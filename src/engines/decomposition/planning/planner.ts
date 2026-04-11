@@ -1,4 +1,4 @@
-import { Goal } from "../../../domain/models";
+import { AdaptationProfile, Goal } from "../../../domain/models";
 import { GoalPlanningAnalysis, PlanningMode } from "../../../domain/models/planningBrain";
 import { mapGoalDomain } from "./domainMapper";
 import { classifyGoal } from "./goalClassifier";
@@ -8,12 +8,16 @@ import { buildPlanningPolicy } from "./protectiveMode";
 import { selectStrategies } from "./strategyTemplates";
 import { generateTasks } from "./taskGenerator";
 
-export function analyzeGoal(goal: Goal, mode: PlanningMode = PlanningMode.Protective): GoalPlanningAnalysis {
+export function analyzeGoal(
+  goal: Goal,
+  mode: PlanningMode = PlanningMode.Protective,
+  adaptationProfile: AdaptationProfile | null = null,
+): GoalPlanningAnalysis {
   const input = toGoalDraftInput(goal);
   const classification = classifyGoal(input);
   const domainCandidates = mapGoalDomain(input);
   const selectedDomain = domainCandidates[0];
-  const policy = buildPlanningPolicy(mode);
+  const policy = buildPlanningPolicy(mode, adaptationProfile);
   const analysis: GoalPlanningAnalysis = {
     classification: {
       ...classification,
@@ -30,10 +34,16 @@ export function analyzeGoal(goal: Goal, mode: PlanningMode = PlanningMode.Protec
   return analysis;
 }
 
-export function buildGoalPlan(goal: Goal, mode: PlanningMode = PlanningMode.Protective) {
-  const analysis = analyzeGoal(goal, mode);
+export function buildGoalPlan(
+  goal: Goal,
+  mode: PlanningMode = PlanningMode.Protective,
+  adaptationProfile: AdaptationProfile | null = null,
+) {
+  const analysis = analyzeGoal(goal, mode, adaptationProfile);
   const milestones = generateMilestones(goal, analysis);
-  const tasks = milestones.flatMap((milestone) => generateTasks(goal, milestone, analysis));
+  const tasks = milestones.flatMap((milestone) =>
+    generateTasks(goal, milestone, analysis, adaptationProfile),
+  );
 
   return { analysis, milestones, tasks };
 }

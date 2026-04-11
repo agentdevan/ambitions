@@ -154,4 +154,48 @@ export class SQLiteIntegrationRepository
       }
     });
   }
+
+  async replaceCalendarConstraintsForDate(date: string, constraints: ScheduleConstraint[]) {
+    const start = `${date}T00:00:00.000Z`;
+    const end = `${date}T23:59:59.999Z`;
+
+    await this.database.withTransaction(async (client) => {
+      await client.run(
+        `
+          DELETE FROM schedule_constraints
+          WHERE source = ? AND starts_at <= ? AND ends_at >= ?;
+        `,
+        ["calendar", end, start],
+      );
+
+      for (const constraint of constraints) {
+        await client.run(
+          `
+            INSERT OR REPLACE INTO schedule_constraints (
+              id, source, type, title, starts_at, ends_at, is_all_day, external_event_id,
+              location, notes, metadata_json, owner_user_id, remote_id, sync_state, version,
+              last_synced_at, created_at, updated_at
+            ) VALUES (
+              $id, $source, $type, $title, $startsAt, $endsAt, $isAllDay, $externalEventId,
+              $location, $notes, $metadataJson, $ownerUserId, $remoteId, $syncState, $version,
+              $lastSyncedAt, $createdAt, $updatedAt
+            );
+          `,
+          {
+            ...entityParams(constraint),
+            $source: constraint.source,
+            $type: constraint.type,
+            $title: constraint.title,
+            $startsAt: constraint.startsAt,
+            $endsAt: constraint.endsAt,
+            $isAllDay: constraint.isAllDay ? 1 : 0,
+            $externalEventId: constraint.externalEventId,
+            $location: constraint.location,
+            $notes: constraint.notes,
+            $metadataJson: encodeJson(constraint.metadata),
+          },
+        );
+      }
+    });
+  }
 }

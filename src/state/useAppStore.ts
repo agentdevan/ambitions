@@ -17,7 +17,7 @@ import {
   TimeBlock,
   UserPreferences,
 } from "../domain/models";
-import { NotificationsService } from "../services/notifications/NotificationsService";
+import { selectConstraintsForScheduling, shouldUseLiveCalendar } from "../services/calendar/constraintSelection";
 import { buildTodayViewModel, TodayViewModel } from "./viewModels/today";
 
 type LoadStatus = "idle" | "loading" | "ready" | "error";
@@ -62,7 +62,10 @@ interface AdaptationSlice {
 interface IntegrationSlice {
   calendarConnectionState: CalendarConnectionState | null;
   scheduleConstraints: ScheduleConstraint[];
+  notificationPermissionStatus: string;
   refreshIntegration: (date?: string) => Promise<void>;
+  requestCalendarAccess: () => Promise<void>;
+  requestNotificationAccess: () => Promise<void>;
 }
 
 type AppState = AppShellSlice &
@@ -73,6 +76,35 @@ type AppState = AppShellSlice &
   IntegrationSlice;
 
 const initialPlanDate = "2026-04-11";
+
+async function syncCalendarIntegration(date: string) {
+  const existingState = await appServices.repositories.integration.getCalendarConnectionState();
+  const result = await appServices.services.calendar.syncDate({
+    date,
+    existingState,
+    selectedCalendarIds: existingState?.selectedCalendarIds,
+  });
+
+  await appServices.repositories.integration.saveCalendarConnectionState(result.connectionState);
+
+  if (shouldUseLiveCalendar(result.connectionState)) {
+    await appServices.repositories.integration.replaceCalendarConstraintsForDate(date, result.constraints);
+  } else {
+    await appServices.repositories.integration.replaceCalendarConstraintsForDate(date, []);
+  }
+
+  return result.connectionState;
+}
+
+async function syncNotificationsForSnapshot(snapshot: Awaited<ReturnType<typeof loadFoundationSnapshot>>) {
+  await appServices.services.notifications.syncPlanNotifications({
+    date: snapshot.today?.date ?? initialPlanDate,
+    schedule: snapshot.schedule,
+    timeBlocks: snapshot.blocks,
+    tasks: snapshot.tasks,
+    preferences: snapshot.notificationPreferences,
+  });
+}
 
 async function loadFoundationSnapshot(date: string) {
   const [
@@ -100,6 +132,10 @@ async function loadFoundationSnapshot(date: string) {
     appServices.repositories.integration.listScheduleConstraintsForDate(date),
     appServices.repositories.adaptation.listReplanSuggestions(date),
   ]);
+  const effectiveConstraints = selectConstraintsForScheduling(
+    scheduleConstraints,
+    calendarConnectionState,
+  );
 
   const blocks = dailyPlan
     ? await appServices.repositories.planning.listTimeBlocksForPlan(dailyPlan.id)
@@ -110,7 +146,7 @@ async function loadFoundationSnapshot(date: string) {
         goals,
         milestones,
         tasks,
-        constraints: scheduleConstraints,
+        constraints: effectiveConstraints,
         preferences,
         adaptationProfile,
         existingPlan: dailyPlan,
@@ -125,7 +161,7 @@ async function loadFoundationSnapshot(date: string) {
             goals,
             milestones,
             tasks,
-            constraints: scheduleConstraints,
+            constraints: effectiveConstraints,
             preferences,
             adaptationProfile,
             dailyPlan,
@@ -155,7 +191,7 @@ async function loadFoundationSnapshot(date: string) {
     blocks,
     tasks,
     calendarConnectionState,
-    scheduleConstraints,
+    scheduleConstraints: effectiveConstraints,
     replanSuggestions: mergedReplanSuggestions,
     schedule,
     today: buildTodayViewModel({
@@ -165,8 +201,9 @@ async function loadFoundationSnapshot(date: string) {
       schedule,
       profile: adaptationProfile,
       suggestions: mergedReplanSuggestions,
-      constraints: scheduleConstraints,
+      constraints: effectiveConstraints,
       tasks,
+      calendarConnectionState,
     }),
   };
 }
@@ -190,6 +227,7 @@ export const useAppStore = create<AppState>((set, get) => ({
   replanSuggestions: [],
   calendarConnectionState: null,
   scheduleConstraints: [],
+  notificationPermissionStatus: "undetermined",
 
   bootstrap: async () => {
     if (get().bootStatus === "loading" || get().bootstrapped) {
@@ -200,8 +238,12 @@ export const useAppStore = create<AppState>((set, get) => ({
 
     try {
       await initializeAppServices();
-      await NotificationsService.configure();
+      await appServices.services.notifications.configure();
+      await syncCalendarIntegration(get().planDate);
       const snapshot = await loadFoundationSnapshot(get().planDate);
+      const notificationPermissionStatus =
+        await appServices.services.notifications.getPermissionStatus();
+      await syncNotificationsForSnapshot(snapshot);
 
       set({
         bootstrapped: true,
@@ -220,6 +262,7 @@ export const useAppStore = create<AppState>((set, get) => ({
         tasksForSelectedDate: snapshot.tasks,
         calendarConnectionState: snapshot.calendarConnectionState,
         scheduleConstraints: snapshot.scheduleConstraints,
+        notificationPermissionStatus,
       });
     } catch (error) {
       set({
@@ -241,7 +284,9 @@ export const useAppStore = create<AppState>((set, get) => ({
 
   refreshPlanning: async (date) => {
     const planDate = date ?? get().planDate;
+    await syncCalendarIntegration(planDate);
     const snapshot = await loadFoundationSnapshot(planDate);
+    await syncNotificationsForSnapshot(snapshot);
 
     set({
       planDate,
@@ -252,6 +297,7 @@ export const useAppStore = create<AppState>((set, get) => ({
       tasksForSelectedDate: snapshot.tasks,
       replanSuggestions: snapshot.replanSuggestions,
       scheduleConstraints: snapshot.scheduleConstraints,
+      calendarConnectionState: snapshot.calendarConnectionState,
     });
   },
 
@@ -287,7 +333,26 @@ export const useAppStore = create<AppState>((set, get) => ({
       appServices.repositories.adaptation.replaceReplanSuggestions(state.planDate, nextSuggestions),
     ]);
 
+    const [allTasks, userPreferences] = await Promise.all([
+      appServices.repositories.tasks.listTasks(),
+      state.userPreferences
+        ? Promise.resolve(state.userPreferences)
+        : appServices.repositories.preferences.getUserPreferences(),
+    ]);
+
+    if (userPreferences) {
+      const adaptationResult = await appServices.engines.adaptation.updateProfile({
+        date: state.planDate,
+        tasks: allTasks,
+        priorProfile: state.adaptationProfile,
+        preferences: userPreferences,
+      });
+
+      await appServices.repositories.adaptation.saveProfiles([adaptationResult.payload.profile]);
+    }
+
     const snapshot = await loadFoundationSnapshot(state.planDate);
+    await syncNotificationsForSnapshot(snapshot);
 
     set({
       dailyPlan: snapshot.schedule?.dailyPlan ?? snapshot.dailyPlan,
@@ -296,6 +361,8 @@ export const useAppStore = create<AppState>((set, get) => ({
       timeBlocksForSelectedDate: snapshot.blocks,
       tasksForSelectedDate: snapshot.tasks,
       replanSuggestions: snapshot.replanSuggestions,
+      scheduleConstraints: snapshot.scheduleConstraints,
+      calendarConnectionState: snapshot.calendarConnectionState,
     });
   },
 
@@ -320,11 +387,37 @@ export const useAppStore = create<AppState>((set, get) => ({
 
   refreshIntegration: async (date) => {
     const planDate = date ?? get().planDate;
-    const [calendarConnectionState, scheduleConstraints] = await Promise.all([
-      appServices.repositories.integration.getCalendarConnectionState(),
-      appServices.repositories.integration.listScheduleConstraintsForDate(planDate),
-    ]);
+    await syncCalendarIntegration(planDate);
+    const snapshot = await loadFoundationSnapshot(planDate);
+    const notificationPermissionStatus =
+      await appServices.services.notifications.getPermissionStatus();
+    await syncNotificationsForSnapshot(snapshot);
 
-    set({ calendarConnectionState, scheduleConstraints });
+    set({
+      planDate,
+      dailyPlan: snapshot.schedule?.dailyPlan ?? snapshot.dailyPlan,
+      schedule: snapshot.schedule,
+      today: snapshot.today,
+      timeBlocksForSelectedDate: snapshot.blocks,
+      tasksForSelectedDate: snapshot.tasks,
+      replanSuggestions: snapshot.replanSuggestions,
+      calendarConnectionState: snapshot.calendarConnectionState,
+      scheduleConstraints: snapshot.scheduleConstraints,
+      notificationPermissionStatus,
+    });
+  },
+
+  requestCalendarAccess: async () => {
+    await appServices.services.calendar.requestAccess();
+    await get().refreshPlanning(get().planDate);
+  },
+
+  requestNotificationAccess: async () => {
+    const notificationPermissionStatus =
+      await appServices.services.notifications.requestAccess();
+    const snapshot = await loadFoundationSnapshot(get().planDate);
+    await syncNotificationsForSnapshot(snapshot);
+
+    set({ notificationPermissionStatus });
   },
 }));

@@ -1,4 +1,5 @@
 import {
+  AdaptationProfile,
   EntitySyncState,
   Goal,
   GoalMilestone,
@@ -229,7 +230,12 @@ function milestoneTaskBlueprints(
   return generic[phaseKey] ?? generic.review;
 }
 
-export function generateTasks(goal: Goal, milestone: GoalMilestone, analysis: GoalPlanningAnalysis) {
+export function generateTasks(
+  goal: Goal,
+  milestone: GoalMilestone,
+  analysis: GoalPlanningAnalysis,
+  adaptationProfile: AdaptationProfile | null = null,
+) {
   const drafts = milestoneTaskBlueprints(goal, milestone, analysis).slice(
     0,
     analysis.policy.maxTasksPerMilestone,
@@ -243,6 +249,7 @@ export function generateTasks(goal: Goal, milestone: GoalMilestone, analysis: Go
       novelty: draft.novelty,
       analysis,
       policy: analysis.policy,
+      adaptationProfile,
     });
 
     task.title = draft.title;

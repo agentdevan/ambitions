@@ -344,8 +344,165 @@ export const seedAdaptationProfile: AdaptationProfile = {
   strategy: {
     strictness: StrategyStrictness.Protective,
     replanningStyle: ReplanningStyle.Guided,
+    progressionScore: 0.42,
+    balancedReadiness: 0.46,
   },
-  metadata: { seedPhase: "phase4" },
+  history: {
+    sampleSize: 10,
+    recentWindowSize: 8,
+    recentCompletionRate: 0.63,
+    baselineCompletionRate: 0.66,
+    averageCompletedMinutes: 24,
+    averageCompletedDurationBand: "medium",
+    carryoverPressureRate: 0.22,
+    recoveryRelianceRate: 0.18,
+    splitRecoverySuccessRate: 0.5,
+    substituteRecoverySuccessRate: 0.67,
+    missedStartCollapseRate: 0.25,
+    entryTaskLiftRate: 0.6,
+    overloadedDayRate: 0.2,
+    domainPatterns: [
+      {
+        domainKey: DomainKey.Credit,
+        sampleSize: 3,
+        successRate: 0.67,
+        averageCompletedMinutes: 25,
+        explanation: "Credit work is holding up when it stays bounded.",
+      },
+      {
+        domainKey: DomainKey.Career,
+        sampleSize: 3,
+        successRate: 0.5,
+        averageCompletedMinutes: 30,
+        explanation: "Career work still benefits from smaller, tailored sessions.",
+      },
+    ],
+    timeOfDayPatterns: [
+      {
+        window: "morning",
+        sampleSize: 4,
+        successRate: 0.75,
+        preferredForAdmin: false,
+        preferredForDeepWork: true,
+        explanation: "Morning work has been the most reliable start window.",
+      },
+      {
+        window: "evening",
+        sampleSize: 2,
+        successRate: 0.5,
+        preferredForAdmin: true,
+        preferredForDeepWork: false,
+        explanation: "Evening is better for short admin cleanup than heavier work.",
+      },
+    ],
+    durationPatterns: [
+      {
+        band: "short",
+        sampleSize: 4,
+        completionRate: 0.75,
+        confidence: 0.74,
+        explanation: "Short tasks are completing most reliably.",
+      },
+      {
+        band: "medium",
+        sampleSize: 4,
+        completionRate: 0.63,
+        confidence: 0.62,
+        explanation: "Medium tasks are workable when the day is not crowded.",
+      },
+      {
+        band: "long",
+        sampleSize: 2,
+        completionRate: 0.4,
+        confidence: 0.35,
+        explanation: "Longer tasks still carry more execution risk than the system should assume away.",
+      },
+    ],
+    taskTypeFriction: [
+      {
+        workType: "research",
+        sampleSize: 3,
+        frictionScore: 0.42,
+        markers: ["underestimated_duration"],
+        explanation: "Research tasks tend to run longer than planned.",
+      },
+      {
+        workType: "admin",
+        sampleSize: 3,
+        frictionScore: 0.2,
+        markers: [],
+        explanation: "Admin work is relatively stable when kept short.",
+      },
+    ],
+  },
+  regression: {
+    severity: "none",
+    isRegressing: false,
+    triggers: [],
+    explanation: "Seed profile starts protective without an active regression state.",
+  },
+  durationRefinements: [
+    {
+      workType: "research",
+      sampleSize: 3,
+      averageEstimatedMinutes: 20,
+      averageActualMinutes: 25,
+      multiplier: 1.15,
+      suggestedAdjustmentMinutes: 5,
+      confidence: 0.65,
+      explanation: "Research tasks have been taking slightly longer than estimated.",
+    },
+    {
+      workType: "routine_action",
+      sampleSize: 2,
+      averageEstimatedMinutes: 15,
+      averageActualMinutes: 10,
+      multiplier: 0.85,
+      suggestedAdjustmentMinutes: -5,
+      confidence: 0.55,
+      explanation: "Routine actions have been finishing a bit faster than estimated.",
+    },
+  ],
+  planningDirectives: {
+    preferredTaskDurationMin: 10,
+    preferredTaskDurationMax: 30,
+    dailyTaskSoftCap: 4,
+    dailyPlannedMinutesTarget: 110,
+    underpackMinutes: 45,
+    schedulingConfidenceFloor: 0.52,
+    earlyWinBias: true,
+    preserveMomentumBias: true,
+    preferSmallerEntryTasks: true,
+    timeWindowConfidences: [
+      {
+        window: "morning",
+        confidence: 0.78,
+        explanation: "Morning execution has been strongest.",
+      },
+      {
+        window: "evening",
+        confidence: 0.58,
+        explanation: "Evening is acceptable for short cleanup work only.",
+      },
+    ],
+    workTypeSchedulingPreferences: [
+      {
+        workType: "deep_work",
+        window: "morning",
+        confidence: 0.75,
+        explanation: "Deep work behaves best in the morning.",
+      },
+      {
+        workType: "admin",
+        window: "evening",
+        confidence: 0.7,
+        explanation: "Short admin follow-through works well in the evening.",
+      },
+    ],
+    explanation:
+      "Protective planning is still active, with a strong preference for smaller early wins and lighter day packing.",
+  },
+  metadata: { seedPhase: "phase6" },
 };
 
 export const seedDailyPlan: DailyPlan = {
@@ -433,17 +590,17 @@ export const seedReplanSuggestions: ReplanSuggestion[] = [
 
 export const seedCalendarConnectionState: CalendarConnectionState = {
   ...recordBase("calendar-state-default"),
-  permissionState: CalendarPermissionState.Unknown,
-  connectionStatus: CalendarSyncState.NotConnected,
+  permissionState: CalendarPermissionState.NotAsked,
+  connectionStatus: CalendarSyncState.Idle,
   selectedCalendarIds: [],
   lastSuccessfulSyncAt: null,
-  metadata: { seedPhase: "phase3" },
+  metadata: { seedPhase: "phase7" },
 };
 
 export const seedScheduleConstraints: ScheduleConstraint[] = [
   {
     ...recordBase("constraint-1"),
-    source: ConstraintSource.Calendar,
+    source: ConstraintSource.System,
     type: ScheduleConstraintType.Hard,
     title: "Midday meeting block",
     startsAt: `${seedDate}T12:30:00.000Z`,
@@ -452,7 +609,7 @@ export const seedScheduleConstraints: ScheduleConstraint[] = [
     externalEventId: "calendar-event-1",
     location: null,
     notes: "Fixed meeting load keeps the rest of the day intentionally light.",
-  metadata: { classification: "meeting", seedPhase: "phase4" },
+    metadata: { classification: "meeting", seedPhase: "phase7", fallback: true },
   },
   {
     ...recordBase("constraint-2"),
@@ -465,6 +622,6 @@ export const seedScheduleConstraints: ScheduleConstraint[] = [
     externalEventId: null,
     location: null,
     notes: "Can flex a bit, but should not be silently consumed by work.",
-    metadata: { classification: "relationship", flexible: true, seedPhase: "phase4" },
+    metadata: { classification: "relationship", flexible: true, seedPhase: "phase7", fallback: true },
   },
 ];

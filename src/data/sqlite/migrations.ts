@@ -295,4 +295,14 @@ export const schemaMigrations: MigrationDefinition[] = [
       `CREATE INDEX IF NOT EXISTS idx_schedule_constraints_starts_at ON schedule_constraints(starts_at);`,
     ],
   },
+  {
+    id: 2,
+    name: "phase_6_adaptation_profile_expansion",
+    statements: [
+      `ALTER TABLE adaptation_profiles ADD COLUMN history_json TEXT NOT NULL DEFAULT '{}';`,
+      `ALTER TABLE adaptation_profiles ADD COLUMN regression_json TEXT NOT NULL DEFAULT '{}';`,
+      `ALTER TABLE adaptation_profiles ADD COLUMN duration_refinements_json TEXT NOT NULL DEFAULT '[]';`,
+      `ALTER TABLE adaptation_profiles ADD COLUMN planning_directives_json TEXT NOT NULL DEFAULT '{}';`,
+    ],
+  },
 ];

@@ -30,6 +30,131 @@ export enum ReplanSuggestionType {
   DropFromCurrentDay = "drop_from_current_day",
 }
 
+export type DurationBand = "short" | "medium" | "long";
+export type TimeOfDayWindow = "morning" | "midday" | "afternoon" | "evening";
+export type AdaptationWorkType =
+  | "admin"
+  | "research"
+  | "communication"
+  | "deep_work"
+  | "routine_action"
+  | "unknown";
+export type RegressionSeverity = "none" | "watch" | "active";
+export type RegressionTrigger =
+  | "miss_rate_spike"
+  | "recovery_reliance"
+  | "completion_slide"
+  | "overpacked_days"
+  | "missed_start_collapse";
+
+export interface DomainExecutionPattern {
+  domainKey: string;
+  sampleSize: number;
+  successRate: number;
+  averageCompletedMinutes: number | null;
+  explanation: string;
+}
+
+export interface TimeOfDayExecutionPattern {
+  window: TimeOfDayWindow;
+  sampleSize: number;
+  successRate: number;
+  preferredForAdmin: boolean;
+  preferredForDeepWork: boolean;
+  explanation: string;
+}
+
+export interface DurationExecutionPattern {
+  band: DurationBand;
+  sampleSize: number;
+  completionRate: number;
+  confidence: number;
+  explanation: string;
+}
+
+export interface TaskTypeFrictionPattern {
+  workType: AdaptationWorkType;
+  sampleSize: number;
+  frictionScore: number;
+  markers: string[];
+  explanation: string;
+}
+
+export interface ExecutionHistorySummary {
+  sampleSize: number;
+  recentWindowSize: number;
+  recentCompletionRate: number;
+  baselineCompletionRate: number;
+  averageCompletedMinutes: number | null;
+  averageCompletedDurationBand: DurationBand | null;
+  carryoverPressureRate: number;
+  recoveryRelianceRate: number;
+  splitRecoverySuccessRate: number | null;
+  substituteRecoverySuccessRate: number | null;
+  missedStartCollapseRate: number;
+  entryTaskLiftRate: number;
+  overloadedDayRate: number;
+  domainPatterns: DomainExecutionPattern[];
+  timeOfDayPatterns: TimeOfDayExecutionPattern[];
+  durationPatterns: DurationExecutionPattern[];
+  taskTypeFriction: TaskTypeFrictionPattern[];
+}
+
+export interface RegressionSignal {
+  severity: RegressionSeverity;
+  isRegressing: boolean;
+  trigger: RegressionTrigger;
+  metric: number;
+  threshold: number;
+  explanation: string;
+}
+
+export interface RegressionState {
+  severity: RegressionSeverity;
+  isRegressing: boolean;
+  triggers: RegressionSignal[];
+  explanation: string;
+}
+
+export interface DurationRefinementRule {
+  workType: AdaptationWorkType;
+  sampleSize: number;
+  averageEstimatedMinutes: number;
+  averageActualMinutes: number;
+  multiplier: number;
+  suggestedAdjustmentMinutes: number;
+  confidence: number;
+  explanation: string;
+}
+
+export interface TimeWindowConfidence {
+  window: TimeOfDayWindow;
+  confidence: number;
+  explanation: string;
+}
+
+export interface WorkTypeSchedulingPreference {
+  workType: AdaptationWorkType;
+  window: TimeOfDayWindow;
+  confidence: number;
+  explanation: string;
+}
+
+export interface AdaptationPlanningDirectives {
+  preferredTaskDurationMin: number;
+  preferredTaskDurationMax: number;
+  dailyTaskSoftCap: number;
+  dailyPlannedMinutesTarget: number;
+  underpackMinutes: number;
+  schedulingConfidenceFloor: number;
+  earlyWinBias: boolean;
+  preserveMomentumBias: boolean;
+  preferSmallerEntryTasks: boolean;
+  timeWindowConfidences: TimeWindowConfidence[];
+  workTypeSchedulingPreferences: WorkTypeSchedulingPreference[];
+  explanation: string;
+}
+
 export interface AdaptationProfile extends EntityRecord {
   effectiveDate: ISODateString;
   source: "bootstrap" | "manual" | "observed";
@@ -57,7 +182,13 @@ export interface AdaptationProfile extends EntityRecord {
   strategy: {
     strictness: StrategyStrictness;
     replanningStyle: ReplanningStyle;
+    progressionScore: number;
+    balancedReadiness: number;
   };
+  history: ExecutionHistorySummary;
+  regression: RegressionState;
+  durationRefinements: DurationRefinementRule[];
+  planningDirectives: AdaptationPlanningDirectives;
   metadata: JsonMap;
 }
 

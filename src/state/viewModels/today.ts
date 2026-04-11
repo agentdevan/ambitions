@@ -1,5 +1,8 @@
 import {
   AdaptationProfile,
+  CalendarConnectionState,
+  CalendarPermissionState,
+  CalendarSyncState,
   CapacityLoad,
   DailyPlan,
   ReplanSuggestionType,
@@ -66,6 +69,62 @@ export interface TodayViewModel {
     scheduled: number;
     recovery: number;
   };
+  integration: {
+    usingLiveCalendar: boolean;
+    calendarStatusLabel: string;
+    calendarDetail: string;
+  };
+}
+
+function calendarStatus(connectionState: CalendarConnectionState | null, constraintCount: number) {
+  if (!connectionState || connectionState.permissionState === CalendarPermissionState.NotAsked) {
+    return {
+      usingLiveCalendar: false,
+      calendarStatusLabel: "Calendar not connected",
+      calendarDetail: "Today is using fallback schedule context until calendar access is granted.",
+    };
+  }
+
+  if (connectionState.permissionState === CalendarPermissionState.Denied) {
+    return {
+      usingLiveCalendar: false,
+      calendarStatusLabel: "Calendar access denied",
+      calendarDetail: "The planner stayed on fallback context because calendar access is off.",
+    };
+  }
+
+  if (connectionState.connectionStatus === CalendarSyncState.NoUsableCalendars) {
+    return {
+      usingLiveCalendar: false,
+      calendarStatusLabel: "No usable calendars",
+      calendarDetail: "Permission is granted, but there were no visible calendars to read from.",
+    };
+  }
+
+  if (connectionState.connectionStatus === CalendarSyncState.Ready) {
+    return {
+      usingLiveCalendar: true,
+      calendarStatusLabel: "Live calendar context",
+      calendarDetail:
+        constraintCount > 0
+          ? `Today is using ${constraintCount} live calendar-derived constraints.`
+          : "Today is using live calendar context and found no blocking events.",
+    };
+  }
+
+  if (connectionState.connectionStatus === CalendarSyncState.Stale) {
+    return {
+      usingLiveCalendar: false,
+      calendarStatusLabel: "Calendar read is stale",
+      calendarDetail: "The latest calendar read failed, so the planner kept the safer fallback context.",
+    };
+  }
+
+  return {
+    usingLiveCalendar: false,
+    calendarStatusLabel: "Calendar temporarily unavailable",
+    calendarDetail: "The latest calendar read failed, so the planner stayed conservative.",
+  };
 }
 
 function actionsForTask(task: Task | undefined): TaskActionType[] {
@@ -93,6 +152,7 @@ export function buildTodayViewModel(params: {
   suggestions: ReplanSuggestion[];
   constraints: ScheduleConstraint[];
   tasks: Task[];
+  calendarConnectionState: CalendarConnectionState | null;
 }): TodayViewModel {
   const tasksById = new Map(params.tasks.map((task) => [task.id, task]));
   const completed = params.blocks.filter((block) => block.state === TimeBlockState.Complete).length;
@@ -139,6 +199,22 @@ export function buildTodayViewModel(params: {
     rationale: suggestion.rationale,
     taskTitle: suggestion.taskId ? tasksById.get(suggestion.taskId)?.title ?? null : null,
   }));
+  const adaptationNotes = params.profile
+    ? [
+        params.profile.regression.isRegressing
+          ? "Recent execution has been less stable, so today stays intentionally lighter."
+          : params.profile.strategy.strictness === "balanced"
+            ? "Recent follow-through supports a slightly fuller plan without pushing the day."
+            : "Today stays protective until recent execution supports a fuller day.",
+        params.profile.planningDirectives.earlyWinBias
+          ? "The plan is biased toward an early, easier win before heavier work."
+          : null,
+      ].filter((note): note is string => note !== null)
+    : [];
+  const integration = calendarStatus(
+    params.calendarConnectionState,
+    params.constraints.filter((constraint) => constraint.source === "calendar").length,
+  );
 
   return {
     date: params.date,
@@ -190,6 +266,10 @@ export function buildTodayViewModel(params: {
     replanSuggestions,
     scheduleContext: [
       {
+        label: "Calendar context",
+        value: integration.usingLiveCalendar ? "Live device calendar" : "Fallback schedule baseline",
+      },
+      {
         label: "Usable windows",
         value: params.schedule
           ? `${params.schedule.usableWindows.length} windows, ${params.schedule.capacitySummary.totalUsableMinutes} min`
@@ -207,7 +287,9 @@ export function buildTodayViewModel(params: {
       },
     ],
     adaptiveGuidance:
-      recoveryTasks.length > 0
+      adaptationNotes.length > 0
+        ? adaptationNotes
+        : recoveryTasks.length > 0
         ? recoveryTasks.slice(0, 3).map((task) => task.reason)
         : replanSuggestions.length > 0
           ? replanSuggestions.map((suggestion) => suggestion.rationale)
@@ -219,5 +301,6 @@ export function buildTodayViewModel(params: {
       scheduled,
       recovery,
     },
+    integration,
   };
 }

@@ -31,7 +31,13 @@
     "plugins": [
       "expo-sqlite",
       "expo-font",
-      "expo-notifications"
+      "expo-notifications",
+      [
+        "expo-calendar",
+        {
+          "calendarPermission": "Ambitions reads your calendar to keep the day plan realistic without changing your events."
+        }
+      ]
     ]
   }
 }

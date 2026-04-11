@@ -1,4 +1,4 @@
-import { DomainKey, TaskDifficulty } from "../../../domain/models";
+import { AdaptationProfile, DomainKey, TaskDifficulty } from "../../../domain/models";
 import {
   GoalPlanningAnalysis,
   PlanningPolicy,
@@ -6,6 +6,7 @@ import {
 } from "../../../domain/models/planningBrain";
 import { clamp, roundToFive } from "./date";
 import { DurationEstimate } from "./types";
+import { refinementForWorkType } from "../../adaptation/durationRefinement";
 
 const baseMinutesByWorkType: Record<PlanningWorkType, number> = {
   [PlanningWorkType.Admin]: 10,
@@ -40,6 +41,7 @@ export function estimateTaskDuration(params: {
   novelty: "low" | "medium" | "high";
   analysis: GoalPlanningAnalysis;
   policy: PlanningPolicy;
+  adaptationProfile?: AdaptationProfile | null;
 }): DurationEstimate {
   const reasons: string[] = [];
   let minutes = baseMinutesByWorkType[params.workType];
@@ -73,6 +75,16 @@ export function estimateTaskDuration(params: {
   ) {
     minutes += 5;
     reasons.push("High-complexity deep work gets a small extension.");
+  }
+
+  const refinement = refinementForWorkType(
+    params.adaptationProfile?.durationRefinements ?? [],
+    String(params.workType) as Parameters<typeof refinementForWorkType>[1],
+  );
+
+  if (refinement && refinement.confidence >= 0.55) {
+    minutes += refinement.suggestedAdjustmentMinutes;
+    reasons.push(refinement.explanation);
   }
 
   minutes = clamp(roundToFive(minutes), 5, params.policy.preferredTaskDurationMax);

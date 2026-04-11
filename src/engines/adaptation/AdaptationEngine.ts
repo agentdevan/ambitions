@@ -1,5 +1,9 @@
-import { CapacityLoad, EntitySyncState, ReplanningStyle, StrategyStrictness } from "../../domain/models";
 import { AdaptationOutput, AdaptationRequest, EngineResult } from "../types";
+import { buildDurationRefinementRules } from "./durationRefinement";
+import { interpretExecutionHistory } from "./historyInterpreter";
+import { updateAdaptationProfile } from "./profileUpdaters";
+import { detectRegression } from "./regressionDetector";
+import { determineStrictness } from "./strictnessPolicy";
 
 export interface AdaptationEngine {
   updateProfile(request: AdaptationRequest): Promise<EngineResult<AdaptationOutput>>;
@@ -7,49 +11,32 @@ export interface AdaptationEngine {
 
 export const adaptationEngine: AdaptationEngine = {
   async updateProfile(request) {
+    const history = interpretExecutionHistory(request.tasks);
+    const regression = detectRegression(history.summary);
+    const strictness = determineStrictness(history.summary, regression);
+    const durationRefinements = buildDurationRefinementRules(request.tasks);
+    const profile = updateAdaptationProfile({
+      date: request.date,
+      preferences: request.preferences,
+      priorProfile: request.priorProfile,
+      history: history.summary,
+      streakDays: history.streakDays,
+      regression,
+      strictness,
+      durationRefinements,
+    });
+
     return {
       generatedAt: new Date().toISOString(),
       payload: {
-        profile: request.priorProfile ?? {
-          id: "adaptation-placeholder",
-          ownerUserId: null,
-          remoteId: null,
-          syncState: EntitySyncState.LocalOnly,
-          version: 1,
-          lastSyncedAt: null,
-          createdAt: new Date().toISOString(),
-          updatedAt: new Date().toISOString(),
-          effectiveDate: request.date,
-          source: "observed",
-          capacity: {
-            mentalLoad: CapacityLoad.Balanced,
-            focusBudgetMinutes: 0,
-            meetingLoadMinutes: 0,
-            recoveryBudgetMinutes: 0,
-          },
-          completion: {
-            consistencyScore: 0,
-            rolloverRate: 0,
-            averageTaskCompletionMinutes: null,
-          },
-          friction: {
-            switchingPenaltyMinutes: 0,
-            preferredStartWindow: "09:00",
-            commonBlockers: [],
-          },
-          momentum: {
-            currentStreakDays: 0,
-            recentWinPattern: "",
-            confidenceScore: 0,
-          },
-          strategy: {
-            strictness: StrategyStrictness.Balanced,
-            replanningStyle: ReplanningStyle.Guided,
-          },
-          metadata: {},
-        },
+        profile,
       },
-      warnings: ["Adaptation logic remains intentionally shallow in Phase 2."],
+      warnings:
+        history.summary.sampleSize < 4
+          ? [
+              "Adaptation is active, but the current profile is still operating on a very small execution sample.",
+            ]
+          : [],
     };
   },
 };

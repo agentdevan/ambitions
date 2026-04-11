@@ -1,7 +1,9 @@
 import {
+  AdaptationPlanningDirectives,
   DailyPlan,
   DailyPlanStatus,
   EntitySyncState,
+  TimeOfDayWindow,
   StrategyStrictness,
   Task,
   TaskDifficulty,
@@ -28,7 +30,65 @@ interface CandidateTask {
   task: Task;
   flexibility: "high" | "medium" | "low";
   splitEligible: boolean;
+  workType: string;
   priorityScore: number;
+}
+
+function bucketForTime(time: string): TimeOfDayWindow {
+  const hour = Number(time.slice(0, 2));
+
+  if (hour < 10) return "morning";
+  if (hour < 14) return "midday";
+  if (hour < 18) return "afternoon";
+  return "evening";
+}
+
+function directivesForProfile(profile: SchedulingRequest["adaptationProfile"]) {
+  return (
+    profile?.planningDirectives ?? {
+      preferredTaskDurationMin: 10,
+      preferredTaskDurationMax: 30,
+      dailyTaskSoftCap: 5,
+      dailyPlannedMinutesTarget: 120,
+      underpackMinutes: 45,
+      schedulingConfidenceFloor: 0.5,
+      earlyWinBias: true,
+      preserveMomentumBias: true,
+      preferSmallerEntryTasks: true,
+      timeWindowConfidences: [],
+      workTypeSchedulingPreferences: [],
+      explanation:
+        "No adaptation directives are available yet, so scheduling stays protective by default.",
+    }
+  ) satisfies AdaptationPlanningDirectives;
+}
+
+function isEntryTask(task: Task) {
+  const lower = task.title.toLowerCase();
+
+  return (
+    task.estimatedMinutes <= 20 &&
+    ["choose", "pick", "set up", "start ", "open ", "minimum"].some((token) =>
+      lower.includes(token),
+    )
+  );
+}
+
+function timeWindowConfidence(
+  directives: AdaptationPlanningDirectives,
+  workType: string,
+  startTime: string,
+) {
+  const bucket = bucketForTime(startTime);
+  const specific =
+    directives.workTypeSchedulingPreferences.find(
+      (preference) => preference.workType === workType && preference.window === bucket,
+    )?.confidence ?? null;
+  const general =
+    directives.timeWindowConfidences.find((window) => window.window === bucket)?.confidence ??
+    directives.schedulingConfidenceFloor;
+
+  return specific ?? general;
 }
 
 function blockTypeForTask(task: Task) {
@@ -45,7 +105,11 @@ function blockTypeForTask(task: Task) {
   return TimeBlockType.Focus;
 }
 
-function buildCandidates(tasks: Task[], protectiveMode: boolean) {
+function buildCandidates(
+  tasks: Task[],
+  protectiveMode: boolean,
+  directives: AdaptationPlanningDirectives,
+) {
   return tasks
     .filter((task) =>
       [
@@ -74,6 +138,9 @@ function buildCandidates(tasks: Task[], protectiveMode: boolean) {
       if (task.targetDate) priorityScore += 4;
       if (protectiveMode && task.estimatedMinutes <= 30) priorityScore += 4;
       if (protectiveMode && task.estimatedMinutes > 50) priorityScore -= 10;
+      if (task.estimatedMinutes > directives.preferredTaskDurationMax) priorityScore -= 14;
+      if (directives.earlyWinBias && isEntryTask(task)) priorityScore += 10;
+      if (directives.preferSmallerEntryTasks && task.estimatedMinutes <= 20) priorityScore += 4;
       if (task.title.toLowerCase().startsWith("review the current signal")) priorityScore -= 10;
       if (task.title.toLowerCase().startsWith("choose the next lower-friction adjustment")) priorityScore -= 6;
 
@@ -81,6 +148,7 @@ function buildCandidates(tasks: Task[], protectiveMode: boolean) {
         task,
         flexibility,
         splitEligible,
+        workType,
         priorityScore,
       } satisfies CandidateTask;
     })
@@ -93,8 +161,13 @@ function buildCandidates(tasks: Task[], protectiveMode: boolean) {
     });
 }
 
-function findPlacement(task: CandidateTask, windows: UsableTimeWindow[], protectiveMode: boolean) {
-  return findPlacementWithPreference(task, windows, protectiveMode, null);
+function findPlacement(
+  task: CandidateTask,
+  windows: UsableTimeWindow[],
+  protectiveMode: boolean,
+  directives: AdaptationPlanningDirectives,
+) {
+  return findPlacementWithPreference(task, windows, protectiveMode, null, directives);
 }
 
 function findPlacementWithPreference(
@@ -102,6 +175,7 @@ function findPlacementWithPreference(
   windows: UsableTimeWindow[],
   protectiveMode: boolean,
   preferredStartTime: string | null,
+  directives: AdaptationPlanningDirectives,
 ) {
   const requiredMinutes =
     protectiveMode && task.task.difficulty === TaskDifficulty.Deep
@@ -110,6 +184,15 @@ function findPlacementWithPreference(
   const preferredStartMinutes = preferredStartTime ? timeToMinutes(preferredStartTime) : null;
 
   let shortenedWindow: UsableTimeWindow | null = null;
+
+  type PlacementCandidate = {
+    window: UsableTimeWindow;
+    adjustedStart: number;
+    adjustedMinutes: number;
+    confidence: number;
+  };
+
+  const exactFits: PlacementCandidate[] = [];
 
   for (const window of windows) {
     const rawStart = timeToMinutes(window.startTime);
@@ -125,18 +208,17 @@ function findPlacementWithPreference(
         continue;
       }
 
-      return {
-        window: {
-          ...window,
-          startTime: buildIso("1970-01-01", adjustedStart).slice(11, 16),
-          minutes: adjustedMinutes,
-        },
-        scheduledMinutes: task.task.estimatedMinutes,
-        reason:
-          window.kind === "lunch"
-            ? "Placed into the explicit lunch window."
-            : "Placed into the first believable open window without crowding the day.",
-      };
+      exactFits.push({
+        window,
+        adjustedStart,
+        adjustedMinutes,
+        confidence: timeWindowConfidence(
+          directives,
+          task.workType,
+          buildIso("1970-01-01", adjustedStart).slice(11, 16),
+        ),
+      });
+      continue;
     }
 
     if (!shortenedWindow && task.splitEligible && adjustedMinutes >= Math.max(15, task.task.estimatedMinutes - 15)) {
@@ -148,10 +230,35 @@ function findPlacementWithPreference(
     }
   }
 
+  const bestFit = exactFits.sort((left, right) => {
+    if (right.confidence !== left.confidence) {
+      return right.confidence - left.confidence;
+    }
+
+    return left.adjustedStart - right.adjustedStart;
+  })[0];
+
+  if (bestFit) {
+    return {
+      window: {
+        ...bestFit.window,
+        startTime: buildIso("1970-01-01", bestFit.adjustedStart).slice(11, 16),
+        minutes: bestFit.adjustedMinutes,
+      },
+      scheduledMinutes: task.task.estimatedMinutes,
+      confidence: bestFit.confidence,
+      reason:
+        bestFit.window.kind === "lunch"
+          ? "Placed into the explicit lunch window."
+          : "Placed into the most believable open window based on recent execution patterns.",
+    };
+  }
+
   if (shortenedWindow) {
     return {
       window: shortenedWindow,
       scheduledMinutes: Math.min(task.task.estimatedMinutes, shortenedWindow.minutes),
+      confidence: timeWindowConfidence(directives, task.workType, shortenedWindow.startTime),
       reason: "Shortened to fit the largest realistic window instead of forcing the day to stretch.",
     };
   }
@@ -221,6 +328,7 @@ function buildSignals(params: {
   unscheduledDemandMinutes: number;
   unscheduledTasks: UnscheduledTask[];
   protectiveMode: boolean;
+  directives: AdaptationPlanningDirectives;
 }) {
   const occupancy =
     params.totalUsableMinutes === 0 ? 1 : params.scheduledMinutes / params.totalUsableMinutes;
@@ -242,6 +350,7 @@ function buildSignals(params: {
         (params.unscheduledTasks.length * 0.05) -
         (planPressure === "high" ? 0.08 : 0) -
         (params.protectiveMode ? 0.04 : 0),
+      params.directives.schedulingConfidenceFloor,
     ),
     unusedCapacityMinutes: Math.max(0, params.totalUsableMinutes - params.scheduledMinutes),
     overloadWarning:
@@ -250,9 +359,15 @@ function buildSignals(params: {
   } satisfies SchedulingSignals;
 }
 
-function buildPlan(request: SchedulingRequest, scheduledTasks: ScheduledTaskWindow[], signals: SchedulingSignals) {
+function buildPlan(
+  request: SchedulingRequest,
+  scheduledTasks: ScheduledTaskWindow[],
+  signals: SchedulingSignals,
+  directives: AdaptationPlanningDirectives,
+) {
   const existing = request.existingPlan;
   const timestamp = new Date().toISOString();
+  const regression = request.adaptationProfile?.regression;
 
   return {
     id: existing?.id ?? `generated-plan-${request.date}`,
@@ -268,11 +383,16 @@ function buildPlan(request: SchedulingRequest, scheduledTasks: ScheduledTaskWind
     focus:
       existing?.focus ??
       (scheduledTasks[0]
-        ? `Protect ${scheduledTasks[0].title.toLowerCase()} first, then stop before the day gets crowded.`
+        ? directives.earlyWinBias
+          ? `Start with ${scheduledTasks[0].title.toLowerCase()} and let the rest of the day stay earned.`
+          : `Protect ${scheduledTasks[0].title.toLowerCase()} first, then stop before the day gets crowded.`
         : "Keep the day light and preserve only the work that clearly fits."),
-    planningNotes: signals.overloadWarning
-      ? "Demand exceeds believable capacity, so only the most executable subset was scheduled."
-      : "The day is intentionally underpacked to preserve follow-through.",
+    planningNotes:
+      regression?.isRegressing
+        ? "Recent execution has softened, so the plan is intentionally lighter to preserve momentum."
+        : signals.overloadWarning
+          ? "Demand exceeds believable capacity, so only the most executable subset was scheduled."
+          : "The day is intentionally underpacked to preserve follow-through.",
     totalPlannedMinutes: scheduledTasks.reduce((sum, task) => sum + task.durationMinutes, 0),
     totalCommittedMinutes: scheduledTasks.reduce((sum, task) => sum + task.durationMinutes, 0),
     adaptationProfileId: request.adaptationProfile?.id ?? null,
@@ -282,6 +402,8 @@ function buildPlan(request: SchedulingRequest, scheduledTasks: ScheduledTaskWind
       schedulingConfidence: Number(signals.schedulingConfidence.toFixed(2)),
       unusedCapacityMinutes: signals.unusedCapacityMinutes,
       overloadWarning: signals.overloadWarning,
+      adaptationDirectiveExplanation: directives.explanation,
+      regressionSeverity: regression?.severity ?? "none",
     },
   } satisfies DailyPlan;
 }
@@ -328,6 +450,7 @@ function buildBlocks(
 
 export function buildDailySchedule(request: SchedulingRequest): SchedulingOutput {
   const strictness = request.adaptationProfile?.strategy.strictness ?? StrategyStrictness.Protective;
+  const directives = directivesForProfile(request.adaptationProfile);
   const interpretedConstraints = interpretConstraints({
     date: request.date,
     constraints: request.constraints,
@@ -352,17 +475,35 @@ export function buildDailySchedule(request: SchedulingRequest): SchedulingOutput
   const focusBudget = request.adaptationProfile?.capacity.focusBudgetMinutes
     ? request.adaptationProfile.capacity.focusBudgetMinutes + 30
     : request.preferences.defaultFocusSessionMinutes * 3;
-  const reservedCapacity = protectiveMode
-    ? Math.max(45, Math.round(capacity.capacitySummary.totalUsableMinutes * 0.25))
-    : Math.max(20, Math.round(capacity.capacitySummary.totalUsableMinutes * 0.12));
+  const reservedCapacity = Math.max(
+    directives.underpackMinutes,
+    Math.round(
+      capacity.capacitySummary.totalUsableMinutes * (protectiveMode ? 0.22 : 0.12),
+    ),
+  );
   const scheduledMinuteCap = Math.max(
     60,
-    Math.min(capacity.capacitySummary.totalUsableMinutes - reservedCapacity, focusBudget),
+    Math.min(
+      capacity.capacitySummary.totalUsableMinutes - reservedCapacity,
+      Math.min(focusBudget, directives.dailyPlannedMinutesTarget),
+    ),
   );
-  const scheduledTaskCap = protectiveMode ? 5 : 7;
+  const scheduledTaskCap = directives.dailyTaskSoftCap;
 
-  for (const candidate of buildCandidates(request.tasks, protectiveMode)) {
+  for (const candidate of buildCandidates(request.tasks, protectiveMode, directives)) {
     const minutesAlreadyScheduled = scheduledTasks.reduce((sum, task) => sum + task.durationMinutes, 0);
+
+    if (candidate.task.estimatedMinutes > directives.preferredTaskDurationMax + (protectiveMode ? 0 : 5)) {
+      unscheduledTasks.push({
+        taskId: candidate.task.id,
+        goalId: candidate.task.goalId,
+        title: candidate.task.title,
+        estimatedMinutes: candidate.task.estimatedMinutes,
+        reasonCode: "protected_from_overload",
+        reason: `${candidate.task.title} was held back because recent execution supports smaller task sizes right now.`,
+      });
+      continue;
+    }
 
     if (
       scheduledTasks.length >= scheduledTaskCap ||
@@ -386,6 +527,7 @@ export function buildDailySchedule(request: SchedulingRequest): SchedulingOutput
       windows,
       protectiveMode,
       preferredStartTime,
+      directives,
     );
 
     if (!placement) {
@@ -414,7 +556,10 @@ export function buildDailySchedule(request: SchedulingRequest): SchedulingOutput
       endsAtTime: buildIso(request.date, endsAtMinutes).slice(11, 16),
       durationMinutes: placement.scheduledMinutes,
       windowId: placement.window.id,
-      confidence: Math.min(0.94, placement.window.confidence + (candidate.priorityScore / 200)),
+      confidence: Math.min(
+        0.94,
+        placement.window.confidence + (candidate.priorityScore / 200) + placement.confidence * 0.1,
+      ),
       reason: placement.reason,
     });
 
@@ -450,8 +595,9 @@ export function buildDailySchedule(request: SchedulingRequest): SchedulingOutput
     unscheduledDemandMinutes,
     unscheduledTasks,
     protectiveMode,
+    directives,
   });
-  const dailyPlan = buildPlan(request, scheduledTasks, signals);
+  const dailyPlan = buildPlan(request, scheduledTasks, signals, directives);
 
   return {
     dailyPlan,

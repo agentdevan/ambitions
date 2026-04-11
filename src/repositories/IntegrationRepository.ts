@@ -5,4 +5,5 @@ export interface IntegrationRepository {
   listScheduleConstraintsForDate(date: string): Promise<ScheduleConstraint[]>;
   saveCalendarConnectionState(state: CalendarConnectionState): Promise<void>;
   saveScheduleConstraints(constraints: ScheduleConstraint[]): Promise<void>;
+  replaceCalendarConstraintsForDate(date: string, constraints: ScheduleConstraint[]): Promise<void>;
 }

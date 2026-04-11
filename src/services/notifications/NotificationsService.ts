@@ -1,5 +1,9 @@
 import * as Notifications from "expo-notifications";
 
+import { buildNotificationDrafts } from "./nudgePolicy";
+import { cancelManagedNotifications, scheduleDrafts } from "./notificationScheduler";
+import { NotificationPlanContext, NotificationSyncResult } from "./types";
+
 Notifications.setNotificationHandler({
   handleNotification: async () => ({
     shouldPlaySound: false,
@@ -9,19 +13,12 @@ Notifications.setNotificationHandler({
   }),
 });
 
-export interface NotificationDraft {
-  id: string;
-  title: string;
-  body: string;
-  scheduledAt?: string;
-  metadata?: Record<string, string>;
-}
-
 export interface NotificationServiceContract {
   configure(): Promise<void>;
+  getPermissionStatus(): Promise<Notifications.PermissionStatus>;
   requestAccess(): Promise<Notifications.PermissionStatus>;
-  scheduleReminder(notification: NotificationDraft): Promise<string | null>;
-  sendContextualNudge(notification: NotificationDraft): Promise<string | null>;
+  syncPlanNotifications(context: NotificationPlanContext): Promise<NotificationSyncResult>;
+  clearManagedNotifications(): Promise<void>;
 }
 
 export const NotificationsService: NotificationServiceContract = {
@@ -31,7 +28,13 @@ export const NotificationsService: NotificationServiceContract = {
       importance: Notifications.AndroidImportance.DEFAULT,
       vibrationPattern: [0, 120],
       lightColor: "#6D7C6D",
+      sound: null,
     });
+  },
+
+  async getPermissionStatus() {
+    const { status } = await Notifications.getPermissionsAsync();
+    return status;
   },
 
   async requestAccess() {
@@ -39,29 +42,19 @@ export const NotificationsService: NotificationServiceContract = {
     return status;
   },
 
-  async scheduleReminder(notification) {
-    if (!notification.scheduledAt) {
-      return null;
+  async syncPlanNotifications(context) {
+    const status = await this.getPermissionStatus();
+
+    if (status !== "granted") {
+      await cancelManagedNotifications();
+      return { scheduledIds: [], drafts: [] };
     }
 
-    return Notifications.scheduleNotificationAsync({
-      content: {
-        title: notification.title,
-        body: notification.body,
-        data: notification.metadata,
-      },
-      trigger: null,
-    });
+    const drafts = buildNotificationDrafts(context);
+    return scheduleDrafts(drafts);
   },
 
-  async sendContextualNudge(notification) {
-    return Notifications.scheduleNotificationAsync({
-      content: {
-        title: notification.title,
-        body: notification.body,
-        data: notification.metadata,
-      },
-      trigger: null,
-    });
+  async clearManagedNotifications() {
+    await cancelManagedNotifications();
   },
 };

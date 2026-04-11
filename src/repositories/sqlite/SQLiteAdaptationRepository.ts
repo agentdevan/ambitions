@@ -13,6 +13,10 @@ interface AdaptationProfileRow {
   friction_json: string;
   momentum_json: string;
   strategy_json: string;
+  history_json: string;
+  regression_json: string;
+  duration_refinements_json: string;
+  planning_directives_json: string;
   metadata_json: string;
   owner_user_id: string | null;
   remote_id: string | null;
@@ -69,6 +73,10 @@ export class SQLiteAdaptationRepository
       friction: decodeJson(row.friction_json),
       momentum: decodeJson(row.momentum_json),
       strategy: decodeJson(row.strategy_json),
+      history: decodeJson(row.history_json),
+      regression: decodeJson(row.regression_json),
+      durationRefinements: decodeJson(row.duration_refinements_json),
+      planningDirectives: decodeJson(row.planning_directives_json),
       metadata: decodeJson(row.metadata_json),
     });
   }
@@ -101,11 +109,13 @@ export class SQLiteAdaptationRepository
           `
             INSERT OR REPLACE INTO adaptation_profiles (
               id, effective_date, source, capacity_json, completion_json, friction_json,
-              momentum_json, strategy_json, metadata_json, owner_user_id, remote_id,
+              momentum_json, strategy_json, history_json, regression_json,
+              duration_refinements_json, planning_directives_json, metadata_json, owner_user_id, remote_id,
               sync_state, version, last_synced_at, created_at, updated_at
             ) VALUES (
               $id, $effectiveDate, $source, $capacityJson, $completionJson, $frictionJson,
-              $momentumJson, $strategyJson, $metadataJson, $ownerUserId, $remoteId,
+              $momentumJson, $strategyJson, $historyJson, $regressionJson,
+              $durationRefinementsJson, $planningDirectivesJson, $metadataJson, $ownerUserId, $remoteId,
               $syncState, $version, $lastSyncedAt, $createdAt, $updatedAt
             );
           `,
@@ -118,6 +128,10 @@ export class SQLiteAdaptationRepository
             $frictionJson: encodeJson(profile.friction),
             $momentumJson: encodeJson(profile.momentum),
             $strategyJson: encodeJson(profile.strategy),
+            $historyJson: encodeJson(profile.history),
+            $regressionJson: encodeJson(profile.regression),
+            $durationRefinementsJson: encodeJson(profile.durationRefinements),
+            $planningDirectivesJson: encodeJson(profile.planningDirectives),
             $metadataJson: encodeJson(profile.metadata),
           },
         );

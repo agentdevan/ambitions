@@ -37,6 +37,7 @@ export interface GoalDecompositionRequest {
   milestones: GoalMilestone[];
   existingTasks: Task[];
   preferences: UserPreferences;
+  adaptationProfile?: AdaptationProfile | null;
   referenceDate?: string;
 }
 
@@ -217,8 +218,7 @@ export interface ReplanningOutput {
 
 export interface AdaptationRequest {
   date: string;
-  completedTasks: Task[];
-  deferredTasks: Task[];
+  tasks: Task[];
   priorProfile: AdaptationProfile | null;
   preferences: UserPreferences;
 }

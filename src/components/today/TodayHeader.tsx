@@ -5,13 +5,17 @@ import { AppText } from "../ui/Text";
 
 interface TodayHeaderProps {
   dateLabel: string;
+  liveContext: boolean;
 }
 
-export function TodayHeader({ dateLabel }: TodayHeaderProps) {
+export function TodayHeader({ dateLabel, liveContext }: TodayHeaderProps) {
   return (
     <View className="gap-4 pt-5">
       <View className="flex-row items-center justify-between">
-        <Pill label="Today" />
+        <View className="flex-row items-center gap-2">
+          <Pill label="Today" />
+          <Pill label={liveContext ? "Live context" : "Fallback"} tone={liveContext ? "accent" : "neutral"} />
+        </View>
         <AppText tone="tertiary" variant="caption">
           Quiet structure
         </AppText>

@@ -1,30 +1,35 @@
-import { StrategyStrictness } from "../../../domain/models";
+import { AdaptationProfile, StrategyStrictness } from "../../../domain/models";
 import { PlanningMode, PlanningPolicy } from "../../../domain/models/planningBrain";
 
-export function buildPlanningPolicy(mode: PlanningMode = PlanningMode.Protective): PlanningPolicy {
+export function buildPlanningPolicy(
+  mode: PlanningMode = PlanningMode.Protective,
+  adaptationProfile: AdaptationProfile | null = null,
+): PlanningPolicy {
+  const directives = adaptationProfile?.planningDirectives ?? null;
+
   if (mode === PlanningMode.Balanced) {
     return {
       mode,
       strictness: StrategyStrictness.Balanced,
-      dailyTaskSoftCap: 5,
+      dailyTaskSoftCap: directives?.dailyTaskSoftCap ?? 5,
       maxTasksPerMilestone: 4,
-      preferredTaskDurationMax: 45,
-      earlyWinBias: true,
+      preferredTaskDurationMax: directives?.preferredTaskDurationMax ?? 45,
+      earlyWinBias: directives?.earlyWinBias ?? true,
       shorterWhenUncertain: false,
       reduceVolumeUnderUncertainty: false,
-      prefersSmallerEntryTasks: false,
+      prefersSmallerEntryTasks: directives?.preferSmallerEntryTasks ?? false,
     };
   }
 
   return {
     mode: PlanningMode.Protective,
     strictness: StrategyStrictness.Protective,
-    dailyTaskSoftCap: 3,
+    dailyTaskSoftCap: directives?.dailyTaskSoftCap ?? 3,
     maxTasksPerMilestone: 3,
-    preferredTaskDurationMax: 30,
-    earlyWinBias: true,
+    preferredTaskDurationMax: directives?.preferredTaskDurationMax ?? 30,
+    earlyWinBias: directives?.earlyWinBias ?? true,
     shorterWhenUncertain: true,
     reduceVolumeUnderUncertainty: true,
-    prefersSmallerEntryTasks: true,
+    prefersSmallerEntryTasks: directives?.preferSmallerEntryTasks ?? true,
   };
 }

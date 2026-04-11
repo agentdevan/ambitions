@@ -1,16 +1,17 @@
 import { EntityRecord, ISODateTimeString, JsonMap } from "./shared";
 
 export enum CalendarPermissionState {
-  Unknown = "unknown",
+  NotAsked = "not_asked",
   Granted = "granted",
   Denied = "denied",
 }
 
 export enum CalendarSyncState {
-  NotConnected = "not_connected",
+  Idle = "idle",
+  NoUsableCalendars = "no_usable_calendars",
   Ready = "ready",
-  NeedsAttention = "needs_attention",
-  Syncing = "syncing",
+  TemporaryFailure = "temporary_failure",
+  Stale = "stale",
 }
 
 export enum ScheduleConstraintType {

@@ -2,6 +2,7 @@ import { View } from "react-native";
 
 import { CapacityInsight } from "../../components/today/CapacityInsight";
 import { GuidancePanel } from "../../components/today/GuidancePanel";
+import { IntegrationStatusCard } from "../../components/today/IntegrationStatusCard";
 import { ProgressPanel } from "../../components/today/ProgressPanel";
 import { ReplanSuggestionsPanel } from "../../components/today/ReplanSuggestionsPanel";
 import { ScheduleContext } from "../../components/today/ScheduleContext";
@@ -17,12 +18,20 @@ export function TodayScreen() {
   const today = useAppStore((state) => state.today);
   const bootStatus = useAppStore((state) => state.bootStatus);
   const applyTaskAction = useAppStore((state) => state.applyTaskAction);
+  const calendarConnectionState = useAppStore((state) => state.calendarConnectionState);
+  const notificationPermissionStatus = useAppStore(
+    (state) => state.notificationPermissionStatus,
+  );
+  const requestCalendarAccess = useAppStore((state) => state.requestCalendarAccess);
+  const requestNotificationAccess = useAppStore((state) => state.requestNotificationAccess);
+  const refreshIntegration = useAppStore((state) => state.refreshIntegration);
 
   if (!today) {
     return (
       <Screen>
         <View className="gap-4">
           <TodayHeader
+            liveContext={false}
             dateLabel={bootStatus === "error" ? "Unable to load plan" : formatLongDate("2026-04-11")}
           />
           <AppText tone="secondary">
@@ -38,7 +47,16 @@ export function TodayScreen() {
   return (
     <Screen>
       <View className="gap-6">
-        <TodayHeader dateLabel={formatLongDate(today.date)} />
+        <TodayHeader dateLabel={formatLongDate(today.date)} liveContext={today.integration.usingLiveCalendar} />
+        <IntegrationStatusCard
+          calendarConnectionState={calendarConnectionState}
+          notificationPermissionStatus={notificationPermissionStatus}
+          onRequestCalendarAccess={requestCalendarAccess}
+          onRequestNotificationAccess={requestNotificationAccess}
+          onRefreshIntegration={() => refreshIntegration(today.date)}
+          usingLiveCalendar={today.integration.usingLiveCalendar}
+          calendarDetail={today.integration.calendarDetail}
+        />
         <CapacityInsight capacity={today.capacity} focus={today.focus} />
         <TimelinePlan blocks={today.blocks} onTaskAction={applyTaskAction} />
         <UnscheduledTasksPanel tasks={today.unscheduled} />
@@ -53,7 +71,7 @@ export function TodayScreen() {
 
         <View className="pb-2 pt-1">
           <AppText tone="tertiary" variant="caption">
-            The execution layer now recovers through smaller tasks, substitutes, and selective rollover. Adaptive learning, notification intelligence, and account sync remain deferred.
+            Calendar writes, account sync, and broader automation remain deferred. This phase only reads live context and keeps reminders intentionally sparse.
           </AppText>
         </View>
       </View>
