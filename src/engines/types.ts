@@ -3,6 +3,7 @@ import {
   DailyPlan,
   Goal,
   GoalMilestone,
+  GoalPlanningAnalysis,
   ReplanSuggestion,
   ScheduleConstraint,
   Task,
@@ -31,9 +32,11 @@ export interface GoalDecompositionRequest {
   milestones: GoalMilestone[];
   existingTasks: Task[];
   preferences: UserPreferences;
+  referenceDate?: string;
 }
 
 export interface GoalDecompositionOutput {
+  analysis: GoalPlanningAnalysis;
   milestones: GoalMilestone[];
   tasks: Task[];
 }

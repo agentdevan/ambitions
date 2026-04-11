@@ -1,4 +1,5 @@
 import { EngineResult, GoalDecompositionOutput, GoalDecompositionRequest } from "../types";
+import { buildGoalPlan } from "./planning/planner";
 
 export interface GoalDecompositionEngine {
   decompose(request: GoalDecompositionRequest): Promise<EngineResult<GoalDecompositionOutput>>;
@@ -6,13 +7,16 @@ export interface GoalDecompositionEngine {
 
 export const goalDecompositionEngine: GoalDecompositionEngine = {
   async decompose(request) {
+    const plan = buildGoalPlan(request.goal);
+
     return {
       generatedAt: new Date().toISOString(),
       payload: {
-        milestones: request.milestones,
-        tasks: request.existingTasks,
+        analysis: plan.analysis,
+        milestones: plan.milestones,
+        tasks: plan.tasks,
       },
-      warnings: ["Goal decomposition logic is intentionally deferred to Phase 3."],
+      warnings: [],
     };
   },
 };

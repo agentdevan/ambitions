@@ -1,12 +1,13 @@
 import { EntityRecord } from "./shared";
 
 export enum DomainKey {
+  Fitness = "fitness",
+  Finance = "finance",
+  Credit = "credit",
   Career = "career",
-  Health = "health",
-  Craft = "craft",
-  Relationships = "relationships",
-  Home = "home",
-  Wealth = "wealth",
+  SkillBuilding = "skill_building",
+  Relationship = "relationship",
+  Personal = "personal",
 }
 
 export interface Domain extends EntityRecord {

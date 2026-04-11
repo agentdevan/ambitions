@@ -11,7 +11,7 @@ import {
   seedScheduleConstraints,
   seedTasks,
   seedTimeBlocks,
-} from "../../data/seed/phase2Seed";
+} from "../../data/seed/phase3Seed";
 import { initializeDatabase, sqliteClient } from "../../data/sqlite/client";
 import {
   adaptationEngine,
@@ -56,17 +56,47 @@ export const appServices = {
 };
 
 let initializationPromise: Promise<void> | null = null;
+const bootstrapSeedVersion = "phase3-planning-brain";
+
+async function resetSeedData() {
+  await sqliteClient.withTransaction(async (client) => {
+    await client.run("DELETE FROM time_blocks;");
+    await client.run("DELETE FROM daily_plans;");
+    await client.run("DELETE FROM replan_suggestions;");
+    await client.run("DELETE FROM tasks;");
+    await client.run("DELETE FROM goal_milestones;");
+    await client.run("DELETE FROM goals;");
+    await client.run("DELETE FROM adaptation_profiles;");
+    await client.run("DELETE FROM schedule_constraints;");
+    await client.run("DELETE FROM calendar_connection_states;");
+    await client.run("DELETE FROM notification_preferences;");
+    await client.run("DELETE FROM user_preferences;");
+    await client.run("DELETE FROM domains;");
+    await client.run(
+      "INSERT OR REPLACE INTO app_metadata (key, value) VALUES (?, ?);",
+      ["bootstrap_seed_version", bootstrapSeedVersion],
+    );
+  });
+}
 
 export async function initializeAppServices() {
   if (!initializationPromise) {
     initializationPromise = (async () => {
       await initializeDatabase();
 
+      const seedVersion = await sqliteClient.getFirst<{ value: string }>(
+        "SELECT value FROM app_metadata WHERE key = ? LIMIT 1;",
+        ["bootstrap_seed_version"],
+      );
       const existingGoals = await appServices.repositories.goals.listGoals();
+      const needsReseed =
+        existingGoals.length === 0 || seedVersion?.value !== bootstrapSeedVersion;
 
-      if (existingGoals.length > 0) {
+      if (!needsReseed) {
         return;
       }
+
+      await resetSeedData();
 
       await appServices.repositories.preferences.saveDomains(seedDomains);
       await appServices.repositories.preferences.saveUserPreferences(seedPreferences);

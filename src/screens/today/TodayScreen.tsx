@@ -48,7 +48,7 @@ export function TodayScreen() {
 
         <View className="pb-2 pt-1">
           <AppText tone="tertiary" variant="caption">
-            Local-first planning data now flows through repositories and state contracts. The adaptive engines are still scaffolded, not fully intelligent.
+            The planning brain is now deterministic and protective-first. Calendar-aware execution and richer adaptation are still intentionally deferred.
           </AppText>
         </View>
       </View>
