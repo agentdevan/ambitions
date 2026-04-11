@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { Pressable, View } from "react-native";
 
+import { AccountStatusCard } from "../../components/account/AccountStatusCard";
 import { Button } from "../../components/ui/Button";
 import { EmptyStateCard } from "../../components/ui/EmptyStateCard";
 import { OptionChip } from "../../components/ui/OptionChip";
@@ -27,6 +28,15 @@ export function InsightsScreen() {
   );
   const requestCalendarAccess = useAppStore((state) => state.requestCalendarAccess);
   const requestNotificationAccess = useAppStore((state) => state.requestNotificationAccess);
+  const account = useAppStore((state) => state.account);
+  const authState = useAppStore((state) => state.authState);
+  const attachmentState = useAppStore((state) => state.attachmentState);
+  const syncState = useAppStore((state) => state.syncState);
+  const syncConflicts = useAppStore((state) => state.syncConflicts);
+  const signInWithApple = useAppStore((state) => state.signInWithApple);
+  const attachLocalDataToAccount = useAppStore((state) => state.attachLocalDataToAccount);
+  const deferLocalDataAttachment = useAppStore((state) => state.deferLocalDataAttachment);
+  const syncAccountData = useAppStore((state) => state.syncAccountData);
   const [sleepStart, setSleepStart] = useState("23:00");
   const [sleepEnd, setSleepEnd] = useState("07:00");
   const [workStart, setWorkStart] = useState("09:00");
@@ -101,6 +111,42 @@ export function InsightsScreen() {
             This is the product settings area for V1, not a control panel.
           </AppText>
         </View>
+
+        <AccountStatusCard
+          account={account}
+          authState={authState}
+          attachmentState={attachmentState}
+          syncState={syncState}
+          conflicts={syncConflicts}
+          busyAction={
+            busyState === "sign_in" ||
+            busyState === "attach" ||
+            busyState === "sync" ||
+            busyState === "defer"
+              ? (busyState as "sign_in" | "attach" | "sync" | "defer")
+              : null
+          }
+          onSignIn={() =>
+            void runAction("sign_in", signInWithApple, "Sign in with Apple could not start.")
+          }
+          onAttach={() =>
+            void runAction(
+              "attach",
+              attachLocalDataToAccount,
+              "Local data could not be attached to the account.",
+            )
+          }
+          onDefer={() =>
+            void runAction(
+              "defer",
+              deferLocalDataAttachment,
+              "The local-only path could not be preserved.",
+            )
+          }
+          onSync={() =>
+            void runAction("sync", () => syncAccountData(), "Account sync could not complete.")
+          }
+        />
 
         <Surface>
           <View className="gap-4">

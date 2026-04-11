@@ -66,6 +66,13 @@ export class SQLitePlanRepository extends SQLiteRepository implements PlanReposi
     return mapDailyPlanRow(row);
   }
 
+  async listDailyPlans() {
+    const rows = await this.database.getAll<DailyPlanRow>(
+      "SELECT * FROM daily_plans ORDER BY date ASC;",
+    );
+    return rows.map(mapDailyPlanRow);
+  }
+
   async listTimeBlocksForPlan(dailyPlanId: string) {
     const rows = await this.database.getAll<TimeBlockRow>(
       "SELECT * FROM time_blocks WHERE daily_plan_id = ? ORDER BY starts_at_datetime ASC;",

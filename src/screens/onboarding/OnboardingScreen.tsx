@@ -357,6 +357,10 @@ export function OnboardingScreen() {
           <AppText tone="tertiary" variant="caption" style={{ textAlign: "center" }}>
             Defaults can be edited later in Settings.
           </AppText>
+          <AppText tone="tertiary" variant="caption" style={{ textAlign: "center" }}>
+            Accounts stay optional at first. Add one later when backup or cross-device continuity
+            matters.
+          </AppText>
           {runtimeMessage ? (
             <AppText tone="tertiary" variant="caption" style={{ textAlign: "center" }}>
               {runtimeMessage}

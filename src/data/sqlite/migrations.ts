@@ -305,4 +305,126 @@ export const schemaMigrations: MigrationDefinition[] = [
       `ALTER TABLE adaptation_profiles ADD COLUMN planning_directives_json TEXT NOT NULL DEFAULT '{}';`,
     ],
   },
+  {
+    id: 3,
+    name: "phase_10_accounts_sync_foundation",
+    statements: [
+      `
+        CREATE TABLE IF NOT EXISTS accounts (
+          id TEXT PRIMARY KEY NOT NULL,
+          provider TEXT NOT NULL,
+          provider_subject TEXT NOT NULL,
+          email TEXT,
+          display_name TEXT,
+          metadata_json TEXT NOT NULL,
+          owner_user_id TEXT,
+          remote_id TEXT,
+          sync_state TEXT NOT NULL,
+          version INTEGER NOT NULL,
+          last_synced_at TEXT,
+          created_at TEXT NOT NULL,
+          updated_at TEXT NOT NULL
+        );
+      `,
+      `
+        CREATE TABLE IF NOT EXISTS auth_state (
+          id TEXT PRIMARY KEY NOT NULL,
+          status TEXT NOT NULL,
+          signed_in_account_id TEXT,
+          primary_provider TEXT NOT NULL,
+          available_providers_json TEXT NOT NULL,
+          can_attempt_apple_sign_in INTEGER NOT NULL,
+          last_authenticated_at TEXT,
+          last_error TEXT,
+          created_at TEXT NOT NULL,
+          updated_at TEXT NOT NULL
+        );
+      `,
+      `
+        CREATE TABLE IF NOT EXISTS local_attachment_state (
+          id TEXT PRIMARY KEY NOT NULL,
+          account_id TEXT,
+          status TEXT NOT NULL,
+          has_meaningful_local_data INTEGER NOT NULL,
+          pending_record_count INTEGER NOT NULL,
+          last_attached_at TEXT,
+          last_error TEXT,
+          created_at TEXT NOT NULL,
+          updated_at TEXT NOT NULL
+        );
+      `,
+      `
+        CREATE TABLE IF NOT EXISTS sync_state (
+          id TEXT PRIMARY KEY NOT NULL,
+          account_id TEXT,
+          device_id TEXT NOT NULL,
+          mode TEXT NOT NULL,
+          last_sync_at TEXT,
+          pending_push_count INTEGER NOT NULL,
+          pending_pull_count INTEGER NOT NULL,
+          unresolved_conflict_count INTEGER NOT NULL,
+          last_error TEXT,
+          metadata_json TEXT NOT NULL,
+          created_at TEXT NOT NULL,
+          updated_at TEXT NOT NULL
+        );
+      `,
+      `
+        CREATE TABLE IF NOT EXISTS sync_operations (
+          id TEXT PRIMARY KEY NOT NULL,
+          account_id TEXT,
+          kind TEXT NOT NULL,
+          status TEXT NOT NULL,
+          started_at TEXT NOT NULL,
+          finished_at TEXT,
+          error_message TEXT,
+          metadata_json TEXT NOT NULL,
+          owner_user_id TEXT,
+          remote_id TEXT,
+          sync_state TEXT NOT NULL,
+          version INTEGER NOT NULL,
+          last_synced_at TEXT,
+          created_at TEXT NOT NULL,
+          updated_at TEXT NOT NULL
+        );
+      `,
+      `
+        CREATE TABLE IF NOT EXISTS sync_conflicts (
+          id TEXT PRIMARY KEY NOT NULL,
+          account_id TEXT NOT NULL,
+          entity_kind TEXT NOT NULL,
+          entity_id TEXT NOT NULL,
+          local_version INTEGER NOT NULL,
+          remote_version INTEGER NOT NULL,
+          strategy TEXT NOT NULL,
+          status TEXT NOT NULL,
+          summary TEXT NOT NULL,
+          metadata_json TEXT NOT NULL,
+          owner_user_id TEXT,
+          remote_id TEXT,
+          sync_state TEXT NOT NULL,
+          version INTEGER NOT NULL,
+          last_synced_at TEXT,
+          created_at TEXT NOT NULL,
+          updated_at TEXT NOT NULL
+        );
+      `,
+      `CREATE INDEX IF NOT EXISTS idx_sync_conflicts_account_id ON sync_conflicts(account_id);`,
+      `
+        CREATE TABLE IF NOT EXISTS remote_sync_records (
+          id TEXT PRIMARY KEY NOT NULL,
+          account_id TEXT NOT NULL,
+          entity_kind TEXT NOT NULL,
+          entity_id TEXT NOT NULL,
+          remote_id TEXT NOT NULL,
+          payload_json TEXT NOT NULL,
+          version INTEGER NOT NULL,
+          last_writer_device_id TEXT NOT NULL,
+          created_at TEXT NOT NULL,
+          updated_at TEXT NOT NULL
+        );
+      `,
+      `CREATE INDEX IF NOT EXISTS idx_remote_sync_records_account_id ON remote_sync_records(account_id);`,
+    ],
+  },
 ];

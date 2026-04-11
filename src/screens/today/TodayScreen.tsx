@@ -1,3 +1,4 @@
+import { AccountStatusCard } from "../../components/account/AccountStatusCard";
 import { useState } from "react";
 import { View } from "react-native";
 import { useNavigation } from "@react-navigation/native";
@@ -32,8 +33,18 @@ export function TodayScreen() {
   const requestCalendarAccess = useAppStore((state) => state.requestCalendarAccess);
   const requestNotificationAccess = useAppStore((state) => state.requestNotificationAccess);
   const refreshIntegration = useAppStore((state) => state.refreshIntegration);
+  const account = useAppStore((state) => state.account);
+  const authState = useAppStore((state) => state.authState);
+  const attachmentState = useAppStore((state) => state.attachmentState);
+  const syncState = useAppStore((state) => state.syncState);
+  const syncConflicts = useAppStore((state) => state.syncConflicts);
+  const signInWithApple = useAppStore((state) => state.signInWithApple);
+  const attachLocalDataToAccount = useAppStore((state) => state.attachLocalDataToAccount);
+  const deferLocalDataAttachment = useAppStore((state) => state.deferLocalDataAttachment);
+  const syncAccountData = useAppStore((state) => state.syncAccountData);
   const [busyTaskId, setBusyTaskId] = useState<string | null>(null);
   const [integrationBusy, setIntegrationBusy] = useState<string | null>(null);
+  const [accountBusy, setAccountBusy] = useState<string | null>(null);
   const [runtimeMessage, setRuntimeMessage] = useState<string | null>(null);
 
   async function runIntegrationAction(
@@ -67,6 +78,23 @@ export function TodayScreen() {
       );
     } finally {
       setBusyTaskId(null);
+    }
+  }
+
+  async function runAccountAction(
+    key: string,
+    action: () => Promise<void>,
+    fallbackError: string,
+  ) {
+    setAccountBusy(key);
+    setRuntimeMessage(null);
+
+    try {
+      await action();
+    } catch (error) {
+      setRuntimeMessage(error instanceof Error ? error.message : fallbackError);
+    } finally {
+      setAccountBusy(null);
     }
   }
 
@@ -121,6 +149,41 @@ export function TodayScreen() {
         <TodayHeader
           dateLabel={formatLongDate(today.date)}
           liveContext={today.integration.usingLiveCalendar}
+        />
+        <AccountStatusCard
+          account={account}
+          authState={authState}
+          attachmentState={attachmentState}
+          syncState={syncState}
+          conflicts={syncConflicts}
+          busyAction={
+            accountBusy === "sign_in" ||
+            accountBusy === "attach" ||
+            accountBusy === "sync" ||
+            accountBusy === "defer"
+              ? (accountBusy as "sign_in" | "attach" | "sync" | "defer")
+              : null
+          }
+          onSignIn={() =>
+            runAccountAction("sign_in", signInWithApple, "Sign in with Apple could not start.")
+          }
+          onAttach={() =>
+            runAccountAction(
+              "attach",
+              attachLocalDataToAccount,
+              "Local data could not be attached to the account.",
+            )
+          }
+          onDefer={() =>
+            runAccountAction(
+              "defer",
+              deferLocalDataAttachment,
+              "The local-only path could not be preserved.",
+            )
+          }
+          onSync={() =>
+            runAccountAction("sync", () => syncAccountData(), "Account sync could not complete.")
+          }
         />
         <IntegrationStatusCard
           calendarConnectionState={calendarConnectionState}
@@ -185,8 +248,9 @@ export function TodayScreen() {
 
         <View className="pb-2 pt-1">
           <AppText tone="tertiary" variant="caption">
-            Calendar writes, account sync, and broader automation remain deferred. This release
-            reads live context and keeps reminders intentionally sparse.
+            Account sync covers goals, milestones, tasks, daily plans, preferences, and the
+            adaptation profile. Notifications, permissions, and transient runtime state remain
+            device-local.
           </AppText>
         </View>
       </View>

@@ -17,19 +17,41 @@ import {
 } from "../../engines";
 import {
   SQLiteAdaptationRepository,
+  SQLiteAccountRepository,
   SQLiteGoalRepository,
   SQLiteIntegrationRepository,
   SQLitePlanRepository,
   SQLitePreferencesRepository,
   SQLiteTaskRepository,
 } from "../../repositories/sqlite";
+import { AccountService } from "../../services/account/AccountService";
 import { CalendarService } from "../../services/calendar/CalendarService";
 import { NotificationsService } from "../../services/notifications/NotificationsService";
+
+const repositories = {
+  account: new SQLiteAccountRepository(sqliteClient),
+  goals: new SQLiteGoalRepository(sqliteClient),
+  tasks: new SQLiteTaskRepository(sqliteClient),
+  planning: new SQLitePlanRepository(sqliteClient),
+  preferences: new SQLitePreferencesRepository(sqliteClient),
+  adaptation: new SQLiteAdaptationRepository(sqliteClient),
+  integration: new SQLiteIntegrationRepository(sqliteClient),
+};
 
 export const appServices = {
   services: {
     calendar: CalendarService,
     notifications: NotificationsService,
+    account: new AccountService({
+      accountRepository: repositories.account,
+      repositories: {
+        goals: repositories.goals,
+        tasks: repositories.tasks,
+        planning: repositories.planning,
+        preferences: repositories.preferences,
+        adaptation: repositories.adaptation,
+      },
+    }),
   },
   engines: {
     decomposition: goalDecompositionEngine,
@@ -39,14 +61,7 @@ export const appServices = {
     replanning: replanningEngine,
     adaptation: adaptationEngine,
   },
-  repositories: {
-    goals: new SQLiteGoalRepository(sqliteClient),
-    tasks: new SQLiteTaskRepository(sqliteClient),
-    planning: new SQLitePlanRepository(sqliteClient),
-    preferences: new SQLitePreferencesRepository(sqliteClient),
-    adaptation: new SQLiteAdaptationRepository(sqliteClient),
-    integration: new SQLiteIntegrationRepository(sqliteClient),
-  },
+  repositories,
 };
 
 let initializationPromise: Promise<void> | null = null;
@@ -84,6 +99,7 @@ export async function initializeAppServices() {
   if (!initializationPromise) {
     initializationPromise = (async () => {
       await initializeDatabase();
+      await appServices.services.account.initialize();
 
       const seedVersion = await sqliteClient.getFirst<{ value: string }>(
         "SELECT value FROM app_metadata WHERE key = ? LIMIT 1;",

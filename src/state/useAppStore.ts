@@ -4,15 +4,22 @@ import { initializeAppServices, appServices } from "../bootstrap/runtime/appServ
 import { SchedulingOutput } from "../engines";
 import {
   AdaptationProfile,
+  AccountIdentity,
+  AccountSnapshot,
+  AuthStateSnapshot,
   CalendarConnectionState,
   DailyPlan,
   Domain,
   Goal,
   GoalMilestone,
   GoalStatus,
+  LocalAttachmentState,
   NotificationPreference,
   ReplanSuggestion,
   ScheduleConstraint,
+  SyncConflictRecord,
+  SyncOperationKind,
+  SyncStateSnapshot,
   Task,
   TaskActionType,
   TimeBlock,
@@ -90,13 +97,55 @@ interface ProductSlice {
   }) => Promise<void>;
 }
 
+interface AccountSlice {
+  account: AccountIdentity | null;
+  authState: AuthStateSnapshot | null;
+  attachmentState: LocalAttachmentState | null;
+  syncState: SyncStateSnapshot | null;
+  syncConflicts: SyncConflictRecord[];
+  refreshAccountState: () => Promise<void>;
+  signInWithApple: () => Promise<void>;
+  attachLocalDataToAccount: () => Promise<void>;
+  deferLocalDataAttachment: () => Promise<void>;
+  syncAccountData: (kind?: SyncOperationKind) => Promise<void>;
+}
+
 type AppState = AppShellSlice &
   GoalsSlice &
   PlanningSlice &
   PreferencesSlice &
   AdaptationSlice &
   IntegrationSlice &
-  ProductSlice;
+  ProductSlice &
+  AccountSlice;
+
+function mapAccountSnapshot(snapshot: AccountSnapshot) {
+  return {
+    account: snapshot.account,
+    authState: snapshot.auth,
+    attachmentState: snapshot.attachment,
+    syncState: snapshot.sync,
+    syncConflicts: snapshot.conflicts,
+  };
+}
+
+function bindRecordToAccount<
+  T extends { id: string; ownerUserId: string | null; remoteId: string | null; syncState: string },
+>(
+  record: T,
+  accountId: string | null,
+) {
+  if (!accountId) {
+    return record;
+  }
+
+  return {
+    ...record,
+    ownerUserId: accountId,
+    remoteId: record.remoteId,
+    syncState: "pending_sync" as const,
+  };
+}
 
 export const useAppStore = create<AppState>((set, get) => ({
   bootstrapped: false,
@@ -121,6 +170,11 @@ export const useAppStore = create<AppState>((set, get) => ({
   scheduleConstraints: [],
   notificationPermissionStatus: "undetermined",
   onboardingBusy: false,
+  account: null,
+  authState: null,
+  attachmentState: null,
+  syncState: null,
+  syncConflicts: [],
 
   bootstrap: async () => {
     if (get().bootStatus === "loading" || get().bootstrapped) {
@@ -132,13 +186,29 @@ export const useAppStore = create<AppState>((set, get) => ({
     try {
       await initializeAppServices();
       await appServices.services.notifications.configure();
-      const snapshot = await refreshAllState(get().planDate);
+      const [snapshot, accountSnapshot] = await Promise.all([
+        refreshAllState(get().planDate),
+        appServices.services.account.getSnapshot(),
+      ]);
 
       set({
         bootstrapped: true,
         bootStatus: "ready",
         ...snapshot,
+        ...mapAccountSnapshot(accountSnapshot),
       });
+
+      if (
+        accountSnapshot.auth.signedInAccountId &&
+        accountSnapshot.attachment.status === "attached"
+      ) {
+        appServices.services.account
+          .syncNow(SyncOperationKind.Startup)
+          .then((nextSnapshot) => {
+            set(mapAccountSnapshot(nextSnapshot));
+          })
+          .catch(() => null);
+      }
     } catch (error) {
       set({
         bootStatus: "error",
@@ -164,6 +234,9 @@ export const useAppStore = create<AppState>((set, get) => ({
       throw new Error("Preferences are not available yet.");
     }
 
+    const accountId =
+      state.attachmentState?.status === "attached" ? state.authState?.signedInAccountId ?? null : null;
+
     const artifacts = await createGoalArtifacts({
       inference,
       productPreferences: state.productPreferences,
@@ -173,27 +246,40 @@ export const useAppStore = create<AppState>((set, get) => ({
     });
     const existingGoals = await appServices.repositories.goals.listGoals();
 
-    await appServices.repositories.preferences.saveUserPreferences(artifacts.mergedPreferences);
+    await appServices.repositories.preferences.saveUserPreferences(
+      bindRecordToAccount(artifacts.mergedPreferences, accountId),
+    );
     await appServices.repositories.goals.saveGoals([
       ...existingGoals.map((goal, index) => ({ ...goal, sortOrder: index + 1 })),
-      { ...artifacts.goal, sortOrder: existingGoals.length + 1 },
+      bindRecordToAccount(
+        { ...artifacts.goal, sortOrder: existingGoals.length + 1 },
+        accountId,
+      ),
     ]);
-    await appServices.repositories.goals.saveMilestones(artifacts.milestones);
-    await appServices.repositories.tasks.saveTasks(artifacts.tasks);
+    await appServices.repositories.goals.saveMilestones(
+      artifacts.milestones.map((milestone) => bindRecordToAccount(milestone, accountId)),
+    );
+    await appServices.repositories.tasks.saveTasks(
+      artifacts.tasks.map((task) => bindRecordToAccount(task, accountId)),
+    );
 
     set(await refreshAllState(state.planDate));
   },
 
   updateGoal: async (goalId, patch) => {
     const goals = await appServices.repositories.goals.listGoals();
+    const accountId =
+      get().attachmentState?.status === "attached"
+        ? get().authState?.signedInAccountId ?? null
+        : null;
     const nextGoals = goals.map((goal) =>
       goal.id === goalId
-        ? {
+        ? bindRecordToAccount({
             ...goal,
             ...patch,
             updatedAt: new Date().toISOString(),
             version: goal.version + 1,
-          }
+          }, accountId)
         : goal,
     );
 
@@ -283,7 +369,13 @@ export const useAppStore = create<AppState>((set, get) => ({
     }
 
     const nextPreferences = mergeProductPreferences(currentPreferences, productPreferences);
-    await appServices.repositories.preferences.saveUserPreferences(nextPreferences);
+    const accountId =
+      get().attachmentState?.status === "attached"
+        ? get().authState?.signedInAccountId ?? null
+        : null;
+    await appServices.repositories.preferences.saveUserPreferences(
+      bindRecordToAccount(nextPreferences, accountId),
+    );
     set(await refreshAllState(get().planDate));
   },
 
@@ -346,9 +438,49 @@ export const useAppStore = create<AppState>((set, get) => ({
         today: state.planDate,
         adaptationProfile: state.adaptationProfile,
       });
-      set(await refreshAllState(state.planDate));
+      const [foundationSnapshot, accountSnapshot] = await Promise.all([
+        refreshAllState(state.planDate),
+        appServices.services.account.getSnapshot(),
+      ]);
+      set({
+        ...foundationSnapshot,
+        ...mapAccountSnapshot(accountSnapshot),
+      });
     } finally {
       set({ onboardingBusy: false });
     }
+  },
+
+  refreshAccountState: async () => {
+    const snapshot = await appServices.services.account.getSnapshot();
+    set(mapAccountSnapshot(snapshot));
+  },
+
+  signInWithApple: async () => {
+    const snapshot = await appServices.services.account.signInWithApple();
+    set(mapAccountSnapshot(snapshot));
+  },
+
+  attachLocalDataToAccount: async () => {
+    const accountSnapshot = await appServices.services.account.attachLocalDataToSignedInAccount();
+    const foundationSnapshot = await refreshAllState(get().planDate);
+    set({
+      ...foundationSnapshot,
+      ...mapAccountSnapshot(accountSnapshot),
+    });
+  },
+
+  deferLocalDataAttachment: async () => {
+    const snapshot = await appServices.services.account.deferLocalAttachment();
+    set(mapAccountSnapshot(snapshot));
+  },
+
+  syncAccountData: async (kind) => {
+    const accountSnapshot = await appServices.services.account.syncNow(kind);
+    const foundationSnapshot = await refreshAllState(get().planDate);
+    set({
+      ...foundationSnapshot,
+      ...mapAccountSnapshot(accountSnapshot),
+    });
   },
 }));
