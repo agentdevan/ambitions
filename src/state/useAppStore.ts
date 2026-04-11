@@ -12,7 +12,9 @@ import {
   NotificationPreference,
   ReplanSuggestion,
   ScheduleConstraint,
+  TaskActionType,
   Task,
+  TimeBlock,
   UserPreferences,
 } from "../domain/models";
 import { NotificationsService } from "../services/notifications/NotificationsService";
@@ -39,8 +41,10 @@ interface PlanningSlice {
   dailyPlan: DailyPlan | null;
   schedule: SchedulingOutput | null;
   today: TodayViewModel | null;
+  timeBlocksForSelectedDate: TimeBlock[];
   tasksForSelectedDate: Task[];
   refreshPlanning: (date?: string) => Promise<void>;
+  applyTaskAction: (taskId: string, action: TaskActionType) => Promise<void>;
 }
 
 interface PreferencesSlice {
@@ -113,6 +117,32 @@ async function loadFoundationSnapshot(date: string) {
       })
     : null;
   const schedule = scheduleResult?.payload ?? null;
+  const derivedReplanSuggestions =
+    preferences && dailyPlan
+      ? (
+          await appServices.engines.replanning.suggestAdjustments({
+            date,
+            goals,
+            milestones,
+            tasks,
+            constraints: scheduleConstraints,
+            preferences,
+            adaptationProfile,
+            dailyPlan,
+            timeBlocks: schedule?.timeBlocks ?? blocks,
+          })
+        ).payload.suggestions
+      : [];
+  const mergedReplanSuggestions = [
+    ...replanSuggestions,
+    ...derivedReplanSuggestions.filter(
+      (candidate) =>
+        !replanSuggestions.some(
+          (existing) =>
+            existing.taskId === candidate.taskId && existing.type === candidate.type,
+        ),
+    ),
+  ].sort((left, right) => right.confidence - left.confidence);
 
   return {
     domains,
@@ -122,18 +152,19 @@ async function loadFoundationSnapshot(date: string) {
     notificationPreferences,
     adaptationProfile,
     dailyPlan,
+    blocks,
     tasks,
     calendarConnectionState,
     scheduleConstraints,
-    replanSuggestions,
+    replanSuggestions: mergedReplanSuggestions,
     schedule,
     today: buildTodayViewModel({
       date,
       dailyPlan: schedule?.dailyPlan ?? dailyPlan,
-      blocks: schedule?.timeBlocks ?? blocks,
+      blocks,
       schedule,
       profile: adaptationProfile,
-      suggestions: replanSuggestions,
+      suggestions: mergedReplanSuggestions,
       constraints: scheduleConstraints,
       tasks,
     }),
@@ -152,6 +183,7 @@ export const useAppStore = create<AppState>((set, get) => ({
   schedule: null,
   today: null,
   tasksForSelectedDate: [],
+  timeBlocksForSelectedDate: [],
   userPreferences: null,
   notificationPreferences: [],
   adaptationProfile: null,
@@ -184,6 +216,7 @@ export const useAppStore = create<AppState>((set, get) => ({
         dailyPlan: snapshot.schedule?.dailyPlan ?? snapshot.dailyPlan,
         schedule: snapshot.schedule,
         today: snapshot.today,
+        timeBlocksForSelectedDate: snapshot.blocks,
         tasksForSelectedDate: snapshot.tasks,
         calendarConnectionState: snapshot.calendarConnectionState,
         scheduleConstraints: snapshot.scheduleConstraints,
@@ -215,9 +248,54 @@ export const useAppStore = create<AppState>((set, get) => ({
       dailyPlan: snapshot.schedule?.dailyPlan ?? snapshot.dailyPlan,
       schedule: snapshot.schedule,
       today: snapshot.today,
+      timeBlocksForSelectedDate: snapshot.blocks,
       tasksForSelectedDate: snapshot.tasks,
       replanSuggestions: snapshot.replanSuggestions,
       scheduleConstraints: snapshot.scheduleConstraints,
+    });
+  },
+
+  applyTaskAction: async (taskId, action) => {
+    const state = get();
+
+    if (!state.dailyPlan) {
+      throw new Error("No daily plan is loaded for execution.");
+    }
+
+    const execution = await appServices.engines.execution.execute({
+      date: state.planDate,
+      dailyPlan: state.dailyPlan,
+      timeBlocks: state.timeBlocksForSelectedDate,
+      tasks: state.tasksForSelectedDate,
+      adaptationProfile: state.adaptationProfile,
+      event: {
+        taskId,
+        type: action,
+        occurredAt: new Date().toISOString(),
+      },
+    });
+
+    const nextSuggestions = [
+      ...state.replanSuggestions.filter((suggestion) => suggestion.taskId !== taskId),
+      ...execution.payload.replanSuggestions,
+    ].sort((left, right) => right.confidence - left.confidence);
+
+    await Promise.all([
+      appServices.repositories.tasks.saveTasks(execution.payload.mutation.tasksToSave),
+      appServices.repositories.planning.saveTimeBlocks(execution.payload.mutation.blocksToSave),
+      appServices.repositories.planning.saveDailyPlans([execution.payload.mutation.dailyPlan]),
+      appServices.repositories.adaptation.replaceReplanSuggestions(state.planDate, nextSuggestions),
+    ]);
+
+    const snapshot = await loadFoundationSnapshot(state.planDate);
+
+    set({
+      dailyPlan: snapshot.schedule?.dailyPlan ?? snapshot.dailyPlan,
+      schedule: snapshot.schedule,
+      today: snapshot.today,
+      timeBlocksForSelectedDate: snapshot.blocks,
+      tasksForSelectedDate: snapshot.tasks,
+      replanSuggestions: snapshot.replanSuggestions,
     });
   },
 

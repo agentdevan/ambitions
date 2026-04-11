@@ -23,6 +23,11 @@ export enum ReplanSuggestionType {
   ProtectFocus = "protect_focus",
   AddRecovery = "add_recovery",
   DeferTask = "defer_task",
+  RetrySmaller = "retry_smaller",
+  SubstituteLowerFriction = "substitute_lower_friction",
+  RescheduleDifferentWindow = "reschedule_different_window",
+  PreserveAndDefer = "preserve_and_defer",
+  DropFromCurrentDay = "drop_from_current_day",
 }
 
 export interface AdaptationProfile extends EntityRecord {

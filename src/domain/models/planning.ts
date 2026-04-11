@@ -3,10 +3,15 @@ import { EntityRecord, ISODateString, ISODateTimeString, JsonMap } from "./share
 export enum TaskStatus {
   Inbox = "inbox",
   Ready = "ready",
+  Unscheduled = "unscheduled",
   Scheduled = "scheduled",
   InProgress = "in_progress",
   Completed = "completed",
+  Skipped = "skipped",
+  Missed = "missed",
   Deferred = "deferred",
+  Split = "split",
+  Substituted = "substituted",
   Cancelled = "cancelled",
 }
 

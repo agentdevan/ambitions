@@ -1,11 +1,11 @@
 import { View } from "react-native";
 
-import { UnscheduledTask } from "../../engines";
+import { TodayRecoveryTask } from "../../state/viewModels/today";
 import { Surface } from "../ui/Surface";
 import { AppText } from "../ui/Text";
 
 interface UnscheduledTasksPanelProps {
-  tasks: UnscheduledTask[];
+  tasks: TodayRecoveryTask[];
 }
 
 export function UnscheduledTasksPanel({ tasks }: UnscheduledTasksPanelProps) {
@@ -27,7 +27,7 @@ export function UnscheduledTasksPanel({ tasks }: UnscheduledTasksPanelProps) {
           <View key={task.taskId} className="gap-1">
             <AppText variant="section">{task.title}</AppText>
             <AppText tone="tertiary" variant="caption">
-              {task.estimatedMinutes} min
+              {task.status.replaceAll("_", " ")} • {task.estimatedMinutes} min
             </AppText>
             <AppText tone="secondary">{task.reason}</AppText>
           </View>

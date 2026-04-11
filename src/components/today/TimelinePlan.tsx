@@ -1,11 +1,13 @@
-import { View } from "react-native";
+import { Pressable, View } from "react-native";
 
-import { PlanBlock } from "../../data/models";
+import { TaskActionType } from "../../domain/models";
+import { TodayTaskBlock } from "../../state/viewModels/today";
 import { Surface } from "../ui/Surface";
 import { AppText } from "../ui/Text";
 
 interface TimelinePlanProps {
-  blocks: PlanBlock[];
+  blocks: TodayTaskBlock[];
+  onTaskAction: (taskId: string, action: TaskActionType) => void;
 }
 
 const stateAccentMap = {
@@ -17,7 +19,16 @@ const stateAccentMap = {
   cancelled: "#A19B92",
 };
 
-export function TimelinePlan({ blocks }: TimelinePlanProps) {
+const actionLabels: Record<TaskActionType, string> = {
+  start: "Start",
+  complete: "Done",
+  skip: "Skip",
+  miss: "Missed",
+  defer: "Defer",
+  unschedule: "Unscheduled",
+};
+
+export function TimelinePlan({ blocks, onTaskAction }: TimelinePlanProps) {
   return (
     <Surface className="gap-6">
       <View className="gap-2">
@@ -73,6 +84,29 @@ export function TimelinePlan({ blocks }: TimelinePlanProps) {
               <AppText tone="secondary" style={{ maxWidth: 280 }}>
                 {block.note}
               </AppText>
+
+              {block.taskStatus ? (
+                <AppText tone="tertiary" variant="caption">
+                  Status: {block.taskStatus.replaceAll("_", " ")}
+                  {block.estimatedMinutes ? ` • ${block.estimatedMinutes} min` : ""}
+                </AppText>
+              ) : null}
+
+              {block.taskId && block.actions.length > 0 ? (
+                <View className="flex-row flex-wrap gap-2 pt-1">
+                  {block.actions.map((action) => (
+                    <Pressable
+                      key={`${block.id}-${action}`}
+                      onPress={() => onTaskAction(block.taskId as string, action)}
+                      className="rounded-full border border-[#DED7CB] bg-[#FCFAF6] px-3 py-2"
+                    >
+                      <AppText variant="micro" tone="secondary">
+                        {actionLabels[action]}
+                      </AppText>
+                    </Pressable>
+                  ))}
+                </View>
+              ) : null}
             </View>
           </View>
         ))}

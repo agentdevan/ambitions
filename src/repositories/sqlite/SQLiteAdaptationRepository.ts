@@ -157,4 +157,39 @@ export class SQLiteAdaptationRepository
       }
     });
   }
+
+  async replaceReplanSuggestions(planDate: string, suggestions: ReplanSuggestion[]) {
+    await this.database.withTransaction(async (client) => {
+      await client.run("DELETE FROM replan_suggestions WHERE plan_date = ?;", [planDate]);
+
+      for (const suggestion of suggestions) {
+        await client.run(
+          `
+            INSERT OR REPLACE INTO replan_suggestions (
+              id, plan_date, type, title, rationale, task_id, time_block_id, confidence,
+              suggested_start_at, suggested_end_at, metadata_json, owner_user_id, remote_id,
+              sync_state, version, last_synced_at, created_at, updated_at
+            ) VALUES (
+              $id, $planDate, $type, $title, $rationale, $taskId, $timeBlockId, $confidence,
+              $suggestedStartAt, $suggestedEndAt, $metadataJson, $ownerUserId, $remoteId,
+              $syncState, $version, $lastSyncedAt, $createdAt, $updatedAt
+            );
+          `,
+          {
+            ...entityParams(suggestion),
+            $planDate: suggestion.planDate,
+            $type: suggestion.type,
+            $title: suggestion.title,
+            $rationale: suggestion.rationale,
+            $taskId: suggestion.taskId,
+            $timeBlockId: suggestion.timeBlockId,
+            $confidence: suggestion.confidence,
+            $suggestedStartAt: suggestion.suggestedStartAt,
+            $suggestedEndAt: suggestion.suggestedEndAt,
+            $metadataJson: encodeJson(suggestion.metadata),
+          },
+        );
+      }
+    });
+  }
 }

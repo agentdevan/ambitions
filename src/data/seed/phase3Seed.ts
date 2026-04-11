@@ -27,6 +27,7 @@ import {
   Task,
   TaskDifficulty,
   TaskSchedulingState,
+  TaskStatus,
   TimeBlock,
   TimeBlockState,
   TimeBlockType,
@@ -68,6 +69,7 @@ function scheduleTask(task: Task, config: {
 }) {
   return {
     ...task,
+    status: TaskStatus.Scheduled,
     scheduledDate: config.scheduledDate,
     targetDate: config.scheduledDate,
     earliestStartAt: config.earliestStartAt,
@@ -404,9 +406,9 @@ export const seedReplanSuggestions: ReplanSuggestion[] = [
   {
     ...recordBase("replan-protect-career"),
     planDate: seedDate,
-    type: ReplanSuggestionType.ProtectFocus,
-    title: "Protect the tailored application block",
-    rationale: "The day only has one deeper career task. Keeping that block intact matters more than adding volume.",
+    type: ReplanSuggestionType.RescheduleDifferentWindow,
+    title: "Reschedule the tailored application block if the afternoon compresses",
+    rationale: "Keep the task, but move it deliberately instead of letting it absorb the rest of the day.",
     taskId: scheduledTasks[1]?.id ?? null,
     timeBlockId: "block-2",
     confidence: 0.84,
@@ -417,9 +419,9 @@ export const seedReplanSuggestions: ReplanSuggestion[] = [
   {
     ...recordBase("replan-shorten-credit"),
     planDate: seedDate,
-    type: ReplanSuggestionType.ShortenTask,
-    title: "Shrink the credit task if the morning compresses",
-    rationale: "If time gets tight, capture balances and limits first, then defer any extra analysis instead of carrying the whole task forward unchanged.",
+    type: ReplanSuggestionType.RetrySmaller,
+    title: "Retry the credit task in a smaller pass",
+    rationale: "If time gets tight, capture balances and limits first, then leave the rest unscheduled pending review.",
     taskId: scheduledTasks[0]?.id ?? null,
     timeBlockId: "block-1",
     confidence: 0.78,

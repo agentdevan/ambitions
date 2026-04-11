@@ -47,7 +47,14 @@ function blockTypeForTask(task: Task) {
 
 function buildCandidates(tasks: Task[], protectiveMode: boolean) {
   return tasks
-    .filter((task) => ![TaskStatus.Completed, TaskStatus.Cancelled].includes(task.status))
+    .filter((task) =>
+      [
+        TaskStatus.Ready,
+        TaskStatus.Unscheduled,
+        TaskStatus.Scheduled,
+        TaskStatus.Deferred,
+      ].includes(task.status),
+    )
     .map((task) => {
       const flexibility = String(task.metadata.planningFlexibility ?? "medium") as
         | "high"

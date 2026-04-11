@@ -6,10 +6,10 @@ import { AppText } from "../ui/Text";
 interface ProgressPanelProps {
   completed: number;
   scheduled: number;
-  rolled: number;
+  recovery: number;
 }
 
-export function ProgressPanel({ completed, scheduled, rolled }: ProgressPanelProps) {
+export function ProgressPanel({ completed, scheduled, recovery }: ProgressPanelProps) {
   return (
     <Surface className="gap-5">
       <View className="gap-2">
@@ -22,11 +22,11 @@ export function ProgressPanel({ completed, scheduled, rolled }: ProgressPanelPro
       <View className="flex-row gap-3">
         <Metric label="Done" value={String(completed)} />
         <Metric label="Active" value={String(scheduled)} />
-        <Metric label="Rolled" value={String(rolled)} />
+        <Metric label="Recovery" value={String(recovery)} />
       </View>
 
       <AppText tone="secondary" style={{ maxWidth: 300 }}>
-        Rollover stays visible, but quiet. It is part of the plan, not a reprimand.
+        Recovery stays visible, but quiet. Missed work should return as a smaller or cleaner next step, not as guilt.
       </AppText>
     </Surface>
   );

@@ -1,5 +1,6 @@
 export * from "./adaptation";
 export * from "./domain";
+export * from "./execution";
 export * from "./goal";
 export * from "./integration";
 export * from "./planning";

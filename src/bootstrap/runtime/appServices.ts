@@ -56,7 +56,7 @@ export const appServices = {
 };
 
 let initializationPromise: Promise<void> | null = null;
-const bootstrapSeedVersion = "phase4-time-aware-planner";
+const bootstrapSeedVersion = "phase5-adaptive-execution";
 
 async function resetSeedData() {
   await sqliteClient.withTransaction(async (client) => {

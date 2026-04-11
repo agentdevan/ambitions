@@ -1,11 +1,15 @@
 import {
   AdaptationProfile,
   DailyPlan,
+  ExecutionAuditTrail,
+  ExecutionMutationSet,
+  PlanPressureSnapshot,
   Goal,
   GoalMilestone,
   GoalPlanningAnalysis,
   ReplanSuggestion,
   ScheduleConstraint,
+  TaskActionEvent,
   Task,
   TimeBlock,
   UserPreferences,
@@ -189,11 +193,17 @@ export interface ExecutionRequest {
   dailyPlan: DailyPlan;
   timeBlocks: TimeBlock[];
   tasks: Task[];
+  adaptationProfile: AdaptationProfile | null;
+  event: TaskActionEvent;
 }
 
 export interface ExecutionOutput {
-  activeTaskIds: string[];
-  rolloverCandidates: string[];
+  mutation: ExecutionMutationSet;
+  audit: ExecutionAuditTrail;
+  createdTaskIds: string[];
+  preservedTaskIds: string[];
+  replanSuggestions: ReplanSuggestion[];
+  pressure: PlanPressureSnapshot;
 }
 
 export interface ReplanningRequest extends PlanningContext {

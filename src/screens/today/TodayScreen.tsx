@@ -3,6 +3,7 @@ import { View } from "react-native";
 import { CapacityInsight } from "../../components/today/CapacityInsight";
 import { GuidancePanel } from "../../components/today/GuidancePanel";
 import { ProgressPanel } from "../../components/today/ProgressPanel";
+import { ReplanSuggestionsPanel } from "../../components/today/ReplanSuggestionsPanel";
 import { ScheduleContext } from "../../components/today/ScheduleContext";
 import { TimelinePlan } from "../../components/today/TimelinePlan";
 import { TodayHeader } from "../../components/today/TodayHeader";
@@ -15,6 +16,7 @@ import { formatLongDate } from "../../utils/date";
 export function TodayScreen() {
   const today = useAppStore((state) => state.today);
   const bootStatus = useAppStore((state) => state.bootStatus);
+  const applyTaskAction = useAppStore((state) => state.applyTaskAction);
 
   if (!today) {
     return (
@@ -38,19 +40,20 @@ export function TodayScreen() {
       <View className="gap-6">
         <TodayHeader dateLabel={formatLongDate(today.date)} />
         <CapacityInsight capacity={today.capacity} focus={today.focus} />
-        <TimelinePlan blocks={today.blocks} />
+        <TimelinePlan blocks={today.blocks} onTaskAction={applyTaskAction} />
         <UnscheduledTasksPanel tasks={today.unscheduled} />
+        <ReplanSuggestionsPanel suggestions={today.replanSuggestions} />
         <GuidancePanel items={today.adaptiveGuidance} />
         <ScheduleContext items={today.scheduleContext} />
         <ProgressPanel
           completed={today.progress.completed}
           scheduled={today.progress.scheduled}
-          rolled={today.progress.rolled}
+          recovery={today.progress.recovery}
         />
 
         <View className="pb-2 pt-1">
           <AppText tone="tertiary" variant="caption">
-            The planning brain is now deterministic and protective-first. Live calendar ingestion, adaptive learning, and deeper replanning remain intentionally deferred.
+            The execution layer now recovers through smaller tasks, substitutes, and selective rollover. Adaptive learning, notification intelligence, and account sync remain deferred.
           </AppText>
         </View>
       </View>
