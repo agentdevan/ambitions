@@ -13,13 +13,31 @@ import { formatLongDate } from "../../utils/date";
 
 export function TodayScreen() {
   const today = useAppStore((state) => state.today);
+  const bootStatus = useAppStore((state) => state.bootStatus);
+
+  if (!today) {
+    return (
+      <Screen>
+        <View className="gap-4">
+          <TodayHeader
+            dateLabel={bootStatus === "error" ? "Unable to load plan" : formatLongDate("2026-04-11")}
+          />
+          <AppText tone="secondary">
+            {bootStatus === "loading"
+              ? "Loading the local planning foundation..."
+              : "The local planning snapshot is not ready yet."}
+          </AppText>
+        </View>
+      </Screen>
+    );
+  }
 
   return (
     <Screen>
-      <View className="gap-5">
-        <TodayHeader dateLabel={formatLongDate(today.plan.date)} />
-        <CapacityInsight capacity={today.capacity} focus={today.plan.focus} />
-        <TimelinePlan blocks={today.plan.blocks} />
+      <View className="gap-6">
+        <TodayHeader dateLabel={formatLongDate(today.date)} />
+        <CapacityInsight capacity={today.capacity} focus={today.focus} />
+        <TimelinePlan blocks={today.blocks} />
         <GuidancePanel items={today.adaptiveGuidance} />
         <ScheduleContext items={today.scheduleContext} />
         <ProgressPanel
@@ -30,8 +48,7 @@ export function TodayScreen() {
 
         <View className="pb-2 pt-1">
           <AppText tone="tertiary" variant="caption">
-            Mock data is intentional in this phase. The surface quality is being validated before the
-            execution engines and integrations start writing real state.
+            Local-first planning data now flows through repositories and state contracts. The adaptive engines are still scaffolded, not fully intelligent.
           </AppText>
         </View>
       </View>

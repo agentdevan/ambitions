@@ -1,25 +1,13 @@
-export interface CapacityProfile {
-  mentalLoad: "low" | "balanced" | "strained";
-  focusBudgetMinutes: number;
-  meetingLoadMinutes: number;
-}
+import type { AdaptationProfile } from "../../domain/models";
 
-export interface CompletionProfile {
-  consistencyScore: number;
-  rolloverRate: number;
-}
-
-export interface FrictionProfile {
-  switchingPenalty: number;
-  preferredStartWindow: string;
-}
-
-export interface MomentumProfile {
-  currentStreakDays: number;
-  recentWinPattern: string;
-}
-
-export interface StrategyProfile {
-  strictness: "protective" | "balanced" | "flexible";
-  replanningStyle: "guided" | "direct";
-}
+export {
+  CapacityLoad,
+  ReplanningStyle,
+  StrategyStrictness,
+} from "../../domain/models";
+export type { AdaptationProfile } from "../../domain/models";
+export type CapacityProfile = AdaptationProfile["capacity"];
+export type CompletionProfile = AdaptationProfile["completion"];
+export type FrictionProfile = AdaptationProfile["friction"];
+export type MomentumProfile = AdaptationProfile["momentum"];
+export type StrategyProfile = AdaptationProfile["strategy"];

@@ -4,10 +4,11 @@ import { GestureHandlerRootView } from "react-native-gesture-handler";
 import { SafeAreaProvider } from "react-native-safe-area-context";
 import { StatusBar } from "expo-status-bar";
 import * as SystemUI from "expo-system-ui";
+import { View } from "react-native";
 
 import { appTheme } from "../../design/theme";
-import { initializeDatabase } from "../../services/database/client";
-import { NotificationsService } from "../../services/notifications/NotificationsService";
+import { useAppStore } from "../../state/useAppStore";
+import { AppText } from "../../components/ui/Text";
 
 const navigationTheme = {
   ...DefaultTheme,
@@ -22,10 +23,12 @@ const navigationTheme = {
 };
 
 export function AppProviders({ children }: PropsWithChildren) {
+  const bootStatus = useAppStore((state) => state.bootStatus);
+  const lastError = useAppStore((state) => state.lastError);
+
   useEffect(() => {
     SystemUI.setBackgroundColorAsync(appTheme.colors.background.canvas).catch(() => null);
-    initializeDatabase().catch(() => null);
-    NotificationsService.configure().catch(() => null);
+    useAppStore.getState().bootstrap().catch(() => null);
   }, []);
 
   return (
@@ -33,7 +36,16 @@ export function AppProviders({ children }: PropsWithChildren) {
       <SafeAreaProvider>
         <NavigationContainer theme={navigationTheme}>
           <StatusBar style="dark" />
-          {children}
+          {bootStatus === "error" ? (
+            <View style={{ flex: 1, justifyContent: "center", alignItems: "center", padding: 24 }}>
+              <AppText variant="section">Ambitions could not load the local data layer.</AppText>
+              <AppText style={{ marginTop: 12, textAlign: "center" }} tone="secondary">
+                {lastError ?? "Unknown startup failure."}
+              </AppText>
+            </View>
+          ) : (
+            children
+          )}
         </NavigationContainer>
       </SafeAreaProvider>
     </GestureHandlerRootView>

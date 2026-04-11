@@ -14,20 +14,20 @@ export function Screen({ children, scrollable = true }: ScreenProps) {
       <ScrollView
         className="flex-1 bg-[#F3F1EC]"
         contentContainerStyle={{
-          paddingTop: insets.top + 10,
-          paddingBottom: insets.bottom + 24,
+          paddingTop: insets.top + 14,
+          paddingBottom: insets.bottom + 34,
         }}
         showsVerticalScrollIndicator={false}
       >
-        <View className="px-5">{children}</View>
+        <View className="px-6">{children}</View>
       </ScrollView>
     );
   }
 
   return (
     <View
-      className="flex-1 bg-[#F3F1EC] px-5"
-      style={{ paddingTop: insets.top + 10, paddingBottom: insets.bottom + 24 }}
+      className="flex-1 bg-[#F3F1EC] px-6"
+      style={{ paddingTop: insets.top + 14, paddingBottom: insets.bottom + 34 }}
     >
       {children}
     </View>

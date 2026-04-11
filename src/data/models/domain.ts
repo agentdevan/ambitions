@@ -1,13 +1,2 @@
-export type DomainKey =
-  | "career"
-  | "health"
-  | "craft"
-  | "relationships"
-  | "home"
-  | "wealth";
-
-export interface DomainDefinition {
-  key: DomainKey;
-  name: string;
-  accentColor: string;
-}
+export { DomainKey } from "../../domain/models";
+export type { Domain as DomainDefinition } from "../../domain/models";

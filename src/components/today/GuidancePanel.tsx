@@ -9,18 +9,18 @@ interface GuidancePanelProps {
 
 export function GuidancePanel({ items }: GuidancePanelProps) {
   return (
-    <Surface tone="sunken" className="gap-3">
-      <View className="gap-1">
+    <Surface tone="sunken" className="gap-4">
+      <View className="gap-2">
         <AppText tone="secondary" variant="caption">
-          Adaptive guidance
+          Guidance
         </AppText>
-        <AppText variant="section">Protect the day before it fragments</AppText>
+        <AppText variant="section">Small adjustments for the way today is shaped</AppText>
       </View>
 
       <View className="gap-3">
         {items.map((item) => (
           <View key={item} className="flex-row gap-3">
-            <View className="mt-2 h-1.5 w-1.5 rounded-full bg-[#6D7C6D]" />
+            <View className="mt-2 h-1.5 w-1.5 rounded-full bg-[#7A8775]" />
             <AppText tone="secondary" style={{ flex: 1 }}>
               {item}
             </AppText>

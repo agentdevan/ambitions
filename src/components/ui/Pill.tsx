@@ -8,14 +8,14 @@ interface PillProps {
 }
 
 const toneMap = {
-  neutral: "bg-[#ECE8E1]",
+  neutral: "bg-[#ECE7DE]",
   accent: "bg-[#DDE5DB]",
 };
 
 export function Pill({ label, tone = "neutral" }: PillProps) {
   return (
-    <View className={`self-start rounded-full px-3 py-1.5 ${toneMap[tone]}`}>
-      <AppText tone="secondary" variant="micro">
+    <View className={`self-start rounded-full px-3 py-1 ${toneMap[tone]}`}>
+      <AppText tone="tertiary" variant="micro" style={{ textTransform: "uppercase" }}>
         {label}
       </AppText>
     </View>
