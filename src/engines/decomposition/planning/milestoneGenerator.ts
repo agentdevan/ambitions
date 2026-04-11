@@ -72,6 +72,7 @@ export function generateMilestones(goal: Goal, analysis: GoalPlanningAnalysis) {
       milestone.metadata = {
         planningStrategyKey: strategy.key,
         planningPhaseKey: blueprint.phaseKey,
+        planningContinuityKey: `${strategy.key}:${blueprint.phaseKey}`,
         planningConfidence: Number(blueprint.confidence.toFixed(2)),
       };
 

@@ -74,6 +74,9 @@ function milestoneTaskBlueprints(
 ) {
   const phaseKey = String(milestone.metadata.planningPhaseKey ?? "");
   const strategyKey = String(milestone.metadata.planningStrategyKey ?? "");
+  const milestoneContinuityKey = String(
+    milestone.metadata.planningContinuityKey ?? `${strategyKey}:${phaseKey}`,
+  );
   const lowerGoal = goal.title.toLowerCase();
   const protective = analysis.policy.prefersSmallerEntryTasks;
 
@@ -236,6 +239,12 @@ export function generateTasks(
   analysis: GoalPlanningAnalysis,
   adaptationProfile: AdaptationProfile | null = null,
 ) {
+  const milestoneContinuityKey = String(
+    milestone.metadata.planningContinuityKey ??
+      `${String(milestone.metadata.planningStrategyKey ?? "")}:${String(
+        milestone.metadata.planningPhaseKey ?? "",
+      )}`,
+  );
   const drafts = milestoneTaskBlueprints(goal, milestone, analysis).slice(
     0,
     analysis.policy.maxTasksPerMilestone,
@@ -264,7 +273,8 @@ export function generateTasks(
       planningFlexibility: draft.flexibility,
       planningSplitEligible: draft.splitEligible,
       planningFallbackTitle: draft.fallbackTitle,
-      planningContinuityToken: `${goal.id}:${milestone.id}:${index + 1}`,
+      planningContinuityKey: `${milestoneContinuityKey}:task:${index + 1}`,
+      planningContinuityToken: `${milestoneContinuityKey}:task:${index + 1}`,
       planningProtectiveMode: analysis.policy.mode === "protective",
       planningNovelty: draft.novelty,
     };

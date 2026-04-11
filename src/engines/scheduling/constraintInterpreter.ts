@@ -1,6 +1,7 @@
 import {
   AdaptationProfile,
   ConstraintSource,
+  JsonValue,
   ScheduleConstraint,
   ScheduleConstraintType,
   StrategyStrictness,
@@ -25,11 +26,11 @@ export interface ConstraintInterpretationContext {
   adaptationProfile: AdaptationProfile | null;
 }
 
-function parseTime(value: string | number | boolean | null | undefined, fallback: string) {
+function parseTime(value: JsonValue | undefined, fallback: string) {
   return typeof value === "string" && /^\d{2}:\d{2}$/.test(value) ? value : fallback;
 }
 
-function parseNumber(value: string | number | boolean | null | undefined, fallback: number) {
+function parseNumber(value: JsonValue | undefined, fallback: number) {
   if (typeof value === "number" && Number.isFinite(value)) {
     return value;
   }
@@ -44,7 +45,7 @@ function parseNumber(value: string | number | boolean | null | undefined, fallba
   return fallback;
 }
 
-function parseDays(value: string | number | boolean | null | undefined) {
+function parseDays(value: JsonValue | undefined) {
   if (typeof value !== "string" || value.trim().length === 0) {
     return [1, 2, 3, 4, 5];
   }
@@ -55,7 +56,7 @@ function parseDays(value: string | number | boolean | null | undefined) {
     .filter((day) => Number.isInteger(day) && day >= 0 && day <= 6);
 }
 
-function parseRoutineList(value: string | number | boolean | null | undefined) {
+function parseRoutineList(value: JsonValue | undefined) {
   if (typeof value !== "string" || value.trim().length === 0) {
     return [];
   }

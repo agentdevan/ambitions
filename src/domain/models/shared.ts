@@ -1,7 +1,14 @@
 export type EntityId = string;
 export type ISODateString = string;
 export type ISODateTimeString = string;
-export type JsonMap = Record<string, boolean | number | string | null>;
+export type JsonValue =
+  | boolean
+  | number
+  | string
+  | null
+  | JsonValue[]
+  | { [key: string]: JsonValue };
+export type JsonMap = Record<string, JsonValue>;
 
 export enum EntitySyncState {
   LocalOnly = "local_only",

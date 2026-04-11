@@ -28,6 +28,24 @@ import {
 import { createGoalAndFirstPlan, createGoalArtifacts } from "../product/planOrchestrator";
 import { getProductPreferences, mergeProductPreferences } from "../product/preferences";
 import { ProductPreferences, GoalDraftInference } from "../product/types";
+import { applyDownstreamHandling } from "../services/goals/downstreamHandlingPolicies";
+import { evaluateGoalEditImpact } from "../services/goals/goalEditImpactEvaluator";
+import {
+  GoalDownstreamChoice,
+  GoalEditImpactPreview,
+  GoalLifecycleHandling,
+  getGoalReviewDraft,
+  getGoalRollbackSnapshot,
+  GoalReviewMode,
+  setGoalReviewDraft,
+  setGoalRollbackSnapshot,
+} from "../services/goals/metadata";
+import {
+  hasUndoAvailable,
+  materializeAcceptedReview,
+  prepareGoalReview,
+  restoreRollbackSnapshot,
+} from "../services/goals/regenerationCoordinator";
 import { TodayViewModel } from "./viewModels/today";
 import { initialPlanDate, refreshAllState } from "./runtime";
 
@@ -47,8 +65,29 @@ interface GoalsSlice {
   allTasks: Task[];
   refreshGoals: () => Promise<void>;
   createGoal: (inference: GoalDraftInference) => Promise<void>;
+  previewGoalEdit: (goalId: string, patch: Partial<Goal>) => Promise<GoalEditImpactPreview>;
+  applyGoalEditDecision: (
+    goalId: string,
+    patch: Partial<Goal>,
+    choice: GoalDownstreamChoice,
+  ) => Promise<void>;
   updateGoal: (goalId: string, patch: Partial<Goal>) => Promise<void>;
   setGoalStatus: (goalId: string, status: GoalStatus) => Promise<void>;
+  setGoalStatusWithHandling: (
+    goalId: string,
+    status: GoalStatus,
+    handling: GoalLifecycleHandling,
+  ) => Promise<void>;
+  acceptGoalReview: (goalId: string) => Promise<void>;
+  regenerateGoalReview: (goalId: string, mode?: GoalReviewMode) => Promise<void>;
+  moveReviewTask: (goalId: string, taskId: string, direction: "up" | "down") => Promise<void>;
+  removeReviewTask: (goalId: string, taskId: string) => Promise<void>;
+  adjustReviewTask: (
+    goalId: string,
+    taskId: string,
+    patch: Partial<Pick<Task, "estimatedMinutes" | "targetDate">>,
+  ) => Promise<void>;
+  undoGoalRegeneration: (goalId: string) => Promise<void>;
 }
 
 interface PlanningSlice {
@@ -252,17 +291,143 @@ export const useAppStore = create<AppState>((set, get) => ({
     await appServices.repositories.goals.saveGoals([
       ...existingGoals.map((goal, index) => ({ ...goal, sortOrder: index + 1 })),
       bindRecordToAccount(
-        { ...artifacts.goal, sortOrder: existingGoals.length + 1 },
+        setGoalReviewDraft(
+          { ...artifacts.goal, sortOrder: existingGoals.length + 1 },
+          {
+            mode: "new_goal",
+            createdAt: new Date().toISOString(),
+            headline: `Recommended plan for ${artifacts.goal.title}`,
+            summary:
+              "Ambitions shaped a recommended structure for this goal. Review it, make a few light changes if needed, then accept it when it feels right.",
+            rationale: [
+              "The plan is recommended, not locked.",
+              "You can reorder, trim, or slightly retime tasks before acceptance.",
+            ],
+            recommendedAction: "targeted_regeneration",
+            milestones: artifacts.milestones.map((milestone) => ({
+              id: milestone.id,
+              sourceMilestoneId: null,
+              continuityKey: String(
+                (milestone.metadata as Record<string, unknown>).planningContinuityKey ??
+                  milestone.id,
+              ),
+              title: milestone.title,
+              summary: milestone.summary,
+              targetDate: milestone.targetDate,
+              estimatedMinutes: milestone.estimatedMinutes,
+              sortOrder: milestone.sortOrder,
+              protected: false,
+              rationale: milestone.summary,
+              changeLabel: "new",
+            })),
+            tasks: artifacts.tasks.map((task, index) => ({
+              id: task.id,
+              sourceTaskId: null,
+              continuityKey: String(
+                (task.metadata as Record<string, unknown>).planningContinuityKey ?? task.id,
+              ),
+              milestoneId: String(task.milestoneId ?? ""),
+              title: task.title,
+              summary: task.summary,
+              targetDate: task.targetDate,
+              estimatedMinutes: task.estimatedMinutes,
+              protected: false,
+              removed: false,
+              userAdjusted: false,
+              rationale: task.summary,
+              order: index + 1,
+              changeLabel: "new",
+            })),
+            impactSummary: {
+              changedFields: [],
+              affectedMilestoneCount: artifacts.milestones.length,
+              affectedTaskCount: artifacts.tasks.length,
+              protectedTaskCount: 0,
+              recommendedRegeneration: false,
+            },
+          },
+        ),
         accountId,
       ),
     ]);
-    await appServices.repositories.goals.saveMilestones(
-      artifacts.milestones.map((milestone) => bindRecordToAccount(milestone, accountId)),
-    );
-    await appServices.repositories.tasks.saveTasks(
-      artifacts.tasks.map((task) => bindRecordToAccount(task, accountId)),
-    );
 
+    set(await refreshAllState(state.planDate));
+  },
+
+  previewGoalEdit: async (goalId, patch) => {
+    const goals = await appServices.repositories.goals.listGoals();
+    const goal = goals.find((entry) => entry.id === goalId);
+    if (!goal) {
+      throw new Error("The goal could not be found.");
+    }
+
+    const [milestones, tasks] = await Promise.all([
+      appServices.repositories.goals.listMilestones(),
+      appServices.repositories.tasks.listTasks(),
+    ]);
+
+    return evaluateGoalEditImpact({
+      goal,
+      patch,
+      milestones: milestones.filter((milestone) => milestone.goalId === goalId),
+      tasks: tasks.filter((task) => task.goalId === goalId),
+    });
+  },
+
+  applyGoalEditDecision: async (goalId, patch, choice) => {
+    const state = get();
+    const goals = await appServices.repositories.goals.listGoals();
+    const goal = goals.find((entry) => entry.id === goalId);
+    if (!goal) {
+      throw new Error("The goal could not be found.");
+    }
+
+    const accountId =
+      state.attachmentState?.status === "attached"
+        ? state.authState?.signedInAccountId ?? null
+        : null;
+    const [milestones, tasks] = await Promise.all([
+      appServices.repositories.goals.listMilestones(),
+      appServices.repositories.tasks.listTasks(),
+    ]);
+    const goalMilestones = milestones.filter((milestone) => milestone.goalId === goalId);
+    const goalTasks = tasks.filter((task) => task.goalId === goalId);
+    const impact = evaluateGoalEditImpact({
+      goal,
+      patch,
+      milestones: goalMilestones,
+      tasks: goalTasks,
+    });
+    const updatedGoalBase = {
+      ...goal,
+      ...patch,
+      updatedAt: new Date().toISOString(),
+      version: goal.version + 1,
+    };
+
+    let updatedGoal = updatedGoalBase;
+    if (choice !== "keep" && state.userPreferences) {
+      const reviewDraft = await prepareGoalReview({
+        goal: updatedGoalBase,
+        mode: choice as GoalReviewMode,
+        existingMilestones: goalMilestones,
+        existingTasks: goalTasks,
+        userPreferences: state.userPreferences,
+        adaptationProfile: state.adaptationProfile,
+        impact,
+      });
+      updatedGoal = setGoalReviewDraft(updatedGoalBase, reviewDraft);
+    } else {
+      updatedGoal = setGoalRollbackSnapshot(setGoalReviewDraft(updatedGoalBase, null), null);
+    }
+
+    await appServices.repositories.goals.saveGoals(
+      goals.map((entry) =>
+        entry.id === goalId
+          ? bindRecordToAccount(updatedGoal, accountId)
+          : entry,
+      ),
+    );
     set(await refreshAllState(state.planDate));
   },
 
@@ -289,6 +454,284 @@ export const useAppStore = create<AppState>((set, get) => ({
 
   setGoalStatus: async (goalId, status) => {
     await get().updateGoal(goalId, { status });
+  },
+
+  setGoalStatusWithHandling: async (goalId, status, handling) => {
+    const state = get();
+    const goals = await appServices.repositories.goals.listGoals();
+    const [milestones, tasks] = await Promise.all([
+      appServices.repositories.goals.listMilestones(),
+      appServices.repositories.tasks.listTasks(),
+    ]);
+    const goal = goals.find((entry) => entry.id === goalId);
+    if (!goal) {
+      throw new Error("The goal could not be found.");
+    }
+
+    const accountId =
+      state.attachmentState?.status === "attached"
+        ? state.authState?.signedInAccountId ?? null
+        : null;
+    const updatedGoal = bindRecordToAccount(
+      setGoalReviewDraft(
+        {
+          ...goal,
+          status,
+          updatedAt: new Date().toISOString(),
+          version: goal.version + 1,
+        },
+        null,
+      ),
+      accountId,
+    );
+
+    await appServices.repositories.goals.saveGoals(
+      goals.map((entry) => (entry.id === goalId ? updatedGoal : entry)),
+    );
+
+    if ([GoalStatus.Paused, GoalStatus.Archived].includes(status)) {
+      const goalMilestones = milestones.filter((milestone) => milestone.goalId === goalId);
+      const goalTasks = tasks.filter((task) => task.goalId === goalId);
+      const next = applyDownstreamHandling({
+        action: status === GoalStatus.Paused ? "pause" : "archive",
+        handling,
+        milestones: goalMilestones,
+        tasks: goalTasks,
+      });
+      await appServices.repositories.goals.saveMilestones(next.milestones);
+      await appServices.repositories.tasks.saveTasks(next.tasks);
+    }
+
+    set(await refreshAllState(state.planDate));
+  },
+
+  acceptGoalReview: async (goalId) => {
+    const state = get();
+    const goals = await appServices.repositories.goals.listGoals();
+    const goal = goals.find((entry) => entry.id === goalId);
+    if (!goal) {
+      throw new Error("The goal could not be found.");
+    }
+
+    const reviewDraft = getGoalReviewDraft(goal);
+    if (!reviewDraft) {
+      throw new Error("There is no pending review for this goal.");
+    }
+
+    const [milestones, tasks] = await Promise.all([
+      appServices.repositories.goals.listMilestones(),
+      appServices.repositories.tasks.listTasks(),
+    ]);
+    const goalMilestones = milestones.filter((milestone) => milestone.goalId === goalId);
+    const goalTasks = tasks.filter((task) => task.goalId === goalId);
+    const next = materializeAcceptedReview({
+      goal,
+      reviewDraft,
+      existingMilestones: goalMilestones,
+      existingTasks: goalTasks,
+    });
+    const accountId =
+      state.attachmentState?.status === "attached"
+        ? state.authState?.signedInAccountId ?? null
+        : null;
+    const nextGoal =
+      reviewDraft.mode === "new_goal"
+        ? setGoalReviewDraft(goal, null)
+        : setGoalRollbackSnapshot(setGoalReviewDraft(goal, null), next.rollbackSnapshot);
+
+    await Promise.all([
+      appServices.repositories.goals.saveGoals(
+        goals.map((entry) =>
+          entry.id === goalId ? bindRecordToAccount(nextGoal, accountId) : entry,
+        ),
+      ),
+      appServices.repositories.goals.saveMilestones(next.milestonesToSave),
+      appServices.repositories.tasks.saveTasks(next.tasksToSave),
+    ]);
+
+    set(await refreshAllState(state.planDate));
+  },
+
+  regenerateGoalReview: async (goalId, mode) => {
+    const state = get();
+    if (!state.userPreferences) {
+      throw new Error("User preferences are unavailable.");
+    }
+
+    const goals = await appServices.repositories.goals.listGoals();
+    const goal = goals.find((entry) => entry.id === goalId);
+    if (!goal) {
+      throw new Error("The goal could not be found.");
+    }
+
+    const currentDraft = getGoalReviewDraft(goal);
+    const [milestones, tasks] = await Promise.all([
+      appServices.repositories.goals.listMilestones(),
+      appServices.repositories.tasks.listTasks(),
+    ]);
+    const nextDraft = await prepareGoalReview({
+      goal,
+      mode: mode ?? currentDraft?.mode ?? "targeted_regeneration",
+      existingMilestones: milestones.filter((milestone) => milestone.goalId === goalId),
+      existingTasks: tasks.filter((task) => task.goalId === goalId),
+      userPreferences: state.userPreferences,
+      adaptationProfile: state.adaptationProfile,
+      impact: null,
+    });
+    const accountId =
+      state.attachmentState?.status === "attached"
+        ? state.authState?.signedInAccountId ?? null
+        : null;
+    await appServices.repositories.goals.saveGoals(
+      goals.map((entry) =>
+        entry.id === goalId
+          ? bindRecordToAccount(setGoalReviewDraft(goal, nextDraft), accountId)
+          : entry,
+      ),
+    );
+    set(await refreshAllState(state.planDate));
+  },
+
+  moveReviewTask: async (goalId, taskId, direction) => {
+    const goals = await appServices.repositories.goals.listGoals();
+    const goal = goals.find((entry) => entry.id === goalId);
+    if (!goal) {
+      throw new Error("The goal could not be found.");
+    }
+
+    const draft = getGoalReviewDraft(goal);
+    if (!draft) {
+      throw new Error("There is no pending review for this goal.");
+    }
+
+    const visibleTasks = draft.tasks.filter((task) => !task.removed);
+    const index = visibleTasks.findIndex((task) => task.id === taskId);
+    if (index < 0) {
+      return;
+    }
+
+    const swapIndex = direction === "up" ? index - 1 : index + 1;
+    if (swapIndex < 0 || swapIndex >= visibleTasks.length) {
+      return;
+    }
+
+    const source = visibleTasks[index];
+    const target = visibleTasks[swapIndex];
+    const nextTasks = draft.tasks.map((task) => {
+      if (task.id === source.id) {
+        return { ...task, order: target.order, userAdjusted: true };
+      }
+      if (task.id === target.id) {
+        return { ...task, order: source.order, userAdjusted: true };
+      }
+      return task;
+    });
+    nextTasks.sort((left, right) => left.order - right.order);
+
+    await get().updateGoal(goalId, {
+      metadata: {
+        ...setGoalReviewDraft(goal, { ...draft, tasks: nextTasks }).metadata,
+      },
+    });
+  },
+
+  removeReviewTask: async (goalId, taskId) => {
+    const goals = await appServices.repositories.goals.listGoals();
+    const goal = goals.find((entry) => entry.id === goalId);
+    if (!goal) {
+      throw new Error("The goal could not be found.");
+    }
+
+    const draft = getGoalReviewDraft(goal);
+    if (!draft) {
+      throw new Error("There is no pending review for this goal.");
+    }
+
+    const nextDraft = {
+      ...draft,
+      tasks: draft.tasks.map((task) =>
+        task.id === taskId ? { ...task, removed: true, userAdjusted: true } : task,
+      ),
+    };
+    await get().updateGoal(goalId, {
+      metadata: {
+        ...setGoalReviewDraft(goal, nextDraft).metadata,
+      },
+    });
+  },
+
+  adjustReviewTask: async (goalId, taskId, patch) => {
+    const goals = await appServices.repositories.goals.listGoals();
+    const goal = goals.find((entry) => entry.id === goalId);
+    if (!goal) {
+      throw new Error("The goal could not be found.");
+    }
+
+    const draft = getGoalReviewDraft(goal);
+    if (!draft) {
+      throw new Error("There is no pending review for this goal.");
+    }
+
+    const nextDraft = {
+      ...draft,
+      tasks: draft.tasks.map((task) =>
+        task.id === taskId
+          ? {
+              ...task,
+              estimatedMinutes: patch.estimatedMinutes ?? task.estimatedMinutes,
+              targetDate: patch.targetDate ?? task.targetDate,
+              userAdjusted: true,
+            }
+          : task,
+      ),
+    };
+    await get().updateGoal(goalId, {
+      metadata: {
+        ...setGoalReviewDraft(goal, nextDraft).metadata,
+      },
+    });
+  },
+
+  undoGoalRegeneration: async (goalId) => {
+    const state = get();
+    const goals = await appServices.repositories.goals.listGoals();
+    const goal = goals.find((entry) => entry.id === goalId);
+    if (!goal) {
+      throw new Error("The goal could not be found.");
+    }
+
+    const rollbackSnapshot = getGoalRollbackSnapshot(goal);
+    if (!rollbackSnapshot || !hasUndoAvailable(goal)) {
+      throw new Error("The temporary rollback window has expired.");
+    }
+
+    const [milestones, tasks] = await Promise.all([
+      appServices.repositories.goals.listMilestones(),
+      appServices.repositories.tasks.listTasks(),
+    ]);
+    const next = restoreRollbackSnapshot({
+      rollbackSnapshot,
+      existingMilestones: milestones.filter((milestone) => milestone.goalId === goalId),
+      existingTasks: tasks.filter((task) => task.goalId === goalId),
+    });
+    const accountId =
+      state.attachmentState?.status === "attached"
+        ? state.authState?.signedInAccountId ?? null
+        : null;
+
+    await Promise.all([
+      appServices.repositories.goals.saveGoals(
+        goals.map((entry) =>
+          entry.id === goalId
+            ? bindRecordToAccount(setGoalRollbackSnapshot(goal, null), accountId)
+            : entry,
+        ),
+      ),
+      appServices.repositories.goals.saveMilestones(next.milestonesToSave),
+      appServices.repositories.tasks.saveTasks(next.tasksToSave),
+    ]);
+
+    set(await refreshAllState(state.planDate));
   },
 
   refreshPlanning: async (date) => {

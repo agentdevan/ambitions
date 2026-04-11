@@ -16,6 +16,9 @@ import { Button } from "../../components/ui/Button";
 import { EmptyStateCard } from "../../components/ui/EmptyStateCard";
 import { Screen } from "../../components/ui/Screen";
 import { AppText } from "../../components/ui/Text";
+import { Surface } from "../../components/ui/Surface";
+import { Pill } from "../../components/ui/Pill";
+import { getGoalReviewDraft } from "../../services/goals/metadata";
 import { useAppStore } from "../../state/useAppStore";
 import { formatLongDate } from "../../utils/date";
 
@@ -46,6 +49,7 @@ export function TodayScreen() {
   const [integrationBusy, setIntegrationBusy] = useState<string | null>(null);
   const [accountBusy, setAccountBusy] = useState<string | null>(null);
   const [runtimeMessage, setRuntimeMessage] = useState<string | null>(null);
+  const pendingReviewGoals = goals.filter((goal) => getGoalReviewDraft(goal) !== null);
 
   async function runIntegrationAction(
     key: string,
@@ -150,6 +154,28 @@ export function TodayScreen() {
           dateLabel={formatLongDate(today.date)}
           liveContext={today.integration.usingLiveCalendar}
         />
+        {pendingReviewGoals.length > 0 ? (
+          <Surface>
+            <View className="gap-3">
+              <View className="flex-row flex-wrap gap-2">
+                <Pill label="Recommended plan" tone="accent" />
+                <Pill label={`${pendingReviewGoals.length} pending review`} />
+              </View>
+              <AppText>
+                {pendingReviewGoals[0]?.title}
+              </AppText>
+              <AppText tone="secondary">
+                A recommended plan or refresh is waiting for review. You can make a few light edits before accepting it.
+              </AppText>
+              <Button
+                tone="secondary"
+                onPress={() => navigation.navigate("Plan" as never)}
+              >
+                Open review
+              </Button>
+            </View>
+          </Surface>
+        ) : null}
         <AccountStatusCard
           account={account}
           authState={authState}
