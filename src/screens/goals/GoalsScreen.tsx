@@ -1,16 +1,21 @@
-import { useMemo, useState } from "react";
-import { Modal, Pressable, ScrollView, TextInput, View } from "react-native";
+import { useEffect, useMemo, useState } from "react";
+import { Modal, Pressable, ScrollView, View } from "react-native";
 
 import { Button } from "../../components/ui/Button";
+import { EmptyStateCard } from "../../components/ui/EmptyStateCard";
+import { OptionChip } from "../../components/ui/OptionChip";
 import { Pill } from "../../components/ui/Pill";
 import { Screen } from "../../components/ui/Screen";
 import { Surface } from "../../components/ui/Surface";
+import { TextField } from "../../components/ui/TextField";
 import { AppText } from "../../components/ui/Text";
+import { useResolvedTheme } from "../../design/theme/useResolvedTheme";
 import { Goal, GoalStatus } from "../../domain/models";
 import { inferGoalDraft } from "../../product/goalIntake";
 import { useAppStore } from "../../state/useAppStore";
 
 export function GoalsScreen() {
+  const theme = useResolvedTheme();
   const goals = useAppStore((state) => state.goals);
   const milestones = useAppStore((state) => state.milestones);
   const allTasks = useAppStore((state) => state.allTasks);
@@ -26,14 +31,14 @@ export function GoalsScreen() {
   const [manualTitle, setManualTitle] = useState("");
   const [manualTargetDate, setManualTargetDate] = useState("");
   const [manualDomainKey, setManualDomainKey] = useState<Goal["domainKey"] | null>(null);
+  const [busyState, setBusyState] = useState<string | null>(null);
+  const [runtimeMessage, setRuntimeMessage] = useState<string | null>(null);
 
   const selectedGoal = goals.find((goal) => goal.id === selectedGoalId) ?? goals[0] ?? null;
   const selectedMilestones = selectedGoal
     ? milestones.filter((milestone) => milestone.goalId === selectedGoal.id)
     : [];
-  const selectedTasks = selectedGoal
-    ? allTasks.filter((task) => task.goalId === selectedGoal.id)
-    : [];
+  const selectedTasks = selectedGoal ? allTasks.filter((task) => task.goalId === selectedGoal.id) : [];
   const activeGoals = goals.filter((goal) => goal.status === GoalStatus.Active);
   const pausedGoals = goals.filter((goal) => goal.status === GoalStatus.Paused);
   const archivedGoals = goals.filter((goal) => goal.status === GoalStatus.Archived);
@@ -42,46 +47,101 @@ export function GoalsScreen() {
     [draftText, planDate],
   );
 
-  const handleCreate = async () => {
-    if (!inference) {
-      return;
+  useEffect(() => {
+    if (!selectedGoalId || !goals.some((goal) => goal.id === selectedGoalId)) {
+      setSelectedGoalId(goals[0]?.id ?? null);
     }
+  }, [goals, selectedGoalId]);
 
-    await createGoal({
-      ...inference,
-      title: manualTitle.trim() || inference.title,
-      targetDate: manualTargetDate.trim() || inference.targetDate,
-      domainKey: manualDomainKey ?? inference.domainKey,
-    });
+  function resetComposer() {
+    setComposerOpen(false);
+    setEditingGoal(null);
     setDraftText("");
     setManualTitle("");
     setManualTargetDate("");
     setManualDomainKey(null);
-    setComposerOpen(false);
-  };
+  }
 
-  const beginEdit = (goal: Goal) => {
+  function openCreateComposer() {
+    setRuntimeMessage(null);
+    setEditingGoal(null);
+    setDraftText("");
+    setManualTitle("");
+    setManualTargetDate("");
+    setManualDomainKey(null);
+    setComposerOpen(true);
+  }
+
+  function beginEdit(goal: Goal) {
+    setRuntimeMessage(null);
     setEditingGoal(goal);
     setManualTitle(goal.title);
     setManualTargetDate(goal.targetDate ?? "");
     setManualDomainKey(goal.domainKey);
     setComposerOpen(true);
-  };
+  }
 
-  const handleUpdate = async () => {
+  async function handleCreate() {
+    if (!inference) {
+      return;
+    }
+
+    setBusyState("create");
+    setRuntimeMessage(null);
+
+    try {
+      await createGoal({
+        ...inference,
+        title: manualTitle.trim() || inference.title,
+        targetDate: manualTargetDate.trim() || inference.targetDate,
+        domainKey: manualDomainKey ?? inference.domainKey,
+      });
+      resetComposer();
+    } catch (error) {
+      setRuntimeMessage(error instanceof Error ? error.message : "The goal could not be created.");
+    } finally {
+      setBusyState(null);
+    }
+  }
+
+  async function handleUpdate() {
     if (!editingGoal) {
       return;
     }
 
-    await updateGoal(editingGoal.id, {
-      title: manualTitle.trim() || editingGoal.title,
-      targetDate: manualTargetDate.trim() || null,
-      domainKey: manualDomainKey ?? editingGoal.domainKey,
-    });
-    setEditingGoal(null);
-    setManualDomainKey(null);
-    setComposerOpen(false);
-  };
+    setBusyState("update");
+    setRuntimeMessage(null);
+
+    try {
+      await updateGoal(editingGoal.id, {
+        title: manualTitle.trim() || editingGoal.title,
+        targetDate: manualTargetDate.trim() || null,
+        domainKey: manualDomainKey ?? editingGoal.domainKey,
+      });
+      resetComposer();
+    } catch (error) {
+      setRuntimeMessage(
+        error instanceof Error ? error.message : "The goal changes could not be saved.",
+      );
+    } finally {
+      setBusyState(null);
+    }
+  }
+
+  async function handleGoalStatus(goalId: string, status: GoalStatus) {
+    setBusyState(`status:${goalId}`);
+    setRuntimeMessage(null);
+
+    try {
+      await setGoalStatus(goalId, status);
+    } catch (error) {
+      setRuntimeMessage(
+        error instanceof Error ? error.message : "The goal status could not be updated.",
+      );
+    } finally {
+      setBusyState(null);
+    }
+  }
 
   return (
     <>
@@ -92,49 +152,57 @@ export function GoalsScreen() {
               <Pill label="Goals" />
               <AppText variant="hero">The active ambitions, without turning into CRUD.</AppText>
             </View>
-            <Button tone="secondary" onPress={() => setComposerOpen(true)}>
+            <Button tone="secondary" onPress={openCreateComposer}>
               New goal
             </Button>
           </View>
 
           {goals.length === 0 ? (
-            <Surface>
-              <View className="gap-3">
-                <AppText variant="section">No goals yet</AppText>
-                <AppText tone="secondary">
-                  Add one goal in plain language. Ambitions will keep the structure compact.
-                </AppText>
-                <Button tone="secondary" onPress={() => setComposerOpen(true)}>
-                  Create a goal
-                </Button>
-              </View>
-            </Surface>
+            <EmptyStateCard
+              title="No goals yet"
+              body="Add one goal in plain language. Ambitions will keep the structure compact and generate the next useful steps."
+              action={
+                <View className="pt-1">
+                  <Button tone="secondary" onPress={openCreateComposer}>
+                    Create a goal
+                  </Button>
+                </View>
+              }
+            />
           ) : (
             <>
               <Surface>
                 <View className="gap-4">
                   <AppText variant="section">Active</AppText>
-                  {activeGoals.map((goal) => (
-                    <Pressable
-                      key={goal.id}
-                      className="rounded-[24px] border px-4 py-4"
-                      onPress={() => setSelectedGoalId(goal.id)}
-                      style={{
-                        borderColor: selectedGoal?.id === goal.id ? "#18181A" : "#DDD8D0",
-                        backgroundColor: "#F8F6F1",
-                      }}
-                    >
-                      <AppText variant="section">{goal.title}</AppText>
-                      <AppText tone="secondary" style={{ marginTop: 6 }}>
-                        {goal.summary ?? "No summary yet."}
-                      </AppText>
-                      <View className="mt-3 flex-row flex-wrap gap-2">
-                        <Pill label={goal.domainKey.replace("_", " ")} />
-                        <Pill label={goal.horizon} tone="accent" />
-                        {goal.targetDate ? <Pill label={goal.targetDate} /> : null}
-                      </View>
-                    </Pressable>
-                  ))}
+                  {activeGoals.map((goal) => {
+                    const selected = selectedGoal?.id === goal.id;
+
+                    return (
+                      <Pressable
+                        key={goal.id}
+                        className="rounded-[24px] px-4 py-4"
+                        onPress={() => setSelectedGoalId(goal.id)}
+                        style={({ pressed }) => ({
+                          borderWidth: 1,
+                          borderColor: selected
+                            ? theme.colors.text.primary
+                            : theme.colors.border.subtle,
+                          backgroundColor: theme.colors.background.elevated,
+                          opacity: pressed ? 0.86 : 1,
+                        })}
+                      >
+                        <AppText variant="section">{goal.title}</AppText>
+                        <AppText tone="secondary" style={{ marginTop: 6 }}>
+                          {goal.summary ?? "No summary yet."}
+                        </AppText>
+                        <View className="mt-3 flex-row flex-wrap gap-2">
+                          <Pill label={goal.domainKey.replace("_", " ")} />
+                          <Pill label={goal.horizon} tone="accent" />
+                          {goal.targetDate ? <Pill label={goal.targetDate} /> : null}
+                        </View>
+                      </Pressable>
+                    );
+                  })}
                 </View>
               </Surface>
 
@@ -157,14 +225,25 @@ export function GoalsScreen() {
                       <Pill label={`${selectedMilestones.length} milestones`} tone="accent" />
                       <Pill label={`${selectedTasks.length} tasks`} />
                     </View>
+
                     <View className="gap-3">
                       <AppText variant="caption" tone="secondary">
                         Milestones
                       </AppText>
+                      {selectedMilestones.length === 0 ? (
+                        <AppText tone="secondary">
+                          This goal has not generated milestone structure yet.
+                        </AppText>
+                      ) : null}
                       {selectedMilestones.map((milestone) => (
                         <View
                           key={milestone.id}
-                          className="rounded-[22px] border border-[#DED7CB] bg-[#F8F6F1] px-4 py-4"
+                          className="rounded-[22px] px-4 py-4"
+                          style={{
+                            borderWidth: 1,
+                            borderColor: theme.colors.border.subtle,
+                            backgroundColor: theme.colors.background.elevated,
+                          }}
                         >
                           <AppText variant="section">{milestone.title}</AppText>
                           <AppText tone="secondary" style={{ marginTop: 6 }}>
@@ -173,42 +252,57 @@ export function GoalsScreen() {
                         </View>
                       ))}
                     </View>
+
                     <View className="gap-3">
                       <AppText variant="caption" tone="secondary">
                         Generated tasks
                       </AppText>
+                      {selectedTasks.length === 0 ? (
+                        <AppText tone="secondary">
+                          This goal does not have task detail yet.
+                        </AppText>
+                      ) : null}
                       {selectedTasks.slice(0, 6).map((task) => (
                         <View
                           key={task.id}
-                          className="rounded-[22px] border border-[#DED7CB] bg-[#F8F6F1] px-4 py-4"
+                          className="rounded-[22px] px-4 py-4"
+                          style={{
+                            borderWidth: 1,
+                            borderColor: theme.colors.border.subtle,
+                            backgroundColor: theme.colors.background.elevated,
+                          }}
                         >
                           <AppText>{task.title}</AppText>
                           <AppText tone="tertiary" variant="caption" style={{ marginTop: 6 }}>
                             {task.estimatedMinutes} min
-                            {task.targetDate ? ` · ${task.targetDate}` : ""}
+                            {task.targetDate ? ` | ${task.targetDate}` : ""}
                           </AppText>
                         </View>
                       ))}
                     </View>
+
                     <View className="flex-row flex-wrap gap-3">
                       {selectedGoal.status === GoalStatus.Active ? (
                         <Button
                           tone="secondary"
-                          onPress={() => setGoalStatus(selectedGoal.id, GoalStatus.Paused)}
+                          onPress={() => handleGoalStatus(selectedGoal.id, GoalStatus.Paused)}
+                          busy={busyState === `status:${selectedGoal.id}`}
                         >
                           Pause
                         </Button>
                       ) : (
                         <Button
                           tone="secondary"
-                          onPress={() => setGoalStatus(selectedGoal.id, GoalStatus.Active)}
+                          onPress={() => handleGoalStatus(selectedGoal.id, GoalStatus.Active)}
+                          busy={busyState === `status:${selectedGoal.id}`}
                         >
                           Resume
                         </Button>
                       )}
                       <Button
                         tone="ghost"
-                        onPress={() => setGoalStatus(selectedGoal.id, GoalStatus.Archived)}
+                        onPress={() => handleGoalStatus(selectedGoal.id, GoalStatus.Archived)}
+                        busy={busyState === `status:${selectedGoal.id}`}
                       >
                         Archive
                       </Button>
@@ -224,7 +318,12 @@ export function GoalsScreen() {
                     {[...pausedGoals, ...archivedGoals].map((goal) => (
                       <View
                         key={goal.id}
-                        className="rounded-[22px] border border-[#DED7CB] bg-[#F8F6F1] px-4 py-4"
+                        className="rounded-[22px] px-4 py-4"
+                        style={{
+                          borderWidth: 1,
+                          borderColor: theme.colors.border.subtle,
+                          backgroundColor: theme.colors.background.elevated,
+                        }}
                       >
                         <AppText>{goal.title}</AppText>
                         <AppText tone="tertiary" variant="caption" style={{ marginTop: 6 }}>
@@ -237,6 +336,12 @@ export function GoalsScreen() {
               ) : null}
             </>
           )}
+
+          {runtimeMessage ? (
+            <AppText tone="tertiary" variant="caption">
+              {runtimeMessage}
+            </AppText>
+          ) : null}
         </View>
       </Screen>
 
@@ -244,20 +349,18 @@ export function GoalsScreen() {
         transparent
         animationType="slide"
         visible={composerOpen}
-        onRequestClose={() => setComposerOpen(false)}
+        onRequestClose={resetComposer}
       >
-        <View className="flex-1 justify-end bg-[#00000033]">
+        <View className="flex-1 justify-end" style={{ backgroundColor: "rgba(16, 18, 22, 0.18)" }}>
           <Surface style={{ borderBottomLeftRadius: 0, borderBottomRightRadius: 0 }}>
             <ScrollView showsVerticalScrollIndicator={false}>
               <View className="gap-4 pb-6">
                 <AppText variant="title">{editingGoal ? "Edit goal" : "Add a goal"}</AppText>
                 {!editingGoal ? (
-                  <TextInput
+                  <TextField
                     multiline
                     onChangeText={setDraftText}
                     placeholder="Build a focused TypeScript systems study plan over the next six weeks."
-                    placeholderTextColor="#8A8680"
-                    style={multilineFieldStyle}
                     value={draftText}
                   />
                 ) : null}
@@ -268,53 +371,49 @@ export function GoalsScreen() {
                     <Pill label={inference.horizon} />
                   </View>
                 ) : null}
-                <TextInput
+                <TextField
                   onChangeText={setManualTitle}
                   placeholder="Goal title"
-                  placeholderTextColor="#8A8680"
-                  style={fieldStyle}
+                  label="Title"
                   value={manualTitle}
                 />
-                <TextInput
+                <TextField
                   onChangeText={setManualTargetDate}
-                  placeholder="Target date (optional)"
-                  placeholderTextColor="#8A8680"
-                  style={fieldStyle}
+                  placeholder="YYYY-MM-DD"
+                  label="Target date"
                   value={manualTargetDate}
                 />
-                <View className="flex-row flex-wrap gap-2">
-                  {domains.map((domain) => {
-                    const key = manualDomainKey ?? inference?.domainKey ?? editingGoal?.domainKey;
-                    const selected = key === domain.key;
+                <View className="gap-2">
+                  <AppText variant="caption" tone="secondary">
+                    Domain
+                  </AppText>
+                  <View className="flex-row flex-wrap gap-2">
+                    {domains.map((domain) => {
+                      const key =
+                        manualDomainKey ?? inference?.domainKey ?? editingGoal?.domainKey;
+                      const selected = key === domain.key;
 
-                    return (
-                      <Pressable
-                        key={`domain-select-${domain.id}`}
-                        className="rounded-full border px-4 py-3"
-                        onPress={() => setManualDomainKey(domain.key)}
-                        style={{
-                          backgroundColor: selected ? "#18181A" : "#F8F6F1",
-                          borderColor: selected ? "#18181A" : "#DDD8D0",
-                        }}
-                      >
-                        <AppText
-                          tone={selected ? "inverse" : "secondary"}
-                          variant="caption"
+                      return (
+                        <OptionChip
+                          key={`domain-select-${domain.id}`}
+                          selected={selected}
+                          onPress={() => setManualDomainKey(domain.key)}
                         >
                           {domain.name}
-                        </AppText>
-                      </Pressable>
-                    );
-                  })}
+                        </OptionChip>
+                      );
+                    })}
+                  </View>
                 </View>
                 <View className="flex-row gap-3">
-                  <Button tone="ghost" style={{ flex: 1 }} onPress={() => setComposerOpen(false)}>
+                  <Button tone="ghost" style={{ flex: 1 }} onPress={resetComposer}>
                     Cancel
                   </Button>
                   <Button
                     style={{ flex: 1 }}
                     onPress={editingGoal ? handleUpdate : handleCreate}
                     disabled={!editingGoal && !inference}
+                    busy={busyState === "create" || busyState === "update"}
                   >
                     {editingGoal ? "Save changes" : "Create goal"}
                   </Button>
@@ -327,22 +426,3 @@ export function GoalsScreen() {
     </>
   );
 }
-
-const fieldStyle = {
-  minHeight: 52,
-  borderRadius: 22,
-  borderWidth: 1,
-  borderColor: "#DDD8D0",
-  backgroundColor: "#F8F6F1",
-  paddingHorizontal: 16,
-  paddingVertical: 14,
-  color: "#18181A",
-  fontSize: 15,
-} as const;
-
-const multilineFieldStyle = {
-  ...fieldStyle,
-  minHeight: 110,
-  paddingVertical: 16,
-  textAlignVertical: "top" as const,
-} as const;

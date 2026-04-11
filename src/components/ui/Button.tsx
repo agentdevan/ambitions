@@ -43,11 +43,12 @@ export function Button({
       {...props}
       disabled={disabled || busy}
       className="min-h-12 items-center justify-center rounded-full border px-5"
-      style={[
+      style={({ pressed }) => [
         {
           backgroundColor: palette.backgroundColor,
           borderColor: palette.borderColor,
-          opacity: disabled ? 0.5 : 1,
+          opacity: disabled ? 0.5 : pressed ? 0.82 : 1,
+          transform: [{ scale: pressed ? 0.99 : 1 }],
         },
         style,
       ]}

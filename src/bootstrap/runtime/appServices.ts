@@ -73,6 +73,13 @@ async function resetSeedData() {
   });
 }
 
+async function ensureBootstrapMetadata() {
+  await sqliteClient.run(
+    "INSERT OR REPLACE INTO app_metadata (key, value) VALUES (?, ?);",
+    ["bootstrap_seed_version", bootstrapSeedVersion],
+  );
+}
+
 export async function initializeAppServices() {
   if (!initializationPromise) {
     initializationPromise = (async () => {
@@ -82,11 +89,20 @@ export async function initializeAppServices() {
         "SELECT value FROM app_metadata WHERE key = ? LIMIT 1;",
         ["bootstrap_seed_version"],
       );
-      const existingGoals = await appServices.repositories.goals.listGoals();
-      const needsReseed =
-        existingGoals.length === 0 || seedVersion?.value !== bootstrapSeedVersion;
+      const [existingGoals, existingPreferences, existingDomains] = await Promise.all([
+        appServices.repositories.goals.listGoals(),
+        appServices.repositories.preferences.getUserPreferences(),
+        appServices.repositories.preferences.listDomains(),
+      ]);
+      const needsInitialSeed =
+        existingGoals.length === 0 &&
+        existingDomains.length === 0 &&
+        existingPreferences === null;
 
-      if (!needsReseed) {
+      if (!needsInitialSeed) {
+        if (seedVersion?.value !== bootstrapSeedVersion) {
+          await ensureBootstrapMetadata();
+        }
         return;
       }
 
@@ -102,6 +118,7 @@ export async function initializeAppServices() {
         seedCalendarConnectionState,
       );
       await appServices.repositories.integration.saveScheduleConstraints(seedScheduleConstraints);
+      await ensureBootstrapMetadata();
     })();
   }
 

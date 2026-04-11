@@ -27,14 +27,14 @@ export function Surface({ children, className = "", tone = "default", style, ...
   return (
     <View
       {...props}
-      className={`rounded-[30px] border px-5 py-5 ${className}`.trim()}
+      className={`rounded-[28px] border px-5 py-5 ${className}`.trim()}
       style={[
         {
           ...toneMap[tone],
           shadowColor: theme.colors.text.primary,
-          shadowOpacity: 0.045,
-          shadowRadius: 22,
-          shadowOffset: { width: 0, height: 12 },
+          shadowOpacity: 0.05,
+          shadowRadius: 18,
+          shadowOffset: { width: 0, height: 10 },
           elevation: 3,
         },
         style,

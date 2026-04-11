@@ -1,5 +1,6 @@
 import { View } from "react-native";
 
+import { useResolvedTheme } from "../../design/theme/useResolvedTheme";
 import { Surface } from "../ui/Surface";
 import { AppText } from "../ui/Text";
 
@@ -10,6 +11,28 @@ interface ProgressPanelProps {
 }
 
 export function ProgressPanel({ completed, scheduled, recovery }: ProgressPanelProps) {
+  const theme = useResolvedTheme();
+
+  function Metric({ label, value }: { label: string; value: string }) {
+    return (
+      <View
+        className="flex-1 rounded-[22px] px-4 py-3"
+        style={{
+          borderWidth: 1,
+          borderColor: theme.colors.border.subtle,
+          backgroundColor: theme.colors.background.elevated,
+        }}
+      >
+        <AppText tone="tertiary" variant="micro">
+          {label}
+        </AppText>
+        <AppText variant="title" style={{ marginTop: 6 }}>
+          {value}
+        </AppText>
+      </View>
+    );
+  }
+
   return (
     <Surface className="gap-5">
       <View className="gap-2">
@@ -26,21 +49,9 @@ export function ProgressPanel({ completed, scheduled, recovery }: ProgressPanelP
       </View>
 
       <AppText tone="secondary" style={{ maxWidth: 300 }}>
-        Recovery stays visible, but quiet. Missed work should return as a smaller or cleaner next step, not as guilt.
+        Recovery stays visible, but quiet. Missed work should return as a smaller or cleaner next
+        step, not as guilt.
       </AppText>
     </Surface>
-  );
-}
-
-function Metric({ label, value }: { label: string; value: string }) {
-  return (
-    <View className="flex-1 rounded-[22px] border border-[#E6DFD5] bg-[#FBF8F3] px-4 py-3">
-      <AppText tone="tertiary" variant="micro">
-        {label}
-      </AppText>
-      <AppText variant="title" style={{ marginTop: 6 }}>
-        {value}
-      </AppText>
-    </View>
   );
 }

@@ -8,6 +8,7 @@ import { View } from "react-native";
 
 import { resolveThemePreset } from "../../product/theme";
 import { useAppStore } from "../../state/useAppStore";
+import { Button } from "../../components/ui/Button";
 import { AppText } from "../../components/ui/Text";
 
 export function AppProviders({ children }: PropsWithChildren) {
@@ -35,12 +36,36 @@ export function AppProviders({ children }: PropsWithChildren) {
     SystemUI.setBackgroundColorAsync(theme.colors.background.canvas).catch(() => null);
   }, [theme.colors.background.canvas]);
 
+  const bootstrap = useAppStore((state) => state.bootstrap);
+
   return (
     <GestureHandlerRootView style={{ flex: 1 }}>
       <SafeAreaProvider>
         <NavigationContainer theme={navigationTheme}>
           <StatusBar style="dark" />
-          {bootStatus === "error" ? (
+          {bootStatus === "idle" || bootStatus === "loading" ? (
+            <View
+              style={{
+                flex: 1,
+                justifyContent: "center",
+                alignItems: "center",
+                padding: 28,
+                backgroundColor: theme.colors.background.canvas,
+              }}
+            >
+              <View style={{ gap: 12, maxWidth: 320 }}>
+                <AppText variant="caption" tone="tertiary" style={{ textAlign: "center" }}>
+                  Ambitions
+                </AppText>
+                <AppText variant="title" style={{ textAlign: "center" }}>
+                  Loading the personal planning layer
+                </AppText>
+                <AppText tone="secondary" style={{ textAlign: "center" }}>
+                  Rebuilding your local context, preferences, and today&apos;s baseline.
+                </AppText>
+              </View>
+            </View>
+          ) : bootStatus === "error" ? (
             <View
               style={{
                 flex: 1,
@@ -50,10 +75,17 @@ export function AppProviders({ children }: PropsWithChildren) {
                 backgroundColor: theme.colors.background.canvas,
               }}
             >
-              <AppText variant="section">Ambitions could not load the local data layer.</AppText>
-              <AppText style={{ marginTop: 12, textAlign: "center" }} tone="secondary">
-                {lastError ?? "Unknown startup failure."}
-              </AppText>
+              <View style={{ gap: 12, maxWidth: 320 }}>
+                <AppText variant="section" style={{ textAlign: "center" }}>
+                  Ambitions could not load the local data layer.
+                </AppText>
+                <AppText style={{ textAlign: "center" }} tone="secondary">
+                  {lastError ?? "Unknown startup failure."}
+                </AppText>
+                <Button tone="secondary" onPress={() => void bootstrap()}>
+                  Retry loading
+                </Button>
+              </View>
             </View>
           ) : (
             children

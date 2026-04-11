@@ -27,7 +27,7 @@ export function UnscheduledTasksPanel({ tasks }: UnscheduledTasksPanelProps) {
           <View key={task.taskId} className="gap-1">
             <AppText variant="section">{task.title}</AppText>
             <AppText tone="tertiary" variant="caption">
-              {task.status.replaceAll("_", " ")} • {task.estimatedMinutes} min
+              {task.status.replaceAll("_", " ")} | {task.estimatedMinutes} min
             </AppText>
             <AppText tone="secondary">{task.reason}</AppText>
           </View>

@@ -17,8 +17,12 @@ export function Pill({ label, tone = "neutral" }: PillProps) {
 
   return (
     <View
-      className="self-start rounded-full px-3 py-1"
-      style={{ backgroundColor: toneMap[tone] }}
+      className="self-start rounded-full px-3 py-1.5"
+      style={{
+        backgroundColor: toneMap[tone],
+        borderWidth: 1,
+        borderColor: tone === "accent" ? theme.colors.border.strong : theme.colors.border.subtle,
+      }}
     >
       <AppText tone="tertiary" variant="micro" style={{ textTransform: "uppercase" }}>
         {label}

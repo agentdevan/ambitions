@@ -1,6 +1,7 @@
 import { Pressable, View } from "react-native";
 
 import { TaskActionType } from "../../domain/models";
+import { useResolvedTheme } from "../../design/theme/useResolvedTheme";
 import { TodayTaskBlock } from "../../state/viewModels/today";
 import { Surface } from "../ui/Surface";
 import { AppText } from "../ui/Text";
@@ -8,16 +9,8 @@ import { AppText } from "../ui/Text";
 interface TimelinePlanProps {
   blocks: TodayTaskBlock[];
   onTaskAction: (taskId: string, action: TaskActionType) => void;
+  busyTaskId?: string | null;
 }
-
-const stateAccentMap = {
-  complete: "#6A8368",
-  scheduled: "#6C7483",
-  active: "#4F6D7A",
-  rolled: "#A17A56",
-  deferred: "#9A978E",
-  cancelled: "#A19B92",
-};
 
 const actionLabels: Record<TaskActionType, string> = {
   start: "Start",
@@ -28,7 +21,21 @@ const actionLabels: Record<TaskActionType, string> = {
   unschedule: "Unscheduled",
 };
 
-export function TimelinePlan({ blocks, onTaskAction }: TimelinePlanProps) {
+export function TimelinePlan({
+  blocks,
+  onTaskAction,
+  busyTaskId = null,
+}: TimelinePlanProps) {
+  const theme = useResolvedTheme();
+  const stateAccentMap = {
+    complete: theme.colors.semantic.success,
+    scheduled: theme.colors.accent.muted,
+    active: theme.colors.accent.primary,
+    rolled: theme.colors.semantic.warning,
+    deferred: theme.colors.semantic.muted,
+    cancelled: theme.colors.border.strong,
+  };
+
   return (
     <Surface className="gap-6">
       <View className="gap-2">
@@ -40,12 +47,18 @@ export function TimelinePlan({ blocks, onTaskAction }: TimelinePlanProps) {
 
       <View className="gap-1">
         {blocks.length === 0 ? (
-          <AppText tone="secondary">No tasks were scheduled into believable windows for this day.</AppText>
+          <AppText tone="secondary">
+            No tasks were scheduled into believable windows for this day.
+          </AppText>
         ) : null}
         {blocks.map((block, index) => (
           <View
             key={block.id}
-            className={`flex-row gap-4 py-4 ${index < blocks.length - 1 ? "border-b border-[#E7E1D8]" : ""}`}
+            className="flex-row gap-4 py-4"
+            style={{
+              borderBottomWidth: index < blocks.length - 1 ? 1 : 0,
+              borderBottomColor: theme.colors.border.subtle,
+            }}
           >
             <View className="items-center pt-0.5">
               <AppText variant="micro" tone="tertiary">
@@ -81,14 +94,16 @@ export function TimelinePlan({ blocks, onTaskAction }: TimelinePlanProps) {
                 </View>
               </View>
 
-              <AppText tone="secondary" style={{ maxWidth: 280 }}>
-                {block.note}
-              </AppText>
+              {block.note ? (
+                <AppText tone="secondary" style={{ maxWidth: 280 }}>
+                  {block.note}
+                </AppText>
+              ) : null}
 
               {block.taskStatus ? (
                 <AppText tone="tertiary" variant="caption">
                   Status: {block.taskStatus.replaceAll("_", " ")}
-                  {block.estimatedMinutes ? ` • ${block.estimatedMinutes} min` : ""}
+                  {block.estimatedMinutes ? ` | ${block.estimatedMinutes} min` : ""}
                 </AppText>
               ) : null}
 
@@ -98,10 +113,17 @@ export function TimelinePlan({ blocks, onTaskAction }: TimelinePlanProps) {
                     <Pressable
                       key={`${block.id}-${action}`}
                       onPress={() => onTaskAction(block.taskId as string, action)}
-                      className="rounded-full border border-[#DED7CB] bg-[#FCFAF6] px-3 py-2"
+                      className="rounded-full px-3 py-2"
+                      disabled={busyTaskId === block.taskId}
+                      style={({ pressed }) => ({
+                        borderWidth: 1,
+                        borderColor: theme.colors.border.subtle,
+                        backgroundColor: theme.colors.background.elevated,
+                        opacity: busyTaskId === block.taskId ? 0.45 : pressed ? 0.8 : 1,
+                      })}
                     >
                       <AppText variant="micro" tone="secondary">
-                        {actionLabels[action]}
+                        {busyTaskId === block.taskId ? "Working..." : actionLabels[action]}
                       </AppText>
                     </Pressable>
                   ))}

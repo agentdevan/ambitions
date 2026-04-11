@@ -1,11 +1,15 @@
 import { useMemo, useState } from "react";
-import { Pressable, TextInput, View } from "react-native";
+import { Pressable, View } from "react-native";
 
 import { Button } from "../../components/ui/Button";
+import { EmptyStateCard } from "../../components/ui/EmptyStateCard";
+import { OptionChip } from "../../components/ui/OptionChip";
 import { Pill } from "../../components/ui/Pill";
 import { Screen } from "../../components/ui/Screen";
 import { Surface } from "../../components/ui/Surface";
+import { TextField } from "../../components/ui/TextField";
 import { AppText } from "../../components/ui/Text";
+import { useResolvedTheme } from "../../design/theme/useResolvedTheme";
 import { DomainKey } from "../../domain/models";
 import { inferGoalDraft } from "../../product/goalIntake";
 import { ThemePresetKey } from "../../product/types";
@@ -36,65 +40,22 @@ function ChoiceRow<T extends string>(props: {
         {props.label}
       </AppText>
       <View className="flex-row flex-wrap gap-2">
-        {props.options.map((option) => {
-          const selected = option.key === props.value;
-          return (
-            <Pressable
-              key={option.key}
-              className="rounded-full border px-4 py-3"
-              onPress={() => props.onChange(option.key)}
-              style={{
-                backgroundColor: selected ? "#18181A" : "#F8F6F1",
-                borderColor: selected ? "#18181A" : "#DDD8D0",
-              }}
-            >
-              <AppText tone={selected ? "inverse" : "secondary"} variant="caption">
-                {option.label}
-              </AppText>
-            </Pressable>
-          );
-        })}
+        {props.options.map((option) => (
+          <OptionChip
+            key={option.key}
+            selected={option.key === props.value}
+            onPress={() => props.onChange(option.key)}
+          >
+            {option.label}
+          </OptionChip>
+        ))}
       </View>
     </View>
   );
 }
 
-function Field(props: {
-  label: string;
-  value: string;
-  onChangeText: (value: string) => void;
-  placeholder?: string;
-  multiline?: boolean;
-}) {
-  return (
-    <View className="gap-2">
-      <AppText variant="caption" tone="secondary">
-        {props.label}
-      </AppText>
-      <TextInput
-        multiline={props.multiline}
-        onChangeText={props.onChangeText}
-        placeholder={props.placeholder}
-        placeholderTextColor="#8A8680"
-        style={{
-          minHeight: props.multiline ? 108 : 52,
-          borderRadius: 22,
-          borderWidth: 1,
-          borderColor: "#DDD8D0",
-          backgroundColor: "#F8F6F1",
-          paddingHorizontal: 16,
-          paddingVertical: props.multiline ? 16 : 14,
-          color: "#18181A",
-          fontSize: 15,
-          lineHeight: 21,
-        }}
-        value={props.value}
-      />
-    </View>
-  );
-}
-
 export function OnboardingScreen() {
+  const theme = useResolvedTheme();
   const domains = useAppStore((state) => state.domains);
   const current = useAppStore((state) => state.productPreferences);
   const onboardingBusy = useAppStore((state) => state.onboardingBusy);
@@ -123,6 +84,7 @@ export function OnboardingScreen() {
   const [focusDomains, setFocusDomains] = useState<DomainKey[]>(
     current?.focusDomains ?? [DomainKey.Career, DomainKey.Personal],
   );
+  const [runtimeMessage, setRuntimeMessage] = useState<string | null>(null);
 
   const inferredGoal = useMemo(
     () => (goalText.trim().length > 0 ? inferGoalDraft(goalText, planDate) : null),
@@ -138,41 +100,60 @@ export function OnboardingScreen() {
     );
   };
 
-  const handleGenerate = async () => {
+  async function handleGenerate() {
     if (!inferredGoal) {
       return;
     }
 
+    setRuntimeMessage(null);
     const [sleepStart, sleepEnd] = sleepWindow.includes("-")
       ? sleepWindow.split("-")
       : ["23:00", "07:00"];
 
-    await createFirstPlan({
-      inference: {
-        ...inferredGoal,
-        title: goalTitle.trim() || inferredGoal.title,
-        targetDate: goalTargetDate.trim() || inferredGoal.targetDate,
-        domainKey: resolvedGoalDomain,
-        focusDomains,
-      },
-      productPreferences: {
-        onboardingCompleted: true,
-        focusDomains,
-        taskSizing,
-        dayIntensity,
-        themePreset,
-        schedule: {
-          sleepStart,
-          sleepEnd,
-          morningPrepMinutes: Number(prepMinutes) || 30,
-          workdayStart: workStart,
-          workdayEnd: workEnd,
-          workdays: [1, 2, 3, 4, 5],
-          commuteMinutes: Number(commuteMinutes) || 0,
+    try {
+      await createFirstPlan({
+        inference: {
+          ...inferredGoal,
+          title: goalTitle.trim() || inferredGoal.title,
+          targetDate: goalTargetDate.trim() || inferredGoal.targetDate,
+          domainKey: resolvedGoalDomain,
+          focusDomains,
         },
-      },
-    });
-  };
+        productPreferences: {
+          onboardingCompleted: true,
+          focusDomains,
+          taskSizing,
+          dayIntensity,
+          themePreset,
+          schedule: {
+            sleepStart,
+            sleepEnd,
+            morningPrepMinutes: Number(prepMinutes) || 30,
+            workdayStart: workStart,
+            workdayEnd: workEnd,
+            workdays: [1, 2, 3, 4, 5],
+            commuteMinutes: Number(commuteMinutes) || 0,
+          },
+        },
+      });
+    } catch (error) {
+      setRuntimeMessage(
+        error instanceof Error ? error.message : "The first plan could not be generated.",
+      );
+    }
+  }
+
+  if (domains.length === 0) {
+    return (
+      <Screen>
+        <EmptyStateCard
+          eyebrow="Ambitions"
+          title="Preparing onboarding"
+          body="The local setup defaults are still loading. Reopen onboarding in a moment."
+        />
+      </Screen>
+    );
+  }
 
   return (
     <Screen>
@@ -189,17 +170,17 @@ export function OnboardingScreen() {
           <View className="gap-4">
             <AppText variant="section">A few day-shape defaults</AppText>
             <View className="flex-row gap-3">
-              <View className="flex-1">
-                <Field
+              <View style={{ flex: 1 }}>
+                <TextField
                   label="Sleep window"
                   value={sleepWindow}
                   onChangeText={setSleepWindow}
                   placeholder="23:00-07:00"
                 />
               </View>
-              <View className="w-28">
-                <Field
-                  label="Prep minutes"
+              <View style={{ width: 112 }}>
+                <TextField
+                  label="Prep"
                   value={prepMinutes}
                   onChangeText={setPrepMinutes}
                   placeholder="30"
@@ -207,24 +188,24 @@ export function OnboardingScreen() {
               </View>
             </View>
             <View className="flex-row gap-3">
-              <View className="flex-1">
-                <Field
+              <View style={{ flex: 1 }}>
+                <TextField
                   label="Work starts"
                   value={workStart}
                   onChangeText={setWorkStart}
                   placeholder="09:00"
                 />
               </View>
-              <View className="flex-1">
-                <Field
+              <View style={{ flex: 1 }}>
+                <TextField
                   label="Work ends"
                   value={workEnd}
                   onChangeText={setWorkEnd}
                   placeholder="17:00"
                 />
               </View>
-              <View className="w-28">
-                <Field
+              <View style={{ width: 112 }}>
+                <TextField
                   label="Commute"
                   value={commuteMinutes}
                   onChangeText={setCommuteMinutes}
@@ -243,23 +224,17 @@ export function OnboardingScreen() {
                 const selected = focusDomains.includes(domain.key);
 
                 return (
-                  <Pressable
+                  <OptionChip
                     key={domain.id}
-                    className="rounded-full border px-4 py-3"
+                    selected={selected}
                     onPress={() => toggleDomain(domain.key)}
-                    style={{
-                      backgroundColor: selected ? "#18181A" : "#F8F6F1",
-                      borderColor: selected ? "#18181A" : "#DDD8D0",
-                    }}
                   >
-                    <AppText tone={selected ? "inverse" : "secondary"} variant="caption">
-                      {domain.name}
-                    </AppText>
-                  </Pressable>
+                    {domain.name}
+                  </OptionChip>
                 );
               })}
             </View>
-            <Field
+            <TextField
               label="First goal"
               value={goalText}
               onChangeText={setGoalText}
@@ -267,7 +242,14 @@ export function OnboardingScreen() {
               multiline
             />
             {inferredGoal ? (
-              <View className="gap-3 rounded-[24px] border border-[#DED7CB] bg-[#F8F6F1] px-4 py-4">
+              <View
+                className="gap-3 rounded-[24px] px-4 py-4"
+                style={{
+                  borderWidth: 1,
+                  borderColor: theme.colors.border.subtle,
+                  backgroundColor: theme.colors.background.elevated,
+                }}
+              >
                 <AppText variant="caption" tone="secondary">
                   What Ambitions is likely using
                 </AppText>
@@ -283,13 +265,13 @@ export function OnboardingScreen() {
             ) : null}
             {inferredGoal ? (
               <>
-                <Field
+                <TextField
                   label="Goal title"
                   value={goalTitle}
                   onChangeText={setGoalTitle}
                   placeholder={inferredGoal.title}
                 />
-                <Field
+                <TextField
                   label="Target date"
                   value={goalTargetDate}
                   onChangeText={setGoalTargetDate}
@@ -303,22 +285,13 @@ export function OnboardingScreen() {
                     {domains.map((domain) => {
                       const selected = domain.key === resolvedGoalDomain;
                       return (
-                        <Pressable
+                        <OptionChip
                           key={`goal-domain-${domain.id}`}
-                          className="rounded-full border px-4 py-3"
+                          selected={selected}
                           onPress={() => setGoalDomainKey(domain.key)}
-                          style={{
-                            backgroundColor: selected ? "#18181A" : "#F8F6F1",
-                            borderColor: selected ? "#18181A" : "#DDD8D0",
-                          }}
                         >
-                          <AppText
-                            tone={selected ? "inverse" : "secondary"}
-                            variant="caption"
-                          >
-                            {domain.name}
-                          </AppText>
-                        </Pressable>
+                          {domain.name}
+                        </OptionChip>
                       );
                     })}
                   </View>
@@ -353,15 +326,17 @@ export function OnboardingScreen() {
                   return (
                     <Pressable
                       key={preset.id}
-                      className="rounded-[22px] border px-4 py-3"
+                      className="rounded-[22px] px-4 py-3"
                       onPress={() => setThemePreset(preset.id)}
-                      style={{
+                      style={({ pressed }) => ({
                         minWidth: 112,
                         backgroundColor: preset.colors.background.elevated,
                         borderColor: selected
                           ? preset.colors.text.primary
                           : preset.colors.border.subtle,
-                      }}
+                        borderWidth: 1,
+                        opacity: pressed ? 0.84 : 1,
+                      })}
                     >
                       <AppText variant="caption">{preset.label}</AppText>
                       <AppText tone="tertiary" variant="micro">
@@ -382,6 +357,11 @@ export function OnboardingScreen() {
           <AppText tone="tertiary" variant="caption" style={{ textAlign: "center" }}>
             Defaults can be edited later in Settings.
           </AppText>
+          {runtimeMessage ? (
+            <AppText tone="tertiary" variant="caption" style={{ textAlign: "center" }}>
+              {runtimeMessage}
+            </AppText>
+          ) : null}
         </View>
       </View>
     </Screen>

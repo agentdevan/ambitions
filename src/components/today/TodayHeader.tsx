@@ -10,11 +10,14 @@ interface TodayHeaderProps {
 
 export function TodayHeader({ dateLabel, liveContext }: TodayHeaderProps) {
   return (
-    <View className="gap-4 pt-5">
+    <View className="gap-4 pt-4">
       <View className="flex-row items-center justify-between">
         <View className="flex-row items-center gap-2">
           <Pill label="Today" />
-          <Pill label={liveContext ? "Live context" : "Fallback"} tone={liveContext ? "accent" : "neutral"} />
+          <Pill
+            label={liveContext ? "Live context" : "Fallback"}
+            tone={liveContext ? "accent" : "neutral"}
+          />
         </View>
         <AppText tone="tertiary" variant="caption">
           Quiet structure
@@ -26,7 +29,7 @@ export function TodayHeader({ dateLabel, liveContext }: TodayHeaderProps) {
         <AppText tone="secondary">{dateLabel}</AppText>
       </View>
 
-      <AppText tone="secondary" style={{ maxWidth: 310 }}>
+      <AppText tone="secondary" style={{ maxWidth: 320 }}>
         A measured plan for the day, shaped to fit real capacity.
       </AppText>
     </View>

@@ -1,5 +1,6 @@
 import { View } from "react-native";
 
+import { useResolvedTheme } from "../../design/theme/useResolvedTheme";
 import { Surface } from "../ui/Surface";
 import { AppText } from "../ui/Text";
 
@@ -8,6 +9,8 @@ interface ScheduleContextProps {
 }
 
 export function ScheduleContext({ items }: ScheduleContextProps) {
+  const theme = useResolvedTheme();
+
   return (
     <Surface className="gap-5">
       <View className="gap-2">
@@ -21,7 +24,11 @@ export function ScheduleContext({ items }: ScheduleContextProps) {
         {items.map((item, index) => (
           <View
             key={item.label}
-            className={`flex-row items-center justify-between gap-4 py-3 ${index < items.length - 1 ? "border-b border-[#E7E1D8]" : ""}`}
+            className="flex-row items-center justify-between gap-4 py-3"
+            style={{
+              borderBottomWidth: index < items.length - 1 ? 1 : 0,
+              borderBottomColor: theme.colors.border.subtle,
+            }}
           >
             <AppText tone="tertiary">{item.label}</AppText>
             <AppText style={{ flexShrink: 1, textAlign: "right" }}>{item.value}</AppText>

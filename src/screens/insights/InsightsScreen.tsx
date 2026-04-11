@@ -1,15 +1,20 @@
-import { useState } from "react";
-import { Pressable, TextInput, View } from "react-native";
+import { useEffect, useState } from "react";
+import { Pressable, View } from "react-native";
 
 import { Button } from "../../components/ui/Button";
+import { EmptyStateCard } from "../../components/ui/EmptyStateCard";
+import { OptionChip } from "../../components/ui/OptionChip";
 import { Pill } from "../../components/ui/Pill";
 import { Screen } from "../../components/ui/Screen";
 import { Surface } from "../../components/ui/Surface";
+import { TextField } from "../../components/ui/TextField";
 import { AppText } from "../../components/ui/Text";
 import { themePresets } from "../../product/theme";
+import { useResolvedTheme } from "../../design/theme/useResolvedTheme";
 import { useAppStore } from "../../state/useAppStore";
 
 export function InsightsScreen() {
+  const theme = useResolvedTheme();
   const productPreferences = useAppStore((state) => state.productPreferences);
   const notificationPreferences = useAppStore((state) => state.notificationPreferences);
   const notificationPermissionStatus = useAppStore(
@@ -22,16 +27,68 @@ export function InsightsScreen() {
   );
   const requestCalendarAccess = useAppStore((state) => state.requestCalendarAccess);
   const requestNotificationAccess = useAppStore((state) => state.requestNotificationAccess);
-  const [sleepStart, setSleepStart] = useState(productPreferences?.schedule.sleepStart ?? "23:00");
-  const [sleepEnd, setSleepEnd] = useState(productPreferences?.schedule.sleepEnd ?? "07:00");
-  const [workStart, setWorkStart] = useState(productPreferences?.schedule.workdayStart ?? "09:00");
-  const [workEnd, setWorkEnd] = useState(productPreferences?.schedule.workdayEnd ?? "17:00");
-  const [commuteMinutes, setCommuteMinutes] = useState(
-    String(productPreferences?.schedule.commuteMinutes ?? 20),
-  );
+  const [sleepStart, setSleepStart] = useState("23:00");
+  const [sleepEnd, setSleepEnd] = useState("07:00");
+  const [workStart, setWorkStart] = useState("09:00");
+  const [workEnd, setWorkEnd] = useState("17:00");
+  const [commuteMinutes, setCommuteMinutes] = useState("20");
+  const [busyState, setBusyState] = useState<string | null>(null);
+  const [runtimeMessage, setRuntimeMessage] = useState<string | null>(null);
+
+  useEffect(() => {
+    if (!productPreferences) {
+      return;
+    }
+
+    setSleepStart(productPreferences.schedule.sleepStart);
+    setSleepEnd(productPreferences.schedule.sleepEnd);
+    setWorkStart(productPreferences.schedule.workdayStart);
+    setWorkEnd(productPreferences.schedule.workdayEnd);
+    setCommuteMinutes(String(productPreferences.schedule.commuteMinutes));
+  }, [productPreferences]);
 
   if (!productPreferences) {
-    return null;
+    return (
+      <Screen>
+        <EmptyStateCard
+          eyebrow="Settings"
+          title="Settings are not available yet"
+          body="The local preference layer is still settling. Reopen the app once startup finishes."
+        />
+      </Screen>
+    );
+  }
+
+  const resolvedProductPreferences = productPreferences;
+
+  async function savePreferences(
+    key: string,
+    buildNext: () => typeof resolvedProductPreferences,
+    fallbackError: string,
+  ) {
+    setBusyState(key);
+    setRuntimeMessage(null);
+
+    try {
+      await saveProductPreferences(buildNext());
+    } catch (error) {
+      setRuntimeMessage(error instanceof Error ? error.message : fallbackError);
+    } finally {
+      setBusyState(null);
+    }
+  }
+
+  async function runAction(key: string, action: () => Promise<void>, fallbackError: string) {
+    setBusyState(key);
+    setRuntimeMessage(null);
+
+    try {
+      await action();
+    } catch (error) {
+      setRuntimeMessage(error instanceof Error ? error.message : fallbackError);
+    } finally {
+      setBusyState(null);
+    }
   }
 
   return (
@@ -49,32 +106,47 @@ export function InsightsScreen() {
           <View className="gap-4">
             <AppText variant="section">Schedule defaults</AppText>
             <View className="flex-row gap-3">
-              <TextInput onChangeText={setSleepStart} style={fieldStyle} value={sleepStart} />
-              <TextInput onChangeText={setSleepEnd} style={fieldStyle} value={sleepEnd} />
+              <View style={{ flex: 1 }}>
+                <TextField label="Sleep starts" onChangeText={setSleepStart} value={sleepStart} />
+              </View>
+              <View style={{ flex: 1 }}>
+                <TextField label="Sleep ends" onChangeText={setSleepEnd} value={sleepEnd} />
+              </View>
             </View>
             <View className="flex-row gap-3">
-              <TextInput onChangeText={setWorkStart} style={fieldStyle} value={workStart} />
-              <TextInput onChangeText={setWorkEnd} style={fieldStyle} value={workEnd} />
-              <TextInput
-                onChangeText={setCommuteMinutes}
-                style={[fieldStyle, { flex: 0.7 }]}
-                value={commuteMinutes}
-              />
+              <View style={{ flex: 1 }}>
+                <TextField label="Work starts" onChangeText={setWorkStart} value={workStart} />
+              </View>
+              <View style={{ flex: 1 }}>
+                <TextField label="Work ends" onChangeText={setWorkEnd} value={workEnd} />
+              </View>
+              <View style={{ flex: 0.7 }}>
+                <TextField
+                  label="Commute"
+                  onChangeText={setCommuteMinutes}
+                  value={commuteMinutes}
+                />
+              </View>
             </View>
             <Button
               tone="secondary"
+              busy={busyState === "schedule"}
               onPress={() =>
-                saveProductPreferences({
-                  ...productPreferences,
-                  schedule: {
-                    ...productPreferences.schedule,
-                    sleepStart,
-                    sleepEnd,
-                    workdayStart: workStart,
-                    workdayEnd: workEnd,
-                    commuteMinutes: Number(commuteMinutes) || 0,
-                  },
-                })
+                void savePreferences(
+                  "schedule",
+                    () => ({
+                    ...resolvedProductPreferences,
+                    schedule: {
+                      ...resolvedProductPreferences.schedule,
+                      sleepStart,
+                      sleepEnd,
+                      workdayStart: workStart,
+                      workdayEnd: workEnd,
+                      commuteMinutes: Number(commuteMinutes) || 0,
+                    },
+                  }),
+                  "Schedule defaults could not be saved.",
+                )
               }
             >
               Save schedule defaults
@@ -85,67 +157,64 @@ export function InsightsScreen() {
         <Surface tone="sunken">
           <View className="gap-4">
             <AppText variant="section">Planning style</AppText>
-            <View className="flex-row flex-wrap gap-2">
-              {[
-                ["smaller", "Smaller tasks"],
-                ["mixed", "Mixed"],
-                ["bigger", "Fewer bigger tasks"],
-              ].map(([key, label]) => (
-                <Pressable
-                  key={key}
-                  className="rounded-full border px-4 py-3"
-                  onPress={() =>
-                    saveProductPreferences({
-                      ...productPreferences,
-                      taskSizing: key as typeof productPreferences.taskSizing,
-                    })
-                  }
-                  style={{
-                    backgroundColor:
-                      productPreferences.taskSizing === key ? "#18181A" : "#F8F6F1",
-                    borderColor:
-                      productPreferences.taskSizing === key ? "#18181A" : "#DDD8D0",
-                  }}
-                >
-                  <AppText
-                    tone={productPreferences.taskSizing === key ? "inverse" : "secondary"}
-                    variant="caption"
+            <View className="gap-2">
+              <AppText variant="caption" tone="secondary">
+                Task size
+              </AppText>
+              <View className="flex-row flex-wrap gap-2">
+                {[
+                  ["smaller", "Smaller tasks"],
+                  ["mixed", "Mixed"],
+                  ["bigger", "Fewer bigger tasks"],
+                ].map(([key, label]) => (
+                  <OptionChip
+                    key={key}
+                    selected={resolvedProductPreferences.taskSizing === key}
+                    onPress={() =>
+                      void savePreferences(
+                        "task-sizing",
+                        () => ({
+                          ...resolvedProductPreferences,
+                          taskSizing: key as typeof resolvedProductPreferences.taskSizing,
+                        }),
+                        "Task sizing could not be updated.",
+                      )
+                    }
                   >
                     {label}
-                  </AppText>
-                </Pressable>
-              ))}
+                  </OptionChip>
+                ))}
+              </View>
             </View>
-            <View className="flex-row flex-wrap gap-2">
-              {[
-                ["light", "Light"],
-                ["balanced", "Balanced"],
-                ["ambitious", "Ambitious"],
-              ].map(([key, label]) => (
-                <Pressable
-                  key={key}
-                  className="rounded-full border px-4 py-3"
-                  onPress={() =>
-                    saveProductPreferences({
-                      ...productPreferences,
-                      dayIntensity: key as typeof productPreferences.dayIntensity,
-                    })
-                  }
-                  style={{
-                    backgroundColor:
-                      productPreferences.dayIntensity === key ? "#18181A" : "#F8F6F1",
-                    borderColor:
-                      productPreferences.dayIntensity === key ? "#18181A" : "#DDD8D0",
-                  }}
-                >
-                  <AppText
-                    tone={productPreferences.dayIntensity === key ? "inverse" : "secondary"}
-                    variant="caption"
+
+            <View className="gap-2">
+              <AppText variant="caption" tone="secondary">
+                Day intensity
+              </AppText>
+              <View className="flex-row flex-wrap gap-2">
+                {[
+                  ["light", "Light"],
+                  ["balanced", "Balanced"],
+                  ["ambitious", "Ambitious"],
+                ].map(([key, label]) => (
+                  <OptionChip
+                    key={key}
+                    selected={resolvedProductPreferences.dayIntensity === key}
+                    onPress={() =>
+                      void savePreferences(
+                        "day-intensity",
+                        () => ({
+                          ...resolvedProductPreferences,
+                          dayIntensity: key as typeof resolvedProductPreferences.dayIntensity,
+                        }),
+                        "Day intensity could not be updated.",
+                      )
+                    }
                   >
                     {label}
-                  </AppText>
-                </Pressable>
-              ))}
+                  </OptionChip>
+                ))}
+              </View>
             </View>
           </View>
         </Surface>
@@ -154,26 +223,63 @@ export function InsightsScreen() {
           <View className="gap-4">
             <AppText variant="section">Integrations</AppText>
             <AppText tone="secondary">
-              Calendar: {calendarConnectionState?.permissionState === "granted" ? "connected" : "not connected"}
+              Calendar:{" "}
+              {calendarConnectionState?.permissionState === "granted"
+                ? "connected"
+                : "not connected"}
             </AppText>
-            <AppText tone="secondary">
-              Notifications: {notificationPermissionStatus}
-            </AppText>
+            <AppText tone="secondary">Notifications: {notificationPermissionStatus}</AppText>
             <View className="flex-row gap-3">
-              <Button tone="secondary" style={{ flex: 1 }} onPress={requestCalendarAccess}>
+              <Button
+                tone="secondary"
+                style={{ flex: 1 }}
+                busy={busyState === "calendar"}
+                onPress={() =>
+                  void runAction(
+                    "calendar",
+                    requestCalendarAccess,
+                    "Calendar access could not be refreshed.",
+                  )
+                }
+              >
                 Refresh calendar access
               </Button>
-              <Button tone="secondary" style={{ flex: 1 }} onPress={requestNotificationAccess}>
+              <Button
+                tone="secondary"
+                style={{ flex: 1 }}
+                busy={busyState === "notifications"}
+                onPress={() =>
+                  void runAction(
+                    "notifications",
+                    requestNotificationAccess,
+                    "Notification access could not be refreshed.",
+                  )
+                }
+              >
                 Refresh notifications
               </Button>
             </View>
             {notificationPreferences.map((preference) => (
               <Pressable
                 key={preference.id}
-                className="flex-row items-center justify-between rounded-[22px] border border-[#DED7CB] bg-[#F8F6F1] px-4 py-4"
+                className="flex-row items-center justify-between rounded-[22px] px-4 py-4"
                 onPress={() =>
-                  updateNotificationPreference(preference.reminderType, !preference.enabled)
+                  void runAction(
+                    `notification:${preference.id}`,
+                    () =>
+                      updateNotificationPreference(
+                        preference.reminderType,
+                        !preference.enabled,
+                      ),
+                    "Notification preference could not be updated.",
+                  )
                 }
+                style={({ pressed }) => ({
+                  borderWidth: 1,
+                  borderColor: theme.colors.border.subtle,
+                  backgroundColor: theme.colors.background.elevated,
+                  opacity: pressed ? 0.84 : 1,
+                })}
               >
                 <View className="flex-1 gap-1">
                   <AppText>{preference.reminderType.replace(/_/g, " ")}</AppText>
@@ -193,17 +299,23 @@ export function InsightsScreen() {
             {themePresets.map((preset) => (
               <Pressable
                 key={preset.id}
-                className="rounded-[24px] border px-4 py-4"
+                className="rounded-[24px] px-4 py-4"
                 onPress={() =>
-                  saveProductPreferences({ ...productPreferences, themePreset: preset.id })
+                  void savePreferences(
+                    "theme",
+                    () => ({ ...resolvedProductPreferences, themePreset: preset.id }),
+                    "Theme selection could not be updated.",
+                  )
                 }
-                style={{
+                style={({ pressed }) => ({
                   backgroundColor: preset.colors.background.elevated,
                   borderColor:
-                    productPreferences.themePreset === preset.id
+                    resolvedProductPreferences.themePreset === preset.id
                       ? preset.colors.text.primary
                       : preset.colors.border.subtle,
-                }}
+                  borderWidth: 1,
+                  opacity: pressed ? 0.85 : 1,
+                })}
               >
                 <AppText variant="section">{preset.label}</AppText>
                 <AppText tone="secondary" style={{ marginTop: 6 }}>
@@ -213,20 +325,13 @@ export function InsightsScreen() {
             ))}
           </View>
         </Surface>
+
+        {runtimeMessage ? (
+          <AppText tone="tertiary" variant="caption">
+            {runtimeMessage}
+          </AppText>
+        ) : null}
       </View>
     </Screen>
   );
 }
-
-const fieldStyle = {
-  flex: 1,
-  minHeight: 52,
-  borderRadius: 22,
-  borderWidth: 1,
-  borderColor: "#DDD8D0",
-  backgroundColor: "#F8F6F1",
-  paddingHorizontal: 16,
-  paddingVertical: 14,
-  color: "#18181A",
-  fontSize: 15,
-} as const;
