@@ -55,9 +55,12 @@ export function AccountStatusCard({
         </View>
 
         <View className="flex-row flex-wrap gap-2">
-          <Pill label={hasAccount ? "Signed in" : "Local only"} tone={hasAccount ? "accent" : "neutral"} />
+          <Pill
+            label={hasAccount ? "Signed in" : "On this device"}
+            tone={hasAccount ? "accent" : "neutral"}
+          />
           {syncState ? <Pill label={`Sync ${syncState.mode.replace("_", " ")}`} /> : null}
-          {conflicts.length > 0 ? <Pill label={`${conflicts.length} review`} /> : null}
+          {conflicts.length > 0 ? <Pill label={`${conflicts.length} items to review`} /> : null}
         </View>
 
         {account ? (
@@ -66,7 +69,7 @@ export function AccountStatusCard({
             <AppText tone="tertiary" variant="caption">
               {syncState?.lastSyncAt
                 ? `Last sync ${syncState.lastSyncAt}`
-                : "No sync has completed yet."}
+                : "Sync has not run yet."}
             </AppText>
           </View>
         ) : null}

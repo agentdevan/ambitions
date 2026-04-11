@@ -89,7 +89,8 @@ export function PlanScreen() {
             <Pill label="Plan" />
             <AppText variant="hero">The current shape of the work.</AppText>
             <AppText tone="secondary">
-              Recommended structure, light rationale, and just enough editing power before a plan becomes active.
+              Recommended structure, light rationale, and only the editing controls that need to
+              exist before a plan becomes active.
             </AppText>
           </View>
 
@@ -107,6 +108,7 @@ export function PlanScreen() {
                     <Button
                       key={goal.id}
                       tone={selectedGoalId === goal.id ? "primary" : "secondary"}
+                      size="compact"
                       onPress={() => setSelectedGoalId(goal.id)}
                     >
                       {goal.title}
@@ -139,9 +141,9 @@ export function PlanScreen() {
 
                 <View className="gap-2">
                   {selectedReviewDraft.rationale.map((item) => (
-                    <AppText key={item} tone="secondary">
-                      {item}
-                    </AppText>
+                    <Surface key={item} tone="sunken" className="gap-1">
+                      <AppText tone="secondary">{item}</AppText>
+                    </Surface>
                   ))}
                 </View>
 
@@ -151,14 +153,10 @@ export function PlanScreen() {
                     .sort((left, right) => left.order - right.order);
 
                   return (
-                    <View
+                    <Surface
                       key={milestone.id}
-                      className="rounded-[22px] px-4 py-4"
-                      style={{
-                        borderWidth: 1,
-                        borderColor: theme.colors.border.subtle,
-                        backgroundColor: theme.colors.background.elevated,
-                      }}
+                      className="gap-4"
+                      tone="default"
                     >
                       <View className="gap-2">
                         <AppText variant="section">{milestone.title}</AppText>
@@ -174,22 +172,18 @@ export function PlanScreen() {
 
                       <View className="mt-4 gap-3">
                         {milestoneTasks.map((task) => (
-                          <View
+                          <Surface
                             key={task.id}
-                            className="rounded-[18px] px-4 py-4"
-                            style={{
-                              borderWidth: 1,
-                              borderColor: theme.colors.border.subtle,
-                              backgroundColor: theme.colors.background.canvas,
-                            }}
+                            className="gap-3"
+                            tone="sunken"
                           >
                             <View className="gap-2">
                               <AppText>{task.title}</AppText>
-                              <AppText tone="tertiary" variant="caption">
-                                {task.estimatedMinutes} min
-                                {task.targetDate ? ` | ${task.targetDate}` : ""}
-                                {task.protected ? " | protected" : ""}
-                              </AppText>
+                              <View className="flex-row flex-wrap gap-2">
+                                <Pill label={`${task.estimatedMinutes} min`} />
+                                {task.targetDate ? <Pill label={task.targetDate} /> : null}
+                                {task.protected ? <Pill label="Preserved" tone="accent" /> : null}
+                              </View>
                               {task.rationale ? (
                                 <AppText tone="secondary">{task.rationale}</AppText>
                               ) : null}
@@ -198,6 +192,7 @@ export function PlanScreen() {
                               <View className="mt-3 flex-row flex-wrap gap-2">
                                 <Button
                                   tone="ghost"
+                                  size="compact"
                                   onPress={() =>
                                     runReviewAction(
                                       `move-up:${task.id}`,
@@ -210,6 +205,7 @@ export function PlanScreen() {
                                 </Button>
                                 <Button
                                   tone="ghost"
+                                  size="compact"
                                   onPress={() =>
                                     runReviewAction(
                                       `move-down:${task.id}`,
@@ -222,6 +218,7 @@ export function PlanScreen() {
                                 </Button>
                                 <Button
                                   tone="ghost"
+                                  size="compact"
                                   onPress={() =>
                                     runReviewAction(
                                       `minus:${task.id}`,
@@ -237,6 +234,7 @@ export function PlanScreen() {
                                 </Button>
                                 <Button
                                   tone="ghost"
+                                  size="compact"
                                   onPress={() =>
                                     runReviewAction(
                                       `plus:${task.id}`,
@@ -252,6 +250,7 @@ export function PlanScreen() {
                                 </Button>
                                 <Button
                                   tone="ghost"
+                                  size="compact"
                                   onPress={() =>
                                     runReviewAction(
                                       `date-earlier:${task.id}`,
@@ -267,6 +266,7 @@ export function PlanScreen() {
                                 </Button>
                                 <Button
                                   tone="ghost"
+                                  size="compact"
                                   onPress={() =>
                                     runReviewAction(
                                       `date-later:${task.id}`,
@@ -282,6 +282,7 @@ export function PlanScreen() {
                                 </Button>
                                 <Button
                                   tone="ghost"
+                                  size="compact"
                                   onPress={() =>
                                     runReviewAction(
                                       `remove:${task.id}`,
@@ -294,10 +295,10 @@ export function PlanScreen() {
                                 </Button>
                               </View>
                             ) : null}
-                          </View>
+                          </Surface>
                         ))}
                       </View>
-                    </View>
+                    </Surface>
                   );
                 })}
 
@@ -348,18 +349,18 @@ export function PlanScreen() {
           {dailyPlan ? (
             <>
               <Surface>
-                <View className="gap-3">
-                  <AppText variant="section">Today&apos;s frame</AppText>
-                  <AppText>{dailyPlan.focus}</AppText>
+                  <View className="gap-3">
+                    <AppText variant="section">Today&apos;s frame</AppText>
+                    <AppText>{dailyPlan.focus}</AppText>
                   <AppText tone="secondary">
                     {dailyPlan.planningNotes ?? "The planner created a compact, protective day shape."}
                   </AppText>
                   <View className="flex-row flex-wrap gap-2">
-                    <Pill label={`${timeBlocks.length} blocks`} tone="accent" />
+                    <Pill label={`${timeBlocks.length} sessions`} tone="accent" />
                     <Pill
                       label={`${
                         tasks.filter((task) => task.scheduledDate === dailyPlan.date).length
-                      } scheduled tasks`}
+                      } tasks on deck`}
                     />
                     <Pill label={dailyPlan.date} />
                   </View>
@@ -378,23 +379,19 @@ export function PlanScreen() {
                     const goal = goals.find((entry) => entry.id === milestone.goalId);
 
                     return (
-                      <View
+                      <Surface
                         key={milestone.id}
-                        className="rounded-[22px] px-4 py-4"
-                        style={{
-                          borderWidth: 1,
-                          borderColor: theme.colors.border.subtle,
-                          backgroundColor: theme.colors.background.elevated,
-                        }}
+                        className="gap-2"
+                        tone="default"
                       >
                         <AppText>{milestone.title}</AppText>
-                        <AppText tone="secondary" style={{ marginTop: 6 }}>
+                        <AppText tone="secondary">
                           {goal?.title ?? "Goal no longer available"}
                         </AppText>
-                        <AppText tone="tertiary" variant="caption" style={{ marginTop: 6 }}>
-                          {milestone.targetDate ?? "No target date"}
-                        </AppText>
-                      </View>
+                        <View className="flex-row flex-wrap gap-2">
+                          <Pill label={milestone.targetDate ?? "No target date"} />
+                        </View>
+                      </Surface>
                     );
                   })}
                 </View>

@@ -32,10 +32,10 @@ export function Surface({ children, className = "", tone = "default", style, ...
         {
           ...toneMap[tone],
           shadowColor: theme.colors.text.primary,
-          shadowOpacity: 0.05,
+          shadowOpacity: tone === "sunken" ? 0.02 : 0.05,
           shadowRadius: 18,
           shadowOffset: { width: 0, height: 10 },
-          elevation: 3,
+          elevation: tone === "sunken" ? 1 : 3,
         },
         style,
       ]}

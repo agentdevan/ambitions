@@ -162,13 +162,17 @@ export function OnboardingScreen() {
           <Pill label="Ambitions" />
           <AppText variant="hero">Set the defaults once. Start with one real goal.</AppText>
           <AppText tone="secondary">
-            This keeps the first plan believable without turning setup into a project.
+            A small amount of setup gives the first plan believable constraints without turning
+            onboarding into work.
           </AppText>
         </View>
 
         <Surface>
           <View className="gap-4">
             <AppText variant="section">A few day-shape defaults</AppText>
+            <AppText tone="secondary">
+              These defaults anchor the schedule so the first day feels realistic on arrival.
+            </AppText>
             <View className="flex-row gap-3">
               <View style={{ flex: 1 }}>
                 <TextField
@@ -219,6 +223,10 @@ export function OnboardingScreen() {
         <Surface>
           <View className="gap-4">
             <AppText variant="section">What matters first</AppText>
+            <AppText tone="secondary">
+              Pick the domains you want Ambitions to protect first, then describe the first real
+              outcome you want to move.
+            </AppText>
             <View className="flex-row flex-wrap gap-2">
               {domains.map((domain) => {
                 const selected = focusDomains.includes(domain.key);
@@ -242,14 +250,7 @@ export function OnboardingScreen() {
               multiline
             />
             {inferredGoal ? (
-              <View
-                className="gap-3 rounded-[24px] px-4 py-4"
-                style={{
-                  borderWidth: 1,
-                  borderColor: theme.colors.border.subtle,
-                  backgroundColor: theme.colors.background.elevated,
-                }}
-              >
+              <Surface tone="sunken" className="gap-3">
                 <AppText variant="caption" tone="secondary">
                   What Ambitions is likely using
                 </AppText>
@@ -261,7 +262,7 @@ export function OnboardingScreen() {
                     <Pill label={goalTargetDate || inferredGoal.targetDate || ""} />
                   ) : null}
                 </View>
-              </View>
+              </Surface>
             ) : null}
             {inferredGoal ? (
               <>
@@ -304,6 +305,10 @@ export function OnboardingScreen() {
         <Surface>
           <View className="gap-5">
             <AppText variant="section">Planning feel</AppText>
+            <AppText tone="secondary">
+              Choose the default pacing and visual tone you want to start with. Everything here can
+              be changed later.
+            </AppText>
             <ChoiceRow
               label="Task size"
               options={taskSizingOptions}
@@ -326,22 +331,32 @@ export function OnboardingScreen() {
                   return (
                     <Pressable
                       key={preset.id}
-                      className="rounded-[22px] px-4 py-3"
+                      className="rounded-[24px]"
                       onPress={() => setThemePreset(preset.id)}
                       style={({ pressed }) => ({
                         minWidth: 112,
-                        backgroundColor: preset.colors.background.elevated,
-                        borderColor: selected
-                          ? preset.colors.text.primary
-                          : preset.colors.border.subtle,
-                        borderWidth: 1,
                         opacity: pressed ? 0.84 : 1,
                       })}
                     >
-                      <AppText variant="caption">{preset.label}</AppText>
-                      <AppText tone="tertiary" variant="micro">
-                        {preset.description}
-                      </AppText>
+                      <Surface
+                        tone="default"
+                        className="gap-2"
+                        style={{
+                          minWidth: 112,
+                          backgroundColor: preset.colors.background.elevated,
+                          borderColor: selected
+                            ? preset.colors.text.primary
+                            : preset.colors.border.subtle,
+                        }}
+                      >
+                        <View className="flex-row flex-wrap gap-2">
+                          {selected ? <Pill label="Selected" tone="accent" /> : null}
+                          <Pill label={preset.label} />
+                        </View>
+                        <AppText tone="secondary" variant="caption">
+                          {preset.description}
+                        </AppText>
+                      </Surface>
                     </Pressable>
                   );
                 })}

@@ -11,7 +11,7 @@ interface PillProps {
 export function Pill({ label, tone = "neutral" }: PillProps) {
   const theme = useResolvedTheme();
   const toneMap = {
-    neutral: theme.colors.background.sunken,
+    neutral: theme.colors.background.canvas,
     accent: theme.colors.background.accentWash,
   };
 
@@ -24,7 +24,7 @@ export function Pill({ label, tone = "neutral" }: PillProps) {
         borderColor: tone === "accent" ? theme.colors.border.strong : theme.colors.border.subtle,
       }}
     >
-      <AppText tone="tertiary" variant="micro" style={{ textTransform: "uppercase" }}>
+      <AppText tone={tone === "accent" ? "secondary" : "tertiary"} variant="micro">
         {label}
       </AppText>
     </View>

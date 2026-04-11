@@ -26,25 +26,33 @@ export function OptionChip({
       {...props}
       style={({ pressed }) => [
         {
-          minHeight: compact ? 34 : 42,
+          minHeight: compact ? 36 : 44,
           borderRadius: 999,
           borderWidth: 1,
-          paddingHorizontal: compact ? 12 : 16,
+          paddingHorizontal: compact ? 12 : 15,
           paddingVertical: compact ? 8 : 11,
+          alignItems: "center",
+          justifyContent: "center",
           backgroundColor: selected
             ? theme.colors.text.primary
-            : theme.colors.background.elevated,
+            : theme.colors.background.canvas,
           borderColor: selected
             ? theme.colors.text.primary
-            : theme.colors.border.subtle,
-          opacity: props.disabled ? 0.45 : pressed ? 0.82 : 1,
+            : theme.colors.border.strong,
+          opacity: props.disabled ? 0.45 : pressed ? 0.88 : 1,
+          shadowColor: selected ? theme.colors.text.primary : "transparent",
+          shadowOpacity: selected ? 0.08 : 0,
+          shadowRadius: 12,
+          shadowOffset: { width: 0, height: 6 },
+          elevation: selected ? 2 : 0,
         },
         style,
       ]}
     >
       <AppText
-        tone={selected ? "inverse" : "secondary"}
+        tone={selected ? "inverse" : "primary"}
         variant={compact ? "micro" : "caption"}
+        style={{ textAlign: "center" }}
       >
         {children}
       </AppText>

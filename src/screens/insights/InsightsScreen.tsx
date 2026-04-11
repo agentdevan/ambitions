@@ -108,7 +108,8 @@ export function InsightsScreen() {
           <Pill label="Settings" />
           <AppText variant="hero">Quiet controls. Personal ownership.</AppText>
           <AppText tone="secondary">
-            This is the product settings area for V1, not a control panel.
+            The essentials only: schedule defaults, planning preferences, account continuity, and
+            a few personal controls.
           </AppText>
         </View>
 
@@ -151,6 +152,9 @@ export function InsightsScreen() {
         <Surface>
           <View className="gap-4">
             <AppText variant="section">Schedule defaults</AppText>
+            <AppText tone="secondary">
+              These defaults shape the planner when live context is unavailable or incomplete.
+            </AppText>
             <View className="flex-row gap-3">
               <View style={{ flex: 1 }}>
                 <TextField label="Sleep starts" onChangeText={setSleepStart} value={sleepStart} />
@@ -203,6 +207,9 @@ export function InsightsScreen() {
         <Surface tone="sunken">
           <View className="gap-4">
             <AppText variant="section">Planning style</AppText>
+            <AppText tone="secondary">
+              Keep the planner aligned to your preferred pacing without over-customizing it.
+            </AppText>
             <View className="gap-2">
               <AppText variant="caption" tone="secondary">
                 Task size
@@ -268,13 +275,22 @@ export function InsightsScreen() {
         <Surface>
           <View className="gap-4">
             <AppText variant="section">Integrations</AppText>
-            <AppText tone="secondary">
-              Calendar:{" "}
-              {calendarConnectionState?.permissionState === "granted"
-                ? "connected"
-                : "not connected"}
-            </AppText>
-            <AppText tone="secondary">Notifications: {notificationPermissionStatus}</AppText>
+            <View className="flex-row flex-wrap gap-2">
+              <Pill
+                label={
+                  calendarConnectionState?.permissionState === "granted"
+                    ? "Calendar connected"
+                    : "Calendar not connected"
+                }
+                tone={
+                  calendarConnectionState?.permissionState === "granted" ? "accent" : "neutral"
+                }
+              />
+              <Pill
+                label={`Notifications ${notificationPermissionStatus}`}
+                tone={notificationPermissionStatus === "granted" ? "accent" : "neutral"}
+              />
+            </View>
             <View className="flex-row gap-3">
               <Button
                 tone="secondary"
@@ -308,7 +324,7 @@ export function InsightsScreen() {
             {notificationPreferences.map((preference) => (
               <Pressable
                 key={preference.id}
-                className="flex-row items-center justify-between rounded-[22px] px-4 py-4"
+                className="rounded-[24px]"
                 onPress={() =>
                   void runAction(
                     `notification:${preference.id}`,
@@ -321,19 +337,28 @@ export function InsightsScreen() {
                   )
                 }
                 style={({ pressed }) => ({
-                  borderWidth: 1,
-                  borderColor: theme.colors.border.subtle,
-                  backgroundColor: theme.colors.background.elevated,
                   opacity: pressed ? 0.84 : 1,
                 })}
               >
-                <View className="flex-1 gap-1">
-                  <AppText>{preference.reminderType.replace(/_/g, " ")}</AppText>
-                  <AppText tone="tertiary" variant="caption">
-                    {preference.enabled ? "On" : "Off"}
-                  </AppText>
-                </View>
-                <Pill label={preference.enabled ? "Enabled" : "Muted"} tone="accent" />
+                <Surface
+                  tone={preference.enabled ? "accent" : "default"}
+                  className="gap-2"
+                  style={{
+                    borderColor: preference.enabled
+                      ? theme.colors.border.strong
+                      : theme.colors.border.subtle,
+                  }}
+                >
+                  <View className="flex-row items-center justify-between gap-3">
+                    <View className="flex-1 gap-1">
+                      <AppText>{preference.reminderType.replace(/_/g, " ")}</AppText>
+                      <AppText tone="tertiary" variant="caption">
+                        {preference.enabled ? "Reminder is active" : "Reminder is muted"}
+                      </AppText>
+                    </View>
+                    <Pill label={preference.enabled ? "Enabled" : "Muted"} tone="accent" />
+                  </View>
+                </Surface>
               </Pressable>
             ))}
           </View>
@@ -342,10 +367,14 @@ export function InsightsScreen() {
         <Surface>
           <View className="gap-4">
             <AppText variant="section">Theme</AppText>
+            <AppText tone="secondary">
+              Pick the visual tone you want across the app without changing the overall product
+              language.
+            </AppText>
             {themePresets.map((preset) => (
               <Pressable
                 key={preset.id}
-                className="rounded-[24px] px-4 py-4"
+                className="rounded-[24px]"
                 onPress={() =>
                   void savePreferences(
                     "theme",
@@ -354,19 +383,28 @@ export function InsightsScreen() {
                   )
                 }
                 style={({ pressed }) => ({
-                  backgroundColor: preset.colors.background.elevated,
-                  borderColor:
-                    resolvedProductPreferences.themePreset === preset.id
-                      ? preset.colors.text.primary
-                      : preset.colors.border.subtle,
-                  borderWidth: 1,
                   opacity: pressed ? 0.85 : 1,
                 })}
               >
-                <AppText variant="section">{preset.label}</AppText>
-                <AppText tone="secondary" style={{ marginTop: 6 }}>
-                  {preset.description}
-                </AppText>
+                <Surface
+                  tone="default"
+                  className="gap-3"
+                  style={{
+                    backgroundColor: preset.colors.background.elevated,
+                    borderColor:
+                      resolvedProductPreferences.themePreset === preset.id
+                        ? preset.colors.text.primary
+                        : preset.colors.border.subtle,
+                  }}
+                >
+                  <View className="flex-row flex-wrap gap-2">
+                    {resolvedProductPreferences.themePreset === preset.id ? (
+                      <Pill label="Selected" tone="accent" />
+                    ) : null}
+                    <Pill label={preset.label} />
+                  </View>
+                  <AppText tone="secondary">{preset.description}</AppText>
+                </Surface>
               </Pressable>
             ))}
           </View>

@@ -1,8 +1,10 @@
-import { Pressable, View } from "react-native";
+import { View } from "react-native";
 
 import { TaskActionType } from "../../domain/models";
 import { useResolvedTheme } from "../../design/theme/useResolvedTheme";
 import { TodayTaskBlock } from "../../state/viewModels/today";
+import { Button } from "../ui/Button";
+import { Pill } from "../ui/Pill";
 import { Surface } from "../ui/Surface";
 import { AppText } from "../ui/Text";
 
@@ -39,9 +41,10 @@ export function TimelinePlan({
   return (
     <Surface className="gap-6">
       <View className="gap-2">
-        <AppText tone="secondary" variant="caption">
-          Time-blocked plan
-        </AppText>
+        <View className="flex-row flex-wrap gap-2">
+          <Pill label="Today plan" />
+          <Pill label={`${blocks.length} scheduled sessions`} tone="accent" />
+        </View>
         <AppText variant="section">A believable shape for the day</AppText>
       </View>
 
@@ -100,32 +103,27 @@ export function TimelinePlan({
                 </AppText>
               ) : null}
 
-              {block.taskStatus ? (
-                <AppText tone="tertiary" variant="caption">
-                  Status: {block.taskStatus.replaceAll("_", " ")}
-                  {block.estimatedMinutes ? ` | ${block.estimatedMinutes} min` : ""}
-                </AppText>
-              ) : null}
+              <View className="flex-row flex-wrap gap-2">
+                {block.taskStatus ? (
+                  <Pill label={block.taskStatus.replaceAll("_", " ")} />
+                ) : null}
+                {block.estimatedMinutes ? (
+                  <Pill label={`${block.estimatedMinutes} min`} />
+                ) : null}
+              </View>
 
               {block.taskId && block.actions.length > 0 ? (
                 <View className="flex-row flex-wrap gap-2 pt-1">
                   {block.actions.map((action) => (
-                    <Pressable
+                    <Button
                       key={`${block.id}-${action}`}
                       onPress={() => onTaskAction(block.taskId as string, action)}
-                      className="rounded-full px-3 py-2"
                       disabled={busyTaskId === block.taskId}
-                      style={({ pressed }) => ({
-                        borderWidth: 1,
-                        borderColor: theme.colors.border.subtle,
-                        backgroundColor: theme.colors.background.elevated,
-                        opacity: busyTaskId === block.taskId ? 0.45 : pressed ? 0.8 : 1,
-                      })}
+                      tone={action === "start" || action === "complete" ? "secondary" : "ghost"}
+                      size="compact"
                     >
-                      <AppText variant="micro" tone="secondary">
-                        {busyTaskId === block.taskId ? "Working..." : actionLabels[action]}
-                      </AppText>
-                    </Pressable>
+                      {busyTaskId === block.taskId ? "Working..." : actionLabels[action]}
+                    </Button>
                   ))}
                 </View>
               ) : null}

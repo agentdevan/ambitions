@@ -159,11 +159,9 @@ export function TodayScreen() {
             <View className="gap-3">
               <View className="flex-row flex-wrap gap-2">
                 <Pill label="Recommended plan" tone="accent" />
-                <Pill label={`${pendingReviewGoals.length} pending review`} />
+                <Pill label={`${pendingReviewGoals.length} awaiting review`} />
               </View>
-              <AppText>
-                {pendingReviewGoals[0]?.title}
-              </AppText>
+              <AppText variant="section">{pendingReviewGoals[0]?.title}</AppText>
               <AppText tone="secondary">
                 A recommended plan or refresh is waiting for review. You can make a few light edits before accepting it.
               </AppText>
@@ -261,24 +259,28 @@ export function TodayScreen() {
           recovery={today.progress.recovery}
         />
 
-        {runtimeMessage ? (
-          <AppText tone="tertiary" variant="caption">
-            {runtimeMessage}
-          </AppText>
-        ) : null}
-        {integrationBusy ? (
-          <AppText tone="tertiary" variant="caption">
-            Updating live context...
-          </AppText>
+        {runtimeMessage || integrationBusy ? (
+          <Surface tone="sunken">
+            <View className="gap-2">
+              {runtimeMessage ? (
+                <AppText tone="secondary">{runtimeMessage}</AppText>
+              ) : null}
+              {integrationBusy ? (
+                <AppText tone="tertiary" variant="caption">
+                  Updating live context...
+                </AppText>
+              ) : null}
+            </View>
+          </Surface>
         ) : null}
 
-        <View className="pb-2 pt-1">
+        <Surface tone="sunken">
           <AppText tone="tertiary" variant="caption">
             Account sync covers goals, milestones, tasks, daily plans, preferences, and the
-            adaptation profile. Notifications, permissions, and transient runtime state remain
-            device-local.
+            adaptation profile. Notifications, permissions, and transient runtime state stay on the
+            device.
           </AppText>
-        </View>
+        </Surface>
       </View>
     </Screen>
   );

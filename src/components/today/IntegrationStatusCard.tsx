@@ -1,11 +1,12 @@
-import { Pressable, View } from "react-native";
+import { View } from "react-native";
 
 import {
   CalendarConnectionState,
   CalendarPermissionState,
   CalendarSyncState,
 } from "../../domain/models";
-import { useResolvedTheme } from "../../design/theme/useResolvedTheme";
+import { Button } from "../ui/Button";
+import { Pill } from "../ui/Pill";
 import { Surface } from "../ui/Surface";
 import { AppText } from "../ui/Text";
 
@@ -18,28 +19,6 @@ interface IntegrationStatusCardProps {
   usingLiveCalendar: boolean;
   calendarDetail: string;
   busyAction?: "calendar" | "notifications" | "refresh" | null;
-}
-
-function ActionButton(props: { label: string; onPress: () => Promise<void>; busy?: boolean }) {
-  const theme = useResolvedTheme();
-
-  return (
-    <Pressable
-      className="rounded-full px-4 py-2.5"
-      onPress={() => {
-        void props.onPress();
-      }}
-      disabled={props.busy}
-      style={({ pressed }) => ({
-        backgroundColor: theme.colors.background.accentWash,
-        borderColor: theme.colors.border.subtle,
-        borderWidth: 1,
-        opacity: props.busy ? 0.5 : pressed ? 0.82 : 1,
-      })}
-    >
-      <AppText variant="caption">{props.label}</AppText>
-    </Pressable>
-  );
 }
 
 export function IntegrationStatusCard({
@@ -68,13 +47,17 @@ export function IntegrationStatusCard({
   return (
     <Surface tone={usingLiveCalendar ? "accent" : "default"} className="gap-4">
       <View className="gap-2">
+        <View className="flex-row flex-wrap gap-2">
+          <Pill label="Real-world context" />
+          <Pill
+            label={usingLiveCalendar ? "Calendar connected" : "Using saved schedule"}
+            tone={usingLiveCalendar ? "accent" : "neutral"}
+          />
+        </View>
         <AppText tone="secondary" variant="caption">
-          Real-world context
-        </AppText>
-        <AppText variant="section">
           {usingLiveCalendar
             ? "Today is grounded in live calendar context."
-            : "Today is staying on fallback context."}
+            : "Today is using the saved schedule baseline."}
         </AppText>
         <AppText tone="secondary">{calendarDetail}</AppText>
         {syncFailure && calendarConnectionState?.metadata.lastError ? (
@@ -86,32 +69,44 @@ export function IntegrationStatusCard({
 
       <View className="flex-row flex-wrap gap-3">
         {needsCalendarPermission ? (
-          <ActionButton
-            label="Connect calendar"
-            onPress={onRequestCalendarAccess}
+          <Button
+            tone="secondary"
+            size="compact"
+            onPress={() => void onRequestCalendarAccess()}
             busy={busyAction === "calendar"}
-          />
+          >
+            Connect calendar
+          </Button>
         ) : null}
         {calendarDenied ? (
-          <ActionButton
-            label="Retry calendar access"
-            onPress={onRequestCalendarAccess}
+          <Button
+            tone="secondary"
+            size="compact"
+            onPress={() => void onRequestCalendarAccess()}
             busy={busyAction === "calendar"}
-          />
+          >
+            Retry calendar access
+          </Button>
         ) : null}
         {canRetryCalendar ? (
-          <ActionButton
-            label="Refresh calendar"
-            onPress={onRefreshIntegration}
+          <Button
+            tone="secondary"
+            size="compact"
+            onPress={() => void onRefreshIntegration()}
             busy={busyAction === "refresh"}
-          />
+          >
+            Refresh calendar
+          </Button>
         ) : null}
         {notificationNeedsPermission ? (
-          <ActionButton
-            label="Allow reminders"
-            onPress={onRequestNotificationAccess}
+          <Button
+            tone="secondary"
+            size="compact"
+            onPress={() => void onRequestNotificationAccess()}
             busy={busyAction === "notifications"}
-          />
+          >
+            Allow reminders
+          </Button>
         ) : null}
       </View>
     </Surface>

@@ -1,6 +1,7 @@
 import { View } from "react-native";
 
 import { useResolvedTheme } from "../../design/theme/useResolvedTheme";
+import { Pill } from "../ui/Pill";
 import { Surface } from "../ui/Surface";
 import { AppText } from "../ui/Text";
 
@@ -36,9 +37,9 @@ export function ProgressPanel({ completed, scheduled, recovery }: ProgressPanelP
   return (
     <Surface className="gap-5">
       <View className="gap-2">
-        <AppText tone="secondary" variant="caption">
-          Progress
-        </AppText>
+        <View className="flex-row flex-wrap gap-2">
+          <Pill label="Progress" />
+        </View>
         <AppText variant="section">Enough movement to keep the day intact</AppText>
       </View>
 

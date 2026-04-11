@@ -1,6 +1,7 @@
 import { View } from "react-native";
 
 import { TodayRecoveryTask } from "../../state/viewModels/today";
+import { Pill } from "../ui/Pill";
 import { Surface } from "../ui/Surface";
 import { AppText } from "../ui/Text";
 
@@ -24,11 +25,12 @@ export function UnscheduledTasksPanel({ tasks }: UnscheduledTasksPanelProps) {
 
       <View className="gap-4">
         {tasks.map((task) => (
-          <View key={task.taskId} className="gap-1">
+          <View key={task.taskId} className="gap-2">
             <AppText variant="section">{task.title}</AppText>
-            <AppText tone="tertiary" variant="caption">
-              {task.status.replaceAll("_", " ")} | {task.estimatedMinutes} min
-            </AppText>
+            <View className="flex-row flex-wrap gap-2">
+              <Pill label={task.status.replaceAll("_", " ")} />
+              <Pill label={`${task.estimatedMinutes} min`} />
+            </View>
             <AppText tone="secondary">{task.reason}</AppText>
           </View>
         ))}

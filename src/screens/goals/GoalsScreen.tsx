@@ -296,7 +296,11 @@ export function GoalsScreen() {
           <View className="flex-row items-end justify-between gap-4 pt-2">
             <View className="flex-1 gap-2">
               <Pill label="Goals" />
-              <AppText variant="hero">Editable goals with calm downstream control.</AppText>
+              <AppText variant="hero">Goals with structure you can actually work with.</AppText>
+              <AppText tone="secondary">
+                Review progress, protect edited work, and make changes without turning the screen
+                into a planning console.
+              </AppText>
             </View>
             <Button tone="secondary" onPress={openCreateComposer}>
               New goal
@@ -320,6 +324,10 @@ export function GoalsScreen() {
               <Surface>
                 <View className="gap-4">
                   <AppText variant="section">Active</AppText>
+                  <AppText tone="secondary">
+                    Choose a goal to inspect its milestones, generated work, and current planning
+                    state.
+                  </AppText>
                   {activeGoals.map((goal) => {
                     const selected = selectedGoal?.id === goal.id;
                     const reviewDraft = getGoalReviewDraft(goal);
@@ -334,20 +342,25 @@ export function GoalsScreen() {
                           borderColor: selected
                             ? theme.colors.text.primary
                             : theme.colors.border.subtle,
-                          backgroundColor: theme.colors.background.elevated,
+                          backgroundColor: selected
+                            ? theme.colors.background.accentWash
+                            : theme.colors.background.elevated,
                           opacity: pressed ? 0.86 : 1,
                         })}
                       >
-                        <AppText variant="section">{goal.title}</AppText>
+                        <View className="gap-3">
+                          <View className="flex-row flex-wrap gap-2">
+                            {selected ? <Pill label="Selected" tone="accent" /> : null}
+                            <Pill label={goal.domainKey.replace("_", " ")} />
+                            <Pill label={goal.horizon} />
+                            {goal.targetDate ? <Pill label={goal.targetDate} /> : null}
+                            {reviewDraft ? <Pill label="Review pending" tone="accent" /> : null}
+                          </View>
+                          <AppText variant="section">{goal.title}</AppText>
+                        </View>
                         <AppText tone="secondary" style={{ marginTop: 6 }}>
                           {goal.summary ?? "No summary yet."}
                         </AppText>
-                        <View className="mt-3 flex-row flex-wrap gap-2">
-                          <Pill label={goal.domainKey.replace("_", " ")} />
-                          <Pill label={goal.horizon} tone="accent" />
-                          {goal.targetDate ? <Pill label={goal.targetDate} /> : null}
-                          {reviewDraft ? <Pill label="Review pending" tone="accent" /> : null}
-                        </View>
                       </Pressable>
                     );
                   })}
@@ -374,7 +387,7 @@ export function GoalsScreen() {
                       <Pill label={`${selectedMilestones.length} milestones`} tone="accent" />
                       <Pill label={`${visibleTasks.length} tasks`} />
                       {protectedTasks.length > 0 ? (
-                        <Pill label={`${protectedTasks.length} protected`} />
+                        <Pill label={`${protectedTasks.length} preserved`} />
                       ) : null}
                       {selectedReviewDraft ? (
                         <Pill label="Recommended review pending" tone="accent" />
@@ -407,8 +420,8 @@ export function GoalsScreen() {
                     ) : null}
 
                     <View className="gap-3">
-                      <AppText variant="caption" tone="secondary">
-                        Current goal state
+                      <AppText variant="section">
+                        Goal snapshot
                       </AppText>
                       <AppText tone="secondary">
                         {selectedGoal.successMetric
@@ -426,7 +439,7 @@ export function GoalsScreen() {
                     </View>
 
                     <View className="gap-3">
-                      <AppText variant="caption" tone="secondary">
+                      <AppText variant="section">
                         Milestones
                       </AppText>
                       {selectedMilestones.length === 0 ? (
@@ -435,31 +448,27 @@ export function GoalsScreen() {
                         </AppText>
                       ) : null}
                       {selectedMilestones.map((milestone) => (
-                        <View
+                        <Surface
                           key={milestone.id}
-                          className="rounded-[22px] px-4 py-4"
-                          style={{
-                            borderWidth: 1,
-                            borderColor: theme.colors.border.subtle,
-                            backgroundColor: theme.colors.background.elevated,
-                          }}
+                          className="gap-3"
+                          tone="default"
                         >
                           <AppText variant="section">{milestone.title}</AppText>
-                          <AppText tone="secondary" style={{ marginTop: 6 }}>
+                          <AppText tone="secondary">
                             {milestone.summary ?? "Generated from the current goal structure."}
                           </AppText>
-                          <View className="mt-3 flex-row flex-wrap gap-2">
+                          <View className="flex-row flex-wrap gap-2">
                             {milestone.targetDate ? <Pill label={milestone.targetDate} /> : null}
                             {hasUserAdjustedMetadata(milestone) ? (
-                              <Pill label="Protected" tone="accent" />
+                              <Pill label="Preserved" tone="accent" />
                             ) : null}
                           </View>
-                        </View>
+                        </Surface>
                       ))}
                     </View>
 
                     <View className="gap-3">
-                      <AppText variant="caption" tone="secondary">
+                      <AppText variant="section">
                         Generated tasks
                       </AppText>
                       {visibleTasks.length === 0 ? (
@@ -468,28 +477,24 @@ export function GoalsScreen() {
                         </AppText>
                       ) : null}
                       {visibleTasks.slice(0, 6).map((task) => (
-                        <View
+                        <Surface
                           key={task.id}
-                          className="rounded-[22px] px-4 py-4"
-                          style={{
-                            borderWidth: 1,
-                            borderColor: theme.colors.border.subtle,
-                            backgroundColor: theme.colors.background.elevated,
-                          }}
+                          className="gap-3"
+                          tone="default"
                         >
                           <AppText>{task.title}</AppText>
-                          <AppText tone="tertiary" variant="caption" style={{ marginTop: 6 }}>
-                            {task.estimatedMinutes} min
-                            {task.targetDate ? ` | ${task.targetDate}` : ""}
-                          </AppText>
+                          <View className="flex-row flex-wrap gap-2">
+                            <Pill label={`${task.estimatedMinutes} min`} />
+                            {task.targetDate ? <Pill label={task.targetDate} /> : null}
+                          </View>
                           {hasUserAdjustedMetadata(task) ||
                           task.status === TaskStatus.Completed ||
                           task.status === TaskStatus.InProgress ? (
-                            <View className="mt-3 flex-row gap-2">
-                              <Pill label="Protected" tone="accent" />
+                            <View className="flex-row gap-2">
+                              <Pill label="Preserved" tone="accent" />
                             </View>
                           ) : null}
-                        </View>
+                        </Surface>
                       ))}
                     </View>
 
@@ -536,21 +541,22 @@ export function GoalsScreen() {
                 <Surface>
                   <View className="gap-3">
                     <AppText variant="section">Quiet storage</AppText>
+                    <AppText tone="secondary">
+                      Paused and archived goals stay out of the way, but remain available when you
+                      need them again.
+                    </AppText>
                     {[...pausedGoals, ...archivedGoals].map((goal) => (
-                      <View
+                      <Surface
                         key={goal.id}
-                        className="rounded-[22px] px-4 py-4"
-                        style={{
-                          borderWidth: 1,
-                          borderColor: theme.colors.border.subtle,
-                          backgroundColor: theme.colors.background.elevated,
-                        }}
+                        className="gap-2"
+                        tone="default"
                       >
                         <AppText>{goal.title}</AppText>
-                        <AppText tone="tertiary" variant="caption" style={{ marginTop: 6 }}>
-                          {goal.status}
-                        </AppText>
-                      </View>
+                        <View className="flex-row flex-wrap gap-2">
+                          <Pill label={goal.status} />
+                          {goal.targetDate ? <Pill label={goal.targetDate} /> : null}
+                        </View>
+                      </Surface>
                     ))}
                   </View>
                 </Surface>

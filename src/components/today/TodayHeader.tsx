@@ -15,12 +15,12 @@ export function TodayHeader({ dateLabel, liveContext }: TodayHeaderProps) {
         <View className="flex-row items-center gap-2">
           <Pill label="Today" />
           <Pill
-            label={liveContext ? "Live context" : "Fallback"}
+            label={liveContext ? "Live context" : "Schedule baseline"}
             tone={liveContext ? "accent" : "neutral"}
           />
         </View>
         <AppText tone="tertiary" variant="caption">
-          Quiet structure
+          Calm structure
         </AppText>
       </View>
 
