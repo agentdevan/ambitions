@@ -1,24 +1,37 @@
 import { PropsWithChildren } from "react";
 import { View, ViewProps } from "react-native";
 
+import { useResolvedTheme } from "../../design/theme/useResolvedTheme";
+
 interface SurfaceProps extends PropsWithChildren, ViewProps {
   tone?: "default" | "accent" | "sunken";
 }
 
-const toneMap = {
-  default: "bg-[#F7F4EE] border-[#E6E0D6]",
-  accent: "bg-[#E5EBE3] border-[#D9E0D6]",
-  sunken: "bg-[#EFEAE2] border-[#E2DBD0]",
-};
-
 export function Surface({ children, className = "", tone = "default", style, ...props }: SurfaceProps) {
+  const theme = useResolvedTheme();
+  const toneMap = {
+    default: {
+      backgroundColor: theme.colors.background.elevated,
+      borderColor: theme.colors.border.subtle,
+    },
+    accent: {
+      backgroundColor: theme.colors.background.accentWash,
+      borderColor: theme.colors.border.subtle,
+    },
+    sunken: {
+      backgroundColor: theme.colors.background.sunken,
+      borderColor: theme.colors.border.subtle,
+    },
+  };
+
   return (
     <View
       {...props}
-      className={`rounded-[30px] border px-5 py-5 ${toneMap[tone]} ${className}`.trim()}
+      className={`rounded-[30px] border px-5 py-5 ${className}`.trim()}
       style={[
         {
-          shadowColor: "#1A1B1E",
+          ...toneMap[tone],
+          shadowColor: theme.colors.text.primary,
           shadowOpacity: 0.045,
           shadowRadius: 22,
           shadowOffset: { width: 0, height: 12 },

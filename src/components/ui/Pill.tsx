@@ -1,5 +1,6 @@
 import { View } from "react-native";
 
+import { useResolvedTheme } from "../../design/theme/useResolvedTheme";
 import { AppText } from "./Text";
 
 interface PillProps {
@@ -7,14 +8,18 @@ interface PillProps {
   tone?: "neutral" | "accent";
 }
 
-const toneMap = {
-  neutral: "bg-[#ECE7DE]",
-  accent: "bg-[#DDE5DB]",
-};
-
 export function Pill({ label, tone = "neutral" }: PillProps) {
+  const theme = useResolvedTheme();
+  const toneMap = {
+    neutral: theme.colors.background.sunken,
+    accent: theme.colors.background.accentWash,
+  };
+
   return (
-    <View className={`self-start rounded-full px-3 py-1 ${toneMap[tone]}`}>
+    <View
+      className="self-start rounded-full px-3 py-1"
+      style={{ backgroundColor: toneMap[tone] }}
+    >
       <AppText tone="tertiary" variant="micro" style={{ textTransform: "uppercase" }}>
         {label}
       </AppText>

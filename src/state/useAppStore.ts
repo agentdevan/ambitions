@@ -9,15 +9,19 @@ import {
   Domain,
   Goal,
   GoalMilestone,
+  GoalStatus,
   NotificationPreference,
   ReplanSuggestion,
   ScheduleConstraint,
-  TaskActionType,
   Task,
+  TaskActionType,
   TimeBlock,
   UserPreferences,
 } from "../domain/models";
 import { selectConstraintsForScheduling, shouldUseLiveCalendar } from "../services/calendar/constraintSelection";
+import { createGoalAndFirstPlan, createGoalArtifacts } from "../product/planOrchestrator";
+import { getProductPreferences, mergeProductPreferences } from "../product/preferences";
+import { ProductPreferences, GoalDraftInference } from "../product/types";
 import { buildTodayViewModel, TodayViewModel } from "./viewModels/today";
 
 type LoadStatus = "idle" | "loading" | "ready" | "error";
@@ -33,7 +37,11 @@ interface GoalsSlice {
   domains: Domain[];
   goals: Goal[];
   milestones: GoalMilestone[];
+  allTasks: Task[];
   refreshGoals: () => Promise<void>;
+  createGoal: (inference: GoalDraftInference) => Promise<void>;
+  updateGoal: (goalId: string, patch: Partial<Goal>) => Promise<void>;
+  setGoalStatus: (goalId: string, status: GoalStatus) => Promise<void>;
 }
 
 interface PlanningSlice {
@@ -49,8 +57,14 @@ interface PlanningSlice {
 
 interface PreferencesSlice {
   userPreferences: UserPreferences | null;
+  productPreferences: ProductPreferences | null;
   notificationPreferences: NotificationPreference[];
   refreshPreferences: () => Promise<void>;
+  saveProductPreferences: (productPreferences: ProductPreferences) => Promise<void>;
+  updateNotificationPreference: (
+    reminderType: NotificationPreference["reminderType"],
+    enabled: boolean,
+  ) => Promise<void>;
 }
 
 interface AdaptationSlice {
@@ -68,12 +82,21 @@ interface IntegrationSlice {
   requestNotificationAccess: () => Promise<void>;
 }
 
+interface ProductSlice {
+  onboardingBusy: boolean;
+  createFirstPlan: (params: {
+    inference: GoalDraftInference;
+    productPreferences: ProductPreferences;
+  }) => Promise<void>;
+}
+
 type AppState = AppShellSlice &
   GoalsSlice &
   PlanningSlice &
   PreferencesSlice &
   AdaptationSlice &
-  IntegrationSlice;
+  IntegrationSlice &
+  ProductSlice;
 
 const initialPlanDate = "2026-04-11";
 
@@ -106,6 +129,16 @@ async function syncNotificationsForSnapshot(snapshot: Awaited<ReturnType<typeof 
   });
 }
 
+function shouldBuildSchedule(preferences: UserPreferences | null, goals: Goal[], tasks: Task[]) {
+  const productPreferences = getProductPreferences(preferences);
+
+  return (
+    productPreferences.onboardingCompleted &&
+    goals.some((goal) => goal.status === GoalStatus.Active) &&
+    tasks.length > 0
+  );
+}
+
 async function loadFoundationSnapshot(date: string) {
   const [
     domains,
@@ -116,6 +149,7 @@ async function loadFoundationSnapshot(date: string) {
     adaptationProfile,
     dailyPlan,
     tasks,
+    allTasks,
     calendarConnectionState,
     scheduleConstraints,
     replanSuggestions,
@@ -128,6 +162,7 @@ async function loadFoundationSnapshot(date: string) {
     appServices.repositories.adaptation.getLatestProfile(),
     appServices.repositories.planning.getDailyPlan(date),
     appServices.repositories.tasks.listTasksForDate(date),
+    appServices.repositories.tasks.listTasks(),
     appServices.repositories.integration.getCalendarConnectionState(),
     appServices.repositories.integration.listScheduleConstraintsForDate(date),
     appServices.repositories.adaptation.listReplanSuggestions(date),
@@ -136,25 +171,25 @@ async function loadFoundationSnapshot(date: string) {
     scheduleConstraints,
     calendarConnectionState,
   );
-
-  const blocks = dailyPlan
+  const persistedBlocks = dailyPlan
     ? await appServices.repositories.planning.listTimeBlocksForPlan(dailyPlan.id)
     : [];
-  const scheduleResult = preferences
+  const scheduleResult = shouldBuildSchedule(preferences, goals, tasks)
     ? await appServices.engines.scheduling.buildSchedule({
         date,
         goals,
         milestones,
         tasks,
         constraints: effectiveConstraints,
-        preferences,
+        preferences: preferences as UserPreferences,
         adaptationProfile,
         existingPlan: dailyPlan,
       })
     : null;
   const schedule = scheduleResult?.payload ?? null;
+  const blocks = schedule?.timeBlocks ?? persistedBlocks;
   const derivedReplanSuggestions =
-    preferences && dailyPlan
+    preferences && dailyPlan && tasks.length > 0
       ? (
           await appServices.engines.replanning.suggestAdjustments({
             date,
@@ -165,7 +200,7 @@ async function loadFoundationSnapshot(date: string) {
             preferences,
             adaptationProfile,
             dailyPlan,
-            timeBlocks: schedule?.timeBlocks ?? blocks,
+            timeBlocks: blocks,
           })
         ).payload.suggestions
       : [];
@@ -185,27 +220,61 @@ async function loadFoundationSnapshot(date: string) {
     goals,
     milestones,
     preferences,
+    productPreferences: getProductPreferences(preferences),
     notificationPreferences,
     adaptationProfile,
     dailyPlan,
     blocks,
     tasks,
+    allTasks,
     calendarConnectionState,
     scheduleConstraints: effectiveConstraints,
     replanSuggestions: mergedReplanSuggestions,
     schedule,
-    today: buildTodayViewModel({
-      date,
-      dailyPlan: schedule?.dailyPlan ?? dailyPlan,
-      blocks,
-      schedule,
-      profile: adaptationProfile,
-      suggestions: mergedReplanSuggestions,
-      constraints: effectiveConstraints,
-      tasks,
-      calendarConnectionState,
-    }),
+    today:
+      getProductPreferences(preferences).onboardingCompleted && (schedule?.dailyPlan ?? dailyPlan)
+        ? buildTodayViewModel({
+            date,
+            dailyPlan: schedule?.dailyPlan ?? dailyPlan,
+            blocks,
+            schedule,
+            profile: adaptationProfile,
+            suggestions: mergedReplanSuggestions,
+            constraints: effectiveConstraints,
+            tasks,
+            calendarConnectionState,
+          })
+        : null,
   };
+}
+
+async function refreshAllState(date: string) {
+  await syncCalendarIntegration(date);
+  const snapshot = await loadFoundationSnapshot(date);
+  await syncNotificationsForSnapshot(snapshot);
+  const notificationPermissionStatus =
+    await appServices.services.notifications.getPermissionStatus();
+
+  return {
+    planDate: date,
+    domains: snapshot.domains,
+    goals: snapshot.goals,
+    milestones: snapshot.milestones,
+    allTasks: snapshot.allTasks,
+    userPreferences: snapshot.preferences,
+    productPreferences: snapshot.productPreferences,
+    notificationPreferences: snapshot.notificationPreferences,
+    adaptationProfile: snapshot.adaptationProfile,
+    replanSuggestions: snapshot.replanSuggestions,
+    dailyPlan: snapshot.schedule?.dailyPlan ?? snapshot.dailyPlan,
+    schedule: snapshot.schedule,
+    today: snapshot.today,
+    timeBlocksForSelectedDate: snapshot.blocks,
+    tasksForSelectedDate: snapshot.tasks,
+    calendarConnectionState: snapshot.calendarConnectionState,
+    scheduleConstraints: snapshot.scheduleConstraints,
+    notificationPermissionStatus,
+  } satisfies Partial<AppState>;
 }
 
 export const useAppStore = create<AppState>((set, get) => ({
@@ -215,6 +284,7 @@ export const useAppStore = create<AppState>((set, get) => ({
   domains: [],
   goals: [],
   milestones: [],
+  allTasks: [],
   planDate: initialPlanDate,
   dailyPlan: null,
   schedule: null,
@@ -222,12 +292,14 @@ export const useAppStore = create<AppState>((set, get) => ({
   tasksForSelectedDate: [],
   timeBlocksForSelectedDate: [],
   userPreferences: null,
+  productPreferences: null,
   notificationPreferences: [],
   adaptationProfile: null,
   replanSuggestions: [],
   calendarConnectionState: null,
   scheduleConstraints: [],
   notificationPermissionStatus: "undetermined",
+  onboardingBusy: false,
 
   bootstrap: async () => {
     if (get().bootStatus === "loading" || get().bootstrapped) {
@@ -239,30 +311,12 @@ export const useAppStore = create<AppState>((set, get) => ({
     try {
       await initializeAppServices();
       await appServices.services.notifications.configure();
-      await syncCalendarIntegration(get().planDate);
-      const snapshot = await loadFoundationSnapshot(get().planDate);
-      const notificationPermissionStatus =
-        await appServices.services.notifications.getPermissionStatus();
-      await syncNotificationsForSnapshot(snapshot);
+      const snapshot = await refreshAllState(get().planDate);
 
       set({
         bootstrapped: true,
         bootStatus: "ready",
-        domains: snapshot.domains,
-        goals: snapshot.goals,
-        milestones: snapshot.milestones,
-        userPreferences: snapshot.preferences,
-        notificationPreferences: snapshot.notificationPreferences,
-        adaptationProfile: snapshot.adaptationProfile,
-        replanSuggestions: snapshot.replanSuggestions,
-        dailyPlan: snapshot.schedule?.dailyPlan ?? snapshot.dailyPlan,
-        schedule: snapshot.schedule,
-        today: snapshot.today,
-        timeBlocksForSelectedDate: snapshot.blocks,
-        tasksForSelectedDate: snapshot.tasks,
-        calendarConnectionState: snapshot.calendarConnectionState,
-        scheduleConstraints: snapshot.scheduleConstraints,
-        notificationPermissionStatus,
+        ...snapshot,
       });
     } catch (error) {
       set({
@@ -273,32 +327,66 @@ export const useAppStore = create<AppState>((set, get) => ({
   },
 
   refreshGoals: async () => {
-    const [domains, goals, milestones] = await Promise.all([
+    const [domains, goals, milestones, allTasks] = await Promise.all([
       appServices.repositories.preferences.listDomains(),
       appServices.repositories.goals.listGoals(),
       appServices.repositories.goals.listMilestones(),
+      appServices.repositories.tasks.listTasks(),
     ]);
 
-    set({ domains, goals, milestones });
+    set({ domains, goals, milestones, allTasks });
+  },
+
+  createGoal: async (inference) => {
+    const state = get();
+    if (!state.userPreferences || !state.productPreferences) {
+      throw new Error("Preferences are not available yet.");
+    }
+
+    const artifacts = await createGoalArtifacts({
+      inference,
+      productPreferences: state.productPreferences,
+      currentPreferences: state.userPreferences,
+      today: state.planDate,
+      adaptationProfile: state.adaptationProfile,
+    });
+    const existingGoals = await appServices.repositories.goals.listGoals();
+
+    await appServices.repositories.preferences.saveUserPreferences(artifacts.mergedPreferences);
+    await appServices.repositories.goals.saveGoals([
+      ...existingGoals.map((goal, index) => ({ ...goal, sortOrder: index + 1 })),
+      { ...artifacts.goal, sortOrder: existingGoals.length + 1 },
+    ]);
+    await appServices.repositories.goals.saveMilestones(artifacts.milestones);
+    await appServices.repositories.tasks.saveTasks(artifacts.tasks);
+
+    set(await refreshAllState(state.planDate));
+  },
+
+  updateGoal: async (goalId, patch) => {
+    const goals = await appServices.repositories.goals.listGoals();
+    const nextGoals = goals.map((goal) =>
+      goal.id === goalId
+        ? {
+            ...goal,
+            ...patch,
+            updatedAt: new Date().toISOString(),
+            version: goal.version + 1,
+          }
+        : goal,
+    );
+
+    await appServices.repositories.goals.saveGoals(nextGoals);
+    set(await refreshAllState(get().planDate));
+  },
+
+  setGoalStatus: async (goalId, status) => {
+    await get().updateGoal(goalId, { status });
   },
 
   refreshPlanning: async (date) => {
     const planDate = date ?? get().planDate;
-    await syncCalendarIntegration(planDate);
-    const snapshot = await loadFoundationSnapshot(planDate);
-    await syncNotificationsForSnapshot(snapshot);
-
-    set({
-      planDate,
-      dailyPlan: snapshot.schedule?.dailyPlan ?? snapshot.dailyPlan,
-      schedule: snapshot.schedule,
-      today: snapshot.today,
-      timeBlocksForSelectedDate: snapshot.blocks,
-      tasksForSelectedDate: snapshot.tasks,
-      replanSuggestions: snapshot.replanSuggestions,
-      scheduleConstraints: snapshot.scheduleConstraints,
-      calendarConnectionState: snapshot.calendarConnectionState,
-    });
+    set(await refreshAllState(planDate));
   },
 
   applyTaskAction: async (taskId, action) => {
@@ -351,19 +439,7 @@ export const useAppStore = create<AppState>((set, get) => ({
       await appServices.repositories.adaptation.saveProfiles([adaptationResult.payload.profile]);
     }
 
-    const snapshot = await loadFoundationSnapshot(state.planDate);
-    await syncNotificationsForSnapshot(snapshot);
-
-    set({
-      dailyPlan: snapshot.schedule?.dailyPlan ?? snapshot.dailyPlan,
-      schedule: snapshot.schedule,
-      today: snapshot.today,
-      timeBlocksForSelectedDate: snapshot.blocks,
-      tasksForSelectedDate: snapshot.tasks,
-      replanSuggestions: snapshot.replanSuggestions,
-      scheduleConstraints: snapshot.scheduleConstraints,
-      calendarConnectionState: snapshot.calendarConnectionState,
-    });
+    set(await refreshAllState(state.planDate));
   },
 
   refreshPreferences: async () => {
@@ -372,7 +448,39 @@ export const useAppStore = create<AppState>((set, get) => ({
       appServices.repositories.preferences.listNotificationPreferences(),
     ]);
 
-    set({ userPreferences, notificationPreferences });
+    set({
+      userPreferences,
+      productPreferences: getProductPreferences(userPreferences),
+      notificationPreferences,
+    });
+  },
+
+  saveProductPreferences: async (productPreferences) => {
+    const currentPreferences = get().userPreferences;
+    if (!currentPreferences) {
+      throw new Error("User preferences are unavailable.");
+    }
+
+    const nextPreferences = mergeProductPreferences(currentPreferences, productPreferences);
+    await appServices.repositories.preferences.saveUserPreferences(nextPreferences);
+    set(await refreshAllState(get().planDate));
+  },
+
+  updateNotificationPreference: async (reminderType, enabled) => {
+    const preferences = await appServices.repositories.preferences.listNotificationPreferences();
+    const nextPreferences = preferences.map((preference) =>
+      preference.reminderType === reminderType
+        ? {
+            ...preference,
+            enabled,
+            updatedAt: new Date().toISOString(),
+            version: preference.version + 1,
+          }
+        : preference,
+    );
+
+    await appServices.repositories.preferences.saveNotificationPreferences(nextPreferences);
+    set(await refreshAllState(get().planDate));
   },
 
   refreshAdaptation: async (date) => {
@@ -387,29 +495,12 @@ export const useAppStore = create<AppState>((set, get) => ({
 
   refreshIntegration: async (date) => {
     const planDate = date ?? get().planDate;
-    await syncCalendarIntegration(planDate);
-    const snapshot = await loadFoundationSnapshot(planDate);
-    const notificationPermissionStatus =
-      await appServices.services.notifications.getPermissionStatus();
-    await syncNotificationsForSnapshot(snapshot);
-
-    set({
-      planDate,
-      dailyPlan: snapshot.schedule?.dailyPlan ?? snapshot.dailyPlan,
-      schedule: snapshot.schedule,
-      today: snapshot.today,
-      timeBlocksForSelectedDate: snapshot.blocks,
-      tasksForSelectedDate: snapshot.tasks,
-      replanSuggestions: snapshot.replanSuggestions,
-      calendarConnectionState: snapshot.calendarConnectionState,
-      scheduleConstraints: snapshot.scheduleConstraints,
-      notificationPermissionStatus,
-    });
+    set(await refreshAllState(planDate));
   },
 
   requestCalendarAccess: async () => {
     await appServices.services.calendar.requestAccess();
-    await get().refreshPlanning(get().planDate);
+    set(await refreshAllState(get().planDate));
   },
 
   requestNotificationAccess: async () => {
@@ -419,5 +510,28 @@ export const useAppStore = create<AppState>((set, get) => ({
     await syncNotificationsForSnapshot(snapshot);
 
     set({ notificationPermissionStatus });
+  },
+
+  createFirstPlan: async ({ inference, productPreferences }) => {
+    const state = get();
+
+    if (!state.userPreferences) {
+      throw new Error("User preferences are unavailable.");
+    }
+
+    set({ onboardingBusy: true });
+
+    try {
+      await createGoalAndFirstPlan({
+        inference,
+        productPreferences,
+        currentPreferences: state.userPreferences,
+        today: state.planDate,
+        adaptationProfile: state.adaptationProfile,
+      });
+      set(await refreshAllState(state.planDate));
+    } finally {
+      set({ onboardingBusy: false });
+    }
   },
 }));

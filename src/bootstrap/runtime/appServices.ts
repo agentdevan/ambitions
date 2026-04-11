@@ -1,17 +1,11 @@
 import {
-  seedAdaptationProfile,
   seedCalendarConnectionState,
-  seedDailyPlan,
   seedDomains,
-  seedGoals,
-  seedMilestones,
   seedNotificationPreferences,
   seedPreferences,
-  seedReplanSuggestions,
   seedScheduleConstraints,
-  seedTasks,
-  seedTimeBlocks,
-} from "../../data/seed/phase3Seed";
+  seedAdaptationProfile,
+} from "../../data/seed/phase8Seed";
 import { initializeDatabase, sqliteClient } from "../../data/sqlite/client";
 import {
   adaptationEngine,
@@ -56,7 +50,7 @@ export const appServices = {
 };
 
 let initializationPromise: Promise<void> | null = null;
-const bootstrapSeedVersion = "phase7-live-calendar-notifications";
+const bootstrapSeedVersion = "phase8-product-foundation";
 
 async function resetSeedData() {
   await sqliteClient.withTransaction(async (client) => {
@@ -103,13 +97,7 @@ export async function initializeAppServices() {
       await appServices.repositories.preferences.saveNotificationPreferences(
         seedNotificationPreferences,
       );
-      await appServices.repositories.goals.saveGoals(seedGoals);
-      await appServices.repositories.goals.saveMilestones(seedMilestones);
-      await appServices.repositories.tasks.saveTasks(seedTasks);
       await appServices.repositories.adaptation.saveProfiles([seedAdaptationProfile]);
-      await appServices.repositories.planning.saveDailyPlans([seedDailyPlan]);
-      await appServices.repositories.planning.saveTimeBlocks(seedTimeBlocks);
-      await appServices.repositories.adaptation.saveReplanSuggestions(seedReplanSuggestions);
       await appServices.repositories.integration.saveCalendarConnectionState(
         seedCalendarConnectionState,
       );

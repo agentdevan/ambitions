@@ -1,5 +1,7 @@
 import { View } from "react-native";
+import { useNavigation } from "@react-navigation/native";
 
+import { Button } from "../../components/ui/Button";
 import { CapacityInsight } from "../../components/today/CapacityInsight";
 import { GuidancePanel } from "../../components/today/GuidancePanel";
 import { IntegrationStatusCard } from "../../components/today/IntegrationStatusCard";
@@ -15,8 +17,11 @@ import { useAppStore } from "../../state/useAppStore";
 import { formatLongDate } from "../../utils/date";
 
 export function TodayScreen() {
+  const navigation = useNavigation();
   const today = useAppStore((state) => state.today);
   const bootStatus = useAppStore((state) => state.bootStatus);
+  const goals = useAppStore((state) => state.goals);
+  const planDate = useAppStore((state) => state.planDate);
   const applyTaskAction = useAppStore((state) => state.applyTaskAction);
   const calendarConnectionState = useAppStore((state) => state.calendarConnectionState);
   const notificationPermissionStatus = useAppStore(
@@ -32,13 +37,40 @@ export function TodayScreen() {
         <View className="gap-4">
           <TodayHeader
             liveContext={false}
-            dateLabel={bootStatus === "error" ? "Unable to load plan" : formatLongDate("2026-04-11")}
+            dateLabel={
+              bootStatus === "error" ? "Unable to load plan" : formatLongDate(planDate)
+            }
           />
-          <AppText tone="secondary">
-            {bootStatus === "loading"
-              ? "Loading the local planning foundation..."
-              : "The local planning snapshot is not ready yet."}
-          </AppText>
+          <View className="gap-3 rounded-[30px] border border-[#DED7CB] bg-[#F8F6F1] px-5 py-5">
+            <AppText variant="section">
+              {bootStatus === "loading" ? "Loading the planning layer" : "No plan yet"}
+            </AppText>
+            <AppText tone="secondary">
+              {bootStatus === "loading"
+                ? "Loading the local planning foundation..."
+                : goals.length === 0
+                  ? "Create a goal first. Ambitions will generate a compact first day from it."
+                  : "There is not a saved day plan yet. The current goals exist, but today has not been generated."}
+            </AppText>
+            {bootStatus !== "loading" ? (
+              <View className="flex-row gap-3">
+                <Button
+                  tone="secondary"
+                  style={{ flex: 1 }}
+                  onPress={() => navigation.navigate("Goals" as never)}
+                >
+                  Open goals
+                </Button>
+                <Button
+                  tone="secondary"
+                  style={{ flex: 1 }}
+                  onPress={() => navigation.navigate("Plan" as never)}
+                >
+                  Open plan
+                </Button>
+              </View>
+            ) : null}
+          </View>
         </View>
       </Screen>
     );

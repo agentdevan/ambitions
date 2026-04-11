@@ -6,30 +6,34 @@ import { StatusBar } from "expo-status-bar";
 import * as SystemUI from "expo-system-ui";
 import { View } from "react-native";
 
-import { appTheme } from "../../design/theme";
+import { resolveThemePreset } from "../../product/theme";
 import { useAppStore } from "../../state/useAppStore";
 import { AppText } from "../../components/ui/Text";
-
-const navigationTheme = {
-  ...DefaultTheme,
-  colors: {
-    ...DefaultTheme.colors,
-    background: appTheme.colors.background.canvas,
-    card: appTheme.colors.background.canvas,
-    text: appTheme.colors.text.primary,
-    border: appTheme.colors.border.subtle,
-    primary: appTheme.colors.accent.sage,
-  },
-};
 
 export function AppProviders({ children }: PropsWithChildren) {
   const bootStatus = useAppStore((state) => state.bootStatus);
   const lastError = useAppStore((state) => state.lastError);
+  const themePreset = useAppStore((state) => state.productPreferences?.themePreset);
+  const theme = resolveThemePreset(themePreset);
+  const navigationTheme = {
+    ...DefaultTheme,
+    colors: {
+      ...DefaultTheme.colors,
+      background: theme.colors.background.canvas,
+      card: theme.colors.background.canvas,
+      text: theme.colors.text.primary,
+      border: theme.colors.border.subtle,
+      primary: theme.colors.accent.primary,
+    },
+  };
 
   useEffect(() => {
-    SystemUI.setBackgroundColorAsync(appTheme.colors.background.canvas).catch(() => null);
     useAppStore.getState().bootstrap().catch(() => null);
   }, []);
+
+  useEffect(() => {
+    SystemUI.setBackgroundColorAsync(theme.colors.background.canvas).catch(() => null);
+  }, [theme.colors.background.canvas]);
 
   return (
     <GestureHandlerRootView style={{ flex: 1 }}>
@@ -37,7 +41,15 @@ export function AppProviders({ children }: PropsWithChildren) {
         <NavigationContainer theme={navigationTheme}>
           <StatusBar style="dark" />
           {bootStatus === "error" ? (
-            <View style={{ flex: 1, justifyContent: "center", alignItems: "center", padding: 24 }}>
+            <View
+              style={{
+                flex: 1,
+                justifyContent: "center",
+                alignItems: "center",
+                padding: 24,
+                backgroundColor: theme.colors.background.canvas,
+              }}
+            >
               <AppText variant="section">Ambitions could not load the local data layer.</AppText>
               <AppText style={{ marginTop: 12, textAlign: "center" }} tone="secondary">
                 {lastError ?? "Unknown startup failure."}

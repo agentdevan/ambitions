@@ -1,11 +1,13 @@
 import { Ionicons } from "@expo/vector-icons";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 
-import { appTheme } from "../design/theme";
+import { useResolvedTheme } from "../design/theme/useResolvedTheme";
 import { GoalsScreen } from "../screens/goals/GoalsScreen";
 import { InsightsScreen } from "../screens/insights/InsightsScreen";
+import { OnboardingScreen } from "../screens/onboarding/OnboardingScreen";
 import { PlanScreen } from "../screens/plan/PlanScreen";
 import { TodayScreen } from "../screens/today/TodayScreen";
+import { useAppStore } from "../state/useAppStore";
 import { RootTabParamList } from "./types";
 
 const Tab = createBottomTabNavigator<RootTabParamList>();
@@ -18,15 +20,24 @@ const iconMap: Record<keyof RootTabParamList, keyof typeof Ionicons.glyphMap> = 
 };
 
 export function RootNavigator() {
+  const theme = useResolvedTheme();
+  const onboardingCompleted = useAppStore(
+    (state) => state.productPreferences?.onboardingCompleted ?? false,
+  );
+
+  if (!onboardingCompleted) {
+    return <OnboardingScreen />;
+  }
+
   return (
     <Tab.Navigator
       screenOptions={({ route }) => ({
         headerShown: false,
-        tabBarActiveTintColor: appTheme.colors.text.primary,
-        tabBarInactiveTintColor: appTheme.colors.text.tertiary,
+        tabBarActiveTintColor: theme.colors.text.primary,
+        tabBarInactiveTintColor: theme.colors.text.tertiary,
         tabBarStyle: {
-          backgroundColor: appTheme.colors.background.elevated,
-          borderTopColor: appTheme.colors.border.subtle,
+          backgroundColor: theme.colors.background.elevated,
+          borderTopColor: theme.colors.border.subtle,
           height: 86,
           paddingTop: 12,
           paddingBottom: 18,
@@ -40,7 +51,7 @@ export function RootNavigator() {
           <Ionicons color={color} name={iconMap[route.name]} size={size} />
         ),
         sceneStyle: {
-          backgroundColor: appTheme.colors.background.canvas,
+          backgroundColor: theme.colors.background.canvas,
         },
       })}
     >

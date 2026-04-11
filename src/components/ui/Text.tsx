@@ -1,6 +1,8 @@
 import { PropsWithChildren } from "react";
 import { Text as RNText, TextProps } from "react-native";
 
+import { useResolvedTheme } from "../../design/theme/useResolvedTheme";
+
 type Tone = "primary" | "secondary" | "tertiary" | "inverse";
 type Variant = "hero" | "title" | "section" | "body" | "caption" | "micro";
 
@@ -8,13 +10,6 @@ interface AppTextProps extends PropsWithChildren, TextProps {
   tone?: Tone;
   variant?: Variant;
 }
-
-const toneMap: Record<Tone, string> = {
-  primary: "#18181A",
-  secondary: "#4B4B53",
-  tertiary: "#7A7A84",
-  inverse: "#F8F8FA",
-};
 
 const variantMap: Record<
   Variant,
@@ -35,6 +30,14 @@ export function AppText({
   variant = "body",
   ...props
 }: AppTextProps) {
+  const theme = useResolvedTheme();
+  const toneMap: Record<Tone, string> = {
+    primary: theme.colors.text.primary,
+    secondary: theme.colors.text.secondary,
+    tertiary: theme.colors.text.tertiary,
+    inverse: theme.colors.text.inverse,
+  };
+
   return (
     <RNText
       {...props}
