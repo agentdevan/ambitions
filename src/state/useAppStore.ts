@@ -1,6 +1,7 @@
 import { create } from "zustand";
 
 import { initializeAppServices, appServices } from "../bootstrap/runtime/appServices";
+import { SchedulingOutput } from "../engines";
 import {
   AdaptationProfile,
   CalendarConnectionState,
@@ -36,6 +37,7 @@ interface GoalsSlice {
 interface PlanningSlice {
   planDate: string;
   dailyPlan: DailyPlan | null;
+  schedule: SchedulingOutput | null;
   today: TodayViewModel | null;
   tasksForSelectedDate: Task[];
   refreshPlanning: (date?: string) => Promise<void>;
@@ -98,6 +100,19 @@ async function loadFoundationSnapshot(date: string) {
   const blocks = dailyPlan
     ? await appServices.repositories.planning.listTimeBlocksForPlan(dailyPlan.id)
     : [];
+  const scheduleResult = preferences
+    ? await appServices.engines.scheduling.buildSchedule({
+        date,
+        goals,
+        milestones,
+        tasks,
+        constraints: scheduleConstraints,
+        preferences,
+        adaptationProfile,
+        existingPlan: dailyPlan,
+      })
+    : null;
+  const schedule = scheduleResult?.payload ?? null;
 
   return {
     domains,
@@ -111,10 +126,12 @@ async function loadFoundationSnapshot(date: string) {
     calendarConnectionState,
     scheduleConstraints,
     replanSuggestions,
+    schedule,
     today: buildTodayViewModel({
       date,
-      dailyPlan,
-      blocks,
+      dailyPlan: schedule?.dailyPlan ?? dailyPlan,
+      blocks: schedule?.timeBlocks ?? blocks,
+      schedule,
       profile: adaptationProfile,
       suggestions: replanSuggestions,
       constraints: scheduleConstraints,
@@ -132,6 +149,7 @@ export const useAppStore = create<AppState>((set, get) => ({
   milestones: [],
   planDate: initialPlanDate,
   dailyPlan: null,
+  schedule: null,
   today: null,
   tasksForSelectedDate: [],
   userPreferences: null,
@@ -163,7 +181,8 @@ export const useAppStore = create<AppState>((set, get) => ({
         notificationPreferences: snapshot.notificationPreferences,
         adaptationProfile: snapshot.adaptationProfile,
         replanSuggestions: snapshot.replanSuggestions,
-        dailyPlan: snapshot.dailyPlan,
+        dailyPlan: snapshot.schedule?.dailyPlan ?? snapshot.dailyPlan,
+        schedule: snapshot.schedule,
         today: snapshot.today,
         tasksForSelectedDate: snapshot.tasks,
         calendarConnectionState: snapshot.calendarConnectionState,
@@ -193,7 +212,8 @@ export const useAppStore = create<AppState>((set, get) => ({
 
     set({
       planDate,
-      dailyPlan: snapshot.dailyPlan,
+      dailyPlan: snapshot.schedule?.dailyPlan ?? snapshot.dailyPlan,
+      schedule: snapshot.schedule,
       today: snapshot.today,
       tasksForSelectedDate: snapshot.tasks,
       replanSuggestions: snapshot.replanSuggestions,

@@ -268,7 +268,19 @@ export const seedPreferences: UserPreferences = {
   monthlyPlanningDay: 1,
   allowWeekendPlanning: true,
   preferredDeepWorkWindows: ["08:30-10:30", "14:00-15:30"],
-  metadata: { seedPhase: "phase3" },
+  metadata: {
+    seedPhase: "phase4",
+    sleepWindowStart: "23:00",
+    sleepWindowEnd: "07:00",
+    workdayStart: "09:00",
+    workdayEnd: "17:00",
+    workdays: "1,2,3,4,5",
+    morningPrepMinutes: 35,
+    commuteMinutes: 30,
+    lunchWindowStart: "12:00",
+    lunchWindowEnd: "12:45",
+    recurringRoutineWindows: "Dinner reset,18:30,19:00,soft",
+  },
 };
 
 export const seedNotificationPreferences: NotificationPreference[] = [
@@ -331,7 +343,7 @@ export const seedAdaptationProfile: AdaptationProfile = {
     strictness: StrategyStrictness.Protective,
     replanningStyle: ReplanningStyle.Guided,
   },
-  metadata: { seedPhase: "phase3" },
+  metadata: { seedPhase: "phase4" },
 };
 
 export const seedDailyPlan: DailyPlan = {
@@ -344,7 +356,7 @@ export const seedDailyPlan: DailyPlan = {
   totalPlannedMinutes: scheduledTasks.reduce((sum, task) => sum + task.estimatedMinutes, 0) + 20,
   totalCommittedMinutes: scheduledTasks.reduce((sum, task) => sum + task.estimatedMinutes, 0),
   adaptationProfileId: "adaptation-2026-04-11",
-  metadata: { seedPhase: "phase3" },
+  metadata: { seedPhase: "phase4" },
 };
 
 export const seedTimeBlocks: TimeBlock[] = scheduledTasks.map((task, index) => ({
@@ -367,7 +379,7 @@ export const seedTimeBlocks: TimeBlock[] = scheduledTasks.map((task, index) => (
   note: task.summary,
   energyLabel: task.difficulty,
   sourceConstraintId: null,
-  metadata: { seedPhase: "phase3" },
+  metadata: { seedPhase: "phase4" },
 }));
 
 seedTimeBlocks.push({
@@ -385,7 +397,7 @@ seedTimeBlocks.push({
   note: "Protective mode keeps a small buffer instead of blindly rolling more work into the afternoon.",
   energyLabel: TaskDifficulty.Light,
   sourceConstraintId: null,
-  metadata: { seedPhase: "phase3" },
+  metadata: { seedPhase: "phase4" },
 });
 
 export const seedReplanSuggestions: ReplanSuggestion[] = [
@@ -438,6 +450,19 @@ export const seedScheduleConstraints: ScheduleConstraint[] = [
     externalEventId: "calendar-event-1",
     location: null,
     notes: "Fixed meeting load keeps the rest of the day intentionally light.",
-    metadata: { classification: "meeting", seedPhase: "phase3" },
+  metadata: { classification: "meeting", seedPhase: "phase4" },
+  },
+  {
+    ...recordBase("constraint-2"),
+    source: ConstraintSource.Manual,
+    type: ScheduleConstraintType.Soft,
+    title: "Family call window",
+    startsAt: `${seedDate}T19:30:00.000Z`,
+    endsAt: `${seedDate}T20:15:00.000Z`,
+    isAllDay: false,
+    externalEventId: null,
+    location: null,
+    notes: "Can flex a bit, but should not be silently consumed by work.",
+    metadata: { classification: "relationship", flexible: true, seedPhase: "phase4" },
   },
 ];

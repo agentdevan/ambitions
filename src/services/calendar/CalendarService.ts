@@ -15,10 +15,22 @@ export interface AvailableTimeWindow {
   durationMinutes: number;
 }
 
+export interface ExternalScheduleBlock {
+  externalEventId: string;
+  title: string;
+  startsAt: string;
+  endsAt: string;
+  isAllDay: boolean;
+  location: string | null;
+  notes: string | null;
+  classificationHint: "meeting" | "work" | "personal" | "relationship" | "unknown";
+}
+
 export interface CalendarServiceContract {
   requestAccess(): Promise<Calendar.PermissionStatus>;
   listWritableCalendars(): Promise<Calendar.Calendar[]>;
   readEventWindows(date: string): Promise<CalendarEventWindow[]>;
+  readScheduleBlocks(date: string): Promise<ExternalScheduleBlock[]>;
   deriveAvailableWindows(date: string): Promise<AvailableTimeWindow[]>;
 }
 
@@ -34,6 +46,10 @@ export const CalendarService: CalendarServiceContract = {
   },
 
   async readEventWindows() {
+    return [];
+  },
+
+  async readScheduleBlocks() {
     return [];
   },
 

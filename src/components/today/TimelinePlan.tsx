@@ -28,6 +28,9 @@ export function TimelinePlan({ blocks }: TimelinePlanProps) {
       </View>
 
       <View className="gap-1">
+        {blocks.length === 0 ? (
+          <AppText tone="secondary">No tasks were scheduled into believable windows for this day.</AppText>
+        ) : null}
         {blocks.map((block, index) => (
           <View
             key={block.id}

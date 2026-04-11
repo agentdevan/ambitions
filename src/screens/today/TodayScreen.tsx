@@ -6,6 +6,7 @@ import { ProgressPanel } from "../../components/today/ProgressPanel";
 import { ScheduleContext } from "../../components/today/ScheduleContext";
 import { TimelinePlan } from "../../components/today/TimelinePlan";
 import { TodayHeader } from "../../components/today/TodayHeader";
+import { UnscheduledTasksPanel } from "../../components/today/UnscheduledTasksPanel";
 import { Screen } from "../../components/ui/Screen";
 import { AppText } from "../../components/ui/Text";
 import { useAppStore } from "../../state/useAppStore";
@@ -38,6 +39,7 @@ export function TodayScreen() {
         <TodayHeader dateLabel={formatLongDate(today.date)} />
         <CapacityInsight capacity={today.capacity} focus={today.focus} />
         <TimelinePlan blocks={today.blocks} />
+        <UnscheduledTasksPanel tasks={today.unscheduled} />
         <GuidancePanel items={today.adaptiveGuidance} />
         <ScheduleContext items={today.scheduleContext} />
         <ProgressPanel
@@ -48,7 +50,7 @@ export function TodayScreen() {
 
         <View className="pb-2 pt-1">
           <AppText tone="tertiary" variant="caption">
-            The planning brain is now deterministic and protective-first. Calendar-aware execution and richer adaptation are still intentionally deferred.
+            The planning brain is now deterministic and protective-first. Live calendar ingestion, adaptive learning, and deeper replanning remain intentionally deferred.
           </AppText>
         </View>
       </View>

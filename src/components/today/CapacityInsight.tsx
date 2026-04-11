@@ -1,11 +1,20 @@
 import { View } from "react-native";
 
-import { CapacityProfile } from "../../data/models";
 import { Surface } from "../ui/Surface";
 import { AppText } from "../ui/Text";
 
 interface CapacityInsightProps {
-  capacity: CapacityProfile;
+  capacity: {
+    mentalLoad: string;
+    focusBudgetMinutes: number;
+    meetingLoadMinutes: number;
+    recoveryBudgetMinutes: number;
+    usableMinutes: number;
+    unusedCapacityMinutes: number;
+    confidence: number;
+    planPressure: "low" | "moderate" | "high";
+    overloadWarning: boolean;
+  };
   focus: string;
 }
 
@@ -17,7 +26,7 @@ export function CapacityInsight({ capacity, focus }: CapacityInsightProps) {
           Capacity
         </AppText>
         <AppText variant="section">
-          {capacity.focusBudgetMinutes} minutes of clear focus room today.
+          {capacity.focusBudgetMinutes} minutes scheduled inside {capacity.usableMinutes} usable minutes.
         </AppText>
       </View>
 
@@ -37,13 +46,19 @@ export function CapacityInsight({ capacity, focus }: CapacityInsightProps) {
 
         <View className="flex-1 rounded-[22px] border border-[#D7DED3] bg-[#EEF3EC] px-4 py-3">
           <AppText tone="tertiary" variant="micro">
-            Meeting load
+            Pressure
           </AppText>
           <AppText variant="section" style={{ marginTop: 6 }}>
-            {capacity.meetingLoadMinutes} min
+            {capacity.planPressure}
           </AppText>
         </View>
       </View>
+
+      <AppText tone="secondary" variant="caption">
+        {capacity.unusedCapacityMinutes} minutes remain intentionally open. Confidence {Math.round(
+          capacity.confidence * 100,
+        )}%{capacity.overloadWarning ? ", with excess demand left unscheduled." : "."}
+      </AppText>
     </Surface>
   );
 }
