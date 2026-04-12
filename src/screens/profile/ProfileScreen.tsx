@@ -5,6 +5,7 @@ import { View } from "react-native";
 
 import { DrillInRow } from "../../components/navigation/DrillInRow";
 import { PageHeader } from "../../components/navigation/PageHeader";
+import { Button } from "../../components/ui/Button";
 import { Pill } from "../../components/ui/Pill";
 import { Screen } from "../../components/ui/Screen";
 import { Surface } from "../../components/ui/Surface";
@@ -66,7 +67,20 @@ export function ProfileScreen({ navigation }: Props) {
   return (
     <Screen>
       <View className="gap-5">
-        <PageHeader eyebrow="Profile" title="Profile" description="Controls and defaults." />
+        <PageHeader
+          eyebrow="Profile"
+          title="Profile"
+          description="Controls and defaults."
+          action={
+            <Button
+              size="compact"
+              tone="tertiary"
+              onPress={() => navigation.navigate(account ? "ProfileAccount" : "ProfileAppearance")}
+            >
+              {account ? "Open account" : "Appearance"}
+            </Button>
+          }
+        />
 
         <Surface tone="hero" className="gap-4">
           <View className="flex-row items-center gap-4">
@@ -103,6 +117,7 @@ export function ProfileScreen({ navigation }: Props) {
             title="Appearance"
             subtitle="Mode and accent"
             detail={appearanceDetail}
+            actionLabel="Open"
             leading={<Ionicons color={theme.colors.text.secondary} name="color-palette-outline" size={18} />}
             onPress={() => navigation.navigate("ProfileAppearance")}
           />
@@ -110,6 +125,7 @@ export function ProfileScreen({ navigation }: Props) {
             title="Notifications"
             subtitle="Reminders"
             detail={`${enabledNotifications} enabled`}
+            actionLabel="Open"
             leading={<Ionicons color={theme.colors.text.secondary} name="notifications-outline" size={18} />}
             onPress={() => navigation.navigate("ProfileNotifications")}
           />
@@ -119,6 +135,7 @@ export function ProfileScreen({ navigation }: Props) {
               calendarConnectionState?.permissionState === "granted" ? "Calendar ready" : "Calendar off"
             }
             detail={calendarConnectionState?.permissionState ?? "not ready"}
+            actionLabel="Open"
             leading={<Ionicons color={theme.colors.text.secondary} name="link-outline" size={18} />}
             onPress={() => navigation.navigate("ProfileIntegrations")}
           />
@@ -126,6 +143,7 @@ export function ProfileScreen({ navigation }: Props) {
             title="Planning"
             subtitle="Task size and intensity"
             detail={`${productPreferences.taskSizing} / ${productPreferences.dayIntensity}`}
+            actionLabel="Open"
             leading={<Ionicons color={theme.colors.text.secondary} name="options-outline" size={18} />}
             onPress={() => navigation.navigate("ProfilePlanningPreferences")}
           />
@@ -136,6 +154,7 @@ export function ProfileScreen({ navigation }: Props) {
               productPreferences.schedule.sleepEnd,
             )}
             detail={`${productPreferences.schedule.commuteMinutes} min commute`}
+            actionLabel="Open"
             leading={<Ionicons color={theme.colors.text.secondary} name="time-outline" size={18} />}
             onPress={() => navigation.navigate("ProfileScheduleDefaults")}
           />
@@ -143,6 +162,7 @@ export function ProfileScreen({ navigation }: Props) {
             title="Account"
             subtitle="Sign-in and sync"
             detail={account ? "Connected" : "Local only"}
+            actionLabel="Open"
             leading={<Ionicons color={theme.colors.text.secondary} name="person-circle-outline" size={18} />}
             onPress={() => navigation.navigate("ProfileAccount")}
           />

@@ -5,6 +5,7 @@ import { View } from "react-native";
 import { MomentumBars } from "../../components/history/ActivityTimeline";
 import { DrillInRow } from "../../components/navigation/DrillInRow";
 import { PageHeader } from "../../components/navigation/PageHeader";
+import { Button } from "../../components/ui/Button";
 import { Pill } from "../../components/ui/Pill";
 import { ProgressBar } from "../../components/ui/ProgressBar";
 import { Screen } from "../../components/ui/Screen";
@@ -66,7 +67,16 @@ export function InsightsScreen({ navigation }: Props) {
   return (
     <Screen>
       <View className="gap-5">
-        <PageHeader eyebrow="Insights" title="Insights" description="Recent movement." />
+        <PageHeader
+          eyebrow="Insights"
+          title="Insights"
+          description="Recent movement."
+          action={
+            <Button size="compact" tone="tertiary" onPress={() => navigation.navigate("InsightActivity")}>
+              Open activity
+            </Button>
+          }
+        />
 
         <Surface tone="hero" className="gap-5">
           <View className="flex-row flex-wrap gap-2">
@@ -122,6 +132,7 @@ export function InsightsScreen({ navigation }: Props) {
             title="Continuity"
             subtitle="Momentum and consistency"
             detail={`${summary.movingGoalCount} moving`}
+            actionLabel="Open"
             leading={<Ionicons color={theme.colors.text.secondary} name="pulse-outline" size={18} />}
             onPress={() => navigation.navigate("InsightContinuity")}
           />
@@ -129,6 +140,7 @@ export function InsightsScreen({ navigation }: Props) {
             title="Activity"
             subtitle="Completed and reshaped work"
             detail={`${feed.length} events`}
+            actionLabel="Open"
             leading={<Ionicons color={theme.colors.text.secondary} name="time-outline" size={18} />}
             onPress={() => navigation.navigate("InsightActivity")}
           />
@@ -136,6 +148,7 @@ export function InsightsScreen({ navigation }: Props) {
             title="Plan changes"
             subtitle="What shifted"
             detail={`${planChangeEvents.length} changes`}
+            actionLabel="Open"
             leading={
               <Ionicons color={theme.colors.text.secondary} name="swap-horizontal-outline" size={18} />
             }
@@ -145,6 +158,7 @@ export function InsightsScreen({ navigation }: Props) {
             title="Capacity"
             subtitle={`${today?.capacity.unusedCapacityMinutes ?? 0} min open`}
             detail={today?.capacity.overloadWarning ? "Tight day" : "Balanced"}
+            actionLabel="Open"
             leading={
               <Ionicons color={theme.colors.text.secondary} name="speedometer-outline" size={18} />
             }

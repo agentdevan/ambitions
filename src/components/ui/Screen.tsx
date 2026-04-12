@@ -23,14 +23,14 @@ export function Screen({ children, scrollable = true }: ScreenProps) {
         }}
         showsVerticalScrollIndicator={false}
       >
-        <View className="px-5 pb-4">{children}</View>
+        <View className="px-4 pb-4">{children}</View>
       </ScrollView>
     );
   }
 
   return (
     <View
-      className="flex-1 px-6"
+      className="flex-1 px-4"
       style={{
         paddingTop: insets.top + 10,
         paddingBottom: insets.bottom + 34,

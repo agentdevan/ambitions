@@ -52,7 +52,7 @@ export function CompactTimelineRow({ block, onPress }: CompactTimelineRowProps) 
     >
       {({ pressed }) => (
         <View
-          className="flex-row items-center gap-3 rounded-[24px] px-4 py-4"
+          className="flex-row items-center gap-3 rounded-[22px] px-4 py-3.5"
           style={{
             backgroundColor:
               block.state === "active"
@@ -66,7 +66,7 @@ export function CompactTimelineRow({ block, onPress }: CompactTimelineRowProps) 
                 ? theme.colors.border.accent
                 : pressed
                   ? theme.colors.border.accent
-                  : theme.colors.border.subtle,
+                  : theme.colors.border.strong,
             shadowColor: theme.colors.shadow.color,
             shadowOpacity: theme.mode === "dark" ? 0.14 : 0.03,
             shadowRadius: 10,
@@ -81,30 +81,44 @@ export function CompactTimelineRow({ block, onPress }: CompactTimelineRowProps) 
               opacity: block.state === "active" ? 1 : 0.7,
             }}
           />
-          <View className="w-[76px] gap-1">
+          <View className="w-[72px] gap-1">
             <AppText variant="caption">
               {formatTimeRangeLabel(block.startsAt, block.endsAt, { compact: true })}
             </AppText>
-            <AppText tone="tertiary" variant="caption">
+            <AppText tone="tertiary" variant="micro">
               {block.estimatedMinutes ? `${block.estimatedMinutes} min` : "Session"}
             </AppText>
           </View>
           <View className="flex-1 gap-1">
             <View className="flex-row flex-wrap items-center gap-2">
-              <AppText variant="section" numberOfLines={1}>
+              <AppText variant="section" numberOfLines={2} style={{ flexShrink: 1 }}>
                 {block.title}
               </AppText>
               <Pill label={stateLabelMap[block.state]} tone={stateToneMap[block.state]} />
             </View>
             <AppText tone="secondary" numberOfLines={2}>
-              {block.note ?? "Open for details."}
+              {block.note ?? "Open the session for context and actions."}
             </AppText>
           </View>
-          <Ionicons
-            color={pressed ? theme.colors.accent.primary : theme.colors.text.tertiary}
-            name="chevron-forward"
-            size={16}
-          />
+          <View className="items-end gap-1 pl-2">
+            <View className="flex-row items-center gap-1">
+              <AppText
+                tone={pressed ? "accent" : "secondary"}
+                variant="micro"
+                style={{ textTransform: "uppercase" }}
+              >
+                Open
+              </AppText>
+              <Ionicons
+                color={pressed ? theme.colors.accent.primary : theme.colors.text.tertiary}
+                name="chevron-forward"
+                size={16}
+              />
+            </View>
+            <AppText tone="tertiary" variant="caption" numberOfLines={1}>
+              {block.state === "active" ? "Live session" : "Session detail"}
+            </AppText>
+          </View>
         </View>
       )}
     </Pressable>

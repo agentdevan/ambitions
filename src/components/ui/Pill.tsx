@@ -20,20 +20,20 @@ export function Pill({ label, tone = "neutral" }: PillProps) {
       textTone: "secondary",
     },
     accent: {
-      backgroundColor: theme.colors.accent.primary,
-      borderColor: theme.colors.accent.primary,
-      textTone: "inverse",
+      backgroundColor: theme.colors.background.accentWashStrong,
+      borderColor: theme.colors.border.accent,
+      textTone: "secondary",
     },
     quiet: {
       backgroundColor: theme.colors.background.sunken,
       borderColor: theme.colors.border.subtle,
-      textTone: "secondary",
+      textTone: "tertiary",
     },
   };
 
   return (
     <View
-      className="self-start rounded-full px-2.5 py-1.5"
+      className="self-start rounded-full px-2.5 py-1"
       style={{
         backgroundColor: toneMap[tone].backgroundColor,
         borderWidth: 1,

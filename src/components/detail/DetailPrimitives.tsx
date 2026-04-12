@@ -24,8 +24,8 @@ export function DetailHero({
   tone = "accent",
 }: DetailHeroProps) {
   return (
-    <Surface tone={tone} className="gap-3">
-      <View className="gap-2">
+    <Surface tone={tone} className="gap-3.5">
+      <View className="gap-2.5">
         {eyebrow ? (
           <AppText tone="tertiary" variant="micro" style={{ textTransform: "uppercase" }}>
             {eyebrow}
@@ -34,7 +34,7 @@ export function DetailHero({
         {badges ? <View className="flex-row flex-wrap items-center gap-2">{badges}</View> : null}
         <View className="gap-1.5">
           <AppText variant="title">{title}</AppText>
-          {description ? <AppText tone="secondary">{description}</AppText> : null}
+          {description ? <AppText tone="secondary" numberOfLines={3}>{description}</AppText> : null}
         </View>
       </View>
       {meta}
@@ -58,7 +58,7 @@ export function DetailSection({
 }: DetailSectionProps) {
   return (
     <View className="gap-3">
-      <View className="flex-row items-end justify-between gap-3">
+      <View className="flex-row items-start justify-between gap-3">
         <View className="flex-1 gap-0.5">
           <AppText variant="section">{title}</AppText>
           {description ? (

@@ -55,7 +55,7 @@ export function Surface({ children, className = "", tone = "default", style, ...
   return (
     <View
       {...props}
-      className={`overflow-hidden rounded-[28px] px-5 py-5 ${className}`.trim()}
+      className={`overflow-hidden rounded-[26px] px-4 py-4 ${className}`.trim()}
       style={[
         {
           backgroundColor: toneMap[tone].backgroundColor,

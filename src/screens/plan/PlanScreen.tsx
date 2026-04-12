@@ -41,6 +41,7 @@ function SessionRow({
       title={title}
       subtitle={detail}
       detail={time}
+      actionLabel="Open"
       leading={<View style={{ width: 8, height: 32, borderRadius: 999, backgroundColor: accent }} />}
       onPress={onPress}
     />
@@ -76,7 +77,23 @@ export function PlanScreen({ navigation }: Props) {
   return (
     <Screen>
       <View className="gap-5">
-        <PageHeader eyebrow="Plan" title="Plan" description="Review, decide, move." />
+        <PageHeader
+          eyebrow="Plan"
+          title="Plan"
+          description="Review, decide, move."
+          action={
+            <Button
+              size="compact"
+              onPress={() =>
+                reviewGoals.length > 0
+                  ? navigation.navigate("PlanReview", {})
+                  : navigation.navigate("PlanDetail")
+              }
+            >
+              {reviewGoals.length > 0 ? "Review plan" : "Open plan"}
+            </Button>
+          }
+        />
 
         <Surface tone="hero" className="gap-4">
           <View className="flex-row items-start justify-between gap-3">
@@ -125,8 +142,8 @@ export function PlanScreen({ navigation }: Props) {
               </AppText>
               <AppText variant="title">{planView === "week" ? "Upcoming" : "Day shape"}</AppText>
             </View>
-            <Button tone="inline" onPress={() => navigation.navigate("PlanDetail")}>
-              Open
+            <Button size="compact" tone="tertiary" onPress={() => navigation.navigate("PlanDetail")}>
+              Open plan
             </Button>
           </View>
 
@@ -149,6 +166,7 @@ export function PlanScreen({ navigation }: Props) {
             title="This week"
             subtitle={`${activeGoals.length} active goals`}
             detail={`${milestones.length} milestones`}
+            actionLabel="Open"
             leading={<Ionicons color={theme.colors.text.secondary} name="calendar-outline" size={18} />}
             onPress={() => navigation.navigate("PlanDetail")}
           />
@@ -156,6 +174,7 @@ export function PlanScreen({ navigation }: Props) {
             title="Structure"
             subtitle="Goals, milestones, tasks"
             detail={`${timeBlocks.length} sessions`}
+            actionLabel="Open"
             leading={<Ionicons color={theme.colors.text.secondary} name="layers-outline" size={18} />}
             onPress={() => navigation.navigate("PlanStructure", {})}
           />

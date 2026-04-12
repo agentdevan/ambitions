@@ -25,6 +25,7 @@ function GoalCard({
   title,
   subtitle,
   detail,
+  actionLabel = "Open",
   iconName,
   highlighted,
   onPress,
@@ -32,6 +33,7 @@ function GoalCard({
   title: string;
   subtitle: string;
   detail: string;
+  actionLabel?: string;
   iconName: keyof typeof Ionicons.glyphMap;
   highlighted?: boolean;
   onPress: () => void;
@@ -43,6 +45,7 @@ function GoalCard({
       title={title}
       subtitle={subtitle}
       detail={detail}
+      actionLabel={actionLabel}
       badge={highlighted ? <Pill label="Review" tone="accent" /> : undefined}
       leading={
         <View
@@ -87,7 +90,11 @@ export function GoalsScreen({ navigation }: Props) {
           eyebrow="Goals"
           title="Goals"
           description="Active work first."
-          action={<Button onPress={() => navigation.navigate("GoalEdit", {})}>New</Button>}
+          action={
+            <Button size="compact" onPress={() => navigation.navigate("GoalEdit", {})}>
+              New goal
+            </Button>
+          }
         />
 
         {goals.length === 0 ? (
@@ -150,10 +157,11 @@ export function GoalsScreen({ navigation }: Props) {
                         </AppText>
                       </View>
                       <Button
-                        tone="inline"
+                        tone="tertiary"
+                        size="compact"
                         onPress={() => navigation.navigate("GoalDetail", { goalId: goal.id })}
                       >
-                        Open
+                        Open goal
                       </Button>
                     </View>
 
@@ -173,6 +181,7 @@ export function GoalsScreen({ navigation }: Props) {
                         title="Milestones"
                         subtitle={`${goalSummary.activeTasks} active tasks`}
                         detail={`${goalSummary.completedMilestones}/${goalSummary.milestoneCount || 0}`}
+                        actionLabel="Review"
                         iconName="git-branch-outline"
                         highlighted={!!reviewDraft}
                         onPress={() => navigation.navigate("GoalMilestones", { goalId: goal.id })}
@@ -181,6 +190,7 @@ export function GoalsScreen({ navigation }: Props) {
                         title="Progress"
                         subtitle={goalSummary.reflection}
                         detail={`${goalSummary.completedTasks} done`}
+                        actionLabel="Open"
                         iconName="stats-chart-outline"
                         onPress={() => navigation.navigate("GoalProgress", { goalId: goal.id })}
                       />

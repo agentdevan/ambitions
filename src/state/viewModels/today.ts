@@ -302,13 +302,13 @@ function actionForOpportunity(task: Task): {
   if (task.status === TaskStatus.InProgress) {
     return {
       suggestedAction: TaskActionType.Complete,
-      actionLabel: "Finish this step",
+      actionLabel: "Finish step",
     };
   }
 
   return {
     suggestedAction: TaskActionType.Start,
-    actionLabel: "Start this task",
+    actionLabel: "Start next step",
   };
 }
 
@@ -394,28 +394,28 @@ function buildOpportunityReason(params: {
 
   if (task.status === TaskStatus.InProgress) {
     return {
-      summary: "Already moving. This is the cleanest thing to finish from here.",
-      fitLabel: "Already in motion",
+      summary: "Already underway. Finishing it is the cleanest move.",
+      fitLabel: "In motion",
     };
   }
 
   if (nextBlock?.taskId === task.id) {
     return {
-      summary: `It is already next in the plan and fits before ${formatTimeLabel(nextBlock.startsAt)}.`,
+      summary: `Already next in the plan and still fits before ${formatTimeLabel(nextBlock.startsAt)}.`,
       fitLabel: "Already next",
     };
   }
 
   if (overloaded) {
     return {
-      summary: "The day is tight, so this is the lightest useful move that still counts.",
-      fitLabel: "Keeps the day calm",
+      summary: "A lighter useful move for a tighter day.",
+      fitLabel: "Lower lift",
     };
   }
 
   if (bucket === "tiny" || bucket === "short") {
     return {
-      summary: `Short enough to finish inside this ${availableMinutes}-minute window.`,
+      summary: `Fits inside this ${availableMinutes}-minute window.`,
       fitLabel: "Fits cleanly",
     };
   }
@@ -423,9 +423,9 @@ function buildOpportunityReason(params: {
   return {
     summary:
       task.difficulty === TaskDifficulty.Deep
-        ? "There is enough room here to make real progress without rushing the start."
-        : "A strong fit for this opening without turning it into a scramble.",
-    fitLabel: task.difficulty === TaskDifficulty.Deep ? "Room for depth" : "Good fit",
+        ? "Enough room here for a real work session."
+        : "A strong fit for this opening without making it rushed.",
+    fitLabel: task.difficulty === TaskDifficulty.Deep ? "Deep work" : "Strong fit",
   };
 }
 
@@ -448,7 +448,7 @@ function buildOpportunityOptions(params: {
 
   const goalsById = new Map(goals.map((goal) => [goal.id, goal]));
 
-  return tasks
+  const rankedOptions = tasks
     .filter((task) =>
       [
         TaskStatus.Ready,
@@ -496,9 +496,29 @@ function buildOpportunityOptions(params: {
       };
     })
     .filter((option) => option.score > 0)
-    .sort((left, right) => right.score - left.score)
-    .slice(0, 3)
-    .map(({ score: _score, ...option }) => option);
+    .sort((left, right) => right.score - left.score);
+
+  const seenTaskIds = new Set<string>();
+  const seenTitles = new Set<string>();
+  const dedupedOptions: TodayOpportunityOption[] = [];
+
+  for (const { score: _score, ...option } of rankedOptions) {
+    const normalizedTitle = option.title.trim().toLowerCase();
+
+    if (seenTaskIds.has(option.taskId) || seenTitles.has(normalizedTitle)) {
+      continue;
+    }
+
+    seenTaskIds.add(option.taskId);
+    seenTitles.add(normalizedTitle);
+    dedupedOptions.push(option);
+
+    if (dedupedOptions.length === 3) {
+      break;
+    }
+  }
+
+  return dedupedOptions;
 }
 
 function buildStatusSnapshot(params: {
@@ -594,12 +614,12 @@ function buildRecommendation(params: {
     return {
       kind: "stay_on_current_block",
       title: "Stay with the block you’re already in.",
-      summary: activeBlock.note ?? "Momentum matters more than switching right now.",
+      summary: activeBlock.title,
       emphasis: nextBlock
-        ? `Next up in ${Math.max(0, minutesBetween(new Date().toISOString(), nextBlock.startsAtDateTime))} min.`
-        : `This session runs until ${formatTimeLabel(activeBlock.endsAt)}.`,
+        ? `Keep this moving. Next up in ${Math.max(0, minutesBetween(new Date().toISOString(), nextBlock.startsAtDateTime))} min.`
+        : activeBlock.note ?? `This session runs until ${formatTimeLabel(activeBlock.endsAt)}.`,
       primaryLabel: "Open current block",
-      secondaryLabel: nextBlock ? "See what’s next" : null,
+      secondaryLabel: nextBlock ? "Open next block" : "Open timeline",
       taskId: activeBlock.taskId,
       blockId: activeBlock.id,
       suggestedAction: null,
@@ -612,12 +632,12 @@ function buildRecommendation(params: {
       kind: overloadWarning ? "protect_recovery" : "no_fit",
       title: overloadWarning ? "Nothing urgent fits. Protect the space." : "No clear fit yet.",
       summary: overloadWarning
-        ? "A reset is better than squeezing in one more thing."
-        : "Use the timeline when you need the next committed move.",
+        ? "Hold the gap instead of forcing filler."
+        : "Open the next committed move.",
       emphasis: nextBlock
         ? `Next block at ${formatTimeLabel(nextBlock.startsAt)}.`
         : "The next move is still flexible.",
-      primaryLabel: nextBlock ? "Open next block" : "View timeline",
+      primaryLabel: nextBlock ? "Open next block" : "Open timeline",
       secondaryLabel: null,
       taskId: nextBlock?.taskId ?? null,
       blockId: nextBlock?.id ?? null,
@@ -638,12 +658,12 @@ function buildRecommendation(params: {
       summary:
         openWindow.bucket === "tiny"
           ? "Keep this opening light instead of forcing a rushed start."
-          : "Better to hold the window than start something that will spill.",
+          : "Better to hold this window than start something that spills over.",
       emphasis: nextBlock
         ? `Next block begins at ${formatTimeLabel(nextBlock.startsAt)}.`
         : `${openWindow.availableMinutes} minutes are still open.`,
-      primaryLabel: "See options",
-      secondaryLabel: nextBlock ? "Open next block" : null,
+      primaryLabel: "Use this time",
+      secondaryLabel: nextBlock ? "Open next block" : "Open timeline",
       taskId: null,
       blockId: null,
       suggestedAction: null,
@@ -665,7 +685,7 @@ function buildRecommendation(params: {
     summary: primary.title,
     emphasis: primary.reason,
     primaryLabel: primary.actionLabel,
-    secondaryLabel: options.length > 1 ? "See options" : nextBlock ? "Open timeline" : null,
+    secondaryLabel: options.length > 1 ? "See options" : nextBlock ? "Open timeline" : "Use this time",
     taskId: primary.taskId,
     blockId: null,
     suggestedAction: primary.suggestedAction,

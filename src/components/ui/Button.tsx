@@ -23,72 +23,105 @@ export function Button({
 }: ButtonProps) {
   const theme = useResolvedTheme();
   const resolvedTone = tone === "ghost" ? "secondary" : tone;
-  const palette = {
+  const tonePalette = {
     primary: {
-      backgroundColor: theme.colors.accent.primary,
-      borderColor: theme.colors.accent.primary,
+      idleBackground: theme.colors.accent.primary,
+      pressedBackground: theme.colors.accent.muted,
+      disabledBackground: theme.colors.border.strong,
+      idleBorder: theme.colors.accent.primary,
+      pressedBorder: theme.colors.accent.muted,
+      disabledBorder: theme.colors.border.strong,
       textTone: "inverse" as const,
       shadowColor: theme.colors.accent.primary,
+      elevation: 4,
     },
     secondary: {
-      backgroundColor: theme.colors.background.elevatedSecondary,
-      borderColor: theme.colors.border.subtle,
+      idleBackground: theme.colors.background.elevated,
+      pressedBackground: theme.colors.background.elevatedSecondary,
+      disabledBackground: theme.colors.background.elevatedSecondary,
+      idleBorder: theme.colors.border.strong,
+      pressedBorder: theme.colors.border.accent,
+      disabledBorder: theme.colors.border.subtle,
       textTone: "primary" as const,
       shadowColor: theme.colors.text.primary,
+      elevation: 2,
     },
     tertiary: {
-      backgroundColor: theme.colors.background.sunken,
-      borderColor: theme.colors.border.subtle,
-      textTone: "secondary" as const,
+      idleBackground: theme.colors.background.canvas,
+      pressedBackground: theme.colors.background.elevatedSecondary,
+      disabledBackground: theme.colors.background.sunken,
+      idleBorder: theme.colors.border.subtle,
+      pressedBorder: theme.colors.border.strong,
+      disabledBorder: theme.colors.border.subtle,
+      textTone: "primary" as const,
       shadowColor: theme.colors.text.primary,
+      elevation: 0,
     },
     inline: {
-      backgroundColor: "transparent",
-      borderColor: "transparent",
+      idleBackground: "transparent",
+      pressedBackground: "transparent",
+      disabledBackground: "transparent",
+      idleBorder: "transparent",
+      pressedBorder: "transparent",
+      disabledBorder: "transparent",
       textTone: "accent" as const,
       shadowColor: "transparent",
+      elevation: 0,
     },
   }[resolvedTone];
   const sizing = {
     default: {
-      minHeight: 52,
-      paddingHorizontal: 18,
-      paddingVertical: 14,
+      minHeight: resolvedTone === "inline" ? 28 : 52,
+      paddingHorizontal: resolvedTone === "inline" ? 0 : 18,
+      paddingVertical: resolvedTone === "inline" ? 0 : 14,
       textVariant: "caption" as const,
     },
     compact: {
-      minHeight: 42,
-      paddingHorizontal: 14,
-      paddingVertical: 10,
+      minHeight: resolvedTone === "inline" ? 24 : 40,
+      paddingHorizontal: resolvedTone === "inline" ? 0 : 14,
+      paddingVertical: resolvedTone === "inline" ? 0 : 10,
       textVariant: "caption" as const,
     },
   }[size];
+  const isDisabled = disabled || busy;
 
   return (
     <Pressable
       {...props}
-      disabled={disabled || busy}
-      className="items-center justify-center rounded-[18px] border"
+      disabled={isDisabled}
+      className="items-center justify-center rounded-[18px]"
       style={({ pressed }) => [
         {
           minHeight: sizing.minHeight,
           paddingHorizontal: sizing.paddingHorizontal,
-          paddingVertical: resolvedTone === "inline" ? 0 : sizing.paddingVertical,
-          backgroundColor: palette.backgroundColor,
-          borderColor: palette.borderColor,
+          paddingVertical: sizing.paddingVertical,
+          backgroundColor: isDisabled
+            ? tonePalette.disabledBackground
+            : pressed
+              ? tonePalette.pressedBackground
+              : tonePalette.idleBackground,
+          borderColor: isDisabled
+            ? tonePalette.disabledBorder
+            : pressed
+              ? tonePalette.pressedBorder
+              : tonePalette.idleBorder,
           borderWidth: resolvedTone === "inline" ? 0 : 1,
-          opacity: disabled || busy ? 0.46 : pressed ? 0.94 : 1,
-          transform: [{ scale: pressed ? 0.985 : 1 }],
-          shadowColor: palette.shadowColor,
+          opacity: isDisabled && resolvedTone === "inline" ? 0.58 : 1,
+          transform: [{ scale: pressed && !isDisabled ? 0.985 : 1 }],
+          shadowColor: tonePalette.shadowColor,
           shadowOpacity:
             resolvedTone === "primary"
-              ? pressed
+              ? isDisabled
+                ? 0
+                : pressed
                 ? 0.2
                 : theme.mode === "dark"
                   ? 0.34
                   : 0.18
               : resolvedTone === "secondary" || resolvedTone === "tertiary"
-                ? pressed
+                ? isDisabled
+                  ? 0
+                  : pressed
                   ? 0.03
                   : theme.mode === "dark"
                     ? 0.08
@@ -96,7 +129,7 @@ export function Button({
                 : 0,
           shadowRadius: resolvedTone === "primary" ? 18 : 8,
           shadowOffset: { width: 0, height: resolvedTone === "primary" ? 10 : 4 },
-          elevation: resolvedTone === "primary" ? 3 : resolvedTone === "inline" ? 0 : 1,
+          elevation: isDisabled ? 0 : tonePalette.elevation,
         },
         style,
       ]}
@@ -113,10 +146,19 @@ export function Button({
         />
       ) : (
         <AppText
-          tone={palette.textTone}
+          tone={
+            isDisabled
+              ? resolvedTone === "primary"
+                ? "inverse"
+                : "secondary"
+              : tonePalette.textTone
+          }
           variant={sizing.textVariant}
           numberOfLines={1}
-          style={{ fontWeight: resolvedTone === "inline" ? "600" : "700", letterSpacing: -0.15 }}
+          style={{
+            fontWeight: resolvedTone === "inline" ? "700" : "700",
+            letterSpacing: resolvedTone === "inline" ? -0.1 : -0.15,
+          }}
         >
           {children}
         </AppText>

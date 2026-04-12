@@ -25,7 +25,7 @@ export function SegmentedControl<T extends string>({
     <View
       className="flex-row rounded-[18px] p-1"
       style={{
-        backgroundColor: theme.colors.background.elevatedSecondary,
+        backgroundColor: theme.colors.background.sunken,
         borderWidth: 1,
         borderColor: theme.colors.border.subtle,
       }}
@@ -44,14 +44,16 @@ export function SegmentedControl<T extends string>({
               justifyContent: "center",
               borderRadius: 14,
               backgroundColor: selected
-                ? theme.colors.background.elevated
+                ? theme.colors.background.accentWashStrong
                 : pressed
-                  ? theme.colors.background.sunken
+                  ? theme.colors.background.elevatedSecondary
                   : "transparent",
+              borderWidth: selected ? 1 : 0,
+              borderColor: selected ? theme.colors.border.accent : "transparent",
             })}
           >
             <AppText
-              tone={selected ? "primary" : "secondary"}
+              tone={selected ? "accent" : "secondary"}
               variant="caption"
               style={{ fontWeight: selected ? "700" : "600" }}
             >
