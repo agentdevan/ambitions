@@ -4,17 +4,12 @@ import { View } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 
 import { CapacityInsight } from "../../components/today/CapacityInsight";
-import { GuidancePanel } from "../../components/today/GuidancePanel";
 import { IntegrationStatusCard } from "../../components/today/IntegrationStatusCard";
-import { ProgressPanel } from "../../components/today/ProgressPanel";
-import { ReplanSuggestionsPanel } from "../../components/today/ReplanSuggestionsPanel";
 import { ScheduleContext } from "../../components/today/ScheduleContext";
 import { TimelinePlan } from "../../components/today/TimelinePlan";
 import { TodayHeader } from "../../components/today/TodayHeader";
-import { UnscheduledTasksPanel } from "../../components/today/UnscheduledTasksPanel";
 import { Button } from "../../components/ui/Button";
 import { EmptyStateCard } from "../../components/ui/EmptyStateCard";
-import { MetricCard } from "../../components/ui/MetricCard";
 import { Screen } from "../../components/ui/Screen";
 import { Pill } from "../../components/ui/Pill";
 import { Surface } from "../../components/ui/Surface";
@@ -155,50 +150,54 @@ export function TodayScreen() {
           dateLabel={formatLongDate(today.date)}
           liveContext={today.integration.usingLiveCalendar}
         />
-        <Surface tone="sunken" className="gap-5">
+        <Surface tone="accent" className="gap-4">
           <View className="gap-3">
             <View className="flex-row flex-wrap gap-2">
               <Pill label="Daily brief" tone="accent" />
               <Pill label={`${today.blocks.length} sessions`} tone="quiet" />
-              <Pill label={`${today.unscheduled.length} held out`} tone="quiet" />
+              <Pill label={`${today.progress.completed} done`} tone="quiet" />
             </View>
             <AppText variant="title">{today.focus}</AppText>
             <AppText tone="secondary">
-              A productized day view: what matters first, what is scheduled next, and where the buffer lives.
+              {today.adaptiveGuidance[0] ??
+                "What matters first is clear, the next sessions are bounded, and the rest of the day stays supportive instead of noisy."}
             </AppText>
           </View>
-          <View className="flex-row gap-3">
-            <MetricCard label="On deck" value={String(today.blocks.length)} />
-            <MetricCard label="Recovery" value={String(today.replanSuggestions.length)} />
-            <MetricCard label="Done" value={String(today.progress.completed)} />
-          </View>
-          <View className="rounded-[26px] bg-[#FFFFFF70] px-4 py-4">
-            <AppText tone="tertiary" variant="micro" style={{ textTransform: "uppercase" }}>
-              Daily shape
-            </AppText>
-            <AppText tone="secondary" style={{ marginTop: 8 }}>
-              Supporting guidance, capacity, and continuity now sit in their own cards below the timeline instead of reading as one long report.
-            </AppText>
+          <View className="flex-row flex-wrap gap-2">
+            <Pill label={`${today.replanSuggestions.length} recovery options`} />
+            <Pill label={`${today.unscheduled.length} held out`} tone="quiet" />
+            <Pill
+              label={
+                today.integration.usingLiveCalendar ? "Live context on" : "Saved baseline mode"
+              }
+              tone={today.integration.usingLiveCalendar ? "accent" : "neutral"}
+            />
           </View>
         </Surface>
-        <View className="gap-6">
-          <TimelinePlan
-            blocks={today.blocks}
-            onTaskAction={handleTaskAction}
-            busyTaskId={busyTaskId}
-          />
-          <CapacityInsight capacity={today.capacity} focus={today.focus} />
-          <UnscheduledTasksPanel tasks={today.unscheduled} />
-          <ReplanSuggestionsPanel suggestions={today.replanSuggestions} />
-          <GuidancePanel items={today.adaptiveGuidance} />
+        <TimelinePlan
+          blocks={today.blocks}
+          onTaskAction={handleTaskAction}
+          busyTaskId={busyTaskId}
+        />
+        <CapacityInsight capacity={today.capacity} focus={today.focus} />
+        <Surface className="gap-4">
+          <View className="gap-2">
+            <AppText tone="tertiary" variant="micro" style={{ textTransform: "uppercase" }}>
+              Context
+            </AppText>
+            <AppText variant="section">Surrounding conditions</AppText>
+            <AppText tone="secondary">{today.integration.calendarDetail}</AppText>
+          </View>
+          {today.adaptiveGuidance.length > 1 ? (
+            <View className="flex-row flex-wrap gap-2">
+              {today.adaptiveGuidance.slice(1, 3).map((item) => (
+                <Pill key={item} label={item} tone="quiet" />
+              ))}
+            </View>
+          ) : null}
           <ScheduleContext items={today.scheduleContext} />
-          <ProgressPanel
-            completed={today.progress.completed}
-            scheduled={today.progress.scheduled}
-            recovery={today.progress.recovery}
-          />
-        </View>
-        <View className="gap-4">
+        </Surface>
+        <View className="gap-0">
           <AppText tone="tertiary" variant="micro" style={{ textTransform: "uppercase" }}>
             Support
           </AppText>
@@ -307,19 +306,6 @@ export function TodayScreen() {
             </View>
           </Surface>
         ) : null}
-
-        <Surface tone="sunken">
-          <View className="gap-3">
-            <View className="flex-row flex-wrap gap-2">
-              <Pill label="Continuity scope" tone="quiet" />
-            </View>
-            <AppText tone="tertiary" variant="caption">
-              Account sync covers goals, milestones, tasks, daily plans, preferences, and the
-              adaptation profile. Notifications, permissions, and transient runtime state stay on the
-              device.
-            </AppText>
-          </View>
-        </Surface>
       </View>
     </Screen>
   );

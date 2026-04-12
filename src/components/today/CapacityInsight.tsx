@@ -1,6 +1,6 @@
 import { View } from "react-native";
 
-import { MetricCard } from "../ui/MetricCard";
+import { Pill } from "../ui/Pill";
 import { Surface } from "../ui/Surface";
 import { AppText } from "../ui/Text";
 
@@ -21,24 +21,23 @@ interface CapacityInsightProps {
 
 export function CapacityInsight({ capacity, focus }: CapacityInsightProps) {
   return (
-    <Surface tone="accent" className="gap-5">
+    <Surface tone="accent" className="gap-4">
       <View className="gap-3">
-        <AppText tone="secondary" variant="micro" style={{ textTransform: "uppercase" }}>
+        <AppText tone="tertiary" variant="micro" style={{ textTransform: "uppercase" }}>
           Capacity
         </AppText>
-        <AppText variant="section">
-          {capacity.focusBudgetMinutes} minutes committed inside {capacity.usableMinutes} usable
-          minutes.
-        </AppText>
-        <AppText tone="secondary" style={{ maxWidth: 300 }}>
+        <AppText variant="section">Capacity stays protected for the day.</AppText>
+        <AppText tone="secondary">
           {focus}
         </AppText>
       </View>
 
-      <View className="flex-row gap-3">
-        <MetricCard label="Mental load" value={capacity.mentalLoad} />
-        <MetricCard label="Pressure" value={capacity.planPressure} />
-        <MetricCard label="Open" value={`${capacity.unusedCapacityMinutes} min`} />
+      <View className="flex-row flex-wrap gap-2">
+        <Pill label={`${capacity.focusBudgetMinutes} min committed`} tone="accent" />
+        <Pill label={`${capacity.usableMinutes} min usable`} />
+        <Pill label={`${capacity.unusedCapacityMinutes} min open`} tone="quiet" />
+        <Pill label={`Load ${capacity.mentalLoad}`} />
+        <Pill label={`Pressure ${capacity.planPressure}`} tone="quiet" />
       </View>
 
       <AppText tone="secondary" variant="caption">

@@ -12,32 +12,32 @@ export function Pill({ label, tone = "neutral" }: PillProps) {
   const theme = useResolvedTheme();
   const toneMap: Record<NonNullable<PillProps["tone"]>, { backgroundColor: string; borderColor: string; textTone: "secondary" | "tertiary" }> = {
     neutral: {
-      backgroundColor: theme.colors.background.sunken,
-      borderColor: theme.colors.border.subtle,
+      backgroundColor: "#ECE6DD",
+      borderColor: "#E0D7CC",
       textTone: "secondary",
     },
     accent: {
-      backgroundColor: theme.colors.background.accentWash,
-      borderColor: theme.colors.border.strong,
+      backgroundColor: "#DCE8D8",
+      borderColor: "#BED0B9",
       textTone: "secondary",
     },
     quiet: {
-      backgroundColor: theme.colors.background.elevated,
-      borderColor: theme.colors.background.elevated,
+      backgroundColor: "#F6F1EA",
+      borderColor: "#E7DED3",
       textTone: "tertiary",
     },
   };
 
   return (
     <View
-      className="self-start rounded-full px-3.5 py-2"
+      className="self-start rounded-full px-3 py-1.5"
       style={{
         backgroundColor: toneMap[tone].backgroundColor,
         borderWidth: 1,
         borderColor: toneMap[tone].borderColor,
       }}
     >
-      <AppText tone={toneMap[tone].textTone} variant="micro">
+      <AppText tone={toneMap[tone].textTone} variant="micro" numberOfLines={1}>
         {label}
       </AppText>
     </View>
