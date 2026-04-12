@@ -8,6 +8,7 @@ import { IntegrationStatusCard } from "../../components/today/IntegrationStatusC
 import { ScheduleContext } from "../../components/today/ScheduleContext";
 import { TimelinePlan } from "../../components/today/TimelinePlan";
 import { TodayHeader } from "../../components/today/TodayHeader";
+import { useResolvedTheme } from "../../design/theme/useResolvedTheme";
 import { Button } from "../../components/ui/Button";
 import { EmptyStateCard } from "../../components/ui/EmptyStateCard";
 import { Screen } from "../../components/ui/Screen";
@@ -15,7 +16,7 @@ import { Surface } from "../../components/ui/Surface";
 import { AppText } from "../../components/ui/Text";
 import { getGoalReviewDraft } from "../../services/goals/metadata";
 import { useAppStore } from "../../state/useAppStore";
-import { formatLongDate } from "../../utils/date";
+import { formatLongDate, formatTimeLabel } from "../../utils/date";
 
 function MetaLine({ items }: { items: string[] }) {
   return (
@@ -31,6 +32,7 @@ function MetaLine({ items }: { items: string[] }) {
 
 export function TodayScreen() {
   const navigation = useNavigation();
+  const theme = useResolvedTheme();
   const today = useAppStore((state) => state.today);
   const bootStatus = useAppStore((state) => state.bootStatus);
   const goals = useAppStore((state) => state.goals);
@@ -57,6 +59,10 @@ export function TodayScreen() {
   const [accountBusy, setAccountBusy] = useState<string | null>(null);
   const [runtimeMessage, setRuntimeMessage] = useState<string | null>(null);
   const pendingReviewGoals = goals.filter((goal) => getGoalReviewDraft(goal) !== null);
+  const nextBlock =
+    today?.blocks.find((block) => block.state === "active") ??
+    today?.blocks.find((block) => block.state === "scheduled") ??
+    null;
 
   async function runIntegrationAction(
     key: string,
@@ -131,15 +137,11 @@ export function TodayScreen() {
             action={
               bootStatus !== "loading" ? (
                 <View className="flex-row gap-3 pt-1">
-                  <Button
-                    tone="secondary"
-                    style={{ flex: 1 }}
-                    onPress={() => navigation.navigate("Goals" as never)}
-                  >
-                    Open goals
+                  <Button style={{ flex: 1 }} onPress={() => navigation.navigate("Goals" as never)}>
+                    Go to goals
                   </Button>
                   <Button
-                    tone="secondary"
+                    tone="tertiary"
                     style={{ flex: 1 }}
                     onPress={() => navigation.navigate("Plan" as never)}
                   >
@@ -165,7 +167,7 @@ export function TodayScreen() {
         <Surface tone="accent" className="gap-6">
           <View className="gap-3">
             <AppText tone="tertiary" variant="micro" style={{ textTransform: "uppercase" }}>
-              Execution brief
+              Right now
             </AppText>
             <AppText variant="title">{today.focus}</AppText>
             <AppText tone="secondary" style={{ maxWidth: 330 }}>
@@ -182,17 +184,41 @@ export function TodayScreen() {
             ]}
           />
 
+          {nextBlock ? (
+            <View
+              className="gap-2 rounded-[18px] px-4 py-4"
+              style={{
+                backgroundColor: theme.colors.background.elevated,
+                borderWidth: 1,
+                borderColor: theme.colors.border.strong,
+              }}
+            >
+              <AppText tone="tertiary" variant="micro" style={{ textTransform: "uppercase" }}>
+                Next up
+              </AppText>
+              <AppText variant="section">{nextBlock.title}</AppText>
+              <AppText tone="secondary">
+                {formatTimeLabel(nextBlock.startsAt)}
+                {nextBlock.state === "active" ? " in progress now." : " is the next session."}
+              </AppText>
+            </View>
+          ) : null}
+
           <View
             className="gap-2 rounded-[18px] px-4 py-4"
-            style={{ backgroundColor: "#F5F7F1", borderWidth: 1, borderColor: "#CBD4C4" }}
+            style={{
+              backgroundColor: theme.colors.background.elevated,
+              borderWidth: 1,
+              borderColor: theme.colors.border.strong,
+            }}
           >
             <AppText tone="tertiary" variant="micro" style={{ textTransform: "uppercase" }}>
-              Day note
+              Stay steady
             </AppText>
             <AppText tone="secondary">
               {today.replanSuggestions.length > 0
                 ? "If the day slips, recover with the lightest useful adjustment."
-                : "The schedule has room to stay steady without extra adjustments."}
+                : "The schedule has enough room to stay steady without extra reshuffling."}
             </AppText>
           </View>
         </Surface>
@@ -206,11 +232,11 @@ export function TodayScreen() {
         <View className="gap-4 px-1">
           <View className="gap-2">
             <AppText tone="tertiary" variant="micro" style={{ textTransform: "uppercase" }}>
-              Support
+              Keep the day steady
             </AppText>
-            <AppText variant="section">The rest of the day at a glance</AppText>
+            <AppText variant="section">Context that supports execution</AppText>
             <AppText tone="secondary">
-              Capacity, context, and account state stay available without crowding the work.
+              Capacity, setup, and continuity stay nearby without competing with the work itself.
             </AppText>
           </View>
 
@@ -308,15 +334,15 @@ export function TodayScreen() {
               </AppText>
               <AppText variant="section">{pendingReviewGoals[0]?.title}</AppText>
               <AppText tone="secondary">
-                A revised plan is ready for review before it becomes active.
+                A change is ready for review before it replaces the current plan.
               </AppText>
               <MetaLine
                 items={[
                   `${pendingReviewGoals.length} goal${pendingReviewGoals.length === 1 ? "" : "s"} waiting`,
                 ]}
               />
-              <Button tone="secondary" onPress={() => navigation.navigate("Plan" as never)}>
-                Open review
+              <Button onPress={() => navigation.navigate("Plan" as never)}>
+                Review changes
               </Button>
             </Surface>
           ) : null}

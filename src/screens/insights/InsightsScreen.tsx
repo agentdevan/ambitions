@@ -13,6 +13,11 @@ import { Screen } from "../../components/ui/Screen";
 import { Surface } from "../../components/ui/Surface";
 import { TextField } from "../../components/ui/TextField";
 import { AppText } from "../../components/ui/Text";
+import {
+  formatTimeLabel,
+  formatTimeRangeLabel,
+  normalizeTimeString,
+} from "../../utils/date";
 
 function MetaLine({ items }: { items: string[] }) {
   return (
@@ -49,10 +54,10 @@ export function InsightsScreen() {
   const attachLocalDataToAccount = useAppStore((state) => state.attachLocalDataToAccount);
   const deferLocalDataAttachment = useAppStore((state) => state.deferLocalDataAttachment);
   const syncAccountData = useAppStore((state) => state.syncAccountData);
-  const [sleepStart, setSleepStart] = useState("23:00");
-  const [sleepEnd, setSleepEnd] = useState("07:00");
-  const [workStart, setWorkStart] = useState("09:00");
-  const [workEnd, setWorkEnd] = useState("17:00");
+  const [sleepStart, setSleepStart] = useState("11:00 PM");
+  const [sleepEnd, setSleepEnd] = useState("7:00 AM");
+  const [workStart, setWorkStart] = useState("9:00 AM");
+  const [workEnd, setWorkEnd] = useState("5:00 PM");
   const [commuteMinutes, setCommuteMinutes] = useState("20");
   const [busyState, setBusyState] = useState<string | null>(null);
   const [runtimeMessage, setRuntimeMessage] = useState<string | null>(null);
@@ -62,10 +67,10 @@ export function InsightsScreen() {
       return;
     }
 
-    setSleepStart(productPreferences.schedule.sleepStart);
-    setSleepEnd(productPreferences.schedule.sleepEnd);
-    setWorkStart(productPreferences.schedule.workdayStart);
-    setWorkEnd(productPreferences.schedule.workdayEnd);
+    setSleepStart(formatTimeLabel(productPreferences.schedule.sleepStart));
+    setSleepEnd(formatTimeLabel(productPreferences.schedule.sleepEnd));
+    setWorkStart(formatTimeLabel(productPreferences.schedule.workdayStart));
+    setWorkEnd(formatTimeLabel(productPreferences.schedule.workdayEnd));
     setCommuteMinutes(String(productPreferences.schedule.commuteMinutes));
   }, [productPreferences]);
 
@@ -82,6 +87,14 @@ export function InsightsScreen() {
   }
 
   const resolvedProductPreferences = productPreferences;
+  const normalizedSleepStart =
+    normalizeTimeString(sleepStart) ?? resolvedProductPreferences.schedule.sleepStart;
+  const normalizedSleepEnd =
+    normalizeTimeString(sleepEnd) ?? resolvedProductPreferences.schedule.sleepEnd;
+  const normalizedWorkStart =
+    normalizeTimeString(workStart) ?? resolvedProductPreferences.schedule.workdayStart;
+  const normalizedWorkEnd =
+    normalizeTimeString(workEnd) ?? resolvedProductPreferences.schedule.workdayEnd;
 
   async function savePreferences(
     key: string,
@@ -120,11 +133,35 @@ export function InsightsScreen() {
           <AppText tone="tertiary" variant="micro" style={{ textTransform: "uppercase" }}>
             Insights
           </AppText>
-          <AppText variant="hero">Preferences that shape the app quietly.</AppText>
+          <AppText variant="hero">See what is shaping the plan right now.</AppText>
           <AppText tone="secondary">
-            Keep the product aligned to your defaults without turning this into a settings maze.
+            Review the defaults, preferences, and connections influencing the plan without digging
+            through a settings maze.
           </AppText>
         </View>
+
+        <Surface tone="accent" className="gap-4">
+          <View className="gap-2">
+            <AppText tone="tertiary" variant="micro" style={{ textTransform: "uppercase" }}>
+              Snapshot
+            </AppText>
+            <AppText variant="section">Current planning signals</AppText>
+            <AppText tone="secondary">
+              These are the main defaults and connections the product is using right now.
+            </AppText>
+          </View>
+          <View className="flex-row gap-3">
+            <MetricCard
+              label="Sleep"
+              value={formatTimeRangeLabel(normalizedSleepStart, normalizedSleepEnd)}
+            />
+            <MetricCard
+              label="Workday"
+              value={formatTimeRangeLabel(normalizedWorkStart, normalizedWorkEnd)}
+            />
+            <MetricCard label="Intensity" value={resolvedProductPreferences.dayIntensity} />
+          </View>
+        </Surface>
 
         <AccountStatusCard
           account={account}
@@ -165,32 +202,58 @@ export function InsightsScreen() {
         <Surface className="gap-4">
           <View className="gap-2">
             <AppText tone="tertiary" variant="micro" style={{ textTransform: "uppercase" }}>
-              Schedule
+              Defaults
             </AppText>
-            <AppText variant="section">Saved defaults</AppText>
+            <AppText variant="section">Day-shape defaults</AppText>
             <AppText tone="secondary">
-              These defaults shape the planner whenever live context is missing or incomplete.
+              These defaults guide the planner whenever live context is missing, limited, or stale.
             </AppText>
           </View>
           <View className="flex-row gap-3">
-            <MetricCard label="Sleep" value={`${sleepStart} - ${sleepEnd}`} />
-            <MetricCard label="Work" value={`${workStart} - ${workEnd}`} />
+            <MetricCard
+              label="Sleep"
+              value={formatTimeRangeLabel(normalizedSleepStart, normalizedSleepEnd)}
+            />
+            <MetricCard
+              label="Work"
+              value={formatTimeRangeLabel(normalizedWorkStart, normalizedWorkEnd)}
+            />
             <MetricCard label="Commute" value={`${commuteMinutes} min`} />
           </View>
           <View className="flex-row gap-3">
             <View style={{ flex: 1 }}>
-              <TextField label="Sleep starts" onChangeText={setSleepStart} value={sleepStart} />
+              <TextField
+                label="Sleep starts"
+                onChangeText={setSleepStart}
+                placeholder="11:00 PM"
+                value={sleepStart}
+              />
             </View>
             <View style={{ flex: 1 }}>
-              <TextField label="Sleep ends" onChangeText={setSleepEnd} value={sleepEnd} />
+              <TextField
+                label="Sleep ends"
+                onChangeText={setSleepEnd}
+                placeholder="7:00 AM"
+                value={sleepEnd}
+              />
             </View>
           </View>
           <View className="flex-row gap-3">
             <View style={{ flex: 1 }}>
-              <TextField label="Work starts" onChangeText={setWorkStart} value={workStart} />
+              <TextField
+                label="Work starts"
+                onChangeText={setWorkStart}
+                placeholder="9:00 AM"
+                value={workStart}
+              />
             </View>
             <View style={{ flex: 1 }}>
-              <TextField label="Work ends" onChangeText={setWorkEnd} value={workEnd} />
+              <TextField
+                label="Work ends"
+                onChangeText={setWorkEnd}
+                placeholder="5:00 PM"
+                value={workEnd}
+              />
             </View>
             <View style={{ flex: 0.7 }}>
               <TextField
@@ -210,10 +273,10 @@ export function InsightsScreen() {
                   ...resolvedProductPreferences,
                   schedule: {
                     ...resolvedProductPreferences.schedule,
-                    sleepStart,
-                    sleepEnd,
-                    workdayStart: workStart,
-                    workdayEnd: workEnd,
+                    sleepStart: normalizedSleepStart,
+                    sleepEnd: normalizedSleepEnd,
+                    workdayStart: normalizedWorkStart,
+                    workdayEnd: normalizedWorkEnd,
                     commuteMinutes: Number(commuteMinutes) || 0,
                   },
                 }),
@@ -300,11 +363,11 @@ export function InsightsScreen() {
         <Surface className="gap-4">
           <View className="gap-2">
             <AppText tone="tertiary" variant="micro" style={{ textTransform: "uppercase" }}>
-              Context
+              Connections
             </AppText>
             <AppText variant="section">Calendar and reminders</AppText>
             <AppText tone="secondary">
-              Refresh access when the real-world context changes.
+              Refresh access and reminder settings when the real-world context changes.
             </AppText>
           </View>
           <MetaLine
@@ -381,11 +444,11 @@ export function InsightsScreen() {
         <Surface className="gap-4">
           <View className="gap-2">
             <AppText tone="tertiary" variant="micro" style={{ textTransform: "uppercase" }}>
-              Theme
+              Appearance
             </AppText>
             <AppText variant="section">Visual tone</AppText>
             <AppText tone="secondary">
-              Pick the visual tone you want without changing the product structure.
+              Pick the tone you want without changing the structure of the product.
             </AppText>
           </View>
           {themePresets.map((preset) => (

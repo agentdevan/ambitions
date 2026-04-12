@@ -23,6 +23,7 @@ import {
 } from "../../services/goals/metadata";
 import { hasUndoAvailable } from "../../services/goals/regenerationCoordinator";
 import { useAppStore } from "../../state/useAppStore";
+import { formatShortDate } from "../../utils/date";
 
 interface LifecycleDialogState {
   goal: Goal;
@@ -310,13 +311,13 @@ export function GoalsScreen() {
             </AppText>
             <View className="flex-row items-end justify-between gap-4">
               <View className="flex-1 gap-2">
-                <AppText variant="hero">Goals you can inspect and trust.</AppText>
+                <AppText variant="hero">Keep goals clear, focused, and current.</AppText>
                 <AppText tone="secondary">
-                  Review the structure, protect edited work, and make changes without turning the
-                  screen into admin clutter.
+                  Pick a goal, review its structure, and make changes without turning the page into
+                  admin clutter.
                 </AppText>
               </View>
-              <Button tone="secondary" onPress={openCreateComposer}>
+              <Button onPress={openCreateComposer}>
                 New goal
               </Button>
             </View>
@@ -341,9 +342,9 @@ export function GoalsScreen() {
                   <AppText tone="tertiary" variant="micro" style={{ textTransform: "uppercase" }}>
                     Active goals
                   </AppText>
-                  <AppText variant="section">Choose a goal</AppText>
+                  <AppText variant="section">Choose a goal to review</AppText>
                   <AppText tone="secondary">
-                    Active goals stay clear and comparable. Open one to inspect the full structure.
+                    Active goals stay easy to compare. Open one to review what matters now.
                   </AppText>
                 </View>
                 <View className="gap-3">
@@ -371,7 +372,9 @@ export function GoalsScreen() {
                           <MetaLine
                             items={[
                               goal.domainKey.replace("_", " "),
-                              goal.targetDate ? `Target ${goal.targetDate}` : "No target date",
+                              goal.targetDate
+                                ? `Target ${formatShortDate(goal.targetDate)}`
+                                : "No target date",
                               reviewDraft ? "Review pending" : "Plan current",
                             ]}
                           />
@@ -388,15 +391,15 @@ export function GoalsScreen() {
                     <View className="flex-row items-start justify-between gap-3">
                       <View className="flex-1 gap-2">
                         <AppText tone="tertiary" variant="micro" style={{ textTransform: "uppercase" }}>
-                          Goal detail
+                          Current goal
                         </AppText>
                         <AppText variant="title">{selectedGoal.title}</AppText>
                         <AppText tone="secondary">
                           {selectedGoal.summary ?? "A structured goal with a clear planning spine."}
                         </AppText>
                       </View>
-                      <Button tone="secondary" onPress={() => beginEdit(selectedGoal)}>
-                        Edit
+                      <Button tone="tertiary" onPress={() => beginEdit(selectedGoal)}>
+                        Edit goal
                       </Button>
                     </View>
 
@@ -426,11 +429,8 @@ export function GoalsScreen() {
                       <AppText variant="section">{selectedReviewDraft.headline}</AppText>
                       <AppText tone="secondary">{selectedReviewDraft.summary}</AppText>
                       <MetaLine items={["Recommended plan", "Needs review"]} />
-                      <Button
-                        tone="secondary"
-                        onPress={() => navigation.navigate("Plan" as never)}
-                      >
-                        Review plan
+                      <Button onPress={() => navigation.navigate("Plan" as never)}>
+                        Review changes
                       </Button>
                     </Surface>
                   ) : null}
@@ -448,7 +448,7 @@ export function GoalsScreen() {
                           ? `${selectedGoal.desiredWeeklyMinutes} min per week`
                           : "No weekly pacing set",
                         selectedGoal.targetDate
-                          ? `Target date ${selectedGoal.targetDate}`
+                          ? `Target date ${formatShortDate(selectedGoal.targetDate)}`
                           : "No target date",
                       ]}
                     />
@@ -477,7 +477,9 @@ export function GoalsScreen() {
                         </AppText>
                         <MetaLine
                           items={[
-                            milestone.targetDate ? `Target ${milestone.targetDate}` : "No target date",
+                            milestone.targetDate
+                              ? `Target ${formatShortDate(milestone.targetDate)}`
+                              : "No target date",
                             hasUserAdjustedMetadata(milestone) ? "Preserved" : "Generated",
                           ]}
                         />
@@ -503,7 +505,9 @@ export function GoalsScreen() {
                         <MetaLine
                           items={[
                             `${task.estimatedMinutes} min`,
-                            task.targetDate ? `Target ${task.targetDate}` : "No target date",
+                            task.targetDate
+                              ? `Target ${formatShortDate(task.targetDate)}`
+                              : "No target date",
                             hasUserAdjustedMetadata(task) ||
                             task.status === TaskStatus.Completed ||
                             task.status === TaskStatus.InProgress
@@ -522,7 +526,7 @@ export function GoalsScreen() {
                         onPress={() => openLifecycleDialog(selectedGoal, GoalStatus.Paused)}
                         busy={busyState === `status:${selectedGoal.id}`}
                       >
-                        Pause
+                        Pause goal
                       </Button>
                     ) : (
                       <Button
@@ -530,23 +534,23 @@ export function GoalsScreen() {
                         onPress={() => updateGoal(selectedGoal.id, { status: GoalStatus.Active })}
                         busy={busyState === `status:${selectedGoal.id}`}
                       >
-                        Resume
+                        Resume goal
                       </Button>
                     )}
                     <Button
-                      tone="ghost"
+                      tone="tertiary"
                       onPress={() => openLifecycleDialog(selectedGoal, GoalStatus.Archived)}
                       busy={busyState === `status:${selectedGoal.id}`}
                     >
-                      Archive
+                      Archive goal
                     </Button>
                     {hasUndoAvailable(selectedGoal) ? (
                       <Button
-                        tone="tertiary"
+                        tone="inline"
                         onPress={() => handleUndo(selectedGoal.id)}
                         busy={busyState === `undo:${selectedGoal.id}`}
                       >
-                        Undo last refresh
+                        Undo refresh
                       </Button>
                     ) : null}
                   </View>
@@ -557,11 +561,11 @@ export function GoalsScreen() {
                 <Surface className="gap-3">
                   <View className="gap-2">
                     <AppText tone="tertiary" variant="micro" style={{ textTransform: "uppercase" }}>
-                      Quiet storage
+                      Inactive goals
                     </AppText>
                     <AppText variant="section">Paused and archived</AppText>
                     <AppText tone="secondary">
-                      Goals that are out of rotation stay available without competing for attention.
+                      Goals that are out of rotation stay available without taking over the page.
                     </AppText>
                   </View>
                   {[...pausedGoals, ...archivedGoals].map((goal) => (
@@ -575,7 +579,9 @@ export function GoalsScreen() {
                         <AppText>{goal.title}</AppText>
                         <MetaLine
                           items={[
-                            goal.targetDate ? `Target ${goal.targetDate}` : "No target date",
+                            goal.targetDate
+                              ? `Target ${formatShortDate(goal.targetDate)}`
+                              : "No target date",
                           ]}
                         />
                       </View>
@@ -678,7 +684,7 @@ export function GoalsScreen() {
                   </View>
                 </View>
                 <View className="flex-row gap-3">
-                  <Button tone="ghost" style={{ flex: 1 }} onPress={resetComposer}>
+                  <Button tone="tertiary" style={{ flex: 1 }} onPress={resetComposer}>
                     Cancel
                   </Button>
                   <Button
@@ -735,11 +741,11 @@ export function GoalsScreen() {
                 </OptionChip>
               </View>
               <View className="flex-row gap-3">
-                <Button tone="ghost" style={{ flex: 1 }} onPress={() => setImpactPreview(null)}>
+                <Button tone="tertiary" style={{ flex: 1 }} onPress={() => setImpactPreview(null)}>
                   Back
                 </Button>
                 <Button style={{ flex: 1 }} onPress={confirmGoalEdit} busy={busyState === "impact"}>
-                  Confirm
+                  Apply changes
                 </Button>
               </View>
             </View>
@@ -791,7 +797,7 @@ export function GoalsScreen() {
                 </AppText>
               ) : null}
               <View className="flex-row gap-3">
-                <Button tone="ghost" style={{ flex: 1 }} onPress={() => setLifecycleState(null)}>
+                <Button tone="tertiary" style={{ flex: 1 }} onPress={() => setLifecycleState(null)}>
                   Cancel
                 </Button>
                 <Button
@@ -799,7 +805,7 @@ export function GoalsScreen() {
                   onPress={confirmLifecycleChange}
                   busy={lifecycleState ? busyState === `status:${lifecycleState.goal.id}` : false}
                 >
-                  Confirm
+                  Confirm change
                 </Button>
               </View>
             </View>

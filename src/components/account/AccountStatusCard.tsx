@@ -11,6 +11,8 @@ import {
 import { Button } from "../ui/Button";
 import { Surface } from "../ui/Surface";
 import { AppText } from "../ui/Text";
+import { useResolvedTheme } from "../../design/theme/useResolvedTheme";
+import { formatShortDateTime } from "../../utils/date";
 
 interface AccountStatusCardProps {
   account: AccountIdentity | null;
@@ -37,6 +39,7 @@ export function AccountStatusCard({
   onDefer,
   onSync,
 }: AccountStatusCardProps) {
+  const theme = useResolvedTheme();
   const hasAccount = !!account;
   const requiresAttachment =
     attachmentState?.status === LocalAttachmentStatus.ConfirmationRequired;
@@ -74,12 +77,16 @@ export function AccountStatusCard({
         {account ? (
           <View
             className="gap-1 rounded-[18px] px-4 py-4"
-            style={{ backgroundColor: "#F5F1EA", borderWidth: 1, borderColor: "#DDD5CB" }}
+            style={{
+              backgroundColor: theme.colors.background.elevated,
+              borderWidth: 1,
+              borderColor: theme.colors.border.strong,
+            }}
           >
             <AppText>{account.displayName ?? account.email ?? "Apple account"}</AppText>
             <AppText tone="tertiary" variant="caption">
               {syncState?.lastSyncAt
-                ? `Last sync ${syncState.lastSyncAt}`
+                ? `Last sync ${formatShortDateTime(syncState.lastSyncAt)}`
                 : "Sync has not run yet."}
             </AppText>
           </View>
@@ -104,19 +111,18 @@ export function AccountStatusCard({
                 Attach data
               </Button>
               <Button
-                tone="secondary"
+                tone="tertiary"
                 style={{ flex: 1 }}
                 busy={busyAction === "defer"}
                 onPress={onDefer}
               >
-                Not now
+                Keep local only
               </Button>
             </View>
           </View>
         ) : hasAccount ? (
           <View className="flex-row gap-3">
             <Button
-              tone="secondary"
               style={{ flex: 1 }}
               busy={busyAction === "sync"}
               onPress={onSync}
@@ -126,7 +132,7 @@ export function AccountStatusCard({
             </Button>
           </View>
         ) : (
-          <Button busy={busyAction === "sign_in"} onPress={onSignIn}>
+          <Button tone="secondary" busy={busyAction === "sign_in"} onPress={onSignIn}>
             Add account
           </Button>
         )}

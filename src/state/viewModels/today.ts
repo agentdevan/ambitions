@@ -15,6 +15,7 @@ import {
   TimeBlockState,
 } from "../../domain/models";
 import { SchedulingOutput } from "../../engines";
+import { formatTimeLabel } from "../../utils/date";
 
 export interface TodayTaskBlock {
   id: string;
@@ -283,7 +284,7 @@ export function buildTodayViewModel(params: {
       },
       {
         label: "Last realistic finish",
-        value: latestFinish ? `${latestFinish} without overload` : "Open-ended",
+        value: latestFinish ? `${formatTimeLabel(latestFinish)} without overload` : "Open-ended",
       },
     ],
     adaptiveGuidance:

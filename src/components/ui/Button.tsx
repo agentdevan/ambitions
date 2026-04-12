@@ -6,7 +6,7 @@ import { AppText } from "./Text";
 
 interface ButtonProps extends Omit<PressableProps, "children" | "style"> {
   children?: ReactNode;
-  tone?: "primary" | "secondary" | "tertiary" | "ghost";
+  tone?: "primary" | "secondary" | "tertiary" | "inline" | "ghost";
   busy?: boolean;
   size?: "default" | "compact";
   style?: StyleProp<ViewStyle>;
@@ -22,12 +22,13 @@ export function Button({
   ...props
 }: ButtonProps) {
   const theme = useResolvedTheme();
+  const resolvedTone = tone === "ghost" ? "secondary" : tone;
   const palette = {
     primary: {
-      backgroundColor: theme.colors.text.primary,
-      borderColor: theme.colors.text.primary,
+      backgroundColor: theme.colors.accent.primary,
+      borderColor: theme.colors.accent.primary,
       textTone: "inverse" as const,
-      shadowColor: theme.colors.text.primary,
+      shadowColor: theme.colors.accent.primary,
     },
     secondary: {
       backgroundColor: theme.colors.background.elevated,
@@ -36,28 +37,30 @@ export function Button({
       shadowColor: theme.colors.text.primary,
     },
     tertiary: {
-      backgroundColor: "transparent",
-      borderColor: "transparent",
-      textTone: "secondary" as const,
-      shadowColor: "transparent",
-    },
-    ghost: {
-      backgroundColor: theme.colors.background.canvas,
+      backgroundColor: theme.colors.background.sunken,
       borderColor: theme.colors.border.subtle,
       textTone: "secondary" as const,
       shadowColor: theme.colors.text.primary,
     },
-  }[tone];
+    inline: {
+      backgroundColor: "transparent",
+      borderColor: "transparent",
+      textTone: "accent" as const,
+      shadowColor: "transparent",
+    },
+  }[resolvedTone];
   const sizing = {
     default: {
-      minHeight: 48,
+      minHeight: 52,
       paddingHorizontal: 18,
+      paddingVertical: 14,
       textVariant: "caption" as const,
     },
     compact: {
-      minHeight: 38,
-      paddingHorizontal: 12,
-      textVariant: "micro" as const,
+      minHeight: 42,
+      paddingHorizontal: 14,
+      paddingVertical: 10,
+      textVariant: "caption" as const,
     },
   }[size];
 
@@ -65,32 +68,52 @@ export function Button({
     <Pressable
       {...props}
       disabled={disabled || busy}
-      className="items-center justify-center rounded-[16px] border"
+      className="items-center justify-center rounded-[18px] border"
       style={({ pressed }) => [
         {
           minHeight: sizing.minHeight,
           paddingHorizontal: sizing.paddingHorizontal,
+          paddingVertical: resolvedTone === "inline" ? 0 : sizing.paddingVertical,
           backgroundColor: palette.backgroundColor,
           borderColor: palette.borderColor,
-          borderWidth: tone === "tertiary" ? 0 : 1,
-          opacity: disabled || busy ? 0.45 : 1,
+          borderWidth: resolvedTone === "inline" ? 0 : 1,
+          opacity: disabled || busy ? 0.46 : pressed ? 0.94 : 1,
           transform: [{ scale: pressed ? 0.985 : 1 }],
           shadowColor: palette.shadowColor,
           shadowOpacity:
-            tone === "primary" ? (pressed ? 0.12 : 0.16) : tone === "secondary" ? 0.04 : 0,
-          shadowRadius: tone === "primary" ? 12 : 8,
-          shadowOffset: { width: 0, height: tone === "primary" ? 7 : 4 },
-          elevation: tone === "primary" ? 3 : tone === "secondary" ? 1 : 0,
+            resolvedTone === "primary"
+              ? pressed
+                ? 0.14
+                : 0.2
+              : resolvedTone === "secondary" || resolvedTone === "tertiary"
+                ? pressed
+                  ? 0.03
+                  : 0.06
+                : 0,
+          shadowRadius: resolvedTone === "primary" ? 14 : 8,
+          shadowOffset: { width: 0, height: resolvedTone === "primary" ? 8 : 4 },
+          elevation: resolvedTone === "primary" ? 3 : resolvedTone === "inline" ? 0 : 1,
         },
         style,
       ]}
     >
       {busy ? (
         <ActivityIndicator
-          color={tone === "primary" ? theme.colors.text.inverse : theme.colors.text.primary}
+          color={
+            resolvedTone === "primary"
+              ? theme.colors.text.inverse
+              : resolvedTone === "inline"
+                ? theme.colors.accent.primary
+                : theme.colors.text.primary
+          }
         />
       ) : (
-        <AppText tone={palette.textTone} variant={sizing.textVariant} numberOfLines={1}>
+        <AppText
+          tone={palette.textTone}
+          variant={sizing.textVariant}
+          numberOfLines={1}
+          style={{ fontWeight: resolvedTone === "inline" ? "600" : "700" }}
+        >
           {children}
         </AppText>
       )}

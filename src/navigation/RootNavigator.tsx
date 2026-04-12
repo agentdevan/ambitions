@@ -13,10 +13,10 @@ import { RootTabParamList } from "./types";
 const Tab = createBottomTabNavigator<RootTabParamList>();
 
 const iconMap: Record<keyof RootTabParamList, keyof typeof Ionicons.glyphMap> = {
-  Today: "sparkles-outline",
+  Today: "today-outline",
   Goals: "flag-outline",
-  Plan: "calendar-outline",
-  Insights: "pulse-outline",
+  Plan: "layers-outline",
+  Insights: "analytics-outline",
 };
 
 export function RootNavigator() {
@@ -35,12 +35,19 @@ export function RootNavigator() {
         headerShown: false,
         tabBarActiveTintColor: theme.colors.text.primary,
         tabBarInactiveTintColor: theme.colors.text.tertiary,
+        tabBarActiveBackgroundColor: theme.colors.background.sunken,
         tabBarStyle: {
           backgroundColor: theme.colors.background.elevated,
           borderTopColor: theme.colors.border.subtle,
-          height: 86,
-          paddingTop: 12,
-          paddingBottom: 18,
+          borderTopWidth: 1,
+          height: 84,
+          paddingTop: 10,
+          paddingBottom: 16,
+        },
+        tabBarItemStyle: {
+          marginHorizontal: 6,
+          marginVertical: 6,
+          borderRadius: 18,
         },
         tabBarLabelStyle: {
           fontSize: 11,

@@ -15,6 +15,7 @@ import { inferGoalDraft } from "../../product/goalIntake";
 import { ThemePresetKey } from "../../product/types";
 import { themePresets } from "../../product/theme";
 import { useAppStore } from "../../state/useAppStore";
+import { formatTimeLabel, formatTimeRangeLabel, normalizeTimeString } from "../../utils/date";
 
 const taskSizingOptions = [
   { key: "smaller", label: "Smaller tasks" },
@@ -66,13 +67,20 @@ export function OnboardingScreen() {
   const [goalTargetDate, setGoalTargetDate] = useState("");
   const [goalDomainKey, setGoalDomainKey] = useState<DomainKey | null>(null);
   const [sleepWindow, setSleepWindow] = useState(
-    `${current?.schedule.sleepStart ?? "23:00"}-${current?.schedule.sleepEnd ?? "07:00"}`,
+    formatTimeRangeLabel(
+      current?.schedule.sleepStart ?? "23:00",
+      current?.schedule.sleepEnd ?? "07:00",
+    ),
   );
   const [prepMinutes, setPrepMinutes] = useState(
     String(current?.schedule.morningPrepMinutes ?? 30),
   );
-  const [workStart, setWorkStart] = useState(current?.schedule.workdayStart ?? "09:00");
-  const [workEnd, setWorkEnd] = useState(current?.schedule.workdayEnd ?? "17:00");
+  const [workStart, setWorkStart] = useState(
+    formatTimeLabel(current?.schedule.workdayStart ?? "09:00"),
+  );
+  const [workEnd, setWorkEnd] = useState(
+    formatTimeLabel(current?.schedule.workdayEnd ?? "17:00"),
+  );
   const [commuteMinutes, setCommuteMinutes] = useState(
     String(current?.schedule.commuteMinutes ?? 20),
   );
@@ -106,9 +114,11 @@ export function OnboardingScreen() {
     }
 
     setRuntimeMessage(null);
-    const [sleepStart, sleepEnd] = sleepWindow.includes("-")
-      ? sleepWindow.split("-")
-      : ["23:00", "07:00"];
+    const [rawSleepStart, rawSleepEnd] = sleepWindow.includes("-")
+      ? sleepWindow.split(/\s*-\s*/)
+      : ["11:00 PM", "7:00 AM"];
+    const sleepStart = normalizeTimeString(rawSleepStart) ?? "23:00";
+    const sleepEnd = normalizeTimeString(rawSleepEnd) ?? "07:00";
 
     try {
       await createFirstPlan({
@@ -129,8 +139,8 @@ export function OnboardingScreen() {
             sleepStart,
             sleepEnd,
             morningPrepMinutes: Number(prepMinutes) || 30,
-            workdayStart: workStart,
-            workdayEnd: workEnd,
+            workdayStart: normalizeTimeString(workStart) ?? "09:00",
+            workdayEnd: normalizeTimeString(workEnd) ?? "17:00",
             workdays: [1, 2, 3, 4, 5],
             commuteMinutes: Number(commuteMinutes) || 0,
           },
@@ -179,7 +189,7 @@ export function OnboardingScreen() {
                   label="Sleep window"
                   value={sleepWindow}
                   onChangeText={setSleepWindow}
-                  placeholder="23:00-07:00"
+                  placeholder="11:00 PM - 7:00 AM"
                 />
               </View>
               <View style={{ width: 112 }}>
@@ -197,7 +207,7 @@ export function OnboardingScreen() {
                   label="Work starts"
                   value={workStart}
                   onChangeText={setWorkStart}
-                  placeholder="09:00"
+                  placeholder="9:00 AM"
                 />
               </View>
               <View style={{ flex: 1 }}>
@@ -205,7 +215,7 @@ export function OnboardingScreen() {
                   label="Work ends"
                   value={workEnd}
                   onChangeText={setWorkEnd}
-                  placeholder="17:00"
+                  placeholder="5:00 PM"
                 />
               </View>
               <View style={{ width: 112 }}>
@@ -370,7 +380,7 @@ export function OnboardingScreen() {
             Generate the first plan
           </Button>
           <AppText tone="tertiary" variant="caption" style={{ textAlign: "center" }}>
-            Defaults can be edited later in Settings.
+            Defaults can be edited later in Insights.
           </AppText>
           <AppText tone="tertiary" variant="caption" style={{ textAlign: "center" }}>
             Accounts stay optional at first. Add one later when backup or cross-device continuity

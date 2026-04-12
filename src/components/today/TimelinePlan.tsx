@@ -6,6 +6,7 @@ import { TodayTaskBlock } from "../../state/viewModels/today";
 import { Button } from "../ui/Button";
 import { Surface } from "../ui/Surface";
 import { AppText } from "../ui/Text";
+import { formatTimeRangeLabel } from "../../utils/date";
 
 interface TimelinePlanProps {
   blocks: TodayTaskBlock[];
@@ -14,12 +15,21 @@ interface TimelinePlanProps {
 }
 
 const actionLabels: Record<TaskActionType, string> = {
-  start: "Start",
-  complete: "Done",
+  start: "Start now",
+  complete: "Mark done",
   skip: "Skip",
   miss: "Missed",
-  defer: "Defer",
-  unschedule: "Unscheduled",
+  defer: "Move later",
+  unschedule: "Unschedule",
+};
+
+const stateLabels: Record<TodayTaskBlock["state"], string> = {
+  complete: "Complete",
+  scheduled: "Scheduled",
+  active: "In progress",
+  rolled: "Rolled forward",
+  deferred: "Deferred",
+  cancelled: "Removed",
 };
 
 export function TimelinePlan({
@@ -44,9 +54,9 @@ export function TimelinePlan({
           <AppText tone="tertiary" variant="micro" style={{ textTransform: "uppercase" }}>
             Timeline
           </AppText>
-          <AppText variant="title">Task timeline</AppText>
+          <AppText variant="title">Today&apos;s timeline</AppText>
           <AppText tone="secondary">
-            Work blocks with clear boundaries and only the next useful actions.
+            See each work block in order, then take the next useful action without extra clutter.
           </AppText>
         </View>
         <AppText tone="secondary" variant="caption">
@@ -56,7 +66,11 @@ export function TimelinePlan({
 
       <View
         className="gap-4 rounded-[20px] px-1 py-1"
-        style={{ backgroundColor: "#EAE4DB", borderWidth: 1, borderColor: "#D8CDBF" }}
+        style={{
+          backgroundColor: theme.colors.background.sunken,
+          borderWidth: 1,
+          borderColor: theme.colors.border.strong,
+        }}
       >
         {blocks.length === 0 ? (
           <AppText tone="secondary">
@@ -79,10 +93,10 @@ export function TimelinePlan({
                 <View className="flex-1 gap-3">
                   <View className="flex-row flex-wrap items-center gap-x-4 gap-y-2">
                     <AppText tone="tertiary" variant="micro" style={{ textTransform: "uppercase" }}>
-                      {block.startsAt} to {block.endsAt}
+                      {formatTimeRangeLabel(block.startsAt, block.endsAt)}
                     </AppText>
                     <AppText tone="secondary" variant="caption">
-                      {block.state}
+                      {stateLabels[block.state]}
                     </AppText>
                   </View>
                   <AppText variant="title">{block.title}</AppText>
@@ -106,9 +120,15 @@ export function TimelinePlan({
               <View
                 className="gap-2 rounded-[18px] px-3 py-3"
                 style={{
-                  backgroundColor: block.state === "active" ? "#F4F8F2" : "#F4EEE6",
+                  backgroundColor:
+                    block.state === "active"
+                      ? theme.colors.background.elevated
+                      : theme.colors.background.canvas,
                   borderWidth: 1,
-                  borderColor: block.state === "active" ? "#CCD8C5" : "#DDD3C7",
+                  borderColor:
+                    block.state === "active"
+                      ? `${theme.colors.accent.primary}44`
+                      : theme.colors.border.subtle,
                 }}
               >
                 <AppText tone="tertiary" variant="micro" style={{ textTransform: "uppercase" }}>
@@ -131,14 +151,18 @@ export function TimelinePlan({
               {block.taskId && block.actions.length > 0 ? (
                 <View
                   className="gap-3 rounded-[18px] px-3 py-3"
-                  style={{ backgroundColor: "#F6F1EA", borderWidth: 1, borderColor: "#DDD3C7" }}
+                  style={{
+                    backgroundColor: theme.colors.background.canvas,
+                    borderWidth: 1,
+                    borderColor: theme.colors.border.subtle,
+                  }}
                 >
                   <View className="flex-row items-center justify-between gap-3">
                     <AppText tone="tertiary" variant="micro" style={{ textTransform: "uppercase" }}>
                       Actions
                     </AppText>
                     <AppText tone="tertiary" variant="caption">
-                      Next move
+                      Next step
                     </AppText>
                   </View>
                   <View className="flex-row flex-wrap gap-2">
@@ -147,7 +171,13 @@ export function TimelinePlan({
                         key={`${block.id}-${action}`}
                         onPress={() => onTaskAction(block.taskId as string, action)}
                         disabled={busyTaskId === block.taskId}
-                        tone={action === "start" || action === "complete" ? "primary" : "ghost"}
+                        tone={
+                          action === "start" || action === "complete"
+                            ? "primary"
+                            : action === "defer"
+                              ? "secondary"
+                              : "tertiary"
+                        }
                         size="compact"
                       >
                         {busyTaskId === block.taskId ? "Working..." : actionLabels[action]}

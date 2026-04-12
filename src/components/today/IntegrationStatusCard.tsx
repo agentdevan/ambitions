@@ -5,6 +5,7 @@ import {
   CalendarPermissionState,
   CalendarSyncState,
 } from "../../domain/models";
+import { useResolvedTheme } from "../../design/theme/useResolvedTheme";
 import { Button } from "../ui/Button";
 import { Surface } from "../ui/Surface";
 import { AppText } from "../ui/Text";
@@ -30,6 +31,7 @@ export function IntegrationStatusCard({
   calendarDetail,
   busyAction = null,
 }: IntegrationStatusCardProps) {
+  const theme = useResolvedTheme();
   const needsCalendarPermission =
     !calendarConnectionState ||
     calendarConnectionState.permissionState === CalendarPermissionState.NotAsked;
@@ -57,7 +59,11 @@ export function IntegrationStatusCard({
         </AppText>
         <View
           className="rounded-[18px] px-4 py-4"
-          style={{ backgroundColor: "#F5F1EA", borderWidth: 1, borderColor: "#DDD5CB" }}
+          style={{
+            backgroundColor: theme.colors.background.elevated,
+            borderWidth: 1,
+            borderColor: theme.colors.border.strong,
+          }}
         >
           <AppText tone="secondary">{calendarDetail}</AppText>
           {syncFailure && calendarConnectionState?.metadata.lastError ? (
@@ -89,7 +95,7 @@ export function IntegrationStatusCard({
         ) : null}
         {calendarDenied ? (
           <Button
-            tone="secondary"
+            tone="tertiary"
             size="compact"
             onPress={() => void onRequestCalendarAccess()}
             busy={busyAction === "calendar"}
@@ -104,12 +110,12 @@ export function IntegrationStatusCard({
             onPress={() => void onRefreshIntegration()}
             busy={busyAction === "refresh"}
           >
-            Refresh calendar
+            Refresh context
           </Button>
         ) : null}
         {notificationNeedsPermission ? (
           <Button
-            tone="secondary"
+            tone="tertiary"
             size="compact"
             onPress={() => void onRequestNotificationAccess()}
             busy={busyAction === "notifications"}

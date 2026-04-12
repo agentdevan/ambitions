@@ -1,5 +1,5 @@
 import { PropsWithChildren } from "react";
-import { Pressable, PressableProps, StyleProp, View, ViewStyle } from "react-native";
+import { Pressable, PressableProps, StyleProp, ViewStyle } from "react-native";
 
 import { useResolvedTheme } from "../../design/theme/useResolvedTheme";
 import { AppText } from "./Text";
@@ -26,48 +26,37 @@ export function OptionChip({
       {...props}
       style={({ pressed }) => [
         {
-          minHeight: compact ? 34 : 40,
-          borderRadius: 16,
+          minHeight: compact ? 38 : 44,
+          borderRadius: compact ? 16 : 18,
           borderWidth: 1,
-          paddingHorizontal: compact ? 12 : 14,
-          paddingVertical: compact ? 7 : 9,
+          paddingHorizontal: compact ? 12 : 15,
+          paddingVertical: compact ? 8 : 10,
           alignItems: "center",
           justifyContent: "center",
           backgroundColor: selected
-            ? theme.colors.text.primary
-            : theme.colors.background.elevated,
+            ? theme.colors.accent.primary
+            : theme.colors.background.sunken,
           borderColor: selected
-            ? theme.colors.text.primary
-            : theme.colors.border.subtle,
-          opacity: props.disabled ? 0.45 : 1,
+            ? theme.colors.accent.primary
+            : theme.colors.border.strong,
+          opacity: props.disabled ? 0.45 : pressed ? 0.94 : 1,
           transform: [{ scale: pressed ? 0.985 : 1 }],
           shadowColor: theme.colors.text.primary,
-          shadowOpacity: selected ? 0.08 : 0.02,
-          shadowRadius: selected ? 10 : 6,
+          shadowOpacity: selected ? 0.12 : 0.03,
+          shadowRadius: selected ? 12 : 6,
           shadowOffset: { width: 0, height: selected ? 6 : 3 },
           elevation: selected ? 2 : 1,
         },
         style,
       ]}
     >
-      <View className="flex-row items-center justify-center gap-2">
-        <View
-          className="h-2 w-2 rounded-full"
-          style={{
-            backgroundColor: selected
-              ? theme.colors.text.inverse
-              : theme.colors.text.tertiary,
-            opacity: selected ? 0.92 : 0.55,
-          }}
-        />
-        <AppText
-          tone={selected ? "inverse" : "primary"}
-          variant={compact ? "micro" : "caption"}
-          style={{ textAlign: "center" }}
-        >
-          {children}
-        </AppText>
-      </View>
+      <AppText
+        tone={selected ? "inverse" : "primary"}
+        variant={compact ? "micro" : "caption"}
+        style={{ textAlign: "center", fontWeight: "600" }}
+      >
+        {children}
+      </AppText>
     </Pressable>
   );
 }

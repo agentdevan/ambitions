@@ -25,9 +25,9 @@ export function Pill({ label, tone = "neutral" }: PillProps) {
       textTone: "secondary",
     },
     quiet: {
-      backgroundColor: "transparent",
-      borderColor: "transparent",
-      textTone: "tertiary",
+      backgroundColor: theme.colors.background.sunken,
+      borderColor: theme.colors.border.subtle,
+      textTone: "secondary",
     },
   };
 
@@ -36,7 +36,7 @@ export function Pill({ label, tone = "neutral" }: PillProps) {
       className="self-start rounded-full px-2.5 py-1"
       style={{
         backgroundColor: toneMap[tone].backgroundColor,
-        borderWidth: tone === "quiet" ? 0 : 1,
+        borderWidth: 1,
         borderColor: toneMap[tone].borderColor,
       }}
     >

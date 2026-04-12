@@ -11,6 +11,7 @@ import { AppText } from "../../components/ui/Text";
 import { GoalStatus } from "../../domain/models";
 import { getGoalReviewDraft } from "../../services/goals/metadata";
 import { useAppStore } from "../../state/useAppStore";
+import { formatShortDate } from "../../utils/date";
 
 function shiftDate(date: string | null, offsetDays: number) {
   const base = date ? Date.parse(`${date}T12:00:00.000Z`) : Date.now();
@@ -96,9 +97,9 @@ export function PlanScreen() {
           <AppText tone="tertiary" variant="micro" style={{ textTransform: "uppercase" }}>
             Plan
           </AppText>
-          <AppText variant="hero">The current shape of the work.</AppText>
+          <AppText variant="hero">Review the plan, then keep it moving.</AppText>
           <AppText tone="secondary">
-            Review what is changing, then scan the active day and what it feeds next.
+            Review pending changes first, then scan the active day and the structure it supports.
           </AppText>
         </View>
 
@@ -108,9 +109,9 @@ export function PlanScreen() {
               <AppText tone="tertiary" variant="micro" style={{ textTransform: "uppercase" }}>
                 Review queue
               </AppText>
-              <AppText variant="section">Recommended changes</AppText>
+              <AppText variant="section">Changes waiting on a decision</AppText>
               <AppText tone="secondary">
-                Review stays close to the work. Open the goal that needs a decision.
+                Pick the goal that needs a decision, then approve or adjust the recommendation.
               </AppText>
             </View>
             <MetaLine
@@ -176,7 +177,9 @@ export function PlanScreen() {
                     </AppText>
                     <MetaLine
                       items={[
-                        milestone.targetDate ? `Target ${milestone.targetDate}` : "No target date",
+                        milestone.targetDate
+                          ? `Target ${formatShortDate(milestone.targetDate)}`
+                          : "No target date",
                         milestone.protected ? "Protected" : milestone.changeLabel,
                       ]}
                     />
@@ -190,7 +193,9 @@ export function PlanScreen() {
                           <MetaLine
                             items={[
                               `${task.estimatedMinutes} min`,
-                              task.targetDate ? `Target ${task.targetDate}` : "No target date",
+                              task.targetDate
+                                ? `Target ${formatShortDate(task.targetDate)}`
+                                : "No target date",
                               task.protected ? "Preserved" : "Adjustable",
                             ]}
                           />
@@ -203,7 +208,7 @@ export function PlanScreen() {
                         {!task.protected ? (
                           <View className="flex-row flex-wrap gap-2">
                             <Button
-                              tone="ghost"
+                              tone="tertiary"
                               size="compact"
                               onPress={() =>
                                 runReviewAction(
@@ -216,7 +221,7 @@ export function PlanScreen() {
                               Earlier
                             </Button>
                             <Button
-                              tone="ghost"
+                              tone="tertiary"
                               size="compact"
                               onPress={() =>
                                 runReviewAction(
@@ -229,7 +234,7 @@ export function PlanScreen() {
                               Later
                             </Button>
                             <Button
-                              tone="ghost"
+                              tone="tertiary"
                               size="compact"
                               onPress={() =>
                                 runReviewAction(
@@ -245,7 +250,7 @@ export function PlanScreen() {
                               -15 min
                             </Button>
                             <Button
-                              tone="ghost"
+                              tone="tertiary"
                               size="compact"
                               onPress={() =>
                                 runReviewAction(
@@ -261,7 +266,7 @@ export function PlanScreen() {
                               +15 min
                             </Button>
                             <Button
-                              tone="ghost"
+                              tone="tertiary"
                               size="compact"
                               onPress={() =>
                                 runReviewAction(
@@ -277,7 +282,7 @@ export function PlanScreen() {
                               Move earlier
                             </Button>
                             <Button
-                              tone="ghost"
+                              tone="tertiary"
                               size="compact"
                               onPress={() =>
                                 runReviewAction(
@@ -293,7 +298,7 @@ export function PlanScreen() {
                               Move later
                             </Button>
                             <Button
-                              tone="tertiary"
+                              tone="inline"
                               size="compact"
                               onPress={() =>
                                 runReviewAction(
@@ -325,7 +330,7 @@ export function PlanScreen() {
                 }
                 busy={busyAction === `accept:${selectedGoal.id}`}
               >
-                Accept recommendation
+                Approve changes
               </Button>
               <Button
                 tone="secondary"
@@ -338,10 +343,10 @@ export function PlanScreen() {
                 }
                 busy={busyAction === `refresh:${selectedGoal.id}`}
               >
-                Refresh
+                Refresh proposal
               </Button>
               <Button
-                tone="tertiary"
+                tone="inline"
                 onPress={() =>
                   runReviewAction(
                     `full:${selectedGoal.id}`,
@@ -351,7 +356,7 @@ export function PlanScreen() {
                 }
                 busy={busyAction === `full:${selectedGoal.id}`}
               >
-                Full refresh
+                Rebuild plan
               </Button>
             </View>
           </Surface>
@@ -362,13 +367,13 @@ export function PlanScreen() {
             <Surface className="gap-4">
               <View className="gap-2">
                 <AppText tone="tertiary" variant="micro" style={{ textTransform: "uppercase" }}>
-                  Today's frame
+                  Active day
                 </AppText>
                 <AppText variant="title">{dailyPlan.focus}</AppText>
                 <AppText tone="secondary">
                   {dailyPlan.planningNotes ?? "The planner built a compact day with room to recover."}
                 </AppText>
-                <MetaLine items={[dailyPlan.date, `${timeBlocks.length} sessions`]} />
+                <MetaLine items={[formatShortDate(dailyPlan.date), `${timeBlocks.length} sessions`]} />
               </View>
               <View className="flex-row gap-3">
                 <MetricCard label="Sessions" value={String(timeBlocks.length)} />
@@ -376,7 +381,7 @@ export function PlanScreen() {
                   label="Tasks"
                   value={String(tasks.filter((task) => task.scheduledDate === dailyPlan.date).length)}
                 />
-                <MetricCard label="Date" value={dailyPlan.date} />
+                <MetricCard label="Date" value={formatShortDate(dailyPlan.date)} />
               </View>
             </Surface>
 
@@ -400,7 +405,9 @@ export function PlanScreen() {
                     <AppText>{milestone.title}</AppText>
                     <MetaLine
                       items={[
-                        milestone.targetDate ? `Target ${milestone.targetDate}` : "No target date",
+                        milestone.targetDate
+                          ? `Target ${formatShortDate(milestone.targetDate)}`
+                          : "No target date",
                         goal?.title ?? "Goal no longer available",
                       ]}
                     />
@@ -412,9 +419,9 @@ export function PlanScreen() {
             <Surface className="gap-3">
               <View className="gap-2">
                 <AppText tone="tertiary" variant="micro" style={{ textTransform: "uppercase" }}>
-                  Continuity
+                  Planning context
                 </AppText>
-                <AppText variant="section">What keeps the plan stable</AppText>
+                <AppText variant="section">What keeps the plan believable</AppText>
                 <AppText tone="secondary">
                   {calendarConnectionState?.permissionState === "granted"
                     ? "Calendar access is available for live context."
