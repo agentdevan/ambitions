@@ -42,7 +42,7 @@ interface AuthStateRow {
   signed_in_account_id: string | null;
   primary_provider: AuthProvider;
   available_providers_json: string;
-  can_attempt_apple_sign_in: number;
+  session_expires_at: string | null;
   last_authenticated_at: string | null;
   last_error: string | null;
   created_at: string;
@@ -163,10 +163,10 @@ export class SQLiteAccountRepository extends SQLiteRepository implements Account
       `
         INSERT OR REPLACE INTO auth_state (
           id, status, signed_in_account_id, primary_provider, available_providers_json,
-          can_attempt_apple_sign_in, last_authenticated_at, last_error, created_at, updated_at
+          session_expires_at, last_authenticated_at, last_error, created_at, updated_at
         ) VALUES (
           'primary', $status, $signedInAccountId, $primaryProvider, $availableProvidersJson,
-          $canAttemptAppleSignIn, $lastAuthenticatedAt, $lastError, $createdAt, $updatedAt
+          $sessionExpiresAt, $lastAuthenticatedAt, $lastError, $createdAt, $updatedAt
         );
       `,
       {
@@ -174,7 +174,7 @@ export class SQLiteAccountRepository extends SQLiteRepository implements Account
         $signedInAccountId: state.signedInAccountId,
         $primaryProvider: state.primaryProvider,
         $availableProvidersJson: encodeJson(state.availableProviders),
-        $canAttemptAppleSignIn: state.canAttemptAppleSignIn ? 1 : 0,
+        $sessionExpiresAt: state.sessionExpiresAt,
         $lastAuthenticatedAt: state.lastAuthenticatedAt,
         $lastError: state.lastError,
         $createdAt: state.createdAt,
@@ -385,7 +385,7 @@ function mapAuthState(row: AuthStateRow): AuthStateSnapshot {
     signedInAccountId: row.signed_in_account_id,
     primaryProvider: row.primary_provider,
     availableProviders: decodeJson<AuthProvider[]>(row.available_providers_json),
-    canAttemptAppleSignIn: row.can_attempt_apple_sign_in === 1,
+    sessionExpiresAt: row.session_expires_at,
     lastAuthenticatedAt: row.last_authenticated_at,
     lastError: row.last_error,
     createdAt: row.created_at,

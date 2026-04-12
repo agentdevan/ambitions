@@ -466,4 +466,52 @@ export const schemaMigrations: MigrationDefinition[] = [
       `CREATE INDEX IF NOT EXISTS idx_activity_events_date ON activity_events(date DESC);`,
     ],
   },
+  {
+    id: 5,
+    name: "phase_14_auth_session_persistence",
+    statements: [
+      `
+        CREATE TABLE IF NOT EXISTS auth_state_v2 (
+          id TEXT PRIMARY KEY NOT NULL,
+          status TEXT NOT NULL,
+          signed_in_account_id TEXT,
+          primary_provider TEXT NOT NULL,
+          available_providers_json TEXT NOT NULL,
+          session_expires_at TEXT,
+          last_authenticated_at TEXT,
+          last_error TEXT,
+          created_at TEXT NOT NULL,
+          updated_at TEXT NOT NULL
+        );
+      `,
+      `
+        INSERT OR REPLACE INTO auth_state_v2 (
+          id,
+          status,
+          signed_in_account_id,
+          primary_provider,
+          available_providers_json,
+          session_expires_at,
+          last_authenticated_at,
+          last_error,
+          created_at,
+          updated_at
+        )
+        SELECT
+          id,
+          status,
+          signed_in_account_id,
+          primary_provider,
+          available_providers_json,
+          NULL,
+          last_authenticated_at,
+          last_error,
+          created_at,
+          updated_at
+        FROM auth_state;
+      `,
+      `DROP TABLE auth_state;`,
+      `ALTER TABLE auth_state_v2 RENAME TO auth_state;`,
+    ],
+  },
 ];

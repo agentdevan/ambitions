@@ -1,11 +1,14 @@
 import { AuditMetadata, EntityRecord, ISODateTimeString, JsonMap } from "./shared";
 
 export enum AuthProvider {
+  Email = "email",
   Apple = "apple",
 }
 
 export enum AuthStatus {
   LocalOnly = "local_only",
+  Restoring = "restoring",
+  SigningUp = "signing_up",
   SigningIn = "signing_in",
   Authenticated = "authenticated",
   Unavailable = "unavailable",
@@ -22,9 +25,11 @@ export enum LocalAttachmentStatus {
 
 export enum SyncMode {
   LocalOnly = "local_only",
-  Ready = "ready",
+  PendingChanges = "pending_changes",
   Syncing = "syncing",
-  Degraded = "degraded",
+  Synced = "synced",
+  Offline = "offline",
+  Issue = "issue",
   ReviewRequired = "review_required",
 }
 
@@ -55,8 +60,11 @@ export type SyncEntityKind =
   | "milestone"
   | "task"
   | "daily_plan"
+  | "time_block"
   | "preferences"
-  | "adaptation_profile";
+  | "notification_preference"
+  | "adaptation_profile"
+  | "activity_event";
 
 export interface AccountIdentity extends EntityRecord {
   provider: AuthProvider;
@@ -71,7 +79,7 @@ export interface AuthStateSnapshot extends AuditMetadata {
   signedInAccountId: string | null;
   primaryProvider: AuthProvider;
   availableProviders: AuthProvider[];
-  canAttemptAppleSignIn: boolean;
+  sessionExpiresAt: ISODateTimeString | null;
   lastAuthenticatedAt: ISODateTimeString | null;
   lastError: string | null;
 }

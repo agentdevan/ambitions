@@ -53,6 +53,7 @@ export const appServices = {
         planning: repositories.planning,
         preferences: repositories.preferences,
         adaptation: repositories.adaptation,
+        history: repositories.history,
       },
     }),
   },

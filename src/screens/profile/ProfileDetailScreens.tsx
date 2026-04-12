@@ -541,12 +541,18 @@ export function ProfileAccountScreen() {
   const attachmentState = useAppStore((state) => state.attachmentState);
   const syncState = useAppStore((state) => state.syncState);
   const syncConflicts = useAppStore((state) => state.syncConflicts);
-  const signInWithApple = useAppStore((state) => state.signInWithApple);
+  const createAccount = useAppStore((state) => state.createAccount);
+  const signIn = useAppStore((state) => state.signIn);
+  const signOut = useAppStore((state) => state.signOut);
   const attachLocalDataToAccount = useAppStore((state) => state.attachLocalDataToAccount);
   const deferLocalDataAttachment = useAppStore((state) => state.deferLocalDataAttachment);
   const syncAccountData = useAppStore((state) => state.syncAccountData);
   const [accountBusy, setAccountBusy] = useState<string | null>(null);
   const [runtimeMessage, setRuntimeMessage] = useState<string | null>(null);
+  const [authMode, setAuthMode] = useState<"create" | "sign_in">("create");
+  const [displayName, setDisplayName] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
 
   async function runAccountAction(
     key: string,
@@ -565,12 +571,17 @@ export function ProfileAccountScreen() {
     }
   }
 
+  const canSubmitAuth =
+    email.trim().length > 3 &&
+    password.trim().length >= 8 &&
+    (authMode === "sign_in" || displayName.trim().length > 0);
+
   return (
     <Screen>
       <View className="gap-4">
         <Surface tone="accent" className="gap-3">
           <AppText variant="title">Account</AppText>
-          <AppText tone="secondary">Sign-in, attachment, and sync.</AppText>
+          <AppText tone="secondary">Identity and sync.</AppText>
         </Surface>
         <AccountStatusCard
           account={account}
@@ -579,15 +590,12 @@ export function ProfileAccountScreen() {
           syncState={syncState}
           conflicts={syncConflicts}
           busyAction={
-            accountBusy === "sign_in" ||
             accountBusy === "attach" ||
             accountBusy === "sync" ||
-            accountBusy === "defer"
-              ? (accountBusy as "sign_in" | "attach" | "sync" | "defer")
+            accountBusy === "defer" ||
+            accountBusy === "sign_out"
+              ? (accountBusy as "attach" | "sync" | "defer" | "sign_out")
               : null
-          }
-          onSignIn={() =>
-            void runAccountAction("sign_in", signInWithApple, "Sign in with Apple could not start.")
           }
           onAttach={() =>
             void runAccountAction(
@@ -606,7 +614,80 @@ export function ProfileAccountScreen() {
           onSync={() =>
             void runAccountAction("sync", () => syncAccountData(), "Account sync could not complete.")
           }
+          onSignOut={() =>
+            void runAccountAction("sign_out", signOut, "The account could not be signed out.")
+          }
         />
+        {!account ? (
+          <Surface className="gap-4">
+            <View className="gap-3">
+              <AppText variant="section">Connect an account</AppText>
+              <View className="flex-row gap-2">
+                <OptionChip selected={authMode === "create"} onPress={() => setAuthMode("create")}>
+                  Create account
+                </OptionChip>
+                <OptionChip selected={authMode === "sign_in"} onPress={() => setAuthMode("sign_in")}>
+                  Sign in
+                </OptionChip>
+              </View>
+            </View>
+            {authMode === "create" ? (
+              <TextField
+                autoCapitalize="words"
+                label="Name"
+                onChangeText={setDisplayName}
+                placeholder="Your name"
+                value={displayName}
+              />
+            ) : null}
+            <TextField
+              autoCapitalize="none"
+              keyboardType="email-address"
+              label="Email"
+              onChangeText={setEmail}
+              placeholder="you@example.com"
+              value={email}
+            />
+            <TextField
+              autoCapitalize="none"
+              label="Password"
+              onChangeText={setPassword}
+              placeholder="At least 8 characters"
+              secureTextEntry
+              value={password}
+            />
+            <Button
+              busy={accountBusy === "auth"}
+              disabled={!canSubmitAuth}
+              onPress={() =>
+                void runAccountAction(
+                  "auth",
+                  () =>
+                    authMode === "create"
+                      ? createAccount({
+                          email: email.trim(),
+                          password,
+                          displayName: displayName.trim(),
+                        })
+                      : signIn({
+                          email: email.trim(),
+                          password,
+                        }),
+                  authMode === "create"
+                    ? "The account could not be created."
+                    : "The account could not be signed in.",
+                )
+              }
+            >
+              {authMode === "create" ? "Create account" : "Sign in"}
+            </Button>
+            <AppText tone="tertiary" variant="caption">
+              {authMode === "create"
+                ? "Create an account to carry your data across devices."
+                : "Sign back in to resume sync on this device."}
+            </AppText>
+          </Surface>
+        ) : null}
         {runtimeMessage ? <AppText tone="tertiary" variant="caption">{runtimeMessage}</AppText> : null}
       </View>
     </Screen>

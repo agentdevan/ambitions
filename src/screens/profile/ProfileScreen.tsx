@@ -101,13 +101,30 @@ export function ProfileScreen({ navigation }: Props) {
                 {account?.displayName ?? account?.email ?? "Local profile"}
               </AppText>
               <AppText tone="secondary" variant="caption">
-                {account ? "Sync ready." : "Local only."}
+                {account
+                  ? syncState?.mode === "synced"
+                    ? "Up to date."
+                    : syncState?.mode === "syncing"
+                      ? "Syncing changes."
+                      : syncState?.mode === "offline"
+                        ? "Offline for now."
+                        : syncState?.mode === "issue"
+                          ? "Couldn’t sync."
+                          : "Signed in."
+                  : "Local only."}
               </AppText>
             </View>
           </View>
 
           <View className="flex-row flex-wrap gap-2">
-            <Pill label={syncState?.mode.replaceAll("_", " ") ?? "Not synced"} tone="quiet" />
+            <Pill
+              label={
+                account
+                  ? syncState?.mode.replaceAll("_", " ") ?? "signed in"
+                  : "local only"
+              }
+              tone="quiet"
+            />
             <Pill label={`${reflectionSummary.completedThisWeek} done this week`} tone="accent" />
           </View>
         </Surface>
@@ -161,7 +178,19 @@ export function ProfileScreen({ navigation }: Props) {
           <DrillInRow
             title="Account"
             subtitle="Sign-in and sync"
-            detail={account ? "Connected" : "Local only"}
+            detail={
+              account
+                ? syncState?.mode === "synced"
+                  ? "Up to date"
+                  : syncState?.mode === "pending_changes"
+                    ? "Pending changes"
+                    : syncState?.mode === "offline"
+                      ? "Offline"
+                      : syncState?.mode === "issue"
+                        ? "Retry needed"
+                        : "Connected"
+                : "Local only"
+            }
             actionLabel="Open"
             leading={<Ionicons color={theme.colors.text.secondary} name="person-circle-outline" size={18} />}
             onPress={() => navigation.navigate("ProfileAccount")}

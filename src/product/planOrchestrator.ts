@@ -27,6 +27,20 @@ function nowIso() {
   return new Date().toISOString();
 }
 
+function bindToAccount<
+  T extends { ownerUserId: string | null; remoteId: string | null; syncState: string },
+>(record: T, accountId: string | null) {
+  if (!accountId) {
+    return record;
+  }
+
+  return {
+    ...record,
+    ownerUserId: accountId,
+    syncState: EntitySyncState.PendingSync,
+  };
+}
+
 function createGoalRecord(inference: GoalDraftInference, focusDomains: DomainKey[], today: string): Goal {
   const timestamp = nowIso();
 
@@ -199,6 +213,7 @@ export async function createGoalAndFirstPlan(params: {
   currentPreferences: UserPreferences;
   today: string;
   adaptationProfile: AdaptationProfile | null;
+  accountId?: string | null;
 }) {
   const { goal, milestones, tasks, mergedPreferences } = await createGoalArtifacts(params);
   const goals = await appServices.repositories.goals.listGoals();
@@ -233,12 +248,25 @@ export async function createGoalAndFirstPlan(params: {
       })
     ).payload.suggestions ?? [];
 
-  await appServices.repositories.preferences.saveUserPreferences(mergedPreferences);
-  await appServices.repositories.goals.saveGoals([goal, ...goals.map((entry, index) => ({ ...entry, sortOrder: index + 2 }))]);
-  await appServices.repositories.goals.saveMilestones(milestones);
-  await appServices.repositories.tasks.saveTasks(persistedTasks);
-  await appServices.repositories.planning.saveDailyPlans([schedule.payload.dailyPlan]);
-  await appServices.repositories.planning.saveTimeBlocks(schedule.payload.timeBlocks);
+  await appServices.repositories.preferences.saveUserPreferences(
+    bindToAccount(mergedPreferences, params.accountId ?? null),
+  );
+  await appServices.repositories.goals.saveGoals([
+    bindToAccount(goal, params.accountId ?? null),
+    ...goals.map((entry, index) => ({ ...entry, sortOrder: index + 2 })),
+  ]);
+  await appServices.repositories.goals.saveMilestones(
+    milestones.map((milestone) => bindToAccount(milestone, params.accountId ?? null)),
+  );
+  await appServices.repositories.tasks.saveTasks(
+    persistedTasks.map((task) => bindToAccount(task, params.accountId ?? null)),
+  );
+  await appServices.repositories.planning.saveDailyPlans([
+    bindToAccount(schedule.payload.dailyPlan, params.accountId ?? null),
+  ]);
+  await appServices.repositories.planning.saveTimeBlocks(
+    schedule.payload.timeBlocks.map((block) => bindToAccount(block, params.accountId ?? null)),
+  );
   await appServices.repositories.adaptation.replaceReplanSuggestions(params.today, suggestions);
 
   return {

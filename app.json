@@ -39,6 +39,7 @@
       "expo-sqlite",
       "expo-font",
       "expo-notifications",
+      "expo-secure-store",
       [
         "expo-calendar",
         {

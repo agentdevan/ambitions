@@ -1,9 +1,11 @@
 import {
   AdaptationProfile,
+  ActivityEvent,
   DailyPlan,
   EntitySyncState,
   Goal,
   GoalMilestone,
+  NotificationPreference,
   RemoteSyncRecord,
   SyncEntityKind,
   SyncMode,
@@ -11,14 +13,17 @@ import {
   SyncOperationStatus,
   SyncStateSnapshot,
   Task,
+  TimeBlock,
   UserPreferences,
 } from "../../../domain/models";
 import { AccountRepository } from "../../../repositories/AccountRepository";
 import { AdaptationRepository } from "../../../repositories/AdaptationRepository";
 import { GoalRepository } from "../../../repositories/GoalRepository";
+import { HistoryRepository } from "../../../repositories/HistoryRepository";
 import { PlanRepository } from "../../../repositories/PlanRepository";
 import { PreferencesRepository } from "../../../repositories/PreferencesRepository";
 import { TaskRepository } from "../../../repositories/TaskRepository";
+import { SupabaseAccountClient } from "../SupabaseAccountClient";
 import { buildConflictRecord, MergeEvaluator } from "./MergeEvaluator";
 import {
   duplicateConflictRecord,
@@ -35,21 +40,43 @@ interface SyncRepositories {
   planning: PlanRepository;
   preferences: PreferencesRepository;
   adaptation: AdaptationRepository;
+  history: HistoryRepository;
+}
+
+interface LocalSyncState {
+  goals: Goal[];
+  milestones: GoalMilestone[];
+  tasks: Task[];
+  preferences: UserPreferences | null;
+  notificationPreferences: NotificationPreference[];
+  adaptationProfile: AdaptationProfile | null;
+  dailyPlans: DailyPlan[];
+  timeBlocks: TimeBlock[];
+  activityEvents: ActivityEvent[];
 }
 
 export class SyncCoordinator {
   constructor(
     private readonly accountRepository: AccountRepository,
     private readonly repositories: SyncRepositories,
+    private readonly remoteClient: SupabaseAccountClient,
   ) {}
 
   async countMeaningfulLocalRecords() {
-    const [goals, milestones, tasks, plans, preferences] = await Promise.all([
+    const [
+      goals,
+      milestones,
+      tasks,
+      plans,
+      preferences,
+      activityEvents,
+    ] = await Promise.all([
       this.repositories.goals.listGoals(),
       this.repositories.goals.listMilestones(),
       this.repositories.tasks.listTasks(),
       this.repositories.planning.listDailyPlans(),
       this.repositories.preferences.getUserPreferences(),
+      this.repositories.history.listActivityEvents(500),
     ]);
 
     return {
@@ -58,48 +85,78 @@ export class SyncCoordinator {
         milestones.length > 0 ||
         tasks.length > 0 ||
         plans.length > 0 ||
+        activityEvents.length > 0 ||
         preferences?.metadata.onboardingCompleted === true ||
         preferences?.metadata.onboardingCompleted === "true",
       pendingRecordCount:
-        goals.length + milestones.length + tasks.length + plans.length + (preferences ? 1 : 0),
+        goals.length +
+        milestones.length +
+        tasks.length +
+        plans.length +
+        activityEvents.length +
+        (preferences ? 1 : 0),
+    };
+  }
+
+  async countPendingRecords(accountId: string) {
+    const localState = await this.loadLocalSyncState();
+    const allRecords = this.flattenLocal(localState).filter(
+      (entry) => entry.record.ownerUserId === accountId,
+    );
+    const pendingPushCount = allRecords.filter(
+      (entry) => entry.record.syncState !== EntitySyncState.Synced,
+    ).length;
+
+    return {
+      totalRecordCount: allRecords.length,
+      pendingPushCount,
     };
   }
 
   async attachLocalDataToAccount(accountId: string) {
     const now = new Date().toISOString();
-    const {
-      goals,
-      milestones,
-      tasks,
-      preferences,
-      adaptationProfile,
-      dailyPlans,
-    } = await this.loadLocalSyncState();
+    const localState = await this.loadLocalSyncState();
 
     await this.repositories.goals.saveGoals(
-      goals.map((goal) => prepareOwnedRecord("goal", goal, accountId, now)),
+      localState.goals.map((goal) => prepareOwnedRecord("goal", goal, accountId, now)),
     );
     await this.repositories.goals.saveMilestones(
-      milestones.map((milestone) => prepareOwnedRecord("milestone", milestone, accountId, now)),
+      localState.milestones.map((milestone) =>
+        prepareOwnedRecord("milestone", milestone, accountId, now),
+      ),
     );
     await this.repositories.tasks.saveTasks(
-      tasks.map((task) => prepareOwnedRecord("task", task, accountId, now)),
+      localState.tasks.map((task) => prepareOwnedRecord("task", task, accountId, now)),
     );
 
-    if (preferences) {
+    if (localState.preferences) {
       await this.repositories.preferences.saveUserPreferences(
-        prepareOwnedRecord("preferences", preferences, accountId, now),
+        prepareOwnedRecord("preferences", localState.preferences, accountId, now),
       );
     }
 
-    if (adaptationProfile) {
+    await this.repositories.preferences.saveNotificationPreferences(
+      localState.notificationPreferences.map((preference) =>
+        prepareOwnedRecord("notification_preference", preference, accountId, now),
+      ),
+    );
+
+    if (localState.adaptationProfile) {
       await this.repositories.adaptation.saveProfiles([
-        prepareOwnedRecord("adaptation_profile", adaptationProfile, accountId, now),
+        prepareOwnedRecord("adaptation_profile", localState.adaptationProfile, accountId, now),
       ]);
     }
 
     await this.repositories.planning.saveDailyPlans(
-      dailyPlans.map((plan) => prepareOwnedRecord("daily_plan", plan, accountId, now)),
+      localState.dailyPlans.map((plan) => prepareOwnedRecord("daily_plan", plan, accountId, now)),
+    );
+    await this.repositories.planning.saveTimeBlocks(
+      localState.timeBlocks.map((block) => prepareOwnedRecord("time_block", block, accountId, now)),
+    );
+    await this.repositories.history.saveActivityEvents(
+      localState.activityEvents.map((event) =>
+        prepareOwnedRecord("activity_event", event, accountId, now),
+      ),
     );
   }
 
@@ -135,7 +192,9 @@ export class SyncCoordinator {
 
     try {
       const localState = await this.loadLocalSyncState();
-      const remoteRecords = await this.accountRepository.listRemoteRecords(accountId);
+      const remoteRecords = this.remoteClient.isConfigured()
+        ? await this.remoteClient.listRemoteRecords(accountId)
+        : await this.accountRepository.listRemoteRecords(accountId);
       const remoteByKey = new Map(
         remoteRecords.map((record) => [`${record.entityKind}:${record.remoteId}`, record] as const),
       );
@@ -145,7 +204,9 @@ export class SyncCoordinator {
       let conflictCount = 0;
 
       for (const entityKind of syncEntityOrder) {
-        const localRecords = this.getByKind(localState, entityKind);
+        const localRecords = this.getByKind(localState, entityKind).filter(
+          (record) => record.ownerUserId === accountId,
+        );
 
         for (const localRecord of localRecords) {
           const remoteId = toRemoteId(entityKind, localRecord);
@@ -229,7 +290,9 @@ export class SyncCoordinator {
       }
 
       const knownRemoteIds = new Set(
-        this.flattenLocal(localState).map((entry) => `${entry.kind}:${toRemoteId(entry.kind, entry.record)}`),
+        this.flattenLocal(localState)
+          .filter((entry) => entry.record.ownerUserId === accountId)
+          .map((entry) => `${entry.kind}:${toRemoteId(entry.kind, entry.record)}`),
       );
 
       for (const remoteRecord of remoteRecords) {
@@ -248,8 +311,15 @@ export class SyncCoordinator {
         pendingPullCount += 1;
       }
 
-      if (remoteWrites.length > 0) {
-        await this.accountRepository.saveRemoteRecords(remoteWrites);
+      if (remoteWrites.length > 0 && this.remoteClient.isConfigured()) {
+        await this.remoteClient.upsertRemoteRecords(remoteWrites);
+      }
+
+      if (remoteWrites.length > 0 || remoteRecords.length > 0) {
+        await this.accountRepository.saveRemoteRecords([
+          ...remoteRecords.filter((record) => record.accountId === accountId),
+          ...remoteWrites,
+        ]);
       }
 
       await this.accountRepository.saveSyncOperation({
@@ -269,13 +339,19 @@ export class SyncCoordinator {
         createdAt: now,
         updatedAt: now,
       });
+      const remainingCounts = await this.countPendingRecords(accountId);
 
       await this.accountRepository.saveSyncState({
         ...syncState,
         accountId,
-        mode: conflictCount > 0 ? SyncMode.ReviewRequired : SyncMode.Ready,
+        mode:
+          conflictCount > 0
+            ? SyncMode.ReviewRequired
+            : remainingCounts.pendingPushCount > 0
+              ? SyncMode.PendingChanges
+              : SyncMode.Synced,
         lastSyncAt: now,
-        pendingPushCount,
+        pendingPushCount: remainingCounts.pendingPushCount,
         pendingPullCount,
         unresolvedConflictCount: conflictCount,
         lastError: null,
@@ -305,7 +381,7 @@ export class SyncCoordinator {
       await this.accountRepository.saveSyncState({
         ...syncState,
         accountId,
-        mode: SyncMode.Degraded,
+        mode: SyncMode.Issue,
         lastError: message,
         updatedAt: now,
       });
@@ -314,23 +390,43 @@ export class SyncCoordinator {
     }
   }
 
-  private async loadLocalSyncState() {
-    const [goals, milestones, tasks, preferences, adaptationProfile, dailyPlans] = await Promise.all([
+  private async loadLocalSyncState(): Promise<LocalSyncState> {
+    const [
+      goals,
+      milestones,
+      tasks,
+      preferences,
+      notificationPreferences,
+      adaptationProfile,
+      dailyPlans,
+      timeBlocks,
+      activityEvents,
+    ] = await Promise.all([
       this.repositories.goals.listGoals(),
       this.repositories.goals.listMilestones(),
       this.repositories.tasks.listTasks(),
       this.repositories.preferences.getUserPreferences(),
+      this.repositories.preferences.listNotificationPreferences(),
       this.repositories.adaptation.getLatestProfile(),
       this.repositories.planning.listDailyPlans(),
+      this.repositories.planning.listTimeBlocks(),
+      this.repositories.history.listActivityEvents(1000),
     ]);
 
-    return { goals, milestones, tasks, preferences, adaptationProfile, dailyPlans };
+    return {
+      goals,
+      milestones,
+      tasks,
+      preferences,
+      notificationPreferences,
+      adaptationProfile,
+      dailyPlans,
+      timeBlocks,
+      activityEvents,
+    };
   }
 
-  private getByKind(
-    state: Awaited<ReturnType<SyncCoordinator["loadLocalSyncState"]>>,
-    kind: SyncEntityKind,
-  ): SyncEntityRecord[] {
+  private getByKind(state: LocalSyncState, kind: SyncEntityKind): SyncEntityRecord[] {
     switch (kind) {
       case "goal":
         return state.goals;
@@ -338,18 +434,24 @@ export class SyncCoordinator {
         return state.milestones;
       case "task":
         return state.tasks;
-      case "preferences":
-        return state.preferences ? [state.preferences] : [];
-      case "adaptation_profile":
-        return state.adaptationProfile ? [state.adaptationProfile] : [];
       case "daily_plan":
         return state.dailyPlans;
+      case "time_block":
+        return state.timeBlocks;
+      case "preferences":
+        return state.preferences ? [state.preferences] : [];
+      case "notification_preference":
+        return state.notificationPreferences;
+      case "adaptation_profile":
+        return state.adaptationProfile ? [state.adaptationProfile] : [];
+      case "activity_event":
+        return state.activityEvents;
       default:
         return [];
     }
   }
 
-  private async saveLocalRecord(kind: string, record: SyncEntityRecord) {
+  private async saveLocalRecord(kind: SyncEntityKind, record: SyncEntityRecord) {
     switch (kind) {
       case "goal":
         return this.repositories.goals.saveGoals([record as Goal]);
@@ -357,12 +459,20 @@ export class SyncCoordinator {
         return this.repositories.goals.saveMilestones([record as GoalMilestone]);
       case "task":
         return this.repositories.tasks.saveTasks([record as Task]);
-      case "preferences":
-        return this.repositories.preferences.saveUserPreferences(record as UserPreferences);
-      case "adaptation_profile":
-        return this.repositories.adaptation.saveProfiles([record as AdaptationProfile]);
       case "daily_plan":
         return this.repositories.planning.saveDailyPlans([record as DailyPlan]);
+      case "time_block":
+        return this.repositories.planning.saveTimeBlocks([record as TimeBlock]);
+      case "preferences":
+        return this.repositories.preferences.saveUserPreferences(record as UserPreferences);
+      case "notification_preference":
+        return this.repositories.preferences.saveNotificationPreferences([
+          record as NotificationPreference,
+        ]);
+      case "adaptation_profile":
+        return this.repositories.adaptation.saveProfiles([record as AdaptationProfile]);
+      case "activity_event":
+        return this.repositories.history.saveActivityEvents([record as ActivityEvent]);
       default:
         return Promise.resolve();
     }
@@ -371,14 +481,14 @@ export class SyncCoordinator {
   private toRemoteRecord(
     accountId: string,
     deviceId: string,
-    kind: string,
+    kind: SyncEntityKind,
     record: SyncEntityRecord,
   ): RemoteSyncRecord {
-    const remoteId = toRemoteId(kind as never, record);
+    const remoteId = toRemoteId(kind, record);
 
     return {
       accountId,
-      entityKind: kind as never,
+      entityKind: kind,
       entityId: record.id,
       remoteId,
       payload: JSON.stringify({ ...record, remoteId }),
@@ -389,7 +499,7 @@ export class SyncCoordinator {
     };
   }
 
-  private flattenLocal(state: Awaited<ReturnType<SyncCoordinator["loadLocalSyncState"]>>) {
+  private flattenLocal(state: LocalSyncState) {
     return syncEntityOrder.flatMap((kind) =>
       this.getByKind(state, kind).map((record) => ({ kind, record })),
     );

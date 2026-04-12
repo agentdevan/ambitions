@@ -155,7 +155,13 @@ interface AccountSlice {
   syncState: SyncStateSnapshot | null;
   syncConflicts: SyncConflictRecord[];
   refreshAccountState: () => Promise<void>;
-  signInWithApple: () => Promise<void>;
+  createAccount: (input: {
+    email: string;
+    password: string;
+    displayName?: string;
+  }) => Promise<void>;
+  signIn: (input: { email: string; password: string }) => Promise<void>;
+  signOut: () => Promise<void>;
   attachLocalDataToAccount: () => Promise<void>;
   deferLocalDataAttachment: () => Promise<void>;
   syncAccountData: (kind?: SyncOperationKind) => Promise<void>;
@@ -196,6 +202,18 @@ function bindRecordToAccount<
     remoteId: record.remoteId,
     syncState: "pending_sync" as const,
   };
+}
+
+function bindRecordsToAccount<
+  T extends { id: string; ownerUserId: string | null; remoteId: string | null; syncState: string },
+>(records: T[], accountId: string | null) {
+  return records.map((record) => bindRecordToAccount(record, accountId));
+}
+
+function getAttachedAccountId(state: Pick<AppState, "attachmentState" | "authState">) {
+  return state.attachmentState?.status === "attached"
+    ? state.authState?.signedInAccountId ?? null
+    : null;
 }
 
 export const useAppStore = create<AppState>((set, get) => ({
@@ -287,8 +305,7 @@ export const useAppStore = create<AppState>((set, get) => ({
       throw new Error("Preferences are not available yet.");
     }
 
-    const accountId =
-      state.attachmentState?.status === "attached" ? state.authState?.signedInAccountId ?? null : null;
+    const accountId = getAttachedAccountId(state);
 
     const artifacts = await createGoalArtifacts({
       inference,
@@ -365,7 +382,14 @@ export const useAppStore = create<AppState>((set, get) => ({
       ),
     ]);
 
-    set(await refreshAllState(state.planDate));
+    const [foundationSnapshot, accountSnapshot] = await Promise.all([
+      refreshAllState(state.planDate),
+      appServices.services.account.notePendingChanges(),
+    ]);
+    set({
+      ...foundationSnapshot,
+      ...mapAccountSnapshot(accountSnapshot),
+    });
   },
 
   previewGoalEdit: async (goalId, patch) => {
@@ -396,10 +420,7 @@ export const useAppStore = create<AppState>((set, get) => ({
       throw new Error("The goal could not be found.");
     }
 
-    const accountId =
-      state.attachmentState?.status === "attached"
-        ? state.authState?.signedInAccountId ?? null
-        : null;
+    const accountId = getAttachedAccountId(state);
     const [milestones, tasks] = await Promise.all([
       appServices.repositories.goals.listMilestones(),
       appServices.repositories.tasks.listTasks(),
@@ -442,23 +463,32 @@ export const useAppStore = create<AppState>((set, get) => ({
           : entry,
       ),
     );
-    await appServices.repositories.history.saveActivityEvents([
-      buildGoalUpdatedActivityEvent({
-        goal,
-        changedFields: impact.changedFields,
-        occurredAt: updatedGoal.updatedAt,
-        choice,
-      }),
+    await appServices.repositories.history.saveActivityEvents(
+      bindRecordsToAccount(
+        [
+          buildGoalUpdatedActivityEvent({
+            goal,
+            changedFields: impact.changedFields,
+            occurredAt: updatedGoal.updatedAt,
+            choice,
+          }),
+        ],
+        accountId,
+      ),
+    );
+    const [foundationSnapshot, accountSnapshot] = await Promise.all([
+      refreshAllState(state.planDate),
+      appServices.services.account.notePendingChanges(),
     ]);
-    set(await refreshAllState(state.planDate));
+    set({
+      ...foundationSnapshot,
+      ...mapAccountSnapshot(accountSnapshot),
+    });
   },
 
   updateGoal: async (goalId, patch) => {
     const goals = await appServices.repositories.goals.listGoals();
-    const accountId =
-      get().attachmentState?.status === "attached"
-        ? get().authState?.signedInAccountId ?? null
-        : null;
+    const accountId = getAttachedAccountId(get());
     const nextGoals = goals.map((goal) =>
       goal.id === goalId
         ? bindRecordToAccount({
@@ -471,7 +501,14 @@ export const useAppStore = create<AppState>((set, get) => ({
     );
 
     await appServices.repositories.goals.saveGoals(nextGoals);
-    set(await refreshAllState(get().planDate));
+    const [foundationSnapshot, accountSnapshot] = await Promise.all([
+      refreshAllState(get().planDate),
+      appServices.services.account.notePendingChanges(),
+    ]);
+    set({
+      ...foundationSnapshot,
+      ...mapAccountSnapshot(accountSnapshot),
+    });
   },
 
   setGoalStatus: async (goalId, status) => {
@@ -490,10 +527,7 @@ export const useAppStore = create<AppState>((set, get) => ({
       throw new Error("The goal could not be found.");
     }
 
-    const accountId =
-      state.attachmentState?.status === "attached"
-        ? state.authState?.signedInAccountId ?? null
-        : null;
+    const accountId = getAttachedAccountId(state);
     const updatedGoal = bindRecordToAccount(
       setGoalReviewDraft(
         {
@@ -520,19 +554,33 @@ export const useAppStore = create<AppState>((set, get) => ({
         milestones: goalMilestones,
         tasks: goalTasks,
       });
-      await appServices.repositories.goals.saveMilestones(next.milestones);
-      await appServices.repositories.tasks.saveTasks(next.tasks);
+      await appServices.repositories.goals.saveMilestones(
+        bindRecordsToAccount(next.milestones, accountId),
+      );
+      await appServices.repositories.tasks.saveTasks(bindRecordsToAccount(next.tasks, accountId));
     }
 
-    await appServices.repositories.history.saveActivityEvents([
-      buildGoalStatusActivityEvent({
-        goal,
-        nextStatus: status,
-        occurredAt: updatedGoal.updatedAt,
-      }),
-    ]);
+    await appServices.repositories.history.saveActivityEvents(
+      bindRecordsToAccount(
+        [
+          buildGoalStatusActivityEvent({
+            goal,
+            nextStatus: status,
+            occurredAt: updatedGoal.updatedAt,
+          }),
+        ],
+        accountId,
+      ),
+    );
 
-    set(await refreshAllState(state.planDate));
+    const [foundationSnapshot, accountSnapshot] = await Promise.all([
+      refreshAllState(state.planDate),
+      appServices.services.account.notePendingChanges(),
+    ]);
+    set({
+      ...foundationSnapshot,
+      ...mapAccountSnapshot(accountSnapshot),
+    });
   },
 
   acceptGoalReview: async (goalId) => {
@@ -560,10 +608,7 @@ export const useAppStore = create<AppState>((set, get) => ({
       existingMilestones: goalMilestones,
       existingTasks: goalTasks,
     });
-    const accountId =
-      state.attachmentState?.status === "attached"
-        ? state.authState?.signedInAccountId ?? null
-        : null;
+    const accountId = getAttachedAccountId(state);
     const nextGoal =
       reviewDraft.mode === "new_goal"
         ? setGoalReviewDraft(goal, null)
@@ -587,12 +632,23 @@ export const useAppStore = create<AppState>((set, get) => ({
           entry.id === goalId ? bindRecordToAccount(nextGoal, accountId) : entry,
         ),
       ),
-      appServices.repositories.goals.saveMilestones(next.milestonesToSave),
-      appServices.repositories.tasks.saveTasks(next.tasksToSave),
-      appServices.repositories.history.saveActivityEvents(historyEvents),
+      appServices.repositories.goals.saveMilestones(
+        bindRecordsToAccount(next.milestonesToSave, accountId),
+      ),
+      appServices.repositories.tasks.saveTasks(bindRecordsToAccount(next.tasksToSave, accountId)),
+      appServices.repositories.history.saveActivityEvents(
+        bindRecordsToAccount(historyEvents, accountId),
+      ),
     ]);
 
-    set(await refreshAllState(state.planDate));
+    const [foundationSnapshot, accountSnapshot] = await Promise.all([
+      refreshAllState(state.planDate),
+      appServices.services.account.notePendingChanges(),
+    ]);
+    set({
+      ...foundationSnapshot,
+      ...mapAccountSnapshot(accountSnapshot),
+    });
   },
 
   regenerateGoalReview: async (goalId, mode) => {
@@ -621,10 +677,7 @@ export const useAppStore = create<AppState>((set, get) => ({
       adaptationProfile: state.adaptationProfile,
       impact: null,
     });
-    const accountId =
-      state.attachmentState?.status === "attached"
-        ? state.authState?.signedInAccountId ?? null
-        : null;
+    const accountId = getAttachedAccountId(state);
     const occurredAt = new Date().toISOString();
     await appServices.repositories.goals.saveGoals(
       goals.map((entry) =>
@@ -633,14 +686,26 @@ export const useAppStore = create<AppState>((set, get) => ({
           : entry,
       ),
     );
-    await appServices.repositories.history.saveActivityEvents([
-      buildPlanReviewGeneratedActivityEvent({
-        goal,
-        reviewDraft: nextDraft,
-        occurredAt,
-      }),
+    await appServices.repositories.history.saveActivityEvents(
+      bindRecordsToAccount(
+        [
+          buildPlanReviewGeneratedActivityEvent({
+            goal,
+            reviewDraft: nextDraft,
+            occurredAt,
+          }),
+        ],
+        accountId,
+      ),
+    );
+    const [foundationSnapshot, accountSnapshot] = await Promise.all([
+      refreshAllState(state.planDate),
+      appServices.services.account.notePendingChanges(),
     ]);
-    set(await refreshAllState(state.planDate));
+    set({
+      ...foundationSnapshot,
+      ...mapAccountSnapshot(accountSnapshot),
+    });
   },
 
   moveReviewTask: async (goalId, taskId, direction) => {
@@ -765,10 +830,7 @@ export const useAppStore = create<AppState>((set, get) => ({
       existingMilestones: milestones.filter((milestone) => milestone.goalId === goalId),
       existingTasks: tasks.filter((task) => task.goalId === goalId),
     });
-    const accountId =
-      state.attachmentState?.status === "attached"
-        ? state.authState?.signedInAccountId ?? null
-        : null;
+    const accountId = getAttachedAccountId(state);
 
     await Promise.all([
       appServices.repositories.goals.saveGoals(
@@ -778,17 +840,31 @@ export const useAppStore = create<AppState>((set, get) => ({
             : entry,
         ),
       ),
-      appServices.repositories.goals.saveMilestones(next.milestonesToSave),
-      appServices.repositories.tasks.saveTasks(next.tasksToSave),
-      appServices.repositories.history.saveActivityEvents([
-        buildPlanReviewRevertedActivityEvent({
-          goal,
-          occurredAt: new Date().toISOString(),
-        }),
-      ]),
+      appServices.repositories.goals.saveMilestones(
+        bindRecordsToAccount(next.milestonesToSave, accountId),
+      ),
+      appServices.repositories.tasks.saveTasks(bindRecordsToAccount(next.tasksToSave, accountId)),
+      appServices.repositories.history.saveActivityEvents(
+        bindRecordsToAccount(
+          [
+            buildPlanReviewRevertedActivityEvent({
+              goal,
+              occurredAt: new Date().toISOString(),
+            }),
+          ],
+          accountId,
+        ),
+      ),
     ]);
 
-    set(await refreshAllState(state.planDate));
+    const [foundationSnapshot, accountSnapshot] = await Promise.all([
+      refreshAllState(state.planDate),
+      appServices.services.account.notePendingChanges(),
+    ]);
+    set({
+      ...foundationSnapshot,
+      ...mapAccountSnapshot(accountSnapshot),
+    });
   },
 
   refreshPlanning: async (date) => {
@@ -838,14 +914,23 @@ export const useAppStore = create<AppState>((set, get) => ({
             dailyPlanId: state.dailyPlan.id,
           })
         : null;
+    const accountId = getAttachedAccountId(state);
 
     await Promise.all([
-      appServices.repositories.tasks.saveTasks(execution.payload.mutation.tasksToSave),
-      appServices.repositories.planning.saveTimeBlocks(execution.payload.mutation.blocksToSave),
-      appServices.repositories.planning.saveDailyPlans([execution.payload.mutation.dailyPlan]),
+      appServices.repositories.tasks.saveTasks(
+        bindRecordsToAccount(execution.payload.mutation.tasksToSave, accountId),
+      ),
+      appServices.repositories.planning.saveTimeBlocks(
+        bindRecordsToAccount(execution.payload.mutation.blocksToSave, accountId),
+      ),
+      appServices.repositories.planning.saveDailyPlans([
+        bindRecordToAccount(execution.payload.mutation.dailyPlan, accountId),
+      ]),
       appServices.repositories.adaptation.replaceReplanSuggestions(state.planDate, nextSuggestions),
       historyEvent
-        ? appServices.repositories.history.saveActivityEvents([historyEvent])
+        ? appServices.repositories.history.saveActivityEvents(
+            bindRecordsToAccount([historyEvent], accountId),
+          )
         : Promise.resolve(),
     ]);
 
@@ -864,10 +949,19 @@ export const useAppStore = create<AppState>((set, get) => ({
         preferences: userPreferences,
       });
 
-      await appServices.repositories.adaptation.saveProfiles([adaptationResult.payload.profile]);
+      await appServices.repositories.adaptation.saveProfiles([
+        bindRecordToAccount(adaptationResult.payload.profile, accountId),
+      ]);
     }
 
-    set(await refreshAllState(state.planDate));
+    const [foundationSnapshot, accountSnapshot] = await Promise.all([
+      refreshAllState(state.planDate),
+      appServices.services.account.notePendingChanges(),
+    ]);
+    set({
+      ...foundationSnapshot,
+      ...mapAccountSnapshot(accountSnapshot),
+    });
   },
 
   refreshPreferences: async () => {
@@ -890,14 +984,18 @@ export const useAppStore = create<AppState>((set, get) => ({
     }
 
     const nextPreferences = mergeProductPreferences(currentPreferences, productPreferences);
-    const accountId =
-      get().attachmentState?.status === "attached"
-        ? get().authState?.signedInAccountId ?? null
-        : null;
+    const accountId = getAttachedAccountId(get());
     await appServices.repositories.preferences.saveUserPreferences(
       bindRecordToAccount(nextPreferences, accountId),
     );
-    set(await refreshAllState(get().planDate));
+    const [foundationSnapshot, accountSnapshot] = await Promise.all([
+      refreshAllState(get().planDate),
+      appServices.services.account.notePendingChanges(),
+    ]);
+    set({
+      ...foundationSnapshot,
+      ...mapAccountSnapshot(accountSnapshot),
+    });
   },
 
   updateNotificationPreference: async (reminderType, enabled) => {
@@ -913,8 +1011,18 @@ export const useAppStore = create<AppState>((set, get) => ({
         : preference,
     );
 
-    await appServices.repositories.preferences.saveNotificationPreferences(nextPreferences);
-    set(await refreshAllState(get().planDate));
+    const accountId = getAttachedAccountId(get());
+    await appServices.repositories.preferences.saveNotificationPreferences(
+      bindRecordsToAccount(nextPreferences, accountId),
+    );
+    const [foundationSnapshot, accountSnapshot] = await Promise.all([
+      refreshAllState(get().planDate),
+      appServices.services.account.notePendingChanges(),
+    ]);
+    set({
+      ...foundationSnapshot,
+      ...mapAccountSnapshot(accountSnapshot),
+    });
   },
 
   refreshAdaptation: async (date) => {
@@ -958,10 +1066,11 @@ export const useAppStore = create<AppState>((set, get) => ({
         currentPreferences: state.userPreferences,
         today: state.planDate,
         adaptationProfile: state.adaptationProfile,
+        accountId: getAttachedAccountId(state),
       });
       const [foundationSnapshot, accountSnapshot] = await Promise.all([
         refreshAllState(state.planDate),
-        appServices.services.account.getSnapshot(),
+        appServices.services.account.notePendingChanges(),
       ]);
       set({
         ...foundationSnapshot,
@@ -977,9 +1086,23 @@ export const useAppStore = create<AppState>((set, get) => ({
     set(mapAccountSnapshot(snapshot));
   },
 
-  signInWithApple: async () => {
-    const snapshot = await appServices.services.account.signInWithApple();
+  createAccount: async (input) => {
+    const snapshot = await appServices.services.account.createAccount(input);
     set(mapAccountSnapshot(snapshot));
+  },
+
+  signIn: async (input) => {
+    const snapshot = await appServices.services.account.signIn(input);
+    set(mapAccountSnapshot(snapshot));
+  },
+
+  signOut: async () => {
+    const accountSnapshot = await appServices.services.account.signOut();
+    const foundationSnapshot = await refreshAllState(get().planDate);
+    set({
+      ...foundationSnapshot,
+      ...mapAccountSnapshot(accountSnapshot),
+    });
   },
 
   attachLocalDataToAccount: async () => {

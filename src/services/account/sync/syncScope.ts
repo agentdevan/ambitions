@@ -1,12 +1,15 @@
 import {
   AdaptationProfile,
+  ActivityEvent,
   DailyPlan,
   EntityRecord,
   EntitySyncState,
   Goal,
   GoalMilestone,
+  NotificationPreference,
   SyncEntityKind,
   Task,
+  TimeBlock,
   UserPreferences,
 } from "../../../domain/models";
 
@@ -15,16 +18,22 @@ export type SyncEntityRecord =
   | GoalMilestone
   | Task
   | DailyPlan
+  | TimeBlock
   | UserPreferences
-  | AdaptationProfile;
+  | NotificationPreference
+  | AdaptationProfile
+  | ActivityEvent;
 
 export const syncEntityOrder: SyncEntityKind[] = [
   "goal",
   "milestone",
   "task",
-  "preferences",
-  "adaptation_profile",
   "daily_plan",
+  "time_block",
+  "activity_event",
+  "preferences",
+  "notification_preference",
+  "adaptation_profile",
 ];
 
 export function toRemoteId(kind: SyncEntityKind, record: EntityRecord) {
@@ -111,6 +120,22 @@ export function duplicateConflictRecord(
       createdAt: now,
       updatedAt: now,
       metadata: { ...task.metadata, preservedConflict: "true" },
+    };
+  }
+
+  if (kind === "activity_event") {
+    const event = record as ActivityEvent;
+    return {
+      ...event,
+      id: `${event.id}:preserved:${now}`,
+      title: `${event.title} (Preserved copy)`,
+      remoteId: null,
+      syncState: EntitySyncState.Conflict,
+      version: 1,
+      lastSyncedAt: null,
+      createdAt: now,
+      updatedAt: now,
+      metadata: { ...event.metadata, preservedConflict: "true" },
     };
   }
 
