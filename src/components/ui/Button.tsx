@@ -6,7 +6,7 @@ import { AppText } from "./Text";
 
 interface ButtonProps extends Omit<PressableProps, "children" | "style"> {
   children?: ReactNode;
-  tone?: "primary" | "secondary" | "ghost";
+  tone?: "primary" | "secondary" | "tertiary" | "ghost";
   busy?: boolean;
   size?: "default" | "compact";
   style?: StyleProp<ViewStyle>;
@@ -24,33 +24,39 @@ export function Button({
   const theme = useResolvedTheme();
   const palette = {
     primary: {
-      backgroundColor: "#60705D",
-      borderColor: "#52614F",
+      backgroundColor: theme.colors.text.primary,
+      borderColor: theme.colors.text.primary,
       textTone: "inverse" as const,
-      shadowColor: theme.colors.accent.primary,
+      shadowColor: theme.colors.text.primary,
     },
     secondary: {
-      backgroundColor: "#FFF9F1",
-      borderColor: "#CCBDAD",
+      backgroundColor: theme.colors.background.elevated,
+      borderColor: theme.colors.border.strong,
       textTone: "primary" as const,
       shadowColor: theme.colors.text.primary,
     },
+    tertiary: {
+      backgroundColor: "transparent",
+      borderColor: "transparent",
+      textTone: "secondary" as const,
+      shadowColor: "transparent",
+    },
     ghost: {
-      backgroundColor: "#EFE5D8",
-      borderColor: "#D8C9B8",
+      backgroundColor: theme.colors.background.canvas,
+      borderColor: theme.colors.border.subtle,
       textTone: "secondary" as const,
       shadowColor: theme.colors.text.primary,
     },
   }[tone];
   const sizing = {
     default: {
-      minHeight: 46,
+      minHeight: 48,
       paddingHorizontal: 18,
       textVariant: "caption" as const,
     },
     compact: {
-      minHeight: 40,
-      paddingHorizontal: 14,
+      minHeight: 38,
+      paddingHorizontal: 12,
       textVariant: "micro" as const,
     },
   }[size];
@@ -59,30 +65,32 @@ export function Button({
     <Pressable
       {...props}
       disabled={disabled || busy}
-      className="items-center justify-center rounded-[14px] border"
+      className="items-center justify-center rounded-[16px] border"
       style={({ pressed }) => [
         {
           minHeight: sizing.minHeight,
           paddingHorizontal: sizing.paddingHorizontal,
           backgroundColor: palette.backgroundColor,
           borderColor: palette.borderColor,
-          borderWidth: 1,
-          opacity: disabled || busy ? 0.5 : 1,
+          borderWidth: tone === "tertiary" ? 0 : 1,
+          opacity: disabled || busy ? 0.45 : 1,
           transform: [{ scale: pressed ? 0.985 : 1 }],
           shadowColor: palette.shadowColor,
           shadowOpacity:
-            tone === "primary" ? (pressed ? 0.18 : 0.26) : tone === "secondary" ? 0.08 : 0.05,
-          shadowRadius: tone === "primary" ? 18 : 10,
-          shadowOffset: { width: 0, height: tone === "primary" ? 9 : 5 },
-          elevation: tone === "primary" ? 5 : 2,
+            tone === "primary" ? (pressed ? 0.12 : 0.16) : tone === "secondary" ? 0.04 : 0,
+          shadowRadius: tone === "primary" ? 12 : 8,
+          shadowOffset: { width: 0, height: tone === "primary" ? 7 : 4 },
+          elevation: tone === "primary" ? 3 : tone === "secondary" ? 1 : 0,
         },
         style,
       ]}
     >
       {busy ? (
-        <ActivityIndicator color={tone === "primary" ? theme.colors.text.inverse : theme.colors.text.primary} />
+        <ActivityIndicator
+          color={tone === "primary" ? theme.colors.text.inverse : theme.colors.text.primary}
+        />
       ) : (
-        <AppText tone={palette.textTone} variant={sizing.textVariant}>
+        <AppText tone={palette.textTone} variant={sizing.textVariant} numberOfLines={1}>
           {children}
         </AppText>
       )}

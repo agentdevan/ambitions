@@ -26,25 +26,25 @@ export function OptionChip({
       {...props}
       style={({ pressed }) => [
         {
-          minHeight: compact ? 36 : 42,
-          borderRadius: 999,
+          minHeight: compact ? 34 : 40,
+          borderRadius: 16,
           borderWidth: 1,
           paddingHorizontal: compact ? 12 : 14,
-          paddingVertical: compact ? 8 : 10,
+          paddingVertical: compact ? 7 : 9,
           alignItems: "center",
           justifyContent: "center",
           backgroundColor: selected
-            ? theme.colors.accent.primary
-            : "#F4EEE7",
+            ? theme.colors.text.primary
+            : theme.colors.background.elevated,
           borderColor: selected
-            ? theme.colors.accent.primary
-            : "#D8CEC2",
+            ? theme.colors.text.primary
+            : theme.colors.border.subtle,
           opacity: props.disabled ? 0.45 : 1,
-          transform: [{ scale: pressed ? 0.97 : 1 }],
-          shadowColor: selected ? theme.colors.accent.primary : theme.colors.text.primary,
-          shadowOpacity: pressed ? 0.08 : selected ? 0.16 : 0.03,
-          shadowRadius: selected ? 12 : 8,
-          shadowOffset: { width: 0, height: selected ? 8 : 4 },
+          transform: [{ scale: pressed ? 0.985 : 1 }],
+          shadowColor: theme.colors.text.primary,
+          shadowOpacity: selected ? 0.08 : 0.02,
+          shadowRadius: selected ? 10 : 6,
+          shadowOffset: { width: 0, height: selected ? 6 : 3 },
           elevation: selected ? 2 : 1,
         },
         style,
@@ -52,12 +52,12 @@ export function OptionChip({
     >
       <View className="flex-row items-center justify-center gap-2">
         <View
-          className="h-2.5 w-2.5 rounded-full"
+          className="h-2 w-2 rounded-full"
           style={{
             backgroundColor: selected
               ? theme.colors.text.inverse
-              : theme.colors.accent.primary,
-            opacity: selected ? 0.92 : 0.4,
+              : theme.colors.text.tertiary,
+            opacity: selected ? 0.92 : 0.55,
           }}
         />
         <AppText

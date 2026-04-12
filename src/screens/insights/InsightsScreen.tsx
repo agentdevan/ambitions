@@ -1,19 +1,30 @@
 import { useEffect, useState } from "react";
 import { Pressable, View } from "react-native";
 
+import { useResolvedTheme } from "../../design/theme/useResolvedTheme";
+import { themePresets } from "../../product/theme";
+import { useAppStore } from "../../state/useAppStore";
 import { AccountStatusCard } from "../../components/account/AccountStatusCard";
 import { Button } from "../../components/ui/Button";
 import { EmptyStateCard } from "../../components/ui/EmptyStateCard";
 import { MetricCard } from "../../components/ui/MetricCard";
 import { OptionChip } from "../../components/ui/OptionChip";
-import { Pill } from "../../components/ui/Pill";
 import { Screen } from "../../components/ui/Screen";
 import { Surface } from "../../components/ui/Surface";
 import { TextField } from "../../components/ui/TextField";
 import { AppText } from "../../components/ui/Text";
-import { themePresets } from "../../product/theme";
-import { useResolvedTheme } from "../../design/theme/useResolvedTheme";
-import { useAppStore } from "../../state/useAppStore";
+
+function MetaLine({ items }: { items: string[] }) {
+  return (
+    <View className="flex-row flex-wrap gap-x-4 gap-y-2">
+      {items.map((item) => (
+        <AppText key={item} tone="secondary" variant="caption">
+          {item}
+        </AppText>
+      ))}
+    </View>
+  );
+}
 
 export function InsightsScreen() {
   const theme = useResolvedTheme();
@@ -62,9 +73,9 @@ export function InsightsScreen() {
     return (
       <Screen>
         <EmptyStateCard
-          eyebrow="Settings"
-          title="Settings are not available yet"
-          body="The local preference layer is still settling. Reopen the app once startup finishes."
+          eyebrow="Insights"
+          title="Preferences are not ready yet"
+          body="The local preference layer is still loading. Reopen the app once startup finishes."
         />
       </Screen>
     );
@@ -105,12 +116,13 @@ export function InsightsScreen() {
   return (
     <Screen>
       <View className="gap-6">
-        <View className="gap-2 pt-2">
-          <Pill label="Settings" />
-          <AppText variant="hero">Quiet controls. Personal ownership.</AppText>
+        <View className="gap-3 pt-2">
+          <AppText tone="tertiary" variant="micro" style={{ textTransform: "uppercase" }}>
+            Insights
+          </AppText>
+          <AppText variant="hero">Preferences that shape the app quietly.</AppText>
           <AppText tone="secondary">
-            The essentials only: schedule defaults, planning preferences, account continuity, and
-            a few personal controls.
+            Keep the product aligned to your defaults without turning this into a settings maze.
           </AppText>
         </View>
 
@@ -150,285 +162,266 @@ export function InsightsScreen() {
           }
         />
 
-        <Surface>
-          <View className="gap-4">
-            <View className="flex-row flex-wrap gap-2">
-              <Pill label="Schedule defaults" tone="accent" />
-              <Pill label="Planner baseline" tone="quiet" />
-            </View>
-            <AppText variant="section">Schedule defaults</AppText>
-            <AppText tone="secondary">
-              These defaults shape the planner when live context is unavailable or incomplete.
+        <Surface className="gap-4">
+          <View className="gap-2">
+            <AppText tone="tertiary" variant="micro" style={{ textTransform: "uppercase" }}>
+              Schedule
             </AppText>
-            <View className="flex-row gap-3">
-              <MetricCard label="Sleep" value={`${sleepStart} - ${sleepEnd}`} />
-              <MetricCard label="Work" value={`${workStart} - ${workEnd}`} />
-              <MetricCard label="Commute" value={`${commuteMinutes} min`} />
+            <AppText variant="section">Saved defaults</AppText>
+            <AppText tone="secondary">
+              These defaults shape the planner whenever live context is missing or incomplete.
+            </AppText>
+          </View>
+          <View className="flex-row gap-3">
+            <MetricCard label="Sleep" value={`${sleepStart} - ${sleepEnd}`} />
+            <MetricCard label="Work" value={`${workStart} - ${workEnd}`} />
+            <MetricCard label="Commute" value={`${commuteMinutes} min`} />
+          </View>
+          <View className="flex-row gap-3">
+            <View style={{ flex: 1 }}>
+              <TextField label="Sleep starts" onChangeText={setSleepStart} value={sleepStart} />
             </View>
-            <View className="flex-row gap-3">
-              <View style={{ flex: 1 }}>
-                <TextField label="Sleep starts" onChangeText={setSleepStart} value={sleepStart} />
-              </View>
-              <View style={{ flex: 1 }}>
-                <TextField label="Sleep ends" onChangeText={setSleepEnd} value={sleepEnd} />
-              </View>
+            <View style={{ flex: 1 }}>
+              <TextField label="Sleep ends" onChangeText={setSleepEnd} value={sleepEnd} />
             </View>
-            <View className="flex-row gap-3">
-              <View style={{ flex: 1 }}>
-                <TextField label="Work starts" onChangeText={setWorkStart} value={workStart} />
-              </View>
-              <View style={{ flex: 1 }}>
-                <TextField label="Work ends" onChangeText={setWorkEnd} value={workEnd} />
-              </View>
-              <View style={{ flex: 0.7 }}>
-                <TextField
-                  label="Commute"
-                  onChangeText={setCommuteMinutes}
-                  value={commuteMinutes}
-                />
-              </View>
+          </View>
+          <View className="flex-row gap-3">
+            <View style={{ flex: 1 }}>
+              <TextField label="Work starts" onChangeText={setWorkStart} value={workStart} />
             </View>
+            <View style={{ flex: 1 }}>
+              <TextField label="Work ends" onChangeText={setWorkEnd} value={workEnd} />
+            </View>
+            <View style={{ flex: 0.7 }}>
+              <TextField
+                label="Commute"
+                onChangeText={setCommuteMinutes}
+                value={commuteMinutes}
+              />
+            </View>
+          </View>
+          <Button
+            tone="secondary"
+            busy={busyState === "schedule"}
+            onPress={() =>
+              void savePreferences(
+                "schedule",
+                () => ({
+                  ...resolvedProductPreferences,
+                  schedule: {
+                    ...resolvedProductPreferences.schedule,
+                    sleepStart,
+                    sleepEnd,
+                    workdayStart: workStart,
+                    workdayEnd: workEnd,
+                    commuteMinutes: Number(commuteMinutes) || 0,
+                  },
+                }),
+                "Schedule defaults could not be saved.",
+              )
+            }
+          >
+            Save schedule defaults
+          </Button>
+        </Surface>
+
+        <Surface tone="sunken" className="gap-4">
+          <View className="gap-2">
+            <AppText tone="tertiary" variant="micro" style={{ textTransform: "uppercase" }}>
+              Planning style
+            </AppText>
+            <AppText variant="section">Pacing preferences</AppText>
+            <AppText tone="secondary">
+              Keep the planner aligned to how you like to work without over-tuning it.
+            </AppText>
+          </View>
+
+          <View className="gap-2">
+            <AppText variant="caption" tone="secondary">
+              Task size
+            </AppText>
+            <View className="flex-row flex-wrap gap-2">
+              {[
+                ["smaller", "Smaller tasks"],
+                ["mixed", "Mixed"],
+                ["bigger", "Fewer bigger tasks"],
+              ].map(([key, label]) => (
+                <OptionChip
+                  key={key}
+                  selected={resolvedProductPreferences.taskSizing === key}
+                  onPress={() =>
+                    void savePreferences(
+                      "task-sizing",
+                      () => ({
+                        ...resolvedProductPreferences,
+                        taskSizing: key as typeof resolvedProductPreferences.taskSizing,
+                      }),
+                      "Task sizing could not be updated.",
+                    )
+                  }
+                >
+                  {label}
+                </OptionChip>
+              ))}
+            </View>
+          </View>
+
+          <View className="gap-2">
+            <AppText variant="caption" tone="secondary">
+              Day intensity
+            </AppText>
+            <View className="flex-row flex-wrap gap-2">
+              {[
+                ["light", "Light"],
+                ["balanced", "Balanced"],
+                ["ambitious", "Ambitious"],
+              ].map(([key, label]) => (
+                <OptionChip
+                  key={key}
+                  selected={resolvedProductPreferences.dayIntensity === key}
+                  onPress={() =>
+                    void savePreferences(
+                      "day-intensity",
+                      () => ({
+                        ...resolvedProductPreferences,
+                        dayIntensity: key as typeof resolvedProductPreferences.dayIntensity,
+                      }),
+                      "Day intensity could not be updated.",
+                    )
+                  }
+                >
+                  {label}
+                </OptionChip>
+              ))}
+            </View>
+          </View>
+        </Surface>
+
+        <Surface className="gap-4">
+          <View className="gap-2">
+            <AppText tone="tertiary" variant="micro" style={{ textTransform: "uppercase" }}>
+              Context
+            </AppText>
+            <AppText variant="section">Calendar and reminders</AppText>
+            <AppText tone="secondary">
+              Refresh access when the real-world context changes.
+            </AppText>
+          </View>
+          <MetaLine
+            items={[
+              calendarConnectionState?.permissionState === "granted"
+                ? "Calendar connected"
+                : "Calendar not connected",
+              notificationPermissionStatus === "granted"
+                ? "Notifications ready"
+                : `Notifications ${notificationPermissionStatus}`,
+            ]}
+          />
+          <View className="flex-row gap-3">
             <Button
               tone="secondary"
-              busy={busyState === "schedule"}
+              style={{ flex: 1 }}
+              busy={busyState === "calendar"}
               onPress={() =>
-                void savePreferences(
-                  "schedule",
-                    () => ({
-                    ...resolvedProductPreferences,
-                    schedule: {
-                      ...resolvedProductPreferences.schedule,
-                      sleepStart,
-                      sleepEnd,
-                      workdayStart: workStart,
-                      workdayEnd: workEnd,
-                      commuteMinutes: Number(commuteMinutes) || 0,
-                    },
-                  }),
-                  "Schedule defaults could not be saved.",
+                void runAction(
+                  "calendar",
+                  requestCalendarAccess,
+                  "Calendar access could not be refreshed.",
                 )
               }
             >
-              Save schedule defaults
+              Refresh calendar access
+            </Button>
+            <Button
+              tone="secondary"
+              style={{ flex: 1 }}
+              busy={busyState === "notifications"}
+              onPress={() =>
+                void runAction(
+                  "notifications",
+                  requestNotificationAccess,
+                  "Notification access could not be refreshed.",
+                )
+              }
+            >
+              Refresh notifications
             </Button>
           </View>
+          {notificationPreferences.map((preference) => (
+            <Pressable
+              key={preference.id}
+              className="rounded-[24px]"
+              onPress={() =>
+                void runAction(
+                  `notification:${preference.id}`,
+                  () => updateNotificationPreference(preference.reminderType, !preference.enabled),
+                  "Notification preference could not be updated.",
+                )
+              }
+              style={({ pressed }) => ({
+                opacity: pressed ? 0.84 : 1,
+              })}
+            >
+              <Surface
+                tone={preference.enabled ? "accent" : "default"}
+                className="gap-2"
+                style={{
+                  borderColor: preference.enabled
+                    ? theme.colors.border.strong
+                    : theme.colors.border.subtle,
+                }}
+              >
+                <AppText variant="section">{preference.reminderType.replace(/_/g, " ")}</AppText>
+                <MetaLine items={[preference.enabled ? "Reminder active" : "Reminder muted"]} />
+              </Surface>
+            </Pressable>
+          ))}
         </Surface>
 
-        <Surface tone="sunken">
-          <View className="gap-4">
-            <View className="flex-row flex-wrap gap-2">
-              <Pill label="Planning style" tone="accent" />
-            </View>
-            <AppText variant="section">Planning style</AppText>
-            <AppText tone="secondary">
-              Keep the planner aligned to your preferred pacing without over-customizing it.
+        <Surface className="gap-4">
+          <View className="gap-2">
+            <AppText tone="tertiary" variant="micro" style={{ textTransform: "uppercase" }}>
+              Theme
             </AppText>
-            <View className="gap-2">
-              <AppText variant="caption" tone="secondary">
-                Task size
-              </AppText>
-              <View className="flex-row flex-wrap gap-2">
-                {[
-                  ["smaller", "Smaller tasks"],
-                  ["mixed", "Mixed"],
-                  ["bigger", "Fewer bigger tasks"],
-                ].map(([key, label]) => (
-                  <OptionChip
-                    key={key}
-                    selected={resolvedProductPreferences.taskSizing === key}
-                    onPress={() =>
-                      void savePreferences(
-                        "task-sizing",
-                        () => ({
-                          ...resolvedProductPreferences,
-                          taskSizing: key as typeof resolvedProductPreferences.taskSizing,
-                        }),
-                        "Task sizing could not be updated.",
-                      )
-                    }
-                  >
-                    {label}
-                  </OptionChip>
-                ))}
-              </View>
-            </View>
-
-            <View className="gap-2">
-              <AppText variant="caption" tone="secondary">
-                Day intensity
-              </AppText>
-              <View className="flex-row flex-wrap gap-2">
-                {[
-                  ["light", "Light"],
-                  ["balanced", "Balanced"],
-                  ["ambitious", "Ambitious"],
-                ].map(([key, label]) => (
-                  <OptionChip
-                    key={key}
-                    selected={resolvedProductPreferences.dayIntensity === key}
-                    onPress={() =>
-                      void savePreferences(
-                        "day-intensity",
-                        () => ({
-                          ...resolvedProductPreferences,
-                          dayIntensity: key as typeof resolvedProductPreferences.dayIntensity,
-                        }),
-                        "Day intensity could not be updated.",
-                      )
-                    }
-                  >
-                    {label}
-                  </OptionChip>
-                ))}
-              </View>
-            </View>
-          </View>
-        </Surface>
-
-        <Surface>
-          <View className="gap-4">
-            <View className="flex-row flex-wrap gap-2">
-              <Pill label="Integrations" tone="accent" />
-            </View>
-            <AppText variant="section">Integrations</AppText>
-            <View className="flex-row flex-wrap gap-2">
-              <Pill
-                label={
-                  calendarConnectionState?.permissionState === "granted"
-                    ? "Calendar connected"
-                    : "Calendar not connected"
-                }
-                tone={
-                  calendarConnectionState?.permissionState === "granted" ? "accent" : "neutral"
-                }
-              />
-              <Pill
-                label={`Notifications ${notificationPermissionStatus}`}
-                tone={notificationPermissionStatus === "granted" ? "accent" : "neutral"}
-              />
-            </View>
-            <View className="flex-row gap-3">
-              <Button
-                tone="secondary"
-                style={{ flex: 1 }}
-                busy={busyState === "calendar"}
-                onPress={() =>
-                  void runAction(
-                    "calendar",
-                    requestCalendarAccess,
-                    "Calendar access could not be refreshed.",
-                  )
-                }
-              >
-                Refresh calendar access
-              </Button>
-              <Button
-                tone="secondary"
-                style={{ flex: 1 }}
-                busy={busyState === "notifications"}
-                onPress={() =>
-                  void runAction(
-                    "notifications",
-                    requestNotificationAccess,
-                    "Notification access could not be refreshed.",
-                  )
-                }
-              >
-                Refresh notifications
-              </Button>
-            </View>
-            {notificationPreferences.map((preference) => (
-              <Pressable
-                key={preference.id}
-                className="rounded-[28px]"
-                onPress={() =>
-                  void runAction(
-                    `notification:${preference.id}`,
-                    () =>
-                      updateNotificationPreference(
-                        preference.reminderType,
-                        !preference.enabled,
-                      ),
-                    "Notification preference could not be updated.",
-                  )
-                }
-                style={({ pressed }) => ({
-                  opacity: pressed ? 0.84 : 1,
-                })}
-              >
-                <Surface
-                  tone={preference.enabled ? "accent" : "default"}
-                  className="gap-3"
-                  style={{
-                    borderColor: preference.enabled
-                      ? theme.colors.border.strong
-                      : theme.colors.border.subtle,
-                  }}
-                >
-                  <View className="flex-row items-center justify-between gap-3">
-                    <View className="flex-1 gap-1">
-                      <AppText variant="section">{preference.reminderType.replace(/_/g, " ")}</AppText>
-                      <AppText tone="tertiary" variant="caption">
-                        {preference.enabled ? "Reminder is active" : "Reminder is muted"}
-                      </AppText>
-                    </View>
-                    <Pill label={preference.enabled ? "Enabled" : "Muted"} tone="accent" />
-                  </View>
-                </Surface>
-              </Pressable>
-            ))}
-          </View>
-        </Surface>
-
-        <Surface>
-          <View className="gap-4">
-            <View className="flex-row flex-wrap gap-2">
-              <Pill label="Theme" tone="accent" />
-            </View>
-            <AppText variant="section">Theme</AppText>
+            <AppText variant="section">Visual tone</AppText>
             <AppText tone="secondary">
-              Pick the visual tone you want across the app without changing the overall product
-              language.
+              Pick the visual tone you want without changing the product structure.
             </AppText>
-            {themePresets.map((preset) => (
-              <Pressable
-                key={preset.id}
-                className="rounded-[24px]"
-                onPress={() =>
-                  void savePreferences(
-                    "theme",
-                    () => ({ ...resolvedProductPreferences, themePreset: preset.id }),
-                    "Theme selection could not be updated.",
-                  )
-                }
-                style={({ pressed }) => ({
-                  opacity: pressed ? 0.85 : 1,
-                })}
-              >
-                <Surface
-                  tone="default"
-                  className="gap-3"
-                  style={{
-                    backgroundColor: preset.colors.background.elevated,
-                    borderColor:
-                      resolvedProductPreferences.themePreset === preset.id
-                        ? preset.colors.text.primary
-                        : preset.colors.border.subtle,
-                    borderWidth:
-                      resolvedProductPreferences.themePreset === preset.id ? 1.5 : 1,
-                  }}
-                >
-                  <View className="flex-row flex-wrap gap-2">
-                    {resolvedProductPreferences.themePreset === preset.id ? (
-                      <Pill label="Selected" tone="accent" />
-                    ) : null}
-                    <Pill label={preset.label} />
-                  </View>
-                  <AppText tone="secondary">{preset.description}</AppText>
-                </Surface>
-              </Pressable>
-            ))}
           </View>
+          {themePresets.map((preset) => (
+            <Pressable
+              key={preset.id}
+              className="rounded-[24px]"
+              onPress={() =>
+                void savePreferences(
+                  "theme",
+                  () => ({ ...resolvedProductPreferences, themePreset: preset.id }),
+                  "Theme selection could not be updated.",
+                )
+              }
+              style={({ pressed }) => ({
+                opacity: pressed ? 0.85 : 1,
+              })}
+            >
+              <Surface
+                tone="default"
+                className="gap-2"
+                style={{
+                  backgroundColor: preset.colors.background.elevated,
+                  borderColor:
+                    resolvedProductPreferences.themePreset === preset.id
+                      ? preset.colors.text.primary
+                      : preset.colors.border.subtle,
+                }}
+              >
+                <AppText variant="section">{preset.label}</AppText>
+                <AppText tone="secondary">{preset.description}</AppText>
+                {resolvedProductPreferences.themePreset === preset.id ? (
+                  <MetaLine items={["Selected"]} />
+                ) : null}
+              </Surface>
+            </Pressable>
+          ))}
         </Surface>
 
         {runtimeMessage ? (

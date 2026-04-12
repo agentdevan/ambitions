@@ -23,11 +23,11 @@ export function EmptyStateCard({
     <Surface tone={tone}>
       <View className="gap-3">
         {eyebrow ? (
-          <AppText variant="caption" tone="tertiary">
+          <AppText variant="micro" tone="tertiary" style={{ textTransform: "uppercase" }}>
             {eyebrow}
           </AppText>
         ) : null}
-        <AppText variant="section">{title}</AppText>
+        <AppText variant="title">{title}</AppText>
         <AppText tone="secondary">{body}</AppText>
         {action}
       </View>

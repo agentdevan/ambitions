@@ -9,7 +9,6 @@ import {
   SyncStateSnapshot,
 } from "../../domain/models";
 import { Button } from "../ui/Button";
-import { Pill } from "../ui/Pill";
 import { Surface } from "../ui/Surface";
 import { AppText } from "../ui/Text";
 
@@ -46,26 +45,36 @@ export function AccountStatusCard({
     <Surface tone="sunken">
       <View className="gap-5">
         <View className="gap-3">
-          <View className="flex-row flex-wrap gap-2">
-            <Pill
-              label={hasAccount ? "Signed in" : "Local only"}
-              tone={hasAccount ? "accent" : "neutral"}
-            />
-            {syncState ? <Pill label={syncState.mode.replace("_", " ")} tone="quiet" /> : null}
-            {conflicts.length > 0 ? <Pill label={`${conflicts.length} items to review`} /> : null}
-          </View>
+          <AppText tone="tertiary" variant="micro" style={{ textTransform: "uppercase" }}>
+            Account
+          </AppText>
           <AppText variant="section">Account and sync</AppText>
           <AppText tone="secondary">
             {hasAccount
-              ? "Keep your core Ambitions data available across devices without turning the app into an account product."
-              : "Stay local if you want. Add an account when backup and cross-device continuity become useful."}
+              ? "Keep the planning foundation available across devices."
+              : "Stay local, or add an account when backup becomes useful."}
           </AppText>
+          <View className="flex-row flex-wrap gap-x-5 gap-y-2">
+            <AppText tone="secondary" variant="caption">
+              {hasAccount ? "Signed in" : "Local only"}
+            </AppText>
+            {syncState ? (
+              <AppText tone="secondary" variant="caption">
+                {syncState.mode.replace("_", " ")}
+              </AppText>
+            ) : null}
+            {conflicts.length > 0 ? (
+              <AppText tone="secondary" variant="caption">
+                {conflicts.length} item{conflicts.length === 1 ? "" : "s"} to review
+              </AppText>
+            ) : null}
+          </View>
         </View>
 
         {account ? (
           <View
-            className="gap-1 rounded-[24px] px-4 py-4"
-            style={{ backgroundColor: "#F6EFE6", borderWidth: 1, borderColor: "#DDCFBF" }}
+            className="gap-1 rounded-[18px] px-4 py-4"
+            style={{ backgroundColor: "#F5F1EA", borderWidth: 1, borderColor: "#DDD5CB" }}
           >
             <AppText>{account.displayName ?? account.email ?? "Apple account"}</AppText>
             <AppText tone="tertiary" variant="caption">
@@ -85,13 +94,9 @@ export function AccountStatusCard({
         {requiresAttachment ? (
           <View className="gap-4">
             <View className="gap-2">
-              <AppText>
-                Attach this device&apos;s Ambitions data to the signed-in account?
-              </AppText>
+              <AppText>Attach this device's data to the signed-in account?</AppText>
               <AppText tone="secondary" variant="caption">
-                Existing goals, milestones, tasks, daily plans, preferences, and adaptation profile
-                will stay on this device and become the baseline for sync. Nothing is overwritten
-                silently.
+                Existing goals, plans, and preferences become the sync baseline. Nothing is overwritten silently.
               </AppText>
             </View>
             <View className="flex-row gap-3">
@@ -122,7 +127,7 @@ export function AccountStatusCard({
           </View>
         ) : (
           <Button busy={busyAction === "sign_in"} onPress={onSignIn}>
-            Add Apple account
+            Add account
           </Button>
         )}
       </View>

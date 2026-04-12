@@ -9,15 +9,18 @@ interface TodayHeaderProps {
 
 export function TodayHeader({ dateLabel, liveContext }: TodayHeaderProps) {
   return (
-    <View className="gap-2 px-1">
+    <View className="gap-2 px-1 pt-2">
+      <AppText tone="tertiary" variant="micro" style={{ textTransform: "uppercase" }}>
+        Today
+      </AppText>
       <AppText variant="hero">Today</AppText>
-      <AppText tone="secondary" variant="section">
+      <AppText tone="secondary" variant="caption">
         {dateLabel}
       </AppText>
       <AppText tone="secondary" style={{ maxWidth: 320 }}>
         {liveContext
-          ? "Calendar-grounded focus, then action cards, then supporting context."
-          : "A steady fallback day: brief first, then task cards, then supporting context."}
+          ? "Live context is shaping the day."
+          : "Using your saved baseline for a steady day."}
       </AppText>
     </View>
   );

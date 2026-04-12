@@ -10,35 +10,34 @@ interface PillProps {
 
 export function Pill({ label, tone = "neutral" }: PillProps) {
   const theme = useResolvedTheme();
-  const toneMap: Record<NonNullable<PillProps["tone"]>, { backgroundColor: string; borderColor: string; textTone: "secondary" | "tertiary" }> = {
+  const toneMap: Record<
+    NonNullable<PillProps["tone"]>,
+    { backgroundColor: string; borderColor: string; textTone: "secondary" | "tertiary" }
+  > = {
     neutral: {
-      backgroundColor: "#F1E8DC",
-      borderColor: "#D1C1AF",
+      backgroundColor: theme.colors.background.elevated,
+      borderColor: theme.colors.border.subtle,
       textTone: "secondary",
     },
     accent: {
-      backgroundColor: "#D4E1CF",
-      borderColor: "#AEC3A7",
+      backgroundColor: theme.colors.background.accentWash,
+      borderColor: `${theme.colors.accent.primary}35`,
       textTone: "secondary",
     },
     quiet: {
-      backgroundColor: "#EFE6DA",
-      borderColor: "#DACBBB",
+      backgroundColor: "transparent",
+      borderColor: "transparent",
       textTone: "tertiary",
     },
   };
 
   return (
     <View
-      className="self-start rounded-full px-3.5 py-1.5"
+      className="self-start rounded-full px-2.5 py-1"
       style={{
         backgroundColor: toneMap[tone].backgroundColor,
-        borderWidth: 1,
+        borderWidth: tone === "quiet" ? 0 : 1,
         borderColor: toneMap[tone].borderColor,
-        shadowColor: theme.colors.text.primary,
-        shadowOpacity: 0.05,
-        shadowRadius: 5,
-        shadowOffset: { width: 0, height: 2 },
       }}
     >
       <AppText tone={toneMap[tone].textTone} variant="micro" numberOfLines={1}>

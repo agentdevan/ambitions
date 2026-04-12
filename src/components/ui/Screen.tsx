@@ -17,13 +17,13 @@ export function Screen({ children, scrollable = true }: ScreenProps) {
       <ScrollView
         className="flex-1"
         contentContainerStyle={{
-          paddingTop: insets.top + 12,
-          paddingBottom: insets.bottom + 34,
+          paddingTop: insets.top + 8,
+          paddingBottom: insets.bottom + 32,
           backgroundColor: theme.colors.background.canvas,
         }}
         showsVerticalScrollIndicator={false}
       >
-        <View className="px-6 pb-2">{children}</View>
+        <View className="px-5 pb-3">{children}</View>
       </ScrollView>
     );
   }
@@ -32,8 +32,8 @@ export function Screen({ children, scrollable = true }: ScreenProps) {
     <View
       className="flex-1 px-6"
       style={{
-        paddingTop: insets.top + 12,
-        paddingBottom: insets.bottom + 34,
+        paddingTop: insets.top + 8,
+        paddingBottom: insets.bottom + 32,
         backgroundColor: theme.colors.background.canvas,
       }}
     >

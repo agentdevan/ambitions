@@ -26,19 +26,19 @@ export function SelectionCard({
   return (
     <Pressable
       {...props}
-      className="rounded-[28px] px-5 py-5"
+      className="rounded-[22px] px-4 py-4"
       style={({ pressed }) => [
         {
-          borderWidth: selected ? 1.5 : 1,
-          borderColor: selected ? theme.colors.accent.primary : theme.colors.border.subtle,
+          borderWidth: 1,
+          borderColor: selected ? theme.colors.text.primary : theme.colors.border.subtle,
           backgroundColor: selected
-            ? theme.colors.background.accentWash
+            ? theme.colors.background.elevated
             : theme.colors.background.canvas,
-          shadowColor: selected ? theme.colors.accent.primary : theme.colors.text.primary,
-          shadowOpacity: selected ? 0.14 : 0.06,
-          shadowRadius: selected ? 18 : 12,
-          shadowOffset: { width: 0, height: selected ? 10 : 6 },
-          elevation: selected ? 3 : 1,
+          shadowColor: theme.colors.text.primary,
+          shadowOpacity: selected ? 0.07 : 0.03,
+          shadowRadius: selected ? 10 : 6,
+          shadowOffset: { width: 0, height: selected ? 6 : 3 },
+          elevation: selected ? 2 : 0,
           opacity: props.disabled ? 0.5 : pressed ? 0.92 : 1,
         },
         style,
@@ -49,10 +49,10 @@ export function SelectionCard({
           <View className="flex-1 gap-2">
             <View className="flex-row items-center gap-2">
               <View
-                className="h-2.5 w-2.5 rounded-full"
+                className="h-2 w-2 rounded-full"
                 style={{
                   backgroundColor: selected
-                    ? theme.colors.accent.primary
+                    ? theme.colors.text.primary
                     : theme.colors.border.strong,
                 }}
               />

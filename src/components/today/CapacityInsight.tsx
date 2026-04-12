@@ -1,6 +1,5 @@
 import { View } from "react-native";
 
-import { Pill } from "../ui/Pill";
 import { Surface } from "../ui/Surface";
 import { AppText } from "../ui/Text";
 
@@ -26,27 +25,38 @@ export function CapacityInsight({ capacity, focus }: CapacityInsightProps) {
         <AppText tone="tertiary" variant="micro" style={{ textTransform: "uppercase" }}>
           Capacity
         </AppText>
-        <AppText variant="section">Capacity stays protected for the day.</AppText>
-        <AppText tone="secondary">
-          {focus}
-        </AppText>
+        <AppText variant="section">Capacity guardrails</AppText>
+        <AppText tone="secondary">{focus}</AppText>
       </View>
 
       <View
-        className="gap-3 rounded-[22px] px-4 py-4"
-        style={{ backgroundColor: "#F6EFE6", borderWidth: 1, borderColor: "#DDCFBF" }}
+        className="gap-3 rounded-[18px] px-4 py-4"
+        style={{ backgroundColor: "#F5F1EA", borderWidth: 1, borderColor: "#DDD5CB" }}
       >
-        <View className="flex-row flex-wrap gap-2">
-          <Pill label={`${capacity.focusBudgetMinutes} min committed`} tone="accent" />
-          <Pill label={`${capacity.usableMinutes} min usable`} />
-          <Pill label={`${capacity.unusedCapacityMinutes} min open`} tone="quiet" />
-          <Pill label={`Load ${capacity.mentalLoad}`} />
-          <Pill label={`Pressure ${capacity.planPressure}`} tone="quiet" />
+        <View className="flex-row flex-wrap gap-x-6 gap-y-3">
+          <View className="min-w-[96px] gap-1">
+            <AppText tone="tertiary" variant="micro" style={{ textTransform: "uppercase" }}>
+              Focus
+            </AppText>
+            <AppText variant="section">{capacity.focusBudgetMinutes} min</AppText>
+          </View>
+          <View className="min-w-[96px] gap-1">
+            <AppText tone="tertiary" variant="micro" style={{ textTransform: "uppercase" }}>
+              Usable
+            </AppText>
+            <AppText variant="section">{capacity.usableMinutes} min</AppText>
+          </View>
+          <View className="min-w-[96px] gap-1">
+            <AppText tone="tertiary" variant="micro" style={{ textTransform: "uppercase" }}>
+              Open
+            </AppText>
+            <AppText variant="section">{capacity.unusedCapacityMinutes} min</AppText>
+          </View>
         </View>
-
         <AppText tone="secondary" variant="caption">
-          Confidence {Math.round(capacity.confidence * 100)}%
-          {capacity.overloadWarning ? ", with excess demand left unscheduled." : "."}
+          Load is {capacity.mentalLoad}. Pressure is {capacity.planPressure}. Confidence is{" "}
+          {Math.round(capacity.confidence * 100)}%
+          {capacity.overloadWarning ? ", with some work left out on purpose." : "."}
         </AppText>
       </View>
     </Surface>

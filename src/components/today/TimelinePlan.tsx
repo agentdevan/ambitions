@@ -4,7 +4,6 @@ import { TaskActionType } from "../../domain/models";
 import { useResolvedTheme } from "../../design/theme/useResolvedTheme";
 import { TodayTaskBlock } from "../../state/viewModels/today";
 import { Button } from "../ui/Button";
-import { Pill } from "../ui/Pill";
 import { Surface } from "../ui/Surface";
 import { AppText } from "../ui/Text";
 
@@ -42,24 +41,26 @@ export function TimelinePlan({
     <Surface className="gap-6">
       <View className="flex-row items-end justify-between gap-3">
         <View className="gap-2">
-          <View className="flex-row flex-wrap gap-2">
-            <Pill label="Today plan" tone="accent" />
-            <Pill label={`${blocks.length} scheduled sessions`} tone="quiet" />
-          </View>
+          <AppText tone="tertiary" variant="micro" style={{ textTransform: "uppercase" }}>
+            Timeline
+          </AppText>
           <AppText variant="title">Task timeline</AppText>
           <AppText tone="secondary">
-            The main work area keeps each session bounded, readable, and action-ready.
+            Work blocks with clear boundaries and only the next useful actions.
           </AppText>
         </View>
+        <AppText tone="secondary" variant="caption">
+          {blocks.length} session{blocks.length === 1 ? "" : "s"}
+        </AppText>
       </View>
 
       <View
-        className="gap-4 rounded-[30px] px-3.5 py-3.5"
-        style={{ backgroundColor: "#E7DDD1", borderWidth: 1, borderColor: "#D0BFAE" }}
+        className="gap-4 rounded-[20px] px-1 py-1"
+        style={{ backgroundColor: "#EAE4DB", borderWidth: 1, borderColor: "#D8CDBF" }}
       >
         {blocks.length === 0 ? (
           <AppText tone="secondary">
-            No tasks were scheduled into believable windows for this day.
+            Nothing was scheduled into believable windows for today.
           </AppText>
         ) : null}
         {blocks.map((block) => (
@@ -76,9 +77,13 @@ export function TimelinePlan({
             <View className="gap-6">
               <View className="flex-row items-start justify-between gap-3">
                 <View className="flex-1 gap-3">
-                  <View className="flex-row flex-wrap gap-2">
-                    <Pill label={`${block.startsAt} - ${block.endsAt}`} tone="quiet" />
-                    <Pill label={block.state} tone={block.state === "active" ? "accent" : "neutral"} />
+                  <View className="flex-row flex-wrap items-center gap-x-4 gap-y-2">
+                    <AppText tone="tertiary" variant="micro" style={{ textTransform: "uppercase" }}>
+                      {block.startsAt} to {block.endsAt}
+                    </AppText>
+                    <AppText tone="secondary" variant="caption">
+                      {block.state}
+                    </AppText>
                   </View>
                   <AppText variant="title">{block.title}</AppText>
                   {block.note ? (
@@ -99,26 +104,34 @@ export function TimelinePlan({
               </View>
 
               <View
-                className="gap-3 rounded-[20px] px-3 py-3"
-                style={{ backgroundColor: block.state === "active" ? "#F5FAF3" : "#F5EDE3", borderWidth: 1, borderColor: block.state === "active" ? "#C8D8C1" : "#DECFBF" }}
+                className="gap-2 rounded-[18px] px-3 py-3"
+                style={{
+                  backgroundColor: block.state === "active" ? "#F4F8F2" : "#F4EEE6",
+                  borderWidth: 1,
+                  borderColor: block.state === "active" ? "#CCD8C5" : "#DDD3C7",
+                }}
               >
                 <AppText tone="tertiary" variant="micro" style={{ textTransform: "uppercase" }}>
                   Session details
                 </AppText>
-                <View className="flex-row flex-wrap gap-2">
-                {block.taskStatus ? (
-                  <Pill label={block.taskStatus.replaceAll("_", " ")} />
-                ) : null}
-                {block.estimatedMinutes ? (
-                  <Pill label={`${block.estimatedMinutes} min`} tone="quiet" />
-                ) : null}
+                <View className="flex-row flex-wrap gap-x-4 gap-y-2">
+                  {block.taskStatus ? (
+                    <AppText tone="secondary" variant="caption">
+                      {block.taskStatus.replaceAll("_", " ")}
+                    </AppText>
+                  ) : null}
+                  {block.estimatedMinutes ? (
+                    <AppText tone="secondary" variant="caption">
+                      {block.estimatedMinutes} min
+                    </AppText>
+                  ) : null}
                 </View>
               </View>
 
               {block.taskId && block.actions.length > 0 ? (
                 <View
-                  className="gap-3 rounded-[20px] px-3 py-3"
-                  style={{ backgroundColor: "#F7F1E8", borderWidth: 1, borderColor: "#DDCDBD" }}
+                  className="gap-3 rounded-[18px] px-3 py-3"
+                  style={{ backgroundColor: "#F6F1EA", borderWidth: 1, borderColor: "#DDD3C7" }}
                 >
                   <View className="flex-row items-center justify-between gap-3">
                     <AppText tone="tertiary" variant="micro" style={{ textTransform: "uppercase" }}>
@@ -134,7 +147,7 @@ export function TimelinePlan({
                         key={`${block.id}-${action}`}
                         onPress={() => onTaskAction(block.taskId as string, action)}
                         disabled={busyTaskId === block.taskId}
-                        tone={action === "start" || action === "complete" ? "primary" : "secondary"}
+                        tone={action === "start" || action === "complete" ? "primary" : "ghost"}
                         size="compact"
                       >
                         {busyTaskId === block.taskId ? "Working..." : actionLabels[action]}

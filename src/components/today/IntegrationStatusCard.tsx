@@ -6,7 +6,6 @@ import {
   CalendarSyncState,
 } from "../../domain/models";
 import { Button } from "../ui/Button";
-import { Pill } from "../ui/Pill";
 import { Surface } from "../ui/Surface";
 import { AppText } from "../ui/Text";
 
@@ -47,25 +46,18 @@ export function IntegrationStatusCard({
   return (
     <Surface tone="sunken" className="gap-4">
       <View className="gap-3">
-        <View className="flex-row flex-wrap gap-2">
-          <Pill label="Real-world context" tone="quiet" />
-          <Pill
-            label={usingLiveCalendar ? "Calendar connected" : "Saved schedule"}
-            tone={usingLiveCalendar ? "accent" : "neutral"}
-          />
-          <Pill
-            label={`Notifications ${notificationPermissionStatus}`}
-            tone={notificationNeedsPermission ? "neutral" : "quiet"}
-          />
-        </View>
+        <AppText tone="tertiary" variant="micro" style={{ textTransform: "uppercase" }}>
+          Integrations
+        </AppText>
+        <AppText variant="section">Context and reminders</AppText>
         <AppText tone="secondary" variant="caption">
           {usingLiveCalendar
             ? "Today is grounded in live calendar context."
-            : "Today is using the saved schedule baseline."}
+            : "Today is running from your saved schedule."}
         </AppText>
         <View
-          className="rounded-[24px] px-4 py-4"
-          style={{ backgroundColor: "#F6EFE6", borderWidth: 1, borderColor: "#DDCFBF" }}
+          className="rounded-[18px] px-4 py-4"
+          style={{ backgroundColor: "#F5F1EA", borderWidth: 1, borderColor: "#DDD5CB" }}
         >
           <AppText tone="secondary">{calendarDetail}</AppText>
           {syncFailure && calendarConnectionState?.metadata.lastError ? (
@@ -73,6 +65,14 @@ export function IntegrationStatusCard({
               Last read issue: {String(calendarConnectionState.metadata.lastError)}
             </AppText>
           ) : null}
+        </View>
+        <View className="flex-row flex-wrap gap-x-5 gap-y-2">
+          <AppText tone="secondary" variant="caption">
+            Calendar: {usingLiveCalendar ? "Connected" : "Offline"}
+          </AppText>
+          <AppText tone="secondary" variant="caption">
+            Reminders: {notificationNeedsPermission ? "Needs access" : "Ready"}
+          </AppText>
         </View>
       </View>
 

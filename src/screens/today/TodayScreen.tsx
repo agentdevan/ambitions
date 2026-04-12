@@ -1,8 +1,8 @@
-import { AccountStatusCard } from "../../components/account/AccountStatusCard";
 import { useState } from "react";
 import { View } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 
+import { AccountStatusCard } from "../../components/account/AccountStatusCard";
 import { CapacityInsight } from "../../components/today/CapacityInsight";
 import { IntegrationStatusCard } from "../../components/today/IntegrationStatusCard";
 import { ScheduleContext } from "../../components/today/ScheduleContext";
@@ -11,12 +11,23 @@ import { TodayHeader } from "../../components/today/TodayHeader";
 import { Button } from "../../components/ui/Button";
 import { EmptyStateCard } from "../../components/ui/EmptyStateCard";
 import { Screen } from "../../components/ui/Screen";
-import { Pill } from "../../components/ui/Pill";
 import { Surface } from "../../components/ui/Surface";
 import { AppText } from "../../components/ui/Text";
 import { getGoalReviewDraft } from "../../services/goals/metadata";
 import { useAppStore } from "../../state/useAppStore";
 import { formatLongDate } from "../../utils/date";
+
+function MetaLine({ items }: { items: string[] }) {
+  return (
+    <View className="flex-row flex-wrap gap-x-4 gap-y-2">
+      {items.map((item) => (
+        <AppText key={item} tone="secondary" variant="caption">
+          {item}
+        </AppText>
+      ))}
+    </View>
+  );
+}
 
 export function TodayScreen() {
   const navigation = useNavigation();
@@ -74,7 +85,7 @@ export function TodayScreen() {
       setRuntimeMessage(
         error instanceof Error
           ? error.message
-          : "The task action could not be applied to today's plan.",
+          : "That change could not be applied to today's plan.",
       );
     } finally {
       setBusyTaskId(null);
@@ -101,10 +112,10 @@ export function TodayScreen() {
   if (!today) {
     const emptyBody =
       bootStatus === "loading"
-        ? "Loading the local planning foundation."
+        ? "Loading your planning foundation."
         : goals.length === 0
-          ? "Start with a goal. Ambitions will turn it into a calm first day instead of a blank planner."
-          : "Your goals exist, but there is no generated day yet. Open Plan to regenerate from the current foundation.";
+          ? "Start with a goal. Ambitions will shape the first day from there."
+          : "Your goals are here, but today has not been generated yet. Open Plan to rebuild it.";
 
     return (
       <Screen>
@@ -114,7 +125,7 @@ export function TodayScreen() {
             dateLabel={bootStatus === "error" ? "Unable to load plan" : formatLongDate(planDate)}
           />
           <EmptyStateCard
-            title={bootStatus === "loading" ? "Loading the planning layer" : "No plan yet"}
+            title={bootStatus === "loading" ? "Loading today" : "No plan yet"}
             body={emptyBody}
             tone="sunken"
             action={
@@ -145,64 +156,66 @@ export function TodayScreen() {
 
   return (
     <Screen>
-      <View className="gap-10">
+      <View className="gap-8">
         <TodayHeader
           dateLabel={formatLongDate(today.date)}
           liveContext={today.integration.usingLiveCalendar}
         />
-        <View className="gap-5">
-          <Surface tone="accent" className="gap-6">
-            <View className="gap-4">
-              <AppText tone="tertiary" variant="micro" style={{ textTransform: "uppercase" }}>
-                Primary focus
-              </AppText>
-              <View className="flex-row flex-wrap gap-2">
-                <Pill label="Daily brief" tone="accent" />
-                <Pill label={`${today.blocks.length} sessions`} />
-                <Pill label={`${today.progress.completed} done`} tone="quiet" />
-              </View>
-              <AppText variant="title">{today.focus}</AppText>
-              <AppText tone="secondary" style={{ maxWidth: 320 }}>
-                {today.adaptiveGuidance[0] ??
-                  "What matters first is clear, the next sessions are bounded, and the rest of the day stays supportive instead of noisy."}
-              </AppText>
-            </View>
-            <View
-              className="gap-4 rounded-[24px] px-4 py-4"
-              style={{ backgroundColor: "#F8FBF6B8", borderWidth: 1, borderColor: "#BECDB7" }}
-            >
-              <AppText tone="tertiary" variant="micro" style={{ textTransform: "uppercase" }}>
-                Today signal
-              </AppText>
-              <View className="flex-row flex-wrap gap-2">
-                <Pill label={`${today.replanSuggestions.length} recovery options`} />
-                <Pill label={`${today.unscheduled.length} held out`} tone="quiet" />
-                <Pill
-                  label={
-                    today.integration.usingLiveCalendar ? "Live context on" : "Saved baseline mode"
-                  }
-                  tone={today.integration.usingLiveCalendar ? "accent" : "neutral"}
-                />
-              </View>
-            </View>
-          </Surface>
-          <TimelinePlan
-            blocks={today.blocks}
-            onTaskAction={handleTaskAction}
-            busyTaskId={busyTaskId}
+
+        <Surface tone="accent" className="gap-6">
+          <View className="gap-3">
+            <AppText tone="tertiary" variant="micro" style={{ textTransform: "uppercase" }}>
+              Execution brief
+            </AppText>
+            <AppText variant="title">{today.focus}</AppText>
+            <AppText tone="secondary" style={{ maxWidth: 330 }}>
+              {today.adaptiveGuidance[0] ?? "Start with the easiest meaningful move."}
+            </AppText>
+          </View>
+
+          <MetaLine
+            items={[
+              `${today.blocks.length} sessions`,
+              `${today.progress.completed} done`,
+              `${today.replanSuggestions.length} fallback options`,
+              today.integration.usingLiveCalendar ? "Live context on" : "Saved baseline mode",
+            ]}
           />
-        </View>
+
+          <View
+            className="gap-2 rounded-[18px] px-4 py-4"
+            style={{ backgroundColor: "#F5F7F1", borderWidth: 1, borderColor: "#CBD4C4" }}
+          >
+            <AppText tone="tertiary" variant="micro" style={{ textTransform: "uppercase" }}>
+              Day note
+            </AppText>
+            <AppText tone="secondary">
+              {today.replanSuggestions.length > 0
+                ? "If the day slips, recover with the lightest useful adjustment."
+                : "The schedule has room to stay steady without extra adjustments."}
+            </AppText>
+          </View>
+        </Surface>
+
+        <TimelinePlan
+          blocks={today.blocks}
+          onTaskAction={handleTaskAction}
+          busyTaskId={busyTaskId}
+        />
+
         <View className="gap-4 px-1">
           <View className="gap-2">
             <AppText tone="tertiary" variant="micro" style={{ textTransform: "uppercase" }}>
               Support
             </AppText>
-            <AppText variant="section">Capacity, context, and system support</AppText>
+            <AppText variant="section">The rest of the day at a glance</AppText>
             <AppText tone="secondary">
-              The rest of the screen stays useful, but visually quieter than the brief and task cards.
+              Capacity, context, and account state stay available without crowding the work.
             </AppText>
           </View>
+
           <CapacityInsight capacity={today.capacity} focus={today.focus} />
+
           <Surface tone="sunken" className="gap-4">
             <View className="gap-2">
               <AppText tone="tertiary" variant="micro" style={{ textTransform: "uppercase" }}>
@@ -212,14 +225,11 @@ export function TodayScreen() {
               <AppText tone="secondary">{today.integration.calendarDetail}</AppText>
             </View>
             {today.adaptiveGuidance.length > 1 ? (
-              <View className="flex-row flex-wrap gap-2">
-                {today.adaptiveGuidance.slice(1, 3).map((item) => (
-                  <Pill key={item} label={item} tone="quiet" />
-                ))}
-              </View>
+              <MetaLine items={today.adaptiveGuidance.slice(1, 3)} />
             ) : null}
             <ScheduleContext items={today.scheduleContext} />
           </Surface>
+
           <IntegrationStatusCard
             calendarConnectionState={calendarConnectionState}
             notificationPermissionStatus={notificationPermissionStatus}
@@ -254,6 +264,7 @@ export function TodayScreen() {
                 : null
             }
           />
+
           <AccountStatusCard
             account={account}
             authState={authState}
@@ -289,24 +300,24 @@ export function TodayScreen() {
               runAccountAction("sync", () => syncAccountData(), "Account sync could not complete.")
             }
           />
+
           {pendingReviewGoals.length > 0 ? (
-            <Surface tone="sunken">
-              <View className="gap-3">
-                <View className="flex-row flex-wrap gap-2">
-                  <Pill label="Recommended plan" tone="accent" />
-                  <Pill label={`${pendingReviewGoals.length} awaiting review`} />
-                </View>
-                <AppText variant="section">{pendingReviewGoals[0]?.title}</AppText>
-                <AppText tone="secondary">
-                  A recommended plan or refresh is waiting for review. You can make a few light edits before accepting it.
-                </AppText>
-                <Button
-                  tone="secondary"
-                  onPress={() => navigation.navigate("Plan" as never)}
-                >
-                  Open review
-                </Button>
-              </View>
+            <Surface tone="sunken" className="gap-3">
+              <AppText tone="tertiary" variant="micro" style={{ textTransform: "uppercase" }}>
+                Pending review
+              </AppText>
+              <AppText variant="section">{pendingReviewGoals[0]?.title}</AppText>
+              <AppText tone="secondary">
+                A revised plan is ready for review before it becomes active.
+              </AppText>
+              <MetaLine
+                items={[
+                  `${pendingReviewGoals.length} goal${pendingReviewGoals.length === 1 ? "" : "s"} waiting`,
+                ]}
+              />
+              <Button tone="secondary" onPress={() => navigation.navigate("Plan" as never)}>
+                Open review
+              </Button>
             </Surface>
           ) : null}
         </View>
@@ -314,9 +325,7 @@ export function TodayScreen() {
         {runtimeMessage || integrationBusy ? (
           <Surface tone="sunken">
             <View className="gap-2">
-              {runtimeMessage ? (
-                <AppText tone="secondary">{runtimeMessage}</AppText>
-              ) : null}
+              {runtimeMessage ? <AppText tone="secondary">{runtimeMessage}</AppText> : null}
               {integrationBusy ? (
                 <AppText tone="tertiary" variant="caption">
                   Updating live context...
