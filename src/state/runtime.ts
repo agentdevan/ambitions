@@ -20,9 +20,10 @@ import {
 } from "../services/calendar/constraintSelection";
 import { getProductPreferences } from "../product/preferences";
 import { ProductPreferences } from "../product/types";
+import { getCurrentLocalDateString } from "../utils/date";
 import { buildTodayViewModel, TodayViewModel } from "./viewModels/today";
 
-export const initialPlanDate = "2026-04-11";
+export const initialPlanDate = getCurrentLocalDateString();
 
 export interface FoundationSnapshot {
   domains: Awaited<ReturnType<typeof appServices.repositories.preferences.listDomains>>;

@@ -47,6 +47,7 @@ import {
   prepareGoalReview,
   restoreRollbackSnapshot,
 } from "../services/goals/regenerationCoordinator";
+import { getCurrentLocalDateString } from "../utils/date";
 import { TodayViewModel } from "./viewModels/today";
 import { initialPlanDate, refreshAllState } from "./runtime";
 
@@ -224,9 +225,10 @@ export const useAppStore = create<AppState>((set, get) => ({
     set({ bootStatus: "loading", lastError: null });
 
     try {
+      const currentPlanDate = getCurrentLocalDateString();
       await initializeAppServices();
       await appServices.services.notifications.configure();
-      const snapshot = await refreshAllState(get().planDate);
+      const snapshot = await refreshAllState(currentPlanDate);
       const accountSnapshot = await appServices.services.account.getSnapshot();
 
       set({
