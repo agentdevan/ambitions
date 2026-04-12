@@ -186,6 +186,7 @@ export async function loadFoundationSnapshot(date: string): Promise<FoundationSn
         ? buildTodayViewModel({
             date,
             dailyPlan: schedule?.dailyPlan ?? dailyPlan,
+            goals,
             blocks,
             schedule,
             profile: adaptationProfile,

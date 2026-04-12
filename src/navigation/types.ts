@@ -4,6 +4,7 @@ export type TodayStackParamList = {
   TodayHome: undefined;
   TodayTimeline: undefined;
   TodaySessionDetail: { blockId: string };
+  TodayOpenTime: undefined;
   TodayCapacity: undefined;
   TodayContext: undefined;
 };

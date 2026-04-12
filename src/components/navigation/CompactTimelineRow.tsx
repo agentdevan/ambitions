@@ -31,6 +31,12 @@ const stateLabelMap: Record<TodayTaskBlock["state"], string> = {
 
 export function CompactTimelineRow({ block, onPress }: CompactTimelineRowProps) {
   const theme = useResolvedTheme();
+  const accentColor =
+    block.state === "active"
+      ? theme.colors.accent.primary
+      : block.state === "scheduled"
+        ? theme.colors.semantic.warning
+        : theme.colors.border.strong;
 
   return (
     <Pressable
@@ -62,6 +68,14 @@ export function CompactTimelineRow({ block, onPress }: CompactTimelineRowProps) 
                   : theme.colors.border.subtle,
           }}
         >
+          <View
+            className="self-stretch rounded-full"
+            style={{
+              width: 4,
+              backgroundColor: accentColor,
+              opacity: block.state === "active" ? 1 : 0.7,
+            }}
+          />
           <View className="w-[82px] gap-1">
             <AppText variant="caption">
               {formatTimeRangeLabel(block.startsAt, block.endsAt, { compact: true })}
@@ -77,7 +91,7 @@ export function CompactTimelineRow({ block, onPress }: CompactTimelineRowProps) 
               </AppText>
               <Pill label={stateLabelMap[block.state]} tone={stateToneMap[block.state]} />
             </View>
-            <AppText tone="secondary" numberOfLines={1}>
+            <AppText tone="secondary" numberOfLines={2}>
               {block.note ?? "Open the session to see the next useful move."}
             </AppText>
           </View>

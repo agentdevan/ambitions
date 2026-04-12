@@ -39,6 +39,7 @@ import { TodayScreen } from "../screens/today/TodayScreen";
 import {
   TodayCapacityScreen,
   TodayContextScreen,
+  TodayOpenTimeScreen,
   TodaySessionDetailScreen,
   TodayTimelineScreen,
 } from "../screens/today/TodayDetailScreens";
@@ -108,6 +109,11 @@ function TodayNavigator() {
         name="TodaySessionDetail"
         component={TodaySessionDetailScreen}
         options={{ title: "Session" }}
+      />
+      <TodayStack.Screen
+        name="TodayOpenTime"
+        component={TodayOpenTimeScreen}
+        options={{ title: "Use This Window" }}
       />
       <TodayStack.Screen
         name="TodayCapacity"

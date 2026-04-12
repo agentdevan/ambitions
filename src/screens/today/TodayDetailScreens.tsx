@@ -20,6 +20,7 @@ import { Pill } from "../../components/ui/Pill";
 import { Screen } from "../../components/ui/Screen";
 import { Surface } from "../../components/ui/Surface";
 import { AppText } from "../../components/ui/Text";
+import { useResolvedTheme } from "../../design/theme/useResolvedTheme";
 import { GoalMilestoneStatus, GoalStatus, TaskActionType, TaskStatus } from "../../domain/models";
 import { TodayStackParamList } from "../../navigation/types";
 import { useAppStore } from "../../state/useAppStore";
@@ -123,6 +124,51 @@ function TimelineGroup({
         ))}
       </View>
     </DetailSection>
+  );
+}
+
+function OpportunityOptionCard({
+  title,
+  detail,
+  fitLabel,
+  durationLabel,
+  actionLabel,
+  busy,
+  onPress,
+}: {
+  title: string;
+  detail: string;
+  fitLabel: string;
+  durationLabel: string;
+  actionLabel: string;
+  busy: boolean;
+  onPress: () => Promise<void>;
+}) {
+  const theme = useResolvedTheme();
+
+  return (
+    <Surface tone="sunken" className="gap-4 mb-0">
+      <View className="gap-2">
+        <View className="flex-row flex-wrap items-center gap-2">
+          <AppText variant="section">{title}</AppText>
+          <Pill label={durationLabel} tone="quiet" />
+          <Pill label={fitLabel} tone="accent" />
+        </View>
+        <AppText tone="secondary">{detail}</AppText>
+      </View>
+      <View
+        className="rounded-[18px] px-3 py-3"
+        style={{
+          backgroundColor: theme.colors.background.canvas,
+          borderWidth: 1,
+          borderColor: theme.colors.border.subtle,
+        }}
+      >
+        <Button busy={busy} onPress={() => void onPress()}>
+          {actionLabel}
+        </Button>
+      </View>
+    </Surface>
   );
 }
 
@@ -436,6 +482,167 @@ export function TodaySessionDetailScreen({
             <DrillInRow
               title="View in full timeline"
               subtitle="See how this session sits inside the rest of the day."
+              onPress={() => navigation.navigate("TodayTimeline")}
+            />
+          </View>
+        </DetailSection>
+
+        {runtimeMessage ? (
+          <AppText tone="tertiary" variant="caption">
+            {runtimeMessage}
+          </AppText>
+        ) : null}
+      </View>
+    </Screen>
+  );
+}
+
+export function TodayOpenTimeScreen({
+  navigation,
+}: NativeStackScreenProps<TodayStackParamList, "TodayOpenTime">) {
+  const today = useAppStore((state) => state.today);
+  const applyTaskAction = useAppStore((state) => state.applyTaskAction);
+  const [busyTaskId, setBusyTaskId] = useState<string | null>(null);
+  const [runtimeMessage, setRuntimeMessage] = useState<string | null>(null);
+
+  async function handleOptionAction(taskId: string, action: TaskActionType) {
+    setBusyTaskId(taskId);
+    setRuntimeMessage(null);
+
+    try {
+      await applyTaskAction(taskId, action);
+    } catch (error) {
+      setRuntimeMessage(
+        error instanceof Error
+          ? error.message
+          : "That task could not be updated right now.",
+      );
+    } finally {
+      setBusyTaskId(null);
+    }
+  }
+
+  if (!today || !today.openWindow) {
+    return (
+      <Screen>
+        <EmptyStateCard
+          title="No open window right now"
+          body="There is not a current free-time window to work from."
+        />
+      </Screen>
+    );
+  }
+
+  const primary = today.recommendation.options[0] ?? null;
+  const nextBlock = today.next;
+
+  return (
+    <Screen>
+      <View className="gap-6">
+        <DetailHero
+          eyebrow="Open time"
+          title={
+            today.openWindow.bucket === "tiny"
+              ? "A short opening is available."
+              : "Here are the best ways to use this time."
+          }
+          description={
+            today.openWindow.opensUntilLabel
+              ? `${today.openWindow.availableMinutes} minutes are open until ${today.openWindow.opensUntilLabel}.`
+              : `${today.openWindow.availableMinutes} minutes are still open today.`
+          }
+          badges={
+            <>
+              <Pill label={today.openWindow.label} tone="accent" />
+              <Pill label={`Pressure: ${today.capacity.planPressure}`} tone="quiet" />
+            </>
+          }
+          meta={
+            <DetailSummaryStrip
+              items={[
+                {
+                  label: "Window",
+                  value: today.openWindow.label,
+                  detail: today.openWindow.detail,
+                },
+                {
+                  label: "Next",
+                  value: nextBlock ? nextBlock.title : "No fixed next block",
+                  detail: nextBlock
+                    ? `${formatTimeLabel(nextBlock.startsAt)}`
+                    : "This part of the day is flexible.",
+                },
+              ]}
+            />
+          }
+        />
+
+        {primary ? (
+          <DetailSection
+            title="Recommended fit"
+            description="One sensible move to make this window count."
+          >
+            <OpportunityOptionCard
+              actionLabel={primary.actionLabel}
+              busy={busyTaskId === primary.taskId}
+              detail={primary.reason}
+              durationLabel={`${primary.estimatedMinutes} min`}
+              fitLabel={primary.fitLabel}
+              title={primary.title}
+              onPress={() => handleOptionAction(primary.taskId, primary.suggestedAction)}
+            />
+          </DetailSection>
+        ) : (
+          <Surface className="gap-3">
+            <AppText variant="section">No strong fit right now</AppText>
+            <AppText tone="secondary">
+              Nothing honest fits this opening cleanly. Protect the space, reset, or let the next block arrive without forcing filler.
+            </AppText>
+          </Surface>
+        )}
+
+        {today.recommendation.options.length > 1 ? (
+          <DetailSection
+            title="Alternate fits"
+            description="A few other realistic ways to use this window."
+          >
+            <View className="gap-3">
+              {today.recommendation.options.slice(1).map((option) => (
+                <OpportunityOptionCard
+                  key={option.taskId}
+                  actionLabel={option.actionLabel}
+                  busy={busyTaskId === option.taskId}
+                  detail={option.reason}
+                  durationLabel={`${option.estimatedMinutes} min`}
+                  fitLabel={option.fitLabel}
+                  title={option.title}
+                  onPress={() => handleOptionAction(option.taskId, option.suggestedAction)}
+                />
+              ))}
+            </View>
+          </DetailSection>
+        ) : null}
+
+        <DetailSection
+          title="More context"
+          description="If you need the broader shape before deciding."
+        >
+          <View className="gap-3">
+            {nextBlock ? (
+              <DrillInRow
+                title={nextBlock.title}
+                subtitle="Open the next scheduled session."
+                detail={formatTimeLabel(nextBlock.startsAt)}
+                onPress={() =>
+                  navigation.navigate("TodaySessionDetail", {
+                    blockId: nextBlock.id,
+                  })
+                }
+              />
+            ) : null}
+            <DrillInRow
+              title="View full timeline"
+              subtitle="See the whole day before you choose."
               onPress={() => navigation.navigate("TodayTimeline")}
             />
           </View>

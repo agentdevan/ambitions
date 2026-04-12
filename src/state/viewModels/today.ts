@@ -5,17 +5,20 @@ import {
   CalendarSyncState,
   CapacityLoad,
   DailyPlan,
+  Goal,
+  GoalStatus,
   ReplanSuggestionType,
   TaskActionType,
   ReplanSuggestion,
   ScheduleConstraint,
   Task,
+  TaskDifficulty,
   TaskStatus,
   TimeBlock,
   TimeBlockState,
 } from "../../domain/models";
 import { SchedulingOutput } from "../../engines";
-import { formatTimeLabel } from "../../utils/date";
+import { formatTimeLabel, getCurrentLocalDateString } from "../../utils/date";
 
 export interface TodayTaskBlock {
   id: string;
@@ -23,9 +26,13 @@ export interface TodayTaskBlock {
   title: string;
   startsAt: string;
   endsAt: string;
+  startsAtDateTime: string;
+  endsAtDateTime: string;
   state: TimeBlock["state"];
   note: string | null;
   taskStatus: TaskStatus | null;
+  type: TimeBlock["type"];
+  energyLabel: TimeBlock["energyLabel"];
   estimatedMinutes: number | null;
   actions: TaskActionType[];
 }
@@ -46,6 +53,66 @@ export interface TodaySuggestion {
   taskTitle: string | null;
 }
 
+export type TodayFreeWindowBucket = "tiny" | "short" | "meaningful" | "spacious";
+export type TodayStatusMode =
+  | "in_block"
+  | "short_window"
+  | "surplus_window"
+  | "light_day"
+  | "overloaded_day"
+  | "no_next";
+
+export interface TodayOpportunityOption {
+  taskId: string;
+  title: string;
+  goalId: string | null;
+  goalTitle: string | null;
+  status: TaskStatus;
+  difficulty: TaskDifficulty;
+  estimatedMinutes: number;
+  reason: string;
+  fitLabel: string;
+  suggestedAction: TaskActionType;
+  actionLabel: string;
+}
+
+export interface TodayOpenWindow {
+  availableMinutes: number;
+  bucket: TodayFreeWindowBucket;
+  label: string;
+  detail: string;
+  nextStartsAt: string | null;
+  nextStartsInMinutes: number | null;
+  opensUntilLabel: string | null;
+}
+
+export interface TodayRecommendation {
+  kind:
+    | "stay_on_current_block"
+    | "quick_win"
+    | "meaningful_session"
+    | "continue_in_progress"
+    | "protect_recovery"
+    | "no_fit";
+  title: string;
+  summary: string;
+  emphasis: string;
+  primaryLabel: string;
+  secondaryLabel: string | null;
+  taskId: string | null;
+  blockId: string | null;
+  suggestedAction: TaskActionType | null;
+  options: TodayOpportunityOption[];
+}
+
+export interface TodayStatusSnapshot {
+  mode: TodayStatusMode;
+  eyebrow: string;
+  title: string;
+  detail: string;
+  warmth: string;
+}
+
 export interface TodayViewModel {
   date: string;
   focus: string;
@@ -61,6 +128,12 @@ export interface TodayViewModel {
     overloadWarning: boolean;
   };
   blocks: TodayTaskBlock[];
+  now: TodayTaskBlock | null;
+  next: TodayTaskBlock | null;
+  status: TodayStatusSnapshot;
+  openWindow: TodayOpenWindow | null;
+  recommendation: TodayRecommendation;
+  timelinePreview: TodayTaskBlock[];
   unscheduled: TodayRecoveryTask[];
   replanSuggestions: TodaySuggestion[];
   scheduleContext: Array<{ label: string; value: string }>;
@@ -144,9 +217,466 @@ function actionsForTask(task: Task | undefined): TaskActionType[] {
   return [TaskActionType.Start, TaskActionType.Complete, TaskActionType.Miss, TaskActionType.Defer];
 }
 
+function minutesBetween(start: string, end: string) {
+  const startMs = Date.parse(start);
+  const endMs = Date.parse(end);
+
+  if (Number.isNaN(startMs) || Number.isNaN(endMs)) {
+    return 0;
+  }
+
+  return Math.max(0, Math.round((endMs - startMs) / 60000));
+}
+
+function formatMinutesLabel(minutes: number) {
+  if (minutes <= 0) {
+    return "No open time";
+  }
+
+  if (minutes < 60) {
+    return `${minutes} min`;
+  }
+
+  const hours = Math.floor(minutes / 60);
+  const remaining = minutes % 60;
+
+  if (remaining === 0) {
+    return `${hours} hr`;
+  }
+
+  return `${hours} hr ${remaining} min`;
+}
+
+function bucketOpenWindow(minutes: number): TodayFreeWindowBucket {
+  if (minutes < 10) {
+    return "tiny";
+  }
+
+  if (minutes < 25) {
+    return "short";
+  }
+
+  if (minutes < 50) {
+    return "meaningful";
+  }
+
+  return "spacious";
+}
+
+function buildOpenWindow(params: {
+  availableMinutes: number;
+  nextBlock: TimeBlock | null;
+}): TodayOpenWindow | null {
+  if (params.availableMinutes <= 0) {
+    return null;
+  }
+
+  const bucket = bucketOpenWindow(params.availableMinutes);
+  const detailByBucket: Record<TodayFreeWindowBucket, string> = {
+    tiny: "Tiny gap. Keep it light or reset.",
+    short: "Short, usable gap before the next block.",
+    meaningful: "Enough room for a real useful step.",
+    spacious: "A wide open stretch is available.",
+  };
+
+  return {
+    availableMinutes: params.availableMinutes,
+    bucket,
+    label:
+      bucket === "spacious"
+        ? `${formatMinutesLabel(params.availableMinutes)} open`
+        : `${params.availableMinutes} quiet min`,
+    detail: detailByBucket[bucket],
+    nextStartsAt: params.nextBlock?.startsAt ?? null,
+    nextStartsInMinutes: params.nextBlock
+      ? minutesBetween(new Date().toISOString(), params.nextBlock.startsAtDateTime)
+      : null,
+    opensUntilLabel: params.nextBlock ? formatTimeLabel(params.nextBlock.startsAt) : null,
+  };
+}
+
+function actionForOpportunity(task: Task): {
+  suggestedAction: TaskActionType;
+  actionLabel: string;
+} {
+  if (task.status === TaskStatus.InProgress) {
+    return {
+      suggestedAction: TaskActionType.Complete,
+      actionLabel: "Finish this step",
+    };
+  }
+
+  return {
+    suggestedAction: TaskActionType.Start,
+    actionLabel: "Start this task",
+  };
+}
+
+function rankOpportunity(params: {
+  task: Task;
+  goal: Goal | null;
+  nextBlock: TimeBlock | null;
+  availableMinutes: number;
+  overloaded: boolean;
+  bucket: TodayFreeWindowBucket | null;
+}) {
+  const { task, goal, nextBlock, availableMinutes, overloaded, bucket } = params;
+  const baseByStatus: Record<TaskStatus, number> = {
+    [TaskStatus.Inbox]: 15,
+    [TaskStatus.Ready]: 88,
+    [TaskStatus.Unscheduled]: 66,
+    [TaskStatus.Scheduled]: 82,
+    [TaskStatus.InProgress]: 112,
+    [TaskStatus.Completed]: -999,
+    [TaskStatus.Skipped]: 20,
+    [TaskStatus.Missed]: 42,
+    [TaskStatus.Deferred]: 54,
+    [TaskStatus.Split]: 58,
+    [TaskStatus.Substituted]: 56,
+    [TaskStatus.Cancelled]: -999,
+  };
+
+  let score = baseByStatus[task.status] ?? 0;
+
+  if (goal?.status === GoalStatus.Active) {
+    score += 12;
+    score += Math.max(0, 8 - goal.sortOrder);
+  }
+
+  if (nextBlock?.taskId === task.id) {
+    score += 20;
+  }
+
+  const closeness = Math.max(0, 26 - Math.abs(availableMinutes - task.estimatedMinutes));
+  score += closeness;
+
+  if (availableMinutes < task.estimatedMinutes) {
+    score -= 120;
+  }
+
+  if (bucket === "tiny" && task.estimatedMinutes > 8) {
+    score -= 80;
+  }
+
+  if (bucket === "short" && task.estimatedMinutes > 20) {
+    score -= 42;
+  }
+
+  if (bucket === "meaningful" && task.estimatedMinutes >= 25) {
+    score += 10;
+  }
+
+  if (bucket === "spacious" && task.estimatedMinutes >= 35) {
+    score += 16;
+  }
+
+  if (task.difficulty === TaskDifficulty.Deep) {
+    score += bucket === "spacious" ? 12 : bucket === "meaningful" ? 3 : -24;
+  } else if (task.difficulty === TaskDifficulty.Light) {
+    score += bucket === "tiny" || bucket === "short" ? 14 : 4;
+  }
+
+  if (overloaded) {
+    score += task.difficulty === TaskDifficulty.Light ? 12 : -18;
+  }
+
+  return score;
+}
+
+function buildOpportunityReason(params: {
+  task: Task;
+  nextBlock: TimeBlock | null;
+  availableMinutes: number;
+  bucket: TodayFreeWindowBucket;
+  overloaded: boolean;
+}) {
+  const { task, nextBlock, availableMinutes, bucket, overloaded } = params;
+
+  if (task.status === TaskStatus.InProgress) {
+    return {
+      summary: "Already moving. This is the cleanest thing to finish from here.",
+      fitLabel: "Already in motion",
+    };
+  }
+
+  if (nextBlock?.taskId === task.id) {
+    return {
+      summary: `It is already next in the plan and fits before ${formatTimeLabel(nextBlock.startsAt)}.`,
+      fitLabel: "Already next",
+    };
+  }
+
+  if (overloaded) {
+    return {
+      summary: "The day is tight, so this is the lightest useful move that still counts.",
+      fitLabel: "Keeps the day calm",
+    };
+  }
+
+  if (bucket === "tiny" || bucket === "short") {
+    return {
+      summary: `Short enough to finish inside this ${availableMinutes}-minute window.`,
+      fitLabel: "Fits cleanly",
+    };
+  }
+
+  return {
+    summary:
+      task.difficulty === TaskDifficulty.Deep
+        ? "There is enough room here to make real progress without rushing the start."
+        : "A strong fit for this opening without turning it into a scramble.",
+    fitLabel: task.difficulty === TaskDifficulty.Deep ? "Room for depth" : "Good fit",
+  };
+}
+
+function buildOpportunityOptions(params: {
+  tasks: Task[];
+  goals: Goal[];
+  blocks: TimeBlock[];
+  openWindow: TodayOpenWindow | null;
+  overloadWarning: boolean;
+}) {
+  const { tasks, goals, blocks, openWindow, overloadWarning } = params;
+  const nextBlock =
+    blocks.find((block) => block.state === TimeBlockState.Scheduled) ??
+    blocks.find((block) => block.state === TimeBlockState.Rolled) ??
+    null;
+
+  if (!openWindow) {
+    return [];
+  }
+
+  const goalsById = new Map(goals.map((goal) => [goal.id, goal]));
+
+  return tasks
+    .filter((task) =>
+      [
+        TaskStatus.Ready,
+        TaskStatus.Scheduled,
+        TaskStatus.InProgress,
+        TaskStatus.Unscheduled,
+        TaskStatus.Deferred,
+        TaskStatus.Split,
+        TaskStatus.Substituted,
+        TaskStatus.Missed,
+      ].includes(task.status),
+    )
+    .filter((task) => task.estimatedMinutes > 0)
+    .map((task) => {
+      const goal = task.goalId ? goalsById.get(task.goalId) ?? null : null;
+      const { summary, fitLabel } = buildOpportunityReason({
+        task,
+        nextBlock,
+        availableMinutes: openWindow.availableMinutes,
+        bucket: openWindow.bucket,
+        overloaded: overloadWarning,
+      });
+      const action = actionForOpportunity(task);
+
+      return {
+        taskId: task.id,
+        title: task.title,
+        goalId: task.goalId,
+        goalTitle: goal?.title ?? null,
+        status: task.status,
+        difficulty: task.difficulty,
+        estimatedMinutes: task.estimatedMinutes,
+        reason: summary,
+        fitLabel,
+        suggestedAction: action.suggestedAction,
+        actionLabel: action.actionLabel,
+        score: rankOpportunity({
+          task,
+          goal,
+          nextBlock,
+          availableMinutes: openWindow.availableMinutes,
+          overloaded: overloadWarning,
+          bucket: openWindow.bucket,
+        }),
+      };
+    })
+    .filter((option) => option.score > 0)
+    .sort((left, right) => right.score - left.score)
+    .slice(0, 3)
+    .map(({ score: _score, ...option }) => option);
+}
+
+function buildStatusSnapshot(params: {
+  activeBlock: TimeBlock | null;
+  nextBlock: TimeBlock | null;
+  openWindow: TodayOpenWindow | null;
+  unusedCapacityMinutes: number;
+  overloadWarning: boolean;
+  focus: string;
+}): TodayStatusSnapshot {
+  const { activeBlock, nextBlock, openWindow, unusedCapacityMinutes, overloadWarning } = params;
+  const lightDay = unusedCapacityMinutes >= 90;
+
+  if (activeBlock) {
+    return {
+      mode: "in_block",
+      eyebrow: "Now",
+      title: "You’re in the middle of the main block.",
+      detail: `This session runs until ${formatTimeLabel(activeBlock.endsAt)}.`,
+      warmth: nextBlock
+        ? `Next up at ${formatTimeLabel(nextBlock.startsAt)}.`
+        : "The rest of the day stays fairly open after this.",
+    };
+  }
+
+  if (overloadWarning && (!openWindow || openWindow.availableMinutes < 12)) {
+    return {
+      mode: "overloaded_day",
+      eyebrow: "Today",
+      title: "The day is already carrying enough.",
+      detail: "Keep the next move light and avoid forcing extra work in.",
+      warmth: nextBlock
+        ? `Next block begins at ${formatTimeLabel(nextBlock.startsAt)}.`
+        : "There is no strong next commitment yet.",
+    };
+  }
+
+  if (openWindow && openWindow.availableMinutes > 0) {
+    if (lightDay && !nextBlock && openWindow.availableMinutes >= 60) {
+      return {
+        mode: "light_day",
+        eyebrow: "Open day",
+        title: "There’s real room in today.",
+        detail: `${openWindow.availableMinutes} minutes are still available.`,
+        warmth: "Good time to choose one meaningful thing and let it breathe.",
+      };
+    }
+
+    if (openWindow.bucket === "tiny" || openWindow.bucket === "short") {
+      return {
+        mode: "short_window",
+        eyebrow: "Open time",
+        title: `You have ${openWindow.availableMinutes} quiet minutes before the next block.`,
+        detail: "Best used for a short useful step or a reset.",
+        warmth: nextBlock
+          ? `Next up at ${formatTimeLabel(nextBlock.startsAt)}.`
+          : "There is no locked next block yet.",
+      };
+    }
+
+    return {
+      mode: lightDay ? "light_day" : "surplus_window",
+      eyebrow: "Open time",
+      title: `There’s room to make real progress here.`,
+      detail: `${openWindow.availableMinutes} minutes are open right now.`,
+      warmth: nextBlock
+        ? `You still have time before ${formatTimeLabel(nextBlock.startsAt)}.`
+        : "No strong next scheduled action yet, so you can choose intentionally.",
+    };
+  }
+
+  return {
+    mode: "no_next",
+    eyebrow: "Today",
+    title: "No strong next scheduled action yet.",
+    detail: "The plan is steady, but this part of the day is still flexible.",
+    warmth: lightDay
+      ? "That space can stay open or become a meaningful work session."
+      : "If nothing sensible fits, protect the gap instead of filling it.",
+  };
+}
+
+function buildRecommendation(params: {
+  activeBlock: TodayTaskBlock | null;
+  nextBlock: TodayTaskBlock | null;
+  openWindow: TodayOpenWindow | null;
+  options: TodayOpportunityOption[];
+  overloadWarning: boolean;
+}): TodayRecommendation {
+  const { activeBlock, nextBlock, openWindow, options, overloadWarning } = params;
+
+  if (activeBlock) {
+    return {
+      kind: "stay_on_current_block",
+      title: "Stay with the block you’re already in.",
+      summary: activeBlock.note ?? "Momentum matters more than switching right now.",
+      emphasis: nextBlock
+        ? `Next up in ${Math.max(0, minutesBetween(new Date().toISOString(), nextBlock.startsAtDateTime))} min.`
+        : `This session runs until ${formatTimeLabel(activeBlock.endsAt)}.`,
+      primaryLabel: "Open current block",
+      secondaryLabel: nextBlock ? "See what’s next" : null,
+      taskId: activeBlock.taskId,
+      blockId: activeBlock.id,
+      suggestedAction: null,
+      options: [],
+    };
+  }
+
+  if (!openWindow) {
+    return {
+      kind: overloadWarning ? "protect_recovery" : "no_fit",
+      title: overloadWarning ? "Nothing urgent fits. Protect the space." : "No clear fit yet.",
+      summary: overloadWarning
+        ? "A reset is better than squeezing in one more thing."
+        : "Use the timeline when you need the next committed move.",
+      emphasis: nextBlock
+        ? `Next block at ${formatTimeLabel(nextBlock.startsAt)}.`
+        : "The next move is still flexible.",
+      primaryLabel: nextBlock ? "Open next block" : "View timeline",
+      secondaryLabel: null,
+      taskId: nextBlock?.taskId ?? null,
+      blockId: nextBlock?.id ?? null,
+      suggestedAction: null,
+      options: [],
+    };
+  }
+
+  const primary = options[0] ?? null;
+
+  if (!primary) {
+    return {
+      kind: openWindow.bucket === "tiny" || overloadWarning ? "protect_recovery" : "no_fit",
+      title:
+        openWindow.bucket === "tiny" || overloadWarning
+          ? "Nothing urgent fits. Protect the space and reset."
+          : "No sensible fit for this window yet.",
+      summary:
+        openWindow.bucket === "tiny"
+          ? "Keep this opening light instead of forcing a rushed start."
+          : "Better to hold the window than start something that will spill.",
+      emphasis: nextBlock
+        ? `Next block begins at ${formatTimeLabel(nextBlock.startsAt)}.`
+        : `${openWindow.availableMinutes} minutes are still open.`,
+      primaryLabel: "See options",
+      secondaryLabel: nextBlock ? "Open next block" : null,
+      taskId: null,
+      blockId: null,
+      suggestedAction: null,
+      options: [],
+    };
+  }
+
+  return {
+    kind:
+      primary.status === TaskStatus.InProgress
+        ? "continue_in_progress"
+        : openWindow.bucket === "meaningful" || openWindow.bucket === "spacious"
+          ? "meaningful_session"
+          : "quick_win",
+    title:
+      openWindow.bucket === "meaningful" || openWindow.bucket === "spacious"
+        ? "Best use of this window"
+        : "This window fits a quick win.",
+    summary: primary.title,
+    emphasis: primary.reason,
+    primaryLabel: primary.actionLabel,
+    secondaryLabel: options.length > 1 ? "See options" : nextBlock ? "Open timeline" : null,
+    taskId: primary.taskId,
+    blockId: null,
+    suggestedAction: primary.suggestedAction,
+    options,
+  };
+}
+
 export function buildTodayViewModel(params: {
   date: string;
   dailyPlan: DailyPlan | null;
+  goals: Goal[];
   blocks: TimeBlock[];
   schedule: SchedulingOutput | null;
   profile: AdaptationProfile | null;
@@ -155,7 +685,36 @@ export function buildTodayViewModel(params: {
   tasks: Task[];
   calendarConnectionState: CalendarConnectionState | null;
 }): TodayViewModel {
+  const nowIso = new Date().toISOString();
+  const isCurrentDate = params.date === getCurrentLocalDateString();
+  const orderedBlocks = [...params.blocks].sort((left, right) =>
+    left.startsAtDateTime.localeCompare(right.startsAtDateTime),
+  );
   const tasksById = new Map(params.tasks.map((task) => [task.id, task]));
+  const rawActiveBlock =
+    orderedBlocks.find((block) => block.state === TimeBlockState.Active) ??
+    (isCurrentDate
+      ? orderedBlocks.find((block) => {
+          const startsAt = Date.parse(block.startsAtDateTime);
+          const endsAt = Date.parse(block.endsAtDateTime);
+          const now = Date.parse(nowIso);
+          return !Number.isNaN(startsAt) && !Number.isNaN(endsAt) && now >= startsAt && now < endsAt;
+        }) ?? null
+      : null);
+  const futureBlocks = orderedBlocks.filter(
+    (block) =>
+      [TimeBlockState.Scheduled, TimeBlockState.Rolled, TimeBlockState.Deferred].includes(block.state) &&
+      (!isCurrentDate || Date.parse(block.startsAtDateTime) > Date.parse(nowIso)),
+  );
+  const rawNextBlock = futureBlocks[0] ?? null;
+  const openWindowMinutes =
+    !rawActiveBlock && isCurrentDate && rawNextBlock
+      ? Math.max(0, minutesBetween(nowIso, rawNextBlock.startsAtDateTime))
+      : !rawActiveBlock && isCurrentDate
+        ? Math.max(0, params.schedule?.signals.unusedCapacityMinutes ?? params.schedule?.capacitySummary.unusedCapacityMinutes ?? 0)
+        : !rawActiveBlock && !isCurrentDate
+          ? Math.max(0, params.schedule?.capacitySummary.unusedCapacityMinutes ?? 0)
+          : 0;
   const completed = params.blocks.filter((block) => block.state === TimeBlockState.Complete).length;
   const scheduled = params.blocks.filter((block) =>
     [TimeBlockState.Scheduled, TimeBlockState.Active].includes(block.state),
@@ -216,6 +775,70 @@ export function buildTodayViewModel(params: {
     params.calendarConnectionState,
     params.constraints.filter((constraint) => constraint.source === "calendar").length,
   );
+  const openWindow = buildOpenWindow({
+    availableMinutes: openWindowMinutes,
+    nextBlock: rawNextBlock,
+  });
+  const opportunityOptions = buildOpportunityOptions({
+    tasks: params.tasks,
+    goals: params.goals,
+    blocks: orderedBlocks,
+    openWindow,
+    overloadWarning: params.schedule?.signals.overloadWarning ?? false,
+  });
+
+  const mappedBlocks = orderedBlocks.map((block) => {
+    const linkedTask = block.taskId ? tasksById.get(block.taskId) : undefined;
+
+    return {
+      id: block.id,
+      taskId: block.taskId,
+      title: block.title,
+      startsAt: block.startsAt,
+      endsAt: block.endsAt,
+      startsAtDateTime: block.startsAtDateTime,
+      endsAtDateTime: block.endsAtDateTime,
+      state: block.state,
+      note: linkedTask?.summary ?? block.note,
+      taskStatus: linkedTask?.status ?? null,
+      type: block.type,
+      energyLabel: block.energyLabel,
+      estimatedMinutes: linkedTask?.estimatedMinutes ?? null,
+      actions: actionsForTask(linkedTask),
+    };
+  });
+  const activeBlock = mappedBlocks.find((block) => block.id === rawActiveBlock?.id) ?? null;
+  const nextBlock = mappedBlocks.find((block) => block.id === rawNextBlock?.id) ?? null;
+  const timelinePreview = (() => {
+    if (activeBlock) {
+      const activeIndex = mappedBlocks.findIndex((block) => block.id === activeBlock.id);
+      return mappedBlocks.slice(activeIndex, activeIndex + 4);
+    }
+
+    if (nextBlock) {
+      const nextIndex = mappedBlocks.findIndex((block) => block.id === nextBlock.id);
+      return mappedBlocks.slice(Math.max(0, nextIndex - 1), nextIndex + 3);
+    }
+
+    return mappedBlocks.slice(0, 4);
+  })();
+  const status = buildStatusSnapshot({
+    activeBlock: rawActiveBlock,
+    nextBlock: rawNextBlock,
+    openWindow,
+    unusedCapacityMinutes: params.schedule?.capacitySummary.unusedCapacityMinutes ?? 0,
+    overloadWarning: params.schedule?.signals.overloadWarning ?? false,
+    focus:
+      params.dailyPlan?.focus ??
+      "Hold the shape of the day steady instead of trying to optimize every minute.",
+  });
+  const recommendation = buildRecommendation({
+    activeBlock,
+    nextBlock,
+    openWindow,
+    options: opportunityOptions,
+    overloadWarning: params.schedule?.signals.overloadWarning ?? false,
+  });
 
   return {
     date: params.date,
@@ -247,22 +870,13 @@ export function buildTodayViewModel(params: {
       planPressure: params.schedule?.signals.planPressure ?? "low",
       overloadWarning: params.schedule?.signals.overloadWarning ?? false,
     },
-    blocks: params.blocks.map((block) => {
-      const linkedTask = block.taskId ? tasksById.get(block.taskId) : undefined;
-
-      return {
-        id: block.id,
-        taskId: block.taskId,
-        title: block.title,
-        startsAt: block.startsAt,
-        endsAt: block.endsAt,
-        state: block.state,
-        note: linkedTask?.summary ?? block.note,
-        taskStatus: linkedTask?.status ?? null,
-        estimatedMinutes: linkedTask?.estimatedMinutes ?? null,
-        actions: actionsForTask(linkedTask),
-      };
-    }),
+    blocks: mappedBlocks,
+    now: activeBlock,
+    next: nextBlock,
+    status,
+    openWindow,
+    recommendation,
+    timelinePreview,
     unscheduled: recoveryTasks,
     replanSuggestions,
     scheduleContext: [
