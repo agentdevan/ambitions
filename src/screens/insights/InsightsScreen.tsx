@@ -1,4 +1,5 @@
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
+import { Ionicons } from "@expo/vector-icons";
 import { View } from "react-native";
 
 import { MomentumBars } from "../../components/history/ActivityTimeline";
@@ -60,19 +61,19 @@ export function InsightsScreen({ navigation }: Props) {
       <View className="gap-6">
         <PageHeader
           eyebrow="Insights"
-          title="Recent movement, without the noise."
-          description="Reflection lives here once the app has enough real history to support it."
+          title="Insights"
+          description="Recent movement."
         />
 
         <Surface tone="accent" className="gap-5">
-          <View className="gap-2">
+          <View className="gap-1.5">
             <View className="flex-row flex-wrap items-center gap-2">
               <Pill label={`${summary.movingGoalCount} goals moving`} tone="quiet" />
               {pendingReviews > 0 ? (
                 <Pill label={`${pendingReviews} review waiting`} tone="accent" />
               ) : null}
             </View>
-            <AppText variant="title">The recent picture feels earned now.</AppText>
+            <AppText variant="title">Recent momentum</AppText>
             <AppText tone="secondary">{summary.momentumCopy}</AppText>
           </View>
 
@@ -100,25 +101,29 @@ export function InsightsScreen({ navigation }: Props) {
         <View className="gap-3">
           <DrillInRow
             title="Continuity"
-            subtitle={summary.momentumCopy}
+            subtitle="Momentum and consistency"
             detail={`${summary.movingGoalCount} moving`}
+            leading={<Ionicons color="#6F6558" name="pulse-outline" size={18} />}
             onPress={() => navigation.navigate("InsightContinuity")}
           />
           <DrillInRow
-            title="Activity timeline"
-            subtitle="Review what was completed, moved, deferred, or accepted over time."
+            title="Activity"
+            subtitle="Completed, moved, reviewed"
             detail={`${feed.length} events`}
+            leading={<Ionicons color="#6F6558" name="time-outline" size={18} />}
             onPress={() => navigation.navigate("InsightActivity")}
           />
           <DrillInRow
             title="Plan changes"
-            subtitle={summary.planCopy}
+            subtitle="What shifted"
             detail={`${planChangeEvents.length} changes`}
+            leading={<Ionicons color="#6F6558" name="swap-horizontal-outline" size={18} />}
             onPress={() => navigation.navigate("InsightPlanChanges")}
           />
           <DrillInRow
-            title="Capacity and balance"
-            subtitle={`Pressure is ${today?.capacity.planPressure ?? "low"} with ${today?.capacity.unusedCapacityMinutes ?? 0} minutes still open today.`}
+            title="Capacity"
+            subtitle={`${today?.capacity.unusedCapacityMinutes ?? 0} min open`}
+            leading={<Ionicons color="#6F6558" name="speedometer-outline" size={18} />}
             onPress={() => navigation.navigate("InsightCapacity")}
           />
         </View>

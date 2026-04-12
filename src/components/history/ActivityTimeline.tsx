@@ -90,7 +90,9 @@ export function GroupedActivityTimeline({
     return (
       <Surface className="gap-2 mb-0">
         <AppText variant="section">{emptyTitle}</AppText>
-        <AppText tone="secondary">{emptyBody}</AppText>
+        <AppText tone="secondary" variant="caption">
+          {emptyBody}
+        </AppText>
       </Surface>
     );
   }

@@ -1,4 +1,5 @@
 import { Pressable, View } from "react-native";
+import { Ionicons } from "@expo/vector-icons";
 
 import { useResolvedTheme } from "../../design/theme/useResolvedTheme";
 import { TodayTaskBlock } from "../../state/viewModels/today";
@@ -51,7 +52,7 @@ export function CompactTimelineRow({ block, onPress }: CompactTimelineRowProps) 
     >
       {({ pressed }) => (
         <View
-          className="flex-row items-center gap-4 rounded-[22px] px-4 py-4"
+          className="flex-row items-center gap-3 rounded-[22px] px-4 py-4"
           style={{
             backgroundColor:
               block.state === "active"
@@ -76,7 +77,7 @@ export function CompactTimelineRow({ block, onPress }: CompactTimelineRowProps) 
               opacity: block.state === "active" ? 1 : 0.7,
             }}
           />
-          <View className="w-[82px] gap-1">
+          <View className="w-[76px] gap-1">
             <AppText variant="caption">
               {formatTimeRangeLabel(block.startsAt, block.endsAt, { compact: true })}
             </AppText>
@@ -84,7 +85,7 @@ export function CompactTimelineRow({ block, onPress }: CompactTimelineRowProps) 
               {block.estimatedMinutes ? `${block.estimatedMinutes} min` : "Session"}
             </AppText>
           </View>
-          <View className="flex-1 gap-1.5">
+          <View className="flex-1 gap-1">
             <View className="flex-row flex-wrap items-center gap-2">
               <AppText variant="section" numberOfLines={1}>
                 {block.title}
@@ -92,12 +93,14 @@ export function CompactTimelineRow({ block, onPress }: CompactTimelineRowProps) 
               <Pill label={stateLabelMap[block.state]} tone={stateToneMap[block.state]} />
             </View>
             <AppText tone="secondary" numberOfLines={2}>
-              {block.note ?? "Open the session to see the next useful move."}
+              {block.note ?? "Open for details."}
             </AppText>
           </View>
-          <AppText tone={pressed ? "accent" : "tertiary"} variant="caption">
-            Open
-          </AppText>
+          <Ionicons
+            color={pressed ? theme.colors.accent.primary : theme.colors.text.tertiary}
+            name="chevron-forward"
+            size={16}
+          />
         </View>
       )}
     </Pressable>

@@ -21,7 +21,7 @@ export function EmptyStateCard({
 }: EmptyStateCardProps) {
   return (
     <Surface tone={tone}>
-      <View className="gap-3">
+      <View className="gap-2.5">
         {eyebrow ? (
           <AppText variant="micro" tone="tertiary" style={{ textTransform: "uppercase" }}>
             {eyebrow}

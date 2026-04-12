@@ -21,11 +21,11 @@ interface CapacityInsightProps {
 export function CapacityInsight({ capacity, focus }: CapacityInsightProps) {
   return (
     <Surface tone="sunken" className="gap-4">
-      <View className="gap-3">
+      <View className="gap-2">
         <AppText tone="tertiary" variant="micro" style={{ textTransform: "uppercase" }}>
           Capacity
         </AppText>
-        <AppText variant="section">Capacity guardrails</AppText>
+        <AppText variant="section">Day limits</AppText>
         <AppText tone="secondary">{focus}</AppText>
       </View>
 
@@ -54,9 +54,9 @@ export function CapacityInsight({ capacity, focus }: CapacityInsightProps) {
           </View>
         </View>
         <AppText tone="secondary" variant="caption">
-          Load is {capacity.mentalLoad}. Pressure is {capacity.planPressure}. Confidence is{" "}
-          {Math.round(capacity.confidence * 100)}%
-          {capacity.overloadWarning ? ", with some work left out on purpose." : "."}
+          {capacity.mentalLoad} load. {capacity.planPressure} pressure.{" "}
+          {Math.round(capacity.confidence * 100)}% confidence
+          {capacity.overloadWarning ? ". Some work stayed out." : "."}
         </AppText>
       </View>
     </Surface>

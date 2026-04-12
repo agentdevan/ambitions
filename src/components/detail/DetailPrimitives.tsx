@@ -24,15 +24,15 @@ export function DetailHero({
   tone = "accent",
 }: DetailHeroProps) {
   return (
-    <Surface tone={tone} className="gap-4">
-      <View className="gap-3">
+    <Surface tone={tone} className="gap-3">
+      <View className="gap-2">
         {eyebrow ? (
           <AppText tone="tertiary" variant="micro" style={{ textTransform: "uppercase" }}>
             {eyebrow}
           </AppText>
         ) : null}
         {badges ? <View className="flex-row flex-wrap items-center gap-2">{badges}</View> : null}
-        <View className="gap-2">
+        <View className="gap-1.5">
           <AppText variant="title">{title}</AppText>
           {description ? <AppText tone="secondary">{description}</AppText> : null}
         </View>
@@ -59,7 +59,7 @@ export function DetailSection({
   return (
     <View className="gap-3">
       <View className="flex-row items-end justify-between gap-3">
-        <View className="flex-1 gap-1">
+        <View className="flex-1 gap-0.5">
           <AppText variant="section">{title}</AppText>
           {description ? (
             <AppText tone="secondary" variant="caption">
@@ -101,7 +101,11 @@ export function DetailSummaryStrip({
   return (
     <View className="flex-row flex-wrap gap-3">
       {items.map((item) => (
-        <Surface key={`${item.label}:${item.value}`} tone="sunken" className="min-w-[46%] flex-1 gap-1.5 px-4 py-4 mb-0">
+        <Surface
+          key={`${item.label}:${item.value}`}
+          tone="sunken"
+          className="min-w-[46%] flex-1 gap-1 px-4 py-4 mb-0"
+        >
           <AppText tone="tertiary" variant="micro" style={{ textTransform: "uppercase" }}>
             {item.label}
           </AppText>

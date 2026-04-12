@@ -47,15 +47,13 @@ export function IntegrationStatusCard({
 
   return (
     <Surface tone="sunken" className="gap-4">
-      <View className="gap-3">
+      <View className="gap-2">
         <AppText tone="tertiary" variant="micro" style={{ textTransform: "uppercase" }}>
           Integrations
         </AppText>
-        <AppText variant="section">Context and reminders</AppText>
+        <AppText variant="section">Context</AppText>
         <AppText tone="secondary" variant="caption">
-          {usingLiveCalendar
-            ? "Today is grounded in live calendar context."
-            : "Today is running from your saved schedule."}
+          {usingLiveCalendar ? "Live calendar" : "Saved schedule"}
         </AppText>
         <View
           className="rounded-[18px] px-4 py-4"
@@ -68,7 +66,7 @@ export function IntegrationStatusCard({
           <AppText tone="secondary">{calendarDetail}</AppText>
           {syncFailure && calendarConnectionState?.metadata.lastError ? (
             <AppText tone="tertiary" variant="caption" style={{ marginTop: 8 }}>
-              Last read issue: {String(calendarConnectionState.metadata.lastError)}
+              Last issue: {String(calendarConnectionState.metadata.lastError)}
             </AppText>
           ) : null}
         </View>

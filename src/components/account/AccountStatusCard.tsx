@@ -47,15 +47,15 @@ export function AccountStatusCard({
   return (
     <Surface tone="sunken">
       <View className="gap-5">
-        <View className="gap-3">
+        <View className="gap-2">
           <AppText tone="tertiary" variant="micro" style={{ textTransform: "uppercase" }}>
             Account
           </AppText>
-          <AppText variant="section">Account and sync</AppText>
+          <AppText variant="section">Sync</AppText>
           <AppText tone="secondary">
             {hasAccount
-              ? "Keep the planning foundation available across devices."
-              : "Stay local, or add an account when backup becomes useful."}
+              ? "Available across devices."
+              : "Local for now."}
           </AppText>
           <View className="flex-row flex-wrap gap-x-5 gap-y-2">
             <AppText tone="secondary" variant="caption">
@@ -103,7 +103,7 @@ export function AccountStatusCard({
             <View className="gap-2">
               <AppText>Attach this device's data to the signed-in account?</AppText>
               <AppText tone="secondary" variant="caption">
-                Existing goals, plans, and preferences become the sync baseline. Nothing is overwritten silently.
+                This device becomes the sync baseline.
               </AppText>
             </View>
             <View className="flex-row gap-3">

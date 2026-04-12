@@ -76,7 +76,7 @@ export function PlanDetailScreen({
 
         <DetailSection
           title="Today’s shape"
-          description="The sessions carrying the current plan."
+          description="Today's sessions."
         >
           <View className="gap-3">
             {(today?.blocks ?? []).map((block) => (
@@ -126,13 +126,13 @@ export function PlanStructureScreen({
         <DetailHero
           eyebrow="Plan"
           title="Generated structure"
-          description="See the goal and milestone structure feeding the current plan."
+          description="Goals, milestones, tasks."
         />
 
         {filteredGoals.length === 0 ? (
           <EmptyStateCard
             title="No active structure"
-            body="There is no active goal structure to inspect right now."
+            body="No active structure."
           />
         ) : (
           <View className="gap-4">
@@ -252,7 +252,7 @@ export function PlanReviewScreen({
       <Screen>
         <EmptyStateCard
           title="Nothing to review"
-          body={dailyPlan ? "The active plan is current right now." : "No review queue is available."}
+          body={dailyPlan ? "The plan is current." : "No review queue."}
         />
       </Screen>
     );
@@ -266,7 +266,7 @@ export function PlanReviewScreen({
         <DetailHero
           eyebrow="Plan"
           title="Review changes"
-          description="See what changed, why it changed, then decide what happens next."
+          description="What changed and why."
           badges={
             selectedReviewDraft ? (
               <>
@@ -298,7 +298,7 @@ export function PlanReviewScreen({
           <>
             <DetailSection
               title="Summary"
-              description="The short version before you inspect details."
+              description="Short version."
             >
               <Surface className="gap-4 mb-0">
                 <View className="gap-2">
@@ -329,7 +329,7 @@ export function PlanReviewScreen({
 
             <DetailSection
               title="Why this changed"
-              description="Reasoning first, before you act."
+              description="Why it shifted."
             >
               <View className="gap-3">
                 {selectedReviewDraft.rationale.map((item) => (
@@ -342,7 +342,7 @@ export function PlanReviewScreen({
 
             <DetailSection
               title="Inspect proposed work"
-              description="Refine the draft without dumping the whole system onto one page."
+              description="Adjust the draft."
               action={
                 <Button
                   tone="inline"

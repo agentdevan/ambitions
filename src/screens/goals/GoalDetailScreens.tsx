@@ -128,7 +128,7 @@ export function GoalDetailScreen({
   if (!resolvedGoal) {
     return (
       <Screen>
-        <EmptyStateCard title="Goal not found" body="That goal is no longer available." />
+        <EmptyStateCard title="Goal not found" body="That goal isn't available." />
       </Screen>
     );
   }
@@ -199,7 +199,7 @@ export function GoalDetailScreen({
           <DetailHero
             eyebrow="Goal"
             title={resolvedGoal.title}
-            description={resolvedGoal.summary ?? "This goal is active and ready for deeper inspection."}
+            description={resolvedGoal.summary ?? "Open the current structure."}
             badges={
               <>
                 <Pill label={statusLabel(resolvedGoal.status)} tone="quiet" />
@@ -270,7 +270,7 @@ export function GoalDetailScreen({
 
           <DetailSection
             title="Recent movement"
-            description="The latest shifts attached to this goal."
+            description="Latest shifts."
             action={
               <Button
                 tone="inline"
@@ -301,7 +301,7 @@ export function GoalDetailScreen({
 
           <DetailSection
             title="Open this goal"
-            description="Go deeper where it matters."
+            description="Go deeper."
           >
             <View className="gap-3">
               <DrillInRow
@@ -316,19 +316,19 @@ export function GoalDetailScreen({
               />
               <DrillInRow
                 title="Progress"
-                subtitle="See current work, milestone progress, and recent movement together."
+                subtitle="Work, milestones, movement"
                 detail={`${visibleTasks.length} tasks`}
                 onPress={() => navigation.navigate("GoalProgress", { goalId: resolvedGoal.id })}
               />
               <DrillInRow
                 title="History"
-                subtitle="Review completed work, moved tasks, and accepted plan changes."
+                subtitle="Completed, moved, reviewed"
                 detail={`${activityFeed.length} events`}
                 onPress={() => navigation.navigate("GoalHistory", { goalId: resolvedGoal.id })}
               />
               <DrillInRow
                 title="Edit goal"
-                subtitle="Refine the goal definition, then decide how downstream work should respond."
+                subtitle="Update the goal definition"
                 onPress={() => navigation.navigate("GoalEdit", { goalId: resolvedGoal.id })}
               />
               {reviewDraft ? (
@@ -500,7 +500,7 @@ export function GoalMilestonesScreen({
   if (!goal) {
     return (
       <Screen>
-        <EmptyStateCard title="Goal not found" body="That goal is no longer available." />
+        <EmptyStateCard title="Goal not found" body="That goal isn't available." />
       </Screen>
     );
   }
@@ -515,7 +515,7 @@ export function GoalMilestonesScreen({
         <DetailHero
           eyebrow="Goal"
           title="Milestones"
-          description="See the checkpoints shaping this goal."
+          description="Checkpoints shaping the goal."
           meta={
             <DetailSummaryStrip
               items={[
@@ -536,7 +536,7 @@ export function GoalMilestonesScreen({
         {goalMilestones.length === 0 ? (
           <EmptyStateCard
             title="No milestones yet"
-            body="This goal is waiting on review before milestones become active."
+            body="Milestones aren't active yet."
           />
         ) : (
           <View className="gap-3">
@@ -596,7 +596,7 @@ export function GoalProgressScreen({
   if (!goal) {
     return (
       <Screen>
-        <EmptyStateCard title="Goal not found" body="That goal is no longer available." />
+        <EmptyStateCard title="Goal not found" body="That goal isn't available." />
       </Screen>
     );
   }
@@ -649,7 +649,7 @@ export function GoalProgressScreen({
 
         <DetailSection
           title="Momentum"
-          description="A restrained read on how this goal has moved over the last week."
+          description="Last 7 days."
           action={
             <Button tone="inline" onPress={() => navigation.navigate("GoalHistory", { goalId: goal.id })}>
               View history
@@ -671,13 +671,13 @@ export function GoalProgressScreen({
         {visibleTasks.length === 0 ? (
           <EmptyStateCard
             title="No active tasks"
-            body="This goal does not have task detail yet."
+            body="No task detail yet."
           />
         ) : (
           <>
             <DetailSection
               title="Current work"
-              description="The task load that still matters right now."
+              description="What matters now."
             >
               <View className="gap-3">
                 {activeTasks.length === 0 ? (
@@ -709,7 +709,7 @@ export function GoalProgressScreen({
             {protectedTasks.length > 0 ? (
               <DetailSection
                 title="Protected work"
-                description="Items preserved because you already shaped them."
+                description="Items you already shaped."
               >
                 <View className="gap-3">
                   {protectedTasks.map((task) => (
@@ -732,12 +732,12 @@ export function GoalProgressScreen({
 
             <DetailSection
               title="Recent movement"
-              description="The latest execution and plan changes attached to this goal."
+              description="Latest execution and plan changes."
             >
               <GroupedActivityTimeline
                 groups={groupedActivity}
                 emptyTitle="No recent movement"
-                emptyBody="This goal has not logged recent movement yet."
+                emptyBody="No recent movement yet."
               />
             </DetailSection>
           </>
@@ -756,7 +756,7 @@ export function GoalHistoryScreen({
   if (!goal) {
     return (
       <Screen>
-        <EmptyStateCard title="Goal not found" body="That goal is no longer available." />
+        <EmptyStateCard title="Goal not found" body="That goal isn't available." />
       </Screen>
     );
   }
@@ -797,7 +797,7 @@ export function GoalHistoryScreen({
         <GroupedActivityTimeline
           groups={groupedActivity}
           emptyTitle="No goal history yet"
-          emptyBody="History becomes richer as work gets completed, moved, or reviewed."
+          emptyBody="History will appear here."
         />
       </View>
     </Screen>
@@ -973,8 +973,8 @@ export function GoalEditScreen({
             title={goal ? "Refine the goal" : "Add a goal"}
             description={
               goal
-                ? "Tighten the definition here. If the change affects downstream work, review the impact before it lands."
-                : "Describe the outcome in plain language. Ambitions will shape the first structure from it."
+                ? "Update the definition before it lands."
+                : "Describe the outcome. Ambitions builds the first draft."
             }
           />
 
@@ -1001,7 +1001,7 @@ export function GoalEditScreen({
 
           <DetailSection
             title="Core definition"
-            description="Set what this goal is trying to do."
+            description="What this goal is."
           >
             <Surface className="gap-4 mb-0">
               <TextField
@@ -1035,7 +1035,7 @@ export function GoalEditScreen({
 
           <DetailSection
             title="Timing and pacing"
-            description="Keep the plan grounded in time."
+            description="Timing and pace."
           >
             <Surface className="gap-4 mb-0">
               <TextField
@@ -1056,7 +1056,7 @@ export function GoalEditScreen({
 
           <DetailSection
             title="Domain"
-            description="Choose the area this goal belongs to."
+            description="Choose the area."
           >
             <Surface className="gap-3 mb-0">
               <View className="flex-row flex-wrap gap-2">

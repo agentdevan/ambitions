@@ -1,5 +1,6 @@
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
 import { LinearGradient } from "expo-linear-gradient";
+import { Ionicons } from "@expo/vector-icons";
 import { useEffect, useMemo, useRef, useState } from "react";
 import { Animated, View } from "react-native";
 
@@ -90,7 +91,7 @@ function OpportunityCard({
       <Surface className="gap-4">
         <View className="gap-2">
           <AppText tone="tertiary" variant="micro" style={{ textTransform: "uppercase" }}>
-            Use this time
+            Next move
           </AppText>
           <AppText variant="title">{recommendation.title}</AppText>
           <AppText variant="section">{recommendation.summary}</AppText>
@@ -158,7 +159,7 @@ export function TodayScreen({ navigation }: Props) {
         <View className="gap-5">
           <PageHeader
             eyebrow="Today"
-            title="Execution starts here."
+            title="Today"
             description={formatLongDate(planDate)}
           />
           <EmptyStateCard
@@ -250,7 +251,7 @@ export function TodayScreen({ navigation }: Props) {
       <View className="gap-6">
         <PageHeader
           eyebrow="Today"
-          title="Know where the day stands."
+          title="See the day fast."
           description={formatLongDate(todayVm.date)}
         />
 
@@ -290,9 +291,6 @@ export function TodayScreen({ navigation }: Props) {
               </AppText>
               <AppText variant="title">{todayVm.status.title}</AppText>
               <AppText tone="secondary">{todayVm.status.detail}</AppText>
-              <AppText tone="secondary" variant="caption">
-                {todayVm.status.warmth}
-              </AppText>
             </View>
           </View>
 
@@ -336,18 +334,15 @@ export function TodayScreen({ navigation }: Props) {
         />
 
         <Surface className="gap-4">
-          <View className="flex-row items-end justify-between gap-3">
-            <View className="gap-2">
+            <View className="flex-row items-end justify-between gap-3">
+            <View className="gap-1">
               <AppText tone="tertiary" variant="micro" style={{ textTransform: "uppercase" }}>
                 Timeline
               </AppText>
-              <AppText variant="title">A calm read on the rest of today</AppText>
-              <AppText tone="secondary">
-                The current block and the next useful turns, without the whole day taking over.
-              </AppText>
+              <AppText variant="title">What’s next</AppText>
             </View>
             <Button tone="secondary" onPress={() => navigation.navigate("TodayTimeline")}>
-              Full timeline
+              Full day
             </Button>
           </View>
 
@@ -369,33 +364,37 @@ export function TodayScreen({ navigation }: Props) {
         <View className="gap-3">
           {todayVm.openWindow ? (
             <DrillInRow
-              title="Use this window"
+              title="Open time"
               subtitle={
                 todayVm.recommendation.options.length > 0
-                  ? `${todayVm.openWindow.availableMinutes} minutes open. See the best fits and alternate options.`
-                  : `${todayVm.openWindow.availableMinutes} minutes open. Keep it protected if nothing sensible fits.`
+                  ? `${todayVm.openWindow.availableMinutes} min free`
+                  : `${todayVm.openWindow.availableMinutes} min protected`
               }
               detail={todayVm.openWindow.label}
+              leading={<Ionicons color={theme.colors.accent.primary} name="sparkles-outline" size={18} />}
               onPress={() => navigation.navigate("TodayOpenTime")}
             />
           ) : null}
           <DrillInRow
             title="Capacity"
-            subtitle={`Pressure is ${todayVm.capacity.planPressure}. ${todayVm.capacity.unusedCapacityMinutes} minutes are still free across the day.`}
+            subtitle={`${todayVm.capacity.unusedCapacityMinutes} min open`}
             detail={`${Math.round(todayVm.capacity.confidence * 100)}% confidence`}
+            leading={<Ionicons color={theme.colors.text.secondary} name="speedometer-outline" size={18} />}
             onPress={() => navigation.navigate("TodayCapacity")}
           />
           <DrillInRow
             title="Context"
-            subtitle={todayVm.integration.calendarDetail}
+            subtitle={todayVm.integration.usingLiveCalendar ? "Live calendar" : "Saved schedule"}
             detail={todayVm.integration.calendarStatusLabel}
+            leading={<Ionicons color={theme.colors.text.secondary} name="calendar-clear-outline" size={18} />}
             onPress={() => navigation.navigate("TodayContext")}
           />
           {pendingReviewCount > 0 ? (
             <DrillInRow
-              title="Plan review"
-              subtitle="Changes are waiting before they replace the current structure."
+              title="Review"
+              subtitle="Changes waiting"
               detail={`${pendingReviewCount} pending`}
+              leading={<Ionicons color={theme.colors.accent.primary} name="git-compare-outline" size={18} />}
               onPress={() => navigation.getParent()?.navigate("Plan")}
             />
           ) : null}

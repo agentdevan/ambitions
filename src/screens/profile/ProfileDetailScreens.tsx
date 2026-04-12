@@ -62,7 +62,7 @@ export function ProfileHistoryScreen() {
         <GroupedActivityTimeline
           groups={groups}
           emptyTitle="No history yet"
-          emptyBody="Recent movement will appear here as the app captures more execution."
+          emptyBody="Recent movement will appear here."
         />
       </View>
     </Screen>
@@ -78,7 +78,7 @@ export function ProfileAppearanceScreen() {
   if (!productPreferences) {
     return (
       <Screen>
-        <EmptyStateCard title="Preferences unavailable" body="Appearance settings are still loading." />
+        <EmptyStateCard title="Preferences unavailable" body="Appearance is still loading." />
       </Screen>
     );
   }
@@ -397,7 +397,7 @@ export function ProfilePlanningPreferencesScreen() {
   if (!productPreferences) {
     return (
       <Screen>
-        <EmptyStateCard title="Preferences unavailable" body="Planning preferences are still loading." />
+        <EmptyStateCard title="Preferences unavailable" body="Planning is still loading." />
       </Screen>
     );
   }

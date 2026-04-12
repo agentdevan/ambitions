@@ -1,4 +1,5 @@
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
+import { Ionicons } from "@expo/vector-icons";
 import { View } from "react-native";
 
 import { DrillInRow } from "../../components/navigation/DrillInRow";
@@ -43,8 +44,8 @@ export function GoalsScreen({ navigation }: Props) {
       <View className="gap-6">
         <PageHeader
           eyebrow="Goals"
-          title="Keep goals clear and in motion."
-          description="This is the active goals index. Open a goal to review structure, progress, or edits without crowding the page."
+          title="Goals"
+          description="Active work first."
           action={<Button onPress={() => navigation.navigate("GoalEdit", {})}>New goal</Button>}
         />
 
@@ -63,7 +64,7 @@ export function GoalsScreen({ navigation }: Props) {
         ) : (
           <>
             <Surface tone="accent" className="gap-4">
-              <View className="gap-2">
+              <View className="gap-1.5">
                 <View className="flex-row flex-wrap items-center gap-2">
                   {reviewGoals.length > 0 ? (
                     <Pill
@@ -73,10 +74,7 @@ export function GoalsScreen({ navigation }: Props) {
                   ) : null}
                   <Pill label={`${activeGoals.length} active`} tone="quiet" />
                 </View>
-                <AppText variant="title">Active goals stay easy to scan.</AppText>
-                <AppText tone="secondary">
-                  Focus on the goals that are actually driving the plan right now.
-                </AppText>
+                <AppText variant="title">Scan the active set.</AppText>
               </View>
               <View className="flex-row gap-2">
                 <SummaryMetric label="Milestones" value={String(milestones.length)} />
@@ -90,11 +88,11 @@ export function GoalsScreen({ navigation }: Props) {
 
             <Surface className="gap-4">
               <View className="flex-row items-end justify-between gap-3">
-                <View className="gap-2">
+                <View className="gap-1">
                   <AppText tone="tertiary" variant="micro" style={{ textTransform: "uppercase" }}>
                     Active goals
                   </AppText>
-                  <AppText variant="title">Open a goal</AppText>
+                  <AppText variant="title">In motion</AppText>
                 </View>
                 {reviewGoals.length > 0 ? (
                   <Button
@@ -114,15 +112,19 @@ export function GoalsScreen({ navigation }: Props) {
                     <DrillInRow
                       key={goal.id}
                       title={goal.title}
-                      subtitle={
-                        goal.summary ??
-                        "Open the goal to see the current structure and next checkpoints."
-                      }
+                      subtitle={goal.summary ?? "Open milestones, progress, and edits."}
                       detail={
                         goal.targetDate ? `Target ${formatShortDate(goal.targetDate)}` : goal.horizon
                       }
                       badge={
                         reviewDraft ? <Pill label="Needs review" tone="accent" /> : undefined
+                      }
+                      leading={
+                        <Ionicons
+                          color={reviewDraft ? "#9F6B00" : "#6F6558"}
+                          name={reviewDraft ? "git-compare-outline" : "flag-outline"}
+                          size={18}
+                        />
                       }
                       onPress={() => navigation.navigate("GoalDetail", { goalId: goal.id })}
                     />
@@ -139,8 +141,15 @@ export function GoalsScreen({ navigation }: Props) {
                     <DrillInRow
                       key={goal.id}
                       title={goal.title}
-                      subtitle={goal.summary ?? "This goal is out of rotation but still available."}
+                      subtitle={goal.summary ?? "Out of rotation"}
                       detail={goal.status}
+                      leading={
+                        <Ionicons
+                          color="#6F6558"
+                          name={goal.status === GoalStatus.Paused ? "pause-outline" : "archive-outline"}
+                          size={18}
+                        />
+                      }
                       onPress={() => navigation.navigate("GoalDetail", { goalId: goal.id })}
                     />
                   ))}

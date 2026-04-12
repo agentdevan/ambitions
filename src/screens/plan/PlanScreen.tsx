@@ -1,4 +1,5 @@
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
+import { Ionicons } from "@expo/vector-icons";
 import { View } from "react-native";
 
 import { DrillInRow } from "../../components/navigation/DrillInRow";
@@ -53,23 +54,20 @@ export function PlanScreen({ navigation }: Props) {
       <View className="gap-6">
         <PageHeader
           eyebrow="Plan"
-          title="Review the plan, then move on."
-          description="This surface is for decisions and shape, not for dumping the whole plan into one page."
+          title="Plan"
+          description="Review, decide, move."
         />
 
         {reviewGoals.length > 0 ? (
           <Surface tone="accent" className="gap-4">
-            <View className="gap-2">
+            <View className="gap-1.5">
               <View className="flex-row flex-wrap items-center gap-2">
                 <Pill
                   label={`${reviewGoals.length} review${reviewGoals.length === 1 ? "" : "s"} waiting`}
                   tone="accent"
                 />
               </View>
-              <AppText variant="title">Changes are waiting on a decision.</AppText>
-              <AppText tone="secondary">
-                Review the recommendation, make light adjustments if needed, then accept it.
-              </AppText>
+              <AppText variant="title">Changes need a call.</AppText>
             </View>
             <Button onPress={() => navigation.navigate("PlanReview", {})}>Review changes</Button>
           </Surface>
@@ -78,14 +76,14 @@ export function PlanScreen({ navigation }: Props) {
         {dailyPlan ? (
           <>
             <Surface className="gap-4">
-              <View className="gap-2">
+              <View className="gap-1.5">
                 <AppText tone="tertiary" variant="micro" style={{ textTransform: "uppercase" }}>
                   Active plan
                 </AppText>
                 <AppText variant="title">{dailyPlan.focus}</AppText>
-                <AppText tone="secondary">
-                  {dailyPlan.planningNotes ?? "The planner built a compact day with room to recover."}
-                </AppText>
+                {dailyPlan.planningNotes ? (
+                  <AppText tone="secondary">{dailyPlan.planningNotes}</AppText>
+                ) : null}
               </View>
               <View className="flex-row gap-2">
                 <SummaryMetric label="Date" value={formatShortDate(dailyPlan.date)} />
@@ -96,15 +94,17 @@ export function PlanScreen({ navigation }: Props) {
 
             <View className="gap-3">
               <DrillInRow
-                title="Plan detail"
-                subtitle="See the current day shape and what keeps it believable."
+                title="Day shape"
+                subtitle="Sessions and timing"
                 detail={`${timeBlocks.length} sessions`}
+                leading={<Ionicons color="#6F6558" name="calendar-outline" size={18} />}
                 onPress={() => navigation.navigate("PlanDetail")}
               />
               <DrillInRow
-                title="Generated structure"
-                subtitle="Open the goal and milestone structure feeding the current plan."
+                title="Structure"
+                subtitle="Goals, milestones, tasks"
                 detail={`${milestones.length} milestones`}
+                leading={<Ionicons color="#6F6558" name="layers-outline" size={18} />}
                 onPress={() => navigation.navigate("PlanStructure", {})}
               />
             </View>

@@ -36,7 +36,7 @@ export function InsightContinuityScreen() {
   if (activeGoals.length === 0) {
     return (
       <Screen>
-        <EmptyStateCard title="No active goals" body="Continuity starts once active goals are in motion." />
+        <EmptyStateCard title="No active goals" body="Add an active goal first." />
       </Screen>
     );
   }
@@ -73,7 +73,7 @@ export function InsightContinuityScreen() {
 
         <DetailSection
           title="Recent continuity"
-          description="A weekly read on finishing versus reshaping."
+          description="Finished vs reshaped."
         >
           <Surface className="gap-4 mb-0">
             <MomentumBars points={summary.momentum} />
@@ -83,7 +83,7 @@ export function InsightContinuityScreen() {
 
         <DetailSection
           title="Goals in motion"
-          description="The goals with the clearest recent movement."
+          description="Most active goals."
         >
           <View className="gap-3">
             {activeGoals.map((goal) => {
@@ -136,12 +136,12 @@ export function InsightActivityScreen() {
         <DetailHero
           eyebrow="Insights"
           title="Activity timeline"
-          description="A readable history of what actually happened, not a raw event log."
+          description="What happened."
         />
         <GroupedActivityTimeline
           groups={groups}
           emptyTitle="No activity yet"
-          emptyBody="Timeline detail will appear once work starts moving through the plan."
+          emptyBody="Activity will appear here."
         />
       </View>
     </Screen>
@@ -171,12 +171,12 @@ export function InsightPlanChangesScreen() {
         <DetailHero
           eyebrow="Insights"
           title="Plan changes"
-          description="See when the plan stayed stable and when it was deliberately reshaped."
+          description="What changed in the plan."
         />
 
         <DetailSection
           title="Current plan pressure"
-          description="A quick read on where revisions are concentrated."
+          description="Where revisions cluster."
         >
           <Surface className="gap-4 mb-0">
             {goals
@@ -211,7 +211,7 @@ export function InsightPlanChangesScreen() {
         <GroupedActivityTimeline
           groups={groups}
           emptyTitle="No plan changes yet"
-          emptyBody="Plan revisions will appear here after accepted reviews or structural edits."
+          emptyBody="Plan changes will appear here."
         />
       </View>
     </Screen>
@@ -224,7 +224,7 @@ export function InsightCapacityScreen() {
   if (!today) {
     return (
       <Screen>
-        <EmptyStateCard title="No capacity read yet" body="Capacity insight is not available right now." />
+        <EmptyStateCard title="No capacity read yet" body="Capacity isn't ready." />
       </Screen>
     );
   }

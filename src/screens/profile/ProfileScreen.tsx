@@ -1,4 +1,5 @@
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
+import { Ionicons } from "@expo/vector-icons";
 import { View } from "react-native";
 
 import { DrillInRow } from "../../components/navigation/DrillInRow";
@@ -51,36 +52,34 @@ export function ProfileScreen({ navigation }: Props) {
       <View className="gap-6">
         <PageHeader
           eyebrow="Profile"
-          title="Your controls live here."
-          description="Settings, account, defaults, and integrations are grouped here so the rest of the app can stay focused."
+          title="Profile"
+          description="Controls and defaults."
         />
 
         <Surface tone="accent" className="gap-4">
-          <View className="gap-2">
+          <View className="gap-1.5">
             <View className="flex-row flex-wrap items-center gap-2">
               <Pill label={account ? "Account connected" : "Local only"} tone="accent" />
               <Pill label={syncState?.mode.replaceAll("_", " ") ?? "Not synced"} tone="quiet" />
             </View>
             <AppText variant="title">{account?.displayName ?? account?.email ?? "Local profile"}</AppText>
-            <AppText tone="secondary">
-              {account
-                ? "Account, sync state, and personal defaults are grouped here."
-                : "The app is running locally right now. Add an account later if you want sync."}
-            </AppText>
+            <AppText tone="secondary">{account ? "Sync ready." : "Local setup."}</AppText>
           </View>
         </Surface>
 
         <View className="gap-3">
           <DrillInRow
             title="Recent movement"
-            subtitle={reflectionSummary.momentumCopy}
+            subtitle="History and momentum"
             detail={`${reflectionSummary.completedThisWeek} completed`}
+            leading={<Ionicons color="#6F6558" name="analytics-outline" size={18} />}
             onPress={() => navigation.navigate("ProfileHistory")}
           />
           <DrillInRow
             title="Appearance"
-            subtitle="Theme preset and visual tone."
+            subtitle="Theme"
             detail={productPreferences.themePreset}
+            leading={<Ionicons color="#6F6558" name="color-palette-outline" size={18} />}
             onPress={() => navigation.navigate("ProfileAppearance")}
           />
           <DrillInRow
@@ -90,34 +89,39 @@ export function ProfileScreen({ navigation }: Props) {
               productPreferences.schedule.sleepEnd,
             )}
             detail={`${productPreferences.schedule.commuteMinutes} min commute`}
+            leading={<Ionicons color="#6F6558" name="time-outline" size={18} />}
             onPress={() => navigation.navigate("ProfileScheduleDefaults")}
           />
           <DrillInRow
             title="Integrations"
             subtitle={
               calendarConnectionState?.permissionState === "granted"
-                ? "Calendar context is available."
-                : "Calendar access is not configured."
+                ? "Calendar ready"
+                : "Calendar off"
             }
             detail={calendarConnectionState?.permissionState ?? "not ready"}
+            leading={<Ionicons color="#6F6558" name="link-outline" size={18} />}
             onPress={() => navigation.navigate("ProfileIntegrations")}
           />
           <DrillInRow
             title="Notifications"
-            subtitle="Reminder behavior and permission state."
+            subtitle="Reminders"
             detail={`${enabledNotifications} enabled`}
+            leading={<Ionicons color="#6F6558" name="notifications-outline" size={18} />}
             onPress={() => navigation.navigate("ProfileNotifications")}
           />
           <DrillInRow
             title="Planning preferences"
-            subtitle="Task sizing and day intensity."
+            subtitle="Task size and intensity"
             detail={`${productPreferences.taskSizing} / ${productPreferences.dayIntensity}`}
+            leading={<Ionicons color="#6F6558" name="options-outline" size={18} />}
             onPress={() => navigation.navigate("ProfilePlanningPreferences")}
           />
           <DrillInRow
             title="Account"
-            subtitle="Sign-in, local attachment, and sync."
+            subtitle="Sign-in and sync"
             detail={account ? "Connected" : "Local only"}
+            leading={<Ionicons color="#6F6558" name="person-circle-outline" size={18} />}
             onPress={() => navigation.navigate("ProfileAccount")}
           />
         </View>

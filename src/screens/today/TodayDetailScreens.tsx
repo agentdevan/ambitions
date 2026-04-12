@@ -182,7 +182,7 @@ export function TodayTimelineScreen({
       <Screen>
         <EmptyStateCard
           title="No timeline yet"
-          body="Today's sessions are not available right now."
+          body="Today's sessions aren't ready."
         />
       </Screen>
     );
@@ -205,7 +205,7 @@ export function TodayTimelineScreen({
         <DetailHero
           eyebrow="Today"
           title="Full timeline"
-          description="Open a session when you need context, timing, or the next action."
+          description="Session-by-session."
           meta={
             <DetailSummaryStrip
               items={[
@@ -229,28 +229,28 @@ export function TodayTimelineScreen({
 
         <TimelineGroup
           title="Now"
-          description="Current sessions and the very next committed block."
+          description="Current block and next up."
           blocks={[...grouped.now, ...grouped.next.slice(0, Math.max(0, 1 - grouped.now.length))]}
           onOpen={(blockId) => navigation.navigate("TodaySessionDetail", { blockId })}
         />
 
         <TimelineGroup
           title="Coming up"
-          description="The next planned sessions after the current block."
+          description="Next planned sessions."
           blocks={grouped.now.length > 0 ? grouped.next : grouped.next.slice(1)}
           onOpen={(blockId) => navigation.navigate("TodaySessionDetail", { blockId })}
         />
 
         <TimelineGroup
           title="Later changes"
-          description="Sessions that already moved or need another pass."
+          description="Moved or deferred."
           blocks={grouped.later}
           onOpen={(blockId) => navigation.navigate("TodaySessionDetail", { blockId })}
         />
 
         <TimelineGroup
           title="Done"
-          description="Completed or cleared from the day."
+          description="Completed or cleared."
           blocks={grouped.done}
           onOpen={(blockId) => navigation.navigate("TodaySessionDetail", { blockId })}
         />
@@ -305,7 +305,7 @@ export function TodaySessionDetailScreen({
       <Screen>
         <EmptyStateCard
           title="Session not found"
-          body="That session is no longer available."
+          body="That session isn't available."
         />
       </Screen>
     );
@@ -339,7 +339,7 @@ export function TodaySessionDetailScreen({
         <DetailHero
           eyebrow="Session"
           title={block.title}
-          description={block.note ?? "Keep this block simple and move the work forward cleanly."}
+          description={block.note ?? "Keep it moving."}
           badges={
             <>
               <Pill
@@ -421,7 +421,7 @@ export function TodaySessionDetailScreen({
 
         <DetailSection
           title="Session read"
-          description="The key context without turning the page into another summary wall."
+          description="Key context."
         >
           <Surface className="gap-4 mb-0">
             <QuietMetaLine
@@ -459,7 +459,7 @@ export function TodaySessionDetailScreen({
 
         <DetailSection
           title="Linked work"
-          description="Jump straight into the connected goal or back to the day's structure."
+          description="Open the connected goal or day."
         >
           <View className="gap-3">
             {linkedGoal ? (
@@ -481,7 +481,7 @@ export function TodaySessionDetailScreen({
             ) : null}
             <DrillInRow
               title="View in full timeline"
-              subtitle="See how this session sits inside the rest of the day."
+              subtitle="See the whole day"
               onPress={() => navigation.navigate("TodayTimeline")}
             />
           </View>
@@ -527,7 +527,7 @@ export function TodayOpenTimeScreen({
       <Screen>
         <EmptyStateCard
           title="No open window right now"
-          body="There is not a current free-time window to work from."
+          body="No free window right now."
         />
       </Screen>
     );
@@ -580,7 +580,7 @@ export function TodayOpenTimeScreen({
         {primary ? (
           <DetailSection
             title="Recommended fit"
-            description="One sensible move to make this window count."
+            description="Best use of the window."
           >
             <OpportunityOptionCard
               actionLabel={primary.actionLabel}
@@ -604,7 +604,7 @@ export function TodayOpenTimeScreen({
         {today.recommendation.options.length > 1 ? (
           <DetailSection
             title="Alternate fits"
-            description="A few other realistic ways to use this window."
+            description="Other good fits."
           >
             <View className="gap-3">
               {today.recommendation.options.slice(1).map((option) => (
@@ -625,13 +625,13 @@ export function TodayOpenTimeScreen({
 
         <DetailSection
           title="More context"
-          description="If you need the broader shape before deciding."
+          description="Before you decide."
         >
           <View className="gap-3">
             {nextBlock ? (
               <DrillInRow
                 title={nextBlock.title}
-                subtitle="Open the next scheduled session."
+                subtitle="Next scheduled block"
                 detail={formatTimeLabel(nextBlock.startsAt)}
                 onPress={() =>
                   navigation.navigate("TodaySessionDetail", {
@@ -642,7 +642,7 @@ export function TodayOpenTimeScreen({
             ) : null}
             <DrillInRow
               title="View full timeline"
-              subtitle="See the whole day before you choose."
+              subtitle="See the whole day"
               onPress={() => navigation.navigate("TodayTimeline")}
             />
           </View>
@@ -666,7 +666,7 @@ export function TodayCapacityScreen() {
       <Screen>
         <EmptyStateCard
           title="No capacity detail yet"
-          body="Today's capacity snapshot is not available."
+          body="Capacity isn't ready."
         />
       </Screen>
     );
@@ -678,7 +678,7 @@ export function TodayCapacityScreen() {
         <DetailHero
           eyebrow="Today"
           title="Capacity"
-          description="A quick read on whether the day can still absorb more work."
+          description="How much room is left."
           meta={
             <DetailSummaryStrip
               items={[
@@ -752,7 +752,7 @@ export function TodayContextScreen() {
       <Screen>
         <EmptyStateCard
           title="No context yet"
-          body="Today's surrounding conditions are not available."
+          body="Context isn't ready."
         />
       </Screen>
     );
