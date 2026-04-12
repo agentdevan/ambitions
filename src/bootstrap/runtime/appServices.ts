@@ -27,6 +27,7 @@ import {
 import { AccountService } from "../../services/account/AccountService";
 import { CalendarService } from "../../services/calendar/CalendarService";
 import { NotificationsService } from "../../services/notifications/NotificationsService";
+import { resetStartupReady } from "./startupBarrier";
 
 const repositories = {
   account: new SQLiteAccountRepository(sqliteClient),
@@ -95,47 +96,63 @@ async function ensureBootstrapMetadata() {
   );
 }
 
+async function detectInitialSeedNeed() {
+  const seedVersion = await sqliteClient.getFirst<{ value: string }>(
+    "SELECT value FROM app_metadata WHERE key = ? LIMIT 1;",
+    ["bootstrap_seed_version"],
+  );
+  const goalCount = await sqliteClient.getFirst<{ count: number }>(
+    "SELECT COUNT(*) as count FROM goals;",
+  );
+  const preferencesCount = await sqliteClient.getFirst<{ count: number }>(
+    "SELECT COUNT(*) as count FROM user_preferences;",
+  );
+  const domainCount = await sqliteClient.getFirst<{ count: number }>(
+    "SELECT COUNT(*) as count FROM domains;",
+  );
+
+  return {
+    seedVersion: seedVersion?.value ?? null,
+    needsInitialSeed:
+      (goalCount?.count ?? 0) === 0 &&
+      (preferencesCount?.count ?? 0) === 0 &&
+      (domainCount?.count ?? 0) === 0,
+  };
+}
+
+async function seedInitialData() {
+  await resetSeedData();
+  await appServices.repositories.preferences.saveDomains(seedDomains);
+  await appServices.repositories.preferences.saveUserPreferences(seedPreferences);
+  await appServices.repositories.preferences.saveNotificationPreferences(
+    seedNotificationPreferences,
+  );
+  await appServices.repositories.adaptation.saveProfiles([seedAdaptationProfile]);
+  await appServices.repositories.integration.saveCalendarConnectionState(
+    seedCalendarConnectionState,
+  );
+  await appServices.repositories.integration.saveScheduleConstraints(seedScheduleConstraints);
+  await ensureBootstrapMetadata();
+}
+
 export async function initializeAppServices() {
   if (!initializationPromise) {
+    resetStartupReady();
     initializationPromise = (async () => {
       await initializeDatabase();
-      await appServices.services.account.initialize();
+      const { seedVersion, needsInitialSeed } = await detectInitialSeedNeed();
 
-      const seedVersion = await sqliteClient.getFirst<{ value: string }>(
-        "SELECT value FROM app_metadata WHERE key = ? LIMIT 1;",
-        ["bootstrap_seed_version"],
-      );
-      const [existingGoals, existingPreferences, existingDomains] = await Promise.all([
-        appServices.repositories.goals.listGoals(),
-        appServices.repositories.preferences.getUserPreferences(),
-        appServices.repositories.preferences.listDomains(),
-      ]);
-      const needsInitialSeed =
-        existingGoals.length === 0 &&
-        existingDomains.length === 0 &&
-        existingPreferences === null;
-
-      if (!needsInitialSeed) {
-        if (seedVersion?.value !== bootstrapSeedVersion) {
-          await ensureBootstrapMetadata();
-        }
-        return;
+      if (needsInitialSeed) {
+        await seedInitialData();
+      } else if (seedVersion !== bootstrapSeedVersion) {
+        await ensureBootstrapMetadata();
       }
 
-      await resetSeedData();
-
-      await appServices.repositories.preferences.saveDomains(seedDomains);
-      await appServices.repositories.preferences.saveUserPreferences(seedPreferences);
-      await appServices.repositories.preferences.saveNotificationPreferences(
-        seedNotificationPreferences,
-      );
-      await appServices.repositories.adaptation.saveProfiles([seedAdaptationProfile]);
-      await appServices.repositories.integration.saveCalendarConnectionState(
-        seedCalendarConnectionState,
-      );
-      await appServices.repositories.integration.saveScheduleConstraints(seedScheduleConstraints);
-      await ensureBootstrapMetadata();
-    })();
+      await appServices.services.account.initialize();
+    })().catch((error) => {
+      initializationPromise = null;
+      throw error;
+    });
   }
 
   return initializationPromise;

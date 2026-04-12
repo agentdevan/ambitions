@@ -1,5 +1,7 @@
 import * as SQLite from "expo-sqlite";
 
+import { withLockAwareRetry } from "./lockAwareRetry";
+import { SQLiteOperationQueue } from "./operationQueue";
 import { schemaMigrations } from "./migrations";
 
 export interface DatabaseClient {
@@ -11,86 +13,127 @@ export interface DatabaseClient {
 }
 
 let databasePromise: Promise<SQLite.SQLiteDatabase> | null = null;
+let databaseSetupPromise: Promise<SQLite.SQLiteDatabase> | null = null;
+const operationQueue = new SQLiteOperationQueue();
 
 async function getDatabase() {
   if (!databasePromise) {
-    databasePromise = SQLite.openDatabaseAsync("ambitions.db");
+    databasePromise = SQLite.openDatabaseAsync("ambitions.db").catch((error) => {
+      databasePromise = null;
+      databaseSetupPromise = null;
+      throw error;
+    });
   }
 
-  return databasePromise;
+  if (!databaseSetupPromise) {
+    databaseSetupPromise = databasePromise
+      .then(async (database) => {
+        await database.execAsync("PRAGMA foreign_keys = ON;");
+        await database.execAsync("PRAGMA journal_mode = WAL;");
+        await database.execAsync("PRAGMA busy_timeout = 5000;");
+
+        return database;
+      })
+      .catch((error) => {
+        databaseSetupPromise = null;
+        throw error;
+      });
+  }
+
+  return databaseSetupPromise;
 }
 
 class SQLiteClient implements DatabaseClient {
   async exec(statements: string[]) {
-    const database = await getDatabase();
+    await operationQueue.enqueue(() =>
+      withLockAwareRetry(async () => {
+        const database = await getDatabase();
 
-    for (const statement of statements) {
-      await database.execAsync(statement);
-    }
+        for (const statement of statements) {
+          await database.execAsync(statement);
+        }
+      }),
+    );
   }
 
   async run(statement: string, params?: SQLite.SQLiteBindParams) {
-    const database = await getDatabase();
-    if (params === undefined) {
-      await database.runAsync(statement);
-      return;
-    }
+    await operationQueue.enqueue(() =>
+      withLockAwareRetry(async () => {
+        const database = await getDatabase();
+        if (params === undefined) {
+          await database.runAsync(statement);
+          return;
+        }
 
-    await database.runAsync(statement, params);
+        await database.runAsync(statement, params);
+      }),
+    );
   }
 
   async getAll<T>(statement: string, params?: SQLite.SQLiteBindParams) {
-    const database = await getDatabase();
-    if (params === undefined) {
-      return database.getAllAsync<T>(statement);
-    }
+    return operationQueue.enqueue(() =>
+      withLockAwareRetry(async () => {
+        const database = await getDatabase();
+        if (params === undefined) {
+          return database.getAllAsync<T>(statement);
+        }
 
-    return database.getAllAsync<T>(statement, params);
+        return database.getAllAsync<T>(statement, params);
+      }),
+    );
   }
 
   async getFirst<T>(statement: string, params?: SQLite.SQLiteBindParams) {
-    const database = await getDatabase();
-    if (params === undefined) {
-      return database.getFirstAsync<T>(statement);
-    }
+    return operationQueue.enqueue(() =>
+      withLockAwareRetry(async () => {
+        const database = await getDatabase();
+        if (params === undefined) {
+          return database.getFirstAsync<T>(statement);
+        }
 
-    return database.getFirstAsync<T>(statement, params);
+        return database.getFirstAsync<T>(statement, params);
+      }),
+    );
   }
 
   async withTransaction<T>(operation: (client: DatabaseClient) => Promise<T>) {
-    const database = await getDatabase();
-    let result: T | undefined;
+    return operationQueue.enqueue(() =>
+      withLockAwareRetry(async () => {
+        const database = await getDatabase();
+        let result: T | undefined;
 
-    await database.withExclusiveTransactionAsync(async (transaction) => {
-      const transactionalClient: DatabaseClient = {
-        exec: async (statements) => {
-          for (const statement of statements) {
-            await transaction.execAsync(statement);
-          }
-        },
-        run: async (statement, params) => {
-          if (params === undefined) {
-            await transaction.runAsync(statement);
-            return;
-          }
+        await database.withExclusiveTransactionAsync(async (transaction) => {
+          const transactionalClient: DatabaseClient = {
+            exec: async (statements) => {
+              for (const statement of statements) {
+                await transaction.execAsync(statement);
+              }
+            },
+            run: async (statement, nestedParams) => {
+              if (nestedParams === undefined) {
+                await transaction.runAsync(statement);
+                return;
+              }
 
-          await transaction.runAsync(statement, params);
-        },
-        getAll: async (statement, params) =>
-          params === undefined
-            ? transaction.getAllAsync(statement)
-            : transaction.getAllAsync(statement, params),
-        getFirst: async (statement, params) =>
-          params === undefined
-            ? transaction.getFirstAsync(statement)
-            : transaction.getFirstAsync(statement, params),
-        withTransaction: async (nestedOperation) => nestedOperation(transactionalClient),
-      };
+              await transaction.runAsync(statement, nestedParams);
+            },
+            getAll: async (statement, nestedParams) =>
+              nestedParams === undefined
+                ? transaction.getAllAsync(statement)
+                : transaction.getAllAsync(statement, nestedParams),
+            getFirst: async (statement, nestedParams) =>
+              nestedParams === undefined
+                ? transaction.getFirstAsync(statement)
+                : transaction.getFirstAsync(statement, nestedParams),
+            withTransaction: async (nestedOperation) => nestedOperation(transactionalClient),
+          };
 
-      result = await operation(transactionalClient);
-    });
+          result = await operation(transactionalClient);
+        });
 
-    return result as T;
+        return result as T;
+      }),
+    );
   }
 }
 
@@ -98,7 +141,6 @@ export const sqliteClient: DatabaseClient = new SQLiteClient();
 
 export async function initializeDatabase() {
   await sqliteClient.exec([
-    "PRAGMA foreign_keys = ON;",
     `
       CREATE TABLE IF NOT EXISTS schema_migrations (
         id INTEGER PRIMARY KEY NOT NULL,

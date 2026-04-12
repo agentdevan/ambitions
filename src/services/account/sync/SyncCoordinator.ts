@@ -76,30 +76,31 @@ export class SyncCoordinator {
       dailyPlans,
     } = await this.loadLocalSyncState();
 
-    await Promise.all([
-      this.repositories.goals.saveGoals(
-        goals.map((goal) => prepareOwnedRecord("goal", goal, accountId, now)),
-      ),
-      this.repositories.goals.saveMilestones(
-        milestones.map((milestone) => prepareOwnedRecord("milestone", milestone, accountId, now)),
-      ),
-      this.repositories.tasks.saveTasks(
-        tasks.map((task) => prepareOwnedRecord("task", task, accountId, now)),
-      ),
-      preferences
-        ? this.repositories.preferences.saveUserPreferences(
-            prepareOwnedRecord("preferences", preferences, accountId, now),
-          )
-        : Promise.resolve(),
-      adaptationProfile
-        ? this.repositories.adaptation.saveProfiles([
-            prepareOwnedRecord("adaptation_profile", adaptationProfile, accountId, now),
-          ])
-        : Promise.resolve(),
-      this.repositories.planning.saveDailyPlans(
-        dailyPlans.map((plan) => prepareOwnedRecord("daily_plan", plan, accountId, now)),
-      ),
-    ]);
+    await this.repositories.goals.saveGoals(
+      goals.map((goal) => prepareOwnedRecord("goal", goal, accountId, now)),
+    );
+    await this.repositories.goals.saveMilestones(
+      milestones.map((milestone) => prepareOwnedRecord("milestone", milestone, accountId, now)),
+    );
+    await this.repositories.tasks.saveTasks(
+      tasks.map((task) => prepareOwnedRecord("task", task, accountId, now)),
+    );
+
+    if (preferences) {
+      await this.repositories.preferences.saveUserPreferences(
+        prepareOwnedRecord("preferences", preferences, accountId, now),
+      );
+    }
+
+    if (adaptationProfile) {
+      await this.repositories.adaptation.saveProfiles([
+        prepareOwnedRecord("adaptation_profile", adaptationProfile, accountId, now),
+      ]);
+    }
+
+    await this.repositories.planning.saveDailyPlans(
+      dailyPlans.map((plan) => prepareOwnedRecord("daily_plan", plan, accountId, now)),
+    );
   }
 
   async sync(accountId: string, syncState: SyncStateSnapshot, kind: SyncOperationKind) {

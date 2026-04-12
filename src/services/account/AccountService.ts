@@ -8,6 +8,7 @@ import {
   SyncMode,
   SyncOperationKind,
 } from "../../domain/models";
+import { waitForStartupReady } from "../../bootstrap/runtime/startupBarrier";
 import { AccountRepository } from "../../repositories/AccountRepository";
 import { AdaptationRepository } from "../../repositories/AdaptationRepository";
 import { GoalRepository } from "../../repositories/GoalRepository";
@@ -30,6 +31,8 @@ interface AccountServiceDependencies {
 
 export class AccountService {
   private readonly syncCoordinator: SyncCoordinator;
+  private activeSyncPromise: Promise<void> | null = null;
+  private startupSyncPromise: Promise<AccountSnapshot> | null = null;
 
   constructor(private readonly dependencies: AccountServiceDependencies) {
     this.syncCoordinator = new SyncCoordinator(
@@ -239,27 +242,25 @@ export class AccountService {
       await this.syncCoordinator.attachLocalDataToAccount(accountId);
       const syncState = (await this.dependencies.accountRepository.getSyncState())!;
 
-      await Promise.all([
-        this.dependencies.accountRepository.saveAttachmentState({
-          ...snapshot.attachment,
-          accountId,
-          status: LocalAttachmentStatus.Attached,
-          hasMeaningfulLocalData: false,
-          pendingRecordCount: 0,
-          lastAttachedAt: now,
-          lastError: null,
-          updatedAt: now,
-        }),
-        this.dependencies.accountRepository.saveSyncState({
-          ...syncState,
-          accountId,
-          mode: SyncMode.Ready,
-          lastError: null,
-          updatedAt: now,
-        }),
-      ]);
+      await this.dependencies.accountRepository.saveAttachmentState({
+        ...snapshot.attachment,
+        accountId,
+        status: LocalAttachmentStatus.Attached,
+        hasMeaningfulLocalData: false,
+        pendingRecordCount: 0,
+        lastAttachedAt: now,
+        lastError: null,
+        updatedAt: now,
+      });
+      await this.dependencies.accountRepository.saveSyncState({
+        ...syncState,
+        accountId,
+        mode: SyncMode.Ready,
+        lastError: null,
+        updatedAt: now,
+      });
 
-      await this.syncCoordinator.sync(accountId, syncState, SyncOperationKind.AttachLocalData);
+      await this.runSerializedSync(accountId, syncState, SyncOperationKind.AttachLocalData);
     } catch (error) {
       await this.dependencies.accountRepository.saveAttachmentState({
         ...snapshot.attachment,
@@ -289,12 +290,52 @@ export class AccountService {
   }
 
   async syncNow(kind: SyncOperationKind = SyncOperationKind.PushPull) {
+    await waitForStartupReady();
+
     const snapshot = await this.getSnapshot();
     if (!snapshot.auth.signedInAccountId || snapshot.attachment.status !== LocalAttachmentStatus.Attached) {
       return snapshot;
     }
 
-    await this.syncCoordinator.sync(snapshot.auth.signedInAccountId, snapshot.sync, kind);
+    await this.runSerializedSync(snapshot.auth.signedInAccountId, snapshot.sync, kind);
     return this.getSnapshot();
+  }
+
+  async runStartupSyncIfNeeded() {
+    if (!this.startupSyncPromise) {
+      this.startupSyncPromise = (async () => {
+        await waitForStartupReady();
+        return this.syncNow(SyncOperationKind.Startup);
+      })().finally(() => {
+        this.startupSyncPromise = null;
+      });
+    }
+
+    return this.startupSyncPromise;
+  }
+
+  private async runSerializedSync(
+    accountId: string,
+    syncState: AccountSnapshot["sync"],
+    kind: SyncOperationKind,
+  ) {
+    while (this.activeSyncPromise) {
+      await this.activeSyncPromise;
+    }
+
+    const syncPromise = this.syncCoordinator.sync(accountId, syncState, kind);
+    this.activeSyncPromise = syncPromise.then(
+      () => undefined,
+      () => undefined,
+    );
+
+    try {
+      await syncPromise;
+    } finally {
+      if (this.activeSyncPromise) {
+        await this.activeSyncPromise;
+        this.activeSyncPromise = null;
+      }
+    }
   }
 }

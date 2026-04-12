@@ -1,6 +1,7 @@
 import { create } from "zustand";
 
 import { initializeAppServices, appServices } from "../bootstrap/runtime/appServices";
+import { markStartupReady, resetStartupReady } from "../bootstrap/runtime/startupBarrier";
 import { SchedulingOutput } from "../engines";
 import {
   AdaptationProfile,
@@ -225,10 +226,8 @@ export const useAppStore = create<AppState>((set, get) => ({
     try {
       await initializeAppServices();
       await appServices.services.notifications.configure();
-      const [snapshot, accountSnapshot] = await Promise.all([
-        refreshAllState(get().planDate),
-        appServices.services.account.getSnapshot(),
-      ]);
+      const snapshot = await refreshAllState(get().planDate);
+      const accountSnapshot = await appServices.services.account.getSnapshot();
 
       set({
         bootstrapped: true,
@@ -236,19 +235,21 @@ export const useAppStore = create<AppState>((set, get) => ({
         ...snapshot,
         ...mapAccountSnapshot(accountSnapshot),
       });
+      markStartupReady();
 
       if (
         accountSnapshot.auth.signedInAccountId &&
         accountSnapshot.attachment.status === "attached"
       ) {
         appServices.services.account
-          .syncNow(SyncOperationKind.Startup)
+          .runStartupSyncIfNeeded()
           .then((nextSnapshot) => {
             set(mapAccountSnapshot(nextSnapshot));
           })
           .catch(() => null);
       }
     } catch (error) {
+      resetStartupReady();
       set({
         bootStatus: "error",
         lastError: error instanceof Error ? error.message : "Unknown bootstrap failure",
