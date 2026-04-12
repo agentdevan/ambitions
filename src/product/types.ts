@@ -2,7 +2,14 @@ import { DomainKey } from "../domain/models";
 
 export type TaskSizingPreference = "smaller" | "mixed" | "bigger";
 export type DayIntensityPreference = "light" | "balanced" | "ambitious";
-export type ThemePresetKey = "neutral" | "sage" | "slate" | "dusk";
+export type AppearanceMode = "light" | "dark" | "system";
+export type AccentThemeKey =
+  | "gold"
+  | "sage"
+  | "slateBlue"
+  | "bronze"
+  | "olive"
+  | "terracotta";
 
 export interface ScheduleDefaults {
   sleepStart: string;
@@ -19,7 +26,8 @@ export interface ProductPreferences {
   focusDomains: DomainKey[];
   taskSizing: TaskSizingPreference;
   dayIntensity: DayIntensityPreference;
-  themePreset: ThemePresetKey;
+  appearanceMode: AppearanceMode;
+  accentTheme: AccentThemeKey;
   schedule: ScheduleDefaults;
 }
 

@@ -1,10 +1,11 @@
 import { DomainKey, PlanningCadence, UserPreferences } from "../domain/models";
 import {
+  AccentThemeKey,
+  AppearanceMode,
   DayIntensityPreference,
   ProductPreferences,
   ScheduleDefaults,
   TaskSizingPreference,
-  ThemePresetKey,
 } from "./types";
 
 const defaultSchedule: ScheduleDefaults = {
@@ -76,10 +77,28 @@ function parseDayIntensity(value: unknown): DayIntensityPreference {
     : "balanced";
 }
 
-function parseThemePreset(value: unknown): ThemePresetKey {
-  return value === "neutral" || value === "sage" || value === "slate" || value === "dusk"
-    ? value
-    : "neutral";
+function parseAppearanceMode(value: unknown): AppearanceMode {
+  return value === "light" || value === "dark" || value === "system" ? value : "system";
+}
+
+function parseAccentTheme(value: unknown): AccentThemeKey {
+  switch (value) {
+    case "gold":
+    case "sage":
+    case "slateBlue":
+    case "bronze":
+    case "olive":
+    case "terracotta":
+      return value;
+    case "neutral":
+      return "gold";
+    case "slate":
+      return "slateBlue";
+    case "dusk":
+      return "bronze";
+    default:
+      return "gold";
+  }
 }
 
 export function getProductPreferences(preferences: UserPreferences | null): ProductPreferences {
@@ -90,7 +109,8 @@ export function getProductPreferences(preferences: UserPreferences | null): Prod
     focusDomains: parseDomainList(metadata.focusDomains),
     taskSizing: parseTaskSizing(metadata.taskSizing),
     dayIntensity: parseDayIntensity(metadata.dayIntensity),
-    themePreset: parseThemePreset(metadata.themePreset),
+    appearanceMode: parseAppearanceMode(metadata.appearanceMode),
+    accentTheme: parseAccentTheme(metadata.accentTheme ?? metadata.themePreset),
     schedule: {
       sleepStart: parseTime(metadata.sleepWindowStart, defaultSchedule.sleepStart),
       sleepEnd: parseTime(metadata.sleepWindowEnd, defaultSchedule.sleepEnd),
@@ -152,7 +172,8 @@ export function mergeProductPreferences(
     focusDomains: product.focusDomains.join(","),
     taskSizing: product.taskSizing,
     dayIntensity: product.dayIntensity,
-    themePreset: product.themePreset,
+    appearanceMode: product.appearanceMode,
+    accentTheme: product.accentTheme,
     sleepWindowStart: product.schedule.sleepStart,
     sleepWindowEnd: product.schedule.sleepEnd,
     morningPrepMinutes: product.schedule.morningPrepMinutes,

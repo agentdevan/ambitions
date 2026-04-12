@@ -143,7 +143,7 @@ export function MomentumBars({
                     width: "72%",
                     height: reshapedHeight,
                     borderRadius: 999,
-                    backgroundColor: theme.colors.border.strong,
+                    backgroundColor: theme.colors.progress.mutedFill,
                     marginBottom: 4,
                   }}
                 />
@@ -153,7 +153,7 @@ export function MomentumBars({
                   width: "72%",
                   height: completedHeight,
                   borderRadius: 999,
-                  backgroundColor: theme.colors.accent.primary,
+                  backgroundColor: theme.colors.progress.fill,
                 }}
               />
             </View>

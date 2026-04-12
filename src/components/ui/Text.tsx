@@ -15,12 +15,12 @@ const variantMap: Record<
   Variant,
   { fontSize: number; lineHeight: number; fontWeight: "400" | "500" | "600" | "700"; letterSpacing?: number }
 > = {
-  hero: { fontSize: 28, lineHeight: 34, fontWeight: "600", letterSpacing: -0.7 },
-  title: { fontSize: 21, lineHeight: 27, fontWeight: "600", letterSpacing: -0.45 },
-  section: { fontSize: 17, lineHeight: 22, fontWeight: "600", letterSpacing: -0.2 },
-  body: { fontSize: 15, lineHeight: 21, fontWeight: "400", letterSpacing: -0.1 },
-  caption: { fontSize: 14, lineHeight: 19, fontWeight: "500", letterSpacing: 0 },
-  micro: { fontSize: 12, lineHeight: 15, fontWeight: "600", letterSpacing: 0.4 },
+  hero: { fontSize: 31, lineHeight: 37, fontWeight: "600", letterSpacing: -0.95 },
+  title: { fontSize: 23, lineHeight: 29, fontWeight: "600", letterSpacing: -0.55 },
+  section: { fontSize: 17, lineHeight: 22, fontWeight: "600", letterSpacing: -0.3 },
+  body: { fontSize: 15, lineHeight: 21, fontWeight: "400", letterSpacing: -0.15 },
+  caption: { fontSize: 13, lineHeight: 18, fontWeight: "600", letterSpacing: -0.05 },
+  micro: { fontSize: 11, lineHeight: 14, fontWeight: "700", letterSpacing: 0.5 },
 };
 
 export function AppText({
@@ -36,7 +36,7 @@ export function AppText({
     secondary: theme.colors.text.secondary,
     tertiary: theme.colors.text.tertiary,
     inverse: theme.colors.text.inverse,
-    accent: theme.colors.accent.primary,
+    accent: theme.colors.text.accent,
   };
 
   return (

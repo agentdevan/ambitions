@@ -6,9 +6,11 @@ import { MomentumBars } from "../../components/history/ActivityTimeline";
 import { DrillInRow } from "../../components/navigation/DrillInRow";
 import { PageHeader } from "../../components/navigation/PageHeader";
 import { Pill } from "../../components/ui/Pill";
+import { ProgressBar } from "../../components/ui/ProgressBar";
 import { Screen } from "../../components/ui/Screen";
 import { Surface } from "../../components/ui/Surface";
 import { AppText } from "../../components/ui/Text";
+import { useResolvedTheme } from "../../design/theme/useResolvedTheme";
 import { ActivityEventKind } from "../../domain/models";
 import { InsightsStackParamList } from "../../navigation/types";
 import { getGoalReviewDraft } from "../../services/goals/metadata";
@@ -17,9 +19,9 @@ import { useAppStore } from "../../state/useAppStore";
 
 type Props = NativeStackScreenProps<InsightsStackParamList, "InsightsHome">;
 
-function SummaryMetric({ label, value, detail }: { label: string; value: string; detail: string }) {
+function StatCard({ label, value, detail }: { label: string; value: string; detail: string }) {
   return (
-    <View className="flex-1 gap-1 rounded-[18px] px-4 py-4">
+    <View className="flex-1 gap-1 rounded-[20px] px-4 py-4">
       <AppText tone="tertiary" variant="micro" style={{ textTransform: "uppercase" }}>
         {label}
       </AppText>
@@ -37,6 +39,7 @@ export function InsightsScreen({ navigation }: Props) {
   const tasks = useAppStore((state) => state.allTasks);
   const activityEvents = useAppStore((state) => state.activityEvents);
   const today = useAppStore((state) => state.today);
+  const theme = useResolvedTheme();
 
   const pendingReviews = goals.filter((goal) => getGoalReviewDraft(goal) !== null).length;
   const feed = buildActivityFeed(activityEvents, tasks, milestones);
@@ -55,47 +58,63 @@ export function InsightsScreen({ navigation }: Props) {
       ActivityEventKind.TaskRescheduled,
     ].includes(event.kind),
   );
+  const completionShare =
+    summary.completedThisWeek + summary.reshapedThisWeek > 0
+      ? summary.completedThisWeek / (summary.completedThisWeek + summary.reshapedThisWeek)
+      : 0;
 
   return (
     <Screen>
-      <View className="gap-6">
-        <PageHeader
-          eyebrow="Insights"
-          title="Insights"
-          description="Recent movement."
-        />
+      <View className="gap-5">
+        <PageHeader eyebrow="Insights" title="Insights" description="Recent movement." />
 
-        <Surface tone="accent" className="gap-5">
-          <View className="gap-1.5">
-            <View className="flex-row flex-wrap items-center gap-2">
-              <Pill label={`${summary.movingGoalCount} goals moving`} tone="quiet" />
-              {pendingReviews > 0 ? (
-                <Pill label={`${pendingReviews} review waiting`} tone="accent" />
-              ) : null}
-            </View>
-            <AppText variant="title">Recent momentum</AppText>
-            <AppText tone="secondary">{summary.momentumCopy}</AppText>
+        <Surface tone="hero" className="gap-5">
+          <View className="flex-row flex-wrap gap-2">
+            <Pill label={`${summary.movingGoalCount} moving`} tone="accent" />
+            {pendingReviews > 0 ? <Pill label={`${pendingReviews} review`} tone="quiet" /> : null}
           </View>
 
-          <MomentumBars points={summary.momentum} />
+          <View className="gap-2">
+            <AppText variant="title">Consistent focus</AppText>
+            <AppText tone="secondary" variant="caption">
+              {summary.momentumCopy}
+            </AppText>
+          </View>
 
-          <View className="flex-row gap-2">
-            <SummaryMetric
-              label="Completed"
-              value={String(summary.completedThisWeek)}
-              detail="Finished this week"
+          <View className="flex-row gap-3">
+            <StatCard
+              label="This month"
+              value={`${Math.round(completionShare * 100)}%`}
+              detail="Completion share"
             />
-            <SummaryMetric
-              label="Reshaped"
-              value={String(summary.reshapedThisWeek)}
-              detail="Moved, deferred, or revised"
-            />
-            <SummaryMetric
+            <StatCard
               label="Plan drift"
               value={String(summary.planChangeCount)}
-              detail="Recent structural changes"
+              detail="Structural changes"
             />
           </View>
+
+          <View className="gap-2">
+            <View className="flex-row items-center justify-between">
+              <AppText tone="secondary" variant="caption">
+                Weekly balance
+              </AppText>
+              <AppText tone="secondary" variant="caption">
+                {summary.completedThisWeek} done
+              </AppText>
+            </View>
+            <ProgressBar progress={completionShare} />
+          </View>
+        </Surface>
+
+        <Surface className="gap-4">
+          <View className="gap-1">
+            <AppText tone="tertiary" variant="micro" style={{ textTransform: "uppercase" }}>
+              Weekly review
+            </AppText>
+            <AppText variant="title">Momentum</AppText>
+          </View>
+          <MomentumBars points={summary.momentum} />
         </Surface>
 
         <View className="gap-3">
@@ -103,27 +122,32 @@ export function InsightsScreen({ navigation }: Props) {
             title="Continuity"
             subtitle="Momentum and consistency"
             detail={`${summary.movingGoalCount} moving`}
-            leading={<Ionicons color="#6F6558" name="pulse-outline" size={18} />}
+            leading={<Ionicons color={theme.colors.text.secondary} name="pulse-outline" size={18} />}
             onPress={() => navigation.navigate("InsightContinuity")}
           />
           <DrillInRow
             title="Activity"
-            subtitle="Completed, moved, reviewed"
+            subtitle="Completed and reshaped work"
             detail={`${feed.length} events`}
-            leading={<Ionicons color="#6F6558" name="time-outline" size={18} />}
+            leading={<Ionicons color={theme.colors.text.secondary} name="time-outline" size={18} />}
             onPress={() => navigation.navigate("InsightActivity")}
           />
           <DrillInRow
             title="Plan changes"
             subtitle="What shifted"
             detail={`${planChangeEvents.length} changes`}
-            leading={<Ionicons color="#6F6558" name="swap-horizontal-outline" size={18} />}
+            leading={
+              <Ionicons color={theme.colors.text.secondary} name="swap-horizontal-outline" size={18} />
+            }
             onPress={() => navigation.navigate("InsightPlanChanges")}
           />
           <DrillInRow
             title="Capacity"
             subtitle={`${today?.capacity.unusedCapacityMinutes ?? 0} min open`}
-            leading={<Ionicons color="#6F6558" name="speedometer-outline" size={18} />}
+            detail={today?.capacity.overloadWarning ? "Tight day" : "Balanced"}
+            leading={
+              <Ionicons color={theme.colors.text.secondary} name="speedometer-outline" size={18} />
+            }
             onPress={() => navigation.navigate("InsightCapacity")}
           />
         </View>

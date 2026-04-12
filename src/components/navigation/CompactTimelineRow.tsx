@@ -36,7 +36,7 @@ export function CompactTimelineRow({ block, onPress }: CompactTimelineRowProps) 
     block.state === "active"
       ? theme.colors.accent.primary
       : block.state === "scheduled"
-        ? theme.colors.semantic.warning
+        ? theme.colors.accent.secondary
         : theme.colors.border.strong;
 
   return (
@@ -52,21 +52,25 @@ export function CompactTimelineRow({ block, onPress }: CompactTimelineRowProps) 
     >
       {({ pressed }) => (
         <View
-          className="flex-row items-center gap-3 rounded-[22px] px-4 py-4"
+          className="flex-row items-center gap-3 rounded-[24px] px-4 py-4"
           style={{
             backgroundColor:
               block.state === "active"
-                ? theme.colors.background.accentWash
+                ? theme.colors.background.accentWashStrong
                 : pressed
-                  ? theme.colors.background.sunken
+                  ? theme.colors.background.elevatedSecondary
                   : theme.colors.background.elevated,
             borderWidth: 1,
             borderColor:
               block.state === "active"
-                ? `${theme.colors.accent.primary}40`
+                ? theme.colors.border.accent
                 : pressed
-                  ? `${theme.colors.accent.primary}2A`
+                  ? theme.colors.border.accent
                   : theme.colors.border.subtle,
+            shadowColor: theme.colors.shadow.color,
+            shadowOpacity: theme.mode === "dark" ? 0.14 : 0.03,
+            shadowRadius: 10,
+            shadowOffset: { width: 0, height: 5 },
           }}
         >
           <View

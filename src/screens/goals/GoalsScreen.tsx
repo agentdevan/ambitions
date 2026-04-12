@@ -7,25 +7,61 @@ import { PageHeader } from "../../components/navigation/PageHeader";
 import { Button } from "../../components/ui/Button";
 import { EmptyStateCard } from "../../components/ui/EmptyStateCard";
 import { Pill } from "../../components/ui/Pill";
+import { ProgressBar } from "../../components/ui/ProgressBar";
 import { Screen } from "../../components/ui/Screen";
 import { Surface } from "../../components/ui/Surface";
 import { AppText } from "../../components/ui/Text";
+import { useResolvedTheme } from "../../design/theme/useResolvedTheme";
 import { GoalStatus } from "../../domain/models";
+import { GoalsStackParamList } from "../../navigation/types";
 import { getGoalReviewDraft } from "../../services/goals/metadata";
+import { buildActivityFeed, summarizeGoalProgress } from "../../services/history/selectors";
 import { useAppStore } from "../../state/useAppStore";
 import { formatShortDate } from "../../utils/date";
-import { GoalsStackParamList } from "../../navigation/types";
 
 type Props = NativeStackScreenProps<GoalsStackParamList, "GoalsHome">;
 
-function SummaryMetric({ label, value }: { label: string; value: string }) {
+function GoalCard({
+  title,
+  subtitle,
+  detail,
+  iconName,
+  highlighted,
+  onPress,
+}: {
+  title: string;
+  subtitle: string;
+  detail: string;
+  iconName: keyof typeof Ionicons.glyphMap;
+  highlighted?: boolean;
+  onPress: () => void;
+}) {
+  const theme = useResolvedTheme();
+
   return (
-    <View className="flex-1 gap-1 rounded-[18px] px-4 py-4">
-      <AppText tone="tertiary" variant="micro" style={{ textTransform: "uppercase" }}>
-        {label}
-      </AppText>
-      <AppText variant="section">{value}</AppText>
-    </View>
+    <DrillInRow
+      title={title}
+      subtitle={subtitle}
+      detail={detail}
+      badge={highlighted ? <Pill label="Review" tone="accent" /> : undefined}
+      leading={
+        <View
+          className="rounded-[16px] px-3 py-3"
+          style={{
+            backgroundColor: highlighted
+              ? theme.colors.background.accentWashStrong
+              : theme.colors.background.elevatedSecondary,
+          }}
+        >
+          <Ionicons
+            color={highlighted ? theme.colors.accent.primary : theme.colors.text.secondary}
+            name={iconName}
+            size={18}
+          />
+        </View>
+      }
+      onPress={onPress}
+    />
   );
 }
 
@@ -33,119 +69,145 @@ export function GoalsScreen({ navigation }: Props) {
   const goals = useAppStore((state) => state.goals);
   const milestones = useAppStore((state) => state.milestones);
   const tasks = useAppStore((state) => state.allTasks);
+  const activityEvents = useAppStore((state) => state.activityEvents);
 
   const activeGoals = goals.filter((goal) => goal.status === GoalStatus.Active);
-  const pausedGoals = goals.filter((goal) => goal.status === GoalStatus.Paused);
-  const archivedGoals = goals.filter((goal) => goal.status === GoalStatus.Archived);
+  const inactiveGoals = goals.filter((goal) =>
+    [GoalStatus.Paused, GoalStatus.Archived, GoalStatus.Completed].includes(goal.status),
+  );
   const reviewGoals = goals.filter((goal) => getGoalReviewDraft(goal) !== null);
+  const feed = buildActivityFeed(activityEvents, tasks, milestones);
+  const totalMilestones = milestones.length;
+  const totalTasks = tasks.length;
 
   return (
     <Screen>
-      <View className="gap-6">
+      <View className="gap-5">
         <PageHeader
           eyebrow="Goals"
           title="Goals"
           description="Active work first."
-          action={<Button onPress={() => navigation.navigate("GoalEdit", {})}>New goal</Button>}
+          action={<Button onPress={() => navigation.navigate("GoalEdit", {})}>New</Button>}
         />
 
         {goals.length === 0 ? (
           <EmptyStateCard
             title="No goals yet"
-            body="Write one goal in plain language. Ambitions will shape the structure before it goes live."
+            body="Start with one clear goal."
             action={
               <View className="pt-1">
                 <Button tone="secondary" onPress={() => navigation.navigate("GoalEdit", {})}>
-                  Create a goal
+                  Create goal
                 </Button>
               </View>
             }
           />
         ) : (
           <>
-            <Surface tone="accent" className="gap-4">
-              <View className="gap-1.5">
-                <View className="flex-row flex-wrap items-center gap-2">
-                  {reviewGoals.length > 0 ? (
-                    <Pill
-                      label={`${reviewGoals.length} review${reviewGoals.length === 1 ? "" : "s"} waiting`}
-                      tone="accent"
-                    />
-                  ) : null}
-                  <Pill label={`${activeGoals.length} active`} tone="quiet" />
-                </View>
-                <AppText variant="title">Scan the active set.</AppText>
-              </View>
-              <View className="flex-row gap-2">
-                <SummaryMetric label="Milestones" value={String(milestones.length)} />
-                <SummaryMetric label="Tasks" value={String(tasks.length)} />
-                <SummaryMetric
-                  label="Inactive"
-                  value={String(pausedGoals.length + archivedGoals.length)}
-                />
-              </View>
-            </Surface>
-
-            <Surface className="gap-4">
-              <View className="flex-row items-end justify-between gap-3">
-                <View className="gap-1">
-                  <AppText tone="tertiary" variant="micro" style={{ textTransform: "uppercase" }}>
-                    Active goals
-                  </AppText>
-                  <AppText variant="title">In motion</AppText>
-                </View>
+            <Surface tone="hero" className="gap-4">
+              <View className="flex-row flex-wrap gap-2">
+                <Pill label={`${activeGoals.length} active`} tone="accent" />
                 {reviewGoals.length > 0 ? (
-                  <Button
-                    tone="secondary"
-                    onPress={() => navigation.getParent()?.navigate("Plan" as never)}
-                  >
-                    Review changes
-                  </Button>
+                  <Pill label={`${reviewGoals.length} review`} tone="quiet" />
                 ) : null}
               </View>
-
-              <View className="gap-3">
-                {activeGoals.map((goal) => {
-                  const reviewDraft = getGoalReviewDraft(goal);
-
-                  return (
-                    <DrillInRow
-                      key={goal.id}
-                      title={goal.title}
-                      subtitle={goal.summary ?? "Open milestones, progress, and edits."}
-                      detail={
-                        goal.targetDate ? `Target ${formatShortDate(goal.targetDate)}` : goal.horizon
-                      }
-                      badge={
-                        reviewDraft ? <Pill label="Needs review" tone="accent" /> : undefined
-                      }
-                      leading={
-                        <Ionicons
-                          color={reviewDraft ? "#9F6B00" : "#6F6558"}
-                          name={reviewDraft ? "git-compare-outline" : "flag-outline"}
-                          size={18}
-                        />
-                      }
-                      onPress={() => navigation.navigate("GoalDetail", { goalId: goal.id })}
-                    />
-                  );
-                })}
+              <View className="gap-2">
+                <AppText variant="title">Keep the set small.</AppText>
+                <AppText tone="secondary" variant="caption">
+                  {totalMilestones} milestones across {totalTasks} tasks.
+                </AppText>
               </View>
             </Surface>
 
-            {pausedGoals.length > 0 || archivedGoals.length > 0 ? (
-              <Surface className="gap-3">
-                <AppText variant="section">Inactive goals</AppText>
+            <View className="gap-3">
+              {activeGoals.map((goal) => {
+                const goalSummary = summarizeGoalProgress({
+                  goal,
+                  milestones: milestones.filter((item) => item.goalId === goal.id),
+                  tasks: tasks.filter((item) => item.goalId === goal.id),
+                  events: feed,
+                });
+                const completionRatio =
+                  goalSummary.milestoneCount > 0
+                    ? goalSummary.completedMilestones / goalSummary.milestoneCount
+                    : goalSummary.taskCount > 0
+                      ? goalSummary.completedTasks / goalSummary.taskCount
+                      : 0;
+                const reviewDraft = getGoalReviewDraft(goal);
+
+                return (
+                  <Surface key={goal.id} className="gap-4">
+                    <View className="flex-row items-start justify-between gap-3">
+                      <View className="flex-1 gap-2">
+                        <View className="flex-row flex-wrap items-center gap-2">
+                          <AppText variant="section">{goal.title}</AppText>
+                          {reviewDraft ? <Pill label="Review" tone="accent" /> : null}
+                        </View>
+                        <AppText tone="secondary" variant="caption">
+                          {goal.targetDate
+                            ? `Target ${formatShortDate(goal.targetDate)}`
+                            : goal.horizon}
+                        </AppText>
+                      </View>
+                      <Button
+                        tone="inline"
+                        onPress={() => navigation.navigate("GoalDetail", { goalId: goal.id })}
+                      >
+                        Open
+                      </Button>
+                    </View>
+
+                    <ProgressBar progress={completionRatio} />
+
+                    <View className="flex-row items-center justify-between">
+                      <AppText tone="secondary" variant="caption">
+                        {goalSummary.completedMilestones}/{goalSummary.milestoneCount || goalSummary.taskCount} complete
+                      </AppText>
+                      <AppText tone="secondary" variant="caption">
+                        {Math.round(completionRatio * 100)}%
+                      </AppText>
+                    </View>
+
+                    <View className="gap-3">
+                      <GoalCard
+                        title="Milestones"
+                        subtitle={`${goalSummary.activeTasks} active tasks`}
+                        detail={`${goalSummary.completedMilestones}/${goalSummary.milestoneCount || 0}`}
+                        iconName="git-branch-outline"
+                        highlighted={!!reviewDraft}
+                        onPress={() => navigation.navigate("GoalMilestones", { goalId: goal.id })}
+                      />
+                      <GoalCard
+                        title="Progress"
+                        subtitle={goalSummary.reflection}
+                        detail={`${goalSummary.completedTasks} done`}
+                        iconName="stats-chart-outline"
+                        onPress={() => navigation.navigate("GoalProgress", { goalId: goal.id })}
+                      />
+                    </View>
+                  </Surface>
+                );
+              })}
+            </View>
+
+            {inactiveGoals.length > 0 ? (
+              <Surface className="gap-4">
+                <View className="gap-1">
+                  <AppText tone="tertiary" variant="micro" style={{ textTransform: "uppercase" }}>
+                    Inactive
+                  </AppText>
+                  <AppText variant="title">On hold</AppText>
+                </View>
                 <View className="gap-3">
-                  {[...pausedGoals, ...archivedGoals].slice(0, 4).map((goal) => (
+                  {inactiveGoals.slice(0, 4).map((goal) => (
                     <DrillInRow
                       key={goal.id}
                       title={goal.title}
-                      subtitle={goal.summary ?? "Out of rotation"}
+                      subtitle={goal.summary ?? "Out of the active rotation"}
                       detail={goal.status}
                       leading={
                         <Ionicons
-                          color="#6F6558"
+                          color="#8B7F71"
                           name={goal.status === GoalStatus.Paused ? "pause-outline" : "archive-outline"}
                           size={18}
                         />

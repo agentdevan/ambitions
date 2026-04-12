@@ -31,8 +31,8 @@ export function Button({
       shadowColor: theme.colors.accent.primary,
     },
     secondary: {
-      backgroundColor: theme.colors.background.elevated,
-      borderColor: theme.colors.border.strong,
+      backgroundColor: theme.colors.background.elevatedSecondary,
+      borderColor: theme.colors.border.subtle,
       textTone: "primary" as const,
       shadowColor: theme.colors.text.primary,
     },
@@ -83,15 +83,19 @@ export function Button({
           shadowOpacity:
             resolvedTone === "primary"
               ? pressed
-                ? 0.14
-                : 0.2
+                ? 0.2
+                : theme.mode === "dark"
+                  ? 0.34
+                  : 0.18
               : resolvedTone === "secondary" || resolvedTone === "tertiary"
                 ? pressed
                   ? 0.03
-                  : 0.06
+                  : theme.mode === "dark"
+                    ? 0.08
+                    : 0.05
                 : 0,
-          shadowRadius: resolvedTone === "primary" ? 14 : 8,
-          shadowOffset: { width: 0, height: resolvedTone === "primary" ? 8 : 4 },
+          shadowRadius: resolvedTone === "primary" ? 18 : 8,
+          shadowOffset: { width: 0, height: resolvedTone === "primary" ? 10 : 4 },
           elevation: resolvedTone === "primary" ? 3 : resolvedTone === "inline" ? 0 : 1,
         },
         style,
@@ -112,7 +116,7 @@ export function Button({
           tone={palette.textTone}
           variant={sizing.textVariant}
           numberOfLines={1}
-          style={{ fontWeight: resolvedTone === "inline" ? "600" : "700" }}
+          style={{ fontWeight: resolvedTone === "inline" ? "600" : "700", letterSpacing: -0.15 }}
         >
           {children}
         </AppText>

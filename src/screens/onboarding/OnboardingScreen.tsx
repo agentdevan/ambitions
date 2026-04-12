@@ -12,8 +12,7 @@ import { AppText } from "../../components/ui/Text";
 import { useResolvedTheme } from "../../design/theme/useResolvedTheme";
 import { DomainKey } from "../../domain/models";
 import { inferGoalDraft } from "../../product/goalIntake";
-import { ThemePresetKey } from "../../product/types";
-import { themePresets } from "../../product/theme";
+import { accentThemeOptions, appearanceModeOptions } from "../../product/theme";
 import { useAppStore } from "../../state/useAppStore";
 import { formatTimeLabel, formatTimeRangeLabel, normalizeTimeString } from "../../utils/date";
 
@@ -86,9 +85,8 @@ export function OnboardingScreen() {
   );
   const [taskSizing, setTaskSizing] = useState(current?.taskSizing ?? "mixed");
   const [dayIntensity, setDayIntensity] = useState(current?.dayIntensity ?? "balanced");
-  const [themePreset, setThemePreset] = useState<ThemePresetKey>(
-    current?.themePreset ?? "neutral",
-  );
+  const [appearanceMode, setAppearanceMode] = useState(current?.appearanceMode ?? "system");
+  const [accentTheme, setAccentTheme] = useState(current?.accentTheme ?? "gold");
   const [focusDomains, setFocusDomains] = useState<DomainKey[]>(
     current?.focusDomains ?? [DomainKey.Career, DomainKey.Personal],
   );
@@ -134,7 +132,8 @@ export function OnboardingScreen() {
           focusDomains,
           taskSizing,
           dayIntensity,
-          themePreset,
+          appearanceMode,
+          accentTheme,
           schedule: {
             sleepStart,
             sleepEnd,
@@ -332,19 +331,25 @@ export function OnboardingScreen() {
               onChange={setDayIntensity}
             />
             <View className="gap-3">
-              <AppText variant="caption" tone="secondary">
-                Theme
-              </AppText>
+              <ChoiceRow
+                label="Mode"
+                options={appearanceModeOptions.map((option) => ({
+                  key: option.id,
+                  label: option.label,
+                }))}
+                value={appearanceMode}
+                onChange={setAppearanceMode}
+              />
               <View className="flex-row flex-wrap gap-2">
-                {themePresets.map((preset) => {
-                  const selected = preset.id === themePreset;
+                {accentThemeOptions.map((accent) => {
+                  const selected = accent.id === accentTheme;
                   return (
                     <Pressable
-                      key={preset.id}
+                      key={accent.id}
                       className="rounded-[24px]"
-                      onPress={() => setThemePreset(preset.id)}
+                      onPress={() => setAccentTheme(accent.id)}
                       style={({ pressed }) => ({
-                        minWidth: 112,
+                        minWidth: 132,
                         opacity: pressed ? 0.84 : 1,
                       })}
                     >
@@ -352,19 +357,31 @@ export function OnboardingScreen() {
                         tone="default"
                         className="gap-2"
                         style={{
-                          minWidth: 112,
-                          backgroundColor: preset.colors.background.elevated,
-                          borderColor: selected
-                            ? preset.colors.text.primary
-                            : preset.colors.border.subtle,
+                          minWidth: 132,
+                          borderColor: selected ? theme.colors.border.accent : theme.colors.border.subtle,
                         }}
                       >
                         <View className="flex-row flex-wrap gap-2">
                           {selected ? <Pill label="Selected" tone="accent" /> : null}
-                          <Pill label={preset.label} />
+                          <Pill label={accent.label} />
+                        </View>
+                        <View className="flex-row gap-2">
+                          {accent.preview.map((color) => (
+                            <View
+                              key={color}
+                              style={{
+                                width: 18,
+                                height: 18,
+                                borderRadius: 999,
+                                backgroundColor: color,
+                                borderWidth: 1,
+                                borderColor: "rgba(0,0,0,0.06)",
+                              }}
+                            />
+                          ))}
                         </View>
                         <AppText tone="secondary" variant="caption">
-                          {preset.description}
+                          {accent.description}
                         </AppText>
                       </Surface>
                     </Pressable>
@@ -380,7 +397,7 @@ export function OnboardingScreen() {
             Generate the first plan
           </Button>
           <AppText tone="tertiary" variant="caption" style={{ textAlign: "center" }}>
-            Defaults can be edited later in Insights.
+            Defaults can be edited later in Profile.
           </AppText>
           <AppText tone="tertiary" variant="caption" style={{ textAlign: "center" }}>
             Accounts stay optional at first. Add one later when backup or cross-device continuity

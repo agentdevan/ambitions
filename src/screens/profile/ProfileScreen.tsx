@@ -1,5 +1,6 @@
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
 import { Ionicons } from "@expo/vector-icons";
+import type { ReactNode } from "react";
 import { View } from "react-native";
 
 import { DrillInRow } from "../../components/navigation/DrillInRow";
@@ -8,12 +9,24 @@ import { Pill } from "../../components/ui/Pill";
 import { Screen } from "../../components/ui/Screen";
 import { Surface } from "../../components/ui/Surface";
 import { AppText } from "../../components/ui/Text";
+import { useResolvedTheme } from "../../design/theme/useResolvedTheme";
 import { buildActivityFeed, summarizeInsights } from "../../services/history/selectors";
 import { useAppStore } from "../../state/useAppStore";
 import { formatTimeRangeLabel } from "../../utils/date";
 import { ProfileStackParamList } from "../../navigation/types";
 
 type Props = NativeStackScreenProps<ProfileStackParamList, "ProfileHome">;
+
+function SettingGroup({ title, children }: { title: string; children: ReactNode }) {
+  return (
+    <View className="gap-3">
+      <AppText tone="tertiary" variant="micro" style={{ textTransform: "uppercase" }}>
+        {title}
+      </AppText>
+      <View className="gap-3">{children}</View>
+    </View>
+  );
+}
 
 export function ProfileScreen({ navigation }: Props) {
   const productPreferences = useAppStore((state) => state.productPreferences);
@@ -25,15 +38,14 @@ export function ProfileScreen({ navigation }: Props) {
   const milestones = useAppStore((state) => state.milestones);
   const tasks = useAppStore((state) => state.allTasks);
   const activityEvents = useAppStore((state) => state.activityEvents);
+  const theme = useResolvedTheme();
 
   if (!productPreferences) {
     return (
       <Screen>
         <Surface>
           <AppText variant="title">Profile is loading</AppText>
-          <AppText tone="secondary">
-            Account and preference detail are not ready yet.
-          </AppText>
+          <AppText tone="secondary">Settings will appear in a moment.</AppText>
         </Surface>
       </Screen>
     );
@@ -46,85 +58,102 @@ export function ProfileScreen({ navigation }: Props) {
     milestones,
     events: buildActivityFeed(activityEvents, tasks, milestones),
   });
+  const appearanceDetail =
+    productPreferences.appearanceMode === "system"
+      ? `System · ${theme.accentLabel}`
+      : `${productPreferences.appearanceMode} · ${theme.accentLabel}`;
 
   return (
     <Screen>
-      <View className="gap-6">
-        <PageHeader
-          eyebrow="Profile"
-          title="Profile"
-          description="Controls and defaults."
-        />
+      <View className="gap-5">
+        <PageHeader eyebrow="Profile" title="Profile" description="Controls and defaults." />
 
-        <Surface tone="accent" className="gap-4">
-          <View className="gap-1.5">
-            <View className="flex-row flex-wrap items-center gap-2">
-              <Pill label={account ? "Account connected" : "Local only"} tone="accent" />
-              <Pill label={syncState?.mode.replaceAll("_", " ") ?? "Not synced"} tone="quiet" />
+        <Surface tone="hero" className="gap-4">
+          <View className="flex-row items-center gap-4">
+            <View
+              className="items-center justify-center rounded-full"
+              style={{
+                width: 54,
+                height: 54,
+                backgroundColor: theme.colors.background.elevated,
+                borderWidth: 1,
+                borderColor: theme.colors.border.subtle,
+              }}
+            >
+              <Ionicons color={theme.colors.text.primary} name="person-outline" size={24} />
             </View>
-            <AppText variant="title">{account?.displayName ?? account?.email ?? "Local profile"}</AppText>
-            <AppText tone="secondary">{account ? "Sync ready." : "Local setup."}</AppText>
+            <View className="flex-1 gap-1">
+              <AppText variant="section">
+                {account?.displayName ?? account?.email ?? "Local profile"}
+              </AppText>
+              <AppText tone="secondary" variant="caption">
+                {account ? "Sync ready." : "Local only."}
+              </AppText>
+            </View>
+          </View>
+
+          <View className="flex-row flex-wrap gap-2">
+            <Pill label={syncState?.mode.replaceAll("_", " ") ?? "Not synced"} tone="quiet" />
+            <Pill label={`${reflectionSummary.completedThisWeek} done this week`} tone="accent" />
           </View>
         </Surface>
 
-        <View className="gap-3">
-          <DrillInRow
-            title="Recent movement"
-            subtitle="History and momentum"
-            detail={`${reflectionSummary.completedThisWeek} completed`}
-            leading={<Ionicons color="#6F6558" name="analytics-outline" size={18} />}
-            onPress={() => navigation.navigate("ProfileHistory")}
-          />
+        <SettingGroup title="Settings">
           <DrillInRow
             title="Appearance"
-            subtitle="Theme"
-            detail={productPreferences.themePreset}
-            leading={<Ionicons color="#6F6558" name="color-palette-outline" size={18} />}
+            subtitle="Mode and accent"
+            detail={appearanceDetail}
+            leading={<Ionicons color={theme.colors.text.secondary} name="color-palette-outline" size={18} />}
             onPress={() => navigation.navigate("ProfileAppearance")}
-          />
-          <DrillInRow
-            title="Schedule defaults"
-            subtitle={formatTimeRangeLabel(
-              productPreferences.schedule.sleepStart,
-              productPreferences.schedule.sleepEnd,
-            )}
-            detail={`${productPreferences.schedule.commuteMinutes} min commute`}
-            leading={<Ionicons color="#6F6558" name="time-outline" size={18} />}
-            onPress={() => navigation.navigate("ProfileScheduleDefaults")}
-          />
-          <DrillInRow
-            title="Integrations"
-            subtitle={
-              calendarConnectionState?.permissionState === "granted"
-                ? "Calendar ready"
-                : "Calendar off"
-            }
-            detail={calendarConnectionState?.permissionState ?? "not ready"}
-            leading={<Ionicons color="#6F6558" name="link-outline" size={18} />}
-            onPress={() => navigation.navigate("ProfileIntegrations")}
           />
           <DrillInRow
             title="Notifications"
             subtitle="Reminders"
             detail={`${enabledNotifications} enabled`}
-            leading={<Ionicons color="#6F6558" name="notifications-outline" size={18} />}
+            leading={<Ionicons color={theme.colors.text.secondary} name="notifications-outline" size={18} />}
             onPress={() => navigation.navigate("ProfileNotifications")}
           />
           <DrillInRow
-            title="Planning preferences"
+            title="Integrations"
+            subtitle={
+              calendarConnectionState?.permissionState === "granted" ? "Calendar ready" : "Calendar off"
+            }
+            detail={calendarConnectionState?.permissionState ?? "not ready"}
+            leading={<Ionicons color={theme.colors.text.secondary} name="link-outline" size={18} />}
+            onPress={() => navigation.navigate("ProfileIntegrations")}
+          />
+          <DrillInRow
+            title="Planning"
             subtitle="Task size and intensity"
             detail={`${productPreferences.taskSizing} / ${productPreferences.dayIntensity}`}
-            leading={<Ionicons color="#6F6558" name="options-outline" size={18} />}
+            leading={<Ionicons color={theme.colors.text.secondary} name="options-outline" size={18} />}
             onPress={() => navigation.navigate("ProfilePlanningPreferences")}
+          />
+          <DrillInRow
+            title="Schedule"
+            subtitle={formatTimeRangeLabel(
+              productPreferences.schedule.sleepStart,
+              productPreferences.schedule.sleepEnd,
+            )}
+            detail={`${productPreferences.schedule.commuteMinutes} min commute`}
+            leading={<Ionicons color={theme.colors.text.secondary} name="time-outline" size={18} />}
+            onPress={() => navigation.navigate("ProfileScheduleDefaults")}
           />
           <DrillInRow
             title="Account"
             subtitle="Sign-in and sync"
             detail={account ? "Connected" : "Local only"}
-            leading={<Ionicons color="#6F6558" name="person-circle-outline" size={18} />}
+            leading={<Ionicons color={theme.colors.text.secondary} name="person-circle-outline" size={18} />}
             onPress={() => navigation.navigate("ProfileAccount")}
           />
-        </View>
+        </SettingGroup>
+
+        <Surface className="gap-3">
+          <AppText variant="section">You&apos;re on track</AppText>
+          <AppText tone="secondary" variant="caption">
+            Keep going. Small actions, big results.
+          </AppText>
+        </Surface>
       </View>
     </Screen>
   );

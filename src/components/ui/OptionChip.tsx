@@ -35,16 +35,16 @@ export function OptionChip({
           justifyContent: "center",
           backgroundColor: selected
             ? theme.colors.accent.primary
-            : theme.colors.background.sunken,
+            : theme.colors.background.elevatedSecondary,
           borderColor: selected
             ? theme.colors.accent.primary
-            : theme.colors.border.strong,
+            : theme.colors.border.subtle,
           opacity: props.disabled ? 0.45 : pressed ? 0.94 : 1,
           transform: [{ scale: pressed ? 0.985 : 1 }],
-          shadowColor: theme.colors.text.primary,
-          shadowOpacity: selected ? 0.12 : 0.03,
-          shadowRadius: selected ? 12 : 6,
-          shadowOffset: { width: 0, height: selected ? 6 : 3 },
+          shadowColor: theme.colors.shadow.color,
+          shadowOpacity: selected ? (theme.mode === "dark" ? 0.22 : 0.12) : 0.03,
+          shadowRadius: selected ? 14 : 6,
+          shadowOffset: { width: 0, height: selected ? 8 : 3 },
           elevation: selected ? 2 : 1,
         },
         style,
@@ -53,7 +53,7 @@ export function OptionChip({
       <AppText
         tone={selected ? "inverse" : "primary"}
         variant={compact ? "micro" : "caption"}
-        style={{ textAlign: "center", fontWeight: "600" }}
+        style={{ textAlign: "center", fontWeight: selected ? "700" : "600" }}
       >
         {children}
       </AppText>

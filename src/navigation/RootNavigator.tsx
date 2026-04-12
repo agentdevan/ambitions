@@ -82,7 +82,7 @@ function useStackOptions() {
     headerTitleStyle: {
       fontSize: 17,
       fontWeight: "600" as const,
-      letterSpacing: -0.2,
+      letterSpacing: -0.3,
     },
     contentStyle: {
       backgroundColor: theme.colors.background.canvas,
@@ -294,34 +294,34 @@ export function RootNavigator() {
     <Tab.Navigator
       screenOptions={({ route }) => ({
         headerShown: false,
-        tabBarActiveTintColor: theme.colors.text.primary,
-        tabBarInactiveTintColor: theme.colors.text.tertiary,
-        tabBarActiveBackgroundColor: theme.colors.background.sunken,
+        tabBarActiveTintColor: theme.colors.tabBar.active,
+        tabBarInactiveTintColor: theme.colors.tabBar.inactive,
+        tabBarActiveBackgroundColor: theme.colors.tabBar.pill,
         tabBarHideOnKeyboard: true,
         tabBarStyle: {
-          backgroundColor: theme.colors.background.elevated,
-          borderTopColor: theme.colors.border.subtle,
+          backgroundColor: theme.colors.tabBar.background,
+          borderTopColor: theme.colors.tabBar.border,
           borderTopWidth: 1,
-          height: 86,
+          height: 88,
           paddingTop: 10,
-          paddingBottom: 16,
+          paddingBottom: 18,
         },
         tabBarItemStyle: {
-          marginHorizontal: 6,
-          marginVertical: 6,
-          borderRadius: 20,
+          marginHorizontal: 8,
+          marginVertical: 8,
+          borderRadius: 22,
         },
         tabBarLabelStyle: {
           fontSize: 11,
           fontWeight: "700",
-          letterSpacing: 0.15,
+          letterSpacing: -0.05,
           marginTop: 2,
         },
         tabBarIcon: ({ color, size, focused }) => (
           <Ionicons
             color={color}
             name={focused ? iconMap[route.name] : iconMap[route.name]}
-            size={size}
+            size={focused ? size + 1 : size}
           />
         ),
         sceneStyle: {

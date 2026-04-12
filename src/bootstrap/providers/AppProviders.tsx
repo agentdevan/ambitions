@@ -4,9 +4,9 @@ import { GestureHandlerRootView } from "react-native-gesture-handler";
 import { SafeAreaProvider } from "react-native-safe-area-context";
 import { StatusBar } from "expo-status-bar";
 import * as SystemUI from "expo-system-ui";
-import { View } from "react-native";
+import { useColorScheme, View } from "react-native";
 
-import { resolveThemePreset } from "../../product/theme";
+import { resolveTheme } from "../../product/theme";
 import { useAppStore } from "../../state/useAppStore";
 import { Button } from "../../components/ui/Button";
 import { AppText } from "../../components/ui/Text";
@@ -14,14 +14,16 @@ import { AppText } from "../../components/ui/Text";
 export function AppProviders({ children }: PropsWithChildren) {
   const bootStatus = useAppStore((state) => state.bootStatus);
   const lastError = useAppStore((state) => state.lastError);
-  const themePreset = useAppStore((state) => state.productPreferences?.themePreset);
-  const theme = resolveThemePreset(themePreset);
+  const appearanceMode = useAppStore((state) => state.productPreferences?.appearanceMode);
+  const accentTheme = useAppStore((state) => state.productPreferences?.accentTheme);
+  const systemScheme = useColorScheme();
+  const theme = resolveTheme({ appearanceMode, accentTheme, systemScheme });
   const navigationTheme = {
     ...DefaultTheme,
     colors: {
       ...DefaultTheme.colors,
       background: theme.colors.background.canvas,
-      card: theme.colors.background.canvas,
+      card: theme.colors.background.elevated,
       text: theme.colors.text.primary,
       border: theme.colors.border.subtle,
       primary: theme.colors.accent.primary,
@@ -42,7 +44,7 @@ export function AppProviders({ children }: PropsWithChildren) {
     <GestureHandlerRootView style={{ flex: 1 }}>
       <SafeAreaProvider>
         <NavigationContainer theme={navigationTheme}>
-          <StatusBar style="dark" />
+          <StatusBar style={theme.mode === "dark" ? "light" : "dark"} />
           {bootStatus === "idle" || bootStatus === "loading" ? (
             <View
               style={{

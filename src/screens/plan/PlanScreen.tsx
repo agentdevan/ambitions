@@ -1,5 +1,6 @@
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
 import { Ionicons } from "@expo/vector-icons";
+import { useMemo, useState } from "react";
 import { View } from "react-native";
 
 import { DrillInRow } from "../../components/navigation/DrillInRow";
@@ -7,25 +8,42 @@ import { PageHeader } from "../../components/navigation/PageHeader";
 import { Button } from "../../components/ui/Button";
 import { EmptyStateCard } from "../../components/ui/EmptyStateCard";
 import { Pill } from "../../components/ui/Pill";
+import { ProgressBar } from "../../components/ui/ProgressBar";
 import { Screen } from "../../components/ui/Screen";
+import { SegmentedControl } from "../../components/ui/SegmentedControl";
 import { Surface } from "../../components/ui/Surface";
 import { AppText } from "../../components/ui/Text";
+import { useResolvedTheme } from "../../design/theme/useResolvedTheme";
 import { GoalStatus } from "../../domain/models";
+import { PlanStackParamList } from "../../navigation/types";
 import { getGoalReviewDraft } from "../../services/goals/metadata";
 import { useAppStore } from "../../state/useAppStore";
-import { formatShortDate } from "../../utils/date";
-import { PlanStackParamList } from "../../navigation/types";
+import { formatShortDate, formatTimeRangeLabel } from "../../utils/date";
 
 type Props = NativeStackScreenProps<PlanStackParamList, "PlanHome">;
+type PlanView = "week" | "day";
 
-function SummaryMetric({ label, value }: { label: string; value: string }) {
+function SessionRow({
+  title,
+  time,
+  detail,
+  accent,
+  onPress,
+}: {
+  title: string;
+  time: string;
+  detail: string;
+  accent: string;
+  onPress: () => void;
+}) {
   return (
-    <View className="flex-1 gap-1 rounded-[18px] px-4 py-4">
-      <AppText tone="tertiary" variant="micro" style={{ textTransform: "uppercase" }}>
-        {label}
-      </AppText>
-      <AppText variant="section">{value}</AppText>
-    </View>
+    <DrillInRow
+      title={title}
+      subtitle={detail}
+      detail={time}
+      leading={<View style={{ width: 8, height: 32, borderRadius: 999, backgroundColor: accent }} />}
+      onPress={onPress}
+    />
   );
 }
 
@@ -34,82 +52,114 @@ export function PlanScreen({ navigation }: Props) {
   const timeBlocks = useAppStore((state) => state.timeBlocksForSelectedDate);
   const goals = useAppStore((state) => state.goals);
   const milestones = useAppStore((state) => state.milestones);
+  const [planView, setPlanView] = useState<PlanView>("week");
+  const theme = useResolvedTheme();
 
   const reviewGoals = goals.filter((goal) => getGoalReviewDraft(goal) !== null);
   const activeGoals = goals.filter((goal) => goal.status === GoalStatus.Active);
+  const scheduledMinutes = timeBlocks.reduce((sum, block) => {
+    const start = Date.parse(block.startsAtDateTime);
+    const end = Date.parse(block.endsAtDateTime);
+    return sum + Math.max(0, Math.round((end - start) / 60000));
+  }, 0);
+  const completionRatio = activeGoals.length > 0 ? Math.min(1, milestones.length / (activeGoals.length * 4)) : 0;
+  const visibleBlocks = useMemo(() => timeBlocks.slice(0, planView === "week" ? 4 : 6), [planView, timeBlocks]);
 
   if (!dailyPlan && reviewGoals.length === 0) {
     return (
       <Screen>
-        <EmptyStateCard
-          title="No generated plan yet"
-          body="Finish onboarding, add a goal, or review a pending recommendation first."
-        />
+        <EmptyStateCard title="No plan yet" body="Add a goal, then build the week." />
       </Screen>
     );
   }
 
   return (
     <Screen>
-      <View className="gap-6">
-        <PageHeader
-          eyebrow="Plan"
-          title="Plan"
-          description="Review, decide, move."
-        />
+      <View className="gap-5">
+        <PageHeader eyebrow="Plan" title="Plan" description="Review, decide, move." />
 
-        {reviewGoals.length > 0 ? (
-          <Surface tone="accent" className="gap-4">
-            <View className="gap-1.5">
-              <View className="flex-row flex-wrap items-center gap-2">
-                <Pill
-                  label={`${reviewGoals.length} review${reviewGoals.length === 1 ? "" : "s"} waiting`}
-                  tone="accent"
-                />
+        <Surface tone="hero" className="gap-4">
+          <View className="flex-row items-start justify-between gap-3">
+            <View className="flex-1 gap-2">
+              <View className="flex-row flex-wrap gap-2">
+                <Pill label={formatShortDate(dailyPlan?.date ?? new Date().toISOString())} tone="accent" />
+                {reviewGoals.length > 0 ? <Pill label={`${reviewGoals.length} review`} tone="quiet" /> : null}
               </View>
-              <AppText variant="title">Changes need a call.</AppText>
+              <AppText variant="title">{dailyPlan?.focus ?? "Current plan"}</AppText>
+              <AppText tone="secondary" variant="caption">
+                {dailyPlan?.planningNotes ?? "Keep the week intentional."}
+              </AppText>
             </View>
-            <Button onPress={() => navigation.navigate("PlanReview", {})}>Review changes</Button>
-          </Surface>
-        ) : null}
+            {reviewGoals.length > 0 ? (
+              <Button onPress={() => navigation.navigate("PlanReview", {})}>Review</Button>
+            ) : null}
+          </View>
 
-        {dailyPlan ? (
-          <>
-            <Surface className="gap-4">
-              <View className="gap-1.5">
-                <AppText tone="tertiary" variant="micro" style={{ textTransform: "uppercase" }}>
-                  Active plan
-                </AppText>
-                <AppText variant="title">{dailyPlan.focus}</AppText>
-                {dailyPlan.planningNotes ? (
-                  <AppText tone="secondary">{dailyPlan.planningNotes}</AppText>
-                ) : null}
-              </View>
-              <View className="flex-row gap-2">
-                <SummaryMetric label="Date" value={formatShortDate(dailyPlan.date)} />
-                <SummaryMetric label="Sessions" value={String(timeBlocks.length)} />
-                <SummaryMetric label="Goals" value={String(activeGoals.length)} />
-              </View>
-            </Surface>
+          <SegmentedControl
+            value={planView}
+            options={[
+              { value: "week", label: "Week" },
+              { value: "day", label: "Day" },
+            ]}
+            onChange={setPlanView}
+          />
 
-            <View className="gap-3">
-              <DrillInRow
-                title="Day shape"
-                subtitle="Sessions and timing"
-                detail={`${timeBlocks.length} sessions`}
-                leading={<Ionicons color="#6F6558" name="calendar-outline" size={18} />}
+          <View className="gap-2">
+            <View className="flex-row items-center justify-between">
+              <AppText tone="secondary" variant="caption">
+                This week&apos;s focus
+              </AppText>
+              <AppText tone="secondary" variant="caption">
+                {scheduledMinutes} min scheduled
+              </AppText>
+            </View>
+            <ProgressBar progress={completionRatio} muted />
+          </View>
+        </Surface>
+
+        <Surface className="gap-4">
+          <View className="flex-row items-end justify-between gap-3">
+            <View className="gap-1">
+              <AppText tone="tertiary" variant="micro" style={{ textTransform: "uppercase" }}>
+                Sessions
+              </AppText>
+              <AppText variant="title">{planView === "week" ? "Upcoming" : "Day shape"}</AppText>
+            </View>
+            <Button tone="inline" onPress={() => navigation.navigate("PlanDetail")}>
+              Open
+            </Button>
+          </View>
+
+          <View className="gap-3">
+            {visibleBlocks.map((block, index) => (
+              <SessionRow
+                key={block.id}
+                title={block.title}
+                time={formatTimeRangeLabel(block.startsAt, block.endsAt, { compact: true })}
+                detail={block.note ?? (block.energyLabel ? `${block.energyLabel} energy` : "Scheduled")}
+                accent={index === 0 ? theme.colors.accent.primary : theme.colors.accent.secondary}
                 onPress={() => navigation.navigate("PlanDetail")}
               />
-              <DrillInRow
-                title="Structure"
-                subtitle="Goals, milestones, tasks"
-                detail={`${milestones.length} milestones`}
-                leading={<Ionicons color="#6F6558" name="layers-outline" size={18} />}
-                onPress={() => navigation.navigate("PlanStructure", {})}
-              />
-            </View>
-          </>
-        ) : null}
+            ))}
+          </View>
+        </Surface>
+
+        <View className="gap-3">
+          <DrillInRow
+            title="This week"
+            subtitle={`${activeGoals.length} active goals`}
+            detail={`${milestones.length} milestones`}
+            leading={<Ionicons color={theme.colors.text.secondary} name="calendar-outline" size={18} />}
+            onPress={() => navigation.navigate("PlanDetail")}
+          />
+          <DrillInRow
+            title="Structure"
+            subtitle="Goals, milestones, tasks"
+            detail={`${timeBlocks.length} sessions`}
+            leading={<Ionicons color={theme.colors.text.secondary} name="layers-outline" size={18} />}
+            onPress={() => navigation.navigate("PlanStructure", {})}
+          />
+        </View>
       </View>
     </Screen>
   );

@@ -37,15 +37,19 @@ export function DrillInRow({
     >
       {({ pressed }) => (
         <View
-          className="flex-row items-center gap-3 rounded-[22px] px-4 py-4"
+          className="flex-row items-center gap-3 rounded-[24px] px-4 py-4"
           style={{
             backgroundColor: pressed
-              ? theme.colors.background.sunken
+              ? theme.colors.background.elevatedSecondary
               : theme.colors.background.elevated,
             borderWidth: 1,
             borderColor: pressed
-              ? `${theme.colors.accent.primary}33`
+              ? theme.colors.border.accent
               : theme.colors.border.subtle,
+            shadowColor: theme.colors.shadow.color,
+            shadowOpacity: theme.mode === "dark" ? 0.16 : 0.04,
+            shadowRadius: 12,
+            shadowOffset: { width: 0, height: 6 },
           }}
         >
           {leading ? (
@@ -53,8 +57,8 @@ export function DrillInRow({
               className="items-center justify-center rounded-[16px] px-3 py-3"
               style={{
                 backgroundColor: pressed
-                  ? `${theme.colors.accent.primary}18`
-                  : theme.colors.background.sunken,
+                  ? theme.colors.background.accentWashStrong
+                  : theme.colors.background.elevatedSecondary,
               }}
             >
               {leading}

@@ -28,7 +28,9 @@ export function EmptyStateCard({
           </AppText>
         ) : null}
         <AppText variant="title">{title}</AppText>
-        <AppText tone="secondary">{body}</AppText>
+        <AppText tone="secondary" style={{ maxWidth: "94%" }}>
+          {body}
+        </AppText>
         {action}
       </View>
     </Surface>

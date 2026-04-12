@@ -7,12 +7,13 @@ import { GroupedActivityTimeline, MomentumBars } from "../../components/history/
 import { Button } from "../../components/ui/Button";
 import { EmptyStateCard } from "../../components/ui/EmptyStateCard";
 import { OptionChip } from "../../components/ui/OptionChip";
+import { ProgressBar } from "../../components/ui/ProgressBar";
 import { Screen } from "../../components/ui/Screen";
 import { Surface } from "../../components/ui/Surface";
 import { AppText } from "../../components/ui/Text";
 import { TextField } from "../../components/ui/TextField";
 import { useResolvedTheme } from "../../design/theme/useResolvedTheme";
-import { themePresets } from "../../product/theme";
+import { accentThemeOptions, appearanceModeOptions } from "../../product/theme";
 import { useAppStore } from "../../state/useAppStore";
 import { buildActivityFeed, groupActivityByDate, summarizeInsights } from "../../services/history/selectors";
 import {
@@ -49,6 +50,13 @@ export function ProfileHistoryScreen() {
         <Surface tone="accent" className="gap-4">
           <AppText variant="title">Recent movement</AppText>
           <AppText tone="secondary">{summary.momentumCopy}</AppText>
+          <ProgressBar
+            progress={
+              summary.completedThisWeek + summary.reshapedThisWeek > 0
+                ? summary.completedThisWeek / (summary.completedThisWeek + summary.reshapedThisWeek)
+                : 0
+            }
+          />
           <MomentumBars points={summary.momentum} />
           <MetaLine
             items={[
@@ -72,6 +80,7 @@ export function ProfileHistoryScreen() {
 export function ProfileAppearanceScreen() {
   const productPreferences = useAppStore((state) => state.productPreferences);
   const saveProductPreferences = useAppStore((state) => state.saveProductPreferences);
+  const theme = useResolvedTheme();
   const [busyState, setBusyState] = useState<string | null>(null);
   const [runtimeMessage, setRuntimeMessage] = useState<string | null>(null);
 
@@ -85,14 +94,16 @@ export function ProfileAppearanceScreen() {
 
   const resolvedPreferences = productPreferences;
 
-  async function saveTheme(themePreset: (typeof themePresets)[number]["id"]) {
-    setBusyState(themePreset);
+  async function saveAppearance(next: typeof resolvedPreferences, busyKey: string) {
+    setBusyState(busyKey);
     setRuntimeMessage(null);
 
     try {
-      await saveProductPreferences({ ...resolvedPreferences, themePreset });
+      await saveProductPreferences(next);
     } catch (error) {
-      setRuntimeMessage(error instanceof Error ? error.message : "Theme selection could not be updated.");
+      setRuntimeMessage(
+        error instanceof Error ? error.message : "Appearance could not be updated.",
+      );
     } finally {
       setBusyState(null);
     }
@@ -101,40 +112,85 @@ export function ProfileAppearanceScreen() {
   return (
     <Screen>
       <View className="gap-4">
-        <Surface tone="accent" className="gap-3">
+        <Surface tone="hero" className="gap-3">
           <AppText variant="title">Appearance</AppText>
           <AppText tone="secondary">
-            Pick the visual tone here instead of burying it in Insights.
+            Pick mode and accent here.
           </AppText>
+          <MetaLine items={[`${theme.mode} mode`, theme.accentLabel]} />
         </Surface>
-        {themePresets.map((preset) => (
-          <Pressable
-            key={preset.id}
-            className="rounded-[24px]"
-            onPress={() => void saveTheme(preset.id)}
-            style={({ pressed }) => ({ opacity: pressed ? 0.9 : 1 })}
-          >
-            <Surface
-              className="gap-2"
-              style={{
-                backgroundColor: preset.colors.background.elevated,
-                borderColor:
-                  resolvedPreferences.themePreset === preset.id
-                    ? preset.colors.text.primary
-                    : preset.colors.border.subtle,
-              }}
+        <Surface className="gap-3">
+          <AppText variant="section">Mode</AppText>
+          <View className="flex-row flex-wrap gap-2">
+            {appearanceModeOptions.map((option) => (
+              <OptionChip
+                key={option.id}
+                selected={resolvedPreferences.appearanceMode === option.id}
+                onPress={() =>
+                  void saveAppearance(
+                    { ...resolvedPreferences, appearanceMode: option.id },
+                    `mode:${option.id}`,
+                  )
+                }
+              >
+                {option.label}
+              </OptionChip>
+            ))}
+          </View>
+        </Surface>
+        <View className="gap-3">
+          <AppText tone="tertiary" variant="micro" style={{ textTransform: "uppercase" }}>
+            Accent
+          </AppText>
+          {accentThemeOptions.map((accent) => (
+            <Pressable
+              key={accent.id}
+              className="rounded-[28px]"
+              onPress={() =>
+                void saveAppearance(
+                  { ...resolvedPreferences, accentTheme: accent.id },
+                  `accent:${accent.id}`,
+                )
+              }
+              style={({ pressed }) => ({ opacity: pressed ? 0.92 : 1 })}
             >
-              <AppText variant="section">{preset.label}</AppText>
-              <AppText tone="secondary">{preset.description}</AppText>
-              {resolvedPreferences.themePreset === preset.id ? <MetaLine items={["Selected"]} /> : null}
-              {busyState === preset.id ? (
-                <AppText tone="tertiary" variant="caption">
-                  Saving...
-                </AppText>
-              ) : null}
-            </Surface>
-          </Pressable>
-        ))}
+              <Surface
+                className="gap-3"
+                style={{
+                  borderColor:
+                    resolvedPreferences.accentTheme === accent.id
+                      ? theme.colors.border.accent
+                      : theme.colors.border.subtle,
+                }}
+              >
+                <View className="flex-row items-center justify-between gap-3">
+                  <View className="flex-1 gap-1">
+                    <AppText variant="section">{accent.label}</AppText>
+                    <AppText tone="secondary" variant="caption">
+                      {accent.description}
+                    </AppText>
+                  </View>
+                  <View className="flex-row gap-2">
+                    {accent.preview.map((color) => (
+                      <View
+                        key={color}
+                        style={{
+                          width: 22,
+                          height: 22,
+                          borderRadius: 999,
+                          backgroundColor: color,
+                          borderWidth: 1,
+                          borderColor: "rgba(0,0,0,0.06)",
+                        }}
+                      />
+                    ))}
+                  </View>
+                </View>
+                {resolvedPreferences.accentTheme === accent.id ? <MetaLine items={["Selected"]} /> : null}
+              </Surface>
+            </Pressable>
+          ))}
+        </View>
         {runtimeMessage ? <AppText tone="tertiary" variant="caption">{runtimeMessage}</AppText> : null}
       </View>
     </Screen>
@@ -209,7 +265,7 @@ export function ProfileScheduleDefaultsScreen() {
         <Surface tone="accent" className="gap-3">
           <AppText variant="title">Schedule defaults</AppText>
           <AppText tone="secondary">
-            These defaults shape the plan when live context is missing or incomplete.
+            Used when live context is missing.
           </AppText>
           <MetaLine
             items={[
@@ -280,7 +336,7 @@ export function ProfileIntegrationsScreen() {
         <Surface tone="accent" className="gap-3">
           <AppText variant="title">Integrations</AppText>
           <AppText tone="secondary">
-            Calendar and reminder connections live here, not on Insights.
+            Calendar and reminders.
           </AppText>
         </Surface>
         <IntegrationStatusCard
@@ -345,9 +401,7 @@ export function ProfileNotificationsScreen() {
       <View className="gap-4">
         <Surface tone="accent" className="gap-3">
           <AppText variant="title">Notifications</AppText>
-          <AppText tone="secondary">
-            Manage reminder behavior here.
-          </AppText>
+          <AppText tone="secondary">Manage reminder behavior.</AppText>
           <MetaLine items={[`Permission: ${notificationPermissionStatus}`]} />
         </Surface>
         {notificationPermissionStatus !== "granted" ? (
@@ -424,9 +478,7 @@ export function ProfilePlanningPreferencesScreen() {
       <View className="gap-4">
         <Surface tone="accent" className="gap-3">
           <AppText variant="title">Planning preferences</AppText>
-          <AppText tone="secondary">
-            Tune the planner's bias without turning the main product into a form.
-          </AppText>
+          <AppText tone="secondary">Tune the planner.</AppText>
         </Surface>
         <Surface className="gap-3">
           <AppText variant="section">Task size</AppText>
@@ -518,9 +570,7 @@ export function ProfileAccountScreen() {
       <View className="gap-4">
         <Surface tone="accent" className="gap-3">
           <AppText variant="title">Account</AppText>
-          <AppText tone="secondary">
-            Sign-in, attachment, and sync all live here now.
-          </AppText>
+          <AppText tone="secondary">Sign-in, attachment, and sync.</AppText>
         </Surface>
         <AccountStatusCard
           account={account}

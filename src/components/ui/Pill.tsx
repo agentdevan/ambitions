@@ -12,17 +12,17 @@ export function Pill({ label, tone = "neutral" }: PillProps) {
   const theme = useResolvedTheme();
   const toneMap: Record<
     NonNullable<PillProps["tone"]>,
-    { backgroundColor: string; borderColor: string; textTone: "secondary" | "tertiary" }
+    { backgroundColor: string; borderColor: string; textTone: "secondary" | "tertiary" | "inverse" }
   > = {
     neutral: {
-      backgroundColor: theme.colors.background.elevated,
+      backgroundColor: theme.colors.background.elevatedSecondary,
       borderColor: theme.colors.border.subtle,
       textTone: "secondary",
     },
     accent: {
-      backgroundColor: theme.colors.background.accentWash,
-      borderColor: `${theme.colors.accent.primary}35`,
-      textTone: "secondary",
+      backgroundColor: theme.colors.accent.primary,
+      borderColor: theme.colors.accent.primary,
+      textTone: "inverse",
     },
     quiet: {
       backgroundColor: theme.colors.background.sunken,
@@ -33,7 +33,7 @@ export function Pill({ label, tone = "neutral" }: PillProps) {
 
   return (
     <View
-      className="self-start rounded-full px-2.5 py-1"
+      className="self-start rounded-full px-2.5 py-1.5"
       style={{
         backgroundColor: toneMap[tone].backgroundColor,
         borderWidth: 1,

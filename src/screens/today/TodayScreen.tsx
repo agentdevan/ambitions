@@ -10,6 +10,7 @@ import { PageHeader } from "../../components/navigation/PageHeader";
 import { Button } from "../../components/ui/Button";
 import { EmptyStateCard } from "../../components/ui/EmptyStateCard";
 import { Pill } from "../../components/ui/Pill";
+import { ProgressBar } from "../../components/ui/ProgressBar";
 import { Screen } from "../../components/ui/Screen";
 import { Surface } from "../../components/ui/Surface";
 import { AppText } from "../../components/ui/Text";
@@ -22,7 +23,7 @@ import { formatLongDate, formatTimeLabel } from "../../utils/date";
 
 type Props = NativeStackScreenProps<TodayStackParamList, "TodayHome">;
 
-function StatusTile({
+function MetricTile({
   label,
   value,
   detail,
@@ -31,29 +32,93 @@ function StatusTile({
   value: string;
   detail: string;
 }) {
+  const theme = useResolvedTheme();
+
   return (
-    <View className="min-w-[46%] flex-1 gap-1 rounded-[18px] px-4 py-4">
+    <View
+      className="flex-1 gap-1 rounded-[22px] px-4 py-4"
+      style={{
+        minWidth: "47%",
+        backgroundColor: theme.colors.background.elevated,
+        borderWidth: 1,
+        borderColor: theme.colors.border.subtle,
+      }}
+    >
       <AppText tone="tertiary" variant="micro" style={{ textTransform: "uppercase" }}>
         {label}
       </AppText>
-      <AppText variant="section">{value}</AppText>
-      <AppText tone="secondary" variant="caption">
+      <AppText variant="section" numberOfLines={1}>
+        {value}
+      </AppText>
+      <AppText tone="secondary" variant="caption" numberOfLines={2}>
         {detail}
       </AppText>
     </View>
   );
 }
 
-function OpportunityCard({
+function TodayHero({
+  title,
+  detail,
+  warmth,
+  focus,
+}: {
+  title: string;
+  detail: string;
+  warmth: string;
+  focus: string;
+}) {
+  const theme = useResolvedTheme();
+
+  return (
+    <Surface tone="hero" className="gap-5">
+      <LinearGradient
+        colors={
+          theme.mode === "dark"
+            ? ["rgba(255,255,255,0.05)", "rgba(255,255,255,0)", "rgba(0,0,0,0.08)"]
+            : ["rgba(255,255,255,0.65)", "rgba(255,248,235,0.25)", "rgba(255,255,255,0)"]
+        }
+        end={{ x: 1, y: 1 }}
+        start={{ x: 0, y: 0 }}
+        style={{ position: "absolute", top: 0, right: 0, bottom: 0, left: 0 }}
+      />
+      <View className="gap-3">
+        <Pill label="Today" tone="accent" />
+        <View className="gap-2">
+          <AppText variant="title">{title}</AppText>
+          <AppText tone="secondary">{detail}</AppText>
+          <AppText tone="secondary" variant="caption">
+            {warmth}
+          </AppText>
+        </View>
+      </View>
+      <View
+        className="rounded-[22px] px-4 py-4"
+        style={{
+          backgroundColor: theme.colors.background.elevated,
+          borderWidth: 1,
+          borderColor: theme.colors.border.subtle,
+        }}
+      >
+        <AppText tone="tertiary" variant="micro" style={{ textTransform: "uppercase" }}>
+          Focus
+        </AppText>
+        <AppText style={{ marginTop: 6 }}>{focus}</AppText>
+      </View>
+    </Surface>
+  );
+}
+
+function SuggestedActionCard({
   recommendation,
+  busy,
   onPrimaryPress,
   onSecondaryPress,
-  busy,
 }: {
   recommendation: TodayRecommendation;
+  busy: boolean;
   onPrimaryPress: () => void;
   onSecondaryPress: (() => void) | null;
-  busy: boolean;
 }) {
   const theme = useResolvedTheme();
   const opacity = useRef(new Animated.Value(0)).current;
@@ -82,47 +147,49 @@ function OpportunityCard({
   }, [opacity, recommendationKey, translateY]);
 
   return (
-    <Animated.View
-      style={{
-        opacity,
-        transform: [{ translateY }],
-      }}
-    >
+    <Animated.View style={{ opacity, transform: [{ translateY }] }}>
       <Surface className="gap-4">
-        <View className="gap-2">
-          <AppText tone="tertiary" variant="micro" style={{ textTransform: "uppercase" }}>
-            Next move
-          </AppText>
-          <AppText variant="title">{recommendation.title}</AppText>
-          <AppText variant="section">{recommendation.summary}</AppText>
-          <AppText tone="secondary">{recommendation.emphasis}</AppText>
+        <View className="flex-row items-start justify-between gap-3">
+          <View className="flex-1 gap-1.5">
+            <AppText tone="tertiary" variant="micro" style={{ textTransform: "uppercase" }}>
+              Suggested next action
+            </AppText>
+            <AppText variant="title">{recommendation.summary}</AppText>
+            <AppText tone="secondary" variant="caption">
+              {recommendation.emphasis}
+            </AppText>
+          </View>
+          <View
+            className="rounded-[18px] px-3 py-3"
+            style={{ backgroundColor: theme.colors.background.accentWash }}
+          >
+            <Ionicons color={theme.colors.accent.primary} name="sparkles-outline" size={18} />
+          </View>
         </View>
 
         {recommendation.options.length > 1 ? (
-          <View
-            className="gap-3 rounded-[18px] px-4 py-4"
-            style={{
-              backgroundColor: theme.colors.background.sunken,
-              borderWidth: 1,
-              borderColor: theme.colors.border.subtle,
-            }}
-          >
+          <View className="gap-3">
             {recommendation.options.slice(1, 3).map((option) => (
-              <View key={option.taskId} className="gap-1.5">
+              <View
+                key={option.taskId}
+                className="rounded-[20px] px-4 py-3"
+                style={{
+                  backgroundColor: theme.colors.background.elevatedSecondary,
+                  borderWidth: 1,
+                  borderColor: theme.colors.border.subtle,
+                }}
+              >
                 <View className="flex-row flex-wrap items-center gap-2">
                   <AppText variant="caption">{option.title}</AppText>
                   <Pill label={`${option.estimatedMinutes} min`} tone="quiet" />
-                  <Pill label={option.fitLabel} tone="accent" />
+                  <Pill label={option.fitLabel} tone="neutral" />
                 </View>
-                <AppText tone="secondary" variant="caption">
-                  {option.reason}
-                </AppText>
               </View>
             ))}
           </View>
         ) : null}
 
-        <View className="flex-row flex-wrap gap-3">
+        <View className="flex-row gap-3">
           <Button busy={busy} style={{ flex: 1 }} onPress={onPrimaryPress}>
             {recommendation.primaryLabel}
           </Button>
@@ -149,34 +216,30 @@ export function TodayScreen({ navigation }: Props) {
   if (!today) {
     const emptyBody =
       bootStatus === "loading"
-        ? "Loading today's execution layer."
+        ? "Loading today."
         : goals.length === 0
-          ? "Add a goal first. Ambitions will shape the first day from there."
-          : "Today's plan is missing. Open Plan to rebuild it.";
+          ? "Add a goal to start the day."
+          : "Open Plan to rebuild today.";
 
     return (
       <Screen>
         <View className="gap-5">
-          <PageHeader
-            eyebrow="Today"
-            title="Today"
-            description={formatLongDate(planDate)}
-          />
+          <PageHeader eyebrow="Today" title="Today" description={formatLongDate(planDate)} />
           <EmptyStateCard
-            title={bootStatus === "loading" ? "Loading today" : "No plan yet"}
+            title={bootStatus === "loading" ? "Loading" : "No day yet"}
             body={emptyBody}
             action={
               bootStatus !== "loading" ? (
                 <View className="flex-row gap-3 pt-1">
                   <Button style={{ flex: 1 }} onPress={() => navigation.getParent()?.navigate("Goals")}>
-                    Go to goals
+                    Goals
                   </Button>
                   <Button
-                    tone="tertiary"
+                    tone="secondary"
                     style={{ flex: 1 }}
                     onPress={() => navigation.getParent()?.navigate("Plan")}
                   >
-                    Open plan
+                    Plan
                   </Button>
                 </View>
               ) : null
@@ -187,16 +250,15 @@ export function TodayScreen({ navigation }: Props) {
     );
   }
 
-  const todayVm = today;
-
   const pendingReviewCount = goals.filter((goal) => getGoalReviewDraft(goal) !== null).length;
+  const todayVm = today;
   const openTimeValue =
     todayVm.openWindow?.label ?? (todayVm.next ? "Protected until next block" : "Flexible");
   const openTimeDetail =
     todayVm.openWindow?.detail ??
-    (todayVm.next
-      ? `Next up at ${formatTimeLabel(todayVm.next.startsAt)}.`
-      : "No strong next block is locked yet.");
+    (todayVm.next ? `Next at ${formatTimeLabel(todayVm.next.startsAt)}.` : "Nothing fixed yet.");
+  const completedRatio =
+    todayVm.progress.scheduled > 0 ? todayVm.progress.completed / todayVm.progress.scheduled : 0;
 
   async function handleRecommendedAction() {
     if (todayVm.recommendation.taskId && todayVm.recommendation.suggestedAction) {
@@ -248,83 +310,78 @@ export function TodayScreen({ navigation }: Props) {
 
   return (
     <Screen>
-      <View className="gap-6">
+      <View className="gap-5">
         <PageHeader
           eyebrow="Today"
-          title="See the day fast."
+          title={todayVm.status.mode === "in_block" ? "In motion." : "See the day fast."}
           description={formatLongDate(todayVm.date)}
         />
 
-        <Surface tone="accent" className="gap-5 overflow-hidden">
-          <LinearGradient
-            colors={["rgba(255,255,255,0.46)", "rgba(233,214,186,0.16)", "rgba(255,255,255,0)"]}
-            end={{ x: 1, y: 1 }}
-            start={{ x: 0, y: 0 }}
-            style={{
-              position: "absolute",
-              top: 0,
-              right: 0,
-              left: 0,
-              bottom: 0,
-            }}
+        <TodayHero
+          title={todayVm.status.title}
+          detail={todayVm.status.detail}
+          warmth={todayVm.status.warmth}
+          focus={todayVm.focus}
+        />
+
+        <View className="flex-row flex-wrap gap-3">
+          <MetricTile
+            label="Focus now"
+            value={todayVm.now ? todayVm.now.title : "Open space"}
+            detail={
+              todayVm.now
+                ? `Until ${formatTimeLabel(todayVm.now.endsAt)}`
+                : todayVm.openWindow
+                  ? todayVm.openWindow.detail
+                  : "No live block."
+            }
           />
-          <View className="gap-3">
-            <View className="flex-row flex-wrap items-center gap-2">
+          <MetricTile
+            label="Up next"
+            value={todayVm.next ? todayVm.next.title : "Nothing fixed"}
+            detail={todayVm.next ? formatTimeLabel(todayVm.next.startsAt) : "Still flexible"}
+          />
+          <MetricTile label="Free time" value={openTimeValue} detail={openTimeDetail} />
+          <MetricTile
+            label="Completed"
+            value={`${todayVm.progress.completed}/${todayVm.progress.scheduled || 0}`}
+            detail={
+              todayVm.progress.recovery > 0
+                ? `${todayVm.progress.recovery} need reshaping`
+                : "Steady day"
+            }
+          />
+        </View>
+
+        <Surface className="gap-4">
+          <View className="flex-row items-end justify-between gap-3">
+            <View className="gap-1">
+              <AppText tone="tertiary" variant="micro" style={{ textTransform: "uppercase" }}>
+                Day progress
+              </AppText>
+              <AppText variant="title">Quiet momentum</AppText>
+            </View>
+            <AppText tone="secondary" variant="caption">
+              {Math.round(completedRatio * 100)}%
+            </AppText>
+          </View>
+          <ProgressBar progress={completedRatio} />
+          <View className="flex-row flex-wrap gap-2">
+            <Pill
+              label={todayVm.integration.usingLiveCalendar ? "Live context" : "Saved baseline"}
+              tone="neutral"
+            />
+            <Pill label={`${todayVm.capacity.unusedCapacityMinutes} min open`} tone="quiet" />
+            {pendingReviewCount > 0 ? (
               <Pill
-                label={todayVm.integration.usingLiveCalendar ? "Live context" : "Saved baseline"}
+                label={`${pendingReviewCount} review${pendingReviewCount === 1 ? "" : "s"}`}
                 tone="accent"
               />
-              <Pill
-                label={todayVm.status.mode === "in_block" ? "In motion" : "Open day read"}
-                tone="quiet"
-              />
-              {pendingReviewCount > 0 ? (
-                <Pill
-                  label={`${pendingReviewCount} review${pendingReviewCount === 1 ? "" : "s"} waiting`}
-                  tone="quiet"
-                />
-              ) : null}
-            </View>
-            <View className="gap-2">
-              <AppText tone="tertiary" variant="micro" style={{ textTransform: "uppercase" }}>
-                {todayVm.status.eyebrow}
-              </AppText>
-              <AppText variant="title">{todayVm.status.title}</AppText>
-              <AppText tone="secondary">{todayVm.status.detail}</AppText>
-            </View>
-          </View>
-
-          <View className="flex-row flex-wrap gap-2 rounded-[22px]">
-            <StatusTile
-              label="Now"
-              value={todayVm.now ? todayVm.now.title : "Open space"}
-              detail={
-                todayVm.now
-                  ? `Until ${formatTimeLabel(todayVm.now.endsAt)}`
-                  : todayVm.openWindow
-                    ? todayVm.openWindow.detail
-                    : "No live block right now."
-              }
-            />
-            <StatusTile
-              label="Next"
-              value={todayVm.next ? todayVm.next.title : "No fixed next block"}
-              detail={
-                todayVm.next
-                  ? `${formatTimeLabel(todayVm.next.startsAt)}`
-                  : "This part of the day is still flexible."
-              }
-            />
-            <StatusTile label="Open time" value={openTimeValue} detail={openTimeDetail} />
-            <StatusTile
-              label="Best move"
-              value={todayVm.recommendation.summary}
-              detail={todayVm.recommendation.emphasis}
-            />
+            ) : null}
           </View>
         </Surface>
 
-        <OpportunityCard
+        <SuggestedActionCard
           recommendation={todayVm.recommendation}
           onPrimaryPress={() => void handleRecommendedAction()}
           onSecondaryPress={
@@ -334,14 +391,14 @@ export function TodayScreen({ navigation }: Props) {
         />
 
         <Surface className="gap-4">
-            <View className="flex-row items-end justify-between gap-3">
+          <View className="flex-row items-end justify-between gap-3">
             <View className="gap-1">
               <AppText tone="tertiary" variant="micro" style={{ textTransform: "uppercase" }}>
-                Timeline
+                Schedule
               </AppText>
-              <AppText variant="title">What’s next</AppText>
+              <AppText variant="title">Up next</AppText>
             </View>
-            <Button tone="secondary" onPress={() => navigation.navigate("TodayTimeline")}>
+            <Button tone="inline" onPress={() => navigation.navigate("TodayTimeline")}>
               Full day
             </Button>
           </View>
@@ -351,11 +408,7 @@ export function TodayScreen({ navigation }: Props) {
               <CompactTimelineRow
                 key={block.id}
                 block={block}
-                onPress={() =>
-                  navigation.navigate("TodaySessionDetail", {
-                    blockId: block.id,
-                  })
-                }
+                onPress={() => navigation.navigate("TodaySessionDetail", { blockId: block.id })}
               />
             ))}
           </View>
@@ -365,12 +418,8 @@ export function TodayScreen({ navigation }: Props) {
           {todayVm.openWindow ? (
             <DrillInRow
               title="Open time"
-              subtitle={
-                todayVm.recommendation.options.length > 0
-                  ? `${todayVm.openWindow.availableMinutes} min free`
-                  : `${todayVm.openWindow.availableMinutes} min protected`
-              }
-              detail={todayVm.openWindow.label}
+              subtitle={`${todayVm.openWindow.availableMinutes} min available`}
+              detail="Use well"
               leading={<Ionicons color={theme.colors.accent.primary} name="sparkles-outline" size={18} />}
               onPress={() => navigation.navigate("TodayOpenTime")}
             />
@@ -379,38 +428,20 @@ export function TodayScreen({ navigation }: Props) {
             title="Capacity"
             subtitle={`${todayVm.capacity.unusedCapacityMinutes} min open`}
             detail={`${Math.round(todayVm.capacity.confidence * 100)}% confidence`}
-            leading={<Ionicons color={theme.colors.text.secondary} name="speedometer-outline" size={18} />}
+            leading={
+              <Ionicons color={theme.colors.text.secondary} name="speedometer-outline" size={18} />
+            }
             onPress={() => navigation.navigate("TodayCapacity")}
           />
           <DrillInRow
             title="Context"
             subtitle={todayVm.integration.usingLiveCalendar ? "Live calendar" : "Saved schedule"}
             detail={todayVm.integration.calendarStatusLabel}
-            leading={<Ionicons color={theme.colors.text.secondary} name="calendar-clear-outline" size={18} />}
+            leading={
+              <Ionicons color={theme.colors.text.secondary} name="calendar-clear-outline" size={18} />
+            }
             onPress={() => navigation.navigate("TodayContext")}
           />
-          {pendingReviewCount > 0 ? (
-            <DrillInRow
-              title="Review"
-              subtitle="Changes waiting"
-              detail={`${pendingReviewCount} pending`}
-              leading={<Ionicons color={theme.colors.accent.primary} name="git-compare-outline" size={18} />}
-              onPress={() => navigation.getParent()?.navigate("Plan")}
-            />
-          ) : null}
-        </View>
-
-        <View
-          className="rounded-[22px] px-4 py-4"
-          style={{
-            backgroundColor: theme.colors.background.sunken,
-            borderWidth: 1,
-            borderColor: theme.colors.border.subtle,
-          }}
-        >
-          <AppText tone="secondary" variant="caption">
-            {todayVm.focus}
-          </AppText>
         </View>
       </View>
     </Screen>

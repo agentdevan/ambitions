@@ -1,10 +1,21 @@
 import { useMemo } from "react";
+import { useColorScheme } from "react-native";
 
 import { useAppStore } from "../../state/useAppStore";
-import { resolveThemePreset } from "../../product/theme";
+import { resolveTheme } from "../../product/theme";
 
 export function useResolvedTheme() {
-  const preset = useAppStore((state) => state.productPreferences?.themePreset);
+  const appearanceMode = useAppStore((state) => state.productPreferences?.appearanceMode);
+  const accentTheme = useAppStore((state) => state.productPreferences?.accentTheme);
+  const systemScheme = useColorScheme();
 
-  return useMemo(() => resolveThemePreset(preset), [preset]);
+  return useMemo(
+    () =>
+      resolveTheme({
+        appearanceMode,
+        accentTheme,
+        systemScheme,
+      }),
+    [accentTheme, appearanceMode, systemScheme],
+  );
 }
