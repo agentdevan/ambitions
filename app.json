@@ -14,7 +14,10 @@
     },
     "ios": {
       "supportsTablet": true,
-      "bundleIdentifier": "com.ambitions.app"
+      "bundleIdentifier": "com.ambitions.app",
+      "infoPlist": {
+        "ITSAppUsesNonExemptEncryption": false
+      }
     },
     "android": {
       "package": "com.ambitions.app",
@@ -23,7 +26,11 @@
         "backgroundColor": "#ffffff"
       },
       "edgeToEdgeEnabled": true,
-      "predictiveBackGestureEnabled": false
+      "predictiveBackGestureEnabled": false,
+      "permissions": [
+        "android.permission.READ_CALENDAR",
+        "android.permission.WRITE_CALENDAR"
+      ]
     },
     "web": {
       "favicon": "./assets/favicon.png"
@@ -38,6 +45,11 @@
           "calendarPermission": "Ambitions reads your calendar to keep the day plan realistic without changing your events."
         }
       ]
-    ]
+    ],
+    "extra": {
+      "eas": {
+        "projectId": "e25ee429-44ed-4de0-b608-0ce686bd1866"
+      }
+    }
   }
 }
