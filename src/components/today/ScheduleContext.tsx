@@ -18,7 +18,9 @@ export function ScheduleContext({ items }: ScheduleContextProps) {
           key={item.label}
           className="rounded-[16px] px-4 py-3"
           style={{
-            backgroundColor: theme.colors.background.canvas,
+            backgroundColor: "#FBF8F3",
+            borderWidth: 1,
+            borderColor: "#DFD3C5",
             minWidth: "47%",
           }}
         >

@@ -11,25 +11,34 @@ export function Surface({ children, className = "", tone = "default", style, ...
   const theme = useResolvedTheme();
   const toneMap = {
     default: {
-      backgroundColor: theme.colors.background.elevated,
-      borderColor: theme.colors.border.subtle,
+      backgroundColor: "#FBF8F3",
+      borderColor: "#D9D0C4",
       accentColor: "#FFFFFF",
-      shadowOpacity: 0.1,
-      elevation: 5,
+      shadowOpacity: 0.13,
+      shadowRadius: 20,
+      shadowOffset: { width: 0, height: 10 },
+      elevation: 6,
+      washOpacity: 0.28,
     },
     accent: {
-      backgroundColor: "#E9EFE6",
-      borderColor: theme.colors.border.strong,
+      backgroundColor: "#E2EAE0",
+      borderColor: "#C5D1C0",
       accentColor: theme.colors.accent.primary,
-      shadowOpacity: 0.14,
-      elevation: 6,
+      shadowOpacity: 0.18,
+      shadowRadius: 24,
+      shadowOffset: { width: 0, height: 14 },
+      elevation: 8,
+      washOpacity: 0.18,
     },
     sunken: {
-      backgroundColor: "#EEE8E0",
-      borderColor: "#E0D8CF",
+      backgroundColor: "#ECE5DC",
+      borderColor: "#D8CDBF",
       accentColor: "#F7F2EB",
-      shadowOpacity: 0.06,
+      shadowOpacity: 0.08,
+      shadowRadius: 12,
+      shadowOffset: { width: 0, height: 5 },
       elevation: 2,
+      washOpacity: 0.1,
     },
   };
 
@@ -44,8 +53,8 @@ export function Surface({ children, className = "", tone = "default", style, ...
           borderWidth: 1,
           shadowColor: theme.colors.text.primary,
           shadowOpacity: toneMap[tone].shadowOpacity,
-          shadowRadius: tone === "accent" ? 22 : 16,
-          shadowOffset: { width: 0, height: tone === "accent" ? 12 : 8 },
+          shadowRadius: toneMap[tone].shadowRadius,
+          shadowOffset: toneMap[tone].shadowOffset,
           elevation: toneMap[tone].elevation,
         },
         style,
@@ -55,12 +64,26 @@ export function Surface({ children, className = "", tone = "default", style, ...
         pointerEvents="none"
         style={{
           position: "absolute",
+          top: 1,
+          left: 1,
+          right: 1,
+          height: "48%",
+          borderTopLeftRadius: 19,
+          borderTopRightRadius: 19,
+          backgroundColor: "#FFFFFF",
+          opacity: toneMap[tone].washOpacity,
+        }}
+      />
+      <View
+        pointerEvents="none"
+        style={{
+          position: "absolute",
           top: 0,
           left: 0,
           right: 0,
-          height: 4,
+          height: tone === "accent" ? 5 : 4,
           backgroundColor: toneMap[tone].accentColor,
-          opacity: tone === "accent" ? 0.5 : 0.85,
+          opacity: tone === "accent" ? 0.72 : tone === "default" ? 0.55 : 0.42,
         }}
       />
       {children}

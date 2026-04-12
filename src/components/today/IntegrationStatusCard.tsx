@@ -45,10 +45,10 @@ export function IntegrationStatusCard({
     calendarConnectionState?.connectionStatus === CalendarSyncState.TemporaryFailure;
 
   return (
-    <Surface tone={usingLiveCalendar ? "accent" : "default"} className="gap-4">
+    <Surface tone="default" className="gap-4">
       <View className="gap-3">
         <View className="flex-row flex-wrap gap-2">
-          <Pill label="Real-world context" />
+          <Pill label="Real-world context" tone="quiet" />
           <Pill
             label={usingLiveCalendar ? "Calendar connected" : "Saved schedule"}
             tone={usingLiveCalendar ? "accent" : "neutral"}
@@ -65,7 +65,7 @@ export function IntegrationStatusCard({
         </AppText>
         <View
           className="rounded-[24px] px-4 py-4"
-          style={{ backgroundColor: "#FFFFFF66" }}
+          style={{ backgroundColor: "#F3ECE3", borderWidth: 1, borderColor: "#E1D4C5" }}
         >
           <AppText tone="secondary">{calendarDetail}</AppText>
           {syncFailure && calendarConnectionState?.metadata.lastError ? (

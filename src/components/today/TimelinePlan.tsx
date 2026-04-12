@@ -39,7 +39,7 @@ export function TimelinePlan({
   };
 
   return (
-    <Surface className="gap-5">
+    <Surface className="gap-6">
       <View className="flex-row items-end justify-between gap-3">
         <View className="gap-2">
           <View className="flex-row flex-wrap gap-2">
@@ -53,7 +53,10 @@ export function TimelinePlan({
         </View>
       </View>
 
-      <View className="gap-0">
+      <View
+        className="gap-3 rounded-[28px] px-3 py-3"
+        style={{ backgroundColor: "#EDE6DD", borderWidth: 1, borderColor: "#D9CDBF" }}
+      >
         {blocks.length === 0 ? (
           <AppText tone="secondary">
             No tasks were scheduled into believable windows for this day.
@@ -62,16 +65,16 @@ export function TimelinePlan({
         {blocks.map((block) => (
           <Surface
             key={block.id}
-            className="gap-4"
+            className="gap-5"
             tone={block.state === "active" ? "accent" : "default"}
-            style={{ marginBottom: 14 }}
+            style={{ marginBottom: 0 }}
           >
             <View className="gap-4">
               <View className="flex-row items-start justify-between gap-3">
                 <View className="flex-1 gap-2">
-                  <AppText tone="tertiary" variant="micro" style={{ textTransform: "uppercase" }}>
-                    {block.startsAt} - {block.endsAt}
-                  </AppText>
+                  <View>
+                    <Pill label={`${block.startsAt} - ${block.endsAt}`} tone="quiet" />
+                  </View>
                   <AppText variant="section">{block.title}</AppText>
                   {block.note ? (
                     <AppText tone="secondary">
@@ -100,18 +103,26 @@ export function TimelinePlan({
               </View>
 
               {block.taskId && block.actions.length > 0 ? (
-                <View className="flex-row flex-wrap gap-2 pt-1">
-                  {block.actions.slice(0, 2).map((action) => (
-                    <Button
-                      key={`${block.id}-${action}`}
-                      onPress={() => onTaskAction(block.taskId as string, action)}
-                      disabled={busyTaskId === block.taskId}
-                      tone={action === "start" || action === "complete" ? "primary" : "secondary"}
-                      size="compact"
-                    >
-                      {busyTaskId === block.taskId ? "Working..." : actionLabels[action]}
-                    </Button>
-                  ))}
+                <View
+                  className="gap-3 rounded-[20px] px-3 py-3"
+                  style={{ backgroundColor: "#F3ECE3", borderWidth: 1, borderColor: "#E1D4C5" }}
+                >
+                  <AppText tone="tertiary" variant="micro" style={{ textTransform: "uppercase" }}>
+                    Actions
+                  </AppText>
+                  <View className="flex-row flex-wrap gap-2">
+                    {block.actions.slice(0, 2).map((action) => (
+                      <Button
+                        key={`${block.id}-${action}`}
+                        onPress={() => onTaskAction(block.taskId as string, action)}
+                        disabled={busyTaskId === block.taskId}
+                        tone={action === "start" || action === "complete" ? "primary" : "secondary"}
+                        size="compact"
+                      >
+                        {busyTaskId === block.taskId ? "Working..." : actionLabels[action]}
+                      </Button>
+                    ))}
+                  </View>
                 </View>
               ) : null}
             </View>

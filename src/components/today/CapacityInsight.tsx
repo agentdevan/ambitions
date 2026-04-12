@@ -21,7 +21,7 @@ interface CapacityInsightProps {
 
 export function CapacityInsight({ capacity, focus }: CapacityInsightProps) {
   return (
-    <Surface tone="accent" className="gap-4">
+    <Surface className="gap-4">
       <View className="gap-3">
         <AppText tone="tertiary" variant="micro" style={{ textTransform: "uppercase" }}>
           Capacity
@@ -32,18 +32,23 @@ export function CapacityInsight({ capacity, focus }: CapacityInsightProps) {
         </AppText>
       </View>
 
-      <View className="flex-row flex-wrap gap-2">
-        <Pill label={`${capacity.focusBudgetMinutes} min committed`} tone="accent" />
-        <Pill label={`${capacity.usableMinutes} min usable`} />
-        <Pill label={`${capacity.unusedCapacityMinutes} min open`} tone="quiet" />
-        <Pill label={`Load ${capacity.mentalLoad}`} />
-        <Pill label={`Pressure ${capacity.planPressure}`} tone="quiet" />
-      </View>
+      <View
+        className="gap-3 rounded-[22px] px-4 py-4"
+        style={{ backgroundColor: "#F3ECE3", borderWidth: 1, borderColor: "#E2D6C8" }}
+      >
+        <View className="flex-row flex-wrap gap-2">
+          <Pill label={`${capacity.focusBudgetMinutes} min committed`} tone="accent" />
+          <Pill label={`${capacity.usableMinutes} min usable`} />
+          <Pill label={`${capacity.unusedCapacityMinutes} min open`} tone="quiet" />
+          <Pill label={`Load ${capacity.mentalLoad}`} />
+          <Pill label={`Pressure ${capacity.planPressure}`} tone="quiet" />
+        </View>
 
-      <AppText tone="secondary" variant="caption">
-        Confidence {Math.round(capacity.confidence * 100)}%
-        {capacity.overloadWarning ? ", with excess demand left unscheduled." : "."}
-      </AppText>
+        <AppText tone="secondary" variant="caption">
+          Confidence {Math.round(capacity.confidence * 100)}%
+          {capacity.overloadWarning ? ", with excess demand left unscheduled." : "."}
+        </AppText>
+      </View>
     </Surface>
   );
 }

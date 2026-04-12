@@ -145,62 +145,78 @@ export function TodayScreen() {
 
   return (
     <Screen>
-      <View className="gap-6">
+      <View className="gap-8">
         <TodayHeader
           dateLabel={formatLongDate(today.date)}
           liveContext={today.integration.usingLiveCalendar}
         />
-        <Surface tone="accent" className="gap-4">
-          <View className="gap-3">
-            <View className="flex-row flex-wrap gap-2">
-              <Pill label="Daily brief" tone="accent" />
-              <Pill label={`${today.blocks.length} sessions`} tone="quiet" />
-              <Pill label={`${today.progress.completed} done`} tone="quiet" />
+        <View className="gap-4">
+          <Surface tone="accent" className="gap-5">
+            <View className="gap-3">
+              <View className="flex-row flex-wrap gap-2">
+                <Pill label="Daily brief" tone="accent" />
+                <Pill label={`${today.blocks.length} sessions`} tone="quiet" />
+                <Pill label={`${today.progress.completed} done`} tone="quiet" />
+              </View>
+              <AppText variant="title">{today.focus}</AppText>
+              <AppText tone="secondary">
+                {today.adaptiveGuidance[0] ??
+                  "What matters first is clear, the next sessions are bounded, and the rest of the day stays supportive instead of noisy."}
+              </AppText>
             </View>
-            <AppText variant="title">{today.focus}</AppText>
-            <AppText tone="secondary">
-              {today.adaptiveGuidance[0] ??
-                "What matters first is clear, the next sessions are bounded, and the rest of the day stays supportive instead of noisy."}
-            </AppText>
-          </View>
-          <View className="flex-row flex-wrap gap-2">
-            <Pill label={`${today.replanSuggestions.length} recovery options`} />
-            <Pill label={`${today.unscheduled.length} held out`} tone="quiet" />
-            <Pill
-              label={
-                today.integration.usingLiveCalendar ? "Live context on" : "Saved baseline mode"
-              }
-              tone={today.integration.usingLiveCalendar ? "accent" : "neutral"}
-            />
-          </View>
-        </Surface>
-        <TimelinePlan
-          blocks={today.blocks}
-          onTaskAction={handleTaskAction}
-          busyTaskId={busyTaskId}
-        />
-        <CapacityInsight capacity={today.capacity} focus={today.focus} />
-        <Surface className="gap-4">
+            <View
+              className="gap-3 rounded-[24px] px-4 py-4"
+              style={{ backgroundColor: "#FFFFFF78", borderWidth: 1, borderColor: "#C9D5C4" }}
+            >
+              <AppText tone="tertiary" variant="micro" style={{ textTransform: "uppercase" }}>
+                Signal
+              </AppText>
+              <View className="flex-row flex-wrap gap-2">
+                <Pill label={`${today.replanSuggestions.length} recovery options`} />
+                <Pill label={`${today.unscheduled.length} held out`} tone="quiet" />
+                <Pill
+                  label={
+                    today.integration.usingLiveCalendar ? "Live context on" : "Saved baseline mode"
+                  }
+                  tone={today.integration.usingLiveCalendar ? "accent" : "neutral"}
+                />
+              </View>
+            </View>
+          </Surface>
+          <TimelinePlan
+            blocks={today.blocks}
+            onTaskAction={handleTaskAction}
+            busyTaskId={busyTaskId}
+          />
+        </View>
+        <Surface tone="sunken" className="gap-5">
           <View className="gap-2">
             <AppText tone="tertiary" variant="micro" style={{ textTransform: "uppercase" }}>
-              Context
+              Support
             </AppText>
-            <AppText variant="section">Surrounding conditions</AppText>
-            <AppText tone="secondary">{today.integration.calendarDetail}</AppText>
+            <AppText variant="section">Capacity, context, and system support</AppText>
+            <AppText tone="secondary">
+              The rest of the screen stays useful, but visually quieter than the brief and task cards.
+            </AppText>
           </View>
-          {today.adaptiveGuidance.length > 1 ? (
-            <View className="flex-row flex-wrap gap-2">
-              {today.adaptiveGuidance.slice(1, 3).map((item) => (
-                <Pill key={item} label={item} tone="quiet" />
-              ))}
+          <CapacityInsight capacity={today.capacity} focus={today.focus} />
+          <Surface tone="default" className="gap-4">
+            <View className="gap-2">
+              <AppText tone="tertiary" variant="micro" style={{ textTransform: "uppercase" }}>
+                Context
+              </AppText>
+              <AppText variant="section">Surrounding conditions</AppText>
+              <AppText tone="secondary">{today.integration.calendarDetail}</AppText>
             </View>
-          ) : null}
-          <ScheduleContext items={today.scheduleContext} />
-        </Surface>
-        <View className="gap-0">
-          <AppText tone="tertiary" variant="micro" style={{ textTransform: "uppercase" }}>
-            Support
-          </AppText>
+            {today.adaptiveGuidance.length > 1 ? (
+              <View className="flex-row flex-wrap gap-2">
+                {today.adaptiveGuidance.slice(1, 3).map((item) => (
+                  <Pill key={item} label={item} tone="quiet" />
+                ))}
+              </View>
+            ) : null}
+            <ScheduleContext items={today.scheduleContext} />
+          </Surface>
           <IntegrationStatusCard
             calendarConnectionState={calendarConnectionState}
             notificationPermissionStatus={notificationPermissionStatus}
@@ -270,27 +286,27 @@ export function TodayScreen() {
               runAccountAction("sync", () => syncAccountData(), "Account sync could not complete.")
             }
           />
-        </View>
-        {pendingReviewGoals.length > 0 ? (
-          <Surface>
-            <View className="gap-3">
-              <View className="flex-row flex-wrap gap-2">
-                <Pill label="Recommended plan" tone="accent" />
-                <Pill label={`${pendingReviewGoals.length} awaiting review`} />
+          {pendingReviewGoals.length > 0 ? (
+            <Surface>
+              <View className="gap-3">
+                <View className="flex-row flex-wrap gap-2">
+                  <Pill label="Recommended plan" tone="accent" />
+                  <Pill label={`${pendingReviewGoals.length} awaiting review`} />
+                </View>
+                <AppText variant="section">{pendingReviewGoals[0]?.title}</AppText>
+                <AppText tone="secondary">
+                  A recommended plan or refresh is waiting for review. You can make a few light edits before accepting it.
+                </AppText>
+                <Button
+                  tone="secondary"
+                  onPress={() => navigation.navigate("Plan" as never)}
+                >
+                  Open review
+                </Button>
               </View>
-              <AppText variant="section">{pendingReviewGoals[0]?.title}</AppText>
-              <AppText tone="secondary">
-                A recommended plan or refresh is waiting for review. You can make a few light edits before accepting it.
-              </AppText>
-              <Button
-                tone="secondary"
-                onPress={() => navigation.navigate("Plan" as never)}
-              >
-                Open review
-              </Button>
-            </View>
-          </Surface>
-        ) : null}
+            </Surface>
+          ) : null}
+        </Surface>
 
         {runtimeMessage || integrationBusy ? (
           <Surface tone="sunken">
