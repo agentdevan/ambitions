@@ -39,6 +39,8 @@ export class AccountService {
   private activeSyncPromise: Promise<void> | null = null;
   private startupSyncPromise: Promise<AccountSnapshot> | null = null;
   private initializationPromise: Promise<void> | null = null;
+  private reconnectListenerUnsubscribe: { remove: () => void } | null = null;
+  private lastKnownConnectivity: boolean | null = null;
 
   constructor(private readonly dependencies: AccountServiceDependencies) {
     this.syncCoordinator = new SyncCoordinator(
@@ -56,7 +58,8 @@ export class AccountService {
       });
     }
 
-    return this.initializationPromise;
+    await this.initializationPromise;
+    this.ensureReconnectListener();
   }
 
   async getSnapshot(): Promise<AccountSnapshot> {
@@ -427,9 +430,10 @@ export class AccountService {
 
   private async restoreSession() {
     const authState = await this.dependencies.accountRepository.getAuthState();
+    const attachmentState = await this.dependencies.accountRepository.getAttachmentState();
     const syncState = await this.dependencies.accountRepository.getSyncState();
 
-    if (!authState || !syncState || !this.remoteClient.isConfigured()) {
+    if (!authState || !attachmentState || !syncState || !this.remoteClient.isConfigured()) {
       return;
     }
 
@@ -439,19 +443,13 @@ export class AccountService {
 
       if (!remoteSession) {
         if (authState.signedInAccountId) {
-          await this.dependencies.accountRepository.saveAuthState({
-            ...authState,
-            status: AuthStatus.LocalOnly,
-            signedInAccountId: null,
-            sessionExpiresAt: null,
-            lastError: "Your session ended. Sign in again to keep syncing.",
-            updatedAt: now,
-          });
-          await this.dependencies.accountRepository.saveSyncState({
-            ...syncState,
-            accountId: null,
-            mode: SyncMode.LocalOnly,
-            updatedAt: now,
+          await this.resetLocalOnlyState({
+            authState,
+            attachmentState,
+            syncState,
+            now,
+            authStatus: AuthStatus.LocalOnly,
+            authError: "Your session ended. Sign in again to keep syncing.",
           });
         }
         return;
@@ -469,25 +467,38 @@ export class AccountService {
       };
 
       await this.dependencies.accountRepository.saveAccount(account);
-      await this.dependencies.accountRepository.saveAuthState({
-        ...authState,
-        status: AuthStatus.Authenticated,
-        signedInAccountId: account.id,
-        sessionExpiresAt: remoteSession.session.expires_at
-          ? new Date(remoteSession.session.expires_at * 1000).toISOString()
-          : null,
-        lastAuthenticatedAt: now,
-        lastError: null,
-        updatedAt: now,
-      });
+      await Promise.all([
+        this.dependencies.accountRepository.saveAuthState({
+          ...authState,
+          status: AuthStatus.Authenticated,
+          signedInAccountId: account.id,
+          sessionExpiresAt: remoteSession.session.expires_at
+            ? new Date(remoteSession.session.expires_at * 1000).toISOString()
+            : null,
+          lastAuthenticatedAt: now,
+          lastError: null,
+          updatedAt: now,
+        }),
+        this.dependencies.accountRepository.saveAttachmentState({
+          ...attachmentState,
+          accountId: account.id,
+          updatedAt: now,
+        }),
+        this.dependencies.accountRepository.saveSyncState({
+          ...syncState,
+          accountId: account.id,
+          updatedAt: now,
+        }),
+      ]);
     } catch (error) {
-      await this.dependencies.accountRepository.saveAuthState({
-        ...authState,
-        status: AuthStatus.Error,
-        signedInAccountId: null,
-        sessionExpiresAt: null,
-        lastError: mapAuthErrorMessage(error, "sign_in"),
-        updatedAt: new Date().toISOString(),
+      const now = new Date().toISOString();
+      await this.resetLocalOnlyState({
+        authState,
+        attachmentState,
+        syncState,
+        now,
+        authStatus: AuthStatus.Error,
+        authError: mapAuthErrorMessage(error, "sign_in"),
       });
     }
   }
@@ -538,16 +549,6 @@ export class AccountService {
         createdAt: now,
         updatedAt: now,
       });
-    } else if (!backendConfigured && authState.signedInAccountId) {
-      await this.dependencies.accountRepository.saveAuthState({
-        ...authState,
-        status: AuthStatus.Unavailable,
-        signedInAccountId: null,
-        sessionExpiresAt: null,
-        availableProviders: [],
-        lastError: getAuthUnavailableMessage(),
-        updatedAt: now,
-      });
     } else if (
       authState.primaryProvider !== AuthProvider.Email ||
       authState.availableProviders.length !== (backendConfigured ? 1 : 0)
@@ -562,7 +563,7 @@ export class AccountService {
               : authState.status,
         primaryProvider: AuthProvider.Email,
         availableProviders: backendConfigured ? [AuthProvider.Email] : [],
-        lastError: backendConfigured ? authState.lastError : getAuthUnavailableMessage(),
+        lastError: backendConfigured ? null : getAuthUnavailableMessage(),
         updatedAt: now,
       });
     }
@@ -595,8 +596,98 @@ export class AccountService {
         createdAt: now,
         updatedAt: now,
       });
-    } else if (!backendConfigured && syncState.accountId) {
-      await this.dependencies.accountRepository.saveSyncState({
+    }
+
+    if (!backendConfigured && authState && attachmentState && syncState) {
+      await this.resetLocalOnlyState({
+        authState,
+        attachmentState,
+        syncState,
+        now,
+        authStatus: AuthStatus.Unavailable,
+        authError: getAuthUnavailableMessage(),
+      });
+    }
+
+    await this.restoreSession();
+  }
+
+  private ensureReconnectListener() {
+    if (this.reconnectListenerUnsubscribe) {
+      return;
+    }
+
+    this.reconnectListenerUnsubscribe = NetworkStatusService.addListener((isConnected) => {
+      const cameBackOnline = this.lastKnownConnectivity === false && isConnected === true;
+      this.lastKnownConnectivity = isConnected;
+
+      if (!cameBackOnline) {
+        return;
+      }
+
+      void this.retrySyncAfterReconnect();
+    });
+  }
+
+  private async retrySyncAfterReconnect() {
+    try {
+      const snapshot = await this.getSnapshot();
+      const canRetry =
+        snapshot.auth.signedInAccountId &&
+        snapshot.attachment.status === LocalAttachmentStatus.Attached &&
+        [SyncMode.Offline, SyncMode.PendingChanges, SyncMode.Issue].includes(snapshot.sync.mode);
+
+      if (!canRetry) {
+        return;
+      }
+
+      await this.runSerializedSync(
+        snapshot.auth.signedInAccountId as string,
+        snapshot.sync,
+        SyncOperationKind.PushPull,
+      );
+    } catch {
+      // Keep reconnect retries silent; sync state already surfaces issues.
+    }
+  }
+
+  private async resetLocalOnlyState({
+    authState,
+    attachmentState,
+    syncState,
+    now,
+    authStatus,
+    authError,
+  }: {
+    authState: NonNullable<Awaited<ReturnType<AccountRepository["getAuthState"]>>>;
+    attachmentState: NonNullable<Awaited<ReturnType<AccountRepository["getAttachmentState"]>>>;
+    syncState: NonNullable<Awaited<ReturnType<AccountRepository["getSyncState"]>>>;
+    now: string;
+    authStatus: AuthStatus;
+    authError: string | null;
+  }) {
+    const localCounts = await this.syncCoordinator.countMeaningfulLocalRecords();
+
+    await Promise.all([
+      this.dependencies.accountRepository.saveAuthState({
+        ...authState,
+        status: authStatus,
+        signedInAccountId: null,
+        sessionExpiresAt: null,
+        availableProviders: this.remoteClient.isConfigured() ? [AuthProvider.Email] : [],
+        lastError: authError,
+        updatedAt: now,
+      }),
+      this.dependencies.accountRepository.saveAttachmentState({
+        ...attachmentState,
+        accountId: null,
+        status: LocalAttachmentStatus.Detached,
+        hasMeaningfulLocalData: localCounts.hasMeaningfulLocalData,
+        pendingRecordCount: localCounts.pendingRecordCount,
+        lastError: null,
+        updatedAt: now,
+      }),
+      this.dependencies.accountRepository.saveSyncState({
         ...syncState,
         accountId: null,
         mode: SyncMode.LocalOnly,
@@ -605,10 +696,8 @@ export class AccountService {
         unresolvedConflictCount: 0,
         lastError: null,
         updatedAt: now,
-      });
-    }
-
-    await this.restoreSession();
+      }),
+    ]);
   }
 }
 

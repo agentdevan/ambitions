@@ -56,5 +56,5 @@ export function mapAuthErrorMessage(error: unknown, mode: "sign_in" | "sign_up")
 }
 
 export function getAuthUnavailableMessage() {
-  return "Account connection unavailable in this build.";
+  return "Account connection is unavailable until EXPO_PUBLIC_SUPABASE_URL and EXPO_PUBLIC_SUPABASE_ANON_KEY are set with real values.";
 }

@@ -126,7 +126,7 @@ export class SupabaseAccountClient {
 
   async signOut() {
     const client = this.requireClient();
-    const { error } = await client.auth.signOut();
+    const { error } = await client.auth.signOut({ scope: "local" });
     if (error) {
       throw error;
     }

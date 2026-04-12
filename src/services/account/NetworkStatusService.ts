@@ -9,4 +9,10 @@ export class NetworkStatusService {
       return true;
     }
   }
+
+  static addListener(listener: (isConnected: boolean) => void) {
+    return Network.addNetworkStateListener((state) => {
+      listener(state.isConnected === true && state.isInternetReachable !== false);
+    });
+  }
 }
