@@ -2,12 +2,15 @@
 
 ## Status
 
-As of April 12, 2026, this workspace does not have live Supabase credentials available at runtime:
+As of April 12, 2026, this workspace now has live Supabase runtime config locally via an ignored `.env` file.
 
-- `EXPO_PUBLIC_SUPABASE_URL`: missing
-- `EXPO_PUBLIC_SUPABASE_ANON_KEY`: missing
+Live auth is verified against the real Supabase project.
 
-Because of that, connected auth and remote sync cannot be truthfully verified from this checkout alone. The app should remain in local-only mode until real values are supplied.
+Live sync is still blocked by the backend returning:
+
+`Could not find the table 'public.sync_records' in the schema cache`
+
+That means the app-side connected auth path is active, but the remote sync table is still not reachable from the anon client path yet.
 
 ## Required Environment
 
@@ -42,6 +45,13 @@ Manual step:
 3. Run the script.
 4. Confirm the table and RLS policies exist before testing the app.
 
+If sync still returns `Could not find the table 'public.sync_records' in the schema cache` after running the SQL:
+
+1. Confirm the SQL was run in the correct Supabase project: `yeylmvlunqcnyfzyjmtj`.
+2. Confirm the table was created in schema `public`.
+3. Confirm the SQL completed successfully without partial failure.
+4. If the table exists in the dashboard but the API still returns the same schema-cache error, refresh PostgREST/schema cache from Supabase or re-run the migration in the same project.
+
 ## What Was Implemented In Code
 
 - Missing or placeholder Supabase env now keeps the app in truthful local-only mode.
@@ -69,28 +79,36 @@ After env and SQL are in place, verify in this order:
 
 ## Verified In This Workspace
 
-Fully verified here:
+Fully verified live:
 
-- Missing-env fallback stays local-only.
-- Placeholder env values are rejected as unconfigured.
-- Code paths for offline sign-out and reconnect retry compile.
+- `EXPO_PUBLIC_SUPABASE_URL` and `EXPO_PUBLIC_SUPABASE_ANON_KEY` are loaded from local `.env`.
+- Account creation reaches the real Supabase backend.
+- Email confirmation gating works when email confirmation is ON.
+- Email confirmation link completion works.
+- Sign-in works after confirmation.
+- Session restore works in a fresh Supabase client using persisted session state.
+- Sign-out works.
+- The app code now handles confirmation-required sign-up truthfully instead of treating it as a broken auth failure.
 
-Not live-verified here because backend credentials are missing:
+Verified locally but not in native mobile runtime:
 
-- Account creation
-- Sign-in against Supabase
-- Remote session restore
-- Remote sync round-trip
-- Remote attach/import upload
-- Cross-device continuity
-- SQL/RLS behavior in the target Supabase project
+- Typecheck passes.
+- App-side auth/sync code compiles after the live-auth fixes.
 
-## Remaining Blocker
+Still blocked:
 
-The only blocker to full Phase 14.2 completion from this workspace is missing live Supabase project access:
+- `sync_records` read/write from the anon client path
+- attach local data
+- sync pending -> synced
+- offline change -> reconnect retry
+- rendered signed-out / signed-in / synced UI verification in an actual native runtime
 
-- no runtime `EXPO_PUBLIC_SUPABASE_URL`
-- no runtime `EXPO_PUBLIC_SUPABASE_ANON_KEY`
-- no applied/confirmed target Supabase schema in this session
+## Remaining Blockers
 
-Once those are supplied, the checklist above can be run without any further secret changes in git.
+1. Backend sync table is still not reachable from the app client.
+   Exact error:
+   `Could not find the table 'public.sync_records' in the schema cache`
+
+2. Native runtime verification is not possible from this machine right now because the workspace does not have a usable Android SDK/emulator, `adb`, or iOS/Xcode runtime.
+
+3. Expo web is not the primary blocker, but it is also currently not a reliable substitute for native verification in this workspace.
