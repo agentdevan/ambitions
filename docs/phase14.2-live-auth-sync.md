@@ -12,6 +12,10 @@ Live sync is still blocked by the backend returning:
 
 That means the app-side connected auth path is active, but the remote sync table is still not reachable from the anon client path yet.
 
+Latest verification note:
+
+- After the most recent report that `docs/phase14-supabase.sql` was run in Supabase SQL Editor, the anon client still receives the same `sync_records` schema-cache error from the live project API.
+
 ## Required Environment
 
 Create a local ignored env file such as `.env.local` with:
@@ -51,6 +55,7 @@ If sync still returns `Could not find the table 'public.sync_records' in the sch
 2. Confirm the table was created in schema `public`.
 3. Confirm the SQL completed successfully without partial failure.
 4. If the table exists in the dashboard but the API still returns the same schema-cache error, refresh PostgREST/schema cache from Supabase or re-run the migration in the same project.
+5. Re-test from the anon client after the refresh; Phase 14.2 sync cannot be considered live until a real read or upsert succeeds.
 
 ## What Was Implemented In Code
 
