@@ -346,6 +346,21 @@ export class AccountService {
         mode === "sign_up"
           ? await this.remoteClient.signUp(input)
           : await this.remoteClient.signIn(input);
+      const requiresEmailConfirmation = mode === "sign_up" && !remoteSession.session;
+
+      if (requiresEmailConfirmation) {
+        await this.dependencies.accountRepository.saveAuthState({
+          ...authState,
+          status: AuthStatus.LocalOnly,
+          signedInAccountId: null,
+          sessionExpiresAt: null,
+          lastError: "Check your email to finish setting up your account, then sign in.",
+          updatedAt: now,
+        });
+
+        return this.getSnapshot();
+      }
+
       const accountId = `account:${remoteSession.user.id}`;
       const existing = await this.dependencies.accountRepository.getAccount(accountId);
       const identity = this.remoteClient.buildAccountIdentity(remoteSession.user);
@@ -375,7 +390,7 @@ export class AccountService {
           ...authState,
           status: AuthStatus.Authenticated,
           signedInAccountId: accountId,
-          sessionExpiresAt: remoteSession.session.expires_at
+          sessionExpiresAt: remoteSession.session?.expires_at
             ? new Date(remoteSession.session.expires_at * 1000).toISOString()
             : null,
           lastAuthenticatedAt: now,
@@ -472,7 +487,7 @@ export class AccountService {
           ...authState,
           status: AuthStatus.Authenticated,
           signedInAccountId: account.id,
-          sessionExpiresAt: remoteSession.session.expires_at
+          sessionExpiresAt: remoteSession.session?.expires_at
             ? new Date(remoteSession.session.expires_at * 1000).toISOString()
             : null,
           lastAuthenticatedAt: now,

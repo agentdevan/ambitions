@@ -6,7 +6,7 @@ import { getSupabaseConfig } from "./supabaseConfig";
 
 interface RemoteSessionSnapshot {
   user: User;
-  session: Session;
+  session: Session | null;
 }
 
 interface AuthInput {
@@ -99,11 +99,11 @@ export class SupabaseAccountClient {
       throw error;
     }
 
-    if (!data.session || !data.user) {
+    if (!data.user) {
       throw new Error("Check your email to finish creating your account, then sign in.");
     }
 
-    return { session: data.session, user: data.user };
+    return { session: data.session ?? null, user: data.user };
   }
 
   async signIn(input: AuthInput): Promise<RemoteSessionSnapshot> {
