@@ -2,17 +2,24 @@ import { NativeStackScreenProps } from "@react-navigation/native-stack";
 import { useEffect, useMemo, useState } from "react";
 import { Modal, View } from "react-native";
 
+import {
+  DetailHero,
+  DetailMetaGroup,
+  DetailSection,
+  DetailSummaryStrip,
+  QuietMetaLine,
+} from "../../components/detail/DetailPrimitives";
 import { DrillInRow } from "../../components/navigation/DrillInRow";
 import { Button } from "../../components/ui/Button";
 import { EmptyStateCard } from "../../components/ui/EmptyStateCard";
-import { MetricCard } from "../../components/ui/MetricCard";
 import { OptionChip } from "../../components/ui/OptionChip";
 import { Pill } from "../../components/ui/Pill";
 import { Screen } from "../../components/ui/Screen";
 import { Surface } from "../../components/ui/Surface";
 import { AppText } from "../../components/ui/Text";
 import { TextField } from "../../components/ui/TextField";
-import { Goal, GoalStatus, TaskStatus } from "../../domain/models";
+import { Goal, GoalMilestoneStatus, GoalStatus, TaskStatus } from "../../domain/models";
+import { GoalsStackParamList } from "../../navigation/types";
 import { inferGoalDraft } from "../../product/goalIntake";
 import { describeLifecycleOptions } from "../../services/goals/downstreamHandlingPolicies";
 import {
@@ -25,24 +32,11 @@ import {
 import { hasUndoAvailable } from "../../services/goals/regenerationCoordinator";
 import { useAppStore } from "../../state/useAppStore";
 import { formatShortDate } from "../../utils/date";
-import { GoalsStackParamList } from "../../navigation/types";
 
 interface LifecycleDialogState {
   goal: Goal;
   status: GoalStatus.Paused | GoalStatus.Archived;
   handling: GoalLifecycleHandling;
-}
-
-function MetaLine({ items }: { items: string[] }) {
-  return (
-    <View className="flex-row flex-wrap gap-x-4 gap-y-2">
-      {items.map((item) => (
-        <AppText key={item} tone="secondary" variant="caption">
-          {item}
-        </AppText>
-      ))}
-    </View>
-  );
 }
 
 function useGoalData(goalId: string) {
@@ -51,12 +45,44 @@ function useGoalData(goalId: string) {
   const allTasks = useAppStore((state) => state.allTasks);
 
   const goal = goals.find((entry) => entry.id === goalId) ?? null;
-  const goalMilestones = milestones.filter((milestone) => milestone.goalId === goalId);
-  const visibleTasks = allTasks.filter(
-    (task) => task.goalId === goalId && task.status !== TaskStatus.Cancelled,
-  );
+  const goalMilestones = milestones
+    .filter((milestone) => milestone.goalId === goalId)
+    .sort((left, right) => left.sortOrder - right.sortOrder);
+  const visibleTasks = allTasks
+    .filter((task) => task.goalId === goalId && task.status !== TaskStatus.Cancelled)
+    .sort((left, right) => left.createdAt.localeCompare(right.createdAt));
 
   return { goal, goalMilestones, visibleTasks };
+}
+
+function statusLabel(status: GoalStatus) {
+  switch (status) {
+    case GoalStatus.Active:
+      return "Active";
+    case GoalStatus.Paused:
+      return "Paused";
+    case GoalStatus.Completed:
+      return "Completed";
+    case GoalStatus.Archived:
+      return "Archived";
+    default:
+      return "Draft";
+  }
+}
+
+function milestoneStatusLabel(status: GoalMilestoneStatus) {
+  switch (status) {
+    case GoalMilestoneStatus.InProgress:
+      return "In progress";
+    case GoalMilestoneStatus.Completed:
+      return "Completed";
+    case GoalMilestoneStatus.Missed:
+      return "Missed";
+    case GoalMilestoneStatus.Archived:
+      return "Archived";
+    default:
+      return "Pending";
+  }
 }
 
 export function GoalDetailScreen({
@@ -80,6 +106,7 @@ export function GoalDetailScreen({
   }
 
   const resolvedGoal = goal;
+
   const reviewDraft = getGoalReviewDraft(resolvedGoal);
   const protectedTasks = visibleTasks.filter(
     (task) =>
@@ -87,6 +114,22 @@ export function GoalDetailScreen({
       task.status === TaskStatus.Completed ||
       task.status === TaskStatus.InProgress,
   );
+  const activeTasks = visibleTasks.filter((task) =>
+    [TaskStatus.Ready, TaskStatus.Scheduled, TaskStatus.InProgress].includes(task.status),
+  );
+  const completedTasks = visibleTasks.filter((task) => task.status === TaskStatus.Completed);
+  const completedMilestones = goalMilestones.filter(
+    (milestone) => milestone.status === GoalMilestoneStatus.Completed,
+  );
+  const currentMilestone =
+    goalMilestones.find((milestone) => milestone.status === GoalMilestoneStatus.InProgress) ??
+    goalMilestones.find((milestone) => milestone.status === GoalMilestoneStatus.Pending) ??
+    null;
+  const nextTask =
+    activeTasks.find((task) => task.status === TaskStatus.InProgress) ??
+    activeTasks.find((task) => task.status === TaskStatus.Scheduled) ??
+    activeTasks[0] ??
+    null;
 
   function openLifecycleDialog(status: GoalStatus.Paused | GoalStatus.Archived) {
     const options = describeLifecycleOptions(status === GoalStatus.Paused ? "pause" : "archive");
@@ -139,110 +182,194 @@ export function GoalDetailScreen({
   return (
     <>
       <Screen>
-        <View className="gap-5">
-          <Surface tone="accent" className="gap-4">
-            <View className="gap-2">
-              <View className="flex-row flex-wrap items-center gap-2">
-                <Pill label={resolvedGoal.status} tone="quiet" />
+        <View className="gap-6">
+          <DetailHero
+            eyebrow="Goal"
+            title={resolvedGoal.title}
+            description={resolvedGoal.summary ?? "This goal is active and ready for deeper inspection."}
+            badges={
+              <>
+                <Pill label={statusLabel(resolvedGoal.status)} tone="quiet" />
                 {reviewDraft ? <Pill label="Needs review" tone="accent" /> : null}
-              </View>
-              <AppText variant="title">{resolvedGoal.title}</AppText>
-              <AppText tone="secondary">
-                {resolvedGoal.summary ?? "A structured goal with a clear planning spine."}
-              </AppText>
-            </View>
-            <MetaLine
+              </>
+            }
+            meta={
+              <DetailMetaGroup
+                items={[
+                  {
+                    label: "Target",
+                    value: resolvedGoal.targetDate ? formatShortDate(resolvedGoal.targetDate) : "No date",
+                  },
+                  {
+                    label: "Current milestone",
+                    value: currentMilestone?.title ?? "No active milestone",
+                  },
+                  {
+                    label: "Protected work",
+                    value: `${protectedTasks.length} tasks`,
+                  },
+                  {
+                    label: "Pacing",
+                    value: resolvedGoal.desiredWeeklyMinutes
+                      ? `${resolvedGoal.desiredWeeklyMinutes} min per week`
+                      : "No weekly pacing",
+                  },
+                ]}
+              />
+            }
+          />
+
+          <DetailSection
+            title="Progress"
+            description="A clean read on movement without turning this into a dashboard wall."
+          >
+            <DetailSummaryStrip
               items={[
-                resolvedGoal.targetDate ? `Target ${formatShortDate(resolvedGoal.targetDate)}` : "No target date",
-                `${goalMilestones.length} milestone${goalMilestones.length === 1 ? "" : "s"}`,
-                `${visibleTasks.length} task${visibleTasks.length === 1 ? "" : "s"}`,
+                {
+                  label: "Milestones",
+                  value: `${completedMilestones.length}/${goalMilestones.length}`,
+                  detail: completedMilestones.length > 0 ? "Completed" : "Not started yet",
+                },
+                {
+                  label: "Active work",
+                  value: String(activeTasks.length),
+                  detail: nextTask ? `Next: ${nextTask.title}` : "Nothing queued right now",
+                },
+                {
+                  label: "Completed tasks",
+                  value: String(completedTasks.length),
+                  detail: "Finished inside this goal",
+                },
+                {
+                  label: "Plan review",
+                  value: reviewDraft ? "Waiting" : "Clear",
+                  detail: reviewDraft ? "Structure needs a decision" : "No pending changes",
+                },
               ]}
             />
-          </Surface>
+          </DetailSection>
 
-          <View className="flex-row gap-3">
-            <MetricCard label="Milestones" value={String(goalMilestones.length)} />
-            <MetricCard label="Tasks" value={String(visibleTasks.length)} />
-            <MetricCard label="Protected" value={String(protectedTasks.length)} />
-          </View>
-
-          <View className="gap-3">
-            <DrillInRow
-              title="Milestones"
-              subtitle="Review the checkpoints shaping this goal."
-              detail={`${goalMilestones.length}`}
-              onPress={() => navigation.navigate("GoalMilestones", { goalId: resolvedGoal.id })}
-            />
-            <DrillInRow
-              title="Progress breakdown"
-              subtitle="See active tasks, preserved work, and what is waiting."
-              detail={`${visibleTasks.length} tasks`}
-              onPress={() => navigation.navigate("GoalProgress", { goalId: resolvedGoal.id })}
-            />
-            <DrillInRow
-              title="Edit goal"
-              subtitle="Adjust the goal definition without burying the change flow."
-              onPress={() => navigation.navigate("GoalEdit", { goalId: resolvedGoal.id })}
-            />
-            {reviewDraft ? (
+          <DetailSection
+            title="Open this goal"
+            description="Go deeper where it matters."
+          >
+            <View className="gap-3">
               <DrillInRow
-                title="Review changes"
-                subtitle={reviewDraft.summary}
-                detail={reviewDraft.mode.replaceAll("_", " ")}
-                onPress={() => navigation.getParent()?.navigate("Plan" as never)}
+                title="Milestones"
+                subtitle={
+                  currentMilestone
+                    ? `Current checkpoint: ${currentMilestone.title}`
+                    : "Review the sequence shaping this goal."
+                }
+                detail={`${goalMilestones.length} total`}
+                onPress={() => navigation.navigate("GoalMilestones", { goalId: resolvedGoal.id })}
               />
-            ) : null}
-          </View>
+              <DrillInRow
+                title="Progress"
+                subtitle="See active tasks, protected work, and completed movement."
+                detail={`${visibleTasks.length} tasks`}
+                onPress={() => navigation.navigate("GoalProgress", { goalId: resolvedGoal.id })}
+              />
+              <DrillInRow
+                title="Edit goal"
+                subtitle="Refine the goal definition, then decide how downstream work should respond."
+                onPress={() => navigation.navigate("GoalEdit", { goalId: resolvedGoal.id })}
+              />
+              {reviewDraft ? (
+                <DrillInRow
+                  title="Review pending changes"
+                  subtitle={reviewDraft.summary}
+                  detail="Open review"
+                  onPress={() =>
+                    (navigation.getParent() as any)?.navigate("Plan", {
+                      screen: "PlanReview",
+                      params: { goalId: resolvedGoal.id },
+                    })
+                  }
+                />
+              ) : null}
+            </View>
+          </DetailSection>
 
-          <Surface className="gap-4">
-            <AppText variant="section">Snapshot</AppText>
-            <MetaLine
+          <Surface className="gap-4 mb-0">
+            <View className="gap-1">
+              <AppText variant="section">Goal definition</AppText>
+              <AppText tone="secondary" variant="caption">
+                What this goal is, separate from what you can do next.
+              </AppText>
+            </View>
+            <QuietMetaLine
               items={[
-                resolvedGoal.successMetric ? `Success: ${resolvedGoal.successMetric}` : "No success metric yet",
-                resolvedGoal.desiredWeeklyMinutes
-                  ? `${resolvedGoal.desiredWeeklyMinutes} min per week`
-                  : "No weekly pacing set",
-                resolvedGoal.domainKey.replace("_", " "),
+                resolvedGoal.successMetric
+                  ? `Success: ${resolvedGoal.successMetric}`
+                  : "No success metric",
+                resolvedGoal.horizon,
+                resolvedGoal.type,
+                resolvedGoal.domainKey.replaceAll("_", " "),
               ]}
             />
             {resolvedGoal.notes ? <AppText tone="secondary">{resolvedGoal.notes}</AppText> : null}
           </Surface>
 
-          <View className="flex-row flex-wrap gap-3">
-            {resolvedGoal.status === GoalStatus.Active ? (
-              <Button
-                tone="secondary"
-                onPress={() => openLifecycleDialog(GoalStatus.Paused)}
-                busy={busyState === `status:${resolvedGoal.id}`}
-              >
-                Pause goal
-              </Button>
-            ) : (
-              <Button
-                tone="secondary"
-                onPress={() => void updateGoal(resolvedGoal.id, { status: GoalStatus.Active })}
-                busy={busyState === `status:${resolvedGoal.id}`}
-              >
-                Resume goal
-              </Button>
-            )}
-            <Button
-              tone="tertiary"
-              onPress={() => openLifecycleDialog(GoalStatus.Archived)}
-              busy={busyState === `status:${resolvedGoal.id}`}
-            >
-              Archive goal
+          <Surface className="gap-4 mb-0">
+            <View className="gap-1">
+              <AppText variant="section">Actions</AppText>
+              <AppText tone="secondary" variant="caption">
+                Keep the primary move obvious. Everything else stays quieter.
+              </AppText>
+            </View>
+            <Button onPress={() => navigation.navigate("GoalEdit", { goalId: resolvedGoal.id })}>
+              Edit goal
             </Button>
-            {hasUndoAvailable(resolvedGoal) ? (
+            <View className="flex-row flex-wrap gap-3">
+              {resolvedGoal.status === GoalStatus.Active ? (
+                <Button
+                  tone="secondary"
+                  onPress={() => openLifecycleDialog(GoalStatus.Paused)}
+                  busy={busyState === `status:${resolvedGoal.id}`}
+                >
+                  Pause goal
+                </Button>
+              ) : (
+                <Button
+                  tone="secondary"
+                  onPress={() => void updateGoal(resolvedGoal.id, { status: GoalStatus.Active })}
+                  busy={busyState === `status:${resolvedGoal.id}`}
+                >
+                  Resume goal
+                </Button>
+              )}
+              {reviewDraft ? (
+                <Button
+                  tone="inline"
+                  onPress={() =>
+                    (navigation.getParent() as any)?.navigate("Plan", {
+                      screen: "PlanReview",
+                      params: { goalId: resolvedGoal.id },
+                    })
+                  }
+                >
+                  Review changes
+                </Button>
+              ) : null}
               <Button
                 tone="inline"
-                onPress={() => void handleUndo(resolvedGoal.id)}
-                busy={busyState === `undo:${resolvedGoal.id}`}
+                onPress={() => openLifecycleDialog(GoalStatus.Archived)}
+                busy={busyState === `status:${resolvedGoal.id}`}
               >
-                Undo refresh
+                Archive
               </Button>
-            ) : null}
-          </View>
+              {hasUndoAvailable(resolvedGoal) ? (
+                <Button
+                  tone="inline"
+                  onPress={() => void handleUndo(resolvedGoal.id)}
+                  busy={busyState === `undo:${resolvedGoal.id}`}
+                >
+                  Undo refresh
+                </Button>
+              ) : null}
+            </View>
+          </Surface>
 
           {runtimeMessage ? (
             <AppText tone="tertiary" variant="caption">
@@ -258,14 +385,17 @@ export function GoalDetailScreen({
         visible={lifecycleState !== null}
         onRequestClose={() => setLifecycleState(null)}
       >
-        <View className="flex-1 items-center justify-center px-5" style={{ backgroundColor: "rgba(16, 18, 22, 0.22)" }}>
+        <View
+          className="flex-1 items-center justify-center px-5"
+          style={{ backgroundColor: "rgba(16, 18, 22, 0.22)" }}
+        >
           <Surface style={{ width: "100%" }}>
             <View className="gap-4">
               <AppText variant="title">
                 {lifecycleState?.status === GoalStatus.Paused ? "Pause goal" : "Archive goal"}
               </AppText>
               <AppText tone="secondary">
-                Choose how downstream work should be handled instead of letting it disappear silently.
+                Choose what happens to downstream work before this goal leaves the main rotation.
               </AppText>
               <View className="gap-2">
                 {lifecycleState
@@ -295,7 +425,7 @@ export function GoalDetailScreen({
                   onPress={() => void confirmLifecycleChange()}
                   busy={lifecycleState ? busyState === `status:${lifecycleState.goal.id}` : false}
                 >
-                  Confirm change
+                  Confirm
                 </Button>
               </View>
             </View>
@@ -309,7 +439,7 @@ export function GoalDetailScreen({
 export function GoalMilestonesScreen({
   route,
 }: NativeStackScreenProps<GoalsStackParamList, "GoalMilestones">) {
-  const { goal, goalMilestones } = useGoalData(route.params.goalId);
+  const { goal, goalMilestones, visibleTasks } = useGoalData(route.params.goalId);
 
   if (!goal) {
     return (
@@ -319,35 +449,81 @@ export function GoalMilestonesScreen({
     );
   }
 
+  const completedCount = goalMilestones.filter(
+    (milestone) => milestone.status === GoalMilestoneStatus.Completed,
+  ).length;
+
   return (
     <Screen>
-      <View className="gap-4">
-        <Surface tone="accent" className="gap-3">
-          <AppText variant="title">{goal.title}</AppText>
-          <AppText tone="secondary">Milestones stay separate so the goal page can stay concise.</AppText>
-        </Surface>
-        <View className="gap-3">
-          {goalMilestones.length === 0 ? (
-            <EmptyStateCard
-              title="No milestones yet"
-              body="This goal is waiting on review before milestones become active."
+      <View className="gap-6">
+        <DetailHero
+          eyebrow="Goal"
+          title="Milestones"
+          description="See the checkpoints shaping this goal."
+          meta={
+            <DetailSummaryStrip
+              items={[
+                {
+                  label: "Completed",
+                  value: `${completedCount}/${goalMilestones.length}`,
+                  detail: "Milestones finished",
+                },
+                {
+                  label: "Work items",
+                  value: String(visibleTasks.length),
+                  detail: "Tasks attached to this goal",
+                },
+              ]}
             />
-          ) : null}
-          {goalMilestones.map((milestone) => (
-            <Surface key={milestone.id} className="gap-2">
-              <AppText variant="section">{milestone.title}</AppText>
-              <AppText tone="secondary">
-                {milestone.summary ?? "Generated from the current goal structure."}
-              </AppText>
-              <MetaLine
-                items={[
-                  milestone.targetDate ? `Target ${formatShortDate(milestone.targetDate)}` : "No target date",
-                  hasUserAdjustedMetadata(milestone) ? "Preserved" : milestone.status.replaceAll("_", " "),
-                ]}
-              />
-            </Surface>
-          ))}
-        </View>
+          }
+        />
+        {goalMilestones.length === 0 ? (
+          <EmptyStateCard
+            title="No milestones yet"
+            body="This goal is waiting on review before milestones become active."
+          />
+        ) : (
+          <View className="gap-3">
+            {goalMilestones.map((milestone, index) => {
+              const milestoneTasks = visibleTasks.filter(
+                (task) => task.milestoneId === milestone.id,
+              );
+
+              return (
+                <Surface key={milestone.id} className="gap-3 mb-0">
+                  <View className="flex-row flex-wrap items-center gap-2">
+                    <Pill label={milestoneStatusLabel(milestone.status)} tone="quiet" />
+                    {hasUserAdjustedMetadata(milestone) ? (
+                      <Pill label="Protected" tone="accent" />
+                    ) : null}
+                    <AppText tone="tertiary" variant="caption">
+                      Step {index + 1}
+                    </AppText>
+                  </View>
+                  <View className="gap-1">
+                    <AppText variant="section">{milestone.title}</AppText>
+                    <AppText tone="secondary">
+                      {milestone.summary ?? "This milestone anchors a section of the goal."}
+                    </AppText>
+                  </View>
+                  <QuietMetaLine
+                    items={[
+                      milestone.targetDate
+                        ? `Target ${formatShortDate(milestone.targetDate)}`
+                        : "No target date",
+                      milestone.estimatedMinutes
+                        ? `${milestone.estimatedMinutes} planned min`
+                        : "No time estimate",
+                      `${milestoneTasks.length} linked task${
+                        milestoneTasks.length === 1 ? "" : "s"
+                      }`,
+                    ]}
+                  />
+                </Surface>
+              );
+            })}
+          </View>
+        )}
       </View>
     </Screen>
   );
@@ -366,36 +542,105 @@ export function GoalProgressScreen({
     );
   }
 
+  const activeTasks = visibleTasks.filter((task) =>
+    [TaskStatus.Ready, TaskStatus.Scheduled, TaskStatus.InProgress].includes(task.status),
+  );
+  const protectedTasks = visibleTasks.filter((task) => hasUserAdjustedMetadata(task));
+  const completedTasks = visibleTasks.filter((task) => task.status === TaskStatus.Completed);
+
   return (
     <Screen>
-      <View className="gap-4">
-        <Surface tone="accent" className="gap-3">
-          <AppText variant="title">{goal.title}</AppText>
-          <AppText tone="secondary">
-            See the active task load without forcing all of it onto the main goal screen.
-          </AppText>
-        </Surface>
-        <View className="gap-3">
-          {visibleTasks.length === 0 ? (
-            <EmptyStateCard
-              title="No active tasks"
-              body="This goal does not have active task detail yet."
+      <View className="gap-6">
+        <DetailHero
+          eyebrow="Goal"
+          title="Progress"
+          description="See how this goal is moving."
+          meta={
+            <DetailSummaryStrip
+              items={[
+                {
+                  label: "Active",
+                  value: String(activeTasks.length),
+                  detail: "Currently in rotation",
+                },
+                {
+                  label: "Protected",
+                  value: String(protectedTasks.length),
+                  detail: "Held steady through changes",
+                },
+                {
+                  label: "Completed",
+                  value: String(completedTasks.length),
+                  detail: "Finished work",
+                },
+              ]}
             />
-          ) : null}
-          {visibleTasks.map((task) => (
-            <Surface key={task.id} className="gap-2">
-              <AppText variant="section">{task.title}</AppText>
-              <MetaLine
-                items={[
-                  `${task.estimatedMinutes} min`,
-                  task.targetDate ? `Target ${formatShortDate(task.targetDate)}` : "No target date",
-                  task.status.replaceAll("_", " "),
-                ]}
-              />
-              {task.summary ? <AppText tone="secondary">{task.summary}</AppText> : null}
-            </Surface>
-          ))}
-        </View>
+          }
+        />
+
+        {visibleTasks.length === 0 ? (
+          <EmptyStateCard
+            title="No active tasks"
+            body="This goal does not have task detail yet."
+          />
+        ) : (
+          <>
+            <DetailSection
+              title="Current work"
+              description="The task load that still matters right now."
+            >
+              <View className="gap-3">
+                {activeTasks.length === 0 ? (
+                  <Surface className="gap-2 mb-0">
+                    <AppText tone="secondary">
+                      Nothing is currently in active rotation for this goal.
+                    </AppText>
+                  </Surface>
+                ) : (
+                  activeTasks.map((task) => (
+                    <Surface key={task.id} className="gap-2 mb-0">
+                      <AppText variant="section">{task.title}</AppText>
+                      <QuietMetaLine
+                        items={[
+                          `${task.estimatedMinutes} min`,
+                          task.targetDate
+                            ? `Target ${formatShortDate(task.targetDate)}`
+                            : "No target date",
+                          task.status.replaceAll("_", " "),
+                        ]}
+                      />
+                      {task.summary ? <AppText tone="secondary">{task.summary}</AppText> : null}
+                    </Surface>
+                  ))
+                )}
+              </View>
+            </DetailSection>
+
+            {protectedTasks.length > 0 ? (
+              <DetailSection
+                title="Protected work"
+                description="Items preserved because you already shaped them."
+              >
+                <View className="gap-3">
+                  {protectedTasks.map((task) => (
+                    <Surface key={task.id} className="gap-2 mb-0">
+                      <View className="flex-row flex-wrap items-center gap-2">
+                        <Pill label="Protected" tone="accent" />
+                        <AppText variant="section">{task.title}</AppText>
+                      </View>
+                      <QuietMetaLine
+                        items={[
+                          `${task.estimatedMinutes} min`,
+                          task.status.replaceAll("_", " "),
+                        ]}
+                      />
+                    </Surface>
+                  ))}
+                </View>
+              </DetailSection>
+            ) : null}
+          </>
+        )}
       </View>
     </Screen>
   );
@@ -564,67 +809,139 @@ export function GoalEditScreen({
   return (
     <>
       <Screen>
-        <View className="gap-5">
-          <Surface tone="accent" className="gap-3">
-            <AppText variant="title">{goal ? "Refine the goal" : "Add a goal"}</AppText>
-            <AppText tone="secondary">
-              {goal
-                ? "Edit the goal definition here, then decide how downstream work should respond."
-                : "Write the goal in plain language first. Ambitions will turn it into a workable structure."}
-            </AppText>
-          </Surface>
+        <View className="gap-6">
+          <DetailHero
+            eyebrow="Goal"
+            title={goal ? "Refine the goal" : "Add a goal"}
+            description={
+              goal
+                ? "Tighten the definition here. If the change affects downstream work, review the impact before it lands."
+                : "Describe the outcome in plain language. Ambitions will shape the first structure from it."
+            }
+          />
 
           {!goal ? (
-            <TextField
-              multiline
-              onChangeText={setDraftText}
-              placeholder="Build a focused TypeScript systems study plan over the next six weeks."
-              value={draftText}
-            />
+            <Surface className="gap-3 mb-0">
+              <AppText variant="section">Start with the goal</AppText>
+              <TextField
+                multiline
+                onChangeText={setDraftText}
+                placeholder="Build a focused TypeScript systems study plan over the next six weeks."
+                value={draftText}
+              />
+              {inference ? (
+                <QuietMetaLine
+                  items={[
+                    inference.domainKey.replace("_", " "),
+                    inference.type,
+                    inference.horizon,
+                  ]}
+                />
+              ) : null}
+            </Surface>
           ) : null}
 
-          {inference && !goal ? (
-            <MetaLine items={[inference.domainKey.replace("_", " "), inference.type, inference.horizon]} />
-          ) : null}
+          <DetailSection
+            title="Core definition"
+            description="Set what this goal is trying to do."
+          >
+            <Surface className="gap-4 mb-0">
+              <TextField
+                onChangeText={setManualTitle}
+                placeholder="Goal title"
+                label="Title"
+                value={manualTitle}
+              />
+              <TextField
+                onChangeText={setManualSummary}
+                placeholder="Short goal summary"
+                label="Summary"
+                multiline
+                value={manualSummary}
+              />
+              <TextField
+                onChangeText={setManualSuccessMetric}
+                placeholder="Success measure"
+                label="Success metric"
+                value={manualSuccessMetric}
+              />
+              <TextField
+                onChangeText={setManualNotes}
+                placeholder="Notes that should shape the goal."
+                label="Notes"
+                multiline
+                value={manualNotes}
+              />
+            </Surface>
+          </DetailSection>
 
-          <TextField onChangeText={setManualTitle} placeholder="Goal title" label="Title" value={manualTitle} />
-          <TextField onChangeText={setManualSummary} placeholder="Short goal summary" label="Summary" multiline value={manualSummary} />
-          <TextField onChangeText={setManualSuccessMetric} placeholder="Success measure" label="Success metric" value={manualSuccessMetric} />
-          <TextField onChangeText={setManualTargetDate} placeholder="YYYY-MM-DD" label="Target date" value={manualTargetDate} />
-          <TextField onChangeText={setManualDesiredWeeklyMinutes} placeholder="120" label="Target minutes per week" keyboardType="numeric" value={manualDesiredWeeklyMinutes} />
-          <TextField onChangeText={setManualNotes} placeholder="Notes that should shape the goal." label="Notes" multiline value={manualNotes} />
-          <View className="gap-2">
-            <AppText variant="caption" tone="secondary">
-              Domain
-            </AppText>
-            <View className="flex-row flex-wrap gap-2">
-              {domains.map((domain) => {
-                const key = manualDomainKey ?? inference?.domainKey ?? goal?.domainKey;
-                return (
-                  <OptionChip
-                    key={`domain-select-${domain.id}`}
-                    selected={key === domain.key}
-                    onPress={() => setManualDomainKey(domain.key)}
-                  >
-                    {domain.name}
-                  </OptionChip>
-                );
-              })}
+          <DetailSection
+            title="Timing and pacing"
+            description="Keep the plan grounded in time."
+          >
+            <Surface className="gap-4 mb-0">
+              <TextField
+                onChangeText={setManualTargetDate}
+                placeholder="YYYY-MM-DD"
+                label="Target date"
+                value={manualTargetDate}
+              />
+              <TextField
+                onChangeText={setManualDesiredWeeklyMinutes}
+                placeholder="120"
+                label="Target minutes per week"
+                keyboardType="numeric"
+                value={manualDesiredWeeklyMinutes}
+              />
+            </Surface>
+          </DetailSection>
+
+          <DetailSection
+            title="Domain"
+            description="Choose the area this goal belongs to."
+          >
+            <Surface className="gap-3 mb-0">
+              <View className="flex-row flex-wrap gap-2">
+                {domains.map((domain) => {
+                  const key = manualDomainKey ?? inference?.domainKey ?? goal?.domainKey;
+                  return (
+                    <OptionChip
+                      key={`domain-select-${domain.id}`}
+                      selected={key === domain.key}
+                      onPress={() => setManualDomainKey(domain.key)}
+                    >
+                      {domain.name}
+                    </OptionChip>
+                  );
+                })}
+              </View>
+            </Surface>
+          </DetailSection>
+
+          <Surface className="gap-4 mb-0">
+            <View className="gap-1">
+              <AppText variant="section">{goal ? "Review the change" : "Create the goal"}</AppText>
+              <AppText tone="secondary" variant="caption">
+                {goal
+                  ? "You’ll review downstream effects only if the edit changes the current structure."
+                  : "The goal will open in detail after creation so you can inspect the structure there."}
+              </AppText>
             </View>
-          </View>
-          <View className="flex-row gap-3">
-            <Button tone="tertiary" style={{ flex: 1 }} onPress={() => navigation.goBack()}>
-              Cancel
-            </Button>
-            <Button
-              style={{ flex: 1 }}
-              onPress={() => void (goal ? handleUpdate() : handleCreate())}
-              disabled={!goal && !inference}
-              busy={busyState === "create" || busyState === "update"}
-            >
-              {goal ? "Review changes" : "Create goal"}
-            </Button>
-          </View>
+            <View className="flex-row gap-3">
+              <Button tone="tertiary" style={{ flex: 1 }} onPress={() => navigation.goBack()}>
+                Cancel
+              </Button>
+              <Button
+                style={{ flex: 1 }}
+                onPress={() => void (goal ? handleUpdate() : handleCreate())}
+                disabled={!goal && !inference}
+                busy={busyState === "create" || busyState === "update"}
+              >
+                {goal ? "Review changes" : "Create goal"}
+              </Button>
+            </View>
+          </Surface>
+
           {runtimeMessage ? (
             <AppText tone="tertiary" variant="caption">
               {runtimeMessage}
@@ -639,37 +956,62 @@ export function GoalEditScreen({
         visible={impactPreview !== null}
         onRequestClose={() => setImpactPreview(null)}
       >
-        <View className="flex-1 items-center justify-center px-5" style={{ backgroundColor: "rgba(16, 18, 22, 0.22)" }}>
+        <View
+          className="flex-1 items-center justify-center px-5"
+          style={{ backgroundColor: "rgba(16, 18, 22, 0.22)" }}
+        >
           <Surface style={{ width: "100%" }}>
             <View className="gap-4">
-              <AppText variant="title">This change affects downstream work</AppText>
+              <AppText variant="title">Review the downstream effect</AppText>
               <AppText tone="secondary">{impactPreview?.summary}</AppText>
-              <MetaLine
+              <DetailMetaGroup
                 items={[
-                  `${impactPreview?.affectedMilestoneCount ?? 0} milestone areas`,
-                  `${impactPreview?.affectedTaskCount ?? 0} tasks`,
-                  `${impactPreview?.protectedTaskCount ?? 0} protected`,
+                  {
+                    label: "Milestone areas",
+                    value: String(impactPreview?.affectedMilestoneCount ?? 0),
+                  },
+                  {
+                    label: "Tasks touched",
+                    value: String(impactPreview?.affectedTaskCount ?? 0),
+                  },
+                  {
+                    label: "Protected",
+                    value: String(impactPreview?.protectedTaskCount ?? 0),
+                  },
                 ]}
               />
               <View className="gap-2">
                 <AppText variant="caption" tone="secondary">
-                  Downstream handling
+                  Choose what happens next
                 </AppText>
-                <OptionChip selected={downstreamChoice === "keep"} onPress={() => setDownstreamChoice("keep")}>
-                  Keep downstream work
+                <OptionChip
+                  selected={downstreamChoice === "keep"}
+                  onPress={() => setDownstreamChoice("keep")}
+                >
+                  Keep current work
                 </OptionChip>
-                <OptionChip selected={downstreamChoice === "targeted_regeneration"} onPress={() => setDownstreamChoice("targeted_regeneration")}>
+                <OptionChip
+                  selected={downstreamChoice === "targeted_regeneration"}
+                  onPress={() => setDownstreamChoice("targeted_regeneration")}
+                >
                   Refresh what changed
                 </OptionChip>
-                <OptionChip selected={downstreamChoice === "full_regeneration"} onPress={() => setDownstreamChoice("full_regeneration")}>
-                  Rebuild downstream work
+                <OptionChip
+                  selected={downstreamChoice === "full_regeneration"}
+                  onPress={() => setDownstreamChoice("full_regeneration")}
+                >
+                  Rebuild the structure
                 </OptionChip>
               </View>
               <View className="flex-row gap-3">
                 <Button tone="tertiary" style={{ flex: 1 }} onPress={() => setImpactPreview(null)}>
                   Back
                 </Button>
-                <Button style={{ flex: 1 }} onPress={() => void confirmGoalEdit()} busy={busyState === "impact"}>
+                <Button
+                  style={{ flex: 1 }}
+                  onPress={() => void confirmGoalEdit()}
+                  busy={busyState === "impact"}
+                >
                   Apply changes
                 </Button>
               </View>

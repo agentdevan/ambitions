@@ -2,7 +2,15 @@ import { NativeStackScreenProps } from "@react-navigation/native-stack";
 import { useEffect, useMemo, useState } from "react";
 import { View } from "react-native";
 
+import {
+  DetailHero,
+  DetailMetaGroup,
+  DetailSection,
+  DetailSummaryStrip,
+  QuietMetaLine,
+} from "../../components/detail/DetailPrimitives";
 import { CompactTimelineRow } from "../../components/navigation/CompactTimelineRow";
+import { DrillInRow } from "../../components/navigation/DrillInRow";
 import { Button } from "../../components/ui/Button";
 import { EmptyStateCard } from "../../components/ui/EmptyStateCard";
 import { OptionChip } from "../../components/ui/OptionChip";
@@ -11,29 +19,19 @@ import { Screen } from "../../components/ui/Screen";
 import { Surface } from "../../components/ui/Surface";
 import { AppText } from "../../components/ui/Text";
 import { GoalStatus } from "../../domain/models";
+import { PlanStackParamList } from "../../navigation/types";
 import { getGoalReviewDraft } from "../../services/goals/metadata";
 import { useAppStore } from "../../state/useAppStore";
 import { formatShortDate } from "../../utils/date";
-import { PlanStackParamList } from "../../navigation/types";
 
 function shiftDate(date: string | null, offsetDays: number) {
   const base = date ? Date.parse(`${date}T12:00:00.000Z`) : Date.now();
   return new Date(base + offsetDays * 86400000).toISOString().slice(0, 10);
 }
 
-function MetaLine({ items }: { items: string[] }) {
-  return (
-    <View className="flex-row flex-wrap gap-x-4 gap-y-2">
-      {items.map((item) => (
-        <AppText key={item} tone="secondary" variant="caption">
-          {item}
-        </AppText>
-      ))}
-    </View>
-  );
-}
-
-export function PlanDetailScreen() {
+export function PlanDetailScreen({
+  navigation,
+}: NativeStackScreenProps<PlanStackParamList, "PlanDetail">) {
   const dailyPlan = useAppStore((state) => state.dailyPlan);
   const today = useAppStore((state) => state.today);
   const calendarConnectionState = useAppStore((state) => state.calendarConnectionState);
@@ -48,24 +46,55 @@ export function PlanDetailScreen() {
 
   return (
     <Screen>
-      <View className="gap-5">
-        <Surface tone="accent" className="gap-3">
-          <AppText variant="title">{dailyPlan.focus}</AppText>
-          <AppText tone="secondary">
-            Open the current day shape without mixing it with review tools or settings.
-          </AppText>
-        </Surface>
+      <View className="gap-6">
+        <DetailHero
+          eyebrow="Plan"
+          title={dailyPlan.focus}
+          description={
+            dailyPlan.planningNotes ?? "This is the current day shape that Ambitions is protecting."
+          }
+          meta={
+            <DetailMetaGroup
+              items={[
+                { label: "Date", value: formatShortDate(dailyPlan.date) },
+                {
+                  label: "Sessions",
+                  value: String(today?.blocks.length ?? 0),
+                },
+                {
+                  label: "Committed",
+                  value: `${dailyPlan.totalCommittedMinutes} min`,
+                },
+                {
+                  label: "Planned",
+                  value: `${dailyPlan.totalPlannedMinutes} min`,
+                },
+              ]}
+            />
+          }
+        />
 
-        <Surface className="gap-4">
-          <AppText variant="section">Today's sessions</AppText>
+        <DetailSection
+          title="Today’s shape"
+          description="The sessions carrying the current plan."
+        >
           <View className="gap-3">
             {(today?.blocks ?? []).map((block) => (
-              <CompactTimelineRow key={block.id} block={block} onPress={() => null} />
+              <CompactTimelineRow
+                key={block.id}
+                block={block}
+                onPress={() =>
+                  (navigation.getParent() as any)?.navigate("Today", {
+                    screen: "TodaySessionDetail",
+                    params: { blockId: block.id },
+                  })
+                }
+              />
             ))}
           </View>
-        </Surface>
+        </DetailSection>
 
-        <Surface className="gap-3">
+        <Surface className="gap-3 mb-0">
           <AppText variant="section">Planning context</AppText>
           <AppText tone="secondary">
             {calendarConnectionState?.permissionState === "granted"
@@ -80,6 +109,7 @@ export function PlanDetailScreen() {
 
 export function PlanStructureScreen({
   route,
+  navigation,
 }: NativeStackScreenProps<PlanStackParamList, "PlanStructure">) {
   const goals = useAppStore((state) => state.goals);
   const milestones = useAppStore((state) => state.milestones);
@@ -92,41 +122,80 @@ export function PlanStructureScreen({
 
   return (
     <Screen>
-      <View className="gap-4">
-        <Surface tone="accent" className="gap-3">
-          <AppText variant="title">Generated structure</AppText>
-          <AppText tone="secondary">
-            This is the current planning structure feeding the plan.
-          </AppText>
-        </Surface>
-        <View className="gap-4">
-          {filteredGoals.map((goal) => {
-            const goalMilestones = milestones.filter((milestone) => milestone.goalId === goal.id);
-            const goalTasks = tasks.filter((task) => task.goalId === goal.id).slice(0, 5);
+      <View className="gap-6">
+        <DetailHero
+          eyebrow="Plan"
+          title="Generated structure"
+          description="See the goal and milestone structure feeding the current plan."
+        />
 
-            return (
-              <Surface key={goal.id} className="gap-3">
-                <AppText variant="section">{goal.title}</AppText>
-                <MetaLine
-                  items={[
-                    `${goalMilestones.length} milestone${goalMilestones.length === 1 ? "" : "s"}`,
-                    `${goalTasks.length} preview task${goalTasks.length === 1 ? "" : "s"}`,
-                  ]}
-                />
-                {goalMilestones.slice(0, 3).map((milestone) => (
-                  <View key={milestone.id} className="gap-1">
-                    <AppText>{milestone.title}</AppText>
-                    <AppText tone="secondary" variant="caption">
-                      {milestone.targetDate
-                        ? `Target ${formatShortDate(milestone.targetDate)}`
-                        : "No target date"}
+        {filteredGoals.length === 0 ? (
+          <EmptyStateCard
+            title="No active structure"
+            body="There is no active goal structure to inspect right now."
+          />
+        ) : (
+          <View className="gap-4">
+            {filteredGoals.map((goal) => {
+              const goalMilestones = milestones.filter((milestone) => milestone.goalId === goal.id);
+              const goalTasks = tasks.filter((task) => task.goalId === goal.id);
+              const upcomingMilestone =
+                goalMilestones.find((milestone) => milestone.status === "in_progress") ??
+                goalMilestones.find((milestone) => milestone.status === "pending") ??
+                null;
+
+              return (
+                <Surface key={goal.id} className="gap-4 mb-0">
+                  <View className="gap-1">
+                    <AppText variant="section">{goal.title}</AppText>
+                    <AppText tone="secondary">
+                      {goal.summary ?? "Open the goal if you need the full milestone and task detail."}
                     </AppText>
                   </View>
-                ))}
-              </Surface>
-            );
-          })}
-        </View>
+                  <DetailSummaryStrip
+                    items={[
+                      {
+                        label: "Milestones",
+                        value: String(goalMilestones.length),
+                        detail: upcomingMilestone
+                          ? `Next: ${upcomingMilestone.title}`
+                          : "No milestone queued",
+                      },
+                      {
+                        label: "Tasks",
+                        value: String(goalTasks.length),
+                        detail: "Current task depth",
+                      },
+                    ]}
+                  />
+                  <View className="gap-2">
+                    {goalMilestones.slice(0, 3).map((milestone) => (
+                      <View key={milestone.id} className="gap-1">
+                        <AppText>{milestone.title}</AppText>
+                        <AppText tone="secondary" variant="caption">
+                          {milestone.targetDate
+                            ? `Target ${formatShortDate(milestone.targetDate)}`
+                            : "No target date"}
+                        </AppText>
+                      </View>
+                    ))}
+                  </View>
+                  <Button
+                    tone="inline"
+                    onPress={() =>
+                      (navigation.getParent() as any)?.navigate("Goals", {
+                        screen: "GoalDetail",
+                        params: { goalId: goal.id },
+                      })
+                    }
+                  >
+                    Open goal
+                  </Button>
+                </Surface>
+              );
+            })}
+          </View>
+        )}
       </View>
     </Screen>
   );
@@ -134,6 +203,7 @@ export function PlanStructureScreen({
 
 export function PlanReviewScreen({
   route,
+  navigation,
 }: NativeStackScreenProps<PlanStackParamList, "PlanReview">) {
   const dailyPlan = useAppStore((state) => state.dailyPlan);
   const goals = useAppStore((state) => state.goals);
@@ -188,147 +258,200 @@ export function PlanReviewScreen({
     );
   }
 
+  const visibleTasks = selectedReviewDraft?.tasks.filter((task) => !task.removed) ?? [];
+
   return (
     <Screen>
-      <View className="gap-5">
-        <Surface tone="accent" className="gap-3">
-          <AppText variant="title">Review changes</AppText>
-          <AppText tone="secondary">
-            Make the decision here so the main plan screen stays focused on summary.
-          </AppText>
-          <View className="flex-row flex-wrap gap-2">
-            {reviewGoals.map((goal) => (
-              <OptionChip
-                key={goal.id}
-                selected={selectedGoalId === goal.id}
-                compact
-                onPress={() => setSelectedGoalId(goal.id)}
-              >
-                {goal.title}
-              </OptionChip>
-            ))}
-          </View>
-        </Surface>
-
-        {selectedGoal && selectedReviewDraft ? (
-          <Surface className="gap-5">
-            <View className="gap-3">
-              <View className="flex-row flex-wrap items-center gap-2">
+      <View className="gap-6">
+        <DetailHero
+          eyebrow="Plan"
+          title="Review changes"
+          description="See what changed, why it changed, then decide what happens next."
+          badges={
+            selectedReviewDraft ? (
+              <>
                 <Pill label={selectedReviewDraft.mode.replaceAll("_", " ")} tone="accent" />
                 <Pill
                   label={`${selectedReviewDraft.impactSummary.affectedTaskCount} task changes`}
                   tone="quiet"
                 />
-              </View>
-              <AppText variant="title">{selectedReviewDraft.headline}</AppText>
-              <AppText tone="secondary">{selectedReviewDraft.summary}</AppText>
-              <MetaLine
-                items={[
-                  `${selectedReviewDraft.impactSummary.affectedMilestoneCount} milestone changes`,
-                  `${selectedReviewDraft.impactSummary.protectedTaskCount} protected`,
-                ]}
-              />
-            </View>
-
-            <View className="gap-2">
-              {selectedReviewDraft.rationale.map((item) => (
-                <Surface key={item} tone="sunken" className="gap-2">
-                  <AppText tone="secondary">{item}</AppText>
-                </Surface>
+              </>
+            ) : null
+          }
+          action={
+            <View className="flex-row flex-wrap gap-2">
+              {reviewGoals.map((goal) => (
+                <OptionChip
+                  key={goal.id}
+                  selected={selectedGoalId === goal.id}
+                  compact
+                  onPress={() => setSelectedGoalId(goal.id)}
+                >
+                  {goal.title}
+                </OptionChip>
               ))}
             </View>
+          }
+        />
 
-            {selectedReviewDraft.tasks.slice(0, 8).map((task) => (
-              <Surface key={task.id} className="gap-3" tone="sunken">
+        {selectedGoal && selectedReviewDraft ? (
+          <>
+            <DetailSection
+              title="Summary"
+              description="The short version before you inspect details."
+            >
+              <Surface className="gap-4 mb-0">
                 <View className="gap-2">
-                  <AppText variant="section">{task.title}</AppText>
-                  <MetaLine
-                    items={[
-                      `${task.estimatedMinutes} min`,
-                      task.targetDate ? `Target ${formatShortDate(task.targetDate)}` : "No target date",
-                      task.protected ? "Preserved" : "Adjustable",
-                    ]}
-                  />
+                  <AppText variant="title">{selectedReviewDraft.headline}</AppText>
+                  <AppText tone="secondary">{selectedReviewDraft.summary}</AppText>
                 </View>
-                {!task.protected ? (
-                  <View className="flex-row flex-wrap gap-2">
-                    <Button
-                      tone="tertiary"
-                      size="compact"
-                      onPress={() =>
-                        void runReviewAction(
-                          `move-up:${task.id}`,
-                          () => moveReviewTask(selectedGoal.id, task.id, "up"),
-                          "The task order could not be updated.",
-                        )
-                      }
-                    >
-                      Earlier
-                    </Button>
-                    <Button
-                      tone="tertiary"
-                      size="compact"
-                      onPress={() =>
-                        void runReviewAction(
-                          `move-down:${task.id}`,
-                          () => moveReviewTask(selectedGoal.id, task.id, "down"),
-                          "The task order could not be updated.",
-                        )
-                      }
-                    >
-                      Later
-                    </Button>
-                    <Button
-                      tone="tertiary"
-                      size="compact"
-                      onPress={() =>
-                        void runReviewAction(
-                          `plus:${task.id}`,
-                          () =>
-                            adjustReviewTask(selectedGoal.id, task.id, {
-                              estimatedMinutes: task.estimatedMinutes + 15,
-                            }),
-                          "The task duration could not be adjusted.",
-                        )
-                      }
-                    >
-                      +15 min
-                    </Button>
-                    <Button
-                      tone="tertiary"
-                      size="compact"
-                      onPress={() =>
-                        void runReviewAction(
-                          `date-later:${task.id}`,
-                          () =>
-                            adjustReviewTask(selectedGoal.id, task.id, {
-                              targetDate: shiftDate(task.targetDate, 1),
-                            }),
-                          "The task timing could not be adjusted.",
-                        )
-                      }
-                    >
-                      Move later
-                    </Button>
-                    <Button
-                      tone="inline"
-                      size="compact"
-                      onPress={() =>
-                        void runReviewAction(
-                          `remove:${task.id}`,
-                          () => removeReviewTask(selectedGoal.id, task.id),
-                          "The task could not be removed from review.",
-                        )
-                      }
-                    >
-                      Remove
-                    </Button>
-                  </View>
-                ) : null}
+                <DetailSummaryStrip
+                  items={[
+                    {
+                      label: "Milestones affected",
+                      value: String(selectedReviewDraft.impactSummary.affectedMilestoneCount),
+                      detail: "Parts of the structure touched",
+                    },
+                    {
+                      label: "Tasks affected",
+                      value: String(selectedReviewDraft.impactSummary.affectedTaskCount),
+                      detail: "Recommended edits",
+                    },
+                    {
+                      label: "Protected",
+                      value: String(selectedReviewDraft.impactSummary.protectedTaskCount),
+                      detail: "Held steady",
+                    },
+                  ]}
+                />
               </Surface>
-            ))}
+            </DetailSection>
 
-            <View className="flex-row flex-wrap gap-3">
+            <DetailSection
+              title="Why this changed"
+              description="Reasoning first, before you act."
+            >
+              <View className="gap-3">
+                {selectedReviewDraft.rationale.map((item) => (
+                  <Surface key={item} tone="sunken" className="gap-2 mb-0">
+                    <AppText tone="secondary">{item}</AppText>
+                  </Surface>
+                ))}
+              </View>
+            </DetailSection>
+
+            <DetailSection
+              title="Inspect proposed work"
+              description="Refine the draft without dumping the whole system onto one page."
+              action={
+                <Button
+                  tone="inline"
+                  onPress={() => navigation.navigate("PlanStructure", { goalId: selectedGoal.id })}
+                >
+                  Open structure
+                </Button>
+              }
+            >
+              <View className="gap-3">
+                {visibleTasks.slice(0, 8).map((task) => (
+                  <Surface key={task.id} className="gap-3 mb-0" tone="sunken">
+                    <View className="gap-2">
+                      <View className="flex-row flex-wrap items-center gap-2">
+                        <Pill
+                          label={task.protected ? "Protected" : task.changeLabel.replaceAll("_", " ")}
+                          tone={task.protected ? "quiet" : "accent"}
+                        />
+                        {task.userAdjusted ? <Pill label="Adjusted" tone="quiet" /> : null}
+                      </View>
+                      <AppText variant="section">{task.title}</AppText>
+                      <QuietMetaLine
+                        items={[
+                          `${task.estimatedMinutes} min`,
+                          task.targetDate
+                            ? `Target ${formatShortDate(task.targetDate)}`
+                            : "No target date",
+                        ]}
+                      />
+                      {task.summary ? <AppText tone="secondary">{task.summary}</AppText> : null}
+                    </View>
+                    {!task.protected ? (
+                      <View className="flex-row flex-wrap gap-2">
+                        <Button
+                          tone="secondary"
+                          size="compact"
+                          onPress={() =>
+                            void runReviewAction(
+                              `move-up:${task.id}`,
+                              () => moveReviewTask(selectedGoal.id, task.id, "up"),
+                              "The task order could not be updated.",
+                            )
+                          }
+                          busy={busyAction === `move-up:${task.id}`}
+                        >
+                          Earlier
+                        </Button>
+                        <Button
+                          tone="secondary"
+                          size="compact"
+                          onPress={() =>
+                            void runReviewAction(
+                              `plus:${task.id}`,
+                              () =>
+                                adjustReviewTask(selectedGoal.id, task.id, {
+                                  estimatedMinutes: task.estimatedMinutes + 15,
+                                }),
+                              "The task duration could not be adjusted.",
+                            )
+                          }
+                          busy={busyAction === `plus:${task.id}`}
+                        >
+                          +15 min
+                        </Button>
+                        <Button
+                          tone="inline"
+                          size="compact"
+                          onPress={() =>
+                            void runReviewAction(
+                              `date-later:${task.id}`,
+                              () =>
+                                adjustReviewTask(selectedGoal.id, task.id, {
+                                  targetDate: shiftDate(task.targetDate, 1),
+                                }),
+                              "The task timing could not be adjusted.",
+                            )
+                          }
+                          busy={busyAction === `date-later:${task.id}`}
+                        >
+                          Defer a day
+                        </Button>
+                        <Button
+                          tone="inline"
+                          size="compact"
+                          onPress={() =>
+                            void runReviewAction(
+                              `remove:${task.id}`,
+                              () => removeReviewTask(selectedGoal.id, task.id),
+                              "The task could not be removed from review.",
+                            )
+                          }
+                          busy={busyAction === `remove:${task.id}`}
+                        >
+                          Remove
+                        </Button>
+                      </View>
+                    ) : null}
+                  </Surface>
+                ))}
+              </View>
+            </DetailSection>
+
+            <Surface className="gap-4 mb-0">
+              <View className="gap-1">
+                <AppText variant="section">Decide what happens next</AppText>
+                <AppText tone="secondary" variant="caption">
+                  Accept the recommendation, refine it again, or leave it for later.
+                </AppText>
+              </View>
               <Button
                 onPress={() =>
                   void runReviewAction(
@@ -339,23 +462,31 @@ export function PlanReviewScreen({
                 }
                 busy={busyAction === `accept:${selectedGoal.id}`}
               >
-                Approve changes
+                Accept changes
               </Button>
-              <Button
-                tone="secondary"
-                onPress={() =>
-                  void runReviewAction(
-                    `refresh:${selectedGoal.id}`,
-                    () => regenerateGoalReview(selectedGoal.id),
-                    "The recommendation could not be refreshed.",
-                  )
-                }
-                busy={busyAction === `refresh:${selectedGoal.id}`}
-              >
-                Refresh proposal
-              </Button>
-            </View>
-          </Surface>
+              <View className="flex-row flex-wrap gap-3">
+                <Button
+                  tone="secondary"
+                  onPress={() =>
+                    void runReviewAction(
+                      `refresh:${selectedGoal.id}`,
+                      () => regenerateGoalReview(selectedGoal.id),
+                      "The recommendation could not be refreshed.",
+                    )
+                  }
+                  busy={busyAction === `refresh:${selectedGoal.id}`}
+                >
+                  Refine proposal
+                </Button>
+                <Button
+                  tone="inline"
+                  onPress={() => navigation.goBack()}
+                >
+                  Decide later
+                </Button>
+              </View>
+            </Surface>
+          </>
         ) : null}
 
         {runtimeMessage ? (

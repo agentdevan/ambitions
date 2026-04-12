@@ -26,43 +26,51 @@ export function DrillInRow({
     <Pressable
       className="rounded-[22px]"
       onPress={onPress}
-      style={({ pressed }) => ({
-        opacity: pressed ? 0.92 : 1,
-        transform: [{ scale: pressed ? 0.992 : 1 }],
-      })}
+      style={({ pressed }) => [
+        {
+          opacity: pressed ? 0.96 : 1,
+          transform: [{ scale: pressed ? 0.994 : 1 }],
+        },
+      ]}
     >
-      <View
-        className="flex-row items-center gap-4 rounded-[22px] px-4 py-4"
-        style={{
-          backgroundColor: theme.colors.background.elevated,
-          borderWidth: 1,
-          borderColor: theme.colors.border.subtle,
-        }}
-      >
-        <View className="flex-1 gap-1.5">
-          <View className="flex-row flex-wrap items-center gap-2">
-            <AppText variant="section">{title}</AppText>
-            {badge}
+      {({ pressed }) => (
+        <View
+          className="flex-row items-center gap-4 rounded-[22px] px-4 py-4"
+          style={{
+            backgroundColor: pressed
+              ? theme.colors.background.sunken
+              : theme.colors.background.elevated,
+            borderWidth: 1,
+            borderColor: pressed
+              ? `${theme.colors.accent.primary}33`
+              : theme.colors.border.subtle,
+          }}
+        >
+          <View className="flex-1 gap-1.5">
+            <View className="flex-row flex-wrap items-center gap-2">
+              <AppText variant="section">{title}</AppText>
+              {badge}
+            </View>
+            {subtitle ? (
+              <AppText tone="secondary" numberOfLines={2}>
+                {subtitle}
+              </AppText>
+            ) : null}
           </View>
-          {subtitle ? (
-            <AppText tone="secondary" numberOfLines={2}>
-              {subtitle}
-            </AppText>
-          ) : null}
+          <View className="items-end gap-1">
+            {detail ? (
+              <AppText tone="tertiary" variant="caption" numberOfLines={1}>
+                {detail}
+              </AppText>
+            ) : null}
+            <Ionicons
+              color={pressed ? theme.colors.accent.primary : theme.colors.text.tertiary}
+              name="chevron-forward"
+              size={18}
+            />
+          </View>
         </View>
-        <View className="items-end gap-1">
-          {detail ? (
-            <AppText tone="tertiary" variant="caption" numberOfLines={1}>
-              {detail}
-            </AppText>
-          ) : null}
-          <Ionicons
-            color={theme.colors.text.tertiary}
-            name="chevron-forward"
-            size={18}
-          />
-        </View>
-      </View>
+      )}
     </Pressable>
   );
 }

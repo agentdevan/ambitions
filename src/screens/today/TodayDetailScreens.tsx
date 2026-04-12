@@ -1,8 +1,16 @@
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import { View } from "react-native";
 
+import {
+  DetailHero,
+  DetailMetaGroup,
+  DetailSection,
+  DetailSummaryStrip,
+  QuietMetaLine,
+} from "../../components/detail/DetailPrimitives";
 import { CompactTimelineRow } from "../../components/navigation/CompactTimelineRow";
+import { DrillInRow } from "../../components/navigation/DrillInRow";
 import { CapacityInsight } from "../../components/today/CapacityInsight";
 import { IntegrationStatusCard } from "../../components/today/IntegrationStatusCard";
 import { ScheduleContext } from "../../components/today/ScheduleContext";
@@ -12,10 +20,11 @@ import { Pill } from "../../components/ui/Pill";
 import { Screen } from "../../components/ui/Screen";
 import { Surface } from "../../components/ui/Surface";
 import { AppText } from "../../components/ui/Text";
-import { TaskActionType } from "../../domain/models";
-import { useAppStore } from "../../state/useAppStore";
-import { formatTimeLabel, formatTimeRangeLabel } from "../../utils/date";
+import { GoalMilestoneStatus, GoalStatus, TaskActionType, TaskStatus } from "../../domain/models";
 import { TodayStackParamList } from "../../navigation/types";
+import { useAppStore } from "../../state/useAppStore";
+import { TodayTaskBlock } from "../../state/viewModels/today";
+import { formatTimeLabel, formatTimeRangeLabel } from "../../utils/date";
 
 const actionLabelMap: Record<TaskActionType, string> = {
   start: "Start now",
@@ -26,24 +35,43 @@ const actionLabelMap: Record<TaskActionType, string> = {
   unschedule: "Unschedule",
 };
 
-function TaskActionButton({
+const statusLabelMap: Record<TaskStatus, string> = {
+  inbox: "Inbox",
+  ready: "Ready",
+  unscheduled: "Unscheduled",
+  scheduled: "Scheduled",
+  in_progress: "In progress",
+  completed: "Completed",
+  skipped: "Skipped",
+  missed: "Missed",
+  deferred: "Deferred",
+  split: "Split",
+  substituted: "Substituted",
+  cancelled: "Cancelled",
+};
+
+const blockStateLabelMap: Record<TodayTaskBlock["state"], string> = {
+  active: "In progress now",
+  complete: "Completed",
+  scheduled: "Scheduled next",
+  rolled: "Rolled forward",
+  deferred: "Deferred",
+  cancelled: "Removed",
+};
+
+function ActionButton({
   action,
   taskId,
   busyTaskId,
   onPress,
+  tone = "primary",
 }: {
   action: TaskActionType;
   taskId: string;
   busyTaskId: string | null;
   onPress: (taskId: string, action: TaskActionType) => Promise<void>;
+  tone?: "primary" | "secondary" | "inline";
 }) {
-  const tone =
-    action === "start" || action === "complete"
-      ? "primary"
-      : action === "defer"
-        ? "secondary"
-        : "tertiary";
-
   return (
     <Button
       busy={busyTaskId === taskId}
@@ -52,6 +80,49 @@ function TaskActionButton({
     >
       {actionLabelMap[action]}
     </Button>
+  );
+}
+
+function getActionHierarchy(actions: TaskActionType[]) {
+  const primary =
+    actions.find((action) => action === "start") ??
+    actions.find((action) => action === "complete") ??
+    actions.find((action) => action === "defer") ??
+    null;
+
+  const secondary = actions.filter(
+    (action) => action !== primary && (action === "complete" || action === "defer"),
+  );
+
+  return {
+    primary,
+    secondary: secondary.slice(0, 1),
+  };
+}
+
+function TimelineGroup({
+  title,
+  description,
+  blocks,
+  onOpen,
+}: {
+  title: string;
+  description: string;
+  blocks: TodayTaskBlock[];
+  onOpen: (blockId: string) => void;
+}) {
+  if (blocks.length === 0) {
+    return null;
+  }
+
+  return (
+    <DetailSection title={title} description={description}>
+      <View className="gap-3">
+        {blocks.map((block) => (
+          <CompactTimelineRow key={block.id} block={block} onPress={() => onOpen(block.id)} />
+        ))}
+      </View>
+    </DetailSection>
   );
 }
 
@@ -71,28 +142,72 @@ export function TodayTimelineScreen({
     );
   }
 
+  const grouped = {
+    now: today.blocks.filter((block) => block.state === "active"),
+    next: today.blocks.filter((block) =>
+      block.state === "scheduled" || block.state === "rolled",
+    ),
+    later: today.blocks.filter((block) => block.state === "deferred"),
+    done: today.blocks.filter(
+      (block) => block.state === "complete" || block.state === "cancelled",
+    ),
+  };
+
   return (
     <Screen>
-      <View className="gap-5">
-        <Surface tone="accent" className="gap-3">
-          <AppText variant="title">Full timeline</AppText>
-          <AppText tone="secondary">
-            Every session stays compact here. Open one when you need context or an action.
-          </AppText>
-        </Surface>
-        <View className="gap-3">
-          {today.blocks.map((block) => (
-            <CompactTimelineRow
-              key={block.id}
-              block={block}
-              onPress={() =>
-                navigation.navigate("TodaySessionDetail", {
-                  blockId: block.id,
-                })
-              }
+      <View className="gap-6">
+        <DetailHero
+          eyebrow="Today"
+          title="Full timeline"
+          description="Open a session when you need context, timing, or the next action."
+          meta={
+            <DetailSummaryStrip
+              items={[
+                {
+                  label: "Sessions",
+                  value: String(today.blocks.length),
+                  detail: "Blocks in today's plan",
+                },
+                {
+                  label: "Open time",
+                  value:
+                    today.capacity.unusedCapacityMinutes > 0
+                      ? `${today.capacity.unusedCapacityMinutes} min`
+                      : "None",
+                  detail: "Still available today",
+                },
+              ]}
             />
-          ))}
-        </View>
+          }
+        />
+
+        <TimelineGroup
+          title="Now"
+          description="Current sessions and the very next committed block."
+          blocks={[...grouped.now, ...grouped.next.slice(0, Math.max(0, 1 - grouped.now.length))]}
+          onOpen={(blockId) => navigation.navigate("TodaySessionDetail", { blockId })}
+        />
+
+        <TimelineGroup
+          title="Coming up"
+          description="The next planned sessions after the current block."
+          blocks={grouped.now.length > 0 ? grouped.next : grouped.next.slice(1)}
+          onOpen={(blockId) => navigation.navigate("TodaySessionDetail", { blockId })}
+        />
+
+        <TimelineGroup
+          title="Later changes"
+          description="Sessions that already moved or need another pass."
+          blocks={grouped.later}
+          onOpen={(blockId) => navigation.navigate("TodaySessionDetail", { blockId })}
+        />
+
+        <TimelineGroup
+          title="Done"
+          description="Completed or cleared from the day."
+          blocks={grouped.done}
+          onOpen={(blockId) => navigation.navigate("TodaySessionDetail", { blockId })}
+        />
       </View>
     </Screen>
   );
@@ -100,13 +215,27 @@ export function TodayTimelineScreen({
 
 export function TodaySessionDetailScreen({
   route,
+  navigation,
 }: NativeStackScreenProps<TodayStackParamList, "TodaySessionDetail">) {
   const today = useAppStore((state) => state.today);
   const applyTaskAction = useAppStore((state) => state.applyTaskAction);
+  const allTasks = useAppStore((state) => state.allTasks);
+  const goals = useAppStore((state) => state.goals);
+  const milestones = useAppStore((state) => state.milestones);
   const [busyTaskId, setBusyTaskId] = useState<string | null>(null);
   const [runtimeMessage, setRuntimeMessage] = useState<string | null>(null);
 
   const block = today?.blocks.find((entry) => entry.id === route.params.blockId) ?? null;
+  const linkedTask = allTasks.find((task) => task.id === block?.taskId) ?? null;
+  const linkedGoal = goals.find((goal) => goal.id === linkedTask?.goalId) ?? null;
+  const linkedMilestone = milestones.find(
+    (milestone) => milestone.id === linkedTask?.milestoneId,
+  ) ?? null;
+
+  const { primary, secondary } = useMemo(
+    () => getActionHierarchy(block?.actions ?? []),
+    [block?.actions],
+  );
 
   async function handleTaskAction(taskId: string, action: TaskActionType) {
     setBusyTaskId(taskId);
@@ -136,57 +265,181 @@ export function TodaySessionDetailScreen({
     );
   }
 
+  const goalStateLabel = linkedGoal
+    ? linkedGoal.status === GoalStatus.Active
+      ? "Active goal"
+      : linkedGoal.status === GoalStatus.Paused
+        ? "Paused goal"
+        : linkedGoal.status === GoalStatus.Completed
+          ? "Completed goal"
+          : "Archived goal"
+    : "No linked goal";
+
+  const milestoneStateLabel = linkedMilestone
+    ? linkedMilestone.status === GoalMilestoneStatus.InProgress
+      ? "Milestone in progress"
+      : linkedMilestone.status === GoalMilestoneStatus.Completed
+        ? "Milestone completed"
+        : linkedMilestone.status === GoalMilestoneStatus.Missed
+          ? "Milestone missed"
+          : linkedMilestone.status === GoalMilestoneStatus.Archived
+            ? "Milestone archived"
+            : "Milestone pending"
+    : "No milestone";
+
   return (
     <Screen>
-      <View className="gap-5">
-        <Surface tone={block.state === "active" ? "accent" : "default"} className="gap-4">
-          <View className="gap-2">
-            <View className="flex-row flex-wrap items-center gap-2">
-              <Pill label={block.state.replace("_", " ")} tone={block.state === "active" ? "accent" : "quiet"} />
-              {block.taskStatus ? <Pill label={block.taskStatus.replace("_", " ")} tone="quiet" /> : null}
-            </View>
-            <AppText variant="title">{block.title}</AppText>
-            <AppText tone="secondary">
-              {formatTimeRangeLabel(block.startsAt, block.endsAt)}.
-            </AppText>
-          </View>
-          <AppText tone="secondary">
-            {block.note ?? "Open the next useful move and keep the session simple."}
-          </AppText>
-        </Surface>
+      <View className="gap-6">
+        <DetailHero
+          eyebrow="Session"
+          title={block.title}
+          description={block.note ?? "Keep this block simple and move the work forward cleanly."}
+          badges={
+            <>
+              <Pill
+                label={blockStateLabelMap[block.state]}
+                tone={block.state === "active" ? "accent" : "quiet"}
+              />
+              {block.taskStatus ? (
+                <Pill label={statusLabelMap[block.taskStatus]} tone="quiet" />
+              ) : null}
+            </>
+          }
+          meta={
+            <DetailMetaGroup
+              items={[
+                {
+                  label: "Time",
+                  value: formatTimeRangeLabel(block.startsAt, block.endsAt),
+                },
+                {
+                  label: "Expected",
+                  value: block.estimatedMinutes ? `${block.estimatedMinutes} min` : "No estimate",
+                },
+                {
+                  label: "Goal",
+                  value: linkedGoal?.title ?? "Unlinked session",
+                },
+                {
+                  label: "Milestone",
+                  value: linkedMilestone?.title ?? "Not tied to a milestone",
+                },
+              ]}
+            />
+          }
+        />
 
-        <Surface className="gap-4">
-          <AppText variant="section">Session details</AppText>
-          <View className="gap-3">
-            <AppText tone="secondary">
-              {block.estimatedMinutes
-                ? `${block.estimatedMinutes} planned minutes.`
-                : "No estimated duration was saved for this block."}
-            </AppText>
-            <AppText tone="secondary">
-              {block.state === "active"
-                ? `This session is live until ${formatTimeLabel(block.endsAt)}.`
-                : `The session begins at ${formatTimeLabel(block.startsAt)}.`}
-            </AppText>
-          </View>
-        </Surface>
-
-        {block.taskId && block.actions.length > 0 ? (
-          <Surface className="gap-4">
-            <AppText variant="section">What to do next</AppText>
-            <View className="gap-3">
-              {block.actions.map((action) => (
-                <TaskActionButton
-                  key={action}
-                  action={action}
-                  taskId={block.taskId as string}
-                  busyTaskId={busyTaskId}
-                  onPress={handleTaskAction}
-                />
-              ))}
+        {block.taskId && primary ? (
+          <Surface className="gap-4 mb-0">
+            <View className="gap-1">
+              <AppText variant="section">Next action</AppText>
+              <AppText tone="secondary" variant="caption">
+                Take the clearest next step from here.
+              </AppText>
             </View>
+            <ActionButton
+              action={primary}
+              taskId={block.taskId}
+              busyTaskId={busyTaskId}
+              onPress={handleTaskAction}
+            />
+            {secondary.length > 0 || linkedGoal ? (
+              <View className="flex-row flex-wrap gap-3">
+                {secondary.map((action) => (
+                  <ActionButton
+                    key={action}
+                    action={action}
+                    taskId={block.taskId as string}
+                    busyTaskId={busyTaskId}
+                    onPress={handleTaskAction}
+                    tone="secondary"
+                  />
+                ))}
+                {linkedGoal ? (
+                  <Button
+                    tone="inline"
+                    onPress={() =>
+                      (navigation.getParent() as any)?.navigate("Goals", {
+                        screen: "GoalDetail",
+                        params: { goalId: linkedGoal.id },
+                      })
+                    }
+                  >
+                    Open goal
+                  </Button>
+                ) : null}
+              </View>
+            ) : null}
           </Surface>
         ) : null}
+
+        <DetailSection
+          title="Session read"
+          description="The key context without turning the page into another summary wall."
+        >
+          <Surface className="gap-4 mb-0">
+            <QuietMetaLine
+              items={[
+                block.state === "active"
+                  ? `Live until ${formatTimeLabel(block.endsAt)}`
+                  : `Starts at ${formatTimeLabel(block.startsAt)}`,
+                goalStateLabel,
+                milestoneStateLabel,
+                linkedTask?.difficulty ? `${linkedTask.difficulty} effort` : "No effort label",
+              ]}
+            />
+            <DetailSummaryStrip
+              items={[
+                {
+                  label: "Why this exists",
+                  value: linkedMilestone?.title ?? linkedGoal?.title ?? "Hold the next useful step",
+                  detail:
+                    linkedMilestone?.summary ??
+                    linkedGoal?.summary ??
+                    "This block protects the next meaningful move.",
+                },
+                {
+                  label: "State",
+                  value: blockStateLabelMap[block.state],
+                  detail:
+                    block.taskStatus && linkedTask
+                      ? `${statusLabelMap[block.taskStatus]} task`
+                      : "Session-level planning block",
+                },
+              ]}
+            />
+          </Surface>
+        </DetailSection>
+
+        <DetailSection
+          title="Linked work"
+          description="Jump straight into the connected goal or back to the day's structure."
+        >
+          <View className="gap-3">
+            {linkedGoal ? (
+              <DrillInRow
+                title={linkedGoal.title}
+                subtitle={
+                  linkedMilestone?.title
+                    ? `Inside ${linkedMilestone.title}`
+                    : linkedGoal.summary ?? "Open the goal for milestones, progress, and edits."
+                }
+                detail={goalStateLabel}
+                onPress={() =>
+                  (navigation.getParent() as any)?.navigate("Goals", {
+                    screen: "GoalDetail",
+                    params: { goalId: linkedGoal.id },
+                  })
+                }
+              />
+            ) : null}
+            <DrillInRow
+              title="View in full timeline"
+              subtitle="See how this session sits inside the rest of the day."
+              onPress={() => navigation.navigate("TodayTimeline")}
+            />
+          </View>
+        </DetailSection>
 
         {runtimeMessage ? (
           <AppText tone="tertiary" variant="caption">
@@ -214,22 +467,44 @@ export function TodayCapacityScreen() {
 
   return (
     <Screen>
-      <View className="gap-5">
+      <View className="gap-6">
+        <DetailHero
+          eyebrow="Today"
+          title="Capacity"
+          description="A quick read on whether the day can still absorb more work."
+          meta={
+            <DetailSummaryStrip
+              items={[
+                {
+                  label: "Usable",
+                  value: `${today.capacity.usableMinutes} min`,
+                  detail: "Estimated workable time",
+                },
+                {
+                  label: "Open",
+                  value:
+                    today.capacity.unusedCapacityMinutes > 0
+                      ? `${today.capacity.unusedCapacityMinutes} min`
+                      : "None",
+                  detail: "Still free today",
+                },
+              ]}
+            />
+          }
+        />
         <CapacityInsight capacity={today.capacity} focus={today.focus} />
-        <Surface className="gap-4">
+        <Surface className="gap-3 mb-0">
           <AppText variant="section">Read on the day</AppText>
-          <View className="gap-3">
-            <AppText tone="secondary">
-              {today.capacity.unusedCapacityMinutes > 0
-                ? `${today.capacity.unusedCapacityMinutes} minutes are still open. Protect them for the best next move, not filler.`
-                : "The day is already committed. If something slips, replan instead of forcing more in."}
-            </AppText>
-            <AppText tone="secondary">
-              {today.capacity.overloadWarning
-                ? "The planner already held work back to avoid overload."
-                : "The current shape still fits inside the planned guardrails."}
-            </AppText>
-          </View>
+          <AppText tone="secondary">
+            {today.capacity.unusedCapacityMinutes > 0
+              ? `${today.capacity.unusedCapacityMinutes} minutes are still open. Protect them for the best next move, not filler.`
+              : "The day is already committed. If something slips, replan instead of forcing more in."}
+          </AppText>
+          <AppText tone="secondary">
+            {today.capacity.overloadWarning
+              ? "The planner already held work back to avoid overload."
+              : "The current shape still fits inside the planned guardrails."}
+          </AppText>
         </Surface>
       </View>
     </Screen>
@@ -278,13 +553,20 @@ export function TodayContextScreen() {
 
   return (
     <Screen>
-      <View className="gap-5">
-        <Surface tone="accent" className="gap-3">
-          <AppText variant="title">Context around the day</AppText>
-          <AppText tone="secondary">{today.integration.calendarDetail}</AppText>
-        </Surface>
+      <View className="gap-6">
+        <DetailHero
+          eyebrow="Today"
+          title="Context"
+          description={today.integration.calendarDetail}
+          badges={
+            <Pill
+              label={today.integration.calendarStatusLabel}
+              tone={today.integration.usingLiveCalendar ? "accent" : "quiet"}
+            />
+          }
+        />
 
-        <Surface className="gap-4">
+        <Surface className="gap-4 mb-0">
           <AppText variant="section">Scheduling context</AppText>
           <ScheduleContext items={today.scheduleContext} />
         </Surface>
