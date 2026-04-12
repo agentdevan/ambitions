@@ -24,20 +24,20 @@ export function Button({
   const theme = useResolvedTheme();
   const palette = {
     primary: {
-      backgroundColor: "#6B7A69",
-      borderColor: "#61705F",
+      backgroundColor: "#60705D",
+      borderColor: "#52614F",
       textTone: "inverse" as const,
       shadowColor: theme.colors.accent.primary,
     },
     secondary: {
-      backgroundColor: "#FAF5EE",
-      borderColor: "#D3C6B8",
+      backgroundColor: "#FFF9F1",
+      borderColor: "#CCBDAD",
       textTone: "primary" as const,
       shadowColor: theme.colors.text.primary,
     },
     ghost: {
-      backgroundColor: "#F1EAE1",
-      borderColor: "#DDCFC0",
+      backgroundColor: "#EFE5D8",
+      borderColor: "#D8C9B8",
       textTone: "secondary" as const,
       shadowColor: theme.colors.text.primary,
     },
@@ -71,10 +71,10 @@ export function Button({
           transform: [{ scale: pressed ? 0.985 : 1 }],
           shadowColor: palette.shadowColor,
           shadowOpacity:
-            tone === "primary" ? (pressed ? 0.14 : 0.22) : tone === "secondary" ? 0.06 : 0.03,
-          shadowRadius: tone === "primary" ? 16 : 8,
-          shadowOffset: { width: 0, height: tone === "primary" ? 8 : 4 },
-          elevation: tone === "primary" ? 4 : 1,
+            tone === "primary" ? (pressed ? 0.18 : 0.26) : tone === "secondary" ? 0.08 : 0.05,
+          shadowRadius: tone === "primary" ? 18 : 10,
+          shadowOffset: { width: 0, height: tone === "primary" ? 9 : 5 },
+          elevation: tone === "primary" ? 5 : 2,
         },
         style,
       ]}

@@ -145,31 +145,34 @@ export function TodayScreen() {
 
   return (
     <Screen>
-      <View className="gap-8">
+      <View className="gap-10">
         <TodayHeader
           dateLabel={formatLongDate(today.date)}
           liveContext={today.integration.usingLiveCalendar}
         />
-        <View className="gap-4">
-          <Surface tone="accent" className="gap-5">
-            <View className="gap-3">
+        <View className="gap-5">
+          <Surface tone="accent" className="gap-6">
+            <View className="gap-4">
+              <AppText tone="tertiary" variant="micro" style={{ textTransform: "uppercase" }}>
+                Primary focus
+              </AppText>
               <View className="flex-row flex-wrap gap-2">
                 <Pill label="Daily brief" tone="accent" />
-                <Pill label={`${today.blocks.length} sessions`} tone="quiet" />
+                <Pill label={`${today.blocks.length} sessions`} />
                 <Pill label={`${today.progress.completed} done`} tone="quiet" />
               </View>
               <AppText variant="title">{today.focus}</AppText>
-              <AppText tone="secondary">
+              <AppText tone="secondary" style={{ maxWidth: 320 }}>
                 {today.adaptiveGuidance[0] ??
                   "What matters first is clear, the next sessions are bounded, and the rest of the day stays supportive instead of noisy."}
               </AppText>
             </View>
             <View
-              className="gap-3 rounded-[24px] px-4 py-4"
-              style={{ backgroundColor: "#FFFFFF78", borderWidth: 1, borderColor: "#C9D5C4" }}
+              className="gap-4 rounded-[24px] px-4 py-4"
+              style={{ backgroundColor: "#F8FBF6B8", borderWidth: 1, borderColor: "#BECDB7" }}
             >
               <AppText tone="tertiary" variant="micro" style={{ textTransform: "uppercase" }}>
-                Signal
+                Today signal
               </AppText>
               <View className="flex-row flex-wrap gap-2">
                 <Pill label={`${today.replanSuggestions.length} recovery options`} />
@@ -189,7 +192,7 @@ export function TodayScreen() {
             busyTaskId={busyTaskId}
           />
         </View>
-        <Surface tone="sunken" className="gap-5">
+        <View className="gap-4 px-1">
           <View className="gap-2">
             <AppText tone="tertiary" variant="micro" style={{ textTransform: "uppercase" }}>
               Support
@@ -200,7 +203,7 @@ export function TodayScreen() {
             </AppText>
           </View>
           <CapacityInsight capacity={today.capacity} focus={today.focus} />
-          <Surface tone="default" className="gap-4">
+          <Surface tone="sunken" className="gap-4">
             <View className="gap-2">
               <AppText tone="tertiary" variant="micro" style={{ textTransform: "uppercase" }}>
                 Context
@@ -287,7 +290,7 @@ export function TodayScreen() {
             }
           />
           {pendingReviewGoals.length > 0 ? (
-            <Surface>
+            <Surface tone="sunken">
               <View className="gap-3">
                 <View className="flex-row flex-wrap gap-2">
                   <Pill label="Recommended plan" tone="accent" />
@@ -306,7 +309,7 @@ export function TodayScreen() {
               </View>
             </Surface>
           ) : null}
-        </Surface>
+        </View>
 
         {runtimeMessage || integrationBusy ? (
           <Surface tone="sunken">

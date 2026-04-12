@@ -46,16 +46,16 @@ export function TimelinePlan({
             <Pill label="Today plan" tone="accent" />
             <Pill label={`${blocks.length} scheduled sessions`} tone="quiet" />
           </View>
-          <AppText variant="section">Task timeline</AppText>
+          <AppText variant="title">Task timeline</AppText>
           <AppText tone="secondary">
-            Every scheduled task is rendered as its own card with timing, state, and actions.
+            The main work area keeps each session bounded, readable, and action-ready.
           </AppText>
         </View>
       </View>
 
       <View
-        className="gap-3 rounded-[28px] px-3 py-3"
-        style={{ backgroundColor: "#EDE6DD", borderWidth: 1, borderColor: "#D9CDBF" }}
+        className="gap-4 rounded-[30px] px-3.5 py-3.5"
+        style={{ backgroundColor: "#E7DDD1", borderWidth: 1, borderColor: "#D0BFAE" }}
       >
         {blocks.length === 0 ? (
           <AppText tone="secondary">
@@ -65,26 +65,31 @@ export function TimelinePlan({
         {blocks.map((block) => (
           <Surface
             key={block.id}
-            className="gap-5"
+            className="gap-6"
             tone={block.state === "active" ? "accent" : "default"}
-            style={{ marginBottom: 0 }}
+            style={{
+              marginBottom: 0,
+              borderColor:
+                block.state === "active" ? "#AFC3A7" : `${stateAccentMap[block.state]}33`,
+            }}
           >
-            <View className="gap-4">
+            <View className="gap-6">
               <View className="flex-row items-start justify-between gap-3">
-                <View className="flex-1 gap-2">
-                  <View>
+                <View className="flex-1 gap-3">
+                  <View className="flex-row flex-wrap gap-2">
                     <Pill label={`${block.startsAt} - ${block.endsAt}`} tone="quiet" />
+                    <Pill label={block.state} tone={block.state === "active" ? "accent" : "neutral"} />
                   </View>
-                  <AppText variant="section">{block.title}</AppText>
+                  <AppText variant="title">{block.title}</AppText>
                   {block.note ? (
-                    <AppText tone="secondary">
+                    <AppText tone="secondary" variant="caption">
                       {block.note}
                     </AppText>
                   ) : null}
                 </View>
                 <View
-                  className="h-11 w-11 items-center justify-center rounded-[16px]"
-                  style={{ backgroundColor: `${stateAccentMap[block.state]}18` }}
+                  className="h-12 w-12 items-center justify-center rounded-[18px]"
+                  style={{ backgroundColor: `${stateAccentMap[block.state]}20`, borderWidth: 1, borderColor: `${stateAccentMap[block.state]}38` }}
                 >
                   <View
                     className="h-3 w-3 rounded-full"
@@ -92,24 +97,37 @@ export function TimelinePlan({
                   />
                 </View>
               </View>
-              <View className="flex-row flex-wrap gap-2">
-                <Pill label={block.state} tone={block.state === "active" ? "accent" : "neutral"} />
+
+              <View
+                className="gap-3 rounded-[20px] px-3 py-3"
+                style={{ backgroundColor: block.state === "active" ? "#F5FAF3" : "#F5EDE3", borderWidth: 1, borderColor: block.state === "active" ? "#C8D8C1" : "#DECFBF" }}
+              >
+                <AppText tone="tertiary" variant="micro" style={{ textTransform: "uppercase" }}>
+                  Session details
+                </AppText>
+                <View className="flex-row flex-wrap gap-2">
                 {block.taskStatus ? (
                   <Pill label={block.taskStatus.replaceAll("_", " ")} />
                 ) : null}
                 {block.estimatedMinutes ? (
                   <Pill label={`${block.estimatedMinutes} min`} tone="quiet" />
                 ) : null}
+                </View>
               </View>
 
               {block.taskId && block.actions.length > 0 ? (
                 <View
                   className="gap-3 rounded-[20px] px-3 py-3"
-                  style={{ backgroundColor: "#F3ECE3", borderWidth: 1, borderColor: "#E1D4C5" }}
+                  style={{ backgroundColor: "#F7F1E8", borderWidth: 1, borderColor: "#DDCDBD" }}
                 >
-                  <AppText tone="tertiary" variant="micro" style={{ textTransform: "uppercase" }}>
-                    Actions
-                  </AppText>
+                  <View className="flex-row items-center justify-between gap-3">
+                    <AppText tone="tertiary" variant="micro" style={{ textTransform: "uppercase" }}>
+                      Actions
+                    </AppText>
+                    <AppText tone="tertiary" variant="caption">
+                      Next move
+                    </AppText>
+                  </View>
                   <View className="flex-row flex-wrap gap-2">
                     {block.actions.slice(0, 2).map((action) => (
                       <Button

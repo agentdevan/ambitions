@@ -21,7 +21,7 @@ interface CapacityInsightProps {
 
 export function CapacityInsight({ capacity, focus }: CapacityInsightProps) {
   return (
-    <Surface className="gap-4">
+    <Surface tone="sunken" className="gap-4">
       <View className="gap-3">
         <AppText tone="tertiary" variant="micro" style={{ textTransform: "uppercase" }}>
           Capacity
@@ -34,7 +34,7 @@ export function CapacityInsight({ capacity, focus }: CapacityInsightProps) {
 
       <View
         className="gap-3 rounded-[22px] px-4 py-4"
-        style={{ backgroundColor: "#F3ECE3", borderWidth: 1, borderColor: "#E2D6C8" }}
+        style={{ backgroundColor: "#F6EFE6", borderWidth: 1, borderColor: "#DDCFBF" }}
       >
         <View className="flex-row flex-wrap gap-2">
           <Pill label={`${capacity.focusBudgetMinutes} min committed`} tone="accent" />

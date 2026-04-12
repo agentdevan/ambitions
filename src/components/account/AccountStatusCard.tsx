@@ -43,7 +43,7 @@ export function AccountStatusCard({
     attachmentState?.status === LocalAttachmentStatus.ConfirmationRequired;
 
   return (
-    <Surface tone="default">
+    <Surface tone="sunken">
       <View className="gap-5">
         <View className="gap-3">
           <View className="flex-row flex-wrap gap-2">
@@ -65,7 +65,7 @@ export function AccountStatusCard({
         {account ? (
           <View
             className="gap-1 rounded-[24px] px-4 py-4"
-            style={{ backgroundColor: "#F3ECE3", borderWidth: 1, borderColor: "#E1D4C5" }}
+            style={{ backgroundColor: "#F6EFE6", borderWidth: 1, borderColor: "#DDCFBF" }}
           >
             <AppText>{account.displayName ?? account.email ?? "Apple account"}</AppText>
             <AppText tone="tertiary" variant="caption">

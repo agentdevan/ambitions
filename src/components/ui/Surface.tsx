@@ -11,41 +11,41 @@ export function Surface({ children, className = "", tone = "default", style, ...
   const theme = useResolvedTheme();
   const toneMap = {
     default: {
-      backgroundColor: "#FBF8F3",
-      borderColor: "#D9D0C4",
+      backgroundColor: "#FFFCF8",
+      borderColor: "#D3C6B7",
       accentColor: "#FFFFFF",
-      shadowOpacity: 0.13,
-      shadowRadius: 20,
-      shadowOffset: { width: 0, height: 10 },
-      elevation: 6,
-      washOpacity: 0.28,
+      shadowOpacity: 0.16,
+      shadowRadius: 22,
+      shadowOffset: { width: 0, height: 12 },
+      elevation: 7,
+      washOpacity: 0.42,
     },
     accent: {
-      backgroundColor: "#E2EAE0",
-      borderColor: "#C5D1C0",
+      backgroundColor: "#DCE7D7",
+      borderColor: "#B7C5B1",
       accentColor: theme.colors.accent.primary,
-      shadowOpacity: 0.18,
-      shadowRadius: 24,
-      shadowOffset: { width: 0, height: 14 },
-      elevation: 8,
-      washOpacity: 0.18,
+      shadowOpacity: 0.22,
+      shadowRadius: 26,
+      shadowOffset: { width: 0, height: 16 },
+      elevation: 9,
+      washOpacity: 0.24,
     },
     sunken: {
-      backgroundColor: "#ECE5DC",
-      borderColor: "#D8CDBF",
-      accentColor: "#F7F2EB",
-      shadowOpacity: 0.08,
-      shadowRadius: 12,
-      shadowOffset: { width: 0, height: 5 },
+      backgroundColor: "#E7DDD1",
+      borderColor: "#CFC0AE",
+      accentColor: "#F3ECE3",
+      shadowOpacity: 0.05,
+      shadowRadius: 10,
+      shadowOffset: { width: 0, height: 4 },
       elevation: 2,
-      washOpacity: 0.1,
+      washOpacity: 0.12,
     },
   };
 
   return (
     <View
       {...props}
-      className={`overflow-hidden rounded-[20px] px-4 py-4 mb-3 ${className}`.trim()}
+      className={`overflow-hidden rounded-[22px] px-4 py-4 mb-3 ${className}`.trim()}
       style={[
         {
           backgroundColor: toneMap[tone].backgroundColor,
@@ -67,9 +67,9 @@ export function Surface({ children, className = "", tone = "default", style, ...
           top: 1,
           left: 1,
           right: 1,
-          height: "48%",
-          borderTopLeftRadius: 19,
-          borderTopRightRadius: 19,
+          height: tone === "sunken" ? "38%" : "46%",
+          borderTopLeftRadius: 21,
+          borderTopRightRadius: 21,
           backgroundColor: "#FFFFFF",
           opacity: toneMap[tone].washOpacity,
         }}
@@ -81,9 +81,9 @@ export function Surface({ children, className = "", tone = "default", style, ...
           top: 0,
           left: 0,
           right: 0,
-          height: tone === "accent" ? 5 : 4,
+          height: tone === "accent" ? 6 : tone === "default" ? 4 : 3,
           backgroundColor: toneMap[tone].accentColor,
-          opacity: tone === "accent" ? 0.72 : tone === "default" ? 0.55 : 0.42,
+          opacity: tone === "accent" ? 0.82 : tone === "default" ? 0.62 : 0.36,
         }}
       />
       {children}

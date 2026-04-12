@@ -12,32 +12,32 @@ export function Pill({ label, tone = "neutral" }: PillProps) {
   const theme = useResolvedTheme();
   const toneMap: Record<NonNullable<PillProps["tone"]>, { backgroundColor: string; borderColor: string; textTone: "secondary" | "tertiary" }> = {
     neutral: {
-      backgroundColor: "#EFE7DC",
-      borderColor: "#D8CCBE",
+      backgroundColor: "#F1E8DC",
+      borderColor: "#D1C1AF",
       textTone: "secondary",
     },
     accent: {
-      backgroundColor: "#D5E3D2",
-      borderColor: "#B5C8B0",
+      backgroundColor: "#D4E1CF",
+      borderColor: "#AEC3A7",
       textTone: "secondary",
     },
     quiet: {
-      backgroundColor: "#F5EEE5",
-      borderColor: "#E2D6C8",
+      backgroundColor: "#EFE6DA",
+      borderColor: "#DACBBB",
       textTone: "tertiary",
     },
   };
 
   return (
     <View
-      className="self-start rounded-full px-3 py-1.5"
+      className="self-start rounded-full px-3.5 py-1.5"
       style={{
         backgroundColor: toneMap[tone].backgroundColor,
         borderWidth: 1,
         borderColor: toneMap[tone].borderColor,
         shadowColor: theme.colors.text.primary,
-        shadowOpacity: 0.04,
-        shadowRadius: 4,
+        shadowOpacity: 0.05,
+        shadowRadius: 5,
         shadowOffset: { width: 0, height: 2 },
       }}
     >
