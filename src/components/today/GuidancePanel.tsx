@@ -14,7 +14,7 @@ export function GuidancePanel({ items }: GuidancePanelProps) {
   return (
     <Surface tone="sunken" className="gap-4">
       <View className="gap-2">
-        <AppText tone="secondary" variant="caption">
+        <AppText tone="secondary" variant="micro" style={{ textTransform: "uppercase" }}>
           Guidance
         </AppText>
         <AppText variant="section">Small adjustments for the way today is shaped</AppText>
@@ -22,9 +22,17 @@ export function GuidancePanel({ items }: GuidancePanelProps) {
 
       <View className="gap-3">
         {items.map((item) => (
-          <View key={item} className="flex-row gap-3">
+          <View
+            key={item}
+            className="flex-row gap-3 rounded-[20px] px-4 py-3"
+            style={{
+              backgroundColor: theme.colors.background.elevated,
+              borderWidth: 1,
+              borderColor: theme.colors.border.subtle,
+            }}
+          >
             <View
-              className="mt-2 h-1.5 w-1.5 rounded-full"
+              className="mt-2 h-2 w-2 rounded-full"
               style={{ backgroundColor: theme.colors.accent.primary }}
             />
             <AppText tone="secondary" style={{ flex: 1 }}>

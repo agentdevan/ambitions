@@ -42,93 +42,76 @@ export function TimelinePlan({
     <Surface className="gap-6">
       <View className="gap-2">
         <View className="flex-row flex-wrap gap-2">
-          <Pill label="Today plan" />
+          <Pill label="Today plan" tone="accent" />
           <Pill label={`${blocks.length} scheduled sessions`} tone="accent" />
         </View>
         <AppText variant="section">A believable shape for the day</AppText>
+        <AppText tone="secondary">
+          Each block is presented as an action surface instead of a flat schedule row.
+        </AppText>
       </View>
 
-      <View className="gap-1">
+      <View className="gap-3">
         {blocks.length === 0 ? (
           <AppText tone="secondary">
             No tasks were scheduled into believable windows for this day.
           </AppText>
         ) : null}
-        {blocks.map((block, index) => (
-          <View
+        {blocks.map((block) => (
+          <Surface
             key={block.id}
-            className="flex-row gap-4 py-4"
-            style={{
-              borderBottomWidth: index < blocks.length - 1 ? 1 : 0,
-              borderBottomColor: theme.colors.border.subtle,
-            }}
+            className="gap-4"
+            tone={block.state === "active" ? "accent" : "sunken"}
           >
-            <View className="items-center pt-0.5">
-              <AppText variant="micro" tone="tertiary">
-                {block.startsAt}
-              </AppText>
+            <View className="flex-row items-start justify-between gap-3">
+              <View className="flex-1 gap-2">
+                <View className="flex-row flex-wrap gap-2">
+                  <Pill label={`${block.startsAt} - ${block.endsAt}`} tone="quiet" />
+                  <Pill label={block.state} tone={block.state === "active" ? "accent" : "neutral"} />
+                </View>
+                <AppText variant="section">{block.title}</AppText>
+                {block.note ? (
+                  <AppText tone="secondary" style={{ maxWidth: 280 }}>
+                    {block.note}
+                  </AppText>
+                ) : null}
+              </View>
               <View
-                className="mt-2 w-[2px] flex-1 rounded-full"
-                style={{ backgroundColor: `${stateAccentMap[block.state]}24`, minHeight: 46 }}
-              />
-            </View>
-
-            <View className="flex-1 gap-2">
-              <View className="flex-row items-start justify-between gap-3">
-                <View className="flex-1 gap-1.5">
-                  <AppText variant="section">{block.title}</AppText>
-                  <AppText tone="tertiary" variant="caption">
-                    Until {block.endsAt}
-                  </AppText>
-                </View>
+                className="h-10 w-10 items-center justify-center rounded-full"
+                style={{ backgroundColor: `${stateAccentMap[block.state]}18` }}
+              >
                 <View
-                  className="rounded-full px-2.5 py-1"
-                  style={{ backgroundColor: `${stateAccentMap[block.state]}14` }}
-                >
-                  <AppText
-                    variant="micro"
-                    style={{
-                      color: stateAccentMap[block.state],
-                      textTransform: "capitalize",
-                    }}
-                  >
-                    {block.state}
-                  </AppText>
-                </View>
+                  className="h-3 w-3 rounded-full"
+                  style={{ backgroundColor: stateAccentMap[block.state] }}
+                />
               </View>
+            </View>
 
-              {block.note ? (
-                <AppText tone="secondary" style={{ maxWidth: 280 }}>
-                  {block.note}
-                </AppText>
+            <View className="flex-row flex-wrap gap-2">
+              {block.taskStatus ? (
+                <Pill label={block.taskStatus.replaceAll("_", " ")} />
               ) : null}
-
-              <View className="flex-row flex-wrap gap-2">
-                {block.taskStatus ? (
-                  <Pill label={block.taskStatus.replaceAll("_", " ")} />
-                ) : null}
-                {block.estimatedMinutes ? (
-                  <Pill label={`${block.estimatedMinutes} min`} />
-                ) : null}
-              </View>
-
-              {block.taskId && block.actions.length > 0 ? (
-                <View className="flex-row flex-wrap gap-2 pt-1">
-                  {block.actions.map((action) => (
-                    <Button
-                      key={`${block.id}-${action}`}
-                      onPress={() => onTaskAction(block.taskId as string, action)}
-                      disabled={busyTaskId === block.taskId}
-                      tone={action === "start" || action === "complete" ? "secondary" : "ghost"}
-                      size="compact"
-                    >
-                      {busyTaskId === block.taskId ? "Working..." : actionLabels[action]}
-                    </Button>
-                  ))}
-                </View>
+              {block.estimatedMinutes ? (
+                <Pill label={`${block.estimatedMinutes} min`} tone="quiet" />
               ) : null}
             </View>
-          </View>
+
+            {block.taskId && block.actions.length > 0 ? (
+              <View className="flex-row flex-wrap gap-2 pt-1">
+                {block.actions.map((action) => (
+                  <Button
+                    key={`${block.id}-${action}`}
+                    onPress={() => onTaskAction(block.taskId as string, action)}
+                    disabled={busyTaskId === block.taskId}
+                    tone={action === "start" || action === "complete" ? "primary" : "secondary"}
+                    size="compact"
+                  >
+                    {busyTaskId === block.taskId ? "Working..." : actionLabels[action]}
+                  </Button>
+                ))}
+              </View>
+            ) : null}
+          </Surface>
         ))}
       </View>
     </Surface>

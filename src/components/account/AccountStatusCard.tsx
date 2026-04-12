@@ -44,8 +44,8 @@ export function AccountStatusCard({
 
   return (
     <Surface tone={requiresAttachment ? "accent" : "default"}>
-      <View className="gap-4">
-        <View className="gap-2">
+      <View className="gap-5">
+        <View className="gap-3">
           <AppText variant="section">Account and sync</AppText>
           <AppText tone="secondary">
             {hasAccount
@@ -56,15 +56,18 @@ export function AccountStatusCard({
 
         <View className="flex-row flex-wrap gap-2">
           <Pill
-            label={hasAccount ? "Signed in" : "On this device"}
+            label={hasAccount ? "Signed in" : "Local only"}
             tone={hasAccount ? "accent" : "neutral"}
           />
-          {syncState ? <Pill label={`Sync ${syncState.mode.replace("_", " ")}`} /> : null}
+          {syncState ? <Pill label={syncState.mode.replace("_", " ")} tone="quiet" /> : null}
           {conflicts.length > 0 ? <Pill label={`${conflicts.length} items to review`} /> : null}
         </View>
 
         {account ? (
-          <View className="gap-1">
+          <View
+            className="gap-1 rounded-[22px] px-4 py-4"
+            style={{ borderWidth: 1, borderColor: "#00000010" }}
+          >
             <AppText>{account.displayName ?? account.email ?? "Apple account"}</AppText>
             <AppText tone="tertiary" variant="caption">
               {syncState?.lastSyncAt
@@ -81,15 +84,17 @@ export function AccountStatusCard({
         ) : null}
 
         {requiresAttachment ? (
-          <View className="gap-3">
-            <AppText>
-              Attach this device&apos;s Ambitions data to the signed-in account?
-            </AppText>
-            <AppText tone="secondary" variant="caption">
-              Existing goals, milestones, tasks, daily plans, preferences, and adaptation profile
-              will stay on this device and become the baseline for sync. Nothing is overwritten
-              silently.
-            </AppText>
+          <View className="gap-4">
+            <View className="gap-2">
+              <AppText>
+                Attach this device&apos;s Ambitions data to the signed-in account?
+              </AppText>
+              <AppText tone="secondary" variant="caption">
+                Existing goals, milestones, tasks, daily plans, preferences, and adaptation profile
+                will stay on this device and become the baseline for sync. Nothing is overwritten
+                silently.
+              </AppText>
+            </View>
             <View className="flex-row gap-3">
               <Button style={{ flex: 1 }} busy={busyAction === "attach"} onPress={onAttach}>
                 Attach data
@@ -118,7 +123,7 @@ export function AccountStatusCard({
           </View>
         ) : (
           <Button busy={busyAction === "sign_in"} onPress={onSignIn}>
-            Continue with Apple
+            Add Apple account
           </Button>
         )}
       </View>

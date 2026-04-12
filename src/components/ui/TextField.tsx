@@ -16,7 +16,7 @@ export function TextField({ label, multiline = false, style, ...props }: TextFie
   return (
     <View className="gap-2">
       {label ? (
-        <AppText variant="caption" tone="secondary" style={{ marginLeft: 2 }}>
+        <AppText variant="micro" tone="tertiary" style={{ marginLeft: 4, textTransform: "uppercase" }}>
           {label}
         </AppText>
       ) : null}
@@ -36,7 +36,7 @@ export function TextField({ label, multiline = false, style, ...props }: TextFie
           {
             minHeight: multiline ? 108 : 52,
             borderRadius: 22,
-            borderWidth: 1,
+            borderWidth: 1.5,
             borderColor: focused ? theme.colors.border.strong : theme.colors.border.subtle,
             backgroundColor: theme.colors.background.elevated,
             paddingHorizontal: 16,
@@ -46,9 +46,9 @@ export function TextField({ label, multiline = false, style, ...props }: TextFie
             lineHeight: 21,
             textAlignVertical: multiline ? "top" : "center",
             shadowColor: theme.colors.text.primary,
-            shadowOpacity: focused ? 0.05 : 0,
-            shadowRadius: 10,
-            shadowOffset: { width: 0, height: 4 },
+            shadowOpacity: focused ? 0.06 : 0.02,
+            shadowRadius: focused ? 14 : 8,
+            shadowOffset: { width: 0, height: focused ? 8 : 4 },
           },
           style,
         ]}

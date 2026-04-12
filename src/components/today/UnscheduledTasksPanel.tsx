@@ -17,7 +17,7 @@ export function UnscheduledTasksPanel({ tasks }: UnscheduledTasksPanelProps) {
   return (
     <Surface className="gap-5">
       <View className="gap-2">
-        <AppText tone="secondary" variant="caption">
+        <AppText tone="secondary" variant="micro" style={{ textTransform: "uppercase" }}>
           Left Unscheduled
         </AppText>
         <AppText variant="section">Held out to keep the day executable</AppText>
@@ -25,14 +25,14 @@ export function UnscheduledTasksPanel({ tasks }: UnscheduledTasksPanelProps) {
 
       <View className="gap-4">
         {tasks.map((task) => (
-          <View key={task.taskId} className="gap-2">
+          <Surface key={task.taskId} className="gap-3" tone="sunken">
             <AppText variant="section">{task.title}</AppText>
             <View className="flex-row flex-wrap gap-2">
               <Pill label={task.status.replaceAll("_", " ")} />
-              <Pill label={`${task.estimatedMinutes} min`} />
+              <Pill label={`${task.estimatedMinutes} min`} tone="quiet" />
             </View>
             <AppText tone="secondary">{task.reason}</AppText>
-          </View>
+          </Surface>
         ))}
       </View>
     </Surface>

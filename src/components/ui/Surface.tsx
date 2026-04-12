@@ -13,29 +13,37 @@ export function Surface({ children, className = "", tone = "default", style, ...
     default: {
       backgroundColor: theme.colors.background.elevated,
       borderColor: theme.colors.border.subtle,
+      shadowOpacity: 0.06,
+      elevation: 3,
     },
     accent: {
       backgroundColor: theme.colors.background.accentWash,
       borderColor: theme.colors.border.subtle,
+      shadowOpacity: 0.08,
+      elevation: 4,
     },
     sunken: {
       backgroundColor: theme.colors.background.sunken,
       borderColor: theme.colors.border.subtle,
+      shadowOpacity: 0.03,
+      elevation: 1,
     },
   };
 
   return (
     <View
       {...props}
-      className={`rounded-[28px] border px-5 py-5 ${className}`.trim()}
+      className={`rounded-[30px] border px-5 py-5 ${className}`.trim()}
       style={[
         {
-          ...toneMap[tone],
+          backgroundColor: toneMap[tone].backgroundColor,
+          borderColor: toneMap[tone].borderColor,
+          borderWidth: 1,
           shadowColor: theme.colors.text.primary,
-          shadowOpacity: tone === "sunken" ? 0.02 : 0.05,
-          shadowRadius: 18,
-          shadowOffset: { width: 0, height: 10 },
-          elevation: tone === "sunken" ? 1 : 3,
+          shadowOpacity: toneMap[tone].shadowOpacity,
+          shadowRadius: tone === "accent" ? 22 : 18,
+          shadowOffset: { width: 0, height: tone === "accent" ? 12 : 10 },
+          elevation: toneMap[tone].elevation,
         },
         style,
       ]}

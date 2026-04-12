@@ -4,6 +4,7 @@ import { Pressable, View } from "react-native";
 import { AccountStatusCard } from "../../components/account/AccountStatusCard";
 import { Button } from "../../components/ui/Button";
 import { EmptyStateCard } from "../../components/ui/EmptyStateCard";
+import { MetricCard } from "../../components/ui/MetricCard";
 import { OptionChip } from "../../components/ui/OptionChip";
 import { Pill } from "../../components/ui/Pill";
 import { Screen } from "../../components/ui/Screen";
@@ -155,6 +156,11 @@ export function InsightsScreen() {
             <AppText tone="secondary">
               These defaults shape the planner when live context is unavailable or incomplete.
             </AppText>
+            <View className="flex-row gap-3">
+              <MetricCard label="Sleep" value={`${sleepStart} - ${sleepEnd}`} />
+              <MetricCard label="Work" value={`${workStart} - ${workEnd}`} />
+              <MetricCard label="Commute" value={`${commuteMinutes} min`} />
+            </View>
             <View className="flex-row gap-3">
               <View style={{ flex: 1 }}>
                 <TextField label="Sleep starts" onChangeText={setSleepStart} value={sleepStart} />
@@ -395,6 +401,8 @@ export function InsightsScreen() {
                       resolvedProductPreferences.themePreset === preset.id
                         ? preset.colors.text.primary
                         : preset.colors.border.subtle,
+                    borderWidth:
+                      resolvedProductPreferences.themePreset === preset.id ? 1.5 : 1,
                   }}
                 >
                   <View className="flex-row flex-wrap gap-2">

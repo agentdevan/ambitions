@@ -14,10 +14,11 @@ import { TodayHeader } from "../../components/today/TodayHeader";
 import { UnscheduledTasksPanel } from "../../components/today/UnscheduledTasksPanel";
 import { Button } from "../../components/ui/Button";
 import { EmptyStateCard } from "../../components/ui/EmptyStateCard";
+import { MetricCard } from "../../components/ui/MetricCard";
 import { Screen } from "../../components/ui/Screen";
-import { AppText } from "../../components/ui/Text";
-import { Surface } from "../../components/ui/Surface";
 import { Pill } from "../../components/ui/Pill";
+import { Surface } from "../../components/ui/Surface";
+import { AppText } from "../../components/ui/Text";
 import { getGoalReviewDraft } from "../../services/goals/metadata";
 import { useAppStore } from "../../state/useAppStore";
 import { formatLongDate } from "../../utils/date";
@@ -154,6 +155,21 @@ export function TodayScreen() {
           dateLabel={formatLongDate(today.date)}
           liveContext={today.integration.usingLiveCalendar}
         />
+        <Surface tone="sunken">
+          <View className="gap-4">
+            <View className="flex-row flex-wrap gap-2">
+              <Pill label="Daily brief" tone="accent" />
+              <Pill label={`${today.blocks.length} sessions`} tone="quiet" />
+              <Pill label={`${today.unscheduled.length} held out`} tone="quiet" />
+            </View>
+            <AppText variant="section">{today.focus}</AppText>
+            <View className="flex-row gap-3">
+              <MetricCard label="On deck" value={String(today.blocks.length)} />
+              <MetricCard label="Recovery" value={String(today.replanSuggestions.length)} />
+              <MetricCard label="Done" value={String(today.progress.completed)} />
+            </View>
+          </View>
+        </Surface>
         {pendingReviewGoals.length > 0 ? (
           <Surface>
             <View className="gap-3">
@@ -275,11 +291,16 @@ export function TodayScreen() {
         ) : null}
 
         <Surface tone="sunken">
-          <AppText tone="tertiary" variant="caption">
-            Account sync covers goals, milestones, tasks, daily plans, preferences, and the
-            adaptation profile. Notifications, permissions, and transient runtime state stay on the
-            device.
-          </AppText>
+          <View className="gap-3">
+            <View className="flex-row flex-wrap gap-2">
+              <Pill label="Continuity scope" tone="quiet" />
+            </View>
+            <AppText tone="tertiary" variant="caption">
+              Account sync covers goals, milestones, tasks, daily plans, preferences, and the
+              adaptation profile. Notifications, permissions, and transient runtime state stay on the
+              device.
+            </AppText>
+          </View>
         </Surface>
       </View>
     </Screen>

@@ -1,6 +1,7 @@
 import { View } from "react-native";
 
 import { TodaySuggestion } from "../../state/viewModels/today";
+import { Pill } from "../ui/Pill";
 import { Surface } from "../ui/Surface";
 import { AppText } from "../ui/Text";
 
@@ -16,7 +17,7 @@ export function ReplanSuggestionsPanel({ suggestions }: ReplanSuggestionsPanelPr
   return (
     <Surface tone="sunken" className="gap-4">
       <View className="gap-2">
-        <AppText tone="secondary" variant="caption">
+        <AppText tone="secondary" variant="micro" style={{ textTransform: "uppercase" }}>
           Replan Suggestions
         </AppText>
         <AppText variant="section">Calm recovery options, not silent reshuffling</AppText>
@@ -24,7 +25,8 @@ export function ReplanSuggestionsPanel({ suggestions }: ReplanSuggestionsPanelPr
 
       <View className="gap-4">
         {suggestions.map((suggestion) => (
-          <View key={suggestion.id} className="gap-1">
+          <Surface key={suggestion.id} className="gap-2" tone="default">
+            <Pill label="Recovery option" tone="quiet" />
             <AppText variant="section">{suggestion.title}</AppText>
             {suggestion.taskTitle ? (
               <AppText tone="tertiary" variant="caption">
@@ -32,7 +34,7 @@ export function ReplanSuggestionsPanel({ suggestions }: ReplanSuggestionsPanelPr
               </AppText>
             ) : null}
             <AppText tone="secondary">{suggestion.rationale}</AppText>
-          </View>
+          </Surface>
         ))}
       </View>
     </Surface>

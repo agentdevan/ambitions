@@ -4,9 +4,11 @@ import { useNavigation } from "@react-navigation/native";
 
 import { Button } from "../../components/ui/Button";
 import { EmptyStateCard } from "../../components/ui/EmptyStateCard";
+import { MetricCard } from "../../components/ui/MetricCard";
 import { OptionChip } from "../../components/ui/OptionChip";
 import { Pill } from "../../components/ui/Pill";
 import { Screen } from "../../components/ui/Screen";
+import { SelectionCard } from "../../components/ui/SelectionCard";
 import { Surface } from "../../components/ui/Surface";
 import { AppText } from "../../components/ui/Text";
 import { TextField } from "../../components/ui/TextField";
@@ -323,53 +325,49 @@ export function GoalsScreen() {
             <>
               <Surface>
                 <View className="gap-4">
-                  <AppText variant="section">Active</AppText>
-                  <AppText tone="secondary">
-                    Choose a goal to inspect its milestones, generated work, and current planning
-                    state.
-                  </AppText>
+                  <View className="gap-2">
+                    <AppText variant="section">Active goals</AppText>
+                    <AppText tone="secondary">
+                      Choose a goal to inspect its milestones, generated work, and current planning
+                      state.
+                    </AppText>
+                  </View>
+                  <View className="gap-3">
                   {activeGoals.map((goal) => {
                     const selected = selectedGoal?.id === goal.id;
                     const reviewDraft = getGoalReviewDraft(goal);
 
                     return (
-                      <Pressable
+                      <SelectionCard
                         key={goal.id}
-                        className="rounded-[24px] px-4 py-4"
+                        selected={selected}
+                        eyebrow={selected ? "Selected goal" : "Goal"}
                         onPress={() => setSelectedGoalId(goal.id)}
-                        style={({ pressed }) => ({
-                          borderWidth: 1,
-                          borderColor: selected
-                            ? theme.colors.text.primary
-                            : theme.colors.border.subtle,
-                          backgroundColor: selected
-                            ? theme.colors.background.accentWash
-                            : theme.colors.background.elevated,
-                          opacity: pressed ? 0.86 : 1,
-                        })}
+                        trailing={
+                          <Pill label={goal.horizon} tone={selected ? "accent" : "quiet"} />
+                        }
                       >
                         <View className="gap-3">
                           <View className="flex-row flex-wrap gap-2">
-                            {selected ? <Pill label="Selected" tone="accent" /> : null}
                             <Pill label={goal.domainKey.replace("_", " ")} />
-                            <Pill label={goal.horizon} />
-                            {goal.targetDate ? <Pill label={goal.targetDate} /> : null}
+                            {goal.targetDate ? <Pill label={goal.targetDate} tone="quiet" /> : null}
                             {reviewDraft ? <Pill label="Review pending" tone="accent" /> : null}
                           </View>
                           <AppText variant="section">{goal.title}</AppText>
+                          <AppText tone="secondary">
+                            {goal.summary ?? "No summary yet."}
+                          </AppText>
                         </View>
-                        <AppText tone="secondary" style={{ marginTop: 6 }}>
-                          {goal.summary ?? "No summary yet."}
-                        </AppText>
-                      </Pressable>
+                      </SelectionCard>
                     );
                   })}
+                  </View>
                 </View>
               </Surface>
 
               {selectedGoal ? (
                 <Surface tone="sunken">
-                  <View className="gap-4">
+                  <View className="gap-5">
                     <View className="flex-row items-start justify-between gap-3">
                       <View className="flex-1 gap-2">
                         <AppText variant="title">{selectedGoal.title}</AppText>
@@ -385,7 +383,7 @@ export function GoalsScreen() {
                     <View className="flex-row flex-wrap gap-2">
                       <Pill label={selectedGoal.status} />
                       <Pill label={`${selectedMilestones.length} milestones`} tone="accent" />
-                      <Pill label={`${visibleTasks.length} tasks`} />
+                      <Pill label={`${visibleTasks.length} tasks`} tone="quiet" />
                       {protectedTasks.length > 0 ? (
                         <Pill label={`${protectedTasks.length} preserved`} />
                       ) : null}
@@ -394,20 +392,19 @@ export function GoalsScreen() {
                       ) : null}
                     </View>
 
+                    <View className="flex-row gap-3">
+                      <MetricCard label="Milestones" value={String(selectedMilestones.length)} />
+                      <MetricCard label="Tasks" value={String(visibleTasks.length)} />
+                      <MetricCard label="Protected" value={String(protectedTasks.length)} />
+                    </View>
+
                     {selectedReviewDraft ? (
-                      <View
-                        className="rounded-[22px] px-4 py-4"
-                        style={{
-                          borderWidth: 1,
-                          borderColor: theme.colors.border.strong,
-                          backgroundColor: theme.colors.background.elevated,
-                        }}
-                      >
+                      <Surface className="gap-3" tone="default">
                         <AppText variant="section">{selectedReviewDraft.headline}</AppText>
-                        <AppText tone="secondary" style={{ marginTop: 6 }}>
+                        <AppText tone="secondary">
                           {selectedReviewDraft.summary}
                         </AppText>
-                        <View className="mt-3 flex-row gap-3">
+                        <View className="flex-row gap-3">
                           <Button
                             tone="secondary"
                             style={{ flex: 1 }}
@@ -416,10 +413,10 @@ export function GoalsScreen() {
                             Review plan
                           </Button>
                         </View>
-                      </View>
+                      </Surface>
                     ) : null}
 
-                    <View className="gap-3">
+                    <Surface tone="default" className="gap-3">
                       <AppText variant="section">
                         Goal snapshot
                       </AppText>
@@ -436,7 +433,7 @@ export function GoalsScreen() {
                       {selectedGoal.notes ? (
                         <AppText tone="secondary">{selectedGoal.notes}</AppText>
                       ) : null}
-                    </View>
+                    </Surface>
 
                     <View className="gap-3">
                       <AppText variant="section">
@@ -484,7 +481,7 @@ export function GoalsScreen() {
                         >
                           <AppText>{task.title}</AppText>
                           <View className="flex-row flex-wrap gap-2">
-                            <Pill label={`${task.estimatedMinutes} min`} />
+                            <Pill label={`${task.estimatedMinutes} min`} tone="quiet" />
                             {task.targetDate ? <Pill label={task.targetDate} /> : null}
                           </View>
                           {hasUserAdjustedMetadata(task) ||
@@ -546,17 +543,17 @@ export function GoalsScreen() {
                       need them again.
                     </AppText>
                     {[...pausedGoals, ...archivedGoals].map((goal) => (
-                      <Surface
+                      <SelectionCard
                         key={goal.id}
-                        className="gap-2"
-                        tone="default"
+                        selected={false}
+                        eyebrow={goal.status}
+                        onPress={() => setSelectedGoalId(goal.id)}
                       >
                         <AppText>{goal.title}</AppText>
                         <View className="flex-row flex-wrap gap-2">
-                          <Pill label={goal.status} />
-                          {goal.targetDate ? <Pill label={goal.targetDate} /> : null}
+                          {goal.targetDate ? <Pill label={goal.targetDate} tone="quiet" /> : null}
                         </View>
-                      </Surface>
+                      </SelectionCard>
                     ))}
                   </View>
                 </Surface>

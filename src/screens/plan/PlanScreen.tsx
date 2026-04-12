@@ -3,6 +3,8 @@ import { ScrollView, View } from "react-native";
 
 import { Button } from "../../components/ui/Button";
 import { EmptyStateCard } from "../../components/ui/EmptyStateCard";
+import { MetricCard } from "../../components/ui/MetricCard";
+import { OptionChip } from "../../components/ui/OptionChip";
 import { Pill } from "../../components/ui/Pill";
 import { Screen } from "../../components/ui/Screen";
 import { Surface } from "../../components/ui/Surface";
@@ -18,7 +20,6 @@ function shiftDate(date: string | null, offsetDays: number) {
 }
 
 export function PlanScreen() {
-  const theme = useResolvedTheme();
   const dailyPlan = useAppStore((state) => state.dailyPlan);
   const timeBlocks = useAppStore((state) => state.timeBlocksForSelectedDate);
   const goals = useAppStore((state) => state.goals);
@@ -83,7 +84,6 @@ export function PlanScreen() {
 
   return (
     <Screen>
-      <ScrollView showsVerticalScrollIndicator={false}>
         <View className="gap-6 pb-6">
           <View className="gap-2 pt-2">
             <Pill label="Plan" />
@@ -105,14 +105,14 @@ export function PlanScreen() {
                 </AppText>
                 <View className="flex-row flex-wrap gap-2">
                   {reviewGoals.map((goal) => (
-                    <Button
+                    <OptionChip
                       key={goal.id}
-                      tone={selectedGoalId === goal.id ? "primary" : "secondary"}
-                      size="compact"
+                      selected={selectedGoalId === goal.id}
+                      compact
                       onPress={() => setSelectedGoalId(goal.id)}
                     >
                       {goal.title}
-                    </Button>
+                    </OptionChip>
                   ))}
                 </View>
               </View>
@@ -139,7 +139,7 @@ export function PlanScreen() {
                   ) : null}
                 </View>
 
-                <View className="gap-2">
+                <View className="gap-3">
                   {selectedReviewDraft.rationale.map((item) => (
                     <Surface key={item} tone="sunken" className="gap-1">
                       <AppText tone="secondary">{item}</AppText>
@@ -170,7 +170,7 @@ export function PlanScreen() {
                         </View>
                       </View>
 
-                      <View className="mt-4 gap-3">
+                      <View className="gap-3">
                         {milestoneTasks.map((task) => (
                           <Surface
                             key={task.id}
@@ -180,7 +180,7 @@ export function PlanScreen() {
                             <View className="gap-2">
                               <AppText>{task.title}</AppText>
                               <View className="flex-row flex-wrap gap-2">
-                                <Pill label={`${task.estimatedMinutes} min`} />
+                                <Pill label={`${task.estimatedMinutes} min`} tone="quiet" />
                                 {task.targetDate ? <Pill label={task.targetDate} /> : null}
                                 {task.protected ? <Pill label="Preserved" tone="accent" /> : null}
                               </View>
@@ -349,20 +349,19 @@ export function PlanScreen() {
           {dailyPlan ? (
             <>
               <Surface>
-                  <View className="gap-3">
+                  <View className="gap-4">
                     <AppText variant="section">Today&apos;s frame</AppText>
                     <AppText>{dailyPlan.focus}</AppText>
                   <AppText tone="secondary">
                     {dailyPlan.planningNotes ?? "The planner created a compact, protective day shape."}
                   </AppText>
-                  <View className="flex-row flex-wrap gap-2">
-                    <Pill label={`${timeBlocks.length} sessions`} tone="accent" />
-                    <Pill
-                      label={`${
-                        tasks.filter((task) => task.scheduledDate === dailyPlan.date).length
-                      } tasks on deck`}
+                  <View className="flex-row gap-3">
+                    <MetricCard label="Sessions" value={String(timeBlocks.length)} />
+                    <MetricCard
+                      label="Tasks"
+                      value={String(tasks.filter((task) => task.scheduledDate === dailyPlan.date).length)}
                     />
-                    <Pill label={dailyPlan.date} />
+                    <MetricCard label="Date" value={dailyPlan.date} />
                   </View>
                 </View>
               </Surface>
@@ -389,7 +388,7 @@ export function PlanScreen() {
                           {goal?.title ?? "Goal no longer available"}
                         </AppText>
                         <View className="flex-row flex-wrap gap-2">
-                          <Pill label={milestone.targetDate ?? "No target date"} />
+                          <Pill label={milestone.targetDate ?? "No target date"} tone="quiet" />
                         </View>
                       </Surface>
                     );
@@ -410,6 +409,28 @@ export function PlanScreen() {
                       ? "Active goals are feeding future milestones and task generation."
                       : "There are no active goals feeding future planning yet."}
                   </AppText>
+                  <View className="flex-row flex-wrap gap-2">
+                    <Pill
+                      label={
+                        calendarConnectionState?.permissionState === "granted"
+                          ? "Calendar continuity on"
+                          : "Calendar continuity off"
+                      }
+                      tone={
+                        calendarConnectionState?.permissionState === "granted"
+                          ? "accent"
+                          : "neutral"
+                      }
+                    />
+                    <Pill
+                      label={
+                        goals.some((goal) => goal.status === GoalStatus.Active)
+                          ? "Active goals feeding plan"
+                          : "No active goals"
+                      }
+                      tone="quiet"
+                    />
+                  </View>
                 </View>
               </Surface>
             </>
@@ -421,7 +442,6 @@ export function PlanScreen() {
             </AppText>
           ) : null}
         </View>
-      </ScrollView>
     </Screen>
   );
 }

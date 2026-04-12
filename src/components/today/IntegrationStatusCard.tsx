@@ -46,12 +46,16 @@ export function IntegrationStatusCard({
 
   return (
     <Surface tone={usingLiveCalendar ? "accent" : "default"} className="gap-4">
-      <View className="gap-2">
+      <View className="gap-3">
         <View className="flex-row flex-wrap gap-2">
           <Pill label="Real-world context" />
           <Pill
-            label={usingLiveCalendar ? "Calendar connected" : "Using saved schedule"}
+            label={usingLiveCalendar ? "Calendar connected" : "Saved schedule"}
             tone={usingLiveCalendar ? "accent" : "neutral"}
+          />
+          <Pill
+            label={`Notifications ${notificationPermissionStatus}`}
+            tone={notificationNeedsPermission ? "neutral" : "quiet"}
           />
         </View>
         <AppText tone="secondary" variant="caption">
@@ -59,12 +63,17 @@ export function IntegrationStatusCard({
             ? "Today is grounded in live calendar context."
             : "Today is using the saved schedule baseline."}
         </AppText>
-        <AppText tone="secondary">{calendarDetail}</AppText>
-        {syncFailure && calendarConnectionState?.metadata.lastError ? (
-          <AppText tone="tertiary" variant="caption">
-            Last read issue: {String(calendarConnectionState.metadata.lastError)}
-          </AppText>
-        ) : null}
+        <View
+          className="rounded-[22px] px-4 py-4"
+          style={{ borderWidth: 1, borderColor: "#00000010" }}
+        >
+          <AppText tone="secondary">{calendarDetail}</AppText>
+          {syncFailure && calendarConnectionState?.metadata.lastError ? (
+            <AppText tone="tertiary" variant="caption" style={{ marginTop: 8 }}>
+              Last read issue: {String(calendarConnectionState.metadata.lastError)}
+            </AppText>
+          ) : null}
+        </View>
       </View>
 
       <View className="flex-row flex-wrap gap-3">
