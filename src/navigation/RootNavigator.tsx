@@ -235,7 +235,13 @@ function ProfileNavigator() {
   const stackOptions = useStackOptions();
 
   return (
-    <ProfileStack.Navigator screenOptions={stackOptions}>
+    <ProfileStack.Navigator
+      screenOptions={{
+        ...stackOptions,
+        headerBackTitle: "Profile",
+        headerBackButtonDisplayMode: "minimal",
+      }}
+    >
       <ProfileStack.Screen
         name="ProfileHome"
         component={ProfileScreen}

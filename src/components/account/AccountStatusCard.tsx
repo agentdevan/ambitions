@@ -41,8 +41,15 @@ export function AccountStatusCard({
   onSignOut,
 }: AccountStatusCardProps) {
   const hasAccount = !!account;
+  const accountUnavailable = !hasAccount && (authState?.availableProviders.length ?? 0) === 0;
   const requiresAttachment =
     attachmentState?.status === LocalAttachmentStatus.ConfirmationRequired;
+  const statusPills = buildStatusPills({
+    hasAccount,
+    accountUnavailable,
+    syncState,
+    conflictsCount: conflicts.length,
+  });
 
   return (
     <Surface tone="sunken">
@@ -52,19 +59,15 @@ export function AccountStatusCard({
             Account
           </AppText>
           <AppText variant="section">{buildHeadline(hasAccount, syncState, authState)}</AppText>
-          <AppText tone="secondary">{buildSummary(hasAccount, attachmentState, syncState)}</AppText>
+          <AppText tone="secondary">
+            {buildSummary(hasAccount, accountUnavailable, attachmentState, syncState)}
+          </AppText>
           <View className="flex-row flex-wrap gap-x-5 gap-y-2">
-            <AppText tone="secondary" variant="caption">
-              {hasAccount ? "Signed in" : "Local only"}
-            </AppText>
-            <AppText tone="secondary" variant="caption">
-              {buildModeLabel(syncState)}
-            </AppText>
-            {conflicts.length > 0 ? (
-              <AppText tone="secondary" variant="caption">
-                {conflicts.length} item{conflicts.length === 1 ? "" : "s"} need review
+            {statusPills.map((pill) => (
+              <AppText key={pill} tone="secondary" variant="caption">
+                {pill}
               </AppText>
-            ) : null}
+            ))}
           </View>
         </View>
 
@@ -141,7 +144,7 @@ function buildHeadline(
   authState: AuthStateSnapshot | null,
 ) {
   if (!hasAccount) {
-    return authState?.status === AuthStatus.Unavailable ? "Local only" : "Add an account";
+    return authState?.status === AuthStatus.Unavailable ? "Local only" : "Connect an account";
   }
 
   switch (syncState?.mode) {
@@ -164,10 +167,14 @@ function buildHeadline(
 
 function buildSummary(
   hasAccount: boolean,
+  accountUnavailable: boolean,
   attachmentState: LocalAttachmentState | null,
   syncState: SyncStateSnapshot | null,
 ) {
   if (!hasAccount) {
+    if (accountUnavailable) {
+      return "Your data stays on this device. Account connection is unavailable right now.";
+    }
     return "Your data stays on this device until you connect an account.";
   }
 
@@ -208,4 +215,34 @@ function buildModeLabel(syncState: SyncStateSnapshot | null) {
     default:
       return "Local only";
   }
+}
+
+function buildStatusPills({
+  hasAccount,
+  accountUnavailable,
+  syncState,
+  conflictsCount,
+}: {
+  hasAccount: boolean;
+  accountUnavailable: boolean;
+  syncState: SyncStateSnapshot | null;
+  conflictsCount: number;
+}) {
+  const pills: string[] = [];
+
+  if (hasAccount) {
+    pills.push("Signed in");
+    pills.push(buildModeLabel(syncState));
+  } else {
+    pills.push("Local only");
+    if (accountUnavailable) {
+      pills.push("Connection unavailable");
+    }
+  }
+
+  if (conflictsCount > 0) {
+    pills.push(`${conflictsCount} item${conflictsCount === 1 ? "" : "s"} need review`);
+  }
+
+  return pills;
 }

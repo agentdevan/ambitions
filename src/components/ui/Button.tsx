@@ -27,11 +27,12 @@ export function Button({
     primary: {
       idleBackground: theme.colors.accent.primary,
       pressedBackground: theme.colors.accent.muted,
-      disabledBackground: theme.colors.border.strong,
+      disabledBackground: theme.colors.background.accentWashStrong,
       idleBorder: theme.colors.accent.primary,
       pressedBorder: theme.colors.accent.muted,
-      disabledBorder: theme.colors.border.strong,
+      disabledBorder: theme.colors.border.accent,
       textTone: "inverse" as const,
+      disabledTextTone: "primary" as const,
       shadowColor: theme.colors.accent.primary,
       elevation: 4,
     },
@@ -43,6 +44,7 @@ export function Button({
       pressedBorder: theme.colors.border.accent,
       disabledBorder: theme.colors.border.subtle,
       textTone: "primary" as const,
+      disabledTextTone: "secondary" as const,
       shadowColor: theme.colors.text.primary,
       elevation: 2,
     },
@@ -54,6 +56,7 @@ export function Button({
       pressedBorder: theme.colors.border.strong,
       disabledBorder: theme.colors.border.subtle,
       textTone: "primary" as const,
+      disabledTextTone: "secondary" as const,
       shadowColor: theme.colors.text.primary,
       elevation: 0,
     },
@@ -65,6 +68,7 @@ export function Button({
       pressedBorder: "transparent",
       disabledBorder: "transparent",
       textTone: "accent" as const,
+      disabledTextTone: "secondary" as const,
       shadowColor: "transparent",
       elevation: 0,
     },
@@ -148,9 +152,7 @@ export function Button({
         <AppText
           tone={
             isDisabled
-              ? resolvedTone === "primary"
-                ? "inverse"
-                : "secondary"
+              ? tonePalette.disabledTextTone
               : tonePalette.textTone
           }
           variant={sizing.textVariant}

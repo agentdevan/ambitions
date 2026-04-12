@@ -18,6 +18,7 @@ import { PreferencesRepository } from "../../repositories/PreferencesRepository"
 import { TaskRepository } from "../../repositories/TaskRepository";
 import { NetworkStatusService } from "./NetworkStatusService";
 import { SupabaseAccountClient } from "./SupabaseAccountClient";
+import { getAuthUnavailableMessage, mapAuthErrorMessage } from "./accountCopy";
 import { SyncCoordinator } from "./sync/SyncCoordinator";
 
 interface AccountServiceDependencies {
@@ -118,7 +119,7 @@ export class AccountService {
     await Promise.all([
       this.dependencies.accountRepository.saveAuthState({
         ...authState,
-        status: AuthStatus.LocalOnly,
+        status: this.remoteClient.isConfigured() ? AuthStatus.LocalOnly : AuthStatus.Unavailable,
         signedInAccountId: null,
         sessionExpiresAt: null,
         lastError: null,
@@ -324,8 +325,7 @@ export class AccountService {
       await this.dependencies.accountRepository.saveAuthState({
         ...authState,
         status: AuthStatus.Unavailable,
-        lastError:
-          "Account sync is not configured in this build. Add Supabase env keys to enable sign-in.",
+        lastError: getAuthUnavailableMessage(),
         updatedAt: now,
       });
       return this.getSnapshot();
@@ -417,8 +417,7 @@ export class AccountService {
       await this.dependencies.accountRepository.saveAuthState({
         ...authState,
         status: AuthStatus.Error,
-        lastError:
-          error instanceof Error ? error.message : "Account authentication could not complete.",
+        lastError: mapAuthErrorMessage(error, mode),
         updatedAt: now,
       });
     }
@@ -445,7 +444,7 @@ export class AccountService {
             status: AuthStatus.LocalOnly,
             signedInAccountId: null,
             sessionExpiresAt: null,
-            lastError: "Your session expired. Sign in again to resume sync.",
+            lastError: "Your session ended. Sign in again to keep syncing.",
             updatedAt: now,
           });
           await this.dependencies.accountRepository.saveSyncState({
@@ -487,7 +486,7 @@ export class AccountService {
         status: AuthStatus.Error,
         signedInAccountId: null,
         sessionExpiresAt: null,
-        lastError: error instanceof Error ? error.message : "Session restore failed.",
+        lastError: mapAuthErrorMessage(error, "sign_in"),
         updatedAt: new Date().toISOString(),
       });
     }
@@ -529,23 +528,24 @@ export class AccountService {
 
     if (!authState) {
       await this.dependencies.accountRepository.saveAuthState({
-        status: AuthStatus.LocalOnly,
+        status: backendConfigured ? AuthStatus.LocalOnly : AuthStatus.Unavailable,
         signedInAccountId: null,
         primaryProvider: AuthProvider.Email,
         availableProviders: backendConfigured ? [AuthProvider.Email] : [],
         sessionExpiresAt: null,
         lastAuthenticatedAt: null,
-        lastError: null,
+        lastError: backendConfigured ? null : getAuthUnavailableMessage(),
         createdAt: now,
         updatedAt: now,
       });
     } else if (!backendConfigured && authState.signedInAccountId) {
       await this.dependencies.accountRepository.saveAuthState({
         ...authState,
-        status: AuthStatus.LocalOnly,
+        status: AuthStatus.Unavailable,
         signedInAccountId: null,
         sessionExpiresAt: null,
         availableProviders: [],
+        lastError: getAuthUnavailableMessage(),
         updatedAt: now,
       });
     } else if (
@@ -554,8 +554,15 @@ export class AccountService {
     ) {
       await this.dependencies.accountRepository.saveAuthState({
         ...authState,
+        status:
+          backendConfigured && authState.status === AuthStatus.Unavailable
+            ? AuthStatus.LocalOnly
+            : !backendConfigured && !authState.signedInAccountId
+              ? AuthStatus.Unavailable
+              : authState.status,
         primaryProvider: AuthProvider.Email,
         availableProviders: backendConfigured ? [AuthProvider.Email] : [],
+        lastError: backendConfigured ? authState.lastError : getAuthUnavailableMessage(),
         updatedAt: now,
       });
     }

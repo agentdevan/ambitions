@@ -1,5 +1,16 @@
-import { useEffect, useState } from "react";
-import { Pressable, View } from "react-native";
+import { Ionicons } from "@expo/vector-icons";
+import { useEffect, useRef, useState } from "react";
+import {
+  Keyboard,
+  KeyboardAvoidingView,
+  LayoutChangeEvent,
+  Platform,
+  Pressable,
+  ScrollView,
+  TextInput,
+  View,
+} from "react-native";
+import { useSafeAreaInsets } from "react-native-safe-area-context";
 
 import { AccountStatusCard } from "../../components/account/AccountStatusCard";
 import { IntegrationStatusCard } from "../../components/today/IntegrationStatusCard";
@@ -9,6 +20,7 @@ import { EmptyStateCard } from "../../components/ui/EmptyStateCard";
 import { OptionChip } from "../../components/ui/OptionChip";
 import { ProgressBar } from "../../components/ui/ProgressBar";
 import { Screen } from "../../components/ui/Screen";
+import { SegmentedControl } from "../../components/ui/SegmentedControl";
 import { Surface } from "../../components/ui/Surface";
 import { AppText } from "../../components/ui/Text";
 import { TextField } from "../../components/ui/TextField";
@@ -21,6 +33,7 @@ import {
   formatTimeRangeLabel,
   normalizeTimeString,
 } from "../../utils/date";
+import { isSupabaseConfigured } from "../../services/account/supabaseConfig";
 
 function MetaLine({ items }: { items: string[] }) {
   return (
@@ -535,6 +548,85 @@ export function ProfilePlanningPreferencesScreen() {
   );
 }
 
+type AuthMode = "create" | "sign_in";
+type AccountFieldKey = "displayName" | "email" | "password";
+
+function validateEmail(value: string) {
+  return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value.trim());
+}
+
+function getFieldValidationState({
+  valid,
+  touched,
+  value,
+}: {
+  valid: boolean;
+  touched: boolean;
+  value: string;
+}) {
+  if (valid && value.trim().length > 0) {
+    return "success" as const;
+  }
+
+  if (touched && value.trim().length > 0) {
+    return "error" as const;
+  }
+
+  return "default" as const;
+}
+
+function RequirementRow({
+  label,
+  met,
+}: {
+  label: string;
+  met: boolean;
+}) {
+  const theme = useResolvedTheme();
+
+  return (
+    <View className="flex-row items-center gap-2">
+      <Ionicons
+        color={met ? theme.colors.semantic.success : theme.colors.text.tertiary}
+        name={met ? "checkmark-circle" : "ellipse-outline"}
+        size={15}
+      />
+      <AppText
+        tone={met ? "primary" : "secondary"}
+        variant="caption"
+        style={met ? { color: theme.colors.semantic.success } : undefined}
+      >
+        {label}
+      </AppText>
+    </View>
+  );
+}
+
+function AuthReadyBadge({
+  mode,
+}: {
+  mode: AuthMode;
+}) {
+  const theme = useResolvedTheme();
+
+  return (
+    <View
+      className="flex-row items-center gap-2 rounded-[18px] px-3 py-3"
+      style={{
+        backgroundColor:
+          theme.mode === "dark" ? "rgba(142,168,131,0.14)" : "rgba(111,133,102,0.1)",
+        borderWidth: 1,
+        borderColor: theme.colors.semantic.success,
+      }}
+    >
+      <Ionicons color={theme.colors.semantic.success} name="checkmark-circle" size={18} />
+      <AppText tone="primary" variant="caption">
+        {mode === "create" ? "Ready to create your account" : "Ready to sign in"}
+      </AppText>
+    </View>
+  );
+}
+
 export function ProfileAccountScreen() {
   const account = useAppStore((state) => state.account);
   const authState = useAppStore((state) => state.authState);
@@ -547,12 +639,63 @@ export function ProfileAccountScreen() {
   const attachLocalDataToAccount = useAppStore((state) => state.attachLocalDataToAccount);
   const deferLocalDataAttachment = useAppStore((state) => state.deferLocalDataAttachment);
   const syncAccountData = useAppStore((state) => state.syncAccountData);
+  const theme = useResolvedTheme();
+  const insets = useSafeAreaInsets();
   const [accountBusy, setAccountBusy] = useState<string | null>(null);
   const [runtimeMessage, setRuntimeMessage] = useState<string | null>(null);
-  const [authMode, setAuthMode] = useState<"create" | "sign_in">("create");
+  const [authMode, setAuthMode] = useState<AuthMode>("create");
   const [displayName, setDisplayName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [touchedFields, setTouchedFields] = useState<Record<AccountFieldKey, boolean>>({
+    displayName: false,
+    email: false,
+    password: false,
+  });
+  const [keyboardInset, setKeyboardInset] = useState(0);
+  const [focusedField, setFocusedField] = useState<AccountFieldKey | null>(null);
+  const scrollRef = useRef<ScrollView>(null);
+  const nameInputRef = useRef<TextInput>(null);
+  const emailInputRef = useRef<TextInput>(null);
+  const passwordInputRef = useRef<TextInput>(null);
+  const fieldOffsets = useRef<Partial<Record<AccountFieldKey, number>>>({});
+  const authConfigured = isSupabaseConfigured();
+
+  useEffect(() => {
+    const showEvent = Platform.OS === "ios" ? "keyboardWillShow" : "keyboardDidShow";
+    const hideEvent = Platform.OS === "ios" ? "keyboardWillHide" : "keyboardDidHide";
+    const showSubscription = Keyboard.addListener(showEvent, (event) => {
+      setKeyboardInset(event.endCoordinates.height);
+      if (focusedField) {
+        requestAnimationFrame(() => {
+          const top = fieldOffsets.current[focusedField] ?? 0;
+          scrollRef.current?.scrollTo({
+            y: Math.max(0, top - 28),
+            animated: true,
+          });
+        });
+      }
+    });
+    const hideSubscription = Keyboard.addListener(hideEvent, () => {
+      setKeyboardInset(0);
+    });
+
+    return () => {
+      showSubscription.remove();
+      hideSubscription.remove();
+    };
+  }, [focusedField]);
+
+  useEffect(() => {
+    if (account) {
+      setRuntimeMessage(null);
+      return;
+    }
+
+    if (authState?.lastError) {
+      setRuntimeMessage(authState.lastError);
+    }
+  }, [account, authState?.lastError]);
 
   async function runAccountAction(
     key: string,
@@ -571,125 +714,320 @@ export function ProfileAccountScreen() {
     }
   }
 
+  function markTouched(field: AccountFieldKey) {
+    setTouchedFields((current) => ({
+      ...current,
+      [field]: true,
+    }));
+  }
+
+  function registerFieldOffset(field: AccountFieldKey, event: LayoutChangeEvent) {
+    fieldOffsets.current[field] = event.nativeEvent.layout.y;
+  }
+
+  function focusField(field: AccountFieldKey) {
+    setFocusedField(field);
+    requestAnimationFrame(() => {
+      const top = fieldOffsets.current[field] ?? 0;
+      scrollRef.current?.scrollTo({
+        y: Math.max(0, top - 28),
+        animated: true,
+      });
+    });
+  }
+
+  function handleSubmitEditing(field: AccountFieldKey) {
+    if (field === "displayName") {
+      emailInputRef.current?.focus();
+      return;
+    }
+
+    if (field === "email") {
+      passwordInputRef.current?.focus();
+      return;
+    }
+
+    if (field === "password" && canSubmitAuth && authConfigured) {
+      void submitAuth();
+    }
+  }
+
+  async function submitAuth() {
+    setTouchedFields({
+      displayName: true,
+      email: true,
+      password: true,
+    });
+
+    if (!canSubmitAuth || !authConfigured) {
+      return;
+    }
+
+    await runAccountAction(
+      "auth",
+      () =>
+        authMode === "create"
+          ? createAccount({
+              email: email.trim(),
+              password,
+              displayName: displayName.trim(),
+            })
+          : signIn({
+              email: email.trim(),
+              password,
+            }),
+      authMode === "create"
+        ? "Couldn’t create your account. Try again."
+        : "Couldn’t sign in. Try again.",
+    );
+  }
+
+  const nameValid = displayName.trim().length > 0;
+  const emailValid = validateEmail(email);
+  const passwordValid = password.trim().length >= 8;
   const canSubmitAuth =
-    email.trim().length > 3 &&
-    password.trim().length >= 8 &&
-    (authMode === "sign_in" || displayName.trim().length > 0);
+    emailValid && passwordValid && (authMode === "sign_in" || nameValid);
+  const nameFieldState =
+    authMode === "create"
+      ? getFieldValidationState({
+          valid: nameValid,
+          touched: touchedFields.displayName,
+          value: displayName,
+        })
+      : "default";
+  const emailFieldState = getFieldValidationState({
+    valid: emailValid,
+    touched: touchedFields.email,
+    value: email,
+  });
+  const passwordFieldState = getFieldValidationState({
+    valid: passwordValid,
+    touched: touchedFields.password,
+    value: password,
+  });
+  const modeDescription =
+    authMode === "create"
+      ? "Create an account to keep your plans and history available across devices."
+      : "Sign in to continue syncing on this device.";
+  const unavailableMessage =
+    authState?.lastError ?? "Connection unavailable right now.";
 
   return (
-    <Screen>
-      <View className="gap-4">
-        <Surface tone="accent" className="gap-3">
-          <AppText variant="title">Account</AppText>
-          <AppText tone="secondary">Identity and sync.</AppText>
-        </Surface>
-        <AccountStatusCard
-          account={account}
-          authState={authState}
-          attachmentState={attachmentState}
-          syncState={syncState}
-          conflicts={syncConflicts}
-          busyAction={
-            accountBusy === "attach" ||
-            accountBusy === "sync" ||
-            accountBusy === "defer" ||
-            accountBusy === "sign_out"
-              ? (accountBusy as "attach" | "sync" | "defer" | "sign_out")
-              : null
-          }
-          onAttach={() =>
-            void runAccountAction(
-              "attach",
-              attachLocalDataToAccount,
-              "Local data could not be attached to the account.",
-            )
-          }
-          onDefer={() =>
-            void runAccountAction(
-              "defer",
-              deferLocalDataAttachment,
-              "The local-only path could not be preserved.",
-            )
-          }
-          onSync={() =>
-            void runAccountAction("sync", () => syncAccountData(), "Account sync could not complete.")
-          }
-          onSignOut={() =>
-            void runAccountAction("sign_out", signOut, "The account could not be signed out.")
-          }
-        />
-        {!account ? (
-          <Surface className="gap-4">
-            <View className="gap-3">
-              <AppText variant="section">Connect an account</AppText>
-              <View className="flex-row gap-2">
-                <OptionChip selected={authMode === "create"} onPress={() => setAuthMode("create")}>
-                  Create account
-                </OptionChip>
-                <OptionChip selected={authMode === "sign_in"} onPress={() => setAuthMode("sign_in")}>
-                  Sign in
-                </OptionChip>
-              </View>
-            </View>
-            {authMode === "create" ? (
-              <TextField
-                autoCapitalize="words"
-                label="Name"
-                onChangeText={setDisplayName}
-                placeholder="Your name"
-                value={displayName}
-              />
-            ) : null}
-            <TextField
-              autoCapitalize="none"
-              keyboardType="email-address"
-              label="Email"
-              onChangeText={setEmail}
-              placeholder="you@example.com"
-              value={email}
-            />
-            <TextField
-              autoCapitalize="none"
-              label="Password"
-              onChangeText={setPassword}
-              placeholder="At least 8 characters"
-              secureTextEntry
-              value={password}
-            />
-            <Button
-              busy={accountBusy === "auth"}
-              disabled={!canSubmitAuth}
-              onPress={() =>
-                void runAccountAction(
-                  "auth",
-                  () =>
-                    authMode === "create"
-                      ? createAccount({
-                          email: email.trim(),
-                          password,
-                          displayName: displayName.trim(),
-                        })
-                      : signIn({
-                          email: email.trim(),
-                          password,
-                        }),
-                  authMode === "create"
-                    ? "The account could not be created."
-                    : "The account could not be signed in.",
-                )
-              }
-            >
-              {authMode === "create" ? "Create account" : "Sign in"}
-            </Button>
-            <AppText tone="tertiary" variant="caption">
-              {authMode === "create"
-                ? "Create an account to carry your data across devices."
-                : "Sign back in to resume sync on this device."}
+    <KeyboardAvoidingView
+      behavior={Platform.OS === "ios" ? "padding" : undefined}
+      keyboardVerticalOffset={Platform.OS === "ios" ? 8 : 0}
+      style={{ flex: 1, backgroundColor: theme.colors.background.canvas }}
+    >
+      <ScrollView
+        ref={scrollRef}
+        keyboardDismissMode={Platform.OS === "ios" ? "interactive" : "on-drag"}
+        keyboardShouldPersistTaps="handled"
+        showsVerticalScrollIndicator={false}
+        contentContainerStyle={{
+          paddingTop: insets.top + 10,
+          paddingBottom: Math.max(insets.bottom + 24, keyboardInset + 24),
+          paddingHorizontal: 16,
+        }}
+      >
+        <View className="gap-4">
+          <Surface tone="accent" className="gap-3">
+            <AppText variant="title">Account</AppText>
+            <AppText tone="secondary">
+              Understand your account status, connect when you&apos;re ready, and keep your data safe.
             </AppText>
           </Surface>
-        ) : null}
-        {runtimeMessage ? <AppText tone="tertiary" variant="caption">{runtimeMessage}</AppText> : null}
-      </View>
-    </Screen>
+          <AccountStatusCard
+            account={account}
+            authState={authState}
+            attachmentState={attachmentState}
+            syncState={syncState}
+            conflicts={syncConflicts}
+            busyAction={
+              accountBusy === "attach" ||
+              accountBusy === "sync" ||
+              accountBusy === "defer" ||
+              accountBusy === "sign_out"
+                ? (accountBusy as "attach" | "sync" | "defer" | "sign_out")
+                : null
+            }
+            onAttach={() =>
+              void runAccountAction(
+                "attach",
+                attachLocalDataToAccount,
+                "Couldn’t bring this device’s data into your account.",
+              )
+            }
+            onDefer={() =>
+              void runAccountAction(
+                "defer",
+                deferLocalDataAttachment,
+                "Couldn’t keep this device in local-only mode.",
+              )
+            }
+            onSync={() =>
+              void runAccountAction("sync", () => syncAccountData(), "Couldn’t sync right now.")
+            }
+            onSignOut={() =>
+              void runAccountAction("sign_out", signOut, "Couldn’t sign out right now.")
+            }
+          />
+          {!account ? (
+            !authConfigured ? (
+              <Surface className="gap-4">
+                <View className="gap-2">
+                  <AppText variant="section">Account connection unavailable</AppText>
+                  <AppText tone="secondary">
+                    This build can keep your data local, but account connection has not been configured yet.
+                  </AppText>
+                </View>
+                <View
+                  className="rounded-[20px] px-4 py-4"
+                  style={{
+                    backgroundColor: theme.colors.background.elevatedSecondary,
+                    borderWidth: 1,
+                    borderColor: theme.colors.border.subtle,
+                  }}
+                >
+                  <AppText tone="secondary" variant="caption">
+                    {unavailableMessage}
+                  </AppText>
+                </View>
+              </Surface>
+            ) : (
+              <Surface className="gap-4">
+                <View className="gap-3">
+                  <AppText variant="section">Connect an account</AppText>
+                  <AppText tone="secondary" variant="caption">
+                    {modeDescription}
+                  </AppText>
+                  <SegmentedControl
+                    value={authMode}
+                    options={[
+                      { value: "create", label: "Create account" },
+                      { value: "sign_in", label: "Sign in" },
+                    ]}
+                    onChange={(value) => {
+                      setAuthMode(value);
+                      setRuntimeMessage(null);
+                    }}
+                  />
+                </View>
+                {authMode === "create" ? (
+                  <View
+                    onLayout={(event) => registerFieldOffset("displayName", event)}
+                  >
+                    <TextField
+                      ref={nameInputRef}
+                      autoCapitalize="words"
+                      autoCorrect={false}
+                      label="Name"
+                      onBlur={() => markTouched("displayName")}
+                      onChangeText={setDisplayName}
+                      onFocus={() => focusField("displayName")}
+                      onSubmitEditing={() => handleSubmitEditing("displayName")}
+                      placeholder="Your name"
+                      returnKeyType="next"
+                      supportingText={
+                        touchedFields.displayName && !nameValid ? "Enter your name." : undefined
+                      }
+                      validationState={nameFieldState}
+                      value={displayName}
+                    />
+                  </View>
+                ) : null}
+                <View onLayout={(event) => registerFieldOffset("email", event)}>
+                  <TextField
+                    ref={emailInputRef}
+                    autoCapitalize="none"
+                    autoCorrect={false}
+                    keyboardType="email-address"
+                    label="Email"
+                    onBlur={() => markTouched("email")}
+                    onChangeText={setEmail}
+                    onFocus={() => focusField("email")}
+                    onSubmitEditing={() => handleSubmitEditing("email")}
+                    placeholder="you@example.com"
+                    returnKeyType="next"
+                    supportingText={
+                      touchedFields.email && !emailValid ? "Enter a valid email address." : undefined
+                    }
+                    validationState={emailFieldState}
+                    value={email}
+                  />
+                </View>
+                <View onLayout={(event) => registerFieldOffset("password", event)}>
+                  <TextField
+                    ref={passwordInputRef}
+                    autoCapitalize="none"
+                    autoCorrect={false}
+                    label="Password"
+                    onBlur={() => markTouched("password")}
+                    onChangeText={setPassword}
+                    onFocus={() => focusField("password")}
+                    onSubmitEditing={() => handleSubmitEditing("password")}
+                    placeholder="At least 8 characters"
+                    returnKeyType={canSubmitAuth ? "go" : "done"}
+                    secureTextEntry
+                    supportingText={
+                      touchedFields.password && !passwordValid
+                        ? "Use at least 8 characters."
+                        : undefined
+                    }
+                    validationState={passwordFieldState}
+                    value={password}
+                  />
+                </View>
+                <View
+                  className="gap-2 rounded-[22px] px-4 py-4"
+                  style={{
+                    backgroundColor: theme.colors.background.elevatedSecondary,
+                    borderWidth: 1,
+                    borderColor: canSubmitAuth
+                      ? theme.colors.semantic.success
+                      : theme.colors.border.subtle,
+                  }}
+                >
+                  <AppText variant="caption">
+                    {authMode === "create" ? "What you need" : "Before you sign in"}
+                  </AppText>
+                  {authMode === "create" ? (
+                    <RequirementRow label="Name required" met={nameValid} />
+                  ) : null}
+                  <RequirementRow label="Valid email" met={emailValid} />
+                  <RequirementRow label="At least 8 characters" met={passwordValid} />
+                </View>
+                {canSubmitAuth ? <AuthReadyBadge mode={authMode} /> : null}
+                <View className="gap-3">
+                  <Button
+                    busy={accountBusy === "auth"}
+                    disabled={!canSubmitAuth}
+                    onPress={() => void submitAuth()}
+                  >
+                    {authMode === "create" ? "Create account" : "Sign in"}
+                  </Button>
+                  <AppText tone="tertiary" variant="caption">
+                    Your data stays on this device until you connect an account.
+                  </AppText>
+                </View>
+              </Surface>
+            )
+          ) : null}
+          {runtimeMessage && (account || authConfigured) ? (
+            <Surface
+              tone="sunken"
+              className="gap-2"
+              style={{
+                borderColor: theme.colors.semantic.warning,
+              }}
+            >
+              <AppText variant="caption">Couldn&apos;t complete that action</AppText>
+              <AppText tone="secondary" variant="caption">
+                {runtimeMessage}
+              </AppText>
+            </Surface>
+          ) : null}
+        </View>
+      </ScrollView>
+    </KeyboardAvoidingView>
   );
 }
