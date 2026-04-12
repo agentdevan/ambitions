@@ -13,6 +13,7 @@ export type GoalsStackParamList = {
   GoalDetail: { goalId: string };
   GoalMilestones: { goalId: string };
   GoalProgress: { goalId: string };
+  GoalHistory: { goalId: string };
   GoalEdit: { goalId?: string };
 };
 
@@ -26,12 +27,14 @@ export type PlanStackParamList = {
 export type InsightsStackParamList = {
   InsightsHome: undefined;
   InsightContinuity: undefined;
-  InsightSignals: undefined;
+  InsightActivity: undefined;
+  InsightPlanChanges: undefined;
   InsightCapacity: undefined;
 };
 
 export type ProfileStackParamList = {
   ProfileHome: undefined;
+  ProfileHistory: undefined;
   ProfileAccount: undefined;
   ProfileAppearance: undefined;
   ProfileScheduleDefaults: undefined;

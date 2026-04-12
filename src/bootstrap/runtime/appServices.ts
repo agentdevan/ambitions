@@ -19,6 +19,7 @@ import {
   SQLiteAdaptationRepository,
   SQLiteAccountRepository,
   SQLiteGoalRepository,
+  SQLiteHistoryRepository,
   SQLiteIntegrationRepository,
   SQLitePlanRepository,
   SQLitePreferencesRepository,
@@ -32,6 +33,7 @@ import { resetStartupReady } from "./startupBarrier";
 const repositories = {
   account: new SQLiteAccountRepository(sqliteClient),
   goals: new SQLiteGoalRepository(sqliteClient),
+  history: new SQLiteHistoryRepository(sqliteClient),
   tasks: new SQLiteTaskRepository(sqliteClient),
   planning: new SQLitePlanRepository(sqliteClient),
   preferences: new SQLitePreferencesRepository(sqliteClient),
@@ -72,6 +74,7 @@ async function resetSeedData() {
   await sqliteClient.withTransaction(async (client) => {
     await client.run("DELETE FROM time_blocks;");
     await client.run("DELETE FROM daily_plans;");
+    await client.run("DELETE FROM activity_events;");
     await client.run("DELETE FROM replan_suggestions;");
     await client.run("DELETE FROM tasks;");
     await client.run("DELETE FROM goal_milestones;");

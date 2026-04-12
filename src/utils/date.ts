@@ -9,6 +9,12 @@ const shortDateFormatter = new Intl.DateTimeFormat("en-US", {
   day: "numeric",
 });
 
+const weekdayDateFormatter = new Intl.DateTimeFormat("en-US", {
+  weekday: "long",
+  month: "short",
+  day: "numeric",
+});
+
 const shortDateTimeFormatter = new Intl.DateTimeFormat("en-US", {
   month: "short",
   day: "numeric",
@@ -103,6 +109,10 @@ export function formatLongDate(dateString: string) {
 
 export function formatShortDate(dateString: string) {
   return shortDateFormatter.format(parseLocalDateOnly(dateString));
+}
+
+export function formatWeekdayDate(dateString: string) {
+  return weekdayDateFormatter.format(parseLocalDateOnly(dateString));
 }
 
 export function formatShortDateTime(value: string) {

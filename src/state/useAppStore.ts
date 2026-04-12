@@ -5,6 +5,7 @@ import { markStartupReady, resetStartupReady } from "../bootstrap/runtime/startu
 import { SchedulingOutput } from "../engines";
 import {
   AdaptationProfile,
+  ActivityEvent,
   AccountIdentity,
   AccountSnapshot,
   AuthStateSnapshot,
@@ -48,6 +49,14 @@ import {
   restoreRollbackSnapshot,
 } from "../services/goals/regenerationCoordinator";
 import { getCurrentLocalDateString } from "../utils/date";
+import {
+  buildGoalStatusActivityEvent,
+  buildGoalUpdatedActivityEvent,
+  buildPlanReviewAcceptedActivityEvents,
+  buildPlanReviewGeneratedActivityEvent,
+  buildPlanReviewRevertedActivityEvent,
+  buildTaskActionActivityEvent,
+} from "../services/history/activity";
 import { TodayViewModel } from "./viewModels/today";
 import { initialPlanDate, refreshAllState } from "./runtime";
 
@@ -97,6 +106,7 @@ interface PlanningSlice {
   dailyPlan: DailyPlan | null;
   schedule: SchedulingOutput | null;
   today: TodayViewModel | null;
+  activityEvents: ActivityEvent[];
   timeBlocksForSelectedDate: TimeBlock[];
   tasksForSelectedDate: Task[];
   refreshPlanning: (date?: string) => Promise<void>;
@@ -200,6 +210,7 @@ export const useAppStore = create<AppState>((set, get) => ({
   dailyPlan: null,
   schedule: null,
   today: null,
+  activityEvents: [],
   tasksForSelectedDate: [],
   timeBlocksForSelectedDate: [],
   userPreferences: null,
@@ -431,6 +442,14 @@ export const useAppStore = create<AppState>((set, get) => ({
           : entry,
       ),
     );
+    await appServices.repositories.history.saveActivityEvents([
+      buildGoalUpdatedActivityEvent({
+        goal,
+        changedFields: impact.changedFields,
+        occurredAt: updatedGoal.updatedAt,
+        choice,
+      }),
+    ]);
     set(await refreshAllState(state.planDate));
   },
 
@@ -505,6 +524,14 @@ export const useAppStore = create<AppState>((set, get) => ({
       await appServices.repositories.tasks.saveTasks(next.tasks);
     }
 
+    await appServices.repositories.history.saveActivityEvents([
+      buildGoalStatusActivityEvent({
+        goal,
+        nextStatus: status,
+        occurredAt: updatedGoal.updatedAt,
+      }),
+    ]);
+
     set(await refreshAllState(state.planDate));
   },
 
@@ -541,6 +568,18 @@ export const useAppStore = create<AppState>((set, get) => ({
       reviewDraft.mode === "new_goal"
         ? setGoalReviewDraft(goal, null)
         : setGoalRollbackSnapshot(setGoalReviewDraft(goal, null), next.rollbackSnapshot);
+    const acceptedAt = new Date().toISOString();
+    const nextTasks = next.tasksToSave.filter((task) => task.goalId === goalId);
+    const nextMilestones = next.milestonesToSave.filter((milestone) => milestone.goalId === goalId);
+    const historyEvents = buildPlanReviewAcceptedActivityEvents({
+      goal,
+      reviewDraft,
+      existingTasks: goalTasks,
+      nextTasks,
+      existingMilestones: goalMilestones,
+      nextMilestones,
+      occurredAt: acceptedAt,
+    });
 
     await Promise.all([
       appServices.repositories.goals.saveGoals(
@@ -550,6 +589,7 @@ export const useAppStore = create<AppState>((set, get) => ({
       ),
       appServices.repositories.goals.saveMilestones(next.milestonesToSave),
       appServices.repositories.tasks.saveTasks(next.tasksToSave),
+      appServices.repositories.history.saveActivityEvents(historyEvents),
     ]);
 
     set(await refreshAllState(state.planDate));
@@ -585,6 +625,7 @@ export const useAppStore = create<AppState>((set, get) => ({
       state.attachmentState?.status === "attached"
         ? state.authState?.signedInAccountId ?? null
         : null;
+    const occurredAt = new Date().toISOString();
     await appServices.repositories.goals.saveGoals(
       goals.map((entry) =>
         entry.id === goalId
@@ -592,6 +633,13 @@ export const useAppStore = create<AppState>((set, get) => ({
           : entry,
       ),
     );
+    await appServices.repositories.history.saveActivityEvents([
+      buildPlanReviewGeneratedActivityEvent({
+        goal,
+        reviewDraft: nextDraft,
+        occurredAt,
+      }),
+    ]);
     set(await refreshAllState(state.planDate));
   },
 
@@ -732,6 +780,12 @@ export const useAppStore = create<AppState>((set, get) => ({
       ),
       appServices.repositories.goals.saveMilestones(next.milestonesToSave),
       appServices.repositories.tasks.saveTasks(next.tasksToSave),
+      appServices.repositories.history.saveActivityEvents([
+        buildPlanReviewRevertedActivityEvent({
+          goal,
+          occurredAt: new Date().toISOString(),
+        }),
+      ]),
     ]);
 
     set(await refreshAllState(state.planDate));
@@ -766,12 +820,33 @@ export const useAppStore = create<AppState>((set, get) => ({
       ...state.replanSuggestions.filter((suggestion) => suggestion.taskId !== taskId),
       ...execution.payload.replanSuggestions,
     ].sort((left, right) => right.confidence - left.confidence);
+    const task = state.tasksForSelectedDate.find((entry) => entry.id === taskId);
+    const block = state.timeBlocksForSelectedDate.find((entry) => entry.taskId === taskId) ?? null;
+    const goal = task?.goalId ? state.goals.find((entry) => entry.id === task.goalId) ?? null : null;
+    const milestone =
+      task?.milestoneId
+        ? state.milestones.find((entry) => entry.id === task.milestoneId) ?? null
+        : null;
+    const historyEvent =
+      task
+        ? buildTaskActionActivityEvent({
+            audit: execution.payload.audit,
+            task,
+            block,
+            goal,
+            milestone,
+            dailyPlanId: state.dailyPlan.id,
+          })
+        : null;
 
     await Promise.all([
       appServices.repositories.tasks.saveTasks(execution.payload.mutation.tasksToSave),
       appServices.repositories.planning.saveTimeBlocks(execution.payload.mutation.blocksToSave),
       appServices.repositories.planning.saveDailyPlans([execution.payload.mutation.dailyPlan]),
       appServices.repositories.adaptation.replaceReplanSuggestions(state.planDate, nextSuggestions),
+      historyEvent
+        ? appServices.repositories.history.saveActivityEvents([historyEvent])
+        : Promise.resolve(),
     ]);
 
     const [allTasks, userPreferences] = await Promise.all([

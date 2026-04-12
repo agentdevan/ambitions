@@ -1,114 +1,218 @@
 import { View } from "react-native";
 
+import { GroupedActivityTimeline, MomentumBars } from "../../components/history/ActivityTimeline";
+import {
+  DetailHero,
+  DetailSection,
+  DetailSummaryStrip,
+  QuietMetaLine,
+} from "../../components/detail/DetailPrimitives";
 import { EmptyStateCard } from "../../components/ui/EmptyStateCard";
 import { Pill } from "../../components/ui/Pill";
 import { Screen } from "../../components/ui/Screen";
 import { Surface } from "../../components/ui/Surface";
 import { AppText } from "../../components/ui/Text";
+import { ActivityEventKind, GoalStatus, TaskStatus } from "../../domain/models";
 import { getGoalReviewDraft } from "../../services/goals/metadata";
+import {
+  buildActivityFeed,
+  groupActivityByDate,
+  summarizeGoalProgress,
+  summarizeInsights,
+} from "../../services/history/selectors";
 import { useAppStore } from "../../state/useAppStore";
-
-function MetaLine({ items }: { items: string[] }) {
-  return (
-    <View className="flex-row flex-wrap gap-x-4 gap-y-2">
-      {items.map((item) => (
-        <AppText key={item} tone="secondary" variant="caption">
-          {item}
-        </AppText>
-      ))}
-    </View>
-  );
-}
+import { formatShortDate } from "../../utils/date";
 
 export function InsightContinuityScreen() {
-  const today = useAppStore((state) => state.today);
   const goals = useAppStore((state) => state.goals);
-  const pendingReviews = goals.filter((goal) => getGoalReviewDraft(goal) !== null);
+  const milestones = useAppStore((state) => state.milestones);
+  const tasks = useAppStore((state) => state.allTasks);
+  const activityEvents = useAppStore((state) => state.activityEvents);
 
-  if (!today) {
+  const feed = buildActivityFeed(activityEvents, tasks, milestones);
+  const summary = summarizeInsights({ goals, tasks, milestones, events: feed });
+  const activeGoals = goals.filter((goal) => goal.status === GoalStatus.Active);
+
+  if (activeGoals.length === 0) {
     return (
       <Screen>
-        <EmptyStateCard title="No insight data" body="Today's continuity snapshot is not available." />
+        <EmptyStateCard title="No active goals" body="Continuity starts once active goals are in motion." />
       </Screen>
     );
   }
 
   return (
     <Screen>
-      <View className="gap-4">
-        <Surface tone="accent" className="gap-3">
-          <AppText variant="title">Continuity</AppText>
-          <AppText tone="secondary">
-            See what is carrying forward well and what still needs a decision.
-          </AppText>
-        </Surface>
-        <Surface className="gap-3">
-          <MetaLine
-            items={[
-              `${today.progress.completed} completed`,
-              `${today.progress.scheduled} still scheduled`,
-              `${today.progress.recovery} recovery items`,
-            ]}
-          />
-          {pendingReviews.map((goal) => (
-            <View key={goal.id} className="gap-1">
-              <AppText>{goal.title}</AppText>
-              <AppText tone="secondary" variant="caption">
-                {getGoalReviewDraft(goal)?.summary}
-              </AppText>
-            </View>
-          ))}
-        </Surface>
+      <View className="gap-6">
+        <DetailHero
+          eyebrow="Insights"
+          title="Continuity"
+          description={summary.momentumCopy}
+          meta={
+            <DetailSummaryStrip
+              items={[
+                {
+                  label: "Moving goals",
+                  value: String(summary.movingGoalCount),
+                  detail: "Active goals with visible recent movement",
+                },
+                {
+                  label: "Completed",
+                  value: String(summary.completedThisWeek),
+                  detail: "Completion events this week",
+                },
+                {
+                  label: "Reshaped",
+                  value: String(summary.reshapedThisWeek),
+                  detail: "Deferred, moved, or revised",
+                },
+              ]}
+            />
+          }
+        />
+
+        <DetailSection
+          title="Recent continuity"
+          description="A weekly read on finishing versus reshaping."
+        >
+          <Surface className="gap-4 mb-0">
+            <MomentumBars points={summary.momentum} />
+            <QuietMetaLine items={[summary.momentumCopy, summary.planCopy]} />
+          </Surface>
+        </DetailSection>
+
+        <DetailSection
+          title="Goals in motion"
+          description="The goals with the clearest recent movement."
+        >
+          <View className="gap-3">
+            {activeGoals.map((goal) => {
+              const goalTasks = tasks.filter((task) => task.goalId === goal.id);
+              const goalMilestones = milestones.filter((milestone) => milestone.goalId === goal.id);
+              const goalEvents = feed.filter((event) => event.goalId === goal.id);
+              const goalSummary = summarizeGoalProgress({
+                goal,
+                milestones: goalMilestones,
+                tasks: goalTasks,
+                events: goalEvents,
+              });
+              const pendingReview = getGoalReviewDraft(goal);
+
+              return (
+                <Surface key={goal.id} className="gap-3 mb-0">
+                  <View className="flex-row flex-wrap items-center gap-2">
+                    <AppText variant="section">{goal.title}</AppText>
+                    {pendingReview ? <Pill label="Review waiting" tone="accent" /> : null}
+                  </View>
+                  <AppText tone="secondary">{goalSummary.reflection}</AppText>
+                  <QuietMetaLine
+                    items={[
+                      `${goalSummary.completedTasks} completed tasks`,
+                      `${goalSummary.carryTasks} carried or moved`,
+                      `${goalSummary.completedMilestones}/${goalSummary.milestoneCount} milestones completed`,
+                    ]}
+                  />
+                </Surface>
+              );
+            })}
+          </View>
+        </DetailSection>
       </View>
     </Screen>
   );
 }
 
-export function InsightSignalsScreen() {
-  const today = useAppStore((state) => state.today);
-  const replanSuggestions = useAppStore((state) => state.replanSuggestions);
+export function InsightActivityScreen() {
+  const milestones = useAppStore((state) => state.milestones);
+  const tasks = useAppStore((state) => state.allTasks);
+  const activityEvents = useAppStore((state) => state.activityEvents);
 
-  if (!today) {
-    return (
-      <Screen>
-        <EmptyStateCard title="No signals yet" body="Signal detail is not available right now." />
-      </Screen>
-    );
-  }
+  const feed = buildActivityFeed(activityEvents, tasks, milestones);
+  const groups = groupActivityByDate(feed);
 
   return (
     <Screen>
-      <View className="gap-4">
-        <Surface tone="accent" className="gap-3">
-          <AppText variant="title">Planning signals</AppText>
-          <AppText tone="secondary">
-            These signals explain why the plan is staying steady or asking for change.
-          </AppText>
-        </Surface>
-        <Surface className="gap-3">
-          {today.adaptiveGuidance.map((item) => (
-            <View key={item} className="gap-1">
-              <AppText>{item}</AppText>
-            </View>
-          ))}
-        </Surface>
-        <Surface className="gap-3">
-          {replanSuggestions.length === 0 ? (
-            <AppText tone="secondary">No active replan suggestions right now.</AppText>
-          ) : (
-            replanSuggestions.map((suggestion) => (
-              <View key={suggestion.id} className="gap-1">
-                <View className="flex-row flex-wrap items-center gap-2">
-                  <AppText>{suggestion.title}</AppText>
-                  <Pill label={suggestion.type.replaceAll("_", " ")} tone="quiet" />
-                </View>
-                <AppText tone="secondary" variant="caption">
-                  {suggestion.rationale}
-                </AppText>
-              </View>
-            ))
-          )}
-        </Surface>
+      <View className="gap-6">
+        <DetailHero
+          eyebrow="Insights"
+          title="Activity timeline"
+          description="A readable history of what actually happened, not a raw event log."
+        />
+        <GroupedActivityTimeline
+          groups={groups}
+          emptyTitle="No activity yet"
+          emptyBody="Timeline detail will appear once work starts moving through the plan."
+        />
+      </View>
+    </Screen>
+  );
+}
+
+export function InsightPlanChangesScreen() {
+  const goals = useAppStore((state) => state.goals);
+  const milestones = useAppStore((state) => state.milestones);
+  const tasks = useAppStore((state) => state.allTasks);
+  const activityEvents = useAppStore((state) => state.activityEvents);
+
+  const feed = buildActivityFeed(activityEvents, tasks, milestones).filter((event) =>
+    [
+      ActivityEventKind.PlanReviewAccepted,
+      ActivityEventKind.PlanReviewGenerated,
+      ActivityEventKind.PlanReviewReverted,
+      ActivityEventKind.GoalUpdated,
+      ActivityEventKind.TaskRescheduled,
+    ].includes(event.kind),
+  );
+  const groups = groupActivityByDate(feed);
+
+  return (
+    <Screen>
+      <View className="gap-6">
+        <DetailHero
+          eyebrow="Insights"
+          title="Plan changes"
+          description="See when the plan stayed stable and when it was deliberately reshaped."
+        />
+
+        <DetailSection
+          title="Current plan pressure"
+          description="A quick read on where revisions are concentrated."
+        >
+          <Surface className="gap-4 mb-0">
+            {goals
+              .filter((goal) => goal.status === GoalStatus.Active || getGoalReviewDraft(goal))
+              .slice(0, 4)
+              .map((goal) => {
+                const goalTasks = tasks.filter((task) => task.goalId === goal.id);
+                const movedTasks = goalTasks.filter((task) =>
+                  [TaskStatus.Deferred, TaskStatus.Missed, TaskStatus.Skipped].includes(task.status),
+                ).length;
+                const nextTarget = goal.targetDate ? formatShortDate(goal.targetDate) : "No target date";
+
+                return (
+                  <Surface key={goal.id} tone="sunken" className="gap-2 mb-0">
+                    <View className="flex-row flex-wrap items-center justify-between gap-2">
+                      <AppText variant="section">{goal.title}</AppText>
+                      <AppText tone="tertiary" variant="caption">
+                        {nextTarget}
+                      </AppText>
+                    </View>
+                    <AppText tone="secondary" variant="caption">
+                      {movedTasks > 0
+                        ? `${movedTasks} tasks currently sitting in carryover states.`
+                        : "Recent changes stayed contained."}
+                    </AppText>
+                  </Surface>
+                );
+              })}
+          </Surface>
+        </DetailSection>
+
+        <GroupedActivityTimeline
+          groups={groups}
+          emptyTitle="No plan changes yet"
+          emptyBody="Plan revisions will appear here after accepted reviews or structural edits."
+        />
       </View>
     </Screen>
   );
@@ -131,11 +235,11 @@ export function InsightCapacityScreen() {
         <Surface tone="accent" className="gap-3">
           <AppText variant="title">Capacity and balance</AppText>
           <AppText tone="secondary">
-            A compact read on how heavy the day is and how much room is left.
+            Capacity still stays compact. Reflection belongs to history, not to a dashboard wall.
           </AppText>
         </Surface>
         <Surface className="gap-3">
-          <MetaLine
+          <QuietMetaLine
             items={[
               `${today.capacity.focusBudgetMinutes} focus minutes`,
               `${today.capacity.meetingLoadMinutes} meeting minutes`,

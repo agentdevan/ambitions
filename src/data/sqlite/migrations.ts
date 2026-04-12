@@ -427,4 +427,43 @@ export const schemaMigrations: MigrationDefinition[] = [
       `CREATE INDEX IF NOT EXISTS idx_remote_sync_records_account_id ON remote_sync_records(account_id);`,
     ],
   },
+  {
+    id: 4,
+    name: "phase_12_activity_history",
+    statements: [
+      `
+        CREATE TABLE IF NOT EXISTS activity_events (
+          id TEXT PRIMARY KEY NOT NULL,
+          kind TEXT NOT NULL,
+          occurred_at TEXT NOT NULL,
+          date TEXT NOT NULL,
+          title TEXT NOT NULL,
+          detail TEXT,
+          outcome_label TEXT,
+          goal_id TEXT,
+          milestone_id TEXT,
+          task_id TEXT,
+          daily_plan_id TEXT,
+          time_block_id TEXT,
+          metadata_json TEXT NOT NULL,
+          owner_user_id TEXT,
+          remote_id TEXT,
+          sync_state TEXT NOT NULL,
+          version INTEGER NOT NULL,
+          last_synced_at TEXT,
+          created_at TEXT NOT NULL,
+          updated_at TEXT NOT NULL,
+          FOREIGN KEY(goal_id) REFERENCES goals(id) ON DELETE SET NULL,
+          FOREIGN KEY(milestone_id) REFERENCES goal_milestones(id) ON DELETE SET NULL,
+          FOREIGN KEY(task_id) REFERENCES tasks(id) ON DELETE SET NULL,
+          FOREIGN KEY(daily_plan_id) REFERENCES daily_plans(id) ON DELETE SET NULL,
+          FOREIGN KEY(time_block_id) REFERENCES time_blocks(id) ON DELETE SET NULL
+        );
+      `,
+      `CREATE INDEX IF NOT EXISTS idx_activity_events_occurred_at ON activity_events(occurred_at DESC);`,
+      `CREATE INDEX IF NOT EXISTS idx_activity_events_goal_id ON activity_events(goal_id);`,
+      `CREATE INDEX IF NOT EXISTS idx_activity_events_task_id ON activity_events(task_id);`,
+      `CREATE INDEX IF NOT EXISTS idx_activity_events_date ON activity_events(date DESC);`,
+    ],
+  },
 ];

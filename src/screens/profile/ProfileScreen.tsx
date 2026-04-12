@@ -7,6 +7,7 @@ import { Pill } from "../../components/ui/Pill";
 import { Screen } from "../../components/ui/Screen";
 import { Surface } from "../../components/ui/Surface";
 import { AppText } from "../../components/ui/Text";
+import { buildActivityFeed, summarizeInsights } from "../../services/history/selectors";
 import { useAppStore } from "../../state/useAppStore";
 import { formatTimeRangeLabel } from "../../utils/date";
 import { ProfileStackParamList } from "../../navigation/types";
@@ -19,6 +20,10 @@ export function ProfileScreen({ navigation }: Props) {
   const calendarConnectionState = useAppStore((state) => state.calendarConnectionState);
   const account = useAppStore((state) => state.account);
   const syncState = useAppStore((state) => state.syncState);
+  const goals = useAppStore((state) => state.goals);
+  const milestones = useAppStore((state) => state.milestones);
+  const tasks = useAppStore((state) => state.allTasks);
+  const activityEvents = useAppStore((state) => state.activityEvents);
 
   if (!productPreferences) {
     return (
@@ -34,6 +39,12 @@ export function ProfileScreen({ navigation }: Props) {
   }
 
   const enabledNotifications = notificationPreferences.filter((item) => item.enabled).length;
+  const reflectionSummary = summarizeInsights({
+    goals,
+    tasks,
+    milestones,
+    events: buildActivityFeed(activityEvents, tasks, milestones),
+  });
 
   return (
     <Screen>
@@ -60,6 +71,12 @@ export function ProfileScreen({ navigation }: Props) {
         </Surface>
 
         <View className="gap-3">
+          <DrillInRow
+            title="Recent movement"
+            subtitle={reflectionSummary.momentumCopy}
+            detail={`${reflectionSummary.completedThisWeek} completed`}
+            onPress={() => navigation.navigate("ProfileHistory")}
+          />
           <DrillInRow
             title="Appearance"
             subtitle="Theme preset and visual tone."

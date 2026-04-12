@@ -3,6 +3,7 @@ import { Pressable, View } from "react-native";
 
 import { AccountStatusCard } from "../../components/account/AccountStatusCard";
 import { IntegrationStatusCard } from "../../components/today/IntegrationStatusCard";
+import { GroupedActivityTimeline, MomentumBars } from "../../components/history/ActivityTimeline";
 import { Button } from "../../components/ui/Button";
 import { EmptyStateCard } from "../../components/ui/EmptyStateCard";
 import { OptionChip } from "../../components/ui/OptionChip";
@@ -13,6 +14,7 @@ import { TextField } from "../../components/ui/TextField";
 import { useResolvedTheme } from "../../design/theme/useResolvedTheme";
 import { themePresets } from "../../product/theme";
 import { useAppStore } from "../../state/useAppStore";
+import { buildActivityFeed, groupActivityByDate, summarizeInsights } from "../../services/history/selectors";
 import {
   formatTimeLabel,
   formatTimeRangeLabel,
@@ -28,6 +30,42 @@ function MetaLine({ items }: { items: string[] }) {
         </AppText>
       ))}
     </View>
+  );
+}
+
+export function ProfileHistoryScreen() {
+  const goals = useAppStore((state) => state.goals);
+  const milestones = useAppStore((state) => state.milestones);
+  const tasks = useAppStore((state) => state.allTasks);
+  const activityEvents = useAppStore((state) => state.activityEvents);
+
+  const feed = buildActivityFeed(activityEvents, tasks, milestones);
+  const groups = groupActivityByDate(feed.slice(0, 18));
+  const summary = summarizeInsights({ goals, tasks, milestones, events: feed });
+
+  return (
+    <Screen>
+      <View className="gap-4">
+        <Surface tone="accent" className="gap-4">
+          <AppText variant="title">Recent movement</AppText>
+          <AppText tone="secondary">{summary.momentumCopy}</AppText>
+          <MomentumBars points={summary.momentum} />
+          <MetaLine
+            items={[
+              `${summary.completedThisWeek} completed this week`,
+              `${summary.reshapedThisWeek} reshaped`,
+              summary.planCopy,
+            ]}
+          />
+        </Surface>
+
+        <GroupedActivityTimeline
+          groups={groups}
+          emptyTitle="No history yet"
+          emptyBody="Recent movement will appear here as the app captures more execution."
+        />
+      </View>
+    </Screen>
   );
 }
 

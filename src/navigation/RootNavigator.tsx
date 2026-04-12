@@ -7,14 +7,16 @@ import { GoalsScreen } from "../screens/goals/GoalsScreen";
 import {
   GoalDetailScreen,
   GoalEditScreen,
+  GoalHistoryScreen,
   GoalMilestonesScreen,
   GoalProgressScreen,
 } from "../screens/goals/GoalDetailScreens";
 import { InsightsScreen } from "../screens/insights/InsightsScreen";
 import {
+  InsightActivityScreen,
   InsightCapacityScreen,
   InsightContinuityScreen,
-  InsightSignalsScreen,
+  InsightPlanChangesScreen,
 } from "../screens/insights/InsightDetailScreens";
 import { OnboardingScreen } from "../screens/onboarding/OnboardingScreen";
 import { PlanScreen } from "../screens/plan/PlanScreen";
@@ -27,6 +29,7 @@ import { ProfileScreen } from "../screens/profile/ProfileScreen";
 import {
   ProfileAccountScreen,
   ProfileAppearanceScreen,
+  ProfileHistoryScreen,
   ProfileIntegrationsScreen,
   ProfileNotificationsScreen,
   ProfilePlanningPreferencesScreen,
@@ -146,6 +149,11 @@ function GoalsNavigator() {
         options={{ title: "Progress" }}
       />
       <GoalsStack.Screen
+        name="GoalHistory"
+        component={GoalHistoryScreen}
+        options={{ title: "History" }}
+      />
+      <GoalsStack.Screen
         name="GoalEdit"
         component={GoalEditScreen}
         options={({ route }) => ({ title: route.params?.goalId ? "Edit Goal" : "New Goal" })}
@@ -199,9 +207,14 @@ function InsightsNavigator() {
         options={{ title: "Continuity" }}
       />
       <InsightsStack.Screen
-        name="InsightSignals"
-        component={InsightSignalsScreen}
-        options={{ title: "Signals" }}
+        name="InsightActivity"
+        component={InsightActivityScreen}
+        options={{ title: "Activity Timeline" }}
+      />
+      <InsightsStack.Screen
+        name="InsightPlanChanges"
+        component={InsightPlanChangesScreen}
+        options={{ title: "Plan Changes" }}
       />
       <InsightsStack.Screen
         name="InsightCapacity"
@@ -221,6 +234,11 @@ function ProfileNavigator() {
         name="ProfileHome"
         component={ProfileScreen}
         options={{ headerShown: false }}
+      />
+      <ProfileStack.Screen
+        name="ProfileHistory"
+        component={ProfileHistoryScreen}
+        options={{ title: "Recent Movement" }}
       />
       <ProfileStack.Screen
         name="ProfileAppearance"

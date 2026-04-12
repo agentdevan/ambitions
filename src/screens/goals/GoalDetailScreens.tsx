@@ -2,6 +2,7 @@ import { NativeStackScreenProps } from "@react-navigation/native-stack";
 import { useEffect, useMemo, useState } from "react";
 import { Modal, View } from "react-native";
 
+import { ActivityTimelineRow, GroupedActivityTimeline, MomentumBars } from "../../components/history/ActivityTimeline";
 import {
   DetailHero,
   DetailMetaGroup,
@@ -30,6 +31,12 @@ import {
   hasUserAdjustedMetadata,
 } from "../../services/goals/metadata";
 import { hasUndoAvailable } from "../../services/goals/regenerationCoordinator";
+import {
+  buildActivityFeed,
+  buildMomentumSeries,
+  groupActivityByDate,
+  summarizeGoalProgress,
+} from "../../services/history/selectors";
 import { useAppStore } from "../../state/useAppStore";
 import { formatShortDate } from "../../utils/date";
 
@@ -90,24 +97,15 @@ export function GoalDetailScreen({
   navigation,
 }: NativeStackScreenProps<GoalsStackParamList, "GoalDetail">) {
   const { goal, goalMilestones, visibleTasks } = useGoalData(route.params.goalId);
+  const activityEvents = useAppStore((state) => state.activityEvents);
   const updateGoal = useAppStore((state) => state.updateGoal);
   const setGoalStatusWithHandling = useAppStore((state) => state.setGoalStatusWithHandling);
   const undoGoalRegeneration = useAppStore((state) => state.undoGoalRegeneration);
   const [busyState, setBusyState] = useState<string | null>(null);
   const [runtimeMessage, setRuntimeMessage] = useState<string | null>(null);
   const [lifecycleState, setLifecycleState] = useState<LifecycleDialogState | null>(null);
-
-  if (!goal) {
-    return (
-      <Screen>
-        <EmptyStateCard title="Goal not found" body="That goal is no longer available." />
-      </Screen>
-    );
-  }
-
   const resolvedGoal = goal;
-
-  const reviewDraft = getGoalReviewDraft(resolvedGoal);
+  const reviewDraft = resolvedGoal ? getGoalReviewDraft(resolvedGoal) : null;
   const protectedTasks = visibleTasks.filter(
     (task) =>
       hasUserAdjustedMetadata(task) ||
@@ -116,10 +114,6 @@ export function GoalDetailScreen({
   );
   const activeTasks = visibleTasks.filter((task) =>
     [TaskStatus.Ready, TaskStatus.Scheduled, TaskStatus.InProgress].includes(task.status),
-  );
-  const completedTasks = visibleTasks.filter((task) => task.status === TaskStatus.Completed);
-  const completedMilestones = goalMilestones.filter(
-    (milestone) => milestone.status === GoalMilestoneStatus.Completed,
   );
   const currentMilestone =
     goalMilestones.find((milestone) => milestone.status === GoalMilestoneStatus.InProgress) ??
@@ -131,10 +125,29 @@ export function GoalDetailScreen({
     activeTasks[0] ??
     null;
 
+  if (!resolvedGoal) {
+    return (
+      <Screen>
+        <EmptyStateCard title="Goal not found" body="That goal is no longer available." />
+      </Screen>
+    );
+  }
+  const goalRecord: Goal = resolvedGoal;
+
+  const activityFeed = buildActivityFeed(activityEvents, visibleTasks, goalMilestones).filter(
+    (event) => event.goalId === goalRecord.id,
+  );
+  const progressSummary = summarizeGoalProgress({
+    goal: goalRecord,
+    milestones: goalMilestones,
+    tasks: visibleTasks,
+    events: activityFeed,
+  });
+
   function openLifecycleDialog(status: GoalStatus.Paused | GoalStatus.Archived) {
     const options = describeLifecycleOptions(status === GoalStatus.Paused ? "pause" : "archive");
     setLifecycleState({
-      goal: resolvedGoal,
+      goal: goalRecord,
       status,
       handling: options[0]?.key ?? "remove_from_active_plans",
     });
@@ -221,32 +234,69 @@ export function GoalDetailScreen({
 
           <DetailSection
             title="Progress"
-            description="A clean read on movement without turning this into a dashboard wall."
+            description={progressSummary.reflection}
           >
             <DetailSummaryStrip
               items={[
                 {
                   label: "Milestones",
-                  value: `${completedMilestones.length}/${goalMilestones.length}`,
-                  detail: completedMilestones.length > 0 ? "Completed" : "Not started yet",
+                  value: `${progressSummary.completedMilestones}/${progressSummary.milestoneCount}`,
+                  detail:
+                    progressSummary.completedMilestones > 0
+                      ? "Checkpoint movement is visible"
+                      : "Still waiting on a first completion",
                 },
                 {
-                  label: "Active work",
-                  value: String(activeTasks.length),
+                  label: "In motion",
+                  value: String(progressSummary.activeTasks),
                   detail: nextTask ? `Next: ${nextTask.title}` : "Nothing queued right now",
                 },
                 {
-                  label: "Completed tasks",
-                  value: String(completedTasks.length),
+                  label: "Completed work",
+                  value: String(progressSummary.completedTasks),
                   detail: "Finished inside this goal",
                 },
                 {
-                  label: "Plan review",
-                  value: reviewDraft ? "Waiting" : "Clear",
-                  detail: reviewDraft ? "Structure needs a decision" : "No pending changes",
+                  label: "Carryover",
+                  value: String(progressSummary.carryTasks),
+                  detail:
+                    progressSummary.carryTasks > 0
+                      ? "Work that was moved or held for later"
+                      : "No visible carryover right now",
                 },
               ]}
             />
+          </DetailSection>
+
+          <DetailSection
+            title="Recent movement"
+            description="The latest shifts attached to this goal."
+            action={
+              <Button
+                tone="inline"
+                onPress={() => navigation.navigate("GoalHistory", { goalId: resolvedGoal.id })}
+              >
+                Full history
+              </Button>
+            }
+          >
+            {progressSummary.recentEvents.length === 0 ? (
+              <Surface className="gap-2 mb-0">
+                <AppText tone="secondary">
+                  Recent history will start filling in as work is completed, moved, or reviewed.
+                </AppText>
+              </Surface>
+            ) : (
+              <Surface className="gap-0 mb-0">
+                {progressSummary.recentEvents.slice(0, 3).map((event, index, array) => (
+                  <ActivityTimelineRow
+                    key={event.id}
+                    item={event}
+                    compact={index === array.length - 1}
+                  />
+                ))}
+              </Surface>
+            )}
           </DetailSection>
 
           <DetailSection
@@ -266,9 +316,15 @@ export function GoalDetailScreen({
               />
               <DrillInRow
                 title="Progress"
-                subtitle="See active tasks, protected work, and completed movement."
+                subtitle="See current work, milestone progress, and recent movement together."
                 detail={`${visibleTasks.length} tasks`}
                 onPress={() => navigation.navigate("GoalProgress", { goalId: resolvedGoal.id })}
+              />
+              <DrillInRow
+                title="History"
+                subtitle="Review completed work, moved tasks, and accepted plan changes."
+                detail={`${activityFeed.length} events`}
+                onPress={() => navigation.navigate("GoalHistory", { goalId: resolvedGoal.id })}
               />
               <DrillInRow
                 title="Edit goal"
@@ -531,8 +587,11 @@ export function GoalMilestonesScreen({
 
 export function GoalProgressScreen({
   route,
+  navigation,
 }: NativeStackScreenProps<GoalsStackParamList, "GoalProgress">) {
   const { goal, visibleTasks } = useGoalData(route.params.goalId);
+  const milestones = useAppStore((state) => state.milestones.filter((entry) => entry.goalId === route.params.goalId));
+  const activityEvents = useAppStore((state) => state.activityEvents);
 
   if (!goal) {
     return (
@@ -546,7 +605,17 @@ export function GoalProgressScreen({
     [TaskStatus.Ready, TaskStatus.Scheduled, TaskStatus.InProgress].includes(task.status),
   );
   const protectedTasks = visibleTasks.filter((task) => hasUserAdjustedMetadata(task));
-  const completedTasks = visibleTasks.filter((task) => task.status === TaskStatus.Completed);
+  const activityFeed = buildActivityFeed(activityEvents, visibleTasks, milestones).filter(
+    (event) => event.goalId === goal.id,
+  );
+  const groupedActivity = groupActivityByDate(activityFeed.slice(0, 10));
+  const progressSummary = summarizeGoalProgress({
+    goal,
+    milestones,
+    tasks: visibleTasks,
+    events: activityFeed,
+  });
+  const momentum = buildMomentumSeries(activityFeed, 7);
 
   return (
     <Screen>
@@ -554,13 +623,13 @@ export function GoalProgressScreen({
         <DetailHero
           eyebrow="Goal"
           title="Progress"
-          description="See how this goal is moving."
+          description={progressSummary.reflection}
           meta={
             <DetailSummaryStrip
               items={[
                 {
                   label: "Active",
-                  value: String(activeTasks.length),
+                  value: String(progressSummary.activeTasks),
                   detail: "Currently in rotation",
                 },
                 {
@@ -570,13 +639,34 @@ export function GoalProgressScreen({
                 },
                 {
                   label: "Completed",
-                  value: String(completedTasks.length),
+                  value: String(progressSummary.completedTasks),
                   detail: "Finished work",
                 },
               ]}
             />
           }
         />
+
+        <DetailSection
+          title="Momentum"
+          description="A restrained read on how this goal has moved over the last week."
+          action={
+            <Button tone="inline" onPress={() => navigation.navigate("GoalHistory", { goalId: goal.id })}>
+              View history
+            </Button>
+          }
+        >
+          <Surface className="gap-4 mb-0">
+            <MomentumBars points={momentum} />
+            <QuietMetaLine
+              items={[
+                `${progressSummary.completedTasks} completed total`,
+                `${progressSummary.carryTasks} carried or moved`,
+                `${progressSummary.completedMilestones}/${progressSummary.milestoneCount} milestones completed`,
+              ]}
+            />
+          </Surface>
+        </DetailSection>
 
         {visibleTasks.length === 0 ? (
           <EmptyStateCard
@@ -639,8 +729,76 @@ export function GoalProgressScreen({
                 </View>
               </DetailSection>
             ) : null}
+
+            <DetailSection
+              title="Recent movement"
+              description="The latest execution and plan changes attached to this goal."
+            >
+              <GroupedActivityTimeline
+                groups={groupedActivity}
+                emptyTitle="No recent movement"
+                emptyBody="This goal has not logged recent movement yet."
+              />
+            </DetailSection>
           </>
         )}
+      </View>
+    </Screen>
+  );
+}
+
+export function GoalHistoryScreen({
+  route,
+}: NativeStackScreenProps<GoalsStackParamList, "GoalHistory">) {
+  const { goal, goalMilestones, visibleTasks } = useGoalData(route.params.goalId);
+  const activityEvents = useAppStore((state) => state.activityEvents);
+
+  if (!goal) {
+    return (
+      <Screen>
+        <EmptyStateCard title="Goal not found" body="That goal is no longer available." />
+      </Screen>
+    );
+  }
+
+  const activityFeed = buildActivityFeed(activityEvents, visibleTasks, goalMilestones).filter(
+    (event) => event.goalId === goal.id,
+  );
+  const groupedActivity = groupActivityByDate(activityFeed);
+  const progressSummary = summarizeGoalProgress({
+    goal,
+    milestones: goalMilestones,
+    tasks: visibleTasks,
+    events: activityFeed,
+  });
+
+  return (
+    <Screen>
+      <View className="gap-6">
+        <DetailHero
+          eyebrow="Goal"
+          title="History"
+          description={progressSummary.reflection}
+          meta={
+            <DetailMetaGroup
+              items={[
+                { label: "Completed tasks", value: String(progressSummary.completedTasks) },
+                { label: "Carryover", value: String(progressSummary.carryTasks) },
+                {
+                  label: "Milestones",
+                  value: `${progressSummary.completedMilestones}/${progressSummary.milestoneCount}`,
+                },
+                { label: "Events", value: String(activityFeed.length) },
+              ]}
+            />
+          }
+        />
+
+        <GroupedActivityTimeline
+          groups={groupedActivity}
+          emptyTitle="No goal history yet"
+          emptyBody="History becomes richer as work gets completed, moved, or reviewed."
+        />
       </View>
     </Screen>
   );

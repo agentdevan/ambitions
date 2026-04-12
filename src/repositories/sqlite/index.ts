@@ -1,6 +1,7 @@
 export * from "./SQLiteAdaptationRepository";
 export * from "./SQLiteAccountRepository";
 export * from "./SQLiteGoalRepository";
+export * from "./SQLiteHistoryRepository";
 export * from "./SQLiteIntegrationRepository";
 export * from "./SQLitePlanRepository";
 export * from "./SQLitePreferencesRepository";

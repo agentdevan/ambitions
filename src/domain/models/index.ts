@@ -3,6 +3,7 @@ export * from "./account";
 export * from "./domain";
 export * from "./execution";
 export * from "./goal";
+export * from "./history";
 export * from "./integration";
 export * from "./planning";
 export * from "./planningBrain";

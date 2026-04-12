@@ -1,15 +1,18 @@
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
 import { View } from "react-native";
 
+import { MomentumBars } from "../../components/history/ActivityTimeline";
 import { DrillInRow } from "../../components/navigation/DrillInRow";
 import { PageHeader } from "../../components/navigation/PageHeader";
 import { Pill } from "../../components/ui/Pill";
 import { Screen } from "../../components/ui/Screen";
 import { Surface } from "../../components/ui/Surface";
 import { AppText } from "../../components/ui/Text";
-import { getGoalReviewDraft } from "../../services/goals/metadata";
-import { useAppStore } from "../../state/useAppStore";
+import { ActivityEventKind } from "../../domain/models";
 import { InsightsStackParamList } from "../../navigation/types";
+import { getGoalReviewDraft } from "../../services/goals/metadata";
+import { buildActivityFeed, summarizeInsights } from "../../services/history/selectors";
+import { useAppStore } from "../../state/useAppStore";
 
 type Props = NativeStackScreenProps<InsightsStackParamList, "InsightsHome">;
 
@@ -28,50 +31,68 @@ function SummaryMetric({ label, value, detail }: { label: string; value: string;
 }
 
 export function InsightsScreen({ navigation }: Props) {
-  const today = useAppStore((state) => state.today);
   const goals = useAppStore((state) => state.goals);
-  const replanSuggestions = useAppStore((state) => state.replanSuggestions);
+  const milestones = useAppStore((state) => state.milestones);
+  const tasks = useAppStore((state) => state.allTasks);
+  const activityEvents = useAppStore((state) => state.activityEvents);
+  const today = useAppStore((state) => state.today);
 
   const pendingReviews = goals.filter((goal) => getGoalReviewDraft(goal) !== null).length;
-  const activeGoals = goals.filter((goal) => goal.status === "active").length;
+  const feed = buildActivityFeed(activityEvents, tasks, milestones);
+  const summary = summarizeInsights({
+    goals,
+    tasks,
+    milestones,
+    events: feed,
+  });
+  const planChangeEvents = feed.filter((event) =>
+    [
+      ActivityEventKind.PlanReviewAccepted,
+      ActivityEventKind.PlanReviewGenerated,
+      ActivityEventKind.PlanReviewReverted,
+      ActivityEventKind.GoalUpdated,
+      ActivityEventKind.TaskRescheduled,
+    ].includes(event.kind),
+  );
 
   return (
     <Screen>
       <View className="gap-6">
         <PageHeader
           eyebrow="Insights"
-          title="See what is shaping the plan."
-          description="Reflection, continuity, and planning signals live here. Controls moved out."
+          title="Recent movement, without the noise."
+          description="Reflection lives here once the app has enough real history to support it."
         />
 
-        <Surface tone="accent" className="gap-4">
+        <Surface tone="accent" className="gap-5">
           <View className="gap-2">
             <View className="flex-row flex-wrap items-center gap-2">
-              <Pill label={`${activeGoals} active goals`} tone="quiet" />
+              <Pill label={`${summary.movingGoalCount} goals moving`} tone="quiet" />
               {pendingReviews > 0 ? (
                 <Pill label={`${pendingReviews} review waiting`} tone="accent" />
               ) : null}
             </View>
-            <AppText variant="title">A calm read on the current planning state.</AppText>
-            <AppText tone="secondary">
-              Open the deeper views when you want more than a snapshot.
-            </AppText>
+            <AppText variant="title">The recent picture feels earned now.</AppText>
+            <AppText tone="secondary">{summary.momentumCopy}</AppText>
           </View>
+
+          <MomentumBars points={summary.momentum} />
+
           <View className="flex-row gap-2">
             <SummaryMetric
-              label="Continuity"
-              value={`${today?.progress.completed ?? 0} done`}
-              detail="Completed sessions today"
+              label="Completed"
+              value={String(summary.completedThisWeek)}
+              detail="Finished this week"
             />
             <SummaryMetric
-              label="Signals"
-              value={`${replanSuggestions.length}`}
-              detail="Current replan signals"
+              label="Reshaped"
+              value={String(summary.reshapedThisWeek)}
+              detail="Moved, deferred, or revised"
             />
             <SummaryMetric
-              label="Open room"
-              value={`${today?.capacity.unusedCapacityMinutes ?? 0} min`}
-              detail="Unused capacity"
+              label="Plan drift"
+              value={String(summary.planChangeCount)}
+              detail="Recent structural changes"
             />
           </View>
         </Surface>
@@ -79,21 +100,25 @@ export function InsightsScreen({ navigation }: Props) {
         <View className="gap-3">
           <DrillInRow
             title="Continuity"
-            subtitle="Review active goals, completed work, and pending review pressure."
-            detail={`${pendingReviews} waiting`}
+            subtitle={summary.momentumCopy}
+            detail={`${summary.movingGoalCount} moving`}
             onPress={() => navigation.navigate("InsightContinuity")}
           />
           <DrillInRow
-            title="Planning signals"
-            subtitle={
-              today?.adaptiveGuidance[0] ?? "See what is nudging the plan toward rework or recovery."
-            }
-            detail={`${replanSuggestions.length} signals`}
-            onPress={() => navigation.navigate("InsightSignals")}
+            title="Activity timeline"
+            subtitle="Review what was completed, moved, deferred, or accepted over time."
+            detail={`${feed.length} events`}
+            onPress={() => navigation.navigate("InsightActivity")}
+          />
+          <DrillInRow
+            title="Plan changes"
+            subtitle={summary.planCopy}
+            detail={`${planChangeEvents.length} changes`}
+            onPress={() => navigation.navigate("InsightPlanChanges")}
           />
           <DrillInRow
             title="Capacity and balance"
-            subtitle={`Pressure is ${today?.capacity.planPressure ?? "low"} with ${today?.capacity.unusedCapacityMinutes ?? 0} minutes still open.`}
+            subtitle={`Pressure is ${today?.capacity.planPressure ?? "low"} with ${today?.capacity.unusedCapacityMinutes ?? 0} minutes still open today.`}
             onPress={() => navigation.navigate("InsightCapacity")}
           />
         </View>

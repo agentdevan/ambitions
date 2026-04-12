@@ -1,6 +1,7 @@
 import { appServices } from "../bootstrap/runtime/appServices";
 import {
   AdaptationProfile,
+  ActivityEvent,
   CalendarConnectionState,
   DailyPlan,
   Goal,
@@ -40,6 +41,7 @@ export interface FoundationSnapshot {
   calendarConnectionState: CalendarConnectionState | null;
   scheduleConstraints: ScheduleConstraint[];
   replanSuggestions: ReplanSuggestion[];
+  activityEvents: ActivityEvent[];
   schedule: SchedulingOutput | null;
   today: TodayViewModel | null;
 }
@@ -97,6 +99,7 @@ export async function loadFoundationSnapshot(date: string): Promise<FoundationSn
     calendarConnectionState,
     scheduleConstraints,
     replanSuggestions,
+    activityEvents,
   ] = await Promise.all([
     appServices.repositories.preferences.listDomains(),
     appServices.repositories.goals.listGoals(),
@@ -110,6 +113,7 @@ export async function loadFoundationSnapshot(date: string): Promise<FoundationSn
     appServices.repositories.integration.getCalendarConnectionState(),
     appServices.repositories.integration.listScheduleConstraintsForDate(date),
     appServices.repositories.adaptation.listReplanSuggestions(date),
+    appServices.repositories.history.listActivityEvents(),
   ]);
   const effectiveConstraints = selectConstraintsForScheduling(
     scheduleConstraints,
@@ -175,6 +179,7 @@ export async function loadFoundationSnapshot(date: string): Promise<FoundationSn
     calendarConnectionState,
     scheduleConstraints: effectiveConstraints,
     replanSuggestions: mergedReplanSuggestions,
+    activityEvents,
     schedule,
     today:
       productPreferences.onboardingCompleted && (schedule?.dailyPlan ?? dailyPlan)
@@ -211,6 +216,7 @@ export async function refreshAllState(date: string) {
     notificationPreferences: snapshot.notificationPreferences,
     adaptationProfile: snapshot.adaptationProfile,
     replanSuggestions: snapshot.replanSuggestions,
+    activityEvents: snapshot.activityEvents,
     dailyPlan: snapshot.schedule?.dailyPlan ?? snapshot.dailyPlan,
     schedule: snapshot.schedule,
     today: snapshot.today,
