@@ -26,11 +26,11 @@ export function UnscheduledTasksPanel({ tasks }: UnscheduledTasksPanelProps) {
       <View className="gap-4">
         {tasks.map((task) => (
           <Surface key={task.taskId} className="gap-3" tone="sunken">
-            <AppText variant="section">{task.title}</AppText>
             <View className="flex-row flex-wrap gap-2">
               <Pill label={task.status.replaceAll("_", " ")} />
               <Pill label={`${task.estimatedMinutes} min`} tone="quiet" />
             </View>
+            <AppText variant="section">{task.title}</AppText>
             <AppText tone="secondary">{task.reason}</AppText>
           </Surface>
         ))}

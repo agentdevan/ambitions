@@ -155,21 +155,123 @@ export function TodayScreen() {
           dateLabel={formatLongDate(today.date)}
           liveContext={today.integration.usingLiveCalendar}
         />
-        <Surface tone="sunken">
-          <View className="gap-4">
+        <Surface tone="sunken" className="gap-5">
+          <View className="gap-3">
             <View className="flex-row flex-wrap gap-2">
               <Pill label="Daily brief" tone="accent" />
               <Pill label={`${today.blocks.length} sessions`} tone="quiet" />
               <Pill label={`${today.unscheduled.length} held out`} tone="quiet" />
             </View>
-            <AppText variant="section">{today.focus}</AppText>
-            <View className="flex-row gap-3">
-              <MetricCard label="On deck" value={String(today.blocks.length)} />
-              <MetricCard label="Recovery" value={String(today.replanSuggestions.length)} />
-              <MetricCard label="Done" value={String(today.progress.completed)} />
-            </View>
+            <AppText variant="title">{today.focus}</AppText>
+            <AppText tone="secondary">
+              A productized day view: what matters first, what is scheduled next, and where the buffer lives.
+            </AppText>
+          </View>
+          <View className="flex-row gap-3">
+            <MetricCard label="On deck" value={String(today.blocks.length)} />
+            <MetricCard label="Recovery" value={String(today.replanSuggestions.length)} />
+            <MetricCard label="Done" value={String(today.progress.completed)} />
+          </View>
+          <View className="rounded-[26px] bg-[#FFFFFF70] px-4 py-4">
+            <AppText tone="tertiary" variant="micro" style={{ textTransform: "uppercase" }}>
+              Daily shape
+            </AppText>
+            <AppText tone="secondary" style={{ marginTop: 8 }}>
+              Supporting guidance, capacity, and continuity now sit in their own cards below the timeline instead of reading as one long report.
+            </AppText>
           </View>
         </Surface>
+        <View className="gap-6">
+          <TimelinePlan
+            blocks={today.blocks}
+            onTaskAction={handleTaskAction}
+            busyTaskId={busyTaskId}
+          />
+          <CapacityInsight capacity={today.capacity} focus={today.focus} />
+          <UnscheduledTasksPanel tasks={today.unscheduled} />
+          <ReplanSuggestionsPanel suggestions={today.replanSuggestions} />
+          <GuidancePanel items={today.adaptiveGuidance} />
+          <ScheduleContext items={today.scheduleContext} />
+          <ProgressPanel
+            completed={today.progress.completed}
+            scheduled={today.progress.scheduled}
+            recovery={today.progress.recovery}
+          />
+        </View>
+        <View className="gap-4">
+          <AppText tone="tertiary" variant="micro" style={{ textTransform: "uppercase" }}>
+            Support
+          </AppText>
+          <IntegrationStatusCard
+            calendarConnectionState={calendarConnectionState}
+            notificationPermissionStatus={notificationPermissionStatus}
+            onRequestCalendarAccess={() =>
+              runIntegrationAction(
+                "calendar",
+                requestCalendarAccess,
+                "Calendar access could not be refreshed.",
+              )
+            }
+            onRequestNotificationAccess={() =>
+              runIntegrationAction(
+                "notifications",
+                requestNotificationAccess,
+                "Notification access could not be refreshed.",
+              )
+            }
+            onRefreshIntegration={() =>
+              runIntegrationAction(
+                "refresh",
+                () => refreshIntegration(today.date),
+                "Calendar context could not be refreshed.",
+              )
+            }
+            usingLiveCalendar={today.integration.usingLiveCalendar}
+            calendarDetail={today.integration.calendarDetail}
+            busyAction={
+              integrationBusy === "calendar" ||
+              integrationBusy === "notifications" ||
+              integrationBusy === "refresh"
+                ? integrationBusy
+                : null
+            }
+          />
+          <AccountStatusCard
+            account={account}
+            authState={authState}
+            attachmentState={attachmentState}
+            syncState={syncState}
+            conflicts={syncConflicts}
+            busyAction={
+              accountBusy === "sign_in" ||
+              accountBusy === "attach" ||
+              accountBusy === "sync" ||
+              accountBusy === "defer"
+                ? (accountBusy as "sign_in" | "attach" | "sync" | "defer")
+                : null
+            }
+            onSignIn={() =>
+              runAccountAction("sign_in", signInWithApple, "Sign in with Apple could not start.")
+            }
+            onAttach={() =>
+              runAccountAction(
+                "attach",
+                attachLocalDataToAccount,
+                "Local data could not be attached to the account.",
+              )
+            }
+            onDefer={() =>
+              runAccountAction(
+                "defer",
+                deferLocalDataAttachment,
+                "The local-only path could not be preserved.",
+              )
+            }
+            onSync={() =>
+              runAccountAction("sync", () => syncAccountData(), "Account sync could not complete.")
+            }
+          />
+        </View>
         {pendingReviewGoals.length > 0 ? (
           <Surface>
             <View className="gap-3">
@@ -190,90 +292,6 @@ export function TodayScreen() {
             </View>
           </Surface>
         ) : null}
-        <AccountStatusCard
-          account={account}
-          authState={authState}
-          attachmentState={attachmentState}
-          syncState={syncState}
-          conflicts={syncConflicts}
-          busyAction={
-            accountBusy === "sign_in" ||
-            accountBusy === "attach" ||
-            accountBusy === "sync" ||
-            accountBusy === "defer"
-              ? (accountBusy as "sign_in" | "attach" | "sync" | "defer")
-              : null
-          }
-          onSignIn={() =>
-            runAccountAction("sign_in", signInWithApple, "Sign in with Apple could not start.")
-          }
-          onAttach={() =>
-            runAccountAction(
-              "attach",
-              attachLocalDataToAccount,
-              "Local data could not be attached to the account.",
-            )
-          }
-          onDefer={() =>
-            runAccountAction(
-              "defer",
-              deferLocalDataAttachment,
-              "The local-only path could not be preserved.",
-            )
-          }
-          onSync={() =>
-            runAccountAction("sync", () => syncAccountData(), "Account sync could not complete.")
-          }
-        />
-        <IntegrationStatusCard
-          calendarConnectionState={calendarConnectionState}
-          notificationPermissionStatus={notificationPermissionStatus}
-          onRequestCalendarAccess={() =>
-            runIntegrationAction(
-              "calendar",
-              requestCalendarAccess,
-              "Calendar access could not be refreshed.",
-            )
-          }
-          onRequestNotificationAccess={() =>
-            runIntegrationAction(
-              "notifications",
-              requestNotificationAccess,
-              "Notification access could not be refreshed.",
-            )
-          }
-          onRefreshIntegration={() =>
-            runIntegrationAction(
-              "refresh",
-              () => refreshIntegration(today.date),
-              "Calendar context could not be refreshed.",
-            )
-          }
-          usingLiveCalendar={today.integration.usingLiveCalendar}
-          calendarDetail={today.integration.calendarDetail}
-          busyAction={
-            integrationBusy === "calendar" ||
-            integrationBusy === "notifications" ||
-            integrationBusy === "refresh"
-              ? integrationBusy
-              : null
-          }
-        />
-        <CapacityInsight capacity={today.capacity} focus={today.focus} />
-        <TimelinePlan
-          blocks={today.blocks}
-          onTaskAction={handleTaskAction}
-          busyTaskId={busyTaskId}
-        />
-        <UnscheduledTasksPanel tasks={today.unscheduled} />
-        <ReplanSuggestionsPanel suggestions={today.replanSuggestions} />
-        <GuidancePanel items={today.adaptiveGuidance} />
-        <ScheduleContext items={today.scheduleContext} />
-        <ProgressPanel
-          completed={today.progress.completed}
-          scheduled={today.progress.scheduled}
-          recovery={today.progress.recovery}
-        />
 
         {runtimeMessage || integrationBusy ? (
           <Surface tone="sunken">

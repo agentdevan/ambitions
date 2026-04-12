@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useState } from "react";
-import { Modal, Pressable, ScrollView, View } from "react-native";
+import { Modal, ScrollView, View } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 
 import { Button } from "../../components/ui/Button";
@@ -12,7 +12,6 @@ import { SelectionCard } from "../../components/ui/SelectionCard";
 import { Surface } from "../../components/ui/Surface";
 import { AppText } from "../../components/ui/Text";
 import { TextField } from "../../components/ui/TextField";
-import { useResolvedTheme } from "../../design/theme/useResolvedTheme";
 import { Goal, GoalStatus, TaskStatus } from "../../domain/models";
 import { inferGoalDraft } from "../../product/goalIntake";
 import { describeLifecycleOptions } from "../../services/goals/downstreamHandlingPolicies";
@@ -33,7 +32,6 @@ interface LifecycleDialogState {
 }
 
 export function GoalsScreen() {
-  const theme = useResolvedTheme();
   const navigation = useNavigation();
   const goals = useAppStore((state) => state.goals);
   const milestones = useAppStore((state) => state.milestones);
@@ -325,11 +323,16 @@ export function GoalsScreen() {
             <>
               <Surface>
                 <View className="gap-4">
-                  <View className="gap-2">
-                    <AppText variant="section">Active goals</AppText>
-                    <AppText tone="secondary">
-                      Choose a goal to inspect its milestones, generated work, and current planning
-                      state.
+                  <View className="flex-row items-end justify-between gap-3">
+                    <View className="gap-2">
+                      <AppText variant="section">Goal selection</AppText>
+                      <AppText tone="secondary">
+                        Choose a goal to inspect its milestones, generated work, and current planning
+                        state.
+                      </AppText>
+                    </View>
+                    <AppText tone="tertiary" variant="micro" style={{ textTransform: "uppercase" }}>
+                      Active goals
                     </AppText>
                   </View>
                   <View className="gap-3">
@@ -368,38 +371,42 @@ export function GoalsScreen() {
               {selectedGoal ? (
                 <Surface tone="sunken">
                   <View className="gap-5">
-                    <View className="flex-row items-start justify-between gap-3">
-                      <View className="flex-1 gap-2">
-                        <AppText variant="title">{selectedGoal.title}</AppText>
-                        <AppText tone="secondary">
-                          {selectedGoal.summary ?? "A structured goal with a calm planning spine."}
-                        </AppText>
+                    <View className="gap-4">
+                      <View className="flex-row items-start justify-between gap-3">
+                        <View className="flex-1 gap-2">
+                          <View className="flex-row flex-wrap gap-2">
+                            <Pill label={selectedGoal.status} />
+                            <Pill label={`${selectedMilestones.length} milestones`} tone="accent" />
+                            <Pill label={`${visibleTasks.length} tasks`} tone="quiet" />
+                            {protectedTasks.length > 0 ? (
+                              <Pill label={`${protectedTasks.length} preserved`} />
+                            ) : null}
+                            {selectedReviewDraft ? (
+                              <Pill label="Recommended review pending" tone="accent" />
+                            ) : null}
+                          </View>
+                          <AppText variant="title">{selectedGoal.title}</AppText>
+                          <AppText tone="secondary">
+                            {selectedGoal.summary ?? "A structured goal with a calm planning spine."}
+                          </AppText>
+                        </View>
+                        <Button tone="secondary" onPress={() => beginEdit(selectedGoal)}>
+                          Edit
+                        </Button>
                       </View>
-                      <Button tone="secondary" onPress={() => beginEdit(selectedGoal)}>
-                        Edit
-                      </Button>
-                    </View>
-
-                    <View className="flex-row flex-wrap gap-2">
-                      <Pill label={selectedGoal.status} />
-                      <Pill label={`${selectedMilestones.length} milestones`} tone="accent" />
-                      <Pill label={`${visibleTasks.length} tasks`} tone="quiet" />
-                      {protectedTasks.length > 0 ? (
-                        <Pill label={`${protectedTasks.length} preserved`} />
-                      ) : null}
-                      {selectedReviewDraft ? (
-                        <Pill label="Recommended review pending" tone="accent" />
-                      ) : null}
-                    </View>
-
-                    <View className="flex-row gap-3">
-                      <MetricCard label="Milestones" value={String(selectedMilestones.length)} />
-                      <MetricCard label="Tasks" value={String(visibleTasks.length)} />
-                      <MetricCard label="Protected" value={String(protectedTasks.length)} />
+                      <View className="flex-row gap-3">
+                        <MetricCard label="Milestones" value={String(selectedMilestones.length)} />
+                        <MetricCard label="Tasks" value={String(visibleTasks.length)} />
+                        <MetricCard label="Protected" value={String(protectedTasks.length)} />
+                      </View>
                     </View>
 
                     {selectedReviewDraft ? (
                       <Surface className="gap-3" tone="default">
+                        <View className="flex-row flex-wrap gap-2">
+                          <Pill label="Recommended plan" tone="accent" />
+                          <Pill label="Needs review" />
+                        </View>
                         <AppText variant="section">{selectedReviewDraft.headline}</AppText>
                         <AppText tone="secondary">
                           {selectedReviewDraft.summary}
@@ -416,20 +423,27 @@ export function GoalsScreen() {
                       </Surface>
                     ) : null}
 
-                    <Surface tone="default" className="gap-3">
-                      <AppText variant="section">
-                        Goal snapshot
-                      </AppText>
-                      <AppText tone="secondary">
-                        {selectedGoal.successMetric
-                          ? `Success measure: ${selectedGoal.successMetric}`
-                          : "No success measure is set yet."}
-                      </AppText>
-                      <AppText tone="secondary">
-                        {selectedGoal.desiredWeeklyMinutes
-                          ? `${selectedGoal.desiredWeeklyMinutes} target minutes per week.`
-                          : "No weekly pacing has been set."}
-                      </AppText>
+                    <Surface tone="default" className="gap-4">
+                      <View className="gap-2">
+                        <AppText variant="section">
+                          Goal snapshot
+                        </AppText>
+                        <AppText tone="secondary">
+                          Success metric, pacing, and notes are kept as inline card content instead of metadata rows.
+                        </AppText>
+                      </View>
+                      <View className="flex-row flex-wrap gap-2">
+                        {selectedGoal.successMetric ? (
+                          <Pill label={selectedGoal.successMetric} tone="accent" />
+                        ) : (
+                          <Pill label="No success metric" tone="quiet" />
+                        )}
+                        {selectedGoal.desiredWeeklyMinutes ? (
+                          <Pill label={`${selectedGoal.desiredWeeklyMinutes} min/week`} />
+                        ) : (
+                          <Pill label="No weekly pacing" tone="quiet" />
+                        )}
+                      </View>
                       {selectedGoal.notes ? (
                         <AppText tone="secondary">{selectedGoal.notes}</AppText>
                       ) : null}
@@ -450,23 +464,23 @@ export function GoalsScreen() {
                           className="gap-3"
                           tone="default"
                         >
-                          <AppText variant="section">{milestone.title}</AppText>
-                          <AppText tone="secondary">
-                            {milestone.summary ?? "Generated from the current goal structure."}
-                          </AppText>
                           <View className="flex-row flex-wrap gap-2">
                             {milestone.targetDate ? <Pill label={milestone.targetDate} /> : null}
                             {hasUserAdjustedMetadata(milestone) ? (
                               <Pill label="Preserved" tone="accent" />
                             ) : null}
                           </View>
+                          <AppText variant="section">{milestone.title}</AppText>
+                          <AppText tone="secondary">
+                            {milestone.summary ?? "Generated from the current goal structure."}
+                          </AppText>
                         </Surface>
                       ))}
                     </View>
 
                     <View className="gap-3">
                       <AppText variant="section">
-                        Generated tasks
+                        Task cards
                       </AppText>
                       {visibleTasks.length === 0 ? (
                         <AppText tone="secondary">
@@ -479,18 +493,16 @@ export function GoalsScreen() {
                           className="gap-3"
                           tone="default"
                         >
-                          <AppText>{task.title}</AppText>
                           <View className="flex-row flex-wrap gap-2">
                             <Pill label={`${task.estimatedMinutes} min`} tone="quiet" />
                             {task.targetDate ? <Pill label={task.targetDate} /> : null}
-                          </View>
-                          {hasUserAdjustedMetadata(task) ||
-                          task.status === TaskStatus.Completed ||
-                          task.status === TaskStatus.InProgress ? (
-                            <View className="flex-row gap-2">
+                            {hasUserAdjustedMetadata(task) ||
+                            task.status === TaskStatus.Completed ||
+                            task.status === TaskStatus.InProgress ? (
                               <Pill label="Preserved" tone="accent" />
-                            </View>
-                          ) : null}
+                            ) : null}
+                          </View>
+                          <AppText>{task.title}</AppText>
                         </Surface>
                       ))}
                     </View>

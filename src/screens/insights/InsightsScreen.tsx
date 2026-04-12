@@ -152,6 +152,10 @@ export function InsightsScreen() {
 
         <Surface>
           <View className="gap-4">
+            <View className="flex-row flex-wrap gap-2">
+              <Pill label="Schedule defaults" tone="accent" />
+              <Pill label="Planner baseline" tone="quiet" />
+            </View>
             <AppText variant="section">Schedule defaults</AppText>
             <AppText tone="secondary">
               These defaults shape the planner when live context is unavailable or incomplete.
@@ -212,6 +216,9 @@ export function InsightsScreen() {
 
         <Surface tone="sunken">
           <View className="gap-4">
+            <View className="flex-row flex-wrap gap-2">
+              <Pill label="Planning style" tone="accent" />
+            </View>
             <AppText variant="section">Planning style</AppText>
             <AppText tone="secondary">
               Keep the planner aligned to your preferred pacing without over-customizing it.
@@ -280,6 +287,9 @@ export function InsightsScreen() {
 
         <Surface>
           <View className="gap-4">
+            <View className="flex-row flex-wrap gap-2">
+              <Pill label="Integrations" tone="accent" />
+            </View>
             <AppText variant="section">Integrations</AppText>
             <View className="flex-row flex-wrap gap-2">
               <Pill
@@ -330,7 +340,7 @@ export function InsightsScreen() {
             {notificationPreferences.map((preference) => (
               <Pressable
                 key={preference.id}
-                className="rounded-[24px]"
+                className="rounded-[28px]"
                 onPress={() =>
                   void runAction(
                     `notification:${preference.id}`,
@@ -348,7 +358,7 @@ export function InsightsScreen() {
               >
                 <Surface
                   tone={preference.enabled ? "accent" : "default"}
-                  className="gap-2"
+                  className="gap-3"
                   style={{
                     borderColor: preference.enabled
                       ? theme.colors.border.strong
@@ -357,7 +367,7 @@ export function InsightsScreen() {
                 >
                   <View className="flex-row items-center justify-between gap-3">
                     <View className="flex-1 gap-1">
-                      <AppText>{preference.reminderType.replace(/_/g, " ")}</AppText>
+                      <AppText variant="section">{preference.reminderType.replace(/_/g, " ")}</AppText>
                       <AppText tone="tertiary" variant="caption">
                         {preference.enabled ? "Reminder is active" : "Reminder is muted"}
                       </AppText>
@@ -372,6 +382,9 @@ export function InsightsScreen() {
 
         <Surface>
           <View className="gap-4">
+            <View className="flex-row flex-wrap gap-2">
+              <Pill label="Theme" tone="accent" />
+            </View>
             <AppText variant="section">Theme</AppText>
             <AppText tone="secondary">
               Pick the visual tone you want across the app without changing the overall product

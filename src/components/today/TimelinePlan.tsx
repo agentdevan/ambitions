@@ -40,14 +40,19 @@ export function TimelinePlan({
 
   return (
     <Surface className="gap-6">
-      <View className="gap-2">
-        <View className="flex-row flex-wrap gap-2">
-          <Pill label="Today plan" tone="accent" />
-          <Pill label={`${blocks.length} scheduled sessions`} tone="accent" />
+      <View className="flex-row items-end justify-between gap-3">
+        <View className="gap-2">
+          <View className="flex-row flex-wrap gap-2">
+            <Pill label="Today plan" tone="accent" />
+            <Pill label={`${blocks.length} scheduled sessions`} tone="accent" />
+          </View>
+          <AppText variant="section">Task timeline</AppText>
+          <AppText tone="secondary">
+            Sessions are rendered as action cards with grouped timing, state, and controls.
+          </AppText>
         </View>
-        <AppText variant="section">A believable shape for the day</AppText>
-        <AppText tone="secondary">
-          Each block is presented as an action surface instead of a flat schedule row.
+        <AppText tone="tertiary" variant="micro" style={{ textTransform: "uppercase" }}>
+          Cards
         </AppText>
       </View>
 
@@ -64,10 +69,16 @@ export function TimelinePlan({
             tone={block.state === "active" ? "accent" : "sunken"}
           >
             <View className="flex-row items-start justify-between gap-3">
-              <View className="flex-1 gap-2">
+              <View className="flex-1 gap-3">
                 <View className="flex-row flex-wrap gap-2">
                   <Pill label={`${block.startsAt} - ${block.endsAt}`} tone="quiet" />
                   <Pill label={block.state} tone={block.state === "active" ? "accent" : "neutral"} />
+                  {block.taskStatus ? (
+                    <Pill label={block.taskStatus.replaceAll("_", " ")} />
+                  ) : null}
+                  {block.estimatedMinutes ? (
+                    <Pill label={`${block.estimatedMinutes} min`} tone="quiet" />
+                  ) : null}
                 </View>
                 <AppText variant="section">{block.title}</AppText>
                 {block.note ? (
@@ -77,7 +88,7 @@ export function TimelinePlan({
                 ) : null}
               </View>
               <View
-                className="h-10 w-10 items-center justify-center rounded-full"
+                className="h-12 w-12 items-center justify-center rounded-[20px]"
                 style={{ backgroundColor: `${stateAccentMap[block.state]}18` }}
               >
                 <View
@@ -85,15 +96,6 @@ export function TimelinePlan({
                   style={{ backgroundColor: stateAccentMap[block.state] }}
                 />
               </View>
-            </View>
-
-            <View className="flex-row flex-wrap gap-2">
-              {block.taskStatus ? (
-                <Pill label={block.taskStatus.replaceAll("_", " ")} />
-              ) : null}
-              {block.estimatedMinutes ? (
-                <Pill label={`${block.estimatedMinutes} min`} tone="quiet" />
-              ) : null}
             </View>
 
             {block.taskId && block.actions.length > 0 ? (

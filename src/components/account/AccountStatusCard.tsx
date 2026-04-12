@@ -46,6 +46,14 @@ export function AccountStatusCard({
     <Surface tone={requiresAttachment ? "accent" : "default"}>
       <View className="gap-5">
         <View className="gap-3">
+          <View className="flex-row flex-wrap gap-2">
+            <Pill
+              label={hasAccount ? "Signed in" : "Local only"}
+              tone={hasAccount ? "accent" : "neutral"}
+            />
+            {syncState ? <Pill label={syncState.mode.replace("_", " ")} tone="quiet" /> : null}
+            {conflicts.length > 0 ? <Pill label={`${conflicts.length} items to review`} /> : null}
+          </View>
           <AppText variant="section">Account and sync</AppText>
           <AppText tone="secondary">
             {hasAccount
@@ -54,19 +62,10 @@ export function AccountStatusCard({
           </AppText>
         </View>
 
-        <View className="flex-row flex-wrap gap-2">
-          <Pill
-            label={hasAccount ? "Signed in" : "Local only"}
-            tone={hasAccount ? "accent" : "neutral"}
-          />
-          {syncState ? <Pill label={syncState.mode.replace("_", " ")} tone="quiet" /> : null}
-          {conflicts.length > 0 ? <Pill label={`${conflicts.length} items to review`} /> : null}
-        </View>
-
         {account ? (
           <View
-            className="gap-1 rounded-[22px] px-4 py-4"
-            style={{ borderWidth: 1, borderColor: "#00000010" }}
+            className="gap-1 rounded-[24px] px-4 py-4"
+            style={{ backgroundColor: "#FFFFFF66" }}
           >
             <AppText>{account.displayName ?? account.email ?? "Apple account"}</AppText>
             <AppText tone="tertiary" variant="caption">

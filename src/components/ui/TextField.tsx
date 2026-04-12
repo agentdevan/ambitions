@@ -35,11 +35,11 @@ export function TextField({ label, multiline = false, style, ...props }: TextFie
         style={[
           {
             minHeight: multiline ? 108 : 52,
-            borderRadius: 22,
+            borderRadius: 24,
             borderWidth: 1.5,
             borderColor: focused ? theme.colors.border.strong : theme.colors.border.subtle,
-            backgroundColor: theme.colors.background.elevated,
-            paddingHorizontal: 16,
+            backgroundColor: theme.colors.background.canvas,
+            paddingHorizontal: 18,
             paddingVertical: multiline ? 16 : 14,
             color: theme.colors.text.primary,
             fontSize: 15,

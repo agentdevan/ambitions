@@ -26,18 +26,18 @@ export function SelectionCard({
   return (
     <Pressable
       {...props}
-      className="rounded-[26px] px-4 py-4"
+      className="rounded-[28px] px-5 py-5"
       style={({ pressed }) => [
         {
-          borderWidth: 1.5,
+          borderWidth: selected ? 1.5 : 1,
           borderColor: selected ? theme.colors.accent.primary : theme.colors.border.subtle,
           backgroundColor: selected
             ? theme.colors.background.accentWash
-            : theme.colors.background.elevated,
+            : theme.colors.background.canvas,
           shadowColor: selected ? theme.colors.accent.primary : theme.colors.text.primary,
-          shadowOpacity: selected ? 0.12 : 0.04,
-          shadowRadius: selected ? 16 : 10,
-          shadowOffset: { width: 0, height: selected ? 8 : 4 },
+          shadowOpacity: selected ? 0.14 : 0.06,
+          shadowRadius: selected ? 18 : 12,
+          shadowOffset: { width: 0, height: selected ? 10 : 6 },
           elevation: selected ? 3 : 1,
           opacity: props.disabled ? 0.5 : pressed ? 0.92 : 1,
         },

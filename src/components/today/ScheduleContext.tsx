@@ -1,6 +1,7 @@
 import { View } from "react-native";
 
 import { useResolvedTheme } from "../../design/theme/useResolvedTheme";
+import { Pill } from "../ui/Pill";
 import { Surface } from "../ui/Surface";
 import { AppText } from "../ui/Text";
 
@@ -21,21 +22,18 @@ export function ScheduleContext({ items }: ScheduleContextProps) {
       </View>
 
       <View className="gap-3">
-        {items.map((item, index) => (
+        {items.map((item) => (
           <View
             key={item.label}
-            className="rounded-[20px] px-4 py-4"
+            className="rounded-[24px] px-4 py-4"
             style={{
-              borderWidth: 1,
-              borderColor: theme.colors.border.subtle,
-              backgroundColor:
-                index % 2 === 0 ? theme.colors.background.elevated : theme.colors.background.sunken,
+              backgroundColor: theme.colors.background.canvas,
             }}
           >
-            <AppText tone="tertiary" variant="micro" style={{ textTransform: "uppercase" }}>
-              {item.label}
-            </AppText>
-            <AppText style={{ marginTop: 6 }}>{item.value}</AppText>
+            <View className="gap-2">
+              <Pill label={item.label} tone="quiet" />
+              <AppText>{item.value}</AppText>
+            </View>
           </View>
         ))}
       </View>

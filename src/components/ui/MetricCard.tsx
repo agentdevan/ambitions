@@ -14,17 +14,17 @@ export function MetricCard({ label, value, detail }: MetricCardProps) {
 
   return (
     <View
-      className="flex-1 rounded-[22px] px-4 py-4"
+      className="min-w-[96px] flex-1 rounded-[26px] px-4 py-4"
       style={{
-        borderWidth: 1,
-        borderColor: theme.colors.border.subtle,
-        backgroundColor: theme.colors.background.elevated,
+        borderWidth: 1.5,
+        borderColor: theme.colors.background.canvas,
+        backgroundColor: theme.colors.background.canvas,
       }}
     >
       <AppText tone="tertiary" variant="micro" style={{ textTransform: "uppercase" }}>
         {label}
       </AppText>
-      <AppText variant="title" style={{ marginTop: 8 }}>
+      <AppText variant="title" style={{ marginTop: 10 }}>
         {value}
       </AppText>
       {detail ? (

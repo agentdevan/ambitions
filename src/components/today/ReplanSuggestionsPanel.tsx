@@ -25,8 +25,11 @@ export function ReplanSuggestionsPanel({ suggestions }: ReplanSuggestionsPanelPr
 
       <View className="gap-4">
         {suggestions.map((suggestion) => (
-          <Surface key={suggestion.id} className="gap-2" tone="default">
-            <Pill label="Recovery option" tone="quiet" />
+          <Surface key={suggestion.id} className="gap-3" tone="default">
+            <View className="flex-row flex-wrap gap-2">
+              <Pill label="Recovery option" tone="quiet" />
+              {suggestion.taskTitle ? <Pill label="Linked task" /> : null}
+            </View>
             <AppText variant="section">{suggestion.title}</AppText>
             {suggestion.taskTitle ? (
               <AppText tone="tertiary" variant="caption">

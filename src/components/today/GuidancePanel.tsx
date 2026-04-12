@@ -24,17 +24,20 @@ export function GuidancePanel({ items }: GuidancePanelProps) {
         {items.map((item) => (
           <View
             key={item}
-            className="flex-row gap-3 rounded-[20px] px-4 py-3"
+            className="flex-row gap-3 rounded-[24px] px-4 py-4"
             style={{
-              backgroundColor: theme.colors.background.elevated,
-              borderWidth: 1,
-              borderColor: theme.colors.border.subtle,
+              backgroundColor: theme.colors.background.canvas,
             }}
           >
             <View
-              className="mt-2 h-2 w-2 rounded-full"
-              style={{ backgroundColor: theme.colors.accent.primary }}
-            />
+              className="h-8 w-8 items-center justify-center rounded-[16px]"
+              style={{ backgroundColor: `${theme.colors.accent.primary}18` }}
+            >
+              <View
+                className="h-2.5 w-2.5 rounded-full"
+                style={{ backgroundColor: theme.colors.accent.primary }}
+              />
+            </View>
             <AppText tone="secondary" style={{ flex: 1 }}>
               {item}
             </AppText>

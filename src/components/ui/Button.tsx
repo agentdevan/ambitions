@@ -30,27 +30,27 @@ export function Button({
       shadowColor: theme.colors.accent.primary,
     },
     secondary: {
-      backgroundColor: theme.colors.background.elevated,
+      backgroundColor: theme.colors.background.canvas,
       borderColor: theme.colors.border.strong,
       textTone: "primary" as const,
       shadowColor: theme.colors.text.primary,
     },
     ghost: {
-      backgroundColor: theme.colors.background.sunken,
-      borderColor: theme.colors.border.subtle,
+      backgroundColor: theme.colors.background.elevated,
+      borderColor: theme.colors.background.elevated,
       textTone: "secondary" as const,
-      shadowColor: "transparent",
+      shadowColor: theme.colors.text.primary,
     },
   }[tone];
   const sizing = {
     default: {
-      minHeight: 50,
-      paddingHorizontal: 18,
+      minHeight: 52,
+      paddingHorizontal: 20,
       textVariant: "caption" as const,
     },
     compact: {
-      minHeight: 40,
-      paddingHorizontal: 14,
+      minHeight: 42,
+      paddingHorizontal: 16,
       textVariant: "micro" as const,
     },
   }[size];
@@ -59,21 +59,21 @@ export function Button({
     <Pressable
       {...props}
       disabled={disabled || busy}
-      className="items-center justify-center rounded-[22px] border"
+      className="items-center justify-center rounded-full border"
       style={({ pressed }) => [
         {
           minHeight: sizing.minHeight,
           paddingHorizontal: sizing.paddingHorizontal,
           backgroundColor: palette.backgroundColor,
           borderColor: palette.borderColor,
-          borderWidth: tone === "ghost" ? 1 : 1.5,
+          borderWidth: tone === "ghost" ? 0 : 1.5,
           opacity: disabled || busy ? 0.5 : pressed ? 0.9 : 1,
-          transform: [{ scale: pressed ? 0.985 : 1 }],
+          transform: [{ scale: pressed ? 0.98 : 1 }],
           shadowColor: palette.shadowColor,
-          shadowOpacity: tone === "primary" ? 0.16 : tone === "secondary" ? 0.05 : 0,
+          shadowOpacity: tone === "primary" ? 0.18 : tone === "secondary" ? 0.06 : 0.03,
           shadowRadius: tone === "primary" ? 18 : 12,
           shadowOffset: { width: 0, height: tone === "primary" ? 10 : 6 },
-          elevation: tone === "primary" ? 4 : tone === "secondary" ? 1 : 0,
+          elevation: tone === "primary" ? 4 : 1,
         },
         style,
       ]}

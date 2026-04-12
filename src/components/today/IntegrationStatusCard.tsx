@@ -64,8 +64,8 @@ export function IntegrationStatusCard({
             : "Today is using the saved schedule baseline."}
         </AppText>
         <View
-          className="rounded-[22px] px-4 py-4"
-          style={{ borderWidth: 1, borderColor: "#00000010" }}
+          className="rounded-[24px] px-4 py-4"
+          style={{ backgroundColor: "#FFFFFF66" }}
         >
           <AppText tone="secondary">{calendarDetail}</AppText>
           {syncFailure && calendarConnectionState?.metadata.lastError ? (

@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useState } from "react";
-import { ScrollView, View } from "react-native";
+import { View } from "react-native";
 
 import { Button } from "../../components/ui/Button";
 import { EmptyStateCard } from "../../components/ui/EmptyStateCard";
@@ -9,7 +9,6 @@ import { Pill } from "../../components/ui/Pill";
 import { Screen } from "../../components/ui/Screen";
 import { Surface } from "../../components/ui/Surface";
 import { AppText } from "../../components/ui/Text";
-import { useResolvedTheme } from "../../design/theme/useResolvedTheme";
 import { GoalStatus } from "../../domain/models";
 import { getGoalReviewDraft } from "../../services/goals/metadata";
 import { useAppStore } from "../../state/useAppStore";
@@ -122,13 +121,16 @@ export function PlanScreen() {
           {selectedGoal && selectedReviewDraft ? (
             <Surface>
               <View className="gap-4">
-                <View className="gap-2">
+                <View className="gap-3">
+                  <View className="flex-row flex-wrap gap-2">
+                    <Pill label="Review surface" tone="accent" />
+                    <Pill label={selectedReviewDraft.mode.replaceAll("_", " ")} />
+                  </View>
                   <AppText variant="section">{selectedReviewDraft.headline}</AppText>
                   <AppText tone="secondary">{selectedReviewDraft.summary}</AppText>
                 </View>
 
                 <View className="flex-row flex-wrap gap-2">
-                  <Pill label={selectedReviewDraft.mode.replaceAll("_", " ")} />
                   <Pill
                     label={`${selectedReviewDraft.impactSummary.affectedMilestoneCount} milestone changes`}
                     tone="accent"
@@ -142,6 +144,7 @@ export function PlanScreen() {
                 <View className="gap-3">
                   {selectedReviewDraft.rationale.map((item) => (
                     <Surface key={item} tone="sunken" className="gap-1">
+                      <Pill label="Rationale" tone="quiet" />
                       <AppText tone="secondary">{item}</AppText>
                     </Surface>
                   ))}
@@ -159,15 +162,15 @@ export function PlanScreen() {
                       tone="default"
                     >
                       <View className="gap-2">
-                        <AppText variant="section">{milestone.title}</AppText>
-                        <AppText tone="secondary">
-                          {milestone.summary ?? "Recommended milestone structure for the current goal."}
-                        </AppText>
                         <View className="flex-row flex-wrap gap-2">
                           {milestone.targetDate ? <Pill label={milestone.targetDate} /> : null}
                           {milestone.protected ? <Pill label="Protected" tone="accent" /> : null}
                           <Pill label={milestone.changeLabel} />
                         </View>
+                        <AppText variant="section">{milestone.title}</AppText>
+                        <AppText tone="secondary">
+                          {milestone.summary ?? "Recommended milestone structure for the current goal."}
+                        </AppText>
                       </View>
 
                       <View className="gap-3">
@@ -178,12 +181,12 @@ export function PlanScreen() {
                             tone="sunken"
                           >
                             <View className="gap-2">
-                              <AppText>{task.title}</AppText>
                               <View className="flex-row flex-wrap gap-2">
                                 <Pill label={`${task.estimatedMinutes} min`} tone="quiet" />
                                 {task.targetDate ? <Pill label={task.targetDate} /> : null}
                                 {task.protected ? <Pill label="Preserved" tone="accent" /> : null}
                               </View>
+                              <AppText>{task.title}</AppText>
                               {task.rationale ? (
                                 <AppText tone="secondary">{task.rationale}</AppText>
                               ) : null}
@@ -350,8 +353,11 @@ export function PlanScreen() {
             <>
               <Surface>
                   <View className="gap-4">
-                    <AppText variant="section">Today&apos;s frame</AppText>
-                    <AppText>{dailyPlan.focus}</AppText>
+                    <View className="flex-row flex-wrap gap-2">
+                      <Pill label="Today&apos;s frame" tone="accent" />
+                      <Pill label={dailyPlan.date} tone="quiet" />
+                    </View>
+                    <AppText variant="title">{dailyPlan.focus}</AppText>
                   <AppText tone="secondary">
                     {dailyPlan.planningNotes ?? "The planner created a compact, protective day shape."}
                   </AppText>
@@ -368,6 +374,9 @@ export function PlanScreen() {
 
               <Surface tone="sunken">
                 <View className="gap-3">
+                  <View className="flex-row flex-wrap gap-2">
+                    <Pill label="Milestones" tone="accent" />
+                  </View>
                   <AppText variant="section">Next milestones</AppText>
                   {nextMilestones.length === 0 ? (
                     <AppText tone="secondary">
@@ -380,16 +389,16 @@ export function PlanScreen() {
                     return (
                       <Surface
                         key={milestone.id}
-                        className="gap-2"
+                        className="gap-3"
                         tone="default"
                       >
+                        <View className="flex-row flex-wrap gap-2">
+                          <Pill label={milestone.targetDate ?? "No target date"} tone="quiet" />
+                        </View>
                         <AppText>{milestone.title}</AppText>
                         <AppText tone="secondary">
                           {goal?.title ?? "Goal no longer available"}
                         </AppText>
-                        <View className="flex-row flex-wrap gap-2">
-                          <Pill label={milestone.targetDate ?? "No target date"} tone="quiet" />
-                        </View>
                       </Surface>
                     );
                   })}
@@ -397,7 +406,10 @@ export function PlanScreen() {
               </Surface>
 
               <Surface>
-                <View className="gap-3">
+                <View className="gap-4">
+                  <View className="flex-row flex-wrap gap-2">
+                    <Pill label="Continuity" tone="accent" />
+                  </View>
                   <AppText variant="section">Continuity</AppText>
                   <AppText tone="secondary">
                     {calendarConnectionState?.permissionState === "granted"
