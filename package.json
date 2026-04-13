@@ -7,7 +7,8 @@
     "android": "expo run:android",
     "ios": "expo run:ios",
     "web": "expo start --web",
-    "typecheck": "tsc --noEmit"
+    "typecheck": "tsc --noEmit",
+    "auth:qa": "node scripts/auth_qa_plan.mjs"
   },
   "dependencies": {
     "@expo/metro-runtime": "~6.1.2",

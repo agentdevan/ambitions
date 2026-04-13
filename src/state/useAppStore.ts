@@ -32,6 +32,7 @@ import { getProductPreferences, mergeProductPreferences } from "../product/prefe
 import { ProductPreferences, GoalDraftInference } from "../product/types";
 import { applyDownstreamHandling } from "../services/goals/downstreamHandlingPolicies";
 import { evaluateGoalEditImpact } from "../services/goals/goalEditImpactEvaluator";
+import { AuthActionResult } from "../services/account/AccountService";
 import {
   GoalDownstreamChoice,
   GoalEditImpactPreview,
@@ -159,8 +160,9 @@ interface AccountSlice {
     email: string;
     password: string;
     displayName?: string;
-  }) => Promise<void>;
-  signIn: (input: { email: string; password: string }) => Promise<void>;
+  }) => Promise<AuthActionResult>;
+  signIn: (input: { email: string; password: string }) => Promise<AuthActionResult>;
+  clearAuthFeedback: () => Promise<void>;
   signOut: () => Promise<void>;
   attachLocalDataToAccount: () => Promise<void>;
   deferLocalDataAttachment: () => Promise<void>;
@@ -1094,12 +1096,19 @@ export const useAppStore = create<AppState>((set, get) => ({
   },
 
   createAccount: async (input) => {
-    const snapshot = await appServices.services.account.createAccount(input);
-    set(mapAccountSnapshot(snapshot));
+    const result = await appServices.services.account.createAccount(input);
+    set(mapAccountSnapshot(result.snapshot));
+    return result;
   },
 
   signIn: async (input) => {
-    const snapshot = await appServices.services.account.signIn(input);
+    const result = await appServices.services.account.signIn(input);
+    set(mapAccountSnapshot(result.snapshot));
+    return result;
+  },
+
+  clearAuthFeedback: async () => {
+    const snapshot = await appServices.services.account.clearTransientAuthFeedback();
     set(mapAccountSnapshot(snapshot));
   },
 

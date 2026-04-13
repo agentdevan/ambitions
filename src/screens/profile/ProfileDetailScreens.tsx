@@ -27,6 +27,7 @@ import { TextField } from "../../components/ui/TextField";
 import { useResolvedTheme } from "../../design/theme/useResolvedTheme";
 import { accentThemeOptions, appearanceModeOptions } from "../../product/theme";
 import { useAppStore } from "../../state/useAppStore";
+import { AuthFeedback } from "../../services/account/accountCopy";
 import { buildActivityFeed, groupActivityByDate, summarizeInsights } from "../../services/history/selectors";
 import {
   formatTimeLabel,
@@ -550,6 +551,7 @@ export function ProfilePlanningPreferencesScreen() {
 
 type AuthMode = "create" | "sign_in";
 type AccountFieldKey = "displayName" | "email" | "password";
+const AUTH_RATE_LIMIT_COOLDOWN_MS = 30_000;
 
 function validateEmail(value: string) {
   return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value.trim());
@@ -627,6 +629,50 @@ function AuthReadyBadge({
   );
 }
 
+function AuthFeedbackCard({
+  feedback,
+  detail,
+}: {
+  feedback: AuthFeedback;
+  detail?: string;
+}) {
+  const theme = useResolvedTheme();
+  const isInfo = feedback.kind === "info";
+
+  return (
+    <View
+      className="gap-2 rounded-[20px] px-4 py-4"
+      style={{
+        backgroundColor: isInfo
+          ? theme.mode === "dark"
+            ? "rgba(142,168,131,0.14)"
+            : "rgba(111,133,102,0.08)"
+          : theme.mode === "dark"
+            ? "rgba(193,154,116,0.14)"
+            : "rgba(165,128,89,0.08)",
+        borderWidth: 1,
+        borderColor: isInfo ? theme.colors.semantic.success : theme.colors.semantic.warning,
+      }}
+    >
+      <AppText variant="caption">
+        {feedback.code === "confirmation_required"
+          ? "Check your email"
+          : feedback.code === "email_exists"
+            ? "Account already exists"
+            : "Couldn’t continue"}
+      </AppText>
+      <AppText tone="secondary" variant="caption">
+        {feedback.message}
+      </AppText>
+      {detail ? (
+        <AppText tone="tertiary" variant="caption">
+          {detail}
+        </AppText>
+      ) : null}
+    </View>
+  );
+}
+
 export function ProfileAccountScreen() {
   const account = useAppStore((state) => state.account);
   const authState = useAppStore((state) => state.authState);
@@ -635,6 +681,7 @@ export function ProfileAccountScreen() {
   const syncConflicts = useAppStore((state) => state.syncConflicts);
   const createAccount = useAppStore((state) => state.createAccount);
   const signIn = useAppStore((state) => state.signIn);
+  const clearAuthFeedback = useAppStore((state) => state.clearAuthFeedback);
   const signOut = useAppStore((state) => state.signOut);
   const attachLocalDataToAccount = useAppStore((state) => state.attachLocalDataToAccount);
   const deferLocalDataAttachment = useAppStore((state) => state.deferLocalDataAttachment);
@@ -642,7 +689,10 @@ export function ProfileAccountScreen() {
   const theme = useResolvedTheme();
   const insets = useSafeAreaInsets();
   const [accountBusy, setAccountBusy] = useState<string | null>(null);
-  const [runtimeMessage, setRuntimeMessage] = useState<string | null>(null);
+  const [accountActionMessage, setAccountActionMessage] = useState<string | null>(null);
+  const [authFeedback, setAuthFeedback] = useState<AuthFeedback | null>(null);
+  const [authCooldownUntil, setAuthCooldownUntil] = useState<number | null>(null);
+  const [authCooldownRemainingMs, setAuthCooldownRemainingMs] = useState(0);
   const [authMode, setAuthMode] = useState<AuthMode>("create");
   const [displayName, setDisplayName] = useState("");
   const [email, setEmail] = useState("");
@@ -688,14 +738,35 @@ export function ProfileAccountScreen() {
 
   useEffect(() => {
     if (account) {
-      setRuntimeMessage(null);
+      setAccountActionMessage(null);
+      setAuthFeedback(null);
+      setAuthCooldownUntil(null);
+      setAuthCooldownRemainingMs(0);
+    }
+  }, [account]);
+
+  useEffect(() => {
+    if (!authCooldownUntil) {
+      setAuthCooldownRemainingMs(0);
       return;
     }
 
-    if (authState?.lastError) {
-      setRuntimeMessage(authState.lastError);
-    }
-  }, [account, authState?.lastError]);
+    const updateRemaining = () => {
+      const nextRemaining = Math.max(0, authCooldownUntil - Date.now());
+      setAuthCooldownRemainingMs(nextRemaining);
+
+      if (nextRemaining === 0) {
+        setAuthCooldownUntil(null);
+      }
+    };
+
+    updateRemaining();
+    const interval = setInterval(updateRemaining, 250);
+
+    return () => {
+      clearInterval(interval);
+    };
+  }, [authCooldownUntil]);
 
   async function runAccountAction(
     key: string,
@@ -703,14 +774,23 @@ export function ProfileAccountScreen() {
     fallbackError: string,
   ) {
     setAccountBusy(key);
-    setRuntimeMessage(null);
+    setAccountActionMessage(null);
 
     try {
       await action();
     } catch (error) {
-      setRuntimeMessage(error instanceof Error ? error.message : fallbackError);
+      setAccountActionMessage(error instanceof Error ? error.message : fallbackError);
     } finally {
       setAccountBusy(null);
+    }
+  }
+
+  function clearAuthSurfaceFeedback() {
+    if (!(authFeedback?.code === "rate_limited" && authCooldownRemainingMs > 0)) {
+      setAuthFeedback(null);
+    }
+    if (authState?.lastError || authState?.status === "error") {
+      void clearAuthFeedback();
     }
   }
 
@@ -747,12 +827,16 @@ export function ProfileAccountScreen() {
       return;
     }
 
-    if (field === "password" && canSubmitAuth && authConfigured) {
+    if (field === "password" && canAttemptAuth && authConfigured) {
       void submitAuth();
     }
   }
 
   async function submitAuth() {
+    if (accountBusy === "auth" || authCooldownRemainingMs > 0) {
+      return;
+    }
+
     setTouchedFields({
       displayName: true,
       email: true,
@@ -763,23 +847,55 @@ export function ProfileAccountScreen() {
       return;
     }
 
-    await runAccountAction(
-      "auth",
-      () =>
+    setAccountBusy("auth");
+    setAuthFeedback(null);
+    setAccountActionMessage(null);
+
+    try {
+      const result =
         authMode === "create"
-          ? createAccount({
+          ? await createAccount({
               email: email.trim(),
               password,
               displayName: displayName.trim(),
             })
-          : signIn({
+          : await signIn({
               email: email.trim(),
               password,
-            }),
-      authMode === "create"
-        ? "Couldn’t create your account. Try again."
-        : "Couldn’t sign in. Try again.",
-    );
+            });
+
+      if (result.feedback) {
+        setAuthFeedback(result.feedback);
+
+        if (result.feedback.code === "rate_limited") {
+          setAuthCooldownUntil(Date.now() + AUTH_RATE_LIMIT_COOLDOWN_MS);
+        }
+
+        if (result.feedback.suggestedMode === "sign_in") {
+          setAuthMode("sign_in");
+          setTouchedFields({
+            displayName: false,
+            email: true,
+            password: false,
+          });
+          setDisplayName("");
+          setPassword("");
+        }
+      }
+    } catch (error) {
+      setAuthFeedback({
+        kind: "error",
+        code: "unknown",
+        message:
+          error instanceof Error
+            ? error.message
+            : authMode === "create"
+              ? "Couldn’t create your account. Try again."
+              : "Couldn’t sign in. Try again.",
+      });
+    } finally {
+      setAccountBusy(null);
+    }
   }
 
   const nameValid = displayName.trim().length > 0;
@@ -787,6 +903,9 @@ export function ProfileAccountScreen() {
   const passwordValid = password.trim().length >= 8;
   const canSubmitAuth =
     emailValid && passwordValid && (authMode === "sign_in" || nameValid);
+  const isAuthCoolingDown = authCooldownRemainingMs > 0;
+  const cooldownSeconds = Math.max(1, Math.ceil(authCooldownRemainingMs / 1000));
+  const canAttemptAuth = canSubmitAuth && accountBusy !== "auth" && !isAuthCoolingDown;
   const nameFieldState =
     authMode === "create"
       ? getFieldValidationState({
@@ -807,10 +926,20 @@ export function ProfileAccountScreen() {
   });
   const modeDescription =
     authMode === "create"
-      ? "Create an account to keep your plans and history available across devices."
-      : "Sign in to continue syncing on this device.";
+      ? "Keep plans, history, and settings available across devices."
+      : "Pick up your account on this device.";
   const unavailableMessage =
     authState?.lastError ?? "Connection unavailable right now.";
+  const authFeedbackDetail =
+    authFeedback?.code === "rate_limited" && isAuthCoolingDown
+      ? `You can try again in ${cooldownSeconds}s.`
+      : undefined;
+  const authButtonLabel =
+    isAuthCoolingDown
+      ? `Try again in ${cooldownSeconds}s`
+      : authMode === "create"
+        ? "Create account"
+        : "Sign in";
 
   return (
     <KeyboardAvoidingView
@@ -833,7 +962,7 @@ export function ProfileAccountScreen() {
           <Surface tone="accent" className="gap-3">
             <AppText variant="title">Account</AppText>
             <AppText tone="secondary">
-              Understand your account status, connect when you&apos;re ready, and keep your data safe.
+              Sync your plans and history when you&apos;re ready.
             </AppText>
           </Surface>
           <AccountStatusCard
@@ -908,10 +1037,18 @@ export function ProfileAccountScreen() {
                     ]}
                     onChange={(value) => {
                       setAuthMode(value);
-                      setRuntimeMessage(null);
+                      setTouchedFields({
+                        displayName: false,
+                        email: false,
+                        password: false,
+                      });
+                      clearAuthSurfaceFeedback();
                     }}
                   />
                 </View>
+                {authFeedback ? (
+                  <AuthFeedbackCard feedback={authFeedback} detail={authFeedbackDetail} />
+                ) : null}
                 {authMode === "create" ? (
                   <View
                     onLayout={(event) => registerFieldOffset("displayName", event)}
@@ -922,7 +1059,10 @@ export function ProfileAccountScreen() {
                       autoCorrect={false}
                       label="Name"
                       onBlur={() => markTouched("displayName")}
-                      onChangeText={setDisplayName}
+                      onChangeText={(value) => {
+                        setDisplayName(value);
+                        clearAuthSurfaceFeedback();
+                      }}
                       onFocus={() => focusField("displayName")}
                       onSubmitEditing={() => handleSubmitEditing("displayName")}
                       placeholder="Your name"
@@ -943,7 +1083,10 @@ export function ProfileAccountScreen() {
                     keyboardType="email-address"
                     label="Email"
                     onBlur={() => markTouched("email")}
-                    onChangeText={setEmail}
+                    onChangeText={(value) => {
+                      setEmail(value);
+                      clearAuthSurfaceFeedback();
+                    }}
                     onFocus={() => focusField("email")}
                     onSubmitEditing={() => handleSubmitEditing("email")}
                     placeholder="you@example.com"
@@ -962,11 +1105,14 @@ export function ProfileAccountScreen() {
                     autoCorrect={false}
                     label="Password"
                     onBlur={() => markTouched("password")}
-                    onChangeText={setPassword}
+                    onChangeText={(value) => {
+                      setPassword(value);
+                      clearAuthSurfaceFeedback();
+                    }}
                     onFocus={() => focusField("password")}
                     onSubmitEditing={() => handleSubmitEditing("password")}
                     placeholder="At least 8 characters"
-                    returnKeyType={canSubmitAuth ? "go" : "done"}
+                    returnKeyType={canAttemptAuth ? "go" : "done"}
                     secureTextEntry
                     supportingText={
                       touchedFields.password && !passwordValid
@@ -988,7 +1134,7 @@ export function ProfileAccountScreen() {
                   }}
                 >
                   <AppText variant="caption">
-                    {authMode === "create" ? "What you need" : "Before you sign in"}
+                    {authMode === "create" ? "Requirements" : "Ready to sign in"}
                   </AppText>
                   {authMode === "create" ? (
                     <RequirementRow label="Name required" met={nameValid} />
@@ -1000,19 +1146,31 @@ export function ProfileAccountScreen() {
                 <View className="gap-3">
                   <Button
                     busy={accountBusy === "auth"}
-                    disabled={!canSubmitAuth}
+                    disabled={!canAttemptAuth}
                     onPress={() => void submitAuth()}
+                    style={{ width: "100%" }}
                   >
-                    {authMode === "create" ? "Create account" : "Sign in"}
+                    {authButtonLabel}
                   </Button>
-                  <AppText tone="tertiary" variant="caption">
-                    Your data stays on this device until you connect an account.
-                  </AppText>
+                  <Button
+                    tone="inline"
+                    onPress={() => {
+                      setAuthMode(authMode === "create" ? "sign_in" : "create");
+                      setTouchedFields({
+                        displayName: false,
+                        email: false,
+                        password: false,
+                      });
+                      clearAuthSurfaceFeedback();
+                    }}
+                  >
+                    {authMode === "create" ? "Already have an account? Sign in" : "Need an account? Create one"}
+                  </Button>
                 </View>
               </Surface>
             )
           ) : null}
-          {runtimeMessage && (account || authConfigured) ? (
+          {accountActionMessage && (account || authConfigured) ? (
             <Surface
               tone="sunken"
               className="gap-2"
@@ -1022,7 +1180,7 @@ export function ProfileAccountScreen() {
             >
               <AppText variant="caption">Couldn&apos;t complete that action</AppText>
               <AppText tone="secondary" variant="caption">
-                {runtimeMessage}
+                {accountActionMessage}
               </AppText>
             </Surface>
           ) : null}

@@ -1,13 +1,85 @@
-function normalizeMessage(error: unknown) {
-  if (error instanceof Error) {
-    return error.message.toLowerCase();
-  }
+export type AuthFeedbackKind = "error" | "info";
+export type AuthFeedbackSuggestedMode = "create" | "sign_in";
+export type AuthFeedbackCode =
+  | "confirmation_required"
+  | "email_exists"
+  | "invalid_email"
+  | "weak_password"
+  | "invalid_credentials"
+  | "network"
+  | "rate_limited"
+  | "signup_disabled"
+  | "session_expired"
+  | "unknown";
 
-  return String(error ?? "").toLowerCase();
+export interface AuthFeedback {
+  kind: AuthFeedbackKind;
+  code: AuthFeedbackCode;
+  message: string;
+  suggestedMode?: AuthFeedbackSuggestedMode;
 }
 
-export function mapAuthErrorMessage(error: unknown, mode: "sign_in" | "sign_up") {
-  const message = normalizeMessage(error);
+interface AuthErrorLike {
+  message: string;
+  code: string | null;
+}
+
+function readErrorMessage(error: unknown) {
+  if (error instanceof Error) {
+    return error.message;
+  }
+
+  return String(error ?? "");
+}
+
+function readErrorCode(error: unknown) {
+  if (error && typeof error === "object" && "code" in error) {
+    const code = (error as { code?: unknown }).code;
+    return typeof code === "string" ? code : null;
+  }
+
+  return null;
+}
+
+function normalizeAuthError(error: unknown): AuthErrorLike {
+  return {
+    message: readErrorMessage(error).toLowerCase(),
+    code: readErrorCode(error)?.toLowerCase() ?? null,
+  };
+}
+
+export function buildConfirmationRequiredFeedback(): AuthFeedback {
+  return {
+    kind: "info",
+    code: "confirmation_required",
+    message: "Check your email to finish setting up your account.",
+    suggestedMode: "sign_in",
+  };
+}
+
+export function buildExistingAccountFeedback(): AuthFeedback {
+  return {
+    kind: "error",
+    code: "email_exists",
+    message: "That email already has an account. Sign in instead.",
+    suggestedMode: "sign_in",
+  };
+}
+
+export function mapAuthErrorFeedback(error: unknown, mode: "sign_in" | "sign_up"): AuthFeedback {
+  const { message, code } = normalizeAuthError(error);
+
+  if (
+    code === "over_email_send_rate_limit" ||
+    message.includes("rate limit") ||
+    message.includes("too many requests")
+  ) {
+    return {
+      kind: "error",
+      code: "rate_limited",
+      message: "Too many attempts right now. Give it a minute and try again.",
+    };
+  }
 
   if (
     message.includes("failed to fetch") ||
@@ -15,44 +87,78 @@ export function mapAuthErrorMessage(error: unknown, mode: "sign_in" | "sign_up")
     message.includes("network error") ||
     message.includes("fetch")
   ) {
-    return "Connection unavailable right now. Try again.";
+    return {
+      kind: "error",
+      code: "network",
+      message: "Connection unavailable right now. Try again.",
+    };
   }
 
   if (message.includes("invalid login credentials")) {
-    return "Couldn’t sign in. Check your email and password and try again.";
+    return {
+      kind: "error",
+      code: "invalid_credentials",
+      message: "Couldn’t sign in. Check your email and password and try again.",
+    };
   }
 
   if (message.includes("email not confirmed")) {
-    return "Check your email to finish setting up your account.";
+    return buildConfirmationRequiredFeedback();
   }
 
   if (message.includes("user already registered")) {
-    return "That email already has an account. Sign in instead.";
+    return buildExistingAccountFeedback();
   }
 
   if (message.includes("password should be at least")) {
-    return "Use at least 8 characters for your password.";
+    return {
+      kind: "error",
+      code: "weak_password",
+      message: "Use at least 8 characters for your password.",
+    };
   }
 
-  if (message.includes("invalid email") || message.includes("email_address_invalid")) {
-    return "Enter a valid email address.";
+  if (
+    message.includes("invalid email") ||
+    code === "email_address_invalid" ||
+    message.includes("email_address_invalid")
+  ) {
+    return {
+      kind: "error",
+      code: "invalid_email",
+      message: "Enter a valid email address.",
+    };
   }
 
   if (message.includes("signup is disabled")) {
-    return "Account creation isn’t available right now.";
+    return {
+      kind: "error",
+      code: "signup_disabled",
+      message: "Account creation isn’t available right now.",
+    };
   }
 
   if (message.includes("check your email to finish creating your account")) {
-    return "Check your email to finish setting up your account.";
+    return buildConfirmationRequiredFeedback();
   }
 
   if (message.includes("session expired")) {
-    return "Your session ended. Sign in again to keep syncing.";
+    return {
+      kind: "error",
+      code: "session_expired",
+      message: "Your session ended. Sign in again to keep syncing.",
+      suggestedMode: "sign_in",
+    };
   }
 
-  return mode === "sign_in"
-    ? "Couldn’t sign in. Try again."
-    : "Couldn’t create your account. Try again.";
+  return {
+    kind: "error",
+    code: "unknown",
+    message:
+      mode === "sign_in"
+        ? "Couldn’t sign in. Try again."
+        : "Couldn’t create your account. Try again.",
+  };
 }
 
 export function getAuthUnavailableMessage() {

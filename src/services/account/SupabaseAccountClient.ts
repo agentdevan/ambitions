@@ -4,9 +4,20 @@ import { AuthProvider, RemoteSyncRecord } from "../../domain/models";
 import { accountSessionStorage } from "./sessionStorage";
 import { getSupabaseConfig } from "./supabaseConfig";
 
-interface RemoteSessionSnapshot {
+export interface RemoteSessionSnapshot {
   user: User;
   session: Session | null;
+}
+
+export interface SignUpResult {
+  outcome: "authenticated" | "confirmation_required" | "email_exists";
+  user: User;
+  session: Session | null;
+  debug: {
+    identitiesLength: number | null;
+    emailConfirmedAt: string | null;
+    obfuscatedExistingUser: boolean;
+  };
 }
 
 interface AuthInput {
@@ -83,7 +94,7 @@ export class SupabaseAccountClient {
     return { session, user: session.user };
   }
 
-  async signUp(input: AuthInput): Promise<RemoteSessionSnapshot> {
+  async signUp(input: AuthInput): Promise<SignUpResult> {
     const client = this.requireClient();
     const { data, error } = await client.auth.signUp({
       email: input.email,
@@ -103,7 +114,27 @@ export class SupabaseAccountClient {
       throw new Error("Check your email to finish creating your account, then sign in.");
     }
 
-    return { session: data.session ?? null, user: data.user };
+    const identitiesLength = Array.isArray(data.user.identities) ? data.user.identities.length : null;
+    const obfuscatedExistingUser =
+      !data.session &&
+      (identitiesLength === 0 ||
+        !data.user.email ||
+        data.user.email.toLowerCase() !== input.email.trim().toLowerCase());
+
+    return {
+      outcome: obfuscatedExistingUser
+        ? "email_exists"
+        : data.session
+          ? "authenticated"
+          : "confirmation_required",
+      session: data.session ?? null,
+      user: data.user,
+      debug: {
+        identitiesLength,
+        emailConfirmedAt: data.user.email_confirmed_at ?? null,
+        obfuscatedExistingUser,
+      },
+    };
   }
 
   async signIn(input: AuthInput): Promise<RemoteSessionSnapshot> {
