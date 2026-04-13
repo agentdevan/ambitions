@@ -48,7 +48,9 @@ export class MergeEvaluator {
       return { type: "pull_remote" };
     }
 
-    const preserveBothKinds = new Set<SyncEntityKind>(["goal", "milestone", "task"]);
+    // Portfolio entities need one authoritative identity. Creating preserved copies
+    // with new ids turns one logical record into multiple surfaced records.
+    const preserveBothKinds = new Set<SyncEntityKind>();
     const strategy = preserveBothKinds.has(params.kind)
       ? SyncConflictStrategy.PreserveBoth
       : SyncConflictStrategy.ReviewRequired;

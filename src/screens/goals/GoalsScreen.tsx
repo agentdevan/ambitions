@@ -1,4 +1,5 @@
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
+import { useMemo } from "react";
 import { Ionicons } from "@expo/vector-icons";
 import { View } from "react-native";
 
@@ -16,6 +17,7 @@ import { GoalsStackParamList } from "../../navigation/types";
 import { describeGoalFeasibility, describeGoalPaceMode, getGoalIntelligenceSnapshot } from "../../services/goals/goalIntelligence";
 import { buildDirectionPortfolioSnapshot, buildGoalProgressTruth } from "../../services/goals/progress";
 import { getGoalReviewDraft } from "../../services/goals/metadata";
+import { canonicalizeAmbitions, canonicalizeGoals } from "../../services/goals/portfolioIntegrity";
 import { buildActivityFeed } from "../../services/history/selectors";
 import { useAppStore } from "../../state/useAppStore";
 import { formatShortDate } from "../../utils/date";
@@ -79,31 +81,72 @@ export function GoalsScreen({ navigation }: Props) {
   const currentWeekReview = useAppStore((state) => state.currentWeekReview);
   const currentMonthReview = useAppStore((state) => state.currentMonthReview);
 
-  const activeGoals = goals.filter((goal) => goal.status === GoalStatus.Active);
-  const inactiveGoals = goals.filter((goal) =>
-    [GoalStatus.Paused, GoalStatus.Archived, GoalStatus.Completed].includes(goal.status),
-  );
-  const reviewGoals = goals.filter((goal) => getGoalReviewDraft(goal) !== null);
-  const feed = buildActivityFeed(activityEvents, tasks, milestones);
-  const goalTruths = activeGoals.map((goal) =>
-    buildGoalProgressTruth({
-      goal,
-      ambition: ambitions.find((entry) => entry.id === goal.ambitionId) ?? null,
-      milestones: milestones.filter((item) => item.goalId === goal.id),
-      tasks: tasks.filter((item) => item.goalId === goal.id),
-      timeBlocks,
-      activityFeed: feed,
-      currentWeekReview,
-      currentMonthReview,
-    }),
-  );
-  const directionPortfolio = buildDirectionPortfolioSnapshot({
+  const {
+    uniqueAmbitions,
+    activeGoals,
+    inactiveGoals,
+    reviewGoalIds,
+    directionPortfolio,
+    linkedActiveGoalCount,
+    unlinkedActiveGoals,
+    goalTruthById,
+  } = useMemo(() => {
+    const uniqueAmbitions = canonicalizeAmbitions(ambitions);
+    const uniqueGoals = canonicalizeGoals(goals);
+    const activeGoals = uniqueGoals
+      .filter((goal) => goal.status === GoalStatus.Active)
+      .sort((left, right) => {
+        if (!!left.ambitionId !== !!right.ambitionId) {
+          return left.ambitionId ? -1 : 1;
+        }
+        return left.sortOrder - right.sortOrder;
+      });
+    const inactiveGoals = uniqueGoals.filter((goal) =>
+      [GoalStatus.Paused, GoalStatus.Archived, GoalStatus.Completed].includes(goal.status),
+    );
+    const reviewGoalIds = new Set(
+      uniqueGoals.filter((goal) => getGoalReviewDraft(goal) !== null).map((goal) => goal.id),
+    );
+    const feed = buildActivityFeed(activityEvents, tasks, milestones);
+    const goalTruths = activeGoals.map((goal) =>
+      buildGoalProgressTruth({
+        goal,
+        ambition: uniqueAmbitions.find((entry) => entry.id === goal.ambitionId) ?? null,
+        milestones: milestones.filter((item) => item.goalId === goal.id),
+        tasks: tasks.filter((item) => item.goalId === goal.id),
+        timeBlocks,
+        activityFeed: feed,
+        currentWeekReview,
+        currentMonthReview,
+      }),
+    );
+    const directionPortfolio = buildDirectionPortfolioSnapshot({
+      ambitions: uniqueAmbitions,
+      goals: activeGoals,
+      goalTruths,
+    });
+    const goalTruthById = new Map(goalTruths.map((truth) => [truth.goalId, truth]));
+
+    return {
+      uniqueAmbitions,
+      activeGoals,
+      inactiveGoals,
+      reviewGoalIds,
+      directionPortfolio,
+      linkedActiveGoalCount: activeGoals.filter((goal) => goal.ambitionId).length,
+      unlinkedActiveGoals: activeGoals.filter((goal) => !goal.ambitionId),
+      goalTruthById,
+    };
+  }, [
     ambitions,
-    goals: activeGoals,
-    goalTruths,
-  });
-  const linkedActiveGoalCount = activeGoals.filter((goal) => goal.ambitionId).length;
-  const unlinkedActiveGoals = activeGoals.filter((goal) => !goal.ambitionId);
+    goals,
+    milestones,
+    tasks,
+    timeBlocks,
+    activityEvents,
+    currentWeekReview,
+    currentMonthReview,
+  ]);
 
   return (
     <Screen>
@@ -142,14 +185,19 @@ export function GoalsScreen({ navigation }: Props) {
               <View className="flex-row flex-wrap gap-2">
                 <Pill label={`${directionPortfolio.ambitions.length} ambitions`} tone="quiet" />
                 <Pill label={`${activeGoals.length} active`} tone="accent" />
-                {reviewGoals.length > 0 ? (
-                  <Pill label={`${reviewGoals.length} review`} tone="quiet" />
+                {reviewGoalIds.size > 0 ? (
+                  <Pill label={`${reviewGoalIds.size} review`} tone="quiet" />
+                ) : null}
+                {unlinkedActiveGoals.length > 0 ? (
+                  <Pill label={`${unlinkedActiveGoals.length} need direction`} tone="neutral" />
                 ) : null}
               </View>
               <View className="gap-2">
                 <AppText variant="title">Keep direction visible.</AppText>
                 <AppText tone="secondary" variant="caption">
-                  {linkedActiveGoalCount} active goals already serve a named ambition.
+                  {linkedActiveGoalCount > 0
+                    ? `${linkedActiveGoalCount} active goals already serve a named ambition.`
+                    : "Active goals need a clearer direction layer."}
                 </AppText>
               </View>
               {directionPortfolio.underrepresentedAmbitionIds.length > 0 ? (
@@ -169,7 +217,7 @@ export function GoalsScreen({ navigation }: Props) {
                 </View>
                 <View className="gap-3">
                   {directionPortfolio.ambitions.map((ambitionTruth) => {
-                    const ambition = ambitions.find((entry) => entry.id === ambitionTruth.ambitionId);
+                    const ambition = uniqueAmbitions.find((entry) => entry.id === ambitionTruth.ambitionId);
                     if (!ambition) {
                       return null;
                     }
@@ -194,14 +242,14 @@ export function GoalsScreen({ navigation }: Props) {
                 <AppText tone="tertiary" variant="micro" style={{ textTransform: "uppercase" }}>
                   Active goals
                 </AppText>
-                <AppText variant="title">Current truth</AppText>
+                <AppText variant="title">Active portfolio</AppText>
               </View>
               {activeGoals.map((goal) => {
-                const goalTruth = goalTruths.find((entry) => entry.goalId === goal.id);
-                const reviewDraft = getGoalReviewDraft(goal);
+                const goalTruth = goalTruthById.get(goal.id);
+                const reviewDraft = reviewGoalIds.has(goal.id) ? getGoalReviewDraft(goal) : null;
                 const intelligence = getGoalIntelligenceSnapshot(goal);
                 const feasibility = describeGoalFeasibility(goal);
-                const ambition = ambitions.find((entry) => entry.id === goal.ambitionId) ?? null;
+                const ambition = uniqueAmbitions.find((entry) => entry.id === goal.ambitionId) ?? null;
 
                 return (
                   <Surface key={goal.id} className="gap-4">
@@ -210,6 +258,9 @@ export function GoalsScreen({ navigation }: Props) {
                         <View className="flex-row flex-wrap items-center gap-2">
                           <AppText variant="section">{goal.title}</AppText>
                           {reviewDraft ? <Pill label="Review" tone="accent" /> : null}
+                          {!ambition ? <Pill label="Needs direction" tone="neutral" /> : null}
+                          {goalTruth?.crowded ? <Pill label="Crowded" tone="quiet" /> : null}
+                          {goalTruth?.stale ? <Pill label="Quiet" tone="quiet" /> : null}
                           {intelligence ? (
                             <Pill
                               label={describeGoalPaceMode(intelligence.selectedPaceMode)}
@@ -294,14 +345,17 @@ export function GoalsScreen({ navigation }: Props) {
                   <AppText tone="tertiary" variant="micro" style={{ textTransform: "uppercase" }}>
                     Needs direction
                   </AppText>
-                  <AppText variant="title">Unlinked goals</AppText>
+                  <AppText variant="title">Compact follow-up</AppText>
                 </View>
+                <AppText tone="secondary" variant="caption">
+                  These goals are already in the active portfolio above. This is only the quick link pass.
+                </AppText>
                 <View className="gap-3">
                   {unlinkedActiveGoals.map((goal) => (
                     <DrillInRow
                       key={goal.id}
                       title={goal.title}
-                      subtitle="This goal is active, but it is not yet tied to a bigger direction."
+                      subtitle="Active, but still not tied to a bigger direction."
                       detail="Link ambition"
                       onPress={() => navigation.navigate("GoalEdit", { goalId: goal.id })}
                     />

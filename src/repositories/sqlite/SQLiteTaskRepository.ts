@@ -3,6 +3,7 @@ import { DatabaseClient } from "../../data/sqlite/client";
 import { decodeJson, encodeJson, entityParams, mapEntityRecord } from "./shared";
 import { SQLiteRepository } from "../base";
 import { TaskRepository } from "../TaskRepository";
+import { canonicalizeTasks } from "../../services/goals/portfolioIntegrity";
 
 interface TaskRow {
   id: string;
@@ -43,7 +44,7 @@ export class SQLiteTaskRepository extends SQLiteRepository implements TaskReposi
     const rows = await this.database.getAll<TaskRow>(
       "SELECT * FROM tasks ORDER BY COALESCE(scheduled_date, target_date, created_at) ASC;",
     );
-    return rows.map(mapTaskRow);
+    return canonicalizeTasks(rows.map(mapTaskRow));
   }
 
   async listTasksForDate(date: string) {
@@ -55,7 +56,7 @@ export class SQLiteTaskRepository extends SQLiteRepository implements TaskReposi
       `,
       [date, date],
     );
-    return rows.map(mapTaskRow);
+    return canonicalizeTasks(rows.map(mapTaskRow));
   }
 
   async saveTasks(tasks: Task[]) {

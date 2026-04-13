@@ -3,6 +3,11 @@ import { DatabaseClient } from "../../data/sqlite/client";
 import { decodeJson, encodeJson, entityParams, mapEntityRecord } from "./shared";
 import { GoalRepository } from "../GoalRepository";
 import { SQLiteRepository } from "../base";
+import {
+  canonicalizeAmbitions,
+  canonicalizeGoalMilestones,
+  canonicalizeGoals,
+} from "../../services/goals/portfolioIntegrity";
 
 interface GoalRow {
   id: string;
@@ -78,15 +83,17 @@ export class SQLiteGoalRepository extends SQLiteRepository implements GoalReposi
     const rows = await this.database.getAll<AmbitionRow>(
       "SELECT * FROM ambitions ORDER BY sort_order ASC, created_at ASC;",
     );
-    return rows.map((row) =>
-      mapEntityRecord<Ambition>(row, {
-        title: row.title,
-        thesis: row.thesis,
-        status: row.status,
-        sortOrder: row.sort_order,
-        isVisible: row.is_visible === 1,
-        metadata: decodeJson(row.metadata_json),
-      }),
+    return canonicalizeAmbitions(
+      rows.map((row) =>
+        mapEntityRecord<Ambition>(row, {
+          title: row.title,
+          thesis: row.thesis,
+          status: row.status,
+          sortOrder: row.sort_order,
+          isVisible: row.is_visible === 1,
+          metadata: decodeJson(row.metadata_json),
+        }),
+      ),
     );
   }
 
@@ -94,26 +101,28 @@ export class SQLiteGoalRepository extends SQLiteRepository implements GoalReposi
     const rows = await this.database.getAll<GoalRow>(
       "SELECT * FROM goals ORDER BY sort_order ASC, created_at ASC;",
     );
-    return rows.map((row) =>
-      mapEntityRecord<Goal>(row, {
-        ambitionId: row.ambition_id,
-        title: row.title,
-        summary: row.summary,
-        domainKey: row.domain_key,
-        horizon: row.horizon,
-        type: row.type,
-        status: row.status,
-        parentGoalId: row.parent_goal_id,
-        sortOrder: row.sort_order,
-        startDate: row.start_date,
-        targetDate: row.target_date,
-        desiredWeeklyMinutes: row.desired_weekly_minutes,
-        estimatedTotalMinutes: row.estimated_total_minutes,
-        successMetric: row.success_metric,
-        notes: row.notes,
-        tags: decodeJson<string[]>(row.tags_json),
-        metadata: decodeJson(row.metadata_json),
-      }),
+    return canonicalizeGoals(
+      rows.map((row) =>
+        mapEntityRecord<Goal>(row, {
+          ambitionId: row.ambition_id,
+          title: row.title,
+          summary: row.summary,
+          domainKey: row.domain_key,
+          horizon: row.horizon,
+          type: row.type,
+          status: row.status,
+          parentGoalId: row.parent_goal_id,
+          sortOrder: row.sort_order,
+          startDate: row.start_date,
+          targetDate: row.target_date,
+          desiredWeeklyMinutes: row.desired_weekly_minutes,
+          estimatedTotalMinutes: row.estimated_total_minutes,
+          successMetric: row.success_metric,
+          notes: row.notes,
+          tags: decodeJson<string[]>(row.tags_json),
+          metadata: decodeJson(row.metadata_json),
+        }),
+      ),
     );
   }
 
@@ -121,18 +130,20 @@ export class SQLiteGoalRepository extends SQLiteRepository implements GoalReposi
     const rows = await this.database.getAll<MilestoneRow>(
       "SELECT * FROM goal_milestones ORDER BY goal_id ASC, sort_order ASC;",
     );
-    return rows.map((row) =>
-      mapEntityRecord<GoalMilestone>(row, {
-        goalId: row.goal_id,
-        title: row.title,
-        summary: row.summary,
-        status: row.status,
-        targetDate: row.target_date,
-        completedAt: row.completed_at,
-        sortOrder: row.sort_order,
-        estimatedMinutes: row.estimated_minutes,
-        metadata: decodeJson(row.metadata_json),
-      }),
+    return canonicalizeGoalMilestones(
+      rows.map((row) =>
+        mapEntityRecord<GoalMilestone>(row, {
+          goalId: row.goal_id,
+          title: row.title,
+          summary: row.summary,
+          status: row.status,
+          targetDate: row.target_date,
+          completedAt: row.completed_at,
+          sortOrder: row.sort_order,
+          estimatedMinutes: row.estimated_minutes,
+          metadata: decodeJson(row.metadata_json),
+        }),
+      ),
     );
   }
 

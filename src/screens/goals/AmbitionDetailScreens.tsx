@@ -22,6 +22,7 @@ import {
   buildDirectionPortfolioSnapshot,
   buildGoalProgressTruth,
 } from "../../services/goals/progress";
+import { canonicalizeAmbitions, canonicalizeGoals } from "../../services/goals/portfolioIntegrity";
 import { buildActivityFeed } from "../../services/history/selectors";
 import { useAppStore } from "../../state/useAppStore";
 
@@ -47,8 +48,10 @@ function useAmbitionData(ambitionId: string) {
   const currentMonthReview = useAppStore((state) => state.currentMonthReview);
 
   return useMemo(() => {
-    const ambition = ambitions.find((entry) => entry.id === ambitionId) ?? null;
-    const linkedGoals = goals.filter((goal) => goal.ambitionId === ambitionId);
+    const uniqueAmbitions = canonicalizeAmbitions(ambitions);
+    const uniqueGoals = canonicalizeGoals(goals);
+    const ambition = uniqueAmbitions.find((entry) => entry.id === ambitionId) ?? null;
+    const linkedGoals = uniqueGoals.filter((goal) => goal.ambitionId === ambitionId);
     const feed = buildActivityFeed(activityEvents, tasks, milestones);
     const goalTruths = linkedGoals.map((goal) =>
       buildGoalProgressTruth({
@@ -72,6 +75,7 @@ function useAmbitionData(ambitionId: string) {
       ambition,
       linkedGoals,
       goalTruths,
+      goalTruthById: new Map(goalTruths.map((truth) => [truth.goalId, truth])),
       ambitionTruth: portfolio.ambitions[0] ?? null,
     };
   }, [
@@ -91,7 +95,7 @@ export function AmbitionDetailScreen({
   route,
   navigation,
 }: NativeStackScreenProps<GoalsStackParamList, "AmbitionDetail">) {
-  const { ambition, linkedGoals, goalTruths, ambitionTruth } = useAmbitionData(route.params.ambitionId);
+  const { ambition, linkedGoals, goalTruthById, ambitionTruth } = useAmbitionData(route.params.ambitionId);
 
   if (!ambition) {
     return (
@@ -165,7 +169,7 @@ export function AmbitionDetailScreen({
           ) : (
             <View className="gap-3">
               {linkedGoals.map((goal) => {
-                const truth = goalTruths.find((entry) => entry.goalId === goal.id);
+                const truth = goalTruthById.get(goal.id);
                 return (
                   <DrillInRow
                     key={goal.id}
