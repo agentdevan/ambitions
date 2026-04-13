@@ -340,7 +340,7 @@ export function TodayScreen({ navigation }: Props) {
           recommendation={todayVm.recommendation}
           focus={todayVm.focus}
           now={todayVm.workspace.now}
-          busy={busyTaskId === todayVm.recommendation.taskId}
+          busy={todayVm.recommendation.taskId !== null && busyTaskId === todayVm.recommendation.taskId}
           onPrimaryPress={() => void handleRecommendedAction()}
           onSecondaryPress={todayVm.recommendation.secondaryLabel ? () => handleSecondaryAction() : null}
           progressLabel={progressLabel}

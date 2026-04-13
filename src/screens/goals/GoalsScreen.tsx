@@ -61,6 +61,7 @@ function GoalCard({
 }) {
   const theme = useResolvedTheme();
   const { reduceMotionEnabled } = useAccessibilityPreferences();
+  const useStrongActionCapsule = theme.mode === "light" && theme.accentTheme === "gold";
 
   return (
     <Pressable accessibilityRole="button" onPress={selectionMode ? onToggleSelect : onOpen}>
@@ -140,20 +141,30 @@ function GoalCard({
               style={{
                 backgroundColor: selected
                   ? theme.colors.accent.primary
-                  : theme.colors.background.accentWashStrong,
+                  : useStrongActionCapsule
+                    ? theme.colors.accent.muted
+                    : theme.colors.background.accentWashStrong,
                 borderWidth: 1,
-                borderColor: selected ? theme.colors.accent.primary : theme.colors.border.accent,
-                shadowColor: theme.colors.accent.primary,
-                shadowOpacity: selected ? 0.2 : theme.mode === "dark" ? 0.12 : 0.08,
+                borderColor: selected
+                  ? theme.colors.accent.primary
+                  : useStrongActionCapsule
+                    ? theme.colors.accent.muted
+                    : theme.colors.border.accent,
+                shadowColor: useStrongActionCapsule ? theme.colors.accent.muted : theme.colors.accent.primary,
+                shadowOpacity: selected ? 0.2 : theme.mode === "dark" ? 0.12 : 0.12,
                 shadowRadius: 10,
                 shadowOffset: { width: 0, height: 4 },
               }}
             >
-              <AppText tone={selected ? "inverse" : "accent"} variant="micro" style={{ textTransform: "uppercase" }}>
+              <AppText
+                tone={selected || useStrongActionCapsule ? "inverse" : "accent"}
+                variant="micro"
+                style={{ textTransform: "uppercase" }}
+              >
                 {selectionMode ? (selected ? "Selected" : "Select") : "Open goal"}
               </AppText>
               <Ionicons
-                color={selected ? theme.colors.text.inverse : theme.colors.accent.primary}
+                color={selected || useStrongActionCapsule ? theme.colors.text.inverse : theme.colors.accent.primary}
                 name={selectionMode ? (selected ? "checkmark" : "add") : "arrow-forward"}
                 size={14}
               />

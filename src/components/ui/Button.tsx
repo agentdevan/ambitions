@@ -25,27 +25,28 @@ export function Button({
   const theme = useResolvedTheme();
   const { reduceMotionEnabled } = useAccessibilityPreferences();
   const resolvedTone = tone === "ghost" ? "secondary" : tone;
+  const isWarmGoldLight = theme.mode === "light" && theme.accentTheme === "gold";
   const tonePalette = {
     primary: {
-      idleBackground: theme.colors.accent.primary,
-      pressedBackground: theme.colors.accent.muted,
+      idleBackground: isWarmGoldLight ? theme.colors.accent.muted : theme.colors.accent.primary,
+      pressedBackground: isWarmGoldLight ? theme.colors.accent.primary : theme.colors.accent.muted,
       disabledBackground: theme.colors.background.sunken,
-      idleBorder: theme.colors.accent.primary,
+      idleBorder: isWarmGoldLight ? theme.colors.accent.muted : theme.colors.accent.primary,
       pressedBorder: theme.colors.accent.primary,
       disabledBorder: theme.colors.border.subtle,
       textTone: "inverse" as const,
       disabledTextTone: "secondary" as const,
       textColor: theme.colors.accent.contrast,
       disabledTextColor: theme.colors.text.tertiary,
-      shadowColor: theme.colors.accent.primary,
-      innerGlow: theme.colors.accent.glow,
+      shadowColor: isWarmGoldLight ? theme.colors.accent.muted : theme.colors.accent.primary,
+      innerGlow: isWarmGoldLight ? `${theme.colors.accent.primary}18` : theme.colors.accent.glow,
       elevation: 7,
     },
     secondary: {
-      idleBackground: theme.colors.background.elevatedSecondary,
-      pressedBackground: theme.colors.background.accentWashStrong,
+      idleBackground: isWarmGoldLight ? theme.colors.background.accentWashStrong : theme.colors.background.elevatedSecondary,
+      pressedBackground: isWarmGoldLight ? theme.colors.background.accentWash : theme.colors.background.accentWashStrong,
       disabledBackground: theme.colors.background.sunken,
-      idleBorder: theme.colors.border.strong,
+      idleBorder: isWarmGoldLight ? theme.colors.border.accent : theme.colors.border.strong,
       pressedBorder: theme.colors.border.accent,
       disabledBorder: theme.colors.border.subtle,
       textTone: "primary" as const,
@@ -57,10 +58,15 @@ export function Button({
       elevation: 3,
     },
     tertiary: {
-      idleBackground: theme.mode === "dark" ? theme.colors.background.elevated : theme.colors.background.sunken,
-      pressedBackground: theme.colors.background.accentWash,
+      idleBackground:
+        theme.mode === "dark"
+          ? theme.colors.background.elevated
+          : isWarmGoldLight
+            ? theme.colors.background.accentWash
+            : theme.colors.background.sunken,
+      pressedBackground: isWarmGoldLight ? theme.colors.background.accentWashStrong : theme.colors.background.accentWash,
       disabledBackground: theme.colors.background.sunken,
-      idleBorder: theme.colors.border.strong,
+      idleBorder: isWarmGoldLight ? theme.colors.border.accent : theme.colors.border.strong,
       pressedBorder: theme.colors.border.accent,
       disabledBorder: theme.colors.border.subtle,
       textTone: "primary" as const,
