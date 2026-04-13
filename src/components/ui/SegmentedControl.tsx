@@ -23,11 +23,12 @@ export function SegmentedControl<T extends string>({
 
   return (
     <View
-      className="flex-row rounded-[18px] p-1"
+      className="flex-row rounded-[20px] p-1"
       style={{
         backgroundColor: theme.colors.background.sunken,
         borderWidth: 1,
         borderColor: theme.colors.border.subtle,
+        gap: 6,
       }}
     >
       {options.map((option) => {
@@ -39,10 +40,12 @@ export function SegmentedControl<T extends string>({
             onPress={() => onChange(option.value)}
             style={({ pressed }) => ({
               flex: 1,
-              minHeight: 38,
+              flexBasis: 0,
+              minHeight: 42,
               alignItems: "center",
               justifyContent: "center",
               borderRadius: 14,
+              paddingHorizontal: 12,
               backgroundColor: selected
                 ? theme.colors.background.accentWashStrong
                 : pressed
@@ -55,7 +58,11 @@ export function SegmentedControl<T extends string>({
             <AppText
               tone={selected ? "accent" : "secondary"}
               variant="caption"
-              style={{ fontWeight: selected ? "700" : "600" }}
+              numberOfLines={1}
+              style={{
+                fontWeight: selected ? "700" : "600",
+                textAlign: "center",
+              }}
             >
               {option.label}
             </AppText>

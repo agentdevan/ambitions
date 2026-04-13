@@ -85,7 +85,7 @@ export function AccountStatusCard({
           </View>
         ) : null}
 
-        {authState?.lastError ? (
+        {hasAccount && authState?.lastError ? (
           <AppText tone="tertiary" variant="caption">
             {authState.lastError}
           </AppText>

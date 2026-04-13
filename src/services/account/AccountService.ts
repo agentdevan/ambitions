@@ -17,8 +17,14 @@ import { PlanRepository } from "../../repositories/PlanRepository";
 import { PreferencesRepository } from "../../repositories/PreferencesRepository";
 import { TaskRepository } from "../../repositories/TaskRepository";
 import { NetworkStatusService } from "./NetworkStatusService";
-import { SupabaseAccountClient } from "./SupabaseAccountClient";
-import { getAuthUnavailableMessage, mapAuthErrorMessage } from "./accountCopy";
+import { RemoteSessionSnapshot, SupabaseAccountClient } from "./SupabaseAccountClient";
+import {
+  AuthFeedback,
+  buildConfirmationRequiredFeedback,
+  buildExistingAccountFeedback,
+  getAuthUnavailableMessage,
+  mapAuthErrorFeedback,
+} from "./accountCopy";
 import { SyncCoordinator } from "./sync/SyncCoordinator";
 
 interface AccountServiceDependencies {
@@ -34,6 +40,21 @@ interface AccountServiceDependencies {
 }
 
 type AccountSnapshotListener = (snapshot: AccountSnapshot) => void;
+
+export interface AuthActionResult {
+  snapshot: AccountSnapshot;
+  feedback: AuthFeedback | null;
+}
+
+interface ResolvedAuthSession {
+  session: RemoteSessionSnapshot["session"];
+  user: RemoteSessionSnapshot["user"];
+}
+
+interface SignUpResolution {
+  feedback: AuthFeedback | null;
+  session: ResolvedAuthSession | null;
+}
 
 export class AccountService {
   private readonly remoteClient = new SupabaseAccountClient();
@@ -119,6 +140,31 @@ export class AccountService {
 
   async signIn(input: { email: string; password: string }) {
     return this.authenticate("sign_in", input);
+  }
+
+  async clearTransientAuthFeedback() {
+    await this.initialize();
+    const now = new Date().toISOString();
+    const authState = (await this.dependencies.accountRepository.getAuthState())!;
+    const nextStatus =
+      authState.signedInAccountId
+        ? authState.status
+        : this.remoteClient.isConfigured()
+          ? AuthStatus.LocalOnly
+          : AuthStatus.Unavailable;
+
+    if (authState.lastError === null && authState.status === nextStatus) {
+      return this.getSnapshot();
+    }
+
+    await this.dependencies.accountRepository.saveAuthState({
+      ...authState,
+      status: nextStatus,
+      lastError: null,
+      updatedAt: now,
+    });
+
+    return this.getSnapshot();
   }
 
   async signOut() {
@@ -332,7 +378,7 @@ export class AccountService {
   private async authenticate(
     mode: "sign_up" | "sign_in",
     input: { email: string; password: string; displayName?: string },
-  ) {
+  ): Promise<AuthActionResult> {
     await this.initialize();
     const now = new Date().toISOString();
     const authState = (await this.dependencies.accountRepository.getAuthState())!;
@@ -344,7 +390,7 @@ export class AccountService {
         lastError: getAuthUnavailableMessage(),
         updatedAt: now,
       });
-      return this.getSnapshot();
+      return { snapshot: await this.getSnapshot(), feedback: null };
     }
 
     await this.dependencies.accountRepository.saveAuthState({
@@ -355,28 +401,29 @@ export class AccountService {
     });
 
     try {
-      const remoteSession =
-        mode === "sign_up"
-          ? await this.remoteClient.signUp(input)
-          : await this.remoteClient.signIn(input);
-      const requiresEmailConfirmation = mode === "sign_up" && !remoteSession.session;
+      let activeSession: ResolvedAuthSession | null = null;
 
-      if (requiresEmailConfirmation) {
-        await this.dependencies.accountRepository.saveAuthState({
-          ...authState,
-          status: AuthStatus.LocalOnly,
-          signedInAccountId: null,
-          sessionExpiresAt: null,
-          lastError: "Check your email to finish setting up your account, then sign in.",
-          updatedAt: now,
-        });
-
-        return this.getSnapshot();
+      if (mode === "sign_up") {
+        const signUpResolution = await this.handleSignUpAuthentication(authState, now, input);
+        if (signUpResolution.feedback) {
+          return { snapshot: await this.getSnapshot(), feedback: signUpResolution.feedback };
+        }
+        activeSession = signUpResolution.session;
+      } else {
+        const signInSession = await this.remoteClient.signIn(input);
+        activeSession = {
+          session: signInSession.session,
+          user: signInSession.user,
+        };
       }
 
-      const accountId = `account:${remoteSession.user.id}`;
+      if (!activeSession) {
+        return { snapshot: await this.getSnapshot(), feedback: null };
+      }
+
+      const accountId = `account:${activeSession.user.id}`;
       const existing = await this.dependencies.accountRepository.getAccount(accountId);
-      const identity = this.remoteClient.buildAccountIdentity(remoteSession.user);
+      const identity = this.remoteClient.buildAccountIdentity(activeSession.user);
       const account: AccountIdentity = {
         ...identity,
         metadata: {
@@ -403,8 +450,8 @@ export class AccountService {
           ...authState,
           status: AuthStatus.Authenticated,
           signedInAccountId: accountId,
-          sessionExpiresAt: remoteSession.session?.expires_at
-            ? new Date(remoteSession.session.expires_at * 1000).toISOString()
+          sessionExpiresAt: activeSession.session?.expires_at
+            ? new Date(activeSession.session.expires_at * 1000).toISOString()
             : null,
           lastAuthenticatedAt: now,
           lastError: null,
@@ -445,15 +492,88 @@ export class AccountService {
         }
       }
     } catch (error) {
+      const feedback = mapAuthErrorFeedback(error, mode);
+      this.logAuthDiagnostic("auth_error", {
+        mode,
+        email: input.email,
+        rawMessage: error instanceof Error ? error.message : String(error ?? ""),
+        rawCode:
+          error && typeof error === "object" && "code" in error
+            ? String((error as { code?: unknown }).code ?? "")
+            : "",
+        mappedCode: feedback.code,
+        mappedMessage: feedback.message,
+      });
       await this.dependencies.accountRepository.saveAuthState({
         ...authState,
         status: AuthStatus.Error,
-        lastError: mapAuthErrorMessage(error, mode),
+        lastError: feedback.message,
         updatedAt: now,
       });
+
+      return { snapshot: await this.getSnapshot(), feedback };
     }
 
-    return this.getSnapshot();
+    return { snapshot: await this.getSnapshot(), feedback: null };
+  }
+
+  private async handleSignUpAuthentication(
+    authState: NonNullable<Awaited<ReturnType<AccountRepository["getAuthState"]>>>,
+    now: string,
+    input: { email: string; password: string; displayName?: string },
+  ): Promise<SignUpResolution> {
+    const remoteSession = await this.remoteClient.signUp(input);
+
+    if (__DEV__) {
+        this.logAuthDiagnostic("sign_up_result", {
+          email: input.email,
+          outcome: remoteSession.outcome,
+          hasSession: !!remoteSession.session,
+          identitiesLength: remoteSession.debug.identitiesLength,
+          emailConfirmedAt: remoteSession.debug.emailConfirmedAt,
+          obfuscatedExistingUser: remoteSession.debug.obfuscatedExistingUser,
+        });
+    }
+
+    if (remoteSession.outcome === "email_exists") {
+      await this.dependencies.accountRepository.saveAuthState({
+        ...authState,
+        status: AuthStatus.LocalOnly,
+        signedInAccountId: null,
+        sessionExpiresAt: null,
+        lastError: null,
+        updatedAt: now,
+      });
+
+      return {
+        session: null,
+        feedback: buildExistingAccountFeedback(),
+      };
+    }
+
+    if (remoteSession.outcome === "confirmation_required") {
+      await this.dependencies.accountRepository.saveAuthState({
+        ...authState,
+        status: AuthStatus.LocalOnly,
+        signedInAccountId: null,
+        sessionExpiresAt: null,
+        lastError: null,
+        updatedAt: now,
+      });
+
+      return {
+        session: null,
+        feedback: buildConfirmationRequiredFeedback(),
+      };
+    }
+
+    return {
+      feedback: null,
+      session: {
+        session: remoteSession.session,
+        user: remoteSession.user,
+      },
+    };
   }
 
   private async restoreSession() {
@@ -526,8 +646,14 @@ export class AccountService {
         syncState,
         now,
         authStatus: AuthStatus.Error,
-        authError: mapAuthErrorMessage(error, "sign_in"),
+        authError: mapAuthErrorFeedback(error, "sign_in").message,
       });
+    }
+  }
+
+  private logAuthDiagnostic(event: string, payload: Record<string, unknown>) {
+    if (__DEV__) {
+      console.info("[AccountService]", event, payload);
     }
   }
 

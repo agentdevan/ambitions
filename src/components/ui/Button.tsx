@@ -27,12 +27,13 @@ export function Button({
     primary: {
       idleBackground: theme.colors.accent.primary,
       pressedBackground: theme.colors.accent.muted,
-      disabledBackground: theme.colors.background.accentWashStrong,
+      disabledBackground:
+        theme.mode === "dark" ? theme.colors.accent.muted : theme.colors.accent.primary,
       idleBorder: theme.colors.accent.primary,
       pressedBorder: theme.colors.accent.muted,
-      disabledBorder: theme.colors.border.accent,
+      disabledBorder: theme.colors.accent.muted,
       textTone: "inverse" as const,
-      disabledTextTone: "primary" as const,
+      disabledTextTone: "inverse" as const,
       shadowColor: theme.colors.accent.primary,
       elevation: 4,
     },
@@ -110,7 +111,7 @@ export function Button({
               ? tonePalette.pressedBorder
               : tonePalette.idleBorder,
           borderWidth: resolvedTone === "inline" ? 0 : 1,
-          opacity: isDisabled && resolvedTone === "inline" ? 0.58 : 1,
+          opacity: isDisabled ? (resolvedTone === "inline" ? 0.58 : 0.68) : 1,
           transform: [{ scale: pressed && !isDisabled ? 0.985 : 1 }],
           shadowColor: tonePalette.shadowColor,
           shadowOpacity:
