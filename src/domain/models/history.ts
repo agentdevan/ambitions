@@ -18,6 +18,9 @@ export enum ActivityEventKind {
   DayClosed = "day_closed",
   ReflectionLogged = "reflection_logged",
   CarryoverReviewed = "carryover_reviewed",
+  WeekReviewed = "week_reviewed",
+  NextWeekShaped = "next_week_shaped",
+  WeeklyCarryoverReviewed = "weekly_carryover_reviewed",
 }
 
 export interface ActivityEvent extends EntityRecord {

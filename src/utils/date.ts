@@ -161,3 +161,25 @@ export function formatTimeRangeLabel(
 ) {
   return `${formatTimeLabel(start, options)} - ${formatTimeLabel(end, options)}`;
 }
+
+export function addDays(dateString: string, amount: number) {
+  const value = parseLocalDateOnly(dateString);
+  value.setDate(value.getDate() + amount);
+  return getCurrentLocalDateString(value);
+}
+
+export function startOfWeek(dateString: string, weekStartsOn = 1) {
+  const value = parseLocalDateOnly(dateString);
+  const currentDay = value.getDay();
+  const offset = (currentDay - weekStartsOn + 7) % 7;
+  value.setDate(value.getDate() - offset);
+  return getCurrentLocalDateString(value);
+}
+
+export function endOfWeek(dateString: string, weekStartsOn = 1) {
+  return addDays(startOfWeek(dateString, weekStartsOn), 6);
+}
+
+export function isDateInRange(dateString: string, start: string, end: string) {
+  return dateString >= start && dateString <= end;
+}

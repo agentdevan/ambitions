@@ -12,6 +12,7 @@ import {
   Task,
   TimeBlock,
   UserPreferences,
+  WeeklyReviewState,
 } from "../../../domain/models";
 
 export type SyncEntityRecord =
@@ -20,6 +21,7 @@ export type SyncEntityRecord =
   | Task
   | DailyPlan
   | DailyRitualState
+  | WeeklyReviewState
   | TimeBlock
   | UserPreferences
   | NotificationPreference
@@ -32,6 +34,7 @@ export const syncEntityOrder: SyncEntityKind[] = [
   "task",
   "daily_plan",
   "daily_ritual_state",
+  "weekly_review_state",
   "time_block",
   "activity_event",
   "preferences",

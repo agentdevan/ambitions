@@ -134,6 +134,10 @@ export function OnboardingScreen() {
           dayIntensity,
           adaptivePlanningEnabled: true,
           defaultUnfinishedWorkBehavior: "ask_each_time",
+          weeklyReviewDay: 0,
+          weeklyReviewTime: "16:30",
+          autoPromptNextWeekShaping: true,
+          defaultWeeklyCarryoverBehavior: "review_first",
           appearanceMode,
           accentTheme,
           schedule: {

@@ -17,6 +17,7 @@ import { useResolvedTheme } from "../../design/theme/useResolvedTheme";
 import { GoalStatus } from "../../domain/models";
 import { PlanStackParamList } from "../../navigation/types";
 import { getGoalReviewDraft } from "../../services/goals/metadata";
+import { describeWeeklyShape } from "../../services/history/weekly";
 import { useAppStore } from "../../state/useAppStore";
 import { formatShortDate, formatTimeRangeLabel } from "../../utils/date";
 
@@ -53,6 +54,7 @@ export function PlanScreen({ navigation }: Props) {
   const timeBlocks = useAppStore((state) => state.timeBlocksForSelectedDate);
   const goals = useAppStore((state) => state.goals);
   const milestones = useAppStore((state) => state.milestones);
+  const nextWeekReview = useAppStore((state) => state.nextWeekReview);
   const [planView, setPlanView] = useState<PlanView>("week");
   const theme = useResolvedTheme();
 
@@ -65,6 +67,11 @@ export function PlanScreen({ navigation }: Props) {
   }, 0);
   const completionRatio = activeGoals.length > 0 ? Math.min(1, milestones.length / (activeGoals.length * 4)) : 0;
   const visibleBlocks = useMemo(() => timeBlocks.slice(0, planView === "week" ? 4 : 6), [planView, timeBlocks]);
+  const weeklyShapeSummary = describeWeeklyShape({
+    intensity: nextWeekReview?.targetWeekIntensity ?? null,
+    emphasis: nextWeekReview?.weeklyEmphasis ?? null,
+    carryoverPosture: nextWeekReview?.carryoverPosture ?? null,
+  });
 
   if (!dailyPlan && reviewGoals.length === 0) {
     return (
@@ -168,6 +175,14 @@ export function PlanScreen({ navigation }: Props) {
             detail={`${milestones.length} milestones`}
             actionLabel="Open"
             leading={<Ionicons color={theme.colors.text.secondary} name="calendar-outline" size={18} />}
+            onPress={() => navigation.navigate("PlanDetail")}
+          />
+          <DrillInRow
+            title="Next week"
+            subtitle={nextWeekReview?.nextWeekShapedAt ? "Shaped intentionally" : "Needs shaping"}
+            detail={nextWeekReview?.nextWeekShapedAt ? weeklyShapeSummary : "No weekly shape saved yet"}
+            actionLabel="Open"
+            leading={<Ionicons color={theme.colors.text.secondary} name="sparkles-outline" size={18} />}
             onPress={() => navigation.navigate("PlanDetail")}
           />
           <DrillInRow

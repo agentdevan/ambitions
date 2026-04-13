@@ -12,6 +12,9 @@ import {
   TimeBlock,
   TimeBlockState,
   TimeBlockType,
+  WeeklyCarryoverPosture,
+  WeeklyEmphasis,
+  WeeklyIntensity,
 } from "../../domain/models";
 import {
   SchedulingOutput,
@@ -32,6 +35,37 @@ interface CandidateTask {
   splitEligible: boolean;
   workType: string;
   priorityScore: number;
+}
+
+function weeklyIntensityModifier(intensity: WeeklyIntensity | null | undefined) {
+  if (intensity === WeeklyIntensity.Lighter) {
+    return { minuteDelta: -25, taskDelta: -1 };
+  }
+
+  if (intensity === WeeklyIntensity.Fuller) {
+    return { minuteDelta: 20, taskDelta: 1 };
+  }
+
+  return { minuteDelta: 0, taskDelta: 0 };
+}
+
+function determineFocusGoalId(tasks: Task[], weekStartDate: string) {
+  const scores = new Map<string, number>();
+
+  tasks.forEach((task) => {
+    if (!task.goalId) {
+      return;
+    }
+
+    const score =
+      (task.targetDate && task.targetDate >= weekStartDate ? 3 : 0) +
+      (task.schedulingState === TaskSchedulingState.Rolled ? 4 : 0) +
+      (task.status === TaskStatus.InProgress ? 5 : 0) +
+      (task.status === TaskStatus.Ready || task.status === TaskStatus.Scheduled ? 2 : 0);
+    scores.set(task.goalId, (scores.get(task.goalId) ?? 0) + score);
+  });
+
+  return [...scores.entries()].sort((left, right) => right[1] - left[1])[0]?.[0] ?? null;
 }
 
 function bucketForTime(time: string): TimeOfDayWindow {
@@ -114,7 +148,14 @@ function buildCandidates(
   tasks: Task[],
   protectiveMode: boolean,
   directives: AdaptationPlanningDirectives,
+  request: SchedulingRequest,
 ) {
+  const weeklyState = request.weeklyReviewState;
+  const focusGoalId =
+    weeklyState?.weeklyEmphasis === WeeklyEmphasis.PushMeaningfulArea
+      ? determineFocusGoalId(tasks, weeklyState.weekStartDate)
+      : null;
+
   return tasks
     .filter((task) =>
       [
@@ -148,6 +189,38 @@ function buildCandidates(
       if (directives.preferSmallerEntryTasks && task.estimatedMinutes <= 20) priorityScore += 4;
       if (task.title.toLowerCase().startsWith("review the current signal")) priorityScore -= 10;
       if (task.title.toLowerCase().startsWith("choose the next lower-friction adjustment")) priorityScore -= 6;
+      if (weeklyState?.weeklyEmphasis === WeeklyEmphasis.ProtectEssentials) {
+        if (task.status === TaskStatus.InProgress) priorityScore += 18;
+        if (task.schedulingState === TaskSchedulingState.Rolled) priorityScore += 10;
+        if (task.targetDate && task.targetDate <= request.date) priorityScore += 12;
+      }
+      if (
+        weeklyState?.weeklyEmphasis === WeeklyEmphasis.PushMeaningfulArea &&
+        focusGoalId &&
+        task.goalId === focusGoalId
+      ) {
+        priorityScore += 22;
+      }
+      if (
+        weeklyState?.carryoverPosture === WeeklyCarryoverPosture.EssentialsOnly &&
+        task.schedulingState === TaskSchedulingState.Rolled &&
+        task.status !== TaskStatus.InProgress &&
+        task.metadata.weeklyCarryoverReviewedAt === undefined
+      ) {
+        priorityScore -= 16;
+      }
+      if (
+        weeklyState?.carryoverPosture === WeeklyCarryoverPosture.ReviewFirst &&
+        task.metadata.weeklyCarryoverDisposition === "review"
+      ) {
+        priorityScore -= 18;
+      }
+      if (
+        weeklyState?.carryoverPosture === WeeklyCarryoverPosture.Aggressive &&
+        task.schedulingState === TaskSchedulingState.Rolled
+      ) {
+        priorityScore += 8;
+      }
 
       return {
         task,
@@ -387,6 +460,15 @@ function buildPlan(
   const existing = request.existingPlan;
   const timestamp = new Date().toISOString();
   const regression = effectiveProfile?.regression;
+  const weeklyState = request.weeklyReviewState;
+  const weeklyEmphasisNote =
+    weeklyState?.weeklyEmphasis === WeeklyEmphasis.ProtectEssentials
+      ? "This week is protecting essentials first."
+      : weeklyState?.weeklyEmphasis === WeeklyEmphasis.PushMeaningfulArea
+        ? "This week is concentrating pressure into one meaningful area."
+        : weeklyState?.weeklyEmphasis === WeeklyEmphasis.SteadyProgress
+          ? "This week is aiming for steady progress over sharp swings."
+          : null;
 
   return {
     id: existing?.id ?? `generated-plan-${request.date}`,
@@ -411,7 +493,7 @@ function buildPlan(
         ? "Recent execution has softened, so the plan is intentionally lighter to preserve momentum."
         : signals.overloadWarning
           ? "Demand exceeds believable capacity, so only the most executable subset was scheduled."
-          : "The day is intentionally underpacked to preserve follow-through.",
+          : weeklyEmphasisNote ?? "The day is intentionally underpacked to preserve follow-through.",
     totalPlannedMinutes: scheduledTasks.reduce((sum, task) => sum + task.durationMinutes, 0),
     totalCommittedMinutes: scheduledTasks.reduce((sum, task) => sum + task.durationMinutes, 0),
     adaptationProfileId: effectiveProfile?.id ?? null,
@@ -511,13 +593,17 @@ export function buildDailySchedule(request: SchedulingRequest): SchedulingOutput
       Math.min(
         focusBudget,
         directives.dailyPlannedMinutesTarget +
+          weeklyIntensityModifier(request.weeklyReviewState?.targetWeekIntensity).minuteDelta +
           (personalization?.intensityStyle === "high" ? 10 : personalization?.intensityStyle === "light" ? -10 : 0),
       ),
     ),
   );
-  const scheduledTaskCap = directives.dailyTaskSoftCap;
+  const scheduledTaskCap = Math.max(
+    2,
+    directives.dailyTaskSoftCap + weeklyIntensityModifier(request.weeklyReviewState?.targetWeekIntensity).taskDelta,
+  );
 
-  for (const candidate of buildCandidates(request.tasks, protectiveMode, directives)) {
+  for (const candidate of buildCandidates(request.tasks, protectiveMode, directives, request)) {
     const minutesAlreadyScheduled = scheduledTasks.reduce((sum, task) => sum + task.durationMinutes, 0);
 
     if (candidate.task.estimatedMinutes > directives.preferredTaskDurationMax + (protectiveMode ? 0 : 5)) {

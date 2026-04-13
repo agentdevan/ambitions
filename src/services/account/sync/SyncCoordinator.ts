@@ -16,6 +16,7 @@ import {
   Task,
   TimeBlock,
   UserPreferences,
+  WeeklyReviewState,
 } from "../../../domain/models";
 import { AccountRepository } from "../../../repositories/AccountRepository";
 import { AdaptationRepository } from "../../../repositories/AdaptationRepository";
@@ -53,6 +54,7 @@ interface LocalSyncState {
   adaptationProfile: AdaptationProfile | null;
   dailyPlans: DailyPlan[];
   dailyRitualStates: DailyRitualState[];
+  weeklyReviewStates: WeeklyReviewState[];
   timeBlocks: TimeBlock[];
   activityEvents: ActivityEvent[];
 }
@@ -71,6 +73,7 @@ export class SyncCoordinator {
       tasks,
       plans,
       ritualStates,
+      weeklyStates,
       preferences,
       activityEvents,
     ] = await Promise.all([
@@ -79,6 +82,7 @@ export class SyncCoordinator {
       this.repositories.tasks.listTasks(),
       this.repositories.planning.listDailyPlans(),
       this.repositories.planning.listDailyRitualStates(),
+      this.repositories.planning.listWeeklyReviewStates(),
       this.repositories.preferences.getUserPreferences(),
       this.repositories.history.listActivityEvents(500),
     ]);
@@ -90,6 +94,7 @@ export class SyncCoordinator {
         tasks.length > 0 ||
         plans.length > 0 ||
         ritualStates.length > 0 ||
+        weeklyStates.length > 0 ||
         activityEvents.length > 0 ||
         preferences?.metadata.onboardingCompleted === true ||
         preferences?.metadata.onboardingCompleted === "true",
@@ -99,6 +104,7 @@ export class SyncCoordinator {
         tasks.length +
         plans.length +
         ritualStates.length +
+        weeklyStates.length +
         activityEvents.length +
         (preferences ? 1 : 0),
     };
@@ -159,6 +165,11 @@ export class SyncCoordinator {
     await this.repositories.planning.saveDailyRitualStates(
       localState.dailyRitualStates.map((state) =>
         prepareOwnedRecord("daily_ritual_state", state, accountId, now),
+      ),
+    );
+    await this.repositories.planning.saveWeeklyReviewStates(
+      localState.weeklyReviewStates.map((state) =>
+        prepareOwnedRecord("weekly_review_state", state, accountId, now),
       ),
     );
     await this.repositories.planning.saveTimeBlocks(
@@ -411,6 +422,7 @@ export class SyncCoordinator {
       adaptationProfile,
       dailyPlans,
       dailyRitualStates,
+      weeklyReviewStates,
       timeBlocks,
       activityEvents,
     ] = await Promise.all([
@@ -422,6 +434,7 @@ export class SyncCoordinator {
       this.repositories.adaptation.getLatestProfile(),
       this.repositories.planning.listDailyPlans(),
       this.repositories.planning.listDailyRitualStates(),
+      this.repositories.planning.listWeeklyReviewStates(),
       this.repositories.planning.listTimeBlocks(),
       this.repositories.history.listActivityEvents(1000),
     ]);
@@ -435,6 +448,7 @@ export class SyncCoordinator {
       adaptationProfile,
       dailyPlans,
       dailyRitualStates,
+      weeklyReviewStates,
       timeBlocks,
       activityEvents,
     };
@@ -454,6 +468,8 @@ export class SyncCoordinator {
         return state.timeBlocks;
       case "daily_ritual_state":
         return state.dailyRitualStates;
+      case "weekly_review_state":
+        return state.weeklyReviewStates;
       case "preferences":
         return state.preferences ? [state.preferences] : [];
       case "notification_preference":
@@ -481,6 +497,8 @@ export class SyncCoordinator {
         return this.repositories.planning.saveTimeBlocks([record as TimeBlock]);
       case "daily_ritual_state":
         return this.repositories.planning.saveDailyRitualStates([record as DailyRitualState]);
+      case "weekly_review_state":
+        return this.repositories.planning.saveWeeklyReviewStates([record as WeeklyReviewState]);
       case "preferences":
         return this.repositories.preferences.saveUserPreferences(record as UserPreferences);
       case "notification_preference":

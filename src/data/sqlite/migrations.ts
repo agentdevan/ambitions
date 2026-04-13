@@ -544,4 +544,36 @@ export const schemaMigrations: MigrationDefinition[] = [
       `CREATE INDEX IF NOT EXISTS idx_daily_ritual_states_date ON daily_ritual_states(date DESC);`,
     ],
   },
+  {
+    id: 7,
+    name: "phase_18_weekly_review",
+    statements: [
+      `
+        CREATE TABLE IF NOT EXISTS weekly_review_states (
+          id TEXT PRIMARY KEY NOT NULL,
+          week_start_date TEXT NOT NULL UNIQUE,
+          week_end_date TEXT NOT NULL,
+          reviewed_at TEXT,
+          next_week_shaped_at TEXT,
+          weekly_emphasis TEXT,
+          target_week_intensity TEXT,
+          carryover_posture TEXT,
+          note TEXT,
+          carryover_task_ids_json TEXT NOT NULL DEFAULT '[]',
+          review_task_ids_json TEXT NOT NULL DEFAULT '[]',
+          released_task_ids_json TEXT NOT NULL DEFAULT '[]',
+          summary_json TEXT,
+          metadata_json TEXT NOT NULL,
+          owner_user_id TEXT,
+          remote_id TEXT,
+          sync_state TEXT NOT NULL,
+          version INTEGER NOT NULL,
+          last_synced_at TEXT,
+          created_at TEXT NOT NULL,
+          updated_at TEXT NOT NULL
+        );
+      `,
+      `CREATE INDEX IF NOT EXISTS idx_weekly_review_states_week_start_date ON weekly_review_states(week_start_date DESC);`,
+    ],
+  },
 ];

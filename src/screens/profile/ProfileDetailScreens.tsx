@@ -927,6 +927,15 @@ export function ProfilePlanningPreferencesScreen() {
   const adaptationProfile = useAppStore((state) => state.adaptationProfile);
   const [busyState, setBusyState] = useState<string | null>(null);
   const [runtimeMessage, setRuntimeMessage] = useState<string | null>(null);
+  const [weeklyReviewTime, setWeeklyReviewTime] = useState("4:30 PM");
+
+  useEffect(() => {
+    if (!productPreferences) {
+      return;
+    }
+
+    setWeeklyReviewTime(formatTimeLabel(productPreferences.weeklyReviewTime));
+  }, [productPreferences]);
 
   if (!productPreferences) {
     return (
@@ -990,6 +999,11 @@ export function ProfilePlanningPreferencesScreen() {
                   value: planningSummary.unfinishedWorkLabel,
                   detail: "Default closeout handling",
                 },
+                {
+                  label: "Weekly carryover",
+                  value: planningSummary.weeklyCarryoverLabel,
+                  detail: "Default weekly carryover posture",
+                },
               ]}
             />
           }
@@ -1037,6 +1051,127 @@ export function ProfilePlanningPreferencesScreen() {
           ) : null}
           </Surface>
         </DetailSection>
+        <DetailSection
+          title="Weekly shaping"
+          description="Set the weekly prompt and the default posture the planner should respect."
+        >
+          <Surface className="gap-3 mb-0">
+            <AppText tone="secondary" variant="caption">
+              Weekly review is scheduled from your planning controls, then weekly shaping can be prompted automatically.
+            </AppText>
+            <View className="gap-2">
+              <AppText tone="tertiary" variant="micro" style={{ textTransform: "uppercase" }}>
+                Review day
+              </AppText>
+              <View className="flex-row flex-wrap gap-2">
+                {[
+                  [0, "Sun"],
+                  [1, "Mon"],
+                  [2, "Tue"],
+                  [3, "Wed"],
+                  [4, "Thu"],
+                  [5, "Fri"],
+                  [6, "Sat"],
+                ].map(([day, label]) => (
+                  <OptionChip
+                    key={String(day)}
+                    selected={productPreferences.weeklyReviewDay === day}
+                    onPress={() =>
+                      void savePreference(
+                        `weekly-day:${day}`,
+                        { ...productPreferences, weeklyReviewDay: day as number },
+                        "Weekly review day could not be updated.",
+                      )
+                    }
+                  >
+                    {label}
+                  </OptionChip>
+                ))}
+              </View>
+            </View>
+            <TextField
+              label="Review time"
+              onChangeText={setWeeklyReviewTime}
+              supportingText={`Currently ${formatTimeLabel(productPreferences.weeklyReviewTime, { compact: true })}`}
+              value={weeklyReviewTime}
+            />
+            <Button
+              busy={busyState === "weekly-time"}
+              onPress={() => {
+                const normalized = normalizeTimeString(weeklyReviewTime);
+                void savePreference(
+                  "weekly-time",
+                  {
+                    ...productPreferences,
+                    weeklyReviewTime: normalized ?? productPreferences.weeklyReviewTime,
+                  },
+                  "Weekly review time could not be updated.",
+                );
+              }}
+            >
+              Save weekly review time
+            </Button>
+            <View className="gap-2">
+              <AppText tone="tertiary" variant="micro" style={{ textTransform: "uppercase" }}>
+                Next-week prompt
+              </AppText>
+              <View className="flex-row flex-wrap gap-2">
+                {[
+                  [true, "Prompt automatically"],
+                  [false, "Manual only"],
+                ].map(([enabled, label]) => (
+                  <OptionChip
+                    key={`weekly-prompt:${String(enabled)}`}
+                    selected={productPreferences.autoPromptNextWeekShaping === enabled}
+                    onPress={() =>
+                      void savePreference(
+                        `weekly-prompt:${enabled}`,
+                        {
+                          ...productPreferences,
+                          autoPromptNextWeekShaping: enabled as boolean,
+                        },
+                        "Next-week shaping prompt could not be updated.",
+                      )
+                    }
+                  >
+                    {label}
+                  </OptionChip>
+                ))}
+              </View>
+            </View>
+            <View className="gap-2">
+              <AppText tone="tertiary" variant="micro" style={{ textTransform: "uppercase" }}>
+                Default weekly carryover
+              </AppText>
+              <View className="flex-row flex-wrap gap-2">
+                {[
+                  ["essentials_only", "Carry only essentials"],
+                  ["review_first", "Review first"],
+                  ["aggressive", "Carry more forward"],
+                ].map(([key, label]) => (
+                  <OptionChip
+                    key={key}
+                    selected={productPreferences.defaultWeeklyCarryoverBehavior === key}
+                    onPress={() =>
+                      void savePreference(
+                        `weekly-carry:${key}`,
+                        {
+                          ...productPreferences,
+                          defaultWeeklyCarryoverBehavior:
+                            key as typeof productPreferences.defaultWeeklyCarryoverBehavior,
+                        },
+                        "Weekly carryover posture could not be updated.",
+                      )
+                    }
+                  >
+                    {label}
+                  </OptionChip>
+                ))}
+              </View>
+            </View>
+          </Surface>
+        </DetailSection>
+
         <DetailSection
           title="Closeout default"
           description="Choose what unfinished work should do when you close the day."

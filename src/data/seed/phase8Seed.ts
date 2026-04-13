@@ -118,6 +118,10 @@ export const seedPreferences: UserPreferences = {
     taskSizing: "mixed",
     dayIntensity: "balanced",
     defaultUnfinishedWorkBehavior: "ask_each_time",
+    weeklyReviewDay: 0,
+    weeklyReviewTime: "16:30",
+    autoPromptNextWeekShaping: true,
+    defaultWeeklyCarryoverBehavior: "review_first",
     themePreset: "neutral",
     sleepWindowStart: "23:00",
     sleepWindowEnd: "07:00",
@@ -181,6 +185,16 @@ export const seedNotificationPreferences: NotificationPreference[] = [
     quietHoursStart: "21:30",
     quietHoursEnd: "07:00",
     metadata: { seedPhase: "phase17" },
+  },
+  {
+    ...recordBase("notification-weekly-review"),
+    channel: NotificationChannel.Push,
+    reminderType: ReminderType.WeeklyReview,
+    enabled: false,
+    leadTimeMinutes: 15,
+    quietHoursStart: "21:30",
+    quietHoursEnd: "07:00",
+    metadata: { seedPhase: "phase18" },
   },
 ];
 

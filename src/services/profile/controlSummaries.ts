@@ -31,6 +31,8 @@ export function formatReminderTypeLabel(reminderType: ReminderType) {
       return "Evening close";
     case ReminderType.RecoveryPrompt:
       return "Recovery prompt";
+    case ReminderType.WeeklyReview:
+      return "Weekly review";
     default:
       return "Reminder";
   }
@@ -56,6 +58,8 @@ export function formatReminderBehavior(preference: NotificationPreference) {
       return `${preference.leadTimeMinutes} min before closeout time`;
     case ReminderType.RecoveryPrompt:
       return "When drift is detected and a clean recovery path is available";
+    case ReminderType.WeeklyReview:
+      return `${preference.leadTimeMinutes} min before weekly review time`;
     default:
       return "Active";
   }
@@ -181,12 +185,19 @@ export function summarizePlanningControls(
       : productPreferences.defaultUnfinishedWorkBehavior === "send_to_review"
         ? "Send unfinished work back to review"
         : "Ask each evening";
+  const weeklyCarryoverLabel =
+    productPreferences.defaultWeeklyCarryoverBehavior === "essentials_only"
+      ? "Carry only essentials"
+      : productPreferences.defaultWeeklyCarryoverBehavior === "aggressive"
+        ? "Carry more forward"
+        : "Review unfinished work first";
 
   return {
     adaptiveLabel,
     intensityLabel,
     taskLabel,
     unfinishedWorkLabel,
+    weeklyCarryoverLabel,
     learnedSummary:
       productPreferences.adaptivePlanningEnabled && adaptationProfile?.personalization.active
         ? adaptationProfile.personalization.summary.todayApproach

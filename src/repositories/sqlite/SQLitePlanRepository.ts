@@ -1,4 +1,4 @@
-import { DailyPlan, DailyRitualState, TimeBlock } from "../../domain/models";
+import { DailyPlan, DailyRitualState, TimeBlock, WeeklyReviewState } from "../../domain/models";
 import { DatabaseClient } from "../../data/sqlite/client";
 import { decodeJson, encodeJson, entityParams, mapEntityRecord } from "./shared";
 import { PlanRepository } from "../PlanRepository";
@@ -70,6 +70,30 @@ interface DailyRitualStateRow {
   updated_at: string;
 }
 
+interface WeeklyReviewStateRow {
+  id: string;
+  week_start_date: string;
+  week_end_date: string;
+  reviewed_at: string | null;
+  next_week_shaped_at: string | null;
+  weekly_emphasis: WeeklyReviewState["weeklyEmphasis"];
+  target_week_intensity: WeeklyReviewState["targetWeekIntensity"];
+  carryover_posture: WeeklyReviewState["carryoverPosture"];
+  note: string | null;
+  carryover_task_ids_json: string;
+  review_task_ids_json: string;
+  released_task_ids_json: string;
+  summary_json: string | null;
+  metadata_json: string;
+  owner_user_id: string | null;
+  remote_id: string | null;
+  sync_state: WeeklyReviewState["syncState"];
+  version: number;
+  last_synced_at: string | null;
+  created_at: string;
+  updated_at: string;
+}
+
 export class SQLitePlanRepository extends SQLiteRepository implements PlanRepository {
   constructor(database: DatabaseClient) {
     super(database);
@@ -113,6 +137,26 @@ export class SQLitePlanRepository extends SQLiteRepository implements PlanReposi
       "SELECT * FROM daily_ritual_states ORDER BY date ASC;",
     );
     return rows.map(mapDailyRitualStateRow);
+  }
+
+  async getWeeklyReviewState(weekStartDate: string) {
+    const row = await this.database.getFirst<WeeklyReviewStateRow>(
+      "SELECT * FROM weekly_review_states WHERE week_start_date = ? LIMIT 1;",
+      [weekStartDate],
+    );
+
+    if (!row) {
+      return null;
+    }
+
+    return mapWeeklyReviewStateRow(row);
+  }
+
+  async listWeeklyReviewStates() {
+    const rows = await this.database.getAll<WeeklyReviewStateRow>(
+      "SELECT * FROM weekly_review_states ORDER BY week_start_date ASC;",
+    );
+    return rows.map(mapWeeklyReviewStateRow);
   }
 
   async listTimeBlocks() {
@@ -192,6 +236,46 @@ export class SQLitePlanRepository extends SQLiteRepository implements PlanReposi
             $carryDecisionSummaryJson: state.carryDecisionSummary
               ? encodeJson(state.carryDecisionSummary)
               : null,
+            $metadataJson: encodeJson(state.metadata),
+          },
+        );
+      }
+    });
+  }
+
+  async saveWeeklyReviewStates(states: WeeklyReviewState[]) {
+    await this.database.withTransaction(async (client) => {
+      for (const state of states) {
+        await client.run(
+          `
+            INSERT OR REPLACE INTO weekly_review_states (
+              id, week_start_date, week_end_date, reviewed_at, next_week_shaped_at,
+              weekly_emphasis, target_week_intensity, carryover_posture, note,
+              carryover_task_ids_json, review_task_ids_json, released_task_ids_json,
+              summary_json, metadata_json, owner_user_id, remote_id, sync_state,
+              version, last_synced_at, created_at, updated_at
+            ) VALUES (
+              $id, $weekStartDate, $weekEndDate, $reviewedAt, $nextWeekShapedAt,
+              $weeklyEmphasis, $targetWeekIntensity, $carryoverPosture, $note,
+              $carryoverTaskIdsJson, $reviewTaskIdsJson, $releasedTaskIdsJson,
+              $summaryJson, $metadataJson, $ownerUserId, $remoteId, $syncState,
+              $version, $lastSyncedAt, $createdAt, $updatedAt
+            );
+          `,
+          {
+            ...entityParams(state),
+            $weekStartDate: state.weekStartDate,
+            $weekEndDate: state.weekEndDate,
+            $reviewedAt: state.reviewedAt,
+            $nextWeekShapedAt: state.nextWeekShapedAt,
+            $weeklyEmphasis: state.weeklyEmphasis,
+            $targetWeekIntensity: state.targetWeekIntensity,
+            $carryoverPosture: state.carryoverPosture,
+            $note: state.note,
+            $carryoverTaskIdsJson: encodeJson(state.carryoverTaskIds),
+            $reviewTaskIdsJson: encodeJson(state.reviewTaskIds),
+            $releasedTaskIdsJson: encodeJson(state.releasedTaskIds),
+            $summaryJson: state.summary ? encodeJson(state.summary) : null,
             $metadataJson: encodeJson(state.metadata),
           },
         );
@@ -283,6 +367,24 @@ function mapDailyRitualStateRow(row: DailyRitualStateRow): DailyRitualState {
     carryDecisionSummary: row.carry_decision_summary_json
       ? decodeJson(row.carry_decision_summary_json)
       : null,
+    metadata: decodeJson(row.metadata_json),
+  });
+}
+
+function mapWeeklyReviewStateRow(row: WeeklyReviewStateRow): WeeklyReviewState {
+  return mapEntityRecord<WeeklyReviewState>(row, {
+    weekStartDate: row.week_start_date,
+    weekEndDate: row.week_end_date,
+    reviewedAt: row.reviewed_at,
+    nextWeekShapedAt: row.next_week_shaped_at,
+    weeklyEmphasis: row.weekly_emphasis,
+    targetWeekIntensity: row.target_week_intensity,
+    carryoverPosture: row.carryover_posture,
+    note: row.note,
+    carryoverTaskIds: decodeJson(row.carryover_task_ids_json),
+    reviewTaskIds: decodeJson(row.review_task_ids_json),
+    releasedTaskIds: decodeJson(row.released_task_ids_json),
+    summary: row.summary_json ? decodeJson(row.summary_json) : null,
     metadata: decodeJson(row.metadata_json),
   });
 }

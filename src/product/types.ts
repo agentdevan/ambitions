@@ -14,6 +14,15 @@ export type DefaultUnfinishedWorkBehavior =
   | "carry_forward"
   | "send_to_review"
   | "ask_each_time";
+export type WeeklyIntensityPreference = "lighter" | "balanced" | "fuller";
+export type WeeklyEmphasisPreference =
+  | "protect_essentials"
+  | "steady_progress"
+  | "push_meaningful_area";
+export type DefaultWeeklyCarryoverBehavior =
+  | "essentials_only"
+  | "review_first"
+  | "aggressive";
 
 export interface ScheduleDefaults {
   sleepStart: string;
@@ -34,6 +43,10 @@ export interface ProductPreferences {
   appearanceMode: AppearanceMode;
   accentTheme: AccentThemeKey;
   defaultUnfinishedWorkBehavior: DefaultUnfinishedWorkBehavior;
+  weeklyReviewDay: number;
+  weeklyReviewTime: string;
+  autoPromptNextWeekShaping: boolean;
+  defaultWeeklyCarryoverBehavior: DefaultWeeklyCarryoverBehavior;
   schedule: ScheduleDefaults;
 }
 

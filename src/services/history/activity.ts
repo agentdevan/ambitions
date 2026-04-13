@@ -11,6 +11,9 @@ import {
   GoalStatus,
   Task,
   TimeBlock,
+  WeeklyCarryoverPosture,
+  WeeklyEmphasis,
+  WeeklyIntensity,
 } from "../../domain/models";
 import { GoalDownstreamChoice, GoalReviewDraft } from "../goals/metadata";
 import { formatShortDate } from "../../utils/date";
@@ -117,6 +120,18 @@ export function buildTaskActionActivityEvent(params: {
       detail: audit.explanation,
     },
     [ActivityEventKind.CarryoverReviewed]: {
+      outcomeLabel: "Reviewed",
+      detail: audit.explanation,
+    },
+    [ActivityEventKind.WeekReviewed]: {
+      outcomeLabel: "Reviewed",
+      detail: audit.explanation,
+    },
+    [ActivityEventKind.NextWeekShaped]: {
+      outcomeLabel: "Shaped",
+      detail: audit.explanation,
+    },
+    [ActivityEventKind.WeeklyCarryoverReviewed]: {
       outcomeLabel: "Reviewed",
       detail: audit.explanation,
     },
@@ -489,6 +504,98 @@ export function buildCarryoverReviewedActivityEvent(params: {
       date,
       decision,
       unfinishedCount,
+    },
+  } satisfies ActivityEvent;
+}
+
+export function buildWeekReviewedActivityEvent(params: {
+  weekStartDate: string;
+  weekEndDate: string;
+  occurredAt: string;
+  completedCount: number;
+  reshapedCount: number;
+  heldSteady: boolean;
+}) {
+  const { weekStartDate, weekEndDate, occurredAt, completedCount, reshapedCount, heldSteady } =
+    params;
+
+  return {
+    ...activityBase(occurredAt),
+    kind: ActivityEventKind.WeekReviewed,
+    title: `Reviewed ${formatShortDate(weekStartDate)} - ${formatShortDate(weekEndDate)}`,
+    detail: heldSteady
+      ? `${completedCount} completed and ${reshapedCount} reshaped. The week mostly held.`
+      : `${completedCount} completed and ${reshapedCount} reshaped. The week needed more adjustment than follow-through.`,
+    outcomeLabel: "Reviewed",
+    goalId: null,
+    milestoneId: null,
+    taskId: null,
+    dailyPlanId: null,
+    timeBlockId: null,
+    metadata: {
+      weekStartDate,
+      weekEndDate,
+      completedCount,
+      reshapedCount,
+      heldSteady,
+    },
+  } satisfies ActivityEvent;
+}
+
+export function buildNextWeekShapedActivityEvent(params: {
+  weekStartDate: string;
+  occurredAt: string;
+  intensity: WeeklyIntensity;
+  emphasis: WeeklyEmphasis;
+  carryoverPosture: WeeklyCarryoverPosture;
+}) {
+  const { weekStartDate, occurredAt, intensity, emphasis, carryoverPosture } = params;
+
+  return {
+    ...activityBase(occurredAt),
+    kind: ActivityEventKind.NextWeekShaped,
+    title: `Shaped week of ${formatShortDate(weekStartDate)}`,
+    detail: `Set the week to ${intensity.replaceAll("_", " ")} pressure with ${emphasis.replaceAll("_", " ")} as the emphasis.`,
+    outcomeLabel: "Shaped",
+    goalId: null,
+    milestoneId: null,
+    taskId: null,
+    dailyPlanId: null,
+    timeBlockId: null,
+    metadata: {
+      weekStartDate,
+      intensity,
+      emphasis,
+      carryoverPosture,
+    },
+  } satisfies ActivityEvent;
+}
+
+export function buildWeeklyCarryoverReviewedActivityEvent(params: {
+  weekStartDate: string;
+  occurredAt: string;
+  carryCount: number;
+  reviewCount: number;
+  releasedCount: number;
+}) {
+  const { weekStartDate, occurredAt, carryCount, reviewCount, releasedCount } = params;
+
+  return {
+    ...activityBase(occurredAt),
+    kind: ActivityEventKind.WeeklyCarryoverReviewed,
+    title: `Reviewed weekly carryover for ${formatShortDate(weekStartDate)}`,
+    detail: `${carryCount} carried, ${reviewCount} sent to review, ${releasedCount} released.`,
+    outcomeLabel: "Carryover",
+    goalId: null,
+    milestoneId: null,
+    taskId: null,
+    dailyPlanId: null,
+    timeBlockId: null,
+    metadata: {
+      weekStartDate,
+      carryCount,
+      reviewCount,
+      releasedCount,
     },
   } satisfies ActivityEvent;
 }

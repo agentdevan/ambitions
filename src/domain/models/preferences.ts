@@ -14,6 +14,7 @@ export enum ReminderType {
   MorningStart = "morning_start",
   EveningClose = "evening_close",
   RecoveryPrompt = "recovery_prompt",
+  WeeklyReview = "weekly_review",
 }
 
 export enum NotificationChannel {

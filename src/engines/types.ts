@@ -13,6 +13,7 @@ import {
   Task,
   TimeBlock,
   UserPreferences,
+  WeeklyReviewState,
 } from "../domain/models";
 import { StrategyStrictness } from "../domain/models/adaptation";
 
@@ -175,6 +176,7 @@ export interface SchedulingContextSnapshot {
 
 export interface SchedulingRequest extends PlanningContext {
   existingPlan: DailyPlan | null;
+  weeklyReviewState?: WeeklyReviewState | null;
 }
 
 export interface SchedulingOutput {

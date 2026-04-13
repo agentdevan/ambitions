@@ -14,6 +14,7 @@ import {
   Task,
   TimeBlock,
   UserPreferences,
+  WeeklyReviewState,
 } from "../domain/models";
 import { SchedulingOutput } from "../engines";
 import {
@@ -22,7 +23,7 @@ import {
 } from "../services/calendar/constraintSelection";
 import { getProductPreferences } from "../product/preferences";
 import { ProductPreferences } from "../product/types";
-import { getCurrentLocalDateString } from "../utils/date";
+import { addDays, getCurrentLocalDateString, startOfWeek } from "../utils/date";
 import { buildTodayViewModel, TodayViewModel } from "./viewModels/today";
 
 export const initialPlanDate = getCurrentLocalDateString();
@@ -38,6 +39,9 @@ export interface FoundationSnapshot {
   dailyPlan: DailyPlan | null;
   dailyRitual: DailyRitualState | null;
   dailyRitualHistory: DailyRitualState[];
+  currentWeekReview: WeeklyReviewState | null;
+  nextWeekReview: WeeklyReviewState | null;
+  weeklyReviewHistory: WeeklyReviewState[];
   blocks: TimeBlock[];
   tasks: Task[];
   allTasks: Task[];
@@ -77,6 +81,8 @@ async function syncNotificationsForSnapshot(snapshot: FoundationSnapshot) {
     preferences: snapshot.notificationPreferences,
     productPreferences: snapshot.productPreferences,
     dailyRitual: snapshot.dailyRitual,
+    weeklyReviewState: snapshot.currentWeekReview,
+    nextWeekReviewState: snapshot.nextWeekReview,
   });
 }
 
@@ -101,6 +107,7 @@ export async function loadFoundationSnapshot(date: string): Promise<FoundationSn
     dailyPlan,
     dailyRitual,
     dailyRitualHistory,
+    weeklyReviewHistory,
     tasks,
     allTasks,
     calendarConnectionState,
@@ -117,6 +124,7 @@ export async function loadFoundationSnapshot(date: string): Promise<FoundationSn
     appServices.repositories.planning.getDailyPlan(date),
     appServices.repositories.planning.getDailyRitualState(date),
     appServices.repositories.planning.listDailyRitualStates(),
+    appServices.repositories.planning.listWeeklyReviewStates(),
     appServices.repositories.tasks.listTasksForDate(date),
     appServices.repositories.tasks.listTasks(),
     appServices.repositories.integration.getCalendarConnectionState(),
@@ -129,6 +137,12 @@ export async function loadFoundationSnapshot(date: string): Promise<FoundationSn
     calendarConnectionState,
   );
   const productPreferences = getProductPreferences(preferences);
+  const currentWeekStart = startOfWeek(date, preferences?.weekStartsOn ?? 1);
+  const nextWeekStart = addDays(currentWeekStart, 7);
+  const currentWeekReview =
+    weeklyReviewHistory.find((state) => state.weekStartDate === currentWeekStart) ?? null;
+  const nextWeekReview =
+    weeklyReviewHistory.find((state) => state.weekStartDate === nextWeekStart) ?? null;
   const effectiveAdaptationProfile = productPreferences.adaptivePlanningEnabled
     ? adaptationProfile
     : null;
@@ -145,6 +159,7 @@ export async function loadFoundationSnapshot(date: string): Promise<FoundationSn
         preferences: preferences as UserPreferences,
         adaptationProfile: effectiveAdaptationProfile,
         existingPlan: dailyPlan,
+        weeklyReviewState: currentWeekReview,
       })
     : null;
   const schedule = scheduleResult?.payload ?? null;
@@ -186,6 +201,9 @@ export async function loadFoundationSnapshot(date: string): Promise<FoundationSn
     dailyPlan,
     dailyRitual,
     dailyRitualHistory,
+    currentWeekReview,
+    nextWeekReview,
+    weeklyReviewHistory,
     blocks,
     tasks,
     allTasks,
@@ -237,6 +255,9 @@ export async function refreshAllState(date: string) {
     dailyPlan: snapshot.schedule?.dailyPlan ?? snapshot.dailyPlan,
     dailyRitual: snapshot.dailyRitual,
     dailyRitualHistory: snapshot.dailyRitualHistory,
+    currentWeekReview: snapshot.currentWeekReview,
+    nextWeekReview: snapshot.nextWeekReview,
+    weeklyReviewHistory: snapshot.weeklyReviewHistory,
     schedule: snapshot.schedule,
     today: snapshot.today,
     timeBlocksForSelectedDate: snapshot.blocks,

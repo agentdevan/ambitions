@@ -39,6 +39,10 @@ import {
   TimeBlock,
   DailyPlanStatus,
   UserPreferences,
+  WeeklyCarryoverPosture,
+  WeeklyEmphasis,
+  WeeklyIntensity,
+  WeeklyReviewState,
 } from "../domain/models";
 import { createGoalAndFirstPlan, createGoalArtifacts } from "../product/planOrchestrator";
 import { getProductPreferences, mergeProductPreferences } from "../product/preferences";
@@ -62,7 +66,7 @@ import {
   prepareGoalReview,
   restoreRollbackSnapshot,
 } from "../services/goals/regenerationCoordinator";
-import { getCurrentLocalDateString } from "../utils/date";
+import { addDays, endOfWeek, getCurrentLocalDateString, startOfWeek } from "../utils/date";
 import {
   buildGoalStatusActivityEvent,
   buildGoalUpdatedActivityEvent,
@@ -70,12 +74,17 @@ import {
   buildDayClosedActivityEvent,
   buildDayOpenedActivityEvent,
   buildDayRecoveredActivityEvent,
+  buildNextWeekShapedActivityEvent,
   buildPlanReviewAcceptedActivityEvents,
   buildPlanReviewGeneratedActivityEvent,
   buildPlanReviewRevertedActivityEvent,
   buildReflectionLoggedActivityEvent,
   buildTaskActionActivityEvent,
+  buildWeekReviewedActivityEvent,
+  buildWeeklyCarryoverReviewedActivityEvent,
 } from "../services/history/activity";
+import { buildActivityFeed } from "../services/history/selectors";
+import { buildWeeklyReviewDigest } from "../services/history/weekly";
 import { TodayViewModel } from "./viewModels/today";
 import { initialPlanDate, refreshAllState } from "./runtime";
 
@@ -125,12 +134,27 @@ interface PlanningSlice {
   dailyPlan: DailyPlan | null;
   dailyRitual: DailyRitualState | null;
   dailyRitualHistory: DailyRitualState[];
+  currentWeekReview: WeeklyReviewState | null;
+  nextWeekReview: WeeklyReviewState | null;
+  weeklyReviewHistory: WeeklyReviewState[];
   schedule: SchedulingOutput | null;
   today: TodayViewModel | null;
   activityEvents: ActivityEvent[];
   timeBlocksForSelectedDate: TimeBlock[];
   tasksForSelectedDate: Task[];
   refreshPlanning: (date?: string) => Promise<void>;
+  reviewWeek: (input: { note?: string | null }) => Promise<void>;
+  reviewWeeklyCarryover: (input: {
+    carryTaskIds: string[];
+    reviewTaskIds: string[];
+    releasedTaskIds: string[];
+  }) => Promise<void>;
+  shapeNextWeek: (input: {
+    intensity: WeeklyIntensity;
+    emphasis: WeeklyEmphasis;
+    carryoverPosture: WeeklyCarryoverPosture;
+    note?: string | null;
+  }) => Promise<void>;
   openDay: (focus?: DailyRitualOpeningFocus | null) => Promise<void>;
   recoverDay: (mode: DailyRitualRecoveryMode) => Promise<void>;
   closeDay: (input: {
@@ -305,6 +329,57 @@ function bindRitualStateToAccount(state: DailyRitualState, accountId: string | n
   };
 }
 
+function createWeeklyReviewState(params: {
+  weekStartDate: string;
+  weekEndDate: string;
+  accountId: string | null;
+  existing?: WeeklyReviewState | null;
+}): WeeklyReviewState {
+  const now = new Date().toISOString();
+  const existing = params.existing;
+
+  return {
+    id: existing?.id ?? `weekly-review:${params.weekStartDate}`,
+    weekStartDate: params.weekStartDate,
+    weekEndDate: params.weekEndDate,
+    reviewedAt: existing?.reviewedAt ?? null,
+    nextWeekShapedAt: existing?.nextWeekShapedAt ?? null,
+    weeklyEmphasis: existing?.weeklyEmphasis ?? null,
+    targetWeekIntensity: existing?.targetWeekIntensity ?? null,
+    carryoverPosture: existing?.carryoverPosture ?? null,
+    note: existing?.note ?? null,
+    carryoverTaskIds: existing?.carryoverTaskIds ?? [],
+    reviewTaskIds: existing?.reviewTaskIds ?? [],
+    releasedTaskIds: existing?.releasedTaskIds ?? [],
+    summary: existing?.summary ?? null,
+    metadata: existing?.metadata ?? {},
+    ownerUserId: existing?.ownerUserId ?? params.accountId,
+    remoteId: existing?.remoteId ?? null,
+    syncState:
+      existing?.syncState ??
+      (params.accountId ? EntitySyncState.PendingSync : EntitySyncState.LocalOnly),
+    version: existing?.version ?? 1,
+    lastSyncedAt: existing?.lastSyncedAt ?? null,
+    createdAt: existing?.createdAt ?? now,
+    updatedAt: now,
+  };
+}
+
+function bindWeeklyReviewToAccount(
+  state: WeeklyReviewState,
+  accountId: string | null,
+): WeeklyReviewState {
+  if (!accountId) {
+    return state;
+  }
+
+  return {
+    ...state,
+    ownerUserId: accountId,
+    syncState: EntitySyncState.PendingSync,
+  };
+}
+
 function summarizeRecoveryMode(mode: DailyRitualRecoveryMode, changedTaskCount: number) {
   if (mode === DailyRitualRecoveryMode.SalvageEssentials) {
     return `Held the day to the few pieces that still mattered, moving ${changedTaskCount} tasks out of today's shape.`;
@@ -315,12 +390,6 @@ function summarizeRecoveryMode(mode: DailyRitualRecoveryMode, changedTaskCount: 
   }
 
   return `Rebalanced the remaining day around what could still fit cleanly.`;
-}
-
-function nextDate(date: string) {
-  const value = new Date(`${date}T12:00:00`);
-  value.setDate(value.getDate() + 1);
-  return value.toISOString().slice(0, 10);
 }
 
 let accountSnapshotUnsubscribe: (() => void) | null = null;
@@ -337,6 +406,9 @@ export const useAppStore = create<AppState>((set, get) => ({
   dailyPlan: null,
   dailyRitual: null,
   dailyRitualHistory: [],
+  currentWeekReview: null,
+  nextWeekReview: null,
+  weeklyReviewHistory: [],
   schedule: null,
   today: null,
   activityEvents: [],
@@ -988,6 +1060,248 @@ export const useAppStore = create<AppState>((set, get) => ({
     set(await refreshAllState(planDate));
   },
 
+  reviewWeek: async (input) => {
+    const state = get();
+    const accountId = getAttachedAccountId(state);
+    const weekStartsOn = state.userPreferences?.weekStartsOn ?? 1;
+    const weekStartDate = startOfWeek(state.planDate, weekStartsOn);
+    const weekEndDate = endOfWeek(state.planDate, weekStartsOn);
+    const existing = await appServices.repositories.planning.getWeeklyReviewState(weekStartDate);
+    const digest = buildWeeklyReviewDigest({
+      date: state.planDate,
+      weekStartsOn,
+      tasks: state.allTasks,
+      rituals: state.dailyRitualHistory,
+      events: buildActivityFeed(state.activityEvents, state.allTasks, state.milestones),
+    });
+    const now = new Date().toISOString();
+    const nextState = bindWeeklyReviewToAccount(
+      {
+        ...createWeeklyReviewState({
+          weekStartDate,
+          weekEndDate,
+          accountId,
+          existing,
+        }),
+        reviewedAt: now,
+        note: input.note?.trim() ? input.note.trim() : existing?.note ?? null,
+        summary: digest.summary,
+        metadata: {
+          ...(existing?.metadata ?? {}),
+          reads: digest.reads,
+          unfinishedCount: digest.unfinishedTasks.length,
+          carryCandidateCount: digest.carryCandidateTasks.length,
+        },
+        updatedAt: now,
+        version: existing ? existing.version + 1 : 1,
+      },
+      accountId,
+    );
+
+    await Promise.all([
+      appServices.repositories.planning.saveWeeklyReviewStates([nextState]),
+      appServices.repositories.history.saveActivityEvents(
+        bindRecordsToAccount(
+          [
+            buildWeekReviewedActivityEvent({
+              weekStartDate,
+              weekEndDate,
+              occurredAt: now,
+              completedCount: digest.summary.completedCount,
+              reshapedCount: digest.summary.reshapedCount,
+              heldSteady: digest.summary.heldSteady,
+            }),
+          ],
+          accountId,
+        ),
+      ),
+    ]);
+
+    const [foundationSnapshot, accountSnapshot] = await Promise.all([
+      refreshAllState(state.planDate),
+      appServices.services.account.notePendingChanges(),
+    ]);
+    set({
+      ...foundationSnapshot,
+      ...mapAccountSnapshot(accountSnapshot),
+    });
+  },
+
+  reviewWeeklyCarryover: async (input) => {
+    const state = get();
+    const accountId = getAttachedAccountId(state);
+    const weekStartsOn = state.userPreferences?.weekStartsOn ?? 1;
+    const weekStartDate = startOfWeek(state.planDate, weekStartsOn);
+    const weekEndDate = endOfWeek(state.planDate, weekStartsOn);
+    const nextWeekDate = addDays(weekEndDate, 1);
+    const now = new Date().toISOString();
+    const existing = await appServices.repositories.planning.getWeeklyReviewState(weekStartDate);
+    const digest = buildWeeklyReviewDigest({
+      date: state.planDate,
+      weekStartsOn,
+      tasks: state.allTasks,
+      rituals: state.dailyRitualHistory,
+      events: buildActivityFeed(state.activityEvents, state.allTasks, state.milestones),
+    });
+    const carryIds = new Set(input.carryTaskIds);
+    const reviewIds = new Set(input.reviewTaskIds);
+    const releasedIds = new Set(input.releasedTaskIds);
+    const tasksToUpdate = state.allTasks
+      .filter((task) => carryIds.has(task.id) || reviewIds.has(task.id) || releasedIds.has(task.id))
+      .map((task) => {
+        if (carryIds.has(task.id)) {
+          return bindRecordToAccount(
+            {
+              ...task,
+              status: TaskStatus.Deferred,
+              schedulingState: TaskSchedulingState.Rolled,
+              targetDate: nextWeekDate,
+              scheduledDate: nextWeekDate,
+              metadata: {
+                ...task.metadata,
+                weeklyCarryoverReviewedAt: now,
+                weeklyCarryoverWeekStart: weekStartDate,
+              },
+              updatedAt: now,
+              version: task.version + 1,
+            },
+            accountId,
+          );
+        }
+
+        return bindRecordToAccount(
+          {
+            ...task,
+            status: TaskStatus.Unscheduled,
+            schedulingState: TaskSchedulingState.Unscheduled,
+            targetDate: null,
+            scheduledDate: null,
+            metadata: {
+              ...task.metadata,
+              weeklyCarryoverReviewedAt: now,
+              weeklyCarryoverWeekStart: weekStartDate,
+              weeklyCarryoverDisposition: reviewIds.has(task.id) ? "review" : "released",
+            },
+            updatedAt: now,
+            version: task.version + 1,
+          },
+          accountId,
+        );
+      });
+
+    const nextState = bindWeeklyReviewToAccount(
+      {
+        ...createWeeklyReviewState({
+          weekStartDate,
+          weekEndDate,
+          accountId,
+          existing,
+        }),
+        reviewedAt: existing?.reviewedAt ?? now,
+        carryoverTaskIds: input.carryTaskIds,
+        reviewTaskIds: input.reviewTaskIds,
+        releasedTaskIds: input.releasedTaskIds,
+        summary: digest.summary,
+        metadata: {
+          ...(existing?.metadata ?? {}),
+          carryoverReviewedAt: now,
+        },
+        updatedAt: now,
+        version: existing ? existing.version + 1 : 1,
+      },
+      accountId,
+    );
+
+    await Promise.all([
+      tasksToUpdate.length > 0
+        ? appServices.repositories.tasks.saveTasks(tasksToUpdate)
+        : Promise.resolve(),
+      appServices.repositories.planning.saveWeeklyReviewStates([nextState]),
+      appServices.repositories.history.saveActivityEvents(
+        bindRecordsToAccount(
+          [
+            buildWeeklyCarryoverReviewedActivityEvent({
+              weekStartDate,
+              occurredAt: now,
+              carryCount: input.carryTaskIds.length,
+              reviewCount: input.reviewTaskIds.length,
+              releasedCount: input.releasedTaskIds.length,
+            }),
+          ],
+          accountId,
+        ),
+      ),
+    ]);
+
+    const [foundationSnapshot, accountSnapshot] = await Promise.all([
+      refreshAllState(state.planDate),
+      appServices.services.account.notePendingChanges(),
+    ]);
+    set({
+      ...foundationSnapshot,
+      ...mapAccountSnapshot(accountSnapshot),
+    });
+  },
+
+  shapeNextWeek: async (input) => {
+    const state = get();
+    const accountId = getAttachedAccountId(state);
+    const weekStartsOn = state.userPreferences?.weekStartsOn ?? 1;
+    const nextWeekStartDate = addDays(startOfWeek(state.planDate, weekStartsOn), 7);
+    const nextWeekEndDate = endOfWeek(nextWeekStartDate, weekStartsOn);
+    const existing = await appServices.repositories.planning.getWeeklyReviewState(nextWeekStartDate);
+    const now = new Date().toISOString();
+    const nextState = bindWeeklyReviewToAccount(
+      {
+        ...createWeeklyReviewState({
+          weekStartDate: nextWeekStartDate,
+          weekEndDate: nextWeekEndDate,
+          accountId,
+          existing,
+        }),
+        nextWeekShapedAt: now,
+        targetWeekIntensity: input.intensity,
+        weeklyEmphasis: input.emphasis,
+        carryoverPosture: input.carryoverPosture,
+        note: input.note?.trim() ? input.note.trim() : existing?.note ?? null,
+        metadata: {
+          ...(existing?.metadata ?? {}),
+          shapedFromWeek: startOfWeek(state.planDate, weekStartsOn),
+        },
+        updatedAt: now,
+        version: existing ? existing.version + 1 : 1,
+      },
+      accountId,
+    );
+
+    await Promise.all([
+      appServices.repositories.planning.saveWeeklyReviewStates([nextState]),
+      appServices.repositories.history.saveActivityEvents(
+        bindRecordsToAccount(
+          [
+            buildNextWeekShapedActivityEvent({
+              weekStartDate: nextWeekStartDate,
+              occurredAt: now,
+              intensity: input.intensity,
+              emphasis: input.emphasis,
+              carryoverPosture: input.carryoverPosture,
+            }),
+          ],
+          accountId,
+        ),
+      ),
+    ]);
+
+    const [foundationSnapshot, accountSnapshot] = await Promise.all([
+      refreshAllState(state.planDate),
+      appServices.services.account.notePendingChanges(),
+    ]);
+    set({
+      ...foundationSnapshot,
+      ...mapAccountSnapshot(accountSnapshot),
+    });
+  },
+
   openDay: async (focus = null) => {
     const state = get();
     const accountId = getAttachedAccountId(state);
@@ -1068,7 +1382,7 @@ export const useAppStore = create<AppState>((set, get) => ({
 
     const accountId = getAttachedAccountId(state);
     const now = new Date().toISOString();
-    const recoveryDate = nextDate(state.planDate);
+    const recoveryDate = addDays(state.planDate, 1);
     const candidateTasks = [...state.tasksForSelectedDate].sort((left, right) => {
       const leftScore =
         (left.status === TaskStatus.InProgress ? 60 : 0) +
@@ -1224,7 +1538,7 @@ export const useAppStore = create<AppState>((set, get) => ({
       accountId,
       existing,
     });
-    const tomorrow = nextDate(state.planDate);
+    const tomorrow = addDays(state.planDate, 1);
     const unfinishedTasks = state.tasksForSelectedDate.filter(
       (task) => ![TaskStatus.Completed, TaskStatus.Cancelled].includes(task.status),
     );

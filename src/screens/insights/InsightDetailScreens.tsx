@@ -20,6 +20,7 @@ import {
   summarizeGoalProgress,
   summarizeInsights,
 } from "../../services/history/selectors";
+import { summarizeWeeklyContinuity } from "../../services/history/weekly";
 import { useAppStore } from "../../state/useAppStore";
 import { formatShortDate } from "../../utils/date";
 
@@ -30,6 +31,7 @@ export function InsightContinuityScreen() {
   const activityEvents = useAppStore((state) => state.activityEvents);
   const adaptationProfile = useAppStore((state) => state.adaptationProfile);
   const productPreferences = useAppStore((state) => state.productPreferences);
+  const weeklyReviewHistory = useAppStore((state) => state.weeklyReviewHistory);
 
   const feed = buildActivityFeed(activityEvents, tasks, milestones);
   const summary = summarizeInsights({
@@ -40,6 +42,7 @@ export function InsightContinuityScreen() {
     profile: adaptationProfile,
     adaptiveEnabled: productPreferences?.adaptivePlanningEnabled !== false,
   });
+  const weeklyContinuity = summarizeWeeklyContinuity(weeklyReviewHistory);
   const activeGoals = goals.filter((goal) => goal.status === GoalStatus.Active);
 
   if (activeGoals.length === 0) {
@@ -74,6 +77,11 @@ export function InsightContinuityScreen() {
                   label: "Open / close",
                   value: `${Math.round(summary.openConsistency * 100)} / ${Math.round(summary.closeConsistency * 100)}%`,
                   detail: "Days opened and closed intentionally",
+                },
+                {
+                  label: "Weeks reviewed",
+                  value: String(weeklyContinuity.reviewedWeeks),
+                  detail: "Intentional weekly review moments",
                 },
               ]}
             />
@@ -110,6 +118,30 @@ export function InsightContinuityScreen() {
               ]}
             />
             <AppText tone="secondary">{summary.carryoverQualityCopy}</AppText>
+          </Surface>
+        </DetailSection>
+
+        <DetailSection
+          title="Weekly shaping"
+          description="How weekly steering is affecting drift."
+        >
+          <Surface className="gap-3 mb-0">
+            <QuietMetaLine
+              items={[
+                `${weeklyContinuity.shapedWeeks} shaped week${weeklyContinuity.shapedWeeks === 1 ? "" : "s"}`,
+                `${Math.round(weeklyContinuity.averageWeeklyChurn * 100)}% average churn`,
+                `${Math.round(weeklyContinuity.averageCarryoverQuality * 100)}% carryover quality`,
+              ]}
+            />
+            <AppText tone="secondary">
+              {weeklyContinuity.shapedWeekDriftDelta === null
+                ? "There is not enough shaped-week history yet to compare next-week drift."
+                : weeklyContinuity.shapedWeekDriftDelta < -0.05
+                  ? "Shaped weeks have tended to drift less in the following week."
+                  : weeklyContinuity.shapedWeekDriftDelta > 0.05
+                    ? "Shaping is present, but it has not yet lowered next-week drift."
+                    : "Shaped and unshaped weeks are still landing about the same."}
+            </AppText>
           </Surface>
         </DetailSection>
 

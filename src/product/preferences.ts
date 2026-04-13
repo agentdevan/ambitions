@@ -2,6 +2,7 @@ import { DomainKey, PlanningCadence, UserPreferences } from "../domain/models";
 import {
   AccentThemeKey,
   AppearanceMode,
+  DefaultWeeklyCarryoverBehavior,
   DefaultUnfinishedWorkBehavior,
   DayIntensityPreference,
   ProductPreferences,
@@ -126,6 +127,12 @@ function parseUnfinishedWorkBehavior(value: unknown): DefaultUnfinishedWorkBehav
     : "ask_each_time";
 }
 
+function parseWeeklyCarryoverBehavior(value: unknown): DefaultWeeklyCarryoverBehavior {
+  return value === "essentials_only" || value === "review_first" || value === "aggressive"
+    ? value
+    : "review_first";
+}
+
 export function getProductPreferences(preferences: UserPreferences | null): ProductPreferences {
   const metadata = preferences?.metadata ?? {};
 
@@ -139,6 +146,12 @@ export function getProductPreferences(preferences: UserPreferences | null): Prod
     accentTheme: parseAccentTheme(metadata.accentTheme ?? metadata.themePreset),
     defaultUnfinishedWorkBehavior: parseUnfinishedWorkBehavior(
       metadata.defaultUnfinishedWorkBehavior,
+    ),
+    weeklyReviewDay: parseNumber(metadata.weeklyReviewDay, preferences?.weeklyPlanningDay ?? 0),
+    weeklyReviewTime: parseTime(metadata.weeklyReviewTime, "16:30"),
+    autoPromptNextWeekShaping: parseBoolean(metadata.autoPromptNextWeekShaping, true),
+    defaultWeeklyCarryoverBehavior: parseWeeklyCarryoverBehavior(
+      metadata.defaultWeeklyCarryoverBehavior,
     ),
     schedule: {
       sleepStart: parseTime(metadata.sleepWindowStart, defaultSchedule.sleepStart),
@@ -205,6 +218,10 @@ export function mergeProductPreferences(
     appearanceMode: product.appearanceMode,
     accentTheme: product.accentTheme,
     defaultUnfinishedWorkBehavior: product.defaultUnfinishedWorkBehavior,
+    weeklyReviewDay: product.weeklyReviewDay,
+    weeklyReviewTime: product.weeklyReviewTime,
+    autoPromptNextWeekShaping: product.autoPromptNextWeekShaping,
+    defaultWeeklyCarryoverBehavior: product.defaultWeeklyCarryoverBehavior,
     sleepWindowStart: product.schedule.sleepStart,
     sleepWindowEnd: product.schedule.sleepEnd,
     morningPrepMinutes: product.schedule.morningPrepMinutes,
@@ -225,6 +242,7 @@ export function mergeProductPreferences(
   return {
     ...current,
     planningCadence: cadenceForIntensity(product.dayIntensity),
+    weeklyPlanningDay: product.weeklyReviewDay,
     defaultFocusSessionMinutes: focusSessionMinutes(product.taskSizing),
     defaultBreakMinutes: breakMinutes(product.taskSizing),
     preferredDeepWorkWindows,

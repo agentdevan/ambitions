@@ -207,6 +207,59 @@ function buildRecoveryPrompt(
   });
 }
 
+function buildWeeklyReviewReminder(
+  context: NotificationPlanContext,
+  now: Date,
+  drafts: NotificationDraft[],
+) {
+  const preference = context.preferences.find(
+    (item) => item.reminderType === ReminderType.WeeklyReview && item.enabled,
+  );
+
+  if (!preference) {
+    return;
+  }
+
+  const reviewDate = new Date(`${context.date}T12:00:00`);
+  if (reviewDate.getDay() !== context.productPreferences.weeklyReviewDay) {
+    return;
+  }
+
+  const [hour, minute] = context.productPreferences.weeklyReviewTime.split(":").map(Number);
+  const triggerDate = new Date(`${context.date}T00:00:00`);
+  triggerDate.setHours(hour, minute - preference.leadTimeMinutes, 0, 0);
+
+  if (
+    !isFutureDate(triggerDate, now) ||
+    isWithinQuietHours(triggerDate, preference.quietHoursStart, preference.quietHoursEnd)
+  ) {
+    return;
+  }
+
+  if (
+    context.weeklyReviewState?.reviewedAt &&
+    (!context.productPreferences.autoPromptNextWeekShaping || context.nextWeekReviewState?.nextWeekShapedAt)
+  ) {
+    return;
+  }
+
+  const body = context.weeklyReviewState?.reviewedAt
+    ? "Shape next week while the current week is still fresh."
+    : "Take a quiet weekly read before unfinished work quietly rolls forward.";
+
+  drafts.push({
+    id: `weekly-review-${context.date}`,
+    kind: "weekly_review",
+    title: context.weeklyReviewState?.reviewedAt ? "Shape next week" : "Weekly review",
+    body,
+    scheduledAt: triggerDate.toISOString(),
+    metadata: {
+      date: context.date,
+      weekStartDate: context.weeklyReviewState?.weekStartDate ?? context.date,
+    },
+  });
+}
+
 function buildStartSmallNudge(
   context: NotificationPlanContext,
   now: Date,
@@ -301,6 +354,7 @@ export function buildNotificationDrafts(context: NotificationPlanContext) {
   buildFreeWindowNudge(context, now, drafts);
   buildRecoveryPrompt(context, now, drafts);
   buildEveningCloseReminder(context, now, drafts);
+  buildWeeklyReviewReminder(context, now, drafts);
 
   return drafts
     .sort((left, right) => left.scheduledAt.localeCompare(right.scheduledAt))

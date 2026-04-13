@@ -76,6 +76,7 @@ async function resetSeedData() {
     await client.run("DELETE FROM time_blocks;");
     await client.run("DELETE FROM daily_plans;");
     await client.run("DELETE FROM daily_ritual_states;");
+    await client.run("DELETE FROM weekly_review_states;");
     await client.run("DELETE FROM activity_events;");
     await client.run("DELETE FROM replan_suggestions;");
     await client.run("DELETE FROM tasks;");
@@ -140,18 +141,34 @@ async function seedInitialData() {
   await ensureBootstrapMetadata();
 }
 
-async function ensurePhase17Defaults() {
+async function ensurePhase18Defaults() {
   const [preferences, notificationPreferences] = await Promise.all([
     appServices.repositories.preferences.getUserPreferences(),
     appServices.repositories.preferences.listNotificationPreferences(),
   ]);
 
-  if (preferences && preferences.metadata.defaultUnfinishedWorkBehavior === undefined) {
+  if (
+    preferences &&
+    (
+      preferences.metadata.defaultUnfinishedWorkBehavior === undefined ||
+      preferences.metadata.weeklyReviewTime === undefined ||
+      preferences.metadata.autoPromptNextWeekShaping === undefined ||
+      preferences.metadata.defaultWeeklyCarryoverBehavior === undefined ||
+      preferences.metadata.weeklyReviewDay === undefined
+    )
+  ) {
     await appServices.repositories.preferences.saveUserPreferences({
       ...preferences,
       metadata: {
         ...preferences.metadata,
-        defaultUnfinishedWorkBehavior: "ask_each_time",
+        defaultUnfinishedWorkBehavior:
+          preferences.metadata.defaultUnfinishedWorkBehavior ?? "ask_each_time",
+        weeklyReviewDay: preferences.metadata.weeklyReviewDay ?? preferences.weeklyPlanningDay,
+        weeklyReviewTime: preferences.metadata.weeklyReviewTime ?? "16:30",
+        autoPromptNextWeekShaping:
+          preferences.metadata.autoPromptNextWeekShaping ?? true,
+        defaultWeeklyCarryoverBehavior:
+          preferences.metadata.defaultWeeklyCarryoverBehavior ?? "review_first",
       },
       updatedAt: new Date().toISOString(),
       version: preferences.version + 1,
@@ -184,7 +201,7 @@ export async function initializeAppServices() {
         await ensureBootstrapMetadata();
       }
 
-      await ensurePhase17Defaults();
+      await ensurePhase18Defaults();
 
       await appServices.services.account.initialize();
     })().catch((error) => {
