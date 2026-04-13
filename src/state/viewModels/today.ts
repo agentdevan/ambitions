@@ -153,6 +153,35 @@ export interface TodayStatusSnapshot {
   warmth: string;
 }
 
+export interface TodayWorkspaceSlot {
+  label: string;
+  title: string;
+  detail: string;
+  tone: "accent" | "neutral" | "quiet";
+}
+
+export interface TodayWorkspaceSummary {
+  title: string;
+  detail: string;
+}
+
+export interface TodayRecoverySnapshot {
+  title: string;
+  detail: string;
+  impact: string;
+}
+
+export interface TodayWorkspaceDigest {
+  now: TodayWorkspaceSlot;
+  next: TodayWorkspaceSlot;
+  later: TodayWorkspaceSlot;
+  fixed: TodayWorkspaceSummary;
+  flexible: TodayWorkspaceSummary;
+  optional: TodayWorkspaceSummary | null;
+  room: TodayWorkspaceSummary;
+  changed: TodayWorkspaceSummary | null;
+}
+
 export interface TodayViewModel {
   date: string;
   focus: string;
@@ -188,6 +217,8 @@ export interface TodayViewModel {
     calendarStatusLabel: string;
     calendarDetail: string;
   };
+  workspace: TodayWorkspaceDigest;
+  recoverySnapshot: TodayRecoverySnapshot | null;
   ritual: TodayRitualSurface | null;
 }
 
@@ -286,6 +317,10 @@ function formatMinutesLabel(minutes: number) {
   }
 
   return `${hours} hr ${remaining} min`;
+}
+
+function formatCountLabel(count: number, singular: string, plural = `${singular}s`) {
+  return `${count} ${count === 1 ? singular : plural}`;
 }
 
 function bucketOpenWindow(minutes: number): TodayFreeWindowBucket {
@@ -816,6 +851,276 @@ function buildRecommendation(params: {
   };
 }
 
+function buildWorkspaceDigest(params: {
+  activeBlock: TodayTaskBlock | null;
+  nextBlock: TodayTaskBlock | null;
+  futureBlocks: TodayTaskBlock[];
+  openWindow: TodayOpenWindow | null;
+  recommendation: TodayRecommendation;
+  recoveryTasks: TodayRecoveryTask[];
+  replanSuggestions: TodaySuggestion[];
+  schedule: SchedulingOutput | null;
+  progress: TodayViewModel["progress"];
+}): TodayWorkspaceDigest {
+  const {
+    activeBlock,
+    nextBlock,
+    futureBlocks,
+    openWindow,
+    recommendation,
+    recoveryTasks,
+    replanSuggestions,
+    schedule,
+    progress,
+  } = params;
+  const now = new Date().toISOString();
+  const laterBlocks = futureBlocks.filter((block) => block.id !== nextBlock?.id);
+  const upcomingHardConstraints =
+    schedule?.interpretedConstraints
+      .filter((constraint) => constraint.disposition === "hard_constraint")
+      .filter((constraint) => Date.parse(constraint.endsAt) >= Date.parse(now))
+      .sort((left, right) => left.startsAt.localeCompare(right.startsAt)) ?? [];
+  const nextHardConstraint = upcomingHardConstraints[0] ?? null;
+  const unscheduledCount = schedule?.unscheduledTasks.length ?? 0;
+  const optionalCount = recoveryTasks.length + unscheduledCount;
+  const openMinutes =
+    openWindow?.availableMinutes ?? schedule?.capacitySummary.unusedCapacityMinutes ?? 0;
+
+  const nowSlot: TodayWorkspaceSlot = activeBlock
+    ? {
+        label: "Now",
+        title: activeBlock.title,
+        detail: `In motion until ${formatTimeLabel(activeBlock.endsAt)}.`,
+        tone: "accent",
+      }
+    : openWindow
+      ? {
+          label: "Now",
+          title:
+            recommendation.taskId && recommendation.summary
+              ? recommendation.summary
+              : openWindow.bucket === "tiny"
+                ? "Keep this opening light."
+                : "The day is in a flexible window.",
+          detail:
+            recommendation.taskId && recommendation.emphasis
+              ? recommendation.emphasis
+              : openWindow.opensUntilLabel
+                ? `Open until ${openWindow.opensUntilLabel}.`
+                : openWindow.detail,
+          tone: "accent",
+        }
+      : {
+          label: "Now",
+          title: "Nothing live is running.",
+          detail: nextBlock
+            ? `The next protected block starts at ${formatTimeLabel(nextBlock.startsAt)}.`
+            : "This part of the day is still unsettled.",
+          tone: "quiet",
+        };
+
+  const nextSlot: TodayWorkspaceSlot = nextBlock
+    ? {
+        label: "Next",
+        title: nextBlock.title,
+        detail:
+          nextBlock.state === TimeBlockState.Rolled
+            ? `Rolled into ${formatTimeLabel(nextBlock.startsAt)} and needs a clean restart.`
+            : `Protected at ${formatTimeLabel(nextBlock.startsAt)}.`,
+        tone: nextBlock.state === TimeBlockState.Rolled ? "quiet" : "neutral",
+      }
+    : nextHardConstraint
+      ? {
+          label: "Next",
+          title: nextHardConstraint.title,
+          detail: `Hard edge at ${formatTimeLabel(nextHardConstraint.startsAtTime)}.`,
+          tone: "neutral",
+        }
+      : {
+          label: "Next",
+          title: "No hard next edge yet.",
+          detail: "The next move is still yours to place deliberately.",
+          tone: "quiet",
+        };
+
+  const laterSlot: TodayWorkspaceSlot = laterBlocks[0]
+    ? {
+        label: "Later",
+        title:
+          laterBlocks.length === 1
+            ? laterBlocks[0].title
+            : `${laterBlocks[0].title} and ${laterBlocks.length - 1} more`,
+        detail:
+          laterBlocks[0].state === TimeBlockState.Deferred
+            ? "Later work has already shifted and is still movable."
+            : `The later line of the day stays anchored after ${formatTimeLabel(laterBlocks[0].startsAt)}.`,
+        tone: laterBlocks[0].state === TimeBlockState.Deferred ? "quiet" : "neutral",
+      }
+    : optionalCount > 0
+      ? {
+          label: "Later",
+          title: `${formatCountLabel(optionalCount, "item")} stay negotiable`,
+          detail:
+            recoveryTasks.length > 0
+              ? `${formatCountLabel(recoveryTasks.length, "item")} already sit outside the main line of today.`
+              : "Optional work is being held back to keep the day believable.",
+          tone: "quiet",
+        }
+      : {
+          label: "Later",
+          title: "The rest of today is fairly clean.",
+          detail:
+            progress.completed > 0
+              ? `${formatCountLabel(progress.completed, "session")} already moved.`
+              : "There is not much loose later work to re-read.",
+          tone: "quiet",
+        };
+
+  const fixed: TodayWorkspaceSummary = nextBlock
+    ? {
+        title:
+          upcomingHardConstraints.length > 0
+            ? `${formatCountLabel(upcomingHardConstraints.length, "hard edge")} are holding today`
+            : "The next protected block is the main hard edge",
+        detail: `${nextBlock.title} starts at ${formatTimeLabel(nextBlock.startsAt)}.`,
+      }
+    : nextHardConstraint
+      ? {
+          title: `${nextHardConstraint.title} is the next hard edge`,
+          detail: `It starts at ${formatTimeLabel(nextHardConstraint.startsAtTime)}.`,
+        }
+      : {
+          title: "There is no strong fixed edge yet",
+          detail: "The rest of the day is being held with a lighter hand.",
+        };
+
+  const flexible: TodayWorkspaceSummary = openWindow
+    ? {
+        title: `${formatMinutesLabel(openWindow.availableMinutes)} can still move`,
+        detail:
+          recommendation.taskId && recommendation.summary
+            ? `${recommendation.summary} is the cleanest use of that room.`
+            : openWindow.detail,
+      }
+    : laterBlocks.length > 0
+      ? {
+          title: `${formatCountLabel(laterBlocks.length, "later block")} can still flex`,
+          detail: "The later part of today is shaped, but not all of it is locked.",
+        }
+      : {
+          title: "Most of today's work is already placed",
+          detail: "Following the next protected block is cleaner than reworking the whole day.",
+        };
+
+  const optional =
+    optionalCount > 0
+      ? {
+          title: `${formatCountLabel(optionalCount, "item")} remain negotiable`,
+          detail:
+            recoveryTasks.length > 0
+              ? `${formatCountLabel(recoveryTasks.length, "item")} are already in recovery or carry states.`
+              : `${formatCountLabel(unscheduledCount, "item")} stayed out of the main plan on purpose.`,
+        }
+      : null;
+
+  const room: TodayWorkspaceSummary =
+    schedule?.signals.overloadWarning || openMinutes <= 15
+      ? {
+          title: openMinutes > 0 ? "Room is narrow now" : "The day is basically full",
+          detail:
+            openMinutes > 0
+              ? `${formatMinutesLabel(openMinutes)} remain, so the next move needs restraint.`
+              : "Anything extra should come from recovery, not stuffing more in.",
+        }
+      : openMinutes >= 90
+        ? {
+            title: "There is real room left",
+            detail: `${formatMinutesLabel(openMinutes)} are still believable without stretching the day.`,
+          }
+        : {
+            title: "There is usable room left",
+            detail: `${formatMinutesLabel(openMinutes)} remain in the current day shape.`,
+          };
+
+  const latestSuggestion = replanSuggestions[0] ?? null;
+  const changed: TodayWorkspaceSummary | null =
+    latestSuggestion
+      ? {
+          title:
+            replanSuggestions.length > 1
+              ? `${formatCountLabel(replanSuggestions.length, "change")} are still asking for attention`
+              : "One change is still asking for attention",
+          detail: latestSuggestion.rationale,
+        }
+      : progress.completed > 0
+        ? {
+            title: `${formatCountLabel(progress.completed, "session")} already moved`,
+            detail:
+              progress.recovery > 0
+                ? `${formatCountLabel(progress.recovery, "item")} still need a cleaner destination.`
+                : "You can reopen without rereading the whole day.",
+          }
+        : null;
+
+  return {
+    now: nowSlot,
+    next: nextSlot,
+    later: laterSlot,
+    fixed,
+    flexible,
+    optional,
+    room,
+    changed,
+  };
+}
+
+function buildRecoverySnapshot(params: {
+  ritual: TodayRitualSurface | null;
+  ritualState: DailyRitualState | null;
+  openWindow: TodayOpenWindow | null;
+  nextBlock: TodayTaskBlock | null;
+  recoveryCount: number;
+}): TodayRecoverySnapshot | null {
+  const { ritual, ritualState, openWindow, nextBlock, recoveryCount } = params;
+  const latestRecovery = ritualState?.recoveryMoments.at(-1) ?? null;
+
+  if (ritual?.kind === "recovery") {
+    return {
+      title: ritual.title,
+      detail: ritual.summary,
+      impact:
+        ritual.recoveryReasons?.[0] ??
+        (nextBlock
+          ? `Recovery is trying to protect ${nextBlock.title} at ${formatTimeLabel(nextBlock.startsAt)}.`
+          : "Recovery is trying to keep the rest of today believable."),
+    };
+  }
+
+  if (latestRecovery) {
+    return {
+      title: "Recovery already happened earlier today.",
+      detail: latestRecovery.summary,
+      impact: nextBlock
+        ? `The remaining line is now rebuilding toward ${nextBlock.title} at ${formatTimeLabel(nextBlock.startsAt)}.`
+        : openWindow
+          ? `The remaining day now has ${formatMinutesLabel(openWindow.availableMinutes)} of usable room.`
+          : "The remaining day is already lighter than the original shape.",
+    };
+  }
+
+  if (recoveryCount > 0) {
+    return {
+      title: `${formatCountLabel(recoveryCount, "item")} are slipping out of today's clean line.`,
+      detail: "If the rest of the day no longer holds, use recovery once instead of starting over.",
+      impact: nextBlock
+        ? `The clean target is still ${nextBlock.title} at ${formatTimeLabel(nextBlock.startsAt)}.`
+        : "The clean target is a lighter, believable rest of day.",
+    };
+  }
+
+  return null;
+}
+
 const openingOptions: TodayOpeningOption[] = [
   {
     focus: DailyRitualOpeningFocus.ProtectEssentials,
@@ -1195,6 +1500,13 @@ export function buildTodayViewModel(params: {
   });
   const activeBlock = mappedBlocks.find((block) => block.id === rawActiveBlock?.id) ?? null;
   const nextBlock = mappedBlocks.find((block) => block.id === rawNextBlock?.id) ?? null;
+  const futureMappedBlocks = mappedBlocks.filter(
+    (block) =>
+      [TimeBlockState.Scheduled, TimeBlockState.Rolled, TimeBlockState.Deferred].includes(
+        block.state,
+      ) &&
+      (!isCurrentDate || Date.parse(block.startsAtDateTime) > Date.parse(nowIso)),
+  );
   const timelinePreview = (() => {
     if (activeBlock) {
       const activeIndex = mappedBlocks.findIndex((block) => block.id === activeBlock.id);
@@ -1238,6 +1550,29 @@ export function buildTodayViewModel(params: {
     schedule: params.schedule,
     nextBlock: rawNextBlock,
     activityEvents: params.activityEvents,
+  });
+  const progress = {
+    completed,
+    scheduled,
+    recovery,
+  };
+  const workspace = buildWorkspaceDigest({
+    activeBlock,
+    nextBlock,
+    futureBlocks: futureMappedBlocks,
+    openWindow,
+    recommendation,
+    recoveryTasks,
+    replanSuggestions,
+    schedule: params.schedule,
+    progress,
+  });
+  const recoverySnapshot = buildRecoverySnapshot({
+    ritual,
+    ritualState: params.ritualState,
+    openWindow,
+    nextBlock,
+    recoveryCount: recovery,
   });
 
   return {
@@ -1311,12 +1646,10 @@ export function buildTodayViewModel(params: {
           : params.schedule && params.schedule.unscheduledTasks.length > 0
             ? params.schedule.unscheduledTasks.slice(0, 3).map((task) => task.reason)
             : [],
-    progress: {
-      completed,
-      scheduled,
-      recovery,
-    },
+    progress,
     integration,
+    workspace,
+    recoverySnapshot,
     ritual,
   };
 }

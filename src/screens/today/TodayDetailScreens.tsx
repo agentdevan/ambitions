@@ -205,7 +205,7 @@ export function TodayTimelineScreen({
         <DetailHero
           eyebrow="Today"
           title="Full timeline"
-          description="Session-by-session."
+          description="The protected shape of today."
           meta={
             <DetailSummaryStrip
               items={[
@@ -229,21 +229,21 @@ export function TodayTimelineScreen({
 
         <TimelineGroup
           title="Now"
-          description="Current block and next up."
+          description="What is live now, or the cleanest immediate re-entry."
           blocks={[...grouped.now, ...grouped.next.slice(0, Math.max(0, 1 - grouped.now.length))]}
           onOpen={(blockId) => navigation.navigate("TodaySessionDetail", { blockId })}
         />
 
         <TimelineGroup
-          title="Coming up"
-          description="Next planned sessions."
+          title="Next"
+          description="Protected sessions that are already holding the day."
           blocks={grouped.now.length > 0 ? grouped.next : grouped.next.slice(1)}
           onOpen={(blockId) => navigation.navigate("TodaySessionDetail", { blockId })}
         />
 
         <TimelineGroup
-          title="Later changes"
-          description="Moved or deferred."
+          title="Later"
+          description="Later sessions that have shifted or can still move."
           blocks={grouped.later}
           onOpen={(blockId) => navigation.navigate("TodaySessionDetail", { blockId })}
         />
@@ -544,7 +544,7 @@ export function TodayOpenTimeScreen({
           title={
             today.openWindow.bucket === "tiny"
               ? "A short opening is available."
-              : "Here are the best ways to use this time."
+              : "This is the cleanest use of the open window."
           }
           description={
             today.openWindow.opensUntilLabel
@@ -579,8 +579,8 @@ export function TodayOpenTimeScreen({
 
         {primary ? (
           <DetailSection
-            title="Recommended fit"
-            description="Best use of the window."
+            title="Best fit"
+            description="The most believable move for the room that is left."
           >
             <OpportunityOptionCard
               actionLabel={primary.actionLabel}
@@ -603,8 +603,8 @@ export function TodayOpenTimeScreen({
 
         {today.recommendation.options.length > 1 ? (
           <DetailSection
-            title="Alternate fits"
-            description="Other good fits."
+            title="Still fits"
+            description="Other clean options, if you want a different move."
           >
             <View className="gap-3">
               {today.recommendation.options.slice(1).map((option) => (
@@ -625,7 +625,7 @@ export function TodayOpenTimeScreen({
 
         <DetailSection
           title="More context"
-          description="Before you decide."
+          description="Before you commit the window."
         >
           <View className="gap-3">
             {nextBlock ? (
@@ -678,7 +678,7 @@ export function TodayCapacityScreen() {
         <DetailHero
           eyebrow="Today"
           title="Capacity"
-          description="How much room is left."
+          description="How much room the day still honestly has."
           meta={
             <DetailSummaryStrip
               items={[
@@ -704,8 +704,8 @@ export function TodayCapacityScreen() {
           <AppText variant="section">Read on the day</AppText>
           <AppText tone="secondary">
             {today.capacity.unusedCapacityMinutes > 0
-              ? `${today.capacity.unusedCapacityMinutes} minutes are still open. Protect them for the best next move, not filler.`
-              : "The day is already committed. If something slips, replan instead of forcing more in."}
+              ? `${today.capacity.unusedCapacityMinutes} minutes are still open. Protect them for the cleanest next move, not filler.`
+              : "The day is already committed. If something slips, recover it instead of forcing more in."}
           </AppText>
           <AppText tone="secondary">
             {today.capacity.overloadWarning
