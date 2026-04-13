@@ -280,7 +280,7 @@ export function GoalDetailScreen({
           <DetailHero
             eyebrow="Goal"
             title={resolvedGoal.title}
-            description={progressTruth.paceSummary}
+            description={nextMoveDetail}
             badges={
               <>
                 <Pill label={statusLabel(resolvedGoal.status)} tone="quiet" />
@@ -305,28 +305,20 @@ export function GoalDetailScreen({
                     value: resolvedGoal.targetDate ? formatShortDate(resolvedGoal.targetDate) : "No date",
                   },
                   {
-                    label: "Current milestone",
-                    value: currentMilestone?.title ?? "No active milestone",
+                    label: "This week",
+                    value: `${Math.round(progressTruth.currentWeekScheduledMinutes / 60)} hr`,
+                  },
+                  {
+                    label: "Next move",
+                    value: nextTask?.title ?? currentMilestone?.title ?? "Not shaped yet",
                   },
                   {
                     label: "Direction",
                     value: ambition?.title ?? "Not linked yet",
                   },
                   {
-                    label: "Next move",
-                    value: nextTask?.title ?? "Not shaped yet",
-                  },
-                  {
-                    label: "This week",
-                    value: `${Math.round(progressTruth.currentWeekScheduledMinutes / 60)} hr`,
-                  },
-                  {
-                    label: "Deadline read",
+                    label: "Likelihood",
                     value: feasibility?.deadlineConfidence ?? "Not shaped yet",
-                  },
-                  {
-                    label: "Protected work",
-                    value: `${protectedTasks.length} tasks`,
                   },
                 ]}
               />
@@ -335,7 +327,7 @@ export function GoalDetailScreen({
 
           <DetailSection
             title="This week"
-            description="Pace, target, and recent movement."
+            description="Pace, focus, and recent movement."
           >
             <View className="gap-4">
               <DetailSummaryStrip
@@ -391,7 +383,7 @@ export function GoalDetailScreen({
 
           <DetailSection
             title="Next meaningful move"
-            description="Keep the next move obvious."
+            description="The one thing to open next."
           >
             <Surface tone={reviewDraft || nextTask ? "accent" : "default"} className="gap-4 mb-0">
               <View className="gap-1.5">
@@ -440,46 +432,10 @@ export function GoalDetailScreen({
             </Surface>
           </DetailSection>
 
-          <DetailSection
-            title="What needs attention"
-            description={
-              ambition
-                ? ambition.thesis ?? "Keep the direction visible."
-                : "Link a direction when you want the goal tied to something bigger."
-            }
-          >
-            <View className="gap-3">
-              <DrillInRow
-                title={ambition ? ambition.title : "No ambition linked yet"}
-                subtitle={
-                  ambition
-                    ? `${ambitionStatusLabel(ambition.status)} direction above this goal`
-                    : "Link an ambition to show what this goal serves."
-                }
-                detail={ambition ? "Open ambition" : "Link now"}
-                onPress={() =>
-                  ambition
-                    ? navigation.navigate("AmbitionDetail", { ambitionId: ambition.id })
-                    : navigation.navigate("GoalEdit", { goalId: resolvedGoal.id })
-                }
-              />
-              <Surface tone="sunken" className="gap-2 mb-0">
-                <AppText variant="caption">
-                  {ambition ? progressTruth.representationSummary : progressTruth.paceSummary}
-                </AppText>
-                <AppText tone="secondary" variant="caption">
-                  {ambition
-                    ? ambition.thesis ?? "This goal stays meaningful because it serves a larger direction."
-                    : "Linking a direction keeps this goal from feeling isolated."}
-                </AppText>
-              </Surface>
-            </View>
-          </DetailSection>
-
           {intelligence ? (
             <DetailSection
               title="This month"
-              description="Likelihood, workload, and deadline pressure."
+              description="Likelihood, workload, and pace health."
             >
               <View className="gap-4">
                 <DetailSummaryStrip
@@ -528,7 +484,7 @@ export function GoalDetailScreen({
 
           <DetailSection
             title="Recent movement"
-            description="Latest shifts."
+            description="Latest execution and plan changes."
             action={
               <Button
                 tone="tertiary"
@@ -560,7 +516,7 @@ export function GoalDetailScreen({
 
           <DetailSection
             title="Open more"
-            description="Drill into the full detail only when you need it."
+            description="Open the deeper views only when you need them."
           >
             <View className="gap-3">
               <DrillInRow
@@ -609,9 +565,6 @@ export function GoalDetailScreen({
           <Surface className="gap-4 mb-0">
             <View className="gap-1">
               <AppText variant="section">Goal definition</AppText>
-              <AppText tone="secondary" variant="caption">
-                What this goal is, separate from what you can do next.
-              </AppText>
             </View>
             <QuietMetaLine
               items={[

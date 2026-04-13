@@ -65,11 +65,11 @@ export function DetailSection({
   const theme = useResolvedTheme();
 
   return (
-    <View className="gap-3.5">
+    <View className="gap-4">
       <View
         style={{
-          width: 22,
-          height: 2,
+          width: 28,
+          height: 3,
           borderRadius: 999,
           backgroundColor: theme.colors.border.accent,
         }}
@@ -78,7 +78,7 @@ export function DetailSection({
         <View className="flex-1 gap-1">
           <AppText variant="section">{title}</AppText>
           {description ? (
-            <AppText tone="secondary" variant="caption">
+            <AppText tone="secondary" variant="body">
               {description}
             </AppText>
           ) : null}
@@ -120,14 +120,14 @@ export function DetailSummaryStrip({
         <Surface
           key={`${item.label}:${item.value}`}
           tone="sunken"
-          className="min-w-[46%] flex-1 gap-1 px-4 py-4 mb-0"
+          className="min-w-[46%] flex-1 gap-1.5 px-4 py-4 mb-0"
         >
-          <AppText tone="tertiary" variant="micro" style={{ textTransform: "uppercase" }}>
+          <AppText tone="secondary" variant="micro" style={{ textTransform: "uppercase" }}>
             {item.label}
           </AppText>
           <AppText variant="section">{item.value}</AppText>
           {item.detail ? (
-            <AppText tone="secondary" variant="caption">
+            <AppText tone="secondary" variant="body">
               {item.detail}
             </AppText>
           ) : null}
@@ -141,7 +141,7 @@ export function QuietMetaLine({ items }: { items: string[] }) {
   return (
     <View className="flex-row flex-wrap gap-x-4 gap-y-2">
       {items.map((item) => (
-        <AppText key={item} tone="tertiary" variant="caption" style={{ maxWidth: "100%" }}>
+        <AppText key={item} tone="secondary" variant="caption" style={{ maxWidth: "100%" }}>
           {item}
         </AppText>
       ))}

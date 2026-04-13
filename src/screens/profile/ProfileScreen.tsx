@@ -5,11 +5,6 @@ import { useMemo, useRef } from "react";
 import { View } from "react-native";
 import { useShallow } from "zustand/react/shallow";
 
-import {
-  DetailSection,
-  DetailSummaryStrip,
-  QuietMetaLine,
-} from "../../components/detail/DetailPrimitives";
 import { DrillInRow } from "../../components/navigation/DrillInRow";
 import { PageHeader } from "../../components/navigation/PageHeader";
 import { Button } from "../../components/ui/Button";
@@ -21,14 +16,11 @@ import { AppText } from "../../components/ui/Text";
 import { useResolvedTheme } from "../../design/theme/useResolvedTheme";
 import { buildActivityFeed, summarizeInsights } from "../../services/history/selectors";
 import {
-  formatMonthlyReviewCadenceShort,
   summarizeCalendarControl,
-  summarizePlanningControls,
   summarizeQuietHours,
   summarizeSyncState,
 } from "../../services/profile/controlSummaries";
 import { useAppStore } from "../../state/useAppStore";
-import { formatTimeRangeLabel } from "../../utils/date";
 import { ProfileStackParamList } from "../../navigation/types";
 
 type Props = NativeStackScreenProps<ProfileStackParamList, "ProfileHome">;
@@ -74,21 +66,14 @@ export function ProfileScreen({ navigation }: Props) {
   if (!productPreferences) {
     return (
       <Screen ref={scrollRef}>
-        <EmptyStateCard
-          eyebrow="Preparing"
-          title="Profile is loading"
-          body="Settings, trust state, and defaults will appear in a moment."
-        />
+        <EmptyStateCard eyebrow="Preparing" title="Profile is loading" body="Settings, trust state, and defaults will appear in a moment." />
       </Screen>
     );
   }
 
   const enabledNotifications = notificationPreferences.filter((item) => item.enabled).length;
   const quietHoursSummary = summarizeQuietHours(notificationPreferences);
-  const activityFeed = useMemo(
-    () => buildActivityFeed(activityEvents, tasks, milestones),
-    [activityEvents, milestones, tasks],
-  );
+  const activityFeed = useMemo(() => buildActivityFeed(activityEvents, tasks, milestones), [activityEvents, milestones, tasks]);
   const reflectionSummary = useMemo(
     () =>
       summarizeInsights({
@@ -100,10 +85,6 @@ export function ProfileScreen({ navigation }: Props) {
         adaptiveEnabled: productPreferences.adaptivePlanningEnabled,
       }),
     [activityFeed, adaptationProfile, goals, milestones, productPreferences.adaptivePlanningEnabled, tasks],
-  );
-  const planningSummary = summarizePlanningControls(
-    productPreferences,
-    adaptationProfile,
   );
   const calendarSummary = summarizeCalendarControl({
     connectionState: calendarConnectionState,
@@ -119,34 +100,6 @@ export function ProfileScreen({ navigation }: Props) {
     productPreferences.appearanceMode === "system"
       ? `System · ${theme.accentLabel}`
       : `${productPreferences.appearanceMode} · ${theme.accentLabel}`;
-  const homeSummaryItems = [
-    {
-      label: "Sync",
-      value: account ? accountSummary.badge : "Local only",
-      detail: account ? accountSummary.modeLabel : accountSummary.detail,
-    },
-    {
-      label: "Calendar",
-      value: calendarSummary.badge,
-      detail: calendarSummary.headline,
-    },
-    {
-      label: "Reminders",
-      value: enabledNotifications > 0 ? `${enabledNotifications} active` : "Muted",
-      detail: quietHoursSummary,
-    },
-    {
-      label: "Movement",
-      value: String(reflectionSummary.completedThisWeek),
-      detail: "Completed this week",
-    },
-  ];
-  const statusReads = [
-    planningSummary.learnedSummary,
-    reflectionSummary.personalizedHighlights[0] ?? reflectionSummary.momentumCopy,
-    calendarSummary.issue ?? calendarSummary.detail,
-    account ? accountSummary.nextStep : "Everything is still staying on this device.",
-  ];
 
   return (
     <Screen ref={scrollRef}>
@@ -154,14 +107,14 @@ export function ProfileScreen({ navigation }: Props) {
         <PageHeader
           eyebrow="Profile"
           title="Profile"
-          description="Controls and defaults."
+          description="Settings, connected services, and account."
           action={
             <Button
               size="compact"
-              tone="tertiary"
+              tone="secondary"
               onPress={() => navigation.navigate(account ? "ProfileAccount" : "ProfileAppearance")}
             >
-              {account ? "Open account" : "Appearance"}
+              {account ? "Account" : "Appearance"}
             </Button>
           }
         />
@@ -171,8 +124,8 @@ export function ProfileScreen({ navigation }: Props) {
             <View
               className="items-center justify-center rounded-full"
               style={{
-                width: 54,
-                height: 54,
+                width: 58,
+                height: 58,
                 backgroundColor: theme.colors.background.elevated,
                 borderWidth: 1,
                 borderColor: theme.colors.border.subtle,
@@ -181,142 +134,87 @@ export function ProfileScreen({ navigation }: Props) {
               <Ionicons color={theme.colors.text.primary} name="person-outline" size={24} />
             </View>
             <View className="flex-1 gap-1">
-              <AppText variant="section">
-                {account?.displayName ?? account?.email ?? "Local profile"}
-              </AppText>
-              <AppText tone="secondary" variant="caption">
-                {account ? accountSummary.modeLabel : "Local only on this device."}
-              </AppText>
+              <AppText variant="section">{account?.displayName ?? account?.email ?? "Local profile"}</AppText>
+              <AppText tone="secondary">{account ? accountSummary.modeLabel : "Local only on this device."}</AppText>
             </View>
           </View>
 
           <View className="flex-row flex-wrap gap-2">
-            <Pill
-              label={
-                account
-                  ? accountSummary.badge
-                  : "local only"
-              }
-              tone="quiet"
-            />
-            <Pill label={`${reflectionSummary.completedThisWeek} done this week`} tone="accent" />
+            <Pill label={account ? accountSummary.badge : "Local only"} tone="quiet" />
+            <Pill label={calendarSummary.badge} tone="quiet" />
+            <Pill label={enabledNotifications > 0 ? `${enabledNotifications} reminders` : "Reminders muted"} tone="accent" />
           </View>
-          <DetailSummaryStrip items={homeSummaryItems} />
         </Surface>
 
-        <Surface className="gap-5">
-          <DetailSection
-            title="Status line"
-            description="Profile stays secondary, but it should still tell you quickly what is healthy, connected, or needs trust attention."
-          >
-            <View className="gap-4">
-              <QuietMetaLine items={statusReads} />
-              <View className="flex-row flex-wrap gap-2">
-                <Pill label={planningSummary.intensityLabel} tone="quiet" />
-                <Pill label={planningSummary.unfinishedWorkLabel} tone="quiet" />
-                <Pill label={planningSummary.weeklyCarryoverLabel} tone="quiet" />
-                <Pill label={`${formatMonthlyReviewCadenceShort(productPreferences.monthlyReviewDay)} review`} tone="quiet" />
-                <Pill label={calendarSummary.badge} tone="quiet" />
-              </View>
-            </View>
-          </DetailSection>
+        <Surface className="gap-3">
+          <AppText variant="section">Open more</AppText>
+          <DrillInRow
+            title="Appearance"
+            subtitle="Mode and accent"
+            detail={appearanceDetail}
+            actionLabel="Open"
+            leading={<Ionicons color={theme.colors.accent.primary} name="color-palette-outline" size={18} />}
+            onPress={() => navigation.navigate("ProfileAppearance")}
+          />
+          <DrillInRow
+            title="Notifications"
+            subtitle={enabledNotifications > 0 ? `${enabledNotifications} reminder${enabledNotifications === 1 ? "" : "s"} active` : "All reminders muted"}
+            detail={quietHoursSummary}
+            actionLabel="Open"
+            leading={<Ionicons color={theme.colors.text.secondary} name="notifications-outline" size={18} />}
+            onPress={() => navigation.navigate("ProfileNotifications")}
+          />
+          <DrillInRow
+            title="Integrations"
+            subtitle={calendarSummary.headline}
+            detail={calendarSummary.badge}
+            actionLabel="Open"
+            leading={<Ionicons color={theme.colors.text.secondary} name="link-outline" size={18} />}
+            onPress={() => navigation.navigate("ProfileIntegrations")}
+          />
+          <DrillInRow
+            title="Account"
+            subtitle={account ? accountSummary.modeLabel : accountSummary.detail}
+            detail={account ? accountSummary.badge : "Local only"}
+            actionLabel="Open"
+            leading={<Ionicons color={theme.colors.text.secondary} name="person-circle-outline" size={18} />}
+            onPress={() => navigation.navigate("ProfileAccount")}
+          />
         </Surface>
 
-        <Surface className="gap-5">
-          <DetailSection
-            title="Trust and connected systems"
-            description="Account, sync, calendar, and reminders belong together so operational trust reads as one layer."
-          >
-            <View className="gap-3">
-              {!account ? (
-                <Surface tone="sunken" className="gap-2.5 mb-0">
-                  <AppText variant="section">Everything is still local only.</AppText>
-                  <AppText tone="secondary" variant="caption">
-                    That keeps this device self-contained, but sync, recovery, and cross-device trust are still off until you attach an account.
-                  </AppText>
-                </Surface>
-              ) : null}
-              <DrillInRow
-                title="Integrations"
-                subtitle={calendarSummary.headline}
-                detail={calendarSummary.badge}
-                actionLabel="Open"
-                leading={<Ionicons color={theme.colors.text.secondary} name="link-outline" size={18} />}
-                onPress={() => navigation.navigate("ProfileIntegrations")}
-              />
-              <DrillInRow
-                title="Notifications"
-                subtitle={enabledNotifications > 0 ? `${enabledNotifications} reminder${enabledNotifications === 1 ? "" : "s"} active` : "All reminders muted"}
-                detail={quietHoursSummary}
-                actionLabel="Open"
-                leading={<Ionicons color={theme.colors.text.secondary} name="notifications-outline" size={18} />}
-                onPress={() => navigation.navigate("ProfileNotifications")}
-              />
-              <DrillInRow
-                title="Account"
-                subtitle={account ? accountSummary.modeLabel : accountSummary.detail}
-                detail={account ? accountSummary.badge : "Local only"}
-                actionLabel="Open"
-                leading={<Ionicons color={theme.colors.text.secondary} name="person-circle-outline" size={18} />}
-                onPress={() => navigation.navigate("ProfileAccount")}
-              />
-            </View>
-          </DetailSection>
-        </Surface>
-
-        <Surface className="gap-5">
-          <DetailSection
+        <Surface className="gap-3">
+          <AppText variant="section">More settings</AppText>
+          <DrillInRow
             title="Planning defaults"
-            description="These controls shape how the planner behaves before Today, Plan, and Insights interpret anything."
-          >
-            <View className="gap-3">
-              <DrillInRow
-                title="Planning"
-                subtitle={planningSummary.unfinishedWorkLabel}
-                detail={`${planningSummary.intensityLabel} · ${planningSummary.monthlyPostureLabel}`}
-                actionLabel="Open"
-                leading={<Ionicons color={theme.colors.text.secondary} name="options-outline" size={18} />}
-                onPress={() => navigation.navigate("ProfilePlanningPreferences")}
-              />
-              <DrillInRow
-                title="Schedule"
-                subtitle={formatTimeRangeLabel(
-                  productPreferences.schedule.sleepStart,
-                  productPreferences.schedule.sleepEnd,
-                )}
-                detail={`${productPreferences.schedule.commuteMinutes} min commute`}
-                actionLabel="Open"
-                leading={<Ionicons color={theme.colors.text.secondary} name="time-outline" size={18} />}
-                onPress={() => navigation.navigate("ProfileScheduleDefaults")}
-              />
-            </View>
-          </DetailSection>
+            subtitle="Schedule and planner behavior"
+            detail="Open"
+            actionLabel="Open"
+            leading={<Ionicons color={theme.colors.text.secondary} name="options-outline" size={18} />}
+            onPress={() => navigation.navigate("ProfilePlanningPreferences")}
+          />
+          <DrillInRow
+            title="Schedule defaults"
+            subtitle="Sleep, commute, and time boundaries"
+            detail="Open"
+            actionLabel="Open"
+            leading={<Ionicons color={theme.colors.text.secondary} name="time-outline" size={18} />}
+            onPress={() => navigation.navigate("ProfileScheduleDefaults")}
+          />
+          <DrillInRow
+            title="History"
+            subtitle={reflectionSummary.personalizedHighlights[0] ?? "Recent movement and reflection"}
+            detail={`${reflectionSummary.completedThisWeek} completed`}
+            actionLabel="Open"
+            leading={<Ionicons color={theme.colors.text.secondary} name="pulse-outline" size={18} />}
+            onPress={() => navigation.navigate("ProfileHistory")}
+          />
         </Surface>
 
-        <Surface className="gap-5">
-          <DetailSection
-            title="Personalization and reflection"
-            description="Appearance and history stay available, but they remain support surfaces instead of becoming the workflow."
-          >
-            <View className="gap-3">
-              <DrillInRow
-                title="Appearance"
-                subtitle="Mode and accent"
-                detail={appearanceDetail}
-                actionLabel="Open"
-                leading={<Ionicons color={theme.colors.text.secondary} name="color-palette-outline" size={18} />}
-                onPress={() => navigation.navigate("ProfileAppearance")}
-              />
-              <DrillInRow
-                title="History & reflection"
-                subtitle={reflectionSummary.personalizedHighlights[0] ?? "Recent movement and reflection"}
-                detail={`${reflectionSummary.completedThisWeek} completed this week`}
-                actionLabel="Open"
-                leading={<Ionicons color={theme.colors.text.secondary} name="pulse-outline" size={18} />}
-                onPress={() => navigation.navigate("ProfileHistory")}
-              />
-            </View>
-          </DetailSection>
+        <Surface tone="sunken" className="gap-2">
+          <AppText variant="caption">System status</AppText>
+          <AppText tone="secondary" variant="caption">
+            {account ? accountSummary.nextStep : calendarSummary.issue ?? "Everything is staying on this device right now."}
+          </AppText>
         </Surface>
       </View>
     </Screen>

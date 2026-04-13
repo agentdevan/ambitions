@@ -21,12 +21,12 @@ export function PageHeader({
   const theme = useResolvedTheme();
 
   return (
-    <Surface tone="hero" className="gap-4 mb-0">
+    <Surface tone="hero" className="gap-5 mb-0 px-5 py-5">
       <View className="flex-row items-center gap-2">
         <View
           style={{
-            width: 26,
-            height: 3,
+            width: 34,
+            height: 4,
             borderRadius: 999,
             backgroundColor: theme.colors.accent.primary,
             opacity: theme.mode === "dark" ? 0.92 : 0.8,
@@ -37,17 +37,17 @@ export function PageHeader({
         </AppText>
       </View>
       <View className="flex-row items-start justify-between gap-3">
-        <View className="flex-1 gap-2">
+        <View className="flex-1 gap-2.5">
           <AppText variant="hero" style={{ maxWidth: "96%" }}>
             {title}
           </AppText>
           {description ? (
-            <AppText tone="secondary" variant="caption" style={{ maxWidth: "96%" }}>
+            <AppText tone="secondary" variant="body" style={{ maxWidth: "92%" }}>
               {description}
             </AppText>
           ) : null}
         </View>
-        {action ? <View style={{ marginTop: 6 }}>{action}</View> : null}
+        {action ? <View style={{ marginTop: 4 }}>{action}</View> : null}
       </View>
     </Surface>
   );

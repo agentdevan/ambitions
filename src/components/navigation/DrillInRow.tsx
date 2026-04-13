@@ -87,7 +87,18 @@ export function DrillInRow({
             ) : null}
           </View>
           <View className="items-end gap-1 pl-2">
-            <View className="flex-row items-center gap-1">
+            <View
+              className="flex-row items-center gap-1 rounded-full px-2.5 py-1.5"
+              style={{
+                backgroundColor: pressed
+                  ? theme.colors.background.accentWashStrong
+                  : theme.colors.background.canvas,
+                borderWidth: 1,
+                borderColor: pressed
+                  ? theme.colors.border.accent
+                  : theme.colors.border.subtle,
+              }}
+            >
               <AppText
                 tone={pressed ? "accent" : "secondary"}
                 variant="micro"
@@ -103,7 +114,7 @@ export function DrillInRow({
               />
             </View>
             {detail ? (
-              <AppText tone="tertiary" variant="caption" style={{ textAlign: "right", maxWidth: 132 }}>
+              <AppText tone="secondary" variant="caption" style={{ textAlign: "right", maxWidth: 132 }}>
                 {detail}
               </AppText>
             ) : null}

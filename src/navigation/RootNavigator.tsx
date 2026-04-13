@@ -85,14 +85,15 @@ function useStackOptions() {
     gestureEnabled: true,
     headerShadowVisible: false,
     headerBackTitleVisible: false,
+    headerBackButtonDisplayMode: "minimal" as const,
     headerTintColor: theme.colors.text.primary,
     headerStyle: {
       backgroundColor: theme.colors.background.canvas,
     },
     headerTitleStyle: {
-      fontSize: 17,
-      fontWeight: "600" as const,
-      letterSpacing: -0.3,
+      fontSize: 18,
+      fontWeight: "700" as const,
+      letterSpacing: -0.35,
     },
     contentStyle: {
       backgroundColor: theme.colors.background.canvas,
@@ -113,7 +114,7 @@ function TodayNavigator() {
       <TodayStack.Screen
         name="TodayTimeline"
         component={TodayTimelineScreen}
-        options={{ title: "Timeline" }}
+        options={{ title: "Today Timeline" }}
       />
       <TodayStack.Screen
         name="TodaySessionDetail"
@@ -123,7 +124,7 @@ function TodayNavigator() {
       <TodayStack.Screen
         name="TodayOpenTime"
         component={TodayOpenTimeScreen}
-        options={{ title: "Use This Window" }}
+        options={{ title: "Open Window" }}
       />
       <TodayStack.Screen
         name="TodayCapacity"
@@ -133,7 +134,7 @@ function TodayNavigator() {
       <TodayStack.Screen
         name="TodayContext"
         component={TodayContextScreen}
-        options={{ title: "Context" }}
+        options={{ title: "Calendar & Context" }}
       />
     </TodayStack.Navigator>
   );
@@ -172,12 +173,12 @@ function GoalsNavigator() {
       <GoalsStack.Screen
         name="GoalProgress"
         component={GoalProgressScreen}
-        options={{ title: "Progress" }}
+        options={{ title: "Goal Progress" }}
       />
       <GoalsStack.Screen
         name="GoalHistory"
         component={GoalHistoryScreen}
-        options={{ title: "History" }}
+        options={{ title: "Goal History" }}
       />
       <GoalsStack.Screen
         name="GoalEdit"
@@ -201,7 +202,7 @@ function PlanNavigator() {
       <PlanStack.Screen
         name="PlanReview"
         component={PlanReviewScreen}
-        options={{ title: "Review Changes" }}
+        options={{ title: "Goal Review" }}
       />
       <PlanStack.Screen
         name="PlanDetail"
@@ -240,17 +241,17 @@ function InsightsNavigator() {
       <InsightsStack.Screen
         name="InsightActivity"
         component={InsightActivityScreen}
-        options={{ title: "Activity Timeline" }}
+        options={{ title: "Recent Activity" }}
       />
       <InsightsStack.Screen
         name="InsightPlanChanges"
         component={InsightPlanChangesScreen}
-        options={{ title: "Plan Changes" }}
+        options={{ title: "Plan Movement" }}
       />
       <InsightsStack.Screen
         name="InsightCapacity"
         component={InsightCapacityScreen}
-        options={{ title: "Capacity & Balance" }}
+        options={{ title: "Capacity" }}
       />
     </InsightsStack.Navigator>
   );
