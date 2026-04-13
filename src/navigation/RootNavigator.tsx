@@ -65,12 +65,15 @@ const PlanStack = createNativeStackNavigator<PlanStackParamList>();
 const InsightsStack = createNativeStackNavigator<InsightsStackParamList>();
 const ProfileStack = createNativeStackNavigator<ProfileStackParamList>();
 
-const iconMap: Record<keyof RootTabParamList, keyof typeof Ionicons.glyphMap> = {
-  Today: "today-outline",
-  Goals: "flag-outline",
-  Plan: "layers-outline",
-  Insights: "analytics-outline",
-  Profile: "person-circle-outline",
+const iconMap: Record<
+  keyof RootTabParamList,
+  { inactive: keyof typeof Ionicons.glyphMap; active: keyof typeof Ionicons.glyphMap }
+> = {
+  Today: { inactive: "today-outline", active: "today" },
+  Goals: { inactive: "flag-outline", active: "flag" },
+  Plan: { inactive: "layers-outline", active: "layers" },
+  Insights: { inactive: "analytics-outline", active: "analytics" },
+  Profile: { inactive: "person-circle-outline", active: "person-circle" },
 };
 
 function useStackOptions() {
@@ -326,28 +329,34 @@ export function RootNavigator() {
         tabBarHideOnKeyboard: true,
         tabBarStyle: {
           backgroundColor: theme.colors.tabBar.background,
-          borderTopColor: theme.colors.tabBar.border,
-          borderTopWidth: 1,
-          height: 88,
+          borderTopColor: "transparent",
+          borderTopWidth: 0,
+          height: 84,
           paddingTop: 10,
-          paddingBottom: 18,
+          paddingBottom: 14,
+          paddingHorizontal: 10,
+          shadowColor: theme.colors.shadow.color,
+          shadowOpacity: theme.mode === "dark" ? 0.28 : 0.08,
+          shadowRadius: theme.mode === "dark" ? 18 : 14,
+          shadowOffset: { width: 0, height: -6 },
+          elevation: 18,
         },
         tabBarItemStyle: {
-          marginHorizontal: 8,
-          marginVertical: 8,
-          borderRadius: 22,
+          marginHorizontal: 6,
+          marginVertical: 6,
+          borderRadius: 20,
         },
         tabBarLabelStyle: {
-          fontSize: 11,
+          fontSize: 10.5,
           fontWeight: "700",
-          letterSpacing: -0.05,
-          marginTop: 2,
+          letterSpacing: 0.1,
+          marginTop: 1,
         },
         tabBarIcon: ({ color, size, focused }) => (
           <Ionicons
             color={color}
-            name={focused ? iconMap[route.name] : iconMap[route.name]}
-            size={focused ? size + 1 : size}
+            name={focused ? iconMap[route.name].active : iconMap[route.name].inactive}
+            size={focused ? size + 2 : size}
           />
         ),
         sceneStyle: {

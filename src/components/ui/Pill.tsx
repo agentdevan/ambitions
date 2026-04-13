@@ -33,8 +33,9 @@ export function Pill({ label, tone = "neutral" }: PillProps) {
 
   return (
     <View
-      className="self-start rounded-full px-2.5 py-1"
+      className="self-start px-3 py-1.5"
       style={{
+        borderRadius: theme.radius.pill,
         backgroundColor: toneMap[tone].backgroundColor,
         borderWidth: 1,
         borderColor: toneMap[tone].borderColor,

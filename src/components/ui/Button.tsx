@@ -26,22 +26,21 @@ export function Button({
   const tonePalette = {
     primary: {
       idleBackground: theme.colors.accent.primary,
-      pressedBackground: theme.colors.accent.muted,
-      disabledBackground:
-        theme.mode === "dark" ? theme.colors.accent.muted : theme.colors.accent.primary,
+      pressedBackground: theme.colors.accent.secondary,
+      disabledBackground: theme.mode === "dark" ? theme.colors.border.strong : theme.colors.border.accent,
       idleBorder: theme.colors.accent.primary,
-      pressedBorder: theme.colors.accent.muted,
-      disabledBorder: theme.colors.accent.muted,
+      pressedBorder: theme.colors.accent.secondary,
+      disabledBorder: theme.colors.border.accent,
       textTone: "inverse" as const,
       disabledTextTone: "inverse" as const,
       shadowColor: theme.colors.accent.primary,
       elevation: 4,
     },
     secondary: {
-      idleBackground: theme.colors.background.elevated,
+      idleBackground: theme.colors.background.elevatedSecondary,
       pressedBackground: theme.colors.background.elevatedSecondary,
-      disabledBackground: theme.colors.background.elevatedSecondary,
-      idleBorder: theme.colors.border.strong,
+      disabledBackground: theme.colors.background.sunken,
+      idleBorder: theme.colors.border.subtle,
       pressedBorder: theme.colors.border.accent,
       disabledBorder: theme.colors.border.subtle,
       textTone: "primary" as const,
@@ -50,8 +49,8 @@ export function Button({
       elevation: 2,
     },
     tertiary: {
-      idleBackground: theme.colors.background.canvas,
-      pressedBackground: theme.colors.background.elevatedSecondary,
+      idleBackground: theme.colors.background.canvasAlt,
+      pressedBackground: theme.colors.background.elevated,
       disabledBackground: theme.colors.background.sunken,
       idleBorder: theme.colors.border.subtle,
       pressedBorder: theme.colors.border.strong,
@@ -76,15 +75,15 @@ export function Button({
   }[resolvedTone];
   const sizing = {
     default: {
-      minHeight: resolvedTone === "inline" ? 28 : 52,
-      paddingHorizontal: resolvedTone === "inline" ? 0 : 18,
-      paddingVertical: resolvedTone === "inline" ? 0 : 14,
-      textVariant: "caption" as const,
+      minHeight: resolvedTone === "inline" ? 28 : 56,
+      paddingHorizontal: resolvedTone === "inline" ? 0 : 20,
+      paddingVertical: resolvedTone === "inline" ? 0 : 15,
+      textVariant: resolvedTone === "primary" ? ("body" as const) : ("caption" as const),
     },
     compact: {
-      minHeight: resolvedTone === "inline" ? 24 : 40,
-      paddingHorizontal: resolvedTone === "inline" ? 0 : 14,
-      paddingVertical: resolvedTone === "inline" ? 0 : 10,
+      minHeight: resolvedTone === "inline" ? 24 : 44,
+      paddingHorizontal: resolvedTone === "inline" ? 0 : 16,
+      paddingVertical: resolvedTone === "inline" ? 0 : 11,
       textVariant: "caption" as const,
     },
   }[size];
@@ -94,9 +93,10 @@ export function Button({
     <Pressable
       {...props}
       disabled={isDisabled}
-      className="items-center justify-center rounded-[18px]"
+      className="items-center justify-center"
       style={({ pressed }) => [
         {
+          borderRadius: resolvedTone === "inline" ? 0 : theme.radius.control,
           minHeight: sizing.minHeight,
           paddingHorizontal: sizing.paddingHorizontal,
           paddingVertical: sizing.paddingVertical,
@@ -119,21 +119,21 @@ export function Button({
               ? isDisabled
                 ? 0
                 : pressed
-                ? 0.2
+                ? 0.22
                 : theme.mode === "dark"
-                  ? 0.34
-                  : 0.18
+                  ? 0.24
+                  : 0.12
               : resolvedTone === "secondary" || resolvedTone === "tertiary"
                 ? isDisabled
                   ? 0
                   : pressed
                   ? 0.03
                   : theme.mode === "dark"
-                    ? 0.08
-                    : 0.05
+                    ? 0.06
+                    : 0.04
                 : 0,
-          shadowRadius: resolvedTone === "primary" ? 18 : 8,
-          shadowOffset: { width: 0, height: resolvedTone === "primary" ? 10 : 4 },
+          shadowRadius: resolvedTone === "primary" ? 20 : 8,
+          shadowOffset: { width: 0, height: resolvedTone === "primary" ? 12 : 4 },
           elevation: isDisabled ? 0 : tonePalette.elevation,
         },
         style,
@@ -159,8 +159,8 @@ export function Button({
           variant={sizing.textVariant}
           numberOfLines={1}
           style={{
-            fontWeight: resolvedTone === "inline" ? "700" : "700",
-            letterSpacing: resolvedTone === "inline" ? -0.1 : -0.15,
+            fontWeight: "700",
+            letterSpacing: resolvedTone === "primary" ? -0.22 : resolvedTone === "inline" ? -0.05 : -0.1,
           }}
         >
           {children}

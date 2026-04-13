@@ -1,5 +1,4 @@
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
-import { LinearGradient } from "expo-linear-gradient";
 import { Ionicons } from "@expo/vector-icons";
 import type { ReactNode } from "react";
 import { useEffect, useMemo, useRef, useState } from "react";
@@ -196,17 +195,6 @@ function ExecutionHeroCard({
   return (
     <Animated.View style={{ opacity, transform: [{ translateY }] }}>
       <Surface tone="hero" className="gap-4">
-        <LinearGradient
-          colors={
-            theme.mode === "dark"
-              ? ["rgba(255,255,255,0.05)", "rgba(255,255,255,0)", "rgba(0,0,0,0.08)"]
-              : ["rgba(255,255,255,0.68)", "rgba(255,248,235,0.28)", "rgba(255,255,255,0)"]
-          }
-          end={{ x: 1, y: 1 }}
-          start={{ x: 0, y: 0 }}
-          style={{ position: "absolute", top: 0, right: 0, bottom: 0, left: 0 }}
-        />
-
         <View className="gap-3">
           <View className="flex-row flex-wrap items-center justify-between gap-2">
             <Pill

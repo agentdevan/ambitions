@@ -23,8 +23,9 @@ export function SegmentedControl<T extends string>({
 
   return (
     <View
-      className="flex-row rounded-[20px] p-1"
+      className="flex-row p-1"
       style={{
+        borderRadius: theme.radius.control + 2,
         backgroundColor: theme.colors.background.sunken,
         borderWidth: 1,
         borderColor: theme.colors.border.subtle,
@@ -41,11 +42,11 @@ export function SegmentedControl<T extends string>({
             style={({ pressed }) => ({
               flex: 1,
               flexBasis: 0,
-              minHeight: 42,
+              minHeight: 44,
               alignItems: "center",
               justifyContent: "center",
-              borderRadius: 14,
-              paddingHorizontal: 12,
+              borderRadius: theme.radius.compactControl,
+              paddingHorizontal: 14,
               backgroundColor: selected
                 ? theme.colors.background.accentWashStrong
                 : pressed

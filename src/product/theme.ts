@@ -1,3 +1,6 @@
+import { radius } from "../design/tokens/radius";
+import { spacing } from "../design/tokens/spacing";
+import { typeScale } from "../design/tokens/type";
 import { AccentThemeKey, AppearanceMode } from "./types";
 
 export interface AccentThemeOption {
@@ -12,6 +15,15 @@ export interface ResolvedTheme {
   appearanceMode: AppearanceMode;
   accentTheme: AccentThemeKey;
   accentLabel: string;
+  spacing: typeof spacing;
+  radius: typeof radius & {
+    card: number;
+    row: number;
+    control: number;
+    compactControl: number;
+    field: number;
+  };
+  typeScale: typeof typeScale;
   colors: {
     background: {
       canvas: string;
@@ -205,6 +217,16 @@ export function resolveTheme(options: {
     appearanceMode,
     accentTheme,
     accentLabel: accent.label,
+    spacing,
+    radius: {
+      ...radius,
+      card: 28,
+      row: 24,
+      control: 20,
+      compactControl: 16,
+      field: 24,
+    },
+    typeScale,
     colors: {
       background: {
         canvas: base.canvas,

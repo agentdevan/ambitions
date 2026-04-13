@@ -28,7 +28,7 @@ export function DrillInRow({
 
   return (
     <Pressable
-      className="rounded-[22px]"
+      className="rounded-[24px]"
       onPress={onPress}
       style={({ pressed }) => [
         {
@@ -39,25 +39,27 @@ export function DrillInRow({
     >
       {({ pressed }) => (
         <View
-          className="flex-row items-center gap-3 rounded-[22px] px-4 py-3.5"
+          className="flex-row items-center gap-3 px-4 py-4"
           style={{
+            borderRadius: theme.radius.row,
             backgroundColor: pressed
               ? theme.colors.background.accentWash
-              : theme.colors.background.elevated,
+              : theme.colors.background.elevatedSecondary,
             borderWidth: 1,
             borderColor: pressed
               ? theme.colors.border.accent
-              : theme.colors.border.strong,
+              : theme.colors.border.subtle,
             shadowColor: theme.colors.shadow.color,
-            shadowOpacity: theme.mode === "dark" ? 0.14 : 0.04,
-            shadowRadius: 10,
-            shadowOffset: { width: 0, height: 5 },
+            shadowOpacity: theme.mode === "dark" ? 0.1 : 0.04,
+            shadowRadius: 12,
+            shadowOffset: { width: 0, height: 4 },
           }}
         >
           {leading ? (
             <View
-              className="items-center justify-center rounded-[16px] px-3 py-3"
+              className="items-center justify-center px-3 py-3"
               style={{
+                borderRadius: theme.radius.compactControl,
                 backgroundColor: pressed
                   ? theme.colors.background.accentWashStrong
                   : theme.colors.background.elevatedSecondary,
@@ -85,7 +87,7 @@ export function DrillInRow({
                 tone={pressed ? "accent" : "secondary"}
                 variant="micro"
                 numberOfLines={1}
-                style={{ textTransform: "uppercase" }}
+                style={{ textTransform: "uppercase", letterSpacing: 0.45 }}
               >
                 {actionLabel}
               </AppText>

@@ -29,6 +29,7 @@ import { Pill } from "../../components/ui/Pill";
 import { ProgressBar } from "../../components/ui/ProgressBar";
 import { Screen } from "../../components/ui/Screen";
 import { SegmentedControl } from "../../components/ui/SegmentedControl";
+import { SelectionCard } from "../../components/ui/SelectionCard";
 import { Surface } from "../../components/ui/Surface";
 import { AppText } from "../../components/ui/Text";
 import { TextField } from "../../components/ui/TextField";
@@ -217,84 +218,94 @@ export function ProfileAppearanceScreen() {
 
   return (
     <Screen>
-      <View className="gap-4">
-        <Surface tone="hero" className="gap-3">
+      <View className="gap-5">
+        <Surface tone="hero" className="gap-4">
           <AppText variant="title">Appearance</AppText>
           <AppText tone="secondary">
-            Pick mode and accent here.
+            Dark mode leads here, with light mode kept equally deliberate. Changes apply through the shared product shell and primitives.
           </AppText>
-          <MetaLine items={[`${theme.mode} mode`, theme.accentLabel]} />
+          <View className="flex-row flex-wrap gap-2">
+            <Pill label={`${theme.mode} mode`} tone="accent" />
+            <Pill label={theme.accentLabel} tone="quiet" />
+          </View>
         </Surface>
         <Surface className="gap-3">
           <AppText variant="section">Mode</AppText>
-          <View className="flex-row flex-wrap gap-2">
-            {appearanceModeOptions.map((option) => (
-              <OptionChip
-                key={option.id}
-                selected={resolvedPreferences.appearanceMode === option.id}
-                onPress={() =>
-                  void saveAppearance(
-                    { ...resolvedPreferences, appearanceMode: option.id },
-                    `mode:${option.id}`,
-                  )
-                }
-              >
-                {option.label}
-              </OptionChip>
-            ))}
-          </View>
-        </Surface>
-        <View className="gap-3">
-          <AppText tone="tertiary" variant="micro" style={{ textTransform: "uppercase" }}>
-            Accent
+          <SegmentedControl
+            value={resolvedPreferences.appearanceMode}
+            options={appearanceModeOptions.map((option) => ({
+              value: option.id,
+              label: option.label,
+            }))}
+            onChange={(value) =>
+              void saveAppearance(
+                { ...resolvedPreferences, appearanceMode: value },
+                `mode:${value}`,
+              )
+            }
+          />
+          <AppText tone="secondary" variant="caption">
+            {
+              appearanceModeOptions.find(
+                (option) => option.id === resolvedPreferences.appearanceMode,
+              )?.description
+            }
           </AppText>
+        </Surface>
+        <View className="gap-3.5">
+          <View className="gap-1">
+            <AppText tone="tertiary" variant="micro" style={{ textTransform: "uppercase" }}>
+              Accent
+            </AppText>
+            <AppText tone="secondary" variant="caption">
+              One curated accent carries buttons, pills, focus states, and shell emphasis.
+            </AppText>
+          </View>
           {accentThemeOptions.map((accent) => (
-            <Pressable
+            <SelectionCard
               key={accent.id}
-              className="rounded-[28px]"
+              selected={resolvedPreferences.accentTheme === accent.id}
               onPress={() =>
                 void saveAppearance(
                   { ...resolvedPreferences, accentTheme: accent.id },
                   `accent:${accent.id}`,
                 )
               }
-              style={({ pressed }) => ({ opacity: pressed ? 0.92 : 1 })}
+              trailing={
+                resolvedPreferences.accentTheme === accent.id ? (
+                  <Pill label="Selected" tone="accent" />
+                ) : (
+                  <Pill label="Use accent" tone="quiet" />
+                )
+              }
             >
-              <Surface
-                className="gap-3"
-                style={{
-                  borderColor:
-                    resolvedPreferences.accentTheme === accent.id
-                      ? theme.colors.border.accent
-                      : theme.colors.border.subtle,
-                }}
-              >
-                <View className="flex-row items-center justify-between gap-3">
-                  <View className="flex-1 gap-1">
-                    <AppText variant="section">{accent.label}</AppText>
-                    <AppText tone="secondary" variant="caption">
-                      {accent.description}
-                    </AppText>
-                  </View>
-                  <View className="flex-row gap-2">
-                    {accent.preview.map((color) => (
-                      <View
-                        key={color}
-                        style={{
-                          width: 22,
-                          height: 22,
-                          borderRadius: 999,
-                          backgroundColor: color,
-                          borderWidth: 1,
-                          borderColor: "rgba(0,0,0,0.06)",
-                        }}
-                      />
-                    ))}
-                  </View>
+              <View className="gap-3">
+                <View className="gap-1">
+                  <AppText variant="section">{accent.label}</AppText>
+                  <AppText tone="secondary" variant="caption">
+                    {accent.description}
+                  </AppText>
                 </View>
-                {resolvedPreferences.accentTheme === accent.id ? <MetaLine items={["Selected"]} /> : null}
-              </Surface>
-            </Pressable>
+                <View className="flex-row gap-2">
+                  {accent.preview.map((color) => (
+                    <View
+                      key={color}
+                      style={{
+                        width: 26,
+                        height: 26,
+                        borderRadius: 999,
+                        backgroundColor: color,
+                        borderWidth: 1,
+                        borderColor:
+                          theme.mode === "dark"
+                            ? theme.colors.border.strong
+                            : theme.colors.border.subtle,
+                      }}
+                    />
+                  ))}
+                </View>
+              </View>
+            </SelectionCard>
           ))}
         </View>
         {runtimeMessage ? <AppText tone="tertiary" variant="caption">{runtimeMessage}</AppText> : null}

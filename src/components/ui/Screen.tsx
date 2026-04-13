@@ -17,22 +17,23 @@ export function Screen({ children, scrollable = true }: ScreenProps) {
       <ScrollView
         className="flex-1"
         contentContainerStyle={{
-          paddingTop: insets.top + 10,
+          paddingTop: insets.top + 14,
           paddingBottom: insets.bottom + 34,
+          paddingHorizontal: 20,
           backgroundColor: theme.colors.background.canvas,
         }}
         showsVerticalScrollIndicator={false}
       >
-        <View className="px-4 pb-4">{children}</View>
+        <View className="pb-6">{children}</View>
       </ScrollView>
     );
   }
 
   return (
     <View
-      className="flex-1 px-4"
+      className="flex-1 px-5"
       style={{
-        paddingTop: insets.top + 10,
+        paddingTop: insets.top + 14,
         paddingBottom: insets.bottom + 34,
         backgroundColor: theme.colors.background.canvas,
       }}

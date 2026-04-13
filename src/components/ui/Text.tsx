@@ -15,12 +15,12 @@ const variantMap: Record<
   Variant,
   { fontSize: number; lineHeight: number; fontWeight: "400" | "500" | "600" | "700"; letterSpacing?: number }
 > = {
-  hero: { fontSize: 31, lineHeight: 37, fontWeight: "600", letterSpacing: -0.95 },
-  title: { fontSize: 23, lineHeight: 29, fontWeight: "600", letterSpacing: -0.55 },
-  section: { fontSize: 17, lineHeight: 22, fontWeight: "600", letterSpacing: -0.3 },
-  body: { fontSize: 15, lineHeight: 21, fontWeight: "400", letterSpacing: -0.15 },
-  caption: { fontSize: 13, lineHeight: 18, fontWeight: "600", letterSpacing: -0.05 },
-  micro: { fontSize: 11, lineHeight: 14, fontWeight: "700", letterSpacing: 0.5 },
+  hero: { fontSize: 36, lineHeight: 40, fontWeight: "600", letterSpacing: -1.15 },
+  title: { fontSize: 27, lineHeight: 32, fontWeight: "600", letterSpacing: -0.72 },
+  section: { fontSize: 18, lineHeight: 24, fontWeight: "600", letterSpacing: -0.35 },
+  body: { fontSize: 15, lineHeight: 22, fontWeight: "400", letterSpacing: -0.12 },
+  caption: { fontSize: 13, lineHeight: 18, fontWeight: "600", letterSpacing: 0 },
+  micro: { fontSize: 11, lineHeight: 14, fontWeight: "700", letterSpacing: 0.6 },
 };
 
 export function AppText({
@@ -46,6 +46,7 @@ export function AppText({
         {
           color: toneMap[tone],
           letterSpacing: variantMap[variant].letterSpacing ?? -0.2,
+          fontFamily: "System",
         },
         variantMap[variant],
         style,

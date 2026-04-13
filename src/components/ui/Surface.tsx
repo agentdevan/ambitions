@@ -14,21 +14,21 @@ export function Surface({ children, className = "", tone = "default", style, ...
       backgroundColor: theme.colors.background.elevated,
       borderColor: theme.colors.border.subtle,
       accentColor: theme.colors.background.cardTint,
-      shadowOpacity: theme.mode === "dark" ? 0.2 : 0.06,
-      shadowRadius: theme.mode === "dark" ? 24 : 18,
-      shadowOffset: { width: 0, height: theme.mode === "dark" ? 14 : 10 },
+      shadowOpacity: theme.mode === "dark" ? 0.18 : 0.05,
+      shadowRadius: theme.mode === "dark" ? 22 : 16,
+      shadowOffset: { width: 0, height: theme.mode === "dark" ? 12 : 8 },
       elevation: 2,
-      washOpacity: theme.mode === "dark" ? 0.08 : 0.5,
+      washOpacity: theme.mode === "dark" ? 0.06 : 0.42,
     },
     accent: {
       backgroundColor: theme.colors.background.accentWash,
       borderColor: theme.colors.border.accent,
       accentColor: theme.colors.accent.glow,
-      shadowOpacity: theme.mode === "dark" ? 0.26 : 0.1,
-      shadowRadius: 22,
-      shadowOffset: { width: 0, height: 12 },
+      shadowOpacity: theme.mode === "dark" ? 0.2 : 0.08,
+      shadowRadius: 18,
+      shadowOffset: { width: 0, height: 10 },
       elevation: 3,
-      washOpacity: theme.mode === "dark" ? 0.05 : 0.35,
+      washOpacity: theme.mode === "dark" ? 0.04 : 0.26,
     },
     sunken: {
       backgroundColor: theme.colors.background.sunken,
@@ -44,20 +44,21 @@ export function Surface({ children, className = "", tone = "default", style, ...
       backgroundColor: theme.colors.background.hero,
       borderColor: theme.colors.border.subtle,
       accentColor: theme.colors.accent.glow,
-      shadowOpacity: theme.mode === "dark" ? 0.3 : 0.08,
-      shadowRadius: 28,
-      shadowOffset: { width: 0, height: 16 },
+      shadowOpacity: theme.mode === "dark" ? 0.24 : 0.08,
+      shadowRadius: 26,
+      shadowOffset: { width: 0, height: 14 },
       elevation: 4,
-      washOpacity: theme.mode === "dark" ? 0.05 : 0.42,
+      washOpacity: theme.mode === "dark" ? 0.04 : 0.32,
     },
   };
 
   return (
     <View
       {...props}
-      className={`overflow-hidden rounded-[26px] px-4 py-4 ${className}`.trim()}
+      className={`overflow-hidden px-4 py-4 ${className}`.trim()}
       style={[
         {
+          borderRadius: theme.radius.card,
           backgroundColor: toneMap[tone].backgroundColor,
           borderColor: toneMap[tone].borderColor,
           borderWidth: 1,
@@ -78,8 +79,8 @@ export function Surface({ children, className = "", tone = "default", style, ...
           left: 1,
           right: 1,
           height: tone === "sunken" ? "34%" : "40%",
-          borderTopLeftRadius: 27,
-          borderTopRightRadius: 27,
+          borderTopLeftRadius: theme.radius.card,
+          borderTopRightRadius: theme.radius.card,
           backgroundColor: toneMap[tone].accentColor,
           opacity: toneMap[tone].washOpacity,
         }}
@@ -91,9 +92,9 @@ export function Surface({ children, className = "", tone = "default", style, ...
           top: 0,
           left: 0,
           right: 0,
-          height: tone === "hero" ? 5 : tone === "accent" ? 4 : tone === "default" ? 2 : 1,
+          height: tone === "hero" ? 4 : tone === "accent" ? 3 : tone === "default" ? 2 : 1,
           backgroundColor: toneMap[tone].accentColor,
-          opacity: tone === "hero" ? 0.85 : tone === "accent" ? 0.58 : tone === "default" ? 0.24 : 0.18,
+          opacity: tone === "hero" ? 0.72 : tone === "accent" ? 0.5 : tone === "default" ? 0.22 : 0.16,
         }}
       />
       {children}

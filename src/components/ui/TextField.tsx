@@ -34,7 +34,7 @@ function TextFieldComponent(
       ? {
           borderColor: theme.colors.semantic.success,
           backgroundColor:
-            theme.mode === "dark" ? "rgba(142,168,131,0.12)" : "rgba(111,133,102,0.08)",
+            theme.mode === "dark" ? "rgba(142,168,131,0.10)" : "rgba(111,133,102,0.07)",
           labelTone: "accent" as const,
           helperTone: "accent" as const,
           iconName: "checkmark-circle" as IoniconName,
@@ -44,7 +44,7 @@ function TextFieldComponent(
         ? {
             borderColor: theme.colors.semantic.warning,
             backgroundColor:
-              theme.mode === "dark" ? "rgba(193,154,116,0.12)" : "rgba(165,128,89,0.08)",
+              theme.mode === "dark" ? "rgba(193,154,116,0.10)" : "rgba(165,128,89,0.07)",
           labelTone: "tertiary" as const,
           helperTone: "tertiary" as const,
           iconName: "alert-circle" as IoniconName,
@@ -74,7 +74,7 @@ function TextFieldComponent(
         style={[
           {
             minHeight: multiline ? 108 : 54,
-            borderRadius: 22,
+            borderRadius: theme.radius.field,
             borderWidth: 1,
             borderColor: palette.borderColor,
             backgroundColor: palette.backgroundColor,

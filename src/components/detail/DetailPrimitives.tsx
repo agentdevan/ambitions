@@ -1,6 +1,7 @@
 import { ReactNode } from "react";
 import { View } from "react-native";
 
+import { useResolvedTheme } from "../../design/theme/useResolvedTheme";
 import { Surface } from "../ui/Surface";
 import { AppText } from "../ui/Text";
 
@@ -11,7 +12,7 @@ interface DetailHeroProps {
   badges?: ReactNode;
   meta?: ReactNode;
   action?: ReactNode;
-  tone?: "default" | "accent";
+  tone?: "default" | "accent" | "hero" | "sunken";
 }
 
 export function DetailHero({
@@ -21,7 +22,7 @@ export function DetailHero({
   badges = null,
   meta = null,
   action = null,
-  tone = "accent",
+  tone = "hero",
 }: DetailHeroProps) {
   return (
     <Surface tone={tone} className="gap-3.5">
@@ -56,8 +57,18 @@ export function DetailSection({
   action = null,
   children,
 }: DetailSectionProps) {
+  const theme = useResolvedTheme();
+
   return (
     <View className="gap-3">
+      <View
+        style={{
+          width: 22,
+          height: 2,
+          borderRadius: 999,
+          backgroundColor: theme.colors.border.accent,
+        }}
+      />
       <View className="flex-row items-start justify-between gap-3">
         <View className="flex-1 gap-0.5">
           <AppText variant="section">{title}</AppText>

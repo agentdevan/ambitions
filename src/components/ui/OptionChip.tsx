@@ -26,16 +26,16 @@ export function OptionChip({
       {...props}
       style={({ pressed }) => [
         {
-          minHeight: compact ? 36 : 42,
-          borderRadius: compact ? 15 : 17,
+          minHeight: compact ? 38 : 44,
+          borderRadius: compact ? theme.radius.compactControl : theme.radius.control,
           borderWidth: 1,
-          paddingHorizontal: compact ? 12 : 14,
-          paddingVertical: compact ? 7 : 9,
+          paddingHorizontal: compact ? 12 : 15,
+          paddingVertical: compact ? 8 : 10,
           alignItems: "center",
           justifyContent: "center",
           backgroundColor: selected
             ? theme.colors.background.accentWashStrong
-            : theme.colors.background.elevated,
+            : theme.colors.background.elevatedSecondary,
           borderColor: selected
             ? theme.colors.border.accent
             : pressed
@@ -44,7 +44,7 @@ export function OptionChip({
           opacity: props.disabled ? 0.6 : 1,
           transform: [{ scale: pressed && !props.disabled ? 0.985 : 1 }],
           shadowColor: theme.colors.shadow.color,
-          shadowOpacity: selected ? (theme.mode === "dark" ? 0.12 : 0.07) : 0.02,
+          shadowOpacity: selected ? (theme.mode === "dark" ? 0.1 : 0.05) : 0.02,
           shadowRadius: selected ? 10 : 4,
           shadowOffset: { width: 0, height: selected ? 5 : 2 },
           elevation: selected ? 2 : 1,
