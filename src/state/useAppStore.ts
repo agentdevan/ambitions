@@ -151,11 +151,14 @@ interface PlanningSlice {
   currentMonthReview: MonthlyReviewState | null;
   nextMonthReview: MonthlyReviewState | null;
   monthlyReviewHistory: MonthlyReviewState[];
+  dailyPlans: DailyPlan[];
   schedule: SchedulingOutput | null;
   today: TodayViewModel | null;
   activityEvents: ActivityEvent[];
+  allTimeBlocks: TimeBlock[];
   timeBlocksForSelectedDate: TimeBlock[];
   tasksForSelectedDate: Task[];
+  weekScheduleConstraints: ScheduleConstraint[];
   refreshPlanning: (date?: string) => Promise<void>;
   reviewWeek: (input: { note?: string | null }) => Promise<void>;
   reviewWeeklyCarryover: (input: {
@@ -493,9 +496,11 @@ export const useAppStore = create<AppState>((set, get) => ({
   currentMonthReview: null,
   nextMonthReview: null,
   monthlyReviewHistory: [],
+  dailyPlans: [],
   schedule: null,
   today: null,
   activityEvents: [],
+  allTimeBlocks: [],
   tasksForSelectedDate: [],
   timeBlocksForSelectedDate: [],
   userPreferences: null,
@@ -505,6 +510,7 @@ export const useAppStore = create<AppState>((set, get) => ({
   replanSuggestions: [],
   calendarConnectionState: null,
   scheduleConstraints: [],
+  weekScheduleConstraints: [],
   notificationPermissionStatus: "undetermined",
   onboardingBusy: false,
   account: null,

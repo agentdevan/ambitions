@@ -46,11 +46,14 @@ export interface FoundationSnapshot {
   currentMonthReview: MonthlyReviewState | null;
   nextMonthReview: MonthlyReviewState | null;
   monthlyReviewHistory: MonthlyReviewState[];
+  dailyPlans: DailyPlan[];
   blocks: TimeBlock[];
+  allTimeBlocks: TimeBlock[];
   tasks: Task[];
   allTasks: Task[];
   calendarConnectionState: CalendarConnectionState | null;
   scheduleConstraints: ScheduleConstraint[];
+  weekScheduleConstraints: ScheduleConstraint[];
   replanSuggestions: ReplanSuggestion[];
   activityEvents: ActivityEvent[];
   schedule: SchedulingOutput | null;
@@ -115,6 +118,8 @@ export async function loadFoundationSnapshot(date: string): Promise<FoundationSn
     dailyRitualHistory,
     weeklyReviewHistory,
     monthlyReviewHistory,
+    dailyPlans,
+    allTimeBlocks,
     tasks,
     allTasks,
     calendarConnectionState,
@@ -133,6 +138,8 @@ export async function loadFoundationSnapshot(date: string): Promise<FoundationSn
     appServices.repositories.planning.listDailyRitualStates(),
     appServices.repositories.planning.listWeeklyReviewStates(),
     appServices.repositories.planning.listMonthlyReviewStates(),
+    appServices.repositories.planning.listDailyPlans(),
+    appServices.repositories.planning.listTimeBlocks(),
     appServices.repositories.tasks.listTasksForDate(date),
     appServices.repositories.tasks.listTasks(),
     appServices.repositories.integration.getCalendarConnectionState(),
@@ -149,6 +156,11 @@ export async function loadFoundationSnapshot(date: string): Promise<FoundationSn
   const nextWeekStart = addDays(currentWeekStart, 7);
   const currentMonthStart = startOfMonth(date);
   const nextMonthStart = addMonths(currentMonthStart, 1);
+  const weekConstraintDays = await Promise.all(
+    Array.from({ length: 7 }, (_, index) => addDays(currentWeekStart, index)).map((currentDate) =>
+      appServices.repositories.integration.listScheduleConstraintsForDate(currentDate),
+    ),
+  );
   const currentWeekReview =
     weeklyReviewHistory.find((state) => state.weekStartDate === currentWeekStart) ?? null;
   const nextWeekReview =
@@ -179,6 +191,9 @@ export async function loadFoundationSnapshot(date: string): Promise<FoundationSn
     : null;
   const schedule = scheduleResult?.payload ?? null;
   const blocks = schedule?.timeBlocks ?? persistedBlocks;
+  const weekScheduleConstraints = [...weekConstraintDays.flat()].filter(
+    (constraint, index, list) => list.findIndex((candidate) => candidate.id === constraint.id) === index,
+  );
   const derivedReplanSuggestions =
     preferences && dailyPlan && tasks.length > 0
       ? (
@@ -222,11 +237,14 @@ export async function loadFoundationSnapshot(date: string): Promise<FoundationSn
     currentMonthReview,
     nextMonthReview,
     monthlyReviewHistory,
+    dailyPlans,
     blocks,
+    allTimeBlocks,
     tasks,
     allTasks,
     calendarConnectionState,
     scheduleConstraints: effectiveConstraints,
+    weekScheduleConstraints,
     replanSuggestions: mergedReplanSuggestions,
     activityEvents,
     schedule,

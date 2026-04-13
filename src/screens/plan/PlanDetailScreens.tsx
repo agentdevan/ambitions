@@ -9,7 +9,6 @@ import {
   DetailSummaryStrip,
   QuietMetaLine,
 } from "../../components/detail/DetailPrimitives";
-import { CompactTimelineRow } from "../../components/navigation/CompactTimelineRow";
 import { DrillInRow } from "../../components/navigation/DrillInRow";
 import { Button } from "../../components/ui/Button";
 import { EmptyStateCard } from "../../components/ui/EmptyStateCard";
@@ -22,6 +21,7 @@ import { GoalStatus } from "../../domain/models";
 import { PlanStackParamList } from "../../navigation/types";
 import { getGoalReviewDraft } from "../../services/goals/metadata";
 import { useAppStore } from "../../state/useAppStore";
+import { buildPlanWorkspaceViewModel, PlanDaySummary, PlanStructureItem } from "../../state/viewModels/plan";
 import { formatShortDate } from "../../utils/date";
 
 function shiftDate(date: string | null, offsetDays: number) {
@@ -32,14 +32,52 @@ function shiftDate(date: string | null, offsetDays: number) {
 export function PlanDetailScreen({
   navigation,
 }: NativeStackScreenProps<PlanStackParamList, "PlanDetail">) {
-  const dailyPlan = useAppStore((state) => state.dailyPlan);
-  const today = useAppStore((state) => state.today);
+  const planDate = useAppStore((state) => state.planDate);
+  const goals = useAppStore((state) => state.goals);
+  const preferences = useAppStore((state) => state.userPreferences);
+  const adaptationProfile = useAppStore((state) => state.adaptationProfile);
+  const dailyPlans = useAppStore((state) => state.dailyPlans);
+  const allTimeBlocks = useAppStore((state) => state.allTimeBlocks);
+  const allTasks = useAppStore((state) => state.allTasks);
+  const currentWeekReview = useAppStore((state) => state.currentWeekReview);
+  const currentMonthReview = useAppStore((state) => state.currentMonthReview);
   const calendarConnectionState = useAppStore((state) => state.calendarConnectionState);
+  const weekScheduleConstraints = useAppStore((state) => state.weekScheduleConstraints);
 
-  if (!dailyPlan) {
+  const workspace = useMemo(
+    () =>
+      buildPlanWorkspaceViewModel({
+        date: planDate,
+        goals,
+        preferences,
+        adaptationProfile,
+        dailyPlans,
+        timeBlocks: allTimeBlocks,
+        tasks: allTasks,
+        weekScheduleConstraints,
+        currentWeekReview,
+        currentMonthReview,
+        calendarConnectionState,
+      }),
+    [
+      adaptationProfile,
+      allTasks,
+      allTimeBlocks,
+      calendarConnectionState,
+      currentMonthReview,
+      currentWeekReview,
+      dailyPlans,
+      goals,
+      planDate,
+      preferences,
+      weekScheduleConstraints,
+    ],
+  );
+
+  if (!workspace) {
     return (
       <Screen>
-        <EmptyStateCard title="No active plan" body="The current plan is not available." />
+        <EmptyStateCard title="No active plan" body="The weekly structure is not available." />
       </Screen>
     );
   }
@@ -49,25 +87,30 @@ export function PlanDetailScreen({
       <View className="gap-6">
         <DetailHero
           eyebrow="Plan"
-          title={dailyPlan.focus}
-          description={
-            dailyPlan.planningNotes ?? "This is the current day shape that Ambitions is protecting."
+          title={workspace.heroTitle}
+          description={workspace.heroDetail}
+          badges={
+            <>
+              <Pill label={workspace.weekLabel} tone="accent" />
+              <Pill label={workspace.pressureLabel} tone={workspace.pressureTone} />
+              <Pill label={workspace.strategySummary.sourceLabel} tone="quiet" />
+            </>
           }
           meta={
             <DetailMetaGroup
               items={[
-                { label: "Date", value: formatShortDate(dailyPlan.date) },
+                { label: "Week", value: workspace.weekLabel },
                 {
-                  label: "Sessions",
-                  value: String(today?.blocks.length ?? 0),
+                  label: "Fixed",
+                  value: String(workspace.structureSummary.fixedCommitmentCount),
                 },
                 {
-                  label: "Committed",
-                  value: `${dailyPlan.totalCommittedMinutes} min`,
+                  label: "Placed",
+                  value: `${workspace.capacitySummary.scheduledWorkMinutes} min`,
                 },
                 {
-                  label: "Planned",
-                  value: `${dailyPlan.totalPlannedMinutes} min`,
+                  label: "Open",
+                  value: `${workspace.capacitySummary.openCapacityMinutes} min`,
                 },
               ]}
             />
@@ -75,35 +118,198 @@ export function PlanDetailScreen({
         />
 
         <DetailSection
-          title="Today’s shape"
-          description="Today's sessions."
+          title="Week line"
+          description="See where the week is anchored, protected, or already getting tight."
         >
           <View className="gap-3">
-            {(today?.blocks ?? []).map((block) => (
-              <CompactTimelineRow
-                key={block.id}
-                block={block}
-                onPress={() =>
-                  (navigation.getParent() as any)?.navigate("Today", {
-                    screen: "TodaySessionDetail",
-                    params: { blockId: block.id },
-                  })
-                }
-              />
+            {workspace.days.map((day) => (
+              <WeekShapeCard key={day.date} day={day} />
             ))}
+          </View>
+        </DetailSection>
+
+        <DetailSection
+          title="Fixed vs flexible"
+          description="This is the structural split between what the week owes and what the week is still negotiating."
+        >
+          <View className="gap-4">
+            <DetailSummaryStrip
+              items={[
+                {
+                  label: "Flexible work",
+                  value: String(workspace.structureSummary.flexibleWorkCount),
+                  detail: "Important work still shaping the week",
+                },
+                {
+                  label: "Optional work",
+                  value: String(workspace.structureSummary.optionalWorkCount),
+                  detail: "Should stay negotiable",
+                },
+                {
+                  label: "Carryover",
+                  value: String(workspace.structureSummary.carryoverCount),
+                  detail: "Entered from prior weeks",
+                },
+                {
+                  label: "Pressure",
+                  value: String(workspace.structureSummary.underPressureCount),
+                  detail: "Needs a cleaner decision",
+                },
+              ]}
+            />
+            <PlanStructureList
+              title="Fixed commitments"
+              empty="No fixed commitments are anchoring the week yet."
+              items={workspace.fixedCommitments}
+            />
+            <PlanStructureList
+              title="Flexible work"
+              empty="No meaningful work is waiting for placement right now."
+              items={workspace.flexibleWork}
+            />
+            <PlanStructureList
+              title="Optional or stretch"
+              empty="Stretch work is not taking room in the week."
+              items={workspace.optionalWork}
+            />
+          </View>
+        </DetailSection>
+
+        <DetailSection
+          title="Carryover and pressure"
+          description="Unfinished work should either be protected on purpose or sent back through review."
+        >
+          <View className="gap-4">
+            <AppText tone="secondary" variant="caption">
+              {workspace.carryoverSummary.detail}
+            </AppText>
+            <PlanStructureList
+              title="Carryover in play"
+              empty="No carryover is actively pressuring this week."
+              items={workspace.carryoverItems}
+            />
+            <PlanStructureList
+              title="Work under pressure"
+              empty="Nothing is currently flashing as likely to slip."
+              items={workspace.pressureItems}
+            />
+          </View>
+        </DetailSection>
+
+        <DetailSection
+          title="Protected focus"
+          description="Protected depth should be visible, not assumed."
+        >
+          <View className="gap-4">
+            <DetailSummaryStrip
+              items={[
+                {
+                  label: "Focus blocks",
+                  value: String(workspace.structureSummary.protectedFocusBlockCount),
+                  detail: `${workspace.structureSummary.protectedFocusMinutes} min protected`,
+                },
+                {
+                  label: "Largest window",
+                  value: workspace.capacitySummary.largestOpenWindowLabel ?? "No clear window",
+                  detail: workspace.capacitySummary.fragmentationLabel,
+                },
+              ]}
+            />
+            <PlanStructureList
+              title="Protected sessions"
+              empty="No meaningful focus blocks are protected yet."
+              items={workspace.protectedFocusItems}
+            />
           </View>
         </DetailSection>
 
         <Surface className="gap-3 mb-0">
           <AppText variant="section">Planning context</AppText>
+          <QuietMetaLine items={workspace.structuralReads} />
           <AppText tone="secondary">
+            {workspace.strategySummary.detail}{" "}
             {calendarConnectionState?.permissionState === "granted"
               ? "Calendar access is available for live context."
-              : "Calendar access is still off, so the planner is using saved defaults."}
+              : "Calendar access is still off, so fixed commitments may be understated."}
           </AppText>
+          <DrillInRow
+            title="Weekly shaping"
+            subtitle={workspace.strategySummary.sourceLabel}
+            detail={workspace.strategySummary.weeklyShape}
+            actionLabel="Open"
+            onPress={() =>
+              (navigation.getParent() as any)?.navigate("Insights", {
+                screen: "InsightsHome",
+              })
+            }
+          />
         </Surface>
       </View>
     </Screen>
+  );
+}
+
+function WeekShapeCard({ day }: { day: PlanDaySummary }) {
+  return (
+    <Surface tone="sunken" className="gap-2 mb-0">
+      <View className="flex-row items-start justify-between gap-3">
+        <View className="flex-1 gap-1">
+          <AppText variant="section">{day.label}</AppText>
+          <AppText tone="secondary" variant="caption">
+            {day.fixedCount > 0 ? `${day.fixedCount} fixed commitments` : "No fixed commitments"}
+          </AppText>
+        </View>
+        <View className="items-end gap-1">
+          <AppText variant="caption">{day.openMinutes} min open</AppText>
+          <AppText tone={day.isTight ? "accent" : "tertiary"} variant="micro">
+            {day.isTight ? "Tight" : `${day.meaningfulWindowCount} windows`}
+          </AppText>
+        </View>
+      </View>
+      <QuietMetaLine
+        items={[
+          day.scheduledMinutes > 0 ? `${day.scheduledMinutes} min placed` : "Nothing placed yet",
+          day.focusMinutes > 0 ? `${day.focusMinutes} min focus protected` : "No focus protected yet",
+        ]}
+      />
+    </Surface>
+  );
+}
+
+function PlanStructureList({
+  title,
+  empty,
+  items,
+}: {
+  title: string;
+  empty: string;
+  items: PlanStructureItem[];
+}) {
+  return (
+    <View className="gap-2.5">
+      <AppText tone="tertiary" variant="micro" style={{ textTransform: "uppercase" }}>
+        {title}
+      </AppText>
+      {items.length > 0 ? (
+        <View className="gap-2">
+          {items.map((item) => (
+            <View key={item.id} className="gap-1">
+              <AppText>{item.title}</AppText>
+              <AppText tone="secondary" variant="caption">
+                {item.detail}
+              </AppText>
+              <AppText tone="tertiary" variant="micro">
+                {item.supporting}
+              </AppText>
+            </View>
+          ))}
+        </View>
+      ) : (
+        <AppText tone="secondary" variant="caption">
+          {empty}
+        </AppText>
+      )}
+    </View>
   );
 }
 
