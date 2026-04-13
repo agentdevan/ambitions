@@ -13,7 +13,23 @@ import {
   SyncStateSnapshot,
 } from "../../domain/models";
 import { ProductPreferences } from "../../product/types";
-import { formatShortDateTime, formatTimeRangeLabel } from "../../utils/date";
+import { formatShortDateTime, formatTimeLabel, formatTimeRangeLabel } from "../../utils/date";
+
+const monthlyReviewCadenceOptions = [
+  { day: 1, shortLabel: "Month opens", longLabel: "the first day of the month" },
+  { day: 2, shortLabel: "After landing", longLabel: "the second day of the month" },
+  { day: 3, shortLabel: "Early reset", longLabel: "the third day of the month" },
+  { day: 5, shortLabel: "First work stretch", longLabel: "the fifth day of the month" },
+  { day: 7, shortLabel: "After the first week", longLabel: "the seventh day of the month" },
+] as const;
+
+function monthlyCadenceOption(day: number) {
+  return monthlyReviewCadenceOptions.find((option) => option.day === day) ?? null;
+}
+
+export function getMonthlyReviewCadenceOptions() {
+  return monthlyReviewCadenceOptions.map((option) => ({ ...option }));
+}
 
 export function formatReminderTypeLabel(reminderType: ReminderType) {
   switch (reminderType) {
@@ -33,6 +49,8 @@ export function formatReminderTypeLabel(reminderType: ReminderType) {
       return "Recovery prompt";
     case ReminderType.WeeklyReview:
       return "Weekly review";
+    case ReminderType.MonthlyReview:
+      return "Monthly review";
     default:
       return "Reminder";
   }
@@ -60,9 +78,38 @@ export function formatReminderBehavior(preference: NotificationPreference) {
       return "When drift is detected and a clean recovery path is available";
     case ReminderType.WeeklyReview:
       return `${preference.leadTimeMinutes} min before weekly review time`;
+    case ReminderType.MonthlyReview:
+      return `${preference.leadTimeMinutes} min before monthly review time`;
     default:
       return "Active";
   }
+}
+
+export function formatMonthlyReviewCadence(day: number) {
+  const option = monthlyCadenceOption(day);
+  return option?.longLabel ?? `day ${day} of the month`;
+}
+
+export function formatMonthlyReviewCadenceShort(day: number) {
+  const option = monthlyCadenceOption(day);
+  return option?.shortLabel ?? `Day ${day}`;
+}
+
+export function summarizeMonthlyReviewControl(params: {
+  day: number;
+  time: string;
+  autoPrompt: boolean;
+}) {
+  const cadence = formatMonthlyReviewCadenceShort(params.day);
+  const time = formatTimeLabel(params.time, { compact: true });
+
+  return {
+    cadenceLabel: cadence,
+    scheduleLabel: `${cadence} at ${time}`,
+    promptLabel: params.autoPrompt
+      ? "Next-month strategy prompts stay on"
+      : "Next-month strategy stays manual",
+  };
 }
 
 export function summarizeQuietHours(preferences: NotificationPreference[]) {
@@ -191,6 +238,19 @@ export function summarizePlanningControls(
       : productPreferences.defaultWeeklyCarryoverBehavior === "aggressive"
         ? "Carry more forward"
         : "Review unfinished work first";
+  const monthlyCadenceLabel = formatMonthlyReviewCadenceShort(productPreferences.monthlyReviewDay);
+  const monthlyPostureLabel =
+    productPreferences.defaultMonthlyPosture === "build_momentum"
+      ? "Build momentum"
+      : productPreferences.defaultMonthlyPosture === "push_output"
+        ? "Push output"
+        : "Stabilize";
+  const monthlyCarryoverLabel =
+    productPreferences.defaultMonthlyCarryoverStance === "prune_aggressively"
+      ? "Prune aggressively"
+      : productPreferences.defaultMonthlyCarryoverStance === "tolerate_more_carryover"
+        ? "Tolerate more carryover"
+        : "Review before carrying";
 
   return {
     adaptiveLabel,
@@ -198,6 +258,9 @@ export function summarizePlanningControls(
     taskLabel,
     unfinishedWorkLabel,
     weeklyCarryoverLabel,
+    monthlyCadenceLabel,
+    monthlyPostureLabel,
+    monthlyCarryoverLabel,
     learnedSummary:
       productPreferences.adaptivePlanningEnabled && adaptationProfile?.personalization.active
         ? adaptationProfile.personalization.summary.todayApproach

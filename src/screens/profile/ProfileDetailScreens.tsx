@@ -41,6 +41,10 @@ import { buildPlanningStyleSummary } from "../../services/personalization/select
 import {
   formatReminderBehavior,
   formatReminderTypeLabel,
+  formatMonthlyReviewCadence,
+  formatMonthlyReviewCadenceShort,
+  getMonthlyReviewCadenceOptions,
+  summarizeMonthlyReviewControl,
   summarizeCalendarControl,
   summarizePlanningControls,
   summarizeQuietHours,
@@ -622,6 +626,13 @@ export function ProfileNotificationsScreen() {
   const monthlyReviewPreference = notificationPreferences.find(
     (preference) => preference.reminderType === ReminderType.MonthlyReview,
   );
+  const monthlyReviewSummary = productPreferences
+    ? summarizeMonthlyReviewControl({
+        day: productPreferences.monthlyReviewDay,
+        time: productPreferences.monthlyReviewTime,
+        autoPrompt: productPreferences.autoPromptNextMonthShaping,
+      })
+    : null;
   const quietHoursSummary = summarizeQuietHours(notificationPreferences);
 
   async function runAction(key: string, action: () => Promise<void>, fallbackError: string) {
@@ -887,7 +898,7 @@ export function ProfileNotificationsScreen() {
                   </AppText>
                   <AppText tone="secondary" variant="caption">
                     {monthlyReviewPreference.enabled
-                      ? `Scheduled for day ${productPreferences.monthlyReviewDay} at ${formatTimeLabel(productPreferences.monthlyReviewTime, { compact: true })}.`
+                      ? `Scheduled for ${monthlyReviewSummary?.scheduleLabel ?? `day ${productPreferences.monthlyReviewDay}`}.`
                       : "Monthly review stays quiet until you enable this reminder again."}
                   </AppText>
                 </View>
@@ -938,7 +949,7 @@ export function ProfileNotificationsScreen() {
                 ]}
               />
               <AppText tone="secondary" variant="caption">
-                Review day and time are set in Planning. Delivery here stays on the real monthly review preference.
+                Review cadence is set in Planning. Delivery here stays on the real monthly review preference.
               </AppText>
             </Surface>
           </DetailSection>
@@ -1328,25 +1339,28 @@ export function ProfilePlanningPreferencesScreen() {
             </AppText>
             <View className="gap-2">
               <AppText tone="tertiary" variant="micro" style={{ textTransform: "uppercase" }}>
-                Review day
+                Review cadence
               </AppText>
               <View className="flex-row flex-wrap gap-2">
-                {[1, 2, 3, 4, 5, 7, 10].map((day) => (
+                {getMonthlyReviewCadenceOptions().map((option) => (
                   <OptionChip
-                    key={`monthly-day:${day}`}
-                    selected={productPreferences.monthlyReviewDay === day}
+                    key={`monthly-day:${option.day}`}
+                    selected={productPreferences.monthlyReviewDay === option.day}
                     onPress={() =>
                       void savePreference(
-                        `monthly-day:${day}`,
-                        { ...productPreferences, monthlyReviewDay: day },
-                        "Monthly review day could not be updated.",
+                        `monthly-day:${option.day}`,
+                        { ...productPreferences, monthlyReviewDay: option.day },
+                        "Monthly review cadence could not be updated.",
                       )
                     }
                   >
-                    Day {day}
+                    {option.shortLabel}
                   </OptionChip>
                 ))}
               </View>
+              <AppText tone="secondary" variant="caption">
+                Monthly review is currently set for {formatMonthlyReviewCadence(productPreferences.monthlyReviewDay)}.
+              </AppText>
             </View>
             <TextField
               label="Monthly review time"
@@ -1397,6 +1411,13 @@ export function ProfilePlanningPreferencesScreen() {
                   </OptionChip>
                 ))}
               </View>
+              <AppText tone="secondary" variant="caption">
+                {summarizeMonthlyReviewControl({
+                  day: productPreferences.monthlyReviewDay,
+                  time: productPreferences.monthlyReviewTime,
+                  autoPrompt: productPreferences.autoPromptNextMonthShaping,
+                }).promptLabel}
+              </AppText>
             </View>
             <View className="gap-2">
               <AppText tone="tertiary" variant="micro" style={{ textTransform: "uppercase" }}>

@@ -13,6 +13,7 @@ import { AppText } from "../../components/ui/Text";
 import { useResolvedTheme } from "../../design/theme/useResolvedTheme";
 import { buildActivityFeed, summarizeInsights } from "../../services/history/selectors";
 import {
+  formatMonthlyReviewCadenceShort,
   summarizeCalendarControl,
   summarizePlanningControls,
   summarizeQuietHours,
@@ -151,7 +152,7 @@ export function ProfileScreen({ navigation }: Props) {
           <DrillInRow
             title="Planning"
             subtitle={planningSummary.unfinishedWorkLabel}
-            detail={`${planningSummary.intensityLabel} · ${planningSummary.weeklyCarryoverLabel}`}
+            detail={`${planningSummary.intensityLabel} · ${planningSummary.monthlyPostureLabel}`}
             actionLabel="Open"
             leading={<Ionicons color={theme.colors.text.secondary} name="options-outline" size={18} />}
             onPress={() => navigation.navigate("ProfilePlanningPreferences")}
@@ -224,6 +225,7 @@ export function ProfileScreen({ navigation }: Props) {
             <Pill label={planningSummary.intensityLabel} tone="quiet" />
             <Pill label={planningSummary.unfinishedWorkLabel} tone="quiet" />
             <Pill label={planningSummary.weeklyCarryoverLabel} tone="quiet" />
+            <Pill label={`${formatMonthlyReviewCadenceShort(productPreferences.monthlyReviewDay)} review`} tone="quiet" />
             <Pill label={calendarSummary.badge} tone="quiet" />
           </View>
         </Surface>

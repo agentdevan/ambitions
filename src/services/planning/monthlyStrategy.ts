@@ -77,11 +77,11 @@ function mapMonthlyCarryover(
 ) {
   switch (carryoverStance) {
     case MonthlyCarryoverStance.PruneAggressively:
-      return WeeklyCarryoverPosture.Aggressive;
+      return WeeklyCarryoverPosture.EssentialsOnly;
     case MonthlyCarryoverStance.ReviewBeforeCarrying:
       return WeeklyCarryoverPosture.ReviewFirst;
     case MonthlyCarryoverStance.TolerateMoreCarryover:
-      return WeeklyCarryoverPosture.EssentialsOnly;
+      return WeeklyCarryoverPosture.Aggressive;
     default:
       return posture === MonthlyPosture.Stabilize
         ? WeeklyCarryoverPosture.ReviewFirst

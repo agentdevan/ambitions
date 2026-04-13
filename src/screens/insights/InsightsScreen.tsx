@@ -37,6 +37,7 @@ import {
 import { useAppStore } from "../../state/useAppStore";
 import { formatMonthLabel, formatShortDate, formatTimeLabel } from "../../utils/date";
 import { OptionChip } from "../../components/ui/OptionChip";
+import { summarizeMonthlyReviewControl } from "../../services/profile/controlSummaries";
 
 type Props = NativeStackScreenProps<InsightsStackParamList, "InsightsHome">;
 type CarryDecision = "carry" | "review" | "release";
@@ -360,6 +361,13 @@ export function InsightsScreen({ navigation }: Props) {
   const monthReviewPreference = notificationPreferences.find(
     (preference) => preference.reminderType === ReminderType.MonthlyReview,
   );
+  const monthlyReviewSummary = productPreferences
+    ? summarizeMonthlyReviewControl({
+        day: productPreferences.monthlyReviewDay,
+        time: productPreferences.monthlyReviewTime,
+        autoPrompt: productPreferences.autoPromptNextMonthShaping,
+      })
+    : null;
   const monthRecommitDefaults = useMemo(
     () => ({
       recommit: new Set(currentMonthReview?.recommitGoalIds ?? []),
@@ -944,14 +952,11 @@ export function InsightsScreen({ navigation }: Props) {
         <Surface className="gap-3">
           <AppText variant="section">Monthly controls</AppText>
           <AppText tone="secondary" variant="caption">
-            Review day {productPreferences?.monthlyReviewDay ?? 1} at{" "}
-            {productPreferences ? formatTimeLabel(productPreferences.monthlyReviewTime, { compact: true }) : "9:30a"}.
+            {monthlyReviewSummary?.scheduleLabel ?? `Monthly review at ${productPreferences ? formatTimeLabel(productPreferences.monthlyReviewTime, { compact: true }) : "9:30a"}`}.
             {monthReviewPreference?.enabled
               ? ` Reminder speaks up ${monthReviewPreference.leadTimeMinutes} min early.`
               : " Monthly reminder is muted."}
-            {productPreferences?.autoPromptNextMonthShaping
-              ? " Next-month strategy stays prompted automatically."
-              : " Next-month strategy is manual."}
+            {monthlyReviewSummary ? ` ${monthlyReviewSummary.promptLabel}.` : ""}
           </AppText>
         </Surface>
 
