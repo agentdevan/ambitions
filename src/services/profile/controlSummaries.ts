@@ -14,6 +14,7 @@ import {
 } from "../../domain/models";
 import { ProductPreferences } from "../../product/types";
 import { formatShortDateTime, formatTimeLabel, formatTimeRangeLabel } from "../../utils/date";
+import { unsupportedNotificationPermissionStatus } from "../../bootstrap/runtime/runtimeSupport";
 
 interface SyncStatusMetadata {
   lastAttemptedSyncAt: string | null;
@@ -156,6 +157,16 @@ export function summarizeCalendarControl(params: {
     };
   }
 
+  if (connectionState.permissionState === CalendarPermissionState.Unavailable) {
+    return {
+      badge: "Native only",
+      headline: "Using saved defaults",
+      detail: "Calendar context is only available in native iPhone and Android builds, so Ambitions is staying on saved schedule defaults here.",
+      meta: ["Native calendar access unavailable", "Saved defaults still active"],
+      issue: "Calendar is native-only in this build. Use a device build when you need live calendar validation.",
+    };
+  }
+
   if (connectionState.permissionState === CalendarPermissionState.Denied) {
     return {
       badge: "Access off",
@@ -212,6 +223,45 @@ export function summarizeCalendarControl(params: {
       stale
         ? "Calendar context is stale. Refresh when you want a fresh read."
         : "Connection issue. Try again when you're ready.",
+  };
+}
+
+export function summarizeNotificationAccess(status: string) {
+  if (status === "granted") {
+    return {
+      badge: "Access ready",
+      shortLabel: "Ready",
+      detail: "Ready to notify",
+      headline: "Reminders ready",
+      description: "Choose what Ambitions can interrupt you for, and how early it should speak up.",
+      actionLabel: "Allow notifications",
+      needsPermission: false,
+      unsupported: false,
+    };
+  }
+
+  if (status === unsupportedNotificationPermissionStatus) {
+    return {
+      badge: "Native only",
+      shortLabel: "Native only",
+      detail: "Reminders need a native device build",
+      headline: "Reminders are native-only",
+      description: "Push reminders are only available in native iPhone and Android builds, so this runtime stays quiet.",
+      actionLabel: "Allow notifications",
+      needsPermission: false,
+      unsupported: true,
+    };
+  }
+
+  return {
+    badge: "Access needed",
+    shortLabel: "Needs access",
+    detail: "Grant access to enable pushes",
+    headline: "Reminders need access",
+    description: "Notification access is still off, so Ambitions will keep reminders quiet.",
+    actionLabel: "Allow notifications",
+    needsPermission: true,
+    unsupported: false,
   };
 }
 

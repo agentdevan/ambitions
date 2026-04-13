@@ -1,6 +1,10 @@
-import * as Calendar from "expo-calendar";
+import type * as Calendar from "expo-calendar";
 
 import { DeviceCalendarDescriptor, RawCalendarEvent } from "./types";
+import {
+  getUnsupportedCalendarMessage,
+  supportsCalendarIntegration,
+} from "../../bootstrap/runtime/runtimeSupport";
 
 function describeCalendar(calendar: Calendar.Calendar): DeviceCalendarDescriptor {
   return {
@@ -26,18 +30,50 @@ function toRawEvent(event: Calendar.Event): RawCalendarEvent {
   };
 }
 
+let calendarModulePromise: Promise<typeof import("expo-calendar")> | null = null;
+
+async function getCalendarModule() {
+  if (!supportsCalendarIntegration()) {
+    return null;
+  }
+
+  if (!calendarModulePromise) {
+    calendarModulePromise = import("expo-calendar").catch((error) => {
+      calendarModulePromise = null;
+      throw error;
+    });
+  }
+
+  return calendarModulePromise;
+}
+
 export async function getCalendarPermissionStatus() {
-  const { status } = await Calendar.getCalendarPermissionsAsync();
+  const CalendarModule = await getCalendarModule();
+  if (!CalendarModule) {
+    return "unavailable";
+  }
+
+  const { status } = await CalendarModule.getCalendarPermissionsAsync();
   return status;
 }
 
 export async function requestCalendarPermission() {
-  const { status } = await Calendar.requestCalendarPermissionsAsync();
+  const CalendarModule = await getCalendarModule();
+  if (!CalendarModule) {
+    return "unavailable";
+  }
+
+  const { status } = await CalendarModule.requestCalendarPermissionsAsync();
   return status;
 }
 
 export async function listReadableCalendars() {
-  const calendars = await Calendar.getCalendarsAsync(Calendar.EntityTypes.EVENT);
+  const CalendarModule = await getCalendarModule();
+  if (!CalendarModule) {
+    return [];
+  }
+
+  const calendars = await CalendarModule.getCalendarsAsync(CalendarModule.EntityTypes.EVENT);
 
   return calendars
     .filter((calendar) => (calendar.isVisible ?? true) !== false)
@@ -50,11 +86,16 @@ export async function readRawEventsInRange(params: {
   end: Date;
   calendarIds: string[];
 }) {
+  const CalendarModule = await getCalendarModule();
+  if (!CalendarModule) {
+    throw new Error(getUnsupportedCalendarMessage());
+  }
+
   if (params.calendarIds.length === 0) {
     return [];
   }
 
-  const events = await Calendar.getEventsAsync(params.calendarIds, params.start, params.end);
+  const events = await CalendarModule.getEventsAsync(params.calendarIds, params.start, params.end);
 
   return events
     .map(toRawEvent)

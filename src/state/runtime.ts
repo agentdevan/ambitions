@@ -27,6 +27,7 @@ import { getProductPreferences } from "../product/preferences";
 import { ProductPreferences } from "../product/types";
 import { addDays, addMonths, getCurrentLocalDateString, startOfMonth, startOfWeek } from "../utils/date";
 import { buildTodayViewModel, TodayViewModel } from "./viewModels/today";
+import { unsupportedNotificationPermissionStatus } from "../bootstrap/runtime/runtimeSupport";
 
 export const initialPlanDate = getCurrentLocalDateString();
 
@@ -149,19 +150,23 @@ function mergeWeeklyTimeBlocks(params: {
 }
 
 async function syncNotificationsForSnapshot(snapshot: FoundationSnapshot) {
-  await appServices.services.notifications.syncPlanNotifications({
-    date: snapshot.today?.date ?? initialPlanDate,
-    schedule: snapshot.schedule,
-    timeBlocks: snapshot.blocks,
-    tasks: snapshot.tasks,
-    preferences: snapshot.notificationPreferences,
-    productPreferences: snapshot.productPreferences,
-    dailyRitual: snapshot.dailyRitual,
-    weeklyReviewState: snapshot.currentWeekReview,
-    nextWeekReviewState: snapshot.nextWeekReview,
-    monthlyReviewState: snapshot.currentMonthReview,
-    nextMonthReviewState: snapshot.nextMonthReview,
-  });
+  try {
+    await appServices.services.notifications.syncPlanNotifications({
+      date: snapshot.today?.date ?? initialPlanDate,
+      schedule: snapshot.schedule,
+      timeBlocks: snapshot.blocks,
+      tasks: snapshot.tasks,
+      preferences: snapshot.notificationPreferences,
+      productPreferences: snapshot.productPreferences,
+      dailyRitual: snapshot.dailyRitual,
+      weeklyReviewState: snapshot.currentWeekReview,
+      nextWeekReviewState: snapshot.nextWeekReview,
+      monthlyReviewState: snapshot.currentMonthReview,
+      nextMonthReviewState: snapshot.nextMonthReview,
+    });
+  } catch {
+    // Notification failures should not block app startup or state refresh.
+  }
 }
 
 function shouldBuildSchedule(preferences: UserPreferences | null, goals: Goal[], tasks: Task[]) {
@@ -356,11 +361,21 @@ export async function loadFoundationSnapshot(date: string): Promise<FoundationSn
 }
 
 export async function refreshAllState(date: string) {
-  await syncCalendarIntegration(date);
+  try {
+    await syncCalendarIntegration(date);
+  } catch {
+    // Calendar refresh failures should fall back to the last persisted connection state.
+  }
+
   const snapshot = await loadFoundationSnapshot(date);
   await syncNotificationsForSnapshot(snapshot);
-  const notificationPermissionStatus =
-    await appServices.services.notifications.getPermissionStatus();
+  let notificationPermissionStatus = unsupportedNotificationPermissionStatus;
+
+  try {
+    notificationPermissionStatus = await appServices.services.notifications.getPermissionStatus();
+  } catch {
+    notificationPermissionStatus = unsupportedNotificationPermissionStatus;
+  }
 
   return {
     planDate: date,

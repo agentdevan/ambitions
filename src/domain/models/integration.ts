@@ -4,6 +4,7 @@ export enum CalendarPermissionState {
   NotAsked = "not_asked",
   Granted = "granted",
   Denied = "denied",
+  Unavailable = "unavailable",
 }
 
 export enum CalendarSyncState {

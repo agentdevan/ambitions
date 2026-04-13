@@ -8,7 +8,9 @@
     "ios": "expo run:ios",
     "web": "expo start --web",
     "typecheck": "tsc --noEmit",
-    "auth:qa": "node scripts/auth_qa_plan.mjs"
+    "auth:qa": "node scripts/auth_qa_plan.mjs",
+    "validate:native": "npm run typecheck && npx expo export --platform ios && npx expo export --platform android",
+    "validate:web": "npx expo export --platform web"
   },
   "dependencies": {
     "@expo/metro-runtime": "~6.1.2",

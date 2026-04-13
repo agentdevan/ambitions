@@ -6,6 +6,7 @@ import {
   CalendarSyncState,
 } from "../../domain/models";
 import { useResolvedTheme } from "../../design/theme/useResolvedTheme";
+import { summarizeNotificationAccess } from "../../services/profile/controlSummaries";
 import { Button } from "../ui/Button";
 import { Surface } from "../ui/Surface";
 import { AppText } from "../ui/Text";
@@ -37,10 +38,13 @@ export function IntegrationStatusCard({
     calendarConnectionState.permissionState === CalendarPermissionState.NotAsked;
   const calendarDenied =
     calendarConnectionState?.permissionState === CalendarPermissionState.Denied;
+  const calendarUnavailable =
+    calendarConnectionState?.permissionState === CalendarPermissionState.Unavailable;
   const canRetryCalendar =
     calendarConnectionState?.permissionState === CalendarPermissionState.Granted &&
     calendarConnectionState.connectionStatus !== CalendarSyncState.Ready;
-  const notificationNeedsPermission = notificationPermissionStatus !== "granted";
+  const notificationSummary = summarizeNotificationAccess(notificationPermissionStatus);
+  const notificationNeedsPermission = notificationSummary.needsPermission;
   const syncFailure =
     calendarConnectionState?.connectionStatus === CalendarSyncState.Stale ||
     calendarConnectionState?.connectionStatus === CalendarSyncState.TemporaryFailure;
@@ -72,10 +76,10 @@ export function IntegrationStatusCard({
         </View>
         <View className="flex-row flex-wrap gap-x-5 gap-y-2">
           <AppText tone="secondary" variant="caption">
-            Calendar: {usingLiveCalendar ? "Connected" : "Offline"}
+            Calendar: {calendarUnavailable ? "Native only" : usingLiveCalendar ? "Connected" : "Offline"}
           </AppText>
           <AppText tone="secondary" variant="caption">
-            Reminders: {notificationNeedsPermission ? "Needs access" : "Ready"}
+            Reminders: {notificationSummary.shortLabel}
           </AppText>
         </View>
       </View>

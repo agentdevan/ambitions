@@ -10,6 +10,10 @@ import { resolveTheme } from "../../product/theme";
 import { useAppStore } from "../../state/useAppStore";
 import { Button } from "../../components/ui/Button";
 import { AppText } from "../../components/ui/Text";
+import {
+  getUnsupportedRuntimeMessage,
+  isWebRuntime,
+} from "../runtime/runtimeSupport";
 
 export function AppProviders({ children }: PropsWithChildren) {
   const bootStatus = useAppStore((state) => state.bootStatus);
@@ -18,6 +22,7 @@ export function AppProviders({ children }: PropsWithChildren) {
   const accentTheme = useAppStore((state) => state.productPreferences?.accentTheme);
   const systemScheme = useColorScheme();
   const theme = resolveTheme({ appearanceMode, accentTheme, systemScheme });
+  const unsupportedWebRuntime = isWebRuntime();
   const navigationTheme = {
     ...DefaultTheme,
     colors: {
@@ -31,8 +36,12 @@ export function AppProviders({ children }: PropsWithChildren) {
   };
 
   useEffect(() => {
+    if (unsupportedWebRuntime) {
+      return;
+    }
+
     useAppStore.getState().bootstrap().catch(() => null);
-  }, []);
+  }, [unsupportedWebRuntime]);
 
   useEffect(() => {
     SystemUI.setBackgroundColorAsync(theme.colors.background.canvas).catch(() => null);
@@ -45,7 +54,32 @@ export function AppProviders({ children }: PropsWithChildren) {
       <SafeAreaProvider>
         <NavigationContainer theme={navigationTheme}>
           <StatusBar style={theme.mode === "dark" ? "light" : "dark"} />
-          {bootStatus === "idle" || bootStatus === "loading" ? (
+          {unsupportedWebRuntime ? (
+            <View
+              style={{
+                flex: 1,
+                justifyContent: "center",
+                alignItems: "center",
+                padding: 28,
+                backgroundColor: theme.colors.background.canvas,
+              }}
+            >
+              <View style={{ gap: 12, maxWidth: 360 }}>
+                <AppText variant="caption" tone="tertiary" style={{ textAlign: "center" }}>
+                  Ambitions
+                </AppText>
+                <AppText variant="title" style={{ textAlign: "center" }}>
+                  Native release validation only
+                </AppText>
+                <AppText tone="secondary" style={{ textAlign: "center" }}>
+                  {getUnsupportedRuntimeMessage()}
+                </AppText>
+                <AppText tone="tertiary" variant="caption" style={{ textAlign: "center" }}>
+                  Use an iPhone simulator, iPhone device, or Android device for runtime and launch-readiness testing.
+                </AppText>
+              </View>
+            </View>
+          ) : bootStatus === "idle" || bootStatus === "loading" ? (
             <View
               style={{
                 flex: 1,

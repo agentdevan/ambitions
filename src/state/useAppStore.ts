@@ -513,6 +513,45 @@ function summarizeRecoveryMode(mode: DailyRitualRecoveryMode, changedTaskCount: 
 }
 
 let accountSnapshotUnsubscribe: (() => void) | null = null;
+let accountDrivenRefreshPromise: Promise<void> | null = null;
+
+function shouldRefreshFoundationForAccountChange(
+  state: Pick<AppState, "bootstrapped" | "account" | "attachmentState" | "syncState" | "syncConflicts">,
+  snapshot: AccountSnapshot,
+) {
+  if (!state.bootstrapped) {
+    return false;
+  }
+
+  return (
+    state.account?.id !== snapshot.account?.id ||
+    state.attachmentState?.status !== snapshot.attachment.status ||
+    state.syncState?.mode !== snapshot.sync.mode ||
+    state.syncState?.lastSyncAt !== snapshot.sync.lastSyncAt ||
+    state.syncConflicts.length !== snapshot.conflicts.length
+  );
+}
+
+function queueFoundationRefreshFromAccountSnapshot() {
+  if (!accountDrivenRefreshPromise) {
+    accountDrivenRefreshPromise = (async () => {
+      const currentState = useAppStore.getState();
+      const [foundationSnapshot, accountSnapshot] = await Promise.all([
+        refreshAllState(currentState.planDate),
+        appServices.services.account.getSnapshot(),
+      ]);
+
+      useAppStore.setState({
+        ...foundationSnapshot,
+        ...mapAccountSnapshot(accountSnapshot),
+      });
+    })().finally(() => {
+      accountDrivenRefreshPromise = null;
+    });
+  }
+
+  return accountDrivenRefreshPromise;
+}
 
 export const useAppStore = create<AppState>((set, get) => ({
   bootstrapped: false,
@@ -568,10 +607,17 @@ export const useAppStore = create<AppState>((set, get) => ({
       await initializeAppServices();
       if (!accountSnapshotUnsubscribe) {
         accountSnapshotUnsubscribe = appServices.services.account.subscribe((snapshot) => {
+          const state = get();
+          const shouldRefreshFoundation = shouldRefreshFoundationForAccountChange(state, snapshot);
+
           set(mapAccountSnapshot(snapshot));
+
+          if (shouldRefreshFoundation) {
+            void queueFoundationRefreshFromAccountSnapshot().catch(() => null);
+          }
         });
       }
-      await appServices.services.notifications.configure();
+      await appServices.services.notifications.configure().catch(() => null);
       const snapshot = await refreshAllState(currentPlanDate);
       const accountSnapshot = await appServices.services.account.getSnapshot();
 
@@ -589,8 +635,8 @@ export const useAppStore = create<AppState>((set, get) => ({
       ) {
         appServices.services.account
           .runStartupSyncIfNeeded()
-          .then((nextSnapshot) => {
-            set(mapAccountSnapshot(nextSnapshot));
+          .then(async () => {
+            await queueFoundationRefreshFromAccountSnapshot();
           })
           .catch(() => null);
       }
@@ -2180,13 +2226,21 @@ export const useAppStore = create<AppState>((set, get) => ({
 
   createAccount: async (input) => {
     const result = await appServices.services.account.createAccount(input);
-    set(mapAccountSnapshot(result.snapshot));
+    const foundationSnapshot = await refreshAllState(get().planDate);
+    set({
+      ...foundationSnapshot,
+      ...mapAccountSnapshot(result.snapshot),
+    });
     return result;
   },
 
   signIn: async (input) => {
     const result = await appServices.services.account.signIn(input);
-    set(mapAccountSnapshot(result.snapshot));
+    const foundationSnapshot = await refreshAllState(get().planDate);
+    set({
+      ...foundationSnapshot,
+      ...mapAccountSnapshot(result.snapshot),
+    });
     return result;
   },
 

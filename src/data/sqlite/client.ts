@@ -1,32 +1,69 @@
-import * as SQLite from "expo-sqlite";
-
 import { withLockAwareRetry } from "./lockAwareRetry";
 import { SQLiteOperationQueue } from "./operationQueue";
 import { schemaMigrations } from "./migrations";
+import {
+  getUnsupportedDatabaseMessage,
+  supportsNativeDatabase,
+} from "../../bootstrap/runtime/runtimeSupport";
 
 export interface DatabaseClient {
   exec(statements: string[]): Promise<void>;
-  run(statement: string, params?: SQLite.SQLiteBindParams): Promise<void>;
-  getAll<T>(statement: string, params?: SQLite.SQLiteBindParams): Promise<T[]>;
-  getFirst<T>(statement: string, params?: SQLite.SQLiteBindParams): Promise<T | null>;
+  run(statement: string, params?: SQLiteBindParams): Promise<void>;
+  getAll<T>(statement: string, params?: SQLiteBindParams): Promise<T[]>;
+  getFirst<T>(statement: string, params?: SQLiteBindParams): Promise<T | null>;
   withTransaction<T>(operation: (client: DatabaseClient) => Promise<T>): Promise<T>;
 }
 
-let databasePromise: Promise<SQLite.SQLiteDatabase> | null = null;
-let databaseSetupPromise: Promise<SQLite.SQLiteDatabase> | null = null;
+type SQLiteBindParams = readonly unknown[] | Record<string, unknown>;
+type SQLiteModuleLike = {
+  openDatabaseAsync(name: string): Promise<SQLiteDatabase>;
+};
+type SQLiteDatabase = {
+  execAsync(statement: string): Promise<void>;
+  runAsync(statement: string, params?: SQLiteBindParams): Promise<unknown>;
+  getAllAsync<T>(statement: string, params?: SQLiteBindParams): Promise<T[]>;
+  getFirstAsync<T>(statement: string, params?: SQLiteBindParams): Promise<T | null>;
+  withExclusiveTransactionAsync(
+    operation: (transaction: SQLiteDatabase) => Promise<void>,
+  ): Promise<void>;
+};
+
+let databasePromise: Promise<SQLiteDatabase> | null = null;
+let databaseSetupPromise: Promise<SQLiteDatabase> | null = null;
+let sqliteModulePromise: Promise<SQLiteModuleLike> | null = null;
 const operationQueue = new SQLiteOperationQueue();
+
+async function getSQLiteModule() {
+  if (!supportsNativeDatabase()) {
+    throw new Error(getUnsupportedDatabaseMessage());
+  }
+
+  if (!sqliteModulePromise) {
+    sqliteModulePromise = import("expo-sqlite")
+      .then((module) => module as SQLiteModuleLike)
+      .catch((error) => {
+        sqliteModulePromise = null;
+        throw error;
+      });
+  }
+
+  return sqliteModulePromise;
+}
 
 async function getDatabase() {
   if (!databasePromise) {
-    databasePromise = SQLite.openDatabaseAsync("ambitions.db").catch((error) => {
-      databasePromise = null;
-      databaseSetupPromise = null;
-      throw error;
-    });
+    databasePromise = getSQLiteModule()
+      .then((module) => module.openDatabaseAsync("ambitions.db"))
+      .catch((error) => {
+        databasePromise = null;
+        databaseSetupPromise = null;
+        throw error;
+      });
   }
 
   if (!databaseSetupPromise) {
-    databaseSetupPromise = databasePromise
+    const activeDatabasePromise = databasePromise;
+    databaseSetupPromise = activeDatabasePromise
       .then(async (database) => {
         await database.execAsync("PRAGMA foreign_keys = ON;");
         await database.execAsync("PRAGMA journal_mode = WAL;");
@@ -56,7 +93,7 @@ class SQLiteClient implements DatabaseClient {
     );
   }
 
-  async run(statement: string, params?: SQLite.SQLiteBindParams) {
+  async run(statement: string, params?: SQLiteBindParams) {
     await operationQueue.enqueue(() =>
       withLockAwareRetry(async () => {
         const database = await getDatabase();
@@ -70,7 +107,7 @@ class SQLiteClient implements DatabaseClient {
     );
   }
 
-  async getAll<T>(statement: string, params?: SQLite.SQLiteBindParams) {
+  async getAll<T>(statement: string, params?: SQLiteBindParams) {
     return operationQueue.enqueue(() =>
       withLockAwareRetry(async () => {
         const database = await getDatabase();
@@ -83,7 +120,7 @@ class SQLiteClient implements DatabaseClient {
     );
   }
 
-  async getFirst<T>(statement: string, params?: SQLite.SQLiteBindParams) {
+  async getFirst<T>(statement: string, params?: SQLiteBindParams) {
     return operationQueue.enqueue(() =>
       withLockAwareRetry(async () => {
         const database = await getDatabase();

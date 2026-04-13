@@ -47,6 +47,7 @@ import {
   getMonthlyReviewCadenceOptions,
   summarizeMonthlyReviewControl,
   summarizeCalendarControl,
+  summarizeNotificationAccess,
   summarizePlanningControls,
   summarizeQuietHours,
   summarizeSyncState,
@@ -482,6 +483,7 @@ export function ProfileIntegrationsScreen() {
     .map((title) => title.trim())
     .filter(Boolean);
   const visibleConstraints = scheduleConstraints.slice(0, 4);
+  const notificationSummary = summarizeNotificationAccess(notificationPermissionStatus);
 
   async function runIntegrationAction(
     key: string,
@@ -511,7 +513,7 @@ export function ProfileIntegrationsScreen() {
             <>
               <Pill label={calendarSummary.badge} tone="accent" />
               <Pill
-                label={notificationPermissionStatus === "granted" ? "Reminders ready" : "Reminders need access"}
+                label={notificationSummary.headline}
                 tone="quiet"
               />
             </>
@@ -587,7 +589,7 @@ export function ProfileIntegrationsScreen() {
                 },
                 {
                   label: "Reminder access",
-                  value: notificationPermissionStatus === "granted" ? "Ready" : "Needs access",
+                  value: notificationSummary.shortLabel,
                 },
               ]}
             />
@@ -643,6 +645,14 @@ export function ProfileIntegrationsScreen() {
             </AppText>
           </Surface>
         ) : null}
+        {notificationSummary.unsupported ? (
+          <Surface tone="sunken" className="gap-2">
+            <AppText variant="caption">Reminders</AppText>
+            <AppText tone="secondary" variant="caption">
+              {notificationSummary.description}
+            </AppText>
+          </Surface>
+        ) : null}
         {runtimeMessage ? <AppText tone="tertiary" variant="caption">{runtimeMessage}</AppText> : null}
       </View>
     </Screen>
@@ -684,6 +694,7 @@ export function ProfileNotificationsScreen() {
       })
     : null;
   const quietHoursSummary = summarizeQuietHours(notificationPreferences);
+  const notificationSummary = summarizeNotificationAccess(notificationPermissionStatus);
 
   async function runAction(key: string, action: () => Promise<void>, fallbackError: string) {
     setBusyState(key);
@@ -719,16 +730,12 @@ export function ProfileNotificationsScreen() {
         <DetailHero
           eyebrow="Notifications"
           title={enabledCount > 0 ? "Calm reminder control" : "Reminders are quiet"}
-          description={
-            notificationPermissionStatus === "granted"
-              ? "Choose what Ambitions can interrupt you for, and how early it should speak up."
-              : "Notification access is still off, so Ambitions will keep reminders quiet."
-          }
+          description={notificationSummary.description}
           badges={
             <>
               <Pill
-                label={notificationPermissionStatus === "granted" ? "Access ready" : "Access needed"}
-                tone={notificationPermissionStatus === "granted" ? "accent" : "quiet"}
+                label={notificationSummary.badge}
+                tone={notificationSummary.needsPermission ? "quiet" : "accent"}
               />
               <Pill
                 label={
@@ -745,8 +752,8 @@ export function ProfileNotificationsScreen() {
               items={[
                 {
                   label: "Permission",
-                  value: notificationPermissionStatus,
-                  detail: notificationPermissionStatus === "granted" ? "Ready to notify" : "Grant access to enable pushes",
+                  value: notificationSummary.shortLabel,
+                  detail: notificationSummary.detail,
                 },
                 {
                   label: "Quiet hours",
@@ -757,7 +764,7 @@ export function ProfileNotificationsScreen() {
             />
           }
         />
-        {notificationPermissionStatus !== "granted" ? (
+        {notificationSummary.needsPermission ? (
           <Button
             tone="secondary"
             onPress={() =>
@@ -769,8 +776,16 @@ export function ProfileNotificationsScreen() {
             }
             busy={busyState === "permission"}
           >
-            Allow notifications
+            {notificationSummary.actionLabel}
           </Button>
+        ) : null}
+        {notificationSummary.unsupported ? (
+          <Surface tone="sunken" className="gap-2">
+            <AppText variant="caption">Native runtime required</AppText>
+            <AppText tone="secondary" variant="caption">
+              Push reminders are intentionally kept off here. Use a native device build when you need launch-level reminder validation.
+            </AppText>
+          </Surface>
         ) : null}
         <DetailSection
           title="Push timing"

@@ -602,6 +602,15 @@ export class AccountService {
     }
 
     try {
+      if (authState.signedInAccountId) {
+        await this.dependencies.accountRepository.saveAuthState({
+          ...authState,
+          status: AuthStatus.Restoring,
+          lastError: null,
+          updatedAt: new Date().toISOString(),
+        });
+      }
+
       const remoteSession = await this.remoteClient.restoreSession();
       const now = new Date().toISOString();
 
@@ -651,6 +660,12 @@ export class AccountService {
         this.dependencies.accountRepository.saveSyncState({
           ...syncState,
           accountId: account.id,
+          mode:
+            attachmentState.status === LocalAttachmentStatus.Attached
+              ? syncState.mode === SyncMode.LocalOnly
+                ? SyncMode.PendingChanges
+                : syncState.mode
+              : SyncMode.LocalOnly,
           updatedAt: now,
         }),
       ]);
@@ -723,13 +738,20 @@ export class AccountService {
       });
     } else if (
       authState.primaryProvider !== AuthProvider.Email ||
-      authState.availableProviders.length !== (backendConfigured ? 1 : 0)
+      authState.availableProviders.length !== (backendConfigured ? 1 : 0) ||
+      (backendConfigured &&
+        !authState.signedInAccountId &&
+        [AuthStatus.Error, AuthStatus.Restoring].includes(authState.status))
     ) {
       await this.dependencies.accountRepository.saveAuthState({
         ...authState,
         status:
           backendConfigured && authState.status === AuthStatus.Unavailable
             ? AuthStatus.LocalOnly
+            : backendConfigured &&
+                !authState.signedInAccountId &&
+                [AuthStatus.Error, AuthStatus.Restoring].includes(authState.status)
+              ? AuthStatus.LocalOnly
             : !backendConfigured && !authState.signedInAccountId
               ? AuthStatus.Unavailable
               : authState.status,

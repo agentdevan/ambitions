@@ -4,6 +4,10 @@ import {
   CalendarSyncState,
   EntitySyncState,
 } from "../../domain/models";
+import {
+  getUnsupportedCalendarMessage,
+  supportsCalendarIntegration,
+} from "../../bootstrap/runtime/runtimeSupport";
 
 import {
   getCalendarPermissionStatus,
@@ -56,6 +60,10 @@ function buildConnectionState(params: {
 }
 
 function mapPermissionState(status: string) {
+  if (status === "unavailable") {
+    return CalendarPermissionState.Unavailable;
+  }
+
   if (status === "granted") {
     return CalendarPermissionState.Granted;
   }
@@ -117,6 +125,31 @@ export const CalendarService: CalendarServiceContract = {
   },
 
   async syncDate(params) {
+    if (!supportsCalendarIntegration()) {
+      return {
+        connectionState: buildConnectionState({
+          existing: params.existingState,
+          permissionState: CalendarPermissionState.Unavailable,
+          connectionStatus: CalendarSyncState.Idle,
+          selectedCalendarIds: [],
+          availableCalendars: [],
+          lastSuccessfulSyncAt: params.existingState?.lastSuccessfulSyncAt ?? null,
+          metadata: {
+            lastReadDate: params.date,
+            lastError: getUnsupportedCalendarMessage(),
+            lastEventCount: 0,
+            lastConstraintCount: 0,
+            selectedCalendarTitles: "",
+          },
+        }),
+        calendars: [],
+        events: [],
+        constraints: [],
+        warnings: [getUnsupportedCalendarMessage()],
+        usedSelectedCalendarIds: [],
+      };
+    }
+
     const permissionStatus = await getCalendarPermissionStatus();
     const permissionState = mapPermissionState(permissionStatus);
 

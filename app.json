@@ -3,9 +3,10 @@
     "name": "Ambitions",
     "slug": "ambitions",
     "version": "1.0.0",
+    "scheme": "ambitions",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
-    "userInterfaceStyle": "light",
+    "userInterfaceStyle": "automatic",
     "newArchEnabled": true,
     "splash": {
       "image": "./assets/splash-icon.png",
@@ -15,12 +16,16 @@
     "ios": {
       "supportsTablet": true,
       "bundleIdentifier": "com.ambitions.app",
+      "buildNumber": "1",
       "infoPlist": {
-        "ITSAppUsesNonExemptEncryption": false
+        "ITSAppUsesNonExemptEncryption": false,
+        "NSCalendarsFullAccessUsageDescription": "Ambitions reads your calendar to keep the day plan realistic without changing your events.",
+        "NSCalendarsWriteOnlyAccessUsageDescription": "Ambitions can prepare planning context from your calendar without editing your events."
       }
     },
     "android": {
       "package": "com.ambitions.app",
+      "versionCode": 1,
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
@@ -29,7 +34,8 @@
       "predictiveBackGestureEnabled": false,
       "permissions": [
         "android.permission.READ_CALENDAR",
-        "android.permission.WRITE_CALENDAR"
+        "android.permission.WRITE_CALENDAR",
+        "android.permission.POST_NOTIFICATIONS"
       ]
     },
     "web": {
