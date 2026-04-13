@@ -4,6 +4,11 @@ import type { ReactNode } from "react";
 import { useEffect, useMemo, useRef, useState } from "react";
 import { Animated, View } from "react-native";
 
+import {
+  DetailSection,
+  DetailSummaryStrip,
+  QuietMetaLine,
+} from "../../components/detail/DetailPrimitives";
 import { CompactTimelineRow } from "../../components/navigation/CompactTimelineRow";
 import { DrillInRow } from "../../components/navigation/DrillInRow";
 import { PageHeader } from "../../components/navigation/PageHeader";
@@ -375,6 +380,45 @@ export function TodayScreen({ navigation }: Props) {
     (todayVm.capacity.unusedCapacityMinutes > 0
       ? `${todayVm.capacity.unusedCapacityMinutes} min open`
       : "Day is full");
+  const returnItems = [
+    {
+      label: "Movement",
+      value: progressLabel,
+      detail:
+        todayVm.progress.recovery > 0
+          ? `${todayVm.progress.recovery} task${todayVm.progress.recovery === 1 ? "" : "s"} still need reshaping`
+          : "Completion is moving without extra churn right now",
+    },
+    {
+      label: "Room",
+      value: roomLabel,
+      detail: todayVm.openWindow?.detail ?? todayVm.workspace.room.detail,
+    },
+    {
+      label: todayVm.workspace.changed ? "Changed" : "Continuity",
+      value: todayVm.workspace.changed?.title ?? todayVm.workspace.fixed.title,
+      detail: todayVm.workspace.changed?.detail ?? todayVm.workspace.fixed.detail,
+    },
+    {
+      label: "Next",
+      value: todayVm.recommendation.primaryLabel,
+      detail: todayVm.recommendation.emphasis,
+    },
+  ];
+  const returnReads = [
+    todayVm.status.detail,
+    todayVm.integration.calendarStatusLabel,
+    pendingReviewCount > 0
+      ? `${pendingReviewCount} review${pendingReviewCount === 1 ? "" : "s"} are waiting outside today's execution line.`
+      : "No review backlog is pressing on today's execution line.",
+    todayVm.goalPressure
+      ? `${todayVm.goalPressure.goalTitle} is the main pressure signal underneath today.`
+      : "No single goal is pressuring today's line more than the rest.",
+  ];
+  const supportReads = [
+    ...todayVm.adaptiveGuidance.slice(0, 2),
+    ...(todayVm.recoverySnapshot ? [todayVm.recoverySnapshot.impact] : []),
+  ].slice(0, 3);
 
   async function handleRecommendedAction() {
     if (todayVm.recommendation.taskId && todayVm.recommendation.suggestedAction) {
@@ -496,6 +540,18 @@ export function TodayScreen({ navigation }: Props) {
           usingLiveCalendar={todayVm.integration.usingLiveCalendar}
         />
 
+        <Surface className="gap-5">
+          <DetailSection
+            title="Return line"
+            description="What changed, what still fits, and the cleanest next useful move."
+          >
+            <View className="gap-4">
+              <DetailSummaryStrip items={returnItems} />
+              <QuietMetaLine items={returnReads} />
+            </View>
+          </DetailSection>
+        </Surface>
+
         {todayVm.ritual?.kind === "opening" ? (
           <SupportCard label="Opening">
             <View className="gap-2">
@@ -573,44 +629,30 @@ export function TodayScreen({ navigation }: Props) {
         ) : null}
 
         <Surface className="gap-4">
-          <View className="flex-row items-end justify-between gap-3">
-            <View className="gap-1">
-              <AppText tone="tertiary" variant="micro" style={{ textTransform: "uppercase" }}>
-                Day line
-              </AppText>
-              <AppText variant="title">Now, next, later</AppText>
+          <DetailSection
+            title="Execution line"
+            description="Reopen the day quickly, then see the structural split underneath it."
+          >
+            <View className="gap-5">
+              <View className="gap-3">
+                <WorkspaceRow slot={todayVm.workspace.now} />
+                <WorkspaceRow slot={todayVm.workspace.next} />
+                <WorkspaceRow slot={todayVm.workspace.later} />
+              </View>
+
+              <View className="gap-3">
+                <SummaryRow label="Fixed" summary={todayVm.workspace.fixed} />
+                <SummaryRow label="Flexible" summary={todayVm.workspace.flexible} />
+                <SummaryRow label="Room left" summary={todayVm.workspace.room} />
+                {todayVm.workspace.optional ? (
+                  <SummaryRow label="Optional" summary={todayVm.workspace.optional} />
+                ) : null}
+                {todayVm.workspace.changed ? (
+                  <SummaryRow label="Changed" summary={todayVm.workspace.changed} />
+                ) : null}
+              </View>
             </View>
-            <AppText tone="secondary" variant="caption">
-              Reopen fast
-            </AppText>
-          </View>
-
-          <View className="gap-3">
-            <WorkspaceRow slot={todayVm.workspace.now} />
-            <WorkspaceRow slot={todayVm.workspace.next} />
-            <WorkspaceRow slot={todayVm.workspace.later} />
-          </View>
-        </Surface>
-
-        <Surface className="gap-4">
-          <View className="gap-1">
-            <AppText tone="tertiary" variant="micro" style={{ textTransform: "uppercase" }}>
-              Day read
-            </AppText>
-            <AppText variant="title">Fixed, flexible, and room left</AppText>
-          </View>
-
-          <View className="gap-3">
-            <SummaryRow label="Fixed" summary={todayVm.workspace.fixed} />
-            <SummaryRow label="Flexible" summary={todayVm.workspace.flexible} />
-            <SummaryRow label="Room left" summary={todayVm.workspace.room} />
-            {todayVm.workspace.optional ? (
-              <SummaryRow label="Optional" summary={todayVm.workspace.optional} />
-            ) : null}
-            {todayVm.workspace.changed ? (
-              <SummaryRow label="Changed" summary={todayVm.workspace.changed} />
-            ) : null}
-          </View>
+          </DetailSection>
         </Surface>
 
         {todayVm.recoverySnapshot && todayVm.ritual?.kind !== "recovery" ? (
@@ -628,59 +670,54 @@ export function TodayScreen({ navigation }: Props) {
           </Surface>
         ) : null}
 
-        {todayVm.timelinePreview.length > 0 ? (
-          <Surface className="gap-4">
-            <View className="flex-row items-end justify-between gap-3">
-              <View className="gap-1">
-                <AppText tone="tertiary" variant="micro" style={{ textTransform: "uppercase" }}>
-                  Coming up
-                </AppText>
-                <AppText variant="title">The protected line</AppText>
-              </View>
-              <Button
-                size="compact"
-                tone="tertiary"
-                onPress={() => navigation.navigate("TodayTimeline")}
+        {todayVm.timelinePreview.length > 0 || supportReads.length > 0 || todayVm.goalPressure ? (
+          <Surface className="gap-5">
+            {todayVm.timelinePreview.length > 0 ? (
+              <DetailSection
+                title="Protected line"
+                description="The next part of the day that is already holding."
+                action={
+                  <Button
+                    size="compact"
+                    tone="tertiary"
+                    onPress={() => navigation.navigate("TodayTimeline")}
+                  >
+                    Open timeline
+                  </Button>
+                }
               >
-                Open timeline
-              </Button>
-            </View>
+                <View className="gap-3">
+                  {todayVm.timelinePreview.slice(0, 3).map((block) => (
+                    <CompactTimelineRow
+                      key={block.id}
+                      block={block}
+                      onPress={() => navigation.navigate("TodaySessionDetail", { blockId: block.id })}
+                    />
+                  ))}
+                </View>
+              </DetailSection>
+            ) : null}
 
-            <View className="gap-3">
-              {todayVm.timelinePreview.slice(0, 3).map((block) => (
-                <CompactTimelineRow
-                  key={block.id}
-                  block={block}
-                  onPress={() => navigation.navigate("TodaySessionDetail", { blockId: block.id })}
-                />
-              ))}
-            </View>
-          </Surface>
-        ) : null}
+            {supportReads.length > 0 ? (
+              <DetailSection
+                title="Quiet guidance"
+                description="Calm reads from recent movement and the current shape of day."
+              >
+                <QuietMetaLine items={supportReads} />
+              </DetailSection>
+            ) : null}
 
-        {todayVm.adaptiveGuidance.length > 0 ? (
-          <Surface tone="sunken" className="gap-3">
-            <View className="gap-1">
-              <AppText tone="tertiary" variant="micro" style={{ textTransform: "uppercase" }}>
-                Small adjustments
-              </AppText>
-              <AppText variant="section">Quiet guidance for this shape of day</AppText>
-            </View>
-            {todayVm.adaptiveGuidance.slice(0, 2).map((item) => (
-              <AppText key={item} tone="secondary">
-                {item}
-              </AppText>
-            ))}
-          </Surface>
-        ) : null}
-
-        {todayVm.goalPressure ? (
-          <Surface tone="sunken" className="gap-2">
-            <AppText tone="tertiary" variant="micro" style={{ textTransform: "uppercase" }}>
-              Goal pressure
-            </AppText>
-            <AppText variant="section">{todayVm.goalPressure.goalTitle}</AppText>
-            <AppText tone="secondary">{todayVm.goalPressure.summary}</AppText>
+            {todayVm.goalPressure ? (
+              <DetailSection
+                title="Goal pressure"
+                description="Direction tension that still matters, even while Today stays execution-first."
+              >
+                <View className="gap-2">
+                  <AppText variant="section">{todayVm.goalPressure.goalTitle}</AppText>
+                  <AppText tone="secondary">{todayVm.goalPressure.summary}</AppText>
+                </View>
+              </DetailSection>
+            ) : null}
           </Surface>
         ) : null}
 
@@ -775,48 +812,55 @@ export function TodayScreen({ navigation }: Props) {
           </SupportCard>
         ) : null}
 
-        <View className="gap-3">
-          {todayVm.openWindow ? (
-            <DrillInRow
-              title="Open time"
-              subtitle={`${todayVm.openWindow.availableMinutes} min available`}
-              detail={
-                todayVm.openWindow.opensUntilLabel
-                  ? `Until ${todayVm.openWindow.opensUntilLabel}`
-                  : "Open window"
-              }
-              actionLabel="Use time"
-              leading={
-                <Ionicons color={theme.colors.accent.primary} name="sparkles-outline" size={18} />
-              }
-              onPress={() => navigation.navigate("TodayOpenTime")}
-            />
-          ) : null}
-          <DrillInRow
-            title="Capacity"
-            subtitle={todayVm.workspace.room.title}
-            detail={todayVm.workspace.room.detail}
-            actionLabel="Open"
-            leading={
-              <Ionicons color={theme.colors.text.secondary} name="speedometer-outline" size={18} />
-            }
-            onPress={() => navigation.navigate("TodayCapacity")}
-          />
-          <DrillInRow
-            title="Context"
-            subtitle={todayVm.integration.usingLiveCalendar ? "Live calendar" : "Saved schedule"}
-            detail={todayVm.integration.calendarStatusLabel}
-            actionLabel="Open"
-            leading={
-              <Ionicons
-                color={theme.colors.text.secondary}
-                name="calendar-clear-outline"
-                size={18}
+        <Surface className="gap-4">
+          <DetailSection
+            title="Drill in"
+            description="Open the parts of today that deserve a closer read without crowding the main line."
+          >
+            <View className="gap-3">
+              {todayVm.openWindow ? (
+                <DrillInRow
+                  title="Open time"
+                  subtitle={`${todayVm.openWindow.availableMinutes} min available`}
+                  detail={
+                    todayVm.openWindow.opensUntilLabel
+                      ? `Until ${todayVm.openWindow.opensUntilLabel}`
+                      : "Open window"
+                  }
+                  actionLabel="Use time"
+                  leading={
+                    <Ionicons color={theme.colors.accent.primary} name="sparkles-outline" size={18} />
+                  }
+                  onPress={() => navigation.navigate("TodayOpenTime")}
+                />
+              ) : null}
+              <DrillInRow
+                title="Capacity"
+                subtitle={todayVm.workspace.room.title}
+                detail={todayVm.workspace.room.detail}
+                actionLabel="Open"
+                leading={
+                  <Ionicons color={theme.colors.text.secondary} name="speedometer-outline" size={18} />
+                }
+                onPress={() => navigation.navigate("TodayCapacity")}
               />
-            }
-            onPress={() => navigation.navigate("TodayContext")}
-          />
-        </View>
+              <DrillInRow
+                title="Context"
+                subtitle={todayVm.integration.usingLiveCalendar ? "Live calendar" : "Saved schedule"}
+                detail={todayVm.integration.calendarStatusLabel}
+                actionLabel="Open"
+                leading={
+                  <Ionicons
+                    color={theme.colors.text.secondary}
+                    name="calendar-clear-outline"
+                    size={18}
+                  />
+                }
+                onPress={() => navigation.navigate("TodayContext")}
+              />
+            </View>
+          </DetailSection>
+        </Surface>
 
         {pendingReviewCount > 0 ? (
           <AppText tone="tertiary" variant="caption">

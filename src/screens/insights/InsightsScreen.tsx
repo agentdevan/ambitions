@@ -4,6 +4,11 @@ import { useEffect, useMemo, useState } from "react";
 import { View } from "react-native";
 
 import { MomentumBars } from "../../components/history/ActivityTimeline";
+import {
+  DetailSection,
+  DetailSummaryStrip,
+  QuietMetaLine,
+} from "../../components/detail/DetailPrimitives";
 import { DrillInRow } from "../../components/navigation/DrillInRow";
 import { PageHeader } from "../../components/navigation/PageHeader";
 import { Button } from "../../components/ui/Button";
@@ -41,20 +46,6 @@ import { summarizeMonthlyReviewControl } from "../../services/profile/controlSum
 
 type Props = NativeStackScreenProps<InsightsStackParamList, "InsightsHome">;
 type CarryDecision = "carry" | "review" | "release";
-
-function StatCard({ label, value, detail }: { label: string; value: string; detail: string }) {
-  return (
-    <View className="flex-1 gap-1 rounded-[20px] px-4 py-4">
-      <AppText tone="tertiary" variant="micro" style={{ textTransform: "uppercase" }}>
-        {label}
-      </AppText>
-      <AppText variant="section">{value}</AppText>
-      <AppText tone="secondary" variant="caption">
-        {detail}
-      </AppText>
-    </View>
-  );
-}
 
 function CarryoverTaskCard({
   title,
@@ -396,6 +387,60 @@ export function InsightsScreen({ navigation }: Props) {
     pressureLevel: nextMonthReview?.pressureLevel ?? monthPressure,
     carryoverStance: nextMonthReview?.carryoverStance ?? monthCarryoverStance,
   });
+  const nextMoveTitle = !currentWeekReview?.reviewedAt
+    ? "Review this week"
+    : needsCarryoverReview
+      ? "Decide unfinished work"
+      : !nextWeekReview?.nextWeekShapedAt
+        ? "Shape next week"
+        : !currentMonthReview?.reviewedAt
+          ? "Review the month"
+          : !nextMonthReview?.strategySetAt
+            ? "Set the next month"
+            : "Open continuity";
+  const nextMoveDetail = !currentWeekReview?.reviewedAt
+    ? weeklyDigest.reads[0]
+    : needsCarryoverReview
+      ? `${carryoverTasks.length} unfinished task${carryoverTasks.length === 1 ? "" : "s"} still need an explicit carry, review, or release decision.`
+      : !nextWeekReview?.nextWeekShapedAt
+        ? `Next week still has no saved posture. ${nextWeekShapeLabel}.`
+        : !currentMonthReview?.reviewedAt
+          ? monthlyDigest.headline
+          : !nextMonthReview?.strategySetAt
+            ? `Next month is still unset. ${nextMonthShapeLabel}.`
+            : "Review the deeper continuity and plan-change reads when you want more context.";
+  const returnItems = [
+    {
+      label: "This week",
+      value: weeklySummary.heldSteady ? "Holding" : "Needs reset",
+      detail: weeklyDigest.reads[0],
+    },
+    {
+      label: "Carryover",
+      value: needsCarryoverReview ? String(carryoverTasks.length) : "Clear",
+      detail: needsCarryoverReview
+        ? "Unfinished work still needs an explicit disposition"
+        : "No carryover review is currently waiting",
+    },
+    {
+      label: "Next week",
+      value: nextWeekReview?.nextWeekShapedAt ? "Shaped" : "Unset",
+      detail: nextWeekReview?.nextWeekShapedAt
+        ? nextWeekShapeLabel
+        : "No saved posture yet",
+    },
+    {
+      label: "Next move",
+      value: nextMoveTitle,
+      detail: nextMoveDetail,
+    },
+  ];
+  const returnReads = [
+    summary.personalizedHighlights[0] ?? summary.momentumCopy,
+    summary.personalizedHighlights[1] ?? summary.planCopy,
+    summary.closingImpactCopy,
+    monthlyDigest.reads[0] ?? monthlyDigest.headline,
+  ];
 
   return (
     <Screen>
@@ -420,24 +465,34 @@ export function InsightsScreen({ navigation }: Props) {
           </View>
 
           <View className="gap-2">
-            <AppText variant="title">Weekly continuity</AppText>
-            <AppText tone="secondary" variant="caption">
-              {weeklyDigest.reads[0]}
-            </AppText>
+            <AppText variant="title">Insights</AppText>
+            <AppText tone="secondary">{summary.personalizedHighlights[0] ?? weeklyDigest.reads[0]}</AppText>
           </View>
 
-          <View className="flex-row gap-3">
-            <StatCard
-              label="Reviewed"
-              value={String(weeklyContinuity.reviewedWeeks)}
-              detail="Intentional weeks"
-            />
-            <StatCard
-              label="Shaped"
-              value={String(weeklyContinuity.shapedWeeks)}
-              detail="Weeks started deliberately"
-            />
-          </View>
+          <DetailSummaryStrip
+            items={[
+              {
+                label: "Completed",
+                value: String(summary.completedThisWeek),
+                detail: "Completion events this week",
+              },
+              {
+                label: "Reshaped",
+                value: String(summary.reshapedThisWeek),
+                detail: "Adjustments and carryover this week",
+              },
+              {
+                label: "Reviewed",
+                value: String(weeklyContinuity.reviewedWeeks),
+                detail: "Intentional weeks on record",
+              },
+              {
+                label: "Shaped",
+                value: String(weeklyContinuity.shapedWeeks),
+                detail: "Weeks started deliberately",
+              },
+            ]}
+          />
 
           <View className="gap-2">
             <View className="flex-row items-center justify-between">
@@ -450,6 +505,18 @@ export function InsightsScreen({ navigation }: Props) {
             </View>
             <ProgressBar progress={weeklyCompletionShare} />
           </View>
+        </Surface>
+
+        <Surface className="gap-5">
+          <DetailSection
+            title="Return line"
+            description="What shifted, what still matters, and the cleanest next useful read."
+          >
+            <View className="gap-4">
+              <DetailSummaryStrip items={returnItems} />
+              <QuietMetaLine items={returnReads} />
+            </View>
+          </DetailSection>
         </Surface>
 
         <Surface className="gap-4">
@@ -481,47 +548,46 @@ export function InsightsScreen({ navigation }: Props) {
         </Surface>
 
         <Surface className="gap-4">
-          <View className="gap-1">
-            <AppText tone="tertiary" variant="micro" style={{ textTransform: "uppercase" }}>
-              Weekly review
-            </AppText>
-            <AppText variant="title">
-              {formatShortDate(weeklyDigest.weekStartDate)} - {formatShortDate(weeklyDigest.weekEndDate)}
-            </AppText>
-          </View>
-          <MomentumBars points={summary.momentum} />
-          <View className="flex-row flex-wrap gap-2">
-            <Pill label={`${weeklyDigest.summary.daysOpened} opened`} tone="quiet" />
-            <Pill label={`${weeklyDigest.summary.daysClosed} closed`} tone="quiet" />
-            <Pill label={`${weeklyDigest.summary.recoveryCount} recoveries`} tone="quiet" />
-            <Pill label={`${Math.round(weeklyDigest.summary.churnRate * 100)}% churn`} tone="quiet" />
-          </View>
-          <View className="gap-2">
-            {weeklyDigest.reads.map((read) => (
-              <AppText key={read} tone="secondary" variant="caption">
-                {read}
-              </AppText>
-            ))}
-          </View>
-          <TextField
-            label="Weekly note"
-            multiline
-            onChangeText={setReviewNote}
-            supportingText="Optional and short."
-            value={reviewNote}
-          />
-          <Button
-            busy={busyAction === "review-week"}
-            onPress={() =>
-              void runAction(
-                "review-week",
-                () => reviewWeek({ note: reviewNote }),
-                "Weekly review could not be saved.",
-              )
-            }
+          <DetailSection
+            title="Weekly review"
+            description={`${formatShortDate(weeklyDigest.weekStartDate)} - ${formatShortDate(weeklyDigest.weekEndDate)}`}
           >
-            {currentWeekReview?.reviewedAt ? "Update review" : "Review week"}
-          </Button>
+            <View className="gap-4">
+              <MomentumBars points={summary.momentum} />
+              <View className="flex-row flex-wrap gap-2">
+                <Pill label={`${weeklyDigest.summary.daysOpened} opened`} tone="quiet" />
+                <Pill label={`${weeklyDigest.summary.daysClosed} closed`} tone="quiet" />
+                <Pill label={`${weeklyDigest.summary.recoveryCount} recoveries`} tone="quiet" />
+                <Pill label={`${Math.round(weeklyDigest.summary.churnRate * 100)}% churn`} tone="quiet" />
+              </View>
+              <View className="gap-2">
+                {weeklyDigest.reads.map((read) => (
+                  <AppText key={read} tone="secondary" variant="caption">
+                    {read}
+                  </AppText>
+                ))}
+              </View>
+              <TextField
+                label="Weekly note"
+                multiline
+                onChangeText={setReviewNote}
+                supportingText="Optional and short."
+                value={reviewNote}
+              />
+              <Button
+                busy={busyAction === "review-week"}
+                onPress={() =>
+                  void runAction(
+                    "review-week",
+                    () => reviewWeek({ note: reviewNote }),
+                    "Weekly review could not be saved.",
+                  )
+                }
+              >
+                {currentWeekReview?.reviewedAt ? "Update review" : "Review week"}
+              </Button>
+            </View>
+          </DetailSection>
         </Surface>
 
         <Surface className="gap-4">

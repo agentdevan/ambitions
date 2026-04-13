@@ -1,8 +1,12 @@
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
 import { Ionicons } from "@expo/vector-icons";
-import type { ReactNode } from "react";
 import { View } from "react-native";
 
+import {
+  DetailSection,
+  DetailSummaryStrip,
+  QuietMetaLine,
+} from "../../components/detail/DetailPrimitives";
 import { DrillInRow } from "../../components/navigation/DrillInRow";
 import { PageHeader } from "../../components/navigation/PageHeader";
 import { Button } from "../../components/ui/Button";
@@ -24,17 +28,6 @@ import { formatTimeRangeLabel } from "../../utils/date";
 import { ProfileStackParamList } from "../../navigation/types";
 
 type Props = NativeStackScreenProps<ProfileStackParamList, "ProfileHome">;
-
-function SettingGroup({ title, children }: { title: string; children: ReactNode }) {
-  return (
-    <View className="gap-3">
-      <AppText tone="tertiary" variant="micro" style={{ textTransform: "uppercase" }}>
-        {title}
-      </AppText>
-      <View className="gap-3">{children}</View>
-    </View>
-  );
-}
 
 export function ProfileScreen({ navigation }: Props) {
   const productPreferences = useAppStore((state) => state.productPreferences);
@@ -92,6 +85,34 @@ export function ProfileScreen({ navigation }: Props) {
     productPreferences.appearanceMode === "system"
       ? `System · ${theme.accentLabel}`
       : `${productPreferences.appearanceMode} · ${theme.accentLabel}`;
+  const homeSummaryItems = [
+    {
+      label: "Sync",
+      value: account ? accountSummary.headline : "Local only",
+      detail: accountSummary.detail,
+    },
+    {
+      label: "Calendar",
+      value: calendarSummary.badge,
+      detail: calendarSummary.headline,
+    },
+    {
+      label: "Reminders",
+      value: enabledNotifications > 0 ? `${enabledNotifications} active` : "Muted",
+      detail: quietHoursSummary,
+    },
+    {
+      label: "Movement",
+      value: String(reflectionSummary.completedThisWeek),
+      detail: "Completed this week",
+    },
+  ];
+  const statusReads = [
+    planningSummary.learnedSummary,
+    reflectionSummary.personalizedHighlights[0] ?? reflectionSummary.momentumCopy,
+    calendarSummary.issue ?? calendarSummary.detail,
+    account ? accountSummary.detail : "Everything is still staying on this device.",
+  ];
 
   return (
     <Screen>
@@ -146,104 +167,114 @@ export function ProfileScreen({ navigation }: Props) {
             />
             <Pill label={`${reflectionSummary.completedThisWeek} done this week`} tone="accent" />
           </View>
+          <DetailSummaryStrip items={homeSummaryItems} />
         </Surface>
 
-        <SettingGroup title="Planning">
-          <DrillInRow
-            title="Planning"
-            subtitle={planningSummary.unfinishedWorkLabel}
-            detail={`${planningSummary.intensityLabel} · ${planningSummary.monthlyPostureLabel}`}
-            actionLabel="Open"
-            leading={<Ionicons color={theme.colors.text.secondary} name="options-outline" size={18} />}
-            onPress={() => navigation.navigate("ProfilePlanningPreferences")}
-          />
-          <DrillInRow
-            title="Schedule"
-            subtitle={formatTimeRangeLabel(
-              productPreferences.schedule.sleepStart,
-              productPreferences.schedule.sleepEnd,
-            )}
-            detail={`${productPreferences.schedule.commuteMinutes} min commute`}
-            actionLabel="Open"
-            leading={<Ionicons color={theme.colors.text.secondary} name="time-outline" size={18} />}
-            onPress={() => navigation.navigate("ProfileScheduleDefaults")}
-          />
-        </SettingGroup>
-
-        <SettingGroup title="Connected">
-          <DrillInRow
-            title="Integrations"
-            subtitle={calendarSummary.headline}
-            detail={calendarSummary.badge}
-            actionLabel="Open"
-            leading={<Ionicons color={theme.colors.text.secondary} name="link-outline" size={18} />}
-            onPress={() => navigation.navigate("ProfileIntegrations")}
-          />
-          <DrillInRow
-            title="Notifications"
-            subtitle={enabledNotifications > 0 ? `${enabledNotifications} reminder${enabledNotifications === 1 ? "" : "s"} active` : "All reminders muted"}
-            detail={quietHoursSummary}
-            actionLabel="Open"
-            leading={<Ionicons color={theme.colors.text.secondary} name="notifications-outline" size={18} />}
-            onPress={() => navigation.navigate("ProfileNotifications")}
-          />
-          <DrillInRow
-            title="Account"
-            subtitle={accountSummary.headline}
-            detail={account ? "Connected account" : "Local only"}
-            actionLabel="Open"
-            leading={<Ionicons color={theme.colors.text.secondary} name="person-circle-outline" size={18} />}
-            onPress={() => navigation.navigate("ProfileAccount")}
-          />
-        </SettingGroup>
-
-        <SettingGroup title="Profile">
-          <DrillInRow
-            title="Appearance"
-            subtitle="Mode and accent"
-            detail={appearanceDetail}
-            actionLabel="Open"
-            leading={<Ionicons color={theme.colors.text.secondary} name="color-palette-outline" size={18} />}
-            onPress={() => navigation.navigate("ProfileAppearance")}
-          />
-          <DrillInRow
-            title="History & reflection"
-            subtitle={reflectionSummary.personalizedHighlights[0] ?? "Recent movement and reflection"}
-            detail={`${reflectionSummary.completedThisWeek} completed this week`}
-            actionLabel="Open"
-            leading={<Ionicons color={theme.colors.text.secondary} name="pulse-outline" size={18} />}
-            onPress={() => navigation.navigate("ProfileHistory")}
-          />
-        </SettingGroup>
-
-        <Surface className="gap-3">
-          <AppText variant="section">What&apos;s controllable now</AppText>
-          <AppText tone="secondary" variant="caption">
-            Plan weight, daily closeout defaults, weekly shaping posture, monthly steering defaults, reminders, calendar context, account syncing, and appearance are yours to tune.
-          </AppText>
-          <View className="flex-row flex-wrap gap-2">
-            <Pill label={planningSummary.intensityLabel} tone="quiet" />
-            <Pill label={planningSummary.unfinishedWorkLabel} tone="quiet" />
-            <Pill label={planningSummary.weeklyCarryoverLabel} tone="quiet" />
-            <Pill label={`${formatMonthlyReviewCadenceShort(productPreferences.monthlyReviewDay)} review`} tone="quiet" />
-            <Pill label={calendarSummary.badge} tone="quiet" />
-          </View>
+        <Surface className="gap-5">
+          <DetailSection
+            title="Status line"
+            description="Profile stays secondary, but it should still tell you quickly what is healthy, connected, or needs trust attention."
+          >
+            <View className="gap-4">
+              <QuietMetaLine items={statusReads} />
+              <View className="flex-row flex-wrap gap-2">
+                <Pill label={planningSummary.intensityLabel} tone="quiet" />
+                <Pill label={planningSummary.unfinishedWorkLabel} tone="quiet" />
+                <Pill label={planningSummary.weeklyCarryoverLabel} tone="quiet" />
+                <Pill label={`${formatMonthlyReviewCadenceShort(productPreferences.monthlyReviewDay)} review`} tone="quiet" />
+                <Pill label={calendarSummary.badge} tone="quiet" />
+              </View>
+            </View>
+          </DetailSection>
         </Surface>
 
-        {productPreferences.adaptivePlanningEnabled ? (
-          <Surface className="gap-3">
-            <AppText variant="section">Planning automation</AppText>
-            <AppText tone="secondary" variant="caption">
-              {planningSummary.learnedSummary}
-            </AppText>
-          </Surface>
-        ) : null}
+        <Surface className="gap-5">
+          <DetailSection
+            title="Trust and connected systems"
+            description="Account, sync, calendar, and reminders belong together so operational trust reads as one layer."
+          >
+            <View className="gap-3">
+              <DrillInRow
+                title="Integrations"
+                subtitle={calendarSummary.headline}
+                detail={calendarSummary.badge}
+                actionLabel="Open"
+                leading={<Ionicons color={theme.colors.text.secondary} name="link-outline" size={18} />}
+                onPress={() => navigation.navigate("ProfileIntegrations")}
+              />
+              <DrillInRow
+                title="Notifications"
+                subtitle={enabledNotifications > 0 ? `${enabledNotifications} reminder${enabledNotifications === 1 ? "" : "s"} active` : "All reminders muted"}
+                detail={quietHoursSummary}
+                actionLabel="Open"
+                leading={<Ionicons color={theme.colors.text.secondary} name="notifications-outline" size={18} />}
+                onPress={() => navigation.navigate("ProfileNotifications")}
+              />
+              <DrillInRow
+                title="Account"
+                subtitle={accountSummary.headline}
+                detail={account ? "Connected account" : "Local only"}
+                actionLabel="Open"
+                leading={<Ionicons color={theme.colors.text.secondary} name="person-circle-outline" size={18} />}
+                onPress={() => navigation.navigate("ProfileAccount")}
+              />
+            </View>
+          </DetailSection>
+        </Surface>
 
-        <Surface className="gap-3">
-          <AppText variant="section">You&apos;re on track</AppText>
-          <AppText tone="secondary" variant="caption">
-            {reflectionSummary.personalizedHighlights[0] ?? "Recent movement is starting to take shape."}
-          </AppText>
+        <Surface className="gap-5">
+          <DetailSection
+            title="Planning defaults"
+            description="These controls shape how the planner behaves before Today, Plan, and Insights interpret anything."
+          >
+            <View className="gap-3">
+              <DrillInRow
+                title="Planning"
+                subtitle={planningSummary.unfinishedWorkLabel}
+                detail={`${planningSummary.intensityLabel} · ${planningSummary.monthlyPostureLabel}`}
+                actionLabel="Open"
+                leading={<Ionicons color={theme.colors.text.secondary} name="options-outline" size={18} />}
+                onPress={() => navigation.navigate("ProfilePlanningPreferences")}
+              />
+              <DrillInRow
+                title="Schedule"
+                subtitle={formatTimeRangeLabel(
+                  productPreferences.schedule.sleepStart,
+                  productPreferences.schedule.sleepEnd,
+                )}
+                detail={`${productPreferences.schedule.commuteMinutes} min commute`}
+                actionLabel="Open"
+                leading={<Ionicons color={theme.colors.text.secondary} name="time-outline" size={18} />}
+                onPress={() => navigation.navigate("ProfileScheduleDefaults")}
+              />
+            </View>
+          </DetailSection>
+        </Surface>
+
+        <Surface className="gap-5">
+          <DetailSection
+            title="Personalization and reflection"
+            description="Appearance and history stay available, but they remain support surfaces instead of becoming the workflow."
+          >
+            <View className="gap-3">
+              <DrillInRow
+                title="Appearance"
+                subtitle="Mode and accent"
+                detail={appearanceDetail}
+                actionLabel="Open"
+                leading={<Ionicons color={theme.colors.text.secondary} name="color-palette-outline" size={18} />}
+                onPress={() => navigation.navigate("ProfileAppearance")}
+              />
+              <DrillInRow
+                title="History & reflection"
+                subtitle={reflectionSummary.personalizedHighlights[0] ?? "Recent movement and reflection"}
+                detail={`${reflectionSummary.completedThisWeek} completed this week`}
+                actionLabel="Open"
+                leading={<Ionicons color={theme.colors.text.secondary} name="pulse-outline" size={18} />}
+                onPress={() => navigation.navigate("ProfileHistory")}
+              />
+            </View>
+          </DetailSection>
         </Surface>
       </View>
     </Screen>

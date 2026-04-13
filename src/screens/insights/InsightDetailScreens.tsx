@@ -323,12 +323,21 @@ export function InsightContinuityScreen() {
 }
 
 export function InsightActivityScreen() {
+  const goals = useAppStore((state) => state.goals);
   const milestones = useAppStore((state) => state.milestones);
   const tasks = useAppStore((state) => state.allTasks);
   const activityEvents = useAppStore((state) => state.activityEvents);
+  const adaptationProfile = useAppStore((state) => state.adaptationProfile);
 
   const feed = buildActivityFeed(activityEvents, tasks, milestones);
   const groups = groupActivityByDate(feed);
+  const summary = summarizeInsights({
+    goals,
+    tasks,
+    milestones,
+    events: feed,
+    profile: adaptationProfile,
+  });
 
   return (
     <Screen>
@@ -336,8 +345,43 @@ export function InsightActivityScreen() {
         <DetailHero
           eyebrow="Insights"
           title="Activity timeline"
-          description="What happened."
+          description={summary.momentumCopy}
+          meta={
+            <DetailSummaryStrip
+              items={[
+                {
+                  label: "Events",
+                  value: String(feed.length),
+                  detail: "Tracked activity events",
+                },
+                {
+                  label: "Completed",
+                  value: String(summary.completedThisWeek),
+                  detail: "Completion events this week",
+                },
+                {
+                  label: "Reshaped",
+                  value: String(summary.reshapedThisWeek),
+                  detail: "Adjustments this week",
+                },
+                {
+                  label: "Moving goals",
+                  value: String(summary.movingGoalCount),
+                  detail: "Active goals with recent movement",
+                },
+              ]}
+            />
+          }
         />
+        <Surface className="gap-3 mb-0">
+          <QuietMetaLine
+            items={[
+              summary.momentumCopy,
+              summary.planCopy,
+              summary.closingImpactCopy,
+            ]}
+          />
+        </Surface>
         <GroupedActivityTimeline
           groups={groups}
           emptyTitle="No activity yet"
@@ -364,6 +408,7 @@ export function InsightPlanChangesScreen() {
     ].includes(event.kind),
   );
   const groups = groupActivityByDate(feed);
+  const activeGoalCount = goals.filter((goal) => goal.status === GoalStatus.Active).length;
 
   return (
     <Screen>
@@ -371,7 +416,37 @@ export function InsightPlanChangesScreen() {
         <DetailHero
           eyebrow="Insights"
           title="Plan changes"
-          description="What changed in the plan."
+          description="What changed in the plan, without forcing you to read a wall of churn."
+          meta={
+            <DetailSummaryStrip
+              items={[
+                {
+                  label: "Changes",
+                  value: String(feed.length),
+                  detail: "Recent plan and goal shifts",
+                },
+                {
+                  label: "Goals",
+                  value: String(activeGoalCount),
+                  detail: "Active direction surfaces in play",
+                },
+                {
+                  label: "Review",
+                  value: String(
+                    goals.filter((goal) => Boolean(getGoalReviewDraft(goal))).length,
+                  ),
+                  detail: "Goals currently waiting on review",
+                },
+                {
+                  label: "Rescheduled",
+                  value: String(
+                    feed.filter((event) => event.kind === ActivityEventKind.TaskRescheduled).length,
+                  ),
+                  detail: "Task timing changes in this feed",
+                },
+              ]}
+            />
+          }
         />
 
         <DetailSection

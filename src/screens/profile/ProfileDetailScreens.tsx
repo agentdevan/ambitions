@@ -142,37 +142,76 @@ export function ProfileHistoryScreen() {
 
   return (
     <Screen>
-      <View className="gap-4">
-        <Surface tone="accent" className="gap-4">
-          <AppText variant="title">Recent movement</AppText>
-          <AppText tone="secondary">{summary.momentumCopy}</AppText>
-          <ProgressBar
-            progress={
-              summary.completedThisWeek + summary.reshapedThisWeek > 0
-                ? summary.completedThisWeek / (summary.completedThisWeek + summary.reshapedThisWeek)
-                : 0
-            }
-          />
-          <MomentumBars points={summary.momentum} />
-          <MetaLine
-            items={[
-              `${summary.completedThisWeek} completed this week`,
-              `${summary.reshapedThisWeek} reshaped`,
-              `${summary.openedThisWeek} opened · ${summary.closedThisWeek} closed`,
-            ]}
-          />
-        </Surface>
+      <View className="gap-6">
+        <DetailHero
+          eyebrow="Profile"
+          title="Recent movement"
+          description={summary.personalizedHighlights[0] ?? summary.momentumCopy}
+          meta={
+            <DetailSummaryStrip
+              items={[
+                {
+                  label: "Completed",
+                  value: String(summary.completedThisWeek),
+                  detail: "Completion events this week",
+                },
+                {
+                  label: "Reshaped",
+                  value: String(summary.reshapedThisWeek),
+                  detail: "Adjustments and carryover this week",
+                },
+                {
+                  label: "Opened",
+                  value: String(summary.openedThisWeek),
+                  detail: `${summary.closedThisWeek} days closed`,
+                },
+                {
+                  label: "Moving goals",
+                  value: String(summary.movingGoalCount),
+                  detail: "Active goals with recent movement",
+                },
+              ]}
+            />
+          }
+        />
 
-        <Surface className="gap-3">
-          <AppText variant="section">Daily rituals</AppText>
-          <AppText tone="secondary">{summary.planStabilityCopy}</AppText>
-          <MetaLine
-            items={[
-              `${summary.recoveryUsedThisWeek} recoveries`,
-              summary.carryoverQualityCopy,
-            ]}
-          />
-        </Surface>
+        <DetailSection
+          title="Movement line"
+          description="A compact read on recent completion, reshaping, and ritual continuity."
+        >
+          <Surface className="gap-4 mb-0">
+            <ProgressBar
+              progress={
+                summary.completedThisWeek + summary.reshapedThisWeek > 0
+                  ? summary.completedThisWeek / (summary.completedThisWeek + summary.reshapedThisWeek)
+                  : 0
+              }
+            />
+            <MomentumBars points={summary.momentum} />
+            <QuietMetaLine
+              items={[
+                summary.momentumCopy,
+                summary.planStabilityCopy,
+                summary.carryoverQualityCopy,
+              ]}
+            />
+          </Surface>
+        </DetailSection>
+
+        <DetailSection
+          title="Daily rituals"
+          description="Opening, recovery, and closeout behavior stay visible without turning into a score."
+        >
+          <Surface className="gap-3 mb-0">
+            <AppText tone="secondary">{summary.planStabilityCopy}</AppText>
+            <MetaLine
+              items={[
+                `${summary.recoveryUsedThisWeek} recoveries`,
+                summary.carryoverQualityCopy,
+              ]}
+            />
+          </Surface>
+        </DetailSection>
 
         <GroupedActivityTimeline
           groups={groups}

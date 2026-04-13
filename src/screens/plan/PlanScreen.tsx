@@ -138,6 +138,45 @@ export function PlanScreen({ navigation }: Props) {
       weekScheduleConstraints,
     ],
   );
+  const returnItems = workspace
+    ? [
+        {
+          label: "Open",
+          value: `${workspace.capacitySummary.openCapacityMinutes} min`,
+          detail: `${workspace.capacitySummary.meaningfulWindowCount} usable window${workspace.capacitySummary.meaningfulWindowCount === 1 ? "" : "s"} this week`,
+        },
+        {
+          label: "Carryover",
+          value: String(workspace.carryoverSummary.enteringCount),
+          detail: workspace.carryoverSummary.detail,
+        },
+        {
+          label: "Pressure",
+          value: String(workspace.structureSummary.underPressureCount),
+          detail:
+            workspace.structureSummary.underPressureCount > 0
+              ? "Needs a deliberate reshaping decision"
+              : "No major pressure points are flashing right now",
+        },
+        {
+          label: "Next move",
+          value: workspace.shouldOpenWeeklyReview ? "Review week" : "Open week",
+          detail: workspace.strategySummary.weeklyShape,
+        },
+      ]
+    : [];
+  const returnReads = workspace
+    ? [
+        workspace.heroDetail,
+        workspace.capacitySummary.weeklyLoadDetail,
+        reviewGoals.length > 0
+          ? `${reviewGoals.length} goal review${reviewGoals.length === 1 ? "" : "s"} are still waiting outside the weekly structure.`
+          : "No goal review backlog is waiting on the week.",
+        workspace.structureSummary.carryoverCount > 0
+          ? "Carryover is visible here so Today does not have to carry that reading burden."
+          : "No meaningful carryover is obscuring the week.",
+      ]
+    : [];
 
   function openWeeklyExperience() {
     (navigation.getParent() as any)?.navigate("Insights", {
@@ -226,6 +265,18 @@ export function PlanScreen({ navigation }: Props) {
           <QuietMetaLine items={workspace.structuralReads.slice(0, 2)} />
         </Surface>
 
+        <Surface className="gap-5">
+          <DetailSection
+            title="Return line"
+            description="What changed in the week, what still fits, and the cleanest next planning move."
+          >
+            <View className="gap-4">
+              <DetailSummaryStrip items={returnItems} />
+              <QuietMetaLine items={returnReads} />
+            </View>
+          </DetailSection>
+        </Surface>
+
         <Surface className="gap-4">
           <DetailSection
             title="Week line"
@@ -307,10 +358,10 @@ export function PlanScreen({ navigation }: Props) {
 
         <Surface className="gap-5">
           <DetailSection
-            title="Carryover"
-            description="Plan is the best place to see what came forward on purpose versus what is still drifting."
+            title="Carryover and next decisions"
+            description="Plan is where unfinished work should become explicit again instead of staying vague."
           >
-            <View className="gap-3">
+            <View className="gap-4">
               <DetailSummaryStrip
                 items={[
                   {
@@ -348,24 +399,29 @@ export function PlanScreen({ navigation }: Props) {
             </View>
           </DetailSection>
 
-          <View className="gap-3">
-            <DrillInRow
-              title="Weekly shaping"
-              subtitle={workspace.strategySummary.detail}
-              detail={workspace.strategySummary.weeklyShape}
-              actionLabel="Open"
-              leading={<Ionicons color={theme.colors.text.secondary} name="sparkles-outline" size={18} />}
-              onPress={openWeeklyExperience}
-            />
-            <DrillInRow
-              title="Generated structure"
-              subtitle="Goals, milestones, and the current task shape."
-              detail={`${activeGoals.length} active goals`}
-              actionLabel="Open"
-              leading={<Ionicons color={theme.colors.text.secondary} name="layers-outline" size={18} />}
-              onPress={() => navigation.navigate("PlanStructure", {})}
-            />
-          </View>
+          <DetailSection
+            title="Drill in"
+            description="Open the connected surfaces that shape the week without flattening their responsibilities."
+          >
+            <View className="gap-3">
+              <DrillInRow
+                title="Weekly shaping"
+                subtitle={workspace.strategySummary.detail}
+                detail={workspace.strategySummary.weeklyShape}
+                actionLabel="Open"
+                leading={<Ionicons color={theme.colors.text.secondary} name="sparkles-outline" size={18} />}
+                onPress={openWeeklyExperience}
+              />
+              <DrillInRow
+                title="Generated structure"
+                subtitle="Goals, milestones, and the current task shape."
+                detail={`${activeGoals.length} active goals`}
+                actionLabel="Open"
+                leading={<Ionicons color={theme.colors.text.secondary} name="layers-outline" size={18} />}
+                onPress={() => navigation.navigate("PlanStructure", {})}
+              />
+            </View>
+          </DetailSection>
         </Surface>
       </View>
     </Screen>
