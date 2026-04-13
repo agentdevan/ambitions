@@ -23,7 +23,7 @@ type Props = NativeStackScreenProps<PlanStackParamList, "PlanHome">;
 
 function WeekdayRow({ day }: { day: PlanDaySummary }) {
   return (
-    <View className="flex-row items-center gap-3 rounded-[20px] px-4 py-3" style={{ backgroundColor: "#F5F1EA" }}>
+    <Surface tone="sunken" className="flex-row items-center gap-3 rounded-[20px] px-4 py-3 mb-0">
       <View className="min-w-[108px] gap-1">
         <AppText variant="caption">{day.label}</AppText>
         <AppText tone="tertiary" variant="micro">
@@ -48,7 +48,7 @@ function WeekdayRow({ day }: { day: PlanDaySummary }) {
           {day.isTight ? "Tight" : `${day.meaningfulWindowCount} windows`}
         </AppText>
       </View>
-    </View>
+    </Surface>
   );
 }
 
@@ -69,10 +69,10 @@ function StructureList({
       {items.length > 0 ? (
         <View className="gap-2">
           {items.map((item) => (
-            <View
+            <Surface
+              tone="sunken"
               key={item.id}
               className="gap-1 rounded-[18px] px-4 py-3"
-              style={{ backgroundColor: "#F5F1EA" }}
             >
               <AppText variant="caption">{item.title}</AppText>
               <AppText tone="secondary" variant="caption">
@@ -81,7 +81,7 @@ function StructureList({
               <AppText tone="tertiary" variant="micro">
                 {item.supporting}
               </AppText>
-            </View>
+            </Surface>
           ))}
         </View>
       ) : (
@@ -272,7 +272,7 @@ export function PlanScreen({ navigation }: Props) {
             title="Capacity"
             description="This is the real room left once calendar anchors and planned work are accounted for."
           >
-            <View className="gap-3 rounded-[22px] px-4 py-4" style={{ backgroundColor: "#F5F1EA" }}>
+            <Surface tone="sunken" className="gap-3 rounded-[22px] px-4 py-4 mb-0">
               <View className="flex-row flex-wrap gap-x-6 gap-y-3">
                 <View className="min-w-[96px] gap-1">
                   <AppText tone="tertiary" variant="micro" style={{ textTransform: "uppercase" }}>
@@ -301,7 +301,7 @@ export function PlanScreen({ navigation }: Props) {
               <AppText tone="tertiary" variant="caption">
                 {workspace.capacitySummary.fragmentationDetail}
               </AppText>
-            </View>
+            </Surface>
           </DetailSection>
         </Surface>
 

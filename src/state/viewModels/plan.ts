@@ -447,12 +447,12 @@ export function buildPlanWorkspaceViewModel(params: {
 
   const structuralReads = [
     fixedCommitments.length > 0
-      ? `${fixedCommitments.length} fixed commitments are already anchoring the week.`
+      ? `${fixedCommitments.length} fixed commitments are anchoring the week.`
       : params.calendarConnectionState?.permissionState === "granted"
         ? "The week is still light on fixed commitments."
         : "Calendar context is still limited, so fixed commitments may be understated.",
     protectedFocusBlocks.length >= 3
-      ? `${protectedFocusBlocks.length} focus blocks are already protected.`
+      ? `${protectedFocusBlocks.length} focus blocks are protected in the week.`
       : "Protected focus time is still thin for the amount of work in view.",
     carryoverTasks.length > 0
       ? `${carryoverTasks.length} items entered the week as carryover, with ${carryoverReviewTasks.length} still review-gated.`
@@ -493,10 +493,10 @@ export function buildPlanWorkspaceViewModel(params: {
       meaningfulWindowCount,
       largestOpenWindowMinutes: largestOpenWindow,
       largestOpenWindowLabel:
-        largestOpenWindow > 0 ? `${countHoursAndMinutes(largestOpenWindow)} in the clearest window` : null,
+      largestOpenWindow > 0 ? `${countHoursAndMinutes(largestOpenWindow)} in the clearest window` : null,
       fragmentationLabel,
       fragmentationDetail,
-      weeklyLoadDetail: `${countHoursAndMinutes(scheduledWorkMinutes)} of work is already placed inside ${countHoursAndMinutes(totalUsableMinutes)} of usable room.`,
+      weeklyLoadDetail: `${countHoursAndMinutes(scheduledWorkMinutes)} of work is placed inside ${countHoursAndMinutes(totalUsableMinutes)} of usable room.`,
     },
     carryoverSummary: {
       enteringCount: carryoverTasks.length,
@@ -541,7 +541,7 @@ export function buildPlanWorkspaceViewModel(params: {
       id: task.id,
       title: task.title,
       detail: summarizeTask(task),
-      supporting: scheduledTaskIds.has(task.id) ? "Already taking room" : "Keep negotiable",
+      supporting: scheduledTaskIds.has(task.id) ? "Taking room this week" : "Keep negotiable",
     })),
     pressureItems: pressureTasks.slice(0, 4).map((task) => ({
       id: task.id,

@@ -62,6 +62,9 @@ export interface FoundationSnapshot {
 
 async function syncCalendarIntegration(date: string) {
   const existingState = await appServices.repositories.integration.getCalendarConnectionState();
+  const preferences = await appServices.repositories.preferences.getUserPreferences();
+  const weekStartDate = startOfWeek(date, preferences?.weekStartsOn ?? 1);
+  const weekDates = Array.from({ length: 7 }, (_, index) => addDays(weekStartDate, index));
   const result = await appServices.services.calendar.syncDate({
     date,
     existingState,
@@ -72,11 +75,75 @@ async function syncCalendarIntegration(date: string) {
 
   if (shouldUseLiveCalendar(result.connectionState)) {
     await appServices.repositories.integration.replaceCalendarConstraintsForDate(date, result.constraints);
+    const siblingDates = weekDates.filter((currentDate) => currentDate !== date);
+
+    await Promise.all(
+      siblingDates.map(async (currentDate) => {
+        const siblingResult = await appServices.services.calendar.syncDate({
+          date: currentDate,
+          existingState: result.connectionState,
+          selectedCalendarIds: result.connectionState.selectedCalendarIds,
+        });
+
+        await appServices.repositories.integration.replaceCalendarConstraintsForDate(
+          currentDate,
+          siblingResult.constraints,
+        );
+      }),
+    );
   } else {
-    await appServices.repositories.integration.replaceCalendarConstraintsForDate(date, []);
+    await Promise.all(
+      weekDates.map((currentDate) =>
+        appServices.repositories.integration.replaceCalendarConstraintsForDate(currentDate, []),
+      ),
+    );
   }
 
   return result.connectionState;
+}
+
+function mergeWeeklyDailyPlans(params: {
+  date: string;
+  dailyPlans: DailyPlan[];
+  dailyPlan: DailyPlan | null;
+  schedule: SchedulingOutput | null;
+}) {
+  const next = params.dailyPlans.filter((plan) => plan.date !== params.date);
+  const freshestPlan = params.schedule?.dailyPlan ?? params.dailyPlan;
+
+  if (freshestPlan) {
+    next.push(freshestPlan);
+  }
+
+  return next.sort((left, right) => left.date.localeCompare(right.date));
+}
+
+function mergeWeeklyTimeBlocks(params: {
+  date: string;
+  allTimeBlocks: TimeBlock[];
+  dailyPlans: DailyPlan[];
+  dailyPlan: DailyPlan | null;
+  persistedBlocks: TimeBlock[];
+  schedule: SchedulingOutput | null;
+}) {
+  const currentDayPlanIds = new Set(
+    params.dailyPlans.filter((plan) => plan.date === params.date).map((plan) => plan.id),
+  );
+
+  if (params.dailyPlan) {
+    currentDayPlanIds.add(params.dailyPlan.id);
+  }
+
+  if (params.schedule?.dailyPlan) {
+    currentDayPlanIds.add(params.schedule.dailyPlan.id);
+  }
+
+  const next = params.allTimeBlocks.filter((block) => !currentDayPlanIds.has(block.dailyPlanId));
+  const freshestBlocks = params.schedule?.timeBlocks ?? params.persistedBlocks;
+
+  return [...next, ...freshestBlocks].sort((left, right) =>
+    left.startsAtDateTime.localeCompare(right.startsAtDateTime),
+  );
 }
 
 async function syncNotificationsForSnapshot(snapshot: FoundationSnapshot) {
@@ -191,6 +258,20 @@ export async function loadFoundationSnapshot(date: string): Promise<FoundationSn
     : null;
   const schedule = scheduleResult?.payload ?? null;
   const blocks = schedule?.timeBlocks ?? persistedBlocks;
+  const mergedDailyPlans = mergeWeeklyDailyPlans({
+    date,
+    dailyPlans,
+    dailyPlan,
+    schedule,
+  });
+  const mergedTimeBlocks = mergeWeeklyTimeBlocks({
+    date,
+    allTimeBlocks,
+    dailyPlans,
+    dailyPlan,
+    persistedBlocks,
+    schedule,
+  });
   const weekScheduleConstraints = [...weekConstraintDays.flat()].filter(
     (constraint, index, list) => list.findIndex((candidate) => candidate.id === constraint.id) === index,
   );
@@ -237,9 +318,9 @@ export async function loadFoundationSnapshot(date: string): Promise<FoundationSn
     currentMonthReview,
     nextMonthReview,
     monthlyReviewHistory,
-    dailyPlans,
+    dailyPlans: mergedDailyPlans,
     blocks,
-    allTimeBlocks,
+    allTimeBlocks: mergedTimeBlocks,
     tasks,
     allTasks,
     calendarConnectionState,
@@ -297,12 +378,15 @@ export async function refreshAllState(date: string) {
     currentMonthReview: snapshot.currentMonthReview,
     nextMonthReview: snapshot.nextMonthReview,
     monthlyReviewHistory: snapshot.monthlyReviewHistory,
+    dailyPlans: snapshot.dailyPlans,
     schedule: snapshot.schedule,
     today: snapshot.today,
+    allTimeBlocks: snapshot.allTimeBlocks,
     timeBlocksForSelectedDate: snapshot.blocks,
     tasksForSelectedDate: snapshot.tasks,
     calendarConnectionState: snapshot.calendarConnectionState,
     scheduleConstraints: snapshot.scheduleConstraints,
+    weekScheduleConstraints: snapshot.weekScheduleConstraints,
     notificationPermissionStatus,
   };
 }
