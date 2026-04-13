@@ -36,12 +36,12 @@ export function PageHeader({
         </AppText>
       </View>
       <View className="flex-row items-start justify-between gap-3">
-        <View className="flex-1 gap-2">
-          <AppText variant="hero" style={{ maxWidth: "92%" }}>
+        <View className="flex-1 gap-2.5">
+          <AppText variant="hero" style={{ maxWidth: "96%" }}>
             {title}
           </AppText>
           {description ? (
-            <AppText tone="secondary" variant="body" style={{ maxWidth: "92%" }}>
+            <AppText tone="secondary" variant="body" style={{ maxWidth: "96%" }}>
               {description}
             </AppText>
           ) : null}

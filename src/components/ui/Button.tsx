@@ -1,6 +1,7 @@
 import { ReactNode } from "react";
 import { ActivityIndicator, Pressable, PressableProps, StyleProp, ViewStyle } from "react-native";
 
+import { useAccessibilityPreferences } from "../../design/accessibility/useAccessibilityPreferences";
 import { useResolvedTheme } from "../../design/theme/useResolvedTheme";
 import { AppText } from "./Text";
 
@@ -22,6 +23,7 @@ export function Button({
   ...props
 }: ButtonProps) {
   const theme = useResolvedTheme();
+  const { reduceMotionEnabled } = useAccessibilityPreferences();
   const resolvedTone = tone === "ghost" ? "secondary" : tone;
   const tonePalette = {
     primary: {
@@ -92,7 +94,10 @@ export function Button({
   return (
     <Pressable
       {...props}
+      accessibilityRole="button"
+      accessibilityState={{ disabled: isDisabled, busy }}
       disabled={isDisabled}
+      hitSlop={resolvedTone === "inline" ? 4 : undefined}
       className="items-center justify-center"
       style={({ pressed }) => [
         {
@@ -112,7 +117,7 @@ export function Button({
               : tonePalette.idleBorder,
           borderWidth: resolvedTone === "inline" ? 0 : 1,
           opacity: isDisabled ? (resolvedTone === "inline" ? 0.58 : 0.68) : 1,
-          transform: [{ scale: pressed && !isDisabled ? 0.985 : 1 }],
+          transform: [{ scale: pressed && !isDisabled && !reduceMotionEnabled ? 0.985 : 1 }],
           shadowColor: tonePalette.shadowColor,
           shadowOpacity:
             resolvedTone === "primary"
@@ -161,6 +166,7 @@ export function Button({
           style={{
             fontWeight: "700",
             letterSpacing: resolvedTone === "primary" ? -0.22 : resolvedTone === "inline" ? -0.05 : -0.1,
+            textAlign: "center",
           }}
         >
           {children}

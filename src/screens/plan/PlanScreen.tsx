@@ -2,6 +2,7 @@ import { NativeStackScreenProps } from "@react-navigation/native-stack";
 import { Ionicons } from "@expo/vector-icons";
 import { useMemo } from "react";
 import { View } from "react-native";
+import { useShallow } from "zustand/react/shallow";
 
 import {
   CompactExplanationCard,
@@ -100,17 +101,33 @@ function StructureList({
 
 export function PlanScreen({ navigation }: Props) {
   const theme = useResolvedTheme();
-  const planDate = useAppStore((state) => state.planDate);
-  const goals = useAppStore((state) => state.goals);
-  const dailyPlans = useAppStore((state) => state.dailyPlans);
-  const timeBlocks = useAppStore((state) => state.allTimeBlocks);
-  const tasks = useAppStore((state) => state.allTasks);
-  const preferences = useAppStore((state) => state.userPreferences);
-  const adaptationProfile = useAppStore((state) => state.adaptationProfile);
-  const currentWeekReview = useAppStore((state) => state.currentWeekReview);
-  const currentMonthReview = useAppStore((state) => state.currentMonthReview);
-  const calendarConnectionState = useAppStore((state) => state.calendarConnectionState);
-  const weekScheduleConstraints = useAppStore((state) => state.weekScheduleConstraints);
+  const {
+    planDate,
+    goals,
+    dailyPlans,
+    timeBlocks,
+    tasks,
+    preferences,
+    adaptationProfile,
+    currentWeekReview,
+    currentMonthReview,
+    calendarConnectionState,
+    weekScheduleConstraints,
+  } = useAppStore(
+    useShallow((state) => ({
+      planDate: state.planDate,
+      goals: state.goals,
+      dailyPlans: state.dailyPlans,
+      timeBlocks: state.allTimeBlocks,
+      tasks: state.allTasks,
+      preferences: state.userPreferences,
+      adaptationProfile: state.adaptationProfile,
+      currentWeekReview: state.currentWeekReview,
+      currentMonthReview: state.currentMonthReview,
+      calendarConnectionState: state.calendarConnectionState,
+      weekScheduleConstraints: state.weekScheduleConstraints,
+    })),
+  );
 
   const reviewGoals = goals.filter((goal) => getGoalReviewDraft(goal) !== null);
   const activeGoals = goals.filter((goal) => goal.status === GoalStatus.Active);
@@ -193,8 +210,9 @@ export function PlanScreen({ navigation }: Props) {
     return (
       <Screen>
         <EmptyStateCard
+          eyebrow="Preparing"
           title="Plan is still loading"
-          body="The weekly structure is not available yet."
+          body="The weekly structure is still being composed."
         />
       </Screen>
     );
@@ -204,8 +222,23 @@ export function PlanScreen({ navigation }: Props) {
     return (
       <Screen>
         <EmptyStateCard
+          eyebrow="Sparse week"
           title="No week to shape yet"
-          body="Add a goal or connect calendar context, then Plan can show the real shape of the week."
+          body="Add a goal or connect calendar context, then Plan can show the real shape of the week instead of an empty shell."
+          action={
+            <View className="flex-row gap-3 pt-1">
+              <Button style={{ flex: 1 }} onPress={() => navigation.getParent()?.navigate("Goals")}>
+                Goals
+              </Button>
+              <Button
+                tone="secondary"
+                style={{ flex: 1 }}
+                onPress={() => navigation.navigate("PlanDetail")}
+              >
+                Open week
+              </Button>
+            </View>
+          }
         />
       </Screen>
     );
@@ -282,6 +315,20 @@ export function PlanScreen({ navigation }: Props) {
             </View>
           </DetailSection>
         </Surface>
+
+        {calendarConnectionState?.connectionStatus !== "ready" ? (
+          <Surface tone="sunken" className="gap-3">
+            <View className="gap-1">
+              <AppText tone="tertiary" variant="micro" style={{ textTransform: "uppercase" }}>
+                Calendar fallback
+              </AppText>
+              <AppText variant="section">Plan is leaning on saved schedule defaults.</AppText>
+            </View>
+            <AppText tone="secondary" variant="caption">
+              Fixed commitments may still be understated until live calendar context is available again.
+            </AppText>
+          </Surface>
+        ) : null}
 
         <Surface className="gap-4">
           <DetailSection

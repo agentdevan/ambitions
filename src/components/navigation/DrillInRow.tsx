@@ -2,6 +2,7 @@ import { Ionicons } from "@expo/vector-icons";
 import { ReactNode } from "react";
 import { Pressable, View } from "react-native";
 
+import { useAccessibilityPreferences } from "../../design/accessibility/useAccessibilityPreferences";
 import { useResolvedTheme } from "../../design/theme/useResolvedTheme";
 import { AppText } from "../ui/Text";
 
@@ -25,15 +26,19 @@ export function DrillInRow({
   onPress,
 }: DrillInRowProps) {
   const theme = useResolvedTheme();
+  const { reduceMotionEnabled } = useAccessibilityPreferences();
 
   return (
     <Pressable
+      accessibilityRole="button"
+      accessibilityHint={actionLabel ? `${actionLabel} ${title}` : undefined}
       className="rounded-[24px]"
+      hitSlop={4}
       onPress={onPress}
       style={({ pressed }) => [
         {
           opacity: pressed ? 0.96 : 1,
-          transform: [{ scale: pressed ? 0.994 : 1 }],
+          transform: [{ scale: pressed && !reduceMotionEnabled ? 0.994 : 1 }],
         },
       ]}
     >
@@ -70,13 +75,13 @@ export function DrillInRow({
           ) : null}
           <View className="flex-1 gap-1">
             <View className="flex-row flex-wrap items-center gap-2">
-              <AppText variant="section" numberOfLines={2} style={{ flexShrink: 1 }}>
+              <AppText variant="section" style={{ flexShrink: 1 }}>
                 {title}
               </AppText>
               {badge}
             </View>
             {subtitle ? (
-              <AppText tone="secondary" variant="caption" numberOfLines={2}>
+              <AppText tone="secondary" variant="caption">
                 {subtitle}
               </AppText>
             ) : null}
@@ -98,7 +103,7 @@ export function DrillInRow({
               />
             </View>
             {detail ? (
-              <AppText tone="tertiary" variant="caption" numberOfLines={1}>
+              <AppText tone="tertiary" variant="caption" style={{ textAlign: "right", maxWidth: 132 }}>
                 {detail}
               </AppText>
             ) : null}

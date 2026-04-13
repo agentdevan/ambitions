@@ -17,11 +17,14 @@ export function Screen({ children, scrollable = true }: ScreenProps) {
       <ScrollView
         className="flex-1"
         contentContainerStyle={{
+          flexGrow: 1,
           paddingTop: insets.top + 14,
           paddingBottom: insets.bottom + 34,
           paddingHorizontal: 20,
           backgroundColor: theme.colors.background.canvas,
         }}
+        contentInsetAdjustmentBehavior="automatic"
+        keyboardShouldPersistTaps="handled"
         showsVerticalScrollIndicator={false}
       >
         <View className="pb-6">{children}</View>

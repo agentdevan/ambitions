@@ -3,6 +3,7 @@ import { Ionicons } from "@expo/vector-icons";
 import type { ReactNode } from "react";
 import { useEffect, useMemo, useRef, useState } from "react";
 import { Animated, View } from "react-native";
+import { useShallow } from "zustand/react/shallow";
 
 import {
   CompactExplanationCard,
@@ -22,6 +23,7 @@ import { SegmentedControl } from "../../components/ui/SegmentedControl";
 import { Surface } from "../../components/ui/Surface";
 import { AppText } from "../../components/ui/Text";
 import { TextField } from "../../components/ui/TextField";
+import { useAccessibilityPreferences } from "../../design/accessibility/useAccessibilityPreferences";
 import { useResolvedTheme } from "../../design/theme/useResolvedTheme";
 import {
   DailyRitualCarryDecision,
@@ -173,6 +175,7 @@ function ExecutionHeroCard({
   usingLiveCalendar: boolean;
 }) {
   const theme = useResolvedTheme();
+  const { reduceMotionEnabled } = useAccessibilityPreferences();
   const opacity = useRef(new Animated.Value(0)).current;
   const translateY = useRef(new Animated.Value(10)).current;
   const recommendationKey = useMemo(
@@ -181,6 +184,12 @@ function ExecutionHeroCard({
   );
 
   useEffect(() => {
+    if (reduceMotionEnabled) {
+      opacity.setValue(1);
+      translateY.setValue(0);
+      return;
+    }
+
     opacity.setValue(0);
     translateY.setValue(10);
 
@@ -196,7 +205,7 @@ function ExecutionHeroCard({
         useNativeDriver: true,
       }),
     ]).start();
-  }, [opacity, recommendationKey, translateY]);
+  }, [opacity, recommendationKey, reduceMotionEnabled, translateY]);
 
   return (
     <Animated.View style={{ opacity, transform: [{ translateY }] }}>
@@ -290,14 +299,27 @@ function SupportCard({
 }
 
 export function TodayScreen({ navigation }: Props) {
-  const today = useAppStore((state) => state.today);
-  const goals = useAppStore((state) => state.goals);
-  const bootStatus = useAppStore((state) => state.bootStatus);
-  const planDate = useAppStore((state) => state.planDate);
-  const applyTaskAction = useAppStore((state) => state.applyTaskAction);
-  const openDay = useAppStore((state) => state.openDay);
-  const recoverDay = useAppStore((state) => state.recoverDay);
-  const closeDay = useAppStore((state) => state.closeDay);
+  const {
+    today,
+    goals,
+    bootStatus,
+    planDate,
+    applyTaskAction,
+    openDay,
+    recoverDay,
+    closeDay,
+  } = useAppStore(
+    useShallow((state) => ({
+      today: state.today,
+      goals: state.goals,
+      bootStatus: state.bootStatus,
+      planDate: state.planDate,
+      applyTaskAction: state.applyTaskAction,
+      openDay: state.openDay,
+      recoverDay: state.recoverDay,
+      closeDay: state.closeDay,
+    })),
+  );
   const [busyTaskId, setBusyTaskId] = useState<string | null>(null);
   const [ritualBusy, setRitualBusy] = useState<string | null>(null);
   const [selectedFocus, setSelectedFocus] = useState<DailyRitualOpeningFocus | null>(null);
@@ -336,17 +358,18 @@ export function TodayScreen({ navigation }: Props) {
   if (!today) {
     const emptyBody =
       bootStatus === "loading"
-        ? "Loading today."
+        ? "Pulling today's execution line into view."
         : goals.length === 0
-          ? "Add a goal to start the day."
-          : "Open Plan to rebuild today.";
+          ? "Create one active goal so Today can protect a believable line."
+          : "Today's line has not been rebuilt yet. Open Plan and shape the day from the week's real room.";
 
     return (
       <Screen>
         <View className="gap-5">
           <PageHeader eyebrow="Today" title="Today" description={formatLongDate(planDate)} />
           <EmptyStateCard
-            title={bootStatus === "loading" ? "Loading" : "No day yet"}
+            eyebrow={bootStatus === "loading" ? "Preparing" : goals.length === 0 ? "Start here" : "Needs shaping"}
+            title={bootStatus === "loading" ? "Loading today" : "Today is not shaped yet"}
             body={emptyBody}
             action={
               bootStatus !== "loading" ? (
@@ -373,10 +396,11 @@ export function TodayScreen({ navigation }: Props) {
     );
   }
 
-  const pendingReviewCount = goals.filter((goal) => getGoalReviewDraft(goal) !== null).length;
+  const pendingReviewCount = useMemo(
+    () => goals.filter((goal) => getGoalReviewDraft(goal) !== null).length,
+    [goals],
+  );
   const todayVm = today;
-  const completedRatio =
-    todayVm.progress.scheduled > 0 ? todayVm.progress.completed / todayVm.progress.scheduled : 0;
   const progressLabel = `${todayVm.progress.completed}/${todayVm.progress.scheduled || 0} moved`;
   const roomLabel =
     todayVm.openWindow?.label ??
@@ -554,6 +578,20 @@ export function TodayScreen({ navigation }: Props) {
             </View>
           </DetailSection>
         </Surface>
+
+        {!todayVm.integration.usingLiveCalendar ? (
+          <Surface tone="sunken" className="gap-3">
+            <View className="gap-1">
+              <AppText tone="tertiary" variant="micro" style={{ textTransform: "uppercase" }}>
+                Calendar fallback
+              </AppText>
+              <AppText variant="section">Today is reading from your saved baseline.</AppText>
+            </View>
+            <AppText tone="secondary" variant="caption">
+              {todayVm.integration.calendarDetail}
+            </AppText>
+          </Surface>
+        ) : null}
 
         {todayVm.ritual?.kind === "opening" ? (
           <SupportCard label="Opening">
@@ -866,7 +904,7 @@ export function TodayScreen({ navigation }: Props) {
         </Surface>
 
         {pendingReviewCount > 0 ? (
-          <AppText tone="tertiary" variant="caption">
+          <AppText tone="tertiary" variant="caption" style={{ maxWidth: "96%" }}>
             {pendingReviewCount} review{pendingReviewCount === 1 ? "" : "s"} are waiting in Plan
             or Goals. Today is keeping them out of the main execution line.
           </AppText>

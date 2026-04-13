@@ -2,6 +2,7 @@ import { NativeStackScreenProps } from "@react-navigation/native-stack";
 import { Ionicons } from "@expo/vector-icons";
 import { useEffect, useMemo, useState } from "react";
 import { View } from "react-native";
+import { useShallow } from "zustand/react/shallow";
 
 import { MomentumBars } from "../../components/history/ActivityTimeline";
 import {
@@ -13,6 +14,7 @@ import {
 import { DrillInRow } from "../../components/navigation/DrillInRow";
 import { PageHeader } from "../../components/navigation/PageHeader";
 import { Button } from "../../components/ui/Button";
+import { EmptyStateCard } from "../../components/ui/EmptyStateCard";
 import { Pill } from "../../components/ui/Pill";
 import { ProgressBar } from "../../components/ui/ProgressBar";
 import { Screen } from "../../components/ui/Screen";
@@ -83,26 +85,51 @@ function CarryoverTaskCard({
 }
 
 export function InsightsScreen({ navigation }: Props) {
-  const goals = useAppStore((state) => state.goals);
-  const milestones = useAppStore((state) => state.milestones);
-  const tasks = useAppStore((state) => state.allTasks);
-  const activityEvents = useAppStore((state) => state.activityEvents);
-  const today = useAppStore((state) => state.today);
-  const adaptationProfile = useAppStore((state) => state.adaptationProfile);
-  const productPreferences = useAppStore((state) => state.productPreferences);
-  const userPreferences = useAppStore((state) => state.userPreferences);
-  const notificationPreferences = useAppStore((state) => state.notificationPreferences);
-  const dailyRitualHistory = useAppStore((state) => state.dailyRitualHistory);
-  const currentWeekReview = useAppStore((state) => state.currentWeekReview);
-  const nextWeekReview = useAppStore((state) => state.nextWeekReview);
-  const weeklyReviewHistory = useAppStore((state) => state.weeklyReviewHistory);
-  const currentMonthReview = useAppStore((state) => state.currentMonthReview);
-  const nextMonthReview = useAppStore((state) => state.nextMonthReview);
-  const reviewWeek = useAppStore((state) => state.reviewWeek);
-  const reviewWeeklyCarryover = useAppStore((state) => state.reviewWeeklyCarryover);
-  const shapeNextWeek = useAppStore((state) => state.shapeNextWeek);
-  const reviewMonth = useAppStore((state) => state.reviewMonth);
-  const shapeNextMonth = useAppStore((state) => state.shapeNextMonth);
+  const {
+    goals,
+    milestones,
+    tasks,
+    activityEvents,
+    today,
+    adaptationProfile,
+    productPreferences,
+    userPreferences,
+    notificationPreferences,
+    dailyRitualHistory,
+    currentWeekReview,
+    nextWeekReview,
+    weeklyReviewHistory,
+    currentMonthReview,
+    nextMonthReview,
+    reviewWeek,
+    reviewWeeklyCarryover,
+    shapeNextWeek,
+    reviewMonth,
+    shapeNextMonth,
+  } = useAppStore(
+    useShallow((state) => ({
+      goals: state.goals,
+      milestones: state.milestones,
+      tasks: state.allTasks,
+      activityEvents: state.activityEvents,
+      today: state.today,
+      adaptationProfile: state.adaptationProfile,
+      productPreferences: state.productPreferences,
+      userPreferences: state.userPreferences,
+      notificationPreferences: state.notificationPreferences,
+      dailyRitualHistory: state.dailyRitualHistory,
+      currentWeekReview: state.currentWeekReview,
+      nextWeekReview: state.nextWeekReview,
+      weeklyReviewHistory: state.weeklyReviewHistory,
+      currentMonthReview: state.currentMonthReview,
+      nextMonthReview: state.nextMonthReview,
+      reviewWeek: state.reviewWeek,
+      reviewWeeklyCarryover: state.reviewWeeklyCarryover,
+      shapeNextWeek: state.shapeNextWeek,
+      reviewMonth: state.reviewMonth,
+      shapeNextMonth: state.shapeNextMonth,
+    })),
+  );
   const theme = useResolvedTheme();
   const [busyAction, setBusyAction] = useState<string | null>(null);
   const [runtimeMessage, setRuntimeMessage] = useState<string | null>(null);
@@ -442,6 +469,40 @@ export function InsightsScreen({ navigation }: Props) {
     summary.closingImpactCopy,
     monthlyDigest.reads[0] ?? monthlyDigest.headline,
   ];
+
+  if (goals.length === 0 && feed.length === 0) {
+    return (
+      <Screen>
+        <View className="gap-5">
+          <PageHeader
+            eyebrow="Insights"
+            title="Insights"
+            description="Weekly read and next-week shape."
+          />
+          <EmptyStateCard
+            eyebrow="Nothing to read yet"
+            title="Insights will become useful once work starts moving."
+            body="Finish a few tasks, review a week, or shape a plan and this screen will turn that movement into a calmer read."
+            tone="sunken"
+            action={
+              <View className="flex-row gap-3 pt-1">
+                <Button style={{ flex: 1 }} onPress={() => navigation.getParent()?.navigate("Goals")}>
+                  Goals
+                </Button>
+                <Button
+                  tone="secondary"
+                  style={{ flex: 1 }}
+                  onPress={() => navigation.getParent()?.navigate("Plan")}
+                >
+                  Plan
+                </Button>
+              </View>
+            }
+          />
+        </View>
+      </Screen>
+    );
+  }
 
   return (
     <Screen>

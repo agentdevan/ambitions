@@ -1,6 +1,8 @@
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
 import { Ionicons } from "@expo/vector-icons";
+import { useMemo } from "react";
 import { View } from "react-native";
+import { useShallow } from "zustand/react/shallow";
 
 import {
   DetailSection,
@@ -10,6 +12,7 @@ import {
 import { DrillInRow } from "../../components/navigation/DrillInRow";
 import { PageHeader } from "../../components/navigation/PageHeader";
 import { Button } from "../../components/ui/Button";
+import { EmptyStateCard } from "../../components/ui/EmptyStateCard";
 import { Pill } from "../../components/ui/Pill";
 import { Screen } from "../../components/ui/Screen";
 import { Surface } from "../../components/ui/Surface";
@@ -30,43 +33,71 @@ import { ProfileStackParamList } from "../../navigation/types";
 type Props = NativeStackScreenProps<ProfileStackParamList, "ProfileHome">;
 
 export function ProfileScreen({ navigation }: Props) {
-  const productPreferences = useAppStore((state) => state.productPreferences);
-  const notificationPreferences = useAppStore((state) => state.notificationPreferences);
-  const calendarConnectionState = useAppStore((state) => state.calendarConnectionState);
-  const account = useAppStore((state) => state.account);
-  const attachmentState = useAppStore((state) => state.attachmentState);
-  const syncState = useAppStore((state) => state.syncState);
-  const syncConflicts = useAppStore((state) => state.syncConflicts);
-  const scheduleConstraints = useAppStore((state) => state.scheduleConstraints);
-  const today = useAppStore((state) => state.today);
-  const goals = useAppStore((state) => state.goals);
-  const milestones = useAppStore((state) => state.milestones);
-  const tasks = useAppStore((state) => state.allTasks);
-  const activityEvents = useAppStore((state) => state.activityEvents);
-  const adaptationProfile = useAppStore((state) => state.adaptationProfile);
+  const {
+    productPreferences,
+    notificationPreferences,
+    calendarConnectionState,
+    account,
+    attachmentState,
+    syncState,
+    syncConflicts,
+    scheduleConstraints,
+    today,
+    goals,
+    milestones,
+    tasks,
+    activityEvents,
+    adaptationProfile,
+  } = useAppStore(
+    useShallow((state) => ({
+      productPreferences: state.productPreferences,
+      notificationPreferences: state.notificationPreferences,
+      calendarConnectionState: state.calendarConnectionState,
+      account: state.account,
+      attachmentState: state.attachmentState,
+      syncState: state.syncState,
+      syncConflicts: state.syncConflicts,
+      scheduleConstraints: state.scheduleConstraints,
+      today: state.today,
+      goals: state.goals,
+      milestones: state.milestones,
+      tasks: state.allTasks,
+      activityEvents: state.activityEvents,
+      adaptationProfile: state.adaptationProfile,
+    })),
+  );
   const theme = useResolvedTheme();
 
   if (!productPreferences) {
     return (
       <Screen>
-        <Surface>
-          <AppText variant="title">Profile is loading</AppText>
-          <AppText tone="secondary">Settings will appear in a moment.</AppText>
-        </Surface>
+        <EmptyStateCard
+          eyebrow="Preparing"
+          title="Profile is loading"
+          body="Settings, trust state, and defaults will appear in a moment."
+        />
       </Screen>
     );
   }
 
   const enabledNotifications = notificationPreferences.filter((item) => item.enabled).length;
   const quietHoursSummary = summarizeQuietHours(notificationPreferences);
-  const reflectionSummary = summarizeInsights({
-    goals,
-    tasks,
-    milestones,
-    events: buildActivityFeed(activityEvents, tasks, milestones),
-    profile: adaptationProfile,
-    adaptiveEnabled: productPreferences.adaptivePlanningEnabled,
-  });
+  const activityFeed = useMemo(
+    () => buildActivityFeed(activityEvents, tasks, milestones),
+    [activityEvents, milestones, tasks],
+  );
+  const reflectionSummary = useMemo(
+    () =>
+      summarizeInsights({
+        goals,
+        tasks,
+        milestones,
+        events: activityFeed,
+        profile: adaptationProfile,
+        adaptiveEnabled: productPreferences.adaptivePlanningEnabled,
+      }),
+    [activityFeed, adaptationProfile, goals, milestones, productPreferences.adaptivePlanningEnabled, tasks],
+  );
   const planningSummary = summarizePlanningControls(
     productPreferences,
     adaptationProfile,
@@ -194,6 +225,14 @@ export function ProfileScreen({ navigation }: Props) {
             description="Account, sync, calendar, and reminders belong together so operational trust reads as one layer."
           >
             <View className="gap-3">
+              {!account ? (
+                <Surface tone="sunken" className="gap-2.5 mb-0">
+                  <AppText variant="section">Everything is still local only.</AppText>
+                  <AppText tone="secondary" variant="caption">
+                    That keeps this device self-contained, but sync, recovery, and cross-device trust are still off until you attach an account.
+                  </AppText>
+                </Surface>
+              ) : null}
               <DrillInRow
                 title="Integrations"
                 subtitle={calendarSummary.headline}

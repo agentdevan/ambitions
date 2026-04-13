@@ -1,5 +1,6 @@
 import { Pressable, View } from "react-native";
 
+import { useAccessibilityPreferences } from "../../design/accessibility/useAccessibilityPreferences";
 import { useResolvedTheme } from "../../design/theme/useResolvedTheme";
 import { AppText } from "./Text";
 
@@ -20,6 +21,7 @@ export function SegmentedControl<T extends string>({
   onChange,
 }: SegmentedControlProps<T>) {
   const theme = useResolvedTheme();
+  const { reduceMotionEnabled } = useAccessibilityPreferences();
 
   return (
     <View
@@ -38,6 +40,9 @@ export function SegmentedControl<T extends string>({
         return (
           <Pressable
             key={option.value}
+            accessibilityRole="tab"
+            accessibilityState={{ selected }}
+            hitSlop={4}
             onPress={() => onChange(option.value)}
             style={({ pressed }) => ({
               flex: 1,
@@ -54,6 +59,7 @@ export function SegmentedControl<T extends string>({
                   : "transparent",
               borderWidth: selected ? 1 : 0,
               borderColor: selected ? theme.colors.border.accent : "transparent",
+              transform: [{ scale: pressed && !reduceMotionEnabled ? 0.99 : 1 }],
             })}
           >
             <AppText

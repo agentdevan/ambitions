@@ -20,15 +20,17 @@ export function EmptyStateCard({
   action,
 }: EmptyStateCardProps) {
   return (
-    <Surface tone={tone} className="gap-3.5">
-      <View className="gap-3">
+    <Surface tone={tone} className="gap-4">
+      <View className="gap-3.5">
         {eyebrow ? (
           <AppText variant="micro" tone="tertiary" style={{ textTransform: "uppercase" }}>
             {eyebrow}
           </AppText>
         ) : null}
-        <AppText variant="title">{title}</AppText>
-        <AppText tone="secondary" style={{ maxWidth: "92%" }}>
+        <AppText variant="title" style={{ maxWidth: "96%" }}>
+          {title}
+        </AppText>
+        <AppText tone="secondary" style={{ maxWidth: "96%" }}>
           {body}
         </AppText>
         {action}

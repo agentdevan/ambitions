@@ -1,6 +1,7 @@
 import { PropsWithChildren } from "react";
 import { Pressable, PressableProps, StyleProp, ViewStyle } from "react-native";
 
+import { useAccessibilityPreferences } from "../../design/accessibility/useAccessibilityPreferences";
 import { useResolvedTheme } from "../../design/theme/useResolvedTheme";
 import { AppText } from "./Text";
 
@@ -20,10 +21,14 @@ export function OptionChip({
   ...props
 }: OptionChipProps) {
   const theme = useResolvedTheme();
+  const { reduceMotionEnabled } = useAccessibilityPreferences();
 
   return (
     <Pressable
       {...props}
+      accessibilityRole="button"
+      accessibilityState={{ selected, disabled: !!props.disabled }}
+      hitSlop={4}
       style={({ pressed }) => [
         {
           minHeight: compact ? 38 : 44,
@@ -42,7 +47,7 @@ export function OptionChip({
               ? theme.colors.border.strong
               : theme.colors.border.subtle,
           opacity: props.disabled ? 0.6 : 1,
-          transform: [{ scale: pressed && !props.disabled ? 0.985 : 1 }],
+          transform: [{ scale: pressed && !props.disabled && !reduceMotionEnabled ? 0.985 : 1 }],
           shadowColor: theme.colors.shadow.color,
           shadowOpacity: selected ? (theme.mode === "dark" ? 0.1 : 0.05) : 0.02,
           shadowRadius: selected ? 10 : 4,

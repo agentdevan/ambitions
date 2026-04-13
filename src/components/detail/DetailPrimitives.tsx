@@ -36,7 +36,11 @@ export function DetailHero({
         {badges ? <View className="flex-row flex-wrap items-center gap-2">{badges}</View> : null}
         <View className="gap-1.5">
           <AppText variant="title">{title}</AppText>
-          {description ? <AppText tone="secondary" numberOfLines={3}>{description}</AppText> : null}
+          {description ? (
+            <AppText tone="secondary" style={{ maxWidth: "96%" }}>
+              {description}
+            </AppText>
+          ) : null}
         </View>
       </View>
       {meta}
@@ -61,7 +65,7 @@ export function DetailSection({
   const theme = useResolvedTheme();
 
   return (
-    <View className="gap-3">
+    <View className="gap-3.5">
       <View
         style={{
           width: 22,
@@ -71,7 +75,7 @@ export function DetailSection({
         }}
       />
       <View className="flex-row items-start justify-between gap-3">
-        <View className="flex-1 gap-0.5">
+        <View className="flex-1 gap-1">
           <AppText variant="section">{title}</AppText>
           {description ? (
             <AppText tone="secondary" variant="caption">
@@ -137,7 +141,7 @@ export function QuietMetaLine({ items }: { items: string[] }) {
   return (
     <View className="flex-row flex-wrap gap-x-4 gap-y-2">
       {items.map((item) => (
-        <AppText key={item} tone="tertiary" variant="caption">
+        <AppText key={item} tone="tertiary" variant="caption" style={{ maxWidth: "100%" }}>
           {item}
         </AppText>
       ))}

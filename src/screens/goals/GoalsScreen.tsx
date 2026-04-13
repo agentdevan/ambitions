@@ -2,6 +2,7 @@ import { NativeStackScreenProps } from "@react-navigation/native-stack";
 import { useMemo } from "react";
 import { Ionicons } from "@expo/vector-icons";
 import { View } from "react-native";
+import { useShallow } from "zustand/react/shallow";
 
 import { PageHeader } from "../../components/navigation/PageHeader";
 import { Button } from "../../components/ui/Button";
@@ -174,14 +175,27 @@ function GoalSignalCard({
 }
 
 export function GoalsScreen({ navigation }: Props) {
-  const ambitions = useAppStore((state) => state.ambitions);
-  const goals = useAppStore((state) => state.goals);
-  const milestones = useAppStore((state) => state.milestones);
-  const tasks = useAppStore((state) => state.allTasks);
-  const timeBlocks = useAppStore((state) => state.allTimeBlocks);
-  const activityEvents = useAppStore((state) => state.activityEvents);
-  const currentWeekReview = useAppStore((state) => state.currentWeekReview);
-  const currentMonthReview = useAppStore((state) => state.currentMonthReview);
+  const {
+    ambitions,
+    goals,
+    milestones,
+    tasks,
+    timeBlocks,
+    activityEvents,
+    currentWeekReview,
+    currentMonthReview,
+  } = useAppStore(
+    useShallow((state) => ({
+      ambitions: state.ambitions,
+      goals: state.goals,
+      milestones: state.milestones,
+      tasks: state.allTasks,
+      timeBlocks: state.allTimeBlocks,
+      activityEvents: state.activityEvents,
+      currentWeekReview: state.currentWeekReview,
+      currentMonthReview: state.currentMonthReview,
+    })),
+  );
 
   const {
     uniqueAmbitions,
@@ -316,8 +330,9 @@ export function GoalsScreen({ navigation }: Props) {
 
         {goals.length === 0 ? (
           <EmptyStateCard
+            eyebrow="Start here"
             title="No goals yet"
-            body="Start with one clear goal."
+            body="Start with one clear goal. Direction, pace, and believable work will build outward from there."
             action={
               <View className="pt-1">
                 <Button tone="secondary" onPress={() => navigation.navigate("GoalEdit", {})}>
@@ -328,6 +343,20 @@ export function GoalsScreen({ navigation }: Props) {
           />
         ) : (
           <>
+            {activeGoals.length === 0 ? (
+              <EmptyStateCard
+                eyebrow="Quiet portfolio"
+                title="Nothing is active right now"
+                body="Your history and archived work are still here, but Goals will feel most useful once one active goal is back in motion."
+                tone="sunken"
+                action={
+                  <View className="pt-1">
+                    <Button onPress={() => navigation.navigate("GoalEdit", {})}>Start a goal</Button>
+                  </View>
+                }
+              />
+            ) : null}
+
             <Surface tone="hero" className="gap-4">
               <View className="flex-row flex-wrap gap-2">
                 <Pill label={`${directionPortfolio.ambitions.length} ambitions`} tone="quiet" />
