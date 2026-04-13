@@ -121,6 +121,20 @@ function ambitionStatusLabel(status: AmbitionStatus) {
   }
 }
 
+function paceTruthTone(
+  paceState: "on_pace" | "slightly_off_pace" | "reset_needed" | "recovered" | "unrealistic",
+) {
+  if (paceState === "on_pace" || paceState === "recovered") {
+    return "accent" as const;
+  }
+
+  if (paceState === "slightly_off_pace") {
+    return "neutral" as const;
+  }
+
+  return "quiet" as const;
+}
+
 export function GoalDetailScreen({
   route,
   navigation,
@@ -191,6 +205,24 @@ export function GoalDetailScreen({
     currentWeekReview,
     currentMonthReview,
   });
+  const momentumSeries = buildMomentumSeries(activityFeed, 7);
+  const completedThisWeek = momentumSeries.reduce((sum, point) => sum + point.completed, 0);
+  const reshapedThisWeek = momentumSeries.reduce((sum, point) => sum + point.reshaped, 0);
+  const recentMovementLabel =
+    progressSummary.recentEvents[0]?.outcomeLabel ??
+    (progressTruth.stale ? "Quiet" : progressTruth.paceLabel);
+  const nextMoveTitle = reviewDraft
+    ? "Review pending changes"
+    : nextTask?.title ?? currentMilestone?.title ?? "No next step shaped yet";
+  const nextMoveDetail = reviewDraft
+    ? reviewDraft.summary
+    : nextTask
+      ? currentMilestone
+        ? `Current phase: ${currentMilestone.title}`
+        : "Next scheduled task"
+      : currentMilestone
+        ? "Current milestone is defined, but the next task is not yet queued."
+        : "The goal needs a clearer immediate move.";
 
   function openLifecycleDialog(status: GoalStatus.Paused | GoalStatus.Archived) {
     const options = describeLifecycleOptions(status === GoalStatus.Paused ? "pause" : "archive");
@@ -252,6 +284,7 @@ export function GoalDetailScreen({
               <>
                 <Pill label={statusLabel(resolvedGoal.status)} tone="quiet" />
                 {reviewDraft ? <Pill label="Needs review" tone="accent" /> : null}
+                <Pill label={progressTruth.paceLabel} tone={paceTruthTone(progressTruth.paceState)} />
                 {intelligence ? (
                   <Pill
                     label={describeGoalPaceMode(intelligence.selectedPaceMode)}
@@ -259,6 +292,8 @@ export function GoalDetailScreen({
                   />
                 ) : null}
                 {feasibility ? <Pill label={feasibility.statusLabel} tone="neutral" /> : null}
+                {progressTruth.crowded ? <Pill label="Crowded" tone="quiet" /> : null}
+                {progressTruth.stale ? <Pill label="Quiet" tone="quiet" /> : null}
               </>
             }
             meta={
@@ -273,24 +308,24 @@ export function GoalDetailScreen({
                     value: currentMilestone?.title ?? "No active milestone",
                   },
                   {
-                    label: "Ambition",
+                    label: "Direction",
                     value: ambition?.title ?? "Not linked yet",
                   },
                   {
-                    label: "Protected work",
-                    value: `${protectedTasks.length} tasks`,
+                    label: "Next move",
+                    value: nextTask?.title ?? "Not shaped yet",
                   },
                   {
-                    label: "Pacing",
-                    value: intelligence
-                      ? `${describeGoalPaceMode(intelligence.selectedPaceMode)}`
-                      : resolvedGoal.desiredWeeklyMinutes
-                        ? `${resolvedGoal.desiredWeeklyMinutes} min per week`
-                        : "No weekly pacing",
+                    label: "This week",
+                    value: `${Math.round(progressTruth.currentWeekScheduledMinutes / 60)} hr`,
                   },
                   {
                     label: "Deadline read",
                     value: feasibility?.deadlineConfidence ?? "Not shaped yet",
+                  },
+                  {
+                    label: "Protected work",
+                    value: `${protectedTasks.length} tasks`,
                   },
                 ]}
               />
@@ -298,39 +333,110 @@ export function GoalDetailScreen({
           />
 
           <DetailSection
-            title="Progress"
+            title="Momentum"
             description={progressTruth.paceSummary}
           >
-            <DetailSummaryStrip
-              items={[
-                {
-                  label: "Pace",
-                  value: progressTruth.paceLabel,
-                  detail:
-                    progressTruth.deadlineSummary ?? "Pace truth is grounded in recent execution.",
-                },
-                {
-                  label: "This week",
-                  value: `${Math.round(progressTruth.currentWeekScheduledMinutes / 60)} hr`,
-                  detail: progressTruth.representationSummary,
-                },
-                {
-                  label: "In motion",
-                  value: String(progressTruth.activeTaskCount),
-                  detail: nextTask ? `Next: ${nextTask.title}` : "Nothing queued right now",
-                },
-                {
-                  label: "This month",
-                  value: `${Math.round(progressTruth.currentMonthScheduledMinutes / 60)} hr`,
-                  detail:
-                    progressTruth.crowded
-                      ? "The work is crowding the room it has."
-                      : progressTruth.stale
-                        ? "The goal has gone quiet recently."
-                        : "Recent execution is still visible.",
-                },
-              ]}
-            />
+            <View className="gap-4">
+              <DetailSummaryStrip
+                items={[
+                  {
+                    label: "Pace",
+                    value: progressTruth.paceLabel,
+                    detail:
+                      progressTruth.crowded
+                        ? "The work is crowding the room it has."
+                        : progressTruth.stale
+                          ? "The goal has gone quiet recently."
+                          : progressTruth.representationSummary,
+                  },
+                  {
+                    label: "Target",
+                    value: resolvedGoal.targetDate ? formatShortDate(resolvedGoal.targetDate) : "No date",
+                    detail:
+                      progressTruth.deadlineSummary ??
+                      feasibility?.detail ??
+                      "Pace truth is grounded in recent execution.",
+                  },
+                  {
+                    label: "This week",
+                    value: `${Math.round(progressTruth.currentWeekScheduledMinutes / 60)} hr`,
+                    detail: nextTask ? `Next: ${nextTask.title}` : "Nothing immediate is queued right now.",
+                  },
+                  {
+                    label: "Recent",
+                    value: recentMovementLabel,
+                    detail:
+                      progressSummary.recentEvents[0]?.title ??
+                      "Movement will appear here as work gets completed or reshaped.",
+                  },
+                ]}
+              />
+              <Surface tone="sunken" className="gap-3 mb-0">
+                <View className="flex-row items-center justify-between gap-3">
+                  <View className="gap-1">
+                    <AppText variant="section">Last 7 days</AppText>
+                    <AppText tone="secondary" variant="caption">
+                      {completedThisWeek > 0 || reshapedThisWeek > 0
+                        ? `${completedThisWeek} completed, ${reshapedThisWeek} reshaped.`
+                        : "No visible movement yet this week."}
+                    </AppText>
+                  </View>
+                  <Pill label={`${progressTruth.activeTaskCount} in motion`} tone="quiet" />
+                </View>
+                <MomentumBars points={momentumSeries} />
+              </Surface>
+            </View>
+          </DetailSection>
+
+          <DetailSection
+            title="Next meaningful move"
+            description="Keep the next movement obvious."
+          >
+            <Surface tone={reviewDraft || nextTask ? "accent" : "default"} className="gap-4 mb-0">
+              <View className="gap-1.5">
+                <AppText variant="section">{nextMoveTitle}</AppText>
+                <AppText tone="secondary" variant="caption">
+                  {nextMoveDetail}
+                </AppText>
+              </View>
+              <View className="gap-3">
+                {nextTask ? (
+                  <DrillInRow
+                    title={nextTask.title}
+                    subtitle={
+                      currentMilestone
+                        ? `Inside ${currentMilestone.title}`
+                        : "Current task at the front of the goal"
+                    }
+                    detail={`${nextTask.estimatedMinutes} min`}
+                    onPress={() => navigation.navigate("GoalProgress", { goalId: resolvedGoal.id })}
+                  />
+                ) : null}
+                <DrillInRow
+                  title={currentMilestone?.title ?? "Shape the next phase"}
+                  subtitle={
+                    currentMilestone
+                      ? "Current milestone"
+                      : "Milestones help the direction feel tangible."
+                  }
+                  detail={`${goalMilestones.length} total`}
+                  onPress={() => navigation.navigate("GoalMilestones", { goalId: resolvedGoal.id })}
+                />
+                {reviewDraft ? (
+                  <DrillInRow
+                    title="Review pending changes"
+                    subtitle={reviewDraft.summary}
+                    detail="Open review"
+                    onPress={() =>
+                      (navigation.getParent() as any)?.navigate("Plan", {
+                        screen: "PlanReview",
+                        params: { goalId: resolvedGoal.id },
+                      })
+                    }
+                  />
+                ) : null}
+              </View>
+            </Surface>
           </DetailSection>
 
           <DetailSection
@@ -357,13 +463,67 @@ export function GoalDetailScreen({
                 }
               />
               <Surface tone="sunken" className="gap-2 mb-0">
-                <AppText variant="caption">{progressTruth.paceSummary}</AppText>
+                <AppText variant="caption">
+                  {ambition ? progressTruth.representationSummary : progressTruth.paceSummary}
+                </AppText>
                 <AppText tone="secondary" variant="caption">
-                  {progressTruth.representationSummary}
+                  {ambition
+                    ? ambition.thesis ?? "This goal stays meaningful because it serves a larger direction."
+                    : "Linking a direction keeps this goal from feeling isolated."}
                 </AppText>
               </Surface>
             </View>
           </DetailSection>
+
+          {intelligence ? (
+            <DetailSection
+              title="Timeline read"
+              description="Believability, workload, and refinement without dashboard noise."
+            >
+              <View className="gap-4">
+                <DetailSummaryStrip
+                  items={[
+                    {
+                      label: "Pace",
+                      value: describeGoalPaceMode(intelligence.selectedPaceMode),
+                      detail: intelligence.paceOptions.find(
+                        (option) => option.mode === intelligence.selectedPaceMode,
+                      )?.summary,
+                    },
+                    {
+                      label: "Deadline",
+                      value: feasibility?.statusLabel ?? "Believable",
+                      detail: intelligence.feasibility.detail,
+                    },
+                    {
+                      label: "Capacity",
+                      value: intelligence.availableCapacitySummary,
+                      detail: intelligence.commitmentsSummary,
+                    },
+                    {
+                      label: "Workload",
+                      value: intelligence.workloadEstimateLabel,
+                      detail: intelligence.interpretation.workPattern,
+                    },
+                  ]}
+                />
+                <Surface tone="sunken" className="gap-2 mb-0">
+                  <AppText tone="secondary">{intelligence.feasibility.pacingTradeoff}</AppText>
+                  {intelligence.feasibility.revisedDeadlineSuggestion ? (
+                    <AppText tone="secondary">
+                      A later target would be more believable:{" "}
+                      {formatShortDate(intelligence.feasibility.revisedDeadlineSuggestion)}.
+                    </AppText>
+                  ) : null}
+                  {intelligence.feasibility.lighterScopeSuggestion ? (
+                    <AppText tone="secondary">
+                      {intelligence.feasibility.lighterScopeSuggestion}
+                    </AppText>
+                  ) : null}
+                </Surface>
+              </View>
+            </DetailSection>
+          ) : null}
 
           <DetailSection
             title="Recent movement"
@@ -463,55 +623,6 @@ export function GoalDetailScreen({
             />
             {resolvedGoal.notes ? <AppText tone="secondary">{resolvedGoal.notes}</AppText> : null}
           </Surface>
-
-          {intelligence ? (
-            <Surface className="gap-4 mb-0">
-              <View className="gap-1">
-                <AppText variant="section">Pace and deadline truth</AppText>
-                <AppText tone="secondary" variant="caption">
-                  Visible intelligence without the scoring theater.
-                </AppText>
-              </View>
-              <DetailSummaryStrip
-                items={[
-                  {
-                    label: "Pace",
-                    value: describeGoalPaceMode(intelligence.selectedPaceMode),
-                    detail: intelligence.paceOptions.find(
-                      (option) => option.mode === intelligence.selectedPaceMode,
-                    )?.summary,
-                  },
-                  {
-                    label: "Deadline",
-                    value: feasibility?.statusLabel ?? "Believable",
-                    detail: intelligence.feasibility.detail,
-                  },
-                  {
-                    label: "Capacity",
-                    value: intelligence.availableCapacitySummary,
-                    detail: intelligence.commitmentsSummary,
-                  },
-                  {
-                    label: "Workload",
-                    value: intelligence.workloadEstimateLabel,
-                    detail: intelligence.interpretation.workPattern,
-                  },
-                ]}
-              />
-              <AppText tone="secondary">{intelligence.feasibility.pacingTradeoff}</AppText>
-              {intelligence.feasibility.revisedDeadlineSuggestion ? (
-                <AppText tone="secondary">
-                  A later target would be more believable:{" "}
-                  {formatShortDate(intelligence.feasibility.revisedDeadlineSuggestion)}.
-                </AppText>
-              ) : null}
-              {intelligence.feasibility.lighterScopeSuggestion ? (
-                <AppText tone="secondary">
-                  {intelligence.feasibility.lighterScopeSuggestion}
-                </AppText>
-              ) : null}
-            </Surface>
-          ) : null}
 
           <Surface className="gap-4 mb-0">
             <View className="gap-1">

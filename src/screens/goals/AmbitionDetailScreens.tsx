@@ -8,15 +8,15 @@ import {
   DetailSummaryStrip,
   QuietMetaLine,
 } from "../../components/detail/DetailPrimitives";
-import { DrillInRow } from "../../components/navigation/DrillInRow";
 import { Button } from "../../components/ui/Button";
 import { EmptyStateCard } from "../../components/ui/EmptyStateCard";
 import { OptionChip } from "../../components/ui/OptionChip";
+import { Pill } from "../../components/ui/Pill";
 import { Screen } from "../../components/ui/Screen";
 import { Surface } from "../../components/ui/Surface";
 import { AppText } from "../../components/ui/Text";
 import { TextField } from "../../components/ui/TextField";
-import { Ambition, AmbitionStatus, GoalStatus } from "../../domain/models";
+import { AmbitionStatus, GoalStatus } from "../../domain/models";
 import { GoalsStackParamList } from "../../navigation/types";
 import {
   buildDirectionPortfolioSnapshot,
@@ -25,6 +25,7 @@ import {
 import { canonicalizeAmbitions, canonicalizeGoals } from "../../services/goals/portfolioIntegrity";
 import { buildActivityFeed } from "../../services/history/selectors";
 import { useAppStore } from "../../state/useAppStore";
+import { formatShortDate } from "../../utils/date";
 
 function statusLabel(status: AmbitionStatus) {
   switch (status) {
@@ -35,6 +36,20 @@ function statusLabel(status: AmbitionStatus) {
     default:
       return "Active";
   }
+}
+
+function representationTone(
+  state: "well_represented" | "lightly_represented" | "underrepresented" | undefined,
+) {
+  if (state === "well_represented") {
+    return "accent" as const;
+  }
+
+  if (state === "lightly_represented") {
+    return "neutral" as const;
+  }
+
+  return "quiet" as const;
 }
 
 function useAmbitionData(ambitionId: string) {
@@ -51,7 +66,15 @@ function useAmbitionData(ambitionId: string) {
     const uniqueAmbitions = canonicalizeAmbitions(ambitions);
     const uniqueGoals = canonicalizeGoals(goals);
     const ambition = uniqueAmbitions.find((entry) => entry.id === ambitionId) ?? null;
-    const linkedGoals = uniqueGoals.filter((goal) => goal.ambitionId === ambitionId);
+    const linkedGoals = uniqueGoals
+      .filter((goal) => goal.ambitionId === ambitionId)
+      .sort((left, right) => {
+        if (left.status !== right.status) {
+          return left.status === GoalStatus.Active ? -1 : 1;
+        }
+
+        return left.sortOrder - right.sortOrder;
+      });
     const feed = buildActivityFeed(activityEvents, tasks, milestones);
     const goalTruths = linkedGoals.map((goal) =>
       buildGoalProgressTruth({
@@ -112,12 +135,22 @@ export function AmbitionDetailScreen({
           eyebrow="Ambition"
           title={ambition.title}
           description={ambition.thesis ?? "A direction above the current goals."}
+          badges={
+            <>
+              <Pill label={statusLabel(ambition.status)} tone="quiet" />
+              {ambitionTruth ? (
+                <Pill
+                  label={ambitionTruth.representationLabel}
+                  tone={representationTone(ambitionTruth.representationState)}
+                />
+              ) : null}
+            </>
+          }
           meta={
             <QuietMetaLine
               items={[
-                statusLabel(ambition.status),
-                ambitionTruth?.representationLabel ?? "No representation read yet",
                 `${linkedGoals.length} linked goals`,
+                ambitionTruth?.portfolioSummary ?? "No representation read yet",
               ]}
             />
           }
@@ -128,25 +161,41 @@ export function AmbitionDetailScreen({
             title="Direction truth"
             description={ambitionTruth.portfolioSummary}
           >
-            <DetailSummaryStrip
-              items={[
-                {
-                  label: "This week",
-                  value: `${Math.round(ambitionTruth.currentWeekScheduledMinutes / 60)} hr`,
-                  detail: ambitionTruth.representationSummary,
-                },
-                {
-                  label: "This month",
-                  value: `${Math.round(ambitionTruth.currentMonthScheduledMinutes / 60)} hr`,
-                  detail: "Direction represented through planned time.",
-                },
-                {
-                  label: "Moving goals",
-                  value: String(ambitionTruth.movingGoalCount),
-                  detail: `${ambitionTruth.representedGoalCount} currently visible in the week`,
-                },
-              ]}
-            />
+            <View className="gap-4">
+              <DetailSummaryStrip
+                items={[
+                  {
+                    label: "Representation",
+                    value: ambitionTruth.representationLabel,
+                    detail: ambitionTruth.representationSummary,
+                  },
+                  {
+                    label: "This week",
+                    value: `${Math.round(ambitionTruth.currentWeekScheduledMinutes / 60)} hr`,
+                    detail: "Direction represented through planned time.",
+                  },
+                  {
+                    label: "Moving goals",
+                    value: String(ambitionTruth.movingGoalCount),
+                    detail: `${ambitionTruth.representedGoalCount} currently visible in the week`,
+                  },
+                  {
+                    label: "Active goals",
+                    value: String(ambitionTruth.activeGoalCount),
+                    detail: "Linked goals carrying this direction.",
+                  },
+                ]}
+              />
+              <Surface
+                tone={ambitionTruth.representationState === "underrepresented" ? "accent" : "sunken"}
+                className="gap-2 mb-0"
+              >
+                <AppText variant="caption">{ambitionTruth.portfolioSummary}</AppText>
+                <AppText tone="secondary" variant="caption">
+                  {ambitionTruth.representationSummary}
+                </AppText>
+              </Surface>
+            </View>
           </DetailSection>
         ) : null}
 
@@ -171,13 +220,71 @@ export function AmbitionDetailScreen({
               {linkedGoals.map((goal) => {
                 const truth = goalTruthById.get(goal.id);
                 return (
-                  <DrillInRow
-                    key={goal.id}
-                    title={goal.title}
-                    subtitle={truth?.paceSummary ?? goal.summary ?? "Open the current read."}
-                    detail={truth?.paceLabel ?? statusLabel(ambition.status)}
-                    onPress={() => navigation.navigate("GoalDetail", { goalId: goal.id })}
-                  />
+                  <Surface key={goal.id} tone="sunken" className="gap-3 mb-0">
+                    <View className="flex-row flex-wrap items-center justify-between gap-2">
+                      <AppText tone="tertiary" variant="micro" style={{ textTransform: "uppercase" }}>
+                        {goal.status === GoalStatus.Active ? "Active goal" : "Inactive goal"}
+                      </AppText>
+                      <View className="flex-row flex-wrap gap-2">
+                        {truth ? (
+                          <Pill
+                            label={truth.paceLabel}
+                            tone={representationTone(
+                              truth.paceState === "on_pace" || truth.paceState === "recovered"
+                                ? "well_represented"
+                                : truth.paceState === "slightly_off_pace"
+                                  ? "lightly_represented"
+                                  : "underrepresented",
+                            )}
+                          />
+                        ) : null}
+                        {truth?.crowded ? <Pill label="Crowded" tone="quiet" /> : null}
+                        {truth?.stale ? <Pill label="Quiet" tone="quiet" /> : null}
+                      </View>
+                    </View>
+                    <View className="gap-1">
+                      <AppText variant="section">{goal.title}</AppText>
+                      <AppText tone="secondary" variant="caption">
+                        {truth?.paceSummary ?? goal.summary ?? "Open the current read."}
+                      </AppText>
+                    </View>
+                    <View className="flex-row flex-wrap gap-3">
+                      <Surface tone="sunken" className="min-w-[31%] flex-1 gap-1.5 mb-0 px-4 py-4">
+                        <AppText tone="tertiary" variant="micro" style={{ textTransform: "uppercase" }}>
+                          This week
+                        </AppText>
+                        <AppText variant="section">
+                          {truth ? `${Math.round(truth.currentWeekScheduledMinutes / 60)} hr` : "0 hr"}
+                        </AppText>
+                        <AppText tone="secondary" variant="caption">
+                          {truth?.representationSummary ?? "No current week read."}
+                        </AppText>
+                      </Surface>
+                      <Surface tone="sunken" className="min-w-[31%] flex-1 gap-1.5 mb-0 px-4 py-4">
+                        <AppText tone="tertiary" variant="micro" style={{ textTransform: "uppercase" }}>
+                          Timeline
+                        </AppText>
+                        <AppText variant="section">
+                          {goal.targetDate ? formatShortDate(goal.targetDate) : "No date"}
+                        </AppText>
+                        <AppText tone="secondary" variant="caption">
+                          {truth?.deadlineSummary ?? "Goal detail carries the full timeline read."}
+                        </AppText>
+                      </Surface>
+                    </View>
+                    <View className="flex-row items-center justify-between gap-3">
+                      <AppText tone="secondary" variant="caption" style={{ flex: 1 }}>
+                        {goal.summary ?? "Direction stays meaningful through linked live work."}
+                      </AppText>
+                      <Button
+                        tone="tertiary"
+                        size="compact"
+                        onPress={() => navigation.navigate("GoalDetail", { goalId: goal.id })}
+                      >
+                        Open goal
+                      </Button>
+                    </View>
+                  </Surface>
                 );
               })}
             </View>
