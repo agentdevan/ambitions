@@ -88,8 +88,8 @@ export function ProfileScreen({ navigation }: Props) {
   const homeSummaryItems = [
     {
       label: "Sync",
-      value: account ? accountSummary.headline : "Local only",
-      detail: accountSummary.detail,
+      value: account ? accountSummary.badge : "Local only",
+      detail: account ? accountSummary.modeLabel : accountSummary.detail,
     },
     {
       label: "Calendar",
@@ -111,7 +111,7 @@ export function ProfileScreen({ navigation }: Props) {
     planningSummary.learnedSummary,
     reflectionSummary.personalizedHighlights[0] ?? reflectionSummary.momentumCopy,
     calendarSummary.issue ?? calendarSummary.detail,
-    account ? accountSummary.detail : "Everything is still staying on this device.",
+    account ? accountSummary.nextStep : "Everything is still staying on this device.",
   ];
 
   return (
@@ -151,7 +151,7 @@ export function ProfileScreen({ navigation }: Props) {
                 {account?.displayName ?? account?.email ?? "Local profile"}
               </AppText>
               <AppText tone="secondary" variant="caption">
-                {account ? accountSummary.headline : "Local only."}
+                {account ? accountSummary.modeLabel : "Local only on this device."}
               </AppText>
             </View>
           </View>
@@ -160,7 +160,7 @@ export function ProfileScreen({ navigation }: Props) {
             <Pill
               label={
                 account
-                  ? syncState?.mode.replaceAll("_", " ") ?? "signed in"
+                  ? accountSummary.badge
                   : "local only"
               }
               tone="quiet"
@@ -212,8 +212,8 @@ export function ProfileScreen({ navigation }: Props) {
               />
               <DrillInRow
                 title="Account"
-                subtitle={accountSummary.headline}
-                detail={account ? "Connected account" : "Local only"}
+                subtitle={account ? accountSummary.modeLabel : accountSummary.detail}
+                detail={account ? accountSummary.badge : "Local only"}
                 actionLabel="Open"
                 leading={<Ionicons color={theme.colors.text.secondary} name="person-circle-outline" size={18} />}
                 onPress={() => navigation.navigate("ProfileAccount")}

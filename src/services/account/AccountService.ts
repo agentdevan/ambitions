@@ -259,6 +259,11 @@ export class AccountService {
           accountId,
           mode: SyncMode.Offline,
           lastError: null,
+          metadata: {
+            ...syncState.metadata,
+            lastAttemptedSyncAt: now,
+            lastOperationKind: SyncOperationKind.AttachLocalData,
+          },
           updatedAt: now,
         });
       }
@@ -331,6 +336,11 @@ export class AccountService {
         accountId,
         mode: SyncMode.Offline,
         pendingPushCount: counts.pendingPushCount,
+        metadata: {
+          ...snapshot.sync.metadata,
+          lastAttemptedSyncAt: now,
+          lastOperationKind: SyncOperationKind.PushPull,
+        },
         updatedAt: now,
       });
     }
@@ -348,12 +358,18 @@ export class AccountService {
 
     const online = await NetworkStatusService.isConnected();
     if (!online) {
+      const now = new Date().toISOString();
       await this.dependencies.accountRepository.saveSyncState({
         ...snapshot.sync,
         accountId: snapshot.auth.signedInAccountId,
         mode: SyncMode.Offline,
         lastError: null,
-        updatedAt: new Date().toISOString(),
+        metadata: {
+          ...snapshot.sync.metadata,
+          lastAttemptedSyncAt: now,
+          lastOperationKind: kind,
+        },
+        updatedAt: now,
       });
       return this.getSnapshot();
     }

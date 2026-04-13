@@ -53,8 +53,15 @@ export function AccountStatusCard({
     hasAccount,
     accountUnavailable,
     syncState,
+    syncSummaryBadge: syncSummary.badge,
     conflictsCount: conflicts.length,
   });
+  const primarySyncLabel =
+    syncState?.mode === SyncMode.Offline || syncState?.mode === SyncMode.Issue
+      ? "Retry now"
+      : syncState?.mode === SyncMode.PendingChanges
+        ? "Sync now"
+        : "Check sync";
 
   return (
     <Surface tone="sunken">
@@ -63,7 +70,7 @@ export function AccountStatusCard({
           <AppText tone="tertiary" variant="micro" style={{ textTransform: "uppercase" }}>
             Account
           </AppText>
-          <AppText variant="section">{buildHeadline(hasAccount, syncState, authState)}</AppText>
+          <AppText variant="section">{buildHeadline(hasAccount, attachmentState, syncState, authState)}</AppText>
           <AppText tone="secondary">{buildSummary(hasAccount, accountUnavailable, attachmentState, syncState)}</AppText>
           <View className="flex-row flex-wrap gap-x-5 gap-y-2">
             {statusPills.map((pill) => (
@@ -88,6 +95,14 @@ export function AccountStatusCard({
                 {syncSummary.detail}
               </AppText>
             </View>
+            <View className="gap-1">
+              <AppText tone="tertiary" variant="caption">
+                {syncSummary.localStateDetail}
+              </AppText>
+              <AppText tone="tertiary" variant="caption">
+                {syncSummary.cloudStateDetail}
+              </AppText>
+            </View>
             <View className="flex-row flex-wrap gap-x-5 gap-y-2">
               {syncSummary.meta.slice(1).map((item) => (
                 <AppText key={item} tone="tertiary" variant="caption">
@@ -95,6 +110,9 @@ export function AccountStatusCard({
                 </AppText>
               ))}
             </View>
+            <AppText tone="secondary" variant="caption">
+              {syncSummary.nextStep}
+            </AppText>
           </View>
         ) : null}
 
@@ -135,7 +153,7 @@ export function AccountStatusCard({
                 onPress={onSync}
                 disabled={attachmentState?.status !== LocalAttachmentStatus.Attached}
               >
-                Retry sync
+                {primarySyncLabel}
               </Button>
               <Button
                 tone="tertiary"
@@ -146,15 +164,9 @@ export function AccountStatusCard({
                 Sign out
               </Button>
             </View>
-            {(syncState?.pendingPushCount ?? 0) > 0 || syncState?.mode === SyncMode.Offline || syncState?.mode === SyncMode.Issue ? (
-              <AppText tone="tertiary" variant="caption">
-                Signing out keeps current changes on this device. They will not reach your account until you sign in and sync again.
-              </AppText>
-            ) : (
-              <AppText tone="tertiary" variant="caption">
-                Signing out leaves local data on this device and pauses connected syncing.
-              </AppText>
-            )}
+            <AppText tone="tertiary" variant="caption">
+              {syncSummary.signOutDetail}
+            </AppText>
           </View>
         ) : null}
       </View>
@@ -164,11 +176,24 @@ export function AccountStatusCard({
 
 function buildHeadline(
   hasAccount: boolean,
+  attachmentState: LocalAttachmentState | null,
   syncState: SyncStateSnapshot | null,
   authState: AuthStateSnapshot | null,
 ) {
   if (!hasAccount) {
     return authState?.status === AuthStatus.Unavailable ? "Local only" : "Connect an account";
+  }
+
+  if (attachmentState?.status === LocalAttachmentStatus.ConfirmationRequired) {
+    return "Signed in, still local on this device";
+  }
+
+  if (attachmentState?.status === LocalAttachmentStatus.Detached) {
+    return "Signed in, but this device is still local";
+  }
+
+  if (attachmentState?.status === LocalAttachmentStatus.Failed) {
+    return "Device attachment needs another try";
   }
 
   switch (syncState?.mode) {
@@ -203,7 +228,15 @@ function buildSummary(
   }
 
   if (attachmentState?.status === LocalAttachmentStatus.ConfirmationRequired) {
-    return "This device has local data ready to carry forward.";
+    return "This device has local work that has not moved into the account yet.";
+  }
+
+  if (attachmentState?.status === LocalAttachmentStatus.Detached) {
+    return "Your account is connected, but this device is still local-first.";
+  }
+
+  if (attachmentState?.status === LocalAttachmentStatus.Failed) {
+    return "This device could not attach its local state yet.";
   }
 
   switch (syncState?.mode) {
@@ -245,17 +278,20 @@ function buildStatusPills({
   hasAccount,
   accountUnavailable,
   syncState,
+  syncSummaryBadge,
   conflictsCount,
 }: {
   hasAccount: boolean;
   accountUnavailable: boolean;
   syncState: SyncStateSnapshot | null;
+  syncSummaryBadge: string;
   conflictsCount: number;
 }) {
   const pills: string[] = [];
 
   if (hasAccount) {
     pills.push("Signed in");
+    pills.push(syncSummaryBadge);
     pills.push(buildModeLabel(syncState));
   } else {
     pills.push("Local only");

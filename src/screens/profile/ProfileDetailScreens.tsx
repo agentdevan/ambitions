@@ -2091,8 +2091,16 @@ export function ProfileAccountScreen() {
     attachmentState,
     conflicts: syncConflicts,
   });
-  const pendingChangeCount =
-    (syncState?.pendingPushCount ?? 0) + (syncState?.pendingPullCount ?? 0);
+  const syncedSurfaceLabels =
+    attachmentState?.status === "attached"
+      ? ["Goals", "Plans", "Review history", "Preferences", "Reminder settings"]
+      : [];
+  const localOnlySurfaceLabels = [
+    "Calendar permission",
+    "Live calendar access",
+    "Notification permission",
+    "Current sign-in session",
+  ];
 
   return (
     <KeyboardAvoidingView
@@ -2114,17 +2122,17 @@ export function ProfileAccountScreen() {
         <View className="gap-4">
           <DetailHero
             eyebrow="Account"
-            title={account ? syncSummary.headline : "Local profile"}
+            title={account ? syncSummary.modeLabel : "Local profile"}
             description={
               account
                 ? syncSummary.detail
-                : "Keep everything on this device, or connect an account when you want cross-device syncing."
+                : "Everything is currently staying on this device. Connect an account when you want goals, plans, and review history to follow you."
             }
             badges={
               <>
-                <Pill label={account ? "Connected account" : "Local only"} tone="accent" />
+                <Pill label={account ? "Account connected" : "Local only"} tone="accent" />
                 <Pill
-                  label={attachmentState?.status === "attached" ? "Device attached" : "Device not attached"}
+                  label={account ? syncSummary.badge : "On this device only"}
                   tone="quiet"
                 />
               </>
@@ -2133,21 +2141,21 @@ export function ProfileAccountScreen() {
               <DetailSummaryStrip
                 items={[
                   {
-                    label: "Sync",
-                    value: account ? syncSummary.headline : "Local only",
+                    label: "Mode",
+                    value: account ? syncSummary.badge : "Local only",
                     detail: account
-                      ? syncState?.lastSyncAt
-                        ? `Last sync ${formatShortDateTime(syncState.lastSyncAt)}`
+                      ? syncSummary.lastSuccessLabel
+                        ? `Last completed sync ${syncSummary.lastSuccessLabel}`
                         : "No completed sync yet"
                       : "Nothing is being sent to an account",
                   },
                   {
                     label: "Pending",
-                    value: String(pendingChangeCount),
+                    value: String(syncSummary.unsyncedLocalCount),
                     detail:
-                      pendingChangeCount > 0
-                        ? "Changes waiting to move"
-                        : "No pending sync work",
+                      syncSummary.unsyncedLocalCount > 0
+                        ? "This device is holding newer local changes"
+                        : "No unsynced local changes",
                   },
                 ]}
               />
@@ -2189,56 +2197,126 @@ export function ProfileAccountScreen() {
             }
           />
           <DetailSection
-            title="What syncs"
-            description="Only real surfaces Ambitions can currently carry between devices."
+            title="Cross-device coverage"
+            description="What follows your account, and what still stays device-specific."
           >
-            <Surface className="gap-3 mb-0">
-              <QuietMetaLine
-                items={
-                  attachmentState?.status === "attached"
-                    ? ["Goals", "Plans", "History", "Preferences", "Notification settings"]
-                    : ["Everything stays local until this device is attached to an account"]
-                }
-              />
-              <AppText tone="secondary" variant="caption">
-                {attachmentState?.status === "attached"
-                  ? "Local device state and connected account state are linked for these surfaces."
-                  : "You can sign in without immediately uploading local data. Attachment stays explicit."}
-              </AppText>
-            </Surface>
+            <View className="gap-3">
+              <Surface className="gap-3 mb-0">
+                <AppText variant="section">Follows your account</AppText>
+                <QuietMetaLine
+                  items={
+                    syncedSurfaceLabels.length > 0
+                      ? syncedSurfaceLabels
+                      : ["Nothing follows your account until this device is attached."]
+                  }
+                />
+                <AppText tone="secondary" variant="caption">
+                  {attachmentState?.status === "attached"
+                    ? "These surfaces are cloud-backed for this device and can follow you to another device after sync completes."
+                    : "Signing in does not move local work automatically. Device attachment stays explicit so you can decide when current local state should follow the account."}
+                </AppText>
+              </Surface>
+              <Surface className="gap-3 mb-0">
+                <AppText variant="section">Stays on this device</AppText>
+                <QuietMetaLine items={localOnlySurfaceLabels} />
+                <AppText tone="secondary" variant="caption">
+                  Device permissions, live integrations, and the current signed-in session stay local even when your account is connected.
+                </AppText>
+              </Surface>
+            </View>
           </DetailSection>
           {account ? (
             <DetailSection
               title="Current state"
-              description="A compact read of connection health."
+              description="A compact read of what this device is holding, what the account has, and what needs attention next."
             >
               <Surface className="gap-3 mb-0">
                 <DetailMetaGroup
                   items={[
                     {
                       label: "Mode",
-                      value: syncSummary.headline,
+                      value: syncSummary.badge,
                     },
                     {
-                      label: "Conflicts",
-                      value: String(syncConflicts.length),
+                      label: "Last success",
+                      value: syncSummary.lastSuccessLabel ?? "Not yet",
                     },
                     {
-                      label: "Uploads",
-                      value: String(syncState?.pendingPushCount ?? 0),
+                      label: "Local newer",
+                      value: String(syncSummary.unsyncedLocalCount),
                     },
                     {
-                      label: "Downloads",
-                      value: String(syncState?.pendingPullCount ?? 0),
+                      label: "Review",
+                      value: String(syncSummary.reviewCount),
                     },
                   ]}
                 />
+                <AppText tone="secondary" variant="caption">
+                  {syncSummary.localStateDetail}
+                </AppText>
+                <AppText tone="secondary" variant="caption">
+                  {syncSummary.cloudStateDetail}
+                </AppText>
+                <AppText tone="secondary" variant="caption">
+                  {syncSummary.nextStep}
+                </AppText>
+                {syncSummary.lastAttemptLabel ? (
+                  <AppText tone="tertiary" variant="caption">
+                    Last sync check {syncSummary.lastAttemptLabel}
+                  </AppText>
+                ) : null}
+                {syncSummary.lastFailureLabel ? (
+                  <AppText tone="tertiary" variant="caption">
+                    Last failed attempt {syncSummary.lastFailureLabel}
+                  </AppText>
+                ) : null}
                 {syncState?.lastError ? (
                   <AppText tone="secondary" variant="caption">
                     {syncState.lastError}
                   </AppText>
                 ) : null}
               </Surface>
+            </DetailSection>
+          ) : null}
+          {account ? (
+            <DetailSection
+              title="If you sign out"
+              description="Signing out should feel explicit, not surprising."
+            >
+              <Surface className="gap-3 mb-0">
+                <AppText tone="secondary" variant="caption">
+                  {syncSummary.signOutDetail}
+                </AppText>
+                {attachmentState?.status !== "attached" ? (
+                  <AppText tone="tertiary" variant="caption">
+                    Local-only work on this device stays here even if you disconnect the account.
+                  </AppText>
+                ) : null}
+              </Surface>
+            </DetailSection>
+          ) : null}
+          {account && syncConflicts.length > 0 ? (
+            <DetailSection
+              title="Items waiting for review"
+              description="Ambitions stopped automatic replacement here to avoid trust-damaging duplication or silent overwrites."
+            >
+              <View className="gap-3">
+                {syncConflicts.slice(0, 3).map((conflict) => (
+                  <Surface key={conflict.id} className="gap-2 mb-0">
+                    <AppText variant="section">
+                      {String(conflict.entityKind).replaceAll("_", " ")}
+                    </AppText>
+                    <AppText tone="secondary" variant="caption">
+                      {conflict.summary}
+                    </AppText>
+                  </Surface>
+                ))}
+                {syncConflicts.length > 3 ? (
+                  <AppText tone="tertiary" variant="caption">
+                    {syncConflicts.length - 3} more item{syncConflicts.length - 3 === 1 ? "" : "s"} are still waiting for review.
+                  </AppText>
+                ) : null}
+              </View>
             </DetailSection>
           ) : null}
           {!account ? (

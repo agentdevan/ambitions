@@ -15,6 +15,12 @@ import {
 import { ProductPreferences } from "../../product/types";
 import { formatShortDateTime, formatTimeLabel, formatTimeRangeLabel } from "../../utils/date";
 
+interface SyncStatusMetadata {
+  lastAttemptedSyncAt: string | null;
+  lastFailureAt: string | null;
+  lastOperationKind: string | null;
+}
+
 const monthlyReviewCadenceOptions = [
   { day: 1, shortLabel: "Month opens", longLabel: "the first day of the month" },
   { day: 2, shortLabel: "After landing", longLabel: "the second day of the month" },
@@ -277,48 +283,199 @@ export function summarizeSyncState(params: {
   const pendingPushCount = syncState?.pendingPushCount ?? 0;
   const pendingPullCount = syncState?.pendingPullCount ?? 0;
   const pendingTotal = pendingPushCount + pendingPullCount;
+  const unsyncedLocalCount = pendingPushCount;
   const attached = attachmentState?.status === LocalAttachmentStatus.Attached;
+  const accountConnected = !!syncState?.accountId;
+  const metadata = readSyncStatusMetadata(syncState);
+  const hasAttentionState =
+    syncState?.mode === SyncMode.Offline ||
+    syncState?.mode === SyncMode.Issue ||
+    syncState?.mode === SyncMode.ReviewRequired ||
+    conflicts.length > 0;
+  const canRetry = attached && accountConnected;
+  const lastSuccessLabel = syncState?.lastSyncAt
+    ? formatShortDateTime(syncState.lastSyncAt)
+    : null;
+  const lastAttemptLabel = metadata.lastAttemptedSyncAt
+    ? formatShortDateTime(metadata.lastAttemptedSyncAt)
+    : null;
+  const lastFailureLabel = metadata.lastFailureAt
+    ? formatShortDateTime(metadata.lastFailureAt)
+    : null;
 
   let headline = "Local only";
   let detail = "Everything is staying on this device.";
+  let badge = "Local only";
+  let modeLabel = "On this device only";
+  let nextStep = "Connect an account when you want goals, plans, and review history to follow you to another device.";
+  let localStateDetail = "This device is the only place holding current Ambitions data.";
+  let cloudStateDetail = "Nothing is in your account yet.";
+  let signOutDetail = "There is no connected account to sign out from.";
 
-  switch (syncState?.mode) {
-    case SyncMode.Synced:
-      headline = "Up to date";
-      detail = "Your account and this device are aligned.";
-      break;
-    case SyncMode.Syncing:
-      headline = "Syncing now";
-      detail = "Ambitions is moving recent changes to your account.";
-      break;
-    case SyncMode.PendingChanges:
-      headline = "Pending changes";
-      detail = "Recent changes are waiting to sync.";
-      break;
-    case SyncMode.Offline:
-      headline = "Offline for now";
-      detail = "You can keep working. Changes will sync later.";
-      break;
-    case SyncMode.Issue:
-      headline = "Connection issue";
-      detail = "Your changes are still safe on this device.";
-      break;
-    case SyncMode.ReviewRequired:
-      headline = "Needs review";
-      detail = "Some synced items need a quick review.";
-      break;
-    default:
-      break;
+  if (accountConnected && !attached) {
+    headline =
+      attachmentState?.status === LocalAttachmentStatus.ConfirmationRequired
+        ? "Signed in, still local on this device"
+        : "Signed in without device attachment";
+    detail =
+      attachmentState?.status === LocalAttachmentStatus.ConfirmationRequired
+        ? "Your account is ready, but this device is still holding newer local data until you choose to bring it over."
+        : "Your account is connected, but this device is not sending its local work yet.";
+    badge = "Account connected";
+    modeLabel = "Account connected, device still local";
+    nextStep =
+      attachmentState?.status === LocalAttachmentStatus.ConfirmationRequired
+        ? "Attach this device when you want its current goals, plans, and history to follow you."
+        : "Attach this device when you want new work here to start following the account.";
+    localStateDetail =
+      attachmentState?.pendingRecordCount ?? 0
+        ? `This device is holding ${attachmentState?.pendingRecordCount ?? 0} local item${
+            attachmentState?.pendingRecordCount === 1 ? "" : "s"
+          } that have not moved into the account.`
+        : "This device is still the source of truth for any work created here until attachment happens.";
+    cloudStateDetail = "Your account exists, but this device has not started cross-device syncing yet.";
+    signOutDetail =
+      attachmentState?.status === LocalAttachmentStatus.ConfirmationRequired
+        ? "Signing out leaves this device's current work here. Reconnect before signing out if you want this local state to follow you."
+        : "Signing out removes the account connection only. Local work on this device stays here.";
+  } else {
+    switch (syncState?.mode) {
+      case SyncMode.Synced:
+        headline = "Up to date across devices";
+        detail = "This device and your account are aligned.";
+        badge = "Healthy sync";
+        modeLabel = "Cloud-backed and current";
+        nextStep = "Nothing needs attention right now.";
+        localStateDetail = "This device is not holding newer unsynced changes.";
+        cloudStateDetail = lastSuccessLabel
+          ? `Your account last received a completed sync ${lastSuccessLabel}.`
+          : "Your account has the same known state as this device.";
+        signOutDetail =
+          "Signing out pauses syncing on this device, but your current content stays here and remains in the connected account.";
+        break;
+      case SyncMode.Syncing:
+        headline = "Syncing recent changes";
+        detail = "Ambitions is moving this device's newer state into your account now.";
+        badge = "Syncing";
+        modeLabel = "Connected and moving changes";
+        nextStep = "Let the current sync finish before relying on another device for the latest state.";
+        localStateDetail = "This device is currently writing newer local changes into the connected account.";
+        cloudStateDetail = "The account is updating now.";
+        signOutDetail =
+          "Signing out now would leave any still-pending local changes on this device until you reconnect and sync again.";
+        break;
+      case SyncMode.PendingChanges:
+        headline = "This device has newer unsynced changes";
+        detail = "Recent edits are still on this device and have not reached your account yet.";
+        badge = "Needs sync";
+        modeLabel = "Connected, waiting to send changes";
+        nextStep = canRetry
+          ? "Sync again when you're ready if you want another device to pick these changes up."
+          : "Reconnect this device before expecting another device to match it.";
+        localStateDetail = `This device is currently holding ${unsyncedLocalCount} unsynced local change${
+          unsyncedLocalCount === 1 ? "" : "s"
+        }.`;
+        cloudStateDetail = lastSuccessLabel
+          ? `Your account is still at the state from ${lastSuccessLabel}.`
+          : "Your account has not received a completed sync from this device yet.";
+        signOutDetail =
+          "Signing out keeps these newer local changes on this device. Reconnect before signing out if you want them to follow you.";
+        break;
+      case SyncMode.Offline:
+        headline = "Offline, with local changes preserved";
+        detail = pendingPushCount > 0
+          ? "You can keep working here. This device is holding newer changes until the connection returns."
+          : "You can keep working here while the account connection is paused.";
+        badge = "Offline";
+        modeLabel = "Connected, waiting on network";
+        nextStep = pendingPushCount > 0
+          ? "Reconnect and sync when you want these local changes to reach your account."
+          : "Reconnect whenever you want the account to confirm this device is current again.";
+        localStateDetail = pendingPushCount > 0
+          ? `This device is holding ${pendingPushCount} unsynced local change${pendingPushCount === 1 ? "" : "s"}.`
+          : "No new local changes are waiting right now.";
+        cloudStateDetail = lastSuccessLabel
+          ? `Your account is still at the last completed sync from ${lastSuccessLabel}.`
+          : "No completed account sync has happened from this device yet.";
+        signOutDetail =
+          pendingPushCount > 0
+            ? "Signing out now leaves the newer local state on this device. Reconnect before signing out if you want it to follow you."
+            : "Signing out leaves local data on this device and pauses account syncing.";
+        break;
+      case SyncMode.Issue:
+        headline = "Sync needs another try";
+        detail = "The last sync did not finish, but your local changes are still here on this device.";
+        badge = "Needs attention";
+        modeLabel = "Connected, retry available";
+        nextStep = "Retry when you're ready. Another device may still be behind until a sync completes.";
+        localStateDetail = pendingPushCount > 0
+          ? `This device is holding ${pendingPushCount} newer local change${pendingPushCount === 1 ? "" : "s"}.`
+          : "This device kept the latest local state after the failed sync.";
+        cloudStateDetail = lastSuccessLabel
+          ? `Your account is still at the last completed sync from ${lastSuccessLabel}.`
+          : "Your account may not have any completed sync from this device yet.";
+        signOutDetail =
+          "Signing out keeps local data on this device. Retry first if you want the connected account to receive your latest changes.";
+        break;
+      case SyncMode.ReviewRequired:
+        headline = "Sync stopped to protect conflicting edits";
+        detail = "Ambitions kept local state in place instead of silently replacing it.";
+        badge = "Review required";
+        modeLabel = "Connected, waiting on review";
+        nextStep = "Use this device as the current source of truth until the conflicting items are reviewed.";
+        localStateDetail = "This device kept its local state instead of manufacturing duplicate records.";
+        cloudStateDetail =
+          conflicts.length > 0
+            ? `${conflicts.length} item${conflicts.length === 1 ? "" : "s"} differ between this device and the connected account.`
+            : "A prior sync conflict still needs review.";
+        signOutDetail =
+          "Signing out now leaves current local data on this device, but another device should not be treated as current until review is complete.";
+        break;
+      default:
+        break;
+    }
   }
 
   return {
     headline,
     detail,
+    badge,
+    modeLabel,
+    nextStep,
+    localStateDetail,
+    cloudStateDetail,
+    signOutDetail,
+    needsAttention: hasAttentionState,
+    canRetry,
+    pendingChangeCount: pendingTotal,
+    unsyncedLocalCount,
+    reviewCount: conflicts.length,
+    lastSuccessLabel,
+    lastAttemptLabel,
+    lastFailureLabel,
     meta: [
-      attached ? "Device attached to account" : "Device not attached",
-      syncState?.lastSyncAt ? `Last sync ${formatShortDateTime(syncState.lastSyncAt)}` : "No completed sync yet",
-      pendingTotal > 0 ? `${pendingTotal} change${pendingTotal === 1 ? "" : "s"} waiting` : "No pending changes",
-      conflicts.length > 0 ? `${conflicts.length} review item${conflicts.length === 1 ? "" : "s"}` : "No sync conflicts",
+      accountConnected
+        ? attached
+          ? "This device is attached to the connected account"
+          : "Account is connected, but this device is still local-first"
+        : "This device is staying local only",
+      lastSuccessLabel ? `Last completed sync ${lastSuccessLabel}` : "No completed sync yet",
+      pendingTotal > 0
+        ? `${pendingTotal} pending sync change${pendingTotal === 1 ? "" : "s"}`
+        : "No pending sync changes",
+      conflicts.length > 0
+        ? `${conflicts.length} item${conflicts.length === 1 ? "" : "s"} need review`
+        : "No open sync conflicts",
     ],
+  };
+}
+
+function readSyncStatusMetadata(syncState: SyncStateSnapshot | null): SyncStatusMetadata {
+  const metadata = syncState?.metadata ?? {};
+  return {
+    lastAttemptedSyncAt:
+      typeof metadata.lastAttemptedSyncAt === "string" ? metadata.lastAttemptedSyncAt : null,
+    lastFailureAt: typeof metadata.lastFailureAt === "string" ? metadata.lastFailureAt : null,
+    lastOperationKind: typeof metadata.lastOperationKind === "string" ? metadata.lastOperationKind : null,
   };
 }

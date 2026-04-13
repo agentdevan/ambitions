@@ -28,9 +28,8 @@ import { PlanRepository } from "../../../repositories/PlanRepository";
 import { PreferencesRepository } from "../../../repositories/PreferencesRepository";
 import { TaskRepository } from "../../../repositories/TaskRepository";
 import { SupabaseAccountClient } from "../SupabaseAccountClient";
-import { buildConflictRecord, MergeEvaluator } from "./MergeEvaluator";
+import { buildConflictRecord, buildConflictRecordId, MergeEvaluator } from "./MergeEvaluator";
 import {
-  duplicateConflictRecord,
   normalizeRemoteRecord,
   prepareOwnedRecord,
   syncEntityOrder,
@@ -207,6 +206,11 @@ export class SyncCoordinator {
   async sync(accountId: string, syncState: SyncStateSnapshot, kind: SyncOperationKind) {
     const now = new Date().toISOString();
     const operationId = `sync:${kind}:${now}`;
+    const syncMetadata = {
+      ...syncState.metadata,
+      lastAttemptedSyncAt: now,
+      lastOperationKind: kind,
+    };
 
     await this.accountRepository.saveSyncOperation({
       id: operationId,
@@ -231,6 +235,7 @@ export class SyncCoordinator {
       accountId,
       mode: SyncMode.Syncing,
       lastError: null,
+      metadata: syncMetadata,
       updatedAt: now,
     });
 
@@ -297,7 +302,7 @@ export class SyncCoordinator {
           if (decision.type === "conflict") {
             await this.accountRepository.saveConflict(
               buildConflictRecord({
-                id: `conflict:${entityKind}:${localRecord.id}:${now}`,
+                id: buildConflictRecordId(accountId, entityKind, localRecord.id),
                 accountId,
                 kind: entityKind,
                 entityId: localRecord.id,
@@ -309,19 +314,11 @@ export class SyncCoordinator {
               }),
             );
             conflictCount += 1;
-
-            if (decision.strategy === "preserve_both") {
-              const preserved = duplicateConflictRecord(entityKind, remoteEntity, now);
-              if (preserved) {
-                await this.saveLocalRecord(entityKind, preserved);
-              }
-
-              await this.saveLocalRecord(entityKind, {
-                ...localRecord,
-                syncState: EntitySyncState.Conflict,
-                updatedAt: now,
-              });
-            }
+            await this.saveLocalRecord(entityKind, {
+              ...localRecord,
+              syncState: EntitySyncState.Conflict,
+              updatedAt: now,
+            });
 
             continue;
           }
@@ -384,12 +381,16 @@ export class SyncCoordinator {
         updatedAt: now,
       });
       const remainingCounts = await this.countPendingRecords(accountId);
+      const openConflicts = (await this.accountRepository.listOpenConflicts()).filter(
+        (conflict) => conflict.accountId === accountId,
+      );
+      const totalConflictCount = openConflicts.length;
 
       await this.accountRepository.saveSyncState({
         ...syncState,
         accountId,
         mode:
-          conflictCount > 0
+          totalConflictCount > 0
             ? SyncMode.ReviewRequired
             : remainingCounts.pendingPushCount > 0
               ? SyncMode.PendingChanges
@@ -397,8 +398,12 @@ export class SyncCoordinator {
         lastSyncAt: now,
         pendingPushCount: remainingCounts.pendingPushCount,
         pendingPullCount,
-        unresolvedConflictCount: conflictCount,
+        unresolvedConflictCount: totalConflictCount,
         lastError: null,
+        metadata: {
+          ...syncMetadata,
+          lastSuccessfulSyncAt: now,
+        },
         updatedAt: now,
       });
     } catch (error) {
@@ -427,6 +432,10 @@ export class SyncCoordinator {
         accountId,
         mode: SyncMode.Issue,
         lastError: message,
+        metadata: {
+          ...syncMetadata,
+          lastFailureAt: now,
+        },
         updatedAt: now,
       });
 

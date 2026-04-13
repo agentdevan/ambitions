@@ -48,22 +48,21 @@ export class MergeEvaluator {
       return { type: "pull_remote" };
     }
 
-    // Portfolio entities need one authoritative identity. Creating preserved copies
-    // with new ids turns one logical record into multiple surfaced records.
-    const preserveBothKinds = new Set<SyncEntityKind>();
-    const strategy = preserveBothKinds.has(params.kind)
-      ? SyncConflictStrategy.PreserveBoth
-      : SyncConflictStrategy.ReviewRequired;
+    // Every synced entity in Ambitions should keep one stable logical identity.
+    // When edits diverge, stop automatic replacement and keep the existing local
+    // record in conflict instead of manufacturing preserved duplicates.
+    const strategy = SyncConflictStrategy.ReviewRequired;
 
     return {
       type: "conflict",
       strategy,
-      summary:
-        strategy === SyncConflictStrategy.PreserveBoth
-          ? "Both versions were kept because edits diverged."
-          : "Both versions changed and need review before replacing local data.",
+      summary: "Both versions changed. Ambitions kept local data in place until this item is reviewed.",
     };
   }
+}
+
+export function buildConflictRecordId(accountId: string, kind: SyncEntityKind, entityId: string) {
+  return `conflict:${accountId}:${kind}:${entityId}`;
 }
 
 export function buildConflictRecord(params: {
