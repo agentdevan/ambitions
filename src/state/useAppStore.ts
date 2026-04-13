@@ -961,6 +961,7 @@ export const useAppStore = create<AppState>((set, get) => ({
     }
 
     const state = get();
+    const accountId = getAttachedAccountId(state);
     const goalSet = new Set(uniqueGoalIds);
     const milestoneIds = state.milestones
       .filter((milestone) => goalSet.has(milestone.goalId))
@@ -975,6 +976,70 @@ export const useAppStore = create<AppState>((set, get) => ({
           (block.taskId ? taskIds.includes(block.taskId) : false),
       )
       .map((block) => block.id);
+    const activityEventIds = state.activityEvents
+      .filter(
+        (event) =>
+          goalSet.has(event.goalId ?? "") ||
+          (event.milestoneId ? milestoneIds.includes(event.milestoneId) : false) ||
+          (event.taskId ? taskIds.includes(event.taskId) : false) ||
+          (event.timeBlockId ? timeBlockIds.includes(event.timeBlockId) : false),
+      )
+      .map((event) => event.id);
+    const now = new Date().toISOString();
+    const taskIdSet = new Set(taskIds);
+    const nextWeeklyReviews = state.weeklyReviewHistory.map((review) => {
+      const nextCarryover = review.carryoverTaskIds.filter((taskId) => !taskIdSet.has(taskId));
+      const nextReview = review.reviewTaskIds.filter((taskId) => !taskIdSet.has(taskId));
+      const nextReleased = review.releasedTaskIds.filter((taskId) => !taskIdSet.has(taskId));
+      const changed =
+        nextCarryover.length !== review.carryoverTaskIds.length ||
+        nextReview.length !== review.reviewTaskIds.length ||
+        nextReleased.length !== review.releasedTaskIds.length;
+
+      if (!changed) {
+        return review;
+      }
+
+      return bindRecordToAccount(
+        {
+          ...review,
+          carryoverTaskIds: nextCarryover,
+          reviewTaskIds: nextReview,
+          releasedTaskIds: nextReleased,
+          updatedAt: now,
+          version: review.version + 1,
+        },
+        accountId,
+      );
+    });
+    const nextMonthlyReviews = state.monthlyReviewHistory.map((review) => {
+      const nextRecommit = review.recommitGoalIds.filter((goalId) => !goalSet.has(goalId));
+      const nextReduce = review.reduceGoalIds.filter((goalId) => !goalSet.has(goalId));
+      const nextPause = review.pauseGoalIds.filter((goalId) => !goalSet.has(goalId));
+      const nextCoverage = review.goalCoverage.filter((coverage) => !goalSet.has(coverage.goalId));
+      const changed =
+        nextRecommit.length !== review.recommitGoalIds.length ||
+        nextReduce.length !== review.reduceGoalIds.length ||
+        nextPause.length !== review.pauseGoalIds.length ||
+        nextCoverage.length !== review.goalCoverage.length;
+
+      if (!changed) {
+        return review;
+      }
+
+      return bindRecordToAccount(
+        {
+          ...review,
+          recommitGoalIds: nextRecommit,
+          reduceGoalIds: nextReduce,
+          pauseGoalIds: nextPause,
+          goalCoverage: nextCoverage,
+          updatedAt: now,
+          version: review.version + 1,
+        },
+        accountId,
+      );
+    });
 
     await sqliteClient.withTransaction(async (client) => {
       if (taskIds.length > 0) {
@@ -1053,7 +1118,20 @@ export const useAppStore = create<AppState>((set, get) => ({
       };
     });
 
-    await appServices.repositories.goals.saveAmbitions(nextAmbitions);
+    const deletedEntityIds = [
+      ...uniqueGoalIds,
+      ...milestoneIds,
+      ...taskIds,
+      ...timeBlockIds,
+      ...activityEventIds,
+    ];
+
+    await Promise.all([
+      appServices.repositories.goals.saveAmbitions(nextAmbitions),
+      appServices.repositories.planning.saveWeeklyReviewStates(nextWeeklyReviews),
+      appServices.repositories.planning.saveMonthlyReviewStates(nextMonthlyReviews),
+      appServices.services.account.deleteSyncedEntities(deletedEntityIds),
+    ]);
 
     const [foundationSnapshot, accountSnapshot] = await Promise.all([
       refreshAllState(state.planDate),

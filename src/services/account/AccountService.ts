@@ -378,6 +378,30 @@ export class AccountService {
     return this.getSnapshot();
   }
 
+  async deleteSyncedEntities(entityIds: string[]) {
+    await this.initialize();
+    const snapshot = await this.getSnapshot();
+    const accountId = snapshot.auth.signedInAccountId;
+    const uniqueEntityIds = Array.from(new Set(entityIds)).filter(Boolean);
+
+    if (
+      uniqueEntityIds.length === 0 ||
+      !accountId ||
+      snapshot.attachment.status !== LocalAttachmentStatus.Attached
+    ) {
+      return;
+    }
+
+    if (this.remoteClient.isConfigured()) {
+      await this.remoteClient.deleteRemoteRecords(accountId, uniqueEntityIds);
+    }
+
+    await Promise.all([
+      this.dependencies.accountRepository.deleteRemoteRecords(accountId, uniqueEntityIds),
+      this.dependencies.accountRepository.deleteConflictsByEntityIds(accountId, uniqueEntityIds),
+    ]);
+  }
+
   async runStartupSyncIfNeeded() {
     if (!this.startupSyncPromise) {
       this.startupSyncPromise = (async () => {

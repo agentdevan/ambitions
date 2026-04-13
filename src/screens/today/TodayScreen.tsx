@@ -230,11 +230,11 @@ export function TodayScreen({ navigation }: Props) {
             action={
               bootStatus !== "loading" ? (
                 <View className="flex-row gap-3 pt-1">
-                  <Button style={{ flex: 1 }} onPress={() => navigation.getParent()?.navigate("Goals")}>
-                    Goals
+                  <Button style={{ flex: 1 }} onPress={() => navigation.getParent()?.navigate("Plan")}>
+                    Open Plan
                   </Button>
-                  <Button tone="secondary" style={{ flex: 1 }} onPress={() => navigation.getParent()?.navigate("Plan")}>
-                    Plan
+                  <Button tone="secondary" style={{ flex: 1 }} onPress={() => navigation.getParent()?.navigate("Goals")}>
+                    View Goals
                   </Button>
                 </View>
               ) : null

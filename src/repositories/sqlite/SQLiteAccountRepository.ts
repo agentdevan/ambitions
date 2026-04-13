@@ -367,6 +367,32 @@ export class SQLiteAccountRepository extends SQLiteRepository implements Account
       }
     });
   }
+
+  async deleteConflictsByEntityIds(accountId: string, entityIds: string[]) {
+    const uniqueEntityIds = Array.from(new Set(entityIds)).filter(Boolean);
+    if (uniqueEntityIds.length === 0) {
+      return;
+    }
+
+    const placeholders = uniqueEntityIds.map(() => "?").join(", ");
+    await this.database.run(
+      `DELETE FROM sync_conflicts WHERE account_id = ? AND entity_id IN (${placeholders});`,
+      [accountId, ...uniqueEntityIds],
+    );
+  }
+
+  async deleteRemoteRecords(accountId: string, entityIds: string[]) {
+    const uniqueEntityIds = Array.from(new Set(entityIds)).filter(Boolean);
+    if (uniqueEntityIds.length === 0) {
+      return;
+    }
+
+    const placeholders = uniqueEntityIds.map(() => "?").join(", ");
+    await this.database.run(
+      `DELETE FROM remote_sync_records WHERE account_id = ? AND entity_id IN (${placeholders});`,
+      [accountId, ...uniqueEntityIds],
+    );
+  }
 }
 
 function mapAccount(row: AccountRow): AccountIdentity {

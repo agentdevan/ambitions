@@ -23,4 +23,6 @@ export interface AccountRepository {
   saveConflict(conflict: SyncConflictRecord): Promise<void>;
   listRemoteRecords(accountId: string): Promise<RemoteSyncRecord[]>;
   saveRemoteRecords(records: RemoteSyncRecord[]): Promise<void>;
+  deleteConflictsByEntityIds(accountId: string, entityIds: string[]): Promise<void>;
+  deleteRemoteRecords(accountId: string, entityIds: string[]): Promise<void>;
 }

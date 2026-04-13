@@ -205,6 +205,23 @@ export class SupabaseAccountClient {
     }
   }
 
+  async deleteRemoteRecords(accountId: string, entityIds: string[]) {
+    if (entityIds.length === 0) {
+      return;
+    }
+
+    const client = this.requireClient();
+    const { error } = await client
+      .from("sync_records")
+      .delete()
+      .eq("account_id", accountId)
+      .in("entity_id", entityIds);
+
+    if (error) {
+      throw error;
+    }
+  }
+
   buildAccountIdentity(user: User) {
     const displayName = readUserMetadata(user, "display_name");
     return {

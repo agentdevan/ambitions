@@ -93,23 +93,23 @@ export function DrillInRow({
           </View>
           <View className="items-end gap-1 pl-2">
             <View
-              className="flex-row items-center gap-1.5 rounded-full px-3.5 py-2.5"
+              className="min-w-[84px] flex-row items-center justify-center gap-1.5 rounded-full px-3.5 py-2.5"
               style={{
                 backgroundColor: pressed
-                  ? theme.colors.background.accentWashStrong
-                  : theme.colors.background.elevatedSecondary,
+                  ? theme.colors.accent.primary
+                  : theme.colors.background.accentWashStrong,
                 borderWidth: 1,
                 borderColor: pressed
-                  ? theme.colors.border.accent
-                  : theme.colors.border.strong,
-                shadowColor: theme.colors.shadow.color,
-                shadowOpacity: pressed ? 0.12 : theme.mode === "dark" ? 0.08 : 0.04,
-                shadowRadius: 8,
-                shadowOffset: { width: 0, height: 3 },
+                  ? theme.colors.accent.primary
+                  : theme.colors.border.accent,
+                shadowColor: theme.colors.accent.primary,
+                shadowOpacity: pressed ? 0.18 : theme.mode === "dark" ? 0.12 : 0.08,
+                shadowRadius: 10,
+                shadowOffset: { width: 0, height: 4 },
               }}
             >
               <AppText
-                tone={pressed ? "accent" : "primary"}
+                tone={pressed ? "inverse" : "accent"}
                 variant="micro"
                 numberOfLines={1}
                 style={{ textTransform: "uppercase", letterSpacing: 0.55 }}
@@ -117,7 +117,7 @@ export function DrillInRow({
                 {actionLabel}
               </AppText>
               <Ionicons
-                color={pressed ? theme.colors.accent.primary : theme.colors.text.secondary}
+                color={pressed ? theme.colors.text.inverse : theme.colors.accent.primary}
                 name="chevron-forward"
                 size={16}
               />

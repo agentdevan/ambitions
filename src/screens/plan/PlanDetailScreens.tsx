@@ -631,7 +631,7 @@ export function PlanReviewScreen({
                           Defer a day
                         </Button>
                         <Button
-                          tone="inline"
+                          tone="destructive"
                           size="compact"
                           onPress={() =>
                             void runReviewAction(

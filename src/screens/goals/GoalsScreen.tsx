@@ -136,24 +136,24 @@ function GoalCard({
               {meta}
             </AppText>
             <View
-              className="flex-row items-center gap-1.5 rounded-full px-3.5 py-2.5"
+              className="min-w-[106px] flex-row items-center justify-center gap-1.5 rounded-full px-3.5 py-2.5"
               style={{
                 backgroundColor: selected
-                  ? theme.colors.background.accentWashStrong
-                  : theme.colors.background.elevatedSecondary,
+                  ? theme.colors.accent.primary
+                  : theme.colors.background.accentWashStrong,
                 borderWidth: 1,
-                borderColor: selected ? theme.colors.border.accent : theme.colors.border.strong,
-                shadowColor: theme.colors.shadow.color,
-                shadowOpacity: selected ? 0.12 : theme.mode === "dark" ? 0.08 : 0.04,
-                shadowRadius: 8,
-                shadowOffset: { width: 0, height: 3 },
+                borderColor: selected ? theme.colors.accent.primary : theme.colors.border.accent,
+                shadowColor: theme.colors.accent.primary,
+                shadowOpacity: selected ? 0.2 : theme.mode === "dark" ? 0.12 : 0.08,
+                shadowRadius: 10,
+                shadowOffset: { width: 0, height: 4 },
               }}
             >
-              <AppText tone="primary" variant="micro" style={{ textTransform: "uppercase" }}>
+              <AppText tone={selected ? "inverse" : "accent"} variant="micro" style={{ textTransform: "uppercase" }}>
                 {selectionMode ? (selected ? "Selected" : "Select") : "Open goal"}
               </AppText>
               <Ionicons
-                color={selected ? theme.colors.accent.primary : theme.colors.text.secondary}
+                color={selected ? theme.colors.text.inverse : theme.colors.accent.primary}
                 name={selectionMode ? (selected ? "checkmark" : "add") : "arrow-forward"}
                 size={14}
               />
@@ -379,11 +379,11 @@ export function GoalsScreen({ navigation }: Props) {
                   <View className="flex-row items-start justify-between gap-3">
                     <View className="flex-1 gap-1">
                       <AppText variant="section">Bulk cleanup</AppText>
-                      <AppText tone="secondary" variant="caption">
-                        Select goals, then confirm one deliberate destructive action.
-                      </AppText>
-                    </View>
-                    <Pill label={selectedCount > 0 ? `${selectedCount} selected` : "Select goals"} tone="accent" />
+                  <AppText tone="secondary" variant="caption">
+                    Select goals, then confirm one deliberate destructive action.
+                  </AppText>
+                </View>
+                    <Pill label={selectedCount > 0 ? `${selectedCount} selected` : "Select goals"} tone="neutral" />
                   </View>
                   <View className="flex-row gap-3">
                     <Button
@@ -476,9 +476,10 @@ export function GoalsScreen({ navigation }: Props) {
             <View className="gap-4">
               <View className="gap-2">
                 <Pill label={selectedCount > 0 ? `${selectedCount} selected` : "No goals selected"} tone="neutral" />
-                <AppText variant="title">Delete selected goals?</AppText>
+                <Pill label="Destructive action" tone="quiet" />
+                <AppText variant="title">Delete goals for good?</AppText>
                 <AppText tone="secondary">
-                  This removes the goals and their generated work. The cleanup is immediate and cannot be undone.
+                  This removes the goals, generated tasks, scheduled blocks, and related history links from this runtime. The cleanup is immediate and cannot be undone.
                 </AppText>
               </View>
               {selectedTitles.length > 0 ? (
@@ -501,8 +502,8 @@ export function GoalsScreen({ navigation }: Props) {
                 </AppText>
               ) : null}
               <View className="flex-row gap-3">
-                <Button tone="tertiary" style={{ flex: 1 }} onPress={() => setConfirmDeleteOpen(false)}>
-                  Keep goals
+                <Button tone="secondary" style={{ flex: 1 }} onPress={() => setConfirmDeleteOpen(false)}>
+                  Cancel
                 </Button>
                 <Button tone="destructive" style={{ flex: 1 }} busy={deleteBusy} onPress={() => void handleDeleteSelected()}>
                   Delete goals

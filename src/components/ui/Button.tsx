@@ -28,19 +28,21 @@ export function Button({
   const tonePalette = {
     primary: {
       idleBackground: theme.colors.accent.primary,
-      pressedBackground: theme.colors.accent.secondary,
-      disabledBackground: theme.mode === "dark" ? theme.colors.border.strong : theme.colors.border.accent,
+      pressedBackground: theme.colors.accent.muted,
+      disabledBackground: theme.colors.background.sunken,
       idleBorder: theme.colors.accent.primary,
-      pressedBorder: theme.colors.accent.secondary,
-      disabledBorder: theme.colors.border.accent,
+      pressedBorder: theme.colors.accent.primary,
+      disabledBorder: theme.colors.border.subtle,
       textTone: "inverse" as const,
-      disabledTextTone: "inverse" as const,
+      disabledTextTone: "secondary" as const,
+      textColor: theme.colors.accent.contrast,
+      disabledTextColor: theme.colors.text.tertiary,
       shadowColor: theme.colors.accent.primary,
       innerGlow: theme.colors.accent.glow,
-      elevation: 6,
+      elevation: 7,
     },
     secondary: {
-      idleBackground: theme.colors.background.elevated,
+      idleBackground: theme.colors.background.elevatedSecondary,
       pressedBackground: theme.colors.background.accentWashStrong,
       disabledBackground: theme.colors.background.sunken,
       idleBorder: theme.colors.border.strong,
@@ -48,12 +50,14 @@ export function Button({
       disabledBorder: theme.colors.border.subtle,
       textTone: "primary" as const,
       disabledTextTone: "secondary" as const,
+      textColor: theme.colors.text.primary,
+      disabledTextColor: theme.colors.text.tertiary,
       shadowColor: theme.colors.text.primary,
       innerGlow: theme.colors.background.cardTint,
-      elevation: 2,
+      elevation: 3,
     },
     tertiary: {
-      idleBackground: theme.colors.background.elevatedSecondary,
+      idleBackground: theme.mode === "dark" ? theme.colors.background.elevated : theme.colors.background.sunken,
       pressedBackground: theme.colors.background.accentWash,
       disabledBackground: theme.colors.background.sunken,
       idleBorder: theme.colors.border.strong,
@@ -61,37 +65,32 @@ export function Button({
       disabledBorder: theme.colors.border.subtle,
       textTone: "primary" as const,
       disabledTextTone: "secondary" as const,
+      textColor: theme.colors.text.primary,
+      disabledTextColor: theme.colors.text.tertiary,
       shadowColor: theme.colors.text.primary,
       innerGlow: theme.colors.background.cardTint,
-      elevation: 1,
+      elevation: 2,
     },
     destructive: {
-      idleBackground:
-        theme.mode === "dark"
-          ? `${theme.colors.semantic.warning}22`
-          : `${theme.colors.semantic.warning}18`,
+      idleBackground: theme.colors.semantic.warning,
       pressedBackground:
         theme.mode === "dark"
-          ? `${theme.colors.semantic.warning}36`
-          : `${theme.colors.semantic.warning}28`,
+          ? theme.colors.accent.muted
+          : theme.colors.accent.muted,
       disabledBackground: theme.colors.background.sunken,
-      idleBorder:
-        theme.mode === "dark"
-          ? `${theme.colors.semantic.warning}8A`
-          : `${theme.colors.semantic.warning}66`,
-      pressedBorder:
-        theme.mode === "dark"
-          ? `${theme.colors.semantic.warning}C0`
-          : `${theme.colors.semantic.warning}96`,
+      idleBorder: theme.colors.semantic.warning,
+      pressedBorder: theme.colors.accent.muted,
       disabledBorder: theme.colors.border.subtle,
-      textTone: "primary" as const,
+      textTone: "inverse" as const,
       disabledTextTone: "secondary" as const,
+      textColor: theme.colors.accent.contrast,
+      disabledTextColor: theme.colors.text.tertiary,
       shadowColor: theme.colors.semantic.warning,
       innerGlow:
         theme.mode === "dark"
-          ? `${theme.colors.semantic.warning}1E`
-          : `${theme.colors.semantic.warning}12`,
-      elevation: 2,
+          ? `${theme.colors.semantic.warning}22`
+          : `${theme.colors.semantic.warning}18`,
+      elevation: 4,
     },
     inline: {
       idleBackground: theme.colors.background.elevatedSecondary,
@@ -102,6 +101,8 @@ export function Button({
       disabledBorder: theme.colors.border.subtle,
       textTone: "accent" as const,
       disabledTextTone: "secondary" as const,
+      textColor: theme.colors.accent.primary,
+      disabledTextColor: theme.colors.text.tertiary,
       shadowColor: theme.colors.accent.primary,
       innerGlow: theme.colors.accent.wash,
       elevation: 1,
@@ -109,18 +110,18 @@ export function Button({
   }[resolvedTone];
   const sizing = {
     default: {
-      minHeight: resolvedTone === "inline" ? 42 : resolvedTone === "primary" ? 58 : 52,
-      paddingHorizontal: resolvedTone === "inline" ? 14 : resolvedTone === "primary" ? 22 : 18,
-      paddingVertical: resolvedTone === "inline" ? 10 : resolvedTone === "primary" ? 16 : 13,
+      minHeight: resolvedTone === "inline" ? 42 : resolvedTone === "primary" || resolvedTone === "destructive" ? 60 : 54,
+      paddingHorizontal: resolvedTone === "inline" ? 14 : resolvedTone === "primary" || resolvedTone === "destructive" ? 22 : 18,
+      paddingVertical: resolvedTone === "inline" ? 10 : resolvedTone === "primary" || resolvedTone === "destructive" ? 16 : 13,
       textVariant:
         resolvedTone === "inline"
           ? ("micro" as const)
-          : resolvedTone === "primary"
+          : resolvedTone === "primary" || resolvedTone === "destructive"
             ? ("body" as const)
             : ("caption" as const),
     },
     compact: {
-      minHeight: resolvedTone === "inline" ? 36 : 44,
+      minHeight: resolvedTone === "inline" ? 36 : resolvedTone === "destructive" ? 46 : 46,
       paddingHorizontal: resolvedTone === "inline" ? 12 : 15,
       paddingVertical: resolvedTone === "inline" ? 8 : 10,
       textVariant: resolvedTone === "inline" ? ("micro" as const) : ("caption" as const),
@@ -152,7 +153,7 @@ export function Button({
             : pressed
               ? tonePalette.pressedBorder
               : tonePalette.idleBorder,
-          borderWidth: resolvedTone === "primary" ? 1.25 : 1,
+          borderWidth: resolvedTone === "primary" || resolvedTone === "destructive" ? 1.35 : 1,
           opacity: isDisabled ? (resolvedTone === "inline" ? 0.58 : 0.68) : 1,
           transform: [
             { scale: pressed && !isDisabled && !reduceMotionEnabled ? 0.982 : 1 },
@@ -160,15 +161,15 @@ export function Button({
           ],
           shadowColor: tonePalette.shadowColor,
           shadowOpacity:
-            resolvedTone === "primary"
+            resolvedTone === "primary" || resolvedTone === "destructive"
               ? isDisabled
                 ? 0
                 : pressed
-                ? 0.18
+                ? 0.2
                 : theme.mode === "dark"
-                  ? 0.28
-                  : 0.14
-              : resolvedTone === "secondary" || resolvedTone === "tertiary" || resolvedTone === "destructive"
+                  ? 0.32
+                  : 0.16
+              : resolvedTone === "secondary" || resolvedTone === "tertiary"
                 ? isDisabled
                   ? 0
                   : pressed
@@ -183,8 +184,8 @@ export function Button({
                     : theme.mode === "dark"
                       ? 0.14
                       : 0.08,
-          shadowRadius: resolvedTone === "primary" ? 22 : 10,
-          shadowOffset: { width: 0, height: resolvedTone === "primary" ? 12 : 5 },
+          shadowRadius: resolvedTone === "primary" || resolvedTone === "destructive" ? 24 : 10,
+          shadowOffset: { width: 0, height: resolvedTone === "primary" || resolvedTone === "destructive" ? 12 : 5 },
           elevation: isDisabled ? 0 : tonePalette.elevation,
         },
         style,
@@ -199,11 +200,17 @@ export function Button({
               top: 1,
               left: 1,
               right: 1,
-              height: resolvedTone === "primary" ? "46%" : resolvedTone === "inline" ? "52%" : "42%",
+              height:
+                resolvedTone === "primary" || resolvedTone === "destructive"
+                  ? "46%"
+                  : resolvedTone === "inline"
+                    ? "52%"
+                    : "42%",
               borderTopLeftRadius: resolvedTone === "inline" ? theme.radius.compactControl : theme.radius.control,
               borderTopRightRadius: resolvedTone === "inline" ? theme.radius.compactControl : theme.radius.control,
               backgroundColor: tonePalette.innerGlow,
-              opacity: isDisabled ? 0 : pressed ? 0.08 : resolvedTone === "primary" ? 0.2 : 0.14,
+              opacity:
+                isDisabled ? 0 : pressed ? 0.08 : resolvedTone === "primary" || resolvedTone === "destructive" ? 0.22 : 0.14,
             }}
           />
           {busy ? (
@@ -226,9 +233,10 @@ export function Button({
               variant={sizing.textVariant}
               numberOfLines={1}
               style={{
+                color: isDisabled ? tonePalette.disabledTextColor : tonePalette.textColor,
                 fontWeight: "700",
                 letterSpacing:
-                  resolvedTone === "primary"
+                  resolvedTone === "primary" || resolvedTone === "destructive"
                     ? -0.26
                     : resolvedTone === "inline"
                       ? 0.28

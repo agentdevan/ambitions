@@ -673,11 +673,15 @@ export function GoalDetailScreen({
                 Choose what happens to downstream work before this goal leaves the main rotation.
               </AppText>
               <View className="gap-2">
+                <Pill
+                  label={lifecycleState?.status === GoalStatus.Paused ? "Pause flow" : "Archive flow"}
+                  tone={lifecycleState?.status === GoalStatus.Paused ? "quiet" : "neutral"}
+                />
                 {lifecycleState
                   ? describeLifecycleOptions(
                       lifecycleState.status === GoalStatus.Paused ? "pause" : "archive",
                     ).map((option) => (
-                      <OptionChip
+                      <SelectionCard
                         key={option.key}
                         selected={lifecycleState.handling === option.key}
                         onPress={() =>
@@ -686,21 +690,27 @@ export function GoalDetailScreen({
                           )
                         }
                       >
-                        {option.label}
-                      </OptionChip>
+                        <View className="gap-1.5">
+                          <AppText variant="section">{option.label}</AppText>
+                          <AppText tone="secondary" variant="caption">
+                            {option.description}
+                          </AppText>
+                        </View>
+                      </SelectionCard>
                     ))
                   : null}
               </View>
               <View className="flex-row gap-3">
-                <Button tone="tertiary" style={{ flex: 1 }} onPress={() => setLifecycleState(null)}>
+                <Button tone="secondary" style={{ flex: 1 }} onPress={() => setLifecycleState(null)}>
                   Cancel
                 </Button>
                 <Button
+                  tone={lifecycleState?.status === GoalStatus.Archived ? "destructive" : "primary"}
                   style={{ flex: 1 }}
                   onPress={() => void confirmLifecycleChange()}
                   busy={lifecycleState ? busyState === `status:${lifecycleState.goal.id}` : false}
                 >
-                  Confirm
+                  {lifecycleState?.status === GoalStatus.Paused ? "Pause goal" : "Archive goal"}
                 </Button>
               </View>
             </View>
