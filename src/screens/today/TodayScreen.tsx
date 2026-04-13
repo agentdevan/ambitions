@@ -5,6 +5,7 @@ import { useEffect, useMemo, useRef, useState } from "react";
 import { Animated, View } from "react-native";
 
 import {
+  CompactExplanationCard,
   DetailSection,
   DetailSummaryStrip,
   QuietMetaLine,
@@ -229,6 +230,8 @@ function ExecutionHeroCard({
             </AppText>
           </View>
         </View>
+
+        <CompactExplanationCard explanation={recommendation.explanation} />
 
         <View
           className="gap-3 rounded-[24px] px-4 py-4"

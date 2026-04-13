@@ -5,6 +5,7 @@ import { View } from "react-native";
 
 import { MomentumBars } from "../../components/history/ActivityTimeline";
 import {
+  CompactExplanationCard,
   DetailSection,
   DetailSummaryStrip,
   QuietMetaLine,
@@ -514,6 +515,7 @@ export function InsightsScreen({ navigation }: Props) {
           >
             <View className="gap-4">
               <DetailSummaryStrip items={returnItems} />
+              <CompactExplanationCard explanation={weeklyDigest.explanation} />
               <QuietMetaLine items={returnReads} />
             </View>
           </DetailSection>
@@ -542,6 +544,7 @@ export function InsightsScreen({ navigation }: Props) {
               </AppText>
             ))}
           </View>
+          <CompactExplanationCard explanation={monthlyDigest.directionExplanation} />
           <Button size="compact" tone="tertiary" onPress={() => navigation.navigate("InsightMonthlyReview")}>
             Open monthly review
           </Button>
@@ -567,6 +570,7 @@ export function InsightsScreen({ navigation }: Props) {
                   </AppText>
                 ))}
               </View>
+              <CompactExplanationCard explanation={weeklyDigest.carryoverExplanation} />
               <TextField
                 label="Weekly note"
                 multiline

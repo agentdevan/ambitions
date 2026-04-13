@@ -2,6 +2,7 @@ import { View } from "react-native";
 
 import { GroupedActivityTimeline, MomentumBars } from "../../components/history/ActivityTimeline";
 import {
+  CompactExplanationCard,
   DetailHero,
   DetailSection,
   DetailSummaryStrip,
@@ -103,6 +104,7 @@ export function InsightMonthlyReviewScreen() {
                 {read}
               </AppText>
             ))}
+            <CompactExplanationCard explanation={digest.explanation} />
           </Surface>
         </DetailSection>
 
@@ -151,6 +153,7 @@ export function InsightMonthlyReviewScreen() {
             {currentMonthReview?.reviewNote ? (
               <AppText tone="secondary">Note: {currentMonthReview.reviewNote}</AppText>
             ) : null}
+            <CompactExplanationCard explanation={digest.directionExplanation} />
           </Surface>
         </DetailSection>
       </View>

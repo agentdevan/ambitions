@@ -15,6 +15,7 @@ import {
 } from "../../domain/models";
 import { endOfMonth, formatMonthLabel, isDateInRange, startOfMonth } from "../../utils/date";
 import { ActivityFeedItem } from "./selectors";
+import { ExplanationBlock } from "../explanations/types";
 
 export interface MonthlyReviewDigest {
   monthStartDate: string;
@@ -25,6 +26,8 @@ export interface MonthlyReviewDigest {
   goalCoverage: MonthlyReviewState["goalCoverage"];
   underrepresentedGoals: Goal[];
   dragGoals: Goal[];
+  explanation: ExplanationBlock;
+  directionExplanation: ExplanationBlock;
 }
 
 function countKinds(events: ActivityFeedItem[], kinds: ActivityEventKind[]) {
@@ -193,6 +196,38 @@ export function buildMonthlyReviewDigest(params: {
       : summary.underrepresentedGoalCount > 0
         ? `${formatMonthLabel(monthStartDate)} moved some priorities while leaving others mostly in name only.`
         : `${formatMonthLabel(monthStartDate)} kept stated priorities visible in actual execution.`;
+  const explanation: ExplanationBlock = {
+    eyebrow: "Monthly causality",
+    headline: heldSteady
+      ? "The month held where weekly review and closeout habits stayed present."
+      : "The month drifted because reshaping kept outrunning stable follow-through.",
+    supporting: `${reviewedWeeks} weeks were reviewed and ${daysClosed} days were closed intentionally.`,
+    because: overloaded
+      ? "The month was carrying more pressure than execution reality could support."
+      : summary.goalCoverageCount === 0
+        ? "Goals stayed named, but the month did not translate them into real execution."
+        : "Some priorities received real room while others kept slipping to the edges.",
+    decision:
+      summary.underrepresentedGoalCount > 0
+        ? "Decide which goals get real room next month and reduce the rest."
+        : "Carry the represented priorities forward and prune drag.",
+  };
+  const directionExplanation: ExplanationBlock = {
+    eyebrow: "Direction coverage",
+    headline:
+      summary.underrepresentedGoalCount > 0
+        ? "Some active goals were still underrepresented."
+        : "Active goals were represented more evenly this month.",
+    supporting: `${summary.goalCoverageCount} active goals got real execution; ${summary.underrepresentedGoalCount} did not.`,
+    because:
+      summary.dragGoalCount > 0
+        ? `${summary.dragGoalCount} goals kept dragging through carryover or churn.`
+        : "Execution stayed closer to the priorities already in motion.",
+    decision:
+      summary.underrepresentedGoalCount > 0
+        ? "Reduce, pause, or recommit deliberately instead of keeping every goal equally active."
+        : "Keep next month selective so current representation holds.",
+  };
 
   return {
     monthStartDate,
@@ -203,6 +238,8 @@ export function buildMonthlyReviewDigest(params: {
     goalCoverage,
     underrepresentedGoals,
     dragGoals,
+    explanation,
+    directionExplanation,
   };
 }
 

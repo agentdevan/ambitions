@@ -3,7 +3,12 @@ import { Ionicons } from "@expo/vector-icons";
 import { useMemo } from "react";
 import { View } from "react-native";
 
-import { DetailSection, DetailSummaryStrip, QuietMetaLine } from "../../components/detail/DetailPrimitives";
+import {
+  CompactExplanationCard,
+  DetailSection,
+  DetailSummaryStrip,
+  QuietMetaLine,
+} from "../../components/detail/DetailPrimitives";
 import { DrillInRow } from "../../components/navigation/DrillInRow";
 import { PageHeader } from "../../components/navigation/PageHeader";
 import { Button } from "../../components/ui/Button";
@@ -272,6 +277,7 @@ export function PlanScreen({ navigation }: Props) {
           >
             <View className="gap-4">
               <DetailSummaryStrip items={returnItems} />
+              <CompactExplanationCard explanation={workspace.postureExplanation} />
               <QuietMetaLine items={returnReads} />
             </View>
           </DetailSection>
@@ -389,6 +395,7 @@ export function PlanScreen({ navigation }: Props) {
               <AppText tone="secondary" variant="caption">
                 {workspace.carryoverSummary.detail}
               </AppText>
+              <CompactExplanationCard explanation={workspace.carryoverExplanation} />
               {workspace.carryoverItems.length > 0 ? (
                 <StructureList
                   title="Carryover in view"
@@ -412,6 +419,7 @@ export function PlanScreen({ navigation }: Props) {
                 leading={<Ionicons color={theme.colors.text.secondary} name="sparkles-outline" size={18} />}
                 onPress={openWeeklyExperience}
               />
+              <CompactExplanationCard explanation={workspace.pressureExplanation} />
               <DrillInRow
                 title="Generated structure"
                 subtitle="Goals, milestones, and the current task shape."

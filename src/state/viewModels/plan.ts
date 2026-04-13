@@ -17,6 +17,7 @@ import {
 } from "../../domain/models";
 import { buildCapacityOutput, deriveUsableWindows } from "../../engines/scheduling/capacityCalculator";
 import { interpretConstraints } from "../../engines/scheduling/constraintInterpreter";
+import { ExplanationBlock } from "../../services/explanations/types";
 import { deriveWeeklyDefaultsFromMonthlyStrategy } from "../../services/planning/monthlyStrategy";
 import { describeMonthlyStrategy } from "../../services/history/monthly";
 import { describeWeeklyShape } from "../../services/history/weekly";
@@ -93,6 +94,9 @@ export interface PlanWorkspaceViewModel {
     carryoverLabel: string;
     detail: string;
   };
+  postureExplanation: ExplanationBlock;
+  carryoverExplanation: ExplanationBlock;
+  pressureExplanation: ExplanationBlock;
   structuralReads: string[];
   fixedCommitments: PlanStructureItem[];
   flexibleWork: PlanStructureItem[];
@@ -461,6 +465,65 @@ export function buildPlanWorkspaceViewModel(params: {
       ? `${countHoursAndMinutes(optionalDemandMinutes)} of stretch work is visible but should stay negotiable.`
       : "Optional work is not crowding the week.",
   ];
+  const postureExplanation: ExplanationBlock = {
+    eyebrow: "Weekly posture",
+    headline:
+      pressureLabel === "Balanced"
+        ? "The week still reads as believable."
+        : pressureLabel === "Tight"
+          ? "The week still fits, but only with a tighter shape."
+          : "The week is currently asking for more than the room supports.",
+    supporting: `${countHoursAndMinutes(openCapacityMinutes)} remain open against ${countHoursAndMinutes(unscheduledFlexibleMinutes)} of unslotted core work.`,
+    because:
+      pressureLabel === "Overloaded"
+        ? "Open room has dropped below the work already asking for protected space."
+        : pressureLabel === "Tight"
+          ? "Several days are tight and there is not much buffer for extra carryover."
+          : "Open room, protected focus, and current work are still in balance.",
+    decision:
+      pressureLabel === "Balanced"
+        ? "Protect the current shape and keep additions selective."
+        : pressureLabel === "Tight"
+          ? "Review carryover and optional work before adding anything else."
+          : "Reshape the week before trusting the current load.",
+  };
+  const carryoverExplanation: ExplanationBlock = {
+    eyebrow: "Carryover",
+    headline:
+      carryoverTasks.length === 0
+        ? "Carryover is not distorting the week right now."
+        : carryoverReviewTasks.length > 0
+          ? "Carryover needs an explicit review pass."
+          : "Carryover is visible, but mostly contained.",
+    supporting: `${carryoverTasks.length} items entered the week as carryover; ${carryoverProtectedTasks.length} are already protected.`,
+    because:
+      carryoverReviewTasks.length > 0
+        ? `${carryoverReviewTasks.length} items are still review-gated, so they are consuming attention without a settled disposition.`
+        : carryoverTasks.length > 0
+          ? "The week is already carrying unfinished work from the prior cycle."
+          : "No meaningful unfinished work is spilling into the current week.",
+    decision:
+      carryoverReviewTasks.length > 0
+        ? "Decide what to review, carry, or release before trusting the rest of the week."
+        : carryoverTasks.length > 0
+          ? "Keep carryover explicit so Today does not have to hold it."
+          : "Use the open room for current-week work, not legacy pressure.",
+  };
+  const pressureExplanation: ExplanationBlock = {
+    eyebrow: "What is driving it",
+    headline:
+      monthlyInfluence
+        ? "Monthly posture is shaping the week, but the week still has to answer to real room."
+        : "The week is being driven mostly by current commitments and open work.",
+    supporting: weeklyShape,
+    because: monthlyInfluence
+      ? `Monthly strategy is currently reading as ${monthlyInfluence}.`
+      : "No monthly strategy override is currently shaping the week.",
+    decision:
+      pressureLabel === "Balanced"
+        ? "Let the monthly posture guide emphasis without overfilling the week."
+        : "Trim the weekly shape until it matches both the monthly posture and the actual room.",
+  };
 
   return {
     weekStartDate,
@@ -524,6 +587,9 @@ export function buildPlanWorkspaceViewModel(params: {
             ? "Monthly strategy is filling the weekly defaults until you override them."
             : "The planner is staying in its default protective posture.",
     },
+    postureExplanation,
+    carryoverExplanation,
+    pressureExplanation,
     structuralReads,
     fixedCommitments: fixedCommitments.slice(0, 4).map((constraint) => ({
       id: constraint.id,

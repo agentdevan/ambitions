@@ -2,6 +2,7 @@ import { ReactNode } from "react";
 import { View } from "react-native";
 
 import { useResolvedTheme } from "../../design/theme/useResolvedTheme";
+import { ExplanationBlock } from "../../services/explanations/types";
 import { Surface } from "../ui/Surface";
 import { AppText } from "../ui/Text";
 
@@ -141,5 +142,41 @@ export function QuietMetaLine({ items }: { items: string[] }) {
         </AppText>
       ))}
     </View>
+  );
+}
+
+export function CompactExplanationCard({
+  explanation,
+  tone = "sunken",
+}: {
+  explanation: ExplanationBlock;
+  tone?: "default" | "accent" | "hero" | "sunken";
+}) {
+  return (
+    <Surface tone={tone} className="gap-2.5 mb-0 px-4 py-4">
+      {explanation.eyebrow ? (
+        <AppText tone="tertiary" variant="micro" style={{ textTransform: "uppercase" }}>
+          {explanation.eyebrow}
+        </AppText>
+      ) : null}
+      <View className="gap-1.5">
+        <AppText variant="section">{explanation.headline}</AppText>
+        {explanation.supporting ? (
+          <AppText tone="secondary" variant="caption">
+            {explanation.supporting}
+          </AppText>
+        ) : null}
+      </View>
+      {explanation.because ? (
+        <AppText tone="secondary" variant="caption">
+          {explanation.because}
+        </AppText>
+      ) : null}
+      {explanation.decision ? (
+        <AppText tone="tertiary" variant="caption">
+          {explanation.decision}
+        </AppText>
+      ) : null}
+    </Surface>
   );
 }

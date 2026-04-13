@@ -15,6 +15,7 @@ import {
 import { formatShortDate, getCurrentLocalDateString, startOfMonth, startOfWeek } from "../../utils/date";
 import { getGoalIntelligenceSnapshot } from "./goalIntelligence";
 import { ActivityFeedItem } from "../history/selectors";
+import { ExplanationBlock } from "../explanations/types";
 
 export type GoalPaceTruthState =
   | "on_pace"
@@ -36,6 +37,9 @@ export interface GoalProgressTruth {
   paceSummary: string;
   deadlineSummary: string | null;
   representationSummary: string;
+  paceExplanation: ExplanationBlock;
+  deadlineExplanation: ExplanationBlock | null;
+  representationExplanation: ExplanationBlock;
   recentExecutionMinutes: number;
   currentWeekScheduledMinutes: number;
   currentMonthScheduledMinutes: number;
@@ -55,6 +59,7 @@ export interface AmbitionProgressTruth {
   representedGoalCount: number;
   movingGoalCount: number;
   portfolioSummary: string;
+  explanation: ExplanationBlock;
 }
 
 export interface DirectionPortfolioSnapshot {
@@ -244,6 +249,78 @@ export function buildGoalProgressTruth(params: {
         intelligence.feasibility.revisedDeadlineSuggestion,
       )}.`
     : intelligence?.feasibility.detail ?? null;
+  const weeklyHoursLabel = `${Math.max(0, Math.round(currentWeekScheduledMinutes / 60))} hr`;
+  const desiredHoursLabel = `${Math.max(1, Math.round(desiredWeeklyMinutes / 60))} hr`;
+  const paceExplanation: ExplanationBlock = {
+    eyebrow: "Why this read",
+    headline:
+      paceState === "on_pace"
+        ? "This still fits without forcing the week."
+        : paceState === "slightly_off_pace"
+          ? "The goal is still moving, but the week is lighter than the pace assumes."
+          : paceState === "reset_needed"
+            ? "The direction still holds, but the pace needs a reset."
+            : paceState === "recovered"
+              ? "Recent movement has pulled the goal back into a believable lane."
+              : "The current timeline no longer matches the room or recent movement.",
+    supporting: `${weeklyHoursLabel} are visible this week against a ${desiredHoursLabel} pace.`,
+    because:
+      paceState === "recovered"
+        ? `Recent completions are now outpacing reshaping (${completedEvents} to ${reshapedEvents}).`
+        : paceState === "on_pace"
+          ? "Current-week time and recent execution are both supporting the target."
+          : stale
+            ? "Recent movement has gone quiet, so the current pace is being carried more by intention than execution."
+            : crowded
+              ? "There is too much active work for the amount of room this goal currently has."
+              : weeklyReviewPressure > 0
+                ? "Carryover and review pressure are eating into the pace this goal needs."
+                : "Recent execution and current-week room are running below the pace the goal assumes.",
+    decision:
+      paceState === "on_pace" || paceState === "recovered"
+        ? "Keep the current shape unless the week tightens."
+        : paceState === "slightly_off_pace"
+          ? "Give it more current-week room or accept a slightly slower pace."
+          : paceState === "reset_needed"
+            ? "Reset the weekly shape before adding more scope."
+            : "Change the date, scope, or pace mode.",
+  };
+  const deadlineExplanation: ExplanationBlock | null = intelligence
+    ? {
+        eyebrow: "Deadline read",
+        headline:
+          intelligence.feasibility.status === "feasible"
+            ? "The deadline still holds."
+            : intelligence.feasibility.status === "tight"
+              ? "The deadline can still hold, but only with a tighter week."
+              : "The deadline does not hold under the current conditions.",
+        supporting: intelligence.feasibility.summary,
+        because: intelligence.feasibility.detail,
+        decision: intelligence.feasibility.revisedDeadlineSuggestion
+          ? `A later target like ${formatShortDate(intelligence.feasibility.revisedDeadlineSuggestion)} would be more believable.`
+          : intelligence.feasibility.lighterScopeSuggestion ?? intelligence.feasibility.highestLeverageStep,
+      }
+    : null;
+  const representationExplanation: ExplanationBlock = {
+    eyebrow: "Week representation",
+    headline:
+      currentWeekScheduledMinutes >= desiredWeeklyMinutes * 0.75
+        ? "This goal has real room in the current week."
+        : currentWeekScheduledMinutes >= desiredWeeklyMinutes * 0.35
+          ? "This goal is visible in the week, but lightly."
+          : "This goal is still more named than represented this week.",
+    supporting: `${weeklyHoursLabel} are currently placed this week.`,
+    because:
+      currentWeekScheduledMinutes >= desiredWeeklyMinutes * 0.75
+        ? "The weekly plan is giving this goal enough room to stay believable."
+        : crowded
+          ? "Other active work is competing for the same room."
+          : "The current week is not yet giving this goal the room its pace assumes.",
+    decision:
+      currentWeekScheduledMinutes >= desiredWeeklyMinutes * 0.75
+        ? "Protect the existing time."
+        : "Add room in the week or accept that this goal will move more slowly.",
+  };
 
   return {
     goalId: params.goal.id,
@@ -261,6 +338,9 @@ export function buildGoalProgressTruth(params: {
         : currentWeekScheduledMinutes >= desiredWeeklyMinutes * 0.35
           ? "This goal is visible in the week, but lightly."
           : "This goal is active in name more than in the current week.",
+    paceExplanation,
+    deadlineExplanation,
+    representationExplanation,
     recentExecutionMinutes,
     currentWeekScheduledMinutes,
     currentMonthScheduledMinutes,
@@ -330,8 +410,28 @@ export function buildAmbitionProgressTruth(params: {
       : movingGoalCount === 0
       ? "The direction is named, but it is not yet moving through current goals."
       : movingGoalCount === activeGoals.length
-        ? "The active goals under this direction are still moving."
-        : "Part of this direction is moving, but part of it has gone quiet.";
+      ? "The active goals under this direction are still moving."
+      : "Part of this direction is moving, but part of it has gone quiet.";
+  const explanation: ExplanationBlock = {
+    eyebrow: "Direction read",
+    headline:
+      representationState === "well_represented"
+        ? "This direction is showing up in the current week."
+        : representationState === "lightly_represented"
+          ? "This direction is present, but not fully supported by the week."
+          : "This direction is underrepresented in the current week.",
+    supporting: `${representedGoalCount} of ${activeGoals.length} active goals are currently visible in time.`,
+    because:
+      representationState === "well_represented"
+        ? "Enough current-week time is mapped onto the goals under this direction."
+        : movingGoalCount === 0
+          ? "The goals under this direction are active on paper, but not moving in real time."
+          : "The current week is favoring other work more than this direction.",
+    decision:
+      representationState === "well_represented"
+        ? "Keep the direction visible and protect the existing room."
+        : "Rebalance the week if this direction is still meant to matter now.",
+  };
 
   return {
     ambitionId: params.ambition.id,
@@ -344,6 +444,7 @@ export function buildAmbitionProgressTruth(params: {
     representedGoalCount,
     movingGoalCount,
     portfolioSummary,
+    explanation,
   };
 }
 

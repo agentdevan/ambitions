@@ -4,6 +4,7 @@ import { Modal, View } from "react-native";
 
 import { ActivityTimelineRow, GroupedActivityTimeline, MomentumBars } from "../../components/history/ActivityTimeline";
 import {
+  CompactExplanationCard,
   DetailHero,
   DetailMetaGroup,
   DetailSection,
@@ -385,6 +386,7 @@ export function GoalDetailScreen({
                 </View>
                 <MomentumBars points={momentumSeries} />
               </Surface>
+              <CompactExplanationCard explanation={progressTruth.paceExplanation} />
             </View>
           </DetailSection>
 
@@ -472,6 +474,7 @@ export function GoalDetailScreen({
                     : "Linking a direction keeps this goal from feeling isolated."}
                 </AppText>
               </Surface>
+              <CompactExplanationCard explanation={progressTruth.representationExplanation} />
             </View>
           </DetailSection>
 
@@ -521,6 +524,9 @@ export function GoalDetailScreen({
                     </AppText>
                   ) : null}
                 </Surface>
+                {progressTruth.deadlineExplanation ? (
+                  <CompactExplanationCard explanation={progressTruth.deadlineExplanation} />
+                ) : null}
               </View>
             </DetailSection>
           ) : null}

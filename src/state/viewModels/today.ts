@@ -24,6 +24,7 @@ import {
   TimeBlockState,
 } from "../../domain/models";
 import { SchedulingOutput } from "../../engines";
+import { ExplanationBlock } from "../../services/explanations/types";
 import { buildGoalPressureNote, getGoalIntelligenceSnapshot } from "../../services/goals/goalIntelligence";
 import { formatTimeLabel, getCurrentLocalDateString } from "../../utils/date";
 
@@ -110,6 +111,7 @@ export interface TodayRecommendation {
   blockId: string | null;
   suggestedAction: TaskActionType | null;
   options: TodayOpportunityOption[];
+  explanation: ExplanationBlock;
 }
 
 export interface TodayOpeningOption {
@@ -784,6 +786,17 @@ function buildRecommendation(params: {
       blockId: activeBlock.id,
       suggestedAction: null,
       options: [],
+      explanation: {
+        eyebrow: "Why now",
+        headline: "This is still the cleanest next move because it is already in motion.",
+        supporting: nextBlock
+          ? `${activeBlock.title} is protecting the handoff into ${nextBlock.title}.`
+          : `${activeBlock.title} already has the day’s attention.`,
+        because: nextBlock
+          ? `A live block starts in ${Math.max(0, minutesBetween(new Date().toISOString(), nextBlock.startsAtDateTime))} min, so switching now would create extra churn.`
+          : `The current block still has room until ${formatTimeLabel(activeBlock.endsAt)}.`,
+        decision: "Finish the current block before reshaping the rest of the day.",
+      },
     };
   }
 
@@ -803,6 +816,23 @@ function buildRecommendation(params: {
       blockId: nextBlock?.id ?? null,
       suggestedAction: null,
       options: [],
+      explanation: {
+        eyebrow: "Why now",
+        headline: overloadWarning
+          ? "The cleanest move is to protect this gap."
+          : "There is not enough clean room for a new move yet.",
+        supporting: nextBlock
+          ? `${nextBlock.title} is the nearest live commitment.`
+          : "The day is between committed work and flexible time.",
+        because: overloadWarning
+          ? "The remaining room is already narrow, so a fresh task would likely spill and create more pressure."
+          : nextBlock
+            ? `The next anchored block starts at ${formatTimeLabel(nextBlock.startsAt)}.`
+            : "No current task fits better than holding the opening for a cleaner start.",
+        decision: overloadWarning
+          ? "Use the gap for recovery or setup instead of another commitment."
+          : "Wait for the next committed move or reopen the timeline.",
+      },
     };
   }
 
@@ -828,6 +858,24 @@ function buildRecommendation(params: {
       blockId: null,
       suggestedAction: null,
       options: [],
+      explanation: {
+        eyebrow: "Why now",
+        headline:
+          openWindow.bucket === "tiny" || overloadWarning
+            ? "This opening is real, but it is too tight for a clean start."
+            : "Holding the window is more honest than forcing a weak fit.",
+        supporting:
+          openWindow.bucket === "tiny"
+            ? `${openWindow.availableMinutes} minutes is only enough for a light reset.`
+            : `${openWindow.availableMinutes} minutes are open, but no current task fits without spilling over.`,
+        because: nextBlock
+          ? `${nextBlock.title} begins at ${formatTimeLabel(nextBlock.startsAt)}.`
+          : "The room is real, but not yet strong enough for a meaningful session.",
+        decision:
+          openWindow.bucket === "tiny" || overloadWarning
+            ? "Protect the opening or use it to reset."
+            : "Leave the space open until a cleaner move appears.",
+      },
     };
   }
 
@@ -854,6 +902,23 @@ function buildRecommendation(params: {
     blockId: null,
     suggestedAction: primary.suggestedAction,
     options,
+    explanation: {
+      eyebrow: "Why now",
+      headline:
+        primary.status === TaskStatus.InProgress
+          ? "This is the cleanest continuation because the work is already warm."
+          : openWindow.bucket === "meaningful" || openWindow.bucket === "spacious"
+            ? "This is the best use of the open room."
+            : "This is the safest useful move for a short opening.",
+      supporting: primary.reason,
+      because: nextBlock
+        ? `You have ${openWindow.availableMinutes} open minutes before ${nextBlock.title} starts at ${formatTimeLabel(nextBlock.startsAt)}.`
+        : `${openWindow.availableMinutes} open minutes make this the clearest fit right now.`,
+      decision:
+        primary.status === TaskStatus.InProgress
+          ? "Continue instead of restarting something colder."
+          : "Take this move now and leave the rest of the day lighter.",
+    },
   };
 }
 
@@ -1577,6 +1642,9 @@ export function buildTodayViewModel(params: {
     recommendation.kind !== "continue_in_progress"
   ) {
     recommendation.emphasis = `${recommendation.emphasis} ${topGoalPressure.note}`;
+    recommendation.explanation.because = recommendation.explanation.because
+      ? `${recommendation.explanation.because} ${topGoalPressure.note}`
+      : topGoalPressure.note;
   }
   const ritual = buildRitualSurface({
     date: params.date,

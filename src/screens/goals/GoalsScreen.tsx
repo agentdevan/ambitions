@@ -10,6 +10,7 @@ import { Pill } from "../../components/ui/Pill";
 import { Screen } from "../../components/ui/Screen";
 import { Surface } from "../../components/ui/Surface";
 import { AppText } from "../../components/ui/Text";
+import { CompactExplanationCard } from "../../components/detail/DetailPrimitives";
 import { useResolvedTheme } from "../../design/theme/useResolvedTheme";
 import { GoalMilestoneStatus, GoalStatus, TaskStatus } from "../../domain/models";
 import { GoalsStackParamList } from "../../navigation/types";
@@ -128,6 +129,7 @@ function DirectionCard({
           Open ambition
         </Button>
       </View>
+      <CompactExplanationCard explanation={truth.explanation} />
     </Surface>
   );
 }
@@ -515,6 +517,8 @@ export function GoalsScreen({ navigation }: Props) {
                         highlighted={!!reviewDraft}
                       />
                     </View>
+
+                    {goalTruth ? <CompactExplanationCard explanation={goalTruth.paceExplanation} /> : null}
 
                     <View className="flex-row items-center justify-between gap-3">
                       <Button

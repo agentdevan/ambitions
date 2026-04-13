@@ -11,6 +11,7 @@ import {
 } from "../../domain/models";
 import { addDays, endOfWeek, isDateInRange, startOfWeek } from "../../utils/date";
 import { ActivityFeedItem } from "./selectors";
+import { ExplanationBlock } from "../explanations/types";
 
 export interface WeeklyReviewDigest {
   weekStartDate: string;
@@ -19,6 +20,8 @@ export interface WeeklyReviewDigest {
   reads: string[];
   unfinishedTasks: Task[];
   carryCandidateTasks: Task[];
+  explanation: ExplanationBlock;
+  carryoverExplanation: ExplanationBlock;
 }
 
 export interface WeeklyContinuitySnapshot {
@@ -190,6 +193,39 @@ export function buildWeeklyReviewDigest(params: {
       ? "The week was fuller than execution reality supported."
       : "The week stayed within a believable load.",
   ];
+  const explanation: ExplanationBlock = {
+    eyebrow: "Weekly causality",
+    headline: heldSteady
+      ? "The week mostly held because follow-through kept up with reshaping."
+      : "The week drifted because reshaping started to outrun follow-through.",
+    supporting: `${completedCount} completions and ${reshapedCount} reshapes defined the week.`,
+    because: overloaded
+      ? "The load asked for more than the week could absorb cleanly."
+      : openedLateWeekCount > closedLateWeekCount
+        ? "The back half of the week lost structure faster than it regained it."
+        : "The week stayed closer to its original shape.",
+    decision: heldSteady
+      ? "Carry forward only what still matters."
+      : "Use review to reset the next week before carrying more.",
+  };
+  const carryoverExplanation: ExplanationBlock = {
+    eyebrow: "Carryover read",
+    headline:
+      sentToReviewCount >= leftVagueCount + carryForwardCount
+        ? "Unfinished work stayed mostly explicit."
+        : leftVagueCount > 0
+          ? "Some unfinished work was left vague."
+          : "Carryover leaned more toward being pushed forward.",
+    supporting: `${carryForwardCount} carried, ${sentToReviewCount} sent back to review, ${leftVagueCount} left undecided.`,
+    because:
+      carryoverReviewedCount === 0
+        ? "The week ended with unfinished work, but it was not routed deliberately yet."
+        : "End-of-day carry decisions shaped how much pressure spilled into review.",
+    decision:
+      sentToReviewCount >= carryForwardCount
+        ? "Review first before loading next week."
+        : "Prune or review unfinished work before it becomes automatic carryover.",
+  };
 
   return {
     weekStartDate,
@@ -198,6 +234,8 @@ export function buildWeeklyReviewDigest(params: {
     reads,
     unfinishedTasks,
     carryCandidateTasks,
+    explanation,
+    carryoverExplanation,
   };
 }
 
