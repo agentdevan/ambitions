@@ -1,6 +1,7 @@
+import { useScrollToTop } from "@react-navigation/native";
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
 import { Ionicons } from "@expo/vector-icons";
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { View } from "react-native";
 import { useShallow } from "zustand/react/shallow";
 
@@ -85,6 +86,8 @@ function CarryoverTaskCard({
 }
 
 export function InsightsScreen({ navigation }: Props) {
+  const scrollRef = useRef<any>(null);
+  useScrollToTop(scrollRef);
   const {
     goals,
     milestones,
@@ -472,7 +475,7 @@ export function InsightsScreen({ navigation }: Props) {
 
   if (goals.length === 0 && feed.length === 0) {
     return (
-      <Screen>
+      <Screen ref={scrollRef}>
         <View className="gap-5">
           <PageHeader
             eyebrow="Insights"
@@ -505,7 +508,7 @@ export function InsightsScreen({ navigation }: Props) {
   }
 
   return (
-    <Screen>
+    <Screen ref={scrollRef}>
       <View className="gap-5">
         <PageHeader
           eyebrow="Insights"

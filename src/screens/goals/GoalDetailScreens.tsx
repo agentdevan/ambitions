@@ -280,7 +280,7 @@ export function GoalDetailScreen({
           <DetailHero
             eyebrow="Goal"
             title={resolvedGoal.title}
-            description={resolvedGoal.summary ?? "Open the current structure."}
+            description={progressTruth.paceSummary}
             badges={
               <>
                 <Pill label={statusLabel(resolvedGoal.status)} tone="quiet" />
@@ -334,8 +334,8 @@ export function GoalDetailScreen({
           />
 
           <DetailSection
-            title="Momentum"
-            description={progressTruth.paceSummary}
+            title="This week"
+            description="Pace, target, and recent movement."
           >
             <View className="gap-4">
               <DetailSummaryStrip
@@ -386,13 +386,12 @@ export function GoalDetailScreen({
                 </View>
                 <MomentumBars points={momentumSeries} />
               </Surface>
-              <CompactExplanationCard explanation={progressTruth.paceExplanation} />
             </View>
           </DetailSection>
 
           <DetailSection
             title="Next meaningful move"
-            description="Keep the next movement obvious."
+            description="Keep the next move obvious."
           >
             <Surface tone={reviewDraft || nextTask ? "accent" : "default"} className="gap-4 mb-0">
               <View className="gap-1.5">
@@ -442,11 +441,11 @@ export function GoalDetailScreen({
           </DetailSection>
 
           <DetailSection
-            title="Direction"
+            title="What needs attention"
             description={
               ambition
-                ? ambition.thesis ?? "This goal sits inside a larger direction."
-                : "Tie this goal to a bigger direction so the work stays meaningful."
+                ? ambition.thesis ?? "Keep the direction visible."
+                : "Link a direction when you want the goal tied to something bigger."
             }
           >
             <View className="gap-3">
@@ -474,14 +473,13 @@ export function GoalDetailScreen({
                     : "Linking a direction keeps this goal from feeling isolated."}
                 </AppText>
               </Surface>
-              <CompactExplanationCard explanation={progressTruth.representationExplanation} />
             </View>
           </DetailSection>
 
           {intelligence ? (
             <DetailSection
-              title="Timeline read"
-              description="Believability, workload, and refinement without dashboard noise."
+              title="This month"
+              description="Likelihood, workload, and deadline pressure."
             >
               <View className="gap-4">
                 <DetailSummaryStrip
@@ -524,9 +522,6 @@ export function GoalDetailScreen({
                     </AppText>
                   ) : null}
                 </Surface>
-                {progressTruth.deadlineExplanation ? (
-                  <CompactExplanationCard explanation={progressTruth.deadlineExplanation} />
-                ) : null}
               </View>
             </DetailSection>
           ) : null}
@@ -536,7 +531,8 @@ export function GoalDetailScreen({
             description="Latest shifts."
             action={
               <Button
-                tone="inline"
+                tone="tertiary"
+                size="compact"
                 onPress={() => navigation.navigate("GoalHistory", { goalId: resolvedGoal.id })}
               >
                 Full history
@@ -563,8 +559,8 @@ export function GoalDetailScreen({
           </DetailSection>
 
           <DetailSection
-            title="Open this goal"
-            description="Go deeper."
+            title="Open more"
+            description="Drill into the full detail only when you need it."
           >
             <View className="gap-3">
               <DrillInRow
@@ -633,9 +629,6 @@ export function GoalDetailScreen({
           <Surface className="gap-4 mb-0">
             <View className="gap-1">
               <AppText variant="section">Actions</AppText>
-              <AppText tone="secondary" variant="caption">
-                Keep the primary move obvious. Everything else stays quieter.
-              </AppText>
             </View>
             <Button onPress={() => navigation.navigate("GoalEdit", { goalId: resolvedGoal.id })}>
               Edit goal
@@ -660,7 +653,7 @@ export function GoalDetailScreen({
               )}
               {reviewDraft ? (
                 <Button
-                  tone="inline"
+                  tone="tertiary"
                   onPress={() =>
                     (navigation.getParent() as any)?.navigate("Plan", {
                       screen: "PlanReview",
@@ -672,7 +665,7 @@ export function GoalDetailScreen({
                 </Button>
               ) : null}
               <Button
-                tone="inline"
+                tone="tertiary"
                 onPress={() => openLifecycleDialog(GoalStatus.Archived)}
                 busy={busyState === `status:${resolvedGoal.id}`}
               >
@@ -680,7 +673,7 @@ export function GoalDetailScreen({
               </Button>
               {hasUndoAvailable(resolvedGoal) ? (
                 <Button
-                  tone="inline"
+                  tone="tertiary"
                   onPress={() => void handleUndo(resolvedGoal.id)}
                   busy={busyState === `undo:${resolvedGoal.id}`}
                 >

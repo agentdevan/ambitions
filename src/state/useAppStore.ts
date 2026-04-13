@@ -2,6 +2,7 @@ import { create } from "zustand";
 
 import { initializeAppServices, appServices } from "../bootstrap/runtime/appServices";
 import { markStartupReady, resetStartupReady } from "../bootstrap/runtime/startupBarrier";
+import { sqliteClient } from "../data/sqlite/client";
 import { SchedulingOutput } from "../engines";
 import {
   AdaptationProfile,
@@ -137,6 +138,7 @@ interface GoalsSlice {
     status: GoalStatus,
     handling: GoalLifecycleHandling,
   ) => Promise<void>;
+  deleteGoals: (goalIds: string[]) => Promise<void>;
   acceptGoalReview: (goalId: string) => Promise<void>;
   regenerateGoalReview: (goalId: string, mode?: GoalReviewMode) => Promise<void>;
   moveReviewTask: (goalId: string, taskId: string, direction: "up" | "down") => Promise<void>;
@@ -941,6 +943,94 @@ export const useAppStore = create<AppState>((set, get) => ({
         accountId,
       ),
     );
+
+    const [foundationSnapshot, accountSnapshot] = await Promise.all([
+      refreshAllState(state.planDate),
+      appServices.services.account.notePendingChanges(),
+    ]);
+    set({
+      ...foundationSnapshot,
+      ...mapAccountSnapshot(accountSnapshot),
+    });
+  },
+
+  deleteGoals: async (goalIds) => {
+    const uniqueGoalIds = Array.from(new Set(goalIds)).filter(Boolean);
+    if (uniqueGoalIds.length === 0) {
+      return;
+    }
+
+    const state = get();
+    const goalSet = new Set(uniqueGoalIds);
+    const milestoneIds = state.milestones
+      .filter((milestone) => goalSet.has(milestone.goalId))
+      .map((milestone) => milestone.id);
+    const taskIds = state.allTasks
+      .filter((task) => task.goalId && goalSet.has(task.goalId))
+      .map((task) => task.id);
+
+    await sqliteClient.withTransaction(async (client) => {
+      if (taskIds.length > 0) {
+        const taskPlaceholders = taskIds.map(() => "?").join(", ");
+        await client.run(
+          `DELETE FROM time_blocks WHERE task_id IN (${taskPlaceholders});`,
+          taskIds,
+        );
+        await client.run(
+          `DELETE FROM replan_suggestions WHERE task_id IN (${taskPlaceholders});`,
+          taskIds,
+        );
+      }
+
+      if (milestoneIds.length > 0) {
+        const milestonePlaceholders = milestoneIds.map(() => "?").join(", ");
+        await client.run(
+          `DELETE FROM activity_events WHERE milestone_id IN (${milestonePlaceholders});`,
+          milestoneIds,
+        );
+      }
+
+      if (taskIds.length > 0) {
+        const taskPlaceholders = taskIds.map(() => "?").join(", ");
+        await client.run(
+          `DELETE FROM activity_events WHERE task_id IN (${taskPlaceholders});`,
+          taskIds,
+        );
+        await client.run(`DELETE FROM tasks WHERE id IN (${taskPlaceholders});`, taskIds);
+      }
+
+      if (milestoneIds.length > 0) {
+        const milestonePlaceholders = milestoneIds.map(() => "?").join(", ");
+        await client.run(
+          `DELETE FROM goal_milestones WHERE id IN (${milestonePlaceholders});`,
+          milestoneIds,
+        );
+      }
+
+      const goalPlaceholders = uniqueGoalIds.map(() => "?").join(", ");
+      await client.run(
+        `DELETE FROM activity_events WHERE goal_id IN (${goalPlaceholders});`,
+        uniqueGoalIds,
+      );
+      await client.run(`DELETE FROM goals WHERE id IN (${goalPlaceholders});`, uniqueGoalIds);
+    });
+
+    const nextAmbitions = state.ambitions.map((ambition) => {
+      const remainingGoals = state.goals.filter(
+        (goal) => goal.ambitionId === ambition.id && !goalSet.has(goal.id),
+      );
+      if (remainingGoals.length > 0) {
+        return ambition;
+      }
+
+      return {
+        ...ambition,
+        updatedAt: new Date().toISOString(),
+        version: ambition.version + 1,
+      };
+    });
+
+    await appServices.repositories.goals.saveAmbitions(nextAmbitions);
 
     const [foundationSnapshot, accountSnapshot] = await Promise.all([
       refreshAllState(state.planDate),

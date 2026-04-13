@@ -1,3 +1,4 @@
+import { useScrollToTop } from "@react-navigation/native";
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
 import { Ionicons } from "@expo/vector-icons";
 import type { ReactNode } from "react";
@@ -6,7 +7,6 @@ import { Animated, View } from "react-native";
 import { useShallow } from "zustand/react/shallow";
 
 import {
-  CompactExplanationCard,
   DetailSection,
   DetailSummaryStrip,
   QuietMetaLine,
@@ -240,8 +240,6 @@ function ExecutionHeroCard({
           </View>
         </View>
 
-        <CompactExplanationCard explanation={recommendation.explanation} />
-
         <View
           className="gap-3 rounded-[24px] px-4 py-4"
           style={{
@@ -334,6 +332,9 @@ export function TodayScreen({ navigation }: Props) {
   );
   const [reflectionNote, setReflectionNote] = useState("");
   const theme = useResolvedTheme();
+  const scrollRef = useRef<any>(null);
+
+  useScrollToTop(scrollRef);
 
   useEffect(() => {
     if (today?.ritual?.kind === "opening") {
@@ -364,7 +365,7 @@ export function TodayScreen({ navigation }: Props) {
           : "Today's line has not been rebuilt yet. Open Plan and shape the day from the week's real room.";
 
     return (
-      <Screen>
+      <Screen ref={scrollRef}>
         <View className="gap-5">
           <PageHeader eyebrow="Today" title="Today" description={formatLongDate(planDate)} />
           <EmptyStateCard
@@ -533,7 +534,7 @@ export function TodayScreen({ navigation }: Props) {
   }
 
   return (
-    <Screen>
+    <Screen ref={scrollRef}>
       <View className="gap-5">
         <PageHeader
           eyebrow="Today"
@@ -570,7 +571,7 @@ export function TodayScreen({ navigation }: Props) {
         <Surface className="gap-5">
           <DetailSection
             title="Return line"
-            description="What changed, what still fits, and the cleanest next useful move."
+            description="What changed and what fits next."
           >
             <View className="gap-4">
               <DetailSummaryStrip items={returnItems} />
@@ -741,8 +742,7 @@ export function TodayScreen({ navigation }: Props) {
 
             {supportReads.length > 0 ? (
               <DetailSection
-                title="Quiet guidance"
-                description="Calm reads from recent movement and the current shape of day."
+                title="Signals"
               >
                 <QuietMetaLine items={supportReads} />
               </DetailSection>
@@ -903,12 +903,6 @@ export function TodayScreen({ navigation }: Props) {
           </DetailSection>
         </Surface>
 
-        {pendingReviewCount > 0 ? (
-          <AppText tone="tertiary" variant="caption" style={{ maxWidth: "96%" }}>
-            {pendingReviewCount} review{pendingReviewCount === 1 ? "" : "s"} are waiting in Plan
-            or Goals. Today is keeping them out of the main execution line.
-          </AppText>
-        ) : null}
       </View>
     </Screen>
   );

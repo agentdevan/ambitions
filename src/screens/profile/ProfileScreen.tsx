@@ -1,6 +1,7 @@
+import { useScrollToTop } from "@react-navigation/native";
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
 import { Ionicons } from "@expo/vector-icons";
-import { useMemo } from "react";
+import { useMemo, useRef } from "react";
 import { View } from "react-native";
 import { useShallow } from "zustand/react/shallow";
 
@@ -33,6 +34,8 @@ import { ProfileStackParamList } from "../../navigation/types";
 type Props = NativeStackScreenProps<ProfileStackParamList, "ProfileHome">;
 
 export function ProfileScreen({ navigation }: Props) {
+  const scrollRef = useRef<any>(null);
+  useScrollToTop(scrollRef);
   const {
     productPreferences,
     notificationPreferences,
@@ -70,7 +73,7 @@ export function ProfileScreen({ navigation }: Props) {
 
   if (!productPreferences) {
     return (
-      <Screen>
+      <Screen ref={scrollRef}>
         <EmptyStateCard
           eyebrow="Preparing"
           title="Profile is loading"
@@ -146,7 +149,7 @@ export function ProfileScreen({ navigation }: Props) {
   ];
 
   return (
-    <Screen>
+    <Screen ref={scrollRef}>
       <View className="gap-5">
         <PageHeader
           eyebrow="Profile"

@@ -29,9 +29,9 @@ export function Pill({ label, tone = "neutral" }: PillProps) {
       textTone: "accent",
     },
     quiet: {
-      backgroundColor: theme.colors.background.sunken,
-      borderColor: theme.colors.border.subtle,
-      textTone: "tertiary",
+      backgroundColor: theme.colors.background.elevatedSecondary,
+      borderColor: theme.colors.border.strong,
+      textTone: "secondary",
     },
   };
 

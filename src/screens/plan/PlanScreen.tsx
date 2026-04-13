@@ -1,11 +1,11 @@
+import { useScrollToTop } from "@react-navigation/native";
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
 import { Ionicons } from "@expo/vector-icons";
-import { useMemo } from "react";
+import { useMemo, useRef } from "react";
 import { View } from "react-native";
 import { useShallow } from "zustand/react/shallow";
 
 import {
-  CompactExplanationCard,
   DetailSection,
   DetailSummaryStrip,
   QuietMetaLine,
@@ -101,6 +101,8 @@ function StructureList({
 
 export function PlanScreen({ navigation }: Props) {
   const theme = useResolvedTheme();
+  const scrollRef = useRef<any>(null);
+  useScrollToTop(scrollRef);
   const {
     planDate,
     goals,
@@ -208,7 +210,7 @@ export function PlanScreen({ navigation }: Props) {
 
   if (!workspace) {
     return (
-      <Screen>
+      <Screen ref={scrollRef}>
         <EmptyStateCard
           eyebrow="Preparing"
           title="Plan is still loading"
@@ -220,7 +222,7 @@ export function PlanScreen({ navigation }: Props) {
 
   if (activeGoals.length === 0 && workspace.structureSummary.fixedCommitmentCount === 0) {
     return (
-      <Screen>
+      <Screen ref={scrollRef}>
         <EmptyStateCard
           eyebrow="Sparse week"
           title="No week to shape yet"
@@ -245,12 +247,12 @@ export function PlanScreen({ navigation }: Props) {
   }
 
   return (
-    <Screen>
+    <Screen ref={scrollRef}>
       <View className="gap-6">
         <PageHeader
           eyebrow="Plan"
           title="Plan"
-          description="Inspect the week, then keep it believable."
+          description="This week at a glance."
           action={
             <Button
               size="compact"
@@ -306,11 +308,10 @@ export function PlanScreen({ navigation }: Props) {
         <Surface className="gap-5">
           <DetailSection
             title="Return line"
-            description="What changed in the week, what still fits, and the cleanest next planning move."
+            description="What changed and what to do next."
           >
             <View className="gap-4">
               <DetailSummaryStrip items={returnItems} />
-              <CompactExplanationCard explanation={workspace.postureExplanation} />
               <QuietMetaLine items={returnReads} />
             </View>
           </DetailSection>
@@ -332,8 +333,8 @@ export function PlanScreen({ navigation }: Props) {
 
         <Surface className="gap-4">
           <DetailSection
-            title="Week line"
-            description="See which days are already anchored and where real room still exists."
+            title="This week"
+            description="Which days are anchored and where room is left."
             action={
               <Button size="compact" tone="tertiary" onPress={() => navigation.navigate("PlanDetail")}>
                 Open week
@@ -412,7 +413,7 @@ export function PlanScreen({ navigation }: Props) {
         <Surface className="gap-5">
           <DetailSection
             title="Carryover and next decisions"
-            description="Plan is where unfinished work should become explicit again instead of staying vague."
+            description="Keep unfinished work explicit."
           >
             <View className="gap-4">
               <DetailSummaryStrip
@@ -442,7 +443,6 @@ export function PlanScreen({ navigation }: Props) {
               <AppText tone="secondary" variant="caption">
                 {workspace.carryoverSummary.detail}
               </AppText>
-              <CompactExplanationCard explanation={workspace.carryoverExplanation} />
               {workspace.carryoverItems.length > 0 ? (
                 <StructureList
                   title="Carryover in view"
@@ -455,7 +455,7 @@ export function PlanScreen({ navigation }: Props) {
 
           <DetailSection
             title="Drill in"
-            description="Open the connected surfaces that shape the week without flattening their responsibilities."
+            description="Open the connected planning views."
           >
             <View className="gap-3">
               <DrillInRow
@@ -466,7 +466,6 @@ export function PlanScreen({ navigation }: Props) {
                 leading={<Ionicons color={theme.colors.text.secondary} name="sparkles-outline" size={18} />}
                 onPress={openWeeklyExperience}
               />
-              <CompactExplanationCard explanation={workspace.pressureExplanation} />
               <DrillInRow
                 title="Generated structure"
                 subtitle="Goals, milestones, and the current task shape."

@@ -2,6 +2,7 @@ import { ReactNode } from "react";
 import { View } from "react-native";
 
 import { useResolvedTheme } from "../../design/theme/useResolvedTheme";
+import { Surface } from "../ui/Surface";
 import { AppText } from "../ui/Text";
 
 interface PageHeaderProps {
@@ -20,15 +21,15 @@ export function PageHeader({
   const theme = useResolvedTheme();
 
   return (
-    <View className="gap-3 pb-1.5">
+    <Surface tone="hero" className="gap-4 mb-0">
       <View className="flex-row items-center gap-2">
         <View
           style={{
-            width: 18,
-            height: 2,
+            width: 26,
+            height: 3,
             borderRadius: 999,
             backgroundColor: theme.colors.accent.primary,
-            opacity: theme.mode === "dark" ? 0.86 : 0.72,
+            opacity: theme.mode === "dark" ? 0.92 : 0.8,
           }}
         />
         <AppText tone="accent" variant="micro" style={{ textTransform: "uppercase" }}>
@@ -36,18 +37,18 @@ export function PageHeader({
         </AppText>
       </View>
       <View className="flex-row items-start justify-between gap-3">
-        <View className="flex-1 gap-2.5">
+        <View className="flex-1 gap-2">
           <AppText variant="hero" style={{ maxWidth: "96%" }}>
             {title}
           </AppText>
           {description ? (
-            <AppText tone="secondary" variant="body" style={{ maxWidth: "96%" }}>
+            <AppText tone="secondary" variant="caption" style={{ maxWidth: "96%" }}>
               {description}
             </AppText>
           ) : null}
         </View>
         {action ? <View style={{ marginTop: 6 }}>{action}</View> : null}
       </View>
-    </View>
+    </Surface>
   );
 }

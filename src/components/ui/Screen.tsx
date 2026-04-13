@@ -1,4 +1,4 @@
-import { PropsWithChildren } from "react";
+import { ForwardedRef, PropsWithChildren, forwardRef } from "react";
 import { ScrollView, View } from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 
@@ -8,13 +8,17 @@ interface ScreenProps extends PropsWithChildren {
   scrollable?: boolean;
 }
 
-export function Screen({ children, scrollable = true }: ScreenProps) {
+export const Screen = forwardRef(function Screen(
+  { children, scrollable = true }: ScreenProps,
+  ref: ForwardedRef<ScrollView>,
+) {
   const insets = useSafeAreaInsets();
   const theme = useResolvedTheme();
 
   if (scrollable) {
     return (
       <ScrollView
+        ref={ref}
         className="flex-1"
         contentContainerStyle={{
           flexGrow: 1,
@@ -44,4 +48,4 @@ export function Screen({ children, scrollable = true }: ScreenProps) {
       {children}
     </View>
   );
-}
+});

@@ -1,6 +1,8 @@
 import { Ionicons } from "@expo/vector-icons";
+import { StackActions } from "@react-navigation/native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import { Text } from "react-native";
 
 import { useResolvedTheme } from "../design/theme/useResolvedTheme";
 import { GoalsScreen } from "../screens/goals/GoalsScreen";
@@ -10,11 +12,11 @@ import {
 } from "../screens/goals/AmbitionDetailScreens";
 import {
   GoalDetailScreen,
-  GoalEditScreen,
   GoalHistoryScreen,
   GoalMilestonesScreen,
   GoalProgressScreen,
 } from "../screens/goals/GoalDetailScreens";
+import { GoalComposerScreen } from "../screens/goals/GoalComposerScreen";
 import { InsightsScreen } from "../screens/insights/InsightsScreen";
 import {
   InsightActivityScreen,
@@ -179,7 +181,7 @@ function GoalsNavigator() {
       />
       <GoalsStack.Screen
         name="GoalEdit"
-        component={GoalEditScreen}
+        component={GoalComposerScreen}
         options={({ route }) => ({ title: route.params?.goalId ? "Edit Goal" : "New Goal" })}
       />
     </GoalsStack.Navigator>
@@ -315,6 +317,25 @@ export function RootNavigator() {
     (state) => state.productPreferences?.onboardingCompleted ?? false,
   );
 
+  function buildRetapListener() {
+    return ({ navigation, route }: { navigation: any; route: any }) => ({
+      tabPress: (event: any) => {
+        if (!navigation.isFocused()) {
+          return;
+        }
+
+        const nestedState = route.state;
+        if (nestedState?.index > 0 && nestedState?.key) {
+          event.preventDefault();
+          navigation.dispatch({
+            ...StackActions.popToTop(),
+            target: nestedState.key,
+          });
+        }
+      },
+    });
+  }
+
   if (!onboardingCompleted) {
     return <OnboardingScreen />;
   }
@@ -329,9 +350,9 @@ export function RootNavigator() {
         tabBarHideOnKeyboard: true,
         tabBarStyle: {
           backgroundColor: theme.colors.tabBar.background,
-          borderTopColor: "transparent",
-          borderTopWidth: 0,
-          height: 84,
+          borderTopColor: theme.colors.tabBar.border,
+          borderTopWidth: 1,
+          height: 88,
           paddingTop: 10,
           paddingBottom: 14,
           paddingHorizontal: 10,
@@ -344,14 +365,21 @@ export function RootNavigator() {
         tabBarItemStyle: {
           marginHorizontal: 6,
           marginVertical: 6,
-          borderRadius: 20,
+          borderRadius: 22,
         },
-        tabBarLabelStyle: {
-          fontSize: 10.5,
-          fontWeight: "700",
-          letterSpacing: 0.1,
-          marginTop: 1,
-        },
+        tabBarLabel: ({ focused, color, children }) => (
+          <Text
+            style={{
+              color,
+              fontSize: focused ? 11.5 : 10.5,
+              fontWeight: focused ? "800" : "700",
+              letterSpacing: focused ? 0.2 : 0.1,
+              marginTop: 2,
+            }}
+          >
+            {children}
+          </Text>
+        ),
         tabBarIcon: ({ color, size, focused }) => (
           <Ionicons
             color={color}
@@ -364,11 +392,31 @@ export function RootNavigator() {
         },
       })}
     >
-      <Tab.Screen name="Today" component={TodayNavigator} />
-      <Tab.Screen name="Goals" component={GoalsNavigator} />
-      <Tab.Screen name="Plan" component={PlanNavigator} />
-      <Tab.Screen name="Insights" component={InsightsNavigator} />
-      <Tab.Screen name="Profile" component={ProfileNavigator} />
+      <Tab.Screen
+        name="Today"
+        component={TodayNavigator}
+        listeners={buildRetapListener()}
+      />
+      <Tab.Screen
+        name="Goals"
+        component={GoalsNavigator}
+        listeners={buildRetapListener()}
+      />
+      <Tab.Screen
+        name="Plan"
+        component={PlanNavigator}
+        listeners={buildRetapListener()}
+      />
+      <Tab.Screen
+        name="Insights"
+        component={InsightsNavigator}
+        listeners={buildRetapListener()}
+      />
+      <Tab.Screen
+        name="Profile"
+        component={ProfileNavigator}
+        listeners={buildRetapListener()}
+      />
     </Tab.Navigator>
   );
 }
