@@ -1,4 +1,5 @@
 import {
+  AdaptationProfile,
   ActivityEvent,
   ActivityEventKind,
   Goal,
@@ -8,6 +9,10 @@ import {
   TaskStatus,
 } from "../../domain/models";
 import { formatShortDate, getCurrentLocalDateString } from "../../utils/date";
+import {
+  buildGoalPersonalization,
+  buildInsightHighlights,
+} from "../personalization/selectors";
 
 export interface ActivityFeedItem extends ActivityEvent {
   derived: boolean;
@@ -130,8 +135,10 @@ export function summarizeGoalProgress(params: {
   milestones: GoalMilestone[];
   tasks: Task[];
   events: ActivityFeedItem[];
+  profile?: AdaptationProfile | null;
+  adaptiveEnabled?: boolean;
 }) {
-  const { goal, milestones, tasks, events } = params;
+  const { goal, milestones, tasks, events, profile = null, adaptiveEnabled = true } = params;
   const completedTasks = tasks.filter((task) => task.status === TaskStatus.Completed).length;
   const activeTasks = tasks.filter((task) =>
     [TaskStatus.Ready, TaskStatus.Scheduled, TaskStatus.InProgress].includes(task.status),
@@ -175,6 +182,12 @@ export function summarizeGoalProgress(params: {
         : recoveryEvents > completionEvents
           ? "This goal has seen more reshaping than completion lately."
           : "This goal is still moving, with a mix of progress and reshaping.";
+  const personalization = buildGoalPersonalization({
+    goal,
+    tasks,
+    profile,
+    adaptiveEnabled,
+  });
 
   return {
     completedTasks,
@@ -184,7 +197,12 @@ export function summarizeGoalProgress(params: {
     milestoneCount: milestones.length,
     taskCount: tasks.length,
     recentEvents,
-    reflection,
+    reflection:
+      recoveryEvents > completionEvents && personalization.nextMove
+        ? `${reflection} ${personalization.nextMove}`
+        : reflection,
+    momentumStyle: personalization.momentumStyle,
+    nextMove: personalization.nextMove,
   };
 }
 
@@ -220,8 +238,10 @@ export function summarizeInsights(params: {
   tasks: Task[];
   milestones: GoalMilestone[];
   events: ActivityFeedItem[];
+  profile?: AdaptationProfile | null;
+  adaptiveEnabled?: boolean;
 }) {
-  const { goals, tasks, milestones, events } = params;
+  const { goals, tasks, milestones, events, profile = null, adaptiveEnabled = true } = params;
   const momentum = buildMomentumSeries(events, 7);
   const completedThisWeek = momentum.reduce((sum, day) => sum + day.completed, 0);
   const reshapedThisWeek = momentum.reduce((sum, day) => sum + day.reshaped, 0);
@@ -259,6 +279,7 @@ export function summarizeInsights(params: {
       : planChangeCount <= 2
         ? "The plan changed, but without constant churn."
         : "The plan has been adjusted several times recently.";
+  const personalizedHighlights = buildInsightHighlights(profile, adaptiveEnabled);
 
   return {
     momentum,
@@ -270,6 +291,7 @@ export function summarizeInsights(params: {
     planChangeCount,
     momentumCopy,
     planCopy,
+    personalizedHighlights,
   };
 }
 

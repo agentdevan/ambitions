@@ -46,6 +46,51 @@ export type RegressionTrigger =
   | "completion_slide"
   | "overpacked_days"
   | "missed_start_collapse";
+export type PersonalTaskSizingStyle = "shorter_tasks" | "mixed_tasks" | "deeper_blocks";
+export type PersonalOpenWindowStyle = "short_bursts" | "medium_blocks" | "deep_windows" | "mixed";
+export type PersonalLateDayStyle = "steady" | "lighter_late" | "avoid_late_heavy";
+export type PersonalCarryoverStyle = "low" | "moderate" | "high";
+export type PersonalPlanStability = "stable" | "adjusting" | "volatile";
+export type PersonalIntensityStyle = "light" | "balanced" | "high";
+export type PersonalRecoveryStyle = "low" | "moderate" | "high";
+
+export interface PersonalizationSignal {
+  key:
+    | "task_sizing"
+    | "open_window_fit"
+    | "late_day_pattern"
+    | "carryover_tendency"
+    | "plan_stability"
+    | "intensity_tolerance"
+    | "focus_window";
+  label: string;
+  value: string;
+  confidence: number;
+  sampleSize: number;
+  explanation: string;
+}
+
+export interface PersonalizationSummary {
+  planningStyle: string;
+  todayApproach: string;
+  insights: string;
+}
+
+export interface PersonalizationProfile {
+  active: boolean;
+  sampleSize: number;
+  taskSizingStyle: PersonalTaskSizingStyle;
+  openWindowStyle: PersonalOpenWindowStyle;
+  lateDayStyle: PersonalLateDayStyle;
+  carryoverStyle: PersonalCarryoverStyle;
+  planStability: PersonalPlanStability;
+  intensityStyle: PersonalIntensityStyle;
+  recoveryStyle: PersonalRecoveryStyle;
+  bestFocusWindow: TimeOfDayWindow | null;
+  signals: PersonalizationSignal[];
+  summary: PersonalizationSummary;
+  explanation: string;
+}
 
 export interface DomainExecutionPattern {
   domainKey: string;
@@ -187,6 +232,7 @@ export interface AdaptationProfile extends EntityRecord {
   };
   history: ExecutionHistorySummary;
   regression: RegressionState;
+  personalization: PersonalizationProfile;
   durationRefinements: DurationRefinementRule[];
   planningDirectives: AdaptationPlanningDirectives;
   metadata: JsonMap;

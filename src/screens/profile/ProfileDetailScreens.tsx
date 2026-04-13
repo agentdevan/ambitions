@@ -29,6 +29,7 @@ import { accentThemeOptions, appearanceModeOptions } from "../../product/theme";
 import { useAppStore } from "../../state/useAppStore";
 import { AuthFeedback } from "../../services/account/accountCopy";
 import { buildActivityFeed, groupActivityByDate, summarizeInsights } from "../../services/history/selectors";
+import { buildPlanningStyleSummary } from "../../services/personalization/selectors";
 import {
   formatTimeLabel,
   formatTimeRangeLabel,
@@ -53,10 +54,17 @@ export function ProfileHistoryScreen() {
   const milestones = useAppStore((state) => state.milestones);
   const tasks = useAppStore((state) => state.allTasks);
   const activityEvents = useAppStore((state) => state.activityEvents);
+  const adaptationProfile = useAppStore((state) => state.adaptationProfile);
 
   const feed = buildActivityFeed(activityEvents, tasks, milestones);
   const groups = groupActivityByDate(feed.slice(0, 18));
-  const summary = summarizeInsights({ goals, tasks, milestones, events: feed });
+  const summary = summarizeInsights({
+    goals,
+    tasks,
+    milestones,
+    events: feed,
+    profile: adaptationProfile,
+  });
 
   return (
     <Screen>
@@ -459,6 +467,7 @@ export function ProfileNotificationsScreen() {
 export function ProfilePlanningPreferencesScreen() {
   const productPreferences = useAppStore((state) => state.productPreferences);
   const saveProductPreferences = useAppStore((state) => state.saveProductPreferences);
+  const adaptationProfile = useAppStore((state) => state.adaptationProfile);
   const [busyState, setBusyState] = useState<string | null>(null);
   const [runtimeMessage, setRuntimeMessage] = useState<string | null>(null);
 
@@ -469,6 +478,11 @@ export function ProfilePlanningPreferencesScreen() {
       </Screen>
     );
   }
+
+  const planningStyle = buildPlanningStyleSummary(
+    adaptationProfile,
+    productPreferences.adaptivePlanningEnabled,
+  );
 
   async function savePreference(
     key: string,
@@ -493,6 +507,45 @@ export function ProfilePlanningPreferencesScreen() {
         <Surface tone="accent" className="gap-3">
           <AppText variant="title">Planning preferences</AppText>
           <AppText tone="secondary">Tune the planner.</AppText>
+        </Surface>
+        <Surface className="gap-3">
+          <AppText variant="section">Adaptive planning</AppText>
+          <AppText tone="secondary" variant="caption">
+            {productPreferences.adaptivePlanningEnabled
+              ? "Let recent behavior quietly tune task sizing and pacing."
+              : "Keep planning on the default rules for now."}
+          </AppText>
+          <View className="flex-row flex-wrap gap-2">
+            {[
+              [true, "On"],
+              [false, "Off"],
+            ].map(([enabled, label]) => (
+              <OptionChip
+                key={String(enabled)}
+                selected={productPreferences.adaptivePlanningEnabled === enabled}
+                onPress={() =>
+                  void savePreference(
+                    `adaptive:${enabled}`,
+                    {
+                      ...productPreferences,
+                      adaptivePlanningEnabled: enabled as boolean,
+                    },
+                    "Adaptive planning could not be updated.",
+                  )
+                }
+              >
+                {label}
+              </OptionChip>
+            ))}
+          </View>
+          {planningStyle ? (
+            <View className="gap-1 rounded-[20px] bg-black/5 px-4 py-4">
+              <AppText tone="secondary" variant="caption">
+                Learned from recent activity
+              </AppText>
+              <AppText variant="caption">{planningStyle.summary}</AppText>
+            </View>
+          ) : null}
         </Surface>
         <Surface className="gap-3">
           <AppText variant="section">Task size</AppText>

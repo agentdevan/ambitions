@@ -7,6 +7,7 @@ import { Animated, View } from "react-native";
 import { CompactTimelineRow } from "../../components/navigation/CompactTimelineRow";
 import { DrillInRow } from "../../components/navigation/DrillInRow";
 import { PageHeader } from "../../components/navigation/PageHeader";
+import { GuidancePanel } from "../../components/today/GuidancePanel";
 import { Button } from "../../components/ui/Button";
 import { EmptyStateCard } from "../../components/ui/EmptyStateCard";
 import { Pill } from "../../components/ui/Pill";
@@ -401,6 +402,10 @@ export function TodayScreen({ navigation }: Props) {
           }
           busy={busyTaskId === todayVm.recommendation.taskId}
         />
+
+        {todayVm.adaptiveGuidance.length > 0 ? (
+          <GuidancePanel items={todayVm.adaptiveGuidance.slice(0, 3)} />
+        ) : null}
 
         <Surface className="gap-4">
           <View className="flex-row items-end justify-between gap-3">

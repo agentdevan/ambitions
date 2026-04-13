@@ -132,6 +132,7 @@ export function OnboardingScreen() {
           focusDomains,
           taskSizing,
           dayIntensity,
+          adaptivePlanningEnabled: true,
           appearanceMode,
           accentTheme,
           schedule: {

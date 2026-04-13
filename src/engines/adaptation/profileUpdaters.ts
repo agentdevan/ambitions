@@ -3,6 +3,7 @@ import {
   CapacityLoad,
   EntitySyncState,
   ExecutionHistorySummary,
+  PersonalizationProfile,
   RegressionState,
   ReplanningStyle,
   StrategyStrictness,
@@ -68,6 +69,29 @@ function mentalLoad(summary: ExecutionHistorySummary, regression: RegressionStat
   }
 
   return CapacityLoad.Balanced;
+}
+
+function defaultPersonalization(): PersonalizationProfile {
+  return {
+    active: false,
+    sampleSize: 0,
+    taskSizingStyle: "mixed_tasks",
+    openWindowStyle: "mixed",
+    lateDayStyle: "steady",
+    carryoverStyle: "moderate",
+    planStability: "adjusting",
+    intensityStyle: "balanced",
+    recoveryStyle: "moderate",
+    bestFocusWindow: null,
+    signals: [],
+    summary: {
+      planningStyle: "Adaptation will tighten once there is enough real history.",
+      todayApproach: "Recommendations stay conservative while recent patterns are still shallow.",
+      insights: "Reflection stays close to simple recent activity until history deepens.",
+    },
+    explanation:
+      "Adaptation will tighten once there is enough real history.",
+  };
 }
 
 export function createDefaultProfile(date: string, preferences: UserPreferences): AdaptationProfile {
@@ -137,6 +161,7 @@ export function createDefaultProfile(date: string, preferences: UserPreferences)
       explanation:
         "No regression signal yet because there is not enough execution history.",
     },
+    personalization: defaultPersonalization(),
     durationRefinements: [],
     planningDirectives: {
       preferredTaskDurationMin: 10,
@@ -164,6 +189,7 @@ export function updateAdaptationProfile(params: {
   preferences: UserPreferences;
   priorProfile: AdaptationProfile | null;
   history: ExecutionHistorySummary;
+  personalization: PersonalizationProfile;
   streakDays: number;
   regression: RegressionState;
   strictness: StrictnessDecision;
@@ -247,6 +273,7 @@ export function updateAdaptationProfile(params: {
     },
     history: params.history,
     regression: params.regression,
+    personalization: params.personalization,
     durationRefinements: params.durationRefinements,
     planningDirectives: params.strictness.directives,
     metadata: {
@@ -254,6 +281,7 @@ export function updateAdaptationProfile(params: {
       lastExplainedAt: timestamp,
       planningDirectiveExplanation: params.strictness.directives.explanation,
       regressionExplanation: params.regression.explanation,
+      personalizationExplanation: params.personalization.explanation,
     },
   };
 }

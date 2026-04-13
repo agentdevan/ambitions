@@ -87,6 +87,20 @@ export function estimateTaskDuration(params: {
     reasons.push(refinement.explanation);
   }
 
+  const personalization = params.adaptationProfile?.personalization;
+  if (personalization?.active) {
+    if (personalization.taskSizingStyle === "shorter_tasks") {
+      minutes -= params.workType === PlanningWorkType.DeepWork ? 10 : 5;
+      reasons.push("Recent follow-through is stronger with smaller steps, so task size stays tighter.");
+    } else if (
+      personalization.taskSizingStyle === "deeper_blocks" &&
+      params.workType === PlanningWorkType.DeepWork
+    ) {
+      minutes += 5;
+      reasons.push("Deeper work has been holding well enough to allow a fuller session.");
+    }
+  }
+
   minutes = clamp(roundToFive(minutes), 5, params.policy.preferredTaskDurationMax);
 
   const difficulty =

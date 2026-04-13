@@ -81,6 +81,24 @@ function parseAppearanceMode(value: unknown): AppearanceMode {
   return value === "light" || value === "dark" || value === "system" ? value : "system";
 }
 
+function parseBoolean(value: unknown, fallback: boolean) {
+  if (typeof value === "boolean") {
+    return value;
+  }
+
+  if (typeof value === "string") {
+    if (value === "true") {
+      return true;
+    }
+
+    if (value === "false") {
+      return false;
+    }
+  }
+
+  return fallback;
+}
+
 function parseAccentTheme(value: unknown): AccentThemeKey {
   switch (value) {
     case "gold":
@@ -109,6 +127,7 @@ export function getProductPreferences(preferences: UserPreferences | null): Prod
     focusDomains: parseDomainList(metadata.focusDomains),
     taskSizing: parseTaskSizing(metadata.taskSizing),
     dayIntensity: parseDayIntensity(metadata.dayIntensity),
+    adaptivePlanningEnabled: parseBoolean(metadata.adaptivePlanningEnabled, true),
     appearanceMode: parseAppearanceMode(metadata.appearanceMode),
     accentTheme: parseAccentTheme(metadata.accentTheme ?? metadata.themePreset),
     schedule: {
@@ -172,6 +191,7 @@ export function mergeProductPreferences(
     focusDomains: product.focusDomains.join(","),
     taskSizing: product.taskSizing,
     dayIntensity: product.dayIntensity,
+    adaptivePlanningEnabled: product.adaptivePlanningEnabled,
     appearanceMode: product.appearanceMode,
     accentTheme: product.accentTheme,
     sleepWindowStart: product.schedule.sleepStart,

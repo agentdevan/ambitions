@@ -11,6 +11,7 @@ import { Screen } from "../../components/ui/Screen";
 import { Surface } from "../../components/ui/Surface";
 import { AppText } from "../../components/ui/Text";
 import { useResolvedTheme } from "../../design/theme/useResolvedTheme";
+import { buildPlanningStyleSummary } from "../../services/personalization/selectors";
 import { buildActivityFeed, summarizeInsights } from "../../services/history/selectors";
 import { useAppStore } from "../../state/useAppStore";
 import { formatTimeRangeLabel } from "../../utils/date";
@@ -39,6 +40,7 @@ export function ProfileScreen({ navigation }: Props) {
   const milestones = useAppStore((state) => state.milestones);
   const tasks = useAppStore((state) => state.allTasks);
   const activityEvents = useAppStore((state) => state.activityEvents);
+  const adaptationProfile = useAppStore((state) => state.adaptationProfile);
   const theme = useResolvedTheme();
 
   if (!productPreferences) {
@@ -58,7 +60,13 @@ export function ProfileScreen({ navigation }: Props) {
     tasks,
     milestones,
     events: buildActivityFeed(activityEvents, tasks, milestones),
+    profile: adaptationProfile,
+    adaptiveEnabled: productPreferences.adaptivePlanningEnabled,
   });
+  const planningStyle = buildPlanningStyleSummary(
+    adaptationProfile,
+    productPreferences.adaptivePlanningEnabled,
+  );
   const appearanceDetail =
     productPreferences.appearanceMode === "system"
       ? `System · ${theme.accentLabel}`
@@ -197,10 +205,24 @@ export function ProfileScreen({ navigation }: Props) {
           />
         </SettingGroup>
 
+        {planningStyle ? (
+          <Surface className="gap-3">
+            <AppText variant="section">{planningStyle.title}</AppText>
+            <AppText tone="secondary" variant="caption">
+              {planningStyle.summary}
+            </AppText>
+            <View className="flex-row flex-wrap gap-2">
+              {planningStyle.notes.map((note) => (
+                <Pill key={note} label={note} tone="quiet" />
+              ))}
+            </View>
+          </Surface>
+        ) : null}
+
         <Surface className="gap-3">
           <AppText variant="section">You&apos;re on track</AppText>
           <AppText tone="secondary" variant="caption">
-            Keep going. Small actions, big results.
+            {reflectionSummary.personalizedHighlights[0] ?? "Recent movement is starting to take shape."}
           </AppText>
         </Surface>
       </View>

@@ -441,6 +441,42 @@ export const seedAdaptationProfile: AdaptationProfile = {
     triggers: [],
     explanation: "Seed profile starts protective without an active regression state.",
   },
+  personalization: {
+    active: true,
+    sampleSize: 10,
+    taskSizingStyle: "shorter_tasks",
+    openWindowStyle: "short_bursts",
+    lateDayStyle: "lighter_late",
+    carryoverStyle: "moderate",
+    planStability: "adjusting",
+    intensityStyle: "balanced",
+    recoveryStyle: "moderate",
+    bestFocusWindow: "morning",
+    signals: [
+      {
+        key: "task_sizing",
+        label: "Task sizing",
+        value: "Shorter tasks are landing better.",
+        confidence: 0.74,
+        sampleSize: 4,
+        explanation: "Recent completions are clustering in shorter sessions.",
+      },
+      {
+        key: "late_day_pattern",
+        label: "Late-day pattern",
+        value: "Late work lands better when lighter.",
+        confidence: 0.6,
+        sampleSize: 2,
+        explanation: "Evening is more reliable for lighter admin cleanup than heavier work.",
+      },
+    ],
+    summary: {
+      planningStyle: "Shorter blocks are working better lately.",
+      todayApproach: "Open time should lean toward smaller useful wins.",
+      insights: "Carryover rises a bit when the day gets too full.",
+    },
+    explanation: "Seed profile reflects a user who does better with shorter, earlier work.",
+  },
   durationRefinements: [
     {
       workType: "research",

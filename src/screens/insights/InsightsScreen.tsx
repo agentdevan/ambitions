@@ -40,6 +40,8 @@ export function InsightsScreen({ navigation }: Props) {
   const tasks = useAppStore((state) => state.allTasks);
   const activityEvents = useAppStore((state) => state.activityEvents);
   const today = useAppStore((state) => state.today);
+  const adaptationProfile = useAppStore((state) => state.adaptationProfile);
+  const productPreferences = useAppStore((state) => state.productPreferences);
   const theme = useResolvedTheme();
 
   const pendingReviews = goals.filter((goal) => getGoalReviewDraft(goal) !== null).length;
@@ -49,6 +51,8 @@ export function InsightsScreen({ navigation }: Props) {
     tasks,
     milestones,
     events: feed,
+    profile: adaptationProfile,
+    adaptiveEnabled: productPreferences?.adaptivePlanningEnabled !== false,
   });
   const planChangeEvents = feed.filter((event) =>
     [
@@ -87,7 +91,7 @@ export function InsightsScreen({ navigation }: Props) {
           <View className="gap-2">
             <AppText variant="title">Consistent focus</AppText>
             <AppText tone="secondary" variant="caption">
-              {summary.momentumCopy}
+              {summary.personalizedHighlights[0] ?? summary.momentumCopy}
             </AppText>
           </View>
 

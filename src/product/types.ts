@@ -26,6 +26,7 @@ export interface ProductPreferences {
   focusDomains: DomainKey[];
   taskSizing: TaskSizingPreference;
   dayIntensity: DayIntensityPreference;
+  adaptivePlanningEnabled: boolean;
   appearanceMode: AppearanceMode;
   accentTheme: AccentThemeKey;
   schedule: ScheduleDefaults;

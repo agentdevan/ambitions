@@ -28,9 +28,18 @@ export function InsightContinuityScreen() {
   const milestones = useAppStore((state) => state.milestones);
   const tasks = useAppStore((state) => state.allTasks);
   const activityEvents = useAppStore((state) => state.activityEvents);
+  const adaptationProfile = useAppStore((state) => state.adaptationProfile);
+  const productPreferences = useAppStore((state) => state.productPreferences);
 
   const feed = buildActivityFeed(activityEvents, tasks, milestones);
-  const summary = summarizeInsights({ goals, tasks, milestones, events: feed });
+  const summary = summarizeInsights({
+    goals,
+    tasks,
+    milestones,
+    events: feed,
+    profile: adaptationProfile,
+    adaptiveEnabled: productPreferences?.adaptivePlanningEnabled !== false,
+  });
   const activeGoals = goals.filter((goal) => goal.status === GoalStatus.Active);
 
   if (activeGoals.length === 0) {
@@ -47,7 +56,7 @@ export function InsightContinuityScreen() {
         <DetailHero
           eyebrow="Insights"
           title="Continuity"
-          description={summary.momentumCopy}
+          description={summary.personalizedHighlights[0] ?? summary.momentumCopy}
           meta={
             <DetailSummaryStrip
               items={[
@@ -77,7 +86,12 @@ export function InsightContinuityScreen() {
         >
           <Surface className="gap-4 mb-0">
             <MomentumBars points={summary.momentum} />
-            <QuietMetaLine items={[summary.momentumCopy, summary.planCopy]} />
+            <QuietMetaLine
+              items={[
+                summary.personalizedHighlights[0] ?? summary.momentumCopy,
+                summary.personalizedHighlights[1] ?? summary.planCopy,
+              ]}
+            />
           </Surface>
         </DetailSection>
 
@@ -95,6 +109,8 @@ export function InsightContinuityScreen() {
                 milestones: goalMilestones,
                 tasks: goalTasks,
                 events: goalEvents,
+                profile: adaptationProfile,
+                adaptiveEnabled: productPreferences?.adaptivePlanningEnabled !== false,
               });
               const pendingReview = getGoalReviewDraft(goal);
 

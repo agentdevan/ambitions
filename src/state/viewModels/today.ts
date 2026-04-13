@@ -319,8 +319,21 @@ function rankOpportunity(params: {
   availableMinutes: number;
   overloaded: boolean;
   bucket: TodayFreeWindowBucket | null;
+  profile: AdaptationProfile | null;
+  adaptiveEnabled: boolean;
 }) {
-  const { task, goal, nextBlock, availableMinutes, overloaded, bucket } = params;
+  const {
+    task,
+    goal,
+    nextBlock,
+    availableMinutes,
+    overloaded,
+    bucket,
+    profile,
+    adaptiveEnabled,
+  } = params;
+  const personalization =
+    adaptiveEnabled && profile?.personalization.active ? profile.personalization : null;
   const baseByStatus: Record<TaskStatus, number> = {
     [TaskStatus.Inbox]: 15,
     [TaskStatus.Ready]: 88,
@@ -380,6 +393,31 @@ function rankOpportunity(params: {
     score += task.difficulty === TaskDifficulty.Light ? 12 : -18;
   }
 
+  if (personalization?.taskSizingStyle === "shorter_tasks") {
+    score += task.estimatedMinutes <= 25 ? 14 : -22;
+  } else if (personalization?.taskSizingStyle === "deeper_blocks") {
+    score += task.difficulty === TaskDifficulty.Deep && availableMinutes >= task.estimatedMinutes ? 14 : 0;
+  }
+
+  if (personalization?.openWindowStyle === "short_bursts") {
+    score += bucket === "tiny" || bucket === "short" ? 12 : task.estimatedMinutes <= 25 ? 6 : -8;
+  } else if (personalization?.openWindowStyle === "deep_windows") {
+    score += bucket === "meaningful" || bucket === "spacious" ? 8 : -10;
+  }
+
+  if (
+    personalization &&
+    personalization.lateDayStyle !== "steady" &&
+    (task.difficulty === TaskDifficulty.Deep || task.estimatedMinutes >= 35)
+  ) {
+    const lateDayStyle = personalization.lateDayStyle;
+    const nextWindowHour = Number((nextBlock?.startsAt ?? "18:00").slice(0, 2));
+
+    if (nextWindowHour >= 17) {
+      score -= lateDayStyle === "avoid_late_heavy" ? 24 : 12;
+    }
+  }
+
   return score;
 }
 
@@ -389,8 +427,12 @@ function buildOpportunityReason(params: {
   availableMinutes: number;
   bucket: TodayFreeWindowBucket;
   overloaded: boolean;
+  profile: AdaptationProfile | null;
+  adaptiveEnabled: boolean;
 }) {
-  const { task, nextBlock, availableMinutes, bucket, overloaded } = params;
+  const { task, nextBlock, availableMinutes, bucket, overloaded, profile, adaptiveEnabled } = params;
+  const personalization =
+    adaptiveEnabled && profile?.personalization.active ? profile.personalization : null;
 
   if (task.status === TaskStatus.InProgress) {
     return {
@@ -413,10 +455,36 @@ function buildOpportunityReason(params: {
     };
   }
 
+  if (
+    personalization &&
+    personalization.lateDayStyle !== "steady" &&
+    (task.difficulty === TaskDifficulty.Deep || task.estimatedMinutes >= 35)
+  ) {
+    const lateDayStyle = personalization.lateDayStyle;
+    return {
+      summary:
+        lateDayStyle === "avoid_late_heavy"
+          ? "Better saved for an earlier or cleaner window."
+          : "More realistic in an earlier, fresher window.",
+      fitLabel: "Earlier fit",
+    };
+  }
+
   if (bucket === "tiny" || bucket === "short") {
     return {
-      summary: `Fits inside this ${availableMinutes}-minute window.`,
-      fitLabel: "Fits cleanly",
+      summary:
+        personalization?.openWindowStyle === "short_bursts"
+          ? "Short windows like this have been working well lately."
+          : `Fits inside this ${availableMinutes}-minute window.`,
+      fitLabel:
+        personalization?.openWindowStyle === "short_bursts" ? "Short-window fit" : "Fits cleanly",
+    };
+  }
+
+  if (personalization?.taskSizingStyle === "deeper_blocks" && task.difficulty === TaskDifficulty.Deep) {
+    return {
+      summary: "You tend to hold deeper work well when the window is real.",
+      fitLabel: "Deeper fit",
     };
   }
 
@@ -435,8 +503,10 @@ function buildOpportunityOptions(params: {
   blocks: TimeBlock[];
   openWindow: TodayOpenWindow | null;
   overloadWarning: boolean;
+  profile: AdaptationProfile | null;
+  adaptiveEnabled: boolean;
 }) {
-  const { tasks, goals, blocks, openWindow, overloadWarning } = params;
+  const { tasks, goals, blocks, openWindow, overloadWarning, profile, adaptiveEnabled } = params;
   const nextBlock =
     blocks.find((block) => block.state === TimeBlockState.Scheduled) ??
     blocks.find((block) => block.state === TimeBlockState.Rolled) ??
@@ -470,6 +540,8 @@ function buildOpportunityOptions(params: {
         availableMinutes: openWindow.availableMinutes,
         bucket: openWindow.bucket,
         overloaded: overloadWarning,
+        profile,
+        adaptiveEnabled,
       });
       const action = actionForOpportunity(task);
 
@@ -492,6 +564,8 @@ function buildOpportunityOptions(params: {
           availableMinutes: openWindow.availableMinutes,
           overloaded: overloadWarning,
           bucket: openWindow.bucket,
+          profile,
+          adaptiveEnabled,
         }),
       };
     })
@@ -607,8 +681,12 @@ function buildRecommendation(params: {
   openWindow: TodayOpenWindow | null;
   options: TodayOpportunityOption[];
   overloadWarning: boolean;
+  profile: AdaptationProfile | null;
+  adaptiveEnabled: boolean;
 }): TodayRecommendation {
-  const { activeBlock, nextBlock, openWindow, options, overloadWarning } = params;
+  const { activeBlock, nextBlock, openWindow, options, overloadWarning, profile, adaptiveEnabled } = params;
+  const personalization =
+    adaptiveEnabled && profile?.personalization.active ? profile.personalization : null;
 
   if (activeBlock) {
     return {
@@ -675,13 +753,17 @@ function buildRecommendation(params: {
     kind:
       primary.status === TaskStatus.InProgress
         ? "continue_in_progress"
-        : openWindow.bucket === "meaningful" || openWindow.bucket === "spacious"
-          ? "meaningful_session"
-          : "quick_win",
+        : personalization?.openWindowStyle === "short_bursts"
+          ? "quick_win"
+          : openWindow.bucket === "meaningful" || openWindow.bucket === "spacious"
+            ? "meaningful_session"
+            : "quick_win",
     title:
-      openWindow.bucket === "meaningful" || openWindow.bucket === "spacious"
-        ? "Best use of this window"
-        : "This window fits a quick win.",
+      personalization?.openWindowStyle === "short_bursts"
+        ? "This window fits a short useful win."
+        : openWindow.bucket === "meaningful" || openWindow.bucket === "spacious"
+          ? "Best use of this window"
+          : "This window fits a quick win.",
     summary: primary.title,
     emphasis: primary.reason,
     primaryLabel: primary.actionLabel,
@@ -704,6 +786,7 @@ export function buildTodayViewModel(params: {
   constraints: ScheduleConstraint[];
   tasks: Task[];
   calendarConnectionState: CalendarConnectionState | null;
+  adaptiveEnabled: boolean;
 }): TodayViewModel {
   const nowIso = new Date().toISOString();
   const isCurrentDate = params.date === getCurrentLocalDateString();
@@ -781,14 +864,18 @@ export function buildTodayViewModel(params: {
   }));
   const adaptationNotes = params.profile
     ? [
-        params.profile.regression.isRegressing
-          ? "Recent execution has been less stable, so today stays intentionally lighter."
-          : params.profile.strategy.strictness === "balanced"
-            ? "Recent follow-through supports a slightly fuller plan without pushing the day."
-            : "Today stays protective until recent execution supports a fuller day.",
-        params.profile.planningDirectives.earlyWinBias
-          ? "The plan is biased toward an early, easier win before heavier work."
-          : null,
+        params.adaptiveEnabled && params.profile.personalization.active
+          ? params.profile.personalization.summary.todayApproach
+          : params.profile.regression.isRegressing
+            ? "Recent execution has been less stable, so today stays intentionally lighter."
+            : params.profile.strategy.strictness === "balanced"
+              ? "Recent follow-through supports a slightly fuller plan without pushing the day."
+              : "Today stays protective until recent execution supports a fuller day.",
+        params.adaptiveEnabled && params.profile.personalization.active
+          ? params.profile.personalization.signals[0]?.value ?? null
+          : params.profile.planningDirectives.earlyWinBias
+            ? "The plan is biased toward an early, easier win before heavier work."
+            : null,
       ].filter((note): note is string => note !== null)
     : [];
   const integration = calendarStatus(
@@ -805,6 +892,8 @@ export function buildTodayViewModel(params: {
     blocks: orderedBlocks,
     openWindow,
     overloadWarning: params.schedule?.signals.overloadWarning ?? false,
+    profile: params.profile,
+    adaptiveEnabled: params.adaptiveEnabled,
   });
 
   const mappedBlocks = orderedBlocks.map((block) => {
@@ -858,6 +947,8 @@ export function buildTodayViewModel(params: {
     openWindow,
     options: opportunityOptions,
     overloadWarning: params.schedule?.signals.overloadWarning ?? false,
+    profile: params.profile,
+    adaptiveEnabled: params.adaptiveEnabled,
   });
 
   return {

@@ -98,6 +98,8 @@ export function GoalDetailScreen({
 }: NativeStackScreenProps<GoalsStackParamList, "GoalDetail">) {
   const { goal, goalMilestones, visibleTasks } = useGoalData(route.params.goalId);
   const activityEvents = useAppStore((state) => state.activityEvents);
+  const adaptationProfile = useAppStore((state) => state.adaptationProfile);
+  const productPreferences = useAppStore((state) => state.productPreferences);
   const updateGoal = useAppStore((state) => state.updateGoal);
   const setGoalStatusWithHandling = useAppStore((state) => state.setGoalStatusWithHandling);
   const undoGoalRegeneration = useAppStore((state) => state.undoGoalRegeneration);
@@ -142,6 +144,8 @@ export function GoalDetailScreen({
     milestones: goalMilestones,
     tasks: visibleTasks,
     events: activityFeed,
+    profile: adaptationProfile,
+    adaptiveEnabled: productPreferences?.adaptivePlanningEnabled !== false,
   });
 
   function openLifecycleDialog(status: GoalStatus.Paused | GoalStatus.Archived) {
@@ -592,6 +596,8 @@ export function GoalProgressScreen({
   const { goal, visibleTasks } = useGoalData(route.params.goalId);
   const milestones = useAppStore((state) => state.milestones.filter((entry) => entry.goalId === route.params.goalId));
   const activityEvents = useAppStore((state) => state.activityEvents);
+  const adaptationProfile = useAppStore((state) => state.adaptationProfile);
+  const productPreferences = useAppStore((state) => state.productPreferences);
 
   if (!goal) {
     return (
@@ -614,6 +620,8 @@ export function GoalProgressScreen({
     milestones,
     tasks: visibleTasks,
     events: activityFeed,
+    profile: adaptationProfile,
+    adaptiveEnabled: productPreferences?.adaptivePlanningEnabled !== false,
   });
   const momentum = buildMomentumSeries(activityFeed, 7);
 
@@ -752,6 +760,8 @@ export function GoalHistoryScreen({
 }: NativeStackScreenProps<GoalsStackParamList, "GoalHistory">) {
   const { goal, goalMilestones, visibleTasks } = useGoalData(route.params.goalId);
   const activityEvents = useAppStore((state) => state.activityEvents);
+  const adaptationProfile = useAppStore((state) => state.adaptationProfile);
+  const productPreferences = useAppStore((state) => state.productPreferences);
 
   if (!goal) {
     return (
@@ -770,6 +780,8 @@ export function GoalHistoryScreen({
     milestones: goalMilestones,
     tasks: visibleTasks,
     events: activityFeed,
+    profile: adaptationProfile,
+    adaptiveEnabled: productPreferences?.adaptivePlanningEnabled !== false,
   });
 
   return (

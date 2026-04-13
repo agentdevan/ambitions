@@ -119,6 +119,10 @@ export async function loadFoundationSnapshot(date: string): Promise<FoundationSn
     scheduleConstraints,
     calendarConnectionState,
   );
+  const productPreferences = getProductPreferences(preferences);
+  const effectiveAdaptationProfile = productPreferences.adaptivePlanningEnabled
+    ? adaptationProfile
+    : null;
   const persistedBlocks = dailyPlan
     ? await appServices.repositories.planning.listTimeBlocksForPlan(dailyPlan.id)
     : [];
@@ -130,7 +134,7 @@ export async function loadFoundationSnapshot(date: string): Promise<FoundationSn
         tasks,
         constraints: effectiveConstraints,
         preferences: preferences as UserPreferences,
-        adaptationProfile,
+        adaptationProfile: effectiveAdaptationProfile,
         existingPlan: dailyPlan,
       })
     : null;
@@ -146,7 +150,7 @@ export async function loadFoundationSnapshot(date: string): Promise<FoundationSn
             tasks,
             constraints: effectiveConstraints,
             preferences,
-            adaptationProfile,
+            adaptationProfile: effectiveAdaptationProfile,
             dailyPlan,
             timeBlocks: blocks,
           })
@@ -162,8 +166,6 @@ export async function loadFoundationSnapshot(date: string): Promise<FoundationSn
         ),
     ),
   ].sort((left, right) => right.confidence - left.confidence);
-  const productPreferences = getProductPreferences(preferences);
-
   return {
     domains,
     goals,
@@ -171,7 +173,7 @@ export async function loadFoundationSnapshot(date: string): Promise<FoundationSn
     preferences,
     productPreferences,
     notificationPreferences,
-    adaptationProfile,
+    adaptationProfile: effectiveAdaptationProfile,
     dailyPlan,
     blocks,
     tasks,
@@ -194,6 +196,7 @@ export async function loadFoundationSnapshot(date: string): Promise<FoundationSn
             constraints: effectiveConstraints,
             tasks,
             calendarConnectionState,
+            adaptiveEnabled: productPreferences.adaptivePlanningEnabled,
           })
         : null,
   };

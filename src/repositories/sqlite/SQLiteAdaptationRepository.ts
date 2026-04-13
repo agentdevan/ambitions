@@ -48,6 +48,28 @@ interface ReplanSuggestionRow {
   updated_at: string;
 }
 
+function fallbackPersonalization() {
+  return {
+    active: false,
+    sampleSize: 0,
+    taskSizingStyle: "mixed_tasks" as const,
+    openWindowStyle: "mixed" as const,
+    lateDayStyle: "steady" as const,
+    carryoverStyle: "moderate" as const,
+    planStability: "adjusting" as const,
+    intensityStyle: "balanced" as const,
+    recoveryStyle: "moderate" as const,
+    bestFocusWindow: null,
+    signals: [],
+    summary: {
+      planningStyle: "Adaptation is still learning from recent activity.",
+      todayApproach: "Recommendations stay conservative until more history builds.",
+      insights: "Reflection stays close to recent activity until the signal is stronger.",
+    },
+    explanation: "Adaptation is still learning from recent activity.",
+  };
+}
+
 export class SQLiteAdaptationRepository
   extends SQLiteRepository
   implements AdaptationRepository
@@ -65,6 +87,10 @@ export class SQLiteAdaptationRepository
       return null;
     }
 
+    const metadata = decodeJson(row.metadata_json) as AdaptationProfile["metadata"] & {
+      personalization?: AdaptationProfile["personalization"];
+    };
+
     return mapEntityRecord<AdaptationProfile>(row, {
       effectiveDate: row.effective_date,
       source: row.source,
@@ -75,9 +101,10 @@ export class SQLiteAdaptationRepository
       strategy: decodeJson(row.strategy_json),
       history: decodeJson(row.history_json),
       regression: decodeJson(row.regression_json),
+      personalization: metadata.personalization ?? fallbackPersonalization(),
       durationRefinements: decodeJson(row.duration_refinements_json),
       planningDirectives: decodeJson(row.planning_directives_json),
-      metadata: decodeJson(row.metadata_json),
+      metadata,
     });
   }
 
@@ -132,7 +159,10 @@ export class SQLiteAdaptationRepository
             $regressionJson: encodeJson(profile.regression),
             $durationRefinementsJson: encodeJson(profile.durationRefinements),
             $planningDirectivesJson: encodeJson(profile.planningDirectives),
-            $metadataJson: encodeJson(profile.metadata),
+            $metadataJson: encodeJson({
+              ...profile.metadata,
+              personalization: profile.personalization,
+            }),
           },
         );
       }

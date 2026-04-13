@@ -218,6 +218,14 @@ function getAttachedAccountId(state: Pick<AppState, "attachmentState" | "authSta
     : null;
 }
 
+function getEffectiveAdaptationProfile(
+  state: Pick<AppState, "adaptationProfile" | "productPreferences">,
+) {
+  return state.productPreferences?.adaptivePlanningEnabled === false
+    ? null
+    : state.adaptationProfile;
+}
+
 let accountSnapshotUnsubscribe: (() => void) | null = null;
 
 export const useAppStore = create<AppState>((set, get) => ({
@@ -321,7 +329,7 @@ export const useAppStore = create<AppState>((set, get) => ({
       productPreferences: state.productPreferences,
       currentPreferences: state.userPreferences,
       today: state.planDate,
-      adaptationProfile: state.adaptationProfile,
+      adaptationProfile: getEffectiveAdaptationProfile(state),
     });
     const existingGoals = await appServices.repositories.goals.listGoals();
 
@@ -457,7 +465,7 @@ export const useAppStore = create<AppState>((set, get) => ({
         existingMilestones: goalMilestones,
         existingTasks: goalTasks,
         userPreferences: state.userPreferences,
-        adaptationProfile: state.adaptationProfile,
+        adaptationProfile: getEffectiveAdaptationProfile(state),
         impact,
       });
       updatedGoal = setGoalReviewDraft(updatedGoalBase, reviewDraft);
@@ -681,11 +689,11 @@ export const useAppStore = create<AppState>((set, get) => ({
       goal,
       mode: mode ?? currentDraft?.mode ?? "targeted_regeneration",
       existingMilestones: milestones.filter((milestone) => milestone.goalId === goalId),
-      existingTasks: tasks.filter((task) => task.goalId === goalId),
-      userPreferences: state.userPreferences,
-      adaptationProfile: state.adaptationProfile,
-      impact: null,
-    });
+        existingTasks: tasks.filter((task) => task.goalId === goalId),
+        userPreferences: state.userPreferences,
+        adaptationProfile: getEffectiveAdaptationProfile(state),
+        impact: null,
+      });
     const accountId = getAttachedAccountId(state);
     const occurredAt = new Date().toISOString();
     await appServices.repositories.goals.saveGoals(
@@ -893,7 +901,7 @@ export const useAppStore = create<AppState>((set, get) => ({
       dailyPlan: state.dailyPlan,
       timeBlocks: state.timeBlocksForSelectedDate,
       tasks: state.tasksForSelectedDate,
-      adaptationProfile: state.adaptationProfile,
+      adaptationProfile: getEffectiveAdaptationProfile(state),
       event: {
         taskId,
         type: action,
@@ -1074,7 +1082,7 @@ export const useAppStore = create<AppState>((set, get) => ({
         productPreferences,
         currentPreferences: state.userPreferences,
         today: state.planDate,
-        adaptationProfile: state.adaptationProfile,
+        adaptationProfile: getEffectiveAdaptationProfile(state),
         accountId: getAttachedAccountId(state),
       });
       const [foundationSnapshot, accountSnapshot] = await Promise.all([

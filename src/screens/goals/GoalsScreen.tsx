@@ -73,6 +73,8 @@ export function GoalsScreen({ navigation }: Props) {
   const milestones = useAppStore((state) => state.milestones);
   const tasks = useAppStore((state) => state.allTasks);
   const activityEvents = useAppStore((state) => state.activityEvents);
+  const adaptationProfile = useAppStore((state) => state.adaptationProfile);
+  const productPreferences = useAppStore((state) => state.productPreferences);
 
   const activeGoals = goals.filter((goal) => goal.status === GoalStatus.Active);
   const inactiveGoals = goals.filter((goal) =>
@@ -133,6 +135,8 @@ export function GoalsScreen({ navigation }: Props) {
                   milestones: milestones.filter((item) => item.goalId === goal.id),
                   tasks: tasks.filter((item) => item.goalId === goal.id),
                   events: feed,
+                  profile: adaptationProfile,
+                  adaptiveEnabled: productPreferences?.adaptivePlanningEnabled !== false,
                 });
                 const completionRatio =
                   goalSummary.milestoneCount > 0

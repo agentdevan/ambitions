@@ -63,6 +63,11 @@ function directivesForProfile(profile: SchedulingRequest["adaptationProfile"]) {
   ) satisfies AdaptationPlanningDirectives;
 }
 
+function adaptivePlanningEnabled(preferences: SchedulingRequest["preferences"]) {
+  const raw = preferences.metadata.adaptivePlanningEnabled;
+  return raw !== false && raw !== "false";
+}
+
 function isEntryTask(task: Task) {
   const lower = task.title.toLowerCase();
 
@@ -166,8 +171,9 @@ function findPlacement(
   windows: UsableTimeWindow[],
   protectiveMode: boolean,
   directives: AdaptationPlanningDirectives,
+  profile: SchedulingRequest["adaptationProfile"],
 ) {
-  return findPlacementWithPreference(task, windows, protectiveMode, null, directives);
+  return findPlacementWithPreference(task, windows, protectiveMode, null, directives, profile);
 }
 
 function findPlacementWithPreference(
@@ -176,7 +182,9 @@ function findPlacementWithPreference(
   protectiveMode: boolean,
   preferredStartTime: string | null,
   directives: AdaptationPlanningDirectives,
+  profile: SchedulingRequest["adaptationProfile"],
 ) {
+  const personalization = profile?.personalization.active ? profile.personalization : null;
   const requiredMinutes =
     protectiveMode && task.task.difficulty === TaskDifficulty.Deep
       ? task.task.estimatedMinutes + 10
@@ -205,6 +213,15 @@ function findPlacementWithPreference(
 
     if (adjustedMinutes >= requiredMinutes) {
       if (task.flexibility === "low" && window.kind === "lunch") {
+        continue;
+      }
+
+      const windowBucket = bucketForTime(buildIso("1970-01-01", adjustedStart).slice(11, 16));
+      if (
+        personalization?.lateDayStyle === "avoid_late_heavy" &&
+        windowBucket === "evening" &&
+        (task.workType === "deep_work" || task.task.estimatedMinutes >= 35)
+      ) {
         continue;
       }
 
@@ -365,9 +382,11 @@ function buildPlan(
   signals: SchedulingSignals,
   directives: AdaptationPlanningDirectives,
 ) {
+  const effectiveProfile =
+    adaptivePlanningEnabled(request.preferences) ? request.adaptationProfile : null;
   const existing = request.existingPlan;
   const timestamp = new Date().toISOString();
-  const regression = request.adaptationProfile?.regression;
+  const regression = effectiveProfile?.regression;
 
   return {
     id: existing?.id ?? `generated-plan-${request.date}`,
@@ -395,7 +414,7 @@ function buildPlan(
           : "The day is intentionally underpacked to preserve follow-through.",
     totalPlannedMinutes: scheduledTasks.reduce((sum, task) => sum + task.durationMinutes, 0),
     totalCommittedMinutes: scheduledTasks.reduce((sum, task) => sum + task.durationMinutes, 0),
-    adaptationProfileId: request.adaptationProfile?.id ?? null,
+    adaptationProfileId: effectiveProfile?.id ?? null,
     metadata: {
       planPressure: signals.planPressure,
       rolloverPressure: signals.rolloverPressure,
@@ -449,13 +468,15 @@ function buildBlocks(
 }
 
 export function buildDailySchedule(request: SchedulingRequest): SchedulingOutput {
-  const strictness = request.adaptationProfile?.strategy.strictness ?? StrategyStrictness.Protective;
-  const directives = directivesForProfile(request.adaptationProfile);
+  const effectiveProfile =
+    adaptivePlanningEnabled(request.preferences) ? request.adaptationProfile : null;
+  const strictness = effectiveProfile?.strategy.strictness ?? StrategyStrictness.Protective;
+  const directives = directivesForProfile(effectiveProfile);
   const interpretedConstraints = interpretConstraints({
     date: request.date,
     constraints: request.constraints,
     preferences: request.preferences,
-    adaptationProfile: request.adaptationProfile,
+    adaptationProfile: effectiveProfile,
   });
   const rawUsableWindows = deriveUsableWindows(interpretedConstraints, strictness);
   const capacity = buildCapacityOutput({
@@ -469,11 +490,13 @@ export function buildDailySchedule(request: SchedulingRequest): SchedulingOutput
   const unscheduledTasks: UnscheduledTask[] = [];
   const windows = rawUsableWindows.map((window) => ({ ...window }));
   const preferredStartTime =
-    request.adaptationProfile?.friction.preferredStartWindow ??
+    effectiveProfile?.friction.preferredStartWindow ??
     request.preferences.dailyPlanningTime ??
     null;
-  const focusBudget = request.adaptationProfile?.capacity.focusBudgetMinutes
-    ? request.adaptationProfile.capacity.focusBudgetMinutes + 30
+  const personalization =
+    effectiveProfile?.personalization.active ? effectiveProfile.personalization : null;
+  const focusBudget = effectiveProfile?.capacity.focusBudgetMinutes
+    ? effectiveProfile.capacity.focusBudgetMinutes + 30
     : request.preferences.defaultFocusSessionMinutes * 3;
   const reservedCapacity = Math.max(
     directives.underpackMinutes,
@@ -485,7 +508,11 @@ export function buildDailySchedule(request: SchedulingRequest): SchedulingOutput
     60,
     Math.min(
       capacity.capacitySummary.totalUsableMinutes - reservedCapacity,
-      Math.min(focusBudget, directives.dailyPlannedMinutesTarget),
+      Math.min(
+        focusBudget,
+        directives.dailyPlannedMinutesTarget +
+          (personalization?.intensityStyle === "high" ? 10 : personalization?.intensityStyle === "light" ? -10 : 0),
+      ),
     ),
   );
   const scheduledTaskCap = directives.dailyTaskSoftCap;
@@ -528,6 +555,7 @@ export function buildDailySchedule(request: SchedulingRequest): SchedulingOutput
       protectiveMode,
       preferredStartTime,
       directives,
+      effectiveProfile,
     );
 
     if (!placement) {
