@@ -551,6 +551,7 @@ export function ProfilePlanningPreferencesScreen() {
 
 type AuthMode = "create" | "sign_in";
 type AccountFieldKey = "displayName" | "email" | "password";
+const AUTH_RATE_LIMIT_COOLDOWN_MS = 30_000;
 
 function validateEmail(value: string) {
   return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value.trim());
@@ -630,8 +631,10 @@ function AuthReadyBadge({
 
 function AuthFeedbackCard({
   feedback,
+  detail,
 }: {
   feedback: AuthFeedback;
+  detail?: string;
 }) {
   const theme = useResolvedTheme();
   const isInfo = feedback.kind === "info";
@@ -661,6 +664,11 @@ function AuthFeedbackCard({
       <AppText tone="secondary" variant="caption">
         {feedback.message}
       </AppText>
+      {detail ? (
+        <AppText tone="tertiary" variant="caption">
+          {detail}
+        </AppText>
+      ) : null}
     </View>
   );
 }
@@ -683,6 +691,8 @@ export function ProfileAccountScreen() {
   const [accountBusy, setAccountBusy] = useState<string | null>(null);
   const [accountActionMessage, setAccountActionMessage] = useState<string | null>(null);
   const [authFeedback, setAuthFeedback] = useState<AuthFeedback | null>(null);
+  const [authCooldownUntil, setAuthCooldownUntil] = useState<number | null>(null);
+  const [authCooldownRemainingMs, setAuthCooldownRemainingMs] = useState(0);
   const [authMode, setAuthMode] = useState<AuthMode>("create");
   const [displayName, setDisplayName] = useState("");
   const [email, setEmail] = useState("");
@@ -730,8 +740,33 @@ export function ProfileAccountScreen() {
     if (account) {
       setAccountActionMessage(null);
       setAuthFeedback(null);
+      setAuthCooldownUntil(null);
+      setAuthCooldownRemainingMs(0);
     }
   }, [account]);
+
+  useEffect(() => {
+    if (!authCooldownUntil) {
+      setAuthCooldownRemainingMs(0);
+      return;
+    }
+
+    const updateRemaining = () => {
+      const nextRemaining = Math.max(0, authCooldownUntil - Date.now());
+      setAuthCooldownRemainingMs(nextRemaining);
+
+      if (nextRemaining === 0) {
+        setAuthCooldownUntil(null);
+      }
+    };
+
+    updateRemaining();
+    const interval = setInterval(updateRemaining, 250);
+
+    return () => {
+      clearInterval(interval);
+    };
+  }, [authCooldownUntil]);
 
   async function runAccountAction(
     key: string,
@@ -751,7 +786,9 @@ export function ProfileAccountScreen() {
   }
 
   function clearAuthSurfaceFeedback() {
-    setAuthFeedback(null);
+    if (!(authFeedback?.code === "rate_limited" && authCooldownRemainingMs > 0)) {
+      setAuthFeedback(null);
+    }
     if (authState?.lastError || authState?.status === "error") {
       void clearAuthFeedback();
     }
@@ -790,12 +827,16 @@ export function ProfileAccountScreen() {
       return;
     }
 
-    if (field === "password" && canSubmitAuth && authConfigured) {
+    if (field === "password" && canAttemptAuth && authConfigured) {
       void submitAuth();
     }
   }
 
   async function submitAuth() {
+    if (accountBusy === "auth" || authCooldownRemainingMs > 0) {
+      return;
+    }
+
     setTouchedFields({
       displayName: true,
       email: true,
@@ -825,6 +866,10 @@ export function ProfileAccountScreen() {
 
       if (result.feedback) {
         setAuthFeedback(result.feedback);
+
+        if (result.feedback.code === "rate_limited") {
+          setAuthCooldownUntil(Date.now() + AUTH_RATE_LIMIT_COOLDOWN_MS);
+        }
 
         if (result.feedback.suggestedMode === "sign_in") {
           setAuthMode("sign_in");
@@ -858,6 +903,9 @@ export function ProfileAccountScreen() {
   const passwordValid = password.trim().length >= 8;
   const canSubmitAuth =
     emailValid && passwordValid && (authMode === "sign_in" || nameValid);
+  const isAuthCoolingDown = authCooldownRemainingMs > 0;
+  const cooldownSeconds = Math.max(1, Math.ceil(authCooldownRemainingMs / 1000));
+  const canAttemptAuth = canSubmitAuth && accountBusy !== "auth" && !isAuthCoolingDown;
   const nameFieldState =
     authMode === "create"
       ? getFieldValidationState({
@@ -882,6 +930,16 @@ export function ProfileAccountScreen() {
       : "Pick up your account on this device.";
   const unavailableMessage =
     authState?.lastError ?? "Connection unavailable right now.";
+  const authFeedbackDetail =
+    authFeedback?.code === "rate_limited" && isAuthCoolingDown
+      ? `You can try again in ${cooldownSeconds}s.`
+      : undefined;
+  const authButtonLabel =
+    isAuthCoolingDown
+      ? `Try again in ${cooldownSeconds}s`
+      : authMode === "create"
+        ? "Create account"
+        : "Sign in";
 
   return (
     <KeyboardAvoidingView
@@ -988,7 +1046,9 @@ export function ProfileAccountScreen() {
                     }}
                   />
                 </View>
-                {authFeedback ? <AuthFeedbackCard feedback={authFeedback} /> : null}
+                {authFeedback ? (
+                  <AuthFeedbackCard feedback={authFeedback} detail={authFeedbackDetail} />
+                ) : null}
                 {authMode === "create" ? (
                   <View
                     onLayout={(event) => registerFieldOffset("displayName", event)}
@@ -1052,7 +1112,7 @@ export function ProfileAccountScreen() {
                     onFocus={() => focusField("password")}
                     onSubmitEditing={() => handleSubmitEditing("password")}
                     placeholder="At least 8 characters"
-                    returnKeyType={canSubmitAuth ? "go" : "done"}
+                    returnKeyType={canAttemptAuth ? "go" : "done"}
                     secureTextEntry
                     supportingText={
                       touchedFields.password && !passwordValid
@@ -1086,11 +1146,11 @@ export function ProfileAccountScreen() {
                 <View className="gap-3">
                   <Button
                     busy={accountBusy === "auth"}
-                    disabled={!canSubmitAuth}
+                    disabled={!canAttemptAuth}
                     onPress={() => void submitAuth()}
                     style={{ width: "100%" }}
                   >
-                    {authMode === "create" ? "Create account" : "Sign in"}
+                    {authButtonLabel}
                   </Button>
                   <Button
                     tone="inline"
