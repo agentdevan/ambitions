@@ -133,6 +133,7 @@ export function OnboardingScreen() {
           taskSizing,
           dayIntensity,
           adaptivePlanningEnabled: true,
+          defaultUnfinishedWorkBehavior: "ask_each_time",
           appearanceMode,
           accentTheme,
           schedule: {

@@ -2,6 +2,7 @@ import { DomainKey, PlanningCadence, UserPreferences } from "../domain/models";
 import {
   AccentThemeKey,
   AppearanceMode,
+  DefaultUnfinishedWorkBehavior,
   DayIntensityPreference,
   ProductPreferences,
   ScheduleDefaults,
@@ -119,6 +120,12 @@ function parseAccentTheme(value: unknown): AccentThemeKey {
   }
 }
 
+function parseUnfinishedWorkBehavior(value: unknown): DefaultUnfinishedWorkBehavior {
+  return value === "carry_forward" || value === "send_to_review" || value === "ask_each_time"
+    ? value
+    : "ask_each_time";
+}
+
 export function getProductPreferences(preferences: UserPreferences | null): ProductPreferences {
   const metadata = preferences?.metadata ?? {};
 
@@ -130,6 +137,9 @@ export function getProductPreferences(preferences: UserPreferences | null): Prod
     adaptivePlanningEnabled: parseBoolean(metadata.adaptivePlanningEnabled, true),
     appearanceMode: parseAppearanceMode(metadata.appearanceMode),
     accentTheme: parseAccentTheme(metadata.accentTheme ?? metadata.themePreset),
+    defaultUnfinishedWorkBehavior: parseUnfinishedWorkBehavior(
+      metadata.defaultUnfinishedWorkBehavior,
+    ),
     schedule: {
       sleepStart: parseTime(metadata.sleepWindowStart, defaultSchedule.sleepStart),
       sleepEnd: parseTime(metadata.sleepWindowEnd, defaultSchedule.sleepEnd),
@@ -194,6 +204,7 @@ export function mergeProductPreferences(
     adaptivePlanningEnabled: product.adaptivePlanningEnabled,
     appearanceMode: product.appearanceMode,
     accentTheme: product.accentTheme,
+    defaultUnfinishedWorkBehavior: product.defaultUnfinishedWorkBehavior,
     sleepWindowStart: product.schedule.sleepStart,
     sleepWindowEnd: product.schedule.sleepEnd,
     morningPrepMinutes: product.schedule.morningPrepMinutes,

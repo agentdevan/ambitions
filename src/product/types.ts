@@ -10,6 +10,10 @@ export type AccentThemeKey =
   | "bronze"
   | "olive"
   | "terracotta";
+export type DefaultUnfinishedWorkBehavior =
+  | "carry_forward"
+  | "send_to_review"
+  | "ask_each_time";
 
 export interface ScheduleDefaults {
   sleepStart: string;
@@ -29,6 +33,7 @@ export interface ProductPreferences {
   adaptivePlanningEnabled: boolean;
   appearanceMode: AppearanceMode;
   accentTheme: AccentThemeKey;
+  defaultUnfinishedWorkBehavior: DefaultUnfinishedWorkBehavior;
   schedule: ScheduleDefaults;
 }
 

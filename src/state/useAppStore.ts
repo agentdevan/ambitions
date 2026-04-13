@@ -11,7 +11,17 @@ import {
   AuthStateSnapshot,
   CalendarConnectionState,
   DailyPlan,
+  DailyRitualCarryDecision,
+  DailyRitualCarryDecisionSummary,
+  DailyRitualClarityRating,
+  DailyRitualDayLoadRating,
+  DailyRitualEnergyRating,
+  DailyRitualOpeningFocus,
+  DailyRitualRecoveryMode,
+  DailyRitualRecoveryMoment,
+  DailyRitualState,
   Domain,
+  EntitySyncState,
   Goal,
   GoalMilestone,
   GoalStatus,
@@ -24,7 +34,10 @@ import {
   SyncStateSnapshot,
   Task,
   TaskActionType,
+  TaskSchedulingState,
+  TaskStatus,
   TimeBlock,
+  DailyPlanStatus,
   UserPreferences,
 } from "../domain/models";
 import { createGoalAndFirstPlan, createGoalArtifacts } from "../product/planOrchestrator";
@@ -53,9 +66,14 @@ import { getCurrentLocalDateString } from "../utils/date";
 import {
   buildGoalStatusActivityEvent,
   buildGoalUpdatedActivityEvent,
+  buildCarryoverReviewedActivityEvent,
+  buildDayClosedActivityEvent,
+  buildDayOpenedActivityEvent,
+  buildDayRecoveredActivityEvent,
   buildPlanReviewAcceptedActivityEvents,
   buildPlanReviewGeneratedActivityEvent,
   buildPlanReviewRevertedActivityEvent,
+  buildReflectionLoggedActivityEvent,
   buildTaskActionActivityEvent,
 } from "../services/history/activity";
 import { TodayViewModel } from "./viewModels/today";
@@ -105,12 +123,23 @@ interface GoalsSlice {
 interface PlanningSlice {
   planDate: string;
   dailyPlan: DailyPlan | null;
+  dailyRitual: DailyRitualState | null;
+  dailyRitualHistory: DailyRitualState[];
   schedule: SchedulingOutput | null;
   today: TodayViewModel | null;
   activityEvents: ActivityEvent[];
   timeBlocksForSelectedDate: TimeBlock[];
   tasksForSelectedDate: Task[];
   refreshPlanning: (date?: string) => Promise<void>;
+  openDay: (focus?: DailyRitualOpeningFocus | null) => Promise<void>;
+  recoverDay: (mode: DailyRitualRecoveryMode) => Promise<void>;
+  closeDay: (input: {
+    dayLoadRating: DailyRitualDayLoadRating | null;
+    energyRating: DailyRitualEnergyRating | null;
+    clarityRating: DailyRitualClarityRating | null;
+    reflectionNote: string | null;
+    carryDecision: DailyRitualCarryDecision;
+  }) => Promise<void>;
   applyTaskAction: (taskId: string, action: TaskActionType) => Promise<void>;
 }
 
@@ -231,6 +260,69 @@ function getEffectiveAdaptationProfile(
     : state.adaptationProfile;
 }
 
+function createDailyRitualState(params: {
+  date: string;
+  accountId: string | null;
+  existing?: DailyRitualState | null;
+}): DailyRitualState {
+  const now = new Date().toISOString();
+  const existing = params.existing;
+
+  return {
+    id: existing?.id ?? `ritual:${params.date}`,
+    date: params.date,
+    openedAt: existing?.openedAt ?? null,
+    openingFocus: existing?.openingFocus ?? null,
+    recoveryMoments: existing?.recoveryMoments ?? [],
+    closedAt: existing?.closedAt ?? null,
+    dayLoadRating: existing?.dayLoadRating ?? null,
+    energyRating: existing?.energyRating ?? null,
+    clarityRating: existing?.clarityRating ?? null,
+    reflectionNote: existing?.reflectionNote ?? null,
+    carryDecisionSummary: existing?.carryDecisionSummary ?? null,
+    metadata: existing?.metadata ?? {},
+    ownerUserId: existing?.ownerUserId ?? params.accountId,
+    remoteId: existing?.remoteId ?? null,
+    syncState:
+      existing?.syncState ??
+      (params.accountId ? EntitySyncState.PendingSync : EntitySyncState.LocalOnly),
+    version: existing?.version ?? 1,
+    lastSyncedAt: existing?.lastSyncedAt ?? null,
+    createdAt: existing?.createdAt ?? now,
+    updatedAt: now,
+  };
+}
+
+function bindRitualStateToAccount(state: DailyRitualState, accountId: string | null): DailyRitualState {
+  if (!accountId) {
+    return state;
+  }
+
+  return {
+    ...state,
+    ownerUserId: accountId,
+    syncState: EntitySyncState.PendingSync,
+  };
+}
+
+function summarizeRecoveryMode(mode: DailyRitualRecoveryMode, changedTaskCount: number) {
+  if (mode === DailyRitualRecoveryMode.SalvageEssentials) {
+    return `Held the day to the few pieces that still mattered, moving ${changedTaskCount} tasks out of today's shape.`;
+  }
+
+  if (mode === DailyRitualRecoveryMode.LightenRest) {
+    return `Reduced the rest of the day so pressure dropped and only the clearest work remained.`;
+  }
+
+  return `Rebalanced the remaining day around what could still fit cleanly.`;
+}
+
+function nextDate(date: string) {
+  const value = new Date(`${date}T12:00:00`);
+  value.setDate(value.getDate() + 1);
+  return value.toISOString().slice(0, 10);
+}
+
 let accountSnapshotUnsubscribe: (() => void) | null = null;
 
 export const useAppStore = create<AppState>((set, get) => ({
@@ -243,6 +335,8 @@ export const useAppStore = create<AppState>((set, get) => ({
   allTasks: [],
   planDate: initialPlanDate,
   dailyPlan: null,
+  dailyRitual: null,
+  dailyRitualHistory: [],
   schedule: null,
   today: null,
   activityEvents: [],
@@ -892,6 +986,390 @@ export const useAppStore = create<AppState>((set, get) => ({
   refreshPlanning: async (date) => {
     const planDate = date ?? get().planDate;
     set(await refreshAllState(planDate));
+  },
+
+  openDay: async (focus = null) => {
+    const state = get();
+    const accountId = getAttachedAccountId(state);
+    const existing = await appServices.repositories.planning.getDailyRitualState(state.planDate);
+    const now = new Date().toISOString();
+    const ritualState = createDailyRitualState({
+      date: state.planDate,
+      accountId,
+      existing,
+    });
+    const nextRitualState = bindRitualStateToAccount(
+      {
+        ...ritualState,
+        openedAt: ritualState.openedAt ?? now,
+        openingFocus: focus ?? ritualState.openingFocus ?? null,
+        closedAt: null,
+        updatedAt: now,
+        version: ritualState.version + (existing ? 1 : 0),
+      },
+      accountId,
+    );
+
+    const updates: Promise<unknown>[] = [
+      appServices.repositories.planning.saveDailyRitualStates([nextRitualState]),
+      appServices.repositories.history.saveActivityEvents(
+        bindRecordsToAccount(
+          [
+            buildDayOpenedActivityEvent({
+              date: state.planDate,
+              occurredAt: now,
+              openingFocus: nextRitualState.openingFocus,
+            }),
+          ],
+          accountId,
+        ),
+      ),
+    ];
+
+    if (state.dailyPlan && focus) {
+      const focusCopy =
+        focus === DailyRitualOpeningFocus.ProtectEssentials
+          ? "Protect the essentials first. Anything extra needs to earn its way in."
+          : focus === DailyRitualOpeningFocus.MeaningfulProgress
+            ? "Move the one meaningful thing that makes the rest of the day easier."
+            : "Keep the day light enough to stay believable from start to finish.";
+      updates.push(
+        appServices.repositories.planning.saveDailyPlans([
+          bindRecordToAccount(
+            {
+              ...state.dailyPlan,
+              focus: focusCopy,
+              updatedAt: now,
+              version: state.dailyPlan.version + 1,
+            },
+            accountId,
+          ),
+        ]),
+      );
+    }
+
+    await Promise.all(updates);
+    const [foundationSnapshot, accountSnapshot] = await Promise.all([
+      refreshAllState(state.planDate),
+      appServices.services.account.notePendingChanges(),
+    ]);
+    set({
+      ...foundationSnapshot,
+      ...mapAccountSnapshot(accountSnapshot),
+    });
+  },
+
+  recoverDay: async (mode) => {
+    const state = get();
+
+    if (!state.userPreferences || !state.dailyPlan) {
+      throw new Error("Today's plan is not ready for recovery.");
+    }
+
+    const accountId = getAttachedAccountId(state);
+    const now = new Date().toISOString();
+    const recoveryDate = nextDate(state.planDate);
+    const candidateTasks = [...state.tasksForSelectedDate].sort((left, right) => {
+      const leftScore =
+        (left.status === TaskStatus.InProgress ? 60 : 0) +
+        (left.status === TaskStatus.Scheduled ? 24 : 0) +
+        (left.status === TaskStatus.Ready ? 16 : 0) +
+        (left.difficulty === "light" ? 8 : left.difficulty === "moderate" ? 5 : 0) -
+        left.estimatedMinutes / 10;
+      const rightScore =
+        (right.status === TaskStatus.InProgress ? 60 : 0) +
+        (right.status === TaskStatus.Scheduled ? 24 : 0) +
+        (right.status === TaskStatus.Ready ? 16 : 0) +
+        (right.difficulty === "light" ? 8 : right.difficulty === "moderate" ? 5 : 0) -
+        right.estimatedMinutes / 10;
+
+      return rightScore - leftScore;
+    });
+    const keepCount =
+      mode === DailyRitualRecoveryMode.SalvageEssentials
+        ? 2
+        : mode === DailyRitualRecoveryMode.LightenRest
+          ? 1
+          : 3;
+    const keepTaskIds = new Set(
+      candidateTasks
+        .filter((task) => ![TaskStatus.Completed, TaskStatus.Cancelled].includes(task.status))
+        .slice(0, keepCount)
+        .map((task) => task.id),
+    );
+
+    const updatedTasks = state.tasksForSelectedDate.map((task) => {
+      if ([TaskStatus.Completed, TaskStatus.Cancelled].includes(task.status)) {
+        return task;
+      }
+
+      if (keepTaskIds.has(task.id)) {
+        return bindRecordToAccount(
+          {
+            ...task,
+            targetDate: state.planDate,
+            scheduledDate: state.planDate,
+            status:
+              task.status === TaskStatus.InProgress
+                ? TaskStatus.InProgress
+                : task.status === TaskStatus.Completed
+                  ? TaskStatus.Completed
+                  : TaskStatus.Ready,
+            schedulingState:
+              task.status === TaskStatus.InProgress
+                ? TaskSchedulingState.InFlight
+                : TaskSchedulingState.Committed,
+            metadata: {
+              ...task.metadata,
+              ritualRecoveryMode: mode,
+              ritualRecoveryAppliedAt: now,
+            },
+            updatedAt: now,
+            version: task.version + 1,
+          },
+          accountId,
+        );
+      }
+
+      return bindRecordToAccount(
+        {
+          ...task,
+          status: TaskStatus.Deferred,
+          schedulingState: TaskSchedulingState.Rolled,
+          targetDate: recoveryDate,
+          scheduledDate: recoveryDate,
+          metadata: {
+            ...task.metadata,
+            ritualRecoveryMode: mode,
+            ritualRecoveryAppliedAt: now,
+            ritualDeferredFrom: state.planDate,
+          },
+          updatedAt: now,
+          version: task.version + 1,
+        },
+        accountId,
+      );
+    });
+
+    await appServices.repositories.tasks.saveTasks(updatedTasks);
+
+    const existing = await appServices.repositories.planning.getDailyRitualState(state.planDate);
+    const ritualState = createDailyRitualState({
+      date: state.planDate,
+      accountId,
+      existing,
+    });
+    const changedTaskCount = updatedTasks.filter((task) => !keepTaskIds.has(task.id)).length;
+    const changedBlockCount = Math.max(
+      0,
+      state.timeBlocksForSelectedDate.filter((block) => block.taskId && !keepTaskIds.has(block.taskId)).length,
+    );
+    const recoveryMoment: DailyRitualRecoveryMoment = {
+      occurredAt: now,
+      mode,
+      summary: summarizeRecoveryMode(mode, changedTaskCount),
+      changedTaskCount,
+      changedBlockCount,
+      triggerLabels: [
+        state.today?.ritual?.recoveryReasons?.[0] ?? "The original day shape no longer held.",
+      ],
+    };
+
+    const nextRitualState = bindRitualStateToAccount(
+      {
+        ...ritualState,
+        recoveryMoments: [...ritualState.recoveryMoments, recoveryMoment],
+        updatedAt: now,
+        version: ritualState.version + (existing ? 1 : 0),
+      },
+      accountId,
+    );
+
+    await Promise.all([
+      appServices.repositories.planning.saveDailyRitualStates([nextRitualState]),
+      appServices.repositories.history.saveActivityEvents(
+        bindRecordsToAccount(
+          [
+            buildDayRecoveredActivityEvent({
+              date: state.planDate,
+              occurredAt: now,
+              recoveryMode: mode,
+              summary: recoveryMoment.summary,
+              changedTaskCount,
+              changedBlockCount,
+            }),
+          ],
+          accountId,
+        ),
+      ),
+    ]);
+
+    const [foundationSnapshot, accountSnapshot] = await Promise.all([
+      refreshAllState(state.planDate),
+      appServices.services.account.notePendingChanges(),
+    ]);
+    set({
+      ...foundationSnapshot,
+      ...mapAccountSnapshot(accountSnapshot),
+    });
+  },
+
+  closeDay: async (input) => {
+    const state = get();
+    const accountId = getAttachedAccountId(state);
+    const now = new Date().toISOString();
+    const existing = await appServices.repositories.planning.getDailyRitualState(state.planDate);
+    const ritualState = createDailyRitualState({
+      date: state.planDate,
+      accountId,
+      existing,
+    });
+    const tomorrow = nextDate(state.planDate);
+    const unfinishedTasks = state.tasksForSelectedDate.filter(
+      (task) => ![TaskStatus.Completed, TaskStatus.Cancelled].includes(task.status),
+    );
+
+    const updatedTasks = unfinishedTasks.map((task) => {
+      if (input.carryDecision === DailyRitualCarryDecision.DeferDecision) {
+        return bindRecordToAccount(
+          {
+            ...task,
+            metadata: {
+              ...task.metadata,
+              ritualCloseDeferredAt: now,
+            },
+            updatedAt: now,
+            version: task.version + 1,
+          },
+          accountId,
+        );
+      }
+
+      if (input.carryDecision === DailyRitualCarryDecision.SendToReview) {
+        return bindRecordToAccount(
+          {
+            ...task,
+            status: TaskStatus.Unscheduled,
+            schedulingState: TaskSchedulingState.Unscheduled,
+            targetDate: null,
+            scheduledDate: null,
+            metadata: {
+              ...task.metadata,
+              ritualReviewRequestedAt: now,
+              ritualCarryDecision: input.carryDecision,
+            },
+            updatedAt: now,
+            version: task.version + 1,
+          },
+          accountId,
+        );
+      }
+
+      return bindRecordToAccount(
+        {
+          ...task,
+          status: TaskStatus.Deferred,
+          schedulingState: TaskSchedulingState.Rolled,
+          targetDate: tomorrow,
+          scheduledDate: tomorrow,
+          metadata: {
+            ...task.metadata,
+            ritualCarryDecision: input.carryDecision,
+            ritualCarriedFrom: state.planDate,
+          },
+          updatedAt: now,
+          version: task.version + 1,
+        },
+        accountId,
+      );
+    });
+
+    if (updatedTasks.length > 0) {
+      await appServices.repositories.tasks.saveTasks(updatedTasks);
+    }
+
+    const carryDecisionSummary: DailyRitualCarryDecisionSummary = {
+      decidedAt: now,
+      decision: input.carryDecision,
+      unfinishedTaskCount: unfinishedTasks.length,
+      carriedTaskCount:
+        input.carryDecision === DailyRitualCarryDecision.CarryForward ? unfinishedTasks.length : 0,
+      sentToReviewCount:
+        input.carryDecision === DailyRitualCarryDecision.SendToReview ? unfinishedTasks.length : 0,
+      deferredDecisionCount:
+        input.carryDecision === DailyRitualCarryDecision.DeferDecision ? unfinishedTasks.length : 0,
+    };
+
+    const nextRitualState = bindRitualStateToAccount(
+      {
+        ...ritualState,
+        openedAt: ritualState.openedAt ?? now,
+        closedAt: now,
+        dayLoadRating: input.dayLoadRating,
+        energyRating: input.energyRating,
+        clarityRating: input.clarityRating,
+        reflectionNote: input.reflectionNote?.trim() ? input.reflectionNote.trim() : null,
+        carryDecisionSummary,
+        updatedAt: now,
+        version: ritualState.version + (existing ? 1 : 0),
+      },
+      accountId,
+    );
+
+    const completedCount = state.tasksForSelectedDate.filter(
+      (task) => task.status === TaskStatus.Completed,
+    ).length;
+
+    const historyEvents = [
+      buildDayClosedActivityEvent({
+        date: state.planDate,
+        occurredAt: now,
+        completedCount,
+        unfinishedCount: unfinishedTasks.length,
+      }),
+      buildReflectionLoggedActivityEvent({
+        date: state.planDate,
+        occurredAt: now,
+        dayLoad: input.dayLoadRating,
+        energy: input.energyRating,
+        clarity: input.clarityRating,
+      }),
+      buildCarryoverReviewedActivityEvent({
+        date: state.planDate,
+        occurredAt: now,
+        decision: input.carryDecision,
+        unfinishedCount: unfinishedTasks.length,
+      }),
+    ];
+
+    await Promise.all([
+      appServices.repositories.planning.saveDailyRitualStates([nextRitualState]),
+      state.dailyPlan
+        ? appServices.repositories.planning.saveDailyPlans([
+            bindRecordToAccount(
+              {
+                ...state.dailyPlan,
+                status: DailyPlanStatus.Completed,
+                updatedAt: now,
+                version: state.dailyPlan.version + 1,
+              },
+              accountId,
+            ),
+          ])
+        : Promise.resolve(),
+      appServices.repositories.history.saveActivityEvents(
+        bindRecordsToAccount(historyEvents, accountId),
+      ),
+    ]);
+
+    const [foundationSnapshot, accountSnapshot] = await Promise.all([
+      refreshAllState(state.planDate),
+      appServices.services.account.notePendingChanges(),
+    ]);
+    set({
+      ...foundationSnapshot,
+      ...mapAccountSnapshot(accountSnapshot),
+    });
   },
 
   applyTaskAction: async (taskId, action) => {

@@ -2,6 +2,7 @@ import {
   AdaptationProfile,
   ActivityEvent,
   DailyPlan,
+  DailyRitualState,
   EntitySyncState,
   Goal,
   GoalMilestone,
@@ -51,6 +52,7 @@ interface LocalSyncState {
   notificationPreferences: NotificationPreference[];
   adaptationProfile: AdaptationProfile | null;
   dailyPlans: DailyPlan[];
+  dailyRitualStates: DailyRitualState[];
   timeBlocks: TimeBlock[];
   activityEvents: ActivityEvent[];
 }
@@ -68,6 +70,7 @@ export class SyncCoordinator {
       milestones,
       tasks,
       plans,
+      ritualStates,
       preferences,
       activityEvents,
     ] = await Promise.all([
@@ -75,6 +78,7 @@ export class SyncCoordinator {
       this.repositories.goals.listMilestones(),
       this.repositories.tasks.listTasks(),
       this.repositories.planning.listDailyPlans(),
+      this.repositories.planning.listDailyRitualStates(),
       this.repositories.preferences.getUserPreferences(),
       this.repositories.history.listActivityEvents(500),
     ]);
@@ -85,6 +89,7 @@ export class SyncCoordinator {
         milestones.length > 0 ||
         tasks.length > 0 ||
         plans.length > 0 ||
+        ritualStates.length > 0 ||
         activityEvents.length > 0 ||
         preferences?.metadata.onboardingCompleted === true ||
         preferences?.metadata.onboardingCompleted === "true",
@@ -93,6 +98,7 @@ export class SyncCoordinator {
         milestones.length +
         tasks.length +
         plans.length +
+        ritualStates.length +
         activityEvents.length +
         (preferences ? 1 : 0),
     };
@@ -149,6 +155,11 @@ export class SyncCoordinator {
 
     await this.repositories.planning.saveDailyPlans(
       localState.dailyPlans.map((plan) => prepareOwnedRecord("daily_plan", plan, accountId, now)),
+    );
+    await this.repositories.planning.saveDailyRitualStates(
+      localState.dailyRitualStates.map((state) =>
+        prepareOwnedRecord("daily_ritual_state", state, accountId, now),
+      ),
     );
     await this.repositories.planning.saveTimeBlocks(
       localState.timeBlocks.map((block) => prepareOwnedRecord("time_block", block, accountId, now)),
@@ -399,6 +410,7 @@ export class SyncCoordinator {
       notificationPreferences,
       adaptationProfile,
       dailyPlans,
+      dailyRitualStates,
       timeBlocks,
       activityEvents,
     ] = await Promise.all([
@@ -409,6 +421,7 @@ export class SyncCoordinator {
       this.repositories.preferences.listNotificationPreferences(),
       this.repositories.adaptation.getLatestProfile(),
       this.repositories.planning.listDailyPlans(),
+      this.repositories.planning.listDailyRitualStates(),
       this.repositories.planning.listTimeBlocks(),
       this.repositories.history.listActivityEvents(1000),
     ]);
@@ -421,6 +434,7 @@ export class SyncCoordinator {
       notificationPreferences,
       adaptationProfile,
       dailyPlans,
+      dailyRitualStates,
       timeBlocks,
       activityEvents,
     };
@@ -438,6 +452,8 @@ export class SyncCoordinator {
         return state.dailyPlans;
       case "time_block":
         return state.timeBlocks;
+      case "daily_ritual_state":
+        return state.dailyRitualStates;
       case "preferences":
         return state.preferences ? [state.preferences] : [];
       case "notification_preference":
@@ -463,6 +479,8 @@ export class SyncCoordinator {
         return this.repositories.planning.saveDailyPlans([record as DailyPlan]);
       case "time_block":
         return this.repositories.planning.saveTimeBlocks([record as TimeBlock]);
+      case "daily_ritual_state":
+        return this.repositories.planning.saveDailyRitualStates([record as DailyRitualState]);
       case "preferences":
         return this.repositories.preferences.saveUserPreferences(record as UserPreferences);
       case "notification_preference":

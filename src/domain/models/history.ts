@@ -13,6 +13,11 @@ export enum ActivityEventKind {
   GoalStatusChanged = "goal_status_changed",
   GoalUpdated = "goal_updated",
   MilestoneCompleted = "milestone_completed",
+  DayOpened = "day_opened",
+  DayRecovered = "day_recovered",
+  DayClosed = "day_closed",
+  ReflectionLogged = "reflection_logged",
+  CarryoverReviewed = "carryover_reviewed",
 }
 
 export interface ActivityEvent extends EntityRecord {

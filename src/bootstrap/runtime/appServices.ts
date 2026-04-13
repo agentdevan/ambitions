@@ -75,6 +75,7 @@ async function resetSeedData() {
   await sqliteClient.withTransaction(async (client) => {
     await client.run("DELETE FROM time_blocks;");
     await client.run("DELETE FROM daily_plans;");
+    await client.run("DELETE FROM daily_ritual_states;");
     await client.run("DELETE FROM activity_events;");
     await client.run("DELETE FROM replan_suggestions;");
     await client.run("DELETE FROM tasks;");
@@ -139,6 +140,37 @@ async function seedInitialData() {
   await ensureBootstrapMetadata();
 }
 
+async function ensurePhase17Defaults() {
+  const [preferences, notificationPreferences] = await Promise.all([
+    appServices.repositories.preferences.getUserPreferences(),
+    appServices.repositories.preferences.listNotificationPreferences(),
+  ]);
+
+  if (preferences && preferences.metadata.defaultUnfinishedWorkBehavior === undefined) {
+    await appServices.repositories.preferences.saveUserPreferences({
+      ...preferences,
+      metadata: {
+        ...preferences.metadata,
+        defaultUnfinishedWorkBehavior: "ask_each_time",
+      },
+      updatedAt: new Date().toISOString(),
+      version: preferences.version + 1,
+    });
+  }
+
+  const existingTypes = new Set(notificationPreferences.map((preference) => preference.reminderType));
+  const missing = seedNotificationPreferences.filter(
+    (preference) => !existingTypes.has(preference.reminderType),
+  );
+
+  if (missing.length > 0) {
+    await appServices.repositories.preferences.saveNotificationPreferences([
+      ...notificationPreferences,
+      ...missing,
+    ]);
+  }
+}
+
 export async function initializeAppServices() {
   if (!initializationPromise) {
     resetStartupReady();
@@ -151,6 +183,8 @@ export async function initializeAppServices() {
       } else if (seedVersion !== bootstrapSeedVersion) {
         await ensureBootstrapMetadata();
       }
+
+      await ensurePhase17Defaults();
 
       await appServices.services.account.initialize();
     })().catch((error) => {

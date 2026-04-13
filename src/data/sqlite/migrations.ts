@@ -514,4 +514,34 @@ export const schemaMigrations: MigrationDefinition[] = [
       `ALTER TABLE auth_state_v2 RENAME TO auth_state;`,
     ],
   },
+  {
+    id: 6,
+    name: "phase_17_daily_rituals",
+    statements: [
+      `
+        CREATE TABLE IF NOT EXISTS daily_ritual_states (
+          id TEXT PRIMARY KEY NOT NULL,
+          date TEXT NOT NULL UNIQUE,
+          opened_at TEXT,
+          opening_focus TEXT,
+          recovery_moments_json TEXT NOT NULL DEFAULT '[]',
+          closed_at TEXT,
+          day_load_rating TEXT,
+          energy_rating TEXT,
+          clarity_rating TEXT,
+          reflection_note TEXT,
+          carry_decision_summary_json TEXT,
+          metadata_json TEXT NOT NULL,
+          owner_user_id TEXT,
+          remote_id TEXT,
+          sync_state TEXT NOT NULL,
+          version INTEGER NOT NULL,
+          last_synced_at TEXT,
+          created_at TEXT NOT NULL,
+          updated_at TEXT NOT NULL
+        );
+      `,
+      `CREATE INDEX IF NOT EXISTS idx_daily_ritual_states_date ON daily_ritual_states(date DESC);`,
+    ],
+  },
 ];

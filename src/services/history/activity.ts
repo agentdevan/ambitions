@@ -1,6 +1,9 @@
 import {
   ActivityEvent,
   ActivityEventKind,
+  DailyRitualCarryDecision,
+  DailyRitualOpeningFocus,
+  DailyRitualRecoveryMode,
   EntitySyncState,
   ExecutionAuditTrail,
   Goal,
@@ -95,6 +98,26 @@ export function buildTaskActionActivityEvent(params: {
     },
     [ActivityEventKind.MilestoneCompleted]: {
       outcomeLabel: "Completed",
+      detail: audit.explanation,
+    },
+    [ActivityEventKind.DayOpened]: {
+      outcomeLabel: "Opened",
+      detail: audit.explanation,
+    },
+    [ActivityEventKind.DayRecovered]: {
+      outcomeLabel: "Reset",
+      detail: audit.explanation,
+    },
+    [ActivityEventKind.DayClosed]: {
+      outcomeLabel: "Closed",
+      detail: audit.explanation,
+    },
+    [ActivityEventKind.ReflectionLogged]: {
+      outcomeLabel: "Logged",
+      detail: audit.explanation,
+    },
+    [ActivityEventKind.CarryoverReviewed]: {
+      outcomeLabel: "Reviewed",
       detail: audit.explanation,
     },
   };
@@ -318,4 +341,154 @@ export function buildPlanReviewRevertedActivityEvent(params: {
     timeBlockId: null,
     metadata: {},
   };
+}
+
+export function buildDayOpenedActivityEvent(params: {
+  date: string;
+  occurredAt: string;
+  openingFocus: DailyRitualOpeningFocus | null;
+}) {
+  const { date, occurredAt, openingFocus } = params;
+
+  return {
+    ...activityBase(occurredAt),
+    kind: ActivityEventKind.DayOpened,
+    title: `Opened ${date}`,
+    detail:
+      openingFocus === DailyRitualOpeningFocus.ProtectEssentials
+        ? "Opened with a narrower day in mind."
+        : openingFocus === DailyRitualOpeningFocus.MeaningfulProgress
+          ? "Opened with one meaningful move as the anchor."
+          : openingFocus === DailyRitualOpeningFocus.KeepItLight
+            ? "Opened with a lighter day in mind."
+            : "Opened the day intentionally.",
+    outcomeLabel: "Opened",
+    goalId: null,
+    milestoneId: null,
+    taskId: null,
+    dailyPlanId: null,
+    timeBlockId: null,
+    metadata: {
+      date,
+      openingFocus,
+    },
+  } satisfies ActivityEvent;
+}
+
+export function buildDayRecoveredActivityEvent(params: {
+  date: string;
+  occurredAt: string;
+  recoveryMode: DailyRitualRecoveryMode;
+  summary: string;
+  changedTaskCount: number;
+  changedBlockCount: number;
+}) {
+  const { date, occurredAt, recoveryMode, summary, changedTaskCount, changedBlockCount } = params;
+
+  return {
+    ...activityBase(occurredAt),
+    kind: ActivityEventKind.DayRecovered,
+    title: `Recovered ${date}`,
+    detail: summary,
+    outcomeLabel: "Recovered",
+    goalId: null,
+    milestoneId: null,
+    taskId: null,
+    dailyPlanId: null,
+    timeBlockId: null,
+    metadata: {
+      date,
+      recoveryMode,
+      changedTaskCount,
+      changedBlockCount,
+    },
+  } satisfies ActivityEvent;
+}
+
+export function buildDayClosedActivityEvent(params: {
+  date: string;
+  occurredAt: string;
+  completedCount: number;
+  unfinishedCount: number;
+}) {
+  const { date, occurredAt, completedCount, unfinishedCount } = params;
+
+  return {
+    ...activityBase(occurredAt),
+    kind: ActivityEventKind.DayClosed,
+    title: `Closed ${date}`,
+    detail: `${completedCount} completed, ${unfinishedCount} left for a deliberate next step.`,
+    outcomeLabel: "Closed",
+    goalId: null,
+    milestoneId: null,
+    taskId: null,
+    dailyPlanId: null,
+    timeBlockId: null,
+    metadata: {
+      date,
+      completedCount,
+      unfinishedCount,
+    },
+  } satisfies ActivityEvent;
+}
+
+export function buildReflectionLoggedActivityEvent(params: {
+  date: string;
+  occurredAt: string;
+  dayLoad: string | null;
+  energy: string | null;
+  clarity: string | null;
+}) {
+  const { date, occurredAt, dayLoad, energy, clarity } = params;
+
+  return {
+    ...activityBase(occurredAt),
+    kind: ActivityEventKind.ReflectionLogged,
+    title: `Reflected on ${date}`,
+    detail: "Logged a quick read on load, energy, and clarity.",
+    outcomeLabel: "Reflected",
+    goalId: null,
+    milestoneId: null,
+    taskId: null,
+    dailyPlanId: null,
+    timeBlockId: null,
+    metadata: {
+      date,
+      dayLoad,
+      energy,
+      clarity,
+    },
+  } satisfies ActivityEvent;
+}
+
+export function buildCarryoverReviewedActivityEvent(params: {
+  date: string;
+  occurredAt: string;
+  decision: DailyRitualCarryDecision;
+  unfinishedCount: number;
+}) {
+  const { date, occurredAt, decision, unfinishedCount } = params;
+
+  return {
+    ...activityBase(occurredAt),
+    kind: ActivityEventKind.CarryoverReviewed,
+    title: `Reviewed carryover for ${date}`,
+    detail:
+      decision === DailyRitualCarryDecision.CarryForward
+        ? "Unfinished work was carried forward."
+        : decision === DailyRitualCarryDecision.SendToReview
+          ? "Unfinished work was sent back for review."
+          : "Carryover was left undecided for now.",
+    outcomeLabel: "Carryover",
+    goalId: null,
+    milestoneId: null,
+    taskId: null,
+    dailyPlanId: null,
+    timeBlockId: null,
+    metadata: {
+      date,
+      decision,
+      unfinishedCount,
+    },
+  } satisfies ActivityEvent;
 }

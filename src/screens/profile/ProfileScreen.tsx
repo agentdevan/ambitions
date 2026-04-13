@@ -151,7 +151,7 @@ export function ProfileScreen({ navigation }: Props) {
           <DrillInRow
             title="Planning"
             subtitle={planningSummary.intensityLabel}
-            detail={`${planningSummary.taskLabel} · ${planningSummary.adaptiveLabel}`}
+            detail={`${planningSummary.taskLabel} · ${planningSummary.unfinishedWorkLabel}`}
             actionLabel="Open"
             leading={<Ionicons color={theme.colors.text.secondary} name="options-outline" size={18} />}
             onPress={() => navigation.navigate("ProfilePlanningPreferences")}
@@ -218,10 +218,11 @@ export function ProfileScreen({ navigation }: Props) {
         <Surface className="gap-3">
           <AppText variant="section">What&apos;s controllable now</AppText>
           <AppText tone="secondary" variant="caption">
-            Plan weight, task size, reminders, calendar refresh, account syncing, and appearance are yours to tune.
+            Plan weight, unfinished-work handling, ritual reminders, calendar refresh, account syncing, and appearance are yours to tune.
           </AppText>
           <View className="flex-row flex-wrap gap-2">
             <Pill label={planningSummary.intensityLabel} tone="quiet" />
+            <Pill label={planningSummary.unfinishedWorkLabel} tone="quiet" />
             <Pill label={calendarSummary.badge} tone="quiet" />
             <Pill label={account ? accountSummary.headline : "Local only"} tone="quiet" />
           </View>

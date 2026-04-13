@@ -1,4 +1,4 @@
-import { DailyPlan, TimeBlock } from "../../domain/models";
+import { DailyPlan, DailyRitualState, TimeBlock } from "../../domain/models";
 import { DatabaseClient } from "../../data/sqlite/client";
 import { decodeJson, encodeJson, entityParams, mapEntityRecord } from "./shared";
 import { PlanRepository } from "../PlanRepository";
@@ -48,6 +48,28 @@ interface TimeBlockRow {
   updated_at: string;
 }
 
+interface DailyRitualStateRow {
+  id: string;
+  date: string;
+  opened_at: string | null;
+  opening_focus: DailyRitualState["openingFocus"];
+  recovery_moments_json: string;
+  closed_at: string | null;
+  day_load_rating: DailyRitualState["dayLoadRating"];
+  energy_rating: DailyRitualState["energyRating"];
+  clarity_rating: DailyRitualState["clarityRating"];
+  reflection_note: string | null;
+  carry_decision_summary_json: string | null;
+  metadata_json: string;
+  owner_user_id: string | null;
+  remote_id: string | null;
+  sync_state: DailyRitualState["syncState"];
+  version: number;
+  last_synced_at: string | null;
+  created_at: string;
+  updated_at: string;
+}
+
 export class SQLitePlanRepository extends SQLiteRepository implements PlanRepository {
   constructor(database: DatabaseClient) {
     super(database);
@@ -66,11 +88,31 @@ export class SQLitePlanRepository extends SQLiteRepository implements PlanReposi
     return mapDailyPlanRow(row);
   }
 
+  async getDailyRitualState(date: string) {
+    const row = await this.database.getFirst<DailyRitualStateRow>(
+      "SELECT * FROM daily_ritual_states WHERE date = ? LIMIT 1;",
+      [date],
+    );
+
+    if (!row) {
+      return null;
+    }
+
+    return mapDailyRitualStateRow(row);
+  }
+
   async listDailyPlans() {
     const rows = await this.database.getAll<DailyPlanRow>(
       "SELECT * FROM daily_plans ORDER BY date ASC;",
     );
     return rows.map(mapDailyPlanRow);
+  }
+
+  async listDailyRitualStates() {
+    const rows = await this.database.getAll<DailyRitualStateRow>(
+      "SELECT * FROM daily_ritual_states ORDER BY date ASC;",
+    );
+    return rows.map(mapDailyRitualStateRow);
   }
 
   async listTimeBlocks() {
@@ -113,6 +155,44 @@ export class SQLitePlanRepository extends SQLiteRepository implements PlanReposi
             $totalCommittedMinutes: plan.totalCommittedMinutes,
             $adaptationProfileId: plan.adaptationProfileId,
             $metadataJson: encodeJson(plan.metadata),
+          },
+        );
+      }
+    });
+  }
+
+  async saveDailyRitualStates(states: DailyRitualState[]) {
+    await this.database.withTransaction(async (client) => {
+      for (const state of states) {
+        await client.run(
+          `
+            INSERT OR REPLACE INTO daily_ritual_states (
+              id, date, opened_at, opening_focus, recovery_moments_json, closed_at,
+              day_load_rating, energy_rating, clarity_rating, reflection_note,
+              carry_decision_summary_json, metadata_json, owner_user_id, remote_id, sync_state,
+              version, last_synced_at, created_at, updated_at
+            ) VALUES (
+              $id, $date, $openedAt, $openingFocus, $recoveryMomentsJson, $closedAt,
+              $dayLoadRating, $energyRating, $clarityRating, $reflectionNote,
+              $carryDecisionSummaryJson, $metadataJson, $ownerUserId, $remoteId, $syncState,
+              $version, $lastSyncedAt, $createdAt, $updatedAt
+            );
+          `,
+          {
+            ...entityParams(state),
+            $date: state.date,
+            $openedAt: state.openedAt,
+            $openingFocus: state.openingFocus,
+            $recoveryMomentsJson: encodeJson(state.recoveryMoments),
+            $closedAt: state.closedAt,
+            $dayLoadRating: state.dayLoadRating,
+            $energyRating: state.energyRating,
+            $clarityRating: state.clarityRating,
+            $reflectionNote: state.reflectionNote,
+            $carryDecisionSummaryJson: state.carryDecisionSummary
+              ? encodeJson(state.carryDecisionSummary)
+              : null,
+            $metadataJson: encodeJson(state.metadata),
           },
         );
       }
@@ -185,6 +265,24 @@ function mapTimeBlockRow(row: TimeBlockRow): TimeBlock {
     note: row.note,
     energyLabel: row.energy_label,
     sourceConstraintId: row.source_constraint_id,
+    metadata: decodeJson(row.metadata_json),
+  });
+}
+
+function mapDailyRitualStateRow(row: DailyRitualStateRow): DailyRitualState {
+  return mapEntityRecord<DailyRitualState>(row, {
+    date: row.date,
+    openedAt: row.opened_at,
+    openingFocus: row.opening_focus,
+    recoveryMoments: decodeJson(row.recovery_moments_json),
+    closedAt: row.closed_at,
+    dayLoadRating: row.day_load_rating,
+    energyRating: row.energy_rating,
+    clarityRating: row.clarity_rating,
+    reflectionNote: row.reflection_note,
+    carryDecisionSummary: row.carry_decision_summary_json
+      ? decodeJson(row.carry_decision_summary_json)
+      : null,
     metadata: decodeJson(row.metadata_json),
   });
 }

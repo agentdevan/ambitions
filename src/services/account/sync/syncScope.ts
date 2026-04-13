@@ -2,6 +2,7 @@ import {
   AdaptationProfile,
   ActivityEvent,
   DailyPlan,
+  DailyRitualState,
   EntityRecord,
   EntitySyncState,
   Goal,
@@ -18,6 +19,7 @@ export type SyncEntityRecord =
   | GoalMilestone
   | Task
   | DailyPlan
+  | DailyRitualState
   | TimeBlock
   | UserPreferences
   | NotificationPreference
@@ -29,6 +31,7 @@ export const syncEntityOrder: SyncEntityKind[] = [
   "milestone",
   "task",
   "daily_plan",
+  "daily_ritual_state",
   "time_block",
   "activity_event",
   "preferences",

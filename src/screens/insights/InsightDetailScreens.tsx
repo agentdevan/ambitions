@@ -71,9 +71,9 @@ export function InsightContinuityScreen() {
                   detail: "Completion events this week",
                 },
                 {
-                  label: "Reshaped",
-                  value: String(summary.reshapedThisWeek),
-                  detail: "Deferred, moved, or revised",
+                  label: "Open / close",
+                  value: `${Math.round(summary.openConsistency * 100)} / ${Math.round(summary.closeConsistency * 100)}%`,
+                  detail: "Days opened and closed intentionally",
                 },
               ]}
             />
@@ -90,8 +90,26 @@ export function InsightContinuityScreen() {
               items={[
                 summary.personalizedHighlights[0] ?? summary.momentumCopy,
                 summary.personalizedHighlights[1] ?? summary.planCopy,
+                summary.planStabilityCopy,
+                summary.closingImpactCopy,
               ]}
             />
+          </Surface>
+        </DetailSection>
+
+        <DetailSection
+          title="Daily rituals"
+          description="Opening, recovery, and closeout behavior."
+        >
+          <Surface className="gap-3 mb-0">
+            <QuietMetaLine
+              items={[
+                `${summary.openedThisWeek} opened this week`,
+                `${summary.closedThisWeek} closed this week`,
+                `${summary.recoveryUsedThisWeek} recovery${summary.recoveryUsedThisWeek === 1 ? "" : "ies"} used`,
+              ]}
+            />
+            <AppText tone="secondary">{summary.carryoverQualityCopy}</AppText>
           </Surface>
         </DetailSection>
 

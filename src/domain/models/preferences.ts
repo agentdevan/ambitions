@@ -11,6 +11,9 @@ export enum ReminderType {
   PlanReview = "plan_review",
   ReplanPrompt = "replan_prompt",
   MomentumNudge = "momentum_nudge",
+  MorningStart = "morning_start",
+  EveningClose = "evening_close",
+  RecoveryPrompt = "recovery_prompt",
 }
 
 export enum NotificationChannel {

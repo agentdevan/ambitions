@@ -102,9 +102,9 @@ export function InsightsScreen({ navigation }: Props) {
               detail="Completion share"
             />
             <StatCard
-              label="Plan drift"
-              value={String(summary.planChangeCount)}
-              detail="Structural changes"
+              label="Open / close"
+              value={`${Math.round(summary.openConsistency * 100)} / ${Math.round(summary.closeConsistency * 100)}%`}
+              detail="Weekly ritual consistency"
             />
           </View>
 
@@ -129,13 +129,18 @@ export function InsightsScreen({ navigation }: Props) {
             <AppText variant="title">Momentum</AppText>
           </View>
           <MomentumBars points={summary.momentum} />
+          <View className="flex-row flex-wrap gap-2">
+            <Pill label={`${summary.openedThisWeek} opened`} tone="quiet" />
+            <Pill label={`${summary.closedThisWeek} closed`} tone="quiet" />
+            <Pill label={`${summary.recoveryUsedThisWeek} recoveries`} tone="quiet" />
+          </View>
         </Surface>
 
         <View className="gap-3">
           <DrillInRow
             title="Continuity"
             subtitle="Momentum and consistency"
-            detail={`${summary.movingGoalCount} moving`}
+            detail={`${summary.openedThisWeek} opens · ${summary.closedThisWeek} closes`}
             actionLabel="Open"
             leading={<Ionicons color={theme.colors.text.secondary} name="pulse-outline" size={18} />}
             onPress={() => navigation.navigate("InsightContinuity")}
@@ -157,6 +162,14 @@ export function InsightsScreen({ navigation }: Props) {
               <Ionicons color={theme.colors.text.secondary} name="swap-horizontal-outline" size={18} />
             }
             onPress={() => navigation.navigate("InsightPlanChanges")}
+          />
+          <DrillInRow
+            title="Ritual effects"
+            subtitle={summary.planStabilityCopy}
+            detail={summary.closingImpactCopy}
+            actionLabel="Open"
+            leading={<Ionicons color={theme.colors.text.secondary} name="repeat-outline" size={18} />}
+            onPress={() => navigation.navigate("InsightContinuity")}
           />
           <DrillInRow
             title="Capacity"

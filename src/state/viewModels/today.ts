@@ -1,10 +1,16 @@
 import {
   AdaptationProfile,
+  ActivityEvent,
+  ActivityEventKind,
   CalendarConnectionState,
   CalendarPermissionState,
   CalendarSyncState,
   CapacityLoad,
   DailyPlan,
+  DailyRitualCarryDecision,
+  DailyRitualOpeningFocus,
+  DailyRitualRecoveryMode,
+  DailyRitualState,
   Goal,
   GoalStatus,
   ReplanSuggestionType,
@@ -105,6 +111,40 @@ export interface TodayRecommendation {
   options: TodayOpportunityOption[];
 }
 
+export interface TodayOpeningOption {
+  focus: DailyRitualOpeningFocus;
+  label: string;
+  description: string;
+}
+
+export interface TodayRecoveryOption {
+  mode: DailyRitualRecoveryMode;
+  label: string;
+  description: string;
+}
+
+export interface TodayCloseSummary {
+  completedCount: number;
+  carriedCount: number;
+  unfinishedCount: number;
+  structuralChangeCount: number;
+  defaultDecision: DailyRitualCarryDecision;
+}
+
+export interface TodayRitualSurface {
+  kind: "opening" | "recovery" | "closeout";
+  title: string;
+  summary: string;
+  detail: string;
+  keyConstraint: string;
+  primaryLabel: string;
+  openingOptions?: TodayOpeningOption[];
+  recommendedRecoveryMode?: DailyRitualRecoveryMode;
+  recoveryOptions?: TodayRecoveryOption[];
+  recoveryReasons?: string[];
+  closeSummary?: TodayCloseSummary;
+}
+
 export interface TodayStatusSnapshot {
   mode: TodayStatusMode;
   eyebrow: string;
@@ -148,6 +188,7 @@ export interface TodayViewModel {
     calendarStatusLabel: string;
     calendarDetail: string;
   };
+  ritual: TodayRitualSurface | null;
 }
 
 function calendarStatus(connectionState: CalendarConnectionState | null, constraintCount: number) {
@@ -775,6 +816,240 @@ function buildRecommendation(params: {
   };
 }
 
+const openingOptions: TodayOpeningOption[] = [
+  {
+    focus: DailyRitualOpeningFocus.ProtectEssentials,
+    label: "Protect essentials",
+    description: "Keep the day narrower and defensible.",
+  },
+  {
+    focus: DailyRitualOpeningFocus.MeaningfulProgress,
+    label: "Move one meaningful thing",
+    description: "Bias toward the best substantive move.",
+  },
+  {
+    focus: DailyRitualOpeningFocus.KeepItLight,
+    label: "Keep it light",
+    description: "Preserve energy and avoid overfilling the day.",
+  },
+];
+
+const recoveryOptions: TodayRecoveryOption[] = [
+  {
+    mode: DailyRitualRecoveryMode.SalvageEssentials,
+    label: "Salvage essentials",
+    description: "Hold only what still deserves today.",
+  },
+  {
+    mode: DailyRitualRecoveryMode.RebalanceToday,
+    label: "Rebalance today",
+    description: "Rebuild the remaining day around what still fits.",
+  },
+  {
+    mode: DailyRitualRecoveryMode.LightenRest,
+    label: "Lighten the rest",
+    description: "Reduce pressure and keep the afternoon believable.",
+  },
+];
+
+function buildKeyConstraint(params: {
+  constraints: ScheduleConstraint[];
+  schedule: SchedulingOutput | null;
+  nextBlock: TimeBlock | null;
+}) {
+  const calendarConstraint = params.constraints
+    .filter((constraint) => constraint.source === "calendar")
+    .sort((left, right) => left.startsAt.localeCompare(right.startsAt))[0];
+
+  if (params.schedule?.signals.overloadWarning) {
+    return "Capacity is already tighter than the original day shape allows.";
+  }
+
+  if (calendarConstraint) {
+    return `${calendarConstraint.title} is shaping the available room today.`;
+  }
+
+  if (params.nextBlock) {
+    return `${params.nextBlock.title} sets the next hard edge at ${formatTimeLabel(params.nextBlock.startsAt)}.`;
+  }
+
+  return "The main constraint is staying realistic with the room that's actually left.";
+}
+
+function countStructuralChanges(events: ActivityEvent[], date: string, ritualState: DailyRitualState | null) {
+  const eventChanges = events.filter(
+    (event) =>
+      event.date === date &&
+      [
+        ActivityEventKind.PlanReviewAccepted,
+        ActivityEventKind.PlanReviewGenerated,
+        ActivityEventKind.PlanReviewReverted,
+        ActivityEventKind.GoalUpdated,
+        ActivityEventKind.TaskRescheduled,
+        ActivityEventKind.DayRecovered,
+      ].includes(event.kind),
+  ).length;
+
+  return eventChanges + (ritualState?.recoveryMoments.length ?? 0);
+}
+
+function buildRitualSurface(params: {
+  date: string;
+  tasks: Task[];
+  blocks: TimeBlock[];
+  openWindow: TodayOpenWindow | null;
+  recommendation: TodayRecommendation;
+  ritualState: DailyRitualState | null;
+  constraints: ScheduleConstraint[];
+  schedule: SchedulingOutput | null;
+  nextBlock: TimeBlock | null;
+  activityEvents: ActivityEvent[];
+}): TodayRitualSurface | null {
+  const now = new Date();
+  const currentDate = getCurrentLocalDateString();
+  const nowMs = now.getTime();
+
+  if (params.date !== currentDate) {
+    return null;
+  }
+
+  const keyConstraint = buildKeyConstraint({
+    constraints: params.constraints,
+    schedule: params.schedule,
+    nextBlock: params.nextBlock,
+  });
+
+  if (!params.ritualState?.openedAt) {
+    return {
+      kind: "opening",
+      title: "Open the day with a clean read.",
+      summary:
+        params.recommendation.taskId && params.recommendation.summary
+          ? `${params.schedule?.capacitySummary.unusedCapacityMinutes ?? 0} minutes still fit. ${params.recommendation.summary} is the first useful move.`
+          : `${params.schedule?.capacitySummary.unusedCapacityMinutes ?? 0} minutes still fit today.`,
+      detail: "A quick opening locks the day in without turning it into a setup ritual.",
+      keyConstraint,
+      primaryLabel: "Start today",
+      openingOptions,
+    };
+  }
+
+  if (params.ritualState.closedAt) {
+    return null;
+  }
+
+  const overdueBlocks = params.blocks.filter((block) => {
+    const startMs = Date.parse(block.startsAtDateTime);
+    return (
+      block.state === TimeBlockState.Scheduled &&
+      !Number.isNaN(startMs) &&
+      startMs < nowMs - 20 * 60 * 1000
+    );
+  });
+  const carryTasks = params.tasks.filter((task) =>
+    [TaskStatus.Deferred, TaskStatus.Missed, TaskStatus.Split, TaskStatus.Substituted].includes(
+      task.status,
+    ),
+  );
+  const latestRecoveryAt = params.ritualState.recoveryMoments.at(-1)?.occurredAt ?? null;
+  const recoveredRecently =
+    latestRecoveryAt !== null && nowMs - Date.parse(latestRecoveryAt) < 90 * 60 * 1000;
+
+  const recoveryReasons: string[] = [];
+
+  if (overdueBlocks.length > 0) {
+    recoveryReasons.push(
+      overdueBlocks.length === 1
+        ? "The next planned block has already slipped."
+        : `${overdueBlocks.length} planned blocks have slipped past their intended window.`,
+    );
+  }
+
+  if (carryTasks.length >= 2) {
+    recoveryReasons.push(
+      `${carryTasks.length} pieces of work are already sitting in carryover states.`,
+    );
+  }
+
+  if ((params.schedule?.signals.overloadWarning ?? false) && (params.openWindow?.availableMinutes ?? 0) >= 25) {
+    recoveryReasons.push("There is still usable room left, but the original day shape is no longer believable.");
+  }
+
+  if (
+    !recoveredRecently &&
+    recoveryReasons.length > 0 &&
+    (params.openWindow?.availableMinutes ?? 0) >= 15
+  ) {
+    const recommendedRecoveryMode =
+      params.schedule?.signals.overloadWarning || (params.openWindow?.availableMinutes ?? 0) < 25
+        ? DailyRitualRecoveryMode.LightenRest
+        : carryTasks.length >= 3 || overdueBlocks.length >= 2
+          ? DailyRitualRecoveryMode.SalvageEssentials
+          : DailyRitualRecoveryMode.RebalanceToday;
+
+    return {
+      kind: "recovery",
+      title: "The day has drifted. Reset it once, cleanly.",
+      summary:
+        recommendedRecoveryMode === DailyRitualRecoveryMode.SalvageEssentials
+          ? "Keep only what still deserves today."
+          : recommendedRecoveryMode === DailyRitualRecoveryMode.LightenRest
+            ? "Reduce the rest of the day's pressure."
+            : "Rebuild the remaining day around what still fits.",
+      detail: "Ambitions can reshape the remaining work without making you rebuild the whole day by hand.",
+      keyConstraint,
+      primaryLabel: "Apply recovery",
+      recommendedRecoveryMode,
+      recoveryOptions,
+      recoveryReasons,
+    };
+  }
+
+  const completedCount = params.tasks.filter((task) => task.status === TaskStatus.Completed).length;
+  const unfinishedTasks = params.tasks.filter((task) =>
+    ![TaskStatus.Completed, TaskStatus.Cancelled].includes(task.status),
+  );
+  const carriedCount = unfinishedTasks.filter((task) =>
+    [TaskStatus.Deferred, TaskStatus.Missed, TaskStatus.Split, TaskStatus.Substituted].includes(
+      task.status,
+    ),
+  ).length;
+  const latestBlockEnd = params.blocks
+    .map((block) => Date.parse(block.endsAtDateTime))
+    .filter((value) => !Number.isNaN(value))
+    .sort((left, right) => right - left)[0];
+  const showCloseout =
+    now.getHours() >= 17 || (latestBlockEnd !== undefined && nowMs >= latestBlockEnd - 20 * 60 * 1000);
+
+  if (!showCloseout) {
+    return null;
+  }
+
+  return {
+    kind: "closeout",
+    title: "Close the day while it is still fresh.",
+    summary:
+      unfinishedTasks.length > 0
+        ? `${completedCount} moved. ${unfinishedTasks.length} still need a deliberate next destination.`
+        : `${completedCount} moved. The rest of the day is already clear.`,
+    detail: "A short closeout captures what changed, what carried, and how the day actually felt.",
+    keyConstraint,
+    primaryLabel: "Close the day",
+    closeSummary: {
+      completedCount,
+      carriedCount,
+      unfinishedCount: unfinishedTasks.length,
+      structuralChangeCount: countStructuralChanges(
+        params.activityEvents,
+        params.date,
+        params.ritualState,
+      ),
+      defaultDecision:
+        params.ritualState.carryDecisionSummary?.decision ?? DailyRitualCarryDecision.CarryForward,
+    },
+  };
+}
+
 export function buildTodayViewModel(params: {
   date: string;
   dailyPlan: DailyPlan | null;
@@ -787,6 +1062,8 @@ export function buildTodayViewModel(params: {
   tasks: Task[];
   calendarConnectionState: CalendarConnectionState | null;
   adaptiveEnabled: boolean;
+  ritualState: DailyRitualState | null;
+  activityEvents: ActivityEvent[];
 }): TodayViewModel {
   const nowIso = new Date().toISOString();
   const isCurrentDate = params.date === getCurrentLocalDateString();
@@ -950,6 +1227,18 @@ export function buildTodayViewModel(params: {
     profile: params.profile,
     adaptiveEnabled: params.adaptiveEnabled,
   });
+  const ritual = buildRitualSurface({
+    date: params.date,
+    tasks: params.tasks,
+    blocks: orderedBlocks,
+    openWindow,
+    recommendation,
+    ritualState: params.ritualState,
+    constraints: params.constraints,
+    schedule: params.schedule,
+    nextBlock: rawNextBlock,
+    activityEvents: params.activityEvents,
+  });
 
   return {
     date: params.date,
@@ -1028,5 +1317,6 @@ export function buildTodayViewModel(params: {
       recovery,
     },
     integration,
+    ritual,
   };
 }

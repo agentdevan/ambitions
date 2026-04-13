@@ -4,6 +4,7 @@ import {
   ActivityEvent,
   CalendarConnectionState,
   DailyPlan,
+  DailyRitualState,
   Goal,
   GoalMilestone,
   GoalStatus,
@@ -35,6 +36,8 @@ export interface FoundationSnapshot {
   notificationPreferences: NotificationPreference[];
   adaptationProfile: AdaptationProfile | null;
   dailyPlan: DailyPlan | null;
+  dailyRitual: DailyRitualState | null;
+  dailyRitualHistory: DailyRitualState[];
   blocks: TimeBlock[];
   tasks: Task[];
   allTasks: Task[];
@@ -72,6 +75,8 @@ async function syncNotificationsForSnapshot(snapshot: FoundationSnapshot) {
     timeBlocks: snapshot.blocks,
     tasks: snapshot.tasks,
     preferences: snapshot.notificationPreferences,
+    productPreferences: snapshot.productPreferences,
+    dailyRitual: snapshot.dailyRitual,
   });
 }
 
@@ -94,6 +99,8 @@ export async function loadFoundationSnapshot(date: string): Promise<FoundationSn
     notificationPreferences,
     adaptationProfile,
     dailyPlan,
+    dailyRitual,
+    dailyRitualHistory,
     tasks,
     allTasks,
     calendarConnectionState,
@@ -108,6 +115,8 @@ export async function loadFoundationSnapshot(date: string): Promise<FoundationSn
     appServices.repositories.preferences.listNotificationPreferences(),
     appServices.repositories.adaptation.getLatestProfile(),
     appServices.repositories.planning.getDailyPlan(date),
+    appServices.repositories.planning.getDailyRitualState(date),
+    appServices.repositories.planning.listDailyRitualStates(),
     appServices.repositories.tasks.listTasksForDate(date),
     appServices.repositories.tasks.listTasks(),
     appServices.repositories.integration.getCalendarConnectionState(),
@@ -175,6 +184,8 @@ export async function loadFoundationSnapshot(date: string): Promise<FoundationSn
     notificationPreferences,
     adaptationProfile: effectiveAdaptationProfile,
     dailyPlan,
+    dailyRitual,
+    dailyRitualHistory,
     blocks,
     tasks,
     allTasks,
@@ -197,6 +208,8 @@ export async function loadFoundationSnapshot(date: string): Promise<FoundationSn
             tasks,
             calendarConnectionState,
             adaptiveEnabled: productPreferences.adaptivePlanningEnabled,
+            ritualState: dailyRitual,
+            activityEvents,
           })
         : null,
   };
@@ -222,6 +235,8 @@ export async function refreshAllState(date: string) {
     replanSuggestions: snapshot.replanSuggestions,
     activityEvents: snapshot.activityEvents,
     dailyPlan: snapshot.schedule?.dailyPlan ?? snapshot.dailyPlan,
+    dailyRitual: snapshot.dailyRitual,
+    dailyRitualHistory: snapshot.dailyRitualHistory,
     schedule: snapshot.schedule,
     today: snapshot.today,
     timeBlocksForSelectedDate: snapshot.blocks,

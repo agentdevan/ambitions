@@ -1,6 +1,7 @@
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
 import { LinearGradient } from "expo-linear-gradient";
 import { Ionicons } from "@expo/vector-icons";
+import type { ReactNode } from "react";
 import { useEffect, useMemo, useRef, useState } from "react";
 import { Animated, View } from "react-native";
 
@@ -10,12 +11,23 @@ import { PageHeader } from "../../components/navigation/PageHeader";
 import { GuidancePanel } from "../../components/today/GuidancePanel";
 import { Button } from "../../components/ui/Button";
 import { EmptyStateCard } from "../../components/ui/EmptyStateCard";
+import { OptionChip } from "../../components/ui/OptionChip";
 import { Pill } from "../../components/ui/Pill";
 import { ProgressBar } from "../../components/ui/ProgressBar";
 import { Screen } from "../../components/ui/Screen";
+import { SegmentedControl } from "../../components/ui/SegmentedControl";
 import { Surface } from "../../components/ui/Surface";
 import { AppText } from "../../components/ui/Text";
+import { TextField } from "../../components/ui/TextField";
 import { useResolvedTheme } from "../../design/theme/useResolvedTheme";
+import {
+  DailyRitualCarryDecision,
+  DailyRitualClarityRating,
+  DailyRitualDayLoadRating,
+  DailyRitualEnergyRating,
+  DailyRitualOpeningFocus,
+  DailyRitualRecoveryMode,
+} from "../../domain/models";
 import { TodayStackParamList } from "../../navigation/types";
 import { getGoalReviewDraft } from "../../services/goals/metadata";
 import { useAppStore } from "../../state/useAppStore";
@@ -212,14 +224,64 @@ function SuggestedActionCard({
   );
 }
 
+function RitualCard({
+  children,
+  label,
+}: {
+  children: ReactNode;
+  label: string;
+}) {
+  return (
+    <Surface tone="accent" className="gap-4">
+      <Pill label={label} tone="accent" />
+      {children}
+    </Surface>
+  );
+}
+
 export function TodayScreen({ navigation }: Props) {
   const today = useAppStore((state) => state.today);
   const goals = useAppStore((state) => state.goals);
   const bootStatus = useAppStore((state) => state.bootStatus);
   const planDate = useAppStore((state) => state.planDate);
   const applyTaskAction = useAppStore((state) => state.applyTaskAction);
+  const openDay = useAppStore((state) => state.openDay);
+  const recoverDay = useAppStore((state) => state.recoverDay);
+  const closeDay = useAppStore((state) => state.closeDay);
   const [busyTaskId, setBusyTaskId] = useState<string | null>(null);
+  const [ritualBusy, setRitualBusy] = useState<string | null>(null);
+  const [selectedFocus, setSelectedFocus] = useState<DailyRitualOpeningFocus | null>(null);
+  const [selectedRecoveryMode, setSelectedRecoveryMode] = useState<DailyRitualRecoveryMode | null>(
+    null,
+  );
+  const [dayLoadRating, setDayLoadRating] = useState<DailyRitualDayLoadRating | null>(null);
+  const [energyRating, setEnergyRating] = useState<DailyRitualEnergyRating | null>(null);
+  const [clarityRating, setClarityRating] = useState<DailyRitualClarityRating | null>(null);
+  const [carryDecision, setCarryDecision] = useState<DailyRitualCarryDecision>(
+    DailyRitualCarryDecision.DeferDecision,
+  );
+  const [reflectionNote, setReflectionNote] = useState("");
   const theme = useResolvedTheme();
+
+  useEffect(() => {
+    if (today?.ritual?.kind === "opening") {
+      setSelectedFocus(today.ritual.openingOptions?.[0]?.focus ?? null);
+    }
+
+    if (today?.ritual?.kind === "recovery") {
+      setSelectedRecoveryMode(today.ritual.recommendedRecoveryMode ?? null);
+    }
+
+    if (today?.ritual?.kind === "closeout") {
+      setCarryDecision(
+        today.ritual.closeSummary?.defaultDecision ?? DailyRitualCarryDecision.DeferDecision,
+      );
+      setReflectionNote("");
+      setDayLoadRating(null);
+      setEnergyRating(null);
+      setClarityRating(null);
+    }
+  }, [today?.date, today?.ritual]);
 
   if (!today) {
     const emptyBody =
@@ -316,6 +378,43 @@ export function TodayScreen({ navigation }: Props) {
     navigation.navigate("TodayTimeline");
   }
 
+  async function handleOpenDay() {
+    setRitualBusy("open");
+    try {
+      await openDay(selectedFocus);
+    } finally {
+      setRitualBusy(null);
+    }
+  }
+
+  async function handleRecoverDay() {
+    if (!selectedRecoveryMode) {
+      return;
+    }
+
+    setRitualBusy("recover");
+    try {
+      await recoverDay(selectedRecoveryMode);
+    } finally {
+      setRitualBusy(null);
+    }
+  }
+
+  async function handleCloseDay() {
+    setRitualBusy("close");
+    try {
+      await closeDay({
+        dayLoadRating,
+        energyRating,
+        clarityRating,
+        reflectionNote,
+        carryDecision,
+      });
+    } finally {
+      setRitualBusy(null);
+    }
+  }
+
   return (
     <Screen>
       <View className="gap-5">
@@ -336,6 +435,191 @@ export function TodayScreen({ navigation }: Props) {
           warmth={todayVm.status.warmth}
           focus={todayVm.focus}
         />
+
+        {todayVm.ritual?.kind === "opening" ? (
+          <RitualCard label="Opening ritual">
+            <View className="gap-2">
+              <AppText variant="title">{todayVm.ritual.title}</AppText>
+              <AppText tone="secondary">{todayVm.ritual.summary}</AppText>
+              <AppText tone="secondary" variant="caption">
+                {todayVm.ritual.detail}
+              </AppText>
+            </View>
+            <View className="flex-row flex-wrap gap-2">
+              <Pill label={`${todayVm.capacity.usableMinutes} usable min`} tone="quiet" />
+              <Pill label={todayVm.recommendation.summary} tone="neutral" />
+            </View>
+            <View
+              className="gap-2 rounded-[20px] px-4 py-3.5"
+              style={{
+                backgroundColor: theme.colors.background.elevated,
+                borderWidth: 1,
+                borderColor: theme.colors.border.subtle,
+              }}
+            >
+              <AppText tone="tertiary" variant="micro" style={{ textTransform: "uppercase" }}>
+                Main constraint
+              </AppText>
+              <AppText>{todayVm.ritual.keyConstraint}</AppText>
+            </View>
+            {todayVm.ritual.openingOptions?.length ? (
+              <View className="gap-2">
+                <AppText tone="secondary" variant="caption">
+                  Optional focus
+                </AppText>
+                <View className="flex-row flex-wrap gap-2">
+                  {todayVm.ritual.openingOptions.map((option) => (
+                    <OptionChip
+                      key={option.focus}
+                      selected={selectedFocus === option.focus}
+                      onPress={() => setSelectedFocus(option.focus)}
+                    >
+                      {option.label}
+                    </OptionChip>
+                  ))}
+                </View>
+              </View>
+            ) : null}
+            <Button busy={ritualBusy === "open"} onPress={() => void handleOpenDay()}>
+              {todayVm.ritual.primaryLabel}
+            </Button>
+          </RitualCard>
+        ) : null}
+
+        {todayVm.ritual?.kind === "recovery" ? (
+          <RitualCard label="Recovery ritual">
+            <View className="gap-2">
+              <AppText variant="title">{todayVm.ritual.title}</AppText>
+              <AppText tone="secondary">{todayVm.ritual.summary}</AppText>
+              <AppText tone="secondary" variant="caption">
+                {todayVm.ritual.detail}
+              </AppText>
+            </View>
+            <View
+              className="gap-2 rounded-[20px] px-4 py-3.5"
+              style={{
+                backgroundColor: theme.colors.background.elevated,
+                borderWidth: 1,
+                borderColor: theme.colors.border.subtle,
+              }}
+            >
+              <AppText tone="tertiary" variant="micro" style={{ textTransform: "uppercase" }}>
+                What changed
+              </AppText>
+              <AppText>{todayVm.ritual.keyConstraint}</AppText>
+              {todayVm.ritual.recoveryReasons?.map((reason) => (
+                <AppText key={reason} tone="secondary" variant="caption">
+                  {reason}
+                </AppText>
+              ))}
+            </View>
+            <View className="flex-row flex-wrap gap-2">
+              {todayVm.ritual.recoveryOptions?.map((option) => (
+                <OptionChip
+                  key={option.mode}
+                  selected={selectedRecoveryMode === option.mode}
+                  onPress={() => setSelectedRecoveryMode(option.mode)}
+                >
+                  {option.label}
+                </OptionChip>
+              ))}
+            </View>
+            <Button busy={ritualBusy === "recover"} onPress={() => void handleRecoverDay()}>
+              {todayVm.ritual.primaryLabel}
+            </Button>
+          </RitualCard>
+        ) : null}
+
+        {todayVm.ritual?.kind === "closeout" ? (
+          <RitualCard label="Evening close">
+            <View className="gap-2">
+              <AppText variant="title">{todayVm.ritual.title}</AppText>
+              <AppText tone="secondary">{todayVm.ritual.summary}</AppText>
+            </View>
+            {todayVm.ritual.closeSummary ? (
+              <View className="flex-row flex-wrap gap-3">
+                <MetricTile
+                  label="Completed"
+                  value={String(todayVm.ritual.closeSummary.completedCount)}
+                  detail="Moved cleanly"
+                />
+                <MetricTile
+                  label="Unfinished"
+                  value={String(todayVm.ritual.closeSummary.unfinishedCount)}
+                  detail="Needs a deliberate next step"
+                />
+                <MetricTile
+                  label="Carried"
+                  value={String(todayVm.ritual.closeSummary.carriedCount)}
+                  detail="Already sitting in carry states"
+                />
+                <MetricTile
+                  label="Changes"
+                  value={String(todayVm.ritual.closeSummary.structuralChangeCount)}
+                  detail="Structural shifts today"
+                />
+              </View>
+            ) : null}
+            <View className="gap-3">
+              <SegmentedControl
+                options={[
+                  { label: "Light", value: DailyRitualDayLoadRating.Light },
+                  { label: "Balanced", value: DailyRitualDayLoadRating.Balanced },
+                  { label: "Overloaded", value: DailyRitualDayLoadRating.Overloaded },
+                ]}
+                value={dayLoadRating ?? DailyRitualDayLoadRating.Balanced}
+                onChange={(value) => setDayLoadRating(value as DailyRitualDayLoadRating)}
+              />
+              <SegmentedControl
+                options={[
+                  { label: "Low", value: DailyRitualEnergyRating.Low },
+                  { label: "Normal", value: DailyRitualEnergyRating.Normal },
+                  { label: "High", value: DailyRitualEnergyRating.High },
+                ]}
+                value={energyRating ?? DailyRitualEnergyRating.Normal}
+                onChange={(value) => setEnergyRating(value as DailyRitualEnergyRating)}
+              />
+              <SegmentedControl
+                options={[
+                  { label: "Clear", value: DailyRitualClarityRating.Clear },
+                  { label: "Crowded", value: DailyRitualClarityRating.Crowded },
+                  { label: "Unrealistic", value: DailyRitualClarityRating.Unrealistic },
+                ]}
+                value={clarityRating ?? DailyRitualClarityRating.Clear}
+                onChange={(value) => setClarityRating(value as DailyRitualClarityRating)}
+              />
+            </View>
+            <View className="gap-2">
+              <AppText tone="secondary" variant="caption">
+                Unfinished work
+              </AppText>
+              <View className="flex-row flex-wrap gap-2">
+                {[
+                  [DailyRitualCarryDecision.CarryForward, "Carry forward"],
+                  [DailyRitualCarryDecision.SendToReview, "Send to review"],
+                  [DailyRitualCarryDecision.DeferDecision, "Defer decision"],
+                ].map(([value, label]) => (
+                  <OptionChip
+                    key={String(value)}
+                    selected={carryDecision === value}
+                    onPress={() => setCarryDecision(value as DailyRitualCarryDecision)}
+                  >
+                    {label}
+                  </OptionChip>
+                ))}
+              </View>
+            </View>
+            <TextField
+              label="Quick note (optional)"
+              multiline
+              onChangeText={setReflectionNote}
+              value={reflectionNote}
+            />
+            <Button busy={ritualBusy === "close"} onPress={() => void handleCloseDay()}>
+              {todayVm.ritual.primaryLabel}
+            </Button>
+          </RitualCard>
+        ) : null}
 
         <View className="flex-row flex-wrap gap-3">
           <MetricTile

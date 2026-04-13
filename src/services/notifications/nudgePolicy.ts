@@ -83,6 +83,130 @@ function buildTaskReminders(
   }
 }
 
+function isFutureDate(target: Date, now: Date) {
+  return target.getTime() > now.getTime();
+}
+
+function buildMorningRitualReminder(
+  context: NotificationPlanContext,
+  now: Date,
+  drafts: NotificationDraft[],
+) {
+  const preference = context.preferences.find(
+    (item) => item.reminderType === ReminderType.MorningStart && item.enabled,
+  );
+
+  if (!preference || context.dailyRitual?.openedAt) {
+    return;
+  }
+
+  const [hour, minute] = context.productPreferences.schedule.workdayStart.split(":").map(Number);
+  const triggerDate = new Date(`${context.date}T00:00:00`);
+  triggerDate.setHours(hour, minute - preference.leadTimeMinutes, 0, 0);
+
+  if (
+    !isFutureDate(triggerDate, now) ||
+    isWithinQuietHours(triggerDate, preference.quietHoursStart, preference.quietHoursEnd)
+  ) {
+    return;
+  }
+
+  drafts.push({
+    id: `morning-ritual-${context.date}`,
+    kind: "morning_ritual",
+    title: "Open the day",
+    body: "Take a quiet minute to see today's shape before the day starts moving.",
+    scheduledAt: triggerDate.toISOString(),
+    metadata: {
+      date: context.date,
+    },
+  });
+}
+
+function buildEveningCloseReminder(
+  context: NotificationPlanContext,
+  now: Date,
+  drafts: NotificationDraft[],
+) {
+  const preference = context.preferences.find(
+    (item) => item.reminderType === ReminderType.EveningClose && item.enabled,
+  );
+
+  if (!preference || context.dailyRitual?.closedAt) {
+    return;
+  }
+
+  const [hour, minute] = context.productPreferences.schedule.workdayEnd.split(":").map(Number);
+  const triggerDate = new Date(`${context.date}T00:00:00`);
+  triggerDate.setHours(hour, minute - preference.leadTimeMinutes, 0, 0);
+
+  if (
+    !isFutureDate(triggerDate, now) ||
+    isWithinQuietHours(triggerDate, preference.quietHoursStart, preference.quietHoursEnd)
+  ) {
+    return;
+  }
+
+  drafts.push({
+    id: `evening-close-${context.date}`,
+    kind: "evening_close",
+    title: "Close the day",
+    body: "A short closeout will capture what moved and what should happen next.",
+    scheduledAt: triggerDate.toISOString(),
+    metadata: {
+      date: context.date,
+    },
+  });
+}
+
+function buildRecoveryPrompt(
+  context: NotificationPlanContext,
+  now: Date,
+  drafts: NotificationDraft[],
+) {
+  const preference = context.preferences.find(
+    (item) => item.reminderType === ReminderType.RecoveryPrompt && item.enabled,
+  );
+
+  if (!preference || !context.schedule || !context.dailyRitual?.openedAt || context.dailyRitual.closedAt) {
+    return;
+  }
+
+  const overdueTasks = context.tasks.filter((task) =>
+    [TaskStatus.Missed, TaskStatus.Deferred, TaskStatus.Split, TaskStatus.Substituted].includes(
+      task.status,
+    ),
+  ).length;
+  const openMinutes = context.schedule.capacitySummary.unusedCapacityMinutes;
+  const alreadyRecoveredRecently =
+    context.dailyRitual.recoveryMoments.at(-1)?.occurredAt &&
+    now.getTime() - new Date(context.dailyRitual.recoveryMoments.at(-1)!.occurredAt).getTime() <
+      90 * 60 * 1000;
+
+  if (
+    alreadyRecoveredRecently ||
+    (overdueTasks < 2 && !(context.schedule.signals.overloadWarning && openMinutes >= 30))
+  ) {
+    return;
+  }
+
+  const triggerDate = new Date(now.getTime() + 3 * 60 * 1000);
+  if (isWithinQuietHours(triggerDate, preference.quietHoursStart, preference.quietHoursEnd)) {
+    return;
+  }
+
+  drafts.push({
+    id: `recovery-prompt-${context.date}`,
+    kind: "recovery_prompt",
+    title: "Reset the rest of the day",
+    body: "Ambitions can salvage what still matters without rebuilding the whole day.",
+    scheduledAt: triggerDate.toISOString(),
+    metadata: {
+      date: context.date,
+    },
+  });
+}
+
 function buildStartSmallNudge(
   context: NotificationPlanContext,
   now: Date,
@@ -171,9 +295,12 @@ export function buildNotificationDrafts(context: NotificationPlanContext) {
   const now = new Date();
   const drafts: NotificationDraft[] = [];
 
+  buildMorningRitualReminder(context, now, drafts);
   buildTaskReminders(context, now, drafts);
   buildStartSmallNudge(context, now, drafts);
   buildFreeWindowNudge(context, now, drafts);
+  buildRecoveryPrompt(context, now, drafts);
+  buildEveningCloseReminder(context, now, drafts);
 
   return drafts
     .sort((left, right) => left.scheduledAt.localeCompare(right.scheduledAt))

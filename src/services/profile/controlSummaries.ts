@@ -25,6 +25,12 @@ export function formatReminderTypeLabel(reminderType: ReminderType) {
       return "Replan prompts";
     case ReminderType.MomentumNudge:
       return "Momentum nudges";
+    case ReminderType.MorningStart:
+      return "Morning start";
+    case ReminderType.EveningClose:
+      return "Evening close";
+    case ReminderType.RecoveryPrompt:
+      return "Recovery prompt";
     default:
       return "Reminder";
   }
@@ -44,6 +50,12 @@ export function formatReminderBehavior(preference: NotificationPreference) {
       return "When the day needs reshaping";
     case ReminderType.MomentumNudge:
       return "When a small nudge can keep momentum going";
+    case ReminderType.MorningStart:
+      return `${preference.leadTimeMinutes} min before the day opens`;
+    case ReminderType.EveningClose:
+      return `${preference.leadTimeMinutes} min before closeout time`;
+    case ReminderType.RecoveryPrompt:
+      return "When drift is detected and a clean recovery path is available";
     default:
       return "Active";
   }
@@ -163,11 +175,18 @@ export function summarizePlanningControls(
       : productPreferences.taskSizing === "bigger"
         ? "Deeper blocks"
         : "Mixed task size";
+  const unfinishedWorkLabel =
+    productPreferences.defaultUnfinishedWorkBehavior === "carry_forward"
+      ? "Carry unfinished work forward"
+      : productPreferences.defaultUnfinishedWorkBehavior === "send_to_review"
+        ? "Send unfinished work back to review"
+        : "Ask each evening";
 
   return {
     adaptiveLabel,
     intensityLabel,
     taskLabel,
+    unfinishedWorkLabel,
     learnedSummary:
       productPreferences.adaptivePlanningEnabled && adaptationProfile?.personalization.active
         ? adaptationProfile.personalization.summary.todayApproach

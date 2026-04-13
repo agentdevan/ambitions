@@ -1,10 +1,19 @@
-import { NotificationPreference, Task, TimeBlock } from "../../domain/models";
+import {
+  DailyRitualState,
+  NotificationPreference,
+  Task,
+  TimeBlock,
+} from "../../domain/models";
 import { SchedulingOutput } from "../../engines";
+import { ProductPreferences } from "../../product/types";
 
 export type CalmNotificationKind =
   | "task_reminder"
   | "start_small_nudge"
-  | "free_window_nudge";
+  | "free_window_nudge"
+  | "morning_ritual"
+  | "evening_close"
+  | "recovery_prompt";
 
 export interface NotificationDraft {
   id: string;
@@ -21,6 +30,8 @@ export interface NotificationPlanContext {
   timeBlocks: TimeBlock[];
   tasks: Task[];
   preferences: NotificationPreference[];
+  productPreferences: ProductPreferences;
+  dailyRitual: DailyRitualState | null;
 }
 
 export interface NotificationSyncResult {

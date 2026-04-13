@@ -58,6 +58,7 @@ import {
   ConstraintSource,
   ReminderType,
 } from "../../domain/models";
+import { DefaultUnfinishedWorkBehavior } from "../../product/types";
 
 function MetaLine({ items }: { items: string[] }) {
   return (
@@ -78,6 +79,28 @@ const quietHourPresets = [
 ] as const;
 
 const reminderLeadTimeOptions = [5, 10, 15] as const;
+const ritualReminderLeadTimeOptions = [0, 10, 15] as const;
+const unfinishedWorkBehaviorOptions: Array<{
+  id: DefaultUnfinishedWorkBehavior;
+  label: string;
+  description: string;
+}> = [
+  {
+    id: "carry_forward",
+    label: "Carry forward",
+    description: "Move unfinished work into tomorrow by default.",
+  },
+  {
+    id: "send_to_review",
+    label: "Send to review",
+    description: "Route unfinished work back to review instead of assuming it stays live.",
+  },
+  {
+    id: "ask_each_time",
+    label: "Ask each time",
+    description: "Choose the carry decision during closeout.",
+  },
+];
 
 function describeConstraintSource(constraintCount: number, usingLiveCalendar: boolean) {
   if (usingLiveCalendar) {
@@ -130,7 +153,18 @@ export function ProfileHistoryScreen() {
             items={[
               `${summary.completedThisWeek} completed this week`,
               `${summary.reshapedThisWeek} reshaped`,
-              summary.planCopy,
+              `${summary.openedThisWeek} opened · ${summary.closedThisWeek} closed`,
+            ]}
+          />
+        </Surface>
+
+        <Surface className="gap-3">
+          <AppText variant="section">Daily rituals</AppText>
+          <AppText tone="secondary">{summary.planStabilityCopy}</AppText>
+          <MetaLine
+            items={[
+              `${summary.recoveryUsedThisWeek} recoveries`,
+              summary.carryoverQualityCopy,
             ]}
           />
         </Surface>
@@ -572,6 +606,15 @@ export function ProfileNotificationsScreen() {
   const timeBlockPreference = notificationPreferences.find(
     (preference) => preference.reminderType === ReminderType.TimeBlockStart,
   );
+  const morningPreference = notificationPreferences.find(
+    (preference) => preference.reminderType === ReminderType.MorningStart,
+  );
+  const eveningPreference = notificationPreferences.find(
+    (preference) => preference.reminderType === ReminderType.EveningClose,
+  );
+  const recoveryPreference = notificationPreferences.find(
+    (preference) => preference.reminderType === ReminderType.RecoveryPrompt,
+  );
   const quietHoursSummary = summarizeQuietHours(notificationPreferences);
 
   async function runAction(key: string, action: () => Promise<void>, fallbackError: string) {
@@ -756,6 +799,78 @@ export function ProfileNotificationsScreen() {
           </DetailSection>
         ) : null}
         <DetailSection
+          title="Daily rituals"
+          description="Keep opening and closeout reminders quiet and deliberate."
+        >
+          <View className="gap-3">
+            {[morningPreference, eveningPreference, recoveryPreference]
+              .filter((preference): preference is NonNullable<typeof morningPreference> => Boolean(preference))
+              .map((preference) => (
+                <Surface key={preference.id} className="gap-3 mb-0">
+                  <View className="flex-row items-center justify-between gap-3">
+                    <View className="flex-1 gap-1">
+                      <AppText variant="section">
+                        {formatReminderTypeLabel(preference.reminderType)}
+                      </AppText>
+                      <AppText tone="secondary" variant="caption">
+                        {formatReminderBehavior(preference)}
+                      </AppText>
+                    </View>
+                    <Button
+                      size="compact"
+                      tone={preference.enabled ? "tertiary" : "secondary"}
+                      busy={busyState === `notification:${preference.id}`}
+                      onPress={() =>
+                        void runAction(
+                          `notification:${preference.id}`,
+                          () =>
+                            updateNotificationPreference(preference.reminderType, {
+                              enabled: !preference.enabled,
+                            }),
+                          "Notification preference could not be updated.",
+                        )
+                      }
+                    >
+                      {preference.enabled ? "Mute" : "Enable"}
+                    </Button>
+                  </View>
+                  {preference.reminderType !== ReminderType.RecoveryPrompt ? (
+                    <View className="flex-row flex-wrap gap-2">
+                      {ritualReminderLeadTimeOptions.map((minutes) => (
+                        <OptionChip
+                          key={`${preference.id}:${minutes}`}
+                          selected={preference.leadTimeMinutes === minutes}
+                          onPress={() =>
+                            void runAction(
+                              `lead-time:${preference.id}:${minutes}`,
+                              () =>
+                                updateNotificationPreference(preference.reminderType, {
+                                  enabled: true,
+                                  leadTimeMinutes: minutes,
+                                }),
+                              "Lead time could not be updated.",
+                            )
+                          }
+                        >
+                          {minutes === 0 ? "At time" : `${minutes} min`}
+                        </OptionChip>
+                      ))}
+                    </View>
+                  ) : null}
+                  <QuietMetaLine
+                    items={[
+                      preference.channel === "push" ? "Push" : "In app",
+                      preference.enabled ? "Active" : "Muted",
+                      preference.reminderType === ReminderType.RecoveryPrompt
+                        ? "Shown only when drift is detected"
+                        : quietHoursSummary,
+                    ]}
+                  />
+                </Surface>
+              ))}
+          </View>
+        </DetailSection>
+        <DetailSection
           title="Reminder types"
           description="What Ambitions is allowed to notify you about."
         >
@@ -870,6 +985,11 @@ export function ProfilePlanningPreferencesScreen() {
                   value: planningSummary.taskLabel,
                   detail: "How granular planned work should feel",
                 },
+                {
+                  label: "Unfinished work",
+                  value: planningSummary.unfinishedWorkLabel,
+                  detail: "Default closeout handling",
+                },
               ]}
             />
           }
@@ -915,6 +1035,43 @@ export function ProfilePlanningPreferencesScreen() {
               <AppText variant="caption">{planningStyle.summary}</AppText>
             </View>
           ) : null}
+          </Surface>
+        </DetailSection>
+        <DetailSection
+          title="Closeout default"
+          description="Choose what unfinished work should do when you close the day."
+        >
+          <Surface className="gap-3 mb-0">
+            <AppText tone="secondary" variant="caption">
+              {planningSummary.unfinishedWorkLabel}
+            </AppText>
+            <View className="gap-2">
+              {unfinishedWorkBehaviorOptions.map((option) => (
+                <OptionChip
+                  key={option.id}
+                  selected={productPreferences.defaultUnfinishedWorkBehavior === option.id}
+                  onPress={() =>
+                    void savePreference(
+                      `unfinished:${option.id}`,
+                      {
+                        ...productPreferences,
+                        defaultUnfinishedWorkBehavior: option.id,
+                      },
+                      "The closeout default could not be updated.",
+                    )
+                  }
+                >
+                  {option.label}
+                </OptionChip>
+              ))}
+            </View>
+            <AppText tone="secondary" variant="caption">
+              {
+                unfinishedWorkBehaviorOptions.find(
+                  (option) => option.id === productPreferences.defaultUnfinishedWorkBehavior,
+                )?.description
+              }
+            </AppText>
           </Surface>
         </DetailSection>
         <DetailSection
@@ -976,7 +1133,7 @@ export function ProfilePlanningPreferencesScreen() {
         <Surface className="gap-3">
           <AppText variant="section">Still automatic</AppText>
           <AppText tone="secondary" variant="caption">
-            Ambitions still decides exact task ordering, reshaping details, and most open-time recommendations automatically.
+            Ambitions still decides exact task ordering, recovery reshaping details, and most open-time recommendations automatically.
           </AppText>
         </Surface>
         {busyState ? <AppText tone="tertiary" variant="caption">Saving...</AppText> : null}

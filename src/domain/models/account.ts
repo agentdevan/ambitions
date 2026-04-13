@@ -60,6 +60,7 @@ export type SyncEntityKind =
   | "milestone"
   | "task"
   | "daily_plan"
+  | "daily_ritual_state"
   | "time_block"
   | "preferences"
   | "notification_preference"

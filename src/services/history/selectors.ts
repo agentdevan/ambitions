@@ -255,6 +255,31 @@ export function summarizeInsights(params: {
   const completedMilestones = milestones.filter(
     (milestone) => milestone.status === GoalMilestoneStatus.Completed,
   ).length;
+  const lastWeekDates = new Set(momentum.map((point) => point.date));
+  const ritualEvents = events.filter((event) => lastWeekDates.has(event.date));
+  const openedThisWeek = ritualEvents.filter((event) => event.kind === ActivityEventKind.DayOpened).length;
+  const closedThisWeek = ritualEvents.filter((event) => event.kind === ActivityEventKind.DayClosed).length;
+  const recoveryUsedThisWeek = ritualEvents.filter(
+    (event) => event.kind === ActivityEventKind.DayRecovered,
+  ).length;
+  const carryoverReviewedThisWeek = ritualEvents.filter(
+    (event) => event.kind === ActivityEventKind.CarryoverReviewed,
+  ).length;
+  const carryForwardCount = ritualEvents.filter(
+    (event) =>
+      event.kind === ActivityEventKind.CarryoverReviewed &&
+      event.metadata.decision === "carry_forward",
+  ).length;
+  const sendToReviewCount = ritualEvents.filter(
+    (event) =>
+      event.kind === ActivityEventKind.CarryoverReviewed &&
+      event.metadata.decision === "send_to_review",
+  ).length;
+  const deferredDecisionCount = ritualEvents.filter(
+    (event) =>
+      event.kind === ActivityEventKind.CarryoverReviewed &&
+      event.metadata.decision === "defer_decision",
+  ).length;
   const planChangeCount = events.filter((event) =>
     [
       ActivityEventKind.PlanReviewAccepted,
@@ -280,6 +305,76 @@ export function summarizeInsights(params: {
         ? "The plan changed, but without constant churn."
         : "The plan has been adjusted several times recently.";
   const personalizedHighlights = buildInsightHighlights(profile, adaptiveEnabled);
+  const openConsistency = openedThisWeek / momentum.length;
+  const closeConsistency = closedThisWeek / momentum.length;
+  const activeDates = [...new Set(events.map((event) => event.date))].sort();
+  const nextDayReshapeCounts = activeDates.map((date) => {
+    const nextDate = addDays(date, 1);
+    return {
+      date,
+      closed: events.some(
+        (event) => event.date === date && event.kind === ActivityEventKind.DayClosed,
+      ),
+      nextDayReshapes: events.filter(
+        (event) =>
+          event.date === nextDate &&
+          [
+            ActivityEventKind.TaskDeferred,
+            ActivityEventKind.TaskMissed,
+            ActivityEventKind.TaskSkipped,
+            ActivityEventKind.TaskRescheduled,
+            ActivityEventKind.DayRecovered,
+          ].includes(event.kind),
+      ).length,
+    };
+  });
+  const closedDays = nextDayReshapeCounts.filter((entry) => entry.closed);
+  const openEndedDays = nextDayReshapeCounts.filter((entry) => !entry.closed);
+  const average = (values: number[]) =>
+    values.length > 0 ? values.reduce((sum, value) => sum + value, 0) / values.length : 0;
+  const closedNextDayReshapeAverage = average(
+    closedDays.map((entry) => entry.nextDayReshapes),
+  );
+  const openEndedNextDayReshapeAverage = average(
+    openEndedDays.map((entry) => entry.nextDayReshapes),
+  );
+  const closingImpactCopy =
+    closedDays.length === 0
+      ? "Closeouts have not happened often enough to show a next-day effect yet."
+      : closedNextDayReshapeAverage + 0.25 < openEndedNextDayReshapeAverage
+        ? "Closed days have tended to lead into steadier next mornings."
+        : closedNextDayReshapeAverage > openEndedNextDayReshapeAverage + 0.25
+          ? "Closing has happened, but it has not yet translated into calmer next-day execution."
+          : "Closing the day and next-day drift are running fairly even so far.";
+  const openedPlanChanges = events.filter(
+    (event) =>
+      events.some(
+        (candidate) =>
+          candidate.date === event.date && candidate.kind === ActivityEventKind.DayOpened,
+      ) &&
+      [
+        ActivityEventKind.PlanReviewAccepted,
+        ActivityEventKind.PlanReviewGenerated,
+        ActivityEventKind.PlanReviewReverted,
+        ActivityEventKind.GoalUpdated,
+        ActivityEventKind.TaskRescheduled,
+      ].includes(event.kind),
+  ).length;
+  const unopenedPlanChanges = Math.max(0, planChangeCount - openedPlanChanges);
+  const planStabilityCopy =
+    openedThisWeek === 0
+      ? "Openings have not happened often enough to compare plan stability yet."
+      : openedPlanChanges <= unopenedPlanChanges
+        ? "Days that were opened intentionally have tended to stay steadier."
+        : "Opening the day has not yet reduced plan churn.";
+  const carryoverQualityCopy =
+    carryoverReviewedThisWeek === 0
+      ? "Carryover is still mostly implicit."
+      : sendToReviewCount > carryForwardCount
+        ? "Carryover has been routed back for review more often than pushed forward."
+        : deferredDecisionCount > 0
+          ? "Carry decisions are being made, though some unfinished work is still being left open."
+          : "Carryover has mostly been handled deliberately instead of being left vague.";
 
   return {
     momentum,
@@ -292,6 +387,18 @@ export function summarizeInsights(params: {
     momentumCopy,
     planCopy,
     personalizedHighlights,
+    openedThisWeek,
+    closedThisWeek,
+    recoveryUsedThisWeek,
+    carryoverReviewedThisWeek,
+    carryForwardCount,
+    sendToReviewCount,
+    deferredDecisionCount,
+    openConsistency,
+    closeConsistency,
+    planStabilityCopy,
+    carryoverQualityCopy,
+    closingImpactCopy,
   };
 }
 
