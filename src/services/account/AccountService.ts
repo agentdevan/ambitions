@@ -33,6 +33,8 @@ interface AccountServiceDependencies {
   };
 }
 
+type AccountSnapshotListener = (snapshot: AccountSnapshot) => void;
+
 export class AccountService {
   private readonly remoteClient = new SupabaseAccountClient();
   private readonly syncCoordinator: SyncCoordinator;
@@ -41,6 +43,7 @@ export class AccountService {
   private initializationPromise: Promise<void> | null = null;
   private reconnectListenerUnsubscribe: { remove: () => void } | null = null;
   private lastKnownConnectivity: boolean | null = null;
+  private readonly snapshotListeners = new Set<AccountSnapshotListener>();
 
   constructor(private readonly dependencies: AccountServiceDependencies) {
     this.syncCoordinator = new SyncCoordinator(
@@ -60,6 +63,13 @@ export class AccountService {
 
     await this.initializationPromise;
     this.ensureReconnectListener();
+  }
+
+  subscribe(listener: AccountSnapshotListener) {
+    this.snapshotListeners.add(listener);
+    return () => {
+      this.snapshotListeners.delete(listener);
+    };
   }
 
   async getSnapshot(): Promise<AccountSnapshot> {
@@ -87,8 +97,9 @@ export class AccountService {
       await this.dependencies.accountRepository.saveAttachmentState(nextAttachment);
     }
 
-    const account = auth?.signedInAccountId
-      ? await this.dependencies.accountRepository.getAccount(auth.signedInAccountId)
+    const signedInAccountId = auth?.signedInAccountId ?? null;
+    const account = signedInAccountId
+      ? await this.dependencies.accountRepository.getAccount(signedInAccountId)
       : null;
 
     return {
@@ -96,7 +107,9 @@ export class AccountService {
       auth: auth!,
       attachment: nextAttachment,
       sync: sync!,
-      conflicts,
+      conflicts: signedInAccountId
+        ? conflicts.filter((conflict) => conflict.accountId === signedInAccountId)
+        : [],
     };
   }
 
@@ -534,12 +547,14 @@ export class AccountService {
     );
 
     try {
+      await this.emitSnapshot();
       await syncPromise;
     } finally {
       if (this.activeSyncPromise) {
         await this.activeSyncPromise;
         this.activeSyncPromise = null;
       }
+      await this.emitSnapshot();
     }
   }
 
@@ -663,6 +678,17 @@ export class AccountService {
       );
     } catch {
       // Keep reconnect retries silent; sync state already surfaces issues.
+    }
+  }
+
+  private async emitSnapshot() {
+    if (this.snapshotListeners.size === 0) {
+      return;
+    }
+
+    const snapshot = await this.getSnapshot();
+    for (const listener of this.snapshotListeners) {
+      listener(snapshot);
     }
   }
 

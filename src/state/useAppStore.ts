@@ -216,6 +216,8 @@ function getAttachedAccountId(state: Pick<AppState, "attachmentState" | "authSta
     : null;
 }
 
+let accountSnapshotUnsubscribe: (() => void) | null = null;
+
 export const useAppStore = create<AppState>((set, get) => ({
   bootstrapped: false,
   bootStatus: "idle",
@@ -256,6 +258,11 @@ export const useAppStore = create<AppState>((set, get) => ({
     try {
       const currentPlanDate = getCurrentLocalDateString();
       await initializeAppServices();
+      if (!accountSnapshotUnsubscribe) {
+        accountSnapshotUnsubscribe = appServices.services.account.subscribe((snapshot) => {
+          set(mapAccountSnapshot(snapshot));
+        });
+      }
       await appServices.services.notifications.configure();
       const snapshot = await refreshAllState(currentPlanDate);
       const accountSnapshot = await appServices.services.account.getSnapshot();
