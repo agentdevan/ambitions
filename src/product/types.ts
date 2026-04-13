@@ -23,6 +23,16 @@ export type DefaultWeeklyCarryoverBehavior =
   | "essentials_only"
   | "review_first"
   | "aggressive";
+export type MonthlyPosturePreference = "stabilize" | "build_momentum" | "push_output";
+export type MonthlyEmphasisPreference =
+  | "protect_essentials"
+  | "deepen_one_priority_area"
+  | "rebalance_neglected_areas";
+export type MonthlyPressurePreference = "lighter" | "balanced" | "fuller";
+export type MonthlyCarryoverPreference =
+  | "prune_aggressively"
+  | "review_before_carrying"
+  | "tolerate_more_carryover";
 
 export interface ScheduleDefaults {
   sleepStart: string;
@@ -47,6 +57,13 @@ export interface ProductPreferences {
   weeklyReviewTime: string;
   autoPromptNextWeekShaping: boolean;
   defaultWeeklyCarryoverBehavior: DefaultWeeklyCarryoverBehavior;
+  monthlyReviewDay: number;
+  monthlyReviewTime: string;
+  autoPromptNextMonthShaping: boolean;
+  defaultMonthlyPosture: MonthlyPosturePreference;
+  defaultMonthlyEmphasis: MonthlyEmphasisPreference;
+  defaultMonthlyPressure: MonthlyPressurePreference;
+  defaultMonthlyCarryoverStance: MonthlyCarryoverPreference;
   schedule: ScheduleDefaults;
 }
 

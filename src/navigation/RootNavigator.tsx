@@ -16,6 +16,7 @@ import {
   InsightActivityScreen,
   InsightCapacityScreen,
   InsightContinuityScreen,
+  InsightMonthlyReviewScreen,
   InsightPlanChangesScreen,
 } from "../screens/insights/InsightDetailScreens";
 import { OnboardingScreen } from "../screens/onboarding/OnboardingScreen";
@@ -206,6 +207,11 @@ function InsightsNavigator() {
         name="InsightsHome"
         component={InsightsScreen}
         options={{ headerShown: false }}
+      />
+      <InsightsStack.Screen
+        name="InsightMonthlyReview"
+        component={InsightMonthlyReviewScreen}
+        options={{ title: "Monthly Review" }}
       />
       <InsightsStack.Screen
         name="InsightContinuity"

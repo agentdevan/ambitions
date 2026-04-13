@@ -8,6 +8,7 @@ import {
   Goal,
   GoalMilestone,
   GoalStatus,
+  MonthlyReviewState,
   NotificationPreference,
   ReplanSuggestion,
   ScheduleConstraint,
@@ -23,7 +24,7 @@ import {
 } from "../services/calendar/constraintSelection";
 import { getProductPreferences } from "../product/preferences";
 import { ProductPreferences } from "../product/types";
-import { addDays, getCurrentLocalDateString, startOfWeek } from "../utils/date";
+import { addDays, addMonths, getCurrentLocalDateString, startOfMonth, startOfWeek } from "../utils/date";
 import { buildTodayViewModel, TodayViewModel } from "./viewModels/today";
 
 export const initialPlanDate = getCurrentLocalDateString();
@@ -42,6 +43,9 @@ export interface FoundationSnapshot {
   currentWeekReview: WeeklyReviewState | null;
   nextWeekReview: WeeklyReviewState | null;
   weeklyReviewHistory: WeeklyReviewState[];
+  currentMonthReview: MonthlyReviewState | null;
+  nextMonthReview: MonthlyReviewState | null;
+  monthlyReviewHistory: MonthlyReviewState[];
   blocks: TimeBlock[];
   tasks: Task[];
   allTasks: Task[];
@@ -83,6 +87,8 @@ async function syncNotificationsForSnapshot(snapshot: FoundationSnapshot) {
     dailyRitual: snapshot.dailyRitual,
     weeklyReviewState: snapshot.currentWeekReview,
     nextWeekReviewState: snapshot.nextWeekReview,
+    monthlyReviewState: snapshot.currentMonthReview,
+    nextMonthReviewState: snapshot.nextMonthReview,
   });
 }
 
@@ -108,6 +114,7 @@ export async function loadFoundationSnapshot(date: string): Promise<FoundationSn
     dailyRitual,
     dailyRitualHistory,
     weeklyReviewHistory,
+    monthlyReviewHistory,
     tasks,
     allTasks,
     calendarConnectionState,
@@ -125,6 +132,7 @@ export async function loadFoundationSnapshot(date: string): Promise<FoundationSn
     appServices.repositories.planning.getDailyRitualState(date),
     appServices.repositories.planning.listDailyRitualStates(),
     appServices.repositories.planning.listWeeklyReviewStates(),
+    appServices.repositories.planning.listMonthlyReviewStates(),
     appServices.repositories.tasks.listTasksForDate(date),
     appServices.repositories.tasks.listTasks(),
     appServices.repositories.integration.getCalendarConnectionState(),
@@ -139,10 +147,16 @@ export async function loadFoundationSnapshot(date: string): Promise<FoundationSn
   const productPreferences = getProductPreferences(preferences);
   const currentWeekStart = startOfWeek(date, preferences?.weekStartsOn ?? 1);
   const nextWeekStart = addDays(currentWeekStart, 7);
+  const currentMonthStart = startOfMonth(date);
+  const nextMonthStart = addMonths(currentMonthStart, 1);
   const currentWeekReview =
     weeklyReviewHistory.find((state) => state.weekStartDate === currentWeekStart) ?? null;
   const nextWeekReview =
     weeklyReviewHistory.find((state) => state.weekStartDate === nextWeekStart) ?? null;
+  const currentMonthReview =
+    monthlyReviewHistory.find((state) => state.monthStartDate === currentMonthStart) ?? null;
+  const nextMonthReview =
+    monthlyReviewHistory.find((state) => state.monthStartDate === nextMonthStart) ?? null;
   const effectiveAdaptationProfile = productPreferences.adaptivePlanningEnabled
     ? adaptationProfile
     : null;
@@ -160,6 +174,7 @@ export async function loadFoundationSnapshot(date: string): Promise<FoundationSn
         adaptationProfile: effectiveAdaptationProfile,
         existingPlan: dailyPlan,
         weeklyReviewState: currentWeekReview,
+        monthlyReviewState: currentMonthReview,
       })
     : null;
   const schedule = scheduleResult?.payload ?? null;
@@ -204,6 +219,9 @@ export async function loadFoundationSnapshot(date: string): Promise<FoundationSn
     currentWeekReview,
     nextWeekReview,
     weeklyReviewHistory,
+    currentMonthReview,
+    nextMonthReview,
+    monthlyReviewHistory,
     blocks,
     tasks,
     allTasks,
@@ -258,6 +276,9 @@ export async function refreshAllState(date: string) {
     currentWeekReview: snapshot.currentWeekReview,
     nextWeekReview: snapshot.nextWeekReview,
     weeklyReviewHistory: snapshot.weeklyReviewHistory,
+    currentMonthReview: snapshot.currentMonthReview,
+    nextMonthReview: snapshot.nextMonthReview,
+    monthlyReviewHistory: snapshot.monthlyReviewHistory,
     schedule: snapshot.schedule,
     today: snapshot.today,
     timeBlocksForSelectedDate: snapshot.blocks,

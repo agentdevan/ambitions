@@ -20,9 +20,143 @@ import {
   summarizeGoalProgress,
   summarizeInsights,
 } from "../../services/history/selectors";
+import {
+  buildMonthlyReviewDigest,
+  describeMonthlyStrategy,
+  summarizeMonthlyContinuity,
+} from "../../services/history/monthly";
 import { summarizeWeeklyContinuity } from "../../services/history/weekly";
 import { useAppStore } from "../../state/useAppStore";
-import { formatShortDate } from "../../utils/date";
+import { formatMonthLabel, formatShortDate } from "../../utils/date";
+
+export function InsightMonthlyReviewScreen() {
+  const goals = useAppStore((state) => state.goals);
+  const milestones = useAppStore((state) => state.milestones);
+  const tasks = useAppStore((state) => state.allTasks);
+  const activityEvents = useAppStore((state) => state.activityEvents);
+  const dailyRitualHistory = useAppStore((state) => state.dailyRitualHistory);
+  const weeklyReviewHistory = useAppStore((state) => state.weeklyReviewHistory);
+  const currentMonthReview = useAppStore((state) => state.currentMonthReview);
+  const nextMonthReview = useAppStore((state) => state.nextMonthReview);
+  const monthlyReviewHistory = useAppStore((state) => state.monthlyReviewHistory);
+  const today = useAppStore((state) => state.today);
+
+  const feed = buildActivityFeed(activityEvents, tasks, milestones);
+  const digest = buildMonthlyReviewDigest({
+    date: today?.date ?? new Date().toISOString().slice(0, 10),
+    goals,
+    tasks,
+    rituals: dailyRitualHistory,
+    weeklyReviews: weeklyReviewHistory,
+    events: feed,
+  });
+  const continuity = summarizeMonthlyContinuity(monthlyReviewHistory);
+  const strategyLabel = describeMonthlyStrategy({
+    posture: nextMonthReview?.monthPosture ?? null,
+    emphasis: nextMonthReview?.monthlyEmphasis ?? null,
+    pressureLevel: nextMonthReview?.pressureLevel ?? null,
+    carryoverStance: nextMonthReview?.carryoverStance ?? null,
+  });
+
+  return (
+    <Screen>
+      <View className="gap-6">
+        <DetailHero
+          eyebrow="Insights"
+          title={formatMonthLabel(digest.monthStartDate)}
+          description={digest.headline}
+          meta={
+            <DetailSummaryStrip
+              items={[
+                {
+                  label: "Completed",
+                  value: String(digest.summary.completedCount),
+                  detail: "Completion events this month",
+                },
+                {
+                  label: "Reviewed weeks",
+                  value: String(digest.summary.reviewedWeeks),
+                  detail: "Weeks read intentionally",
+                },
+                {
+                  label: "Goal coverage",
+                  value: String(digest.summary.goalCoverageCount),
+                  detail: "Active goals with real execution",
+                },
+                {
+                  label: "Underrepresented",
+                  value: String(digest.summary.underrepresentedGoalCount),
+                  detail: "Active goals left mostly aspirational",
+                },
+              ]}
+            />
+          }
+        />
+
+        <DetailSection
+          title="Monthly read"
+          description="What held, what drifted, and where pressure kept dragging."
+        >
+          <Surface className="gap-3 mb-0">
+            {digest.reads.map((read) => (
+              <AppText key={read} tone="secondary">
+                {read}
+              </AppText>
+            ))}
+          </Surface>
+        </DetailSection>
+
+        <DetailSection
+          title="Goal coverage"
+          description="Which goals received actual execution."
+        >
+          <View className="gap-3">
+            {digest.goalCoverage.map((coverage) => (
+              <Surface key={coverage.goalId} className="gap-3 mb-0">
+                <View className="flex-row flex-wrap items-center gap-2">
+                  <AppText variant="section">{coverage.goalTitle}</AppText>
+                  {coverage.underrepresented ? <Pill label="Underrepresented" tone="quiet" /> : null}
+                  {coverage.dragSignal ? <Pill label="Drag" tone="accent" /> : null}
+                </View>
+                <QuietMetaLine
+                  items={[
+                    `${coverage.executionCount} execution touches`,
+                    `${coverage.completionCount} completions`,
+                    `${coverage.carryoverCount} carryover`,
+                    `${coverage.churnCount} churn`,
+                  ]}
+                />
+              </Surface>
+            ))}
+          </View>
+        </DetailSection>
+
+        <DetailSection
+          title="Continuity across months"
+          description="A compact read on monthly steering."
+        >
+          <Surface className="gap-3 mb-0">
+            <QuietMetaLine
+              items={[
+                `${continuity.reviewedMonths} reviewed months`,
+                `${continuity.shapedMonths} shaped months`,
+                `${Math.round(continuity.averageMonthlyChurn * 100)}% average churn`,
+              ]}
+            />
+            <AppText tone="secondary">
+              {nextMonthReview?.strategySetAt
+                ? `Next month is currently set to ${strategyLabel}.`
+                : "Next month does not have a saved strategy yet."}
+            </AppText>
+            {currentMonthReview?.reviewNote ? (
+              <AppText tone="secondary">Note: {currentMonthReview.reviewNote}</AppText>
+            ) : null}
+          </Surface>
+        </DetailSection>
+      </View>
+    </Screen>
+  );
+}
 
 export function InsightContinuityScreen() {
   const goals = useAppStore((state) => state.goals);

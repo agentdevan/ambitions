@@ -9,6 +9,10 @@ import {
   Goal,
   GoalMilestone,
   GoalStatus,
+  MonthlyCarryoverStance,
+  MonthlyEmphasis,
+  MonthlyPosture,
+  MonthlyPressureLevel,
   Task,
   TimeBlock,
   WeeklyCarryoverPosture,
@@ -132,6 +136,22 @@ export function buildTaskActionActivityEvent(params: {
       detail: audit.explanation,
     },
     [ActivityEventKind.WeeklyCarryoverReviewed]: {
+      outcomeLabel: "Reviewed",
+      detail: audit.explanation,
+    },
+    [ActivityEventKind.MonthReviewed]: {
+      outcomeLabel: "Reviewed",
+      detail: audit.explanation,
+    },
+    [ActivityEventKind.NextMonthShaped]: {
+      outcomeLabel: "Shaped",
+      detail: audit.explanation,
+    },
+    [ActivityEventKind.MonthlyRecommitmentUpdated]: {
+      outcomeLabel: "Updated",
+      detail: audit.explanation,
+    },
+    [ActivityEventKind.MonthlyCoverageReviewed]: {
       outcomeLabel: "Reviewed",
       detail: audit.explanation,
     },
@@ -596,6 +616,131 @@ export function buildWeeklyCarryoverReviewedActivityEvent(params: {
       carryCount,
       reviewCount,
       releasedCount,
+    },
+  } satisfies ActivityEvent;
+}
+
+export function buildMonthReviewedActivityEvent(params: {
+  monthStartDate: string;
+  monthEndDate: string;
+  occurredAt: string;
+  completedCount: number;
+  representedGoalCount: number;
+  underrepresentedGoalCount: number;
+}) {
+  const {
+    monthStartDate,
+    monthEndDate,
+    occurredAt,
+    completedCount,
+    representedGoalCount,
+    underrepresentedGoalCount,
+  } = params;
+
+  return {
+    ...activityBase(occurredAt),
+    kind: ActivityEventKind.MonthReviewed,
+    title: `Reviewed ${formatShortDate(monthStartDate)} - ${formatShortDate(monthEndDate)}`,
+    detail: `${completedCount} completed. ${representedGoalCount} goals received real execution and ${underrepresentedGoalCount} stayed underrepresented.`,
+    outcomeLabel: "Reviewed",
+    goalId: null,
+    milestoneId: null,
+    taskId: null,
+    dailyPlanId: null,
+    timeBlockId: null,
+    metadata: {
+      monthStartDate,
+      monthEndDate,
+      completedCount,
+      representedGoalCount,
+      underrepresentedGoalCount,
+    },
+  } satisfies ActivityEvent;
+}
+
+export function buildNextMonthShapedActivityEvent(params: {
+  monthStartDate: string;
+  occurredAt: string;
+  posture: MonthlyPosture;
+  emphasis: MonthlyEmphasis;
+  pressureLevel: MonthlyPressureLevel;
+  carryoverStance: MonthlyCarryoverStance;
+}) {
+  const { monthStartDate, occurredAt, posture, emphasis, pressureLevel, carryoverStance } = params;
+
+  return {
+    ...activityBase(occurredAt),
+    kind: ActivityEventKind.NextMonthShaped,
+    title: `Shaped ${formatShortDate(monthStartDate)}`,
+    detail: `Set the month to ${posture.replaceAll("_", " ")} with ${emphasis.replaceAll("_", " ")} and ${pressureLevel} pressure.`,
+    outcomeLabel: "Shaped",
+    goalId: null,
+    milestoneId: null,
+    taskId: null,
+    dailyPlanId: null,
+    timeBlockId: null,
+    metadata: {
+      monthStartDate,
+      posture,
+      emphasis,
+      pressureLevel,
+      carryoverStance,
+    },
+  } satisfies ActivityEvent;
+}
+
+export function buildMonthlyRecommitmentUpdatedActivityEvent(params: {
+  monthStartDate: string;
+  occurredAt: string;
+  recommitCount: number;
+  reduceCount: number;
+  pauseCount: number;
+}) {
+  const { monthStartDate, occurredAt, recommitCount, reduceCount, pauseCount } = params;
+
+  return {
+    ...activityBase(occurredAt),
+    kind: ActivityEventKind.MonthlyRecommitmentUpdated,
+    title: `Updated monthly commitments for ${formatShortDate(monthStartDate)}`,
+    detail: `${recommitCount} recommit, ${reduceCount} reduce, ${pauseCount} pause.`,
+    outcomeLabel: "Commitments",
+    goalId: null,
+    milestoneId: null,
+    taskId: null,
+    dailyPlanId: null,
+    timeBlockId: null,
+    metadata: {
+      monthStartDate,
+      recommitCount,
+      reduceCount,
+      pauseCount,
+    },
+  } satisfies ActivityEvent;
+}
+
+export function buildMonthlyCoverageReviewedActivityEvent(params: {
+  monthStartDate: string;
+  occurredAt: string;
+  coveredGoalCount: number;
+  dragGoalCount: number;
+}) {
+  const { monthStartDate, occurredAt, coveredGoalCount, dragGoalCount } = params;
+
+  return {
+    ...activityBase(occurredAt),
+    kind: ActivityEventKind.MonthlyCoverageReviewed,
+    title: `Reviewed goal coverage for ${formatShortDate(monthStartDate)}`,
+    detail: `${coveredGoalCount} goals were represented. ${dragGoalCount} carried visible drag.`,
+    outcomeLabel: "Coverage",
+    goalId: null,
+    milestoneId: null,
+    taskId: null,
+    dailyPlanId: null,
+    timeBlockId: null,
+    metadata: {
+      monthStartDate,
+      coveredGoalCount,
+      dragGoalCount,
     },
   } satisfies ActivityEvent;
 }

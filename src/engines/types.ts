@@ -7,6 +7,7 @@ import {
   Goal,
   GoalMilestone,
   GoalPlanningAnalysis,
+  MonthlyReviewState,
   ReplanSuggestion,
   ScheduleConstraint,
   TaskActionEvent,
@@ -177,6 +178,7 @@ export interface SchedulingContextSnapshot {
 export interface SchedulingRequest extends PlanningContext {
   existingPlan: DailyPlan | null;
   weeklyReviewState?: WeeklyReviewState | null;
+  monthlyReviewState?: MonthlyReviewState | null;
 }
 
 export interface SchedulingOutput {

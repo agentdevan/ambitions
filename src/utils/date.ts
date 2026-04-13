@@ -180,6 +180,29 @@ export function endOfWeek(dateString: string, weekStartsOn = 1) {
   return addDays(startOfWeek(dateString, weekStartsOn), 6);
 }
 
+export function startOfMonth(dateString: string) {
+  const value = parseLocalDateOnly(dateString);
+  value.setDate(1);
+  return getCurrentLocalDateString(value);
+}
+
+export function addMonths(dateString: string, amount: number) {
+  const value = parseLocalDateOnly(startOfMonth(dateString));
+  value.setMonth(value.getMonth() + amount, 1);
+  return getCurrentLocalDateString(value);
+}
+
+export function endOfMonth(dateString: string) {
+  return addDays(addMonths(startOfMonth(dateString), 1), -1);
+}
+
+export function formatMonthLabel(dateString: string) {
+  return new Intl.DateTimeFormat("en-US", {
+    month: "long",
+    year: "numeric",
+  }).format(parseLocalDateOnly(dateString));
+}
+
 export function isDateInRange(dateString: string, start: string, end: string) {
   return dateString >= start && dateString <= end;
 }

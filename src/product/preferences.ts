@@ -1,6 +1,10 @@
 import { DomainKey, PlanningCadence, UserPreferences } from "../domain/models";
 import {
   AccentThemeKey,
+  MonthlyCarryoverPreference,
+  MonthlyEmphasisPreference,
+  MonthlyPosturePreference,
+  MonthlyPressurePreference,
   AppearanceMode,
   DefaultWeeklyCarryoverBehavior,
   DefaultUnfinishedWorkBehavior,
@@ -133,6 +137,34 @@ function parseWeeklyCarryoverBehavior(value: unknown): DefaultWeeklyCarryoverBeh
     : "review_first";
 }
 
+function parseMonthlyPosture(value: unknown): MonthlyPosturePreference {
+  return value === "stabilize" || value === "build_momentum" || value === "push_output"
+    ? value
+    : "stabilize";
+}
+
+function parseMonthlyEmphasis(value: unknown): MonthlyEmphasisPreference {
+  return value === "protect_essentials" ||
+    value === "deepen_one_priority_area" ||
+    value === "rebalance_neglected_areas"
+    ? value
+    : "protect_essentials";
+}
+
+function parseMonthlyPressure(value: unknown): MonthlyPressurePreference {
+  return value === "lighter" || value === "balanced" || value === "fuller"
+    ? value
+    : "balanced";
+}
+
+function parseMonthlyCarryover(value: unknown): MonthlyCarryoverPreference {
+  return value === "prune_aggressively" ||
+    value === "review_before_carrying" ||
+    value === "tolerate_more_carryover"
+    ? value
+    : "review_before_carrying";
+}
+
 export function getProductPreferences(preferences: UserPreferences | null): ProductPreferences {
   const metadata = preferences?.metadata ?? {};
 
@@ -153,6 +185,13 @@ export function getProductPreferences(preferences: UserPreferences | null): Prod
     defaultWeeklyCarryoverBehavior: parseWeeklyCarryoverBehavior(
       metadata.defaultWeeklyCarryoverBehavior,
     ),
+    monthlyReviewDay: parseNumber(metadata.monthlyReviewDay, preferences?.monthlyPlanningDay ?? 1),
+    monthlyReviewTime: parseTime(metadata.monthlyReviewTime, "09:30"),
+    autoPromptNextMonthShaping: parseBoolean(metadata.autoPromptNextMonthShaping, true),
+    defaultMonthlyPosture: parseMonthlyPosture(metadata.defaultMonthlyPosture),
+    defaultMonthlyEmphasis: parseMonthlyEmphasis(metadata.defaultMonthlyEmphasis),
+    defaultMonthlyPressure: parseMonthlyPressure(metadata.defaultMonthlyPressure),
+    defaultMonthlyCarryoverStance: parseMonthlyCarryover(metadata.defaultMonthlyCarryoverStance),
     schedule: {
       sleepStart: parseTime(metadata.sleepWindowStart, defaultSchedule.sleepStart),
       sleepEnd: parseTime(metadata.sleepWindowEnd, defaultSchedule.sleepEnd),
@@ -222,6 +261,13 @@ export function mergeProductPreferences(
     weeklyReviewTime: product.weeklyReviewTime,
     autoPromptNextWeekShaping: product.autoPromptNextWeekShaping,
     defaultWeeklyCarryoverBehavior: product.defaultWeeklyCarryoverBehavior,
+    monthlyReviewDay: product.monthlyReviewDay,
+    monthlyReviewTime: product.monthlyReviewTime,
+    autoPromptNextMonthShaping: product.autoPromptNextMonthShaping,
+    defaultMonthlyPosture: product.defaultMonthlyPosture,
+    defaultMonthlyEmphasis: product.defaultMonthlyEmphasis,
+    defaultMonthlyPressure: product.defaultMonthlyPressure,
+    defaultMonthlyCarryoverStance: product.defaultMonthlyCarryoverStance,
     sleepWindowStart: product.schedule.sleepStart,
     sleepWindowEnd: product.schedule.sleepEnd,
     morningPrepMinutes: product.schedule.morningPrepMinutes,
@@ -243,6 +289,7 @@ export function mergeProductPreferences(
     ...current,
     planningCadence: cadenceForIntensity(product.dayIntensity),
     weeklyPlanningDay: product.weeklyReviewDay,
+    monthlyPlanningDay: product.monthlyReviewDay,
     defaultFocusSessionMinutes: focusSessionMinutes(product.taskSizing),
     defaultBreakMinutes: breakMinutes(product.taskSizing),
     preferredDeepWorkWindows,

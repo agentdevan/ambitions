@@ -21,6 +21,10 @@ export enum ActivityEventKind {
   WeekReviewed = "week_reviewed",
   NextWeekShaped = "next_week_shaped",
   WeeklyCarryoverReviewed = "weekly_carryover_reviewed",
+  MonthReviewed = "month_reviewed",
+  NextMonthShaped = "next_month_shaped",
+  MonthlyRecommitmentUpdated = "monthly_recommitment_updated",
+  MonthlyCoverageReviewed = "monthly_coverage_reviewed",
 }
 
 export interface ActivityEvent extends EntityRecord {

@@ -62,6 +62,7 @@ export type SyncEntityKind =
   | "daily_plan"
   | "daily_ritual_state"
   | "weekly_review_state"
+  | "monthly_review_state"
   | "time_block"
   | "preferences"
   | "notification_preference"

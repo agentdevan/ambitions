@@ -138,6 +138,13 @@ export function OnboardingScreen() {
           weeklyReviewTime: "16:30",
           autoPromptNextWeekShaping: true,
           defaultWeeklyCarryoverBehavior: "review_first",
+          monthlyReviewDay: 1,
+          monthlyReviewTime: "09:30",
+          autoPromptNextMonthShaping: true,
+          defaultMonthlyPosture: "stabilize",
+          defaultMonthlyEmphasis: "protect_essentials",
+          defaultMonthlyPressure: "balanced",
+          defaultMonthlyCarryoverStance: "review_before_carrying",
           appearanceMode,
           accentTheme,
           schedule: {

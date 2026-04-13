@@ -619,6 +619,9 @@ export function ProfileNotificationsScreen() {
   const weeklyReviewPreference = notificationPreferences.find(
     (preference) => preference.reminderType === ReminderType.WeeklyReview,
   );
+  const monthlyReviewPreference = notificationPreferences.find(
+    (preference) => preference.reminderType === ReminderType.MonthlyReview,
+  );
   const quietHoursSummary = summarizeQuietHours(notificationPreferences);
 
   async function runAction(key: string, action: () => Promise<void>, fallbackError: string) {
@@ -871,6 +874,75 @@ export function ProfileNotificationsScreen() {
             </Surface>
           </DetailSection>
         ) : null}
+        {monthlyReviewPreference && productPreferences ? (
+          <DetailSection
+            title="Monthly review"
+            description="Control the reminder that opens monthly review and next-month shaping."
+          >
+            <Surface className="gap-3 mb-0">
+              <View className="flex-row items-center justify-between gap-3">
+                <View className="flex-1 gap-1">
+                  <AppText variant="section">
+                    {formatReminderBehavior(monthlyReviewPreference)}
+                  </AppText>
+                  <AppText tone="secondary" variant="caption">
+                    {monthlyReviewPreference.enabled
+                      ? `Scheduled for day ${productPreferences.monthlyReviewDay} at ${formatTimeLabel(productPreferences.monthlyReviewTime, { compact: true })}.`
+                      : "Monthly review stays quiet until you enable this reminder again."}
+                  </AppText>
+                </View>
+                <Button
+                  size="compact"
+                  tone={monthlyReviewPreference.enabled ? "tertiary" : "secondary"}
+                  busy={busyState === `notification:${monthlyReviewPreference.id}`}
+                  onPress={() =>
+                    void runAction(
+                      `notification:${monthlyReviewPreference.id}`,
+                      () =>
+                        updateNotificationPreference(monthlyReviewPreference.reminderType, {
+                          enabled: !monthlyReviewPreference.enabled,
+                        }),
+                      "Monthly review reminder could not be updated.",
+                    )
+                  }
+                >
+                  {monthlyReviewPreference.enabled ? "Mute" : "Enable"}
+                </Button>
+              </View>
+              <View className="flex-row flex-wrap gap-2">
+                {reminderLeadTimeOptions.map((minutes) => (
+                  <OptionChip
+                    key={`monthly-review:${minutes}`}
+                    selected={monthlyReviewPreference.leadTimeMinutes === minutes}
+                    onPress={() =>
+                      void runAction(
+                        `lead-time:${monthlyReviewPreference.id}:${minutes}`,
+                        () =>
+                          updateNotificationPreference(monthlyReviewPreference.reminderType, {
+                            enabled: true,
+                            leadTimeMinutes: minutes,
+                          }),
+                        "Monthly review reminder timing could not be updated.",
+                      )
+                    }
+                  >
+                    {minutes} min
+                  </OptionChip>
+                ))}
+              </View>
+              <QuietMetaLine
+                items={[
+                  monthlyReviewPreference.channel === "push" ? "Push" : "In app",
+                  monthlyReviewPreference.enabled ? "Active" : "Muted",
+                  quietHoursSummary,
+                ]}
+              />
+              <AppText tone="secondary" variant="caption">
+                Review day and time are set in Planning. Delivery here stays on the real monthly review preference.
+              </AppText>
+            </Surface>
+          </DetailSection>
+        ) : null}
         <DetailSection
           title="Daily rituals"
           description="Keep opening and closeout reminders quiet and deliberate."
@@ -1001,6 +1073,7 @@ export function ProfilePlanningPreferencesScreen() {
   const [busyState, setBusyState] = useState<string | null>(null);
   const [runtimeMessage, setRuntimeMessage] = useState<string | null>(null);
   const [weeklyReviewTime, setWeeklyReviewTime] = useState("4:30 PM");
+  const [monthlyReviewTime, setMonthlyReviewTime] = useState("9:30 AM");
 
   useEffect(() => {
     if (!productPreferences) {
@@ -1008,6 +1081,7 @@ export function ProfilePlanningPreferencesScreen() {
     }
 
     setWeeklyReviewTime(formatTimeLabel(productPreferences.weeklyReviewTime));
+    setMonthlyReviewTime(formatTimeLabel(productPreferences.monthlyReviewTime));
   }, [productPreferences]);
 
   if (!productPreferences) {
@@ -1244,6 +1318,205 @@ export function ProfilePlanningPreferencesScreen() {
             </View>
           </Surface>
         </DetailSection>
+        <DetailSection
+          title="Monthly steering"
+          description="Set the month-level review cadence and default strategic posture."
+        >
+          <Surface className="gap-3 mb-0">
+            <AppText tone="secondary" variant="caption">
+              Monthly review steers the week without replacing weekly shaping. Reminder delivery stays in Notifications.
+            </AppText>
+            <View className="gap-2">
+              <AppText tone="tertiary" variant="micro" style={{ textTransform: "uppercase" }}>
+                Review day
+              </AppText>
+              <View className="flex-row flex-wrap gap-2">
+                {[1, 2, 3, 4, 5, 7, 10].map((day) => (
+                  <OptionChip
+                    key={`monthly-day:${day}`}
+                    selected={productPreferences.monthlyReviewDay === day}
+                    onPress={() =>
+                      void savePreference(
+                        `monthly-day:${day}`,
+                        { ...productPreferences, monthlyReviewDay: day },
+                        "Monthly review day could not be updated.",
+                      )
+                    }
+                  >
+                    Day {day}
+                  </OptionChip>
+                ))}
+              </View>
+            </View>
+            <TextField
+              label="Monthly review time"
+              onChangeText={setMonthlyReviewTime}
+              supportingText={`Currently ${formatTimeLabel(productPreferences.monthlyReviewTime, { compact: true })}`}
+              value={monthlyReviewTime}
+            />
+            <Button
+              busy={busyState === "monthly-time"}
+              onPress={() => {
+                const normalized = normalizeTimeString(monthlyReviewTime);
+                void savePreference(
+                  "monthly-time",
+                  {
+                    ...productPreferences,
+                    monthlyReviewTime: normalized ?? productPreferences.monthlyReviewTime,
+                  },
+                  "Monthly review time could not be updated.",
+                );
+              }}
+            >
+              Save monthly review time
+            </Button>
+            <View className="gap-2">
+              <AppText tone="tertiary" variant="micro" style={{ textTransform: "uppercase" }}>
+                Next-month prompt
+              </AppText>
+              <View className="flex-row flex-wrap gap-2">
+                {[
+                  [true, "Prompt automatically"],
+                  [false, "Manual only"],
+                ].map(([enabled, label]) => (
+                  <OptionChip
+                    key={`monthly-prompt:${String(enabled)}`}
+                    selected={productPreferences.autoPromptNextMonthShaping === enabled}
+                    onPress={() =>
+                      void savePreference(
+                        `monthly-prompt:${enabled}`,
+                        {
+                          ...productPreferences,
+                          autoPromptNextMonthShaping: enabled as boolean,
+                        },
+                        "Next-month shaping prompt could not be updated.",
+                      )
+                    }
+                  >
+                    {label}
+                  </OptionChip>
+                ))}
+              </View>
+            </View>
+            <View className="gap-2">
+              <AppText tone="tertiary" variant="micro" style={{ textTransform: "uppercase" }}>
+                Default posture
+              </AppText>
+              <View className="flex-row flex-wrap gap-2">
+                {[
+                  ["stabilize", "Stabilize"],
+                  ["build_momentum", "Build momentum"],
+                  ["push_output", "Push output"],
+                ].map(([key, label]) => (
+                  <OptionChip
+                    key={`monthly-posture:${key}`}
+                    selected={productPreferences.defaultMonthlyPosture === key}
+                    onPress={() =>
+                      void savePreference(
+                        `monthly-posture:${key}`,
+                        {
+                          ...productPreferences,
+                          defaultMonthlyPosture: key as typeof productPreferences.defaultMonthlyPosture,
+                        },
+                        "Monthly posture could not be updated.",
+                      )
+                    }
+                  >
+                    {label}
+                  </OptionChip>
+                ))}
+              </View>
+            </View>
+            <View className="gap-2">
+              <AppText tone="tertiary" variant="micro" style={{ textTransform: "uppercase" }}>
+                Default emphasis
+              </AppText>
+              <View className="flex-row flex-wrap gap-2">
+                {[
+                  ["protect_essentials", "Protect essentials"],
+                  ["deepen_one_priority_area", "Deepen one area"],
+                  ["rebalance_neglected_areas", "Rebalance neglected areas"],
+                ].map(([key, label]) => (
+                  <OptionChip
+                    key={`monthly-emphasis:${key}`}
+                    selected={productPreferences.defaultMonthlyEmphasis === key}
+                    onPress={() =>
+                      void savePreference(
+                        `monthly-emphasis:${key}`,
+                        {
+                          ...productPreferences,
+                          defaultMonthlyEmphasis: key as typeof productPreferences.defaultMonthlyEmphasis,
+                        },
+                        "Monthly emphasis could not be updated.",
+                      )
+                    }
+                  >
+                    {label}
+                  </OptionChip>
+                ))}
+              </View>
+            </View>
+            <View className="gap-2">
+              <AppText tone="tertiary" variant="micro" style={{ textTransform: "uppercase" }}>
+                Default pressure
+              </AppText>
+              <View className="flex-row flex-wrap gap-2">
+                {[
+                  ["lighter", "Lighter"],
+                  ["balanced", "Balanced"],
+                  ["fuller", "Fuller"],
+                ].map(([key, label]) => (
+                  <OptionChip
+                    key={`monthly-pressure:${key}`}
+                    selected={productPreferences.defaultMonthlyPressure === key}
+                    onPress={() =>
+                      void savePreference(
+                        `monthly-pressure:${key}`,
+                        {
+                          ...productPreferences,
+                          defaultMonthlyPressure: key as typeof productPreferences.defaultMonthlyPressure,
+                        },
+                        "Monthly pressure could not be updated.",
+                      )
+                    }
+                  >
+                    {label}
+                  </OptionChip>
+                ))}
+              </View>
+            </View>
+            <View className="gap-2">
+              <AppText tone="tertiary" variant="micro" style={{ textTransform: "uppercase" }}>
+                Carryover stance
+              </AppText>
+              <View className="flex-row flex-wrap gap-2">
+                {[
+                  ["prune_aggressively", "Prune aggressively"],
+                  ["review_before_carrying", "Review before carrying"],
+                  ["tolerate_more_carryover", "Tolerate more carryover"],
+                ].map(([key, label]) => (
+                  <OptionChip
+                    key={`monthly-carry:${key}`}
+                    selected={productPreferences.defaultMonthlyCarryoverStance === key}
+                    onPress={() =>
+                      void savePreference(
+                        `monthly-carry:${key}`,
+                        {
+                          ...productPreferences,
+                          defaultMonthlyCarryoverStance:
+                            key as typeof productPreferences.defaultMonthlyCarryoverStance,
+                        },
+                        "Monthly carryover stance could not be updated.",
+                      )
+                    }
+                  >
+                    {label}
+                  </OptionChip>
+                ))}
+              </View>
+            </View>
+          </Surface>
+        </DetailSection>
 
         <DetailSection
           title="Closeout default"
@@ -1341,7 +1614,7 @@ export function ProfilePlanningPreferencesScreen() {
         <Surface className="gap-3">
           <AppText variant="section">Still automatic</AppText>
           <AppText tone="secondary" variant="caption">
-            Ambitions still decides exact task ordering, recovery reshaping details, and most open-time recommendations automatically.
+            Ambitions still decides exact task ordering, recovery reshaping details, most open-time recommendations, and the final daily fill level automatically.
           </AppText>
         </Surface>
         {busyState ? <AppText tone="tertiary" variant="caption">Saving...</AppText> : null}

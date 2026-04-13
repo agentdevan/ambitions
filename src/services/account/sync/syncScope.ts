@@ -7,6 +7,7 @@ import {
   EntitySyncState,
   Goal,
   GoalMilestone,
+  MonthlyReviewState,
   NotificationPreference,
   SyncEntityKind,
   Task,
@@ -22,6 +23,7 @@ export type SyncEntityRecord =
   | DailyPlan
   | DailyRitualState
   | WeeklyReviewState
+  | MonthlyReviewState
   | TimeBlock
   | UserPreferences
   | NotificationPreference
@@ -35,6 +37,7 @@ export const syncEntityOrder: SyncEntityKind[] = [
   "daily_plan",
   "daily_ritual_state",
   "weekly_review_state",
+  "monthly_review_state",
   "time_block",
   "activity_event",
   "preferences",

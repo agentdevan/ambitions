@@ -26,6 +26,11 @@ import {
   GoalMilestone,
   GoalStatus,
   LocalAttachmentState,
+  MonthlyCarryoverStance,
+  MonthlyEmphasis,
+  MonthlyPosture,
+  MonthlyPressureLevel,
+  MonthlyReviewState,
   NotificationPreference,
   ReplanSuggestion,
   ScheduleConstraint,
@@ -74,7 +79,11 @@ import {
   buildDayClosedActivityEvent,
   buildDayOpenedActivityEvent,
   buildDayRecoveredActivityEvent,
+  buildMonthReviewedActivityEvent,
+  buildMonthlyCoverageReviewedActivityEvent,
+  buildMonthlyRecommitmentUpdatedActivityEvent,
   buildNextWeekShapedActivityEvent,
+  buildNextMonthShapedActivityEvent,
   buildPlanReviewAcceptedActivityEvents,
   buildPlanReviewGeneratedActivityEvent,
   buildPlanReviewRevertedActivityEvent,
@@ -84,9 +93,11 @@ import {
   buildWeeklyCarryoverReviewedActivityEvent,
 } from "../services/history/activity";
 import { buildActivityFeed } from "../services/history/selectors";
+import { buildMonthlyReviewDigest } from "../services/history/monthly";
 import { buildWeeklyReviewDigest } from "../services/history/weekly";
 import { TodayViewModel } from "./viewModels/today";
 import { initialPlanDate, refreshAllState } from "./runtime";
+import { addMonths, endOfMonth, startOfMonth } from "../utils/date";
 
 type LoadStatus = "idle" | "loading" | "ready" | "error";
 
@@ -137,6 +148,9 @@ interface PlanningSlice {
   currentWeekReview: WeeklyReviewState | null;
   nextWeekReview: WeeklyReviewState | null;
   weeklyReviewHistory: WeeklyReviewState[];
+  currentMonthReview: MonthlyReviewState | null;
+  nextMonthReview: MonthlyReviewState | null;
+  monthlyReviewHistory: MonthlyReviewState[];
   schedule: SchedulingOutput | null;
   today: TodayViewModel | null;
   activityEvents: ActivityEvent[];
@@ -153,6 +167,19 @@ interface PlanningSlice {
     intensity: WeeklyIntensity;
     emphasis: WeeklyEmphasis;
     carryoverPosture: WeeklyCarryoverPosture;
+    note?: string | null;
+  }) => Promise<void>;
+  reviewMonth: (input: {
+    reviewNote?: string | null;
+    recommitGoalIds: string[];
+    reduceGoalIds: string[];
+    pauseGoalIds: string[];
+  }) => Promise<void>;
+  shapeNextMonth: (input: {
+    posture: MonthlyPosture;
+    emphasis: MonthlyEmphasis;
+    pressureLevel: MonthlyPressureLevel;
+    carryoverStance: MonthlyCarryoverStance;
     note?: string | null;
   }) => Promise<void>;
   openDay: (focus?: DailyRitualOpeningFocus | null) => Promise<void>;
@@ -380,6 +407,60 @@ function bindWeeklyReviewToAccount(
   };
 }
 
+function createMonthlyReviewState(params: {
+  monthStartDate: string;
+  monthEndDate: string;
+  accountId: string | null;
+  existing?: MonthlyReviewState | null;
+}): MonthlyReviewState {
+  const now = new Date().toISOString();
+  const existing = params.existing;
+
+  return {
+    id: existing?.id ?? `monthly-review:${params.monthStartDate}`,
+    monthStartDate: params.monthStartDate,
+    monthEndDate: params.monthEndDate,
+    reviewedAt: existing?.reviewedAt ?? null,
+    strategySetAt: existing?.strategySetAt ?? null,
+    monthPosture: existing?.monthPosture ?? null,
+    monthlyEmphasis: existing?.monthlyEmphasis ?? null,
+    pressureLevel: existing?.pressureLevel ?? null,
+    carryoverStance: existing?.carryoverStance ?? null,
+    reviewNote: existing?.reviewNote ?? null,
+    strategyNote: existing?.strategyNote ?? null,
+    recommitGoalIds: existing?.recommitGoalIds ?? [],
+    reduceGoalIds: existing?.reduceGoalIds ?? [],
+    pauseGoalIds: existing?.pauseGoalIds ?? [],
+    goalCoverage: existing?.goalCoverage ?? [],
+    summary: existing?.summary ?? null,
+    metadata: existing?.metadata ?? {},
+    ownerUserId: existing?.ownerUserId ?? params.accountId,
+    remoteId: existing?.remoteId ?? null,
+    syncState:
+      existing?.syncState ??
+      (params.accountId ? EntitySyncState.PendingSync : EntitySyncState.LocalOnly),
+    version: existing?.version ?? 1,
+    lastSyncedAt: existing?.lastSyncedAt ?? null,
+    createdAt: existing?.createdAt ?? now,
+    updatedAt: now,
+  };
+}
+
+function bindMonthlyReviewToAccount(
+  state: MonthlyReviewState,
+  accountId: string | null,
+): MonthlyReviewState {
+  if (!accountId) {
+    return state;
+  }
+
+  return {
+    ...state,
+    ownerUserId: accountId,
+    syncState: EntitySyncState.PendingSync,
+  };
+}
+
 function summarizeRecoveryMode(mode: DailyRitualRecoveryMode, changedTaskCount: number) {
   if (mode === DailyRitualRecoveryMode.SalvageEssentials) {
     return `Held the day to the few pieces that still mattered, moving ${changedTaskCount} tasks out of today's shape.`;
@@ -409,6 +490,9 @@ export const useAppStore = create<AppState>((set, get) => ({
   currentWeekReview: null,
   nextWeekReview: null,
   weeklyReviewHistory: [],
+  currentMonthReview: null,
+  nextMonthReview: null,
+  monthlyReviewHistory: [],
   schedule: null,
   today: null,
   activityEvents: [],
@@ -1285,6 +1369,149 @@ export const useAppStore = create<AppState>((set, get) => ({
               intensity: input.intensity,
               emphasis: input.emphasis,
               carryoverPosture: input.carryoverPosture,
+            }),
+          ],
+          accountId,
+        ),
+      ),
+    ]);
+
+    const [foundationSnapshot, accountSnapshot] = await Promise.all([
+      refreshAllState(state.planDate),
+      appServices.services.account.notePendingChanges(),
+    ]);
+    set({
+      ...foundationSnapshot,
+      ...mapAccountSnapshot(accountSnapshot),
+    });
+  },
+
+  reviewMonth: async (input) => {
+    const state = get();
+    const accountId = getAttachedAccountId(state);
+    const monthStartDate = startOfMonth(state.planDate);
+    const monthEndDate = endOfMonth(state.planDate);
+    const existing = await appServices.repositories.planning.getMonthlyReviewState(monthStartDate);
+    const digest = buildMonthlyReviewDigest({
+      date: state.planDate,
+      goals: state.goals,
+      tasks: state.allTasks,
+      rituals: state.dailyRitualHistory,
+      weeklyReviews: state.weeklyReviewHistory,
+      events: buildActivityFeed(state.activityEvents, state.allTasks, state.milestones),
+    });
+    const now = new Date().toISOString();
+    const nextState = bindMonthlyReviewToAccount(
+      {
+        ...createMonthlyReviewState({
+          monthStartDate,
+          monthEndDate,
+          accountId,
+          existing,
+        }),
+        reviewedAt: now,
+        reviewNote: input.reviewNote?.trim() ? input.reviewNote.trim() : existing?.reviewNote ?? null,
+        recommitGoalIds: input.recommitGoalIds,
+        reduceGoalIds: input.reduceGoalIds,
+        pauseGoalIds: input.pauseGoalIds,
+        goalCoverage: digest.goalCoverage,
+        summary: digest.summary,
+        metadata: {
+          ...(existing?.metadata ?? {}),
+          reads: digest.reads,
+          headline: digest.headline,
+        },
+        updatedAt: now,
+        version: existing ? existing.version + 1 : 1,
+      },
+      accountId,
+    );
+
+    await Promise.all([
+      appServices.repositories.planning.saveMonthlyReviewStates([nextState]),
+      appServices.repositories.history.saveActivityEvents(
+        bindRecordsToAccount(
+          [
+            buildMonthReviewedActivityEvent({
+              monthStartDate,
+              monthEndDate,
+              occurredAt: now,
+              completedCount: digest.summary.completedCount,
+              representedGoalCount: digest.summary.goalCoverageCount,
+              underrepresentedGoalCount: digest.summary.underrepresentedGoalCount,
+            }),
+            buildMonthlyRecommitmentUpdatedActivityEvent({
+              monthStartDate,
+              occurredAt: now,
+              recommitCount: input.recommitGoalIds.length,
+              reduceCount: input.reduceGoalIds.length,
+              pauseCount: input.pauseGoalIds.length,
+            }),
+            buildMonthlyCoverageReviewedActivityEvent({
+              monthStartDate,
+              occurredAt: now,
+              coveredGoalCount: digest.summary.goalCoverageCount,
+              dragGoalCount: digest.summary.dragGoalCount,
+            }),
+          ],
+          accountId,
+        ),
+      ),
+    ]);
+
+    const [foundationSnapshot, accountSnapshot] = await Promise.all([
+      refreshAllState(state.planDate),
+      appServices.services.account.notePendingChanges(),
+    ]);
+    set({
+      ...foundationSnapshot,
+      ...mapAccountSnapshot(accountSnapshot),
+    });
+  },
+
+  shapeNextMonth: async (input) => {
+    const state = get();
+    const accountId = getAttachedAccountId(state);
+    const nextMonthStartDate = addMonths(startOfMonth(state.planDate), 1);
+    const nextMonthEndDate = endOfMonth(nextMonthStartDate);
+    const existing = await appServices.repositories.planning.getMonthlyReviewState(nextMonthStartDate);
+    const now = new Date().toISOString();
+    const nextState = bindMonthlyReviewToAccount(
+      {
+        ...createMonthlyReviewState({
+          monthStartDate: nextMonthStartDate,
+          monthEndDate: nextMonthEndDate,
+          accountId,
+          existing,
+        }),
+        strategySetAt: now,
+        monthPosture: input.posture,
+        monthlyEmphasis: input.emphasis,
+        pressureLevel: input.pressureLevel,
+        carryoverStance: input.carryoverStance,
+        strategyNote: input.note?.trim() ? input.note.trim() : existing?.strategyNote ?? null,
+        metadata: {
+          ...(existing?.metadata ?? {}),
+          shapedFromMonth: startOfMonth(state.planDate),
+        },
+        updatedAt: now,
+        version: existing ? existing.version + 1 : 1,
+      },
+      accountId,
+    );
+
+    await Promise.all([
+      appServices.repositories.planning.saveMonthlyReviewStates([nextState]),
+      appServices.repositories.history.saveActivityEvents(
+        bindRecordsToAccount(
+          [
+            buildNextMonthShapedActivityEvent({
+              monthStartDate: nextMonthStartDate,
+              occurredAt: now,
+              posture: input.posture,
+              emphasis: input.emphasis,
+              pressureLevel: input.pressureLevel,
+              carryoverStance: input.carryoverStance,
             }),
           ],
           accountId,

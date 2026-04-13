@@ -1,4 +1,10 @@
-import { DailyPlan, DailyRitualState, TimeBlock, WeeklyReviewState } from "../../domain/models";
+import {
+  DailyPlan,
+  DailyRitualState,
+  MonthlyReviewState,
+  TimeBlock,
+  WeeklyReviewState,
+} from "../../domain/models";
 import { DatabaseClient } from "../../data/sqlite/client";
 import { decodeJson, encodeJson, entityParams, mapEntityRecord } from "./shared";
 import { PlanRepository } from "../PlanRepository";
@@ -94,6 +100,33 @@ interface WeeklyReviewStateRow {
   updated_at: string;
 }
 
+interface MonthlyReviewStateRow {
+  id: string;
+  month_start_date: string;
+  month_end_date: string;
+  reviewed_at: string | null;
+  strategy_set_at: string | null;
+  month_posture: MonthlyReviewState["monthPosture"];
+  monthly_emphasis: MonthlyReviewState["monthlyEmphasis"];
+  pressure_level: MonthlyReviewState["pressureLevel"];
+  carryover_stance: MonthlyReviewState["carryoverStance"];
+  review_note: string | null;
+  strategy_note: string | null;
+  recommit_goal_ids_json: string;
+  reduce_goal_ids_json: string;
+  pause_goal_ids_json: string;
+  goal_coverage_json: string;
+  summary_json: string | null;
+  metadata_json: string;
+  owner_user_id: string | null;
+  remote_id: string | null;
+  sync_state: MonthlyReviewState["syncState"];
+  version: number;
+  last_synced_at: string | null;
+  created_at: string;
+  updated_at: string;
+}
+
 export class SQLitePlanRepository extends SQLiteRepository implements PlanRepository {
   constructor(database: DatabaseClient) {
     super(database);
@@ -157,6 +190,26 @@ export class SQLitePlanRepository extends SQLiteRepository implements PlanReposi
       "SELECT * FROM weekly_review_states ORDER BY week_start_date ASC;",
     );
     return rows.map(mapWeeklyReviewStateRow);
+  }
+
+  async getMonthlyReviewState(monthStartDate: string) {
+    const row = await this.database.getFirst<MonthlyReviewStateRow>(
+      "SELECT * FROM monthly_review_states WHERE month_start_date = ? LIMIT 1;",
+      [monthStartDate],
+    );
+
+    if (!row) {
+      return null;
+    }
+
+    return mapMonthlyReviewStateRow(row);
+  }
+
+  async listMonthlyReviewStates() {
+    const rows = await this.database.getAll<MonthlyReviewStateRow>(
+      "SELECT * FROM monthly_review_states ORDER BY month_start_date ASC;",
+    );
+    return rows.map(mapMonthlyReviewStateRow);
   }
 
   async listTimeBlocks() {
@@ -283,6 +336,49 @@ export class SQLitePlanRepository extends SQLiteRepository implements PlanReposi
     });
   }
 
+  async saveMonthlyReviewStates(states: MonthlyReviewState[]) {
+    await this.database.withTransaction(async (client) => {
+      for (const state of states) {
+        await client.run(
+          `
+            INSERT OR REPLACE INTO monthly_review_states (
+              id, month_start_date, month_end_date, reviewed_at, strategy_set_at,
+              month_posture, monthly_emphasis, pressure_level, carryover_stance,
+              review_note, strategy_note, recommit_goal_ids_json, reduce_goal_ids_json,
+              pause_goal_ids_json, goal_coverage_json, summary_json, metadata_json,
+              owner_user_id, remote_id, sync_state, version, last_synced_at, created_at, updated_at
+            ) VALUES (
+              $id, $monthStartDate, $monthEndDate, $reviewedAt, $strategySetAt,
+              $monthPosture, $monthlyEmphasis, $pressureLevel, $carryoverStance,
+              $reviewNote, $strategyNote, $recommitGoalIdsJson, $reduceGoalIdsJson,
+              $pauseGoalIdsJson, $goalCoverageJson, $summaryJson, $metadataJson,
+              $ownerUserId, $remoteId, $syncState, $version, $lastSyncedAt, $createdAt, $updatedAt
+            );
+          `,
+          {
+            ...entityParams(state),
+            $monthStartDate: state.monthStartDate,
+            $monthEndDate: state.monthEndDate,
+            $reviewedAt: state.reviewedAt,
+            $strategySetAt: state.strategySetAt,
+            $monthPosture: state.monthPosture,
+            $monthlyEmphasis: state.monthlyEmphasis,
+            $pressureLevel: state.pressureLevel,
+            $carryoverStance: state.carryoverStance,
+            $reviewNote: state.reviewNote,
+            $strategyNote: state.strategyNote,
+            $recommitGoalIdsJson: encodeJson(state.recommitGoalIds),
+            $reduceGoalIdsJson: encodeJson(state.reduceGoalIds),
+            $pauseGoalIdsJson: encodeJson(state.pauseGoalIds),
+            $goalCoverageJson: encodeJson(state.goalCoverage),
+            $summaryJson: state.summary ? encodeJson(state.summary) : null,
+            $metadataJson: encodeJson(state.metadata),
+          },
+        );
+      }
+    });
+  }
+
   async saveTimeBlocks(blocks: TimeBlock[]) {
     await this.database.withTransaction(async (client) => {
       for (const block of blocks) {
@@ -384,6 +480,27 @@ function mapWeeklyReviewStateRow(row: WeeklyReviewStateRow): WeeklyReviewState {
     carryoverTaskIds: decodeJson(row.carryover_task_ids_json),
     reviewTaskIds: decodeJson(row.review_task_ids_json),
     releasedTaskIds: decodeJson(row.released_task_ids_json),
+    summary: row.summary_json ? decodeJson(row.summary_json) : null,
+    metadata: decodeJson(row.metadata_json),
+  });
+}
+
+function mapMonthlyReviewStateRow(row: MonthlyReviewStateRow): MonthlyReviewState {
+  return mapEntityRecord<MonthlyReviewState>(row, {
+    monthStartDate: row.month_start_date,
+    monthEndDate: row.month_end_date,
+    reviewedAt: row.reviewed_at,
+    strategySetAt: row.strategy_set_at,
+    monthPosture: row.month_posture,
+    monthlyEmphasis: row.monthly_emphasis,
+    pressureLevel: row.pressure_level,
+    carryoverStance: row.carryover_stance,
+    reviewNote: row.review_note,
+    strategyNote: row.strategy_note,
+    recommitGoalIds: decodeJson(row.recommit_goal_ids_json),
+    reduceGoalIds: decodeJson(row.reduce_goal_ids_json),
+    pauseGoalIds: decodeJson(row.pause_goal_ids_json),
+    goalCoverage: decodeJson(row.goal_coverage_json),
     summary: row.summary_json ? decodeJson(row.summary_json) : null,
     metadata: decodeJson(row.metadata_json),
   });

@@ -27,6 +27,7 @@ export type PlanStackParamList = {
 
 export type InsightsStackParamList = {
   InsightsHome: undefined;
+  InsightMonthlyReview: undefined;
   InsightContinuity: undefined;
   InsightActivity: undefined;
   InsightPlanChanges: undefined;

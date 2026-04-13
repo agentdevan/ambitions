@@ -1,5 +1,6 @@
 import {
   DailyRitualState,
+  MonthlyReviewState,
   NotificationPreference,
   Task,
   TimeBlock,
@@ -15,7 +16,8 @@ export type CalmNotificationKind =
   | "morning_ritual"
   | "evening_close"
   | "recovery_prompt"
-  | "weekly_review";
+  | "weekly_review"
+  | "monthly_review";
 
 export interface NotificationDraft {
   id: string;
@@ -36,6 +38,8 @@ export interface NotificationPlanContext {
   dailyRitual: DailyRitualState | null;
   weeklyReviewState: WeeklyReviewState | null;
   nextWeekReviewState: WeeklyReviewState | null;
+  monthlyReviewState: MonthlyReviewState | null;
+  nextMonthReviewState: MonthlyReviewState | null;
 }
 
 export interface NotificationSyncResult {

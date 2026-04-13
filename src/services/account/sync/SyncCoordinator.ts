@@ -6,6 +6,7 @@ import {
   EntitySyncState,
   Goal,
   GoalMilestone,
+  MonthlyReviewState,
   NotificationPreference,
   RemoteSyncRecord,
   SyncEntityKind,
@@ -55,6 +56,7 @@ interface LocalSyncState {
   dailyPlans: DailyPlan[];
   dailyRitualStates: DailyRitualState[];
   weeklyReviewStates: WeeklyReviewState[];
+  monthlyReviewStates: MonthlyReviewState[];
   timeBlocks: TimeBlock[];
   activityEvents: ActivityEvent[];
 }
@@ -74,6 +76,7 @@ export class SyncCoordinator {
       plans,
       ritualStates,
       weeklyStates,
+      monthlyStates,
       preferences,
       activityEvents,
     ] = await Promise.all([
@@ -83,6 +86,7 @@ export class SyncCoordinator {
       this.repositories.planning.listDailyPlans(),
       this.repositories.planning.listDailyRitualStates(),
       this.repositories.planning.listWeeklyReviewStates(),
+      this.repositories.planning.listMonthlyReviewStates(),
       this.repositories.preferences.getUserPreferences(),
       this.repositories.history.listActivityEvents(500),
     ]);
@@ -95,6 +99,7 @@ export class SyncCoordinator {
         plans.length > 0 ||
         ritualStates.length > 0 ||
         weeklyStates.length > 0 ||
+        monthlyStates.length > 0 ||
         activityEvents.length > 0 ||
         preferences?.metadata.onboardingCompleted === true ||
         preferences?.metadata.onboardingCompleted === "true",
@@ -105,6 +110,7 @@ export class SyncCoordinator {
         plans.length +
         ritualStates.length +
         weeklyStates.length +
+        monthlyStates.length +
         activityEvents.length +
         (preferences ? 1 : 0),
     };
@@ -170,6 +176,11 @@ export class SyncCoordinator {
     await this.repositories.planning.saveWeeklyReviewStates(
       localState.weeklyReviewStates.map((state) =>
         prepareOwnedRecord("weekly_review_state", state, accountId, now),
+      ),
+    );
+    await this.repositories.planning.saveMonthlyReviewStates(
+      localState.monthlyReviewStates.map((state) =>
+        prepareOwnedRecord("monthly_review_state", state, accountId, now),
       ),
     );
     await this.repositories.planning.saveTimeBlocks(
@@ -423,6 +434,7 @@ export class SyncCoordinator {
       dailyPlans,
       dailyRitualStates,
       weeklyReviewStates,
+      monthlyReviewStates,
       timeBlocks,
       activityEvents,
     ] = await Promise.all([
@@ -435,6 +447,7 @@ export class SyncCoordinator {
       this.repositories.planning.listDailyPlans(),
       this.repositories.planning.listDailyRitualStates(),
       this.repositories.planning.listWeeklyReviewStates(),
+      this.repositories.planning.listMonthlyReviewStates(),
       this.repositories.planning.listTimeBlocks(),
       this.repositories.history.listActivityEvents(1000),
     ]);
@@ -449,6 +462,7 @@ export class SyncCoordinator {
       dailyPlans,
       dailyRitualStates,
       weeklyReviewStates,
+      monthlyReviewStates,
       timeBlocks,
       activityEvents,
     };
@@ -470,6 +484,8 @@ export class SyncCoordinator {
         return state.dailyRitualStates;
       case "weekly_review_state":
         return state.weeklyReviewStates;
+      case "monthly_review_state":
+        return state.monthlyReviewStates;
       case "preferences":
         return state.preferences ? [state.preferences] : [];
       case "notification_preference":
@@ -499,6 +515,8 @@ export class SyncCoordinator {
         return this.repositories.planning.saveDailyRitualStates([record as DailyRitualState]);
       case "weekly_review_state":
         return this.repositories.planning.saveWeeklyReviewStates([record as WeeklyReviewState]);
+      case "monthly_review_state":
+        return this.repositories.planning.saveMonthlyReviewStates([record as MonthlyReviewState]);
       case "preferences":
         return this.repositories.preferences.saveUserPreferences(record as UserPreferences);
       case "notification_preference":

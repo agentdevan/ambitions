@@ -5,6 +5,7 @@ export * from "./execution";
 export * from "./goal";
 export * from "./history";
 export * from "./integration";
+export * from "./monthly";
 export * from "./planning";
 export * from "./planningBrain";
 export * from "./preferences";

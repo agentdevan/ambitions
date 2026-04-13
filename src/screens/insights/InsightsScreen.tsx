@@ -16,6 +16,10 @@ import { TextField } from "../../components/ui/TextField";
 import { useResolvedTheme } from "../../design/theme/useResolvedTheme";
 import {
   ActivityEventKind,
+  MonthlyCarryoverStance,
+  MonthlyEmphasis,
+  MonthlyPosture,
+  MonthlyPressureLevel,
   ReminderType,
   WeeklyCarryoverPosture,
   WeeklyEmphasis,
@@ -24,13 +28,14 @@ import {
 import { InsightsStackParamList } from "../../navigation/types";
 import { getGoalReviewDraft } from "../../services/goals/metadata";
 import { buildActivityFeed, summarizeInsights } from "../../services/history/selectors";
+import { buildMonthlyReviewDigest, describeMonthlyStrategy } from "../../services/history/monthly";
 import {
   buildWeeklyReviewDigest,
   describeWeeklyShape,
   summarizeWeeklyContinuity,
 } from "../../services/history/weekly";
 import { useAppStore } from "../../state/useAppStore";
-import { formatShortDate, formatTimeLabel } from "../../utils/date";
+import { formatMonthLabel, formatShortDate, formatTimeLabel } from "../../utils/date";
 import { OptionChip } from "../../components/ui/OptionChip";
 
 type Props = NativeStackScreenProps<InsightsStackParamList, "InsightsHome">;
@@ -98,14 +103,20 @@ export function InsightsScreen({ navigation }: Props) {
   const currentWeekReview = useAppStore((state) => state.currentWeekReview);
   const nextWeekReview = useAppStore((state) => state.nextWeekReview);
   const weeklyReviewHistory = useAppStore((state) => state.weeklyReviewHistory);
+  const currentMonthReview = useAppStore((state) => state.currentMonthReview);
+  const nextMonthReview = useAppStore((state) => state.nextMonthReview);
   const reviewWeek = useAppStore((state) => state.reviewWeek);
   const reviewWeeklyCarryover = useAppStore((state) => state.reviewWeeklyCarryover);
   const shapeNextWeek = useAppStore((state) => state.shapeNextWeek);
+  const reviewMonth = useAppStore((state) => state.reviewMonth);
+  const shapeNextMonth = useAppStore((state) => state.shapeNextMonth);
   const theme = useResolvedTheme();
   const [busyAction, setBusyAction] = useState<string | null>(null);
   const [runtimeMessage, setRuntimeMessage] = useState<string | null>(null);
   const [reviewNote, setReviewNote] = useState(currentWeekReview?.note ?? "");
   const [shapeNote, setShapeNote] = useState(nextWeekReview?.note ?? "");
+  const [monthReviewNote, setMonthReviewNote] = useState(currentMonthReview?.reviewNote ?? "");
+  const [monthStrategyNote, setMonthStrategyNote] = useState(nextMonthReview?.strategyNote ?? "");
   const [intensity, setIntensity] = useState<WeeklyIntensity>(
     nextWeekReview?.targetWeekIntensity ?? WeeklyIntensity.Balanced,
   );
@@ -119,6 +130,38 @@ export function InsightsScreen({ navigation }: Props) {
         : productPreferences?.defaultWeeklyCarryoverBehavior === "aggressive"
           ? WeeklyCarryoverPosture.Aggressive
           : WeeklyCarryoverPosture.ReviewFirst),
+  );
+  const [monthPosture, setMonthPosture] = useState<MonthlyPosture>(
+    nextMonthReview?.monthPosture ??
+      (productPreferences?.defaultMonthlyPosture === "build_momentum"
+        ? MonthlyPosture.BuildMomentum
+        : productPreferences?.defaultMonthlyPosture === "push_output"
+          ? MonthlyPosture.PushOutput
+          : MonthlyPosture.Stabilize),
+  );
+  const [monthEmphasis, setMonthEmphasis] = useState<MonthlyEmphasis>(
+    nextMonthReview?.monthlyEmphasis ??
+      (productPreferences?.defaultMonthlyEmphasis === "deepen_one_priority_area"
+        ? MonthlyEmphasis.DeepenPriorityArea
+        : productPreferences?.defaultMonthlyEmphasis === "rebalance_neglected_areas"
+          ? MonthlyEmphasis.RebalanceNeglectedAreas
+          : MonthlyEmphasis.ProtectEssentials),
+  );
+  const [monthPressure, setMonthPressure] = useState<MonthlyPressureLevel>(
+    nextMonthReview?.pressureLevel ??
+      (productPreferences?.defaultMonthlyPressure === "lighter"
+        ? MonthlyPressureLevel.Lighter
+        : productPreferences?.defaultMonthlyPressure === "fuller"
+          ? MonthlyPressureLevel.Fuller
+          : MonthlyPressureLevel.Balanced),
+  );
+  const [monthCarryoverStance, setMonthCarryoverStance] = useState<MonthlyCarryoverStance>(
+    nextMonthReview?.carryoverStance ??
+      (productPreferences?.defaultMonthlyCarryoverStance === "prune_aggressively"
+        ? MonthlyCarryoverStance.PruneAggressively
+        : productPreferences?.defaultMonthlyCarryoverStance === "tolerate_more_carryover"
+          ? MonthlyCarryoverStance.TolerateMoreCarryover
+          : MonthlyCarryoverStance.ReviewBeforeCarrying),
   );
 
   const pendingReviews = goals.filter((goal) => getGoalReviewDraft(goal) !== null).length;
@@ -148,6 +191,18 @@ export function InsightsScreen({ navigation }: Props) {
         events: feed,
       }),
     [dailyRitualHistory, feed, tasks, today?.date, userPreferences?.weekStartsOn],
+  );
+  const monthlyDigest = useMemo(
+    () =>
+      buildMonthlyReviewDigest({
+        date: today?.date ?? new Date().toISOString().slice(0, 10),
+        goals,
+        tasks,
+        rituals: dailyRitualHistory,
+        weeklyReviews: weeklyReviewHistory,
+        events: feed,
+      }),
+    [dailyRitualHistory, feed, goals, tasks, today?.date, weeklyReviewHistory],
   );
   const weeklyContinuity = useMemo(
     () => summarizeWeeklyContinuity(weeklyReviewHistory),
@@ -201,6 +256,10 @@ export function InsightsScreen({ navigation }: Props) {
   }, [currentWeekReview?.note]);
 
   useEffect(() => {
+    setMonthReviewNote(currentMonthReview?.reviewNote ?? "");
+  }, [currentMonthReview?.reviewNote]);
+
+  useEffect(() => {
     setShapeNote(nextWeekReview?.note ?? "");
     setIntensity(nextWeekReview?.targetWeekIntensity ?? WeeklyIntensity.Balanced);
     setEmphasis(nextWeekReview?.weeklyEmphasis ?? WeeklyEmphasis.SteadyProgress);
@@ -218,6 +277,52 @@ export function InsightsScreen({ navigation }: Props) {
     nextWeekReview?.targetWeekIntensity,
     nextWeekReview?.weeklyEmphasis,
     productPreferences?.defaultWeeklyCarryoverBehavior,
+  ]);
+
+  useEffect(() => {
+    setMonthStrategyNote(nextMonthReview?.strategyNote ?? "");
+    setMonthPosture(
+      nextMonthReview?.monthPosture ??
+        (productPreferences?.defaultMonthlyPosture === "build_momentum"
+          ? MonthlyPosture.BuildMomentum
+          : productPreferences?.defaultMonthlyPosture === "push_output"
+            ? MonthlyPosture.PushOutput
+            : MonthlyPosture.Stabilize),
+    );
+    setMonthEmphasis(
+      nextMonthReview?.monthlyEmphasis ??
+        (productPreferences?.defaultMonthlyEmphasis === "deepen_one_priority_area"
+          ? MonthlyEmphasis.DeepenPriorityArea
+          : productPreferences?.defaultMonthlyEmphasis === "rebalance_neglected_areas"
+            ? MonthlyEmphasis.RebalanceNeglectedAreas
+            : MonthlyEmphasis.ProtectEssentials),
+    );
+    setMonthPressure(
+      nextMonthReview?.pressureLevel ??
+        (productPreferences?.defaultMonthlyPressure === "lighter"
+          ? MonthlyPressureLevel.Lighter
+          : productPreferences?.defaultMonthlyPressure === "fuller"
+            ? MonthlyPressureLevel.Fuller
+            : MonthlyPressureLevel.Balanced),
+    );
+    setMonthCarryoverStance(
+      nextMonthReview?.carryoverStance ??
+        (productPreferences?.defaultMonthlyCarryoverStance === "prune_aggressively"
+          ? MonthlyCarryoverStance.PruneAggressively
+          : productPreferences?.defaultMonthlyCarryoverStance === "tolerate_more_carryover"
+            ? MonthlyCarryoverStance.TolerateMoreCarryover
+            : MonthlyCarryoverStance.ReviewBeforeCarrying),
+    );
+  }, [
+    nextMonthReview?.carryoverStance,
+    nextMonthReview?.monthPosture,
+    nextMonthReview?.monthlyEmphasis,
+    nextMonthReview?.pressureLevel,
+    nextMonthReview?.strategyNote,
+    productPreferences?.defaultMonthlyCarryoverStance,
+    productPreferences?.defaultMonthlyEmphasis,
+    productPreferences?.defaultMonthlyPosture,
+    productPreferences?.defaultMonthlyPressure,
   ]);
 
   useEffect(() => {
@@ -252,6 +357,37 @@ export function InsightsScreen({ navigation }: Props) {
     ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"][
       productPreferences?.weeklyReviewDay ?? 0
     ];
+  const monthReviewPreference = notificationPreferences.find(
+    (preference) => preference.reminderType === ReminderType.MonthlyReview,
+  );
+  const monthRecommitDefaults = useMemo(
+    () => ({
+      recommit: new Set(currentMonthReview?.recommitGoalIds ?? []),
+      reduce: new Set(currentMonthReview?.reduceGoalIds ?? []),
+      pause: new Set(currentMonthReview?.pauseGoalIds ?? []),
+    }),
+    [currentMonthReview?.pauseGoalIds, currentMonthReview?.recommitGoalIds, currentMonthReview?.reduceGoalIds],
+  );
+  const [goalDecisions, setGoalDecisions] = useState<Record<string, "recommit" | "reduce" | "pause">>({});
+
+  useEffect(() => {
+    const next: Record<string, "recommit" | "reduce" | "pause"> = {};
+    monthlyDigest.goalCoverage.forEach((coverage) => {
+      next[coverage.goalId] = monthRecommitDefaults.pause.has(coverage.goalId)
+        ? "pause"
+        : monthRecommitDefaults.reduce.has(coverage.goalId)
+          ? "reduce"
+          : "recommit";
+    });
+    setGoalDecisions(next);
+  }, [monthRecommitDefaults, monthlyDigest.goalCoverage]);
+
+  const nextMonthShapeLabel = describeMonthlyStrategy({
+    posture: nextMonthReview?.monthPosture ?? monthPosture,
+    emphasis: nextMonthReview?.monthlyEmphasis ?? monthEmphasis,
+    pressureLevel: nextMonthReview?.pressureLevel ?? monthPressure,
+    carryoverStance: nextMonthReview?.carryoverStance ?? monthCarryoverStance,
+  });
 
   return (
     <Screen>
@@ -311,6 +447,34 @@ export function InsightsScreen({ navigation }: Props) {
         <Surface className="gap-4">
           <View className="gap-1">
             <AppText tone="tertiary" variant="micro" style={{ textTransform: "uppercase" }}>
+              Monthly review
+            </AppText>
+            <AppText variant="title">{formatMonthLabel(monthlyDigest.monthStartDate)}</AppText>
+          </View>
+          <AppText tone="secondary" variant="caption">
+            {monthlyDigest.headline}
+          </AppText>
+          <View className="flex-row flex-wrap gap-2">
+            <Pill label={`${monthlyDigest.summary.goalCoverageCount} goals represented`} tone="quiet" />
+            <Pill label={`${monthlyDigest.summary.underrepresentedGoalCount} underrepresented`} tone="quiet" />
+            <Pill label={`${monthlyDigest.summary.reviewedWeeks} weeks reviewed`} tone="quiet" />
+            <Pill label={`${Math.round(monthlyDigest.summary.churnRate * 100)}% churn`} tone="quiet" />
+          </View>
+          <View className="gap-2">
+            {monthlyDigest.reads.slice(0, 3).map((read) => (
+              <AppText key={read} tone="secondary" variant="caption">
+                {read}
+              </AppText>
+            ))}
+          </View>
+          <Button size="compact" tone="tertiary" onPress={() => navigation.navigate("InsightMonthlyReview")}>
+            Open monthly review
+          </Button>
+        </Surface>
+
+        <Surface className="gap-4">
+          <View className="gap-1">
+            <AppText tone="tertiary" variant="micro" style={{ textTransform: "uppercase" }}>
               Weekly review
             </AppText>
             <AppText variant="title">
@@ -349,6 +513,197 @@ export function InsightsScreen({ navigation }: Props) {
             }
           >
             {currentWeekReview?.reviewedAt ? "Update review" : "Review week"}
+          </Button>
+        </Surface>
+
+        <Surface className="gap-4">
+          <View className="gap-1">
+            <AppText tone="tertiary" variant="micro" style={{ textTransform: "uppercase" }}>
+              Goal truth
+            </AppText>
+            <AppText variant="title">What the month actually represented</AppText>
+          </View>
+          <AppText tone="secondary" variant="caption">
+            Review which goals received real execution, which dragged, and what should change next month.
+          </AppText>
+          <View className="gap-3">
+            {monthlyDigest.goalCoverage.slice(0, 4).map((coverage) => (
+              <Surface key={coverage.goalId} tone="sunken" className="gap-3 mb-0">
+                <View className="gap-1">
+                  <AppText variant="section">{coverage.goalTitle}</AppText>
+                  <AppText tone="secondary" variant="caption">
+                    {coverage.represented
+                      ? `${coverage.executionCount} execution touches, ${coverage.completionCount} completions.`
+                      : "Stayed mostly aspirational this month."}
+                  </AppText>
+                </View>
+                <View className="flex-row flex-wrap gap-2">
+                  <OptionChip
+                    compact
+                    selected={(goalDecisions[coverage.goalId] ?? "recommit") === "recommit"}
+                    onPress={() =>
+                      setGoalDecisions((current) => ({ ...current, [coverage.goalId]: "recommit" }))
+                    }
+                  >
+                    Recommit
+                  </OptionChip>
+                  <OptionChip
+                    compact
+                    selected={(goalDecisions[coverage.goalId] ?? "recommit") === "reduce"}
+                    onPress={() =>
+                      setGoalDecisions((current) => ({ ...current, [coverage.goalId]: "reduce" }))
+                    }
+                  >
+                    Reduce
+                  </OptionChip>
+                  <OptionChip
+                    compact
+                    selected={(goalDecisions[coverage.goalId] ?? "recommit") === "pause"}
+                    onPress={() =>
+                      setGoalDecisions((current) => ({ ...current, [coverage.goalId]: "pause" }))
+                    }
+                  >
+                    Pause
+                  </OptionChip>
+                </View>
+              </Surface>
+            ))}
+          </View>
+          <TextField
+            label="Monthly note"
+            multiline
+            onChangeText={setMonthReviewNote}
+            supportingText="Optional. Keep it short and factual."
+            value={monthReviewNote}
+          />
+          <Button
+            busy={busyAction === "review-month"}
+            onPress={() =>
+              void runAction(
+                "review-month",
+                () =>
+                  reviewMonth({
+                    reviewNote: monthReviewNote,
+                    recommitGoalIds: Object.entries(goalDecisions)
+                      .filter(([, decision]) => decision === "recommit")
+                      .map(([goalId]) => goalId),
+                    reduceGoalIds: Object.entries(goalDecisions)
+                      .filter(([, decision]) => decision === "reduce")
+                      .map(([goalId]) => goalId),
+                    pauseGoalIds: Object.entries(goalDecisions)
+                      .filter(([, decision]) => decision === "pause")
+                      .map(([goalId]) => goalId),
+                  }),
+                "Monthly review could not be saved.",
+              )
+            }
+          >
+            {currentMonthReview?.reviewedAt ? "Update month" : "Review month"}
+          </Button>
+        </Surface>
+
+        <Surface className="gap-4">
+          <View className="gap-1">
+            <AppText tone="tertiary" variant="micro" style={{ textTransform: "uppercase" }}>
+              Next month
+            </AppText>
+            <AppText variant="title">Shape the next month</AppText>
+          </View>
+          <AppText tone="secondary" variant="caption">
+            Set the month above the week. Weekly shaping still decides the actual week-by-week tradeoffs.
+          </AppText>
+          <View className="gap-2">
+            <AppText tone="tertiary" variant="micro" style={{ textTransform: "uppercase" }}>
+              Posture
+            </AppText>
+            <View className="flex-row flex-wrap gap-2">
+              <OptionChip selected={monthPosture === MonthlyPosture.Stabilize} onPress={() => setMonthPosture(MonthlyPosture.Stabilize)}>
+                Stabilize
+              </OptionChip>
+              <OptionChip selected={monthPosture === MonthlyPosture.BuildMomentum} onPress={() => setMonthPosture(MonthlyPosture.BuildMomentum)}>
+                Build momentum
+              </OptionChip>
+              <OptionChip selected={monthPosture === MonthlyPosture.PushOutput} onPress={() => setMonthPosture(MonthlyPosture.PushOutput)}>
+                Push output
+              </OptionChip>
+            </View>
+          </View>
+          <View className="gap-2">
+            <AppText tone="tertiary" variant="micro" style={{ textTransform: "uppercase" }}>
+              Emphasis
+            </AppText>
+            <View className="flex-row flex-wrap gap-2">
+              <OptionChip selected={monthEmphasis === MonthlyEmphasis.ProtectEssentials} onPress={() => setMonthEmphasis(MonthlyEmphasis.ProtectEssentials)}>
+                Protect essentials
+              </OptionChip>
+              <OptionChip selected={monthEmphasis === MonthlyEmphasis.DeepenPriorityArea} onPress={() => setMonthEmphasis(MonthlyEmphasis.DeepenPriorityArea)}>
+                Deepen one area
+              </OptionChip>
+              <OptionChip selected={monthEmphasis === MonthlyEmphasis.RebalanceNeglectedAreas} onPress={() => setMonthEmphasis(MonthlyEmphasis.RebalanceNeglectedAreas)}>
+                Rebalance neglected areas
+              </OptionChip>
+            </View>
+          </View>
+          <View className="gap-2">
+            <AppText tone="tertiary" variant="micro" style={{ textTransform: "uppercase" }}>
+              Pressure
+            </AppText>
+            <View className="flex-row flex-wrap gap-2">
+              <OptionChip selected={monthPressure === MonthlyPressureLevel.Lighter} onPress={() => setMonthPressure(MonthlyPressureLevel.Lighter)}>
+                Lighter
+              </OptionChip>
+              <OptionChip selected={monthPressure === MonthlyPressureLevel.Balanced} onPress={() => setMonthPressure(MonthlyPressureLevel.Balanced)}>
+                Balanced
+              </OptionChip>
+              <OptionChip selected={monthPressure === MonthlyPressureLevel.Fuller} onPress={() => setMonthPressure(MonthlyPressureLevel.Fuller)}>
+                Fuller
+              </OptionChip>
+            </View>
+          </View>
+          <View className="gap-2">
+            <AppText tone="tertiary" variant="micro" style={{ textTransform: "uppercase" }}>
+              Carryover stance
+            </AppText>
+            <View className="flex-row flex-wrap gap-2">
+              <OptionChip selected={monthCarryoverStance === MonthlyCarryoverStance.PruneAggressively} onPress={() => setMonthCarryoverStance(MonthlyCarryoverStance.PruneAggressively)}>
+                Prune aggressively
+              </OptionChip>
+              <OptionChip selected={monthCarryoverStance === MonthlyCarryoverStance.ReviewBeforeCarrying} onPress={() => setMonthCarryoverStance(MonthlyCarryoverStance.ReviewBeforeCarrying)}>
+                Review before carrying
+              </OptionChip>
+              <OptionChip selected={monthCarryoverStance === MonthlyCarryoverStance.TolerateMoreCarryover} onPress={() => setMonthCarryoverStance(MonthlyCarryoverStance.TolerateMoreCarryover)}>
+                Tolerate more carryover
+              </OptionChip>
+            </View>
+          </View>
+          <TextField
+            label="Monthly thesis"
+            multiline
+            onChangeText={setMonthStrategyNote}
+            supportingText="Optional. A short sentence is enough."
+            value={monthStrategyNote}
+          />
+          <AppText tone="secondary" variant="caption">
+            {nextMonthReview?.strategySetAt ? `Saved ${nextMonthShapeLabel}.` : "No next-month strategy saved yet."}
+          </AppText>
+          <Button
+            busy={busyAction === "shape-month"}
+            onPress={() =>
+              void runAction(
+                "shape-month",
+                () =>
+                  shapeNextMonth({
+                    posture: monthPosture,
+                    emphasis: monthEmphasis,
+                    pressureLevel: monthPressure,
+                    carryoverStance: monthCarryoverStance,
+                    note: monthStrategyNote,
+                  }),
+                "Next-month strategy could not be saved.",
+              )
+            }
+          >
+            {nextMonthReview?.strategySetAt ? "Update next month" : "Shape next month"}
           </Button>
         </Surface>
 
@@ -527,6 +882,14 @@ export function InsightsScreen({ navigation }: Props) {
 
         <View className="gap-3">
           <DrillInRow
+            title="Monthly review"
+            subtitle="Direction, coverage, and drag"
+            detail={formatMonthLabel(monthlyDigest.monthStartDate)}
+            actionLabel="Open"
+            leading={<Ionicons color={theme.colors.text.secondary} name="calendar-outline" size={18} />}
+            onPress={() => navigation.navigate("InsightMonthlyReview")}
+          />
+          <DrillInRow
             title="Continuity"
             subtitle="Weekly rhythm and stability"
             detail={`${weeklyContinuity.reviewedWeeks} reviewed`}
@@ -575,6 +938,20 @@ export function InsightsScreen({ navigation }: Props) {
             {productPreferences?.autoPromptNextWeekShaping
               ? " Next-week shaping stays prompted automatically."
               : " Next-week shaping is manual."}
+          </AppText>
+        </Surface>
+
+        <Surface className="gap-3">
+          <AppText variant="section">Monthly controls</AppText>
+          <AppText tone="secondary" variant="caption">
+            Review day {productPreferences?.monthlyReviewDay ?? 1} at{" "}
+            {productPreferences ? formatTimeLabel(productPreferences.monthlyReviewTime, { compact: true }) : "9:30a"}.
+            {monthReviewPreference?.enabled
+              ? ` Reminder speaks up ${monthReviewPreference.leadTimeMinutes} min early.`
+              : " Monthly reminder is muted."}
+            {productPreferences?.autoPromptNextMonthShaping
+              ? " Next-month strategy stays prompted automatically."
+              : " Next-month strategy is manual."}
           </AppText>
         </Surface>
 

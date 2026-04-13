@@ -218,7 +218,7 @@ export function ProfileScreen({ navigation }: Props) {
         <Surface className="gap-3">
           <AppText variant="section">What&apos;s controllable now</AppText>
           <AppText tone="secondary" variant="caption">
-            Plan weight, daily closeout defaults, weekly shaping posture, reminders, calendar context, account syncing, and appearance are yours to tune.
+            Plan weight, daily closeout defaults, weekly shaping posture, monthly steering defaults, reminders, calendar context, account syncing, and appearance are yours to tune.
           </AppText>
           <View className="flex-row flex-wrap gap-2">
             <Pill label={planningSummary.intensityLabel} tone="quiet" />

@@ -77,6 +77,7 @@ async function resetSeedData() {
     await client.run("DELETE FROM daily_plans;");
     await client.run("DELETE FROM daily_ritual_states;");
     await client.run("DELETE FROM weekly_review_states;");
+    await client.run("DELETE FROM monthly_review_states;");
     await client.run("DELETE FROM activity_events;");
     await client.run("DELETE FROM replan_suggestions;");
     await client.run("DELETE FROM tasks;");
@@ -188,6 +189,59 @@ async function ensurePhase18Defaults() {
   }
 }
 
+async function ensurePhase19Defaults() {
+  const [preferences, notificationPreferences] = await Promise.all([
+    appServices.repositories.preferences.getUserPreferences(),
+    appServices.repositories.preferences.listNotificationPreferences(),
+  ]);
+
+  if (
+    preferences &&
+    (
+      preferences.metadata.monthlyReviewDay === undefined ||
+      preferences.metadata.monthlyReviewTime === undefined ||
+      preferences.metadata.autoPromptNextMonthShaping === undefined ||
+      preferences.metadata.defaultMonthlyPosture === undefined ||
+      preferences.metadata.defaultMonthlyEmphasis === undefined ||
+      preferences.metadata.defaultMonthlyPressure === undefined ||
+      preferences.metadata.defaultMonthlyCarryoverStance === undefined
+    )
+  ) {
+    await appServices.repositories.preferences.saveUserPreferences({
+      ...preferences,
+      metadata: {
+        ...preferences.metadata,
+        monthlyReviewDay: preferences.metadata.monthlyReviewDay ?? preferences.monthlyPlanningDay,
+        monthlyReviewTime: preferences.metadata.monthlyReviewTime ?? "09:30",
+        autoPromptNextMonthShaping:
+          preferences.metadata.autoPromptNextMonthShaping ?? true,
+        defaultMonthlyPosture:
+          preferences.metadata.defaultMonthlyPosture ?? "stabilize",
+        defaultMonthlyEmphasis:
+          preferences.metadata.defaultMonthlyEmphasis ?? "protect_essentials",
+        defaultMonthlyPressure:
+          preferences.metadata.defaultMonthlyPressure ?? "balanced",
+        defaultMonthlyCarryoverStance:
+          preferences.metadata.defaultMonthlyCarryoverStance ?? "review_before_carrying",
+      },
+      updatedAt: new Date().toISOString(),
+      version: preferences.version + 1,
+    });
+  }
+
+  const existingTypes = new Set(notificationPreferences.map((preference) => preference.reminderType));
+  const missing = seedNotificationPreferences.filter(
+    (preference) => !existingTypes.has(preference.reminderType),
+  );
+
+  if (missing.length > 0) {
+    await appServices.repositories.preferences.saveNotificationPreferences([
+      ...notificationPreferences,
+      ...missing,
+    ]);
+  }
+}
+
 export async function initializeAppServices() {
   if (!initializationPromise) {
     resetStartupReady();
@@ -202,6 +256,7 @@ export async function initializeAppServices() {
       }
 
       await ensurePhase18Defaults();
+      await ensurePhase19Defaults();
 
       await appServices.services.account.initialize();
     })().catch((error) => {

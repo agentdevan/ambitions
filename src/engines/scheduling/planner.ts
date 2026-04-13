@@ -16,6 +16,7 @@ import {
   WeeklyEmphasis,
   WeeklyIntensity,
 } from "../../domain/models";
+import { deriveWeeklyDefaultsFromMonthlyStrategy } from "../../services/planning/monthlyStrategy";
 import {
   SchedulingOutput,
   SchedulingRequest,
@@ -150,10 +151,13 @@ function buildCandidates(
   directives: AdaptationPlanningDirectives,
   request: SchedulingRequest,
 ) {
+  const monthlyDefaults = deriveWeeklyDefaultsFromMonthlyStrategy(request.monthlyReviewState);
   const weeklyState = request.weeklyReviewState;
+  const effectiveEmphasis = weeklyState?.weeklyEmphasis ?? monthlyDefaults?.weeklyEmphasis ?? null;
+  const effectiveCarryover = weeklyState?.carryoverPosture ?? monthlyDefaults?.carryoverPosture ?? null;
   const focusGoalId =
-    weeklyState?.weeklyEmphasis === WeeklyEmphasis.PushMeaningfulArea
-      ? determineFocusGoalId(tasks, weeklyState.weekStartDate)
+    effectiveEmphasis === WeeklyEmphasis.PushMeaningfulArea
+      ? determineFocusGoalId(tasks, weeklyState?.weekStartDate ?? request.date)
       : null;
 
   return tasks
@@ -189,20 +193,20 @@ function buildCandidates(
       if (directives.preferSmallerEntryTasks && task.estimatedMinutes <= 20) priorityScore += 4;
       if (task.title.toLowerCase().startsWith("review the current signal")) priorityScore -= 10;
       if (task.title.toLowerCase().startsWith("choose the next lower-friction adjustment")) priorityScore -= 6;
-      if (weeklyState?.weeklyEmphasis === WeeklyEmphasis.ProtectEssentials) {
+      if (effectiveEmphasis === WeeklyEmphasis.ProtectEssentials) {
         if (task.status === TaskStatus.InProgress) priorityScore += 18;
         if (task.schedulingState === TaskSchedulingState.Rolled) priorityScore += 10;
         if (task.targetDate && task.targetDate <= request.date) priorityScore += 12;
       }
       if (
-        weeklyState?.weeklyEmphasis === WeeklyEmphasis.PushMeaningfulArea &&
+        effectiveEmphasis === WeeklyEmphasis.PushMeaningfulArea &&
         focusGoalId &&
         task.goalId === focusGoalId
       ) {
         priorityScore += 22;
       }
       if (
-        weeklyState?.carryoverPosture === WeeklyCarryoverPosture.EssentialsOnly &&
+        effectiveCarryover === WeeklyCarryoverPosture.EssentialsOnly &&
         task.schedulingState === TaskSchedulingState.Rolled &&
         task.status !== TaskStatus.InProgress &&
         task.metadata.weeklyCarryoverReviewedAt === undefined
@@ -210,13 +214,13 @@ function buildCandidates(
         priorityScore -= 16;
       }
       if (
-        weeklyState?.carryoverPosture === WeeklyCarryoverPosture.ReviewFirst &&
+        effectiveCarryover === WeeklyCarryoverPosture.ReviewFirst &&
         task.metadata.weeklyCarryoverDisposition === "review"
       ) {
         priorityScore -= 18;
       }
       if (
-        weeklyState?.carryoverPosture === WeeklyCarryoverPosture.Aggressive &&
+        effectiveCarryover === WeeklyCarryoverPosture.Aggressive &&
         task.schedulingState === TaskSchedulingState.Rolled
       ) {
         priorityScore += 8;
@@ -460,15 +464,20 @@ function buildPlan(
   const existing = request.existingPlan;
   const timestamp = new Date().toISOString();
   const regression = effectiveProfile?.regression;
+  const monthlyDefaults = deriveWeeklyDefaultsFromMonthlyStrategy(request.monthlyReviewState);
   const weeklyState = request.weeklyReviewState;
+  const effectiveEmphasis = weeklyState?.weeklyEmphasis ?? monthlyDefaults?.weeklyEmphasis ?? null;
   const weeklyEmphasisNote =
-    weeklyState?.weeklyEmphasis === WeeklyEmphasis.ProtectEssentials
+    effectiveEmphasis === WeeklyEmphasis.ProtectEssentials
       ? "This week is protecting essentials first."
-      : weeklyState?.weeklyEmphasis === WeeklyEmphasis.PushMeaningfulArea
+      : effectiveEmphasis === WeeklyEmphasis.PushMeaningfulArea
         ? "This week is concentrating pressure into one meaningful area."
-        : weeklyState?.weeklyEmphasis === WeeklyEmphasis.SteadyProgress
+        : effectiveEmphasis === WeeklyEmphasis.SteadyProgress
           ? "This week is aiming for steady progress over sharp swings."
           : null;
+  const monthlyStrategyNote = request.monthlyReviewState?.strategySetAt
+    ? `Monthly strategy is steering toward ${request.monthlyReviewState.monthPosture?.replaceAll("_", " ") ?? "stability"}.`
+    : null;
 
   return {
     id: existing?.id ?? `generated-plan-${request.date}`,
@@ -493,7 +502,7 @@ function buildPlan(
         ? "Recent execution has softened, so the plan is intentionally lighter to preserve momentum."
         : signals.overloadWarning
           ? "Demand exceeds believable capacity, so only the most executable subset was scheduled."
-          : weeklyEmphasisNote ?? "The day is intentionally underpacked to preserve follow-through.",
+          : weeklyEmphasisNote ?? monthlyStrategyNote ?? "The day is intentionally underpacked to preserve follow-through.",
     totalPlannedMinutes: scheduledTasks.reduce((sum, task) => sum + task.durationMinutes, 0),
     totalCommittedMinutes: scheduledTasks.reduce((sum, task) => sum + task.durationMinutes, 0),
     adaptationProfileId: effectiveProfile?.id ?? null,
@@ -577,6 +586,9 @@ export function buildDailySchedule(request: SchedulingRequest): SchedulingOutput
     null;
   const personalization =
     effectiveProfile?.personalization.active ? effectiveProfile.personalization : null;
+  const monthlyDefaults = deriveWeeklyDefaultsFromMonthlyStrategy(request.monthlyReviewState);
+  const effectiveIntensity =
+    request.weeklyReviewState?.targetWeekIntensity ?? monthlyDefaults?.targetWeekIntensity ?? null;
   const focusBudget = effectiveProfile?.capacity.focusBudgetMinutes
     ? effectiveProfile.capacity.focusBudgetMinutes + 30
     : request.preferences.defaultFocusSessionMinutes * 3;
@@ -593,14 +605,14 @@ export function buildDailySchedule(request: SchedulingRequest): SchedulingOutput
       Math.min(
         focusBudget,
         directives.dailyPlannedMinutesTarget +
-          weeklyIntensityModifier(request.weeklyReviewState?.targetWeekIntensity).minuteDelta +
+          weeklyIntensityModifier(effectiveIntensity).minuteDelta +
           (personalization?.intensityStyle === "high" ? 10 : personalization?.intensityStyle === "light" ? -10 : 0),
       ),
     ),
   );
   const scheduledTaskCap = Math.max(
     2,
-    directives.dailyTaskSoftCap + weeklyIntensityModifier(request.weeklyReviewState?.targetWeekIntensity).taskDelta,
+    directives.dailyTaskSoftCap + weeklyIntensityModifier(effectiveIntensity).taskDelta,
   );
 
   for (const candidate of buildCandidates(request.tasks, protectiveMode, directives, request)) {

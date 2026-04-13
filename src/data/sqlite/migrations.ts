@@ -576,4 +576,39 @@ export const schemaMigrations: MigrationDefinition[] = [
       `CREATE INDEX IF NOT EXISTS idx_weekly_review_states_week_start_date ON weekly_review_states(week_start_date DESC);`,
     ],
   },
+  {
+    id: 8,
+    name: "phase_19_monthly_review",
+    statements: [
+      `
+        CREATE TABLE IF NOT EXISTS monthly_review_states (
+          id TEXT PRIMARY KEY NOT NULL,
+          month_start_date TEXT NOT NULL UNIQUE,
+          month_end_date TEXT NOT NULL,
+          reviewed_at TEXT,
+          strategy_set_at TEXT,
+          month_posture TEXT,
+          monthly_emphasis TEXT,
+          pressure_level TEXT,
+          carryover_stance TEXT,
+          review_note TEXT,
+          strategy_note TEXT,
+          recommit_goal_ids_json TEXT NOT NULL DEFAULT '[]',
+          reduce_goal_ids_json TEXT NOT NULL DEFAULT '[]',
+          pause_goal_ids_json TEXT NOT NULL DEFAULT '[]',
+          goal_coverage_json TEXT NOT NULL DEFAULT '[]',
+          summary_json TEXT,
+          metadata_json TEXT NOT NULL,
+          owner_user_id TEXT,
+          remote_id TEXT,
+          sync_state TEXT NOT NULL,
+          version INTEGER NOT NULL,
+          last_synced_at TEXT,
+          created_at TEXT NOT NULL,
+          updated_at TEXT NOT NULL
+        );
+      `,
+      `CREATE INDEX IF NOT EXISTS idx_monthly_review_states_month_start_date ON monthly_review_states(month_start_date DESC);`,
+    ],
+  },
 ];
