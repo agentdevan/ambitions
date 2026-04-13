@@ -56,6 +56,7 @@ export enum SyncConflictStatus {
 }
 
 export type SyncEntityKind =
+  | "ambition"
   | "goal"
   | "milestone"
   | "task"

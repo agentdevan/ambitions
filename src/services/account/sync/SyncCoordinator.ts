@@ -1,5 +1,6 @@
 import {
   AdaptationProfile,
+  Ambition,
   ActivityEvent,
   DailyPlan,
   DailyRitualState,
@@ -47,6 +48,7 @@ interface SyncRepositories {
 }
 
 interface LocalSyncState {
+  ambitions: Ambition[];
   goals: Goal[];
   milestones: GoalMilestone[];
   tasks: Task[];
@@ -70,6 +72,7 @@ export class SyncCoordinator {
 
   async countMeaningfulLocalRecords() {
     const [
+      ambitions,
       goals,
       milestones,
       tasks,
@@ -80,6 +83,7 @@ export class SyncCoordinator {
       preferences,
       activityEvents,
     ] = await Promise.all([
+      this.repositories.goals.listAmbitions(),
       this.repositories.goals.listGoals(),
       this.repositories.goals.listMilestones(),
       this.repositories.tasks.listTasks(),
@@ -93,6 +97,7 @@ export class SyncCoordinator {
 
     return {
       hasMeaningfulLocalData:
+        ambitions.length > 0 ||
         goals.length > 0 ||
         milestones.length > 0 ||
         tasks.length > 0 ||
@@ -104,6 +109,7 @@ export class SyncCoordinator {
         preferences?.metadata.onboardingCompleted === true ||
         preferences?.metadata.onboardingCompleted === "true",
       pendingRecordCount:
+        ambitions.length +
         goals.length +
         milestones.length +
         tasks.length +
@@ -135,6 +141,11 @@ export class SyncCoordinator {
     const now = new Date().toISOString();
     const localState = await this.loadLocalSyncState();
 
+    await this.repositories.goals.saveAmbitions(
+      localState.ambitions.map((ambition) =>
+        prepareOwnedRecord("ambition", ambition, accountId, now),
+      ),
+    );
     await this.repositories.goals.saveGoals(
       localState.goals.map((goal) => prepareOwnedRecord("goal", goal, accountId, now)),
     );
@@ -425,6 +436,7 @@ export class SyncCoordinator {
 
   private async loadLocalSyncState(): Promise<LocalSyncState> {
     const [
+      ambitions,
       goals,
       milestones,
       tasks,
@@ -438,6 +450,7 @@ export class SyncCoordinator {
       timeBlocks,
       activityEvents,
     ] = await Promise.all([
+      this.repositories.goals.listAmbitions(),
       this.repositories.goals.listGoals(),
       this.repositories.goals.listMilestones(),
       this.repositories.tasks.listTasks(),
@@ -453,6 +466,7 @@ export class SyncCoordinator {
     ]);
 
     return {
+      ambitions,
       goals,
       milestones,
       tasks,
@@ -470,6 +484,8 @@ export class SyncCoordinator {
 
   private getByKind(state: LocalSyncState, kind: SyncEntityKind): SyncEntityRecord[] {
     switch (kind) {
+      case "ambition":
+        return state.ambitions;
       case "goal":
         return state.goals;
       case "milestone":
@@ -501,6 +517,8 @@ export class SyncCoordinator {
 
   private async saveLocalRecord(kind: SyncEntityKind, record: SyncEntityRecord) {
     switch (kind) {
+      case "ambition":
+        return this.repositories.goals.saveAmbitions([record as Ambition]);
       case "goal":
         return this.repositories.goals.saveGoals([record as Goal]);
       case "milestone":

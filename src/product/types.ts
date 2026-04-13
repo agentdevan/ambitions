@@ -133,6 +133,7 @@ export interface ProductPreferences {
 }
 
 export interface GoalDraftInference {
+  ambitionId: string | null;
   title: string;
   naturalLanguage: string;
   summary: string | null;

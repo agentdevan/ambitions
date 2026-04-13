@@ -21,13 +21,14 @@ import { SelectionCard } from "../../components/ui/SelectionCard";
 import { Surface } from "../../components/ui/Surface";
 import { AppText } from "../../components/ui/Text";
 import { TextField } from "../../components/ui/TextField";
-import { Goal, GoalMilestoneStatus, GoalStatus, TaskStatus } from "../../domain/models";
+import { AmbitionStatus, Goal, GoalMilestoneStatus, GoalStatus, TaskStatus } from "../../domain/models";
 import { GoalsStackParamList } from "../../navigation/types";
 import { inferGoalDraft } from "../../product/goalIntake";
 import { createGoalArtifacts } from "../../product/planOrchestrator";
 import { GoalPaceMode, GoalStrategyComposer } from "../../product/types";
 import { describeLifecycleOptions } from "../../services/goals/downstreamHandlingPolicies";
 import { describeGoalFeasibility, describeGoalPaceMode, getGoalIntelligenceSnapshot } from "../../services/goals/goalIntelligence";
+import { buildGoalProgressTruth } from "../../services/goals/progress";
 import {
   GoalDownstreamChoice,
   GoalEditImpactPreview,
@@ -109,14 +110,27 @@ function paceChipTone(mode: GoalPaceMode) {
   return "neutral" as const;
 }
 
+function ambitionStatusLabel(status: AmbitionStatus) {
+  switch (status) {
+    case AmbitionStatus.Paused:
+      return "Paused";
+    case AmbitionStatus.Archived:
+      return "Archived";
+    default:
+      return "Active";
+  }
+}
+
 export function GoalDetailScreen({
   route,
   navigation,
 }: NativeStackScreenProps<GoalsStackParamList, "GoalDetail">) {
   const { goal, goalMilestones, visibleTasks } = useGoalData(route.params.goalId);
+  const ambitions = useAppStore((state) => state.ambitions);
   const activityEvents = useAppStore((state) => state.activityEvents);
-  const adaptationProfile = useAppStore((state) => state.adaptationProfile);
-  const productPreferences = useAppStore((state) => state.productPreferences);
+  const timeBlocks = useAppStore((state) => state.allTimeBlocks);
+  const currentWeekReview = useAppStore((state) => state.currentWeekReview);
+  const currentMonthReview = useAppStore((state) => state.currentMonthReview);
   const updateGoal = useAppStore((state) => state.updateGoal);
   const setGoalStatusWithHandling = useAppStore((state) => state.setGoalStatusWithHandling);
   const undoGoalRegeneration = useAppStore((state) => state.undoGoalRegeneration);
@@ -145,6 +159,9 @@ export function GoalDetailScreen({
     activeTasks.find((task) => task.status === TaskStatus.Scheduled) ??
     activeTasks[0] ??
     null;
+  const ambition = resolvedGoal
+    ? ambitions.find((entry) => entry.id === resolvedGoal.ambitionId) ?? null
+    : null;
 
   if (!resolvedGoal) {
     return (
@@ -163,8 +180,16 @@ export function GoalDetailScreen({
     milestones: goalMilestones,
     tasks: visibleTasks,
     events: activityFeed,
-    profile: adaptationProfile,
-    adaptiveEnabled: productPreferences?.adaptivePlanningEnabled !== false,
+  });
+  const progressTruth = buildGoalProgressTruth({
+    goal: goalRecord,
+    ambition,
+    milestones: goalMilestones,
+    tasks: visibleTasks,
+    timeBlocks,
+    activityFeed,
+    currentWeekReview,
+    currentMonthReview,
   });
 
   function openLifecycleDialog(status: GoalStatus.Paused | GoalStatus.Archived) {
@@ -248,6 +273,10 @@ export function GoalDetailScreen({
                     value: currentMilestone?.title ?? "No active milestone",
                   },
                   {
+                    label: "Ambition",
+                    value: ambition?.title ?? "Not linked yet",
+                  },
+                  {
                     label: "Protected work",
                     value: `${protectedTasks.length} tasks`,
                   },
@@ -270,38 +299,70 @@ export function GoalDetailScreen({
 
           <DetailSection
             title="Progress"
-            description={progressSummary.reflection}
+            description={progressTruth.paceSummary}
           >
             <DetailSummaryStrip
               items={[
                 {
-                  label: "Milestones",
-                  value: `${progressSummary.completedMilestones}/${progressSummary.milestoneCount}`,
+                  label: "Pace",
+                  value: progressTruth.paceLabel,
                   detail:
-                    progressSummary.completedMilestones > 0
-                      ? "Checkpoint movement is visible"
-                      : "Still waiting on a first completion",
+                    progressTruth.deadlineSummary ?? "Pace truth is grounded in recent execution.",
+                },
+                {
+                  label: "This week",
+                  value: `${Math.round(progressTruth.currentWeekScheduledMinutes / 60)} hr`,
+                  detail: progressTruth.representationSummary,
                 },
                 {
                   label: "In motion",
-                  value: String(progressSummary.activeTasks),
+                  value: String(progressTruth.activeTaskCount),
                   detail: nextTask ? `Next: ${nextTask.title}` : "Nothing queued right now",
                 },
                 {
-                  label: "Completed work",
-                  value: String(progressSummary.completedTasks),
-                  detail: "Finished inside this goal",
-                },
-                {
-                  label: "Carryover",
-                  value: String(progressSummary.carryTasks),
+                  label: "This month",
+                  value: `${Math.round(progressTruth.currentMonthScheduledMinutes / 60)} hr`,
                   detail:
-                    progressSummary.carryTasks > 0
-                      ? "Work that was moved or held for later"
-                      : "No visible carryover right now",
+                    progressTruth.crowded
+                      ? "The work is crowding the room it has."
+                      : progressTruth.stale
+                        ? "The goal has gone quiet recently."
+                        : "Recent execution is still visible.",
                 },
               ]}
             />
+          </DetailSection>
+
+          <DetailSection
+            title="Direction"
+            description={
+              ambition
+                ? ambition.thesis ?? "This goal sits inside a larger direction."
+                : "Tie this goal to a bigger direction so the work stays meaningful."
+            }
+          >
+            <View className="gap-3">
+              <DrillInRow
+                title={ambition ? ambition.title : "No ambition linked yet"}
+                subtitle={
+                  ambition
+                    ? `${ambitionStatusLabel(ambition.status)} direction above this goal`
+                    : "Link an ambition to show what this goal serves."
+                }
+                detail={ambition ? "Open ambition" : "Link now"}
+                onPress={() =>
+                  ambition
+                    ? navigation.navigate("AmbitionDetail", { ambitionId: ambition.id })
+                    : navigation.navigate("GoalEdit", { goalId: resolvedGoal.id })
+                }
+              />
+              <Surface tone="sunken" className="gap-2 mb-0">
+                <AppText variant="caption">{progressTruth.paceSummary}</AppText>
+                <AppText tone="secondary" variant="caption">
+                  {progressTruth.representationSummary}
+                </AppText>
+              </Surface>
+            </View>
           </DetailSection>
 
           <DetailSection
@@ -352,8 +413,8 @@ export function GoalDetailScreen({
               />
               <DrillInRow
                 title="Progress"
-                subtitle="Work, milestones, movement"
-                detail={`${visibleTasks.length} tasks`}
+                subtitle={progressTruth.paceSummary}
+                detail={progressTruth.paceLabel}
                 onPress={() => navigation.navigate("GoalProgress", { goalId: resolvedGoal.id })}
               />
               <DrillInRow
@@ -675,10 +736,12 @@ export function GoalProgressScreen({
   navigation,
 }: NativeStackScreenProps<GoalsStackParamList, "GoalProgress">) {
   const { goal, visibleTasks } = useGoalData(route.params.goalId);
+  const ambitions = useAppStore((state) => state.ambitions);
   const milestones = useAppStore((state) => state.milestones.filter((entry) => entry.goalId === route.params.goalId));
   const activityEvents = useAppStore((state) => state.activityEvents);
-  const adaptationProfile = useAppStore((state) => state.adaptationProfile);
-  const productPreferences = useAppStore((state) => state.productPreferences);
+  const timeBlocks = useAppStore((state) => state.allTimeBlocks);
+  const currentWeekReview = useAppStore((state) => state.currentWeekReview);
+  const currentMonthReview = useAppStore((state) => state.currentMonthReview);
 
   if (!goal) {
     return (
@@ -696,13 +759,22 @@ export function GoalProgressScreen({
     (event) => event.goalId === goal.id,
   );
   const groupedActivity = groupActivityByDate(activityFeed.slice(0, 10));
+  const ambition = ambitions.find((entry) => entry.id === goal.ambitionId) ?? null;
   const progressSummary = summarizeGoalProgress({
     goal,
     milestones,
     tasks: visibleTasks,
     events: activityFeed,
-    profile: adaptationProfile,
-    adaptiveEnabled: productPreferences?.adaptivePlanningEnabled !== false,
+  });
+  const progressTruth = buildGoalProgressTruth({
+    goal,
+    ambition,
+    milestones,
+    tasks: visibleTasks,
+    timeBlocks,
+    activityFeed,
+    currentWeekReview,
+    currentMonthReview,
   });
   const momentum = buildMomentumSeries(activityFeed, 7);
 
@@ -712,29 +784,46 @@ export function GoalProgressScreen({
         <DetailHero
           eyebrow="Goal"
           title="Progress"
-          description={progressSummary.reflection}
+          description={progressTruth.paceSummary}
           meta={
             <DetailSummaryStrip
               items={[
                 {
-                  label: "Active",
-                  value: String(progressSummary.activeTasks),
-                  detail: "Currently in rotation",
+                  label: "Pace",
+                  value: progressTruth.paceLabel,
+                  detail: progressTruth.deadlineSummary ?? "Grounded in deadline and execution truth.",
+                },
+                {
+                  label: "This week",
+                  value: `${Math.round(progressTruth.currentWeekScheduledMinutes / 60)} hr`,
+                  detail: progressTruth.representationSummary,
                 },
                 {
                   label: "Protected",
                   value: String(protectedTasks.length),
-                  detail: "Held steady through changes",
-                },
-                {
-                  label: "Completed",
-                  value: String(progressSummary.completedTasks),
-                  detail: "Finished work",
+                  detail: ambition ? `Serves ${ambition.title}` : "No ambition linked yet",
                 },
               ]}
             />
           }
         />
+
+        <DetailSection
+          title="Truth read"
+          description="Movement, realism, and representation in one path."
+        >
+          <Surface className="mb-0 gap-3">
+            <AppText>{progressTruth.paceSummary}</AppText>
+            <QuietMetaLine
+              items={[
+                `${Math.round(progressTruth.currentMonthScheduledMinutes / 60)} hr this month`,
+                progressTruth.crowded ? "Crowded" : "Not crowded",
+                progressTruth.stale ? "Recently stale" : "Still active",
+              ]}
+            />
+            <AppText tone="secondary">{progressTruth.representationSummary}</AppText>
+          </Surface>
+        </DetailSection>
 
         <DetailSection
           title="Momentum"
@@ -901,12 +990,14 @@ export function GoalEditScreen({
   route,
   navigation,
 }: NativeStackScreenProps<GoalsStackParamList, "GoalEdit">) {
+  const ambitions = useAppStore((state) => state.ambitions);
   const goals = useAppStore((state) => state.goals);
   const domains = useAppStore((state) => state.domains);
   const planDate = useAppStore((state) => state.planDate);
   const productPreferences = useAppStore((state) => state.productPreferences);
   const userPreferences = useAppStore((state) => state.userPreferences);
   const adaptationProfile = useAppStore((state) => state.adaptationProfile);
+  const createAmbition = useAppStore((state) => state.createAmbition);
   const createGoal = useAppStore((state) => state.createGoal);
   const updateGoal = useAppStore((state) => state.updateGoal);
   const previewGoalEdit = useAppStore((state) => state.previewGoalEdit);
@@ -924,6 +1015,10 @@ export function GoalEditScreen({
   const [manualDesiredWeeklyMinutes, setManualDesiredWeeklyMinutes] = useState(
     goal?.desiredWeeklyMinutes ? String(goal.desiredWeeklyMinutes) : "",
   );
+  const [selectedAmbitionId, setSelectedAmbitionId] = useState<string | null>(goal?.ambitionId ?? null);
+  const [creatingAmbition, setCreatingAmbition] = useState(false);
+  const [newAmbitionTitle, setNewAmbitionTitle] = useState("");
+  const [newAmbitionThesis, setNewAmbitionThesis] = useState("");
   const [selectedPaceMode, setSelectedPaceMode] = useState<GoalPaceMode>("balanced");
   const [paceSelectionSource, setPaceSelectionSource] = useState<"auto" | "manual">("auto");
   const [strategyComposer, setStrategyComposer] = useState<GoalStrategyComposer | null>(null);
@@ -947,6 +1042,8 @@ export function GoalEditScreen({
     setManualSuccessMetric(goal.successMetric ?? "");
     setManualNotes(goal.notes ?? "");
     setManualDesiredWeeklyMinutes(goal.desiredWeeklyMinutes ? String(goal.desiredWeeklyMinutes) : "");
+    setSelectedAmbitionId(goal.ambitionId ?? null);
+    setCreatingAmbition(false);
   }, [goal]);
 
   const inference = useMemo(
@@ -967,6 +1064,7 @@ export function GoalEditScreen({
 
     return {
       ...inference,
+      ambitionId: selectedAmbitionId,
       title: manualTitle.trim() || inference.title,
       summary: manualSummary.trim() || inference.summary,
       targetDate: manualTargetDate.trim() || inference.targetDate,
@@ -988,6 +1086,7 @@ export function GoalEditScreen({
     manualSummary,
     manualTargetDate,
     manualTitle,
+    selectedAmbitionId,
     selectedPaceMode,
   ]);
 
@@ -1044,6 +1143,7 @@ export function GoalEditScreen({
 
     return {
       title: manualTitle.trim() || existingGoal.title,
+      ambitionId: selectedAmbitionId,
       summary: manualSummary.trim() || null,
       targetDate: manualTargetDate.trim() || null,
       domainKey: manualDomainKey ?? existingGoal.domainKey,
@@ -1056,6 +1156,26 @@ export function GoalEditScreen({
     } satisfies Partial<Goal>;
   }
 
+  async function resolveAmbitionId() {
+    if (!creatingAmbition) {
+      return selectedAmbitionId;
+    }
+
+    const title = newAmbitionTitle.trim();
+    if (!title) {
+      throw new Error("A new ambition needs a title.");
+    }
+
+    const ambition = await createAmbition({
+      title,
+      thesis: newAmbitionThesis,
+      status: AmbitionStatus.Active,
+    });
+    setSelectedAmbitionId(ambition.id);
+    setCreatingAmbition(false);
+    return ambition.id;
+  }
+
   async function handleCreate() {
     if (!composedInference) {
       return;
@@ -1065,7 +1185,8 @@ export function GoalEditScreen({
     setRuntimeMessage(null);
 
     try {
-      await createGoal(composedInference);
+      const ambitionId = await resolveAmbitionId();
+      await createGoal({ ...composedInference, ambitionId });
       const latestGoal = [...useAppStore.getState().goals].sort((left, right) =>
         right.createdAt.localeCompare(left.createdAt),
       )[0];
@@ -1095,6 +1216,7 @@ export function GoalEditScreen({
     setRuntimeMessage(null);
 
     try {
+      patch.ambitionId = await resolveAmbitionId();
       const impact = await previewGoalEdit(goal.id, patch);
       if (!impact.hasDownstream || impact.changedFields.length === 0) {
         await updateGoal(goal.id, patch);
@@ -1201,6 +1323,66 @@ export function GoalEditScreen({
                 multiline
                 value={manualNotes}
               />
+            </Surface>
+          </DetailSection>
+
+          <DetailSection
+            title="Ambition"
+            description="What bigger direction this goal serves."
+          >
+            <Surface className="gap-4 mb-0">
+              <View className="flex-row flex-wrap gap-2">
+                <OptionChip
+                  selected={!creatingAmbition && selectedAmbitionId === null}
+                  onPress={() => {
+                    setCreatingAmbition(false);
+                    setSelectedAmbitionId(null);
+                  }}
+                >
+                  None yet
+                </OptionChip>
+                {ambitions
+                  .filter((ambition) => ambition.status !== AmbitionStatus.Archived)
+                  .map((ambition) => (
+                    <OptionChip
+                      key={ambition.id}
+                      selected={!creatingAmbition && selectedAmbitionId === ambition.id}
+                      onPress={() => {
+                        setCreatingAmbition(false);
+                        setSelectedAmbitionId(ambition.id);
+                      }}
+                    >
+                      {ambition.title}
+                    </OptionChip>
+                  ))}
+                <OptionChip
+                  selected={creatingAmbition}
+                  onPress={() => {
+                    setCreatingAmbition(true);
+                    setSelectedAmbitionId(null);
+                  }}
+                >
+                  New ambition
+                </OptionChip>
+              </View>
+
+              {creatingAmbition ? (
+                <View className="gap-4">
+                  <TextField
+                    label="Ambition title"
+                    value={newAmbitionTitle}
+                    onChangeText={setNewAmbitionTitle}
+                    placeholder="Build a steadier creative season"
+                  />
+                  <TextField
+                    label="Direction note"
+                    value={newAmbitionThesis}
+                    onChangeText={setNewAmbitionThesis}
+                    multiline
+                    placeholder="What this direction is trying to protect or build."
+                  />
+                </View>
+              ) : null}
             </Surface>
           </DetailSection>
 

@@ -1,6 +1,7 @@
 import { appServices } from "../bootstrap/runtime/appServices";
 import {
   AdaptationProfile,
+  Ambition,
   ActivityEvent,
   CalendarConnectionState,
   DailyPlan,
@@ -31,6 +32,7 @@ export const initialPlanDate = getCurrentLocalDateString();
 
 export interface FoundationSnapshot {
   domains: Awaited<ReturnType<typeof appServices.repositories.preferences.listDomains>>;
+  ambitions: Ambition[];
   goals: Goal[];
   milestones: GoalMilestone[];
   preferences: UserPreferences | null;
@@ -175,6 +177,7 @@ function shouldBuildSchedule(preferences: UserPreferences | null, goals: Goal[],
 export async function loadFoundationSnapshot(date: string): Promise<FoundationSnapshot> {
   const [
     domains,
+    ambitions,
     goals,
     milestones,
     preferences,
@@ -195,6 +198,7 @@ export async function loadFoundationSnapshot(date: string): Promise<FoundationSn
     activityEvents,
   ] = await Promise.all([
     appServices.repositories.preferences.listDomains(),
+    appServices.repositories.goals.listAmbitions(),
     appServices.repositories.goals.listGoals(),
     appServices.repositories.goals.listMilestones(),
     appServices.repositories.preferences.getUserPreferences(),
@@ -303,6 +307,7 @@ export async function loadFoundationSnapshot(date: string): Promise<FoundationSn
   ].sort((left, right) => right.confidence - left.confidence);
   return {
     domains,
+    ambitions,
     goals,
     milestones,
     preferences,
@@ -360,6 +365,7 @@ export async function refreshAllState(date: string) {
   return {
     planDate: date,
     domains: snapshot.domains,
+    ambitions: snapshot.ambitions,
     goals: snapshot.goals,
     milestones: snapshot.milestones,
     allTasks: snapshot.allTasks,

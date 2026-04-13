@@ -7,7 +7,6 @@ import { PageHeader } from "../../components/navigation/PageHeader";
 import { Button } from "../../components/ui/Button";
 import { EmptyStateCard } from "../../components/ui/EmptyStateCard";
 import { Pill } from "../../components/ui/Pill";
-import { ProgressBar } from "../../components/ui/ProgressBar";
 import { Screen } from "../../components/ui/Screen";
 import { Surface } from "../../components/ui/Surface";
 import { AppText } from "../../components/ui/Text";
@@ -15,8 +14,9 @@ import { useResolvedTheme } from "../../design/theme/useResolvedTheme";
 import { GoalStatus } from "../../domain/models";
 import { GoalsStackParamList } from "../../navigation/types";
 import { describeGoalFeasibility, describeGoalPaceMode, getGoalIntelligenceSnapshot } from "../../services/goals/goalIntelligence";
+import { buildDirectionPortfolioSnapshot, buildGoalProgressTruth } from "../../services/goals/progress";
 import { getGoalReviewDraft } from "../../services/goals/metadata";
-import { buildActivityFeed, summarizeGoalProgress } from "../../services/history/selectors";
+import { buildActivityFeed } from "../../services/history/selectors";
 import { useAppStore } from "../../state/useAppStore";
 import { formatShortDate } from "../../utils/date";
 
@@ -70,12 +70,14 @@ function GoalCard({
 }
 
 export function GoalsScreen({ navigation }: Props) {
+  const ambitions = useAppStore((state) => state.ambitions);
   const goals = useAppStore((state) => state.goals);
   const milestones = useAppStore((state) => state.milestones);
   const tasks = useAppStore((state) => state.allTasks);
+  const timeBlocks = useAppStore((state) => state.allTimeBlocks);
   const activityEvents = useAppStore((state) => state.activityEvents);
-  const adaptationProfile = useAppStore((state) => state.adaptationProfile);
-  const productPreferences = useAppStore((state) => state.productPreferences);
+  const currentWeekReview = useAppStore((state) => state.currentWeekReview);
+  const currentMonthReview = useAppStore((state) => state.currentMonthReview);
 
   const activeGoals = goals.filter((goal) => goal.status === GoalStatus.Active);
   const inactiveGoals = goals.filter((goal) =>
@@ -83,8 +85,25 @@ export function GoalsScreen({ navigation }: Props) {
   );
   const reviewGoals = goals.filter((goal) => getGoalReviewDraft(goal) !== null);
   const feed = buildActivityFeed(activityEvents, tasks, milestones);
-  const totalMilestones = milestones.length;
-  const totalTasks = tasks.length;
+  const goalTruths = activeGoals.map((goal) =>
+    buildGoalProgressTruth({
+      goal,
+      ambition: ambitions.find((entry) => entry.id === goal.ambitionId) ?? null,
+      milestones: milestones.filter((item) => item.goalId === goal.id),
+      tasks: tasks.filter((item) => item.goalId === goal.id),
+      timeBlocks,
+      activityFeed: feed,
+      currentWeekReview,
+      currentMonthReview,
+    }),
+  );
+  const directionPortfolio = buildDirectionPortfolioSnapshot({
+    ambitions,
+    goals: activeGoals,
+    goalTruths,
+  });
+  const linkedActiveGoalCount = activeGoals.filter((goal) => goal.ambitionId).length;
+  const unlinkedActiveGoals = activeGoals.filter((goal) => !goal.ambitionId);
 
   return (
     <Screen>
@@ -92,11 +111,16 @@ export function GoalsScreen({ navigation }: Props) {
         <PageHeader
           eyebrow="Goals"
           title="Goals"
-          description="Active work first."
+          description="Direction and active work."
           action={
-            <Button size="compact" onPress={() => navigation.navigate("GoalEdit", {})}>
-              New goal
-            </Button>
+            <View className="flex-row gap-2">
+              <Button size="compact" tone="secondary" onPress={() => navigation.navigate("AmbitionEdit", {})}>
+                New ambition
+              </Button>
+              <Button size="compact" onPress={() => navigation.navigate("GoalEdit", {})}>
+                New goal
+              </Button>
+            </View>
           }
         />
 
@@ -116,38 +140,68 @@ export function GoalsScreen({ navigation }: Props) {
           <>
             <Surface tone="hero" className="gap-4">
               <View className="flex-row flex-wrap gap-2">
+                <Pill label={`${directionPortfolio.ambitions.length} ambitions`} tone="quiet" />
                 <Pill label={`${activeGoals.length} active`} tone="accent" />
                 {reviewGoals.length > 0 ? (
                   <Pill label={`${reviewGoals.length} review`} tone="quiet" />
                 ) : null}
               </View>
               <View className="gap-2">
-                <AppText variant="title">Keep the set small.</AppText>
+                <AppText variant="title">Keep direction visible.</AppText>
                 <AppText tone="secondary" variant="caption">
-                  {totalMilestones} milestones across {totalTasks} tasks.
+                  {linkedActiveGoalCount} active goals already serve a named ambition.
                 </AppText>
               </View>
+              {directionPortfolio.underrepresentedAmbitionIds.length > 0 ? (
+                <AppText tone="secondary" variant="caption">
+                  Some active ambitions are not getting enough room in the current week.
+                </AppText>
+              ) : null}
             </Surface>
 
+            {directionPortfolio.ambitions.length > 0 ? (
+              <Surface className="gap-4">
+                <View className="gap-1">
+                  <AppText tone="tertiary" variant="micro" style={{ textTransform: "uppercase" }}>
+                    Ambitions
+                  </AppText>
+                  <AppText variant="title">Direction portfolio</AppText>
+                </View>
+                <View className="gap-3">
+                  {directionPortfolio.ambitions.map((ambitionTruth) => {
+                    const ambition = ambitions.find((entry) => entry.id === ambitionTruth.ambitionId);
+                    if (!ambition) {
+                      return null;
+                    }
+
+                    return (
+                      <DrillInRow
+                        key={ambition.id}
+                        title={ambition.title}
+                        subtitle={ambitionTruth.portfolioSummary}
+                        detail={ambitionTruth.representationLabel}
+                        leading={<Pill label={`${ambitionTruth.activeGoalCount} goals`} tone="quiet" />}
+                        onPress={() => navigation.navigate("AmbitionDetail", { ambitionId: ambition.id })}
+                      />
+                    );
+                  })}
+                </View>
+              </Surface>
+            ) : null}
+
             <View className="gap-3">
+              <View className="gap-1">
+                <AppText tone="tertiary" variant="micro" style={{ textTransform: "uppercase" }}>
+                  Active goals
+                </AppText>
+                <AppText variant="title">Current truth</AppText>
+              </View>
               {activeGoals.map((goal) => {
-                const goalSummary = summarizeGoalProgress({
-                  goal,
-                  milestones: milestones.filter((item) => item.goalId === goal.id),
-                  tasks: tasks.filter((item) => item.goalId === goal.id),
-                  events: feed,
-                  profile: adaptationProfile,
-                  adaptiveEnabled: productPreferences?.adaptivePlanningEnabled !== false,
-                });
-                const completionRatio =
-                  goalSummary.milestoneCount > 0
-                    ? goalSummary.completedMilestones / goalSummary.milestoneCount
-                    : goalSummary.taskCount > 0
-                      ? goalSummary.completedTasks / goalSummary.taskCount
-                      : 0;
+                const goalTruth = goalTruths.find((entry) => entry.goalId === goal.id);
                 const reviewDraft = getGoalReviewDraft(goal);
                 const intelligence = getGoalIntelligenceSnapshot(goal);
                 const feasibility = describeGoalFeasibility(goal);
+                const ambition = ambitions.find((entry) => entry.id === goal.ambitionId) ?? null;
 
                 return (
                   <Surface key={goal.id} className="gap-4">
@@ -171,6 +225,9 @@ export function GoalsScreen({ navigation }: Props) {
                             ? `Target ${formatShortDate(goal.targetDate)}`
                             : goal.horizon}
                         </AppText>
+                        <AppText tone="secondary" variant="caption">
+                          {ambition ? `Serves ${ambition.title}` : "No ambition linked yet"}
+                        </AppText>
                       </View>
                       <Button
                         tone="tertiary"
@@ -181,16 +238,14 @@ export function GoalsScreen({ navigation }: Props) {
                       </Button>
                     </View>
 
-                    <ProgressBar progress={completionRatio} />
-
-                    <View className="flex-row items-center justify-between">
-                      <AppText tone="secondary" variant="caption">
-                        {goalSummary.completedMilestones}/{goalSummary.milestoneCount || goalSummary.taskCount} complete
-                      </AppText>
-                      <AppText tone="secondary" variant="caption">
-                        {Math.round(completionRatio * 100)}%
-                      </AppText>
-                    </View>
+                    {goalTruth ? (
+                      <Surface tone="sunken" className="gap-2 mb-0">
+                        <AppText variant="caption">{goalTruth.paceSummary}</AppText>
+                        <AppText tone="secondary" variant="caption">
+                          {goalTruth.representationSummary}
+                        </AppText>
+                      </Surface>
+                    ) : null}
 
                     {feasibility ? (
                       <Surface tone="sunken" className="gap-2 mb-0">
@@ -203,18 +258,26 @@ export function GoalsScreen({ navigation }: Props) {
 
                     <View className="gap-3">
                       <GoalCard
-                        title="Milestones"
-                        subtitle={`${goalSummary.activeTasks} active tasks`}
-                        detail={`${goalSummary.completedMilestones}/${goalSummary.milestoneCount || 0}`}
+                        title="Direction"
+                        subtitle={ambition ? ambition.title : "Link a bigger direction"}
+                        detail={goalTruth?.paceLabel ?? "Open"}
                         actionLabel="Review"
-                        iconName="git-branch-outline"
+                        iconName="sparkles-outline"
                         highlighted={!!reviewDraft}
-                        onPress={() => navigation.navigate("GoalMilestones", { goalId: goal.id })}
+                        onPress={() =>
+                          ambition
+                            ? navigation.navigate("AmbitionDetail", { ambitionId: ambition.id })
+                            : navigation.navigate("GoalEdit", { goalId: goal.id })
+                        }
                       />
                       <GoalCard
                         title="Progress"
-                        subtitle={goalSummary.reflection}
-                        detail={`${goalSummary.completedTasks} done`}
+                        subtitle={goalTruth?.representationSummary ?? "Open the progress read"}
+                        detail={
+                          goalTruth
+                            ? `${Math.round(goalTruth.currentWeekScheduledMinutes / 60)} hr this week`
+                            : "Open"
+                        }
                         actionLabel="Open"
                         iconName="stats-chart-outline"
                         onPress={() => navigation.navigate("GoalProgress", { goalId: goal.id })}
@@ -224,6 +287,28 @@ export function GoalsScreen({ navigation }: Props) {
                 );
               })}
             </View>
+
+            {unlinkedActiveGoals.length > 0 ? (
+              <Surface className="gap-4">
+                <View className="gap-1">
+                  <AppText tone="tertiary" variant="micro" style={{ textTransform: "uppercase" }}>
+                    Needs direction
+                  </AppText>
+                  <AppText variant="title">Unlinked goals</AppText>
+                </View>
+                <View className="gap-3">
+                  {unlinkedActiveGoals.map((goal) => (
+                    <DrillInRow
+                      key={goal.id}
+                      title={goal.title}
+                      subtitle="This goal is active, but it is not yet tied to a bigger direction."
+                      detail="Link ambition"
+                      onPress={() => navigation.navigate("GoalEdit", { goalId: goal.id })}
+                    />
+                  ))}
+                </View>
+              </Surface>
+            ) : null}
 
             {inactiveGoals.length > 0 ? (
               <Surface className="gap-4">

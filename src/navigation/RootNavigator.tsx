@@ -5,6 +5,10 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { useResolvedTheme } from "../design/theme/useResolvedTheme";
 import { GoalsScreen } from "../screens/goals/GoalsScreen";
 import {
+  AmbitionDetailScreen,
+  AmbitionEditScreen,
+} from "../screens/goals/AmbitionDetailScreens";
+import {
   GoalDetailScreen,
   GoalEditScreen,
   GoalHistoryScreen,
@@ -139,6 +143,16 @@ function GoalsNavigator() {
         name="GoalsHome"
         component={GoalsScreen}
         options={{ headerShown: false }}
+      />
+      <GoalsStack.Screen
+        name="AmbitionDetail"
+        component={AmbitionDetailScreen}
+        options={{ title: "Ambition" }}
+      />
+      <GoalsStack.Screen
+        name="AmbitionEdit"
+        component={AmbitionEditScreen}
+        options={({ route }) => ({ title: route.params?.ambitionId ? "Edit Ambition" : "New Ambition" })}
       />
       <GoalsStack.Screen
         name="GoalDetail"

@@ -83,6 +83,7 @@ async function resetSeedData() {
     await client.run("DELETE FROM tasks;");
     await client.run("DELETE FROM goal_milestones;");
     await client.run("DELETE FROM goals;");
+    await client.run("DELETE FROM ambitions;");
     await client.run("DELETE FROM adaptation_profiles;");
     await client.run("DELETE FROM schedule_constraints;");
     await client.run("DELETE FROM calendar_connection_states;");

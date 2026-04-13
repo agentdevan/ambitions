@@ -5,6 +5,8 @@ import { markStartupReady, resetStartupReady } from "../bootstrap/runtime/startu
 import { SchedulingOutput } from "../engines";
 import {
   AdaptationProfile,
+  Ambition,
+  AmbitionStatus,
   ActivityEvent,
   AccountIdentity,
   AccountSnapshot,
@@ -110,10 +112,17 @@ interface AppShellSlice {
 
 interface GoalsSlice {
   domains: Domain[];
+  ambitions: Ambition[];
   goals: Goal[];
   milestones: GoalMilestone[];
   allTasks: Task[];
   refreshGoals: () => Promise<void>;
+  createAmbition: (input: {
+    title: string;
+    thesis?: string | null;
+    status?: AmbitionStatus;
+  }) => Promise<Ambition>;
+  updateAmbition: (ambitionId: string, patch: Partial<Ambition>) => Promise<Ambition>;
   createGoal: (inference: GoalDraftInference) => Promise<void>;
   previewGoalEdit: (goalId: string, patch: Partial<Goal>) => Promise<GoalEditImpactPreview>;
   applyGoalEditDecision: (
@@ -314,6 +323,33 @@ function getEffectiveAdaptationProfile(
     : state.adaptationProfile;
 }
 
+function createAmbitionRecord(params: {
+  title: string;
+  thesis?: string | null;
+  status?: AmbitionStatus;
+  sortOrder: number;
+  accountId: string | null;
+}): Ambition {
+  const now = new Date().toISOString();
+
+  return {
+    id: `ambition:${Math.random().toString(36).slice(2, 10)}`,
+    title: params.title.trim(),
+    thesis: params.thesis?.trim() ? params.thesis.trim() : null,
+    status: params.status ?? AmbitionStatus.Active,
+    sortOrder: params.sortOrder,
+    isVisible: true,
+    metadata: {},
+    ownerUserId: params.accountId,
+    remoteId: null,
+    syncState: params.accountId ? EntitySyncState.PendingSync : EntitySyncState.LocalOnly,
+    version: 1,
+    lastSyncedAt: null,
+    createdAt: now,
+    updatedAt: now,
+  };
+}
+
 function createDailyRitualState(params: {
   date: string;
   accountId: string | null;
@@ -483,6 +519,7 @@ export const useAppStore = create<AppState>((set, get) => ({
   bootStatus: "idle",
   lastError: null,
   domains: [],
+  ambitions: [],
   goals: [],
   milestones: [],
   allTasks: [],
@@ -567,14 +604,90 @@ export const useAppStore = create<AppState>((set, get) => ({
   },
 
   refreshGoals: async () => {
-    const [domains, goals, milestones, allTasks] = await Promise.all([
+    const [domains, ambitions, goals, milestones, allTasks] = await Promise.all([
       appServices.repositories.preferences.listDomains(),
+      appServices.repositories.goals.listAmbitions(),
       appServices.repositories.goals.listGoals(),
       appServices.repositories.goals.listMilestones(),
       appServices.repositories.tasks.listTasks(),
     ]);
 
-    set({ domains, goals, milestones, allTasks });
+    set({ domains, ambitions, goals, milestones, allTasks });
+  },
+
+  createAmbition: async (input) => {
+    const state = get();
+    const title = input.title.trim();
+    if (!title) {
+      throw new Error("An ambition needs a title.");
+    }
+
+    const accountId = getAttachedAccountId(state);
+    const ambition = createAmbitionRecord({
+      title,
+      thesis: input.thesis,
+      status: input.status,
+      sortOrder: state.ambitions.length + 1,
+      accountId,
+    });
+
+    await appServices.repositories.goals.saveAmbitions([...state.ambitions, ambition]);
+    const [foundationSnapshot, accountSnapshot] = await Promise.all([
+      refreshAllState(state.planDate),
+      appServices.services.account.notePendingChanges(),
+    ]);
+    set({
+      ...foundationSnapshot,
+      ...mapAccountSnapshot(accountSnapshot),
+    });
+
+    return ambition;
+  },
+
+  updateAmbition: async (ambitionId, patch) => {
+    const state = get();
+    const accountId = getAttachedAccountId(state);
+    let updatedAmbition: Ambition | null = null;
+    const nextAmbitions = state.ambitions.map((ambition) => {
+      if (ambition.id !== ambitionId) {
+        return ambition;
+      }
+
+      updatedAmbition = bindRecordToAccount(
+        {
+          ...ambition,
+          ...patch,
+          title: patch.title?.trim() ? patch.title.trim() : ambition.title,
+          thesis:
+            patch.thesis === undefined
+              ? ambition.thesis
+              : patch.thesis?.trim()
+                ? patch.thesis.trim()
+                : null,
+          updatedAt: new Date().toISOString(),
+          version: ambition.version + 1,
+        },
+        accountId,
+      ) as Ambition;
+
+      return updatedAmbition;
+    });
+
+    if (!updatedAmbition) {
+      throw new Error("The ambition could not be found.");
+    }
+
+    await appServices.repositories.goals.saveAmbitions(nextAmbitions);
+    const [foundationSnapshot, accountSnapshot] = await Promise.all([
+      refreshAllState(state.planDate),
+      appServices.services.account.notePendingChanges(),
+    ]);
+    set({
+      ...foundationSnapshot,
+      ...mapAccountSnapshot(accountSnapshot),
+    });
+
+    return updatedAmbition;
   },
 
   createGoal: async (inference) => {

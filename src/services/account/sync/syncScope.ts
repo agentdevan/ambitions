@@ -1,5 +1,6 @@
 import {
   AdaptationProfile,
+  Ambition,
   ActivityEvent,
   DailyPlan,
   DailyRitualState,
@@ -17,6 +18,7 @@ import {
 } from "../../../domain/models";
 
 export type SyncEntityRecord =
+  | Ambition
   | Goal
   | GoalMilestone
   | Task
@@ -31,6 +33,7 @@ export type SyncEntityRecord =
   | ActivityEvent;
 
 export const syncEntityOrder: SyncEntityKind[] = [
+  "ambition",
   "goal",
   "milestone",
   "task",
@@ -84,6 +87,22 @@ export function duplicateConflictRecord(
   record: SyncEntityRecord,
   now: string,
 ): SyncEntityRecord | null {
+  if (kind === "ambition") {
+    const ambition = record as Ambition;
+    return {
+      ...ambition,
+      id: `${ambition.id}:preserved:${now}`,
+      title: `${ambition.title} (Preserved copy)`,
+      remoteId: null,
+      syncState: EntitySyncState.Conflict,
+      version: 1,
+      lastSyncedAt: null,
+      createdAt: now,
+      updatedAt: now,
+      metadata: { ...ambition.metadata, preservedConflict: "true" },
+    };
+  }
+
   if (kind === "goal") {
     const goal = record as Goal;
     return {

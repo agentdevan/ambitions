@@ -344,6 +344,7 @@ export function inferGoalDraft(naturalLanguage: string, today: string): GoalDraf
   });
 
   return {
+    ambitionId: null,
     title,
     naturalLanguage: normalized,
     summary: normalized.length > 24 ? normalized : null,

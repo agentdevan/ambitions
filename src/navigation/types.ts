@@ -11,6 +11,8 @@ export type TodayStackParamList = {
 
 export type GoalsStackParamList = {
   GoalsHome: undefined;
+  AmbitionDetail: { ambitionId: string };
+  AmbitionEdit: { ambitionId?: string };
   GoalDetail: { goalId: string };
   GoalMilestones: { goalId: string };
   GoalProgress: { goalId: string };

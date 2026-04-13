@@ -32,6 +32,7 @@ export enum GoalMilestoneStatus {
 }
 
 export interface Goal extends EntityRecord {
+  ambitionId: string | null;
   title: string;
   summary: string | null;
   domainKey: DomainKey;

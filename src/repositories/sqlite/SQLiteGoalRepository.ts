@@ -1,4 +1,4 @@
-import { Goal, GoalMilestone } from "../../domain/models";
+import { Ambition, Goal, GoalMilestone } from "../../domain/models";
 import { DatabaseClient } from "../../data/sqlite/client";
 import { decodeJson, encodeJson, entityParams, mapEntityRecord } from "./shared";
 import { GoalRepository } from "../GoalRepository";
@@ -6,6 +6,7 @@ import { SQLiteRepository } from "../base";
 
 interface GoalRow {
   id: string;
+  ambition_id: string | null;
   title: string;
   summary: string | null;
   domain_key: Goal["domainKey"];
@@ -25,6 +26,23 @@ interface GoalRow {
   owner_user_id: string | null;
   remote_id: string | null;
   sync_state: Goal["syncState"];
+  version: number;
+  last_synced_at: string | null;
+  created_at: string;
+  updated_at: string;
+}
+
+interface AmbitionRow {
+  id: string;
+  title: string;
+  thesis: string | null;
+  status: Ambition["status"];
+  sort_order: number;
+  is_visible: number;
+  metadata_json: string;
+  owner_user_id: string | null;
+  remote_id: string | null;
+  sync_state: Ambition["syncState"];
   version: number;
   last_synced_at: string | null;
   created_at: string;
@@ -56,12 +74,29 @@ export class SQLiteGoalRepository extends SQLiteRepository implements GoalReposi
     super(database);
   }
 
+  async listAmbitions() {
+    const rows = await this.database.getAll<AmbitionRow>(
+      "SELECT * FROM ambitions ORDER BY sort_order ASC, created_at ASC;",
+    );
+    return rows.map((row) =>
+      mapEntityRecord<Ambition>(row, {
+        title: row.title,
+        thesis: row.thesis,
+        status: row.status,
+        sortOrder: row.sort_order,
+        isVisible: row.is_visible === 1,
+        metadata: decodeJson(row.metadata_json),
+      }),
+    );
+  }
+
   async listGoals() {
     const rows = await this.database.getAll<GoalRow>(
       "SELECT * FROM goals ORDER BY sort_order ASC, created_at ASC;",
     );
     return rows.map((row) =>
       mapEntityRecord<Goal>(row, {
+        ambitionId: row.ambition_id,
         title: row.title,
         summary: row.summary,
         domainKey: row.domain_key,
@@ -101,18 +136,45 @@ export class SQLiteGoalRepository extends SQLiteRepository implements GoalReposi
     );
   }
 
+  async saveAmbitions(ambitions: Ambition[]) {
+    await this.database.withTransaction(async (client) => {
+      for (const ambition of ambitions) {
+        await client.run(
+          `
+            INSERT OR REPLACE INTO ambitions (
+              id, title, thesis, status, sort_order, is_visible, metadata_json, owner_user_id,
+              remote_id, sync_state, version, last_synced_at, created_at, updated_at
+            ) VALUES (
+              $id, $title, $thesis, $status, $sortOrder, $isVisible, $metadataJson, $ownerUserId,
+              $remoteId, $syncState, $version, $lastSyncedAt, $createdAt, $updatedAt
+            );
+          `,
+          {
+            ...entityParams(ambition),
+            $title: ambition.title,
+            $thesis: ambition.thesis,
+            $status: ambition.status,
+            $sortOrder: ambition.sortOrder,
+            $isVisible: ambition.isVisible ? 1 : 0,
+            $metadataJson: encodeJson(ambition.metadata),
+          },
+        );
+      }
+    });
+  }
+
   async saveGoals(goals: Goal[]) {
     await this.database.withTransaction(async (client) => {
       for (const goal of goals) {
         await client.run(
           `
             INSERT OR REPLACE INTO goals (
-              id, title, summary, domain_key, horizon, type, status, parent_goal_id, sort_order,
+              id, ambition_id, title, summary, domain_key, horizon, type, status, parent_goal_id, sort_order,
               start_date, target_date, desired_weekly_minutes, estimated_total_minutes,
               success_metric, notes, tags_json, metadata_json, owner_user_id, remote_id,
               sync_state, version, last_synced_at, created_at, updated_at
             ) VALUES (
-              $id, $title, $summary, $domainKey, $horizon, $type, $status, $parentGoalId, $sortOrder,
+              $id, $ambitionId, $title, $summary, $domainKey, $horizon, $type, $status, $parentGoalId, $sortOrder,
               $startDate, $targetDate, $desiredWeeklyMinutes, $estimatedTotalMinutes,
               $successMetric, $notes, $tagsJson, $metadataJson, $ownerUserId, $remoteId,
               $syncState, $version, $lastSyncedAt, $createdAt, $updatedAt
@@ -120,6 +182,7 @@ export class SQLiteGoalRepository extends SQLiteRepository implements GoalReposi
           `,
           {
             ...entityParams(goal),
+            $ambitionId: goal.ambitionId,
             $title: goal.title,
             $summary: goal.summary,
             $domainKey: goal.domainKey,

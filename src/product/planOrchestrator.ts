@@ -660,6 +660,7 @@ function createGoalRecord(inference: GoalDraftInference, focusDomains: DomainKey
     lastSyncedAt: null,
     createdAt: timestamp,
     updatedAt: timestamp,
+    ambitionId: inference.ambitionId,
     title: inference.title,
     summary: inference.summary,
     domainKey: inference.domainKey,

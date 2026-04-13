@@ -611,4 +611,31 @@ export const schemaMigrations: MigrationDefinition[] = [
       `CREATE INDEX IF NOT EXISTS idx_monthly_review_states_month_start_date ON monthly_review_states(month_start_date DESC);`,
     ],
   },
+  {
+    id: 9,
+    name: "phase_23_ambition_layer_progress_model",
+    statements: [
+      `
+        CREATE TABLE IF NOT EXISTS ambitions (
+          id TEXT PRIMARY KEY NOT NULL,
+          title TEXT NOT NULL,
+          thesis TEXT,
+          status TEXT NOT NULL,
+          sort_order INTEGER NOT NULL,
+          is_visible INTEGER NOT NULL DEFAULT 1,
+          metadata_json TEXT NOT NULL,
+          owner_user_id TEXT,
+          remote_id TEXT,
+          sync_state TEXT NOT NULL,
+          version INTEGER NOT NULL,
+          last_synced_at TEXT,
+          created_at TEXT NOT NULL,
+          updated_at TEXT NOT NULL
+        );
+      `,
+      `CREATE INDEX IF NOT EXISTS idx_ambitions_status_sort_order ON ambitions(status, sort_order);`,
+      `ALTER TABLE goals ADD COLUMN ambition_id TEXT REFERENCES ambitions(id) ON DELETE SET NULL;`,
+      `CREATE INDEX IF NOT EXISTS idx_goals_ambition_id ON goals(ambition_id);`,
+    ],
+  },
 ];
