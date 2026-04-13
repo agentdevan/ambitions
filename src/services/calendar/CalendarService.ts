@@ -81,6 +81,17 @@ function selectCalendarIds(
   return calendars.map((calendar) => calendar.id);
 }
 
+function summarizeSelectedCalendarTitles(
+  calendars: DeviceCalendarDescriptor[],
+  selectedCalendarIds: string[],
+) {
+  const selected = calendars
+    .filter((calendar) => selectedCalendarIds.includes(calendar.id))
+    .map((calendar) => calendar.title);
+
+  return selected.slice(0, 4).join(" | ");
+}
+
 export interface CalendarServiceContract {
   getPermissionStatus(): Promise<string>;
   requestAccess(): Promise<string>;
@@ -143,6 +154,13 @@ export const CalendarService: CalendarServiceContract = {
           selectedCalendarIds: [],
           availableCalendars: [],
           lastSuccessfulSyncAt: params.existingState?.lastSuccessfulSyncAt ?? null,
+          metadata: {
+            lastReadDate: params.date,
+            lastError: null,
+            lastEventCount: 0,
+            lastConstraintCount: 0,
+            selectedCalendarTitles: "",
+          },
         }),
         calendars,
         events: [],
@@ -176,6 +194,12 @@ export const CalendarService: CalendarServiceContract = {
           metadata: {
             lastReadDate: params.date,
             lastError: null,
+            lastEventCount: normalizedEvents.length,
+            lastConstraintCount: constraints.length,
+            selectedCalendarTitles: summarizeSelectedCalendarTitles(
+              calendars,
+              selectedCalendarIds,
+            ),
           },
         }),
         calendars,
@@ -201,6 +225,11 @@ export const CalendarService: CalendarServiceContract = {
           metadata: {
             lastReadDate: params.date,
             lastError: message,
+            lastEventCount: params.existingState?.metadata.lastEventCount ?? 0,
+            lastConstraintCount: params.existingState?.metadata.lastConstraintCount ?? 0,
+            selectedCalendarTitles:
+              params.existingState?.metadata.selectedCalendarTitles ??
+              summarizeSelectedCalendarTitles(calendars, selectedCalendarIds),
           },
         }),
         calendars,

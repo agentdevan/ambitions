@@ -13,11 +13,19 @@ import {
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 
 import { AccountStatusCard } from "../../components/account/AccountStatusCard";
+import {
+  DetailHero,
+  DetailMetaGroup,
+  DetailSection,
+  DetailSummaryStrip,
+  QuietMetaLine,
+} from "../../components/detail/DetailPrimitives";
 import { IntegrationStatusCard } from "../../components/today/IntegrationStatusCard";
 import { GroupedActivityTimeline, MomentumBars } from "../../components/history/ActivityTimeline";
 import { Button } from "../../components/ui/Button";
 import { EmptyStateCard } from "../../components/ui/EmptyStateCard";
 import { OptionChip } from "../../components/ui/OptionChip";
+import { Pill } from "../../components/ui/Pill";
 import { ProgressBar } from "../../components/ui/ProgressBar";
 import { Screen } from "../../components/ui/Screen";
 import { SegmentedControl } from "../../components/ui/SegmentedControl";
@@ -31,11 +39,25 @@ import { AuthFeedback } from "../../services/account/accountCopy";
 import { buildActivityFeed, groupActivityByDate, summarizeInsights } from "../../services/history/selectors";
 import { buildPlanningStyleSummary } from "../../services/personalization/selectors";
 import {
+  formatReminderBehavior,
+  formatReminderTypeLabel,
+  summarizeCalendarControl,
+  summarizePlanningControls,
+  summarizeQuietHours,
+  summarizeSyncState,
+} from "../../services/profile/controlSummaries";
+import {
   formatTimeLabel,
   formatTimeRangeLabel,
+  formatShortDateTime,
   normalizeTimeString,
 } from "../../utils/date";
 import { isSupabaseConfigured } from "../../services/account/supabaseConfig";
+import {
+  CalendarSyncState,
+  ConstraintSource,
+  ReminderType,
+} from "../../domain/models";
 
 function MetaLine({ items }: { items: string[] }) {
   return (
@@ -47,6 +69,30 @@ function MetaLine({ items }: { items: string[] }) {
       ))}
     </View>
   );
+}
+
+const quietHourPresets = [
+  { id: "off", label: "Off", start: null, end: null },
+  { id: "calm", label: "9:30p - 7a", start: "21:30", end: "07:00" },
+  { id: "late", label: "10:30p - 7a", start: "22:30", end: "07:00" },
+] as const;
+
+const reminderLeadTimeOptions = [5, 10, 15] as const;
+
+function describeConstraintSource(constraintCount: number, usingLiveCalendar: boolean) {
+  if (usingLiveCalendar) {
+    return constraintCount > 0
+      ? `${constraintCount} live calendar block${constraintCount === 1 ? "" : "s"} shaping today`
+      : "Live calendar checked with no blocking events";
+  }
+
+  return "Saved schedule defaults are shaping today";
+}
+
+function issueTone(status: CalendarSyncState | null | undefined) {
+  return status === CalendarSyncState.Stale || status === CalendarSyncState.TemporaryFailure
+    ? "sunken"
+    : "default";
 }
 
 export function ProfileHistoryScreen() {
@@ -328,12 +374,26 @@ export function ProfileScheduleDefaultsScreen() {
 export function ProfileIntegrationsScreen() {
   const today = useAppStore((state) => state.today);
   const calendarConnectionState = useAppStore((state) => state.calendarConnectionState);
+  const scheduleConstraints = useAppStore((state) => state.scheduleConstraints);
   const notificationPermissionStatus = useAppStore((state) => state.notificationPermissionStatus);
   const requestCalendarAccess = useAppStore((state) => state.requestCalendarAccess);
   const requestNotificationAccess = useAppStore((state) => state.requestNotificationAccess);
   const refreshIntegration = useAppStore((state) => state.refreshIntegration);
   const [integrationBusy, setIntegrationBusy] = useState<string | null>(null);
   const [runtimeMessage, setRuntimeMessage] = useState<string | null>(null);
+  const liveConstraintCount = scheduleConstraints.filter(
+    (constraint) => constraint.source === ConstraintSource.Calendar,
+  ).length;
+  const calendarSummary = summarizeCalendarControl({
+    connectionState: calendarConnectionState,
+    scheduleConstraints,
+    usingLiveCalendar: today?.integration.usingLiveCalendar ?? false,
+  });
+  const calendarTitles = String(calendarConnectionState?.metadata.selectedCalendarTitles ?? "")
+    .split(" | ")
+    .map((title) => title.trim())
+    .filter(Boolean);
+  const visibleConstraints = scheduleConstraints.slice(0, 4);
 
   async function runIntegrationAction(
     key: string,
@@ -355,12 +415,40 @@ export function ProfileIntegrationsScreen() {
   return (
     <Screen>
       <View className="gap-4">
-        <Surface tone="accent" className="gap-3">
-          <AppText variant="title">Integrations</AppText>
-          <AppText tone="secondary">
-            Calendar and reminders.
-          </AppText>
-        </Surface>
+        <DetailHero
+          eyebrow="Integrations"
+          title={calendarSummary.headline}
+          description={calendarSummary.detail}
+          badges={
+            <>
+              <Pill label={calendarSummary.badge} tone="accent" />
+              <Pill
+                label={notificationPermissionStatus === "granted" ? "Reminders ready" : "Reminders need access"}
+                tone="quiet"
+              />
+            </>
+          }
+          meta={
+            <DetailSummaryStrip
+              items={[
+                {
+                  label: "Calendar",
+                  value: today?.integration.usingLiveCalendar ? "Live" : "Defaults",
+                  detail: describeConstraintSource(liveConstraintCount, today?.integration.usingLiveCalendar ?? false),
+                },
+                {
+                  label: "Last refresh",
+                  value: calendarConnectionState?.lastSuccessfulSyncAt
+                    ? formatShortDateTime(calendarConnectionState.lastSuccessfulSyncAt)
+                    : "Not yet",
+                  detail: calendarConnectionState?.metadata.lastReadDate
+                    ? `Checked for ${String(calendarConnectionState.metadata.lastReadDate)}`
+                    : "No completed calendar read",
+                },
+              ]}
+            />
+          }
+        />
         <IntegrationStatusCard
           calendarConnectionState={calendarConnectionState}
           notificationPermissionStatus={notificationPermissionStatus}
@@ -390,6 +478,83 @@ export function ProfileIntegrationsScreen() {
               : null
           }
         />
+        <DetailSection
+          title="Calendar scope"
+          description="What Ambitions can currently inspect."
+        >
+          <Surface tone={issueTone(calendarConnectionState?.connectionStatus)} className="gap-3 mb-0">
+            <DetailMetaGroup
+              items={[
+                {
+                  label: "Selected",
+                  value: String(calendarConnectionState?.selectedCalendarIds.length ?? 0),
+                },
+                {
+                  label: "Visible",
+                  value: String(calendarConnectionState?.metadata.availableCalendarCount ?? 0),
+                },
+                {
+                  label: "Live blocks",
+                  value: String(liveConstraintCount),
+                },
+                {
+                  label: "Reminder access",
+                  value: notificationPermissionStatus === "granted" ? "Ready" : "Needs access",
+                },
+              ]}
+            />
+            {calendarTitles.length > 0 ? (
+              <QuietMetaLine items={calendarTitles} />
+            ) : (
+              <AppText tone="secondary" variant="caption">
+                Calendar names appear here after a successful live read.
+              </AppText>
+            )}
+          </Surface>
+        </DetailSection>
+        <DetailSection
+          title="What shaped today's plan"
+          description="A compact read of the context currently in play."
+        >
+          {visibleConstraints.length > 0 ? (
+            <View className="gap-3">
+              {visibleConstraints.map((constraint) => (
+                <Surface key={constraint.id} className="gap-2 mb-0">
+                  <View className="flex-row items-center justify-between gap-3">
+                    <View className="flex-1 gap-1">
+                      <AppText variant="section">{constraint.title}</AppText>
+                      <AppText tone="secondary" variant="caption">
+                        {formatShortDateTime(constraint.startsAt)} - {formatShortDateTime(constraint.endsAt)}
+                      </AppText>
+                    </View>
+                    <Pill
+                      label={constraint.source === ConstraintSource.Calendar ? "Live" : "Saved"}
+                      tone={constraint.source === ConstraintSource.Calendar ? "accent" : "quiet"}
+                    />
+                  </View>
+                  {constraint.notes ? (
+                    <AppText tone="tertiary" variant="caption">
+                      {constraint.notes}
+                    </AppText>
+                  ) : null}
+                </Surface>
+              ))}
+            </View>
+          ) : (
+            <EmptyStateCard
+              title="No blocking context"
+              body="Nothing from calendar or defaults is actively narrowing today's plan right now."
+            />
+          )}
+        </DetailSection>
+        {calendarSummary.issue ? (
+          <Surface tone="sunken" className="gap-2">
+            <AppText variant="caption">Status</AppText>
+            <AppText tone="secondary" variant="caption">
+              {calendarSummary.issue}
+            </AppText>
+          </Surface>
+        ) : null}
         {runtimeMessage ? <AppText tone="tertiary" variant="caption">{runtimeMessage}</AppText> : null}
       </View>
     </Screen>
@@ -397,13 +562,17 @@ export function ProfileIntegrationsScreen() {
 }
 
 export function ProfileNotificationsScreen() {
-  const theme = useResolvedTheme();
   const notificationPreferences = useAppStore((state) => state.notificationPreferences);
   const notificationPermissionStatus = useAppStore((state) => state.notificationPermissionStatus);
   const updateNotificationPreference = useAppStore((state) => state.updateNotificationPreference);
   const requestNotificationAccess = useAppStore((state) => state.requestNotificationAccess);
   const [busyState, setBusyState] = useState<string | null>(null);
   const [runtimeMessage, setRuntimeMessage] = useState<string | null>(null);
+  const enabledCount = notificationPreferences.filter((preference) => preference.enabled).length;
+  const timeBlockPreference = notificationPreferences.find(
+    (preference) => preference.reminderType === ReminderType.TimeBlockStart,
+  );
+  const quietHoursSummary = summarizeQuietHours(notificationPreferences);
 
   async function runAction(key: string, action: () => Promise<void>, fallbackError: string) {
     setBusyState(key);
@@ -418,46 +587,219 @@ export function ProfileNotificationsScreen() {
     }
   }
 
+  async function applyQuietHours(start: string | null, end: string | null) {
+    const pushPreferences = notificationPreferences.filter(
+      (preference) => preference.channel === "push",
+    );
+
+    await Promise.all(
+      pushPreferences.map((preference) =>
+        updateNotificationPreference(preference.reminderType, {
+          quietHoursStart: start,
+          quietHoursEnd: end,
+        }),
+      ),
+    );
+  }
+
   return (
     <Screen>
       <View className="gap-4">
-        <Surface tone="accent" className="gap-3">
-          <AppText variant="title">Notifications</AppText>
-          <AppText tone="secondary">Manage reminder behavior.</AppText>
-          <MetaLine items={[`Permission: ${notificationPermissionStatus}`]} />
-        </Surface>
+        <DetailHero
+          eyebrow="Notifications"
+          title={enabledCount > 0 ? "Calm reminder control" : "Reminders are quiet"}
+          description={
+            notificationPermissionStatus === "granted"
+              ? "Choose what Ambitions can interrupt you for, and how early it should speak up."
+              : "Notification access is still off, so Ambitions will keep reminders quiet."
+          }
+          badges={
+            <>
+              <Pill
+                label={notificationPermissionStatus === "granted" ? "Access ready" : "Access needed"}
+                tone={notificationPermissionStatus === "granted" ? "accent" : "quiet"}
+              />
+              <Pill
+                label={
+                  enabledCount > 0
+                    ? `${enabledCount} reminder${enabledCount === 1 ? "" : "s"} on`
+                    : "No reminders active"
+                }
+                tone="quiet"
+              />
+            </>
+          }
+          meta={
+            <DetailSummaryStrip
+              items={[
+                {
+                  label: "Permission",
+                  value: notificationPermissionStatus,
+                  detail: notificationPermissionStatus === "granted" ? "Ready to notify" : "Grant access to enable pushes",
+                },
+                {
+                  label: "Quiet hours",
+                  value: quietHoursSummary,
+                  detail: "Shared across push reminders",
+                },
+              ]}
+            />
+          }
+        />
         {notificationPermissionStatus !== "granted" ? (
-          <Button tone="secondary" onPress={() => void runAction("permission", requestNotificationAccess, "Notification access could not be refreshed.")} busy={busyState === "permission"}>
+          <Button
+            tone="secondary"
+            onPress={() =>
+              void runAction(
+                "permission",
+                requestNotificationAccess,
+                "Notification access could not be refreshed.",
+              )
+            }
+            busy={busyState === "permission"}
+          >
             Allow notifications
           </Button>
         ) : null}
-        {notificationPreferences.map((preference) => (
-          <Pressable
-            key={preference.id}
-            className="rounded-[24px]"
-            onPress={() =>
-              void runAction(
-                `notification:${preference.id}`,
-                () => updateNotificationPreference(preference.reminderType, !preference.enabled),
-                "Notification preference could not be updated.",
-              )
-            }
-            style={({ pressed }) => ({ opacity: pressed ? 0.92 : 1 })}
+        <DetailSection
+          title="Push timing"
+          description="For reminders that can reach you outside the app."
+        >
+          <Surface className="gap-3 mb-0">
+            <View className="gap-2">
+              <AppText variant="section">Quiet hours</AppText>
+              <AppText tone="secondary" variant="caption">
+                Keep push reminders quiet overnight.
+              </AppText>
+            </View>
+            <View className="flex-row flex-wrap gap-2">
+              {quietHourPresets.map((preset) => (
+                <OptionChip
+                  key={preset.id}
+                  selected={
+                    summarizeQuietHours([
+                      ...(notificationPreferences.filter((preference) => preference.channel === "push")),
+                    ]) ===
+                    (preset.start && preset.end
+                      ? formatTimeRangeLabel(preset.start, preset.end, { compact: true })
+                      : "No shared quiet hours")
+                  }
+                  onPress={() =>
+                    void runAction(
+                      `quiet-hours:${preset.id}`,
+                      () => applyQuietHours(preset.start, preset.end),
+                      "Quiet hours could not be updated.",
+                    )
+                  }
+                >
+                  {preset.label}
+                </OptionChip>
+              ))}
+            </View>
+          </Surface>
+        </DetailSection>
+        {timeBlockPreference ? (
+          <DetailSection
+            title="Before sessions"
+            description="How early a session reminder should appear."
           >
-            <Surface
-              tone={preference.enabled ? "accent" : "default"}
-              className="gap-2"
-              style={{
-                borderColor: preference.enabled
-                  ? theme.colors.border.strong
-                  : theme.colors.border.subtle,
-              }}
-            >
-              <AppText variant="section">{preference.reminderType.replace(/_/g, " ")}</AppText>
-              <MetaLine items={[preference.enabled ? "Reminder active" : "Reminder muted"]} />
+            <Surface className="gap-3 mb-0">
+              <View className="flex-row items-center justify-between gap-3">
+                <View className="flex-1 gap-1">
+                  <AppText variant="section">{formatReminderBehavior(timeBlockPreference)}</AppText>
+                  <AppText tone="secondary" variant="caption">
+                    {timeBlockPreference.enabled
+                      ? "A heads-up before scheduled work begins."
+                      : "No push reminder before scheduled sessions."}
+                  </AppText>
+                </View>
+                <Button
+                  size="compact"
+                  tone={timeBlockPreference.enabled ? "tertiary" : "secondary"}
+                  busy={busyState === `notification:${timeBlockPreference.id}`}
+                  onPress={() =>
+                    void runAction(
+                      `notification:${timeBlockPreference.id}`,
+                      () =>
+                        updateNotificationPreference(timeBlockPreference.reminderType, {
+                          enabled: !timeBlockPreference.enabled,
+                        }),
+                      "Notification preference could not be updated.",
+                    )
+                  }
+                >
+                  {timeBlockPreference.enabled ? "Mute" : "Enable"}
+                </Button>
+              </View>
+              <View className="flex-row flex-wrap gap-2">
+                {reminderLeadTimeOptions.map((minutes) => (
+                  <OptionChip
+                    key={minutes}
+                    selected={timeBlockPreference.leadTimeMinutes === minutes}
+                    onPress={() =>
+                      void runAction(
+                        `lead-time:${minutes}`,
+                        () =>
+                          updateNotificationPreference(timeBlockPreference.reminderType, {
+                            enabled: true,
+                            leadTimeMinutes: minutes,
+                          }),
+                        "Lead time could not be updated.",
+                      )
+                    }
+                  >
+                    {minutes} min
+                  </OptionChip>
+                ))}
+              </View>
             </Surface>
-          </Pressable>
-        ))}
+          </DetailSection>
+        ) : null}
+        <DetailSection
+          title="Reminder types"
+          description="What Ambitions is allowed to notify you about."
+        >
+          <View className="gap-3">
+            {notificationPreferences.map((preference) => (
+              <Surface key={preference.id} className="gap-3 mb-0">
+                <View className="flex-row items-center justify-between gap-3">
+                  <View className="flex-1 gap-1">
+                    <AppText variant="section">{formatReminderTypeLabel(preference.reminderType)}</AppText>
+                    <AppText tone="secondary" variant="caption">
+                      {formatReminderBehavior(preference)}
+                    </AppText>
+                  </View>
+                  <Button
+                    size="compact"
+                    tone={preference.enabled ? "tertiary" : "secondary"}
+                    busy={busyState === `notification:${preference.id}`}
+                    onPress={() =>
+                      void runAction(
+                        `notification:${preference.id}`,
+                        () =>
+                          updateNotificationPreference(preference.reminderType, {
+                            enabled: !preference.enabled,
+                          }),
+                        "Notification preference could not be updated.",
+                      )
+                    }
+                  >
+                    {preference.enabled ? "Mute" : "Enable"}
+                  </Button>
+                </View>
+                <QuietMetaLine
+                  items={[
+                    preference.channel === "push" ? "Push" : "In app",
+                    preference.enabled ? "Active" : "Muted",
+                    preference.channel === "push"
+                      ? quietHoursSummary
+                      : "Does not use quiet hours",
+                  ]}
+                />
+              </Surface>
+            ))}
+          </View>
+        </DetailSection>
         {runtimeMessage ? <AppText tone="tertiary" variant="caption">{runtimeMessage}</AppText> : null}
       </View>
     </Screen>
@@ -483,6 +825,7 @@ export function ProfilePlanningPreferencesScreen() {
     adaptationProfile,
     productPreferences.adaptivePlanningEnabled,
   );
+  const planningSummary = summarizePlanningControls(productPreferences, adaptationProfile);
 
   async function savePreference(
     key: string,
@@ -504,21 +847,47 @@ export function ProfilePlanningPreferencesScreen() {
   return (
     <Screen>
       <View className="gap-4">
-        <Surface tone="accent" className="gap-3">
-          <AppText variant="title">Planning preferences</AppText>
-          <AppText tone="secondary">Tune the planner.</AppText>
-        </Surface>
-        <Surface className="gap-3">
-          <AppText variant="section">Adaptive planning</AppText>
-          <AppText tone="secondary" variant="caption">
-            {productPreferences.adaptivePlanningEnabled
-              ? "Let recent behavior quietly tune task sizing and pacing."
-              : "Keep planning on the default rules for now."}
-          </AppText>
+        <DetailHero
+          eyebrow="Planning"
+          title={planningSummary.intensityLabel}
+          description="Shape how assertive the planner should feel without dropping into low-level tuning."
+          badges={
+            <>
+              <Pill label={planningSummary.taskLabel} tone="quiet" />
+              <Pill label={planningSummary.adaptiveLabel} tone="accent" />
+            </>
+          }
+          meta={
+            <DetailSummaryStrip
+              items={[
+                {
+                  label: "Plan weight",
+                  value: planningSummary.intensityLabel,
+                  detail: "How full the planner should build the day",
+                },
+                {
+                  label: "Task shape",
+                  value: planningSummary.taskLabel,
+                  detail: "How granular planned work should feel",
+                },
+              ]}
+            />
+          }
+        />
+        <DetailSection
+          title="Adaptive planning"
+          description="Choose whether recent behavior should tune the planner."
+        >
+          <Surface className="gap-3 mb-0">
+            <AppText tone="secondary" variant="caption">
+              {productPreferences.adaptivePlanningEnabled
+                ? "Ambitions can quietly learn from recent completion, carryover, and pace."
+                : "Planning stays on your explicit defaults, without behavior-based tuning."}
+            </AppText>
           <View className="flex-row flex-wrap gap-2">
             {[
-              [true, "On"],
-              [false, "Off"],
+              [true, "Learn from history"],
+              [false, "Keep defaults"],
             ].map(([enabled, label]) => (
               <OptionChip
                 key={String(enabled)}
@@ -541,19 +910,23 @@ export function ProfilePlanningPreferencesScreen() {
           {planningStyle ? (
             <View className="gap-1 rounded-[20px] bg-black/5 px-4 py-4">
               <AppText tone="secondary" variant="caption">
-                Learned from recent activity
+                Current learned signal
               </AppText>
               <AppText variant="caption">{planningStyle.summary}</AppText>
             </View>
           ) : null}
-        </Surface>
-        <Surface className="gap-3">
-          <AppText variant="section">Task size</AppText>
+          </Surface>
+        </DetailSection>
+        <DetailSection
+          title="Task size"
+          description="Decide whether plans should break down into shorter steps or deeper blocks."
+        >
+          <Surface className="gap-3 mb-0">
           <View className="flex-row flex-wrap gap-2">
             {[
-              ["smaller", "Smaller tasks"],
+              ["smaller", "Shorter steps"],
               ["mixed", "Mixed"],
-              ["bigger", "Fewer bigger tasks"],
+              ["bigger", "Deeper blocks"],
             ].map(([key, label]) => (
               <OptionChip
                 key={key}
@@ -570,14 +943,18 @@ export function ProfilePlanningPreferencesScreen() {
               </OptionChip>
             ))}
           </View>
-        </Surface>
-        <Surface className="gap-3">
-          <AppText variant="section">Day intensity</AppText>
+          </Surface>
+        </DetailSection>
+        <DetailSection
+          title="Day intensity"
+          description="Control how much pressure the planner should put into a normal day."
+        >
+          <Surface className="gap-3 mb-0">
           <View className="flex-row flex-wrap gap-2">
             {[
-              ["light", "Light"],
+              ["light", "Lighter plans"],
               ["balanced", "Balanced"],
-              ["ambitious", "Ambitious"],
+              ["ambitious", "Fuller plans"],
             ].map(([key, label]) => (
               <OptionChip
                 key={key}
@@ -594,6 +971,13 @@ export function ProfilePlanningPreferencesScreen() {
               </OptionChip>
             ))}
           </View>
+          </Surface>
+        </DetailSection>
+        <Surface className="gap-3">
+          <AppText variant="section">Still automatic</AppText>
+          <AppText tone="secondary" variant="caption">
+            Ambitions still decides exact task ordering, reshaping details, and most open-time recommendations automatically.
+          </AppText>
         </Surface>
         {busyState ? <AppText tone="tertiary" variant="caption">Saving...</AppText> : null}
         {runtimeMessage ? <AppText tone="tertiary" variant="caption">{runtimeMessage}</AppText> : null}
@@ -993,6 +1377,13 @@ export function ProfileAccountScreen() {
       : authMode === "create"
         ? "Create account"
         : "Sign in";
+  const syncSummary = summarizeSyncState({
+    syncState,
+    attachmentState,
+    conflicts: syncConflicts,
+  });
+  const pendingChangeCount =
+    (syncState?.pendingPushCount ?? 0) + (syncState?.pendingPullCount ?? 0);
 
   return (
     <KeyboardAvoidingView
@@ -1012,12 +1403,47 @@ export function ProfileAccountScreen() {
         }}
       >
         <View className="gap-4">
-          <Surface tone="accent" className="gap-3">
-            <AppText variant="title">Account</AppText>
-            <AppText tone="secondary">
-              Sync your plans and history when you&apos;re ready.
-            </AppText>
-          </Surface>
+          <DetailHero
+            eyebrow="Account"
+            title={account ? syncSummary.headline : "Local profile"}
+            description={
+              account
+                ? syncSummary.detail
+                : "Keep everything on this device, or connect an account when you want cross-device syncing."
+            }
+            badges={
+              <>
+                <Pill label={account ? "Connected account" : "Local only"} tone="accent" />
+                <Pill
+                  label={attachmentState?.status === "attached" ? "Device attached" : "Device not attached"}
+                  tone="quiet"
+                />
+              </>
+            }
+            meta={
+              <DetailSummaryStrip
+                items={[
+                  {
+                    label: "Sync",
+                    value: account ? syncSummary.headline : "Local only",
+                    detail: account
+                      ? syncState?.lastSyncAt
+                        ? `Last sync ${formatShortDateTime(syncState.lastSyncAt)}`
+                        : "No completed sync yet"
+                      : "Nothing is being sent to an account",
+                  },
+                  {
+                    label: "Pending",
+                    value: String(pendingChangeCount),
+                    detail:
+                      pendingChangeCount > 0
+                        ? "Changes waiting to move"
+                        : "No pending sync work",
+                  },
+                ]}
+              />
+            }
+          />
           <AccountStatusCard
             account={account}
             authState={authState}
@@ -1053,6 +1479,59 @@ export function ProfileAccountScreen() {
               void runAccountAction("sign_out", signOut, "Couldn’t sign out right now.")
             }
           />
+          <DetailSection
+            title="What syncs"
+            description="Only real surfaces Ambitions can currently carry between devices."
+          >
+            <Surface className="gap-3 mb-0">
+              <QuietMetaLine
+                items={
+                  attachmentState?.status === "attached"
+                    ? ["Goals", "Plans", "History", "Preferences", "Notification settings"]
+                    : ["Everything stays local until this device is attached to an account"]
+                }
+              />
+              <AppText tone="secondary" variant="caption">
+                {attachmentState?.status === "attached"
+                  ? "Local device state and connected account state are linked for these surfaces."
+                  : "You can sign in without immediately uploading local data. Attachment stays explicit."}
+              </AppText>
+            </Surface>
+          </DetailSection>
+          {account ? (
+            <DetailSection
+              title="Current state"
+              description="A compact read of connection health."
+            >
+              <Surface className="gap-3 mb-0">
+                <DetailMetaGroup
+                  items={[
+                    {
+                      label: "Mode",
+                      value: syncSummary.headline,
+                    },
+                    {
+                      label: "Conflicts",
+                      value: String(syncConflicts.length),
+                    },
+                    {
+                      label: "Uploads",
+                      value: String(syncState?.pendingPushCount ?? 0),
+                    },
+                    {
+                      label: "Downloads",
+                      value: String(syncState?.pendingPullCount ?? 0),
+                    },
+                  ]}
+                />
+                {syncState?.lastError ? (
+                  <AppText tone="secondary" variant="caption">
+                    {syncState.lastError}
+                  </AppText>
+                ) : null}
+              </Surface>
+            </DetailSection>
+          ) : null}
           {!account ? (
             !authConfigured ? (
               <Surface className="gap-4">

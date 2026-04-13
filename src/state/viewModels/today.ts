@@ -154,50 +154,50 @@ function calendarStatus(connectionState: CalendarConnectionState | null, constra
   if (!connectionState || connectionState.permissionState === CalendarPermissionState.NotAsked) {
     return {
       usingLiveCalendar: false,
-      calendarStatusLabel: "Calendar not connected",
-      calendarDetail: "Today is using fallback schedule context until calendar access is granted.",
+      calendarStatusLabel: "Using saved defaults",
+      calendarDetail: "Live calendar is off, so today's plan is using your saved schedule defaults.",
     };
   }
 
   if (connectionState.permissionState === CalendarPermissionState.Denied) {
     return {
       usingLiveCalendar: false,
-      calendarStatusLabel: "Calendar access denied",
-      calendarDetail: "The planner stayed on fallback context because calendar access is off.",
+      calendarStatusLabel: "Calendar access is off",
+      calendarDetail: "Calendar access is off right now, so the planner stayed on your saved baseline.",
     };
   }
 
   if (connectionState.connectionStatus === CalendarSyncState.NoUsableCalendars) {
     return {
       usingLiveCalendar: false,
-      calendarStatusLabel: "No usable calendars",
-      calendarDetail: "Permission is granted, but there were no visible calendars to read from.",
+      calendarStatusLabel: "No visible calendars",
+      calendarDetail: "Permission is ready, but there were no visible calendars to read from.",
     };
   }
 
   if (connectionState.connectionStatus === CalendarSyncState.Ready) {
     return {
       usingLiveCalendar: true,
-      calendarStatusLabel: "Live calendar context",
+      calendarStatusLabel: "Using live calendar",
       calendarDetail:
         constraintCount > 0
-          ? `Today is using ${constraintCount} live calendar-derived constraints.`
-          : "Today is using live calendar context and found no blocking events.",
+          ? `Today's plan is reacting to ${constraintCount} live calendar block${constraintCount === 1 ? "" : "s"}.`
+          : "Live calendar checked in and found no blocking events.",
     };
   }
 
   if (connectionState.connectionStatus === CalendarSyncState.Stale) {
     return {
       usingLiveCalendar: false,
-      calendarStatusLabel: "Calendar read is stale",
-      calendarDetail: "The latest calendar read failed, so the planner kept the safer fallback context.",
+      calendarStatusLabel: "Calendar context is stale",
+      calendarDetail: "The latest calendar refresh failed, so the planner fell back to your saved defaults.",
     };
   }
 
   return {
     usingLiveCalendar: false,
-    calendarStatusLabel: "Calendar temporarily unavailable",
-    calendarDetail: "The latest calendar read failed, so the planner stayed conservative.",
+    calendarStatusLabel: "Connection issue",
+    calendarDetail: "Live calendar could not be read right now, so the planner stayed on your safer defaults.",
   };
 }
 

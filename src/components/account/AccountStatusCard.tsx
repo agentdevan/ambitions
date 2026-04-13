@@ -10,7 +10,7 @@ import {
   SyncMode,
   SyncStateSnapshot,
 } from "../../domain/models";
-import { formatShortDateTime } from "../../utils/date";
+import { summarizeSyncState } from "../../services/profile/controlSummaries";
 import { Button } from "../ui/Button";
 import { Surface } from "../ui/Surface";
 import { AppText } from "../ui/Text";
@@ -44,6 +44,11 @@ export function AccountStatusCard({
   const accountUnavailable = !hasAccount && (authState?.availableProviders.length ?? 0) === 0;
   const requiresAttachment =
     attachmentState?.status === LocalAttachmentStatus.ConfirmationRequired;
+  const syncSummary = summarizeSyncState({
+    syncState,
+    attachmentState,
+    conflicts,
+  });
   const statusPills = buildStatusPills({
     hasAccount,
     accountUnavailable,
@@ -59,9 +64,7 @@ export function AccountStatusCard({
             Account
           </AppText>
           <AppText variant="section">{buildHeadline(hasAccount, syncState, authState)}</AppText>
-          <AppText tone="secondary">
-            {buildSummary(hasAccount, accountUnavailable, attachmentState, syncState)}
-          </AppText>
+          <AppText tone="secondary">{buildSummary(hasAccount, accountUnavailable, attachmentState, syncState)}</AppText>
           <View className="flex-row flex-wrap gap-x-5 gap-y-2">
             {statusPills.map((pill) => (
               <AppText key={pill} tone="secondary" variant="caption">
@@ -72,16 +75,26 @@ export function AccountStatusCard({
         </View>
 
         {account ? (
-          <View className="gap-1 rounded-[18px] px-4 py-4" style={{ backgroundColor: "rgba(255,255,255,0.04)" }}>
-            <AppText>{account.displayName ?? account.email ?? "Account"}</AppText>
-            <AppText tone="tertiary" variant="caption">
-              {account.email ?? "Email account"}
-            </AppText>
-            <AppText tone="tertiary" variant="caption">
-              {syncState?.lastSyncAt
-                ? `Last sync ${formatShortDateTime(syncState.lastSyncAt)}`
-                : "Not synced yet."}
-            </AppText>
+          <View className="gap-3 rounded-[18px] px-4 py-4" style={{ backgroundColor: "rgba(255,255,255,0.04)" }}>
+            <View className="gap-1">
+              <AppText>{account.displayName ?? account.email ?? "Account"}</AppText>
+              <AppText tone="tertiary" variant="caption">
+                {account.email ?? "Email account"}
+              </AppText>
+            </View>
+            <View className="gap-1">
+              <AppText variant="caption">{syncSummary.headline}</AppText>
+              <AppText tone="secondary" variant="caption">
+                {syncSummary.detail}
+              </AppText>
+            </View>
+            <View className="flex-row flex-wrap gap-x-5 gap-y-2">
+              {syncSummary.meta.slice(1).map((item) => (
+                <AppText key={item} tone="tertiary" variant="caption">
+                  {item}
+                </AppText>
+              ))}
+            </View>
           </View>
         ) : null}
 
@@ -114,23 +127,34 @@ export function AccountStatusCard({
             </View>
           </View>
         ) : hasAccount ? (
-          <View className="flex-row gap-3">
-            <Button
-              style={{ flex: 1 }}
-              busy={busyAction === "sync"}
-              onPress={onSync}
-              disabled={attachmentState?.status !== LocalAttachmentStatus.Attached}
-            >
-              Retry sync
-            </Button>
-            <Button
-              tone="tertiary"
-              style={{ flex: 1 }}
-              busy={busyAction === "sign_out"}
-              onPress={onSignOut}
-            >
-              Sign out
-            </Button>
+          <View className="gap-3">
+            <View className="flex-row gap-3">
+              <Button
+                style={{ flex: 1 }}
+                busy={busyAction === "sync"}
+                onPress={onSync}
+                disabled={attachmentState?.status !== LocalAttachmentStatus.Attached}
+              >
+                Retry sync
+              </Button>
+              <Button
+                tone="tertiary"
+                style={{ flex: 1 }}
+                busy={busyAction === "sign_out"}
+                onPress={onSignOut}
+              >
+                Sign out
+              </Button>
+            </View>
+            {(syncState?.pendingPushCount ?? 0) > 0 || syncState?.mode === SyncMode.Offline || syncState?.mode === SyncMode.Issue ? (
+              <AppText tone="tertiary" variant="caption">
+                Signing out keeps current changes on this device. They will not reach your account until you sign in and sync again.
+              </AppText>
+            ) : (
+              <AppText tone="tertiary" variant="caption">
+                Signing out leaves local data on this device and pauses connected syncing.
+              </AppText>
+            )}
           </View>
         ) : null}
       </View>

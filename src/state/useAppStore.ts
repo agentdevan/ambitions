@@ -122,7 +122,12 @@ interface PreferencesSlice {
   saveProductPreferences: (productPreferences: ProductPreferences) => Promise<void>;
   updateNotificationPreference: (
     reminderType: NotificationPreference["reminderType"],
-    enabled: boolean,
+    patch: Partial<
+      Pick<
+        NotificationPreference,
+        "enabled" | "leadTimeMinutes" | "quietHoursStart" | "quietHoursEnd"
+      >
+    >,
   ) => Promise<void>;
 }
 
@@ -1015,13 +1020,13 @@ export const useAppStore = create<AppState>((set, get) => ({
     });
   },
 
-  updateNotificationPreference: async (reminderType, enabled) => {
+  updateNotificationPreference: async (reminderType, patch) => {
     const preferences = await appServices.repositories.preferences.listNotificationPreferences();
     const nextPreferences = preferences.map((preference) =>
       preference.reminderType === reminderType
         ? {
             ...preference,
-            enabled,
+            ...patch,
             updatedAt: new Date().toISOString(),
             version: preference.version + 1,
           }
