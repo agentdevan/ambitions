@@ -18,12 +18,12 @@ export function MetricCard({ label, value, detail }: MetricCardProps) {
       style={{
         borderRadius: theme.radius.row,
         borderWidth: 1,
-        borderColor: theme.colors.border.subtle,
-        backgroundColor: theme.colors.background.elevatedSecondary,
+        borderColor: theme.colors.border.strong,
+        backgroundColor: theme.colors.background.elevated,
         shadowColor: theme.colors.shadow.color,
-        shadowOpacity: theme.mode === "dark" ? 0.08 : 0.04,
-        shadowRadius: 10,
-        shadowOffset: { width: 0, height: 4 },
+        shadowOpacity: theme.mode === "dark" ? 0.1 : 0.05,
+        shadowRadius: 12,
+        shadowOffset: { width: 0, height: 5 },
       }}
     >
       <AppText tone="tertiary" variant="micro" style={{ textTransform: "uppercase" }}>

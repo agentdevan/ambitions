@@ -30,7 +30,7 @@ export function SegmentedControl<T extends string>({
         borderRadius: theme.radius.control + 2,
         backgroundColor: theme.colors.background.sunken,
         borderWidth: 1,
-        borderColor: theme.colors.border.subtle,
+        borderColor: theme.colors.border.strong,
         gap: 6,
       }}
     >
@@ -59,7 +59,14 @@ export function SegmentedControl<T extends string>({
                   : "transparent",
               borderWidth: selected ? 1 : 0,
               borderColor: selected ? theme.colors.border.accent : "transparent",
-              transform: [{ scale: pressed && !reduceMotionEnabled ? 0.99 : 1 }],
+              transform: [
+                { scale: pressed && !reduceMotionEnabled ? 0.99 : 1 },
+                { translateY: pressed && !reduceMotionEnabled ? 1 : 0 },
+              ],
+              shadowColor: selected ? theme.colors.accent.primary : theme.colors.shadow.color,
+              shadowOpacity: selected ? (theme.mode === "dark" ? 0.12 : 0.06) : 0,
+              shadowRadius: 10,
+              shadowOffset: { width: 0, height: 4 },
             })}
           >
             <AppText

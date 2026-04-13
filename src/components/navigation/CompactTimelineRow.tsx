@@ -1,6 +1,7 @@
 import { Pressable, View } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 
+import { useAccessibilityPreferences } from "../../design/accessibility/useAccessibilityPreferences";
 import { useResolvedTheme } from "../../design/theme/useResolvedTheme";
 import { TodayTaskBlock } from "../../state/viewModels/today";
 import { formatTimeRangeLabel } from "../../utils/date";
@@ -32,6 +33,7 @@ const stateLabelMap: Record<TodayTaskBlock["state"], string> = {
 
 export function CompactTimelineRow({ block, onPress }: CompactTimelineRowProps) {
   const theme = useResolvedTheme();
+  const { reduceMotionEnabled } = useAccessibilityPreferences();
   const accentColor =
     block.state === "active"
       ? theme.colors.accent.primary
@@ -45,8 +47,11 @@ export function CompactTimelineRow({ block, onPress }: CompactTimelineRowProps) 
       onPress={onPress}
       style={({ pressed }) => [
         {
-          opacity: pressed ? 0.96 : 1,
-          transform: [{ scale: pressed ? 0.994 : 1 }],
+          opacity: pressed ? 0.98 : 1,
+          transform: [
+            { scale: pressed && !reduceMotionEnabled ? 0.992 : 1 },
+            { translateY: pressed && !reduceMotionEnabled ? 1 : 0 },
+          ],
         },
       ]}
     >
@@ -58,7 +63,7 @@ export function CompactTimelineRow({ block, onPress }: CompactTimelineRowProps) 
               block.state === "active"
                 ? theme.colors.background.accentWashStrong
                 : pressed
-                  ? theme.colors.background.elevatedSecondary
+                  ? theme.colors.background.accentWash
                   : theme.colors.background.elevated,
             borderWidth: 1,
             borderColor:
@@ -66,11 +71,11 @@ export function CompactTimelineRow({ block, onPress }: CompactTimelineRowProps) 
                 ? theme.colors.border.accent
                 : pressed
                   ? theme.colors.border.accent
-                  : theme.colors.border.strong,
+                  : theme.colors.border.subtle,
             shadowColor: theme.colors.shadow.color,
-            shadowOpacity: theme.mode === "dark" ? 0.14 : 0.03,
-            shadowRadius: 10,
-            shadowOffset: { width: 0, height: 5 },
+            shadowOpacity: theme.mode === "dark" ? 0.15 : 0.05,
+            shadowRadius: 12,
+            shadowOffset: { width: 0, height: 6 },
           }}
         >
           <View
@@ -101,16 +106,25 @@ export function CompactTimelineRow({ block, onPress }: CompactTimelineRowProps) 
             </AppText>
           </View>
           <View className="items-end gap-1 pl-2">
-            <View className="flex-row items-center gap-1">
+            <View
+              className="flex-row items-center gap-1.5 rounded-full px-3.5 py-2.5"
+              style={{
+                backgroundColor: pressed
+                  ? theme.colors.background.accentWashStrong
+                  : theme.colors.background.elevatedSecondary,
+                borderWidth: 1,
+                borderColor: pressed ? theme.colors.border.accent : theme.colors.border.strong,
+              }}
+            >
               <AppText
-                tone={pressed ? "accent" : "secondary"}
+                tone={pressed ? "accent" : "primary"}
                 variant="micro"
                 style={{ textTransform: "uppercase" }}
               >
                 Open
               </AppText>
               <Ionicons
-                color={pressed ? theme.colors.accent.primary : theme.colors.text.tertiary}
+                color={pressed ? theme.colors.accent.primary : theme.colors.text.secondary}
                 name="chevron-forward"
                 size={16}
               />

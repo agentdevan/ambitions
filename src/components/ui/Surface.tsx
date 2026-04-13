@@ -14,41 +14,41 @@ export function Surface({ children, className = "", tone = "default", style, ...
       backgroundColor: theme.colors.background.elevated,
       borderColor: theme.colors.border.subtle,
       accentColor: theme.colors.background.cardTint,
-      shadowOpacity: theme.mode === "dark" ? 0.14 : 0.04,
-      shadowRadius: theme.mode === "dark" ? 18 : 12,
-      shadowOffset: { width: 0, height: theme.mode === "dark" ? 10 : 6 },
+      shadowOpacity: theme.mode === "dark" ? 0.16 : 0.05,
+      shadowRadius: theme.mode === "dark" ? 20 : 14,
+      shadowOffset: { width: 0, height: theme.mode === "dark" ? 12 : 7 },
       elevation: 2,
-      washOpacity: theme.mode === "dark" ? 0.06 : 0.42,
+      washOpacity: theme.mode === "dark" ? 0.08 : 0.48,
     },
     accent: {
       backgroundColor: theme.colors.background.accentWash,
       borderColor: theme.colors.border.accent,
       accentColor: theme.colors.accent.glow,
-      shadowOpacity: theme.mode === "dark" ? 0.16 : 0.06,
-      shadowRadius: 16,
-      shadowOffset: { width: 0, height: 8 },
+      shadowOpacity: theme.mode === "dark" ? 0.18 : 0.08,
+      shadowRadius: 18,
+      shadowOffset: { width: 0, height: 10 },
       elevation: 3,
-      washOpacity: theme.mode === "dark" ? 0.04 : 0.26,
+      washOpacity: theme.mode === "dark" ? 0.08 : 0.3,
     },
     sunken: {
       backgroundColor: theme.colors.background.sunken,
       borderColor: theme.colors.border.subtle,
       accentColor: theme.colors.background.cardTint,
-      shadowOpacity: 0.02,
-      shadowRadius: 6,
-      shadowOffset: { width: 0, height: 2 },
+      shadowOpacity: theme.mode === "dark" ? 0.04 : 0.02,
+      shadowRadius: 8,
+      shadowOffset: { width: 0, height: 3 },
       elevation: 0,
-      washOpacity: theme.mode === "dark" ? 0.03 : 0.16,
+      washOpacity: theme.mode === "dark" ? 0.04 : 0.18,
     },
     hero: {
       backgroundColor: theme.colors.background.hero,
       borderColor: theme.colors.border.subtle,
       accentColor: theme.colors.accent.glow,
-      shadowOpacity: theme.mode === "dark" ? 0.2 : 0.07,
-      shadowRadius: 22,
-      shadowOffset: { width: 0, height: 12 },
+      shadowOpacity: theme.mode === "dark" ? 0.22 : 0.08,
+      shadowRadius: 24,
+      shadowOffset: { width: 0, height: 14 },
       elevation: 4,
-      washOpacity: theme.mode === "dark" ? 0.04 : 0.32,
+      washOpacity: theme.mode === "dark" ? 0.07 : 0.36,
     },
   };
 
@@ -83,6 +83,18 @@ export function Surface({ children, className = "", tone = "default", style, ...
           borderTopRightRadius: theme.radius.card,
           backgroundColor: toneMap[tone].accentColor,
           opacity: toneMap[tone].washOpacity,
+        }}
+      />
+      <View
+        pointerEvents="none"
+        style={{
+          position: "absolute",
+          left: 0,
+          right: 0,
+          bottom: 0,
+          height: 1,
+          backgroundColor: theme.mode === "dark" ? "rgba(255,255,255,0.04)" : "rgba(255,255,255,0.56)",
+          opacity: tone === "sunken" ? 0.35 : 0.7,
         }}
       />
       <View

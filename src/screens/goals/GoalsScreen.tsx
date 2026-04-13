@@ -15,6 +15,7 @@ import { Screen } from "../../components/ui/Screen";
 import { Surface } from "../../components/ui/Surface";
 import { AppText } from "../../components/ui/Text";
 import { useResolvedTheme } from "../../design/theme/useResolvedTheme";
+import { useAccessibilityPreferences } from "../../design/accessibility/useAccessibilityPreferences";
 import { GoalMilestoneStatus, GoalStatus, TaskStatus } from "../../domain/models";
 import { GoalsStackParamList } from "../../navigation/types";
 import { describeGoalFeasibility } from "../../services/goals/goalIntelligence";
@@ -59,6 +60,7 @@ function GoalCard({
   selectionMode: boolean;
 }) {
   const theme = useResolvedTheme();
+  const { reduceMotionEnabled } = useAccessibilityPreferences();
 
   return (
     <Pressable accessibilityRole="button" onPress={selectionMode ? onToggleSelect : onOpen}>
@@ -67,8 +69,11 @@ function GoalCard({
           tone={selected ? "accent" : "default"}
           className="gap-4"
           style={{
-            opacity: pressed ? 0.97 : 1,
-            transform: [{ scale: pressed ? 0.995 : 1 }],
+            opacity: pressed ? 0.985 : 1,
+            transform: [
+              { scale: pressed && !reduceMotionEnabled ? 0.993 : 1 },
+              { translateY: pressed && !reduceMotionEnabled ? 1 : 0 },
+            ],
           }}
         >
           <View className="flex-row items-start justify-between gap-3">
@@ -131,20 +136,24 @@ function GoalCard({
               {meta}
             </AppText>
             <View
-              className="flex-row items-center gap-1 rounded-full px-3 py-2"
+              className="flex-row items-center gap-1.5 rounded-full px-3.5 py-2.5"
               style={{
                 backgroundColor: selected
                   ? theme.colors.background.accentWashStrong
                   : theme.colors.background.elevatedSecondary,
                 borderWidth: 1,
-                borderColor: selected ? theme.colors.border.accent : theme.colors.border.subtle,
+                borderColor: selected ? theme.colors.border.accent : theme.colors.border.strong,
+                shadowColor: theme.colors.shadow.color,
+                shadowOpacity: selected ? 0.12 : theme.mode === "dark" ? 0.08 : 0.04,
+                shadowRadius: 8,
+                shadowOffset: { width: 0, height: 3 },
               }}
             >
               <AppText tone="primary" variant="micro" style={{ textTransform: "uppercase" }}>
                 {selectionMode ? (selected ? "Selected" : "Select") : "Open goal"}
               </AppText>
               <Ionicons
-                color={selected ? theme.colors.accent.primary : theme.colors.text.tertiary}
+                color={selected ? theme.colors.accent.primary : theme.colors.text.secondary}
                 name={selectionMode ? (selected ? "checkmark" : "add") : "arrow-forward"}
                 size={14}
               />

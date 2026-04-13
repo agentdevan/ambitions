@@ -140,9 +140,9 @@ export function MomentumBars({
               className="w-full items-center justify-end rounded-[20px] px-1.5 py-2"
               style={{
                 height: 76,
-                backgroundColor: theme.colors.background.elevatedSecondary,
+                backgroundColor: theme.colors.background.elevated,
                 borderWidth: 1,
-                borderColor: theme.colors.border.subtle,
+                borderColor: theme.colors.border.strong,
               }}
             >
               {reshapedHeight > 0 ? (
@@ -153,6 +153,10 @@ export function MomentumBars({
                     borderRadius: 999,
                     backgroundColor: theme.colors.progress.mutedFill,
                     marginBottom: 4,
+                    shadowColor: theme.colors.progress.mutedFill,
+                    shadowOpacity: theme.mode === "dark" ? 0.12 : 0.06,
+                    shadowRadius: 8,
+                    shadowOffset: { width: 0, height: 3 },
                   }}
                 />
               ) : null}

@@ -1,6 +1,7 @@
 import { PropsWithChildren, ReactNode } from "react";
 import { Pressable, PressableProps, StyleProp, View, ViewStyle } from "react-native";
 
+import { useAccessibilityPreferences } from "../../design/accessibility/useAccessibilityPreferences";
 import { useResolvedTheme } from "../../design/theme/useResolvedTheme";
 import { AppText } from "./Text";
 
@@ -22,6 +23,7 @@ export function SelectionCard({
   ...props
 }: SelectionCardProps) {
   const theme = useResolvedTheme();
+  const { reduceMotionEnabled } = useAccessibilityPreferences();
 
   return (
     <Pressable
@@ -40,7 +42,11 @@ export function SelectionCard({
           shadowRadius: selected ? 16 : 8,
           shadowOffset: { width: 0, height: selected ? 10 : 4 },
           elevation: selected ? 2 : 0,
-          opacity: props.disabled ? 0.5 : pressed ? 0.95 : 1,
+          opacity: props.disabled ? 0.5 : pressed ? 0.98 : 1,
+          transform: [
+            { scale: pressed && !props.disabled && !reduceMotionEnabled ? 0.992 : 1 },
+            { translateY: pressed && !props.disabled && !reduceMotionEnabled ? 1 : 0 },
+          ],
         },
         style,
       ]}

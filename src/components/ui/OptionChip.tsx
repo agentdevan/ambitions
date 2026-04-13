@@ -40,18 +40,23 @@ export function OptionChip({
           justifyContent: "center",
           backgroundColor: selected
             ? theme.colors.background.accentWashStrong
-            : theme.colors.background.elevatedSecondary,
+            : pressed
+              ? theme.colors.background.elevated
+              : theme.colors.background.elevatedSecondary,
           borderColor: selected
             ? theme.colors.border.accent
             : pressed
               ? theme.colors.border.strong
               : theme.colors.border.subtle,
           opacity: props.disabled ? 0.6 : 1,
-          transform: [{ scale: pressed && !props.disabled && !reduceMotionEnabled ? 0.985 : 1 }],
+          transform: [
+            { scale: pressed && !props.disabled && !reduceMotionEnabled ? 0.985 : 1 },
+            { translateY: pressed && !props.disabled && !reduceMotionEnabled ? 1 : 0 },
+          ],
           shadowColor: theme.colors.shadow.color,
-          shadowOpacity: selected ? (theme.mode === "dark" ? 0.1 : 0.05) : 0.02,
-          shadowRadius: selected ? 10 : 4,
-          shadowOffset: { width: 0, height: selected ? 5 : 2 },
+          shadowOpacity: selected ? (theme.mode === "dark" ? 0.12 : 0.06) : 0.03,
+          shadowRadius: selected ? 12 : 6,
+          shadowOffset: { width: 0, height: selected ? 6 : 3 },
           elevation: selected ? 2 : 1,
         },
         style,

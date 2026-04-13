@@ -1,5 +1,6 @@
 import { View } from "react-native";
 
+import { useResolvedTheme } from "../../design/theme/useResolvedTheme";
 import { Surface } from "../ui/Surface";
 import { AppText } from "../ui/Text";
 
@@ -19,6 +20,8 @@ interface CapacityInsightProps {
 }
 
 export function CapacityInsight({ capacity, focus }: CapacityInsightProps) {
+  const theme = useResolvedTheme();
+
   return (
     <Surface tone="sunken" className="gap-4">
       <View className="gap-2">
@@ -31,7 +34,15 @@ export function CapacityInsight({ capacity, focus }: CapacityInsightProps) {
 
       <View
         className="gap-3 rounded-[18px] px-4 py-4"
-        style={{ backgroundColor: "#F5F1EA", borderWidth: 1, borderColor: "#DDD5CB" }}
+        style={{
+          backgroundColor: theme.colors.background.elevated,
+          borderWidth: 1,
+          borderColor: theme.colors.border.strong,
+          shadowColor: theme.colors.shadow.color,
+          shadowOpacity: theme.mode === "dark" ? 0.08 : 0.04,
+          shadowRadius: 10,
+          shadowOffset: { width: 0, height: 4 },
+        }}
       >
         <View className="flex-row flex-wrap gap-x-6 gap-y-3">
           <View className="min-w-[96px] gap-1">

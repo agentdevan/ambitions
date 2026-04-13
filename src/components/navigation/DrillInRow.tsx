@@ -37,27 +37,30 @@ export function DrillInRow({
       onPress={onPress}
       style={({ pressed }) => [
         {
-          opacity: pressed ? 0.96 : 1,
-          transform: [{ scale: pressed && !reduceMotionEnabled ? 0.994 : 1 }],
+          opacity: pressed ? 0.98 : 1,
+          transform: [
+            { scale: pressed && !reduceMotionEnabled ? 0.992 : 1 },
+            { translateY: pressed && !reduceMotionEnabled ? 1 : 0 },
+          ],
         },
       ]}
     >
       {({ pressed }) => (
         <View
-          className="flex-row items-center gap-3 px-4 py-4"
+          className="flex-row items-center gap-3 px-4 py-4.5"
           style={{
             borderRadius: theme.radius.row,
             backgroundColor: pressed
-              ? theme.colors.background.accentWash
-              : theme.colors.background.elevatedSecondary,
+              ? theme.colors.background.accentWashStrong
+              : theme.colors.background.elevated,
             borderWidth: 1,
             borderColor: pressed
               ? theme.colors.border.accent
-              : theme.colors.border.subtle,
+              : theme.colors.border.strong,
             shadowColor: theme.colors.shadow.color,
-            shadowOpacity: theme.mode === "dark" ? 0.12 : 0.05,
-            shadowRadius: 14,
-            shadowOffset: { width: 0, height: 5 },
+            shadowOpacity: theme.mode === "dark" ? 0.14 : 0.06,
+            shadowRadius: 16,
+            shadowOffset: { width: 0, height: 6 },
           }}
         >
           {leading ? (
@@ -68,6 +71,8 @@ export function DrillInRow({
                 backgroundColor: pressed
                   ? theme.colors.background.accentWashStrong
                   : theme.colors.background.elevatedSecondary,
+                borderWidth: 1,
+                borderColor: pressed ? theme.colors.border.accent : theme.colors.border.subtle,
               }}
             >
               {leading}
@@ -88,27 +93,31 @@ export function DrillInRow({
           </View>
           <View className="items-end gap-1 pl-2">
             <View
-              className="flex-row items-center gap-1 rounded-full px-3 py-2"
+              className="flex-row items-center gap-1.5 rounded-full px-3.5 py-2.5"
               style={{
                 backgroundColor: pressed
                   ? theme.colors.background.accentWashStrong
-                  : theme.colors.background.elevated,
+                  : theme.colors.background.elevatedSecondary,
                 borderWidth: 1,
                 borderColor: pressed
                   ? theme.colors.border.accent
-                  : theme.colors.border.subtle,
+                  : theme.colors.border.strong,
+                shadowColor: theme.colors.shadow.color,
+                shadowOpacity: pressed ? 0.12 : theme.mode === "dark" ? 0.08 : 0.04,
+                shadowRadius: 8,
+                shadowOffset: { width: 0, height: 3 },
               }}
             >
               <AppText
                 tone={pressed ? "accent" : "primary"}
                 variant="micro"
                 numberOfLines={1}
-                style={{ textTransform: "uppercase", letterSpacing: 0.45 }}
+                style={{ textTransform: "uppercase", letterSpacing: 0.55 }}
               >
                 {actionLabel}
               </AppText>
               <Ionicons
-                color={pressed ? theme.colors.accent.primary : theme.colors.text.tertiary}
+                color={pressed ? theme.colors.accent.primary : theme.colors.text.secondary}
                 name="chevron-forward"
                 size={16}
               />
