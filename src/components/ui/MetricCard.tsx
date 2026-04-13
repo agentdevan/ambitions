@@ -20,12 +20,16 @@ export function MetricCard({ label, value, detail }: MetricCardProps) {
         borderWidth: 1,
         borderColor: theme.colors.border.subtle,
         backgroundColor: theme.colors.background.elevatedSecondary,
+        shadowColor: theme.colors.shadow.color,
+        shadowOpacity: theme.mode === "dark" ? 0.08 : 0.04,
+        shadowRadius: 10,
+        shadowOffset: { width: 0, height: 4 },
       }}
     >
       <AppText tone="tertiary" variant="micro" style={{ textTransform: "uppercase" }}>
         {label}
       </AppText>
-      <AppText variant="section" numberOfLines={2} style={{ marginTop: 8 }}>
+      <AppText variant="title" numberOfLines={2} style={{ marginTop: 10 }}>
         {value}
       </AppText>
       {detail ? (

@@ -323,6 +323,16 @@ export function GoalDetailScreen({
                 ]}
               />
             }
+            action={
+              <View className="flex-row gap-3">
+                <Button style={{ flex: 1 }} onPress={() => navigation.navigate("GoalEdit", { goalId: resolvedGoal.id })}>
+                  Edit goal
+                </Button>
+                <Button tone="secondary" style={{ flex: 1 }} onPress={() => navigation.navigate("GoalHistory", { goalId: resolvedGoal.id })}>
+                  View history
+                </Button>
+              </View>
+            }
           />
 
           <DetailSection
@@ -892,7 +902,7 @@ export function GoalProgressScreen({
           title="Momentum"
           description="Last 7 days."
           action={
-            <Button tone="inline" onPress={() => navigation.navigate("GoalHistory", { goalId: goal.id })}>
+            <Button tone="tertiary" size="compact" onPress={() => navigation.navigate("GoalHistory", { goalId: goal.id })}>
               View history
             </Button>
           }

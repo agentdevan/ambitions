@@ -121,6 +121,21 @@ function ExecutionHeroCard({
 
       <WorkspaceRow slot={now} />
 
+      <DetailSummaryStrip
+        items={[
+          {
+            label: "Main action",
+            value: recommendation.primaryLabel,
+            detail: recommendation.secondaryLabel ?? "This is the strongest next move right now.",
+          },
+          {
+            label: "Focus",
+            value: focus,
+            detail: usingLiveCalendar ? "Live calendar is shaping this read." : "Saved schedule is shaping this read.",
+          },
+        ]}
+      />
+
       <View className="gap-2.5">
         <Button busy={busy} onPress={onPrimaryPress}>
           {recommendation.primaryLabel}
@@ -132,12 +147,11 @@ function ExecutionHeroCard({
         ) : null}
       </View>
 
-      <View className="gap-1">
-        <AppText tone="secondary" variant="micro" style={{ textTransform: "uppercase" }}>
-          Focus
-        </AppText>
-        <AppText tone="secondary">{focus}</AppText>
-      </View>
+      <AppText tone="secondary" variant="caption">
+        {recommendation.kind === "stay_on_current_block" || recommendation.kind === "continue_in_progress"
+          ? "Stay with the current block unless the day has clearly drifted."
+          : "Take the main action first, then open the rest of the day if you need to adjust."}
+      </AppText>
     </Surface>
   );
 }
@@ -311,9 +325,14 @@ export function TodayScreen({ navigation }: Props) {
           title={getGreeting()}
           description={formatLongDate(todayVm.date)}
           action={
-            <Button size="compact" tone="secondary" onPress={() => navigation.navigate("TodayTimeline")}>
-              Timeline
-            </Button>
+            <View className="flex-row gap-3">
+              <Button size="compact" tone="secondary" style={{ flex: 1 }} onPress={() => navigation.navigate("TodayTimeline")}>
+                Timeline
+              </Button>
+              <Button size="compact" tone="tertiary" style={{ flex: 1 }} onPress={() => navigation.navigate("TodayCapacity")}>
+                Capacity
+              </Button>
+            </View>
           }
         />
 
@@ -378,7 +397,7 @@ export function TodayScreen({ navigation }: Props) {
               tone="secondary"
               onPress={() => (todayVm.next ? navigation.navigate("TodaySessionDetail", { blockId: todayVm.next.id }) : navigation.navigate("TodayTimeline"))}
             >
-              Open
+              Open next
             </Button>
           </View>
           <WorkspaceRow slot={todayVm.workspace.next} />
@@ -403,7 +422,7 @@ export function TodayScreen({ navigation }: Props) {
         <Surface className="gap-4">
           <View className="gap-1">
             <AppText variant="section">Momentum</AppText>
-            <AppText tone="secondary">A quick read on whether today is still moving.</AppText>
+            <AppText tone="secondary">A clean read on whether the day is still moving.</AppText>
           </View>
           <DetailSummaryStrip
             items={[
@@ -432,7 +451,12 @@ export function TodayScreen({ navigation }: Props) {
         </Surface>
 
         <Surface className="gap-3">
-          <AppText variant="section">Open more</AppText>
+          <View className="gap-1">
+            <AppText variant="section">Open more</AppText>
+            <AppText tone="secondary" variant="caption">
+              Everything below is a drill-in. The hero action above is still the main move.
+            </AppText>
+          </View>
           <DrillInRow
             title="Today timeline"
             subtitle="See the full protected line"

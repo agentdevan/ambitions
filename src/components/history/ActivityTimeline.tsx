@@ -136,7 +136,15 @@ export function MomentumBars({
 
         return (
           <View key={point.date} className="flex-1 items-center gap-2">
-            <View className="w-full items-center justify-end" style={{ height: 58 }}>
+            <View
+              className="w-full items-center justify-end rounded-[20px] px-1.5 py-2"
+              style={{
+                height: 76,
+                backgroundColor: theme.colors.background.elevatedSecondary,
+                borderWidth: 1,
+                borderColor: theme.colors.border.subtle,
+              }}
+            >
               {reshapedHeight > 0 ? (
                 <View
                   style={{
@@ -154,6 +162,10 @@ export function MomentumBars({
                   height: completedHeight,
                   borderRadius: 999,
                   backgroundColor: theme.colors.progress.fill,
+                  shadowColor: theme.colors.progress.fill,
+                  shadowOpacity: theme.mode === "dark" ? 0.24 : 0.14,
+                  shadowRadius: 10,
+                  shadowOffset: { width: 0, height: 4 },
                 }}
               />
             </View>

@@ -120,14 +120,14 @@ export function DetailSummaryStrip({
         <Surface
           key={`${item.label}:${item.value}`}
           tone="sunken"
-          className="min-w-[46%] flex-1 gap-1.5 px-4 py-4 mb-0"
+          className="min-w-[46%] flex-1 gap-2 px-4 py-4 mb-0"
         >
-          <AppText tone="secondary" variant="micro" style={{ textTransform: "uppercase" }}>
+          <AppText tone="tertiary" variant="micro" style={{ textTransform: "uppercase" }}>
             {item.label}
           </AppText>
           <AppText variant="section">{item.value}</AppText>
           {item.detail ? (
-            <AppText tone="secondary" variant="body">
+            <AppText tone="secondary" variant="caption">
               {item.detail}
             </AppText>
           ) : null}

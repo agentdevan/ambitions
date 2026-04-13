@@ -36,9 +36,9 @@ export function SelectionCard({
             ? theme.colors.background.accentWash
             : theme.colors.background.elevatedSecondary,
           shadowColor: theme.colors.text.primary,
-          shadowOpacity: selected ? 0.08 : 0.03,
-          shadowRadius: selected ? 14 : 6,
-          shadowOffset: { width: 0, height: selected ? 8 : 3 },
+          shadowOpacity: selected ? 0.1 : 0.04,
+          shadowRadius: selected ? 16 : 8,
+          shadowOffset: { width: 0, height: selected ? 10 : 4 },
           elevation: selected ? 2 : 0,
           opacity: props.disabled ? 0.5 : pressed ? 0.95 : 1,
         },

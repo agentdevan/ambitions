@@ -968,6 +968,13 @@ export const useAppStore = create<AppState>((set, get) => ({
     const taskIds = state.allTasks
       .filter((task) => task.goalId && goalSet.has(task.goalId))
       .map((task) => task.id);
+    const timeBlockIds = state.allTimeBlocks
+      .filter(
+        (block) =>
+          goalSet.has(block.goalId ?? "") ||
+          (block.taskId ? taskIds.includes(block.taskId) : false),
+      )
+      .map((block) => block.id);
 
     await sqliteClient.withTransaction(async (client) => {
       if (taskIds.length > 0) {
@@ -979,6 +986,22 @@ export const useAppStore = create<AppState>((set, get) => ({
         await client.run(
           `DELETE FROM replan_suggestions WHERE task_id IN (${taskPlaceholders});`,
           taskIds,
+        );
+      }
+
+      if (timeBlockIds.length > 0) {
+        const timeBlockPlaceholders = timeBlockIds.map(() => "?").join(", ");
+        await client.run(
+          `DELETE FROM activity_events WHERE time_block_id IN (${timeBlockPlaceholders});`,
+          timeBlockIds,
+        );
+        await client.run(
+          `DELETE FROM replan_suggestions WHERE time_block_id IN (${timeBlockPlaceholders});`,
+          timeBlockIds,
+        );
+        await client.run(
+          `DELETE FROM time_blocks WHERE id IN (${timeBlockPlaceholders});`,
+          timeBlockIds,
         );
       }
 

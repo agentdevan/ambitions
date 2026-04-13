@@ -55,9 +55,9 @@ export function DrillInRow({
               ? theme.colors.border.accent
               : theme.colors.border.subtle,
             shadowColor: theme.colors.shadow.color,
-            shadowOpacity: theme.mode === "dark" ? 0.1 : 0.04,
-            shadowRadius: 12,
-            shadowOffset: { width: 0, height: 4 },
+            shadowOpacity: theme.mode === "dark" ? 0.12 : 0.05,
+            shadowRadius: 14,
+            shadowOffset: { width: 0, height: 5 },
           }}
         >
           {leading ? (
@@ -88,11 +88,11 @@ export function DrillInRow({
           </View>
           <View className="items-end gap-1 pl-2">
             <View
-              className="flex-row items-center gap-1 rounded-full px-2.5 py-1.5"
+              className="flex-row items-center gap-1 rounded-full px-3 py-2"
               style={{
                 backgroundColor: pressed
                   ? theme.colors.background.accentWashStrong
-                  : theme.colors.background.canvas,
+                  : theme.colors.background.elevated,
                 borderWidth: 1,
                 borderColor: pressed
                   ? theme.colors.border.accent
@@ -100,7 +100,7 @@ export function DrillInRow({
               }}
             >
               <AppText
-                tone={pressed ? "accent" : "secondary"}
+                tone={pressed ? "accent" : "primary"}
                 variant="micro"
                 numberOfLines={1}
                 style={{ textTransform: "uppercase", letterSpacing: 0.45 }}

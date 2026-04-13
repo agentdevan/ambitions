@@ -133,9 +133,14 @@ export function InsightsScreen({ navigation }: Props) {
           title="Insights"
           description="The short version of what moved and what needs your next read."
           action={
-            <Button size="compact" tone="secondary" onPress={() => navigation.navigate("InsightMonthlyReview")}>
-              Monthly review
-            </Button>
+            <View className="flex-row gap-3">
+              <Button size="compact" style={{ flex: 1 }} onPress={() => navigation.navigate("InsightMonthlyReview")}>
+                Monthly review
+              </Button>
+              <Button size="compact" tone="secondary" style={{ flex: 1 }} onPress={() => navigation.navigate("InsightActivity")}>
+                Activity
+              </Button>
+            </View>
           }
         />
 
@@ -164,6 +169,14 @@ export function InsightsScreen({ navigation }: Props) {
               { label: "Plan shifts", value: String(planChangeEvents.length), detail: "Recent changes worth opening" },
             ]}
           />
+          <View className="flex-row gap-3">
+            <Button style={{ flex: 1 }} onPress={() => navigation.navigate("InsightMonthlyReview")}>
+              Open monthly review
+            </Button>
+            <Button tone="secondary" style={{ flex: 1 }} onPress={() => navigation.navigate("InsightContinuity")}>
+              Open continuity
+            </Button>
+          </View>
         </Surface>
 
         <Surface className="gap-4">
@@ -175,7 +188,12 @@ export function InsightsScreen({ navigation }: Props) {
         </Surface>
 
         <Surface className="gap-3">
-          <AppText variant="section">Recent movement</AppText>
+          <View className="flex-row items-center justify-between gap-3">
+            <AppText variant="section">Recent movement</AppText>
+            <Button size="compact" tone="secondary" onPress={() => navigation.navigate("InsightActivity")}>
+              View all
+            </Button>
+          </View>
           {feed.slice(0, 3).map((event) => (
             <Surface key={event.id} tone="sunken" className="gap-1.5 mb-0">
               <AppText variant="caption">{event.title}</AppText>

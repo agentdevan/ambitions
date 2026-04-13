@@ -109,13 +109,23 @@ export function ProfileScreen({ navigation }: Props) {
           title="Profile"
           description="Settings, connected services, and account."
           action={
-            <Button
-              size="compact"
-              tone="secondary"
-              onPress={() => navigation.navigate(account ? "ProfileAccount" : "ProfileAppearance")}
-            >
-              {account ? "Account" : "Appearance"}
-            </Button>
+            <View className="flex-row gap-3">
+              <Button
+                size="compact"
+                style={{ flex: 1 }}
+                onPress={() => navigation.navigate(account ? "ProfileAccount" : "ProfileAppearance")}
+              >
+                {account ? "Account" : "Appearance"}
+              </Button>
+              <Button
+                size="compact"
+                tone="secondary"
+                style={{ flex: 1 }}
+                onPress={() => navigation.navigate("ProfileNotifications")}
+              >
+                Notifications
+              </Button>
+            </View>
           }
         />
 
@@ -143,6 +153,14 @@ export function ProfileScreen({ navigation }: Props) {
             <Pill label={account ? accountSummary.badge : "Local only"} tone="quiet" />
             <Pill label={calendarSummary.badge} tone="quiet" />
             <Pill label={enabledNotifications > 0 ? `${enabledNotifications} reminders` : "Reminders muted"} tone="accent" />
+          </View>
+          <View className="flex-row gap-3">
+            <Button style={{ flex: 1 }} onPress={() => navigation.navigate("ProfileAppearance")}>
+              Appearance
+            </Button>
+            <Button tone="secondary" style={{ flex: 1 }} onPress={() => navigation.navigate("ProfileAccount")}>
+              Account
+            </Button>
           </View>
         </Surface>
 

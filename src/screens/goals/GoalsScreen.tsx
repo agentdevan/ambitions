@@ -61,58 +61,95 @@ function GoalCard({
   const theme = useResolvedTheme();
 
   return (
-    <Pressable onPress={selectionMode ? onToggleSelect : onOpen}>
+    <Pressable accessibilityRole="button" onPress={selectionMode ? onToggleSelect : onOpen}>
       {({ pressed }) => (
-        <Surface tone={selected ? "accent" : "default"} className="gap-4" style={{ opacity: pressed ? 0.96 : 1 }}>
+        <Surface
+          tone={selected ? "accent" : "default"}
+          className="gap-4"
+          style={{
+            opacity: pressed ? 0.97 : 1,
+            transform: [{ scale: pressed ? 0.995 : 1 }],
+          }}
+        >
           <View className="flex-row items-start justify-between gap-3">
             <View className="flex-1 gap-2">
               <View className="flex-row flex-wrap items-center gap-2">
                 <Pill label={direction} tone="quiet" />
                 <Pill label={health} tone={paceTone(health)} />
               </View>
-              <AppText variant="section">{title}</AppText>
+              <AppText variant="title">{title}</AppText>
             </View>
-            {selectionMode ? (
-              <View
-                className="items-center justify-center rounded-full"
-                style={{
-                  width: 30,
-                  height: 30,
-                  borderWidth: 1,
-                  borderColor: selected ? theme.colors.border.accent : theme.colors.border.subtle,
-                }}
-              >
-                <Ionicons
-                  color={selected ? theme.colors.accent.primary : theme.colors.text.secondary}
-                  name={selected ? "checkmark-circle" : "ellipse-outline"}
-                  size={18}
-                />
-              </View>
-            ) : (
-              <Ionicons color={theme.colors.text.secondary} name="chevron-forward" size={18} />
-            )}
+            <View
+              className="items-center justify-center rounded-full"
+              style={{
+                width: 42,
+                height: 42,
+                borderWidth: 1,
+                borderColor: selected ? theme.colors.border.accent : theme.colors.border.subtle,
+                backgroundColor: selected
+                  ? theme.colors.background.accentWashStrong
+                  : theme.colors.background.elevatedSecondary,
+              }}
+            >
+              <Ionicons
+                color={selected ? theme.colors.accent.primary : theme.colors.text.secondary}
+                name={selectionMode ? (selected ? "checkmark-circle" : "ellipse-outline") : "chevron-forward"}
+                size={selectionMode ? 22 : 18}
+              />
+            </View>
           </View>
-
-          <ProgressBar progress={progress} />
 
           <View className="gap-2">
-            <View className="gap-1">
-              <AppText tone="secondary" variant="micro" style={{ textTransform: "uppercase" }}>
-                Current phase
+            <View className="flex-row items-center justify-between">
+              <AppText tone="tertiary" variant="micro" style={{ textTransform: "uppercase" }}>
+                Progress
               </AppText>
-              <AppText tone="secondary">{phase}</AppText>
-            </View>
-            <View className="gap-1">
-              <AppText tone="secondary" variant="micro" style={{ textTransform: "uppercase" }}>
-                Next move
+              <AppText tone="secondary" variant="caption">
+                {Math.round(progress * 100)}%
               </AppText>
-              <AppText tone="secondary">{nextMove}</AppText>
             </View>
+            <ProgressBar progress={progress} height={10} />
           </View>
 
-          <AppText tone="secondary" variant="caption">
-            {meta}
-          </AppText>
+          <View className="flex-row gap-3">
+            <Surface tone="sunken" className="min-w-[46%] flex-1 gap-1.5 mb-0 px-4 py-4">
+              <AppText tone="tertiary" variant="micro" style={{ textTransform: "uppercase" }}>
+                This week
+              </AppText>
+              <AppText variant="caption">{phase}</AppText>
+            </Surface>
+            <Surface tone="sunken" className="min-w-[46%] flex-1 gap-1.5 mb-0 px-4 py-4">
+              <AppText tone="tertiary" variant="micro" style={{ textTransform: "uppercase" }}>
+                Next move
+              </AppText>
+              <AppText variant="caption">{nextMove}</AppText>
+            </Surface>
+          </View>
+
+          <View className="flex-row items-center justify-between gap-3">
+            <AppText tone="secondary" variant="caption" style={{ flex: 1 }}>
+              {meta}
+            </AppText>
+            <View
+              className="flex-row items-center gap-1 rounded-full px-3 py-2"
+              style={{
+                backgroundColor: selected
+                  ? theme.colors.background.accentWashStrong
+                  : theme.colors.background.elevatedSecondary,
+                borderWidth: 1,
+                borderColor: selected ? theme.colors.border.accent : theme.colors.border.subtle,
+              }}
+            >
+              <AppText tone="primary" variant="micro" style={{ textTransform: "uppercase" }}>
+                {selectionMode ? (selected ? "Selected" : "Select") : "Open goal"}
+              </AppText>
+              <Ionicons
+                color={selected ? theme.colors.accent.primary : theme.colors.text.tertiary}
+                name={selectionMode ? (selected ? "checkmark" : "add") : "arrow-forward"}
+                size={14}
+              />
+            </View>
+          </View>
         </Surface>
       )}
     </Pressable>
@@ -149,6 +186,7 @@ export function GoalsScreen({ navigation }: Props) {
   const [selectedGoalIds, setSelectedGoalIds] = useState<string[]>([]);
   const [confirmDeleteOpen, setConfirmDeleteOpen] = useState(false);
   const [deleteBusy, setDeleteBusy] = useState(false);
+  const [deleteError, setDeleteError] = useState<string | null>(null);
   const theme = useResolvedTheme();
 
   const portfolio = useMemo(() => {
@@ -200,7 +238,9 @@ export function GoalsScreen({ navigation }: Props) {
         phase: currentMilestone?.title ?? "Set first phase",
         nextMove: reviewDraft ? "Review pending changes" : nextTask?.title ?? "Shape next step",
         health: progressTruth.paceLabel,
-        meta: feasibility?.statusLabel ?? (goal.targetDate ? `Target ${formatShortDate(goal.targetDate)}` : "No target date"),
+        meta:
+          feasibility?.statusLabel ??
+          (goal.targetDate ? `Target ${formatShortDate(goal.targetDate)}` : "No target date"),
       };
     });
 
@@ -215,23 +255,34 @@ export function GoalsScreen({ navigation }: Props) {
   }, [ambitions, goals, milestones, tasks, timeBlocks, activityEvents, currentWeekReview, currentMonthReview]);
 
   const selectedCount = selectedGoalIds.length;
+  const selectedTitles = portfolio.cards
+    .filter((card) => selectedGoalIds.includes(card.id))
+    .map((card) => card.title)
+    .slice(0, 3);
 
   function toggleSelection(goalId: string) {
-    setSelectedGoalIds((current) => (current.includes(goalId) ? current.filter((id) => id !== goalId) : [...current, goalId]));
+    setDeleteError(null);
+    setSelectedGoalIds((current) =>
+      current.includes(goalId) ? current.filter((id) => id !== goalId) : [...current, goalId],
+    );
   }
 
   function exitSelectionMode() {
     setSelectionMode(false);
     setSelectedGoalIds([]);
     setConfirmDeleteOpen(false);
+    setDeleteError(null);
   }
 
   async function handleDeleteSelected() {
     if (selectedGoalIds.length === 0) return;
     setDeleteBusy(true);
+    setDeleteError(null);
     try {
       await deleteGoals(selectedGoalIds);
       exitSelectionMode();
+    } catch (error) {
+      setDeleteError(error instanceof Error ? error.message : "The selected goals could not be deleted.");
     } finally {
       setDeleteBusy(false);
     }
@@ -244,17 +295,22 @@ export function GoalsScreen({ navigation }: Props) {
           <PageHeader
             eyebrow="Goals"
             title="Goals"
-            description={portfolio.activeCount > 0 ? `${portfolio.activeCount} active goals in view.` : "Build one clear goal, then keep it moving."}
+            description={
+              portfolio.activeCount > 0
+                ? `${portfolio.activeCount} active goals with one clear tap path each.`
+                : "Build one clear goal, then keep it moving."
+            }
             action={
-              <View className="gap-2">
+              <View className="flex-row gap-3">
                 <Button
                   size="compact"
                   tone={selectionMode ? "secondary" : "tertiary"}
+                  style={{ flex: 1 }}
                   onPress={() => (selectionMode ? exitSelectionMode() : setSelectionMode(true))}
                 >
-                  {selectionMode ? "Done" : "Clean up"}
+                  {selectionMode ? "Done cleaning" : "Clean up"}
                 </Button>
-                <Button size="compact" onPress={() => navigation.navigate("GoalEdit", {})}>
+                <Button size="compact" style={{ flex: 1 }} onPress={() => navigation.navigate("GoalEdit", {})}>
                   New goal
                 </Button>
               </View>
@@ -266,7 +322,11 @@ export function GoalsScreen({ navigation }: Props) {
               eyebrow="Start here"
               title="Add your first goal"
               body="A title, a target, a pace, and the first next step."
-              action={<View className="pt-1"><Button onPress={() => navigation.navigate("GoalEdit", {})}>Create goal</Button></View>}
+              action={
+                <View className="pt-1">
+                  <Button onPress={() => navigation.navigate("GoalEdit", {})}>Create goal</Button>
+                </View>
+              }
             />
           ) : (
             <>
@@ -274,37 +334,76 @@ export function GoalsScreen({ navigation }: Props) {
                 <View className="flex-row flex-wrap items-center gap-2">
                   <Pill label={`${portfolio.activeCount} active`} tone="accent" />
                   <Pill label={`${portfolio.movingCount} moving`} tone="quiet" />
-                  {portfolio.attentionCount > 0 ? <Pill label={`${portfolio.attentionCount} need attention`} tone="neutral" /> : null}
-                  {portfolio.pendingReviews > 0 ? <Pill label={`${portfolio.pendingReviews} review`} tone="quiet" /> : null}
+                  {portfolio.attentionCount > 0 ? (
+                    <Pill label={`${portfolio.attentionCount} need attention`} tone="neutral" />
+                  ) : null}
+                  {portfolio.pendingReviews > 0 ? (
+                    <Pill label={`${portfolio.pendingReviews} review`} tone="quiet" />
+                  ) : null}
                 </View>
-                <View className="gap-1">
+                <View className="gap-2">
                   <AppText variant="title">
-                    {portfolio.attentionCount > 0 ? "A few goals need a cleaner read." : "Your active goals are easy to scan again."}
+                    {portfolio.attentionCount > 0
+                      ? "A few goals need a cleaner read."
+                      : "Your active goals are easier to scan and act on."}
                   </AppText>
-                  <AppText tone="secondary">Open one goal when you want the full milestone, pace, and history detail.</AppText>
+                  <AppText tone="secondary">
+                    The strongest next move is now treated like a control, not a text hint.
+                  </AppText>
+                </View>
+                <View className="flex-row gap-3">
+                  <Button style={{ flex: 1 }} onPress={() => navigation.navigate("GoalEdit", {})}>
+                    Add goal
+                  </Button>
+                  <Button
+                    tone="secondary"
+                    style={{ flex: 1 }}
+                    onPress={() => (selectionMode ? setConfirmDeleteOpen(true) : setSelectionMode(true))}
+                  >
+                    {selectionMode ? "Delete selected" : "Manage goals"}
+                  </Button>
                 </View>
               </Surface>
 
               {selectionMode ? (
-                <Surface className="gap-4">
-                  <View className="flex-row items-center justify-between gap-3">
-                    <View className="gap-1">
+                <Surface tone="accent" className="gap-4">
+                  <View className="flex-row items-start justify-between gap-3">
+                    <View className="flex-1 gap-1">
                       <AppText variant="section">Bulk cleanup</AppText>
-                      <AppText tone="secondary">Select goals to remove from the portfolio.</AppText>
+                      <AppText tone="secondary" variant="caption">
+                        Select goals, then confirm one deliberate destructive action.
+                      </AppText>
                     </View>
+                    <Pill label={selectedCount > 0 ? `${selectedCount} selected` : "Select goals"} tone="accent" />
+                  </View>
+                  <View className="flex-row gap-3">
                     <Button
                       size="compact"
                       tone="secondary"
+                      style={{ flex: 1 }}
                       onPress={() =>
-                        setSelectedGoalIds(selectedCount === portfolio.cards.length ? [] : portfolio.cards.map((card) => card.id))
+                        setSelectedGoalIds(
+                          selectedCount === portfolio.cards.length ? [] : portfolio.cards.map((card) => card.id),
+                        )
                       }
                     >
-                      {selectedCount === portfolio.cards.length ? "Clear" : "Select all"}
+                      {selectedCount === portfolio.cards.length ? "Clear selection" : "Select all"}
+                    </Button>
+                    <Button
+                      size="compact"
+                      tone="destructive"
+                      style={{ flex: 1 }}
+                      disabled={selectedCount === 0}
+                      onPress={() => setConfirmDeleteOpen(true)}
+                    >
+                      Delete selected
                     </Button>
                   </View>
-                  <Button tone="secondary" disabled={selectedCount === 0} onPress={() => setConfirmDeleteOpen(true)}>
-                    Delete selected
-                  </Button>
+                  {deleteError ? (
+                    <AppText tone="secondary" variant="caption">
+                      {deleteError}
+                    </AppText>
+                  ) : null}
                 </Surface>
               ) : null}
 
@@ -314,7 +413,11 @@ export function GoalsScreen({ navigation }: Props) {
                   title="No active goals"
                   body="Bring one goal back into rotation."
                   tone="sunken"
-                  action={<View className="pt-1"><Button onPress={() => navigation.navigate("GoalEdit", {})}>Start goal</Button></View>}
+                  action={
+                    <View className="pt-1">
+                      <Button onPress={() => navigation.navigate("GoalEdit", {})}>Start goal</Button>
+                    </View>
+                  }
                 />
               ) : (
                 <View className="gap-3">
@@ -359,19 +462,41 @@ export function GoalsScreen({ navigation }: Props) {
       </Screen>
 
       <Modal transparent animationType="fade" visible={confirmDeleteOpen} onRequestClose={() => setConfirmDeleteOpen(false)}>
-        <View className="flex-1 items-center justify-center px-5" style={{ backgroundColor: "rgba(16, 18, 22, 0.34)" }}>
+        <View className="flex-1 items-center justify-center px-5" style={{ backgroundColor: "rgba(16, 18, 22, 0.38)" }}>
           <Surface style={{ width: "100%" }}>
             <View className="gap-4">
-              <View className="gap-1">
+              <View className="gap-2">
+                <Pill label={selectedCount > 0 ? `${selectedCount} selected` : "No goals selected"} tone="neutral" />
                 <AppText variant="title">Delete selected goals?</AppText>
-                <AppText tone="secondary">This removes the selected goals and their generated work. This cannot be undone.</AppText>
+                <AppText tone="secondary">
+                  This removes the goals and their generated work. The cleanup is immediate and cannot be undone.
+                </AppText>
               </View>
+              {selectedTitles.length > 0 ? (
+                <Surface tone="sunken" className="gap-2 mb-0">
+                  {selectedTitles.map((title) => (
+                    <AppText key={title} variant="caption">
+                      {title}
+                    </AppText>
+                  ))}
+                  {selectedCount > selectedTitles.length ? (
+                    <AppText tone="secondary" variant="caption">
+                      +{selectedCount - selectedTitles.length} more
+                    </AppText>
+                  ) : null}
+                </Surface>
+              ) : null}
+              {deleteError ? (
+                <AppText tone="secondary" variant="caption">
+                  {deleteError}
+                </AppText>
+              ) : null}
               <View className="flex-row gap-3">
                 <Button tone="tertiary" style={{ flex: 1 }} onPress={() => setConfirmDeleteOpen(false)}>
-                  Cancel
+                  Keep goals
                 </Button>
-                <Button tone="secondary" style={{ flex: 1 }} busy={deleteBusy} onPress={() => void handleDeleteSelected()}>
-                  Delete
+                <Button tone="destructive" style={{ flex: 1 }} busy={deleteBusy} onPress={() => void handleDeleteSelected()}>
+                  Delete goals
                 </Button>
               </View>
             </View>

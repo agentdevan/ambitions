@@ -151,9 +151,18 @@ export function PlanScreen({ navigation }: Props) {
           title="Plan"
           description="This week at a glance."
           action={
-            <Button size="compact" onPress={workspace.shouldOpenWeeklyReview ? openWeeklyExperience : () => navigation.navigate("PlanDetail")}>
-              {workspace.shouldOpenWeeklyReview ? "Weekly review" : "Open week"}
-            </Button>
+            <View className="flex-row gap-3">
+              <Button
+                size="compact"
+                style={{ flex: 1 }}
+                onPress={workspace.shouldOpenWeeklyReview ? openWeeklyExperience : () => navigation.navigate("PlanDetail")}
+              >
+                {workspace.shouldOpenWeeklyReview ? "Weekly review" : "Open week"}
+              </Button>
+              <Button size="compact" tone="secondary" style={{ flex: 1 }} onPress={() => navigation.navigate("PlanStructure", {})}>
+                Structure
+              </Button>
+            </View>
           }
         />
 
@@ -176,6 +185,14 @@ export function PlanScreen({ navigation }: Props) {
               { label: "Pressure", value: String(workspace.structureSummary.underPressureCount), detail: workspace.pressureDetail },
             ]}
           />
+          <View className="flex-row gap-3">
+            <Button style={{ flex: 1 }} onPress={workspace.shouldOpenWeeklyReview ? openWeeklyExperience : () => navigation.navigate("PlanDetail")}>
+              {workspace.shouldOpenWeeklyReview ? "Open weekly review" : "Open week plan"}
+            </Button>
+            <Button tone="secondary" style={{ flex: 1 }} onPress={() => navigation.navigate("PlanStructure", {})}>
+              Open structure
+            </Button>
+          </View>
         </Surface>
 
         <Surface className="gap-4">
