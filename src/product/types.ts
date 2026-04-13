@@ -33,6 +33,71 @@ export type MonthlyCarryoverPreference =
   | "prune_aggressively"
   | "review_before_carrying"
   | "tolerate_more_carryover";
+export type GoalPaceMode = "conservative" | "balanced" | "aggressive";
+export type GoalFeasibilityStatus = "feasible" | "tight" | "unrealistic";
+
+export interface GoalInterpretation {
+  domainLabel: string;
+  categoryLabel: string;
+  workPattern: string;
+  timingLabel: string;
+  workloadShape: string;
+  workloadLabel: string;
+  earlyMilestoneStructure: string[];
+  earlyTaskCategories: string[];
+}
+
+export interface GoalPaceOptionSummary {
+  mode: GoalPaceMode;
+  label: string;
+  summary: string;
+  weeklyHours: number;
+  sessionCount: number;
+  taskSizing: string;
+  riskLevel: string;
+  deadlineConfidence: string;
+  adaptationBehavior: string;
+  recommended: boolean;
+}
+
+export interface GoalFeasibilityTruth {
+  status: GoalFeasibilityStatus;
+  summary: string;
+  detail: string;
+  deadlineConfidence: string;
+  weeklyDemandMinutes: number;
+  weeklyCapacityMinutes: number;
+  totalCapacityMinutes: number;
+  revisedDeadlineSuggestion: string | null;
+  revisedDeadlineReason: string | null;
+  lighterScopeSuggestion: string | null;
+  pacingTradeoff: string;
+  highestLeverageStep: string;
+}
+
+export interface GoalStrategyComposer {
+  selectedPaceMode: GoalPaceMode;
+  recommendedPaceMode: GoalPaceMode;
+  interpretation: GoalInterpretation;
+  availableCapacitySummary: string;
+  commitmentsSummary: string;
+  behaviorSummary: string;
+  workloadEstimateMinutes: number;
+  workloadEstimateLabel: string;
+  paceOptions: GoalPaceOptionSummary[];
+  feasibility: GoalFeasibilityTruth;
+  firstMilestonePath: Array<{
+    title: string;
+    summary: string | null;
+    targetDate: string | null;
+  }>;
+  firstWeekActionPreview: Array<{
+    title: string;
+    summary: string | null;
+    targetDate: string | null;
+    estimatedMinutes: number;
+  }>;
+}
 
 export interface ScheduleDefaults {
   sleepStart: string;
@@ -80,4 +145,6 @@ export interface GoalDraftInference {
   successMetric: string | null;
   notes: string | null;
   focusDomains: DomainKey[];
+  paceMode: GoalPaceMode;
+  interpretation: GoalInterpretation;
 }

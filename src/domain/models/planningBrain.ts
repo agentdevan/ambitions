@@ -60,6 +60,7 @@ export interface DomainCandidate {
 export enum PlanningMode {
   Protective = "protective",
   Balanced = "balanced",
+  Aggressive = "aggressive",
 }
 
 export interface PlanningPolicy {

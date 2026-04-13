@@ -14,6 +14,7 @@ import { AppText } from "../../components/ui/Text";
 import { useResolvedTheme } from "../../design/theme/useResolvedTheme";
 import { GoalStatus } from "../../domain/models";
 import { GoalsStackParamList } from "../../navigation/types";
+import { describeGoalFeasibility, describeGoalPaceMode, getGoalIntelligenceSnapshot } from "../../services/goals/goalIntelligence";
 import { getGoalReviewDraft } from "../../services/goals/metadata";
 import { buildActivityFeed, summarizeGoalProgress } from "../../services/history/selectors";
 import { useAppStore } from "../../state/useAppStore";
@@ -145,6 +146,8 @@ export function GoalsScreen({ navigation }: Props) {
                       ? goalSummary.completedTasks / goalSummary.taskCount
                       : 0;
                 const reviewDraft = getGoalReviewDraft(goal);
+                const intelligence = getGoalIntelligenceSnapshot(goal);
+                const feasibility = describeGoalFeasibility(goal);
 
                 return (
                   <Surface key={goal.id} className="gap-4">
@@ -153,6 +156,15 @@ export function GoalsScreen({ navigation }: Props) {
                         <View className="flex-row flex-wrap items-center gap-2">
                           <AppText variant="section">{goal.title}</AppText>
                           {reviewDraft ? <Pill label="Review" tone="accent" /> : null}
+                          {intelligence ? (
+                            <Pill
+                              label={describeGoalPaceMode(intelligence.selectedPaceMode)}
+                              tone="quiet"
+                            />
+                          ) : null}
+                          {feasibility ? (
+                            <Pill label={feasibility.statusLabel} tone="neutral" />
+                          ) : null}
                         </View>
                         <AppText tone="secondary" variant="caption">
                           {goal.targetDate
@@ -179,6 +191,15 @@ export function GoalsScreen({ navigation }: Props) {
                         {Math.round(completionRatio * 100)}%
                       </AppText>
                     </View>
+
+                    {feasibility ? (
+                      <Surface tone="sunken" className="gap-2 mb-0">
+                        <AppText variant="caption">{feasibility.summary}</AppText>
+                        <AppText tone="secondary" variant="caption">
+                          {feasibility.detail}
+                        </AppText>
+                      </Surface>
+                    ) : null}
 
                     <View className="gap-3">
                       <GoalCard

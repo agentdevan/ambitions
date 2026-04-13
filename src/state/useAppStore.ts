@@ -49,7 +49,7 @@ import {
   WeeklyIntensity,
   WeeklyReviewState,
 } from "../domain/models";
-import { createGoalAndFirstPlan, createGoalArtifacts } from "../product/planOrchestrator";
+import { createGoalAndFirstPlan } from "../product/planOrchestrator";
 import { getProductPreferences, mergeProductPreferences } from "../product/preferences";
 import { ProductPreferences, GoalDraftInference } from "../product/types";
 import { applyDownstreamHandling } from "../services/goals/downstreamHandlingPolicies";
@@ -583,82 +583,14 @@ export const useAppStore = create<AppState>((set, get) => ({
       throw new Error("Preferences are not available yet.");
     }
 
-    const accountId = getAttachedAccountId(state);
-
-    const artifacts = await createGoalArtifacts({
+    await createGoalAndFirstPlan({
       inference,
       productPreferences: state.productPreferences,
       currentPreferences: state.userPreferences,
       today: state.planDate,
       adaptationProfile: getEffectiveAdaptationProfile(state),
+      accountId: getAttachedAccountId(state),
     });
-    const existingGoals = await appServices.repositories.goals.listGoals();
-
-    await appServices.repositories.preferences.saveUserPreferences(
-      bindRecordToAccount(artifacts.mergedPreferences, accountId),
-    );
-    await appServices.repositories.goals.saveGoals([
-      ...existingGoals.map((goal, index) => ({ ...goal, sortOrder: index + 1 })),
-      bindRecordToAccount(
-        setGoalReviewDraft(
-          { ...artifacts.goal, sortOrder: existingGoals.length + 1 },
-          {
-            mode: "new_goal",
-            createdAt: new Date().toISOString(),
-            headline: `Recommended plan for ${artifacts.goal.title}`,
-            summary:
-              "Ambitions shaped a recommended structure for this goal. Review it, make a few light changes if needed, then accept it when it feels right.",
-            rationale: [
-              "The plan is recommended, not locked.",
-              "You can reorder, trim, or slightly retime tasks before acceptance.",
-            ],
-            recommendedAction: "targeted_regeneration",
-            milestones: artifacts.milestones.map((milestone) => ({
-              id: milestone.id,
-              sourceMilestoneId: null,
-              continuityKey: String(
-                (milestone.metadata as Record<string, unknown>).planningContinuityKey ??
-                  milestone.id,
-              ),
-              title: milestone.title,
-              summary: milestone.summary,
-              targetDate: milestone.targetDate,
-              estimatedMinutes: milestone.estimatedMinutes,
-              sortOrder: milestone.sortOrder,
-              protected: false,
-              rationale: milestone.summary,
-              changeLabel: "new",
-            })),
-            tasks: artifacts.tasks.map((task, index) => ({
-              id: task.id,
-              sourceTaskId: null,
-              continuityKey: String(
-                (task.metadata as Record<string, unknown>).planningContinuityKey ?? task.id,
-              ),
-              milestoneId: String(task.milestoneId ?? ""),
-              title: task.title,
-              summary: task.summary,
-              targetDate: task.targetDate,
-              estimatedMinutes: task.estimatedMinutes,
-              protected: false,
-              removed: false,
-              userAdjusted: false,
-              rationale: task.summary,
-              order: index + 1,
-              changeLabel: "new",
-            })),
-            impactSummary: {
-              changedFields: [],
-              affectedMilestoneCount: artifacts.milestones.length,
-              affectedTaskCount: artifacts.tasks.length,
-              protectedTaskCount: 0,
-              recommendedRegeneration: false,
-            },
-          },
-        ),
-        accountId,
-      ),
-    ]);
 
     const [foundationSnapshot, accountSnapshot] = await Promise.all([
       refreshAllState(state.planDate),

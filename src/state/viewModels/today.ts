@@ -24,6 +24,7 @@ import {
   TimeBlockState,
 } from "../../domain/models";
 import { SchedulingOutput } from "../../engines";
+import { buildGoalPressureNote, getGoalIntelligenceSnapshot } from "../../services/goals/goalIntelligence";
 import { formatTimeLabel, getCurrentLocalDateString } from "../../utils/date";
 
 export interface TodayTaskBlock {
@@ -207,6 +208,11 @@ export interface TodayViewModel {
   replanSuggestions: TodaySuggestion[];
   scheduleContext: Array<{ label: string; value: string }>;
   adaptiveGuidance: string[];
+  goalPressure: {
+    goalId: string;
+    goalTitle: string;
+    summary: string;
+  } | null;
   progress: {
     completed: number;
     scheduled: number;
@@ -1460,6 +1466,32 @@ export function buildTodayViewModel(params: {
             : null,
       ].filter((note): note is string => note !== null)
     : [];
+  const activeGoalsWithPressure = params.goals
+    .filter((goal) => goal.status === GoalStatus.Active)
+    .map((goal) => ({
+      goal,
+      snapshot: getGoalIntelligenceSnapshot(goal),
+      note: buildGoalPressureNote(goal),
+    }))
+    .filter(
+      (entry): entry is {
+        goal: Goal;
+        snapshot: NonNullable<ReturnType<typeof getGoalIntelligenceSnapshot>>;
+        note: string;
+      } => entry.snapshot !== null && entry.note !== null,
+    )
+    .sort((left, right) => {
+      const leftWeight = left.snapshot.feasibility.status === "unrealistic" ? 2 : 1;
+      const rightWeight = right.snapshot.feasibility.status === "unrealistic" ? 2 : 1;
+      if (leftWeight !== rightWeight) {
+        return rightWeight - leftWeight;
+      }
+
+      return (left.goal.targetDate ?? "9999-12-31").localeCompare(
+        right.goal.targetDate ?? "9999-12-31",
+      );
+    });
+  const topGoalPressure = activeGoalsWithPressure[0] ?? null;
   const integration = calendarStatus(
     params.calendarConnectionState,
     params.constraints.filter((constraint) => constraint.source === "calendar").length,
@@ -1539,6 +1571,13 @@ export function buildTodayViewModel(params: {
     profile: params.profile,
     adaptiveEnabled: params.adaptiveEnabled,
   });
+  if (
+    topGoalPressure &&
+    recommendation.kind !== "stay_on_current_block" &&
+    recommendation.kind !== "continue_in_progress"
+  ) {
+    recommendation.emphasis = `${recommendation.emphasis} ${topGoalPressure.note}`;
+  }
   const ritual = buildRitualSurface({
     date: params.date,
     tasks: params.tasks,
@@ -1637,8 +1676,10 @@ export function buildTodayViewModel(params: {
       },
     ],
     adaptiveGuidance:
-      adaptationNotes.length > 0
-        ? adaptationNotes
+      topGoalPressure
+        ? [topGoalPressure.note, ...adaptationNotes].slice(0, 3)
+        : adaptationNotes.length > 0
+          ? adaptationNotes
         : recoveryTasks.length > 0
         ? recoveryTasks.slice(0, 3).map((task) => task.reason)
         : replanSuggestions.length > 0
@@ -1646,6 +1687,13 @@ export function buildTodayViewModel(params: {
           : params.schedule && params.schedule.unscheduledTasks.length > 0
             ? params.schedule.unscheduledTasks.slice(0, 3).map((task) => task.reason)
             : [],
+    goalPressure: topGoalPressure
+      ? {
+          goalId: topGoalPressure.goal.id,
+          goalTitle: topGoalPressure.goal.title,
+          summary: topGoalPressure.note,
+        }
+      : null,
     progress,
     integration,
     workspace,

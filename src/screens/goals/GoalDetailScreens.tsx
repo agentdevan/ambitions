@@ -13,16 +13,21 @@ import {
 import { DrillInRow } from "../../components/navigation/DrillInRow";
 import { Button } from "../../components/ui/Button";
 import { EmptyStateCard } from "../../components/ui/EmptyStateCard";
+import { MetricCard } from "../../components/ui/MetricCard";
 import { OptionChip } from "../../components/ui/OptionChip";
 import { Pill } from "../../components/ui/Pill";
 import { Screen } from "../../components/ui/Screen";
+import { SelectionCard } from "../../components/ui/SelectionCard";
 import { Surface } from "../../components/ui/Surface";
 import { AppText } from "../../components/ui/Text";
 import { TextField } from "../../components/ui/TextField";
 import { Goal, GoalMilestoneStatus, GoalStatus, TaskStatus } from "../../domain/models";
 import { GoalsStackParamList } from "../../navigation/types";
 import { inferGoalDraft } from "../../product/goalIntake";
+import { createGoalArtifacts } from "../../product/planOrchestrator";
+import { GoalPaceMode, GoalStrategyComposer } from "../../product/types";
 import { describeLifecycleOptions } from "../../services/goals/downstreamHandlingPolicies";
+import { describeGoalFeasibility, describeGoalPaceMode, getGoalIntelligenceSnapshot } from "../../services/goals/goalIntelligence";
 import {
   GoalDownstreamChoice,
   GoalEditImpactPreview,
@@ -92,6 +97,18 @@ function milestoneStatusLabel(status: GoalMilestoneStatus) {
   }
 }
 
+function paceChipTone(mode: GoalPaceMode) {
+  if (mode === "aggressive") {
+    return "accent" as const;
+  }
+
+  if (mode === "conservative") {
+    return "quiet" as const;
+  }
+
+  return "neutral" as const;
+}
+
 export function GoalDetailScreen({
   route,
   navigation,
@@ -121,6 +138,8 @@ export function GoalDetailScreen({
     goalMilestones.find((milestone) => milestone.status === GoalMilestoneStatus.InProgress) ??
     goalMilestones.find((milestone) => milestone.status === GoalMilestoneStatus.Pending) ??
     null;
+  const intelligence = resolvedGoal ? getGoalIntelligenceSnapshot(resolvedGoal) : null;
+  const feasibility = resolvedGoal ? describeGoalFeasibility(resolvedGoal) : null;
   const nextTask =
     activeTasks.find((task) => task.status === TaskStatus.InProgress) ??
     activeTasks.find((task) => task.status === TaskStatus.Scheduled) ??
@@ -208,6 +227,13 @@ export function GoalDetailScreen({
               <>
                 <Pill label={statusLabel(resolvedGoal.status)} tone="quiet" />
                 {reviewDraft ? <Pill label="Needs review" tone="accent" /> : null}
+                {intelligence ? (
+                  <Pill
+                    label={describeGoalPaceMode(intelligence.selectedPaceMode)}
+                    tone={paceChipTone(intelligence.selectedPaceMode)}
+                  />
+                ) : null}
+                {feasibility ? <Pill label={feasibility.statusLabel} tone="neutral" /> : null}
               </>
             }
             meta={
@@ -227,9 +253,15 @@ export function GoalDetailScreen({
                   },
                   {
                     label: "Pacing",
-                    value: resolvedGoal.desiredWeeklyMinutes
-                      ? `${resolvedGoal.desiredWeeklyMinutes} min per week`
-                      : "No weekly pacing",
+                    value: intelligence
+                      ? `${describeGoalPaceMode(intelligence.selectedPaceMode)}`
+                      : resolvedGoal.desiredWeeklyMinutes
+                        ? `${resolvedGoal.desiredWeeklyMinutes} min per week`
+                        : "No weekly pacing",
+                  },
+                  {
+                    label: "Deadline read",
+                    value: feasibility?.deadlineConfidence ?? "Not shaped yet",
                   },
                 ]}
               />
@@ -370,6 +402,55 @@ export function GoalDetailScreen({
             />
             {resolvedGoal.notes ? <AppText tone="secondary">{resolvedGoal.notes}</AppText> : null}
           </Surface>
+
+          {intelligence ? (
+            <Surface className="gap-4 mb-0">
+              <View className="gap-1">
+                <AppText variant="section">Pace and deadline truth</AppText>
+                <AppText tone="secondary" variant="caption">
+                  Visible intelligence without the scoring theater.
+                </AppText>
+              </View>
+              <DetailSummaryStrip
+                items={[
+                  {
+                    label: "Pace",
+                    value: describeGoalPaceMode(intelligence.selectedPaceMode),
+                    detail: intelligence.paceOptions.find(
+                      (option) => option.mode === intelligence.selectedPaceMode,
+                    )?.summary,
+                  },
+                  {
+                    label: "Deadline",
+                    value: feasibility?.statusLabel ?? "Believable",
+                    detail: intelligence.feasibility.detail,
+                  },
+                  {
+                    label: "Capacity",
+                    value: intelligence.availableCapacitySummary,
+                    detail: intelligence.commitmentsSummary,
+                  },
+                  {
+                    label: "Workload",
+                    value: intelligence.workloadEstimateLabel,
+                    detail: intelligence.interpretation.workPattern,
+                  },
+                ]}
+              />
+              <AppText tone="secondary">{intelligence.feasibility.pacingTradeoff}</AppText>
+              {intelligence.feasibility.revisedDeadlineSuggestion ? (
+                <AppText tone="secondary">
+                  A later target would be more believable:{" "}
+                  {formatShortDate(intelligence.feasibility.revisedDeadlineSuggestion)}.
+                </AppText>
+              ) : null}
+              {intelligence.feasibility.lighterScopeSuggestion ? (
+                <AppText tone="secondary">
+                  {intelligence.feasibility.lighterScopeSuggestion}
+                </AppText>
+              ) : null}
+            </Surface>
+          ) : null}
 
           <Surface className="gap-4 mb-0">
             <View className="gap-1">
@@ -823,6 +904,9 @@ export function GoalEditScreen({
   const goals = useAppStore((state) => state.goals);
   const domains = useAppStore((state) => state.domains);
   const planDate = useAppStore((state) => state.planDate);
+  const productPreferences = useAppStore((state) => state.productPreferences);
+  const userPreferences = useAppStore((state) => state.userPreferences);
+  const adaptationProfile = useAppStore((state) => state.adaptationProfile);
   const createGoal = useAppStore((state) => state.createGoal);
   const updateGoal = useAppStore((state) => state.updateGoal);
   const previewGoalEdit = useAppStore((state) => state.previewGoalEdit);
@@ -840,6 +924,9 @@ export function GoalEditScreen({
   const [manualDesiredWeeklyMinutes, setManualDesiredWeeklyMinutes] = useState(
     goal?.desiredWeeklyMinutes ? String(goal.desiredWeeklyMinutes) : "",
   );
+  const [selectedPaceMode, setSelectedPaceMode] = useState<GoalPaceMode>("balanced");
+  const [strategyComposer, setStrategyComposer] = useState<GoalStrategyComposer | null>(null);
+  const [strategyPreviewBusy, setStrategyPreviewBusy] = useState(false);
   const [busyState, setBusyState] = useState<string | null>(null);
   const [runtimeMessage, setRuntimeMessage] = useState<string | null>(null);
   const [pendingEditPatch, setPendingEditPatch] = useState<Partial<Goal> | null>(null);
@@ -866,6 +953,77 @@ export function GoalEditScreen({
     [draftText, planDate],
   );
 
+  const composedInference = useMemo(() => {
+    if (!inference) {
+      return null;
+    }
+
+    return {
+      ...inference,
+      title: manualTitle.trim() || inference.title,
+      summary: manualSummary.trim() || inference.summary,
+      targetDate: manualTargetDate.trim() || inference.targetDate,
+      domainKey: manualDomainKey ?? inference.domainKey,
+      successMetric: manualSuccessMetric.trim() || inference.successMetric,
+      notes: manualNotes.trim() || inference.notes,
+      desiredWeeklyMinutes:
+        manualDesiredWeeklyMinutes.trim().length > 0
+          ? Number(manualDesiredWeeklyMinutes)
+          : inference.desiredWeeklyMinutes,
+      paceMode: selectedPaceMode,
+    };
+  }, [
+    inference,
+    manualDesiredWeeklyMinutes,
+    manualDomainKey,
+    manualNotes,
+    manualSuccessMetric,
+    manualSummary,
+    manualTargetDate,
+    manualTitle,
+    selectedPaceMode,
+  ]);
+
+  useEffect(() => {
+    let cancelled = false;
+
+    if (goal || !composedInference || !userPreferences || !productPreferences) {
+      setStrategyComposer(null);
+      setStrategyPreviewBusy(false);
+      return () => {
+        cancelled = true;
+      };
+    }
+
+    setStrategyPreviewBusy(true);
+    createGoalArtifacts({
+      inference: composedInference,
+      productPreferences,
+      currentPreferences: userPreferences,
+      today: planDate,
+      adaptationProfile,
+    })
+      .then((artifacts) => {
+        if (!cancelled) {
+          setStrategyComposer(artifacts.composer);
+        }
+      })
+      .catch(() => {
+        if (!cancelled) {
+          setStrategyComposer(null);
+        }
+      })
+      .finally(() => {
+        if (!cancelled) {
+          setStrategyPreviewBusy(false);
+        }
+      });
+
+    return () => {
+      cancelled = true;
+    };
+  }, [adaptationProfile, composedInference, goal, planDate, productPreferences, userPreferences]);
+
   function buildGoalPatch(existingGoal: Goal | null) {
     if (!existingGoal) {
       return null;
@@ -886,7 +1044,7 @@ export function GoalEditScreen({
   }
 
   async function handleCreate() {
-    if (!inference) {
+    if (!composedInference) {
       return;
     }
 
@@ -894,19 +1052,7 @@ export function GoalEditScreen({
     setRuntimeMessage(null);
 
     try {
-      await createGoal({
-        ...inference,
-        title: manualTitle.trim() || inference.title,
-        summary: manualSummary.trim() || inference.summary,
-        targetDate: manualTargetDate.trim() || inference.targetDate,
-        domainKey: manualDomainKey ?? inference.domainKey,
-        successMetric: manualSuccessMetric.trim() || inference.successMetric,
-        notes: manualNotes.trim() || inference.notes,
-        desiredWeeklyMinutes:
-          manualDesiredWeeklyMinutes.trim().length > 0
-            ? Number(manualDesiredWeeklyMinutes)
-            : inference.desiredWeeklyMinutes,
-      });
+      await createGoal(composedInference);
       const latestGoal = [...useAppStore.getState().goals].sort((left, right) =>
         right.createdAt.localeCompare(left.createdAt),
       )[0];
@@ -1088,13 +1234,148 @@ export function GoalEditScreen({
             </Surface>
           </DetailSection>
 
+          {!goal && composedInference ? (
+            <DetailSection
+              title="Strategy read"
+              description="One calm recommendation first."
+            >
+              <Surface className="gap-4 mb-0">
+                {strategyPreviewBusy || !strategyComposer ? (
+                  <AppText tone="secondary">
+                    Building a believable first strategy.
+                  </AppText>
+                ) : (
+                  <>
+                    <View className="gap-2">
+                      <View className="flex-row flex-wrap items-center gap-2">
+                        <Pill label={strategyComposer.feasibility.deadlineConfidence} tone="quiet" />
+                        <Pill
+                          label={describeGoalPaceMode(strategyComposer.recommendedPaceMode)}
+                          tone="neutral"
+                        />
+                      </View>
+                      <AppText variant="section">{strategyComposer.feasibility.summary}</AppText>
+                      <AppText tone="secondary">{strategyComposer.feasibility.detail}</AppText>
+                    </View>
+
+                    <View className="flex-row flex-wrap gap-3">
+                      <MetricCard
+                        label="Capacity"
+                        value={strategyComposer.availableCapacitySummary}
+                        detail={strategyComposer.commitmentsSummary}
+                      />
+                      <MetricCard
+                        label="Workload"
+                        value={strategyComposer.workloadEstimateLabel}
+                        detail={strategyComposer.interpretation.workloadShape}
+                      />
+                    </View>
+
+                    <Surface tone="sunken" className="gap-3 mb-0">
+                      <AppText variant="section">Interpreted goal</AppText>
+                      <QuietMetaLine
+                        items={[
+                          strategyComposer.interpretation.domainLabel,
+                          strategyComposer.interpretation.categoryLabel,
+                          strategyComposer.interpretation.workPattern,
+                          strategyComposer.interpretation.timingLabel,
+                        ]}
+                      />
+                      <AppText tone="secondary">
+                        {strategyComposer.behaviorSummary}
+                      </AppText>
+                    </Surface>
+
+                    <View className="gap-3">
+                      <AppText variant="section">Choose the pace</AppText>
+                      {strategyComposer.paceOptions.map((option) => (
+                        <SelectionCard
+                          key={option.mode}
+                          selected={selectedPaceMode === option.mode}
+                          eyebrow={option.recommended ? "Recommended" : undefined}
+                          onPress={() => setSelectedPaceMode(option.mode)}
+                          trailing={<Pill label={option.deadlineConfidence} tone={paceChipTone(option.mode)} />}
+                        >
+                          <View className="gap-2">
+                            <View className="flex-row flex-wrap items-center gap-2">
+                              <AppText variant="section">{option.label}</AppText>
+                              <Pill label={`${option.weeklyHours} hr/week`} tone="quiet" />
+                              <Pill label={`${option.sessionCount} sessions`} tone="quiet" />
+                            </View>
+                            <AppText tone="secondary">{option.summary}</AppText>
+                            <QuietMetaLine
+                              items={[
+                                option.taskSizing,
+                                option.riskLevel,
+                                option.adaptationBehavior,
+                              ]}
+                            />
+                          </View>
+                        </SelectionCard>
+                      ))}
+                    </View>
+
+                    {strategyComposer.feasibility.revisedDeadlineSuggestion ? (
+                      <Surface tone="sunken" className="gap-2 mb-0">
+                        <AppText variant="section">More believable version</AppText>
+                        <AppText tone="secondary">
+                          {strategyComposer.feasibility.revisedDeadlineReason} Try {formatShortDate(
+                            strategyComposer.feasibility.revisedDeadlineSuggestion,
+                          )} instead.
+                        </AppText>
+                        {strategyComposer.feasibility.lighterScopeSuggestion ? (
+                          <AppText tone="secondary">
+                            {strategyComposer.feasibility.lighterScopeSuggestion}
+                          </AppText>
+                        ) : null}
+                      </Surface>
+                    ) : null}
+
+                    <View className="gap-3">
+                      <AppText variant="section">First path</AppText>
+                      {strategyComposer.firstMilestonePath.map((milestone) => (
+                        <Surface key={milestone.title} tone="sunken" className="gap-1.5 mb-0">
+                          <AppText variant="section">{milestone.title}</AppText>
+                          {milestone.summary ? (
+                            <AppText tone="secondary">{milestone.summary}</AppText>
+                          ) : null}
+                          {milestone.targetDate ? (
+                            <AppText tone="tertiary" variant="caption">
+                              {formatShortDate(milestone.targetDate)}
+                            </AppText>
+                          ) : null}
+                        </Surface>
+                      ))}
+                    </View>
+
+                    <View className="gap-3">
+                      <AppText variant="section">First week preview</AppText>
+                      {strategyComposer.firstWeekActionPreview.map((task) => (
+                        <Surface key={task.title} tone="sunken" className="gap-1.5 mb-0">
+                          <AppText variant="section">{task.title}</AppText>
+                          {task.summary ? <AppText tone="secondary">{task.summary}</AppText> : null}
+                          <QuietMetaLine
+                            items={[
+                              `${task.estimatedMinutes} min`,
+                              task.targetDate ? formatShortDate(task.targetDate) : "No date yet",
+                            ]}
+                          />
+                        </Surface>
+                      ))}
+                    </View>
+                  </>
+                )}
+              </Surface>
+            </DetailSection>
+          ) : null}
+
           <Surface className="gap-4 mb-0">
             <View className="gap-1">
               <AppText variant="section">{goal ? "Review the change" : "Create the goal"}</AppText>
               <AppText tone="secondary" variant="caption">
                 {goal
                   ? "You’ll review downstream effects only if the edit changes the current structure."
-                  : "The goal will open in detail after creation so you can inspect the structure there."}
+                  : "Accepting this creates the goal, milestones, first tasks, and the initial daily placement."}
               </AppText>
             </View>
             <View className="flex-row gap-3">
@@ -1104,7 +1385,7 @@ export function GoalEditScreen({
               <Button
                 style={{ flex: 1 }}
                 onPress={() => void (goal ? handleUpdate() : handleCreate())}
-                disabled={!goal && !inference}
+                disabled={!goal && (!composedInference || strategyPreviewBusy || !strategyComposer)}
                 busy={busyState === "create" || busyState === "update"}
               >
                 {goal ? "Review changes" : "Create goal"}

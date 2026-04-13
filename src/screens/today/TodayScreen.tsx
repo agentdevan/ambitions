@@ -686,6 +686,16 @@ export function TodayScreen({ navigation }: Props) {
           </Surface>
         ) : null}
 
+        {todayVm.goalPressure ? (
+          <Surface tone="sunken" className="gap-2">
+            <AppText tone="tertiary" variant="micro" style={{ textTransform: "uppercase" }}>
+              Goal pressure
+            </AppText>
+            <AppText variant="section">{todayVm.goalPressure.goalTitle}</AppText>
+            <AppText tone="secondary">{todayVm.goalPressure.summary}</AppText>
+          </Surface>
+        ) : null}
+
         {todayVm.ritual?.kind === "closeout" ? (
           <SupportCard label="Closeout">
             <View className="gap-2">
