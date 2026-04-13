@@ -89,7 +89,13 @@ export function setGoalIntelligenceSnapshot(
 }
 
 export function getGoalPaceMode(goal: Goal): GoalPaceMode {
-  return getGoalIntelligenceSnapshot(goal)?.selectedPaceMode ?? "balanced";
+  const snapshotMode = getGoalIntelligenceSnapshot(goal)?.selectedPaceMode;
+  if (snapshotMode) {
+    return snapshotMode;
+  }
+
+  const metadataMode = goal.metadata.phase22SelectedPaceMode;
+  return isPaceMode(metadataMode) ? metadataMode : "balanced";
 }
 
 export function describeGoalPaceMode(mode: GoalPaceMode) {
@@ -130,7 +136,5 @@ export function buildGoalPressureNote(goal: Goal) {
     return null;
   }
 
-  return snapshot.feasibility.status === "tight"
-    ? `${goal.title} is still possible, but tighter than before. ${snapshot.feasibility.highestLeverageStep}`
-    : `${goal.title} is unlikely to hold on the current path. ${snapshot.feasibility.highestLeverageStep}`;
+  return `${goal.title}: ${snapshot.feasibility.summary} ${snapshot.feasibility.highestLeverageStep}`;
 }

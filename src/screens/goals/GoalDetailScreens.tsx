@@ -925,6 +925,7 @@ export function GoalEditScreen({
     goal?.desiredWeeklyMinutes ? String(goal.desiredWeeklyMinutes) : "",
   );
   const [selectedPaceMode, setSelectedPaceMode] = useState<GoalPaceMode>("balanced");
+  const [paceSelectionSource, setPaceSelectionSource] = useState<"auto" | "manual">("auto");
   const [strategyComposer, setStrategyComposer] = useState<GoalStrategyComposer | null>(null);
   const [strategyPreviewBusy, setStrategyPreviewBusy] = useState(false);
   const [busyState, setBusyState] = useState<string | null>(null);
@@ -952,6 +953,12 @@ export function GoalEditScreen({
     () => (draftText.trim().length > 0 ? inferGoalDraft(draftText, planDate) : null),
     [draftText, planDate],
   );
+
+  useEffect(() => {
+    if (!goal && inference) {
+      setPaceSelectionSource("auto");
+    }
+  }, [goal, inference]);
 
   const composedInference = useMemo(() => {
     if (!inference) {
@@ -1023,6 +1030,12 @@ export function GoalEditScreen({
       cancelled = true;
     };
   }, [adaptationProfile, composedInference, goal, planDate, productPreferences, userPreferences]);
+
+  useEffect(() => {
+    if (!goal && strategyComposer && paceSelectionSource === "auto") {
+      setSelectedPaceMode(strategyComposer.recommendedPaceMode);
+    }
+  }, [goal, paceSelectionSource, strategyComposer]);
 
   function buildGoalPatch(existingGoal: Goal | null) {
     if (!existingGoal) {
@@ -1293,7 +1306,10 @@ export function GoalEditScreen({
                           key={option.mode}
                           selected={selectedPaceMode === option.mode}
                           eyebrow={option.recommended ? "Recommended" : undefined}
-                          onPress={() => setSelectedPaceMode(option.mode)}
+                          onPress={() => {
+                            setPaceSelectionSource("manual");
+                            setSelectedPaceMode(option.mode);
+                          }}
                           trailing={<Pill label={option.deadlineConfidence} tone={paceChipTone(option.mode)} />}
                         >
                           <View className="gap-2">

@@ -55,10 +55,20 @@ function bindToAccount<
 
 const paceModes: GoalPaceMode[] = ["conservative", "balanced", "aggressive"];
 
+const recommendationTieBreak: Record<GoalPaceMode, number> = {
+  balanced: 0,
+  conservative: 1,
+  aggressive: 2,
+};
+
 function formatHours(minutes: number) {
   const hours = minutes / 60;
   const rounded = hours >= 10 ? Math.round(hours) : Math.round(hours * 10) / 10;
   return `${rounded} hr/week`;
+}
+
+function clamp(value: number, min: number, max: number) {
+  return Math.min(max, Math.max(min, value));
 }
 
 function daysUntil(date: string, targetDate: string | null) {
@@ -84,9 +94,27 @@ function addDays(date: string, amount: number) {
     .slice(0, 10);
 }
 
-function timeToMinutes(value: string) {
-  const [hours, minutes] = value.split(":").map(Number);
-  return hours * 60 + minutes;
+function describeConsistencyProfile(adaptationProfile: AdaptationProfile | null) {
+  if (adaptationProfile?.regression.isRegressing) {
+    return "Recent follow-through has been uneven, so the model protects against overpromising.";
+  }
+
+  const consistency = adaptationProfile?.completion.consistencyScore ?? 0.5;
+  if (consistency >= 0.72) {
+    return "Recent execution supports leaning on believable capacity instead of best-case energy.";
+  }
+
+  if (consistency >= 0.5) {
+    return "Recent execution is mixed, so the capacity read keeps some guardrails in place.";
+  }
+
+  return "Recent execution has been stop-start, so the model treats consistency as a real constraint.";
+}
+
+function getConstraintMinutes(constraint: ScheduleConstraint) {
+  const start = Date.parse(constraint.startsAt);
+  const end = Date.parse(constraint.endsAt);
+  return Math.max(0, Math.round((end - start) / 60000));
 }
 
 function buildWeeklyCapacityEstimate(params: {
@@ -97,47 +125,67 @@ function buildWeeklyCapacityEstimate(params: {
   scheduleConstraints: ScheduleConstraint[];
   adaptationProfile: AdaptationProfile | null;
 }) {
+  const daysRemaining = daysUntil(params.today, params.targetDate);
+  const horizonWeeks = Math.max(1, daysRemaining / 7);
+  const visibleWindowDays = Math.max(
+    7,
+    Math.min(daysRemaining, Math.max(7, params.scheduleConstraints.length > 0 ? 14 : 7)),
+  );
+  const visibleWeeks = Math.max(1, visibleWindowDays / 7);
   const workdayCount = params.productPreferences.schedule.workdays.length;
   const baseDailyTarget =
     params.adaptationProfile?.planningDirectives.dailyPlannedMinutesTarget ??
     params.adaptationProfile?.capacity.focusBudgetMinutes ??
     90;
-  const behaviorMultiplier = Math.max(
+  const consistencyScore = params.adaptationProfile?.completion.consistencyScore ?? 0.5;
+  const readinessScore = params.adaptationProfile?.strategy.balancedReadiness ?? 0.3;
+  const regressionPenalty = params.adaptationProfile?.regression.isRegressing ? 0.12 : 0;
+  const behaviorMultiplier = clamp(
+    0.72 + consistencyScore * 0.3 + readinessScore * 0.12 - regressionPenalty,
     0.55,
-    Math.min(
-      1.15,
-      0.72 +
-        (params.adaptationProfile?.completion.consistencyScore ?? 0.5) * 0.35 +
-        (params.adaptationProfile?.strategy.balancedReadiness ?? 0.3) * 0.12 -
-        ((params.adaptationProfile?.regression.isRegressing ?? false) ? 0.12 : 0),
-    ),
+    1.12,
   );
-  const fixedCommitmentMinutes = params.scheduleConstraints.reduce((sum, constraint) => {
-    const start = Date.parse(constraint.startsAt);
-    const end = Date.parse(constraint.endsAt);
-    return sum + Math.max(0, Math.round((end - start) / 60000));
-  }, 0);
-  const otherGoalsDemand = params.goals
+  const visibleCommitmentMinutes = params.scheduleConstraints.reduce(
+    (sum, constraint) => sum + getConstraintMinutes(constraint),
+    0,
+  );
+  const visibleWeeklyCommitmentMinutes = Math.round(visibleCommitmentMinutes / visibleWeeks);
+  const activeGoalLoadMinutes = params.goals
     .filter((goal) => goal.status === GoalStatus.Active)
     .reduce((sum, goal) => sum + (goal.desiredWeeklyMinutes ?? 0), 0);
+  const nearDeadlinePenalty = daysRemaining <= 10 ? 0.18 : daysRemaining <= 21 ? 0.08 : 0;
+  const longHorizonPenalty = daysRemaining >= 140 ? 0.1 : daysRemaining >= 84 ? 0.05 : 0;
   const weeklyCapacityMinutes = Math.max(
     90,
-    Math.round(baseDailyTarget * workdayCount * behaviorMultiplier - fixedCommitmentMinutes * 0.2 - otherGoalsDemand * 0.3),
+    Math.round(
+      baseDailyTarget * workdayCount * behaviorMultiplier -
+        visibleWeeklyCommitmentMinutes * 0.45 -
+        activeGoalLoadMinutes * 0.35 -
+        baseDailyTarget * workdayCount * (nearDeadlinePenalty + longHorizonPenalty),
+    ),
   );
-  const totalCapacityMinutes = weeklyCapacityMinutes * weeksUntil(params.today, params.targetDate);
+  const totalCapacityMinutes = Math.round(
+    weeklyCapacityMinutes *
+      horizonWeeks *
+      clamp(daysRemaining <= 21 ? 0.9 : daysRemaining >= 140 ? 0.88 : 0.95, 0.82, 1),
+  );
 
   return {
+    daysRemaining,
+    visibleWindowDays,
+    visibleCommitmentMinutes,
+    visibleWeeklyCommitmentMinutes,
+    activeGoalLoadMinutes,
+    consistencyScore,
+    readinessScore,
     weeklyCapacityMinutes,
     totalCapacityMinutes,
-    availableCapacitySummary: `${formatHours(weeklyCapacityMinutes)} available after current commitments and active-goal load.`,
+    availableCapacitySummary: `About ${formatHours(weeklyCapacityMinutes)} looks believable after visible commitments and active goals.`,
     commitmentsSummary:
-      fixedCommitmentMinutes > 0
-        ? `${Math.round(fixedCommitmentMinutes / 60)} hr of visible fixed commitments are already shaping the week.`
-        : "Fixed commitments are still light in the current planning view.",
-    behaviorSummary:
-      params.adaptationProfile?.regression.isRegressing
-        ? "Recent follow-through has been less stable, so the capacity read stays conservative."
-        : "Recent execution supports a believable weekly capacity instead of a fantasy maximum.",
+      visibleCommitmentMinutes > 0
+        ? `${Math.round(visibleWeeklyCommitmentMinutes / 60)} hr/week of visible fixed commitments and ${Math.round(activeGoalLoadMinutes / 60)} hr/week of active-goal load are already spoken for.`
+        : `${Math.round(activeGoalLoadMinutes / 60)} hr/week is already committed to active goals before this one is added.`,
+    behaviorSummary: describeConsistencyProfile(params.adaptationProfile),
   };
 }
 
@@ -156,61 +204,223 @@ function workloadEstimateForGoal(goal: Goal, tasks: Task[], milestones: GoalMile
 }
 
 function paceConfig(mode: GoalPaceMode, adaptationProfile: AdaptationProfile | null) {
-  const aggressiveLift = Math.min(
-    1.18,
-    1.08 + (adaptationProfile?.strategy.balancedReadiness ?? 0.3) * 0.1,
+  const aggressiveReliability = clamp(
+    0.84 + (adaptationProfile?.strategy.balancedReadiness ?? 0.3) * 0.08,
+    0.84,
+    0.92,
   );
 
   switch (mode) {
     case "conservative":
       return {
         label: "Conservative",
-        demandMultiplier: 0.88,
-        sustainableMultiplier: 0.9,
-        sessionMinutes: 25,
-        taskSizing: "Shorter sessions",
-        riskLevel: "Lower risk",
-        adaptationBehavior: "Protects the plan sooner when life gets crowded.",
+        plannedDemandMultiplier: 0.84,
+        requiredWeeklyBias: 0.82,
+        sustainableCapacityShare: 0.72,
+        reliabilityMultiplier: 0.97,
+        scopeOverheadMultiplier: 1.04,
+        targetBufferWeeks: 1.4,
+        sessionMinutes: 20,
+        taskSizing: "Smaller steps",
+        riskLevel: "Lower pressure",
+        adaptationBehavior: "Cuts volume earlier and protects recovery before the week gets noisy.",
       };
     case "aggressive":
       return {
         label: "Aggressive",
-        demandMultiplier: 1.12,
-        sustainableMultiplier: aggressiveLift,
-        sessionMinutes: 45,
+        plannedDemandMultiplier: 1.24,
+        requiredWeeklyBias: 1.16,
+        sustainableCapacityShare: 0.98,
+        reliabilityMultiplier: aggressiveReliability,
+        scopeOverheadMultiplier: 1.03,
+        targetBufferWeeks: 0.25,
+        sessionMinutes: 50,
         taskSizing: "Longer pushes",
-        riskLevel: "Higher risk",
-        adaptationBehavior: "Holds a fuller load longer before trimming it back.",
+        riskLevel: "Higher pressure",
+        adaptationBehavior: "Front-loads bigger sessions and only eases back after consistency drops.",
       };
     default:
       return {
         label: "Balanced",
-        demandMultiplier: 1,
-        sustainableMultiplier: 1,
+        plannedDemandMultiplier: 1,
+        requiredWeeklyBias: 1,
+        sustainableCapacityShare: 0.84,
+        reliabilityMultiplier: 0.92,
+        scopeOverheadMultiplier: 1,
+        targetBufferWeeks: 0.8,
         sessionMinutes: 35,
         taskSizing: "Mixed session sizes",
-        riskLevel: "Moderate risk",
-        adaptationBehavior: "Protects realism while still keeping momentum visible.",
+        riskLevel: "Moderate pressure",
+        adaptationBehavior: "Trades some slack for steady movement, then trims back when drift starts.",
       };
   }
 }
 
-function lighterScopeSuggestion(goal: Goal, milestones: GoalMilestone[], tasks: Task[]) {
+function joinLabels(labels: string[]) {
+  if (labels.length <= 1) {
+    return labels[0] ?? "";
+  }
+
+  if (labels.length === 2) {
+    return `${labels[0]} and ${labels[1]}`;
+  }
+
+  return `${labels.slice(0, -1).join(", ")}, and ${labels.at(-1)}`;
+}
+
+function lighterScopeSuggestion(
+  goal: Goal,
+  milestones: GoalMilestone[],
+  tasks: Task[],
+  paceMode: GoalPaceMode,
+) {
   if (goal.domainKey === DomainKey.Career) {
-    return "One lighter version still fits: focus the first pass on your best-fit targets instead of the full search spread.";
+    return paceMode === "aggressive"
+      ? "A calmer fallback is to keep the strongest-fit roles and delay the broader search spread."
+      : "A lighter version is to focus the first pass on your strongest-fit roles instead of the full search spread.";
   }
 
   if (goal.domainKey === DomainKey.Fitness) {
-    return "One lighter version still fits: protect the consistency block first, then add intensity later.";
+    return paceMode === "conservative"
+      ? "Keep the consistency block and let intensity wait until the routine feels stable."
+      : "A lighter version is to protect the consistency block first, then add intensity later.";
   }
 
   if (goal.domainKey === DomainKey.Finance || goal.domainKey === DomainKey.Credit) {
-    return "One lighter version still fits: keep the baseline and first reduction milestone, then delay the rest.";
+    return "A lighter version is to keep the baseline and first reduction step, then delay the rest of the cleanup.";
   }
 
-  const trimmedMilestones = Math.max(1, milestones.length - 1);
-  const trimmedTasks = Math.max(3, Math.round(tasks.length * 0.75));
-  return `One lighter version still fits: keep the first ${trimmedMilestones} milestone${trimmedMilestones === 1 ? "" : "s"} and trim the first pass to about ${trimmedTasks} tasks.`;
+  const keptMilestones = milestones.slice(0, Math.max(1, Math.min(2, milestones.length - 1)));
+  const delayedMilestone = milestones.at(-1);
+  if (keptMilestones.length > 0 && delayedMilestone && delayedMilestone.id !== keptMilestones.at(-1)?.id) {
+    return `A lighter version is to hold ${joinLabels(keptMilestones.map((milestone) => milestone.title.toLowerCase()))} first, and move ${delayedMilestone.title.toLowerCase()} into the next cycle.`;
+  }
+
+  const trimmedTasks = Math.max(3, Math.round(tasks.length * 0.7));
+  return `A lighter version is to keep the first pass to about ${trimmedTasks} tasks and leave the rest for later.`;
+}
+
+function buildNoDeadlineTruth(params: {
+  paceMode: GoalPaceMode;
+  plannedWeeklyMinutes: number;
+  sustainableWeeklyMinutes: number;
+  visibleWeeklyCommitmentMinutes: number;
+}) {
+  const summaryByMode: Record<GoalPaceMode, string> = {
+    conservative: "Conservative pacing keeps this goal steady while the target date stays flexible.",
+    balanced: "Balanced pacing can move this goal forward without forcing the timeline yet.",
+    aggressive: "Aggressive pacing can accelerate this goal, but the timeline is still yours to set.",
+  };
+  const detail = `Without a target date, this pace asks for about ${formatHours(params.plannedWeeklyMinutes)} against ${formatHours(params.sustainableWeeklyMinutes)} of believable room once visible commitments are accounted for.`;
+
+  return {
+    status: (params.plannedWeeklyMinutes <= params.sustainableWeeklyMinutes ? "feasible" : "tight") as GoalFeasibilityStatus,
+    summary: summaryByMode[params.paceMode],
+    detail,
+    deadlineConfidence: "Flexible date",
+    revisedDeadlineSuggestion: null,
+    revisedDeadlineReason: null,
+  };
+}
+
+function buildFeasibilityCopy(params: {
+  paceMode: GoalPaceMode;
+  status: GoalFeasibilityStatus;
+  plannedWeeklyMinutes: number;
+  sustainableWeeklyMinutes: number;
+  daysRemaining: number;
+  visibleWeeklyCommitmentMinutes: number;
+  activeGoalLoadMinutes: number;
+}) {
+  const summaryByMode: Record<GoalPaceMode, Record<GoalFeasibilityStatus, string>> = {
+    conservative: {
+      feasible: "Conservative pacing keeps this date believable with room to recover.",
+      tight: "Conservative pacing lowers pressure, but the current date is getting harder to hold.",
+      unrealistic: "Conservative pacing makes the current date unlikely to hold.",
+    },
+    balanced: {
+      feasible: "Balanced pacing keeps this date believable.",
+      tight: "Still possible at this pace, but the buffer is getting thin.",
+      unrealistic: "This deadline is unlikely to hold at a balanced pace.",
+    },
+    aggressive: {
+      feasible: "Aggressive pacing can still hold this date if your follow-through stays steady.",
+      tight: "Aggressive pacing can still protect the date, but it leaves little room for drift.",
+      unrealistic: "Even aggressive pacing does not make this date believable yet.",
+    },
+  };
+  const commitmentHours = Math.round(params.visibleWeeklyCommitmentMinutes / 60);
+  const goalLoadHours = Math.round(params.activeGoalLoadMinutes / 60);
+  const detail =
+    params.status === "feasible"
+      ? `With ${params.daysRemaining} days left, this pace asks for about ${formatHours(params.plannedWeeklyMinutes)} against ${formatHours(params.sustainableWeeklyMinutes)} of believable room. Visible commitments already take about ${commitmentHours} hr/week, and other active goals take about ${goalLoadHours} hr/week.`
+      : params.status === "tight"
+        ? `With ${params.daysRemaining} days left, this pace is asking for about ${formatHours(params.plannedWeeklyMinutes)} against ${formatHours(params.sustainableWeeklyMinutes)} of believable room. Visible commitments already take about ${commitmentHours} hr/week, so there is not much slack.`
+        : `With ${params.daysRemaining} days left, this pace is asking for about ${formatHours(params.plannedWeeklyMinutes)} against ${formatHours(params.sustainableWeeklyMinutes)} of believable room. Visible commitments and active-goal load are already using roughly ${commitmentHours + goalLoadHours} hr/week before this goal fully fits.`;
+
+  return {
+    summary: summaryByMode[params.paceMode][params.status],
+    detail,
+  };
+}
+
+function deadlineConfidenceLabel(mode: GoalPaceMode, status: GoalFeasibilityStatus) {
+  if (status === "unrealistic") {
+    return "Low confidence";
+  }
+
+  if (status === "tight") {
+    if (mode === "conservative") {
+      return "Date needs more room";
+    }
+
+    if (mode === "aggressive") {
+      return "Holding, but exposed";
+    }
+
+    return "Lower buffer";
+  }
+
+  if (mode === "conservative") {
+    return "Believable with room";
+  }
+
+  if (mode === "aggressive") {
+    return "Believable if steady";
+  }
+
+  return "Believable";
+}
+
+function revisedDeadlineReason(mode: GoalPaceMode) {
+  if (mode === "conservative") {
+    return "A later target would make the calmer pace believable.";
+  }
+
+  if (mode === "aggressive") {
+    return "Even with a heavier pace, a later target would make the deadline credible.";
+  }
+
+  return "A later target would be more believable.";
+}
+
+function buildHighestLeverageStep(params: {
+  goal: Goal;
+  tasks: Task[];
+  paceMode: GoalPaceMode;
+  revisedDeadlineSuggestion: string | null;
+}) {
+  if (params.tasks[0]?.title) {
+    return `Protect the next step: ${params.tasks[0].title}.`;
+  }
+
+  if (params.revisedDeadlineSuggestion) {
+    return params.paceMode === "conservative"
+      ? `Protect the first milestone and consider moving the target to ${params.revisedDeadlineSuggestion}.`
+      : `Protect the first milestone before deciding whether to move the target to ${params.revisedDeadlineSuggestion}.`;
+  }
+
+  return "Protect the first milestone before adding more scope.";
 }
 
 function buildFeasibilityTruth(params: {
@@ -219,87 +429,223 @@ function buildFeasibilityTruth(params: {
   milestones: GoalMilestone[];
   today: string;
   paceMode: GoalPaceMode;
-  weeklyCapacityMinutes: number;
-  totalCapacityMinutes: number;
+  capacity: ReturnType<typeof buildWeeklyCapacityEstimate>;
   adaptationProfile: AdaptationProfile | null;
 }) {
-  const totalWorkEstimateMinutes = workloadEstimateForGoal(
+  const baseWorkEstimateMinutes = workloadEstimateForGoal(
     params.goal,
     params.tasks,
     params.milestones,
     params.today,
   );
-  const deadlineWeeks = weeksUntil(params.today, params.goal.targetDate);
   const config = paceConfig(params.paceMode, params.adaptationProfile);
+  const totalWorkEstimateMinutes = Math.round(
+    baseWorkEstimateMinutes * config.scopeOverheadMultiplier,
+  );
+  const deadlineWeeks = Math.max(1, params.capacity.daysRemaining / 7);
+  const baselineWeeklyMinutes = Math.max(
+    60,
+    params.goal.desiredWeeklyMinutes ?? Math.round(totalWorkEstimateMinutes / Math.max(4, Math.min(10, deadlineWeeks))),
+  );
   const requiredWeeklyMinutes = Math.max(
-    params.goal.desiredWeeklyMinutes ?? 0,
+    60,
     Math.ceil(totalWorkEstimateMinutes / deadlineWeeks),
   );
-  const weeklyDemandMinutes = Math.round(requiredWeeklyMinutes * config.demandMultiplier);
-  const sustainableWeeklyMinutes = Math.round(params.weeklyCapacityMinutes * config.sustainableMultiplier);
-  const loadRatio = weeklyDemandMinutes / Math.max(60, sustainableWeeklyMinutes);
+  const plannedWeeklyMinutes = Math.round(
+    Math.max(
+      baselineWeeklyMinutes * config.plannedDemandMultiplier,
+      requiredWeeklyMinutes * config.requiredWeeklyBias,
+    ),
+  );
+  const sustainableWeeklyMinutes = Math.round(
+    params.capacity.weeklyCapacityMinutes * config.sustainableCapacityShare,
+  );
+  const overloadRatio = plannedWeeklyMinutes / Math.max(60, sustainableWeeklyMinutes);
+  const overloadPenalty =
+    overloadRatio <= 1 ? 1 : 1 / (1 + (overloadRatio - 1) * 0.55);
+  const urgencyPenalty =
+    params.capacity.daysRemaining <= 10 ? 0.86 : params.capacity.daysRemaining <= 21 ? 0.93 : 1;
+  const horizonPenalty =
+    params.capacity.daysRemaining >= 140 ? 0.91 : params.capacity.daysRemaining >= 84 ? 0.96 : 1;
+  const effectiveWeeklyProgress = Math.round(
+    Math.max(
+      60,
+      Math.min(plannedWeeklyMinutes, sustainableWeeklyMinutes) *
+        config.reliabilityMultiplier *
+        overloadPenalty *
+        urgencyPenalty *
+        horizonPenalty,
+    ),
+  );
+  const projectedWeeks = totalWorkEstimateMinutes / Math.max(60, effectiveWeeklyProgress);
+  const projectedBufferWeeks = deadlineWeeks - projectedWeeks;
+  const projectedFinishDate =
+    params.goal.targetDate === null ? null : addDays(params.today, Math.ceil(projectedWeeks * 7));
+
+  if (params.goal.targetDate === null) {
+    const noDeadlineTruth = buildNoDeadlineTruth({
+      paceMode: params.paceMode,
+      plannedWeeklyMinutes,
+      sustainableWeeklyMinutes,
+      visibleWeeklyCommitmentMinutes: params.capacity.visibleWeeklyCommitmentMinutes,
+    });
+
+    return {
+      totalWorkEstimateMinutes,
+      projectedBufferWeeks: 0,
+      projectedFinishDate,
+      loadRatio: overloadRatio,
+      truth: {
+        status: noDeadlineTruth.status,
+        summary: noDeadlineTruth.summary,
+        detail: noDeadlineTruth.detail,
+        deadlineConfidence: noDeadlineTruth.deadlineConfidence,
+        weeklyDemandMinutes: plannedWeeklyMinutes,
+        weeklyCapacityMinutes: sustainableWeeklyMinutes,
+        totalCapacityMinutes: params.capacity.totalCapacityMinutes,
+        revisedDeadlineSuggestion: noDeadlineTruth.revisedDeadlineSuggestion,
+        revisedDeadlineReason: noDeadlineTruth.revisedDeadlineReason,
+        lighterScopeSuggestion: null,
+        pacingTradeoff:
+          params.paceMode === "conservative"
+            ? "Conservative pacing keeps the week lighter and protects recovery first."
+            : params.paceMode === "aggressive"
+              ? "Aggressive pacing asks for bigger sessions now so the goal moves sooner."
+              : "Balanced pacing keeps the work moving without forcing a hard date yet.",
+        highestLeverageStep: buildHighestLeverageStep({
+          goal: params.goal,
+          tasks: params.tasks,
+          paceMode: params.paceMode,
+          revisedDeadlineSuggestion: null,
+        }),
+      },
+    };
+  }
+
   const status: GoalFeasibilityStatus =
-    loadRatio <= 0.85 ? "feasible" : loadRatio <= 1 ? "tight" : "unrealistic";
-  const deadlineConfidence =
-    status === "feasible" ? "Believable" : status === "tight" ? "Lower buffer" : "Low confidence";
-  const revisedWeeks = Math.ceil(totalWorkEstimateMinutes / Math.max(60, sustainableWeeklyMinutes));
+    projectedBufferWeeks >= config.targetBufferWeeks && overloadRatio <= 1.04
+      ? "feasible"
+      : projectedBufferWeeks >= -0.4 && overloadRatio <= 1.18
+        ? "tight"
+        : "unrealistic";
+  const suggestedWeeks = Math.max(
+    Math.ceil(projectedWeeks + config.targetBufferWeeks),
+    Math.ceil(deadlineWeeks) + 1,
+  );
   const revisedDeadlineSuggestion =
-    status === "unrealistic" ? addDays(params.today, revisedWeeks * 7) : null;
-  const highestLeverageStep =
-    params.tasks[0]?.title
-      ? `Protect the next step: ${params.tasks[0].title}.`
-      : "Protect the first milestone before adding more scope.";
+    status === "unrealistic" ? addDays(params.today, suggestedWeeks * 7) : null;
+  const copy = buildFeasibilityCopy({
+    paceMode: params.paceMode,
+    status,
+    plannedWeeklyMinutes,
+    sustainableWeeklyMinutes,
+    daysRemaining: params.capacity.daysRemaining,
+    visibleWeeklyCommitmentMinutes: params.capacity.visibleWeeklyCommitmentMinutes,
+    activeGoalLoadMinutes: params.capacity.activeGoalLoadMinutes,
+  });
 
   return {
     totalWorkEstimateMinutes,
+    projectedBufferWeeks,
+    projectedFinishDate,
+    loadRatio: overloadRatio,
     truth: {
       status,
-      summary:
-        status === "feasible"
-          ? "Balanced pacing keeps this goal believable."
-          : status === "tight"
-            ? "Still possible, but tighter than before."
-            : "This deadline is unlikely to hold at the current pace.",
-      detail:
-        status === "feasible"
-          ? `This plan asks for about ${formatHours(weeklyDemandMinutes)} against ${formatHours(sustainableWeeklyMinutes)} of believable room.`
-          : status === "tight"
-            ? `This plan is asking for about ${formatHours(weeklyDemandMinutes)} against ${formatHours(sustainableWeeklyMinutes)} of believable room. There is not much slack.`
-            : `This plan is asking for about ${formatHours(weeklyDemandMinutes)} against ${formatHours(sustainableWeeklyMinutes)} of believable room.`,
-      deadlineConfidence,
-      weeklyDemandMinutes,
+      summary: copy.summary,
+      detail: copy.detail,
+      deadlineConfidence: deadlineConfidenceLabel(params.paceMode, status),
+      weeklyDemandMinutes: plannedWeeklyMinutes,
       weeklyCapacityMinutes: sustainableWeeklyMinutes,
-      totalCapacityMinutes: params.totalCapacityMinutes,
+      totalCapacityMinutes: params.capacity.totalCapacityMinutes,
       revisedDeadlineSuggestion,
       revisedDeadlineReason:
-        revisedDeadlineSuggestion !== null ? "A later target would be more believable." : null,
+        revisedDeadlineSuggestion !== null ? revisedDeadlineReason(params.paceMode) : null,
       lighterScopeSuggestion:
         status === "unrealistic"
-          ? lighterScopeSuggestion(params.goal, params.milestones, params.tasks)
+          ? lighterScopeSuggestion(params.goal, params.milestones, params.tasks, params.paceMode)
           : null,
       pacingTradeoff:
         params.paceMode === "conservative"
-          ? "Conservative pacing lowers daily pressure, but it is more likely to ask for a later finish."
+          ? "Conservative pacing lowers weekly pressure, but it gives up deadline protection sooner."
           : params.paceMode === "aggressive"
-            ? "Aggressive pacing keeps the date alive longer, but it asks for stronger consistency and larger sessions."
-            : "Balanced pacing keeps the workload demanding without leaning on perfect consistency.",
-      highestLeverageStep,
+            ? "Aggressive pacing protects the date longer, but it asks for stronger consistency and larger pushes."
+            : "Balanced pacing keeps the workload honest without leaning on perfect consistency.",
+      highestLeverageStep: buildHighestLeverageStep({
+        goal: params.goal,
+        tasks: params.tasks,
+        paceMode: params.paceMode,
+        revisedDeadlineSuggestion,
+      }),
     },
   };
 }
 
-function chooseRecommendedPace(options: GoalPaceOptionSummary[]) {
-  const feasibleBalanced = options.find((option) => option.mode === "balanced" && option.deadlineConfidence === "Believable");
-  if (feasibleBalanced) {
-    return feasibleBalanced.mode;
-  }
+function chooseRecommendedPace(
+  drafts: Array<{
+    paceOption: GoalPaceOptionSummary;
+    feasibility: {
+      status: GoalFeasibilityStatus;
+      projectedBufferWeeks: number;
+      loadRatio: number;
+    };
+  }>,
+  adaptationProfile: AdaptationProfile | null,
+  today: string,
+  targetDate: string | null,
+) {
+  const daysRemaining = targetDate ? daysUntil(today, targetDate) : null;
+  const ranked = drafts
+    .map((draft) => {
+      const baseScore =
+        draft.feasibility.status === "feasible"
+          ? 6
+          : draft.feasibility.status === "tight"
+            ? 3
+            : -2;
+      let score =
+        baseScore +
+        clamp(draft.feasibility.projectedBufferWeeks, -2, 2) -
+        Math.max(0, draft.feasibility.loadRatio - 1) * 4;
 
-  const feasibleConservative = options.find((option) => option.mode === "conservative" && option.deadlineConfidence !== "Low confidence");
-  if (feasibleConservative) {
-    return feasibleConservative.mode;
-  }
+      if (adaptationProfile?.regression.isRegressing) {
+        score +=
+          draft.paceOption.mode === "conservative"
+            ? 2
+            : draft.paceOption.mode === "balanced"
+              ? 1
+              : -2;
+      }
 
-  return "balanced" as GoalPaceMode;
+      if ((adaptationProfile?.strategy.balancedReadiness ?? 0.3) >= 0.7) {
+        score += draft.paceOption.mode === "aggressive" ? 1.2 : 0;
+      }
+
+      if (daysRemaining !== null && daysRemaining <= 21) {
+        score += draft.paceOption.mode === "aggressive" ? 1.3 : draft.paceOption.mode === "conservative" ? -1 : 0.6;
+      }
+
+      if (daysRemaining !== null && daysRemaining >= 84) {
+        score += draft.paceOption.mode === "conservative" ? 1 : draft.paceOption.mode === "balanced" ? 0.5 : -0.4;
+      }
+
+      if (draft.feasibility.status === "feasible" && draft.paceOption.mode === "balanced") {
+        score += 0.75;
+      }
+
+      return {
+        mode: draft.paceOption.mode,
+        score,
+      };
+    })
+    .sort((left, right) => {
+      if (right.score !== left.score) {
+        return right.score - left.score;
+      }
+
+      return recommendationTieBreak[left.mode] - recommendationTieBreak[right.mode];
+    });
+
+  return ranked[0]?.mode ?? "balanced";
 }
 
 function createGoalRecord(inference: GoalDraftInference, focusDomains: DomainKey[], today: string): Goal {
@@ -464,8 +810,22 @@ async function buildGoalStrategyComposer(params: {
   today: string;
   adaptationProfile: AdaptationProfile | null;
 }) {
-  const scheduleConstraints =
-    await appServices.repositories.integration.listScheduleConstraintsForDate(params.today);
+  const visibleConstraintDays = Array.from(
+    { length: Math.max(7, Math.min(daysUntil(params.today, params.inference.targetDate), 14)) },
+    (_, index) => addDays(params.today, index),
+  );
+  const scheduleConstraints = (
+    await Promise.all(
+      visibleConstraintDays.map((date) =>
+        appServices.repositories.integration.listScheduleConstraintsForDate(date),
+      ),
+    )
+  )
+    .flat()
+    .filter(
+      (constraint, index, list) =>
+        list.findIndex((candidate) => candidate.id === constraint.id) === index,
+    );
   const focusDomains =
     params.mergedPreferences.metadata.focusDomains
       ? String(params.mergedPreferences.metadata.focusDomains)
@@ -496,8 +856,7 @@ async function buildGoalStrategyComposer(params: {
         milestones: artifact.milestones,
         today: params.today,
         paceMode,
-        weeklyCapacityMinutes: capacity.weeklyCapacityMinutes,
-        totalCapacityMinutes: capacity.totalCapacityMinutes,
+        capacity,
         adaptationProfile: params.adaptationProfile,
       });
       const config = paceConfig(paceMode, params.adaptationProfile);
@@ -506,12 +865,15 @@ async function buildGoalStrategyComposer(params: {
         label: config.label,
         summary:
           paceMode === "conservative"
-            ? "Calmer pace with more room to recover."
+            ? "Lower weekly pressure, smaller steps, and earlier adaptation."
             : paceMode === "aggressive"
-              ? "Fuller pace that protects the date at higher risk."
-              : "Steady pace that keeps the goal realistic.",
+              ? "Higher weekly output that protects the date longer at higher risk."
+              : "Steady weekly output with a cleaner balance between pace and realism.",
         weeklyHours: Math.max(1, Math.round(feasibility.truth.weeklyDemandMinutes / 60)),
-        sessionCount: Math.max(2, Math.ceil(feasibility.truth.weeklyDemandMinutes / config.sessionMinutes)),
+        sessionCount: Math.max(
+          2,
+          Math.ceil(feasibility.truth.weeklyDemandMinutes / config.sessionMinutes),
+        ),
         taskSizing: config.taskSizing,
         riskLevel: config.riskLevel,
         deadlineConfidence: feasibility.truth.deadlineConfidence,
@@ -522,12 +884,25 @@ async function buildGoalStrategyComposer(params: {
       return {
         ...artifact,
         feasibility: feasibility.truth,
+        feasibilityMetrics: {
+          status: feasibility.truth.status,
+          projectedBufferWeeks: feasibility.projectedBufferWeeks,
+          loadRatio: feasibility.loadRatio,
+        },
         totalWorkEstimateMinutes: feasibility.totalWorkEstimateMinutes,
         paceOption,
       };
     }),
   );
-  const recommendedPaceMode = chooseRecommendedPace(drafts.map((draft) => draft.paceOption));
+  const recommendedPaceMode = chooseRecommendedPace(
+    drafts.map((draft) => ({
+      paceOption: draft.paceOption,
+      feasibility: draft.feasibilityMetrics,
+    })),
+    params.adaptationProfile,
+    params.today,
+    params.inference.targetDate,
+  );
   const selectedDraft =
     drafts.find((draft) => draft.paceOption.mode === params.inference.paceMode) ?? drafts[1];
   const paceOptions = drafts.map((draft) => ({
@@ -557,12 +932,22 @@ async function buildGoalStrategyComposer(params: {
       estimatedMinutes: task.estimatedMinutes,
     })),
   };
+  const selectedGoal = {
+    ...selectedDraft.goal,
+    desiredWeeklyMinutes: selectedDraft.feasibility.weeklyDemandMinutes,
+    estimatedTotalMinutes: selectedDraft.totalWorkEstimateMinutes,
+    metadata: {
+      ...selectedDraft.goal.metadata,
+      phase22SelectedPaceMode: selectedDraft.paceOption.mode,
+      phase22RecommendedPaceMode: recommendedPaceMode,
+    },
+  };
 
   return {
     composer,
     draft: {
       goal: setGoalIntelligenceSnapshot(
-        selectedDraft.goal,
+        selectedGoal,
         buildGoalIntelligenceSnapshot(composer),
       ),
       milestones: selectedDraft.milestones,
