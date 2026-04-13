@@ -16,6 +16,7 @@ import { TextField } from "../../components/ui/TextField";
 import { useResolvedTheme } from "../../design/theme/useResolvedTheme";
 import {
   ActivityEventKind,
+  ReminderType,
   WeeklyCarryoverPosture,
   WeeklyEmphasis,
   WeeklyIntensity,
@@ -92,6 +93,7 @@ export function InsightsScreen({ navigation }: Props) {
   const adaptationProfile = useAppStore((state) => state.adaptationProfile);
   const productPreferences = useAppStore((state) => state.productPreferences);
   const userPreferences = useAppStore((state) => state.userPreferences);
+  const notificationPreferences = useAppStore((state) => state.notificationPreferences);
   const dailyRitualHistory = useAppStore((state) => state.dailyRitualHistory);
   const currentWeekReview = useAppStore((state) => state.currentWeekReview);
   const nextWeekReview = useAppStore((state) => state.nextWeekReview);
@@ -160,10 +162,14 @@ export function InsightsScreen({ navigation }: Props) {
       ActivityEventKind.TaskRescheduled,
     ].includes(event.kind),
   );
-  const completionShare =
-    summary.completedThisWeek + summary.reshapedThisWeek > 0
-      ? summary.completedThisWeek / (summary.completedThisWeek + summary.reshapedThisWeek)
+  const weeklySummary = weeklyDigest.summary;
+  const weeklyCompletionShare =
+    weeklySummary.completedCount + weeklySummary.reshapedCount > 0
+      ? weeklySummary.completedCount / (weeklySummary.completedCount + weeklySummary.reshapedCount)
       : 0;
+  const weeklyReviewPreference = notificationPreferences.find(
+    (preference) => preference.reminderType === ReminderType.WeeklyReview,
+  );
   const carryoverDefaults = useMemo(() => {
     const base = new Map<string, CarryDecision>();
     currentWeekReview?.carryoverTaskIds.forEach((id) => base.set(id, "carry"));
@@ -295,10 +301,10 @@ export function InsightsScreen({ navigation }: Props) {
                 This week
               </AppText>
               <AppText tone="secondary" variant="caption">
-                {weeklyDigest.summary.completedCount} completed
+                {weeklySummary.completedCount} completed · {weeklySummary.reshapedCount} reshaped
               </AppText>
             </View>
-            <ProgressBar progress={completionShare} />
+            <ProgressBar progress={weeklyCompletionShare} />
           </View>
         </Surface>
 
@@ -378,7 +384,7 @@ export function InsightsScreen({ navigation }: Props) {
               ))
             ) : (
               <AppText tone="secondary" variant="caption">
-                No unresolved weekly carryover is asking for a decision right now.
+                Nothing is quietly rolling into next week right now.
               </AppText>
             )}
           </View>
@@ -563,6 +569,9 @@ export function InsightsScreen({ navigation }: Props) {
           <AppText tone="secondary" variant="caption">
             Review day {weeklyReviewDayLabel} at{" "}
             {productPreferences ? formatTimeLabel(productPreferences.weeklyReviewTime, { compact: true }) : "4:30p"}.
+            {weeklyReviewPreference?.enabled
+              ? ` Reminder speaks up ${weeklyReviewPreference.leadTimeMinutes} min early.`
+              : " Weekly reminder is muted."}
             {productPreferences?.autoPromptNextWeekShaping
               ? " Next-week shaping stays prompted automatically."
               : " Next-week shaping is manual."}
@@ -570,9 +579,12 @@ export function InsightsScreen({ navigation }: Props) {
         </Surface>
 
         {runtimeMessage ? (
-          <AppText tone="tertiary" variant="caption">
-            {runtimeMessage}
-          </AppText>
+          <Surface tone="sunken" className="gap-2">
+            <AppText variant="caption">Couldn&apos;t save that change</AppText>
+            <AppText tone="secondary" variant="caption">
+              {runtimeMessage}
+            </AppText>
+          </Surface>
         ) : null}
       </View>
     </Screen>

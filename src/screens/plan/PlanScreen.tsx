@@ -73,6 +73,12 @@ export function PlanScreen({ navigation }: Props) {
     carryoverPosture: nextWeekReview?.carryoverPosture ?? null,
   });
 
+  function openWeeklyExperience() {
+    (navigation.getParent() as any)?.navigate("Insights", {
+      screen: "InsightsHome",
+    });
+  }
+
   if (!dailyPlan && reviewGoals.length === 0) {
     return (
       <Screen>
@@ -179,11 +185,11 @@ export function PlanScreen({ navigation }: Props) {
           />
           <DrillInRow
             title="Next week"
-            subtitle={nextWeekReview?.nextWeekShapedAt ? "Shaped intentionally" : "Needs shaping"}
-            detail={nextWeekReview?.nextWeekShapedAt ? weeklyShapeSummary : "No weekly shape saved yet"}
+            subtitle={nextWeekReview?.nextWeekShapedAt ? "Weekly shape saved in Insights" : "Finish weekly shaping in Insights"}
+            detail={nextWeekReview?.nextWeekShapedAt ? weeklyShapeSummary : "Open the weekly review to set next week"}
             actionLabel="Open"
             leading={<Ionicons color={theme.colors.text.secondary} name="sparkles-outline" size={18} />}
-            onPress={() => navigation.navigate("PlanDetail")}
+            onPress={openWeeklyExperience}
           />
           <DrillInRow
             title="Structure"

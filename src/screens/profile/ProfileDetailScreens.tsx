@@ -600,6 +600,7 @@ export function ProfileNotificationsScreen() {
   const notificationPermissionStatus = useAppStore((state) => state.notificationPermissionStatus);
   const updateNotificationPreference = useAppStore((state) => state.updateNotificationPreference);
   const requestNotificationAccess = useAppStore((state) => state.requestNotificationAccess);
+  const productPreferences = useAppStore((state) => state.productPreferences);
   const [busyState, setBusyState] = useState<string | null>(null);
   const [runtimeMessage, setRuntimeMessage] = useState<string | null>(null);
   const enabledCount = notificationPreferences.filter((preference) => preference.enabled).length;
@@ -614,6 +615,9 @@ export function ProfileNotificationsScreen() {
   );
   const recoveryPreference = notificationPreferences.find(
     (preference) => preference.reminderType === ReminderType.RecoveryPrompt,
+  );
+  const weeklyReviewPreference = notificationPreferences.find(
+    (preference) => preference.reminderType === ReminderType.WeeklyReview,
   );
   const quietHoursSummary = summarizeQuietHours(notificationPreferences);
 
@@ -795,6 +799,75 @@ export function ProfileNotificationsScreen() {
                   </OptionChip>
                 ))}
               </View>
+            </Surface>
+          </DetailSection>
+        ) : null}
+        {weeklyReviewPreference && productPreferences ? (
+          <DetailSection
+            title="Weekly review"
+            description="Control the reminder that opens weekly review and next-week shaping."
+          >
+            <Surface className="gap-3 mb-0">
+              <View className="flex-row items-center justify-between gap-3">
+                <View className="flex-1 gap-1">
+                  <AppText variant="section">
+                    {formatReminderBehavior(weeklyReviewPreference)}
+                  </AppText>
+                  <AppText tone="secondary" variant="caption">
+                    {weeklyReviewPreference.enabled
+                      ? `Scheduled for ${["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"][productPreferences.weeklyReviewDay]} at ${formatTimeLabel(productPreferences.weeklyReviewTime, { compact: true })}.`
+                      : "Weekly review stays quiet until you enable this reminder again."}
+                  </AppText>
+                </View>
+                <Button
+                  size="compact"
+                  tone={weeklyReviewPreference.enabled ? "tertiary" : "secondary"}
+                  busy={busyState === `notification:${weeklyReviewPreference.id}`}
+                  onPress={() =>
+                    void runAction(
+                      `notification:${weeklyReviewPreference.id}`,
+                      () =>
+                        updateNotificationPreference(weeklyReviewPreference.reminderType, {
+                          enabled: !weeklyReviewPreference.enabled,
+                        }),
+                      "Weekly review reminder could not be updated.",
+                    )
+                  }
+                >
+                  {weeklyReviewPreference.enabled ? "Mute" : "Enable"}
+                </Button>
+              </View>
+              <View className="flex-row flex-wrap gap-2">
+                {reminderLeadTimeOptions.map((minutes) => (
+                  <OptionChip
+                    key={`weekly-review:${minutes}`}
+                    selected={weeklyReviewPreference.leadTimeMinutes === minutes}
+                    onPress={() =>
+                      void runAction(
+                        `lead-time:${weeklyReviewPreference.id}:${minutes}`,
+                        () =>
+                          updateNotificationPreference(weeklyReviewPreference.reminderType, {
+                            enabled: true,
+                            leadTimeMinutes: minutes,
+                          }),
+                        "Weekly review reminder timing could not be updated.",
+                      )
+                    }
+                  >
+                    {minutes} min
+                  </OptionChip>
+                ))}
+              </View>
+              <QuietMetaLine
+                items={[
+                  weeklyReviewPreference.channel === "push" ? "Push" : "In app",
+                  weeklyReviewPreference.enabled ? "Active" : "Muted",
+                  quietHoursSummary,
+                ]}
+              />
+              <AppText tone="secondary" variant="caption">
+                Review day and time are set in Planning. Delivery here stays on the real weekly review preference.
+              </AppText>
             </Surface>
           </DetailSection>
         ) : null}
@@ -1057,7 +1130,7 @@ export function ProfilePlanningPreferencesScreen() {
         >
           <Surface className="gap-3 mb-0">
             <AppText tone="secondary" variant="caption">
-              Weekly review is scheduled from your planning controls, then weekly shaping can be prompted automatically.
+              Set when weekly review should happen here. Reminder delivery is controlled in Notifications, and next-week shaping can still be prompted automatically.
             </AppText>
             <View className="gap-2">
               <AppText tone="tertiary" variant="micro" style={{ textTransform: "uppercase" }}>
