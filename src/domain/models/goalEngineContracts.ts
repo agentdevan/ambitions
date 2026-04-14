@@ -11,6 +11,9 @@ export type { Task as LegacyTask } from "./planning";
 export * from "./goalEngine";
 export * from "./goalEngineSelectors";
 export * from "./goalEngineIntake";
+export * from "./goalEnginePlanner";
+export * from "./goalEnginePlannerLinter";
+export * from "./goalEngineStepRewriter";
 
 export type {
   Goal as EngineGoal,
@@ -19,7 +22,9 @@ export type {
   GoalDraft as EngineGoalDraft,
   GoalPlan as EngineGoalPlan,
   GoalTiming as EngineGoalTiming,
+  PlanAssumption as EnginePlanAssumption,
   PlanSection as EnginePlanSection,
   Step as EngineStep,
+  StepActionability as EngineStepActionability,
   StepContractMetadata as EngineStepContractMetadata,
 } from "./goalEngine";

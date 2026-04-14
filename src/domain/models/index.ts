@@ -18,4 +18,6 @@ export * as GoalEngineContracts from "./goalEngine";
 export * as GoalEngineFixtures from "./goalEngineFixtures";
 export * as GoalEngineIntake from "./goalEngineIntake";
 export * as GoalEngineIntakeFixtures from "./goalEngineIntakeFixtures";
+export * as GoalEnginePlanner from "./goalEnginePlanner";
+export * as GoalEnginePlannerFixtures from "./goalEnginePlannerFixtures";
 export * as GoalEngineMigration from "./goalEngineMigration";

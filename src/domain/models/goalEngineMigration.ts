@@ -632,6 +632,13 @@ function milestoneStep(goal: LegacyGoal, milestone: GoalMilestone, sectionId: st
     isRepeatable: false,
     evidenceRequired: true,
     successSignals: milestone.summary ? [milestone.summary] : [],
+    actionability: {
+      action: milestone.title,
+      completionDefinition: milestone.summary ?? `${milestone.title} is complete.`,
+      evidenceOfCompletion: [milestone.summary ?? `${milestone.title} is complete.`],
+      fallbackMicroStep: `Capture the smallest visible milestone sign for "${milestone.title}".`,
+      contextRequirements: [],
+    },
     contract: createStepContractMetadata({
       legacySourceKind: "milestone",
       legacySourceId: milestone.id,
@@ -695,6 +702,13 @@ function taskToStep(
     isRepeatable: task.isRecurringTemplate,
     evidenceRequired: task.status !== TaskStatus.Cancelled,
     successSignals: [task.summary ?? `${task.title} is complete.`],
+    actionability: {
+      action: task.title,
+      completionDefinition: task.summary ?? `${task.title} is complete.`,
+      evidenceOfCompletion: [task.summary ?? `${task.title} is complete.`],
+      fallbackMicroStep: `Set up the smallest next piece of "${task.title}".`,
+      contextRequirements: [],
+    },
     contract: createStepContractMetadata({
       legacySourceKind: "task",
       legacySourceId: task.id,

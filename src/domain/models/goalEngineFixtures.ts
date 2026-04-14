@@ -64,6 +64,13 @@ function makeStep(params: {
     isRepeatable: params.isRepeatable ?? false,
     evidenceRequired: true,
     successSignals: [params.summary ?? `${params.title} is complete.`],
+    actionability: {
+      action: params.title,
+      completionDefinition: params.summary ?? `${params.title} is complete.`,
+      evidenceOfCompletion: [params.summary ?? `${params.title} is complete.`],
+      fallbackMicroStep: `Do the smallest visible part of "${params.title}".`,
+      contextRequirements: [],
+    },
   };
 }
 
@@ -76,6 +83,7 @@ function makePlan(goalId: string, mode: GoalMode, sections: PlanSection[]): Engi
     summary: `Fixture plan for ${mode}.`,
     strategy: createDefaultPlanningStrategy(mode),
     sections,
+    assumptions: [],
     lint: {
       goalId,
       planVersion: 1,

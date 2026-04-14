@@ -184,6 +184,12 @@ export enum PlanLintIssueCode {
   InvalidDependency = "invalid_dependency",
   InvalidProgressStrategy = "invalid_progress_strategy",
   InvalidDelegatedOwnership = "invalid_delegated_ownership",
+  VagueStep = "vague_step",
+  OversizedStep = "oversized_step",
+  MissingStepEvidence = "missing_step_evidence",
+  InappropriateTimingPressure = "inappropriate_timing_pressure",
+  WrongSupportTone = "wrong_support_tone",
+  NotSessionCompletable = "not_session_completable",
 }
 
 export interface ContractValueProvenance {
@@ -223,6 +229,22 @@ export interface StepContractMetadata {
   legacySourceId: EntityId | null;
   actor: GoalActorProvenance | null;
   timing: GoalTimingProvenance | null;
+}
+
+export interface StepActionability {
+  action: string;
+  completionDefinition: string;
+  evidenceOfCompletion: string[];
+  fallbackMicroStep: string;
+  contextRequirements: string[];
+}
+
+export interface PlanAssumption {
+  id: EntityId;
+  summary: string;
+  rationale: string;
+  confidence: "low" | "medium" | "high";
+  relatedField: string | null;
 }
 
 export interface GoalActor {
@@ -284,6 +306,7 @@ export interface Step {
   isRepeatable: boolean;
   evidenceRequired: boolean;
   successSignals: string[];
+  actionability: StepActionability;
   contract?: StepContractMetadata | null;
 }
 
@@ -304,6 +327,7 @@ export interface PlanLintIssue {
   message: string;
   sectionId: EntityId | null;
   stepId: EntityId | null;
+  suggestedFix?: string | null;
 }
 
 export interface PlanLintResult {
@@ -322,6 +346,7 @@ export interface GoalPlan {
   summary: string | null;
   strategy: PlanningStrategy;
   sections: PlanSection[];
+  assumptions?: PlanAssumption[];
   lint: PlanLintResult;
 }
 
@@ -414,7 +439,7 @@ function issue(
   sectionId: EntityId | null = null,
   stepId: EntityId | null = null,
 ): PlanLintIssue {
-  return { code, severity, fieldPath, message, sectionId, stepId };
+  return { code, severity, fieldPath, message, sectionId, stepId, suggestedFix: null };
 }
 
 function clampProvenanceConfidence(value: number): number {
