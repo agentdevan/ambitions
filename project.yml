@@ -1,0 +1,50 @@
+name: Ambitions
+options:
+  minimumXcodeGenVersion: 2.38.0
+  createIntermediateGroups: true
+settings:
+  base:
+    SWIFT_VERSION: 5.10
+    IPHONEOS_DEPLOYMENT_TARGET: 17.0
+packages:
+  AmbitionsPackages:
+    path: .
+targets:
+  Ambitions:
+    type: application
+    platform: iOS
+    deploymentTarget: "17.0"
+    sources:
+      - path: Native/Ambitions
+        excludes:
+          - "**/*.md"
+          - "Resources/**"
+          - "Support/Info.plist"
+    resources:
+      - path: Native/Ambitions/Resources
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: com.ambitions.ios
+        PRODUCT_NAME: Ambitions
+        GENERATE_INFOPLIST_FILE: NO
+        INFOPLIST_FILE: Native/Ambitions/Support/Info.plist
+        TARGETED_DEVICE_FAMILY: "1,2"
+        SUPPORTS_MACCATALYST: NO
+        ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME: AccentColor
+        CURRENT_PROJECT_VERSION: 1
+        MARKETING_VERSION: 1.0
+        DEVELOPMENT_ASSET_PATHS: Native/Ambitions/PreviewSupport
+    dependencies:
+      - package: AmbitionsPackages
+        product: AmbitionsDesignSystem
+      - package: AmbitionsPackages
+        product: AmbitionsWidgetUI
+schemes:
+  Ambitions:
+    build:
+      targets:
+        Ambitions: all
+    run:
+      config: Debug
+    archive:
+      config: Release
