@@ -1,6 +1,9 @@
 import { Ionicons } from "@expo/vector-icons";
+import { NativeStackNavigationProp } from "@react-navigation/native-stack";
+import { useNavigation } from "@react-navigation/native";
 import { useEffect, useRef, useState } from "react";
 import {
+  Alert,
   Keyboard,
   KeyboardAvoidingView,
   LayoutChangeEvent,
@@ -52,6 +55,7 @@ import {
   summarizeQuietHours,
   summarizeSyncState,
 } from "../../services/profile/controlSummaries";
+import { ProfileStackParamList } from "../../navigation/types";
 import {
   formatTimeLabel,
   formatTimeRangeLabel,
@@ -1835,6 +1839,7 @@ function AuthFeedbackCard({
 }
 
 export function ProfileAccountScreen() {
+  const navigation = useNavigation<NativeStackNavigationProp<ProfileStackParamList>>();
   const account = useAppStore((state) => state.account);
   const authState = useAppStore((state) => state.authState);
   const attachmentState = useAppStore((state) => state.attachmentState);
@@ -2310,6 +2315,19 @@ export function ProfileAccountScreen() {
               </Surface>
             </DetailSection>
           ) : null}
+          <DetailSection
+            title="Privacy & data"
+            description="Review the current data-rights status and, when you are signed in, delete your account from inside the app."
+          >
+            <Surface className="gap-3 mb-0">
+              <AppText tone="secondary" variant="caption">
+                Account deletion now lives in a dedicated flow so the action stays clear, deliberate, and hard to trigger by accident.
+              </AppText>
+              <Button tone="secondary" onPress={() => navigation.navigate("ProfileDataRights")}>
+                Open privacy & data
+              </Button>
+            </Surface>
+          </DetailSection>
           {account && syncConflicts.length > 0 ? (
             <DetailSection
               title="Items waiting for review"
@@ -2521,5 +2539,181 @@ export function ProfileAccountScreen() {
         </View>
       </ScrollView>
     </KeyboardAvoidingView>
+  );
+}
+
+export function ProfileDataRightsScreen() {
+  const account = useAppStore((state) => state.account);
+  const syncState = useAppStore((state) => state.syncState);
+  const deleteAccount = useAppStore((state) => state.deleteAccount);
+  const theme = useResolvedTheme();
+  const [password, setPassword] = useState("");
+  const [confirmationText, setConfirmationText] = useState("");
+  const [acknowledged, setAcknowledged] = useState(false);
+  const [busy, setBusy] = useState(false);
+  const [runtimeMessage, setRuntimeMessage] = useState<string | null>(null);
+
+  const deletePhraseMatches = confirmationText.trim().toUpperCase() === "DELETE";
+  const canDelete =
+    !!account && password.trim().length >= 8 && acknowledged && deletePhraseMatches && !busy;
+
+  async function handleDelete() {
+    if (!account || !canDelete) {
+      return;
+    }
+
+    Alert.alert(
+      "Delete your account?",
+      "This permanently removes your Ambitions account and its synced data. This device will return to a fresh local onboarding state.",
+      [
+        { text: "Cancel", style: "cancel" },
+        {
+          text: "Delete account",
+          style: "destructive",
+          onPress: () => {
+            void (async () => {
+              setBusy(true);
+              setRuntimeMessage(null);
+
+              try {
+                await deleteAccount({ password: password.trim() });
+              } catch (error) {
+                setRuntimeMessage(
+                  error instanceof Error
+                    ? error.message
+                    : "Your account could not be deleted right now.",
+                );
+              } finally {
+                setBusy(false);
+              }
+            })();
+          },
+        },
+      ],
+    );
+  }
+
+  return (
+    <Screen>
+      <View className="gap-5">
+        <DetailHero
+          eyebrow="Privacy & data"
+          title={account ? "Delete your account" : "Privacy & data"}
+          description={
+            account
+              ? "Deletion is permanent. Ambitions will remove the account, clear synced records, and reset this device to a fresh local state."
+              : "This device is local-only right now. Connect an account before any in-app account deletion step becomes relevant."
+          }
+          badges={
+            <>
+              <Pill label={account ? "Deletion available" : "Local only"} tone="accent" />
+              <Pill label={syncState?.mode ?? "local_only"} tone="quiet" />
+            </>
+          }
+        />
+
+        <DetailSection
+          title="What deletion does"
+          description="The action is explicit so there is no confusion between sign-out and deletion."
+        >
+          <Surface className="gap-3 mb-0">
+            <QuietMetaLine
+              items={[
+                "Deletes the Ambitions account itself.",
+                "Removes synced records associated with that account.",
+                "Signs this device out and clears the local app data tied to the deleted account.",
+                "Returns the app to a clean onboarding state instead of leaving stale synced content behind.",
+              ]}
+            />
+            <AppText tone="secondary" variant="caption">
+              Device-level OS permissions may still exist outside the app until you change them in system settings.
+            </AppText>
+          </Surface>
+        </DetailSection>
+
+        <DetailSection
+          title="Export status"
+          description="This phase completes deletion. Export remains intentionally deferred rather than being shipped as a weak placeholder."
+        >
+            <Surface className="gap-3 mb-0">
+              <AppText tone="secondary" variant="caption">
+                A user-facing export flow was not present in the repo and is not completed in this launch-compliance phase.
+              </AppText>
+              <AppText tone="tertiary" variant="caption">
+                The exact current status and the remaining export work are documented in the Phase 28 account deletion note in the repo.
+              </AppText>
+            </Surface>
+          </DetailSection>
+
+        {account ? (
+          <DetailSection
+            title="Delete this account"
+            description="Reenter your password, confirm the consequence, and then use the destructive action."
+          >
+            <View className="gap-3">
+              <Surface className="gap-3 mb-0">
+                <AppText variant="section">{account.email ?? account.displayName ?? "Current account"}</AppText>
+                <AppText tone="secondary" variant="caption">
+                  Reauthentication is required before the delete request is sent.
+                </AppText>
+                <TextField
+                  autoCapitalize="none"
+                  autoCorrect={false}
+                  label="Password"
+                  onChangeText={setPassword}
+                  placeholder="Reenter your password"
+                  secureTextEntry
+                  value={password}
+                />
+                <SelectionCard
+                  selected={acknowledged}
+                  onPress={() => setAcknowledged((current) => !current)}
+                  trailing={
+                    <Pill label={acknowledged ? "Confirmed" : "Required"} tone={acknowledged ? "accent" : "quiet"} />
+                  }
+                >
+                  <View className="gap-2">
+                    <AppText variant="section">I understand this permanently deletes my Ambitions account.</AppText>
+                    <AppText tone="secondary" variant="caption">
+                      This is not sign-out or temporary deactivation.
+                    </AppText>
+                  </View>
+                </SelectionCard>
+                <TextField
+                  autoCapitalize="characters"
+                  autoCorrect={false}
+                  label='Type "DELETE" to continue'
+                  onChangeText={setConfirmationText}
+                  placeholder="DELETE"
+                  value={confirmationText}
+                />
+                <Button busy={busy} disabled={!canDelete} tone="destructive" onPress={() => void handleDelete()}>
+                  Delete account
+                </Button>
+              </Surface>
+              {runtimeMessage ? (
+                <Surface
+                  tone="sunken"
+                  className="gap-2 mb-0"
+                  style={{ borderColor: theme.colors.semantic.warning }}
+                >
+                  <AppText variant="caption">Could not complete deletion</AppText>
+                  <AppText tone="secondary" variant="caption">
+                    {runtimeMessage}
+                  </AppText>
+                </Surface>
+              ) : null}
+            </View>
+          </DetailSection>
+        ) : (
+          <Surface className="gap-3">
+            <AppText variant="section">No connected account</AppText>
+            <AppText tone="secondary" variant="caption">
+              This installation is currently local-only. If you later connect an account, deletion will remain available here from inside the app.
+            </AppText>
+          </Surface>
+        )}
+      </View>
+    </Screen>
   );
 }

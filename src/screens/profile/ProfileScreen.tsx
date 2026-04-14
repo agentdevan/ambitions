@@ -226,6 +226,14 @@ export function ProfileScreen({ navigation }: Props) {
             leading={<Ionicons color={theme.colors.text.secondary} name="pulse-outline" size={18} />}
             onPress={() => navigation.navigate("ProfileHistory")}
           />
+          <DrillInRow
+            title="Privacy & data"
+            subtitle={account ? "Account deletion and current data-rights status" : "Deletion becomes available once an account is connected"}
+            detail={account ? "Open" : "Local only"}
+            actionLabel="Open"
+            leading={<Ionicons color={theme.colors.text.secondary} name="shield-checkmark-outline" size={18} />}
+            onPress={() => navigation.navigate("ProfileDataRights")}
+          />
         </Surface>
 
         <Surface tone="sunken" className="gap-2">

@@ -40,6 +40,7 @@ export type ProfileStackParamList = {
   ProfileHome: undefined;
   ProfileHistory: undefined;
   ProfileAccount: undefined;
+  ProfileDataRights: undefined;
   ProfileAppearance: undefined;
   ProfileScheduleDefaults: undefined;
   ProfileIntegrations: undefined;

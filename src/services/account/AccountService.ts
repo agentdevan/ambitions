@@ -13,9 +13,19 @@ import { AccountRepository } from "../../repositories/AccountRepository";
 import { AdaptationRepository } from "../../repositories/AdaptationRepository";
 import { GoalRepository } from "../../repositories/GoalRepository";
 import { HistoryRepository } from "../../repositories/HistoryRepository";
+import { IntegrationRepository } from "../../repositories/IntegrationRepository";
 import { PlanRepository } from "../../repositories/PlanRepository";
 import { PreferencesRepository } from "../../repositories/PreferencesRepository";
 import { TaskRepository } from "../../repositories/TaskRepository";
+import {
+  seedAdaptationProfile,
+  seedCalendarConnectionState,
+  seedDomains,
+  seedNotificationPreferences,
+  seedPreferences,
+  seedScheduleConstraints,
+} from "../../data/seed/phase8Seed";
+import { wipeLocalAccountAndUserData } from "./localDataReset";
 import { NetworkStatusService } from "./NetworkStatusService";
 import { RemoteSessionSnapshot, SupabaseAccountClient } from "./SupabaseAccountClient";
 import {
@@ -36,6 +46,7 @@ interface AccountServiceDependencies {
     preferences: PreferencesRepository;
     adaptation: AdaptationRepository;
     history: HistoryRepository;
+    integration: IntegrationRepository;
   };
 }
 
@@ -375,6 +386,89 @@ export class AccountService {
     }
 
     await this.runSerializedSync(snapshot.auth.signedInAccountId, snapshot.sync, kind);
+    return this.getSnapshot();
+  }
+
+  async deleteAccount(input: { password: string }) {
+    await this.initialize();
+
+    const snapshot = await this.getSnapshot();
+    const account = snapshot.account;
+    const accountId = snapshot.auth.signedInAccountId;
+
+    if (!account || !accountId) {
+      throw new Error("No signed-in account is available to delete.");
+    }
+
+    if (!account.email) {
+      throw new Error("This account cannot be reauthenticated because the email address is missing.");
+    }
+
+    await this.remoteClient.deleteCurrentAccount({
+      email: account.email,
+      password: input.password,
+    });
+    await this.remoteClient.clearPersistedSession();
+    await wipeLocalAccountAndUserData();
+
+    const now = new Date().toISOString();
+    const metadataTransport = this.remoteClient.isConfigured() ? "supabase" : "local_only";
+    const seedRecord = <T extends { createdAt: string; updatedAt: string }>(record: T): T => ({
+      ...record,
+      createdAt: now,
+      updatedAt: now,
+    });
+
+    await Promise.all([
+      this.dependencies.repositories.preferences.saveDomains(seedDomains.map(seedRecord)),
+      this.dependencies.repositories.preferences.saveUserPreferences(seedRecord(seedPreferences)),
+      this.dependencies.repositories.preferences.saveNotificationPreferences(
+        seedNotificationPreferences.map(seedRecord),
+      ),
+      this.dependencies.repositories.adaptation.saveProfiles([seedRecord(seedAdaptationProfile)]),
+      this.dependencies.repositories.integration.saveCalendarConnectionState(
+        seedRecord(seedCalendarConnectionState),
+      ),
+      this.dependencies.repositories.integration.saveScheduleConstraints(
+        seedScheduleConstraints.map(seedRecord),
+      ),
+      this.dependencies.accountRepository.saveAuthState({
+        status: this.remoteClient.isConfigured() ? AuthStatus.LocalOnly : AuthStatus.Unavailable,
+        signedInAccountId: null,
+        primaryProvider: AuthProvider.Email,
+        availableProviders: this.remoteClient.isConfigured() ? [AuthProvider.Email] : [],
+        sessionExpiresAt: null,
+        lastAuthenticatedAt: null,
+        lastError: null,
+        createdAt: now,
+        updatedAt: now,
+      }),
+      this.dependencies.accountRepository.saveAttachmentState({
+        accountId: null,
+        status: LocalAttachmentStatus.Detached,
+        hasMeaningfulLocalData: false,
+        pendingRecordCount: 0,
+        lastAttachedAt: null,
+        lastError: null,
+        createdAt: now,
+        updatedAt: now,
+      }),
+      this.dependencies.accountRepository.saveSyncState({
+        accountId: null,
+        deviceId: snapshot.sync.deviceId,
+        mode: SyncMode.LocalOnly,
+        lastSyncAt: null,
+        pendingPushCount: 0,
+        pendingPullCount: 0,
+        unresolvedConflictCount: 0,
+        lastError: null,
+        metadata: { transport: metadataTransport },
+        createdAt: now,
+        updatedAt: now,
+      }),
+    ]);
+
+    await this.emitSnapshot();
     return this.getSnapshot();
   }
 

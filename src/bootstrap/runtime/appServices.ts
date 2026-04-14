@@ -54,6 +54,7 @@ export const appServices = {
         preferences: repositories.preferences,
         adaptation: repositories.adaptation,
         history: repositories.history,
+        integration: repositories.integration,
       },
     }),
   },

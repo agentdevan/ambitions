@@ -36,6 +36,7 @@ import { ProfileScreen } from "../screens/profile/ProfileScreen";
 import {
   ProfileAccountScreen,
   ProfileAppearanceScreen,
+  ProfileDataRightsScreen,
   ProfileHistoryScreen,
   ProfileIntegrationsScreen,
   ProfileNotificationsScreen,
@@ -307,6 +308,11 @@ function ProfileNavigator() {
         name="ProfileAccount"
         component={ProfileAccountScreen}
         options={{ title: "Account" }}
+      />
+      <ProfileStack.Screen
+        name="ProfileDataRights"
+        component={ProfileDataRightsScreen}
+        options={{ title: "Privacy & Data" }}
       />
     </ProfileStack.Navigator>
   );

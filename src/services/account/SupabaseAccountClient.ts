@@ -26,6 +26,11 @@ interface AuthInput {
   displayName?: string;
 }
 
+interface DeleteAccountInput {
+  email: string;
+  password: string;
+}
+
 interface RemoteSyncRecordRow {
   account_id: string;
   entity_kind: RemoteSyncRecord["entityKind"];
@@ -220,6 +225,60 @@ export class SupabaseAccountClient {
     if (error) {
       throw error;
     }
+  }
+
+  async deleteCurrentAccount(input: DeleteAccountInput) {
+    const client = this.requireClient();
+    const config = getSupabaseConfig();
+
+    if (!config) {
+      throw new Error("Account sync is not configured for this build.");
+    }
+
+    const { data: authData, error: authError } = await client.auth.signInWithPassword({
+      email: input.email,
+      password: input.password,
+    });
+
+    if (authError) {
+      throw authError;
+    }
+
+    if (!authData.session) {
+      throw new Error("Your session could not be refreshed. Sign in again and retry deletion.");
+    }
+
+    const response = await fetch(`${config.url}/functions/v1/delete-account`, {
+      method: "POST",
+      headers: {
+        Authorization: `Bearer ${authData.session.access_token}`,
+        apikey: config.anonKey,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({}),
+    });
+
+    if (!response.ok) {
+      const payload = (await response.json().catch(() => null)) as { error?: string } | null;
+      throw new Error(payload?.error ?? "Your account could not be deleted right now.");
+    }
+  }
+
+  async clearPersistedSession() {
+    const client = this.getClient();
+    const config = getSupabaseConfig();
+
+    if (!client || !config) {
+      return;
+    }
+
+    try {
+      await client.auth.signOut({ scope: "local" });
+    } catch {
+      // The remote user may already be gone. Clearing the local token is what matters here.
+    }
+
+    await accountSessionStorage.removeItem(buildStorageKey(config.url));
   }
 
   buildAccountIdentity(user: User) {

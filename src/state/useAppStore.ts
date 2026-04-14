@@ -263,6 +263,7 @@ interface AccountSlice {
   signIn: (input: { email: string; password: string }) => Promise<AuthActionResult>;
   clearAuthFeedback: () => Promise<void>;
   signOut: () => Promise<void>;
+  deleteAccount: (input: { password: string }) => Promise<void>;
   attachLocalDataToAccount: () => Promise<void>;
   deferLocalDataAttachment: () => Promise<void>;
   syncAccountData: (kind?: SyncOperationKind) => Promise<void>;
@@ -2442,6 +2443,15 @@ export const useAppStore = create<AppState>((set, get) => ({
 
   signOut: async () => {
     const accountSnapshot = await appServices.services.account.signOut();
+    const foundationSnapshot = await refreshAllState(get().planDate);
+    set({
+      ...foundationSnapshot,
+      ...mapAccountSnapshot(accountSnapshot),
+    });
+  },
+
+  deleteAccount: async (input) => {
+    const accountSnapshot = await appServices.services.account.deleteAccount(input);
     const foundationSnapshot = await refreshAllState(get().planDate);
     set({
       ...foundationSnapshot,
