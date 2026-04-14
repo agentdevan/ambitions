@@ -8,6 +8,7 @@ enum PreviewAppContainerFactory {
 
     static func preview(todayExperience: TodayExperience) -> AppContainer {
         let fixtures = PreviewFixtures.default
+        let navigation = AppNavigationModel(selectedTab: fixtures.preferences.preferredTab)
         return AppContainer(
             session: AppSession(
                 source: .preview,
@@ -17,8 +18,9 @@ enum PreviewAppContainerFactory {
                 startupNote: "Preview bootstrap uses isolated in-memory fixtures."
             ),
             theme: .dark,
+            navigation: navigation,
             todayService: StubTodayService(experience: todayExperience),
-            goalsService: StubGoalsService(fixtures: fixtures),
+            goalsService: StubGoalsService(),
             habitsService: StubHabitsService(fixtures: fixtures),
             insightsService: StubInsightsService(fixtures: fixtures),
             profileService: StubProfileService(fixtures: fixtures),

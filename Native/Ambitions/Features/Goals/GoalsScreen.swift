@@ -1,117 +1,104 @@
 import AmbitionsDesignSystem
-import AmbitionsWidgetUI
 import SwiftUI
 
 struct GoalsScreen: View {
     @Environment(\.appContainer) private var container
-    @State private var state: AsyncViewState<GoalsDashboard> = .loading
+    @Environment(\.ambitionTheme) private var theme
+    @State private var viewModel: GoalsViewModel
+
+    init(viewModel: GoalsViewModel = GoalsViewModel()) {
+        _viewModel = State(initialValue: viewModel)
+    }
 
     var body: some View {
-        FeatureScaffoldView(
-            title: "Goals",
-            subtitle: "Ambition planning is now framed as a native module, with the TypeScript engine kept only as behavioral reference."
-        ) {
-            switch state {
-            case .loading:
-                ProgressView("Loading goals")
-                    .frame(maxWidth: .infinity, alignment: .leading)
-            case let .failed(message):
-                Text(message)
-                    .foregroundStyle(.secondary)
-            case let .loaded(dashboard):
-                WidgetFeed(items: [
-                    WidgetFeedItem(id: "goals-list", priority: .hero, variant: .expanded) {
-                        GoalsListWidget(viewModel: goalsViewModel(dashboard), onAction: handleAction)
-                    },
-                    WidgetFeedItem(id: "goals-milestone", priority: .high, variant: .expanded) {
-                        MilestonePromptWidget(viewModel: milestoneViewModel(dashboard), onAction: handleAction)
+        ScrollView {
+            VStack(alignment: .leading, spacing: theme.spacing.lg) {
+                switch viewModel.state {
+                case .loading:
+                    GoalsHeroCard(overview: PreviewGoalsScenarios.overview)
+                    LoadingSkeletonCard(lineCount: 8)
+                case let .failed(message):
+                    EmptyStateCard(
+                        title: "Goals are unavailable",
+                        message: message,
+                        icon: "exclamationmark.triangle",
+                        actionTitle: "Retry"
+                    ) {
+                        Task { await viewModel.refresh(using: container.goalsService) }
                     }
-                ])
+                case let .loaded(overview):
+                    GoalsHeroCard(overview: overview)
+
+                    AppCard {
+                        VStack(alignment: .leading, spacing: theme.spacing.md) {
+                            SectionHeader(
+                                title: "Portfolio",
+                                subtitle: viewModel.selectedSort == .manualPriority
+                                    ? "Priority currently follows native repository order until explicit manual ranking lands."
+                                    : "Sort by the lens that best matches the kind of decision you need to make."
+                            ) {
+                                Menu {
+                                    ForEach(GoalsSortOption.allCases, id: \.self) { sort in
+                                        Button(sort.title) {
+                                            viewModel.selectedSort = sort
+                                        }
+                                    }
+                                } label: {
+                                    Label(viewModel.selectedSort.title, systemImage: "arrow.up.arrow.down")
+                                }
+                                .buttonStyle(AmbitionPressableButtonStyle(state: .default))
+                            }
+
+                            SegmentedFilterBar(items: GoalsFilter.allCases, selection: $viewModel.selectedFilter) { filter in
+                                let count = viewModel.filterCounts[filter] ?? 0
+                                return "\(filter.title) (\(count))"
+                            }
+
+                            if viewModel.visibleItems.isEmpty {
+                                EmptyStateCard(
+                                    title: overview.emptyTitle,
+                                    message: emptyMessage(for: viewModel.selectedFilter, fallback: overview.emptyMessage),
+                                    icon: viewModel.selectedFilter == .achieved ? "sparkles" : "scope"
+                                )
+                            } else {
+                                VStack(alignment: .leading, spacing: theme.spacing.sm) {
+                                    ForEach(viewModel.visibleItems) { item in
+                                        NavigationLink(value: item.target) {
+                                            GoalRowCard(item: item)
+                                        }
+                                        .buttonStyle(.plain)
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
             }
+            .padding(.horizontal, theme.spacing.lg)
+            .padding(.vertical, theme.spacing.md)
         }
+        .scrollIndicators(.hidden)
         .navigationTitle("Goals")
         .task {
-            guard case .loading = state else { return }
-            await load()
+            await viewModel.load(using: container.goalsService)
         }
     }
 
-    private func load() async {
-        do {
-            state = .loaded(try await container.goalsService.loadGoalsDashboard())
-        } catch {
-            state = .failed("Unable to load Goals: \(error.localizedDescription)")
+    private func emptyMessage(for filter: GoalsFilter, fallback: String) -> String {
+        switch filter {
+        case .active:
+            fallback
+        case .onHold:
+            return "Nothing is paused right now. Ambitions can stay focused on what is actually in motion."
+        case .achieved:
+            return "Completed goals will collect here once the current wave closes cleanly."
         }
-    }
-
-    private func handleAction(_ action: WidgetAction) {
-        Task {
-            await container.actionRouter.handle(action)
-        }
-    }
-
-    private func goalsViewModel(_ dashboard: GoalsDashboard) -> GoalsListWidgetViewModel {
-        GoalsListWidgetViewModel(
-            snapshot: WidgetSnapshot(
-                metadata: WidgetMetadata(
-                    identity: WidgetIdentity(family: .goalsList, instanceID: "primary"),
-                    priority: .hero,
-                    variant: .expanded,
-                    chrome: .appCard,
-                    supportedActions: [.openDetail, .refinePlan]
-                ),
-                state: .ready(
-                    GoalsListContent(
-                        title: dashboard.title,
-                        subtitle: dashboard.subtitle,
-                        goals: dashboard.goals.map {
-                            GoalsListItem(
-                                id: $0.id,
-                                title: $0.title,
-                                subtitle: $0.subtitle,
-                                progressLabel: $0.progressLabel,
-                                statusLabel: $0.statusLabel
-                            )
-                        },
-                        actions: [
-                            WidgetInlineActionDescriptor(kind: .refinePlan, title: "Refine", icon: "slider.horizontal.3"),
-                            WidgetInlineActionDescriptor(kind: .openDetail, title: "Review", icon: "arrow.right.circle")
-                        ]
-                    )
-                )
-            )
-        )
-    }
-
-    private func milestoneViewModel(_ dashboard: GoalsDashboard) -> MilestonePromptWidgetViewModel {
-        MilestonePromptWidgetViewModel(
-            snapshot: WidgetSnapshot(
-                metadata: WidgetMetadata(
-                    identity: WidgetIdentity(family: .milestonePrompt, instanceID: "primary"),
-                    priority: .high,
-                    variant: .expanded,
-                    chrome: .heroCard,
-                    supportedActions: [.openDetail]
-                ),
-                state: .ready(
-                    MilestonePromptContent(
-                        title: dashboard.milestone.title,
-                        subtitle: dashboard.milestone.subtitle,
-                        prompt: dashboard.milestone.prompt,
-                        confidenceLabel: dashboard.milestone.confidenceLabel,
-                        actions: [
-                            WidgetInlineActionDescriptor(kind: .openDetail, title: "Promote milestone", icon: "flag.checkered")
-                        ]
-                    )
-                )
-            )
-        )
     }
 }
 
-#Preview("Goals") {
+#Preview("Goals Overview") {
     NavigationStack {
-        GoalsScreen()
+        GoalsScreen(viewModel: GoalsViewModel(state: .loaded(PreviewGoalsScenarios.overview)))
     }
     .appContainer(PreviewAppContainerFactory.preview)
     .ambitionTheme(.dark)

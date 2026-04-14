@@ -3,17 +3,17 @@ import SwiftUI
 
 struct AmbitionsRootView: View {
     private let container: AppContainer
-    @State private var selectedTab: AppTab
+    @State private var navigation: AppNavigationModel
 
     init(container: AppContainer) {
         self.container = container
-        _selectedTab = State(initialValue: container.session.initialTab)
+        _navigation = State(initialValue: container.navigation)
     }
 
     var body: some View {
-        TabView(selection: $selectedTab) {
+        TabView(selection: $navigation.selectedTab) {
             tabNavigation(tab: .today) { TodayScreen() }
-            tabNavigation(tab: .goals) { GoalsScreen() }
+            goalsNavigation()
             tabNavigation(tab: .habits) { HabitsScreen() }
             tabNavigation(tab: .insights) { InsightsScreen() }
             tabNavigation(tab: .profile) { ProfileScreen() }
@@ -29,6 +29,19 @@ struct AmbitionsRootView: View {
         .tag(tab)
         .tabItem {
             Label(tab.title, systemImage: tab.systemImage)
+        }
+    }
+
+    private func goalsNavigation() -> some View {
+        NavigationStack(path: $navigation.goalsPath) {
+            GoalsScreen()
+                .navigationDestination(for: GoalRouteTarget.self) { target in
+                    GoalDetailScreen(target: target)
+                }
+        }
+        .tag(AppTab.goals)
+        .tabItem {
+            Label(AppTab.goals.title, systemImage: AppTab.goals.systemImage)
         }
     }
 }

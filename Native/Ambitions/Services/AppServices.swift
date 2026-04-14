@@ -11,7 +11,9 @@ protocol TodayServicing: Sendable {
 }
 
 protocol GoalsServicing: Sendable {
-    func loadGoalsDashboard() async throws -> GoalsDashboard
+    func loadOverview() async throws -> GoalsOverview
+    func loadDetail(target: GoalRouteTarget) async throws -> GoalDetailPresentation
+    func performAction(_ request: GoalDetailActionRequest, now: Date) async throws -> GoalDetailActionResponse
 }
 
 protocol HabitsServicing: Sendable {
@@ -53,43 +55,6 @@ struct DefaultStartupService: StartupServicing {
                 : "Live bootstrap is persistence-backed and seeded with native demo content until real user data replaces it."
         )
     }
-}
-
-struct RepositoryBackedGoalsService: GoalsServicing {
-    let goalRepository: any GoalRepository
-
-    func loadGoalsDashboard() async throws -> GoalsDashboard {
-        let goals = try await goalRepository.listGoals()
-        let summaries = goals.map { goal in
-            let stepCount = goal.plan?.sections.flatMap(\.steps).count ?? 0
-            let completedCount = goal.plan?.sections.flatMap(\.steps).filter { $0.state == .completed }.count ?? 0
-            return GoalSummary(
-                id: goal.id,
-                title: goal.title,
-                subtitle: goal.summary ?? goal.mode.rawValue.replacingOccurrences(of: "_", with: " "),
-                progressLabel: stepCount == 0 ? "Draft" : "\(completedCount)/\(stepCount) steps",
-                statusLabel: goal.state.rawValue.capitalized
-            )
-        }
-
-        let milestoneGoal = goals.first
-        return GoalsDashboard(
-            title: "Active ambitions",
-            subtitle: "Native persistence is now the source of truth for goal records and plan state.",
-            goals: summaries,
-            milestone: MilestonePrompt(
-                title: milestoneGoal?.title ?? "No goals yet",
-                subtitle: milestoneGoal?.summary ?? "The store is ready for the first real Today/Goals vertical slice.",
-                prompt: milestoneGoal?.plan?.sections.first?.steps.first?.title ?? "Seed or import a goal to populate the first native detail flow.",
-                confidenceLabel: milestoneGoal == nil ? "Ready for import" : "Persistence-backed"
-            )
-        )
-    }
-}
-
-struct StubGoalsService: GoalsServicing {
-    let fixtures: PreviewFixtures
-    func loadGoalsDashboard() async throws -> GoalsDashboard { fixtures.goalsDashboard }
 }
 
 struct StubHabitsService: HabitsServicing {

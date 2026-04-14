@@ -79,6 +79,15 @@ struct TodayScreen: View {
     }
 
     private func handleAction(_ action: TodayInlineAction) {
+        if action.kind == .openDetail || action.kind == .askForHelp {
+            container.navigation.openGoalDetail(
+                goalID: action.target.goalID,
+                draftID: action.target.draftID,
+                launchContext: action.kind == .askForHelp ? .help : .standard
+            )
+            return
+        }
+
         Task {
             if action.kind == .dismissCelebration {
                 viewModel.transientMessage = nil
