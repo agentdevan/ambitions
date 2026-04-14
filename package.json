@@ -9,6 +9,7 @@
     "web": "expo start --web",
     "typecheck": "tsc --noEmit",
     "auth:qa": "node scripts/auth_qa_plan.mjs",
+    "validate:android:native": "node scripts/verify_android_build.mjs",
     "validate:native": "npm run typecheck && npx expo export --platform ios && npx expo export --platform android",
     "validate:web": "npx expo export --platform web"
   },
@@ -25,7 +26,6 @@
     "expo-apple-authentication": "~8.0.8",
     "expo-blur": "~15.0.8",
     "expo-calendar": "~15.0.8",
-    "expo-dev-client": "~6.0.20",
     "expo-font": "~14.0.11",
     "expo-linear-gradient": "~15.0.8",
     "expo-network": "^55.0.13",
