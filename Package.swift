@@ -11,12 +11,21 @@ let package = Package(
         .library(
             name: "AmbitionsDesignSystem",
             targets: ["AmbitionsDesignSystem"]
+        ),
+        .library(
+            name: "AmbitionsWidgetUI",
+            targets: ["AmbitionsWidgetUI"]
         )
     ],
     targets: [
         .target(
             name: "AmbitionsDesignSystem",
             path: "Sources"
+        ),
+        .target(
+            name: "AmbitionsWidgetUI",
+            dependencies: ["AmbitionsDesignSystem"],
+            path: "AppUI/Sources"
         )
     ]
 )
