@@ -1,7 +1,12 @@
+import AmbitionsDesignSystem
 import Foundation
 
 enum PreviewAppContainerFactory {
     static var preview: AppContainer {
+        preview(todayExperience: PreviewTodayScenarios.seeded)
+    }
+
+    static func preview(todayExperience: TodayExperience) -> AppContainer {
         let fixtures = PreviewFixtures.default
         return AppContainer(
             session: AppSession(
@@ -12,7 +17,7 @@ enum PreviewAppContainerFactory {
                 startupNote: "Preview bootstrap uses isolated in-memory fixtures."
             ),
             theme: .dark,
-            todayService: StubTodayService(fixtures: fixtures),
+            todayService: StubTodayService(experience: todayExperience),
             goalsService: StubGoalsService(fixtures: fixtures),
             habitsService: StubHabitsService(fixtures: fixtures),
             insightsService: StubInsightsService(fixtures: fixtures),

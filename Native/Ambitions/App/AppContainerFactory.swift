@@ -15,7 +15,7 @@ enum AppContainerFactory {
         return AppContainer(
             session: session,
             theme: .dark,
-            todayService: RepositoryBackedTodayService(goalRepository: repositories.goals),
+            todayService: RepositoryBackedTodayService(repositories: repositories),
             goalsService: RepositoryBackedGoalsService(goalRepository: repositories.goals),
             habitsService: StubHabitsService(fixtures: fixtures),
             insightsService: StubInsightsService(fixtures: fixtures),

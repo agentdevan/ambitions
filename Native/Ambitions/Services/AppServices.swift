@@ -6,7 +6,8 @@ protocol StartupServicing: Sendable {
 }
 
 protocol TodayServicing: Sendable {
-    func loadTodayDashboard() async throws -> TodayDashboard
+    func loadTodayExperience(userDisplayName: String, now: Date) async throws -> TodayExperience
+    func performAction(_ action: TodayInlineAction, now: Date) async throws -> TodayActionResponse
 }
 
 protocol GoalsServicing: Sendable {
@@ -84,59 +85,6 @@ struct RepositoryBackedGoalsService: GoalsServicing {
             )
         )
     }
-}
-
-struct RepositoryBackedTodayService: TodayServicing {
-    let goalRepository: any GoalRepository
-
-    func loadTodayDashboard() async throws -> TodayDashboard {
-        let goals = try await goalRepository.listGoals()
-        let steps = try await goalRepository.listActionableSteps()
-        let topSteps = Array(steps.prefix(3))
-        let primaryGoal = goals.first
-        let completion = goals.reduce(into: (done: 0, total: 0)) { partial, goal in
-            let goalSteps = goal.plan?.sections.flatMap(\.steps) ?? []
-            partial.total += goalSteps.count
-            partial.done += goalSteps.filter { $0.state == .completed }.count
-        }
-
-        return TodayDashboard(
-            title: primaryGoal?.title ?? "Today is ready",
-            subtitle: "The widget shell is still placeholder UI, but it now reads from the real native store.",
-            completionLabel: completion.total == 0 ? "No stored steps yet" : "\(Int((Double(completion.done) / Double(max(completion.total, 1))) * 100))% aligned",
-            targets: topSteps.enumerated().map { index, step in
-                DashboardProgressItem(
-                    id: step.id,
-                    title: step.title,
-                    detail: step.summary,
-                    progress: index == 0 ? 0.72 : 0.48,
-                    trailingValue: step.timing.targetBy ?? step.timing.dueAt ?? step.timing.suggestedNextAt,
-                    statusLabel: step.state.rawValue.capitalized
-                )
-            },
-            focus: FocusSession(
-                headline: topSteps.first?.title ?? "Persistence foundation in place",
-                subtitle: primaryGoal?.title ?? "The next native Today implementation can now query real goals, plans, steps, evidence, and feedback.",
-                reason: primaryGoal?.summary ?? "Storage now preserves starter-plan and blocked-draft state instead of relying on in-memory fixtures.",
-                durationLabel: "25 min block",
-                energyLabel: "Deliberate",
-                progress: topSteps.isEmpty ? 0.0 : 0.64,
-                supportSteps: topSteps.map(\.title).isEmpty ? ["Import or seed a goal to generate a real Today queue."] : topSteps.map(\.title)
-            ),
-            freeTime: FreeTimeSuggestion(
-                title: "Storage is ready",
-                subtitle: "Today can move from stubbed widgets to real plan selection next.",
-                windowLabel: "Native query path",
-                suggestionTitle: "Wire Today against actionable steps",
-                suggestionDetail: "The repository now exposes persisted steps and goal state without depending on the Expo runtime."
-            )
-        )
-    }
-}
-
-struct StubTodayService: TodayServicing {
-    let fixtures: PreviewFixtures
-    func loadTodayDashboard() async throws -> TodayDashboard { fixtures.todayDashboard }
 }
 
 struct StubGoalsService: GoalsServicing {

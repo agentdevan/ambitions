@@ -1,153 +1,137 @@
 import AmbitionsDesignSystem
-import AmbitionsWidgetUI
 import SwiftUI
 
 struct TodayScreen: View {
     @Environment(\.appContainer) private var container
-    @State private var state: AsyncViewState<TodayDashboard> = .loading
+    @Environment(\.ambitionTheme) private var theme
+    @State private var viewModel: TodayViewModel
+    @State private var dailyTargetsExpanded = true
+    @State private var reflectionExpanded = false
+
+    private let autoLoad: Bool
+
+    init(viewModel: TodayViewModel = TodayViewModel(), autoLoad: Bool = true) {
+        _viewModel = State(initialValue: viewModel)
+        self.autoLoad = autoLoad
+    }
 
     var body: some View {
-        FeatureScaffoldView(
-            title: "Today",
-            subtitle: "Native-first orchestration for the day, using WidgetUI surfaces as the first production shell."
-        ) {
-            switch state {
-            case .loading:
-                ProgressView("Loading today")
-                    .frame(maxWidth: .infinity, alignment: .leading)
-            case let .failed(message):
-                Text(message)
-                    .foregroundStyle(.secondary)
-            case let .loaded(dashboard):
-                WidgetFeed(items: [
-                    WidgetFeedItem(id: "today-targets", priority: .hero, variant: .expanded) {
-                        DailyTargetsWidget(viewModel: dailyTargetsViewModel(dashboard), onAction: handleAction)
-                    },
-                    WidgetFeedItem(id: "today-focus", priority: .high, variant: .expanded) {
-                        FocusNowWidget(viewModel: focusViewModel(dashboard), onAction: handleAction)
-                    },
-                    WidgetFeedItem(id: "today-free-time", priority: .standard, variant: .compact) {
-                        FreeTimeWidget(viewModel: freeTimeViewModel(dashboard), onAction: handleAction)
+        ZStack {
+            TodayBackgroundView()
+
+            ScrollView {
+                VStack(alignment: .leading, spacing: theme.spacing.lg) {
+                    switch viewModel.state {
+                    case .loading:
+                        LoadingSkeletonCard(lineCount: 6)
+                    case let .failed(message):
+                        EmptyStateCard(
+                            title: "Today is unavailable",
+                            message: message,
+                            icon: "exclamationmark.triangle",
+                            actionTitle: "Retry"
+                        ) {
+                            Task {
+                                await viewModel.refresh(using: container.todayService, userDisplayName: container.session.userDisplayName)
+                            }
+                        }
+                    case let .loaded(experience):
+                        TodayHeaderCard(header: experience.header)
+
+                        if let transientMessage = viewModel.transientMessage {
+                            TodayMessageCard(message: transientMessage)
+                        }
+
+                        TodayDailyTargetsCard(
+                            state: experience.dailyTargets,
+                            expanded: dailyTargetsExpanded,
+                            toggleExpanded: { dailyTargetsExpanded.toggle() },
+                            onAction: handleAction
+                        )
+                        TodayFocusCard(state: experience.focus, onAction: handleAction)
+                        TodayFreeTimeCard(state: experience.freeTime, onAction: handleAction)
+                        TodayMilestoneCard(state: experience.milestone, onAction: handleAction)
+                        TodayMomentumCard(state: experience.momentum)
+
+                        if let celebration = experience.celebration {
+                            TodayCelebrationCard(state: celebration, onAction: handleAction)
+                        }
+
+                        TodayQuickCaptureCard(state: experience.quickCapture, onAction: handleAction)
+                        TodayReflectionCard(
+                            state: experience.reflection,
+                            expanded: reflectionExpanded,
+                            toggleExpanded: { reflectionExpanded.toggle() },
+                            onAction: handleAction
+                        )
                     }
-                ])
+                }
+                .padding(.horizontal, theme.spacing.lg)
+                .padding(.vertical, theme.spacing.md)
             }
+            .scrollIndicators(.hidden)
         }
         .navigationTitle("Today")
         .task {
-            guard case .loading = state else { return }
-            await load()
+            guard autoLoad else { return }
+            await viewModel.load(using: container.todayService, userDisplayName: container.session.userDisplayName)
         }
     }
 
-    private func load() async {
-        do {
-            state = .loaded(try await container.todayService.loadTodayDashboard())
-        } catch {
-            state = .failed("Unable to load Today: \(error.localizedDescription)")
-        }
-    }
-
-    private func handleAction(_ action: WidgetAction) {
+    private func handleAction(_ action: TodayInlineAction) {
         Task {
-            await container.actionRouter.handle(action)
+            if action.kind == .dismissCelebration {
+                viewModel.transientMessage = nil
+            }
+            await viewModel.handle(action, using: container.todayService, userDisplayName: container.session.userDisplayName)
         }
-    }
-
-    private func dailyTargetsViewModel(_ dashboard: TodayDashboard) -> DailyTargetsWidgetViewModel {
-        DailyTargetsWidgetViewModel(
-            snapshot: WidgetSnapshot(
-                metadata: WidgetMetadata(
-                    identity: WidgetIdentity(family: .dailyTargets, instanceID: "primary"),
-                    priority: .hero,
-                    variant: .expanded,
-                    chrome: .appCard,
-                    supportedActions: [.complete, .refinePlan, .openDetail]
-                ),
-                state: .ready(
-                    DailyTargetsContent(
-                        title: dashboard.title,
-                        subtitle: dashboard.subtitle,
-                        completionLabel: dashboard.completionLabel,
-                        targets: dashboard.targets.map {
-                            WidgetProgressItem(
-                                id: $0.id,
-                                title: $0.title,
-                                detail: $0.detail,
-                                progress: $0.progress,
-                                trailingValue: $0.trailingValue,
-                                statusLabel: $0.statusLabel
-                            )
-                        },
-                        actions: [
-                            WidgetInlineActionDescriptor(kind: .complete, title: "Lock focus", icon: "checkmark"),
-                            WidgetInlineActionDescriptor(kind: .refinePlan, title: "Adjust plan", icon: "slider.horizontal.3")
-                        ]
-                    )
-                )
-            )
-        )
-    }
-
-    private func focusViewModel(_ dashboard: TodayDashboard) -> FocusNowWidgetViewModel {
-        FocusNowWidgetViewModel(
-            snapshot: WidgetSnapshot(
-                metadata: WidgetMetadata(
-                    identity: WidgetIdentity(family: .focusNow, instanceID: "primary"),
-                    priority: .high,
-                    variant: .expanded,
-                    chrome: .heroCard,
-                    supportedActions: [.askForSmallerStep, .openDetail]
-                ),
-                state: .ready(
-                    FocusNowContent(
-                        headline: dashboard.focus.headline,
-                        subtitle: dashboard.focus.subtitle,
-                        reason: dashboard.focus.reason,
-                        duration: dashboard.focus.durationLabel,
-                        energyLabel: dashboard.focus.energyLabel,
-                        progress: dashboard.focus.progress,
-                        supportSteps: dashboard.focus.supportSteps,
-                        actions: [
-                            WidgetInlineActionDescriptor(kind: .askForSmallerStep, title: "Smaller step", icon: "scissors"),
-                            WidgetInlineActionDescriptor(kind: .openDetail, title: "Open detail", icon: "arrow.right.circle")
-                        ]
-                    )
-                )
-            )
-        )
-    }
-
-    private func freeTimeViewModel(_ dashboard: TodayDashboard) -> FreeTimeWidgetViewModel {
-        FreeTimeWidgetViewModel(
-            snapshot: WidgetSnapshot(
-                metadata: WidgetMetadata(
-                    identity: WidgetIdentity(family: .freeTime, instanceID: "primary"),
-                    priority: .standard,
-                    variant: .compact,
-                    chrome: .widgetCard,
-                    supportedActions: [.openDetail]
-                ),
-                state: .ready(
-                    FreeTimeContent(
-                        title: dashboard.freeTime.title,
-                        subtitle: dashboard.freeTime.subtitle,
-                        availableWindow: dashboard.freeTime.windowLabel,
-                        suggestionTitle: dashboard.freeTime.suggestionTitle,
-                        suggestionDetail: dashboard.freeTime.suggestionDetail,
-                        actions: [
-                            WidgetInlineActionDescriptor(kind: .openDetail, title: "Use window", icon: "clock.badge.plus")
-                        ]
-                    )
-                )
-            )
-        )
     }
 }
 
-#Preview("Today") {
+#Preview("Today Seeded") {
     NavigationStack {
-        TodayScreen()
+        TodayScreen(viewModel: TodayViewModel(state: .loaded(PreviewTodayScenarios.seeded)), autoLoad: false)
     }
-    .appContainer(PreviewAppContainerFactory.preview)
+    .appContainer(PreviewAppContainerFactory.preview(todayExperience: PreviewTodayScenarios.seeded))
+    .ambitionTheme(.dark)
+}
+
+#Preview("Today Empty") {
+    NavigationStack {
+        TodayScreen(viewModel: TodayViewModel(state: .loaded(PreviewTodayScenarios.empty)), autoLoad: false)
+    }
+    .appContainer(PreviewAppContainerFactory.preview(todayExperience: PreviewTodayScenarios.empty))
+    .ambitionTheme(.dark)
+}
+
+#Preview("Today Starter") {
+    NavigationStack {
+        TodayScreen(viewModel: TodayViewModel(state: .loaded(PreviewTodayScenarios.starter)), autoLoad: false)
+    }
+    .appContainer(PreviewAppContainerFactory.preview(todayExperience: PreviewTodayScenarios.starter))
+    .ambitionTheme(.dark)
+}
+
+#Preview("Today Clarification") {
+    NavigationStack {
+        TodayScreen(viewModel: TodayViewModel(state: .loaded(PreviewTodayScenarios.clarification)), autoLoad: false)
+    }
+    .appContainer(PreviewAppContainerFactory.preview(todayExperience: PreviewTodayScenarios.clarification))
+    .ambitionTheme(.dark)
+}
+
+#Preview("Today Blocked") {
+    NavigationStack {
+        TodayScreen(viewModel: TodayViewModel(state: .loaded(PreviewTodayScenarios.blocked)), autoLoad: false)
+    }
+    .appContainer(PreviewAppContainerFactory.preview(todayExperience: PreviewTodayScenarios.blocked))
+    .ambitionTheme(.dark)
+}
+
+#Preview("Today Loading") {
+    NavigationStack {
+        TodayScreen(viewModel: TodayViewModel(state: .loading), autoLoad: false)
+    }
+    .appContainer(PreviewAppContainerFactory.preview(todayExperience: PreviewTodayScenarios.seeded))
     .ambitionTheme(.dark)
 }
