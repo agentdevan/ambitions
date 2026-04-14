@@ -1,136 +1,138 @@
 import AmbitionsDesignSystem
-import AmbitionsWidgetUI
 import SwiftUI
 
 struct HabitsScreen: View {
     @Environment(\.appContainer) private var container
-    @State private var state: AsyncViewState<HabitsDashboard> = .loading
+    @Environment(\.ambitionTheme) private var theme
+    @State private var viewModel: HabitsViewModel
+
+    init(viewModel: HabitsViewModel = HabitsViewModel()) {
+        _viewModel = State(initialValue: viewModel)
+    }
 
     var body: some View {
-        FeatureScaffoldView(
-            title: "Habits",
-            subtitle: "These loops are placeholder-backed today, but the surface contract is native and production-oriented."
-        ) {
-            switch state {
-            case .loading:
-                ProgressView("Loading habits")
-                    .frame(maxWidth: .infinity, alignment: .leading)
-            case let .failed(message):
-                Text(message)
-                    .foregroundStyle(.secondary)
-            case let .loaded(dashboard):
-                WidgetFeed(items: [
-                    WidgetFeedItem(id: "habit-summary", priority: .hero, variant: .expanded) {
-                        HabitSummaryWidget(viewModel: habitsViewModel(dashboard), onAction: handleAction)
-                    },
-                    WidgetFeedItem(id: "habit-streak", priority: .high, variant: .compact) {
-                        StreakWidget(viewModel: streakViewModel(dashboard), onAction: handleAction)
+        ScrollView {
+            VStack(alignment: .leading, spacing: theme.spacing.lg) {
+                switch viewModel.state {
+                case .loading:
+                    HabitsHeroCard(dashboard: PreviewHabitsScenarios.seeded)
+                    LoadingSkeletonCard(lineCount: 10)
+                case let .failed(message):
+                    EmptyStateCard(
+                        title: "Habits are unavailable",
+                        message: message,
+                        icon: "exclamationmark.triangle",
+                        actionTitle: "Retry"
+                    ) {
+                        Task { await viewModel.refresh(using: container.habitsService) }
                     }
-                ])
+                case let .loaded(dashboard):
+                    HabitsHeroCard(dashboard: dashboard)
+
+                    if let inlineMessage = viewModel.inlineMessage {
+                        TodayMessageCard(
+                            message: TodayInlineMessage(
+                                title: inlineMessage.title,
+                                body: inlineMessage.body,
+                                state: inlineMessage.state
+                            )
+                        )
+                    }
+
+                    if let emptyTitle = dashboard.emptyTitle, let emptyMessage = dashboard.emptyMessage {
+                        EmptyStateCard(title: emptyTitle, message: emptyMessage, icon: "repeat")
+                    } else {
+                        if !dashboard.habits.isEmpty {
+                            habitsSection(
+                                title: "Today",
+                                subtitle: "Fast logging keeps recurring behavior lightweight enough to use every day.",
+                                habits: dashboard.habits
+                            )
+                        }
+
+                        if !dashboard.recoveryHabits.isEmpty {
+                            habitsSection(
+                                title: "Recovery",
+                                subtitle: "These loops need a gentler restart, a smaller version, or a habit-plan correction.",
+                                habits: dashboard.recoveryHabits
+                            )
+                        }
+                    }
+
+                    HabitsRecoveryCard(streak: dashboard.streak)
+
+                    AppCard {
+                        SectionHeader(title: dashboard.guidanceTitle, subtitle: dashboard.guidanceBody)
+                    }
+                }
             }
+            .padding(.horizontal, theme.spacing.lg)
+            .padding(.vertical, theme.spacing.md)
         }
+        .scrollIndicators(.hidden)
         .navigationTitle("Habits")
         .task {
-            guard case .loading = state else { return }
-            await load()
+            await viewModel.load(using: container.habitsService)
         }
     }
 
-    private func load() async {
-        do {
-            state = .loaded(try await container.habitsService.loadHabitsDashboard())
-        } catch {
-            state = .failed("Unable to load Habits: \(error.localizedDescription)")
+    private func habitsSection(title: String, subtitle: String, habits: [HabitSummary]) -> some View {
+        AppCard {
+            VStack(alignment: .leading, spacing: theme.spacing.md) {
+                SectionHeader(title: title, subtitle: subtitle)
+                VStack(alignment: .leading, spacing: theme.spacing.sm) {
+                    ForEach(habits) { habit in
+                        HabitRowCard(habit: habit, onAction: handleAction)
+                    }
+                }
+            }
         }
     }
 
-    private func handleAction(_ action: WidgetAction) {
+    private func handleAction(_ action: HabitActionState) {
+        if action.kind == .openDetail {
+            container.navigation.openGoalDetail(
+                goalID: action.target.goalID,
+                draftID: action.target.draftID,
+                launchContext: .standard
+            )
+            return
+        }
+
         Task {
-            await container.actionRouter.handle(action)
+            await viewModel.perform(action, using: container.habitsService)
         }
-    }
-
-    private func habitsViewModel(_ dashboard: HabitsDashboard) -> HabitSummaryWidgetViewModel {
-        HabitSummaryWidgetViewModel(
-            snapshot: WidgetSnapshot(
-                metadata: WidgetMetadata(
-                    identity: WidgetIdentity(family: .habitSummary, instanceID: "primary"),
-                    priority: .hero,
-                    variant: .expanded,
-                    chrome: .appCard,
-                    supportedActions: [.quickLog, .openDetail]
-                ),
-                state: .ready(
-                    HabitSummaryContent(
-                        title: dashboard.title,
-                        subtitle: dashboard.subtitle,
-                        stats: dashboard.stats.map {
-                            WidgetStat(
-                                id: $0.id,
-                                title: $0.title,
-                                value: $0.value,
-                                detail: $0.detail,
-                                icon: $0.icon
-                            )
-                        },
-                        habits: dashboard.habits.map {
-                            WidgetProgressItem(
-                                id: $0.id,
-                                title: $0.title,
-                                detail: $0.detail,
-                                progress: $0.progress,
-                                trailingValue: $0.trailingValue,
-                                statusLabel: $0.statusLabel
-                            )
-                        },
-                        actions: [
-                            WidgetInlineActionDescriptor(kind: .quickLog, title: "Quick log", icon: "checkmark.circle"),
-                            WidgetInlineActionDescriptor(kind: .openDetail, title: "Open habits", icon: "list.bullet")
-                        ]
-                    )
-                )
-            )
-        )
-    }
-
-    private func streakViewModel(_ dashboard: HabitsDashboard) -> StreakWidgetViewModel {
-        StreakWidgetViewModel(
-            snapshot: WidgetSnapshot(
-                metadata: WidgetMetadata(
-                    identity: WidgetIdentity(family: .streak, instanceID: "primary"),
-                    priority: .high,
-                    variant: .compact,
-                    chrome: .widgetCard,
-                    supportedActions: [.quickLog]
-                ),
-                state: .ready(
-                    StreakContent(
-                        title: dashboard.streak.title,
-                        subtitle: dashboard.streak.subtitle,
-                        stats: dashboard.streak.stats.map {
-                            WidgetStat(
-                                id: $0.id,
-                                title: $0.title,
-                                value: $0.value,
-                                detail: $0.detail,
-                                icon: $0.icon
-                            )
-                        },
-                        recoveryNote: dashboard.streak.recoveryNote,
-                        actions: [
-                            WidgetInlineActionDescriptor(kind: .quickLog, title: "Protect streak", icon: "flame")
-                        ]
-                    )
-                )
-            )
-        )
     }
 }
 
-#Preview("Habits") {
+#Preview("Habits Active") {
     NavigationStack {
-        HabitsScreen()
+        HabitsScreen(viewModel: HabitsViewModel(state: .loaded(PreviewHabitsScenarios.active)))
     }
-    .appContainer(PreviewAppContainerFactory.preview)
+    .appContainer(PreviewAppContainerFactory.preview(habitsDashboard: PreviewHabitsScenarios.active))
+    .ambitionTheme(.dark)
+}
+
+#Preview("Habits Recovery") {
+    NavigationStack {
+        HabitsScreen(viewModel: HabitsViewModel(state: .loaded(PreviewHabitsScenarios.recovery)))
+    }
+    .appContainer(PreviewAppContainerFactory.preview(habitsDashboard: PreviewHabitsScenarios.recovery))
+    .ambitionTheme(.dark)
+}
+
+#Preview("Habits Empty") {
+    NavigationStack {
+        HabitsScreen(viewModel: HabitsViewModel(state: .loaded(PreviewHabitsScenarios.empty)))
+    }
+    .appContainer(PreviewAppContainerFactory.preview(habitsDashboard: PreviewHabitsScenarios.empty))
+    .ambitionTheme(.dark)
+}
+
+#Preview("Habits Seeded") {
+    NavigationStack {
+        HabitsScreen(viewModel: HabitsViewModel(state: .loaded(PreviewHabitsScenarios.seeded)))
+    }
+    .appContainer(PreviewAppContainerFactory.preview(habitsDashboard: PreviewHabitsScenarios.seeded))
     .ambitionTheme(.dark)
 }

@@ -502,29 +502,42 @@ private extension RepositoryBackedGoalsService {
                     note: "Completed from Goal Detail."
                 )
             ])
-            goal = update(goal: goal, stepID: selectedStep.id) { step in
-                Step(
-                    id: step.id,
-                    sectionID: step.sectionID,
-                    title: step.title,
-                    summary: step.summary,
-                    type: step.type,
-                    state: .completed,
-                    owner: step.owner,
-                    timing: step.timing,
-                    dependencyStepIDs: step.dependencyStepIDs,
-                    isOptional: step.isOptional,
-                    isRepeatable: step.isRepeatable,
-                    evidenceRequired: step.evidenceRequired,
-                    successSignals: step.successSignals,
-                    actionability: step.actionability
-                )
+            if HabitGoalSemantics.isHabitLike(goal: goal, step: selectedStep) {
+                let cadenceDays = HabitGoalSemantics.cadenceDays(goal: goal, step: selectedStep)
+                goal = update(goal: goal, stepID: selectedStep.id) { step in
+                    updatedStep(
+                        step,
+                        summary: step.summary ?? step.actionability.fallbackMicroStep,
+                        timing: HabitGoalSemantics.advancedTiming(from: step.timing, now: now, cadenceDays: cadenceDays)
+                    )
+                }
+            } else {
+                goal = update(goal: goal, stepID: selectedStep.id) { step in
+                    Step(
+                        id: step.id,
+                        sectionID: step.sectionID,
+                        title: step.title,
+                        summary: step.summary,
+                        type: step.type,
+                        state: .completed,
+                        owner: step.owner,
+                        timing: step.timing,
+                        dependencyStepIDs: step.dependencyStepIDs,
+                        isOptional: step.isOptional,
+                        isRepeatable: step.isRepeatable,
+                        evidenceRequired: step.evidenceRequired,
+                        successSignals: step.successSignals,
+                        actionability: step.actionability
+                    )
+                }
             }
             try await repositories.goals.saveGoals([goal])
             return GoalDetailActionResponse(
                 message: GoalDetailInlineMessage(
-                    title: "Completion recorded",
-                    body: "\"\(selectedStep.title)\" now lands in native evidence and plan history.",
+                    title: HabitGoalSemantics.isHabitLike(goal: goal, step: selectedStep) ? "Habit logged" : "Completion recorded",
+                    body: HabitGoalSemantics.isHabitLike(goal: goal, step: selectedStep)
+                        ? "\"\(selectedStep.title)\" now lands in native evidence while staying active as a recurring rhythm."
+                        : "\"\(selectedStep.title)\" now lands in native evidence and plan history.",
                     state: .success
                 )
             )

@@ -136,6 +136,7 @@ struct LegacyImportReport: Codable, Sendable, Equatable {
 
 protocol GoalRepository: Sendable {
     func listGoals() async throws -> [Goal]
+    func listHabitGoals() async throws -> [Goal]
     func goal(id: String) async throws -> Goal?
     func saveGoals(_ goals: [Goal]) async throws
     func deleteGoal(id: String) async throws

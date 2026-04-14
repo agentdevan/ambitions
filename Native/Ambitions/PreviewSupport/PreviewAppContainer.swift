@@ -3,10 +3,13 @@ import Foundation
 
 enum PreviewAppContainerFactory {
     static var preview: AppContainer {
-        preview(todayExperience: PreviewTodayScenarios.seeded)
+        preview(todayExperience: PreviewTodayScenarios.seeded, habitsDashboard: PreviewHabitsScenarios.seeded)
     }
 
-    static func preview(todayExperience: TodayExperience) -> AppContainer {
+    static func preview(
+        todayExperience: TodayExperience,
+        habitsDashboard: HabitsDashboard = PreviewHabitsScenarios.seeded
+    ) -> AppContainer {
         let fixtures = PreviewFixtures.default
         let navigation = AppNavigationModel(selectedTab: fixtures.preferences.preferredTab)
         return AppContainer(
@@ -21,7 +24,7 @@ enum PreviewAppContainerFactory {
             navigation: navigation,
             todayService: StubTodayService(experience: todayExperience),
             goalsService: StubGoalsService(),
-            habitsService: StubHabitsService(fixtures: fixtures),
+            habitsService: StubHabitsService(dashboard: habitsDashboard),
             insightsService: StubInsightsService(fixtures: fixtures),
             profileService: StubProfileService(fixtures: fixtures),
             actionRouter: DefaultAppActionRouter()

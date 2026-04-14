@@ -238,28 +238,52 @@ private extension RepositoryBackedTodayService {
                     note: "Completed from Today."
                 )
             ])
-            goal = update(goal: goal, stepID: stepID) { step in
-                Step(
-                    id: step.id,
-                    sectionID: step.sectionID,
-                    title: step.title,
-                    summary: step.summary,
-                    type: step.type,
-                    state: .completed,
-                    owner: step.owner,
-                    timing: step.timing,
-                    dependencyStepIDs: step.dependencyStepIDs,
-                    isOptional: step.isOptional,
-                    isRepeatable: step.isRepeatable,
-                    evidenceRequired: step.evidenceRequired,
-                    successSignals: step.successSignals,
-                    actionability: step.actionability
-                )
+            if HabitGoalSemantics.isHabitLike(goal: goal, step: selectedStep) {
+                let cadenceDays = HabitGoalSemantics.cadenceDays(goal: goal, step: selectedStep)
+                goal = update(goal: goal, stepID: stepID) { step in
+                    Step(
+                        id: step.id,
+                        sectionID: step.sectionID,
+                        title: step.title,
+                        summary: step.summary,
+                        type: step.type,
+                        state: step.state,
+                        owner: step.owner,
+                        timing: HabitGoalSemantics.advancedTiming(from: step.timing, now: now, cadenceDays: cadenceDays),
+                        dependencyStepIDs: step.dependencyStepIDs,
+                        isOptional: step.isOptional,
+                        isRepeatable: step.isRepeatable,
+                        evidenceRequired: step.evidenceRequired,
+                        successSignals: step.successSignals,
+                        actionability: step.actionability
+                    )
+                }
+            } else {
+                goal = update(goal: goal, stepID: stepID) { step in
+                    Step(
+                        id: step.id,
+                        sectionID: step.sectionID,
+                        title: step.title,
+                        summary: step.summary,
+                        type: step.type,
+                        state: .completed,
+                        owner: step.owner,
+                        timing: step.timing,
+                        dependencyStepIDs: step.dependencyStepIDs,
+                        isOptional: step.isOptional,
+                        isRepeatable: step.isRepeatable,
+                        evidenceRequired: step.evidenceRequired,
+                        successSignals: step.successSignals,
+                        actionability: step.actionability
+                    )
+                }
             }
             try await repositories.goals.saveGoals([goal])
             message = TodayInlineMessage(
-                title: "Completion recorded",
-                body: "\"\(selectedStep.title)\" is now reflected in native evidence and feedback.",
+                title: HabitGoalSemantics.isHabitLike(goal: goal, step: selectedStep) ? "Habit logged" : "Completion recorded",
+                body: HabitGoalSemantics.isHabitLike(goal: goal, step: selectedStep)
+                    ? "\"\(selectedStep.title)\" was recorded for today and kept alive as an ongoing rhythm."
+                    : "\"\(selectedStep.title)\" is now reflected in native evidence and feedback.",
                 state: .success
             )
         case .delay:
@@ -930,11 +954,16 @@ private extension RepositoryBackedTodayService {
         if goal.mode == .delegatedSupport {
             return "This move supports \(goal.actor.displayName) without turning the relationship into compliance work."
         }
+        if HabitGoalSemantics.isHabitLike(goal: goal, step: step) {
+            return "Consistency matters more than intensity here. A smaller clean repetition is better than a loud miss."
+        }
         return step.summary ?? goal.summary ?? "This is the cleanest next move from the current native plan."
     }
 
     func energyLabel(for mode: GoalMode) -> String {
         switch mode {
+        case .habit, .maintenance:
+            return "Steady"
         case .recovery:
             return "Gentle"
         case .delegatedSupport:
@@ -949,6 +978,9 @@ private extension RepositoryBackedTodayService {
     func supportingText(for goal: Goal, step: Step) -> [String] {
         var items = [timingLabel(for: step.timing, goalMode: goal.mode)]
         items.append(contentsOf: step.actionability.evidenceOfCompletion.prefix(2))
+        if HabitGoalSemantics.isHabitLike(goal: goal, step: step) {
+            items.append("Minimum version: \(step.actionability.fallbackMicroStep)")
+        }
         if goal.mode == .delegatedSupport {
             items.append("Keep the other person as the owner of execution.")
         }

@@ -58,30 +58,7 @@ struct PreviewFixtures: Sendable {
                 confidenceLabel: "Clear next step"
             )
         ),
-        habitsDashboard: HabitsDashboard(
-            title: "Habit systems",
-            subtitle: "A small set of repeatable loops is enough for the first native release.",
-            stats: [
-                MetricSummary(id: "habit-stat-1", title: "Consistency", value: "81%", detail: "Past 14 days", icon: "checkmark.seal"),
-                MetricSummary(id: "habit-stat-2", title: "Tracked habits", value: "6", detail: "Core loops", icon: "repeat"),
-                MetricSummary(id: "habit-stat-3", title: "Recovered slips", value: "4", detail: "This week", icon: "arrow.uturn.backward"),
-                MetricSummary(id: "habit-stat-4", title: "Best streak", value: "19", detail: "Days", icon: "flame")
-            ],
-            habits: [
-                HabitSummary(id: "habit-1", title: "Morning planning", detail: "10 minute alignment pass", progress: 0.9, trailingValue: "9/10", statusLabel: "Strong"),
-                HabitSummary(id: "habit-2", title: "Deep work block", detail: "One protected session", progress: 0.7, trailingValue: "5/7", statusLabel: "Stable"),
-                HabitSummary(id: "habit-3", title: "Evening review", detail: "Capture wins and misses", progress: 0.55, trailingValue: "4/7", statusLabel: "Recovering")
-            ],
-            streak: StreakSummary(
-                title: "Seven-day rebound",
-                subtitle: "Execution quality is rising again after the pivot decision.",
-                stats: [
-                    MetricSummary(id: "streak-1", title: "Current streak", value: "7", detail: "Days", icon: "flame.fill"),
-                    MetricSummary(id: "streak-2", title: "Best week", value: "5/5", detail: "Core loops", icon: "sparkles")
-                ],
-                recoveryNote: "The placeholder streak data is demo-backed, but the presentation contract is intended to survive the persistence swap."
-            )
-        ),
+        habitsDashboard: PreviewHabitsScenarios.seeded,
         insightsDashboard: InsightsDashboard(
             title: "Behavioral readout",
             subtitle: "Signals should eventually come from native persistence, not from the TS prototype runtime.",

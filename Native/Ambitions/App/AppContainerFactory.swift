@@ -19,7 +19,7 @@ enum AppContainerFactory {
             navigation: navigation,
             todayService: RepositoryBackedTodayService(repositories: repositories),
             goalsService: RepositoryBackedGoalsService(repositories: repositories),
-            habitsService: StubHabitsService(fixtures: fixtures),
+            habitsService: RepositoryBackedHabitsService(repositories: repositories),
             insightsService: StubInsightsService(fixtures: fixtures),
             profileService: StubProfileService(fixtures: fixtures),
             actionRouter: DefaultAppActionRouter()

@@ -17,7 +17,8 @@ protocol GoalsServicing: Sendable {
 }
 
 protocol HabitsServicing: Sendable {
-    func loadHabitsDashboard() async throws -> HabitsDashboard
+    func loadDashboard(now: Date) async throws -> HabitsDashboard
+    func performAction(_ request: HabitActionRequest, now: Date) async throws -> HabitActionResponse
 }
 
 protocol InsightsServicing: Sendable {
@@ -58,8 +59,24 @@ struct DefaultStartupService: StartupServicing {
 }
 
 struct StubHabitsService: HabitsServicing {
-    let fixtures: PreviewFixtures
-    func loadHabitsDashboard() async throws -> HabitsDashboard { fixtures.habitsDashboard }
+    let dashboard: HabitsDashboard
+    let actionResponse: HabitActionResponse?
+
+    init(dashboard: HabitsDashboard, actionResponse: HabitActionResponse? = nil) {
+        self.dashboard = dashboard
+        self.actionResponse = actionResponse
+    }
+
+    func loadDashboard(now: Date) async throws -> HabitsDashboard {
+        _ = now
+        return dashboard
+    }
+
+    func performAction(_ request: HabitActionRequest, now: Date) async throws -> HabitActionResponse {
+        _ = request
+        _ = now
+        return actionResponse ?? HabitActionResponse(message: nil)
+    }
 }
 
 struct StubInsightsService: InsightsServicing {

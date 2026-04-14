@@ -450,6 +450,15 @@ struct SwiftDataGoalRepository: GoalRepository {
         }
     }
 
+    func listHabitGoals() async throws -> [Goal] {
+        try await listGoals().filter { goal in
+            if [.habit, .maintenance, .recovery].contains(goal.mode) {
+                return true
+            }
+            return goal.timing.tempo == .ongoing && goal.state != .completed && goal.state != .archived
+        }
+    }
+
     func goal(id: String) async throws -> Goal? {
         try await listGoals().first(where: { $0.id == id })
     }
