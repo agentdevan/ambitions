@@ -39,12 +39,28 @@ targets:
         product: AmbitionsDesignSystem
       - package: AmbitionsPackages
         product: AmbitionsWidgetUI
+  AmbitionsTests:
+    type: bundle.unit-test
+    platform: iOS
+    deploymentTarget: "17.0"
+    sources:
+      - path: Native/AmbitionsTests
+        excludes:
+          - "**/*.md"
+    dependencies:
+      - target: Ambitions
 schemes:
   Ambitions:
     build:
       targets:
         Ambitions: all
+        AmbitionsTests: [test]
     run:
       config: Debug
     archive:
       config: Release
+    test:
+      config: Debug
+      gatherCoverageData: false
+      targets:
+        - name: AmbitionsTests
