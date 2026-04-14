@@ -16,4 +16,6 @@ export * from "./weekly";
 export * as GoalEngineCanonical from "./goalEngineContracts";
 export * as GoalEngineContracts from "./goalEngine";
 export * as GoalEngineFixtures from "./goalEngineFixtures";
+export * as GoalEngineIntake from "./goalEngineIntake";
+export * as GoalEngineIntakeFixtures from "./goalEngineIntakeFixtures";
 export * as GoalEngineMigration from "./goalEngineMigration";

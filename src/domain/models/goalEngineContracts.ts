@@ -10,6 +10,7 @@ export type { Task as LegacyTask } from "./planning";
 
 export * from "./goalEngine";
 export * from "./goalEngineSelectors";
+export * from "./goalEngineIntake";
 
 export type {
   Goal as EngineGoal,
