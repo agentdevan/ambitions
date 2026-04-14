@@ -27,7 +27,7 @@ enum PreviewAppContainerFactory {
             habitsService: StubHabitsService(dashboard: habitsDashboard),
             insightsService: StubInsightsService(fixtures: fixtures),
             profileService: StubProfileService(fixtures: fixtures),
-            actionRouter: DefaultAppActionRouter()
+            actionRouter: DefaultAppActionRouter(navigation: navigation)
         )
     }
 }

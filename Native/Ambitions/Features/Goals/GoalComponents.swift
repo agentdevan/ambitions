@@ -30,6 +30,7 @@ struct GoalsHeroCard: View {
                 }
             }
         }
+        .ambitionPanelAccessibility()
     }
 }
 
@@ -87,6 +88,7 @@ struct GoalRowCard: View {
         .padding(theme.spacing.md)
         .background(RoundedRectangle(cornerRadius: theme.radius.lg, style: .continuous).fill(theme.colors.surfaceOverlay))
         .overlay(RoundedRectangle(cornerRadius: theme.radius.lg, style: .continuous).stroke(theme.colors.strokeSubtle, lineWidth: 1))
+        .ambitionPanelAccessibility()
     }
 
     private func icon(for mode: GoalMode) -> String {
@@ -148,6 +150,7 @@ struct GoalDetailHeroCard: View {
                 }
             }
         }
+        .ambitionPanelAccessibility()
     }
 }
 
@@ -166,6 +169,7 @@ struct GoalActionGrid: View {
                     Label(action.title, systemImage: action.systemImage)
                         .font(theme.typography.caption)
                         .frame(maxWidth: .infinity)
+                        .frame(minHeight: 44)
                         .padding(.vertical, theme.spacing.xs)
                 }
                 .buttonStyle(AmbitionPressableButtonStyle(state: action.state))
@@ -194,5 +198,6 @@ struct GoalDetailSectionCard: View {
                 content
             }
         }
+        .ambitionPanelAccessibility()
     }
 }

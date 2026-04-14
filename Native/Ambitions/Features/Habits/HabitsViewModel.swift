@@ -9,6 +9,17 @@ final class HabitsViewModel {
 
     private var hasLoaded = false
 
+    var stateKey: String {
+        switch state {
+        case .loading:
+            return "loading"
+        case let .loaded(dashboard):
+            return "loaded:\(dashboard.mode.rawValue):\(dashboard.habits.count):\(dashboard.recoveryHabits.count)"
+        case let .failed(message):
+            return "failed:\(message)"
+        }
+    }
+
     init(
         state: AsyncViewState<HabitsDashboard> = .loading,
         inlineMessage: HabitInlineMessage? = nil

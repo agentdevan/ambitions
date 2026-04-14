@@ -4,6 +4,7 @@ import SwiftUI
 struct GoalDetailScreen: View {
     @Environment(\.appContainer) private var container
     @Environment(\.ambitionTheme) private var theme
+    @Environment(\.accessibilityReduceMotion) private var reduceMotion
     @State private var viewModel: GoalDetailViewModel
 
     init(target: GoalRouteTarget, viewModel: GoalDetailViewModel? = nil) {
@@ -12,7 +13,7 @@ struct GoalDetailScreen: View {
 
     var body: some View {
         ScrollView {
-            VStack(alignment: .leading, spacing: theme.spacing.lg) {
+            LazyVStack(alignment: .leading, spacing: theme.spacing.lg) {
                 switch viewModel.state {
                 case .loading:
                     LoadingSkeletonCard(lineCount: 10)
@@ -263,8 +264,14 @@ struct GoalDetailScreen: View {
             .padding(.vertical, theme.spacing.md)
         }
         .scrollIndicators(.hidden)
-        .navigationTitle("Goal Detail")
+        .refreshable {
+            await viewModel.refresh(using: container.goalsService)
+        }
+        .navigationTitle("Goal")
         .navigationBarTitleDisplayMode(.inline)
+        .animation(theme.motion.animation(reduceMotion: reduceMotion, emphasis: true), value: viewModel.stateKey)
+        .animation(theme.motion.animation(reduceMotion: reduceMotion), value: viewModel.inlineMessage?.title)
+        .animation(theme.motion.animation(reduceMotion: reduceMotion), value: viewModel.lens)
         .task {
             await viewModel.load(using: container.goalsService)
         }

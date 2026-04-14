@@ -4,35 +4,61 @@ import SwiftUI
 
 struct InsightsScreen: View {
     @Environment(\.appContainer) private var container
+    @Environment(\.ambitionTheme) private var theme
+    @Environment(\.accessibilityReduceMotion) private var reduceMotion
     @State private var state: AsyncViewState<InsightsDashboard> = .loading
 
     var body: some View {
         FeatureScaffoldView(
+            eyebrow: "Review",
             title: "Insights",
-            subtitle: "The screen shape is native now; the analytics backend still needs real persistence and event ingestion."
+            subtitle: "Review the patterns behind progress, drift, and useful adaptation without leaving the native planning surface."
         ) {
             switch state {
             case .loading:
-                ProgressView("Loading insights")
-                    .frame(maxWidth: .infinity, alignment: .leading)
+                LoadingSkeletonCard(lineCount: 8)
+                    .transition(.ambitionPanel)
             case let .failed(message):
-                Text(message)
-                    .foregroundStyle(.secondary)
+                EmptyStateCard(
+                    title: "Insights are unavailable",
+                    message: message,
+                    icon: "chart.line.uptrend.xyaxis",
+                    actionTitle: "Retry"
+                ) {
+                    Task { await load() }
+                }
+                .transition(.ambitionPanel)
             case let .loaded(dashboard):
-                WidgetFeed(items: [
-                    WidgetFeedItem(id: "insight-stats", priority: .hero, variant: .expanded) {
-                        InsightStatsWidget(viewModel: statsViewModel(dashboard), onAction: handleAction)
-                    },
-                    WidgetFeedItem(id: "insight-trend", priority: .high, variant: .expanded) {
-                        WeeklyTrendWidget(viewModel: trendViewModel(dashboard), onAction: handleAction)
-                    },
-                    WidgetFeedItem(id: "insight-activity", priority: .standard, variant: .expanded) {
-                        RecentActivityWidget(viewModel: activitiesViewModel(dashboard), onAction: handleAction)
+                VStack(alignment: .leading, spacing: theme.spacing.lg) {
+                    AppCard {
+                        SectionHeader(
+                            title: dashboard.title,
+                            subtitle: dashboard.summary
+                        ) {
+                            TagPill(dashboard.timeframeLabel, state: .selected)
+                        }
                     }
-                ])
+                    .transition(.ambitionPanel)
+
+                    WidgetFeed(items: [
+                        WidgetFeedItem(id: "insight-stats", priority: .hero, variant: .expanded) {
+                            InsightStatsWidget(viewModel: statsViewModel(dashboard))
+                        },
+                        WidgetFeedItem(id: "insight-trend", priority: .high, variant: .expanded) {
+                            WeeklyTrendWidget(viewModel: trendViewModel(dashboard))
+                        },
+                        WidgetFeedItem(id: "insight-activity", priority: .standard, variant: .expanded) {
+                            RecentActivityWidget(viewModel: activitiesViewModel(dashboard))
+                        }
+                    ])
+                }
             }
         }
         .navigationTitle("Insights")
+        .refreshable {
+            await load()
+        }
+        .animation(theme.motion.animation(reduceMotion: reduceMotion, emphasis: true), value: stateKey)
         .task {
             guard case .loading = state else { return }
             await load()
@@ -47,12 +73,6 @@ struct InsightsScreen: View {
         }
     }
 
-    private func handleAction(_ action: WidgetAction) {
-        Task {
-            await container.actionRouter.handle(action)
-        }
-    }
-
     private func statsViewModel(_ dashboard: InsightsDashboard) -> InsightStatsWidgetViewModel {
         InsightStatsWidgetViewModel(
             snapshot: WidgetSnapshot(
@@ -61,7 +81,7 @@ struct InsightsScreen: View {
                     priority: .hero,
                     variant: .expanded,
                     chrome: .appCard,
-                    supportedActions: [.openDetail]
+                    supportedActions: []
                 ),
                 state: .ready(
                     InsightStatsContent(
@@ -77,9 +97,7 @@ struct InsightsScreen: View {
                             )
                         },
                         summary: dashboard.summary,
-                        actions: [
-                            WidgetInlineActionDescriptor(kind: .openDetail, title: "Inspect drivers", icon: "magnifyingglass")
-                        ]
+                        actions: []
                     )
                 )
             )
@@ -94,7 +112,7 @@ struct InsightsScreen: View {
                     priority: .high,
                     variant: .expanded,
                     chrome: .appCard,
-                    supportedActions: [.openDetail]
+                    supportedActions: []
                 ),
                 state: .ready(
                     WeeklyTrendContent(
@@ -103,9 +121,7 @@ struct InsightsScreen: View {
                         timeframeLabel: dashboard.timeframeLabel,
                         points: dashboard.trendPoints.map { WidgetTrendPoint(id: $0.id, label: $0.label, value: $0.value) },
                         summary: dashboard.trendSummary,
-                        actions: [
-                            WidgetInlineActionDescriptor(kind: .openDetail, title: "Trend detail", icon: "chart.bar.xaxis")
-                        ]
+                        actions: []
                     )
                 )
             )
@@ -120,7 +136,7 @@ struct InsightsScreen: View {
                     priority: .standard,
                     variant: .expanded,
                     chrome: .appCard,
-                    supportedActions: [.openDetail]
+                    supportedActions: []
                 ),
                 state: .ready(
                     RecentActivityContent(
@@ -136,13 +152,22 @@ struct InsightsScreen: View {
                                 badge: $0.badge
                             )
                         },
-                        actions: [
-                            WidgetInlineActionDescriptor(kind: .openDetail, title: "Open history", icon: "clock.arrow.circlepath")
-                        ]
+                        actions: []
                     )
                 )
             )
         )
+    }
+
+    private var stateKey: String {
+        switch state {
+        case .loading:
+            return "loading"
+        case let .loaded(dashboard):
+            return "loaded:\(dashboard.stats.count):\(dashboard.activities.count)"
+        case let .failed(message):
+            return "failed:\(message)"
+        }
     }
 }
 

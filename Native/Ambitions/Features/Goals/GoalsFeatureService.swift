@@ -79,17 +79,17 @@ struct StubGoalsService: GoalsServicing {
         let body: String
         switch request.kind {
         case .complete:
-            title = "Preview completion"
-            body = "The preview action rail is wired. Live persistence happens in the repository-backed service."
+            title = "Completion captured"
+            body = "This interaction is preview-safe here. In the repository-backed service, the same action writes directly into plan evidence and feedback."
         case .switchToUntimed:
-            title = "Preview timing update"
-            body = "This preview path shows the real action shape without mutating preview fixtures."
+            title = "Timing softened"
+            body = "This preview keeps the interaction shape intact. The live service removes artificial pressure when the goal can stay untimed."
         case .showSupportMode:
             title = "Support framing"
-            body = "This preview is already rendering support context."
+            body = "Support work stays framed as helpful structure, not ownership over someone else's execution."
         default:
-            title = "Preview action"
-            body = "Inline replanning actions are wired in the live service."
+            title = "Replanning signal captured"
+            body = "This preview mirrors the same trust-preserving action rail used by the repository-backed service."
         }
 
         return GoalDetailActionResponse(
@@ -196,12 +196,12 @@ private extension RepositoryBackedGoalsService {
         return GoalsOverview(
             title: "Goals",
             subtitle: seeded
-                ? "The seeded portfolio is live in native persistence, so this screen is already reading the same records Today uses."
+                ? "Your starter portfolio is already reading from native persistence, so Today, Goals, and Habits stay in sync while the account history fills in."
                 : "Native goals, drafts, evidence, and feedback are now shaping the roadmap directly inside SwiftUI.",
             contextPills: [
                 "\(activeCount) active",
                 "\(snapshot.drafts.filter { $0.latestResultKind == .clarificationRequired || $0.latestResultKind == .blocked }.count) need care",
-                seeded ? "Seeded native data" : "Live native data"
+                seeded ? "Starter data loaded" : "Live native data"
             ],
             isSeeded: seeded,
             filterSummaries: [

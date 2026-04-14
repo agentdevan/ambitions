@@ -163,8 +163,8 @@ struct RepositoryBackedHabitsService: HabitsServicing {
             )
         case .openDetail:
             message = HabitInlineMessage(
-                title: "Detail route next",
-                body: "Open detail is handled by navigation so the habit can land on the real goal detail surface.",
+                title: "Opening habit context",
+                body: "This habit is linked back to the full goal context so cadence, support language, and replanning all stay aligned.",
                 state: .selected
             )
         }
@@ -436,7 +436,7 @@ private extension RepositoryBackedHabitsService {
         case .empty:
             "Habits becomes real as soon as a recurring goal or routine exists. There is no detached subsystem behind this screen."
         case .seeded:
-            "The native demo seed is driving this surface through the real repository layer."
+            "Habits is already reading from the same native goal, evidence, and feedback records that power Today and Goal Detail."
         case .active:
             return totalHabits == 1
                 ? "One habit loop is active. The goal is clarity and repeatability, not pressure."
@@ -479,7 +479,7 @@ private extension RepositoryBackedHabitsService {
         case .empty:
             "Habits is waiting on recurring structure from the native planner and goal engine, not on a separate tracker."
         case .seeded:
-            "Every card here is derived from live native goal records, steps, evidence, and feedback, even though the current data set is still seeded."
+            "Every card here is derived from live native goal records, steps, evidence, and feedback, with starter data only filling the gap before personal history builds up."
         case .active:
             "Use full completion when the routine really landed, minimum version when the smallest valid version happened, and quick log when signal matters more than ceremony."
         case .recovery:

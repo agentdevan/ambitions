@@ -10,6 +10,17 @@ final class GoalsViewModel {
 
     private var hasLoaded = false
 
+    var stateKey: String {
+        switch state {
+        case .loading:
+            return "loading"
+        case let .loaded(overview):
+            return "loaded:\(overview.items.count):\(selectedFilter.rawValue):\(selectedSort.rawValue)"
+        case let .failed(message):
+            return "failed:\(message)"
+        }
+    }
+
     init(
         state: AsyncViewState<GoalsOverview> = .loading,
         selectedFilter: GoalsFilter = .active,
@@ -87,6 +98,17 @@ final class GoalDetailViewModel {
     var lens: GoalDetailLens
 
     private var hasLoaded = false
+
+    var stateKey: String {
+        switch state {
+        case .loading:
+            return "loading"
+        case let .loaded(detail):
+            return "loaded:\(detail.target.id):\(lens.rawValue)"
+        case let .failed(message):
+            return "failed:\(message)"
+        }
+    }
 
     init(
         target: GoalRouteTarget,

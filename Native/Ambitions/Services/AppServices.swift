@@ -29,7 +29,7 @@ protocol ProfileServicing: Sendable {
     func loadProfileDashboard() async throws -> ProfileDashboard
 }
 
-protocol AppActionRouting: Sendable {
+protocol AppActionRouting {
     func handle(_ action: WidgetAction) async
 }
 
@@ -53,7 +53,7 @@ struct DefaultStartupService: StartupServicing {
             launchedAt: Date(),
             startupNote: source == .preview
                 ? "Preview bootstrap uses isolated in-memory fixtures."
-                : "Live bootstrap is persistence-backed and seeded with native demo content until real user data replaces it."
+                : "Live bootstrap is persistence-backed and ready to transition from starter data into personal planning history."
         )
     }
 }
@@ -89,8 +89,20 @@ struct StubProfileService: ProfileServicing {
     func loadProfileDashboard() async throws -> ProfileDashboard { fixtures.profileDashboard }
 }
 
+@MainActor
 struct DefaultAppActionRouter: AppActionRouting {
+    let navigation: AppNavigationModel
+
     func handle(_ action: WidgetAction) async {
-        _ = action
+        switch action.identity.family {
+        case .insightStats, .weeklyTrend, .recentActivity:
+            navigation.selectedTab = .insights
+        case .profileSummary, .settingsGroup:
+            navigation.selectedTab = .profile
+        case .habitSummary, .streak:
+            navigation.selectedTab = .habits
+        case .dailyTargets, .focusNow, .freeTime, .milestonePrompt, .goalsList, .celebration:
+            navigation.selectedTab = .today
+        }
     }
 }

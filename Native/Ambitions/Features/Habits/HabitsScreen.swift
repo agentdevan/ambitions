@@ -4,6 +4,7 @@ import SwiftUI
 struct HabitsScreen: View {
     @Environment(\.appContainer) private var container
     @Environment(\.ambitionTheme) private var theme
+    @Environment(\.accessibilityReduceMotion) private var reduceMotion
     @State private var viewModel: HabitsViewModel
 
     init(viewModel: HabitsViewModel = HabitsViewModel()) {
@@ -12,10 +13,16 @@ struct HabitsScreen: View {
 
     var body: some View {
         ScrollView {
-            VStack(alignment: .leading, spacing: theme.spacing.lg) {
+            LazyVStack(alignment: .leading, spacing: theme.spacing.lg) {
                 switch viewModel.state {
                 case .loading:
-                    HabitsHeroCard(dashboard: PreviewHabitsScenarios.seeded)
+                    HeroCard {
+                        SectionHeader(
+                            eyebrow: "Habits",
+                            title: "Consistency that stays usable",
+                            subtitle: "Loading recurring loops, recovery signals, and the lightest valid next actions."
+                        )
+                    }
                     LoadingSkeletonCard(lineCount: 10)
                 case let .failed(message):
                     EmptyStateCard(
@@ -70,7 +77,11 @@ struct HabitsScreen: View {
             .padding(.vertical, theme.spacing.md)
         }
         .scrollIndicators(.hidden)
+        .refreshable {
+            await viewModel.refresh(using: container.habitsService)
+        }
         .navigationTitle("Habits")
+        .animation(theme.motion.animation(reduceMotion: reduceMotion, emphasis: true), value: viewModel.stateKey)
         .task {
             await viewModel.load(using: container.habitsService)
         }

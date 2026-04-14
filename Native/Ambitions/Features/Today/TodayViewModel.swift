@@ -9,6 +9,17 @@ final class TodayViewModel {
 
     private var hasLoaded = false
 
+    var stateKey: String {
+        switch state {
+        case .loading:
+            return "loading"
+        case let .loaded(experience):
+            return "loaded:\(experience.mode.rawValue)"
+        case let .failed(message):
+            return "failed:\(message)"
+        }
+    }
+
     init(
         state: AsyncViewState<TodayExperience> = .loading,
         transientMessage: TodayInlineMessage? = nil

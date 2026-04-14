@@ -4,6 +4,7 @@ import SwiftUI
 /// Compact segmented selection bar for switching timeframes or modes.
 public struct SegmentedFilterBar<Item: Hashable>: View {
     @Environment(\.ambitionTheme) private var theme
+    @Environment(\.accessibilityReduceMotion) private var reduceMotion
 
     private let items: [Item]
     @Binding private var selection: Item
@@ -29,15 +30,20 @@ public struct SegmentedFilterBar<Item: Hashable>: View {
                 } label: {
                     Text(title(item))
                         .font(theme.typography.caption)
+                        .lineLimit(2)
+                        .multilineTextAlignment(.center)
                         .frame(maxWidth: .infinity)
+                        .frame(minHeight: 44)
                         .padding(.vertical, theme.spacing.xs)
                 }
                 .buttonStyle(AmbitionPressableButtonStyle(state: state))
+                .accessibilityAddTraits(item == selection ? [.isSelected] : [])
             }
         }
         .padding(theme.spacing.xxs)
         .background(Capsule(style: .continuous).fill(theme.colors.surfaceOverlay))
         .overlay(Capsule(style: .continuous).stroke(theme.colors.strokeSubtle, lineWidth: 1))
+        .animation(theme.motion.animation(reduceMotion: reduceMotion), value: selection)
     }
 }
 
@@ -99,6 +105,7 @@ public struct ListChevronRow<Leading: View, Trailing: View>: View {
 /// Reusable bottom navigation shell for future screen modules.
 public struct BottomNavShell<Item: Hashable>: View {
     @Environment(\.ambitionTheme) private var theme
+    @Environment(\.accessibilityReduceMotion) private var reduceMotion
 
     private let items: [Item]
     @Binding private var selection: Item
@@ -133,6 +140,7 @@ public struct BottomNavShell<Item: Hashable>: View {
                             .lineLimit(1)
                     }
                     .frame(maxWidth: .infinity)
+                    .frame(minHeight: 48)
                     .padding(.vertical, theme.spacing.xs)
                     .foregroundStyle(selected ? theme.colors.textPrimary : theme.colors.textSecondary)
                     .background(
@@ -141,6 +149,7 @@ public struct BottomNavShell<Item: Hashable>: View {
                     )
                 }
                 .buttonStyle(.plain)
+                .accessibilityAddTraits(selected ? [.isSelected] : [])
             }
         }
         .padding(theme.spacing.xs)
@@ -154,6 +163,7 @@ public struct BottomNavShell<Item: Hashable>: View {
         }
         .overlay(RoundedRectangle(cornerRadius: theme.radius.lg, style: .continuous).stroke(theme.colors.strokeSubtle, lineWidth: 1))
         .shadow(color: theme.elevation.raised.color, radius: theme.elevation.raised.radius, x: 0, y: theme.elevation.raised.y)
+        .animation(theme.motion.animation(reduceMotion: reduceMotion), value: selection)
     }
 }
 
@@ -175,8 +185,18 @@ public struct AmbitionPressableButtonStyle: ButtonStyle {
 
         return configuration.label
             .foregroundStyle(resolved.foreground)
+            .contentShape(Capsule(style: .continuous))
             .background(Capsule(style: .continuous).fill(resolved.fill))
             .overlay(Capsule(style: .continuous).stroke(resolved.stroke, lineWidth: 1))
+            .shadow(
+                color: configuration.isPressed
+                    ? theme.elevation.resting.color.opacity(0.12)
+                    : theme.elevation.resting.color.opacity(0.28),
+                radius: configuration.isPressed ? 6 : 10,
+                x: 0,
+                y: configuration.isPressed ? 2 : 5
+            )
+            .offset(y: configuration.isPressed && reduceMotion == false ? 1 : 0)
             .scaleEffect(resolved.scale)
             .opacity(resolved.opacity)
             .animation(theme.motion.animation(reduceMotion: reduceMotion), value: configuration.isPressed)

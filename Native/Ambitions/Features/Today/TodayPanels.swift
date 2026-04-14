@@ -30,10 +30,13 @@ struct TodayHeaderCard: View {
                 }
             }
         }
+        .ambitionPanelAccessibility()
     }
 }
 
 struct TodayMessageCard: View {
+    @Environment(\.ambitionTheme) private var theme
+
     let message: TodayInlineMessage
 
     var body: some View {
@@ -46,6 +49,9 @@ struct TodayMessageCard: View {
                     .foregroundStyle(.secondary)
             }
         }
+        .ambitionPanelAccessibility()
+        .accessibilityLabel("\(message.title). \(message.body)")
+        .transition(.ambitionPanel)
     }
 }
 
@@ -56,6 +62,10 @@ struct TodayDailyTargetsCard: View {
     let expanded: Bool
     let toggleExpanded: () -> Void
     let onAction: (TodayInlineAction) -> Void
+
+    private var visibleItems: [TodayTargetItem] {
+        expanded ? state.items : Array(state.items.prefix(2))
+    }
 
     var body: some View {
         AppCard {
@@ -75,7 +85,7 @@ struct TodayDailyTargetsCard: View {
                         .foregroundStyle(theme.colors.textSecondary)
                 } else {
                     VStack(alignment: .leading, spacing: theme.spacing.sm) {
-                        ForEach(expanded ? state.items : Array(state.items.prefix(2))) { item in
+                        ForEach(visibleItems) { item in
                             VStack(alignment: .leading, spacing: theme.spacing.xs) {
                                 HStack(alignment: .top, spacing: theme.spacing.sm) {
                                     VStack(alignment: .leading, spacing: theme.spacing.xxxs) {
@@ -103,11 +113,14 @@ struct TodayDailyTargetsCard: View {
                             .padding(theme.spacing.sm)
                             .background(RoundedRectangle(cornerRadius: theme.radius.md, style: .continuous).fill(theme.colors.surfaceOverlay))
                             .overlay(RoundedRectangle(cornerRadius: theme.radius.md, style: .continuous).stroke(theme.colors.strokeSubtle, lineWidth: 1))
+                            .ambitionPanelAccessibility()
+                            .transition(.ambitionPanel)
                         }
                     }
                 }
             }
         }
+        .ambitionPanelAccessibility()
     }
 }
 
@@ -139,6 +152,7 @@ struct TodayFocusCard: View {
                     TodayActionGrid(actions: value.actions, handler: onAction)
                 }
             }
+            .ambitionPanelAccessibility()
         case let .starter(value):
             HeroCard(state: .selected, accent: theme.colors.accentWarm) {
                 VStack(alignment: .leading, spacing: theme.spacing.md) {
@@ -159,6 +173,7 @@ struct TodayFocusCard: View {
                     TodayActionGrid(actions: value.actions, handler: onAction)
                 }
             }
+            .ambitionPanelAccessibility()
         case let .clarification(value):
             HeroCard(state: .warning, accent: theme.colors.warning) {
                 VStack(alignment: .leading, spacing: theme.spacing.md) {
@@ -182,6 +197,7 @@ struct TodayFocusCard: View {
                     TodayActionGrid(actions: value.actions, handler: onAction)
                 }
             }
+            .ambitionPanelAccessibility()
         case let .blocked(value):
             HeroCard(state: .warning, accent: theme.colors.warning) {
                 VStack(alignment: .leading, spacing: theme.spacing.md) {
@@ -196,6 +212,7 @@ struct TodayFocusCard: View {
                     TodayActionGrid(actions: value.actions, handler: onAction)
                 }
             }
+            .ambitionPanelAccessibility()
         case let .empty(value):
             EmptyStateCard(title: value.title, message: value.message, icon: "moon.zzz")
         }
@@ -238,6 +255,7 @@ struct TodayFreeTimeCard: View {
                 }
             }
         }
+        .ambitionPanelAccessibility()
     }
 }
 
@@ -258,6 +276,7 @@ struct TodayMilestoneCard: View {
                 }
             }
         }
+        .ambitionPanelAccessibility()
     }
 }
 
@@ -286,6 +305,7 @@ struct TodayMomentumCard: View {
                 }
             }
         }
+        .ambitionPanelAccessibility()
     }
 }
 
@@ -307,6 +327,8 @@ struct TodayCelebrationCard: View {
                 TodayActionGrid(actions: state.actions, handler: onAction)
             }
         }
+        .ambitionPanelAccessibility()
+        .transition(.ambitionPanel)
     }
 }
 
@@ -329,6 +351,7 @@ struct TodayQuickCaptureCard: View {
                 TodayActionGrid(actions: state.actions, handler: onAction)
             }
         }
+        .ambitionPanelAccessibility()
     }
 }
 
@@ -359,10 +382,12 @@ struct TodayReflectionCard: View {
                                 .foregroundStyle(theme.colors.textSecondary)
                         }
                     }
+                    .transition(.ambitionPanel)
                 }
                 TodayActionGrid(actions: state.actions, handler: onAction)
             }
         }
+        .ambitionPanelAccessibility()
     }
 }
 
@@ -392,8 +417,22 @@ struct TodayActionChip: View {
             Label(action.title, systemImage: action.systemImage)
                 .font(.caption.weight(.semibold))
                 .frame(maxWidth: .infinity)
+                .frame(minHeight: 44)
                 .padding(.vertical, 10)
         }
         .buttonStyle(AmbitionPressableButtonStyle(state: action.state))
+        .modifier(TodayActionAccessibilityHint(action: action))
+    }
+}
+
+private struct TodayActionAccessibilityHint: ViewModifier {
+    let action: TodayInlineAction
+
+    func body(content: Content) -> some View {
+        if action.kind == .askWhyThisMatters {
+            content.accessibilityHint("Explains why this step is worth doing now.")
+        } else {
+            content
+        }
     }
 }

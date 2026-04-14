@@ -4,6 +4,7 @@ import SwiftUI
 struct TodayScreen: View {
     @Environment(\.appContainer) private var container
     @Environment(\.ambitionTheme) private var theme
+    @Environment(\.accessibilityReduceMotion) private var reduceMotion
     @State private var viewModel: TodayViewModel
     @State private var dailyTargetsExpanded = true
     @State private var reflectionExpanded = false
@@ -20,10 +21,11 @@ struct TodayScreen: View {
             TodayBackgroundView()
 
             ScrollView {
-                VStack(alignment: .leading, spacing: theme.spacing.lg) {
+                LazyVStack(alignment: .leading, spacing: theme.spacing.lg) {
                     switch viewModel.state {
                     case .loading:
                         LoadingSkeletonCard(lineCount: 6)
+                            .transition(.ambitionPanel)
                     case let .failed(message):
                         EmptyStateCard(
                             title: "Today is unavailable",
@@ -35,17 +37,19 @@ struct TodayScreen: View {
                                 await viewModel.refresh(using: container.todayService, userDisplayName: container.session.userDisplayName)
                             }
                         }
+                        .transition(.ambitionPanel)
                     case let .loaded(experience):
                         TodayHeaderCard(header: experience.header)
 
                         if let transientMessage = viewModel.transientMessage {
                             TodayMessageCard(message: transientMessage)
+                                .transition(.ambitionPanel)
                         }
 
                         TodayDailyTargetsCard(
                             state: experience.dailyTargets,
                             expanded: dailyTargetsExpanded,
-                            toggleExpanded: { dailyTargetsExpanded.toggle() },
+                            toggleExpanded: { toggle(&dailyTargetsExpanded) },
                             onAction: handleAction
                         )
                         TodayFocusCard(state: experience.focus, onAction: handleAction)
@@ -61,7 +65,7 @@ struct TodayScreen: View {
                         TodayReflectionCard(
                             state: experience.reflection,
                             expanded: reflectionExpanded,
-                            toggleExpanded: { reflectionExpanded.toggle() },
+                            toggleExpanded: { toggle(&reflectionExpanded) },
                             onAction: handleAction
                         )
                     }
@@ -70,8 +74,13 @@ struct TodayScreen: View {
                 .padding(.vertical, theme.spacing.md)
             }
             .scrollIndicators(.hidden)
+            .refreshable {
+                await viewModel.refresh(using: container.todayService, userDisplayName: container.session.userDisplayName)
+            }
         }
         .navigationTitle("Today")
+        .animation(theme.motion.animation(reduceMotion: reduceMotion, emphasis: true), value: viewModel.stateKey)
+        .animation(theme.motion.animation(reduceMotion: reduceMotion), value: viewModel.transientMessage?.title)
         .task {
             guard autoLoad else { return }
             await viewModel.load(using: container.todayService, userDisplayName: container.session.userDisplayName)
@@ -93,6 +102,16 @@ struct TodayScreen: View {
                 viewModel.transientMessage = nil
             }
             await viewModel.handle(action, using: container.todayService, userDisplayName: container.session.userDisplayName)
+        }
+    }
+
+    private func toggle(_ value: inout Bool) {
+        if reduceMotion {
+            value.toggle()
+        } else {
+            withAnimation(theme.motion.animation(reduceMotion: false)) {
+                value.toggle()
+            }
         }
     }
 }

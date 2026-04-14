@@ -105,6 +105,10 @@ public extension View {
     ) -> some View {
         modifier(AmbitionSurfaceModifier(style: style, state: state, accent: accent))
     }
+
+    func ambitionPanelAccessibility() -> some View {
+        accessibilityElement(children: .contain)
+    }
 }
 
 /// General-purpose content container for primary in-app modules.

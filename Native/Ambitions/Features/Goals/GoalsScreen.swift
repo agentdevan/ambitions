@@ -4,6 +4,7 @@ import SwiftUI
 struct GoalsScreen: View {
     @Environment(\.appContainer) private var container
     @Environment(\.ambitionTheme) private var theme
+    @Environment(\.accessibilityReduceMotion) private var reduceMotion
     @State private var viewModel: GoalsViewModel
 
     init(viewModel: GoalsViewModel = GoalsViewModel()) {
@@ -12,10 +13,16 @@ struct GoalsScreen: View {
 
     var body: some View {
         ScrollView {
-            VStack(alignment: .leading, spacing: theme.spacing.lg) {
+            LazyVStack(alignment: .leading, spacing: theme.spacing.lg) {
                 switch viewModel.state {
                 case .loading:
-                    GoalsHeroCard(overview: PreviewGoalsScenarios.overview)
+                    HeroCard {
+                        SectionHeader(
+                            eyebrow: "Roadmap",
+                            title: "Goals",
+                            subtitle: "Loading the current portfolio, draft states, and next-step signals."
+                        )
+                    }
                     LoadingSkeletonCard(lineCount: 8)
                 case let .failed(message):
                     EmptyStateCard(
@@ -34,7 +41,7 @@ struct GoalsScreen: View {
                             SectionHeader(
                                 title: "Portfolio",
                                 subtitle: viewModel.selectedSort == .manualPriority
-                                    ? "Priority currently follows native repository order until explicit manual ranking lands."
+                                    ? "Priority is currently preserving repository order so the portfolio stays stable while you review it."
                                     : "Sort by the lens that best matches the kind of decision you need to make."
                             ) {
                                 Menu {
@@ -78,7 +85,11 @@ struct GoalsScreen: View {
             .padding(.vertical, theme.spacing.md)
         }
         .scrollIndicators(.hidden)
+        .refreshable {
+            await viewModel.refresh(using: container.goalsService)
+        }
         .navigationTitle("Goals")
+        .animation(theme.motion.animation(reduceMotion: reduceMotion, emphasis: true), value: viewModel.stateKey)
         .task {
             await viewModel.load(using: container.goalsService)
         }

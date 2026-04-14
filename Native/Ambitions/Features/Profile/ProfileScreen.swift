@@ -4,32 +4,58 @@ import SwiftUI
 
 struct ProfileScreen: View {
     @Environment(\.appContainer) private var container
+    @Environment(\.ambitionTheme) private var theme
+    @Environment(\.accessibilityReduceMotion) private var reduceMotion
     @State private var state: AsyncViewState<ProfileDashboard> = .loading
 
     var body: some View {
         FeatureScaffoldView(
+            eyebrow: "Profile",
             title: "Profile",
-            subtitle: "Account, settings, and widget-related configuration will move here as native services come online."
+            subtitle: "Keep identity, planning defaults, and account-facing settings legible and calm inside the native shell."
         ) {
             switch state {
             case .loading:
-                ProgressView("Loading profile")
-                    .frame(maxWidth: .infinity, alignment: .leading)
+                LoadingSkeletonCard(lineCount: 7)
+                    .transition(.ambitionPanel)
             case let .failed(message):
-                Text(message)
-                    .foregroundStyle(.secondary)
+                EmptyStateCard(
+                    title: "Profile is unavailable",
+                    message: message,
+                    icon: "person.crop.circle.badge.exclamationmark",
+                    actionTitle: "Retry"
+                ) {
+                    Task { await load() }
+                }
+                .transition(.ambitionPanel)
             case let .loaded(dashboard):
-                WidgetFeed(items: [
-                    WidgetFeedItem(id: "profile-summary", priority: .hero, variant: .expanded) {
-                        ProfileSummaryWidget(viewModel: summaryViewModel(dashboard), onAction: handleAction)
-                    },
-                    WidgetFeedItem(id: "profile-settings", priority: .high, variant: .expanded) {
-                        SettingsGroupWidget(viewModel: settingsViewModel(dashboard), onAction: handleAction)
+                VStack(alignment: .leading, spacing: theme.spacing.lg) {
+                    AppCard {
+                        SectionHeader(
+                            title: dashboard.title,
+                            subtitle: dashboard.subtitle
+                        ) {
+                            TagPill(dashboard.badges.first ?? "Ready", state: .selected)
+                        }
                     }
-                ])
+                    .transition(.ambitionPanel)
+
+                    WidgetFeed(items: [
+                        WidgetFeedItem(id: "profile-summary", priority: .hero, variant: .expanded) {
+                            ProfileSummaryWidget(viewModel: summaryViewModel(dashboard))
+                        },
+                        WidgetFeedItem(id: "profile-settings", priority: .high, variant: .expanded) {
+                            SettingsGroupWidget(viewModel: settingsViewModel(dashboard))
+                        }
+                    ])
+                }
             }
         }
         .navigationTitle("Profile")
+        .refreshable {
+            await load()
+        }
+        .animation(theme.motion.animation(reduceMotion: reduceMotion, emphasis: true), value: stateKey)
         .task {
             guard case .loading = state else { return }
             await load()
@@ -44,12 +70,6 @@ struct ProfileScreen: View {
         }
     }
 
-    private func handleAction(_ action: WidgetAction) {
-        Task {
-            await container.actionRouter.handle(action)
-        }
-    }
-
     private func summaryViewModel(_ dashboard: ProfileDashboard) -> ProfileSummaryWidgetViewModel {
         ProfileSummaryWidgetViewModel(
             snapshot: WidgetSnapshot(
@@ -58,7 +78,7 @@ struct ProfileScreen: View {
                     priority: .hero,
                     variant: .expanded,
                     chrome: .appCard,
-                    supportedActions: [.openDetail]
+                    supportedActions: []
                 ),
                 state: .ready(
                     ProfileSummaryContent(
@@ -75,9 +95,7 @@ struct ProfileScreen: View {
                                 icon: $0.icon
                             )
                         },
-                        actions: [
-                            WidgetInlineActionDescriptor(kind: .openDetail, title: "Open account", icon: "person.crop.circle.badge.checkmark")
-                        ]
+                        actions: []
                     )
                 )
             )
@@ -92,7 +110,7 @@ struct ProfileScreen: View {
                     priority: .high,
                     variant: .expanded,
                     chrome: .appCard,
-                    supportedActions: [.openDetail]
+                    supportedActions: []
                 ),
                 state: .ready(
                     SettingsGroupContent(
@@ -112,6 +130,17 @@ struct ProfileScreen: View {
                 )
             )
         )
+    }
+
+    private var stateKey: String {
+        switch state {
+        case .loading:
+            return "loading"
+        case let .loaded(dashboard):
+            return "loaded:\(dashboard.stats.count):\(dashboard.settings.count)"
+        case let .failed(message):
+            return "failed:\(message)"
+        }
     }
 }
 

@@ -23,16 +23,16 @@ struct RepositoryBackedTodayService: TodayServicing {
         case .openDetail:
             return TodayActionResponse(
                 message: TodayInlineMessage(
-                    title: "Detail route next",
-                    body: "Goal detail is the next native vertical slice. Today is storing the target so that route wiring can land on real data.",
+                    title: "Opening plan context",
+                    body: "Today is handing off to the same goal context used for replanning, evidence, and support decisions.",
                     state: .selected
                 )
             )
         case .askForHelp:
             return TodayActionResponse(
                 message: TodayInlineMessage(
-                    title: "Help request noted",
-                    body: "The native help flow is not built yet, but Today now knows which goal needs support next.",
+                    title: "Support context captured",
+                    body: "Ambitions will keep the blocked or heavy step visible so the next pass can shrink it, explain it, or route you into the fuller goal context.",
                     state: .warning
                 )
             )
@@ -517,7 +517,7 @@ private extension RepositoryBackedTodayService {
         case .empty:
             subtitle = "Today becomes useful as soon as one real goal or draft exists. Nothing here is faking urgency."
         case .seeded:
-            subtitle = "This is the first native execution center, running against the seeded repository and real orchestration states."
+            subtitle = "Today is already reading real native plan, evidence, and feedback records, with starter data standing in until personal history takes over."
         case .active:
             subtitle = "Today is reading live native goals, drafts, evidence, and feedback to decide what deserves attention now."
         }
@@ -533,7 +533,7 @@ private extension RepositoryBackedTodayService {
             pills.append(TodayPillState(id: "blocked", title: "\(blockedCount) blocker\(blockedCount == 1 ? "" : "s")", icon: "exclamationmark.triangle", state: .warning))
         }
         if mode == .seeded {
-            pills.append(TodayPillState(id: "seeded", title: "Seeded demo", icon: "sparkles", state: .celebration))
+            pills.append(TodayPillState(id: "seeded", title: "Starter data ready", icon: "sparkles", state: .celebration))
         }
 
         return TodayHeaderState(

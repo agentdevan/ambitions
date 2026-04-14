@@ -83,6 +83,7 @@ public struct TagPill: View {
                 .lineLimit(1)
                 .minimumScaleFactor(0.8)
         }
+        .accessibilityElement(children: .combine)
         .foregroundStyle(style.foreground)
         .padding(.horizontal, theme.spacing.sm)
         .padding(.vertical, theme.spacing.xxs)
@@ -102,6 +103,7 @@ public struct TagPill: View {
 /// Key metric tile for progress and health summaries.
 public struct StatTile: View {
     @Environment(\.ambitionTheme) private var theme
+    @Environment(\.accessibilityReduceMotion) private var reduceMotion
 
     private let title: String
     private let value: String
@@ -143,6 +145,7 @@ public struct StatTile: View {
                     .font(theme.typography.numeric)
                     .foregroundStyle(theme.colors.textPrimary)
                     .minimumScaleFactor(0.7)
+                    .contentTransition(reduceMotion ? .identity : .numericText())
 
                 VStack(alignment: .leading, spacing: theme.spacing.xxxs) {
                     Text(title)
@@ -157,6 +160,8 @@ public struct StatTile: View {
                 }
             }
         }
+        .accessibilityElement(children: .combine)
+        .accessibilityLabel("\(title), \(value)\(detail.map { ", \($0)" } ?? "")")
     }
 
     private var labelText: String {
@@ -176,6 +181,7 @@ public struct StatTile: View {
 /// Horizontal rail for single-progress measures and confidence signals.
 public struct ProgressRail: View {
     @Environment(\.ambitionTheme) private var theme
+    @Environment(\.accessibilityReduceMotion) private var reduceMotion
 
     private let title: String
     private let progress: Double
@@ -231,6 +237,7 @@ public struct ProgressRail: View {
                             )
                         )
                         .frame(width: max(width * clamped, 10))
+                        .animation(theme.motion.animation(reduceMotion: reduceMotion), value: clamped)
                 }
             }
             .frame(height: 10)
@@ -238,6 +245,9 @@ public struct ProgressRail: View {
         .padding(theme.spacing.sm)
         .background(RoundedRectangle(cornerRadius: theme.radius.md, style: .continuous).fill(theme.colors.surfaceOverlay))
         .overlay(RoundedRectangle(cornerRadius: theme.radius.md, style: .continuous).stroke(theme.colors.strokeSubtle, lineWidth: 1))
+        .accessibilityElement(children: .ignore)
+        .accessibilityLabel(title)
+        .accessibilityValue("\(Int(clamped * 100)) percent\(trailingValue.map { ", \($0)" } ?? "")")
     }
 }
 
@@ -321,9 +331,11 @@ public struct EmptyStateCard: View {
                         .buttonStyle(.borderless)
                         .font(theme.typography.bodyEmphasized)
                         .foregroundStyle(theme.colors.accentPrimary)
+                        .frame(minHeight: 44)
                 }
             }
         }
+        .accessibilityElement(children: .contain)
     }
 }
 
@@ -395,6 +407,15 @@ private struct AmbitionShimmerModifier: ViewModifier {
 private extension View {
     func shimmering(active: Bool, base: Color, highlight: Color) -> some View {
         modifier(AmbitionShimmerModifier(active: active, base: base, highlight: highlight))
+    }
+}
+
+public extension AnyTransition {
+    static var ambitionPanel: AnyTransition {
+        .asymmetric(
+            insertion: .opacity.combined(with: .scale(scale: 0.985, anchor: .top)),
+            removal: .opacity.combined(with: .scale(scale: 0.99, anchor: .top))
+        )
     }
 }
 #endif

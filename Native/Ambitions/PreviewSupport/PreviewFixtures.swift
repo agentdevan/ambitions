@@ -61,16 +61,16 @@ struct PreviewFixtures: Sendable {
         habitsDashboard: PreviewHabitsScenarios.seeded,
         insightsDashboard: InsightsDashboard(
             title: "Behavioral readout",
-            subtitle: "Signals should eventually come from native persistence, not from the TS prototype runtime.",
+            subtitle: "Signals are organized to make drift, momentum, and adaptation easier to trust at a glance.",
             stats: [
                 MetricSummary(id: "insight-1", title: "Focus quality", value: "76", detail: "Composite score", icon: "scope"),
                 MetricSummary(id: "insight-2", title: "Plan adherence", value: "63%", detail: "Week to date", icon: "chart.bar"),
                 MetricSummary(id: "insight-3", title: "Recovery speed", value: "1.8x", detail: "Vs prior week", icon: "waveform.path.ecg"),
                 MetricSummary(id: "insight-4", title: "Drift alerts", value: "2", detail: "Open", icon: "bell")
             ],
-            summary: "The native client will need its own analytics and history model, but these surfaces already define the shape of the UI contract.",
+            summary: "Recent adaptation works best when the next step stays small, explicit, and grounded in visible evidence.",
             trendTitle: "Weekly trend",
-            trendSubtitle: "Prototype-derived shape, native-owned presentation.",
+            trendSubtitle: "A calm weekly read on throughput and confidence.",
             timeframeLabel: "Last 7 days",
             trendPoints: [
                 TrendPoint(id: "mon", label: "M", value: 0.48),
@@ -83,7 +83,7 @@ struct PreviewFixtures: Sendable {
             ],
             trendSummary: "Execution improved once the scope narrowed to a single native client.",
             activitiesTitle: "Recent signals",
-            activitiesSubtitle: "Reference-only examples until persistence is live.",
+            activitiesSubtitle: "Recent evidence, decisions, and changes that explain the current readout.",
             activities: [
                 ActivitySummary(id: "activity-1", title: "Completed deep work block", subtitle: "Today", timestamp: "09:40", icon: "checkmark.circle.fill", badge: "Win"),
                 ActivitySummary(id: "activity-2", title: "Rescoped feature backlog", subtitle: "Yesterday", timestamp: "17:15", icon: "arrow.triangle.branch", badge: "Decision"),
@@ -102,14 +102,14 @@ struct PreviewFixtures: Sendable {
                 MetricSummary(id: "profile-4", title: "Theme", value: "Dark", detail: "Default shell", icon: "moon.stars")
             ],
             settingsTitle: "Native app configuration",
-            settingsSubtitle: "These rows define the eventual production settings surface.",
+            settingsSubtitle: "Core planning defaults and account-facing controls.",
             settings: [
-                SettingsItem(id: "profile-setting-1", title: "Data source mode", subtitle: "Native persistence replaces TS runtime over time", icon: "internaldrive", valueLabel: "Placeholder"),
-                SettingsItem(id: "profile-setting-2", title: "Notifications", subtitle: "Intent-based nudges and reminders", icon: "bell.badge", valueLabel: "Planned"),
+                SettingsItem(id: "profile-setting-1", title: "Planning storage", subtitle: "Native persistence is active for goals, habits, and evidence", icon: "internaldrive", valueLabel: "Local-first"),
+                SettingsItem(id: "profile-setting-2", title: "Notifications", subtitle: "Intent-based nudges and reminders", icon: "bell.badge", valueLabel: "Configured"),
                 SettingsItem(id: "profile-setting-3", title: "Widgets", subtitle: "Home and lock screen delivery", icon: "square.grid.2x2", valueLabel: "Integrated"),
-                SettingsItem(id: "profile-setting-4", title: "Account", subtitle: "Auth and sync will be rebuilt natively", icon: "person.badge.key", valueLabel: "Next")
+                SettingsItem(id: "profile-setting-4", title: "Account", subtitle: "Identity and sync readiness", icon: "person.badge.key", valueLabel: "Review")
             ],
-            settingsFooter: "Every profile/settings value in this shell is placeholder data until native persistence and account flows are implemented."
+            settingsFooter: "Keep these defaults legible so the planning system feels transparent before deeper account and sync flows are validated on device."
         )
     )
 }

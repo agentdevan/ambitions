@@ -22,7 +22,7 @@ enum AppContainerFactory {
             habitsService: RepositoryBackedHabitsService(repositories: repositories),
             insightsService: StubInsightsService(fixtures: fixtures),
             profileService: StubProfileService(fixtures: fixtures),
-            actionRouter: DefaultAppActionRouter()
+            actionRouter: DefaultAppActionRouter(navigation: navigation)
         )
     }
 

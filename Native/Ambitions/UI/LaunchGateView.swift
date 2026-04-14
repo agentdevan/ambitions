@@ -27,7 +27,7 @@ struct LaunchGateView: View {
                     Text("Ambitions")
                         .font(.largeTitle.bold())
 
-                    Text("Bootstrapping the native SwiftUI shell.")
+                    Text("Preparing your native planning workspace.")
                         .font(.body)
                         .foregroundStyle(.secondary)
 
