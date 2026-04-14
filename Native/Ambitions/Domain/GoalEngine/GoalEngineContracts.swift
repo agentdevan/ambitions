@@ -112,8 +112,19 @@ enum ProgressRollupMethod: String, Codable, Sendable {
     case streakLength = "streak_length"
 }
 
+enum ProgressEvidenceKind: String, Codable, Sendable {
+    case stepCompleted = "step_completed"
+    case sessionLogged = "session_logged"
+    case reflectionLogged = "reflection_logged"
+    case delegatedUpdate = "delegated_update"
+    case observationLogged = "observation_logged"
+    case milestoneReached = "milestone_reached"
+}
+
 enum EvidenceSource: String, Codable, Sendable {
     case manual
+    case migration
+    case imported
     case derived
     case aiSuggested = "ai_suggested"
 }
@@ -422,6 +433,19 @@ struct Goal: Codable, Sendable, Equatable {
     let planningStrategy: PlanningStrategy
     let progressStrategy: ProgressStrategy
     let plan: GoalPlan?
+}
+
+struct ProgressEvidence: Codable, Sendable, Equatable, Identifiable {
+    let id: String
+    let goalID: String
+    let stepID: String?
+    let evidenceKind: ProgressEvidenceKind
+    let source: EvidenceSource
+    let capturedAt: String
+    let progressDelta: Double?
+    let confidenceDelta: Double?
+    let minutesInvested: Int?
+    let note: String?
 }
 
 struct ClassificationResult: Codable, Sendable, Equatable {

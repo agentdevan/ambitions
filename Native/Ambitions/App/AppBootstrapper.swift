@@ -32,7 +32,7 @@ final class AppBootstrapper {
         phase = .launching
 
         do {
-            let container = try await PreviewAppContainerFactory.make(source: resolvedSource)
+            let container = try await AppContainerFactory.make(source: resolvedSource)
             phase = .ready(container)
         } catch {
             phase = .failed("Bootstrap failed: \(error.localizedDescription)")
