@@ -1,5 +1,10 @@
 import Foundation
 
+// Secondary mirror of the canonical TypeScript contract in
+// `src/domain/models/goalEngine.ts`. Keep Swift aligned to TypeScript, and if
+// generators are introduced later, derive Swift from the TS contract rather
+// than evolving the two surfaces independently.
+
 public enum GoalTempo: String, Codable, Sendable {
     case deadlineBased = "deadline_based"
     case targetWindow = "target_window"

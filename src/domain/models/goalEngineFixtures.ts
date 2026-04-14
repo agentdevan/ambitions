@@ -1,16 +1,17 @@
 import {
+  ContractValueSource,
   createDefaultGoalActor,
   createDefaultPlanningStrategy,
   createDefaultProgressStrategy,
   createGoalTiming,
   EvidenceSource,
   ExecutionOwnership,
-  Goal,
-  GoalDraft,
+  Goal as EngineGoal,
+  GoalDraft as EngineGoalDraft,
   GoalLifecycleState,
   GoalMode,
   GoalRelationshipKind,
-  GoalPlan,
+  GoalPlan as EngineGoalPlan,
   GoalTempo,
   GoalTiming,
   GOAL_ENGINE_SCHEMA_VERSION,
@@ -22,6 +23,16 @@ import {
   StepType,
   TimingType,
 } from "./goalEngine";
+import { DomainKey } from "./domain";
+import { Goal as LegacyGoal, GoalHorizon, GoalMilestone, GoalMilestoneStatus, GoalStatus, GoalType } from "./goal";
+import {
+  Task as LegacyTask,
+  TaskDifficulty,
+  TaskSchedulingState,
+  TaskStatus,
+} from "./planning";
+import { EntitySyncState } from "./shared";
+import { migrateLegacyGoal, migrateLegacyGoalDraft, migrateLegacyPlan } from "./goalEngineMigration";
 
 const fixtureTimestamp = "2026-04-14T12:00:00.000Z";
 
@@ -56,7 +67,7 @@ function makeStep(params: {
   };
 }
 
-function makePlan(goalId: string, mode: GoalMode, sections: PlanSection[]): GoalPlan {
+function makePlan(goalId: string, mode: GoalMode, sections: PlanSection[]): EngineGoalPlan {
   return {
     id: `${goalId}-plan`,
     goalId,
@@ -87,7 +98,7 @@ function makeGoalFixture(params: {
   tags?: string[];
   planSections: Omit<PlanSection, "goalId" | "orderIndex">[];
   timing: GoalTiming;
-}): Goal {
+}): EngineGoal {
   const planningStrategy = createDefaultPlanningStrategy(params.mode);
   const progressStrategy = createDefaultProgressStrategy(params.mode, params.tempo);
   const plan = makePlan(
@@ -100,7 +111,7 @@ function makeGoalFixture(params: {
     })),
   );
 
-  const goal: Goal = {
+  const goal: EngineGoal = {
     schemaVersion: GOAL_ENGINE_SCHEMA_VERSION,
     id: params.id,
     revision: 1,
@@ -125,7 +136,7 @@ function makeGoalFixture(params: {
   return goal;
 }
 
-export const goalModeFixtures: Record<GoalMode, Goal> = {
+export const goalModeFixtures: Record<GoalMode, EngineGoal> = {
   [GoalMode.Achievement]: makeGoalFixture({
     id: "fixture-achievement",
     title: "Finish the half marathon strong",
@@ -546,7 +557,7 @@ export const goalModeFixtures: Record<GoalMode, Goal> = {
   }),
 };
 
-export const goalModeDraftFixtures: Record<GoalMode, GoalDraft> = Object.fromEntries(
+export const goalModeDraftFixtures: Record<GoalMode, EngineGoalDraft> = Object.fromEntries(
   Object.entries(goalModeFixtures).map(([mode, goal]) => [
     mode,
     {
@@ -562,6 +573,246 @@ export const goalModeDraftFixtures: Record<GoalMode, GoalDraft> = Object.fromEnt
       timing: goal.timing,
       planningStrategy: goal.planningStrategy,
       progressStrategy: goal.progressStrategy,
-    } satisfies GoalDraft,
+    } satisfies EngineGoalDraft,
   ]),
-) as Record<GoalMode, GoalDraft>;
+) as Record<GoalMode, EngineGoalDraft>;
+
+function makeLegacyGoalFixture(params: {
+  id: string;
+  title: string;
+  goalType: GoalType;
+  goalStatus?: GoalStatus;
+  parentGoalId?: string | null;
+  targetDate?: string | null;
+  startDate?: string | null;
+  tags?: string[];
+  metadata?: Record<string, string>;
+}): LegacyGoal {
+  return {
+    id: params.id,
+    ownerUserId: null,
+    remoteId: null,
+    syncState: EntitySyncState.LocalOnly,
+    version: 1,
+    lastSyncedAt: null,
+    createdAt: fixtureTimestamp,
+    updatedAt: fixtureTimestamp,
+    ambitionId: null,
+    title: params.title,
+    summary: `${params.title} migrated from the legacy domain.`,
+    domainKey: DomainKey.Career,
+    horizon: GoalHorizon.Monthly,
+    type: params.goalType,
+    status: params.goalStatus ?? GoalStatus.Active,
+    parentGoalId: params.parentGoalId ?? null,
+    sortOrder: 0,
+    startDate: params.startDate ?? "2026-04-14",
+    targetDate: params.targetDate ?? null,
+    desiredWeeklyMinutes: null,
+    estimatedTotalMinutes: null,
+    successMetric: null,
+    notes: null,
+    tags: params.tags ?? [],
+    metadata: params.metadata ?? {},
+  };
+}
+
+function makeLegacyTaskFixture(params: {
+  id: string;
+  title: string;
+  status: TaskStatus;
+  goalId: string;
+  scheduledDate?: string | null;
+  targetDate?: string | null;
+  earliestStartAt?: string | null;
+  latestFinishAt?: string | null;
+  isRecurringTemplate?: boolean;
+  parentTaskId?: string | null;
+}): LegacyTask {
+  return {
+    id: params.id,
+    ownerUserId: null,
+    remoteId: null,
+    syncState: EntitySyncState.LocalOnly,
+    version: 1,
+    lastSyncedAt: null,
+    createdAt: fixtureTimestamp,
+    updatedAt: fixtureTimestamp,
+    goalId: params.goalId,
+    milestoneId: null,
+    parentTaskId: params.parentTaskId ?? null,
+    title: params.title,
+    summary: `${params.title} migrated from the legacy task model.`,
+    status: params.status,
+    schedulingState:
+      params.status === TaskStatus.Scheduled ? TaskSchedulingState.Committed : TaskSchedulingState.Unscheduled,
+    difficulty: TaskDifficulty.Moderate,
+    estimatedMinutes: 30,
+    actualMinutes: null,
+    effortPoints: null,
+    targetDate: params.targetDate ?? null,
+    scheduledDate: params.scheduledDate ?? null,
+    earliestStartAt: params.earliestStartAt ?? null,
+    latestFinishAt: params.latestFinishAt ?? null,
+    completedAt: params.status === TaskStatus.Completed ? fixtureTimestamp : null,
+    isRecurringTemplate: params.isRecurringTemplate ?? false,
+    tags: [],
+    metadata: {},
+  };
+}
+
+function makeLegacyMilestoneFixture(params: {
+  id: string;
+  goalId: string;
+  title: string;
+  targetDate?: string | null;
+}): GoalMilestone {
+  return {
+    id: params.id,
+    ownerUserId: null,
+    remoteId: null,
+    syncState: EntitySyncState.LocalOnly,
+    version: 1,
+    lastSyncedAt: null,
+    createdAt: fixtureTimestamp,
+    updatedAt: fixtureTimestamp,
+    goalId: params.goalId,
+    title: params.title,
+    summary: `${params.title} migrated from the legacy milestone model.`,
+    status: GoalMilestoneStatus.Pending,
+    targetDate: params.targetDate ?? null,
+    completedAt: null,
+    sortOrder: 0,
+    estimatedMinutes: null,
+    metadata: {},
+  };
+}
+
+export const migratedLegacyGoalCases = [
+  {
+    id: "migrated-learning-case",
+    goal: makeLegacyGoalFixture({
+      id: "legacy-learning-goal",
+      title: "Learn conversational Spanish",
+      goalType: GoalType.Outcome,
+      tags: ["learning"],
+      metadata: {
+        executionOwnership: ExecutionOwnership.Self,
+      },
+    }),
+    tasks: [
+      makeLegacyTaskFixture({
+        id: "legacy-learning-task",
+        goalId: "legacy-learning-goal",
+        title: "Complete the first conversation drill",
+        status: TaskStatus.Ready,
+        earliestStartAt: "2026-04-16T18:00:00.000Z",
+      }),
+    ],
+    milestones: [],
+    expectations: {
+      mode: GoalMode.Learning,
+      modeSource: ContractValueSource.LegacyGoalTags,
+      tempo: GoalTempo.Untimed,
+      tempoSource: ContractValueSource.DerivedContract,
+      ownership: ExecutionOwnership.Self,
+      ownershipSource: ContractValueSource.LegacyActorMetadata,
+      relationshipKind: GoalRelationshipKind.Independent,
+      relationshipSource: ContractValueSource.Migration,
+      stepTimingSource: ContractValueSource.LegacyTaskDates,
+    },
+  },
+  {
+    id: "migrated-support-case",
+    goal: makeLegacyGoalFixture({
+      id: "legacy-support-goal",
+      title: "Support Maya's science project",
+      goalType: GoalType.Project,
+      parentGoalId: "family-learning-goal",
+      tags: ["support"],
+      metadata: {
+        actorDisplayName: "Maya",
+        executionOwnership: ExecutionOwnership.Child,
+      },
+    }),
+    tasks: [
+      makeLegacyTaskFixture({
+        id: "legacy-support-task",
+        goalId: "legacy-support-goal",
+        title: "Ask Maya what still feels unclear",
+        status: TaskStatus.Scheduled,
+        scheduledDate: "2026-04-18",
+        targetDate: "2026-04-20",
+      }),
+    ],
+    milestones: [makeLegacyMilestoneFixture({ id: "legacy-support-milestone", goalId: "legacy-support-goal", title: "Choose the experiment angle", targetDate: "2026-04-22" })],
+    expectations: {
+      mode: GoalMode.DelegatedSupport,
+      modeSource: ContractValueSource.LegacyGoalTags,
+      tempo: GoalTempo.Ongoing,
+      tempoSource: ContractValueSource.DerivedContract,
+      ownership: ExecutionOwnership.Child,
+      ownershipSource: ContractValueSource.LegacyActorMetadata,
+      relationshipKind: GoalRelationshipKind.Support,
+      relationshipSource: ContractValueSource.DerivedContract,
+      stepTimingSource: ContractValueSource.LegacyTaskDates,
+    },
+  },
+  {
+    id: "migrated-deadline-case",
+    goal: makeLegacyGoalFixture({
+      id: "legacy-deadline-goal",
+      title: "Ship the travel archive",
+      goalType: GoalType.Project,
+      targetDate: "2026-07-01",
+      metadata: {},
+    }),
+    tasks: [
+      makeLegacyTaskFixture({
+        id: "legacy-deadline-task",
+        goalId: "legacy-deadline-goal",
+        title: "Finalize archive launch checklist",
+        status: TaskStatus.Scheduled,
+        latestFinishAt: "2026-06-28T20:00:00.000Z",
+      }),
+    ],
+    milestones: [makeLegacyMilestoneFixture({ id: "legacy-deadline-milestone", goalId: "legacy-deadline-goal", title: "Approve final archive copy", targetDate: "2026-06-25" })],
+    expectations: {
+      mode: GoalMode.Project,
+      modeSource: ContractValueSource.LegacyGoalType,
+      tempo: GoalTempo.DeadlineBased,
+      tempoSource: ContractValueSource.LegacyGoalDates,
+      ownership: ExecutionOwnership.Self,
+      ownershipSource: ContractValueSource.Migration,
+      relationshipKind: GoalRelationshipKind.Independent,
+      relationshipSource: ContractValueSource.Migration,
+      stepTimingSource: ContractValueSource.LegacyTaskDates,
+    },
+  },
+] as const;
+
+export const migratedLegacyGoalDraftFixtures = migratedLegacyGoalCases.map((scenario) => ({
+  id: scenario.id,
+  draft: migrateLegacyGoalDraft({ goal: scenario.goal }),
+  expectations: scenario.expectations,
+}));
+
+export const migratedLegacyPlanFixtures = migratedLegacyGoalCases.map((scenario) => ({
+  id: scenario.id,
+  plan: migrateLegacyPlan({
+    goal: scenario.goal,
+    milestones: [...scenario.milestones],
+    tasks: [...scenario.tasks],
+  }),
+  expectations: scenario.expectations,
+}));
+
+export const migratedLegacyGoalFixtures = migratedLegacyGoalCases.map((scenario) => ({
+  id: scenario.id,
+  goal: migrateLegacyGoal({
+    goal: scenario.goal,
+    milestones: [...scenario.milestones],
+    tasks: [...scenario.tasks],
+  }),
+  expectations: scenario.expectations,
+}));

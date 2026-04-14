@@ -13,6 +13,7 @@ export * from "./preferences";
 export * from "./rituals";
 export * from "./shared";
 export * from "./weekly";
+export * as GoalEngineCanonical from "./goalEngineContracts";
 export * as GoalEngineContracts from "./goalEngine";
 export * as GoalEngineFixtures from "./goalEngineFixtures";
 export * as GoalEngineMigration from "./goalEngineMigration";
