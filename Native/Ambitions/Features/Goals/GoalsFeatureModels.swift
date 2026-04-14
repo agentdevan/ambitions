@@ -132,6 +132,24 @@ enum GoalDetailActionKind: String, Sendable {
     case showPath
     case switchToUntimed
     case showSupportMode
+    case raisePriority
+    case lowerPriority
+}
+
+struct GoalClarificationQuestionState: Identifiable, Sendable {
+    let id: String
+    let field: MissingFieldKey
+    let prompt: String
+    let rationale: String
+    let gentleDefault: String
+    let existingAnswer: String?
+}
+
+struct GoalClarificationAnswerRequest: Sendable {
+    let target: GoalRouteTarget
+    let questionID: String
+    let field: MissingFieldKey
+    let answer: String
 }
 
 struct GoalDetailActionRequest: Sendable {
@@ -220,7 +238,7 @@ struct GoalFeedbackItem: Identifiable, Sendable {
 struct GoalClarificationState: Sendable {
     let title: String
     let subtitle: String
-    let questions: [TodayClarificationQuestionState]
+    let questions: [GoalClarificationQuestionState]
 }
 
 struct GoalBlockedState: Sendable {
@@ -237,6 +255,7 @@ struct GoalDetailPresentation: Sendable {
     let progress: GoalDetailProgress
     let timingNote: String
     let progressNote: String
+    let manualPriorityLabel: String
     let assumptions: [String]
     let suggestions: [GoalDetailStepItem]
     let pathStages: [GoalPathStage]

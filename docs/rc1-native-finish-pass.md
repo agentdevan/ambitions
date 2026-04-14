@@ -85,17 +85,16 @@ Scope: native SwiftUI finish pass for motion/polish, accessibility, planner trus
 
 ## Remaining Blockers
 
-- Apple-side compile and archive validation are still unverified in this environment.
-- Real simulator/device validation for SwiftUI layout, animation, and VoiceOver remains outstanding.
-- Insights and Profile are still backed by fixture-style services rather than repository-backed native detail flows.
-- App-state restoration, background lifecycle handling, and scene transitions need Apple runtime validation.
-- Notification, widget, and account flows still need device-level entitlement and integration checks.
+- Apple-side compile, archive, signing, and App Store validation are still unverified in this environment.
+- Real simulator/device validation for SwiftUI layout, animation, VoiceOver, scene transitions, and lifecycle behavior remains outstanding.
+- Notification, widget, and connected-account systems remain post-1.0 scope and therefore are not RC 1.0 repo blockers.
 
 ## High-Risk Flows
 
 - First launch and seed/bootstrap path.
 - Today action handling: complete, delay, skip, smaller step, why-this-matters, quick log, help.
-- Goal Detail action rail: complete, delay, skip, smaller, stuck, untimed, support mode.
+- Goal Detail action rail: complete, delay, skip, smaller, stuck, untimed, support mode, manual priority up/down.
+- Goal Detail clarification answer write-back and draft recompilation.
 - Habit logging and cadence advancement, especially minimum-version and skip/recovery behavior.
 - Navigation handoff from Today/Habits into Goal Detail.
 - Insights/Profile fallback states and empty/error transitions.
@@ -146,7 +145,9 @@ Scope: native SwiftUI finish pass for motion/polish, accessibility, planner trus
 - Shared motion/reduced-motion primitives for cards, rails, segmented controls, and tab shell.
 - Native loading/error/refresh scaffolds across all major screens.
 - Removal of obvious placeholder/demo admissions in live UI copy.
-- Non-dead-end presentation for Insights/Profile.
+- Repository-backed Insights readout over persisted goals, drafts, evidence, feedback, and habit history.
+- Repository-backed Profile with persisted local preferences and explicit local-first RC scope.
+- Clarification answer write-back, manual priority persistence, typed habit evidence, and help-first Goal Detail routing.
 - Planner-trust wording for Today, Goals, Goal Detail, and Habits.
 
 ### Requires Real Device or Apple Runtime
@@ -154,12 +155,17 @@ Scope: native SwiftUI finish pass for motion/polish, accessibility, planner trus
 - Final animation feel, haptics absence/presence, and scroll smoothness.
 - Dynamic Type clipping and VoiceOver rotor/read-order verification.
 - Safe-area, tab-bar, and navigation-bar behavior on multiple device classes.
-- Widget, notification, and account entitlement validation.
+- Notification, widget, and connected-account entitlement validation if those systems are brought into post-1.0 scope.
 - Archive signing, symbol generation, and App Store submission preflight.
 
 ## Known Limitations Before RC 1.0
 
-- Insights and Profile still render high-quality native surfaces over fixture-backed data rather than full repository-backed detail workflows.
 - No Apple-toolchain verification was possible in this environment because `swift`, Xcode, simulator, and archive tools are unavailable here.
 - Performance validation is code-review-based only; there is no Instruments trace yet.
 - Real-device checks for VoiceOver cadence, haptic feel, and final frame pacing remain open.
+
+## RC 1.0 Scope Statement
+
+- RC 1.0 includes the native shell, Today, Goals, Goal Detail, Habits, Insights, Profile, local persistence, planner/adaptation, clarification write-back, manual priority ordering, and typed habit evidence.
+- RC 1.0 is intentionally local-first. Connected account, sync, and fake-auth blockers are out of scope for this release candidate.
+- Home-screen widgets and notifications remain post-1.0 systems unless Apple validation is explicitly scheduled as a separate pass.

@@ -114,6 +114,9 @@ enum ProgressRollupMethod: String, Codable, Sendable {
 
 enum ProgressEvidenceKind: String, Codable, Sendable {
     case stepCompleted = "step_completed"
+    case habitCompletion = "habit_completion"
+    case habitMinimumVersion = "habit_minimum_version"
+    case habitQuickLog = "habit_quick_log"
     case sessionLogged = "session_logged"
     case reflectionLogged = "reflection_logged"
     case delegatedUpdate = "delegated_update"

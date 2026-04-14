@@ -47,6 +47,9 @@ struct GoalDetailScreen: View {
                             Text(detail.outcome)
                                 .font(theme.typography.bodyEmphasized)
                                 .foregroundStyle(theme.colors.textPrimary)
+                            Text(detail.manualPriorityLabel)
+                                .font(theme.typography.caption)
+                                .foregroundStyle(theme.colors.textSecondary)
                             Text(detail.timingNote)
                                 .font(theme.typography.caption)
                                 .foregroundStyle(theme.colors.textSecondary)
@@ -59,6 +62,15 @@ struct GoalDetailScreen: View {
                     GoalDetailSectionCard(title: "Action Rail", subtitle: "These controls write back to the real native plan and feedback history.") {
                         GoalActionGrid(actions: detail.actions) { action in
                             Task { await viewModel.perform(action, using: container.goalsService) }
+                        }
+                    }
+
+                    if detail.target.launchContext == .help {
+                        AppCard(state: .warning) {
+                            SectionHeader(
+                                title: "Help-first route",
+                                subtitle: "This detail view opened from a help or correction action, so the path view is leading with the smallest trustworthy next move."
+                            )
                         }
                     }
 
@@ -88,6 +100,21 @@ struct GoalDetailScreen: View {
                                         Text("Safe default: \(question.gentleDefault)")
                                             .font(theme.typography.caption)
                                             .foregroundStyle(theme.colors.textTertiary)
+                                        TextField(
+                                            "Write the smallest real answer",
+                                            text: Binding(
+                                                get: { viewModel.clarificationAnswers[question.id, default: question.existingAnswer ?? ""] },
+                                                set: { viewModel.clarificationAnswers[question.id] = $0 }
+                                            ),
+                                            axis: .vertical
+                                        )
+                                        .textFieldStyle(.roundedBorder)
+                                        .padding(.top, theme.spacing.xs)
+                                        Button("Save answer") {
+                                            Task { await viewModel.saveClarificationAnswer(question, using: container.goalsService) }
+                                        }
+                                        .buttonStyle(AmbitionPressableButtonStyle(state: .selected))
+                                        .padding(.top, theme.spacing.xs)
                                     }
                                     .padding(theme.spacing.sm)
                                     .background(RoundedRectangle(cornerRadius: theme.radius.md, style: .continuous).fill(theme.colors.surfaceOverlay))

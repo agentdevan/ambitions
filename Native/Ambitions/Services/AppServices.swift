@@ -14,6 +14,7 @@ protocol GoalsServicing: Sendable {
     func loadOverview() async throws -> GoalsOverview
     func loadDetail(target: GoalRouteTarget) async throws -> GoalDetailPresentation
     func performAction(_ request: GoalDetailActionRequest, now: Date) async throws -> GoalDetailActionResponse
+    func submitClarificationAnswer(_ request: GoalClarificationAnswerRequest, now: Date) async throws -> GoalDetailActionResponse
 }
 
 protocol HabitsServicing: Sendable {
@@ -27,6 +28,7 @@ protocol InsightsServicing: Sendable {
 
 protocol ProfileServicing: Sendable {
     func loadProfileDashboard() async throws -> ProfileDashboard
+    func saveProfilePreferences(_ preferences: ProfilePreferencesUpdate) async throws -> ProfileDashboard
 }
 
 protocol AppActionRouting {
@@ -87,6 +89,10 @@ struct StubInsightsService: InsightsServicing {
 struct StubProfileService: ProfileServicing {
     let fixtures: PreviewFixtures
     func loadProfileDashboard() async throws -> ProfileDashboard { fixtures.profileDashboard }
+    func saveProfilePreferences(_ preferences: ProfilePreferencesUpdate) async throws -> ProfileDashboard {
+        _ = preferences
+        return fixtures.profileDashboard
+    }
 }
 
 @MainActor

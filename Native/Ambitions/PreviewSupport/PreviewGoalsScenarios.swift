@@ -40,6 +40,7 @@ enum PreviewGoalsScenarios {
             progress: GoalDetailProgress(label: "5 of 11 steps landed", detail: "Progress is reading the real persisted plan and evidence history.", value: 0.46, evidenceLabel: "85 minutes of visible evidence"),
             timingNote: "The deadline is real, but the path should still stay session-sized.",
             progressNote: "The next step stays small enough to act on without losing the broader path.",
+            manualPriorityLabel: "Manual priority #1",
             assumptions: [],
             suggestions: [
                 GoalDetailStepItem(id: "s1", title: "Wire Goal Detail into Today route actions", summary: "Replace the Today placeholder and land on the real goal target.", timingLabel: "Due 2026-04-15", statusLabel: "Planned", state: .selected),
@@ -88,6 +89,7 @@ enum PreviewGoalsScenarios {
             progress: GoalDetailProgress(label: "Starter path in motion", detail: "Starter-plan assumptions are being treated as temporary scaffolding.", value: 0.22, evidenceLabel: "No evidence logged yet"),
             timingNote: "This goal is intentionally untimed, so progress is visible without an artificial countdown.",
             progressNote: "Starter plans are allowed to be provisional while the system learns what actually helps.",
+            manualPriorityLabel: "Manual priority #2",
             assumptions: ["A single rough pass is enough signal.", "You do not need the whole system figured out before the first session."],
             suggestions: [
                 GoalDetailStepItem(id: "ls1", title: "Record one rough pass", summary: "Capture one take and note the muddiest frequency area.", timingLabel: "Untimed", statusLabel: "Planned", state: .selected),
@@ -124,13 +126,14 @@ enum PreviewGoalsScenarios {
             progress: GoalDetailProgress(label: "Clarification first", detail: "Progress is paused until the missing context is explicit.", value: 0.05, evidenceLabel: "No evidence logged yet"),
             timingNote: "Support goals should suggest windows, not impose pressure.",
             progressNote: "Clarification comes before decomposition. Ambitions is surfacing the missing information instead of inventing urgency.",
+            manualPriorityLabel: "Manual priority #4",
             assumptions: [],
             suggestions: [],
             pathStages: [],
             sections: [],
             clarification: GoalClarificationState(title: "Clarification needed", subtitle: "Ambitions is pausing decomposition until these questions are answered cleanly.", questions: [
-                TodayClarificationQuestionState(id: "cq1", prompt: "Who is this actually for?", rationale: "The planner needs to know whose work is being supported.", gentleDefault: "If unclear, assume you are supporting without taking ownership."),
-                TodayClarificationQuestionState(id: "cq2", prompt: "What visible outcome would matter most?", rationale: "A single success definition leads to a cleaner path.", gentleDefault: "Start with the smallest visible improvement you would notice."),
+                GoalClarificationQuestionState(id: "cq1", field: .executorIdentity, prompt: "Who is this actually for?", rationale: "The planner needs to know whose work is being supported.", gentleDefault: "If unclear, assume you are supporting without taking ownership.", existingAnswer: nil),
+                GoalClarificationQuestionState(id: "cq2", field: .successDefinition, prompt: "What visible outcome would matter most?", rationale: "A single success definition leads to a cleaner path.", gentleDefault: "Start with the smallest visible improvement you would notice.", existingAnswer: nil),
             ]),
             blocked: nil,
             evidence: [],
@@ -152,6 +155,7 @@ enum PreviewGoalsScenarios {
             progress: GoalDetailProgress(label: "Blocked state", detail: "The planner kept the constraint explicit instead of inventing fake tasks.", value: 0.04, evidenceLabel: "No evidence logged yet"),
             timingNote: "The window matters, but the path still stays flexible.",
             progressNote: "The blocker is kept visible so the path can restart cleanly once the missing input arrives.",
+            manualPriorityLabel: "Manual priority #5",
             assumptions: [],
             suggestions: [],
             pathStages: [],
@@ -176,6 +180,7 @@ enum PreviewGoalsScenarios {
             progress: GoalDetailProgress(label: "2 of 7 support steps landed", detail: "Progress is reading the real persisted plan and evidence history.", value: 0.31, evidenceLabel: "45 minutes of visible evidence"),
             timingNote: "Support goals should suggest windows, not impose pressure.",
             progressNote: "Support goals stay non-punitive. Progress reflects what you can support, not what you can force.",
+            manualPriorityLabel: "Manual priority #3",
             assumptions: [],
             suggestions: [
                 GoalDetailStepItem(id: "ss1", title: "Set up one calm reading check-in", summary: "Invite Maya to choose the time and the book.", timingLabel: "Support window open", statusLabel: "Planned", state: .selected),

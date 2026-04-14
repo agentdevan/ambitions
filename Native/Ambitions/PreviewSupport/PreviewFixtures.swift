@@ -92,9 +92,9 @@ struct PreviewFixtures: Sendable {
         ),
         profileDashboard: ProfileDashboard(
             title: "Devan Warner",
-            subtitle: "Builder mode, native-first roadmap.",
+            subtitle: "Local-first native roadmap.",
             initials: "DW",
-            badges: ["Native pivot", "Spec keeper", "Design system"],
+            badges: ["Local-first", "Native pivot", "Design system"],
             stats: [
                 MetricSummary(id: "profile-1", title: "Open ambitions", value: "3", detail: "In active review", icon: "target"),
                 MetricSummary(id: "profile-2", title: "Tracked habits", value: "6", detail: "Current set", icon: "repeat"),
@@ -102,14 +102,15 @@ struct PreviewFixtures: Sendable {
                 MetricSummary(id: "profile-4", title: "Theme", value: "Dark", detail: "Default shell", icon: "moon.stars")
             ],
             settingsTitle: "Native app configuration",
-            settingsSubtitle: "Core planning defaults and account-facing controls.",
+            settingsSubtitle: "Core local preferences and RC scope markers.",
             settings: [
                 SettingsItem(id: "profile-setting-1", title: "Planning storage", subtitle: "Native persistence is active for goals, habits, and evidence", icon: "internaldrive", valueLabel: "Local-first"),
-                SettingsItem(id: "profile-setting-2", title: "Notifications", subtitle: "Intent-based nudges and reminders", icon: "bell.badge", valueLabel: "Configured"),
-                SettingsItem(id: "profile-setting-3", title: "Widgets", subtitle: "Home and lock screen delivery", icon: "square.grid.2x2", valueLabel: "Integrated"),
-                SettingsItem(id: "profile-setting-4", title: "Account", subtitle: "Identity and sync readiness", icon: "person.badge.key", valueLabel: "Review")
+                SettingsItem(id: "profile-setting-2", title: "Default tab", subtitle: "Used on the next cold launch", icon: "square.grid.2x2", valueLabel: "Today"),
+                SettingsItem(id: "profile-setting-3", title: "Review cadence", subtitle: "How often the app should frame a reset", icon: "clock.arrow.circlepath", valueLabel: "Weekly"),
+                SettingsItem(id: "profile-setting-4", title: "Connected account", subtitle: "Sync and auth are intentionally outside RC 1.0 scope", icon: "person.badge.key", valueLabel: "Post-1.0")
             ],
-            settingsFooter: "Keep these defaults legible so the planning system feels transparent before deeper account and sync flows are validated on device."
+            settingsFooter: "RC 1.0 is intentionally local-first while Apple-side notifications, widgets, and connected-account work stay outside blocker scope.",
+            preferences: ProfilePreferencesState(preferredTab: .today, reviewCadenceDays: 7, localOnlyModeEnabled: true)
         )
     )
 }

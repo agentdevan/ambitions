@@ -138,7 +138,7 @@ enum PreviewTodayScenarios {
         milestone: TodayMilestoneState(title: "Milestone prompt", subtitle: "No active milestone yet", prompt: "Once a goal exists, Today will pull the next milestone cue from the real plan.", confidenceLabel: "Waiting on first goal", action: nil),
         momentum: TodayMomentumState(title: "Momentum", subtitle: "Progress summary", metrics: [], note: "The first real goal will light this up."),
         celebration: nil,
-        quickCapture: TodayQuickCaptureState(title: "Quick capture", subtitle: "Capture is ready when the first goal is.", prompt: "Quick log will attach to a real step once one exists.", helpText: "Ask for help will route into goal detail after that flow lands.", actions: []),
+        quickCapture: TodayQuickCaptureState(title: "Quick capture", subtitle: "Capture is ready when the first goal is.", prompt: "Quick log will attach to a real step once one exists.", helpText: "Ask for help now routes into the native Goal Detail help path.", actions: []),
         reflection: TodayReflectionState(title: "End-of-day reflection", subtitle: "A calm close still counts.", prompt: "What do you want future Today to help you protect?", highlights: [], actions: [])
     )
 

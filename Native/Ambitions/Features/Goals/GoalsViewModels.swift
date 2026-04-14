@@ -96,6 +96,7 @@ final class GoalDetailViewModel {
     var state: AsyncViewState<GoalDetailPresentation>
     var inlineMessage: GoalDetailInlineMessage?
     var lens: GoalDetailLens
+    var clarificationAnswers: [String: String]
 
     private var hasLoaded = false
 
@@ -114,12 +115,14 @@ final class GoalDetailViewModel {
         target: GoalRouteTarget,
         state: AsyncViewState<GoalDetailPresentation> = .loading,
         inlineMessage: GoalDetailInlineMessage? = nil,
-        lens: GoalDetailLens = .tasks
+        lens: GoalDetailLens = .tasks,
+        clarificationAnswers: [String: String] = [:]
     ) {
         self.target = target
         self.state = state
         self.inlineMessage = inlineMessage
         self.lens = lens
+        self.clarificationAnswers = clarificationAnswers
     }
 
     func load(using service: any GoalsServicing) async {
@@ -132,6 +135,9 @@ final class GoalDetailViewModel {
         do {
             let detail = try await service.loadDetail(target: target)
             state = .loaded(detail)
+            if clarificationAnswers.isEmpty {
+                clarificationAnswers = Dictionary(uniqueKeysWithValues: detail.clarification?.questions.map { ($0.id, $0.existingAnswer ?? "") } ?? [])
+            }
             if hasLoaded == false || inlineMessage == nil {
                 lens = detail.defaultLens
             }
@@ -161,6 +167,33 @@ final class GoalDetailViewModel {
         } catch {
             inlineMessage = GoalDetailInlineMessage(
                 title: "Action failed",
+                body: error.localizedDescription,
+                state: .warning
+            )
+        }
+    }
+
+    func saveClarificationAnswer(
+        _ question: GoalClarificationQuestionState,
+        using service: any GoalsServicing,
+        now: Date = .now
+    ) async {
+        let answer = clarificationAnswers[question.id, default: ""]
+        do {
+            let response = try await service.submitClarificationAnswer(
+                GoalClarificationAnswerRequest(
+                    target: target,
+                    questionID: question.id,
+                    field: question.field,
+                    answer: answer
+                ),
+                now: now
+            )
+            inlineMessage = response.message
+            await refresh(using: service)
+        } catch {
+            inlineMessage = GoalDetailInlineMessage(
+                title: "Clarification failed",
                 body: error.localizedDescription,
                 state: .warning
             )

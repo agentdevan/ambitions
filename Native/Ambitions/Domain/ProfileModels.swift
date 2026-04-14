@@ -8,6 +8,18 @@ struct SettingsItem: Identifiable, Sendable {
     let valueLabel: String?
 }
 
+struct ProfilePreferencesState: Sendable, Equatable {
+    let preferredTab: AppTab
+    let reviewCadenceDays: Int
+    let localOnlyModeEnabled: Bool
+}
+
+struct ProfilePreferencesUpdate: Sendable, Equatable {
+    let preferredTab: AppTab
+    let reviewCadenceDays: Int
+    let localOnlyModeEnabled: Bool
+}
+
 struct ProfileDashboard: Sendable {
     let title: String
     let subtitle: String
@@ -18,4 +30,5 @@ struct ProfileDashboard: Sendable {
     let settingsSubtitle: String
     let settings: [SettingsItem]
     let settingsFooter: String
+    let preferences: ProfilePreferencesState
 }

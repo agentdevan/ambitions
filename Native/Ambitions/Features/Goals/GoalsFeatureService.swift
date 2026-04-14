@@ -4,13 +4,16 @@ import Foundation
 struct RepositoryBackedGoalsService: GoalsServicing {
     let repositories: AppRepositories
     let adaptationService: GoalEngineAdaptationService
+    let orchestrator: GoalEngineOrchestrator
 
     init(
         repositories: AppRepositories,
-        adaptationService: GoalEngineAdaptationService = GoalEngineAdaptationService()
+        adaptationService: GoalEngineAdaptationService = GoalEngineAdaptationService(),
+        orchestrator: GoalEngineOrchestrator = GoalEngineOrchestrator()
     ) {
         self.repositories = repositories
         self.adaptationService = adaptationService
+        self.orchestrator = orchestrator
     }
 
     func loadOverview() async throws -> GoalsOverview {
@@ -43,6 +46,43 @@ struct RepositoryBackedGoalsService: GoalsServicing {
         default:
             return try await performMutation(request: request, detail: detail, now: now)
         }
+    }
+
+    func submitClarificationAnswer(_ request: GoalClarificationAnswerRequest, now: Date) async throws -> GoalDetailActionResponse {
+        let snapshot = try await loadSnapshot()
+        guard let draft = snapshot.drafts.first(where: { $0.id == request.target.draftID || ($0.plannedGoalID != nil && $0.plannedGoalID == request.target.goalID) }) else {
+            throw GoalsFeatureError.notFound
+        }
+
+        let trimmed = request.answer.trimmingCharacters(in: .whitespacesAndNewlines)
+        guard trimmed.isEmpty == false else {
+            return GoalDetailActionResponse(
+                message: GoalDetailInlineMessage(
+                    title: "Answer still needed",
+                    body: "Write the smallest real answer you have. Ambitions will keep the plan provisional rather than inventing one.",
+                    state: .warning
+                )
+            )
+        }
+
+        let updatedDraft = materializeDraft(
+            from: draft,
+            answeredField: request.field,
+            answer: trimmed,
+            now: now
+        )
+        try await repositories.drafts.saveDrafts([updatedDraft.draft])
+        if let goal = updatedDraft.goal {
+            try await repositories.goals.saveGoals([goal])
+        }
+
+        return GoalDetailActionResponse(
+            message: GoalDetailInlineMessage(
+                title: updatedDraft.draft.latestResultKind == .clarificationRequired ? "Clarification saved" : "Plan refreshed",
+                body: updatedDraft.message,
+                state: updatedDraft.draft.latestResultKind == .clarificationRequired ? .selected : .success
+            )
+        )
     }
 }
 
@@ -94,6 +134,18 @@ struct StubGoalsService: GoalsServicing {
 
         return GoalDetailActionResponse(
             message: GoalDetailInlineMessage(title: title, body: body, state: .selected)
+        )
+    }
+
+    func submitClarificationAnswer(_ request: GoalClarificationAnswerRequest, now: Date) async throws -> GoalDetailActionResponse {
+        _ = request
+        _ = now
+        return GoalDetailActionResponse(
+            message: GoalDetailInlineMessage(
+                title: "Clarification saved",
+                body: "Preview mode keeps the write-back interaction intact while the live service recompiles the draft.",
+                state: .selected
+            )
         )
     }
 }
@@ -172,19 +224,22 @@ private extension RepositoryBackedGoalsService {
     }
 
     func makeOverview(snapshot: Snapshot) -> GoalsOverview {
-        let goalItems = snapshot.goals.enumerated().map { index, goal in
+        let orderedIDs = normalizedPriorityOrder(snapshot: snapshot)
+        let manualRanks = Dictionary(uniqueKeysWithValues: orderedIDs.enumerated().map { ($1, $0) })
+
+        let goalItems = snapshot.goals.map { goal in
             makeGoalListItem(
                 goal: goal,
                 draft: snapshot.drafts.first(where: { $0.plannedGoalID == goal.id }),
                 evidence: snapshot.evidence,
                 feedback: snapshot.feedback,
-                manualRank: index
+                manualRank: manualRanks[goal.id] ?? manualRanks.count
             )
         }
 
-        let draftItems = snapshot.drafts.enumerated().compactMap { index, draft -> GoalListItem? in
+        let draftItems = snapshot.drafts.compactMap { draft -> GoalListItem? in
             guard draft.plannedGoalID == nil else { return nil }
-            return makeDraftListItem(draft: draft, manualRank: snapshot.goals.count + index)
+            return makeDraftListItem(draft: draft, manualRank: manualRanks[draft.id] ?? manualRanks.count)
         }
 
         let items = goalItems + draftItems
@@ -226,7 +281,7 @@ private extension RepositoryBackedGoalsService {
             }
         }
 
-        return buildDetailPresentation(from: context)
+        return buildDetailPresentation(from: context, appState: snapshot.appState, priorityOrder: normalizedPriorityOrder(snapshot: snapshot))
     }
 
     func resolveDetailContext(target: GoalRouteTarget, snapshot: Snapshot) throws -> DetailContext {
@@ -354,7 +409,7 @@ private extension RepositoryBackedGoalsService {
         )
     }
 
-    func buildDetailPresentation(from context: DetailContext) -> GoalDetailPresentation {
+    func buildDetailPresentation(from context: DetailContext, appState: AppStateSnapshot, priorityOrder: [String]) -> GoalDetailPresentation {
         let sourceGoal = context.goal
         let sourceDraft = context.draft?.draft
         let effectiveMode = sourceGoal?.mode ?? sourceDraft?.mode ?? .project
@@ -416,6 +471,7 @@ private extension RepositoryBackedGoalsService {
                     : effectiveMode == .delegatedSupport
                         ? "Support goals stay non-punitive. Progress reflects what you can support, not what you can force."
                         : "The next step stays small enough to act on without losing the broader path.",
+            manualPriorityLabel: manualPriorityLabel(for: context, appState: appState, priorityOrder: priorityOrder),
             assumptions: context.draft?.assumptions.map(\.summary) ?? [],
             suggestions: suggestions,
             pathStages: pathStages,
@@ -442,6 +498,10 @@ private extension RepositoryBackedGoalsService {
         detail: DetailContext,
         now: Date
     ) async throws -> GoalDetailActionResponse {
+        if request.kind == .raisePriority || request.kind == .lowerPriority {
+            return try await adjustPriority(for: detail, direction: request.kind == .raisePriority ? -1 : 1)
+        }
+
         guard var goal = detail.goal else {
             throw GoalsFeatureError.notActionable
         }
@@ -493,7 +553,7 @@ private extension RepositoryBackedGoalsService {
                     id: "evidence-\(UUID().uuidString)",
                     goalID: goal.id,
                     stepID: selectedStep.id,
-                    evidenceKind: .stepCompleted,
+                    evidenceKind: HabitGoalSemantics.isHabitLike(goal: goal, step: selectedStep) ? .habitCompletion : .stepCompleted,
                     source: .manual,
                     capturedAt: timestamp,
                     progressDelta: 0.18,
@@ -650,7 +710,7 @@ private extension RepositoryBackedGoalsService {
                     state: .selected
                 )
             )
-        case .showPath, .showSupportMode:
+        case .showPath, .showSupportMode, .raisePriority, .lowerPriority:
             return GoalDetailActionResponse(message: nil)
         }
     }
@@ -678,6 +738,185 @@ private extension RepositoryBackedGoalsService {
         return GoalDetailActionResponse(
             message: message(for: adjustment.recommendation, fallbackTitle: fallbackTitle, fallbackBody: fallbackBody)
         )
+    }
+
+    func adjustPriority(for detail: DetailContext, direction: Int) async throws -> GoalDetailActionResponse {
+        let snapshot = try await loadSnapshot()
+        let identifier = detail.goal?.id ?? detail.draft?.id
+        guard let identifier else {
+            throw GoalsFeatureError.notFound
+        }
+
+        var state = snapshot.appState
+        var ordered = normalizedPriorityOrder(snapshot: snapshot)
+        guard let currentIndex = ordered.firstIndex(of: identifier) else {
+            throw GoalsFeatureError.notFound
+        }
+
+        let nextIndex = min(max(0, currentIndex + direction), max(ordered.count - 1, 0))
+        if nextIndex != currentIndex {
+            ordered.swapAt(currentIndex, nextIndex)
+            state.goalPriorityOrder = ordered
+            try await repositories.appState.saveState(state)
+        }
+
+        let rank = (ordered.firstIndex(of: identifier) ?? currentIndex) + 1
+        return GoalDetailActionResponse(
+            message: GoalDetailInlineMessage(
+                title: "Priority updated",
+                body: "This item now sits at manual priority #\(rank). Goals sort will preserve that order when you switch to the Priority lens.",
+                state: .selected
+            )
+        )
+    }
+
+    func materializeDraft(
+        from existingDraft: PersistedGoalDraft,
+        answeredField: MissingFieldKey,
+        answer: String,
+        now: Date
+    ) -> (draft: PersistedGoalDraft, goal: Goal?, message: String) {
+        var clarifiedFields = existingDraft.metadata?.context.clarifiedFields ?? [:]
+        clarifiedFields[answeredField.rawValue] = answer
+
+        let previousContext = existingDraft.metadata?.context
+        let result = orchestrator.compileGoal(
+            existingDraft.metadata?.input.rawInput ?? existingDraft.draft.title,
+            context: GoalEngineOrchestrationContext(
+                actorName: previousContext?.actorName,
+                preferredPlanningStrictness: previousContext?.preferredPlanningStrictness ?? .balanced,
+                goalOwnerRole: previousContext?.goalOwnerRole,
+                supportScope: previousContext?.supportScope,
+                deadlineHints: previousContext?.deadlineHints ?? [],
+                existingGoalReferences: previousContext?.existingGoalReferences ?? [],
+                sourceScreen: previousContext?.sourceScreen,
+                sourceFlow: previousContext?.sourceFlow,
+                clarifiedFields: Dictionary(uniqueKeysWithValues: clarifiedFields.compactMap { key, value in
+                    MissingFieldKey(rawValue: key).map { ($0, value) }
+                }),
+                referenceNow: Self.iso.string(from: now)
+            )
+        )
+
+        let updatedAt = Self.iso.string(from: now)
+        let draft: PersistedGoalDraft
+        let goal: Goal?
+        let message: String
+
+        switch result {
+        case let .clarificationRequired(required):
+            draft = PersistedGoalDraft(
+                id: existingDraft.id,
+                createdAt: existingDraft.createdAt,
+                updatedAt: updatedAt,
+                draft: required.draft,
+                classification: nil,
+                clarification: required.clarification,
+                stagedPlan: nil,
+                assumptions: required.metadata.reasoning.assumptions,
+                blockers: [],
+                metadata: required.metadata,
+                plannedGoalID: nil,
+                latestResultKind: .clarificationRequired
+            )
+            goal = nil
+            message = "The answer was saved, but the planner is still waiting on the remaining missing detail."
+        case let .blocked(blocked):
+            draft = PersistedGoalDraft(
+                id: existingDraft.id,
+                createdAt: existingDraft.createdAt,
+                updatedAt: updatedAt,
+                draft: blocked.draft,
+                classification: nil,
+                clarification: blocked.clarification,
+                stagedPlan: nil,
+                assumptions: blocked.metadata.reasoning.assumptions,
+                blockers: blocked.blockers,
+                metadata: blocked.metadata,
+                plannedGoalID: nil,
+                latestResultKind: .blocked
+            )
+            goal = nil
+            message = "The answer was saved. The blocker is clearer now, but the draft still needs one real constraint resolved."
+        case let .planned(planned):
+            let plannedGoalID = existingDraft.plannedGoalID ?? planned.plan.goalID
+            draft = PersistedGoalDraft(
+                id: existingDraft.id,
+                createdAt: existingDraft.createdAt,
+                updatedAt: updatedAt,
+                draft: planned.draft,
+                classification: nil,
+                clarification: planned.metadata.clarification,
+                stagedPlan: planned.plan,
+                assumptions: [],
+                blockers: [],
+                metadata: planned.metadata,
+                plannedGoalID: plannedGoalID,
+                latestResultKind: .planned
+            )
+            goal = Goal(
+                schemaVersion: goalEngineSchemaVersion,
+                id: plannedGoalID,
+                revision: existingDraft.plannedGoalID == nil ? 1 : 2,
+                createdAt: existingDraft.createdAt,
+                updatedAt: updatedAt,
+                state: .active,
+                title: planned.draft.title,
+                summary: planned.draft.summary,
+                mode: planned.draft.mode,
+                relationshipKind: planned.draft.relationshipKind,
+                actor: planned.draft.actor,
+                parentGoalID: planned.draft.parentGoalID,
+                childGoalIDs: [],
+                supportGoalIDs: [],
+                tags: planned.draft.tags,
+                timing: planned.draft.timing,
+                planningStrategy: planned.draft.planningStrategy,
+                progressStrategy: planned.draft.progressStrategy,
+                plan: planned.plan
+            )
+            message = "The clarification unlocked a full plan. Goal Detail is now reading a real persisted path instead of a blocked draft."
+        case let .starterPlanned(starter):
+            let plannedGoalID = existingDraft.plannedGoalID ?? starter.plan.goalID
+            draft = PersistedGoalDraft(
+                id: existingDraft.id,
+                createdAt: existingDraft.createdAt,
+                updatedAt: updatedAt,
+                draft: starter.draft,
+                classification: nil,
+                clarification: starter.clarification,
+                stagedPlan: starter.plan,
+                assumptions: starter.assumptions,
+                blockers: [],
+                metadata: starter.metadata,
+                plannedGoalID: plannedGoalID,
+                latestResultKind: .starterPlanned
+            )
+            goal = Goal(
+                schemaVersion: goalEngineSchemaVersion,
+                id: plannedGoalID,
+                revision: (existingDraft.plannedGoalID == nil ? 1 : 2),
+                createdAt: existingDraft.createdAt,
+                updatedAt: updatedAt,
+                state: .active,
+                title: starter.draft.title,
+                summary: starter.draft.summary,
+                mode: starter.draft.mode,
+                relationshipKind: starter.draft.relationshipKind,
+                actor: starter.draft.actor,
+                parentGoalID: starter.draft.parentGoalID,
+                childGoalIDs: [],
+                supportGoalIDs: [],
+                tags: starter.draft.tags,
+                timing: starter.draft.timing,
+                planningStrategy: starter.draft.planningStrategy,
+                progressStrategy: starter.draft.progressStrategy,
+                plan: starter.plan
+            )
+            message = "The clarification unlocked a starter plan. The path stays provisional, but it now writes back as a real native goal."
+        }
+
+        return (draft, goal, message)
     }
 
     func updatedGoal(goal: Goal, step: Step, recommendation: GoalReplanRecommendation) -> Goal {
@@ -778,11 +1017,13 @@ private extension RepositoryBackedGoalsService {
             title: "Clarification needed",
             subtitle: "Ambitions is pausing decomposition until these questions are answered cleanly.",
             questions: clarification.questions.map {
-                TodayClarificationQuestionState(
+                GoalClarificationQuestionState(
                     id: $0.id,
+                    field: $0.field,
                     prompt: $0.prompt,
                     rationale: $0.rationale,
-                    gentleDefault: $0.skipSafeDefault
+                    gentleDefault: $0.skipSafeDefault,
+                    existingAnswer: draft?.metadata?.context.clarifiedFields[$0.field.rawValue]
                 )
             }
         )
@@ -798,6 +1039,22 @@ private extension RepositoryBackedGoalsService {
         )
     }
 
+    func normalizedPriorityOrder(snapshot: Snapshot) -> [String] {
+        let liveIDs = snapshot.goals.map(\.id) + snapshot.drafts.filter { $0.plannedGoalID == nil }.map(\.id)
+        let preserved = snapshot.appState.goalPriorityOrder.filter { liveIDs.contains($0) }
+        let missing = liveIDs.filter { preserved.contains($0) == false }
+        return preserved + missing
+    }
+
+    func manualPriorityLabel(for context: DetailContext, appState: AppStateSnapshot, priorityOrder: [String]) -> String {
+        let identifier = context.goal?.id ?? context.draft?.id
+        let ordered = appState.goalPriorityOrder.isEmpty ? priorityOrder : appState.goalPriorityOrder
+        guard let identifier, let index = ordered.firstIndex(of: identifier) else {
+            return "Priority will follow the current portfolio order until you adjust it."
+        }
+        return "Manual priority #\(index + 1)"
+    }
+
     func detailActions(
         for state: GoalRenderState,
         primaryStepAvailable: Bool,
@@ -806,6 +1063,8 @@ private extension RepositoryBackedGoalsService {
     ) -> [GoalDetailActionState] {
         var actions: [GoalDetailActionState] = [
             GoalDetailActionState(kind: .showPath, title: "Show the path", systemImage: "square.split.2x2", state: .default),
+            GoalDetailActionState(kind: .raisePriority, title: "Raise priority", systemImage: "arrow.up.circle", state: .selected),
+            GoalDetailActionState(kind: .lowerPriority, title: "Lower priority", systemImage: "arrow.down.circle", state: .default),
         ]
 
         if primaryStepAvailable, state != .clarification, state != .blocked, state != .achieved {
@@ -1002,6 +1261,10 @@ private extension RepositoryBackedGoalsService {
             return "Marked as stuck from Goal Detail."
         case .showPath, .switchToUntimed, .showSupportMode:
             return step.title
+        case .raisePriority:
+            return "Raised manual priority from Goal Detail."
+        case .lowerPriority:
+            return "Lowered manual priority from Goal Detail."
         }
     }
 

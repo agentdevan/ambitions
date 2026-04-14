@@ -7,12 +7,15 @@ struct ProfileScreen: View {
     @Environment(\.ambitionTheme) private var theme
     @Environment(\.accessibilityReduceMotion) private var reduceMotion
     @State private var state: AsyncViewState<ProfileDashboard> = .loading
+    @State private var preferredTab: AppTab = .today
+    @State private var reviewCadenceDays: Int = 7
+    @State private var localOnlyModeEnabled = true
 
     var body: some View {
         FeatureScaffoldView(
             eyebrow: "Profile",
             title: "Profile",
-            subtitle: "Keep identity, planning defaults, and account-facing settings legible and calm inside the native shell."
+            subtitle: "Keep identity, local preferences, and RC scope boundaries legible inside the native shell."
         ) {
             switch state {
             case .loading:
@@ -48,6 +51,37 @@ struct ProfileScreen: View {
                             SettingsGroupWidget(viewModel: settingsViewModel(dashboard))
                         }
                     ])
+
+                    AppCard {
+                        VStack(alignment: .leading, spacing: theme.spacing.md) {
+                            SectionHeader(
+                                title: "Persisted preferences",
+                                subtitle: "These controls write directly into the local app state used by the native shell."
+                            )
+
+                            Picker("Default tab", selection: $preferredTab) {
+                                ForEach(AppTab.allCases) { tab in
+                                    Text(tab.title).tag(tab)
+                                }
+                            }
+                            .pickerStyle(.segmented)
+
+                            Picker("Review cadence", selection: $reviewCadenceDays) {
+                                Text("Daily").tag(1)
+                                Text("Every 3 days").tag(3)
+                                Text("Weekly").tag(7)
+                            }
+                            .pickerStyle(.segmented)
+
+                            Toggle("Keep RC 1.0 local-first", isOn: $localOnlyModeEnabled)
+                                .tint(theme.colors.accentPrimary)
+
+                            Button("Save preferences") {
+                                Task { await savePreferences() }
+                            }
+                            .buttonStyle(AmbitionPressableButtonStyle(state: .selected))
+                        }
+                    }
                 }
             }
         }
@@ -64,10 +98,34 @@ struct ProfileScreen: View {
 
     private func load() async {
         do {
-            state = .loaded(try await container.profileService.loadProfileDashboard())
+            let dashboard = try await container.profileService.loadProfileDashboard()
+            syncEditor(with: dashboard)
+            state = .loaded(dashboard)
         } catch {
             state = .failed("Unable to load Profile: \(error.localizedDescription)")
         }
+    }
+
+    private func savePreferences() async {
+        do {
+            let dashboard = try await container.profileService.saveProfilePreferences(
+                ProfilePreferencesUpdate(
+                    preferredTab: preferredTab,
+                    reviewCadenceDays: reviewCadenceDays,
+                    localOnlyModeEnabled: localOnlyModeEnabled
+                )
+            )
+            syncEditor(with: dashboard)
+            state = .loaded(dashboard)
+        } catch {
+            state = .failed("Unable to save Profile: \(error.localizedDescription)")
+        }
+    }
+
+    private func syncEditor(with dashboard: ProfileDashboard) {
+        preferredTab = dashboard.preferences.preferredTab
+        reviewCadenceDays = dashboard.preferences.reviewCadenceDays
+        localOnlyModeEnabled = dashboard.preferences.localOnlyModeEnabled
     }
 
     private func summaryViewModel(_ dashboard: ProfileDashboard) -> ProfileSummaryWidgetViewModel {

@@ -41,7 +41,7 @@ struct RepositoryBackedHabitsService: HabitsServicing {
                     id: "habit-evidence-\(UUID().uuidString)",
                     goalID: goal.id,
                     stepID: step.id,
-                    evidenceKind: .stepCompleted,
+                    evidenceKind: .habitCompletion,
                     source: .manual,
                     capturedAt: timestamp,
                     progressDelta: 0.16,
@@ -63,7 +63,7 @@ struct RepositoryBackedHabitsService: HabitsServicing {
                     id: "habit-evidence-\(UUID().uuidString)",
                     goalID: goal.id,
                     stepID: step.id,
-                    evidenceKind: .sessionLogged,
+                    evidenceKind: .habitMinimumVersion,
                     source: .manual,
                     capturedAt: timestamp,
                     progressDelta: 0.08,
@@ -85,7 +85,7 @@ struct RepositoryBackedHabitsService: HabitsServicing {
                     id: "habit-evidence-\(UUID().uuidString)",
                     goalID: goal.id,
                     stepID: step.id,
-                    evidenceKind: .sessionLogged,
+                    evidenceKind: .habitQuickLog,
                     source: .manual,
                     capturedAt: timestamp,
                     progressDelta: 0.05,
@@ -338,12 +338,12 @@ private extension RepositoryBackedHabitsService {
         let todayFeedback = feedback.filter { isSameDay($0.base.occurredAt, as: dayStart) }
 
         if goal.state == .paused { return .notRelevant }
-        if todayEvidence.contains(where: { $0.note == Self.completeNote || $0.evidenceKind == .stepCompleted }) ||
+        if todayEvidence.contains(where: { $0.note == Self.completeNote || $0.evidenceKind == .stepCompleted || $0.evidenceKind == .habitCompletion }) ||
             todayFeedback.contains(where: { if case .completed = $0 { return true } else { return false } }) {
             return .completed
         }
-        if todayEvidence.contains(where: { $0.note?.hasPrefix(Self.minimumNotePrefix) == true }) { return .minimumDone }
-        if todayEvidence.contains(where: { $0.note == Self.quickLogNote }) { return .partial }
+        if todayEvidence.contains(where: { $0.evidenceKind == .habitMinimumVersion || $0.note?.hasPrefix(Self.minimumNotePrefix) == true }) { return .minimumDone }
+        if todayEvidence.contains(where: { $0.evidenceKind == .habitQuickLog || $0.note == Self.quickLogNote }) { return .partial }
         if todayFeedback.contains(where: { if case .notRelevant = $0 { return true } else { return false } }) { return .notRelevant }
         if todayFeedback.contains(where: { if case .askedForSmallerVersion = $0 { return true } else { return false } }) { return .needsEasierVersion }
         if todayFeedback.contains(where: { if case .skipped = $0 { return true } else { return false } }) { return .skipped }

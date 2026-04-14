@@ -19,6 +19,8 @@ struct AppStateSnapshot: Identifiable, Codable, Sendable, Equatable {
     let id: String
     var preferredTab: AppTab
     var userDisplayName: String
+    var reviewCadenceDays: Int
+    var localOnlyModeEnabled: Bool
     var hasCompletedBootstrap: Bool
     var lastBootstrapSource: AppSession.BootstrapSource?
     var lastBootstrapAt: String?
@@ -26,18 +28,22 @@ struct AppStateSnapshot: Identifiable, Codable, Sendable, Equatable {
     var lastSeededAt: String?
     var lastImportSummary: LegacyImportSummary?
     var lastOpenedGoalID: String?
+    var goalPriorityOrder: [String]
 
     static let `default` = AppStateSnapshot(
         id: "app_state.default",
         preferredTab: .today,
         userDisplayName: "Devan",
+        reviewCadenceDays: 7,
+        localOnlyModeEnabled: true,
         hasCompletedBootstrap: false,
         lastBootstrapSource: nil,
         lastBootstrapAt: nil,
         lastSeedVersion: nil,
         lastSeededAt: nil,
         lastImportSummary: nil,
-        lastOpenedGoalID: nil
+        lastOpenedGoalID: nil,
+        goalPriorityOrder: []
     )
 
     var preferences: AppPreferences {

@@ -229,7 +229,7 @@ private extension RepositoryBackedTodayService {
                     id: "evidence-\(UUID().uuidString)",
                     goalID: goalID,
                     stepID: stepID,
-                    evidenceKind: .stepCompleted,
+                    evidenceKind: HabitGoalSemantics.isHabitLike(goal: goal, step: selectedStep) ? .habitCompletion : .stepCompleted,
                     source: .manual,
                     capturedAt: timestamp,
                     progressDelta: 0.18,

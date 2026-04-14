@@ -412,13 +412,16 @@ private enum RepositoryMapping {
             id: record.id,
             preferredTab: AppTab(rawValue: record.preferredTabRaw) ?? .today,
             userDisplayName: record.userDisplayName,
+            reviewCadenceDays: 7,
+            localOnlyModeEnabled: true,
             hasCompletedBootstrap: record.hasCompletedBootstrap,
             lastBootstrapSource: record.lastBootstrapSourceRaw.flatMap(AppSession.BootstrapSource.init(rawValue:)),
             lastBootstrapAt: record.lastBootstrapAt,
             lastSeedVersion: record.lastSeedVersion,
             lastSeededAt: record.lastSeededAt,
             lastImportSummary: nil,
-            lastOpenedGoalID: record.lastOpenedGoalID
+            lastOpenedGoalID: record.lastOpenedGoalID,
+            goalPriorityOrder: []
         )
     }
 }

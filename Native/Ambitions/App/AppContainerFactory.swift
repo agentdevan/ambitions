@@ -10,7 +10,6 @@ enum AppContainerFactory {
         let preferencesStore = RepositoryBackedAppPreferencesStore(appStateRepository: repositories.appState)
         let startupService = DefaultStartupService(preferencesStore: preferencesStore, appStateRepository: repositories.appState)
         let session = try await startupService.prepareSession(source: source)
-        let fixtures = PreviewFixtures.default
         let navigation = AppNavigationModel(selectedTab: session.initialTab)
 
         return AppContainer(
@@ -20,8 +19,8 @@ enum AppContainerFactory {
             todayService: RepositoryBackedTodayService(repositories: repositories),
             goalsService: RepositoryBackedGoalsService(repositories: repositories),
             habitsService: RepositoryBackedHabitsService(repositories: repositories),
-            insightsService: StubInsightsService(fixtures: fixtures),
-            profileService: StubProfileService(fixtures: fixtures),
+            insightsService: RepositoryBackedInsightsService(repositories: repositories),
+            profileService: RepositoryBackedProfileService(repositories: repositories),
             actionRouter: DefaultAppActionRouter(navigation: navigation)
         )
     }

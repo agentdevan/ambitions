@@ -41,7 +41,7 @@ struct GoalsScreen: View {
                             SectionHeader(
                                 title: "Portfolio",
                                 subtitle: viewModel.selectedSort == .manualPriority
-                                    ? "Priority is currently preserving repository order so the portfolio stays stable while you review it."
+                                    ? "Priority now reads from the persisted manual ordering you can adjust in Goal Detail."
                                     : "Sort by the lens that best matches the kind of decision you need to make."
                             ) {
                                 Menu {
