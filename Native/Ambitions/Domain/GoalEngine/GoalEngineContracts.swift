@@ -198,8 +198,20 @@ enum PlanLintSeverity: String, Codable, Sendable {
 enum PlanLintIssueCode: String, Codable, Sendable {
     case missingTitle = "missing_title"
     case invalidTiming = "invalid_timing"
+    case missingParentForRelationship = "missing_parent_for_relationship"
     case missingPlanSections = "missing_plan_sections"
     case missingStepTitle = "missing_step_title"
+    case duplicateSectionID = "duplicate_section_id"
+    case duplicateStepID = "duplicate_step_id"
+    case invalidDependency = "invalid_dependency"
+    case invalidProgressStrategy = "invalid_progress_strategy"
+    case invalidDelegatedOwnership = "invalid_delegated_ownership"
+    case vagueStep = "vague_step"
+    case oversizedStep = "oversized_step"
+    case missingStepEvidence = "missing_step_evidence"
+    case inappropriateTimingPressure = "inappropriate_timing_pressure"
+    case wrongSupportTone = "wrong_support_tone"
+    case notSessionCompletable = "not_session_completable"
 }
 
 struct InferenceMetadata: Codable, Sendable, Equatable {
@@ -332,6 +344,27 @@ struct PlanLintIssue: Codable, Sendable, Equatable {
     let severity: PlanLintSeverity
     let fieldPath: [String]
     let message: String
+    let sectionID: String?
+    let stepID: String?
+    let suggestedFix: String?
+
+    init(
+        code: PlanLintIssueCode,
+        severity: PlanLintSeverity,
+        fieldPath: [String],
+        message: String,
+        sectionID: String? = nil,
+        stepID: String? = nil,
+        suggestedFix: String? = nil
+    ) {
+        self.code = code
+        self.severity = severity
+        self.fieldPath = fieldPath
+        self.message = message
+        self.sectionID = sectionID
+        self.stepID = stepID
+        self.suggestedFix = suggestedFix
+    }
 }
 
 struct PlanLintResult: Codable, Sendable, Equatable {
@@ -463,6 +496,109 @@ enum GoalPlannerResult: Sendable, Equatable {
     }
 }
 
+enum GoalFeedbackEffortLevel: String, Codable, Sendable {
+    case low
+    case medium
+    case high
+}
+
+enum GoalStepSkipReasonCode: String, Codable, Sendable {
+    case avoidance
+    case tooHard = "too_hard"
+    case notNow = "not_now"
+    case forgot
+    case blockedExternal = "blocked_external"
+    case notReady = "not_ready"
+}
+
+enum GoalTimingAdjustment: String, Codable, Sendable {
+    case laterToday = "later_today"
+    case laterThisWeek = "later_this_week"
+    case someday
+    case removeDeadline = "remove_deadline"
+}
+
+enum GoalConfusionType: String, Codable, Sendable {
+    case unclearAction = "unclear_action"
+    case unclearWhy = "unclear_why"
+    case missingContext = "missing_context"
+    case missingEvidence = "missing_evidence"
+}
+
+struct GoalFeedbackEventBase: Codable, Sendable, Equatable {
+    let id: String
+    let stepID: String
+    let occurredAt: String
+    let note: String?
+}
+
+enum GoalFeedbackEvent: Sendable, Equatable {
+    case completed(base: GoalFeedbackEventBase, actualDuration: Int?, effortLevel: GoalFeedbackEffortLevel, confidenceDelta: Double?)
+    case skipped(base: GoalFeedbackEventBase, reasonCode: GoalStepSkipReasonCode)
+    case delayed(base: GoalFeedbackEventBase, timingAdjustment: GoalTimingAdjustment, date: String?)
+    case edited(base: GoalFeedbackEventBase, rewrittenText: String)
+    case confused(base: GoalFeedbackEventBase, confusionType: GoalConfusionType)
+    case tooBig(base: GoalFeedbackEventBase)
+    case tooEasy(base: GoalFeedbackEventBase)
+    case notRelevant(base: GoalFeedbackEventBase)
+    case askedForSmallerVersion(base: GoalFeedbackEventBase)
+    case askedWhyThisMatters(base: GoalFeedbackEventBase)
+
+    var base: GoalFeedbackEventBase {
+        switch self {
+        case let .completed(base, _, _, _),
+             let .skipped(base, _),
+             let .delayed(base, _, _),
+             let .edited(base, _),
+             let .confused(base, _),
+             let .tooBig(base),
+             let .tooEasy(base),
+             let .notRelevant(base),
+             let .askedForSmallerVersion(base),
+             let .askedWhyThisMatters(base):
+            return base
+        }
+    }
+
+    var stepID: String { base.stepID }
+}
+
+struct GoalFeedbackSignalSnapshot: Codable, Sendable, Equatable {
+    enum ConfidenceTrend: String, Codable, Sendable {
+        case improving
+        case eroding
+        case flat
+    }
+
+    let avoidanceCount: Int
+    let tooBigCount: Int
+    let confusedCount: Int
+    let notRelevantCount: Int
+    let delayedCount: Int
+    let askedWhyCount: Int
+    let confidenceScore: Double
+    let confidenceTrend: ConfidenceTrend
+    let frictionScore: Double
+    let toneDriftDetected: Bool
+    let rigidityDetected: Bool
+}
+
+struct WhyStepMattersExplanationHook: Codable, Sendable, Equatable {
+    let prompt: String
+    let explanation: String
+}
+
+enum GoalReplanRecommendationKind: String, Codable, Sendable {
+    case noChange = "no_change"
+    case reviseStep = "revise_step"
+    case shrinkStep = "shrink_step"
+    case relaxTiming = "relax_timing"
+    case requestReclarification = "request_reclarification"
+    case adjustPlanTone = "adjust_plan_tone"
+    case suggestMicroStep = "suggest_micro_step"
+    case suggestAlternatePath = "suggest_alternate_path"
+}
+
 struct GoalEngineOrchestrationContext: Codable, Sendable, Equatable {
     let actorName: String?
     let preferredPlanningStrictness: GoalPlanningStrictness
@@ -587,6 +723,75 @@ struct GoalStarterPlannedResult: Sendable, Equatable {
     let metadata: GoalOrchestrationMetadata
 }
 
+enum GoalAdaptivePlanResult: Sendable, Equatable {
+    case planned(GoalPlannedResult)
+    case starterPlanned(GoalStarterPlannedResult)
+
+    var draft: GoalDraft {
+        switch self {
+        case let .planned(result):
+            return result.draft
+        case let .starterPlanned(result):
+            return result.draft
+        }
+    }
+
+    var plan: GoalPlan {
+        switch self {
+        case let .planned(result):
+            return result.plan
+        case let .starterPlanned(result):
+            return result.plan
+        }
+    }
+}
+
+struct GoalAdaptivePlanInput: Sendable, Equatable {
+    let currentResult: GoalAdaptivePlanResult
+    let selectedStep: Step
+    let feedbackHistory: [GoalFeedbackEvent]
+}
+
+enum GoalReplanRecommendation: Sendable, Equatable {
+    case noChange(stepID: String, rationale: String, confidence: Double, signals: GoalFeedbackSignalSnapshot)
+    case reviseStep(stepID: String, rationale: String, confidence: Double, signals: GoalFeedbackSignalSnapshot, rewriteHints: [String], evidenceAdjustments: [String], explanationHook: WhyStepMattersExplanationHook?)
+    case shrinkStep(stepID: String, rationale: String, confidence: Double, signals: GoalFeedbackSignalSnapshot, smallerVersion: String, fallbackMicroStep: String)
+    case relaxTiming(stepID: String, rationale: String, confidence: Double, signals: GoalFeedbackSignalSnapshot, suggestedTimingType: TimingType, removeDeadline: Bool)
+    case requestReclarification(stepID: String, rationale: String, confidence: Double, signals: GoalFeedbackSignalSnapshot, questions: [String])
+    case adjustPlanTone(stepID: String, rationale: String, confidence: Double, signals: GoalFeedbackSignalSnapshot, toneGuidance: [String])
+    case suggestMicroStep(stepID: String, rationale: String, confidence: Double, signals: GoalFeedbackSignalSnapshot, microStep: String)
+    case suggestAlternatePath(stepID: String, rationale: String, confidence: Double, signals: GoalFeedbackSignalSnapshot, alternatePath: String, explanationHook: WhyStepMattersExplanationHook?)
+
+    var kind: GoalReplanRecommendationKind {
+        switch self {
+        case .noChange:
+            return .noChange
+        case .reviseStep:
+            return .reviseStep
+        case .shrinkStep:
+            return .shrinkStep
+        case .relaxTiming:
+            return .relaxTiming
+        case .requestReclarification:
+            return .requestReclarification
+        case .adjustPlanTone:
+            return .adjustPlanTone
+        case .suggestMicroStep:
+            return .suggestMicroStep
+        case .suggestAlternatePath:
+            return .suggestAlternatePath
+        }
+    }
+}
+
+struct GoalAdaptivePlanAdjustmentPayload: Sendable, Equatable {
+    let goal: GoalDraft
+    let plan: GoalPlan
+    let selectedStep: Step
+    let recommendation: GoalReplanRecommendation
+    let explanationHook: WhyStepMattersExplanationHook?
+}
+
 struct GoalBlockedResult: Sendable, Equatable {
     let draft: GoalDraft
     let blockers: [GoalPlanningBlocker]
@@ -662,17 +867,62 @@ enum GoalContractValidator {
 
     static func lint(plan: GoalPlan) -> PlanLintResult {
         var issues: [PlanLintIssue] = []
+        var sectionIDs = Set<String>()
+        var stepIDs = Set<String>()
+        var validStepIDs = Set<String>()
 
         if plan.sections.isEmpty {
             issues.append(PlanLintIssue(code: .missingPlanSections, severity: .error, fieldPath: ["sections"], message: "Goal plans require at least one section."))
         }
 
         for section in plan.sections {
+            if !sectionIDs.insert(section.id).inserted {
+                issues.append(
+                    PlanLintIssue(
+                        code: .duplicateSectionID,
+                        severity: .error,
+                        fieldPath: ["sections", section.id],
+                        message: "Section identifiers must be unique.",
+                        sectionID: section.id
+                    )
+                )
+            }
+
             for step in section.steps where step.title.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
-                issues.append(PlanLintIssue(code: .missingStepTitle, severity: .error, fieldPath: ["sections", section.id, "steps", step.id, "title"], message: "Step title is required."))
+                issues.append(PlanLintIssue(code: .missingStepTitle, severity: .error, fieldPath: ["sections", section.id, "steps", step.id, "title"], message: "Step title is required.", sectionID: section.id, stepID: step.id))
             }
             for step in section.steps {
+                if !stepIDs.insert(step.id).inserted {
+                    issues.append(
+                        PlanLintIssue(
+                            code: .duplicateStepID,
+                            severity: .error,
+                            fieldPath: ["sections", section.id, "steps", step.id],
+                            message: "Step identifiers must be unique.",
+                            sectionID: section.id,
+                            stepID: step.id
+                        )
+                    )
+                }
+                validStepIDs.insert(step.id)
                 issues.append(contentsOf: lintTiming(step.timing, fieldPath: ["sections", section.id, "steps", step.id, "timing"]))
+            }
+        }
+
+        for section in plan.sections {
+            for step in section.steps {
+                for dependencyStepID in step.dependencyStepIDs where !validStepIDs.contains(dependencyStepID) {
+                    issues.append(
+                        PlanLintIssue(
+                            code: .invalidDependency,
+                            severity: .error,
+                            fieldPath: ["sections", section.id, "steps", step.id, "dependencyStepIDs"],
+                            message: "Step dependencies must reference a valid step identifier.",
+                            sectionID: section.id,
+                            stepID: step.id
+                        )
+                    )
+                }
             }
         }
 
@@ -695,6 +945,19 @@ enum GoalContractValidator {
             return (timing.dueAt != nil || timing.targetBy != nil || timing.windowStart != nil || timing.windowEnd != nil)
                 ? [PlanLintIssue(code: .invalidTiming, severity: .error, fieldPath: fieldPath, message: "Untimed goals cannot carry deadline or target-window dates.")]
                 : []
+        }
+    }
+}
+
+extension GoalOrchestrationResult {
+    var adaptivePlanResult: GoalAdaptivePlanResult? {
+        switch self {
+        case let .planned(result):
+            return .planned(result)
+        case let .starterPlanned(result):
+            return .starterPlanned(result)
+        case .clarificationRequired, .blocked:
+            return nil
         }
     }
 }
