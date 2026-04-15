@@ -18,16 +18,30 @@ jobs:
     defaults:
       run:
         shell: bash
-    env:
-      DERIVED_DATA_PATH: ${{ runner.temp }}/DerivedData-unit
-      UNIT_XCRESULT_PATH: ${{ runner.temp }}/AmbitionsUnitTests.xcresult
-      ARCHIVE_PATH: ${{ runner.temp }}/Ambitions.xcarchive
-      IPA_PATH: ${{ runner.temp }}/Ambitions-unsigned.ipa
-      IPA_NOTES_PATH: ${{ runner.temp }}/Ambitions-unsigned-ipa-notes.txt
 
     steps:
       - name: Check out repository
         uses: actions/checkout@v4
+
+      - name: Configure temp paths
+        id: temp_paths
+        run: |
+          set -euo pipefail
+
+          {
+            echo "DERIVED_DATA_PATH=$RUNNER_TEMP/DerivedData-unit"
+            echo "UNIT_XCRESULT_PATH=$RUNNER_TEMP/AmbitionsUnitTests.xcresult"
+            echo "ARCHIVE_PATH=$RUNNER_TEMP/Ambitions.xcarchive"
+            echo "IPA_PATH=$RUNNER_TEMP/Ambitions-unsigned.ipa"
+            echo "IPA_NOTES_PATH=$RUNNER_TEMP/Ambitions-unsigned-ipa-notes.txt"
+          } >> "$GITHUB_ENV"
+
+          {
+            echo "unit_xcresult_path=$RUNNER_TEMP/AmbitionsUnitTests.xcresult"
+            echo "archive_path=$RUNNER_TEMP/Ambitions.xcarchive"
+            echo "ipa_path=$RUNNER_TEMP/Ambitions-unsigned.ipa"
+            echo "ipa_notes_path=$RUNNER_TEMP/Ambitions-unsigned-ipa-notes.txt"
+          } >> "$GITHUB_OUTPUT"
 
       - name: Show Xcode version
         run: |
@@ -177,7 +191,7 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: ambitions-unit-tests-xcresult
-          path: ${{ env.UNIT_XCRESULT_PATH }}
+          path: ${{ steps.temp_paths.outputs.unit_xcresult_path }}
           if-no-files-found: ignore
 
       - name: Validate unsigned release archive
@@ -221,7 +235,7 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: ambitions-unsigned-xcarchive
-          path: ${{ env.ARCHIVE_PATH }}
+          path: ${{ steps.temp_paths.outputs.archive_path }}
           if-no-files-found: ignore
 
       - name: Upload unsigned IPA artifact
@@ -230,8 +244,8 @@ jobs:
         with:
           name: ambitions-unsigned-ipa
           path: |
-            ${{ env.IPA_PATH }}
-            ${{ env.IPA_NOTES_PATH }}
+            ${{ steps.temp_paths.outputs.ipa_path }}
+            ${{ steps.temp_paths.outputs.ipa_notes_path }}
           if-no-files-found: ignore
 
   ui-tests:
@@ -241,13 +255,24 @@ jobs:
     defaults:
       run:
         shell: bash
-    env:
-      DERIVED_DATA_PATH: ${{ runner.temp }}/DerivedData-ui
-      UI_XCRESULT_PATH: ${{ runner.temp }}/AmbitionsUITests.xcresult
 
     steps:
       - name: Check out repository
         uses: actions/checkout@v4
+
+      - name: Configure temp paths
+        id: temp_paths
+        run: |
+          set -euo pipefail
+
+          {
+            echo "DERIVED_DATA_PATH=$RUNNER_TEMP/DerivedData-ui"
+            echo "UI_XCRESULT_PATH=$RUNNER_TEMP/AmbitionsUITests.xcresult"
+          } >> "$GITHUB_ENV"
+
+          {
+            echo "ui_xcresult_path=$RUNNER_TEMP/AmbitionsUITests.xcresult"
+          } >> "$GITHUB_OUTPUT"
 
       - name: Show Xcode version
         run: |
@@ -390,5 +415,5 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: ambitions-ui-tests-xcresult
-          path: ${{ env.UI_XCRESULT_PATH }}
+          path: ${{ steps.temp_paths.outputs.ui_xcresult_path }}
           if-no-files-found: ignore
