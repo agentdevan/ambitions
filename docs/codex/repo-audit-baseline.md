@@ -18,8 +18,9 @@ It is intentionally repo-aware and native-first:
 
 ### 1. App target and native source of truth
 
-- `project.yml` defines a single iOS application target named `Ambitions`.
-- That target sources code from `Native/Ambitions/`.
+- `project.yml` defines the `Ambitions` iOS app target, the `AmbitionsWidgetExtension` target, and the native unit/UI test bundles.
+- The shipping app target sources code from `Native/Ambitions/`.
+- The widget/live-activity extension sources code from `Native/AmbitionsWidgetExtension/` plus shared snapshot contracts under `Native/Ambitions/ExternalSnapshots/`.
 - The app also depends on local Swift packages:
   - `Sources/` via `AmbitionsDesignSystem`
   - `AppUI/Sources/` via `AmbitionsWidgetUI`
@@ -35,10 +36,12 @@ Current bootstrap shape:
 
 1. `AppContainerFactory.make(source:)` creates a SwiftData-backed `AmbitionsPersistenceStore`.
 2. It constructs repository implementations through `AppRepositories`.
-3. It seeds starter data through `DemoSeedPipeline`.
-4. It prepares `AppSession` through `DefaultStartupService`.
-5. It creates `AppNavigationModel`.
-6. It injects repository-backed feature services into `AppContainer`.
+3. It creates an `ExternalSurfaceSnapshotWriter`, `LocalNotificationFoundation`, and `EventKitIntegrationService`.
+4. It wraps Today and Goals services with snapshot-refresh and notification-refresh behavior.
+5. It seeds starter data through `DemoSeedPipeline` when explicitly requested.
+6. It prepares `AppSession` through `DefaultStartupService`.
+7. It creates `AppNavigationModel` plus `DefaultAppExternalRouter`.
+8. It injects repository-backed feature services and system-surface services into `AppContainer`.
 
 ### 2. Current feature pattern
 
@@ -56,6 +59,10 @@ Confirmed examples:
   - screen: `Native/Ambitions/Features/Today/TodayScreen.swift`
   - view model: `Native/Ambitions/Features/Today/TodayViewModel.swift`
   - service: `Native/Ambitions/Features/Today/TodayFeatureService.swift`
+- Captures
+  - screen: `Native/Ambitions/Features/Captures/CapturesScreen.swift`
+  - service boundary: `Native/Ambitions/Services/AppServices.swift`
+  - service implementation: `Native/Ambitions/Services/CaptureService.swift`
 - Goals
   - screens: `Native/Ambitions/Features/Goals/GoalsScreen.swift`, `Native/Ambitions/Features/Goals/GoalDetailScreen.swift`
   - view models: `Native/Ambitions/Features/Goals/GoalsViewModels.swift`
@@ -79,6 +86,7 @@ Current repositories:
 - `SwiftDataGoalDraftRepository`
 - `SwiftDataProgressEvidenceRepository`
 - `SwiftDataFeedbackEventRepository`
+- `SwiftDataCaptureRepository`
 - `SwiftDataAppStateRepository`
 
 ### 4. Goal engine and draft compilation already exist in native code
@@ -165,60 +173,66 @@ Repository contracts live in:
   - owns tab wiring
   - owns `NavigationStack(path: $navigation.goalsPath)` for Goals detail routing
 
-#### Existing create-goal or draft-related flows
+#### Existing create-goal and draft-related flows
 
-There is no native SwiftUI create-goal/composer screen today.
+The native app now has a user-facing create-goal flow.
 
-What does exist:
+What exists:
 
+- Goal creation UI:
+  - `Native/Ambitions/Features/Goals/CreateGoalScreen.swift`
+  - `Native/Ambitions/Features/Goals/CreateGoalViewModel.swift`
+- Goal creation service path:
+  - `Native/Ambitions/Services/AppServices.swift`
+  - `Native/Ambitions/Features/Goals/GoalsFeatureService.swift`
 - Goal draft intake/orchestration:
   - `Native/Ambitions/Domain/GoalEngine/GoalEngineIntake.swift`
   - `Native/Ambitions/Domain/GoalEngine/GoalEngineOrchestrator.swift`
 - Draft persistence:
   - `Native/Ambitions/Persistence/PersistenceContracts.swift`
   - `Native/Ambitions/Persistence/SwiftDataRepositories.swift`
-- Draft materialization from clarification answers:
-  - `Native/Ambitions/Features/Goals/GoalsFeatureService.swift`
-  - `materializeDraft(...)`
-- Seeded draft creation:
-  - `Native/Ambitions/Persistence/DemoSeedPipeline.swift`
-- Legacy import into goals + drafts:
-  - `Native/Ambitions/Persistence/LegacyImportService.swift`
+- Goals list integration:
+  - `Native/Ambitions/Features/Goals/GoalsScreen.swift`
 
 Current native write path summary:
 
-- A draft can be created by domain orchestration or seed/import code.
-- A draft can be recompiled into a blocked, clarification-required, starter, or planned result inside `GoalsFeatureService.materializeDraft(...)`.
-- There is not yet a native user-facing goal composer flow that captures freeform input and saves a new `PersistedGoalDraft`.
+- The Goals surface can present `CreateGoalScreen`, submit `CreateGoalRequest`, and navigate into `GoalDetailScreen` via `GoalRouteTarget`.
+- Goal creation still reuses the native goal-engine and repository path rather than reviving old TypeScript runtime flows.
+- Drafts, clarification-required outcomes, and planned goals continue to resolve through the native goal-engine/service pipeline.
 
-## Missing Capabilities For Upcoming Roadmap Work
+## Remaining Gaps That Still Matter For Implementation Planning
 
-These are verified gaps in the native implementation, not guesses.
+These are verified gaps or caution areas in the native implementation/docs, not guesses.
 
-### 1. No native create-goal UI flow
+### 1. Cross-surface capture ingress is only partially wired
 
-Missing:
+Verified current truth:
 
-- no `CreateGoalScreen`
-- no native composer route
-- no feature service method for creating a new draft from fresh user input
-- no action in `GoalsScreen` that launches intake
+- Capture persistence exists in native code.
+- Today quick capture writes real captures.
+- The Captures tab reads from `captureService.listCaptures()`.
+- Domain/tests already recognize capture sources such as notification, share extension text/URL, and app intent.
 
-What exists instead:
+Remaining caution:
 
-- domain-level compile/orchestration
-- seed/import paths
-- clarification-answer write-back on an existing draft
+- Share Extension and App Intents targets are not yet the active native source of truth in this repo.
+- Future cross-surface capture work should extend the existing capture boundary rather than invent a second ingestion path.
 
-### 2. No dedicated draft list or draft-first intake surface
+### 2. External-surface code exists, but environment validation still matters
 
-Current `GoalsScreen` can render draft-backed items inside the portfolio, but there is:
+Verified current truth:
 
-- no separate draft queue surface
-- no draft creation entry point
-- no draft editing screen before detail
+- `AppExternalRouting` handles deep links, notification payloads, and widget payloads.
+- `LocalNotificationFoundation` performs category registration, authorization requests, and schedule refresh.
+- `EventKitIntegrationService` exists in the live app container.
+- `project.yml` defines `AmbitionsWidgetExtension`, and the repo includes widget/live-activity code plus shared snapshot contracts.
 
-### 3. App-state write surface is coarse
+Remaining caution:
+
+- This audit did not run a simulator/device validation pass.
+- Do not collapse "implemented in code" into "fully validated shipping behavior" without the build/runtime checks.
+
+### 3. App-state write surface is still coarse
 
 `AppStateSnapshot` contains:
 
@@ -243,20 +257,17 @@ There are no finer-grained app-state APIs yet for:
 - updating local-only mode
 - setting feature flags or roadmap settings
 
-### 4. Navigation only covers goal detail drill-in
+### 4. Create-goal presentation is local to Goals, not yet a shared app-level route
 
-Current navigation model only directly supports:
+Verified current truth:
 
-- tab selection
-- `goalsPath`
-- opening a `GoalDetailScreen`
+- `GoalsScreen` can present `CreateGoalScreen`.
+- Submission returns a `GoalRouteTarget` that opens detail.
 
-Missing:
+Remaining caution:
 
-- explicit routes for create-goal
-- draft composer/editing
-- modal flows
-- deeper nested multi-step creation/navigation state
+- The create-goal flow is not a generalized app-wide route yet.
+- If future work needs cross-tab or external entry into create-goal, extend navigation deliberately instead of assuming that route already exists.
 
 ### 5. Preview infrastructure is static, scenario-driven, and manual
 
@@ -268,7 +279,7 @@ Missing:
 - generic preview repository builders
 - reusable scenario builders for new intake/create-goal flows
 
-### 6. Some repo docs are stale relative to the code
+### 6. Some repo docs are still stale relative to the code
 
 Verified mismatch:
 
@@ -277,58 +288,46 @@ Verified mismatch:
 
 That older plan should be treated as historical/reference context, not as a roadmap implementation source.
 
-### 7. README understates current native persistence
-
-`README.md` still says native persistence is placeholder/in-memory in the "Current placeholder scope" section.
-
-That is no longer fully true.
+### 7. Sync/auth/backend account flows remain non-shipping
 
 Verified current state:
 
-- live bootstrap uses `AmbitionsPersistenceStore(inMemory: false)` for non-preview boot
-- SwiftData repositories are in use for goals, drafts, evidence, feedback, and app state
-
-What is still fair to call incomplete:
-
-- account/auth
-- sync
-- analytics history beyond the current native scope
-- user-facing create-goal flow
+- The native repo is still local-first.
+- Sync/auth/account deletion should remain documented as non-shipping unless a later task explicitly revives them.
 
 ## Exact Recommended Implementation Points
 
 These are the current extension points later phases should attach to.
 
-### 1. New create-goal intake should attach at the service boundary, not directly in screens
+### 1. New goal/capture behavior should attach at the current service boundary, not directly in screens
 
 Recommended insertion points:
 
-- add create-draft API to `GoalsServicing` in `Native/Ambitions/Services/AppServices.swift`
-- implement it in `RepositoryBackedGoalsService` in `Native/Ambitions/Features/Goals/GoalsFeatureService.swift`
-- keep orchestration delegated to `GoalEngineOrchestrator`
-- persist through `GoalDraftRepository`
+- extend `GoalsServicing`, `CaptureServicing`, or other existing protocols in `Native/Ambitions/Services/AppServices.swift`
+- implement behavior in the current repository-backed feature/service layer
+- keep orchestration delegated to the native domain and persistence stack already in place
 
 Why:
 
 - This preserves the existing screen -> view model -> service -> repository pattern.
-- It avoids duplicating draft orchestration logic in SwiftUI views.
+- It avoids duplicating orchestration logic in SwiftUI views.
 
-### 2. New create-goal navigation should extend `AppNavigationModel`
+### 2. App-level routing changes should extend `AppNavigationModel` and `AppExternalRouting` deliberately
 
 Recommended insertion points:
 
 - `Native/Ambitions/App/AppNavigation.swift`
 - `Native/Ambitions/App/AmbitionsRootView.swift`
+- `Native/Ambitions/App/AppExternalRouting.swift`
 
 Add later:
 
-- a route type for create-goal flow
-- path or modal state for intake
-- goal/draft creation completion handoff into `GoalDetailScreen`
+- new app-level route types only when the flow truly needs cross-screen or external entry
+- explicit routing translations for new OS-surface payloads
 
-Do not attach creation flow to `TodayScreen` or `GoalsScreen` with local-only state.
+Do not invent parallel routing paths outside the current navigation/external-router layer.
 
-### 3. Fresh draft creation should reuse native goal engine code, not the old TS composer flow
+### 3. Goal creation and follow-up work should reuse native goal-engine code, not the old TS composer flow
 
 Recommended insertion points:
 
@@ -373,7 +372,7 @@ Current priority ordering already lives in:
 
 So future roadmap work that needs persisted portfolio ordering should build from that field rather than inventing a separate ordering store.
 
-### 6. Preview support for new goal-creation work should extend `PreviewAppContainerFactory` and scenario files
+### 6. Preview support should continue to extend `PreviewAppContainerFactory` and scenario files
 
 Recommended insertion points:
 
@@ -413,16 +412,11 @@ For native implementation work, the actual repository contracts and implementati
 
 - `Native/Ambitions/Persistence/`
 
-### Do not assume there is already a native goal composer screen
+### Do not assume missing-foundation docs are still correct
 
-There is not.
+Several older implementation notes still describe captures, create-goal, routing, notifications, widgets, or EventKit as future work.
 
-Draft creation currently exists only through:
-
-- seed pipeline
-- legacy import
-- domain orchestration
-- clarification re-materialization on existing drafts
+They are no longer safe to treat as current architecture truth without re-checking code first.
 
 ### Do not assume `GoalDetailScreen` only renders persisted goals
 
@@ -479,10 +473,10 @@ Do not use old React Native surfaces as the place to implement new shipping prod
 
 If a later phase asks for native implementation work, the safest sequence is:
 
-1. Extend `GoalsServicing` and `RepositoryBackedGoalsService` for new goal/draft creation behavior.
-2. Extend `AppNavigationModel` and `AmbitionsRootView` for the route.
-3. Add the new SwiftUI screen under `Native/Ambitions/Features/Goals/`.
-4. Reuse `GoalEngineOrchestrator` and `GoalDraftRepository` rather than inventing a second intake path.
-5. Add preview scenarios in `Native/Ambitions/PreviewSupport/`.
+1. Verify whether the requested behavior already exists in native code before planning a new foundation.
+2. Extend the current service boundary and domain/persistence path rather than inventing a second seam.
+3. Route app-entry changes through `AppNavigationModel` and `AppExternalRouting`.
+4. Add or refine SwiftUI screens only after the service/routing truth is clear.
+5. Keep preview scenarios aligned with the real native service boundary.
 
 That sequence matches the current architecture and keeps diffs native, local, and focused.

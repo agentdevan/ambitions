@@ -7,7 +7,8 @@ This backlog translates the current roadmap into implementation work that matche
 - The shipping product is the native SwiftUI app.
 - The live native target is local-first and on-device first.
 - The app currently ships repository-backed Today, Captures, Goals, Habits, Insights, and Profile surfaces backed by SwiftData repositories for goals, drafts, plans, steps, evidence, feedback, captures, and app state.
-- Notifications, widgets, Live Activities, and calendar/reminders integrations are available as native device features.
+- `project.yml` currently defines the `Ambitions` app target, the `AmbitionsWidgetExtension` target, and the unit/UI test bundles.
+- The current native codebase already includes capture persistence, create-goal submission, external routing, snapshot export, local notification scheduling, EventKit integration, and widget/live-activity code paths.
 - Account sync, auth, and backend-driven account deletion are not current shipping features.
 
 ## Roadmap mismatches against the current codebase
@@ -23,118 +24,97 @@ Backlog impact:
 - Add a documentation cleanup phase before feature work.
 - Mark Supabase/auth docs as historical unless and until a native sync decision is made.
 
-### 2. "Quick capture" exists as presentation state, not as a persisted capture domain
+### 2. Capture persistence now exists; the remaining gap is cross-surface rollout discipline
 
 Why this matters:
-- The roadmap assumes share-sheet capture, App Intents capture, and a canonical capture object.
-- The current code only exposes a `TodayQuickCaptureState` panel and a `quickLog` action inside Today.
-- There is no capture repository, capture SwiftData model, or cross-surface ingestion layer yet.
+- The native app already has `Capture`, `CaptureRecord`, `SwiftDataCaptureRepository`, `DefaultCaptureService`, and a `CapturesScreen`.
+- Today quick capture now writes through the capture service instead of remaining presentation-only state.
+- Share Extension and App Intent capture source types exist in the domain/tests, but those OS surfaces still need their own target-level wiring and end-to-end validation.
 
 Backlog impact:
-- Add a dedicated capture-domain phase before Share Extension and App Intents work.
+- Do not schedule another net-new capture-foundation phase.
+- Treat future Share Extension and App Intents work as incremental work on top of the existing capture boundary.
 
-### 3. Widgets and Live Activities are blocked on shared export/storage work that does not exist yet
+### 3. Widget/Live Activity foundations exist; remaining work is validation and scope control
 
 Why this matters:
-- `AmbitionsWidgetUI` is an in-app package, not a WidgetKit extension target.
-- The app has no app group, no shared snapshot writer, and no extension-safe read model.
-- The roadmap jumps directly to WidgetKit and ActivityKit without first defining the export path.
+- `project.yml` already defines `AmbitionsWidgetExtension`.
+- The repo already includes shared snapshot contracts/store code and app-group entitlements for the app and widget extension.
+- The codebase contains both WidgetKit and ActivityKit surfaces, so planning should start from validation of the existing path rather than from a missing-foundation assumption.
 
 Backlog impact:
-- Insert a shared snapshot/export phase before WidgetKit and Live Activities.
+- Keep external-surface work incremental.
+- Prioritize truth cleanup and environment validation before expanding widget/live-activity scope further.
 
-### 4. Notifications are planned as product work, but there is no background capability or external routing boundary yet
+### 4. Notification and external-routing foundations already exist; the remaining work is behavior hardening
 
 Why this matters:
-- The current service boundary has no notification services.
-- The current app action router only handles in-app `WidgetAction` tab routing.
-- There is no notification authorization model, scheduler, deep-link parser, or external action dispatcher.
+- `LocalNotificationFoundation` already handles category registration, authorization requests, schedule refresh, and live-activity refresh.
+- `AppExternalRouting` already translates deep links, notifications, and widget payloads into app navigation targets.
+- The next risk is not missing architecture; it is whether the current behavior has been fully validated on-device/simulator.
 
 Backlog impact:
-- Add an external-routing and background-actions foundation phase before notifications.
+- Do not re-plan notification/routing as greenfield infrastructure work.
+- Validate and refine the current routing and notification behavior on the existing seams.
 
-### 5. Calendar/Reminders integration is planned without a permissions/privacy preparation phase
+### 5. EventKit and privacy preparation exist; remaining work is explicit product gating and validation
 
 Why this matters:
-- `Info.plist` currently has no notification, calendar, reminder, widget, or Live Activity related keys.
-- The roadmap assumes EventKit and system integrations, but the current target has not prepared privacy text, entitlements, or extension metadata.
+- `EventKitIntegrationService` is already part of the live native container.
+- `Info.plist` already contains calendar/reminder usage descriptions, and the app/extension already carry app-group entitlements.
+- The current uncertainty is feature readiness, not whether permission/config scaffolding exists at all.
 
 Backlog impact:
-- Add a permissions, entitlements, and privacy-manifest phase before system integrations.
+- Avoid redoing permissions/entitlements prep as if it is still absent.
+- Treat further calendar/reminder work as iterative hardening on top of the current service/configuration layer.
 
-### 6. Auto-rescheduling is planned after EventKit, but the codebase lacks a dedicated reschedule engine boundary today
+### 6. A native reschedule engine exists; remaining work is policy integration and validation
 
 Why this matters:
 - The app already stores feedback events and suggested timing fields, which is good groundwork.
-- But there is no explicit `RescheduleEngine`, policy layer, or stable patch format for timing updates.
-- Tying the first reschedule implementation directly to EventKit would over-couple two separate concerns.
+- The repo now also has a dedicated `Native/Ambitions/Domain/Reschedule/RescheduleEngine.swift`.
+- Follow-on work should extend or validate that existing boundary rather than assuming scheduling logic is still missing.
 
 Backlog impact:
-- Build the deterministic reschedule engine before calendar-aware optimization.
+- Keep calendar-aware work layered on top of the current reschedule boundary.
 
-## Missing phases
+## Remaining phases
 
-These phases are not represented clearly enough in the original roadmap and should be added.
+These are the phases that still matter after the native foundations already landed.
 
 ### Phase A. Documentation and source-of-truth cleanup
 
 Goals:
 - Mark stale auth/sync docs as historical or explicitly scoped to legacy/native-future work.
-- Add a docs index that distinguishes live native docs from historical migration material.
-- Remove ambiguity about whether sync/auth is currently shipped.
+- Keep implementation docs aligned with the current native service, routing, capture, and extension boundaries.
+- Remove ambiguity about what is implemented versus what has merely been scaffolded.
 
 Deliverables:
 - `docs/README.md`
 - status note on historical Supabase/auth docs
-- cross-links from `README.md`
+- corrections in backlog/audit docs when architecture changes land
 
-### Phase B. Capture domain and persistence foundation
-
-Goals:
-- Define a first-class capture object model before Share Extension or App Intents work.
-- Decide whether captures can remain lightweight notes, become inbox items, or promote into goals.
-- Add SwiftData models, repositories, and service boundaries for capture ingestion and review.
-
-Deliverables:
-- `CaptureRecord` SwiftData model
-- `CaptureRepository`
-- `CaptureServicing`
-- minimal in-app capture inbox surface or Today integration
-
-### Phase C. Shared export/snapshot layer for external surfaces
+### Phase B. External-surface validation and hardening
 
 Goals:
-- Create a stable, extension-safe export format for widgets, intents, live activities, and possible sync.
-- Avoid making extensions read SwiftData internals directly.
-- Centralize derived "next step", "focus session", and "capture summary" snapshots.
+- Validate the current deep-link, notification, widget, live-activity, and EventKit paths in a real build/runtime workflow.
+- Tighten copy, routing, and fallback behavior only where the current implementation proves weak.
+- Keep system-surface expansion bounded to the seams that already exist.
 
 Deliverables:
-- shared app-group capable snapshot writer/reader
-- read-only JSON snapshot contracts
-- tests for snapshot generation
+- manual validation notes
+- follow-up fixes for any notification/widget/EventKit drift found during validation
+- truth-checked docs describing verified behavior versus unverified foundations
 
-### Phase D. External routing and background action foundation
+### Phase C. Sync decision and historical-doc containment
 
 Goals:
-- Introduce a routing layer that can handle notification taps, widget taps, intents, and future deep links.
-- Separate app navigation decisions from OS-surface event handling.
-- Define a stable action-dispatch contract for background and extension flows.
+- Make an explicit native sync decision before any provider-specific implementation resumes.
+- Keep older Supabase/auth/account-deletion material clearly labeled as historical until that decision changes.
 
 Deliverables:
-- deep-link parser/router
-- external action dispatcher
-- app open target model
-
-### Phase E. Permissions, entitlements, and privacy preparation
-
-Goals:
-- Prepare `Info.plist`, entitlements, privacy manifest, and XcodeGen target config before shipping system integrations.
-- Keep this as a deliberate phase instead of scattering permission changes across later work.
-
-Deliverables:
-- permission copy inventory
-- entitlement/app-group plan
-- `PrivacyInfo.xcprivacy` review for added APIs
+- documented sync decision
+- historical labeling for legacy docs that still mention live auth/sync/account deletion
 
 ## Proposed implementation order
 
@@ -144,120 +124,62 @@ Deliverables:
 - Add `docs/README.md` with live vs historical doc status.
 - Remove backend-flow docs from the active native doc set unless a native sync track is approved.
 
-### 1. Capture domain foundation
+### 1. Validate the existing native foundations
 
-- Introduce persistent capture entities and repositories.
-- Rework Today quick capture to read/write real capture data instead of only presentation state.
-- Add tests for capture creation, listing, and promotion rules.
+- Validate create-goal, capture persistence, external routing, notification scheduling, EventKit behavior, and widget/live-activity reads against the current code.
+- Fix only the gaps exposed by that validation pass.
 
-### 2. External routing foundation
+### 2. Harden capture and external-surface behavior on the existing seams
 
-- Add a deep-link and open-target model.
-- Expand app action routing beyond current in-app widget tab switching.
-- Add tests for route parsing and target selection.
+- Extend the current capture service/repository path instead of rebuilding capture foundations.
+- Keep routing work inside `AppExternalRouting`, snapshot export, and the existing service layer.
 
-### 3. Shared snapshots for external surfaces
+### 3. Decide sync before reviving backend work
 
-- Add an app-group compatible snapshot export layer.
-- Export at least:
-  - next step snapshot
-  - focus session snapshot
-  - capture summary snapshot
-- Add deterministic snapshot tests.
-
-### 4. Permissions and privacy preparation
-
-- Add missing permission strings and entitlements only after the feature scope is finalized.
-- Update `project.yml`, `Info.plist`, and privacy metadata in one deliberate pass.
-
-### 5. Notifications foundation
-
-- Add notification authorization and category registration.
-- Schedule one daily "next tiny step" prompt.
-- Support `Complete`, `Snooze`, and `Open`.
-- Route notification opens through the new routing layer.
-
-### 6. Deterministic reschedule engine
-
-- Implement a standalone `RescheduleEngine`.
-- Feed it existing feedback events and timing fields.
-- Keep this engine independent of EventKit in its first iteration.
-
-### 7. WidgetKit extension
-
-- Add a new extension target via `project.yml`.
-- Read from shared snapshots instead of the app database.
-- Ship a single "Next tiny step" widget first.
-
-### 8. Live Activities / focus session
-
-- Define a first-class focus session domain model.
-- Add ActivityKit support only after shared snapshots and routing exist.
-- Keep it local-only at first.
-
-### 9. Calendar and Reminders integration
-
-- Add EventKit service boundaries and permission handling.
-- Start with optional write flows and conflict checks.
-- Integrate with the reschedule engine only after the base reschedule logic is stable.
-
-### 10. Share Extension and App Intents
-
-- Build these on top of the capture domain, shared snapshots, and routing foundation.
-- Start with:
-  - save text/URL capture
-  - open goals
-  - start focus session
-
-### 11. Sync decision and scaffolding
-
-- Make an explicit backend decision first.
-- Add sync boundaries and snapshot export/import contracts before any real provider integration.
-- Keep the app fully local-only by default until a native sync path is approved.
+- Make the backend/sync decision explicit before treating old auth/sync docs as live work again.
+- Keep the app local-first until a native sync path is deliberately approved.
 
 ## Suggested work items by repo area
 
 ### App and navigation
 
 - `Native/Ambitions/App/`
-  - add external route handling
-  - add open-target parsing
-  - keep tab and goal-detail routing centralized
+  - keep tab, goal-detail, and external-entry routing centralized
+  - validate the current deep-link/notification/widget handoff before introducing new route seams
 
 ### Services
 
 - `Native/Ambitions/Services/`
-  - add `CaptureServicing`
-  - add notification service boundaries
-  - add calendar service boundaries
-  - add sync capability boundaries
+  - keep `CaptureServicing`, notification scheduling, and calendar/reminder boundaries as the extension points
+  - add new capability boundaries only when a new product surface actually needs them
 
 ### Persistence
 
-- `Native/Ambitions/Persistence/`
-  - add capture models/repositories
-  - add snapshot export contracts
-  - add sync export/import support
+- `Native/Ambitions/Persistence/` and `Native/Ambitions/ExternalSnapshots/`
+  - treat capture persistence and snapshot export as existing truth
+  - extend them incrementally instead of recreating a second foundation
 
 ### Features
 
 - `Native/Ambitions/Features/Today/`
-  - convert quick capture from presentational-only state into repository-backed behavior
+  - keep quick capture on the current repository-backed path
 - `Native/Ambitions/Features/Profile/`
-  - host connected-feature status, permissions education, and sync readiness states
+  - host connected-feature status, permissions education, and sync readiness states only when verified product behavior exists
 - `Native/Ambitions/Features/Goals/`
-  - integrate reschedule actions and optional calendar/reminder flows
+  - keep create-goal, reschedule, and optional calendar/reminder work on the current service layer
 
 ### Project configuration
 
 - `project.yml`
-  - add extension targets only after foundations exist
+  - extend existing targets/config only when new scope actually needs it
 - `Native/Ambitions/Support/Info.plist`
-  - add permissions only when each surface is actually introduced
+  - keep permission copy truthful to the surfaces that are actually intended to ship
 
 ## Recommended acceptance gates
 
-- Do not start WidgetKit, ActivityKit, Share Extension, or App Intents work until shared snapshots and routing exist.
+- Do not plan capture persistence, snapshot export, external routing, notification foundation, EventKit foundation, or reschedule engine work as if they are still missing; those seams already exist in native code.
+- Do not claim widget/live-activity/notification/EventKit behavior is production-ready without manual validation.
+- Do not start Share Extension or App Intents work by bypassing the existing capture and routing boundaries.
 - Do not start sync implementation until the backend decision is documented.
 - Do not treat old Supabase docs as live-native product truth.
 - Keep all new shipping work inside `Native/Ambitions/`, `Sources/`, `AppUI/Sources/`, or new native extension folders added through `project.yml`.

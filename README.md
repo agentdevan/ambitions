@@ -83,4 +83,4 @@ Local reproduction, including exact build, unit test, UI test, and archive comma
 
 ## Current status
 
-The app boots through the native SwiftUI entry point, persists state through SwiftData, and ships repository-backed Today, Captures, Goals, Habits, Insights, and Profile surfaces in a Swift-only repo.
+The app boots through the native SwiftUI entry point, persists state through SwiftData, and ships repository-backed Today, Captures, Goals, Habits, Insights, and Profile surfaces while the repo still retains older legacy Expo/React Native reference material.
