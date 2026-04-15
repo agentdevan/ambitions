@@ -54,10 +54,19 @@ struct DefaultStartupService: StartupServicing {
             userDisplayName: preferences.userDisplayName,
             initialTab: preferences.preferredTab,
             launchedAt: Date(),
-            startupNote: source == .preview
-                ? "Preview bootstrap uses isolated in-memory fixtures."
-                : "Live bootstrap is persistence-backed and ready to transition from starter data into personal planning history."
+            startupNote: startupNote(for: source)
         )
+    }
+
+    private func startupNote(for source: AppSession.BootstrapSource) -> String {
+        switch source {
+        case .preview:
+            return "Preview bootstrap uses isolated in-memory fixtures."
+        case .demo:
+            return "Demo bootstrap uses isolated in-memory seeded data."
+        case .live:
+            return "Live bootstrap is persistence-backed and starts from the user's actual on-device data."
+        }
     }
 }
 

@@ -49,18 +49,30 @@ targets:
           - "**/*.md"
     dependencies:
       - target: Ambitions
+  AmbitionsUITests:
+    type: bundle.ui-testing
+    platform: iOS
+    deploymentTarget: "17.0"
+    sources:
+      - path: Native/AmbitionsUITests
+        excludes:
+          - "**/*.md"
+    dependencies:
+      - target: Ambitions
 schemes:
   Ambitions:
     build:
       targets:
         Ambitions: all
         AmbitionsTests: [test]
+        AmbitionsUITests: [test]
     run:
       config: Debug
     archive:
       config: Release
     test:
       config: Debug
-      gatherCoverageData: false
+      gatherCoverageData: true
       targets:
         - name: AmbitionsTests
+        - name: AmbitionsUITests

@@ -7,7 +7,6 @@ struct AmbitionsApp: App {
     var body: some Scene {
         WindowGroup {
             LaunchGateView(bootstrapper: bootstrapper)
-                .preferredColorScheme(.dark)
         }
     }
 }

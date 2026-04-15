@@ -4,6 +4,7 @@ struct AppSession: Sendable {
     enum BootstrapSource: String, Sendable {
         case live
         case preview
+        case demo
     }
 
     let source: BootstrapSource

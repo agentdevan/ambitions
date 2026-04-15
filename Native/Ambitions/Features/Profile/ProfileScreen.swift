@@ -9,13 +9,12 @@ struct ProfileScreen: View {
     @State private var state: AsyncViewState<ProfileDashboard> = .loading
     @State private var preferredTab: AppTab = .today
     @State private var reviewCadenceDays: Int = 7
-    @State private var localOnlyModeEnabled = true
 
     var body: some View {
         FeatureScaffoldView(
             eyebrow: "Profile",
             title: "Profile",
-            subtitle: "Keep identity, local preferences, and RC scope boundaries legible inside the native shell."
+            subtitle: "Keep identity and on-device preferences clear inside the native shell."
         ) {
             switch state {
             case .loading:
@@ -73,9 +72,6 @@ struct ProfileScreen: View {
                             }
                             .pickerStyle(.segmented)
 
-                            Toggle("Keep RC 1.0 local-first", isOn: $localOnlyModeEnabled)
-                                .tint(theme.colors.accentPrimary)
-
                             Button("Save preferences") {
                                 Task { await savePreferences() }
                             }
@@ -112,7 +108,7 @@ struct ProfileScreen: View {
                 ProfilePreferencesUpdate(
                     preferredTab: preferredTab,
                     reviewCadenceDays: reviewCadenceDays,
-                    localOnlyModeEnabled: localOnlyModeEnabled
+                    localOnlyModeEnabled: true
                 )
             )
             syncEditor(with: dashboard)
@@ -125,7 +121,6 @@ struct ProfileScreen: View {
     private func syncEditor(with dashboard: ProfileDashboard) {
         preferredTab = dashboard.preferences.preferredTab
         reviewCadenceDays = dashboard.preferences.reviewCadenceDays
-        localOnlyModeEnabled = dashboard.preferences.localOnlyModeEnabled
     }
 
     private func summaryViewModel(_ dashboard: ProfileDashboard) -> ProfileSummaryWidgetViewModel {

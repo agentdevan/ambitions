@@ -107,9 +107,9 @@ struct PreviewFixtures: Sendable {
                 SettingsItem(id: "profile-setting-1", title: "Planning storage", subtitle: "Native persistence is active for goals, habits, and evidence", icon: "internaldrive", valueLabel: "Local-first"),
                 SettingsItem(id: "profile-setting-2", title: "Default tab", subtitle: "Used on the next cold launch", icon: "square.grid.2x2", valueLabel: "Today"),
                 SettingsItem(id: "profile-setting-3", title: "Review cadence", subtitle: "How often the app should frame a reset", icon: "clock.arrow.circlepath", valueLabel: "Weekly"),
-                SettingsItem(id: "profile-setting-4", title: "Connected account", subtitle: "Sync and auth are intentionally outside RC 1.0 scope", icon: "person.badge.key", valueLabel: "Post-1.0")
+                SettingsItem(id: "profile-setting-4", title: "Connected features", subtitle: "Account sync, notifications, and widgets are not included in this build", icon: "person.badge.key", valueLabel: "Not included")
             ],
-            settingsFooter: "RC 1.0 is intentionally local-first while Apple-side notifications, widgets, and connected-account work stay outside blocker scope.",
+            settingsFooter: "Everything in this build runs from on-device persistence. There is no connected account or background delivery path to configure yet.",
             preferences: ProfilePreferencesState(preferredTab: .today, reviewCadenceDays: 7, localOnlyModeEnabled: true)
         )
     )

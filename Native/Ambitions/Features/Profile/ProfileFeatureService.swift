@@ -12,7 +12,7 @@ struct RepositoryBackedProfileService: ProfileServicing {
         var state = try await repositories.appState.loadState()
         state.preferredTab = preferences.preferredTab
         state.reviewCadenceDays = max(1, preferences.reviewCadenceDays)
-        state.localOnlyModeEnabled = preferences.localOnlyModeEnabled
+        state.localOnlyModeEnabled = true
         try await repositories.appState.saveState(state)
         return try await loadProfileDashboard()
     }
@@ -44,6 +44,7 @@ private extension RepositoryBackedProfileService {
     }
 
     func makeDashboard(snapshot: Snapshot) -> ProfileDashboard {
+        let connectedFeaturesAvailable = false
         let activeGoals = snapshot.goals.filter { $0.state == .active }.count
         let liveHabits = snapshot.goals.filter { goal in
             guard let step = HabitGoalSemantics.preferredStep(in: goal) else { return false }
@@ -57,12 +58,10 @@ private extension RepositoryBackedProfileService {
 
         return ProfileDashboard(
             title: snapshot.appState.userDisplayName,
-            subtitle: snapshot.appState.localOnlyModeEnabled
-                ? "Local-first RC build with native persistence as the source of truth."
-                : "Native persistence is active while connected features stay intentionally out of scope for RC 1.0.",
+            subtitle: "This build keeps planning data on-device. Account sync, notifications, and widgets are not part of the current shipped feature surface.",
             initials: initials.isEmpty ? "A" : initials,
             badges: [
-                snapshot.appState.localOnlyModeEnabled ? "Local-first" : "Connected later",
+                "On-device only",
                 "Native persistence",
                 snapshot.drafts.contains(where: { $0.latestResultKind == .clarificationRequired }) ? "Clarification-aware" : "Stable planner"
             ],
@@ -75,16 +74,24 @@ private extension RepositoryBackedProfileService {
             settingsTitle: "Local preferences",
             settingsSubtitle: "These preferences are persisted on device and already shape the native experience.",
             settings: [
-                SettingsItem(id: "profile-storage", title: "Planning storage", subtitle: "Goals, habits, evidence, and feedback all read from the native repository.", icon: "internaldrive", valueLabel: snapshot.appState.localOnlyModeEnabled ? "Local-first" : "Hybrid later"),
+                SettingsItem(id: "profile-storage", title: "Planning storage", subtitle: "Goals, habits, evidence, and feedback all read from the native repository.", icon: "internaldrive", valueLabel: "On-device only"),
                 SettingsItem(id: "profile-tab", title: "Default tab", subtitle: "Used on the next cold launch.", icon: "square.grid.2x2", valueLabel: snapshot.appState.preferredTab.title),
                 SettingsItem(id: "profile-review", title: "Review cadence", subtitle: "How often Profile frames a planning reset.", icon: "clock.arrow.circlepath", valueLabel: reviewLabel(days: snapshot.appState.reviewCadenceDays)),
-                SettingsItem(id: "profile-scope", title: "Connected account", subtitle: "Account, sync, notifications, and widgets are intentionally outside RC 1.0 blocker scope.", icon: "person.badge.key", valueLabel: "Post-1.0")
+                SettingsItem(
+                    id: "profile-scope",
+                    title: "Connected features",
+                    subtitle: connectedFeaturesAvailable
+                        ? "This build can connect account-backed features."
+                        : "Account sync, notifications, and widgets are not available in this build.",
+                    icon: "person.badge.key",
+                    valueLabel: connectedFeaturesAvailable ? "Available" : "Not included"
+                )
             ],
-            settingsFooter: "This RC build is intentionally local-first. Apple-side notification, widget, and account validation can happen after the core native product proves stable.",
+            settingsFooter: "Everything in this version runs from on-device persistence. There is no connected account or background delivery path to configure yet.",
             preferences: ProfilePreferencesState(
                 preferredTab: snapshot.appState.preferredTab,
                 reviewCadenceDays: snapshot.appState.reviewCadenceDays,
-                localOnlyModeEnabled: snapshot.appState.localOnlyModeEnabled
+                localOnlyModeEnabled: true
             )
         )
     }

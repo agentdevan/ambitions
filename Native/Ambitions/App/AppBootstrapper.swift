@@ -15,6 +15,9 @@ final class AppBootstrapper {
         case automatic
         case preview
         case live
+        #if DEBUG
+        case demo
+        #endif
     }
 
     var phase: Phase = .idle
@@ -32,7 +35,7 @@ final class AppBootstrapper {
         phase = .launching
 
         do {
-            let container = try await AppContainerFactory.make(source: resolvedSource)
+            let container = try await AppContainerFactory.make(configuration: resolvedConfiguration)
             phase = .ready(container)
         } catch {
             phase = .failed("Bootstrap failed: \(error.localizedDescription)")
@@ -44,14 +47,43 @@ final class AppBootstrapper {
         await start()
     }
 
-    private var resolvedSource: AppSession.BootstrapSource {
+    private var resolvedConfiguration: AppBootstrapConfiguration {
+        #if DEBUG
+        if let override = debugOverrideConfiguration {
+            return override
+        }
+        #endif
+
         switch mode {
         case .preview:
             .preview
         case .live:
             .live
+        #if DEBUG
+        case .demo:
+            .demo
+        #endif
         case .automatic:
             ProcessInfo.processInfo.environment["XCODE_RUNNING_FOR_PREVIEWS"] == "1" ? .preview : .live
         }
     }
+
+    #if DEBUG
+    private var debugOverrideConfiguration: AppBootstrapConfiguration? {
+        guard let rawValue = ProcessInfo.processInfo.environment["AMBITIONS_BOOTSTRAP_MODE"]?.lowercased() else {
+            return nil
+        }
+
+        switch rawValue {
+        case "preview":
+            return .preview
+        case "live":
+            return .live
+        case "demo":
+            return .demo
+        default:
+            return nil
+        }
+    }
+    #endif
 }

@@ -45,6 +45,7 @@ struct CreateGoalScreen: View {
                         TextField("What do you want to do?", text: $viewModel.title, axis: .vertical)
                             .textFieldStyle(.roundedBorder)
                             .disabled(viewModel.isSubmitting)
+                            .accessibilityIdentifier("create-goal.title-field")
 
                         Picker("Goal type", selection: Binding<GoalMode?>(
                             get: { viewModel.selectedMode },
@@ -91,6 +92,7 @@ struct CreateGoalScreen: View {
                 }
                 .buttonStyle(AmbitionPressableButtonStyle(state: .selected))
                 .disabled(viewModel.canSubmit == false)
+                .accessibilityIdentifier("create-goal.submit-button")
             }
         }
         .navigationTitle("Create Goal")

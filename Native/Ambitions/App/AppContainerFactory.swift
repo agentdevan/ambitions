@@ -1,15 +1,57 @@
 import AmbitionsDesignSystem
 import Foundation
 
+struct AppBootstrapConfiguration: Sendable, Equatable {
+    enum PersistenceMode: Sendable, Equatable {
+        case persistent
+        case inMemory
+    }
+
+    enum SeedPolicy: Sendable, Equatable {
+        case never
+        case whenExplicit
+    }
+
+    let sessionSource: AppSession.BootstrapSource
+    let persistenceMode: PersistenceMode
+    let seedPolicy: SeedPolicy
+
+    static let live = AppBootstrapConfiguration(
+        sessionSource: .live,
+        persistenceMode: .persistent,
+        seedPolicy: .never
+    )
+
+    static let preview = AppBootstrapConfiguration(
+        sessionSource: .preview,
+        persistenceMode: .inMemory,
+        seedPolicy: .never
+    )
+
+    #if DEBUG
+    static let demo = AppBootstrapConfiguration(
+        sessionSource: .demo,
+        persistenceMode: .inMemory,
+        seedPolicy: .whenExplicit
+    )
+    #endif
+
+    var usesInMemoryStore: Bool {
+        persistenceMode == .inMemory
+    }
+}
+
 enum AppContainerFactory {
     static func make(source: AppSession.BootstrapSource) async throws -> AppContainer {
-        let store = try AmbitionsPersistenceStore(inMemory: source == .preview)
-        let repositories = makeRepositories(store: store)
-        try await DemoSeedPipeline(repositories: repositories).seedIfNeeded(force: source == .preview)
+        try await make(configuration: configuration(for: source))
+    }
+
+    static func make(configuration: AppBootstrapConfiguration) async throws -> AppContainer {
+        let repositories = try await prepareRepositories(for: configuration)
 
         let preferencesStore = RepositoryBackedAppPreferencesStore(appStateRepository: repositories.appState)
         let startupService = DefaultStartupService(preferencesStore: preferencesStore, appStateRepository: repositories.appState)
-        let session = try await startupService.prepareSession(source: source)
+        let session = try await startupService.prepareSession(source: configuration.sessionSource)
         let navigation = AppNavigationModel(selectedTab: session.initialTab)
 
         return AppContainer(
@@ -23,6 +65,46 @@ enum AppContainerFactory {
             profileService: RepositoryBackedProfileService(repositories: repositories),
             actionRouter: DefaultAppActionRouter(navigation: navigation)
         )
+    }
+
+    static func prepareRepositories(
+        for configuration: AppBootstrapConfiguration,
+        store overrideStore: AmbitionsPersistenceStore? = nil
+    ) async throws -> AppRepositories {
+        let store: AmbitionsPersistenceStore
+        if let overrideStore {
+            store = overrideStore
+        } else {
+            store = try AmbitionsPersistenceStore(inMemory: configuration.usesInMemoryStore)
+        }
+
+        let repositories = makeRepositories(store: store)
+        try await applySeedPolicy(configuration.seedPolicy, to: repositories)
+        return repositories
+    }
+
+    private static func configuration(for source: AppSession.BootstrapSource) -> AppBootstrapConfiguration {
+        switch source {
+        case .live:
+            return .live
+        case .preview:
+            return .preview
+        case .demo:
+            #if DEBUG
+            return .demo
+            #else
+            return .live
+            #endif
+        }
+    }
+
+    private static func applySeedPolicy(_ seedPolicy: AppBootstrapConfiguration.SeedPolicy, to repositories: AppRepositories) async throws {
+        switch seedPolicy {
+        case .never:
+            return
+        case .whenExplicit:
+            try await DemoSeedPipeline(repositories: repositories).seedIfNeeded(force: true)
+        }
     }
 
     private static func makeRepositories(store: AmbitionsPersistenceStore) -> AppRepositories {

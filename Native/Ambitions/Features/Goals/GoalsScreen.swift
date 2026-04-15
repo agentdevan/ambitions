@@ -112,6 +112,7 @@ struct GoalsScreen: View {
                 } label: {
                     Label("Create Goal", systemImage: "plus")
                 }
+                .accessibilityIdentifier("goals.create-button")
             }
         }
         .sheet(isPresented: $isCreateGoalPresented) {
