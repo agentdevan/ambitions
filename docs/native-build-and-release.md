@@ -148,6 +148,7 @@ This job verifies:
 - the native app target builds for `iphonesimulator`
 - `AmbitionsTests` pass on an available simulator
 - an unsigned Release archive can be produced
+- an unsigned `.ipa` container can be packaged from that archive and uploaded as an artifact with an explicit unsigned limitation note
 
 Core commands used in CI:
 
@@ -184,6 +185,8 @@ xcodebuild \
   CODE_SIGN_IDENTITY="" \
   archive
 ```
+
+CI then packages `Payload/Ambitions.app` from the unsigned archive into `Ambitions-unsigned.ipa` and uploads it as an artifact. This is intentionally not described as sideloadable or installable; device installation still requires signing and provisioning outside GitHub Actions.
 
 ### UI Tests job
 

@@ -22,6 +22,8 @@ jobs:
       DERIVED_DATA_PATH: ${{ runner.temp }}/DerivedData-unit
       UNIT_XCRESULT_PATH: ${{ runner.temp }}/AmbitionsUnitTests.xcresult
       ARCHIVE_PATH: ${{ runner.temp }}/Ambitions.xcarchive
+      IPA_PATH: ${{ runner.temp }}/Ambitions-unsigned.ipa
+      IPA_NOTES_PATH: ${{ runner.temp }}/Ambitions-unsigned-ipa-notes.txt
 
     steps:
       - name: Check out repository
@@ -191,6 +193,46 @@ jobs:
             CODE_SIGNING_ALLOWED=NO \
             CODE_SIGN_IDENTITY="" \
             archive
+
+      - name: Package unsigned IPA artifact
+        run: |
+          set -euo pipefail
+          APP_PATH="$ARCHIVE_PATH/Products/Applications/Ambitions.app"
+          STAGING_DIR="$RUNNER_TEMP/ipa-staging"
+
+          test -d "$APP_PATH"
+          rm -rf "$STAGING_DIR" "$IPA_PATH"
+          mkdir -p "$STAGING_DIR/Payload"
+          cp -R "$APP_PATH" "$STAGING_DIR/Payload/Ambitions.app"
+
+          (
+            cd "$STAGING_DIR"
+            /usr/bin/ditto -c -k --sequesterRsrc --keepParent Payload "$IPA_PATH"
+          )
+
+          cat > "$IPA_NOTES_PATH" <<'EOF'
+          This artifact is packaged from an unsigned iOS archive.
+          It is useful for inspection and downstream packaging experiments, but it is not a signed installable build.
+          Device sideloading or on-device testing still requires signing and provisioning outside this workflow.
+          EOF
+
+      - name: Upload unsigned archive
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: ambitions-unsigned-xcarchive
+          path: ${{ env.ARCHIVE_PATH }}
+          if-no-files-found: ignore
+
+      - name: Upload unsigned IPA artifact
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: ambitions-unsigned-ipa
+          path: |
+            ${{ env.IPA_PATH }}
+            ${{ env.IPA_NOTES_PATH }}
+          if-no-files-found: ignore
 
   ui-tests:
     name: UI Tests

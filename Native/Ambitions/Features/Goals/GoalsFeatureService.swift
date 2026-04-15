@@ -1927,7 +1927,7 @@ private extension RepositoryBackedGoalsService {
 
     func parseDate(_ value: String?) -> Date? {
         guard let value else { return nil }
-        return Self.iso.date(from: value) ?? Self.isoFallback.date(from: value)
+        return Self.iso.date(from: value) ?? Self.isoFallback.date(from: value) ?? Self.dateOnly.date(from: value)
     }
 
     static let iso: ISO8601DateFormatter = {
@@ -1939,6 +1939,15 @@ private extension RepositoryBackedGoalsService {
     static let isoFallback: ISO8601DateFormatter = {
         let formatter = ISO8601DateFormatter()
         formatter.formatOptions = [.withInternetDateTime]
+        return formatter
+    }()
+
+    static let dateOnly: DateFormatter = {
+        let formatter = DateFormatter()
+        formatter.calendar = Calendar(identifier: .gregorian)
+        formatter.locale = Locale(identifier: "en_US_POSIX")
+        formatter.timeZone = TimeZone(secondsFromGMT: 0)
+        formatter.dateFormat = "yyyy-MM-dd"
         return formatter
     }()
 }

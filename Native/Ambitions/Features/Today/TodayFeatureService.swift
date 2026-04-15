@@ -1370,6 +1370,15 @@ private extension RepositoryBackedTodayService {
     }()
 
     func parseDate(_ value: String) -> Date? {
-        Self.iso.date(from: value) ?? Self.isoFallback.date(from: value)
+        Self.iso.date(from: value) ?? Self.isoFallback.date(from: value) ?? Self.dateOnly.date(from: value)
     }
+
+    static let dateOnly: DateFormatter = {
+        let formatter = DateFormatter()
+        formatter.calendar = Calendar(identifier: .gregorian)
+        formatter.locale = Locale(identifier: "en_US_POSIX")
+        formatter.timeZone = TimeZone(secondsFromGMT: 0)
+        formatter.dateFormat = "yyyy-MM-dd"
+        return formatter
+    }()
 }
