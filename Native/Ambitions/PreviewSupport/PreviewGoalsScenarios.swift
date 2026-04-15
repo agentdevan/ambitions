@@ -31,6 +31,42 @@ enum PreviewGoalsScenarios {
         emptyMessage: "Once a goal or planning draft exists, this screen will immediately explain the path, not just dump tasks."
     )
 
+    static let createdOverview = GoalsOverview(
+        title: "Goals",
+        subtitle: "A newly created goal should look native immediately, with its first micro-plan already visible in the portfolio.",
+        contextPills: ["1 active", "0 need care", "Live native data"],
+        isSeeded: false,
+        filterSummaries: [
+            GoalsFilterSummary(filter: .active, count: 1),
+            GoalsFilterSummary(filter: .onHold, count: 0),
+            GoalsFilterSummary(filter: .achieved, count: 0),
+        ],
+        items: [
+            GoalListItem(
+                id: "goal-created",
+                target: GoalRouteTarget(goalID: "goal-created", draftID: "draft-created"),
+                title: "Ship the native create goal flow",
+                subtitle: "A freshly created project goal with an immediate deterministic micro-plan.",
+                mode: .project,
+                renderState: .active,
+                progressValue: 0.08,
+                progressLabel: "3 starter steps created",
+                statusLabel: "In motion",
+                timingLabel: "Untimed",
+                nextStepHint: "Define scope",
+                modeLabel: "Project",
+                supportLabel: nil,
+                relevanceScore: 0.93,
+                momentumScore: 0.34,
+                urgencyScore: 0.22,
+                manualPriorityRank: 0,
+                updatedAt: "2026-04-15T10:00:00Z"
+            )
+        ],
+        emptyTitle: "No goals yet",
+        emptyMessage: "Once a goal or planning draft exists, this screen will immediately explain the path, not just dump tasks."
+    )
+
     static let detailScenarios: [String: GoalDetailPresentation] = [
         activeTarget.id: GoalDetailPresentation(
             target: activeTarget,

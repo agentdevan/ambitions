@@ -23,7 +23,8 @@ struct InsightsScreen: View {
                     title: "Insights are unavailable",
                     message: message,
                     icon: "chart.line.uptrend.xyaxis",
-                    actionTitle: "Retry"
+                    actionTitle: "Retry",
+                    actionAccessibilityIdentifier: "insights.retry-button"
                 ) {
                     Task { await load() }
                 }
@@ -58,6 +59,7 @@ struct InsightsScreen: View {
         .refreshable {
             await load()
         }
+        .accessibilityIdentifier("insights.screen")
         .animation(theme.motion.animation(reduceMotion: reduceMotion, emphasis: true), value: stateKey)
         .task {
             guard case .loading = state else { return }
@@ -171,10 +173,20 @@ struct InsightsScreen: View {
     }
 }
 
-#Preview("Insights") {
+#Preview("Insights Light") {
+    NavigationStack {
+        InsightsScreen()
+    }
+    .appContainer(PreviewAppContainerFactory.preview)
+    .ambitionTheme(.light)
+    .preferredColorScheme(.light)
+}
+
+#Preview("Insights Dark") {
     NavigationStack {
         InsightsScreen()
     }
     .appContainer(PreviewAppContainerFactory.preview)
     .ambitionTheme(.dark)
+    .preferredColorScheme(.dark)
 }

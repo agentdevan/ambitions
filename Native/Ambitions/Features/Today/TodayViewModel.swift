@@ -28,6 +28,14 @@ final class TodayViewModel {
         self.transientMessage = transientMessage
     }
 
+    func activate(using service: any TodayServicing, userDisplayName: String, now: Date = .now) async {
+        if hasLoaded {
+            await refresh(using: service, userDisplayName: userDisplayName, now: now)
+        } else {
+            await load(using: service, userDisplayName: userDisplayName, now: now)
+        }
+    }
+
     func load(using service: any TodayServicing, userDisplayName: String, now: Date = .now) async {
         guard hasLoaded == false else { return }
         hasLoaded = true

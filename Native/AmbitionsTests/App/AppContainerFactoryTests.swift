@@ -17,6 +17,8 @@ final class AppContainerFactoryTests: XCTestCase {
         XCTAssertTrue(drafts.isEmpty)
         XCTAssertTrue(evidence.isEmpty)
         XCTAssertTrue(feedback.isEmpty)
+        XCTAssertEqual(state.userDisplayName, "")
+        XCTAssertEqual(state.appearancePreference, .system)
         XCTAssertNil(state.lastSeedVersion)
         XCTAssertNil(state.lastSeededAt)
     }
@@ -54,6 +56,7 @@ final class AppContainerFactoryTests: XCTestCase {
                 id: AppStateSnapshot.default.id,
                 preferredTab: .goals,
                 userDisplayName: "Existing User",
+                appearancePreference: .dark,
                 reviewCadenceDays: 3,
                 localOnlyModeEnabled: true,
                 hasCompletedBootstrap: true,
@@ -74,6 +77,7 @@ final class AppContainerFactoryTests: XCTestCase {
         XCTAssertEqual(loadedGoals.map(\.id), [goal.id])
         XCTAssertEqual(loadedGoals.first?.title, goal.title)
         XCTAssertEqual(loadedState.userDisplayName, "Existing User")
+        XCTAssertEqual(loadedState.appearancePreference, .dark)
         XCTAssertEqual(loadedState.goalPriorityOrder, [goal.id])
         XCTAssertNil(loadedState.lastSeedVersion)
     }

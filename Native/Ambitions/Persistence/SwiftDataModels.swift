@@ -362,6 +362,7 @@ final class AppStateRecord {
     @Attribute(.unique) var id: String
     var preferredTabRaw: String
     var userDisplayName: String
+    var appearancePreferenceRaw: String
     var hasCompletedBootstrap: Bool
     var lastBootstrapSourceRaw: String?
     var lastBootstrapAt: String?
@@ -374,6 +375,7 @@ final class AppStateRecord {
         id: String,
         preferredTabRaw: String,
         userDisplayName: String,
+        appearancePreferenceRaw: String,
         hasCompletedBootstrap: Bool,
         lastBootstrapSourceRaw: String?,
         lastBootstrapAt: String?,
@@ -385,6 +387,7 @@ final class AppStateRecord {
         self.id = id
         self.preferredTabRaw = preferredTabRaw
         self.userDisplayName = userDisplayName
+        self.appearancePreferenceRaw = appearancePreferenceRaw
         self.hasCompletedBootstrap = hasCompletedBootstrap
         self.lastBootstrapSourceRaw = lastBootstrapSourceRaw
         self.lastBootstrapAt = lastBootstrapAt

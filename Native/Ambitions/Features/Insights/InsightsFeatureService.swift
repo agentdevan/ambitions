@@ -110,35 +110,54 @@ private extension RepositoryBackedInsightsService {
     }
 
     func recentActivities(snapshot: Snapshot, now: Date) -> [ActivitySummary] {
+        struct DatedActivity {
+            let date: Date
+            let summary: ActivitySummary
+        }
+
         let evidenceActivities = snapshot.evidence
-            .sorted { $0.capturedAt > $1.capturedAt }
-            .prefix(4)
-            .map { evidence in
-                ActivitySummary(
-                    id: evidence.id,
-                    title: evidenceTitle(for: evidence),
-                    subtitle: goalTitle(for: evidence.goalID, goals: snapshot.goals),
-                    timestamp: relativeTimestamp(for: evidence.capturedAt, now: now),
-                    icon: evidenceIcon(for: evidence),
-                    badge: evidenceBadge(for: evidence)
+            .compactMap { evidence -> DatedActivity? in
+                guard let date = parseDate(evidence.capturedAt) else { return nil }
+                return DatedActivity(
+                    date: date,
+                    summary: ActivitySummary(
+                        id: evidence.id,
+                        title: evidenceTitle(for: evidence),
+                        subtitle: goalTitle(for: evidence.goalID, goals: snapshot.goals),
+                        timestamp: relativeTimestamp(for: evidence.capturedAt, now: now),
+                        icon: evidenceIcon(for: evidence),
+                        badge: evidenceBadge(for: evidence)
+                    )
                 )
             }
 
         let feedbackActivities = snapshot.feedback
-            .sorted { $0.base.occurredAt > $1.base.occurredAt }
-            .prefix(4)
-            .map { event in
-                ActivitySummary(
-                    id: event.base.id,
-                    title: feedbackTitle(for: event),
-                    subtitle: stepTitle(for: event.stepID, goals: snapshot.goals),
-                    timestamp: relativeTimestamp(for: event.base.occurredAt, now: now),
-                    icon: feedbackIcon(for: event),
-                    badge: feedbackBadge(for: event)
+            .compactMap { event -> DatedActivity? in
+                guard let date = parseDate(event.base.occurredAt) else { return nil }
+                return DatedActivity(
+                    date: date,
+                    summary: ActivitySummary(
+                        id: event.base.id,
+                        title: feedbackTitle(for: event),
+                        subtitle: stepTitle(for: event.stepID, goals: snapshot.goals),
+                        timestamp: relativeTimestamp(for: event.base.occurredAt, now: now),
+                        icon: feedbackIcon(for: event),
+                        badge: feedbackBadge(for: event)
+                    )
                 )
             }
 
-        return Array((evidenceActivities + feedbackActivities).sorted { $0.timestamp > $1.timestamp }.prefix(6))
+        return Array(
+            (evidenceActivities + feedbackActivities)
+                .sorted { lhs, rhs in
+                    if lhs.date == rhs.date {
+                        return lhs.summary.id > rhs.summary.id
+                    }
+                    return lhs.date > rhs.date
+                }
+                .prefix(6)
+                .map(\.summary)
+        )
     }
 
     func summaryText(activeGoalCount: Int, blockedCount: Int, completionCount: Int, minimumCount: Int, frictionCount: Int) -> String {

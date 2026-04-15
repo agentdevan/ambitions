@@ -291,6 +291,7 @@ public struct EmptyStateCard: View {
     private let message: String
     private let icon: String
     private let actionTitle: String?
+    private let actionAccessibilityIdentifier: String?
     private let action: (() -> Void)?
 
     public init(
@@ -298,12 +299,14 @@ public struct EmptyStateCard: View {
         message: String,
         icon: String,
         actionTitle: String? = nil,
+        actionAccessibilityIdentifier: String? = nil,
         action: (() -> Void)? = nil
     ) {
         self.title = title
         self.message = message
         self.icon = icon
         self.actionTitle = actionTitle
+        self.actionAccessibilityIdentifier = actionAccessibilityIdentifier
         self.action = action
     }
 
@@ -332,6 +335,7 @@ public struct EmptyStateCard: View {
                         .font(theme.typography.bodyEmphasized)
                         .foregroundStyle(theme.colors.accentPrimary)
                         .frame(minHeight: 44)
+                        .accessibilityIdentifier(actionAccessibilityIdentifier ?? "")
                 }
             }
         }

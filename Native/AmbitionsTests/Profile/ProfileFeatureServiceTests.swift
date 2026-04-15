@@ -21,6 +21,7 @@ final class ProfileFeatureServiceTests: XCTestCase {
         _ = try await service.saveProfilePreferences(
             ProfilePreferencesUpdate(
                 preferredTab: .goals,
+                appearancePreference: .dark,
                 reviewCadenceDays: 3,
                 localOnlyModeEnabled: false
             )
@@ -28,8 +29,25 @@ final class ProfileFeatureServiceTests: XCTestCase {
 
         let state = try await repositories.appState.loadState()
         XCTAssertEqual(state.preferredTab, .goals)
+        XCTAssertEqual(state.appearancePreference, .dark)
         XCTAssertEqual(state.reviewCadenceDays, 3)
         XCTAssertTrue(state.localOnlyModeEnabled)
+    }
+
+    func testDashboardUsesNeutralIdentityWhenDisplayNameIsBlank() async throws {
+        let repositories = try await makeRepositories()
+        let service = RepositoryBackedProfileService(repositories: repositories)
+
+        var state = try await repositories.appState.loadState()
+        state.userDisplayName = "   "
+        try await repositories.appState.saveState(state)
+
+        let dashboard = try await service.loadProfileDashboard()
+
+        XCTAssertEqual(dashboard.title, "Your profile")
+        XCTAssertEqual(dashboard.initials, "U")
+        XCTAssertEqual(dashboard.preferences.appearancePreference, .system)
+        XCTAssertTrue(dashboard.settings.contains(where: { $0.id == "profile-appearance" && $0.valueLabel == "System" }))
     }
 }
 

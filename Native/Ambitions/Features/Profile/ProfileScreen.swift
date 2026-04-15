@@ -8,6 +8,7 @@ struct ProfileScreen: View {
     @Environment(\.accessibilityReduceMotion) private var reduceMotion
     @State private var state: AsyncViewState<ProfileDashboard> = .loading
     @State private var preferredTab: AppTab = .today
+    @State private var appearancePreference: AppAppearancePreference = .system
     @State private var reviewCadenceDays: Int = 7
 
     var body: some View {
@@ -25,7 +26,8 @@ struct ProfileScreen: View {
                     title: "Profile is unavailable",
                     message: message,
                     icon: "person.crop.circle.badge.exclamationmark",
-                    actionTitle: "Retry"
+                    actionTitle: "Retry",
+                    actionAccessibilityIdentifier: "profile.retry-button"
                 ) {
                     Task { await load() }
                 }
@@ -64,6 +66,15 @@ struct ProfileScreen: View {
                                 }
                             }
                             .pickerStyle(.segmented)
+                            .accessibilityIdentifier("profile.default-tab-picker")
+
+                            Picker("Appearance", selection: $appearancePreference) {
+                                ForEach(AppAppearancePreference.allCases, id: \.self) { preference in
+                                    Text(preference.title).tag(preference)
+                                }
+                            }
+                            .pickerStyle(.segmented)
+                            .accessibilityIdentifier("profile.appearance-picker")
 
                             Picker("Review cadence", selection: $reviewCadenceDays) {
                                 Text("Daily").tag(1)
@@ -76,6 +87,7 @@ struct ProfileScreen: View {
                                 Task { await savePreferences() }
                             }
                             .buttonStyle(AmbitionPressableButtonStyle(state: .selected))
+                            .accessibilityIdentifier("profile.save-preferences-button")
                         }
                     }
                 }
@@ -85,6 +97,7 @@ struct ProfileScreen: View {
         .refreshable {
             await load()
         }
+        .accessibilityIdentifier("profile.screen")
         .animation(theme.motion.animation(reduceMotion: reduceMotion, emphasis: true), value: stateKey)
         .task {
             guard case .loading = state else { return }
@@ -96,6 +109,7 @@ struct ProfileScreen: View {
         do {
             let dashboard = try await container.profileService.loadProfileDashboard()
             syncEditor(with: dashboard)
+            container.appearancePreference = dashboard.preferences.appearancePreference
             state = .loaded(dashboard)
         } catch {
             state = .failed("Unable to load Profile: \(error.localizedDescription)")
@@ -107,11 +121,13 @@ struct ProfileScreen: View {
             let dashboard = try await container.profileService.saveProfilePreferences(
                 ProfilePreferencesUpdate(
                     preferredTab: preferredTab,
+                    appearancePreference: appearancePreference,
                     reviewCadenceDays: reviewCadenceDays,
                     localOnlyModeEnabled: true
                 )
             )
             syncEditor(with: dashboard)
+            container.appearancePreference = dashboard.preferences.appearancePreference
             state = .loaded(dashboard)
         } catch {
             state = .failed("Unable to save Profile: \(error.localizedDescription)")
@@ -120,6 +136,7 @@ struct ProfileScreen: View {
 
     private func syncEditor(with dashboard: ProfileDashboard) {
         preferredTab = dashboard.preferences.preferredTab
+        appearancePreference = dashboard.preferences.appearancePreference
         reviewCadenceDays = dashboard.preferences.reviewCadenceDays
     }
 
@@ -197,10 +214,20 @@ struct ProfileScreen: View {
     }
 }
 
-#Preview("Profile") {
+#Preview("Profile Light") {
+    NavigationStack {
+        ProfileScreen()
+    }
+    .appContainer(PreviewAppContainerFactory.preview)
+    .ambitionTheme(.light)
+    .preferredColorScheme(.light)
+}
+
+#Preview("Profile Dark") {
     NavigationStack {
         ProfileScreen()
     }
     .appContainer(PreviewAppContainerFactory.preview)
     .ambitionTheme(.dark)
+    .preferredColorScheme(.dark)
 }

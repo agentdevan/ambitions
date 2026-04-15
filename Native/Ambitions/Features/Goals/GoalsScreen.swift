@@ -9,8 +9,12 @@ struct GoalsScreen: View {
     @State private var isCreateGoalPresented = false
     @State private var creationMessage: GoalDetailInlineMessage?
 
-    init(viewModel: GoalsViewModel = GoalsViewModel()) {
+    init(
+        viewModel: GoalsViewModel = GoalsViewModel(),
+        creationMessage: GoalDetailInlineMessage? = nil
+    ) {
         _viewModel = State(initialValue: viewModel)
+        _creationMessage = State(initialValue: creationMessage)
     }
 
     var body: some View {
@@ -151,6 +155,21 @@ struct GoalsScreen: View {
 #Preview("Goals Overview") {
     NavigationStack {
         GoalsScreen(viewModel: GoalsViewModel(state: .loaded(PreviewGoalsScenarios.overview)))
+    }
+    .appContainer(PreviewAppContainerFactory.preview)
+    .ambitionTheme(.dark)
+}
+
+#Preview("Goals After Create") {
+    NavigationStack {
+        GoalsScreen(
+            viewModel: GoalsViewModel(state: .loaded(PreviewGoalsScenarios.createdOverview)),
+            creationMessage: GoalDetailInlineMessage(
+                title: "Goal created",
+                body: "Ship the native create goal flow is now in the portfolio with its first 3 steps.",
+                state: .success
+            )
+        )
     }
     .appContainer(PreviewAppContainerFactory.preview)
     .ambitionTheme(.dark)

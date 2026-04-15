@@ -31,7 +31,8 @@ struct TodayScreen: View {
                             title: "Today is unavailable",
                             message: message,
                             icon: "exclamationmark.triangle",
-                            actionTitle: "Retry"
+                            actionTitle: "Retry",
+                            actionAccessibilityIdentifier: "today.retry-button"
                         ) {
                             Task {
                                 await viewModel.refresh(using: container.todayService, userDisplayName: container.session.userDisplayName)
@@ -74,6 +75,7 @@ struct TodayScreen: View {
                 .padding(.vertical, theme.spacing.md)
             }
             .scrollIndicators(.hidden)
+            .accessibilityIdentifier("today.screen")
             .refreshable {
                 await viewModel.refresh(using: container.todayService, userDisplayName: container.session.userDisplayName)
             }
@@ -81,9 +83,21 @@ struct TodayScreen: View {
         .navigationTitle("Today")
         .animation(theme.motion.animation(reduceMotion: reduceMotion, emphasis: true), value: viewModel.stateKey)
         .animation(theme.motion.animation(reduceMotion: reduceMotion), value: viewModel.transientMessage?.title)
+        .onChange(of: container.navigation.selectedTab) { _, selectedTab in
+            guard autoLoad, selectedTab == .today else { return }
+            Task {
+                await viewModel.activate(
+                    using: container.todayService,
+                    userDisplayName: container.session.userDisplayName
+                )
+            }
+        }
         .task {
             guard autoLoad else { return }
-            await viewModel.load(using: container.todayService, userDisplayName: container.session.userDisplayName)
+            await viewModel.activate(
+                using: container.todayService,
+                userDisplayName: container.session.userDisplayName
+            )
         }
     }
 
@@ -116,12 +130,22 @@ struct TodayScreen: View {
     }
 }
 
-#Preview("Today Seeded") {
+#Preview("Today Seeded Light") {
+    NavigationStack {
+        TodayScreen(viewModel: TodayViewModel(state: .loaded(PreviewTodayScenarios.seeded)), autoLoad: false)
+    }
+    .appContainer(PreviewAppContainerFactory.preview(todayExperience: PreviewTodayScenarios.seeded))
+    .ambitionTheme(.light)
+    .preferredColorScheme(.light)
+}
+
+#Preview("Today Seeded Dark") {
     NavigationStack {
         TodayScreen(viewModel: TodayViewModel(state: .loaded(PreviewTodayScenarios.seeded)), autoLoad: false)
     }
     .appContainer(PreviewAppContainerFactory.preview(todayExperience: PreviewTodayScenarios.seeded))
     .ambitionTheme(.dark)
+    .preferredColorScheme(.dark)
 }
 
 #Preview("Today Empty") {
@@ -153,6 +177,14 @@ struct TodayScreen: View {
         TodayScreen(viewModel: TodayViewModel(state: .loaded(PreviewTodayScenarios.blocked)), autoLoad: false)
     }
     .appContainer(PreviewAppContainerFactory.preview(todayExperience: PreviewTodayScenarios.blocked))
+    .ambitionTheme(.dark)
+}
+
+#Preview("Today Fresh Goal") {
+    NavigationStack {
+        TodayScreen(viewModel: TodayViewModel(state: .loaded(PreviewTodayScenarios.freshGoal)), autoLoad: false)
+    }
+    .appContainer(PreviewAppContainerFactory.preview(todayExperience: PreviewTodayScenarios.freshGoal))
     .ambitionTheme(.dark)
 }
 

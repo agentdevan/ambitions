@@ -10,12 +10,14 @@ struct SettingsItem: Identifiable, Sendable {
 
 struct ProfilePreferencesState: Sendable, Equatable {
     let preferredTab: AppTab
+    let appearancePreference: AppAppearancePreference
     let reviewCadenceDays: Int
     let localOnlyModeEnabled: Bool
 }
 
 struct ProfilePreferencesUpdate: Sendable, Equatable {
     let preferredTab: AppTab
+    let appearancePreference: AppAppearancePreference
     let reviewCadenceDays: Int
     let localOnlyModeEnabled: Bool
 }

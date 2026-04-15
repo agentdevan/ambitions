@@ -504,12 +504,13 @@ private extension RepositoryBackedTodayService {
         blockedCount: Int
     ) -> TodayHeaderState {
         let hour = Calendar.current.component(.hour, from: now)
+        let trimmedName = userDisplayName.trimmingCharacters(in: .whitespacesAndNewlines)
         let greeting: String
         switch hour {
-        case 0..<5: greeting = "Still up, \(userDisplayName)"
-        case 5..<12: greeting = "Good morning, \(userDisplayName)"
-        case 12..<17: greeting = "Good afternoon, \(userDisplayName)"
-        default: greeting = "Good evening, \(userDisplayName)"
+        case 0..<5: greeting = trimmedName.isEmpty ? "Still up" : "Still up, \(trimmedName)"
+        case 5..<12: greeting = trimmedName.isEmpty ? "Good morning" : "Good morning, \(trimmedName)"
+        case 12..<17: greeting = trimmedName.isEmpty ? "Good afternoon" : "Good afternoon, \(trimmedName)"
+        default: greeting = trimmedName.isEmpty ? "Good evening" : "Good evening, \(trimmedName)"
         }
 
         let subtitle: String

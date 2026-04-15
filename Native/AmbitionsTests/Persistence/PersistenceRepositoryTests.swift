@@ -61,6 +61,7 @@ final class PersistenceRepositoryTests: XCTestCase {
         var state = try await repositories.appState.loadState()
         state.preferredTab = .goals
         state.userDisplayName = "Storage Test"
+        state.appearancePreference = .dark
         state.hasCompletedBootstrap = true
         state.lastBootstrapSource = .live
         state.lastBootstrapAt = GoalEngineFixtures.fixedNow
@@ -70,6 +71,7 @@ final class PersistenceRepositoryTests: XCTestCase {
 
         XCTAssertEqual(loaded.preferredTab, .goals)
         XCTAssertEqual(loaded.userDisplayName, "Storage Test")
+        XCTAssertEqual(loaded.appearancePreference, .dark)
         XCTAssertEqual(loaded.lastBootstrapSource, .live)
     }
 }

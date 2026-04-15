@@ -3,7 +3,7 @@ import SwiftUI
 
 /// Shared theme surface for Ambitions SwiftUI UI.
 ///
-/// Inject a theme at the app shell with `.ambitionTheme(.dark)` and read it
+/// Inject a theme at the app shell with `.ambitionTheme(theme)` and read it
 /// inside reusable primitives with `@Environment(\.ambitionTheme)`.
 public struct AmbitionTheme: Sendable {
     public struct Colors: Sendable {
@@ -359,7 +359,7 @@ public extension AmbitionTheme {
 }
 
 private struct AmbitionThemeKey: EnvironmentKey {
-    static let defaultValue: AmbitionTheme = .dark
+    static let defaultValue: AmbitionTheme = .light
 }
 
 public extension EnvironmentValues {

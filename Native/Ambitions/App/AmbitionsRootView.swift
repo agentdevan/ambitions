@@ -2,6 +2,7 @@ import AmbitionsDesignSystem
 import SwiftUI
 
 struct AmbitionsRootView: View {
+    @Environment(\.colorScheme) private var systemColorScheme
     private let container: AppContainer
     @State private var navigation: AppNavigationModel
 
@@ -19,7 +20,8 @@ struct AmbitionsRootView: View {
             tabNavigation(tab: .profile) { ProfileScreen() }
         }
         .appContainer(container)
-        .ambitionTheme(container.theme)
+        .preferredColorScheme(container.appearancePreference.preferredColorScheme)
+        .ambitionTheme(container.appearancePreference.resolveTheme(systemColorScheme: systemColorScheme))
     }
 
     private func tabNavigation<Content: View>(tab: AppTab, @ViewBuilder content: () -> Content) -> some View {

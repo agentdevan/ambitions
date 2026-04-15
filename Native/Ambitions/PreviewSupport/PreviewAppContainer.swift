@@ -17,10 +17,11 @@ enum PreviewAppContainerFactory {
                 source: .preview,
                 userDisplayName: fixtures.preferences.userDisplayName,
                 initialTab: fixtures.preferences.preferredTab,
+                appearancePreference: fixtures.preferences.appearancePreference,
                 launchedAt: .now,
                 startupNote: "Preview bootstrap uses isolated in-memory fixtures."
             ),
-            theme: .dark,
+            appearancePreference: fixtures.preferences.appearancePreference,
             navigation: navigation,
             todayService: StubTodayService(experience: todayExperience),
             goalsService: StubGoalsService(),

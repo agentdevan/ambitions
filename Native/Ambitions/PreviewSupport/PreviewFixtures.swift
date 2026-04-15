@@ -11,7 +11,8 @@ struct PreviewFixtures: Sendable {
     static let `default` = PreviewFixtures(
         preferences: AppPreferences(
             preferredTab: .today,
-            userDisplayName: "Devan"
+            userDisplayName: "Preview User",
+            appearancePreference: .system
         ),
         todayDashboard: TodayDashboard(
             title: "Steady execution, light load",
@@ -91,26 +92,27 @@ struct PreviewFixtures: Sendable {
             ]
         ),
         profileDashboard: ProfileDashboard(
-            title: "Devan Warner",
+            title: "Preview User",
             subtitle: "Local-first native roadmap.",
-            initials: "DW",
+            initials: "PU",
             badges: ["Local-first", "Native pivot", "Design system"],
             stats: [
                 MetricSummary(id: "profile-1", title: "Open ambitions", value: "3", detail: "In active review", icon: "target"),
                 MetricSummary(id: "profile-2", title: "Tracked habits", value: "6", detail: "Current set", icon: "repeat"),
                 MetricSummary(id: "profile-3", title: "Review cadence", value: "Weekly", detail: "Sunday reset", icon: "calendar"),
-                MetricSummary(id: "profile-4", title: "Theme", value: "Dark", detail: "Default shell", icon: "moon.stars")
+                MetricSummary(id: "profile-4", title: "Appearance", value: "System", detail: "Follows the device by default", icon: "circle.lefthalf.filled")
             ],
             settingsTitle: "Native app configuration",
             settingsSubtitle: "Core local preferences and RC scope markers.",
             settings: [
                 SettingsItem(id: "profile-setting-1", title: "Planning storage", subtitle: "Native persistence is active for goals, habits, and evidence", icon: "internaldrive", valueLabel: "Local-first"),
                 SettingsItem(id: "profile-setting-2", title: "Default tab", subtitle: "Used on the next cold launch", icon: "square.grid.2x2", valueLabel: "Today"),
-                SettingsItem(id: "profile-setting-3", title: "Review cadence", subtitle: "How often the app should frame a reset", icon: "clock.arrow.circlepath", valueLabel: "Weekly"),
-                SettingsItem(id: "profile-setting-4", title: "Connected features", subtitle: "Account sync, notifications, and widgets are not included in this build", icon: "person.badge.key", valueLabel: "Not included")
+                SettingsItem(id: "profile-setting-3", title: "Appearance", subtitle: "System follows the device while explicit themes stay selectable", icon: "circle.lefthalf.filled", valueLabel: "System"),
+                SettingsItem(id: "profile-setting-4", title: "Review cadence", subtitle: "How often the app should frame a reset", icon: "clock.arrow.circlepath", valueLabel: "Weekly"),
+                SettingsItem(id: "profile-setting-5", title: "Connected features", subtitle: "Account sync, notifications, and widgets are not included in this build", icon: "person.badge.key", valueLabel: "Not included")
             ],
             settingsFooter: "Everything in this build runs from on-device persistence. There is no connected account or background delivery path to configure yet.",
-            preferences: ProfilePreferencesState(preferredTab: .today, reviewCadenceDays: 7, localOnlyModeEnabled: true)
+            preferences: ProfilePreferencesState(preferredTab: .today, appearancePreference: .system, reviewCadenceDays: 7, localOnlyModeEnabled: true)
         )
     )
 }

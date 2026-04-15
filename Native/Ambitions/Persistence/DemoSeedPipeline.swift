@@ -30,7 +30,7 @@ struct DemoSeedPipeline {
         state.lastSeedVersion = Self.seedVersion
         state.lastSeededAt = GoalEngineFixtures.fixedNow
         if state.userDisplayName.isEmpty {
-            state.userDisplayName = "Devan"
+            state.userDisplayName = "Demo User"
         }
         try await repositories.appState.saveState(state)
     }

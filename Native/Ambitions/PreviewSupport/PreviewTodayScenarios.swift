@@ -5,7 +5,7 @@ enum PreviewTodayScenarios {
     static let seeded = TodayExperience(
         mode: .seeded,
         header: TodayHeaderState(
-            greeting: "Good afternoon, Devan",
+            greeting: "Good afternoon, Preview User",
             title: "Today",
             subtitle: "The native execution center is reading seeded repository data and real orchestration states.",
             contextPills: [
@@ -121,7 +121,7 @@ enum PreviewTodayScenarios {
     static let empty = TodayExperience(
         mode: .empty,
         header: TodayHeaderState(
-            greeting: "Good morning, Devan",
+            greeting: "Good morning",
             title: "Today",
             subtitle: "Today becomes useful as soon as one real goal or draft exists. Nothing here is faking urgency.",
             contextPills: [TodayPillState(id: "empty", title: "No live goals", icon: "moon.zzz", state: .default)]
@@ -209,5 +209,107 @@ enum PreviewTodayScenarios {
         celebration: nil,
         quickCapture: seeded.quickCapture,
         reflection: seeded.reflection
+    )
+
+    static let freshGoal = TodayExperience(
+        mode: .active,
+        header: TodayHeaderState(
+            greeting: "Good afternoon, Preview User",
+            title: "Today",
+            subtitle: "A newly created goal is already part of the same native execution flow.",
+            contextPills: [
+                TodayPillState(id: "goals", title: "1 active goal", icon: "scope", state: .selected),
+                TodayPillState(id: "moves", title: "3 live moves", icon: "bolt.fill", state: .default)
+            ]
+        ),
+        dailyTargets: TodayDailyTargetsState(
+            title: "Daily targets",
+            subtitle: "Freshly created goals can surface here immediately when the next step is concrete enough to act on.",
+            completionLabel: "0% through visible plan work",
+            items: [
+                TodayTargetItem(
+                    id: "fresh-step-1",
+                    title: "Define scope",
+                    subtitle: "Ship the native create goal flow",
+                    timingLabel: "No deadline",
+                    statusLabel: "Planned",
+                    progress: 0.48,
+                    state: .default,
+                    primaryAction: TodayInlineAction(kind: .complete, title: "Complete", systemImage: "checkmark", state: .success, target: TodayActionTarget(goalID: "goal-fresh", stepID: "goal-fresh-step-1", draftID: "draft-fresh")),
+                    secondaryAction: TodayInlineAction(kind: .delay, title: "Delay", systemImage: "clock.arrow.circlepath", state: .default, target: TodayActionTarget(goalID: "goal-fresh", stepID: "goal-fresh-step-1", draftID: "draft-fresh"))
+                )
+            ],
+            emptyMessage: nil
+        ),
+        focus: .planned(
+            TodayFocusPlannedState(
+                title: "Define scope",
+                subtitle: "Ship the native create goal flow",
+                reason: "This is the cleanest next move from the newly created micro-plan.",
+                timingLabel: "No deadline",
+                energyLabel: "Deliberate",
+                progress: 0.48,
+                supportingText: ["No deadline", "Scope is written in a few lines.", "Open detail stays available if the step needs context."],
+                actions: [
+                    TodayInlineAction(kind: .complete, title: "Complete", systemImage: "checkmark", state: .success, target: TodayActionTarget(goalID: "goal-fresh", stepID: "goal-fresh-step-1", draftID: "draft-fresh")),
+                    TodayInlineAction(kind: .delay, title: "Delay", systemImage: "clock.arrow.circlepath", state: .default, target: TodayActionTarget(goalID: "goal-fresh", stepID: "goal-fresh-step-1", draftID: "draft-fresh")),
+                    TodayInlineAction(kind: .askForSmallerStep, title: "Smaller step", systemImage: "scissors", state: .selected, target: TodayActionTarget(goalID: "goal-fresh", stepID: "goal-fresh-step-1", draftID: "draft-fresh")),
+                    TodayInlineAction(kind: .askWhyThisMatters, title: "Why this matters", systemImage: "questionmark.circle", state: .default, target: TodayActionTarget(goalID: "goal-fresh", stepID: "goal-fresh-step-1", draftID: "draft-fresh")),
+                    TodayInlineAction(kind: .openDetail, title: "Open detail", systemImage: "arrow.right.circle", state: .default, target: TodayActionTarget(goalID: "goal-fresh", stepID: "goal-fresh-step-1", draftID: "draft-fresh"))
+                ]
+            )
+        ),
+        freeTime: TodayFreeTimeState(
+            title: "Free time opportunities",
+            subtitle: "Fresh goals can still leave room for optional movement later in the day.",
+            opportunities: [
+                TodayOpportunityState(
+                    id: "fresh-step-2",
+                    title: "List constraints",
+                    subtitle: "A calm use of spare time",
+                    timingLabel: "No deadline",
+                    state: .default,
+                    action: TodayInlineAction(kind: .quickLog, title: "Quick log", systemImage: "plus.bubble", state: .success, target: TodayActionTarget(goalID: "goal-fresh", stepID: "goal-fresh-step-2", draftID: "draft-fresh"))
+                )
+            ]
+        ),
+        milestone: TodayMilestoneState(
+            title: "Ship the native create goal flow",
+            subtitle: "Milestone prompt",
+            prompt: "Do the first pass once scope and constraints are written down.",
+            confidenceLabel: "Live plan",
+            action: TodayInlineAction(kind: .openDetail, title: "Open detail", systemImage: "flag.checkered.2.crossed", state: .selected, target: TodayActionTarget(goalID: "goal-fresh", draftID: "draft-fresh"))
+        ),
+        momentum: TodayMomentumState(
+            title: "Momentum",
+            subtitle: "Progress summary",
+            metrics: [
+                TodayMetricState(id: "fresh-1", title: "Completed today", value: "0", detail: "Recorded from native evidence", icon: "checkmark.circle.fill", state: .default),
+                TodayMetricState(id: "fresh-2", title: "Active goals", value: "1", detail: "Live in the repository", icon: "scope", state: .selected),
+                TodayMetricState(id: "fresh-3", title: "Logged minutes", value: "0", detail: "Captured evidence", icon: "timer", state: .default),
+                TodayMetricState(id: "fresh-4", title: "Friction signals", value: "0", detail: "Feedback worth respecting", icon: "waveform.path.ecg", state: .success)
+            ],
+            note: "A fresh goal is visible without pretending momentum already exists."
+        ),
+        celebration: nil,
+        quickCapture: TodayQuickCaptureState(
+            title: "Quick capture",
+            subtitle: "Ask for help when the next move is still too large or too vague.",
+            prompt: "Use quick log when progress happened without a clean completion event.",
+            helpText: "If the step still feels heavy, ask for a smaller step before it turns into drift.",
+            actions: [
+                TodayInlineAction(kind: .quickLog, title: "Quick log", systemImage: "plus.bubble", state: .success, target: TodayActionTarget(goalID: "goal-fresh", stepID: "goal-fresh-step-1", draftID: "draft-fresh")),
+                TodayInlineAction(kind: .askForHelp, title: "Ask for help", systemImage: "lifepreserver", state: .default, target: TodayActionTarget(goalID: "goal-fresh", stepID: "goal-fresh-step-1", draftID: "draft-fresh"))
+            ]
+        ),
+        reflection: TodayReflectionState(
+            title: "End-of-day reflection",
+            subtitle: "A calm close matters more than squeezing in one more noisy panel.",
+            prompt: "What would make this new goal feel genuinely started by tonight?",
+            highlights: ["The first step is already clear."],
+            actions: [
+                TodayInlineAction(kind: .quickLog, title: "Quick log", systemImage: "square.and.pencil", state: .default, target: TodayActionTarget(goalID: "goal-fresh", stepID: "goal-fresh-step-1", draftID: "draft-fresh"))
+            ]
+        )
     )
 }

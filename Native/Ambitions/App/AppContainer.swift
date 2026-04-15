@@ -1,9 +1,12 @@
 import AmbitionsDesignSystem
 import Foundation
+import Observation
 
+@MainActor
+@Observable
 final class AppContainer {
     let session: AppSession
-    let theme: AmbitionTheme
+    var appearancePreference: AppAppearancePreference
     let navigation: AppNavigationModel
     let todayService: any TodayServicing
     let goalsService: any GoalsServicing
@@ -14,7 +17,7 @@ final class AppContainer {
 
     init(
         session: AppSession,
-        theme: AmbitionTheme,
+        appearancePreference: AppAppearancePreference,
         navigation: AppNavigationModel,
         todayService: any TodayServicing,
         goalsService: any GoalsServicing,
@@ -24,7 +27,7 @@ final class AppContainer {
         actionRouter: any AppActionRouting
     ) {
         self.session = session
-        self.theme = theme
+        self.appearancePreference = appearancePreference
         self.navigation = navigation
         self.todayService = todayService
         self.goalsService = goalsService

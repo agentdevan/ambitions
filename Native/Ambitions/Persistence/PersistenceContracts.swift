@@ -19,6 +19,7 @@ struct AppStateSnapshot: Identifiable, Codable, Sendable, Equatable {
     let id: String
     var preferredTab: AppTab
     var userDisplayName: String
+    var appearancePreference: AppAppearancePreference
     var reviewCadenceDays: Int
     var localOnlyModeEnabled: Bool
     var hasCompletedBootstrap: Bool
@@ -33,7 +34,8 @@ struct AppStateSnapshot: Identifiable, Codable, Sendable, Equatable {
     static let `default` = AppStateSnapshot(
         id: "app_state.default",
         preferredTab: .today,
-        userDisplayName: "Devan",
+        userDisplayName: "",
+        appearancePreference: .system,
         reviewCadenceDays: 7,
         localOnlyModeEnabled: true,
         hasCompletedBootstrap: false,
@@ -47,7 +49,11 @@ struct AppStateSnapshot: Identifiable, Codable, Sendable, Equatable {
     )
 
     var preferences: AppPreferences {
-        AppPreferences(preferredTab: preferredTab, userDisplayName: userDisplayName)
+        AppPreferences(
+            preferredTab: preferredTab,
+            userDisplayName: userDisplayName,
+            appearancePreference: appearancePreference
+        )
     }
 }
 

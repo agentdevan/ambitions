@@ -16,9 +16,9 @@ Ambitions is a native iOS SwiftUI application. The old Expo/React Native runtime
 - `Native/Ambitions/Domain`
   Native domain models for launch/session and first-pass dashboard contracts.
 - `Native/Ambitions/Services`
-  Startup and feature service protocols plus current placeholder implementations.
+  Startup and feature service protocols plus repository-backed implementations for Today, Goals, Habits, Insights, and Profile.
 - `Native/Ambitions/Persistence`
-  Native persistence boundary, currently in-memory.
+  SwiftData-backed native persistence for goals, drafts, evidence, feedback, and app preferences.
 - `Native/Ambitions/Features`
   Today, Goals, Habits, Insights, and Profile screens.
 - `Native/Ambitions/UI`
@@ -42,11 +42,13 @@ On a Mac with Xcode and XcodeGen installed:
 2. Open `Ambitions.xcodeproj`.
 3. Build and run the `Ambitions` scheme on an iOS Simulator.
 
+The full reproducible native build, test, and archive flow lives in [docs/native-build-and-release.md](/Users/Devan/Documents/GitHub/ambitions/docs/native-build-and-release.md).
+
 ## iOS native validation
 
 GitHub Actions validates iOS-native integrity on `macos-latest` in [.github/workflows/ios-validate.yml](/Users/Devan/Documents/GitHub/ambitions/.github/workflows/ios-validate.yml).
 
-What the workflow does:
+What the workflow does today:
 
 - Verifies that `project.yml` exists.
 - Installs XcodeGen and runs `xcodegen generate`.
@@ -56,7 +58,9 @@ What the workflow does:
 - Runs `xcodebuild -list` against the generated workspace or project.
 - Runs an unsigned simulator build only when the scheme is discoverable from checked-in files.
 
-For this repo specifically, the validation path is:
+The workflow does not currently perform signed archive or App Store Connect validation because the repo does not carry Apple signing material or upload credentials.
+
+For this repo specifically, the automated validation path is:
 
 1. `xcodegen generate`
 2. Use `project.yml` to discover the generated `Ambitions.xcodeproj` and `Ambitions` scheme
@@ -64,16 +68,17 @@ For this repo specifically, the validation path is:
 4. Run `xcodebuild -list`
 5. Run a simulator build with `CODE_SIGNING_ALLOWED=NO`
 
-Local reproduction on a Mac:
+Local reproduction, including unit tests, UI tests, and archive sanity checks, is documented in [docs/native-build-and-release.md](/Users/Devan/Documents/GitHub/ambitions/docs/native-build-and-release.md).
 
-1. Install Xcode and XcodeGen.
-2. Run `xcodegen generate` from the repo root.
-3. If a `Podfile` is ever introduced, run `pod install` in that directory.
-4. Run `xcodebuild -project Ambitions.xcodeproj -list`
-5. Run `xcodebuild -project Ambitions.xcodeproj -scheme Ambitions -sdk iphonesimulator -destination "generic/platform=iOS Simulator" CODE_SIGNING_ALLOWED=NO build`
+## Runtime behavior
+
+- Appearance defaults to `System` and can be explicitly switched to Light or Dark from Profile.
+- First-run identity is blank and neutral until the user enters personal data; preview/demo fixtures remain clearly non-production.
+- The current shipped surface is local-first and on-device only. Account sync, notifications, and widgets are not part of the live native target.
+- The iOS target now includes a complete native app icon set and `PrivacyInfo.xcprivacy`.
 
 ## Current status
 
-The app now boots through the native SwiftUI entry point and uses native repositories/services for Today, Goals, Habits, Insights, and Profile.
+The app boots through the native SwiftUI entry point, persists state through SwiftData, and ships repository-backed Today, Goals, Habits, Insights, and Profile surfaces.
 
 Remaining legacy TypeScript code is retained only as migration/reference material and should not be treated as runnable product code.

@@ -45,6 +45,25 @@ final class GoalCreationServiceTests: XCTestCase {
         }
     }
 
+    func testCreatedGoalAppearsInGoalsOverviewWithInitialNextStep() async throws {
+        let repositories = try await makeRepositories()
+        let service = RepositoryBackedGoalsService(repositories: repositories)
+
+        _ = try await service.createGoal(
+            CreateGoalRequest(title: "Ship the native create goal flow"),
+            now: fixedNow
+        )
+
+        let overview = try await service.loadOverview()
+        let createdItem = try XCTUnwrap(overview.items.first(where: { $0.title == "Ship the native create goal flow" }))
+
+        XCTAssertEqual(createdItem.renderState, .active)
+        XCTAssertEqual(createdItem.nextStepHint, "Define scope")
+        XCTAssertEqual(createdItem.statusLabel, "In motion")
+        XCTAssertEqual(createdItem.target.goalID?.hasPrefix("goal-"), true)
+        XCTAssertEqual(createdItem.target.draftID?.hasPrefix("draft-"), true)
+    }
+
     func testServiceRejectsEmptyTitle() async throws {
         let repositories = try await makeRepositories()
         let service = RepositoryBackedGoalsService(repositories: repositories)

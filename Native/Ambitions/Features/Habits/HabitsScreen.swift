@@ -29,7 +29,8 @@ struct HabitsScreen: View {
                         title: "Habits are unavailable",
                         message: message,
                         icon: "exclamationmark.triangle",
-                        actionTitle: "Retry"
+                        actionTitle: "Retry",
+                        actionAccessibilityIdentifier: "habits.retry-button"
                     ) {
                         Task { await viewModel.refresh(using: container.habitsService) }
                     }
@@ -81,6 +82,7 @@ struct HabitsScreen: View {
             await viewModel.refresh(using: container.habitsService)
         }
         .navigationTitle("Habits")
+        .accessibilityIdentifier("habits.screen")
         .animation(theme.motion.animation(reduceMotion: reduceMotion, emphasis: true), value: viewModel.stateKey)
         .task {
             await viewModel.load(using: container.habitsService)
@@ -116,12 +118,22 @@ struct HabitsScreen: View {
     }
 }
 
-#Preview("Habits Active") {
+#Preview("Habits Active Light") {
+    NavigationStack {
+        HabitsScreen(viewModel: HabitsViewModel(state: .loaded(PreviewHabitsScenarios.active)))
+    }
+    .appContainer(PreviewAppContainerFactory.preview(habitsDashboard: PreviewHabitsScenarios.active))
+    .ambitionTheme(.light)
+    .preferredColorScheme(.light)
+}
+
+#Preview("Habits Active Dark") {
     NavigationStack {
         HabitsScreen(viewModel: HabitsViewModel(state: .loaded(PreviewHabitsScenarios.active)))
     }
     .appContainer(PreviewAppContainerFactory.preview(habitsDashboard: PreviewHabitsScenarios.active))
     .ambitionTheme(.dark)
+    .preferredColorScheme(.dark)
 }
 
 #Preview("Habits Recovery") {

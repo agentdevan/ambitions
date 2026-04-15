@@ -53,6 +53,7 @@ struct DefaultStartupService: StartupServicing {
             source: source,
             userDisplayName: preferences.userDisplayName,
             initialTab: preferences.preferredTab,
+            appearancePreference: preferences.appearancePreference,
             launchedAt: Date(),
             startupNote: startupNote(for: source)
         )

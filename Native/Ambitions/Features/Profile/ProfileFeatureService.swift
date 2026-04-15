@@ -11,6 +11,7 @@ struct RepositoryBackedProfileService: ProfileServicing {
     func saveProfilePreferences(_ preferences: ProfilePreferencesUpdate) async throws -> ProfileDashboard {
         var state = try await repositories.appState.loadState()
         state.preferredTab = preferences.preferredTab
+        state.appearancePreference = preferences.appearancePreference
         state.reviewCadenceDays = max(1, preferences.reviewCadenceDays)
         state.localOnlyModeEnabled = true
         try await repositories.appState.saveState(state)
@@ -50,16 +51,18 @@ private extension RepositoryBackedProfileService {
             guard let step = HabitGoalSemantics.preferredStep(in: goal) else { return false }
             return HabitGoalSemantics.isHabitLike(goal: goal, step: step)
         }.count
-        let initials = snapshot.appState.userDisplayName
+        let trimmedName = snapshot.appState.userDisplayName.trimmingCharacters(in: .whitespacesAndNewlines)
+        let initials = trimmedName
             .split(separator: " ")
             .prefix(2)
             .map { String($0.prefix(1)).uppercased() }
             .joined()
+        let profileTitle = trimmedName.isEmpty ? "Your profile" : trimmedName
 
         return ProfileDashboard(
-            title: snapshot.appState.userDisplayName,
+            title: profileTitle,
             subtitle: "This build keeps planning data on-device. Account sync, notifications, and widgets are not part of the current shipped feature surface.",
-            initials: initials.isEmpty ? "A" : initials,
+            initials: initials.isEmpty ? "U" : initials,
             badges: [
                 "On-device only",
                 "Native persistence",
@@ -76,6 +79,7 @@ private extension RepositoryBackedProfileService {
             settings: [
                 SettingsItem(id: "profile-storage", title: "Planning storage", subtitle: "Goals, habits, evidence, and feedback all read from the native repository.", icon: "internaldrive", valueLabel: "On-device only"),
                 SettingsItem(id: "profile-tab", title: "Default tab", subtitle: "Used on the next cold launch.", icon: "square.grid.2x2", valueLabel: snapshot.appState.preferredTab.title),
+                SettingsItem(id: "profile-appearance", title: "Appearance", subtitle: "Choose whether Ambitions follows the system or stays explicit.", icon: "circle.lefthalf.filled", valueLabel: snapshot.appState.appearancePreference.title),
                 SettingsItem(id: "profile-review", title: "Review cadence", subtitle: "How often Profile frames a planning reset.", icon: "clock.arrow.circlepath", valueLabel: reviewLabel(days: snapshot.appState.reviewCadenceDays)),
                 SettingsItem(
                     id: "profile-scope",
@@ -90,6 +94,7 @@ private extension RepositoryBackedProfileService {
             settingsFooter: "Everything in this version runs from on-device persistence. There is no connected account or background delivery path to configure yet.",
             preferences: ProfilePreferencesState(
                 preferredTab: snapshot.appState.preferredTab,
+                appearancePreference: snapshot.appState.appearancePreference,
                 reviewCadenceDays: snapshot.appState.reviewCadenceDays,
                 localOnlyModeEnabled: true
             )

@@ -1,5 +1,7 @@
 # Ambitions RC 1.0 Native Finish Pass
 
+Superseded in part by the later production-readiness pass documented in [native-build-and-release.md](/Users/Devan/Documents/GitHub/ambitions/docs/native-build-and-release.md). The app now has a native privacy manifest, a complete app icon set, system-driven appearance by default, and neutral first-run identity defaults.
+
 Date: 2026-04-14
 Scope: native SwiftUI finish pass for motion/polish, accessibility, planner trust, unfinished-flow removal, and RC hardening.
 
@@ -80,12 +82,12 @@ Scope: native SwiftUI finish pass for motion/polish, accessibility, planner trus
 - Verify starter data seeds only once in live mode and does not duplicate.
 - Verify launch, error, and retry states across all main tabs.
 - Validate widget/UI package compile compatibility from `Package.swift`.
-- Validate archive, signing, and export flow in Xcode.
+- Validate archive, signing, and export flow in Xcode using the commands and Organizer steps in `docs/native-build-and-release.md`.
 - Validate App Store submission metadata, privacy strings, and screenshots.
 
 ## Remaining Blockers
 
-- Apple-side compile, archive, signing, and App Store validation are still unverified in this environment.
+- Apple-side compile, archive, signing, and App Store validation were still unverified during this pass; use the documented native build pipeline for current validation steps.
 - Real simulator/device validation for SwiftUI layout, animation, VoiceOver, scene transitions, and lifecycle behavior remains outstanding.
 - Notification, widget, and connected-account systems remain post-1.0 scope and therefore are not RC 1.0 repo blockers.
 
@@ -160,7 +162,7 @@ Scope: native SwiftUI finish pass for motion/polish, accessibility, planner trus
 
 ## Known Limitations Before RC 1.0
 
-- No Apple-toolchain verification was possible in this environment because `swift`, Xcode, simulator, and archive tools are unavailable here.
+- Apple-toolchain verification was not possible during this earlier pass. The current repo-level validation path is documented in `docs/native-build-and-release.md`.
 - Performance validation is code-review-based only; there is no Instruments trace yet.
 - Real-device checks for VoiceOver cadence, haptic feel, and final frame pacing remain open.
 

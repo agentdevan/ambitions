@@ -32,6 +32,7 @@ struct RepositoryBackedAppPreferencesStore: AppPreferencesStore {
         var state = try await appStateRepository.loadState()
         state.preferredTab = preferences.preferredTab
         state.userDisplayName = preferences.userDisplayName
+        state.appearancePreference = preferences.appearancePreference
         try await appStateRepository.saveState(state)
     }
 }

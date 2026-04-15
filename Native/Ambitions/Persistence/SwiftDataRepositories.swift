@@ -393,6 +393,7 @@ private enum RepositoryMapping {
             id: state.id,
             preferredTabRaw: state.preferredTab.rawValue,
             userDisplayName: state.userDisplayName,
+            appearancePreferenceRaw: state.appearancePreference.rawValue,
             hasCompletedBootstrap: state.hasCompletedBootstrap,
             lastBootstrapSourceRaw: state.lastBootstrapSource?.rawValue,
             lastBootstrapAt: state.lastBootstrapAt,
@@ -412,6 +413,7 @@ private enum RepositoryMapping {
             id: record.id,
             preferredTab: AppTab(rawValue: record.preferredTabRaw) ?? .today,
             userDisplayName: record.userDisplayName,
+            appearancePreference: AppAppearancePreference(rawValue: record.appearancePreferenceRaw) ?? .system,
             reviewCadenceDays: 7,
             localOnlyModeEnabled: true,
             hasCompletedBootstrap: record.hasCompletedBootstrap,
@@ -685,6 +687,7 @@ struct SwiftDataAppStateRepository: AppStateRepository {
             if let record = try context.fetch(FetchDescriptor<AppStateRecord>()).first(where: { $0.id == state.id }) {
                 record.preferredTabRaw = state.preferredTab.rawValue
                 record.userDisplayName = state.userDisplayName
+                record.appearancePreferenceRaw = state.appearancePreference.rawValue
                 record.hasCompletedBootstrap = state.hasCompletedBootstrap
                 record.lastBootstrapSourceRaw = state.lastBootstrapSource?.rawValue
                 record.lastBootstrapAt = state.lastBootstrapAt
