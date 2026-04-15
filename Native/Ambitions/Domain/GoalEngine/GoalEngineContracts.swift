@@ -10,7 +10,7 @@ enum GoalTempo: String, Codable, Sendable {
     case untimed = "untimed"
 }
 
-enum GoalMode: String, Codable, Sendable {
+enum GoalMode: String, Codable, Sendable, Hashable {
     case achievement
     case project
     case habit

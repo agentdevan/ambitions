@@ -6,6 +6,8 @@ struct GoalsScreen: View {
     @Environment(\.ambitionTheme) private var theme
     @Environment(\.accessibilityReduceMotion) private var reduceMotion
     @State private var viewModel: GoalsViewModel
+    @State private var isCreateGoalPresented = false
+    @State private var creationMessage: GoalDetailInlineMessage?
 
     init(viewModel: GoalsViewModel = GoalsViewModel()) {
         _viewModel = State(initialValue: viewModel)
@@ -35,6 +37,19 @@ struct GoalsScreen: View {
                     }
                 case let .loaded(overview):
                     GoalsHeroCard(overview: overview)
+
+                    if let creationMessage {
+                        AppCard(state: creationMessage.state) {
+                            VStack(alignment: .leading, spacing: theme.spacing.xs) {
+                                Text(creationMessage.title)
+                                    .font(theme.typography.section)
+                                    .foregroundStyle(theme.colors.textPrimary)
+                                Text(creationMessage.body)
+                                    .font(theme.typography.body)
+                                    .foregroundStyle(theme.colors.textSecondary)
+                            }
+                        }
+                    }
 
                     AppCard {
                         VStack(alignment: .leading, spacing: theme.spacing.md) {
@@ -89,7 +104,32 @@ struct GoalsScreen: View {
             await viewModel.refresh(using: container.goalsService)
         }
         .navigationTitle("Goals")
+        .toolbar {
+            ToolbarItem(placement: .topBarTrailing) {
+                Button {
+                    creationMessage = nil
+                    isCreateGoalPresented = true
+                } label: {
+                    Label("Create Goal", systemImage: "plus")
+                }
+            }
+        }
+        .sheet(isPresented: $isCreateGoalPresented) {
+            NavigationStack {
+                CreateGoalScreen { response in
+                    creationMessage = GoalDetailInlineMessage(
+                        title: "Goal created",
+                        body: "\(response.blueprint.title) is now in the portfolio with its first 3 steps.",
+                        state: .success
+                    )
+                    Task {
+                        await viewModel.refresh(using: container.goalsService)
+                    }
+                }
+            }
+        }
         .animation(theme.motion.animation(reduceMotion: reduceMotion, emphasis: true), value: viewModel.stateKey)
+        .animation(theme.motion.animation(reduceMotion: reduceMotion), value: creationMessage?.title)
         .task {
             await viewModel.load(using: container.goalsService)
         }

@@ -3,15 +3,18 @@ import Foundation
 
 struct RepositoryBackedGoalsService: GoalsServicing {
     let repositories: AppRepositories
+    let planner: DeterministicGoalPlanner
     let adaptationService: GoalEngineAdaptationService
     let orchestrator: GoalEngineOrchestrator
 
     init(
         repositories: AppRepositories,
+        planner: DeterministicGoalPlanner = DeterministicGoalPlanner(),
         adaptationService: GoalEngineAdaptationService = GoalEngineAdaptationService(),
         orchestrator: GoalEngineOrchestrator = GoalEngineOrchestrator()
     ) {
         self.repositories = repositories
+        self.planner = planner
         self.adaptationService = adaptationService
         self.orchestrator = orchestrator
     }
@@ -24,6 +27,63 @@ struct RepositoryBackedGoalsService: GoalsServicing {
     func loadDetail(target: GoalRouteTarget) async throws -> GoalDetailPresentation {
         let snapshot = try await loadSnapshot()
         return try await makeDetail(target: target, snapshot: snapshot)
+    }
+
+    func createGoal(_ request: CreateGoalRequest, now: Date) async throws -> CreateGoalResponse {
+        let trimmedTitle = request.title.trimmingCharacters(in: .whitespacesAndNewlines)
+        guard trimmedTitle.isEmpty == false else {
+            throw GoalsFeatureError.invalidTitle
+        }
+
+        let createdAt = Self.iso.string(from: now)
+        let goalID = "goal-\(UUID().uuidString.lowercased())"
+        let draftID = "draft-\(UUID().uuidString.lowercased())"
+        let planSeed = planner.plan(for: trimmedTitle, preferredMode: request.mode)
+        let draft = planSeed.blueprint.makeDraft()
+        let plan = makeInitialPlan(goalID: goalID, seed: planSeed, generatedAt: createdAt)
+        let goal = Goal(
+            schemaVersion: goalEngineSchemaVersion,
+            id: goalID,
+            revision: 1,
+            createdAt: createdAt,
+            updatedAt: createdAt,
+            state: .active,
+            title: draft.title,
+            summary: draft.summary,
+            mode: draft.mode,
+            relationshipKind: draft.relationshipKind,
+            actor: draft.actor,
+            parentGoalID: draft.parentGoalID,
+            childGoalIDs: [],
+            supportGoalIDs: [],
+            tags: draft.tags,
+            timing: draft.timing,
+            planningStrategy: draft.planningStrategy,
+            progressStrategy: draft.progressStrategy,
+            plan: plan
+        )
+        let storedDraft = PersistedGoalDraft(
+            id: draftID,
+            createdAt: createdAt,
+            updatedAt: createdAt,
+            draft: draft,
+            classification: nil,
+            clarification: nil,
+            stagedPlan: plan,
+            assumptions: [],
+            blockers: [],
+            metadata: nil,
+            plannedGoalID: goalID,
+            latestResultKind: .planned
+        )
+
+        try await repositories.goals.saveGoals([goal])
+        try await repositories.drafts.saveDrafts([storedDraft])
+
+        return CreateGoalResponse(
+            target: GoalRouteTarget(goalID: goalID, draftID: draftID),
+            blueprint: planSeed.blueprint
+        )
     }
 
     func performAction(_ request: GoalDetailActionRequest, now: Date) async throws -> GoalDetailActionResponse {
@@ -114,6 +174,15 @@ struct StubGoalsService: GoalsServicing {
         throw GoalsFeatureError.notFound
     }
 
+    func createGoal(_ request: CreateGoalRequest, now: Date) async throws -> CreateGoalResponse {
+        _ = now
+        let seed = DeterministicGoalPlanner().plan(for: request.title, preferredMode: request.mode)
+        return CreateGoalResponse(
+            target: GoalRouteTarget(goalID: "preview-goal", draftID: "preview-draft"),
+            blueprint: seed.blueprint
+        )
+    }
+
     func performAction(_ request: GoalDetailActionRequest, now: Date) async throws -> GoalDetailActionResponse {
         let title: String
         let body: String
@@ -154,6 +223,7 @@ private enum GoalsFeatureError: LocalizedError {
     case notFound
     case missingStep
     case notActionable
+    case invalidTitle
 
     var errorDescription: String? {
         switch self {
@@ -163,6 +233,8 @@ private enum GoalsFeatureError: LocalizedError {
             return "This goal does not currently expose an actionable step."
         case .notActionable:
             return "That action is not available for the current goal state."
+        case .invalidTitle:
+            return "A goal title is required before a native plan can be created."
         }
     }
 }
@@ -205,6 +277,72 @@ private extension RepositoryBackedGoalsService {
             }
             return goal?.actor.ownership != .self || draft?.draft.actor.ownership != .self
         }
+    }
+
+    func makeInitialPlan(goalID: String, seed: DeterministicGoalPlanSeed, generatedAt: String) -> GoalPlan {
+        let planID = "plan-\(goalID)"
+        let sectionID = "section-\(goalID)-active"
+        let steps = seed.steps.enumerated().map { index, template in
+            template.makeStep(
+                sectionID: sectionID,
+                owner: seed.blueprint.actor,
+                dependencyStepIDs: index == 0 ? [] : [goalScopedStepID(goalID: goalID, templateID: seed.steps[index - 1].id)]
+            )
+        }.enumerated().map { index, step in
+            Step(
+                id: goalScopedStepID(goalID: goalID, templateID: seed.steps[index].id),
+                sectionID: step.sectionID,
+                title: step.title,
+                summary: step.summary,
+                type: step.type,
+                state: step.state,
+                owner: step.owner,
+                timing: step.timing,
+                dependencyStepIDs: step.dependencyStepIDs,
+                isOptional: step.isOptional,
+                isRepeatable: step.isRepeatable,
+                evidenceRequired: step.evidenceRequired,
+                successSignals: step.successSignals,
+                actionability: step.actionability
+            )
+        }
+
+        let section = PlanSection(
+            id: sectionID,
+            goalID: goalID,
+            title: "Initial micro-plan",
+            summary: "Deterministic local first-pass planning.",
+            kind: .activeSteps,
+            orderIndex: 0,
+            steps: steps
+        )
+        let provisional = GoalPlan(
+            id: planID,
+            goalID: goalID,
+            version: goalEnginePlanVersion,
+            generatedAt: generatedAt,
+            summary: "Three conservative first steps generated locally.",
+            strategy: seed.blueprint.makeDraft().planningStrategy,
+            sections: [section],
+            assumptions: [],
+            lint: PlanLintResult(goalID: goalID, planVersion: goalEnginePlanVersion, isValid: true, issueCount: 0, issues: [])
+        )
+
+        return GoalPlan(
+            id: provisional.id,
+            goalID: provisional.goalID,
+            version: provisional.version,
+            generatedAt: provisional.generatedAt,
+            summary: provisional.summary,
+            strategy: provisional.strategy,
+            sections: provisional.sections,
+            assumptions: provisional.assumptions,
+            lint: GoalContractValidator.lint(plan: provisional)
+        )
+    }
+
+    func goalScopedStepID(goalID: String, templateID: String) -> String {
+        "\(goalID)-\(templateID)"
     }
 
     func loadSnapshot() async throws -> Snapshot {

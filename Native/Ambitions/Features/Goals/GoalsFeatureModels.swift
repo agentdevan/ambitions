@@ -111,6 +111,21 @@ struct GoalsOverview: Sendable {
     let emptyMessage: String
 }
 
+struct CreateGoalRequest: Sendable {
+    let title: String
+    let mode: GoalMode?
+
+    init(title: String, mode: GoalMode? = nil) {
+        self.title = title
+        self.mode = mode
+    }
+}
+
+struct CreateGoalResponse: Sendable {
+    let target: GoalRouteTarget
+    let blueprint: GoalBlueprint
+}
+
 struct GoalDetailActionState: Identifiable, Sendable {
     let kind: GoalDetailActionKind
     let title: String
