@@ -2,15 +2,16 @@ import XCTest
 @testable import Ambitions
 
 final class ProfileFeatureServiceTests: XCTestCase {
-    func testDashboardCopyStatesConnectedFeaturesAreUnavailable() async throws {
+    func testDashboardCopyStatesDeviceFeaturesAreLocalAndSyncIsUnavailable() async throws {
         let repositories = try await makeRepositories()
         let service = RepositoryBackedProfileService(repositories: repositories)
 
         let dashboard = try await service.loadProfileDashboard()
 
         XCTAssertTrue(dashboard.subtitle.contains("on-device"))
-        XCTAssertTrue(dashboard.settings.contains(where: { $0.id == "profile-scope" && $0.valueLabel == "Not included" }))
-        XCTAssertTrue(dashboard.settingsFooter.contains("There is no connected account"))
+        XCTAssertTrue(dashboard.subtitle.contains("Account sync is not implemented"))
+        XCTAssertTrue(dashboard.settings.contains(where: { $0.id == "profile-scope" && $0.valueLabel == "Local device features" }))
+        XCTAssertTrue(dashboard.settingsFooter.contains("there is no account sync configuration"))
         XCTAssertFalse(dashboard.badges.contains("Connected later"))
     }
 

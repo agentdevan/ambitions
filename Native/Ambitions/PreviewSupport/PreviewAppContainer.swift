@@ -25,6 +25,7 @@ enum PreviewAppContainerFactory {
             appearancePreference: fixtures.preferences.appearancePreference,
             navigation: navigation,
             todayService: StubTodayService(experience: todayExperience),
+            captureService: StubCaptureService(captures: fixtures.captures),
             goalsService: StubGoalsService(),
             habitsService: StubHabitsService(dashboard: habitsDashboard),
             insightsService: StubInsightsService(fixtures: fixtures),

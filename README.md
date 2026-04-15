@@ -1,13 +1,12 @@
 # Ambitions Native iOS App
 
-Ambitions is a native iOS SwiftUI application. The old Expo/React Native runtime has been removed from the repo root.
+Ambitions is a native iOS SwiftUI application.
 
 ## Source of truth
 
 - `Native/Ambitions/` is the UI source of truth for the shipping app.
 - `Sources/` contains the `AmbitionsDesignSystem` Swift package used by the native app.
 - `AppUI/Sources/` contains the `AmbitionsWidgetUI` Swift package used by the native app.
-- `src/` contains legacy TypeScript reference material for migration/spec work only. It is not a shipping runtime.
 
 ## Native structure
 
@@ -20,17 +19,16 @@ Ambitions is a native iOS SwiftUI application. The old Expo/React Native runtime
 - `Native/Ambitions/Persistence`
   SwiftData-backed native persistence for goals, drafts, evidence, feedback, and app preferences.
 - `Native/Ambitions/Features`
-  Today, Goals, Habits, Insights, and Profile screens.
+  Today, Captures, Goals, Habits, Insights, and Profile screens.
 - `Native/Ambitions/UI`
   Shared shell UI like the launch gate and background canvas.
 - `Native/Ambitions/PreviewSupport`
   Preview-safe bootstrap and fixture data.
 
-## Legacy boundary
+## Repo boundaries
 
 - Do not add new production UI work outside `Native/Ambitions/`, `Sources/`, or `AppUI/Sources/`.
-- Do not reintroduce Expo or React Native boot/runtime files at the repo root.
-- If behavior from the old client is still useful, treat the TypeScript implementation as specification/reference input for the native rewrite.
+- Do not reintroduce Expo, React Native, or TypeScript runtime files.
 
 ## Running the native app
 
@@ -42,15 +40,15 @@ On a Mac with Xcode 16+ and XcodeGen installed:
 2. Open `Ambitions.xcodeproj`.
 3. Build and run the `Ambitions` scheme on an iOS Simulator.
 
-The full reproducible native generation, build, test, UI test, and archive flow lives in [docs/native-build-and-release.md](/Users/Devan/Documents/GitHub/ambitions/docs/native-build-and-release.md).
+The full reproducible native generation, build, test, UI test, and archive flow lives in [docs/native-build-and-release.md](docs/native-build-and-release.md).
 
 ## Docs status
 
-Use [docs/README.md](/Users/Devan/Documents/GitHub/ambitions/docs/README.md) as the index for current native docs versus historical backend or pre-native planning material.
+Use [docs/README.md](docs/README.md) as the index for current native docs and retained reference material.
 
 ## iOS native validation
 
-GitHub Actions validates iOS-native integrity on `macos-15` in [.github/workflows/ios-validate.yml](/Users/Devan/Documents/GitHub/ambitions/.github/workflows/ios-validate.yml).
+GitHub Actions validates iOS-native integrity on `macos-15` in [.github/workflows/ios-validate.yml](.github/workflows/ios-validate.yml).
 
 What the workflow verifies now:
 
@@ -72,17 +70,17 @@ What the workflow does not verify:
 
 The UI test job is honest but scoped: it validates the current preview-bootstrapped UI flow, not a signed production install path.
 
-Local reproduction, including exact build, unit test, UI test, and archive commands, is documented in [docs/native-build-and-release.md](/Users/Devan/Documents/GitHub/ambitions/docs/native-build-and-release.md).
+Local reproduction, including exact build, unit test, UI test, and archive commands, is documented in [docs/native-build-and-release.md](docs/native-build-and-release.md).
 
 ## Runtime behavior
 
 - Appearance defaults to `System` and can be explicitly switched to Light or Dark from Profile.
 - First-run identity is blank and neutral until the user enters personal data; preview/demo fixtures remain clearly non-production.
-- The current shipped surface is local-first and on-device only. Account sync, notifications, and widgets are not part of the live native target.
+- The current shipped surface is local-first and on-device first.
+- Notifications, widgets, Live Activities, and calendar/reminder integrations are available as native device features.
+- Account sync is not implemented.
 - The iOS target now includes a complete native app icon set and `PrivacyInfo.xcprivacy`.
 
 ## Current status
 
-The app boots through the native SwiftUI entry point, persists state through SwiftData, and ships repository-backed Today, Goals, Habits, Insights, and Profile surfaces.
-
-Remaining legacy TypeScript code is retained only as migration/reference material and should not be treated as runnable product code.
+The app boots through the native SwiftUI entry point, persists state through SwiftData, and ships repository-backed Today, Captures, Goals, Habits, Insights, and Profile surfaces in a Swift-only repo.

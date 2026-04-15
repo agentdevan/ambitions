@@ -9,6 +9,7 @@ final class AppContainer {
     var appearancePreference: AppAppearancePreference
     let navigation: AppNavigationModel
     let todayService: any TodayServicing
+    let captureService: any CaptureServicing
     let goalsService: any GoalsServicing
     let habitsService: any HabitsServicing
     let insightsService: any InsightsServicing
@@ -23,6 +24,7 @@ final class AppContainer {
         appearancePreference: AppAppearancePreference,
         navigation: AppNavigationModel,
         todayService: any TodayServicing,
+        captureService: any CaptureServicing,
         goalsService: any GoalsServicing,
         habitsService: any HabitsServicing,
         insightsService: any InsightsServicing,
@@ -36,6 +38,7 @@ final class AppContainer {
         self.appearancePreference = appearancePreference
         self.navigation = navigation
         self.todayService = todayService
+        self.captureService = captureService
         self.goalsService = goalsService
         self.habitsService = habitsService
         self.insightsService = insightsService

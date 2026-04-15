@@ -72,13 +72,13 @@ final class ExternalRoutingTests: XCTestCase {
     }
 
     @MainActor
-    func testRouterDispatchesCapturesInboxToDeterministicFallbackTab() {
+    func testRouterDispatchesCapturesInboxToCapturesTab() {
         let navigation = AppNavigationModel(selectedTab: .insights)
         let router = DefaultAppExternalRouter(navigation: navigation)
 
         router.dispatch(.openCapturesInbox, source: .widgetAction)
 
-        XCTAssertEqual(navigation.selectedTab, .today)
+        XCTAssertEqual(navigation.selectedTab, .captures)
         XCTAssertEqual(navigation.lastExternalRoute, .openCapturesInbox)
         XCTAssertEqual(navigation.lastExternalRouteSource, .widgetAction)
     }

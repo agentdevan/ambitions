@@ -149,8 +149,7 @@ final class DefaultAppExternalRouter: AppExternalRouting {
         case let .openGoalDetail(goalID):
             navigation.openGoalDetail(goalID: goalID)
         case .openCapturesInbox:
-            // Keep deterministic fallback until captures has its own surface.
-            navigation.selectedTab = .today
+            navigation.selectedTab = .captures
         case .genericExternalEntry:
             navigation.selectedTab = .today
         }

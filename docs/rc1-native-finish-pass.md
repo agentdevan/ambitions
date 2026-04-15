@@ -1,6 +1,6 @@
 # Ambitions RC 1.0 Native Finish Pass
 
-Superseded in part by the later production-readiness pass documented in [native-build-and-release.md](/Users/Devan/Documents/GitHub/ambitions/docs/native-build-and-release.md). The app now has a native privacy manifest, a complete app icon set, system-driven appearance by default, and neutral first-run identity defaults.
+Superseded in part by the later production-readiness pass documented in [native-build-and-release.md](native-build-and-release.md). The app now has a native privacy manifest, a complete app icon set, system-driven appearance by default, and neutral first-run identity defaults.
 
 Date: 2026-04-14
 Scope: native SwiftUI finish pass for motion/polish, accessibility, planner trust, unfinished-flow removal, and RC hardening.

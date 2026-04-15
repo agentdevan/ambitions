@@ -45,7 +45,6 @@ private extension RepositoryBackedProfileService {
     }
 
     func makeDashboard(snapshot: Snapshot) -> ProfileDashboard {
-        let connectedFeaturesAvailable = false
         let activeGoals = snapshot.goals.filter { $0.state == .active }.count
         let liveHabits = snapshot.goals.filter { goal in
             guard let step = HabitGoalSemantics.preferredStep(in: goal) else { return false }
@@ -61,7 +60,7 @@ private extension RepositoryBackedProfileService {
 
         return ProfileDashboard(
             title: profileTitle,
-            subtitle: "This build keeps planning data on-device. Account sync, notifications, and widgets are not part of the current shipped feature surface.",
+            subtitle: "This build keeps planning data on-device first. Notifications, widgets, Live Activities, and calendar/reminder integrations are available as local device features, while account sync is not implemented.",
             initials: initials.isEmpty ? "U" : initials,
             badges: [
                 "On-device only",
@@ -84,14 +83,12 @@ private extension RepositoryBackedProfileService {
                 SettingsItem(
                     id: "profile-scope",
                     title: "Connected features",
-                    subtitle: connectedFeaturesAvailable
-                        ? "This build can connect account-backed features."
-                        : "Account sync, notifications, and widgets are not available in this build.",
+                    subtitle: "Notifications, widgets, Live Activities, and calendar/reminder hooks are available on device. Account sync is not part of this build yet.",
                     icon: "person.badge.key",
-                    valueLabel: connectedFeaturesAvailable ? "Available" : "Not included"
+                    valueLabel: "Local device features"
                 )
             ],
-            settingsFooter: "Everything in this version runs from on-device persistence. There is no connected account or background delivery path to configure yet.",
+            settingsFooter: "Everything in this version runs from on-device-first persistence. Device integrations stay local, and there is no account sync configuration to manage yet.",
             preferences: ProfilePreferencesState(
                 preferredTab: snapshot.appState.preferredTab,
                 appearancePreference: snapshot.appState.appearancePreference,

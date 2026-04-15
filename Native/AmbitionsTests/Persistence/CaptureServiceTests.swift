@@ -60,6 +60,27 @@ final class CaptureServiceTests: XCTestCase {
             XCTAssertEqual((error as? CaptureServiceError)?.errorDescription, "Capture text cannot be empty.")
         }
     }
+
+    func testCreateCaptureSupportsAllStableCaptureSourceTypes() async throws {
+        let repository = PreviewCaptureRepository()
+        let service = DefaultCaptureService(repository: repository, idProvider: { "capture-stable" })
+        let now = Date(timeIntervalSince1970: 1_712_692_800)
+        let sources: [CaptureSourceType] = [.todayQuickCapture, .shareExtensionText, .shareExtensionURL, .appIntent]
+
+        for source in sources {
+            let created = try await service.createCapture(
+                CreateCaptureRequest(rawText: "Source \(source.rawValue)", sourceType: source),
+                now: now
+            )
+            XCTAssertEqual(created.sourceType, source)
+        }
+
+        let storedSources = try await service.listCaptures()
+            .compactMap(\.sourceType)
+            .map(\.rawValue)
+            .sorted()
+        XCTAssertEqual(storedSources, sources.map(\.rawValue).sorted())
+    }
 }
 
 private extension CaptureServiceTests {

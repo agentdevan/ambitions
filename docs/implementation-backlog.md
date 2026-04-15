@@ -4,10 +4,11 @@ This backlog translates the current roadmap into implementation work that matche
 
 ## Current repo truth
 
-- The shipping product is the native SwiftUI app, not the legacy `src/` runtime.
-- The live native target is explicitly local-first and on-device only.
-- The app currently ships repository-backed Today, Goals, Habits, Insights, and Profile surfaces backed by SwiftData repositories for goals, drafts, plans, steps, evidence, feedback, and app state.
-- The current app does not ship account sync, notifications, widgets, Live Activities, calendar/reminders integration, App Intents, or extensions.
+- The shipping product is the native SwiftUI app.
+- The live native target is local-first and on-device first.
+- The app currently ships repository-backed Today, Captures, Goals, Habits, Insights, and Profile surfaces backed by SwiftData repositories for goals, drafts, plans, steps, evidence, feedback, captures, and app state.
+- Notifications, widgets, Live Activities, and calendar/reminders integrations are available as native device features.
+- Account sync, auth, and backend-driven account deletion are not current shipping features.
 
 ## Roadmap mismatches against the current codebase
 
@@ -141,7 +142,7 @@ Deliverables:
 
 - Keep native-only source-of-truth rules explicit.
 - Add `docs/README.md` with live vs historical doc status.
-- Mark `docs/auth-qa-flow.md`, `docs/phase14.2-live-auth-sync.md`, and `docs/phase28-account-deletion.md` as historical unless a native sync track is approved.
+- Remove backend-flow docs from the active native doc set unless a native sync track is approved.
 
 ### 1. Capture domain foundation
 

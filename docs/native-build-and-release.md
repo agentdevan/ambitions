@@ -136,7 +136,7 @@ GitHub Actions does not perform these signed validation or distribution steps.
 
 ## GitHub Actions CI Coverage
 
-The native CI workflow lives in [.github/workflows/ios-validate.yml](/Users/Devan/Documents/GitHub/ambitions/.github/workflows/ios-validate.yml) and runs on `macos-15`.
+The native CI workflow lives in [.github/workflows/ios-validate.yml](../.github/workflows/ios-validate.yml) and runs on `macos-15`.
 
 ### Build, Unit Tests, Archive job
 

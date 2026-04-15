@@ -14,6 +14,7 @@ struct AmbitionsRootView: View {
     var body: some View {
         TabView(selection: $navigation.selectedTab) {
             tabNavigation(tab: .today) { TodayScreen() }
+            tabNavigation(tab: .captures) { CapturesScreen() }
             goalsNavigation()
             tabNavigation(tab: .habits) { HabitsScreen() }
             tabNavigation(tab: .insights) { InsightsScreen() }

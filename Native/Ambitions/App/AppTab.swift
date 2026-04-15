@@ -2,6 +2,7 @@ import Foundation
 
 enum AppTab: String, CaseIterable, Hashable, Identifiable, Codable {
     case today
+    case captures
     case goals
     case habits
     case insights
@@ -12,6 +13,7 @@ enum AppTab: String, CaseIterable, Hashable, Identifiable, Codable {
     var title: String {
         switch self {
         case .today: "Today"
+        case .captures: "Captures"
         case .goals: "Goals"
         case .habits: "Habits"
         case .insights: "Insights"
@@ -22,6 +24,7 @@ enum AppTab: String, CaseIterable, Hashable, Identifiable, Codable {
     var systemImage: String {
         switch self {
         case .today: "sun.max"
+        case .captures: "tray.full"
         case .goals: "target"
         case .habits: "repeat"
         case .insights: "chart.line.uptrend.xyaxis"

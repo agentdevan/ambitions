@@ -113,6 +113,36 @@ struct StubProfileService: ProfileServicing {
     }
 }
 
+struct StubCaptureService: CaptureServicing {
+    let captures: [Capture]
+
+    func createCapture(_ request: CreateCaptureRequest, now: Date) async throws -> Capture {
+        Capture(
+            id: "preview-capture-created",
+            createdAt: ISO8601DateFormatter().string(from: now),
+            updatedAt: ISO8601DateFormatter().string(from: now),
+            rawText: request.rawText,
+            sourceType: request.sourceType,
+            status: .pending,
+            linkedGoalID: request.linkedGoalID
+        )
+    }
+
+    func listCaptures() async throws -> [Capture] {
+        captures
+    }
+
+    func markCaptureProcessed(id: String, now: Date) async throws -> Capture? {
+        _ = now
+        return captures.first(where: { $0.id == id })
+    }
+
+    func markCaptureArchived(id: String, now: Date) async throws -> Capture? {
+        _ = now
+        return captures.first(where: { $0.id == id })
+    }
+}
+
 @MainActor
 struct DefaultAppActionRouter: AppActionRouting {
     let navigation: AppNavigationModel

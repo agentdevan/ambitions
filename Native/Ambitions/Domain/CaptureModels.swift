@@ -2,6 +2,9 @@ import Foundation
 
 enum CaptureSourceType: String, Codable, Sendable, Equatable {
     case todayQuickCapture = "today_quick_capture"
+    case shareExtensionText = "share_extension_text"
+    case shareExtensionURL = "share_extension_url"
+    case appIntent = "app_intent"
 }
 
 enum CaptureStatus: String, Codable, Sendable, Equatable {
