@@ -1,6 +1,8 @@
 # Phase 14.2 Live Auth + Sync Activation
 
-## Status
+Status: Historical reference only. This document captures an earlier live Supabase auth/sync path and is not active in the current native shipping codebase. The current shipped native app is local-first and on-device only.
+
+## Historical snapshot
 
 As of April 12, 2026, this workspace now has live Supabase runtime config locally via an ignored `.env` file.
 
@@ -55,7 +57,7 @@ If sync still returns `Could not find the table 'public.sync_records' in the sch
 4. If the table exists in the dashboard but the API still returns the same schema-cache error, refresh PostgREST/schema cache from Supabase or re-run the migration in the same project.
 5. Re-test from the anon client after the refresh; Phase 14.2 sync cannot be considered live until a real read or upsert succeeds.
 
-## What Was Implemented In Code
+## What this earlier phase documented in code
 
 - Missing or placeholder Supabase env now keeps the app in truthful local-only mode.
 - Auth unavailable copy now explains the exact required env variables.
@@ -65,7 +67,7 @@ If sync still returns `Could not find the table 'public.sync_records' in the sch
 - Backend-unavailable initialization now clears stale connected account/sync state consistently.
 - Network reconnection now triggers a silent sync retry when the user is signed in, attached, and previously offline/pending/failed.
 
-## Live Verification Checklist
+## Historical verification checklist
 
 After env and SQL are in place, verify in this order:
 
@@ -80,7 +82,7 @@ After env and SQL are in place, verify in this order:
 9. Confirm local records are preserved and uploaded, not silently replaced.
 10. Go offline, make changes, relaunch, then reconnect and confirm retry completes.
 
-## Verified In This Workspace
+## What this workspace verified at the time
 
 Fully verified live:
 

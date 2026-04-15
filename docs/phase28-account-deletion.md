@@ -1,6 +1,8 @@
 # Phase 28.1 data-rights status
 
-## Implemented now
+Status: Historical reference only. This document describes an earlier backend-connected account-deletion path and does not reflect a currently shipped native feature.
+
+## Earlier backend-connected status
 
 - In-app account deletion is implemented from Profile settings.
 - The mobile client reauthenticates with the user's password before deletion.

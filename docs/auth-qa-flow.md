@@ -1,5 +1,7 @@
 # Auth QA Flow
 
+Status: Historical reference only. This document describes an earlier Supabase-auth testing workflow and does not describe the currently shipped native app, which is local-first and on-device only.
+
 Use this flow when testing Ambitions auth against the live Supabase project.
 
 ## Why this exists

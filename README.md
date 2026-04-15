@@ -44,6 +44,10 @@ On a Mac with Xcode 16+ and XcodeGen installed:
 
 The full reproducible native generation, build, test, UI test, and archive flow lives in [docs/native-build-and-release.md](/Users/Devan/Documents/GitHub/ambitions/docs/native-build-and-release.md).
 
+## Docs status
+
+Use [docs/README.md](/Users/Devan/Documents/GitHub/ambitions/docs/README.md) as the index for current native docs versus historical backend or pre-native planning material.
+
 ## iOS native validation
 
 GitHub Actions validates iOS-native integrity on `macos-15` in [.github/workflows/ios-validate.yml](/Users/Devan/Documents/GitHub/ambitions/.github/workflows/ios-validate.yml).

@@ -1,5 +1,7 @@
 # Premium Modular Goal Engine Audit Plan
 
+Status: Historical reference only. This audit was written against older Expo/React Native assumptions and should not be treated as the source of truth for the current native SwiftUI app.
+
 Date: April 14, 2026
 Repo: `C:\Users\Devan\Documents\GitHub\ambitions`
 Status: Audit only. No implementation changes included.

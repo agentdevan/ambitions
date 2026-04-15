@@ -1,3 +1,6 @@
+-- Historical reference only.
+-- This SQL file belongs to an earlier Supabase sync path and is not part of the currently shipped native local-only app.
+
 create table if not exists public.sync_records (
   account_id text not null,
   entity_kind text not null,
