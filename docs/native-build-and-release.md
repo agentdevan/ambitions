@@ -8,6 +8,14 @@ This repo does not check in an `.xcodeproj`. Native contributors generate the pr
 - Xcode command-line tools selected via `xcode-select`
 - Homebrew-installed XcodeGen: `brew install xcodegen`
 
+If you want the repo to bootstrap the common local CLI tooling for you, run:
+
+```bash
+./scripts/setup_macos_ios_dev.sh
+```
+
+That script installs the repo-required `xcodegen`, plus `xcbeautify`, `swiftformat`, and `swiftlint`, then regenerates `Ambitions.xcodeproj` and verifies the project is discoverable through `xcodebuild`.
+
 ## Generate The Project
 
 From the repo root:
