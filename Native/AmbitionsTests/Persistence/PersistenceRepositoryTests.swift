@@ -74,6 +74,35 @@ final class PersistenceRepositoryTests: XCTestCase {
         XCTAssertEqual(loaded.appearancePreference, .dark)
         XCTAssertEqual(loaded.lastBootstrapSource, .live)
     }
+
+    func testCaptureRepositoryPersistsAndSortsByUpdatedAt() async throws {
+        let repositories = try await makeRepositories()
+        let first = Capture(
+            id: "capture-first",
+            createdAt: "2026-04-15T10:00:00Z",
+            updatedAt: "2026-04-15T10:00:00Z",
+            rawText: "First capture",
+            sourceType: .todayQuickCapture,
+            status: .pending,
+            linkedGoalID: "goal-1"
+        )
+        let second = Capture(
+            id: "capture-second",
+            createdAt: "2026-04-15T11:00:00Z",
+            updatedAt: "2026-04-15T11:00:00Z",
+            rawText: "Second capture",
+            sourceType: nil,
+            status: .processed,
+            linkedGoalID: nil
+        )
+
+        try await repositories.captures.saveCaptures([first, second])
+        let loaded = try await repositories.captures.listCaptures()
+
+        XCTAssertEqual(loaded.map(\.id), ["capture-second", "capture-first"])
+        XCTAssertEqual(loaded.first?.status, .processed)
+        XCTAssertEqual(loaded.last?.sourceType, .todayQuickCapture)
+    }
 }
 
 private extension PersistenceRepositoryTests {
@@ -84,6 +113,7 @@ private extension PersistenceRepositoryTests {
             drafts: SwiftDataGoalDraftRepository(store: store),
             evidence: SwiftDataProgressEvidenceRepository(store: store),
             feedback: SwiftDataFeedbackEventRepository(store: store),
+            captures: SwiftDataCaptureRepository(store: store),
             appState: SwiftDataAppStateRepository(store: store)
         )
     }

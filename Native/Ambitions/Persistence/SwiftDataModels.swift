@@ -358,6 +358,38 @@ final class FeedbackEventRecord {
 }
 
 @Model
+final class CaptureRecord {
+    @Attribute(.unique) var id: String
+    var createdAt: String
+    var updatedAt: String
+    var rawText: String
+    var sourceTypeRaw: String?
+    var statusRaw: String
+    var linkedGoalID: String?
+    var snapshotData: Data
+
+    init(
+        id: String,
+        createdAt: String,
+        updatedAt: String,
+        rawText: String,
+        sourceTypeRaw: String?,
+        statusRaw: String,
+        linkedGoalID: String?,
+        snapshotData: Data
+    ) {
+        self.id = id
+        self.createdAt = createdAt
+        self.updatedAt = updatedAt
+        self.rawText = rawText
+        self.sourceTypeRaw = sourceTypeRaw
+        self.statusRaw = statusRaw
+        self.linkedGoalID = linkedGoalID
+        self.snapshotData = snapshotData
+    }
+}
+
+@Model
 final class AppStateRecord {
     @Attribute(.unique) var id: String
     var preferredTabRaw: String

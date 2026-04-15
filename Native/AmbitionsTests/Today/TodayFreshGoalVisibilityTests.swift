@@ -36,6 +36,37 @@ final class TodayFreshGoalVisibilityTests: XCTestCase {
         }))
     }
 
+    func testQuickLogActionCreatesPersistedCapture() async throws {
+        let repositories = try await makeRepositories()
+        let goalsService = RepositoryBackedGoalsService(repositories: repositories)
+        let todayService = RepositoryBackedTodayService(repositories: repositories)
+
+        let created = try await goalsService.createGoal(
+            CreateGoalRequest(title: "Ship capture persistence"),
+            now: fixedNow
+        )
+        let goalID = try XCTUnwrap(created.target.goalID)
+        let goal = try await XCTUnwrap(repositories.goals.goal(id: goalID))
+        let step = try await XCTUnwrap(goal.plan?.sections.first?.steps.first)
+
+        _ = try await todayService.performAction(
+            TodayInlineAction(
+                kind: .quickLog,
+                title: "Quick log",
+                systemImage: "plus.bubble",
+                state: .success,
+                target: TodayActionTarget(goalID: goalID, stepID: step.id)
+            ),
+            now: fixedNow
+        )
+        let captures = try await repositories.captures.listCaptures()
+
+        XCTAssertEqual(captures.count, 1)
+        XCTAssertEqual(captures.first?.status, .pending)
+        XCTAssertEqual(captures.first?.sourceType, .todayQuickCapture)
+        XCTAssertEqual(captures.first?.linkedGoalID, goalID)
+    }
+
     @MainActor
     func testTodayViewModelActivateRefreshesOnReturnToTodayTab() async {
         let first = PreviewTodayScenarios.empty
@@ -80,6 +111,7 @@ private extension TodayFreshGoalVisibilityTests {
             drafts: SwiftDataGoalDraftRepository(store: store),
             evidence: SwiftDataProgressEvidenceRepository(store: store),
             feedback: SwiftDataFeedbackEventRepository(store: store),
+            captures: SwiftDataCaptureRepository(store: store),
             appState: SwiftDataAppStateRepository(store: store)
         )
     }

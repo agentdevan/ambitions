@@ -32,6 +32,13 @@ protocol ProfileServicing: Sendable {
     func saveProfilePreferences(_ preferences: ProfilePreferencesUpdate) async throws -> ProfileDashboard
 }
 
+protocol CaptureServicing: Sendable {
+    func createCapture(_ request: CreateCaptureRequest, now: Date) async throws -> Capture
+    func listCaptures() async throws -> [Capture]
+    func markCaptureProcessed(id: String, now: Date) async throws -> Capture?
+    func markCaptureArchived(id: String, now: Date) async throws -> Capture?
+}
+
 protocol AppActionRouting {
     func handle(_ action: WidgetAction) async
 }

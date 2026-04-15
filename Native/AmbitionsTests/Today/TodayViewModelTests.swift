@@ -63,6 +63,7 @@ private extension TodayViewModelTests {
             drafts: SwiftDataGoalDraftRepository(store: store),
             evidence: SwiftDataProgressEvidenceRepository(store: store),
             feedback: SwiftDataFeedbackEventRepository(store: store),
+            captures: SwiftDataCaptureRepository(store: store),
             appState: SwiftDataAppStateRepository(store: store)
         )
     }

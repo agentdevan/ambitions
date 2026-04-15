@@ -4,13 +4,16 @@ import Foundation
 struct RepositoryBackedTodayService: TodayServicing {
     let repositories: AppRepositories
     let adaptationService: GoalEngineAdaptationService
+    let captureService: any CaptureServicing
 
     init(
         repositories: AppRepositories,
-        adaptationService: GoalEngineAdaptationService = GoalEngineAdaptationService()
+        adaptationService: GoalEngineAdaptationService = GoalEngineAdaptationService(),
+        captureService: (any CaptureServicing)? = nil
     ) {
         self.repositories = repositories
         self.adaptationService = adaptationService
+        self.captureService = captureService ?? DefaultCaptureService(repository: repositories.captures)
     }
 
     func loadTodayExperience(userDisplayName: String, now: Date) async throws -> TodayExperience {
@@ -384,6 +387,14 @@ private extension RepositoryBackedTodayService {
                     note: "Quick log from Today."
                 )
             ])
+            _ = try await captureService.createCapture(
+                CreateCaptureRequest(
+                    rawText: "Quick log for \"\(selectedStep.title)\".",
+                    sourceType: .todayQuickCapture,
+                    linkedGoalID: goalID
+                ),
+                now: now
+            )
             message = TodayInlineMessage(
                 title: "Signal saved",
                 body: "Today recorded a quick bit of evidence without creating fake urgency.",

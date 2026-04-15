@@ -28,6 +28,7 @@ actor AmbitionsPersistenceStore {
         StepRecord.self,
         ProgressEvidenceRecord.self,
         FeedbackEventRecord.self,
+        CaptureRecord.self,
         AppStateRecord.self,
     ])
 

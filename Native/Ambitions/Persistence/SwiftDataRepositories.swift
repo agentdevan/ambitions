@@ -370,6 +370,35 @@ private enum RepositoryMapping {
         try PersistenceCoding.decode(StoredGoalFeedbackEvent.self, from: record.payloadData).event
     }
 
+    static func captureRecord(from capture: Capture) throws -> CaptureRecord {
+        CaptureRecord(
+            id: capture.id,
+            createdAt: capture.createdAt,
+            updatedAt: capture.updatedAt,
+            rawText: capture.rawText,
+            sourceTypeRaw: capture.sourceType?.rawValue,
+            statusRaw: capture.status.rawValue,
+            linkedGoalID: capture.linkedGoalID,
+            snapshotData: try PersistenceCoding.encode(capture)
+        )
+    }
+
+    static func capture(from record: CaptureRecord) throws -> Capture {
+        if let snapshot = try? PersistenceCoding.decode(Capture.self, from: record.snapshotData) {
+            return snapshot
+        }
+
+        return Capture(
+            id: record.id,
+            createdAt: record.createdAt,
+            updatedAt: record.updatedAt,
+            rawText: record.rawText,
+            sourceType: record.sourceTypeRaw.flatMap(CaptureSourceType.init(rawValue:)),
+            status: CaptureStatus(rawValue: record.statusRaw) ?? .pending,
+            linkedGoalID: record.linkedGoalID
+        )
+    }
+
     static func draftRecord(from draft: PersistedGoalDraft) throws -> GoalDraftRecord {
         GoalDraftRecord(
             id: draft.id,
@@ -665,6 +694,41 @@ struct SwiftDataFeedbackEventRepository: FeedbackEventRepository {
             }
             for event in events {
                 context.insert(try RepositoryMapping.feedbackRecord(from: event, goalID: goalID))
+            }
+        }
+    }
+}
+
+struct SwiftDataCaptureRepository: CaptureRepository {
+    let store: AmbitionsPersistenceStore
+
+    func listCaptures() async throws -> [Capture] {
+        try await store.read { context in
+            try context.fetch(FetchDescriptor<CaptureRecord>())
+                .sorted { $0.updatedAt > $1.updatedAt }
+                .map(RepositoryMapping.capture(from:))
+        }
+    }
+
+    func capture(id: String) async throws -> Capture? {
+        try await listCaptures().first(where: { $0.id == id })
+    }
+
+    func saveCaptures(_ captures: [Capture]) async throws {
+        try await store.write { context in
+            let existing = Dictionary(uniqueKeysWithValues: try context.fetch(FetchDescriptor<CaptureRecord>()).map { ($0.id, $0) })
+            for capture in captures {
+                if let record = existing[capture.id] {
+                    record.createdAt = capture.createdAt
+                    record.updatedAt = capture.updatedAt
+                    record.rawText = capture.rawText
+                    record.sourceTypeRaw = capture.sourceType?.rawValue
+                    record.statusRaw = capture.status.rawValue
+                    record.linkedGoalID = capture.linkedGoalID
+                    record.snapshotData = try PersistenceCoding.encode(capture)
+                } else {
+                    context.insert(try RepositoryMapping.captureRecord(from: capture))
+                }
             }
         }
     }

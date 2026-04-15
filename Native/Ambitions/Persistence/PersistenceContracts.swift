@@ -173,6 +173,12 @@ protocol FeedbackEventRepository: Sendable {
     func saveEvents(_ events: [GoalFeedbackEvent], goalID: String) async throws
 }
 
+protocol CaptureRepository: Sendable {
+    func listCaptures() async throws -> [Capture]
+    func capture(id: String) async throws -> Capture?
+    func saveCaptures(_ captures: [Capture]) async throws
+}
+
 protocol AppStateRepository: Sendable {
     func loadState() async throws -> AppStateSnapshot
     func saveState(_ state: AppStateSnapshot) async throws
@@ -187,5 +193,6 @@ struct AppRepositories: Sendable {
     let drafts: any GoalDraftRepository
     let evidence: any ProgressEvidenceRepository
     let feedback: any FeedbackEventRepository
+    let captures: any CaptureRepository
     let appState: any AppStateRepository
 }
