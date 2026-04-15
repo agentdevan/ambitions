@@ -49,13 +49,22 @@ enum AppContainerFactory {
     static func make(configuration: AppBootstrapConfiguration) async throws -> AppContainer {
         let repositories = try await prepareRepositories(for: configuration)
         let snapshotWriter = ExternalSurfaceSnapshotWriter(repositories: repositories)
-        let todayService = SnapshotRefreshingTodayService(
+        let notificationService = LocalNotificationFoundation()
+        let snapshotTodayService = SnapshotRefreshingTodayService(
             base: RepositoryBackedTodayService(repositories: repositories),
             snapshotWriter: snapshotWriter
         )
-        let goalsService = SnapshotRefreshingGoalsService(
+        let snapshotGoalsService = SnapshotRefreshingGoalsService(
             base: RepositoryBackedGoalsService(repositories: repositories),
             snapshotWriter: snapshotWriter
+        )
+        let todayService = NotificationSchedulingTodayService(
+            base: snapshotTodayService,
+            notificationService: notificationService
+        )
+        let goalsService = NotificationSchedulingGoalsService(
+            base: snapshotGoalsService,
+            notificationService: notificationService
         )
 
         let preferencesStore = RepositoryBackedAppPreferencesStore(appStateRepository: repositories.appState)
@@ -63,7 +72,9 @@ enum AppContainerFactory {
         let session = try await startupService.prepareSession(source: configuration.sessionSource)
         let navigation = AppNavigationModel(selectedTab: session.initialTab)
         let externalRouter = DefaultAppExternalRouter(navigation: navigation)
+        await notificationService.registerCategories()
         await snapshotWriter.refresh(now: .now)
+        await notificationService.refreshSchedule(now: .now)
 
         return AppContainer(
             session: session,
@@ -74,6 +85,7 @@ enum AppContainerFactory {
             habitsService: RepositoryBackedHabitsService(repositories: repositories),
             insightsService: RepositoryBackedInsightsService(repositories: repositories),
             profileService: RepositoryBackedProfileService(repositories: repositories),
+            notificationService: notificationService,
             actionRouter: DefaultAppActionRouter(navigation: navigation),
             externalRouter: externalRouter
         )

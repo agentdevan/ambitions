@@ -13,6 +13,7 @@ final class AppContainer {
     let habitsService: any HabitsServicing
     let insightsService: any InsightsServicing
     let profileService: any ProfileServicing
+    let notificationService: any NotificationServicing
     let actionRouter: any AppActionRouting
     let externalRouter: any AppExternalRouting
 
@@ -25,6 +26,7 @@ final class AppContainer {
         habitsService: any HabitsServicing,
         insightsService: any InsightsServicing,
         profileService: any ProfileServicing,
+        notificationService: any NotificationServicing,
         actionRouter: any AppActionRouting,
         externalRouter: any AppExternalRouting
     ) {
@@ -36,6 +38,7 @@ final class AppContainer {
         self.habitsService = habitsService
         self.insightsService = insightsService
         self.profileService = profileService
+        self.notificationService = notificationService
         self.actionRouter = actionRouter
         self.externalRouter = externalRouter
     }

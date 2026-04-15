@@ -44,6 +44,19 @@ final class ExternalRoutingTests: XCTestCase {
         )
     }
 
+    func testNotificationTranslatorRoutesGoalPayloadToGoalDetail() {
+        let translator = AppExternalRouteTranslator()
+
+        let route = translator.route(
+            fromNotification: AppNotificationRoutingPayload(
+                action: "complete",
+                values: ["goalID": "goal-123", "stepID": "step-1"]
+            )
+        )
+
+        XCTAssertEqual(route, .openGoalDetail(goalID: "goal-123"))
+    }
+
     @MainActor
     func testRouterDispatchesGoalDetailToExistingNavigationModel() {
         let navigation = AppNavigationModel(selectedTab: .today)

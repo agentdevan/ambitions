@@ -1,3 +1,4 @@
+import AmbitionsDesignSystem
 import Foundation
 import Observation
 
@@ -60,7 +61,10 @@ final class AppBootstrapper {
 
     func handleNotificationPayload(_ payload: AppNotificationRoutingPayload) {
         guard case let .ready(container) = phase else { return }
-        container.externalRouter.handleNotificationPayload(payload)
+        Task {
+            await performNotificationActionIfNeeded(payload, container: container)
+            container.externalRouter.handleNotificationPayload(payload)
+        }
     }
 
     func handleWidgetPayload(_ payload: AppWidgetRoutingPayload) {
@@ -115,5 +119,40 @@ final class AppBootstrapper {
         for url in queued {
             container.externalRouter.handleDeepLink(url)
         }
+    }
+
+    func requestNotificationAuthorizationOptIn() async -> Bool {
+        guard case let .ready(container) = phase else { return false }
+        let granted = await container.notificationService.requestAuthorizationOptIn()
+        if granted {
+            await container.notificationService.refreshSchedule(now: .now)
+        }
+        return granted
+    }
+
+    private func performNotificationActionIfNeeded(_ payload: AppNotificationRoutingPayload, container: AppContainer) async {
+        guard let goalID = payload.values["goalID"], let stepID = payload.values["stepID"] else { return }
+
+        let actionKind: TodayActionKind?
+        switch payload.action.lowercased() {
+        case "snooze":
+            actionKind = .delay
+        case "complete":
+            actionKind = .complete
+        default:
+            actionKind = nil
+        }
+
+        guard let actionKind else { return }
+        _ = try? await container.todayService.performAction(
+            TodayInlineAction(
+                kind: actionKind,
+                title: actionKind == .complete ? "Complete" : "Snooze",
+                systemImage: actionKind == .complete ? "checkmark" : "clock.badge",
+                state: actionKind == .complete ? .success : .selected,
+                target: TodayActionTarget(goalID: goalID, stepID: stepID)
+            ),
+            now: .now
+        )
     }
 }

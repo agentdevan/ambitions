@@ -6,8 +6,8 @@
 - Persist in JSON so storage can move to an App Group container later without schema changes.
 
 ## File
-- Current path: app support directory under `ExternalSnapshots/external-snapshot.v1.json`
-- Future path: App Group container URL with the same file name
+- Preferred path: App Group container `group.com.ambitions.shared/ExternalSnapshots/external-snapshot.v1.json`
+- Fallback path: app support directory under `ExternalSnapshots/external-snapshot.v1.json`
 - Writer: `ExternalSurfaceSnapshotWriter` (best effort, non-blocking)
 
 ## Schema

@@ -26,10 +26,29 @@ struct ExternalSurfaceNextAction: Codable, Sendable, Equatable {
 
 struct ExternalSurfaceDisplayMetadata: Codable, Sendable, Equatable {
     let templateKey: String
-    let goalMode: GoalMode
-    let stepState: StepLifecycleState
+    let goalMode: ExternalSurfaceGoalMode
+    let stepState: ExternalSurfaceStepState
     let urgency: ExternalSurfaceUrgency
     let timing: ExternalSurfaceTiming
+}
+
+enum ExternalSurfaceGoalMode: String, Codable, Sendable {
+    case achievement
+    case project
+    case habit
+    case learning
+    case exploration
+    case maintenance
+    case recovery
+    case delegatedSupport = "delegated_support"
+}
+
+enum ExternalSurfaceStepState: String, Codable, Sendable {
+    case planned
+    case active
+    case completed
+    case blocked
+    case cancelled
 }
 
 enum ExternalSurfaceUrgency: String, Codable, Sendable {
@@ -81,8 +100,8 @@ struct ExternalSurfaceSnapshotBuilder: Sendable {
             stepID: step.id,
             display: ExternalSurfaceDisplayMetadata(
                 templateKey: "next_tiny_step",
-                goalMode: goal.mode,
-                stepState: step.state,
+                goalMode: mapGoalMode(goal.mode),
+                stepState: mapStepState(step.state),
                 urgency: urgency(for: step.timing, now: now),
                 timing: timing(for: step.timing)
             )
@@ -115,6 +134,42 @@ struct ExternalSurfaceSnapshotBuilder: Sendable {
 
     private func timingSortKey(for timing: GoalTiming) -> String {
         timing.dueAt ?? timing.targetBy ?? timing.windowEnd ?? timing.suggestedNextAt ?? "9999-12-31T23:59:59Z"
+    }
+
+    private func mapGoalMode(_ mode: GoalMode) -> ExternalSurfaceGoalMode {
+        switch mode {
+        case .achievement:
+            return .achievement
+        case .project:
+            return .project
+        case .habit:
+            return .habit
+        case .learning:
+            return .learning
+        case .exploration:
+            return .exploration
+        case .maintenance:
+            return .maintenance
+        case .recovery:
+            return .recovery
+        case .delegatedSupport:
+            return .delegatedSupport
+        }
+    }
+
+    private func mapStepState(_ state: StepLifecycleState) -> ExternalSurfaceStepState {
+        switch state {
+        case .planned:
+            return .planned
+        case .active:
+            return .active
+        case .completed:
+            return .completed
+        case .blocked:
+            return .blocked
+        case .cancelled:
+            return .cancelled
+        }
     }
 
     private func parseDate(_ value: String?) -> Date? {

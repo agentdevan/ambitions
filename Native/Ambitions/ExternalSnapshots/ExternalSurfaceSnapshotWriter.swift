@@ -36,8 +36,6 @@ actor ExternalSurfaceSnapshotWriter: ExternalSurfaceSnapshotWriting {
 }
 
 struct FileExternalSurfaceSnapshotDataSink: ExternalSurfaceSnapshotDataSink {
-    static let fileName = "external-snapshot.v1.json"
-
     let fileURL: URL
 
     func write(_ data: Data) throws {
@@ -47,15 +45,6 @@ struct FileExternalSurfaceSnapshotDataSink: ExternalSurfaceSnapshotDataSink {
     }
 
     static func `default`() -> FileExternalSurfaceSnapshotDataSink {
-        let baseDirectory: URL
-        if let appSupport = FileManager.default.urls(for: .applicationSupportDirectory, in: .userDomainMask).first {
-            baseDirectory = appSupport
-        } else {
-            baseDirectory = FileManager.default.temporaryDirectory
-        }
-
-        // App Group migration path: swap this root with containerURL(forSecurityApplicationGroupIdentifier:).
-        let snapshotsDirectory = baseDirectory.appendingPathComponent("ExternalSnapshots", isDirectory: true)
-        return FileExternalSurfaceSnapshotDataSink(fileURL: snapshotsDirectory.appendingPathComponent(fileName))
+        FileExternalSurfaceSnapshotDataSink(fileURL: SharedExternalSnapshotStore.snapshotFileURL())
     }
 }

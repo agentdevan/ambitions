@@ -35,11 +35,30 @@ targets:
         CURRENT_PROJECT_VERSION: 1
         MARKETING_VERSION: 1.0
         DEVELOPMENT_ASSET_PATHS: Native/Ambitions/PreviewSupport
+        CODE_SIGN_ENTITLEMENTS: Native/Ambitions/Support/Ambitions.entitlements
     dependencies:
       - package: AmbitionsPackages
         product: AmbitionsDesignSystem
       - package: AmbitionsPackages
         product: AmbitionsWidgetUI
+  AmbitionsWidgetExtension:
+    type: app-extension
+    platform: iOS
+    deploymentTarget: "17.0"
+    sources:
+      - path: Native/AmbitionsWidgetExtension
+        excludes:
+          - "**/*.md"
+      - path: Native/Ambitions/ExternalSnapshots/ExternalSurfaceSnapshotContracts.swift
+      - path: Native/Ambitions/ExternalSnapshots/SharedExternalSnapshotStore.swift
+      - path: Native/Ambitions/ExternalSnapshots/NextStepActivityAttributes.swift
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: com.ambitions.ios.widgetextension
+        PRODUCT_NAME: AmbitionsWidgetExtension
+        GENERATE_INFOPLIST_FILE: NO
+        INFOPLIST_FILE: Native/AmbitionsWidgetExtension/Info.plist
+        CODE_SIGN_ENTITLEMENTS: Native/AmbitionsWidgetExtension/AmbitionsWidgetExtension.entitlements
   AmbitionsTests:
     type: bundle.unit-test
     platform: iOS
@@ -65,6 +84,7 @@ schemes:
     build:
       targets:
         Ambitions: all
+        AmbitionsWidgetExtension: all
         AmbitionsTests: [test]
         AmbitionsUITests: [test]
     run:
