@@ -1,0 +1,36 @@
+# Ambitions project-scoped Codex config.
+# Project config is loaded only when this repo is trusted; personal defaults still live in ~/.codex/config.toml.
+# Named profiles are primarily a CLI/App profile convenience and should not be treated as IDE-specific guarantees.
+
+personality = "pragmatic"
+model_reasoning_effort = "medium"
+project_doc_max_bytes = 49152
+project_root_markers = [".git", "project.yml", "Package.swift"]
+
+[profiles.small-edit]
+# Quick copy cleanup, single-file maintenance, or narrow docs truth fixes.
+personality = "pragmatic"
+plan_mode_reasoning_effort = "minimal"
+service_tier = "fast"
+web_search = "disabled"
+
+[profiles.feature-build]
+# Multi-file feature wiring inside the existing native architecture.
+personality = "pragmatic"
+plan_mode_reasoning_effort = "medium"
+service_tier = "fast"
+web_search = "cached"
+
+[profiles.domain-safe]
+# Planner, rescheduling, routing, persistence, or other higher-risk logic edits.
+personality = "pragmatic"
+plan_mode_reasoning_effort = "high"
+service_tier = "flex"
+web_search = "cached"
+
+[profiles.release-check]
+# Validation, hardening, and final repo-truth/release sanity passes.
+personality = "pragmatic"
+plan_mode_reasoning_effort = "medium"
+service_tier = "flex"
+web_search = "live"

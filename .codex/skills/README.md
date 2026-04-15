@@ -2,6 +2,8 @@
 
 Repo-local skills live under `.codex/skills/`. Keep durable repo rules in `AGENTS.md`; put repeatable, narrowly scoped execution workflows in a skill.
 
+Personal defaults live in `~/.codex/config.toml`; repo overrides live in `.codex/config.toml`. Project-scoped config and skills are applied only when Codex trusts the project.
+
 ## Skills
 
 - `phase-executor`
