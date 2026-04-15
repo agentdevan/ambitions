@@ -4,6 +4,10 @@
 
 Implement phase 10 from the Ambitions backlog, but first break it into exact repo tasks and validation steps.
 
+## Expected Likely Skill(s)
+
+- `phase-executor`
+
 ## Success Looks Like
 
 - Inspects the backlog and current native code first.
@@ -24,7 +28,7 @@ Implement phase 10 from the Ambitions backlog, but first break it into exact rep
 - `Native/Ambitions/Services/`
 - `Native/Ambitions/Features/`
 
-## Should Not Touch By Default
+## Files That Should Not Be Touched By Default
 
 - `Sources/Theme/`
 - unrelated asset files

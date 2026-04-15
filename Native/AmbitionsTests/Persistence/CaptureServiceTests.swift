@@ -65,7 +65,7 @@ final class CaptureServiceTests: XCTestCase {
         let repository = PreviewCaptureRepository()
         let service = DefaultCaptureService(repository: repository, idProvider: { "capture-stable" })
         let now = Date(timeIntervalSince1970: 1_712_692_800)
-        let sources: [CaptureSourceType] = [.todayQuickCapture, .shareExtensionText, .shareExtensionURL, .appIntent]
+        let sources: [CaptureSourceType] = [.todayQuickCapture, .notification, .shareExtensionText, .shareExtensionURL, .appIntent]
 
         for source in sources {
             let created = try await service.createCapture(

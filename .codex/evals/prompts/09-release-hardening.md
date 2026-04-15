@@ -2,7 +2,13 @@
 
 ## Prompt
 
-Do a final preflight on this branch and tell me whether anything in docs, plist/privacy, extension notes, or validation still blocks merge.
+Do a final preflight on this branch and tell me whether anything in docs, plist/privacy, extension notes, or validation still blocks merge, assuming the current environment may not be able to run native Apple toolchain checks.
+
+## Expected Likely Skill(s)
+
+- `release-hardening`
+- `repo-truth-enforcer`
+- `ios-qa-regression-checker`
 
 ## Success Looks Like
 
@@ -24,6 +30,6 @@ Do a final preflight on this branch and tell me whether anything in docs, plist/
 - `docs/widget-live-activity-manual-testing.md`
 - changed docs
 
-## Should Not Touch By Default
+## Files That Should Not Be Touched By Default
 
 - unrelated feature implementation files unless they contain stale release-facing copy

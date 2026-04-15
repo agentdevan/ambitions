@@ -4,6 +4,11 @@
 
 Polish the Captures screen so it feels like the rest of Ambitions without redesigning unrelated tabs.
 
+## Expected Likely Skill(s)
+
+- `design-system-guard`
+- `ios-qa-regression-checker` only if behavior changes materially
+
 ## Success Looks Like
 
 - Reuses current theme/primitives and preserves the premium dark-first feel.
@@ -21,7 +26,7 @@ Polish the Captures screen so it feels like the rest of Ambitions without redesi
 - `Native/Ambitions/Features/Captures/CapturesScreen.swift`
 - possibly a small shared primitive in `Sources/Components/`
 
-## Should Not Touch By Default
+## Files That Should Not Be Touched By Default
 
 - domain/persistence files
 - unrelated tabs

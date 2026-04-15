@@ -4,6 +4,12 @@
 
 Clean up any remaining active docs that still imply Ambitions ships sync or backend auth today.
 
+## Expected Likely Skill(s)
+
+- `phase-executor` if multiple active docs conflict
+- `repo-truth-enforcer`
+- `ios-qa-regression-checker`
+
 ## Success Looks Like
 
 - Audits current README/docs against the native repo truth.
@@ -22,7 +28,7 @@ Clean up any remaining active docs that still imply Ambitions ships sync or back
 - `docs/README.md`
 - any active doc still making stale sync/auth claims
 
-## Should Not Touch By Default
+## Files That Should Not Be Touched By Default
 
 - `project.yml`
 - native source code unless a comment is stale

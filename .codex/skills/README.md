@@ -4,6 +4,8 @@ Repo-local skills live under `.codex/skills/`. Keep durable repo rules in `AGENT
 
 Personal defaults live in `~/.codex/config.toml`; repo overrides live in `.codex/config.toml`. Project-scoped config and skills are applied only when Codex trusts the project.
 
+Use [.codex/README.md](/C:/Users/Devan/Documents/GitHub/ambitions/.codex/README.md) for project config intent, profile selection, and trusted-project notes.
+
 ## Skills
 
 - `phase-executor`
@@ -85,3 +87,40 @@ Personal defaults live in `~/.codex/config.toml`; repo overrides live in `.codex
 - Put narrowly scoped, repeatable jobs in a skill.
 - Do not duplicate long procedures in `AGENTS.md` when a skill can carry them.
 - Keep skill `name` and `description` specific so Codex can trigger them implicitly from user wording.
+
+## Planning Gate
+
+- Risky work must start with a plan before edits.
+- Use `phase-executor` when the task spans multiple layers, has uncertain seams, or needs a more formal execution map.
+- Use the templates in `.codex/templates/` when a lightweight plan is enough.
+
+## Autonomous Execution Loop
+
+- Classify the task first: maintenance, feature wiring, domain-safe edit, target/config work, docs truth, validation, or release hardening.
+- Choose the narrowest skill set that fits. Prefer one primary skill plus a follow-on validation skill rather than blending several vague workflows.
+- If the task is risky, plan first with `phase-executor` or the relevant plan template.
+- Use `.codex/templates/autonomous-execution-loop.md` when a task needs an explicit classify -> plan -> execute -> check -> retry or stop structure.
+- Execute the smallest safe slice, then self-check before continuing.
+- If the result misses the goal, retry only with a narrower grounded step.
+- If the task is blocked, stop and report the block instead of widening the diff speculatively.
+- Finish with a truthful summary that separates verified from unverified.
+
+## Common Skill Chains
+
+- `phase-executor` -> `capture-flow-implementer`
+- `phase-executor` -> `xcodegen-target-writer`
+- `ios-extension-builder` -> `xcodegen-target-writer`
+- `capture-flow-implementer` -> `ios-qa-regression-checker`
+- `repo-truth-enforcer` -> `ios-qa-regression-checker`
+- `planner-domain-safe-editor` -> `ios-qa-regression-checker`
+- `release-hardening` -> `repo-truth-enforcer` and `ios-qa-regression-checker`
+
+## Recovery Rules
+
+- If the wrong skill is likely selected, say so and switch to the narrower correct one.
+- If skills overlap, name the primary skill and the follow-on skill instead of blending them into one vague workflow.
+- If no skill fits cleanly, use the narrowest truthful plan and explain the gap.
+- If validation cannot run, use the validation summary template and separate verified from unverified explicitly.
+- Use `.codex/templates/retry-decision.md` when deciding whether to retry, continue, or stop.
+- Use `.codex/templates/blocked-work-summary.md` when the repo seam, environment, or scope block the remaining work.
+- Use `.codex/templates/execution-report.md` when the task spans several bounded steps and needs a clean final report.

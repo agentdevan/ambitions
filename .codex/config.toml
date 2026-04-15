@@ -1,6 +1,8 @@
 # Ambitions project-scoped Codex config.
 # Project config is loaded only when this repo is trusted; personal defaults still live in ~/.codex/config.toml.
 # Named profiles are primarily a CLI/App profile convenience and should not be treated as IDE-specific guarantees.
+# Command-line or surface-specific overrides can still supersede these defaults when the invoking Codex surface supports them.
+# Profiles influence defaults such as planning intensity and service tier; planning gates, retries, stop conditions, and validation honesty are enforced by AGENTS and skills, not by config alone.
 
 personality = "pragmatic"
 model_reasoning_effort = "medium"
@@ -9,6 +11,8 @@ project_root_markers = [".git", "project.yml", "Package.swift"]
 
 [profiles.small-edit]
 # Quick copy cleanup, single-file maintenance, or narrow docs truth fixes.
+# Prefer this for one-file edits where a heavyweight plan would be unnecessary.
+# If the task becomes risky mid-stream, switch back to an instruction-driven planning workflow instead of forcing this profile to carry it.
 personality = "pragmatic"
 plan_mode_reasoning_effort = "minimal"
 service_tier = "fast"
@@ -16,6 +20,8 @@ web_search = "disabled"
 
 [profiles.feature-build]
 # Multi-file feature wiring inside the existing native architecture.
+# Prefer this for normal implementation work that still stays inside existing seams.
+# Use for bounded implementation loops after the correct skill and plan are already chosen.
 personality = "pragmatic"
 plan_mode_reasoning_effort = "medium"
 service_tier = "fast"
@@ -23,6 +29,8 @@ web_search = "cached"
 
 [profiles.domain-safe]
 # Planner, rescheduling, routing, persistence, or other higher-risk logic edits.
+# Prefer this when the task should plan first and keep the diff especially narrow.
+# Prefer command-line override into this profile when a task crosses domain, persistence, routing, or container boundaries.
 personality = "pragmatic"
 plan_mode_reasoning_effort = "high"
 service_tier = "flex"
@@ -30,6 +38,8 @@ web_search = "cached"
 
 [profiles.release-check]
 # Validation, hardening, and final repo-truth/release sanity passes.
+# Prefer this for preflight work where verified vs unverified reporting matters more than implementation speed.
+# Use when the loop is mostly checking, hardening, and reporting rather than feature implementation.
 personality = "pragmatic"
 plan_mode_reasoning_effort = "medium"
 service_tier = "flex"

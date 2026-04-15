@@ -4,6 +4,13 @@
 
 Build a share extension that captures shared text and URLs into Ambitions and opens the captures inbox when needed.
 
+## Expected Likely Skill(s)
+
+- `phase-executor` if the seam is uncertain
+- `ios-extension-builder`
+- `xcodegen-target-writer`
+- `ios-qa-regression-checker`
+
 ## Success Looks Like
 
 - Routes target wiring through the XcodeGen skill/workflow.
@@ -23,6 +30,6 @@ Build a share extension that captures shared text and URLs into Ambitions and op
 - capture-domain or routing files
 - docs/manual-test notes
 
-## Should Not Touch By Default
+## Files That Should Not Be Touched By Default
 
 - unrelated Goals/Habits UI files

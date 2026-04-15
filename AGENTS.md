@@ -4,8 +4,15 @@
 - Use XcodeGen. Edit `project.yml` and regenerate the project instead of relying on a checked-in `.xcodeproj`.
 - Preserve architecture boundaries: app and routing in `Native/Ambitions/App`, domain logic in `Native/Ambitions/Domain`, services in `Native/Ambitions/Services`, persistence in `Native/Ambitions/Persistence`, feature UI in `Native/Ambitions/Features`, shared UI in `Sources/` and `AppUI/Sources/`.
 - Avoid broad rewrites when targeted edits are sufficient. Extend current repo patterns instead of introducing parallel abstractions.
-- Plan first for risky changes involving domain logic, XcodeGen, extensions, persistence, or app routing.
+- Any task touching domain logic, persistence models, XcodeGen target wiring, extensions, routing, container wiring, release hardening, or docs truth across multiple files must start with a plan before edits.
+- Use a lightweight plan for narrow risky changes and a fuller `phase-executor` or `.codex/templates/*-plan.md` plan when the work spans multiple layers or files.
+- For non-trivial work, follow this loop: classify the task, choose the narrowest skill set, plan if risky, execute the smallest safe slice, self-check the result, then either continue, retry more narrowly, or stop and report the block.
+- Keep execution bounded. Prefer one grounded step at a time over batching unrelated edits across app, domain, persistence, docs, or config.
+- Retry only when the next attempt is narrower and informed by the last result. Do not repeat the same failed action blindly, and stop after a small number of grounded retries.
 - After meaningful changes, run the relevant generation, build, and test workflow when the environment supports it.
 - Do not claim validation that was not run.
+- Validation summaries should explicitly separate verified, not verified, could not verify here, likely risks, and manual follow-up required.
+- If a request would require inventing a seam the repo does not currently have, broad rewriting beyond scope, or an unavailable toolchain, stop with narrow truthful progress and a blocked-work summary instead of bluffing.
+- If the right skill is unclear, overlapping, or missing, say so, choose the narrowest truthful workflow, and avoid inventing seams that the repo does not currently support.
 - Keep docs, copy, previews, and shipped behavior truthful to the current repo state.
 - Use repo-local skills in `.codex/skills/` for specialized recurring workflows instead of expanding this file with task-specific procedures.

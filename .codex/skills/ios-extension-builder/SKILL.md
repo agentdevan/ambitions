@@ -1,6 +1,6 @@
 ---
 name: ios-extension-builder
-description: Build or modify Ambitions iOS extension surfaces for WidgetKit, Live Activities, Share extensions, and App Intents using the repo's current native patterns. Use when a request involves adding a widget, Share extension, App Intent, or Live Activity, and route any target-level wiring through `xcodegen-target-writer`; do not use for plain in-app SwiftUI work with no extension or OS-surface component.
+description: Build or modify Ambitions iOS extension surfaces for WidgetKit, Live Activities, Share extensions, and App Intents using the repo's current native patterns. Use when a request involves adding a widget, Share extension, App Intent, or Live Activity; start with a plan for risky extension work, route any target-level wiring through `xcodegen-target-writer`, and finish with `ios-qa-regression-checker`; do not use for plain in-app SwiftUI work with no extension or OS-surface component.
 ---
 
 # iOS Extension Builder
@@ -30,6 +30,7 @@ Implement extension-facing work in Ambitions without bypassing target wiring, ex
 
 ## Execution Steps
 
+0. If the extension work is new, multi-file, or seam-uncertain, require a plan first via `phase-executor` or `extension-plan.md`.
 1. Determine the requested surface:
    - WidgetKit
    - Live Activity / ActivityKit
@@ -41,18 +42,34 @@ Implement extension-facing work in Ambitions without bypassing target wiring, ex
    - `Native/Ambitions/App/AppExternalRouting.swift`
    - current Info.plist and entitlements
 3. Route target-level edits through `xcodegen-target-writer`. Do not hand-edit target sprawl without checking current XcodeGen conventions.
-4. Keep extension code extension-safe:
+4. Choose the first safe slice. If the repo seam is not ready for full runtime support, stop at target/config planning or shared-model preparation rather than faking a complete extension.
+5. Keep extension code extension-safe:
    - no direct app-only repository access
    - no unsafe dependency on live app container state
    - use shared contracts, app groups, deep links, and snapshot readers/writers where appropriate
-5. Verify required supporting pieces:
+6. Verify required supporting pieces:
    - app groups
    - bundle IDs
    - entitlements
    - NSExtension or widget plist keys
    - deep-link routing
    - manual-test notes
-6. Note the validation path. For widgets and Live Activities, include manual simulator or device checks in addition to build validation.
+7. Retry only with narrower config or shared-model fixes when a step fails. Do not widen into unrelated app rewrites.
+8. Stop when the remaining request depends on a missing app-side seam, entitlement setup you cannot verify here, or unsupported runtime assumptions.
+9. Note the validation path. For widgets and Live Activities, include manual simulator or device checks in addition to build validation.
+
+## Skill Chaining
+
+- Use `phase-executor` first when the extension seam or architecture is uncertain.
+- Route target/config edits through `xcodegen-target-writer`.
+- Use `capture-flow-implementer` if the extension feeds the capture domain.
+- Use `ios-qa-regression-checker` after implementation.
+
+## Failure Recovery
+
+- If the request really needs only target wiring, switch to `xcodegen-target-writer`.
+- If the underlying in-app action or capture seam does not exist yet, stop short of inventing unsupported runtime behavior and say what is missing.
+- If manual extension validation cannot run here, separate config support from runtime support explicitly.
 
 Use the templates in `templates/` to keep implementation and review grounded:
 

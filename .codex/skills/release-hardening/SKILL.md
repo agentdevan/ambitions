@@ -1,6 +1,6 @@
 ---
 name: release-hardening
-description: Run a final Ambitions preflight across docs truth, plist/privacy/entitlements, extension setup, build reproducibility, and release sanity before merge or release. Use when preparing a branch for merge, doing final preflight, or hardening changes that touch targets, OS capabilities, or shipped documentation; do not use for early feature planning or small isolated edits that are not near integration.
+description: Run a final Ambitions preflight across docs truth, plist/privacy/entitlements, extension setup, build reproducibility, and release sanity before merge or release. Use when preparing a branch for merge, doing final preflight, or hardening changes that touch targets, OS capabilities, or shipped documentation; chain to `repo-truth-enforcer` and `ios-qa-regression-checker` where appropriate; do not use for early feature planning or small isolated edits that are not near integration.
 ---
 
 # Release Hardening
@@ -30,6 +30,7 @@ Perform the final repo-level merge or release check so the branch is truthful, b
 
 ## Execution Steps
 
+0. If the branch spans multiple release-sensitive areas, start with `release-plan.md` or a brief `phase-executor` plan.
 1. Audit the diff for release-sensitive files:
    - `project.yml`
    - plist files
@@ -38,9 +39,22 @@ Perform the final repo-level merge or release check so the branch is truthful, b
    - extension targets
    - docs and manual test notes
 2. Re-check repo truth. Docs and copy should match the actual shipped branch state.
-3. Verify build reproducibility through the repo’s documented XcodeGen and `xcodebuild` flow where possible.
-4. If extension or OS-surface changes landed, confirm manual validation notes exist and point at the correct behavior.
-5. Report remaining release risk instead of hand-waving it away.
+3. Work in bounded preflight slices instead of a single pass: docs truth, config/privacy, validation, then final report.
+4. After each slice, self-check whether the branch is actually closer to releasable or whether a block remains.
+5. Verify build reproducibility through the repo’s documented XcodeGen and `xcodebuild` flow where possible.
+6. If extension or OS-surface changes landed, confirm manual validation notes exist and point at the correct behavior.
+7. Report remaining release risk instead of hand-waving it away.
+
+## Skill Chaining
+
+- Use `repo-truth-enforcer` when docs or product claims need reconciliation.
+- Use `ios-qa-regression-checker` for the validation summary.
+
+## Failure Recovery
+
+- If validation is environment-limited, do not block on impossible checks; separate verified, unverified, and manual follow-up explicitly.
+- If the branch is not mature enough for release hardening, say so and stop short of a false readiness claim.
+- If the remaining readiness claim depends on unavailable signing, simulator, or archive checks, stop with a blocked-work summary rather than implying release readiness.
 
 Use the checklist in `templates/release-hardening-checklist.md`.
 

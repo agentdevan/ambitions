@@ -4,11 +4,16 @@
 
 Validate the recent capture and routing changes and tell me exactly what was verified versus what still needs simulator checks.
 
+## Expected Likely Skill(s)
+
+- `ios-qa-regression-checker`
+
 ## Success Looks Like
 
 - Uses the real repo validation commands and docs.
 - Separates executed checks from unexecuted manual follow-up.
 - Mentions routing/container consistency in addition to raw build status.
+- Uses the verified / not verified / could not verify here split or equivalent.
 
 ## Common Failure Patterns
 
@@ -22,6 +27,6 @@ Validate the recent capture and routing changes and tell me exactly what was ver
 - `.github/workflows/ios-validate.yml`
 - changed app/capture/routing files
 
-## Should Not Touch By Default
+## Files That Should Not Be Touched By Default
 
 - unrelated design files

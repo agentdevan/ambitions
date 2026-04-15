@@ -1,6 +1,6 @@
 ---
 name: capture-flow-implementer
-description: Implement or modify Ambitions capture flows end-to-end across capture models, persistence, services, routing, screens, and tests. Use when building the captures inbox, wiring capture ingestion, expanding `CaptureSourceType`, or connecting quick capture, Share extension text/URL capture, App Intent capture, and captures-tab routing; do not use for unrelated generic inbox features that ignore Ambitions capture terminology.
+description: Implement or modify Ambitions capture flows end-to-end across capture models, persistence, services, routing, screens, and tests. Use when building the captures inbox, wiring capture ingestion, expanding `CaptureSourceType`, or connecting quick capture, Share extension text/URL capture, App Intent capture, and captures-tab routing; for risky or multi-file capture work, start with `phase-executor`, and finish with `ios-qa-regression-checker`; do not use for unrelated generic inbox features that ignore Ambitions capture terminology.
 ---
 
 # Capture Flow Implementer
@@ -31,6 +31,7 @@ Build or change Ambitions capture behavior without collapsing it into a generic 
 
 ## Execution Steps
 
+0. If the request is risky or crosses multiple layers, require a plan first. Use `phase-executor` or a relevant plan template before editing.
 1. Inspect the current capture domain first:
    - `Native/Ambitions/Domain/CaptureModels.swift`
    - `Native/Ambitions/Services/CaptureService.swift`
@@ -48,9 +49,16 @@ Build or change Ambitions capture behavior without collapsing it into a generic 
    - container exposure
    - screen/tab routing
    - external routing or extension handoff if relevant
-4. Make end-to-end edits instead of partial stubs. If a new capture source is added, update all affected layers that should understand it.
-5. Preserve Ambitions capture semantics. Captures are local ingestion records that may later connect to goals or other actions; do not rewrite them into a generic enterprise backlog.
-6. Add or update tests around capture creation, listing, status changes, and route wiring.
+4. Choose the first safe slice and keep it bounded. Start with the narrowest change that can land truthfully, such as the model contract before UI copy or tests before routing.
+5. Make end-to-end edits for that slice instead of leaving partial stubs. If a new capture source is added, update the layers that should already understand that slice.
+6. Self-check after each slice:
+   - did the requested seam already exist
+   - is the next slice still grounded
+   - would the remaining work require a new runtime path
+7. Preserve Ambitions capture semantics. Captures are local ingestion records that may later connect to goals or other actions; do not rewrite them into a generic enterprise backlog.
+8. Add or update tests around capture creation, listing, status changes, and route wiring.
+9. Retry only with a narrower grounded correction when a slice fails. Stop when the remaining work would require inventing a new capture ingestion seam or unsupported runtime flow.
+10. Hand off to `ios-qa-regression-checker` after implementation for validation reporting.
 
 Use the checklists in `templates/` when scoping or reviewing the change:
 
@@ -74,6 +82,7 @@ Summaries should cover:
 - Check that the captures tab still compiles and loads.
 - Verify external routing or handoff behavior when the change adds share or intent-driven capture entry.
 - Report any manual validation that could not be run.
+- Use `templates/execution-report.md`, `templates/retry-decision.md`, and `templates/blocked-work-summary.md` when the work lands in slices instead of one pass.
 
 ## Ambitions-Specific Guardrails
 
@@ -82,6 +91,19 @@ Summaries should cover:
 - Preserve app-container wiring through `AppContainerFactory`, `AppContainer`, and `AppServices`.
 - Re-check `AppExternalRouting` if the change adds deep-link or extension entry points.
 - Avoid changing unrelated planning or goal logic unless the capture flow truly requires it.
+
+## Skill Chaining
+
+- Use `phase-executor` first when capture work is risky, multi-file, or seam-uncertain.
+- Use `planner-domain-safe-editor` if the request spills into Today/planner behavior.
+- Use `ios-qa-regression-checker` after implementation.
+
+## Failure Recovery
+
+- If the requested capture feature would require a runtime seam the repo does not currently have, say so and implement only the supported domain/service/UI portions.
+- If the request is really an extension or target-wiring task, switch to `ios-extension-builder` or `xcodegen-target-writer`.
+- If validation cannot run, report that explicitly instead of implying runtime support.
+- If a narrow slice fails validation for the same grounded reason more than once or twice, stop and report the remaining unsupported portion.
 
 ## Trigger Phrases
 

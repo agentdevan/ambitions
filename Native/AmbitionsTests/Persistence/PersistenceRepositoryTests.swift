@@ -107,6 +107,7 @@ final class PersistenceRepositoryTests: XCTestCase {
     func testCaptureRepositoryRoundTripsAllStableSourceTypes() async throws {
         let repositories = try await makeRepositories()
         let captures = [
+            Capture(id: "capture-notification", createdAt: "2026-04-15T09:55:00Z", updatedAt: "2026-04-15T09:55:00Z", rawText: "Notification capture", sourceType: .notification, status: .pending, linkedGoalID: nil),
             Capture(id: "capture-text", createdAt: "2026-04-15T10:00:00Z", updatedAt: "2026-04-15T10:00:00Z", rawText: "Shared text", sourceType: .shareExtensionText, status: .pending, linkedGoalID: nil),
             Capture(id: "capture-url", createdAt: "2026-04-15T10:05:00Z", updatedAt: "2026-04-15T10:05:00Z", rawText: "https://example.com", sourceType: .shareExtensionURL, status: .pending, linkedGoalID: nil),
             Capture(id: "capture-intent", createdAt: "2026-04-15T10:10:00Z", updatedAt: "2026-04-15T10:10:00Z", rawText: "Intent capture", sourceType: .appIntent, status: .pending, linkedGoalID: nil)
@@ -115,6 +116,7 @@ final class PersistenceRepositoryTests: XCTestCase {
         try await repositories.captures.saveCaptures(captures)
         let loadedByID = Dictionary(uniqueKeysWithValues: try await repositories.captures.listCaptures().map { ($0.id, $0) })
 
+        XCTAssertEqual(loadedByID["capture-notification"]?.sourceType, .notification)
         XCTAssertEqual(loadedByID["capture-text"]?.sourceType, .shareExtensionText)
         XCTAssertEqual(loadedByID["capture-url"]?.sourceType, .shareExtensionURL)
         XCTAssertEqual(loadedByID["capture-intent"]?.sourceType, .appIntent)

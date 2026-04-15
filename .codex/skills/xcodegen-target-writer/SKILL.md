@@ -1,6 +1,6 @@
 ---
 name: xcodegen-target-writer
-description: Safely edit Ambitions `project.yml` and related plist, entitlements, bundle ID, dependency, resource, and test target wiring for new iOS targets or target changes. Use when adding or modifying app targets, test bundles, WidgetKit targets, Share extensions, App Intents support, capabilities, or shared configuration through XcodeGen; do not use for general SwiftUI feature work that does not require target or build-graph changes.
+description: Safely edit Ambitions `project.yml` and related plist, entitlements, bundle ID, dependency, resource, and test target wiring for new iOS targets or target changes. Use when adding or modifying app targets, test bundles, WidgetKit targets, Share extensions, App Intents support, capabilities, or shared configuration through XcodeGen; for risky or uncertain target work, start with `phase-executor`, and pair with `ios-extension-builder` when the target belongs to an extension surface; do not use for general SwiftUI feature work that does not require target or build-graph changes.
 ---
 
 # XcodeGen Target Writer
@@ -29,6 +29,7 @@ Make target-level changes through `project.yml` without breaking existing Ambiti
 
 ## Execution Steps
 
+0. If the task is risky, multi-target, or unclear, require a plan first via `phase-executor` or `extension-plan.md`.
 1. Inspect current target patterns in `project.yml` before editing anything.
 2. Identify whether the new work belongs in:
    - `Ambitions`
@@ -44,10 +45,26 @@ Make target-level changes through `project.yml` without breaking existing Ambiti
    - `CODE_SIGN_ENTITLEMENTS`
    - bundle ID naming
    - scheme inclusion
-4. Verify whether supporting files already exist. If plist, entitlements, or target directories are missing, create only what is required.
-5. Check dependencies and shared-source usage carefully. Prefer reusing extension-safe contracts like `ExternalSurfaceSnapshotContracts` instead of exposing app internals directly.
-6. Confirm testability. Decide whether unit or UI test coverage or manual-test notes need updates.
-7. Regenerate and validate through the repo’s actual XcodeGen/build path when possible.
+4. Choose the first safe slice and verify whether supporting files already exist. If plist, entitlements, or target directories are missing, create only what is required.
+5. Self-check after each config slice before adding more files, capabilities, or target complexity.
+6. Check dependencies and shared-source usage carefully. Prefer reusing extension-safe contracts like `ExternalSurfaceSnapshotContracts` instead of exposing app internals directly.
+7. Confirm testability. Decide whether unit or UI test coverage or manual-test notes need updates.
+8. Retry only when the next change is narrower and grounded in the previous failure. Do not keep expanding `project.yml` speculatively.
+9. Stop if the requested target would introduce arbitrary target sprawl or requires a runtime seam the app does not yet have.
+10. Regenerate and validate through the repo’s actual XcodeGen/build path when possible.
+
+## Skill Chaining
+
+- Use `phase-executor` first for larger target or capability work.
+- Expect `ios-extension-builder` to call into this skill for extension target wiring.
+- Use `ios-qa-regression-checker` after target changes.
+
+## Failure Recovery
+
+- If the request is really about implementing extension behavior rather than target wiring, switch to `ios-extension-builder`.
+- If a required plist, entitlement, app group, or dependency seam does not exist yet, name it explicitly instead of bluffing a complete setup.
+- If validation tools are unavailable, still report config and file-level checks separately from runtime verification.
+- If the same config or generation failure repeats without a narrower next move, stop and report the block instead of churning `project.yml`.
 
 Use the checklists in `templates/`:
 

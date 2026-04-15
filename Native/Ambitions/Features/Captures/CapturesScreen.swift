@@ -93,6 +93,8 @@ struct CapturesScreen: View {
         switch sourceType {
         case .todayQuickCapture:
             return "Today quick capture"
+        case .notification:
+            return "Notification"
         case .shareExtensionText:
             return "Share extension text"
         case .shareExtensionURL:

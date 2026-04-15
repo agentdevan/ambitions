@@ -4,6 +4,11 @@
 
 Add a new App Intents-capable extension target and wire its plist and entitlements through XcodeGen using current Ambitions conventions.
 
+## Expected Likely Skill(s)
+
+- `phase-executor` if the target wiring is uncertain or broad
+- `xcodegen-target-writer`
+
 ## Success Looks Like
 
 - Inspects existing `project.yml` targets first.
@@ -22,7 +27,7 @@ Add a new App Intents-capable extension target and wire its plist and entitlemen
 - new or existing extension `Info.plist`
 - new or existing entitlements file
 
-## Should Not Touch By Default
+## Files That Should Not Be Touched By Default
 
 - planner/domain files
 - unrelated feature screens
