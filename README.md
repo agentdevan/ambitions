@@ -1,19 +1,13 @@
-# Ambitions Native iOS Pivot
+# Ambitions Native iOS App
 
-Ambitions is now pivoting from an Expo/React Native prototype into a single native iOS SwiftUI application.
+Ambitions is a native iOS SwiftUI application. The old Expo/React Native runtime has been removed from the repo root.
 
 ## Source of truth
 
-- `Native/Ambitions/` is the new UI source of truth for the shipping app.
+- `Native/Ambitions/` is the UI source of truth for the shipping app.
 - `Sources/` contains the `AmbitionsDesignSystem` Swift package used by the native app.
 - `AppUI/Sources/` contains the `AmbitionsWidgetUI` Swift package used by the native app.
-- `src/`, `App.tsx`, Expo config, and the TypeScript goal engine remain in the repo as reference material only.
-
-## What changed
-
-- Added a native app shell with a real `@main` entry point, bootstrap flow, dependency container, and root tab navigation.
-- Added a production-minded folder layout for app, domain, services, persistence, features, UI, and preview support.
-- Added `project.yml` so XcodeGen can create the native iOS target against the existing local Swift packages.
+- `src/` contains legacy TypeScript reference material for migration/spec work only. It is not a shipping runtime.
 
 ## Native structure
 
@@ -34,13 +28,13 @@ Ambitions is now pivoting from an Expo/React Native prototype into a single nati
 
 ## Legacy boundary
 
-- Do not add new production UI work to Expo or React Native files.
-- Do not bridge React Native screens into SwiftUI.
-- If behavior from the old client is still useful, treat the TypeScript implementation as a specification/reference input for the native rewrite.
+- Do not add new production UI work outside `Native/Ambitions/`, `Sources/`, or `AppUI/Sources/`.
+- Do not reintroduce Expo or React Native boot/runtime files at the repo root.
+- If behavior from the old client is still useful, treat the TypeScript implementation as specification/reference input for the native rewrite.
 
 ## Running the native app
 
-This repo now includes an XcodeGen spec rather than a checked-in `.xcodeproj`, because this environment does not have Apple tooling.
+This repo includes an XcodeGen spec rather than a checked-in `.xcodeproj`.
 
 On a Mac with Xcode and XcodeGen installed:
 
@@ -48,15 +42,8 @@ On a Mac with Xcode and XcodeGen installed:
 2. Open `Ambitions.xcodeproj`.
 3. Build and run the `Ambitions` scheme on an iOS Simulator.
 
-## Current placeholder scope
+## Current status
 
-The native shell is production-oriented structurally, but the following still use placeholder/demo data:
+The app now boots through the native SwiftUI entry point and uses native repositories/services for Today, Goals, Habits, Insights, and Profile.
 
-- startup/session bootstrap
-- all five tab dashboards
-- widget actions
-- persistence
-- account/auth state
-- analytics and insights history
-
-The next step is replacing the stub services with native persistence-backed feature pipelines, starting with Today and Goals.
+Remaining legacy TypeScript code is retained only as migration/reference material and should not be treated as runnable product code.
