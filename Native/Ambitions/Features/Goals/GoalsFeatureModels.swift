@@ -139,6 +139,8 @@ enum GoalDetailActionKind: String, Sendable {
     case complete
     case delay
     case skip
+    case createReminder
+    case createCalendarEvent
     case askForSmallerStep
     case askWhyThisMatters
     case markNotRelevant

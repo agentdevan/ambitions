@@ -7,19 +7,22 @@ struct RepositoryBackedGoalsService: GoalsServicing {
     let adaptationService: GoalEngineAdaptationService
     let rescheduleEngine: RescheduleEngine
     let orchestrator: GoalEngineOrchestrator
+    let calendarRemindersService: any CalendarRemindersServicing
 
     init(
         repositories: AppRepositories,
         planner: DeterministicGoalPlanner = DeterministicGoalPlanner(),
         adaptationService: GoalEngineAdaptationService = GoalEngineAdaptationService(),
         rescheduleEngine: RescheduleEngine = RescheduleEngine(),
-        orchestrator: GoalEngineOrchestrator = GoalEngineOrchestrator()
+        orchestrator: GoalEngineOrchestrator = GoalEngineOrchestrator(),
+        calendarRemindersService: (any CalendarRemindersServicing)? = nil
     ) {
         self.repositories = repositories
         self.planner = planner
         self.adaptationService = adaptationService
         self.rescheduleEngine = rescheduleEngine
         self.orchestrator = orchestrator
+        self.calendarRemindersService = calendarRemindersService ?? StubCalendarRemindersService()
     }
 
     func loadOverview() async throws -> GoalsOverview {
@@ -827,6 +830,55 @@ private extension RepositoryBackedGoalsService {
                     state: .warning
                 )
             )
+        case .createReminder:
+            let selection = nextStepSchedulingSelection(goal: goal, step: selectedStep)
+            let authorization = await calendarRemindersService.requestAuthorizationIfNeeded(for: .reminders)
+            guard authorization.canWrite else {
+                return GoalDetailActionResponse(
+                    message: GoalDetailInlineMessage(
+                        title: "Reminders permission needed",
+                        body: "Enable Reminders access to create next-step reminders from Ambitions.",
+                        state: .warning
+                    )
+                )
+            }
+
+            _ = try await calendarRemindersService.createReminder(for: selection, now: now)
+            return GoalDetailActionResponse(
+                message: GoalDetailInlineMessage(
+                    title: "Reminder created",
+                    body: "\"\(selectedStep.title)\" was added to Reminders.",
+                    state: .success
+                )
+            )
+        case .createCalendarEvent:
+            let selection = nextStepSchedulingSelection(goal: goal, step: selectedStep)
+            let authorization = await calendarRemindersService.requestAuthorizationIfNeeded(for: .calendarEvents)
+            guard authorization.canWrite else {
+                return GoalDetailActionResponse(
+                    message: GoalDetailInlineMessage(
+                        title: "Calendar permission needed",
+                        body: "Enable Calendar access to add next-step events from Ambitions.",
+                        state: .warning
+                    )
+                )
+            }
+
+            let conflictReport = await calendarRemindersService.detectConflicts(for: selection, durationMinutes: 45, now: now)
+            let event = try await calendarRemindersService.createCalendarEvent(for: selection, durationMinutes: 45, now: now)
+            let conflictLine: String
+            if let conflictReport, conflictReport.hasConflicts {
+                conflictLine = " \(conflictReport.conflicts.count) overlap\(conflictReport.conflicts.count == 1 ? "" : "s") detected."
+            } else {
+                conflictLine = " No overlap detected."
+            }
+            return GoalDetailActionResponse(
+                message: GoalDetailInlineMessage(
+                    title: "Calendar event created",
+                    body: "\"\(event.title)\" was scheduled.\(conflictLine)",
+                    state: .success
+                )
+            )
         case .markNotRelevant:
             history.append(.notRelevant(base: base))
             try await repositories.feedback.saveEvents(history, goalID: goal.id)
@@ -1372,6 +1424,8 @@ private extension RepositoryBackedGoalsService {
                 GoalDetailActionState(kind: .complete, title: "Complete", systemImage: "checkmark", state: .success),
                 GoalDetailActionState(kind: .delay, title: "Delay", systemImage: "clock.arrow.circlepath", state: .default),
                 GoalDetailActionState(kind: .skip, title: "Skip", systemImage: "forward.fill", state: .warning),
+                GoalDetailActionState(kind: .createReminder, title: "Reminder", systemImage: "list.bullet.clipboard", state: .default),
+                GoalDetailActionState(kind: .createCalendarEvent, title: "Calendar event", systemImage: "calendar.badge.plus", state: .default),
                 GoalDetailActionState(kind: .askForSmallerStep, title: "Smaller step", systemImage: "scissors", state: .selected),
                 GoalDetailActionState(kind: .breakThisDownSmaller, title: "Break it down", systemImage: "rectangle.split.3x1", state: .selected),
                 GoalDetailActionState(kind: .imStuck, title: "I'm stuck", systemImage: "lifepreserver", state: .warning),
@@ -1549,6 +1603,10 @@ private extension RepositoryBackedGoalsService {
             return "Delayed from Goal Detail."
         case .skip:
             return "Skipped from Goal Detail without punitive language."
+        case .createReminder:
+            return "Created reminder from Goal Detail."
+        case .createCalendarEvent:
+            return "Created calendar event from Goal Detail."
         case .askForSmallerStep:
             return "Asked for a smaller version from Goal Detail."
         case .askWhyThisMatters:
@@ -1597,7 +1655,7 @@ private extension RepositoryBackedGoalsService {
             return .askForSmallerStep
         case .imStuck:
             return .stuck
-        case .complete, .askWhyThisMatters, .markNotRelevant, .showPath, .switchToUntimed, .showSupportMode, .raisePriority, .lowerPriority:
+        case .complete, .createReminder, .createCalendarEvent, .askWhyThisMatters, .markNotRelevant, .showPath, .switchToUntimed, .showSupportMode, .raisePriority, .lowerPriority:
             return nil
         }
     }
@@ -1853,6 +1911,17 @@ private extension RepositoryBackedGoalsService {
             planningStrategy: goal.planningStrategy,
             progressStrategy: goal.progressStrategy,
             plan: updatedPlan
+        )
+    }
+
+    func nextStepSchedulingSelection(goal: Goal, step: Step) -> NextStepSchedulingSelection {
+        NextStepSchedulingSelection(
+            goalID: goal.id,
+            goalTitle: goal.title,
+            stepID: step.id,
+            stepTitle: step.title,
+            stepSummary: step.summary ?? step.actionability.fallbackMicroStep,
+            suggestedDate: parseDate(step.timing.suggestedNextAt ?? step.timing.targetBy ?? step.timing.dueAt)
         )
     }
 

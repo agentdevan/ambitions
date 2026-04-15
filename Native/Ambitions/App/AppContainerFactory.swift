@@ -50,12 +50,19 @@ enum AppContainerFactory {
         let repositories = try await prepareRepositories(for: configuration)
         let snapshotWriter = ExternalSurfaceSnapshotWriter(repositories: repositories)
         let notificationService = LocalNotificationFoundation()
+        let calendarRemindersService = EventKitIntegrationService()
         let snapshotTodayService = SnapshotRefreshingTodayService(
-            base: RepositoryBackedTodayService(repositories: repositories),
+            base: RepositoryBackedTodayService(
+                repositories: repositories,
+                calendarRemindersService: calendarRemindersService
+            ),
             snapshotWriter: snapshotWriter
         )
         let snapshotGoalsService = SnapshotRefreshingGoalsService(
-            base: RepositoryBackedGoalsService(repositories: repositories),
+            base: RepositoryBackedGoalsService(
+                repositories: repositories,
+                calendarRemindersService: calendarRemindersService
+            ),
             snapshotWriter: snapshotWriter
         )
         let todayService = NotificationSchedulingTodayService(
@@ -86,6 +93,7 @@ enum AppContainerFactory {
             insightsService: RepositoryBackedInsightsService(repositories: repositories),
             profileService: RepositoryBackedProfileService(repositories: repositories),
             notificationService: notificationService,
+            calendarRemindersService: calendarRemindersService,
             actionRouter: DefaultAppActionRouter(navigation: navigation),
             externalRouter: externalRouter
         )

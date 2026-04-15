@@ -6,17 +6,20 @@ struct RepositoryBackedTodayService: TodayServicing {
     let adaptationService: GoalEngineAdaptationService
     let rescheduleEngine: RescheduleEngine
     let captureService: any CaptureServicing
+    let calendarRemindersService: any CalendarRemindersServicing
 
     init(
         repositories: AppRepositories,
         adaptationService: GoalEngineAdaptationService = GoalEngineAdaptationService(),
         rescheduleEngine: RescheduleEngine = RescheduleEngine(),
-        captureService: (any CaptureServicing)? = nil
+        captureService: (any CaptureServicing)? = nil,
+        calendarRemindersService: (any CalendarRemindersServicing)? = nil
     ) {
         self.repositories = repositories
         self.adaptationService = adaptationService
         self.rescheduleEngine = rescheduleEngine
         self.captureService = captureService ?? DefaultCaptureService(repository: repositories.captures)
+        self.calendarRemindersService = calendarRemindersService ?? StubCalendarRemindersService()
     }
 
     func loadTodayExperience(userDisplayName: String, now: Date) async throws -> TodayExperience {
@@ -455,6 +458,49 @@ private extension RepositoryBackedTodayService {
                 body: "Today recorded a quick bit of evidence without creating fake urgency.",
                 state: .success
             )
+        case .createReminder:
+            let selection = nextStepSchedulingSelection(goal: goal, step: selectedStep)
+            let authorization = await calendarRemindersService.requestAuthorizationIfNeeded(for: .reminders)
+            guard authorization.canWrite else {
+                message = TodayInlineMessage(
+                    title: "Reminders permission needed",
+                    body: "Enable Reminders access to create next-step reminders from Ambitions.",
+                    state: .warning
+                )
+                break
+            }
+
+            _ = try await calendarRemindersService.createReminder(for: selection, now: now)
+            message = TodayInlineMessage(
+                title: "Reminder created",
+                body: "\"\(selectedStep.title)\" was added to Reminders.",
+                state: .success
+            )
+        case .createCalendarEvent:
+            let selection = nextStepSchedulingSelection(goal: goal, step: selectedStep)
+            let authorization = await calendarRemindersService.requestAuthorizationIfNeeded(for: .calendarEvents)
+            guard authorization.canWrite else {
+                message = TodayInlineMessage(
+                    title: "Calendar permission needed",
+                    body: "Enable Calendar access to add next-step events from Ambitions.",
+                    state: .warning
+                )
+                break
+            }
+
+            let conflictReport = await calendarRemindersService.detectConflicts(for: selection, durationMinutes: 45, now: now)
+            let event = try await calendarRemindersService.createCalendarEvent(for: selection, durationMinutes: 45, now: now)
+            let conflictLine: String
+            if let conflictReport, conflictReport.hasConflicts {
+                conflictLine = " \(conflictReport.conflicts.count) overlap\(conflictReport.conflicts.count == 1 ? "" : "s") detected."
+            } else {
+                conflictLine = " No overlap detected."
+            }
+            message = TodayInlineMessage(
+                title: "Calendar event created",
+                body: "\"\(event.title)\" was scheduled.\(conflictLine)",
+                state: .success
+            )
         case .askForSmallerStep:
             let decision = rescheduleDecision(for: action.kind, step: selectedStep, history: events, now: now)
             events.append(.askedForSmallerVersion(base: base))
@@ -825,6 +871,8 @@ private extension RepositoryBackedTodayService {
                     actions: [
                         TodayInlineAction(kind: .complete, title: "Complete", systemImage: "checkmark", state: .success, target: target),
                         TodayInlineAction(kind: .askForSmallerStep, title: "Smaller step", systemImage: "scissors", state: .selected, target: target),
+                        TodayInlineAction(kind: .createReminder, title: "Reminder", systemImage: "list.bullet.clipboard", state: .default, target: target),
+                        TodayInlineAction(kind: .createCalendarEvent, title: "Calendar event", systemImage: "calendar.badge.plus", state: .default, target: target),
                         TodayInlineAction(kind: .askWhyThisMatters, title: "Why this matters", systemImage: "questionmark.circle", state: .default, target: target),
                         TodayInlineAction(kind: .openDetail, title: "Open detail", systemImage: "arrow.right.circle", state: .default, target: target)
                     ]
@@ -845,6 +893,8 @@ private extension RepositoryBackedTodayService {
                     TodayInlineAction(kind: .complete, title: "Complete", systemImage: "checkmark", state: .success, target: target),
                     TodayInlineAction(kind: .delay, title: "Delay", systemImage: "clock.arrow.circlepath", state: .default, target: target),
                     TodayInlineAction(kind: .skip, title: "Skip", systemImage: "forward.fill", state: .warning, target: target),
+                    TodayInlineAction(kind: .createReminder, title: "Reminder", systemImage: "list.bullet.clipboard", state: .default, target: target),
+                    TodayInlineAction(kind: .createCalendarEvent, title: "Calendar event", systemImage: "calendar.badge.plus", state: .default, target: target),
                     TodayInlineAction(kind: .askForSmallerStep, title: "Smaller step", systemImage: "scissors", state: .selected, target: target),
                     TodayInlineAction(kind: .askWhyThisMatters, title: "Why this matters", systemImage: "questionmark.circle", state: .default, target: target),
                     TodayInlineAction(kind: .markNotRelevant, title: "Not relevant", systemImage: "nosign", state: .warning, target: target),
@@ -1173,7 +1223,7 @@ private extension RepositoryBackedTodayService {
             return .askForSmallerStep
         case .askForHelp:
             return .stuck
-        case .complete, .askWhyThisMatters, .markNotRelevant, .openDetail, .quickLog, .dismissCelebration:
+        case .complete, .createReminder, .createCalendarEvent, .askWhyThisMatters, .markNotRelevant, .openDetail, .quickLog, .dismissCelebration:
             return nil
         }
     }
@@ -1186,6 +1236,10 @@ private extension RepositoryBackedTodayService {
             return "Delayed from Today to reduce pressure."
         case .skip:
             return "Skipped from Today without punitive language."
+        case .createReminder:
+            return "Created reminder from Today."
+        case .createCalendarEvent:
+            return "Created calendar event from Today."
         case .askForSmallerStep:
             return "Asked for a smaller version from Today."
         case .askWhyThisMatters:
@@ -1197,6 +1251,17 @@ private extension RepositoryBackedTodayService {
         case .openDetail, .askForHelp, .dismissCelebration:
             return step.title
         }
+    }
+
+    func nextStepSchedulingSelection(goal: Goal, step: Step) -> NextStepSchedulingSelection {
+        NextStepSchedulingSelection(
+            goalID: goal.id,
+            goalTitle: goal.title,
+            stepID: step.id,
+            stepTitle: step.title,
+            stepSummary: step.summary ?? step.actionability.fallbackMicroStep,
+            suggestedDate: parseDate(step.timing.suggestedNextAt ?? step.timing.targetBy ?? step.timing.dueAt ?? "")
+        )
     }
 
     func shiftedTiming(for timing: GoalTiming, now: Date, adjustment: GoalTimingAdjustment) -> GoalTiming {

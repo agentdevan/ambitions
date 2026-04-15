@@ -30,6 +30,7 @@ enum PreviewAppContainerFactory {
             insightsService: StubInsightsService(fixtures: fixtures),
             profileService: StubProfileService(fixtures: fixtures),
             notificationService: StubNotificationService(),
+            calendarRemindersService: StubCalendarRemindersService(),
             actionRouter: DefaultAppActionRouter(navigation: navigation),
             externalRouter: externalRouter
         )

@@ -26,6 +26,10 @@
     <true/>
     <key>NSSupportsLiveActivities</key>
     <true/>
+    <key>NSCalendarsUsageDescription</key>
+    <string>Ambitions uses calendar access to schedule selected next steps as events.</string>
+    <key>NSRemindersUsageDescription</key>
+    <string>Ambitions uses reminders access to save selected next steps for follow-through.</string>
     <key>UIApplicationSupportsIndirectInputEvents</key>
     <true/>
     <key>UIApplicationSceneManifest</key>

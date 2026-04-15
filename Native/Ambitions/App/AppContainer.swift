@@ -14,6 +14,7 @@ final class AppContainer {
     let insightsService: any InsightsServicing
     let profileService: any ProfileServicing
     let notificationService: any NotificationServicing
+    let calendarRemindersService: any CalendarRemindersServicing
     let actionRouter: any AppActionRouting
     let externalRouter: any AppExternalRouting
 
@@ -27,6 +28,7 @@ final class AppContainer {
         insightsService: any InsightsServicing,
         profileService: any ProfileServicing,
         notificationService: any NotificationServicing,
+        calendarRemindersService: any CalendarRemindersServicing,
         actionRouter: any AppActionRouting,
         externalRouter: any AppExternalRouting
     ) {
@@ -39,6 +41,7 @@ final class AppContainer {
         self.insightsService = insightsService
         self.profileService = profileService
         self.notificationService = notificationService
+        self.calendarRemindersService = calendarRemindersService
         self.actionRouter = actionRouter
         self.externalRouter = externalRouter
     }
