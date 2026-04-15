@@ -1,0 +1,233 @@
+name: iOS Native Validation
+
+on:
+  pull_request:
+  push:
+    branches:
+      - main
+
+jobs:
+  ios-native-validation:
+    runs-on: macos-latest
+    defaults:
+      run:
+        shell: bash
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Detect repository shape
+        id: detect
+        run: |
+          set -euo pipefail
+
+          package_manager=none
+          if [[ -f pnpm-lock.yaml ]]; then
+            package_manager=pnpm
+          elif [[ -f yarn.lock ]]; then
+            package_manager=yarn
+          elif [[ -f package-lock.json ]]; then
+            package_manager=npm
+          fi
+
+          has_package_json=false
+          if [[ -f package.json ]]; then
+            has_package_json=true
+          fi
+
+          repo_type=unknown
+          if [[ -f package.json ]] && ruby -rjson -e 'pkg = JSON.parse(File.read("package.json")); deps = (pkg["dependencies"] || {}).merge(pkg["devDependencies"] || {}); exit((deps.key?("expo") && (File.exist?("app.json") || Dir.glob("app.config.*").any? || File.exist?("expo-env.d.ts"))) ? 0 : 1)'; then
+            repo_type=expo-prebuild
+          elif [[ -f package.json ]] && ruby -rjson -e 'pkg = JSON.parse(File.read("package.json")); deps = (pkg["dependencies"] || {}).merge(pkg["devDependencies"] || {}); exit(deps.key?("react-native") ? 0 : 1)'; then
+            repo_type=bare-react-native
+          elif [[ -f project.yml ]] || find . -maxdepth 4 \( -name "*.xcodeproj" -o -name "*.xcworkspace" \) -print -quit | grep -q .; then
+            repo_type=native-ios
+          fi
+
+          echo "package_manager=$package_manager" >> "$GITHUB_OUTPUT"
+          echo "has_package_json=$has_package_json" >> "$GITHUB_OUTPUT"
+          echo "repo_type=$repo_type" >> "$GITHUB_OUTPUT"
+
+      - name: Set up Node.js (npm)
+        if: steps.detect.outputs.package_manager == 'npm'
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - name: Set up Node.js (yarn)
+        if: steps.detect.outputs.package_manager == 'yarn'
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: yarn
+
+      - name: Set up Node.js (pnpm)
+        if: steps.detect.outputs.package_manager == 'pnpm'
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: pnpm
+
+      - name: Set up Node.js
+        if: steps.detect.outputs.package_manager == 'none'
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Install JavaScript dependencies
+        if: steps.detect.outputs.has_package_json == 'true'
+        run: |
+          set -euo pipefail
+
+          case "${{ steps.detect.outputs.package_manager }}" in
+            npm)
+              npm ci
+              ;;
+            yarn)
+              corepack enable
+              yarn install --frozen-lockfile
+              ;;
+            pnpm)
+              corepack enable
+              pnpm install --frozen-lockfile
+              ;;
+            none)
+              echo "package.json is present, but no npm/yarn/pnpm lockfile was found."
+              exit 1
+              ;;
+          esac
+
+      - name: Install XcodeGen
+        if: steps.detect.outputs.repo_type == 'native-ios' && hashFiles('project.yml') != ''
+        run: brew install xcodegen
+
+      - name: Generate native iOS project
+        run: |
+          set -euo pipefail
+
+          case "${{ steps.detect.outputs.repo_type }}" in
+            expo-prebuild)
+              npx expo prebuild --platform ios --non-interactive
+              ;;
+            native-ios)
+              if [[ -f project.yml ]]; then
+                xcodegen generate
+              fi
+              ;;
+            bare-react-native)
+              echo "Bare React Native repo detected; using checked-in native iOS project."
+              ;;
+            *)
+              echo "Unable to determine how to generate or validate native iOS files."
+              exit 1
+              ;;
+          esac
+
+      - name: Install CocoaPods dependencies
+        run: |
+          set -euo pipefail
+
+          podfile_path="$(find . -name Podfile -print -quit)"
+          if [[ -z "${podfile_path:-}" ]]; then
+            echo "No Podfile found; skipping CocoaPods install."
+            exit 0
+          fi
+
+          podfile_dir="$(dirname "$podfile_path")"
+
+          if ! command -v pod >/dev/null 2>&1; then
+            sudo gem install cocoapods
+          fi
+
+          cd "$podfile_dir"
+          pod install
+
+      - name: Discover Xcode build target
+        id: discover
+        run: |
+          set -euo pipefail
+
+          project_path=""
+          workspace_path=""
+          scheme=""
+
+          if [[ -f project.yml ]]; then
+            discovered_project_name="$(ruby -ryaml -e 'data = YAML.safe_load(File.read("project.yml")); puts data["name"] if data["name"]')"
+            discovered_scheme_count="$(ruby -ryaml -e 'data = YAML.safe_load(File.read("project.yml")) || {}; schemes = data["schemes"] || {}; puts schemes.keys.length')"
+            if [[ -n "${discovered_project_name:-}" && -d "${discovered_project_name}.xcodeproj" ]]; then
+              project_path="${discovered_project_name}.xcodeproj"
+            fi
+            if [[ "${discovered_scheme_count:-0}" == "1" ]]; then
+              scheme="$(ruby -ryaml -e 'data = YAML.safe_load(File.read("project.yml")) || {}; schemes = data["schemes"] || {}; puts schemes.keys.first if schemes.keys.first')"
+            fi
+          fi
+
+          if [[ -z "$workspace_path" ]]; then
+            mapfile -t workspaces < <(find . -maxdepth 4 -name "*.xcworkspace" -print | sort)
+            if [[ "${#workspaces[@]}" == "1" ]]; then
+              workspace_path="${workspaces[0]}"
+            fi
+          fi
+
+          if [[ -z "$project_path" ]]; then
+            mapfile -t projects < <(find . -maxdepth 4 -name "*.xcodeproj" -print | sort)
+            if [[ "${#projects[@]}" == "1" ]]; then
+              project_path="${projects[0]}"
+            fi
+          fi
+
+          if [[ -z "$scheme" ]]; then
+            mapfile -t schemes < <(find . -path "*/xcshareddata/xcschemes/*.xcscheme" -print | sort)
+            if [[ "${#schemes[@]}" == "1" ]]; then
+              scheme="$(basename "${schemes[0]}" .xcscheme)"
+            fi
+          fi
+
+          can_build=false
+          if [[ -n "$scheme" && ( -n "$workspace_path" || -n "$project_path" ) ]]; then
+            can_build=true
+          fi
+
+          echo "project_path=$project_path" >> "$GITHUB_OUTPUT"
+          echo "workspace_path=$workspace_path" >> "$GITHUB_OUTPUT"
+          echo "scheme=$scheme" >> "$GITHUB_OUTPUT"
+          echo "can_build=$can_build" >> "$GITHUB_OUTPUT"
+
+      - name: Validate native iOS build
+        if: steps.discover.outputs.can_build == 'true'
+        run: |
+          set -euo pipefail
+
+          xcode_args=()
+          if [[ -n "${{ steps.discover.outputs.workspace_path }}" ]]; then
+            xcode_args+=(-workspace "${{ steps.discover.outputs.workspace_path }}")
+          else
+            xcode_args+=(-project "${{ steps.discover.outputs.project_path }}")
+          fi
+
+          xcodebuild \
+            "${xcode_args[@]}" \
+            -scheme "${{ steps.discover.outputs.scheme }}" \
+            -resolvePackageDependencies
+
+          xcodebuild \
+            "${xcode_args[@]}" \
+            -scheme "${{ steps.discover.outputs.scheme }}" \
+            -sdk iphonesimulator \
+            -destination "generic/platform=iOS Simulator" \
+            CODE_SIGNING_ALLOWED=NO \
+            build
+
+      - name: Validate generated native artifacts
+        if: steps.discover.outputs.can_build != 'true'
+        run: |
+          set -euo pipefail
+
+          if find . -maxdepth 4 \( -name "*.xcodeproj" -o -name "*.xcworkspace" \) -print -quit | grep -q .; then
+            echo "Native project artifacts were generated successfully."
+          else
+            echo "Expected a generated .xcodeproj or .xcworkspace, but none was found."
+            exit 1
+          fi
