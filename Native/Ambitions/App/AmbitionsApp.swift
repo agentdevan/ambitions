@@ -7,6 +7,9 @@ struct AmbitionsApp: App {
     var body: some Scene {
         WindowGroup {
             LaunchGateView(bootstrapper: bootstrapper)
+                .onOpenURL { url in
+                    bootstrapper.handleDeepLink(url)
+                }
         }
     }
 }

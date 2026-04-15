@@ -24,6 +24,7 @@ final class AppBootstrapper {
 
     private let mode: BootstrapMode
     private var hasStarted = false
+    private var pendingDeepLinks: [URL] = []
 
     init(mode: BootstrapMode = .automatic) {
         self.mode = mode
@@ -37,6 +38,7 @@ final class AppBootstrapper {
         do {
             let container = try await AppContainerFactory.make(configuration: resolvedConfiguration)
             phase = .ready(container)
+            flushPendingDeepLinks(using: container)
         } catch {
             phase = .failed("Bootstrap failed: \(error.localizedDescription)")
         }
@@ -45,6 +47,25 @@ final class AppBootstrapper {
     func retry() async {
         hasStarted = false
         await start()
+    }
+
+    func handleDeepLink(_ url: URL) {
+        switch phase {
+        case let .ready(container):
+            container.externalRouter.handleDeepLink(url)
+        case .idle, .launching, .failed:
+            pendingDeepLinks.append(url)
+        }
+    }
+
+    func handleNotificationPayload(_ payload: AppNotificationRoutingPayload) {
+        guard case let .ready(container) = phase else { return }
+        container.externalRouter.handleNotificationPayload(payload)
+    }
+
+    func handleWidgetPayload(_ payload: AppWidgetRoutingPayload) {
+        guard case let .ready(container) = phase else { return }
+        container.externalRouter.handleWidgetPayload(payload)
     }
 
     private var resolvedConfiguration: AppBootstrapConfiguration {
@@ -86,4 +107,13 @@ final class AppBootstrapper {
         }
     }
     #endif
+
+    private func flushPendingDeepLinks(using container: AppContainer) {
+        guard pendingDeepLinks.isEmpty == false else { return }
+        let queued = pendingDeepLinks
+        pendingDeepLinks.removeAll(keepingCapacity: false)
+        for url in queued {
+            container.externalRouter.handleDeepLink(url)
+        }
+    }
 }

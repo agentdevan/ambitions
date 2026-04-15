@@ -12,6 +12,7 @@ enum PreviewAppContainerFactory {
     ) -> AppContainer {
         let fixtures = PreviewFixtures.default
         let navigation = AppNavigationModel(selectedTab: fixtures.preferences.preferredTab)
+        let externalRouter = DefaultAppExternalRouter(navigation: navigation)
         return AppContainer(
             session: AppSession(
                 source: .preview,
@@ -28,7 +29,8 @@ enum PreviewAppContainerFactory {
             habitsService: StubHabitsService(dashboard: habitsDashboard),
             insightsService: StubInsightsService(fixtures: fixtures),
             profileService: StubProfileService(fixtures: fixtures),
-            actionRouter: DefaultAppActionRouter(navigation: navigation)
+            actionRouter: DefaultAppActionRouter(navigation: navigation),
+            externalRouter: externalRouter
         )
     }
 }

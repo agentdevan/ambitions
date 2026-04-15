@@ -14,6 +14,7 @@ final class AppContainer {
     let insightsService: any InsightsServicing
     let profileService: any ProfileServicing
     let actionRouter: any AppActionRouting
+    let externalRouter: any AppExternalRouting
 
     init(
         session: AppSession,
@@ -24,7 +25,8 @@ final class AppContainer {
         habitsService: any HabitsServicing,
         insightsService: any InsightsServicing,
         profileService: any ProfileServicing,
-        actionRouter: any AppActionRouting
+        actionRouter: any AppActionRouting,
+        externalRouter: any AppExternalRouting
     ) {
         self.session = session
         self.appearancePreference = appearancePreference
@@ -35,5 +37,6 @@ final class AppContainer {
         self.insightsService = insightsService
         self.profileService = profileService
         self.actionRouter = actionRouter
+        self.externalRouter = externalRouter
     }
 }

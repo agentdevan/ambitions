@@ -53,6 +53,7 @@ enum AppContainerFactory {
         let startupService = DefaultStartupService(preferencesStore: preferencesStore, appStateRepository: repositories.appState)
         let session = try await startupService.prepareSession(source: configuration.sessionSource)
         let navigation = AppNavigationModel(selectedTab: session.initialTab)
+        let externalRouter = DefaultAppExternalRouter(navigation: navigation)
 
         return AppContainer(
             session: session,
@@ -63,7 +64,8 @@ enum AppContainerFactory {
             habitsService: RepositoryBackedHabitsService(repositories: repositories),
             insightsService: RepositoryBackedInsightsService(repositories: repositories),
             profileService: RepositoryBackedProfileService(repositories: repositories),
-            actionRouter: DefaultAppActionRouter(navigation: navigation)
+            actionRouter: DefaultAppActionRouter(navigation: navigation),
+            externalRouter: externalRouter
         )
     }
 

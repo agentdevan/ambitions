@@ -31,10 +31,14 @@ struct GoalRouteTarget: Hashable, Identifiable, Sendable {
 final class AppNavigationModel {
     var selectedTab: AppTab
     var goalsPath: [GoalRouteTarget]
+    var lastExternalRoute: AppExternalRoute?
+    var lastExternalRouteSource: AppExternalRouteSource?
 
     init(selectedTab: AppTab) {
         self.selectedTab = selectedTab
         goalsPath = []
+        lastExternalRoute = nil
+        lastExternalRouteSource = nil
     }
 
     func openGoalDetail(_ target: GoalRouteTarget) {
