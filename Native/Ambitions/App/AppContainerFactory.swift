@@ -48,19 +48,29 @@ enum AppContainerFactory {
 
     static func make(configuration: AppBootstrapConfiguration) async throws -> AppContainer {
         let repositories = try await prepareRepositories(for: configuration)
+        let snapshotWriter = ExternalSurfaceSnapshotWriter(repositories: repositories)
+        let todayService = SnapshotRefreshingTodayService(
+            base: RepositoryBackedTodayService(repositories: repositories),
+            snapshotWriter: snapshotWriter
+        )
+        let goalsService = SnapshotRefreshingGoalsService(
+            base: RepositoryBackedGoalsService(repositories: repositories),
+            snapshotWriter: snapshotWriter
+        )
 
         let preferencesStore = RepositoryBackedAppPreferencesStore(appStateRepository: repositories.appState)
         let startupService = DefaultStartupService(preferencesStore: preferencesStore, appStateRepository: repositories.appState)
         let session = try await startupService.prepareSession(source: configuration.sessionSource)
         let navigation = AppNavigationModel(selectedTab: session.initialTab)
         let externalRouter = DefaultAppExternalRouter(navigation: navigation)
+        await snapshotWriter.refresh(now: .now)
 
         return AppContainer(
             session: session,
             appearancePreference: session.appearancePreference,
             navigation: navigation,
-            todayService: RepositoryBackedTodayService(repositories: repositories),
-            goalsService: RepositoryBackedGoalsService(repositories: repositories),
+            todayService: todayService,
+            goalsService: goalsService,
             habitsService: RepositoryBackedHabitsService(repositories: repositories),
             insightsService: RepositoryBackedInsightsService(repositories: repositories),
             profileService: RepositoryBackedProfileService(repositories: repositories),
