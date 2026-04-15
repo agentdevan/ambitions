@@ -4,15 +4,18 @@ import Foundation
 struct RepositoryBackedTodayService: TodayServicing {
     let repositories: AppRepositories
     let adaptationService: GoalEngineAdaptationService
+    let rescheduleEngine: RescheduleEngine
     let captureService: any CaptureServicing
 
     init(
         repositories: AppRepositories,
         adaptationService: GoalEngineAdaptationService = GoalEngineAdaptationService(),
+        rescheduleEngine: RescheduleEngine = RescheduleEngine(),
         captureService: (any CaptureServicing)? = nil
     ) {
         self.repositories = repositories
         self.adaptationService = adaptationService
+        self.rescheduleEngine = rescheduleEngine
         self.captureService = captureService ?? DefaultCaptureService(repository: repositories.captures)
     }
 
@@ -32,6 +35,9 @@ struct RepositoryBackedTodayService: TodayServicing {
                 )
             )
         case .askForHelp:
+            if action.target.goalID != nil, action.target.stepID != nil {
+                return try await performFeedbackAction(action, now: now)
+            }
             return TodayActionResponse(
                 message: TodayInlineMessage(
                     title: "Support context captured",
@@ -290,15 +296,29 @@ private extension RepositoryBackedTodayService {
                 state: .success
             )
         case .delay:
-            events.append(.delayed(base: base, timingAdjustment: .laterToday, date: nil))
+            let decision = rescheduleDecision(for: action.kind, step: selectedStep, history: events, now: now)
+            let adjustment = decision?.timingAdjustment ?? .laterToday
+            events.append(.delayed(base: base, timingAdjustment: adjustment, date: decision?.suggestedTime))
+            if let smaller = decision?.smallerStep {
+                events.append(
+                    .askedForSmallerVersion(
+                        base: GoalFeedbackEventBase(
+                            id: "today-reschedule-smaller-\(UUID().uuidString)",
+                            stepID: stepID,
+                            occurredAt: timestamp,
+                            note: smaller.note
+                        )
+                    )
+                )
+            }
             try await repositories.feedback.saveEvents(events, goalID: goalID)
             goal = update(goal: goal, stepID: stepID) { step in
-                let shifted = shiftedTiming(for: step.timing, now: now, adjustment: .laterToday)
+                let shifted = shiftedTiming(for: step.timing, now: now, adjustment: adjustment)
                 return Step(
                     id: step.id,
                     sectionID: step.sectionID,
                     title: step.title,
-                    summary: step.summary,
+                    summary: decision?.smallerStep?.summary ?? step.summary,
                     type: step.type,
                     state: step.state,
                     owner: step.owner,
@@ -312,21 +332,52 @@ private extension RepositoryBackedTodayService {
                 )
             }
             try await repositories.goals.saveGoals([goal])
+            let deferLine: String = {
+                guard let decision, decision.deferRecommendation.indicatesDeferral else { return "" }
+                return " It was deferred with a calmer retry window."
+            }()
             message = TodayInlineMessage(
                 title: "Pressure softened",
-                body: "The step stays in play without pretending it must happen right now.",
+                body: "The step stays in play without pretending it must happen right now.\(deferLine)",
                 state: .selected
             )
         case .skip:
             events.append(.skipped(base: base, reasonCode: .notNow))
+            let decision = rescheduleDecision(for: action.kind, step: selectedStep, history: events, now: now)
+            if let adjustment = decision?.timingAdjustment {
+                events.append(
+                    .delayed(
+                        base: GoalFeedbackEventBase(
+                            id: "today-skip-reschedule-\(UUID().uuidString)",
+                            stepID: stepID,
+                            occurredAt: timestamp,
+                            note: decision?.rationale
+                        ),
+                        timingAdjustment: adjustment,
+                        date: decision?.suggestedTime
+                    )
+                )
+            }
+            if let smaller = decision?.smallerStep {
+                events.append(
+                    .askedForSmallerVersion(
+                        base: GoalFeedbackEventBase(
+                            id: "today-skip-smaller-\(UUID().uuidString)",
+                            stepID: stepID,
+                            occurredAt: timestamp,
+                            note: smaller.note
+                        )
+                    )
+                )
+            }
             try await repositories.feedback.saveEvents(events, goalID: goalID)
             goal = update(goal: goal, stepID: stepID) { step in
-                let shifted = shiftedTiming(for: step.timing, now: now, adjustment: .laterThisWeek)
+                let shifted = shiftedTiming(for: step.timing, now: now, adjustment: decision?.timingAdjustment ?? .laterThisWeek)
                 return Step(
                     id: step.id,
                     sectionID: step.sectionID,
                     title: step.title,
-                    summary: step.summary,
+                    summary: decision?.smallerStep?.summary ?? step.summary,
                     type: step.type,
                     state: step.state,
                     owner: step.owner,
@@ -340,9 +391,13 @@ private extension RepositoryBackedTodayService {
                 )
             }
             try await repositories.goals.saveGoals([goal])
+            let deferLine: String = {
+                guard let decision, decision.deferRecommendation.indicatesDeferral else { return "" }
+                return " The next attempt was deferred to prevent churn."
+            }()
             message = TodayInlineMessage(
                 title: "Moved out of today",
-                body: "The step was skipped without turning it into a failure state.",
+                body: "The step was skipped without turning it into a failure state.\(deferLine)",
                 state: .warning
             )
         case .markNotRelevant:
@@ -401,12 +456,30 @@ private extension RepositoryBackedTodayService {
                 state: .success
             )
         case .askForSmallerStep:
+            let decision = rescheduleDecision(for: action.kind, step: selectedStep, history: events, now: now)
             events.append(.askedForSmallerVersion(base: base))
+            if let adjustment = decision?.timingAdjustment {
+                events.append(
+                    .delayed(
+                        base: GoalFeedbackEventBase(
+                            id: "today-smaller-reschedule-\(UUID().uuidString)",
+                            stepID: stepID,
+                            occurredAt: timestamp,
+                            note: decision?.rationale
+                        ),
+                        timingAdjustment: adjustment,
+                        date: decision?.suggestedTime
+                    )
+                )
+            }
             try await repositories.feedback.saveEvents(events, goalID: goalID)
             let adjustment = adjustmentPayload(draft: draft, goal: goal, step: selectedStep, history: events)
-            if let adjustment,
-               let replacement = smallerSummary(from: adjustment.recommendation, step: selectedStep) {
+            let replacement = adjustment.flatMap { smallerSummary(from: $0.recommendation, step: selectedStep) }
+                ?? decision?.smallerStep?.summary
+                ?? selectedStep.actionability.fallbackMicroStep
+            if replacement.isEmpty == false {
                 goal = update(goal: goal, stepID: stepID) { step in
+                    let timing = decision?.timingAdjustment.map { shiftedTiming(for: step.timing, now: now, adjustment: $0) } ?? step.timing
                     Step(
                         id: step.id,
                         sectionID: step.sectionID,
@@ -415,7 +488,7 @@ private extension RepositoryBackedTodayService {
                         type: step.type,
                         state: step.state,
                         owner: step.owner,
-                        timing: step.timing,
+                        timing: timing,
                         dependencyStepIDs: step.dependencyStepIDs,
                         isOptional: step.isOptional,
                         isRepeatable: step.isRepeatable,
@@ -427,7 +500,9 @@ private extension RepositoryBackedTodayService {
                 try await repositories.goals.saveGoals([goal])
                 message = TodayInlineMessage(
                     title: "Smaller version ready",
-                    body: replacement,
+                    body: decision?.deferRecommendation.indicatesDeferral == true
+                        ? "\(replacement)\n\nThe next attempt was deferred to keep the ask realistic."
+                        : replacement,
                     state: .selected
                 )
             } else {
@@ -437,6 +512,63 @@ private extension RepositoryBackedTodayService {
                     state: .selected
                 )
             }
+        case .askForHelp:
+            let decision = rescheduleDecision(for: action.kind, step: selectedStep, history: events, now: now)
+            events.append(.confused(base: base, confusionType: .unclearAction))
+            if let smaller = decision?.smallerStep {
+                events.append(
+                    .askedForSmallerVersion(
+                        base: GoalFeedbackEventBase(
+                            id: "today-help-smaller-\(UUID().uuidString)",
+                            stepID: stepID,
+                            occurredAt: timestamp,
+                            note: smaller.note
+                        )
+                    )
+                )
+            }
+            if let adjustment = decision?.timingAdjustment {
+                events.append(
+                    .delayed(
+                        base: GoalFeedbackEventBase(
+                            id: "today-help-delay-\(UUID().uuidString)",
+                            stepID: stepID,
+                            occurredAt: timestamp,
+                            note: decision?.rationale
+                        ),
+                        timingAdjustment: adjustment,
+                        date: decision?.suggestedTime
+                    )
+                )
+            }
+            try await repositories.feedback.saveEvents(events, goalID: goalID)
+            if let decision {
+                goal = update(goal: goal, stepID: stepID) { step in
+                    let shifted = decision.timingAdjustment.map { shiftedTiming(for: step.timing, now: now, adjustment: $0) } ?? step.timing
+                    return Step(
+                        id: step.id,
+                        sectionID: step.sectionID,
+                        title: step.title,
+                        summary: decision.smallerStep?.summary ?? step.summary,
+                        type: step.type,
+                        state: step.state,
+                        owner: step.owner,
+                        timing: shifted,
+                        dependencyStepIDs: step.dependencyStepIDs,
+                        isOptional: step.isOptional,
+                        isRepeatable: step.isRepeatable,
+                        evidenceRequired: step.evidenceRequired,
+                        successSignals: step.successSignals,
+                        actionability: step.actionability
+                    )
+                }
+                try await repositories.goals.saveGoals([goal])
+            }
+            message = TodayInlineMessage(
+                title: "A calmer next move is ready",
+                body: decision?.smallerStep?.summary ?? selectedStep.actionability.fallbackMicroStep,
+                state: .selected
+            )
         case .askWhyThisMatters:
             events.append(.askedWhyThisMatters(base: base))
             try await repositories.feedback.saveEvents(events, goalID: goalID)
@@ -449,7 +581,7 @@ private extension RepositoryBackedTodayService {
                 body: explanation,
                 state: .selected
             )
-        case .openDetail, .askForHelp, .dismissCelebration:
+        case .openDetail, .dismissCelebration:
             break
         }
 
@@ -1009,6 +1141,40 @@ private extension RepositoryBackedTodayService {
             return "A low-pressure experiment"
         default:
             return goal.summary ?? "A calm use of spare time"
+        }
+    }
+
+    func rescheduleDecision(
+        for kind: TodayActionKind,
+        step: Step,
+        history: [GoalFeedbackEvent],
+        now: Date
+    ) -> RescheduleDecision? {
+        guard let trigger = rescheduleTrigger(for: kind) else { return nil }
+        return rescheduleEngine.decide(
+            RescheduleEngineInput(
+                stepID: step.id,
+                timing: step.timing,
+                feedbackHistory: history,
+                trigger: trigger,
+                fallbackMicroStep: step.actionability.fallbackMicroStep,
+                now: now
+            )
+        )
+    }
+
+    func rescheduleTrigger(for kind: TodayActionKind) -> RescheduleTrigger? {
+        switch kind {
+        case .delay:
+            return .delay
+        case .skip:
+            return .skip
+        case .askForSmallerStep:
+            return .askForSmallerStep
+        case .askForHelp:
+            return .stuck
+        case .complete, .askWhyThisMatters, .markNotRelevant, .openDetail, .quickLog, .dismissCelebration:
+            return nil
         }
     }
 

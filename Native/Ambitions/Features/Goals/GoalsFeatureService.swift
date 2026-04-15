@@ -5,17 +5,20 @@ struct RepositoryBackedGoalsService: GoalsServicing {
     let repositories: AppRepositories
     let planner: DeterministicGoalPlanner
     let adaptationService: GoalEngineAdaptationService
+    let rescheduleEngine: RescheduleEngine
     let orchestrator: GoalEngineOrchestrator
 
     init(
         repositories: AppRepositories,
         planner: DeterministicGoalPlanner = DeterministicGoalPlanner(),
         adaptationService: GoalEngineAdaptationService = GoalEngineAdaptationService(),
+        rescheduleEngine: RescheduleEngine = RescheduleEngine(),
         orchestrator: GoalEngineOrchestrator = GoalEngineOrchestrator()
     ) {
         self.repositories = repositories
         self.planner = planner
         self.adaptationService = adaptationService
+        self.rescheduleEngine = rescheduleEngine
         self.orchestrator = orchestrator
     }
 
@@ -740,30 +743,87 @@ private extension RepositoryBackedGoalsService {
                 )
             )
         case .delay:
-            history.append(.delayed(base: base, timingAdjustment: .laterToday, date: nil))
+            let decision = rescheduleDecision(for: request.kind, step: selectedStep, history: history, now: now)
+            let adjustment = decision?.timingAdjustment ?? .laterToday
+            history.append(.delayed(base: base, timingAdjustment: adjustment, date: decision?.suggestedTime))
+            if let smaller = decision?.smallerStep {
+                history.append(
+                    .askedForSmallerVersion(
+                        base: GoalFeedbackEventBase(
+                            id: "goal-detail-delay-smaller-\(UUID().uuidString)",
+                            stepID: selectedStep.id,
+                            occurredAt: timestamp,
+                            note: smaller.note
+                        )
+                    )
+                )
+            }
             try await repositories.feedback.saveEvents(history, goalID: goal.id)
             goal = update(goal: goal, stepID: selectedStep.id) { step in
-                updatedStep(step, summary: step.summary ?? step.actionability.fallbackMicroStep, timing: shiftedTiming(for: step.timing, now: now, adjustment: .laterToday))
+                updatedStep(
+                    step,
+                    summary: decision?.smallerStep?.summary ?? step.summary ?? step.actionability.fallbackMicroStep,
+                    timing: shiftedTiming(for: step.timing, now: now, adjustment: adjustment)
+                )
             }
             try await repositories.goals.saveGoals([goal])
+            let deferLine: String = {
+                guard let decision, decision.deferRecommendation.indicatesDeferral else { return "" }
+                return " The next attempt was deferred to keep pressure realistic."
+            }()
             return GoalDetailActionResponse(
                 message: GoalDetailInlineMessage(
                     title: "Pressure reduced",
-                    body: "The step remains visible, but the timing is gentler now.",
+                    body: "The step remains visible, but the timing is gentler now.\(deferLine)",
                     state: .selected
                 )
             )
         case .skip:
             history.append(.skipped(base: base, reasonCode: .notNow))
+            let decision = rescheduleDecision(for: request.kind, step: selectedStep, history: history, now: now)
+            if let adjustment = decision?.timingAdjustment {
+                history.append(
+                    .delayed(
+                        base: GoalFeedbackEventBase(
+                            id: "goal-detail-skip-delay-\(UUID().uuidString)",
+                            stepID: selectedStep.id,
+                            occurredAt: timestamp,
+                            note: decision?.rationale
+                        ),
+                        timingAdjustment: adjustment,
+                        date: decision?.suggestedTime
+                    )
+                )
+            }
+            if let smaller = decision?.smallerStep {
+                history.append(
+                    .askedForSmallerVersion(
+                        base: GoalFeedbackEventBase(
+                            id: "goal-detail-skip-smaller-\(UUID().uuidString)",
+                            stepID: selectedStep.id,
+                            occurredAt: timestamp,
+                            note: smaller.note
+                        )
+                    )
+                )
+            }
             try await repositories.feedback.saveEvents(history, goalID: goal.id)
             goal = update(goal: goal, stepID: selectedStep.id) { step in
-                updatedStep(step, summary: step.summary ?? step.actionability.fallbackMicroStep, timing: shiftedTiming(for: step.timing, now: now, adjustment: .laterThisWeek))
+                updatedStep(
+                    step,
+                    summary: decision?.smallerStep?.summary ?? step.summary ?? step.actionability.fallbackMicroStep,
+                    timing: shiftedTiming(for: step.timing, now: now, adjustment: decision?.timingAdjustment ?? .laterThisWeek)
+                )
             }
             try await repositories.goals.saveGoals([goal])
+            let deferLine: String = {
+                guard let decision, decision.deferRecommendation.indicatesDeferral else { return "" }
+                return " The next attempt is intentionally deferred to avoid churn."
+            }()
             return GoalDetailActionResponse(
                 message: GoalDetailInlineMessage(
                     title: "Moved out of the way",
-                    body: "The path stays intact without treating one skipped step like failure.",
+                    body: "The path stays intact without treating one skipped step like failure.\(deferLine)",
                     state: .warning
                 )
             )
@@ -811,18 +871,120 @@ private extension RepositoryBackedGoalsService {
                 )
             )
         case .askForSmallerStep:
+            let decision = rescheduleDecision(for: request.kind, step: selectedStep, history: history, now: now)
             history.append(.askedForSmallerVersion(base: base))
+            if let adjustment = decision?.timingAdjustment {
+                history.append(
+                    .delayed(
+                        base: GoalFeedbackEventBase(
+                            id: "goal-detail-smaller-delay-\(UUID().uuidString)",
+                            stepID: selectedStep.id,
+                            occurredAt: timestamp,
+                            note: decision?.rationale
+                        ),
+                        timingAdjustment: adjustment,
+                        date: decision?.suggestedTime
+                    )
+                )
+            }
             try await repositories.feedback.saveEvents(history, goalID: goal.id)
-            return try await applyAdaptiveRecommendation(goal: goal, draft: detail.draft, step: selectedStep, history: history, fallbackTitle: "Smaller version ready", fallbackBody: selectedStep.actionability.fallbackMicroStep)
+            goal = update(goal: goal, stepID: selectedStep.id) { step in
+                let timing = decision?.timingAdjustment.map { shiftedTiming(for: step.timing, now: now, adjustment: $0) } ?? step.timing
+                return updatedStep(
+                    step,
+                    summary: decision?.smallerStep?.summary ?? step.actionability.fallbackMicroStep,
+                    timing: timing
+                )
+            }
+            try await repositories.goals.saveGoals([goal])
+            return GoalDetailActionResponse(
+                message: GoalDetailInlineMessage(
+                    title: "Smaller version ready",
+                    body: decision?.smallerStep?.summary ?? selectedStep.actionability.fallbackMicroStep,
+                    state: .selected
+                )
+            )
         case .breakThisDownSmaller:
+            let decision = rescheduleDecision(for: request.kind, step: selectedStep, history: history, now: now)
             history.append(.tooBig(base: base))
             history.append(.askedForSmallerVersion(base: GoalFeedbackEventBase(id: "smaller-\(UUID().uuidString)", stepID: selectedStep.id, occurredAt: timestamp, note: "Break this down smaller.")))
+            if let adjustment = decision?.timingAdjustment {
+                history.append(
+                    .delayed(
+                        base: GoalFeedbackEventBase(
+                            id: "goal-detail-break-delay-\(UUID().uuidString)",
+                            stepID: selectedStep.id,
+                            occurredAt: timestamp,
+                            note: decision?.rationale
+                        ),
+                        timingAdjustment: adjustment,
+                        date: decision?.suggestedTime
+                    )
+                )
+            }
             try await repositories.feedback.saveEvents(history, goalID: goal.id)
-            return try await applyAdaptiveRecommendation(goal: goal, draft: detail.draft, step: selectedStep, history: history, fallbackTitle: "Broken down smaller", fallbackBody: selectedStep.actionability.fallbackMicroStep)
+            goal = update(goal: goal, stepID: selectedStep.id) { step in
+                let timing = decision?.timingAdjustment.map { shiftedTiming(for: step.timing, now: now, adjustment: $0) } ?? step.timing
+                return updatedStep(
+                    step,
+                    summary: decision?.smallerStep?.summary ?? step.actionability.fallbackMicroStep,
+                    timing: timing
+                )
+            }
+            try await repositories.goals.saveGoals([goal])
+            return GoalDetailActionResponse(
+                message: GoalDetailInlineMessage(
+                    title: "Broken down smaller",
+                    body: decision?.smallerStep?.summary ?? selectedStep.actionability.fallbackMicroStep,
+                    state: .selected
+                )
+            )
         case .imStuck:
+            let decision = rescheduleDecision(for: request.kind, step: selectedStep, history: history, now: now)
             history.append(.confused(base: base, confusionType: .unclearAction))
+            if let smaller = decision?.smallerStep {
+                history.append(
+                    .askedForSmallerVersion(
+                        base: GoalFeedbackEventBase(
+                            id: "goal-detail-stuck-smaller-\(UUID().uuidString)",
+                            stepID: selectedStep.id,
+                            occurredAt: timestamp,
+                            note: smaller.note
+                        )
+                    )
+                )
+            }
+            if let adjustment = decision?.timingAdjustment {
+                history.append(
+                    .delayed(
+                        base: GoalFeedbackEventBase(
+                            id: "goal-detail-stuck-delay-\(UUID().uuidString)",
+                            stepID: selectedStep.id,
+                            occurredAt: timestamp,
+                            note: decision?.rationale
+                        ),
+                        timingAdjustment: adjustment,
+                        date: decision?.suggestedTime
+                    )
+                )
+            }
             try await repositories.feedback.saveEvents(history, goalID: goal.id)
-            return try await applyAdaptiveRecommendation(goal: goal, draft: detail.draft, step: selectedStep, history: history, fallbackTitle: "A calmer next move is ready", fallbackBody: selectedStep.actionability.fallbackMicroStep)
+            goal = update(goal: goal, stepID: selectedStep.id) { step in
+                let timing = decision?.timingAdjustment.map { shiftedTiming(for: step.timing, now: now, adjustment: $0) } ?? step.timing
+                return updatedStep(
+                    step,
+                    summary: decision?.smallerStep?.summary ?? step.actionability.fallbackMicroStep,
+                    timing: timing
+                )
+            }
+            try await repositories.goals.saveGoals([goal])
+            return GoalDetailActionResponse(
+                message: GoalDetailInlineMessage(
+                    title: "A calmer next move is ready",
+                    body: decision?.smallerStep?.summary ?? selectedStep.actionability.fallbackMicroStep,
+                    state: .selected
+                )
+            )
         case .switchToUntimed:
             history.append(.delayed(base: base, timingAdjustment: .removeDeadline, date: nil))
             try await repositories.feedback.saveEvents(history, goalID: goal.id)
@@ -1403,6 +1565,40 @@ private extension RepositoryBackedGoalsService {
             return "Raised manual priority from Goal Detail."
         case .lowerPriority:
             return "Lowered manual priority from Goal Detail."
+        }
+    }
+
+    func rescheduleDecision(
+        for kind: GoalDetailActionKind,
+        step: Step,
+        history: [GoalFeedbackEvent],
+        now: Date
+    ) -> RescheduleDecision? {
+        guard let trigger = rescheduleTrigger(for: kind) else { return nil }
+        return rescheduleEngine.decide(
+            RescheduleEngineInput(
+                stepID: step.id,
+                timing: step.timing,
+                feedbackHistory: history,
+                trigger: trigger,
+                fallbackMicroStep: step.actionability.fallbackMicroStep,
+                now: now
+            )
+        )
+    }
+
+    func rescheduleTrigger(for kind: GoalDetailActionKind) -> RescheduleTrigger? {
+        switch kind {
+        case .delay:
+            return .delay
+        case .skip:
+            return .skip
+        case .askForSmallerStep, .breakThisDownSmaller:
+            return .askForSmallerStep
+        case .imStuck:
+            return .stuck
+        case .complete, .askWhyThisMatters, .markNotRelevant, .showPath, .switchToUntimed, .showSupportMode, .raisePriority, .lowerPriority:
+            return nil
         }
     }
 
