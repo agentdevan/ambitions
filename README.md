@@ -48,25 +48,29 @@ GitHub Actions validates iOS-native integrity on `macos-latest` in [.github/work
 
 What the workflow does:
 
-- Detects whether the repo is Expo prebuild, bare React Native, or native iOS-only.
-- Detects `npm`, `yarn`, or `pnpm` from lockfiles before installing JavaScript dependencies.
-- Generates native iOS files when required.
+- Verifies that `project.yml` exists.
+- Installs XcodeGen and runs `xcodegen generate`.
 - Runs `pod install` only when a `Podfile` exists.
-- Runs `xcodebuild` only when the project/workspace and scheme can be discovered from checked-in repo files.
-- Otherwise, falls back to validating successful native generation plus the presence of a generated `.xcodeproj` or `.xcworkspace`.
+- Validates that generation produced a `.xcodeproj` or `.xcworkspace`.
+- Prefers the generated workspace when CocoaPods creates one.
+- Runs `xcodebuild -list` against the generated workspace or project.
+- Runs an unsigned simulator build only when the scheme is discoverable from checked-in files.
 
 For this repo specifically, the validation path is:
 
 1. `xcodegen generate`
-2. Discover the generated `Ambitions.xcodeproj` and `Ambitions` scheme from `project.yml`
-3. Run a simulator build with `CODE_SIGNING_ALLOWED=NO`
+2. Use `project.yml` to discover the generated `Ambitions.xcodeproj` and `Ambitions` scheme
+3. Prefer a generated `.xcworkspace` if CocoaPods creates one
+4. Run `xcodebuild -list`
+5. Run a simulator build with `CODE_SIGNING_ALLOWED=NO`
 
 Local reproduction on a Mac:
 
 1. Install Xcode and XcodeGen.
 2. Run `xcodegen generate` from the repo root.
 3. If a `Podfile` is ever introduced, run `pod install` in that directory.
-4. Run `xcodebuild -project Ambitions.xcodeproj -scheme Ambitions -sdk iphonesimulator -destination "generic/platform=iOS Simulator" CODE_SIGNING_ALLOWED=NO build`
+4. Run `xcodebuild -project Ambitions.xcodeproj -list`
+5. Run `xcodebuild -project Ambitions.xcodeproj -scheme Ambitions -sdk iphonesimulator -destination "generic/platform=iOS Simulator" CODE_SIGNING_ALLOWED=NO build`
 
 ## Current status
 
