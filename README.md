@@ -36,39 +36,39 @@ Ambitions is a native iOS SwiftUI application. The old Expo/React Native runtime
 
 This repo includes an XcodeGen spec rather than a checked-in `.xcodeproj`.
 
-On a Mac with Xcode and XcodeGen installed:
+On a Mac with Xcode 16+ and XcodeGen installed:
 
 1. Run `xcodegen generate`.
 2. Open `Ambitions.xcodeproj`.
 3. Build and run the `Ambitions` scheme on an iOS Simulator.
 
-The full reproducible native build, test, and archive flow lives in [docs/native-build-and-release.md](/Users/Devan/Documents/GitHub/ambitions/docs/native-build-and-release.md).
+The full reproducible native generation, build, test, UI test, and archive flow lives in [docs/native-build-and-release.md](/Users/Devan/Documents/GitHub/ambitions/docs/native-build-and-release.md).
 
 ## iOS native validation
 
-GitHub Actions validates iOS-native integrity on `macos-latest` in [.github/workflows/ios-validate.yml](/Users/Devan/Documents/GitHub/ambitions/.github/workflows/ios-validate.yml).
+GitHub Actions validates iOS-native integrity on `macos-15` in [.github/workflows/ios-validate.yml](/Users/Devan/Documents/GitHub/ambitions/.github/workflows/ios-validate.yml).
 
-What the workflow does today:
+What the workflow verifies now:
 
-- Verifies that `project.yml` exists.
-- Installs XcodeGen and runs `xcodegen generate`.
-- Runs `pod install` only when a `Podfile` exists.
-- Validates that generation produced a `.xcodeproj` or `.xcworkspace`.
-- Prefers the generated workspace when CocoaPods creates one.
-- Runs `xcodebuild -list` against the generated workspace or project.
-- Runs an unsigned simulator build only when the scheme is discoverable from checked-in files.
+- Installs XcodeGen and regenerates `Ambitions.xcodeproj` from `project.yml`.
+- Derives the project name and primary scheme from `project.yml` and fails if generation drifts.
+- Lists the generated project and resolves Swift package dependencies.
+- Builds the native app target for `iphonesimulator` with signing disabled.
+- Runs `AmbitionsTests` on a deterministically selected available simulator.
+- Runs `AmbitionsUITests` in a separate macOS job using `build-for-testing` plus `test-without-building`.
+- Runs an unsigned Release archive sanity check with `CODE_SIGNING_ALLOWED=NO`.
+- Uploads `.xcresult` bundles for unit and UI test jobs.
 
-The workflow does not currently perform signed archive or App Store Connect validation because the repo does not carry Apple signing material or upload credentials.
+What the workflow does not verify:
 
-For this repo specifically, the automated validation path is:
+- Signed archives
+- TestFlight or App Store Connect validation
+- Distribution exports
+- Physical-device behavior
 
-1. `xcodegen generate`
-2. Use `project.yml` to discover the generated `Ambitions.xcodeproj` and `Ambitions` scheme
-3. Prefer a generated `.xcworkspace` if CocoaPods creates one
-4. Run `xcodebuild -list`
-5. Run a simulator build with `CODE_SIGNING_ALLOWED=NO`
+The UI test job is honest but scoped: it validates the current preview-bootstrapped UI flow, not a signed production install path.
 
-Local reproduction, including unit tests, UI tests, and archive sanity checks, is documented in [docs/native-build-and-release.md](/Users/Devan/Documents/GitHub/ambitions/docs/native-build-and-release.md).
+Local reproduction, including exact build, unit test, UI test, and archive commands, is documented in [docs/native-build-and-release.md](/Users/Devan/Documents/GitHub/ambitions/docs/native-build-and-release.md).
 
 ## Runtime behavior
 
