@@ -16,3 +16,5 @@
 - If the right skill is unclear, overlapping, or missing, say so, choose the narrowest truthful workflow, and avoid inventing seams that the repo does not currently support.
 - Keep docs, copy, previews, and shipped behavior truthful to the current repo state.
 - Use repo-local skills in `.codex/skills/` for specialized recurring workflows instead of expanding this file with task-specific procedures.
+- After weak, blocked, misrouted, or over-broad runs, capture the issue through `.codex/improvement/` instead of relying on memory or prompt folklore.
+- For production work intake, execution mode selection, validation, escalation, and release/readiness flow, follow `.codex/operations/`.

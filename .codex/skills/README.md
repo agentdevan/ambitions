@@ -5,6 +5,7 @@ Repo-local skills live under `.codex/skills/`. Keep durable repo rules in `AGENT
 Personal defaults live in `~/.codex/config.toml`; repo overrides live in `.codex/config.toml`. Project-scoped config and skills are applied only when Codex trusts the project.
 
 Use [.codex/README.md](/C:/Users/Devan/Documents/GitHub/ambitions/.codex/README.md) for project config intent, profile selection, and trusted-project notes.
+Use `.codex/operations/` for production work intake and execution conventions, and `.codex/improvement/` when a weak run should change the system itself.
 
 ## Skills
 
@@ -124,3 +125,4 @@ Use [.codex/README.md](/C:/Users/Devan/Documents/GitHub/ambitions/.codex/README.
 - Use `.codex/templates/retry-decision.md` when deciding whether to retry, continue, or stop.
 - Use `.codex/templates/blocked-work-summary.md` when the repo seam, environment, or scope block the remaining work.
 - Use `.codex/templates/execution-report.md` when the task spans several bounded steps and needs a clean final report.
+- If the run itself was weak, use `.codex/templates/post-run-review.md` and `.codex/templates/system-refinement-decision.md` to decide whether AGENTS, a skill, a template, an eval, or docs should change.

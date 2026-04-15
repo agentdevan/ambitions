@@ -37,3 +37,9 @@ This repo uses project-scoped Codex config in `.codex/config.toml`.
 
 - Subagents are not part of the default Ambitions loop.
 - Use them only when a user explicitly asks for delegated parallel review work. This repo does not assume automatic subagent spawning.
+
+## Improvement And Operations Layers
+
+- `.codex/improvement/` is the durable self-improvement loop for reviewing weak Codex runs and deciding what system layer to update.
+- `.codex/operations/` is the day-to-day operating manual for production Ambitions work intake, execution, validation, escalation, and release/readiness flow.
+- The current stack is tuned for GPT-5.4 with medium reasoning through file-based guidance, not hidden memory or automatic learning.

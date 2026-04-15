@@ -3,6 +3,7 @@
 This folder is a practical eval pack for the Ambitions Codex setup.
 
 Use it to check whether a request is likely to trigger the right skill, stay within the right repo boundaries, avoid over-editing, execute in bounded slices, recover narrowly when needed, and report validation honestly.
+Use `improvement-loop-matrix.md` when the question is not just "did the run go well?" but also "would the current system know how to improve after a weak run?"
 
 ## How To Use
 
@@ -23,9 +24,11 @@ Use it to check whether a request is likely to trigger the right skill, stay wit
 - Validation claims should match commands actually run.
 - Wrong-skill starts should recover into the correct narrower workflow instead of bluffing forward.
 - The result should preserve native SwiftUI/XcodeGen architecture boundaries.
+- When a run is weak, the review should point to a concrete refinement target in `.codex/improvement/`, `.codex/templates/`, `.codex/operations/`, or the affected skill.
 
 ## What This Eval Pack Is Not
 
 - It is not an academic benchmark.
 - It does not require exact wording matches.
 - It is not a substitute for real code review or simulator/device checks.
+- It is also not automatic learning. The eval pack only helps decide which files in `.codex/` should be updated next.
