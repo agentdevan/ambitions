@@ -3,7 +3,7 @@ import AmbitionsWidgetUI
 import SwiftUI
 
 struct ProfileScreen: View {
-    @Environment(\.appContainer) private var container
+    @Environment(\.appContainer) private var appContainer
     @Environment(\.ambitionTheme) private var theme
     @Environment(\.accessibilityReduceMotion) private var reduceMotion
     @State private var state: AsyncViewState<ProfileDashboard> = .loading
@@ -211,6 +211,13 @@ struct ProfileScreen: View {
         case let .failed(message):
             return "failed:\(message)"
         }
+    }
+
+    private var container: AppContainer {
+        guard let appContainer else {
+            preconditionFailure("App container must be injected.")
+        }
+        return appContainer
     }
 }
 

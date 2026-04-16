@@ -2,7 +2,7 @@ import AmbitionsDesignSystem
 import SwiftUI
 
 struct HabitsScreen: View {
-    @Environment(\.appContainer) private var container
+    @Environment(\.appContainer) private var appContainer
     @Environment(\.ambitionTheme) private var theme
     @Environment(\.accessibilityReduceMotion) private var reduceMotion
     @State private var viewModel: HabitsViewModel
@@ -116,6 +116,13 @@ struct HabitsScreen: View {
         Task {
             await viewModel.perform(action, using: container.habitsService)
         }
+    }
+
+    private var container: AppContainer {
+        guard let appContainer else {
+            preconditionFailure("App container must be injected.")
+        }
+        return appContainer
     }
 }
 

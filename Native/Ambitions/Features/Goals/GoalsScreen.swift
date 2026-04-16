@@ -2,7 +2,7 @@ import AmbitionsDesignSystem
 import SwiftUI
 
 struct GoalsScreen: View {
-    @Environment(\.appContainer) private var container
+    @Environment(\.appContainer) private var appContainer
     @Environment(\.ambitionTheme) private var theme
     @Environment(\.accessibilityReduceMotion) private var reduceMotion
     @State private var viewModel: GoalsViewModel
@@ -150,6 +150,13 @@ struct GoalsScreen: View {
         case .achieved:
             return "Completed goals will collect here once the current wave closes cleanly."
         }
+    }
+
+    private var container: AppContainer {
+        guard let appContainer else {
+            preconditionFailure("App container must be injected.")
+        }
+        return appContainer
     }
 }
 

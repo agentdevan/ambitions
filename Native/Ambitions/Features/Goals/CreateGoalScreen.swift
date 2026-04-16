@@ -2,7 +2,7 @@ import AmbitionsDesignSystem
 import SwiftUI
 
 struct CreateGoalScreen: View {
-    @Environment(\.appContainer) private var container
+    @Environment(\.appContainer) private var appContainer
     @Environment(\.ambitionTheme) private var theme
     @Environment(\.dismiss) private var dismiss
     @State private var viewModel: CreateGoalViewModel
@@ -110,6 +110,13 @@ struct CreateGoalScreen: View {
 
     private var goalTypeOptions: [GoalMode] {
         [.project, .achievement, .learning, .exploration, .maintenance]
+    }
+
+    private var container: AppContainer {
+        guard let appContainer else {
+            preconditionFailure("App container must be injected.")
+        }
+        return appContainer
     }
 }
 

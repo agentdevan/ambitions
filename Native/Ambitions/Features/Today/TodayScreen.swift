@@ -2,7 +2,7 @@ import AmbitionsDesignSystem
 import SwiftUI
 
 struct TodayScreen: View {
-    @Environment(\.appContainer) private var container
+    @Environment(\.appContainer) private var appContainer
     @Environment(\.ambitionTheme) private var theme
     @Environment(\.accessibilityReduceMotion) private var reduceMotion
     @State private var viewModel: TodayViewModel
@@ -128,6 +128,13 @@ struct TodayScreen: View {
                 value.toggle()
             }
         }
+    }
+
+    private var container: AppContainer {
+        guard let appContainer else {
+            preconditionFailure("App container must be injected.")
+        }
+        return appContainer
     }
 }
 

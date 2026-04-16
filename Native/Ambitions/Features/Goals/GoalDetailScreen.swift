@@ -2,7 +2,7 @@ import AmbitionsDesignSystem
 import SwiftUI
 
 struct GoalDetailScreen: View {
-    @Environment(\.appContainer) private var container
+    @Environment(\.appContainer) private var appContainer
     @Environment(\.ambitionTheme) private var theme
     @Environment(\.accessibilityReduceMotion) private var reduceMotion
     @State private var viewModel: GoalDetailViewModel
@@ -303,6 +303,13 @@ struct GoalDetailScreen: View {
         .task {
             await viewModel.load(using: container.goalsService)
         }
+    }
+
+    private var container: AppContainer {
+        guard let appContainer else {
+            preconditionFailure("App container must be injected.")
+        }
+        return appContainer
     }
 }
 
