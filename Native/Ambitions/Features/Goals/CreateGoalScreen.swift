@@ -120,6 +120,7 @@ struct CreateGoalScreen: View {
     }
 }
 
+#if DEBUG
 #Preview("Create Goal Empty") {
     NavigationStack {
         CreateGoalScreen(viewModel: CreateGoalViewModel())
@@ -140,6 +141,7 @@ struct CreateGoalScreen: View {
     .appContainer(PreviewAppContainerFactory.preview)
     .ambitionTheme(.dark)
 }
+#endif
 
 #Preview("Create Goal Loading") {
     NavigationStack {

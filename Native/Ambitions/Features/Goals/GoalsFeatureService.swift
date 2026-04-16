@@ -152,6 +152,7 @@ struct RepositoryBackedGoalsService: GoalsServicing {
     }
 }
 
+#if DEBUG
 struct StubGoalsService: GoalsServicing {
     let overview: GoalsOverview
     let detailScenarios: [String: GoalDetailPresentation]
@@ -224,6 +225,7 @@ struct StubGoalsService: GoalsServicing {
         )
     }
 }
+#endif
 
 private enum GoalsFeatureError: LocalizedError {
     case notFound

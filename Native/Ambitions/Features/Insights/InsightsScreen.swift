@@ -180,6 +180,7 @@ struct InsightsScreen: View {
     }
 }
 
+#if DEBUG
 #Preview("Insights Light") {
     NavigationStack {
         InsightsScreen()
@@ -197,3 +198,4 @@ struct InsightsScreen: View {
     .ambitionTheme(.dark)
     .preferredColorScheme(.dark)
 }
+#endif

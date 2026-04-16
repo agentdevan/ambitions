@@ -313,6 +313,7 @@ struct GoalDetailScreen: View {
     }
 }
 
+#if DEBUG
 #Preview("Goal Detail Active") {
     NavigationStack {
         GoalDetailScreen(
@@ -341,6 +342,7 @@ struct GoalDetailScreen: View {
     .appContainer(PreviewAppContainerFactory.preview)
     .ambitionTheme(.dark)
 }
+#endif
 
 #Preview("Goal Detail Clarification") {
     NavigationStack {

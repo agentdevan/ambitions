@@ -99,6 +99,7 @@ struct StubHabitsService: HabitsServicing {
     }
 }
 
+#if DEBUG
 struct StubInsightsService: InsightsServicing {
     let fixtures: PreviewFixtures
     func loadInsightsDashboard() async throws -> InsightsDashboard { fixtures.insightsDashboard }
@@ -112,6 +113,7 @@ struct StubProfileService: ProfileServicing {
         return fixtures.profileDashboard
     }
 }
+#endif
 
 struct StubCaptureService: CaptureServicing {
     let captures: [Capture]

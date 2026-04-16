@@ -160,6 +160,7 @@ struct GoalsScreen: View {
     }
 }
 
+#if DEBUG
 #Preview("Goals Overview") {
     NavigationStack {
         GoalsScreen(viewModel: GoalsViewModel(state: .loaded(PreviewGoalsScenarios.overview)))
@@ -182,3 +183,4 @@ struct GoalsScreen: View {
     .appContainer(PreviewAppContainerFactory.preview)
     .ambitionTheme(.dark)
 }
+#endif

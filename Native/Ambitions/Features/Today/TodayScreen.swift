@@ -138,6 +138,7 @@ struct TodayScreen: View {
     }
 }
 
+#if DEBUG
 #Preview("Today Seeded Light") {
     NavigationStack {
         TodayScreen(viewModel: TodayViewModel(state: .loaded(PreviewTodayScenarios.seeded)), autoLoad: false)
@@ -203,3 +204,4 @@ struct TodayScreen: View {
     .appContainer(PreviewAppContainerFactory.preview(todayExperience: PreviewTodayScenarios.seeded))
     .ambitionTheme(.dark)
 }
+#endif

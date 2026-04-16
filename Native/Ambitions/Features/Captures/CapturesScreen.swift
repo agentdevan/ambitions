@@ -123,6 +123,7 @@ struct CapturesScreen: View {
     }
 }
 
+#if DEBUG
 #Preview("Captures Light") {
     NavigationStack {
         CapturesScreen()
@@ -140,3 +141,4 @@ struct CapturesScreen: View {
     .ambitionTheme(.dark)
     .preferredColorScheme(.dark)
 }
+#endif

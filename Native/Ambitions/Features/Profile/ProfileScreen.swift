@@ -221,6 +221,7 @@ struct ProfileScreen: View {
     }
 }
 
+#if DEBUG
 #Preview("Profile Light") {
     NavigationStack {
         ProfileScreen()
@@ -238,3 +239,4 @@ struct ProfileScreen: View {
     .ambitionTheme(.dark)
     .preferredColorScheme(.dark)
 }
+#endif

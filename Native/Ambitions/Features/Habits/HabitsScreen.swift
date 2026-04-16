@@ -126,6 +126,7 @@ struct HabitsScreen: View {
     }
 }
 
+#if DEBUG
 #Preview("Habits Active Light") {
     NavigationStack {
         HabitsScreen(viewModel: HabitsViewModel(state: .loaded(PreviewHabitsScenarios.active)))
@@ -167,3 +168,4 @@ struct HabitsScreen: View {
     .appContainer(PreviewAppContainerFactory.preview(habitsDashboard: PreviewHabitsScenarios.seeded))
     .ambitionTheme(.dark)
 }
+#endif
