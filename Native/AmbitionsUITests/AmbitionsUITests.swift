@@ -37,25 +37,32 @@ final class AmbitionsUITests: XCTestCase {
         submitButton.tap()
 
         XCTAssertTrue(app.staticTexts["Goal created"].waitForExistence(timeout: 10))
-        XCTAssertTrue(app.staticTexts["UI Smoke Goal"].waitForExistence(timeout: 10))
+        XCTAssertTrue(createButton.waitForExistence(timeout: 10))
+        XCTAssertFalse(titleField.exists)
     }
 
     func testPreviewBootstrapExposesTodayHabitsInsightsAndProfileSurfaces() throws {
         let app = makeApp(bootstrapMode: "preview")
         app.launch()
 
-        XCTAssertTrue(app.otherElements["today.screen"].waitForExistence(timeout: 10))
+        let todayTab = app.tabBars.buttons["Today"]
+        XCTAssertTrue(todayTab.waitForExistence(timeout: 10))
+        XCTAssertTrue(todayTab.isSelected)
         XCTAssertTrue(app.staticTexts["Quick capture"].waitForExistence(timeout: 10))
 
         app.tabBars.buttons["Habits"].tap()
         XCTAssertTrue(app.otherElements["habits.screen"].waitForExistence(timeout: 10))
         XCTAssertTrue(app.staticTexts["No habits are live yet"].waitForExistence(timeout: 10))
 
-        app.tabBars.buttons["Insights"].tap()
+        openMoreDestination("Insights", in: app)
         XCTAssertTrue(app.otherElements["insights.screen"].waitForExistence(timeout: 10))
         XCTAssertTrue(app.staticTexts["Recent signals"].waitForExistence(timeout: 10))
 
-        app.tabBars.buttons["Profile"].tap()
+        if app.navigationBars.buttons["More"].waitForExistence(timeout: 2) {
+            app.navigationBars.buttons["More"].tap()
+        }
+
+        openMoreDestination("Profile", in: app)
         XCTAssertTrue(app.otherElements["profile.screen"].waitForExistence(timeout: 10))
         XCTAssertTrue(app.otherElements["profile.default-tab-picker"].waitForExistence(timeout: 10))
         XCTAssertTrue(app.otherElements["profile.appearance-picker"].waitForExistence(timeout: 10))
@@ -66,7 +73,7 @@ final class AmbitionsUITests: XCTestCase {
         let app = makeApp(bootstrapMode: "preview")
         app.launch()
 
-        app.tabBars.buttons["Profile"].tap()
+        openMoreDestination("Profile", in: app)
 
         let defaultTabPicker = app.otherElements["profile.default-tab-picker"]
         let appearancePicker = app.otherElements["profile.appearance-picker"]
@@ -82,5 +89,17 @@ final class AmbitionsUITests: XCTestCase {
         let app = XCUIApplication()
         app.launchEnvironment["AMBITIONS_BOOTSTRAP_MODE"] = bootstrapMode
         return app
+    }
+
+    private func openMoreDestination(_ label: String, in app: XCUIApplication) {
+        let moreTab = app.tabBars.buttons["More"]
+        XCTAssertTrue(moreTab.waitForExistence(timeout: 10))
+        moreTab.tap()
+
+        let destination = app.descendants(matching: .any)
+            .matching(NSPredicate(format: "identifier == %@ OR label == %@", label, label))
+            .firstMatch
+        XCTAssertTrue(destination.waitForExistence(timeout: 10))
+        destination.tap()
     }
 }
