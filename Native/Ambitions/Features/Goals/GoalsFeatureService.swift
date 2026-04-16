@@ -452,7 +452,7 @@ private extension RepositoryBackedGoalsService {
             snapshot.evidence.filter { $0.goalID == goalID }
         } ?? []
 
-        let feedback = goal.map { currentGoal in
+        let feedback: [GoalFeedbackEvent] = goal.map { currentGoal in
             let stepIDs = Set(currentGoal.plan?.sections.flatMap(\.steps).map(\.id) ?? [])
             return snapshot.feedback.filter { stepIDs.contains($0.stepID) }
         } ?? []
