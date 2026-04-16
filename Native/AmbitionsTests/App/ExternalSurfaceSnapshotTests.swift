@@ -112,8 +112,8 @@ private extension ExternalSurfaceSnapshotTests {
         let actionability = StepActionability(
             action: "Do it",
             completionDefinition: "Done",
-            fallbackMicroStep: "Start",
             evidenceOfCompletion: ["Done"],
+            fallbackMicroStep: "Start",
             contextRequirements: []
         )
         let step = Step(
