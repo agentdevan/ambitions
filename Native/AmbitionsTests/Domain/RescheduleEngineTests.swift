@@ -39,8 +39,8 @@ final class RescheduleEngineTests: XCTestCase {
             )
         )
 
-        XCTAssertEqual(decision.deferRecommendation, .someday)
-        XCTAssertEqual(decision.timingAdjustment, .someday)
+        XCTAssertEqual(decision.deferRecommendation, .laterThisWeek)
+        XCTAssertEqual(decision.timingAdjustment, .laterThisWeek)
         XCTAssertNotNil(decision.suggestedTime)
     }
 

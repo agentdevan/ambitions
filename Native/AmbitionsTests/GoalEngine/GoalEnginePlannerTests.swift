@@ -58,7 +58,7 @@ final class GoalEnginePlannerTests: XCTestCase {
             return XCTFail("Expected recovery-oriented plan.")
         }
 
-        XCTAssertEqual(plan.sections.first?.title, "Stabilization First")
+        XCTAssertEqual(plan.sections.first?.title, "Starter Focus")
         XCTAssertTrue(plan.sections.flatMap(\.steps).allSatisfy { $0.timing.timingType != .dueAt })
     }
 
