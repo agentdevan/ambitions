@@ -65,7 +65,8 @@ final class LocalNotificationFoundationTests: XCTestCase {
 
         await foundation.refreshSchedule(now: .now)
 
-        XCTAssertNil(await center.replacedRequest)
+        let replacedRequest = await center.replacedRequest
+        XCTAssertNil(replacedRequest)
     }
 }
 

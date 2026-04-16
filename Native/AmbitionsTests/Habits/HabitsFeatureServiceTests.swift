@@ -17,7 +17,8 @@ final class HabitsFeatureServiceTests: XCTestCase {
         let store = try AmbitionsPersistenceStore(inMemory: true)
         let repositories = try await AppContainerFactory.prepareRepositories(for: .demo, store: store)
         let service = RepositoryBackedHabitsService(repositories: repositories)
-        let goal = try XCTUnwrap((try await repositories.goals.listHabitGoals()).first)
+        let habitGoals = try await repositories.goals.listHabitGoals()
+        let goal = try XCTUnwrap(habitGoals.first)
         let step = try XCTUnwrap(HabitGoalSemantics.preferredStep(in: goal))
         let formatter = ISO8601DateFormatter()
         formatter.formatOptions = [.withInternetDateTime, .withFractionalSeconds]
@@ -26,7 +27,7 @@ final class HabitsFeatureServiceTests: XCTestCase {
         _ = try await service.performAction(
             HabitActionRequest(
                 kind: .quickLog,
-                target: HabitActionTarget(goalID: goal.id, stepID: step.id)
+                target: HabitActionTarget(goalID: goal.id, stepID: step.id, draftID: nil)
             ),
             now: now
         )

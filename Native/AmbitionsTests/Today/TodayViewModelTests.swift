@@ -16,6 +16,7 @@ final class TodayViewModelTests: XCTestCase {
         XCTAssertEqual(experience.header.greeting, "Good afternoon")
     }
 
+    @MainActor
     func testHandlePublishesTransientMessageAfterActionResponse() async {
         let expectedMessage = TodayInlineMessage(
             title: "Captured",
@@ -37,17 +38,20 @@ final class TodayViewModelTests: XCTestCase {
             userDisplayName: ""
         )
 
-        XCTAssertEqual(viewModel.transientMessage?.title, expectedMessage.title)
-        XCTAssertEqual(viewModel.transientMessage?.body, expectedMessage.body)
+        let transientMessage = viewModel.transientMessage
+        XCTAssertEqual(transientMessage?.title, expectedMessage.title)
+        XCTAssertEqual(transientMessage?.body, expectedMessage.body)
         let actionCount = await service.performedActionCount()
         XCTAssertEqual(actionCount, 1)
     }
 
+    @MainActor
     func testRefreshFailureMovesStateToFailed() async {
         let viewModel = TodayViewModel()
         await viewModel.refresh(using: FailingTodayService(), userDisplayName: "")
 
-        guard case let .failed(message) = viewModel.state else {
+        let state = viewModel.state
+        guard case let .failed(message) = state else {
             return XCTFail("Expected Today refresh to end in a failed state.")
         }
 

@@ -46,8 +46,9 @@ final class TodayFreshGoalVisibilityTests: XCTestCase {
             now: fixedNow
         )
         let goalID = try XCTUnwrap(created.target.goalID)
-        let goal = try await XCTUnwrap(repositories.goals.goal(id: goalID))
-        let step = try await XCTUnwrap(goal.plan?.sections.first?.steps.first)
+        let fetchedGoal = await repositories.goals.goal(id: goalID)
+        let goal = try XCTUnwrap(fetchedGoal)
+        let step = try XCTUnwrap(goal.plan?.sections.first?.steps.first)
 
         _ = try await todayService.performAction(
             TodayInlineAction(
