@@ -21,7 +21,7 @@ final class HabitsFeatureServiceTests: XCTestCase {
         let goal = try XCTUnwrap(habitGoals.first)
         let step = try XCTUnwrap(HabitGoalSemantics.preferredStep(in: goal))
         let formatter = ISO8601DateFormatter()
-        formatter.formatOptions = [.withInternetDateTime, .withFractionalSeconds]
+        formatter.formatOptions = [.withInternetDateTime]
         let now = try XCTUnwrap(formatter.date(from: GoalEngineFixtures.fixedNow))
 
         _ = try await service.performAction(

@@ -3,7 +3,9 @@ import XCTest
 
 final class ExternalSurfaceSnapshotTests: XCTestCase {
     func testSnapshotGenerationSelectsNextActionAndRedactsUserEnteredTitles() throws {
-        let now = Date(timeIntervalSince1970: 1_712_692_800)
+        let formatter = ISO8601DateFormatter()
+        formatter.formatOptions = [.withInternetDateTime]
+        let now = try XCTUnwrap(formatter.date(from: "2026-04-15T12:00:00Z"))
         let sensitiveStepTitle = "Private Therapy Session"
         let goal = makeGoal(
             goalID: "goal-sensitive",

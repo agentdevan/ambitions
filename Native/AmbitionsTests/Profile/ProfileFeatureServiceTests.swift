@@ -9,7 +9,7 @@ final class ProfileFeatureServiceTests: XCTestCase {
         let dashboard = try await service.loadProfileDashboard()
 
         XCTAssertTrue(dashboard.subtitle.contains("on-device"))
-        XCTAssertTrue(dashboard.subtitle.contains("Account sync is not implemented"))
+        XCTAssertTrue(dashboard.subtitle.contains("account sync is not implemented"))
         XCTAssertTrue(dashboard.settings.contains(where: { $0.id == "profile-scope" && $0.valueLabel == "Local device features" }))
         XCTAssertTrue(dashboard.settingsFooter.contains("there is no account sync configuration"))
         XCTAssertFalse(dashboard.badges.contains("Connected later"))

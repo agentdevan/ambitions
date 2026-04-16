@@ -63,11 +63,11 @@ final class CaptureServiceTests: XCTestCase {
 
     func testCreateCaptureSupportsAllStableCaptureSourceTypes() async throws {
         let repository = PreviewCaptureRepository()
-        let service = DefaultCaptureService(repository: repository, idProvider: { "capture-stable" })
         let now = Date(timeIntervalSince1970: 1_712_692_800)
         let sources: [CaptureSourceType] = [.todayQuickCapture, .notification, .shareExtensionText, .shareExtensionURL, .appIntent]
 
         for source in sources {
+            let service = DefaultCaptureService(repository: repository, idProvider: { "capture-\(source.rawValue)" })
             let created = try await service.createCapture(
                 CreateCaptureRequest(rawText: "Source \(source.rawValue)", sourceType: source),
                 now: now

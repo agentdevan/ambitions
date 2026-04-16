@@ -89,7 +89,7 @@ final class RescheduleEngineTests: XCTestCase {
 
 private extension RescheduleEngineTests {
     var fixedNow: Date {
-        Date(timeIntervalSince1970: 1_744_713_600) // 2026-04-15T12:00:00Z
+        Date(timeIntervalSince1970: 1_745_798_400) // 2026-04-28T12:00:00Z
     }
 
     var baseTiming: GoalTiming {

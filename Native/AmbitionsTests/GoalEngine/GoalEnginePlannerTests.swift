@@ -48,8 +48,14 @@ final class GoalEnginePlannerTests: XCTestCase {
 
     func testRecoveryPlannerStartsWithStabilization() throws {
         let fixture = try XCTUnwrap(GoalEngineFixtures.plannerFixture(id: "recovery-goal"))
-        guard case let .plan(_, plan, _) = fixture.result else {
-            return XCTFail("Expected full plan.")
+        let plan: GoalPlan
+        switch fixture.result {
+        case let .plan(_, extractedPlan, _):
+            plan = extractedPlan
+        case let .starterPlan(_, extractedPlan, _, _):
+            plan = extractedPlan
+        default:
+            return XCTFail("Expected recovery-oriented plan.")
         }
 
         XCTAssertEqual(plan.sections.first?.title, "Stabilization First")
