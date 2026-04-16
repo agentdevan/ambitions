@@ -191,7 +191,7 @@ actor UNUserNotificationCenterClient: LocalNotificationCenterClient {
     }
 
     func requestAuthorization() async throws -> Bool {
-        try await withCheckedThrowingContinuation { continuation in
+        try await withCheckedThrowingContinuation { (continuation: CheckedContinuation<Bool, Error>) in
             center.requestAuthorization(options: [.alert, .sound, .badge]) { granted, error in
                 if let error {
                     continuation.resume(throwing: error)
@@ -239,7 +239,7 @@ actor UNUserNotificationCenterClient: LocalNotificationCenterClient {
     }
 
     private func add(_ request: UNNotificationRequest) async throws {
-        try await withCheckedThrowingContinuation { continuation in
+        try await withCheckedThrowingContinuation { (continuation: CheckedContinuation<Void, Error>) in
             center.add(request) { error in
                 if let error {
                     continuation.resume(throwing: error)

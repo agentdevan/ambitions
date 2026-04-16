@@ -14,7 +14,7 @@ final class HabitsViewModel {
         case .loading:
             return "loading"
         case let .loaded(dashboard):
-            return "loaded:\(dashboard.mode.rawValue):\(dashboard.habits.count):\(dashboard.recoveryHabits.count)"
+            return "loaded:\(dashboard.mode):\(dashboard.habits.count):\(dashboard.recoveryHabits.count)"
         case let .failed(message):
             return "failed:\(message)"
         }

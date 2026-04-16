@@ -210,7 +210,7 @@ private extension RepositoryBackedHabitsService {
     }
 
     func makeDashboard(snapshot: Snapshot, now: Date) -> HabitsDashboard {
-        let draftIDsByGoal = Dictionary(uniqueKeysWithValues: snapshot.drafts.compactMap { draft in
+        let draftIDsByGoal: [String: String] = Dictionary(uniqueKeysWithValues: snapshot.drafts.compactMap { draft in
             guard let goalID = draft.plannedGoalID else { return nil }
             return (goalID, draft.id)
         })
@@ -221,7 +221,7 @@ private extension RepositoryBackedHabitsService {
             guard HabitGoalSemantics.isHabitLike(goal: goal, step: step) else { return nil }
 
             let goalEvidence = snapshot.evidence.filter { $0.goalID == goal.id }
-            let stepIDs = Set(goal.plan?.sections.flatMap(\.steps).map(\.id) ?? [])
+            let stepIDs: Set<String> = Set(goal.plan?.sections.flatMap(\.steps).map(\.id) ?? [])
             let goalFeedback = snapshot.feedback.filter { stepIDs.contains($0.stepID) }
             let cadenceDays = HabitGoalSemantics.cadenceDays(goal: goal, step: step)
             let positive = positiveDates(from: goalEvidence, feedback: goalFeedback)

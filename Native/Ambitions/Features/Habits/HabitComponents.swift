@@ -165,6 +165,8 @@ private struct HabitMinimumVersionCard: View {
     let state: HabitTodayState
 
     var body: some View {
+        let style = theme.stateStyle(for: state.visualState)
+
         VStack(alignment: .leading, spacing: theme.spacing.xxxs) {
             Text("Minimum version")
                 .font(theme.typography.caption)
@@ -174,8 +176,8 @@ private struct HabitMinimumVersionCard: View {
                 .foregroundStyle(theme.colors.textPrimary)
         }
         .padding(theme.spacing.sm)
-        .background(RoundedRectangle(cornerRadius: theme.radius.md, style: .continuous).fill(theme.stateStyle(for: state.visualState).background.opacity(0.45)))
-        .overlay(RoundedRectangle(cornerRadius: theme.radius.md, style: .continuous).stroke(theme.stateStyle(for: state.visualState).border.opacity(0.6), lineWidth: 1))
+        .background(RoundedRectangle(cornerRadius: theme.radius.md, style: .continuous).fill(style.fill.opacity(0.45)))
+        .overlay(RoundedRectangle(cornerRadius: theme.radius.md, style: .continuous).stroke(style.stroke.opacity(0.6), lineWidth: 1))
     }
 }
 

@@ -2,10 +2,12 @@ import AmbitionsDesignSystem
 import Foundation
 
 enum PreviewAppContainerFactory {
+    @MainActor
     static var preview: AppContainer {
         preview(todayExperience: PreviewTodayScenarios.seeded, habitsDashboard: PreviewHabitsScenarios.seeded)
     }
 
+    @MainActor
     static func preview(
         todayExperience: TodayExperience = PreviewTodayScenarios.seeded,
         habitsDashboard: HabitsDashboard = PreviewHabitsScenarios.seeded
