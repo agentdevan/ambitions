@@ -15,7 +15,8 @@ final class CalendarReminderActionFlowTests: XCTestCase {
             now: fixedNow
         )
         let goalID = try XCTUnwrap(created.target.goalID)
-        let goal = try await XCTUnwrap(repositories.goals.goal(id: goalID))
+        let fetchedGoal = await repositories.goals.goal(id: goalID)
+        let goal = try XCTUnwrap(fetchedGoal)
         let scheduledStep = try XCTUnwrap(goal.plan?.sections.first?.steps.last)
 
         await calendarService.setCalendarAuthorizationResponse(.fullAccess)
@@ -68,7 +69,8 @@ final class CalendarReminderActionFlowTests: XCTestCase {
             now: fixedNow
         )
         let goalID = try XCTUnwrap(created.target.goalID)
-        let goal = try await XCTUnwrap(repositories.goals.goal(id: goalID))
+        let fetchedGoal = await repositories.goals.goal(id: goalID)
+        let goal = try XCTUnwrap(fetchedGoal)
         let scheduledStep = try XCTUnwrap(goal.plan?.sections.first?.steps.last)
 
         await calendarService.setCalendarAuthorizationResponse(.fullAccess)

@@ -84,7 +84,8 @@ final class ExternalSurfaceSnapshotTests: XCTestCase {
             now: .now
         )
 
-        XCTAssertEqual(await writer.refreshCount, 4)
+        let refreshCount = await writer.refreshCount
+        XCTAssertEqual(refreshCount, 4)
     }
 }
 
