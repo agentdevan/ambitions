@@ -434,9 +434,9 @@ private extension RepositoryBackedHabitsService {
     func heroSubtitle(for mode: HabitsExperienceMode, totalHabits: Int, recoveryCount: Int) -> String {
         switch mode {
         case .empty:
-            "Habits becomes real as soon as a recurring goal or routine exists. There is no detached subsystem behind this screen."
+            return "Habits becomes real as soon as a recurring goal or routine exists. There is no detached subsystem behind this screen."
         case .seeded:
-            "Habits is already reading from the same native goal, evidence, and feedback records that power Today and Goal Detail."
+            return "Habits is already reading from the same native goal, evidence, and feedback records that power Today and Goal Detail."
         case .active:
             return totalHabits == 1
                 ? "One habit loop is active. The goal is clarity and repeatability, not pressure."
@@ -452,7 +452,7 @@ private extension RepositoryBackedHabitsService {
         _ = completedToday
         switch mode {
         case .empty:
-            "When planning adds recurring structure, Habits will translate it into a quick daily interaction surface automatically."
+            return "When planning adds recurring structure, Habits will translate it into a quick daily interaction surface automatically."
         case .seeded, .active:
             if recoveryCount == 0 {
                 return minimumToday > 0
