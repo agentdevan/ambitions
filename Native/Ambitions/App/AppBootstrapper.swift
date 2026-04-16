@@ -81,15 +81,15 @@ final class AppBootstrapper {
 
         switch mode {
         case .preview:
-            .preview
+            return .preview
         case .live:
-            .live
+            return .live
         #if DEBUG
         case .demo:
-            .demo
+            return .demo
         #endif
         case .automatic:
-            ProcessInfo.processInfo.environment["XCODE_RUNNING_FOR_PREVIEWS"] == "1" ? .preview : .live
+            return ProcessInfo.processInfo.environment["XCODE_RUNNING_FOR_PREVIEWS"] == "1" ? .preview : .live
         }
     }
 
