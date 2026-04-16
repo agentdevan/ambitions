@@ -342,7 +342,6 @@ struct GoalDetailScreen: View {
     .appContainer(PreviewAppContainerFactory.preview)
     .ambitionTheme(.dark)
 }
-#endif
 
 #Preview("Goal Detail Clarification") {
     NavigationStack {
@@ -358,6 +357,7 @@ struct GoalDetailScreen: View {
     .appContainer(PreviewAppContainerFactory.preview)
     .ambitionTheme(.dark)
 }
+#endif
 
 #Preview("Goal Detail Blocked") {
     NavigationStack {
