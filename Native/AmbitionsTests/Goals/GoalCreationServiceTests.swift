@@ -27,10 +27,10 @@ final class GoalCreationServiceTests: XCTestCase {
         for example in examples {
             let response = try await service.createGoal(CreateGoalRequest(title: example.title), now: fixedNow)
             let goalID = try XCTUnwrap(response.target.goalID)
-            let fetchedGoal = await repositories.goals.goal(id: goalID)
+            let fetchedGoal = try await repositories.goals.goal(id: goalID)
             let goal = try XCTUnwrap(fetchedGoal)
             let draftID = try XCTUnwrap(response.target.draftID)
-            let fetchedDraft = await repositories.drafts.draft(id: draftID)
+            let fetchedDraft = try await repositories.drafts.draft(id: draftID)
             let draft = try XCTUnwrap(fetchedDraft)
             let steps = try await repositories.goals.listSteps(goalID: goal.id)
 

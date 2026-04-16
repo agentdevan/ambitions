@@ -46,7 +46,7 @@ final class TodayFreshGoalVisibilityTests: XCTestCase {
             now: fixedNow
         )
         let goalID = try XCTUnwrap(created.target.goalID)
-        let fetchedGoal = await repositories.goals.goal(id: goalID)
+        let fetchedGoal = try await repositories.goals.goal(id: goalID)
         let goal = try XCTUnwrap(fetchedGoal)
         let step = try XCTUnwrap(goal.plan?.sections.first?.steps.first)
 
