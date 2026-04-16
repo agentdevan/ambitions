@@ -75,7 +75,7 @@ final class CaptureServiceTests: XCTestCase {
             XCTAssertEqual(created.sourceType, source)
         }
 
-        let storedSources = try await service.listCaptures()
+        let storedSources = try await repository.listCaptures()
             .compactMap(\.sourceType)
             .map(\.rawValue)
             .sorted()
