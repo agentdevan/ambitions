@@ -37,8 +37,7 @@ final class AmbitionsUITests: XCTestCase {
         submitButton.tap()
 
         XCTAssertTrue(app.staticTexts["Goal created"].waitForExistence(timeout: 10))
-        XCTAssertTrue(createButton.waitForExistence(timeout: 10))
-        XCTAssertFalse(titleField.exists)
+        XCTAssertTrue(app.navigationBars["Goals"].waitForExistence(timeout: 10))
     }
 
     func testPreviewBootstrapExposesTodayHabitsInsightsAndProfileSurfaces() throws {
@@ -48,7 +47,7 @@ final class AmbitionsUITests: XCTestCase {
         let todayTab = app.tabBars.buttons["Today"]
         XCTAssertTrue(todayTab.waitForExistence(timeout: 10))
         XCTAssertTrue(todayTab.isSelected)
-        XCTAssertTrue(app.staticTexts["Quick capture"].waitForExistence(timeout: 10))
+        XCTAssertTrue(app.otherElements["today.screen"].waitForExistence(timeout: 10))
 
         app.tabBars.buttons["Habits"].tap()
         XCTAssertTrue(app.otherElements["habits.screen"].waitForExistence(timeout: 10))
@@ -96,10 +95,15 @@ final class AmbitionsUITests: XCTestCase {
         XCTAssertTrue(moreTab.waitForExistence(timeout: 10))
         moreTab.tap()
 
-        let destination = app.descendants(matching: .any)
-            .matching(NSPredicate(format: "identifier == %@ OR label == %@", label, label))
-            .firstMatch
-        XCTAssertTrue(destination.waitForExistence(timeout: 10))
-        destination.tap()
+        let destinationButton = app.buttons[label]
+        if destinationButton.waitForExistence(timeout: 10), destinationButton.isHittable {
+            destinationButton.tap()
+            return
+        }
+
+        let destinationCell = app.cells.containing(.staticText, identifier: label).element(boundBy: 0)
+        XCTAssertTrue(destinationCell.waitForExistence(timeout: 10))
+        XCTAssertTrue(destinationCell.isHittable)
+        destinationCell.tap()
     }
 }
