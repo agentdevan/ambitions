@@ -155,7 +155,6 @@ struct CreateGoalScreen: View {
     .appContainer(PreviewAppContainerFactory.preview)
     .ambitionTheme(.dark)
 }
-#endif
 
 #Preview("Create Goal Failure") {
     NavigationStack {
@@ -169,3 +168,4 @@ struct CreateGoalScreen: View {
     .appContainer(PreviewAppContainerFactory.preview)
     .ambitionTheme(.dark)
 }
+#endif
