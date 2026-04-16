@@ -96,17 +96,17 @@ private struct TodaySkyPalette {
         let night = max(0, 1 - solar * 1.35)
         starOpacity = min(0.32, night * 0.34)
 
-        topColor = lerp(
+        topColor = Self.lerp(
             from: Color(red: 0.05, green: 0.07, blue: 0.13),
             to: Color(red: 0.22, green: 0.42, blue: 0.73),
             amount: solar
         )
-        midColor = lerp(
+        midColor = Self.lerp(
             from: Color(red: 0.08, green: 0.09, blue: 0.16),
             to: Color(red: 0.49, green: 0.63, blue: 0.79),
             amount: solar
         )
-        bottomColor = lerp(
+        bottomColor = Self.lerp(
             from: Color(red: 0.10, green: 0.08, blue: 0.15),
             to: Color(red: 0.89, green: 0.48, blue: 0.24),
             amount: warmth * 0.55 + solar * 0.18
@@ -117,7 +117,7 @@ private struct TodaySkyPalette {
         glowY = CGFloat(0.12 + (1 - solar) * 0.18)
     }
 
-    private func lerp(from: Color, to: Color, amount: Double) -> Color {
+    private static func lerp(from: Color, to: Color, amount: Double) -> Color {
         let amount = max(0, min(1, amount))
         return Color(
             red: from.components.red + (to.components.red - from.components.red) * amount,
