@@ -67,6 +67,9 @@ targets:
       - path: Native/AmbitionsTests
         excludes:
           - "**/*.md"
+    settings:
+      base:
+        GENERATE_INFOPLIST_FILE: YES
     dependencies:
       - target: Ambitions
   AmbitionsUITests:
@@ -77,6 +80,9 @@ targets:
       - path: Native/AmbitionsUITests
         excludes:
           - "**/*.md"
+    settings:
+      base:
+        GENERATE_INFOPLIST_FILE: YES
     dependencies:
       - target: Ambitions
 schemes:
