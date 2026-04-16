@@ -7,6 +7,7 @@ struct HabitsScreen: View {
     @Environment(\.accessibilityReduceMotion) private var reduceMotion
     @State private var viewModel: HabitsViewModel
 
+    @MainActor
     init(viewModel: HabitsViewModel = HabitsViewModel()) {
         _viewModel = State(initialValue: viewModel)
     }

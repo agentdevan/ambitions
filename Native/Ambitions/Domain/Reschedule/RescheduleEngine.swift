@@ -99,7 +99,7 @@ struct RescheduleEngine: Sendable {
 }
 
 private extension RescheduleEngine {
-    func signals(for input: RescheduleEngineInput) -> Signals {
+    private func signals(for input: RescheduleEngineInput) -> Signals {
         let stepEvents = sortedStepEvents(input.feedbackHistory, stepID: input.stepID)
         let now = input.now
         let recentWindowStart = now.addingTimeInterval(-7 * 24 * 60 * 60)
@@ -134,7 +134,7 @@ private extension RescheduleEngine {
         )
     }
 
-    func deferRecommendation(for input: RescheduleEngineInput, signals: Signals) -> RescheduleDeferRecommendation {
+    private func deferRecommendation(for input: RescheduleEngineInput, signals: Signals) -> RescheduleDeferRecommendation {
         switch input.trigger {
         case .delay:
             if signals.consecutiveMissCount >= 4 || signals.recentMissCount >= 5 || signals.delayedCount >= 4 {
@@ -162,7 +162,7 @@ private extension RescheduleEngine {
         }
     }
 
-    func needsSmallerStepRecommendation(for trigger: RescheduleTrigger, signals: Signals) -> Bool {
+    private func needsSmallerStepRecommendation(for trigger: RescheduleTrigger, signals: Signals) -> Bool {
         switch trigger {
         case .stuck, .askForSmallerStep:
             return true
@@ -171,7 +171,7 @@ private extension RescheduleEngine {
         }
     }
 
-    func rationale(
+    private func rationale(
         for trigger: RescheduleTrigger,
         deferRecommendation: RescheduleDeferRecommendation,
         signals: Signals,

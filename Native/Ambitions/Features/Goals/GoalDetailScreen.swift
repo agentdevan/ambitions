@@ -7,6 +7,7 @@ struct GoalDetailScreen: View {
     @Environment(\.accessibilityReduceMotion) private var reduceMotion
     @State private var viewModel: GoalDetailViewModel
 
+    @MainActor
     init(target: GoalRouteTarget, viewModel: GoalDetailViewModel? = nil) {
         _viewModel = State(initialValue: viewModel ?? GoalDetailViewModel(target: target))
     }

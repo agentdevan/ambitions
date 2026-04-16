@@ -1,6 +1,7 @@
 import SwiftUI
 
 @main
+@MainActor
 struct AmbitionsApp: App {
     @State private var bootstrapper = AppBootstrapper()
 

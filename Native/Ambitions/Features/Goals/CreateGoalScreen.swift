@@ -9,6 +9,7 @@ struct CreateGoalScreen: View {
 
     private let onCreated: (CreateGoalResponse) -> Void
 
+    @MainActor
     init(
         viewModel: CreateGoalViewModel = CreateGoalViewModel(),
         onCreated: @escaping (CreateGoalResponse) -> Void = { _ in }

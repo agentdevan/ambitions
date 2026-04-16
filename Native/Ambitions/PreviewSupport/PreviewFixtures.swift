@@ -15,26 +15,6 @@ struct PreviewFixtures: Sendable {
             userDisplayName: "Preview User",
             appearancePreference: .system
         ),
-        captures: [
-            Capture(
-                id: "preview-capture-1",
-                createdAt: "2026-04-15T09:20:00Z",
-                updatedAt: "2026-04-15T09:20:00Z",
-                rawText: "Capture an idea from the Today flow before it disappears.",
-                sourceType: .todayQuickCapture,
-                status: .pending,
-                linkedGoalID: "goal-native"
-            ),
-            Capture(
-                id: "preview-capture-2",
-                createdAt: "2026-04-15T08:15:00Z",
-                updatedAt: "2026-04-15T08:30:00Z",
-                rawText: "https://example.com/article-worth-reviewing",
-                sourceType: .shareExtensionURL,
-                status: .processed,
-                linkedGoalID: nil
-            )
-        ],
         todayDashboard: TodayDashboard(
             title: "Steady execution, light load",
             subtitle: "Three deliberate moves are enough to keep momentum today.",
@@ -65,6 +45,26 @@ struct PreviewFixtures: Sendable {
                 suggestionDetail: "Use the spare window to define drill-in navigation contracts without touching legacy screens."
             )
         ),
+        captures: [
+            Capture(
+                id: "preview-capture-1",
+                createdAt: "2026-04-15T09:20:00Z",
+                updatedAt: "2026-04-15T09:20:00Z",
+                rawText: "Capture an idea from the Today flow before it disappears.",
+                sourceType: .todayQuickCapture,
+                status: .pending,
+                linkedGoalID: "goal-native"
+            ),
+            Capture(
+                id: "preview-capture-2",
+                createdAt: "2026-04-15T08:15:00Z",
+                updatedAt: "2026-04-15T08:30:00Z",
+                rawText: "https://example.com/article-worth-reviewing",
+                sourceType: .shareExtensionURL,
+                status: .processed,
+                linkedGoalID: nil
+            )
+        ],
         goalsDashboard: GoalsDashboard(
             title: "Active ambitions",
             subtitle: "Three outcome tracks are currently shaping the roadmap.",

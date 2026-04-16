@@ -11,6 +11,7 @@ struct TodayScreen: View {
 
     private let autoLoad: Bool
 
+    @MainActor
     init(viewModel: TodayViewModel = TodayViewModel(), autoLoad: Bool = true) {
         _viewModel = State(initialValue: viewModel)
         self.autoLoad = autoLoad

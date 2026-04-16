@@ -42,10 +42,12 @@ struct AppBootstrapConfiguration: Sendable, Equatable {
 }
 
 enum AppContainerFactory {
+    @MainActor
     static func make(source: AppSession.BootstrapSource) async throws -> AppContainer {
         try await make(configuration: configuration(for: source))
     }
 
+    @MainActor
     static func make(configuration: AppBootstrapConfiguration) async throws -> AppContainer {
         let repositories = try await prepareRepositories(for: configuration)
         let snapshotWriter = ExternalSurfaceSnapshotWriter(repositories: repositories)

@@ -42,7 +42,7 @@ enum AppAppearancePreference: String, CaseIterable, Codable, Sendable {
 }
 
 struct AppSession: Sendable {
-    enum BootstrapSource: String, Sendable {
+    enum BootstrapSource: String, Codable, Sendable {
         case live
         case preview
         case demo

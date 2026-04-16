@@ -7,7 +7,7 @@ enum PreviewAppContainerFactory {
     }
 
     static func preview(
-        todayExperience: TodayExperience,
+        todayExperience: TodayExperience = PreviewTodayScenarios.seeded,
         habitsDashboard: HabitsDashboard = PreviewHabitsScenarios.seeded
     ) -> AppContainer {
         let fixtures = PreviewFixtures.default

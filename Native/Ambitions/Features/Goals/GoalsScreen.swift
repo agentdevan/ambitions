@@ -9,6 +9,7 @@ struct GoalsScreen: View {
     @State private var isCreateGoalPresented = false
     @State private var creationMessage: GoalDetailInlineMessage?
 
+    @MainActor
     init(
         viewModel: GoalsViewModel = GoalsViewModel(),
         creationMessage: GoalDetailInlineMessage? = nil
