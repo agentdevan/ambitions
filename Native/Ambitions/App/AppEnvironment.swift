@@ -1,8 +1,7 @@
 import SwiftUI
 
-@MainActor
 private struct AppContainerKey: EnvironmentKey {
-    static let defaultValue: AppContainer = PreviewAppContainerFactory.preview
+    nonisolated(unsafe) static let defaultValue: AppContainer = PreviewAppContainerFactory.preview
 }
 
 extension EnvironmentValues {

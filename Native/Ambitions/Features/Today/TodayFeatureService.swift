@@ -106,7 +106,7 @@ private extension RepositoryBackedTodayService {
             .filter { $0.state != .completed && $0.state != .cancelled }
             .sorted(by: stepSortDescriptor(goals: activeGoals))
 
-        let draftsByGoalID = Dictionary(uniqueKeysWithValues: snapshot.drafts.compactMap { draft in
+        let draftsByGoalID: [String: PersistedGoalDraft] = Dictionary(uniqueKeysWithValues: snapshot.drafts.compactMap { draft in
             guard let plannedGoalID = draft.plannedGoalID else { return nil }
             return (plannedGoalID, draft)
         })

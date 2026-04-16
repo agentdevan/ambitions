@@ -84,7 +84,10 @@ private struct TodaySkyPalette {
     init(date: Date) {
         let calendar = Calendar.current
         let seconds = calendar.dateComponents([.hour, .minute, .second], from: date)
-        let totalSeconds = Double((seconds.hour ?? 0) * 3600 + (seconds.minute ?? 0) * 60 + (seconds.second ?? 0))
+        let hour: Double = Double(seconds.hour ?? 0)
+        let minute: Double = Double(seconds.minute ?? 0)
+        let second: Double = Double(seconds.second ?? 0)
+        let totalSeconds: Double = hour * 3600 + minute * 60 + second
         let dayProgress = totalSeconds / 86_400
         let solar = max(0, sin((dayProgress - 0.25) * .pi))
         let dawnGlow = Foundation.exp(-Foundation.pow((dayProgress - 0.23) / 0.06, 2))
