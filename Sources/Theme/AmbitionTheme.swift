@@ -43,6 +43,8 @@ public struct AmbitionTheme: Sendable {
     }
 
     public struct Typography: Sendable {
+        public init() {}
+
         public var hero: Font { .system(.largeTitle, design: .rounded).weight(.bold) }
         public var title: Font { .system(.title2, design: .rounded).weight(.bold) }
         public var titleCompact: Font { .system(.title3, design: .rounded).weight(.semibold) }
@@ -55,6 +57,8 @@ public struct AmbitionTheme: Sendable {
     }
 
     public struct Spacing: Sendable {
+        public init() {}
+
         public let xxxs: CGFloat = 4
         public let xxs: CGFloat = 8
         public let xs: CGFloat = 12
@@ -67,6 +71,8 @@ public struct AmbitionTheme: Sendable {
     }
 
     public struct Radius: Sendable {
+        public init() {}
+
         public let sm: CGFloat = 12
         public let md: CGFloat = 18
         public let lg: CGFloat = 24
