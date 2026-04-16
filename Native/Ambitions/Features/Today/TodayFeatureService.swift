@@ -526,7 +526,7 @@ private extension RepositoryBackedTodayService {
             if replacement.isEmpty == false {
                 goal = update(goal: goal, stepID: stepID) { step in
                     let timing = decision?.timingAdjustment.map { shiftedTiming(for: step.timing, now: now, adjustment: $0) } ?? step.timing
-                    Step(
+                    return Step(
                         id: step.id,
                         sectionID: step.sectionID,
                         title: step.title,

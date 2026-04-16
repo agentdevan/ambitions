@@ -94,6 +94,7 @@ private struct TodaySkyPalette {
         let duskGlow = Foundation.exp(-Foundation.pow((dayProgress - 0.76) / 0.07, 2))
         let warmth = min(1, dawnGlow + duskGlow)
         let night = max(0, 1 - solar * 1.35)
+        starOpacity = min(0.32, night * 0.34)
 
         topColor = lerp(
             from: Color(red: 0.05, green: 0.07, blue: 0.13),
@@ -114,7 +115,6 @@ private struct TodaySkyPalette {
         glowOpacity = 0.16 + warmth * 0.22 + solar * 0.06
         glowX = dawnGlow > duskGlow ? 0.18 : 0.82
         glowY = CGFloat(0.12 + (1 - solar) * 0.18)
-        starOpacity = min(0.32, night * 0.34)
     }
 
     private func lerp(from: Color, to: Color, amount: Double) -> Color {
