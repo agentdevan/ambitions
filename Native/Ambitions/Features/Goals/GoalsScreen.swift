@@ -11,10 +11,10 @@ struct GoalsScreen: View {
 
     @MainActor
     init(
-        viewModel: GoalsViewModel = GoalsViewModel(),
+        viewModel: GoalsViewModel? = nil,
         creationMessage: GoalDetailInlineMessage? = nil
     ) {
-        _viewModel = State(initialValue: viewModel)
+        _viewModel = State(initialValue: viewModel ?? GoalsViewModel())
         _creationMessage = State(initialValue: creationMessage)
     }
 

@@ -8,8 +8,8 @@ struct HabitsScreen: View {
     @State private var viewModel: HabitsViewModel
 
     @MainActor
-    init(viewModel: HabitsViewModel = HabitsViewModel()) {
-        _viewModel = State(initialValue: viewModel)
+    init(viewModel: HabitsViewModel? = nil) {
+        _viewModel = State(initialValue: viewModel ?? HabitsViewModel())
     }
 
     var body: some View {

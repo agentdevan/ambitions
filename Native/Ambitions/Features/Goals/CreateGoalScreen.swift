@@ -11,10 +11,10 @@ struct CreateGoalScreen: View {
 
     @MainActor
     init(
-        viewModel: CreateGoalViewModel = CreateGoalViewModel(),
+        viewModel: CreateGoalViewModel? = nil,
         onCreated: @escaping (CreateGoalResponse) -> Void = { _ in }
     ) {
-        _viewModel = State(initialValue: viewModel)
+        _viewModel = State(initialValue: viewModel ?? CreateGoalViewModel())
         self.onCreated = onCreated
     }
 
