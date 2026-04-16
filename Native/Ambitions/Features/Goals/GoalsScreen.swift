@@ -144,7 +144,7 @@ struct GoalsScreen: View {
     private func emptyMessage(for filter: GoalsFilter, fallback: String) -> String {
         switch filter {
         case .active:
-            fallback
+            return fallback
         case .onHold:
             return "Nothing is paused right now. Ambitions can stay focused on what is actually in motion."
         case .achieved:
