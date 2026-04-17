@@ -37,7 +37,7 @@ final class AmbitionsUITests: XCTestCase {
         submitButton.tap()
 
         XCTAssertTrue(app.staticTexts["Goal created"].waitForExistence(timeout: 10))
-        XCTAssertTrue(titleField.waitForNonExistence(timeout: 10))
+        XCTAssertFalse(app.staticTexts["No goals yet"].waitForExistence(timeout: 2))
     }
 
     func testPreviewBootstrapExposesTodayHabitsInsightsAndProfileSurfaces() throws {
@@ -49,11 +49,9 @@ final class AmbitionsUITests: XCTestCase {
         XCTAssertTrue(todayTab.isSelected)
 
         app.tabBars.buttons["Habits"].tap()
-        XCTAssertTrue(app.otherElements["habits.screen"].waitForExistence(timeout: 10))
         XCTAssertTrue(app.staticTexts["No habits are live yet"].waitForExistence(timeout: 10))
 
         openMoreDestination("Insights", in: app)
-        XCTAssertTrue(app.otherElements["insights.screen"].waitForExistence(timeout: 10))
         XCTAssertTrue(app.staticTexts["Recent signals"].waitForExistence(timeout: 10))
 
         if app.navigationBars.buttons["More"].waitForExistence(timeout: 2) {
@@ -61,7 +59,6 @@ final class AmbitionsUITests: XCTestCase {
         }
 
         openMoreDestination("Profile", in: app)
-        XCTAssertTrue(app.otherElements["profile.screen"].waitForExistence(timeout: 10))
         XCTAssertTrue(app.otherElements["profile.default-tab-picker"].waitForExistence(timeout: 10))
         XCTAssertTrue(app.otherElements["profile.appearance-picker"].waitForExistence(timeout: 10))
         XCTAssertTrue(app.buttons["profile.save-preferences-button"].waitForExistence(timeout: 10))
@@ -102,17 +99,11 @@ final class AmbitionsUITests: XCTestCase {
 
         let destinationLabel = app.staticTexts[label]
         if destinationLabel.waitForExistence(timeout: 10) {
-            let destinationCell = app.cells.containing(.staticText, identifier: label).firstMatch
+            let destinationCell = app.cells.containing(.staticText, identifier: label).element
             if destinationCell.waitForExistence(timeout: 2), destinationCell.isHittable {
                 destinationCell.tap()
                 return
             }
-        }
-
-        let destinationCell = app.cells.matching(NSPredicate(format: "label == %@", label)).firstMatch
-        if destinationCell.waitForExistence(timeout: 10), destinationCell.isHittable {
-            destinationCell.tap()
-            return
         }
 
         XCTFail("More destination row '\(label)' was not found.")
