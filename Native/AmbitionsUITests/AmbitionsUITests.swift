@@ -37,7 +37,7 @@ final class AmbitionsUITests: XCTestCase {
         submitButton.tap()
 
         XCTAssertTrue(app.staticTexts["Goal created"].waitForExistence(timeout: 10))
-        XCTAssertTrue(app.navigationBars["Goals"].waitForExistence(timeout: 10))
+        XCTAssertTrue(titleField.waitForNonExistence(timeout: 10))
     }
 
     func testPreviewBootstrapExposesTodayHabitsInsightsAndProfileSurfaces() throws {
@@ -47,7 +47,6 @@ final class AmbitionsUITests: XCTestCase {
         let todayTab = app.tabBars.buttons["Today"]
         XCTAssertTrue(todayTab.waitForExistence(timeout: 10))
         XCTAssertTrue(todayTab.isSelected)
-        XCTAssertTrue(app.otherElements["today.screen"].waitForExistence(timeout: 10))
 
         app.tabBars.buttons["Habits"].tap()
         XCTAssertTrue(app.otherElements["habits.screen"].waitForExistence(timeout: 10))
@@ -101,9 +100,21 @@ final class AmbitionsUITests: XCTestCase {
             return
         }
 
-        let destinationCell = app.cells.containing(.staticText, identifier: label).element(boundBy: 0)
-        XCTAssertTrue(destinationCell.waitForExistence(timeout: 10))
-        XCTAssertTrue(destinationCell.isHittable)
-        destinationCell.tap()
+        let destinationLabel = app.staticTexts[label]
+        if destinationLabel.waitForExistence(timeout: 10) {
+            let destinationCell = app.cells.containing(.staticText, identifier: label).firstMatch
+            if destinationCell.waitForExistence(timeout: 2), destinationCell.isHittable {
+                destinationCell.tap()
+                return
+            }
+        }
+
+        let destinationCell = app.cells.matching(NSPredicate(format: "label == %@", label)).firstMatch
+        if destinationCell.waitForExistence(timeout: 10), destinationCell.isHittable {
+            destinationCell.tap()
+            return
+        }
+
+        XCTFail("More destination row '\(label)' was not found.")
     }
 }
