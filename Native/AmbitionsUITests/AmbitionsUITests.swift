@@ -37,7 +37,7 @@ final class AmbitionsUITests: XCTestCase {
         submitButton.tap()
 
         XCTAssertTrue(app.staticTexts["Goal created"].waitForExistence(timeout: 10))
-        XCTAssertFalse(app.staticTexts["No goals yet"].waitForExistence(timeout: 2))
+        XCTAssertTrue(titleField.waitForNonExistence(timeout: 10))
     }
 
     func testPreviewBootstrapExposesTodayHabitsInsightsAndProfileSurfaces() throws {
@@ -52,11 +52,7 @@ final class AmbitionsUITests: XCTestCase {
         XCTAssertTrue(app.staticTexts["No habits are live yet"].waitForExistence(timeout: 10))
 
         openMoreDestination("Insights", in: app)
-        XCTAssertTrue(app.staticTexts["Recent signals"].waitForExistence(timeout: 10))
-
-        if app.navigationBars.buttons["More"].waitForExistence(timeout: 2) {
-            app.navigationBars.buttons["More"].tap()
-        }
+        XCTAssertTrue(app.otherElements["insights.screen"].waitForExistence(timeout: 10))
 
         openMoreDestination("Profile", in: app)
         XCTAssertTrue(app.otherElements["profile.default-tab-picker"].waitForExistence(timeout: 10))
@@ -91,15 +87,14 @@ final class AmbitionsUITests: XCTestCase {
         XCTAssertTrue(moreTab.waitForExistence(timeout: 10))
         moreTab.tap()
 
-        let destinationButton = app.buttons[label]
-        if destinationButton.waitForExistence(timeout: 10), destinationButton.isHittable {
-            destinationButton.tap()
-            return
+        let moreBackButton = app.navigationBars.buttons["More"]
+        if moreBackButton.waitForExistence(timeout: 2), moreBackButton.isHittable {
+            moreBackButton.tap()
         }
 
-        let destinationLabel = app.staticTexts[label]
+        let destinationLabel = app.tables.staticTexts[label]
         if destinationLabel.waitForExistence(timeout: 10) {
-            let destinationCell = app.cells.containing(.staticText, identifier: label).element
+            let destinationCell = app.tables.cells.containing(.staticText, identifier: label).element
             if destinationCell.waitForExistence(timeout: 2), destinationCell.isHittable {
                 destinationCell.tap()
                 return
