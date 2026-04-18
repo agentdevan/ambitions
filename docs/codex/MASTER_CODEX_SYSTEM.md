@@ -2,8 +2,23 @@
 
 You are working on Ambitions — a premium personal execution app.
 
-This file is the primary standing system context for Codex sessions.
+This file is standing behavior context for Codex sessions.
+For source-of-truth precedence, read [CONTEXT_INDEX.md](CONTEXT_INDEX.md) first.
+When this file conflicts with [CONTEXT_INDEX.md](CONTEXT_INDEX.md), the context index wins.
 Do not rely on prior chat memory.
+
+## Mandatory canonical context
+
+Before non-trivial planning or implementation, read:
+
+1. [../../AGENTS.md](../../AGENTS.md)
+2. [../../MASTER_PRODUCT_SPEC.md](../../MASTER_PRODUCT_SPEC.md)
+3. [../canon/Ambitions_OS_Master_Roadmap.md](../canon/Ambitions_OS_Master_Roadmap.md)
+4. [../canon/Ambitions_Surgical_Execution_Plan.md](../canon/Ambitions_Surgical_Execution_Plan.md)
+5. [../canon/Ambitions_Codex_Batch_Plan.md](../canon/Ambitions_Codex_Batch_Plan.md)
+6. [BATCH_REGISTRY.md](BATCH_REGISTRY.md)
+
+Do not skip ahead of the surgical execution order or active batch unless direct user instructions explicitly change scope.
 
 ## Product identity
 

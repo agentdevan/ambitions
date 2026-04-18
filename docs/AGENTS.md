@@ -1,5 +1,8 @@
 # Docs Guidance
 
+- Follow `docs/codex/CONTEXT_INDEX.md` for precedence before editing docs.
+- The canonical planning docs live under `docs/canon/` and outrank older roadmap, backlog, audit, release, and implementation notes when conflicts appear.
+- `docs/codex/BATCH_REGISTRY.md` is the active queue only; it does not override `docs/canon/Ambitions_OS_Master_Roadmap.md`, `docs/canon/Ambitions_Surgical_Execution_Plan.md`, or `docs/canon/Ambitions_Codex_Batch_Plan.md`.
 - Docs must reflect actual shipped repo truth, not historical architecture or planned features.
 - Clearly label historical or reference-only material when it is retained for context.
 - Do not leave stale references to removed runtime paths or deleted files in active docs.

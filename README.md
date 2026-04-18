@@ -8,6 +8,15 @@ Ambitions is a native iOS SwiftUI application.
 - `Sources/` contains the `AmbitionsDesignSystem` Swift package used by the native app.
 - `AppUI/Sources/` contains the `AmbitionsWidgetUI` Swift package used by the native app.
 
+## Canonical planning stack
+
+Use [docs/codex/CONTEXT_INDEX.md](docs/codex/CONTEXT_INDEX.md) for the full source-of-truth hierarchy.
+The permanent planning docs live in [docs/canon](docs/canon):
+
+- [Ambitions_OS_Master_Roadmap.md](docs/canon/Ambitions_OS_Master_Roadmap.md)
+- [Ambitions_Surgical_Execution_Plan.md](docs/canon/Ambitions_Surgical_Execution_Plan.md)
+- [Ambitions_Codex_Batch_Plan.md](docs/canon/Ambitions_Codex_Batch_Plan.md)
+
 ## Native structure
 
 - `Native/Ambitions/App`
@@ -48,7 +57,7 @@ Use [docs/README.md](docs/README.md) as the index for current native docs and re
 
 ## Codex workflow
 
-Shared Codex behavior lives in [docs/codex/MASTER_CODEX_SYSTEM.md](docs/codex/MASTER_CODEX_SYSTEM.md). Windows and Mac Codex sessions should both pull the latest repo state from GitHub and use that file as standing session context; Mac sessions can start from [docs/codex/MAC_SESSION_BOOT_PROMPT.md](docs/codex/MAC_SESSION_BOOT_PROMPT.md).
+Shared Codex behavior starts with [docs/codex/CONTEXT_INDEX.md](docs/codex/CONTEXT_INDEX.md), then [docs/codex/MASTER_CODEX_SYSTEM.md](docs/codex/MASTER_CODEX_SYSTEM.md). Windows and Mac Codex sessions should both pull the latest repo state from GitHub and use those files as standing session context; Mac sessions can start from [docs/codex/MAC_SESSION_BOOT_PROMPT.md](docs/codex/MAC_SESSION_BOOT_PROMPT.md).
 
 ## iOS native validation
 

@@ -2,6 +2,12 @@
 
 This backlog translates the current roadmap into implementation work that matches the live native codebase in `Native/Ambitions/`.
 
+## Precedence notice
+
+This backlog is supporting context.
+It does not override [codex/CONTEXT_INDEX.md](codex/CONTEXT_INDEX.md), [../MASTER_PRODUCT_SPEC.md](../MASTER_PRODUCT_SPEC.md), or the canonical planning docs under [canon](canon).
+When this backlog conflicts with the canonical platform vision, surgical execution order, or batch plan, follow the canonical planning stack and update this backlog later.
+
 ## Current repo truth
 
 - The shipping product is the native SwiftUI app.

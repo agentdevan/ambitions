@@ -2,6 +2,23 @@
 
 This folder contains current native-shipping documentation plus a small set of retained reference notes that still apply to the SwiftUI codebase.
 
+## Canonical planning stack
+
+Use [codex/CONTEXT_INDEX.md](codex/CONTEXT_INDEX.md) for source-of-truth precedence before non-trivial work.
+
+- [../MASTER_PRODUCT_SPEC.md](../MASTER_PRODUCT_SPEC.md)
+  Current shipping product truth.
+- [canon/Ambitions_OS_Master_Roadmap.md](canon/Ambitions_OS_Master_Roadmap.md)
+  Platform and endgame vision.
+- [canon/Ambitions_Surgical_Execution_Plan.md](canon/Ambitions_Surgical_Execution_Plan.md)
+  Execution order and dependency hierarchy.
+- [canon/Ambitions_Codex_Batch_Plan.md](canon/Ambitions_Codex_Batch_Plan.md)
+  Batching and work packaging.
+- [codex/BATCH_REGISTRY.md](codex/BATCH_REGISTRY.md)
+  Active work status only.
+
+Older docs in this folder are supporting context and do not override the canonical planning stack.
+
 ## Current shipping native docs
 
 - [native-build-and-release.md](native-build-and-release.md)
@@ -9,7 +26,7 @@ This folder contains current native-shipping documentation plus a small set of r
 - [rc1-native-finish-pass.md](rc1-native-finish-pass.md)
   Historical native polish/release-candidate notes that still describe the current native app direction accurately where not superseded by newer build/release docs.
 - [implementation-backlog.md](implementation-backlog.md)
-  Current roadmap-to-backlog translation aligned to the live native codebase.
+  Supporting backlog translation aligned to the live native codebase where it does not conflict with the canonical planning stack.
 
 ## Other reference docs
 

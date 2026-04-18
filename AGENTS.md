@@ -1,5 +1,16 @@
 # Ambitions Codex Guidance
 
+- Before non-trivial planning or implementation, read `docs/codex/CONTEXT_INDEX.md` and follow its source-of-truth precedence.
+- The permanent canonical planning stack is:
+  - `MASTER_PRODUCT_SPEC.md` for current shipping product truth.
+  - `docs/canon/Ambitions_OS_Master_Roadmap.md` for platform and endgame vision.
+  - `docs/canon/Ambitions_Surgical_Execution_Plan.md` for execution order and dependency hierarchy.
+  - `docs/canon/Ambitions_Codex_Batch_Plan.md` for batching and work packaging.
+  - `docs/codex/BATCH_REGISTRY.md` for active work status only.
+- Do not skip ahead of the execution order in `docs/canon/Ambitions_Surgical_Execution_Plan.md`.
+- Do not build surfaces before engines/services exist; do not build extension-heavy features before shared container/data boundaries exist; do not build sync backend logic before sync boundary/export-import/conflict policy are defined; do not begin device work before runtime separation exists.
+- Implement only the active batch from `docs/canon/Ambitions_Codex_Batch_Plan.md` and `docs/codex/BATCH_REGISTRY.md` unless the user explicitly changes scope.
+- Older roadmap, backlog, audit, release, or implementation docs are supporting context only when they conflict with the canonical planning stack.
 - `Native/Ambitions/` is the source of truth for the shipping app. Treat older Expo/TypeScript material as reference-only unless a task explicitly targets it.
 - Use XcodeGen. Edit `project.yml` and regenerate the project instead of relying on a checked-in `.xcodeproj`.
 - Preserve architecture boundaries: app and routing in `Native/Ambitions/App`, domain logic in `Native/Ambitions/Domain`, services in `Native/Ambitions/Services`, persistence in `Native/Ambitions/Persistence`, feature UI in `Native/Ambitions/Features`, shared UI in `Sources/` and `AppUI/Sources/`.

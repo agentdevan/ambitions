@@ -1,4 +1,11 @@
-Read and use ./docs/codex/MASTER_CODEX_SYSTEM.md as the standing system context for this session.
+Read and use ./docs/codex/CONTEXT_INDEX.md first, then ./docs/codex/MASTER_CODEX_SYSTEM.md as standing context for this session.
+
+For non-trivial work, also read:
+- ./MASTER_PRODUCT_SPEC.md
+- ./docs/canon/Ambitions_OS_Master_Roadmap.md
+- ./docs/canon/Ambitions_Surgical_Execution_Plan.md
+- ./docs/canon/Ambitions_Codex_Batch_Plan.md
+- ./docs/codex/BATCH_REGISTRY.md
 
 Before making any change:
 - inspect the relevant files first
@@ -7,9 +14,11 @@ Before making any change:
 - then implement
 
 For all work in this repository:
+- follow the source-of-truth precedence in CONTEXT_INDEX.md
 - follow the product, UX, design, engineering, and workflow standards in MASTER_CODEX_SYSTEM.md
+- implement only the active batch unless explicitly told otherwise
 - do not rely on prior chat memory
-- keep all behavior aligned to that file
+- keep all behavior aligned to the canonical context stack
 
 At the end of work, always return:
 1. Current state

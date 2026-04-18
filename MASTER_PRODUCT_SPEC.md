@@ -1,5 +1,5 @@
 # Ambitions — Master Product Spec vNext
-**Status:** Full visual plan integrated; this file replaces the prior master spec as the canonical planning source.  
+**Status:** Full visual plan integrated; this file replaces the prior master spec as the canonical source for current shipping product truth.
 **Purpose:** Preserve roadmap continuity, align completed work with the current state, and fold in the full flagship visual plan, dark-first theming system, premium interaction model, and updated phase roadmap.
 
 ---
@@ -1276,7 +1276,8 @@ That is the product.
 
 ## 17. Canonical planning rule
 
-From this point forward, Codex phase planning should treat this document as the canonical source of truth.
+From this point forward, Codex phase planning should treat this document as the canonical source of truth for the current shipping product.
+For platform vision, execution order, batch packaging, and active work status, follow [docs/codex/CONTEXT_INDEX.md](docs/codex/CONTEXT_INDEX.md).
 
 When there is conflict between:
 
@@ -1285,7 +1286,8 @@ When there is conflict between:
 - generic strategy suggestions
 - earlier, lighter visual guidance that is now superseded by the full flagship visual plan
 
-this document should win.
+this document should win for current shipping product truth.
+For future platform scope or implementation sequencing, the canonical roadmap and execution docs in `docs/canon/` win.
 
 All future Codex prompts should be generated against:
 
@@ -1293,3 +1295,5 @@ All future Codex prompts should be generated against:
 - the actual completed phases
 - the in-progress phase state
 - this master product spec
+- the canonical planning docs under `docs/canon/`
+- the active queue in `docs/codex/BATCH_REGISTRY.md`

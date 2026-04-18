@@ -4,9 +4,15 @@ Date: 2026-04-14
 Repo: `agentdevan/ambitions`
 Status: audit only, no product behavior changes
 
+## Precedence Notice
+
+This audit is supporting repo-state context.
+It does not override [CONTEXT_INDEX.md](CONTEXT_INDEX.md), [../../MASTER_PRODUCT_SPEC.md](../../MASTER_PRODUCT_SPEC.md), or the canonical planning docs under [../canon](../canon).
+When this audit conflicts with the canonical planning stack, demote the audit claim and follow the context index.
+
 ## Purpose
 
-This document is the current truth source for upcoming Ambitions implementation work in this repository.
+This document is a repo-aware audit baseline for upcoming Ambitions implementation work in this repository.
 
 It is intentionally repo-aware and native-first:
 
