@@ -26,9 +26,9 @@
     <true/>
     <key>NSSupportsLiveActivities</key>
     <true/>
-    <key>NSCalendarsUsageDescription</key>
+    <key>NSCalendarsFullAccessUsageDescription</key>
     <string>Ambitions uses calendar access to schedule selected next steps as events.</string>
-    <key>NSRemindersUsageDescription</key>
+    <key>NSRemindersFullAccessUsageDescription</key>
     <string>Ambitions uses reminders access to save selected next steps for follow-through.</string>
     <key>UIApplicationSupportsIndirectInputEvents</key>
     <true/>
@@ -37,6 +37,19 @@
         <key>UIApplicationSupportsMultipleScenes</key>
         <false/>
     </dict>
+    <key>UISupportedInterfaceOrientations</key>
+    <array>
+        <string>UIInterfaceOrientationPortrait</string>
+        <string>UIInterfaceOrientationLandscapeLeft</string>
+        <string>UIInterfaceOrientationLandscapeRight</string>
+    </array>
+    <key>UISupportedInterfaceOrientations~ipad</key>
+    <array>
+        <string>UIInterfaceOrientationPortrait</string>
+        <string>UIInterfaceOrientationPortraitUpsideDown</string>
+        <string>UIInterfaceOrientationLandscapeLeft</string>
+        <string>UIInterfaceOrientationLandscapeRight</string>
+    </array>
     <key>UILaunchScreen</key>
     <dict/>
 </dict>

@@ -1,35 +1,42 @@
 # Permissions and Privacy Foundation
 
-This document records the current shipped state of the native iOS app and maps the OS integrations that are planned for later work.
+This document records the current shipped state of the native iOS app across permissions, entitlements, shared-capability wiring, and still-unshipped OS surfaces.
 
 ## Current shipped state
 
-- `Native/Ambitions/Support/Info.plist` does not declare any permission usage strings today.
-- The app does not ship an entitlements file today.
-- `Native/Ambitions/Resources/PrivacyInfo.xcprivacy` is intentionally empty because the current native code does not declare tracked data collection or accessed system APIs that require entries in the privacy manifest.
-- The shipping app remains local-first and does not request runtime permissions unless a feature already depends on them.
+- `Native/Ambitions/Support/Info.plist` declares the current production usage strings for:
+  - `NSCalendarsFullAccessUsageDescription`
+  - `NSRemindersFullAccessUsageDescription`
+- The app ships an entitlements file at `Native/Ambitions/Support/Ambitions.entitlements`.
+- The widget extension ships an entitlements file at `Native/AmbitionsWidgetExtension/AmbitionsWidgetExtension.entitlements`.
+- Both targets currently use the shared App Group `group.com.ambitions.shared`.
+- `Native/Ambitions/Support/Info.plist` declares `NSSupportsLiveActivities`.
+- `Native/Ambitions/Resources/PrivacyInfo.xcprivacy` currently declares:
+  - no tracking
+  - no collected data types
+  - no required accessed API reasons
+- The shipping app is still local-first. Runtime permission requests are limited to features already wired into production code, especially EventKit-backed calendar/reminder actions.
 
-## Future integration map
+## Current capability map
 
-| Integration | Likely Apple surface | Likely permission or capability work | Review considerations |
+| Integration | Current repo state | Permission or capability status | Review considerations |
 | --- | --- | --- | --- |
-| Notifications | UserNotifications | Add a user-facing explanation before any request prompt, register categories, and only request authorization when notification delivery ships. | Review wording should match the exact alert use case. If the feature is optional, defer the prompt until the user opts in. |
-| Calendar / Reminders | EventKit | Add usage strings before access, scope reads to the smallest data set needed, and separate calendar reads from reminder writes if both are ever supported. | Apple review expects a clear benefit statement and a strong reason for system data access. Keep read/write paths explicit. |
-| Widgets / Live Activities | WidgetKit, ActivityKit | Add extension targets and shared snapshot data structures before wiring any capability. Live Activities need a separate ActivityKit path from widgets. | Widgets and Live Activities should not be inferred from in-app code alone; they need explicit extension or activity entry points. |
-| Share extension | Share extension target, App Group if shared persistence is needed | Add a dedicated extension target and a narrow handoff model before accepting shared content from other apps. | Review focuses on whether the extension does only one job and handles shared data safely. Keep it separate from the main app flow. |
-| App Intents | AppIntents, Siri / Shortcuts surfaces | Add stable intent definitions and execution routing only after the underlying action is already supported in-app. | Intent metadata should reflect actual behavior. Do not expose shortcuts for flows that are not yet reliable in the app. |
+| Notifications | Shipped local notification foundation and runtime wiring in the app target. | No Info.plist usage string is required for notification authorization. Prompt timing and copy should still stay intentional and user-triggered. | Review the in-app explanation and permission timing on device before submission. |
+| Calendar / Reminders | Shipped EventKit integration service for selected goal/today actions. | Production Info.plist includes the current full-access EventKit usage strings used by the iOS 17+ authorization APIs. | Review should see a clear user benefit tied to scheduling next steps, not generic calendar access. |
+| Widgets / Live Activities | Shipped widget extension plus shared snapshot wiring and Live Activity support. | App and extension both use the shared App Group entitlement. App Info.plist declares Live Activities support. | Manual validation should confirm widget rendering, shared snapshot updates, and Live Activity behavior on device. |
+| Share extension | Not shipped yet. | No share-extension target is wired today. | Keep this explicitly future work until the target and intake path actually exist. |
+| App Intents | Not shipped yet as a product surface. | No concrete App Intents dependency or user-facing shortcut surface is wired today. | Do not imply Siri/Shortcuts support until the target and action routing are real. |
 
 ## Operational rules
 
-- Do not add runtime permission prompts until the feature that needs them is shipping.
-- Do not add entitlements or plist usage strings until the corresponding Apple framework is wired into production code.
-- If a future capability needs shared storage, review whether an App Group is actually required before adding one.
-- Keep the privacy manifest aligned with what the code imports and executes, not with roadmap items.
+- Keep permission strings and entitlements aligned with production code, not roadmap items.
+- When a capability is shipped, keep the wording specific to the user-visible benefit.
+- If a future capability needs shared storage, confirm the App Group is still the narrowest correct solution before expanding it.
+- Keep the privacy manifest aligned with actual accessed APIs and collected data, not with imported frameworks alone.
 
-## Suggested next wiring points
+## Next wiring points for unshipped surfaces
 
 - `Native/Ambitions/App/AppBootstrapper.swift`
 - `Native/Ambitions/App/AppExternalRouting.swift`
 - `Native/Ambitions/Services/AppServices.swift`
 - `Native/Ambitions/Support/FutureIntegrationPlaceholders.swift`
-
