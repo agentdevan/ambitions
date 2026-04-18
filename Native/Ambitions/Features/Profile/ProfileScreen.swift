@@ -44,15 +44,6 @@ struct ProfileScreen: View {
                     }
                     .transition(.ambitionPanel)
 
-                    WidgetFeed(items: [
-                        WidgetFeedItem(id: "profile-summary", priority: .hero, variant: .expanded) {
-                            ProfileSummaryWidget(viewModel: summaryViewModel(dashboard))
-                        },
-                        WidgetFeedItem(id: "profile-settings", priority: .high, variant: .expanded) {
-                            SettingsGroupWidget(viewModel: settingsViewModel(dashboard))
-                        }
-                    ])
-
                     AppCard {
                         VStack(alignment: .leading, spacing: theme.spacing.md) {
                             SectionHeader(
@@ -90,6 +81,15 @@ struct ProfileScreen: View {
                             .accessibilityIdentifier("profile.save-preferences-button")
                         }
                     }
+
+                    WidgetFeed(items: [
+                        WidgetFeedItem(id: "profile-summary", priority: .hero, variant: .expanded) {
+                            ProfileSummaryWidget(viewModel: summaryViewModel(dashboard))
+                        },
+                        WidgetFeedItem(id: "profile-settings", priority: .high, variant: .expanded) {
+                            SettingsGroupWidget(viewModel: settingsViewModel(dashboard))
+                        }
+                    ])
                 }
             }
         }

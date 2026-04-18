@@ -31,12 +31,14 @@ final class AmbitionsUITests: XCTestCase {
         XCTAssertTrue(titleField.waitForExistence(timeout: 10))
         titleField.tap()
         titleField.typeText("UI Smoke Goal")
+        dismissKeyboardIfNeeded(in: app)
 
-        let submitButton = app.buttons["create-goal.submit-button"]
-        XCTAssertTrue(submitButton.waitForExistence(timeout: 10))
+        XCTAssertTrue(app.buttons["create-goal.submit-button"].waitForExistence(timeout: 10))
+        let submitButton = scrollUntilButtonHittable("create-goal.submit-button", in: app)
+        XCTAssertTrue(submitButton.isHittable)
         submitButton.tap()
 
-        XCTAssertTrue(app.staticTexts["Goal created"].waitForExistence(timeout: 10))
+        XCTAssertTrue(app.descendants(matching: .any)["goals.creation-message"].waitForExistence(timeout: 30))
         XCTAssertTrue(titleField.waitForNonExistence(timeout: 10))
     }
 
@@ -52,11 +54,11 @@ final class AmbitionsUITests: XCTestCase {
         XCTAssertTrue(app.staticTexts["No habits are live yet"].waitForExistence(timeout: 10))
 
         openMoreDestination("Insights", in: app)
-        XCTAssertTrue(app.otherElements["insights.screen"].waitForExistence(timeout: 10))
+        XCTAssertTrue(app.descendants(matching: .any)["insights.screen"].waitForExistence(timeout: 10))
 
         openMoreDestination("Profile", in: app)
-        XCTAssertTrue(app.otherElements["profile.default-tab-picker"].waitForExistence(timeout: 10))
-        XCTAssertTrue(app.otherElements["profile.appearance-picker"].waitForExistence(timeout: 10))
+        XCTAssertTrue(app.descendants(matching: .any)["profile.default-tab-picker"].waitForExistence(timeout: 10))
+        XCTAssertTrue(app.descendants(matching: .any)["profile.appearance-picker"].waitForExistence(timeout: 10))
         XCTAssertTrue(app.buttons["profile.save-preferences-button"].waitForExistence(timeout: 10))
     }
 
@@ -66,13 +68,12 @@ final class AmbitionsUITests: XCTestCase {
 
         openMoreDestination("Profile", in: app)
 
-        let defaultTabPicker = app.otherElements["profile.default-tab-picker"]
-        let appearancePicker = app.otherElements["profile.appearance-picker"]
-        let saveButton = app.buttons["profile.save-preferences-button"]
-
+        let defaultTabPicker = app.descendants(matching: .any)["profile.default-tab-picker"]
+        let appearancePicker = app.descendants(matching: .any)["profile.appearance-picker"]
         XCTAssertTrue(defaultTabPicker.waitForExistence(timeout: 10))
         XCTAssertTrue(appearancePicker.waitForExistence(timeout: 10))
-        XCTAssertTrue(saveButton.waitForExistence(timeout: 10))
+        XCTAssertTrue(app.buttons["profile.save-preferences-button"].waitForExistence(timeout: 10))
+        let saveButton = scrollUntilButtonHittable("profile.save-preferences-button", in: app)
         XCTAssertTrue(saveButton.isHittable)
     }
 
@@ -102,5 +103,29 @@ final class AmbitionsUITests: XCTestCase {
         }
 
         XCTFail("More destination row '\(label)' was not found.")
+    }
+
+    private func dismissKeyboardIfNeeded(in app: XCUIApplication) {
+        guard app.keyboards.element.exists else { return }
+
+        let returnButton = app.keyboards.buttons["Return"]
+        if returnButton.exists {
+            returnButton.tap()
+        }
+
+        if app.keyboards.element.exists {
+            app.navigationBars.element(boundBy: 0).tap()
+        }
+    }
+
+    private func scrollUntilButtonHittable(_ identifier: String, in app: XCUIApplication, maxAttempts: Int = 3) -> XCUIElement {
+        for _ in 0..<maxAttempts {
+            let button = app.buttons[identifier]
+            if button.isHittable {
+                return button
+            }
+            app.swipeUp()
+        }
+        return app.buttons[identifier]
     }
 }

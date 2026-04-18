@@ -96,7 +96,22 @@ public struct WidgetAction: Identifiable, Hashable, Sendable {
     }
 }
 
-public typealias WidgetActionHandler = @Sendable (WidgetAction) -> Void
+public typealias WidgetActionHandler = @MainActor @Sendable (WidgetAction) -> Void
+public typealias WidgetVoidAction = @MainActor @Sendable () -> Void
+
+@MainActor
+public func makeWidgetAction(
+    identity: WidgetIdentity,
+    kind: WidgetActionKind,
+    handler: WidgetActionHandler?
+) -> WidgetVoidAction? {
+    guard let handler else { return nil }
+
+    let action: WidgetVoidAction = {
+        handler(WidgetAction(identity: identity, kind: kind))
+    }
+    return action
+}
 
 public struct WidgetEmptyState: Hashable, Sendable {
     public let title: String

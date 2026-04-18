@@ -374,7 +374,7 @@ actor EventKitStoreClientLive: EventKitStoreClient {
     }
 
     private func request(
-        _ action: (@escaping (Bool, Error?) -> Void) -> Void
+        _ action: (@escaping @Sendable (Bool, Error?) -> Void) -> Void
     ) async throws -> Bool {
         try await withCheckedThrowingContinuation { continuation in
             action { granted, error in

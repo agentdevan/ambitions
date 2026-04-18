@@ -35,13 +35,16 @@ public struct InsightStatsWidget: View {
     }
 
     public var body: some View {
+        let handler: WidgetActionHandler? = onAction
+        let identity = viewModel.identity
+
         switch viewModel.snapshot.state {
         case .loading:
             WidgetLoadingStateView(lineCount: 4)
         case let .empty(empty):
-            WidgetFallbackStateView(title: empty.title, message: empty.message, icon: empty.icon, actionTitle: empty.actionTitle, action: emit(.openDetail))
+            WidgetFallbackStateView(title: empty.title, message: empty.message, icon: empty.icon, actionTitle: empty.actionTitle, action: makeWidgetAction(identity: identity, kind: .openDetail, handler: handler))
         case let .error(error):
-            WidgetFallbackStateView(title: error.title, message: error.message, icon: "waveform.path.ecg", actionTitle: error.recoveryTitle, action: emit(.markHelpful))
+            WidgetFallbackStateView(title: error.title, message: error.message, icon: "waveform.path.ecg", actionTitle: error.recoveryTitle, action: makeWidgetAction(identity: identity, kind: .markHelpful, handler: handler))
         case let .ready(content):
             WidgetSurface(chrome: .appCard) {
                 VStack(alignment: .leading, spacing: theme.spacing.md) {
@@ -50,14 +53,10 @@ public struct InsightStatsWidget: View {
                     Text(content.summary)
                         .font(theme.typography.body)
                         .foregroundStyle(theme.colors.textSecondary)
-                    WidgetActionBar(identity: viewModel.identity, actions: content.actions, handler: onAction)
+                    WidgetActionBar(identity: identity, actions: content.actions, handler: handler)
                 }
             }
         }
-    }
-
-    private func emit(_ kind: WidgetActionKind) -> (() -> Void)? {
-        { onAction?(WidgetAction(identity: viewModel.identity, kind: kind)) }
     }
 }
 
@@ -103,13 +102,16 @@ public struct WeeklyTrendWidget: View {
     }
 
     public var body: some View {
+        let handler: WidgetActionHandler? = onAction
+        let identity = viewModel.identity
+
         switch viewModel.snapshot.state {
         case .loading:
             WidgetLoadingStateView(lineCount: 4)
         case let .empty(empty):
-            WidgetFallbackStateView(title: empty.title, message: empty.message, icon: empty.icon, actionTitle: empty.actionTitle, action: emit(.openDetail))
+            WidgetFallbackStateView(title: empty.title, message: empty.message, icon: empty.icon, actionTitle: empty.actionTitle, action: makeWidgetAction(identity: identity, kind: .openDetail, handler: handler))
         case let .error(error):
-            WidgetFallbackStateView(title: error.title, message: error.message, icon: "chart.bar", actionTitle: error.recoveryTitle, action: emit(.refinePlan))
+            WidgetFallbackStateView(title: error.title, message: error.message, icon: "chart.bar", actionTitle: error.recoveryTitle, action: makeWidgetAction(identity: identity, kind: .refinePlan, handler: handler))
         case let .ready(content):
             CompactChartShell(title: content.title, subtitle: content.subtitle) {
                 VStack(alignment: .leading, spacing: theme.spacing.md) {
@@ -121,14 +123,10 @@ public struct WeeklyTrendWidget: View {
                     Text(content.summary)
                         .font(theme.typography.body)
                         .foregroundStyle(theme.colors.textSecondary)
-                    WidgetActionBar(identity: viewModel.identity, actions: content.actions, handler: onAction)
+                    WidgetActionBar(identity: identity, actions: content.actions, handler: handler)
                 }
             }
         }
-    }
-
-    private func emit(_ kind: WidgetActionKind) -> (() -> Void)? {
-        { onAction?(WidgetAction(identity: viewModel.identity, kind: kind)) }
     }
 }
 
@@ -163,13 +161,16 @@ public struct RecentActivityWidget: View {
     }
 
     public var body: some View {
+        let handler: WidgetActionHandler? = onAction
+        let identity = viewModel.identity
+
         switch viewModel.snapshot.state {
         case .loading:
             WidgetLoadingStateView(lineCount: 5)
         case let .empty(empty):
-            WidgetFallbackStateView(title: empty.title, message: empty.message, icon: empty.icon, actionTitle: empty.actionTitle, action: emit(.quickLog))
+            WidgetFallbackStateView(title: empty.title, message: empty.message, icon: empty.icon, actionTitle: empty.actionTitle, action: makeWidgetAction(identity: identity, kind: .quickLog, handler: handler))
         case let .error(error):
-            WidgetFallbackStateView(title: error.title, message: error.message, icon: "clock.badge.exclamationmark", actionTitle: error.recoveryTitle, action: emit(.openDetail))
+            WidgetFallbackStateView(title: error.title, message: error.message, icon: "clock.badge.exclamationmark", actionTitle: error.recoveryTitle, action: makeWidgetAction(identity: identity, kind: .openDetail, handler: handler))
         case let .ready(content):
             WidgetSurface(chrome: .appCard) {
                 VStack(alignment: .leading, spacing: theme.spacing.md) {
@@ -181,17 +182,13 @@ public struct RecentActivityWidget: View {
                             icon: item.icon,
                             badge: item.badge
                         ) {
-                            onAction?(WidgetAction(identity: viewModel.identity, kind: .openDetail, payload: item.id))
+                            handler?(WidgetAction(identity: identity, kind: .openDetail, payload: item.id))
                         }
                     }
-                    WidgetActionBar(identity: viewModel.identity, actions: content.actions, handler: onAction)
+                    WidgetActionBar(identity: identity, actions: content.actions, handler: handler)
                 }
             }
         }
-    }
-
-    private func emit(_ kind: WidgetActionKind) -> (() -> Void)? {
-        { onAction?(WidgetAction(identity: viewModel.identity, kind: kind)) }
     }
 }
 
@@ -237,13 +234,16 @@ public struct ProfileSummaryWidget: View {
     }
 
     public var body: some View {
+        let handler: WidgetActionHandler? = onAction
+        let identity = viewModel.identity
+
         switch viewModel.snapshot.state {
         case .loading:
             WidgetLoadingStateView(lineCount: 4)
         case let .empty(empty):
-            WidgetFallbackStateView(title: empty.title, message: empty.message, icon: empty.icon, actionTitle: empty.actionTitle, action: emit(.openDetail))
+            WidgetFallbackStateView(title: empty.title, message: empty.message, icon: empty.icon, actionTitle: empty.actionTitle, action: makeWidgetAction(identity: identity, kind: .openDetail, handler: handler))
         case let .error(error):
-            WidgetFallbackStateView(title: error.title, message: error.message, icon: "person.crop.circle.badge.exclamationmark", actionTitle: error.recoveryTitle, action: emit(.openDetail))
+            WidgetFallbackStateView(title: error.title, message: error.message, icon: "person.crop.circle.badge.exclamationmark", actionTitle: error.recoveryTitle, action: makeWidgetAction(identity: identity, kind: .openDetail, handler: handler))
         case let .ready(content):
             WidgetSurface(chrome: .appCard) {
                 VStack(alignment: .leading, spacing: theme.spacing.md) {
@@ -255,14 +255,10 @@ public struct ProfileSummaryWidget: View {
                         }
                     }
                     WidgetMetricGrid(stats: content.stats)
-                    WidgetActionBar(identity: viewModel.identity, actions: content.actions, handler: onAction)
+                    WidgetActionBar(identity: identity, actions: content.actions, handler: handler)
                 }
             }
         }
-    }
-
-    private func emit(_ kind: WidgetActionKind) -> (() -> Void)? {
-        { onAction?(WidgetAction(identity: viewModel.identity, kind: kind)) }
     }
 }
 
@@ -297,13 +293,16 @@ public struct CelebrationWidget: View {
     }
 
     public var body: some View {
+        let handler: WidgetActionHandler? = onAction
+        let identity = viewModel.identity
+
         switch viewModel.snapshot.state {
         case .loading:
             WidgetLoadingStateView(lineCount: 3)
         case let .empty(empty):
-            WidgetFallbackStateView(title: empty.title, message: empty.message, icon: empty.icon, actionTitle: empty.actionTitle, action: emit(.dismiss))
+            WidgetFallbackStateView(title: empty.title, message: empty.message, icon: empty.icon, actionTitle: empty.actionTitle, action: makeWidgetAction(identity: identity, kind: .dismiss, handler: handler))
         case let .error(error):
-            WidgetFallbackStateView(title: error.title, message: error.message, icon: "sparkles", actionTitle: error.recoveryTitle, action: emit(.dismiss))
+            WidgetFallbackStateView(title: error.title, message: error.message, icon: "sparkles", actionTitle: error.recoveryTitle, action: makeWidgetAction(identity: identity, kind: .dismiss, handler: handler))
         case let .ready(content):
             WidgetSurface(chrome: .heroCard, state: .celebration, accent: theme.colors.celebration) {
                 VStack(alignment: .leading, spacing: theme.spacing.md) {
@@ -312,14 +311,10 @@ public struct CelebrationWidget: View {
                     ForEach(content.achievements, id: \.self) { achievement in
                         WidgetListRow(title: achievement, subtitle: "Captured win", icon: "sparkle", badge: nil, tap: nil)
                     }
-                    WidgetActionBar(identity: viewModel.identity, actions: content.actions, handler: onAction)
+                    WidgetActionBar(identity: identity, actions: content.actions, handler: handler)
                 }
             }
         }
-    }
-
-    private func emit(_ kind: WidgetActionKind) -> (() -> Void)? {
-        { onAction?(WidgetAction(identity: viewModel.identity, kind: kind)) }
     }
 }
 
@@ -354,20 +349,23 @@ public struct SettingsGroupWidget: View {
     }
 
     public var body: some View {
+        let handler: WidgetActionHandler? = onAction
+        let identity = viewModel.identity
+
         switch viewModel.snapshot.state {
         case .loading:
             WidgetLoadingStateView(lineCount: 4)
         case let .empty(empty):
-            WidgetFallbackStateView(title: empty.title, message: empty.message, icon: empty.icon, actionTitle: empty.actionTitle, action: emit(.openDetail))
+            WidgetFallbackStateView(title: empty.title, message: empty.message, icon: empty.icon, actionTitle: empty.actionTitle, action: makeWidgetAction(identity: identity, kind: .openDetail, handler: handler))
         case let .error(error):
-            WidgetFallbackStateView(title: error.title, message: error.message, icon: "gearshape.2", actionTitle: error.recoveryTitle, action: emit(.openDetail))
+            WidgetFallbackStateView(title: error.title, message: error.message, icon: "gearshape.2", actionTitle: error.recoveryTitle, action: makeWidgetAction(identity: identity, kind: .openDetail, handler: handler))
         case let .ready(content):
             WidgetSurface(chrome: .appCard) {
                 VStack(alignment: .leading, spacing: theme.spacing.md) {
                     WidgetTitleBlock(eyebrow: "Settings", title: content.title, subtitle: content.subtitle)
                     ForEach(content.items) { item in
                         WidgetListRow(title: item.title, subtitle: item.subtitle, icon: item.icon, badge: item.valueLabel) {
-                            onAction?(WidgetAction(identity: viewModel.identity, kind: .openDetail, payload: item.id))
+                            handler?(WidgetAction(identity: identity, kind: .openDetail, payload: item.id))
                         }
                     }
                     if let footer = content.footer {
@@ -378,10 +376,6 @@ public struct SettingsGroupWidget: View {
                 }
             }
         }
-    }
-
-    private func emit(_ kind: WidgetActionKind) -> (() -> Void)? {
-        { onAction?(WidgetAction(identity: viewModel.identity, kind: kind)) }
     }
 }
 #endif

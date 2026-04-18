@@ -54,6 +54,7 @@ struct GoalsScreen: View {
                                     .foregroundStyle(theme.colors.textSecondary)
                             }
                         }
+                        .accessibilityIdentifier("goals.creation-message")
                     }
 
                     AppCard {

@@ -7,9 +7,7 @@ final class TodayViewModelTests: XCTestCase {
         let repositories = try await makeRepositories()
         let service = RepositoryBackedTodayService(repositories: repositories)
 
-        let formatter = ISO8601DateFormatter()
-        formatter.formatOptions = [.withInternetDateTime]
-        let now = try XCTUnwrap(formatter.date(from: "2026-04-15T13:00:00Z"))
+        let now = try XCTUnwrap(Calendar.current.date(from: DateComponents(year: 2026, month: 4, day: 15, hour: 13)))
         let experience = try await service.loadTodayExperience(userDisplayName: "   ", now: now)
 
         XCTAssertEqual(experience.mode, .empty)

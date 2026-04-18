@@ -123,7 +123,7 @@ struct WidgetFallbackStateView: View {
     let message: String
     let icon: String
     let actionTitle: String?
-    let action: (() -> Void)?
+    let action: WidgetVoidAction?
 
     var body: some View {
         EmptyStateCard(
@@ -185,7 +185,7 @@ struct WidgetListRow: View {
     let subtitle: String?
     let icon: String
     let badge: String?
-    let tap: (() -> Void)?
+    let tap: WidgetVoidAction?
 
     var body: some View {
         Group {
