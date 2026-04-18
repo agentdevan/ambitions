@@ -46,6 +46,10 @@ The full reproducible native generation, build, test, UI test, and archive flow 
 
 Use [docs/README.md](docs/README.md) as the index for current native docs and retained reference material.
 
+## Codex workflow
+
+Shared Codex behavior lives in [docs/codex/MASTER_CODEX_SYSTEM.md](docs/codex/MASTER_CODEX_SYSTEM.md). Windows and Mac Codex sessions should both pull the latest repo state from GitHub and use that file as standing session context; Mac sessions can start from [docs/codex/MAC_SESSION_BOOT_PROMPT.md](docs/codex/MAC_SESSION_BOOT_PROMPT.md).
+
 ## iOS native validation
 
 GitHub Actions validates iOS-native integrity on `macos-15` in [.github/workflows/ios-validate.yml](.github/workflows/ios-validate.yml).
