@@ -112,6 +112,38 @@ final class ExternalRoutingTests: XCTestCase {
         XCTAssertEqual(translator.route(fromWidget: widget), route)
     }
 
+    func testNotificationAndWidgetPayloadsUseCanonicalActionPayloadWithLegacyKeys() {
+        let translator = AppExternalRouteTranslator()
+        let route = AppExternalRoute.openGoalDetail(goalID: "goal-123")
+
+        let notification = translator.notificationPayload(for: route, action: "complete")
+        let widget = translator.widgetPayload(for: route, action: "complete")
+
+        XCTAssertEqual(notification.values, widget.values)
+        XCTAssertEqual(notification.values["action"], "complete")
+        XCTAssertEqual(notification.values["surface"], "goal-detail")
+        XCTAssertEqual(notification.values["goalID"], "goal-123")
+        XCTAssertEqual(notification.values["tab"], AppTab.goals.rawValue)
+        XCTAssertEqual(translator.route(fromNotification: notification), route)
+        XCTAssertEqual(translator.route(fromWidget: widget), route)
+    }
+
+    func testOldPayloadKeysStillRouteAfterCanonicalPayloadNormalization() {
+        let translator = AppExternalRouteTranslator()
+
+        let oldGoalPayload = AppWidgetRoutingPayload(
+            action: "open",
+            values: ["goalID": "goal-old", "tab": "goals"]
+        )
+        let oldCapturesPayload = AppNotificationRoutingPayload(
+            action: "noop",
+            values: ["surface": "captures-inbox"]
+        )
+
+        XCTAssertEqual(translator.route(fromWidget: oldGoalPayload), .openGoalDetail(goalID: "goal-old"))
+        XCTAssertEqual(translator.route(fromNotification: oldCapturesPayload), .openCapturesInbox)
+    }
+
     @MainActor
     func testRouterDispatchesGoalDetailToExistingNavigationModel() {
         let navigation = AppNavigationModel(selectedTab: .today)

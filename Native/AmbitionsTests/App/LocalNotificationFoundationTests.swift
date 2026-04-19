@@ -48,6 +48,9 @@ final class LocalNotificationFoundationTests: XCTestCase {
         let request = await center.replacedRequest
         XCTAssertEqual(request?.identifier, AppNotificationConstants.nextStepRequestID)
         XCTAssertEqual(request?.categoryIdentifier, AppNotificationConstants.nextStepCategoryID)
+        XCTAssertEqual(request?.userInfo["action"], "open")
+        XCTAssertEqual(request?.userInfo["surface"], "goal-detail")
+        XCTAssertEqual(request?.userInfo["tab"], "goals")
         XCTAssertEqual(request?.userInfo["goalID"], "goal-123")
         XCTAssertEqual(request?.userInfo["stepID"], "step-456")
         XCTAssertEqual(request?.timeInterval, 300)

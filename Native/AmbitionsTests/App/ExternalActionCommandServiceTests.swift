@@ -111,6 +111,31 @@ final class ExternalActionCommandServiceTests: XCTestCase {
         XCTAssertTrue(today.performedActions.isEmpty)
         XCTAssertTrue(router.dispatchedRoutes.isEmpty)
     }
+
+    func testWidgetPayloadFallsBackToCanonicalActionValueWhenActionIdentifierIsGeneric() async {
+        let today = RecordingExternalActionTodayService()
+        let service = makeService(todayService: today)
+        let payload = AppWidgetRoutingPayload(
+            action: "noop",
+            values: ExternalSurfaceActionPayload.commandPayload(
+                action: .complete,
+                surface: .goalDetail,
+                goalID: "goal-1",
+                stepID: "step-1",
+                tab: "goals"
+            )
+        )
+
+        let result = await service.execute(
+            ExternalActionCommand(widgetPayload: payload),
+            now: .now
+        )
+
+        XCTAssertEqual(result.outcome, .performed)
+        XCTAssertEqual(today.performedActions.map(\.kind), [.complete])
+        XCTAssertEqual(today.performedActions.first?.target.goalID, "goal-1")
+        XCTAssertEqual(today.performedActions.first?.target.stepID, "step-1")
+    }
 }
 
 @MainActor

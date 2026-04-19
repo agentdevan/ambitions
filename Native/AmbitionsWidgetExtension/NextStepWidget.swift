@@ -24,6 +24,17 @@ struct NextStepProvider: TimelineProvider {
                         urgency: .normal,
                         timing: .deadline
                     )
+                ),
+                nowState: ExternalSurfaceNowState(
+                    todayPosture: .active,
+                    pressureLevel: .steady,
+                    bestNextStep: ExternalSurfaceActionReference(goalID: "goal-placeholder", stepID: "step-placeholder"),
+                    activeFocus: nil,
+                    openCaptureUrgency: .none,
+                    blockerSummary: ExternalSurfaceBlockerSummary(waitingCount: 0, blockedCount: 0),
+                    supportedCommands: [
+                        ExternalSurfaceCommandDescriptor(kind: .openToday, requiresGoalID: false, requiresStepID: false),
+                    ]
                 )
             )
         )
@@ -57,18 +68,20 @@ private struct NextStepWidgetView: View {
     let entry: NextStepEntry
 
     var body: some View {
+        let glance = ExternalSurfaceGlanceState(snapshot: entry.snapshot)
+
         VStack(alignment: .leading, spacing: 8) {
             Text("Ambitions")
                 .font(.caption)
                 .foregroundStyle(.secondary)
 
-            if let next = entry.snapshot?.nextAction {
-                Text("Next step ready")
+            if glance.primaryReference != nil {
+                Text(title(for: glance.todayPosture))
                     .font(.headline)
-                Text(urgencyLabel(next.display.urgency))
+                Text(detail(for: glance))
                     .font(.subheadline)
                     .foregroundStyle(.secondary)
-                Text("Goal \(next.goalID.prefix(8))")
+                Text(pressureLabel(glance.pressureLevel))
                     .font(.caption2)
                     .foregroundStyle(.tertiary)
             } else {
@@ -81,7 +94,31 @@ private struct NextStepWidgetView: View {
             Spacer(minLength: 0)
         }
         .padding()
-        .widgetURL(widgetURL())
+        .widgetURL(glance.primaryURL)
+    }
+
+    private func title(for posture: ExternalSurfaceTodayPosture) -> String {
+        switch posture {
+        case .empty:
+            return "No next step"
+        case .active:
+            return "Next step ready"
+        case .waiting:
+            return "Waiting on a blocker"
+        case .recovery:
+            return "Recovery step ready"
+        }
+    }
+
+    private func detail(for glance: ExternalSurfaceGlanceState) -> String {
+        switch glance.todayPosture {
+        case .waiting:
+            return "Open Ambitions for the safest next move."
+        case .empty:
+            return "Open Ambitions to refresh your plan."
+        case .active, .recovery:
+            return urgencyLabel(glance.urgency)
+        }
     }
 
     private func urgencyLabel(_ urgency: ExternalSurfaceUrgency) -> String {
@@ -97,11 +134,17 @@ private struct NextStepWidgetView: View {
         }
     }
 
-    private func widgetURL() -> URL? {
-        guard let goalID = entry.snapshot?.nextAction?.goalID else {
-            return URL(string: "ambitions://tab/today")
+    private func pressureLabel(_ pressure: ExternalSurfacePressureLevel) -> String {
+        switch pressure {
+        case .open:
+            return "Open"
+        case .steady:
+            return "Steady"
+        case .elevated:
+            return "Elevated pressure"
+        case .overloaded:
+            return "Needs triage"
         }
-        return URL(string: "ambitions://goal/\(goalID)")
     }
 }
 

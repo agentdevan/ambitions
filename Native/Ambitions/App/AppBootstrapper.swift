@@ -72,7 +72,13 @@ final class AppBootstrapper {
 
     func handleWidgetPayload(_ payload: AppWidgetRoutingPayload) {
         guard case let .ready(container) = phase else { return }
-        container.externalRouter.handleWidgetPayload(payload)
+        Task {
+            _ = await container.externalActionService.execute(
+                ExternalActionCommand(widgetPayload: payload),
+                now: .now
+            )
+            container.externalRouter.handleWidgetPayload(payload)
+        }
     }
 
     private var resolvedConfiguration: AppBootstrapConfiguration {

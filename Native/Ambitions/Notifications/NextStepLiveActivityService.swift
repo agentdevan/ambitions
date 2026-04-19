@@ -9,18 +9,10 @@ actor NextStepLiveActivityService: NextStepLiveActivityServicing {
     func refresh(from snapshot: ExternalSurfaceSnapshot?, now: Date) async {
         guard ActivityAuthorizationInfo().areActivitiesEnabled else { return }
 
-        guard let nextAction = snapshot?.nextAction else {
+        guard let contentState = NextStepActivityAttributes.ContentState(snapshot: snapshot, now: now) else {
             await endAll()
             return
         }
-
-        let contentState = NextStepActivityAttributes.ContentState(
-            goalID: nextAction.goalID,
-            stepID: nextAction.stepID,
-            urgency: nextAction.display.urgency,
-            timing: nextAction.display.timing,
-            updatedAt: ISO8601DateFormatter().string(from: now)
-        )
 
         if let existing = Activity<NextStepActivityAttributes>.activities.first {
             await existing.update(ActivityContent(state: contentState, staleDate: nil))

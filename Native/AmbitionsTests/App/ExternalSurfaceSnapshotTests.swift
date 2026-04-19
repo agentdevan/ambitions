@@ -95,6 +95,49 @@ final class ExternalSurfaceSnapshotTests: XCTestCase {
         XCTAssertNil(decoded.nowState)
     }
 
+    func testLiveActivityContentStatePrefersNowStateAndFallsBackToNextAction() throws {
+        let now = try XCTUnwrap(ISO8601DateFormatter().date(from: "2026-04-15T12:00:00Z"))
+        let nextAction = ExternalSurfaceNextAction(
+            goalID: "goal-old",
+            stepID: "step-old",
+            display: ExternalSurfaceDisplayMetadata(
+                templateKey: "next_tiny_step",
+                goalMode: .project,
+                stepState: .planned,
+                urgency: .soon,
+                timing: .deadline
+            )
+        )
+        let snapshot = ExternalSurfaceSnapshot(
+            generatedAt: "2026-04-15T12:00:00Z",
+            nextAction: nextAction,
+            nowState: ExternalSurfaceNowState(
+                todayPosture: .active,
+                pressureLevel: .elevated,
+                bestNextStep: ExternalSurfaceActionReference(goalID: "goal-now", stepID: "step-now"),
+                activeFocus: nil,
+                openCaptureUrgency: .none,
+                blockerSummary: ExternalSurfaceBlockerSummary(waitingCount: 0, blockedCount: 0),
+                supportedCommands: []
+            )
+        )
+
+        let state = try XCTUnwrap(NextStepActivityAttributes.ContentState(snapshot: snapshot, now: now))
+        let legacyState = try XCTUnwrap(
+            NextStepActivityAttributes.ContentState(
+                snapshot: ExternalSurfaceSnapshot(generatedAt: "2026-04-15T12:00:00Z", nextAction: nextAction),
+                now: now
+            )
+        )
+
+        XCTAssertEqual(state.goalID, "goal-now")
+        XCTAssertEqual(state.stepID, "step-now")
+        XCTAssertEqual(state.pressureLevel, .elevated)
+        XCTAssertEqual(legacyState.goalID, "goal-old")
+        XCTAssertEqual(legacyState.stepID, "step-old")
+        XCTAssertEqual(legacyState.pressureLevel, .steady)
+    }
+
     func testSnapshotRefreshingDecoratorsRefreshWriterAfterTodayAndGoalsMutations() async throws {
         let writer = RecordingSnapshotWriter()
         let goalsBase = RecordingGoalsService()

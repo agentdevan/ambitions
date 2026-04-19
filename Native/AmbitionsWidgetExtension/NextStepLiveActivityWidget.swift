@@ -16,6 +16,9 @@ struct NextStepLiveActivityWidget: Widget {
                     Text(urgencyLabel(context.state.urgency))
                         .font(.subheadline)
                         .foregroundStyle(.secondary)
+                    Text(pressureLabel(context.state.pressureLevel))
+                        .font(.caption2)
+                        .foregroundStyle(.tertiary)
                 }
                 Spacer()
                 Link(destination: deepLinkURL(goalID: context.state.goalID)) {
@@ -74,6 +77,20 @@ struct NextStepLiveActivityWidget: Widget {
     }
 
     private func deepLinkURL(goalID: String) -> URL {
-        URL(string: "ambitions://goal/\(goalID)") ?? URL(string: "ambitions://tab/today")!
+        ExternalSurfaceActionPayload.deepLinkURL(surface: .goalDetail, goalID: goalID)
+            ?? ExternalSurfaceActionPayload.deepLinkURL(surface: .tab, tab: "today")!
+    }
+
+    private func pressureLabel(_ pressure: ExternalSurfacePressureLevel) -> String {
+        switch pressure {
+        case .open:
+            return "Open"
+        case .steady:
+            return "Steady"
+        case .elevated:
+            return "Elevated pressure"
+        case .overloaded:
+            return "Needs triage"
+        }
     }
 }

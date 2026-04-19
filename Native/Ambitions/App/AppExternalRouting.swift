@@ -94,11 +94,11 @@ struct AppExternalRouteTranslator {
     func deepLinkURL(for route: AppExternalRoute) -> URL? {
         switch route {
         case let .openTab(tab):
-            return URL(string: "ambitions://tab/\(tab.rawValue)")
+            return ExternalSurfaceActionPayload.deepLinkURL(surface: .tab, tab: tab.rawValue)
         case let .openGoalDetail(goalID):
-            return URL(string: "ambitions://goal/\(goalID)")
+            return ExternalSurfaceActionPayload.deepLinkURL(surface: .goalDetail, goalID: goalID)
         case .openCapturesInbox:
-            return URL(string: "ambitions://captures/inbox")
+            return ExternalSurfaceActionPayload.deepLinkURL(surface: .capturesInbox)
         case let .genericExternalEntry(kind, payload):
             var components = URLComponents()
             components.scheme = "ambitions"
@@ -112,24 +112,60 @@ struct AppExternalRouteTranslator {
     }
 
     func notificationPayload(for route: AppExternalRoute, action: String) -> AppNotificationRoutingPayload {
-        AppNotificationRoutingPayload(action: action, values: routePayload(for: route))
+        AppNotificationRoutingPayload(action: action, values: commandPayload(for: route, action: action))
     }
 
     func widgetPayload(for route: AppExternalRoute, action: String) -> AppWidgetRoutingPayload {
-        AppWidgetRoutingPayload(action: action, values: routePayload(for: route))
+        AppWidgetRoutingPayload(action: action, values: commandPayload(for: route, action: action))
     }
 
     func routePayload(for route: AppExternalRoute) -> [String: String] {
         switch route {
         case let .openTab(tab):
-            return ["surface": "tab", "tab": tab.rawValue]
+            return ExternalSurfaceActionPayload.routePayload(surface: .tab, tab: tab.rawValue)
         case let .openGoalDetail(goalID):
-            return ["goalID": goalID, "surface": "goal-detail", "tab": AppTab.goals.rawValue]
+            return ExternalSurfaceActionPayload.routePayload(
+                surface: .goalDetail,
+                goalID: goalID,
+                tab: AppTab.goals.rawValue
+            )
         case .openCapturesInbox:
-            return ["surface": "captures-inbox", "tab": AppTab.captures.rawValue]
+            return ExternalSurfaceActionPayload.routePayload(
+                surface: .capturesInbox,
+                tab: AppTab.captures.rawValue
+            )
         case let .genericExternalEntry(kind, payload):
             var values = payload
             values["surface"] = kind
+            return values
+        }
+    }
+
+    private func commandPayload(for route: AppExternalRoute, action: String) -> [String: String] {
+        let actionName = ExternalSurfaceActionName(rawAction: action)
+        switch route {
+        case let .openTab(tab):
+            return ExternalSurfaceActionPayload.commandPayload(
+                action: actionName,
+                surface: .tab,
+                tab: tab.rawValue
+            )
+        case let .openGoalDetail(goalID):
+            return ExternalSurfaceActionPayload.commandPayload(
+                action: actionName,
+                surface: .goalDetail,
+                goalID: goalID,
+                tab: AppTab.goals.rawValue
+            )
+        case .openCapturesInbox:
+            return ExternalSurfaceActionPayload.commandPayload(
+                action: actionName,
+                surface: .capturesInbox,
+                tab: AppTab.captures.rawValue
+            )
+        case .genericExternalEntry:
+            var values = routePayload(for: route)
+            values[ExternalSurfaceActionPayload.Key.action] = actionName.rawValue
             return values
         }
     }

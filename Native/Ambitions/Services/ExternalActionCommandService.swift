@@ -51,7 +51,7 @@ struct ExternalActionCommand: Equatable, Sendable {
 
     init(notificationPayload payload: AppNotificationRoutingPayload) {
         self.init(
-            kind: Self.kind(from: payload.action),
+            kind: Self.kind(from: payload.action, values: payload.values),
             target: ExternalActionTarget(
                 goalID: payload.values["goalID"],
                 stepID: payload.values["stepID"],
@@ -64,7 +64,7 @@ struct ExternalActionCommand: Equatable, Sendable {
 
     init(widgetPayload payload: AppWidgetRoutingPayload) {
         self.init(
-            kind: Self.kind(from: payload.action),
+            kind: Self.kind(from: payload.action, values: payload.values),
             target: ExternalActionTarget(
                 goalID: payload.values["goalID"],
                 stepID: payload.values["stepID"],
@@ -75,8 +75,12 @@ struct ExternalActionCommand: Equatable, Sendable {
         )
     }
 
-    private static func kind(from rawAction: String) -> ExternalActionKind {
-        switch rawAction.lowercased() {
+    private static func kind(from rawAction: String, values: [String: String] = [:]) -> ExternalActionKind {
+        let normalized = rawAction.lowercased()
+        let fallback = values[ExternalSurfaceActionPayload.Key.action]?.lowercased()
+        let command = normalized == "noop" || normalized.isEmpty ? fallback ?? normalized : normalized
+
+        switch command {
         case "complete":
             return .complete
         case "delay":
