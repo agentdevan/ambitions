@@ -264,6 +264,9 @@ struct PlanningNextStepCandidate: Codable, Sendable, Equatable {
     let score: Double
     let timingKey: String
     let evaluation: PlanningEvaluation
+    let learnedFitScore: Double?
+    let whyNow: WhyNowExplanationMetadata?
+    let timelineRiskScore: Double?
 }
 
 struct PlanningNextStepSelection: Sendable, Equatable {
@@ -274,9 +277,25 @@ struct PlanningNextStepSelection: Sendable, Equatable {
 
 struct PlanningNextStepSelector: Sendable {
     private let evaluator = PlanningEvaluator()
+    private let learningService: LearningAnticipationService
 
-    func rankedSelections(goals: [Goal], now: Date) -> [PlanningNextStepSelection] {
+    init(learningService: LearningAnticipationService = LearningAnticipationService()) {
+        self.learningService = learningService
+    }
+
+    func rankedSelections(
+        goals: [Goal],
+        evidence: [ProgressEvidence] = [],
+        feedback: [GoalFeedbackEvent] = [],
+        now: Date
+    ) -> [PlanningNextStepSelection] {
         let activeGoals = goals.filter { $0.state == .active || $0.state == .paused }
+        let learningSnapshot = learningService.buildSnapshot(
+            goals: activeGoals,
+            evidence: evidence,
+            feedback: feedback,
+            now: now
+        )
         let selections = activeGoals.flatMap { goal -> [PlanningNextStepSelection] in
             guard let plan = goal.plan else { return [] }
             let draft = GoalDraft(
@@ -298,7 +317,13 @@ struct PlanningNextStepSelector: Sendable {
             return plan.sections.flatMap(\.steps)
                 .filter { $0.state != .completed && $0.state != .cancelled }
                 .map { step in
-                    PlanningNextStepSelection(
+                    let insight = learningService.learnedStepInsight(
+                        goal: goal,
+                        step: step,
+                        snapshot: learningSnapshot,
+                        now: now
+                    )
+                    return PlanningNextStepSelection(
                         goal: goal,
                         step: step,
                         candidate: PlanningNextStepCandidate(
@@ -309,10 +334,14 @@ struct PlanningNextStepSelector: Sendable {
                                 step: step,
                                 evaluation: evaluation,
                                 hasIncompleteDependencies: hasIncompleteDependencies(step: step, completedStepIDs: completedStepIDs),
+                                learnedFitScore: insight.fitScore,
                                 now: now
                             ),
                             timingKey: timingKey(for: step.timing, goalMode: goal.mode),
-                            evaluation: evaluation
+                            evaluation: evaluation,
+                            learnedFitScore: insight.fitScore,
+                            whyNow: insight.whyNow,
+                            timelineRiskScore: learningSnapshot.goalSummaries[goal.id]?.timelineRisk.riskScore
                         )
                     )
                 }
@@ -326,8 +355,13 @@ struct PlanningNextStepSelector: Sendable {
         }
     }
 
-    func bestSelection(goals: [Goal], now: Date) -> PlanningNextStepSelection? {
-        rankedSelections(goals: goals, now: now).first
+    func bestSelection(
+        goals: [Goal],
+        evidence: [ProgressEvidence] = [],
+        feedback: [GoalFeedbackEvent] = [],
+        now: Date
+    ) -> PlanningNextStepSelection? {
+        rankedSelections(goals: goals, evidence: evidence, feedback: feedback, now: now).first
     }
 
     private func score(
@@ -335,6 +369,7 @@ struct PlanningNextStepSelector: Sendable {
         step: Step,
         evaluation: PlanningEvaluation,
         hasIncompleteDependencies: Bool,
+        learnedFitScore: Double,
         now: Date
     ) -> Double {
         var value = 0.5
@@ -375,6 +410,7 @@ struct PlanningNextStepSelector: Sendable {
         if goal.mode == .delegatedSupport {
             value -= 0.04
         }
+        value += (learnedFitScore - 0.5) * 0.24
         return (value * 100).rounded() / 100
     }
 

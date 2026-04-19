@@ -226,6 +226,33 @@ final class RescheduleEngineTests: XCTestCase {
 
         XCTAssertEqual(first, second)
     }
+
+    func testObservedPoorFitPatternCanEscalateDelayToLaterThisWeek() {
+        let decision = RescheduleEngine().decide(
+            RescheduleEngineInput(
+                stepID: "step-1",
+                timing: baseTiming,
+                feedbackHistory: [],
+                trigger: .delay,
+                fallbackMicroStep: "Write one paragraph.",
+                now: fixedNow,
+                learningSummary: GoalLearningSummary(
+                    goalID: "goal-1",
+                    energyFitPattern: EnergyFitPattern(preferredSessionLength: .short, supportingEvidenceCount: 4, frictionEventCount: 0, confidence: .high, summary: "Short focused passes have the strongest observed fit."),
+                    focusWindowPattern: FocusWindowPattern(preferredWindow: .morning, supportingEvidenceCount: 4, frictionEventCount: 3, confidence: .high, summary: "Morning attempts land more often than evening retries."),
+                    historicalFit: HistoricalFitSignal(score: 0.22, confidence: .high, supportingEvidenceCount: 4, frictionEventCount: 3, summary: "Recent completion fit is low for the current retry window."),
+                    driftTriggers: [
+                        DriftTriggerPattern(goalID: "goal-1", cause: .timingPressure, window: .evening, occurrenceCount: 3, summary: "Observed drift clusters in the evening.")
+                    ],
+                    timelineRisk: TimelineRiskForecast(riskScore: 0.74, confidence: .high, reasons: ["Repeated delays are compressing the remaining timeline."]),
+                    whyNow: nil
+                )
+            )
+        )
+
+        XCTAssertEqual(decision.deferRecommendation, .laterThisWeek)
+        XCTAssertTrue(decision.rationale.localizedCaseInsensitiveContains("observed fit"))
+    }
 }
 
 private extension RescheduleEngineTests {

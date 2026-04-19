@@ -134,6 +134,39 @@ final class RitualOrchestrationServiceTests: XCTestCase {
         XCTAssertNil(plan.activeRecommendation.primaryAction)
         XCTAssertFalse(plan.activeRecommendation.body.localizedCaseInsensitiveContains("checklist"))
     }
+
+    func testWeeklyResetCanSurfaceUnderrepresentedDomainPressureFromLearningSnapshot() throws {
+        let now = try XCTUnwrap(DomainTimestamp.date(from: "2026-04-20T09:00:00Z"))
+        let goal = makeGoal(goalID: "goal-health", stepID: "step-health", dueAt: "2026-04-25T16:00:00Z")
+
+        let plan = RitualOrchestrationService().makePlan(
+            input: RitualOrchestrationInput(
+                goals: [goal],
+                captures: [],
+                evidence: [],
+                feedback: [],
+                learningSnapshot: LearningAnticipationSnapshot(
+                    goalSummaries: [
+                        "goal-health": GoalLearningSummary(
+                            goalID: "goal-health",
+                            energyFitPattern: EnergyFitPattern(preferredSessionLength: nil, supportingEvidenceCount: 1, frictionEventCount: 0, confidence: .low, summary: "Observed history is still limited."),
+                            focusWindowPattern: FocusWindowPattern(preferredWindow: nil, supportingEvidenceCount: 1, frictionEventCount: 0, confidence: .low, summary: "Observed history is still limited."),
+                            historicalFit: HistoricalFitSignal(score: 0.42, confidence: .low, supportingEvidenceCount: 1, frictionEventCount: 0, summary: "Observed history is still limited."),
+                            driftTriggers: [],
+                            timelineRisk: TimelineRiskForecast(riskScore: 0.32, confidence: .medium, reasons: ["The path is still manageable."]),
+                            whyNow: nil
+                        )
+                    ],
+                    underrepresentedGoalSignals: [
+                        UnderrepresentedGoalSignal(goalID: "goal-health", domain: .health, pressureScore: 0.78, summary: "Health work is underrepresented against the active portfolio.")
+                    ]
+                ),
+                now: now
+            )
+        )
+
+        XCTAssertTrue(plan.weekThesis.localizedCaseInsensitiveContains("underrepresented"))
+    }
 }
 
 private extension RitualOrchestrationServiceTests {

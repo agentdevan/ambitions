@@ -65,6 +65,7 @@ struct RescheduleEngineInput: Sendable {
     let stepState: StepLifecycleState
     let incompleteDependencyCount: Int
     let pathStateSummary: LifePathStateSummary?
+    let learningSummary: GoalLearningSummary?
 
     init(
         stepID: String,
@@ -76,7 +77,8 @@ struct RescheduleEngineInput: Sendable {
         planningEvaluation: PlanningEvaluation? = nil,
         stepState: StepLifecycleState = .planned,
         incompleteDependencyCount: Int = 0,
-        pathStateSummary: LifePathStateSummary? = nil
+        pathStateSummary: LifePathStateSummary? = nil,
+        learningSummary: GoalLearningSummary? = nil
     ) {
         self.stepID = stepID
         self.timing = timing
@@ -88,6 +90,7 @@ struct RescheduleEngineInput: Sendable {
         self.stepState = stepState
         self.incompleteDependencyCount = incompleteDependencyCount
         self.pathStateSummary = pathStateSummary
+        self.learningSummary = learningSummary
     }
 }
 
@@ -123,6 +126,7 @@ struct RescheduleEngine: GoalRescheduling {
         if input.timing.tempo == .ongoing, deferRecommendation == .someday {
             deferRecommendation = .laterThisWeek
         }
+        deferRecommendation = adjustedDeferRecommendation(base: deferRecommendation, input: input)
 
         let needsSmallerStep = needsSmallerStepRecommendation(
             for: input,
@@ -419,7 +423,43 @@ private extension RescheduleEngine {
             return " Cause: \(causeOfDrift.rawValue)."
         }()
         let postureClause = posture == .gentle ? " Recovery stays gentle." : ""
-        return "\(action) with \(signals.consecutiveMissCount) consecutive misses and \(signals.recentMissCount) recent misses \(timingClause)\(scopeClause)\(causeClause)\(postureClause)"
+        let learnedClause: String = {
+            guard let learningSummary = input.learningSummary,
+                  learningSummary.historicalFit.confidence == .high,
+                  learningSummary.historicalFit.score <= 0.3 else {
+                return ""
+            }
+            return " Observed fit is weak in this window."
+        }()
+        return "\(action) with \(signals.consecutiveMissCount) consecutive misses and \(signals.recentMissCount) recent misses \(timingClause)\(scopeClause)\(causeClause)\(postureClause)\(learnedClause)"
+    }
+
+    private func adjustedDeferRecommendation(
+        base: RescheduleDeferRecommendation,
+        input: RescheduleEngineInput
+    ) -> RescheduleDeferRecommendation {
+        guard base == .none || base == .laterToday else { return base }
+        guard let learningSummary = input.learningSummary,
+              learningSummary.historicalFit.confidence == .high,
+              learningSummary.historicalFit.score <= 0.3,
+              learningSummary.driftTriggers.contains(where: {
+                  $0.window == focusWindow(for: input.now) && $0.occurrenceCount >= 2
+              }) else {
+            return base
+        }
+        return .laterThisWeek
+    }
+
+    private func focusWindow(for date: Date) -> FocusWindowBucket {
+        let hour = Calendar(identifier: .gregorian).component(.hour, from: date)
+        switch hour {
+        case 5..<12:
+            return .morning
+        case 12..<18:
+            return .afternoon
+        default:
+            return .evening
+        }
     }
 
     func suggestedTime(for recommendation: RescheduleDeferRecommendation, now: Date) -> String? {

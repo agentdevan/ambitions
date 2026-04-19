@@ -8,6 +8,7 @@ struct RepositoryBackedTodayService: TodayServicing {
     let captureService: any CaptureServicing
     let calendarRemindersService: any CalendarRemindersServicing
     let ritualService: RitualOrchestrationService
+    let learningService: LearningAnticipationService
 
     init(
         repositories: AppRepositories,
@@ -15,7 +16,8 @@ struct RepositoryBackedTodayService: TodayServicing {
         rescheduleEngine: any GoalRescheduling = RescheduleEngine(),
         captureService: (any CaptureServicing)? = nil,
         calendarRemindersService: (any CalendarRemindersServicing)? = nil,
-        ritualService: RitualOrchestrationService = RitualOrchestrationService()
+        ritualService: RitualOrchestrationService = RitualOrchestrationService(),
+        learningService: LearningAnticipationService = LearningAnticipationService()
     ) {
         self.repositories = repositories
         self.adaptationService = adaptationService
@@ -23,6 +25,7 @@ struct RepositoryBackedTodayService: TodayServicing {
         self.captureService = captureService ?? DefaultCaptureService(repository: repositories.captures)
         self.calendarRemindersService = calendarRemindersService ?? StubCalendarRemindersService()
         self.ritualService = ritualService
+        self.learningService = learningService
     }
 
     func loadTodayExperience(userDisplayName: String, now: Date) async throws -> TodayExperience {
@@ -107,7 +110,18 @@ private extension RepositoryBackedTodayService {
 
     func makeExperience(snapshot: Snapshot, userDisplayName: String, now: Date) -> TodayExperience {
         let activeGoals = snapshot.goals.filter { $0.state == .active || $0.state == .paused }
-        let rankedSelections = PlanningNextStepSelector().rankedSelections(goals: activeGoals, now: now)
+        let learningSnapshot = learningService.buildSnapshot(
+            goals: activeGoals,
+            evidence: snapshot.evidence,
+            feedback: snapshot.feedback,
+            now: now
+        )
+        let rankedSelections = PlanningNextStepSelector(learningService: learningService).rankedSelections(
+            goals: activeGoals,
+            evidence: snapshot.evidence,
+            feedback: snapshot.feedback,
+            now: now
+        )
         let allSteps = activeGoals.flatMap { $0.plan?.sections.flatMap(\.steps) ?? [] }
         let actionableSteps = rankedSelections.map(\.step)
 
@@ -147,7 +161,7 @@ private extension RepositoryBackedTodayService {
                 clarificationCount: clarificationDrafts.count,
                 blockedCount: blockedDrafts.count
             ),
-            ritual: makeRitual(snapshot: snapshot, activeGoals: activeGoals, now: now),
+            ritual: makeRitual(snapshot: snapshot, activeGoals: activeGoals, learningSnapshot: learningSnapshot, now: now),
             dailyTargets: makeDailyTargets(
                 mode: mode,
                 goals: activeGoals,
@@ -158,6 +172,7 @@ private extension RepositoryBackedTodayService {
             focus: makeFocus(
                 clarificationDrafts: clarificationDrafts,
                 blockedDrafts: blockedDrafts,
+                rankedSelections: rankedSelections,
                 actionableSteps: actionableSteps,
                 goals: activeGoals,
                 draftsByGoalID: draftsByGoalID,
@@ -202,13 +217,14 @@ private extension RepositoryBackedTodayService {
         )
     }
 
-    func makeRitual(snapshot: Snapshot, activeGoals: [Goal], now: Date) -> TodayRitualLoopState {
+    func makeRitual(snapshot: Snapshot, activeGoals: [Goal], learningSnapshot: LearningAnticipationSnapshot, now: Date) -> TodayRitualLoopState {
         let plan = ritualService.makePlan(
             input: RitualOrchestrationInput(
                 goals: activeGoals,
                 captures: snapshot.captures,
                 evidence: snapshot.evidence,
                 feedback: snapshot.feedback,
+                learningSnapshot: learningSnapshot,
                 now: now
             )
         )
@@ -872,6 +888,7 @@ private extension RepositoryBackedTodayService {
     func makeFocus(
         clarificationDrafts: [PersistedGoalDraft],
         blockedDrafts: [PersistedGoalDraft],
+        rankedSelections: [PlanningNextStepSelection],
         actionableSteps: [Step],
         goals: [Goal],
         draftsByGoalID: [String: PersistedGoalDraft],
@@ -938,6 +955,7 @@ private extension RepositoryBackedTodayService {
         let draft = draftsByGoalID[goal.id]
         let target = TodayActionTarget(goalID: goal.id, stepID: step.id, draftID: draft?.id)
         let progress = focusProgress(for: step, feedback: feedback, evidence: evidence)
+        let selection = rankedSelections.first(where: { $0.goal.id == goal.id && $0.step.id == step.id })
 
         if draft?.latestResultKind == .starterPlanned {
             return .starter(
@@ -963,7 +981,7 @@ private extension RepositoryBackedTodayService {
             TodayFocusPlannedState(
                 title: step.title,
                 subtitle: goal.title,
-                reason: focusReason(for: goal, step: step),
+                reason: selection?.candidate.whyNow?.conciseReason ?? focusReason(for: goal, step: step),
                 timingLabel: timingLabel(for: step.timing, goalMode: goal.mode),
                 energyLabel: energyLabel(for: goal.mode),
                 progress: progress,
@@ -1299,7 +1317,13 @@ private extension RepositoryBackedTodayService {
                 planningEvaluation: goal.plan?.evaluation,
                 stepState: step.state,
                 incompleteDependencyCount: incompleteDependencyCount(in: goal, for: step),
-                pathStateSummary: LifeGraphResolver.pathStateSummary(for: goal)
+                pathStateSummary: LifeGraphResolver.pathStateSummary(for: goal),
+                learningSummary: learningService.buildSnapshot(
+                    goals: [goal],
+                    evidence: [],
+                    feedback: history,
+                    now: now
+                ).goalSummaries[goal.id]
             )
         )
     }

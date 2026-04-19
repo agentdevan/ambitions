@@ -8,6 +8,7 @@ struct RepositoryBackedGoalsService: GoalsServicing {
     let rescheduleEngine: any GoalRescheduling
     let orchestrator: any GoalOrchestrating
     let calendarRemindersService: any CalendarRemindersServicing
+    let learningService: LearningAnticipationService
 
     init(
         repositories: AppRepositories,
@@ -15,7 +16,8 @@ struct RepositoryBackedGoalsService: GoalsServicing {
         adaptationService: GoalEngineAdaptationService = GoalEngineAdaptationService(),
         rescheduleEngine: any GoalRescheduling = RescheduleEngine(),
         orchestrator: any GoalOrchestrating = GoalEngineOrchestrator(),
-        calendarRemindersService: (any CalendarRemindersServicing)? = nil
+        calendarRemindersService: (any CalendarRemindersServicing)? = nil,
+        learningService: LearningAnticipationService = LearningAnticipationService()
     ) {
         self.repositories = repositories
         self.planner = planner
@@ -23,6 +25,7 @@ struct RepositoryBackedGoalsService: GoalsServicing {
         self.rescheduleEngine = rescheduleEngine
         self.orchestrator = orchestrator
         self.calendarRemindersService = calendarRemindersService ?? StubCalendarRemindersService()
+        self.learningService = learningService
     }
 
     func loadOverview() async throws -> GoalsOverview {
@@ -480,6 +483,12 @@ private extension RepositoryBackedGoalsService {
     func makeOverview(snapshot: Snapshot) -> GoalsOverview {
         let orderedIDs = normalizedPriorityOrder(snapshot: snapshot)
         let manualRanks = Dictionary(uniqueKeysWithValues: orderedIDs.enumerated().map { ($1, $0) })
+        let learningSnapshot = learningService.buildSnapshot(
+            goals: snapshot.goals,
+            evidence: snapshot.evidence,
+            feedback: snapshot.feedback,
+            now: .now
+        )
 
         let goalItems = snapshot.goals.map { goal in
             makeGoalListItem(
@@ -487,6 +496,8 @@ private extension RepositoryBackedGoalsService {
                 draft: snapshot.drafts.first(where: { $0.plannedGoalID == goal.id }),
                 evidence: snapshot.evidence,
                 feedback: snapshot.feedback,
+                learningSummary: learningSnapshot.goalSummaries[goal.id],
+                underrepresentedSignal: learningSnapshot.underrepresentedGoalSignals.first(where: { $0.goalID == goal.id }),
                 manualRank: manualRanks[goal.id] ?? manualRanks.count
             )
         }
@@ -575,6 +586,8 @@ private extension RepositoryBackedGoalsService {
         draft: PersistedGoalDraft?,
         evidence: [ProgressEvidence],
         feedback: [GoalFeedbackEvent],
+        learningSummary: GoalLearningSummary?,
+        underrepresentedSignal: UnderrepresentedGoalSignal?,
         manualRank: Int
     ) -> GoalListItem {
         let steps = goal.plan?.sections.flatMap(\.steps) ?? []
@@ -593,7 +606,21 @@ private extension RepositoryBackedGoalsService {
         }.count
         let urgencyScore = urgencyScore(for: goal.timing, mode: goal.mode)
         let momentumScore = min(0.98, max(0.12, progressValue + Double(evidenceCount) * 0.08 - Double(frictionCount) * 0.04))
-        let relevanceScore = min(0.99, max(0.1, urgencyScore * 0.45 + momentumScore * 0.35 + (renderState == .clarification || renderState == .blocked ? 0.2 : 0.05)))
+        let historicalFit = learningSummary?.historicalFit.score ?? 0.5
+        let underrepresentedBoost = underrepresentedSignal.map { min(0.12, $0.pressureScore * 0.1) } ?? 0
+        let timelineRiskBoost = learningSummary.map { min(0.12, $0.timelineRisk.riskScore * 0.08) } ?? 0
+        let relevanceScore = min(
+            0.99,
+            max(
+                0.1,
+                urgencyScore * 0.4
+                    + momentumScore * 0.28
+                    + historicalFit * 0.2
+                    + underrepresentedBoost
+                    + timelineRiskBoost
+                    + (renderState == .clarification || renderState == .blocked ? 0.18 : 0.04)
+            )
+        )
 
         return GoalListItem(
             id: goal.id,
@@ -677,6 +704,24 @@ private extension RepositoryBackedGoalsService {
         let evidenceLabel = context.evidence.isEmpty ? "No evidence logged yet" : "\(minutes) minutes of visible evidence"
         let suggestions = Array(allSteps.filter { $0.state != .completed && $0.state != .cancelled }.prefix(3)).map { makeStepItem(step: $0, goalMode: effectiveMode) }
         let pathSummary = sourceGoal.map(LifeGraphResolver.pathStateSummary(for:)) ?? sourceDraft.map { LifeGraphResolver.pathStateSummary(for: $0, plan: context.draft?.stagedPlan) } ?? nil
+        let learningSnapshot = sourceGoal.map {
+            learningService.buildSnapshot(
+                goals: [$0],
+                evidence: context.evidence,
+                feedback: context.feedback,
+                now: .now
+            )
+        } ?? .empty
+        let whyNow = sourceGoal.flatMap { goal in
+            context.primaryStep.map { step in
+                learningService.learnedStepInsight(
+                    goal: goal,
+                    step: step,
+                    snapshot: learningSnapshot,
+                    now: .now
+                ).whyNow
+            }
+        }
         let pathStages = makePathStages(pathSummary: pathSummary, sections: sections, renderState: renderState)
         let sectionStates = sections.sorted { $0.orderIndex < $1.orderIndex }.map { section in
             GoalDetailSectionState(
@@ -716,7 +761,7 @@ private extension RepositoryBackedGoalsService {
                     ? "The blocker is kept visible so the path can restart cleanly once the missing input arrives."
                     : effectiveMode == .delegatedSupport
                         ? "Support goals stay non-punitive. Progress reflects what you can support, not what you can force."
-                        : "The next step stays small enough to act on without losing the broader path.",
+                        : whyNow?.conciseReason ?? "The next step stays small enough to act on without losing the broader path.",
             manualPriorityLabel: manualPriorityLabel(for: context, appState: appState, priorityOrder: priorityOrder),
             assumptions: context.draft?.assumptions.map(\.summary) ?? [],
             suggestions: suggestions,
@@ -1744,7 +1789,13 @@ private extension RepositoryBackedGoalsService {
                 planningEvaluation: goal.plan?.evaluation,
                 stepState: step.state,
                 incompleteDependencyCount: incompleteDependencyCount(in: goal, for: step),
-                pathStateSummary: LifeGraphResolver.pathStateSummary(for: goal)
+                pathStateSummary: LifeGraphResolver.pathStateSummary(for: goal),
+                learningSummary: learningService.buildSnapshot(
+                    goals: [goal],
+                    evidence: [],
+                    feedback: history,
+                    now: now
+                ).goalSummaries[goal.id]
             )
         )
     }

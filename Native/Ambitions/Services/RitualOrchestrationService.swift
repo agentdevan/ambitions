@@ -5,6 +5,7 @@ struct RitualOrchestrationInput: Sendable {
     let captures: [Capture]
     let evidence: [ProgressEvidence]
     let feedback: [GoalFeedbackEvent]
+    let learningSnapshot: LearningAnticipationSnapshot?
     let now: Date
 
     init(
@@ -12,12 +13,14 @@ struct RitualOrchestrationInput: Sendable {
         captures: [Capture],
         evidence: [ProgressEvidence],
         feedback: [GoalFeedbackEvent],
+        learningSnapshot: LearningAnticipationSnapshot? = nil,
         now: Date
     ) {
         self.goals = goals
         self.captures = captures
         self.evidence = evidence
         self.feedback = feedback
+        self.learningSnapshot = learningSnapshot
         self.now = now
     }
 }
@@ -38,7 +41,12 @@ struct RitualOrchestrationService: Sendable {
 
     func makePlan(input: RitualOrchestrationInput) -> RitualPlan {
         let activeGoals = input.goals.filter { $0.state == .active || $0.state == .paused }
-        let bestSelection = selector.bestSelection(goals: activeGoals, now: input.now)
+        let bestSelection = selector.bestSelection(
+            goals: activeGoals,
+            evidence: input.evidence,
+            feedback: input.feedback,
+            now: input.now
+        )
         let summary = signalSummary(input: input, activeGoals: activeGoals)
         let kind = ritualKind(now: input.now)
         let recommendation = recommendation(
@@ -52,7 +60,7 @@ struct RitualOrchestrationService: Sendable {
             activeRecommendation: recommendation,
             signalSummary: summary,
             dayThesis: dayThesis(summary: summary, selection: bestSelection),
-            weekThesis: weekThesis(summary: summary)
+            weekThesis: weekThesis(summary: summary, learningSnapshot: input.learningSnapshot)
         )
     }
 }
@@ -237,11 +245,15 @@ private extension RitualOrchestrationService {
         return "Keep the day light until the next move is clear."
     }
 
-    func weekThesis(summary: RitualSignalSummary) -> String {
+    func weekThesis(summary: RitualSignalSummary, learningSnapshot: LearningAnticipationSnapshot?) -> String {
         if summary.activeGoalCount == 0 {
             return "No active goals are shaping the week yet."
         }
         let goalLabel = "\(summary.activeGoalCount) active goal\(summary.activeGoalCount == 1 ? "" : "s")"
+        if let signal = learningSnapshot?.underrepresentedGoalSignals.first {
+            let domain = signal.domain?.rawValue.replacingOccurrences(of: "_", with: " ") ?? "one domain"
+            return "\(goalLabel), with underrepresented pressure visible in \(domain)."
+        }
         if summary.frictionThisWeekCount > 0 {
             return "\(goalLabel), with \(summary.frictionThisWeekCount) friction signal\(summary.frictionThisWeekCount == 1 ? "" : "s") worth respecting."
         }

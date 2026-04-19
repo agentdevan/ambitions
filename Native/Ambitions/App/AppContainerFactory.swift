@@ -53,17 +53,20 @@ enum AppContainerFactory {
         let snapshotWriter = ExternalSurfaceSnapshotWriter(repositories: repositories)
         let notificationService = LocalNotificationFoundation()
         let calendarRemindersService = EventKitIntegrationService()
+        let learningService = LearningAnticipationService()
         let snapshotTodayService = SnapshotRefreshingTodayService(
             base: RepositoryBackedTodayService(
                 repositories: repositories,
-                calendarRemindersService: calendarRemindersService
+                calendarRemindersService: calendarRemindersService,
+                learningService: learningService
             ),
             snapshotWriter: snapshotWriter
         )
         let snapshotGoalsService = SnapshotRefreshingGoalsService(
             base: RepositoryBackedGoalsService(
                 repositories: repositories,
-                calendarRemindersService: calendarRemindersService
+                calendarRemindersService: calendarRemindersService,
+                learningService: learningService
             ),
             snapshotWriter: snapshotWriter
         )

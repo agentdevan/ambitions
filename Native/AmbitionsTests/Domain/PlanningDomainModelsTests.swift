@@ -127,4 +127,42 @@ final class PlanningDomainModelsTests: XCTestCase {
         XCTAssertEqual(draft.lifeGraph?.prerequisites.map(\.id), ["application-needs-foundation"])
         XCTAssertEqual(draft.lifeGraph?.milestones.map(\.id), ["screening"])
     }
+
+    func testSharedLearnedFitScorerReordersEqualUrgencySelectionsWhenHistorySupportsOneGoal() throws {
+        let now = try XCTUnwrap(DomainTimestamp.date(from: "2026-04-21T09:30:00Z"))
+        let strongFit = makeGoal(id: "goal-strong-fit", stepID: "step-strong-fit", dueAt: "2026-04-24T12:00:00Z")
+        let weakFit = makeGoal(id: "goal-weak-fit", stepID: "step-weak-fit", dueAt: "2026-04-24T12:00:00Z")
+
+        let evidence = [
+            ProgressEvidence(id: "fit-1", goalID: strongFit.id, stepID: "step-strong-fit", evidenceKind: .stepCompleted, source: .manual, capturedAt: "2026-04-18T09:00:00Z", progressDelta: 0.2, confidenceDelta: 0.05, minutesInvested: 20, note: nil),
+            ProgressEvidence(id: "fit-2", goalID: strongFit.id, stepID: "step-strong-fit", evidenceKind: .stepCompleted, source: .manual, capturedAt: "2026-04-19T09:10:00Z", progressDelta: 0.2, confidenceDelta: 0.05, minutesInvested: 25, note: nil),
+            ProgressEvidence(id: "fit-3", goalID: strongFit.id, stepID: "step-strong-fit", evidenceKind: .stepCompleted, source: .manual, capturedAt: "2026-04-20T09:20:00Z", progressDelta: 0.2, confidenceDelta: 0.05, minutesInvested: 30, note: nil)
+        ]
+        let feedback: [GoalFeedbackEvent] = [
+            .delayed(base: GoalFeedbackEventBase(id: "weak-1", stepID: "step-weak-fit", occurredAt: "2026-04-18T20:30:00Z", note: nil), timingAdjustment: .laterToday, date: nil),
+            .skipped(base: GoalFeedbackEventBase(id: "weak-2", stepID: "step-weak-fit", occurredAt: "2026-04-19T20:45:00Z", note: nil), reasonCode: .notNow)
+        ]
+
+        let ranked = PlanningNextStepSelector().rankedSelections(
+            goals: [weakFit, strongFit],
+            evidence: evidence,
+            feedback: feedback,
+            now: now
+        )
+
+        XCTAssertEqual(ranked.first?.goal.id, "goal-strong-fit")
+        XCTAssertGreaterThan(try XCTUnwrap(ranked.first?.candidate.learnedFitScore), try XCTUnwrap(ranked.last?.candidate.learnedFitScore))
+    }
+}
+
+private extension PlanningDomainModelsTests {
+    func makeGoal(id: String, stepID: String, dueAt: String) -> Goal {
+        let actor = GoalActor(actorID: "self", displayName: "You", ownership: .self, roleLabel: "Primary owner", isPrimary: true)
+        let timing = GoalTiming(tempo: .deadlineBased, timingType: .dueAt, startsOn: nil, dueAt: dueAt, targetBy: nil, windowStart: nil, windowEnd: nil, suggestedNextAt: nil, repeatEveryDays: nil, progressReviewCadenceDays: 7)
+        let strategy = PlanningStrategy(strategyKind: .sequential, allowParallelSteps: false, maxActiveSteps: 3, preferredSectionOrder: [.activeSteps], defaultStepType: .actionUnit, autoGenerateReviewSection: false, preferShortSteps: true, revisitCadenceDays: 7)
+        let progress = ProgressStrategy(metricKind: .stepCompletion, rollupMethod: .ratio, targetStepCount: nil, targetEvidenceCount: nil, targetMinutes: nil, supportsUntimedProgress: true, countsChildGoals: false, countsSupportGoals: false)
+        let step = Step(id: stepID, sectionID: "section-\(id)", title: "Do the next thing", summary: nil, type: .actionUnit, state: .planned, owner: actor, timing: timing, dependencyStepIDs: [], isOptional: false, isRepeatable: false, evidenceRequired: true, successSignals: ["Done"], actionability: StepActionability(action: "Do it", completionDefinition: "Done", evidenceOfCompletion: ["Done"], fallbackMicroStep: "Start", contextRequirements: []))
+        let plan = GoalPlan(id: "plan-\(id)", goalID: id, version: goalEnginePlanVersion, generatedAt: "2026-04-15T12:00:00Z", summary: nil, strategy: strategy, sections: [PlanSection(id: "section-\(id)", goalID: id, title: "Active", summary: nil, kind: .activeSteps, orderIndex: 0, steps: [step])], assumptions: [], lint: PlanLintResult(goalID: id, planVersion: goalEnginePlanVersion, isValid: true, issueCount: 0, issues: []))
+        return Goal(schemaVersion: goalEngineSchemaVersion, id: id, revision: 1, createdAt: "2026-04-15T12:00:00Z", updatedAt: "2026-04-15T12:00:00Z", state: .active, title: id, summary: nil, mode: .project, relationshipKind: .independent, actor: actor, parentGoalID: nil, childGoalIDs: [], supportGoalIDs: [], tags: [], timing: timing, planningStrategy: strategy, progressStrategy: progress, plan: plan)
+    }
 }
