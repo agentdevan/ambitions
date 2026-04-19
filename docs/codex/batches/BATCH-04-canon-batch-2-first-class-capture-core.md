@@ -1,0 +1,55 @@
+# Batch 04 — Canon Batch 2 / First-Class Capture Core
+
+## Status
+
+Completed
+
+## Goal
+
+Make capture a stable, first-class product system inside the app so later share extension, App Intent capture, memory intake, and triage automation can target one mature capture model safely.
+
+## In Scope
+
+- audit the current capture model/repository/service/UI state
+- formalize capture states and state transitions
+- implement or refine turn capture into goal
+- implement or refine attach capture to existing goal
+- add minimal capture-domain metadata needed for triage and revisit logic
+- improve capture service/repository contracts only where needed
+- add or update focused tests for capture state transitions, turn-into-goal, attach-to-goal, and persistence behavior
+
+## Out Of Scope
+
+- share extension
+- App Intent capture
+- voice capture
+- automated capture triage beyond minimal stable rules
+- planning engine v2
+- recovery engine work
+- time orchestration
+- widgets / Live Activities
+- sync
+- life graph / household / device work
+- large UI redesigns unrelated to capture core
+
+## Current Repo Notes
+
+- Existing capture foundations are already present and should be strengthened, not rebuilt:
+  - `Capture`, `CaptureSourceType`, `CaptureRepository`, `DefaultCaptureService`, and SwiftData capture persistence exist.
+  - Today quick capture already writes real captures.
+  - The Captures tab is already routed through the app container and tab model.
+  - Source types for notification, Share extension text/URL, and App Intent already exist as domain values, but those external intake surfaces remain out of scope for this batch.
+- Legacy capture statuses may exist in persisted records or snapshots and should be normalized in repository mapping only.
+
+## Exit Criteria
+
+- canonical capture states and transitions are deterministic and covered by focused tests
+- captures can be saved as seeds, archived, attached to an existing goal, or turned into a goal through service boundaries
+- turn-into-goal reuses the existing goal creation path
+- attach-to-goal validates against existing persisted goals
+- minimal triage/revisit metadata round-trips through existing snapshot persistence
+- build and targeted tests pass before this batch is marked completed
+
+## Completion Note
+
+Completed after XcodeGen generation, app build, targeted capture/persistence/Today/view-model tests, and the full AmbitionsTests unit suite passed on the available iPhone 17 simulator.

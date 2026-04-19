@@ -395,9 +395,20 @@ private enum RepositoryMapping {
             updatedAt: record.updatedAt,
             rawText: record.rawText,
             sourceType: record.sourceTypeRaw.flatMap(CaptureSourceType.init(rawValue:)),
-            status: CaptureStatus(rawValue: record.statusRaw) ?? .pending,
+            status: captureStatus(from: record.statusRaw),
             linkedGoalID: record.linkedGoalID
         )
+    }
+
+    static func captureStatus(from rawValue: String) -> CaptureStatus {
+        switch rawValue {
+        case "pending":
+            return .actionable
+        case "processed":
+            return .goalBound
+        default:
+            return CaptureStatus(rawValue: rawValue) ?? .actionable
+        }
     }
 
     static func draftRecord(from draft: PersistedGoalDraft) throws -> GoalDraftRecord {

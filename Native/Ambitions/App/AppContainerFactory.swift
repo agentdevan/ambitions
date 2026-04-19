@@ -67,7 +67,6 @@ enum AppContainerFactory {
             ),
             snapshotWriter: snapshotWriter
         )
-        let captureService = DefaultCaptureService(repository: repositories.captures)
         let todayService = NotificationSchedulingTodayService(
             base: snapshotTodayService,
             notificationService: notificationService
@@ -75,6 +74,11 @@ enum AppContainerFactory {
         let goalsService = NotificationSchedulingGoalsService(
             base: snapshotGoalsService,
             notificationService: notificationService
+        )
+        let captureService = DefaultCaptureService(
+            repository: repositories.captures,
+            goalRepository: repositories.goals,
+            goalsService: goalsService
         )
 
         let preferencesStore = RepositoryBackedAppPreferencesStore(appStateRepository: repositories.appState)

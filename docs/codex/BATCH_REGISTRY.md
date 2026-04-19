@@ -25,3 +25,4 @@ It is not the higher-level vision source. For vision, dependency order, and batc
 | 01 | Pre-Phase-9 cleanup and Captures tab | Completed | Runtime truth cleanup, capture source normalization, captures-tab wiring verification, routing, and targeted tests are completed. |
 | 02 | Delete legacy TypeScript runtime | Completed | Legacy TS / Expo runtime artifacts are absent from the live repo, and active docs now describe the project as Swift-native and XcodeGen-driven. |
 | 03 | Canon Batch 1 / Domain foundation | Completed | Shared domain primitives, history/event seam refinements, recovery/orchestration service boundaries, and focused contract tests passed the intended validation set. |
+| 04 | Canon Batch 2 / First-class capture core | Completed | Canonical capture states, transitions, goal binding, minimal triage/revisit metadata, and focused tests passed build, targeted tests, and full AmbitionsTests validation. |

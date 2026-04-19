@@ -35,6 +35,9 @@ protocol ProfileServicing: Sendable {
 protocol CaptureServicing: Sendable {
     func createCapture(_ request: CreateCaptureRequest, now: Date) async throws -> Capture
     func listCaptures() async throws -> [Capture]
+    func updateCaptureState(_ request: CaptureStateUpdateRequest, now: Date) async throws -> Capture?
+    func attachCaptureToGoal(_ request: AttachCaptureToGoalRequest, now: Date) async throws -> CaptureGoalBinding?
+    func turnCaptureIntoGoal(_ request: TurnCaptureIntoGoalRequest, now: Date) async throws -> CaptureGoalBinding?
     func markCaptureProcessed(id: String, now: Date) async throws -> Capture?
     func markCaptureArchived(id: String, now: Date) async throws -> Capture?
 }
@@ -125,7 +128,7 @@ struct StubCaptureService: CaptureServicing {
             updatedAt: DomainTimestamp.string(from: now),
             rawText: request.rawText,
             sourceType: request.sourceType,
-            status: .pending,
+            status: .actionable,
             linkedGoalID: request.linkedGoalID
         )
     }
@@ -142,6 +145,27 @@ struct StubCaptureService: CaptureServicing {
     func markCaptureArchived(id: String, now: Date) async throws -> Capture? {
         _ = now
         return captures.first(where: { $0.id == id })
+    }
+
+    func updateCaptureState(_ request: CaptureStateUpdateRequest, now: Date) async throws -> Capture? {
+        _ = now
+        return captures.first(where: { $0.id == request.id })
+    }
+
+    func attachCaptureToGoal(_ request: AttachCaptureToGoalRequest, now: Date) async throws -> CaptureGoalBinding? {
+        _ = now
+        guard let capture = captures.first(where: { $0.id == request.captureID }) else {
+            return nil
+        }
+        return CaptureGoalBinding(capture: capture, target: GoalRouteTarget(goalID: request.goalID, draftID: nil))
+    }
+
+    func turnCaptureIntoGoal(_ request: TurnCaptureIntoGoalRequest, now: Date) async throws -> CaptureGoalBinding? {
+        _ = now
+        guard let capture = captures.first(where: { $0.id == request.captureID }) else {
+            return nil
+        }
+        return CaptureGoalBinding(capture: capture, target: GoalRouteTarget(goalID: "preview-goal-created", draftID: "preview-draft-created"))
     }
 }
 

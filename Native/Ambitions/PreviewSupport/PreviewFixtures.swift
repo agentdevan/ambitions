@@ -52,8 +52,9 @@ struct PreviewFixtures: Sendable {
                 updatedAt: "2026-04-15T09:20:00Z",
                 rawText: "Capture an idea from the Today flow before it disappears.",
                 sourceType: .todayQuickCapture,
-                status: .pending,
-                linkedGoalID: "goal-native"
+                status: .goalBound,
+                linkedGoalID: "goal-native",
+                triage: CaptureTriageMetadata(destination: .attachToGoal, hint: "Keep with the native pivot.")
             ),
             Capture(
                 id: "preview-capture-2",
@@ -61,8 +62,10 @@ struct PreviewFixtures: Sendable {
                 updatedAt: "2026-04-15T08:30:00Z",
                 rawText: "https://example.com/article-worth-reviewing",
                 sourceType: .shareExtensionURL,
-                status: .processed,
-                linkedGoalID: nil
+                status: .seed,
+                linkedGoalID: nil,
+                triage: CaptureTriageMetadata(destination: .saveAsSeed),
+                revisitAfter: "2026-04-22T09:00:00Z"
             )
         ],
         goalsDashboard: GoalsDashboard(

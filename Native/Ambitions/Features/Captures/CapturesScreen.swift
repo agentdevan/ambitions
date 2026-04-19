@@ -5,7 +5,7 @@ struct CapturesScreen: View {
     @Environment(\.appContainer) private var appContainer
     @Environment(\.ambitionTheme) private var theme
     @Environment(\.accessibilityReduceMotion) private var reduceMotion
-    @State private var state: AsyncViewState<[Capture]> = .loading
+    @State private var viewModel = CapturesViewModel()
 
     var body: some View {
         FeatureScaffoldView(
@@ -13,7 +13,7 @@ struct CapturesScreen: View {
             title: "Captures",
             subtitle: "Review local captures collected from Ambitions and other on-device entry points."
         ) {
-            switch state {
+            switch viewModel.state {
             case .loading:
                 LoadingSkeletonCard(lineCount: 6)
                     .transition(.ambitionPanel)
@@ -28,8 +28,8 @@ struct CapturesScreen: View {
                     Task { await load() }
                 }
                 .transition(.ambitionPanel)
-            case let .loaded(captures):
-                if captures.isEmpty {
+            case let .loaded(viewState):
+                if viewState.captures.isEmpty {
                     EmptyStateCard(
                         title: "No captures yet",
                         message: "Quick capture, share extension intake, and future app intents will appear here once they create local records.",
@@ -38,7 +38,21 @@ struct CapturesScreen: View {
                     .transition(.ambitionPanel)
                 } else {
                     LazyVStack(alignment: .leading, spacing: theme.spacing.lg) {
-                        ForEach(captures) { capture in
+                        if let message = viewModel.actionMessage {
+                            AppCard {
+                                VStack(alignment: .leading, spacing: theme.spacing.sm) {
+                                    Text(message.title)
+                                        .font(theme.typography.bodyEmphasized)
+                                        .foregroundStyle(theme.colors.textPrimary)
+                                    Text(message.body)
+                                        .font(theme.typography.caption)
+                                        .foregroundStyle(theme.colors.textSecondary)
+                                }
+                                .frame(maxWidth: .infinity, alignment: .leading)
+                            }
+                        }
+
+                        ForEach(viewState.captures) { capture in
                             AppCard {
                                 VStack(alignment: .leading, spacing: theme.spacing.md) {
                                     Text(capture.rawText)
@@ -51,6 +65,8 @@ struct CapturesScreen: View {
                                         .foregroundStyle(theme.colors.textSecondary)
                                         .frame(maxWidth: .infinity, alignment: .leading)
                                         .accessibilityIdentifier("captures.metadata.\(capture.id)")
+
+                                    captureActions(for: capture, activeGoalOptions: viewState.activeGoalOptions)
                                 }
                             }
                             .accessibilityIdentifier("captures.card.\(capture.id)")
@@ -65,25 +81,27 @@ struct CapturesScreen: View {
             await load()
         }
         .accessibilityIdentifier("captures.screen")
-        .animation(theme.motion.animation(reduceMotion: reduceMotion, emphasis: true), value: stateKey)
+        .animation(theme.motion.animation(reduceMotion: reduceMotion, emphasis: true), value: viewModel.stateKey)
         .task {
-            guard case .loading = state else { return }
+            guard case .loading = viewModel.state else { return }
             await load()
         }
     }
 
     private func load() async {
-        do {
-            state = .loaded(try await container.captureService.listCaptures())
-        } catch {
-            state = .failed("Unable to load captures: \(error.localizedDescription)")
-        }
+        await viewModel.load(captureService: container.captureService, goalsService: container.goalsService)
     }
 
     private func metadataText(for capture: Capture) -> String {
-        var parts = [capture.status.rawValue.capitalized]
+        var parts = [capture.status.title]
         if let sourceType = capture.sourceType {
             parts.append(sourceLabel(for: sourceType))
+        }
+        if let destination = capture.triage?.destination {
+            parts.append(destination.title)
+        }
+        if let revisitAfter = capture.revisitAfter {
+            parts.append("Revisit after \(revisitAfter)")
         }
         parts.append(capture.updatedAt)
         return parts.joined(separator: " • ")
@@ -93,15 +111,75 @@ struct CapturesScreen: View {
         sourceType.title
     }
 
-    private var stateKey: String {
-        switch state {
-        case .loading:
-            return "loading"
-        case let .loaded(captures):
-            return "loaded:\(captures.count)"
-        case let .failed(message):
-            return "failed:\(message)"
+    @ViewBuilder
+    private func captureActions(for capture: Capture, activeGoalOptions: [CaptureGoalOption]) -> some View {
+        HStack(spacing: theme.spacing.sm) {
+            Button("Seed") {
+                Task {
+                    await viewModel.saveAsSeed(
+                        id: capture.id,
+                        captureService: container.captureService,
+                        goalsService: container.goalsService
+                    )
+                }
+            }
+            .buttonStyle(.bordered)
+            .disabled(capture.status.canTransition(to: .seed) == false)
+
+            Button("Goal") {
+                Task {
+                    if let target = await viewModel.turnIntoGoal(
+                        captureID: capture.id,
+                        captureService: container.captureService,
+                        goalsService: container.goalsService
+                    ) {
+                        openGoal(target)
+                    }
+                }
+            }
+            .buttonStyle(.borderedProminent)
+            .disabled(capture.status.canTransition(to: .goalBound) == false)
+
+            Menu("Attach") {
+                if activeGoalOptions.isEmpty {
+                    Text("No active goals")
+                } else {
+                    ForEach(activeGoalOptions) { option in
+                        Button(option.title) {
+                            Task {
+                                if let target = await viewModel.attachToGoal(
+                                    captureID: capture.id,
+                                    goalID: option.id,
+                                    captureService: container.captureService,
+                                    goalsService: container.goalsService
+                                ) {
+                                    openGoal(target)
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            .disabled(capture.status.canTransition(to: .goalBound) == false || activeGoalOptions.isEmpty)
+
+            Button("Archive") {
+                Task {
+                    await viewModel.archive(
+                        id: capture.id,
+                        captureService: container.captureService,
+                        goalsService: container.goalsService
+                    )
+                }
+            }
+            .buttonStyle(.bordered)
+            .disabled(capture.status.canTransition(to: .archived) == false)
         }
+        .font(theme.typography.caption)
+    }
+
+    private func openGoal(_ target: GoalRouteTarget) {
+        guard let goalID = target.goalID else { return }
+        container.navigation.openGoalDetail(goalID: goalID, draftID: target.draftID)
     }
 
     private var container: AppContainer {

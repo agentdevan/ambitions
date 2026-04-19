@@ -63,7 +63,7 @@ final class TodayFreshGoalVisibilityTests: XCTestCase {
         let captures = try await repositories.captures.listCaptures()
 
         XCTAssertEqual(captures.count, 1)
-        XCTAssertEqual(captures.first?.status, .pending)
+        XCTAssertEqual(captures.first?.status, .actionable)
         XCTAssertEqual(captures.first?.sourceType, .todayQuickCapture)
         XCTAssertEqual(captures.first?.linkedGoalID, goalID)
     }

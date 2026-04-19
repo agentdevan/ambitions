@@ -1,3 +1,4 @@
+import SwiftData
 import XCTest
 @testable import Ambitions
 
@@ -83,8 +84,9 @@ final class PersistenceRepositoryTests: XCTestCase {
             updatedAt: "2026-04-15T10:00:00Z",
             rawText: "First capture",
             sourceType: .todayQuickCapture,
-            status: .pending,
-            linkedGoalID: "goal-1"
+            status: .goalBound,
+            linkedGoalID: "goal-1",
+            triage: CaptureTriageMetadata(destination: .attachToGoal, hint: "Keep near the goal.")
         )
         let second = Capture(
             id: "capture-second",
@@ -92,40 +94,109 @@ final class PersistenceRepositoryTests: XCTestCase {
             updatedAt: "2026-04-15T11:00:00Z",
             rawText: "Second capture",
             sourceType: nil,
-            status: .processed,
-            linkedGoalID: nil
+            status: .seed,
+            linkedGoalID: nil,
+            triage: CaptureTriageMetadata(destination: .saveAsSeed),
+            revisitAfter: "2026-04-22T09:00:00Z"
         )
 
         try await repositories.captures.saveCaptures([first, second])
         let loaded = try await repositories.captures.listCaptures()
 
         XCTAssertEqual(loaded.map(\.id), ["capture-second", "capture-first"])
-        XCTAssertEqual(loaded.first?.status, .processed)
+        XCTAssertEqual(loaded.first?.status, .seed)
+        XCTAssertEqual(loaded.first?.triage?.destination, .saveAsSeed)
+        XCTAssertEqual(loaded.first?.revisitAfter, "2026-04-22T09:00:00Z")
         XCTAssertEqual(loaded.last?.sourceType, .todayQuickCapture)
+        XCTAssertEqual(loaded.last?.status, .goalBound)
+        XCTAssertEqual(loaded.last?.triage?.hint, "Keep near the goal.")
     }
 
     func testCaptureRepositoryRoundTripsAllStableSourceTypes() async throws {
         let repositories = try await makeRepositories()
         let captures = [
-            Capture(id: "capture-notification", createdAt: "2026-04-15T09:55:00Z", updatedAt: "2026-04-15T09:55:00Z", rawText: "Notification capture", sourceType: .notification, status: .pending, linkedGoalID: nil),
-            Capture(id: "capture-text", createdAt: "2026-04-15T10:00:00Z", updatedAt: "2026-04-15T10:00:00Z", rawText: "Shared text", sourceType: .shareExtensionText, status: .pending, linkedGoalID: nil),
-            Capture(id: "capture-url", createdAt: "2026-04-15T10:05:00Z", updatedAt: "2026-04-15T10:05:00Z", rawText: "https://example.com", sourceType: .shareExtensionURL, status: .pending, linkedGoalID: nil),
-            Capture(id: "capture-intent", createdAt: "2026-04-15T10:10:00Z", updatedAt: "2026-04-15T10:10:00Z", rawText: "Intent capture", sourceType: .appIntent, status: .pending, linkedGoalID: nil)
+            Capture(id: "capture-notification", createdAt: "2026-04-15T09:55:00Z", updatedAt: "2026-04-15T09:55:00Z", rawText: "Notification capture", sourceType: .notification, status: .actionable, linkedGoalID: nil),
+            Capture(id: "capture-text", createdAt: "2026-04-15T10:00:00Z", updatedAt: "2026-04-15T10:00:00Z", rawText: "Shared text", sourceType: .shareExtensionText, status: .actionable, linkedGoalID: nil),
+            Capture(id: "capture-url", createdAt: "2026-04-15T10:05:00Z", updatedAt: "2026-04-15T10:05:00Z", rawText: "https://example.com", sourceType: .shareExtensionURL, status: .actionable, linkedGoalID: nil),
+            Capture(id: "capture-intent", createdAt: "2026-04-15T10:10:00Z", updatedAt: "2026-04-15T10:10:00Z", rawText: "Intent capture", sourceType: .appIntent, status: .actionable, linkedGoalID: nil)
         ]
 
         try await repositories.captures.saveCaptures(captures)
-        let loadedByID = Dictionary(uniqueKeysWithValues: try await repositories.captures.listCaptures().map { ($0.id, $0) })
+        let loadedCaptures = try await repositories.captures.listCaptures()
+        let loadedByID = Dictionary(uniqueKeysWithValues: loadedCaptures.map { ($0.id, $0) })
 
         XCTAssertEqual(loadedByID["capture-notification"]?.sourceType, .notification)
         XCTAssertEqual(loadedByID["capture-text"]?.sourceType, .shareExtensionText)
         XCTAssertEqual(loadedByID["capture-url"]?.sourceType, .shareExtensionURL)
         XCTAssertEqual(loadedByID["capture-intent"]?.sourceType, .appIntent)
     }
+
+    func testCaptureRepositoryRoundTripsCanonicalStates() async throws {
+        let repositories = try await makeRepositories()
+        let captures = CaptureStatus.allCasesForTests.enumerated().map { index, status in
+            Capture(
+                id: "capture-\(status.rawValue)",
+                createdAt: "2026-04-15T10:0\(index):00Z",
+                updatedAt: "2026-04-15T10:0\(index):00Z",
+                rawText: "Capture \(status.rawValue)",
+                sourceType: .todayQuickCapture,
+                status: status,
+                linkedGoalID: status == .goalBound ? "goal-bound" : nil
+            )
+        }
+
+        try await repositories.captures.saveCaptures(captures)
+        let loadedStatuses = Set(try await repositories.captures.listCaptures().map(\.status))
+
+        XCTAssertEqual(loadedStatuses, Set(CaptureStatus.allCasesForTests))
+    }
+
+    func testCaptureRepositoryMapsLegacyStatusRawValuesInOnePersistenceFallback() async throws {
+        let store = try AmbitionsPersistenceStore(inMemory: true)
+        let repositories = makeRepositories(store: store)
+
+        try await store.write { context in
+            context.insert(
+                CaptureRecord(
+                    id: "legacy-pending",
+                    createdAt: "2026-04-15T10:00:00Z",
+                    updatedAt: "2026-04-15T10:00:00Z",
+                    rawText: "Legacy pending",
+                    sourceTypeRaw: CaptureSourceType.todayQuickCapture.rawValue,
+                    statusRaw: "pending",
+                    linkedGoalID: nil,
+                    snapshotData: Data("{}".utf8)
+                )
+            )
+            context.insert(
+                CaptureRecord(
+                    id: "legacy-processed",
+                    createdAt: "2026-04-15T11:00:00Z",
+                    updatedAt: "2026-04-15T11:00:00Z",
+                    rawText: "Legacy processed",
+                    sourceTypeRaw: nil,
+                    statusRaw: "processed",
+                    linkedGoalID: "goal-legacy",
+                    snapshotData: Data("{}".utf8)
+                )
+            )
+        }
+
+        let loadedByID = Dictionary(uniqueKeysWithValues: try await repositories.captures.listCaptures().map { ($0.id, $0) })
+
+        XCTAssertEqual(loadedByID["legacy-pending"]?.status, .actionable)
+        XCTAssertEqual(loadedByID["legacy-processed"]?.status, .goalBound)
+        XCTAssertEqual(loadedByID["legacy-processed"]?.linkedGoalID, "goal-legacy")
+    }
 }
 
 private extension PersistenceRepositoryTests {
     func makeRepositories() async throws -> AppRepositories {
         let store = try AmbitionsPersistenceStore(inMemory: true)
+        return makeRepositories(store: store)
+    }
+
+    func makeRepositories(store: AmbitionsPersistenceStore) -> AppRepositories {
         return AppRepositories(
             goals: SwiftDataGoalRepository(store: store),
             drafts: SwiftDataGoalDraftRepository(store: store),
@@ -157,4 +228,8 @@ private extension PersistenceRepositoryTests {
             return nil
         }
     }
+}
+
+private extension CaptureStatus {
+    static let allCasesForTests: [CaptureStatus] = [.seed, .actionable, .goalBound, .scheduled, .delegated, .archived]
 }
