@@ -15,20 +15,21 @@ When this backlog conflicts with the canonical platform vision, surgical executi
 - The app currently ships repository-backed Today, Captures, Goals, Habits, Insights, and Profile surfaces backed by SwiftData repositories for goals, drafts, plans, steps, evidence, feedback, captures, and app state.
 - `project.yml` currently defines the `Ambitions` app target, the `AmbitionsWidgetExtension` target, and the unit/UI test bundles.
 - The current native codebase already includes capture persistence, create-goal submission, external routing, snapshot export, local notification scheduling, EventKit integration, and widget/live-activity code paths.
+- The repo no longer retains an active TypeScript / Expo / React Native runtime path.
 - Account sync, auth, and backend-driven account deletion are not current shipping features.
 
 ## Roadmap mismatches against the current codebase
 
-### 1. Sync is treated as a late-phase add, but older docs still describe live Supabase auth/sync as if it exists now
+### 1. Sync is treated as a late-phase add, and backend/provider-specific assumptions must stay out of active repo truth
 
 Why this matters:
 - The README and Profile service both describe the native app as local-only today.
-- Several docs still describe active Supabase auth, sync, and account deletion flows.
-- Any implementation plan that ignores this conflict will create more source-of-truth drift.
+- Provider-specific backend/runtime artifacts have been removed from the active repo path.
+- Any implementation plan that reintroduces backend-specific assumptions before a sync decision will create new source-of-truth drift.
 
 Backlog impact:
-- Add a documentation cleanup phase before feature work.
-- Mark Supabase/auth docs as historical unless and until a native sync decision is made.
+- Keep documentation and planning native-first until a sync decision is made.
+- Do not restore provider-specific backend docs or runtime paths without an explicit later batch.
 
 ### 2. Capture persistence now exists; the remaining gap is cross-surface rollout discipline
 
@@ -91,13 +92,13 @@ These are the phases that still matter after the native foundations already land
 ### Phase A. Documentation and source-of-truth cleanup
 
 Goals:
-- Mark stale auth/sync docs as historical or explicitly scoped to legacy/native-future work.
+- Keep backend/sync notes boundary-level and provider-agnostic until a native sync decision exists.
 - Keep implementation docs aligned with the current native service, routing, capture, and extension boundaries.
 - Remove ambiguity about what is implemented versus what has merely been scaffolded.
 
 Deliverables:
 - `docs/README.md`
-- status note on historical Supabase/auth docs
+- status note that legacy runtime/backend artifacts are no longer part of the active repo path
 - corrections in backlog/audit docs when architecture changes land
 
 ### Phase B. External-surface validation and hardening
@@ -116,11 +117,11 @@ Deliverables:
 
 Goals:
 - Make an explicit native sync decision before any provider-specific implementation resumes.
-- Keep older Supabase/auth/account-deletion material clearly labeled as historical until that decision changes.
+- Keep backend/provider-specific work out of the active repo until that decision changes.
 
 Deliverables:
 - documented sync decision
-- historical labeling for legacy docs that still mention live auth/sync/account deletion
+- explicit boundary language for any future backend revival
 
 ## Proposed implementation order
 
@@ -128,7 +129,7 @@ Deliverables:
 
 - Keep native-only source-of-truth rules explicit.
 - Add `docs/README.md` with live vs historical doc status.
-- Remove backend-flow docs from the active native doc set unless a native sync track is approved.
+- Keep backend/provider-specific docs out of the active native doc set unless a native sync track is approved.
 
 ### 1. Validate the existing native foundations
 
@@ -142,7 +143,7 @@ Deliverables:
 
 ### 3. Decide sync before reviving backend work
 
-- Make the backend/sync decision explicit before treating old auth/sync docs as live work again.
+- Make the backend/sync decision explicit before adding provider-specific backend work back into the repo.
 - Keep the app local-first until a native sync path is deliberately approved.
 
 ## Suggested work items by repo area
@@ -187,5 +188,5 @@ Deliverables:
 - Do not claim widget/live-activity/notification/EventKit behavior is production-ready without manual validation.
 - Do not start Share Extension or App Intents work by bypassing the existing capture and routing boundaries.
 - Do not start sync implementation until the backend decision is documented.
-- Do not treat old Supabase docs as live-native product truth.
+- Do not treat backend/provider-specific runtime work as live-native product truth before a sync decision.
 - Keep all new shipping work inside `Native/Ambitions/`, `Sources/`, `AppUI/Sources/`, or new native extension folders added through `project.yml`.

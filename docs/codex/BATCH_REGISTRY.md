@@ -22,5 +22,5 @@ It is not the higher-level vision source. For vision, dependency order, and batc
 | Batch | Name | Status | Notes |
 | --- | --- | --- | --- |
 | 00 | Repo operating system / canon alignment | Completed | Repo truth and control-file alignment completed enough to move Batch 01 into the active slot. |
-| 01 | Pre-Phase-9 cleanup and Captures tab | Active | Run only this batch: runtime truth cleanup, capture source expansion, first-class Captures tab wiring, routing, and tests. |
-| 02 | Legacy runtime deletion | Queued | Explicitly out of scope for Batch 01. |
+| 01 | Pre-Phase-9 cleanup and Captures tab | Completed | Runtime truth cleanup, capture source normalization, captures-tab wiring verification, routing, and targeted tests are completed. |
+| 02 | Delete legacy TypeScript runtime | Active | Remove any remaining legacy TS / Expo / React Native runtime artifacts and stale backend/runtime docs so repo truth becomes fully Swift-native. |

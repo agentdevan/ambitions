@@ -1,6 +1,6 @@
 # Docs Status
 
-This folder contains current native-shipping documentation plus a small set of retained reference notes that still apply to the SwiftUI codebase.
+This folder contains the current Swift-native documentation for the Ambitions repo.
 
 ## Canonical planning stack
 
@@ -39,6 +39,7 @@ Older docs in this folder are supporting context and do not override the canonic
 
 - The current shipping app is the native SwiftUI target under `Native/Ambitions/`.
 - The native SwiftUI app is the source of truth.
+- The repo no longer carries an active TypeScript / Expo / React Native runtime path.
 - The current shipped native surface is local-first and on-device first.
 - Today quick capture persists to the native Captures tab.
 - Notification scheduling and calendar/reminders are wired in the native app.

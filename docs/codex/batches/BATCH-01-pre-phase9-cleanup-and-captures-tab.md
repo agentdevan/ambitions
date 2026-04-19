@@ -2,7 +2,7 @@
 
 ## Status
 
-Active
+Completed
 
 ## Goal
 
@@ -50,3 +50,8 @@ Complete the pre-Phase-9 cleanup slice and land the first-class Captures tab wir
 - Captures is a first-class app tab backed by the existing container and routing seams.
 - Capture source persistence covers the Batch 01 source set.
 - Tests cover the capture source matrix and captures routing behavior.
+
+## Completion Note
+
+- Batch 01 has been completed and validated as a bounded native cleanup/captures pass.
+- Batch 02 is the next active repo-truth slice and should focus on deleting remaining dead-path TypeScript/runtime artifacts and stale backend/runtime docs only where they still exist.

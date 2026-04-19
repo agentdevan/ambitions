@@ -17,8 +17,8 @@ This document is a repo-aware audit baseline for upcoming Ambitions implementati
 It is intentionally repo-aware and native-first:
 
 - The shipping app surface is the SwiftUI app under `Native/Ambitions/`.
-- Older Expo/React Native code still exists in the repo, but it is no longer the implementation target unless a later task explicitly says otherwise.
-- Some older docs still describe the repo as Expo-first. They are not the source of truth for current implementation planning.
+- The repo no longer carries an active Expo / React Native / TypeScript runtime path.
+- Older docs may still discuss removed paths as historical context, but they are not the source of truth for current implementation planning.
 
 ## Verified Architecture
 
@@ -290,9 +290,9 @@ Missing:
 Verified mismatch:
 
 - `README.md` correctly states the native SwiftUI pivot and says `Native/Ambitions/` is the source of truth.
-- `docs/premium-modular-goal-engine-audit-plan.md` is stale for current implementation planning because it describes the repo as Expo/React Native without a native shell.
+- `docs/premium-modular-goal-engine-audit-plan.md` was stale for current implementation planning because it described the repo as Expo/React Native without a native shell.
 
-That older plan should be treated as historical/reference context, not as a roadmap implementation source.
+That older plan has since been removed from the active repo and should not be reintroduced as a roadmap implementation source.
 
 ### 7. Sync/auth/backend account flows remain non-shipping
 
@@ -346,7 +346,7 @@ Use current native primitives:
 - `GoalOrchestrationResult`
 - `PersistedGoalDraft`
 
-Do not rebuild intake using old `src/product/goalIntake.ts` for shipping native work.
+Do not rebuild intake by reviving removed TypeScript runtime paths for shipping native work.
 
 ### 4. Goal detail follow-up work should continue to hang off `GoalRouteTarget`
 
@@ -453,27 +453,13 @@ For implementation planning, prefer:
 3. `README.md`
 4. this audit doc
 
-Treat older Expo-first roadmap docs as reference-only unless explicitly refreshed.
+Treat any older Expo-first roadmap language as historical/reference-only unless explicitly refreshed.
 
 ## Native vs Legacy Boundary
 
-This repo contains both native and older React Native/Expo code.
+The active repo is native SwiftUI only.
 
-For this roadmap, ignore the following unless a task explicitly asks for them:
-
-- `src/`
-- `App.tsx`
-- Expo config and React Native navigation
-- old TypeScript screen implementations
-- old Zustand/runtime/store composition as an implementation target
-
-What can still be used from the old code:
-
-- behavioral reference
-- contract/reference notes
-- migration context
-
-Do not use old React Native surfaces as the place to implement new shipping product work for Ambitions.
+Removed legacy runtime paths such as `src/`, Expo config, and React Native screen/runtime code are no longer part of the implementation surface and should not be recreated for shipping work.
 
 ## Practical Next-Step Guidance
 

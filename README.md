@@ -53,7 +53,7 @@ The full reproducible native generation, build, test, UI test, and archive flow 
 
 ## Docs status
 
-Use [docs/README.md](docs/README.md) as the index for current native docs and retained reference material.
+Use [docs/README.md](docs/README.md) as the index for current native SwiftUI docs and active repo-truth references.
 Batch control status for active work now lives in [docs/codex/BATCH_REGISTRY.md](docs/codex/BATCH_REGISTRY.md).
 
 ## Codex workflow
@@ -99,4 +99,4 @@ Local reproduction, including exact build, unit test, UI test, and archive comma
 
 ## Current status
 
-The app boots through the native SwiftUI entry point, persists state through SwiftData, and ships repository-backed Today, Captures, Goals, Habits, Insights, and Profile surfaces while the repo still retains older legacy Expo/React Native reference material.
+The repo is now Swift-native and XcodeGen-driven. The app boots through the native SwiftUI entry point, persists state through SwiftData, and ships repository-backed Today, Captures, Goals, Habits, Insights, and Profile surfaces without a retained TypeScript / Expo / React Native runtime path.
