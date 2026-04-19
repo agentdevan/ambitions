@@ -88,4 +88,69 @@ final class GoalEngineFeedbackTests: XCTestCase {
         XCTAssertFalse(rewriteHints.isEmpty)
         XCTAssertNotNil(explanationHook)
     }
+
+    func testBlockedExternalFeedbackSurfacesWaitingAlternatePath() throws {
+        let input = try recoveryInput(
+            reasonCode: .blockedExternal,
+            occurredAt: "2026-04-15T12:00:00Z"
+        )
+
+        let result = GoalEngineAdaptationService().recommendPlanAdjustment(input: input)
+
+        guard case let .suggestAlternatePath(_, rationale, _, _, alternatePath, _) = result.recommendation else {
+            return XCTFail("Expected suggest_alternate_path recommendation.")
+        }
+
+        XCTAssertTrue(rationale.contains("outside the plan"))
+        XCTAssertTrue(alternatePath.contains("Wait on the external dependency"))
+        XCTAssertEqual(GoalEngineFeedbackAnalyzer().analyze(input: input).signals.primaryCauseOfDrift, .externalDependency)
+    }
+
+    func testNotReadyFeedbackUsesReadinessMicroStep() throws {
+        let input = try recoveryInput(
+            reasonCode: .notReady,
+            occurredAt: "2026-04-15T12:00:00Z"
+        )
+
+        let result = GoalEngineAdaptationService().recommendPlanAdjustment(input: input)
+
+        guard case let .suggestMicroStep(_, rationale, _, _, microStep) = result.recommendation else {
+            return XCTFail("Expected suggest_micro_step recommendation.")
+        }
+
+        XCTAssertTrue(rationale.contains("readiness"))
+        XCTAssertTrue(microStep.contains("Start with:"))
+        XCTAssertEqual(GoalEngineFeedbackAnalyzer().analyze(input: input).signals.primaryCauseOfDrift, .notReady)
+    }
+}
+
+private extension GoalEngineFeedbackTests {
+    func recoveryInput(reasonCode: GoalStepSkipReasonCode, occurredAt: String) throws -> GoalAdaptivePlanInput {
+        let fixture = try XCTUnwrap(GoalEngineFixtures.fixture(id: "clear-timed-self-goal"))
+        let currentResult: GoalAdaptivePlanResult
+        switch fixture.result {
+        case let .planned(result):
+            currentResult = .planned(result)
+        case let .starterPlanned(result):
+            currentResult = .starterPlanned(result)
+        case .clarificationRequired, .blocked:
+            throw XCTSkip("Fixture must produce a plannable result.")
+        }
+        let step = try XCTUnwrap(currentResult.plan.sections.first?.steps.first)
+        return GoalAdaptivePlanInput(
+            currentResult: currentResult,
+            selectedStep: step,
+            feedbackHistory: [
+                .skipped(
+                    base: GoalFeedbackEventBase(
+                        id: "skip-\(reasonCode.rawValue)",
+                        stepID: step.id,
+                        occurredAt: occurredAt,
+                        note: nil
+                    ),
+                    reasonCode: reasonCode
+                )
+            ]
+        )
+    }
 }

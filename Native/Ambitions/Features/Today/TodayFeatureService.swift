@@ -298,7 +298,7 @@ private extension RepositoryBackedTodayService {
                 state: .success
             )
         case .delay:
-            let decision = rescheduleDecision(for: action.kind, step: selectedStep, history: events, now: now)
+            let decision = rescheduleDecision(for: action.kind, goal: goal, step: selectedStep, history: events, now: now)
             let adjustment = decision?.timingAdjustment ?? .laterToday
             events.append(.delayed(base: base, timingAdjustment: adjustment, date: decision?.suggestedTime))
             if let smaller = decision?.smallerStep {
@@ -320,7 +320,7 @@ private extension RepositoryBackedTodayService {
                     id: step.id,
                     sectionID: step.sectionID,
                     title: step.title,
-                    summary: decision?.smallerStep?.summary ?? step.summary,
+                    summary: decision?.recoverySummary ?? decision?.smallerStep?.summary ?? step.summary,
                     type: step.type,
                     state: step.state,
                     owner: step.owner,
@@ -345,7 +345,7 @@ private extension RepositoryBackedTodayService {
             )
         case .skip:
             events.append(.skipped(base: base, reasonCode: .notNow))
-            let decision = rescheduleDecision(for: action.kind, step: selectedStep, history: events, now: now)
+            let decision = rescheduleDecision(for: action.kind, goal: goal, step: selectedStep, history: events, now: now)
             if let adjustment = decision?.timingAdjustment {
                 events.append(
                     .delayed(
@@ -379,7 +379,7 @@ private extension RepositoryBackedTodayService {
                     id: step.id,
                     sectionID: step.sectionID,
                     title: step.title,
-                    summary: decision?.smallerStep?.summary ?? step.summary,
+                    summary: decision?.recoverySummary ?? decision?.smallerStep?.summary ?? step.summary,
                     type: step.type,
                     state: step.state,
                     owner: step.owner,
@@ -501,7 +501,7 @@ private extension RepositoryBackedTodayService {
                 state: .success
             )
         case .askForSmallerStep:
-            let decision = rescheduleDecision(for: action.kind, step: selectedStep, history: events, now: now)
+            let decision = rescheduleDecision(for: action.kind, goal: goal, step: selectedStep, history: events, now: now)
             events.append(.askedForSmallerVersion(base: base))
             if let adjustment = decision?.timingAdjustment {
                 events.append(
@@ -520,6 +520,7 @@ private extension RepositoryBackedTodayService {
             try await repositories.feedback.saveEvents(events, goalID: goalID)
             let adjustment = adjustmentPayload(draft: draft, goal: goal, step: selectedStep, history: events)
             let replacement = adjustment.flatMap { smallerSummary(from: $0.recommendation, step: selectedStep) }
+                ?? decision?.recoverySummary
                 ?? decision?.smallerStep?.summary
                 ?? selectedStep.actionability.fallbackMicroStep
             if replacement.isEmpty == false {
@@ -558,7 +559,7 @@ private extension RepositoryBackedTodayService {
                 )
             }
         case .askForHelp:
-            let decision = rescheduleDecision(for: action.kind, step: selectedStep, history: events, now: now)
+            let decision = rescheduleDecision(for: action.kind, goal: goal, step: selectedStep, history: events, now: now)
             events.append(.confused(base: base, confusionType: .unclearAction))
             if let smaller = decision?.smallerStep {
                 events.append(
@@ -594,7 +595,7 @@ private extension RepositoryBackedTodayService {
                         id: step.id,
                         sectionID: step.sectionID,
                         title: step.title,
-                        summary: decision.smallerStep?.summary ?? step.summary,
+                        summary: decision.recoverySummary ?? decision.smallerStep?.summary ?? step.summary,
                         type: step.type,
                         state: step.state,
                         owner: step.owner,
@@ -611,7 +612,7 @@ private extension RepositoryBackedTodayService {
             }
             message = TodayInlineMessage(
                 title: "A calmer next move is ready",
-                body: decision?.smallerStep?.summary ?? selectedStep.actionability.fallbackMicroStep,
+                body: decision?.recoverySummary ?? decision?.smallerStep?.summary ?? selectedStep.actionability.fallbackMicroStep,
                 state: .selected
             )
         case .askWhyThisMatters:
@@ -1185,6 +1186,7 @@ private extension RepositoryBackedTodayService {
 
     func rescheduleDecision(
         for kind: TodayActionKind,
+        goal: Goal,
         step: Step,
         history: [GoalFeedbackEvent],
         now: Date
@@ -1197,7 +1199,10 @@ private extension RepositoryBackedTodayService {
                 feedbackHistory: history,
                 trigger: trigger,
                 fallbackMicroStep: step.actionability.fallbackMicroStep,
-                now: now
+                now: now,
+                planningEvaluation: goal.plan?.evaluation,
+                stepState: step.state,
+                incompleteDependencyCount: incompleteDependencyCount(in: goal, for: step)
             )
         )
     }
@@ -1344,6 +1349,11 @@ private extension RepositoryBackedTodayService {
             progressStrategy: goal.progressStrategy,
             plan: updatedPlan
         )
+    }
+
+    func incompleteDependencyCount(in goal: Goal, for step: Step) -> Int {
+        let completedStepIDs = Set(goal.plan?.sections.flatMap(\.steps).filter { $0.state == .completed }.map(\.id) ?? [])
+        return step.dependencyStepIDs.filter { completedStepIDs.contains($0) == false }.count
     }
 
     static let iso: ISO8601DateFormatter = {

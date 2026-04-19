@@ -18,6 +18,8 @@ final class RescheduleEngineTests: XCTestCase {
         XCTAssertEqual(decision.timingAdjustment, .laterToday)
         XCTAssertNotNil(decision.suggestedTime)
         XCTAssertNil(decision.smallerStep)
+        XCTAssertEqual(decision.causeOfDrift, .timingPressure)
+        XCTAssertEqual(decision.posture, .steady)
     }
 
     func testRepeatedMissesEscalateToSomedayDeferral() {
@@ -62,6 +64,90 @@ final class RescheduleEngineTests: XCTestCase {
 
         XCTAssertNotNil(decision.smallerStep)
         XCTAssertTrue(decision.smallerStep?.summary.contains("Write one paragraph.") == true)
+        XCTAssertEqual(decision.posture, .gentle)
+    }
+
+    func testBlockedExternalPrefersWaitingRecovery() {
+        let history: [GoalFeedbackEvent] = [
+            .skipped(base: baseEvent(id: "blocked-1", at: "2026-04-15T10:00:00Z"), reasonCode: .blockedExternal)
+        ]
+
+        let decision = RescheduleEngine().decide(
+            RescheduleEngineInput(
+                stepID: "step-1",
+                timing: baseTiming,
+                feedbackHistory: history,
+                trigger: .skip,
+                fallbackMicroStep: "Write one paragraph.",
+                now: fixedNow
+            )
+        )
+
+        XCTAssertEqual(decision.causeOfDrift, .externalDependency)
+        XCTAssertEqual(decision.waitingState, .waitingOnExternal)
+        XCTAssertEqual(decision.posture, .wait)
+        XCTAssertNil(decision.smallerStep)
+        XCTAssertEqual(decision.recoverySummary, "Keep this waiting until the external dependency clears.")
+    }
+
+    func testNotReadyPrefersReadinessSizedRecovery() {
+        let history: [GoalFeedbackEvent] = [
+            .skipped(base: baseEvent(id: "not-ready-1", at: "2026-04-15T10:00:00Z"), reasonCode: .notReady)
+        ]
+
+        let decision = RescheduleEngine().decide(
+            RescheduleEngineInput(
+                stepID: "step-1",
+                timing: baseTiming,
+                feedbackHistory: history,
+                trigger: .skip,
+                fallbackMicroStep: "Collect the missing note.",
+                now: fixedNow
+            )
+        )
+
+        XCTAssertEqual(decision.causeOfDrift, .notReady)
+        XCTAssertEqual(decision.waitingState, .notReady)
+        XCTAssertEqual(decision.posture, .gentle)
+        XCTAssertTrue(decision.recoverySummary?.contains("Collect the missing note.") == true)
+    }
+
+    func testBlockedStepUsesDependencyAwareRecovery() {
+        let decision = RescheduleEngine().decide(
+            RescheduleEngineInput(
+                stepID: "step-1",
+                timing: baseTiming,
+                feedbackHistory: [],
+                trigger: .delay,
+                fallbackMicroStep: "Write one paragraph.",
+                now: fixedNow,
+                stepState: .blocked,
+                incompleteDependencyCount: 2
+            )
+        )
+
+        XCTAssertEqual(decision.waitingState, .blockedByDependency)
+        XCTAssertEqual(decision.posture, .unblock)
+        XCTAssertEqual(decision.deferRecommendation, .laterThisWeek)
+        XCTAssertEqual(decision.recoverySummary, "Finish the blocking prerequisite before retrying this step.")
+    }
+
+    func testFragilePlanningSoftensRecovery() {
+        let decision = RescheduleEngine().decide(
+            RescheduleEngineInput(
+                stepID: "step-1",
+                timing: baseTiming,
+                feedbackHistory: [],
+                trigger: .delay,
+                fallbackMicroStep: "Write one paragraph.",
+                now: fixedNow,
+                planningEvaluation: fragileEvaluation
+            )
+        )
+
+        XCTAssertEqual(decision.posture, .gentle)
+        XCTAssertNotNil(decision.smallerStep)
+        XCTAssertEqual(decision.recommendationConfidence, .high)
     }
 
     func testDecisionIsDeterministicForSameInputAndTime() {
@@ -113,6 +199,18 @@ private extension RescheduleEngineTests {
             stepID: "step-1",
             occurredAt: occurredAt,
             note: nil
+        )
+    }
+
+    var fragileEvaluation: PlanningEvaluation {
+        PlanningEvaluation(
+            feasibilityScore: 0.28,
+            feasibilityLevel: .notBelievable,
+            recommendationConfidence: .low,
+            pressureLevel: .high,
+            fragilityLevel: .high,
+            effortPosture: .gentle,
+            reasons: ["Deadline pressure is high."]
         )
     }
 }

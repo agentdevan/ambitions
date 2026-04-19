@@ -28,6 +28,27 @@ struct GoalEngineAdaptationService {
                     "Frame progress as observation and support, not compliance.",
                 ]
             )
+        } else if analysis.waitingOnExternalDependency || analysis.waitingOnDependencyChain {
+            recommendation = .suggestAlternatePath(
+                stepID: input.selectedStep.id,
+                rationale: analysis.waitingOnExternalDependency
+                    ? "The current step is waiting on something outside the plan, so recovery should surface the unblock state instead of pretending execution can proceed."
+                    : "A prerequisite is still open, so recovery should point back to the unblock path before this step re-enters the queue.",
+                confidence: confidence(for: signals.frictionScore, bonus: 0.16),
+                signals: signals,
+                alternatePath: analysis.waitingOnExternalDependency
+                    ? "Wait on the external dependency, then retry this step when the blocker clears."
+                    : "Finish the blocking prerequisite before retrying this step.",
+                explanationHook: explanationHook
+            )
+        } else if analysis.needsReadinessRecovery {
+            recommendation = .suggestMicroStep(
+                stepID: input.selectedStep.id,
+                rationale: "The current drift signal says readiness is missing, so recovery should lower the pressure and start with a setup-sized move.",
+                confidence: confidence(for: signals.frictionScore, bonus: 0.14),
+                signals: signals,
+                microStep: "Start with: \(input.selectedStep.actionability.fallbackMicroStep)"
+            )
         } else if analysis.repeatedIrrelevance {
             recommendation = .requestReclarification(
                 stepID: input.selectedStep.id,
@@ -39,10 +60,20 @@ struct GoalEngineAdaptationService {
                     "Which part of the current direction feels off or irrelevant?",
                 ]
             )
-        } else if analysis.repeatedAvoidance {
+        } else if analysis.shouldSoftenRecoveryApproach {
+            recommendation = .suggestMicroStep(
+                stepID: input.selectedStep.id,
+                rationale: "Recovery friction is rising, so the next action should get gentler rather than pushing the same step harder.",
+                confidence: confidence(for: signals.frictionScore, bonus: 0.14),
+                signals: signals,
+                microStep: input.selectedStep.actionability.fallbackMicroStep
+            )
+        } else if analysis.repeatedAvoidance || analysis.hasFragilePlan {
             recommendation = .shrinkStep(
                 stepID: input.selectedStep.id,
-                rationale: "Repeated avoidance combined with size complaints means the step should shrink before the planner asks for more follow-through.",
+                rationale: analysis.hasFragilePlan
+                    ? "Plan fragility is high, so recovery should make the next move smaller before it asks for more follow-through."
+                    : "Repeated avoidance combined with size complaints means the step should shrink before the planner asks for more follow-through.",
                 confidence: confidence(for: signals.frictionScore, bonus: 0.16),
                 signals: signals,
                 smallerVersion: input.selectedStep.summary ?? "Reduce \"\(input.selectedStep.title)\" to a single session-sized pass with one visible outcome.",
@@ -75,14 +106,6 @@ struct GoalEngineAdaptationService {
                 signals: signals,
                 suggestedTimingType: [.learning, .exploration].contains(input.currentResult.draft.mode) ? .suggestedNext : .logWhenDone,
                 removeDeadline: true
-            )
-        } else if analysis.shouldSoftenRecoveryApproach {
-            recommendation = .suggestMicroStep(
-                stepID: input.selectedStep.id,
-                rationale: "Recovery friction is rising, so the next action should get gentler rather than pushing the same step harder.",
-                confidence: confidence(for: signals.frictionScore, bonus: 0.14),
-                signals: signals,
-                microStep: input.selectedStep.actionability.fallbackMicroStep
             )
         } else if input.feedbackHistory.contains(where: { event in
             if case .tooEasy = event, event.stepID == input.selectedStep.id { return true }

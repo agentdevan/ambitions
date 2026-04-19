@@ -268,6 +268,7 @@ struct PlanningNextStepSelector: Sendable {
                 progressStrategy: goal.progressStrategy
             )
             let evaluation = plan.evaluation ?? evaluator.evaluate(draft: draft, plan: plan)
+            let completedStepIDs = Set(plan.sections.flatMap(\.steps).filter { $0.state == .completed }.map(\.id))
             return plan.sections.flatMap(\.steps)
                 .filter { $0.state != .completed && $0.state != .cancelled }
                 .map { step in
@@ -277,7 +278,13 @@ struct PlanningNextStepSelector: Sendable {
                         candidate: PlanningNextStepCandidate(
                             goalID: goal.id,
                             stepID: step.id,
-                            score: score(goal: goal, step: step, evaluation: evaluation, now: now),
+                            score: score(
+                                goal: goal,
+                                step: step,
+                                evaluation: evaluation,
+                                hasIncompleteDependencies: hasIncompleteDependencies(step: step, completedStepIDs: completedStepIDs),
+                                now: now
+                            ),
                             timingKey: timingKey(for: step.timing, goalMode: goal.mode),
                             evaluation: evaluation
                         )
@@ -297,7 +304,13 @@ struct PlanningNextStepSelector: Sendable {
         rankedSelections(goals: goals, now: now).first
     }
 
-    private func score(goal: Goal, step: Step, evaluation: PlanningEvaluation, now: Date) -> Double {
+    private func score(
+        goal: Goal,
+        step: Step,
+        evaluation: PlanningEvaluation,
+        hasIncompleteDependencies: Bool,
+        now: Date
+    ) -> Double {
         var value = 0.5
         switch evaluation.feasibilityLevel {
         case .comfortable:
@@ -317,6 +330,12 @@ struct PlanningNextStepSelector: Sendable {
         case .planned, .completed, .cancelled:
             break
         }
+        if hasIncompleteDependencies {
+            value -= 0.24
+        }
+        if evaluation.fragilityLevel == .high && step.state != .active {
+            value -= 0.08
+        }
         switch urgency(for: step.timing, now: now) {
         case .overdue:
             value += 0.18
@@ -331,6 +350,10 @@ struct PlanningNextStepSelector: Sendable {
             value -= 0.04
         }
         return (value * 100).rounded() / 100
+    }
+
+    private func hasIncompleteDependencies(step: Step, completedStepIDs: Set<String>) -> Bool {
+        step.dependencyStepIDs.contains { completedStepIDs.contains($0) == false }
     }
 
     private enum SelectorUrgency {

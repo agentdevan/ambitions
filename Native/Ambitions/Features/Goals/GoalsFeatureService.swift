@@ -854,7 +854,7 @@ private extension RepositoryBackedGoalsService {
                 )
             )
         case .delay:
-            let decision = rescheduleDecision(for: request.kind, step: selectedStep, history: history, now: now)
+            let decision = rescheduleDecision(for: request.kind, goal: goal, step: selectedStep, history: history, now: now)
             let adjustment = decision?.timingAdjustment ?? .laterToday
             history.append(.delayed(base: base, timingAdjustment: adjustment, date: decision?.suggestedTime))
             if let smaller = decision?.smallerStep {
@@ -873,7 +873,7 @@ private extension RepositoryBackedGoalsService {
             goal = update(goal: goal, stepID: selectedStep.id) { step in
                 updatedStep(
                     step,
-                    summary: decision?.smallerStep?.summary ?? step.summary ?? step.actionability.fallbackMicroStep,
+                    summary: decision?.recoverySummary ?? decision?.smallerStep?.summary ?? step.summary ?? step.actionability.fallbackMicroStep,
                     timing: shiftedTiming(for: step.timing, now: now, adjustment: adjustment)
                 )
             }
@@ -891,7 +891,7 @@ private extension RepositoryBackedGoalsService {
             )
         case .skip:
             history.append(.skipped(base: base, reasonCode: .notNow))
-            let decision = rescheduleDecision(for: request.kind, step: selectedStep, history: history, now: now)
+            let decision = rescheduleDecision(for: request.kind, goal: goal, step: selectedStep, history: history, now: now)
             if let adjustment = decision?.timingAdjustment {
                 history.append(
                     .delayed(
@@ -922,7 +922,7 @@ private extension RepositoryBackedGoalsService {
             goal = update(goal: goal, stepID: selectedStep.id) { step in
                 updatedStep(
                     step,
-                    summary: decision?.smallerStep?.summary ?? step.summary ?? step.actionability.fallbackMicroStep,
+                    summary: decision?.recoverySummary ?? decision?.smallerStep?.summary ?? step.summary ?? step.actionability.fallbackMicroStep,
                     timing: shiftedTiming(for: step.timing, now: now, adjustment: decision?.timingAdjustment ?? .laterThisWeek)
                 )
             }
@@ -1031,7 +1031,7 @@ private extension RepositoryBackedGoalsService {
                 )
             )
         case .askForSmallerStep:
-            let decision = rescheduleDecision(for: request.kind, step: selectedStep, history: history, now: now)
+            let decision = rescheduleDecision(for: request.kind, goal: goal, step: selectedStep, history: history, now: now)
             history.append(.askedForSmallerVersion(base: base))
             if let adjustment = decision?.timingAdjustment {
                 history.append(
@@ -1052,7 +1052,7 @@ private extension RepositoryBackedGoalsService {
                 let timing = decision?.timingAdjustment.map { shiftedTiming(for: step.timing, now: now, adjustment: $0) } ?? step.timing
                 return updatedStep(
                     step,
-                    summary: decision?.smallerStep?.summary ?? step.actionability.fallbackMicroStep,
+                    summary: decision?.recoverySummary ?? decision?.smallerStep?.summary ?? step.actionability.fallbackMicroStep,
                     timing: timing
                 )
             }
@@ -1060,12 +1060,12 @@ private extension RepositoryBackedGoalsService {
             return GoalDetailActionResponse(
                 message: GoalDetailInlineMessage(
                     title: "Smaller version ready",
-                    body: decision?.smallerStep?.summary ?? selectedStep.actionability.fallbackMicroStep,
+                    body: decision?.recoverySummary ?? decision?.smallerStep?.summary ?? selectedStep.actionability.fallbackMicroStep,
                     state: .selected
                 )
             )
         case .breakThisDownSmaller:
-            let decision = rescheduleDecision(for: request.kind, step: selectedStep, history: history, now: now)
+            let decision = rescheduleDecision(for: request.kind, goal: goal, step: selectedStep, history: history, now: now)
             history.append(.tooBig(base: base))
             history.append(.askedForSmallerVersion(base: GoalFeedbackEventBase(id: "smaller-\(UUID().uuidString)", stepID: selectedStep.id, occurredAt: timestamp, note: "Break this down smaller.")))
             if let adjustment = decision?.timingAdjustment {
@@ -1087,7 +1087,7 @@ private extension RepositoryBackedGoalsService {
                 let timing = decision?.timingAdjustment.map { shiftedTiming(for: step.timing, now: now, adjustment: $0) } ?? step.timing
                 return updatedStep(
                     step,
-                    summary: decision?.smallerStep?.summary ?? step.actionability.fallbackMicroStep,
+                    summary: decision?.recoverySummary ?? decision?.smallerStep?.summary ?? step.actionability.fallbackMicroStep,
                     timing: timing
                 )
             }
@@ -1095,12 +1095,12 @@ private extension RepositoryBackedGoalsService {
             return GoalDetailActionResponse(
                 message: GoalDetailInlineMessage(
                     title: "Broken down smaller",
-                    body: decision?.smallerStep?.summary ?? selectedStep.actionability.fallbackMicroStep,
+                    body: decision?.recoverySummary ?? decision?.smallerStep?.summary ?? selectedStep.actionability.fallbackMicroStep,
                     state: .selected
                 )
             )
         case .imStuck:
-            let decision = rescheduleDecision(for: request.kind, step: selectedStep, history: history, now: now)
+            let decision = rescheduleDecision(for: request.kind, goal: goal, step: selectedStep, history: history, now: now)
             history.append(.confused(base: base, confusionType: .unclearAction))
             if let smaller = decision?.smallerStep {
                 history.append(
@@ -1133,7 +1133,7 @@ private extension RepositoryBackedGoalsService {
                 let timing = decision?.timingAdjustment.map { shiftedTiming(for: step.timing, now: now, adjustment: $0) } ?? step.timing
                 return updatedStep(
                     step,
-                    summary: decision?.smallerStep?.summary ?? step.actionability.fallbackMicroStep,
+                    summary: decision?.recoverySummary ?? decision?.smallerStep?.summary ?? step.actionability.fallbackMicroStep,
                     timing: timing
                 )
             }
@@ -1141,7 +1141,7 @@ private extension RepositoryBackedGoalsService {
             return GoalDetailActionResponse(
                 message: GoalDetailInlineMessage(
                     title: "A calmer next move is ready",
-                    body: decision?.smallerStep?.summary ?? selectedStep.actionability.fallbackMicroStep,
+                    body: decision?.recoverySummary ?? decision?.smallerStep?.summary ?? selectedStep.actionability.fallbackMicroStep,
                     state: .selected
                 )
             )
@@ -1737,6 +1737,7 @@ private extension RepositoryBackedGoalsService {
 
     func rescheduleDecision(
         for kind: GoalDetailActionKind,
+        goal: Goal,
         step: Step,
         history: [GoalFeedbackEvent],
         now: Date
@@ -1749,7 +1750,10 @@ private extension RepositoryBackedGoalsService {
                 feedbackHistory: history,
                 trigger: trigger,
                 fallbackMicroStep: step.actionability.fallbackMicroStep,
-                now: now
+                now: now,
+                planningEvaluation: goal.plan?.evaluation,
+                stepState: step.state,
+                incompleteDependencyCount: incompleteDependencyCount(in: goal, for: step)
             )
         )
     }
@@ -1810,6 +1814,11 @@ private extension RepositoryBackedGoalsService {
         case .clarificationRequired, .blocked, .none:
             return nil
         }
+    }
+
+    func incompleteDependencyCount(in goal: Goal, for step: Step) -> Int {
+        let completedStepIDs = Set(goal.plan?.sections.flatMap(\.steps).filter { $0.state == .completed }.map(\.id) ?? [])
+        return step.dependencyStepIDs.filter { completedStepIDs.contains($0) == false }.count
     }
 
     func canSwitchToUntimed(mode: GoalMode, timing: GoalTiming) -> Bool {

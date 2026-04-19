@@ -5,6 +5,10 @@ struct GoalEngineFeedbackAnalysis: Sendable, Equatable {
     let repeatedAvoidance: Bool
     let repeatedConfusion: Bool
     let repeatedIrrelevance: Bool
+    let waitingOnExternalDependency: Bool
+    let waitingOnDependencyChain: Bool
+    let needsReadinessRecovery: Bool
+    let hasFragilePlan: Bool
     let wantsSmallerVersion: Bool
     let asksWhyThisMatters: Bool
     let timingPressureMismatch: Bool
@@ -85,6 +89,12 @@ struct GoalEngineFeedbackAnalyzer {
                 causeOfDrift: primaryCauseOfDrift
             )
         )
+        let hasFragilePlan = input.currentResult.plan.evaluation?.fragilityLevel == .high
+        let waitingOnExternalDependency = primaryCauseOfDrift == .externalDependency
+        let waitingOnDependencyChain =
+            (!input.selectedStep.dependencyStepIDs.isEmpty && input.selectedStep.state == .blocked) ||
+            (!input.selectedStep.dependencyStepIDs.isEmpty && primaryCauseOfDrift == .externalDependency)
+        let needsReadinessRecovery = primaryCauseOfDrift == .notReady
 
         let signals = GoalFeedbackSignalSnapshot(
             avoidanceCount: avoidanceCount,
@@ -109,11 +119,15 @@ struct GoalEngineFeedbackAnalyzer {
             repeatedAvoidance: avoidanceCount >= 2 && tooBigCount >= 1,
             repeatedConfusion: confusedCount >= 2,
             repeatedIrrelevance: notRelevantCount >= 2,
-            wantsSmallerVersion: tooBigCount >= 1,
+            waitingOnExternalDependency: waitingOnExternalDependency,
+            waitingOnDependencyChain: waitingOnDependencyChain,
+            needsReadinessRecovery: needsReadinessRecovery,
+            hasFragilePlan: hasFragilePlan,
+            wantsSmallerVersion: tooBigCount >= 1 || hasFragilePlan,
             asksWhyThisMatters: askedWhyCount >= 1,
             timingPressureMismatch: delayedCount >= 1 && input.currentResult.draft.timing.tempo == .untimed && input.selectedStep.timing.timingType != .logWhenDone,
             shouldReduceLearningPressure: [.learning, .exploration].contains(input.currentResult.draft.mode) && (rigidityDetected || delayedCount >= 1 || confusedCount >= 1),
-            shouldSoftenRecoveryApproach: input.currentResult.draft.mode == .recovery && (frozenByFriction(frictionScore) || tooBigCount >= 1 || avoidanceCount >= 1)
+            shouldSoftenRecoveryApproach: input.currentResult.draft.mode == .recovery && (frozenByFriction(frictionScore) || tooBigCount >= 1 || avoidanceCount >= 1 || hasFragilePlan || needsReadinessRecovery)
         )
     }
 

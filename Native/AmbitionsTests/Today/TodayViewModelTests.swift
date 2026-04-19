@@ -32,6 +32,37 @@ final class TodayViewModelTests: XCTestCase {
         XCTAssertEqual(experience.dailyTargets.items.first?.id, expected?.step.id)
     }
 
+    func testSharedNextStepSelectorDeprioritizesBlockedDependencyWork() async throws {
+        let repositories = try await makeRepositories()
+        let service = RepositoryBackedTodayService(repositories: repositories)
+        let now = try XCTUnwrap(DomainTimestamp.date(from: "2026-04-15T12:00:00Z"))
+        let blocked = makeGoal(
+            id: "goal-blocked",
+            stepID: "step-blocked",
+            stepTitle: "Blocked dependency step",
+            dueAt: "2026-04-16T12:00:00Z",
+            stepState: .blocked,
+            dependencyStepIDs: ["step-prereq"]
+        )
+        let clean = makeGoal(
+            id: "goal-clean",
+            stepID: "step-clean",
+            stepTitle: "Clean recovery-safe step",
+            dueAt: "2026-04-17T12:00:00Z"
+        )
+        try await repositories.goals.saveGoals([blocked, clean])
+
+        let experience = try await service.loadTodayExperience(userDisplayName: "", now: now)
+        let expected = PlanningNextStepSelector().bestSelection(goals: [blocked, clean], now: now)
+
+        guard case let .planned(focus) = experience.focus else {
+            return XCTFail("Expected planned focus.")
+        }
+        XCTAssertEqual(expected?.goal.id, "goal-clean")
+        XCTAssertEqual(focus.title, expected?.step.title)
+        XCTAssertEqual(experience.dailyTargets.items.first?.id, expected?.step.id)
+    }
+
     @MainActor
     func testHandlePublishesTransientMessageAfterActionResponse() async {
         let expectedMessage = TodayInlineMessage(
@@ -88,12 +119,19 @@ private extension TodayViewModelTests {
         )
     }
 
-    func makeGoal(id: String, stepID: String, stepTitle: String, dueAt: String) -> Goal {
+    func makeGoal(
+        id: String,
+        stepID: String,
+        stepTitle: String,
+        dueAt: String,
+        stepState: StepLifecycleState = .planned,
+        dependencyStepIDs: [String] = []
+    ) -> Goal {
         let actor = GoalActor(actorID: "self", displayName: "You", ownership: .self, roleLabel: "Primary owner", isPrimary: true)
         let timing = GoalTiming(tempo: .deadlineBased, timingType: .dueAt, startsOn: nil, dueAt: dueAt, targetBy: nil, windowStart: nil, windowEnd: nil, suggestedNextAt: nil, repeatEveryDays: nil, progressReviewCadenceDays: 7)
         let strategy = PlanningStrategy(strategyKind: .sequential, allowParallelSteps: false, maxActiveSteps: 3, preferredSectionOrder: [.activeSteps], defaultStepType: .actionUnit, autoGenerateReviewSection: false, preferShortSteps: true, revisitCadenceDays: 7)
         let progress = ProgressStrategy(metricKind: .stepCompletion, rollupMethod: .ratio, targetStepCount: nil, targetEvidenceCount: nil, targetMinutes: nil, supportsUntimedProgress: true, countsChildGoals: false, countsSupportGoals: false)
-        let step = Step(id: stepID, sectionID: "section-\(id)", title: stepTitle, summary: nil, type: .actionUnit, state: .planned, owner: actor, timing: timing, dependencyStepIDs: [], isOptional: false, isRepeatable: false, evidenceRequired: true, successSignals: ["Done"], actionability: StepActionability(action: "Do it", completionDefinition: "Done", evidenceOfCompletion: ["Done"], fallbackMicroStep: "Start", contextRequirements: []))
+        let step = Step(id: stepID, sectionID: "section-\(id)", title: stepTitle, summary: nil, type: .actionUnit, state: stepState, owner: actor, timing: timing, dependencyStepIDs: dependencyStepIDs, isOptional: false, isRepeatable: false, evidenceRequired: true, successSignals: ["Done"], actionability: StepActionability(action: "Do it", completionDefinition: "Done", evidenceOfCompletion: ["Done"], fallbackMicroStep: "Start", contextRequirements: []))
         let plan = GoalPlan(id: "plan-\(id)", goalID: id, version: goalEnginePlanVersion, generatedAt: "2026-04-15T12:00:00Z", summary: nil, strategy: strategy, sections: [PlanSection(id: "section-\(id)", goalID: id, title: "Active", summary: nil, kind: .activeSteps, orderIndex: 0, steps: [step])], assumptions: [], lint: PlanLintResult(goalID: id, planVersion: goalEnginePlanVersion, isValid: true, issueCount: 0, issues: []))
         return Goal(schemaVersion: goalEngineSchemaVersion, id: id, revision: 1, createdAt: "2026-04-15T12:00:00Z", updatedAt: "2026-04-15T12:00:00Z", state: .active, title: id, summary: nil, mode: .project, relationshipKind: .independent, actor: actor, parentGoalID: nil, childGoalIDs: [], supportGoalIDs: [], tags: [], timing: timing, planningStrategy: strategy, progressStrategy: progress, plan: plan)
     }
