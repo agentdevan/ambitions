@@ -85,7 +85,30 @@ private extension DeterministicGoalPlanner {
     }
 
     func inferredLifeGraph(for lower: String) -> LifeGraphContext? {
-        if containsAny(in: lower, matches: ["astronaut", "career", "job", "promotion", "business", "company", "freelance"]) {
+        if containsAny(in: lower, matches: ["astronaut"]) {
+            return LifeGraphContext(
+                domains: [LifeDomainAssignment(domain: .career)],
+                roles: [],
+                path: LifePathDescriptor(kind: .careerTrack, title: "Career path"),
+                stages: [
+                    LifePathStage(id: "foundation", title: "Foundation", summary: "Build the baseline first.", orderIndex: 0, readinessSignals: [
+                        LifePathSignal(id: "foundation-gap", title: "Baseline evidence still missing", summary: "The path needs a believable foundation signal.", kind: .evidence, isGap: true)
+                    ]),
+                    LifePathStage(id: "qualification", title: "Qualification", summary: "Collect qualifying evidence before the final push.", orderIndex: 1),
+                    LifePathStage(id: "application", title: "Application readiness", summary: "Treat application work as the late stage.", orderIndex: 2)
+                ],
+                prerequisites: [
+                    LifePathPrerequisite(id: "qualification-needs-degree", title: "Qualification depends on the degree milestone", kind: .milestone, stageID: "qualification", requiredMilestoneID: "degree"),
+                    LifePathPrerequisite(id: "application-needs-experience", title: "Application readiness depends on qualifying experience", kind: .milestone, stageID: "application", requiredMilestoneID: "experience")
+                ],
+                milestones: [
+                    LifeGraphMilestone(id: "degree", title: "Complete a qualifying degree", stageID: "foundation"),
+                    LifeGraphMilestone(id: "experience", title: "Build qualifying experience", stageID: "qualification", dependencyIDs: ["degree"]),
+                    LifeGraphMilestone(id: "application-ready", title: "Prepare the application package", stageID: "application", dependencyIDs: ["experience"])
+                ]
+            )
+        }
+        if containsAny(in: lower, matches: ["career", "job", "promotion", "business", "company", "freelance"]) {
             return LifeGraphContext(
                 domains: [LifeDomainAssignment(domain: .career)],
                 roles: [],
@@ -94,11 +117,27 @@ private extension DeterministicGoalPlanner {
             )
         }
         if containsAny(in: lower, matches: ["degree", "school", "course", "certification", "study program"]) {
+            let explicitProgram = containsAny(in: lower, matches: ["degree", "certification"])
             return LifeGraphContext(
                 domains: [LifeDomainAssignment(domain: .education)],
                 roles: [],
                 path: LifePathDescriptor(kind: .educationTrack, title: "Education path"),
-                milestones: []
+                stages: explicitProgram ? [
+                    LifePathStage(id: "preparation", title: "Preparation", summary: "Clarify the program and constraints.", orderIndex: 0, readinessSignals: [
+                        LifePathSignal(id: "prep-gap", title: "Requirements still need clarifying", summary: "The path should not pretend the program requirements are already known.", kind: .readiness, isGap: true)
+                    ]),
+                    LifePathStage(id: "coursework", title: "Coursework", summary: "Move through the main learning load.", orderIndex: 1),
+                    LifePathStage(id: "completion", title: "Completion", summary: "Close the program with visible completion evidence.", orderIndex: 2)
+                ] : [],
+                prerequisites: explicitProgram ? [
+                    LifePathPrerequisite(id: "coursework-needs-prep", title: "Coursework depends on clarified requirements", kind: .milestone, stageID: "coursework", requiredMilestoneID: "entry"),
+                    LifePathPrerequisite(id: "completion-needs-coursework", title: "Completion depends on core coursework", kind: .milestone, stageID: "completion", requiredMilestoneID: "coursework")
+                ] : [],
+                milestones: explicitProgram ? [
+                    LifeGraphMilestone(id: "entry", title: "Clarify entry requirements", stageID: "preparation"),
+                    LifeGraphMilestone(id: "coursework", title: "Finish the core coursework", stageID: "coursework", dependencyIDs: ["entry"]),
+                    LifeGraphMilestone(id: "completion-ready", title: "Complete the final assessment", stageID: "completion", dependencyIDs: ["coursework"])
+                ] : []
             )
         }
         if containsAny(in: lower, matches: ["workout", "exercise", "health", "fitness", "sleep", "recovery"]) {

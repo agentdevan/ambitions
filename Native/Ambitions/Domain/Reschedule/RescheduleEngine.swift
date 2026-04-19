@@ -64,6 +64,7 @@ struct RescheduleEngineInput: Sendable {
     let planningEvaluation: PlanningEvaluation?
     let stepState: StepLifecycleState
     let incompleteDependencyCount: Int
+    let pathStateSummary: LifePathStateSummary?
 
     init(
         stepID: String,
@@ -74,7 +75,8 @@ struct RescheduleEngineInput: Sendable {
         now: Date,
         planningEvaluation: PlanningEvaluation? = nil,
         stepState: StepLifecycleState = .planned,
-        incompleteDependencyCount: Int = 0
+        incompleteDependencyCount: Int = 0,
+        pathStateSummary: LifePathStateSummary? = nil
     ) {
         self.stepID = stepID
         self.timing = timing
@@ -85,6 +87,7 @@ struct RescheduleEngineInput: Sendable {
         self.planningEvaluation = planningEvaluation
         self.stepState = stepState
         self.incompleteDependencyCount = incompleteDependencyCount
+        self.pathStateSummary = pathStateSummary
     }
 }
 
@@ -240,6 +243,12 @@ private extension RescheduleEngine {
         if causeOfDrift == .notReady {
             return .notReady
         }
+        if input.pathStateSummary?.readiness.gapCount ?? 0 > 0 {
+            return .notReady
+        }
+        if input.pathStateSummary?.blockedPrerequisites.isEmpty == false {
+            return .blockedByDependency
+        }
         if input.stepState == .blocked || input.incompleteDependencyCount > 0 {
             return .blockedByDependency
         }
@@ -352,10 +361,16 @@ private extension RescheduleEngine {
 
         switch waitingState {
         case .blockedByDependency:
+            if let prerequisite = input.pathStateSummary?.blockedPrerequisites.first {
+                return "Finish the blocking prerequisite before retrying this step: \(prerequisite.title)."
+            }
             return "Finish the blocking prerequisite before retrying this step."
         case .waitingOnExternal:
             return "Keep this waiting until the external dependency clears."
         case .notReady:
+            if let gap = input.pathStateSummary?.readiness.gapSignals.first {
+                return "Use a readiness-sized pass first: \(gap.title)."
+            }
             return "Use a readiness-sized pass first: \(fallback)"
         case .none:
             return smallerStep?.summary

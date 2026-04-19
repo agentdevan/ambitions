@@ -45,7 +45,9 @@ final class PersistenceRepositoryTests: XCTestCase {
                 domains: [LifeDomainAssignment(domain: .career)],
                 roles: [LifeRole(kind: .primary, title: "Founder")],
                 path: LifePathDescriptor(kind: .careerTrack, title: "Company path"),
-                milestones: [LifeGraphMilestone(id: "m1", title: "Launch v1", summary: nil, targetDate: "2026-12-01", dependencyIDs: [])]
+                stages: [LifePathStage(id: "foundation", title: "Foundation", orderIndex: 0)],
+                prerequisites: [LifePathPrerequisite(id: "launch-needs-foundation", title: "Launch depends on foundation", kind: .stage, stageID: "launch", requiredStageID: "foundation")],
+                milestones: [LifeGraphMilestone(id: "m1", title: "Launch v1", summary: nil, targetDate: "2026-12-01", stageID: "foundation", dependencyIDs: [])]
             )
         )
 
@@ -55,6 +57,8 @@ final class PersistenceRepositoryTests: XCTestCase {
         XCTAssertEqual(loaded?.lifeGraph?.domains.map(\.domain), [.career])
         XCTAssertEqual(loaded?.lifeGraph?.roles.map(\.title), ["Founder"])
         XCTAssertEqual(loaded?.lifeGraph?.path?.title, "Company path")
+        XCTAssertEqual(loaded?.lifeGraph?.stages.map(\.id), ["foundation"])
+        XCTAssertEqual(loaded?.lifeGraph?.prerequisites.map(\.id), ["launch-needs-foundation"])
         XCTAssertEqual(loaded?.lifeGraph?.milestones.map(\.id), ["m1"])
     }
 

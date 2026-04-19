@@ -132,7 +132,45 @@ final class GoalCreationServiceTests: XCTestCase {
 
         XCTAssertEqual(careerGoal.lifeGraph?.domains.map(\.domain), [.career])
         XCTAssertEqual(careerGoal.lifeGraph?.path?.kind, .careerTrack)
+        XCTAssertEqual(careerGoal.lifeGraph?.stages.map(\.id), ["foundation", "qualification", "application"])
+        XCTAssertEqual(careerGoal.lifeGraph?.prerequisites.map(\.id), ["qualification-needs-foundation", "application-needs-experience"])
         XCTAssertNil(vagueDraft.draft.lifeGraph)
+    }
+
+    func testServiceKeepsGenericCareerSignalsConservative() async throws {
+        let repositories = try await makeRepositories()
+        let service = RepositoryBackedGoalsService(repositories: repositories)
+
+        let response = try await service.createGoal(
+            CreateGoalRequest(title: "Get a better job"),
+            now: fixedNow
+        )
+
+        let goalID = try XCTUnwrap(response.target.goalID)
+        let storedGoal = try await repositories.goals.goal(id: goalID)
+        let goal = try XCTUnwrap(storedGoal)
+
+        XCTAssertEqual(goal.lifeGraph?.path?.kind, .careerTrack)
+        XCTAssertTrue(goal.lifeGraph?.stages.isEmpty ?? true)
+        XCTAssertTrue(goal.lifeGraph?.prerequisites.isEmpty ?? true)
+    }
+
+    func testServiceAddsMinimalEducationStagesOnlyForExplicitPrograms() async throws {
+        let repositories = try await makeRepositories()
+        let service = RepositoryBackedGoalsService(repositories: repositories)
+
+        let response = try await service.createGoal(
+            CreateGoalRequest(title: "Finish my certification"),
+            now: fixedNow
+        )
+
+        let goalID = try XCTUnwrap(response.target.goalID)
+        let storedGoal = try await repositories.goals.goal(id: goalID)
+        let goal = try XCTUnwrap(storedGoal)
+
+        XCTAssertEqual(goal.lifeGraph?.domains.map(\.domain), [.education])
+        XCTAssertEqual(goal.lifeGraph?.stages.map(\.id), ["preparation", "coursework", "completion"])
+        XCTAssertEqual(goal.lifeGraph?.prerequisites.map(\.id), ["coursework-needs-prep", "completion-needs-coursework"])
     }
 
     func testServiceRejectsEmptyTitle() async throws {

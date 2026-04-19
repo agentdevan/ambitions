@@ -98,7 +98,8 @@ struct GoalPlanner: GoalPlanning {
                     "planningStrategyID": classification.planningStrategyID.metadata,
                     "progressStrategyID": classification.progressStrategyID.metadata,
                 ]
-            } ?? [:]
+            } ?? [:],
+            pathStateSummary: LifeGraphResolver.pathStateSummary(for: input.draft, plan: plan)
         )
         plan = GoalPlan(
             id: plan.id,

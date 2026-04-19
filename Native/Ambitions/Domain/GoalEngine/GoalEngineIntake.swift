@@ -386,11 +386,35 @@ struct GoalEngineIntakeService {
         var domains: [LifeDomainAssignment] = []
         var roles: [LifeRole] = []
         var path: LifePathDescriptor?
+        var stages: [LifePathStage] = []
+        var prerequisites: [LifePathPrerequisite] = []
+        var milestones: [LifeGraphMilestone] = []
 
         if normalizedLower.contains("astronaut") {
             domains = [LifeDomainAssignment(domain: .career)]
             path = LifePathDescriptor(kind: .careerTrack, title: "Astronaut path")
             roles = [LifeRole(kind: .aspirational, title: "Astronaut candidate")]
+            stages = [
+                LifePathStage(id: "foundation", title: "Foundation", summary: "Build the academic and physical baseline first.", orderIndex: 0, readinessSignals: [
+                    LifePathSignal(id: "foundation-evidence", title: "Core STEM baseline", summary: "A visible academic baseline helps keep the path believable.", kind: .evidence),
+                    LifePathSignal(id: "foundation-gap", title: "Training rhythm still forming", summary: "A sustainable study and training cadence is still missing.", kind: .readiness, isGap: true)
+                ]),
+                LifePathStage(id: "qualification", title: "Qualification", summary: "Accumulate qualifying experience and decision-ready evidence.", orderIndex: 1, readinessSignals: [
+                    LifePathSignal(id: "qualification-experience", title: "Relevant experience", summary: "The path needs visible experience signals, not just intent.", kind: .experience, isGap: true)
+                ]),
+                LifePathStage(id: "application", title: "Application readiness", summary: "Treat the application as a final stage, not the starting point.", orderIndex: 2, readinessSignals: [
+                    LifePathSignal(id: "application-window", title: "Application window awareness", summary: "The application stage needs a real window and materials ready.", kind: .applicationWindow)
+                ])
+            ]
+            milestones = [
+                LifeGraphMilestone(id: "degree", title: "Complete a qualifying degree", summary: "Finish the academic foundation required for the path.", stageID: "foundation"),
+                LifeGraphMilestone(id: "flight-or-equivalent", title: "Build qualifying experience", summary: "Accumulate relevant operational or research experience.", stageID: "qualification", dependencyIDs: ["degree"]),
+                LifeGraphMilestone(id: "application-ready", title: "Prepare the application package", summary: "Turn the path into a real application-ready package.", stageID: "application", dependencyIDs: ["flight-or-equivalent"])
+            ]
+            prerequisites = [
+                LifePathPrerequisite(id: "qualification-needs-foundation", title: "Qualification depends on the foundation stage", summary: "Do not treat late-stage qualification work like the first move.", kind: .stage, stageID: "qualification", requiredStageID: "foundation"),
+                LifePathPrerequisite(id: "application-needs-experience", title: "Application readiness depends on qualifying experience", summary: "The application stage should stay blocked until the qualifying milestone is real.", kind: .milestone, stageID: "application", requiredMilestoneID: "flight-or-equivalent")
+            ]
         } else if matches(normalizedLower, pattern: #"\bcareer\b|\bjob\b|\bpromotion\b|\bbusiness\b|\bcompany\b|\bfreelance\b"#) {
             domains = [LifeDomainAssignment(domain: .career)]
             if mode == .project || mode == .achievement {
@@ -399,6 +423,26 @@ struct GoalEngineIntakeService {
         } else if matches(normalizedLower, pattern: #"\bdegree\b|\bschool\b|\bcourse\b|\bcertification\b"#) {
             domains = [LifeDomainAssignment(domain: .education)]
             path = LifePathDescriptor(kind: .educationTrack, title: "Education path")
+            if matches(normalizedLower, pattern: #"\bdegree\b|\bcertification\b"#) {
+                stages = [
+                    LifePathStage(id: "preparation", title: "Preparation", summary: "Clarify the program and entry constraints first.", orderIndex: 0, readinessSignals: [
+                        LifePathSignal(id: "prep-readiness", title: "Entry requirements clarified", summary: "The program requirements should be explicit before committing the full path.", kind: .readiness, isGap: true)
+                    ]),
+                    LifePathStage(id: "coursework", title: "Coursework", summary: "Move through the core learning and requirement load.", orderIndex: 1),
+                    LifePathStage(id: "completion", title: "Completion", summary: "Finish assessments and close the path cleanly.", orderIndex: 2, readinessSignals: [
+                        LifePathSignal(id: "completion-evidence", title: "Completion evidence", summary: "The final stage needs visible completion evidence.", kind: .evidence)
+                    ])
+                ]
+                milestones = [
+                    LifeGraphMilestone(id: "entry-requirements", title: "Clarify entry requirements", summary: "Make the entry constraints explicit.", stageID: "preparation"),
+                    LifeGraphMilestone(id: "core-coursework", title: "Finish the core coursework", summary: "Complete the main program requirements.", stageID: "coursework", dependencyIDs: ["entry-requirements"]),
+                    LifeGraphMilestone(id: "final-assessment", title: "Complete the final assessment", summary: "Close the program with the final assessment or review.", stageID: "completion", dependencyIDs: ["core-coursework"])
+                ]
+                prerequisites = [
+                    LifePathPrerequisite(id: "coursework-needs-prep", title: "Coursework depends on clarified entry requirements", kind: .milestone, stageID: "coursework", requiredMilestoneID: "entry-requirements"),
+                    LifePathPrerequisite(id: "completion-needs-coursework", title: "Completion depends on core coursework", kind: .milestone, stageID: "completion", requiredMilestoneID: "core-coursework")
+                ]
+            }
         } else if matches(normalizedLower, pattern: #"\bhealth\b|\bfitness\b|\bexercise\b|\bsleep\b|\brecovery\b"#) {
             domains = [LifeDomainAssignment(domain: .health)]
         } else if matches(normalizedLower, pattern: #"\bdebt\b|\bbudget\b|\bsave money\b|\bfinance\b"#) {
@@ -413,7 +457,14 @@ struct GoalEngineIntakeService {
             return nil
         }
 
-        return LifeGraphContext(domains: domains, roles: roles, path: path, milestones: [])
+        return LifeGraphContext(
+            domains: domains,
+            roles: roles,
+            path: path,
+            stages: stages,
+            prerequisites: prerequisites,
+            milestones: milestones
+        )
     }
 
     private func matches(_ text: String, pattern: String) -> Bool {
