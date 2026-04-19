@@ -81,5 +81,5 @@ Build the life graph foundation so Ambitions can represent structured life domai
 - Added `LifeGraphResolver` for primary domain resolution, domain grouping, structural parent/child/support lookups, and milestone dependency resolution only.
 - Preserved `lifeGraph` through intake, deterministic planning, snapshot-backed persistence, legacy import, demo seeding, and feature-service goal rebuild paths.
 - Added focused tests for domain grouping, relationship resolution, goal-creation compatibility, blueprint forwarding, and repository round-trips.
-- Validation passed for XcodeGen generation, simulator build, corrected focused life-graph/unit tests, and full `AmbitionsTests` validation.
-- The scheme-level `xcodebuild test` command still exits with a UI-test failure because `AmbitionsUITests.testPreviewBootstrapCanCreateGoalFromEmptyState()` crashes with `signal term`; that instability was observed during this batch and remains outside the unit-validation gate.
+- Hardened `AmbitionsUITests.testPreviewBootstrapCanCreateGoalFromEmptyState()` by targeting the concrete text field and removing the brittle keyboard-dismiss fallback that was terminating the create-goal path.
+- Validation passed for XcodeGen generation, simulator build, corrected focused life-graph/unit tests, full `AmbitionsTests` validation, and full scheme UI tests.

@@ -27,14 +27,13 @@ final class AmbitionsUITests: XCTestCase {
         XCTAssertTrue(createButton.waitForExistence(timeout: 10))
         createButton.tap()
 
-        let titleField = app.descendants(matching: .any)["create-goal.title-field"]
+        let titleField = app.textFields["create-goal.title-field"]
         XCTAssertTrue(titleField.waitForExistence(timeout: 10))
         titleField.tap()
-        titleField.typeText("UI Smoke Goal")
-        dismissKeyboardIfNeeded(in: app)
+        titleField.typeText("UI Smoke Goal\n")
 
-        XCTAssertTrue(app.buttons["create-goal.submit-button"].waitForExistence(timeout: 10))
         let submitButton = scrollUntilButtonHittable("create-goal.submit-button", in: app)
+        XCTAssertTrue(submitButton.waitForExistence(timeout: 10))
         XCTAssertTrue(submitButton.isHittable)
         submitButton.tap()
 
@@ -104,20 +103,6 @@ final class AmbitionsUITests: XCTestCase {
 
         XCTFail("More destination row '\(label)' was not found.")
     }
-
-    private func dismissKeyboardIfNeeded(in app: XCUIApplication) {
-        guard app.keyboards.element.exists else { return }
-
-        let returnButton = app.keyboards.buttons["Return"]
-        if returnButton.exists {
-            returnButton.tap()
-        }
-
-        if app.keyboards.element.exists {
-            app.navigationBars.element(boundBy: 0).tap()
-        }
-    }
-
     private func scrollUntilButtonHittable(_ identifier: String, in app: XCUIApplication, maxAttempts: Int = 3) -> XCUIElement {
         for _ in 0..<maxAttempts {
             let button = app.buttons[identifier]
