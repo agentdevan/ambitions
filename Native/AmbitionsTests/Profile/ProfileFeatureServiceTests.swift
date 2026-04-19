@@ -8,11 +8,12 @@ final class ProfileFeatureServiceTests: XCTestCase {
 
         let dashboard = try await service.loadProfileDashboard()
 
-        XCTAssertTrue(dashboard.subtitle.contains("on-device"))
+        XCTAssertTrue(dashboard.subtitle.contains("local-only"))
         XCTAssertTrue(dashboard.subtitle.contains("capture"))
         XCTAssertTrue(dashboard.subtitle.contains("account sync is not implemented"))
+        XCTAssertTrue(dashboard.settings.contains(where: { $0.id == "profile-trust" && $0.valueLabel == "Ambitions is running in explicit local-only mode." }))
         XCTAssertTrue(dashboard.settings.contains(where: { $0.id == "profile-scope" && $0.valueLabel == "Native foundations" }))
-        XCTAssertTrue(dashboard.settingsFooter.contains("widget and Live Activity foundations still need validation"))
+        XCTAssertTrue(dashboard.settingsFooter.contains("local-only trust posture"))
         XCTAssertFalse(dashboard.subtitle.contains("are available as local device features"))
     }
 

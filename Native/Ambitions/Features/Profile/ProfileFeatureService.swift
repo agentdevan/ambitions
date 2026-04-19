@@ -5,7 +5,8 @@ struct RepositoryBackedProfileService: ProfileServicing {
 
     func loadProfileDashboard() async throws -> ProfileDashboard {
         let snapshot = try await loadSnapshot()
-        return makeDashboard(snapshot: snapshot)
+        let syncStatus = await LocalOnlySyncCapability().status()
+        return makeDashboard(snapshot: snapshot, syncStatus: syncStatus)
     }
 
     func saveProfilePreferences(_ preferences: ProfilePreferencesUpdate) async throws -> ProfileDashboard {
@@ -44,7 +45,7 @@ private extension RepositoryBackedProfileService {
         )
     }
 
-    func makeDashboard(snapshot: Snapshot) -> ProfileDashboard {
+    func makeDashboard(snapshot: Snapshot, syncStatus: SyncCapabilityStatus) -> ProfileDashboard {
         let activeGoals = snapshot.goals.filter { $0.state == .active }.count
         let liveHabits = snapshot.goals.filter { goal in
             guard let step = HabitGoalSemantics.preferredStep(in: goal) else { return false }
@@ -60,10 +61,10 @@ private extension RepositoryBackedProfileService {
 
         return ProfileDashboard(
             title: profileTitle,
-            subtitle: "This build keeps planning data on-device first. Today quick capture and the Captures tab are active in the native app, while account sync is not implemented and external device surfaces still need separate validation.",
+            subtitle: "This build keeps planning data in explicit local-only mode. Today quick capture and the Captures tab are active in the native app, while account sync is not implemented and external device surfaces still need separate validation.",
             initials: initials.isEmpty ? "U" : initials,
             badges: [
-                "On-device only",
+                "Local-only trust",
                 "Native persistence",
                 snapshot.drafts.contains(where: { $0.latestResultKind == .clarificationRequired }) ? "Clarification-aware" : "Stable planner"
             ],
@@ -74,12 +75,13 @@ private extension RepositoryBackedProfileService {
                 MetricSummary(id: "profile-evidence", title: "Evidence records", value: "\(snapshot.evidence.count)", detail: "Visible progress signals on device", icon: "sparkles")
             ],
             settingsTitle: "Local preferences",
-            settingsSubtitle: "These preferences are persisted on device and already shape the native experience.",
+            settingsSubtitle: "These preferences are persisted on device and already shape the native local-only experience.",
             settings: [
-                SettingsItem(id: "profile-storage", title: "Planning storage", subtitle: "Goals, habits, evidence, and feedback all read from the native repository.", icon: "internaldrive", valueLabel: "On-device only"),
+                SettingsItem(id: "profile-storage", title: "Planning storage", subtitle: "Goals, habits, evidence, and feedback all read from the native repository.", icon: "internaldrive", valueLabel: "Local-only mode"),
                 SettingsItem(id: "profile-tab", title: "Default tab", subtitle: "Used on the next cold launch.", icon: "square.grid.2x2", valueLabel: snapshot.appState.preferredTab.title),
                 SettingsItem(id: "profile-appearance", title: "Appearance", subtitle: "Choose whether Ambitions follows the system or stays explicit.", icon: "circle.lefthalf.filled", valueLabel: snapshot.appState.appearancePreference.title),
                 SettingsItem(id: "profile-review", title: "Review cadence", subtitle: "How often Profile frames a planning reset.", icon: "clock.arrow.circlepath", valueLabel: reviewLabel(days: snapshot.appState.reviewCadenceDays)),
+                SettingsItem(id: "profile-trust", title: "Trust posture", subtitle: "Portable backup/restore is designed for local-first continuity without implying a live cloud backend.", icon: "lock.shield", valueLabel: syncStatus.detail),
                 SettingsItem(
                     id: "profile-scope",
                     title: "Connected features",
@@ -88,7 +90,7 @@ private extension RepositoryBackedProfileService {
                     valueLabel: "Native foundations"
                 )
             ],
-            settingsFooter: "Everything in this version runs from on-device-first persistence. Capture storage is live in the app today, while widget and Live Activity foundations still need validation and there is no account sync configuration to manage yet.",
+            settingsFooter: "Everything in this version runs from an explicit local-only trust posture. Capture storage is live in the app today, portable backup and restore can stay local-first, widget and Live Activity foundations still need validation, and there is no account sync configuration to manage yet.",
             preferences: ProfilePreferencesState(
                 preferredTab: snapshot.appState.preferredTab,
                 appearancePreference: snapshot.appState.appearancePreference,

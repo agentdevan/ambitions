@@ -57,6 +57,25 @@ actor AmbitionsPersistenceStore {
         }
         return value
     }
+
+    func resetAllData() throws {
+        let context = ModelContext(container)
+        context.autosaveEnabled = false
+
+        try context.fetch(FetchDescriptor<StepRecord>()).forEach(context.delete)
+        try context.fetch(FetchDescriptor<PlanSectionRecord>()).forEach(context.delete)
+        try context.fetch(FetchDescriptor<GoalPlanRecord>()).forEach(context.delete)
+        try context.fetch(FetchDescriptor<GoalRecord>()).forEach(context.delete)
+        try context.fetch(FetchDescriptor<GoalDraftRecord>()).forEach(context.delete)
+        try context.fetch(FetchDescriptor<ProgressEvidenceRecord>()).forEach(context.delete)
+        try context.fetch(FetchDescriptor<FeedbackEventRecord>()).forEach(context.delete)
+        try context.fetch(FetchDescriptor<CaptureRecord>()).forEach(context.delete)
+        try context.fetch(FetchDescriptor<AppStateRecord>()).forEach(context.delete)
+
+        if context.hasChanges {
+            try context.save()
+        }
+    }
 }
 
 enum PersistenceError: LocalizedError {
