@@ -75,7 +75,28 @@ struct ExternalSurfaceNowState: Codable, Sendable, Equatable {
     let activeFocus: ExternalSurfaceActionReference?
     let openCaptureUrgency: ExternalSurfaceCaptureUrgency
     let blockerSummary: ExternalSurfaceBlockerSummary
+    let ritualCue: ExternalSurfaceRitualCue?
     let supportedCommands: [ExternalSurfaceCommandDescriptor]
+
+    init(
+        todayPosture: ExternalSurfaceTodayPosture,
+        pressureLevel: ExternalSurfacePressureLevel,
+        bestNextStep: ExternalSurfaceActionReference?,
+        activeFocus: ExternalSurfaceActionReference?,
+        openCaptureUrgency: ExternalSurfaceCaptureUrgency,
+        blockerSummary: ExternalSurfaceBlockerSummary,
+        ritualCue: ExternalSurfaceRitualCue? = nil,
+        supportedCommands: [ExternalSurfaceCommandDescriptor]
+    ) {
+        self.todayPosture = todayPosture
+        self.pressureLevel = pressureLevel
+        self.bestNextStep = bestNextStep
+        self.activeFocus = activeFocus
+        self.openCaptureUrgency = openCaptureUrgency
+        self.blockerSummary = blockerSummary
+        self.ritualCue = ritualCue
+        self.supportedCommands = supportedCommands
+    }
 }
 
 struct ExternalSurfaceActionReference: Codable, Sendable, Equatable {
@@ -99,6 +120,13 @@ struct ExternalSurfaceCommandDescriptor: Codable, Sendable, Equatable {
     let requiresStepID: Bool
 }
 
+struct ExternalSurfaceRitualCue: Codable, Sendable, Equatable {
+    let kind: ExternalSurfaceRitualKind
+    let templateKey: String
+    let progressState: ExternalSurfaceRitualProgressState
+    let primaryReference: ExternalSurfaceActionReference?
+}
+
 enum ExternalSurfaceTodayPosture: String, Codable, Sendable {
     case empty
     case active
@@ -117,6 +145,20 @@ enum ExternalSurfaceCaptureUrgency: String, Codable, Sendable {
     case none
     case low
     case elevated
+}
+
+enum ExternalSurfaceRitualKind: String, Codable, Sendable {
+    case morningSetup = "morning_setup"
+    case middayReset = "midday_reset"
+    case eveningClose = "evening_close"
+    case weeklyReset = "weekly_reset"
+}
+
+enum ExternalSurfaceRitualProgressState: String, Codable, Sendable {
+    case unavailable
+    case ready
+    case needsReset = "needs_reset"
+    case complete
 }
 
 enum ExternalSurfaceCommandKind: String, Codable, Sendable {

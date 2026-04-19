@@ -1,12 +1,14 @@
 import Foundation
 
 struct ExternalSurfaceSnapshotBuilder: Sendable {
+    private let ritualService = RitualOrchestrationService()
+
     func makeSnapshot(goals: [Goal], captures: [Capture] = [], now: Date) -> ExternalSurfaceSnapshot {
         let nextAction = nextAction(from: goals, now: now)
         return ExternalSurfaceSnapshot(
             generatedAt: Self.iso.string(from: now),
             nextAction: nextAction,
-            nowState: nowState(goals: goals, captures: captures, nextAction: nextAction)
+            nowState: nowState(goals: goals, captures: captures, nextAction: nextAction, now: now)
         )
     }
 
@@ -33,7 +35,8 @@ struct ExternalSurfaceSnapshotBuilder: Sendable {
     private func nowState(
         goals: [Goal],
         captures: [Capture],
-        nextAction: ExternalSurfaceNextAction?
+        nextAction: ExternalSurfaceNextAction?,
+        now: Date
     ) -> ExternalSurfaceNowState {
         let activeGoals = goals.filter { $0.state == .active || $0.state == .paused }
         let blockedSteps = activeGoals.flatMap { goal in
@@ -59,7 +62,31 @@ struct ExternalSurfaceSnapshotBuilder: Sendable {
             activeFocus: nil,
             openCaptureUrgency: captureUrgency(openCaptureCount: openCaptures.count),
             blockerSummary: ExternalSurfaceBlockerSummary(waitingCount: 0, blockedCount: blockedSteps.count),
+            ritualCue: ritualCue(goals: activeGoals, captures: captures, now: now),
             supportedCommands: supportedCommands(hasNextAction: nextAction != nil)
+        )
+    }
+
+    private func ritualCue(goals: [Goal], captures: [Capture], now: Date) -> ExternalSurfaceRitualCue? {
+        let plan = ritualService.makePlan(
+            input: RitualOrchestrationInput(
+                goals: goals,
+                captures: captures,
+                evidence: [],
+                feedback: [],
+                now: now
+            )
+        )
+        let recommendation = plan.activeRecommendation
+        guard recommendation.progressState != .unavailable else { return nil }
+        return ExternalSurfaceRitualCue(
+            kind: mapRitualKind(recommendation.kind),
+            templateKey: templateKey(for: recommendation.kind),
+            progressState: mapRitualProgress(recommendation.progressState),
+            primaryReference: recommendation.primaryAction.flatMap { action in
+                guard let goalID = action.goalID else { return nil }
+                return ExternalSurfaceActionReference(goalID: goalID, stepID: action.stepID)
+            }
         )
     }
 
@@ -150,6 +177,45 @@ struct ExternalSurfaceSnapshotBuilder: Sendable {
             return .blocked
         case .cancelled:
             return .cancelled
+        }
+    }
+
+    private func mapRitualKind(_ kind: RitualKind) -> ExternalSurfaceRitualKind {
+        switch kind {
+        case .morningSetup:
+            return .morningSetup
+        case .middayReset:
+            return .middayReset
+        case .eveningClose:
+            return .eveningClose
+        case .weeklyReset:
+            return .weeklyReset
+        }
+    }
+
+    private func mapRitualProgress(_ state: RitualProgressState) -> ExternalSurfaceRitualProgressState {
+        switch state {
+        case .unavailable:
+            return .unavailable
+        case .ready:
+            return .ready
+        case .needsReset:
+            return .needsReset
+        case .complete:
+            return .complete
+        }
+    }
+
+    private func templateKey(for kind: RitualKind) -> String {
+        switch kind {
+        case .morningSetup:
+            return "ritual_morning_setup"
+        case .middayReset:
+            return "ritual_midday_reset"
+        case .eveningClose:
+            return "ritual_evening_close"
+        case .weeklyReset:
+            return "ritual_weekly_reset"
         }
     }
 

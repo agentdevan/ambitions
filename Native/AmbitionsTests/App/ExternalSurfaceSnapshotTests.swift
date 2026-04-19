@@ -5,7 +5,7 @@ final class ExternalSurfaceSnapshotTests: XCTestCase {
     func testSnapshotGenerationSelectsNextActionAndRedactsUserEnteredTitles() throws {
         let formatter = ISO8601DateFormatter()
         formatter.formatOptions = [.withInternetDateTime]
-        let now = try XCTUnwrap(formatter.date(from: "2026-04-15T12:00:00Z"))
+        let now = try XCTUnwrap(formatter.date(from: "2026-04-15T08:00:00Z"))
         let sensitiveStepTitle = "Private Therapy Session"
         let goal = makeGoal(
             goalID: "goal-sensitive",
@@ -29,6 +29,8 @@ final class ExternalSurfaceSnapshotTests: XCTestCase {
         XCTAssertEqual(snapshot.nowState?.todayPosture, .active)
         XCTAssertEqual(snapshot.nowState?.pressureLevel, .steady)
         XCTAssertEqual(snapshot.nowState?.openCaptureUrgency, ExternalSurfaceCaptureUrgency.none)
+        XCTAssertEqual(snapshot.nowState?.ritualCue?.kind, .morningSetup)
+        XCTAssertEqual(snapshot.nowState?.ritualCue?.templateKey, "ritual_morning_setup")
         XCTAssertEqual(snapshot.nowState?.supportedCommands.map(\.kind), [.complete, .snooze, .openGoal, .openToday, .openCapturesInbox])
         XCTAssertFalse(json.contains(sensitiveStepTitle))
         XCTAssertFalse(json.contains("Very Personal Goal"))
@@ -55,6 +57,12 @@ final class ExternalSurfaceSnapshotTests: XCTestCase {
                 activeFocus: nil,
                 openCaptureUrgency: .none,
                 blockerSummary: ExternalSurfaceBlockerSummary(waitingCount: 0, blockedCount: 0),
+                ritualCue: ExternalSurfaceRitualCue(
+                    kind: .middayReset,
+                    templateKey: "ritual_midday_reset",
+                    progressState: .needsReset,
+                    primaryReference: ExternalSurfaceActionReference(goalID: "goal-1", stepID: "step-1")
+                ),
                 supportedCommands: [
                     ExternalSurfaceCommandDescriptor(kind: .complete, requiresGoalID: true, requiresStepID: true),
                     ExternalSurfaceCommandDescriptor(kind: .snooze, requiresGoalID: true, requiresStepID: true),
@@ -118,6 +126,7 @@ final class ExternalSurfaceSnapshotTests: XCTestCase {
                 activeFocus: nil,
                 openCaptureUrgency: .none,
                 blockerSummary: ExternalSurfaceBlockerSummary(waitingCount: 0, blockedCount: 0),
+                ritualCue: nil,
                 supportedCommands: []
             )
         )
@@ -136,6 +145,32 @@ final class ExternalSurfaceSnapshotTests: XCTestCase {
         XCTAssertEqual(legacyState.goalID, "goal-old")
         XCTAssertEqual(legacyState.stepID, "step-old")
         XCTAssertEqual(legacyState.pressureLevel, .steady)
+    }
+
+    func testSnapshotRitualCueIsPrivacySafeAndBackwardDecodable() throws {
+        let formatter = ISO8601DateFormatter()
+        formatter.formatOptions = [.withInternetDateTime]
+        let now = try XCTUnwrap(formatter.date(from: "2026-04-15T13:00:00Z"))
+        let goal = makeGoal(
+            goalID: "goal-private",
+            goalTitle: "Private Tax Debt Goal",
+            stepID: "step-private",
+            stepTitle: "Call the accountant about private numbers",
+            dueAt: "2026-04-15T14:00:00Z"
+        )
+        let snapshot = ExternalSurfaceSnapshotBuilder().makeSnapshot(goals: [goal], now: now)
+        let json = try XCTUnwrap(String(data: PersistenceCoding.encode(snapshot), encoding: .utf8))
+
+        XCTAssertEqual(snapshot.nowState?.ritualCue?.kind, .middayReset)
+        XCTAssertEqual(snapshot.nowState?.ritualCue?.primaryReference?.goalID, "goal-private")
+        XCTAssertFalse(json.contains("Private Tax Debt Goal"))
+        XCTAssertFalse(json.contains("Call the accountant"))
+
+        let oldJSON = """
+        {"schemaVersion":"external_surface_snapshot.v1","generatedAt":"2026-04-15T12:00:00Z","nextAction":null,"nowState":{"todayPosture":"active","pressureLevel":"steady","bestNextStep":null,"activeFocus":null,"openCaptureUrgency":"none","blockerSummary":{"waitingCount":0,"blockedCount":0},"supportedCommands":[]}}
+        """
+        let decoded = try PersistenceCoding.decode(ExternalSurfaceSnapshot.self, from: Data(oldJSON.utf8))
+        XCTAssertNil(decoded.nowState?.ritualCue)
     }
 
     func testSnapshotRefreshingDecoratorsRefreshWriterAfterTodayAndGoalsMutations() async throws {

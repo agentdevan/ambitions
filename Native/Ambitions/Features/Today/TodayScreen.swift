@@ -48,6 +48,7 @@ struct TodayScreen: View {
                                 .transition(.ambitionPanel)
                         }
 
+                        TodayRitualCard(state: experience.ritual, onAction: handleAction)
                         TodayDailyTargetsCard(
                             state: experience.dailyTargets,
                             expanded: dailyTargetsExpanded,

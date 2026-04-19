@@ -55,6 +55,53 @@ struct TodayMessageCard: View {
     }
 }
 
+struct TodayRitualCard: View {
+    @Environment(\.ambitionTheme) private var theme
+
+    let state: TodayRitualLoopState
+    let onAction: (TodayInlineAction) -> Void
+
+    var body: some View {
+        AppCard(state: visualState) {
+            VStack(alignment: .leading, spacing: theme.spacing.md) {
+                SectionHeader(eyebrow: "1. Ritual Loop", title: state.title, subtitle: state.subtitle) {
+                    TagPill(state.stateLabel, state: visualState)
+                }
+
+                Text(state.thesis)
+                    .font(theme.typography.body)
+                    .foregroundStyle(theme.colors.textSecondary)
+
+                if state.signalLabels.isEmpty == false {
+                    ScrollView(.horizontal, showsIndicators: false) {
+                        HStack(spacing: theme.spacing.xs) {
+                            ForEach(state.signalLabels, id: \.self) { label in
+                                TagPill(label, state: .default)
+                            }
+                        }
+                    }
+                }
+
+                if let action = state.action {
+                    TodayActionChip(action: action, handler: onAction)
+                }
+            }
+        }
+        .ambitionPanelAccessibility()
+    }
+
+    private var visualState: AmbitionVisualState {
+        switch state.kind {
+        case .middayReset:
+            return state.stateLabel == "Reset needed" ? .warning : .selected
+        case .eveningClose:
+            return state.stateLabel == "Progress landed" ? .success : .default
+        case .morningSetup, .weeklyReset:
+            return .selected
+        }
+    }
+}
+
 struct TodayDailyTargetsCard: View {
     @Environment(\.ambitionTheme) private var theme
 

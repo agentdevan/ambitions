@@ -137,12 +137,40 @@ struct NextStepLocalNotificationPlanner: Sendable {
 
         return LocalNotificationScheduleRequest(
             identifier: AppNotificationConstants.nextStepRequestID,
-            title: "Ambitions reminder",
-            body: "Your next step is ready.",
+            title: title(for: snapshot?.nowState?.ritualCue),
+            body: body(for: snapshot?.nowState?.ritualCue),
             categoryIdentifier: AppNotificationConstants.nextStepCategoryID,
             userInfo: userInfo,
             timeInterval: scheduleInterval(for: next.display.urgency)
         )
+    }
+
+    private func title(for ritualCue: ExternalSurfaceRitualCue?) -> String {
+        guard let ritualCue else { return "Ambitions reminder" }
+        switch ritualCue.kind {
+        case .morningSetup:
+            return "Morning setup"
+        case .middayReset:
+            return "Midday reset"
+        case .eveningClose:
+            return "Evening close"
+        case .weeklyReset:
+            return "Weekly reset"
+        }
+    }
+
+    private func body(for ritualCue: ExternalSurfaceRitualCue?) -> String {
+        guard let ritualCue else { return "Your next step is ready." }
+        switch ritualCue.kind {
+        case .morningSetup:
+            return "One next move is ready."
+        case .middayReset:
+            return ritualCue.progressState == .needsReset ? "A smaller next move is ready." : "Your next move is still available."
+        case .eveningClose:
+            return "Close the loop from Today."
+        case .weeklyReset:
+            return "Review the week from Today."
+        }
     }
 
     private func scheduleInterval(for urgency: ExternalSurfaceUrgency) -> TimeInterval {

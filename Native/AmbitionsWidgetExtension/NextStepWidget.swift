@@ -76,7 +76,7 @@ private struct NextStepWidgetView: View {
                 .foregroundStyle(.secondary)
 
             if glance.primaryReference != nil {
-                Text(title(for: glance.todayPosture))
+                Text(title(for: glance))
                     .font(.headline)
                 Text(detail(for: glance))
                     .font(.subheadline)
@@ -97,8 +97,11 @@ private struct NextStepWidgetView: View {
         .widgetURL(glance.primaryURL)
     }
 
-    private func title(for posture: ExternalSurfaceTodayPosture) -> String {
-        switch posture {
+    private func title(for glance: ExternalSurfaceGlanceState) -> String {
+        if let ritualCue = glance.ritualCue {
+            return ritualTitle(for: ritualCue.kind)
+        }
+        switch glance.todayPosture {
         case .empty:
             return "No next step"
         case .active:
@@ -111,6 +114,18 @@ private struct NextStepWidgetView: View {
     }
 
     private func detail(for glance: ExternalSurfaceGlanceState) -> String {
+        if let ritualCue = glance.ritualCue {
+            switch ritualCue.kind {
+            case .morningSetup:
+                return "One next move is ready."
+            case .middayReset:
+                return ritualCue.progressState == .needsReset ? "A smaller reset is ready." : "The next move still fits."
+            case .eveningClose:
+                return "Close the loop in Today."
+            case .weeklyReset:
+                return "Review the week in Today."
+            }
+        }
         switch glance.todayPosture {
         case .waiting:
             return "Open Ambitions for the safest next move."
@@ -118,6 +133,19 @@ private struct NextStepWidgetView: View {
             return "Open Ambitions to refresh your plan."
         case .active, .recovery:
             return urgencyLabel(glance.urgency)
+        }
+    }
+
+    private func ritualTitle(for kind: ExternalSurfaceRitualKind) -> String {
+        switch kind {
+        case .morningSetup:
+            return "Morning setup"
+        case .middayReset:
+            return "Midday reset"
+        case .eveningClose:
+            return "Evening close"
+        case .weeklyReset:
+            return "Weekly reset"
         }
     }
 

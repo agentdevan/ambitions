@@ -2,6 +2,26 @@ import AmbitionsDesignSystem
 import Foundation
 
 enum PreviewTodayScenarios {
+    static let seededRitual = TodayRitualLoopState(
+        kind: .middayReset,
+        title: "Midday reset",
+        subtitle: "Use a smaller next move before pressure turns into drift.",
+        thesis: "Anchor the day around one next move.",
+        stateLabel: "Reset needed",
+        signalLabels: ["4 active goals", "1 done today", "2 friction signals", "moderate pressure"],
+        action: TodayInlineAction(kind: .askForSmallerStep, title: "Smaller step", systemImage: "scissors", state: .selected, target: TodayActionTarget(goalID: "goal-1", stepID: "step-1"))
+    )
+
+    static let emptyRitual = TodayRitualLoopState(
+        kind: .morningSetup,
+        title: "Morning setup",
+        subtitle: "Add a real goal or capture before Ambitions suggests a repeat loop.",
+        thesis: "No day thesis yet because Ambitions has no live signal.",
+        stateLabel: "Waiting",
+        signalLabels: ["0 active goals", "0 done today", "low pressure"],
+        action: nil
+    )
+
     static let seeded = TodayExperience(
         mode: .seeded,
         header: TodayHeaderState(
@@ -14,6 +34,7 @@ enum PreviewTodayScenarios {
                 TodayPillState(id: "seeded", title: "Seeded demo", icon: "sparkles", state: .celebration)
             ]
         ),
+        ritual: seededRitual,
         dailyTargets: TodayDailyTargetsState(
             title: "Daily targets",
             subtitle: "A short list from the native planner and repository layers.",
@@ -126,6 +147,7 @@ enum PreviewTodayScenarios {
             subtitle: "Today becomes useful as soon as one real goal or draft exists. Nothing here is faking urgency.",
             contextPills: [TodayPillState(id: "empty", title: "No live goals", icon: "moon.zzz", state: .default)]
         ),
+        ritual: emptyRitual,
         dailyTargets: TodayDailyTargetsState(
             title: "No live targets yet",
             subtitle: "Once a goal exists, Today will surface only the few moves worth acting on.",
@@ -145,6 +167,7 @@ enum PreviewTodayScenarios {
     static let starter = TodayExperience(
         mode: .active,
         header: seeded.header,
+        ritual: seededRitual,
         dailyTargets: seeded.dailyTargets,
         focus: .starter(
             TodayFocusStarterState(
@@ -170,6 +193,7 @@ enum PreviewTodayScenarios {
     static let clarification = TodayExperience(
         mode: .active,
         header: seeded.header,
+        ritual: seededRitual,
         dailyTargets: seeded.dailyTargets,
         focus: .clarification(
             TodayFocusClarificationState(
@@ -193,6 +217,7 @@ enum PreviewTodayScenarios {
     static let blocked = TodayExperience(
         mode: .active,
         header: seeded.header,
+        ritual: seededRitual,
         dailyTargets: seeded.dailyTargets,
         focus: .blocked(
             TodayFocusBlockedState(
@@ -221,6 +246,15 @@ enum PreviewTodayScenarios {
                 TodayPillState(id: "goals", title: "1 active goal", icon: "scope", state: .selected),
                 TodayPillState(id: "moves", title: "3 live moves", icon: "bolt.fill", state: .default)
             ]
+        ),
+        ritual: TodayRitualLoopState(
+            kind: .morningSetup,
+            title: "Morning setup",
+            subtitle: "Pick one next move before the day gets noisy.",
+            thesis: "Anchor the day around one next move.",
+            stateLabel: "Ready",
+            signalLabels: ["1 active goal", "0 done today", "low pressure"],
+            action: TodayInlineAction(kind: .openDetail, title: "Open detail", systemImage: "arrow.right.circle", state: .default, target: TodayActionTarget(goalID: "goal-fresh", stepID: "goal-fresh-step-1", draftID: "draft-fresh"))
         ),
         dailyTargets: TodayDailyTargetsState(
             title: "Daily targets",

@@ -32,6 +32,21 @@ final class TodayViewModelTests: XCTestCase {
         XCTAssertEqual(experience.dailyTargets.items.first?.id, expected?.step.id)
     }
 
+    func testRepositoryBackedServiceIncludesComputedRitualState() async throws {
+        let repositories = try await makeRepositories()
+        let service = RepositoryBackedTodayService(repositories: repositories)
+        let now = try XCTUnwrap(DomainTimestamp.date(from: "2026-04-21T08:00:00Z"))
+        let goal = makeGoal(id: "goal-ritual", stepID: "step-ritual", stepTitle: "Ritual-backed step", dueAt: "2026-04-21T16:00:00Z")
+        try await repositories.goals.saveGoals([goal])
+
+        let experience = try await service.loadTodayExperience(userDisplayName: "", now: now)
+
+        XCTAssertEqual(experience.ritual.kind, .morningSetup)
+        XCTAssertEqual(experience.ritual.action?.kind, .openDetail)
+        XCTAssertEqual(experience.ritual.action?.target.goalID, "goal-ritual")
+        XCTAssertTrue(experience.ritual.signalLabels.contains("1 active goal"))
+    }
+
     func testSharedNextStepSelectorDeprioritizesBlockedDependencyWork() async throws {
         let repositories = try await makeRepositories()
         let service = RepositoryBackedTodayService(repositories: repositories)

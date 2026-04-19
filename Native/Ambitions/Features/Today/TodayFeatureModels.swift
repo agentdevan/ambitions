@@ -214,9 +214,20 @@ struct TodayReflectionState: Sendable {
     let actions: [TodayInlineAction]
 }
 
+struct TodayRitualLoopState: Sendable {
+    let kind: RitualKind
+    let title: String
+    let subtitle: String
+    let thesis: String
+    let stateLabel: String
+    let signalLabels: [String]
+    let action: TodayInlineAction?
+}
+
 struct TodayExperience: Sendable {
     let mode: TodayExperienceMode
     let header: TodayHeaderState
+    let ritual: TodayRitualLoopState
     let dailyTargets: TodayDailyTargetsState
     let focus: TodayFocusState
     let freeTime: TodayFreeTimeState

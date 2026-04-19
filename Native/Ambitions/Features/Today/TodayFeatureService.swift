@@ -7,19 +7,22 @@ struct RepositoryBackedTodayService: TodayServicing {
     let rescheduleEngine: any GoalRescheduling
     let captureService: any CaptureServicing
     let calendarRemindersService: any CalendarRemindersServicing
+    let ritualService: RitualOrchestrationService
 
     init(
         repositories: AppRepositories,
         adaptationService: GoalEngineAdaptationService = GoalEngineAdaptationService(),
         rescheduleEngine: any GoalRescheduling = RescheduleEngine(),
         captureService: (any CaptureServicing)? = nil,
-        calendarRemindersService: (any CalendarRemindersServicing)? = nil
+        calendarRemindersService: (any CalendarRemindersServicing)? = nil,
+        ritualService: RitualOrchestrationService = RitualOrchestrationService()
     ) {
         self.repositories = repositories
         self.adaptationService = adaptationService
         self.rescheduleEngine = rescheduleEngine
         self.captureService = captureService ?? DefaultCaptureService(repository: repositories.captures)
         self.calendarRemindersService = calendarRemindersService ?? StubCalendarRemindersService()
+        self.ritualService = ritualService
     }
 
     func loadTodayExperience(userDisplayName: String, now: Date) async throws -> TodayExperience {
@@ -80,6 +83,7 @@ private extension RepositoryBackedTodayService {
         let drafts: [PersistedGoalDraft]
         let evidence: [ProgressEvidence]
         let feedback: [GoalFeedbackEvent]
+        let captures: [Capture]
         let appState: AppStateSnapshot
     }
 
@@ -88,6 +92,7 @@ private extension RepositoryBackedTodayService {
         async let drafts = repositories.drafts.listDrafts()
         async let evidence = repositories.evidence.listEvidence(goalID: nil)
         async let feedback = repositories.feedback.listEvents(goalID: nil)
+        async let captures = repositories.captures.listCaptures()
         async let appState = repositories.appState.loadState()
 
         return try await Snapshot(
@@ -95,6 +100,7 @@ private extension RepositoryBackedTodayService {
             drafts: drafts,
             evidence: evidence,
             feedback: feedback,
+            captures: captures,
             appState: appState
         )
     }
@@ -141,6 +147,7 @@ private extension RepositoryBackedTodayService {
                 clarificationCount: clarificationDrafts.count,
                 blockedCount: blockedDrafts.count
             ),
+            ritual: makeRitual(snapshot: snapshot, activeGoals: activeGoals, now: now),
             dailyTargets: makeDailyTargets(
                 mode: mode,
                 goals: activeGoals,
@@ -193,6 +200,84 @@ private extension RepositoryBackedTodayService {
                 feedback: snapshot.feedback
             )
         )
+    }
+
+    func makeRitual(snapshot: Snapshot, activeGoals: [Goal], now: Date) -> TodayRitualLoopState {
+        let plan = ritualService.makePlan(
+            input: RitualOrchestrationInput(
+                goals: activeGoals,
+                captures: snapshot.captures,
+                evidence: snapshot.evidence,
+                feedback: snapshot.feedback,
+                now: now
+            )
+        )
+        let recommendation = plan.activeRecommendation
+        return TodayRitualLoopState(
+            kind: recommendation.kind,
+            title: recommendation.title,
+            subtitle: recommendation.body,
+            thesis: recommendation.kind == .weeklyReset ? plan.weekThesis : plan.dayThesis,
+            stateLabel: recommendation.stateLabel,
+            signalLabels: ritualSignalLabels(from: plan.signalSummary),
+            action: recommendation.primaryAction.map(todayAction(from:))
+        )
+    }
+
+    func todayAction(from action: RitualActionReference) -> TodayInlineAction {
+        let kind: TodayActionKind
+        let title: String
+        let systemImage: String
+        let state: AmbitionVisualState
+        switch action.kind {
+        case .complete:
+            kind = .complete
+            title = "Complete"
+            systemImage = "checkmark"
+            state = .success
+        case .delay:
+            kind = .delay
+            title = "Delay"
+            systemImage = "clock.arrow.circlepath"
+            state = .default
+        case .askForSmallerStep:
+            kind = .askForSmallerStep
+            title = "Smaller step"
+            systemImage = "scissors"
+            state = .selected
+        case .quickLog:
+            kind = .quickLog
+            title = "Quick log"
+            systemImage = "square.and.pencil"
+            state = .default
+        case .openDetail:
+            kind = .openDetail
+            title = "Open detail"
+            systemImage = "arrow.right.circle"
+            state = .default
+        }
+        return TodayInlineAction(
+            kind: kind,
+            title: title,
+            systemImage: systemImage,
+            state: state,
+            target: TodayActionTarget(goalID: action.goalID, stepID: action.stepID, draftID: action.draftID)
+        )
+    }
+
+    func ritualSignalLabels(from summary: RitualSignalSummary) -> [String] {
+        var labels = [
+            "\(summary.activeGoalCount) active goal\(summary.activeGoalCount == 1 ? "" : "s")",
+            "\(summary.completedTodayCount) done today"
+        ]
+        if summary.frictionTodayCount > 0 {
+            labels.append("\(summary.frictionTodayCount) friction signal\(summary.frictionTodayCount == 1 ? "" : "s")")
+        }
+        if summary.openCaptureCount > 0 {
+            labels.append("\(summary.openCaptureCount) open capture\(summary.openCaptureCount == 1 ? "" : "s")")
+        }
+        labels.append("\(summary.pressureLevel.rawValue) pressure")
+        return labels
     }
 
     func performFeedbackAction(_ action: TodayInlineAction, now: Date) async throws -> TodayActionResponse {

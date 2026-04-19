@@ -122,6 +122,7 @@ struct ExternalSurfaceGlanceState: Sendable, Equatable {
     let pressureLevel: ExternalSurfacePressureLevel
     let openCaptureUrgency: ExternalSurfaceCaptureUrgency
     let blockerSummary: ExternalSurfaceBlockerSummary
+    let ritualCue: ExternalSurfaceRitualCue?
     let supportedCommands: [ExternalSurfaceCommandDescriptor]
     let urgency: ExternalSurfaceUrgency
     let timing: ExternalSurfaceTiming
@@ -133,6 +134,7 @@ struct ExternalSurfaceGlanceState: Sendable, Equatable {
             pressureLevel = .open
             openCaptureUrgency = .none
             blockerSummary = ExternalSurfaceBlockerSummary(waitingCount: 0, blockedCount: 0)
+            ritualCue = nil
             supportedCommands = [
                 ExternalSurfaceCommandDescriptor(kind: .openToday, requiresGoalID: false, requiresStepID: false),
             ]
@@ -147,6 +149,7 @@ struct ExternalSurfaceGlanceState: Sendable, Equatable {
             pressureLevel = nowState.pressureLevel
             openCaptureUrgency = nowState.openCaptureUrgency
             blockerSummary = nowState.blockerSummary
+            ritualCue = nowState.ritualCue
             supportedCommands = nowState.supportedCommands
         } else if let nextAction = snapshot.nextAction {
             primaryReference = ExternalSurfaceActionReference(goalID: nextAction.goalID, stepID: nextAction.stepID)
@@ -154,6 +157,7 @@ struct ExternalSurfaceGlanceState: Sendable, Equatable {
             pressureLevel = .steady
             openCaptureUrgency = .none
             blockerSummary = ExternalSurfaceBlockerSummary(waitingCount: 0, blockedCount: 0)
+            ritualCue = nil
             supportedCommands = [
                 ExternalSurfaceCommandDescriptor(kind: .complete, requiresGoalID: true, requiresStepID: true),
                 ExternalSurfaceCommandDescriptor(kind: .snooze, requiresGoalID: true, requiresStepID: true),
@@ -166,6 +170,7 @@ struct ExternalSurfaceGlanceState: Sendable, Equatable {
             pressureLevel = .open
             openCaptureUrgency = .none
             blockerSummary = ExternalSurfaceBlockerSummary(waitingCount: 0, blockedCount: 0)
+            ritualCue = nil
             supportedCommands = [
                 ExternalSurfaceCommandDescriptor(kind: .openToday, requiresGoalID: false, requiresStepID: false),
             ]

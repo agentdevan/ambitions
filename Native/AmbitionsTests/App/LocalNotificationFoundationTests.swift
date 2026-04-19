@@ -71,6 +71,54 @@ final class LocalNotificationFoundationTests: XCTestCase {
         let replacedRequest = await center.replacedRequest
         XCTAssertNil(replacedRequest)
     }
+
+    func testSchedulingUsesGenericRitualCopyWithoutChangingPayload() async {
+        let center = RecordingNotificationCenterClient()
+        await center.setAuthorizationState(.authorized)
+        let snapshot = ExternalSurfaceSnapshot(
+            generatedAt: "2026-04-15T13:00:00Z",
+            nextAction: ExternalSurfaceNextAction(
+                goalID: "goal-123",
+                stepID: "step-456",
+                display: ExternalSurfaceDisplayMetadata(
+                    templateKey: "next_tiny_step",
+                    goalMode: .project,
+                    stepState: .planned,
+                    urgency: .soon,
+                    timing: .deadline
+                )
+            ),
+            nowState: ExternalSurfaceNowState(
+                todayPosture: .active,
+                pressureLevel: .elevated,
+                bestNextStep: ExternalSurfaceActionReference(goalID: "goal-123", stepID: "step-456"),
+                activeFocus: nil,
+                openCaptureUrgency: .none,
+                blockerSummary: ExternalSurfaceBlockerSummary(waitingCount: 0, blockedCount: 0),
+                ritualCue: ExternalSurfaceRitualCue(
+                    kind: .middayReset,
+                    templateKey: "ritual_midday_reset",
+                    progressState: .needsReset,
+                    primaryReference: ExternalSurfaceActionReference(goalID: "goal-123", stepID: "step-456")
+                ),
+                supportedCommands: []
+            )
+        )
+        let foundation = LocalNotificationFoundation(
+            centerClient: center,
+            snapshotReader: StaticSnapshotReader(snapshot: snapshot)
+        )
+
+        await foundation.refreshSchedule(now: Date(timeIntervalSince1970: 1_712_779_200))
+
+        let request = await center.replacedRequest
+        XCTAssertEqual(request?.title, "Midday reset")
+        XCTAssertEqual(request?.body, "A smaller next move is ready.")
+        XCTAssertEqual(request?.userInfo["action"], "open")
+        XCTAssertEqual(request?.userInfo["surface"], "goal-detail")
+        XCTAssertEqual(request?.userInfo["goalID"], "goal-123")
+        XCTAssertEqual(request?.userInfo["stepID"], "step-456")
+    }
 }
 
 private actor RecordingNotificationCenterClient: LocalNotificationCenterClient {
