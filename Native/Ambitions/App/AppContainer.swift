@@ -6,6 +6,7 @@ import Observation
 @Observable
 final class AppContainer {
     let session: AppSession
+    let runtime: AmbitionsRuntime
     var appearancePreference: AppAppearancePreference
     let navigation: AppNavigationModel
     let todayService: any TodayServicing
@@ -22,6 +23,7 @@ final class AppContainer {
 
     init(
         session: AppSession,
+        runtime: AmbitionsRuntime,
         appearancePreference: AppAppearancePreference,
         navigation: AppNavigationModel,
         todayService: any TodayServicing,
@@ -37,6 +39,7 @@ final class AppContainer {
         externalActionService: any ExternalActionCommandExecuting
     ) {
         self.session = session
+        self.runtime = runtime
         self.appearancePreference = appearancePreference
         self.navigation = navigation
         self.todayService = todayService

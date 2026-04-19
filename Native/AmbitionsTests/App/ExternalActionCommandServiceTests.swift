@@ -93,6 +93,52 @@ final class ExternalActionCommandServiceTests: XCTestCase {
         ])
     }
 
+    func testAppAdapterDispatchesRuntimeRouteRequestsThroughExternalRouter() async {
+        let runtimeExecutor = StaticRuntimeActionExecutor(
+            result: RuntimeActionResult(outcome: .routed, routeRequest: .openToday)
+        )
+        let router = RecordingExternalActionRouter()
+        let service = DefaultExternalActionCommandService(
+            runtimeExecutor: runtimeExecutor,
+            externalRouter: router
+        )
+
+        let result = await service.execute(
+            ExternalActionCommand(kind: .openToday, source: .futureExternalPayload),
+            now: .now
+        )
+
+        XCTAssertEqual(result.outcome, .routed)
+        XCTAssertEqual(result.route, .openTab(.today))
+        XCTAssertEqual(router.dispatchedRoutes.map(\.route), [.openTab(.today)])
+        XCTAssertEqual(router.dispatchedRoutes.map(\.source), [.widgetAction])
+    }
+
+    func testAppAdapterDoesNotDispatchWhenRuntimePerformsMutation() async {
+        let runtimeExecutor = StaticRuntimeActionExecutor(
+            result: RuntimeActionResult(outcome: .performed, messageTitle: "Recorded")
+        )
+        let router = RecordingExternalActionRouter()
+        let service = DefaultExternalActionCommandService(
+            runtimeExecutor: runtimeExecutor,
+            externalRouter: router
+        )
+
+        let result = await service.execute(
+            ExternalActionCommand(
+                kind: .complete,
+                target: ExternalActionTarget(goalID: "goal-1", stepID: "step-1"),
+                source: .notification
+            ),
+            now: .now
+        )
+
+        XCTAssertEqual(result.outcome, .performed)
+        XCTAssertEqual(result.messageTitle, "Recorded")
+        XCTAssertNil(result.route)
+        XCTAssertTrue(router.dispatchedRoutes.isEmpty)
+    }
+
     func testUnsupportedCommandFailsSafelyWithoutMutation() async {
         let today = RecordingExternalActionTodayService()
         let router = RecordingExternalActionRouter()
@@ -242,6 +288,21 @@ private struct RecordingExternalActionCaptureService: CaptureServicing {
         _ = id
         _ = now
         return nil
+    }
+}
+
+@MainActor
+private final class StaticRuntimeActionExecutor: RuntimeActionCommandExecuting {
+    let result: RuntimeActionResult
+
+    init(result: RuntimeActionResult) {
+        self.result = result
+    }
+
+    func execute(_ command: ExternalActionCommand, now: Date) async -> RuntimeActionResult {
+        _ = command
+        _ = now
+        return result
     }
 }
 

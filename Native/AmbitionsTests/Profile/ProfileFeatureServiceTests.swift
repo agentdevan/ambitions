@@ -52,6 +52,25 @@ final class ProfileFeatureServiceTests: XCTestCase {
         XCTAssertEqual(dashboard.preferences.appearancePreference, .system)
         XCTAssertTrue(dashboard.settings.contains(where: { $0.id == "profile-appearance" && $0.valueLabel == "System" }))
     }
+
+    func testDashboardUsesInjectedRuntimeSyncCapabilityStatus() async throws {
+        let repositories = try await makeRepositories()
+        let service = RepositoryBackedProfileService(
+            repositories: repositories,
+            syncCapability: StaticProfileSyncCapability(
+                status: SyncCapabilityStatus(
+                    backendKind: .localOnly,
+                    trustPosture: .localOnly,
+                    availability: .unavailable,
+                    detail: "Injected runtime trust posture."
+                )
+            )
+        )
+
+        let dashboard = try await service.loadProfileDashboard()
+
+        XCTAssertTrue(dashboard.settings.contains(where: { $0.id == "profile-trust" && $0.valueLabel == "Injected runtime trust posture." }))
+    }
 }
 
 private extension ProfileFeatureServiceTests {
@@ -65,5 +84,13 @@ private extension ProfileFeatureServiceTests {
             captures: SwiftDataCaptureRepository(store: store),
             appState: SwiftDataAppStateRepository(store: store)
         )
+    }
+}
+
+private struct StaticProfileSyncCapability: SyncCapability {
+    let status: SyncCapabilityStatus
+
+    func status() async -> SyncCapabilityStatus {
+        status
     }
 }

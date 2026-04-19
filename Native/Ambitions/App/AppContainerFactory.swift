@@ -50,38 +50,12 @@ enum AppContainerFactory {
     @MainActor
     static func make(configuration: AppBootstrapConfiguration) async throws -> AppContainer {
         let repositories = try await prepareRepositories(for: configuration)
-        let snapshotWriter = ExternalSurfaceSnapshotWriter(repositories: repositories)
         let notificationService = LocalNotificationFoundation()
         let calendarRemindersService = EventKitIntegrationService()
-        let learningService = LearningAnticipationService()
-        let snapshotTodayService = SnapshotRefreshingTodayService(
-            base: RepositoryBackedTodayService(
-                repositories: repositories,
-                calendarRemindersService: calendarRemindersService,
-                learningService: learningService
-            ),
-            snapshotWriter: snapshotWriter
-        )
-        let snapshotGoalsService = SnapshotRefreshingGoalsService(
-            base: RepositoryBackedGoalsService(
-                repositories: repositories,
-                calendarRemindersService: calendarRemindersService,
-                learningService: learningService
-            ),
-            snapshotWriter: snapshotWriter
-        )
-        let todayService = NotificationSchedulingTodayService(
-            base: snapshotTodayService,
-            notificationService: notificationService
-        )
-        let goalsService = NotificationSchedulingGoalsService(
-            base: snapshotGoalsService,
-            notificationService: notificationService
-        )
-        let captureService = DefaultCaptureService(
-            repository: repositories.captures,
-            goalRepository: repositories.goals,
-            goalsService: goalsService
+        let runtime = AmbitionsRuntimeFactory.make(
+            repositories: repositories,
+            notificationService: notificationService,
+            calendarRemindersService: calendarRemindersService
         )
 
         let preferencesStore = RepositoryBackedAppPreferencesStore(appStateRepository: repositories.appState)
@@ -90,25 +64,24 @@ enum AppContainerFactory {
         let navigation = AppNavigationModel(selectedTab: session.initialTab)
         let externalRouter = DefaultAppExternalRouter(navigation: navigation)
         let externalActionService = DefaultExternalActionCommandService(
-            todayService: todayService,
-            goalsService: goalsService,
-            captureService: captureService,
+            runtimeExecutor: runtime.actionExecutor,
             externalRouter: externalRouter
         )
         await notificationService.registerCategories()
-        await snapshotWriter.refresh(now: .now)
+        await runtime.snapshotWriter.refresh(now: .now)
         await notificationService.refreshSchedule(now: .now)
 
         return AppContainer(
             session: session,
+            runtime: runtime,
             appearancePreference: session.appearancePreference,
             navigation: navigation,
-            todayService: todayService,
-            captureService: captureService,
-            goalsService: goalsService,
-            habitsService: RepositoryBackedHabitsService(repositories: repositories),
-            insightsService: RepositoryBackedInsightsService(repositories: repositories),
-            profileService: RepositoryBackedProfileService(repositories: repositories),
+            todayService: runtime.todayService,
+            captureService: runtime.captureService,
+            goalsService: runtime.goalsService,
+            habitsService: runtime.habitsService,
+            insightsService: runtime.insightsService,
+            profileService: runtime.profileService,
             notificationService: notificationService,
             calendarRemindersService: calendarRemindersService,
             actionRouter: DefaultAppActionRouter(navigation: navigation),

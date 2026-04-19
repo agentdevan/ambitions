@@ -1,4 +1,3 @@
-import AmbitionsDesignSystem
 import Foundation
 
 enum ExternalActionKind: Equatable, Sendable {
@@ -128,10 +127,16 @@ protocol ExternalActionCommandExecuting: AnyObject {
 
 @MainActor
 final class DefaultExternalActionCommandService: ExternalActionCommandExecuting {
-    private let todayService: any TodayServicing
-    private let goalsService: any GoalsServicing
-    private let captureService: any CaptureServicing
+    private let runtimeExecutor: any RuntimeActionCommandExecuting
     private let externalRouter: any AppExternalRouting
+
+    init(
+        runtimeExecutor: any RuntimeActionCommandExecuting,
+        externalRouter: any AppExternalRouting
+    ) {
+        self.runtimeExecutor = runtimeExecutor
+        self.externalRouter = externalRouter
+    }
 
     init(
         todayService: any TodayServicing,
@@ -139,65 +144,21 @@ final class DefaultExternalActionCommandService: ExternalActionCommandExecuting 
         captureService: any CaptureServicing,
         externalRouter: any AppExternalRouting
     ) {
-        self.todayService = todayService
-        self.goalsService = goalsService
-        self.captureService = captureService
+        _ = goalsService
+        _ = captureService
+        self.runtimeExecutor = DefaultRuntimeActionCommandExecutor(todayService: todayService)
         self.externalRouter = externalRouter
     }
 
     func execute(_ command: ExternalActionCommand, now: Date) async -> ExternalActionResult {
-        switch command.kind {
-        case .complete:
-            return await performTodayCommand(.complete, command: command, now: now)
-        case .delay, .snooze:
-            return await performTodayCommand(.delay, command: command, now: now)
-        case .askForSmallerStep:
-            return await performTodayCommand(.askForSmallerStep, command: command, now: now)
-        case .openGoal:
-            guard let goalID = command.target.goalID, goalID.isEmpty == false else {
-                return ExternalActionResult(outcome: .missingTarget)
-            }
-            return route(.openGoalDetail(goalID: goalID), source: command.source)
-        case .openToday:
-            return route(.openTab(.today), source: command.source)
-        case .openCapturesInbox:
-            return route(.openCapturesInbox, source: command.source)
-        case .unsupported:
-            return ExternalActionResult(outcome: .unsupported)
-        }
-    }
-
-    private func performTodayCommand(
-        _ kind: TodayActionKind,
-        command: ExternalActionCommand,
-        now: Date
-    ) async -> ExternalActionResult {
-        guard let goalID = command.target.goalID,
-              let stepID = command.target.stepID,
-              goalID.isEmpty == false,
-              stepID.isEmpty == false else {
-            return ExternalActionResult(outcome: .missingTarget)
-        }
-
-        do {
-            let response = try await todayService.performAction(
-                TodayInlineAction(
-                    kind: kind,
-                    title: title(for: kind),
-                    systemImage: systemImage(for: kind),
-                    state: visualState(for: kind),
-                    target: TodayActionTarget(
-                        goalID: goalID,
-                        stepID: stepID,
-                        draftID: command.target.draftID
-                    )
-                ),
-                now: now
+        let result = await runtimeExecutor.execute(command, now: now)
+        guard let routeRequest = result.routeRequest else {
+            return ExternalActionResult(
+                outcome: result.outcome,
+                messageTitle: result.messageTitle
             )
-            return ExternalActionResult(outcome: .performed, messageTitle: response.message?.title)
-        } catch {
-            return ExternalActionResult(outcome: .failed)
         }
+        return route(appRoute(for: routeRequest), source: command.source)
     }
 
     private func route(_ route: AppExternalRoute, source: ExternalActionSource) -> ExternalActionResult {
@@ -216,40 +177,14 @@ final class DefaultExternalActionCommandService: ExternalActionCommandExecuting 
         }
     }
 
-    private func title(for kind: TodayActionKind) -> String {
-        switch kind {
-        case .complete:
-            return "Complete"
-        case .delay:
-            return "Snooze"
-        case .askForSmallerStep:
-            return "Smaller step"
-        default:
-            return "External action"
-        }
-    }
-
-    private func systemImage(for kind: TodayActionKind) -> String {
-        switch kind {
-        case .complete:
-            return "checkmark"
-        case .delay:
-            return "clock.badge"
-        case .askForSmallerStep:
-            return "scissors"
-        default:
-            return "arrow.right.circle"
-        }
-    }
-
-    private func visualState(for kind: TodayActionKind) -> AmbitionVisualState {
-        switch kind {
-        case .complete:
-            return .success
-        case .delay, .askForSmallerStep:
-            return .selected
-        default:
-            return .default
+    private func appRoute(for request: RuntimeRouteRequest) -> AppExternalRoute {
+        switch request {
+        case .openToday:
+            return .openTab(.today)
+        case let .openGoalDetail(goalID):
+            return .openGoalDetail(goalID: goalID)
+        case .openCapturesInbox:
+            return .openCapturesInbox
         }
     }
 }

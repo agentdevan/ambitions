@@ -2,10 +2,19 @@ import Foundation
 
 struct RepositoryBackedProfileService: ProfileServicing {
     let repositories: AppRepositories
+    let syncCapability: any SyncCapability
+
+    init(
+        repositories: AppRepositories,
+        syncCapability: any SyncCapability = LocalOnlySyncCapability()
+    ) {
+        self.repositories = repositories
+        self.syncCapability = syncCapability
+    }
 
     func loadProfileDashboard() async throws -> ProfileDashboard {
         let snapshot = try await loadSnapshot()
-        let syncStatus = await LocalOnlySyncCapability().status()
+        let syncStatus = await syncCapability.status()
         return makeDashboard(snapshot: snapshot, syncStatus: syncStatus)
     }
 

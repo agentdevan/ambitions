@@ -18,6 +18,7 @@ enum PreviewAppContainerFactory {
         let todayService = StubTodayService(experience: todayExperience)
         let captureService = StubCaptureService(captures: fixtures.captures)
         let goalsService = StubGoalsService()
+        let runtime = makePreviewRuntime()
         return AppContainer(
             session: AppSession(
                 source: .preview,
@@ -27,6 +28,7 @@ enum PreviewAppContainerFactory {
                 launchedAt: .now,
                 startupNote: "Preview bootstrap uses isolated in-memory fixtures."
             ),
+            runtime: runtime,
             appearancePreference: fixtures.preferences.appearancePreference,
             navigation: navigation,
             todayService: todayService,
@@ -45,6 +47,24 @@ enum PreviewAppContainerFactory {
                 captureService: captureService,
                 externalRouter: externalRouter
             )
+        )
+    }
+
+    @MainActor
+    private static func makePreviewRuntime() -> AmbitionsRuntime {
+        let store = try! AmbitionsPersistenceStore(inMemory: true)
+        let repositories = AppRepositories(
+            goals: SwiftDataGoalRepository(store: store),
+            drafts: SwiftDataGoalDraftRepository(store: store),
+            evidence: SwiftDataProgressEvidenceRepository(store: store),
+            feedback: SwiftDataFeedbackEventRepository(store: store),
+            captures: SwiftDataCaptureRepository(store: store),
+            appState: SwiftDataAppStateRepository(store: store)
+        )
+        return AmbitionsRuntimeFactory.make(
+            repositories: repositories,
+            notificationService: StubNotificationService(),
+            calendarRemindersService: StubCalendarRemindersService()
         )
     }
 }

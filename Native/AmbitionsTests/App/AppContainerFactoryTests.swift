@@ -81,6 +81,18 @@ final class AppContainerFactoryTests: XCTestCase {
         XCTAssertEqual(loadedState.goalPriorityOrder, [goal.id])
         XCTAssertNil(loadedState.lastSeedVersion)
     }
+
+    @MainActor
+    func testAppContainerExposesRuntimeWhilePreservingIPhoneServiceFacade() async throws {
+        let container = try await AppContainerFactory.make(configuration: .preview)
+
+        XCTAssertEqual(container.runtime.clientContext.kind, .iphoneApp)
+        XCTAssertEqual(container.runtime.capabilities.syncBackendKind, .localOnly)
+        XCTAssertNotNil(container.todayService as? NotificationSchedulingTodayService)
+        XCTAssertNotNil(container.goalsService as? NotificationSchedulingGoalsService)
+        XCTAssertTrue(container.captureService is DefaultCaptureService)
+        XCTAssertTrue(container.profileService is RepositoryBackedProfileService)
+    }
 }
 
 private extension AppContainerFactoryTests {
