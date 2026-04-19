@@ -30,11 +30,11 @@ final class AmbitionsUITests: XCTestCase {
         let titleField = app.textFields["create-goal.title-field"]
         XCTAssertTrue(titleField.waitForExistence(timeout: 10))
         titleField.tap()
-        titleField.typeText("UI Smoke Goal\n")
+        titleField.typeText("UI Smoke Goal")
+        dismissKeyboardIfNeeded(in: app)
 
         let submitButton = scrollUntilButtonHittable("create-goal.submit-button", in: app)
         XCTAssertTrue(submitButton.waitForExistence(timeout: 10))
-        XCTAssertTrue(submitButton.isHittable)
         submitButton.tap()
 
         XCTAssertTrue(app.descendants(matching: .any)["goals.creation-message"].waitForExistence(timeout: 30))
@@ -103,7 +103,42 @@ final class AmbitionsUITests: XCTestCase {
 
         XCTFail("More destination row '\(label)' was not found.")
     }
-    private func scrollUntilButtonHittable(_ identifier: String, in app: XCUIApplication, maxAttempts: Int = 3) -> XCUIElement {
+    private func dismissKeyboardIfNeeded(in app: XCUIApplication) {
+        let keyboard = app.keyboards.element
+        guard keyboard.exists else { return }
+
+        let dismissButtons = [
+            keyboard.buttons["Return"],
+            keyboard.buttons["Done"],
+            keyboard.buttons["Hide keyboard"],
+            app.toolbars.buttons["Done"]
+        ]
+
+        if let button = dismissButtons.first(where: { $0.waitForExistence(timeout: 1) && $0.isHittable }) {
+            button.tap()
+            return
+        }
+
+        app.swipeUp()
+    }
+
+    private func scrollUntilButtonHittable(_ identifier: String, in app: XCUIApplication, maxAttempts: Int = 5) -> XCUIElement {
+        let button = app.buttons[identifier]
+
+        for _ in 0..<maxAttempts {
+            if button.waitForExistence(timeout: 2), button.isHittable {
+                return button
+            }
+            app.swipeUp()
+        }
+
+        for _ in 0..<maxAttempts {
+            if button.isHittable {
+                return button
+            }
+            app.swipeDown()
+        }
+
         for _ in 0..<maxAttempts {
             let button = app.buttons[identifier]
             if button.isHittable {
@@ -111,6 +146,7 @@ final class AmbitionsUITests: XCTestCase {
             }
             app.swipeUp()
         }
-        return app.buttons[identifier]
+
+        return button
     }
 }

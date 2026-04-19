@@ -2,7 +2,7 @@
 
 ## Status
 
-Active
+Completed
 
 ## Goal
 
@@ -70,4 +70,11 @@ Build the path systems foundation so Ambitions can represent and reason about lo
 - `xcodegen generate`
 - `xcodebuild -project Ambitions.xcodeproj -scheme Ambitions -sdk iphonesimulator -destination "generic/platform=iOS Simulator" CODE_SIGNING_ALLOWED=NO build`
 - `xcodebuild -project Ambitions.xcodeproj -scheme Ambitions -destination "platform=iOS Simulator,name=iPhone 17" -only-testing:AmbitionsTests/LifeGraphModelsTests -only-testing:AmbitionsTests/PlanningDomainModelsTests -only-testing:AmbitionsTests/RescheduleEngineTests -only-testing:AmbitionsTests/GoalCreationServiceTests -only-testing:AmbitionsTests/PersistenceRepositoryTests test`
+- `xcodebuild -project Ambitions.xcodeproj -scheme Ambitions -destination "platform=iOS Simulator,name=iPhone 17" -only-testing:AmbitionsUITests/AmbitionsUITests/testPreviewBootstrapCanCreateGoalFromEmptyState test`
 - `xcodebuild -project Ambitions.xcodeproj -scheme Ambitions -destination "platform=iOS Simulator,name=iPhone 17" test`
+
+## Completion Notes
+
+- Batch 14 remained an additive extension of `LifeGraphContext` and `LifeGraphResolver`; no second planner, recovery engine, persistence stack, or path-model universe was introduced.
+- The final stabilization work stayed narrow to the flaky preview create-goal UI path by making `AmbitionsUITests.testPreviewBootstrapCanCreateGoalFromEmptyState` more resilient to keyboard and scroll timing before tapping the submit button.
+- Validation completed successfully across XcodeGen generation, simulator build, focused Batch 14 domain tests, the isolated flaky UI test, and the full scheme test run on `iPhone 17`.
