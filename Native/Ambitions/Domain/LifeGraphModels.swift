@@ -42,6 +42,118 @@ struct LifeRole: Codable, Sendable, Equatable, Hashable {
     }
 }
 
+enum SharedLifeRelationshipKind: String, Codable, Sendable, Equatable, Hashable {
+    case partner
+    case child
+    case dependent
+    case householdMember = "household_member"
+    case careRecipient = "care_recipient"
+    case supportNetwork = "support_network"
+}
+
+struct SharedLifeParticipant: Codable, Sendable, Equatable, Hashable, Identifiable {
+    let id: String
+    let displayName: String
+    let relationshipKind: SharedLifeRelationshipKind
+    let roleLabel: String?
+    let note: String?
+
+    init(
+        id: String,
+        displayName: String,
+        relationshipKind: SharedLifeRelationshipKind,
+        roleLabel: String? = nil,
+        note: String? = nil
+    ) {
+        self.id = id
+        self.displayName = displayName
+        self.relationshipKind = relationshipKind
+        self.roleLabel = roleLabel
+        self.note = note
+    }
+}
+
+enum SharedResponsibilityKind: String, Codable, Sendable, Equatable, Hashable {
+    case care
+    case household
+    case appointment
+    case logistics
+    case support
+}
+
+enum SharedCoordinationKind: String, Codable, Sendable, Equatable, Hashable {
+    case appointment
+    case logistics
+    case preparation
+    case checkIn = "check_in"
+}
+
+struct SharedCoordinationContext: Codable, Sendable, Equatable, Hashable {
+    let kind: SharedCoordinationKind
+    let title: String?
+    let summary: String?
+    let locationHint: String?
+    let preparationNote: String?
+
+    init(
+        kind: SharedCoordinationKind,
+        title: String? = nil,
+        summary: String? = nil,
+        locationHint: String? = nil,
+        preparationNote: String? = nil
+    ) {
+        self.kind = kind
+        self.title = title
+        self.summary = summary
+        self.locationHint = locationHint
+        self.preparationNote = preparationNote
+    }
+}
+
+struct SharedResponsibility: Codable, Sendable, Equatable, Hashable, Identifiable {
+    let id: String
+    let title: String
+    let summary: String?
+    let kind: SharedResponsibilityKind
+    let participantID: String?
+    let coordination: SharedCoordinationContext?
+
+    init(
+        id: String,
+        title: String,
+        summary: String? = nil,
+        kind: SharedResponsibilityKind,
+        participantID: String? = nil,
+        coordination: SharedCoordinationContext? = nil
+    ) {
+        self.id = id
+        self.title = title
+        self.summary = summary
+        self.kind = kind
+        self.participantID = participantID
+        self.coordination = coordination
+    }
+}
+
+struct SharedLifeContext: Codable, Sendable, Equatable, Hashable {
+    let participants: [SharedLifeParticipant]
+    let responsibilities: [SharedResponsibility]
+    let householdName: String?
+    let careSummary: String?
+
+    init(
+        participants: [SharedLifeParticipant] = [],
+        responsibilities: [SharedResponsibility] = [],
+        householdName: String? = nil,
+        careSummary: String? = nil
+    ) {
+        self.participants = participants
+        self.responsibilities = responsibilities
+        self.householdName = householdName
+        self.careSummary = careSummary
+    }
+}
+
 enum LifePathKind: String, Codable, Sendable {
     case careerTrack = "career_track"
     case educationTrack = "education_track"
@@ -178,6 +290,7 @@ struct LifeGraphContext: Codable, Sendable, Equatable, Hashable {
     let stages: [LifePathStage]
     let prerequisites: [LifePathPrerequisite]
     let milestones: [LifeGraphMilestone]
+    let sharedLife: SharedLifeContext?
 
     init(
         domains: [LifeDomainAssignment] = [],
@@ -185,7 +298,8 @@ struct LifeGraphContext: Codable, Sendable, Equatable, Hashable {
         path: LifePathDescriptor? = nil,
         stages: [LifePathStage] = [],
         prerequisites: [LifePathPrerequisite] = [],
-        milestones: [LifeGraphMilestone] = []
+        milestones: [LifeGraphMilestone] = [],
+        sharedLife: SharedLifeContext? = nil
     ) {
         self.domains = domains
         self.roles = roles
@@ -193,6 +307,7 @@ struct LifeGraphContext: Codable, Sendable, Equatable, Hashable {
         self.stages = stages
         self.prerequisites = prerequisites
         self.milestones = milestones
+        self.sharedLife = sharedLife
     }
 }
 
@@ -231,6 +346,49 @@ struct GoalRelationshipGraph: Sendable, Equatable {
     let supportGoals: [Goal]
 }
 
+struct SharedResponsibilitySummary: Sendable, Equatable {
+    let totalCount: Int
+    let careCount: Int
+    let householdCount: Int
+    let appointmentCount: Int
+    let logisticsCount: Int
+    let supportCount: Int
+    let participantNames: [String]
+}
+
+struct SharedLifeCoordinationSignal: Sendable, Equatable, Identifiable {
+    let id: String
+    let title: String
+    let summary: String
+    let needsPreparation: Bool
+    let isTimed: Bool
+}
+
+struct SharedLifeGoalSummary: Sendable, Equatable {
+    let goalID: String
+    let participantNames: [String]
+    let relationshipLabels: [String]
+    let delegatedSupportActive: Bool
+    let careContextActive: Bool
+    let structuralSupportGoalCount: Int
+    let responsibilitySummary: SharedResponsibilitySummary
+    let coordinationSignals: [SharedLifeCoordinationSignal]
+    let pressureScore: Double
+    let reasons: [String]
+}
+
+struct SharedLifePortfolioSummary: Sendable, Equatable {
+    let totalResponsibilityCount: Int
+    let careGoalCount: Int
+    let coordinationSignalCount: Int
+    let headline: String
+}
+
+struct SharedLifeCoordinationSnapshot: Sendable, Equatable {
+    let goalSummaries: [String: SharedLifeGoalSummary]
+    let portfolioSummary: SharedLifePortfolioSummary
+}
+
 enum LifeGraphResolver {
     static func primaryDomain(for goal: Goal) -> LifeDomainKey? {
         primaryDomain(for: goal.lifeGraph)
@@ -264,6 +422,127 @@ enum LifeGraphResolver {
             children: orderedUniqueGoals(children),
             supportGoals: orderedUniqueGoals(supportGoals)
         )
+    }
+
+    static func sharedLifeSummary(
+        for goal: Goal,
+        within goals: [Goal],
+        now: Date
+    ) -> SharedLifeGoalSummary {
+        let graph = relationshipGraph(for: goal, within: goals)
+        let participants = goal.lifeGraph?.sharedLife?.participants ?? []
+        let responsibilities = goal.lifeGraph?.sharedLife?.responsibilities ?? []
+        let participantLookup = Dictionary(uniqueKeysWithValues: participants.map { ($0.id, $0) })
+        let participantNames = participants.map(\.displayName).sorted()
+        let labels = participants.map {
+            $0.roleLabel ?? $0.relationshipKind.rawValue.replacingOccurrences(of: "_", with: " ")
+        }.sorted()
+        let responsibilitySummary = SharedResponsibilitySummary(
+            totalCount: responsibilities.count,
+            careCount: responsibilities.filter { $0.kind == .care }.count,
+            householdCount: responsibilities.filter { $0.kind == .household }.count,
+            appointmentCount: responsibilities.filter { $0.kind == .appointment }.count,
+            logisticsCount: responsibilities.filter { $0.kind == .logistics }.count,
+            supportCount: responsibilities.filter { $0.kind == .support }.count,
+            participantNames: Array(Set(responsibilities.compactMap { responsibility in
+                responsibility.participantID.flatMap { participantLookup[$0]?.displayName }
+            })).sorted()
+        )
+        let coordinationSignals = coordinationSignals(for: goal, now: now)
+
+        var reasons: [String] = []
+        if responsibilitySummary.careCount > 0 {
+            reasons.append("Care responsibilities are active around this goal.")
+        }
+        if responsibilitySummary.appointmentCount > 0 || coordinationSignals.isEmpty == false {
+            reasons.append("Shared coordination timing is part of this goal's context.")
+        }
+        if graph.supportGoals.isEmpty == false || goal.relationshipKind == .support || goal.mode == .delegatedSupport {
+            reasons.append("Support work is part of the current structure, so progress should stay humane.")
+        }
+
+        var pressure = 0.18
+        if responsibilitySummary.totalCount > 0 {
+            pressure += min(0.16, Double(responsibilitySummary.totalCount) * 0.05)
+        }
+        if responsibilitySummary.careCount > 0 {
+            pressure += 0.14
+        }
+        if coordinationSignals.contains(where: \.isTimed) {
+            pressure += 0.08
+        }
+        if graph.supportGoals.isEmpty == false {
+            pressure += min(0.08, Double(graph.supportGoals.count) * 0.04)
+        }
+        if goal.timing.tempo == .deadlineBased,
+           coordinationSignals.isEmpty == false,
+           let due = parseDate(goal.timing.dueAt ?? goal.timing.targetBy ?? goal.timing.windowEnd) {
+            let days = Calendar(identifier: .gregorian).dateComponents([.day], from: now, to: due).day ?? 0
+            if days <= 3 {
+                pressure += 0.1
+            } else if days <= 7 {
+                pressure += 0.06
+            }
+        }
+
+        let boundedPressure = roundToTwoDecimals(min(max(pressure, 0.05), 0.95))
+        let relationshipLabels = labels.isEmpty
+            ? fallbackRelationshipLabels(goal: goal, graph: graph)
+            : labels
+
+        if reasons.isEmpty {
+            reasons.append("Shared-life context is present but still light.")
+        }
+
+        return SharedLifeGoalSummary(
+            goalID: goal.id,
+            participantNames: participantNames,
+            relationshipLabels: relationshipLabels,
+            delegatedSupportActive: goal.mode == .delegatedSupport || goal.relationshipKind == .support || graph.supportGoals.isEmpty == false,
+            careContextActive: responsibilitySummary.careCount > 0,
+            structuralSupportGoalCount: graph.supportGoals.count,
+            responsibilitySummary: responsibilitySummary,
+            coordinationSignals: coordinationSignals,
+            pressureScore: boundedPressure,
+            reasons: Array(reasons.prefix(3))
+        )
+    }
+
+    static func coordinationSignals(for goal: Goal, now: Date) -> [SharedLifeCoordinationSignal] {
+        let responsibilities = goal.lifeGraph?.sharedLife?.responsibilities ?? []
+        let dueDate = parseDate(goal.timing.dueAt ?? goal.timing.targetBy ?? goal.timing.windowEnd)
+
+        return responsibilities.compactMap { responsibility in
+            guard let coordination = responsibility.coordination else { return nil }
+            let title = coordination.title ?? responsibility.title
+            var fragments: [String] = []
+            if let summary = coordination.summary, summary.isEmpty == false {
+                fragments.append(summary)
+            }
+            if let note = coordination.preparationNote, note.isEmpty == false {
+                fragments.append(note)
+            }
+            if let location = coordination.locationHint, location.isEmpty == false {
+                fragments.append(location)
+            }
+            let isTimed = dueDate != nil
+            let needsPreparation = coordination.preparationNote?.isEmpty == false
+            let baseSummary = fragments.isEmpty ? "Shared coordination should stay visible." : fragments.joined(separator: " ")
+            let summary: String
+            if isTimed, let dueDate {
+                let days = Calendar(identifier: .gregorian).dateComponents([.day], from: now, to: dueDate).day ?? 0
+                summary = days <= 3 ? "\(baseSummary) Timing is close." : baseSummary
+            } else {
+                summary = baseSummary
+            }
+            return SharedLifeCoordinationSignal(
+                id: responsibility.id,
+                title: title,
+                summary: summary,
+                needsPreparation: needsPreparation,
+                isTimed: isTimed
+            )
+        }
     }
 
     static func dependencies(forMilestoneID milestoneID: String, in context: LifeGraphContext?) -> [LifeGraphMilestone] {
@@ -443,5 +722,28 @@ enum LifeGraphResolver {
             .lowercased()
             .replacingOccurrences(of: #"[^a-z0-9]+"#, with: "-", options: .regularExpression)
             .trimmingCharacters(in: CharacterSet(charactersIn: "-"))
+    }
+
+    private static func fallbackRelationshipLabels(goal: Goal, graph: GoalRelationshipGraph) -> [String] {
+        var labels: [String] = []
+        if goal.relationshipKind == .support || goal.mode == .delegatedSupport {
+            labels.append("support")
+        }
+        if graph.children.isEmpty == false {
+            labels.append("child")
+        }
+        if graph.supportGoals.isEmpty == false {
+            labels.append("support network")
+        }
+        return labels.isEmpty ? ["shared context"] : labels
+    }
+
+    private static func parseDate(_ value: String?) -> Date? {
+        guard let value else { return nil }
+        return DomainTimestamp.date(from: value)
+    }
+
+    private static func roundToTwoDecimals(_ value: Double) -> Double {
+        (value * 100).rounded() / 100
     }
 }

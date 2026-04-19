@@ -63,7 +63,8 @@ struct PlanningEvaluator: Sendable {
         draft: GoalDraft,
         plan: GoalPlan,
         inference: [String: InferenceMetadata] = [:],
-        pathStateSummary: LifePathStateSummary? = nil
+        pathStateSummary: LifePathStateSummary? = nil,
+        sharedLifeSummary: SharedLifeGoalSummary? = nil
     ) -> PlanningEvaluation {
         let steps = plan.sections.flatMap(\.steps)
         let incompleteSteps = steps.filter { $0.state != .completed && $0.state != .cancelled }.count
@@ -77,6 +78,7 @@ struct PlanningEvaluator: Sendable {
         let effort = effortPosture(draft: draft, pressure: pressure, assumptionsCount: assumptionsCount)
         let fragility = fragilityLevel(assumptionsCount: assumptionsCount, warningCount: warningCount, pressure: pressure, confidenceInput: confidenceInput)
         let pathRiskCount = pathRiskCount(from: pathStateSummary)
+        let sharedLifeRiskCount = sharedLifeRiskCount(from: sharedLifeSummary)
         let score = feasibilityScore(
             pressure: pressure,
             fragility: fragility,
@@ -84,9 +86,10 @@ struct PlanningEvaluator: Sendable {
             warningCount: warningCount,
             confidenceInput: confidenceInput,
             incompleteSteps: incompleteSteps,
-            pathRiskCount: pathRiskCount
+            pathRiskCount: pathRiskCount,
+            sharedLifeRiskCount: sharedLifeRiskCount
         )
-        let feasibility = feasibilityLevel(score: score, pressure: pressure, fragility: fragility, pathRiskCount: pathRiskCount)
+        let feasibility = feasibilityLevel(score: score, pressure: pressure, fragility: fragility, pathRiskCount: pathRiskCount + sharedLifeRiskCount)
 
         return PlanningEvaluation(
             feasibilityScore: score,
@@ -102,7 +105,8 @@ struct PlanningEvaluator: Sendable {
                 warningCount: warningCount,
                 pressure: pressure,
                 fragility: fragility,
-                pathStateSummary: pathStateSummary
+                pathStateSummary: pathStateSummary,
+                sharedLifeSummary: sharedLifeSummary
             )
         )
     }
@@ -166,7 +170,8 @@ struct PlanningEvaluator: Sendable {
         warningCount: Int,
         confidenceInput: Double,
         incompleteSteps: Int,
-        pathRiskCount: Int
+        pathRiskCount: Int,
+        sharedLifeRiskCount: Int
     ) -> Double {
         let pressurePenalty: Double = {
             switch pressure {
@@ -182,7 +187,7 @@ struct PlanningEvaluator: Sendable {
             case .high: return 0.34
             }
         }()
-        let raw = confidenceInput - pressurePenalty - fragilityPenalty - Double(assumptionsCount) * 0.06 - Double(warningCount) * 0.05 - Double(max(incompleteSteps - 8, 0)) * 0.02 - Double(pathRiskCount) * 0.05
+        let raw = confidenceInput - pressurePenalty - fragilityPenalty - Double(assumptionsCount) * 0.06 - Double(warningCount) * 0.05 - Double(max(incompleteSteps - 8, 0)) * 0.02 - Double(pathRiskCount) * 0.05 - Double(sharedLifeRiskCount) * 0.04
         return (raw * 100).rounded() / 100
     }
 
@@ -205,7 +210,8 @@ struct PlanningEvaluator: Sendable {
         warningCount: Int,
         pressure: PlanningPressureLevel,
         fragility: PlanningFragilityLevel,
-        pathStateSummary: LifePathStateSummary?
+        pathStateSummary: LifePathStateSummary?,
+        sharedLifeSummary: SharedLifeGoalSummary?
     ) -> [String] {
         var output: [String] = []
         if let pathStateSummary {
@@ -221,6 +227,9 @@ struct PlanningEvaluator: Sendable {
             output.append("The plan is untimed, so pressure stays low.")
         } else {
             output.append("\(incompleteSteps) visible step\(incompleteSteps == 1 ? "" : "s") remain in the current plan.")
+        }
+        if let sharedLifeSummary, sharedLifeSummary.pressureScore >= 0.6 {
+            output.append(sharedLifeSummary.reasons.first ?? "Shared responsibilities are materially shaping the plan.")
         }
         if assumptionsCount > 0 {
             output.append("Starter assumptions reduce confidence.")
@@ -241,6 +250,18 @@ struct PlanningEvaluator: Sendable {
             count += 1
         }
         if pathStateSummary.readiness.gapCount > 0 {
+            count += 1
+        }
+        return count
+    }
+
+    private func sharedLifeRiskCount(from sharedLifeSummary: SharedLifeGoalSummary?) -> Int {
+        guard let sharedLifeSummary else { return 0 }
+        var count = 0
+        if sharedLifeSummary.careContextActive {
+            count += 1
+        }
+        if sharedLifeSummary.pressureScore >= 0.7 || sharedLifeSummary.coordinationSignals.contains(where: \.isTimed) {
             count += 1
         }
         return count
@@ -278,9 +299,14 @@ struct PlanningNextStepSelection: Sendable, Equatable {
 struct PlanningNextStepSelector: Sendable {
     private let evaluator = PlanningEvaluator()
     private let learningService: LearningAnticipationService
+    private let sharedLifeService: SharedLifeCoordinationService
 
-    init(learningService: LearningAnticipationService = LearningAnticipationService()) {
+    init(
+        learningService: LearningAnticipationService = LearningAnticipationService(),
+        sharedLifeService: SharedLifeCoordinationService = SharedLifeCoordinationService()
+    ) {
         self.learningService = learningService
+        self.sharedLifeService = sharedLifeService
     }
 
     func rankedSelections(
@@ -291,6 +317,12 @@ struct PlanningNextStepSelector: Sendable {
     ) -> [PlanningNextStepSelection] {
         let activeGoals = goals.filter { $0.state == .active || $0.state == .paused }
         let learningSnapshot = learningService.buildSnapshot(
+            goals: activeGoals,
+            evidence: evidence,
+            feedback: feedback,
+            now: now
+        )
+        let sharedLifeSnapshot = sharedLifeService.buildSnapshot(
             goals: activeGoals,
             evidence: evidence,
             feedback: feedback,
@@ -310,9 +342,16 @@ struct PlanningNextStepSelector: Sendable {
                 tags: goal.tags,
                 timing: goal.timing,
                 planningStrategy: goal.planningStrategy,
-                progressStrategy: goal.progressStrategy
+                progressStrategy: goal.progressStrategy,
+                lifeGraph: goal.lifeGraph
             )
-            let evaluation = plan.evaluation ?? evaluator.evaluate(draft: draft, plan: plan)
+            let sharedLifeSummary = sharedLifeSnapshot.goalSummaries[goal.id]
+            let evaluation = plan.evaluation ?? evaluator.evaluate(
+                draft: draft,
+                plan: plan,
+                pathStateSummary: LifeGraphResolver.pathStateSummary(for: goal),
+                sharedLifeSummary: sharedLifeSummary
+            )
             let completedStepIDs = Set(plan.sections.flatMap(\.steps).filter { $0.state == .completed }.map(\.id))
             return plan.sections.flatMap(\.steps)
                 .filter { $0.state != .completed && $0.state != .cancelled }
@@ -335,6 +374,7 @@ struct PlanningNextStepSelector: Sendable {
                                 evaluation: evaluation,
                                 hasIncompleteDependencies: hasIncompleteDependencies(step: step, completedStepIDs: completedStepIDs),
                                 learnedFitScore: insight.fitScore,
+                                sharedLifeSummary: sharedLifeSummary,
                                 now: now
                             ),
                             timingKey: timingKey(for: step.timing, goalMode: goal.mode),
@@ -370,6 +410,7 @@ struct PlanningNextStepSelector: Sendable {
         evaluation: PlanningEvaluation,
         hasIncompleteDependencies: Bool,
         learnedFitScore: Double,
+        sharedLifeSummary: SharedLifeGoalSummary?,
         now: Date
     ) -> Double {
         var value = 0.5
@@ -408,6 +449,9 @@ struct PlanningNextStepSelector: Sendable {
             value += goal.mode == .learning || goal.mode == .exploration ? 0.03 : 0
         }
         if goal.mode == .delegatedSupport {
+            value -= 0.04
+        }
+        if let sharedLifeSummary, sharedLifeSummary.pressureScore >= 0.7 {
             value -= 0.04
         }
         value += (learnedFitScore - 0.5) * 0.24

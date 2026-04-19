@@ -14,8 +14,23 @@ struct LearningAnticipationService: Sendable {
         now: Date
     ) -> LearningAnticipationSnapshot {
         let activeGoals = goals.filter { $0.state == .active || $0.state == .paused }
+        let sharedLifeSnapshot = SharedLifeCoordinationService(calendar: calendar).buildSnapshot(
+            goals: activeGoals,
+            evidence: evidence,
+            feedback: feedback,
+            now: now
+        )
         let summaries = Dictionary(uniqueKeysWithValues: activeGoals.map { goal in
-            (goal.id, summary(for: goal, evidence: evidence, feedback: feedback, now: now))
+            (
+                goal.id,
+                summary(
+                    for: goal,
+                    evidence: evidence,
+                    feedback: feedback,
+                    sharedLifeSummary: sharedLifeSnapshot.goalSummaries[goal.id],
+                    now: now
+                )
+            )
         })
         let underrepresented = underrepresentedSignals(goals: activeGoals, evidence: evidence, summaries: summaries, now: now)
         return LearningAnticipationSnapshot(goalSummaries: summaries, underrepresentedGoalSignals: underrepresented)
@@ -55,6 +70,7 @@ struct LearningAnticipationService: Sendable {
                 for: goal,
                 summary: summary,
                 underrepresented: snapshot.underrepresentedGoalSignals.first(where: { $0.goalID == goal.id }),
+                sharedLifeSummary: LifeGraphResolver.sharedLifeSummary(for: goal, within: [goal], now: now),
                 nowBucket: nowBucket
             )
         )
@@ -66,6 +82,7 @@ private extension LearningAnticipationService {
         for goal: Goal,
         evidence: [ProgressEvidence],
         feedback: [GoalFeedbackEvent],
+        sharedLifeSummary: SharedLifeGoalSummary?,
         now: Date
     ) -> GoalLearningSummary {
         let stepIDs = Set(goal.plan?.sections.flatMap(\.steps).map(\.id) ?? [])
@@ -84,7 +101,7 @@ private extension LearningAnticipationService {
                 focusWindowPattern: focusWindowFit(positiveBuckets: positiveBuckets, frictionBuckets: frictionBuckets)
             ),
             driftTriggers: driftPatterns(goalID: goal.id, feedback: goalFeedback),
-            timelineRisk: timelineRisk(for: goal, evidence: goalEvidence, feedback: goalFeedback, now: now),
+            timelineRisk: timelineRisk(for: goal, evidence: goalEvidence, feedback: goalFeedback, sharedLifeSummary: sharedLifeSummary, now: now),
             whyNow: nil
         )
     }
@@ -214,7 +231,7 @@ private extension LearningAnticipationService {
         }
     }
 
-    func timelineRisk(for goal: Goal, evidence: [ProgressEvidence], feedback: [GoalFeedbackEvent], now: Date) -> TimelineRiskForecast {
+    func timelineRisk(for goal: Goal, evidence: [ProgressEvidence], feedback: [GoalFeedbackEvent], sharedLifeSummary: SharedLifeGoalSummary?, now: Date) -> TimelineRiskForecast {
         var risk: Double = 0.18
         var reasons: [String] = []
 
@@ -255,6 +272,10 @@ private extension LearningAnticipationService {
         if evidence.isEmpty {
             risk += 0.08
             reasons.append("Recent visible evidence is still thin.")
+        }
+        if let sharedLifeSummary, sharedLifeSummary.pressureScore >= 0.6 {
+            risk += 0.08
+            reasons.append(sharedLifeSummary.reasons.first ?? "Shared responsibilities are adding timing pressure.")
         }
 
         let bounded = roundToTwoDecimals(min(max(risk, 0.05), 0.95))
@@ -302,8 +323,21 @@ private extension LearningAnticipationService {
         for goal: Goal,
         summary: GoalLearningSummary,
         underrepresented: UnderrepresentedGoalSignal?,
+        sharedLifeSummary: SharedLifeGoalSummary?,
         nowBucket: FocusWindowBucket?
     ) -> WhyNowExplanationMetadata {
+        if let sharedLifeSummary,
+           sharedLifeSummary.coordinationSignals.isEmpty == false,
+           sharedLifeSummary.pressureScore >= 0.6 {
+            return WhyNowExplanationMetadata(
+                conciseReason: "Shared responsibilities are time-sensitive, so a calm coordination move now protects the path.",
+                reasons: [
+                    sharedLifeSummary.reasons.first ?? "Shared responsibilities are active.",
+                    sharedLifeSummary.coordinationSignals.first?.summary ?? "Coordination still needs a visible next move."
+                ]
+            )
+        }
+
         if summary.historicalFit.confidence != .low,
            summary.focusWindowPattern.preferredWindow == nowBucket {
             return WhyNowExplanationMetadata(

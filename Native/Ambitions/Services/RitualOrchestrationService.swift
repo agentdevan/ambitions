@@ -6,6 +6,7 @@ struct RitualOrchestrationInput: Sendable {
     let evidence: [ProgressEvidence]
     let feedback: [GoalFeedbackEvent]
     let learningSnapshot: LearningAnticipationSnapshot?
+    let sharedLifeSnapshot: SharedLifeCoordinationSnapshot?
     let now: Date
 
     init(
@@ -14,6 +15,7 @@ struct RitualOrchestrationInput: Sendable {
         evidence: [ProgressEvidence],
         feedback: [GoalFeedbackEvent],
         learningSnapshot: LearningAnticipationSnapshot? = nil,
+        sharedLifeSnapshot: SharedLifeCoordinationSnapshot? = nil,
         now: Date
     ) {
         self.goals = goals
@@ -21,6 +23,7 @@ struct RitualOrchestrationInput: Sendable {
         self.evidence = evidence
         self.feedback = feedback
         self.learningSnapshot = learningSnapshot
+        self.sharedLifeSnapshot = sharedLifeSnapshot
         self.now = now
     }
 }
@@ -59,8 +62,8 @@ struct RitualOrchestrationService: Sendable {
         return RitualPlan(
             activeRecommendation: recommendation,
             signalSummary: summary,
-            dayThesis: dayThesis(summary: summary, selection: bestSelection),
-            weekThesis: weekThesis(summary: summary, learningSnapshot: input.learningSnapshot)
+            dayThesis: dayThesis(summary: summary, selection: bestSelection, sharedLifeSnapshot: input.sharedLifeSnapshot),
+            weekThesis: weekThesis(summary: summary, learningSnapshot: input.learningSnapshot, sharedLifeSnapshot: input.sharedLifeSnapshot)
         )
     }
 }
@@ -232,9 +235,14 @@ private extension RitualOrchestrationService {
         }
     }
 
-    func dayThesis(summary: RitualSignalSummary, selection: PlanningNextStepSelection?) -> String {
+    func dayThesis(summary: RitualSignalSummary, selection: PlanningNextStepSelection?, sharedLifeSnapshot: SharedLifeCoordinationSnapshot?) -> String {
         if summary.activeGoalCount == 0 && summary.openCaptureCount == 0 {
             return "No day thesis yet because Ambitions has no live signal."
+        }
+        if let sharedLifeSnapshot,
+           sharedLifeSnapshot.portfolioSummary.totalResponsibilityCount > 0,
+           selection == nil {
+            return sharedLifeSnapshot.portfolioSummary.headline
         }
         if selection != nil {
             return "Anchor the day around one next move."
@@ -245,11 +253,15 @@ private extension RitualOrchestrationService {
         return "Keep the day light until the next move is clear."
     }
 
-    func weekThesis(summary: RitualSignalSummary, learningSnapshot: LearningAnticipationSnapshot?) -> String {
+    func weekThesis(summary: RitualSignalSummary, learningSnapshot: LearningAnticipationSnapshot?, sharedLifeSnapshot: SharedLifeCoordinationSnapshot?) -> String {
         if summary.activeGoalCount == 0 {
             return "No active goals are shaping the week yet."
         }
         let goalLabel = "\(summary.activeGoalCount) active goal\(summary.activeGoalCount == 1 ? "" : "s")"
+        if let sharedLifeSnapshot,
+           sharedLifeSnapshot.portfolioSummary.totalResponsibilityCount > 0 {
+            return "\(goalLabel), with \(sharedLifeSnapshot.portfolioSummary.totalResponsibilityCount) shared responsibility signal\(sharedLifeSnapshot.portfolioSummary.totalResponsibilityCount == 1 ? "" : "s") visible."
+        }
         if let signal = learningSnapshot?.underrepresentedGoalSignals.first {
             let domain = signal.domain?.rawValue.replacingOccurrences(of: "_", with: " ") ?? "one domain"
             return "\(goalLabel), with underrepresented pressure visible in \(domain)."

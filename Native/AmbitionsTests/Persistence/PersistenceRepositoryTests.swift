@@ -62,6 +62,51 @@ final class PersistenceRepositoryTests: XCTestCase {
         XCTAssertEqual(loaded?.lifeGraph?.milestones.map(\.id), ["m1"])
     }
 
+    func testGoalRepositoryRoundTripsAdditiveSharedLifeMetadataFromSnapshotStorage() async throws {
+        let repositories = try await makeRepositories()
+        let fixture = try XCTUnwrap(GoalEngineFixtures.fixture(id: "clear-timed-self-goal"))
+        var goal = try XCTUnwrap(goalFromFixture(fixture))
+        goal = Goal(
+            schemaVersion: goal.schemaVersion,
+            id: goal.id,
+            revision: goal.revision,
+            createdAt: goal.createdAt,
+            updatedAt: goal.updatedAt,
+            state: goal.state,
+            title: goal.title,
+            summary: goal.summary,
+            mode: goal.mode,
+            relationshipKind: .support,
+            actor: goal.actor,
+            parentGoalID: goal.parentGoalID,
+            childGoalIDs: goal.childGoalIDs,
+            supportGoalIDs: goal.supportGoalIDs,
+            tags: goal.tags,
+            timing: goal.timing,
+            planningStrategy: goal.planningStrategy,
+            progressStrategy: goal.progressStrategy,
+            plan: goal.plan,
+            lifeGraph: LifeGraphContext(
+                domains: [LifeDomainAssignment(domain: .home)],
+                roles: [LifeRole(kind: .supporting, title: "Partner support")],
+                path: nil,
+                stages: [],
+                prerequisites: [],
+                milestones: [],
+                sharedLife: SharedLifeContext(
+                    participants: [SharedLifeParticipant(id: "partner", displayName: "Alex", relationshipKind: .partner, roleLabel: "Partner")],
+                    responsibilities: [SharedResponsibility(id: "groceries", title: "Groceries", kind: .household, participantID: "partner")]
+                )
+            )
+        )
+
+        try await repositories.goals.saveGoals([goal])
+        let loaded = try await repositories.goals.goal(id: goal.id)
+
+        XCTAssertEqual(loaded?.lifeGraph?.sharedLife?.participants.map(\.displayName), ["Alex"])
+        XCTAssertEqual(loaded?.lifeGraph?.sharedLife?.responsibilities.map(\.title), ["Groceries"])
+    }
+
     func testDraftRepositoryPreservesStarterAndBlockedState() async throws {
         let repositories = try await makeRepositories()
         let starterFixture = try XCTUnwrap(GoalEngineFixtures.fixture(id: "exploratory-vague-goal"))

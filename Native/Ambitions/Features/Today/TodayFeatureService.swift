@@ -9,6 +9,7 @@ struct RepositoryBackedTodayService: TodayServicing {
     let calendarRemindersService: any CalendarRemindersServicing
     let ritualService: RitualOrchestrationService
     let learningService: LearningAnticipationService
+    let sharedLifeService: SharedLifeCoordinationService
 
     init(
         repositories: AppRepositories,
@@ -17,7 +18,8 @@ struct RepositoryBackedTodayService: TodayServicing {
         captureService: (any CaptureServicing)? = nil,
         calendarRemindersService: (any CalendarRemindersServicing)? = nil,
         ritualService: RitualOrchestrationService = RitualOrchestrationService(),
-        learningService: LearningAnticipationService = LearningAnticipationService()
+        learningService: LearningAnticipationService = LearningAnticipationService(),
+        sharedLifeService: SharedLifeCoordinationService = SharedLifeCoordinationService()
     ) {
         self.repositories = repositories
         self.adaptationService = adaptationService
@@ -26,6 +28,7 @@ struct RepositoryBackedTodayService: TodayServicing {
         self.calendarRemindersService = calendarRemindersService ?? StubCalendarRemindersService()
         self.ritualService = ritualService
         self.learningService = learningService
+        self.sharedLifeService = sharedLifeService
     }
 
     func loadTodayExperience(userDisplayName: String, now: Date) async throws -> TodayExperience {
@@ -116,6 +119,12 @@ private extension RepositoryBackedTodayService {
             feedback: snapshot.feedback,
             now: now
         )
+        let sharedLifeSnapshot = sharedLifeService.buildSnapshot(
+            goals: activeGoals,
+            evidence: snapshot.evidence,
+            feedback: snapshot.feedback,
+            now: now
+        )
         let rankedSelections = PlanningNextStepSelector(learningService: learningService).rankedSelections(
             goals: activeGoals,
             evidence: snapshot.evidence,
@@ -161,7 +170,7 @@ private extension RepositoryBackedTodayService {
                 clarificationCount: clarificationDrafts.count,
                 blockedCount: blockedDrafts.count
             ),
-            ritual: makeRitual(snapshot: snapshot, activeGoals: activeGoals, learningSnapshot: learningSnapshot, now: now),
+            ritual: makeRitual(snapshot: snapshot, activeGoals: activeGoals, learningSnapshot: learningSnapshot, sharedLifeSnapshot: sharedLifeSnapshot, now: now),
             dailyTargets: makeDailyTargets(
                 mode: mode,
                 goals: activeGoals,
@@ -217,7 +226,7 @@ private extension RepositoryBackedTodayService {
         )
     }
 
-    func makeRitual(snapshot: Snapshot, activeGoals: [Goal], learningSnapshot: LearningAnticipationSnapshot, now: Date) -> TodayRitualLoopState {
+    func makeRitual(snapshot: Snapshot, activeGoals: [Goal], learningSnapshot: LearningAnticipationSnapshot, sharedLifeSnapshot: SharedLifeCoordinationSnapshot, now: Date) -> TodayRitualLoopState {
         let plan = ritualService.makePlan(
             input: RitualOrchestrationInput(
                 goals: activeGoals,
@@ -225,6 +234,7 @@ private extension RepositoryBackedTodayService {
                 evidence: snapshot.evidence,
                 feedback: snapshot.feedback,
                 learningSnapshot: learningSnapshot,
+                sharedLifeSnapshot: sharedLifeSnapshot,
                 now: now
             )
         )
@@ -1319,6 +1329,12 @@ private extension RepositoryBackedTodayService {
                 incompleteDependencyCount: incompleteDependencyCount(in: goal, for: step),
                 pathStateSummary: LifeGraphResolver.pathStateSummary(for: goal),
                 learningSummary: learningService.buildSnapshot(
+                    goals: [goal],
+                    evidence: [],
+                    feedback: history,
+                    now: now
+                ).goalSummaries[goal.id],
+                sharedLifeSummary: sharedLifeService.buildSnapshot(
                     goals: [goal],
                     evidence: [],
                     feedback: history,

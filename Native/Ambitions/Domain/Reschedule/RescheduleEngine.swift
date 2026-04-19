@@ -66,6 +66,7 @@ struct RescheduleEngineInput: Sendable {
     let incompleteDependencyCount: Int
     let pathStateSummary: LifePathStateSummary?
     let learningSummary: GoalLearningSummary?
+    let sharedLifeSummary: SharedLifeGoalSummary?
 
     init(
         stepID: String,
@@ -78,7 +79,8 @@ struct RescheduleEngineInput: Sendable {
         stepState: StepLifecycleState = .planned,
         incompleteDependencyCount: Int = 0,
         pathStateSummary: LifePathStateSummary? = nil,
-        learningSummary: GoalLearningSummary? = nil
+        learningSummary: GoalLearningSummary? = nil,
+        sharedLifeSummary: SharedLifeGoalSummary? = nil
     ) {
         self.stepID = stepID
         self.timing = timing
@@ -91,6 +93,7 @@ struct RescheduleEngineInput: Sendable {
         self.incompleteDependencyCount = incompleteDependencyCount
         self.pathStateSummary = pathStateSummary
         self.learningSummary = learningSummary
+        self.sharedLifeSummary = sharedLifeSummary
     }
 }
 
@@ -350,6 +353,9 @@ private extension RescheduleEngine {
         if input.planningEvaluation?.fragilityLevel == .high || smallerStep != nil {
             return .gentle
         }
+        if input.sharedLifeSummary?.careContextActive == true || (input.sharedLifeSummary?.pressureScore ?? 0) >= 0.6 {
+            return .gentle
+        }
         if [.oversizedStep, .missingContext, .unclearAction, .missingEvidence, .notReady].contains(causeOfDrift) {
             return .gentle
         }
@@ -377,7 +383,13 @@ private extension RescheduleEngine {
             }
             return "Use a readiness-sized pass first: \(fallback)"
         case .none:
-            return smallerStep?.summary
+            if let smallerStep {
+                return smallerStep.summary
+            }
+            if input.sharedLifeSummary?.careContextActive == true {
+                return "Keep the next move gentle enough to support the current care context."
+            }
+            return nil
         }
     }
 
@@ -431,7 +443,14 @@ private extension RescheduleEngine {
             }
             return " Observed fit is weak in this window."
         }()
-        return "\(action) with \(signals.consecutiveMissCount) consecutive misses and \(signals.recentMissCount) recent misses \(timingClause)\(scopeClause)\(causeClause)\(postureClause)\(learnedClause)"
+        let sharedClause: String = {
+            guard let sharedLifeSummary = input.sharedLifeSummary,
+                  sharedLifeSummary.pressureScore >= 0.55 else {
+                return ""
+            }
+            return " Shared-life coordination is also active."
+        }()
+        return "\(action) with \(signals.consecutiveMissCount) consecutive misses and \(signals.recentMissCount) recent misses \(timingClause)\(scopeClause)\(causeClause)\(postureClause)\(learnedClause)\(sharedClause)"
     }
 
     private func adjustedDeferRecommendation(
@@ -439,6 +458,12 @@ private extension RescheduleEngine {
         input: RescheduleEngineInput
     ) -> RescheduleDeferRecommendation {
         guard base == .none || base == .laterToday else { return base }
+        if let sharedLifeSummary = input.sharedLifeSummary,
+           sharedLifeSummary.careContextActive,
+           base == .laterToday,
+           sharedLifeSummary.pressureScore >= 0.7 {
+            return .laterThisWeek
+        }
         guard let learningSummary = input.learningSummary,
               learningSummary.historicalFit.confidence == .high,
               learningSummary.historicalFit.score <= 0.3,

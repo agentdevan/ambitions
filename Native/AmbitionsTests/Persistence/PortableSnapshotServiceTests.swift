@@ -160,6 +160,27 @@ final class PortableSnapshotServiceTests: XCTestCase {
             XCTAssertEqual(error as? PortableSnapshotError, .unsupportedSchemaVersion("portable_app_snapshot.v999"))
         }
     }
+
+    func testPortableSnapshotRoundTripsAdditiveSharedLifeMetadata() async throws {
+        let store = try AmbitionsPersistenceStore(inMemory: true)
+        let repositories = makeRepositories(store: store)
+        let goal = try XCTUnwrap(sampleGoal(id: "goal-shared-life", revision: 2, updatedAt: "2026-04-18T10:00:00Z"))
+        try await repositories.goals.saveGoals([goal])
+
+        let service = PortableSnapshotService(
+            repositories: repositories,
+            resetStore: { try await store.resetAllData() }
+        )
+
+        let snapshot = try await service.exportSnapshot()
+        XCTAssertEqual(snapshot.goals.first?.lifeGraph?.sharedLife?.participants.map(\.displayName), ["Alex"])
+
+        let report = try await service.importSnapshot(snapshot, mode: .replaceLocalStore)
+        let restored = try await repositories.goals.goal(id: goal.id)
+
+        XCTAssertEqual(report.importedGoalCount, 1)
+        XCTAssertEqual(restored?.lifeGraph?.sharedLife?.responsibilities.map(\.title), ["Groceries"])
+    }
 }
 
 private extension PortableSnapshotServiceTests {
@@ -200,7 +221,19 @@ private extension PortableSnapshotServiceTests {
                 timing: result.draft.timing,
                 planningStrategy: result.draft.planningStrategy,
                 progressStrategy: result.draft.progressStrategy,
-                plan: result.plan
+                plan: result.plan,
+                lifeGraph: LifeGraphContext(
+                    domains: [LifeDomainAssignment(domain: .home)],
+                    roles: [LifeRole(kind: .supporting, title: "Partner support")],
+                    path: nil,
+                    stages: [],
+                    prerequisites: [],
+                    milestones: [],
+                    sharedLife: SharedLifeContext(
+                        participants: [SharedLifeParticipant(id: "partner", displayName: "Alex", relationshipKind: .partner, roleLabel: "Partner")],
+                        responsibilities: [SharedResponsibility(id: "groceries", title: "Groceries", kind: .household, participantID: "partner")]
+                    )
+                )
             )
         case let .starterPlanned(result):
             return Goal(
@@ -222,7 +255,19 @@ private extension PortableSnapshotServiceTests {
                 timing: result.draft.timing,
                 planningStrategy: result.draft.planningStrategy,
                 progressStrategy: result.draft.progressStrategy,
-                plan: result.plan
+                plan: result.plan,
+                lifeGraph: LifeGraphContext(
+                    domains: [LifeDomainAssignment(domain: .home)],
+                    roles: [LifeRole(kind: .supporting, title: "Partner support")],
+                    path: nil,
+                    stages: [],
+                    prerequisites: [],
+                    milestones: [],
+                    sharedLife: SharedLifeContext(
+                        participants: [SharedLifeParticipant(id: "partner", displayName: "Alex", relationshipKind: .partner, roleLabel: "Partner")],
+                        responsibilities: [SharedResponsibility(id: "groceries", title: "Groceries", kind: .household, participantID: "partner")]
+                    )
+                )
             )
         case .clarificationRequired, .blocked:
             return nil

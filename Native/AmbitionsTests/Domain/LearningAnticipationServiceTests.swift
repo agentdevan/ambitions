@@ -88,17 +88,51 @@ final class LearningAnticipationServiceTests: XCTestCase {
         XCTAssertEqual(underrepresented.domain, .health)
         XCTAssertTrue(underrepresented.summary.localizedCaseInsensitiveContains("underrepresented"))
     }
+
+    func testSharedLifeContextCanDriveWhyNowWithoutInventingASecondPlanner() throws {
+        let now = try XCTUnwrap(DomainTimestamp.date(from: "2026-04-21T09:00:00Z"))
+        let goal = makeGoal(
+            id: "goal-shared-care",
+            domain: .home,
+            dueAt: "2026-04-22T12:00:00Z",
+            sharedLife: SharedLifeContext(
+                participants: [
+                    SharedLifeParticipant(id: "partner", displayName: "Alex", relationshipKind: .partner, roleLabel: "Partner"),
+                    SharedLifeParticipant(id: "child", displayName: "Maya", relationshipKind: .child, roleLabel: "Child")
+                ],
+                responsibilities: [
+                    SharedResponsibility(id: "pickup", title: "School pickup", kind: .care, participantID: "child"),
+                    SharedResponsibility(id: "appointment", title: "Dentist prep", kind: .appointment, participantID: "child", coordination: SharedCoordinationContext(kind: .appointment, title: "Dentist prep", summary: "Needs prep", preparationNote: "Bring forms"))
+                ],
+                householdName: "Home",
+                careSummary: "Care support is active."
+            )
+        )
+        let service = LearningAnticipationService()
+
+        let snapshot = service.buildSnapshot(
+            goals: [goal],
+            evidence: [],
+            feedback: [],
+            now: now
+        )
+        let step = try XCTUnwrap(goal.plan?.sections.first?.steps.first)
+        let insight = service.learnedStepInsight(goal: goal, step: step, snapshot: snapshot, now: now)
+
+        XCTAssertTrue(insight.whyNow.conciseReason.localizedCaseInsensitiveContains("shared responsibilities"))
+        XCTAssertTrue(insight.whyNow.reasons.contains(where: { $0.localizedCaseInsensitiveContains("coordination") || $0.localizedCaseInsensitiveContains("care") }))
+    }
 }
 
 private extension LearningAnticipationServiceTests {
-    func makeGoal(id: String, domain: LifeDomainKey, dueAt: String) -> Goal {
+    func makeGoal(id: String, domain: LifeDomainKey, dueAt: String, sharedLife: SharedLifeContext? = nil) -> Goal {
         let actor = GoalActor(actorID: "self", displayName: "You", ownership: .self, roleLabel: "Primary owner", isPrimary: true)
         let timing = GoalTiming(tempo: .deadlineBased, timingType: .dueAt, startsOn: nil, dueAt: dueAt, targetBy: nil, windowStart: nil, windowEnd: nil, suggestedNextAt: nil, repeatEveryDays: nil, progressReviewCadenceDays: 7)
         let strategy = PlanningStrategy(strategyKind: .sequential, allowParallelSteps: false, maxActiveSteps: 3, preferredSectionOrder: [.activeSteps], defaultStepType: .actionUnit, autoGenerateReviewSection: false, preferShortSteps: true, revisitCadenceDays: 7)
         let progress = ProgressStrategy(metricKind: .stepCompletion, rollupMethod: .ratio, targetStepCount: nil, targetEvidenceCount: nil, targetMinutes: nil, supportsUntimedProgress: true, countsChildGoals: false, countsSupportGoals: false)
         let step = Step(id: "step-\(id)", sectionID: "section-\(id)", title: "Work \(id)", summary: "Do the next visible pass.", type: .actionUnit, state: .planned, owner: actor, timing: timing, dependencyStepIDs: [], isOptional: false, isRepeatable: false, evidenceRequired: true, successSignals: ["Done"], actionability: StepActionability(action: "Do it", completionDefinition: "Done", evidenceOfCompletion: ["Done"], fallbackMicroStep: "Start", contextRequirements: []))
         let plan = GoalPlan(id: "plan-\(id)", goalID: id, version: goalEnginePlanVersion, generatedAt: "2026-04-15T12:00:00Z", summary: nil, strategy: strategy, sections: [PlanSection(id: "section-\(id)", goalID: id, title: "Active", summary: nil, kind: .activeSteps, orderIndex: 0, steps: [step])], assumptions: [], lint: PlanLintResult(goalID: id, planVersion: goalEnginePlanVersion, isValid: true, issueCount: 0, issues: []))
-        let lifeGraph = LifeGraphContext(domains: [LifeDomainAssignment(domain: domain, priority: 1)], roles: [], path: nil, stages: [], prerequisites: [], milestones: [])
+        let lifeGraph = LifeGraphContext(domains: [LifeDomainAssignment(domain: domain, priority: 1)], roles: [], path: nil, stages: [], prerequisites: [], milestones: [], sharedLife: sharedLife)
         return Goal(schemaVersion: goalEngineSchemaVersion, id: id, revision: 1, createdAt: "2026-04-15T12:00:00Z", updatedAt: "2026-04-15T12:00:00Z", state: .active, title: id, summary: nil, mode: .project, relationshipKind: .independent, actor: actor, parentGoalID: nil, childGoalIDs: [], supportGoalIDs: [], tags: [], timing: timing, planningStrategy: strategy, progressStrategy: progress, plan: plan, lifeGraph: lifeGraph)
     }
 

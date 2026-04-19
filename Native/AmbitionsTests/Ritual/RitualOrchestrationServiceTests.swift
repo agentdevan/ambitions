@@ -167,6 +167,45 @@ final class RitualOrchestrationServiceTests: XCTestCase {
 
         XCTAssertTrue(plan.weekThesis.localizedCaseInsensitiveContains("underrepresented"))
     }
+
+    func testWeekThesisCanSurfaceSharedResponsibilityPressure() throws {
+        let now = try XCTUnwrap(DomainTimestamp.date(from: "2026-04-20T09:00:00Z"))
+        let goal = makeGoal(goalID: "goal-home", stepID: "step-home", dueAt: "2026-04-25T16:00:00Z")
+
+        let plan = RitualOrchestrationService().makePlan(
+            input: RitualOrchestrationInput(
+                goals: [goal],
+                captures: [],
+                evidence: [],
+                feedback: [],
+                sharedLifeSnapshot: SharedLifeCoordinationSnapshot(
+                    goalSummaries: [
+                        goal.id: SharedLifeGoalSummary(
+                            goalID: goal.id,
+                            participantNames: ["Alex"],
+                            relationshipLabels: ["partner"],
+                            delegatedSupportActive: true,
+                            careContextActive: true,
+                            structuralSupportGoalCount: 0,
+                            responsibilitySummary: SharedResponsibilitySummary(totalCount: 2, careCount: 1, householdCount: 1, appointmentCount: 0, logisticsCount: 0, supportCount: 0, participantNames: ["Alex"]),
+                            coordinationSignals: [],
+                            pressureScore: 0.72,
+                            reasons: ["Care responsibilities are active around this goal."]
+                        )
+                    ],
+                    portfolioSummary: SharedLifePortfolioSummary(
+                        totalResponsibilityCount: 2,
+                        careGoalCount: 1,
+                        coordinationSignalCount: 0,
+                        headline: "Shared care and household responsibilities are visible."
+                    )
+                ),
+                now: now
+            )
+        )
+
+        XCTAssertTrue(plan.weekThesis.localizedCaseInsensitiveContains("shared responsibility"))
+    }
 }
 
 private extension RitualOrchestrationServiceTests {

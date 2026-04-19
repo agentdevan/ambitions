@@ -47,6 +47,51 @@ final class TodayViewModelTests: XCTestCase {
         XCTAssertTrue(experience.ritual.signalLabels.contains("1 active goal"))
     }
 
+    func testRepositoryBackedServiceCanSurfaceSharedResponsibilityRitualThesis() async throws {
+        let repositories = try await makeRepositories()
+        let service = RepositoryBackedTodayService(repositories: repositories)
+        let now = try XCTUnwrap(DomainTimestamp.date(from: "2026-04-20T09:00:00Z"))
+        var goal = makeGoal(id: "goal-home", stepID: "step-home", stepTitle: "Home shared step", dueAt: "2026-04-21T16:00:00Z")
+        goal = Goal(
+            schemaVersion: goal.schemaVersion,
+            id: goal.id,
+            revision: goal.revision,
+            createdAt: goal.createdAt,
+            updatedAt: goal.updatedAt,
+            state: goal.state,
+            title: goal.title,
+            summary: goal.summary,
+            mode: goal.mode,
+            relationshipKind: .support,
+            actor: goal.actor,
+            parentGoalID: goal.parentGoalID,
+            childGoalIDs: goal.childGoalIDs,
+            supportGoalIDs: goal.supportGoalIDs,
+            tags: goal.tags,
+            timing: goal.timing,
+            planningStrategy: goal.planningStrategy,
+            progressStrategy: goal.progressStrategy,
+            plan: goal.plan,
+            lifeGraph: LifeGraphContext(
+                domains: [LifeDomainAssignment(domain: .home)],
+                roles: [LifeRole(kind: .supporting, title: "Partner support")],
+                path: nil,
+                stages: [],
+                prerequisites: [],
+                milestones: [],
+                sharedLife: SharedLifeContext(
+                    participants: [SharedLifeParticipant(id: "partner", displayName: "Alex", relationshipKind: .partner, roleLabel: "Partner")],
+                    responsibilities: [SharedResponsibility(id: "groceries", title: "Groceries", kind: .household, participantID: "partner")]
+                )
+            )
+        )
+        try await repositories.goals.saveGoals([goal])
+
+        let experience = try await service.loadTodayExperience(userDisplayName: "", now: now)
+
+        XCTAssertTrue(experience.ritual.thesis.localizedCaseInsensitiveContains("shared"))
+    }
+
     func testSharedNextStepSelectorDeprioritizesBlockedDependencyWork() async throws {
         let repositories = try await makeRepositories()
         let service = RepositoryBackedTodayService(repositories: repositories)

@@ -389,6 +389,9 @@ struct GoalEngineIntakeService {
         var stages: [LifePathStage] = []
         var prerequisites: [LifePathPrerequisite] = []
         var milestones: [LifeGraphMilestone] = []
+        var sharedParticipants: [SharedLifeParticipant] = []
+        var sharedResponsibilities: [SharedResponsibility] = []
+        var careSummary: String?
 
         if normalizedLower.contains("astronaut") {
             domains = [LifeDomainAssignment(domain: .career)]
@@ -449,11 +452,82 @@ struct GoalEngineIntakeService {
             domains = [LifeDomainAssignment(domain: .finance)]
         }
 
+        if matches(normalizedLower, pattern: #"\bpartner\b|\bspouse\b|\bwife\b|\bhusband\b"#) {
+            if domains.isEmpty {
+                domains = [LifeDomainAssignment(domain: .relationships)]
+            }
+            sharedParticipants.append(
+                SharedLifeParticipant(
+                    id: "partner",
+                    displayName: "Partner",
+                    relationshipKind: .partner,
+                    roleLabel: "Partner"
+                )
+            )
+        }
+        if matches(normalizedLower, pattern: #"\bdaughter\b|\bson\b|\bchild\b|\bkid\b"#) {
+            sharedParticipants.append(
+                SharedLifeParticipant(
+                    id: "child",
+                    displayName: "Child",
+                    relationshipKind: .child,
+                    roleLabel: "Child"
+                )
+            )
+            sharedResponsibilities.append(
+                SharedResponsibility(
+                    id: "care-support",
+                    title: "Care support",
+                    summary: "Keep the support path calm and visible.",
+                    kind: .care,
+                    participantID: "child"
+                )
+            )
+            careSummary = "Child-related care support is part of the goal context."
+        }
+        if matches(normalizedLower, pattern: #"\bhousehold\b|\bhome\b|\bgrocery\b|\bchores\b|\bpickup\b|\bdrop off\b"#) {
+            if domains.contains(where: { $0.domain == .home }) == false {
+                domains.append(LifeDomainAssignment(domain: .home, priority: 0.9))
+            }
+            sharedResponsibilities.append(
+                SharedResponsibility(
+                    id: "household-logistics",
+                    title: "Household logistics",
+                    summary: "Keep the coordination load visible without turning it into admin.",
+                    kind: .household
+                )
+            )
+        }
+        if matches(normalizedLower, pattern: #"\bappointment\b|\bdoctor\b|\bdentist\b|\bmeeting\b|\bpickup\b|\bdropoff\b|\bschedule\b"#) {
+            sharedResponsibilities.append(
+                SharedResponsibility(
+                    id: "shared-appointment",
+                    title: "Shared timing",
+                    summary: "A shared timing commitment needs calm coordination.",
+                    kind: .appointment,
+                    coordination: SharedCoordinationContext(
+                        kind: .appointment,
+                        title: "Shared timing",
+                        summary: "Use the current goal timing to keep coordination visible."
+                    )
+                )
+            )
+        }
+
         if ownership != .self, let roleLabel {
             roles.append(LifeRole(kind: .supporting, title: roleLabel))
         }
 
-        guard domains.isEmpty == false || roles.isEmpty == false || path != nil else {
+        let sharedLife: SharedLifeContext? = (sharedParticipants.isEmpty == false || sharedResponsibilities.isEmpty == false || careSummary != nil)
+            ? SharedLifeContext(
+                participants: sharedParticipants,
+                responsibilities: sharedResponsibilities,
+                householdName: domains.contains(where: { $0.domain == .home }) ? "Household" : nil,
+                careSummary: careSummary
+            )
+            : nil
+
+        guard domains.isEmpty == false || roles.isEmpty == false || path != nil || sharedLife != nil else {
             return nil
         }
 
@@ -463,7 +537,8 @@ struct GoalEngineIntakeService {
             path: path,
             stages: stages,
             prerequisites: prerequisites,
-            milestones: milestones
+            milestones: milestones,
+            sharedLife: sharedLife
         )
     }
 

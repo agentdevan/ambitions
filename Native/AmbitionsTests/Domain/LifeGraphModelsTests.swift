@@ -146,6 +146,55 @@ final class LifeGraphModelsTests: XCTestCase {
         XCTAssertEqual(summary.blockedPrerequisites.map(\.id), [])
         XCTAssertEqual(summary.readiness.gapCount, 0)
     }
+
+    func testSharedLifeResponsibilitySummaryStaysAdditiveAndDerived() {
+        let goal = sampleGoal(
+            id: "household-goal",
+            relationshipKind: .support,
+            lifeGraph: LifeGraphContext(
+                domains: [LifeDomainAssignment(domain: .home)],
+                roles: [LifeRole(kind: .responsibility, title: "Household support")],
+                path: nil,
+                stages: [],
+                prerequisites: [],
+                milestones: [],
+                sharedLife: SharedLifeContext(
+                    participants: [
+                        SharedLifeParticipant(id: "partner", displayName: "Alex", relationshipKind: .partner, roleLabel: "Partner")
+                    ],
+                    responsibilities: [
+                        SharedResponsibility(id: "pickup", title: "School pickup", kind: .care, participantID: "partner"),
+                        SharedResponsibility(id: "groceries", title: "Groceries", kind: .household, participantID: "partner"),
+                        SharedResponsibility(id: "dentist", title: "Dentist appointment", kind: .appointment, participantID: "partner", coordination: SharedCoordinationContext(kind: .appointment, title: "Dentist", summary: "Needs prep", preparationNote: "Bring forms"))
+                    ]
+                )
+            )
+        )
+
+        let summary = LifeGraphResolver.sharedLifeSummary(for: goal, within: [goal], now: Date(timeIntervalSince1970: 0))
+
+        XCTAssertEqual(summary.responsibilitySummary.totalCount, 3)
+        XCTAssertEqual(summary.responsibilitySummary.careCount, 1)
+        XCTAssertEqual(summary.responsibilitySummary.householdCount, 1)
+        XCTAssertEqual(summary.responsibilitySummary.appointmentCount, 1)
+        XCTAssertEqual(summary.participantNames, ["Alex"])
+        XCTAssertEqual(summary.coordinationSignals.first?.title, "Dentist")
+    }
+
+    func testSharedLifeSummaryUsesStructuralSupportLinksWhenMetadataIsAbsent() {
+        let parent = sampleGoal(id: "parent", supportGoalIDs: ["support"], relationshipKind: .independent)
+        let support = sampleGoal(id: "support", parentGoalID: "parent", relationshipKind: .support)
+
+        let summary = LifeGraphResolver.sharedLifeSummary(
+            for: parent,
+            within: [parent, support],
+            now: Date(timeIntervalSince1970: 0)
+        )
+
+        XCTAssertTrue(summary.delegatedSupportActive)
+        XCTAssertEqual(summary.structuralSupportGoalCount, 1)
+        XCTAssertTrue(summary.reasons.contains(where: { $0.localizedCaseInsensitiveContains("support") }))
+    }
 }
 
 private extension LifeGraphModelsTests {
