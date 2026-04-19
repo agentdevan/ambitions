@@ -1,509 +1,303 @@
 # Ambitions Surgical Execution Plan
 
-## Goal
-Create the most efficient path from the current native SwiftUI Ambitions app to a true personal operating system, minimizing duplicate work and Codex usage by building reusable foundations before surfaces.
+## Status
 
-## Current State
-Ambitions already has:
-- native SwiftUI app structure
-- Goal Engine / plan-execution-learning foundation
-- SwiftData persistence
-- repository-backed services
-- Today / Goals / Habits / Insights / Profile surfaces
-- UI tests and CI
+Ambitions 1.0 foundation work exists already and is complete through registry Batch 18. That history remains intact in `docs/codex/BATCH_REGISTRY.md`.
 
-Main gaps:
-- no first-class capture system end-to-end
-- no full feasibility / recovery / time orchestration engine
-- no App Intents / widget / Live Activity / share extension stack completed end-to-end
-- no sync boundary finalized
-- no life graph / long-range path modeling / household model / runtime separation
+Ambitions 2.0 is the active execution program. It starts with a canon reset and then builds the retrieval-backed, path-compiling, energy-aware, explainable, correctable intelligence stack in dependency order.
 
-## Core Principle
-Do not build surfaces until the engine they consume is stable.
+All work stays on `main` unless the user explicitly requests branch-based work.
 
-That means:
-- no share extension before capture model exists
-- no widgets/live activities before a canonical Now State exists
-- no calendar conflict UI before time orchestration model exists
-- no multi-device sync before snapshot/export and conflict policy exist
-- no dedicated device prototype before runtime separation and surface-role definitions exist
+## Current 2.0 Gaps
 
-## Reframed Execution Structure
-Instead of feature-first phases, use foundation bundles:
-1. Build hygiene + repo truth
-2. Domain foundation
-3. Core intelligence
-4. Time orchestration
-5. External action infrastructure
-6. Ambient surfaces
-7. Sync + trust foundation
-8. Life graph + path modeling
-9. Learning engine
-10. Shared life
-11. Runtime separation
-12. Device work
+The current repo has a strong native Ambitions 1.0 foundation, but it does not yet have the full Ambitions 2.0 end-state:
 
-## Hard Dependency Rules
+- no generalized provider/provenance/freshness boundary for world knowledge
+- no external knowledge ingestion core with source trust and freshness metadata
+- no generalized clarification engine for ambiguous life goals
+- no path compiler that turns arbitrary goals into staged, sourced paths
+- no domain intelligence pack framework
+- no resource graph with ranked, refreshable sources
+- no energy/capacity operating system that is shared by path recommendations
+- no contradiction engine across retrieved truth, user intent, behavior, and plans
+- no durable correction/teaching loop for user edits to assumptions and recommendations
+- no user-visible source audit and why-this explanation layer for 2.0 intelligence
+- no runtime integration contract for 2.0 intelligence services
+- no Ambitions 2.0 product shell consuming those contracts
 
-### Rule 1 — Canonical Action Pipeline first
-All user/system actions should execute through one command path:
-- in-app buttons
-- notifications
-- widget interactions
-- Live Activity actions
-- App Intents
-- share flows
+## Hard Dependency Order
 
-No surface-specific business logic.
+Execute Ambitions 2.0 in this order:
 
-### Rule 2 — Canonical “Now State” before ambient UI
-Create a single derived model for:
-- best next step
-- today posture
-- pressure level
-- active focus session
-- open capture urgency
-- blockers / waiting-on
+1. canon reset
+2. knowledge / provider / provenance / freshness boundary
+3. understanding + clarification
+4. path compiler foundation
+5. domain intelligence packs
+6. resource graph + freshness
+7. energy + capacity operating system
+8. contradiction / correction loop
+9. explainability + trust controls
+10. runtime integration
+11. product shell integration
 
-Widgets, notifications, controls, and Live Activities should all read from this.
+## Explicit Forbiddance Rules
 
-### Rule 3 — App Intents infrastructure before interaction-heavy surface work
-App Intents should define reusable actions/entities once, then power:
-- Siri / Shortcuts / Spotlight
-- widget interactivity
-- Live Activity buttons
-- controls
-- Action button / lock-screen actions
+- No path UX before the path compiler exists.
+- No energy UI before energy contracts are stable.
+- No retrieval-backed recommendations before provenance and freshness exist.
+- No opaque AI shell behavior before explainability and correction exist.
+- No runtime or surface propagation before trust controls exist.
+- No product/runtime Swift work during Batch 19.
+- No branch creation or branch switching for the standard Ambitions 2.0 program.
 
-### Rule 4 — Shared container before extensions
-Before widgets/share extensions/Live Activities depend on shared data, add:
-- App Groups entitlement
-- shared container abstraction
-- extension-safe storage adapter
-- deep link routing and scene resolution
+## Phase Order
 
-### Rule 5 — Snapshot/export schema before sync
-Before choosing CloudKit or anything else, create:
-- versioned snapshot schema
-- import/export
-- conflict policy
-- sync capability interface
+### Phase 0 — Canon Reset
 
-### Rule 6 — Life graph ontology before long-range path UX
-Before Career Maps, astronaut planning, education ladders, etc., define:
-- domains
-- roles
-- milestones
-- dependencies
-- path branches
-- support/delegation types
-
-### Rule 7 — Runtime separation before hardware prototype
-A device prototype may be concepted earlier, but the first serious engineering prototype should wait until core runtime and context services are detached from the phone app shell.
-
-## Revised Phase Order
-
-### Phase 0 — Build hygiene and source-of-truth cleanup
 Purpose:
-- remove dead path ambiguity
-- lock repo truth
-- stabilize CI/dev workflow
 
-Includes:
-- docs cleanup
-- remove TS/Expo legacy if no longer needed
-- confirm XcodeGen-only workflow
-- current-state capability matrix
-- acceptance test baseline
+- preserve Ambitions 1.0 completion history
+- establish Ambitions 2.0 as the new forward canon program
+- seed the registry and active Batch 19 control file
 
 Exit:
-- one source of truth
-- one build pipeline
-- all future prompts scoped to native app only
 
-### Phase 1 — Domain foundation
+- one canonical roadmap
+- one surgical execution plan
+- one batch plan
+- one operational registry
+- one active Batch 19 file
+
+### Phase 1 — Knowledge, Provider, Provenance, and Freshness Boundary
+
 Purpose:
-Build primitives reused everywhere.
 
-Includes:
-- stable IDs across goals/steps/captures/sessions
-- domain event log
-- Goal Memory event schema
-- Execution Modes enum
-- Narrative Momentum enum
-- cause-of-drift enum
-- confidence model
-- canonical deep link and external route model
-- canonical command/action protocol
+- define the retrieval provider abstraction
+- model source provenance, freshness, trust, and uncertainty before recommendations use retrieved content
 
 Exit:
-- every future feature can attach to shared domain models instead of inventing new ones
 
-### Phase 2 — First-class capture core
+- every retrieved claim has provider, source, freshness, and trust metadata
+- source uncertainty can be represented without product shell logic
+
+### Phase 2 — External Knowledge Ingestion Core
+
 Purpose:
-Make capture a core system before external intake surfaces.
 
-Includes:
-- Captures tab/inbox
-- capture repository/service
-- capture source types
-- triage states
-- turn-into-goal / attach-to-goal
-- seed vault / revisit logic
-- capture tests
-
-Do NOT include yet:
-- share extension
-- App Intents capture
-- voice capture
+- ingest external knowledge through the provider boundary
+- normalize sources into durable, auditable claim/resource structures
 
 Exit:
-- capture model is stable enough that later surfaces can target it safely
 
-### Phase 3 — Planning engine v2
+- ingestion is deterministic and testable
+- stale or low-trust inputs are not silently promoted
+
+### Phase 3 — Understanding and Clarification
+
 Purpose:
-Strengthen the brain before adding OS-level surfaces.
 
-Includes:
-- feasibility engine
-- deadline realism
-- free-time-aware planning (internal model only)
-- confidence-labeled recommendations
-- fragility scoring
-- capacity debt detection
+- interpret generalized life goals
+- identify missing constraints
+- generate clarification needs and apply user answers
 
 Exit:
-- the system can tell whether a plan is believable
 
-### Phase 4 — Recovery engine
+- ambiguous goals pause for clarification instead of pretending certainty
+- interpretation output is stable enough for path compilation
+
+### Phase 4 — Path Compiler Foundation
+
 Purpose:
-Build Ambitions’ defining behavior.
 
-Includes:
-- reschedule engine
-- smaller-step generator
-- waiting/dependency states
-- cause-of-drift classification
-- Goal Memory writebacks
-- recovery-aware recommendation ranking
+- turn understood goals into staged path candidates
+- represent assumptions, dependencies, prerequisites, risks, and fallback branches
 
 Exit:
-- after delay/skip/stuck, the system produces a stable safer next move
 
-### Phase 5 — Time orchestration foundation
+- path outputs are structured, not prose-only
+- compiler contracts exist before path UX
+
+### Phase 5 — Domain Intelligence Packs
+
 Purpose:
-Model time before showing time-heavy surfaces.
 
-Includes:
-- internal schedule/block model
-- protected block model
-- day-pressure and week-pressure computation
-- calendar abstraction layer
-- reminders abstraction layer
-- “believability calendar” logic
-
-Split implementation:
-- 5A add-to-calendar/reminders (write-only where possible)
-- 5B availability + conflict detection (full access)
+- add domain-specific rules without hard-coding every domain into the compiler
+- support packs for education, career, health, finance, creative, home, and other life domains over time
 
 Exit:
-- the app understands room, pressure, and collision risk
 
-### Phase 6 — External action infrastructure
+- domain packs can contribute requirements, resources, risks, and readiness criteria
+- packs remain inspectable and testable
+
+### Phase 6 — Resource Graph and Freshness
+
 Purpose:
-Build the reusable outside-the-app action layer once.
 
-Includes:
-- AppEntity models
-- AppIntent base infrastructure
-- AppDependency/AppDependencyManager wiring
-- shared deep link resolution
-- action execution bridge
-- app group/shared container abstraction
-- snapshot readers for extensions
-
-Do NOT build final widgets yet.
+- connect path stages to ranked resources
+- track freshness, update needs, and source quality over time
 
 Exit:
-- one reusable system can power Shortcuts, Spotlight, widgets, controls, and Live Activities
 
-### Phase 7 — Ambient surfaces batch
+- resource suggestions are explainable and refreshable
+- stale resource chains can be downgraded or flagged
+
+### Phase 7 — Energy and Capacity Operating System
+
 Purpose:
-Build all system surfaces off the same action and Now State foundations.
 
-Includes:
-- notifications
-- widgets
-- Live Activities
-- controls if valuable
-- lock-screen relevance
-- focus session surface
-
-Sequence inside phase:
-- 7A notification foundation
-- 7B widget extension + glance views
-- 7C Live Activity in same widget extension
-- 7D interactive widgets/controls where justified
+- model realistic capacity and energy-fit contracts
+- let recommendations prefer sustainable execution over fantasy planning
 
 Exit:
-- ambient surfaces reuse shared models and action pipeline
-- no surface has custom business logic
 
-### Phase 8 — Ritual OS
+- energy is represented as fit/capacity, not fake biometric certainty
+- path/task ranking can consume shared capacity outputs
+
+### Phase 8 — Contradiction, Correction, and Teaching Loop
+
 Purpose:
-Wrap the engines into repeat daily/weekly behaviors.
 
-Includes:
-- morning setup
-- midday restart
-- evening close
-- weekly reset
-- monthly course correction
-- day/week thesis generation
+- detect conflicts between goals, requirements, behavior, retrieved truth, and user corrections
+- capture user teaching as durable signal
 
 Exit:
-- return loops are coherent and engine-backed, not screen-backed
 
-### Phase 9 — Sync and trust foundation
+- contradictions are explainable
+- corrections change future interpretation, ranking, and explanation
+
+### Phase 9 — Explainability and Trust Controls
+
 Purpose:
-Prepare multi-device durability without overcommitting too early.
 
-Includes:
-- versioned snapshot schema
-- import/export
-- conflict policy
-- SyncCapability abstraction
-- LocalOnlySync default
-- backend selection interface
-
-Recommended decision:
-- if near-term scope is Apple-only: CloudKit via SwiftData is fastest
-- if endgame includes non-Apple dedicated hardware: do not let CloudKit become the only truth layer
+- expose why-this, source audit, freshness, confidence, and correction controls
+- prevent opaque intelligence from spreading into product surfaces
 
 Exit:
-- sync can be added without rewriting the app model
 
-### Phase 10 — Life graph foundation
+- every 2.0 recommendation can identify evidence, memory, inference, uncertainty, and correction path
+
+### Phase 10 — Runtime Integration
+
 Purpose:
-Move from project planning to life structure.
 
-Includes:
-- domains
-- roles
-- obligations
-- long-range milestones
-- dependencies
-- branch paths
-- support/delegation objects
+- integrate 2.0 intelligence behind stable runtime contracts
+- preserve local-first degradation and current app ownership boundaries
 
 Exit:
-- long-range paths can be modeled without ad hoc feature code
 
-### Phase 11 — Path systems
+- runtime consumers can access intelligence outputs without duplicating business logic
+- trust controls remain attached to propagated outputs
+
+### Phase 11 — Product Shell Integration
+
 Purpose:
-Ship the compelling life-planning layer.
 
-Includes:
-- Career Maps
-- education paths
-- credential ladders
-- application windows
-- alternative branches
-- milestone dependency visualizations
+- bring path, resource, energy, correction, and explanation UX into the app shell after services exist
 
 Exit:
-- goals like “be an astronaut” can become structured trajectories
 
-### Phase 12 — Learning and anticipation
-Purpose:
-Make Ambitions truly personalized.
-
-Includes:
-- energy-fit learning
-- focus-window learning
-- recommendation ranking by historical fit
-- contradiction engine
-- underrepresented-goal detection
-- counterfactual planning
-- “why now?” explanations
-
-Exit:
-- recommendations feel historically earned
-
-### Phase 13 — Shared life / household
-Purpose:
-Add humane personal collaboration after solo truth is mature.
-
-Includes:
-- shared goals
-- delegated work
-- partner/home planning
-- household logistics
-- permission model for shared memory
-
-Exit:
-- collaboration feels personal, not workplace-like
-
-### Phase 14 — Runtime separation
-Purpose:
-Detach Ambitions from the phone shell.
-
-Includes:
-- runtime services layer
-- context service
-- memory service
-- capture service
-- orchestration service
-- voice runtime boundary
-- local cache + remote intelligence boundary
-
-Exit:
-- the phone app is one client of Ambitions, not the whole product
-
-### Phase 15 — Device concept and engineering prototype
-Purpose:
-Only now build the dedicated surface.
-
-Includes:
-- surface role validation
-- narrow use-case device thesis
-- ritual/glance/voice interactions
-- secure session model
-- fallback to phone for deep edit
-
-Exit:
-- clear reason the device exists
-- clear reason it is not just a worse phone
+- surfaces consume stable service outputs
+- product behavior is source-aware, correctable, and auditable
 
 ## Framework Reuse Map
 
-### Bundle A — SwiftData + domain services
+### Bundle A — Provider / Provenance / Freshness
+
 Use for:
-- capture core
-- Goal Memory
-- event log
-- planning engine
-- recovery engine
-- sync snapshot/export
-- life graph
 
-Group these prompts together because they all change:
-- models
-- repositories
-- services
-- tests
+- knowledge provider protocols
+- source identity
+- freshness metadata
+- trust scoring
+- retrieval claim normalization
+- tests for stale/unknown/low-trust handling
 
-### Bundle B — EventKit
+### Bundle B — Understanding / Clarification
+
 Use for:
-- add to calendar
-- reminders
-- conflict detection
-- pressure scoring from real calendar data
 
-Split permissions work:
-- write-only event creation first
-- full calendar access only when reading conflicts is needed
+- generalized goal interpretation
+- ambiguity detection
+- clarification prompts/contracts
+- user-answer incorporation
+- deterministic interpretation tests
 
-### Bundle C — App Intents
+### Bundle C — Path Compiler / Domain Packs
+
 Use for:
-- capture shortcuts
-- focus controls
-- open specific goals/plans
-- widget interactivity
-- Live Activity buttons
-- controls / Action button
 
-This should be built once and reused everywhere.
+- path compiler contracts
+- staged path outputs
+- prerequisites and dependencies
+- domain intelligence pack protocol
+- pack-specific requirement/resource tests
 
-### Bundle D — WidgetKit + ActivityKit + SwiftUI glance views
+### Bundle D — Resource Graph / Freshness
+
 Use for:
-- widgets
-- Live Activities
-- controls
-- glanceable shared views
 
-Build these together because:
-- they share extension targets
-- they share glanceable design constraints
-- Live Activities live in a widget extension
+- resource entity graph
+- source ranking
+- resource-to-path links
+- update checks
+- freshness propagation
 
-### Bundle E — App Groups + extension-safe storage
+### Bundle E — Energy / Capacity
+
 Use for:
-- widget data
-- share extension capture
-- extension runtime access
-- shared snapshots
 
-### Bundle F — CloudKit / sync layer
+- capacity budgets
+- energy-fit categories
+- pacing and recovery compatibility
+- learning signals from behavior and explicit feedback
+- ranking inputs
+
+### Bundle F — Correction / Explainability
+
 Use for:
-- multi-device sync
-- conflict resolution
-- durable personal brain layer
 
-Build only after snapshot/export and sync interface exist.
+- contradiction detection
+- correction capture
+- teaching history
+- why-this explanations
+- source audit and confidence surfaces
+
+### Bundle G — Runtime / Shell Integration
+
+Use for:
+
+- runtime-facing service contracts
+- product adapters
+- snapshot-safe outputs
+- surface-safe audit payloads
+- shell integration after trust controls exist
 
 ## Codex Efficiency Rules
 
-1. Every prompt should target one bundle, not one flashy feature.
-2. Every prompt should name reusable artifacts first.
-3. Every prompt should forbid surface-specific duplicate logic.
-4. Every prompt should specify exact files/modules touched.
-5. Every prompt should require tests before UI polish.
-6. Every extension/surface prompt should consume existing services, never create hidden logic islands.
-7. Never build notifications/widgets/controls against unstable recommendation models.
-8. Never start sync implementation until snapshot/export passes round-trip tests.
-9. Never start dedicated-device coding until runtime separation exists.
+1. One batch at a time.
+2. Work on `main` only unless the user explicitly requests branch-based work.
+3. Keep prompts small and batch-scoped.
+4. Name exact files and modules in scope.
+5. Build reusable contracts before product surfaces.
+6. Never create a second truth stack beside the canonical docs.
+7. Preserve Ambitions 1.0 history; do not renumber old batches.
+8. Prefer deterministic models and tests over broad AI prose.
+9. Keep retrieval, interpretation, compilation, energy, correction, and explanation as reusable services.
+10. Stop if a requested surface would require a missing foundation.
+11. Validate the narrow batch before updating status.
+12. Do not touch product/runtime code in docs-only control batches.
 
-## Best Codex Batching Strategy
+## Best Batching Strategy
 
-### Batch 1 — Cleanup and foundation
-- Phase 0
-- Phase 1
-- Phase 2
+The Ambitions 2.0 program should be shipped as small operational batches after the completed Ambitions 1.0 foundation:
 
-### Batch 2 — Intelligence core
-- Phase 3
-- Phase 4
-- Phase 5
+- Batch 19: canon reset only
+- Batches 20-21: knowledge boundary and ingestion
+- Batches 22-23: clarification and goal understanding
+- Batches 24-26: path compiler, domain packs, resource graph
+- Batches 27-29: freshness and energy/capacity
+- Batches 30-32: contradiction, correction, explainability
+- Batches 33-34: runtime and product shell integration
 
-### Batch 3 — External action platform
-- Phase 6
-- Phase 7
-- Phase 8
-
-### Batch 4 — Trust and scale
-- Phase 9
-- Phase 10
-- Phase 11
-
-### Batch 5 — Platform separation
-- Phase 12
-- Phase 13
-- Phase 14
-- Phase 15
-
-## What I would change from the prior roadmap
-- Move full ambient surface work later, after the recommendation/time engines are stronger.
-- Split time orchestration into write-only creation first, conflict-reading second.
-- Build App Intents infrastructure before final interactive widgets/controls.
-- Treat sync as a boundary-first problem, not a backend-first problem.
-- Move serious device engineering after runtime separation.
-
-## Final Recommendation
-The most efficient path is:
-- clean repo truth
-- stabilize domain primitives
-- make capture real
-- make planning truthful
-- make recovery excellent
-- make time orchestration real
-- build reusable external action infrastructure
-- then light up ambient surfaces
-- then sync
-- then life graph and learning
-- then shared life
-- then runtime separation
-- then hardware
-
-That order minimizes rework, keeps Codex prompts modular, and ensures every surface is powered by a mature engine instead of pushing unfinished logic upward into UI and extensions.
+This order prevents the two major failure modes of Ambitions 2.0: source-less AI confidence and UI that outruns the intelligence contracts.

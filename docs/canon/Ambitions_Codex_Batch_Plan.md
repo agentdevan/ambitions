@@ -1,570 +1,268 @@
 # Ambitions Codex Batch Plan
 
-## How to use this plan
+## Status
 
-Use **three layers of context**, not one giant prompt every time.
+Ambitions 1.0 is complete through registry Batch 18. Those batches remain completed historical foundation work and must not be renumbered, erased, or rewritten into a new numbering system.
 
-### Layer 1 — persistent repo context
-Keep an `AGENTS.md` file in the repo root. Put in it:
-- project mission
-- source-of-truth directories
-- build/test commands
-- coding conventions
-- what not to touch
-- current execution rule: do not skip ahead, do not add future-facing UI before the required engine exists
-- branch / commit / PR expectations
+Ambitions 2.0 is the active forward execution program. It begins at registry Batch 19 and continues the existing operational numbering.
 
-### Layer 2 — master roadmap context
-Keep the following docs in the repo and reference them when needed:
+Work on `main` only unless the user explicitly requests branch-based work.
+
+## How to Use This Plan
+
+Use three layers of context, not one giant prompt every time.
+
+### Layer 1 — Persistent Repo Context
+
+Use `AGENTS.md` and `docs/codex/CONTEXT_INDEX.md` for:
+
+- source-of-truth order
+- architecture boundaries
+- main-only execution rule
+- one-batch-at-a-time rule
+- branch, validation, and completion expectations
+
+### Layer 2 — Canon Context
+
+Use the canonical planning stack in-place:
+
 - `MASTER_PRODUCT_SPEC.md`
-- `Ambitions_OS_Master_Roadmap.md`
-- `Ambitions_Surgical_Execution_Plan.md`
-- this `Ambitions_Codex_Batch_Plan.md`
+- `docs/canon/Ambitions_OS_Master_Roadmap.md`
+- `docs/canon/Ambitions_Surgical_Execution_Plan.md`
+- `docs/canon/Ambitions_Codex_Batch_Plan.md`
+- `docs/codex/BATCH_REGISTRY.md`
 
-Do **not** paste all of them into every Codex task.
+Do not create parallel canon docs or duplicate planning stacks.
 
-### Layer 3 — per-batch task prompt
+### Layer 3 — Per-Batch Prompt
+
 For each Codex task, send only:
-- the current batch goal
-- the dependency rules
+
+- active batch name and status
+- goal
+- in-scope and out-of-scope items
+- dependency rules
 - exact files/folders in scope
-- acceptance criteria
-- explicit out-of-scope items
-- required validation commands
+- required validation
+- completion rule
 
-That keeps prompts small and avoids wasting rate on re-explaining the whole product.
+Keep prompts deterministic, repo-oriented, and tightly scoped.
 
----
+## Operating Rules
 
-## Operating rules for Codex
+1. One batch at a time.
+2. Do not start Batch N+1 while Batch N is active or unstable.
+3. Keep old Ambitions 1.0 history completed and intact.
+4. Build foundations before surfaces.
+5. Do not add UI for engines/contracts that do not exist.
+6. Do not add retrieval-backed recommendations before provenance and freshness exist.
+7. Do not add opaque AI behavior before correction and explainability exist.
+8. Shared logic belongs in domain/services/runtime boundaries, not product surfaces.
+9. Tests and validation are part of the batch.
+10. Update the registry only after validation or explicit user decision.
+11. Work on `main` only unless the user explicitly requests branch-based work.
+12. Do not create, switch to, or suggest branches for the standard program.
 
-1. **One batch at a time.** Never ask Codex to do Batch N+1 while Batch N is still unstable.
-2. **Ask mode first for larger work.** Get an implementation plan before code changes.
-3. **Code mode second.** Only after the plan matches the batch below.
-4. **No cross-batch freelancing.** Codex must not opportunistically add later-phase features.
-5. **Patch existing architecture.** Reuse service/repository/navigation patterns already in the repo.
-6. **No UI for engines that do not exist yet.** Views should trail stable domain/service work.
-7. **No new logic islands.** Shared logic must live in reusable services/domain modules.
-8. **Tests are part of the batch.** A batch is not done without the required tests.
-9. **Keep PRs reviewable.** Prefer 1 batch = 1 PR, occasionally split into 2 PRs when the batch has a foundation and a UI follow-up.
-10. **Do not reprompt the entire product thesis each time.** Reference docs; only send the active slice.
+## Completed Foundation: Ambitions 1.0
 
----
+Registry Batch 00 through Batch 18 are completed foundation work. They established the native app, domain and planning foundations, capture core, recovery/time orchestration, external action and ambient surfaces, ritual loops, sync-trust boundary, life graph/path systems, learning, shared-life intelligence, runtime separation, and a constrained dedicated-device prototype seam.
 
-## The correct execution order
+This completed history is preserved in `docs/codex/BATCH_REGISTRY.md`.
 
-### Batch 0 — Repo truth and guardrails
-**Goal:** make the repo and docs tell the truth, remove stale runtime assumptions, and lock in native-only execution.
+## Ambitions 2.0 Forward Program
 
-**Why first:** prevents all future tasks from inheriting stale assumptions.
+### Batch 19 — Ambitions 2.0 Batch 00 / Canon Reset
 
-**In scope**
-- README cleanup
-- docs index cleanup
-- runtime truth alignment
-- remove legacy TS/Expo/runtime artifacts if already approved
-- verify XcodeGen + test pipeline is the source of truth
+Goal:
 
-**Depends on:** nothing
+- establish Ambitions 2.0 as the active canon program while preserving Ambitions 1.0 history
 
-**Enables:** every later batch
+In scope:
 
-**Do not do yet**
-- new product features
-- engine work
-- capture surfaces
-- widgets/intents/sync
+- canon roadmap reset
+- surgical execution reset
+- batch plan reset
+- registry seeding
+- active Batch 19 file
+- AGENTS/context index truth alignment
 
-**Acceptance criteria**
-- docs and Profile/runtime copy are truthful
-- no stale legacy runtime references remain
-- XcodeGen build/test path is documented and green
+Acceptance:
 
----
+- canonical file paths remain unchanged
+- Batch 00-18 remain completed
+- Batch 19 is active
+- Batch 20-34 are queued
+- no product/runtime Swift code changes
 
-### Batch 1 — Domain foundation pass
-**Goal:** stabilize the reusable domain primitives before new features expand.
+### Batch 20 — Ambitions 2.0 Batch 01 / Knowledge Provider Boundary
 
-**Build**
-- audit and normalize shared domain models
-- add version-safe event/history model where needed
-- establish canonical IDs, timestamps, status/state enums
-- create clear service boundaries for capture, planning, recovery, orchestration, sync
+Goal:
 
-**Depends on:** Batch 0
+- define provider, provenance, freshness, trust, and uncertainty contracts for external knowledge
 
-**Enables:** capture, planning v2, recovery, sync
+Acceptance:
 
-**Do not do yet**
-- heavy UI changes
-- App Intents
-- widgets
-- calendar reads
-- sync backend
+- retrieval providers are abstracted behind testable boundaries
+- retrieved claims cannot exist without source and freshness metadata
 
-**Acceptance criteria**
-- shared types are explicit and stable
-- no feature service owns data it should not own
-- service boundaries are clear enough for later extension work
+### Batch 21 — Ambitions 2.0 Batch 02 / External Knowledge Ingestion Core
 
----
+Goal:
 
-### Batch 2 — First-class capture core
-**Goal:** make capture a stable product pillar inside the app.
+- ingest external knowledge through the provider boundary and normalize it into auditable claims/resources
 
-**Build**
-- `CaptureSourceType` expansion
-- capture repository/service finalization
-- Captures inbox/tab
-- capture states and transitions
-- turn capture into goal / attach to goal
-- routing to captures inbox
+Acceptance:
 
-**Depends on:** Batch 1
+- ingestion is deterministic
+- stale, unknown, or low-trust inputs are preserved as such instead of promoted
 
-**Enables:** share extension, App Intent capture, memory graph intake
+### Batch 22 — Ambitions 2.0 Batch 03 / Clarification and Ambiguity Engine
 
-**Do not do yet**
-- share extension
-- voice capture
-- App Intent capture
-- automated triage beyond minimal stable rules
+Goal:
 
-**Acceptance criteria**
-- captures are persisted and browsable
-- captures can be triaged without hacks
-- capture actions reuse app service patterns cleanly
+- detect ambiguity in life goals and produce structured clarification needs
 
----
+Acceptance:
 
-### Batch 3 — Planning engine v2
-**Goal:** strengthen the canonical “what should happen next?” logic before ambient surfaces exist.
+- ambiguous inputs produce explicit clarification prompts
+- user answers can resolve or update the ambiguity model
 
-**Build**
-- confidence-labeled planning
-- feasibility scoring
-- pacing / effort posture rules
-- fragility / pressure markers
-- canonical next-step derivation rules
-- richer planning outputs where needed
+### Batch 23 — Ambitions 2.0 Batch 04 / Generalized Goal Understanding Contracts
 
-**Depends on:** Batch 1
+Goal:
 
-**Enables:** recovery engine, notifications, widgets, time orchestration
+- create stable goal-understanding outputs for domain, constraints, readiness, risk, and missing information
 
-**Do not do yet**
-- widgets
-- Live Activities
-- interactive notifications
-- aggressive learning systems
+Acceptance:
 
-**Acceptance criteria**
-- app can derive one stable, explainable next move
-- planning outputs expose confidence and risk, not just action text
+- path compilation can consume goal-understanding contracts without parsing product copy
 
----
+### Batch 24 — Ambitions 2.0 Batch 05 / Path Compiler Foundation
 
-### Batch 4 — Recovery engine
-**Goal:** make Ambitions adapt after missed, delayed, or blocked work.
+Goal:
 
-**Build**
-- `RescheduleEngine`
-- smaller-step fallback logic
-- waiting / dependency-aware states
-- recovery mode transitions
-- feedback-to-plan patching
-- narrative momentum / execution mode scaffolding if low-risk
+- compile understood goals into staged path candidates with dependencies, assumptions, risks, and fallback branches
 
-**Depends on:** Batch 3
+Acceptance:
 
-**Enables:** ambient next-step surfaces, schedule-aware orchestration
+- path outputs are structured and testable
+- no product path UX is required to prove the compiler
 
-**Do not do yet**
-- calendar conflict reading
-- widgets/Live Activities
-- household/shared planning
+### Batch 25 — Ambitions 2.0 Batch 06 / Domain Pack Framework
 
-**Acceptance criteria**
-- delay/skip/stuck actions produce deterministic plan updates
-- repeated drift results in calmer, smaller, believable next actions
+Goal:
 
----
+- let domain packs contribute requirements, resources, risks, and readiness criteria to the compiler
 
-### Batch 5 — Time orchestration foundation (write paths)
-**Goal:** connect Ambitions to time carefully, without overreaching permissions too early.
+Acceptance:
 
-**Build**
-- EventKit service boundary
-- add-to-calendar
-- add-reminder
-- create-only time actions where possible
-- permission strings and authorization plumbing
+- domain intelligence is modular, inspectable, and testable
 
-**Depends on:** Batch 3
+### Batch 26 — Ambitions 2.0 Batch 07 / Resource Graph and Source Ranking
 
-**Enables:** appointment prep, time blocking, conflict-aware planning
+Goal:
 
-**Do not do yet**
-- full availability scanning
-- conflict forecasting
-- day-pressure analytics
+- connect path stages to ranked resources and source entities
 
-**Acceptance criteria**
-- a selected step can become a calendar event/reminder
-- EventKit is behind mocks and service protocols
+Acceptance:
 
----
+- resource ranking includes trust/provenance signals
+- resource links remain auditable
 
-### Batch 6 — Time orchestration intelligence (read paths)
-**Goal:** make plans reality-aware using real schedule context.
+### Batch 27 — Ambitions 2.0 Batch 08 / Update and Freshness Engine
 
-**Build**
-- calendar read/full access path if approved
-- conflict detection
-- available-window search
-- day pressure / week pressure derivation
-- protected block suggestions
+Goal:
 
-**Depends on:** Batch 5, Batch 4
+- detect stale knowledge/resource chains and propagate freshness changes into rankings and explanations
 
-**Enables:** believable scheduling, pressure-aware next-step logic
+Acceptance:
 
-**Do not do yet**
-- widgets/Live Activities unless the derived outputs are stable
-- sync
+- stale evidence can be downgraded or flagged
+- update status is visible to downstream services
 
-**Acceptance criteria**
-- system can reject or warn on impossible time suggestions
-- plan selection can factor in real schedule pressure
+### Batch 28 — Ambitions 2.0 Batch 09 / Energy Model Foundation
 
----
+Goal:
 
-### Batch 7 — External action infrastructure
-**Goal:** build one command system reused by app, intents, widgets, notifications, and activities.
+- define energy and capacity contracts as effort fit, focus fit, recovery state, and sustainable pacing
 
-**Build**
-- App Intent strategy
-- intent-safe command execution layer
-- app dependency wiring for extensions/intents
-- canonical deep-link / route mapping
-- canonical “Now State” snapshot model
+Acceptance:
 
-**Depends on:** Batch 2, Batch 3, Batch 4
+- no fake biometric claims
+- path/task ranking can consume shared capacity outputs
 
-**Enables:** widgets, Live Activities, interactive notifications, controls, share extension follow-ups
+### Batch 29 — Ambitions 2.0 Batch 10 / Energy Learning and Ranking
 
-**Do not do yet**
-- full widget polish
-- share extension UI
-- device runtime
+Goal:
 
-**Acceptance criteria**
-- one reusable action pipeline exists
-- one reusable snapshot exists for ambient surfaces
+- learn energy/capacity fit from behavior and explicit user feedback, then use it in recommendation ranking
 
----
+Acceptance:
 
-### Batch 8 — Ambient surfaces bundle
-**Goal:** expose stable state outside the app without creating new business logic.
+- ranking can prefer sustainable fit over raw urgency
+- learning signals remain user-correctable
 
-**Build as one grouped framework bundle**
-- App Groups / shared container
-- widget extension
-- glanceable shared views
-- Live Activity layouts
-- interactive widget/activity actions via App Intents
-- notification categories/actions if not already present
+### Batch 30 — Ambitions 2.0 Batch 11 / Contradiction Engine
 
-**Depends on:** Batch 7, Batch 3, Batch 4
+Goal:
 
-**Enables:** ambient Ambitions behavior all day
+- detect contradictions between user goals, behavior, retrieved requirements, plans, and system assumptions
 
-**Do not do yet**
-- overdesigned visual variants
-- experimental controls if not clearly valuable
-- household/shared surfaces
+Acceptance:
 
-**Acceptance criteria**
-- all ambient surfaces read from the same canonical snapshot/action layer
-- no surface-specific business logic exists
+- contradictions are represented structurally and can be explained
 
----
+### Batch 31 — Ambitions 2.0 Batch 12 / Correction and Teaching Loop
 
-### Batch 9 — Ritual OS
-**Goal:** own repeat usage loops once the ambient and recovery layers are real.
+Goal:
 
-**Build**
-- morning setup
-- midday restart
-- evening close
-- weekly reset
-- monthly review scaffolding
-- narrative posture summaries
+- let users correct assumptions, source judgments, path decisions, and energy-fit guesses
 
-**Depends on:** Batch 4, Batch 6, Batch 8
+Acceptance:
 
-**Enables:** retention and deeper personal operating behavior
+- corrections become durable teaching signals
+- future interpretation/ranking uses those corrections
 
-**Do not do yet**
-- advanced life graph or household features
+### Batch 32 — Ambitions 2.0 Batch 13 / Explainability and Source Audit Surfaces
 
-**Acceptance criteria**
-- rituals are powered by existing engines, not hard-coded flows
-- each ritual produces useful state changes or review outputs
+Goal:
 
----
+- expose why-this explanations, source audit, freshness, confidence, and correction controls
 
-### Batch 10 — Sync/trust foundation
-**Goal:** make memory portable and multi-device safe before choosing a forever backend.
+Acceptance:
 
-**Build**
-- versioned snapshot/export format
-- import path
-- `SyncCapability` boundary
-- local-only default
-- conflict policy
-- migration hooks
+- recommendations distinguish source facts, memory, inference, uncertainty, and assumptions
 
-**Depends on:** Batch 1
+### Batch 33 — Ambitions 2.0 Batch 14 / Intelligence Runtime Integration
 
-**Enables:** CloudKit adapter, future non-Apple runtime, dedicated device
+Goal:
 
-**Do not do yet**
-- backend-specific assumptions spread through app code
-- device engineering
+- integrate 2.0 intelligence services behind stable runtime contracts
 
-**Acceptance criteria**
-- all core user state can round-trip through export/import
-- sync remains optional and isolated behind an adapter boundary
+Acceptance:
 
----
+- runtime consumers receive source-aware, correctable, trust-controlled outputs
+- no product surface duplicates intelligence logic
 
-### Batch 11 — Apple-first sync adapter (optional but efficient)
-**Goal:** get practical cross-device value without collapsing the architecture into one provider.
+### Batch 34 — Ambitions 2.0 Batch 15 / Ambitions 2.0 Product Shell Integration
 
-**Build**
-- CloudKit/iCloud-backed sync adapter if chosen
-- background sync hooks
-- device trust UI
-- sync status reporting
+Goal:
 
-**Depends on:** Batch 10
+- integrate path, resource, energy, correction, and explanation experiences into the product shell
 
-**Enables:** real multi-device Ambitions on Apple platforms
+Acceptance:
 
-**Do not do yet**
-- assume CloudKit is the final forever solution for all devices
+- shell surfaces consume stable service/runtime outputs
+- user-facing behavior is explainable, correctable, and source-aware
 
-**Acceptance criteria**
-- sync can be swapped or disabled without breaking core app behavior
-
----
-
-### Batch 12 — Life graph foundation
-**Goal:** model the person’s life structure, not just goals/tasks.
-
-**Build**
-- life domains
-- roles
-- long-range path objects
-- milestone/dependency structures
-- domain-specific metadata
-
-**Depends on:** Batch 10
-
-**Enables:** career maps, education planning, household support, deeper intelligence
-
-**Do not do yet**
-- fancy AI narration on top of weak structures
-
-**Acceptance criteria**
-- nontrivial multi-year goals can be represented structurally
-
----
-
-### Batch 13 — Path systems
-**Goal:** make long-horizon plans first-class.
-
-**Build**
-- career maps
-- education/certification paths
-- alternative branches
-- contingency path logic
-- support/delegation planning hooks
-
-**Depends on:** Batch 12, Batch 3
-
-**Enables:** “astronaut path” class experiences
-
-**Do not do yet**
-- hardware-specific experiences
-
-**Acceptance criteria**
-- the app can represent and guide a long, branching life trajectory
-
----
-
-### Batch 14 — Learning and anticipation
-**Goal:** make Ambitions feel intensely personal and historically informed.
-
-**Build**
-- Goal Memory
-- energy pattern learning
-- focus-window learning
-- procrastination / drift trigger detection
-- recommendation ranking by success likelihood
-- “why now?” explanation system
-
-**Depends on:** Batch 3, Batch 4, Batch 6, Batch 12
-
-**Enables:** true external-brain behavior
-
-**Do not do yet**
-- black-box behavior the user cannot understand
-
-**Acceptance criteria**
-- recommendations are traceable to observed history and explicit user structure
-
----
-
-### Batch 15 — Shared life / household intelligence
-**Goal:** expand from solo operating system to supported shared-life planning.
-
-**Build**
-- support goals
-- delegated work objects
-- partner/shared coordination primitives
-- household logistics surfaces
-
-**Depends on:** Batch 12, Batch 14
-
-**Enables:** family and relationship-scale planning
-
-**Do not do yet**
-- enterprise/team product drift
-
-**Acceptance criteria**
-- shared-life features still feel personal, calm, and consumer-native
-
----
-
-### Batch 16 — Runtime separation
-**Goal:** separate Ambitions intelligence from the iPhone shell.
-
-**Build**
-- platform runtime boundaries
-- memory service
-- context service
-- orchestration service
-- client/surface abstraction
-
-**Depends on:** Batch 10, Batch 12, Batch 14
-
-**Enables:** dedicated device prototyping
-
-**Do not do yet**
-- general consumer hardware launch work
-
-**Acceptance criteria**
-- iPhone app is one client of the Ambitions system, not the whole system
-
----
-
-### Batch 17 — Dedicated device prototype
-**Goal:** test the smallest viable non-phone Ambitions surface.
-
-**Build**
-- one narrow device thesis only
-- likely desk/home/bedside companion first
-- voice + glance + ritual interactions
-- deliberately constrained capability set
-
-**Depends on:** Batch 16
-
-**Acceptance criteria**
-- prototype validates a new surface advantage, not just novelty
-
----
-
-## Shared framework bundles
-
-These should be prompted as grouped work because they reuse the same technical foundation.
-
-### Bundle 1 — SwiftData + domain services
-Use for:
-- capture core
-- recovery engine
-- Goal Memory
-- event log/history
-- sync snapshot
-- life graph
-
-### Bundle 2 — EventKit
-Use for:
-- add-to-calendar
-- reminders
-- conflict detection
-- available windows
-- pressure derivation
-
-### Bundle 3 — App Intents
-Use for:
-- command execution bridge
-- quick capture
-- start focus
-- open goal / open captures
-- widget actions
-- Live Activity actions
-
-### Bundle 4 — WidgetKit + ActivityKit + shared glance UI
-Use for:
-- widgets
-- Live Activities
-- shared compact UI views
-- ambient snapshot rendering
-
-### Bundle 5 — App Groups/shared container
-Use for:
-- widget/share-extension data access
-- extension-safe snapshots
-- local cross-process state sharing
-
-### Bundle 6 — Sync
-Use for:
-- export/import
-- sync boundary
-- CloudKit adapter if chosen
-- conflict policy
-
----
-
-## The exact answer to “whole plan or paced?”
-
-### Do **not** send the whole plan in every Codex prompt.
-That wastes context and rate, and encourages Codex to skip ahead.
-
-### Do keep the whole plan available in-repo.
-That preserves direction and lets Codex reference it when needed.
-
-### Do send work at the pace of the batches.
-That is the safest and most efficient path.
-
-Recommended workflow:
-1. Keep the full roadmap docs in the repo.
-2. Keep `AGENTS.md` updated.
-3. For each batch, first ask Codex to review the codebase and produce a plan **only for that batch**.
-4. Compare the plan to this document.
-5. Then issue the code task for that batch only.
-6. Review/test/merge before starting the next batch.
-
----
-
-## Batch prompt template
+## Batch Prompt Template
 
 ```text
 You are working in the Ambitions repo.
 
-Follow the repo's AGENTS.md and the current roadmap docs, but only implement the active batch below. Do not skip ahead. Do not opportunistically add later-phase features. Reuse existing architecture patterns.
+Work on main only. Do not create, switch to, or suggest branches.
+
+Follow AGENTS.md and the canonical planning stack, but only implement the active batch below. Do not skip ahead. Do not opportunistically add later-batch features. Preserve Ambitions 1.0 completed history.
 
 ACTIVE BATCH: [name]
 
@@ -573,36 +271,33 @@ BATCH GOAL:
 
 IN SCOPE:
 - [item]
-- [item]
-- [item]
 
 OUT OF SCOPE:
 - [item]
-- [item]
-- [item]
 
 DEPENDENCY RULES:
-- Use existing repository/service/navigation patterns.
-- Do not add UI that depends on engines not yet implemented.
-- Shared business logic must live in reusable domain/services, not in surfaces.
+- [batch-specific rule]
 
 FILES / AREAS TO TOUCH:
 - [paths]
 
 REQUIRED VALIDATION:
-- xcodegen generate
-- [build/test commands]
+- [commands]
 
 DELIVERABLES:
 - implementation
-- tests
+- tests or docs validation
 - concise change summary
 
-First, inspect the codebase and provide a brief implementation plan for this batch only. Do not code until the plan is complete.
+First, inspect the repo and provide a brief implementation plan for this batch only when the batch is risky or multi-file.
 ```
 
----
+## Completion Rule
 
-## What you should ask me to do next
+An Ambitions 2.0 batch is complete only when:
 
-Ask for the **Batch 0 prompt** first, then proceed one batch at a time.
+- the implementation matches the active batch scope
+- later batches were not started
+- validation was run and reported truthfully
+- registry status is updated only after validation or explicit user decision
+- the checked-out branch remains `main`

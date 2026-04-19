@@ -1,38 +1,20 @@
 # Ambitions OS — Master Roadmap (Ambitions 2.0)
 
-## 1. State of the platform
+## Status
 
-Ambitions 1.0 is complete.
+Ambitions 1.0 is complete through registry Batch 18. That work remains the historical foundation: native SwiftUI app, domain services, persistence, planning/recovery/time foundations, ambient surfaces, sync-trust boundary, life graph/path systems, learning, shared-life context, runtime separation, and a narrow dedicated-device prototype seam.
 
-The current repo now has the foundation stack that was previously planned:
-- trustworthy native app shell
-- first-class capture
-- planning, recovery, and time orchestration
-- external action infrastructure and ambient surfaces
-- ritual OS
-- sync/trust boundary
-- life graph and path systems
-- learning and anticipation
-- shared-life coordination
-- runtime separation
-- dedicated device prototype seam
+Ambitions 2.0 is the next major program. It is not a minor patch line and it does not renumber or rewrite the completed Ambitions 1.0 history.
 
-Ambitions 2.0 is the next major program.
+## Mission
 
-It is not a patch release, polish pass, or incremental 1.1/1.2/1.3 sequence.
-It is the major upgrade from a strong personal execution system into a retrieval-backed, path-compiling, energy-aware, explainable life intelligence runtime.
+Ambitions exists to become a trusted personal operating system for individual life execution.
 
-## 2. Mission
+The 2.0 end-state is a retrieval-backed, path-compiling, energy-aware, explainable, correctable life intelligence runtime. It should understand a person's goals, constraints, knowledge sources, capacity, contradictions, and corrections well enough to shape believable paths through real life.
 
-Ambitions exists to become a trusted personal operating system for real life execution.
+Ambitions is not a generic to-do app, a corporate task manager, a gamified habit toy, a hardware-first moonshot, or a chat-first AI wrapper.
 
-Ambitions 2.0 should move the product from:
-- a strong local-first planning and orchestration system
-
-to:
-- a living intelligence system that can understand almost any meaningful goal, retrieve current real-world context, compile believable paths, adapt recommendations to the user’s energy and history, and explain what it is doing clearly enough to be trusted.
-
-## 3. Ambitions 2.0 product promise
+## Ambitions 2.0 Product Promise
 
 Ambitions should eventually be able to say:
 
@@ -45,342 +27,270 @@ I will adapt the next move to your actual time, history, and energy fit.
 I will keep the path fresh as conditions change.
 I will help you move without turning your life into admin.
 
-## 4. Ambitions 2.0 end-state definition
+## Ambitions 2.0 Product Thesis
 
-The Ambitions 2.0 end state is a platform with:
-- durable personal memory
-- life graph and path modeling
-- generalized goal understanding
-- real-time knowledge retrieval with provenance
-- path compilation and branch logic
-- resource graphing and freshness monitoring
-- energy and capacity intelligence
-- contradiction and correction learning
-- explainability and auditability
-- runtime support across multiple surfaces with phone-owned deep editing
+Ambitions 2.0 should help a person:
 
-It is not just a smarter planner.
-It is not just a chat wrapper.
-It is not just a static life-graph model.
-It is not just an “AI” feature layer over the existing app.
+1. Turn generalized life goals into structured, believable paths.
+2. Ground recommendations in retrievable knowledge with provenance, freshness, and trust signals.
+3. Ask clarifying questions when the goal, domain, constraint, or evidence is ambiguous.
+4. Compile paths that include milestones, dependencies, resources, risks, and alternative routes.
+5. Match plans to energy, capacity, focus fit, and recovery state without pretending to measure fake biometrics.
+6. Detect contradictions between user intent, real behavior, known requirements, and system assumptions.
+7. Let the user correct and teach the system, then make those corrections durable.
+8. Explain why a recommendation exists, what evidence supports it, and what remains uncertain.
+9. Integrate the intelligence runtime into product surfaces only after the contracts are stable.
 
-## 5. Core platform layers for Ambitions 2.0
+## Core Platform Layers
 
-### 5.1 Life Graph Layer
-Stores the user’s structured life model:
-- ambitions
-- goals
-- milestones
-- tasks
-- roles
-- obligations
-- relationships
-- commitments
-- constraints
-- domains like career, education, health, finance, home, family
-- support/delegation context
-- long-range path structure
+### Life Graph
 
-### 5.2 Memory Layer
-Stores what the system learns over time:
-- goal history
-- pace and scope changes
-- drift patterns
-- execution patterns
-- energy-fit patterns
-- repeated blockers
-- contradiction signals
-- contexts where the user succeeds
-- user corrections to system assumptions and recommendations
+The structured model of the user's life:
 
-### 5.3 Knowledge Truth Layer
-Stores what the system knows about the outside world and how trustworthy it is:
+- ambitions, goals, milestones, tasks, time blocks, rituals
+- domains, roles, obligations, relationships, responsibilities
+- path branches, dependencies, prerequisites, deadlines, application windows
+- support, delegation, household, and care context
+
+### Memory
+
+The durable record of what has happened and what the system has learned:
+
+- goal history and plan changes
+- drift, recovery, and execution patterns
+- user corrections and preference changes
+- energy-fit and focus-fit patterns
+- repeated blockers, assumptions, and contradictions
+
+### Knowledge Truth
+
+The retrieval and evidence layer:
+
+- world-knowledge retrieval
 - provider boundaries
 - source provenance
-- refresh timestamps
-- trust levels
-- stale knowledge detection
-- official versus inferred information
-- graceful degradation when external knowledge is unavailable
+- freshness and update windows
+- trust and quality scoring
+- uncertainty labels
+- source auditability
 
-### 5.4 Goal Understanding Layer
-Computes:
-- intent classification
-- domain detection
+Retrieval must improve truth. It must not hide uncertainty behind confident prose.
+
+### Goal Understanding
+
+The interpretation layer:
+
+- generalized goal classification
+- domain inference
+- constraint extraction
 - ambiguity detection
-- clarification needs
-- assumption capture
-- confidence in understanding
-- safe fallback when certainty is low
+- clarification question generation
+- user-answer incorporation
 
-### 5.5 Path Compilation Layer
-Computes:
-- stage generation
-- prerequisite extraction
-- readiness gaps
-- milestone compilation
-- branch alternatives
-- contingency routes
-- believable first-path shaping
+### Path Compilation
 
-### 5.6 Resource Graph Layer
-Connects paths to actionable support:
-- official requirements
-- learning resources
-- forms and checklists
-- opportunity windows
-- resource ranking
-- branch comparison inputs
-- update triggers when resources or rules change
+The system that turns a goal into a path:
 
-### 5.7 Energy and Capacity Layer
-Computes:
-- task energy profile
-- day-capacity estimates
-- focus-window fit
-- recovery suitability
-- sequencing logic
-- stacking penalties
-- likely best timing for a next move
-- energy-aware recommendation framing
+- staged milestones
+- prerequisites and dependencies
+- resource requirements
+- timing windows
+- alternative branches
+- fallback paths
+- domain-specific constraints
+- acceptance and readiness criteria
 
-### 5.8 Contradiction and Correction Layer
-Protects realism through:
-- contradiction detection
-- recommendation correction memory
-- preferred-route learning
-- user teaching loops
-- wrong-assumption repair
-- explicit preference overrides
+### Resource Graph
 
-### 5.9 Explainability and Trust Layer
-Protects trust through:
-- provenance
-- confidence labels
-- assumption visibility
-- “why now?” reasoning
-- “why this path?” reasoning
-- auditability of recommendation changes
-- privacy controls and external lookup controls
+The model of useful external and internal resources:
 
-### 5.10 Runtime Integration Layer
-Surfaces the system through:
-- iPhone app for deep editing and fallback
-- ambient/device-safe projections
-- widgets and notifications using safe outputs
-- future voice or multimodal surfaces only after trust and runtime contracts are strong
+- source entities
+- requirements, credentials, courses, guides, organizations, applications, references
+- source ranking and trust
+- freshness checks
+- dependency links to path stages
 
-## 6. Permanent Ambitions 2.0 product principles
+### Energy and Capacity
+
+The operating system for realistic personal effort:
+
+- capacity budgets
+- energy and focus fit
+- low-energy/admin/deep-work/creative/social effort shapes
+- sustainable pacing
+- recovery state
+- learned fit from behavior and explicit feedback
+
+Energy should be modeled as fit and capacity, not fake biometrics.
+
+### Contradiction and Correction
+
+The loop that keeps the system honest:
+
+- contradiction detection across goals, behavior, plans, requirements, and retrieved knowledge
+- user correction capture
+- durable teaching signals
+- conflict resolution between old assumptions and new truth
+- correction-aware ranking and explanation
+
+The user must be able to correct the system.
+
+### Explainability and Trust
+
+The audit layer:
+
+- why this recommendation exists
+- which sources or memories support it
+- what is inferred versus known
+- freshness and confidence labels
+- user-visible correction controls
+- privacy and local-first posture
+
+### Runtime Integration
+
+The reusable intelligence boundary:
+
+- service-level contracts for retrieval, understanding, path compilation, energy, correction, and explanation
+- runtime-safe snapshots
+- local-first degradation
+- product-shell adapters
+- surface-safe action and audit payloads
+
+## Ambitions 2.0 Phases
+
+### Phase A — Knowledge and Truth Architecture
+
+Build provider, provenance, freshness, trust, and retrieval boundaries before any retrieval-backed recommendation reaches product UX.
+
+Exit criteria:
+
+- knowledge providers are abstracted
+- source provenance is captured
+- freshness and trust metadata are part of every retrieved claim
+- uncertainty can be represented without product-shell improvisation
+
+### Phase B — Goal Understanding and Clarification
+
+Build generalized goal understanding and the clarification engine before compiling paths.
+
+Exit criteria:
+
+- goals can be interpreted across domains
+- ambiguities become structured clarification needs
+- user answers can update goal understanding deterministically
+
+### Phase C — Path Compiler and Domain Intelligence
+
+Build the path compiler and domain-pack framework before path UX.
+
+Exit criteria:
+
+- a goal can compile into staged path candidates
+- domain packs can contribute requirements without owning the whole planner
+- compiler output includes assumptions, readiness, dependencies, and fallback branches
+
+### Phase D — Resource Graph and Freshness
+
+Build resource graph, source ranking, update checks, and freshness propagation.
+
+Exit criteria:
+
+- resources can be attached to path stages
+- stale evidence can be detected and downgraded
+- source ranking is explainable
+
+### Phase E — Energy and Capacity Operating System
+
+Build energy, capacity, fit, pacing, and learning contracts.
+
+Exit criteria:
+
+- path and task recommendations can account for realistic effort fit
+- energy signals are explicit, user-correctable, and non-biometric
+- ranking can prefer sustainable execution over fantasy planning
+
+### Phase F — Contradiction, Correction, and Teaching Loop
+
+Build contradiction detection, correction capture, and durable teaching before opaque AI behavior spreads.
+
+Exit criteria:
+
+- the system can detect conflicts between plans, behavior, requirements, and user corrections
+- corrections update future interpretation and ranking
+- teaching history is visible enough to audit
+
+### Phase G — Explainability, Trust Controls, and Runtime Integration
+
+Build source audit, why-this explanations, trust controls, and runtime contracts.
+
+Exit criteria:
+
+- recommendations can explain source, memory, inference, freshness, and uncertainty
+- trust controls exist before broad runtime propagation
+- intelligence services integrate behind stable runtime contracts
+
+### Phase H — Ambitions 2.0 Product Shell
+
+Integrate the 2.0 intelligence into user-facing product surfaces after the underlying contracts exist.
+
+Exit criteria:
+
+- product surfaces consume stable intelligence outputs
+- path, resource, energy, correction, and explanation UX do not invent business logic
+- shell behavior remains correctable and auditable
+
+## Ambitions 2.0 Principles
 
 1. Truth before novelty.
-2. Reality before aspiration.
-3. One believable next move before any big plan.
-4. Retrieval must improve truth, not hide uncertainty.
-5. The system must say what is inferred, what is confirmed, and what is stale.
-6. Energy should be modeled as fit and capacity, not fake biometrics.
+2. Retrieval must improve truth, not hide uncertainty.
+3. Provenance, freshness, and trust are product requirements, not backend details.
+4. Clarify before compiling when the goal is ambiguous.
+5. Path UX must trail path compiler contracts.
+6. Energy is fit and capacity, not fake biometric certainty.
 7. The user must be able to correct the system.
-8. Memory should compound value, not just accumulate data.
-9. Deep editing belongs to the phone until another surface clearly earns it.
-10. Hardware and voice follow trust, not the reverse.
+8. Explanations should distinguish known facts, retrieved claims, inference, and assumptions.
+9. Hardware and voice follow trust, not the reverse.
+10. Runtime propagation follows trust controls, not the reverse.
+11. Prefer deterministic boundaries over opaque AI islands.
+12. Preserve local-first degradation and user data control.
 
-## 7. Ambitions 2.0 phases
-
-### Phase A — Knowledge and truth architecture
-**Goal:** create the boundary that lets Ambitions know current real-world facts safely.
-
-**Build:**
-- provider boundaries
-- retrieval result contracts
-- provenance model
-- freshness model
-- trust model
-- stale knowledge handling
-- graceful local-only degradation
-
-**Exit criteria:**
-- external knowledge can be represented without polluting core planning logic
-- the system can state where knowledge came from and how fresh it is
-
-### Phase B — Goal understanding and clarification
-**Goal:** make Ambitions handle arbitrary user prompts more intelligently.
-
-**Build:**
-- ambiguity detection
-- clarification requirement logic
-- assumption capture
-- domain/path classification
-- confidence in understanding
-- structured intake contracts for underspecified goals
-
-**Exit criteria:**
-- the system knows when to ask a sharp question instead of generating a fake plan
-- novel goals can enter the engine through a stable contract
-
-### Phase C — Path compiler and domain intelligence
-**Goal:** turn goals plus real-world knowledge into structured paths.
-
-**Build:**
-- path compiler
-- stage and milestone generation
-- prerequisite extraction
-- readiness-gap derivation
-- branch alternatives
-- domain intelligence packs
-
-**Exit criteria:**
-- Ambitions can turn large life goals into structured, believable trajectories
-- path logic is compiled, not manually hardcoded per feature
-
-### Phase D — Resource graph and freshness
-**Goal:** connect plans to useful, current support.
-
-**Build:**
-- resource graph
-- source ranking
-- opportunity window tracking
-- update triggers
-- stale path detection
-- change-monitoring hooks
-
-**Exit criteria:**
-- compiled paths are paired with useful resources and visible freshness
-- the system can notice when an old recommendation may no longer be current
-
-### Phase E — Energy and capacity operating system
-**Goal:** make execution timing and recommendation framing intensely personal.
-
-**Build:**
-- task energy profile model
-- user energy-fit patterns
-- day-capacity model
-- effort aftermath learning
-- sequencing rules
-- focus-window ranking
-- recovery-fit logic
-
-**Exit criteria:**
-- recommendations feel aligned to the user’s actual working rhythm
-- energy-aware behavior is explainable, not mystical
-
-### Phase F — Contradiction, correction, and teaching loop
-**Goal:** let Ambitions learn with the user rather than acting like an untouchable black box.
-
-**Build:**
-- contradiction engine
-- correction memory
-- route preference learning
-- recommendation acceptance/rejection learning
-- system-teaching hooks
-- wrong-assumption repair
-
-**Exit criteria:**
-- the user can meaningfully teach the system
-- Ambitions can surface when stated goals and actual behavior keep diverging
-
-### Phase G — Explainability, trust controls, and runtime integration
-**Goal:** make the smarter system safe to trust and usable across runtime surfaces.
-
-**Build:**
-- source inspection
-- assumption review
-- confidence surfaces
-- external lookup controls
-- audit-friendly recommendation histories
-- runtime integration of knowledge, path, energy, and correction outputs
-
-**Exit criteria:**
-- the system can explain itself clearly enough to be trusted
-- the runtime can safely expose smarter outputs without breaking the phone shell
-
-### Phase H — Ambitions 2.0 product shell
-**Goal:** integrate the new intelligence into the actual product experience without turning Ambitions into a chat-first tool.
-
-**Build:**
-- intake upgrades
-- explanation surfaces
-- path and resource views
-- energy-aware execution surfaces
-- correction/teaching touchpoints
-- 2.0 onboarding and calibration
-
-**Exit criteria:**
-- Ambitions 2.0 feels visibly more capable inside the product
-- the intelligence layer is usable without becoming noisy or chat-dependent
-
-## 8. Named Ambitions 2.0 pillars
-
-### 8.1 Knowledge Provider Boundary
-A stable seam between Ambitions and changing outside-world information.
-
-### 8.2 Clarification Engine
-A structured way to identify what is missing before path compilation starts.
-
-### 8.3 Path Compiler
-The system that turns goal + knowledge + context into stages, prerequisites, milestones, branches, and realistic next-path shaping.
-
-### 8.4 Resource Graph
-The system that links plans to current supporting resources, deadlines, and opportunity windows.
-
-### 8.5 Energy-Aware Execution
-The system that ranks action by energy fit, day capacity, timing quality, and recovery appropriateness.
-
-### 8.6 Contradiction Engine
-The system that detects when intention, schedule, behavior, and external reality diverge.
-
-### 8.7 Correction Loop
-The system that lets the user teach Ambitions what is wrong, irrelevant, or misaligned.
-
-### 8.8 Source and Assumption Audit
-The system that shows where recommendations came from, what the system is assuming, and what changed.
-
-## 9. Ambitions 2.0 non-goals
+## Non-Goals
 
 Do not let Ambitions 2.0 become:
-- a chat-first AI shell
-- a noisy research toy
-- a corporate workflow manager
-- an enterprise collaboration product
-- a fake biometrics or mood-tracking system
-- a generic browser wrapper around web search
-- a hardware-first moonshot before software trust is stronger
 
-## 10. Immediate Ambitions 2.0 implementation order
+- a black-box AI shell
+- a source-less recommendation engine
+- a generic chat assistant
+- a brittle path template library
+- a fake-health or fake-biometrics product
+- a noisy productivity coach
+- a hardware-first or voice-first program before trust exists
+- a parallel runtime that bypasses the native Ambitions architecture
 
-1. establish the Ambitions 2.0 canon stack
-2. build knowledge and truth boundaries
-3. build goal understanding and clarification
-4. build path compilation and domain intelligence
-5. build resource graph and freshness
-6. build energy and capacity operating layers
-7. build contradiction and correction loops
-8. build explainability and trust controls
-9. integrate the intelligence stack into the runtime
-10. integrate Ambitions 2.0 into the shipping product shell
+## Immediate Ambitions 2.0 Implementation Order
 
-## 11. Why this order wins
+1. Canon reset.
+2. Knowledge / provider / provenance / freshness boundary.
+3. Understanding and clarification.
+4. Path compiler foundation.
+5. Domain intelligence packs.
+6. Resource graph and freshness.
+7. Energy and capacity operating system.
+8. Contradiction and correction loop.
+9. Explainability and trust controls.
+10. Runtime integration.
+11. Product shell integration.
 
-This sequence avoids the main 2.0 failure modes:
-- adding “AI” before truth and provenance exist
-- building flashy energy UI before the system can model fit and capacity correctly
-- compiling paths without current external context
-- retrieving information without a stable internal model to compile it into
-- exposing opaque recommendations before the user can inspect, correct, or constrain them
+## Success Definition
 
-## 12. Success definition
+Ambitions 2.0 succeeds when a user can give Ambitions a meaningful life goal and receive a believable, sourced, correctable path that respects reality: requirements, timing, resources, capacity, energy fit, contradictions, and changing life context.
 
-Ambitions 2.0 succeeds when a user feels:
-- clearer about what kind of problem they are solving
-- more realistic about what is actually required
-- better supported in turning broad ambitions into believable paths
-- more personally understood by the system’s timing and recommendation behavior
-- more trusting because the app can explain itself and accept correction
-- more supported by a system that grows more useful as life changes
+Ambitions becomes a true operating system when it can:
 
-Ambitions reaches the end-state vision when:
-- almost any meaningful user prompt can enter a stable understanding pipeline
-- outside-world facts can be retrieved, ranked, and cited with freshness
-- long-range paths can be compiled and maintained instead of hand-authored
-- execution is adapted to the user’s actual energy and life conditions
-- the system can explain why it recommends what it recommends
-- the user can correct it without friction
-- it becomes difficult to imagine managing a meaningful life direction without it
+- understand goals beyond narrow task planning
+- retrieve and rank trustworthy knowledge
+- compile paths with dependencies and alternatives
+- adapt to energy and capacity
+- explain itself
+- accept correction
+- propagate intelligence safely across runtime and product surfaces

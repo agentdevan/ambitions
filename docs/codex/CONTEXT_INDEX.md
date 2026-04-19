@@ -3,17 +3,21 @@
 This file defines the standing source-of-truth hierarchy for future Ambitions work.
 Use it before planning or implementing any non-trivial task.
 
+Ambitions 1.0 foundation work is complete through registry Batch 18.
+Ambitions 2.0 is now the active canon program, beginning with Batch 19 while preserving the prior operational numbering history.
+
 ## Required Read Order
 
 For non-trivial work, read these in order before planning:
 
 1. [AGENTS.md](../../AGENTS.md) and any more-specific scoped `AGENTS.md`.
-2. [MASTER_PRODUCT_SPEC.md](../../MASTER_PRODUCT_SPEC.md).
-3. [Ambitions_OS_Master_Roadmap.md](../canon/Ambitions_OS_Master_Roadmap.md).
-4. [Ambitions_Surgical_Execution_Plan.md](../canon/Ambitions_Surgical_Execution_Plan.md).
-5. [Ambitions_Codex_Batch_Plan.md](../canon/Ambitions_Codex_Batch_Plan.md).
-6. [BATCH_REGISTRY.md](BATCH_REGISTRY.md).
-7. Supporting docs linked from [docs/README.md](../README.md).
+2. [docs/codex/CONTEXT_INDEX.md](CONTEXT_INDEX.md).
+3. [MASTER_PRODUCT_SPEC.md](../../MASTER_PRODUCT_SPEC.md).
+4. [Ambitions_OS_Master_Roadmap.md](../canon/Ambitions_OS_Master_Roadmap.md).
+5. [Ambitions_Surgical_Execution_Plan.md](../canon/Ambitions_Surgical_Execution_Plan.md).
+6. [Ambitions_Codex_Batch_Plan.md](../canon/Ambitions_Codex_Batch_Plan.md).
+7. [BATCH_REGISTRY.md](BATCH_REGISTRY.md).
+8. Supporting docs linked from [docs/README.md](../README.md).
 
 ## Precedence Model
 
@@ -40,6 +44,8 @@ Do not replace these with external copies or duplicate canon locations.
 
 ## Execution Guardrails
 
+- Work on `main` only unless the user explicitly requests branch-based work.
+- Do not create, switch to, or suggest branches for normal Ambitions execution.
 - Do not skip ahead of the execution order in [Ambitions_Surgical_Execution_Plan.md](../canon/Ambitions_Surgical_Execution_Plan.md).
 - Do not build surfaces before engines or services exist.
 - Do not build extension-heavy features before shared container and data boundaries exist.
