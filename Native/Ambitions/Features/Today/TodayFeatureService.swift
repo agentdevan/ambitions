@@ -487,17 +487,10 @@ private extension RepositoryBackedTodayService {
                 break
             }
 
-            let conflictReport = await calendarRemindersService.detectConflicts(for: selection, durationMinutes: 45, now: now)
             let event = try await calendarRemindersService.createCalendarEvent(for: selection, durationMinutes: 45, now: now)
-            let conflictLine: String
-            if let conflictReport, conflictReport.hasConflicts {
-                conflictLine = " \(conflictReport.conflicts.count) overlap\(conflictReport.conflicts.count == 1 ? "" : "s") detected."
-            } else {
-                conflictLine = " No overlap detected."
-            }
             message = TodayInlineMessage(
                 title: "Calendar event created",
-                body: "\"\(event.title)\" was scheduled.\(conflictLine)",
+                body: "\"\(event.title)\" was added to Calendar.",
                 state: .success
             )
         case .askForSmallerStep:

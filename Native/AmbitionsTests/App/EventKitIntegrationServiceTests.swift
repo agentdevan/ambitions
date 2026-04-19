@@ -33,7 +33,7 @@ final class EventKitIntegrationServiceTests: XCTestCase {
         XCTAssertTrue(payload?.notes.contains("Goal: Ship CFP proposal") == true)
     }
 
-    func testDetectConflictsReturnsOverlappingEventsOnly() async {
+    func testDetectConflictsStaysDeferredDuringWriteOnlyBatch() async {
         let store = RecordingEventKitStoreClient()
         let overlap = EventKitCalendarEventSnapshot(
             title: "Team standup",
@@ -52,9 +52,7 @@ final class EventKitIntegrationServiceTests: XCTestCase {
 
         let report = await service.detectConflicts(for: fixtureSelection(), durationMinutes: 45, now: fixtureNow())
 
-        XCTAssertNotNil(report)
-        XCTAssertEqual(report?.conflicts.count, 1)
-        XCTAssertEqual(report?.conflicts.first?.title, "Team standup")
+        XCTAssertNil(report)
     }
 
     func testCreateCalendarEventFailsWhenStepHasNoSuggestedDate() async {

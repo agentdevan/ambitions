@@ -97,6 +97,7 @@ protocol CalendarRemindersServicing: Sendable {
     func requestAuthorizationIfNeeded(for scope: CalendarRemindersScope) async -> CalendarRemindersAuthorizationState
     func createReminder(for selection: NextStepSchedulingSelection, now: Date) async throws -> CreatedReminderRecord
     func createCalendarEvent(for selection: NextStepSchedulingSelection, durationMinutes: Int, now: Date) async throws -> CreatedCalendarEventRecord
+    // Reserved for Canon Batch 5B. Batch 5A keeps this hook only to avoid broad churn.
     func detectConflicts(for selection: NextStepSchedulingSelection, durationMinutes: Int, now: Date) async -> CalendarConflictReport?
 }
 
@@ -154,14 +155,11 @@ struct StubCalendarRemindersService: CalendarRemindersServicing {
 
 actor EventKitIntegrationService: CalendarRemindersServicing {
     private let storeClient: any EventKitStoreClient
-    private let planner: CalendarConflictPlanner
 
     init(
-        storeClient: any EventKitStoreClient = EventKitStoreClientLive(),
-        planner: CalendarConflictPlanner = CalendarConflictPlanner()
+        storeClient: any EventKitStoreClient = EventKitStoreClientLive()
     ) {
         self.storeClient = storeClient
-        self.planner = planner
     }
 
     func authorizationState(for scope: CalendarRemindersScope) async -> CalendarRemindersAuthorizationState {
@@ -201,7 +199,7 @@ actor EventKitIntegrationService: CalendarRemindersServicing {
             throw CalendarRemindersError.authorizationDenied(scope: .calendarEvents)
         }
 
-        guard let interval = planner.proposedInterval(for: selection, durationMinutes: durationMinutes, now: now) else {
+        guard let interval = proposedInterval(for: selection, durationMinutes: durationMinutes, now: now) else {
             throw CalendarRemindersError.missingEventStartDate
         }
 
@@ -227,11 +225,15 @@ actor EventKitIntegrationService: CalendarRemindersServicing {
     }
 
     func detectConflicts(for selection: NextStepSchedulingSelection, durationMinutes: Int, now: Date) async -> CalendarConflictReport? {
-        guard let interval = planner.proposedInterval(for: selection, durationMinutes: durationMinutes, now: now) else {
+        guard let interval = proposedInterval(for: selection, durationMinutes: durationMinutes, now: now) else {
             return nil
         }
-        let events = await storeClient.fetchEvents(in: interval)
-        return planner.makeConflictReport(events: events, proposed: interval)
+        _ = selection
+        _ = durationMinutes
+        _ = now
+        _ = interval
+        // Canon Batch 5A is write-only. Conflict detection remains deferred to Batch 5B.
+        return nil
     }
 
     private func reminderNotes(from selection: NextStepSchedulingSelection) -> String {
@@ -243,6 +245,21 @@ actor EventKitIntegrationService: CalendarRemindersServicing {
         }
         lines.append("Ambitions IDs: goal=\(selection.goalID), step=\(selection.stepID)")
         return lines.joined(separator: "\n")
+    }
+
+    private func proposedInterval(
+        for selection: NextStepSchedulingSelection,
+        durationMinutes: Int,
+        now: Date
+    ) -> DateInterval? {
+        guard let start = selection.suggestedDate else { return nil }
+        let effectiveDuration = max(durationMinutes, 15)
+        let end = start.addingTimeInterval(TimeInterval(effectiveDuration * 60))
+        if end <= now {
+            let fallbackStart = now.addingTimeInterval(1_800)
+            return DateInterval(start: fallbackStart, end: fallbackStart.addingTimeInterval(TimeInterval(effectiveDuration * 60)))
+        }
+        return DateInterval(start: start, end: end)
     }
 }
 
@@ -271,6 +288,7 @@ protocol EventKitStoreClient: Sendable {
     func requestAuthorization(for scope: CalendarRemindersScope) async -> CalendarRemindersAuthorizationState
     func saveReminder(_ payload: EventKitReminderPayload) async throws -> String
     func saveEvent(_ payload: EventKitEventPayload) async throws -> String
+    // Reserved for Canon Batch 5B read-path work. Batch 5A does not call this.
     func fetchEvents(in interval: DateInterval) async -> [EventKitCalendarEventSnapshot]
 }
 
@@ -404,49 +422,5 @@ actor EventKitStoreClientLive: EventKitStoreClient {
         @unknown default:
             return .denied
         }
-    }
-}
-
-struct CalendarConflictPlanner: Sendable {
-    func proposedInterval(
-        for selection: NextStepSchedulingSelection,
-        durationMinutes: Int,
-        now: Date
-    ) -> DateInterval? {
-        guard let start = selection.suggestedDate else { return nil }
-        let effectiveDuration = max(durationMinutes, 15)
-        let end = start.addingTimeInterval(TimeInterval(effectiveDuration * 60))
-        if end <= now {
-            let fallbackStart = now.addingTimeInterval(1_800)
-            return DateInterval(start: fallbackStart, end: fallbackStart.addingTimeInterval(TimeInterval(effectiveDuration * 60)))
-        }
-        return DateInterval(start: start, end: end)
-    }
-
-    func makeConflictReport(
-        events: [EventKitCalendarEventSnapshot],
-        proposed: DateInterval
-    ) -> CalendarConflictReport {
-        let conflicts = events
-            .filter { event in
-                event.startDate < proposed.end && event.endDate > proposed.start
-            }
-            .sorted { lhs, rhs in
-                lhs.startDate < rhs.startDate
-            }
-            .map {
-                CalendarConflict(
-                    title: $0.title,
-                    startDate: $0.startDate,
-                    endDate: $0.endDate,
-                    isAllDay: $0.isAllDay
-                )
-            }
-
-        return CalendarConflictReport(
-            proposedStartDate: proposed.start,
-            proposedEndDate: proposed.end,
-            conflicts: conflicts
-        )
     }
 }
