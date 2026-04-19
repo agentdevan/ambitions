@@ -114,7 +114,7 @@ struct PreviewFixtures: Sendable {
         ),
         profileDashboard: ProfileDashboard(
             title: "Preview User",
-            subtitle: "Local-first, on-device-first planning with native device features available when you want them.",
+            subtitle: "Local-first, on-device-first planning with native capture storage active today and external device surfaces called out separately until they are validated.",
             initials: "PU",
             badges: ["Local-first", "Native pivot", "Design system"],
             stats: [
@@ -130,9 +130,9 @@ struct PreviewFixtures: Sendable {
                 SettingsItem(id: "profile-setting-2", title: "Default tab", subtitle: "Used on the next cold launch", icon: "square.grid.2x2", valueLabel: "Today"),
                 SettingsItem(id: "profile-setting-3", title: "Appearance", subtitle: "System follows the device while explicit themes stay selectable", icon: "circle.lefthalf.filled", valueLabel: "System"),
                 SettingsItem(id: "profile-setting-4", title: "Review cadence", subtitle: "How often the app should frame a reset", icon: "clock.arrow.circlepath", valueLabel: "Weekly"),
-                SettingsItem(id: "profile-setting-5", title: "Connected features", subtitle: "Notifications, widgets, Live Activities, and calendar/reminder hooks work as on-device features. Account sync is not included yet.", icon: "person.badge.key", valueLabel: "Local device features")
+                SettingsItem(id: "profile-setting-5", title: "Connected features", subtitle: "Notification scheduling and calendar/reminder wiring exist in the native app. Widget and Live Activity foundations are present in the repo but still need validation.", icon: "person.badge.key", valueLabel: "Native foundations")
             ],
-            settingsFooter: "Everything in this build starts from on-device persistence. Device features are available locally, while account sync is still out of scope.",
+            settingsFooter: "Everything in this build starts from on-device persistence. Captures are live in the app today, while widget and Live Activity foundations still need validation and account sync stays out of scope.",
             preferences: ProfilePreferencesState(preferredTab: .today, appearancePreference: .system, reviewCadenceDays: 7, localOnlyModeEnabled: true)
         )
     )

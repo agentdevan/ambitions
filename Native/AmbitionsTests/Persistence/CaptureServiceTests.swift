@@ -2,6 +2,24 @@ import XCTest
 @testable import Ambitions
 
 final class CaptureServiceTests: XCTestCase {
+    func testCaptureSourceTypeMatrixMatchesBatch01SurfaceSet() {
+        XCTAssertEqual(
+            CaptureSourceType.allCases.map(\.rawValue),
+            [
+                "today_quick_capture",
+                "notification",
+                "share_extension_text",
+                "share_extension_url",
+                "app_intent"
+            ]
+        )
+        XCTAssertEqual(CaptureSourceType.todayQuickCapture.title, "Today quick capture")
+        XCTAssertEqual(CaptureSourceType.notification.title, "Notification")
+        XCTAssertEqual(CaptureSourceType.shareExtensionText.title, "Share extension text")
+        XCTAssertEqual(CaptureSourceType.shareExtensionURL.title, "Share extension URL")
+        XCTAssertEqual(CaptureSourceType.appIntent.title, "App Intent")
+    }
+
     func testCreateCaptureTrimsTextAndDefaultsToPending() async throws {
         let repository = PreviewCaptureRepository()
         let service = DefaultCaptureService(
@@ -64,7 +82,7 @@ final class CaptureServiceTests: XCTestCase {
     func testCreateCaptureSupportsAllStableCaptureSourceTypes() async throws {
         let repository = PreviewCaptureRepository()
         let now = Date(timeIntervalSince1970: 1_712_692_800)
-        let sources: [CaptureSourceType] = [.todayQuickCapture, .notification, .shareExtensionText, .shareExtensionURL, .appIntent]
+        let sources = CaptureSourceType.allCases
 
         for source in sources {
             let service = DefaultCaptureService(repository: repository, idProvider: { "capture-\(source.rawValue)" })

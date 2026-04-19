@@ -23,6 +23,8 @@ Older docs in this folder are supporting context and do not override the canonic
 
 - [native-build-and-release.md](native-build-and-release.md)
   Native source-of-truth build, test, archive, and CI validation guidance for the current SwiftUI iOS app.
+- [codex/BATCH_REGISTRY.md](codex/BATCH_REGISTRY.md)
+  Current batch status for active Ambitions work.
 - [rc1-native-finish-pass.md](rc1-native-finish-pass.md)
   Historical native polish/release-candidate notes that still describe the current native app direction accurately where not superseded by newer build/release docs.
 - [implementation-backlog.md](implementation-backlog.md)
@@ -38,5 +40,7 @@ Older docs in this folder are supporting context and do not override the canonic
 - The current shipping app is the native SwiftUI target under `Native/Ambitions/`.
 - The native SwiftUI app is the source of truth.
 - The current shipped native surface is local-first and on-device first.
-- Notifications, widgets, Live Activities, and calendar/reminders are available as native device features.
+- Today quick capture persists to the native Captures tab.
+- Notification scheduling and calendar/reminders are wired in the native app.
+- Widget and Live Activity foundations exist in the repo, but they still require separate validation before they should be described as fully verified shipping behavior.
 - Sync, auth, and account deletion backend flows are not current shipping features.

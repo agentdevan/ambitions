@@ -90,18 +90,7 @@ struct CapturesScreen: View {
     }
 
     private func sourceLabel(for sourceType: CaptureSourceType) -> String {
-        switch sourceType {
-        case .todayQuickCapture:
-            return "Today quick capture"
-        case .notification:
-            return "Notification"
-        case .shareExtensionText:
-            return "Share extension text"
-        case .shareExtensionURL:
-            return "Share extension URL"
-        case .appIntent:
-            return "App Intent"
-        }
+        sourceType.title
     }
 
     private var stateKey: String {

@@ -60,7 +60,7 @@ private extension RepositoryBackedProfileService {
 
         return ProfileDashboard(
             title: profileTitle,
-            subtitle: "This build keeps planning data on-device first. Notifications, widgets, Live Activities, and calendar/reminder integrations are available as local device features, while account sync is not implemented.",
+            subtitle: "This build keeps planning data on-device first. Today quick capture and the Captures tab are active in the native app, while account sync is not implemented and external device surfaces still need separate validation.",
             initials: initials.isEmpty ? "U" : initials,
             badges: [
                 "On-device only",
@@ -83,12 +83,12 @@ private extension RepositoryBackedProfileService {
                 SettingsItem(
                     id: "profile-scope",
                     title: "Connected features",
-                    subtitle: "Notifications, widgets, Live Activities, and calendar/reminder hooks are available on device. Account sync is not part of this build yet.",
+                    subtitle: "Notification scheduling and calendar/reminder wiring exist in the native app. Widget and Live Activity foundations are present in the repo, but they still need their own validation pass.",
                     icon: "person.badge.key",
-                    valueLabel: "Local device features"
+                    valueLabel: "Native foundations"
                 )
             ],
-            settingsFooter: "Everything in this version runs from on-device-first persistence. Device integrations stay local, and there is no account sync configuration to manage yet.",
+            settingsFooter: "Everything in this version runs from on-device-first persistence. Capture storage is live in the app today, while widget and Live Activity foundations still need validation and there is no account sync configuration to manage yet.",
             preferences: ProfilePreferencesState(
                 preferredTab: snapshot.appState.preferredTab,
                 appearancePreference: snapshot.appState.appearancePreference,

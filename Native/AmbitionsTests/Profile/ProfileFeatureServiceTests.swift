@@ -2,17 +2,18 @@ import XCTest
 @testable import Ambitions
 
 final class ProfileFeatureServiceTests: XCTestCase {
-    func testDashboardCopyStatesDeviceFeaturesAreLocalAndSyncIsUnavailable() async throws {
+    func testDashboardCopyStatesCurrentNativeTruthWithoutOverclaimingExternalSurfaces() async throws {
         let repositories = try await makeRepositories()
         let service = RepositoryBackedProfileService(repositories: repositories)
 
         let dashboard = try await service.loadProfileDashboard()
 
         XCTAssertTrue(dashboard.subtitle.contains("on-device"))
+        XCTAssertTrue(dashboard.subtitle.contains("capture"))
         XCTAssertTrue(dashboard.subtitle.contains("account sync is not implemented"))
-        XCTAssertTrue(dashboard.settings.contains(where: { $0.id == "profile-scope" && $0.valueLabel == "Local device features" }))
-        XCTAssertTrue(dashboard.settingsFooter.contains("there is no account sync configuration"))
-        XCTAssertFalse(dashboard.badges.contains("Connected later"))
+        XCTAssertTrue(dashboard.settings.contains(where: { $0.id == "profile-scope" && $0.valueLabel == "Native foundations" }))
+        XCTAssertTrue(dashboard.settingsFooter.contains("widget and Live Activity foundations still need validation"))
+        XCTAssertFalse(dashboard.subtitle.contains("are available as local device features"))
     }
 
     func testSavingPreferencesKeepsStorageOnDeviceOnly() async throws {

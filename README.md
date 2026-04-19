@@ -54,6 +54,7 @@ The full reproducible native generation, build, test, UI test, and archive flow 
 ## Docs status
 
 Use [docs/README.md](docs/README.md) as the index for current native docs and retained reference material.
+Batch control status for active work now lives in [docs/codex/BATCH_REGISTRY.md](docs/codex/BATCH_REGISTRY.md).
 
 ## Codex workflow
 
@@ -90,7 +91,9 @@ Local reproduction, including exact build, unit test, UI test, and archive comma
 - Appearance defaults to `System` and can be explicitly switched to Light or Dark from Profile.
 - First-run identity is blank and neutral until the user enters personal data; preview/demo fixtures remain clearly non-production.
 - The current shipped surface is local-first and on-device first.
-- Notifications, widgets, Live Activities, and calendar/reminder integrations are available as native device features.
+- Today quick capture persists into the Captures tab through the native capture service.
+- Notification scheduling and calendar/reminder wiring exist in the native app.
+- Widget and Live Activity foundations exist in the repo, but they still need separate validation and should not be treated as fully verified shipped behavior from this README alone.
 - Account sync is not implemented.
 - The iOS target now includes a complete native app icon set and `PrivacyInfo.xcprivacy`.
 

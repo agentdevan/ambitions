@@ -57,6 +57,32 @@ final class ExternalRoutingTests: XCTestCase {
         XCTAssertEqual(route, .openGoalDetail(goalID: "goal-123"))
     }
 
+    func testNotificationTranslatorRoutesCapturesInboxPayload() {
+        let translator = AppExternalRouteTranslator()
+
+        let route = translator.route(
+            fromNotification: AppNotificationRoutingPayload(
+                action: "open-captures-inbox",
+                values: [:]
+            )
+        )
+
+        XCTAssertEqual(route, .openCapturesInbox)
+    }
+
+    func testWidgetTranslatorRoutesCapturesInboxPayload() {
+        let translator = AppExternalRouteTranslator()
+
+        let route = translator.route(
+            fromWidget: AppWidgetRoutingPayload(
+                action: "noop",
+                values: ["surface": "captures-inbox"]
+            )
+        )
+
+        XCTAssertEqual(route, .openCapturesInbox)
+    }
+
     @MainActor
     func testRouterDispatchesGoalDetailToExistingNavigationModel() {
         let navigation = AppNavigationModel(selectedTab: .today)

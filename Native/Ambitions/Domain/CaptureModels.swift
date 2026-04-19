@@ -1,11 +1,26 @@
 import Foundation
 
-enum CaptureSourceType: String, Codable, Sendable, Equatable {
+enum CaptureSourceType: String, Codable, Sendable, Equatable, CaseIterable {
     case todayQuickCapture = "today_quick_capture"
     case notification = "notification"
     case shareExtensionText = "share_extension_text"
     case shareExtensionURL = "share_extension_url"
     case appIntent = "app_intent"
+
+    var title: String {
+        switch self {
+        case .todayQuickCapture:
+            return "Today quick capture"
+        case .notification:
+            return "Notification"
+        case .shareExtensionText:
+            return "Share extension text"
+        case .shareExtensionURL:
+            return "Share extension URL"
+        case .appIntent:
+            return "App Intent"
+        }
+    }
 }
 
 enum CaptureStatus: String, Codable, Sendable, Equatable {
