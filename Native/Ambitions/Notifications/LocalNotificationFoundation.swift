@@ -130,18 +130,17 @@ struct NextStepLocalNotificationPlanner: Sendable {
     func makeRequest(snapshot: ExternalSurfaceSnapshot?, now: Date) -> LocalNotificationScheduleRequest? {
         _ = now
         guard let next = snapshot?.nextAction else { return nil }
+        var userInfo = AppExternalRouteTranslator()
+            .notificationPayload(for: .openGoalDetail(goalID: next.goalID), action: "open")
+            .values
+        userInfo["stepID"] = next.stepID
 
         return LocalNotificationScheduleRequest(
             identifier: AppNotificationConstants.nextStepRequestID,
             title: "Ambitions reminder",
             body: "Your next step is ready.",
             categoryIdentifier: AppNotificationConstants.nextStepCategoryID,
-            userInfo: [
-                "goalID": next.goalID,
-                "stepID": next.stepID,
-                "surface": "next-step",
-                "tab": AppTab.goals.rawValue,
-            ],
+            userInfo: userInfo,
             timeInterval: scheduleInterval(for: next.display.urgency)
         )
     }

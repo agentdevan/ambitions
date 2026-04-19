@@ -18,6 +18,7 @@ final class AppContainer {
     let calendarRemindersService: any CalendarRemindersServicing
     let actionRouter: any AppActionRouting
     let externalRouter: any AppExternalRouting
+    let externalActionService: any ExternalActionCommandExecuting
 
     init(
         session: AppSession,
@@ -32,7 +33,8 @@ final class AppContainer {
         notificationService: any NotificationServicing,
         calendarRemindersService: any CalendarRemindersServicing,
         actionRouter: any AppActionRouting,
-        externalRouter: any AppExternalRouting
+        externalRouter: any AppExternalRouting,
+        externalActionService: any ExternalActionCommandExecuting
     ) {
         self.session = session
         self.appearancePreference = appearancePreference
@@ -47,5 +49,6 @@ final class AppContainer {
         self.calendarRemindersService = calendarRemindersService
         self.actionRouter = actionRouter
         self.externalRouter = externalRouter
+        self.externalActionService = externalActionService
     }
 }

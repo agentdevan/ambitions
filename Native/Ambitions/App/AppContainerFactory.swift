@@ -86,6 +86,12 @@ enum AppContainerFactory {
         let session = try await startupService.prepareSession(source: configuration.sessionSource)
         let navigation = AppNavigationModel(selectedTab: session.initialTab)
         let externalRouter = DefaultAppExternalRouter(navigation: navigation)
+        let externalActionService = DefaultExternalActionCommandService(
+            todayService: todayService,
+            goalsService: goalsService,
+            captureService: captureService,
+            externalRouter: externalRouter
+        )
         await notificationService.registerCategories()
         await snapshotWriter.refresh(now: .now)
         await notificationService.refreshSchedule(now: .now)
@@ -103,7 +109,8 @@ enum AppContainerFactory {
             notificationService: notificationService,
             calendarRemindersService: calendarRemindersService,
             actionRouter: DefaultAppActionRouter(navigation: navigation),
-            externalRouter: externalRouter
+            externalRouter: externalRouter,
+            externalActionService: externalActionService
         )
     }
 

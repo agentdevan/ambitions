@@ -64,12 +64,12 @@ struct AppExternalRouteTranslator {
     }
 
     func route(fromNotification payload: AppNotificationRoutingPayload) -> AppExternalRoute {
+        if let goalID = payload.values["goalID"], goalID.isEmpty == false {
+            return .openGoalDetail(goalID: goalID)
+        }
         if let tabRaw = payload.values["tab"]?.lowercased(),
            let tab = AppTab(rawValue: tabRaw) {
             return .openTab(tab)
-        }
-        if let goalID = payload.values["goalID"], goalID.isEmpty == false {
-            return .openGoalDetail(goalID: goalID)
         }
         if payload.action == "open-captures-inbox" || payload.values["surface"] == "captures-inbox" {
             return .openCapturesInbox
@@ -78,17 +78,60 @@ struct AppExternalRouteTranslator {
     }
 
     func route(fromWidget payload: AppWidgetRoutingPayload) -> AppExternalRoute {
+        if let goalID = payload.values["goalID"], goalID.isEmpty == false {
+            return .openGoalDetail(goalID: goalID)
+        }
         if let tabRaw = payload.values["tab"]?.lowercased(),
            let tab = AppTab(rawValue: tabRaw) {
             return .openTab(tab)
-        }
-        if let goalID = payload.values["goalID"], goalID.isEmpty == false {
-            return .openGoalDetail(goalID: goalID)
         }
         if payload.action == "open-captures-inbox" || payload.values["surface"] == "captures-inbox" {
             return .openCapturesInbox
         }
         return .genericExternalEntry(kind: "widget.\(payload.action)", payload: payload.values)
+    }
+
+    func deepLinkURL(for route: AppExternalRoute) -> URL? {
+        switch route {
+        case let .openTab(tab):
+            return URL(string: "ambitions://tab/\(tab.rawValue)")
+        case let .openGoalDetail(goalID):
+            return URL(string: "ambitions://goal/\(goalID)")
+        case .openCapturesInbox:
+            return URL(string: "ambitions://captures/inbox")
+        case let .genericExternalEntry(kind, payload):
+            var components = URLComponents()
+            components.scheme = "ambitions"
+            components.host = "external"
+            components.path = "/\(kind)"
+            components.queryItems = payload
+                .sorted { $0.key < $1.key }
+                .map { URLQueryItem(name: $0.key, value: $0.value) }
+            return components.url
+        }
+    }
+
+    func notificationPayload(for route: AppExternalRoute, action: String) -> AppNotificationRoutingPayload {
+        AppNotificationRoutingPayload(action: action, values: routePayload(for: route))
+    }
+
+    func widgetPayload(for route: AppExternalRoute, action: String) -> AppWidgetRoutingPayload {
+        AppWidgetRoutingPayload(action: action, values: routePayload(for: route))
+    }
+
+    func routePayload(for route: AppExternalRoute) -> [String: String] {
+        switch route {
+        case let .openTab(tab):
+            return ["surface": "tab", "tab": tab.rawValue]
+        case let .openGoalDetail(goalID):
+            return ["goalID": goalID, "surface": "goal-detail", "tab": AppTab.goals.rawValue]
+        case .openCapturesInbox:
+            return ["surface": "captures-inbox", "tab": AppTab.captures.rawValue]
+        case let .genericExternalEntry(kind, payload):
+            var values = payload
+            values["surface"] = kind
+            return values
+        }
     }
 
     private func normalizedPayload(

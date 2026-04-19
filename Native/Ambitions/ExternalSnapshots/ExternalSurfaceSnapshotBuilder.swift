@@ -1,11 +1,12 @@
 import Foundation
 
 struct ExternalSurfaceSnapshotBuilder: Sendable {
-    func makeSnapshot(goals: [Goal], now: Date) -> ExternalSurfaceSnapshot {
+    func makeSnapshot(goals: [Goal], captures: [Capture] = [], now: Date) -> ExternalSurfaceSnapshot {
         let nextAction = nextAction(from: goals, now: now)
         return ExternalSurfaceSnapshot(
             generatedAt: Self.iso.string(from: now),
-            nextAction: nextAction
+            nextAction: nextAction,
+            nowState: nowState(goals: goals, captures: captures, nextAction: nextAction)
         )
     }
 
@@ -27,6 +28,69 @@ struct ExternalSurfaceSnapshotBuilder: Sendable {
                 timing: timing(for: step.timing)
             )
         )
+    }
+
+    private func nowState(
+        goals: [Goal],
+        captures: [Capture],
+        nextAction: ExternalSurfaceNextAction?
+    ) -> ExternalSurfaceNowState {
+        let activeGoals = goals.filter { $0.state == .active || $0.state == .paused }
+        let blockedSteps = activeGoals.flatMap { goal in
+            goal.plan?.sections.flatMap(\.steps) ?? []
+        }.filter { $0.state == .blocked }
+        let openCaptures = captures.filter { capture in
+            capture.status != .archived
+        }
+
+        let posture: ExternalSurfaceTodayPosture
+        if activeGoals.isEmpty {
+            posture = .empty
+        } else if blockedSteps.isEmpty == false && nextAction == nil {
+            posture = .waiting
+        } else {
+            posture = .active
+        }
+
+        return ExternalSurfaceNowState(
+            todayPosture: posture,
+            pressureLevel: pressureLevel(activeGoalCount: activeGoals.count, blockedCount: blockedSteps.count),
+            bestNextStep: nextAction.map { ExternalSurfaceActionReference(goalID: $0.goalID, stepID: $0.stepID) },
+            activeFocus: nil,
+            openCaptureUrgency: captureUrgency(openCaptureCount: openCaptures.count),
+            blockerSummary: ExternalSurfaceBlockerSummary(waitingCount: 0, blockedCount: blockedSteps.count),
+            supportedCommands: supportedCommands(hasNextAction: nextAction != nil)
+        )
+    }
+
+    private func pressureLevel(activeGoalCount: Int, blockedCount: Int) -> ExternalSurfacePressureLevel {
+        if activeGoalCount == 0 { return .open }
+        if blockedCount >= 3 || activeGoalCount >= 8 { return .overloaded }
+        if blockedCount > 0 || activeGoalCount >= 5 { return .elevated }
+        return .steady
+    }
+
+    private func captureUrgency(openCaptureCount: Int) -> ExternalSurfaceCaptureUrgency {
+        if openCaptureCount == 0 { return .none }
+        if openCaptureCount >= 5 { return .elevated }
+        return .low
+    }
+
+    private func supportedCommands(hasNextAction: Bool) -> [ExternalSurfaceCommandDescriptor] {
+        var commands = [
+            ExternalSurfaceCommandDescriptor(kind: .openToday, requiresGoalID: false, requiresStepID: false),
+            ExternalSurfaceCommandDescriptor(kind: .openCapturesInbox, requiresGoalID: false, requiresStepID: false),
+        ]
+
+        if hasNextAction {
+            commands = [
+                ExternalSurfaceCommandDescriptor(kind: .complete, requiresGoalID: true, requiresStepID: true),
+                ExternalSurfaceCommandDescriptor(kind: .snooze, requiresGoalID: true, requiresStepID: true),
+                ExternalSurfaceCommandDescriptor(kind: .openGoal, requiresGoalID: true, requiresStepID: false),
+            ] + commands
+        }
+
+        return commands
     }
 
     private func urgency(for timing: GoalTiming, now: Date) -> ExternalSurfaceUrgency {

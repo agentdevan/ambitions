@@ -15,6 +15,9 @@ enum PreviewAppContainerFactory {
         let fixtures = PreviewFixtures.default
         let navigation = AppNavigationModel(selectedTab: fixtures.preferences.preferredTab)
         let externalRouter = DefaultAppExternalRouter(navigation: navigation)
+        let todayService = StubTodayService(experience: todayExperience)
+        let captureService = StubCaptureService(captures: fixtures.captures)
+        let goalsService = StubGoalsService()
         return AppContainer(
             session: AppSession(
                 source: .preview,
@@ -26,16 +29,22 @@ enum PreviewAppContainerFactory {
             ),
             appearancePreference: fixtures.preferences.appearancePreference,
             navigation: navigation,
-            todayService: StubTodayService(experience: todayExperience),
-            captureService: StubCaptureService(captures: fixtures.captures),
-            goalsService: StubGoalsService(),
+            todayService: todayService,
+            captureService: captureService,
+            goalsService: goalsService,
             habitsService: StubHabitsService(dashboard: habitsDashboard),
             insightsService: StubInsightsService(fixtures: fixtures),
             profileService: StubProfileService(fixtures: fixtures),
             notificationService: StubNotificationService(),
             calendarRemindersService: StubCalendarRemindersService(),
             actionRouter: DefaultAppActionRouter(navigation: navigation),
-            externalRouter: externalRouter
+            externalRouter: externalRouter,
+            externalActionService: DefaultExternalActionCommandService(
+                todayService: todayService,
+                goalsService: goalsService,
+                captureService: captureService,
+                externalRouter: externalRouter
+            )
         )
     }
 }

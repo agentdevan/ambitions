@@ -6,15 +6,18 @@ struct ExternalSurfaceSnapshot: Codable, Sendable, Equatable {
     let schemaVersion: String
     let generatedAt: String
     let nextAction: ExternalSurfaceNextAction?
+    let nowState: ExternalSurfaceNowState?
 
     init(
         schemaVersion: String = ExternalSurfaceSnapshot.schemaVersion,
         generatedAt: String,
-        nextAction: ExternalSurfaceNextAction?
+        nextAction: ExternalSurfaceNextAction?,
+        nowState: ExternalSurfaceNowState? = nil
     ) {
         self.schemaVersion = schemaVersion
         self.generatedAt = generatedAt
         self.nextAction = nextAction
+        self.nowState = nowState
     }
 }
 
@@ -63,4 +66,63 @@ enum ExternalSurfaceTiming: String, Codable, Sendable {
     case window
     case cadence
     case untimed
+}
+
+struct ExternalSurfaceNowState: Codable, Sendable, Equatable {
+    let todayPosture: ExternalSurfaceTodayPosture
+    let pressureLevel: ExternalSurfacePressureLevel
+    let bestNextStep: ExternalSurfaceActionReference?
+    let activeFocus: ExternalSurfaceActionReference?
+    let openCaptureUrgency: ExternalSurfaceCaptureUrgency
+    let blockerSummary: ExternalSurfaceBlockerSummary
+    let supportedCommands: [ExternalSurfaceCommandDescriptor]
+}
+
+struct ExternalSurfaceActionReference: Codable, Sendable, Equatable {
+    let goalID: String
+    let stepID: String?
+
+    init(goalID: String, stepID: String? = nil) {
+        self.goalID = goalID
+        self.stepID = stepID
+    }
+}
+
+struct ExternalSurfaceBlockerSummary: Codable, Sendable, Equatable {
+    let waitingCount: Int
+    let blockedCount: Int
+}
+
+struct ExternalSurfaceCommandDescriptor: Codable, Sendable, Equatable {
+    let kind: ExternalSurfaceCommandKind
+    let requiresGoalID: Bool
+    let requiresStepID: Bool
+}
+
+enum ExternalSurfaceTodayPosture: String, Codable, Sendable {
+    case empty
+    case active
+    case waiting
+    case recovery
+}
+
+enum ExternalSurfacePressureLevel: String, Codable, Sendable {
+    case open
+    case steady
+    case elevated
+    case overloaded
+}
+
+enum ExternalSurfaceCaptureUrgency: String, Codable, Sendable {
+    case none
+    case low
+    case elevated
+}
+
+enum ExternalSurfaceCommandKind: String, Codable, Sendable {
+    case complete
+    case snooze
+    case openGoal
+    case openToday
+    case openCapturesInbox
 }

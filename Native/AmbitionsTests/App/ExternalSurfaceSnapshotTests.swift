@@ -24,6 +24,12 @@ final class ExternalSurfaceSnapshotTests: XCTestCase {
         XCTAssertEqual(snapshot.nextAction?.stepID, "step-sensitive")
         XCTAssertEqual(snapshot.nextAction?.display.templateKey, "next_tiny_step")
         XCTAssertEqual(snapshot.nextAction?.display.urgency, .soon)
+        XCTAssertEqual(snapshot.nowState?.bestNextStep?.goalID, "goal-sensitive")
+        XCTAssertEqual(snapshot.nowState?.bestNextStep?.stepID, "step-sensitive")
+        XCTAssertEqual(snapshot.nowState?.todayPosture, .active)
+        XCTAssertEqual(snapshot.nowState?.pressureLevel, .steady)
+        XCTAssertEqual(snapshot.nowState?.openCaptureUrgency, ExternalSurfaceCaptureUrgency.none)
+        XCTAssertEqual(snapshot.nowState?.supportedCommands.map(\.kind), [.complete, .snooze, .openGoal, .openToday, .openCapturesInbox])
         XCTAssertFalse(json.contains(sensitiveStepTitle))
         XCTAssertFalse(json.contains("Very Personal Goal"))
     }
@@ -41,6 +47,18 @@ final class ExternalSurfaceSnapshotTests: XCTestCase {
                     urgency: .normal,
                     timing: .deadline
                 )
+            ),
+            nowState: ExternalSurfaceNowState(
+                todayPosture: .active,
+                pressureLevel: .steady,
+                bestNextStep: ExternalSurfaceActionReference(goalID: "goal-1", stepID: "step-1"),
+                activeFocus: nil,
+                openCaptureUrgency: .none,
+                blockerSummary: ExternalSurfaceBlockerSummary(waitingCount: 0, blockedCount: 0),
+                supportedCommands: [
+                    ExternalSurfaceCommandDescriptor(kind: .complete, requiresGoalID: true, requiresStepID: true),
+                    ExternalSurfaceCommandDescriptor(kind: .snooze, requiresGoalID: true, requiresStepID: true),
+                ]
             )
         )
 
@@ -50,7 +68,7 @@ final class ExternalSurfaceSnapshotTests: XCTestCase {
         XCTAssertEqual(decoded, snapshot)
     }
 
-    func testSnapshotUsesSharedPlanningNextStepSelector() throws {
+    func testSnapshotUsesSharedPlanningNextStepSelectorForNowState() throws {
         let formatter = ISO8601DateFormatter()
         formatter.formatOptions = [.withInternetDateTime]
         let now = try XCTUnwrap(formatter.date(from: "2026-04-15T12:00:00Z"))
@@ -62,6 +80,8 @@ final class ExternalSurfaceSnapshotTests: XCTestCase {
 
         XCTAssertEqual(snapshot.nextAction?.goalID, expected?.goal.id)
         XCTAssertEqual(snapshot.nextAction?.stepID, expected?.step.id)
+        XCTAssertEqual(snapshot.nowState?.bestNextStep?.goalID, expected?.goal.id)
+        XCTAssertEqual(snapshot.nowState?.bestNextStep?.stepID, expected?.step.id)
     }
 
     func testOldSnapshotWithoutEvaluationFieldsStillDecodes() throws {
@@ -72,6 +92,7 @@ final class ExternalSurfaceSnapshotTests: XCTestCase {
         let decoded = try PersistenceCoding.decode(ExternalSurfaceSnapshot.self, from: Data(json.utf8))
 
         XCTAssertNil(decoded.nextAction)
+        XCTAssertNil(decoded.nowState)
     }
 
     func testSnapshotRefreshingDecoratorsRefreshWriterAfterTodayAndGoalsMutations() async throws {

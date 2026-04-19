@@ -83,6 +83,35 @@ final class ExternalRoutingTests: XCTestCase {
         XCTAssertEqual(route, .openCapturesInbox)
     }
 
+    func testRouteTranslatorGeneratesDeterministicDeepLinks() throws {
+        let translator = AppExternalRouteTranslator()
+
+        let todayURL = try XCTUnwrap(translator.deepLinkURL(for: .openTab(.today)))
+        let goalURL = try XCTUnwrap(translator.deepLinkURL(for: .openGoalDetail(goalID: "goal-123")))
+        let capturesURL = try XCTUnwrap(translator.deepLinkURL(for: .openCapturesInbox))
+
+        XCTAssertEqual(todayURL.absoluteString, "ambitions://tab/today")
+        XCTAssertEqual(goalURL.absoluteString, "ambitions://goal/goal-123")
+        XCTAssertEqual(capturesURL.absoluteString, "ambitions://captures/inbox")
+        XCTAssertEqual(translator.route(fromDeepLink: todayURL), .openTab(.today))
+        XCTAssertEqual(translator.route(fromDeepLink: goalURL), .openGoalDetail(goalID: "goal-123"))
+        XCTAssertEqual(translator.route(fromDeepLink: capturesURL), .openCapturesInbox)
+    }
+
+    func testNotificationAndWidgetPayloadsUseSharedRoutePayloadShape() {
+        let translator = AppExternalRouteTranslator()
+        let route = AppExternalRoute.openGoalDetail(goalID: "goal-123")
+
+        let notification = translator.notificationPayload(for: route, action: "open")
+        let widget = translator.widgetPayload(for: route, action: "open")
+
+        XCTAssertEqual(notification.values, widget.values)
+        XCTAssertEqual(notification.values["goalID"], "goal-123")
+        XCTAssertEqual(notification.values["surface"], "goal-detail")
+        XCTAssertEqual(translator.route(fromNotification: notification), route)
+        XCTAssertEqual(translator.route(fromWidget: widget), route)
+    }
+
     @MainActor
     func testRouterDispatchesGoalDetailToExistingNavigationModel() {
         let navigation = AppNavigationModel(selectedTab: .today)

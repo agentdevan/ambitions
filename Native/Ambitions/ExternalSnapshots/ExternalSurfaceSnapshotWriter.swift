@@ -25,8 +25,9 @@ actor ExternalSurfaceSnapshotWriter: ExternalSurfaceSnapshotWriting {
 
     func refresh(now: Date = .now) async {
         do {
-            let goals = try await repositories.goals.listGoals()
-            let snapshot = builder.makeSnapshot(goals: goals, now: now)
+            async let goals = repositories.goals.listGoals()
+            async let captures = repositories.captures.listCaptures()
+            let snapshot = try await builder.makeSnapshot(goals: goals, captures: captures, now: now)
             let data = try PersistenceCoding.encode(snapshot)
             try sink.write(data)
         } catch {
