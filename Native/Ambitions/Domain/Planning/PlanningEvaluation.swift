@@ -62,7 +62,8 @@ struct PlanningEvaluator: Sendable {
     func evaluate(
         draft: GoalDraft,
         plan: GoalPlan,
-        inference: [String: InferenceMetadata] = [:]
+        inference: [String: InferenceMetadata] = [:],
+        pathStateSummary: LifePathStateSummary? = nil
     ) -> PlanningEvaluation {
         let steps = plan.sections.flatMap(\.steps)
         let incompleteSteps = steps.filter { $0.state != .completed && $0.state != .cancelled }.count
@@ -75,15 +76,17 @@ struct PlanningEvaluator: Sendable {
         let pressure = pressureLevel(draft: draft, incompleteSteps: incompleteSteps)
         let effort = effortPosture(draft: draft, pressure: pressure, assumptionsCount: assumptionsCount)
         let fragility = fragilityLevel(assumptionsCount: assumptionsCount, warningCount: warningCount, pressure: pressure, confidenceInput: confidenceInput)
+        let pathRiskCount = pathRiskCount(from: pathStateSummary)
         let score = feasibilityScore(
             pressure: pressure,
             fragility: fragility,
             assumptionsCount: assumptionsCount,
             warningCount: warningCount,
             confidenceInput: confidenceInput,
-            incompleteSteps: incompleteSteps
+            incompleteSteps: incompleteSteps,
+            pathRiskCount: pathRiskCount
         )
-        let feasibility = feasibilityLevel(score: score, pressure: pressure, fragility: fragility)
+        let feasibility = feasibilityLevel(score: score, pressure: pressure, fragility: fragility, pathRiskCount: pathRiskCount)
 
         return PlanningEvaluation(
             feasibilityScore: score,
@@ -98,7 +101,8 @@ struct PlanningEvaluator: Sendable {
                 assumptionsCount: assumptionsCount,
                 warningCount: warningCount,
                 pressure: pressure,
-                fragility: fragility
+                fragility: fragility,
+                pathStateSummary: pathStateSummary
             )
         )
     }
@@ -161,7 +165,8 @@ struct PlanningEvaluator: Sendable {
         assumptionsCount: Int,
         warningCount: Int,
         confidenceInput: Double,
-        incompleteSteps: Int
+        incompleteSteps: Int,
+        pathRiskCount: Int
     ) -> Double {
         let pressurePenalty: Double = {
             switch pressure {
@@ -177,16 +182,17 @@ struct PlanningEvaluator: Sendable {
             case .high: return 0.34
             }
         }()
-        let raw = confidenceInput - pressurePenalty - fragilityPenalty - Double(assumptionsCount) * 0.06 - Double(warningCount) * 0.05 - Double(max(incompleteSteps - 8, 0)) * 0.02
+        let raw = confidenceInput - pressurePenalty - fragilityPenalty - Double(assumptionsCount) * 0.06 - Double(warningCount) * 0.05 - Double(max(incompleteSteps - 8, 0)) * 0.02 - Double(pathRiskCount) * 0.05
         return (raw * 100).rounded() / 100
     }
 
     private func feasibilityLevel(
         score: Double,
         pressure: PlanningPressureLevel,
-        fragility: PlanningFragilityLevel
+        fragility: PlanningFragilityLevel,
+        pathRiskCount: Int
     ) -> PlanningFeasibilityLevel {
-        if score < 0.34 || (pressure == .high && fragility == .high) { return .notBelievable }
+        if score < 0.34 || (pressure == .high && fragility == .high) || pathRiskCount >= 2 { return .notBelievable }
         if score < 0.52 || fragility == .high { return .fragile }
         if score < 0.72 || pressure == .moderate || fragility == .moderate { return .tight }
         return .comfortable
@@ -198,9 +204,17 @@ struct PlanningEvaluator: Sendable {
         assumptionsCount: Int,
         warningCount: Int,
         pressure: PlanningPressureLevel,
-        fragility: PlanningFragilityLevel
+        fragility: PlanningFragilityLevel,
+        pathStateSummary: LifePathStateSummary?
     ) -> [String] {
         var output: [String] = []
+        if let pathStateSummary {
+            if let prerequisite = pathStateSummary.blockedPrerequisites.first {
+                output.append("Path prerequisites are still blocking the current stage: \(prerequisite.title).")
+            } else if let gap = pathStateSummary.readiness.gapSignals.first {
+                output.append("Readiness gaps are still visible for the active path stage: \(gap.title).")
+            }
+        }
         if pressure == .high {
             output.append("Deadline pressure is high for the visible step count.")
         } else if draft.timing.tempo == .untimed {
@@ -218,6 +232,18 @@ struct PlanningEvaluator: Sendable {
             output.append(fragility == .low ? "No major fragility signals are present." : "Fragility is visible and should stay explicit.")
         }
         return output
+    }
+
+    private func pathRiskCount(from pathStateSummary: LifePathStateSummary?) -> Int {
+        guard let pathStateSummary else { return 0 }
+        var count = 0
+        if pathStateSummary.blockedPrerequisites.isEmpty == false {
+            count += 1
+        }
+        if pathStateSummary.readiness.gapCount > 0 {
+            count += 1
+        }
+        return count
     }
 
     private func date(from value: String?) -> Date? {

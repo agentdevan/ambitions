@@ -132,6 +132,61 @@ final class RescheduleEngineTests: XCTestCase {
         XCTAssertEqual(decision.recoverySummary, "Finish the blocking prerequisite before retrying this step.")
     }
 
+    func testPathSummaryCanDriveBlockedDependencyRecovery() {
+        let decision = RescheduleEngine().decide(
+            RescheduleEngineInput(
+                stepID: "step-1",
+                timing: baseTiming,
+                feedbackHistory: [],
+                trigger: .delay,
+                fallbackMicroStep: "Write one paragraph.",
+                now: fixedNow,
+                pathStateSummary: LifePathStateSummary(
+                    orderedStages: [],
+                    activeStageID: "application",
+                    stageMilestones: [:],
+                    blockedPrerequisites: [
+                        LifePathPrerequisite(id: "application-needs-qualification", title: "Application needs qualification", kind: .stage, stageID: "application", requiredStageID: "qualification")
+                    ],
+                    readiness: LifePathReadinessSummary(stageID: "application", gapSignals: [], supportiveSignals: [], isReady: true),
+                    progression: LifePathProgressionSummary(activeStageID: "application", completedStageIDs: [], completedMilestoneIDs: [], nextMilestoneID: nil, totalStageCount: 0, totalMilestoneCount: 0, completedMilestoneCount: 0)
+                )
+            )
+        )
+
+        XCTAssertEqual(decision.waitingState, .blockedByDependency)
+        XCTAssertEqual(decision.recoverySummary, "Finish the blocking prerequisite before retrying this step: Application needs qualification.")
+    }
+
+    func testPathSummaryCanDriveReadinessRecovery() {
+        let decision = RescheduleEngine().decide(
+            RescheduleEngineInput(
+                stepID: "step-1",
+                timing: baseTiming,
+                feedbackHistory: [],
+                trigger: .skip,
+                fallbackMicroStep: "Collect the missing note.",
+                now: fixedNow,
+                pathStateSummary: LifePathStateSummary(
+                    orderedStages: [],
+                    activeStageID: "foundation",
+                    stageMilestones: [:],
+                    blockedPrerequisites: [],
+                    readiness: LifePathReadinessSummary(
+                        stageID: "foundation",
+                        gapSignals: [LifePathSignal(id: "foundation-gap", title: "Baseline still forming", kind: .readiness, isGap: true)],
+                        supportiveSignals: [],
+                        isReady: false
+                    ),
+                    progression: LifePathProgressionSummary(activeStageID: "foundation", completedStageIDs: [], completedMilestoneIDs: [], nextMilestoneID: nil, totalStageCount: 0, totalMilestoneCount: 0, completedMilestoneCount: 0)
+                )
+            )
+        )
+
+        XCTAssertEqual(decision.waitingState, .notReady)
+        XCTAssertEqual(decision.recoverySummary, "Use a readiness-sized pass first: Baseline still forming.")
+    }
+
     func testFragilePlanningSoftensRecovery() {
         let decision = RescheduleEngine().decide(
             RescheduleEngineInput(

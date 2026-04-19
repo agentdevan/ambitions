@@ -676,16 +676,8 @@ private extension RepositoryBackedGoalsService {
         let minutes = context.evidence.compactMap(\.minutesInvested).reduce(0, +)
         let evidenceLabel = context.evidence.isEmpty ? "No evidence logged yet" : "\(minutes) minutes of visible evidence"
         let suggestions = Array(allSteps.filter { $0.state != .completed && $0.state != .cancelled }.prefix(3)).map { makeStepItem(step: $0, goalMode: effectiveMode) }
-        let pathStages = sections.sorted { $0.orderIndex < $1.orderIndex }.map { section in
-            GoalPathStage(
-                id: section.id,
-                title: section.title,
-                summary: section.summary ?? section.kind.rawValue.replacingOccurrences(of: "_", with: " "),
-                stepCountLabel: "\(section.steps.count) step\(section.steps.count == 1 ? "" : "s")",
-                highlight: section.steps.first(where: { $0.state != .completed && $0.state != .cancelled })?.title,
-                state: section.steps.allSatisfy { $0.state == .completed } ? .success : renderState.visualState
-            )
-        }
+        let pathSummary = sourceGoal.map(LifeGraphResolver.pathStateSummary(for:)) ?? sourceDraft.map { LifeGraphResolver.pathStateSummary(for: $0, plan: context.draft?.stagedPlan) } ?? nil
+        let pathStages = makePathStages(pathSummary: pathSummary, sections: sections, renderState: renderState)
         let sectionStates = sections.sorted { $0.orderIndex < $1.orderIndex }.map { section in
             GoalDetailSectionState(
                 id: section.id,
@@ -1751,9 +1743,47 @@ private extension RepositoryBackedGoalsService {
                 now: now,
                 planningEvaluation: goal.plan?.evaluation,
                 stepState: step.state,
-                incompleteDependencyCount: incompleteDependencyCount(in: goal, for: step)
+                incompleteDependencyCount: incompleteDependencyCount(in: goal, for: step),
+                pathStateSummary: LifeGraphResolver.pathStateSummary(for: goal)
             )
         )
+    }
+
+    func makePathStages(
+        pathSummary: LifePathStateSummary?,
+        sections: [PlanSection],
+        renderState: GoalRenderState
+    ) -> [GoalPathStage] {
+        if let pathSummary, pathSummary.orderedStages.isEmpty == false {
+            return pathSummary.orderedStages.map { stage in
+                let milestones = pathSummary.stageMilestones[stage.id] ?? []
+                let isCompleted = pathSummary.progression.completedStageIDs.contains(stage.id)
+                let isActive = pathSummary.activeStageID == stage.id
+                let isBlocked = isActive && (!pathSummary.blockedPrerequisites.isEmpty || pathSummary.readiness.gapCount > 0)
+                let highlight = milestones.first(where: { pathSummary.progression.completedMilestoneIDs.contains($0.id) == false })?.title
+                    ?? (isBlocked ? pathSummary.blockedPrerequisites.first?.title ?? pathSummary.readiness.gapSignals.first?.title : nil)
+
+                return GoalPathStage(
+                    id: stage.id,
+                    title: stage.title,
+                    summary: stage.summary ?? "Path stage",
+                    stepCountLabel: "\(milestones.count) milestone\(milestones.count == 1 ? "" : "s")",
+                    highlight: highlight,
+                    state: isCompleted ? .success : (isBlocked ? .warning : (isActive ? renderState.visualState : .default))
+                )
+            }
+        }
+
+        return sections.sorted { $0.orderIndex < $1.orderIndex }.map { section in
+            GoalPathStage(
+                id: section.id,
+                title: section.title,
+                summary: section.summary ?? section.kind.rawValue.replacingOccurrences(of: "_", with: " "),
+                stepCountLabel: "\(section.steps.count) step\(section.steps.count == 1 ? "" : "s")",
+                highlight: section.steps.first(where: { $0.state != .completed && $0.state != .cancelled })?.title,
+                state: section.steps.allSatisfy { $0.state == .completed } ? .success : renderState.visualState
+            )
+        }
     }
 
     func rescheduleTrigger(for kind: GoalDetailActionKind) -> RescheduleTrigger? {

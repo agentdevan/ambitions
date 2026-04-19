@@ -1035,12 +1035,29 @@ private extension RepositoryBackedTodayService {
             )
         }
 
-        let prompt = goal.plan?.sections
-            .sorted { $0.orderIndex < $1.orderIndex }
+        let pathSummary = LifeGraphResolver.pathStateSummary(for: goal)
+        let pathPrompt: String?
+        if let summary = pathSummary, let prerequisite = summary.blockedPrerequisites.first {
+            pathPrompt = prerequisite.title
+        } else if let summary = pathSummary,
+                  let nextMilestoneID = summary.progression.nextMilestoneID,
+                  let milestoneTitle = goal.lifeGraph?.milestones.first(where: { $0.id == nextMilestoneID })?.title {
+            pathPrompt = milestoneTitle
+        } else if let summary = pathSummary, let gap = summary.readiness.gapSignals.first {
+            pathPrompt = gap.title
+        } else {
+            pathPrompt = nil
+        }
+
+        let sortedSections = goal.plan?.sections.sorted { $0.orderIndex < $1.orderIndex } ?? []
+        let upcomingPrompt = sortedSections
             .first(where: { $0.kind == .upcoming || $0.kind == .review })?
             .steps
             .first?.title
-            ?? goal.plan?.sections.flatMap(\.steps).dropFirst().first?.title
+        let fallbackPrompt = sortedSections.flatMap(\.steps).dropFirst().first?.title
+        let prompt = pathPrompt
+            ?? upcomingPrompt
+            ?? fallbackPrompt
             ?? goal.summary
             ?? "Open the goal and confirm the next milestone."
 
@@ -1281,7 +1298,8 @@ private extension RepositoryBackedTodayService {
                 now: now,
                 planningEvaluation: goal.plan?.evaluation,
                 stepState: step.state,
-                incompleteDependencyCount: incompleteDependencyCount(in: goal, for: step)
+                incompleteDependencyCount: incompleteDependencyCount(in: goal, for: step),
+                pathStateSummary: LifeGraphResolver.pathStateSummary(for: goal)
             )
         )
     }

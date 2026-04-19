@@ -112,7 +112,9 @@ final class PlanningDomainModelsTests: XCTestCase {
                 domains: [LifeDomainAssignment(domain: .career)],
                 roles: [LifeRole(kind: .aspirational, title: "Astronaut candidate")],
                 path: LifePathDescriptor(kind: .careerTrack, title: "Astronaut path"),
-                milestones: [LifeGraphMilestone(id: "screening", title: "Medical screening", summary: nil, targetDate: "2027-04-01", dependencyIDs: [])]
+                stages: [LifePathStage(id: "foundation", title: "Foundation", orderIndex: 0)],
+                prerequisites: [LifePathPrerequisite(id: "application-needs-foundation", title: "Application needs foundation", kind: .stage, stageID: "application", requiredStageID: "foundation")],
+                milestones: [LifeGraphMilestone(id: "screening", title: "Medical screening", summary: nil, targetDate: "2027-04-01", stageID: "foundation", dependencyIDs: [])]
             )
         )
 
@@ -121,6 +123,8 @@ final class PlanningDomainModelsTests: XCTestCase {
         XCTAssertEqual(draft.lifeGraph?.domains.map(\.domain), [.career])
         XCTAssertEqual(draft.lifeGraph?.roles.map(\.title), ["Astronaut candidate"])
         XCTAssertEqual(draft.lifeGraph?.path?.title, "Astronaut path")
+        XCTAssertEqual(draft.lifeGraph?.stages.map(\.id), ["foundation"])
+        XCTAssertEqual(draft.lifeGraph?.prerequisites.map(\.id), ["application-needs-foundation"])
         XCTAssertEqual(draft.lifeGraph?.milestones.map(\.id), ["screening"])
     }
 }
