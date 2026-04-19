@@ -22,6 +22,21 @@ enum CalendarRemindersAuthorizationState: Sendable, Equatable {
             return false
         }
     }
+
+    var canReadCalendarContext: Bool {
+        switch self {
+        case .authorized, .fullAccess:
+            return true
+        case .notDetermined, .denied, .restricted, .writeOnly:
+            return false
+        }
+    }
+}
+
+enum CalendarSchedulePressure: String, Sendable, Equatable {
+    case low
+    case moderate
+    case high
 }
 
 struct NextStepSchedulingSelection: Sendable, Equatable {
@@ -44,9 +59,15 @@ struct CalendarConflictReport: Sendable, Equatable {
     let proposedStartDate: Date
     let proposedEndDate: Date
     let conflicts: [CalendarConflict]
+    let nearbyAvailableWindow: DateInterval?
+    let pressure: CalendarSchedulePressure
 
     var hasConflicts: Bool {
         conflicts.isEmpty == false
+    }
+
+    var hasNearbyRoom: Bool {
+        nearbyAvailableWindow != nil
     }
 }
 
@@ -225,15 +246,16 @@ actor EventKitIntegrationService: CalendarRemindersServicing {
     }
 
     func detectConflicts(for selection: NextStepSchedulingSelection, durationMinutes: Int, now: Date) async -> CalendarConflictReport? {
+        let authorization = await authorizationState(for: .calendarEvents)
+        guard authorization.canReadCalendarContext else {
+            return nil
+        }
         guard let interval = proposedInterval(for: selection, durationMinutes: durationMinutes, now: now) else {
             return nil
         }
-        _ = selection
-        _ = durationMinutes
-        _ = now
-        _ = interval
-        // Canon Batch 5A is write-only. Conflict detection remains deferred to Batch 5B.
-        return nil
+        let analysis = analysisWindow(around: interval)
+        let events = await storeClient.fetchEvents(in: analysis)
+        return makeConflictReport(events: events, proposed: interval)
     }
 
     private func reminderNotes(from selection: NextStepSchedulingSelection) -> String {
@@ -260,6 +282,94 @@ actor EventKitIntegrationService: CalendarRemindersServicing {
             return DateInterval(start: fallbackStart, end: fallbackStart.addingTimeInterval(TimeInterval(effectiveDuration * 60)))
         }
         return DateInterval(start: start, end: end)
+    }
+
+    private func analysisWindow(around proposed: DateInterval) -> DateInterval {
+        let start = proposed.start.addingTimeInterval(-3_600)
+        let end = proposed.start.addingTimeInterval(12 * 3_600)
+        return DateInterval(start: start, end: end)
+    }
+
+    private func makeConflictReport(
+        events: [EventKitCalendarEventSnapshot],
+        proposed: DateInterval
+    ) -> CalendarConflictReport {
+        let sortedEvents = events.sorted { lhs, rhs in
+            if lhs.startDate == rhs.startDate {
+                return lhs.endDate < rhs.endDate
+            }
+            return lhs.startDate < rhs.startDate
+        }
+        let conflicts = sortedEvents
+            .filter { event in
+                event.startDate < proposed.end && event.endDate > proposed.start
+            }
+            .map {
+                CalendarConflict(
+                    title: $0.title,
+                    startDate: $0.startDate,
+                    endDate: $0.endDate,
+                    isAllDay: $0.isAllDay
+                )
+            }
+
+        return CalendarConflictReport(
+            proposedStartDate: proposed.start,
+            proposedEndDate: proposed.end,
+            conflicts: conflicts,
+            nearbyAvailableWindow: nearbyWindow(from: sortedEvents, proposed: proposed),
+            pressure: pressureLevel(for: sortedEvents, proposed: proposed)
+        )
+    }
+
+    private func nearbyWindow(
+        from events: [EventKitCalendarEventSnapshot],
+        proposed: DateInterval
+    ) -> DateInterval? {
+        let duration = proposed.duration
+        var candidateStart = proposed.start
+        let horizon = proposed.start.addingTimeInterval(8 * 3_600)
+
+        for event in events {
+            if event.endDate <= candidateStart {
+                continue
+            }
+            if event.startDate >= horizon {
+                break
+            }
+            let candidateEnd = candidateStart.addingTimeInterval(duration)
+            if candidateEnd <= event.startDate {
+                return DateInterval(start: candidateStart, duration: duration)
+            }
+            if event.startDate < candidateEnd && event.endDate > candidateStart {
+                candidateStart = max(candidateStart, event.endDate)
+            }
+        }
+
+        let fallbackEnd = candidateStart.addingTimeInterval(duration)
+        guard candidateStart > proposed.start, fallbackEnd <= horizon else { return nil }
+        return DateInterval(start: candidateStart, end: fallbackEnd)
+    }
+
+    private func pressureLevel(
+        for events: [EventKitCalendarEventSnapshot],
+        proposed: DateInterval
+    ) -> CalendarSchedulePressure {
+        let window = DateInterval(start: proposed.start, end: proposed.start.addingTimeInterval(8 * 3_600))
+        let occupied = events.reduce(0.0) { partial, event in
+            let overlapStart = max(event.startDate, window.start)
+            let overlapEnd = min(event.endDate, window.end)
+            guard overlapEnd > overlapStart else { return partial }
+            return partial + overlapEnd.timeIntervalSince(overlapStart)
+        }
+        let occupancy = occupied / window.duration
+        if occupancy >= 0.7 {
+            return .high
+        }
+        if occupancy >= 0.4 {
+            return .moderate
+        }
+        return .low
     }
 }
 

@@ -33,8 +33,9 @@ final class EventKitIntegrationServiceTests: XCTestCase {
         XCTAssertTrue(payload?.notes.contains("Goal: Ship CFP proposal") == true)
     }
 
-    func testDetectConflictsStaysDeferredDuringWriteOnlyBatch() async {
+    func testDetectConflictsReturnsOverlappingEventsAndNearbyRoom() async {
         let store = RecordingEventKitStoreClient()
+        await store.setAuthorization(state: .fullAccess, for: .calendarEvents)
         let overlap = EventKitCalendarEventSnapshot(
             title: "Team standup",
             startDate: fixtureSuggestedDate().addingTimeInterval(-300),
@@ -52,7 +53,44 @@ final class EventKitIntegrationServiceTests: XCTestCase {
 
         let report = await service.detectConflicts(for: fixtureSelection(), durationMinutes: 45, now: fixtureNow())
 
+        XCTAssertEqual(report?.conflicts.count, 1)
+        XCTAssertEqual(report?.conflicts.first?.title, "Team standup")
+        XCTAssertEqual(report?.pressure, .low)
+        XCTAssertNotNil(report?.nearbyAvailableWindow)
+    }
+
+    func testDetectConflictsReturnsNilWithoutCalendarReadContext() async {
+        let store = RecordingEventKitStoreClient()
+        await store.setAuthorization(state: .writeOnly, for: .calendarEvents)
+        await store.setEvents([
+            EventKitCalendarEventSnapshot(
+                title: "Team standup",
+                startDate: fixtureSuggestedDate().addingTimeInterval(-300),
+                endDate: fixtureSuggestedDate().addingTimeInterval(1_200),
+                isAllDay: false
+            )
+        ])
+        let service = EventKitIntegrationService(storeClient: store)
+
+        let report = await service.detectConflicts(for: fixtureSelection(), durationMinutes: 45, now: fixtureNow())
+
         XCTAssertNil(report)
+    }
+
+    func testDetectConflictsDerivesHighPressureWhenDayIsPacked() async {
+        let store = RecordingEventKitStoreClient()
+        await store.setAuthorization(state: .fullAccess, for: .calendarEvents)
+        let start = fixtureSuggestedDate()
+        await store.setEvents([
+            EventKitCalendarEventSnapshot(title: "Block 1", startDate: start, endDate: start.addingTimeInterval(2 * 3_600), isAllDay: false),
+            EventKitCalendarEventSnapshot(title: "Block 2", startDate: start.addingTimeInterval(2.25 * 3_600), endDate: start.addingTimeInterval(4.25 * 3_600), isAllDay: false),
+            EventKitCalendarEventSnapshot(title: "Block 3", startDate: start.addingTimeInterval(4.5 * 3_600), endDate: start.addingTimeInterval(6.5 * 3_600), isAllDay: false)
+        ])
+        let service = EventKitIntegrationService(storeClient: store)
+
+        let report = await service.detectConflicts(for: fixtureSelection(), durationMinutes: 45, now: fixtureNow())
+
+        XCTAssertEqual(report?.pressure, .high)
     }
 
     func testCreateCalendarEventFailsWhenStepHasNoSuggestedDate() async {

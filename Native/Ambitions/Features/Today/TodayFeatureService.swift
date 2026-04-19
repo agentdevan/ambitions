@@ -487,10 +487,11 @@ private extension RepositoryBackedTodayService {
                 break
             }
 
+            let conflictReport = await calendarRemindersService.detectConflicts(for: selection, durationMinutes: 45, now: now)
             let event = try await calendarRemindersService.createCalendarEvent(for: selection, durationMinutes: 45, now: now)
             message = TodayInlineMessage(
                 title: "Calendar event created",
-                body: "\"\(event.title)\" was added to Calendar.",
+                body: calendarEventMessageBody(for: event.title, report: conflictReport),
                 state: .success
             )
         case .askForSmallerStep:
@@ -1373,4 +1374,28 @@ private extension RepositoryBackedTodayService {
         formatter.dateFormat = "yyyy-MM-dd"
         return formatter
     }()
+
+    static let shortTime: DateFormatter = {
+        let formatter = DateFormatter()
+        formatter.timeStyle = .short
+        formatter.dateStyle = .none
+        return formatter
+    }()
+
+    func calendarEventMessageBody(for title: String, report: CalendarConflictReport?) -> String {
+        guard let report else {
+            return "\"\(title)\" was added to Calendar."
+        }
+        if report.hasConflicts {
+            let count = report.conflicts.count
+            if let nearby = report.nearbyAvailableWindow {
+                return "\"\(title)\" was added to Calendar. It overlaps \(count) event\(count == 1 ? "" : "s"). A clearer opening starts around \(Self.shortTime.string(from: nearby.start))."
+            }
+            return "\"\(title)\" was added to Calendar. It overlaps \(count) event\(count == 1 ? "" : "s")."
+        }
+        if report.pressure == .high {
+            return "\"\(title)\" was added to Calendar. The day looks tight around that block."
+        }
+        return "\"\(title)\" was added to Calendar."
+    }
 }

@@ -2,7 +2,7 @@ import XCTest
 @testable import Ambitions
 
 final class CalendarReminderActionFlowTests: XCTestCase {
-    func testGoalDetailCreateCalendarEventUsesSelectedStepWithoutConflictCopy() async throws {
+    func testGoalDetailCreateCalendarEventUsesSelectedStepWithConflictAwareCopy() async throws {
         let repositories = try await makeRepositories()
         let calendarService = RecordingCalendarRemindersService()
         let goalsService = RepositoryBackedGoalsService(
@@ -20,6 +20,25 @@ final class CalendarReminderActionFlowTests: XCTestCase {
         let scheduledStep = try XCTUnwrap(goal.plan?.sections.first?.steps.last)
 
         await calendarService.setCalendarAuthorizationResponse(.fullAccess)
+        await calendarService.setConflictReport(
+            CalendarConflictReport(
+                proposedStartDate: fixedNow,
+                proposedEndDate: fixedNow.addingTimeInterval(45 * 60),
+                conflicts: [
+                    CalendarConflict(
+                        title: "Existing overlap",
+                        startDate: fixedNow.addingTimeInterval(-300),
+                        endDate: fixedNow.addingTimeInterval(900),
+                        isAllDay: false
+                    )
+                ],
+                nearbyAvailableWindow: DateInterval(
+                    start: fixedNow.addingTimeInterval(90 * 60),
+                    end: fixedNow.addingTimeInterval(135 * 60)
+                ),
+                pressure: .moderate
+            )
+        )
 
         let response = try await goalsService.performAction(
             GoalDetailActionRequest(
@@ -34,7 +53,9 @@ final class CalendarReminderActionFlowTests: XCTestCase {
         let selection = await calendarService.lastCalendarSelection
 
         XCTAssertEqual(message.title, "Calendar event created")
-        XCTAssertEqual(message.body, "\"\(scheduledStep.title)\" was added to Calendar.")
+        XCTAssertTrue(message.body.contains("\"\(scheduledStep.title)\" was added to Calendar."))
+        XCTAssertTrue(message.body.contains("It overlaps 1 event."))
+        XCTAssertTrue(message.body.contains("A clearer opening starts around"))
         XCTAssertEqual(selection?.goalID, goalID)
         XCTAssertEqual(selection?.stepID, scheduledStep.id)
         XCTAssertEqual(selection?.suggestedDate, suggestedDate(for: scheduledStep))
@@ -116,6 +137,7 @@ private extension CalendarReminderActionFlowTests {
 private actor RecordingCalendarRemindersService: CalendarRemindersServicing {
     private var reminderAuthorizationResponse: CalendarRemindersAuthorizationState = .notDetermined
     private var calendarAuthorizationResponse: CalendarRemindersAuthorizationState = .notDetermined
+    private var conflictReport: CalendarConflictReport?
 
     private(set) var lastReminderSelection: NextStepSchedulingSelection?
     private(set) var lastCalendarSelection: NextStepSchedulingSelection?
@@ -156,7 +178,7 @@ private actor RecordingCalendarRemindersService: CalendarRemindersServicing {
         _ = selection
         _ = durationMinutes
         _ = now
-        return nil
+        return conflictReport
     }
 
     func setReminderAuthorizationResponse(_ state: CalendarRemindersAuthorizationState) {
@@ -165,5 +187,9 @@ private actor RecordingCalendarRemindersService: CalendarRemindersServicing {
 
     func setCalendarAuthorizationResponse(_ state: CalendarRemindersAuthorizationState) {
         calendarAuthorizationResponse = state
+    }
+
+    func setConflictReport(_ report: CalendarConflictReport?) {
+        conflictReport = report
     }
 }
