@@ -11,6 +11,7 @@ struct DeterministicGoalPlanner {
         let lower = title.lowercased()
         let mode = preferredMode ?? inferredMode(for: lower)
         let pace = inferredPace(for: lower)
+        let lifeGraph = inferredLifeGraph(for: lower)
         let blueprint = GoalBlueprint(
             title: title,
             summary: nil,
@@ -22,7 +23,8 @@ struct DeterministicGoalPlanner {
             pace: pace,
             targetDate: inferredTargetDate(for: lower),
             repeatEveryDays: pace == .ongoing ? 7 : nil,
-            source: .manual
+            source: .manual,
+            lifeGraph: lifeGraph
         )
 
         return DeterministicGoalPlanSeed(
@@ -80,6 +82,34 @@ private extension DeterministicGoalPlanner {
 
     func tags(for mode: GoalMode, pace: PlanningPace) -> [String] {
         [mode.rawValue, "deterministic_plan", pace.rawValue]
+    }
+
+    func inferredLifeGraph(for lower: String) -> LifeGraphContext? {
+        if containsAny(in: lower, matches: ["astronaut", "career", "job", "promotion", "business", "company", "freelance"]) {
+            return LifeGraphContext(
+                domains: [LifeDomainAssignment(domain: .career)],
+                roles: [],
+                path: LifePathDescriptor(kind: .careerTrack, title: "Career path"),
+                milestones: []
+            )
+        }
+        if containsAny(in: lower, matches: ["degree", "school", "course", "certification", "study program"]) {
+            return LifeGraphContext(
+                domains: [LifeDomainAssignment(domain: .education)],
+                roles: [],
+                path: LifePathDescriptor(kind: .educationTrack, title: "Education path"),
+                milestones: []
+            )
+        }
+        if containsAny(in: lower, matches: ["workout", "exercise", "health", "fitness", "sleep", "recovery"]) {
+            return LifeGraphContext(
+                domains: [LifeDomainAssignment(domain: .health)],
+                roles: [],
+                path: nil,
+                milestones: []
+            )
+        }
+        return nil
     }
 
     func stepTemplates(for title: String, mode: GoalMode, pace: PlanningPace) -> [PlanStep] {

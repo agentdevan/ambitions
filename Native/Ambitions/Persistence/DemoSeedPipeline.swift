@@ -60,7 +60,8 @@ private extension DemoSeedPipeline {
                     timing: result.draft.timing,
                     planningStrategy: result.draft.planningStrategy,
                     progressStrategy: result.draft.progressStrategy,
-                    plan: result.plan
+                    plan: result.plan,
+                    lifeGraph: result.draft.lifeGraph
                 )
             case let .starterPlanned(result):
                 return Goal(
@@ -82,7 +83,8 @@ private extension DemoSeedPipeline {
                     timing: result.draft.timing,
                     planningStrategy: result.draft.planningStrategy,
                     progressStrategy: result.draft.progressStrategy,
-                    plan: result.plan
+                    plan: result.plan,
+                    lifeGraph: result.draft.lifeGraph
                 )
             case .clarificationRequired, .blocked:
                 return nil

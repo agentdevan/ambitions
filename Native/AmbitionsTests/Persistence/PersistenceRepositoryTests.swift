@@ -17,6 +17,47 @@ final class PersistenceRepositoryTests: XCTestCase {
         XCTAssertEqual(loadedSteps.count, goal.plan?.sections.flatMap(\.steps).count)
     }
 
+    func testGoalRepositoryRoundTripsLifeGraphFromSnapshotStorage() async throws {
+        let repositories = try await makeRepositories()
+        let fixture = try XCTUnwrap(GoalEngineFixtures.fixture(id: "clear-timed-self-goal"))
+        var goal = try XCTUnwrap(goalFromFixture(fixture))
+        goal = Goal(
+            schemaVersion: goal.schemaVersion,
+            id: goal.id,
+            revision: goal.revision,
+            createdAt: goal.createdAt,
+            updatedAt: goal.updatedAt,
+            state: goal.state,
+            title: goal.title,
+            summary: goal.summary,
+            mode: goal.mode,
+            relationshipKind: goal.relationshipKind,
+            actor: goal.actor,
+            parentGoalID: goal.parentGoalID,
+            childGoalIDs: goal.childGoalIDs,
+            supportGoalIDs: goal.supportGoalIDs,
+            tags: goal.tags,
+            timing: goal.timing,
+            planningStrategy: goal.planningStrategy,
+            progressStrategy: goal.progressStrategy,
+            plan: goal.plan,
+            lifeGraph: LifeGraphContext(
+                domains: [LifeDomainAssignment(domain: .career)],
+                roles: [LifeRole(kind: .primary, title: "Founder")],
+                path: LifePathDescriptor(kind: .careerTrack, title: "Company path"),
+                milestones: [LifeGraphMilestone(id: "m1", title: "Launch v1", summary: nil, targetDate: "2026-12-01", dependencyIDs: [])]
+            )
+        )
+
+        try await repositories.goals.saveGoals([goal])
+        let loaded = try await repositories.goals.goal(id: goal.id)
+
+        XCTAssertEqual(loaded?.lifeGraph?.domains.map(\.domain), [.career])
+        XCTAssertEqual(loaded?.lifeGraph?.roles.map(\.title), ["Founder"])
+        XCTAssertEqual(loaded?.lifeGraph?.path?.title, "Company path")
+        XCTAssertEqual(loaded?.lifeGraph?.milestones.map(\.id), ["m1"])
+    }
+
     func testDraftRepositoryPreservesStarterAndBlockedState() async throws {
         let repositories = try await makeRepositories()
         let starterFixture = try XCTUnwrap(GoalEngineFixtures.fixture(id: "exploratory-vague-goal"))

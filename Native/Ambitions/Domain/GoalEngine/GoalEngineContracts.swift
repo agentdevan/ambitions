@@ -439,6 +439,37 @@ struct GoalDraft: Codable, Sendable, Equatable {
     let timing: GoalTiming
     let planningStrategy: PlanningStrategy
     let progressStrategy: ProgressStrategy
+    let lifeGraph: LifeGraphContext?
+
+    init(
+        schemaVersion: String,
+        source: EvidenceSource,
+        title: String,
+        summary: String?,
+        mode: GoalMode,
+        relationshipKind: GoalRelationshipKind,
+        actor: GoalActor,
+        parentGoalID: String?,
+        tags: [String],
+        timing: GoalTiming,
+        planningStrategy: PlanningStrategy,
+        progressStrategy: ProgressStrategy,
+        lifeGraph: LifeGraphContext? = nil
+    ) {
+        self.schemaVersion = schemaVersion
+        self.source = source
+        self.title = title
+        self.summary = summary
+        self.mode = mode
+        self.relationshipKind = relationshipKind
+        self.actor = actor
+        self.parentGoalID = parentGoalID
+        self.tags = tags
+        self.timing = timing
+        self.planningStrategy = planningStrategy
+        self.progressStrategy = progressStrategy
+        self.lifeGraph = lifeGraph
+    }
 }
 
 struct Goal: Codable, Sendable, Equatable {
@@ -461,6 +492,51 @@ struct Goal: Codable, Sendable, Equatable {
     let planningStrategy: PlanningStrategy
     let progressStrategy: ProgressStrategy
     let plan: GoalPlan?
+    let lifeGraph: LifeGraphContext?
+
+    init(
+        schemaVersion: String,
+        id: String,
+        revision: Int,
+        createdAt: String,
+        updatedAt: String,
+        state: GoalLifecycleState,
+        title: String,
+        summary: String?,
+        mode: GoalMode,
+        relationshipKind: GoalRelationshipKind,
+        actor: GoalActor,
+        parentGoalID: String?,
+        childGoalIDs: [String],
+        supportGoalIDs: [String],
+        tags: [String],
+        timing: GoalTiming,
+        planningStrategy: PlanningStrategy,
+        progressStrategy: ProgressStrategy,
+        plan: GoalPlan?,
+        lifeGraph: LifeGraphContext? = nil
+    ) {
+        self.schemaVersion = schemaVersion
+        self.id = id
+        self.revision = revision
+        self.createdAt = createdAt
+        self.updatedAt = updatedAt
+        self.state = state
+        self.title = title
+        self.summary = summary
+        self.mode = mode
+        self.relationshipKind = relationshipKind
+        self.actor = actor
+        self.parentGoalID = parentGoalID
+        self.childGoalIDs = childGoalIDs
+        self.supportGoalIDs = supportGoalIDs
+        self.tags = tags
+        self.timing = timing
+        self.planningStrategy = planningStrategy
+        self.progressStrategy = progressStrategy
+        self.plan = plan
+        self.lifeGraph = lifeGraph
+    }
 }
 
 struct ProgressEvidence: Codable, Sendable, Equatable, Identifiable {

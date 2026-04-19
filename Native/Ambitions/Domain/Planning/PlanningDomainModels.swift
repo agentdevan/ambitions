@@ -71,6 +71,7 @@ struct GoalBlueprint: Codable, Sendable, Equatable {
     let targetDate: String?
     let repeatEveryDays: Int?
     let source: EvidenceSource
+    let lifeGraph: LifeGraphContext?
 
     init(
         title: String,
@@ -83,7 +84,8 @@ struct GoalBlueprint: Codable, Sendable, Equatable {
         pace: PlanningPace = .untimed,
         targetDate: String? = nil,
         repeatEveryDays: Int? = nil,
-        source: EvidenceSource = .manual
+        source: EvidenceSource = .manual,
+        lifeGraph: LifeGraphContext? = nil
     ) {
         self.title = title
         self.summary = summary
@@ -96,6 +98,7 @@ struct GoalBlueprint: Codable, Sendable, Equatable {
         self.targetDate = targetDate
         self.repeatEveryDays = repeatEveryDays
         self.source = source
+        self.lifeGraph = lifeGraph
     }
 
     var timing: GoalTiming {
@@ -132,7 +135,8 @@ struct GoalBlueprint: Codable, Sendable, Equatable {
             tags: tags,
             timing: timing,
             planningStrategy: planningStrategy ?? .blueprintDefault(for: mode, pace: pace),
-            progressStrategy: progressStrategy ?? .blueprintDefault(for: mode, pace: pace)
+            progressStrategy: progressStrategy ?? .blueprintDefault(for: mode, pace: pace),
+            lifeGraph: lifeGraph
         )
     }
 }

@@ -49,6 +49,12 @@ struct GoalEngineIntakeService {
             normalizedLower: signals.normalizedLower,
             referenceNow: referenceNow
         )
+        let lifeGraph = inferLifeGraph(
+            normalizedLower: signals.normalizedLower,
+            mode: mode.value,
+            ownership: ownership.value,
+            roleLabel: actor.roleLabel
+        )
 
         let draft = GoalDraft(
             schemaVersion: goalEngineSchemaVersion,
@@ -58,11 +64,12 @@ struct GoalEngineIntakeService {
             mode: mode.value,
             relationshipKind: relationshipKind.value,
             actor: actor,
-            parentGoalID: relationshipKind.value == .independent ? nil : "support-parent",
+            parentGoalID: nil,
             tags: [mode.value.rawValue, planningStrategyID.value.rawValue, progressStrategyID.value.rawValue, readiness.rawValue],
             timing: timing,
             planningStrategy: createPlanningStrategy(id: planningStrategyID.value),
-            progressStrategy: createProgressStrategy(id: progressStrategyID.value)
+            progressStrategy: createProgressStrategy(id: progressStrategyID.value),
+            lifeGraph: lifeGraph
         )
 
         return ClassificationResult(
@@ -368,6 +375,49 @@ struct GoalEngineIntakeService {
         case .untimed:
             return GoalTiming(tempo: .untimed, timingType: .logWhenDone, startsOn: nil, dueAt: nil, targetBy: nil, windowStart: nil, windowEnd: nil, suggestedNextAt: nil, repeatEveryDays: nil, progressReviewCadenceDays: reviewCadence)
         }
+    }
+
+    private func inferLifeGraph(
+        normalizedLower: String,
+        mode: GoalMode,
+        ownership: ExecutionOwnership,
+        roleLabel: String?
+    ) -> LifeGraphContext? {
+        var domains: [LifeDomainAssignment] = []
+        var roles: [LifeRole] = []
+        var path: LifePathDescriptor?
+
+        if normalizedLower.contains("astronaut") {
+            domains = [LifeDomainAssignment(domain: .career)]
+            path = LifePathDescriptor(kind: .careerTrack, title: "Astronaut path")
+            roles = [LifeRole(kind: .aspirational, title: "Astronaut candidate")]
+        } else if matches(normalizedLower, pattern: #"\bcareer\b|\bjob\b|\bpromotion\b|\bbusiness\b|\bcompany\b|\bfreelance\b"#) {
+            domains = [LifeDomainAssignment(domain: .career)]
+            if mode == .project || mode == .achievement {
+                path = LifePathDescriptor(kind: .careerTrack, title: "Career path")
+            }
+        } else if matches(normalizedLower, pattern: #"\bdegree\b|\bschool\b|\bcourse\b|\bcertification\b"#) {
+            domains = [LifeDomainAssignment(domain: .education)]
+            path = LifePathDescriptor(kind: .educationTrack, title: "Education path")
+        } else if matches(normalizedLower, pattern: #"\bhealth\b|\bfitness\b|\bexercise\b|\bsleep\b|\brecovery\b"#) {
+            domains = [LifeDomainAssignment(domain: .health)]
+        } else if matches(normalizedLower, pattern: #"\bdebt\b|\bbudget\b|\bsave money\b|\bfinance\b"#) {
+            domains = [LifeDomainAssignment(domain: .finance)]
+        }
+
+        if ownership != .self, let roleLabel {
+            roles.append(LifeRole(kind: .supporting, title: roleLabel))
+        }
+
+        guard domains.isEmpty == false || roles.isEmpty == false || path != nil else {
+            return nil
+        }
+
+        return LifeGraphContext(domains: domains, roles: roles, path: path, milestones: [])
+    }
+
+    private func matches(_ text: String, pattern: String) -> Bool {
+        text.range(of: pattern, options: .regularExpression) != nil
     }
 
     private func createPlanningStrategy(id: IntakePlanningStrategyID) -> PlanningStrategy {

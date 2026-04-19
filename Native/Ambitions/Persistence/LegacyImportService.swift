@@ -28,7 +28,8 @@ struct LegacyImportService: LegacyImportServicing {
                 timing: draft.timing,
                 planningStrategy: draft.planningStrategy,
                 progressStrategy: draft.progressStrategy,
-                plan: plan
+                plan: plan,
+                lifeGraph: draft.lifeGraph
             )
         }
 
@@ -110,7 +111,8 @@ private extension LegacyImportService {
             tags: goal.tags,
             timing: timing,
             planningStrategy: defaultPlanningStrategy(for: mode),
-            progressStrategy: defaultProgressStrategy(for: mode, tempo: timing.tempo)
+            progressStrategy: defaultProgressStrategy(for: mode, tempo: timing.tempo),
+            lifeGraph: inferLifeGraph(goal)
         )
     }
 
@@ -231,6 +233,39 @@ private extension LegacyImportService {
         case .outcome:
             return .achievement
         }
+    }
+
+    func inferLifeGraph(_ goal: LegacyGoalRecord) -> LifeGraphContext? {
+        let tags = Set(goal.tags.map { $0.lowercased() })
+        let metadata = goal.metadata
+        var domains: [LifeDomainAssignment] = []
+        var roles: [LifeRole] = []
+        var path: LifePathDescriptor?
+
+        if tags.contains("career") || tags.contains("work") || metadata["lifeDomain"] == "career" {
+            domains.append(LifeDomainAssignment(domain: .career))
+        }
+        if tags.contains("learning") || tags.contains("education") || metadata["lifeDomain"] == "education" {
+            domains.append(LifeDomainAssignment(domain: .education))
+        }
+        if tags.contains("health") || tags.contains("fitness") || tags.contains("recovery") || metadata["lifeDomain"] == "health" {
+            domains.append(LifeDomainAssignment(domain: .health))
+        }
+        if tags.contains("finance") || tags.contains("money") || metadata["lifeDomain"] == "finance" {
+            domains.append(LifeDomainAssignment(domain: .finance))
+        }
+
+        if let role = metadata["lifeRole"], role.isEmpty == false {
+            roles.append(LifeRole(kind: .responsibility, title: role))
+        }
+        if let pathTitle = metadata["pathTitle"], pathTitle.isEmpty == false {
+            path = LifePathDescriptor(kind: domains.first?.domain == .education ? .educationTrack : .careerTrack, title: pathTitle)
+        }
+
+        guard domains.isEmpty == false || roles.isEmpty == false || path != nil else {
+            return nil
+        }
+        return LifeGraphContext(domains: domains, roles: roles, path: path, milestones: [])
     }
 
     func inferActor(_ goal: LegacyGoalRecord) -> GoalActor {

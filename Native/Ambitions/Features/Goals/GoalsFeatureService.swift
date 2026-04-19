@@ -344,7 +344,8 @@ private extension RepositoryBackedGoalsService {
             timing: draft.timing,
             planningStrategy: draft.planningStrategy,
             progressStrategy: draft.progressStrategy,
-            plan: plan
+            plan: plan,
+            lifeGraph: draft.lifeGraph
         )
     }
 
@@ -389,7 +390,8 @@ private extension RepositoryBackedGoalsService {
             pace: PlanningPace(goalTempo: draft.timing.tempo),
             targetDate: draft.timing.dueAt ?? draft.timing.targetBy ?? draft.timing.windowEnd,
             repeatEveryDays: draft.timing.repeatEveryDays,
-            source: draft.source
+            source: draft.source,
+            lifeGraph: draft.lifeGraph
         )
     }
 
@@ -1328,7 +1330,8 @@ private extension RepositoryBackedGoalsService {
                 timing: planned.draft.timing,
                 planningStrategy: planned.draft.planningStrategy,
                 progressStrategy: planned.draft.progressStrategy,
-                plan: planned.plan
+                plan: planned.plan,
+                lifeGraph: planned.draft.lifeGraph
             )
             message = "The clarification unlocked a full plan. Goal Detail is now reading a real persisted path instead of a blocked draft."
         case let .starterPlanned(starter):
@@ -1366,7 +1369,8 @@ private extension RepositoryBackedGoalsService {
                 timing: starter.draft.timing,
                 planningStrategy: starter.draft.planningStrategy,
                 progressStrategy: starter.draft.progressStrategy,
-                plan: starter.plan
+                plan: starter.plan,
+                lifeGraph: starter.draft.lifeGraph
             )
             message = "The clarification unlocked a starter plan. The path stays provisional, but it now writes back as a real native goal."
         }
@@ -1943,7 +1947,8 @@ private extension RepositoryBackedGoalsService {
             timing: goal.timing,
             planningStrategy: goal.planningStrategy,
             progressStrategy: goal.progressStrategy,
-            plan: updatedPlan
+            plan: updatedPlan,
+            lifeGraph: goal.lifeGraph
         )
     }
 
@@ -2022,7 +2027,8 @@ private extension RepositoryBackedGoalsService {
             timing: newGoalTiming,
             planningStrategy: goal.planningStrategy,
             progressStrategy: goal.progressStrategy,
-            plan: updatedPlan
+            plan: updatedPlan,
+            lifeGraph: goal.lifeGraph
         )
     }
 

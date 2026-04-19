@@ -154,7 +154,8 @@ private enum RepositoryMapping {
                 timing: snapshot.timing,
                 planningStrategy: snapshot.planningStrategy,
                 progressStrategy: snapshot.progressStrategy,
-                plan: plan
+                plan: plan,
+                lifeGraph: snapshot.lifeGraph
             )
         }
 
@@ -194,7 +195,8 @@ private enum RepositoryMapping {
             ),
             planningStrategy: try PersistenceCoding.decode(PlanningStrategy.self, from: record.planningStrategyData),
             progressStrategy: try PersistenceCoding.decode(ProgressStrategy.self, from: record.progressStrategyData),
-            plan: plan
+            plan: plan,
+            lifeGraph: nil
         )
     }
 

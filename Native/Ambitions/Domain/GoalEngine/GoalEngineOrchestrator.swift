@@ -108,7 +108,8 @@ struct GoalEngineOrchestrator: GoalOrchestrating {
             tags: classification.draft.tags,
             timing: classification.draft.timing,
             planningStrategy: classification.draft.planningStrategy,
-            progressStrategy: classification.draft.progressStrategy
+            progressStrategy: classification.draft.progressStrategy,
+            lifeGraph: classification.draft.lifeGraph
         )
 
         let contradictions = detectContradictions(classification: classification, context: context)

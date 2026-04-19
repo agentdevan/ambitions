@@ -103,4 +103,24 @@ final class PlanningDomainModelsTests: XCTestCase {
         XCTAssertEqual(decoded, evaluation)
         XCTAssertEqual(decoded.schemaVersion, PlanningEvaluation.schemaVersion)
     }
+
+    func testGoalBlueprintForwardsLifeGraphIntoDraft() {
+        let blueprint = GoalBlueprint(
+            title: "Become mission ready",
+            mode: .project,
+            lifeGraph: LifeGraphContext(
+                domains: [LifeDomainAssignment(domain: .career)],
+                roles: [LifeRole(kind: .aspirational, title: "Astronaut candidate")],
+                path: LifePathDescriptor(kind: .careerTrack, title: "Astronaut path"),
+                milestones: [LifeGraphMilestone(id: "screening", title: "Medical screening", summary: nil, targetDate: "2027-04-01", dependencyIDs: [])]
+            )
+        )
+
+        let draft = blueprint.makeDraft()
+
+        XCTAssertEqual(draft.lifeGraph?.domains.map(\.domain), [.career])
+        XCTAssertEqual(draft.lifeGraph?.roles.map(\.title), ["Astronaut candidate"])
+        XCTAssertEqual(draft.lifeGraph?.path?.title, "Astronaut path")
+        XCTAssertEqual(draft.lifeGraph?.milestones.map(\.id), ["screening"])
+    }
 }

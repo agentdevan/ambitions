@@ -1426,7 +1426,8 @@ private extension RepositoryBackedTodayService {
             timing: goal.timing,
             planningStrategy: goal.planningStrategy,
             progressStrategy: goal.progressStrategy,
-            plan: updatedPlan
+            plan: updatedPlan,
+            lifeGraph: goal.lifeGraph
         )
     }
 

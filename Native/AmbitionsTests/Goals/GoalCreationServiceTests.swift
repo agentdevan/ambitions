@@ -110,6 +110,31 @@ final class GoalCreationServiceTests: XCTestCase {
         XCTAssertTrue(goals.isEmpty)
     }
 
+    func testServiceCreatesConservativeLifeGraphOnlyForClearSignals() async throws {
+        let repositories = try await makeRepositories()
+        let service = RepositoryBackedGoalsService(repositories: repositories)
+
+        let careerResponse = try await service.createGoal(
+            CreateGoalRequest(title: "Become an astronaut"),
+            now: fixedNow
+        )
+        let vagueResponse = try await service.createGoal(
+            CreateGoalRequest(title: "Do better"),
+            now: fixedNow
+        )
+
+        let careerGoalID = try XCTUnwrap(careerResponse.target.goalID)
+        let vagueDraftID = try XCTUnwrap(vagueResponse.target.draftID)
+        let storedCareerGoal = try await repositories.goals.goal(id: careerGoalID)
+        let storedVagueDraft = try await repositories.drafts.draft(id: vagueDraftID)
+        let careerGoal = try XCTUnwrap(storedCareerGoal)
+        let vagueDraft = try XCTUnwrap(storedVagueDraft)
+
+        XCTAssertEqual(careerGoal.lifeGraph?.domains.map(\.domain), [.career])
+        XCTAssertEqual(careerGoal.lifeGraph?.path?.kind, .careerTrack)
+        XCTAssertNil(vagueDraft.draft.lifeGraph)
+    }
+
     func testServiceRejectsEmptyTitle() async throws {
         let repositories = try await makeRepositories()
         let service = RepositoryBackedGoalsService(repositories: repositories)

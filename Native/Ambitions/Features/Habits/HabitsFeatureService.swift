@@ -153,7 +153,8 @@ struct RepositoryBackedHabitsService: HabitsServicing {
                 timing: goal.timing,
                 planningStrategy: goal.planningStrategy,
                 progressStrategy: goal.progressStrategy,
-                plan: goal.plan
+                plan: goal.plan,
+                lifeGraph: goal.lifeGraph
             )
             try await repositories.goals.saveGoals([goal])
             message = HabitInlineMessage(
@@ -590,7 +591,8 @@ private extension RepositoryBackedHabitsService {
             timing: goal.timing,
             planningStrategy: goal.planningStrategy,
             progressStrategy: goal.progressStrategy,
-            plan: updatedPlan
+            plan: updatedPlan,
+            lifeGraph: goal.lifeGraph
         )
     }
 
