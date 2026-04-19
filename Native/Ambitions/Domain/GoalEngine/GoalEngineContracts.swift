@@ -529,6 +529,19 @@ enum GoalFeedbackEffortLevel: String, Codable, Sendable {
     case high
 }
 
+enum GoalHistoryEventKind: String, Codable, Sendable {
+    case completed
+    case skipped
+    case delayed
+    case edited
+    case confused
+    case tooBig = "too_big"
+    case tooEasy = "too_easy"
+    case notRelevant = "not_relevant"
+    case askedForSmallerVersion = "asked_for_smaller_version"
+    case askedWhyThisMatters = "asked_why_this_matters"
+}
+
 enum GoalStepSkipReasonCode: String, Codable, Sendable {
     case avoidance
     case tooHard = "too_hard"
@@ -553,6 +566,8 @@ enum GoalConfusionType: String, Codable, Sendable {
 }
 
 struct GoalFeedbackEventBase: Codable, Sendable, Equatable {
+    static let schemaVersion = "goal_feedback_event.v1"
+
     let id: String
     let stepID: String
     let occurredAt: String
@@ -588,6 +603,66 @@ enum GoalFeedbackEvent: Sendable, Equatable {
     }
 
     var stepID: String { base.stepID }
+
+    var kind: GoalHistoryEventKind {
+        switch self {
+        case .completed:
+            return .completed
+        case .skipped:
+            return .skipped
+        case .delayed:
+            return .delayed
+        case .edited:
+            return .edited
+        case .confused:
+            return .confused
+        case .tooBig:
+            return .tooBig
+        case .tooEasy:
+            return .tooEasy
+        case .notRelevant:
+            return .notRelevant
+        case .askedForSmallerVersion:
+            return .askedForSmallerVersion
+        case .askedWhyThisMatters:
+            return .askedWhyThisMatters
+        }
+    }
+
+    var causeOfDrift: CauseOfDrift? {
+        switch self {
+        case let .skipped(_, reasonCode):
+            switch reasonCode {
+            case .avoidance, .tooHard:
+                return .avoidance
+            case .blockedExternal:
+                return .externalDependency
+            case .notReady:
+                return .notReady
+            case .notNow:
+                return .timingPressure
+            case .forgot:
+                return .missingContext
+            }
+        case .delayed:
+            return .timingPressure
+        case let .confused(_, confusionType):
+            switch confusionType {
+            case .unclearAction, .unclearWhy:
+                return .unclearAction
+            case .missingContext:
+                return .missingContext
+            case .missingEvidence:
+                return .missingEvidence
+            }
+        case .tooBig, .askedForSmallerVersion:
+            return .oversizedStep
+        case .notRelevant:
+            return .wrongPlanFit
+        case .completed, .edited, .tooEasy, .askedWhyThisMatters:
+            return nil
+        }
+    }
 }
 
 struct GoalFeedbackSignalSnapshot: Codable, Sendable, Equatable {
@@ -606,6 +681,10 @@ struct GoalFeedbackSignalSnapshot: Codable, Sendable, Equatable {
     let confidenceScore: Double
     let confidenceTrend: ConfidenceTrend
     let frictionScore: Double
+    let executionMode: ExecutionMode
+    let narrativeMomentum: NarrativeMomentum
+    let primaryCauseOfDrift: CauseOfDrift?
+    let recommendationConfidence: RecommendationConfidence
     let toneDriftDetected: Bool
     let rigidityDetected: Bool
 }
@@ -807,6 +886,20 @@ enum GoalReplanRecommendation: Sendable, Equatable {
             return .suggestMicroStep
         case .suggestAlternatePath:
             return .suggestAlternatePath
+        }
+    }
+
+    var recommendationConfidence: RecommendationConfidence {
+        switch self {
+        case let .noChange(_, _, confidence, _),
+             let .reviseStep(_, _, confidence, _, _, _, _),
+             let .shrinkStep(_, _, confidence, _, _, _),
+             let .relaxTiming(_, _, confidence, _, _, _),
+             let .requestReclarification(_, _, confidence, _, _),
+             let .adjustPlanTone(_, _, confidence, _, _),
+             let .suggestMicroStep(_, _, confidence, _, _),
+             let .suggestAlternatePath(_, _, confidence, _, _, _):
+            return RecommendationConfidence.label(for: confidence)
         }
     }
 }

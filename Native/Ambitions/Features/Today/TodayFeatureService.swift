@@ -4,14 +4,14 @@ import Foundation
 struct RepositoryBackedTodayService: TodayServicing {
     let repositories: AppRepositories
     let adaptationService: GoalEngineAdaptationService
-    let rescheduleEngine: RescheduleEngine
+    let rescheduleEngine: any GoalRescheduling
     let captureService: any CaptureServicing
     let calendarRemindersService: any CalendarRemindersServicing
 
     init(
         repositories: AppRepositories,
         adaptationService: GoalEngineAdaptationService = GoalEngineAdaptationService(),
-        rescheduleEngine: RescheduleEngine = RescheduleEngine(),
+        rescheduleEngine: any GoalRescheduling = RescheduleEngine(),
         captureService: (any CaptureServicing)? = nil,
         calendarRemindersService: (any CalendarRemindersServicing)? = nil
     ) {

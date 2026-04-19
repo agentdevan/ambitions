@@ -18,7 +18,7 @@ struct DefaultCaptureService: CaptureServicing {
 
     init(
         repository: any CaptureRepository,
-        idProvider: @escaping @Sendable () -> String = { "capture-\(UUID().uuidString)" }
+        idProvider: @escaping @Sendable () -> String = { DomainIdentifier.prefixed("capture") }
     ) {
         self.repository = repository
         self.idProvider = idProvider
@@ -30,7 +30,7 @@ struct DefaultCaptureService: CaptureServicing {
             throw CaptureServiceError.emptyRawText
         }
 
-        let timestamp = Self.iso.string(from: now)
+        let timestamp = DomainTimestamp.string(from: now)
         let capture = Capture(
             id: idProvider(),
             createdAt: timestamp,
@@ -66,7 +66,7 @@ private extension DefaultCaptureService {
         let updated = Capture(
             id: existing.id,
             createdAt: existing.createdAt,
-            updatedAt: Self.iso.string(from: now),
+            updatedAt: DomainTimestamp.string(from: now),
             rawText: existing.rawText,
             sourceType: existing.sourceType,
             status: status,
@@ -75,12 +75,6 @@ private extension DefaultCaptureService {
         try await repository.saveCaptures([updated])
         return updated
     }
-
-    static let iso: ISO8601DateFormatter = {
-        let formatter = ISO8601DateFormatter()
-        formatter.formatOptions = [.withInternetDateTime, .withFractionalSeconds]
-        return formatter
-    }()
 }
 
 enum CaptureServiceError: LocalizedError {

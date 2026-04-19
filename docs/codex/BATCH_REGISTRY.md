@@ -23,4 +23,5 @@ It is not the higher-level vision source. For vision, dependency order, and batc
 | --- | --- | --- | --- |
 | 00 | Repo operating system / canon alignment | Completed | Repo truth and control-file alignment completed enough to move Batch 01 into the active slot. |
 | 01 | Pre-Phase-9 cleanup and Captures tab | Completed | Runtime truth cleanup, capture source normalization, captures-tab wiring verification, routing, and targeted tests are completed. |
-| 02 | Delete legacy TypeScript runtime | Active | Remove any remaining legacy TS / Expo / React Native runtime artifacts and stale backend/runtime docs so repo truth becomes fully Swift-native. |
+| 02 | Delete legacy TypeScript runtime | Completed | Legacy TS / Expo runtime artifacts are absent from the live repo, and active docs now describe the project as Swift-native and XcodeGen-driven. |
+| 03 | Canon Batch 1 / Domain foundation | Completed | Shared domain primitives, history/event seam refinements, recovery/orchestration service boundaries, and focused contract tests passed the intended validation set. |

@@ -55,6 +55,7 @@ struct RescheduleDecision: Sendable, Equatable {
     let suggestedTime: String?
     let deferRecommendation: RescheduleDeferRecommendation
     let smallerStep: RescheduleScopeRecommendation?
+    let recommendationConfidence: RecommendationConfidence
     let rationale: String
 
     var timingAdjustment: GoalTimingAdjustment? {
@@ -62,7 +63,7 @@ struct RescheduleDecision: Sendable, Equatable {
     }
 }
 
-struct RescheduleEngine: Sendable {
+struct RescheduleEngine: GoalRescheduling {
     private struct Signals {
         let delayedCount: Int
         let recentMissCount: Int
@@ -93,6 +94,10 @@ struct RescheduleEngine: Sendable {
             suggestedTime: suggestedTime,
             deferRecommendation: deferRecommendation,
             smallerStep: smallerStep,
+            recommendationConfidence: recommendationConfidence(
+                for: deferRecommendation,
+                hasSmallerStep: smallerStep != nil
+            ),
             rationale: rationale
         )
     }
@@ -209,7 +214,7 @@ private extension RescheduleEngine {
         }
 
         let rounded = ceil(shifted.timeIntervalSince1970 / 900) * 900
-        return Self.iso.string(from: Date(timeIntervalSince1970: rounded))
+        return DomainTimestamp.string(from: Date(timeIntervalSince1970: rounded))
     }
 
     func sortedStepEvents(_ events: [GoalFeedbackEvent], stepID: String) -> [GoalFeedbackEvent] {
@@ -240,18 +245,16 @@ private extension RescheduleEngine {
     }
 
     func parseDate(_ value: String) -> Date? {
-        Self.iso.date(from: value) ?? Self.isoFallback.date(from: value)
+        DomainTimestamp.date(from: value)
     }
 
-    static let iso: ISO8601DateFormatter = {
-        let formatter = ISO8601DateFormatter()
-        formatter.formatOptions = [.withInternetDateTime, .withFractionalSeconds]
-        return formatter
-    }()
-
-    static let isoFallback: ISO8601DateFormatter = {
-        let formatter = ISO8601DateFormatter()
-        formatter.formatOptions = [.withInternetDateTime]
-        return formatter
-    }()
+    private func recommendationConfidence(
+        for recommendation: RescheduleDeferRecommendation,
+        hasSmallerStep: Bool
+    ) -> RecommendationConfidence {
+        if recommendation == .laterThisWeek || recommendation == .someday || hasSmallerStep {
+            return .high
+        }
+        return .medium
+    }
 }

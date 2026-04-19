@@ -5,16 +5,16 @@ struct RepositoryBackedGoalsService: GoalsServicing {
     let repositories: AppRepositories
     let planner: DeterministicGoalPlanner
     let adaptationService: GoalEngineAdaptationService
-    let rescheduleEngine: RescheduleEngine
-    let orchestrator: GoalEngineOrchestrator
+    let rescheduleEngine: any GoalRescheduling
+    let orchestrator: any GoalOrchestrating
     let calendarRemindersService: any CalendarRemindersServicing
 
     init(
         repositories: AppRepositories,
         planner: DeterministicGoalPlanner = DeterministicGoalPlanner(),
         adaptationService: GoalEngineAdaptationService = GoalEngineAdaptationService(),
-        rescheduleEngine: RescheduleEngine = RescheduleEngine(),
-        orchestrator: GoalEngineOrchestrator = GoalEngineOrchestrator(),
+        rescheduleEngine: any GoalRescheduling = RescheduleEngine(),
+        orchestrator: any GoalOrchestrating = GoalEngineOrchestrator(),
         calendarRemindersService: (any CalendarRemindersServicing)? = nil
     ) {
         self.repositories = repositories
@@ -41,9 +41,9 @@ struct RepositoryBackedGoalsService: GoalsServicing {
             throw GoalsFeatureError.invalidTitle
         }
 
-        let createdAt = Self.iso.string(from: now)
-        let goalID = "goal-\(UUID().uuidString.lowercased())"
-        let draftID = "draft-\(UUID().uuidString.lowercased())"
+        let createdAt = DomainTimestamp.string(from: now)
+        let goalID = DomainIdentifier.prefixed("goal")
+        let draftID = DomainIdentifier.prefixed("draft")
         let planSeed = planner.plan(for: trimmedTitle, preferredMode: request.mode)
         let draft = planSeed.blueprint.makeDraft()
         let plan = makeInitialPlan(goalID: goalID, seed: planSeed, generatedAt: createdAt)

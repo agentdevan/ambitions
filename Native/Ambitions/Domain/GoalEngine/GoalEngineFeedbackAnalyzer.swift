@@ -65,6 +65,26 @@ struct GoalEngineFeedbackAnalyzer {
         let roundedConfidence = roundToTwoDecimals(confidenceScore)
         let trend: GoalFeedbackSignalSnapshot.ConfidenceTrend =
             roundedConfidence > 0.35 ? .improving : (roundedConfidence < -0.35 ? .eroding : .flat)
+        let primaryCauseOfDrift = primaryCauseOfDrift(in: stepEvents)
+        let executionMode = executionMode(
+            mode: input.currentResult.draft.mode,
+            step: input.selectedStep,
+            frictionScore: frictionScore,
+            confidenceScore: roundedConfidence
+        )
+        let narrativeMomentum = narrativeMomentum(
+            mode: input.currentResult.draft.mode,
+            executionMode: executionMode,
+            confidenceTrend: trend,
+            primaryCauseOfDrift: primaryCauseOfDrift
+        )
+        let recommendationConfidence = RecommendationConfidence.label(
+            for: confidenceLabelScore(
+                confidenceScore: roundedConfidence,
+                frictionScore: frictionScore,
+                causeOfDrift: primaryCauseOfDrift
+            )
+        )
 
         let signals = GoalFeedbackSignalSnapshot(
             avoidanceCount: avoidanceCount,
@@ -76,6 +96,10 @@ struct GoalEngineFeedbackAnalyzer {
             confidenceScore: roundedConfidence,
             confidenceTrend: trend,
             frictionScore: frictionScore,
+            executionMode: executionMode,
+            narrativeMomentum: narrativeMomentum,
+            primaryCauseOfDrift: primaryCauseOfDrift,
+            recommendationConfidence: recommendationConfidence,
             toneDriftDetected: toneDriftDetected,
             rigidityDetected: rigidityDetected
         )
@@ -108,5 +132,73 @@ struct GoalEngineFeedbackAnalyzer {
 
     private func roundToTwoDecimals(_ value: Double) -> Double {
         (value * 100).rounded() / 100
+    }
+
+    private func primaryCauseOfDrift(in events: [GoalFeedbackEvent]) -> CauseOfDrift? {
+        for event in events.reversed() {
+            if let cause = event.causeOfDrift {
+                return cause
+            }
+        }
+        return nil
+    }
+
+    private func executionMode(
+        mode: GoalMode,
+        step: Step,
+        frictionScore: Double,
+        confidenceScore: Double
+    ) -> ExecutionMode {
+        if mode == .recovery || frictionScore >= 0.7 {
+            return .recovery
+        }
+        if mode == .maintenance || step.isRepeatable {
+            return .maintenance
+        }
+        if confidenceScore >= 0.4 && frictionScore < 0.35 {
+            return .sprint
+        }
+        return .standard
+    }
+
+    private func narrativeMomentum(
+        mode: GoalMode,
+        executionMode: ExecutionMode,
+        confidenceTrend: GoalFeedbackSignalSnapshot.ConfidenceTrend,
+        primaryCauseOfDrift: CauseOfDrift?
+    ) -> NarrativeMomentum {
+        if executionMode == .recovery || mode == .recovery {
+            return .recovering
+        }
+        if primaryCauseOfDrift == .externalDependency {
+            return .waiting
+        }
+        if executionMode == .maintenance {
+            return .stabilizing
+        }
+        if confidenceTrend == .improving {
+            return .accelerating
+        }
+        return .building
+    }
+
+    private func confidenceLabelScore(
+        confidenceScore: Double,
+        frictionScore: Double,
+        causeOfDrift: CauseOfDrift?
+    ) -> Double {
+        let normalizedConfidence = min(max((confidenceScore + 1) / 2, 0), 1)
+        let frictionPenalty = min(frictionScore / 3, 1) * 0.2
+        let causeBonus: Double
+        switch causeOfDrift {
+        case .some(.oversizedStep), .some(.timingPressure):
+            causeBonus = 0.08
+        case .some(.externalDependency):
+            causeBonus = 0.04
+        default:
+            causeBonus = 0
+        }
+
+        return min(max(normalizedConfidence + 0.28 + causeBonus - frictionPenalty, 0), 1)
     }
 }

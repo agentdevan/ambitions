@@ -2,7 +2,8 @@ import Foundation
 import SwiftData
 
 private struct StoredGoalFeedbackEvent: Codable, Sendable, Equatable {
-    let kind: String
+    let schemaVersion: String?
+    let kind: GoalHistoryEventKind
     let base: GoalFeedbackEventBase
     let actualDuration: Int?
     let effortLevel: GoalFeedbackEffortLevel?
@@ -18,49 +19,49 @@ private extension StoredGoalFeedbackEvent {
     init(event: GoalFeedbackEvent) {
         switch event {
         case let .completed(base, actualDuration, effortLevel, confidenceDelta):
-            self = StoredGoalFeedbackEvent(kind: "completed", base: base, actualDuration: actualDuration, effortLevel: effortLevel, confidenceDelta: confidenceDelta, reasonCode: nil, timingAdjustment: nil, adjustedDate: nil, rewrittenText: nil, confusionType: nil)
+            self = StoredGoalFeedbackEvent(schemaVersion: GoalFeedbackEventBase.schemaVersion, kind: .completed, base: base, actualDuration: actualDuration, effortLevel: effortLevel, confidenceDelta: confidenceDelta, reasonCode: nil, timingAdjustment: nil, adjustedDate: nil, rewrittenText: nil, confusionType: nil)
         case let .skipped(base, reasonCode):
-            self = StoredGoalFeedbackEvent(kind: "skipped", base: base, actualDuration: nil, effortLevel: nil, confidenceDelta: nil, reasonCode: reasonCode, timingAdjustment: nil, adjustedDate: nil, rewrittenText: nil, confusionType: nil)
+            self = StoredGoalFeedbackEvent(schemaVersion: GoalFeedbackEventBase.schemaVersion, kind: .skipped, base: base, actualDuration: nil, effortLevel: nil, confidenceDelta: nil, reasonCode: reasonCode, timingAdjustment: nil, adjustedDate: nil, rewrittenText: nil, confusionType: nil)
         case let .delayed(base, timingAdjustment, date):
-            self = StoredGoalFeedbackEvent(kind: "delayed", base: base, actualDuration: nil, effortLevel: nil, confidenceDelta: nil, reasonCode: nil, timingAdjustment: timingAdjustment, adjustedDate: date, rewrittenText: nil, confusionType: nil)
+            self = StoredGoalFeedbackEvent(schemaVersion: GoalFeedbackEventBase.schemaVersion, kind: .delayed, base: base, actualDuration: nil, effortLevel: nil, confidenceDelta: nil, reasonCode: nil, timingAdjustment: timingAdjustment, adjustedDate: date, rewrittenText: nil, confusionType: nil)
         case let .edited(base, rewrittenText):
-            self = StoredGoalFeedbackEvent(kind: "edited", base: base, actualDuration: nil, effortLevel: nil, confidenceDelta: nil, reasonCode: nil, timingAdjustment: nil, adjustedDate: nil, rewrittenText: rewrittenText, confusionType: nil)
+            self = StoredGoalFeedbackEvent(schemaVersion: GoalFeedbackEventBase.schemaVersion, kind: .edited, base: base, actualDuration: nil, effortLevel: nil, confidenceDelta: nil, reasonCode: nil, timingAdjustment: nil, adjustedDate: nil, rewrittenText: rewrittenText, confusionType: nil)
         case let .confused(base, confusionType):
-            self = StoredGoalFeedbackEvent(kind: "confused", base: base, actualDuration: nil, effortLevel: nil, confidenceDelta: nil, reasonCode: nil, timingAdjustment: nil, adjustedDate: nil, rewrittenText: nil, confusionType: confusionType)
+            self = StoredGoalFeedbackEvent(schemaVersion: GoalFeedbackEventBase.schemaVersion, kind: .confused, base: base, actualDuration: nil, effortLevel: nil, confidenceDelta: nil, reasonCode: nil, timingAdjustment: nil, adjustedDate: nil, rewrittenText: nil, confusionType: confusionType)
         case let .tooBig(base):
-            self = StoredGoalFeedbackEvent(kind: "too_big", base: base, actualDuration: nil, effortLevel: nil, confidenceDelta: nil, reasonCode: nil, timingAdjustment: nil, adjustedDate: nil, rewrittenText: nil, confusionType: nil)
+            self = StoredGoalFeedbackEvent(schemaVersion: GoalFeedbackEventBase.schemaVersion, kind: .tooBig, base: base, actualDuration: nil, effortLevel: nil, confidenceDelta: nil, reasonCode: nil, timingAdjustment: nil, adjustedDate: nil, rewrittenText: nil, confusionType: nil)
         case let .tooEasy(base):
-            self = StoredGoalFeedbackEvent(kind: "too_easy", base: base, actualDuration: nil, effortLevel: nil, confidenceDelta: nil, reasonCode: nil, timingAdjustment: nil, adjustedDate: nil, rewrittenText: nil, confusionType: nil)
+            self = StoredGoalFeedbackEvent(schemaVersion: GoalFeedbackEventBase.schemaVersion, kind: .tooEasy, base: base, actualDuration: nil, effortLevel: nil, confidenceDelta: nil, reasonCode: nil, timingAdjustment: nil, adjustedDate: nil, rewrittenText: nil, confusionType: nil)
         case let .notRelevant(base):
-            self = StoredGoalFeedbackEvent(kind: "not_relevant", base: base, actualDuration: nil, effortLevel: nil, confidenceDelta: nil, reasonCode: nil, timingAdjustment: nil, adjustedDate: nil, rewrittenText: nil, confusionType: nil)
+            self = StoredGoalFeedbackEvent(schemaVersion: GoalFeedbackEventBase.schemaVersion, kind: .notRelevant, base: base, actualDuration: nil, effortLevel: nil, confidenceDelta: nil, reasonCode: nil, timingAdjustment: nil, adjustedDate: nil, rewrittenText: nil, confusionType: nil)
         case let .askedForSmallerVersion(base):
-            self = StoredGoalFeedbackEvent(kind: "asked_for_smaller_version", base: base, actualDuration: nil, effortLevel: nil, confidenceDelta: nil, reasonCode: nil, timingAdjustment: nil, adjustedDate: nil, rewrittenText: nil, confusionType: nil)
+            self = StoredGoalFeedbackEvent(schemaVersion: GoalFeedbackEventBase.schemaVersion, kind: .askedForSmallerVersion, base: base, actualDuration: nil, effortLevel: nil, confidenceDelta: nil, reasonCode: nil, timingAdjustment: nil, adjustedDate: nil, rewrittenText: nil, confusionType: nil)
         case let .askedWhyThisMatters(base):
-            self = StoredGoalFeedbackEvent(kind: "asked_why_this_matters", base: base, actualDuration: nil, effortLevel: nil, confidenceDelta: nil, reasonCode: nil, timingAdjustment: nil, adjustedDate: nil, rewrittenText: nil, confusionType: nil)
+            self = StoredGoalFeedbackEvent(schemaVersion: GoalFeedbackEventBase.schemaVersion, kind: .askedWhyThisMatters, base: base, actualDuration: nil, effortLevel: nil, confidenceDelta: nil, reasonCode: nil, timingAdjustment: nil, adjustedDate: nil, rewrittenText: nil, confusionType: nil)
         }
     }
 
     var event: GoalFeedbackEvent {
         switch kind {
-        case "completed":
+        case .completed:
             return .completed(base: base, actualDuration: actualDuration, effortLevel: effortLevel ?? .medium, confidenceDelta: confidenceDelta)
-        case "skipped":
+        case .skipped:
             return .skipped(base: base, reasonCode: reasonCode ?? .notNow)
-        case "delayed":
+        case .delayed:
             return .delayed(base: base, timingAdjustment: timingAdjustment ?? .laterToday, date: adjustedDate)
-        case "edited":
+        case .edited:
             return .edited(base: base, rewrittenText: rewrittenText ?? "")
-        case "confused":
+        case .confused:
             return .confused(base: base, confusionType: confusionType ?? .unclearAction)
-        case "too_big":
+        case .tooBig:
             return .tooBig(base: base)
-        case "too_easy":
+        case .tooEasy:
             return .tooEasy(base: base)
-        case "not_relevant":
+        case .notRelevant:
             return .notRelevant(base: base)
-        case "asked_for_smaller_version":
+        case .askedForSmallerVersion:
             return .askedForSmallerVersion(base: base)
-        default:
+        case .askedWhyThisMatters:
             return .askedWhyThisMatters(base: base)
         }
     }
@@ -360,7 +361,7 @@ private enum RepositoryMapping {
             goalID: goalID,
             stepID: stored.base.stepID,
             occurredAt: stored.base.occurredAt,
-            kindRaw: stored.kind,
+            kindRaw: stored.kind.rawValue,
             note: stored.base.note,
             payloadData: try PersistenceCoding.encode(stored)
         )

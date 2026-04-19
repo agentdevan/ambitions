@@ -2,7 +2,7 @@
 
 ## Status
 
-Active
+Completed
 
 ## Goal
 
@@ -41,3 +41,9 @@ Remove any remaining legacy TypeScript / Expo / React Native runtime artifacts a
 - Remaining legacy runtime artifacts are either deleted or explicitly justified as still needed.
 - `README.md` and `docs/README.md` describe the repo as Swift-native / XcodeGen-driven.
 - Native validation surfaces remain intact.
+
+## Completion Note
+
+- Batch 02 is complete as a bounded repo-truth pass.
+- The live repo no longer carries root TypeScript / Expo runtime artifacts, and active docs already describe the project as Swift-native / XcodeGen-driven.
+- Canon Batch 1 / Domain foundation is now the active implementation batch.

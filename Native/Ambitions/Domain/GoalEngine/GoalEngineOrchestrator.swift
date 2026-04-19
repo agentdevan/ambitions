@@ -1,6 +1,6 @@
 import Foundation
 
-struct GoalEngineOrchestrator {
+struct GoalEngineOrchestrator: GoalOrchestrating {
     private let intake: GoalEngineIntakeService
     private let planner: any GoalPlanning
 
