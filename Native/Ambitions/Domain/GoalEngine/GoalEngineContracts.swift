@@ -399,6 +399,31 @@ struct GoalPlan: Codable, Sendable, Equatable {
     let sections: [PlanSection]
     let assumptions: [PlanAssumption]
     let lint: PlanLintResult
+    let evaluation: PlanningEvaluation?
+
+    init(
+        id: String,
+        goalID: String,
+        version: Int,
+        generatedAt: String,
+        summary: String?,
+        strategy: PlanningStrategy,
+        sections: [PlanSection],
+        assumptions: [PlanAssumption],
+        lint: PlanLintResult,
+        evaluation: PlanningEvaluation? = nil
+    ) {
+        self.id = id
+        self.goalID = goalID
+        self.version = version
+        self.generatedAt = generatedAt
+        self.summary = summary
+        self.strategy = strategy
+        self.sections = sections
+        self.assumptions = assumptions
+        self.lint = lint
+        self.evaluation = evaluation
+    }
 }
 
 struct GoalDraft: Codable, Sendable, Equatable {
@@ -706,6 +731,7 @@ enum GoalReplanRecommendationKind: String, Codable, Sendable {
 }
 
 struct GoalEngineOrchestrationContext: Codable, Sendable, Equatable {
+    let goalID: String?
     let actorName: String?
     let preferredPlanningStrictness: GoalPlanningStrictness
     let goalOwnerRole: String?
@@ -718,6 +744,7 @@ struct GoalEngineOrchestrationContext: Codable, Sendable, Equatable {
     let referenceNow: String?
 
     init(
+        goalID: String? = nil,
         actorName: String? = nil,
         preferredPlanningStrictness: GoalPlanningStrictness = .balanced,
         goalOwnerRole: String? = nil,
@@ -729,6 +756,7 @@ struct GoalEngineOrchestrationContext: Codable, Sendable, Equatable {
         clarifiedFields: [MissingFieldKey: String] = [:],
         referenceNow: String? = nil
     ) {
+        self.goalID = goalID
         self.actorName = actorName
         self.preferredPlanningStrictness = preferredPlanningStrictness
         self.goalOwnerRole = goalOwnerRole
@@ -748,6 +776,7 @@ struct GoalEngineOrchestrationInputSnapshot: Codable, Sendable, Equatable {
 }
 
 struct GoalEngineOrchestrationContextSnapshot: Codable, Sendable, Equatable {
+    let goalID: String?
     let actorName: String?
     let preferredPlanningStrictness: GoalPlanningStrictness
     let goalOwnerRole: String?
@@ -786,6 +815,21 @@ struct GoalOrchestrationPlannerMetadata: Codable, Sendable, Equatable {
     let resultKind: GoalPlannerResultKind?
     let blockers: [GoalPlanningBlocker]
     let lint: PlanLintResult?
+    let evaluation: PlanningEvaluation?
+
+    init(
+        attempted: Bool,
+        resultKind: GoalPlannerResultKind?,
+        blockers: [GoalPlanningBlocker],
+        lint: PlanLintResult?,
+        evaluation: PlanningEvaluation? = nil
+    ) {
+        self.attempted = attempted
+        self.resultKind = resultKind
+        self.blockers = blockers
+        self.lint = lint
+        self.evaluation = evaluation
+    }
 }
 
 struct GoalOrchestrationReasoningMetadata: Codable, Sendable, Equatable {

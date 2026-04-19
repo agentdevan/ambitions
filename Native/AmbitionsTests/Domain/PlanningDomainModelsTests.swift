@@ -86,4 +86,21 @@ final class PlanningDomainModelsTests: XCTestCase {
         XCTAssertEqual(step.timing.repeatEveryDays, 7)
         XCTAssertTrue(step.isRepeatable)
     }
+
+    func testPlanningEvaluationUsesStableCodableShape() throws {
+        let evaluation = PlanningEvaluation(
+            feasibilityScore: 0.81,
+            feasibilityLevel: .comfortable,
+            recommendationConfidence: .high,
+            pressureLevel: .low,
+            fragilityLevel: .low,
+            effortPosture: .steady,
+            reasons: ["No major fragility signals are present."]
+        )
+
+        let decoded = try PersistenceCoding.decode(PlanningEvaluation.self, from: PersistenceCoding.encode(evaluation))
+
+        XCTAssertEqual(decoded, evaluation)
+        XCTAssertEqual(decoded.schemaVersion, PlanningEvaluation.schemaVersion)
+    }
 }

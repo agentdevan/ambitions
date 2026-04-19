@@ -12,20 +12,39 @@ final class GoalCreationServiceTests: XCTestCase {
         XCTAssertEqual(first.steps.count, 3)
     }
 
-    func testServiceCreatesGoalAndThreeStepsForExampleGoals() async throws {
-        let examples: [(title: String, expectedMode: GoalMode)] = [
-            ("Learn SwiftUI layout", .learning),
-            ("Research local climbing gyms", .exploration),
-            ("Keep the apartment clean", .maintenance),
-            ("Ship the native goal intake", .project),
-            ("Plan a freelance pivot", .project)
+    func testServiceCreatesCanonicalGoalEnginePlansForExampleGoals() async throws {
+        let examples = [
+            "Learn how to mix vocals",
+            "Submit my conference talk proposal by 2026-05-15",
+            "Keep my stretching routine going weekly",
+            "Launch my business",
+            "Plan a freelance pivot"
         ]
+        let orchestrator = GoalEngineOrchestrator()
 
         let repositories = try await makeRepositories()
         let service = RepositoryBackedGoalsService(repositories: repositories)
 
-        for example in examples {
-            let response = try await service.createGoal(CreateGoalRequest(title: example.title), now: fixedNow)
+        for title in examples {
+            let expected = orchestrator.compileGoal(
+                title,
+                context: GoalEngineOrchestrationContext(referenceNow: DomainTimestamp.string(from: fixedNow))
+            )
+            let expectedMode: GoalMode
+            let expectedKind: GoalOrchestrationResultKind
+            switch expected {
+            case let .planned(result):
+                expectedMode = result.draft.mode
+                expectedKind = .planned
+            case let .starterPlanned(result):
+                expectedMode = result.draft.mode
+                expectedKind = .starterPlanned
+            case .clarificationRequired, .blocked:
+                XCTFail("Example should produce a persisted goal: \(title)")
+                continue
+            }
+
+            let response = try await service.createGoal(CreateGoalRequest(title: title), now: fixedNow)
             let goalID = try XCTUnwrap(response.target.goalID)
             let fetchedGoal = try await repositories.goals.goal(id: goalID)
             let goal = try XCTUnwrap(fetchedGoal)
@@ -34,18 +53,19 @@ final class GoalCreationServiceTests: XCTestCase {
             let draft = try XCTUnwrap(fetchedDraft)
             let steps = try await repositories.goals.listSteps(goalID: goal.id)
 
-            XCTAssertEqual(response.blueprint.title, example.title)
-            XCTAssertEqual(response.blueprint.mode, example.expectedMode)
-            XCTAssertEqual(goal.title, example.title)
-            XCTAssertEqual(goal.mode, example.expectedMode)
-            XCTAssertEqual(goal.plan?.sections.count, 1)
-            XCTAssertEqual(goal.plan?.sections.first?.title, "Initial micro-plan")
-            XCTAssertEqual(steps.count, 3)
-            XCTAssertEqual(steps.map(\.title).count, 3)
-            XCTAssertEqual(Set(steps.map(\.title)).count, 3)
+            XCTAssertEqual(response.blueprint.title, title)
+            XCTAssertEqual(response.blueprint.mode, expectedMode)
+            XCTAssertEqual(response.resultKind, expectedKind)
+            XCTAssertNotNil(response.planningEvaluation)
+            XCTAssertEqual(goal.title, title)
+            XCTAssertEqual(goal.mode, expectedMode)
+            XCTAssertGreaterThanOrEqual(goal.plan?.sections.count ?? 0, 2)
+            XCTAssertNotEqual(goal.plan?.sections.first?.title, "Initial micro-plan")
+            XCTAssertFalse(steps.isEmpty)
+            XCTAssertEqual(Set(steps.map(\.title)).count, steps.count)
             XCTAssertEqual(draft.plannedGoalID, goal.id)
-            XCTAssertEqual(draft.latestResultKind, .planned)
-            XCTAssertEqual(draft.stagedPlan?.sections.first?.steps.count, 3)
+            XCTAssertEqual(draft.latestResultKind, expectedKind)
+            XCTAssertEqual(draft.stagedPlan?.evaluation, response.planningEvaluation)
         }
     }
 
@@ -61,11 +81,33 @@ final class GoalCreationServiceTests: XCTestCase {
         let overview = try await service.loadOverview()
         let createdItem = try XCTUnwrap(overview.items.first(where: { $0.title == "Ship the native create goal flow" }))
 
-        XCTAssertEqual(createdItem.renderState, .active)
-        XCTAssertEqual(createdItem.nextStepHint, "Define scope")
-        XCTAssertEqual(createdItem.statusLabel, "In motion")
+        XCTAssertTrue([GoalRenderState.active, .starter].contains(createdItem.renderState))
+        XCTAssertFalse(createdItem.nextStepHint.isEmpty)
+        XCTAssertEqual(createdItem.statusLabel, createdItem.renderState.title)
         XCTAssertEqual(createdItem.target.goalID?.hasPrefix("goal-"), true)
         XCTAssertEqual(createdItem.target.draftID?.hasPrefix("draft-"), true)
+    }
+
+    func testCreateGoalPersistsClarificationAsDraftOnly() async throws {
+        let repositories = try await makeRepositories()
+        let service = RepositoryBackedGoalsService(repositories: repositories)
+
+        let response = try await service.createGoal(
+            CreateGoalRequest(title: "I don't know where to start"),
+            now: fixedNow
+        )
+
+        XCTAssertEqual(response.resultKind, .clarificationRequired)
+        XCTAssertNil(response.target.goalID)
+
+        let draftID = try XCTUnwrap(response.target.draftID)
+        let maybeStoredDraft = try await repositories.drafts.draft(id: draftID)
+        let storedDraft = try XCTUnwrap(maybeStoredDraft)
+        let goals = try await repositories.goals.listGoals()
+
+        XCTAssertEqual(storedDraft.latestResultKind, .clarificationRequired)
+        XCTAssertNil(storedDraft.plannedGoalID)
+        XCTAssertTrue(goals.isEmpty)
     }
 
     func testServiceRejectsEmptyTitle() async throws {

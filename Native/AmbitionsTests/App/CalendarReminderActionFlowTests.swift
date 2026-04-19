@@ -52,7 +52,7 @@ final class CalendarReminderActionFlowTests: XCTestCase {
         XCTAssertTrue(message.body.contains("1 overlap detected."))
         XCTAssertEqual(selection?.goalID, goalID)
         XCTAssertEqual(selection?.stepID, scheduledStep.id)
-        XCTAssertEqual(selection?.suggestedDate, fixedDateOnly)
+        XCTAssertEqual(selection?.suggestedDate, suggestedDate(for: scheduledStep))
     }
 
     func testTodayCreateCalendarEventUsesDateOnlyStepTiming() async throws {
@@ -95,7 +95,7 @@ final class CalendarReminderActionFlowTests: XCTestCase {
         XCTAssertEqual(selection?.goalID, goalID)
         XCTAssertEqual(selection?.stepID, scheduledStep.id)
         XCTAssertEqual(selection?.stepTitle, scheduledStep.title)
-        XCTAssertEqual(selection?.suggestedDate, fixedDateOnly)
+        XCTAssertEqual(selection?.suggestedDate, suggestedDate(for: scheduledStep))
     }
 }
 
@@ -104,10 +104,16 @@ private extension CalendarReminderActionFlowTests {
         Date(timeIntervalSince1970: 1_712_692_800)
     }
 
-    var fixedDateOnly: Date {
+    func suggestedDate(for step: Step) -> Date? {
+        guard let value = step.timing.suggestedNextAt ?? step.timing.targetBy ?? step.timing.dueAt else {
+            return nil
+        }
+        if let date = DomainTimestamp.date(from: value) {
+            return date
+        }
         let formatter = ISO8601DateFormatter()
         formatter.formatOptions = [.withFullDate]
-        return formatter.date(from: "2026-05-01")!
+        return formatter.date(from: value)
     }
 
     func makeRepositories() async throws -> AppRepositories {

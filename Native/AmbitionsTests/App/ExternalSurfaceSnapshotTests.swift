@@ -50,6 +50,30 @@ final class ExternalSurfaceSnapshotTests: XCTestCase {
         XCTAssertEqual(decoded, snapshot)
     }
 
+    func testSnapshotUsesSharedPlanningNextStepSelector() throws {
+        let formatter = ISO8601DateFormatter()
+        formatter.formatOptions = [.withInternetDateTime]
+        let now = try XCTUnwrap(formatter.date(from: "2026-04-15T12:00:00Z"))
+        let soon = makeGoal(goalID: "goal-soon", goalTitle: "Soon", stepID: "step-soon", stepTitle: "Soon step", dueAt: "2026-04-16T09:00:00Z")
+        let later = makeGoal(goalID: "goal-later", goalTitle: "Later", stepID: "step-later", stepTitle: "Later step", dueAt: "2026-05-01T09:00:00Z")
+
+        let expected = PlanningNextStepSelector().bestSelection(goals: [later, soon], now: now)
+        let snapshot = ExternalSurfaceSnapshotBuilder().makeSnapshot(goals: [later, soon], now: now)
+
+        XCTAssertEqual(snapshot.nextAction?.goalID, expected?.goal.id)
+        XCTAssertEqual(snapshot.nextAction?.stepID, expected?.step.id)
+    }
+
+    func testOldSnapshotWithoutEvaluationFieldsStillDecodes() throws {
+        let json = """
+        {"schemaVersion":"external_surface_snapshot.v1","generatedAt":"2026-04-15T12:00:00Z","nextAction":null}
+        """
+
+        let decoded = try PersistenceCoding.decode(ExternalSurfaceSnapshot.self, from: Data(json.utf8))
+
+        XCTAssertNil(decoded.nextAction)
+    }
+
     func testSnapshotRefreshingDecoratorsRefreshWriterAfterTodayAndGoalsMutations() async throws {
         let writer = RecordingSnapshotWriter()
         let goalsBase = RecordingGoalsService()

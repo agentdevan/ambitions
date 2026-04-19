@@ -12,6 +12,7 @@ final class GoalEnginePlannerTests: XCTestCase {
         XCTAssertTrue(plan.sections.contains(where: { $0.title == "Workstreams" }))
         XCTAssertTrue(plan.sections.flatMap(\.steps).contains(where: { $0.timing.timingType == .targetBy }))
         XCTAssertTrue(plan.sections.flatMap(\.steps).allSatisfy { !$0.actionability.evidenceOfCompletion.isEmpty })
+        XCTAssertNotNil(plan.evaluation)
         XCTAssertTrue(lint.issues.allSatisfy { $0.code != .missingStepEvidence })
     }
 
@@ -82,6 +83,7 @@ final class GoalEnginePlannerTests: XCTestCase {
 
         XCTAssertFalse(assumptions.isEmpty)
         XCTAssertTrue(plan.sections.contains(where: { $0.title == "Starter Focus" }))
+        XCTAssertEqual(plan.evaluation?.effortPosture, .gentle)
     }
 
     func testBlockedPlanningSurfacesReclarificationState() throws {

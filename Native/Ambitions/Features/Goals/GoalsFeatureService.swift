@@ -44,52 +44,83 @@ struct RepositoryBackedGoalsService: GoalsServicing {
         let createdAt = DomainTimestamp.string(from: now)
         let goalID = DomainIdentifier.prefixed("goal")
         let draftID = DomainIdentifier.prefixed("draft")
-        let planSeed = planner.plan(for: trimmedTitle, preferredMode: request.mode)
-        let draft = planSeed.blueprint.makeDraft()
-        let plan = makeInitialPlan(goalID: goalID, seed: planSeed, generatedAt: createdAt)
-        let goal = Goal(
-            schemaVersion: goalEngineSchemaVersion,
-            id: goalID,
-            revision: 1,
-            createdAt: createdAt,
-            updatedAt: createdAt,
-            state: .active,
-            title: draft.title,
-            summary: draft.summary,
-            mode: draft.mode,
-            relationshipKind: draft.relationshipKind,
-            actor: draft.actor,
-            parentGoalID: draft.parentGoalID,
-            childGoalIDs: [],
-            supportGoalIDs: [],
-            tags: draft.tags,
-            timing: draft.timing,
-            planningStrategy: draft.planningStrategy,
-            progressStrategy: draft.progressStrategy,
-            plan: plan
-        )
-        let storedDraft = PersistedGoalDraft(
-            id: draftID,
-            createdAt: createdAt,
-            updatedAt: createdAt,
-            draft: draft,
-            classification: nil,
-            clarification: nil,
-            stagedPlan: plan,
-            assumptions: [],
-            blockers: [],
-            metadata: nil,
-            plannedGoalID: goalID,
-            latestResultKind: .planned
+        let result = orchestrator.compileGoal(
+            trimmedTitle,
+            context: GoalEngineOrchestrationContext(
+                goalID: goalID,
+                referenceNow: createdAt
+            )
         )
 
-        try await repositories.goals.saveGoals([goal])
-        try await repositories.drafts.saveDrafts([storedDraft])
-
-        return CreateGoalResponse(
-            target: GoalRouteTarget(goalID: goalID, draftID: draftID),
-            blueprint: planSeed.blueprint
-        )
+        switch result {
+        case let .planned(planned):
+            let goal = goal(from: planned.draft, plan: planned.plan, id: goalID, createdAt: createdAt, updatedAt: createdAt)
+            let storedDraft = storedDraft(
+                id: draftID,
+                createdAt: createdAt,
+                updatedAt: createdAt,
+                draft: planned.draft,
+                stagedPlan: planned.plan,
+                assumptions: [],
+                blockers: [],
+                metadata: planned.metadata,
+                plannedGoalID: goalID,
+                resultKind: .planned
+            )
+            try await repositories.goals.saveGoals([goal])
+            try await repositories.drafts.saveDrafts([storedDraft])
+            return CreateGoalResponse(target: GoalRouteTarget(goalID: goalID, draftID: draftID), blueprint: blueprint(from: planned.draft), resultKind: .planned, planningEvaluation: planned.plan.evaluation)
+        case let .starterPlanned(starter):
+            let goal = goal(from: starter.draft, plan: starter.plan, id: goalID, createdAt: createdAt, updatedAt: createdAt)
+            let storedDraft = storedDraft(
+                id: draftID,
+                createdAt: createdAt,
+                updatedAt: createdAt,
+                draft: starter.draft,
+                clarification: starter.clarification,
+                stagedPlan: starter.plan,
+                assumptions: starter.assumptions,
+                blockers: [],
+                metadata: starter.metadata,
+                plannedGoalID: goalID,
+                resultKind: .starterPlanned
+            )
+            try await repositories.goals.saveGoals([goal])
+            try await repositories.drafts.saveDrafts([storedDraft])
+            return CreateGoalResponse(target: GoalRouteTarget(goalID: goalID, draftID: draftID), blueprint: blueprint(from: starter.draft), resultKind: .starterPlanned, planningEvaluation: starter.plan.evaluation)
+        case let .clarificationRequired(required):
+            let storedDraft = storedDraft(
+                id: draftID,
+                createdAt: createdAt,
+                updatedAt: createdAt,
+                draft: required.draft,
+                clarification: required.clarification,
+                stagedPlan: nil,
+                assumptions: required.metadata.reasoning.assumptions,
+                blockers: [],
+                metadata: required.metadata,
+                plannedGoalID: nil,
+                resultKind: .clarificationRequired
+            )
+            try await repositories.drafts.saveDrafts([storedDraft])
+            return CreateGoalResponse(target: GoalRouteTarget(draftID: draftID), blueprint: blueprint(from: required.draft), resultKind: .clarificationRequired, planningEvaluation: nil)
+        case let .blocked(blocked):
+            let storedDraft = storedDraft(
+                id: draftID,
+                createdAt: createdAt,
+                updatedAt: createdAt,
+                draft: blocked.draft,
+                clarification: blocked.clarification,
+                stagedPlan: nil,
+                assumptions: blocked.metadata.reasoning.assumptions,
+                blockers: blocked.blockers,
+                metadata: blocked.metadata,
+                plannedGoalID: nil,
+                resultKind: .blocked
+            )
+            try await repositories.drafts.saveDrafts([storedDraft])
+            return CreateGoalResponse(target: GoalRouteTarget(draftID: draftID), blueprint: blueprint(from: blocked.draft), resultKind: .blocked, planningEvaluation: nil)
+        }
     }
 
     func performAction(_ request: GoalDetailActionRequest, now: Date) async throws -> GoalDetailActionResponse {
@@ -285,6 +316,81 @@ private extension RepositoryBackedGoalsService {
             }
             return goal?.actor.ownership != .self || draft?.draft.actor.ownership != .self
         }
+    }
+
+    func goal(
+        from draft: GoalDraft,
+        plan: GoalPlan,
+        id: String,
+        createdAt: String,
+        updatedAt: String
+    ) -> Goal {
+        Goal(
+            schemaVersion: goalEngineSchemaVersion,
+            id: id,
+            revision: 1,
+            createdAt: createdAt,
+            updatedAt: updatedAt,
+            state: .active,
+            title: draft.title,
+            summary: draft.summary,
+            mode: draft.mode,
+            relationshipKind: draft.relationshipKind,
+            actor: draft.actor,
+            parentGoalID: draft.parentGoalID,
+            childGoalIDs: [],
+            supportGoalIDs: [],
+            tags: draft.tags,
+            timing: draft.timing,
+            planningStrategy: draft.planningStrategy,
+            progressStrategy: draft.progressStrategy,
+            plan: plan
+        )
+    }
+
+    func storedDraft(
+        id: String,
+        createdAt: String,
+        updatedAt: String,
+        draft: GoalDraft,
+        clarification: GoalOrchestrationClarification? = nil,
+        stagedPlan: GoalPlan?,
+        assumptions: [PlanAssumption],
+        blockers: [GoalPlanningBlocker],
+        metadata: GoalOrchestrationMetadata?,
+        plannedGoalID: String?,
+        resultKind: GoalOrchestrationResultKind
+    ) -> PersistedGoalDraft {
+        PersistedGoalDraft(
+            id: id,
+            createdAt: createdAt,
+            updatedAt: updatedAt,
+            draft: draft,
+            classification: nil,
+            clarification: clarification,
+            stagedPlan: stagedPlan,
+            assumptions: assumptions,
+            blockers: blockers,
+            metadata: metadata,
+            plannedGoalID: plannedGoalID,
+            latestResultKind: resultKind
+        )
+    }
+
+    func blueprint(from draft: GoalDraft) -> GoalBlueprint {
+        GoalBlueprint(
+            title: draft.title,
+            summary: draft.summary,
+            mode: draft.mode,
+            relationshipKind: draft.relationshipKind,
+            actor: draft.actor,
+            parentGoalID: draft.parentGoalID,
+            tags: draft.tags,
+            pace: PlanningPace(goalTempo: draft.timing.tempo),
+            targetDate: draft.timing.dueAt ?? draft.timing.targetBy ?? draft.timing.windowEnd,
+            repeatEveryDays: draft.timing.repeatEveryDays,
+            source: draft.source
+        )
     }
 
     func makeInitialPlan(goalID: String, seed: DeterministicGoalPlanSeed, generatedAt: String) -> GoalPlan {
@@ -1137,6 +1243,7 @@ private extension RepositoryBackedGoalsService {
         let result = orchestrator.compileGoal(
             existingDraft.metadata?.input.rawInput ?? existingDraft.draft.title,
             context: GoalEngineOrchestrationContext(
+                goalID: previousContext?.goalID ?? existingDraft.plannedGoalID,
                 actorName: previousContext?.actorName,
                 preferredPlanningStrictness: previousContext?.preferredPlanningStrictness ?? .balanced,
                 goalOwnerRole: previousContext?.goalOwnerRole,

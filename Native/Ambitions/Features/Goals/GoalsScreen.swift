@@ -124,9 +124,21 @@ struct GoalsScreen: View {
         .sheet(isPresented: $isCreateGoalPresented) {
             NavigationStack {
                 CreateGoalScreen { response in
+                    let body: String = {
+                        switch response.resultKind {
+                        case .planned:
+                            return "\(response.blueprint.title) is now in the portfolio with a canonical plan."
+                        case .starterPlanned:
+                            return "\(response.blueprint.title) is now in the portfolio with a starter plan."
+                        case .clarificationRequired:
+                            return "\(response.blueprint.title) needs one clarification before Ambitions treats it as a live goal."
+                        case .blocked:
+                            return "\(response.blueprint.title) was saved as a blocked draft with the missing constraint visible."
+                        }
+                    }()
                     creationMessage = GoalDetailInlineMessage(
                         title: "Goal created",
-                        body: "\(response.blueprint.title) is now in the portfolio with its first 3 steps.",
+                        body: body,
                         state: .success
                     )
                     Task {

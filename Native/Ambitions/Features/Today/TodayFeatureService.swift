@@ -101,10 +101,9 @@ private extension RepositoryBackedTodayService {
 
     func makeExperience(snapshot: Snapshot, userDisplayName: String, now: Date) -> TodayExperience {
         let activeGoals = snapshot.goals.filter { $0.state == .active || $0.state == .paused }
+        let rankedSelections = PlanningNextStepSelector().rankedSelections(goals: activeGoals, now: now)
         let allSteps = activeGoals.flatMap { $0.plan?.sections.flatMap(\.steps) ?? [] }
-        let actionableSteps = allSteps
-            .filter { $0.state != .completed && $0.state != .cancelled }
-            .sorted(by: stepSortDescriptor(goals: activeGoals))
+        let actionableSteps = rankedSelections.map(\.step)
 
         let draftsByGoalID: [String: PersistedGoalDraft] = Dictionary(uniqueKeysWithValues: snapshot.drafts.compactMap { draft in
             guard let plannedGoalID = draft.plannedGoalID else { return nil }
@@ -1082,16 +1081,6 @@ private extension RepositoryBackedTodayService {
             return "Relevance check: \(base.note ?? "Something drifted.")"
         case .completed, .edited, .tooBig, .tooEasy, .askedForSmallerVersion, .askedWhyThisMatters:
             return "Signal captured from Today."
-        }
-    }
-
-    func stepSortDescriptor(goals: [Goal]) -> (Step, Step) -> Bool {
-        { lhs, rhs in
-            let lhsGoal = goals.first(where: { $0.plan?.sections.flatMap(\.steps).contains(where: { $0.id == lhs.id }) == true })
-            let rhsGoal = goals.first(where: { $0.plan?.sections.flatMap(\.steps).contains(where: { $0.id == rhs.id }) == true })
-            let lhsKey = timingSortKey(for: lhs.timing, goalMode: lhsGoal?.mode)
-            let rhsKey = timingSortKey(for: rhs.timing, goalMode: rhsGoal?.mode)
-            return lhsKey == rhsKey ? lhs.title < rhs.title : lhsKey < rhsKey
         }
     }
 

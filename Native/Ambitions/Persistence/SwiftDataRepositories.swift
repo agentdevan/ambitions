@@ -223,7 +223,8 @@ private enum RepositoryMapping {
                 strategy: snapshot.strategy,
                 sections: sections,
                 assumptions: snapshot.assumptions,
-                lint: snapshot.lint
+                lint: snapshot.lint,
+                evaluation: snapshot.evaluation
             )
         }
 

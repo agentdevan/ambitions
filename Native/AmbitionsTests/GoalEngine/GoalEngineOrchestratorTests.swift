@@ -12,6 +12,7 @@ final class GoalEngineOrchestratorTests: XCTestCase {
         XCTAssertEqual(result.metadata.input.normalizedInput, "Submit my conference talk proposal by 2026-05-15")
         XCTAssertEqual(result.metadata.inference.mode.value, result.draft.mode)
         XCTAssertEqual(result.draft.timing.tempo, .deadlineBased)
+        XCTAssertEqual(result.metadata.planner.evaluation, result.plan.evaluation)
     }
 
     func testUntimedLearningGoalCompilesIntoPlanShapedResult() throws {
@@ -21,9 +22,11 @@ final class GoalEngineOrchestratorTests: XCTestCase {
         case let .planned(result):
             XCTAssertEqual(result.metadata.inference.tempo.value, result.draft.timing.tempo)
             XCTAssertEqual(result.draft.mode, .learning)
+            XCTAssertEqual(result.metadata.planner.evaluation, result.plan.evaluation)
         case let .starterPlanned(result):
             XCTAssertEqual(result.metadata.inference.tempo.value, result.draft.timing.tempo)
             XCTAssertEqual(result.draft.mode, .learning)
+            XCTAssertEqual(result.metadata.planner.evaluation, result.plan.evaluation)
         default:
             XCTFail("Expected planned or starter planned result.")
         }

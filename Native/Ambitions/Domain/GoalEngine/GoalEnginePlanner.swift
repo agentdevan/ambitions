@@ -31,6 +31,7 @@ private struct PlannerStepDraft {
 struct GoalPlanner: GoalPlanning {
     private let linter = GoalEnginePlanLinter()
     private let rewriter = GoalEngineStepRewriter()
+    private let evaluator = PlanningEvaluator()
 
     func plan(input: GoalPlannerInput, options: GoalPlannerOptions = .init()) -> GoalPlannerResult {
         let now = options.now ?? "2026-04-14T12:00:00Z"
@@ -83,6 +84,22 @@ struct GoalPlanner: GoalPlanning {
         )
 
         let lint = linter.lint(plan: plan, goal: input.draft)
+        let evaluation = evaluator.evaluate(
+            draft: input.draft,
+            plan: plan,
+            inference: input.classification.map { classification in
+                [
+                    "mode": classification.mode.metadata,
+                    "tempo": classification.tempo.metadata,
+                    "relationshipKind": classification.relationshipKind.metadata,
+                    "executionOwnership": classification.executionOwnership.metadata,
+                    "userRole": classification.userRole.metadata,
+                    "strictDeadlinesAppropriate": classification.strictDeadlinesAppropriate.metadata,
+                    "planningStrategyID": classification.planningStrategyID.metadata,
+                    "progressStrategyID": classification.progressStrategyID.metadata,
+                ]
+            } ?? [:]
+        )
         plan = GoalPlan(
             id: plan.id,
             goalID: plan.goalID,
@@ -92,7 +109,8 @@ struct GoalPlanner: GoalPlanning {
             strategy: plan.strategy,
             sections: plan.sections,
             assumptions: plan.assumptions,
-            lint: lint
+            lint: lint,
+            evaluation: evaluation
         )
 
         if assumptions.isEmpty {

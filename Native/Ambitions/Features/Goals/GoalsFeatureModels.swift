@@ -124,6 +124,20 @@ struct CreateGoalRequest: Sendable {
 struct CreateGoalResponse: Sendable {
     let target: GoalRouteTarget
     let blueprint: GoalBlueprint
+    let resultKind: GoalOrchestrationResultKind
+    let planningEvaluation: PlanningEvaluation?
+
+    init(
+        target: GoalRouteTarget,
+        blueprint: GoalBlueprint,
+        resultKind: GoalOrchestrationResultKind = .planned,
+        planningEvaluation: PlanningEvaluation? = nil
+    ) {
+        self.target = target
+        self.blueprint = blueprint
+        self.resultKind = resultKind
+        self.planningEvaluation = planningEvaluation
+    }
 }
 
 struct GoalDetailActionState: Identifiable, Sendable {

@@ -43,7 +43,7 @@ struct GoalEngineOrchestrator: GoalOrchestrating {
                     missingFields: prepared.clarification.missingFields
                 )
             ),
-            options: GoalPlannerOptions(now: normalizedContext.referenceNow)
+            options: GoalPlannerOptions(goalID: normalizedContext.goalID, now: normalizedContext.referenceNow)
         )
         let metadata = buildMetadata(classification: prepared.classification, clarification: prepared.clarification, context: normalizedContext, plannerResult: plannerResult)
 
@@ -63,6 +63,7 @@ struct GoalEngineOrchestrator: GoalOrchestrating {
             return trimmed.isEmpty ? nil : (key.rawValue, trimmed)
         })
         return GoalEngineOrchestrationContextSnapshot(
+            goalID: trimmed(context.goalID),
             actorName: trimmed(context.actorName),
             preferredPlanningStrictness: context.preferredPlanningStrictness,
             goalOwnerRole: trimmed(context.goalOwnerRole),
@@ -214,10 +215,10 @@ struct GoalEngineOrchestrator: GoalOrchestrating {
 
         let plannerMetadata: GoalOrchestrationPlannerMetadata
         switch plannerResult {
-        case let .plan(_, _, lint):
-            plannerMetadata = GoalOrchestrationPlannerMetadata(attempted: true, resultKind: .plan, blockers: [], lint: lint)
-        case let .starterPlan(_, _, lint, _):
-            plannerMetadata = GoalOrchestrationPlannerMetadata(attempted: true, resultKind: .starterPlan, blockers: [], lint: lint)
+        case let .plan(_, plan, lint):
+            plannerMetadata = GoalOrchestrationPlannerMetadata(attempted: true, resultKind: .plan, blockers: [], lint: lint, evaluation: plan.evaluation)
+        case let .starterPlan(_, plan, lint, _):
+            plannerMetadata = GoalOrchestrationPlannerMetadata(attempted: true, resultKind: .starterPlan, blockers: [], lint: lint, evaluation: plan.evaluation)
         case let .blocked(_, blockers, _):
             plannerMetadata = GoalOrchestrationPlannerMetadata(attempted: true, resultKind: .blocked, blockers: blockers, lint: nil)
         case .none:
