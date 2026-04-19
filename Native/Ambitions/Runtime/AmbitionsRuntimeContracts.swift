@@ -1,16 +1,25 @@
 import Foundation
 
-enum AmbitionsRuntimeClientKind: String, Sendable, Equatable {
+enum AmbitionsRuntimeClientKind: String, Codable, CaseIterable, Sendable, Equatable {
     case iphoneApp = "iphone_app"
+    case bedsideRitualCompanion = "bedside_ritual_companion"
 }
 
-struct AmbitionsRuntimeClientContext: Sendable, Equatable {
+struct AmbitionsRuntimeClientContext: Codable, Sendable, Equatable {
     let kind: AmbitionsRuntimeClientKind
     let displayName: String
+    let isConstrainedPrototype: Bool
 
     static let iphoneApp = AmbitionsRuntimeClientContext(
         kind: .iphoneApp,
-        displayName: "iPhone app"
+        displayName: "iPhone app",
+        isConstrainedPrototype: false
+    )
+
+    static let bedsideRitualCompanion = AmbitionsRuntimeClientContext(
+        kind: .bedsideRitualCompanion,
+        displayName: "Bedside ritual companion",
+        isConstrainedPrototype: true
     )
 }
 
@@ -69,7 +78,7 @@ struct RuntimeContextSnapshot: Sendable, Equatable {
     let externalSurfaceSnapshot: ExternalSurfaceSnapshot?
 }
 
-enum RuntimeRouteRequest: Sendable, Equatable {
+enum RuntimeRouteRequest: Codable, Sendable, Equatable {
     case openToday
     case openGoalDetail(goalID: String)
     case openCapturesInbox
@@ -126,6 +135,7 @@ final class AmbitionsRuntime {
     let profileService: any ProfileServicing
     let notificationService: any NotificationServicing
     let calendarRemindersService: any CalendarRemindersServicing
+    let dedicatedDevicePrototypeRuntime: DedicatedDevicePrototypeRuntime
 
     init(
         clientContext: AmbitionsRuntimeClientContext,
@@ -143,7 +153,8 @@ final class AmbitionsRuntime {
         insightsService: any InsightsServicing,
         profileService: any ProfileServicing,
         notificationService: any NotificationServicing,
-        calendarRemindersService: any CalendarRemindersServicing
+        calendarRemindersService: any CalendarRemindersServicing,
+        dedicatedDevicePrototypeRuntime: DedicatedDevicePrototypeRuntime
     ) {
         self.clientContext = clientContext
         self.capabilities = capabilities
@@ -161,5 +172,6 @@ final class AmbitionsRuntime {
         self.profileService = profileService
         self.notificationService = notificationService
         self.calendarRemindersService = calendarRemindersService
+        self.dedicatedDevicePrototypeRuntime = dedicatedDevicePrototypeRuntime
     }
 }

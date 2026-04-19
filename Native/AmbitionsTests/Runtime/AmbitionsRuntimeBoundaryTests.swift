@@ -7,6 +7,15 @@ final class AmbitionsRuntimeBoundaryTests: XCTestCase {
 
         XCTAssertEqual(context.kind, .iphoneApp)
         XCTAssertEqual(context.displayName, "iPhone app")
+        XCTAssertFalse(context.isConstrainedPrototype)
+    }
+
+    func testBedsideRitualCompanionContextIsExplicitlyConstrained() {
+        let context = AmbitionsRuntimeClientContext.bedsideRitualCompanion
+
+        XCTAssertEqual(context.kind, .bedsideRitualCompanion)
+        XCTAssertEqual(context.displayName, "Bedside ritual companion")
+        XCTAssertTrue(context.isConstrainedPrototype)
     }
 
     func testRuntimeMemoryLoadsFromExistingRepositories() async throws {
@@ -99,6 +108,9 @@ final class AmbitionsRuntimeBoundaryTests: XCTestCase {
         XCTAssertNotNil(runtime.todayService as? NotificationSchedulingTodayService)
         XCTAssertNotNil(runtime.goalsService as? NotificationSchedulingGoalsService)
         XCTAssertTrue(runtime.captureService is DefaultCaptureService)
+        let deviceProjection = try await runtime.dedicatedDevicePrototypeRuntime
+            .loadProjection(now: Date(timeIntervalSince1970: 1_776_600_000))
+        XCTAssertEqual(deviceProjection.clientContext, AmbitionsRuntimeClientContext.bedsideRitualCompanion)
     }
 }
 

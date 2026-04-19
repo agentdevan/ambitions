@@ -2,6 +2,7 @@
 
 This file is the operational queue for active Ambitions work.
 It tracks which batch is completed, active, or queued.
+Registry batch numbers are the operational source of truth. Canon batch numbers are semantic roadmap context and must not be renumbered retroactively.
 
 It is not the higher-level vision source. For vision, dependency order, and batch definitions, use:
 
@@ -39,3 +40,4 @@ It is not the higher-level vision source. For vision, dependency order, and batc
 | 15 | Canon Batch 12 / Learning and anticipation engine | Completed | A fully derived, read-time learning layer now summarizes observed fit, drift, underrepresentation, timeline risk, and concise why-now reasons from existing evidence, feedback, timing, and life/path context; shared ranking, recovery, ritual, Today, and Goals consumers use the same scorer, and XcodeGen generation, simulator build, targeted tests, full `AmbitionsTests`, and full scheme UI tests all passed. |
 | 16 | Canon Batch 13 / Shared life / household intelligence | Completed | Added additive shared-life metadata under `LifeGraphContext` plus a read-time `SharedLifeCoordinationService` so support goals, care responsibilities, household logistics, and compact shared timing context can inform planning, recovery, learning, ritual, and Today without creating a second domain, persistence stack, or sync model; verified with `xcodegen generate`, simulator build, targeted shared-life tests, and full scheme validation on April 19, 2026. |
 | 17 | Canon Batch 14 / Runtime separation | Completed | Added a thin compatibility-first `AmbitionsRuntime` boundary over existing repositories, local-only sync/trust, external snapshots, reusable command semantics, and composed intelligence/services while preserving `AppContainer` as the iPhone compatibility facade; verified with `xcodegen generate`, simulator build, targeted runtime/composition tests, full `AmbitionsTests`, and full scheme validation on April 19, 2026. |
+| 18 | Canon Batch 15 / Dedicated device prototype | Completed | Added a runtime-only bedside ritual companion projection over existing runtime context, external snapshot truth, ritual cues, command descriptors, and app-owned fallback routes without new targets, hardware layers, voice/audio, production UI, transport, persistence, or payload widening; verified with `xcodegen generate`, simulator build, targeted tests, full `AmbitionsTests`, and full scheme validation on April 19, 2026. |

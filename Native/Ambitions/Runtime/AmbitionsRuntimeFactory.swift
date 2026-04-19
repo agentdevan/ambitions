@@ -55,6 +55,10 @@ enum AmbitionsRuntimeFactory {
             syncCapability: syncCapability
         )
         let actionExecutor = DefaultRuntimeActionCommandExecutor(todayService: todayService)
+        let dedicatedDevicePrototypeRuntime = DedicatedDevicePrototypeRuntime(
+            contextService: contextService,
+            actionExecutor: actionExecutor
+        )
 
         return AmbitionsRuntime(
             clientContext: clientContext,
@@ -72,7 +76,8 @@ enum AmbitionsRuntimeFactory {
             insightsService: RepositoryBackedInsightsService(repositories: repositories),
             profileService: profileService,
             notificationService: notificationService,
-            calendarRemindersService: calendarRemindersService
+            calendarRemindersService: calendarRemindersService,
+            dedicatedDevicePrototypeRuntime: dedicatedDevicePrototypeRuntime
         )
     }
 }
