@@ -977,6 +977,7 @@ struct GoalOrchestrationMetadata: Codable, Sendable, Equatable {
     let understanding: GoalUnderstanding
     let compiledPath: GoalCompiledPath
     let resourceGraph: GoalResourceGraph
+    let energyModel: GoalEnergyModel
 
     init(
         input: GoalEngineOrchestrationInputSnapshot,
@@ -987,7 +988,8 @@ struct GoalOrchestrationMetadata: Codable, Sendable, Equatable {
         reasoning: GoalOrchestrationReasoningMetadata,
         understanding: GoalUnderstanding,
         compiledPath: GoalCompiledPath,
-        resourceGraph: GoalResourceGraph
+        resourceGraph: GoalResourceGraph,
+        energyModel: GoalEnergyModel
     ) {
         self.input = input
         self.context = context
@@ -998,6 +1000,7 @@ struct GoalOrchestrationMetadata: Codable, Sendable, Equatable {
         self.understanding = understanding
         self.compiledPath = compiledPath
         self.resourceGraph = resourceGraph
+        self.energyModel = energyModel
     }
 
     private enum CodingKeys: String, CodingKey {
@@ -1010,6 +1013,7 @@ struct GoalOrchestrationMetadata: Codable, Sendable, Equatable {
         case understanding
         case compiledPath
         case resourceGraph
+        case energyModel
     }
 
     init(from decoder: Decoder) throws {
@@ -1035,6 +1039,8 @@ struct GoalOrchestrationMetadata: Codable, Sendable, Equatable {
                 compiledPath: compiledPath,
                 knowledgeContext: context.knowledgeContext
             )
+        energyModel = try container.decodeIfPresent(GoalEnergyModel.self, forKey: .energyModel)
+            ?? .unevaluated()
     }
 }
 

@@ -288,6 +288,7 @@ struct PlanningNextStepCandidate: Codable, Sendable, Equatable {
     let learnedFitScore: Double?
     let whyNow: WhyNowExplanationMetadata?
     let timelineRiskScore: Double?
+    let energyFit: PlanningEnergyFitSummary?
 }
 
 struct PlanningNextStepSelection: Sendable, Equatable {
@@ -300,19 +301,23 @@ struct PlanningNextStepSelector: Sendable {
     private let evaluator = PlanningEvaluator()
     private let learningService: LearningAnticipationService
     private let sharedLifeService: SharedLifeCoordinationService
+    private let energyFitService: any GoalEnergyFitEvaluating
 
     init(
         learningService: LearningAnticipationService = LearningAnticipationService(),
-        sharedLifeService: SharedLifeCoordinationService = SharedLifeCoordinationService()
+        sharedLifeService: SharedLifeCoordinationService = SharedLifeCoordinationService(),
+        energyFitService: any GoalEnergyFitEvaluating = DefaultGoalEnergyFitService()
     ) {
         self.learningService = learningService
         self.sharedLifeService = sharedLifeService
+        self.energyFitService = energyFitService
     }
 
     func rankedSelections(
         goals: [Goal],
         evidence: [ProgressEvidence] = [],
         feedback: [GoalFeedbackEvent] = [],
+        canonicalEnergyModelsByGoalID: [String: GoalEnergyModel] = [:],
         now: Date
     ) -> [PlanningNextStepSelection] {
         let activeGoals = goals.filter { $0.state == .active || $0.state == .paused }
@@ -362,6 +367,12 @@ struct PlanningNextStepSelector: Sendable {
                         snapshot: learningSnapshot,
                         now: now
                     )
+                    let energyFit = energyFitService.planningSummary(
+                        for: step,
+                        goal: goal,
+                        evaluation: evaluation,
+                        canonicalEnergyModel: canonicalEnergyModelsByGoalID[goal.id]
+                    )
                     return PlanningNextStepSelection(
                         goal: goal,
                         step: step,
@@ -381,7 +392,8 @@ struct PlanningNextStepSelector: Sendable {
                             evaluation: evaluation,
                             learnedFitScore: insight.fitScore,
                             whyNow: insight.whyNow,
-                            timelineRiskScore: learningSnapshot.goalSummaries[goal.id]?.timelineRisk.riskScore
+                            timelineRiskScore: learningSnapshot.goalSummaries[goal.id]?.timelineRisk.riskScore,
+                            energyFit: energyFit
                         )
                     )
                 }
@@ -399,9 +411,16 @@ struct PlanningNextStepSelector: Sendable {
         goals: [Goal],
         evidence: [ProgressEvidence] = [],
         feedback: [GoalFeedbackEvent] = [],
+        canonicalEnergyModelsByGoalID: [String: GoalEnergyModel] = [:],
         now: Date
     ) -> PlanningNextStepSelection? {
-        rankedSelections(goals: goals, evidence: evidence, feedback: feedback, now: now).first
+        rankedSelections(
+            goals: goals,
+            evidence: evidence,
+            feedback: feedback,
+            canonicalEnergyModelsByGoalID: canonicalEnergyModelsByGoalID,
+            now: now
+        ).first
     }
 
     private func score(

@@ -153,6 +153,35 @@ final class PlanningDomainModelsTests: XCTestCase {
         XCTAssertEqual(ranked.first?.goal.id, "goal-strong-fit")
         XCTAssertGreaterThan(try XCTUnwrap(ranked.first?.candidate.learnedFitScore), try XCTUnwrap(ranked.last?.candidate.learnedFitScore))
     }
+
+    func testEnergyFitSummaryAttachesWithoutChangingRecommendationOrder() throws {
+        let now = try XCTUnwrap(DomainTimestamp.date(from: "2026-04-21T09:30:00Z"))
+        let soon = makeGoal(id: "goal-soon-energy", stepID: "step-soon-energy", dueAt: "2026-04-22T12:00:00Z")
+        let later = makeGoal(id: "goal-later-energy", stepID: "step-later-energy", dueAt: "2026-05-01T12:00:00Z")
+        let goals = [later, soon]
+        let service = DefaultGoalEnergyFitService()
+        let compiledPath = GoalCompiledPath.legacyFallback(from: GoalPathCompilerServiceTests().sampleUnderstanding())
+        let canonical = service.evaluate(
+            compiledPath: compiledPath,
+            plannedSteps: soon.plan?.sections.flatMap(\.steps) ?? [],
+            capacityContext: .assumedNeutral()
+        )
+
+        let baseline = PlanningNextStepSelector().rankedSelections(goals: goals, now: now)
+        let withEnergy = PlanningNextStepSelector().rankedSelections(
+            goals: goals,
+            canonicalEnergyModelsByGoalID: [soon.id: canonical],
+            now: now
+        )
+
+        XCTAssertEqual(withEnergy.map { "\($0.goal.id)|\($0.step.id)" }, baseline.map { "\($0.goal.id)|\($0.step.id)" })
+        let canonicalSelection = try XCTUnwrap(withEnergy.first(where: { $0.goal.id == soon.id }))
+        let canonicalStepEvaluation = try XCTUnwrap(canonical.evaluations.first(where: { $0.stepID == canonicalSelection.step.id }))
+        XCTAssertEqual(canonicalSelection.candidate.energyFit?.source, .canonicalMetadata)
+        XCTAssertEqual(canonicalSelection.candidate.energyFit?.score, canonicalStepEvaluation.score)
+        XCTAssertEqual(canonicalSelection.candidate.energyFit?.reasonCodes, canonicalStepEvaluation.reasons.map(\.code).sorted { $0.rawValue < $1.rawValue })
+        XCTAssertTrue(withEnergy.allSatisfy { $0.candidate.energyFit != nil })
+    }
 }
 
 private extension PlanningDomainModelsTests {

@@ -7,6 +7,7 @@ struct GoalEngineOrchestrator: GoalOrchestrating {
     private let understandingService: any GoalUnderstandingBuilding
     private let pathCompiler: any GoalPathCompiling
     private let resourceGraphService: any GoalResourceGraphBuilding
+    private let energyFitService: any GoalEnergyFitEvaluating
 
     init(
         intake: GoalEngineIntakeService = GoalEngineIntakeService(),
@@ -14,7 +15,8 @@ struct GoalEngineOrchestrator: GoalOrchestrating {
         clarificationService: any GoalClarificationAnalyzing = DefaultGoalClarificationService(),
         understandingService: any GoalUnderstandingBuilding = DefaultGoalUnderstandingService(),
         pathCompiler: any GoalPathCompiling = DefaultGoalPathCompilerService(),
-        resourceGraphService: any GoalResourceGraphBuilding = DefaultGoalResourceGraphService()
+        resourceGraphService: any GoalResourceGraphBuilding = DefaultGoalResourceGraphService(),
+        energyFitService: any GoalEnergyFitEvaluating = DefaultGoalEnergyFitService()
     ) {
         self.intake = intake
         self.planner = planner
@@ -22,6 +24,7 @@ struct GoalEngineOrchestrator: GoalOrchestrating {
         self.understandingService = understandingService
         self.pathCompiler = pathCompiler
         self.resourceGraphService = resourceGraphService
+        self.energyFitService = energyFitService
     }
 
     func compileGoal(_ rawInput: String, context: GoalEngineOrchestrationContext = .init()) -> GoalOrchestrationResult {
@@ -229,6 +232,11 @@ struct GoalEngineOrchestrator: GoalOrchestrating {
         compiledPath: GoalCompiledPath,
         resourceGraph: GoalResourceGraph
     ) -> GoalOrchestrationMetadata {
+        let energyModel = energyFitService.evaluate(
+            compiledPath: compiledPath,
+            plannedSteps: plannedSteps(from: plannerResult),
+            capacityContext: .assumedNeutral()
+        )
         let assumptions: [PlanAssumption]
         switch plannerResult {
         case let .starterPlan(_, _, _, starterAssumptions):
@@ -287,8 +295,20 @@ struct GoalEngineOrchestrator: GoalOrchestrating {
             ),
             understanding: understanding,
             compiledPath: compiledPath,
-            resourceGraph: resourceGraph
+            resourceGraph: resourceGraph,
+            energyModel: energyModel
         )
+    }
+
+    private func plannedSteps(from plannerResult: GoalPlannerResult?) -> [Step] {
+        switch plannerResult {
+        case let .plan(_, plan, _):
+            return plan.sections.flatMap(\.steps)
+        case let .starterPlan(_, plan, _, _):
+            return plan.sections.flatMap(\.steps)
+        case .blocked, .none:
+            return []
+        }
     }
 
     private func adjustedAnalysis(

@@ -24,6 +24,12 @@ final class GoalEngineOrchestratorTests: XCTestCase {
             result.metadata.resourceGraph.freshness.candidateSummaries.map(\.candidateID),
             result.metadata.compiledPath.candidates.map(\.id)
         )
+        XCTAssertEqual(result.metadata.energyModel.schemaVersion, goalEnergyFitSchemaVersion)
+        XCTAssertEqual(
+            result.metadata.energyModel.candidateSummaries.map(\.candidateID),
+            result.metadata.compiledPath.candidates.map(\.id)
+        )
+        XCTAssertFalse(result.metadata.energyModel.evaluations.filter { $0.targetKind == .planStep }.isEmpty)
     }
 
     func testUntimedLearningGoalCompilesIntoPlanShapedResult() throws {
@@ -102,6 +108,11 @@ final class GoalEngineOrchestratorTests: XCTestCase {
             result.metadata.resourceGraph.freshness.candidateSummaries.map(\.candidateID),
             result.metadata.compiledPath.candidates.map(\.id)
         )
+        XCTAssertEqual(
+            result.metadata.energyModel.candidateSummaries.map(\.candidateID),
+            result.metadata.compiledPath.candidates.map(\.id)
+        )
+        XCTAssertTrue(result.metadata.energyModel.evaluations.contains(where: { $0.reasons.map(\.code).contains(.candidateBlocked) }))
     }
 
     func testPlannerBlockedCaseSurfacesBlockedResult() {

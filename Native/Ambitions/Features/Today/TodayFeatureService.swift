@@ -10,6 +10,7 @@ struct RepositoryBackedTodayService: TodayServicing {
     let ritualService: RitualOrchestrationService
     let learningService: LearningAnticipationService
     let sharedLifeService: SharedLifeCoordinationService
+    let energyFitService: any GoalEnergyFitEvaluating
 
     init(
         repositories: AppRepositories,
@@ -19,7 +20,8 @@ struct RepositoryBackedTodayService: TodayServicing {
         calendarRemindersService: (any CalendarRemindersServicing)? = nil,
         ritualService: RitualOrchestrationService = RitualOrchestrationService(),
         learningService: LearningAnticipationService = LearningAnticipationService(),
-        sharedLifeService: SharedLifeCoordinationService = SharedLifeCoordinationService()
+        sharedLifeService: SharedLifeCoordinationService = SharedLifeCoordinationService(),
+        energyFitService: any GoalEnergyFitEvaluating = DefaultGoalEnergyFitService()
     ) {
         self.repositories = repositories
         self.adaptationService = adaptationService
@@ -29,6 +31,7 @@ struct RepositoryBackedTodayService: TodayServicing {
         self.ritualService = ritualService
         self.learningService = learningService
         self.sharedLifeService = sharedLifeService
+        self.energyFitService = energyFitService
     }
 
     func loadTodayExperience(userDisplayName: String, now: Date) async throws -> TodayExperience {
@@ -125,19 +128,24 @@ private extension RepositoryBackedTodayService {
             feedback: snapshot.feedback,
             now: now
         )
-        let rankedSelections = PlanningNextStepSelector(learningService: learningService).rankedSelections(
+        let draftsByGoalID: [String: PersistedGoalDraft] = Dictionary(uniqueKeysWithValues: snapshot.drafts.compactMap { draft in
+            guard let plannedGoalID = draft.plannedGoalID else { return nil }
+            return (plannedGoalID, draft)
+        })
+        let energyModelsByGoalID = draftsByGoalID.compactMapValues(\.metadata?.energyModel)
+        let rankedSelections = PlanningNextStepSelector(
+            learningService: learningService,
+            energyFitService: energyFitService
+        ).rankedSelections(
             goals: activeGoals,
             evidence: snapshot.evidence,
             feedback: snapshot.feedback,
+            canonicalEnergyModelsByGoalID: energyModelsByGoalID,
             now: now
         )
         let allSteps = activeGoals.flatMap { $0.plan?.sections.flatMap(\.steps) ?? [] }
         let actionableSteps = rankedSelections.map(\.step)
 
-        let draftsByGoalID: [String: PersistedGoalDraft] = Dictionary(uniqueKeysWithValues: snapshot.drafts.compactMap { draft in
-            guard let plannedGoalID = draft.plannedGoalID else { return nil }
-            return (plannedGoalID, draft)
-        })
         let clarificationDrafts = snapshot.drafts.filter { $0.latestResultKind == .clarificationRequired }
         let blockedDrafts = snapshot.drafts.filter { $0.latestResultKind == .blocked }
 
