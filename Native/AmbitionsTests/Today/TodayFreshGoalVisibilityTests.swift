@@ -80,6 +80,61 @@ final class TodayFreshGoalVisibilityTests: XCTestCase {
         XCTAssertEqual(captures.first?.linkedGoalID, goalID)
     }
 
+    func testAskWhyThisMattersUsesMetadataBackedProjectionWhenDraftMetadataExists() async throws {
+        let repositories = try await makeRepositories()
+        let goalsService = RepositoryBackedGoalsService(repositories: repositories)
+        let todayService = RepositoryBackedTodayService(repositories: repositories)
+
+        let created = try await goalsService.createGoal(
+            CreateGoalRequest(title: "Submit my conference talk proposal by 2026-05-15"),
+            now: fixedNow
+        )
+        let goalID = try XCTUnwrap(created.target.goalID)
+        let draftID = try XCTUnwrap(created.target.draftID)
+        let storedGoal = try await repositories.goals.goal(id: goalID)
+        let storedDraft = try await repositories.drafts.draft(id: draftID)
+        let goal = try XCTUnwrap(storedGoal)
+        let draft = try XCTUnwrap(storedDraft)
+        let step = try XCTUnwrap(goal.plan?.sections.first?.steps.first)
+        let expected = DefaultGoalExplainabilityProjector().makeState(
+            metadata: try XCTUnwrap(draft.metadata),
+            applicableSignals: nil,
+            primaryStepID: step.id,
+            whyNow: LearningAnticipationService().learnedStepInsight(
+                goal: goal,
+                step: step,
+                snapshot: LearningAnticipationService().buildSnapshot(
+                    goals: [goal],
+                    evidence: [],
+                    feedback: [.askedWhyThisMatters(
+                        base: GoalFeedbackEventBase(
+                            id: "feedback-why",
+                            stepID: step.id,
+                            occurredAt: DomainTimestamp.string(from: fixedNow),
+                            note: "Asked why this matters from Today."
+                        )
+                    )],
+                    now: fixedNow
+                ),
+                now: fixedNow
+            ).whyNow
+        )
+
+        let response = try await todayService.performAction(
+            TodayInlineAction(
+                kind: .askWhyThisMatters,
+                title: "Why this matters",
+                systemImage: "questionmark.circle",
+                state: .default,
+                target: TodayActionTarget(goalID: goalID, stepID: step.id, draftID: draftID)
+            ),
+            now: fixedNow
+        )
+
+        XCTAssertEqual(response.message?.title, "Why this matters")
+        XCTAssertEqual(response.message?.body, expected.whyThis.compactSummary)
+    }
+
     @MainActor
     func testTodayViewModelActivateRefreshesOnReturnToTodayTab() async {
         let first = PreviewTodayScenarios.empty

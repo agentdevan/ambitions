@@ -16,6 +16,15 @@ protocol GoalsServicing: Sendable {
     func createGoal(_ request: CreateGoalRequest, now: Date) async throws -> CreateGoalResponse
     func performAction(_ request: GoalDetailActionRequest, now: Date) async throws -> GoalDetailActionResponse
     func submitClarificationAnswer(_ request: GoalClarificationAnswerRequest, now: Date) async throws -> GoalDetailActionResponse
+    func submitExplainabilityCorrection(_ request: GoalExplainabilityCorrectionRequest, now: Date) async throws -> GoalDetailActionResponse
+}
+
+extension GoalsServicing {
+    func submitExplainabilityCorrection(_ request: GoalExplainabilityCorrectionRequest, now: Date) async throws -> GoalDetailActionResponse {
+        _ = request
+        _ = now
+        return GoalDetailActionResponse(message: nil)
+    }
 }
 
 protocol HabitsServicing: Sendable {

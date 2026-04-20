@@ -189,6 +189,88 @@ struct GoalDetailActionRequest: Sendable {
     let stepID: String?
 }
 
+enum GoalExplainabilityCorrectionControlKind: String, Sendable {
+    case markSupportNotRelevant = "mark_support_not_relevant"
+    case confirmContradiction = "confirm_contradiction"
+    case dismissContradiction = "dismiss_contradiction"
+    case requestLighterVersion = "request_lighter_version"
+}
+
+struct GoalWhyThisState: Sendable {
+    let compactSummary: String
+    let lines: [String]
+}
+
+struct GoalSourceAuditRowState: Identifiable, Sendable {
+    let id: String
+    let resourceID: String
+    let title: String
+    let subtitle: String
+    let detailLabels: [String]
+    let state: AmbitionVisualState
+}
+
+struct GoalSourceAuditSectionState: Sendable {
+    let rows: [GoalSourceAuditRowState]
+}
+
+struct GoalFreshnessState: Sendable {
+    let posture: GoalFreshnessPosture
+    let postureLabel: String
+    let severityLabel: String
+    let detailLabels: [String]
+}
+
+struct GoalConfidenceState: Sendable {
+    let understandingConfidence: RecommendationConfidence
+    let pathConfidence: RecommendationConfidence?
+    let detailLabels: [String]
+}
+
+struct GoalContradictionSummaryState: Identifiable, Sendable {
+    let id: String
+    let code: GoalContradictionCode
+    let title: String
+    let summary: String
+    let severityLabel: String
+    let state: AmbitionVisualState
+}
+
+struct GoalCorrectionControlState: Identifiable, Sendable {
+    let id: String
+    let title: String
+    let subtitle: String
+    let kind: GoalExplainabilityCorrectionControlKind
+    let artifactKind: GoalTeachingArtifactKind
+    let teachingSignalKind: GoalTeachingSignalKind
+    let payload: GoalTeachingPayload
+    let target: GoalTeachingCaptureTarget
+    let state: AmbitionVisualState
+}
+
+struct GoalAppliedTeachingBadgeState: Identifiable, Sendable {
+    let id: String
+    let signalID: String
+    let title: String
+    let subtitle: String
+    let state: AmbitionVisualState
+}
+
+struct GoalExplainabilityState: Sendable {
+    let whyThis: GoalWhyThisState
+    let sourceAudit: GoalSourceAuditSectionState
+    let freshness: GoalFreshnessState
+    let confidence: GoalConfidenceState
+    let contradictions: [GoalContradictionSummaryState]
+    let correctionControls: [GoalCorrectionControlState]
+    let appliedTeachingBadges: [GoalAppliedTeachingBadgeState]
+}
+
+struct GoalExplainabilityCorrectionRequest: Sendable {
+    let target: GoalRouteTarget
+    let control: GoalCorrectionControlState
+}
+
 struct GoalDetailInlineMessage: Identifiable, Sendable {
     let id: String
     let title: String
@@ -296,6 +378,7 @@ struct GoalDetailPresentation: Sendable {
     let evidence: [GoalEvidenceItem]
     let history: [GoalFeedbackItem]
     let actions: [GoalDetailActionState]
+    let explainability: GoalExplainabilityState?
     let primaryStepID: String?
     let canSwitchToUntimed: Bool
     let supportModeActive: Bool

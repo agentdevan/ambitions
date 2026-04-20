@@ -66,6 +66,15 @@ struct GoalDetailScreen: View {
                         }
                     }
 
+                    if let explainability = detail.explainability {
+                        GoalExplainabilitySection(
+                            state: explainability,
+                            onCorrection: { control in
+                                Task { await viewModel.submitExplainabilityCorrection(control, using: container.goalsService) }
+                            }
+                        )
+                    }
+
                     if detail.target.launchContext == .help {
                         AppCard(state: .warning) {
                             SectionHeader(
@@ -310,6 +319,167 @@ struct GoalDetailScreen: View {
             preconditionFailure("App container must be injected.")
         }
         return appContainer
+    }
+}
+
+private struct GoalExplainabilitySection: View {
+    @Environment(\.ambitionTheme) private var theme
+
+    let state: GoalExplainabilityState
+    let onCorrection: (GoalCorrectionControlState) -> Void
+
+    var body: some View {
+        VStack(alignment: .leading, spacing: theme.spacing.lg) {
+            GoalDetailSectionCard(title: "Why this", subtitle: "Structured rationale from canonical understanding and path metadata.") {
+                VStack(alignment: .leading, spacing: theme.spacing.xs) {
+                    Text(state.whyThis.compactSummary)
+                        .font(theme.typography.bodyEmphasized)
+                        .foregroundStyle(theme.colors.textPrimary)
+
+                    ForEach(Array(state.whyThis.lines.enumerated()), id: \.offset) { _, line in
+                        Text(line)
+                            .font(theme.typography.caption)
+                            .foregroundStyle(theme.colors.textSecondary)
+                    }
+                }
+            }
+
+            GoalDetailSectionCard(title: "Source Audit", subtitle: "Provenance, trust, and freshness as surfaced by the canonical resource graph.") {
+                VStack(alignment: .leading, spacing: theme.spacing.sm) {
+                    ForEach(state.sourceAudit.rows) { row in
+                        AppCard(state: row.state) {
+                            VStack(alignment: .leading, spacing: theme.spacing.xs) {
+                                Text(row.title)
+                                    .font(theme.typography.bodyEmphasized)
+                                    .foregroundStyle(theme.colors.textPrimary)
+                                Text(row.subtitle)
+                                    .font(theme.typography.caption)
+                                    .foregroundStyle(theme.colors.textSecondary)
+                                ForEach(row.detailLabels, id: \.self) { label in
+                                    Text(label)
+                                        .font(theme.typography.micro)
+                                        .foregroundStyle(theme.colors.textTertiary)
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+
+            GoalDetailSectionCard(title: "Freshness", subtitle: "Current posture and severity straight from canonical freshness metadata.") {
+                ExplainabilityLabelList(
+                    title: state.freshness.postureLabel,
+                    subtitle: state.freshness.severityLabel,
+                    labels: state.freshness.detailLabels
+                )
+            }
+
+            GoalDetailSectionCard(title: "Confidence", subtitle: "Understanding and path confidence without view-local reinterpretation.") {
+                ExplainabilityLabelList(
+                    title: humanizedConfidence(state.confidence.understandingConfidence),
+                    subtitle: state.confidence.pathConfidence.map(humanizedConfidence),
+                    labels: state.confidence.detailLabels
+                )
+            }
+
+            if state.contradictions.isEmpty == false {
+                GoalDetailSectionCard(title: "Contradictions", subtitle: "Summary-only contradiction context from the canonical contradiction report.") {
+                    VStack(alignment: .leading, spacing: theme.spacing.sm) {
+                        ForEach(state.contradictions) { contradiction in
+                            AppCard(state: contradiction.state) {
+                                VStack(alignment: .leading, spacing: theme.spacing.xs) {
+                                    HStack {
+                                        Text(contradiction.title)
+                                            .font(theme.typography.bodyEmphasized)
+                                            .foregroundStyle(theme.colors.textPrimary)
+                                        Spacer()
+                                        TagPill(contradiction.severityLabel, state: contradiction.state)
+                                    }
+                                    Text(contradiction.summary)
+                                        .font(theme.typography.caption)
+                                        .foregroundStyle(theme.colors.textSecondary)
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+
+            if state.correctionControls.isEmpty == false || state.appliedTeachingBadges.isEmpty == false {
+                GoalDetailSectionCard(title: "Corrections", subtitle: "Explicit manual corrections only, anchored to visible canonical artifacts.") {
+                    VStack(alignment: .leading, spacing: theme.spacing.sm) {
+                        ForEach(state.correctionControls) { control in
+                            AppCard(state: control.state) {
+                                VStack(alignment: .leading, spacing: theme.spacing.xs) {
+                                    Text(control.title)
+                                        .font(theme.typography.bodyEmphasized)
+                                        .foregroundStyle(theme.colors.textPrimary)
+                                    Text(control.subtitle)
+                                        .font(theme.typography.caption)
+                                        .foregroundStyle(theme.colors.textSecondary)
+                                    Button(control.title) {
+                                        onCorrection(control)
+                                    }
+                                    .buttonStyle(AmbitionPressableButtonStyle(state: control.state))
+                                    .padding(.top, theme.spacing.xs)
+                                }
+                            }
+                        }
+
+                        if state.appliedTeachingBadges.isEmpty == false {
+                            Divider()
+                            VStack(alignment: .leading, spacing: theme.spacing.xs) {
+                                Text("Applied teaching")
+                                    .font(theme.typography.section)
+                                    .foregroundStyle(theme.colors.textPrimary)
+                                ForEach(state.appliedTeachingBadges) { badge in
+                                    HStack(alignment: .top, spacing: theme.spacing.sm) {
+                                        TagPill(badge.title, state: badge.state)
+                                        Text(badge.subtitle)
+                                            .font(theme.typography.caption)
+                                            .foregroundStyle(theme.colors.textSecondary)
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    private func humanizedConfidence(_ confidence: RecommendationConfidence) -> String {
+        confidence.rawValue
+            .replacingOccurrences(of: "_", with: " ")
+            .capitalized
+    }
+}
+
+private struct ExplainabilityLabelList: View {
+    @Environment(\.ambitionTheme) private var theme
+
+    let title: String
+    let subtitle: String?
+    let labels: [String]
+
+    var body: some View {
+        VStack(alignment: .leading, spacing: theme.spacing.xs) {
+            Text(title)
+                .font(theme.typography.bodyEmphasized)
+                .foregroundStyle(theme.colors.textPrimary)
+
+            if let subtitle {
+                Text(subtitle)
+                    .font(theme.typography.caption)
+                    .foregroundStyle(theme.colors.textSecondary)
+            }
+
+            ForEach(labels, id: \.self) { label in
+                Text(label)
+                    .font(theme.typography.micro)
+                    .foregroundStyle(theme.colors.textTertiary)
+            }
+        }
     }
 }
 

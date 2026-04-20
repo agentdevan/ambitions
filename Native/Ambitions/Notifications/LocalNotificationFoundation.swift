@@ -342,4 +342,10 @@ struct NotificationSchedulingGoalsService: GoalsServicing {
         await notificationService.refreshSchedule(now: now)
         return response
     }
+
+    func submitExplainabilityCorrection(_ request: GoalExplainabilityCorrectionRequest, now: Date) async throws -> GoalDetailActionResponse {
+        let response = try await base.submitExplainabilityCorrection(request, now: now)
+        await notificationService.refreshSchedule(now: now)
+        return response
+    }
 }

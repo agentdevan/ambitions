@@ -11,6 +11,7 @@ struct RepositoryBackedTodayService: TodayServicing {
     let learningService: LearningAnticipationService
     let sharedLifeService: SharedLifeCoordinationService
     let selector: PlanningNextStepSelector
+    let explainabilityProjector: any GoalExplainabilityProjecting
 
     init(
         repositories: AppRepositories,
@@ -23,7 +24,8 @@ struct RepositoryBackedTodayService: TodayServicing {
         sharedLifeService: SharedLifeCoordinationService = SharedLifeCoordinationService(),
         energyFitService: any GoalEnergyFitEvaluating = DefaultGoalEnergyFitService(),
         energyLearningService: any GoalEnergyLearning = DefaultGoalEnergyLearningService(),
-        selector: PlanningNextStepSelector? = nil
+        selector: PlanningNextStepSelector? = nil,
+        explainabilityProjector: any GoalExplainabilityProjecting = DefaultGoalExplainabilityProjector()
     ) {
         self.repositories = repositories
         self.adaptationService = adaptationService
@@ -39,6 +41,7 @@ struct RepositoryBackedTodayService: TodayServicing {
             energyFitService: energyFitService,
             energyLearningService: energyLearningService
         )
+        self.explainabilityProjector = explainabilityProjector
     }
 
     func loadTodayExperience(userDisplayName: String, now: Date) async throws -> TodayExperience {
@@ -736,7 +739,25 @@ private extension RepositoryBackedTodayService {
             events.append(.askedWhyThisMatters(base: base))
             try await repositories.feedback.saveEvents(events, goalID: goalID)
             let adjustment = adjustmentPayload(draft: draft, goal: goal, step: selectedStep, history: events)
-            let explanation = adjustment?.explanationHook?.explanation
+            let explanation = draft?.metadata.map { metadata in
+                explainabilityProjector.makeState(
+                    metadata: metadata,
+                    applicableSignals: nil,
+                    primaryStepID: selectedStep.id,
+                    whyNow: learningService.learnedStepInsight(
+                        goal: goal,
+                        step: selectedStep,
+                        snapshot: learningService.buildSnapshot(
+                            goals: [goal],
+                            evidence: [],
+                            feedback: events,
+                            now: now
+                        ),
+                        now: now
+                    ).whyNow
+                ).whyThis.compactSummary
+            }
+                ?? adjustment?.explanationHook?.explanation
                 ?? draft.map { createWhyThisMattersExplanation(draft: $0.draft, step: selectedStep).explanation }
                 ?? "\(selectedStep.title) matters because it moves \(goal.title.lowercased()) forward with visible evidence."
             message = TodayInlineMessage(

@@ -199,4 +199,28 @@ final class GoalDetailViewModel {
             )
         }
     }
+
+    func submitExplainabilityCorrection(
+        _ control: GoalCorrectionControlState,
+        using service: any GoalsServicing,
+        now: Date = .now
+    ) async {
+        do {
+            let response = try await service.submitExplainabilityCorrection(
+                GoalExplainabilityCorrectionRequest(
+                    target: target,
+                    control: control
+                ),
+                now: now
+            )
+            inlineMessage = response.message
+            await refresh(using: service)
+        } catch {
+            inlineMessage = GoalDetailInlineMessage(
+                title: "Correction failed",
+                body: error.localizedDescription,
+                state: .warning
+            )
+        }
+    }
 }

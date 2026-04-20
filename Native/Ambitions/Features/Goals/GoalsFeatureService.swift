@@ -9,6 +9,8 @@ struct RepositoryBackedGoalsService: GoalsServicing {
     let orchestrator: any GoalOrchestrating
     let calendarRemindersService: any CalendarRemindersServicing
     let learningService: LearningAnticipationService
+    let explainabilityProjector: any GoalExplainabilityProjecting
+    let teachingService: DefaultGoalTeachingSignalService
 
     init(
         repositories: AppRepositories,
@@ -17,7 +19,8 @@ struct RepositoryBackedGoalsService: GoalsServicing {
         rescheduleEngine: any GoalRescheduling = RescheduleEngine(),
         orchestrator: any GoalOrchestrating = GoalEngineOrchestrator(),
         calendarRemindersService: (any CalendarRemindersServicing)? = nil,
-        learningService: LearningAnticipationService = LearningAnticipationService()
+        learningService: LearningAnticipationService = LearningAnticipationService(),
+        explainabilityProjector: any GoalExplainabilityProjecting = DefaultGoalExplainabilityProjector()
     ) {
         self.repositories = repositories
         self.planner = planner
@@ -26,6 +29,8 @@ struct RepositoryBackedGoalsService: GoalsServicing {
         self.orchestrator = orchestrator
         self.calendarRemindersService = calendarRemindersService ?? StubCalendarRemindersService()
         self.learningService = learningService
+        self.explainabilityProjector = explainabilityProjector
+        self.teachingService = DefaultGoalTeachingSignalService(repository: repositories.teaching)
     }
 
     func loadOverview() async throws -> GoalsOverview {
@@ -184,6 +189,39 @@ struct RepositoryBackedGoalsService: GoalsServicing {
             )
         )
     }
+
+    func submitExplainabilityCorrection(_ request: GoalExplainabilityCorrectionRequest, now: Date) async throws -> GoalDetailActionResponse {
+        let snapshot = try await loadSnapshot()
+        let detail = try resolveDetailContext(target: request.target, snapshot: snapshot)
+        guard let metadata = detail.draft?.metadata else {
+            throw GoalsFeatureError.notActionable
+        }
+
+        let goalID = detail.goal?.id ?? detail.draft?.plannedGoalID ?? metadata.context.goalID
+        guard let goalID else {
+            throw GoalsFeatureError.notActionable
+        }
+
+        let signal = try await teachingService.capture(
+            GoalTeachingCaptureRequest(
+                goalID: goalID,
+                capturedAt: DomainTimestamp.string(from: now),
+                kind: request.control.teachingSignalKind,
+                payload: request.control.payload,
+                target: request.control.target,
+                userNote: request.control.subtitle
+            ),
+            metadata: metadata
+        )
+
+        return GoalDetailActionResponse(
+            message: GoalDetailInlineMessage(
+                title: "Correction captured",
+                body: correctionMessage(for: signal),
+                state: .selected
+            )
+        )
+    }
 }
 
 #if DEBUG
@@ -254,6 +292,18 @@ struct StubGoalsService: GoalsServicing {
             message: GoalDetailInlineMessage(
                 title: "Clarification saved",
                 body: "Preview mode keeps the write-back interaction intact while the live service recompiles the draft.",
+                state: .selected
+            )
+        )
+    }
+
+    func submitExplainabilityCorrection(_ request: GoalExplainabilityCorrectionRequest, now: Date) async throws -> GoalDetailActionResponse {
+        _ = request
+        _ = now
+        return GoalDetailActionResponse(
+            message: GoalDetailInlineMessage(
+                title: "Correction captured",
+                body: "Preview mode keeps explainability correction controls visible while the live service writes through teaching persistence.",
                 state: .selected
             )
         )
@@ -537,6 +587,7 @@ private extension RepositoryBackedGoalsService {
 
     func makeDetail(target: GoalRouteTarget, snapshot: Snapshot) async throws -> GoalDetailPresentation {
         let context = try resolveDetailContext(target: target, snapshot: snapshot)
+        let applicableSignals = try await explainabilitySignals(for: context)
 
         if let goalID = context.goal?.id {
             var appState = snapshot.appState
@@ -546,7 +597,12 @@ private extension RepositoryBackedGoalsService {
             }
         }
 
-        return buildDetailPresentation(from: context, appState: snapshot.appState, priorityOrder: normalizedPriorityOrder(snapshot: snapshot))
+        return buildDetailPresentation(
+            from: context,
+            appState: snapshot.appState,
+            priorityOrder: normalizedPriorityOrder(snapshot: snapshot),
+            applicableSignals: applicableSignals
+        )
     }
 
     func resolveDetailContext(target: GoalRouteTarget, snapshot: Snapshot) throws -> DetailContext {
@@ -690,7 +746,12 @@ private extension RepositoryBackedGoalsService {
         )
     }
 
-    func buildDetailPresentation(from context: DetailContext, appState: AppStateSnapshot, priorityOrder: [String]) -> GoalDetailPresentation {
+    func buildDetailPresentation(
+        from context: DetailContext,
+        appState: AppStateSnapshot,
+        priorityOrder: [String],
+        applicableSignals: GoalTeachingApplicableSet?
+    ) -> GoalDetailPresentation {
         let sourceGoal = context.goal
         let sourceDraft = context.draft?.draft
         let effectiveMode = sourceGoal?.mode ?? sourceDraft?.mode ?? .project
@@ -721,6 +782,14 @@ private extension RepositoryBackedGoalsService {
                     now: .now
                 ).whyNow
             }
+        }
+        let explainability = context.draft?.metadata.map { metadata in
+            explainabilityProjector.makeState(
+                metadata: metadata,
+                applicableSignals: applicableSignals,
+                primaryStepID: context.primaryStep?.id,
+                whyNow: whyNow
+            )
         }
         let pathStages = makePathStages(pathSummary: pathSummary, sections: sections, renderState: renderState)
         let sectionStates = sections.sorted { $0.orderIndex < $1.orderIndex }.map { section in
@@ -777,6 +846,7 @@ private extension RepositoryBackedGoalsService {
                 canSwitchToUntimed: canSwitchToUntimed(mode: effectiveMode, timing: timing),
                 supportModeActive: context.supportModeActive
             ),
+            explainability: explainability,
             primaryStepID: context.primaryStep?.id,
             canSwitchToUntimed: canSwitchToUntimed(mode: effectiveMode, timing: timing),
             supportModeActive: context.supportModeActive,
@@ -1052,10 +1122,29 @@ private extension RepositoryBackedGoalsService {
         case .askWhyThisMatters:
             history.append(.askedWhyThisMatters(base: base))
             try await repositories.feedback.saveEvents(history, goalID: goal.id)
-            let explanation = detail.draft.flatMap { draft in
-                adjustmentPayload(draft: draft, goal: goal, step: selectedStep, history: history)?.explanationHook?.explanation
-                    ?? createWhyThisMattersExplanation(draft: draft.draft, step: selectedStep).explanation
-            } ?? "\(selectedStep.title) matters because it advances \(goal.title.lowercased()) through something observable and finishable."
+            let projectedExplanation = detail.draft?.metadata.map { metadata in
+                explainabilityProjector.makeState(
+                    metadata: metadata,
+                    applicableSignals: nil,
+                    primaryStepID: selectedStep.id,
+                    whyNow: learningService.learnedStepInsight(
+                        goal: goal,
+                        step: selectedStep,
+                        snapshot: learningService.buildSnapshot(
+                            goals: [goal],
+                            evidence: detail.evidence,
+                            feedback: history,
+                            now: now
+                        ),
+                        now: now
+                    ).whyNow
+                ).whyThis.compactSummary
+            }
+            let explanation = projectedExplanation
+                ?? detail.draft.flatMap { draft in
+                    adjustmentPayload(draft: draft, goal: goal, step: selectedStep, history: history)?.explanationHook?.explanation
+                        ?? createWhyThisMattersExplanation(draft: draft.draft, step: selectedStep).explanation
+                } ?? "\(selectedStep.title) matters because it advances \(goal.title.lowercased()) through something observable and finishable."
             return GoalDetailActionResponse(
                 message: GoalDetailInlineMessage(
                     title: "Why this matters",
@@ -1767,6 +1856,26 @@ private extension RepositoryBackedGoalsService {
             return "Raised manual priority from Goal Detail."
         case .lowerPriority:
             return "Lowered manual priority from Goal Detail."
+        }
+    }
+
+    func explainabilitySignals(for context: DetailContext) async throws -> GoalTeachingApplicableSet? {
+        guard let metadata = context.draft?.metadata else { return nil }
+        let goalID = context.goal?.id ?? context.draft?.plannedGoalID ?? metadata.context.goalID
+        guard let goalID else { return nil }
+        return try await teachingService.applicableSignals(goalID: goalID, metadata: metadata)
+    }
+
+    func correctionMessage(for signal: GoalTeachingSignal) -> String {
+        switch signal.kind {
+        case .requirementRelevanceCorrection:
+            return "That support relevance correction is now stored through the canonical teaching layer."
+        case .contradictionDispositionCorrection:
+            return "That contradiction disposition is now stored through the canonical teaching layer."
+        case .energyFitCorrection:
+            return "That energy-fit correction is now stored through the canonical teaching layer."
+        case .interpretationCorrection, .goalSubjectCorrection, .classificationCorrection:
+            return "That correction is now stored through the canonical teaching layer."
         }
     }
 
