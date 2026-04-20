@@ -14,7 +14,16 @@ enum AmbitionsRuntimeFactory {
     ) -> AmbitionsRuntime {
         let snapshotWriter = ExternalSurfaceSnapshotWriter(repositories: repositories)
         let learningService = LearningAnticipationService()
+        let sharedLifeService = SharedLifeCoordinationService()
         let energyFitService = DefaultGoalEnergyFitService()
+        let energyLearningService = DefaultGoalEnergyLearningService()
+        let selector = PlanningNextStepSelector(
+            learningService: learningService,
+            sharedLifeService: sharedLifeService,
+            energyFitService: energyFitService,
+            energyLearningService: energyLearningService
+        )
+        let ritualService = RitualOrchestrationService(selector: selector)
         let goalOrchestrator = GoalEngineOrchestrator(energyFitService: energyFitService)
         let memoryService = RepositoryBackedRuntimeMemoryService(repositories: repositories)
         let contextService = RepositoryBackedRuntimeContextService(
@@ -29,8 +38,12 @@ enum AmbitionsRuntimeFactory {
             base: RepositoryBackedTodayService(
                 repositories: repositories,
                 calendarRemindersService: calendarRemindersService,
+                ritualService: ritualService,
                 learningService: learningService,
-                energyFitService: energyFitService
+                sharedLifeService: sharedLifeService,
+                energyFitService: energyFitService,
+                energyLearningService: energyLearningService,
+                selector: selector
             ),
             snapshotWriter: snapshotWriter
         )

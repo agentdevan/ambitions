@@ -289,6 +289,7 @@ struct PlanningNextStepCandidate: Codable, Sendable, Equatable {
     let whyNow: WhyNowExplanationMetadata?
     let timelineRiskScore: Double?
     let energyFit: PlanningEnergyFitSummary?
+    let energyLearning: PlanningEnergyLearningSummary?
 }
 
 struct PlanningNextStepSelection: Sendable, Equatable {
@@ -302,15 +303,18 @@ struct PlanningNextStepSelector: Sendable {
     private let learningService: LearningAnticipationService
     private let sharedLifeService: SharedLifeCoordinationService
     private let energyFitService: any GoalEnergyFitEvaluating
+    private let energyLearningService: any GoalEnergyLearning
 
     init(
         learningService: LearningAnticipationService = LearningAnticipationService(),
         sharedLifeService: SharedLifeCoordinationService = SharedLifeCoordinationService(),
-        energyFitService: any GoalEnergyFitEvaluating = DefaultGoalEnergyFitService()
+        energyFitService: any GoalEnergyFitEvaluating = DefaultGoalEnergyFitService(),
+        energyLearningService: any GoalEnergyLearning = DefaultGoalEnergyLearningService()
     ) {
         self.learningService = learningService
         self.sharedLifeService = sharedLifeService
         self.energyFitService = energyFitService
+        self.energyLearningService = energyLearningService
     }
 
     func rankedSelections(
@@ -373,6 +377,19 @@ struct PlanningNextStepSelector: Sendable {
                         evaluation: evaluation,
                         canonicalEnergyModel: canonicalEnergyModelsByGoalID[goal.id]
                     )
+                    let hasIncompleteDependencies = hasIncompleteDependencies(step: step, completedStepIDs: completedStepIDs)
+                    let energyLearning: PlanningEnergyLearningSummary? = {
+                        guard step.state != .blocked, hasIncompleteDependencies == false else { return nil }
+                        return energyLearningService.planningSummary(
+                            for: step,
+                            goal: goal,
+                            evidence: evidence,
+                            feedback: feedback,
+                            canonicalEnergyModel: canonicalEnergyModelsByGoalID[goal.id],
+                            energyFit: energyFit,
+                            now: now
+                        )
+                    }()
                     return PlanningNextStepSelection(
                         goal: goal,
                         step: step,
@@ -383,8 +400,8 @@ struct PlanningNextStepSelector: Sendable {
                                 goal: goal,
                                 step: step,
                                 evaluation: evaluation,
-                                hasIncompleteDependencies: hasIncompleteDependencies(step: step, completedStepIDs: completedStepIDs),
-                                learnedFitScore: insight.fitScore,
+                                hasIncompleteDependencies: hasIncompleteDependencies,
+                                energyLearning: energyLearning,
                                 sharedLifeSummary: sharedLifeSummary,
                                 now: now
                             ),
@@ -393,7 +410,8 @@ struct PlanningNextStepSelector: Sendable {
                             learnedFitScore: insight.fitScore,
                             whyNow: insight.whyNow,
                             timelineRiskScore: learningSnapshot.goalSummaries[goal.id]?.timelineRisk.riskScore,
-                            energyFit: energyFit
+                            energyFit: energyFit,
+                            energyLearning: energyLearning
                         )
                     )
                 }
@@ -428,7 +446,7 @@ struct PlanningNextStepSelector: Sendable {
         step: Step,
         evaluation: PlanningEvaluation,
         hasIncompleteDependencies: Bool,
-        learnedFitScore: Double,
+        energyLearning: PlanningEnergyLearningSummary?,
         sharedLifeSummary: SharedLifeGoalSummary?,
         now: Date
     ) -> Double {
@@ -473,7 +491,7 @@ struct PlanningNextStepSelector: Sendable {
         if let sharedLifeSummary, sharedLifeSummary.pressureScore >= 0.7 {
             value -= 0.04
         }
-        value += (learnedFitScore - 0.5) * 0.24
+        value += energyLearning?.rankingAdjustment ?? 0
         return (value * 100).rounded() / 100
     }
 

@@ -10,7 +10,7 @@ struct RepositoryBackedTodayService: TodayServicing {
     let ritualService: RitualOrchestrationService
     let learningService: LearningAnticipationService
     let sharedLifeService: SharedLifeCoordinationService
-    let energyFitService: any GoalEnergyFitEvaluating
+    let selector: PlanningNextStepSelector
 
     init(
         repositories: AppRepositories,
@@ -21,7 +21,9 @@ struct RepositoryBackedTodayService: TodayServicing {
         ritualService: RitualOrchestrationService = RitualOrchestrationService(),
         learningService: LearningAnticipationService = LearningAnticipationService(),
         sharedLifeService: SharedLifeCoordinationService = SharedLifeCoordinationService(),
-        energyFitService: any GoalEnergyFitEvaluating = DefaultGoalEnergyFitService()
+        energyFitService: any GoalEnergyFitEvaluating = DefaultGoalEnergyFitService(),
+        energyLearningService: any GoalEnergyLearning = DefaultGoalEnergyLearningService(),
+        selector: PlanningNextStepSelector? = nil
     ) {
         self.repositories = repositories
         self.adaptationService = adaptationService
@@ -31,7 +33,12 @@ struct RepositoryBackedTodayService: TodayServicing {
         self.ritualService = ritualService
         self.learningService = learningService
         self.sharedLifeService = sharedLifeService
-        self.energyFitService = energyFitService
+        self.selector = selector ?? PlanningNextStepSelector(
+            learningService: learningService,
+            sharedLifeService: sharedLifeService,
+            energyFitService: energyFitService,
+            energyLearningService: energyLearningService
+        )
     }
 
     func loadTodayExperience(userDisplayName: String, now: Date) async throws -> TodayExperience {
@@ -133,10 +140,7 @@ private extension RepositoryBackedTodayService {
             return (plannedGoalID, draft)
         })
         let energyModelsByGoalID = draftsByGoalID.compactMapValues(\.metadata?.energyModel)
-        let rankedSelections = PlanningNextStepSelector(
-            learningService: learningService,
-            energyFitService: energyFitService
-        ).rankedSelections(
+        let rankedSelections = selector.rankedSelections(
             goals: activeGoals,
             evidence: snapshot.evidence,
             feedback: snapshot.feedback,
