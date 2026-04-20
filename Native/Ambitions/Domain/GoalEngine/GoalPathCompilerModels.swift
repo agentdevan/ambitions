@@ -123,11 +123,13 @@ struct GoalCompiledPathReadinessCriterion: Codable, Sendable, Equatable, Identif
 
 struct GoalCompiledPathResourceHook: Codable, Sendable, Equatable, Identifiable, Hashable {
     let id: String
+    let summary: String
     let kind: GoalCompiledPathResourceHookKind
     let targetStageID: String?
     let relatedDomains: [LifeDomainKey]
     let sourceClaimIDs: [String]
     let sourceRecordIDs: [String]
+    let optionality: GoalCompiledPathResourceOptionality
     let placeholderState: GoalCompiledPathResourceHookPlaceholderState
 }
 

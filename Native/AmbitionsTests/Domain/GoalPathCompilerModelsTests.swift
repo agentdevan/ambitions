@@ -46,6 +46,8 @@ final class GoalPathCompilerModelsTests: XCTestCase {
         XCTAssertEqual(primary.requirementHints.map(\.id), ["requirement-1"])
         XCTAssertEqual(primary.readinessCriteria.map(\.id), ["criterion-1"])
         XCTAssertEqual(primary.resourceHooks.map(\.id), ["hook-1"])
+        XCTAssertEqual(primary.resourceHooks.first?.summary, "Requirements reference remains needed.")
+        XCTAssertEqual(primary.resourceHooks.first?.optionality, .required)
         XCTAssertEqual(compiledPath.audit.packEntries.map(\.id), ["pack-audit-1"])
     }
 }
@@ -156,11 +158,13 @@ private extension GoalPathCompilerModelsTests {
                     resourceHooks: [
                         GoalCompiledPathResourceHook(
                             id: "hook-1",
+                            summary: "Requirements reference remains needed.",
                             kind: .requirementReference,
                             targetStageID: "stage-setup",
                             relatedDomains: [.career],
                             sourceClaimIDs: [],
                             sourceRecordIDs: [],
+                            optionality: .required,
                             placeholderState: .resourceNeeded
                         )
                     ],

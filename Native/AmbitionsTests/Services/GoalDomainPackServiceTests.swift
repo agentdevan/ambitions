@@ -56,6 +56,8 @@ final class GoalDomainPackServiceTests: XCTestCase {
 
         let primary = try XCTUnwrap(enriched.candidates.first(where: \.isPrimary))
         XCTAssertTrue(primary.resourceHooks.allSatisfy { $0.placeholderState == .resourceNeeded })
+        XCTAssertTrue(primary.resourceHooks.allSatisfy { $0.summary.isEmpty == false })
+        XCTAssertTrue(primary.resourceHooks.allSatisfy { $0.optionality == .required })
     }
 }
 

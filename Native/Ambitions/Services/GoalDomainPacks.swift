@@ -47,11 +47,13 @@ struct CareerGoalDomainPack: GoalDomainPack {
         )
         let resourceHook = GoalCompiledPathResourceHook(
             id: target.makeArtifactID(packID: descriptor.id, kind: "resource_hook", semanticKey: "requirements_reference"),
+            summary: "Reference material is still needed to confirm path requirements.",
             kind: .requirementReference,
             targetStageID: readinessStageID,
             relatedDomains: [.career],
             sourceClaimIDs: [],
             sourceRecordIDs: [],
+            optionality: .required,
             placeholderState: .resourceNeeded
         )
 
@@ -125,11 +127,13 @@ struct EducationGoalDomainPack: GoalDomainPack {
         )
         let resourceHook = GoalCompiledPathResourceHook(
             id: target.makeArtifactID(packID: descriptor.id, kind: "resource_hook", semanticKey: "entry_requirement_reference"),
+            summary: "Reference material is still needed to confirm entry requirements.",
             kind: .requirementReference,
             targetStageID: readinessStageID,
             relatedDomains: [.education],
             sourceClaimIDs: understanding.dependencies.flatMap(\.sourceClaimIDs),
             sourceRecordIDs: understanding.dependencies.flatMap(\.sourceRecordIDs),
+            optionality: .required,
             placeholderState: .resourceNeeded
         )
         let branch = GoalCompiledPathBranch(

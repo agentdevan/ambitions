@@ -976,6 +976,7 @@ struct GoalOrchestrationMetadata: Codable, Sendable, Equatable {
     let reasoning: GoalOrchestrationReasoningMetadata
     let understanding: GoalUnderstanding
     let compiledPath: GoalCompiledPath
+    let resourceGraph: GoalResourceGraph
 
     init(
         input: GoalEngineOrchestrationInputSnapshot,
@@ -985,7 +986,8 @@ struct GoalOrchestrationMetadata: Codable, Sendable, Equatable {
         planner: GoalOrchestrationPlannerMetadata,
         reasoning: GoalOrchestrationReasoningMetadata,
         understanding: GoalUnderstanding,
-        compiledPath: GoalCompiledPath
+        compiledPath: GoalCompiledPath,
+        resourceGraph: GoalResourceGraph
     ) {
         self.input = input
         self.context = context
@@ -995,6 +997,7 @@ struct GoalOrchestrationMetadata: Codable, Sendable, Equatable {
         self.reasoning = reasoning
         self.understanding = understanding
         self.compiledPath = compiledPath
+        self.resourceGraph = resourceGraph
     }
 
     private enum CodingKeys: String, CodingKey {
@@ -1006,6 +1009,7 @@ struct GoalOrchestrationMetadata: Codable, Sendable, Equatable {
         case reasoning
         case understanding
         case compiledPath
+        case resourceGraph
     }
 
     init(from decoder: Decoder) throws {
@@ -1026,6 +1030,11 @@ struct GoalOrchestrationMetadata: Codable, Sendable, Equatable {
             )
         compiledPath = try container.decodeIfPresent(GoalCompiledPath.self, forKey: .compiledPath)
             ?? GoalCompiledPath.legacyFallback(from: understanding)
+        resourceGraph = try container.decodeIfPresent(GoalResourceGraph.self, forKey: .resourceGraph)
+            ?? GoalResourceGraph.legacyFallback(
+                compiledPath: compiledPath,
+                knowledgeContext: context.knowledgeContext
+            )
     }
 }
 

@@ -66,11 +66,13 @@ final class GoalDomainPackModelsTests: XCTestCase {
             resourceHooks: [
                 GoalCompiledPathResourceHook(
                     id: "hook-1",
+                    summary: "Requirements may still need a reference.",
                     kind: .requirementReference,
                     targetStageID: "stage-primary-readiness",
                     relatedDomains: [.education],
                     sourceClaimIDs: [],
                     sourceRecordIDs: [],
+                    optionality: .required,
                     placeholderState: .resourceNeeded
                 )
             ],
