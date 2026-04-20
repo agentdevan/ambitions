@@ -2,7 +2,7 @@
 
 ## Status
 
-Active
+Completed
 
 ## Goal
 
@@ -42,11 +42,77 @@ This batch is the first step of the post-2.0 whole-repo/app hardening wave. It i
 - the active shell no longer carries unresolved top-level product-truth disagreement
 - Batch 36 can validate external/trust surfaces against a settled shell
 
-## Validation
+## What Landed
 
-- docs/control-file truth checks for touched planning files
-- targeted repo verification appropriate to the eventual implementation scope
-- do not mark this batch completed until the shell truth changes are validated truthfully
+- restored the canonical five-tab top-level shell:
+  - Today
+  - Goals
+  - Plan
+  - Insights
+  - Profile
+- added a real first-class Plan surface under `Native/Ambitions/Features/Plan/` as a narrow weekly-shaping dashboard built from existing goals, drafts, steps, captures, evidence, feedback, and habit-like semantics already present in the repo
+- preserved legacy `.captures` and `.habits` tab values as compatibility inputs while normalizing them into subordinate navigation truth:
+  - Captures routes under Today
+  - Habits routes under Plan
+- updated root navigation and shell consumers so the app no longer depends on a six-tab overflow model
+- tightened deep-link, payload, and external-route truth so canonical `ambitions://tab/plan` is supported and older captures/habits tab payloads still resolve safely into the new shell map
+- aligned preview wiring and profile copy with the settled shell truth
+- added focused shell, routing, Plan, and UI coverage for:
+  - canonical five-tab truth
+  - legacy tab normalization
+  - canonical Plan presence
+  - Today to Captures subordinate reachability
+  - Plan to Habits subordinate reachability
+
+## What Did Not Land
+
+- no Batch 36 external-surface validation or trust cleanup beyond the shell/routing compatibility needed to settle Batch 35 truth
+- no premium redesign or later UI/UX excellence wave work
+- no new intelligence-engine behavior, ranking changes, or planner heuristics
+- no broad secondary-surface productization beyond the minimum needed to make Plan real and keep Captures/Habits intentionally reachable
+
+## Validation That Actually Ran
+
+- `xcodegen generate`
+  - passed
+- native simulator build:
+  - `xcodebuild -project Ambitions.xcodeproj -scheme Ambitions -sdk iphonesimulator -destination "generic/platform=iOS Simulator" CODE_SIGNING_ALLOWED=NO build`
+  - passed
+- targeted shell, routing, and Plan coverage:
+  - `xcodebuild -project Ambitions.xcodeproj -scheme Ambitions -destination "platform=iOS Simulator,name=iPhone 17" -only-testing:AmbitionsTests/AppShellNavigationTests -only-testing:AmbitionsTests/ExternalRoutingTests -only-testing:AmbitionsTests/PlanFeatureServiceTests test`
+  - passed
+  - result: 26 tests, 0 failures
+- full native unit suite:
+  - `xcodebuild -project Ambitions.xcodeproj -scheme Ambitions -destination "platform=iOS Simulator,name=iPhone 17" -only-testing:AmbitionsTests test`
+  - passed
+  - result: 336 tests, 0 failures
+- full native UI suite:
+  - `xcodebuild -project Ambitions.xcodeproj -scheme Ambitions -destination "platform=iOS Simulator,name=iPhone 17" -only-testing:AmbitionsUITests test`
+  - passed
+  - result: 4 tests, 0 failures
+- manual simulator follow-up:
+  - canonical five-tab shell confirmed
+  - Plan confirmed visible as a first-class surface
+  - Today subordinate Captures flow exercised
+  - Plan subordinate Habits flow exercised
+  - shell/product-spec drift no longer visible in the top-level navigation model
+
+## Compatibility Notes
+
+- stored preferred-tab values of `.captures` now normalize to Today on load/save
+- stored preferred-tab values of `.habits` now normalize to Plan on load/save
+- legacy `ambitions://tab/captures` and equivalent payloads route safely into Today-owned Captures navigation
+- legacy `ambitions://tab/habits` and equivalent payloads route safely into Plan-owned Habits navigation
+- explicit captures inbox routes remain supported
+- Goal Detail routing remains owned by Goals and remains compatible with the settled shell
+
+## Completion Notes
+
+- Batch 35 delivered the shell correction the hardening wave depended on without pulling forward Batch 36 or the later UI/UX wave
+- Plan now exists as a truthful first-class weekly-shaping surface rather than a missing canon role
+- Captures and Habits remain intentionally reachable without continuing the old six-tab overflow drift
+- no additional Batch 35 implementation bug was identified during wrap-up
+- the checked-out branch remained `main` during implementation, validation, and wrap-up
 
 ## Completion Rule
 
