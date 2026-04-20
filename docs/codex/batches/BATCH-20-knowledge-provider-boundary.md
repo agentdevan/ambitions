@@ -44,8 +44,9 @@ This batch remained contract-first. It did not add real retrieval, networking, p
 
 - Batch 20 closed with a reusable provider/provenance/freshness/trust/uncertainty contract layer in domain, services, and runtime.
 - The batch intentionally preserved Ambitions' explicit local-only trust posture and degradation behavior instead of inventing a second runtime trust model.
-- Every future retrieved claim can now carry provider identity, provenance, freshness, trust classification, and uncertainty metadata before Batch 21 starts ingestion work.
+- Every future retrieved claim can now carry provider identity, provenance, freshness, trust classification, and uncertainty metadata before Batch 21 ingestion work.
+- Batch 21 followed this boundary with deterministic ingestion and normalization on top of the Batch 20 contracts.
 
 ## Next Active Batch
 
-Batch 21 — Ambitions 2.0 Batch 02 / External knowledge ingestion core
+Batch 22 — Ambitions 2.0 Batch 03 / Clarification and ambiguity engine

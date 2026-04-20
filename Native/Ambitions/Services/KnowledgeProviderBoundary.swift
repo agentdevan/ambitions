@@ -7,7 +7,18 @@ struct KnowledgeQuery: Codable, Sendable, Equatable, Hashable {
 
 struct KnowledgeProviderResponse: Codable, Sendable, Equatable {
     let claimSet: KnowledgeClaimSet
+    let providerInputs: [KnowledgeProviderClaimInput]
     let providerStatuses: [KnowledgeProviderStatus]
+
+    init(
+        claimSet: KnowledgeClaimSet,
+        providerInputs: [KnowledgeProviderClaimInput] = [],
+        providerStatuses: [KnowledgeProviderStatus]
+    ) {
+        self.claimSet = claimSet
+        self.providerInputs = providerInputs
+        self.providerStatuses = providerStatuses
+    }
 }
 
 protocol KnowledgeProviding: Sendable {
@@ -55,6 +66,15 @@ struct LocalOnlyKnowledgeProvider: KnowledgeProviding {
 
 struct KnowledgeProviderRegistry: KnowledgeProviding {
     let providers: [any KnowledgeProviding]
+    let ingestionService: any KnowledgeIngesting
+
+    init(
+        providers: [any KnowledgeProviding],
+        ingestionService: any KnowledgeIngesting = DefaultKnowledgeIngestionService()
+    ) {
+        self.providers = providers
+        self.ingestionService = ingestionService
+    }
 
     var descriptor: KnowledgeProviderDescriptor {
         KnowledgeProviderDescriptor(
@@ -87,38 +107,51 @@ struct KnowledgeProviderRegistry: KnowledgeProviding {
     }
 
     func fetch(query: KnowledgeQuery, now: Date) async throws -> KnowledgeProviderResponse {
-        var allClaims: [KnowledgeClaim] = []
         var allStatuses: [KnowledgeProviderStatus] = []
-        var degradationFragments: [String] = []
-        var conflictState: KnowledgeConflictState = .none
+        var allProviderInputs: [KnowledgeProviderClaimInput] = []
+        var fallbackClaims: [KnowledgeClaim] = []
+        var fallbackConflictState: KnowledgeConflictState = .none
+        var fallbackDegradationFragments: [String] = []
 
         for provider in providers {
             let currentStatus = await provider.status(now: now)
             let response = try await provider.fetch(query: query, now: now)
             let responseStatuses = response.providerStatuses.isEmpty ? [currentStatus] : response.providerStatuses
 
-            allClaims.append(contentsOf: response.claimSet.claims)
+            allProviderInputs.append(contentsOf: response.providerInputs)
+            fallbackClaims.append(contentsOf: response.claimSet.claims)
             allStatuses.append(contentsOf: responseStatuses)
             if let degradationSummary = response.claimSet.degradationSummary, degradationSummary.isEmpty == false {
-                degradationFragments.append(degradationSummary)
+                fallbackDegradationFragments.append(degradationSummary)
             }
             if response.claimSet.conflictState == .conflictingUnresolved {
-                conflictState = .conflictingUnresolved
+                fallbackConflictState = .conflictingUnresolved
             }
         }
 
-        if conflictState == .none && hasUnresolvedConflicts(in: allClaims) {
-            conflictState = .conflictingUnresolved
-        }
+        let normalized = ingestionService.ingest(
+            response: KnowledgeProviderResponse(
+                claimSet: KnowledgeClaimSet(
+                    claims: fallbackClaims,
+                    conflictState: fallbackConflictState == .conflictingUnresolved || hasUnresolvedConflicts(in: fallbackClaims)
+                        ? .conflictingUnresolved
+                        : .none,
+                    degradationSummary: fallbackDegradationFragments.isEmpty ? nil : fallbackDegradationFragments.joined(separator: " ")
+                ),
+                providerInputs: allProviderInputs,
+                providerStatuses: allStatuses
+            ),
+            fallbackStatuses: allStatuses
+        )
 
-        let degradationSummary = degradationFragments.isEmpty ? nil : degradationFragments.joined(separator: " ")
         return KnowledgeProviderResponse(
             claimSet: KnowledgeClaimSet(
-                claims: allClaims,
-                conflictState: conflictState,
-                degradationSummary: degradationSummary
+                claims: normalized.claimSet.claims,
+                conflictState: normalized.claimSet.conflictState,
+                degradationSummary: normalized.claimSet.degradationSummary
             ),
-            providerStatuses: allStatuses
+            providerInputs: allProviderInputs,
+            providerStatuses: normalized.providerStatuses
         )
     }
 

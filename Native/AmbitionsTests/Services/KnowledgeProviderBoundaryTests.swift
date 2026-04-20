@@ -39,10 +39,17 @@ final class KnowledgeProviderBoundaryTests: XCTestCase {
             ),
             response: KnowledgeProviderResponse(
                 claimSet: KnowledgeClaimSet(
-                    claims: [sampleClaim(id: "claim-1", providerID: "primary", summary: "Deadline is May 1")],
+                    claims: [],
                     conflictState: .none,
                     degradationSummary: nil
                 ),
+                providerInputs: [
+                    sampleProviderInput(
+                        providerClaimKey: "claim-1",
+                        providerID: "primary",
+                        summary: "Deadline is May 1"
+                    )
+                ],
                 providerStatuses: []
             )
         )
@@ -56,10 +63,19 @@ final class KnowledgeProviderBoundaryTests: XCTestCase {
             ),
             response: KnowledgeProviderResponse(
                 claimSet: KnowledgeClaimSet(
-                    claims: [sampleClaim(id: "claim-2", providerID: "secondary", summary: "Deadline is May 15", uncertaintyFlags: [.conflicting, .providerUnavailable])],
+                    claims: [],
                     conflictState: .conflictingUnresolved,
                     degradationSummary: "Secondary provider is unavailable and conflicts remain unresolved."
                 ),
+                providerInputs: [
+                    sampleProviderInput(
+                        providerClaimKey: "claim-2",
+                        providerID: "secondary",
+                        summary: "Deadline is May 15",
+                        trustLevel: .low,
+                        uncertaintyFlags: [.providerUnavailable]
+                    )
+                ],
                 providerStatuses: []
             )
         )
@@ -77,6 +93,39 @@ final class KnowledgeProviderBoundaryTests: XCTestCase {
     }
 
     func testProviderResponsesRetainProvenanceFreshnessAndTrustMetadata() async throws {
+        let provider = StubKnowledgeProvider(
+            descriptor: KnowledgeProviderDescriptor(id: "provider-1", type: .officialAPI, displayName: "Official API"),
+            statusValue: KnowledgeProviderStatus(
+                provider: KnowledgeProviderDescriptor(id: "provider-1", type: .officialAPI, displayName: "Official API"),
+                availability: .available,
+                detail: "Provider is available.",
+                runtimeTrustPosture: .localOnly
+            ),
+            response: KnowledgeProviderResponse(
+                claimSet: KnowledgeClaimSet(
+                    claims: [],
+                    conflictState: .none,
+                    degradationSummary: nil
+                ),
+                providerInputs: [sampleProviderInput(providerClaimKey: "claim-1", providerID: "provider-1", summary: "Tax filing deadline is April 15.", provenanceKind: .official, isOfficial: true)],
+                providerStatuses: []
+            )
+        )
+        let registry = KnowledgeProviderRegistry(providers: [provider])
+
+        let response = try await registry.fetch(
+            query: KnowledgeQuery(topic: "tax deadline", subject: "deadline"),
+            now: Date(timeIntervalSince1970: 1_776_600_000)
+        )
+        let returned = try XCTUnwrap(response.claimSet.claims.first)
+
+        XCTAssertEqual(returned.source.provenanceKind, .official)
+        XCTAssertEqual(returned.freshness.state, .fresh)
+        XCTAssertEqual(returned.trustLevel, .high)
+        XCTAssertEqual(returned.confidence, .high)
+    }
+
+    func testProviderResponsesFallBackToLegacyClaimSetWhenProviderInputsAreEmpty() async throws {
         let claim = sampleClaim()
         let provider = StubKnowledgeProvider(
             descriptor: KnowledgeProviderDescriptor(id: "provider-1", type: .officialAPI, displayName: "Official API"),
@@ -90,8 +139,9 @@ final class KnowledgeProviderBoundaryTests: XCTestCase {
                 claimSet: KnowledgeClaimSet(
                     claims: [claim],
                     conflictState: .none,
-                    degradationSummary: nil
+                    degradationSummary: "legacy_fallback"
                 ),
+                providerInputs: [],
                 providerStatuses: []
             )
         )
@@ -100,12 +150,9 @@ final class KnowledgeProviderBoundaryTests: XCTestCase {
             query: KnowledgeQuery(topic: "tax deadline", subject: "deadline"),
             now: Date(timeIntervalSince1970: 1_776_600_000)
         )
-        let returned = try XCTUnwrap(response.claimSet.claims.first)
 
-        XCTAssertEqual(returned.source.provenanceKind, .official)
-        XCTAssertEqual(returned.freshness.state, .fresh)
-        XCTAssertEqual(returned.trustLevel, .high)
-        XCTAssertEqual(returned.confidence, .high)
+        XCTAssertEqual(response.claimSet.claims, [claim])
+        XCTAssertEqual(response.providerInputs, [])
     }
 }
 
@@ -163,5 +210,43 @@ private struct StubKnowledgeProvider: KnowledgeProviding {
         _ = query
         _ = now
         return response
+    }
+}
+
+private extension KnowledgeProviderBoundaryTests {
+    func sampleProviderInput(
+        providerClaimKey: String,
+        providerID: String,
+        summary: String,
+        provenanceKind: KnowledgeProvenanceKind = .official,
+        isOfficial: Bool = true,
+        trustLevel: KnowledgeTrustLevel = .high,
+        uncertaintyFlags: Set<KnowledgeUncertaintyFlag> = []
+    ) -> KnowledgeProviderClaimInput {
+        KnowledgeProviderClaimInput(
+            providerClaimKey: providerClaimKey,
+            providerID: providerID,
+            subject: "deadline",
+            summary: summary,
+            detail: nil,
+            source: KnowledgeProviderSourceInput(
+                providerSourceKey: "source-\(providerClaimKey)",
+                entityTitle: "Tax calendar",
+                publisher: "IRS",
+                locator: "https://example.com/tax-calendar",
+                provenanceKind: provenanceKind,
+                isOfficial: isOfficial
+            ),
+            freshness: KnowledgeFreshnessMetadata(
+                retrievedAt: "2026-04-19T12:00:00Z",
+                publishedAt: "2026-04-18T12:00:00Z",
+                staleAfter: "2026-04-26T12:00:00Z",
+                expiresAt: "2026-05-01T12:00:00Z",
+                state: .fresh
+            ),
+            trustLevel: trustLevel,
+            confidence: trustLevel == .low ? .low : .high,
+            uncertaintyFlags: uncertaintyFlags
+        )
     }
 }
