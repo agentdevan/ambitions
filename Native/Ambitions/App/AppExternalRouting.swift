@@ -132,7 +132,7 @@ struct AppExternalRouteTranslator {
         case .openCapturesInbox:
             return ExternalSurfaceActionPayload.routePayload(
                 surface: .capturesInbox,
-                tab: AppTab.captures.rawValue
+                tab: AppTab.today.rawValue
             )
         case let .genericExternalEntry(kind, payload):
             var values = payload
@@ -161,7 +161,7 @@ struct AppExternalRouteTranslator {
             return ExternalSurfaceActionPayload.commandPayload(
                 action: actionName,
                 surface: .capturesInbox,
-                tab: AppTab.captures.rawValue
+                tab: AppTab.today.rawValue
             )
         case .genericExternalEntry:
             var values = routePayload(for: route)
@@ -224,11 +224,11 @@ final class DefaultAppExternalRouter: AppExternalRouting {
 
         switch route {
         case let .openTab(tab):
-            navigation.selectedTab = tab
+            navigation.selectTab(tab)
         case let .openGoalDetail(goalID):
             navigation.openGoalDetail(goalID: goalID)
         case .openCapturesInbox:
-            navigation.selectedTab = .captures
+            navigation.openCapturesInbox()
         case .genericExternalEntry:
             navigation.selectedTab = .today
         }

@@ -41,21 +41,30 @@ final class AmbitionsUITests: XCTestCase {
         XCTAssertTrue(titleField.waitForNonExistence(timeout: 10))
     }
 
-    func testPreviewBootstrapExposesTodayHabitsInsightsAndProfileSurfaces() throws {
+    func testPreviewBootstrapExposesCanonicalFiveTabShellAndSecondarySurfaces() throws {
         let app = makeApp(bootstrapMode: "preview")
         app.launch()
 
-        let todayTab = app.tabBars.buttons["Today"]
-        XCTAssertTrue(todayTab.waitForExistence(timeout: 10))
-        XCTAssertTrue(todayTab.isSelected)
+        for tab in ["Today", "Goals", "Plan", "Insights", "Profile"] {
+            XCTAssertTrue(app.tabBars.buttons[tab].waitForExistence(timeout: 10), "Missing top-level tab \(tab)")
+        }
+        XCTAssertFalse(app.tabBars.buttons["More"].exists)
+        XCTAssertFalse(app.tabBars.buttons["Captures"].exists)
+        XCTAssertFalse(app.tabBars.buttons["Habits"].exists)
+        XCTAssertTrue(app.tabBars.buttons["Today"].isSelected)
 
-        app.tabBars.buttons["Habits"].tap()
+        app.buttons["today.open-captures-button"].tap()
+        XCTAssertTrue(app.staticTexts["No captures yet"].waitForExistence(timeout: 10))
+
+        app.tabBars.buttons["Plan"].tap()
+        XCTAssertTrue(app.descendants(matching: .any)["plan.screen"].waitForExistence(timeout: 10))
+        app.buttons["plan.open-habits-button"].tap()
         XCTAssertTrue(app.staticTexts["No habits are live yet"].waitForExistence(timeout: 10))
 
-        openMoreDestination("Insights", in: app)
+        app.tabBars.buttons["Insights"].tap()
         XCTAssertTrue(app.descendants(matching: .any)["insights.screen"].waitForExistence(timeout: 10))
 
-        openMoreDestination("Profile", in: app)
+        app.tabBars.buttons["Profile"].tap()
         XCTAssertTrue(app.descendants(matching: .any)["profile.default-tab-picker"].waitForExistence(timeout: 10))
         XCTAssertTrue(app.descendants(matching: .any)["profile.appearance-picker"].waitForExistence(timeout: 10))
         XCTAssertTrue(app.buttons["profile.save-preferences-button"].waitForExistence(timeout: 10))
@@ -65,7 +74,7 @@ final class AmbitionsUITests: XCTestCase {
         let app = makeApp(bootstrapMode: "preview")
         app.launch()
 
-        openMoreDestination("Profile", in: app)
+        app.tabBars.buttons["Profile"].tap()
 
         let defaultTabPicker = app.descendants(matching: .any)["profile.default-tab-picker"]
         let appearancePicker = app.descendants(matching: .any)["profile.appearance-picker"]
@@ -82,27 +91,6 @@ final class AmbitionsUITests: XCTestCase {
         return app
     }
 
-    private func openMoreDestination(_ label: String, in app: XCUIApplication) {
-        let moreTab = app.tabBars.buttons["More"]
-        XCTAssertTrue(moreTab.waitForExistence(timeout: 10))
-        moreTab.tap()
-
-        let moreBackButton = app.navigationBars.buttons["More"]
-        if moreBackButton.waitForExistence(timeout: 2), moreBackButton.isHittable {
-            moreBackButton.tap()
-        }
-
-        let destinationLabel = app.tables.staticTexts[label]
-        if destinationLabel.waitForExistence(timeout: 10) {
-            let destinationCell = app.tables.cells.containing(.staticText, identifier: label).element
-            if destinationCell.waitForExistence(timeout: 2), destinationCell.isHittable {
-                destinationCell.tap()
-                return
-            }
-        }
-
-        XCTFail("More destination row '\(label)' was not found.")
-    }
     private func dismissKeyboardIfNeeded(in app: XCUIApplication) {
         let keyboard = app.keyboards.element
         guard keyboard.exists else { return }

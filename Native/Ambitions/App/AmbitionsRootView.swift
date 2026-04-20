@@ -13,10 +13,9 @@ struct AmbitionsRootView: View {
 
     var body: some View {
         TabView(selection: $navigation.selectedTab) {
-            tabNavigation(tab: .today) { TodayScreen() }
-            tabNavigation(tab: .captures) { CapturesScreen() }
+            todayNavigation()
             goalsNavigation()
-            tabNavigation(tab: .habits) { HabitsScreen() }
+            planNavigation()
             tabNavigation(tab: .insights) { InsightsScreen() }
             tabNavigation(tab: .profile) { ProfileScreen() }
         }
@@ -35,6 +34,22 @@ struct AmbitionsRootView: View {
         }
     }
 
+    private func todayNavigation() -> some View {
+        NavigationStack(path: $navigation.todayPath) {
+            TodayScreen()
+                .navigationDestination(for: TodayRouteTarget.self) { target in
+                    switch target {
+                    case .capturesInbox:
+                        CapturesScreen()
+                    }
+                }
+        }
+        .tag(AppTab.today)
+        .tabItem {
+            Label(AppTab.today.title, systemImage: AppTab.today.systemImage)
+        }
+    }
+
     private func goalsNavigation() -> some View {
         NavigationStack(path: $navigation.goalsPath) {
             GoalsScreen()
@@ -45,6 +60,25 @@ struct AmbitionsRootView: View {
         .tag(AppTab.goals)
         .tabItem {
             Label(AppTab.goals.title, systemImage: AppTab.goals.systemImage)
+        }
+    }
+
+    private func planNavigation() -> some View {
+        NavigationStack(path: $navigation.planPath) {
+            PlanScreen()
+                .navigationDestination(for: PlanRouteTarget.self) { target in
+                    switch target {
+                    case .habits:
+                        HabitsScreen()
+                    }
+                }
+                .navigationDestination(for: GoalRouteTarget.self) { target in
+                    GoalDetailScreen(target: target)
+                }
+        }
+        .tag(AppTab.plan)
+        .tabItem {
+            Label(AppTab.plan.title, systemImage: AppTab.plan.systemImage)
         }
     }
 }

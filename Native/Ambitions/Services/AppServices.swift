@@ -32,6 +32,10 @@ protocol HabitsServicing: Sendable {
     func performAction(_ request: HabitActionRequest, now: Date) async throws -> HabitActionResponse
 }
 
+protocol PlanServicing: Sendable {
+    func loadPlanDashboard(now: Date) async throws -> PlanDashboard
+}
+
 protocol InsightsServicing: Sendable {
     func loadInsightsDashboard() async throws -> InsightsDashboard
 }
@@ -108,6 +112,15 @@ struct StubHabitsService: HabitsServicing {
         _ = request
         _ = now
         return actionResponse ?? HabitActionResponse(message: nil)
+    }
+}
+
+struct StubPlanService: PlanServicing {
+    let dashboard: PlanDashboard
+
+    func loadPlanDashboard(now: Date) async throws -> PlanDashboard {
+        _ = now
+        return dashboard
     }
 }
 
@@ -189,7 +202,7 @@ struct DefaultAppActionRouter: AppActionRouting {
         case .profileSummary, .settingsGroup:
             navigation.selectedTab = .profile
         case .habitSummary, .streak:
-            navigation.selectedTab = .habits
+            navigation.openHabits()
         case .dailyTargets, .focusNow, .freeTime, .milestonePrompt, .goalsList, .celebration:
             navigation.selectedTab = .today
         }

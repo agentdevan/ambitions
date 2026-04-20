@@ -26,19 +26,44 @@ struct GoalRouteTarget: Hashable, Identifiable, Sendable {
     var hasAddressableContent: Bool { goalID != nil || draftID != nil }
 }
 
+enum TodayRouteTarget: String, Hashable, Identifiable, Sendable {
+    case capturesInbox
+
+    var id: String { rawValue }
+}
+
+enum PlanRouteTarget: String, Hashable, Identifiable, Sendable {
+    case habits
+
+    var id: String { rawValue }
+}
+
 @MainActor
 @Observable
 final class AppNavigationModel {
     var selectedTab: AppTab
+    var todayPath: [TodayRouteTarget]
     var goalsPath: [GoalRouteTarget]
+    var planPath: [PlanRouteTarget]
     var lastExternalRoute: AppExternalRoute?
     var lastExternalRouteSource: AppExternalRouteSource?
 
     init(selectedTab: AppTab) {
-        self.selectedTab = selectedTab
+        self.selectedTab = selectedTab.canonicalTopLevelTab
+        todayPath = selectedTab == .captures ? [.capturesInbox] : []
         goalsPath = []
+        planPath = selectedTab == .habits ? [.habits] : []
         lastExternalRoute = nil
         lastExternalRouteSource = nil
+    }
+
+    func selectTab(_ tab: AppTab) {
+        selectedTab = tab.canonicalTopLevelTab
+        if tab == .captures {
+            openCapturesInbox()
+        } else if tab == .habits {
+            openHabits()
+        }
     }
 
     func openGoalDetail(_ target: GoalRouteTarget) {
@@ -57,5 +82,15 @@ final class AppNavigationModel {
 
     func resetGoalsPath() {
         goalsPath = []
+    }
+
+    func openCapturesInbox() {
+        selectedTab = .today
+        todayPath = [.capturesInbox]
+    }
+
+    func openHabits() {
+        selectedTab = .plan
+        planPath = [.habits]
     }
 }

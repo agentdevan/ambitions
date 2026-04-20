@@ -80,6 +80,7 @@ enum AppContainerFactory {
             captureService: runtime.captureService,
             goalsService: runtime.goalsService,
             habitsService: runtime.habitsService,
+            planService: runtime.planService,
             insightsService: runtime.insightsService,
             profileService: runtime.profileService,
             notificationService: notificationService,

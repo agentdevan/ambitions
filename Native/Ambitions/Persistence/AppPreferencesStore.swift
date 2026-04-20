@@ -30,7 +30,7 @@ struct RepositoryBackedAppPreferencesStore: AppPreferencesStore {
 
     func savePreferences(_ preferences: AppPreferences) async throws {
         var state = try await appStateRepository.loadState()
-        state.preferredTab = preferences.preferredTab
+        state.preferredTab = preferences.preferredTab.canonicalTopLevelTab
         state.userDisplayName = preferences.userDisplayName
         state.appearancePreference = preferences.appearancePreference
         try await appStateRepository.saveState(state)

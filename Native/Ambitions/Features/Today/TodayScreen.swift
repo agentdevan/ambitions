@@ -83,6 +83,16 @@ struct TodayScreen: View {
             }
         }
         .navigationTitle("Today")
+        .toolbar {
+            ToolbarItem(placement: .topBarTrailing) {
+                Button {
+                    container.navigation.openCapturesInbox()
+                } label: {
+                    Label("Captures", systemImage: AppTab.captures.systemImage)
+                }
+                .accessibilityIdentifier("today.open-captures-button")
+            }
+        }
         .animation(theme.motion.animation(reduceMotion: reduceMotion, emphasis: true), value: viewModel.stateKey)
         .animation(theme.motion.animation(reduceMotion: reduceMotion), value: viewModel.transientMessage?.title)
         .onChange(of: container.navigation.selectedTab) { _, selectedTab in

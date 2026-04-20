@@ -50,7 +50,7 @@ struct AppStateSnapshot: Identifiable, Codable, Sendable, Equatable {
 
     var preferences: AppPreferences {
         AppPreferences(
-            preferredTab: preferredTab,
+            preferredTab: preferredTab.canonicalTopLevelTab,
             userDisplayName: userDisplayName,
             appearancePreference: appearancePreference
         )

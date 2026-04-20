@@ -20,7 +20,7 @@ struct RepositoryBackedProfileService: ProfileServicing {
 
     func saveProfilePreferences(_ preferences: ProfilePreferencesUpdate) async throws -> ProfileDashboard {
         var state = try await repositories.appState.loadState()
-        state.preferredTab = preferences.preferredTab
+        state.preferredTab = preferences.preferredTab.canonicalTopLevelTab
         state.appearancePreference = preferences.appearancePreference
         state.reviewCadenceDays = max(1, preferences.reviewCadenceDays)
         state.localOnlyModeEnabled = true
@@ -70,7 +70,7 @@ private extension RepositoryBackedProfileService {
 
         return ProfileDashboard(
             title: profileTitle,
-            subtitle: "This build keeps planning data in explicit local-only mode. Today quick capture and the Captures tab are active in the native app, while account sync is not implemented and external device surfaces still need separate validation.",
+            subtitle: "This build keeps planning data in explicit local-only mode. Today owns the capture inbox, Plan owns routine review, and account sync is not implemented.",
             initials: initials.isEmpty ? "U" : initials,
             badges: [
                 "Local-only trust",
@@ -87,7 +87,7 @@ private extension RepositoryBackedProfileService {
             settingsSubtitle: "These preferences are persisted on device and already shape the native local-only experience.",
             settings: [
                 SettingsItem(id: "profile-storage", title: "Planning storage", subtitle: "Goals, habits, evidence, and feedback all read from the native repository.", icon: "internaldrive", valueLabel: "Local-only mode"),
-                SettingsItem(id: "profile-tab", title: "Default tab", subtitle: "Used on the next cold launch.", icon: "square.grid.2x2", valueLabel: snapshot.appState.preferredTab.title),
+                SettingsItem(id: "profile-tab", title: "Default tab", subtitle: "Used on the next cold launch.", icon: "square.grid.2x2", valueLabel: snapshot.appState.preferredTab.canonicalTopLevelTab.title),
                 SettingsItem(id: "profile-appearance", title: "Appearance", subtitle: "Choose whether Ambitions follows the system or stays explicit.", icon: "circle.lefthalf.filled", valueLabel: snapshot.appState.appearancePreference.title),
                 SettingsItem(id: "profile-review", title: "Review cadence", subtitle: "How often Profile frames a planning reset.", icon: "clock.arrow.circlepath", valueLabel: reviewLabel(days: snapshot.appState.reviewCadenceDays)),
                 SettingsItem(id: "profile-trust", title: "Trust posture", subtitle: "Portable backup/restore is designed for local-first continuity without implying a live cloud backend.", icon: "lock.shield", valueLabel: syncStatus.detail),
@@ -99,9 +99,9 @@ private extension RepositoryBackedProfileService {
                     valueLabel: "Native foundations"
                 )
             ],
-            settingsFooter: "Everything in this version runs from an explicit local-only trust posture. Capture storage is live in the app today, portable backup and restore can stay local-first, widget and Live Activity foundations still need validation, and there is no account sync configuration to manage yet.",
+            settingsFooter: "Everything in this version runs from an explicit local-only trust posture. Capture storage is live under Today, routine review lives under Plan, portable backup and restore can stay local-first, and there is no account sync configuration to manage yet.",
             preferences: ProfilePreferencesState(
-                preferredTab: snapshot.appState.preferredTab,
+                preferredTab: snapshot.appState.preferredTab.canonicalTopLevelTab,
                 appearancePreference: snapshot.appState.appearancePreference,
                 reviewCadenceDays: snapshot.appState.reviewCadenceDays,
                 localOnlyModeEnabled: true
