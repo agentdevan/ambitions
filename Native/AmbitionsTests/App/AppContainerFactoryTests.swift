@@ -88,6 +88,7 @@ final class AppContainerFactoryTests: XCTestCase {
 
         XCTAssertEqual(container.runtime.clientContext.kind, .iphoneApp)
         XCTAssertEqual(container.runtime.capabilities.syncBackendKind, .localOnly)
+        XCTAssertNotNil(container.runtime.goalIntelligenceService as? RepositoryBackedRuntimeGoalIntelligenceService)
         XCTAssertNotNil(container.todayService as? NotificationSchedulingTodayService)
         XCTAssertNotNil(container.goalsService as? NotificationSchedulingGoalsService)
         XCTAssertTrue(container.captureService is DefaultCaptureService)

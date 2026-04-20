@@ -119,6 +119,7 @@ final class AmbitionsRuntimeBoundaryTests: XCTestCase {
         XCTAssertEqual(runtime.capabilities.syncBackendKind, .localOnly)
         XCTAssertNotNil(runtime.todayService as? NotificationSchedulingTodayService)
         XCTAssertNotNil(runtime.goalsService as? NotificationSchedulingGoalsService)
+        XCTAssertNotNil(runtime.goalIntelligenceService as? RepositoryBackedRuntimeGoalIntelligenceService)
         XCTAssertTrue(runtime.captureService is DefaultCaptureService)
         let knowledgeStatus = await runtime.knowledgeProvider.status(now: .now)
         XCTAssertEqual(knowledgeStatus.availability, .localOnlyMode)

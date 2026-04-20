@@ -23,8 +23,17 @@ enum AmbitionsRuntimeFactory {
             energyFitService: energyFitService,
             energyLearningService: energyLearningService
         )
+        let explainabilityProjector = DefaultGoalExplainabilityProjector()
+        let teachingService = DefaultGoalTeachingSignalService(repository: repositories.teaching)
         let ritualService = RitualOrchestrationService(selector: selector)
         let goalOrchestrator = GoalEngineOrchestrator(energyFitService: energyFitService)
+        let goalIntelligenceService = RepositoryBackedRuntimeGoalIntelligenceService(
+            repositories: repositories,
+            explainabilityProjector: explainabilityProjector,
+            teachingReader: teachingService,
+            teachingCaptureService: teachingService,
+            learningService: learningService
+        )
         let memoryService = RepositoryBackedRuntimeMemoryService(repositories: repositories)
         let contextService = RepositoryBackedRuntimeContextService(
             clientContext: clientContext,
@@ -43,7 +52,8 @@ enum AmbitionsRuntimeFactory {
                 sharedLifeService: sharedLifeService,
                 energyFitService: energyFitService,
                 energyLearningService: energyLearningService,
-                selector: selector
+                selector: selector,
+                goalIntelligenceService: goalIntelligenceService
             ),
             snapshotWriter: snapshotWriter
         )
@@ -52,7 +62,10 @@ enum AmbitionsRuntimeFactory {
                 repositories: repositories,
                 orchestrator: goalOrchestrator,
                 calendarRemindersService: calendarRemindersService,
-                learningService: learningService
+                learningService: learningService,
+                explainabilityProjector: explainabilityProjector,
+                teachingService: teachingService,
+                goalIntelligenceService: goalIntelligenceService
             ),
             snapshotWriter: snapshotWriter
         )
@@ -87,6 +100,7 @@ enum AmbitionsRuntimeFactory {
             memoryService: memoryService,
             contextService: contextService,
             actionExecutor: actionExecutor,
+            goalIntelligenceService: goalIntelligenceService,
             syncCapability: syncCapability,
             snapshotWriter: snapshotWriter,
             todayService: todayService,

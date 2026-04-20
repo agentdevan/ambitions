@@ -127,6 +127,7 @@ final class AmbitionsRuntime {
     let memoryService: any RuntimeMemoryServicing
     let contextService: any RuntimeContextServicing
     let actionExecutor: any RuntimeActionCommandExecuting
+    let goalIntelligenceService: any RuntimeGoalIntelligenceServicing
     let syncCapability: any SyncCapability
     let snapshotWriter: any ExternalSurfaceSnapshotWriting
     let todayService: any TodayServicing
@@ -147,6 +148,7 @@ final class AmbitionsRuntime {
         memoryService: any RuntimeMemoryServicing,
         contextService: any RuntimeContextServicing,
         actionExecutor: any RuntimeActionCommandExecuting,
+        goalIntelligenceService: any RuntimeGoalIntelligenceServicing,
         syncCapability: any SyncCapability,
         snapshotWriter: any ExternalSurfaceSnapshotWriting,
         todayService: any TodayServicing,
@@ -166,6 +168,7 @@ final class AmbitionsRuntime {
         self.memoryService = memoryService
         self.contextService = contextService
         self.actionExecutor = actionExecutor
+        self.goalIntelligenceService = goalIntelligenceService
         self.syncCapability = syncCapability
         self.snapshotWriter = snapshotWriter
         self.todayService = todayService

@@ -10,7 +10,8 @@ struct RepositoryBackedGoalsService: GoalsServicing {
     let calendarRemindersService: any CalendarRemindersServicing
     let learningService: LearningAnticipationService
     let explainabilityProjector: any GoalExplainabilityProjecting
-    let teachingService: DefaultGoalTeachingSignalService
+    let teachingService: any GoalTeachingSignalReading & GoalTeachingSignalCapturing
+    let goalIntelligenceService: (any RuntimeGoalIntelligenceServicing)?
 
     init(
         repositories: AppRepositories,
@@ -20,8 +21,11 @@ struct RepositoryBackedGoalsService: GoalsServicing {
         orchestrator: any GoalOrchestrating = GoalEngineOrchestrator(),
         calendarRemindersService: (any CalendarRemindersServicing)? = nil,
         learningService: LearningAnticipationService = LearningAnticipationService(),
-        explainabilityProjector: any GoalExplainabilityProjecting = DefaultGoalExplainabilityProjector()
+        explainabilityProjector: any GoalExplainabilityProjecting = DefaultGoalExplainabilityProjector(),
+        teachingService: (any GoalTeachingSignalReading & GoalTeachingSignalCapturing)? = nil,
+        goalIntelligenceService: (any RuntimeGoalIntelligenceServicing)? = nil
     ) {
+        let compatibilityTeachingService = DefaultGoalTeachingSignalService(repository: repositories.teaching)
         self.repositories = repositories
         self.planner = planner
         self.adaptationService = adaptationService
@@ -30,7 +34,8 @@ struct RepositoryBackedGoalsService: GoalsServicing {
         self.calendarRemindersService = calendarRemindersService ?? StubCalendarRemindersService()
         self.learningService = learningService
         self.explainabilityProjector = explainabilityProjector
-        self.teachingService = DefaultGoalTeachingSignalService(repository: repositories.teaching)
+        self.teachingService = teachingService ?? compatibilityTeachingService
+        self.goalIntelligenceService = goalIntelligenceService
     }
 
     func loadOverview() async throws -> GoalsOverview {
@@ -202,17 +207,32 @@ struct RepositoryBackedGoalsService: GoalsServicing {
             throw GoalsFeatureError.notActionable
         }
 
-        let signal = try await teachingService.capture(
-            GoalTeachingCaptureRequest(
-                goalID: goalID,
-                capturedAt: DomainTimestamp.string(from: now),
-                kind: request.control.teachingSignalKind,
-                payload: request.control.payload,
-                target: request.control.target,
-                userNote: request.control.subtitle
-            ),
-            metadata: metadata
-        )
+        let signal: GoalTeachingSignal
+        if let goalIntelligenceService {
+            do {
+                signal = try await goalIntelligenceService.captureCorrection(
+                    target: request.target,
+                    control: request.control,
+                    now: now
+                )
+            } catch RuntimeGoalIntelligenceError.notFound {
+                throw GoalsFeatureError.notFound
+            } catch RuntimeGoalIntelligenceError.notActionable {
+                throw GoalsFeatureError.notActionable
+            }
+        } else {
+            signal = try await teachingService.capture(
+                GoalTeachingCaptureRequest(
+                    goalID: goalID,
+                    capturedAt: DomainTimestamp.string(from: now),
+                    kind: request.control.teachingSignalKind,
+                    payload: request.control.payload,
+                    target: request.control.target,
+                    userNote: request.control.subtitle
+                ),
+                metadata: metadata
+            )
+        }
 
         return GoalDetailActionResponse(
             message: GoalDetailInlineMessage(
@@ -588,6 +608,12 @@ private extension RepositoryBackedGoalsService {
     func makeDetail(target: GoalRouteTarget, snapshot: Snapshot) async throws -> GoalDetailPresentation {
         let context = try resolveDetailContext(target: target, snapshot: snapshot)
         let applicableSignals = try await explainabilitySignals(for: context)
+        let runtimeIntelligenceContext = try await goalIntelligenceContext(
+            for: context,
+            primaryStepID: context.primaryStep?.id,
+            includeWhyNow: true,
+            now: .now
+        )
 
         if let goalID = context.goal?.id {
             var appState = snapshot.appState
@@ -601,7 +627,8 @@ private extension RepositoryBackedGoalsService {
             from: context,
             appState: snapshot.appState,
             priorityOrder: normalizedPriorityOrder(snapshot: snapshot),
-            applicableSignals: applicableSignals
+            applicableSignals: applicableSignals,
+            runtimeIntelligenceContext: runtimeIntelligenceContext
         )
     }
 
@@ -750,7 +777,8 @@ private extension RepositoryBackedGoalsService {
         from context: DetailContext,
         appState: AppStateSnapshot,
         priorityOrder: [String],
-        applicableSignals: GoalTeachingApplicableSet?
+        applicableSignals: GoalTeachingApplicableSet?,
+        runtimeIntelligenceContext: RuntimeGoalIntelligenceContext?
     ) -> GoalDetailPresentation {
         let sourceGoal = context.goal
         let sourceDraft = context.draft?.draft
@@ -783,7 +811,7 @@ private extension RepositoryBackedGoalsService {
                 ).whyNow
             }
         }
-        let explainability = context.draft?.metadata.map { metadata in
+        let explainability = runtimeIntelligenceContext?.explainability ?? context.draft?.metadata.map { metadata in
             explainabilityProjector.makeState(
                 metadata: metadata,
                 applicableSignals: applicableSignals,
@@ -1122,7 +1150,12 @@ private extension RepositoryBackedGoalsService {
         case .askWhyThisMatters:
             history.append(.askedWhyThisMatters(base: base))
             try await repositories.feedback.saveEvents(history, goalID: goal.id)
-            let projectedExplanation = detail.draft?.metadata.map { metadata in
+            let projectedExplanation = try await goalIntelligenceContext(
+                for: detail,
+                primaryStepID: selectedStep.id,
+                includeWhyNow: true,
+                now: now
+            )?.explainability.whyThis.compactSummary ?? detail.draft?.metadata.map { metadata in
                 explainabilityProjector.makeState(
                     metadata: metadata,
                     applicableSignals: nil,
@@ -1860,10 +1893,35 @@ private extension RepositoryBackedGoalsService {
     }
 
     func explainabilitySignals(for context: DetailContext) async throws -> GoalTeachingApplicableSet? {
+        if let runtimeContext = try await goalIntelligenceContext(
+            for: context,
+            primaryStepID: context.primaryStep?.id,
+            includeWhyNow: false,
+            now: .now
+        ) {
+            return runtimeContext.applicableSignals
+        }
         guard let metadata = context.draft?.metadata else { return nil }
         let goalID = context.goal?.id ?? context.draft?.plannedGoalID ?? metadata.context.goalID
         guard let goalID else { return nil }
         return try await teachingService.applicableSignals(goalID: goalID, metadata: metadata)
+    }
+
+    func goalIntelligenceContext(
+        for context: DetailContext,
+        primaryStepID: String?,
+        includeWhyNow: Bool,
+        now: Date
+    ) async throws -> RuntimeGoalIntelligenceContext? {
+        guard let goalIntelligenceService else { return nil }
+        return try await goalIntelligenceService.loadContext(
+            RuntimeGoalIntelligenceRequest(
+                target: context.target,
+                primaryStepID: primaryStepID,
+                includeWhyNow: includeWhyNow
+            ),
+            now: now
+        )
     }
 
     func correctionMessage(for signal: GoalTeachingSignal) -> String {

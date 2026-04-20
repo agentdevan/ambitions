@@ -135,6 +135,60 @@ final class TodayFreshGoalVisibilityTests: XCTestCase {
         XCTAssertEqual(response.message?.body, expected.whyThis.compactSummary)
     }
 
+    func testAskWhyThisMattersMatchesRuntimeIntelligencePath() async throws {
+        let directRepositories = try await makeRepositories()
+        let runtimeRepositories = try await makeRepositories()
+        let directGoalsService = RepositoryBackedGoalsService(repositories: directRepositories)
+        let runtimeGoalsService = RepositoryBackedGoalsService(repositories: runtimeRepositories)
+
+        let directCreated = try await directGoalsService.createGoal(
+            CreateGoalRequest(title: "Submit my conference talk proposal by 2026-05-15"),
+            now: fixedNow
+        )
+        let runtimeCreated = try await runtimeGoalsService.createGoal(
+            CreateGoalRequest(title: "Submit my conference talk proposal by 2026-05-15"),
+            now: fixedNow
+        )
+        let directGoalID = try XCTUnwrap(directCreated.target.goalID)
+        let runtimeGoalID = try XCTUnwrap(runtimeCreated.target.goalID)
+        let directStoredGoal = try await directRepositories.goals.goal(id: directGoalID)
+        let runtimeStoredGoal = try await runtimeRepositories.goals.goal(id: runtimeGoalID)
+        let directGoal = try XCTUnwrap(directStoredGoal)
+        let runtimeGoal = try XCTUnwrap(runtimeStoredGoal)
+        let directStep = try XCTUnwrap(directGoal.plan?.sections.first?.steps.first)
+        let runtimeStep = try XCTUnwrap(runtimeGoal.plan?.sections.first?.steps.first)
+
+        let directTodayService = RepositoryBackedTodayService(repositories: directRepositories)
+        let migratedTodayService = RepositoryBackedTodayService(
+            repositories: runtimeRepositories,
+            goalIntelligenceService: RepositoryBackedRuntimeGoalIntelligenceService(repositories: runtimeRepositories)
+        )
+
+        let directResponse = try await directTodayService.performAction(
+            TodayInlineAction(
+                kind: .askWhyThisMatters,
+                title: "Why this matters",
+                systemImage: "questionmark.circle",
+                state: .default,
+                target: TodayActionTarget(goalID: directGoalID, stepID: directStep.id, draftID: directCreated.target.draftID)
+            ),
+            now: fixedNow
+        )
+        let migratedResponse = try await migratedTodayService.performAction(
+            TodayInlineAction(
+                kind: .askWhyThisMatters,
+                title: "Why this matters",
+                systemImage: "questionmark.circle",
+                state: .default,
+                target: TodayActionTarget(goalID: runtimeGoalID, stepID: runtimeStep.id, draftID: runtimeCreated.target.draftID)
+            ),
+            now: fixedNow
+        )
+
+        XCTAssertEqual(migratedResponse.message?.title, directResponse.message?.title)
+        XCTAssertEqual(migratedResponse.message?.body, directResponse.message?.body)
+    }
+
     @MainActor
     func testTodayViewModelActivateRefreshesOnReturnToTodayTab() async {
         let first = PreviewTodayScenarios.empty

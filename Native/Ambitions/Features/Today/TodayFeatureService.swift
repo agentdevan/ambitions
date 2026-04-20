@@ -12,6 +12,7 @@ struct RepositoryBackedTodayService: TodayServicing {
     let sharedLifeService: SharedLifeCoordinationService
     let selector: PlanningNextStepSelector
     let explainabilityProjector: any GoalExplainabilityProjecting
+    let goalIntelligenceService: (any RuntimeGoalIntelligenceServicing)?
 
     init(
         repositories: AppRepositories,
@@ -25,7 +26,8 @@ struct RepositoryBackedTodayService: TodayServicing {
         energyFitService: any GoalEnergyFitEvaluating = DefaultGoalEnergyFitService(),
         energyLearningService: any GoalEnergyLearning = DefaultGoalEnergyLearningService(),
         selector: PlanningNextStepSelector? = nil,
-        explainabilityProjector: any GoalExplainabilityProjecting = DefaultGoalExplainabilityProjector()
+        explainabilityProjector: any GoalExplainabilityProjecting = DefaultGoalExplainabilityProjector(),
+        goalIntelligenceService: (any RuntimeGoalIntelligenceServicing)? = nil
     ) {
         self.repositories = repositories
         self.adaptationService = adaptationService
@@ -42,6 +44,7 @@ struct RepositoryBackedTodayService: TodayServicing {
             energyLearningService: energyLearningService
         )
         self.explainabilityProjector = explainabilityProjector
+        self.goalIntelligenceService = goalIntelligenceService
     }
 
     func loadTodayExperience(userDisplayName: String, now: Date) async throws -> TodayExperience {
@@ -739,7 +742,14 @@ private extension RepositoryBackedTodayService {
             events.append(.askedWhyThisMatters(base: base))
             try await repositories.feedback.saveEvents(events, goalID: goalID)
             let adjustment = adjustmentPayload(draft: draft, goal: goal, step: selectedStep, history: events)
-            let explanation = draft?.metadata.map { metadata in
+            let explanation = try await goalIntelligenceService?.loadContext(
+                RuntimeGoalIntelligenceRequest(
+                    target: GoalRouteTarget(goalID: goalID, draftID: draft?.id),
+                    primaryStepID: selectedStep.id,
+                    includeWhyNow: true
+                ),
+                now: now
+            )?.explainability.whyThis.compactSummary ?? draft?.metadata.map { metadata in
                 explainabilityProjector.makeState(
                     metadata: metadata,
                     applicableSignals: nil,
