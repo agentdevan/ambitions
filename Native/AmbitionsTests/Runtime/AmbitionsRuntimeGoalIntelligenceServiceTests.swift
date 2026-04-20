@@ -94,6 +94,45 @@ final class AmbitionsRuntimeGoalIntelligenceServiceTests: XCTestCase {
             normalizedApplicationKey(directSignal.applicationKey)
         )
     }
+
+    func testBatchLoadContextMatchesSingleTargetProjectionAndOrdering() async throws {
+        let repositories = try await makeRepositories()
+        let first = try await createGoalContext(
+            repositories: repositories,
+            title: "Submit my conference talk proposal by 2026-05-15"
+        )
+        let second = try await createGoalContext(
+            repositories: repositories,
+            title: "Launch my business by 2026-08-01"
+        )
+        let requests = [
+            RuntimeGoalIntelligenceRequest(
+                target: first.target,
+                primaryStepID: first.context?.primaryStepID,
+                includeWhyNow: true
+            ),
+            RuntimeGoalIntelligenceRequest(
+                target: GoalRouteTarget(goalID: "missing-goal"),
+                primaryStepID: nil,
+                includeWhyNow: true
+            ),
+            RuntimeGoalIntelligenceRequest(
+                target: second.target,
+                primaryStepID: second.context?.primaryStepID,
+                includeWhyNow: true
+            )
+        ]
+        let service = RepositoryBackedRuntimeGoalIntelligenceService(repositories: repositories)
+
+        let batch = try await service.loadContexts(requests, now: fixedNow)
+
+        XCTAssertEqual(batch.count, requests.count)
+        let firstSingle = try await service.loadContext(requests[0], now: fixedNow)
+        let secondSingle = try await service.loadContext(requests[2], now: fixedNow)
+        assertRuntimeContextParity(batch[0], firstSingle)
+        XCTAssertNil(batch[1])
+        assertRuntimeContextParity(batch[2], secondSingle)
+    }
 }
 
 private extension AmbitionsRuntimeGoalIntelligenceServiceTests {
@@ -123,14 +162,17 @@ private extension AmbitionsRuntimeGoalIntelligenceServiceTests {
             CreateGoalRequest(title: title),
             now: fixedNow
         )
-        let goalID = try XCTUnwrap(created.target.goalID)
-        let storedGoal = try await repositories.goals.goal(id: goalID)
-        let goal = try XCTUnwrap(storedGoal)
-        let step = try XCTUnwrap(goal.plan?.sections.first?.steps.first)
+        let primaryStepID: String?
+        if let goalID = created.target.goalID,
+           let goal = try await repositories.goals.goal(id: goalID) {
+            primaryStepID = goal.plan?.sections.first?.steps.first?.id
+        } else {
+            primaryStepID = nil
+        }
         let context = try await RepositoryBackedRuntimeGoalIntelligenceService(repositories: repositories).loadContext(
             RuntimeGoalIntelligenceRequest(
                 target: created.target,
-                primaryStepID: step.id,
+                primaryStepID: primaryStepID,
                 includeWhyNow: true
             ),
             now: fixedNow
@@ -198,5 +240,19 @@ private extension AmbitionsRuntimeGoalIntelligenceServiceTests {
         let components = value.components(separatedBy: "##")
         guard components.count > 1 else { return value }
         return components.dropFirst().joined(separator: "##")
+    }
+
+    func assertRuntimeContextParity(
+        _ lhs: RuntimeGoalIntelligenceContext?,
+        _ rhs: RuntimeGoalIntelligenceContext?,
+        file: StaticString = #filePath,
+        line: UInt = #line
+    ) {
+        XCTAssertEqual(lhs?.goalID, rhs?.goalID, file: file, line: line)
+        XCTAssertEqual(lhs?.draftID, rhs?.draftID, file: file, line: line)
+        XCTAssertEqual(lhs?.primaryStepID, rhs?.primaryStepID, file: file, line: line)
+        XCTAssertEqual(lhs?.whyNow, rhs?.whyNow, file: file, line: line)
+        XCTAssertEqual(lhs?.applicableSignals, rhs?.applicableSignals, file: file, line: line)
+        assertExplainabilityParity(lhs?.explainability, rhs?.explainability, file: file, line: line)
     }
 }

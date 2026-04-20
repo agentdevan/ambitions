@@ -28,6 +28,16 @@ struct GoalsHeroCard: View {
                         }
                     }
                 }
+
+                if overview.attentionPills.isEmpty == false {
+                    ScrollView(.horizontal, showsIndicators: false) {
+                        HStack(spacing: theme.spacing.xs) {
+                            ForEach(overview.attentionPills, id: \.self) { pill in
+                                TagPill(pill, icon: "sparkle.magnifyingglass", state: .warning)
+                            }
+                        }
+                    }
+                }
             }
         }
         .ambitionPanelAccessibility()
@@ -75,6 +85,10 @@ struct GoalRowCard: View {
                 Text(item.nextStepHint)
                     .font(theme.typography.bodyEmphasized)
                     .foregroundStyle(theme.colors.textPrimary)
+                if let shellSummary = item.shellSummary {
+                    GoalShellSummaryCompactView(summary: shellSummary)
+                        .padding(.top, theme.spacing.xxxs)
+                }
                 Text("Priority #\(item.manualPriorityRank + 1)")
                     .font(theme.typography.caption)
                     .foregroundStyle(theme.colors.textTertiary)

@@ -33,6 +33,7 @@ struct RuntimeGoalIntelligenceContext: Sendable {
 
 protocol RuntimeGoalIntelligenceServicing: Sendable {
     func loadContext(_ request: RuntimeGoalIntelligenceRequest, now: Date) async throws -> RuntimeGoalIntelligenceContext?
+    func loadContexts(_ requests: [RuntimeGoalIntelligenceRequest], now: Date) async throws -> [RuntimeGoalIntelligenceContext?]
     func captureCorrection(
         target: GoalRouteTarget,
         control: GoalCorrectionControlState,
@@ -96,6 +97,17 @@ struct RepositoryBackedRuntimeGoalIntelligenceService: RuntimeGoalIntelligenceSe
             explainability: explainability,
             whyNow: whyNow
         )
+    }
+
+    func loadContexts(_ requests: [RuntimeGoalIntelligenceRequest], now: Date) async throws -> [RuntimeGoalIntelligenceContext?] {
+        var contexts: [RuntimeGoalIntelligenceContext?] = []
+        contexts.reserveCapacity(requests.count)
+
+        for request in requests {
+            contexts.append(try await loadContext(request, now: now))
+        }
+
+        return contexts
     }
 
     func captureCorrection(

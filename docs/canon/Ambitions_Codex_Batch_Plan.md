@@ -4,7 +4,9 @@
 
 Ambitions 1.0 is complete through registry Batch 18. Those batches remain completed historical foundation work and must not be renumbered, erased, or rewritten into a new numbering system.
 
-Ambitions 2.0 is the active forward execution program. It begins at registry Batch 19 and continues the existing operational numbering.
+The currently queued Ambitions 2.0 execution wave is complete through registry Batch 34. It began at registry Batch 19, continued the existing operational numbering, and must not be extended by inventing a normal Batch 35 inside this exhausted registry wave.
+
+The next repo step is a post-2.0 whole-repo/app hardening and product-audit planning pass. Any future implementation wave should be planned explicitly before new registry entries are added.
 
 Work on `main` only unless the user explicitly requests branch-based work.
 

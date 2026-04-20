@@ -98,17 +98,83 @@ struct GoalListItem: Identifiable, Sendable {
     let urgencyScore: Double
     let manualPriorityRank: Int
     let updatedAt: String
+    let shellSummary: GoalShellSummaryState?
+
+    init(
+        id: String,
+        target: GoalRouteTarget,
+        title: String,
+        subtitle: String,
+        mode: GoalMode,
+        renderState: GoalRenderState,
+        progressValue: Double,
+        progressLabel: String,
+        statusLabel: String,
+        timingLabel: String,
+        nextStepHint: String,
+        modeLabel: String,
+        supportLabel: String?,
+        relevanceScore: Double,
+        momentumScore: Double,
+        urgencyScore: Double,
+        manualPriorityRank: Int,
+        updatedAt: String,
+        shellSummary: GoalShellSummaryState? = nil
+    ) {
+        self.id = id
+        self.target = target
+        self.title = title
+        self.subtitle = subtitle
+        self.mode = mode
+        self.renderState = renderState
+        self.progressValue = progressValue
+        self.progressLabel = progressLabel
+        self.statusLabel = statusLabel
+        self.timingLabel = timingLabel
+        self.nextStepHint = nextStepHint
+        self.modeLabel = modeLabel
+        self.supportLabel = supportLabel
+        self.relevanceScore = relevanceScore
+        self.momentumScore = momentumScore
+        self.urgencyScore = urgencyScore
+        self.manualPriorityRank = manualPriorityRank
+        self.updatedAt = updatedAt
+        self.shellSummary = shellSummary
+    }
 }
 
 struct GoalsOverview: Sendable {
     let title: String
     let subtitle: String
     let contextPills: [String]
+    let attentionPills: [String]
     let isSeeded: Bool
     let filterSummaries: [GoalsFilterSummary]
     let items: [GoalListItem]
     let emptyTitle: String
     let emptyMessage: String
+
+    init(
+        title: String,
+        subtitle: String,
+        contextPills: [String],
+        attentionPills: [String] = [],
+        isSeeded: Bool,
+        filterSummaries: [GoalsFilterSummary],
+        items: [GoalListItem],
+        emptyTitle: String,
+        emptyMessage: String
+    ) {
+        self.title = title
+        self.subtitle = subtitle
+        self.contextPills = contextPills
+        self.attentionPills = attentionPills
+        self.isSeeded = isSeeded
+        self.filterSummaries = filterSummaries
+        self.items = items
+        self.emptyTitle = emptyTitle
+        self.emptyMessage = emptyMessage
+    }
 }
 
 struct CreateGoalRequest: Sendable {

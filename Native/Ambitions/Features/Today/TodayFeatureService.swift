@@ -49,7 +49,7 @@ struct RepositoryBackedTodayService: TodayServicing {
 
     func loadTodayExperience(userDisplayName: String, now: Date) async throws -> TodayExperience {
         let snapshot = try await loadSnapshot()
-        return makeExperience(snapshot: snapshot, userDisplayName: userDisplayName, now: now)
+        return try await makeExperience(snapshot: snapshot, userDisplayName: userDisplayName, now: now)
     }
 
     func performAction(_ action: TodayInlineAction, now: Date) async throws -> TodayActionResponse {
@@ -127,7 +127,7 @@ private extension RepositoryBackedTodayService {
         )
     }
 
-    func makeExperience(snapshot: Snapshot, userDisplayName: String, now: Date) -> TodayExperience {
+    func makeExperience(snapshot: Snapshot, userDisplayName: String, now: Date) async throws -> TodayExperience {
         let activeGoals = snapshot.goals.filter { $0.state == .active || $0.state == .paused }
         let learningSnapshot = learningService.buildSnapshot(
             goals: activeGoals,
@@ -155,6 +155,12 @@ private extension RepositoryBackedTodayService {
         )
         let allSteps = activeGoals.flatMap { $0.plan?.sections.flatMap(\.steps) ?? [] }
         let actionableSteps = rankedSelections.map(\.step)
+        let shellSummaries = try await todayShellSummaries(
+            goals: activeGoals,
+            draftsByGoalID: draftsByGoalID,
+            actionableSteps: actionableSteps,
+            now: now
+        )
 
         let clarificationDrafts = snapshot.drafts.filter { $0.latestResultKind == .clarificationRequired }
         let blockedDrafts = snapshot.drafts.filter { $0.latestResultKind == .blocked }
@@ -194,7 +200,8 @@ private extension RepositoryBackedTodayService {
                 goals: activeGoals,
                 actionableSteps: actionableSteps,
                 draftsByGoalID: draftsByGoalID,
-                completion: (completedSteps, totalSteps)
+                completion: (completedSteps, totalSteps),
+                shellSummaries: shellSummaries
             ),
             focus: makeFocus(
                 clarificationDrafts: clarificationDrafts,
@@ -204,14 +211,19 @@ private extension RepositoryBackedTodayService {
                 goals: activeGoals,
                 draftsByGoalID: draftsByGoalID,
                 feedback: snapshot.feedback,
-                evidence: snapshot.evidence
+                evidence: snapshot.evidence,
+                shellSummaries: shellSummaries
             ),
             freeTime: makeFreeTime(
                 goals: activeGoals,
                 actionableSteps: actionableSteps,
                 draftsByGoalID: draftsByGoalID
             ),
-            milestone: makeMilestone(goals: activeGoals, draftsByGoalID: draftsByGoalID),
+            milestone: makeMilestone(
+                goals: activeGoals,
+                draftsByGoalID: draftsByGoalID,
+                shellSummaries: shellSummaries
+            ),
             momentum: makeMomentum(
                 activeGoals: activeGoals,
                 evidence: snapshot.evidence,
@@ -322,6 +334,63 @@ private extension RepositoryBackedTodayService {
         }
         labels.append("\(summary.pressureLevel.rawValue) pressure")
         return labels
+    }
+
+    func todayShellSummaries(
+        goals: [Goal],
+        draftsByGoalID: [String: PersistedGoalDraft],
+        actionableSteps: [Step],
+        now: Date
+    ) async throws -> [TodayActionTarget: GoalShellSummaryState] {
+        guard let goalIntelligenceService else { return [:] }
+
+        var targets: [TodayActionTarget] = []
+        var requests: [RuntimeGoalIntelligenceRequest] = []
+        targets.reserveCapacity(actionableSteps.prefix(3).count + 2)
+        requests.reserveCapacity(actionableSteps.prefix(3).count + 2)
+
+        for step in actionableSteps.prefix(3) {
+            guard let goal = goals.first(where: { $0.plan?.sections.flatMap(\.steps).contains(where: { $0.id == step.id }) == true }) else {
+                continue
+            }
+            let draft = draftsByGoalID[goal.id]
+            let target = TodayActionTarget(goalID: goal.id, stepID: step.id, draftID: draft?.id)
+            targets.append(target)
+            requests.append(
+                RuntimeGoalIntelligenceRequest(
+                    target: GoalRouteTarget(goalID: goal.id, draftID: draft?.id),
+                    primaryStepID: step.id,
+                    includeWhyNow: true
+                )
+            )
+        }
+
+        if let milestoneGoal = goals.sorted(by: { timingSortKey(for: $0.timing) < timingSortKey(for: $1.timing) }).first {
+            let draft = draftsByGoalID[milestoneGoal.id]
+            let target = TodayActionTarget(goalID: milestoneGoal.id, draftID: draft?.id)
+            targets.append(target)
+            requests.append(
+                RuntimeGoalIntelligenceRequest(
+                    target: GoalRouteTarget(goalID: milestoneGoal.id, draftID: draft?.id),
+                    primaryStepID: actionableSteps.first(where: { step in
+                        milestoneGoal.plan?.sections.flatMap(\.steps).contains(where: { $0.id == step.id }) == true
+                    })?.id ?? shellPrimaryStepID(goal: milestoneGoal, draft: draft),
+                    includeWhyNow: true
+                )
+            )
+        }
+
+        let contexts = try await goalIntelligenceService.loadContexts(requests, now: now)
+        let projector = GoalShellSummaryProjector()
+        return Dictionary(uniqueKeysWithValues: zip(targets, contexts).compactMap { target, context in
+            guard let context else { return nil }
+            return (target, projector.makeState(from: context))
+        })
+    }
+
+    func shellPrimaryStepID(goal: Goal?, draft: PersistedGoalDraft?) -> String? {
+        let steps = (goal?.plan ?? draft?.stagedPlan)?.sections.flatMap(\.steps) ?? []
+        return steps.first(where: { $0.state != .completed && $0.state != .cancelled })?.id ?? steps.first?.id
     }
 
     func performFeedbackAction(_ action: TodayInlineAction, now: Date) async throws -> TodayActionResponse {
@@ -887,7 +956,8 @@ private extension RepositoryBackedTodayService {
         goals: [Goal],
         actionableSteps: [Step],
         draftsByGoalID: [String: PersistedGoalDraft],
-        completion: (done: Int, total: Int)
+        completion: (done: Int, total: Int),
+        shellSummaries: [TodayActionTarget: GoalShellSummaryState]
     ) -> TodayDailyTargetsState {
         let completionLabel: String
         if completion.total == 0 {
@@ -923,7 +993,8 @@ private extension RepositoryBackedTodayService {
                     systemImage: "clock.arrow.circlepath",
                     state: .default,
                     target: TodayActionTarget(goalID: goal.id, stepID: step.id, draftID: draft?.id)
-                )
+                ),
+                shellSummary: shellSummaries[TodayActionTarget(goalID: goal.id, stepID: step.id, draftID: draft?.id)]
             )
         }
 
@@ -946,7 +1017,8 @@ private extension RepositoryBackedTodayService {
         goals: [Goal],
         draftsByGoalID: [String: PersistedGoalDraft],
         feedback: [GoalFeedbackEvent],
-        evidence: [ProgressEvidence]
+        evidence: [ProgressEvidence],
+        shellSummaries: [TodayActionTarget: GoalShellSummaryState]
     ) -> TodayFocusState {
         if let draft = clarificationDrafts.first, let clarification = draft.clarification {
             return .clarification(
@@ -1009,6 +1081,7 @@ private extension RepositoryBackedTodayService {
         let target = TodayActionTarget(goalID: goal.id, stepID: step.id, draftID: draft?.id)
         let progress = focusProgress(for: step, feedback: feedback, evidence: evidence)
         let selection = rankedSelections.first(where: { $0.goal.id == goal.id && $0.step.id == step.id })
+        let shellSummary = shellSummaries[target]
 
         if draft?.latestResultKind == .starterPlanned {
             return .starter(
@@ -1025,7 +1098,8 @@ private extension RepositoryBackedTodayService {
                         TodayInlineAction(kind: .createCalendarEvent, title: "Calendar event", systemImage: "calendar.badge.plus", state: .default, target: target),
                         TodayInlineAction(kind: .askWhyThisMatters, title: "Why this matters", systemImage: "questionmark.circle", state: .default, target: target),
                         TodayInlineAction(kind: .openDetail, title: "Open detail", systemImage: "arrow.right.circle", state: .default, target: target)
-                    ]
+                    ],
+                    shellSummary: shellSummary
                 )
             )
         }
@@ -1036,7 +1110,7 @@ private extension RepositoryBackedTodayService {
                 subtitle: goal.title,
                 reason: selection?.candidate.whyNow?.conciseReason ?? focusReason(for: goal, step: step),
                 timingLabel: timingLabel(for: step.timing, goalMode: goal.mode),
-                energyLabel: energyLabel(for: goal.mode),
+                energyLabel: shellSummary?.indicators.first(where: { $0.kind == .energy })?.title ?? energyLabel(for: goal.mode),
                 progress: progress,
                 supportingText: supportingText(for: goal, step: step),
                 actions: [
@@ -1049,7 +1123,8 @@ private extension RepositoryBackedTodayService {
                     TodayInlineAction(kind: .askWhyThisMatters, title: "Why this matters", systemImage: "questionmark.circle", state: .default, target: target),
                     TodayInlineAction(kind: .markNotRelevant, title: "Not relevant", systemImage: "nosign", state: .warning, target: target),
                     TodayInlineAction(kind: .openDetail, title: "Open detail", systemImage: "arrow.right.circle", state: .default, target: target)
-                ]
+                ],
+                shellSummary: shellSummary
             )
         )
     }
@@ -1092,7 +1167,11 @@ private extension RepositoryBackedTodayService {
         )
     }
 
-    func makeMilestone(goals: [Goal], draftsByGoalID: [String: PersistedGoalDraft]) -> TodayMilestoneState {
+    func makeMilestone(
+        goals: [Goal],
+        draftsByGoalID: [String: PersistedGoalDraft],
+        shellSummaries: [TodayActionTarget: GoalShellSummaryState]
+    ) -> TodayMilestoneState {
         let ordered = goals.sorted { lhs, rhs in
             timingSortKey(for: lhs.timing) < timingSortKey(for: rhs.timing)
         }
@@ -1102,7 +1181,8 @@ private extension RepositoryBackedTodayService {
                 subtitle: "No active milestone yet",
                 prompt: "Once a goal exists, Today will pull the next milestone cue from the real plan.",
                 confidenceLabel: "Waiting on first goal",
-                action: nil
+                action: nil,
+                shellSummary: nil
             )
         }
 
@@ -1132,6 +1212,7 @@ private extension RepositoryBackedTodayService {
             ?? goal.summary
             ?? "Open the goal and confirm the next milestone."
 
+        let target = TodayActionTarget(goalID: goal.id, draftID: draftsByGoalID[goal.id]?.id)
         return TodayMilestoneState(
             title: goal.title,
             subtitle: "Milestone prompt",
@@ -1142,8 +1223,9 @@ private extension RepositoryBackedTodayService {
                 title: "Open detail",
                 systemImage: "flag.checkered.2.crossed",
                 state: .selected,
-                target: TodayActionTarget(goalID: goal.id, draftID: draftsByGoalID[goal.id]?.id)
-            )
+                target: target
+            ),
+            shellSummary: shellSummaries[target]
         )
     }
 

@@ -20,6 +20,8 @@ It is not the higher-level vision source. For vision, dependency order, and batc
 
 ## Active Queue
 
+Current wave status: completed and exhausted. Batch 34 closed the currently queued Ambitions 2.0 execution wave; do not fabricate a normal Batch 35 in this registry. The next repo step is a post-2.0 whole-repo/app hardening and product-audit planning pass, with any future execution wave to be planned explicitly before being added here.
+
 | Batch | Name | Status | Notes |
 | --- | --- | --- | --- |
 | 00 | Repo operating system / canon alignment | Completed | Repo truth and control-file alignment completed enough to move Batch 01 into the active slot. |
@@ -56,4 +58,4 @@ It is not the higher-level vision source. For vision, dependency order, and batc
 | 31 | Ambitions 2.0 Batch 12 / Correction and teaching loop | Completed | Added a capture/read-only correction-and-teaching layer with durable typed teaching signals, stable same-goal anchors, deterministic `applicationKey` supersession, strict explicit-manual rejection boundaries, additive standalone persistence, and portable snapshot support; validated with targeted Batch 31 tests plus full `AmbitionsTests` on April 20, 2026. |
 | 32 | Ambitions 2.0 Batch 13 / Explainability and source audit surfaces | Completed | Added Goal Detail explainability and source-audit surfaces powered by a read-only canonical projector, bounded teaching-backed correction controls, compact Today why-this reuse, and validated with `xcodegen generate`, native app build, targeted explainability/correction tests, and full `AmbitionsTests` (316 tests, 0 failures). |
 | 33 | Ambitions 2.0 Batch 14 / Intelligence runtime integration | Completed | Added a composition-only runtime-owned goal-intelligence seam over canonical orchestration, explainability, teaching, and optional why-now services; migrated Goals explainability/correction and Today's narrow why-this path to the live runtime seam; validated with `xcodegen generate`, native app build, and full `AmbitionsTests` on April 20, 2026 (320 tests, 0 failures). |
-| 34 | Ambitions 2.0 Batch 15 / Ambitions 2.0 product shell integration | Active | Integrate path, resource, energy, correction, and explanation experiences into the product shell after services exist. |
+| 34 | Ambitions 2.0 Batch 15 / Ambitions 2.0 product shell integration | Completed | Goals overview and Today now consume compact runtime-backed shell summaries through the Batch 33 runtime seam; Goal Detail remains the only full-fidelity trust surface; validation passed with XcodeGen generation, native build, targeted runtime/shell tests, and full `AmbitionsTests`. Manual simulator UI review was not completed and remains hardening/product-audit follow-up input. |

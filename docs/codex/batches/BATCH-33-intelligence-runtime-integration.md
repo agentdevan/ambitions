@@ -79,6 +79,6 @@ This batch stayed composition-only. It did not add new intelligence behavior, br
 - no additional Batch 33 bug was found during wrap-up
 - the checked-out branch remained `main` during implementation, validation, and wrap-up
 
-## Next Active Batch
+## Subsequent Batch
 
-Batch 34 — Ambitions 2.0 Batch 15 / Ambitions 2.0 product shell integration
+Batch 34 — Ambitions 2.0 Batch 15 / Ambitions 2.0 product shell integration completed the current queued Ambitions 2.0 registry wave.

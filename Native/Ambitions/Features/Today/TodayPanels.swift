@@ -148,6 +148,10 @@ struct TodayDailyTargetsCard: View {
 
                                 ProgressRail(title: item.timingLabel, progress: item.progress, trailingValue: "\(Int(item.progress * 100))%", state: item.state)
 
+                                if let shellSummary = item.shellSummary {
+                                    GoalShellSummaryCompactView(summary: shellSummary)
+                                }
+
                                 HStack(spacing: theme.spacing.xs) {
                                     if let action = item.primaryAction {
                                         TodayActionChip(action: action, handler: onAction)
@@ -189,6 +193,9 @@ struct TodayFocusCard: View {
                     Text(value.reason)
                         .font(theme.typography.body)
                         .foregroundStyle(theme.colors.textSecondary)
+                    if let shellSummary = value.shellSummary {
+                        GoalShellSummaryCompactView(summary: shellSummary)
+                    }
                     VStack(alignment: .leading, spacing: theme.spacing.xs) {
                         ForEach(value.supportingText, id: \.self) { text in
                             Label(text, systemImage: "sparkle")
@@ -210,6 +217,9 @@ struct TodayFocusCard: View {
                         .font(theme.typography.body)
                         .foregroundStyle(theme.colors.textSecondary)
                     TagPill(value.timingLabel, state: .default)
+                    if let shellSummary = value.shellSummary {
+                        GoalShellSummaryCompactView(summary: shellSummary)
+                    }
                     VStack(alignment: .leading, spacing: theme.spacing.xs) {
                         ForEach(value.assumptions, id: \.self) { assumption in
                             Label(assumption, systemImage: "leaf.fill")
@@ -318,6 +328,9 @@ struct TodayMilestoneCard: View {
                 }
                 Text(state.prompt)
                     .font(.body.weight(.semibold))
+                if let shellSummary = state.shellSummary {
+                    GoalShellSummaryCompactView(summary: shellSummary)
+                }
                 if let action = state.action {
                     TodayActionChip(action: action, handler: onAction)
                 }

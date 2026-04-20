@@ -40,7 +40,7 @@ struct RepositoryBackedGoalsService: GoalsServicing {
 
     func loadOverview() async throws -> GoalsOverview {
         let snapshot = try await loadSnapshot()
-        return makeOverview(snapshot: snapshot)
+        return try await makeOverview(snapshot: snapshot)
     }
 
     func loadDetail(target: GoalRouteTarget) async throws -> GoalDetailPresentation {
@@ -550,7 +550,7 @@ private extension RepositoryBackedGoalsService {
         )
     }
 
-    func makeOverview(snapshot: Snapshot) -> GoalsOverview {
+    func makeOverview(snapshot: Snapshot) async throws -> GoalsOverview {
         let orderedIDs = normalizedPriorityOrder(snapshot: snapshot)
         let manualRanks = Dictionary(uniqueKeysWithValues: orderedIDs.enumerated().map { ($1, $0) })
         let learningSnapshot = learningService.buildSnapshot(
@@ -559,6 +559,7 @@ private extension RepositoryBackedGoalsService {
             feedback: snapshot.feedback,
             now: .now
         )
+        let shellSummaries = try await overviewShellSummaries(snapshot: snapshot, now: .now)
 
         let goalItems = snapshot.goals.map { goal in
             makeGoalListItem(
@@ -568,13 +569,18 @@ private extension RepositoryBackedGoalsService {
                 feedback: snapshot.feedback,
                 learningSummary: learningSnapshot.goalSummaries[goal.id],
                 underrepresentedSignal: learningSnapshot.underrepresentedGoalSignals.first(where: { $0.goalID == goal.id }),
-                manualRank: manualRanks[goal.id] ?? manualRanks.count
+                manualRank: manualRanks[goal.id] ?? manualRanks.count,
+                shellSummary: shellSummaries[goal.id]
             )
         }
 
         let draftItems = snapshot.drafts.compactMap { draft -> GoalListItem? in
             guard draft.plannedGoalID == nil else { return nil }
-            return makeDraftListItem(draft: draft, manualRank: manualRanks[draft.id] ?? manualRanks.count)
+            return makeDraftListItem(
+                draft: draft,
+                manualRank: manualRanks[draft.id] ?? manualRanks.count,
+                shellSummary: shellSummaries[draft.id]
+            )
         }
 
         let items = goalItems + draftItems
@@ -593,6 +599,7 @@ private extension RepositoryBackedGoalsService {
                 "\(snapshot.drafts.filter { $0.latestResultKind == .clarificationRequired || $0.latestResultKind == .blocked }.count) need care",
                 seeded ? "Starter data loaded" : "Live native data"
             ],
+            attentionPills: overviewAttentionPills(items: items),
             isSeeded: seeded,
             filterSummaries: [
                 GoalsFilterSummary(filter: .active, count: activeCount),
@@ -671,7 +678,8 @@ private extension RepositoryBackedGoalsService {
         feedback: [GoalFeedbackEvent],
         learningSummary: GoalLearningSummary?,
         underrepresentedSignal: UnderrepresentedGoalSignal?,
-        manualRank: Int
+        manualRank: Int,
+        shellSummary: GoalShellSummaryState?
     ) -> GoalListItem {
         let steps = goal.plan?.sections.flatMap(\.steps) ?? []
         let completed = steps.filter { $0.state == .completed }.count
@@ -723,11 +731,16 @@ private extension RepositoryBackedGoalsService {
             momentumScore: momentumScore,
             urgencyScore: urgencyScore,
             manualPriorityRank: manualRank,
-            updatedAt: goal.updatedAt
+            updatedAt: goal.updatedAt,
+            shellSummary: shellSummary
         )
     }
 
-    func makeDraftListItem(draft: PersistedGoalDraft, manualRank: Int) -> GoalListItem {
+    func makeDraftListItem(
+        draft: PersistedGoalDraft,
+        manualRank: Int,
+        shellSummary: GoalShellSummaryState?
+    ) -> GoalListItem {
         let renderState: GoalRenderState
         switch draft.latestResultKind {
         case .clarificationRequired:
@@ -769,8 +782,75 @@ private extension RepositoryBackedGoalsService {
             momentumScore: renderState == .starter ? 0.38 : 0.2,
             urgencyScore: renderState == .blocked ? 0.9 : 0.64,
             manualPriorityRank: manualRank,
-            updatedAt: draft.updatedAt
+            updatedAt: draft.updatedAt,
+            shellSummary: shellSummary
         )
+    }
+
+    func overviewShellSummaries(
+        snapshot: Snapshot,
+        now: Date
+    ) async throws -> [String: GoalShellSummaryState] {
+        guard let goalIntelligenceService else { return [:] }
+
+        var requestKeys: [String] = []
+        var requests: [RuntimeGoalIntelligenceRequest] = []
+        requestKeys.reserveCapacity(snapshot.goals.count + snapshot.drafts.count)
+        requests.reserveCapacity(snapshot.goals.count + snapshot.drafts.count)
+
+        for goal in snapshot.goals {
+            let draft = snapshot.drafts.first(where: { $0.plannedGoalID == goal.id })
+            requestKeys.append(goal.id)
+            requests.append(
+                RuntimeGoalIntelligenceRequest(
+                    target: GoalRouteTarget(goalID: goal.id, draftID: draft?.id),
+                    primaryStepID: shellPrimaryStepID(goal: goal, draft: draft),
+                    includeWhyNow: true
+                )
+            )
+        }
+
+        for draft in snapshot.drafts where draft.plannedGoalID == nil {
+            requestKeys.append(draft.id)
+            requests.append(
+                RuntimeGoalIntelligenceRequest(
+                    target: GoalRouteTarget(draftID: draft.id),
+                    primaryStepID: shellPrimaryStepID(goal: nil, draft: draft),
+                    includeWhyNow: true
+                )
+            )
+        }
+
+        let contexts = try await goalIntelligenceService.loadContexts(requests, now: now)
+        let projector = GoalShellSummaryProjector()
+        return Dictionary(uniqueKeysWithValues: zip(requestKeys, contexts).compactMap { key, context in
+            guard let context else { return nil }
+            return (key, projector.makeState(from: context))
+        })
+    }
+
+    func shellPrimaryStepID(goal: Goal?, draft: PersistedGoalDraft?) -> String? {
+        let steps = (goal?.plan ?? draft?.stagedPlan)?.sections.flatMap(\.steps) ?? []
+        return steps.first(where: { $0.state != .completed && $0.state != .cancelled })?.id ?? steps.first?.id
+    }
+
+    func overviewAttentionPills(items: [GoalListItem]) -> [String] {
+        let freshnessAttention = items.filter { item in
+            item.shellSummary?.indicators.contains(where: { $0.kind == .freshness && $0.state == .warning }) == true
+        }.count
+        let contradictionAttention = items.filter { item in
+            item.shellSummary?.indicators.contains(where: { $0.kind == .contradiction }) == true
+        }.count
+        let correctionAttention = items.filter { item in
+            item.shellSummary?.indicators.contains(where: { $0.kind == .correction }) == true
+        }.count
+
+        return [
+            freshnessAttention > 0 ? "\(freshnessAttention) freshness attention" : nil,
+            contradictionAttention > 0 ? "\(contradictionAttention) contradiction attention" : nil,
+            correctionAttention > 0 ? "\(correctionAttention) taught paths" : nil
+        ]
+        .compactMap { $0 }
     }
 
     func buildDetailPresentation(

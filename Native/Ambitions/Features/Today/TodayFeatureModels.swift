@@ -86,6 +86,31 @@ struct TodayTargetItem: Identifiable, Sendable {
     let state: AmbitionVisualState
     let primaryAction: TodayInlineAction?
     let secondaryAction: TodayInlineAction?
+    let shellSummary: GoalShellSummaryState?
+
+    init(
+        id: String,
+        title: String,
+        subtitle: String,
+        timingLabel: String,
+        statusLabel: String,
+        progress: Double,
+        state: AmbitionVisualState,
+        primaryAction: TodayInlineAction?,
+        secondaryAction: TodayInlineAction?,
+        shellSummary: GoalShellSummaryState? = nil
+    ) {
+        self.id = id
+        self.title = title
+        self.subtitle = subtitle
+        self.timingLabel = timingLabel
+        self.statusLabel = statusLabel
+        self.progress = progress
+        self.state = state
+        self.primaryAction = primaryAction
+        self.secondaryAction = secondaryAction
+        self.shellSummary = shellSummary
+    }
 }
 
 struct TodayDailyTargetsState: Sendable {
@@ -105,6 +130,29 @@ struct TodayFocusPlannedState: Sendable {
     let progress: Double
     let supportingText: [String]
     let actions: [TodayInlineAction]
+    let shellSummary: GoalShellSummaryState?
+
+    init(
+        title: String,
+        subtitle: String,
+        reason: String,
+        timingLabel: String,
+        energyLabel: String,
+        progress: Double,
+        supportingText: [String],
+        actions: [TodayInlineAction],
+        shellSummary: GoalShellSummaryState? = nil
+    ) {
+        self.title = title
+        self.subtitle = subtitle
+        self.reason = reason
+        self.timingLabel = timingLabel
+        self.energyLabel = energyLabel
+        self.progress = progress
+        self.supportingText = supportingText
+        self.actions = actions
+        self.shellSummary = shellSummary
+    }
 }
 
 struct TodayFocusStarterState: Sendable {
@@ -114,6 +162,25 @@ struct TodayFocusStarterState: Sendable {
     let timingLabel: String
     let assumptions: [String]
     let actions: [TodayInlineAction]
+    let shellSummary: GoalShellSummaryState?
+
+    init(
+        title: String,
+        subtitle: String,
+        reassurance: String,
+        timingLabel: String,
+        assumptions: [String],
+        actions: [TodayInlineAction],
+        shellSummary: GoalShellSummaryState? = nil
+    ) {
+        self.title = title
+        self.subtitle = subtitle
+        self.reassurance = reassurance
+        self.timingLabel = timingLabel
+        self.assumptions = assumptions
+        self.actions = actions
+        self.shellSummary = shellSummary
+    }
 }
 
 struct TodayClarificationQuestionState: Identifiable, Sendable {
@@ -173,6 +240,23 @@ struct TodayMilestoneState: Sendable {
     let prompt: String
     let confidenceLabel: String
     let action: TodayInlineAction?
+    let shellSummary: GoalShellSummaryState?
+
+    init(
+        title: String,
+        subtitle: String,
+        prompt: String,
+        confidenceLabel: String,
+        action: TodayInlineAction?,
+        shellSummary: GoalShellSummaryState? = nil
+    ) {
+        self.title = title
+        self.subtitle = subtitle
+        self.prompt = prompt
+        self.confidenceLabel = confidenceLabel
+        self.action = action
+        self.shellSummary = shellSummary
+    }
 }
 
 struct TodayMetricState: Identifiable, Sendable {

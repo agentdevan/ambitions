@@ -4,26 +4,15 @@
 
 Ambitions 1.0 foundation work exists already and is complete through registry Batch 18. That history remains intact in `docs/codex/BATCH_REGISTRY.md`.
 
-Ambitions 2.0 is the active execution program. It starts with a canon reset and then builds the retrieval-backed, path-compiling, energy-aware, explainable, correctable intelligence stack in dependency order.
+The currently queued Ambitions 2.0 execution wave is complete through registry Batch 34. It started with a canon reset and then built the retrieval-backed, path-compiling, energy-aware, explainable, correctable intelligence stack in dependency order.
+
+Do not invent a normal Batch 35 inside the exhausted registry wave. The next repo step is a post-2.0 whole-repo/app hardening and product-audit planning pass.
 
 All work stays on `main` unless the user explicitly requests branch-based work.
 
 ## Current 2.0 Gaps
 
-The current repo has a strong native Ambitions 1.0 foundation, but it does not yet have the full Ambitions 2.0 end-state:
-
-- no generalized provider/provenance/freshness boundary for world knowledge
-- no external knowledge ingestion core with source trust and freshness metadata
-- no generalized clarification engine for ambiguous life goals
-- no path compiler that turns arbitrary goals into staged, sourced paths
-- no domain intelligence pack framework
-- no resource graph with ranked, refreshable sources
-- no energy/capacity operating system that is shared by path recommendations
-- no contradiction engine across retrieved truth, user intent, behavior, and plans
-- no durable correction/teaching loop for user edits to assumptions and recommendations
-- no user-visible source audit and why-this explanation layer for 2.0 intelligence
-- no runtime integration contract for 2.0 intelligence services
-- no Ambitions 2.0 product shell consuming those contracts
+The planned Ambitions 2.0 service and shell integration gaps tracked by this execution wave are closed through Batch 34. Remaining work should be treated as hardening, product audit, manual UI review, release readiness, or a newly planned future wave rather than as skipped work in this registry sequence.
 
 ## Hard Dependency Order
 
