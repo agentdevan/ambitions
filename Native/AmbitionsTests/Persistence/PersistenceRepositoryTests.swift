@@ -138,6 +138,7 @@ final class PersistenceRepositoryTests: XCTestCase {
         XCTAssertEqual(loaded?.metadata?.resourceGraph, draft.metadata?.resourceGraph)
         XCTAssertEqual(loaded?.metadata?.resourceGraph.freshness, draft.metadata?.resourceGraph.freshness)
         XCTAssertEqual(loaded?.metadata?.energyModel, draft.metadata?.energyModel)
+        XCTAssertEqual(loaded?.metadata?.contradictionReport, draft.metadata?.contradictionReport)
     }
 
     func testEvidenceAndFeedbackRepositoriesPersistAdaptiveHistory() async throws {

@@ -8,6 +8,7 @@ struct GoalEngineOrchestrator: GoalOrchestrating {
     private let pathCompiler: any GoalPathCompiling
     private let resourceGraphService: any GoalResourceGraphBuilding
     private let energyFitService: any GoalEnergyFitEvaluating
+    private let contradictionService: any GoalContradictionAnalyzing
 
     init(
         intake: GoalEngineIntakeService = GoalEngineIntakeService(),
@@ -16,7 +17,8 @@ struct GoalEngineOrchestrator: GoalOrchestrating {
         understandingService: any GoalUnderstandingBuilding = DefaultGoalUnderstandingService(),
         pathCompiler: any GoalPathCompiling = DefaultGoalPathCompilerService(),
         resourceGraphService: any GoalResourceGraphBuilding = DefaultGoalResourceGraphService(),
-        energyFitService: any GoalEnergyFitEvaluating = DefaultGoalEnergyFitService()
+        energyFitService: any GoalEnergyFitEvaluating = DefaultGoalEnergyFitService(),
+        contradictionService: any GoalContradictionAnalyzing = DefaultGoalContradictionService()
     ) {
         self.intake = intake
         self.planner = planner
@@ -25,6 +27,7 @@ struct GoalEngineOrchestrator: GoalOrchestrating {
         self.pathCompiler = pathCompiler
         self.resourceGraphService = resourceGraphService
         self.energyFitService = energyFitService
+        self.contradictionService = contradictionService
     }
 
     func compileGoal(_ rawInput: String, context: GoalEngineOrchestrationContext = .init()) -> GoalOrchestrationResult {
@@ -102,7 +105,9 @@ struct GoalEngineOrchestrator: GoalOrchestrating {
             sourceFlow: trimmed(context.sourceFlow),
             clarifiedFields: clarified,
             referenceNow: trimmed(context.referenceNow),
-            knowledgeContext: context.knowledgeContext
+            knowledgeContext: context.knowledgeContext,
+            evidence: context.evidence,
+            feedbackHistory: context.feedbackHistory
         )
     }
 
@@ -237,6 +242,20 @@ struct GoalEngineOrchestrator: GoalOrchestrating {
             plannedSteps: plannedSteps(from: plannerResult),
             capacityContext: .assumedNeutral()
         )
+        let contradictionReport = contradictionService.analyze(
+            input: GoalContradictionAnalysisInput(
+                classification: classification,
+                clarification: clarification,
+                understanding: understanding,
+                compiledPath: compiledPath,
+                resourceGraph: resourceGraph,
+                energyModel: energyModel,
+                knowledgeContext: context.knowledgeContext,
+                plannedSteps: plannedSteps(from: plannerResult),
+                evidence: context.evidence,
+                feedback: context.feedbackHistory
+            )
+        )
         let assumptions: [PlanAssumption]
         switch plannerResult {
         case let .starterPlan(_, _, _, starterAssumptions):
@@ -296,7 +315,8 @@ struct GoalEngineOrchestrator: GoalOrchestrating {
             understanding: understanding,
             compiledPath: compiledPath,
             resourceGraph: resourceGraph,
-            energyModel: energyModel
+            energyModel: energyModel,
+            contradictionReport: contradictionReport
         )
     }
 

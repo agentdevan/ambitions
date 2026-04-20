@@ -30,6 +30,7 @@ final class GoalEngineOrchestratorTests: XCTestCase {
             result.metadata.compiledPath.candidates.map(\.id)
         )
         XCTAssertFalse(result.metadata.energyModel.evaluations.filter { $0.targetKind == .planStep }.isEmpty)
+        XCTAssertEqual(result.metadata.contradictionReport.schemaVersion, goalContradictionSchemaVersion)
     }
 
     func testUntimedLearningGoalCompilesIntoPlanShapedResult() throws {
@@ -149,6 +150,7 @@ final class GoalEngineOrchestratorTests: XCTestCase {
 
         XCTAssertFalse(result.clarification.contradictions.isEmpty)
         XCTAssertEqual(result.clarification.analysis.decision, .mustClarifyBeforeCompile)
+        XCTAssertTrue(result.metadata.contradictionReport.records.contains(where: { $0.code == .inputTimingConflict }))
     }
 
     func testDontKnowWhereToStartRequiresGoalSubjectClarification() throws {

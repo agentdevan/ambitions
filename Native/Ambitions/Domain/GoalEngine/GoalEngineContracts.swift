@@ -835,6 +835,8 @@ struct GoalEngineOrchestrationContext: Codable, Sendable, Equatable {
     let clarifiedFields: [MissingFieldKey: String]
     let referenceNow: String?
     let knowledgeContext: GoalUnderstandingKnowledgeContext?
+    let evidence: [ProgressEvidence]
+    let feedbackHistory: [GoalFeedbackEvent]
 
     init(
         goalID: String? = nil,
@@ -848,7 +850,9 @@ struct GoalEngineOrchestrationContext: Codable, Sendable, Equatable {
         sourceFlow: String? = nil,
         clarifiedFields: [MissingFieldKey: String] = [:],
         referenceNow: String? = nil,
-        knowledgeContext: GoalUnderstandingKnowledgeContext? = nil
+        knowledgeContext: GoalUnderstandingKnowledgeContext? = nil,
+        evidence: [ProgressEvidence] = [],
+        feedbackHistory: [GoalFeedbackEvent] = []
     ) {
         self.goalID = goalID
         self.actorName = actorName
@@ -862,6 +866,57 @@ struct GoalEngineOrchestrationContext: Codable, Sendable, Equatable {
         self.clarifiedFields = clarifiedFields
         self.referenceNow = referenceNow
         self.knowledgeContext = knowledgeContext
+        self.evidence = evidence
+        self.feedbackHistory = feedbackHistory
+    }
+
+    private enum CodingKeys: String, CodingKey {
+        case goalID
+        case actorName
+        case preferredPlanningStrictness
+        case goalOwnerRole
+        case supportScope
+        case deadlineHints
+        case existingGoalReferences
+        case sourceScreen
+        case sourceFlow
+        case clarifiedFields
+        case referenceNow
+        case knowledgeContext
+    }
+
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        goalID = try container.decodeIfPresent(String.self, forKey: .goalID)
+        actorName = try container.decodeIfPresent(String.self, forKey: .actorName)
+        preferredPlanningStrictness = try container.decodeIfPresent(GoalPlanningStrictness.self, forKey: .preferredPlanningStrictness) ?? .balanced
+        goalOwnerRole = try container.decodeIfPresent(String.self, forKey: .goalOwnerRole)
+        supportScope = try container.decodeIfPresent(GoalSupportScope.self, forKey: .supportScope)
+        deadlineHints = try container.decodeIfPresent([String].self, forKey: .deadlineHints) ?? []
+        existingGoalReferences = try container.decodeIfPresent([String].self, forKey: .existingGoalReferences) ?? []
+        sourceScreen = try container.decodeIfPresent(String.self, forKey: .sourceScreen)
+        sourceFlow = try container.decodeIfPresent(String.self, forKey: .sourceFlow)
+        clarifiedFields = try container.decodeIfPresent([MissingFieldKey: String].self, forKey: .clarifiedFields) ?? [:]
+        referenceNow = try container.decodeIfPresent(String.self, forKey: .referenceNow)
+        knowledgeContext = try container.decodeIfPresent(GoalUnderstandingKnowledgeContext.self, forKey: .knowledgeContext)
+        evidence = []
+        feedbackHistory = []
+    }
+
+    func encode(to encoder: Encoder) throws {
+        var container = encoder.container(keyedBy: CodingKeys.self)
+        try container.encodeIfPresent(goalID, forKey: .goalID)
+        try container.encodeIfPresent(actorName, forKey: .actorName)
+        try container.encode(preferredPlanningStrictness, forKey: .preferredPlanningStrictness)
+        try container.encodeIfPresent(goalOwnerRole, forKey: .goalOwnerRole)
+        try container.encodeIfPresent(supportScope, forKey: .supportScope)
+        try container.encode(deadlineHints, forKey: .deadlineHints)
+        try container.encode(existingGoalReferences, forKey: .existingGoalReferences)
+        try container.encodeIfPresent(sourceScreen, forKey: .sourceScreen)
+        try container.encodeIfPresent(sourceFlow, forKey: .sourceFlow)
+        try container.encode(clarifiedFields, forKey: .clarifiedFields)
+        try container.encodeIfPresent(referenceNow, forKey: .referenceNow)
+        try container.encodeIfPresent(knowledgeContext, forKey: .knowledgeContext)
     }
 }
 
@@ -883,6 +938,8 @@ struct GoalEngineOrchestrationContextSnapshot: Codable, Sendable, Equatable {
     let clarifiedFields: [String: String]
     let referenceNow: String?
     let knowledgeContext: GoalUnderstandingKnowledgeContext?
+    let evidence: [ProgressEvidence]
+    let feedbackHistory: [GoalFeedbackEvent]
 
     init(
         goalID: String?,
@@ -896,7 +953,9 @@ struct GoalEngineOrchestrationContextSnapshot: Codable, Sendable, Equatable {
         sourceFlow: String?,
         clarifiedFields: [String: String],
         referenceNow: String?,
-        knowledgeContext: GoalUnderstandingKnowledgeContext? = nil
+        knowledgeContext: GoalUnderstandingKnowledgeContext? = nil,
+        evidence: [ProgressEvidence] = [],
+        feedbackHistory: [GoalFeedbackEvent] = []
     ) {
         self.goalID = goalID
         self.actorName = actorName
@@ -910,6 +969,57 @@ struct GoalEngineOrchestrationContextSnapshot: Codable, Sendable, Equatable {
         self.clarifiedFields = clarifiedFields
         self.referenceNow = referenceNow
         self.knowledgeContext = knowledgeContext
+        self.evidence = evidence
+        self.feedbackHistory = feedbackHistory
+    }
+
+    private enum CodingKeys: String, CodingKey {
+        case goalID
+        case actorName
+        case preferredPlanningStrictness
+        case goalOwnerRole
+        case supportScope
+        case deadlineHints
+        case existingGoalReferences
+        case sourceScreen
+        case sourceFlow
+        case clarifiedFields
+        case referenceNow
+        case knowledgeContext
+    }
+
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        goalID = try container.decodeIfPresent(String.self, forKey: .goalID)
+        actorName = try container.decodeIfPresent(String.self, forKey: .actorName)
+        preferredPlanningStrictness = try container.decode(GoalPlanningStrictness.self, forKey: .preferredPlanningStrictness)
+        goalOwnerRole = try container.decodeIfPresent(String.self, forKey: .goalOwnerRole)
+        supportScope = try container.decodeIfPresent(GoalSupportScope.self, forKey: .supportScope)
+        deadlineHints = try container.decodeIfPresent([String].self, forKey: .deadlineHints) ?? []
+        existingGoalReferences = try container.decodeIfPresent([String].self, forKey: .existingGoalReferences) ?? []
+        sourceScreen = try container.decodeIfPresent(String.self, forKey: .sourceScreen)
+        sourceFlow = try container.decodeIfPresent(String.self, forKey: .sourceFlow)
+        clarifiedFields = try container.decodeIfPresent([String: String].self, forKey: .clarifiedFields) ?? [:]
+        referenceNow = try container.decodeIfPresent(String.self, forKey: .referenceNow)
+        knowledgeContext = try container.decodeIfPresent(GoalUnderstandingKnowledgeContext.self, forKey: .knowledgeContext)
+        evidence = []
+        feedbackHistory = []
+    }
+
+    func encode(to encoder: Encoder) throws {
+        var container = encoder.container(keyedBy: CodingKeys.self)
+        try container.encodeIfPresent(goalID, forKey: .goalID)
+        try container.encodeIfPresent(actorName, forKey: .actorName)
+        try container.encode(preferredPlanningStrictness, forKey: .preferredPlanningStrictness)
+        try container.encodeIfPresent(goalOwnerRole, forKey: .goalOwnerRole)
+        try container.encodeIfPresent(supportScope, forKey: .supportScope)
+        try container.encode(deadlineHints, forKey: .deadlineHints)
+        try container.encode(existingGoalReferences, forKey: .existingGoalReferences)
+        try container.encodeIfPresent(sourceScreen, forKey: .sourceScreen)
+        try container.encodeIfPresent(sourceFlow, forKey: .sourceFlow)
+        try container.encode(clarifiedFields, forKey: .clarifiedFields)
+        try container.encodeIfPresent(referenceNow, forKey: .referenceNow)
+        try container.encodeIfPresent(knowledgeContext, forKey: .knowledgeContext)
     }
 }
 
@@ -978,6 +1088,7 @@ struct GoalOrchestrationMetadata: Codable, Sendable, Equatable {
     let compiledPath: GoalCompiledPath
     let resourceGraph: GoalResourceGraph
     let energyModel: GoalEnergyModel
+    let contradictionReport: GoalContradictionReport
 
     init(
         input: GoalEngineOrchestrationInputSnapshot,
@@ -989,7 +1100,8 @@ struct GoalOrchestrationMetadata: Codable, Sendable, Equatable {
         understanding: GoalUnderstanding,
         compiledPath: GoalCompiledPath,
         resourceGraph: GoalResourceGraph,
-        energyModel: GoalEnergyModel
+        energyModel: GoalEnergyModel,
+        contradictionReport: GoalContradictionReport = .empty()
     ) {
         self.input = input
         self.context = context
@@ -1001,6 +1113,7 @@ struct GoalOrchestrationMetadata: Codable, Sendable, Equatable {
         self.compiledPath = compiledPath
         self.resourceGraph = resourceGraph
         self.energyModel = energyModel
+        self.contradictionReport = contradictionReport
     }
 
     private enum CodingKeys: String, CodingKey {
@@ -1014,6 +1127,7 @@ struct GoalOrchestrationMetadata: Codable, Sendable, Equatable {
         case compiledPath
         case resourceGraph
         case energyModel
+        case contradictionReport
     }
 
     init(from decoder: Decoder) throws {
@@ -1041,6 +1155,8 @@ struct GoalOrchestrationMetadata: Codable, Sendable, Equatable {
             )
         energyModel = try container.decodeIfPresent(GoalEnergyModel.self, forKey: .energyModel)
             ?? .unevaluated()
+        contradictionReport = try container.decodeIfPresent(GoalContradictionReport.self, forKey: .contradictionReport)
+            ?? .empty()
     }
 }
 
