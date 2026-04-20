@@ -37,6 +37,17 @@ final class GoalPathCompilerModelsTests: XCTestCase {
         XCTAssertEqual(risk.kind, .ambiguity)
         XCTAssertEqual(risk.severity, .important)
     }
+
+    func testCandidateEnrichmentFieldsRoundTripThroughCodable() throws {
+        let compiledPath = sampleCompiledPath()
+        let primary = try XCTUnwrap(compiledPath.candidates.first)
+
+        XCTAssertEqual(primary.appliedPacks.map(\.packID), ["career"])
+        XCTAssertEqual(primary.requirementHints.map(\.id), ["requirement-1"])
+        XCTAssertEqual(primary.readinessCriteria.map(\.id), ["criterion-1"])
+        XCTAssertEqual(primary.resourceHooks.map(\.id), ["hook-1"])
+        XCTAssertEqual(compiledPath.audit.packEntries.map(\.id), ["pack-audit-1"])
+    }
 }
 
 private extension GoalPathCompilerModelsTests {
@@ -112,6 +123,47 @@ private extension GoalPathCompilerModelsTests {
                             severity: .important
                         )
                     ],
+                    appliedPacks: [
+                        GoalCompiledPathAppliedPack(
+                            packID: "career",
+                            displayName: "Career Pack",
+                            matchConfidence: 0.84,
+                            matchedDomains: [.career],
+                            matchReasons: ["Career domain present"],
+                            provisional: true
+                        )
+                    ],
+                    requirementHints: [
+                        GoalCompiledPathRequirementHint(
+                            id: "requirement-1",
+                            summary: "Requirements may need confirmation.",
+                            kind: .externalRequirement,
+                            relatedField: .goalShape,
+                            relatedStageID: "stage-setup",
+                            blocking: false
+                        )
+                    ],
+                    readinessCriteria: [
+                        GoalCompiledPathReadinessCriterion(
+                            id: "criterion-1",
+                            summary: "Confirm baseline requirements",
+                            kind: .confirmation,
+                            targetStageID: "stage-setup",
+                            token: "confirm_requirements",
+                            blocking: true
+                        )
+                    ],
+                    resourceHooks: [
+                        GoalCompiledPathResourceHook(
+                            id: "hook-1",
+                            kind: .requirementReference,
+                            targetStageID: "stage-setup",
+                            relatedDomains: [.career],
+                            sourceClaimIDs: [],
+                            sourceRecordIDs: [],
+                            placeholderState: .resourceNeeded
+                        )
+                    ],
                     blockingReasons: posture == .blocked ? [
                         GoalCompiledPathBlockingReason(
                             id: "blocking-1",
@@ -146,6 +198,17 @@ private extension GoalPathCompilerModelsTests {
                         claimID: nil,
                         sourceRecordID: nil,
                         summary: "Primary interpretation selected as the lead path candidate."
+                    )
+                ],
+                packEntries: [
+                    GoalCompiledPathPackAuditEntry(
+                        id: "pack-audit-1",
+                        packID: "career",
+                        contributionKind: .resourceHook,
+                        artifactID: "hook-1",
+                        targetCandidateID: "candidate-primary",
+                        targetStageID: "stage-setup",
+                        summary: "Career pack added a placeholder resource hook."
                     )
                 ]
             )

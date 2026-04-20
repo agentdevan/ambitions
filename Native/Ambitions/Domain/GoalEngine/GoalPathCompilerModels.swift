@@ -46,6 +46,34 @@ enum GoalCompiledPathAuditKind: String, Codable, Sendable, Equatable, Hashable {
     case knowledgeEvidence = "knowledge_evidence"
 }
 
+enum GoalCompiledPathRequirementKind: String, Codable, Sendable, Equatable, Hashable {
+    case externalRequirement = "external_requirement"
+    case domainReadiness = "domain_readiness"
+}
+
+enum GoalCompiledPathReadinessCriterionKind: String, Codable, Sendable, Equatable, Hashable {
+    case confirmation
+    case eligibility
+}
+
+enum GoalCompiledPathResourceHookKind: String, Codable, Sendable, Equatable, Hashable {
+    case requirementReference = "requirement_reference"
+    case preparationMaterial = "preparation_material"
+}
+
+enum GoalCompiledPathResourceHookPlaceholderState: String, Codable, Sendable, Equatable, Hashable {
+    case resourceNeeded = "resource_needed"
+}
+
+enum GoalCompiledPathPackAuditContributionKind: String, Codable, Sendable, Equatable, Hashable {
+    case requirementHint = "requirement_hint"
+    case dependencyHint = "dependency_hint"
+    case readinessCriterion = "readiness_criterion"
+    case riskHint = "risk_hint"
+    case resourceHook = "resource_hook"
+    case branchAddition = "branch_addition"
+}
+
 struct GoalCompiledPathConfidence: Codable, Sendable, Equatable {
     let overall: RecommendationConfidence
     let score: Double
@@ -73,6 +101,43 @@ struct GoalCompiledPathRisk: Codable, Sendable, Equatable, Identifiable, Hashabl
     let summary: String
     let kind: GoalUnderstandingRiskKind
     let severity: GoalClarificationSeverity
+}
+
+struct GoalCompiledPathRequirementHint: Codable, Sendable, Equatable, Identifiable, Hashable {
+    let id: String
+    let summary: String
+    let kind: GoalCompiledPathRequirementKind
+    let relatedField: MissingFieldKey?
+    let relatedStageID: String?
+    let blocking: Bool
+}
+
+struct GoalCompiledPathReadinessCriterion: Codable, Sendable, Equatable, Identifiable, Hashable {
+    let id: String
+    let summary: String
+    let kind: GoalCompiledPathReadinessCriterionKind
+    let targetStageID: String?
+    let token: String
+    let blocking: Bool
+}
+
+struct GoalCompiledPathResourceHook: Codable, Sendable, Equatable, Identifiable, Hashable {
+    let id: String
+    let kind: GoalCompiledPathResourceHookKind
+    let targetStageID: String?
+    let relatedDomains: [LifeDomainKey]
+    let sourceClaimIDs: [String]
+    let sourceRecordIDs: [String]
+    let placeholderState: GoalCompiledPathResourceHookPlaceholderState
+}
+
+struct GoalCompiledPathAppliedPack: Codable, Sendable, Equatable, Hashable {
+    let packID: String
+    let displayName: String
+    let matchConfidence: Double
+    let matchedDomains: [LifeDomainKey]
+    let matchReasons: [String]
+    let provisional: Bool
 }
 
 struct GoalCompiledPathDependency: Codable, Sendable, Equatable, Identifiable, Hashable {
@@ -119,8 +184,91 @@ struct GoalCompiledPathCandidate: Codable, Sendable, Equatable, Identifiable {
     let branches: [GoalCompiledPathBranch]
     let assumptions: [GoalCompiledPathAssumption]
     let risks: [GoalCompiledPathRisk]
+    let appliedPacks: [GoalCompiledPathAppliedPack]
+    let requirementHints: [GoalCompiledPathRequirementHint]
+    let readinessCriteria: [GoalCompiledPathReadinessCriterion]
+    let resourceHooks: [GoalCompiledPathResourceHook]
     let blockingReasons: [GoalCompiledPathBlockingReason]
     let confidence: GoalCompiledPathConfidence
+
+    init(
+        id: String,
+        title: String,
+        summary: String,
+        isPrimary: Bool,
+        posture: GoalPathCompilePosture,
+        safeForStarterPlanning: Bool,
+        stages: [GoalCompiledPathStage],
+        dependencies: [GoalCompiledPathDependency],
+        branches: [GoalCompiledPathBranch],
+        assumptions: [GoalCompiledPathAssumption],
+        risks: [GoalCompiledPathRisk],
+        appliedPacks: [GoalCompiledPathAppliedPack] = [],
+        requirementHints: [GoalCompiledPathRequirementHint] = [],
+        readinessCriteria: [GoalCompiledPathReadinessCriterion] = [],
+        resourceHooks: [GoalCompiledPathResourceHook] = [],
+        blockingReasons: [GoalCompiledPathBlockingReason],
+        confidence: GoalCompiledPathConfidence
+    ) {
+        self.id = id
+        self.title = title
+        self.summary = summary
+        self.isPrimary = isPrimary
+        self.posture = posture
+        self.safeForStarterPlanning = safeForStarterPlanning
+        self.stages = stages
+        self.dependencies = dependencies
+        self.branches = branches
+        self.assumptions = assumptions
+        self.risks = risks
+        self.appliedPacks = appliedPacks
+        self.requirementHints = requirementHints
+        self.readinessCriteria = readinessCriteria
+        self.resourceHooks = resourceHooks
+        self.blockingReasons = blockingReasons
+        self.confidence = confidence
+    }
+
+    private enum CodingKeys: String, CodingKey {
+        case id
+        case title
+        case summary
+        case isPrimary
+        case posture
+        case safeForStarterPlanning
+        case stages
+        case dependencies
+        case branches
+        case assumptions
+        case risks
+        case appliedPacks
+        case requirementHints
+        case readinessCriteria
+        case resourceHooks
+        case blockingReasons
+        case confidence
+    }
+
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        id = try container.decode(String.self, forKey: .id)
+        title = try container.decode(String.self, forKey: .title)
+        summary = try container.decode(String.self, forKey: .summary)
+        isPrimary = try container.decode(Bool.self, forKey: .isPrimary)
+        posture = try container.decode(GoalPathCompilePosture.self, forKey: .posture)
+        safeForStarterPlanning = try container.decode(Bool.self, forKey: .safeForStarterPlanning)
+        stages = try container.decode([GoalCompiledPathStage].self, forKey: .stages)
+        dependencies = try container.decode([GoalCompiledPathDependency].self, forKey: .dependencies)
+        branches = try container.decode([GoalCompiledPathBranch].self, forKey: .branches)
+        assumptions = try container.decode([GoalCompiledPathAssumption].self, forKey: .assumptions)
+        risks = try container.decode([GoalCompiledPathRisk].self, forKey: .risks)
+        appliedPacks = try container.decodeIfPresent([GoalCompiledPathAppliedPack].self, forKey: .appliedPacks) ?? []
+        requirementHints = try container.decodeIfPresent([GoalCompiledPathRequirementHint].self, forKey: .requirementHints) ?? []
+        readinessCriteria = try container.decodeIfPresent([GoalCompiledPathReadinessCriterion].self, forKey: .readinessCriteria) ?? []
+        resourceHooks = try container.decodeIfPresent([GoalCompiledPathResourceHook].self, forKey: .resourceHooks) ?? []
+        blockingReasons = try container.decode([GoalCompiledPathBlockingReason].self, forKey: .blockingReasons)
+        confidence = try container.decode(GoalCompiledPathConfidence.self, forKey: .confidence)
+    }
 }
 
 struct GoalCompiledPathUncertainty: Codable, Sendable, Equatable {
@@ -144,8 +292,38 @@ struct GoalCompiledPathAuditEntry: Codable, Sendable, Equatable, Identifiable, H
     let summary: String
 }
 
+struct GoalCompiledPathPackAuditEntry: Codable, Sendable, Equatable, Identifiable, Hashable {
+    let id: String
+    let packID: String
+    let contributionKind: GoalCompiledPathPackAuditContributionKind
+    let artifactID: String
+    let targetCandidateID: String
+    let targetStageID: String?
+    let summary: String
+}
+
 struct GoalCompiledPathAuditMetadata: Codable, Sendable, Equatable {
     let entries: [GoalCompiledPathAuditEntry]
+    let packEntries: [GoalCompiledPathPackAuditEntry]
+
+    init(
+        entries: [GoalCompiledPathAuditEntry],
+        packEntries: [GoalCompiledPathPackAuditEntry] = []
+    ) {
+        self.entries = entries
+        self.packEntries = packEntries
+    }
+
+    private enum CodingKeys: String, CodingKey {
+        case entries
+        case packEntries
+    }
+
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        entries = try container.decode([GoalCompiledPathAuditEntry].self, forKey: .entries)
+        packEntries = try container.decodeIfPresent([GoalCompiledPathPackAuditEntry].self, forKey: .packEntries) ?? []
+    }
 }
 
 struct GoalCompiledPath: Codable, Sendable, Equatable {
@@ -164,7 +342,7 @@ extension GoalCompiledPath {
     }
 }
 
-private struct GoalCompiledPathCompilerCore {
+struct GoalCompiledPathCompilerCore {
     func compile(understanding: GoalUnderstanding) -> GoalCompiledPath {
         let overallPosture = posture(for: understanding)
         let starterSafe = understanding.readiness.safeToCompile
@@ -237,6 +415,10 @@ private struct GoalCompiledPathCompilerCore {
                 branches: branches,
                 assumptions: assumptions,
                 risks: risks,
+                appliedPacks: [],
+                requirementHints: [],
+                readinessCriteria: [],
+                resourceHooks: [],
                 blockingReasons: blockingReasons(from: understanding, posture: candidatePosture),
                 confidence: GoalCompiledPathConfidence(
                     overall: understanding.confidence.overall,
@@ -253,7 +435,8 @@ private struct GoalCompiledPathCompilerCore {
             entries: makeAuditEntries(
                 understanding: understanding,
                 candidates: candidates
-            )
+            ),
+            packEntries: []
         )
 
         return GoalCompiledPath(

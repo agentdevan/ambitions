@@ -33,6 +33,8 @@ final class GoalPathCompilerServiceTests: XCTestCase {
         XCTAssertEqual(primary?.assumptions.first?.id, "assumption-1")
         XCTAssertEqual(primary?.risks.first?.id, "risk-1")
         XCTAssertFalse(compiled.audit.entries.isEmpty)
+        XCTAssertFalse(primary?.appliedPacks.isEmpty ?? true)
+        XCTAssertFalse(compiled.audit.packEntries.isEmpty)
     }
 
     func testCompilerWorksWithoutKnowledgeContext() {
@@ -85,9 +87,20 @@ final class GoalPathCompilerServiceTests: XCTestCase {
             }
         })
     }
+
+    func testCompilerAddsPlaceholderResourceHooksWithoutChangingCorePosture() throws {
+        let compiled = DefaultGoalPathCompilerService().compile(
+            understanding: sampleUnderstanding()
+        )
+
+        let primary = try XCTUnwrap(compiled.candidates.first(where: \.isPrimary))
+        XCTAssertEqual(compiled.overallPosture, .provisional)
+        XCTAssertTrue(primary.resourceHooks.isEmpty == false)
+        XCTAssertTrue(primary.resourceHooks.allSatisfy { $0.placeholderState == .resourceNeeded })
+    }
 }
 
-private extension GoalPathCompilerServiceTests {
+extension GoalPathCompilerServiceTests {
     func sampleUnderstanding(
         decision: GoalClarificationDecision = .safeToProceedWithAssumptions
     ) -> GoalUnderstanding {

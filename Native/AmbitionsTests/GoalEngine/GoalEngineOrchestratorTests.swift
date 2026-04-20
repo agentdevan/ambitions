@@ -49,6 +49,8 @@ final class GoalEngineOrchestratorTests: XCTestCase {
         XCTAssertTrue(result.metadata.understanding.clarification.alternateInterpretationsActive)
         XCTAssertEqual(result.metadata.compiledPath.overallPosture, .provisional)
         XCTAssertTrue(result.metadata.compiledPath.safeForStarterPlanning)
+        XCTAssertTrue(result.metadata.compiledPath.candidates.contains(where: { !$0.appliedPacks.isEmpty }))
+        XCTAssertTrue(result.metadata.compiledPath.audit.packEntries.isEmpty == false)
     }
 
     func testDelegatedChildSupportGoalKeepsSupportFraming() throws {
