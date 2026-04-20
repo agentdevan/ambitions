@@ -390,6 +390,41 @@ final class CaptureRecord {
 }
 
 @Model
+final class TeachingSignalRecord {
+    @Attribute(.unique) var id: String
+    var goalID: String
+    var kindRaw: String
+    var sourceRaw: String
+    var dispositionRaw: String
+    var applicationKey: String
+    var createdAt: String
+    var updatedAt: String
+    var snapshotData: Data
+
+    init(
+        id: String,
+        goalID: String,
+        kindRaw: String,
+        sourceRaw: String,
+        dispositionRaw: String,
+        applicationKey: String,
+        createdAt: String,
+        updatedAt: String,
+        snapshotData: Data
+    ) {
+        self.id = id
+        self.goalID = goalID
+        self.kindRaw = kindRaw
+        self.sourceRaw = sourceRaw
+        self.dispositionRaw = dispositionRaw
+        self.applicationKey = applicationKey
+        self.createdAt = createdAt
+        self.updatedAt = updatedAt
+        self.snapshotData = snapshotData
+    }
+}
+
+@Model
 final class AppStateRecord {
     @Attribute(.unique) var id: String
     var preferredTabRaw: String

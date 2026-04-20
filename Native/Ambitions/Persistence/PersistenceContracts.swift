@@ -179,6 +179,11 @@ protocol CaptureRepository: Sendable {
     func saveCaptures(_ captures: [Capture]) async throws
 }
 
+protocol GoalTeachingSignalRepository: Sendable {
+    func listSignals(goalID: String?) async throws -> [GoalTeachingSignal]
+    func saveSignals(_ signals: [GoalTeachingSignal]) async throws
+}
+
 protocol AppStateRepository: Sendable {
     func loadState() async throws -> AppStateSnapshot
     func saveState(_ state: AppStateSnapshot) async throws
@@ -194,5 +199,24 @@ struct AppRepositories: Sendable {
     let evidence: any ProgressEvidenceRepository
     let feedback: any FeedbackEventRepository
     let captures: any CaptureRepository
+    let teaching: any GoalTeachingSignalRepository
     let appState: any AppStateRepository
+
+    init(
+        goals: any GoalRepository,
+        drafts: any GoalDraftRepository,
+        evidence: any ProgressEvidenceRepository,
+        feedback: any FeedbackEventRepository,
+        captures: any CaptureRepository,
+        teaching: any GoalTeachingSignalRepository = InMemoryGoalTeachingSignalRepository(),
+        appState: any AppStateRepository
+    ) {
+        self.goals = goals
+        self.drafts = drafts
+        self.evidence = evidence
+        self.feedback = feedback
+        self.captures = captures
+        self.teaching = teaching
+        self.appState = appState
+    }
 }

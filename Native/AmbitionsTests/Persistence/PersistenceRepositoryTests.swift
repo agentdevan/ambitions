@@ -167,6 +167,52 @@ final class PersistenceRepositoryTests: XCTestCase {
         XCTAssertEqual(loadedFeedback.count, feedbackFixture.input.feedbackHistory.count)
     }
 
+    func testTeachingSignalRepositoryRoundTripsHistoricalSignals() async throws {
+        let repositories = try await makeRepositories()
+        let first = GoalTeachingSignal(
+            id: "teaching-first",
+            goalID: "goal-teaching",
+            createdAt: "2026-04-20T09:00:00Z",
+            updatedAt: "2026-04-20T09:00:00Z",
+            source: .explicitManualCorrection,
+            kind: .goalSubjectCorrection,
+            disposition: .active,
+            anchor: GoalTeachingStableAnchor(
+                artifactKind: .goalSubjectField,
+                canonicalField: .goalSubject,
+                candidateID: nil,
+                stageID: nil,
+                stepID: nil,
+                targetFingerprint: "goal_subject",
+                contradictionCode: nil,
+                contradictionArtifactRefs: []
+            ),
+            payload: .goalSubject(
+                GoalTeachingGoalSubjectCorrection(correctedCanonicalIntent: "Become an astronaut")
+            ),
+            applicationKey: "goal-teaching::goal-subject",
+            userNote: "First"
+        )
+        let second = GoalTeachingSignal(
+            id: "teaching-second",
+            goalID: "goal-teaching",
+            createdAt: "2026-04-20T10:00:00Z",
+            updatedAt: "2026-04-20T10:00:00Z",
+            source: .explicitManualCorrection,
+            kind: .goalSubjectCorrection,
+            disposition: .active,
+            anchor: first.anchor,
+            payload: first.payload,
+            applicationKey: first.applicationKey,
+            userNote: "Second"
+        )
+
+        try await repositories.teaching.saveSignals([first, second])
+        let loaded = try await repositories.teaching.listSignals(goalID: "goal-teaching")
+
+        XCTAssertEqual(loaded.map(\.id), ["teaching-second", "teaching-first"])
+    }
+
     func testAppStateRepositoryPersistsPreferencesAndBootstrapFields() async throws {
         let repositories = try await makeRepositories()
         var state = try await repositories.appState.loadState()
@@ -313,6 +359,7 @@ private extension PersistenceRepositoryTests {
             evidence: SwiftDataProgressEvidenceRepository(store: store),
             feedback: SwiftDataFeedbackEventRepository(store: store),
             captures: SwiftDataCaptureRepository(store: store),
+            teaching: SwiftDataGoalTeachingSignalRepository(store: store),
             appState: SwiftDataAppStateRepository(store: store)
         )
     }

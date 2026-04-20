@@ -23,6 +23,7 @@ struct PortableSnapshotService: PortableSnapshotServicing {
         async let evidence = repositories.evidence.listEvidence(goalID: nil)
         async let feedback = repositories.feedback.listEvents(goalID: nil)
         async let captures = repositories.captures.listCaptures()
+        async let teachingSignals = repositories.teaching.listSignals(goalID: nil)
         async let appState = repositories.appState.loadState()
 
         return try await PortableAppSnapshot(
@@ -37,6 +38,7 @@ struct PortableSnapshotService: PortableSnapshotServicing {
             evidence: evidence,
             feedback: feedback,
             captures: captures,
+            teachingSignals: teachingSignals,
             appState: appState
         )
     }
@@ -87,6 +89,7 @@ private extension PortableSnapshotService {
         }
 
         try await repositories.captures.saveCaptures(snapshot.captures)
+        try await repositories.teaching.saveSignals(snapshot.teachingSignals)
         try await repositories.appState.saveState(snapshot.appState)
 
         return PortableImportReport(
@@ -96,6 +99,7 @@ private extension PortableSnapshotService {
             importedEvidenceCount: snapshot.evidence.count,
             importedFeedbackCount: snapshot.feedback.count,
             importedCaptureCount: snapshot.captures.count,
+            importedTeachingSignalCount: snapshot.teachingSignals.count,
             importedAppStateCount: 1,
             conflicts: [],
             warnings: []
@@ -108,6 +112,7 @@ private extension PortableSnapshotService {
         async let localEvidence = repositories.evidence.listEvidence(goalID: nil)
         async let localFeedback = repositories.feedback.listEvents(goalID: nil)
         async let localCaptures = repositories.captures.listCaptures()
+        async let localTeaching = repositories.teaching.listSignals(goalID: nil)
         async let localAppState = repositories.appState.loadState()
 
         let goalResult = compareGoals(incoming: snapshot.goals, local: try await localGoals)
@@ -115,6 +120,7 @@ private extension PortableSnapshotService {
         let evidenceResult = compareEvidence(incoming: snapshot.evidence, local: try await localEvidence)
         let feedbackResult = compareFeedback(incoming: snapshot.feedback, local: try await localFeedback)
         let captureResult = compareCaptures(incoming: snapshot.captures, local: try await localCaptures)
+        let teachingResult = compareTeachingSignals(incoming: snapshot.teachingSignals, local: try await localTeaching)
         let appStateResult = compareAppState(incoming: snapshot.appState, local: try await localAppState)
 
         if !goalResult.accepted.isEmpty {
@@ -145,6 +151,10 @@ private extension PortableSnapshotService {
         if !captureResult.accepted.isEmpty {
             try await repositories.captures.saveCaptures(captureResult.accepted)
         }
+        if !teachingResult.accepted.isEmpty {
+            let existing = try await repositories.teaching.listSignals(goalID: nil)
+            try await repositories.teaching.saveSignals(existing + teachingResult.accepted)
+        }
         if appStateResult.accepted {
             try await repositories.appState.saveState(snapshot.appState)
         }
@@ -156,8 +166,9 @@ private extension PortableSnapshotService {
             importedEvidenceCount: evidenceResult.accepted.count,
             importedFeedbackCount: feedbackResult.accepted.count,
             importedCaptureCount: captureResult.accepted.count,
+            importedTeachingSignalCount: teachingResult.accepted.count,
             importedAppStateCount: appStateResult.accepted ? 1 : 0,
-            conflicts: goalResult.conflicts + draftResult.conflicts + evidenceResult.conflicts + feedbackResult.conflicts + captureResult.conflicts + appStateResult.conflicts,
+            conflicts: goalResult.conflicts + draftResult.conflicts + evidenceResult.conflicts + feedbackResult.conflicts + captureResult.conflicts + teachingResult.conflicts + appStateResult.conflicts,
             warnings: []
         )
     }
@@ -230,6 +241,16 @@ private extension PortableSnapshotService {
     func compareCaptures(incoming: [Capture], local: [Capture]) -> (accepted: [Capture], conflicts: [PortableConflict]) {
         compareByUpdatedAt(
             kind: .capture,
+            incoming: incoming,
+            local: local,
+            id: \.id,
+            updatedAt: \.updatedAt
+        )
+    }
+
+    func compareTeachingSignals(incoming: [GoalTeachingSignal], local: [GoalTeachingSignal]) -> (accepted: [GoalTeachingSignal], conflicts: [PortableConflict]) {
+        compareByUpdatedAt(
+            kind: .teachingSignal,
             incoming: incoming,
             local: local,
             id: \.id,

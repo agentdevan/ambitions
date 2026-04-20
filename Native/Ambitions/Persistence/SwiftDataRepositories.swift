@@ -403,6 +403,28 @@ private enum RepositoryMapping {
         )
     }
 
+    static func teachingSignalRecord(from signal: GoalTeachingSignal) throws -> TeachingSignalRecord {
+        TeachingSignalRecord(
+            id: signal.id,
+            goalID: signal.goalID,
+            kindRaw: signal.kind.rawValue,
+            sourceRaw: signal.source.rawValue,
+            dispositionRaw: signal.disposition.rawValue,
+            applicationKey: signal.applicationKey,
+            createdAt: signal.createdAt,
+            updatedAt: signal.updatedAt,
+            snapshotData: try PersistenceCoding.encode(signal)
+        )
+    }
+
+    static func teachingSignal(from record: TeachingSignalRecord) throws -> GoalTeachingSignal {
+        if let snapshot = try? PersistenceCoding.decode(GoalTeachingSignal.self, from: record.snapshotData) {
+            return snapshot
+        }
+
+        throw PersistenceError.invalidStoredValue("Teaching signal snapshots must decode into GoalTeachingSignal.")
+    }
+
     static func captureStatus(from rawValue: String) -> CaptureStatus {
         switch rawValue {
         case "pending":
@@ -746,6 +768,65 @@ struct SwiftDataCaptureRepository: CaptureRepository {
                 }
             }
         }
+    }
+}
+
+struct SwiftDataGoalTeachingSignalRepository: GoalTeachingSignalRepository {
+    let store: AmbitionsPersistenceStore
+
+    func listSignals(goalID: String?) async throws -> [GoalTeachingSignal] {
+        try await store.read { context in
+            try context.fetch(FetchDescriptor<TeachingSignalRecord>())
+                .filter { goalID == nil || $0.goalID == goalID }
+                .sorted {
+                    if $0.updatedAt != $1.updatedAt {
+                        return $0.updatedAt > $1.updatedAt
+                    }
+                    return $0.id > $1.id
+                }
+                .map(RepositoryMapping.teachingSignal(from:))
+        }
+    }
+
+    func saveSignals(_ signals: [GoalTeachingSignal]) async throws {
+        try await store.write { context in
+            let existing = Dictionary(uniqueKeysWithValues: try context.fetch(FetchDescriptor<TeachingSignalRecord>()).map { ($0.id, $0) })
+            for signal in signals {
+                if let record = existing[signal.id] {
+                    record.goalID = signal.goalID
+                    record.kindRaw = signal.kind.rawValue
+                    record.sourceRaw = signal.source.rawValue
+                    record.dispositionRaw = signal.disposition.rawValue
+                    record.applicationKey = signal.applicationKey
+                    record.createdAt = signal.createdAt
+                    record.updatedAt = signal.updatedAt
+                    record.snapshotData = try PersistenceCoding.encode(signal)
+                } else {
+                    context.insert(try RepositoryMapping.teachingSignalRecord(from: signal))
+                }
+            }
+        }
+    }
+}
+
+actor InMemoryGoalTeachingSignalRepository: GoalTeachingSignalRepository {
+    private var signals: [GoalTeachingSignal] = []
+
+    func listSignals(goalID: String?) async throws -> [GoalTeachingSignal] {
+        signals
+            .filter { goalID == nil || $0.goalID == goalID }
+            .sorted {
+                if $0.updatedAt != $1.updatedAt {
+                    return $0.updatedAt > $1.updatedAt
+                }
+                return $0.id > $1.id
+            }
+    }
+
+    func saveSignals(_ signals: [GoalTeachingSignal]) async throws {
+        let incomingByID = Dictionary(uniqueKeysWithValues: signals.map { ($0.id, $0) })
+        self.signals.removeAll { incomingByID[$0.id] != nil }
+        self.signals.append(contentsOf: signals)
     }
 }
 

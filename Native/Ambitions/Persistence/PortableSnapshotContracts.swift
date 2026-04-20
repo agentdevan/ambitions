@@ -33,6 +33,7 @@ struct PortableAppSnapshot: Codable, Sendable, Equatable {
     let evidence: [ProgressEvidence]
     let feedback: [GoalFeedbackEvent]
     let captures: [Capture]
+    let teachingSignals: [GoalTeachingSignal]
     let appState: AppStateSnapshot
 
     private enum CodingKeys: String, CodingKey {
@@ -42,6 +43,7 @@ struct PortableAppSnapshot: Codable, Sendable, Equatable {
         case evidence
         case feedback
         case captures
+        case teachingSignals
         case appState
     }
 
@@ -52,6 +54,7 @@ struct PortableAppSnapshot: Codable, Sendable, Equatable {
         evidence: [ProgressEvidence],
         feedback: [GoalFeedbackEvent],
         captures: [Capture],
+        teachingSignals: [GoalTeachingSignal] = [],
         appState: AppStateSnapshot
     ) {
         self.metadata = metadata
@@ -60,6 +63,7 @@ struct PortableAppSnapshot: Codable, Sendable, Equatable {
         self.evidence = evidence
         self.feedback = feedback
         self.captures = captures
+        self.teachingSignals = teachingSignals
         self.appState = appState
     }
 
@@ -71,6 +75,7 @@ struct PortableAppSnapshot: Codable, Sendable, Equatable {
         evidence = try container.decode([ProgressEvidence].self, forKey: .evidence)
         feedback = try container.decode([PortableStoredGoalFeedbackEvent].self, forKey: .feedback).map(\.event)
         captures = try container.decode([Capture].self, forKey: .captures)
+        teachingSignals = try container.decodeIfPresent([GoalTeachingSignal].self, forKey: .teachingSignals) ?? []
         appState = try container.decode(AppStateSnapshot.self, forKey: .appState)
     }
 
@@ -82,6 +87,7 @@ struct PortableAppSnapshot: Codable, Sendable, Equatable {
         try container.encode(evidence, forKey: .evidence)
         try container.encode(feedback.map(PortableStoredGoalFeedbackEvent.init), forKey: .feedback)
         try container.encode(captures, forKey: .captures)
+        try container.encode(teachingSignals, forKey: .teachingSignals)
         try container.encode(appState, forKey: .appState)
     }
 }
@@ -92,6 +98,7 @@ enum PortableConflictEntityKind: String, Codable, Sendable {
     case evidence
     case feedback
     case capture
+    case teachingSignal = "teaching_signal"
     case appState = "app_state"
 }
 
@@ -123,9 +130,34 @@ struct PortableImportReport: Codable, Sendable, Equatable {
     let importedEvidenceCount: Int
     let importedFeedbackCount: Int
     let importedCaptureCount: Int
+    let importedTeachingSignalCount: Int
     let importedAppStateCount: Int
     let conflicts: [PortableConflict]
     let warnings: [PortableImportWarning]
+
+    init(
+        mode: PortableImportMode,
+        importedGoalCount: Int,
+        importedDraftCount: Int,
+        importedEvidenceCount: Int,
+        importedFeedbackCount: Int,
+        importedCaptureCount: Int,
+        importedTeachingSignalCount: Int = 0,
+        importedAppStateCount: Int,
+        conflicts: [PortableConflict],
+        warnings: [PortableImportWarning]
+    ) {
+        self.mode = mode
+        self.importedGoalCount = importedGoalCount
+        self.importedDraftCount = importedDraftCount
+        self.importedEvidenceCount = importedEvidenceCount
+        self.importedFeedbackCount = importedFeedbackCount
+        self.importedCaptureCount = importedCaptureCount
+        self.importedTeachingSignalCount = importedTeachingSignalCount
+        self.importedAppStateCount = importedAppStateCount
+        self.conflicts = conflicts
+        self.warnings = warnings
+    }
 }
 
 enum PortableSnapshotError: Error, Equatable {

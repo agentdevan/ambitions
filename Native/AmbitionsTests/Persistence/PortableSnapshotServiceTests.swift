@@ -10,6 +10,7 @@ final class PortableSnapshotServiceTests: XCTestCase {
         let evidence = sampleEvidence(id: "evidence-export", goalID: goal.id, capturedAt: "2026-04-18T12:00:00Z")
         let feedback = sampleFeedback(stepID: "step-export", occurredAt: "2026-04-18T13:00:00Z")
         let capture = sampleCapture(id: "capture-export", updatedAt: "2026-04-18T14:00:00Z")
+        let teaching = sampleTeachingSignal(goalID: goal.id, updatedAt: "2026-04-18T14:30:00Z")
         var state = AppStateSnapshot.default
         state.userDisplayName = "Portable User"
         state.lastOpenedGoalID = goal.id
@@ -19,6 +20,7 @@ final class PortableSnapshotServiceTests: XCTestCase {
         try await repositories.evidence.saveEvidence([evidence])
         try await repositories.feedback.saveEvents([feedback], goalID: goal.id)
         try await repositories.captures.saveCaptures([capture])
+        try await repositories.teaching.saveSignals([teaching])
         try await repositories.appState.saveState(state)
 
         let service = PortableSnapshotService(
@@ -36,6 +38,7 @@ final class PortableSnapshotServiceTests: XCTestCase {
         XCTAssertEqual(snapshot.evidence.map(\.id), [evidence.id])
         XCTAssertEqual(snapshot.feedback.map(\.base.id), [feedback.base.id])
         XCTAssertEqual(snapshot.captures.map(\.id), [capture.id])
+        XCTAssertEqual(snapshot.teachingSignals.map(\.id), [teaching.id])
         XCTAssertEqual(snapshot.appState.userDisplayName, "Portable User")
     }
 
@@ -48,6 +51,7 @@ final class PortableSnapshotServiceTests: XCTestCase {
         let incomingEvidence = sampleEvidence(id: "evidence-incoming", goalID: incomingGoal.id, capturedAt: "2026-04-19T12:00:00Z")
         let incomingFeedback = sampleFeedback(stepID: "step-incoming", occurredAt: "2026-04-19T13:00:00Z")
         let incomingCapture = sampleCapture(id: "capture-incoming", updatedAt: "2026-04-19T14:00:00Z")
+        let incomingTeaching = sampleTeachingSignal(goalID: incomingGoal.id, updatedAt: "2026-04-19T14:30:00Z")
         var incomingState = AppStateSnapshot.default
         incomingState.userDisplayName = "Restored User"
         incomingState.lastOpenedGoalID = incomingGoal.id
@@ -70,6 +74,7 @@ final class PortableSnapshotServiceTests: XCTestCase {
             evidence: [incomingEvidence],
             feedback: [incomingFeedback],
             captures: [incomingCapture],
+            teachingSignals: [incomingTeaching],
             appState: incomingState
         )
 
@@ -79,6 +84,7 @@ final class PortableSnapshotServiceTests: XCTestCase {
         let loadedEvidence = try await repositories.evidence.listEvidence(goalID: nil)
         let loadedFeedback = try await repositories.feedback.listEvents(goalID: nil)
         let loadedCaptures = try await repositories.captures.listCaptures()
+        let loadedTeaching = try await repositories.teaching.listSignals(goalID: incomingGoal.id)
         let loadedState = try await repositories.appState.loadState()
 
         XCTAssertEqual(report.importedGoalCount, 1)
@@ -88,6 +94,7 @@ final class PortableSnapshotServiceTests: XCTestCase {
         XCTAssertEqual(loadedEvidence.map(\.id), [incomingEvidence.id])
         XCTAssertEqual(loadedFeedback.map(\.base.id), [incomingFeedback.base.id])
         XCTAssertEqual(loadedCaptures.map(\.id), [incomingCapture.id])
+        XCTAssertEqual(loadedTeaching.map(\.id), [incomingTeaching.id])
         XCTAssertEqual(loadedState.userDisplayName, "Restored User")
     }
 
@@ -118,6 +125,7 @@ final class PortableSnapshotServiceTests: XCTestCase {
             evidence: [],
             feedback: [],
             captures: [sampleCapture(id: "capture-shared", updatedAt: "2026-04-19T10:00:00Z", rawText: "Incoming capture conflict")],
+            teachingSignals: [sampleTeachingSignal(goalID: "goal-new", updatedAt: "2026-04-19T10:30:00Z")],
             appState: AppStateSnapshot.default
         )
 
@@ -125,6 +133,7 @@ final class PortableSnapshotServiceTests: XCTestCase {
         let loadedDrafts = try await repositories.drafts.listDrafts()
         let loadedGoal = try await repositories.goals.goal(id: localGoal.id)
         let loadedCapture = try await repositories.captures.capture(id: localCapture.id)
+        let loadedTeaching = try await repositories.teaching.listSignals(goalID: "goal-new")
 
         XCTAssertEqual(report.importedDraftCount, 1)
         XCTAssertEqual(report.conflicts.count, 2)
@@ -132,6 +141,7 @@ final class PortableSnapshotServiceTests: XCTestCase {
         XCTAssertEqual(loadedDrafts.map(\.id), [incomingDraft.id])
         XCTAssertEqual(loadedGoal?.title, localGoal.title)
         XCTAssertEqual(loadedCapture?.rawText, localCapture.rawText)
+        XCTAssertEqual(loadedTeaching.count, 1)
     }
 
     func testImportSnapshotRejectsUnsupportedSchemaVersion() async throws {
@@ -153,6 +163,7 @@ final class PortableSnapshotServiceTests: XCTestCase {
             evidence: [],
             feedback: [],
             captures: [],
+            teachingSignals: [],
             appState: .default
         )
 
@@ -181,6 +192,40 @@ final class PortableSnapshotServiceTests: XCTestCase {
         XCTAssertEqual(report.importedGoalCount, 1)
         XCTAssertEqual(restored?.lifeGraph?.sharedLife?.responsibilities.map(\.title), ["Groceries"])
     }
+
+    func testPortableSnapshotDecodesMissingTeachingSignalsAsEmpty() throws {
+        let data = Data(
+            """
+            {
+              "metadata": {
+                "schemaVersion": "portable_app_snapshot.v1",
+                "exportedAt": "2026-04-19T15:00:00Z",
+                "source": "native.local.repositories",
+                "trustPosture": "local_only"
+              },
+              "goals": [],
+              "drafts": [],
+              "evidence": [],
+              "feedback": [],
+              "captures": [],
+              "appState": {
+                "id": "app_state.default",
+                "preferredTab": "today",
+                "userDisplayName": "",
+                "appearancePreference": "system",
+                "reviewCadenceDays": 7,
+                "localOnlyModeEnabled": true,
+                "hasCompletedBootstrap": false,
+                "goalPriorityOrder": []
+              }
+            }
+            """.utf8
+        )
+
+        let snapshot = try PersistenceCoding.decoder.decode(PortableAppSnapshot.self, from: data)
+
+        XCTAssertTrue(snapshot.teachingSignals.isEmpty)
+    }
 }
 
 private extension PortableSnapshotServiceTests {
@@ -191,7 +236,35 @@ private extension PortableSnapshotServiceTests {
             evidence: SwiftDataProgressEvidenceRepository(store: store),
             feedback: SwiftDataFeedbackEventRepository(store: store),
             captures: SwiftDataCaptureRepository(store: store),
+            teaching: SwiftDataGoalTeachingSignalRepository(store: store),
             appState: SwiftDataAppStateRepository(store: store)
+        )
+    }
+
+    func sampleTeachingSignal(goalID: String, updatedAt: String) -> GoalTeachingSignal {
+        GoalTeachingSignal(
+            id: "teaching-\(goalID)-\(updatedAt)",
+            goalID: goalID,
+            createdAt: updatedAt,
+            updatedAt: updatedAt,
+            source: .explicitManualCorrection,
+            kind: .goalSubjectCorrection,
+            disposition: .active,
+            anchor: GoalTeachingStableAnchor(
+                artifactKind: .goalSubjectField,
+                canonicalField: .goalSubject,
+                candidateID: nil,
+                stageID: nil,
+                stepID: nil,
+                targetFingerprint: "goal_subject",
+                contradictionCode: nil,
+                contradictionArtifactRefs: []
+            ),
+            payload: .goalSubject(
+                GoalTeachingGoalSubjectCorrection(correctedCanonicalIntent: "Become an astronaut")
+            ),
+            applicationKey: "goal-subject::\(goalID)",
+            userNote: nil
         )
     }
 

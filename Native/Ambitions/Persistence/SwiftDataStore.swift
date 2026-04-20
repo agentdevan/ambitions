@@ -29,6 +29,7 @@ actor AmbitionsPersistenceStore {
         ProgressEvidenceRecord.self,
         FeedbackEventRecord.self,
         CaptureRecord.self,
+        TeachingSignalRecord.self,
         AppStateRecord.self,
     ])
 
@@ -70,6 +71,7 @@ actor AmbitionsPersistenceStore {
         try context.fetch(FetchDescriptor<ProgressEvidenceRecord>()).forEach(context.delete)
         try context.fetch(FetchDescriptor<FeedbackEventRecord>()).forEach(context.delete)
         try context.fetch(FetchDescriptor<CaptureRecord>()).forEach(context.delete)
+        try context.fetch(FetchDescriptor<TeachingSignalRecord>()).forEach(context.delete)
         try context.fetch(FetchDescriptor<AppStateRecord>()).forEach(context.delete)
 
         if context.hasChanges {
