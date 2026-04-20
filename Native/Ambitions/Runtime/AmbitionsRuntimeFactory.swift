@@ -9,7 +9,8 @@ enum AmbitionsRuntimeFactory {
         notificationService: any NotificationServicing,
         calendarRemindersService: any CalendarRemindersServicing,
         syncCapability: any SyncCapability = LocalOnlySyncCapability(),
-        externalSnapshotReader: any RuntimeExternalSurfaceSnapshotReading = FileRuntimeExternalSurfaceSnapshotReader()
+        externalSnapshotReader: any RuntimeExternalSurfaceSnapshotReading = FileRuntimeExternalSurfaceSnapshotReader(),
+        knowledgeProvider: any KnowledgeProviding = LocalOnlyKnowledgeProvider()
     ) -> AmbitionsRuntime {
         let snapshotWriter = ExternalSurfaceSnapshotWriter(repositories: repositories)
         let learningService = LearningAnticipationService()
@@ -19,7 +20,8 @@ enum AmbitionsRuntimeFactory {
             capabilities: capabilities,
             memoryService: memoryService,
             syncCapability: syncCapability,
-            externalSnapshotReader: externalSnapshotReader
+            externalSnapshotReader: externalSnapshotReader,
+            knowledgeProvider: knowledgeProvider
         )
         let snapshotTodayService = SnapshotRefreshingTodayService(
             base: RepositoryBackedTodayService(
@@ -64,6 +66,7 @@ enum AmbitionsRuntimeFactory {
             clientContext: clientContext,
             capabilities: capabilities,
             repositories: repositories,
+            knowledgeProvider: knowledgeProvider,
             memoryService: memoryService,
             contextService: contextService,
             actionExecutor: actionExecutor,

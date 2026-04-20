@@ -29,18 +29,20 @@ struct RepositoryBackedRuntimeContextService: RuntimeContextServicing {
     let memoryService: any RuntimeMemoryServicing
     let syncCapability: any SyncCapability
     let externalSnapshotReader: any RuntimeExternalSurfaceSnapshotReading
+    let knowledgeProvider: any KnowledgeProviding
 
     func loadContext(now: Date) async throws -> RuntimeContextSnapshot {
-        _ = now
         async let memory = memoryService.loadMemory()
         async let syncStatus = syncCapability.status()
         async let externalSnapshot = externalSnapshotReader.loadSnapshot()
+        async let knowledgeStatus = knowledgeProvider.status(now: now)
 
         let resolvedMemory = try await memory
         return try await RuntimeContextSnapshot(
             clientContext: clientContext,
             capabilities: capabilities,
             syncStatus: syncStatus,
+            knowledgeProviderStatuses: [knowledgeStatus],
             memorySummary: RuntimeMemorySummary(memory: resolvedMemory),
             externalSurfaceSnapshot: externalSnapshot
         )

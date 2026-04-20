@@ -44,21 +44,33 @@ final class AmbitionsRuntimeBoundaryTests: XCTestCase {
     func testRuntimeContextUsesExistingSyncAndExternalSnapshotTruth() async throws {
         let repositories = try makeRepositories()
         let expectedSnapshot = ExternalSurfaceSnapshot(generatedAt: "2026-04-19T12:00:00Z", nextAction: nil)
+        let knowledgeProvider = StaticKnowledgeProvider(
+            descriptor: KnowledgeProviderDescriptor(id: "local-only", type: .systemFallback, displayName: "Local-only fallback"),
+            statusValue: KnowledgeProviderStatus(
+                provider: KnowledgeProviderDescriptor(id: "local-only", type: .systemFallback, displayName: "Local-only fallback"),
+                availability: .localOnlyMode,
+                detail: "Knowledge retrieval is unavailable while Ambitions remains local-only.",
+                runtimeTrustPosture: .localOnly
+            )
+        )
         let contextService = RepositoryBackedRuntimeContextService(
             clientContext: .iphoneApp,
             capabilities: .currentLocalRuntime,
             memoryService: RepositoryBackedRuntimeMemoryService(repositories: repositories),
             syncCapability: LocalOnlySyncCapability(),
-            externalSnapshotReader: StaticRuntimeSnapshotReader(snapshot: expectedSnapshot)
+            externalSnapshotReader: StaticRuntimeSnapshotReader(snapshot: expectedSnapshot),
+            knowledgeProvider: knowledgeProvider
         )
 
         let context = try await contextService.loadContext(now: Date(timeIntervalSince1970: 1_776_600_000))
+        let expectedKnowledgeStatus = await knowledgeProvider.status(now: Date(timeIntervalSince1970: 1_776_600_000))
 
         XCTAssertEqual(context.clientContext.kind, .iphoneApp)
         XCTAssertEqual(context.capabilities.syncBackendKind, .localOnly)
         XCTAssertFalse(context.capabilities.hasRemoteIntelligenceBackend)
         XCTAssertEqual(context.syncStatus.detail, "Ambitions is running in explicit local-only mode.")
         XCTAssertEqual(context.externalSurfaceSnapshot, expectedSnapshot)
+        XCTAssertEqual(context.knowledgeProviderStatuses, [expectedKnowledgeStatus])
         XCTAssertEqual(context.memorySummary.goalCount, 0)
         XCTAssertEqual(context.memorySummary.captureCount, 0)
     }
@@ -108,6 +120,8 @@ final class AmbitionsRuntimeBoundaryTests: XCTestCase {
         XCTAssertNotNil(runtime.todayService as? NotificationSchedulingTodayService)
         XCTAssertNotNil(runtime.goalsService as? NotificationSchedulingGoalsService)
         XCTAssertTrue(runtime.captureService is DefaultCaptureService)
+        let knowledgeStatus = await runtime.knowledgeProvider.status(now: .now)
+        XCTAssertEqual(knowledgeStatus.availability, .localOnlyMode)
         let deviceProjection = try await runtime.dedicatedDevicePrototypeRuntime
             .loadProjection(now: Date(timeIntervalSince1970: 1_776_600_000))
         XCTAssertEqual(deviceProjection.clientContext, AmbitionsRuntimeClientContext.bedsideRitualCompanion)
@@ -190,6 +204,25 @@ private struct StaticRuntimeSnapshotReader: RuntimeExternalSurfaceSnapshotReadin
 
     func loadSnapshot() async throws -> ExternalSurfaceSnapshot? {
         snapshot
+    }
+}
+
+private struct StaticKnowledgeProvider: KnowledgeProviding {
+    let descriptor: KnowledgeProviderDescriptor
+    let statusValue: KnowledgeProviderStatus
+
+    func status(now: Date) async -> KnowledgeProviderStatus {
+        _ = now
+        return statusValue
+    }
+
+    func fetch(query: KnowledgeQuery, now: Date) async throws -> KnowledgeProviderResponse {
+        _ = query
+        _ = now
+        return KnowledgeProviderResponse(
+            claimSet: KnowledgeClaimSet(claims: [], conflictState: .none, degradationSummary: statusValue.detail),
+            providerStatuses: [statusValue]
+        )
     }
 }
 

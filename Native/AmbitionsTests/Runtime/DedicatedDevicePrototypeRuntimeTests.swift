@@ -133,6 +133,7 @@ private extension DedicatedDevicePrototypeRuntimeTests {
                 availability: .unavailable,
                 detail: "Ambitions is running in explicit local-only mode.",
             ),
+            knowledgeProviderStatuses: [],
             memorySummary: emptyMemorySummary(),
             externalSurfaceSnapshot: snapshot
         )
@@ -204,6 +205,7 @@ private struct StaticDeviceContextService: RuntimeContextServicing {
                 availability: .unavailable,
                 detail: "Ambitions is running in explicit local-only mode.",
             ),
+            knowledgeProviderStatuses: [],
             memorySummary: RuntimeMemorySummary(
                 memory: RuntimeMemorySnapshot(
                     goals: [],

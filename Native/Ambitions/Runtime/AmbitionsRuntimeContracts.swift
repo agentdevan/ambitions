@@ -74,6 +74,7 @@ struct RuntimeContextSnapshot: Sendable, Equatable {
     let clientContext: AmbitionsRuntimeClientContext
     let capabilities: AmbitionsRuntimeCapabilities
     let syncStatus: SyncCapabilityStatus
+    let knowledgeProviderStatuses: [KnowledgeProviderStatus]
     let memorySummary: RuntimeMemorySummary
     let externalSurfaceSnapshot: ExternalSurfaceSnapshot?
 }
@@ -122,6 +123,7 @@ final class AmbitionsRuntime {
     let clientContext: AmbitionsRuntimeClientContext
     let capabilities: AmbitionsRuntimeCapabilities
     let repositories: AppRepositories
+    let knowledgeProvider: any KnowledgeProviding
     let memoryService: any RuntimeMemoryServicing
     let contextService: any RuntimeContextServicing
     let actionExecutor: any RuntimeActionCommandExecuting
@@ -141,6 +143,7 @@ final class AmbitionsRuntime {
         clientContext: AmbitionsRuntimeClientContext,
         capabilities: AmbitionsRuntimeCapabilities,
         repositories: AppRepositories,
+        knowledgeProvider: any KnowledgeProviding,
         memoryService: any RuntimeMemoryServicing,
         contextService: any RuntimeContextServicing,
         actionExecutor: any RuntimeActionCommandExecuting,
@@ -159,6 +162,7 @@ final class AmbitionsRuntime {
         self.clientContext = clientContext
         self.capabilities = capabilities
         self.repositories = repositories
+        self.knowledgeProvider = knowledgeProvider
         self.memoryService = memoryService
         self.contextService = contextService
         self.actionExecutor = actionExecutor
