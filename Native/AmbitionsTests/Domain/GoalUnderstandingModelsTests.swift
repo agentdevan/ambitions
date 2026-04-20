@@ -252,3 +252,11 @@ private extension GoalUnderstandingModelsTests {
         )
     }
 }
+
+extension GoalUnderstandingModelsTests {
+    func sampleUnderstandingForCompiler(
+        decision: GoalClarificationDecision = .safeToProceedWithAssumptions
+    ) -> GoalUnderstanding {
+        sampleUnderstanding(decision: decision)
+    }
+}

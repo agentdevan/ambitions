@@ -975,6 +975,7 @@ struct GoalOrchestrationMetadata: Codable, Sendable, Equatable {
     let planner: GoalOrchestrationPlannerMetadata
     let reasoning: GoalOrchestrationReasoningMetadata
     let understanding: GoalUnderstanding
+    let compiledPath: GoalCompiledPath
 
     init(
         input: GoalEngineOrchestrationInputSnapshot,
@@ -983,7 +984,8 @@ struct GoalOrchestrationMetadata: Codable, Sendable, Equatable {
         clarification: GoalOrchestrationClarification,
         planner: GoalOrchestrationPlannerMetadata,
         reasoning: GoalOrchestrationReasoningMetadata,
-        understanding: GoalUnderstanding
+        understanding: GoalUnderstanding,
+        compiledPath: GoalCompiledPath
     ) {
         self.input = input
         self.context = context
@@ -992,6 +994,7 @@ struct GoalOrchestrationMetadata: Codable, Sendable, Equatable {
         self.planner = planner
         self.reasoning = reasoning
         self.understanding = understanding
+        self.compiledPath = compiledPath
     }
 
     private enum CodingKeys: String, CodingKey {
@@ -1002,6 +1005,7 @@ struct GoalOrchestrationMetadata: Codable, Sendable, Equatable {
         case planner
         case reasoning
         case understanding
+        case compiledPath
     }
 
     init(from decoder: Decoder) throws {
@@ -1020,6 +1024,8 @@ struct GoalOrchestrationMetadata: Codable, Sendable, Equatable {
                 clarification: clarification,
                 reasoning: reasoning
             )
+        compiledPath = try container.decodeIfPresent(GoalCompiledPath.self, forKey: .compiledPath)
+            ?? GoalCompiledPath.legacyFallback(from: understanding)
     }
 }
 

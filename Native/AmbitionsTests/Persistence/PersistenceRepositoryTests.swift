@@ -134,6 +134,7 @@ final class PersistenceRepositoryTests: XCTestCase {
 
         XCTAssertEqual(loaded?.metadata?.understanding, draft.metadata?.understanding)
         XCTAssertEqual(loaded?.metadata?.understanding.primaryInterpretation.id, draft.metadata?.understanding.primaryInterpretation.id)
+        XCTAssertEqual(loaded?.metadata?.compiledPath, draft.metadata?.compiledPath)
     }
 
     func testEvidenceAndFeedbackRepositoriesPersistAdaptiveHistory() async throws {

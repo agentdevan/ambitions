@@ -15,6 +15,7 @@ final class GoalEngineOrchestratorTests: XCTestCase {
         XCTAssertEqual(result.metadata.planner.evaluation, result.plan.evaluation)
         XCTAssertEqual(result.metadata.understanding.mode.goalMode, result.draft.mode)
         XCTAssertEqual(result.metadata.understanding.readiness.decision, result.metadata.clarification.analysis.decision)
+        XCTAssertTrue(result.metadata.compiledPath.candidates.isEmpty == false)
     }
 
     func testUntimedLearningGoalCompilesIntoPlanShapedResult() throws {
@@ -46,6 +47,8 @@ final class GoalEngineOrchestratorTests: XCTestCase {
         XCTAssertGreaterThan(result.clarification.analysis.candidateInterpretations.count, 1)
         XCTAssertFalse(result.metadata.understanding.alternateInterpretations.isEmpty)
         XCTAssertTrue(result.metadata.understanding.clarification.alternateInterpretationsActive)
+        XCTAssertEqual(result.metadata.compiledPath.overallPosture, .provisional)
+        XCTAssertTrue(result.metadata.compiledPath.safeForStarterPlanning)
     }
 
     func testDelegatedChildSupportGoalKeepsSupportFraming() throws {
@@ -76,6 +79,7 @@ final class GoalEngineOrchestratorTests: XCTestCase {
 
         XCTAssertTrue(result.clarification.questions.contains(where: { $0.field == .executorIdentity }))
         XCTAssertEqual(result.clarification.analysis.decision, .mustClarifyBeforeCompile)
+        XCTAssertEqual(result.metadata.compiledPath.overallPosture, .blocked)
     }
 
     func testPlannerBlockedCaseSurfacesBlockedResult() {
