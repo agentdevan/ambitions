@@ -20,6 +20,10 @@ final class GoalEngineOrchestratorTests: XCTestCase {
             result.metadata.resourceGraph.candidateGraphs.map(\.candidateID),
             result.metadata.compiledPath.candidates.map(\.id)
         )
+        XCTAssertEqual(
+            result.metadata.resourceGraph.freshness.candidateSummaries.map(\.candidateID),
+            result.metadata.compiledPath.candidates.map(\.id)
+        )
     }
 
     func testUntimedLearningGoalCompilesIntoPlanShapedResult() throws {
@@ -57,6 +61,7 @@ final class GoalEngineOrchestratorTests: XCTestCase {
         XCTAssertTrue(result.metadata.compiledPath.audit.packEntries.isEmpty == false)
         XCTAssertTrue(result.metadata.resourceGraph.resources.isEmpty == false)
         XCTAssertTrue(result.metadata.resourceGraph.audit.entries.isEmpty == false)
+        XCTAssertFalse(result.metadata.resourceGraph.freshness.candidateSummaries.isEmpty)
     }
 
     func testDelegatedChildSupportGoalKeepsSupportFraming() throws {
@@ -93,6 +98,10 @@ final class GoalEngineOrchestratorTests: XCTestCase {
             result.metadata.compiledPath.candidates.map(\.id)
         )
         XCTAssertEqual(result.metadata.resourceGraph.overallPosture, result.metadata.compiledPath.overallPosture)
+        XCTAssertEqual(
+            result.metadata.resourceGraph.freshness.candidateSummaries.map(\.candidateID),
+            result.metadata.compiledPath.candidates.map(\.id)
+        )
     }
 
     func testPlannerBlockedCaseSurfacesBlockedResult() {

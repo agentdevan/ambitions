@@ -22,6 +22,8 @@ final class GoalResourceGraphServiceTests: XCTestCase {
         let placeholder = try XCTUnwrap(graph.resources.first(where: { $0.resolutionState == .placeholderOnly }))
         XCTAssertEqual(placeholder.missingResourceState, .resourceNeeded)
         XCTAssertTrue(graph.sources.isEmpty)
+        XCTAssertEqual(graph.freshness.overallPosture, .blockedMissingEvidence)
+        XCTAssertEqual(graph.freshness.resourceImpacts.map(\.resourceID), [placeholder.id])
     }
 
     func testServiceRanksCompetingConcreteResourcesDeterministically() {
@@ -37,6 +39,10 @@ final class GoalResourceGraphServiceTests: XCTestCase {
 
         XCTAssertEqual(ranked.map(\.claimIDs.first), ["claim-high", "claim-medium"])
         XCTAssertEqual(ranked.map(\.ranking.rank), [1, 2])
+        XCTAssertTrue(graph.freshness.resourceImpacts.contains(where: { $0.posture == .blockedMissingEvidence }))
+        XCTAssertEqual(graph.freshness.resourceImpacts.first(where: { $0.resourceID == ranked[1].id })?.posture, .stale)
+        XCTAssertTrue(graph.freshness.candidateSummaries.first?.affectedResourceIDs.contains(ranked[1].id) == true)
+        XCTAssertTrue(ranked[1].ranking.flags.contains(.updateRecommended))
     }
 
     func testServiceUsesClaimEmbeddedSourcesWhenKnowledgeContextSourcesAreEmpty() {
@@ -44,6 +50,54 @@ final class GoalResourceGraphServiceTests: XCTestCase {
         let graph = service.build(compiledPath: compiledPathWithSourcedHook(), knowledgeContext: knowledgeContextWithClaimOnlySources())
 
         XCTAssertEqual(graph.sources.map(\.sourceRecordID), ["source-high"])
+    }
+
+    func testServiceAppliesDateBasedFreshnessEvaluationAfterGraphBuild() throws {
+        let service = DefaultGoalResourceGraphService()
+        let claim = KnowledgeClaim(
+            id: "claim-date-stale",
+            providerID: "official-api",
+            subject: "career requirements",
+            payload: KnowledgeClaimPayload(summary: "Date stale claim", detail: nil),
+            source: KnowledgeSourceRecord(
+                id: "source-date-stale",
+                providerID: "official-api",
+                entityTitle: "Date Stale Requirements",
+                publisher: "Official Org",
+                locator: "https://example.com/date-stale",
+                provenanceKind: .official,
+                isOfficial: true
+            ),
+            freshness: KnowledgeFreshnessMetadata(
+                retrievedAt: "2026-04-20T10:00:00Z",
+                publishedAt: "2026-04-01T00:00:00Z",
+                staleAfter: "2026-04-19T12:00:00Z",
+                expiresAt: nil,
+                state: .fresh
+            ),
+            trustLevel: .high,
+            confidence: .high,
+            uncertaintyFlags: [],
+            explanation: KnowledgeExplanationMetadata(summary: "", supportingSourceIDs: ["source-date-stale"], notes: [])
+        )
+        let graph = service.build(
+            compiledPath: compiledPathWithSourcedHook(claimIDs: [claim.id], sourceIDs: [claim.source.id]),
+            knowledgeContext: GoalUnderstandingKnowledgeContext(claims: [claim], providerStatuses: [
+                KnowledgeProviderStatus(
+                    provider: KnowledgeProviderDescriptor(id: "official-api", type: .officialAPI, displayName: "Official API"),
+                    availability: .available,
+                    detail: "Available",
+                    runtimeTrustPosture: .localOnly
+                )
+            ]),
+            referenceNow: "2026-04-20T12:00:00Z"
+        )
+
+        let impact = try XCTUnwrap(graph.freshness.resourceImpacts.first(where: { $0.resourceID.contains("claim-date-stale") }))
+        let resource = try XCTUnwrap(graph.resources.first(where: { $0.id == impact.resourceID }))
+        XCTAssertEqual(impact.posture, .stale)
+        XCTAssertEqual(impact.lineage.map(\.reason), [.sourceStale])
+        XCTAssertTrue(resource.ranking.flags.contains(.updateRecommended))
     }
 }
 
@@ -94,7 +148,10 @@ private extension GoalResourceGraphServiceTests {
         )
     }
 
-    func compiledPathWithSourcedHook() -> GoalCompiledPath {
+    func compiledPathWithSourcedHook(
+        claimIDs: [String] = ["claim-high", "claim-medium"],
+        sourceIDs: [String] = ["source-high", "source-medium"]
+    ) -> GoalCompiledPath {
         let base = GoalCompiledPath.legacyFallback(from: sampleUnderstanding())
         let primary = base.candidates[0]
         let readinessStageID = primary.stages.first(where: { $0.kind == .readiness })?.id ?? "stage-readiness"
@@ -104,8 +161,8 @@ private extension GoalResourceGraphServiceTests {
             kind: .requirementReference,
             targetStageID: readinessStageID,
             relatedDomains: [.career],
-            sourceClaimIDs: ["claim-high", "claim-medium"],
-            sourceRecordIDs: ["source-high", "source-medium"],
+            sourceClaimIDs: claimIDs,
+            sourceRecordIDs: sourceIDs,
             optionality: .required,
             placeholderState: .resourceNeeded
         )

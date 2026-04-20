@@ -45,7 +45,8 @@ struct GoalEngineOrchestrator: GoalOrchestrating {
         let compiledPath = pathCompiler.compile(understanding: understanding)
         let resourceGraph = resourceGraphService.build(
             compiledPath: compiledPath,
-            knowledgeContext: normalizedContext.knowledgeContext
+            knowledgeContext: normalizedContext.knowledgeContext,
+            referenceNow: normalizedContext.referenceNow
         )
 
         if prepared.clarification.analysis.decision == .mustClarifyBeforeCompile {

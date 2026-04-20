@@ -19,6 +19,28 @@ final class GoalResourceGraphModelsTests: XCTestCase {
         XCTAssertTrue(resource.sourceRecordIDs.isEmpty)
         XCTAssertEqual(resource.ranking.flags, [.placeholderOnly, .missingConcreteResource])
     }
+
+    func testLegacyGraphWithoutFreshnessMetadataDecodesSafely() throws {
+        let data = """
+        {
+          "schemaVersion": "goal_resource_graph.native.v1",
+          "sourceCompiledPathSchemaVersion": "goal_path_compiler.native.v1",
+          "overallPosture": "provisional",
+          "candidateGraphs": [],
+          "resources": [],
+          "sources": [],
+          "audit": {
+            "entries": []
+          }
+        }
+        """.data(using: .utf8)!
+
+        let decoded = try JSONDecoder().decode(GoalResourceGraph.self, from: data)
+
+        XCTAssertEqual(decoded.freshness.overallPosture, .unknownFreshness)
+        XCTAssertFalse(decoded.freshness.updateNeeded)
+        XCTAssertEqual(decoded.freshness.maxSeverity, .none)
+    }
 }
 
 private extension GoalResourceGraphModelsTests {

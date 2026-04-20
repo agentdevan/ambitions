@@ -42,8 +42,14 @@ enum GoalResourceRankingFlag: String, Codable, Sendable, Equatable, Hashable {
     case missingConcreteResource = "missing_concrete_resource"
     case officialSource = "official_source"
     case inferredSource = "inferred_source"
+    case agingSource = "aging_source"
     case staleSource = "stale_source"
     case expiredSource = "expired_source"
+    case unknownFreshness = "unknown_freshness"
+    case missingFreshnessEvidence = "missing_freshness_evidence"
+    case providerUnavailable = "provider_unavailable"
+    case updateRecommended = "update_recommended"
+    case updateRequired = "update_required"
     case lowTrustSource = "low_trust_source"
     case domainAligned = "domain_aligned"
     case stageAligned = "stage_aligned"
@@ -129,6 +135,52 @@ struct GoalResourceGraph: Codable, Sendable, Equatable, Hashable {
     let resources: [GoalResourceEntity]
     let sources: [GoalResourceSourceEntity]
     let audit: GoalResourceGraphAuditMetadata
+
+    let freshness: GoalResourceGraphFreshnessMetadata
+
+    init(
+        schemaVersion: String,
+        sourceCompiledPathSchemaVersion: String,
+        overallPosture: GoalPathCompilePosture,
+        candidateGraphs: [GoalResourceGraphCandidate],
+        resources: [GoalResourceEntity],
+        sources: [GoalResourceSourceEntity],
+        audit: GoalResourceGraphAuditMetadata,
+        freshness: GoalResourceGraphFreshnessMetadata = .unevaluated()
+    ) {
+        self.schemaVersion = schemaVersion
+        self.sourceCompiledPathSchemaVersion = sourceCompiledPathSchemaVersion
+        self.overallPosture = overallPosture
+        self.candidateGraphs = candidateGraphs
+        self.resources = resources
+        self.sources = sources
+        self.audit = audit
+        self.freshness = freshness
+    }
+
+    private enum CodingKeys: String, CodingKey {
+        case schemaVersion
+        case sourceCompiledPathSchemaVersion
+        case overallPosture
+        case candidateGraphs
+        case resources
+        case sources
+        case audit
+        case freshness
+    }
+
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        schemaVersion = try container.decode(String.self, forKey: .schemaVersion)
+        sourceCompiledPathSchemaVersion = try container.decode(String.self, forKey: .sourceCompiledPathSchemaVersion)
+        overallPosture = try container.decode(GoalPathCompilePosture.self, forKey: .overallPosture)
+        candidateGraphs = try container.decode([GoalResourceGraphCandidate].self, forKey: .candidateGraphs)
+        resources = try container.decode([GoalResourceEntity].self, forKey: .resources)
+        sources = try container.decode([GoalResourceSourceEntity].self, forKey: .sources)
+        audit = try container.decode(GoalResourceGraphAuditMetadata.self, forKey: .audit)
+        freshness = try container.decodeIfPresent(GoalResourceGraphFreshnessMetadata.self, forKey: .freshness)
+            ?? .unevaluated()
+    }
 }
 
 extension GoalResourceGraph {
@@ -139,6 +191,42 @@ extension GoalResourceGraph {
         GoalResourceGraphBuilderCore().build(
             compiledPath: compiledPath,
             knowledgeContext: knowledgeContext
+        )
+    }
+}
+
+extension GoalResourceGraph {
+    func with(
+        resources: [GoalResourceEntity],
+        freshness: GoalResourceGraphFreshnessMetadata
+    ) -> GoalResourceGraph {
+        GoalResourceGraph(
+            schemaVersion: schemaVersion,
+            sourceCompiledPathSchemaVersion: sourceCompiledPathSchemaVersion,
+            overallPosture: overallPosture,
+            candidateGraphs: candidateGraphs,
+            resources: resources.sorted(by: GoalResourceGraphBuilderCore().resourceOrdering),
+            sources: sources,
+            audit: GoalResourceGraphAuditMetadata(
+                entries: audit.entries.map { entry in
+                    guard let resource = resources.first(where: { $0.id == entry.resourceID }) else {
+                        return entry
+                    }
+                    return GoalResourceGraphAuditEntry(
+                        id: entry.id,
+                        resourceID: entry.resourceID,
+                        candidateID: entry.candidateID,
+                        targetStageID: entry.targetStageID,
+                        hookID: entry.hookID,
+                        packAuditEntryID: entry.packAuditEntryID,
+                        claimID: entry.claimID,
+                        sourceRecordID: entry.sourceRecordID,
+                        rankingFlags: resource.ranking.flags
+                    )
+                }
+                .sorted { $0.id < $1.id }
+            ),
+            freshness: freshness
         )
     }
 }
