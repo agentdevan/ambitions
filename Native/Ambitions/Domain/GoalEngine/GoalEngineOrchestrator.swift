@@ -3,26 +3,32 @@ import Foundation
 struct GoalEngineOrchestrator: GoalOrchestrating {
     private let intake: GoalEngineIntakeService
     private let planner: any GoalPlanning
+    private let clarificationService: any GoalClarificationAnalyzing
 
     init(
         intake: GoalEngineIntakeService = GoalEngineIntakeService(),
-        planner: any GoalPlanning = GoalPlanner()
+        planner: any GoalPlanning = GoalPlanner(),
+        clarificationService: any GoalClarificationAnalyzing = DefaultGoalClarificationService()
     ) {
         self.intake = intake
         self.planner = planner
+        self.clarificationService = clarificationService
     }
 
     func compileGoal(_ rawInput: String, context: GoalEngineOrchestrationContext = .init()) -> GoalOrchestrationResult {
         let normalizedContext = normalize(context)
         let draftBuild = intake.buildGoalDraft(from: rawInput, referenceNow: normalizedContext.referenceNow)
-        let prepared = buildPreparedInput(classification: draftBuild.classification, clarification: draftBuild.clarification, context: normalizedContext)
+        let analysis = clarificationService.analyze(
+            classification: draftBuild.classification,
+            context: normalizedContext
+        )
+        let prepared = buildPreparedInput(
+            classification: draftBuild.classification,
+            analysis: analysis,
+            context: normalizedContext
+        )
 
-        let requiresClarification =
-            !prepared.clarification.contradictions.isEmpty ||
-            prepared.classification.readiness == .needsClarification ||
-            (prepared.classification.readiness == .canPlanWithDefaults && normalizedContext.preferredPlanningStrictness == .strict)
-
-        if requiresClarification {
+        if prepared.clarification.analysis.decision == .mustClarifyBeforeCompile {
             let metadata = buildMetadata(classification: prepared.classification, clarification: prepared.clarification, context: normalizedContext, plannerResult: nil)
             return .clarificationRequired(
                 GoalClarificationRequiredResult(
@@ -37,11 +43,8 @@ struct GoalEngineOrchestrator: GoalOrchestrating {
             input: GoalPlannerInput(
                 draft: prepared.classification.draft,
                 classification: prepared.classification,
-                clarification: ClarificationSet(
-                    readiness: prepared.clarification.readiness,
-                    questions: prepared.clarification.questions,
-                    missingFields: prepared.clarification.missingFields
-                )
+                clarification: prepared.clarification.analysis.compatibilityClarificationSet,
+                clarificationAnalysis: prepared.clarification.analysis
             ),
             options: GoalPlannerOptions(goalID: normalizedContext.goalID, now: normalizedContext.referenceNow)
         )
@@ -83,13 +86,12 @@ struct GoalEngineOrchestrator: GoalOrchestrating {
         return trimmed.isEmpty ? nil : trimmed
     }
 
-    private func buildPreparedInput(classification: ClassificationResult, clarification: ClarificationSet, context: GoalEngineOrchestrationContextSnapshot) -> (classification: ClassificationResult, clarification: GoalOrchestrationClarification) {
+    private func buildPreparedInput(
+        classification: ClassificationResult,
+        analysis: GoalClarificationAnalysis,
+        context: GoalEngineOrchestrationContextSnapshot
+    ) -> (classification: ClassificationResult, clarification: GoalOrchestrationClarification) {
         let resolvedFields = Set(context.clarifiedFields.keys.compactMap(MissingFieldKey.init(rawValue:)))
-        var missingFields = classification.missingFields.filter { !resolvedFields.contains($0.field) }
-        if context.supportScope != nil {
-            missingFields.removeAll { $0.field == .supportScope }
-        }
-
         let updatedDraft = GoalDraft(
             schemaVersion: classification.draft.schemaVersion,
             source: classification.draft.source,
@@ -113,23 +115,20 @@ struct GoalEngineOrchestrator: GoalOrchestrating {
         )
 
         let contradictions = detectContradictions(classification: classification, context: context)
-        let contradictionFields = Set(contradictions.map { $0.question.field })
-        let contradictionMissingFields = contradictions
-            .filter { contradiction in !missingFields.contains(where: { $0.field == contradiction.question.field }) }
-            .map { contradiction in
-                MissingField(field: contradiction.question.field, reason: contradiction.reason, blocksPlanning: true)
-            }
-
-        let readiness = contradictions.isEmpty ? recomputeReadiness(from: missingFields) : .needsClarification
-        let questions = Array(
-            (clarification.questions.filter { !resolvedFields.contains($0.field) && !contradictionFields.contains($0.field) } + contradictions.map(\.question))
-                .prefix(3)
+        let preparedAnalysis = adjustedAnalysis(
+            analysis: analysis,
+            contradictions: contradictions,
+            resolvedFields: resolvedFields,
+            supportScopeProvided: context.supportScope != nil,
+            strictPlanning: context.preferredPlanningStrictness == .strict
         )
+
         let orchestrationClarification = GoalOrchestrationClarification(
-            readiness: readiness,
-            questions: questions,
-            missingFields: missingFields + contradictionMissingFields,
-            contradictions: contradictions
+            readiness: preparedAnalysis.compatibilityReadiness,
+            questions: preparedAnalysis.compatibilityQuestions,
+            missingFields: preparedAnalysis.compatibilityMissingFields,
+            contradictions: contradictions,
+            analysis: preparedAnalysis
         )
 
         let adjustedClassification = ClassificationResult(
@@ -146,21 +145,14 @@ struct GoalEngineOrchestrator: GoalOrchestrating {
             planningStrategyID: classification.planningStrategyID,
             progressStrategyID: classification.progressStrategyID,
             readiness: orchestrationClarification.readiness,
-            clarificationNeeded: orchestrationClarification.readiness != .readyForPlanning,
-            starterPlanSafe: orchestrationClarification.readiness != .needsClarification,
+            clarificationNeeded: preparedAnalysis.decision.clarificationNeeded,
+            starterPlanSafe: preparedAnalysis.decision.starterPlanSafe,
             missingFields: orchestrationClarification.missingFields,
             tags: classification.tags,
             draft: updatedDraft
         )
 
         return (adjustedClassification, orchestrationClarification)
-    }
-
-    private func recomputeReadiness(from missingFields: [MissingField]) -> PlanningReadiness {
-        if missingFields.contains(where: \.blocksPlanning) {
-            return .needsClarification
-        }
-        return missingFields.isEmpty ? .readyForPlanning : .canPlanWithDefaults
     }
 
     private func detectContradictions(classification: ClassificationResult, context: GoalEngineOrchestrationContextSnapshot) -> [GoalInputContradiction] {
@@ -211,7 +203,7 @@ struct GoalEngineOrchestrator: GoalOrchestrating {
         case let .starterPlan(_, _, _, starterAssumptions):
             assumptions = starterAssumptions
         default:
-            assumptions = []
+            assumptions = clarification.analysis.compatibilityPlanAssumptions
         }
 
         let plannerMetadata: GoalOrchestrationPlannerMetadata
@@ -263,6 +255,176 @@ struct GoalEngineOrchestrator: GoalOrchestrating {
                 ]
             )
         )
+    }
+
+    private func adjustedAnalysis(
+        analysis: GoalClarificationAnalysis,
+        contradictions: [GoalInputContradiction],
+        resolvedFields: Set<MissingFieldKey>,
+        supportScopeProvided: Bool,
+        strictPlanning: Bool
+    ) -> GoalClarificationAnalysis {
+        var missingContext = analysis.missingContext.filter { item in
+            guard let field = item.field else { return true }
+            if resolvedFields.contains(field) {
+                return false
+            }
+            if supportScopeProvided && field == .supportScope {
+                return false
+            }
+            return true
+        }
+
+        var ambiguities = analysis.ambiguities.filter { signal in
+            guard let field = signal.relatedField else { return true }
+            if resolvedFields.contains(field) {
+                return false
+            }
+            if supportScopeProvided && field == .supportScope {
+                return false
+            }
+            return true
+        }
+
+        var questions = analysis.questions.filter { question in
+            guard let field = question.targetField else { return true }
+            if resolvedFields.contains(field) {
+                return false
+            }
+            if supportScopeProvided && field == .supportScope {
+                return false
+            }
+            return true
+        }
+
+        let contradictionFields = Set(contradictions.map(\.question.field))
+        let contradictionMissingContext = contradictions
+            .filter { contradiction in
+                missingContext.contains(where: { $0.field == contradiction.question.field }) == false
+            }
+            .map { contradiction in
+                GoalMissingContextItem(
+                    id: "contradiction-\(contradiction.code.rawValue)",
+                    field: contradiction.question.field,
+                    label: contradiction.question.field.rawValue,
+                    reason: contradiction.reason,
+                    severity: .blocking,
+                    blocksCompilation: true
+                )
+            }
+        missingContext.append(contentsOf: contradictionMissingContext)
+
+        ambiguities.append(
+            contentsOf: contradictions.map { contradiction in
+                GoalAmbiguitySignal(
+                    id: "contradiction-signal-\(contradiction.code.rawValue)",
+                    type: contradiction.code == .timingConflict ? .timeline : .readiness,
+                    summary: contradiction.reason,
+                    detail: contradiction.question.rationale,
+                    severity: .blocking,
+                    relatedField: contradiction.question.field,
+                    candidateIDs: []
+                )
+            }
+        )
+
+        questions.append(
+            contentsOf: contradictions.map { contradiction in
+                GoalClarificationQuestionContract(
+                    id: contradiction.question.id,
+                    prompt: contradiction.question.prompt,
+                    rationale: contradiction.question.rationale,
+                    targetField: contradiction.question.field,
+                    addressesAmbiguityTypes: contradiction.code == .timingConflict ? [.timeline] : [.readiness],
+                    severity: .blocking,
+                    blocking: true,
+                    skipSafeDefault: contradiction.question.skipSafeDefault
+                )
+            }
+        )
+
+        let decision: GoalClarificationDecision
+        if contradictions.isEmpty == false {
+            decision = .mustClarifyBeforeCompile
+        } else if strictPlanning && (missingContext.isEmpty == false || ambiguities.contains(where: { $0.severity == .important })) {
+            decision = .mustClarifyBeforeCompile
+        } else if missingContext.contains(where: \.blocksCompilation) || ambiguities.contains(where: { $0.severity.blocksCompilation }) {
+            decision = .mustClarifyBeforeCompile
+        } else {
+            decision = .safeToProceedWithAssumptions
+        }
+
+        return GoalClarificationAnalysis(
+            candidateInterpretations: analysis.candidateInterpretations,
+            ambiguities: stableUniqueAmbiguities(ambiguities),
+            missingContext: stableUniqueMissingContext(missingContext),
+            assumptions: analysis.assumptions.filter { assumption in
+                guard let field = assumption.relatedField else { return true }
+                if resolvedFields.contains(field) {
+                    return false
+                }
+                if supportScopeProvided && field == .supportScope {
+                    return false
+                }
+                return true
+            },
+            questions: stableUniqueQuestions(questions).filter { question in
+                if let field = question.targetField {
+                    return contradictionFields.contains(field) == false || question.blocking
+                }
+                return true
+            },
+            decision: decision,
+            reasoning: GoalClarificationReasoningMetadata(
+                signalNotes: analysis.reasoning.signalNotes + contradictionNotes(from: contradictions, strictPlanning: strictPlanning),
+                inference: analysis.reasoning.inference,
+                auditTags: stableStrings(analysis.reasoning.auditTags + contradictions.map { "contradiction:\($0.code.rawValue)" } + (strictPlanning ? ["strict_planning"] : []))
+            )
+        )
+    }
+
+    private func stableUniqueMissingContext(_ items: [GoalMissingContextItem]) -> [GoalMissingContextItem] {
+        var seen: Set<String> = []
+        var result: [GoalMissingContextItem] = []
+        for item in items where seen.insert(item.id).inserted {
+            result.append(item)
+        }
+        return result
+    }
+
+    private func stableUniqueAmbiguities(_ items: [GoalAmbiguitySignal]) -> [GoalAmbiguitySignal] {
+        var seen: Set<String> = []
+        var result: [GoalAmbiguitySignal] = []
+        for item in items where seen.insert(item.id).inserted {
+            result.append(item)
+        }
+        return result
+    }
+
+    private func stableUniqueQuestions(_ items: [GoalClarificationQuestionContract]) -> [GoalClarificationQuestionContract] {
+        var seen: Set<String> = []
+        var result: [GoalClarificationQuestionContract] = []
+        for item in items where seen.insert(item.id).inserted {
+            result.append(item)
+        }
+        return result
+    }
+
+    private func stableStrings(_ items: [String]) -> [String] {
+        var seen: Set<String> = []
+        var result: [String] = []
+        for item in items where seen.insert(item).inserted {
+            result.append(item)
+        }
+        return result
+    }
+
+    private func contradictionNotes(from contradictions: [GoalInputContradiction], strictPlanning: Bool) -> [String] {
+        var notes = contradictions.map { "Contradiction preserved: \($0.code.rawValue)." }
+        if strictPlanning {
+            notes.append("Strict planning mode promoted unresolved ambiguity into a clarify-first decision.")
+        }
+        return notes
     }
 }
 

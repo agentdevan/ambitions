@@ -595,6 +595,7 @@ struct GoalPlannerInput: Codable, Sendable, Equatable {
     let draft: GoalDraft
     let classification: ClassificationResult?
     let clarification: ClarificationSet?
+    let clarificationAnalysis: GoalClarificationAnalysis?
 }
 
 struct GoalPlannerOptions: Codable, Sendable, Equatable {
@@ -870,6 +871,7 @@ struct GoalOrchestrationClarification: Codable, Sendable, Equatable {
     let questions: [ClarificationQuestion]
     let missingFields: [MissingField]
     let contradictions: [GoalInputContradiction]
+    let analysis: GoalClarificationAnalysis
 }
 
 struct GoalOrchestrationInferenceSnapshot: Codable, Sendable, Equatable {

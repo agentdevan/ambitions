@@ -52,7 +52,12 @@ struct GoalPlanner: GoalPlanning {
             return .blocked(draft: input.draft, blockers: blockers, clarification: input.clarification)
         }
 
-        let assumptions = readiness == .canPlanWithDefaults ? missingFields.map(makeAssumption) : []
+        let assumptions: [PlanAssumption]
+        if let clarificationAnalysis = input.clarificationAnalysis {
+            assumptions = clarificationAnalysis.compatibilityPlanAssumptions
+        } else {
+            assumptions = readiness == .canPlanWithDefaults ? missingFields.map(makeAssumption) : []
+        }
         let strategyID = assumptions.isEmpty ? plannerStrategyID(for: input.draft, classification: input.classification) : .lightweightTracking
         let sections = strategySections(for: strategyID, draft: input.draft, now: now).enumerated().map { index, draftSection in
             buildSection(from: draftSection, goalID: goalID, draft: input.draft, orderIndex: index, now: now)

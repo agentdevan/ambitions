@@ -41,6 +41,7 @@ final class GoalEngineOrchestratorTests: XCTestCase {
 
         XCTAssertFalse(result.assumptions.isEmpty)
         XCTAssertEqual(result.metadata.reasoning.assumptions.count, result.assumptions.count)
+        XCTAssertGreaterThan(result.clarification.analysis.candidateInterpretations.count, 1)
     }
 
     func testDelegatedChildSupportGoalKeepsSupportFraming() throws {
@@ -70,6 +71,7 @@ final class GoalEngineOrchestratorTests: XCTestCase {
         }
 
         XCTAssertTrue(result.clarification.questions.contains(where: { $0.field == .executorIdentity }))
+        XCTAssertEqual(result.clarification.analysis.decision, .mustClarifyBeforeCompile)
     }
 
     func testPlannerBlockedCaseSurfacesBlockedResult() {
@@ -105,6 +107,7 @@ final class GoalEngineOrchestratorTests: XCTestCase {
         }
 
         XCTAssertFalse(result.clarification.contradictions.isEmpty)
+        XCTAssertEqual(result.clarification.analysis.decision, .mustClarifyBeforeCompile)
     }
 
     func testDontKnowWhereToStartRequiresGoalSubjectClarification() throws {
@@ -130,6 +133,23 @@ final class GoalEngineOrchestratorTests: XCTestCase {
         default:
             XCTFail("Expected target-window goal to remain plannable.")
         }
+    }
+
+    func testStrictPlanningPromotesStarterSafeGoalIntoClarifyFirst() {
+        let result = GoalEngineOrchestrator().compileGoal(
+            "Launch my business",
+            context: GoalEngineOrchestrationContext(
+                preferredPlanningStrictness: .strict,
+                referenceNow: GoalEngineFixtures.fixedNow
+            )
+        )
+
+        guard case let .clarificationRequired(required) = result else {
+            return XCTFail("Expected strict planning to require clarification.")
+        }
+
+        XCTAssertEqual(required.clarification.analysis.decision, .mustClarifyBeforeCompile)
+        XCTAssertGreaterThan(required.clarification.analysis.candidateInterpretations.count, 1)
     }
 
     private func unwrapFixture(_ id: String) throws -> GoalEngineFixture {

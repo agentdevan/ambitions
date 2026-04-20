@@ -107,6 +107,7 @@ final class GoalCreationServiceTests: XCTestCase {
 
         XCTAssertEqual(storedDraft.latestResultKind, .clarificationRequired)
         XCTAssertNil(storedDraft.plannedGoalID)
+        XCTAssertEqual(storedDraft.clarification?.analysis.decision, .mustClarifyBeforeCompile)
         XCTAssertTrue(goals.isEmpty)
     }
 

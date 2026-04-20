@@ -74,7 +74,8 @@ final class DomainFoundationTests: XCTestCase {
             input: GoalPlannerInput(
                 draft: build.draft,
                 classification: build.classification,
-                clarification: clarification
+                clarification: clarification,
+                clarificationAnalysis: nil
             ),
             options: GoalPlannerOptions(now: GoalEngineFixtures.fixedNow)
         )
