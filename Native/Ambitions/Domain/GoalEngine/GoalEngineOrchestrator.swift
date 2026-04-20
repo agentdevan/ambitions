@@ -4,15 +4,18 @@ struct GoalEngineOrchestrator: GoalOrchestrating {
     private let intake: GoalEngineIntakeService
     private let planner: any GoalPlanning
     private let clarificationService: any GoalClarificationAnalyzing
+    private let understandingService: any GoalUnderstandingBuilding
 
     init(
         intake: GoalEngineIntakeService = GoalEngineIntakeService(),
         planner: any GoalPlanning = GoalPlanner(),
-        clarificationService: any GoalClarificationAnalyzing = DefaultGoalClarificationService()
+        clarificationService: any GoalClarificationAnalyzing = DefaultGoalClarificationService(),
+        understandingService: any GoalUnderstandingBuilding = DefaultGoalUnderstandingService()
     ) {
         self.intake = intake
         self.planner = planner
         self.clarificationService = clarificationService
+        self.understandingService = understandingService
     }
 
     func compileGoal(_ rawInput: String, context: GoalEngineOrchestrationContext = .init()) -> GoalOrchestrationResult {
@@ -27,9 +30,15 @@ struct GoalEngineOrchestrator: GoalOrchestrating {
             analysis: analysis,
             context: normalizedContext
         )
+        let understanding = understandingService.build(
+            classification: prepared.classification,
+            clarification: prepared.clarification.analysis,
+            context: normalizedContext,
+            contradictions: prepared.clarification.contradictions
+        )
 
         if prepared.clarification.analysis.decision == .mustClarifyBeforeCompile {
-            let metadata = buildMetadata(classification: prepared.classification, clarification: prepared.clarification, context: normalizedContext, plannerResult: nil)
+            let metadata = buildMetadata(classification: prepared.classification, clarification: prepared.clarification, context: normalizedContext, plannerResult: nil, understanding: understanding)
             return .clarificationRequired(
                 GoalClarificationRequiredResult(
                     draft: prepared.classification.draft,
@@ -44,11 +53,12 @@ struct GoalEngineOrchestrator: GoalOrchestrating {
                 draft: prepared.classification.draft,
                 classification: prepared.classification,
                 clarification: prepared.clarification.analysis.compatibilityClarificationSet,
-                clarificationAnalysis: prepared.clarification.analysis
+                clarificationAnalysis: prepared.clarification.analysis,
+                understanding: understanding
             ),
             options: GoalPlannerOptions(goalID: normalizedContext.goalID, now: normalizedContext.referenceNow)
         )
-        let metadata = buildMetadata(classification: prepared.classification, clarification: prepared.clarification, context: normalizedContext, plannerResult: plannerResult)
+        let metadata = buildMetadata(classification: prepared.classification, clarification: prepared.clarification, context: normalizedContext, plannerResult: plannerResult, understanding: understanding)
 
         switch plannerResult {
         case let .plan(draft, plan, lint):
@@ -76,7 +86,8 @@ struct GoalEngineOrchestrator: GoalOrchestrating {
             sourceScreen: trimmed(context.sourceScreen),
             sourceFlow: trimmed(context.sourceFlow),
             clarifiedFields: clarified,
-            referenceNow: trimmed(context.referenceNow)
+            referenceNow: trimmed(context.referenceNow),
+            knowledgeContext: context.knowledgeContext
         )
     }
 
@@ -197,7 +208,13 @@ struct GoalEngineOrchestrator: GoalOrchestrating {
         return contradictions
     }
 
-    private func buildMetadata(classification: ClassificationResult, clarification: GoalOrchestrationClarification, context: GoalEngineOrchestrationContextSnapshot, plannerResult: GoalPlannerResult?) -> GoalOrchestrationMetadata {
+    private func buildMetadata(
+        classification: ClassificationResult,
+        clarification: GoalOrchestrationClarification,
+        context: GoalEngineOrchestrationContextSnapshot,
+        plannerResult: GoalPlannerResult?,
+        understanding: GoalUnderstanding
+    ) -> GoalOrchestrationMetadata {
         let assumptions: [PlanAssumption]
         switch plannerResult {
         case let .starterPlan(_, _, _, starterAssumptions):
@@ -253,7 +270,8 @@ struct GoalEngineOrchestrator: GoalOrchestrating {
                     "planningStrategyID": classification.planningStrategyID.metadata,
                     "progressStrategyID": classification.progressStrategyID.metadata,
                 ]
-            )
+            ),
+            understanding: understanding
         )
     }
 

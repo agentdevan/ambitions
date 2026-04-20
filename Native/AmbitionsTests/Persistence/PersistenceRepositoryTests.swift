@@ -119,6 +119,21 @@ final class PersistenceRepositoryTests: XCTestCase {
         XCTAssertEqual(loaded.count, storedDrafts.count)
         XCTAssertTrue(loaded.contains(where: { $0.latestResultKind == .starterPlanned && !$0.assumptions.isEmpty }))
         XCTAssertTrue(loaded.contains(where: { $0.latestResultKind == .clarificationRequired && $0.clarification != nil }))
+        XCTAssertTrue(loaded.allSatisfy { $0.metadata?.understanding != nil })
+    }
+
+    func testDraftRepositoryRoundTripsUnderstandingInsideEncodedMetadata() async throws {
+        let repositories = try await makeRepositories()
+        let fixture = try XCTUnwrap(GoalEngineFixtures.fixture(id: "exploratory-vague-goal"))
+        guard let draft = storedDraft(id: "starter-understanding", fixture: fixture) else {
+            return XCTFail("Expected stored draft fixture.")
+        }
+
+        try await repositories.drafts.saveDrafts([draft])
+        let loaded = try await repositories.drafts.draft(id: "starter-understanding")
+
+        XCTAssertEqual(loaded?.metadata?.understanding, draft.metadata?.understanding)
+        XCTAssertEqual(loaded?.metadata?.understanding.primaryInterpretation.id, draft.metadata?.understanding.primaryInterpretation.id)
     }
 
     func testEvidenceAndFeedbackRepositoriesPersistAdaptiveHistory() async throws {

@@ -596,6 +596,21 @@ struct GoalPlannerInput: Codable, Sendable, Equatable {
     let classification: ClassificationResult?
     let clarification: ClarificationSet?
     let clarificationAnalysis: GoalClarificationAnalysis?
+    let understanding: GoalUnderstanding?
+
+    init(
+        draft: GoalDraft,
+        classification: ClassificationResult? = nil,
+        clarification: ClarificationSet? = nil,
+        clarificationAnalysis: GoalClarificationAnalysis? = nil,
+        understanding: GoalUnderstanding? = nil
+    ) {
+        self.draft = draft
+        self.classification = classification
+        self.clarification = clarification
+        self.clarificationAnalysis = clarificationAnalysis
+        self.understanding = understanding
+    }
 }
 
 struct GoalPlannerOptions: Codable, Sendable, Equatable {
@@ -819,6 +834,7 @@ struct GoalEngineOrchestrationContext: Codable, Sendable, Equatable {
     let sourceFlow: String?
     let clarifiedFields: [MissingFieldKey: String]
     let referenceNow: String?
+    let knowledgeContext: GoalUnderstandingKnowledgeContext?
 
     init(
         goalID: String? = nil,
@@ -831,7 +847,8 @@ struct GoalEngineOrchestrationContext: Codable, Sendable, Equatable {
         sourceScreen: String? = nil,
         sourceFlow: String? = nil,
         clarifiedFields: [MissingFieldKey: String] = [:],
-        referenceNow: String? = nil
+        referenceNow: String? = nil,
+        knowledgeContext: GoalUnderstandingKnowledgeContext? = nil
     ) {
         self.goalID = goalID
         self.actorName = actorName
@@ -844,6 +861,7 @@ struct GoalEngineOrchestrationContext: Codable, Sendable, Equatable {
         self.sourceFlow = sourceFlow
         self.clarifiedFields = clarifiedFields
         self.referenceNow = referenceNow
+        self.knowledgeContext = knowledgeContext
     }
 }
 
@@ -864,6 +882,35 @@ struct GoalEngineOrchestrationContextSnapshot: Codable, Sendable, Equatable {
     let sourceFlow: String?
     let clarifiedFields: [String: String]
     let referenceNow: String?
+    let knowledgeContext: GoalUnderstandingKnowledgeContext?
+
+    init(
+        goalID: String?,
+        actorName: String?,
+        preferredPlanningStrictness: GoalPlanningStrictness,
+        goalOwnerRole: String?,
+        supportScope: GoalSupportScope?,
+        deadlineHints: [String],
+        existingGoalReferences: [String],
+        sourceScreen: String?,
+        sourceFlow: String?,
+        clarifiedFields: [String: String],
+        referenceNow: String?,
+        knowledgeContext: GoalUnderstandingKnowledgeContext? = nil
+    ) {
+        self.goalID = goalID
+        self.actorName = actorName
+        self.preferredPlanningStrictness = preferredPlanningStrictness
+        self.goalOwnerRole = goalOwnerRole
+        self.supportScope = supportScope
+        self.deadlineHints = deadlineHints
+        self.existingGoalReferences = existingGoalReferences
+        self.sourceScreen = sourceScreen
+        self.sourceFlow = sourceFlow
+        self.clarifiedFields = clarifiedFields
+        self.referenceNow = referenceNow
+        self.knowledgeContext = knowledgeContext
+    }
 }
 
 struct GoalOrchestrationClarification: Codable, Sendable, Equatable {
@@ -927,6 +974,53 @@ struct GoalOrchestrationMetadata: Codable, Sendable, Equatable {
     let clarification: GoalOrchestrationClarification
     let planner: GoalOrchestrationPlannerMetadata
     let reasoning: GoalOrchestrationReasoningMetadata
+    let understanding: GoalUnderstanding
+
+    init(
+        input: GoalEngineOrchestrationInputSnapshot,
+        context: GoalEngineOrchestrationContextSnapshot,
+        inference: GoalOrchestrationInferenceSnapshot,
+        clarification: GoalOrchestrationClarification,
+        planner: GoalOrchestrationPlannerMetadata,
+        reasoning: GoalOrchestrationReasoningMetadata,
+        understanding: GoalUnderstanding
+    ) {
+        self.input = input
+        self.context = context
+        self.inference = inference
+        self.clarification = clarification
+        self.planner = planner
+        self.reasoning = reasoning
+        self.understanding = understanding
+    }
+
+    private enum CodingKeys: String, CodingKey {
+        case input
+        case context
+        case inference
+        case clarification
+        case planner
+        case reasoning
+        case understanding
+    }
+
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        input = try container.decode(GoalEngineOrchestrationInputSnapshot.self, forKey: .input)
+        context = try container.decode(GoalEngineOrchestrationContextSnapshot.self, forKey: .context)
+        inference = try container.decode(GoalOrchestrationInferenceSnapshot.self, forKey: .inference)
+        clarification = try container.decode(GoalOrchestrationClarification.self, forKey: .clarification)
+        planner = try container.decode(GoalOrchestrationPlannerMetadata.self, forKey: .planner)
+        reasoning = try container.decode(GoalOrchestrationReasoningMetadata.self, forKey: .reasoning)
+        understanding = try container.decodeIfPresent(GoalUnderstanding.self, forKey: .understanding)
+            ?? GoalUnderstanding.legacyFallback(
+                input: input,
+                context: context,
+                inference: inference,
+                clarification: clarification,
+                reasoning: reasoning
+            )
+    }
 }
 
 struct GoalClarificationRequiredResult: Sendable, Equatable {

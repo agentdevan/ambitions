@@ -13,6 +13,8 @@ final class GoalEngineOrchestratorTests: XCTestCase {
         XCTAssertEqual(result.metadata.inference.mode.value, result.draft.mode)
         XCTAssertEqual(result.draft.timing.tempo, .deadlineBased)
         XCTAssertEqual(result.metadata.planner.evaluation, result.plan.evaluation)
+        XCTAssertEqual(result.metadata.understanding.mode.goalMode, result.draft.mode)
+        XCTAssertEqual(result.metadata.understanding.readiness.decision, result.metadata.clarification.analysis.decision)
     }
 
     func testUntimedLearningGoalCompilesIntoPlanShapedResult() throws {
@@ -42,6 +44,8 @@ final class GoalEngineOrchestratorTests: XCTestCase {
         XCTAssertFalse(result.assumptions.isEmpty)
         XCTAssertEqual(result.metadata.reasoning.assumptions.count, result.assumptions.count)
         XCTAssertGreaterThan(result.clarification.analysis.candidateInterpretations.count, 1)
+        XCTAssertFalse(result.metadata.understanding.alternateInterpretations.isEmpty)
+        XCTAssertTrue(result.metadata.understanding.clarification.alternateInterpretationsActive)
     }
 
     func testDelegatedChildSupportGoalKeepsSupportFraming() throws {
@@ -118,6 +122,8 @@ final class GoalEngineOrchestratorTests: XCTestCase {
         }
 
         XCTAssertTrue(result.metadata.reasoning.missingFields.contains(where: { $0.field == .goalSubject }))
+        XCTAssertEqual(result.metadata.understanding.readiness.decision, .mustClarifyBeforeCompile)
+        XCTAssertFalse(result.metadata.understanding.readiness.safeToCompile)
     }
 
     func testTargetWindowGoalRetainsFlexibleTiming() throws {

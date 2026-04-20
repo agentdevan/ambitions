@@ -66,6 +66,8 @@ final class GoalCreationServiceTests: XCTestCase {
             XCTAssertEqual(draft.plannedGoalID, goal.id)
             XCTAssertEqual(draft.latestResultKind, expectedKind)
             XCTAssertEqual(draft.stagedPlan?.evaluation, response.planningEvaluation)
+            XCTAssertNotNil(draft.metadata?.understanding)
+            XCTAssertEqual(draft.metadata?.understanding.mode.goalMode, expectedMode)
         }
     }
 
@@ -108,6 +110,7 @@ final class GoalCreationServiceTests: XCTestCase {
         XCTAssertEqual(storedDraft.latestResultKind, .clarificationRequired)
         XCTAssertNil(storedDraft.plannedGoalID)
         XCTAssertEqual(storedDraft.clarification?.analysis.decision, .mustClarifyBeforeCompile)
+        XCTAssertEqual(storedDraft.metadata?.understanding.readiness.decision, .mustClarifyBeforeCompile)
         XCTAssertTrue(goals.isEmpty)
     }
 
