@@ -2,7 +2,7 @@
 
 ## Status
 
-Proposed **post-hardening full transformation program** for Ambitions.
+Active **post-hardening full transformation program** for Ambitions at the canon/control-file layer.
 
 This document supersedes the narrower UI excellence wave framing. It assumes the user has explicitly approved:
 
@@ -15,14 +15,17 @@ It is designed to be used directly in the repo and by Codex in the same operatio
 
 ## Current Roadmap Truth
 
-This program does **not** interrupt the active hardening wave.
+This program does **not** rewrite the completed hardening wave.
 
-Live queue truth at the time of this roadmap:
+Live queue truth in the current repo:
 
-- Batch 37 — Active
-- Batch 38 — Queued
-- the front-end transformation program starts at **Batch 39**
-- the program begins only after Batch 38 is completed and stabilized
+- Batch 38 — Completed
+- Batch 39 — Active
+- Batches 40-59 — Queued
+- the front-end transformation program is active as a canon/control-file program beginning at **Batch 39**
+
+Batch 39 is a docs-only foundation batch.
+It makes the transformation program explicit enough to guide later implementation batches without authorizing shell implementation, route rewiring, or surface redesign work ahead of Batch 40.
 
 ## Program Rule
 
@@ -225,31 +228,31 @@ Implications:
 
 ---
 
-## Proposed Registry Extension
+## Registry Alignment
 
 | Batch | Name | Status | Notes |
 | --- | --- | --- | --- |
-| 39 | Front-End Transformation 00 / Program canon and shell rewrite foundation | Proposed | Starts only after Batch 38 completes. |
-| 40 | Front-End Transformation 01 / Shell reconsideration and navigation architecture | Proposed | Full shell reconsideration is allowed here. |
-| 41 | Front-End Transformation 02 / Design system, materials, motion engine, and controls | Proposed | Shared visual + motion language. |
-| 42 | Front-End Transformation 03 / Global compose, search, capture, and command surface | Proposed | Contextual Global Compose and Memory Lens foundation. |
-| 43 | Front-End Transformation 04 / Today rebuild I — living hero, now state, and action model | Proposed | First half of Today rebuild. |
-| 44 | Front-End Transformation 05 / Today rebuild II — time aperture, recovery bloom, and day logic | Proposed | Completes Today redesign plus logic expansion. |
-| 45 | Front-End Transformation 06 / Goals rebuild I — direction board and horizon ladder | Proposed | Goals overview rebuild. |
-| 46 | Front-End Transformation 07 / Goal intake and Strategy Composer | Proposed | Full create-goal and planning setup redesign. |
-| 47 | Front-End Transformation 08 / Goal Detail rebuild I — strategic chamber and path filmstrip | Proposed | Goal Detail composition phase 1. |
-| 48 | Front-End Transformation 09 / Goal Detail rebuild II — trust whisper, correction, audit, and memory | Proposed | Goal Detail composition phase 2. |
-| 49 | Front-End Transformation 10 / Plan rebuild I — elastic week and pressure scrubber | Proposed | Plan surface phase 1. |
-| 50 | Front-End Transformation 11 / Plan rebuild II — habits, captures, weekly review, and shaping logic | Proposed | Plan ecosystem phase 2. |
-| 51 | Front-End Transformation 12 / Insights rebuild and reflection OS | Proposed | Includes Activity History and review coherence. |
-| 52 | Front-End Transformation 13 / Profile rebuild, Appearance Studio, and Trust Center | Proposed | Includes sync pulse and system controls. |
-| 53 | Front-End Transformation 14 / Onboarding, first-run, permissions, education, and state systems | Proposed | Includes empty/loading/error/re-entry. |
-| 54 | Front-End Transformation 15 / External surfaces I — widgets, Live Activities, notifications | Proposed | Full implementation, not just validation. |
-| 55 | Front-End Transformation 16 / External surfaces II — share extension, App Intents, shortcuts, routing | Proposed | Full implementation and productization. |
-| 56 | Front-End Transformation 17 / Cross-surface command, recall, and ambient coherence | Proposed | Memory Lens, search, command, and handoff coherence. |
-| 57 | Front-End Transformation 18 / iPad and Mac surface architecture and first implementation | Proposed | Future-platform implementation begins. |
-| 58 | Front-End Transformation 19 / Watch and Apple TV ambient surface architecture and first implementation | Proposed | Ambient and household-style surfaces begin. |
-| 59 | Front-End Transformation 20 / Finish-quality pass, accessibility, performance, and release polish | Proposed | Final visual + interaction closure. |
+| 39 | Front-End Transformation 00 / Program canon and shell rewrite foundation | Active | Docs/control-file foundation only. |
+| 40 | Front-End Transformation 01 / Shell reconsideration and navigation architecture | Queued | First batch allowed to implement shell changes. |
+| 41 | Front-End Transformation 02 / Design system, materials, motion engine, and controls | Queued | Shared visual + motion language. |
+| 42 | Front-End Transformation 03 / Global compose, search, capture, and command surface | Queued | Contextual Global Compose and Memory Lens foundation. |
+| 43 | Front-End Transformation 04 / Today rebuild I — living hero, now state, and action model | Queued | First half of Today rebuild. |
+| 44 | Front-End Transformation 05 / Today rebuild II — time aperture, recovery bloom, and day logic | Queued | Completes Today redesign plus logic expansion. |
+| 45 | Front-End Transformation 06 / Goals rebuild I — direction board and horizon ladder | Queued | Goals overview rebuild. |
+| 46 | Front-End Transformation 07 / Goal intake and Strategy Composer | Queued | Full create-goal and planning setup redesign. |
+| 47 | Front-End Transformation 08 / Goal Detail rebuild I — strategic chamber and path filmstrip | Queued | Goal Detail composition phase 1. |
+| 48 | Front-End Transformation 09 / Goal Detail rebuild II — trust whisper, correction, audit, and memory | Queued | Goal Detail composition phase 2. |
+| 49 | Front-End Transformation 10 / Plan rebuild I — elastic week and pressure scrubber | Queued | Plan surface phase 1. |
+| 50 | Front-End Transformation 11 / Plan rebuild II — habits, captures, weekly review, and shaping logic | Queued | Plan ecosystem phase 2. |
+| 51 | Front-End Transformation 12 / Insights rebuild and reflection OS | Queued | Includes Activity History and review coherence. |
+| 52 | Front-End Transformation 13 / Profile rebuild, Appearance Studio, and Trust Center | Queued | Includes sync pulse and system controls. |
+| 53 | Front-End Transformation 14 / Onboarding, first-run, permissions, education, and state systems | Queued | Includes empty/loading/error/re-entry. |
+| 54 | Front-End Transformation 15 / External surfaces I — widgets, Live Activities, notifications | Queued | Full implementation, not just validation. |
+| 55 | Front-End Transformation 16 / External surfaces II — share extension, App Intents, shortcuts, routing | Queued | Full implementation and productization. |
+| 56 | Front-End Transformation 17 / Cross-surface command, recall, and ambient coherence | Queued | Memory Lens, search, command, and handoff coherence. |
+| 57 | Front-End Transformation 18 / iPad and Mac surface architecture and first implementation | Queued | Future-platform implementation begins. |
+| 58 | Front-End Transformation 19 / Watch and Apple TV ambient surface architecture and first implementation | Queued | Ambient and household-style surfaces begin. |
+| 59 | Front-End Transformation 20 / Finish-quality pass, accessibility, performance, and release polish | Queued | Final visual + interaction closure. |
 
 ---
 
@@ -258,13 +261,15 @@ Implications:
 ## Batch 39 — Front-End Transformation 00 / Program canon and shell rewrite foundation
 
 ### Status
-Proposed
+Active
 
 ### Goal
 Create the transformation-ready repo and product foundation for a full front-end rewrite program without pretending the work is merely a polish pass.
 
 ### In Scope
 - create the formal control-file set for this transformation program
+- add `design/transformation-terminology-spec.md` as the shared-language source
+- add `design/transformation-validation-standard.md` as the reusable validation doctrine
 - align master planning language with “full front-end transformation” truth
 - define the approved novelty inventions canon
 - define global visual doctrine and interaction doctrine
@@ -292,8 +297,17 @@ Create the transformation-ready repo and product foundation for a full front-end
 
 ### Validation
 - control-file truth review
-- registry extension draft review
+- design-canon consistency review
+- terminology and validation control-file review
 - master-doc consistency check
+
+### Batch 39 Boundary
+- docs/control-file work only
+- no shell implementation
+- no route rewiring
+- no surface redesign implementation
+- no external-surface implementation
+- no product or runtime behavior changes
 
 ### Completion Rule
 Complete only when the transformation program is explicit enough to drive implementation batches without ambiguity.
@@ -303,7 +317,7 @@ Complete only when the transformation program is explicit enough to drive implem
 ## Batch 40 — Front-End Transformation 01 / Shell reconsideration and navigation architecture
 
 ### Status
-Proposed
+Queued
 
 ### Goal
 Fully reconsider the shell and navigation model, then implement the new canonical shell architecture for the iPhone app.
@@ -354,7 +368,7 @@ Complete only when the new shell is structurally coherent, visually intentional,
 ## Batch 41 — Front-End Transformation 02 / Design system, materials, motion engine, and controls
 
 ### Status
-Proposed
+Queued
 
 ### Goal
 Implement the full premium visual system and motion grammar used by every later batch.
@@ -407,7 +421,7 @@ Complete only when the app has one real system language rather than per-screen s
 ## Batch 42 — Front-End Transformation 03 / Global compose, search, capture, and command surface
 
 ### Status
-Proposed
+Queued
 
 ### Goal
 Implement the cross-app command layer that unifies creation, capture, quick recovery, quick planning, and memory recall.
@@ -455,7 +469,7 @@ Complete only when creation, capture, recovery, and recall feel like one coheren
 ## Batch 43 — Front-End Transformation 04 / Today rebuild I — living hero, now state, and action model
 
 ### Status
-Proposed
+Queued
 
 ### Goal
 Rebuild Today into the flagship living execution surface with a new hero layer, stronger hierarchy, and a first-class action model.
@@ -504,7 +518,7 @@ Complete only when Today clearly feels like the product home base.
 ## Batch 44 — Front-End Transformation 05 / Today rebuild II — time aperture, recovery bloom, and day logic
 
 ### Status
-Proposed
+Queued
 
 ### Goal
 Complete Today by adding the novel time and recovery systems plus any required logic expansion.
@@ -551,7 +565,7 @@ Complete only when Today is fully rebuilt, not partially elevated.
 ## Batch 45 — Front-End Transformation 06 / Goals rebuild I — direction board and horizon ladder
 
 ### Status
-Proposed
+Queued
 
 ### Goal
 Rebuild Goals from a goal list into a living direction board with stronger health, pressure, and ambition structure.
@@ -597,7 +611,7 @@ Complete only when Goals no longer reads like a list-first surface.
 ## Batch 46 — Front-End Transformation 07 / Goal intake and Strategy Composer
 
 ### Status
-Proposed
+Queued
 
 ### Goal
 Fully redesign goal creation, intake, ambiguity handling, and initial strategy shaping into a premium composition flow.
@@ -645,7 +659,7 @@ Complete only when goal setup feels like a real premium product moment.
 ## Batch 47 — Front-End Transformation 08 / Goal Detail rebuild I — strategic chamber and path filmstrip
 
 ### Status
-Proposed
+Queued
 
 ### Goal
 Rebuild Goal Detail into the strategic chamber of Ambitions with clearer composition and path visualization.
@@ -690,7 +704,7 @@ Complete only when Goal Detail’s first-layer experience is excellent.
 ## Batch 48 — Front-End Transformation 09 / Goal Detail rebuild II — trust whisper, correction, audit, and memory
 
 ### Status
-Proposed
+Queued
 
 ### Goal
 Complete Goal Detail by rebuilding explainability, corrections, contradictions, source audit, and historical memory as premium surfaces.
@@ -737,7 +751,7 @@ Complete only when Goal Detail is fully rebuilt across all three trust layers.
 ## Batch 49 — Front-End Transformation 10 / Plan rebuild I — elastic week and pressure scrubber
 
 ### Status
-Proposed
+Queued
 
 ### Goal
 Rebuild Plan into a premium shaping workspace that makes week structure, room, and pressure legible without dense calendar energy.
@@ -784,7 +798,7 @@ Complete only when Plan feels like a true premium weekly workspace.
 ## Batch 50 — Front-End Transformation 11 / Plan rebuild II — habits, captures, weekly review, and shaping logic
 
 ### Status
-Proposed
+Queued
 
 ### Goal
 Complete Plan by integrating Habits, Captures, weekly review, and any required shaping logic expansions.
@@ -829,7 +843,7 @@ Complete only when Plan and its support routes feel like one authored system.
 ## Batch 51 — Front-End Transformation 12 / Insights rebuild and reflection OS
 
 ### Status
-Proposed
+Queued
 
 ### Goal
 Rebuild Insights and reflection surfaces into a narrative truth layer rather than a generic analytics screen.
@@ -876,7 +890,7 @@ Complete only when Insights feels indispensable rather than secondary.
 ## Batch 52 — Front-End Transformation 13 / Profile rebuild, Appearance Studio, and Trust Center
 
 ### Status
-Proposed
+Queued
 
 ### Goal
 Rebuild Profile into a premium utility layer with world-class appearance control, trust framing, and system status.
@@ -922,7 +936,7 @@ Complete only when Profile matches the rest of the product in finish quality.
 ## Batch 53 — Front-End Transformation 14 / Onboarding, first-run, permissions, education, and state systems
 
 ### Status
-Proposed
+Queued
 
 ### Goal
 Rebuild every first-run and system-state experience so Ambitions feels premium and intelligible from first launch onward.
@@ -970,7 +984,7 @@ Complete only when Ambitions feels intentional from cold start through degraded 
 ## Batch 54 — Front-End Transformation 15 / External surfaces I — widgets, Live Activities, notifications
 
 ### Status
-Proposed
+Queued
 
 ### Goal
 Fully implement the core ambient and external surfaces as premium first-class product surfaces.
@@ -1018,7 +1032,7 @@ Complete only when the app’s external surfaces no longer feel conservative or 
 ## Batch 55 — Front-End Transformation 16 / External surfaces II — share extension, App Intents, shortcuts, routing
 
 ### Status
-Proposed
+Queued
 
 ### Goal
 Fully implement the creation, entry, and routing surfaces outside the main app shell.
@@ -1063,7 +1077,7 @@ Complete only when external creation and routing feel like first-class product b
 ## Batch 56 — Front-End Transformation 17 / Cross-surface command, recall, and ambient coherence
 
 ### Status
-Proposed
+Queued
 
 ### Goal
 Complete the command and recall system across app, widgets, notifications, shortcuts, and future device surfaces.
@@ -1108,7 +1122,7 @@ Complete only when command and recall meaningfully raise the product’s “exte
 ## Batch 57 — Front-End Transformation 18 / iPad and Mac surface architecture and first implementation
 
 ### Status
-Proposed
+Queued
 
 ### Goal
 Begin future-platform implementation with coherent larger-screen versions of Ambitions.
@@ -1154,7 +1168,7 @@ Complete only when iPad and Mac feel like true Ambitions clients, not enlarged p
 ## Batch 58 — Front-End Transformation 19 / Watch and Apple TV ambient surface architecture and first implementation
 
 ### Status
-Proposed
+Queued
 
 ### Goal
 Begin future ambient and room-scale implementations for Watch and Apple TV.
@@ -1197,7 +1211,7 @@ Complete only when Watch and Apple TV surfaces have real product roles and initi
 ## Batch 59 — Front-End Transformation 20 / Finish-quality pass, accessibility, performance, and release polish
 
 ### Status
-Proposed
+Queued
 
 ### Goal
 Close the transformation program with a whole-product finish pass that raises Ambitions to flagship release quality.
@@ -1255,6 +1269,9 @@ Every implementation batch in this program should expect, at minimum:
 - manual simulator review for the affected surface family
 - accessibility and motion review when visual interaction changes are central
 
+Batch 39 is the exception because it is docs-only.
+It should report docs truth, control-file consistency, link/file existence, and boundary adherence only, and it must not claim app/runtime validation that was not run.
+
 ---
 
 ## Handoff Artifacts to Derive from This Program
@@ -1267,12 +1284,14 @@ The full program should continue to produce and refine:
 - updated `BATCH_REGISTRY.md` rows for Batch 39 onward
 - one batch doc per proposed batch
 - a maintained shell architecture spec
+- a maintained transformation terminology spec
 - a maintained design token and component system spec
 - a maintained motion and transition grammar spec
 - a maintained copy and trust-language spec
 - a maintained surface-by-surface rebuild spec set
 - a maintained external-surface implementation spec
 - maintained future-device continuity specs for iPad, Mac, Watch, and Apple TV
+- a maintained transformation validation standard
 
 ---
 

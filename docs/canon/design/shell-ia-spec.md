@@ -4,6 +4,13 @@
 
 Define the canonical iPhone shell, route ownership, entry posture, and cross-route continuity rules for the future frontend transformation program.
 
+## Batch Boundary
+
+- The current five-tab shell remains the current shipping truth.
+- Batch 39 defines shell reconsideration doctrine only.
+- Batch 40 is the first allowed shell-implementation batch.
+- No parallel-shell experimentation, hidden-navigation replacement, route rewiring, or speculative shell implementation may land before Batch 40.
+
 ## Product Posture
 
 - The shell must feel like a calm command environment, not a utility dashboard.

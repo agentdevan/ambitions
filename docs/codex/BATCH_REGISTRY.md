@@ -73,14 +73,15 @@ Current wave status: Ambitions 2.0 is complete through Batch 34, the post-2.0 wh
 
 ## Front-End Transformation Program
 
-Batch 39 is now the active batch for the post-hardening front-end transformation program.
-Batches 40-59 remain queued future work.
+Batch 39 is completed as the post-hardening transformation canon/control-file foundation batch.
+Batch 40 is now the active batch for the post-hardening front-end transformation program.
+Batches 41-59 remain queued future work.
 Use the canonical program doc plus the per-batch docs in [batches/](batches/README.md) when working inside this program.
 
 | Batch | Name | Status | Notes |
 | --- | --- | --- | --- |
-| 39 | Front-End Transformation 00 / Program canon and shell rewrite foundation | Active | First post-hardening control-file and canon batch. |
-| 40 | Front-End Transformation 01 / Shell reconsideration and navigation architecture | Queued | Shell and route architecture follow Batch 39. |
+| 39 | Front-End Transformation 00 / Program canon and shell rewrite foundation | Completed | Activated the transformation canon against the live registry, added shared terminology and validation control files, clarified novelty ownership/tier references, tightened the Batch 39 vs. Batch 40 shell boundary, and formalized cross-device continuity doctrine; validated through docs-truth, link/file, consistency, and boundary review only. |
+| 40 | Front-End Transformation 01 / Shell reconsideration and navigation architecture | Active | Shell and route architecture follow the completed Batch 39 control-file foundation. |
 | 41 | Front-End Transformation 02 / Design system, materials, motion engine, and controls | Queued | Shared visual and motion system for later surface work. |
 | 42 | Front-End Transformation 03 / Global compose, search, capture, and command surface | Queued | Cross-app command, compose, and recall foundation. |
 | 43 | Front-End Transformation 04 / Today rebuild I - living hero, now state, and action model | Queued | First half of the Today rebuild. |

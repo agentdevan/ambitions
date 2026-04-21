@@ -4,6 +4,27 @@
 
 Define future platform roles without turning this planning task into implementation work.
 
+## Continuity Doctrine
+
+Cross-device continuity means shared product semantics, not shared layouts.
+
+Every future platform must preserve the same meaning for:
+
+- what the current dominant truth is
+- what the next safe action is
+- what pressure, momentum, freshness, confidence, recovery, and sync mean
+- what command, recall, and trust surfaces are for
+
+Each platform may realize those meanings differently based on form factor, input model, and session length.
+No later platform should inherit iPhone layout literally when a more native composition would preserve the semantics more clearly.
+
+## Batch Boundary
+
+- This file defines continuity semantics only.
+- It does not authorize cross-device architecture or product implementation work in Batch 39.
+- iPad and Mac architecture plus first implementation are deferred to Batch 57.
+- Watch and Apple TV architecture plus first implementation are deferred to Batch 58.
+
 ## Shared Product Rule
 
 All platforms share:
@@ -11,6 +32,14 @@ All platforms share:
 - calm trust posture
 - restrained visual language
 - same semantic meaning for pressure, confidence, freshness, momentum, and sync
+- same meaning for hero, recovery, shaping, command, recall, and continuity signals
+
+## Inheritance Rules
+
+- iPhone remains the primary source of future surface semantics.
+- iPad, Mac, Watch, and Apple TV inherit product meaning, hierarchy intent, and trust posture, not phone-specific layout rules.
+- Command and recall flows may widen on larger screens, but they must preserve the same consumer-facing meaning.
+- Recovery, trust, and continuity cues may simplify on smaller ambient surfaces, but they must not reverse their meaning.
 
 ## iPhone
 
@@ -85,3 +114,4 @@ All platforms share:
 - Time Aperture is primarily iPhone and larger-screen, not Watch
 - Focus Screenlet carries to widgets, Live Activities, and Watch
 - Appearance Studio and deep Trust Center remain primarily phone and larger-screen surfaces
+- cross-device work should preserve semantic continuity first and choose native platform composition second
