@@ -74,15 +74,16 @@ Current wave status: Ambitions 2.0 is complete through Batch 34, the post-2.0 wh
 ## Front-End Transformation Program
 
 Batch 39 is completed as the post-hardening transformation canon/control-file foundation batch.
-Batch 40 is now the active batch for the post-hardening front-end transformation program.
-Batches 41-59 remain queued future work.
+Batch 40 is completed as the canonical shell/navigation architecture batch for the post-hardening front-end transformation program.
+Batch 41 is now the active batch.
+Batches 42-59 remain queued future work.
 Use the canonical program doc plus the per-batch docs in [batches/](batches/README.md) when working inside this program.
 
 | Batch | Name | Status | Notes |
 | --- | --- | --- | --- |
 | 39 | Front-End Transformation 00 / Program canon and shell rewrite foundation | Completed | Activated the transformation canon against the live registry, added shared terminology and validation control files, clarified novelty ownership/tier references, tightened the Batch 39 vs. Batch 40 shell boundary, and formalized cross-device continuity doctrine; validated through docs-truth, link/file, consistency, and boundary review only. |
-| 40 | Front-End Transformation 01 / Shell reconsideration and navigation architecture | Active | Shell and route architecture follow the completed Batch 39 control-file foundation. |
-| 41 | Front-End Transformation 02 / Design system, materials, motion engine, and controls | Queued | Shared visual and motion system for later surface work. |
+| 40 | Front-End Transformation 01 / Shell reconsideration and navigation architecture | Completed | Landed the canonical shell-owned navigation/container architecture: five tabs remain, Captures now canonicalizes to Plan, shell-owned header/container and overlay seams are live, external landing ownership is normalized, and deterministic origin-surface Goal Detail routing proof is closed. No full surface redesigns, no Batch 41 design-system rollout, and no full Batch 42 command behavior shipped; OS-surface Shortcut/App Intent manual verification remains unclosed in this environment, and the last-turn full UITest rerun was not clean due simulator runner instability. |
+| 41 | Front-End Transformation 02 / Design system, materials, motion engine, and controls | Active | Shared visual and motion system for later surface work. |
 | 42 | Front-End Transformation 03 / Global compose, search, capture, and command surface | Queued | Cross-app command, compose, and recall foundation. |
 | 43 | Front-End Transformation 04 / Today rebuild I - living hero, now state, and action model | Queued | First half of the Today rebuild. |
 | 44 | Front-End Transformation 05 / Today rebuild II - time aperture, recovery bloom, and day logic | Queued | Completes the Today rebuild. |

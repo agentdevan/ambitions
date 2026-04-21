@@ -1,6 +1,6 @@
 ﻿# Batch 40 - Front-End Transformation 01 / Shell reconsideration and navigation architecture
 ## Status
-Active
+Completed
 ## Program
 Post-hardening Front-End Transformation Program
 ## Canon Source
@@ -71,3 +71,8 @@ Fully reconsider the shell and navigation model, then implement the new canonica
 Complete only when the new shell is structurally coherent, visually intentional, and stable enough for all later surface rebuilds.
 
 ---
+## Completion Note
+- Actual implementation scope: shipped the canonical shell-owned container, route ownership model, Plan-owned Captures landing, Plan-owned Habits continuity, shell header/overlay seams, external-entry landing normalization, and deterministic origin-surface Goal Detail routing proof across Today, Goals, Plan, and Insights.
+- Validation truth: Batch 40 implementation and evidence were validated through `xcodegen generate`, native simulator build, targeted shell/routing/deep-link coverage, full `AmbitionsTests`, prior strong `AmbitionsUITests` coverage, focused simulator/manual shell review, and a final deterministic integration proof for origin-surface Goal Detail routing.
+- Truthful limits: no full individual surface rebuilds occurred, no Batch 41 visual-system rollout occurred, no full Batch 42 command behavior occurred, and no later-core systems such as Cognitive Mode Lens or Continuity Ribbon shipped.
+- Remaining manual-only caveat: true OS-surface Shortcut/App Intent invocation was not cleanly verifiable in this environment, and the final-turn full UITest rerun was not clean because the simulator runner exited unexpectedly during bootstrap.
