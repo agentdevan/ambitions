@@ -1,15 +1,16 @@
 import AmbitionsDesignSystem
-import AmbitionsWidgetUI
 import SwiftUI
 
 struct ProfileScreen: View {
     @Environment(\.appContainer) private var appContainer
     @Environment(\.ambitionTheme) private var theme
     @Environment(\.accessibilityReduceMotion) private var reduceMotion
-    @State private var state: AsyncViewState<ProfileDashboard> = .loading
-    @State private var preferredTab: AppTab = .today
-    @State private var appearancePreference: AppAppearancePreference = .system
-    @State private var reviewCadenceDays: Int = 7
+    @State private var viewModel: ProfileViewModel
+
+    @MainActor
+    init(viewModel: ProfileViewModel? = nil) {
+        _viewModel = State(initialValue: viewModel ?? ProfileViewModel())
+    }
 
     var body: some View {
         FeatureScaffoldView(
@@ -17,7 +18,7 @@ struct ProfileScreen: View {
             title: "Profile",
             subtitle: "Keep identity and on-device preferences clear inside the native shell."
         ) {
-            switch state {
+            switch viewModel.state {
             case .loading:
                 LoadingSkeletonCard(lineCount: 7)
                     .transition(.ambitionPanel)
@@ -29,7 +30,7 @@ struct ProfileScreen: View {
                     actionTitle: "Retry",
                     actionAccessibilityIdentifier: "profile.retry-button"
                 ) {
-                    Task { await load() }
+                    Task { await refresh() }
                 }
                 .transition(.ambitionPanel)
             case let .loaded(dashboard):
@@ -37,21 +38,23 @@ struct ProfileScreen: View {
                     AppCard {
                         SectionHeader(
                             title: dashboard.title,
-                            subtitle: dashboard.subtitle
+                            subtitle: "Profile keeps the app's defaults, personalization, and conservative trust posture easy to understand."
                         ) {
                             TagPill(dashboard.badges.first ?? "Ready", state: .selected)
                         }
                     }
                     .transition(.ambitionPanel)
 
+                    ProfilePlanningSummaryCard(summary: dashboard.planningSummary)
+
                     AppCard {
                         VStack(alignment: .leading, spacing: theme.spacing.md) {
                             SectionHeader(
-                                title: "Persisted preferences",
-                                subtitle: "These controls write directly into the local app state used by the native shell."
+                                title: dashboard.preferencesSection.title,
+                                subtitle: dashboard.preferencesSection.subtitle
                             )
 
-                            Picker("Default tab", selection: $preferredTab) {
+                            Picker("Default tab", selection: $viewModel.preferredTab) {
                                 ForEach(AppTab.allCases) { tab in
                                     Text(tab.title).tag(tab)
                                 }
@@ -59,7 +62,7 @@ struct ProfileScreen: View {
                             .pickerStyle(.segmented)
                             .accessibilityIdentifier("profile.default-tab-picker")
 
-                            Picker("Appearance", selection: $appearancePreference) {
+                            Picker("Appearance", selection: $viewModel.appearancePreference) {
                                 ForEach(AppAppearancePreference.allCases, id: \.self) { preference in
                                     Text(preference.title).tag(preference)
                                 }
@@ -67,7 +70,7 @@ struct ProfileScreen: View {
                             .pickerStyle(.segmented)
                             .accessibilityIdentifier("profile.appearance-picker")
 
-                            Picker("Review cadence", selection: $reviewCadenceDays) {
+                            Picker("Review cadence", selection: $viewModel.reviewCadenceDays) {
                                 Text("Daily").tag(1)
                                 Text("Every 3 days").tag(3)
                                 Text("Weekly").tag(7)
@@ -89,57 +92,32 @@ struct ProfileScreen: View {
                             }
                         }
                     }
+                    .accessibilityIdentifier("profile.personalization-card")
 
-                    WidgetFeed(items: [
-                        WidgetFeedItem(id: "profile-summary", priority: .hero, variant: .expanded) {
-                            ProfileSummaryWidget(viewModel: summaryViewModel(dashboard))
-                        },
-                        WidgetFeedItem(id: "profile-settings", priority: .high, variant: .expanded) {
-                            SettingsGroupWidget(viewModel: settingsViewModel(dashboard))
-                        }
-                    ])
+                    ProfileTrustSectionCard(section: dashboard.trustSection)
                 }
             }
         }
         .navigationTitle("Profile")
         .refreshable {
-            await load()
+            await refresh()
         }
         .accessibilityIdentifier("profile.screen")
-        .animation(theme.motion.animation(reduceMotion: reduceMotion, emphasis: true), value: stateKey)
+        .animation(theme.motion.animation(reduceMotion: reduceMotion, emphasis: true), value: viewModel.stateKey)
         .task {
-            guard case .loading = state else { return }
-            await load()
+            await viewModel.load(using: container.profileService)
+            syncAppearanceFromLoadedDashboard()
         }
     }
 
-    private func load() async {
-        do {
-            let dashboard = try await container.profileService.loadProfileDashboard()
-            syncEditor(with: dashboard)
-            container.appearancePreference = dashboard.preferences.appearancePreference
-            state = .loaded(dashboard)
-        } catch {
-            state = .failed("Unable to load Profile: \(error.localizedDescription)")
-        }
+    private func refresh() async {
+        await viewModel.refresh(using: container.profileService)
+        syncAppearanceFromLoadedDashboard()
     }
 
     private func savePreferences() async {
-        do {
-            let dashboard = try await container.profileService.saveProfilePreferences(
-                ProfilePreferencesUpdate(
-                    preferredTab: preferredTab,
-                    appearancePreference: appearancePreference,
-                    reviewCadenceDays: reviewCadenceDays,
-                    localOnlyModeEnabled: true
-                )
-            )
-            syncEditor(with: dashboard)
-            container.appearancePreference = dashboard.preferences.appearancePreference
-            state = .loaded(dashboard)
-        } catch {
-            state = .failed("Unable to save Profile: \(error.localizedDescription)")
-        }
+        await viewModel.save(using: container.profileService)
+        syncAppearanceFromLoadedDashboard()
     }
 
     private func requestNotificationAuthorization() async {
@@ -147,86 +125,12 @@ struct ProfileScreen: View {
         if granted {
             await container.notificationService.refreshSchedule(now: .now)
         }
-        await load()
+        await refresh()
     }
 
-    private func syncEditor(with dashboard: ProfileDashboard) {
-        preferredTab = dashboard.preferences.preferredTab
-        appearancePreference = dashboard.preferences.appearancePreference
-        reviewCadenceDays = dashboard.preferences.reviewCadenceDays
-    }
-
-    private func summaryViewModel(_ dashboard: ProfileDashboard) -> ProfileSummaryWidgetViewModel {
-        ProfileSummaryWidgetViewModel(
-            snapshot: WidgetSnapshot(
-                metadata: WidgetMetadata(
-                    identity: WidgetIdentity(family: .profileSummary, instanceID: "primary"),
-                    priority: .hero,
-                    variant: .expanded,
-                    chrome: .appCard,
-                    supportedActions: []
-                ),
-                state: .ready(
-                    ProfileSummaryContent(
-                        title: dashboard.title,
-                        subtitle: dashboard.subtitle,
-                        initials: dashboard.initials,
-                        badges: dashboard.badges,
-                        stats: dashboard.stats.map {
-                            WidgetStat(
-                                id: $0.id,
-                                title: $0.title,
-                                value: $0.value,
-                                detail: $0.detail,
-                                icon: $0.icon
-                            )
-                        },
-                        actions: []
-                    )
-                )
-            )
-        )
-    }
-
-    private func settingsViewModel(_ dashboard: ProfileDashboard) -> SettingsGroupWidgetViewModel {
-        SettingsGroupWidgetViewModel(
-            snapshot: WidgetSnapshot(
-                metadata: WidgetMetadata(
-                    identity: WidgetIdentity(family: .settingsGroup, instanceID: "primary"),
-                    priority: .high,
-                    variant: .expanded,
-                    chrome: .appCard,
-                    supportedActions: []
-                ),
-                state: .ready(
-                    SettingsGroupContent(
-                        title: dashboard.settingsTitle,
-                        subtitle: dashboard.settingsSubtitle,
-                        items: dashboard.settings.map {
-                            WidgetSettingItem(
-                                id: $0.id,
-                                title: $0.title,
-                                subtitle: $0.subtitle,
-                                icon: $0.icon,
-                                valueLabel: $0.valueLabel
-                            )
-                        },
-                        footer: dashboard.settingsFooter
-                    )
-                )
-            )
-        )
-    }
-
-    private var stateKey: String {
-        switch state {
-        case .loading:
-            return "loading"
-        case let .loaded(dashboard):
-            return "loaded:\(dashboard.stats.count):\(dashboard.settings.count)"
-        case let .failed(message):
-            return "failed:\(message)"
-        }
+    private func syncAppearanceFromLoadedDashboard() {
+        guard let dashboard = viewModel.loadedDashboard else { return }
+        container.appearancePreference = dashboard.preferences.appearancePreference
     }
 
     private var container: AppContainer {
@@ -237,10 +141,96 @@ struct ProfileScreen: View {
     }
 }
 
+private struct ProfilePlanningSummaryCard: View {
+    @Environment(\.ambitionTheme) private var theme
+
+    let summary: ProfilePlanningSummary
+
+    var body: some View {
+        AppCard {
+            VStack(alignment: .leading, spacing: theme.spacing.md) {
+                SectionHeader(title: summary.title, subtitle: summary.subtitle)
+
+                VStack(alignment: .leading, spacing: theme.spacing.sm) {
+                    ForEach(summary.items) { item in
+                        ProfileSettingRow(item: item)
+                    }
+                }
+            }
+        }
+        .accessibilityIdentifier("profile.planning-summary-card")
+    }
+}
+
+private struct ProfileTrustSectionCard: View {
+    @Environment(\.ambitionTheme) private var theme
+
+    let section: ProfileSectionGroup
+
+    var body: some View {
+        AppCard {
+            VStack(alignment: .leading, spacing: theme.spacing.md) {
+                SectionHeader(title: section.title, subtitle: section.subtitle)
+
+                VStack(alignment: .leading, spacing: theme.spacing.sm) {
+                    ForEach(section.items) { item in
+                        ProfileSettingRow(item: item)
+                    }
+                }
+
+                if let footer = section.footer {
+                    Text(footer)
+                        .font(theme.typography.caption)
+                        .foregroundStyle(theme.colors.textTertiary)
+                        .fixedSize(horizontal: false, vertical: true)
+                        .padding(.top, theme.spacing.xs)
+                }
+            }
+        }
+        .accessibilityIdentifier("profile.trust-card")
+    }
+}
+
+private struct ProfileSettingRow: View {
+    @Environment(\.ambitionTheme) private var theme
+
+    let item: SettingsItem
+
+    var body: some View {
+        HStack(alignment: .top, spacing: theme.spacing.sm) {
+            Image(systemName: item.icon)
+                .font(.system(size: theme.icon.mediumSize, weight: theme.icon.symbolWeight))
+                .foregroundStyle(theme.colors.accentPrimary)
+                .frame(width: 28)
+
+            VStack(alignment: .leading, spacing: theme.spacing.xxxs) {
+                Text(item.title)
+                    .font(theme.typography.section)
+                    .foregroundStyle(theme.colors.textPrimary)
+                if let subtitle = item.subtitle {
+                    Text(subtitle)
+                        .font(theme.typography.body)
+                        .foregroundStyle(theme.colors.textSecondary)
+                        .fixedSize(horizontal: false, vertical: true)
+                }
+            }
+
+            Spacer(minLength: theme.spacing.sm)
+            if let valueLabel = item.valueLabel {
+                TagPill(valueLabel, state: .default)
+            }
+        }
+        .padding(theme.spacing.md)
+        .background(RoundedRectangle(cornerRadius: theme.radius.lg, style: .continuous).fill(theme.colors.surfaceOverlay))
+        .overlay(RoundedRectangle(cornerRadius: theme.radius.lg, style: .continuous).stroke(theme.colors.strokeSubtle, lineWidth: 1))
+        .ambitionPanelAccessibility()
+    }
+}
+
 #if DEBUG
 #Preview("Profile Light") {
     NavigationStack {
-        ProfileScreen()
+        ProfileScreen(viewModel: ProfileViewModel(state: .loaded(PreviewFixtures.default.profileDashboard)))
     }
     .appContainer(PreviewAppContainerFactory.preview)
     .ambitionTheme(.light)
@@ -249,7 +239,7 @@ struct ProfileScreen: View {
 
 #Preview("Profile Dark") {
     NavigationStack {
-        ProfileScreen()
+        ProfileScreen(viewModel: ProfileViewModel(state: .loaded(PreviewFixtures.default.profileDashboard)))
     }
     .appContainer(PreviewAppContainerFactory.preview)
     .ambitionTheme(.dark)

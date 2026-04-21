@@ -2,7 +2,7 @@
 
 ## Status
 
-Active
+Completed
 
 ## Goal
 
@@ -48,3 +48,9 @@ This batch is the third step of the post-2.0 whole-repo/app hardening wave. It f
 ## Completion Rule
 
 Batch 37 is complete only when the app's secondary surfaces have truthful, stronger product roles and the shell no longer depends on a few flagship surfaces carrying the product alone.
+
+## Completion Note
+
+Completed on `main` as a pre-transformation hardening pass over `Plan`, `Insights`, and `Profile`. The landed scope stayed additive and compatibility-safe: `Plan` gained clearer weekly-intent and goal-shaping summaries, `Insights` gained a dedicated view model plus a stronger narrative truth-layer dashboard, and `Profile` gained a dedicated view model, clearer ownership across planning defaults/personalization/trust, and a compact planning summary without widening trust claims or introducing new shell/product systems.
+
+Validation actually run for completion: `xcodegen generate`, simulator build, targeted Plan/Insights/Profile plus shell integration tests, full `AmbitionsTests` (`343`), full `AmbitionsUITests` (`6`), and a manual simulator closeout pass confirming the five-tab shell remained stable, Plan/Insights/Profile answered their surface roles on first load, and Profile trust/external wording stayed conservative. The live manual dataset did not expose goal-linked secondary rows to tap through during closeout, so that specific route posture remained covered by automated tests rather than direct simulator exercise here.

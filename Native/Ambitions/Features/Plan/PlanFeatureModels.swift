@@ -13,6 +13,13 @@ struct PlanPostureState: Sendable {
     let visualState: AmbitionVisualState
 }
 
+struct PlanWeeklyIntentSummary: Sendable {
+    let title: String
+    let detail: String
+    let attentionLabel: String
+    let goalCountLabel: String
+}
+
 struct PlanFocusItem: Identifiable, Sendable {
     let id: String
     let target: GoalRouteTarget?
@@ -21,6 +28,17 @@ struct PlanFocusItem: Identifiable, Sendable {
     let timingLabel: String
     let statusLabel: String
     let goalLabel: String
+    let visualState: AmbitionVisualState
+}
+
+struct PlanGoalShapingItem: Identifiable, Sendable {
+    let id: String
+    let target: GoalRouteTarget?
+    let goalTitle: String
+    let summary: String
+    let pressureLabel: String
+    let attentionReason: String
+    let shellSummary: GoalShellSummaryState?
     let visualState: AmbitionVisualState
 }
 
@@ -48,7 +66,9 @@ struct PlanDashboard: Sendable {
     let subtitle: String
     let timeframeLabel: String
     let posture: PlanPostureState
+    let weeklyIntent: PlanWeeklyIntentSummary
     let metrics: [MetricSummary]
+    let goalShapingItems: [PlanGoalShapingItem]
     let focusItems: [PlanFocusItem]
     let pressureItems: [PlanPressureItem]
     let secondaryDestinations: [PlanSecondaryDestination]

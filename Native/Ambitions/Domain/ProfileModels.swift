@@ -15,6 +15,19 @@ struct ProfileNotificationAuthorization: Sendable, Equatable {
     let actionTitle: String?
 }
 
+struct ProfilePlanningSummary: Sendable {
+    let title: String
+    let subtitle: String
+    let items: [SettingsItem]
+}
+
+struct ProfileSectionGroup: Sendable {
+    let title: String
+    let subtitle: String
+    let items: [SettingsItem]
+    let footer: String?
+}
+
 struct ProfilePreferencesState: Sendable, Equatable {
     let preferredTab: AppTab
     let appearancePreference: AppAppearancePreference
@@ -35,10 +48,9 @@ struct ProfileDashboard: Sendable {
     let initials: String
     let badges: [String]
     let stats: [MetricSummary]
-    let settingsTitle: String
-    let settingsSubtitle: String
-    let settings: [SettingsItem]
-    let settingsFooter: String
+    let planningSummary: ProfilePlanningSummary
+    let preferencesSection: ProfileSectionGroup
+    let trustSection: ProfileSectionGroup
     let notificationAuthorization: ProfileNotificationAuthorization
     let preferences: ProfilePreferencesState
 }

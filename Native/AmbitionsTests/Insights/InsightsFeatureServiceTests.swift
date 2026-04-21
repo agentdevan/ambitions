@@ -3,6 +3,57 @@ import XCTest
 @testable import Ambitions
 
 final class InsightsFeatureServiceTests: XCTestCase {
+    func testDashboardBuildsNarrativePostureAndGoalStatusFromExistingSignals() async throws {
+        let repositories = try await makeRepositories()
+        let goal = try XCTUnwrap(goalFromFixture(id: "clear-timed-self-goal"))
+        let step = try XCTUnwrap(goal.plan?.sections.first?.steps.first)
+        try await repositories.goals.saveGoals([goal])
+
+        try await repositories.evidence.saveEvidence([
+            ProgressEvidence(
+                id: "evidence-complete",
+                goalID: goal.id,
+                stepID: step.id,
+                evidenceKind: .stepCompleted,
+                source: .manual,
+                capturedAt: isoNow,
+                progressDelta: 0.20,
+                confidenceDelta: 0.08,
+                minutesInvested: 25,
+                note: "Completed"
+            )
+        ])
+        try await repositories.feedback.saveEvents([
+            .askedForSmallerVersion(
+                base: GoalFeedbackEventBase(
+                    id: "feedback-adjust",
+                    stepID: step.id,
+                    occurredAt: isoNow,
+                    note: "Needed smaller version"
+                )
+            )
+        ], goalID: goal.id)
+
+        let dashboard = try await RepositoryBackedInsightsService(repositories: repositories).loadInsightsDashboard()
+
+        XCTAssertEqual(dashboard.posture.label, "Adapting")
+        XCTAssertFalse(dashboard.changeSummaries.isEmpty)
+        XCTAssertFalse(dashboard.goalStatuses.isEmpty)
+        XCTAssertEqual(dashboard.goalStatuses.first?.target?.goalID, goal.id)
+    }
+
+    func testSparseEvidenceDoesNotOverclaimGoalStatus() async throws {
+        let repositories = try await makeRepositories()
+        let goal = try XCTUnwrap(goalFromFixture(id: "clear-timed-self-goal"))
+        try await repositories.goals.saveGoals([goal])
+
+        let dashboard = try await RepositoryBackedInsightsService(repositories: repositories).loadInsightsDashboard()
+
+        XCTAssertNotEqual(dashboard.goalStatuses.first?.statusLabel, "Believable")
+        XCTAssertNotEqual(dashboard.goalStatuses.first?.visualState, .success)
+        XCTAssertEqual(dashboard.posture.visualState, .default)
+    }
+
     func testRecentActivitiesSortByActualTimestampInsteadOfLocalizedLabel() async throws {
         let repositories = try await makeRepositories()
         let goal = try XCTUnwrap(goalFromFixture(id: "clear-timed-self-goal"))
@@ -55,6 +106,10 @@ final class InsightsFeatureServiceTests: XCTestCase {
 }
 
 private extension InsightsFeatureServiceTests {
+    var isoNow: String {
+        "2026-04-15T12:55:00Z"
+    }
+
     func makeRepositories() async throws -> AppRepositories {
         let store = try AmbitionsPersistenceStore(inMemory: true)
         return AppRepositories(

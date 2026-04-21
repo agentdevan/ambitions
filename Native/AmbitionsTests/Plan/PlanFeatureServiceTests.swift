@@ -10,11 +10,13 @@ final class PlanFeatureServiceTests: XCTestCase {
 
         XCTAssertEqual(dashboard.mode, .empty)
         XCTAssertEqual(dashboard.emptyTitle, "No weekly plan pressure yet")
+        XCTAssertEqual(dashboard.weeklyIntent.attentionLabel, "Open week")
+        XCTAssertEqual(dashboard.goalShapingItems.count, 0)
         XCTAssertTrue(dashboard.focusItems.isEmpty)
         XCTAssertTrue(dashboard.metrics.contains(where: { $0.id == "plan-routines" && $0.value == "0" }))
     }
 
-    func testActiveGoalsProduceWeeklyFocusRows() async throws {
+    func testActiveGoalsProduceWeeklyFocusRowsAndGoalShapingSummaries() async throws {
         let repositories = try await makeRepositories()
         let goalsService = RepositoryBackedGoalsService(repositories: repositories)
         _ = try await goalsService.createGoal(
@@ -27,7 +29,10 @@ final class PlanFeatureServiceTests: XCTestCase {
 
         XCTAssertEqual(dashboard.mode, .active)
         XCTAssertFalse(dashboard.focusItems.isEmpty)
+        XCTAssertFalse(dashboard.goalShapingItems.isEmpty)
         XCTAssertTrue(dashboard.focusItems.allSatisfy { $0.target?.goalID != nil })
+        XCTAssertTrue(dashboard.goalShapingItems.allSatisfy { $0.target?.goalID != nil })
+        XCTAssertEqual(dashboard.weeklyIntent.title, "This week is carrying real goal work")
         XCTAssertTrue(dashboard.metrics.contains(where: { $0.id == "plan-week-work" && $0.value != "0" }))
     }
 
@@ -59,6 +64,7 @@ final class PlanFeatureServiceTests: XCTestCase {
         let dashboard = try await service.loadPlanDashboard(now: fixedDate)
 
         XCTAssertEqual(dashboard.posture.visualState, .warning)
+        XCTAssertEqual(dashboard.weeklyIntent.attentionLabel, "Clarify first")
         XCTAssertTrue(dashboard.pressureItems.contains(where: { $0.id == "plan-pressure-captures" && $0.valueLabel == "1" }))
         XCTAssertTrue(dashboard.pressureItems.contains(where: { $0.id == "plan-pressure-clarity" && $0.valueLabel != "0" }))
         XCTAssertTrue(dashboard.metrics.contains(where: { $0.id == "plan-pressure" && $0.value != "0" }))

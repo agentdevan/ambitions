@@ -33,11 +33,15 @@ struct PlanScreen: View {
                 case let .loaded(dashboard):
                     PlanHeroCard(dashboard: dashboard)
 
+                    PlanWeeklyIntentCard(summary: dashboard.weeklyIntent)
+
                     if let emptyTitle = dashboard.emptyTitle, let emptyMessage = dashboard.emptyMessage {
                         EmptyStateCard(title: emptyTitle, message: emptyMessage, icon: AppTab.plan.systemImage)
                     }
 
                     PlanMetricsCard(metrics: dashboard.metrics)
+
+                    PlanGoalShapingCard(items: dashboard.goalShapingItems)
 
                     PlanFocusCard(items: dashboard.focusItems)
 
@@ -80,6 +84,39 @@ struct PlanScreen: View {
             preconditionFailure("App container must be injected.")
         }
         return appContainer
+    }
+}
+
+private struct PlanWeeklyIntentCard: View {
+    @Environment(\.ambitionTheme) private var theme
+
+    let summary: PlanWeeklyIntentSummary
+
+    var body: some View {
+        AppCard {
+            VStack(alignment: .leading, spacing: theme.spacing.md) {
+                SectionHeader(
+                    title: "This week",
+                    subtitle: "Plan explains what the current week is trying to carry before it asks for more structure."
+                )
+
+                VStack(alignment: .leading, spacing: theme.spacing.xs) {
+                    Text(summary.title)
+                        .font(theme.typography.section)
+                        .foregroundStyle(theme.colors.textPrimary)
+                    Text(summary.detail)
+                        .font(theme.typography.body)
+                        .foregroundStyle(theme.colors.textSecondary)
+                        .fixedSize(horizontal: false, vertical: true)
+                }
+
+                HStack(spacing: theme.spacing.xs) {
+                    TagPill(summary.attentionLabel, icon: "scope", state: .selected)
+                    TagPill(summary.goalCountLabel, icon: "target", state: .default)
+                }
+            }
+        }
+        .accessibilityIdentifier("plan.weekly-intent-card")
     }
 }
 
@@ -243,6 +280,45 @@ private struct PlanPressureCard: View {
     }
 }
 
+private struct PlanGoalShapingCard: View {
+    @Environment(\.ambitionTheme) private var theme
+
+    let items: [PlanGoalShapingItem]
+
+    var body: some View {
+        AppCard {
+            VStack(alignment: .leading, spacing: theme.spacing.md) {
+                SectionHeader(
+                    title: "Needs shaping attention",
+                    subtitle: items.isEmpty
+                        ? "No active goal is asking for special shaping attention right now."
+                        : "These goals best explain where the week's shaping attention belongs."
+                )
+
+                if items.isEmpty {
+                    Text("The current week already has enough structure that Plan does not need to invent a new problem here.")
+                        .font(theme.typography.body)
+                        .foregroundStyle(theme.colors.textSecondary)
+                } else {
+                    VStack(alignment: .leading, spacing: theme.spacing.sm) {
+                        ForEach(items) { item in
+                            if let target = item.target {
+                                NavigationLink(value: target) {
+                                    PlanGoalShapingRow(item: item)
+                                }
+                                .buttonStyle(.plain)
+                            } else {
+                                PlanGoalShapingRow(item: item)
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        .accessibilityIdentifier("plan.goal-shaping-card")
+    }
+}
+
 private struct PlanSecondaryDestinationsCard: View {
     @Environment(\.ambitionTheme) private var theme
 
@@ -273,6 +349,46 @@ private struct PlanSecondaryDestinationsCard: View {
                 }
             }
         }
+    }
+}
+
+private struct PlanGoalShapingRow: View {
+    @Environment(\.ambitionTheme) private var theme
+
+    let item: PlanGoalShapingItem
+
+    var body: some View {
+        VStack(alignment: .leading, spacing: theme.spacing.xs) {
+            HStack(alignment: .top, spacing: theme.spacing.sm) {
+                VStack(alignment: .leading, spacing: theme.spacing.xxxs) {
+                    HStack(spacing: theme.spacing.xs) {
+                        TagPill(item.pressureLabel, state: item.visualState)
+                        if let shellSummary = item.shellSummary {
+                            TagPill("\(shellSummary.indicators.count) signals", icon: "sparkles", state: .default)
+                        }
+                    }
+                    Text(item.goalTitle)
+                        .font(theme.typography.section)
+                        .foregroundStyle(theme.colors.textPrimary)
+                    Text(item.summary)
+                        .font(theme.typography.body)
+                        .foregroundStyle(theme.colors.textSecondary)
+                        .fixedSize(horizontal: false, vertical: true)
+                    Text(item.attentionReason)
+                        .font(theme.typography.caption)
+                        .foregroundStyle(theme.colors.textTertiary)
+                        .fixedSize(horizontal: false, vertical: true)
+                }
+                Spacer(minLength: theme.spacing.sm)
+                Image(systemName: "chevron.right")
+                    .font(.system(size: theme.icon.smallSize, weight: theme.icon.symbolWeight))
+                    .foregroundStyle(theme.colors.textTertiary)
+            }
+        }
+        .padding(theme.spacing.md)
+        .background(RoundedRectangle(cornerRadius: theme.radius.lg, style: .continuous).fill(theme.colors.surfaceOverlay))
+        .overlay(RoundedRectangle(cornerRadius: theme.radius.lg, style: .continuous).stroke(theme.colors.strokeSubtle, lineWidth: 1))
+        .ambitionPanelAccessibility()
     }
 }
 

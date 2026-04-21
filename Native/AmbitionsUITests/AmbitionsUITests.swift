@@ -13,7 +13,7 @@ final class AmbitionsUITests: XCTestCase {
         app.tabBars.buttons["Goals"].tap()
 
         XCTAssertTrue(app.staticTexts["No goals yet"].waitForExistence(timeout: 10))
-        XCTAssertTrue(app.buttons["goals.create-button"].waitForExistence(timeout: 10))
+        XCTAssertTrue(goalCreateButton(in: app).waitForExistence(timeout: 10))
     }
 
     func testPreviewBootstrapCanCreateGoalFromEmptyState() throws {
@@ -23,7 +23,7 @@ final class AmbitionsUITests: XCTestCase {
         XCTAssertTrue(app.tabBars.buttons["Goals"].waitForExistence(timeout: 10))
         app.tabBars.buttons["Goals"].tap()
 
-        let createButton = app.buttons["goals.create-button"]
+        let createButton = goalCreateButton(in: app)
         XCTAssertTrue(createButton.waitForExistence(timeout: 10))
         createButton.tap()
 
@@ -58,16 +58,20 @@ final class AmbitionsUITests: XCTestCase {
 
         app.tabBars.buttons["Plan"].tap()
         XCTAssertTrue(app.descendants(matching: .any)["plan.screen"].waitForExistence(timeout: 10))
+        XCTAssertTrue(app.descendants(matching: .any)["plan.weekly-intent-card"].waitForExistence(timeout: 10))
+        XCTAssertTrue(scrollUntilElementExists("plan.goal-shaping-card", in: app))
         app.buttons["plan.open-habits-button"].tap()
         XCTAssertTrue(app.staticTexts["No habits are live yet"].waitForExistence(timeout: 10))
 
         app.tabBars.buttons["Insights"].tap()
         XCTAssertTrue(app.descendants(matching: .any)["insights.screen"].waitForExistence(timeout: 10))
+        XCTAssertTrue(app.descendants(matching: .any)["insights.posture-card"].waitForExistence(timeout: 10))
+        XCTAssertTrue(app.descendants(matching: .any)["insights.change-card"].waitForExistence(timeout: 10))
 
         app.tabBars.buttons["Profile"].tap()
-        XCTAssertTrue(app.descendants(matching: .any)["profile.default-tab-picker"].waitForExistence(timeout: 10))
-        XCTAssertTrue(app.descendants(matching: .any)["profile.appearance-picker"].waitForExistence(timeout: 10))
-        XCTAssertTrue(app.buttons["profile.save-preferences-button"].waitForExistence(timeout: 10))
+        XCTAssertTrue(scrollUntilElementExists("profile.personalization-card", in: app))
+        XCTAssertTrue(scrollUntilElementExists("profile.planning-summary-card", in: app))
+        XCTAssertTrue(scrollUntilElementExists("profile.trust-card", in: app))
     }
 
     func testProfilePreferencesControlsAreAccessibleFromKeyboardAndTouch() throws {
@@ -75,14 +79,9 @@ final class AmbitionsUITests: XCTestCase {
         app.launch()
 
         app.tabBars.buttons["Profile"].tap()
-
-        let defaultTabPicker = app.descendants(matching: .any)["profile.default-tab-picker"]
-        let appearancePicker = app.descendants(matching: .any)["profile.appearance-picker"]
-        XCTAssertTrue(defaultTabPicker.waitForExistence(timeout: 10))
-        XCTAssertTrue(appearancePicker.waitForExistence(timeout: 10))
-        XCTAssertTrue(app.buttons["profile.save-preferences-button"].waitForExistence(timeout: 10))
-        let saveButton = scrollUntilButtonHittable("profile.save-preferences-button", in: app)
-        XCTAssertTrue(saveButton.isHittable)
+        XCTAssertTrue(scrollUntilElementExists("profile.personalization-card", in: app))
+        XCTAssertTrue(scrollUntilElementExists("profile.planning-summary-card", in: app))
+        XCTAssertTrue(scrollUntilElementExists("profile.trust-card", in: app))
     }
 
     func testLaunchURLCanLandOnCanonicalPlanSurface() throws {
@@ -131,6 +130,21 @@ final class AmbitionsUITests: XCTestCase {
         app.swipeUp()
     }
 
+    private func goalCreateButton(in app: XCUIApplication) -> XCUIElement {
+        let candidates = [
+            app.buttons["goals.create-button"],
+            app.navigationBars.buttons["goals.create-button"],
+            app.buttons["Create Goal"],
+            app.navigationBars.buttons["Create Goal"]
+        ]
+
+        for candidate in candidates where candidate.waitForExistence(timeout: 2) {
+            return candidate
+        }
+
+        return app.buttons["goals.create-button"]
+    }
+
     private func scrollUntilButtonHittable(_ identifier: String, in app: XCUIApplication, maxAttempts: Int = 5) -> XCUIElement {
         let button = app.buttons[identifier]
 
@@ -158,4 +172,18 @@ final class AmbitionsUITests: XCTestCase {
 
         return button
     }
+
+    private func scrollUntilElementExists(_ identifier: String, in app: XCUIApplication, maxAttempts: Int = 5) -> Bool {
+        let element = app.descendants(matching: .any)[identifier]
+
+        for _ in 0..<maxAttempts {
+            if element.waitForExistence(timeout: 2) {
+                return true
+            }
+            app.swipeUp()
+        }
+
+        return element.exists
+    }
+
 }

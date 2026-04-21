@@ -13,7 +13,7 @@ final class PlanViewModel {
         case .loading:
             return "loading"
         case let .loaded(dashboard):
-            return "loaded:\(dashboard.mode):\(dashboard.focusItems.count):\(dashboard.pressureItems.count)"
+            return "loaded:\(dashboard.mode):\(dashboard.goalShapingItems.count):\(dashboard.focusItems.count):\(dashboard.pressureItems.count)"
         case let .failed(message):
             return "failed:\(message)"
         }

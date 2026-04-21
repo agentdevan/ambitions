@@ -61,6 +61,7 @@ private extension RepositoryBackedPlanService {
             weekStepCount: weekContexts.count,
             mode: mode
         )
+        let frictionCount = snapshot.feedback.filter(isFriction).count
 
         return PlanDashboard(
             mode: mode,
@@ -70,12 +71,27 @@ private extension RepositoryBackedPlanService {
                 : "Active goals, open planning pressure, and repeatable routines are gathered here before the day gets crowded.",
             timeframeLabel: timeframeLabel(now: now),
             posture: posture,
+            weeklyIntent: weeklyIntentSummary(
+                activeGoals: activeGoals,
+                weekContexts: weekContexts,
+                blockedDrafts: blockedDrafts,
+                clarificationDrafts: clarificationDrafts,
+                openCaptures: openCaptures,
+                frictionCount: frictionCount,
+                posture: posture,
+                mode: mode
+            ),
             metrics: [
                 MetricSummary(id: "plan-goal-coverage", title: "Goal coverage", value: "\(activeGoalCoverage)/\(max(activeGoals.count, 1))", detail: activeGoals.isEmpty ? "No active goals yet" : "Active goals with visible work", icon: "target"),
                 MetricSummary(id: "plan-week-work", title: "Visible work", value: "\(weekContexts.count)", detail: "Current steps in this weekly view", icon: "calendar"),
                 MetricSummary(id: "plan-pressure", title: "Planning pressure", value: "\(blockedDrafts.count + clarificationDrafts.count + openCaptures.count)", detail: "Captures, blockers, and clarification", icon: "exclamationmark.triangle"),
                 MetricSummary(id: "plan-routines", title: "Routines", value: "\(habitGoals.count)", detail: "Habit-like goals stay under Plan", icon: "repeat")
             ],
+            goalShapingItems: goalShapingItems(
+                activeGoals: activeGoals,
+                weekContexts: weekContexts,
+                feedback: snapshot.feedback
+            ),
             focusItems: focusItems(from: weekContexts),
             pressureItems: pressureItems(
                 blockedDrafts: blockedDrafts,
@@ -98,6 +114,129 @@ private extension RepositoryBackedPlanService {
             emptyTitle: mode == .empty ? "No weekly plan pressure yet" : nil,
             emptyMessage: mode == .empty ? "Create a goal or capture an idea, and Plan will show what needs shaping without inventing work." : nil
         )
+    }
+
+    func weeklyIntentSummary(
+        activeGoals: [Goal],
+        weekContexts: [StepContext],
+        blockedDrafts: [PersistedGoalDraft],
+        clarificationDrafts: [PersistedGoalDraft],
+        openCaptures: [Capture],
+        frictionCount: Int,
+        posture: PlanPostureState,
+        mode: PlanDashboardMode
+    ) -> PlanWeeklyIntentSummary {
+        guard mode == .active else {
+            return PlanWeeklyIntentSummary(
+                title: "Nothing is claiming the week yet",
+                detail: "Plan stays quiet until real goals, captures, or routine work create something worth shaping.",
+                attentionLabel: "Open week",
+                goalCountLabel: "0 active goals"
+            )
+        }
+
+        let visibleGoalCount = Set(weekContexts.map(\.goal.id)).count
+        let attentionLabel: String
+        if blockedDrafts.isEmpty == false || clarificationDrafts.isEmpty == false {
+            attentionLabel = "Clarify first"
+        } else if openCaptures.isEmpty == false || frictionCount > 0 {
+            attentionLabel = "Review pressure"
+        } else if weekContexts.isEmpty {
+            attentionLabel = "Seed the week"
+        } else {
+            attentionLabel = posture.label
+        }
+
+        let detail: String
+        if weekContexts.isEmpty {
+            detail = activeGoals.isEmpty
+                ? "No active goals are asking the week to carry anything yet."
+                : "Active goals exist, but no current step is visible enough to shape the week around."
+        } else if blockedDrafts.isEmpty == false || clarificationDrafts.isEmpty == false {
+            detail = "The week already has visible work, but some planning is still paused on blockers or open questions."
+        } else if openCaptures.isEmpty == false {
+            detail = "Visible goal work is present, and open captures are the main source of extra planning pressure."
+        } else if frictionCount > 0 {
+            detail = "Visible work exists, but recent friction suggests the week needs smaller asks instead of more volume."
+        } else {
+            detail = "The week is carrying explicit goal-linked work that can be shaped without inventing a new system."
+        }
+
+        return PlanWeeklyIntentSummary(
+            title: weekContexts.isEmpty ? "This week still needs a visible anchor" : "This week is carrying real goal work",
+            detail: detail,
+            attentionLabel: attentionLabel,
+            goalCountLabel: "\(visibleGoalCount) of \(max(activeGoals.count, 1)) goals represented"
+        )
+    }
+
+    func goalShapingItems(
+        activeGoals: [Goal],
+        weekContexts: [StepContext],
+        feedback: [GoalFeedbackEvent]
+    ) -> [PlanGoalShapingItem] {
+        let weekContextsByGoalID = Dictionary(grouping: weekContexts, by: { $0.goal.id })
+
+        return activeGoals.compactMap { goal in
+            let contexts = weekContextsByGoalID[goal.id] ?? []
+            let evaluation = goal.plan?.evaluation
+            let goalSteps = goal.plan?.sections.flatMap(\.steps) ?? []
+            let goalFeedback = feedback.filter { event in
+                goalSteps.contains(where: { $0.id == event.stepID })
+            }
+            let frictionCount = goalFeedback.filter(isFriction).count
+            let summary: String
+            let pressureLabel: String
+            let attentionReason: String
+            let visualState: AmbitionVisualState
+
+            if let firstContext = contexts.first {
+                summary = firstContext.step.summary ?? firstContext.step.actionability.fallbackMicroStep
+                if frictionCount > 0 {
+                    pressureLabel = "Needs gentler scope"
+                    attentionReason = "Recent friction landed on this goal's current work."
+                    visualState = .warning
+                } else if evaluation?.feasibilityLevel == .notBelievable || evaluation?.feasibilityLevel == .fragile {
+                    pressureLabel = "Fragile"
+                    attentionReason = "The current planning evaluation is warning that this goal is straining the week."
+                    visualState = .warning
+                } else if evaluation?.feasibilityLevel == .tight {
+                    pressureLabel = "Tight"
+                    attentionReason = "This goal is represented, but its current plan needs attention before the week gets crowded."
+                    visualState = .selected
+                } else {
+                    pressureLabel = "Visible"
+                    attentionReason = "This goal already has clear work in the week and is the easiest place to shape next."
+                    visualState = .success
+                }
+            } else {
+                summary = "No current step is visible in this week's shaping view yet."
+                pressureLabel = "Missing from week"
+                attentionReason = "This goal is active, but the week does not yet show a believable step for it."
+                visualState = .default
+            }
+
+            return PlanGoalShapingItem(
+                id: "plan-goal-\(goal.id)",
+                target: GoalRouteTarget(goalID: goal.id),
+                goalTitle: goal.title,
+                summary: summary,
+                pressureLabel: pressureLabel,
+                attentionReason: attentionReason,
+                shellSummary: nil,
+                visualState: visualState
+            )
+        }
+        .sorted { lhs, rhs in
+            let leftRank = shapingRank(for: lhs.visualState)
+            let rightRank = shapingRank(for: rhs.visualState)
+            if leftRank == rightRank {
+                return lhs.goalTitle.localizedCaseInsensitiveCompare(rhs.goalTitle) == .orderedAscending
+            }
+            return leftRank < rightRank
+        }
+        .prefix(4)
+        .map { $0 }
     }
 
     func weekStepContexts(goals: [Goal], now: Date) -> [StepContext] {
@@ -284,6 +423,25 @@ private extension RepositoryBackedPlanService {
             return true
         default:
             return false
+        }
+    }
+
+    func shapingRank(for state: AmbitionVisualState) -> Int {
+        switch state {
+        case .warning:
+            return 0
+        case .selected:
+            return 1
+        case .pressed, .loading:
+            return 2
+        case .default:
+            return 3
+        case .disabled:
+            return 4
+        case .success:
+            return 5
+        case .celebration:
+            return 6
         }
     }
 }

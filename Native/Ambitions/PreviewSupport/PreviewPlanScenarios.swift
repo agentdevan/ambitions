@@ -13,11 +13,39 @@ enum PreviewPlanScenarios {
             label: "Tight",
             visualState: .selected
         ),
+        weeklyIntent: PlanWeeklyIntentSummary(
+            title: "This week is carrying real goal work",
+            detail: "Visible steps exist, but open captures and light friction are the main reasons the week still needs shaping attention.",
+            attentionLabel: "Review pressure",
+            goalCountLabel: "2 of 3 goals represented"
+        ),
         metrics: [
             MetricSummary(id: "plan-goal-coverage", title: "Goal coverage", value: "2/3", detail: "Active goals with visible work", icon: "target"),
             MetricSummary(id: "plan-week-work", title: "Visible work", value: "5", detail: "Current steps in this weekly view", icon: "calendar"),
             MetricSummary(id: "plan-pressure", title: "Planning pressure", value: "2", detail: "Captures, blockers, and clarification", icon: "exclamationmark.triangle"),
             MetricSummary(id: "plan-routines", title: "Routines", value: "1", detail: "Habit-like goals stay under Plan", icon: "repeat")
+        ],
+        goalShapingItems: [
+            PlanGoalShapingItem(
+                id: "plan-goal-native",
+                target: GoalRouteTarget(goalID: "preview-goal-1"),
+                goalTitle: "Ship the native shell",
+                summary: "Draft the weekly review notes and keep the next pass small enough to stay believable.",
+                pressureLabel: "Tight",
+                attentionReason: "This goal is visible in the week, but the surrounding pressure still needs review.",
+                shellSummary: nil,
+                visualState: .selected
+            ),
+            PlanGoalShapingItem(
+                id: "plan-goal-retention",
+                target: GoalRouteTarget(goalID: "preview-goal-2"),
+                goalTitle: "Retention loop",
+                summary: "No current step is visible in this week's shaping view yet.",
+                pressureLabel: "Missing from week",
+                attentionReason: "The goal is active, but the week does not yet show a believable step for it.",
+                shellSummary: nil,
+                visualState: .default
+            )
         ],
         focusItems: [
             PlanFocusItem(
@@ -49,12 +77,19 @@ enum PreviewPlanScenarios {
         subtitle: "Plan will stay honest as goals, captures, and routine work enter the local store.",
         timeframeLabel: "Apr 20-Apr 26",
         posture: PlanPostureState(title: "The week is open", detail: "There is no active local planning pressure yet.", label: "Quiet", visualState: .default),
+        weeklyIntent: PlanWeeklyIntentSummary(
+            title: "Nothing is claiming the week yet",
+            detail: "Plan stays quiet until real goals, captures, or routine work create something worth shaping.",
+            attentionLabel: "Open week",
+            goalCountLabel: "0 active goals"
+        ),
         metrics: [
             MetricSummary(id: "plan-goal-coverage", title: "Goal coverage", value: "0/1", detail: "No active goals yet", icon: "target"),
             MetricSummary(id: "plan-week-work", title: "Visible work", value: "0", detail: "Current steps in this weekly view", icon: "calendar"),
             MetricSummary(id: "plan-pressure", title: "Planning pressure", value: "0", detail: "Captures, blockers, and clarification", icon: "exclamationmark.triangle"),
             MetricSummary(id: "plan-routines", title: "Routines", value: "0", detail: "Habit-like goals stay under Plan", icon: "repeat")
         ],
+        goalShapingItems: [],
         focusItems: [],
         pressureItems: [],
         secondaryDestinations: [
