@@ -11,19 +11,19 @@ final class AppShellNavigationTests: XCTestCase {
     func testLegacyTabRawValuesRemainDecodableAndNormalizeSafely() {
         XCTAssertEqual(AppTab(rawValue: "captures"), .captures)
         XCTAssertEqual(AppTab(rawValue: "habits"), .habits)
-        XCTAssertEqual(AppTab.captures.canonicalTopLevelTab, .today)
+        XCTAssertEqual(AppTab.captures.canonicalTopLevelTab, .plan)
         XCTAssertEqual(AppTab.habits.canonicalTopLevelTab, .plan)
         XCTAssertFalse(AppTab.captures.isCanonicalTopLevel)
         XCTAssertFalse(AppTab.habits.isCanonicalTopLevel)
     }
 
     @MainActor
-    func testNavigationInitializesLegacyCapturesPreferenceIntoTodayInboxRoute() {
+    func testNavigationInitializesLegacyCapturesPreferenceIntoPlanInboxRoute() {
         let navigation = AppNavigationModel(selectedTab: .captures)
 
-        XCTAssertEqual(navigation.selectedTab, .today)
-        XCTAssertEqual(navigation.todayPath, [.capturesInbox])
-        XCTAssertTrue(navigation.planPath.isEmpty)
+        XCTAssertEqual(navigation.selectedTab, .plan)
+        XCTAssertEqual(navigation.planPath, [.capturesInbox])
+        XCTAssertTrue(navigation.insightsPath.isEmpty)
     }
 
     @MainActor
@@ -32,7 +32,17 @@ final class AppShellNavigationTests: XCTestCase {
 
         XCTAssertEqual(navigation.selectedTab, .plan)
         XCTAssertEqual(navigation.planPath, [.habits])
-        XCTAssertTrue(navigation.todayPath.isEmpty)
+        XCTAssertTrue(navigation.insightsPath.isEmpty)
+    }
+
+    @MainActor
+    func testShellOverlayRoutesStayOwnedByTheShellLayer() {
+        let navigation = AppNavigationModel(selectedTab: .today)
+
+        navigation.presentOverlay(.memoryLens)
+
+        XCTAssertEqual(navigation.activeOverlay, .memoryLens)
+        XCTAssertEqual(navigation.selectedTab, .today)
     }
 
     func testStoredLegacyPreferredTabsLoadIntoCanonicalPreferences() async throws {

@@ -3,7 +3,9 @@ import Foundation
 enum AppExternalRoute: Equatable, Sendable {
     case openTab(AppTab)
     case openGoalDetail(goalID: String)
-    case openCapturesInbox
+    case openPlanRoute(PlanRouteTarget)
+    case openInsightsRoute(InsightsRouteTarget)
+    case presentOverlay(ShellOverlayRoute)
     case genericExternalEntry(kind: String, payload: [String: String])
 }
 
@@ -53,7 +55,31 @@ struct AppExternalRouteTranslator {
 
         if host == "captures" || host == "inbox" {
             if pathSegments.isEmpty || pathSegments.first == "inbox" {
-                return .openCapturesInbox
+                return .openPlanRoute(.capturesInbox)
+            }
+        }
+
+        if host == "plan", let first = pathSegments.first {
+            switch first.lowercased() {
+            case "captures":
+                return .openPlanRoute(.capturesInbox)
+            case "habits":
+                return .openPlanRoute(.habits)
+            case "weekly-review":
+                return .openPlanRoute(.weeklyReview)
+            default:
+                break
+            }
+        }
+
+        if host == "insights", let first = pathSegments.first {
+            switch first.lowercased() {
+            case "monthly-review":
+                return .openInsightsRoute(.monthlyReview)
+            case "history":
+                return .openInsightsRoute(.history)
+            default:
+                break
             }
         }
 
@@ -72,7 +98,7 @@ struct AppExternalRouteTranslator {
             return .openTab(tab)
         }
         if payload.action == "open-captures-inbox" || payload.values["surface"] == "captures-inbox" {
-            return .openCapturesInbox
+            return .openPlanRoute(.capturesInbox)
         }
         return .genericExternalEntry(kind: "notification.\(payload.action)", payload: payload.values)
     }
@@ -86,7 +112,7 @@ struct AppExternalRouteTranslator {
             return .openTab(tab)
         }
         if payload.action == "open-captures-inbox" || payload.values["surface"] == "captures-inbox" {
-            return .openCapturesInbox
+            return .openPlanRoute(.capturesInbox)
         }
         return .genericExternalEntry(kind: "widget.\(payload.action)", payload: payload.values)
     }
@@ -97,8 +123,24 @@ struct AppExternalRouteTranslator {
             return ExternalSurfaceActionPayload.deepLinkURL(surface: .tab, tab: tab.rawValue)
         case let .openGoalDetail(goalID):
             return ExternalSurfaceActionPayload.deepLinkURL(surface: .goalDetail, goalID: goalID)
-        case .openCapturesInbox:
-            return ExternalSurfaceActionPayload.deepLinkURL(surface: .capturesInbox)
+        case let .openPlanRoute(target):
+            switch target {
+            case .capturesInbox:
+                return ExternalSurfaceActionPayload.deepLinkURL(surface: .capturesInbox)
+            case .habits:
+                return URL(string: "ambitions://plan/habits")
+            case .weeklyReview:
+                return URL(string: "ambitions://plan/weekly-review")
+            }
+        case let .openInsightsRoute(target):
+            switch target {
+            case .monthlyReview:
+                return URL(string: "ambitions://insights/monthly-review")
+            case .history:
+                return URL(string: "ambitions://insights/history")
+            }
+        case let .presentOverlay(route):
+            return URL(string: "ambitions://overlay/\(route.rawValue)")
         case let .genericExternalEntry(kind, payload):
             var components = URLComponents()
             components.scheme = "ambitions"
@@ -129,11 +171,36 @@ struct AppExternalRouteTranslator {
                 goalID: goalID,
                 tab: AppTab.goals.rawValue
             )
-        case .openCapturesInbox:
-            return ExternalSurfaceActionPayload.routePayload(
-                surface: .capturesInbox,
-                tab: AppTab.today.rawValue
-            )
+        case let .openPlanRoute(target):
+            switch target {
+            case .capturesInbox:
+                return ExternalSurfaceActionPayload.routePayload(
+                    surface: .capturesInbox,
+                    tab: AppTab.plan.rawValue
+                )
+            case .habits:
+                return [
+                    ExternalSurfaceActionPayload.Key.surface: ExternalSurfacePayloadSurface.tab.rawValue,
+                    ExternalSurfaceActionPayload.Key.tab: AppTab.plan.rawValue,
+                    "subroute": target.rawValue
+                ]
+            case .weeklyReview:
+                return [
+                    ExternalSurfaceActionPayload.Key.surface: "weekly-review",
+                    ExternalSurfaceActionPayload.Key.tab: AppTab.plan.rawValue
+                ]
+            }
+        case let .openInsightsRoute(target):
+            return [
+                ExternalSurfaceActionPayload.Key.surface: target.rawValue,
+                ExternalSurfaceActionPayload.Key.tab: AppTab.insights.rawValue
+            ]
+        case let .presentOverlay(route):
+            return [
+                ExternalSurfaceActionPayload.Key.surface: "overlay",
+                "overlay": route.rawValue,
+                ExternalSurfaceActionPayload.Key.tab: AppTab.today.rawValue
+            ]
         case let .genericExternalEntry(kind, payload):
             var values = payload
             values["surface"] = kind
@@ -157,12 +224,33 @@ struct AppExternalRouteTranslator {
                 goalID: goalID,
                 tab: AppTab.goals.rawValue
             )
-        case .openCapturesInbox:
-            return ExternalSurfaceActionPayload.commandPayload(
-                action: actionName,
-                surface: .capturesInbox,
-                tab: AppTab.today.rawValue
-            )
+        case let .openPlanRoute(target):
+            switch target {
+            case .capturesInbox:
+                return ExternalSurfaceActionPayload.commandPayload(
+                    action: actionName,
+                    surface: .capturesInbox,
+                    tab: AppTab.plan.rawValue
+                )
+            case .habits:
+                var values = routePayload(for: route)
+                values[ExternalSurfaceActionPayload.Key.action] = actionName.rawValue
+                return values
+            case .weeklyReview:
+                var values = routePayload(for: route)
+                values[ExternalSurfaceActionPayload.Key.action] = actionName.rawValue
+                return values
+            }
+        case let .openInsightsRoute(target):
+            var values = routePayload(for: route)
+            values[ExternalSurfaceActionPayload.Key.action] = actionName.rawValue
+            values["insightsRoute"] = target.rawValue
+            return values
+        case let .presentOverlay(overlay):
+            var values = routePayload(for: route)
+            values[ExternalSurfaceActionPayload.Key.action] = actionName.rawValue
+            values["overlay"] = overlay.rawValue
+            return values
         case .genericExternalEntry:
             var values = routePayload(for: route)
             values[ExternalSurfaceActionPayload.Key.action] = actionName.rawValue
@@ -227,10 +315,14 @@ final class DefaultAppExternalRouter: AppExternalRouting {
             navigation.selectTab(tab)
         case let .openGoalDetail(goalID):
             navigation.openGoalDetail(goalID: goalID)
-        case .openCapturesInbox:
-            navigation.openCapturesInbox()
+        case let .openPlanRoute(target):
+            navigation.openPlanRoute(target)
+        case let .openInsightsRoute(target):
+            navigation.openInsightsRoute(target)
+        case let .presentOverlay(route):
+            navigation.presentOverlay(route)
         case .genericExternalEntry:
-            navigation.selectedTab = .today
+            navigation.fallbackExternalLanding()
         }
     }
 }

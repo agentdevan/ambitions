@@ -24,7 +24,7 @@ enum AmbitionsAppShortcutDestination: String, CaseIterable, AppEnum {
         case .plan:
             return .openTab(.plan)
         case .capturesInbox:
-            return .openCapturesInbox
+            return .openPlanRoute(.capturesInbox)
         }
     }
 

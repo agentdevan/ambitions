@@ -198,13 +198,13 @@ struct DefaultAppActionRouter: AppActionRouting {
     func handle(_ action: WidgetAction) async {
         switch action.identity.family {
         case .insightStats, .weeklyTrend, .recentActivity:
-            navigation.selectedTab = .insights
+            navigation.selectTab(.insights)
         case .profileSummary, .settingsGroup:
-            navigation.selectedTab = .profile
+            navigation.selectTab(.profile)
         case .habitSummary, .streak:
             navigation.openHabits()
         case .dailyTargets, .focusNow, .freeTime, .milestonePrompt, .goalsList, .celebration:
-            navigation.selectedTab = .today
+            navigation.selectTab(.today)
         }
     }
 }

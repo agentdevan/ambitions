@@ -6,10 +6,12 @@ struct ProfileScreen: View {
     @Environment(\.ambitionTheme) private var theme
     @Environment(\.accessibilityReduceMotion) private var reduceMotion
     @State private var viewModel: ProfileViewModel
+    private let showsNavigationChrome: Bool
 
     @MainActor
-    init(viewModel: ProfileViewModel? = nil) {
+    init(viewModel: ProfileViewModel? = nil, showsNavigationChrome: Bool = true) {
         _viewModel = State(initialValue: viewModel ?? ProfileViewModel())
+        self.showsNavigationChrome = showsNavigationChrome
     }
 
     var body: some View {
@@ -98,7 +100,7 @@ struct ProfileScreen: View {
                 }
             }
         }
-        .navigationTitle("Profile")
+        .navigationTitle(showsNavigationChrome ? "Profile" : "")
         .refreshable {
             await refresh()
         }

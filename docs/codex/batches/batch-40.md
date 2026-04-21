@@ -1,6 +1,6 @@
 ﻿# Batch 40 - Front-End Transformation 01 / Shell reconsideration and navigation architecture
 ## Status
-Queued
+Active
 ## Program
 Post-hardening Front-End Transformation Program
 ## Canon Source
@@ -13,8 +13,6 @@ Post-hardening Front-End Transformation Program
 - [novel-interaction-systems-spec.md](../../canon/design/novel-interaction-systems-spec.md)
 
 Key systems in this batch:
-- Cognitive Mode Lens
-- Continuity Ribbon
 - Quiet Command Sheet
 - Object-Persistent Navigation
 - Adaptive Header Rail
@@ -24,7 +22,7 @@ Execution classification:
 - later core: Cognitive Mode Lens, Continuity Ribbon
 ## Start Gate
 - Start only after Batch 38 is complete and stable.
-- Do not activate or implement this batch early; follow the registry and dependency order.
+- The live registry is the operational source of truth for activation state.
 ## Goal
 Fully reconsider the shell and navigation model, then implement the new canonical shell architecture for the iPhone app.
 ## In Scope
@@ -40,6 +38,15 @@ Fully reconsider the shell and navigation model, then implement the new canonica
 - shell landing logic updates from notifications, widgets, shortcuts, and share flows
 - structural decisions for where Captures, Habits, Review, History, Trust, and Memory Lens live
 - shell-level motion, focus, and hierarchy rules
+## Canonical Batch 40 Decisions
+- five top-level tabs remain: Today, Goals, Plan, Insights, Profile
+- Captures moves from Today-owned routing to Plan-owned subordinate routing
+- Habits remains Plan-owned
+- Weekly Review belongs under Plan
+- Monthly Review and History belong under Insights
+- Trust Center remains Profile-owned and is not shell-global
+- Memory Lens and Quiet Command Sheet are shell overlays, not tabs
+- Cognitive Mode Lens and Continuity Ribbon remain deferred later-core systems and must not ship as user-facing Batch 40 features
 ## Deferred, Not Excluded
 - full individual surface redesigns
 - full external-surface UI implementation

@@ -10,11 +10,13 @@ struct TodayScreen: View {
     @State private var reflectionExpanded = false
 
     private let autoLoad: Bool
+    private let showsNavigationChrome: Bool
 
     @MainActor
-    init(viewModel: TodayViewModel? = nil, autoLoad: Bool = true) {
+    init(viewModel: TodayViewModel? = nil, autoLoad: Bool = true, showsNavigationChrome: Bool = true) {
         _viewModel = State(initialValue: viewModel ?? TodayViewModel())
         self.autoLoad = autoLoad
+        self.showsNavigationChrome = showsNavigationChrome
     }
 
     var body: some View {
@@ -82,15 +84,17 @@ struct TodayScreen: View {
                 await viewModel.refresh(using: container.todayService, userDisplayName: container.session.userDisplayName)
             }
         }
-        .navigationTitle("Today")
+        .navigationTitle(showsNavigationChrome ? "Today" : "")
         .toolbar {
-            ToolbarItem(placement: .topBarTrailing) {
-                Button {
-                    container.navigation.openCapturesInbox()
-                } label: {
-                    Label("Captures", systemImage: AppTab.captures.systemImage)
+            if showsNavigationChrome {
+                ToolbarItem(placement: .topBarTrailing) {
+                    Button {
+                        container.navigation.openCapturesInbox()
+                    } label: {
+                        Label("Captures", systemImage: AppTab.captures.systemImage)
+                    }
+                    .accessibilityIdentifier("today.open-captures-button")
                 }
-                .accessibilityIdentifier("today.open-captures-button")
             }
         }
         .animation(theme.motion.animation(reduceMotion: reduceMotion, emphasis: true), value: viewModel.stateKey)

@@ -35,7 +35,7 @@ final class ExternalRoutingTests: XCTestCase {
 
         let route = translator.route(fromDeepLink: url)
 
-        XCTAssertEqual(route, .openCapturesInbox)
+        XCTAssertEqual(route, .openPlanRoute(.capturesInbox))
     }
 
     func testDeepLinkTranslatorFallsBackToGenericExternalEntry() throws {
@@ -76,7 +76,7 @@ final class ExternalRoutingTests: XCTestCase {
             )
         )
 
-        XCTAssertEqual(route, .openCapturesInbox)
+        XCTAssertEqual(route, .openPlanRoute(.capturesInbox))
     }
 
     func testWidgetTranslatorRoutesCapturesInboxPayload() {
@@ -89,7 +89,7 @@ final class ExternalRoutingTests: XCTestCase {
             )
         )
 
-        XCTAssertEqual(route, .openCapturesInbox)
+        XCTAssertEqual(route, .openPlanRoute(.capturesInbox))
     }
 
     func testLegacyTabPayloadsStillParseForCompatibility() {
@@ -110,14 +110,14 @@ final class ExternalRoutingTests: XCTestCase {
 
         let todayURL = try XCTUnwrap(translator.deepLinkURL(for: .openTab(.today)))
         let goalURL = try XCTUnwrap(translator.deepLinkURL(for: .openGoalDetail(goalID: "goal-123")))
-        let capturesURL = try XCTUnwrap(translator.deepLinkURL(for: .openCapturesInbox))
+        let capturesURL = try XCTUnwrap(translator.deepLinkURL(for: .openPlanRoute(.capturesInbox)))
 
         XCTAssertEqual(todayURL.absoluteString, "ambitions://tab/today")
         XCTAssertEqual(goalURL.absoluteString, "ambitions://goal/goal-123")
         XCTAssertEqual(capturesURL.absoluteString, "ambitions://captures/inbox")
         XCTAssertEqual(translator.route(fromDeepLink: todayURL), .openTab(.today))
         XCTAssertEqual(translator.route(fromDeepLink: goalURL), .openGoalDetail(goalID: "goal-123"))
-        XCTAssertEqual(translator.route(fromDeepLink: capturesURL), .openCapturesInbox)
+        XCTAssertEqual(translator.route(fromDeepLink: capturesURL), .openPlanRoute(.capturesInbox))
     }
 
     func testNotificationAndWidgetPayloadsUseSharedRoutePayloadShape() {
@@ -163,16 +163,16 @@ final class ExternalRoutingTests: XCTestCase {
         )
 
         XCTAssertEqual(translator.route(fromWidget: oldGoalPayload), .openGoalDetail(goalID: "goal-old"))
-        XCTAssertEqual(translator.route(fromNotification: oldCapturesPayload), .openCapturesInbox)
+        XCTAssertEqual(translator.route(fromNotification: oldCapturesPayload), .openPlanRoute(.capturesInbox))
     }
 
-    func testCapturesInboxPayloadUsesCanonicalTodayTabHint() {
+    func testCapturesInboxPayloadUsesCanonicalPlanTabHint() {
         let translator = AppExternalRouteTranslator()
 
-        let payload = translator.routePayload(for: .openCapturesInbox)
+        let payload = translator.routePayload(for: .openPlanRoute(.capturesInbox))
 
         XCTAssertEqual(payload["surface"], "captures-inbox")
-        XCTAssertEqual(payload["tab"], AppTab.today.rawValue)
+        XCTAssertEqual(payload["tab"], AppTab.plan.rawValue)
     }
 
     @MainActor
@@ -190,15 +190,15 @@ final class ExternalRoutingTests: XCTestCase {
     }
 
     @MainActor
-    func testRouterDispatchesCapturesInboxToCapturesTab() {
+    func testRouterDispatchesCapturesInboxToPlanOwnedInbox() {
         let navigation = AppNavigationModel(selectedTab: .insights)
         let router = DefaultAppExternalRouter(navigation: navigation)
 
-        router.dispatch(.openCapturesInbox, source: .widgetAction)
+        router.dispatch(.openPlanRoute(.capturesInbox), source: .widgetAction)
 
-        XCTAssertEqual(navigation.selectedTab, .today)
-        XCTAssertEqual(navigation.todayPath, [.capturesInbox])
-        XCTAssertEqual(navigation.lastExternalRoute, .openCapturesInbox)
+        XCTAssertEqual(navigation.selectedTab, .plan)
+        XCTAssertEqual(navigation.planPath, [.capturesInbox])
+        XCTAssertEqual(navigation.lastExternalRoute, .openPlanRoute(.capturesInbox))
         XCTAssertEqual(navigation.lastExternalRouteSource, .widgetAction)
     }
 
@@ -208,11 +208,24 @@ final class ExternalRoutingTests: XCTestCase {
         let router = DefaultAppExternalRouter(navigation: navigation)
 
         router.dispatch(.openTab(.captures), source: .deepLink)
-        XCTAssertEqual(navigation.selectedTab, .today)
-        XCTAssertEqual(navigation.todayPath, [.capturesInbox])
+        XCTAssertEqual(navigation.selectedTab, .plan)
+        XCTAssertEqual(navigation.planPath, [.capturesInbox])
 
         router.dispatch(.openTab(.habits), source: .deepLink)
         XCTAssertEqual(navigation.selectedTab, .plan)
         XCTAssertEqual(navigation.planPath, [.habits])
+    }
+
+    @MainActor
+    func testRouterFallsBackToExplicitTodayLandingForUnknownExternalEntries() {
+        let navigation = AppNavigationModel(selectedTab: .plan)
+        navigation.openPlanRoute(.capturesInbox)
+        let router = DefaultAppExternalRouter(navigation: navigation)
+
+        router.dispatch(.genericExternalEntry(kind: "future", payload: [:]), source: .deepLink)
+
+        XCTAssertEqual(navigation.selectedTab, .today)
+        XCTAssertTrue(navigation.goalsPath.isEmpty)
+        XCTAssertEqual(navigation.lastExternalRouteSource, .deepLink)
     }
 }

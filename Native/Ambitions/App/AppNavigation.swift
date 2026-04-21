@@ -26,14 +26,25 @@ struct GoalRouteTarget: Hashable, Identifiable, Sendable {
     var hasAddressableContent: Bool { goalID != nil || draftID != nil }
 }
 
-enum TodayRouteTarget: String, Hashable, Identifiable, Sendable {
+enum PlanRouteTarget: String, Hashable, Identifiable, Sendable {
     case capturesInbox
+    case habits
+    case weeklyReview
 
     var id: String { rawValue }
 }
 
-enum PlanRouteTarget: String, Hashable, Identifiable, Sendable {
-    case habits
+enum InsightsRouteTarget: String, Hashable, Identifiable, Sendable {
+    case monthlyReview
+    case history
+
+    var id: String { rawValue }
+}
+
+enum ShellOverlayRoute: String, Hashable, Identifiable, Sendable {
+    case quietCommandSheet
+    case memoryLens
+    case globalCreateEntry
 
     var id: String { rawValue }
 }
@@ -42,22 +53,34 @@ enum PlanRouteTarget: String, Hashable, Identifiable, Sendable {
 @Observable
 final class AppNavigationModel {
     var selectedTab: AppTab
-    var todayPath: [TodayRouteTarget]
     var goalsPath: [GoalRouteTarget]
     var planPath: [PlanRouteTarget]
+    var insightsPath: [InsightsRouteTarget]
+    var activeOverlay: ShellOverlayRoute?
     var lastExternalRoute: AppExternalRoute?
     var lastExternalRouteSource: AppExternalRouteSource?
 
     init(selectedTab: AppTab) {
         self.selectedTab = selectedTab.canonicalTopLevelTab
-        todayPath = selectedTab == .captures ? [.capturesInbox] : []
         goalsPath = []
-        planPath = selectedTab == .habits ? [.habits] : []
+        planPath = []
+        insightsPath = []
+        activeOverlay = nil
         lastExternalRoute = nil
         lastExternalRouteSource = nil
+
+        switch selectedTab {
+        case .captures:
+            planPath = [.capturesInbox]
+        case .habits:
+            planPath = [.habits]
+        case .today, .goals, .plan, .insights, .profile:
+            break
+        }
     }
 
     func selectTab(_ tab: AppTab) {
+        dismissOverlay()
         selectedTab = tab.canonicalTopLevelTab
         if tab == .captures {
             openCapturesInbox()
@@ -68,6 +91,7 @@ final class AppNavigationModel {
 
     func openGoalDetail(_ target: GoalRouteTarget) {
         guard target.hasAddressableContent else { return }
+        dismissOverlay()
         selectedTab = .goals
         goalsPath = [target]
     }
@@ -84,13 +108,56 @@ final class AppNavigationModel {
         goalsPath = []
     }
 
+    func openPlanRoute(_ target: PlanRouteTarget) {
+        dismissOverlay()
+        selectedTab = .plan
+        planPath = [target]
+    }
+
+    func resetPlanPath() {
+        planPath = []
+    }
+
+    func openInsightsRoute(_ target: InsightsRouteTarget) {
+        dismissOverlay()
+        selectedTab = .insights
+        insightsPath = [target]
+    }
+
+    func resetInsightsPath() {
+        insightsPath = []
+    }
+
     func openCapturesInbox() {
-        selectedTab = .today
-        todayPath = [.capturesInbox]
+        openPlanRoute(.capturesInbox)
     }
 
     func openHabits() {
-        selectedTab = .plan
-        planPath = [.habits]
+        openPlanRoute(.habits)
+    }
+
+    func openWeeklyReview() {
+        openPlanRoute(.weeklyReview)
+    }
+
+    func openMonthlyReview() {
+        openInsightsRoute(.monthlyReview)
+    }
+
+    func openHistory() {
+        openInsightsRoute(.history)
+    }
+
+    func presentOverlay(_ route: ShellOverlayRoute) {
+        activeOverlay = route
+    }
+
+    func dismissOverlay() {
+        activeOverlay = nil
+    }
+
+    func fallbackExternalLanding() {
+        dismissOverlay()
+        selectedTab = .today
     }
 }

@@ -18,7 +18,7 @@ enum AppTab: String, CaseIterable, Hashable, Identifiable, Codable {
     var canonicalTopLevelTab: AppTab {
         switch self {
         case .captures:
-            return .today
+            return .plan
         case .habits:
             return .plan
         case .today, .goals, .plan, .insights, .profile:

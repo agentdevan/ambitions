@@ -5,6 +5,9 @@ struct AmbitionsRootView: View {
     @Environment(\.colorScheme) private var systemColorScheme
     private let container: AppContainer
     @State private var navigation: AppNavigationModel
+    @State private var isCreateGoalPresented = false
+    @State private var creationMessage: GoalDetailInlineMessage?
+    @State private var goalsRefreshID = 0
 
     init(container: AppContainer) {
         self.container = container
@@ -12,37 +15,61 @@ struct AmbitionsRootView: View {
     }
 
     var body: some View {
-        TabView(selection: $navigation.selectedTab) {
-            todayNavigation()
-            goalsNavigation()
-            planNavigation()
-            tabNavigation(tab: .insights) { InsightsScreen() }
-            tabNavigation(tab: .profile) { ProfileScreen() }
+        ZStack(alignment: .bottomTrailing) {
+            TabView(selection: $navigation.selectedTab) {
+                todayNavigation()
+                goalsNavigation()
+                planNavigation()
+                insightsNavigation()
+                profileNavigation()
+            }
+
+            shellGlobalEntryButton
+        }
+        .sheet(item: $navigation.activeOverlay) { route in
+            AppShellOverlayPlaceholderView(route: route) {
+                navigation.dismissOverlay()
+            }
+        }
+        .sheet(isPresented: $isCreateGoalPresented) {
+            NavigationStack {
+                CreateGoalScreen { response in
+                    let body: String = {
+                        switch response.resultKind {
+                        case .planned:
+                            return "\(response.blueprint.title) is now in the portfolio with a canonical plan."
+                        case .starterPlanned:
+                            return "\(response.blueprint.title) is now in the portfolio with a starter plan."
+                        case .clarificationRequired:
+                            return "\(response.blueprint.title) needs one clarification before Ambitions treats it as a live goal."
+                        case .blocked:
+                            return "\(response.blueprint.title) was saved as a blocked draft with the missing constraint visible."
+                        }
+                    }()
+                    creationMessage = GoalDetailInlineMessage(
+                        title: "Goal created",
+                        body: body,
+                        state: .success
+                    )
+                    goalsRefreshID += 1
+                }
+            }
         }
         .appContainer(container)
         .preferredColorScheme(container.appearancePreference.preferredColorScheme)
         .ambitionTheme(container.appearancePreference.resolveTheme(systemColorScheme: systemColorScheme))
     }
 
-    private func tabNavigation<Content: View>(tab: AppTab, @ViewBuilder content: () -> Content) -> some View {
-        NavigationStack {
-            content()
-        }
-        .tag(tab)
-        .tabItem {
-            Label(tab.title, systemImage: tab.systemImage)
-        }
-    }
-
     private func todayNavigation() -> some View {
-        NavigationStack(path: $navigation.todayPath) {
-            TodayScreen()
-                .navigationDestination(for: TodayRouteTarget.self) { target in
-                    switch target {
-                    case .capturesInbox:
-                        CapturesScreen()
-                    }
-                }
+        NavigationStack {
+            AppShellScaffold(
+                title: "Today",
+                subtitle: "Execution",
+                posture: .execution,
+                trailingButtons: shellUtilityButtons(for: .today)
+            ) {
+                TodayScreen(showsNavigationChrome: false)
+            }
         }
         .tag(AppTab.today)
         .tabItem {
@@ -52,7 +79,31 @@ struct AmbitionsRootView: View {
 
     private func goalsNavigation() -> some View {
         NavigationStack(path: $navigation.goalsPath) {
-            GoalsScreen()
+            AppShellScaffold(
+                title: "Goals",
+                subtitle: "Direction",
+                posture: .direction,
+                trailingButtons: shellUtilityButtons(for: .goals) + [
+                    AppShellHeaderButton(
+                        title: "Create Goal",
+                        systemImage: "plus",
+                        accessibilityIdentifier: "shell.goals.create-button"
+                    ) {
+                        creationMessage = nil
+                        isCreateGoalPresented = true
+                    }
+                ]
+            ) {
+                GoalsScreen(
+                    externalCreationMessage: creationMessage,
+                    externalRefreshID: goalsRefreshID,
+                    showsNavigationChrome: false,
+                    onCreateGoal: {
+                        creationMessage = nil
+                        isCreateGoalPresented = true
+                    }
+                )
+            }
                 .navigationDestination(for: GoalRouteTarget.self) { target in
                     GoalDetailScreen(target: target)
                 }
@@ -65,11 +116,61 @@ struct AmbitionsRootView: View {
 
     private func planNavigation() -> some View {
         NavigationStack(path: $navigation.planPath) {
-            PlanScreen()
+            AppShellScaffold(
+                title: "Plan",
+                subtitle: "Shaping",
+                posture: .shaping,
+                trailingButtons: [
+                    AppShellHeaderButton(
+                        title: "Captures",
+                        systemImage: AppTab.captures.systemImage,
+                        accessibilityIdentifier: "shell.plan.open-captures-button"
+                    ) {
+                        navigation.openCapturesInbox()
+                    }
+                ] + shellUtilityButtons(for: .plan)
+            ) {
+                PlanScreen(showsNavigationChrome: false)
+            }
                 .navigationDestination(for: PlanRouteTarget.self) { target in
                     switch target {
+                    case .capturesInbox:
+                        AppShellScaffold(
+                            title: "Captures",
+                            subtitle: "Plan-owned inbox",
+                            posture: .shaping,
+                            backButtonAccessibilityIdentifier: "shell.plan.back-button",
+                            onBack: { navigation.resetPlanPath() },
+                            trailingButtons: shellUtilityButtons(for: .plan)
+                        ) {
+                            CapturesScreen()
+                        }
                     case .habits:
-                        HabitsScreen()
+                        AppShellScaffold(
+                            title: "Habits",
+                            subtitle: "Plan-owned loop view",
+                            posture: .shaping,
+                            backButtonAccessibilityIdentifier: "shell.plan.back-button",
+                            onBack: { navigation.resetPlanPath() },
+                            trailingButtons: shellUtilityButtons(for: .plan)
+                        ) {
+                            HabitsScreen()
+                        }
+                    case .weeklyReview:
+                        AppShellScaffold(
+                            title: "Weekly Review",
+                            subtitle: "Plan-owned review route",
+                            posture: .shaping,
+                            backButtonAccessibilityIdentifier: "shell.plan.back-button",
+                            onBack: { navigation.resetPlanPath() },
+                            trailingButtons: shellUtilityButtons(for: .plan)
+                        ) {
+                            AppShellPlaceholderRouteView(
+                                title: "Weekly Review",
+                                subtitle: "Batch 40 establishes ownership without shipping the later Plan review redesign.",
+                                message: "Weekly Review now belongs to Plan at the shell layer. The full review surface stays deferred to the later Plan program."
+                            )
+                        }
                     }
                 }
                 .navigationDestination(for: GoalRouteTarget.self) { target in
@@ -80,5 +181,99 @@ struct AmbitionsRootView: View {
         .tabItem {
             Label(AppTab.plan.title, systemImage: AppTab.plan.systemImage)
         }
+    }
+
+    private func insightsNavigation() -> some View {
+        NavigationStack(path: $navigation.insightsPath) {
+            AppShellScaffold(
+                title: "Insights",
+                subtitle: "Reflection",
+                posture: .reflection,
+                trailingButtons: shellUtilityButtons(for: .insights)
+            ) {
+                InsightsScreen(showsNavigationChrome: false)
+            }
+            .navigationDestination(for: InsightsRouteTarget.self) { target in
+                switch target {
+                case .monthlyReview:
+                    AppShellScaffold(
+                        title: "Monthly Review",
+                        subtitle: "Insights-owned review route",
+                        posture: .reflection,
+                        backButtonAccessibilityIdentifier: "shell.insights.back-button",
+                        onBack: { navigation.resetInsightsPath() },
+                        trailingButtons: shellUtilityButtons(for: .insights)
+                    ) {
+                        AppShellPlaceholderRouteView(
+                            title: "Monthly Review",
+                            subtitle: "Batch 40 establishes ownership without starting the later reflection rebuild.",
+                            message: "Monthly Review now belongs to Insights at the shell layer. The full surface stays deferred to the later reflection work."
+                        )
+                    }
+                case .history:
+                    AppShellScaffold(
+                        title: "History",
+                        subtitle: "Insights-owned history route",
+                        posture: .reflection,
+                        backButtonAccessibilityIdentifier: "shell.insights.back-button",
+                        onBack: { navigation.resetInsightsPath() },
+                        trailingButtons: shellUtilityButtons(for: .insights)
+                    ) {
+                        AppShellPlaceholderRouteView(
+                            title: "History",
+                            subtitle: "Batch 40 establishes ownership without activating the later history redesign.",
+                            message: "History now belongs to Insights at the shell layer. Deeper recall and reflection remain deferred to later batches."
+                        )
+                    }
+                }
+            }
+        }
+        .tag(AppTab.insights)
+        .tabItem {
+            Label(AppTab.insights.title, systemImage: AppTab.insights.systemImage)
+        }
+    }
+
+    private func profileNavigation() -> some View {
+        NavigationStack {
+            AppShellScaffold(
+                title: "Profile",
+                subtitle: "Utility",
+                posture: .utility,
+                trailingButtons: shellUtilityButtons(for: .profile)
+            ) {
+                ProfileScreen(showsNavigationChrome: false)
+            }
+        }
+        .tag(AppTab.profile)
+        .tabItem {
+            Label(AppTab.profile.title, systemImage: AppTab.profile.systemImage)
+        }
+    }
+
+    private func shellUtilityButtons(for tab: AppTab) -> [AppShellHeaderButton] {
+        [
+            AppShellHeaderButton(
+                title: "Memory Lens",
+                systemImage: "magnifyingglass",
+                accessibilityIdentifier: "shell.\(tab.rawValue).memory-lens-button"
+            ) {
+                navigation.presentOverlay(.memoryLens)
+            }
+        ]
+    }
+
+    private var shellGlobalEntryButton: some View {
+        Button {
+            navigation.presentOverlay(.quietCommandSheet)
+        } label: {
+            Label("Command", systemImage: "plus")
+                .labelStyle(.iconOnly)
+                .frame(width: 52, height: 52)
+        }
+        .buttonStyle(AmbitionPressableButtonStyle(state: .selected))
+        .padding(.trailing, 20)
+        .padding(.bottom, 88)
+        .accessibilityIdentifier("shell.global-entry-button")
     }
 }

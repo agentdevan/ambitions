@@ -84,7 +84,7 @@ final class ExternalActionCommandServiceTests: XCTestCase {
         XCTAssertEqual(router.dispatchedRoutes.map(\.route), [
             .openTab(.today),
             .openGoalDetail(goalID: "goal-123"),
-            .openCapturesInbox,
+            .openPlanRoute(.capturesInbox),
         ])
         XCTAssertEqual(router.dispatchedRoutes.map(\.source), [
             .widgetAction,

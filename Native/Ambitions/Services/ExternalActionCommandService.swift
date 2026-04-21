@@ -184,7 +184,7 @@ final class DefaultExternalActionCommandService: ExternalActionCommandExecuting 
         case let .openGoalDetail(goalID):
             return .openGoalDetail(goalID: goalID)
         case .openCapturesInbox:
-            return .openCapturesInbox
+            return .openPlanRoute(.capturesInbox)
         }
     }
 }

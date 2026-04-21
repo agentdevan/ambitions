@@ -7,10 +7,12 @@ struct InsightsScreen: View {
     @Environment(\.ambitionTheme) private var theme
     @Environment(\.accessibilityReduceMotion) private var reduceMotion
     @State private var viewModel: InsightsViewModel
+    private let showsNavigationChrome: Bool
 
     @MainActor
-    init(viewModel: InsightsViewModel? = nil) {
+    init(viewModel: InsightsViewModel? = nil, showsNavigationChrome: Bool = true) {
         _viewModel = State(initialValue: viewModel ?? InsightsViewModel())
+        self.showsNavigationChrome = showsNavigationChrome
     }
 
     var body: some View {
@@ -68,7 +70,7 @@ struct InsightsScreen: View {
                 }
             }
         }
-        .navigationTitle("Insights")
+        .navigationTitle(showsNavigationChrome ? "Insights" : "")
         .refreshable {
             await viewModel.refresh(using: container.insightsService)
         }

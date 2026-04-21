@@ -6,10 +6,12 @@ struct PlanScreen: View {
     @Environment(\.ambitionTheme) private var theme
     @Environment(\.accessibilityReduceMotion) private var reduceMotion
     @State private var viewModel: PlanViewModel
+    private let showsNavigationChrome: Bool
 
     @MainActor
-    init(viewModel: PlanViewModel? = nil) {
+    init(viewModel: PlanViewModel? = nil, showsNavigationChrome: Bool = true) {
         _viewModel = State(initialValue: viewModel ?? PlanViewModel())
+        self.showsNavigationChrome = showsNavigationChrome
     }
 
     var body: some View {
@@ -58,15 +60,17 @@ struct PlanScreen: View {
             .padding(.vertical, theme.spacing.md)
         }
         .scrollIndicators(.hidden)
-        .navigationTitle("Plan")
+        .navigationTitle(showsNavigationChrome ? "Plan" : "")
         .toolbar {
-            ToolbarItem(placement: .topBarTrailing) {
-                Button {
-                    container.navigation.openHabits()
-                } label: {
-                    Label("Habits", systemImage: AppTab.habits.systemImage)
+            if showsNavigationChrome {
+                ToolbarItem(placement: .topBarTrailing) {
+                    Button {
+                        container.navigation.openHabits()
+                    } label: {
+                        Label("Habits", systemImage: AppTab.habits.systemImage)
+                    }
+                    .accessibilityIdentifier("plan.open-habits-button")
                 }
-                .accessibilityIdentifier("plan.open-habits-button")
             }
         }
         .refreshable {

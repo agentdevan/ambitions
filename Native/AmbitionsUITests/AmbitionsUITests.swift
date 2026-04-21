@@ -52,23 +52,30 @@ final class AmbitionsUITests: XCTestCase {
         XCTAssertFalse(app.tabBars.buttons["Captures"].exists)
         XCTAssertFalse(app.tabBars.buttons["Habits"].exists)
         XCTAssertTrue(app.tabBars.buttons["Today"].isSelected)
-
-        app.buttons["today.open-captures-button"].tap()
-        XCTAssertTrue(app.staticTexts["No captures yet"].waitForExistence(timeout: 10))
+        XCTAssertTrue(app.staticTexts["shell.header.title"].waitForExistence(timeout: 10))
 
         app.tabBars.buttons["Plan"].tap()
+        XCTAssertTrue(app.staticTexts["shell.header.title"].waitForExistence(timeout: 10))
+        app.buttons["shell.plan.open-captures-button"].tap()
+        XCTAssertTrue(app.staticTexts["No captures yet"].waitForExistence(timeout: 10))
+
+        app.buttons["shell.plan.back-button"].tap()
         XCTAssertTrue(app.descendants(matching: .any)["plan.screen"].waitForExistence(timeout: 10))
         XCTAssertTrue(app.descendants(matching: .any)["plan.weekly-intent-card"].waitForExistence(timeout: 10))
         XCTAssertTrue(scrollUntilElementExists("plan.goal-shaping-card", in: app))
-        app.buttons["plan.open-habits-button"].tap()
+        XCTAssertTrue(scrollUntilElementExists("plan.open-plan-habits-button", in: app))
+        app.buttons["plan.open-plan-habits-button"].tap()
         XCTAssertTrue(app.staticTexts["No habits are live yet"].waitForExistence(timeout: 10))
+        app.buttons["shell.plan.back-button"].tap()
 
         app.tabBars.buttons["Insights"].tap()
+        XCTAssertTrue(app.staticTexts["shell.header.title"].waitForExistence(timeout: 10))
         XCTAssertTrue(app.descendants(matching: .any)["insights.screen"].waitForExistence(timeout: 10))
         XCTAssertTrue(app.descendants(matching: .any)["insights.posture-card"].waitForExistence(timeout: 10))
         XCTAssertTrue(app.descendants(matching: .any)["insights.change-card"].waitForExistence(timeout: 10))
 
         app.tabBars.buttons["Profile"].tap()
+        XCTAssertTrue(app.staticTexts["shell.header.title"].waitForExistence(timeout: 10))
         XCTAssertTrue(scrollUntilElementExists("profile.personalization-card", in: app))
         XCTAssertTrue(scrollUntilElementExists("profile.planning-summary-card", in: app))
         XCTAssertTrue(scrollUntilElementExists("profile.trust-card", in: app))
@@ -107,12 +114,12 @@ final class AmbitionsUITests: XCTestCase {
         XCTAssertTrue(app.descendants(matching: .any)["plan.screen"].waitForExistence(timeout: 10))
     }
 
-    func testLaunchURLCanLandOnTodayOwnedCapturesInbox() throws {
+    func testLaunchURLCanLandOnPlanOwnedCapturesInbox() throws {
         let app = makeApp(bootstrapMode: "preview", launchURL: "ambitions://captures/inbox")
         app.launch()
 
-        XCTAssertTrue(app.tabBars.buttons["Today"].waitForExistence(timeout: 10))
-        XCTAssertTrue(app.tabBars.buttons["Today"].isSelected)
+        XCTAssertTrue(app.tabBars.buttons["Plan"].waitForExistence(timeout: 10))
+        XCTAssertTrue(app.tabBars.buttons["Plan"].isSelected)
         XCTAssertTrue(app.descendants(matching: .any)["captures.screen"].waitForExistence(timeout: 10))
     }
 
@@ -147,6 +154,7 @@ final class AmbitionsUITests: XCTestCase {
     private func goalCreateButton(in app: XCUIApplication) -> XCUIElement {
         let candidates = [
             app.buttons["goals.create-button"],
+            app.buttons["shell.goals.create-button"],
             app.navigationBars.buttons["goals.create-button"],
             app.buttons["Create Goal"],
             app.navigationBars.buttons["Create Goal"]
