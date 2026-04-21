@@ -8,11 +8,17 @@
   - `docs/canon/Ambitions_OS_Master_Roadmap.md` for platform and endgame vision.
   - `docs/canon/Ambitions_Surgical_Execution_Plan.md` for execution order and dependency hierarchy.
   - `docs/canon/Ambitions_Codex_Batch_Plan.md` for batching and work packaging.
+  - `docs/canon/Ambitions_Full_Frontend_Transformation_Program.md` for the queued post-hardening frontend transformation program only.
+  - `docs/canon/design/README.md` for explicit queued frontend design truth only.
+  - `docs/canon/design/Ambitions_Frontend_Transformation_Execution_Classification.md` for queued frontend execution tiering only.
   - `docs/codex/BATCH_REGISTRY.md` for active work status only.
 - Work on `main` only unless the user explicitly requests branch-based work. Do not create, switch to, or suggest branches for normal Ambitions execution.
 - Do not skip ahead of the execution order in `docs/canon/Ambitions_Surgical_Execution_Plan.md`.
 - Do not build surfaces before engines/services exist; do not build extension-heavy features before shared container/data boundaries exist; do not build sync backend logic before sync boundary/export-import/conflict policy are defined; do not begin device work before runtime separation exists.
 - Implement only the active batch from `docs/canon/Ambitions_Codex_Batch_Plan.md` and `docs/codex/BATCH_REGISTRY.md` unless the user explicitly changes scope.
+- Treat `docs/canon/Ambitions_Full_Frontend_Transformation_Program.md` as future-program canon that starts only after the hardening wave closes; it does not activate future UI batches by itself.
+- Treat `docs/canon/design/README.md` and the files beneath it as future design truth for those queued frontend batches only; they do not activate redesign work ahead of the registry.
+- Treat `docs/canon/design/Ambitions_Frontend_Transformation_Execution_Classification.md` as the single classification source for what must build early, what is later core, and what is advanced later core inside that queued frontend program.
 - Older roadmap, backlog, audit, release, or implementation docs are supporting context only when they conflict with the canonical planning stack.
 - `Native/Ambitions/` is the source of truth for the shipping app. Treat older Expo/TypeScript material as reference-only unless a task explicitly targets it.
 - Use XcodeGen. Edit `project.yml` and regenerate the project instead of relying on a checked-in `.xcodeproj`.

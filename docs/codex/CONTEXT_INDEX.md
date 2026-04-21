@@ -11,13 +11,15 @@ Ambitions 2.0 is now the active canon program, beginning with Batch 19 while pre
 For non-trivial work, read these in order before planning:
 
 1. [AGENTS.md](../../AGENTS.md) and any more-specific scoped `AGENTS.md`.
-2. [docs/codex/CONTEXT_INDEX.md](CONTEXT_INDEX.md).
-3. [MASTER_PRODUCT_SPEC.md](../../MASTER_PRODUCT_SPEC.md).
-4. [Ambitions_OS_Master_Roadmap.md](../canon/Ambitions_OS_Master_Roadmap.md).
-5. [Ambitions_Surgical_Execution_Plan.md](../canon/Ambitions_Surgical_Execution_Plan.md).
-6. [Ambitions_Codex_Batch_Plan.md](../canon/Ambitions_Codex_Batch_Plan.md).
-7. [BATCH_REGISTRY.md](BATCH_REGISTRY.md).
-8. Supporting docs linked from [docs/README.md](../README.md).
+2. [MASTER_PRODUCT_SPEC.md](../../MASTER_PRODUCT_SPEC.md).
+3. [Ambitions_OS_Master_Roadmap.md](../canon/Ambitions_OS_Master_Roadmap.md).
+4. [Ambitions_Surgical_Execution_Plan.md](../canon/Ambitions_Surgical_Execution_Plan.md).
+5. [Ambitions_Codex_Batch_Plan.md](../canon/Ambitions_Codex_Batch_Plan.md).
+6. [Ambitions_Full_Frontend_Transformation_Program.md](../canon/Ambitions_Full_Frontend_Transformation_Program.md) when the task involves the queued post-hardening frontend transformation program.
+7. [design/README.md](../canon/design/README.md) when the task needs explicit frontend design truth for the queued transformation program.
+8. [Ambitions_Frontend_Transformation_Execution_Classification.md](../canon/design/Ambitions_Frontend_Transformation_Execution_Classification.md) when the task needs explicit frontend sequencing truth.
+9. [BATCH_REGISTRY.md](BATCH_REGISTRY.md).
+10. Supporting docs linked from [docs/README.md](../README.md).
 
 ## Precedence Model
 
@@ -29,8 +31,11 @@ When sources conflict, use this precedence:
 4. [Ambitions_OS_Master_Roadmap.md](../canon/Ambitions_OS_Master_Roadmap.md) for platform and endgame vision.
 5. [Ambitions_Surgical_Execution_Plan.md](../canon/Ambitions_Surgical_Execution_Plan.md) for execution order and dependency hierarchy.
 6. [Ambitions_Codex_Batch_Plan.md](../canon/Ambitions_Codex_Batch_Plan.md) for batching and work packaging.
-7. [BATCH_REGISTRY.md](BATCH_REGISTRY.md) for active work status.
-8. Supporting docs.
+7. [Ambitions_Full_Frontend_Transformation_Program.md](../canon/Ambitions_Full_Frontend_Transformation_Program.md) for queued post-hardening frontend transformation scope and batch intent.
+8. [design/README.md](../canon/design/README.md) for explicit future frontend design truth.
+9. [Ambitions_Frontend_Transformation_Execution_Classification.md](../canon/design/Ambitions_Frontend_Transformation_Execution_Classification.md) for explicit future frontend execution tiering.
+10. [BATCH_REGISTRY.md](BATCH_REGISTRY.md) for active work status.
+11. Supporting docs.
 
 ## Canonical Planning Stack
 
@@ -39,6 +44,9 @@ These files are permanent canonical context and must stay in repo:
 - [../canon/Ambitions_OS_Master_Roadmap.md](../canon/Ambitions_OS_Master_Roadmap.md)
 - [../canon/Ambitions_Surgical_Execution_Plan.md](../canon/Ambitions_Surgical_Execution_Plan.md)
 - [../canon/Ambitions_Codex_Batch_Plan.md](../canon/Ambitions_Codex_Batch_Plan.md)
+- [../canon/Ambitions_Full_Frontend_Transformation_Program.md](../canon/Ambitions_Full_Frontend_Transformation_Program.md)
+- [../canon/design/README.md](../canon/design/README.md)
+- [../canon/design/Ambitions_Frontend_Transformation_Execution_Classification.md](../canon/design/Ambitions_Frontend_Transformation_Execution_Classification.md)
 
 Do not replace these with external copies or duplicate canon locations.
 
@@ -52,6 +60,9 @@ Do not replace these with external copies or duplicate canon locations.
 - Do not build sync backend logic before sync boundary, export/import, and conflict policy are defined.
 - Do not begin device work before runtime separation exists.
 - Implement only the active batch from [Ambitions_Codex_Batch_Plan.md](../canon/Ambitions_Codex_Batch_Plan.md) and [BATCH_REGISTRY.md](BATCH_REGISTRY.md) unless explicitly told otherwise.
+- Treat [Ambitions_Full_Frontend_Transformation_Program.md](../canon/Ambitions_Full_Frontend_Transformation_Program.md) as queued future-program truth only; it does not activate any post-hardening UI batch ahead of the registry.
+- Treat [design/README.md](../canon/design/README.md) as explicit future design truth for those queued frontend batches only; it does not override current shipping behavior before the relevant batch is active.
+- Treat [Ambitions_Frontend_Transformation_Execution_Classification.md](../canon/design/Ambitions_Frontend_Transformation_Execution_Classification.md) as the single source for what is early core, later core, and advanced later core inside the queued frontend program.
 
 ## Older Docs
 

@@ -14,8 +14,16 @@ Use [codex/CONTEXT_INDEX.md](codex/CONTEXT_INDEX.md) for source-of-truth precede
   Execution order and dependency hierarchy.
 - [canon/Ambitions_Codex_Batch_Plan.md](canon/Ambitions_Codex_Batch_Plan.md)
   Batching and work packaging.
+- [canon/Ambitions_Full_Frontend_Transformation_Program.md](canon/Ambitions_Full_Frontend_Transformation_Program.md)
+  Queued post-hardening frontend transformation canon. Use with the registry; do not treat it as active work by itself.
+- [canon/design/README.md](canon/design/README.md)
+  Canonical future frontend design-truth set for shell IA, screen architecture, motion, trust UX, copy, external surfaces, and cross-device roles.
+- [canon/design/Ambitions_Frontend_Transformation_Execution_Classification.md](canon/design/Ambitions_Frontend_Transformation_Execution_Classification.md)
+  Canonical future frontend execution-tiering source for early-core, later-core, and optional-experimental systems and surface programs.
 - [codex/BATCH_REGISTRY.md](codex/BATCH_REGISTRY.md)
   Active work status only.
+- [codex/batches/README.md](codex/batches/README.md)
+  Per-batch execution docs for the queued post-hardening frontend transformation program.
 
 Older docs in this folder are supporting context and do not override the canonical planning stack.
 

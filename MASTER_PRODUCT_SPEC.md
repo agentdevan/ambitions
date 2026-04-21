@@ -291,6 +291,40 @@ It must show:
 
 This surface exists to make the system feel alive and trustworthy rather than static.
 
+### 7.8 Supporting-route truth
+
+The transformed frontend may redesign shell behavior, but these route-ownership rules remain the canonical design direction unless a later canon update explicitly replaces them:
+
+- `Captures` is a first-class product surface but not a sixth persistent tab.
+- `Habits` is a first-class product surface but not a sixth persistent tab.
+- `Weekly Review` is a supporting route owned by planning and review flows, not a top-level shell destination.
+- `Monthly Review` is a supporting reflection route, not a top-level shell destination.
+- `Memory Lens` is a shell-level recall utility surface, not a tab.
+- `Trust Center` is a Profile-owned utility and trust surface, not a separate top-level destination.
+
+### 7.9 Cognitive posture truth
+
+The transformed frontend uses four product-level cognitive postures that reweight content without turning the shell into a mode-heavy power-user system:
+
+- `Focus`
+- `Triage`
+- `Shape`
+- `Reflect`
+
+These are not top-level destinations.
+They are a cognitive lens that changes emphasis, primary action posture, and disclosure depth across existing surfaces.
+
+Default posture by top-level surface:
+
+- `Today`: Focus
+- `Goals`: Triage or Shape depending on whether the user is inspecting or composing direction
+- `Plan`: Shape
+- `Insights`: Reflect
+- `Profile`: Utility, outside the main cognitive set unless trust work is active
+
+Mode shifts must remain obvious, calm, and low-ceremony.
+They should feel like the app is reweighting relevance, not like the user is entering a different operating mode that needs setup.
+
 ---
 
 ## 8. ADHD-first product requirements
@@ -437,6 +471,49 @@ That means:
 - cleaner tab bar behavior
 - concise labels
 - bolder primary action framing
+
+### 9.3.1 Canonical design-truth set
+
+The detailed future frontend design truth lives under `docs/canon/design/`.
+
+Those files define:
+
+- shell IA and route ownership
+- exact screen architecture
+- shared design-system rules
+- motion and microinteraction grammar
+- trust and correction UX
+- copy and state language
+- external surface behavior
+- cross-device surface roles
+- signature interaction systems
+
+Use those files when planning or implementing any future frontend transformation batch.
+They deepen this master spec; they do not change the current active batch by themselves.
+
+### 9.3.2 Additional signature systems
+
+The future transformed frontend should treat the following as named product systems, not vague design inspiration:
+
+- Cognitive Mode Lens
+- Continuity Ribbon
+- Semantic Zoom for Goals
+- Quiet Command Sheet
+- Object-Persistent Navigation
+- Path Preview Drawer
+- Pressure Map
+- Review Constellation
+- Window Magnetism
+- Living Capture
+- Intent-Sensitive Primary Action
+
+These systems must stay:
+
+- calm
+- obvious
+- low-density by default
+- progressively disclosed
+- consumer-native rather than tool-like
 
 ### 9.4 Overall look
 
@@ -894,6 +971,9 @@ Must accomplish:
 - cleaner route logic for drill-down screens
 - stronger summary-to-detail layering
 - better safe-area handling, spacing, and breathing room
+- Cognitive Mode Lens weighting rules across shell destinations
+- Quiet Command Sheet and Continuity Ribbon shell integration
+- object-persistent transitions for the same goal, block, or capture across surfaces
 
 Acceptance criteria:
 
@@ -915,6 +995,9 @@ Must accomplish:
 - stronger fixed vs flexible distinction
 - obvious completion, reschedule, skip, and recovery actions
 - re-entry treatment for drifted days
+- Intent-Sensitive Primary Action tuned to day posture
+- Continuity Ribbon carrying the one most important active continuity signal
+- Recovery Bloom as a first-class visual and interaction state
 
 Acceptance criteria:
 
@@ -935,6 +1018,9 @@ Must accomplish:
 - upgraded Goal Detail composition
 - recent movement and next meaningful sub-step treatment
 - stronger distinction between strategy and tactics
+- Semantic Zoom for Goals across now, week, phase, and full-path scales
+- Path Preview Drawer for shallow future-path inspection
+- Goal-level object persistence between Today, Goals, Goal Detail, Plan, and review
 
 Acceptance criteria:
 
@@ -957,6 +1043,8 @@ Must accomplish:
 - calmer explanation of why blocks exist
 - clearer weekly tradeoff framing
 - improved visual communication of whether the week is believable
+- Pressure Map and Window Magnetism behaviors for open-time opportunity and week compression
+- limited split-pane thinking on iPhone only where planning clarity materially improves
 
 Acceptance criteria:
 
@@ -977,6 +1065,7 @@ Must accomplish:
 - less duplication between summary insights and review-oriented surfaces
 - better use of compact charts and micro visualizations
 - lower text burden across reflection surfaces
+- Review Constellation for clustered behavioral proof instead of analytics-heavy dashboard composition
 
 Acceptance criteria:
 
@@ -1278,6 +1367,7 @@ That is the product.
 
 From this point forward, Codex phase planning should treat this document as the canonical source of truth for the current shipping product.
 For platform vision, execution order, batch packaging, and active work status, follow [docs/codex/CONTEXT_INDEX.md](docs/codex/CONTEXT_INDEX.md).
+For explicit future frontend design truth, use [docs/canon/design/README.md](docs/canon/design/README.md) together with [docs/canon/Ambitions_Full_Frontend_Transformation_Program.md](docs/canon/Ambitions_Full_Frontend_Transformation_Program.md).
 
 When there is conflict between:
 

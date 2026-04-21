@@ -4,19 +4,26 @@ This file is the operational queue for active Ambitions work.
 It tracks which batch is completed, active, or queued.
 Registry batch numbers are the operational source of truth. Canon batch numbers are semantic roadmap context and must not be renumbered retroactively.
 
-It is not the higher-level vision source. For vision, dependency order, and batch definitions, use:
+It does not replace the higher-level vision or dependency order. For those, use:
 
 - [../canon/Ambitions_OS_Master_Roadmap.md](../canon/Ambitions_OS_Master_Roadmap.md)
 - [../canon/Ambitions_Surgical_Execution_Plan.md](../canon/Ambitions_Surgical_Execution_Plan.md)
 - [../canon/Ambitions_Codex_Batch_Plan.md](../canon/Ambitions_Codex_Batch_Plan.md)
+- [../canon/Ambitions_Full_Frontend_Transformation_Program.md](../canon/Ambitions_Full_Frontend_Transformation_Program.md) for the queued post-hardening frontend transformation program
 
 ## Registry Rules
 
 - Keep one active batch at a time unless the user explicitly authorizes parallel work.
 - Do not start Batch N+1 while Batch N is unstable.
-- Do not use this registry to override the dependency order in the surgical execution plan.
+- Do not use this registry to override the dependency order in the canonical planning stack.
 - Update status only after validation or an explicit user decision.
+- Preserve historical batch truth; this file is the live queue, not the full historical ledger.
 - If this registry conflicts with the canonical planning stack, the canonical planning stack wins.
+
+## Historical Note
+
+The live operational queue is currently in the hardening wave at Batch 37.
+Earlier batches and phase history remain part of repo truth in the canonical planning stack and master product spec; they are not renumbered here.
 
 ## Active Queue
 
@@ -63,3 +70,33 @@ Current wave status: Ambitions 2.0 is complete through Batch 34, and the registr
 | 36 | Post-2.0 Hardening 02 / Trust, Extensions, and External Surface Validation | Completed | Centralized external-surface truth language, added a narrow Profile notification/trust surface, kept Share Extension explicitly unshipped, shipped navigation-only App Intents, fixed missing `ambitions://` URL registration, and validated canonical external route landing with XcodeGen generation, native build, targeted external-surface tests, full `AmbitionsTests` (`340`), full `AmbitionsUITests` (`6`), shared snapshot verification, and OS-level deep-link registration checks. Widget/Live Activity rendering, notification auth UX, and App Shortcuts visibility remain conservative in copy because full manual platform confirmation could not be completed in this environment. |
 | 37 | Post-2.0 Hardening 03 / Secondary Surface Productization | Active | Clarify and strengthen the product roles of secondary surfaces so Plan, Insights, Profile, and other truthfully lagging shell areas move closer to the maturity bar of Today, Goals, and Goal Detail. |
 | 38 | Post-2.0 Hardening 04 / Repo Truth, Regression, Performance, and Release Readiness | Queued | Close repo truth drift, regression gaps, preview/docs/copy truth issues, performance-risk review, and release-readiness debt as the hardening-wave consolidation pass. |
+ 
+## Future Queue - Front-End Transformation Program
+
+These batches are queued future work only.
+They begin only after Batch 38 is complete and stable.
+Use the canonical program doc plus the per-batch docs in [batches/](batches/README.md) when any of these batches becomes active.
+
+| Batch | Name | Status | Notes |
+| --- | --- | --- | --- |
+| 39 | Front-End Transformation 00 / Program canon and shell rewrite foundation | Queued | First post-hardening control-file and canon batch. |
+| 40 | Front-End Transformation 01 / Shell reconsideration and navigation architecture | Queued | Shell and route architecture follow Batch 39. |
+| 41 | Front-End Transformation 02 / Design system, materials, motion engine, and controls | Queued | Shared visual and motion system for later surface work. |
+| 42 | Front-End Transformation 03 / Global compose, search, capture, and command surface | Queued | Cross-app command, compose, and recall foundation. |
+| 43 | Front-End Transformation 04 / Today rebuild I - living hero, now state, and action model | Queued | First half of the Today rebuild. |
+| 44 | Front-End Transformation 05 / Today rebuild II - time aperture, recovery bloom, and day logic | Queued | Completes the Today rebuild. |
+| 45 | Front-End Transformation 06 / Goals rebuild I - direction board and horizon ladder | Queued | Goals overview rebuild. |
+| 46 | Front-End Transformation 07 / Goal intake and Strategy Composer | Queued | Goal creation and setup redesign. |
+| 47 | Front-End Transformation 08 / Goal Detail rebuild I - strategic chamber and path filmstrip | Queued | Goal Detail first-layer rebuild. |
+| 48 | Front-End Transformation 09 / Goal Detail rebuild II - trust whisper, correction, audit, and memory | Queued | Goal Detail trust and memory layers. |
+| 49 | Front-End Transformation 10 / Plan rebuild I - elastic week and pressure scrubber | Queued | First half of the Plan rebuild. |
+| 50 | Front-End Transformation 11 / Plan rebuild II - habits, captures, weekly review, and shaping logic | Queued | Completes the Plan rebuild. |
+| 51 | Front-End Transformation 12 / Insights rebuild and reflection OS | Queued | Reflection and history system rebuild. |
+| 52 | Front-End Transformation 13 / Profile rebuild, Appearance Studio, and Trust Center | Queued | Profile, theming, and trust surfaces. |
+| 53 | Front-End Transformation 14 / Onboarding, first-run, permissions, education, and state systems | Queued | First-run and degraded-state experience rebuild. |
+| 54 | Front-End Transformation 15 / External surfaces I - widgets, Live Activities, notifications | Queued | Ambient and external surface implementation. |
+| 55 | Front-End Transformation 16 / External surfaces II - share extension, App Intents, shortcuts, routing | Queued | External creation and routing implementation. |
+| 56 | Front-End Transformation 17 / Cross-surface command, recall, and ambient coherence | Queued | Recall, command, and handoff coherence pass. |
+| 57 | Front-End Transformation 18 / iPad and Mac surface architecture and first implementation | Queued | Larger-screen continuity work begins. |
+| 58 | Front-End Transformation 19 / Watch and Apple TV ambient surface architecture and first implementation | Queued | Ambient future-device work begins. |
+| 59 | Front-End Transformation 20 / Finish-quality pass, accessibility, performance, and release polish | Queued | Final program closure and polish batch. |
