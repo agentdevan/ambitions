@@ -93,7 +93,7 @@ Local reproduction, including exact build, unit test, UI test, and archive comma
 - The current shipped surface is local-first and on-device first.
 - Today quick capture persists into the Captures tab through the native capture service.
 - Notification scheduling and calendar/reminder wiring exist in the native app.
-- Widget and Live Activity foundations exist in the repo, but they still need separate validation and should not be treated as fully verified shipped behavior from this README alone.
+- Widget and Live Activity foundations exist in the repo, but they still need manual platform verification and should not be treated as fully verified shipped behavior from this README alone.
 - Account sync is not implemented.
 - The iOS target now includes a complete native app icon set and `PrivacyInfo.xcprivacy`.
 

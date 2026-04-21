@@ -1,13 +1,12 @@
 # Front-End Transformation Batch Docs
 
-This folder contains the queued per-batch execution docs for the post-hardening Front-End Transformation Program.
+This folder contains the per-batch execution docs for the post-hardening Front-End Transformation Program.
 
 ## Queue Rules
 
-- These docs are future work only.
-- Batch 37 remains the active hardening batch.
-- Batch 38 remains queued hardening follow-through.
-- Batches 39-59 begin only after Batch 38 is complete and stable.
+- Batch 39 is the current active transformation batch.
+- Batches 40-59 remain queued future work.
+- The transformation program begins only after Batch 38 is complete and stable.
 - Do not activate or implement future transformation batches early.
 
 ## Canon Sources

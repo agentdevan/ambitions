@@ -22,7 +22,7 @@ struct FutureIntegrationPlaceholderContext: Sendable {
 enum FutureIntegrationPlaceholders {
     static let notifications = FutureIntegrationPlaceholderContext(
         surface: .notifications,
-        notes: "\(ExternalSurfaceTruth.pendingBatch36Validation). Local notification runtime and scheduling already exist; keep future work on the existing bootstrap and routing seam."
+        notes: "\(ExternalSurfaceTruth.availableButNeedsManualVerification). Local notification runtime and scheduling already exist; keep future work on the existing bootstrap and routing seam."
     )
 
     static let calendarReminders = FutureIntegrationPlaceholderContext(
@@ -32,7 +32,7 @@ enum FutureIntegrationPlaceholders {
 
     static let widgetsLiveActivities = FutureIntegrationPlaceholderContext(
         surface: .widgetsLiveActivities,
-        notes: "\(ExternalSurfaceTruth.pendingBatch36Validation). Widgets and Live Activity are read-only surfaces in this batch; only validation or narrow compatibility fixes belong here."
+        notes: "\(ExternalSurfaceTruth.availableButNeedsManualVerification). Widgets and Live Activity are read-only surfaces in this batch; only validation or narrow compatibility fixes belong here."
     )
 
     static let shareExtension = FutureIntegrationPlaceholderContext(
@@ -42,6 +42,6 @@ enum FutureIntegrationPlaceholders {
 
     static let appIntents = FutureIntegrationPlaceholderContext(
         surface: .appIntents,
-        notes: "\(ExternalSurfaceTruth.pendingBatch36Validation). App Intents stay navigation-only in this batch and must continue to route through the canonical app-entry seam."
+        notes: "\(ExternalSurfaceTruth.availableButNeedsManualVerification). App Intents stay navigation-only and must continue to route through the canonical app-entry seam."
     )
 }

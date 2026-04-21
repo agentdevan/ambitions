@@ -2,7 +2,7 @@ import XCTest
 @testable import Ambitions
 
 final class AppIntentRoutingTests: XCTestCase {
-    func testShortcutDestinationsStayBoundedToCanonicalBatch36Routes() {
+    func testShortcutDestinationsStayBoundedToCanonicalNavigationRoutes() {
         XCTAssertEqual(Set(AmbitionsAppShortcutDestination.allCases), [.today, .plan, .capturesInbox])
     }
 

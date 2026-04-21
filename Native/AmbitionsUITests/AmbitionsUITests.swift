@@ -84,6 +84,20 @@ final class AmbitionsUITests: XCTestCase {
         XCTAssertTrue(scrollUntilElementExists("profile.trust-card", in: app))
     }
 
+    func testProfileTrustSurfaceShowsConservativeExternalStatusLabels() throws {
+        let app = makeApp(bootstrapMode: "preview")
+        app.launch()
+
+        app.tabBars.buttons["Profile"].tap()
+
+        XCTAssertTrue(scrollUntilElementExists("profile.trust-card", in: app))
+        XCTAssertTrue(scrollUntilStaticTextExists("Trust and external status", in: app))
+        XCTAssertTrue(scrollUntilStaticTextExists("Notifications", in: app))
+        XCTAssertTrue(scrollUntilStaticTextExists("Navigation shortcuts", in: app))
+        XCTAssertTrue(scrollUntilStaticTextExists("Share Extension", in: app))
+        XCTAssertTrue(scrollUntilButtonExists("Enable notifications", in: app))
+    }
+
     func testLaunchURLCanLandOnCanonicalPlanSurface() throws {
         let app = makeApp(bootstrapMode: "preview", launchURL: "ambitions://tab/plan")
         app.launch()
@@ -175,6 +189,32 @@ final class AmbitionsUITests: XCTestCase {
 
     private func scrollUntilElementExists(_ identifier: String, in app: XCUIApplication, maxAttempts: Int = 5) -> Bool {
         let element = app.descendants(matching: .any)[identifier]
+
+        for _ in 0..<maxAttempts {
+            if element.waitForExistence(timeout: 2) {
+                return true
+            }
+            app.swipeUp()
+        }
+
+        return element.exists
+    }
+
+    private func scrollUntilStaticTextExists(_ label: String, in app: XCUIApplication, maxAttempts: Int = 5) -> Bool {
+        let element = app.staticTexts[label]
+
+        for _ in 0..<maxAttempts {
+            if element.waitForExistence(timeout: 2) {
+                return true
+            }
+            app.swipeUp()
+        }
+
+        return element.exists
+    }
+
+    private func scrollUntilButtonExists(_ label: String, in app: XCUIApplication, maxAttempts: Int = 5) -> Bool {
+        let element = app.buttons[label]
 
         for _ in 0..<maxAttempts {
             if element.waitForExistence(timeout: 2) {

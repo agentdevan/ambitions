@@ -9,13 +9,13 @@ final class ProfileFeatureServiceTests: XCTestCase {
         let dashboard = try await service.loadProfileDashboard()
 
         XCTAssertTrue(dashboard.subtitle.contains("local-only"))
-        XCTAssertTrue(dashboard.trustSection.subtitle.contains(ExternalSurfaceTruth.pendingBatch36Validation))
+        XCTAssertTrue(dashboard.trustSection.subtitle.contains(ExternalSurfaceTruth.verifiedRoutingTruth))
         XCTAssertTrue(dashboard.trustSection.items.contains(where: { $0.id == "profile-trust" && $0.valueLabel == "Ambitions is running in explicit local-only mode." }))
         XCTAssertTrue(dashboard.trustSection.items.contains(where: { $0.id == "profile-notifications" && $0.valueLabel == "Not requested" }))
-        XCTAssertTrue(dashboard.trustSection.items.contains(where: { $0.id == "profile-app-intents" && $0.valueLabel == ExternalSurfaceTruth.pendingBatch36Validation }))
+        XCTAssertTrue(dashboard.trustSection.items.contains(where: { $0.id == "profile-app-intents" && $0.valueLabel == ExternalSurfaceTruth.availableButNeedsManualVerification }))
         XCTAssertTrue(dashboard.trustSection.items.contains(where: { $0.id == "profile-share-extension" && $0.valueLabel == ExternalSurfaceTruth.notShippedInThisBuild }))
         XCTAssertTrue(dashboard.trustSection.footer?.contains("local-only trust posture") == true)
-        XCTAssertTrue(dashboard.trustSection.footer?.contains("validated route claims stay narrow") == true)
+        XCTAssertTrue(dashboard.trustSection.footer?.contains("routing truth stays explicit") == true)
         XCTAssertTrue(dashboard.trustSection.footer?.contains("unverified platform surfaces stay conservative") == true)
         XCTAssertFalse(dashboard.subtitle.contains("are available as local device features"))
     }
@@ -88,6 +88,25 @@ final class ProfileFeatureServiceTests: XCTestCase {
         XCTAssertFalse(dashboard.notificationAuthorization.canRequestAuthorization)
         XCTAssertNil(dashboard.notificationAuthorization.actionTitle)
         XCTAssertTrue(dashboard.trustSection.items.contains(where: { $0.id == "profile-notifications" && $0.valueLabel == "Allowed" }))
+    }
+
+    func testDashboardMapsDeniedNotificationAuthorizationIntoConservativeTrustSurface() async throws {
+        let repositories = try await makeRepositories()
+        let service = RepositoryBackedProfileService(
+            repositories: repositories,
+            notificationService: StaticProfileNotificationService(state: .denied)
+        )
+
+        let dashboard = try await service.loadProfileDashboard()
+
+        XCTAssertEqual(dashboard.notificationAuthorization.statusLabel, "Denied")
+        XCTAssertFalse(dashboard.notificationAuthorization.canRequestAuthorization)
+        XCTAssertNil(dashboard.notificationAuthorization.actionTitle)
+        XCTAssertTrue(dashboard.trustSection.items.contains(where: {
+            $0.id == "profile-notifications" &&
+            $0.valueLabel == "Denied" &&
+            ($0.subtitle?.contains(ExternalSurfaceTruth.availableButNeedsManualVerification) ?? false)
+        }))
     }
 
     func testDashboardAddsPlanningSummaryWithoutTurningProfileIntoWorkflow() async throws {

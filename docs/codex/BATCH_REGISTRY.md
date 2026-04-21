@@ -22,12 +22,12 @@ It does not replace the higher-level vision or dependency order. For those, use:
 
 ## Historical Note
 
-The live operational queue is currently in the hardening wave at Batch 37.
+The hardening wave is now complete through Batch 38, and the live operational queue has advanced into the post-hardening front-end transformation program at Batch 39.
 Earlier batches and phase history remain part of repo truth in the canonical planning stack and master product spec; they are not renumbered here.
 
 ## Active Queue
 
-Current wave status: Ambitions 2.0 is complete through Batch 34, and the registry now advances into an explicit post-2.0 whole-repo/app hardening wave. This hardening wave treats the app and repo as one integrated product rather than leftover 2.0 work. A separate UI/UX excellence wave should follow after this hardening wave, not inside it.
+Current wave status: Ambitions 2.0 is complete through Batch 34, the post-2.0 whole-repo/app hardening wave closed through Batch 38, and the registry now advances into the front-end transformation program beginning at Batch 39. The completed hardening wave treated the app and repo as one integrated product rather than leftover 2.0 work.
 
 | Batch | Name | Status | Notes |
 | --- | --- | --- | --- |
@@ -69,17 +69,17 @@ Current wave status: Ambitions 2.0 is complete through Batch 34, and the registr
 | 35 | Post-2.0 Hardening 01 / Shell Truth, Navigation, and Plan Canon Recovery | Completed | Restored the canonical five-tab shell, recovered Plan as a first-class weekly-shaping surface, normalized legacy Captures/Habits tab truth into subordinate routes, tightened shell-aligned deep-link/payload compatibility, and validated with `xcodegen generate`, simulator build, full `AmbitionsTests` (`336`), full `AmbitionsUITests` (`4`), targeted shell/routing/Plan coverage, and manual simulator shell review. |
 | 36 | Post-2.0 Hardening 02 / Trust, Extensions, and External Surface Validation | Completed | Centralized external-surface truth language, added a narrow Profile notification/trust surface, kept Share Extension explicitly unshipped, shipped navigation-only App Intents, fixed missing `ambitions://` URL registration, and validated canonical external route landing with XcodeGen generation, native build, targeted external-surface tests, full `AmbitionsTests` (`340`), full `AmbitionsUITests` (`6`), shared snapshot verification, and OS-level deep-link registration checks. Widget/Live Activity rendering, notification auth UX, and App Shortcuts visibility remain conservative in copy because full manual platform confirmation could not be completed in this environment. |
 | 37 | Post-2.0 Hardening 03 / Secondary Surface Productization | Completed | Strengthened Plan, Insights, and Profile through additive read-model shaping, dedicated view-model parity for Insights/Profile, restrained section-role clarification, and targeted behavior coverage; validated with `xcodegen generate`, simulator build, targeted surface/shell tests, full `AmbitionsTests` (`343`), full `AmbitionsUITests` (`6`), and a manual simulator closeout confirming shell stability plus first-load role clarity/trust posture. Live manual data did not expose goal-linked secondary rows to tap through, so that specific interaction remained covered by automated routing checks rather than direct simulator exercise. |
-| 38 | Post-2.0 Hardening 04 / Repo Truth, Regression, Performance, and Release Readiness | Active | Close repo truth drift, regression gaps, preview/docs/copy truth issues, performance-risk review, and release-readiness debt as the hardening-wave consolidation pass. |
+| 38 | Post-2.0 Hardening 04 / Repo Truth, Regression, Performance, and Release Readiness | Completed | Closed repo truth drift across app/docs/previews, added bounded trust/routing regression coverage, hardened release-validation guidance around available simulators and isolated DerivedData, and completed a narrow performance-risk audit without widening architecture. Verified with `xcodegen generate`, simulator build, full `AmbitionsTests` (`344`), full `AmbitionsUITests` (`7`), and an unsigned Release archive sanity check on April 21, 2026. Widget/Live Activity device behavior, App Shortcuts visibility, and physical-device EventKit/notification prompt behavior remain manual-only follow-up. |
 
-## Future Queue - Front-End Transformation Program
+## Front-End Transformation Program
 
-These batches are queued future work only.
-They begin only after Batch 38 is complete and stable.
-Use the canonical program doc plus the per-batch docs in [batches/](batches/README.md) when any of these batches becomes active.
+Batch 39 is now the active batch for the post-hardening front-end transformation program.
+Batches 40-59 remain queued future work.
+Use the canonical program doc plus the per-batch docs in [batches/](batches/README.md) when working inside this program.
 
 | Batch | Name | Status | Notes |
 | --- | --- | --- | --- |
-| 39 | Front-End Transformation 00 / Program canon and shell rewrite foundation | Queued | First post-hardening control-file and canon batch. |
+| 39 | Front-End Transformation 00 / Program canon and shell rewrite foundation | Active | First post-hardening control-file and canon batch. |
 | 40 | Front-End Transformation 01 / Shell reconsideration and navigation architecture | Queued | Shell and route architecture follow Batch 39. |
 | 41 | Front-End Transformation 02 / Design system, materials, motion engine, and controls | Queued | Shared visual and motion system for later surface work. |
 | 42 | Front-End Transformation 03 / Global compose, search, capture, and command surface | Queued | Cross-app command, compose, and recall foundation. |

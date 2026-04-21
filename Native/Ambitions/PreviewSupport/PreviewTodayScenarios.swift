@@ -264,7 +264,7 @@ enum PreviewTodayScenarios {
                 TodayTargetItem(
                     id: "fresh-step-1",
                     title: "Define scope",
-                    subtitle: "Ship the native create goal flow",
+                    subtitle: "Build a calmer weekly review ritual",
                     timingLabel: "No deadline",
                     statusLabel: "Planned",
                     progress: 0.48,
@@ -278,7 +278,7 @@ enum PreviewTodayScenarios {
         focus: .planned(
             TodayFocusPlannedState(
                 title: "Define scope",
-                subtitle: "Ship the native create goal flow",
+                subtitle: "Build a calmer weekly review ritual",
                 reason: "This is the cleanest next move from the newly created micro-plan.",
                 timingLabel: "No deadline",
                 energyLabel: "Deliberate",
@@ -308,7 +308,7 @@ enum PreviewTodayScenarios {
             ]
         ),
         milestone: TodayMilestoneState(
-            title: "Ship the native create goal flow",
+            title: "Build a calmer weekly review ritual",
             subtitle: "Milestone prompt",
             prompt: "Do the first pass once scope and constraints are written down.",
             confidenceLabel: "Live plan",

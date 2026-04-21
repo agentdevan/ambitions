@@ -66,7 +66,7 @@ Native unit tests:
 xcodebuild \
   -project Ambitions.xcodeproj \
   -scheme Ambitions \
-  -destination "platform=iOS Simulator,name=iPhone 16" \
+  -destination "platform=iOS Simulator,name=<available-simulator-name>" \
   -only-testing:AmbitionsTests \
   test
 ```
@@ -75,7 +75,7 @@ Expected output:
 
 - `Test Succeeded`
 
-If your local Xcode image does not have `iPhone 16`, substitute any available simulator from:
+Choose any available simulator from:
 
 ```bash
 xcrun simctl list devices available
@@ -89,7 +89,7 @@ Native UI tests:
 xcodebuild \
   -project Ambitions.xcodeproj \
   -scheme Ambitions \
-  -destination "platform=iOS Simulator,name=iPhone 16" \
+  -destination "platform=iOS Simulator,name=<available-simulator-name>" \
   -only-testing:AmbitionsUITests \
   test
 ```
@@ -99,6 +99,30 @@ The current UI suite launches the app with `AMBITIONS_BOOTSTRAP_MODE=preview`, s
 Expected output:
 
 - `Test Succeeded`
+
+## Run Tests Sequentially
+
+When running unit tests and UI tests locally, prefer sequential runs.
+
+If you need to keep multiple local runs separate, pass different DerivedData paths to avoid Xcode build database lock errors:
+
+```bash
+xcodebuild \
+  -project Ambitions.xcodeproj \
+  -scheme Ambitions \
+  -derivedDataPath output/DerivedData-unit \
+  -destination "platform=iOS Simulator,name=<available-simulator-name>" \
+  -only-testing:AmbitionsTests \
+  test
+
+xcodebuild \
+  -project Ambitions.xcodeproj \
+  -scheme Ambitions \
+  -derivedDataPath output/DerivedData-ui \
+  -destination "platform=iOS Simulator,name=<available-simulator-name>" \
+  -only-testing:AmbitionsUITests \
+  test
+```
 
 ## Archive Sanity Check
 

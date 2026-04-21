@@ -20,29 +20,29 @@ struct PreviewFixtures: Sendable {
             subtitle: "Three deliberate moves are enough to keep momentum today.",
             completionLabel: "58% aligned",
             targets: [
-                DashboardProgressItem(id: "today-1", title: "Ship native shell", detail: "Wire target, bootstrap, and tabs", progress: 0.82, trailingValue: "82%", statusLabel: "In flight"),
-                DashboardProgressItem(id: "today-2", title: "Refine goal engine contract", detail: "Keep TS as spec reference only", progress: 0.45, trailingValue: "45%", statusLabel: "Queued"),
-                DashboardProgressItem(id: "today-3", title: "Draft app architecture note", detail: "Clarify native pivot for future work", progress: 0.67, trailingValue: "67%", statusLabel: "Ready")
+                DashboardProgressItem(id: "today-1", title: "Tighten external-surface truth", detail: "Keep docs, Profile, and previews aligned", progress: 0.82, trailingValue: "82%", statusLabel: "In flight"),
+                DashboardProgressItem(id: "today-2", title: "Review validation coverage", detail: "Keep routing, trust copy, and EventKit checks current", progress: 0.45, trailingValue: "45%", statusLabel: "Queued"),
+                DashboardProgressItem(id: "today-3", title: "Prepare release notes", detail: "Make local build and test guidance reproducible", progress: 0.67, trailingValue: "67%", statusLabel: "Ready")
             ],
             focus: FocusSession(
-                headline: "Protect the native source of truth",
-                subtitle: "Build the shell once, stop extending React Native UI",
-                reason: "The fastest path to a shippable App Store client is to make SwiftUI the only UI track and keep the TypeScript engine as behavior reference.",
+                headline: "Keep the hardening pass honest",
+                subtitle: "Reduce drift, keep scope tight, and only certify what we can prove",
+                reason: "The fastest way to protect trust is to align copy, validation, and release notes with the product that actually ships today.",
                 durationLabel: "45 min block",
                 energyLabel: "Confidence",
                 progress: 0.74,
                 supportSteps: [
-                    "Keep Expo code isolated under the legacy prototype boundary.",
-                    "Push shared visuals through AmbitionsDesignSystem.",
-                    "Render first-class native surfaces with WidgetUI building blocks."
+                    "Refresh external-surface status copy where it drifted.",
+                    "Keep previews obviously non-production but current.",
+                    "Use the existing build and test seams before widening scope."
                 ]
             ),
             freeTime: FreeTimeSuggestion(
                 title: "Recovery window available",
-                subtitle: "You have margin after the native shell pass.",
+                subtitle: "You have margin after the validation pass.",
                 windowLabel: "30 min free",
-                suggestionTitle: "Sketch detail routes for Today and Goals",
-                suggestionDetail: "Use the spare window to define drill-in navigation contracts without touching legacy screens."
+                suggestionTitle: "Review the conservative trust notes",
+                suggestionDetail: "Use the spare window to confirm which external surfaces are proven here and which still need manual follow-up."
             )
         ),
         captures: [
@@ -50,11 +50,11 @@ struct PreviewFixtures: Sendable {
                 id: "preview-capture-1",
                 createdAt: "2026-04-15T09:20:00Z",
                 updatedAt: "2026-04-15T09:20:00Z",
-                rawText: "Capture an idea from the Today flow before it disappears.",
+                rawText: "Capture the repo-truth drift before the next docs pass.",
                 sourceType: .todayQuickCapture,
                 status: .goalBound,
                 linkedGoalID: "goal-native",
-                triage: CaptureTriageMetadata(destination: .attachToGoal, hint: "Keep with the native pivot.")
+                triage: CaptureTriageMetadata(destination: .attachToGoal, hint: "Keep with the hardening pass.")
             ),
             Capture(
                 id: "preview-capture-2",
@@ -70,16 +70,16 @@ struct PreviewFixtures: Sendable {
         ],
         goalsDashboard: GoalsDashboard(
             title: "Active ambitions",
-            subtitle: "Three outcome tracks are currently shaping the roadmap.",
+            subtitle: "Three outcome tracks are currently shaping the week.",
             goals: [
-                GoalSummary(id: "goal-native", title: "Native iOS pivot", subtitle: "SwiftUI app shell and production architecture", progressLabel: "Foundation", statusLabel: "Highest leverage"),
-                GoalSummary(id: "goal-engine", title: "Goal intelligence parity", subtitle: "Translate TS reference behavior into native contracts", progressLabel: "Spec phase", statusLabel: "Reference only"),
-                GoalSummary(id: "goal-growth", title: "Retention loop", subtitle: "Habit and insights surfaces that reinforce weekly review", progressLabel: "Discovery", statusLabel: "Upcoming")
+                GoalSummary(id: "goal-native", title: "Close the hardening pass", subtitle: "Repo truth, validation coverage, and release readiness", progressLabel: "Hardening", statusLabel: "Highest leverage"),
+                GoalSummary(id: "goal-learning", title: "Learn advanced vocal mixing", subtitle: "A learning track that stays untimed and evidence-based", progressLabel: "Starter path", statusLabel: "In motion"),
+                GoalSummary(id: "goal-support", title: "Help Maya rebuild a reading rhythm", subtitle: "Supportive structure that keeps Maya as the owner", progressLabel: "Support rhythm", statusLabel: "Active")
             ],
             milestone: MilestonePrompt(
-                title: "Lock the first native vertical slice",
-                subtitle: "Today + Goals should be the first real production flow.",
-                prompt: "Once the shell is stable, the next milestone is replacing placeholder Today data with a real persistence-backed pipeline.",
+                title: "Keep the next validation step obvious",
+                subtitle: "The app already ships the current shell; this pass keeps trust and release notes aligned.",
+                prompt: "Once the truth sweep is clean, rerun the native validation flow and keep any remaining platform claims conservative.",
                 confidenceLabel: "Clear next step"
             )
         ),
@@ -107,7 +107,7 @@ struct PreviewFixtures: Sendable {
                 InsightsChangeSummary(id: "insight-change-4", title: "Visible follow-through", detail: "Completions and minimum versions are carrying the most useful signal right now.", valueLabel: "4", icon: "checkmark.circle", visualState: .success)
             ],
             goalStatuses: [
-                InsightsGoalStatusItem(id: "insight-goal-1", target: GoalRouteTarget(goalID: "goal-native"), title: "Native iOS pivot", summary: "This goal has visible evidence this week, which keeps its current path grounded in real follow-through.", statusLabel: "Believable", visualState: .success),
+                InsightsGoalStatusItem(id: "insight-goal-1", target: GoalRouteTarget(goalID: "goal-native"), title: "Close the hardening pass", summary: "This goal has visible evidence this week, which keeps its current path grounded in real follow-through.", statusLabel: "Believable", visualState: .success),
                 InsightsGoalStatusItem(id: "insight-goal-2", target: GoalRouteTarget(goalID: "goal-growth"), title: "Retention loop", summary: "Recent friction suggests the current version of the work needs a smaller or clearer next move.", statusLabel: "Adjusting", visualState: .selected)
             ],
             trendTitle: "Weekly trend",
@@ -122,20 +122,20 @@ struct PreviewFixtures: Sendable {
                 TrendPoint(id: "sat", label: "S", value: 0.52),
                 TrendPoint(id: "sun", label: "S", value: 0.73)
             ],
-            trendSummary: "Execution improved once the scope narrowed to a single native client.",
+            trendSummary: "Execution improved once the week narrowed to one clear hardening pass.",
             activitiesTitle: "Recent signals",
             activitiesSubtitle: "Recent evidence, decisions, and changes that explain the current readout.",
             activities: [
                 ActivitySummary(id: "activity-1", title: "Completed deep work block", subtitle: "Today", timestamp: "09:40", icon: "checkmark.circle.fill", badge: "Win"),
                 ActivitySummary(id: "activity-2", title: "Rescoped feature backlog", subtitle: "Yesterday", timestamp: "17:15", icon: "arrow.triangle.branch", badge: "Decision"),
-                ActivitySummary(id: "activity-3", title: "Updated native architecture note", subtitle: "Yesterday", timestamp: "14:05", icon: "doc.text", badge: nil)
+                ActivitySummary(id: "activity-3", title: "Updated release validation notes", subtitle: "Yesterday", timestamp: "14:05", icon: "doc.text", badge: nil)
             ]
         ),
         profileDashboard: ProfileDashboard(
             title: "Preview User",
             subtitle: "Defaults, personalization, and local-only trust status all stay explicit here without turning Profile into a workflow surface.",
             initials: "PU",
-            badges: ["Local-first", "Native pivot", "Design system"],
+            badges: ["Local-first", "Hardening pass", "Design system"],
             stats: [
                 MetricSummary(id: "profile-1", title: "Open ambitions", value: "3", detail: "In active review", icon: "target"),
                 MetricSummary(id: "profile-2", title: "Tracked habits", value: "6", detail: "Current set", icon: "repeat"),
@@ -165,14 +165,14 @@ struct PreviewFixtures: Sendable {
             ),
             trustSection: ProfileSectionGroup(
                 title: "Trust and external status",
-                subtitle: "Batch 36 validation stays visible here without overstating platform behavior that still needs manual confirmation.",
+                subtitle: "\(ExternalSurfaceTruth.verifiedRoutingTruth). Other external surfaces stay conservative here until manual checks confirm them.",
                 items: [
-                    SettingsItem(id: "profile-setting-5", title: "Notifications", subtitle: "\(ExternalSurfaceTruth.pendingBatch36Validation). Authorization: Not requested yet.", icon: "bell.badge", valueLabel: "Not requested"),
-                    SettingsItem(id: "profile-setting-6", title: "Widgets and Live Activity", subtitle: "\(ExternalSurfaceTruth.pendingBatch36Validation). These surfaces stay read-only in this batch and still need explicit manual checks.", icon: "rectangle.3.group", valueLabel: ExternalSurfaceTruth.pendingBatch36Validation),
-                    SettingsItem(id: "profile-setting-7", title: "Navigation shortcuts", subtitle: "\(ExternalSurfaceTruth.pendingBatch36Validation). App Intents stay navigation-only and open Today, Plan, or the Captures inbox without creating or mutating records.", icon: "sparkles.rectangle.stack", valueLabel: ExternalSurfaceTruth.pendingBatch36Validation),
+                    SettingsItem(id: "profile-setting-5", title: "Notifications", subtitle: "\(ExternalSurfaceTruth.availableButNeedsManualVerification). Authorization: Not requested yet.", icon: "bell.badge", valueLabel: "Not requested"),
+                    SettingsItem(id: "profile-setting-6", title: "Widgets and Live Activity", subtitle: "\(ExternalSurfaceTruth.availableButNeedsManualVerification). These surfaces stay read-only and still need explicit manual checks.", icon: "rectangle.3.group", valueLabel: ExternalSurfaceTruth.availableButNeedsManualVerification),
+                    SettingsItem(id: "profile-setting-7", title: "Navigation shortcuts", subtitle: "\(ExternalSurfaceTruth.availableButNeedsManualVerification). App Intents stay navigation-only and open Today, Plan, or the Captures inbox without creating or mutating records.", icon: "sparkles.rectangle.stack", valueLabel: ExternalSurfaceTruth.availableButNeedsManualVerification),
                     SettingsItem(id: "profile-setting-8", title: "Share Extension", subtitle: "\(ExternalSurfaceTruth.notShippedInThisBuild). Share intake remains deferred until a dedicated extension target and handoff path exist.", icon: "square.and.arrow.up", valueLabel: ExternalSurfaceTruth.notShippedInThisBuild)
                 ],
-                footer: "Everything in this version runs from an explicit local-only trust posture. Capture storage is live under Today, routine review lives under Plan, portable backup and restore can stay local-first, validated route claims stay narrow, and unverified platform surfaces stay conservative in copy."
+                footer: "Everything in this version runs from an explicit local-only trust posture. Capture storage is live under Today, routine review lives under Plan, portable backup and restore can stay local-first, routing truth stays explicit, and unverified platform surfaces stay conservative in copy."
             ),
             notificationAuthorization: ProfileNotificationAuthorization(
                 statusLabel: "Not requested",

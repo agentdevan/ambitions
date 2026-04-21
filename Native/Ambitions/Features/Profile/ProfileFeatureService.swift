@@ -122,29 +122,29 @@ private extension RepositoryBackedProfileService {
             ),
             trustSection: ProfileSectionGroup(
                 title: "Trust and external status",
-                subtitle: "\(ExternalSurfaceTruth.pendingBatch36Validation). Batch 36 validation stays visible here without overstating platform behavior that still needs manual confirmation.",
+                subtitle: "\(ExternalSurfaceTruth.verifiedRoutingTruth). Other external surfaces stay conservative here until manual checks confirm them.",
                 items: [
                     SettingsItem(id: "profile-trust", title: "Trust posture", subtitle: "Portable backup/restore is designed for local-first continuity without implying a live cloud backend.", icon: "lock.shield", valueLabel: syncStatus.detail),
                     SettingsItem(
                         id: "profile-notifications",
                         title: "Notifications",
-                        subtitle: "\(ExternalSurfaceTruth.pendingBatch36Validation). Authorization: \(notificationStatus.detail)",
+                        subtitle: "\(ExternalSurfaceTruth.availableButNeedsManualVerification). Authorization: \(notificationStatus.detail)",
                         icon: "bell.badge",
                         valueLabel: notificationStatus.statusLabel
                     ),
                     SettingsItem(
                         id: "profile-widgets",
                         title: "Widgets and Live Activity",
-                        subtitle: "\(ExternalSurfaceTruth.pendingBatch36Validation). These surfaces stay read-only in this batch and still need explicit manual checks.",
+                        subtitle: "\(ExternalSurfaceTruth.availableButNeedsManualVerification). These surfaces stay read-only and still need explicit manual checks.",
                         icon: "rectangle.3.group",
-                        valueLabel: ExternalSurfaceTruth.pendingBatch36Validation
+                        valueLabel: ExternalSurfaceTruth.availableButNeedsManualVerification
                     ),
                     SettingsItem(
                         id: "profile-app-intents",
                         title: "Navigation shortcuts",
-                        subtitle: "\(ExternalSurfaceTruth.pendingBatch36Validation). App Intents stay navigation-only and open Today, Plan, or the Captures inbox without creating or mutating records.",
+                        subtitle: "\(ExternalSurfaceTruth.availableButNeedsManualVerification). App Intents stay navigation-only and open Today, Plan, or the Captures inbox without creating or mutating records.",
                         icon: "sparkles.rectangle.stack",
-                        valueLabel: ExternalSurfaceTruth.pendingBatch36Validation
+                        valueLabel: ExternalSurfaceTruth.availableButNeedsManualVerification
                     ),
                     SettingsItem(
                         id: "profile-share-extension",
@@ -154,7 +154,7 @@ private extension RepositoryBackedProfileService {
                         valueLabel: ExternalSurfaceTruth.notShippedInThisBuild
                     )
                 ],
-                footer: "Everything in this version runs from an explicit local-only trust posture. Capture storage is live under Today, routine review lives under Plan, portable backup and restore can stay local-first, validated route claims stay narrow, and unverified platform surfaces stay conservative in copy."
+                footer: "Everything in this version runs from an explicit local-only trust posture. Capture storage is live under Today, routine review lives under Plan, portable backup and restore can stay local-first, routing truth stays explicit, and unverified platform surfaces stay conservative in copy."
             ),
             notificationAuthorization: notificationStatus,
             preferences: ProfilePreferencesState(

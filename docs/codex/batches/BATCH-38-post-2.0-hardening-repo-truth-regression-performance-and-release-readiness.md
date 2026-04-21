@@ -2,7 +2,7 @@
 
 ## Status
 
-Queued
+Completed
 
 ## Goal
 
@@ -49,3 +49,11 @@ This batch is the fourth and final planned step of the current hardening wave. I
 ## Completion Rule
 
 Batch 38 is complete only when the current hardening wave has been consolidated truthfully enough that a separate UI/UX excellence wave can begin without reopening shell, trust, or repo-truth fundamentals.
+
+## Completion Note
+
+Completed on `main` as the hardening-wave consolidation pass for repo truth, previews, docs, regression coverage, and release guidance. The landed scope stayed bounded: active app/docs/previews now use durable external-surface truth language, migration-era preview copy was removed, Profile trust coverage and canonical routing checks were tightened, and local validation docs now reflect actually available simulators plus sequential or isolated DerivedData test guidance.
+
+Validation completed with targeted truth sweeps, `xcodegen generate`, simulator build, full `AmbitionsTests` (`344`), full `AmbitionsUITests` (`7`), and an unsigned Release archive sanity check on April 21, 2026. Performance risk was reviewed across repository-backed feature services, but no bounded architecture-safe performance code change was justified in this pass.
+
+Widget and Live Activity device behavior, App Shortcuts visibility on device, and physical-device notification/EventKit prompt behavior were not promoted beyond conservative manual-verification wording because those checks could not be completed in this environment.
