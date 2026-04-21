@@ -260,6 +260,7 @@ private struct InsightsGoalStatusCard: View {
                                     InsightsGoalStatusRow(item: item)
                                 }
                                 .buttonStyle(.plain)
+                                .accessibilityIdentifier("insights.open-goal.\(target.goalID ?? target.draftID ?? item.id)")
                             } else {
                                 InsightsGoalStatusRow(item: item)
                             }

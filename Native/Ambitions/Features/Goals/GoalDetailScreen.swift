@@ -300,6 +300,7 @@ struct GoalDetailScreen: View {
             .padding(.horizontal, theme.spacing.lg)
             .padding(.vertical, theme.spacing.md)
         }
+        .accessibilityIdentifier("goal-detail.screen")
         .scrollIndicators(.hidden)
         .refreshable {
             await viewModel.refresh(using: container.goalsService)

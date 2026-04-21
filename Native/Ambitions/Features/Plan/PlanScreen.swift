@@ -311,6 +311,7 @@ private struct PlanGoalShapingCard: View {
                                     PlanGoalShapingRow(item: item)
                                 }
                                 .buttonStyle(.plain)
+                                .accessibilityIdentifier("plan.open-goal.\(target.goalID ?? target.draftID ?? item.id)")
                             } else {
                                 PlanGoalShapingRow(item: item)
                             }

@@ -481,7 +481,13 @@ struct TodayActionChip: View {
                 .padding(.vertical, 10)
         }
         .buttonStyle(AmbitionPressableButtonStyle(state: action.state))
+        .accessibilityIdentifier(accessibilityIdentifier)
         .modifier(TodayActionAccessibilityHint(action: action))
+    }
+
+    private var accessibilityIdentifier: String {
+        let targetID = action.target.goalID ?? action.target.draftID ?? "none"
+        return "today.action.\(action.kind.rawValue).\(targetID)"
     }
 }
 

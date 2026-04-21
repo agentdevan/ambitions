@@ -107,6 +107,7 @@ struct GoalsScreen: View {
                                             GoalRowCard(item: item)
                                         }
                                         .buttonStyle(.plain)
+                                        .accessibilityIdentifier("goals.open.\(item.target.goalID ?? item.target.draftID ?? item.id)")
                                     }
                                 }
                             }
