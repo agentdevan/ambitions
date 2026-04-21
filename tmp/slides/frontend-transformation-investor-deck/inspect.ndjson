@@ -1,0 +1,382 @@
+{"kind":"deck","slideCount":24}
+{"kind":"textbox","slide":1,"role":"eyebrow","text":"AMBitions front-end transformation","bbox":[74,54,300,18]}
+{"kind":"textbox","slide":1,"role":"cover-kicker","text":"Investor preview","bbox":[74,108,180,20]}
+{"kind":"textbox","slide":1,"role":"cover-title","text":"Ambitions front-end transformation","bbox":[74,146,560,78]}
+{"kind":"textbox","slide":1,"role":"cover-subtitle","text":"A presentation-ready overview of the future roadmap from Batch 39 through Batch 59, built from the current canonical planning truth.","bbox":[74,236,520,80]}
+{"kind":"textbox","slide":1,"role":"metric","text":"21","bbox":[96,380,70,38]}
+{"kind":"textbox","slide":1,"role":"metric-copy","text":"future transformation batches","bbox":[176,386,104,34]}
+{"kind":"textbox","slide":1,"role":"metric","text":"5","bbox":[348,380,54,38]}
+{"kind":"textbox","slide":1,"role":"metric-copy","text":"major product layers redesigned","bbox":[426,386,100,34]}
+{"kind":"textbox","slide":1,"role":"cover-moment","text":"Calm. Obvious. Premium. Consumer-native.","bbox":[768,448,312,34]}
+{"kind":"textbox","slide":1,"role":"cover-copy","text":"The end state is a high-trust external brain that feels authored across every screen and every device surface.","bbox":[768,494,296,40]}
+{"kind":"textbox","slide":1,"role":"footer-left","text":"Covers only queued future work: Batches 39–59","bbox":[74,666,700,16]}
+{"kind":"textbox","slide":1,"role":"footer-right","text":"Investor presentation preview","bbox":[964,666,238,16]}
+{"kind":"textbox","slide":2,"role":"eyebrow","text":"AMBitions front-end transformation","bbox":[74,54,300,18]}
+{"kind":"textbox","slide":2,"role":"title","text":"Where the roadmap stands today","bbox":[74,94,520,54]}
+{"kind":"textbox","slide":2,"role":"summary","text":"This presentation begins after the current hardening wave. The live queue remains unchanged: Batch 37 is active, Batch 38 is queued, and the front-end transformation begins at Batch 39.","bbox":[74,154,548,84]}
+{"kind":"textbox","slide":2,"role":"status-metric","text":"37","bbox":[94,320,100,34]}
+{"kind":"textbox","slide":2,"role":"status-label","text":"active now","bbox":[94,358,120,18]}
+{"kind":"textbox","slide":2,"role":"status-copy","text":"Current hardening work remains in progress.","bbox":[94,384,196,28]}
+{"kind":"textbox","slide":2,"role":"status-metric","text":"38","bbox":[362,320,100,34]}
+{"kind":"textbox","slide":2,"role":"status-label","text":"queued next","bbox":[362,358,120,18]}
+{"kind":"textbox","slide":2,"role":"status-copy","text":"Hardening follow-through lands before the transformation begins.","bbox":[362,384,196,28]}
+{"kind":"textbox","slide":2,"role":"status-metric","text":"39-59","bbox":[94,468,100,34]}
+{"kind":"textbox","slide":2,"role":"status-label","text":"investor focus","bbox":[94,506,120,18]}
+{"kind":"textbox","slide":2,"role":"status-copy","text":"Every future transformation batch is queued and sequenced.","bbox":[94,532,196,28]}
+{"kind":"textbox","slide":2,"role":"status-metric","text":"0","bbox":[362,468,100,34]}
+{"kind":"textbox","slide":2,"role":"status-label","text":"optional systems","bbox":[362,506,120,18]}
+{"kind":"textbox","slide":2,"role":"status-copy","text":"Everything in the agreed transformation roadmap is intended to ship.","bbox":[362,532,196,28]}
+{"kind":"textbox","slide":2,"role":"subhead","text":"Transformation arcs","bbox":[730,154,160,20]}
+{"kind":"textbox","slide":2,"role":"arc-range","text":"39-42","bbox":[746,206,56,14]}
+{"kind":"textbox","slide":2,"role":"arc-title","text":"Foundation","bbox":[842,204,220,20]}
+{"kind":"textbox","slide":2,"role":"arc-range","text":"43-50","bbox":[746,264,56,14]}
+{"kind":"textbox","slide":2,"role":"arc-title","text":"Flagship surfaces","bbox":[842,262,220,20]}
+{"kind":"textbox","slide":2,"role":"arc-range","text":"51-53","bbox":[746,322,56,14]}
+{"kind":"textbox","slide":2,"role":"arc-title","text":"Trust and reflection","bbox":[842,320,220,20]}
+{"kind":"textbox","slide":2,"role":"arc-range","text":"54-56","bbox":[746,380,56,14]}
+{"kind":"textbox","slide":2,"role":"arc-title","text":"Ambient extension","bbox":[842,378,220,20]}
+{"kind":"textbox","slide":2,"role":"arc-range","text":"57-58","bbox":[746,438,56,14]}
+{"kind":"textbox","slide":2,"role":"arc-title","text":"Multi-device","bbox":[842,436,220,20]}
+{"kind":"textbox","slide":2,"role":"arc-range","text":"59","bbox":[746,496,56,14]}
+{"kind":"textbox","slide":2,"role":"arc-title","text":"Flagship finish","bbox":[842,494,220,20]}
+{"kind":"textbox","slide":2,"role":"status-close","text":"The message for investors is simple: the roadmap is now fully defined, fully batched, and fully mandatory. The remaining work is not discovery drift. It is execution.","bbox":[730,574,356,44]}
+{"kind":"textbox","slide":2,"role":"footer-left","text":"Current operational truth preserved: Batch 37 active, Batch 38 queued","bbox":[74,666,700,16]}
+{"kind":"textbox","slide":2,"role":"footer-right","text":"Investor presentation preview","bbox":[964,666,238,16]}
+{"kind":"textbox","slide":3,"role":"eyebrow","text":"AMBitions front-end transformation","bbox":[74,54,300,18]}
+{"kind":"textbox","slide":3,"role":"title","text":"The roadmap from Batch 39 to Batch 59","bbox":[74,94,560,54]}
+{"kind":"textbox","slide":3,"role":"summary","text":"The transformation is sequenced to protect clarity, avoid shell instability, and move from platform foundations into flagship surfaces, ambient extensions, and multi-device expansion.","bbox":[74,154,650,54]}
+{"kind":"textbox","slide":3,"role":"lane-range","text":"39-42","bbox":[92,256,62,16]}
+{"kind":"textbox","slide":3,"role":"lane-title","text":"Foundation","bbox":[92,272,150,22]}
+{"kind":"textbox","slide":3,"role":"lane-item","text":"Canon","bbox":[364,262,136,18]}
+{"kind":"textbox","slide":3,"role":"lane-item","text":"Shell","bbox":[560,262,136,18]}
+{"kind":"textbox","slide":3,"role":"lane-item","text":"Design system","bbox":[756,262,136,18]}
+{"kind":"textbox","slide":3,"role":"lane-item","text":"Command layer","bbox":[952,262,136,18]}
+{"kind":"textbox","slide":3,"role":"lane-range","text":"43-50","bbox":[92,338,62,16]}
+{"kind":"textbox","slide":3,"role":"lane-title","text":"Flagship surfaces","bbox":[92,354,150,22]}
+{"kind":"textbox","slide":3,"role":"lane-item","text":"Today","bbox":[364,344,136,18]}
+{"kind":"textbox","slide":3,"role":"lane-item","text":"Goals","bbox":[560,344,136,18]}
+{"kind":"textbox","slide":3,"role":"lane-item","text":"Goal Detail","bbox":[756,344,136,18]}
+{"kind":"textbox","slide":3,"role":"lane-item","text":"Plan","bbox":[952,344,136,18]}
+{"kind":"textbox","slide":3,"role":"lane-range","text":"51-53","bbox":[92,420,62,16]}
+{"kind":"textbox","slide":3,"role":"lane-title","text":"Trust and reflection","bbox":[92,436,150,22]}
+{"kind":"textbox","slide":3,"role":"lane-item","text":"Insights","bbox":[364,426,136,18]}
+{"kind":"textbox","slide":3,"role":"lane-item","text":"Profile","bbox":[560,426,136,18]}
+{"kind":"textbox","slide":3,"role":"lane-item","text":"Onboarding","bbox":[756,426,136,18]}
+{"kind":"textbox","slide":3,"role":"lane-range","text":"54-56","bbox":[92,502,62,16]}
+{"kind":"textbox","slide":3,"role":"lane-title","text":"Ambient extension","bbox":[92,518,150,22]}
+{"kind":"textbox","slide":3,"role":"lane-item","text":"Widgets","bbox":[364,508,136,18]}
+{"kind":"textbox","slide":3,"role":"lane-item","text":"Shortcuts","bbox":[560,508,136,18]}
+{"kind":"textbox","slide":3,"role":"lane-item","text":"Recall coherence","bbox":[756,508,136,18]}
+{"kind":"textbox","slide":3,"role":"lane-range","text":"57-59","bbox":[92,584,62,16]}
+{"kind":"textbox","slide":3,"role":"lane-title","text":"Multi-device + finish","bbox":[92,600,150,22]}
+{"kind":"textbox","slide":3,"role":"lane-item","text":"iPad/Mac","bbox":[364,590,136,18]}
+{"kind":"textbox","slide":3,"role":"lane-item","text":"Watch/TV","bbox":[560,590,136,18]}
+{"kind":"textbox","slide":3,"role":"lane-item","text":"Polish","bbox":[756,590,136,18]}
+{"kind":"textbox","slide":3,"role":"logic-head","text":"Execution logic","bbox":[826,584,120,16]}
+{"kind":"textbox","slide":3,"role":"logic-copy","text":"Build the shell first. Prove the core surfaces. Extend trust and ambient value. Expand outward only after the iPhone truth is stable.","bbox":[826,606,258,24]}
+{"kind":"textbox","slide":3,"role":"footer-left","text":"Ordered exactly as the queued future transformation program will be completed","bbox":[74,666,700,16]}
+{"kind":"textbox","slide":3,"role":"footer-right","text":"Investor presentation preview","bbox":[964,666,238,16]}
+{"kind":"textbox","slide":4,"role":"eyebrow","text":"AMBitions front-end transformation","bbox":[74,54,300,18]}
+{"kind":"textbox","slide":4,"role":"pill","text":"BATCH 39","bbox":[86,88,78,16]}
+{"kind":"textbox","slide":4,"role":"pill","text":"FOUNDATION","bbox":[198,88,120,16]}
+{"kind":"textbox","slide":4,"role":"title","text":"Program canon and shell rewrite foundation","bbox":[74,122,600,92]}
+{"kind":"textbox","slide":4,"role":"summary","text":"This batch locks the transformation into executable truth. It turns the redesign from an idea into a governed program with one canon, one design language, and one roadmap for everything that follows.","bbox":[74,218,560,86]}
+{"kind":"textbox","slide":4,"role":"outcome-index","text":"1","bbox":[107,349,16,18]}
+{"kind":"textbox","slide":4,"role":"outcome","text":"Defines the official transformation playbook, named interaction systems, and design principles.","bbox":[154,340,454,46]}
+{"kind":"textbox","slide":4,"role":"outcome-index","text":"2","bbox":[107,453,16,18]}
+{"kind":"textbox","slide":4,"role":"outcome","text":"Sets the rules for shell change, surface ownership, external surfaces, and cross-device continuity.","bbox":[154,444,454,46]}
+{"kind":"textbox","slide":4,"role":"outcome-index","text":"3","bbox":[107,557,16,18]}
+{"kind":"textbox","slide":4,"role":"outcome","text":"Removes interpretation drift so every later batch builds toward the same premium product outcome.","bbox":[154,548,454,46]}
+{"kind":"textbox","slide":4,"role":"mockup-label","text":"Intended batch outcome","bbox":[714,112,160,18]}
+{"kind":"textbox","slide":4,"role":"mockup","text":"Shell truth","bbox":[854,254,120,20]}
+{"kind":"textbox","slide":4,"role":"mockup","text":"Design canon","bbox":[854,284,160,24]}
+{"kind":"textbox","slide":4,"role":"footer-left","text":"Queued future batch 39 of 59","bbox":[74,666,700,16]}
+{"kind":"textbox","slide":4,"role":"footer-right","text":"Investor presentation preview","bbox":[964,666,238,16]}
+{"kind":"textbox","slide":5,"role":"eyebrow","text":"AMBitions front-end transformation","bbox":[74,54,300,18]}
+{"kind":"textbox","slide":5,"role":"pill","text":"BATCH 40","bbox":[86,88,78,16]}
+{"kind":"textbox","slide":5,"role":"pill","text":"FOUNDATION","bbox":[198,88,120,16]}
+{"kind":"textbox","slide":5,"role":"title","text":"Shell reconsideration and navigation architecture","bbox":[74,122,600,92]}
+{"kind":"textbox","slide":5,"role":"summary","text":"This is the structural rewrite of the product shell. Ambitions gets a clearer navigation model, more coherent route ownership, and a foundation built to support the entire front-end transformation.","bbox":[74,218,560,86]}
+{"kind":"textbox","slide":5,"role":"outcome-index","text":"1","bbox":[107,349,16,18]}
+{"kind":"textbox","slide":5,"role":"outcome","text":"Rebuilds top-level navigation and deep-link behavior into one coherent system.","bbox":[154,340,454,46]}
+{"kind":"textbox","slide":5,"role":"outcome-index","text":"2","bbox":[107,453,16,18]}
+{"kind":"textbox","slide":5,"role":"outcome","text":"Introduces the adaptive header rail and shell-aware transition grammar.","bbox":[154,444,454,46]}
+{"kind":"textbox","slide":5,"role":"outcome-index","text":"3","bbox":[107,557,16,18]}
+{"kind":"textbox","slide":5,"role":"outcome","text":"Makes every later surface redesign easier to understand, faster to enter, and harder to fragment.","bbox":[154,548,454,46]}
+{"kind":"textbox","slide":5,"role":"mockup-label","text":"Intended batch outcome","bbox":[714,112,160,18]}
+{"kind":"textbox","slide":5,"role":"footer-left","text":"Queued future batch 40 of 59","bbox":[74,666,700,16]}
+{"kind":"textbox","slide":5,"role":"footer-right","text":"Investor presentation preview","bbox":[964,666,238,16]}
+{"kind":"textbox","slide":6,"role":"eyebrow","text":"AMBitions front-end transformation","bbox":[74,54,300,18]}
+{"kind":"textbox","slide":6,"role":"pill","text":"BATCH 41","bbox":[86,88,78,16]}
+{"kind":"textbox","slide":6,"role":"pill","text":"FOUNDATION","bbox":[198,88,120,16]}
+{"kind":"textbox","slide":6,"role":"title","text":"Design system, materials, motion engine, and controls","bbox":[74,122,600,92]}
+{"kind":"textbox","slide":6,"role":"summary","text":"This batch gives Ambitions one premium visual language. Typography, surfaces, motion, controls, and theming become part of a single system instead of screen-by-screen styling.","bbox":[74,218,560,86]}
+{"kind":"textbox","slide":6,"role":"outcome-index","text":"1","bbox":[107,349,16,18]}
+{"kind":"textbox","slide":6,"role":"outcome","text":"Standardizes tokens for color, spacing, typography, depth, timing, and haptics.","bbox":[154,340,454,46]}
+{"kind":"textbox","slide":6,"role":"outcome-index","text":"2","bbox":[107,453,16,18]}
+{"kind":"textbox","slide":6,"role":"outcome","text":"Creates the shared component set every future surface can rely on.","bbox":[154,444,454,46]}
+{"kind":"textbox","slide":6,"role":"outcome-index","text":"3","bbox":[107,557,16,18]}
+{"kind":"textbox","slide":6,"role":"outcome","text":"Elevates the product from good app screens to one authored flagship interface.","bbox":[154,548,454,46]}
+{"kind":"textbox","slide":6,"role":"mockup-label","text":"Intended batch outcome","bbox":[714,112,160,18]}
+{"kind":"textbox","slide":6,"role":"mockup","text":"System tokens","bbox":[766,174,130,20]}
+{"kind":"textbox","slide":6,"role":"mockup","text":"Primary action","bbox":[796,319,100,18]}
+{"kind":"textbox","slide":6,"role":"mockup","text":"Secondary","bbox":[990,319,70,18]}
+{"kind":"textbox","slide":6,"role":"mockup","text":"Typography, motion, spacing, and materials all align into one premium system.","bbox":[792,398,282,46]}
+{"kind":"textbox","slide":6,"role":"footer-left","text":"Queued future batch 41 of 59","bbox":[74,666,700,16]}
+{"kind":"textbox","slide":6,"role":"footer-right","text":"Investor presentation preview","bbox":[964,666,238,16]}
+{"kind":"textbox","slide":7,"role":"eyebrow","text":"AMBitions front-end transformation","bbox":[74,54,300,18]}
+{"kind":"textbox","slide":7,"role":"pill","text":"BATCH 42","bbox":[86,88,78,16]}
+{"kind":"textbox","slide":7,"role":"pill","text":"FOUNDATION","bbox":[198,88,120,16]}
+{"kind":"textbox","slide":7,"role":"title","text":"Global compose, search, capture, and command surface","bbox":[74,122,600,92]}
+{"kind":"textbox","slide":7,"role":"summary","text":"This is the cross-app action layer. Capture, search, quick planning, recovery, and recall all converge into one elegant command experience.","bbox":[74,218,560,86]}
+{"kind":"textbox","slide":7,"role":"outcome-index","text":"1","bbox":[107,349,16,18]}
+{"kind":"textbox","slide":7,"role":"outcome","text":"Introduces the contextual global compose model and quiet command sheet.","bbox":[154,340,454,46]}
+{"kind":"textbox","slide":7,"role":"outcome-index","text":"2","bbox":[107,453,16,18]}
+{"kind":"textbox","slide":7,"role":"outcome","text":"Unifies fast capture, memory recall, open-object actions, and recovery shortcuts.","bbox":[154,444,454,46]}
+{"kind":"textbox","slide":7,"role":"outcome-index","text":"3","bbox":[107,557,16,18]}
+{"kind":"textbox","slide":7,"role":"outcome","text":"Makes the app feel more like an operating system than a collection of disconnected screens.","bbox":[154,548,454,46]}
+{"kind":"textbox","slide":7,"role":"mockup-label","text":"Intended batch outcome","bbox":[714,112,160,18]}
+{"kind":"textbox","slide":7,"role":"footer-left","text":"Queued future batch 42 of 59","bbox":[74,666,700,16]}
+{"kind":"textbox","slide":7,"role":"footer-right","text":"Investor presentation preview","bbox":[964,666,238,16]}
+{"kind":"textbox","slide":8,"role":"eyebrow","text":"AMBitions front-end transformation","bbox":[74,54,300,18]}
+{"kind":"textbox","slide":8,"role":"pill","text":"BATCH 43","bbox":[86,88,78,16]}
+{"kind":"textbox","slide":8,"role":"pill","text":"CORE SURFACES","bbox":[198,88,120,16]}
+{"kind":"textbox","slide":8,"role":"title","text":"Today rebuild I — living hero, now state, and action model","bbox":[74,122,600,92]}
+{"kind":"textbox","slide":8,"role":"summary","text":"Today becomes the flagship command center. The home experience starts prioritizing the real now, the next move, and the strongest action with far more clarity and authority.","bbox":[74,218,560,86]}
+{"kind":"textbox","slide":8,"role":"outcome-index","text":"1","bbox":[107,349,16,18]}
+{"kind":"textbox","slide":8,"role":"outcome","text":"Introduces the living hero surface for now, next, and daily posture.","bbox":[154,340,454,46]}
+{"kind":"textbox","slide":8,"role":"outcome-index","text":"2","bbox":[107,453,16,18]}
+{"kind":"textbox","slide":8,"role":"outcome","text":"Refocuses the home screen around one obvious best move instead of stacked utility panels.","bbox":[154,444,454,46]}
+{"kind":"textbox","slide":8,"role":"outcome-index","text":"3","bbox":[107,557,16,18]}
+{"kind":"textbox","slide":8,"role":"outcome","text":"Makes the product’s most frequently used surface feel calmer, stronger, and more habit-forming.","bbox":[154,548,454,46]}
+{"kind":"textbox","slide":8,"role":"mockup-label","text":"Intended batch outcome","bbox":[714,112,160,18]}
+{"kind":"textbox","slide":8,"role":"footer-left","text":"Queued future batch 43 of 59","bbox":[74,666,700,16]}
+{"kind":"textbox","slide":8,"role":"footer-right","text":"Investor presentation preview","bbox":[964,666,238,16]}
+{"kind":"textbox","slide":9,"role":"eyebrow","text":"AMBitions front-end transformation","bbox":[74,54,300,18]}
+{"kind":"textbox","slide":9,"role":"pill","text":"BATCH 44","bbox":[86,88,78,16]}
+{"kind":"textbox","slide":9,"role":"pill","text":"CORE SURFACES","bbox":[198,88,120,16]}
+{"kind":"textbox","slide":9,"role":"title","text":"Today rebuild II — time aperture, recovery bloom, and day logic","bbox":[74,122,600,92]}
+{"kind":"textbox","slide":9,"role":"summary","text":"The Today experience becomes adaptive and reality-aware. Ambitions starts helping users recover from drift, understand time, and reshape the day without shame or complexity.","bbox":[74,218,560,86]}
+{"kind":"textbox","slide":9,"role":"outcome-index","text":"1","bbox":[107,349,16,18]}
+{"kind":"textbox","slide":9,"role":"outcome","text":"Adds time aperture for understanding room, compression, and availability at a glance.","bbox":[154,340,454,46]}
+{"kind":"textbox","slide":9,"role":"outcome-index","text":"2","bbox":[107,453,16,18]}
+{"kind":"textbox","slide":9,"role":"outcome","text":"Introduces recovery bloom so broken plans turn into safe next moves instead of dead ends.","bbox":[154,444,454,46]}
+{"kind":"textbox","slide":9,"role":"outcome-index","text":"3","bbox":[107,557,16,18]}
+{"kind":"textbox","slide":9,"role":"outcome","text":"Upgrades day-shaping logic so the home surface feels more intelligent under real-life pressure.","bbox":[154,548,454,46]}
+{"kind":"textbox","slide":9,"role":"mockup-label","text":"Intended batch outcome","bbox":[714,112,160,18]}
+{"kind":"textbox","slide":9,"role":"footer-left","text":"Queued future batch 44 of 59","bbox":[74,666,700,16]}
+{"kind":"textbox","slide":9,"role":"footer-right","text":"Investor presentation preview","bbox":[964,666,238,16]}
+{"kind":"textbox","slide":10,"role":"eyebrow","text":"AMBitions front-end transformation","bbox":[74,54,300,18]}
+{"kind":"textbox","slide":10,"role":"pill","text":"BATCH 45","bbox":[86,88,78,16]}
+{"kind":"textbox","slide":10,"role":"pill","text":"CORE SURFACES","bbox":[198,88,120,16]}
+{"kind":"textbox","slide":10,"role":"title","text":"Goals rebuild I — direction board and horizon ladder","bbox":[74,122,600,92]}
+{"kind":"textbox","slide":10,"role":"summary","text":"Goals stops feeling like inventory and starts feeling like direction. This batch turns ambitions into a living board of priorities, momentum, and long-range structure.","bbox":[74,218,560,86]}
+{"kind":"textbox","slide":10,"role":"outcome-index","text":"1","bbox":[107,349,16,18]}
+{"kind":"textbox","slide":10,"role":"outcome","text":"Rebuilds goal cards around health, pace, pressure, and strategic relevance.","bbox":[154,340,454,46]}
+{"kind":"textbox","slide":10,"role":"outcome-index","text":"2","bbox":[107,453,16,18]}
+{"kind":"textbox","slide":10,"role":"outcome","text":"Introduces horizon-based structure so users can see what matters now, this week, and over time.","bbox":[154,444,454,46]}
+{"kind":"textbox","slide":10,"role":"outcome-index","text":"3","bbox":[107,557,16,18]}
+{"kind":"textbox","slide":10,"role":"outcome","text":"Makes ambition feel visible and actionable instead of buried in lists.","bbox":[154,548,454,46]}
+{"kind":"textbox","slide":10,"role":"mockup-label","text":"Intended batch outcome","bbox":[714,112,160,18]}
+{"kind":"textbox","slide":10,"role":"footer-left","text":"Queued future batch 45 of 59","bbox":[74,666,700,16]}
+{"kind":"textbox","slide":10,"role":"footer-right","text":"Investor presentation preview","bbox":[964,666,238,16]}
+{"kind":"textbox","slide":11,"role":"eyebrow","text":"AMBitions front-end transformation","bbox":[74,54,300,18]}
+{"kind":"textbox","slide":11,"role":"pill","text":"BATCH 46","bbox":[86,88,78,16]}
+{"kind":"textbox","slide":11,"role":"pill","text":"CORE SURFACES","bbox":[198,88,120,16]}
+{"kind":"textbox","slide":11,"role":"title","text":"Goal intake and Strategy Composer","bbox":[74,122,600,92]}
+{"kind":"textbox","slide":11,"role":"summary","text":"Goal creation becomes strategic rather than administrative. New ambitions move through a guided, high-trust composition flow that helps users shape believable plans from day one.","bbox":[74,218,560,86]}
+{"kind":"textbox","slide":11,"role":"outcome-index","text":"1","bbox":[107,349,16,18]}
+{"kind":"textbox","slide":11,"role":"outcome","text":"Turns goal intake into a premium authored flow instead of a plain form.","bbox":[154,340,454,46]}
+{"kind":"textbox","slide":11,"role":"outcome-index","text":"2","bbox":[107,453,16,18]}
+{"kind":"textbox","slide":11,"role":"outcome","text":"Helps users define scope, pace, and structure before a goal enters execution.","bbox":[154,444,454,46]}
+{"kind":"textbox","slide":11,"role":"outcome-index","text":"3","bbox":[107,557,16,18]}
+{"kind":"textbox","slide":11,"role":"outcome","text":"Improves the quality of every later screen by starting with stronger planning inputs.","bbox":[154,548,454,46]}
+{"kind":"textbox","slide":11,"role":"mockup-label","text":"Intended batch outcome","bbox":[714,112,160,18]}
+{"kind":"textbox","slide":11,"role":"footer-left","text":"Queued future batch 46 of 59","bbox":[74,666,700,16]}
+{"kind":"textbox","slide":11,"role":"footer-right","text":"Investor presentation preview","bbox":[964,666,238,16]}
+{"kind":"textbox","slide":12,"role":"eyebrow","text":"AMBitions front-end transformation","bbox":[74,54,300,18]}
+{"kind":"textbox","slide":12,"role":"pill","text":"BATCH 47","bbox":[86,88,78,16]}
+{"kind":"textbox","slide":12,"role":"pill","text":"CORE SURFACES","bbox":[198,88,120,16]}
+{"kind":"textbox","slide":12,"role":"title","text":"Goal Detail rebuild I — strategic chamber and path filmstrip","bbox":[74,122,600,92]}
+{"kind":"textbox","slide":12,"role":"summary","text":"Each goal becomes a living strategy chamber. The product starts showing movement, phase, and next action in a way that feels dynamic, visual, and easy to trust.","bbox":[74,218,560,86]}
+{"kind":"textbox","slide":12,"role":"outcome-index","text":"1","bbox":[107,349,16,18]}
+{"kind":"textbox","slide":12,"role":"outcome","text":"Introduces a richer goal detail hierarchy built around path, phase, and next movement.","bbox":[154,340,454,46]}
+{"kind":"textbox","slide":12,"role":"outcome-index","text":"2","bbox":[107,453,16,18]}
+{"kind":"textbox","slide":12,"role":"outcome","text":"Adds the path filmstrip so progress feels directional instead of administrative.","bbox":[154,444,454,46]}
+{"kind":"textbox","slide":12,"role":"outcome-index","text":"3","bbox":[107,557,16,18]}
+{"kind":"textbox","slide":12,"role":"outcome","text":"Creates a more premium bridge between goals, today, and weekly planning.","bbox":[154,548,454,46]}
+{"kind":"textbox","slide":12,"role":"mockup-label","text":"Intended batch outcome","bbox":[714,112,160,18]}
+{"kind":"textbox","slide":12,"role":"footer-left","text":"Queued future batch 47 of 59","bbox":[74,666,700,16]}
+{"kind":"textbox","slide":12,"role":"footer-right","text":"Investor presentation preview","bbox":[964,666,238,16]}
+{"kind":"textbox","slide":13,"role":"eyebrow","text":"AMBitions front-end transformation","bbox":[74,54,300,18]}
+{"kind":"textbox","slide":13,"role":"pill","text":"BATCH 48","bbox":[86,88,78,16]}
+{"kind":"textbox","slide":13,"role":"pill","text":"CORE SURFACES","bbox":[198,88,120,16]}
+{"kind":"textbox","slide":13,"role":"title","text":"Goal Detail rebuild II — trust whisper, correction, audit, and memory","bbox":[74,122,600,92]}
+{"kind":"textbox","slide":13,"role":"summary","text":"Trust becomes beautifully legible. Users gain a calm way to understand why the system made a call, what changed, and how to correct it without technical clutter.","bbox":[74,218,560,86]}
+{"kind":"textbox","slide":13,"role":"outcome-index","text":"1","bbox":[107,349,16,18]}
+{"kind":"textbox","slide":13,"role":"outcome","text":"Introduces trust whisper, audit, contradiction review, and memory depth into Goal Detail.","bbox":[154,340,454,46]}
+{"kind":"textbox","slide":13,"role":"outcome-index","text":"2","bbox":[107,453,16,18]}
+{"kind":"textbox","slide":13,"role":"outcome","text":"Turns corrections into humane product interactions rather than model management.","bbox":[154,444,454,46]}
+{"kind":"textbox","slide":13,"role":"outcome-index","text":"3","bbox":[107,557,16,18]}
+{"kind":"textbox","slide":13,"role":"outcome","text":"Strengthens confidence in the intelligence layer without sacrificing calmness or restraint.","bbox":[154,548,454,46]}
+{"kind":"textbox","slide":13,"role":"mockup-label","text":"Intended batch outcome","bbox":[714,112,160,18]}
+{"kind":"textbox","slide":13,"role":"footer-left","text":"Queued future batch 48 of 59","bbox":[74,666,700,16]}
+{"kind":"textbox","slide":13,"role":"footer-right","text":"Investor presentation preview","bbox":[964,666,238,16]}
+{"kind":"textbox","slide":14,"role":"eyebrow","text":"AMBitions front-end transformation","bbox":[74,54,300,18]}
+{"kind":"textbox","slide":14,"role":"pill","text":"BATCH 49","bbox":[86,88,78,16]}
+{"kind":"textbox","slide":14,"role":"pill","text":"CORE SURFACES","bbox":[198,88,120,16]}
+{"kind":"textbox","slide":14,"role":"title","text":"Plan rebuild I — elastic week and pressure scrubber","bbox":[74,122,600,92]}
+{"kind":"textbox","slide":14,"role":"summary","text":"Weekly planning becomes a premium shaping workspace. Instead of a cramped calendar, users see room, pressure, and tradeoffs in a format that feels elegant and decisive.","bbox":[74,218,560,86]}
+{"kind":"textbox","slide":14,"role":"outcome-index","text":"1","bbox":[107,349,16,18]}
+{"kind":"textbox","slide":14,"role":"outcome","text":"Introduces the elastic week view so time density expands and compresses intentionally.","bbox":[154,340,454,46]}
+{"kind":"textbox","slide":14,"role":"outcome-index","text":"2","bbox":[107,453,16,18]}
+{"kind":"textbox","slide":14,"role":"outcome","text":"Makes pressure visible through a calmer planning grammar instead of dashboard clutter.","bbox":[154,444,454,46]}
+{"kind":"textbox","slide":14,"role":"outcome-index","text":"3","bbox":[107,557,16,18]}
+{"kind":"textbox","slide":14,"role":"outcome","text":"Turns Plan into a strategic workspace that supports action rather than fighting it.","bbox":[154,548,454,46]}
+{"kind":"textbox","slide":14,"role":"mockup-label","text":"Intended batch outcome","bbox":[714,112,160,18]}
+{"kind":"textbox","slide":14,"role":"footer-left","text":"Queued future batch 49 of 59","bbox":[74,666,700,16]}
+{"kind":"textbox","slide":14,"role":"footer-right","text":"Investor presentation preview","bbox":[964,666,238,16]}
+{"kind":"textbox","slide":15,"role":"eyebrow","text":"AMBitions front-end transformation","bbox":[74,54,300,18]}
+{"kind":"textbox","slide":15,"role":"pill","text":"BATCH 50","bbox":[86,88,78,16]}
+{"kind":"textbox","slide":15,"role":"pill","text":"CORE SURFACES","bbox":[198,88,120,16]}
+{"kind":"textbox","slide":15,"role":"title","text":"Plan rebuild II — habits, captures, weekly review, and shaping logic","bbox":[74,122,600,92]}
+{"kind":"textbox","slide":15,"role":"summary","text":"Plan becomes a true operating system for the week. Habits, captures, review loops, and advanced shaping behaviors lock into the same authored planning experience.","bbox":[74,218,560,86]}
+{"kind":"textbox","slide":15,"role":"outcome-index","text":"1","bbox":[107,349,16,18]}
+{"kind":"textbox","slide":15,"role":"outcome","text":"Absorbs supporting workflows into the planning surface so the week feels unified.","bbox":[154,340,454,46]}
+{"kind":"textbox","slide":15,"role":"outcome-index","text":"2","bbox":[107,453,16,18]}
+{"kind":"textbox","slide":15,"role":"outcome","text":"Adds advanced later-core behaviors like window magnetism and contained split-pane shaping states.","bbox":[154,444,454,46]}
+{"kind":"textbox","slide":15,"role":"outcome-index","text":"3","bbox":[107,557,16,18]}
+{"kind":"textbox","slide":15,"role":"outcome","text":"Makes the weekly loop stronger, more believable, and more defensible as a flagship experience.","bbox":[154,548,454,46]}
+{"kind":"textbox","slide":15,"role":"mockup-label","text":"Intended batch outcome","bbox":[714,112,160,18]}
+{"kind":"textbox","slide":15,"role":"footer-left","text":"Queued future batch 50 of 59","bbox":[74,666,700,16]}
+{"kind":"textbox","slide":15,"role":"footer-right","text":"Investor presentation preview","bbox":[964,666,238,16]}
+{"kind":"textbox","slide":16,"role":"eyebrow","text":"AMBitions front-end transformation","bbox":[74,54,300,18]}
+{"kind":"textbox","slide":16,"role":"pill","text":"BATCH 51","bbox":[86,88,78,16]}
+{"kind":"textbox","slide":16,"role":"pill","text":"TRUST AND REFLECTION","bbox":[198,88,120,16]}
+{"kind":"textbox","slide":16,"role":"title","text":"Insights rebuild and reflection OS","bbox":[74,122,600,92]}
+{"kind":"textbox","slide":16,"role":"summary","text":"Insights evolves from analytics into narrative proof. Reflection becomes more human, more trustworthy, and more useful for long-term momentum.","bbox":[74,218,560,86]}
+{"kind":"textbox","slide":16,"role":"outcome-index","text":"1","bbox":[107,349,16,18]}
+{"kind":"textbox","slide":16,"role":"outcome","text":"Rebuilds the reflection experience around patterns, proof, and behavior clusters.","bbox":[154,340,454,46]}
+{"kind":"textbox","slide":16,"role":"outcome-index","text":"2","bbox":[107,453,16,18]}
+{"kind":"textbox","slide":16,"role":"outcome","text":"Introduces review constellation as a more premium alternative to dashboard-heavy analytics.","bbox":[154,444,454,46]}
+{"kind":"textbox","slide":16,"role":"outcome-index","text":"3","bbox":[107,557,16,18]}
+{"kind":"textbox","slide":16,"role":"outcome","text":"Gives investors and users a clearer picture of how the product turns history into actionable insight.","bbox":[154,548,454,46]}
+{"kind":"textbox","slide":16,"role":"mockup-label","text":"Intended batch outcome","bbox":[714,112,160,18]}
+{"kind":"textbox","slide":16,"role":"footer-left","text":"Queued future batch 51 of 59","bbox":[74,666,700,16]}
+{"kind":"textbox","slide":16,"role":"footer-right","text":"Investor presentation preview","bbox":[964,666,238,16]}
+{"kind":"textbox","slide":17,"role":"eyebrow","text":"AMBitions front-end transformation","bbox":[74,54,300,18]}
+{"kind":"textbox","slide":17,"role":"pill","text":"BATCH 52","bbox":[86,88,78,16]}
+{"kind":"textbox","slide":17,"role":"pill","text":"TRUST AND REFLECTION","bbox":[198,88,120,16]}
+{"kind":"textbox","slide":17,"role":"title","text":"Profile rebuild, Appearance Studio, and Trust Center","bbox":[74,122,600,92]}
+{"kind":"textbox","slide":17,"role":"summary","text":"Utility surfaces become premium. Appearance, trust, sync, defaults, and system posture move into an experience that feels deliberate instead of settings-heavy.","bbox":[74,218,560,86]}
+{"kind":"textbox","slide":17,"role":"outcome-index","text":"1","bbox":[107,349,16,18]}
+{"kind":"textbox","slide":17,"role":"outcome","text":"Introduces Appearance Studio for curated theming and visual personalization.","bbox":[154,340,454,46]}
+{"kind":"textbox","slide":17,"role":"outcome-index","text":"2","bbox":[107,453,16,18]}
+{"kind":"textbox","slide":17,"role":"outcome","text":"Creates a calmer trust center for sync, integrations, and system status.","bbox":[154,444,454,46]}
+{"kind":"textbox","slide":17,"role":"outcome-index","text":"3","bbox":[107,557,16,18]}
+{"kind":"textbox","slide":17,"role":"outcome","text":"Raises the overall product finish by making utility feel as designed as execution.","bbox":[154,548,454,46]}
+{"kind":"textbox","slide":17,"role":"mockup-label","text":"Intended batch outcome","bbox":[714,112,160,18]}
+{"kind":"textbox","slide":17,"role":"footer-left","text":"Queued future batch 52 of 59","bbox":[74,666,700,16]}
+{"kind":"textbox","slide":17,"role":"footer-right","text":"Investor presentation preview","bbox":[964,666,238,16]}
+{"kind":"textbox","slide":18,"role":"eyebrow","text":"AMBitions front-end transformation","bbox":[74,54,300,18]}
+{"kind":"textbox","slide":18,"role":"pill","text":"BATCH 53","bbox":[86,88,78,16]}
+{"kind":"textbox","slide":18,"role":"pill","text":"TRUST AND REFLECTION","bbox":[198,88,120,16]}
+{"kind":"textbox","slide":18,"role":"title","text":"Onboarding, first-run, permissions, education, and state systems","bbox":[74,122,600,92]}
+{"kind":"textbox","slide":18,"role":"summary","text":"The first-run experience becomes worthy of the product. New users get a calmer entry, clearer permissions, and more intentional state behavior from the beginning.","bbox":[74,218,560,86]}
+{"kind":"textbox","slide":18,"role":"outcome-index","text":"1","bbox":[107,349,16,18]}
+{"kind":"textbox","slide":18,"role":"outcome","text":"Rebuilds onboarding and education around product confidence rather than setup friction.","bbox":[154,340,454,46]}
+{"kind":"textbox","slide":18,"role":"outcome-index","text":"2","bbox":[107,453,16,18]}
+{"kind":"textbox","slide":18,"role":"outcome","text":"Improves loading, error, empty, and re-entry states across the transformed product.","bbox":[154,444,454,46]}
+{"kind":"textbox","slide":18,"role":"outcome-index","text":"3","bbox":[107,557,16,18]}
+{"kind":"textbox","slide":18,"role":"outcome","text":"Makes early user impressions more premium, more understandable, and more conversion-friendly.","bbox":[154,548,454,46]}
+{"kind":"textbox","slide":18,"role":"mockup-label","text":"Intended batch outcome","bbox":[714,112,160,18]}
+{"kind":"textbox","slide":18,"role":"footer-left","text":"Queued future batch 53 of 59","bbox":[74,666,700,16]}
+{"kind":"textbox","slide":18,"role":"footer-right","text":"Investor presentation preview","bbox":[964,666,238,16]}
+{"kind":"textbox","slide":19,"role":"eyebrow","text":"AMBitions front-end transformation","bbox":[74,54,300,18]}
+{"kind":"textbox","slide":19,"role":"pill","text":"BATCH 54","bbox":[86,88,78,16]}
+{"kind":"textbox","slide":19,"role":"pill","text":"AMBIENT EXTENSION","bbox":[198,88,120,16]}
+{"kind":"textbox","slide":19,"role":"title","text":"External surfaces I — widgets, Live Activities, notifications","bbox":[74,122,600,92]}
+{"kind":"textbox","slide":19,"role":"summary","text":"Ambitions steps beyond the app. Widgets, Live Activities, and notifications become real product surfaces that carry the same clarity, tone, and quality as the core experience.","bbox":[74,218,560,86]}
+{"kind":"textbox","slide":19,"role":"outcome-index","text":"1","bbox":[107,349,16,18]}
+{"kind":"textbox","slide":19,"role":"outcome","text":"Extends the transformed visual system into glanceable iPhone surfaces.","bbox":[154,340,454,46]}
+{"kind":"textbox","slide":19,"role":"outcome-index","text":"2","bbox":[107,453,16,18]}
+{"kind":"textbox","slide":19,"role":"outcome","text":"Creates more daily visibility without relying on attention-grabbing gimmicks.","bbox":[154,444,454,46]}
+{"kind":"textbox","slide":19,"role":"outcome-index","text":"3","bbox":[107,557,16,18]}
+{"kind":"textbox","slide":19,"role":"outcome","text":"Strengthens retention by making Ambitions useful before the app even opens.","bbox":[154,548,454,46]}
+{"kind":"textbox","slide":19,"role":"mockup-label","text":"Intended batch outcome","bbox":[714,112,160,18]}
+{"kind":"textbox","slide":19,"role":"footer-left","text":"Queued future batch 54 of 59","bbox":[74,666,700,16]}
+{"kind":"textbox","slide":19,"role":"footer-right","text":"Investor presentation preview","bbox":[964,666,238,16]}
+{"kind":"textbox","slide":20,"role":"eyebrow","text":"AMBitions front-end transformation","bbox":[74,54,300,18]}
+{"kind":"textbox","slide":20,"role":"pill","text":"BATCH 55","bbox":[86,88,78,16]}
+{"kind":"textbox","slide":20,"role":"pill","text":"AMBIENT EXTENSION","bbox":[198,88,120,16]}
+{"kind":"textbox","slide":20,"role":"title","text":"External surfaces II — share extension, App Intents, shortcuts, routing","bbox":[74,122,600,92]}
+{"kind":"textbox","slide":20,"role":"summary","text":"External entry points become part of the operating system. Sharing, shortcuts, intents, and routing feel native, fast, and deeply integrated instead of peripheral.","bbox":[74,218,560,86]}
+{"kind":"textbox","slide":20,"role":"outcome-index","text":"1","bbox":[107,349,16,18]}
+{"kind":"textbox","slide":20,"role":"outcome","text":"Lets users push ideas into Ambitions from wherever they are.","bbox":[154,340,454,46]}
+{"kind":"textbox","slide":20,"role":"outcome-index","text":"2","bbox":[107,453,16,18]}
+{"kind":"textbox","slide":20,"role":"outcome","text":"Turns shortcuts and intents into serious product touchpoints, not technical extras.","bbox":[154,444,454,46]}
+{"kind":"textbox","slide":20,"role":"outcome-index","text":"3","bbox":[107,557,16,18]}
+{"kind":"textbox","slide":20,"role":"outcome","text":"Improves the odds that the product becomes part of a user’s daily mental workflow.","bbox":[154,548,454,46]}
+{"kind":"textbox","slide":20,"role":"mockup-label","text":"Intended batch outcome","bbox":[714,112,160,18]}
+{"kind":"textbox","slide":20,"role":"footer-left","text":"Queued future batch 55 of 59","bbox":[74,666,700,16]}
+{"kind":"textbox","slide":20,"role":"footer-right","text":"Investor presentation preview","bbox":[964,666,238,16]}
+{"kind":"textbox","slide":21,"role":"eyebrow","text":"AMBitions front-end transformation","bbox":[74,54,300,18]}
+{"kind":"textbox","slide":21,"role":"pill","text":"BATCH 56","bbox":[86,88,78,16]}
+{"kind":"textbox","slide":21,"role":"pill","text":"AMBIENT EXTENSION","bbox":[198,88,120,16]}
+{"kind":"textbox","slide":21,"role":"title","text":"Cross-surface command, recall, and ambient coherence","bbox":[74,122,600,92]}
+{"kind":"textbox","slide":21,"role":"summary","text":"The product starts acting like a real external brain. Recall, command, and handoff are unified so context follows the user across every major surface.","bbox":[74,218,560,86]}
+{"kind":"textbox","slide":21,"role":"outcome-index","text":"1","bbox":[107,349,16,18]}
+{"kind":"textbox","slide":21,"role":"outcome","text":"Extends memory lens and command behavior across in-app and ambient experiences.","bbox":[154,340,454,46]}
+{"kind":"textbox","slide":21,"role":"outcome-index","text":"2","bbox":[107,453,16,18]}
+{"kind":"textbox","slide":21,"role":"outcome","text":"Makes handoff between surfaces calmer, clearer, and less repetitive.","bbox":[154,444,454,46]}
+{"kind":"textbox","slide":21,"role":"outcome-index","text":"3","bbox":[107,557,16,18]}
+{"kind":"textbox","slide":21,"role":"outcome","text":"Deepens the product moat by turning isolated actions into one coherent cognitive system.","bbox":[154,548,454,46]}
+{"kind":"textbox","slide":21,"role":"mockup-label","text":"Intended batch outcome","bbox":[714,112,160,18]}
+{"kind":"textbox","slide":21,"role":"footer-left","text":"Queued future batch 56 of 59","bbox":[74,666,700,16]}
+{"kind":"textbox","slide":21,"role":"footer-right","text":"Investor presentation preview","bbox":[964,666,238,16]}
+{"kind":"textbox","slide":22,"role":"eyebrow","text":"AMBitions front-end transformation","bbox":[74,54,300,18]}
+{"kind":"textbox","slide":22,"role":"pill","text":"BATCH 57","bbox":[86,88,78,16]}
+{"kind":"textbox","slide":22,"role":"pill","text":"MULTI-DEVICE","bbox":[198,88,120,16]}
+{"kind":"textbox","slide":22,"role":"title","text":"iPad and Mac surface architecture and first implementation","bbox":[74,122,600,92]}
+{"kind":"textbox","slide":22,"role":"summary","text":"The transformation expands to larger screens. Ambitions becomes a more powerful planning and reflection environment on iPad and Mac without losing its calmness.","bbox":[74,218,560,86]}
+{"kind":"textbox","slide":22,"role":"outcome-index","text":"1","bbox":[107,349,16,18]}
+{"kind":"textbox","slide":22,"role":"outcome","text":"Adapts the shell and major surfaces for deeper work on larger displays.","bbox":[154,340,454,46]}
+{"kind":"textbox","slide":22,"role":"outcome-index","text":"2","bbox":[107,453,16,18]}
+{"kind":"textbox","slide":22,"role":"outcome","text":"Introduces multi-pane and keyboard-aware patterns where they add clarity.","bbox":[154,444,454,46]}
+{"kind":"textbox","slide":22,"role":"outcome-index","text":"3","bbox":[107,557,16,18]}
+{"kind":"textbox","slide":22,"role":"outcome","text":"Opens the door to higher-value use cases like richer planning, review, and strategy sessions.","bbox":[154,548,454,46]}
+{"kind":"textbox","slide":22,"role":"mockup-label","text":"Intended batch outcome","bbox":[714,112,160,18]}
+{"kind":"textbox","slide":22,"role":"footer-left","text":"Queued future batch 57 of 59","bbox":[74,666,700,16]}
+{"kind":"textbox","slide":22,"role":"footer-right","text":"Investor presentation preview","bbox":[964,666,238,16]}
+{"kind":"textbox","slide":23,"role":"eyebrow","text":"AMBitions front-end transformation","bbox":[74,54,300,18]}
+{"kind":"textbox","slide":23,"role":"pill","text":"BATCH 58","bbox":[86,88,78,16]}
+{"kind":"textbox","slide":23,"role":"pill","text":"MULTI-DEVICE","bbox":[198,88,120,16]}
+{"kind":"textbox","slide":23,"role":"title","text":"Watch and Apple TV ambient surface architecture and first implementation","bbox":[74,122,600,92]}
+{"kind":"textbox","slide":23,"role":"summary","text":"Ambitions becomes ambient and household-visible. Watch and TV extend focus, ritual, and reflection into surfaces designed for the way people actually live.","bbox":[74,218,560,86]}
+{"kind":"textbox","slide":23,"role":"outcome-index","text":"1","bbox":[107,349,16,18]}
+{"kind":"textbox","slide":23,"role":"outcome","text":"Brings the product into low-friction moments of attention throughout the day.","bbox":[154,340,454,46]}
+{"kind":"textbox","slide":23,"role":"outcome-index","text":"2","bbox":[107,453,16,18]}
+{"kind":"textbox","slide":23,"role":"outcome","text":"Introduces future-facing ritual, momentum, and focus touchpoints beyond the phone.","bbox":[154,444,454,46]}
+{"kind":"textbox","slide":23,"role":"outcome-index","text":"3","bbox":[107,557,16,18]}
+{"kind":"textbox","slide":23,"role":"outcome","text":"Strengthens the platform story by showing Ambitions can scale as an ecosystem product.","bbox":[154,548,454,46]}
+{"kind":"textbox","slide":23,"role":"mockup-label","text":"Intended batch outcome","bbox":[714,112,160,18]}
+{"kind":"textbox","slide":23,"role":"footer-left","text":"Queued future batch 58 of 59","bbox":[74,666,700,16]}
+{"kind":"textbox","slide":23,"role":"footer-right","text":"Investor presentation preview","bbox":[964,666,238,16]}
+{"kind":"textbox","slide":24,"role":"eyebrow","text":"AMBitions front-end transformation","bbox":[74,54,300,18]}
+{"kind":"textbox","slide":24,"role":"pill","text":"BATCH 59","bbox":[86,88,78,16]}
+{"kind":"textbox","slide":24,"role":"pill","text":"FLAGSHIP FINISH","bbox":[198,88,120,16]}
+{"kind":"textbox","slide":24,"role":"title","text":"Finish-quality pass, accessibility, performance, and release polish","bbox":[74,122,600,92]}
+{"kind":"textbox","slide":24,"role":"summary","text":"The roadmap ends with polish, accessibility, performance, and release-grade refinement. This is where the transformed product becomes singular, cohesive, and ready to be judged as a flagship experience.","bbox":[74,218,560,86]}
+{"kind":"textbox","slide":24,"role":"outcome-index","text":"1","bbox":[107,349,16,18]}
+{"kind":"textbox","slide":24,"role":"outcome","text":"Tunes motion, haptics, responsiveness, and consistency across the full product.","bbox":[154,340,454,46]}
+{"kind":"textbox","slide":24,"role":"outcome-index","text":"2","bbox":[107,453,16,18]}
+{"kind":"textbox","slide":24,"role":"outcome","text":"Raises accessibility and quality assurance to first-class release criteria.","bbox":[154,444,454,46]}
+{"kind":"textbox","slide":24,"role":"outcome-index","text":"3","bbox":[107,557,16,18]}
+{"kind":"textbox","slide":24,"role":"outcome","text":"Turns a completed roadmap into a credible, launch-quality front-end transformation.","bbox":[154,548,454,46]}
+{"kind":"textbox","slide":24,"role":"mockup-label","text":"Intended batch outcome","bbox":[714,112,160,18]}
+{"kind":"textbox","slide":24,"role":"mockup","text":"✓","bbox":[1068,389,12,12]}
+{"kind":"textbox","slide":24,"role":"mockup","text":"✓","bbox":[1104,389,12,12]}
+{"kind":"textbox","slide":24,"role":"mockup","text":"✓","bbox":[1068,425,12,12]}
+{"kind":"textbox","slide":24,"role":"mockup","text":"✓","bbox":[1104,425,12,12]}
+{"kind":"textbox","slide":24,"role":"footer-left","text":"Queued future batch 59 of 59","bbox":[74,666,700,16]}
+{"kind":"textbox","slide":24,"role":"footer-right","text":"Investor presentation preview","bbox":[964,666,238,16]}
