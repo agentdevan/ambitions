@@ -79,6 +79,14 @@ struct ProfileScreen: View {
                             }
                             .buttonStyle(AmbitionPressableButtonStyle(state: .selected))
                             .accessibilityIdentifier("profile.save-preferences-button")
+
+                            if let actionTitle = dashboard.notificationAuthorization.actionTitle {
+                                Button(actionTitle) {
+                                    Task { await requestNotificationAuthorization() }
+                                }
+                                .buttonStyle(AmbitionPressableButtonStyle(state: .default))
+                                .accessibilityIdentifier("profile.enable-notifications-button")
+                            }
                         }
                     }
 
@@ -132,6 +140,14 @@ struct ProfileScreen: View {
         } catch {
             state = .failed("Unable to save Profile: \(error.localizedDescription)")
         }
+    }
+
+    private func requestNotificationAuthorization() async {
+        let granted = await container.notificationService.requestAuthorizationOptIn()
+        if granted {
+            await container.notificationService.refreshSchedule(now: .now)
+        }
+        await load()
     }
 
     private func syncEditor(with dashboard: ProfileDashboard) {

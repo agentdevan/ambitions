@@ -32,7 +32,7 @@ struct CapturesScreen: View {
                 if viewState.captures.isEmpty {
                     EmptyStateCard(
                         title: "No captures yet",
-                        message: "Quick capture, share extension intake, and future app intents will appear here once they create local records.",
+                        message: "Local captures created in this build appear here once they are saved. Share Extension is not shipped in this build, and navigation shortcuts do not create captures in this batch.",
                         icon: "tray"
                     )
                     .transition(.ambitionPanel)

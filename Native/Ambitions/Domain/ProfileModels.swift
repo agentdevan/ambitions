@@ -8,6 +8,13 @@ struct SettingsItem: Identifiable, Sendable {
     let valueLabel: String?
 }
 
+struct ProfileNotificationAuthorization: Sendable, Equatable {
+    let statusLabel: String
+    let detail: String
+    let canRequestAuthorization: Bool
+    let actionTitle: String?
+}
+
 struct ProfilePreferencesState: Sendable, Equatable {
     let preferredTab: AppTab
     let appearancePreference: AppAppearancePreference
@@ -32,5 +39,6 @@ struct ProfileDashboard: Sendable {
     let settingsSubtitle: String
     let settings: [SettingsItem]
     let settingsFooter: String
+    let notificationAuthorization: ProfileNotificationAuthorization
     let preferences: ProfilePreferencesState
 }

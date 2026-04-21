@@ -2,7 +2,7 @@
 
 ## Status
 
-Active
+Completed
 
 ## Goal
 
@@ -50,3 +50,29 @@ This batch is the second step of the post-2.0 whole-repo/app hardening wave. It 
 ## Completion Rule
 
 Batch 36 is complete only when external and trust surfaces are truthful, validated against the stabilized shell, and no longer depend on unresolved shell-level ambiguity.
+
+## Completion Summary
+
+- Centralized external-surface truth wording across Profile, previews, placeholders, and docs.
+- Added a narrow Profile trust surface that reflects notification authorization without turning Profile into a broader integration center.
+- Kept Share Extension explicitly unshipped in product copy and documentation.
+- Shipped App Intents only as navigation-only shortcuts bounded to Today, Plan, and the Captures inbox.
+- Preserved centralized routing through `AppExternalRouting` and the shared launch/bootstrap seam.
+- Fixed the missing `ambitions://` URL registration so real OS-surface deep links can open the app.
+
+## Validation Outcome
+
+- Passed `xcodegen generate`.
+- Passed native simulator build for `Ambitions`.
+- Passed targeted external-surface/unit coverage, including routing, payload, snapshot, notification, Profile-truth, and App-Intent routing tests.
+- Passed `AmbitionsUITests`, including canonical landing coverage for `ambitions://tab/plan` and `ambitions://captures/inbox`.
+- Passed full `AmbitionsTests` (`340` tests, `0` failures) after rerunning the unit suite on its own following a killed runner caused by parallel test execution.
+- Confirmed shared snapshot export in the App Group container and real OS-level `ambitions://` route registration with `simctl openurl`.
+
+## Conservative Surfaces After Wrap-Up
+
+- Widgets and Live Activity remain described as `Available in this build, pending Batch 36 validation`.
+- Notifications remain described as `Available in this build, pending Batch 36 validation`.
+- App Intents remain described as `Available in this build, pending Batch 36 validation` even though the navigation-only implementation shipped.
+
+These surfaces stay conservative because full manual platform confirmation of widget rendering/tap behavior, Live Activity appear-update-end behavior, notification authorization UX in Profile, and App Shortcuts visibility/opening could not be completed reliably in this environment.

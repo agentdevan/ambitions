@@ -3,6 +3,7 @@ import SwiftUI
 @main
 @MainActor
 struct AmbitionsApp: App {
+    @Environment(\.scenePhase) private var scenePhase
     @State private var bootstrapper = AppBootstrapper()
 
     init() {
@@ -17,6 +18,12 @@ struct AmbitionsApp: App {
                 }
                 .onAppear {
                     NotificationRuntime.shared.bootstrapper = bootstrapper
+                    bootstrapper.consumePendingAppIntentLaunchIfNeeded()
+                }
+                .onChange(of: scenePhase) { _, newPhase in
+                    guard newPhase == .active else { return }
+                    NotificationRuntime.shared.bootstrapper = bootstrapper
+                    bootstrapper.consumePendingAppIntentLaunchIfNeeded()
                 }
         }
     }

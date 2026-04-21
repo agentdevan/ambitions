@@ -1,5 +1,7 @@
 # Widget + Live Activity Manual Testing
 
+This checklist is the Batch 36 manual validation bar for external surfaces that are currently described as `Available in this build, pending Batch 36 validation`.
+
 ## Prerequisites
 1. Regenerate the Xcode project:
    - `xcodegen generate`
@@ -34,3 +36,4 @@
 ## Notes
 - Widget and Live Activity are read-only surfaces.
 - They consume only the exported snapshot contract, not app repositories/services directly.
+- Do not promote widget or Live Activity wording from pending validation to validated until this checklist passes.

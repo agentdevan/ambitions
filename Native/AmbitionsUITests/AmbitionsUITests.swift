@@ -85,9 +85,30 @@ final class AmbitionsUITests: XCTestCase {
         XCTAssertTrue(saveButton.isHittable)
     }
 
-    private func makeApp(bootstrapMode: String) -> XCUIApplication {
+    func testLaunchURLCanLandOnCanonicalPlanSurface() throws {
+        let app = makeApp(bootstrapMode: "preview", launchURL: "ambitions://tab/plan")
+        app.launch()
+
+        XCTAssertTrue(app.tabBars.buttons["Plan"].waitForExistence(timeout: 10))
+        XCTAssertTrue(app.tabBars.buttons["Plan"].isSelected)
+        XCTAssertTrue(app.descendants(matching: .any)["plan.screen"].waitForExistence(timeout: 10))
+    }
+
+    func testLaunchURLCanLandOnTodayOwnedCapturesInbox() throws {
+        let app = makeApp(bootstrapMode: "preview", launchURL: "ambitions://captures/inbox")
+        app.launch()
+
+        XCTAssertTrue(app.tabBars.buttons["Today"].waitForExistence(timeout: 10))
+        XCTAssertTrue(app.tabBars.buttons["Today"].isSelected)
+        XCTAssertTrue(app.descendants(matching: .any)["captures.screen"].waitForExistence(timeout: 10))
+    }
+
+    private func makeApp(bootstrapMode: String, launchURL: String? = nil) -> XCUIApplication {
         let app = XCUIApplication()
         app.launchEnvironment["AMBITIONS_BOOTSTRAP_MODE"] = bootstrapMode
+        if let launchURL {
+            app.launchEnvironment["AMBITIONS_LAUNCH_URL"] = launchURL
+        }
         return app
     }
 

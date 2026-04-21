@@ -3,19 +3,27 @@ import Foundation
 struct RepositoryBackedProfileService: ProfileServicing {
     let repositories: AppRepositories
     let syncCapability: any SyncCapability
+    let notificationService: any NotificationServicing
 
     init(
         repositories: AppRepositories,
-        syncCapability: any SyncCapability = LocalOnlySyncCapability()
+        syncCapability: any SyncCapability = LocalOnlySyncCapability(),
+        notificationService: any NotificationServicing = StubNotificationService()
     ) {
         self.repositories = repositories
         self.syncCapability = syncCapability
+        self.notificationService = notificationService
     }
 
     func loadProfileDashboard() async throws -> ProfileDashboard {
         let snapshot = try await loadSnapshot()
         let syncStatus = await syncCapability.status()
-        return makeDashboard(snapshot: snapshot, syncStatus: syncStatus)
+        let notificationAuthorization = await notificationService.currentAuthorizationState()
+        return makeDashboard(
+            snapshot: snapshot,
+            syncStatus: syncStatus,
+            notificationAuthorization: notificationAuthorization
+        )
     }
 
     func saveProfilePreferences(_ preferences: ProfilePreferencesUpdate) async throws -> ProfileDashboard {
@@ -54,7 +62,11 @@ private extension RepositoryBackedProfileService {
         )
     }
 
-    func makeDashboard(snapshot: Snapshot, syncStatus: SyncCapabilityStatus) -> ProfileDashboard {
+    func makeDashboard(
+        snapshot: Snapshot,
+        syncStatus: SyncCapabilityStatus,
+        notificationAuthorization: NotificationAuthorizationState
+    ) -> ProfileDashboard {
         let activeGoals = snapshot.goals.filter { $0.state == .active }.count
         let liveHabits = snapshot.goals.filter { goal in
             guard let step = HabitGoalSemantics.preferredStep(in: goal) else { return false }
@@ -67,10 +79,11 @@ private extension RepositoryBackedProfileService {
             .map { String($0.prefix(1)).uppercased() }
             .joined()
         let profileTitle = trimmedName.isEmpty ? "Your profile" : trimmedName
+        let notificationStatus = notificationAuthorizationStatus(notificationAuthorization)
 
         return ProfileDashboard(
             title: profileTitle,
-            subtitle: "This build keeps planning data in explicit local-only mode. Today owns the capture inbox, Plan owns routine review, and account sync is not implemented.",
+            subtitle: "This build keeps planning data in explicit local-only mode. Notifications, widgets, Live Activity, routes, and navigation shortcuts are \(ExternalSurfaceTruth.pendingBatch36Validation). Share Extension status: \(ExternalSurfaceTruth.notShippedInThisBuild).",
             initials: initials.isEmpty ? "U" : initials,
             badges: [
                 "Local-only trust",
@@ -84,7 +97,7 @@ private extension RepositoryBackedProfileService {
                 MetricSummary(id: "profile-evidence", title: "Evidence records", value: "\(snapshot.evidence.count)", detail: "Visible progress signals on device", icon: "sparkles")
             ],
             settingsTitle: "Local preferences",
-            settingsSubtitle: "These preferences are persisted on device and already shape the native local-only experience.",
+            settingsSubtitle: "These preferences are persisted on device and external-surface status stays aligned to the Batch 36 validation result without overstating unverified platform behavior.",
             settings: [
                 SettingsItem(id: "profile-storage", title: "Planning storage", subtitle: "Goals, habits, evidence, and feedback all read from the native repository.", icon: "internaldrive", valueLabel: "Local-only mode"),
                 SettingsItem(id: "profile-tab", title: "Default tab", subtitle: "Used on the next cold launch.", icon: "square.grid.2x2", valueLabel: snapshot.appState.preferredTab.canonicalTopLevelTab.title),
@@ -92,14 +105,36 @@ private extension RepositoryBackedProfileService {
                 SettingsItem(id: "profile-review", title: "Review cadence", subtitle: "How often Profile frames a planning reset.", icon: "clock.arrow.circlepath", valueLabel: reviewLabel(days: snapshot.appState.reviewCadenceDays)),
                 SettingsItem(id: "profile-trust", title: "Trust posture", subtitle: "Portable backup/restore is designed for local-first continuity without implying a live cloud backend.", icon: "lock.shield", valueLabel: syncStatus.detail),
                 SettingsItem(
-                    id: "profile-scope",
-                    title: "Connected features",
-                    subtitle: "Notification scheduling and calendar/reminder wiring exist in the native app. Widget and Live Activity foundations are present in the repo, but they still need their own validation pass.",
-                    icon: "person.badge.key",
-                    valueLabel: "Native foundations"
-                )
+                    id: "profile-notifications",
+                    title: "Notifications",
+                    subtitle: "\(ExternalSurfaceTruth.pendingBatch36Validation). Authorization: \(notificationStatus.detail)",
+                    icon: "bell.badge",
+                    valueLabel: notificationStatus.statusLabel
+                ),
+                SettingsItem(
+                    id: "profile-widgets",
+                    title: "Widgets and Live Activity",
+                    subtitle: "\(ExternalSurfaceTruth.pendingBatch36Validation). These surfaces stay read-only in this batch and still need explicit manual checks.",
+                    icon: "rectangle.3.group",
+                    valueLabel: ExternalSurfaceTruth.pendingBatch36Validation
+                ),
+                SettingsItem(
+                    id: "profile-app-intents",
+                    title: "Navigation shortcuts",
+                    subtitle: "\(ExternalSurfaceTruth.pendingBatch36Validation). App Intents stay navigation-only and open Today, Plan, or the Captures inbox without creating or mutating records.",
+                    icon: "sparkles.rectangle.stack",
+                    valueLabel: ExternalSurfaceTruth.pendingBatch36Validation
+                ),
+                SettingsItem(
+                    id: "profile-share-extension",
+                    title: "Share Extension",
+                    subtitle: "\(ExternalSurfaceTruth.notShippedInThisBuild). Share intake remains deferred until a dedicated extension target and handoff path exist.",
+                    icon: "square.and.arrow.up",
+                    valueLabel: ExternalSurfaceTruth.notShippedInThisBuild
+                ),
             ],
-            settingsFooter: "Everything in this version runs from an explicit local-only trust posture. Capture storage is live under Today, routine review lives under Plan, portable backup and restore can stay local-first, and there is no account sync configuration to manage yet.",
+            settingsFooter: "Everything in this version runs from an explicit local-only trust posture. Capture storage is live under Today, routine review lives under Plan, portable backup and restore can stay local-first, validated route claims stay narrow, and unverified platform surfaces stay conservative in copy.",
+            notificationAuthorization: notificationStatus,
             preferences: ProfilePreferencesState(
                 preferredTab: snapshot.appState.preferredTab.canonicalTopLevelTab,
                 appearancePreference: snapshot.appState.appearancePreference,
@@ -117,5 +152,45 @@ private extension RepositoryBackedProfileService {
             return "Weekly"
         }
         return "Every \(days) days"
+    }
+
+    func notificationAuthorizationStatus(_ state: NotificationAuthorizationState) -> ProfileNotificationAuthorization {
+        switch state {
+        case .notDetermined:
+            return ProfileNotificationAuthorization(
+                statusLabel: "Not requested",
+                detail: "Not requested yet.",
+                canRequestAuthorization: true,
+                actionTitle: "Enable notifications"
+            )
+        case .denied:
+            return ProfileNotificationAuthorization(
+                statusLabel: "Denied",
+                detail: "Denied in system settings.",
+                canRequestAuthorization: false,
+                actionTitle: nil
+            )
+        case .authorized:
+            return ProfileNotificationAuthorization(
+                statusLabel: "Allowed",
+                detail: "Allowed for local reminders.",
+                canRequestAuthorization: false,
+                actionTitle: nil
+            )
+        case .provisional:
+            return ProfileNotificationAuthorization(
+                statusLabel: "Allowed",
+                detail: "Provisionally allowed for local reminders.",
+                canRequestAuthorization: false,
+                actionTitle: nil
+            )
+        case .ephemeral:
+            return ProfileNotificationAuthorization(
+                statusLabel: "Allowed",
+                detail: "Temporarily allowed for local reminders.",
+                canRequestAuthorization: false,
+                actionTitle: nil
+            )
+        }
     }
 }

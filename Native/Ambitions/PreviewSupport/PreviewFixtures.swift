@@ -60,8 +60,8 @@ struct PreviewFixtures: Sendable {
                 id: "preview-capture-2",
                 createdAt: "2026-04-15T08:15:00Z",
                 updatedAt: "2026-04-15T08:30:00Z",
-                rawText: "https://example.com/article-worth-reviewing",
-                sourceType: .shareExtensionURL,
+                rawText: "Review the notification handoff copy before the next hardening pass.",
+                sourceType: .notification,
                 status: .seed,
                 linkedGoalID: nil,
                 triage: CaptureTriageMetadata(destination: .saveAsSeed),
@@ -117,7 +117,7 @@ struct PreviewFixtures: Sendable {
         ),
         profileDashboard: ProfileDashboard(
             title: "Preview User",
-            subtitle: "Local-first, on-device-first planning with native capture storage active today and external device surfaces called out separately until they are validated.",
+            subtitle: "This build keeps planning data in explicit local-only mode. Notifications, widgets, Live Activity, routes, and navigation shortcuts are \(ExternalSurfaceTruth.pendingBatch36Validation). Share Extension status: \(ExternalSurfaceTruth.notShippedInThisBuild).",
             initials: "PU",
             badges: ["Local-first", "Native pivot", "Design system"],
             stats: [
@@ -127,15 +127,24 @@ struct PreviewFixtures: Sendable {
                 MetricSummary(id: "profile-4", title: "Appearance", value: "System", detail: "Follows the device by default", icon: "circle.lefthalf.filled")
             ],
             settingsTitle: "Native app configuration",
-            settingsSubtitle: "Core local preferences and on-device feature availability.",
+            settingsSubtitle: "Core local preferences and external-surface status stay aligned to the Batch 36 validation result without overstating unverified platform behavior.",
             settings: [
                 SettingsItem(id: "profile-setting-1", title: "Planning storage", subtitle: "Native persistence is active for goals, habits, and evidence", icon: "internaldrive", valueLabel: "Local-first"),
                 SettingsItem(id: "profile-setting-2", title: "Default tab", subtitle: "Used on the next cold launch", icon: "square.grid.2x2", valueLabel: "Today"),
                 SettingsItem(id: "profile-setting-3", title: "Appearance", subtitle: "System follows the device while explicit themes stay selectable", icon: "circle.lefthalf.filled", valueLabel: "System"),
                 SettingsItem(id: "profile-setting-4", title: "Review cadence", subtitle: "How often the app should frame a reset", icon: "clock.arrow.circlepath", valueLabel: "Weekly"),
-                SettingsItem(id: "profile-setting-5", title: "Connected features", subtitle: "Notification scheduling and calendar/reminder wiring exist in the native app. Widget and Live Activity foundations are present in the repo but still need validation.", icon: "person.badge.key", valueLabel: "Native foundations")
+                SettingsItem(id: "profile-setting-5", title: "Notifications", subtitle: "\(ExternalSurfaceTruth.pendingBatch36Validation). Authorization: Not requested yet.", icon: "bell.badge", valueLabel: "Not requested"),
+                SettingsItem(id: "profile-setting-6", title: "Widgets and Live Activity", subtitle: "\(ExternalSurfaceTruth.pendingBatch36Validation). These surfaces stay read-only in this batch and still need explicit manual checks.", icon: "rectangle.3.group", valueLabel: ExternalSurfaceTruth.pendingBatch36Validation),
+                SettingsItem(id: "profile-setting-7", title: "Navigation shortcuts", subtitle: "\(ExternalSurfaceTruth.pendingBatch36Validation). App Intents stay navigation-only and open Today, Plan, or the Captures inbox without creating or mutating records.", icon: "sparkles.rectangle.stack", valueLabel: ExternalSurfaceTruth.pendingBatch36Validation),
+                SettingsItem(id: "profile-setting-8", title: "Share Extension", subtitle: "\(ExternalSurfaceTruth.notShippedInThisBuild). Share intake remains deferred until a dedicated extension target and handoff path exist.", icon: "square.and.arrow.up", valueLabel: ExternalSurfaceTruth.notShippedInThisBuild)
             ],
-            settingsFooter: "Everything in this build starts from on-device persistence. Captures are live in the app today, while widget and Live Activity foundations still need validation and account sync stays out of scope.",
+            settingsFooter: "Everything in this version runs from an explicit local-only trust posture. Capture storage is live under Today, routine review lives under Plan, portable backup and restore can stay local-first, validated route claims stay narrow, and unverified platform surfaces stay conservative in copy.",
+            notificationAuthorization: ProfileNotificationAuthorization(
+                statusLabel: "Not requested",
+                detail: "Not requested yet.",
+                canRequestAuthorization: true,
+                actionTitle: "Enable notifications"
+            ),
             preferences: ProfilePreferencesState(preferredTab: .today, appearancePreference: .system, reviewCadenceDays: 7, localOnlyModeEnabled: true)
         )
     )

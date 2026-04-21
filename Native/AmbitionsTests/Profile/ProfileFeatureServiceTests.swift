@@ -9,11 +9,15 @@ final class ProfileFeatureServiceTests: XCTestCase {
         let dashboard = try await service.loadProfileDashboard()
 
         XCTAssertTrue(dashboard.subtitle.contains("local-only"))
-        XCTAssertTrue(dashboard.subtitle.contains("capture"))
-        XCTAssertTrue(dashboard.subtitle.contains("account sync is not implemented"))
+        XCTAssertTrue(dashboard.subtitle.contains(ExternalSurfaceTruth.pendingBatch36Validation))
+        XCTAssertTrue(dashboard.subtitle.contains("Share Extension status: \(ExternalSurfaceTruth.notShippedInThisBuild)"))
         XCTAssertTrue(dashboard.settings.contains(where: { $0.id == "profile-trust" && $0.valueLabel == "Ambitions is running in explicit local-only mode." }))
-        XCTAssertTrue(dashboard.settings.contains(where: { $0.id == "profile-scope" && $0.valueLabel == "Native foundations" }))
+        XCTAssertTrue(dashboard.settings.contains(where: { $0.id == "profile-notifications" && $0.valueLabel == "Not requested" }))
+        XCTAssertTrue(dashboard.settings.contains(where: { $0.id == "profile-app-intents" && $0.valueLabel == ExternalSurfaceTruth.pendingBatch36Validation }))
+        XCTAssertTrue(dashboard.settings.contains(where: { $0.id == "profile-share-extension" && $0.valueLabel == ExternalSurfaceTruth.notShippedInThisBuild }))
         XCTAssertTrue(dashboard.settingsFooter.contains("local-only trust posture"))
+        XCTAssertTrue(dashboard.settingsFooter.contains("validated route claims stay narrow"))
+        XCTAssertTrue(dashboard.settingsFooter.contains("unverified platform surfaces stay conservative"))
         XCTAssertFalse(dashboard.subtitle.contains("are available as local device features"))
     }
 
@@ -71,6 +75,21 @@ final class ProfileFeatureServiceTests: XCTestCase {
 
         XCTAssertTrue(dashboard.settings.contains(where: { $0.id == "profile-trust" && $0.valueLabel == "Injected runtime trust posture." }))
     }
+
+    func testDashboardMapsNotificationAuthorizationIntoNarrowTrustSurface() async throws {
+        let repositories = try await makeRepositories()
+        let service = RepositoryBackedProfileService(
+            repositories: repositories,
+            notificationService: StaticProfileNotificationService(state: .authorized)
+        )
+
+        let dashboard = try await service.loadProfileDashboard()
+
+        XCTAssertEqual(dashboard.notificationAuthorization.statusLabel, "Allowed")
+        XCTAssertFalse(dashboard.notificationAuthorization.canRequestAuthorization)
+        XCTAssertNil(dashboard.notificationAuthorization.actionTitle)
+        XCTAssertTrue(dashboard.settings.contains(where: { $0.id == "profile-notifications" && $0.valueLabel == "Allowed" }))
+    }
 }
 
 private extension ProfileFeatureServiceTests {
@@ -93,4 +112,16 @@ private struct StaticProfileSyncCapability: SyncCapability {
     func status() async -> SyncCapabilityStatus {
         status
     }
+}
+
+private struct StaticProfileNotificationService: NotificationServicing {
+    let state: NotificationAuthorizationState
+
+    func currentAuthorizationState() async -> NotificationAuthorizationState {
+        state
+    }
+
+    func registerCategories() async {}
+    func requestAuthorizationOptIn() async -> Bool { false }
+    func refreshSchedule(now: Date) async { _ = now }
 }

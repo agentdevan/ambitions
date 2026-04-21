@@ -84,7 +84,8 @@ enum AmbitionsRuntimeFactory {
         )
         let profileService = RepositoryBackedProfileService(
             repositories: repositories,
-            syncCapability: syncCapability
+            syncCapability: syncCapability,
+            notificationService: notificationService
         )
         let actionExecutor = DefaultRuntimeActionCommandExecutor(todayService: todayService)
         let dedicatedDevicePrototypeRuntime = DedicatedDevicePrototypeRuntime(

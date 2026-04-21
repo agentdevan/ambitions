@@ -2,6 +2,7 @@ import Foundation
 import UserNotifications
 
 protocol NotificationServicing: Sendable {
+    func currentAuthorizationState() async -> NotificationAuthorizationState
     func registerCategories() async
     func requestAuthorizationOptIn() async -> Bool
     func refreshSchedule(now: Date) async
@@ -62,6 +63,10 @@ actor LocalNotificationFoundation: NotificationServicing {
         self.snapshotReader = snapshotReader
         self.planner = planner
         self.liveActivityService = liveActivityService
+    }
+
+    func currentAuthorizationState() async -> NotificationAuthorizationState {
+        await centerClient.currentAuthorizationState()
     }
 
     func registerCategories() async {
@@ -293,6 +298,7 @@ actor FileExternalSurfaceSnapshotReader: ExternalSurfaceSnapshotReading {
 }
 
 struct StubNotificationService: NotificationServicing {
+    func currentAuthorizationState() async -> NotificationAuthorizationState { .notDetermined }
     func registerCategories() async {}
     func requestAuthorizationOptIn() async -> Bool { false }
     func refreshSchedule(now: Date) async { _ = now }

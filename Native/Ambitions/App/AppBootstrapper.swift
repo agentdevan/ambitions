@@ -26,6 +26,7 @@ final class AppBootstrapper {
     private let mode: BootstrapMode
     private var hasStarted = false
     private var pendingDeepLinks: [URL] = []
+    private var didQueueConfiguredLaunchURL = false
 
     init(mode: BootstrapMode = .automatic) {
         self.mode = mode
@@ -35,6 +36,7 @@ final class AppBootstrapper {
         guard hasStarted == false else { return }
         hasStarted = true
         phase = .launching
+        queueConfiguredLaunchURLIfNeeded()
 
         do {
             let container = try await AppContainerFactory.make(configuration: resolvedConfiguration)
@@ -57,6 +59,11 @@ final class AppBootstrapper {
         case .idle, .launching, .failed:
             pendingDeepLinks.append(url)
         }
+    }
+
+    func consumePendingAppIntentLaunchIfNeeded() {
+        guard let url = AppIntentLaunchRouter.shared.consumePendingURL() else { return }
+        handleDeepLink(url)
     }
 
     func handleNotificationPayload(_ payload: AppNotificationRoutingPayload) {
@@ -128,6 +135,16 @@ final class AppBootstrapper {
         for url in queued {
             container.externalRouter.handleDeepLink(url)
         }
+    }
+
+    private func queueConfiguredLaunchURLIfNeeded() {
+        guard didQueueConfiguredLaunchURL == false else { return }
+        didQueueConfiguredLaunchURL = true
+        guard let rawValue = ProcessInfo.processInfo.environment["AMBITIONS_LAUNCH_URL"],
+              let url = URL(string: rawValue) else {
+            return
+        }
+        pendingDeepLinks.append(url)
     }
 
     func requestNotificationAuthorizationOptIn() async -> Bool {
