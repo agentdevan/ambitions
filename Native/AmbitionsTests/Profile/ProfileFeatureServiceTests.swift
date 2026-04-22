@@ -28,6 +28,7 @@ final class ProfileFeatureServiceTests: XCTestCase {
             ProfilePreferencesUpdate(
                 preferredTab: .goals,
                 appearancePreference: .dark,
+                accentFamily: .copper,
                 reviewCadenceDays: 3,
                 localOnlyModeEnabled: false
             )
@@ -36,6 +37,7 @@ final class ProfileFeatureServiceTests: XCTestCase {
         let state = try await repositories.appState.loadState()
         XCTAssertEqual(state.preferredTab, .goals)
         XCTAssertEqual(state.appearancePreference, .dark)
+        XCTAssertEqual(state.accentFamily, .copper)
         XCTAssertEqual(state.reviewCadenceDays, 3)
         XCTAssertTrue(state.localOnlyModeEnabled)
     }
@@ -53,6 +55,7 @@ final class ProfileFeatureServiceTests: XCTestCase {
         XCTAssertEqual(dashboard.title, "Your profile")
         XCTAssertEqual(dashboard.initials, "U")
         XCTAssertEqual(dashboard.preferences.appearancePreference, .system)
+        XCTAssertEqual(dashboard.preferences.accentFamily, .sage)
         XCTAssertTrue(dashboard.preferencesSection.items.contains(where: { $0.id == "profile-appearance" && $0.valueLabel == "System" }))
     }
 

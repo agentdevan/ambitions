@@ -150,13 +150,13 @@ private struct AppShellHeaderRail: View {
             .padding(.horizontal, theme.spacing.lg)
             .padding(.top, theme.spacing.sm)
             .padding(.bottom, theme.spacing.sm)
-            .background(theme.colors.canvasElevated.opacity(0.96))
+            .background(theme.surfaces.overlayGradient.opacity(theme.surfaces.backgroundBlurOpacity))
 
             Rectangle()
                 .fill(theme.colors.strokeSubtle)
                 .frame(height: 1)
         }
-        .background(theme.colors.canvasElevated.opacity(0.96))
+        .background(theme.surfaces.overlayGradient.opacity(theme.surfaces.backgroundBlurOpacity))
     }
 }
 

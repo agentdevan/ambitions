@@ -142,7 +142,15 @@ private struct WidgetPreviewGallery: View {
 
 struct WidgetPreviewGallery_Previews: PreviewProvider {
     static var previews: some View {
-        WidgetPreviewGallery()
+        Group {
+            WidgetPreviewGallery()
+                .previewDisplayName("Dark")
+
+            WidgetPreviewGallery()
+                .ambitionTheme(.theme(for: .light, accentFamily: .blueGray))
+                .preferredColorScheme(.light)
+                .previewDisplayName("Light Blue Gray")
+        }
     }
 }
 #endif

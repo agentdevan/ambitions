@@ -12,18 +12,8 @@ struct AppCanvasView<Content: View>: View {
 
     var body: some View {
         ZStack {
-            theme.colors.canvas
+            theme.surfaces.canvasGradient
                 .ignoresSafeArea()
-
-            LinearGradient(
-                colors: [
-                    theme.colors.accentSecondary.opacity(0.16),
-                    theme.colors.canvas.opacity(0)
-                ],
-                startPoint: .topLeading,
-                endPoint: .bottomTrailing
-            )
-            .ignoresSafeArea()
 
             content
         }

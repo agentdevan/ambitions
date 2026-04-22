@@ -27,14 +27,11 @@ struct TodayScreen: View {
                 LazyVStack(alignment: .leading, spacing: theme.spacing.lg) {
                     switch viewModel.state {
                     case .loading:
-                        LoadingSkeletonCard(lineCount: 6)
+                        AsyncStateCard(.loading(lines: 6))
                             .transition(.ambitionPanel)
                     case let .failed(message):
-                        EmptyStateCard(
-                            title: "Today is unavailable",
-                            message: message,
-                            icon: "exclamationmark.triangle",
-                            actionTitle: "Retry",
+                        AsyncStateCard(
+                            .error(title: "Today is unavailable", message: message, icon: "exclamationmark.triangle", actionTitle: "Retry"),
                             actionAccessibilityIdentifier: "today.retry-button"
                         ) {
                             Task {

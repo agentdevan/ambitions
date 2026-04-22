@@ -57,6 +57,7 @@ final class AppContainerFactoryTests: XCTestCase {
                 preferredTab: .goals,
                 userDisplayName: "Existing User",
                 appearancePreference: .dark,
+                accentFamily: .blueGray,
                 reviewCadenceDays: 3,
                 localOnlyModeEnabled: true,
                 hasCompletedBootstrap: true,
@@ -78,6 +79,7 @@ final class AppContainerFactoryTests: XCTestCase {
         XCTAssertEqual(loadedGoals.first?.title, goal.title)
         XCTAssertEqual(loadedState.userDisplayName, "Existing User")
         XCTAssertEqual(loadedState.appearancePreference, .dark)
+        XCTAssertEqual(loadedState.accentFamily, .blueGray)
         XCTAssertEqual(loadedState.goalPriorityOrder, [goal.id])
         XCTAssertNil(loadedState.lastSeedVersion)
     }

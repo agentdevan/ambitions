@@ -5,6 +5,7 @@ public enum AmbitionCardStyle: Sendable {
     case app
     case widget
     case hero
+    case band
 }
 
 public struct AmbitionSurfaceModifier: ViewModifier {
@@ -65,6 +66,7 @@ public struct AmbitionSurfaceModifier: ViewModifier {
         case .app: theme.radius.lg
         case .widget: theme.radius.md
         case .hero: theme.radius.xl
+        case .band: theme.radius.band
         }
     }
 
@@ -73,6 +75,7 @@ public struct AmbitionSurfaceModifier: ViewModifier {
         case .app: theme.spacing.lg
         case .widget: theme.spacing.sm
         case .hero: theme.spacing.xl
+        case .band: theme.spacing.md
         }
     }
 
@@ -81,17 +84,20 @@ public struct AmbitionSurfaceModifier: ViewModifier {
         case .app: theme.elevation.resting
         case .widget: theme.elevation.resting
         case .hero: theme.elevation.hero
+        case .band: theme.depth.raised
         }
     }
 
     private var background: LinearGradient {
         switch style {
         case .app:
-            theme.surfaces.cardGradient
+            theme.surfaces.elevatedGradient
         case .widget:
             theme.surfaces.widgetGradient
         case .hero:
             theme.surfaces.heroGradient
+        case .band:
+            theme.surfaces.bandGradient
         }
     }
 }
@@ -174,6 +180,28 @@ public struct HeroCard<Content: View>: View {
     public var body: some View {
         VStack(alignment: .leading, spacing: 0) { content }
             .ambitionSurface(.hero, state: state, accent: accent)
+    }
+}
+
+/// Lighter structural band used for carried context, not heavy module chrome.
+public struct ContextBand<Content: View>: View {
+    private let state: AmbitionVisualState
+    private let accent: Color?
+    private let content: Content
+
+    public init(
+        state: AmbitionVisualState = .default,
+        accent: Color? = nil,
+        @ViewBuilder content: () -> Content
+    ) {
+        self.state = state
+        self.accent = accent
+        self.content = content()
+    }
+
+    public var body: some View {
+        VStack(alignment: .leading, spacing: 0) { content }
+            .ambitionSurface(.band, state: state, accent: accent)
     }
 }
 #endif

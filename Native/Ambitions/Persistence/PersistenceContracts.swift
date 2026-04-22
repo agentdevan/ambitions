@@ -1,3 +1,4 @@
+import AmbitionsDesignSystem
 import Foundation
 
 struct PersistedGoalDraft: Identifiable, Codable, Sendable, Equatable {
@@ -20,6 +21,7 @@ struct AppStateSnapshot: Identifiable, Codable, Sendable, Equatable {
     var preferredTab: AppTab
     var userDisplayName: String
     var appearancePreference: AppAppearancePreference
+    var accentFamily: AmbitionAccentFamily
     var reviewCadenceDays: Int
     var localOnlyModeEnabled: Bool
     var hasCompletedBootstrap: Bool
@@ -31,11 +33,30 @@ struct AppStateSnapshot: Identifiable, Codable, Sendable, Equatable {
     var lastOpenedGoalID: String?
     var goalPriorityOrder: [String]
 
+    private enum CodingKeys: String, CodingKey {
+        case id
+        case preferredTab
+        case userDisplayName
+        case appearancePreference
+        case accentFamily
+        case reviewCadenceDays
+        case localOnlyModeEnabled
+        case hasCompletedBootstrap
+        case lastBootstrapSource
+        case lastBootstrapAt
+        case lastSeedVersion
+        case lastSeededAt
+        case lastImportSummary
+        case lastOpenedGoalID
+        case goalPriorityOrder
+    }
+
     static let `default` = AppStateSnapshot(
         id: "app_state.default",
         preferredTab: .today,
         userDisplayName: "",
         appearancePreference: .system,
+        accentFamily: .sage,
         reviewCadenceDays: 7,
         localOnlyModeEnabled: true,
         hasCompletedBootstrap: false,
@@ -52,8 +73,81 @@ struct AppStateSnapshot: Identifiable, Codable, Sendable, Equatable {
         AppPreferences(
             preferredTab: preferredTab.canonicalTopLevelTab,
             userDisplayName: userDisplayName,
-            appearancePreference: appearancePreference
+            appearancePreference: appearancePreference,
+            accentFamily: accentFamily
         )
+    }
+
+    init(
+        id: String,
+        preferredTab: AppTab,
+        userDisplayName: String,
+        appearancePreference: AppAppearancePreference,
+        accentFamily: AmbitionAccentFamily,
+        reviewCadenceDays: Int,
+        localOnlyModeEnabled: Bool,
+        hasCompletedBootstrap: Bool,
+        lastBootstrapSource: AppSession.BootstrapSource?,
+        lastBootstrapAt: String?,
+        lastSeedVersion: String?,
+        lastSeededAt: String?,
+        lastImportSummary: LegacyImportSummary?,
+        lastOpenedGoalID: String?,
+        goalPriorityOrder: [String]
+    ) {
+        self.id = id
+        self.preferredTab = preferredTab
+        self.userDisplayName = userDisplayName
+        self.appearancePreference = appearancePreference
+        self.accentFamily = accentFamily
+        self.reviewCadenceDays = reviewCadenceDays
+        self.localOnlyModeEnabled = localOnlyModeEnabled
+        self.hasCompletedBootstrap = hasCompletedBootstrap
+        self.lastBootstrapSource = lastBootstrapSource
+        self.lastBootstrapAt = lastBootstrapAt
+        self.lastSeedVersion = lastSeedVersion
+        self.lastSeededAt = lastSeededAt
+        self.lastImportSummary = lastImportSummary
+        self.lastOpenedGoalID = lastOpenedGoalID
+        self.goalPriorityOrder = goalPriorityOrder
+    }
+
+    init(from decoder: any Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        id = try container.decode(String.self, forKey: .id)
+        preferredTab = try container.decode(AppTab.self, forKey: .preferredTab)
+        userDisplayName = try container.decode(String.self, forKey: .userDisplayName)
+        appearancePreference = try container.decode(AppAppearancePreference.self, forKey: .appearancePreference)
+        accentFamily = try container.decodeIfPresent(AmbitionAccentFamily.self, forKey: .accentFamily) ?? .sage
+        reviewCadenceDays = try container.decode(Int.self, forKey: .reviewCadenceDays)
+        localOnlyModeEnabled = try container.decode(Bool.self, forKey: .localOnlyModeEnabled)
+        hasCompletedBootstrap = try container.decode(Bool.self, forKey: .hasCompletedBootstrap)
+        lastBootstrapSource = try container.decodeIfPresent(AppSession.BootstrapSource.self, forKey: .lastBootstrapSource)
+        lastBootstrapAt = try container.decodeIfPresent(String.self, forKey: .lastBootstrapAt)
+        lastSeedVersion = try container.decodeIfPresent(String.self, forKey: .lastSeedVersion)
+        lastSeededAt = try container.decodeIfPresent(String.self, forKey: .lastSeededAt)
+        lastImportSummary = try container.decodeIfPresent(LegacyImportSummary.self, forKey: .lastImportSummary)
+        lastOpenedGoalID = try container.decodeIfPresent(String.self, forKey: .lastOpenedGoalID)
+        goalPriorityOrder = try container.decodeIfPresent([String].self, forKey: .goalPriorityOrder) ?? []
+    }
+
+    func encode(to encoder: any Encoder) throws {
+        var container = encoder.container(keyedBy: CodingKeys.self)
+        try container.encode(id, forKey: .id)
+        try container.encode(preferredTab, forKey: .preferredTab)
+        try container.encode(userDisplayName, forKey: .userDisplayName)
+        try container.encode(appearancePreference, forKey: .appearancePreference)
+        try container.encode(accentFamily, forKey: .accentFamily)
+        try container.encode(reviewCadenceDays, forKey: .reviewCadenceDays)
+        try container.encode(localOnlyModeEnabled, forKey: .localOnlyModeEnabled)
+        try container.encode(hasCompletedBootstrap, forKey: .hasCompletedBootstrap)
+        try container.encodeIfPresent(lastBootstrapSource, forKey: .lastBootstrapSource)
+        try container.encodeIfPresent(lastBootstrapAt, forKey: .lastBootstrapAt)
+        try container.encodeIfPresent(lastSeedVersion, forKey: .lastSeedVersion)
+        try container.encodeIfPresent(lastSeededAt, forKey: .lastSeededAt)
+        try container.encodeIfPresent(lastImportSummary, forKey: .lastImportSummary)
+        try container.encodeIfPresent(lastOpenedGoalID, forKey: .lastOpenedGoalID)
+        try container.encode(goalPriorityOrder, forKey: .goalPriorityOrder)
     }
 }
 

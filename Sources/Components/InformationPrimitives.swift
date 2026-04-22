@@ -331,10 +331,7 @@ public struct EmptyStateCard: View {
 
                 if let actionTitle, let action {
                     Button(actionTitle, action: action)
-                        .buttonStyle(.borderless)
-                        .font(theme.typography.bodyEmphasized)
-                        .foregroundStyle(theme.colors.accentPrimary)
-                        .frame(minHeight: 44)
+                        .buttonStyle(AmbitionButtonStyle(tier: .tertiary, state: .selected))
                         .accessibilityIdentifier(actionAccessibilityIdentifier ?? "")
                 }
             }
@@ -411,15 +408,6 @@ private struct AmbitionShimmerModifier: ViewModifier {
 private extension View {
     func shimmering(active: Bool, base: Color, highlight: Color) -> some View {
         modifier(AmbitionShimmerModifier(active: active, base: base, highlight: highlight))
-    }
-}
-
-public extension AnyTransition {
-    static var ambitionPanel: AnyTransition {
-        .asymmetric(
-            insertion: .opacity.combined(with: .scale(scale: 0.985, anchor: .top)),
-            removal: .opacity.combined(with: .scale(scale: 0.99, anchor: .top))
-        )
     }
 }
 #endif

@@ -25,7 +25,7 @@ struct ProfileScreen: View {
                 LoadingSkeletonCard(lineCount: 7)
                     .transition(.ambitionPanel)
             case let .failed(message):
-                EmptyStateCard(
+                ErrorStateCard(
                     title: "Profile is unavailable",
                     message: message,
                     icon: "person.crop.circle.badge.exclamationmark",
@@ -72,6 +72,14 @@ struct ProfileScreen: View {
                             .pickerStyle(.segmented)
                             .accessibilityIdentifier("profile.appearance-picker")
 
+                            Picker("Accent family", selection: $viewModel.accentFamily) {
+                                ForEach(AmbitionAccentFamily.allCases) { family in
+                                    Text(family.title).tag(family)
+                                }
+                            }
+                            .pickerStyle(.segmented)
+                            .accessibilityIdentifier("profile.accent-family-picker")
+
                             Picker("Review cadence", selection: $viewModel.reviewCadenceDays) {
                                 Text("Daily").tag(1)
                                 Text("Every 3 days").tag(3)
@@ -79,17 +87,25 @@ struct ProfileScreen: View {
                             }
                             .pickerStyle(.segmented)
 
+                            AmbitionBand {
+                                Image(systemName: "paintpalette")
+                                    .foregroundStyle(theme.colors.accentPrimary)
+                                Text("Shared appearance foundations only. Full Appearance Studio stays deferred to the later Profile batch.")
+                                    .font(theme.typography.caption)
+                                    .foregroundStyle(theme.colors.textSecondary)
+                            }
+
                             Button("Save preferences") {
                                 Task { await savePreferences() }
                             }
-                            .buttonStyle(AmbitionPressableButtonStyle(state: .selected))
+                            .buttonStyle(AmbitionButtonStyle(tier: .hero, state: .selected))
                             .accessibilityIdentifier("profile.save-preferences-button")
 
                             if let actionTitle = dashboard.notificationAuthorization.actionTitle {
                                 Button(actionTitle) {
                                     Task { await requestNotificationAuthorization() }
                                 }
-                                .buttonStyle(AmbitionPressableButtonStyle(state: .default))
+                                .buttonStyle(AmbitionButtonStyle(tier: .secondary, state: .default))
                                 .accessibilityIdentifier("profile.enable-notifications-button")
                             }
                         }
@@ -133,6 +149,7 @@ struct ProfileScreen: View {
     private func syncAppearanceFromLoadedDashboard() {
         guard let dashboard = viewModel.loadedDashboard else { return }
         container.appearancePreference = dashboard.preferences.appearancePreference
+        container.accentFamily = dashboard.preferences.accentFamily
     }
 
     private var container: AppContainer {

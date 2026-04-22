@@ -430,6 +430,7 @@ final class AppStateRecord {
     var preferredTabRaw: String
     var userDisplayName: String
     var appearancePreferenceRaw: String
+    var accentFamilyRaw: String?
     var hasCompletedBootstrap: Bool
     var lastBootstrapSourceRaw: String?
     var lastBootstrapAt: String?
@@ -443,6 +444,7 @@ final class AppStateRecord {
         preferredTabRaw: String,
         userDisplayName: String,
         appearancePreferenceRaw: String,
+        accentFamilyRaw: String?,
         hasCompletedBootstrap: Bool,
         lastBootstrapSourceRaw: String?,
         lastBootstrapAt: String?,
@@ -455,6 +457,7 @@ final class AppStateRecord {
         self.preferredTabRaw = preferredTabRaw
         self.userDisplayName = userDisplayName
         self.appearancePreferenceRaw = appearancePreferenceRaw
+        self.accentFamilyRaw = accentFamilyRaw
         self.hasCompletedBootstrap = hasCompletedBootstrap
         self.lastBootstrapSourceRaw = lastBootstrapSourceRaw
         self.lastBootstrapAt = lastBootstrapAt

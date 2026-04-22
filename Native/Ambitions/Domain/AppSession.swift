@@ -29,14 +29,17 @@ enum AppAppearancePreference: String, CaseIterable, Codable, Sendable {
         }
     }
 
-    func resolveTheme(systemColorScheme: ColorScheme) -> AmbitionTheme {
+    func resolveTheme(
+        systemColorScheme: ColorScheme,
+        accentFamily: AmbitionAccentFamily
+    ) -> AmbitionTheme {
         switch self {
         case .system:
-            return systemColorScheme == .dark ? .dark : .light
+            return .theme(for: systemColorScheme == .dark ? .dark : .light, accentFamily: accentFamily)
         case .light:
-            return .light
+            return .theme(for: .light, accentFamily: accentFamily)
         case .dark:
-            return .dark
+            return .theme(for: .dark, accentFamily: accentFamily)
         }
     }
 }
@@ -52,6 +55,7 @@ struct AppSession: Sendable {
     let userDisplayName: String
     let initialTab: AppTab
     let appearancePreference: AppAppearancePreference
+    let accentFamily: AmbitionAccentFamily
     let launchedAt: Date
     let startupNote: String
 }
@@ -60,4 +64,5 @@ struct AppPreferences: Sendable {
     let preferredTab: AppTab
     let userDisplayName: String
     let appearancePreference: AppAppearancePreference
+    let accentFamily: AmbitionAccentFamily
 }

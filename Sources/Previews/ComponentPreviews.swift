@@ -54,8 +54,22 @@ private struct DesignSystemPreviewGallery: View {
                 SegmentedFilterBar(items: PreviewFilter.allCases, selection: $filter) { $0.rawValue }
                 HStack {
                     TagPill("Default")
+                    StatusChip("Success", icon: "checkmark.circle.fill", state: .success)
                     TagPill("Warning", icon: "exclamationmark.triangle.fill", state: .warning)
                     TagPill("Selected", icon: "checkmark.circle.fill", state: .selected)
+                }
+
+                HStack(spacing: 12) {
+                    Button("Primary action") {}
+                        .buttonStyle(AmbitionButtonStyle(tier: .hero, state: .selected))
+                    Button("Secondary") {}
+                        .buttonStyle(AmbitionButtonStyle(tier: .secondary))
+                }
+
+                AmbitionBand {
+                    Image(systemName: "paintpalette")
+                    Text("Band treatment carries lightweight continuity without turning every module into a heavy card.")
+                        .font(.caption)
                 }
 
                 CompactChartShell(title: "CompactChartShell", subtitle: "Chart content drops into the shell later.") {

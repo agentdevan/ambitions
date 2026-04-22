@@ -73,30 +73,19 @@ public struct ListChevronRow<Leading: View, Trailing: View>: View {
 
     public var body: some View {
         Button(action: action) {
-            HStack(spacing: theme.spacing.md) {
-                leading
-
-                VStack(alignment: .leading, spacing: theme.spacing.xxxs) {
-                    Text(title)
-                        .font(theme.typography.bodyEmphasized)
-                        .foregroundStyle(theme.colors.textPrimary)
-
-                    if let subtitle {
-                        Text(subtitle)
-                            .font(theme.typography.caption)
-                            .foregroundStyle(theme.colors.textSecondary)
+            AmbitionRowShell(
+                title: title,
+                subtitle: subtitle,
+                leading: { leading },
+                trailing: {
+                    HStack(spacing: theme.spacing.xs) {
+                        trailing
+                        Image(systemName: "chevron.right")
+                            .font(.system(size: 12, weight: .semibold))
+                            .foregroundStyle(theme.colors.textTertiary)
                     }
                 }
-
-                Spacer()
-                trailing
-                Image(systemName: "chevron.right")
-                    .font(.system(size: 12, weight: .semibold))
-                    .foregroundStyle(theme.colors.textTertiary)
-            }
-            .padding(theme.spacing.md)
-            .background(RoundedRectangle(cornerRadius: theme.radius.md, style: .continuous).fill(theme.colors.surfaceOverlay))
-            .overlay(RoundedRectangle(cornerRadius: theme.radius.md, style: .continuous).stroke(theme.colors.strokeSubtle, lineWidth: 1))
+            )
         }
         .buttonStyle(.plain)
     }
@@ -184,6 +173,7 @@ public struct AmbitionPressableButtonStyle: ButtonStyle {
         let resolved = theme.stateStyle(for: effectiveState, accent: accent)
 
         return configuration.label
+            .font(theme.typography.bodyEmphasized)
             .foregroundStyle(resolved.foreground)
             .contentShape(Capsule(style: .continuous))
             .background(Capsule(style: .continuous).fill(resolved.fill))
@@ -199,7 +189,7 @@ public struct AmbitionPressableButtonStyle: ButtonStyle {
             .offset(y: configuration.isPressed && reduceMotion == false ? 1 : 0)
             .scaleEffect(resolved.scale)
             .opacity(resolved.opacity)
-            .animation(theme.motion.animation(reduceMotion: reduceMotion), value: configuration.isPressed)
+            .animation(theme.motion.settleAnimation(reduceMotion: reduceMotion), value: configuration.isPressed)
     }
 }
 #endif

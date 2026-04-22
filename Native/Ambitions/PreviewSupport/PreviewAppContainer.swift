@@ -25,11 +25,13 @@ enum PreviewAppContainerFactory {
                 userDisplayName: fixtures.preferences.userDisplayName,
                 initialTab: fixtures.preferences.preferredTab,
                 appearancePreference: fixtures.preferences.appearancePreference,
+                accentFamily: fixtures.preferences.accentFamily,
                 launchedAt: .now,
                 startupNote: "Preview bootstrap uses isolated in-memory fixtures."
             ),
             runtime: runtime,
             appearancePreference: fixtures.preferences.appearancePreference,
+            accentFamily: fixtures.preferences.accentFamily,
             navigation: navigation,
             todayService: todayService,
             captureService: captureService,

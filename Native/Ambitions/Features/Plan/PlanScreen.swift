@@ -19,14 +19,11 @@ struct PlanScreen: View {
             LazyVStack(alignment: .leading, spacing: theme.spacing.lg) {
                 switch viewModel.state {
                 case .loading:
-                    LoadingSkeletonCard(lineCount: 8)
+                    AsyncStateCard(.loading(lines: 8))
                         .transition(.ambitionPanel)
                 case let .failed(message):
-                    EmptyStateCard(
-                        title: "Plan is unavailable",
-                        message: message,
-                        icon: AppTab.plan.systemImage,
-                        actionTitle: "Retry",
+                    AsyncStateCard(
+                        .error(title: "Plan is unavailable", message: message, icon: AppTab.plan.systemImage, actionTitle: "Retry"),
                         actionAccessibilityIdentifier: "plan.retry-button"
                     ) {
                         Task { await viewModel.refresh(using: container.planService) }

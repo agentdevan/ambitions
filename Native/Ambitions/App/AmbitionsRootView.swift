@@ -57,7 +57,12 @@ struct AmbitionsRootView: View {
         }
         .appContainer(container)
         .preferredColorScheme(container.appearancePreference.preferredColorScheme)
-        .ambitionTheme(container.appearancePreference.resolveTheme(systemColorScheme: systemColorScheme))
+        .ambitionTheme(
+            container.appearancePreference.resolveTheme(
+                systemColorScheme: systemColorScheme,
+                accentFamily: container.accentFamily
+            )
+        )
     }
 
     private func todayNavigation() -> some View {

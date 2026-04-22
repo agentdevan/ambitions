@@ -1,3 +1,4 @@
+import AmbitionsDesignSystem
 import Foundation
 import Observation
 
@@ -7,6 +8,7 @@ final class ProfileViewModel {
     var state: AsyncViewState<ProfileDashboard>
     var preferredTab: AppTab
     var appearancePreference: AppAppearancePreference
+    var accentFamily: AmbitionAccentFamily
     var reviewCadenceDays: Int
 
     private var hasLoaded = false
@@ -31,6 +33,7 @@ final class ProfileViewModel {
         self.state = state
         preferredTab = .today
         appearancePreference = .system
+        accentFamily = .sage
         reviewCadenceDays = 7
     }
 
@@ -56,6 +59,7 @@ final class ProfileViewModel {
                 ProfilePreferencesUpdate(
                     preferredTab: preferredTab,
                     appearancePreference: appearancePreference,
+                    accentFamily: accentFamily,
                     reviewCadenceDays: reviewCadenceDays,
                     localOnlyModeEnabled: true
                 )
@@ -70,6 +74,7 @@ final class ProfileViewModel {
     private func syncEditor(with dashboard: ProfileDashboard) {
         preferredTab = dashboard.preferences.preferredTab
         appearancePreference = dashboard.preferences.appearancePreference
+        accentFamily = dashboard.preferences.accentFamily
         reviewCadenceDays = dashboard.preferences.reviewCadenceDays
     }
 }

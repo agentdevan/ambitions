@@ -42,14 +42,9 @@ struct GoalsScreen: View {
                             subtitle: "Loading the current portfolio, draft states, and next-step signals."
                         )
                     }
-                    LoadingSkeletonCard(lineCount: 8)
+                    AsyncStateCard(.loading(lines: 8))
                 case let .failed(message):
-                    EmptyStateCard(
-                        title: "Goals are unavailable",
-                        message: message,
-                        icon: "exclamationmark.triangle",
-                        actionTitle: "Retry"
-                    ) {
+                    AsyncStateCard(.error(title: "Goals are unavailable", message: message, actionTitle: "Retry")) {
                         Task { await viewModel.refresh(using: container.goalsService) }
                     }
                 case let .loaded(overview):

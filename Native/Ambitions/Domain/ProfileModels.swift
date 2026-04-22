@@ -1,3 +1,4 @@
+import AmbitionsDesignSystem
 import Foundation
 
 struct SettingsItem: Identifiable, Sendable {
@@ -31,6 +32,7 @@ struct ProfileSectionGroup: Sendable {
 struct ProfilePreferencesState: Sendable, Equatable {
     let preferredTab: AppTab
     let appearancePreference: AppAppearancePreference
+    let accentFamily: AmbitionAccentFamily
     let reviewCadenceDays: Int
     let localOnlyModeEnabled: Bool
 }
@@ -38,6 +40,7 @@ struct ProfilePreferencesState: Sendable, Equatable {
 struct ProfilePreferencesUpdate: Sendable, Equatable {
     let preferredTab: AppTab
     let appearancePreference: AppAppearancePreference
+    let accentFamily: AmbitionAccentFamily
     let reviewCadenceDays: Int
     let localOnlyModeEnabled: Bool
 }

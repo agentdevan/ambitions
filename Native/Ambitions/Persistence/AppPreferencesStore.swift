@@ -33,6 +33,7 @@ struct RepositoryBackedAppPreferencesStore: AppPreferencesStore {
         state.preferredTab = preferences.preferredTab.canonicalTopLevelTab
         state.userDisplayName = preferences.userDisplayName
         state.appearancePreference = preferences.appearancePreference
+        state.accentFamily = preferences.accentFamily
         try await appStateRepository.saveState(state)
     }
 }

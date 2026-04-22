@@ -1,3 +1,4 @@
+import AmbitionsDesignSystem
 import Foundation
 import SwiftData
 
@@ -460,6 +461,7 @@ private enum RepositoryMapping {
             preferredTabRaw: state.preferredTab.rawValue,
             userDisplayName: state.userDisplayName,
             appearancePreferenceRaw: state.appearancePreference.rawValue,
+            accentFamilyRaw: state.accentFamily.rawValue,
             hasCompletedBootstrap: state.hasCompletedBootstrap,
             lastBootstrapSourceRaw: state.lastBootstrapSource?.rawValue,
             lastBootstrapAt: state.lastBootstrapAt,
@@ -480,6 +482,7 @@ private enum RepositoryMapping {
             preferredTab: AppTab(rawValue: record.preferredTabRaw) ?? .today,
             userDisplayName: record.userDisplayName,
             appearancePreference: AppAppearancePreference(rawValue: record.appearancePreferenceRaw) ?? .system,
+            accentFamily: record.accentFamilyRaw.flatMap(AmbitionAccentFamily.init(rawValue:)) ?? .sage,
             reviewCadenceDays: 7,
             localOnlyModeEnabled: true,
             hasCompletedBootstrap: record.hasCompletedBootstrap,

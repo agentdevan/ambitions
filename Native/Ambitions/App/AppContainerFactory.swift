@@ -75,6 +75,7 @@ enum AppContainerFactory {
             session: session,
             runtime: runtime,
             appearancePreference: session.appearancePreference,
+            accentFamily: session.accentFamily,
             navigation: navigation,
             todayService: runtime.todayService,
             captureService: runtime.captureService,

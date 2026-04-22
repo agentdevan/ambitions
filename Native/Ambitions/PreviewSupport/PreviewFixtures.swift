@@ -1,3 +1,4 @@
+import AmbitionsDesignSystem
 import Foundation
 
 struct PreviewFixtures: Sendable {
@@ -13,7 +14,8 @@ struct PreviewFixtures: Sendable {
         preferences: AppPreferences(
             preferredTab: .today,
             userDisplayName: "Preview User",
-            appearancePreference: .system
+            appearancePreference: .system,
+            accentFamily: .sage
         ),
         todayDashboard: TodayDashboard(
             title: "Steady execution, light load",
@@ -159,7 +161,8 @@ struct PreviewFixtures: Sendable {
                     SettingsItem(id: "profile-setting-1", title: "Planning storage", subtitle: "Native persistence is active for goals, habits, and evidence", icon: "internaldrive", valueLabel: "Local-first"),
                     SettingsItem(id: "profile-setting-2", title: "Default tab", subtitle: "Used on the next cold launch", icon: "square.grid.2x2", valueLabel: "Today"),
                     SettingsItem(id: "profile-setting-3", title: "Appearance", subtitle: "System follows the device while explicit themes stay selectable", icon: "circle.lefthalf.filled", valueLabel: "System"),
-                    SettingsItem(id: "profile-setting-4", title: "Review cadence", subtitle: "The same reset rhythm used by the current local planning flow.", icon: "calendar", valueLabel: "Weekly")
+                    SettingsItem(id: "profile-setting-4", title: "Accent family", subtitle: "Curated accents keep the shared system expressive without turning personalization into a toy.", icon: "paintpalette", valueLabel: "Sage"),
+                    SettingsItem(id: "profile-setting-5", title: "Review cadence", subtitle: "The same reset rhythm used by the current local planning flow.", icon: "calendar", valueLabel: "Weekly")
                 ],
                 footer: nil
             ),
@@ -167,10 +170,10 @@ struct PreviewFixtures: Sendable {
                 title: "Trust and external status",
                 subtitle: "\(ExternalSurfaceTruth.verifiedRoutingTruth). Other external surfaces stay conservative here until manual checks confirm them.",
                 items: [
-                    SettingsItem(id: "profile-setting-5", title: "Notifications", subtitle: "\(ExternalSurfaceTruth.availableButNeedsManualVerification). Authorization: Not requested yet.", icon: "bell.badge", valueLabel: "Not requested"),
-                    SettingsItem(id: "profile-setting-6", title: "Widgets and Live Activity", subtitle: "\(ExternalSurfaceTruth.availableButNeedsManualVerification). These surfaces stay read-only and still need explicit manual checks.", icon: "rectangle.3.group", valueLabel: ExternalSurfaceTruth.availableButNeedsManualVerification),
-                    SettingsItem(id: "profile-setting-7", title: "Navigation shortcuts", subtitle: "\(ExternalSurfaceTruth.availableButNeedsManualVerification). App Intents stay navigation-only and open Today, Plan, or the Captures inbox without creating or mutating records.", icon: "sparkles.rectangle.stack", valueLabel: ExternalSurfaceTruth.availableButNeedsManualVerification),
-                    SettingsItem(id: "profile-setting-8", title: "Share Extension", subtitle: "\(ExternalSurfaceTruth.notShippedInThisBuild). Share intake remains deferred until a dedicated extension target and handoff path exist.", icon: "square.and.arrow.up", valueLabel: ExternalSurfaceTruth.notShippedInThisBuild)
+                    SettingsItem(id: "profile-setting-6", title: "Notifications", subtitle: "\(ExternalSurfaceTruth.availableButNeedsManualVerification). Authorization: Not requested yet.", icon: "bell.badge", valueLabel: "Not requested"),
+                    SettingsItem(id: "profile-setting-7", title: "Widgets and Live Activity", subtitle: "\(ExternalSurfaceTruth.availableButNeedsManualVerification). These surfaces stay read-only and still need explicit manual checks.", icon: "rectangle.3.group", valueLabel: ExternalSurfaceTruth.availableButNeedsManualVerification),
+                    SettingsItem(id: "profile-setting-8", title: "Navigation shortcuts", subtitle: "\(ExternalSurfaceTruth.availableButNeedsManualVerification). App Intents stay navigation-only and open Today, Plan, or the Captures inbox without creating or mutating records.", icon: "sparkles.rectangle.stack", valueLabel: ExternalSurfaceTruth.availableButNeedsManualVerification),
+                    SettingsItem(id: "profile-setting-9", title: "Share Extension", subtitle: "\(ExternalSurfaceTruth.notShippedInThisBuild). Share intake remains deferred until a dedicated extension target and handoff path exist.", icon: "square.and.arrow.up", valueLabel: ExternalSurfaceTruth.notShippedInThisBuild)
                 ],
                 footer: "Everything in this version runs from an explicit local-only trust posture. Capture storage is live under Today, routine review lives under Plan, portable backup and restore can stay local-first, routing truth stays explicit, and unverified platform surfaces stay conservative in copy."
             ),
@@ -180,7 +183,7 @@ struct PreviewFixtures: Sendable {
                 canRequestAuthorization: true,
                 actionTitle: "Enable notifications"
             ),
-            preferences: ProfilePreferencesState(preferredTab: .today, appearancePreference: .system, reviewCadenceDays: 7, localOnlyModeEnabled: true)
+            preferences: ProfilePreferencesState(preferredTab: .today, appearancePreference: .system, accentFamily: .sage, reviewCadenceDays: 7, localOnlyModeEnabled: true)
         )
     )
 }

@@ -23,14 +23,11 @@ struct InsightsScreen: View {
         ) {
             switch viewModel.state {
             case .loading:
-                LoadingSkeletonCard(lineCount: 8)
+                AsyncStateCard(.loading(lines: 8))
                     .transition(.ambitionPanel)
             case let .failed(message):
-                EmptyStateCard(
-                    title: "Insights are unavailable",
-                    message: message,
-                    icon: "chart.line.uptrend.xyaxis",
-                    actionTitle: "Retry",
+                AsyncStateCard(
+                    .error(title: "Insights are unavailable", message: message, icon: "chart.line.uptrend.xyaxis", actionTitle: "Retry"),
                     actionAccessibilityIdentifier: "insights.retry-button"
                 ) {
                     Task { await viewModel.refresh(using: container.insightsService) }

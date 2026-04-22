@@ -8,6 +8,7 @@ final class AppContainer {
     let session: AppSession
     let runtime: AmbitionsRuntime
     var appearancePreference: AppAppearancePreference
+    var accentFamily: AmbitionAccentFamily
     let navigation: AppNavigationModel
     let todayService: any TodayServicing
     let captureService: any CaptureServicing
@@ -26,6 +27,7 @@ final class AppContainer {
         session: AppSession,
         runtime: AmbitionsRuntime,
         appearancePreference: AppAppearancePreference,
+        accentFamily: AmbitionAccentFamily,
         navigation: AppNavigationModel,
         todayService: any TodayServicing,
         captureService: any CaptureServicing,
@@ -43,6 +45,7 @@ final class AppContainer {
         self.session = session
         self.runtime = runtime
         self.appearancePreference = appearancePreference
+        self.accentFamily = accentFamily
         self.navigation = navigation
         self.todayService = todayService
         self.captureService = captureService

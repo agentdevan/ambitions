@@ -77,6 +77,7 @@ struct DefaultStartupService: StartupServicing {
             userDisplayName: preferences.userDisplayName,
             initialTab: preferences.preferredTab,
             appearancePreference: preferences.appearancePreference,
+            accentFamily: preferences.accentFamily,
             launchedAt: Date(),
             startupNote: startupNote(for: source)
         )

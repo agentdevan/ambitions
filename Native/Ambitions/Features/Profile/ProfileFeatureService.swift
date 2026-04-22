@@ -30,6 +30,7 @@ struct RepositoryBackedProfileService: ProfileServicing {
         var state = try await repositories.appState.loadState()
         state.preferredTab = preferences.preferredTab.canonicalTopLevelTab
         state.appearancePreference = preferences.appearancePreference
+        state.accentFamily = preferences.accentFamily
         state.reviewCadenceDays = max(1, preferences.reviewCadenceDays)
         state.localOnlyModeEnabled = true
         try await repositories.appState.saveState(state)
@@ -116,6 +117,7 @@ private extension RepositoryBackedProfileService {
                     SettingsItem(id: "profile-storage", title: "Planning storage", subtitle: "Goals, habits, evidence, and feedback all read from the native repository.", icon: "internaldrive", valueLabel: "Local-only mode"),
                     SettingsItem(id: "profile-tab", title: "Default tab", subtitle: "Used on the next cold launch.", icon: "square.grid.2x2", valueLabel: snapshot.appState.preferredTab.canonicalTopLevelTab.title),
                     SettingsItem(id: "profile-appearance", title: "Appearance", subtitle: "Choose whether Ambitions follows the system or stays explicit.", icon: "circle.lefthalf.filled", valueLabel: snapshot.appState.appearancePreference.title),
+                    SettingsItem(id: "profile-accent", title: "Accent family", subtitle: "Curated accents keep the shared system expressive without turning personalization into a toy.", icon: "paintpalette", valueLabel: snapshot.appState.accentFamily.title),
                     SettingsItem(id: "profile-review", title: "Review cadence", subtitle: "The same reset rhythm used by the current local planning flow.", icon: "calendar", valueLabel: reviewLabel(days: snapshot.appState.reviewCadenceDays))
                 ],
                 footer: nil
@@ -160,6 +162,7 @@ private extension RepositoryBackedProfileService {
             preferences: ProfilePreferencesState(
                 preferredTab: snapshot.appState.preferredTab.canonicalTopLevelTab,
                 appearancePreference: snapshot.appState.appearancePreference,
+                accentFamily: snapshot.appState.accentFamily,
                 reviewCadenceDays: snapshot.appState.reviewCadenceDays,
                 localOnlyModeEnabled: true
             )

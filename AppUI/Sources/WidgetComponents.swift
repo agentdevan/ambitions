@@ -126,13 +126,7 @@ struct WidgetFallbackStateView: View {
     let action: WidgetVoidAction?
 
     var body: some View {
-        EmptyStateCard(
-            title: title,
-            message: message,
-            icon: icon,
-            actionTitle: actionTitle,
-            action: action
-        )
+        AsyncStateCard(.empty(title: title, message: message, icon: icon, actionTitle: actionTitle), action: action)
     }
 }
 
@@ -144,7 +138,7 @@ struct WidgetLoadingStateView: View {
     }
 
     var body: some View {
-        LoadingSkeletonCard(lineCount: lineCount)
+        AsyncStateCard(.loading(lines: lineCount))
     }
 }
 
