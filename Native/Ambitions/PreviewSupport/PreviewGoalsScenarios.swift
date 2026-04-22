@@ -9,60 +9,292 @@ enum PreviewGoalsScenarios {
     static let supportTarget = GoalRouteTarget(goalID: "goal-support", draftID: "draft-support")
 
     static let overview = GoalsOverview(
-        title: "Goals",
-        subtitle: "Goals should make current work legible without turning into a backlog dump.",
-        contextPills: ["4 active", "2 need care", "Preview data"],
+        hero: GoalsBoardHeroState(
+            eyebrow: "Direction Board",
+            title: "Goals",
+            subtitle: "Preview goals should read like a living board, not a portfolio dump.",
+            dominantTruth: "Close the hardening pass is the clearest live ambition right now.",
+            pressureSummary: "Plan a freelance pivot is still blocked on one real constraint, so pressure is leaking into the board.",
+            contextPills: [
+                GoalsHeroPillState(title: "4 active", icon: "scope", state: .selected),
+                GoalsHeroPillState(title: "2 stretching thin", icon: "wind", state: .warning),
+                GoalsHeroPillState(title: "Preview data", icon: "sparkles", state: .celebration),
+            ],
+            attentionPills: [
+                GoalsHeroPillState(title: "1 freshness attention", icon: "sparkle.magnifyingglass", state: .warning),
+                GoalsHeroPillState(title: "1 contradiction attention", icon: "sparkle.magnifyingglass", state: .warning),
+            ]
+        ),
+        heroPrimaryAction: GoalsBoardPrimaryAction(
+            kind: .recoverGoal,
+            title: "Recover Plan a freelance pivot",
+            subtitle: "The exploration still needs a real decision target before the path is trustworthy.",
+            systemImage: "lifepreserver",
+            target: blockedTarget,
+            state: .warning
+        ),
+        bands: [
+            GoalsBoardBand(
+                kind: .activeDirection,
+                title: "Active direction",
+                subtitle: "The ambitions that are truly alive and still have believable momentum this week.",
+                cards: [
+                    card(
+                        id: "goal-native",
+                        target: activeTarget,
+                        title: "Close the hardening pass",
+                        subtitle: "Tighten repo truth, validation coverage, and release readiness without widening scope.",
+                        modeLabel: "Project",
+                        posture: .active,
+                        renderState: .active,
+                        progressValue: 0.46,
+                        progressLabel: "5/11 steps complete",
+                        timingLabel: "Due 2026-05-01",
+                        weekRelationship: "This week this goal is carrying the strongest directional weight.",
+                        phaseSummary: "Truth and trust",
+                        milestoneSummary: "2/5 milestones visible",
+                        pressureSummary: "The path still has believable movement.",
+                        nextStepHint: "Refresh release docs and trust copy",
+                        priorityLabel: "Priority #1"
+                    ),
+                    card(
+                        id: "goal-support",
+                        target: supportTarget,
+                        title: "Help Maya rebuild a reading rhythm",
+                        subtitle: "Supportive structure that keeps Maya as the owner of execution.",
+                        modeLabel: "Support",
+                        posture: .active,
+                        renderState: .active,
+                        progressValue: 0.31,
+                        progressLabel: "2/7 support steps landed",
+                        timingLabel: "Support window open",
+                        weekRelationship: "This week can stay steady without opening Plan.",
+                        phaseSummary: "Support rhythm",
+                        milestoneSummary: "1/3 milestones visible",
+                        pressureSummary: "The path still has believable movement.",
+                        nextStepHint: "Set up one calm reading check-in",
+                        supportLabel: "Support for Maya",
+                        priorityLabel: "Priority #3"
+                    ),
+                ]
+            ),
+            GoalsBoardBand(
+                kind: .pressure,
+                title: "Pressure points",
+                subtitle: "Where pressure, crowding, or drift is starting to distort the direction board.",
+                cards: [
+                    card(
+                        id: "draft-blocked",
+                        target: blockedTarget,
+                        title: "Plan a freelance pivot",
+                        subtitle: "The planner is blocked until the real constraint is clarified.",
+                        modeLabel: "Exploration",
+                        posture: .atRisk,
+                        renderState: .blocked,
+                        progressValue: 0.05,
+                        progressLabel: "Needs planning input",
+                        timingLabel: "Flexible window",
+                        weekRelationship: "This week needs a clarifying move before more planning.",
+                        phaseSummary: "Constraint definition",
+                        milestoneSummary: "0/2 milestones visible",
+                        pressureSummary: "The exploration still needs a real decision target before it can become a believable path.",
+                        nextStepHint: "Clarify what decision this exploration actually needs to support",
+                        priorityLabel: "Priority #5"
+                    ),
+                    card(
+                        id: "draft-clarify",
+                        target: clarificationTarget,
+                        title: "Break this down for someone else",
+                        subtitle: "The planner needs one missing detail before the path is trustworthy.",
+                        modeLabel: "Support",
+                        posture: .crowded,
+                        renderState: .clarification,
+                        progressValue: 0.08,
+                        progressLabel: "Needs planning input",
+                        timingLabel: "Support when helpful",
+                        weekRelationship: "This week needs a clarifying move before more planning.",
+                        phaseSummary: "Executor clarity",
+                        milestoneSummary: "0/1 milestones visible",
+                        pressureSummary: "This goal is still alive, but portfolio pressure is squeezing it behind clearer work.",
+                        nextStepHint: "Who is this actually for?",
+                        supportLabel: "Support goal",
+                        priorityLabel: "Priority #4"
+                    ),
+                ]
+            ),
+            GoalsBoardBand(
+                kind: .recentMovement,
+                title: "Recent movement",
+                subtitle: "Visible momentum so you can see which ambitions are actually moving.",
+                cards: [
+                    card(
+                        id: "goal-learning",
+                        target: starterTarget,
+                        title: "Learn advanced vocal mixing",
+                        subtitle: "A learning track that should stay untimed and evidence-based.",
+                        modeLabel: "Learning",
+                        posture: .stalled,
+                        renderState: .starter,
+                        progressValue: 0.22,
+                        progressLabel: "Starter assumptions in play",
+                        timingLabel: "Untimed",
+                        weekRelationship: "This week needs a small visible signal to stay alive.",
+                        phaseSummary: "Starter path",
+                        milestoneSummary: "0/2 milestones visible",
+                        pressureSummary: "Recent movement is thin, so this goal is starting to drift out of view.",
+                        nextStepHint: "Record one rough pass and note what still sounds muddy",
+                        priorityLabel: "Priority #2"
+                    )
+                ]
+            )
+        ],
+        horizonLadder: GoalsHorizonLadderState(
+            title: "Horizon ladder",
+            subtitle: "A shallow read on where the live goals sit in their phase or path.",
+            rungs: [
+                GoalsHorizonLadderRung(id: "goal-native", target: activeTarget, title: "Close the hardening pass", summary: "Truth and trust", milestoneLabel: "2/5 milestones", signalLabel: "Path is moving", highlight: "Refresh release docs and trust copy", state: .selected),
+                GoalsHorizonLadderRung(id: "goal-support", target: supportTarget, title: "Help Maya rebuild a reading rhythm", summary: "Support rhythm", milestoneLabel: "1/3 milestones", signalLabel: "Path is moving", highlight: "Set up one calm reading check-in", state: .selected),
+                GoalsHorizonLadderRung(id: "draft-blocked", target: blockedTarget, title: "Plan a freelance pivot", summary: "Constraint definition", milestoneLabel: "0/2 milestones", signalLabel: "Blocked signal visible", highlight: "Clarify the real decision target", state: .warning),
+            ]
+        ),
+        weekPressureSummary: GoalsWeekPressureSummary(
+            title: "Pressure is spreading across the board",
+            subtitle: "Multiple goals are competing for week-level attention.",
+            leadingMetric: "4 active",
+            trailingMetric: "2 stretching thin",
+            pill: GoalsHeroPillState(title: "Compressed week", icon: "exclamationmark.triangle", state: .warning)
+        ),
+        lowerPriority: GoalsLowerPriorityState(
+            title: "Lower-priority and closed loops",
+            subtitle: "Paused or already-closed goals stay available without competing with live direction pressure.",
+            disclosureTitle: "Show quieter goals",
+            cards: [
+                card(
+                    id: "goal-pause",
+                    target: GoalRouteTarget(goalID: "goal-pause"),
+                    title: "Refresh the onboarding copy",
+                    subtitle: "Useful, but deliberately paused until the goals flow lands.",
+                    modeLabel: "Maintenance",
+                    posture: .lowerPriority,
+                    renderState: .onHold,
+                    progressValue: 0.12,
+                    progressLabel: "Paused at 1/6 steps",
+                    timingLabel: "Every 7 days",
+                    weekRelationship: "This week can stay quiet.",
+                    phaseSummary: "Paused maintenance",
+                    milestoneSummary: "1/6 steps visible",
+                    pressureSummary: "This goal is intentionally quieter right now.",
+                    nextStepHint: "Revisit after the goals milestone lands",
+                    priorityLabel: "Priority #6"
+                ),
+                card(
+                    id: "goal-done",
+                    target: GoalRouteTarget(goalID: "goal-done"),
+                    title: "Stabilize the five-tab shell",
+                    subtitle: "The current shell already reflects the shipped tab model.",
+                    modeLabel: "Achievement",
+                    posture: .achieved,
+                    renderState: .achieved,
+                    progressValue: 1,
+                    progressLabel: "11/11 steps complete",
+                    timingLabel: "Due 2026-04-12",
+                    weekRelationship: "This loop is closed.",
+                    phaseSummary: "Completed shell work",
+                    milestoneSummary: "All milestones landed",
+                    pressureSummary: "This loop is closed and no longer competing for attention.",
+                    nextStepHint: "Keep routing and trust notes aligned",
+                    priorityLabel: "Priority #7"
+                ),
+            ]
+        ),
+        items: [],
         isSeeded: true,
-        filterSummaries: [
-            GoalsFilterSummary(filter: .active, count: 5),
-            GoalsFilterSummary(filter: .onHold, count: 1),
-            GoalsFilterSummary(filter: .achieved, count: 1),
-        ],
-        items: [
-            GoalListItem(id: "goal-native", target: activeTarget, title: "Close the hardening pass", subtitle: "Tighten repo truth, validation coverage, and release readiness without widening scope.", mode: .project, renderState: .active, progressValue: 0.46, progressLabel: "5/11 steps complete", statusLabel: "In motion", timingLabel: "Due 2026-05-01", nextStepHint: "Refresh release docs and trust copy", modeLabel: "Project", supportLabel: nil, relevanceScore: 0.94, momentumScore: 0.72, urgencyScore: 0.83, manualPriorityRank: 0, updatedAt: "2026-04-14T12:00:00Z"),
-            GoalListItem(id: "goal-learning", target: starterTarget, title: "Learn advanced vocal mixing", subtitle: "A learning track that should stay untimed and evidence-based.", mode: .learning, renderState: .starter, progressValue: 0.22, progressLabel: "Starter assumptions in play", statusLabel: "Starter path", timingLabel: "Untimed", nextStepHint: "Record one rough pass and note what still sounds muddy", modeLabel: "Learning", supportLabel: nil, relevanceScore: 0.81, momentumScore: 0.41, urgencyScore: 0.28, manualPriorityRank: 1, updatedAt: "2026-04-14T11:00:00Z"),
-            GoalListItem(id: "goal-support", target: supportTarget, title: "Help Maya rebuild a reading rhythm", subtitle: "Supportive structure that keeps Maya as the owner of execution.", mode: .delegatedSupport, renderState: .active, progressValue: 0.31, progressLabel: "2/7 support steps landed", statusLabel: "In motion", timingLabel: "Support window open", nextStepHint: "Set up one calm reading check-in", modeLabel: "Support", supportLabel: "Support for Maya", relevanceScore: 0.78, momentumScore: 0.55, urgencyScore: 0.49, manualPriorityRank: 2, updatedAt: "2026-04-14T10:00:00Z"),
-            GoalListItem(id: "draft-clarify", target: clarificationTarget, title: "Break this down for someone else", subtitle: "The planner needs one missing detail before the path is trustworthy.", mode: .delegatedSupport, renderState: .clarification, progressValue: 0.08, progressLabel: "Needs planning input", statusLabel: "Needs clarity", timingLabel: "Support when helpful", nextStepHint: "Who is this actually for?", modeLabel: "Support", supportLabel: "Support goal", relevanceScore: 0.9, momentumScore: 0.2, urgencyScore: 0.76, manualPriorityRank: 3, updatedAt: "2026-04-14T09:30:00Z"),
-            GoalListItem(id: "draft-blocked", target: blockedTarget, title: "Plan a freelance pivot", subtitle: "The planner is blocked until the real constraint is clarified.", mode: .exploration, renderState: .blocked, progressValue: 0.05, progressLabel: "Needs planning input", statusLabel: "Blocked", timingLabel: "Flexible window", nextStepHint: "Clarify what decision this exploration actually needs to support", modeLabel: "Exploration", supportLabel: nil, relevanceScore: 0.89, momentumScore: 0.18, urgencyScore: 0.71, manualPriorityRank: 4, updatedAt: "2026-04-14T09:00:00Z"),
-            GoalListItem(id: "goal-pause", target: GoalRouteTarget(goalID: "goal-pause"), title: "Refresh the onboarding copy", subtitle: "Useful, but deliberately paused until the goals flow lands.", mode: .maintenance, renderState: .onHold, progressValue: 0.12, progressLabel: "Paused at 1/6 steps", statusLabel: "On hold", timingLabel: "Every 7 days", nextStepHint: "Revisit after the goals milestone lands", modeLabel: "Maintenance", supportLabel: nil, relevanceScore: 0.42, momentumScore: 0.16, urgencyScore: 0.12, manualPriorityRank: 5, updatedAt: "2026-04-13T16:00:00Z"),
-            GoalListItem(id: "goal-done", target: GoalRouteTarget(goalID: "goal-done"), title: "Stabilize the five-tab shell", subtitle: "The current shell already reflects the shipped tab model.", mode: .achievement, renderState: .achieved, progressValue: 1, progressLabel: "11/11 steps complete", statusLabel: "Achieved", timingLabel: "Due 2026-04-12", nextStepHint: "Keep routing and trust notes aligned", modeLabel: "Achievement", supportLabel: nil, relevanceScore: 0.3, momentumScore: 0.94, urgencyScore: 0.08, manualPriorityRank: 6, updatedAt: "2026-04-12T18:00:00Z"),
-        ],
         emptyTitle: "No goals yet",
         emptyMessage: "Once a goal or planning draft exists, this screen will immediately explain the path, not just dump tasks."
     )
 
     static let createdOverview = GoalsOverview(
-        title: "Goals",
-        subtitle: "A newly created goal should feel grounded immediately, with its first micro-plan already visible in the portfolio.",
-        contextPills: ["1 active", "0 need care", "Live preview data"],
+        hero: GoalsBoardHeroState(
+            eyebrow: "Direction Board",
+            title: "Goals",
+            subtitle: "A freshly created goal should feel grounded immediately instead of landing in a flat list.",
+            dominantTruth: "Build a calmer weekly review ritual is the only live direction right now.",
+            pressureSummary: "The path is still shallow, but the first week signal is already visible.",
+            contextPills: [
+                GoalsHeroPillState(title: "1 active", icon: "scope", state: .selected),
+                GoalsHeroPillState(title: "0 stretching thin", icon: "leaf", state: .success),
+                GoalsHeroPillState(title: "Live preview data", icon: "sparkles", state: .selected),
+            ],
+            attentionPills: []
+        ),
+        heroPrimaryAction: GoalsBoardPrimaryAction(
+            kind: .openGoal,
+            title: "Open Build a calmer weekly review ritual",
+            subtitle: "The first path is already visible and ready for detail.",
+            systemImage: "arrow.up.right.circle",
+            target: GoalRouteTarget(goalID: "goal-created", draftID: "draft-created"),
+            state: .selected
+        ),
+        bands: [
+            GoalsBoardBand(
+                kind: .activeDirection,
+                title: "Active direction",
+                subtitle: "The ambitions that are truly alive and still have believable momentum this week.",
+                cards: [
+                    card(
+                        id: "goal-created",
+                        target: GoalRouteTarget(goalID: "goal-created", draftID: "draft-created"),
+                        title: "Build a calmer weekly review ritual",
+                        subtitle: "A freshly created goal with an immediate deterministic micro-plan.",
+                        modeLabel: "Project",
+                        posture: .active,
+                        renderState: .active,
+                        progressValue: 0.08,
+                        progressLabel: "3 starter steps created",
+                        timingLabel: "Untimed",
+                        weekRelationship: "This week this goal is carrying the strongest directional weight.",
+                        phaseSummary: "Starter path",
+                        milestoneSummary: "0/3 milestones visible",
+                        pressureSummary: "The path still has believable movement.",
+                        nextStepHint: "Define scope",
+                        priorityLabel: "Priority #1"
+                    )
+                ]
+            ),
+            GoalsBoardBand(kind: .pressure, title: "Pressure points", subtitle: "Nothing is loudly off-track right now.", cards: []),
+            GoalsBoardBand(kind: .recentMovement, title: "Recent movement", subtitle: "Visible momentum so you can see which ambitions are actually moving.", cards: [])
+        ],
+        horizonLadder: GoalsHorizonLadderState(
+            title: "Horizon ladder",
+            subtitle: "A shallow read on where the live goals sit in their phase or path.",
+            rungs: [
+                GoalsHorizonLadderRung(
+                    id: "goal-created",
+                    target: GoalRouteTarget(goalID: "goal-created", draftID: "draft-created"),
+                    title: "Build a calmer weekly review ritual",
+                    summary: "Starter path",
+                    milestoneLabel: "0/3 milestones",
+                    signalLabel: "Path is moving",
+                    highlight: "Define scope",
+                    state: .selected
+                )
+            ]
+        ),
+        weekPressureSummary: GoalsWeekPressureSummary(
+            title: "Direction pressure is calm",
+            subtitle: "The board can stay oriented around one live ambition instead of rescue work.",
+            leadingMetric: "1 active",
+            trailingMetric: "0 stretching thin",
+            pill: GoalsHeroPillState(title: "Calm week", icon: "leaf", state: .success)
+        ),
+        lowerPriority: GoalsLowerPriorityState(
+            title: "Lower-priority and closed loops",
+            subtitle: "Paused or already-closed goals stay available without competing with live direction pressure.",
+            disclosureTitle: "Show quieter goals",
+            cards: []
+        ),
+        items: [],
         isSeeded: false,
-        filterSummaries: [
-            GoalsFilterSummary(filter: .active, count: 1),
-            GoalsFilterSummary(filter: .onHold, count: 0),
-            GoalsFilterSummary(filter: .achieved, count: 0),
-        ],
-        items: [
-            GoalListItem(
-                id: "goal-created",
-                target: GoalRouteTarget(goalID: "goal-created", draftID: "draft-created"),
-                title: "Build a calmer weekly review ritual",
-                subtitle: "A freshly created goal with an immediate deterministic micro-plan.",
-                mode: .project,
-                renderState: .active,
-                progressValue: 0.08,
-                progressLabel: "3 starter steps created",
-                statusLabel: "In motion",
-                timingLabel: "Untimed",
-                nextStepHint: "Define scope",
-                modeLabel: "Project",
-                supportLabel: nil,
-                relevanceScore: 0.93,
-                momentumScore: 0.34,
-                urgencyScore: 0.22,
-                manualPriorityRank: 0,
-                updatedAt: "2026-04-15T10:00:00Z"
-            )
-        ],
         emptyTitle: "No goals yet",
         emptyMessage: "Once a goal or planning draft exists, this screen will immediately explain the path, not just dump tasks."
     )
@@ -251,4 +483,46 @@ enum PreviewGoalsScenarios {
             defaultLens: .path
         ),
     ]
+
+    private static func card(
+        id: String,
+        target: GoalRouteTarget,
+        title: String,
+        subtitle: String,
+        modeLabel: String,
+        posture: GoalsBoardPosture,
+        renderState: GoalRenderState,
+        progressValue: Double,
+        progressLabel: String,
+        timingLabel: String,
+        weekRelationship: String,
+        phaseSummary: String,
+        milestoneSummary: String,
+        pressureSummary: String,
+        nextStepHint: String,
+        supportLabel: String? = nil,
+        priorityLabel: String
+    ) -> GoalsBoardCardState {
+        GoalsBoardCardState(
+            id: id,
+            target: target,
+            title: title,
+            subtitle: subtitle,
+            modeLabel: modeLabel,
+            posture: posture,
+            renderState: renderState,
+            progressValue: progressValue,
+            progressLabel: progressLabel,
+            timingLabel: timingLabel,
+            weekRelationship: weekRelationship,
+            phaseSummary: phaseSummary,
+            milestoneSummary: milestoneSummary,
+            pressureSummary: pressureSummary,
+            nextStepHint: nextStepHint,
+            supportLabel: supportLabel,
+            priorityLabel: priorityLabel,
+            manualPriorityRank: Int(priorityLabel.components(separatedBy: CharacterSet.decimalDigits.inverted).joined()) ?? 0,
+            shellSummary: nil
+        )
+    }
 }

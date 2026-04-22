@@ -232,12 +232,35 @@ private actor StaticGoalsService: GoalsServicing {
 
     func loadOverview() async throws -> GoalsOverview {
         GoalsOverview(
-            title: "Goals",
-            subtitle: "Test goals",
-            contextPills: [],
-            isSeeded: false,
-            filterSummaries: [],
+            hero: GoalsBoardHeroState(
+                eyebrow: "Direction Board",
+                title: "Goals",
+                subtitle: "Test goals",
+                dominantTruth: "Test goals",
+                pressureSummary: "Test goals",
+                contextPills: [],
+                attentionPills: []
+            ),
+            heroPrimaryAction: GoalsBoardPrimaryAction(
+                kind: .createGoal,
+                title: "Create goal",
+                subtitle: "Create goal",
+                systemImage: "plus.circle",
+                target: nil,
+                state: .selected
+            ),
+            bands: [],
+            horizonLadder: GoalsHorizonLadderState(title: "Horizon ladder", subtitle: "Test goals", rungs: []),
+            weekPressureSummary: GoalsWeekPressureSummary(
+                title: "Calm",
+                subtitle: "Calm",
+                leadingMetric: "0 active",
+                trailingMetric: "0 stretching thin",
+                pill: GoalsHeroPillState(title: "Calm", icon: "leaf", state: .success)
+            ),
+            lowerPriority: GoalsLowerPriorityState(title: "Lower priority", subtitle: "Test goals", disclosureTitle: "Show quieter goals", cards: []),
             items: items,
+            isSeeded: false,
             emptyTitle: "No goals",
             emptyMessage: "No goals"
         )

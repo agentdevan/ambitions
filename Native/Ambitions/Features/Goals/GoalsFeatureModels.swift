@@ -1,36 +1,6 @@
 import AmbitionsDesignSystem
 import Foundation
 
-enum GoalsFilter: String, CaseIterable, Hashable, Sendable {
-    case active
-    case onHold
-    case achieved
-
-    var title: String {
-        switch self {
-        case .active: "Active"
-        case .onHold: "On Hold"
-        case .achieved: "Achieved"
-        }
-    }
-}
-
-enum GoalsSortOption: String, CaseIterable, Hashable, Sendable {
-    case relevance
-    case momentum
-    case urgency
-    case manualPriority = "manual_priority"
-
-    var title: String {
-        switch self {
-        case .relevance: "Relevance"
-        case .momentum: "Momentum"
-        case .urgency: "Urgency"
-        case .manualPriority: "Priority"
-        }
-    }
-}
-
 enum GoalDetailLens: String, CaseIterable, Hashable, Sendable {
     case tasks
     case path
@@ -74,9 +44,84 @@ enum GoalRenderState: String, Hashable, Sendable {
     }
 }
 
-struct GoalsFilterSummary: Sendable {
-    let filter: GoalsFilter
-    let count: Int
+enum GoalsBoardPosture: String, Hashable, Sendable {
+    case active
+    case stalled
+    case crowded
+    case atRisk
+    case lowerPriority
+    case achieved
+
+    var title: String {
+        switch self {
+        case .active: "Active"
+        case .stalled: "Stalled"
+        case .crowded: "Crowded"
+        case .atRisk: "At Risk"
+        case .lowerPriority: "Lower Priority"
+        case .achieved: "Achieved"
+        }
+    }
+
+    var visualState: AmbitionVisualState {
+        switch self {
+        case .active: .selected
+        case .stalled: .default
+        case .crowded: .warning
+        case .atRisk: .warning
+        case .lowerPriority: .default
+        case .achieved: .success
+        }
+    }
+}
+
+enum GoalsBoardBandKind: String, Hashable, Sendable {
+    case activeDirection = "active_direction"
+    case pressure
+    case recentMovement = "recent_movement"
+    case lowerPriority = "lower_priority"
+}
+
+enum GoalsBoardPrimaryActionKind: String, Hashable, Sendable {
+    case openGoal = "open_goal"
+    case recoverGoal = "recover_goal"
+    case refineStrategy = "refine_strategy"
+    case createGoal = "create_goal"
+}
+
+struct GoalsHeroPillState: Identifiable, Sendable, Hashable {
+    let title: String
+    let icon: String?
+    let state: AmbitionVisualState
+
+    var id: String { [title, icon ?? "", state.rawValue].joined(separator: "|") }
+}
+
+struct GoalsBoardHeroState: Sendable {
+    let eyebrow: String
+    let title: String
+    let subtitle: String
+    let dominantTruth: String
+    let pressureSummary: String
+    let contextPills: [GoalsHeroPillState]
+    let attentionPills: [GoalsHeroPillState]
+}
+
+struct GoalsBoardPrimaryAction: Sendable {
+    let kind: GoalsBoardPrimaryActionKind
+    let title: String
+    let subtitle: String
+    let systemImage: String
+    let target: GoalRouteTarget?
+    let state: AmbitionVisualState
+}
+
+struct GoalsWeekPressureSummary: Sendable {
+    let title: String
+    let subtitle: String
+    let leadingMetric: String
+    let trailingMetric: String
+    let pill: GoalsHeroPillState
 }
 
 struct GoalListItem: Identifiable, Sendable {
@@ -143,35 +188,93 @@ struct GoalListItem: Identifiable, Sendable {
     }
 }
 
-struct GoalsOverview: Sendable {
+struct GoalsBoardCardState: Identifiable, Sendable {
+    let id: String
+    let target: GoalRouteTarget
     let title: String
     let subtitle: String
-    let contextPills: [String]
-    let attentionPills: [String]
-    let isSeeded: Bool
-    let filterSummaries: [GoalsFilterSummary]
+    let modeLabel: String
+    let posture: GoalsBoardPosture
+    let renderState: GoalRenderState
+    let progressValue: Double
+    let progressLabel: String
+    let timingLabel: String
+    let weekRelationship: String
+    let phaseSummary: String
+    let milestoneSummary: String
+    let pressureSummary: String
+    let nextStepHint: String
+    let supportLabel: String?
+    let priorityLabel: String
+    let manualPriorityRank: Int
+    let shellSummary: GoalShellSummaryState?
+}
+
+struct GoalsBoardBand: Identifiable, Sendable {
+    let kind: GoalsBoardBandKind
+    let title: String
+    let subtitle: String
+    let cards: [GoalsBoardCardState]
+
+    var id: String { kind.rawValue }
+}
+
+struct GoalsHorizonLadderRung: Identifiable, Sendable {
+    let id: String
+    let target: GoalRouteTarget
+    let title: String
+    let summary: String
+    let milestoneLabel: String
+    let signalLabel: String
+    let highlight: String
+    let state: AmbitionVisualState
+}
+
+struct GoalsHorizonLadderState: Sendable {
+    let title: String
+    let subtitle: String
+    let rungs: [GoalsHorizonLadderRung]
+}
+
+struct GoalsLowerPriorityState: Sendable {
+    let title: String
+    let subtitle: String
+    let disclosureTitle: String
+    let cards: [GoalsBoardCardState]
+}
+
+struct GoalsOverview: Sendable {
+    let hero: GoalsBoardHeroState
+    let heroPrimaryAction: GoalsBoardPrimaryAction
+    let bands: [GoalsBoardBand]
+    let horizonLadder: GoalsHorizonLadderState
+    let weekPressureSummary: GoalsWeekPressureSummary
+    let lowerPriority: GoalsLowerPriorityState
     let items: [GoalListItem]
+    let isSeeded: Bool
     let emptyTitle: String
     let emptyMessage: String
 
     init(
-        title: String,
-        subtitle: String,
-        contextPills: [String],
-        attentionPills: [String] = [],
-        isSeeded: Bool,
-        filterSummaries: [GoalsFilterSummary],
+        hero: GoalsBoardHeroState,
+        heroPrimaryAction: GoalsBoardPrimaryAction,
+        bands: [GoalsBoardBand],
+        horizonLadder: GoalsHorizonLadderState,
+        weekPressureSummary: GoalsWeekPressureSummary,
+        lowerPriority: GoalsLowerPriorityState,
         items: [GoalListItem],
+        isSeeded: Bool,
         emptyTitle: String,
         emptyMessage: String
     ) {
-        self.title = title
-        self.subtitle = subtitle
-        self.contextPills = contextPills
-        self.attentionPills = attentionPills
-        self.isSeeded = isSeeded
-        self.filterSummaries = filterSummaries
+        self.hero = hero
+        self.heroPrimaryAction = heroPrimaryAction
+        self.bands = bands
+        self.horizonLadder = horizonLadder
+        self.weekPressureSummary = weekPressureSummary
+        self.lowerPriority = lowerPriority
         self.items = items
+        self.isSeeded = isSeeded
         self.emptyTitle = emptyTitle
         self.emptyMessage = emptyMessage
     }

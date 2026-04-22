@@ -20,8 +20,9 @@ This program does **not** rewrite the completed hardening wave.
 Live queue truth in the current repo:
 
 - Batch 38 — Completed
-- Batch 44 — Active
-- Batches 45-59 — Queued
+- Batch 44 — Completed in registry history
+- Batch 45 — Active
+- Batches 46-59 — Queued
 - the front-end transformation program is active in implementation at **Batch 44**
 
 Batch 39 is a docs-only foundation batch.
@@ -238,7 +239,7 @@ Implications:
 | 42 | Front-End Transformation 03 / Global compose, search, capture, and command surface | Queued | Contextual Global Compose and Memory Lens foundation. |
 | 43 | Front-End Transformation 04 / Today rebuild I — living hero, now state, and action model | Completed | First half of Today rebuild delivered as a hero-first flagship execution surface with bounded action/routing seams and no Batch 44 systems shipped. |
 | 44 | Front-End Transformation 05 / Today rebuild II — time aperture, recovery bloom, and day logic | Active | Completes Today redesign plus logic expansion. |
-| 45 | Front-End Transformation 06 / Goals rebuild I — direction board and horizon ladder | Queued | Goals overview rebuild. |
+| 45 | Front-End Transformation 06 / Goals rebuild I — direction board and horizon ladder | Active | Goals overview rebuild. |
 | 46 | Front-End Transformation 07 / Goal intake and Strategy Composer | Queued | Full create-goal and planning setup redesign. |
 | 47 | Front-End Transformation 08 / Goal Detail rebuild I — strategic chamber and path filmstrip | Queued | Goal Detail composition phase 1. |
 | 48 | Front-End Transformation 09 / Goal Detail rebuild II — trust whisper, correction, audit, and memory | Queued | Goal Detail composition phase 2. |
@@ -569,7 +570,7 @@ Complete only when Today is fully rebuilt, not partially elevated.
 ## Batch 45 — Front-End Transformation 06 / Goals rebuild I — direction board and horizon ladder
 
 ### Status
-Queued
+Active
 
 ### Goal
 Rebuild Goals from a goal list into a living direction board with stronger health, pressure, and ambition structure.

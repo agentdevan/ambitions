@@ -584,29 +584,88 @@ private extension RepositoryBackedGoalsService {
         }
 
         let items = goalItems + draftItems
-        let activeCount = items.filter { $0.renderState == .active || $0.renderState == .starter || $0.renderState == .clarification || $0.renderState == .blocked }.count
-        let onHoldCount = items.filter { $0.renderState == .onHold }.count
-        let achievedCount = items.filter { $0.renderState == .achieved }.count
+        let cards = items.map { item in
+            makeBoardCard(
+                from: item,
+                snapshot: snapshot,
+                learningSummary: learningSnapshot.goalSummaries[item.target.goalID ?? ""]
+            )
+        }
+        let activeCards = cards.filter { $0.renderState == .active || $0.renderState == .starter }
+        let activeDirectionCards = activeCards
+            .filter { $0.posture == .active }
+            .sorted(by: boardPriorityDescriptor)
+        let pressuredCards = cards
+            .filter { [.atRisk, .crowded, .stalled].contains($0.posture) }
+            .sorted(by: boardPriorityDescriptor)
+        let recentMovementCards = activeCards
+            .sorted(by: recentMovementDescriptor)
+            .prefix(3)
+        let lowerPriorityCards = cards
+            .filter { $0.posture == .lowerPriority || $0.posture == .achieved || $0.renderState == .onHold || $0.renderState == .achieved }
+            .sorted(by: boardPriorityDescriptor)
+        let heroPrimaryAction = heroPrimaryAction(
+            activeDirectionCards: activeDirectionCards,
+            pressuredCards: pressuredCards,
+            cards: cards
+        )
+        let weekPressureSummary = makeWeekPressureSummary(
+            activeCount: activeCards.count,
+            pressuredCount: pressuredCards.count,
+            crowdedCount: pressuredCards.filter { $0.posture == .crowded }.count,
+            stalledCount: pressuredCards.filter { $0.posture == .stalled }.count
+        )
         let seeded = snapshot.appState.lastSeedVersion == DemoSeedPipeline.seedVersion
 
         return GoalsOverview(
-            title: "Goals",
-            subtitle: seeded
-                ? "Your starter portfolio is already reading from native persistence, so Today, Goals, and Habits stay in sync while the account history fills in."
-                : "Native goals, drafts, evidence, and feedback are now shaping the roadmap directly inside SwiftUI.",
-            contextPills: [
-                "\(activeCount) active",
-                "\(snapshot.drafts.filter { $0.latestResultKind == .clarificationRequired || $0.latestResultKind == .blocked }.count) need care",
-                seeded ? "Starter data loaded" : "Live native data"
+            hero: makeHeroState(
+                seeded: seeded,
+                activeDirectionCards: activeDirectionCards,
+                pressuredCards: pressuredCards,
+                items: items,
+                weekPressureSummary: weekPressureSummary
+            ),
+            heroPrimaryAction: heroPrimaryAction,
+            bands: [
+                GoalsBoardBand(
+                    kind: .activeDirection,
+                    title: "Active direction",
+                    subtitle: activeDirectionCards.isEmpty
+                        ? "The portfolio is quiet right now. The next move is to seed one live ambition."
+                        : "The ambitions that are truly alive and still have believable momentum this week.",
+                    cards: Array(activeDirectionCards.prefix(4))
+                ),
+                GoalsBoardBand(
+                    kind: .pressure,
+                    title: "Pressure points",
+                    subtitle: pressuredCards.isEmpty
+                        ? "Nothing is loudly off-track right now."
+                        : "Where pressure, crowding, or drift is starting to distort the direction board.",
+                    cards: Array(pressuredCards.prefix(4))
+                ),
+                GoalsBoardBand(
+                    kind: .recentMovement,
+                    title: "Recent movement",
+                    subtitle: recentMovementCards.isEmpty
+                        ? "Once a goal gets fresh evidence or a clearer move, it will surface here."
+                        : "Visible momentum so you can see which ambitions are actually moving.",
+                    cards: Array(recentMovementCards)
+                )
             ],
-            attentionPills: overviewAttentionPills(items: items),
-            isSeeded: seeded,
-            filterSummaries: [
-                GoalsFilterSummary(filter: .active, count: activeCount),
-                GoalsFilterSummary(filter: .onHold, count: onHoldCount),
-                GoalsFilterSummary(filter: .achieved, count: achievedCount),
-            ],
+            horizonLadder: makeHorizonLadder(
+                activeDirectionCards: activeDirectionCards,
+                pressuredCards: pressuredCards,
+                snapshot: snapshot
+            ),
+            weekPressureSummary: weekPressureSummary,
+            lowerPriority: GoalsLowerPriorityState(
+                title: "Lower-priority and closed loops",
+                subtitle: "Paused or already-closed goals stay available without competing with live direction pressure.",
+                disclosureTitle: "Show quieter goals",
+                cards: lowerPriorityCards
+            ),
             items: items,
+            isSeeded: seeded,
             emptyTitle: "No goals yet",
             emptyMessage: "Once a goal or planning draft exists, this screen will immediately explain the path, not just dump tasks."
         )
@@ -851,6 +910,385 @@ private extension RepositoryBackedGoalsService {
             correctionAttention > 0 ? "\(correctionAttention) taught paths" : nil
         ]
         .compactMap { $0 }
+    }
+
+    func makeBoardCard(
+        from item: GoalListItem,
+        snapshot: Snapshot,
+        learningSummary: GoalLearningSummary?
+    ) -> GoalsBoardCardState {
+        let posture = classifyPosture(for: item, snapshot: snapshot, learningSummary: learningSummary)
+        let pathSummary = pathSummary(for: item, snapshot: snapshot)
+        let phaseSummary = activeStageTitle(for: pathSummary)
+            ?? item.shellSummary?.pathSummary
+            ?? item.progressLabel
+        let milestoneSummary = milestoneSummary(for: item, pathSummary: pathSummary)
+
+        return GoalsBoardCardState(
+            id: item.id,
+            target: item.target,
+            title: item.title,
+            subtitle: item.subtitle,
+            modeLabel: item.modeLabel,
+            posture: posture,
+            renderState: item.renderState,
+            progressValue: item.progressValue,
+            progressLabel: item.progressLabel,
+            timingLabel: item.timingLabel,
+            weekRelationship: weekRelationship(for: item, learningSummary: learningSummary),
+            phaseSummary: phaseSummary,
+            milestoneSummary: milestoneSummary,
+            pressureSummary: pressureSummary(for: item, posture: posture, learningSummary: learningSummary),
+            nextStepHint: item.nextStepHint,
+            supportLabel: item.supportLabel,
+            priorityLabel: "Priority #\(item.manualPriorityRank + 1)",
+            manualPriorityRank: item.manualPriorityRank,
+            shellSummary: item.shellSummary
+        )
+    }
+
+    func classifyPosture(
+        for item: GoalListItem,
+        snapshot: Snapshot,
+        learningSummary: GoalLearningSummary?
+    ) -> GoalsBoardPosture {
+        switch item.renderState {
+        case .clarification, .blocked:
+            return .atRisk
+        case .onHold:
+            return .lowerPriority
+        case .achieved:
+            return .achieved
+        case .starter, .active:
+            break
+        }
+
+        let freshnessWarning = item.shellSummary?.indicators.contains(where: { $0.kind == .freshness && $0.state == .warning }) == true
+        let contradictionFlag = item.shellSummary?.indicators.contains(where: { $0.kind == .contradiction }) == true
+        let pathSummary = pathSummary(for: item, snapshot: snapshot)
+        let blockedPath = pathSummary?.blockedPrerequisites.isEmpty == false
+            || (pathSummary?.readiness.gapCount ?? 0) > 0
+        let timelineRisk = learningSummary?.timelineRisk.riskScore ?? 0
+        let driftCount = learningSummary?.driftTriggers.count ?? 0
+
+        if freshnessWarning || contradictionFlag || blockedPath {
+            return .atRisk
+        }
+
+        if item.manualPriorityRank >= 2 && item.urgencyScore >= 0.48 && item.momentumScore <= 0.56 {
+            return .crowded
+        }
+
+        if timelineRisk >= 0.85 {
+            return .atRisk
+        }
+
+        if item.manualPriorityRank == 0 && driftCount == 0 && item.urgencyScore >= 0.55 {
+            return .active
+        }
+
+        if item.momentumScore < 0.24 {
+            return .stalled
+        }
+
+        if item.momentumScore < 0.42 && item.manualPriorityRank > 0 {
+            return .stalled
+        }
+
+        if driftCount > 0 && item.progressValue < 0.35 {
+            return .stalled
+        }
+
+        return .active
+    }
+
+    func pathSummary(for item: GoalListItem, snapshot: Snapshot) -> LifePathStateSummary? {
+        pathSummary(for: item.target, snapshot: snapshot)
+    }
+
+    func pathSummary(for target: GoalRouteTarget, snapshot: Snapshot) -> LifePathStateSummary? {
+        if let goalID = target.goalID,
+           let goal = snapshot.goals.first(where: { $0.id == goalID }) {
+            return LifeGraphResolver.pathStateSummary(for: goal)
+        }
+
+        if let draftID = target.draftID,
+           let draft = snapshot.drafts.first(where: { $0.id == draftID }) {
+            return LifeGraphResolver.pathStateSummary(for: draft.draft, plan: draft.stagedPlan)
+        }
+
+        return nil
+    }
+
+    func milestoneSummary(for item: GoalListItem, pathSummary: LifePathStateSummary?) -> String {
+        if let pathSummary {
+            let completed = pathSummary.progression.completedMilestoneIDs.count
+            let total = pathSummary.progression.totalMilestoneCount
+            if total > 0 {
+                return "\(completed)/\(total) milestones visible"
+            }
+        }
+
+        return item.progressLabel
+    }
+
+    func weekRelationship(for item: GoalListItem, learningSummary: GoalLearningSummary?) -> String {
+        if item.renderState == .clarification || item.renderState == .blocked {
+            return "This week needs a clarifying move before more planning."
+        }
+
+        if let risk = learningSummary?.timelineRisk.riskScore, risk >= 0.7 {
+            return "This week is carrying real deadline pressure."
+        }
+
+        if item.manualPriorityRank == 0 {
+            return "This week this goal is carrying the strongest directional weight."
+        }
+
+        if item.momentumScore >= 0.6 {
+            return "This week momentum is visible and worth protecting."
+        }
+
+        if item.momentumScore < 0.4 {
+            return "This week needs a small visible signal to stay alive."
+        }
+
+        return "This week can stay steady without opening Plan."
+    }
+
+    func pressureSummary(
+        for item: GoalListItem,
+        posture: GoalsBoardPosture,
+        learningSummary: GoalLearningSummary?
+    ) -> String {
+        switch posture {
+        case .atRisk:
+            return learningSummary?.timelineRisk.reasons.first
+                ?? item.shellSummary?.explanationSummary
+                ?? "Pressure is high enough that this goal needs direct attention."
+        case .crowded:
+            return "This goal is still alive, but portfolio pressure is squeezing it behind more urgent work."
+        case .stalled:
+            return learningSummary?.driftTriggers.first?.summary
+                ?? "Recent movement is thin, so this goal is starting to drift out of view."
+        case .active:
+            return item.shellSummary?.explanationSummary
+                ?? "The path still has believable movement."
+        case .lowerPriority:
+            return "This goal is intentionally quieter right now."
+        case .achieved:
+            return "This loop is closed and no longer competing for attention."
+        }
+    }
+
+    func makeWeekPressureSummary(
+        activeCount: Int,
+        pressuredCount: Int,
+        crowdedCount: Int,
+        stalledCount: Int
+    ) -> GoalsWeekPressureSummary {
+        let title: String
+        let subtitle: String
+        let pill: GoalsHeroPillState
+
+        switch pressuredCount {
+        case 0:
+            title = "Direction pressure is calm"
+            subtitle = "The board can stay oriented around active ambitions instead of rescue work."
+            pill = GoalsHeroPillState(title: "Calm week", icon: "leaf", state: .success)
+        case 1:
+            title = "One goal is carrying the week"
+            subtitle = "A single pressure point is shaping the board and should stay visible."
+            pill = GoalsHeroPillState(title: "Focused pressure", icon: "scope", state: .selected)
+        default:
+            title = "Pressure is spreading across the board"
+            subtitle = "Multiple goals are competing for week-level attention."
+            pill = GoalsHeroPillState(title: "Compressed week", icon: "exclamationmark.triangle", state: .warning)
+        }
+
+        return GoalsWeekPressureSummary(
+            title: title,
+            subtitle: subtitle,
+            leadingMetric: "\(activeCount) active",
+            trailingMetric: "\(crowdedCount + stalledCount) stretching thin",
+            pill: pill
+        )
+    }
+
+    func makeHeroState(
+        seeded: Bool,
+        activeDirectionCards: [GoalsBoardCardState],
+        pressuredCards: [GoalsBoardCardState],
+        items: [GoalListItem],
+        weekPressureSummary: GoalsWeekPressureSummary
+    ) -> GoalsBoardHeroState {
+        let dominantTruth: String
+        if let primary = activeDirectionCards.first {
+            dominantTruth = "\(primary.title) is the clearest live ambition right now."
+        } else if let pressured = pressuredCards.first {
+            dominantTruth = "\(pressured.title) is shaping the board because pressure is outrunning movement."
+        } else {
+            dominantTruth = "The board is ready for a new live direction."
+        }
+
+        let pressureSummary = pressuredCards.first?.pressureSummary ?? weekPressureSummary.subtitle
+        let attentionPills = overviewAttentionPills(items: items).map {
+            GoalsHeroPillState(title: $0, icon: "sparkle.magnifyingglass", state: .warning)
+        }
+
+        return GoalsBoardHeroState(
+            eyebrow: "Direction Board",
+            title: "Goals",
+            subtitle: seeded
+                ? "Starter and live goals are being composed as a direction board instead of a portfolio list."
+                : "Live goals, drafts, and evidence are now grouped by direction pressure instead of list sorting.",
+            dominantTruth: dominantTruth,
+            pressureSummary: pressureSummary,
+            contextPills: [
+                GoalsHeroPillState(title: weekPressureSummary.leadingMetric, icon: "scope", state: .selected),
+                GoalsHeroPillState(title: weekPressureSummary.trailingMetric, icon: "wind", state: pressuredCards.isEmpty ? .default : .warning),
+                GoalsHeroPillState(title: seeded ? "Starter data loaded" : "Live native data", icon: "sparkles", state: seeded ? .celebration : .selected)
+            ],
+            attentionPills: attentionPills
+        )
+    }
+
+    func heroPrimaryAction(
+        activeDirectionCards: [GoalsBoardCardState],
+        pressuredCards: [GoalsBoardCardState],
+        cards: [GoalsBoardCardState]
+    ) -> GoalsBoardPrimaryAction {
+        if let atRisk = pressuredCards.first(where: { $0.posture == .atRisk }) {
+            return GoalsBoardPrimaryAction(
+                kind: .recoverGoal,
+                title: "Recover \(atRisk.title)",
+                subtitle: atRisk.pressureSummary,
+                systemImage: "lifepreserver",
+                target: atRisk.target,
+                state: .warning
+            )
+        }
+
+        if let crowded = pressuredCards.first(where: { $0.posture == .crowded }) {
+            return GoalsBoardPrimaryAction(
+                kind: .refineStrategy,
+                title: "Refine \(crowded.title)",
+                subtitle: crowded.weekRelationship,
+                systemImage: "slider.horizontal.3",
+                target: crowded.target,
+                state: .selected
+            )
+        }
+
+        if let primary = activeDirectionCards.first {
+            return GoalsBoardPrimaryAction(
+                kind: .openGoal,
+                title: "Open \(primary.title)",
+                subtitle: primary.weekRelationship,
+                systemImage: "arrow.up.right.circle",
+                target: primary.target,
+                state: .selected
+            )
+        }
+
+        return GoalsBoardPrimaryAction(
+            kind: .createGoal,
+            title: cards.isEmpty ? "Create your first goal" : "Create another goal",
+            subtitle: "Start one live direction instead of growing a passive list.",
+            systemImage: "plus.circle",
+            target: nil,
+            state: .selected
+        )
+    }
+
+    func makeHorizonLadder(
+        activeDirectionCards: [GoalsBoardCardState],
+        pressuredCards: [GoalsBoardCardState],
+        snapshot: Snapshot
+    ) -> GoalsHorizonLadderState {
+        let sources = Array((activeDirectionCards + pressuredCards).prefix(4))
+        let rungs = sources.compactMap { card -> GoalsHorizonLadderRung? in
+            let pathSummary = pathSummary(for: card.target, snapshot: snapshot)
+            let completedMilestones = pathSummary?.progression.completedMilestoneIDs.count ?? 0
+            let totalMilestones = pathSummary?.progression.totalMilestoneCount ?? 0
+            let activeStageTitle = activeStageTitle(for: pathSummary) ?? card.phaseSummary
+            let highlight = nextMilestoneTitle(for: pathSummary) ?? card.nextStepHint
+            let signalLabel: String
+            let state: AmbitionVisualState
+
+            if pathSummary?.blockedPrerequisites.isEmpty == false || (pathSummary?.readiness.gapCount ?? 0) > 0 {
+                signalLabel = "Blocked signal visible"
+                state = .warning
+            } else if card.posture == .atRisk {
+                signalLabel = "Pressure is high"
+                state = .warning
+            } else if card.posture == .active {
+                signalLabel = "Path is moving"
+                state = .selected
+            } else {
+                signalLabel = "Needs a smaller move"
+                state = .default
+            }
+
+            return GoalsHorizonLadderRung(
+                id: card.id,
+                target: card.target,
+                title: card.title,
+                summary: activeStageTitle,
+                milestoneLabel: totalMilestones > 0 ? "\(completedMilestones)/\(totalMilestones) milestones" : card.milestoneSummary,
+                signalLabel: signalLabel,
+                highlight: highlight,
+                state: state
+            )
+        }
+
+        return GoalsHorizonLadderState(
+            title: "Horizon ladder",
+            subtitle: "A shallow read on where the live goals sit in their current phase or path without opening Goal Detail.",
+            rungs: rungs
+        )
+    }
+
+    func boardPriorityDescriptor(lhs: GoalsBoardCardState, rhs: GoalsBoardCardState) -> Bool {
+        if lhs.posture != rhs.posture {
+            let order: [GoalsBoardPosture] = [.atRisk, .crowded, .stalled, .active, .lowerPriority, .achieved]
+            return (order.firstIndex(of: lhs.posture) ?? order.count) < (order.firstIndex(of: rhs.posture) ?? order.count)
+        }
+
+        if lhs.manualPriorityRank != rhs.manualPriorityRank {
+            return lhs.manualPriorityRank < rhs.manualPriorityRank
+        }
+
+        return lhs.progressValue > rhs.progressValue
+    }
+
+    func recentMovementDescriptor(lhs: GoalsBoardCardState, rhs: GoalsBoardCardState) -> Bool {
+        if lhs.progressValue == rhs.progressValue {
+            return lhs.manualPriorityRank < rhs.manualPriorityRank
+        }
+
+        return lhs.progressValue > rhs.progressValue
+    }
+
+    func activeStageTitle(for pathSummary: LifePathStateSummary?) -> String? {
+        guard let pathSummary else { return nil }
+        guard let activeStageID = pathSummary.activeStageID else {
+            return pathSummary.orderedStages.first?.title
+        }
+        return pathSummary.orderedStages.first(where: { $0.id == activeStageID })?.title
+    }
+
+    func nextMilestoneTitle(for pathSummary: LifePathStateSummary?) -> String? {
+        guard let pathSummary else { return nil }
+
+        for stage in pathSummary.orderedStages {
+            let milestones = pathSummary.stageMilestones[stage.id] ?? []
+            if let next = milestones.first(where: { pathSummary.progression.completedMilestoneIDs.contains($0.id) == false }) {
+                return next.title
+            }
+        }
+
+        return nil
     }
 
     func buildDetailPresentation(

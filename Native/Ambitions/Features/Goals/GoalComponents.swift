@@ -5,120 +5,387 @@ struct GoalsHeroCard: View {
     @Environment(\.ambitionTheme) private var theme
 
     let overview: GoalsOverview
+    let onPrimaryAction: (GoalsBoardPrimaryAction) -> Void
 
     var body: some View {
-        HeroCard {
+        HeroCard(state: overview.heroPrimaryAction.state) {
             VStack(alignment: .leading, spacing: theme.spacing.md) {
                 VStack(alignment: .leading, spacing: theme.spacing.xxs) {
-                    Text("Roadmap")
+                    Text(overview.hero.eyebrow)
                         .font(theme.typography.micro)
                         .foregroundStyle(theme.colors.accentWarm)
-                    Text(overview.title)
+                    Text(overview.hero.title)
                         .font(theme.typography.hero)
                         .foregroundStyle(theme.colors.textPrimary)
-                    Text(overview.subtitle)
+                    Text(overview.hero.subtitle)
+                        .font(theme.typography.body)
+                        .foregroundStyle(theme.colors.textSecondary)
+                }
+
+                VStack(alignment: .leading, spacing: theme.spacing.xs) {
+                    Text(overview.hero.dominantTruth)
+                        .font(theme.typography.section)
+                        .foregroundStyle(theme.colors.textPrimary)
+                    Text(overview.hero.pressureSummary)
                         .font(theme.typography.body)
                         .foregroundStyle(theme.colors.textSecondary)
                 }
 
                 ScrollView(.horizontal, showsIndicators: false) {
                     HStack(spacing: theme.spacing.xs) {
-                        ForEach(overview.contextPills, id: \.self) { pill in
-                            TagPill(pill, state: pill.contains("need care") ? .warning : (pill.contains("Seeded") ? .celebration : .selected))
+                        ForEach(overview.hero.contextPills) { pill in
+                            TagPill(pill.title, icon: pill.icon, state: pill.state)
                         }
                     }
                 }
 
-                if overview.attentionPills.isEmpty == false {
+                if overview.hero.attentionPills.isEmpty == false {
                     ScrollView(.horizontal, showsIndicators: false) {
                         HStack(spacing: theme.spacing.xs) {
-                            ForEach(overview.attentionPills, id: \.self) { pill in
-                                TagPill(pill, icon: "sparkle.magnifyingglass", state: .warning)
+                            ForEach(overview.hero.attentionPills) { pill in
+                                TagPill(pill.title, icon: pill.icon, state: pill.state)
                             }
+                        }
+                    }
+                }
+
+                GoalsHeroPrimaryActionButton(
+                    action: overview.heroPrimaryAction,
+                    handler: onPrimaryAction
+                )
+            }
+        }
+        .accessibilityIdentifier("goals.hero-card")
+        .ambitionPanelAccessibility()
+    }
+}
+
+private struct GoalsHeroPrimaryActionButton: View {
+    @Environment(\.ambitionTheme) private var theme
+
+    let action: GoalsBoardPrimaryAction
+    let handler: (GoalsBoardPrimaryAction) -> Void
+
+    var body: some View {
+        Button {
+            handler(action)
+        } label: {
+            HStack(alignment: .center, spacing: theme.spacing.sm) {
+                Image(systemName: action.systemImage)
+                    .font(.system(size: theme.icon.mediumSize, weight: theme.icon.symbolWeight))
+                VStack(alignment: .leading, spacing: theme.spacing.xxxs) {
+                    Text(action.title)
+                        .font(theme.typography.bodyEmphasized)
+                    Text(action.subtitle)
+                        .font(theme.typography.caption)
+                        .foregroundStyle(theme.colors.textSecondary)
+                }
+                Spacer()
+                Image(systemName: "arrow.right")
+                    .font(.system(size: theme.icon.smallSize, weight: theme.icon.symbolWeight))
+            }
+            .frame(maxWidth: .infinity, alignment: .leading)
+        }
+        .buttonStyle(AmbitionButtonStyle(tier: .hero, state: action.state))
+        .accessibilityHint(action.subtitle)
+        .accessibilityIdentifier("goals.hero.primary-action")
+    }
+}
+
+struct GoalsWeekPressureCard: View {
+    @Environment(\.ambitionTheme) private var theme
+
+    let summary: GoalsWeekPressureSummary
+
+    var body: some View {
+        AppCard {
+            VStack(alignment: .leading, spacing: theme.spacing.sm) {
+                HStack(alignment: .top, spacing: theme.spacing.sm) {
+                    VStack(alignment: .leading, spacing: theme.spacing.xxxs) {
+                        Text(summary.title)
+                            .font(theme.typography.section)
+                            .foregroundStyle(theme.colors.textPrimary)
+                        Text(summary.subtitle)
+                            .font(theme.typography.body)
+                            .foregroundStyle(theme.colors.textSecondary)
+                    }
+                    Spacer()
+                    TagPill(summary.pill.title, icon: summary.pill.icon, state: summary.pill.state)
+                }
+
+                HStack(spacing: theme.spacing.sm) {
+                    metricBlock(title: "Alive", value: summary.leadingMetric)
+                    metricBlock(title: "Stretch", value: summary.trailingMetric)
+                }
+            }
+        }
+        .accessibilityIdentifier("goals.week-pressure")
+        .ambitionPanelAccessibility()
+    }
+
+    @ViewBuilder
+    private func metricBlock(title: String, value: String) -> some View {
+        VStack(alignment: .leading, spacing: theme.spacing.xxxs) {
+            Text(title)
+                .font(theme.typography.caption)
+                .foregroundStyle(theme.colors.textTertiary)
+            Text(value)
+                .font(theme.typography.bodyEmphasized)
+                .foregroundStyle(theme.colors.textPrimary)
+        }
+        .frame(maxWidth: .infinity, alignment: .leading)
+        .padding(theme.spacing.sm)
+        .background(RoundedRectangle(cornerRadius: theme.radius.md, style: .continuous).fill(theme.colors.surfaceOverlay))
+    }
+}
+
+struct GoalsBoardBandSection: View {
+    @Environment(\.ambitionTheme) private var theme
+
+    let band: GoalsBoardBand
+
+    var body: some View {
+        AppCard {
+            VStack(alignment: .leading, spacing: theme.spacing.md) {
+                SectionHeader(title: band.title, subtitle: band.subtitle)
+
+                if band.cards.isEmpty {
+                    EmptyStateCard(
+                        title: "Nothing to surface here yet",
+                        message: band.subtitle,
+                        icon: "scope"
+                    )
+                } else {
+                    VStack(alignment: .leading, spacing: theme.spacing.sm) {
+                        ForEach(band.cards) { card in
+                            NavigationLink(value: card.target) {
+                                GoalsBoardCardView(card: card)
+                            }
+                            .buttonStyle(.plain)
+                            .accessibilityIdentifier("goals.card.open.\(card.target.goalID ?? card.target.draftID ?? card.id)")
                         }
                     }
                 }
             }
         }
+        .accessibilityIdentifier("goals.band.\(band.kind.rawValue)")
         .ambitionPanelAccessibility()
     }
 }
 
-struct GoalRowCard: View {
+struct GoalsBoardCardView: View {
     @Environment(\.ambitionTheme) private var theme
 
-    let item: GoalListItem
+    let card: GoalsBoardCardState
 
     var body: some View {
         VStack(alignment: .leading, spacing: theme.spacing.sm) {
             HStack(alignment: .top, spacing: theme.spacing.sm) {
                 VStack(alignment: .leading, spacing: theme.spacing.xxxs) {
                     HStack(spacing: theme.spacing.xs) {
-                        TagPill(item.modeLabel, state: item.renderState.visualState)
-                        TagPill(item.statusLabel, state: item.renderState.visualState)
+                        TagPill(card.modeLabel, state: card.renderState.visualState)
+                        TagPill(card.posture.title, state: card.posture.visualState)
                     }
 
-                    Text(item.title)
+                    Text(card.title)
                         .font(theme.typography.section)
                         .foregroundStyle(theme.colors.textPrimary)
 
-                    Text(item.subtitle)
+                    Text(card.subtitle)
                         .font(theme.typography.body)
                         .foregroundStyle(theme.colors.textSecondary)
                         .fixedSize(horizontal: false, vertical: true)
                 }
 
                 Spacer(minLength: theme.spacing.sm)
-                Image(systemName: icon(for: item.mode))
-                    .font(.system(size: theme.icon.mediumSize, weight: theme.icon.symbolWeight))
-                    .foregroundStyle(theme.stateStyle(for: item.renderState.visualState).accent)
+
+                VStack(alignment: .trailing, spacing: theme.spacing.xxxs) {
+                    Text(card.priorityLabel)
+                        .font(theme.typography.caption)
+                        .foregroundStyle(theme.colors.textTertiary)
+                    Text(card.timingLabel)
+                        .font(theme.typography.caption)
+                        .foregroundStyle(theme.colors.textSecondary)
+                }
             }
 
             ProgressRail(
-                title: item.progressLabel,
-                progress: item.progressValue,
-                trailingValue: "\(Int(item.progressValue * 100))%",
-                state: item.renderState.visualState
+                title: card.progressLabel,
+                progress: card.progressValue,
+                trailingValue: "\(Int(card.progressValue * 100))%",
+                state: card.posture.visualState
             )
 
+            HStack(alignment: .top, spacing: theme.spacing.sm) {
+                summaryColumn(title: "This week", body: card.weekRelationship)
+                summaryColumn(title: "Phase", body: card.phaseSummary)
+            }
+
+            HStack(alignment: .top, spacing: theme.spacing.sm) {
+                summaryColumn(title: "Milestones", body: card.milestoneSummary)
+                summaryColumn(title: "Pressure", body: card.pressureSummary)
+            }
+
             VStack(alignment: .leading, spacing: theme.spacing.xxxs) {
-                Text(item.nextStepHint)
+                Text(card.nextStepHint)
                     .font(theme.typography.bodyEmphasized)
                     .foregroundStyle(theme.colors.textPrimary)
-                if let shellSummary = item.shellSummary {
-                    GoalShellSummaryCompactView(summary: shellSummary)
-                        .padding(.top, theme.spacing.xxxs)
-                }
-                Text("Priority #\(item.manualPriorityRank + 1)")
-                    .font(theme.typography.caption)
-                    .foregroundStyle(theme.colors.textTertiary)
-                Text(item.timingLabel)
-                    .font(theme.typography.caption)
-                    .foregroundStyle(theme.colors.textSecondary)
-                if let supportLabel = item.supportLabel {
+
+                if let supportLabel = card.supportLabel {
                     Text(supportLabel)
                         .font(theme.typography.caption)
                         .foregroundStyle(theme.colors.textTertiary)
+                }
+
+                if let shellSummary = card.shellSummary {
+                    GoalShellSummaryCompactView(summary: shellSummary)
+                        .padding(.top, theme.spacing.xxxs)
                 }
             }
         }
         .padding(theme.spacing.md)
         .background(RoundedRectangle(cornerRadius: theme.radius.lg, style: .continuous).fill(theme.colors.surfaceOverlay))
         .overlay(RoundedRectangle(cornerRadius: theme.radius.lg, style: .continuous).stroke(theme.colors.strokeSubtle, lineWidth: 1))
+        .accessibilityIdentifier("goals.card.\(card.id)")
         .ambitionPanelAccessibility()
     }
 
-    private func icon(for mode: GoalMode) -> String {
-        switch mode {
-        case .achievement: "flag.checkered.2.crossed"
-        case .project: "square.stack.3d.up"
-        case .habit: "repeat"
-        case .learning: "book.pages"
-        case .exploration: "sparkle.magnifyingglass"
-        case .maintenance: "wrench.and.screwdriver"
-        case .recovery: "leaf"
-        case .delegatedSupport: "person.2.fill"
+    @ViewBuilder
+    private func summaryColumn(title: String, body: String) -> some View {
+        VStack(alignment: .leading, spacing: theme.spacing.xxxs) {
+            Text(title)
+                .font(theme.typography.caption)
+                .foregroundStyle(theme.colors.textTertiary)
+            Text(body)
+                .font(theme.typography.caption)
+                .foregroundStyle(theme.colors.textSecondary)
+                .fixedSize(horizontal: false, vertical: true)
         }
+        .frame(maxWidth: .infinity, alignment: .leading)
+        .padding(theme.spacing.sm)
+        .background(RoundedRectangle(cornerRadius: theme.radius.md, style: .continuous).fill(theme.colors.surfaceSecondary.opacity(0.7)))
+    }
+}
+
+struct GoalsLowerPriorityDisclosureSection: View {
+    @Environment(\.ambitionTheme) private var theme
+
+    let state: GoalsLowerPriorityState
+    let isExpanded: Bool
+    let onToggle: () -> Void
+
+    var body: some View {
+        AppCard {
+            VStack(alignment: .leading, spacing: theme.spacing.md) {
+                SectionHeader(title: state.title, subtitle: state.subtitle) {
+                    Button(isExpanded ? "Hide" : state.disclosureTitle, action: onToggle)
+                        .buttonStyle(AmbitionPressableButtonStyle(state: .default))
+                        .accessibilityIdentifier("goals.lower-priority.toggle")
+                }
+
+                if isExpanded {
+                    VStack(alignment: .leading, spacing: theme.spacing.sm) {
+                        ForEach(state.cards) { card in
+                            NavigationLink(value: card.target) {
+                                GoalsBoardCardView(card: card)
+                            }
+                            .buttonStyle(.plain)
+                        }
+                    }
+                    .transition(.ambitionPanel)
+                }
+            }
+        }
+        .accessibilityIdentifier("goals.band.lower-priority")
+        .ambitionPanelAccessibility()
+    }
+}
+
+struct GoalsHorizonLadderCard: View {
+    @Environment(\.ambitionTheme) private var theme
+
+    let state: GoalsHorizonLadderState
+
+    var body: some View {
+        AppCard {
+            VStack(alignment: .leading, spacing: theme.spacing.md) {
+                SectionHeader(title: state.title, subtitle: state.subtitle)
+
+                if state.rungs.isEmpty {
+                    EmptyStateCard(
+                        title: "The ladder appears once goals have a visible phase or path.",
+                        message: "It stays shallow here so direction stays legible without pulling Goal Detail forward.",
+                        icon: "stairs"
+                    )
+                } else {
+                    VStack(alignment: .leading, spacing: theme.spacing.sm) {
+                        ForEach(state.rungs) { rung in
+                            NavigationLink(value: rung.target) {
+                                VStack(alignment: .leading, spacing: theme.spacing.xs) {
+                                    HStack(alignment: .top, spacing: theme.spacing.sm) {
+                                        VStack(alignment: .leading, spacing: theme.spacing.xxxs) {
+                                            Text(rung.title)
+                                                .font(theme.typography.bodyEmphasized)
+                                                .foregroundStyle(theme.colors.textPrimary)
+                                            Text(rung.summary)
+                                                .font(theme.typography.caption)
+                                                .foregroundStyle(theme.colors.textSecondary)
+                                        }
+                                        Spacer()
+                                        TagPill(rung.signalLabel, state: rung.state)
+                                    }
+
+                                    HStack(spacing: theme.spacing.sm) {
+                                        Text(rung.milestoneLabel)
+                                            .font(theme.typography.caption)
+                                            .foregroundStyle(theme.colors.textTertiary)
+                                        Text(rung.highlight)
+                                            .font(theme.typography.caption)
+                                            .foregroundStyle(theme.colors.textSecondary)
+                                            .lineLimit(2)
+                                    }
+                                }
+                                .frame(maxWidth: .infinity, alignment: .leading)
+                                .padding(theme.spacing.sm)
+                                .background(RoundedRectangle(cornerRadius: theme.radius.md, style: .continuous).fill(theme.colors.surfaceOverlay))
+                            }
+                            .buttonStyle(.plain)
+                        }
+                    }
+                }
+            }
+        }
+        .accessibilityIdentifier("goals.horizon-ladder")
+        .ambitionPanelAccessibility()
+    }
+}
+
+struct GoalSuggestionCard: View {
+    @Environment(\.ambitionTheme) private var theme
+
+    let step: GoalDetailStepItem
+
+    var body: some View {
+        VStack(alignment: .leading, spacing: theme.spacing.xs) {
+            HStack(alignment: .top, spacing: theme.spacing.sm) {
+                Text(step.title)
+                    .font(theme.typography.bodyEmphasized)
+                    .foregroundStyle(theme.colors.textPrimary)
+                Spacer()
+                TagPill(step.statusLabel, state: step.state)
+            }
+
+            Text(step.summary)
+                .font(theme.typography.caption)
+                .foregroundStyle(theme.colors.textSecondary)
+
+            Text(step.timingLabel)
+                .font(theme.typography.caption)
+                .foregroundStyle(theme.colors.textTertiary)
+        }
+        .frame(maxWidth: .infinity, alignment: .leading)
+        .padding(theme.spacing.sm)
+        .background(RoundedRectangle(cornerRadius: theme.radius.md, style: .continuous).fill(theme.colors.surfaceOverlay))
     }
 }
 

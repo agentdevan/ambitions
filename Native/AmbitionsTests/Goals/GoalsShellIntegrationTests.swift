@@ -63,6 +63,13 @@ final class GoalsShellIntegrationTests: XCTestCase {
         XCTAssertEqual(contradictionSummary.pathSummary, expectedSummary.pathSummary)
         XCTAssertEqual(contradictionSummary.indicators, expectedSummary.indicators)
         XCTAssertFalse(contradictionSummary.indicators.contains(where: { $0.title.contains("Provenance:") }))
+
+        let boardCard = try XCTUnwrap(
+            runtimeOverview.bands
+                .flatMap(\.cards)
+                .first(where: { $0.target == runtimeContradictionCreated.target })
+        )
+        XCTAssertEqual(boardCard.shellSummary, contradictionSummary)
         _ = contradictionCreated
     }
 }

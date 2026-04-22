@@ -223,28 +223,7 @@ struct GoalDetailScreen: View {
                         GoalDetailSectionCard(title: "Suggested Next Steps", subtitle: "The calmest moves that still create signal.") {
                             VStack(alignment: .leading, spacing: theme.spacing.sm) {
                                 ForEach(detail.suggestions) { step in
-                                    GoalRowCard(
-                                        item: GoalListItem(
-                                            id: step.id,
-                                            target: detail.target,
-                                            title: step.title,
-                                            subtitle: step.summary,
-                                            mode: .project,
-                                            renderState: .active,
-                                            progressValue: 0.42,
-                                            progressLabel: step.statusLabel,
-                                            statusLabel: step.statusLabel,
-                                            timingLabel: step.timingLabel,
-                                            nextStepHint: step.summary,
-                                            modeLabel: "Next step",
-                                            supportLabel: nil,
-                                            relevanceScore: 0.8,
-                                            momentumScore: 0.6,
-                                            urgencyScore: 0.6,
-                                            manualPriorityRank: 0,
-                                            updatedAt: ""
-                                        )
-                                    )
+                                    GoalSuggestionCard(step: step)
                                 }
                             }
                         }

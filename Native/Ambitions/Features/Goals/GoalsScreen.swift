@@ -37,9 +37,9 @@ struct GoalsScreen: View {
                 case .loading:
                     HeroCard {
                         SectionHeader(
-                            eyebrow: "Roadmap",
+                            eyebrow: "Direction Board",
                             title: "Goals",
-                            subtitle: "Loading the current portfolio, draft states, and next-step signals."
+                            subtitle: "Loading the current board, direction pressure, and horizon signals."
                         )
                     }
                     AsyncStateCard(.loading(lines: 8))
@@ -48,7 +48,9 @@ struct GoalsScreen: View {
                         Task { await viewModel.refresh(using: container.goalsService) }
                     }
                 case let .loaded(overview):
-                    GoalsHeroCard(overview: overview)
+                    GoalsHeroCard(overview: overview, onPrimaryAction: handlePrimaryAction)
+                    GoalsWeekPressureCard(summary: overview.weekPressureSummary)
+                        .transition(.ambitionPanel)
 
                     if let activeCreationMessage {
                         AppCard(state: activeCreationMessage.state) {
@@ -64,49 +66,29 @@ struct GoalsScreen: View {
                         .accessibilityIdentifier("goals.creation-message")
                     }
 
-                    AppCard {
-                        VStack(alignment: .leading, spacing: theme.spacing.md) {
-                            SectionHeader(
-                                title: "Portfolio",
-                                subtitle: viewModel.selectedSort == .manualPriority
-                                    ? "Priority now reads from the persisted manual ordering you can adjust in Goal Detail."
-                                    : "Sort by the lens that best matches the kind of decision you need to make."
-                            ) {
-                                Menu {
-                                    ForEach(GoalsSortOption.allCases, id: \.self) { sort in
-                                        Button(sort.title) {
-                                            viewModel.selectedSort = sort
-                                        }
-                                    }
-                                } label: {
-                                    Label(viewModel.selectedSort.title, systemImage: "arrow.up.arrow.down")
-                                }
-                                .buttonStyle(AmbitionPressableButtonStyle(state: .default))
-                            }
-
-                            SegmentedFilterBar(items: GoalsFilter.allCases, selection: $viewModel.selectedFilter) { filter in
-                                let count = viewModel.filterCounts[filter] ?? 0
-                                return "\(filter.title) (\(count))"
-                            }
-
-                            if viewModel.visibleItems.isEmpty {
-                                EmptyStateCard(
-                                    title: overview.emptyTitle,
-                                    message: emptyMessage(for: viewModel.selectedFilter, fallback: overview.emptyMessage),
-                                    icon: viewModel.selectedFilter == .achieved ? "sparkles" : "scope"
-                                )
-                            } else {
-                                VStack(alignment: .leading, spacing: theme.spacing.sm) {
-                                    ForEach(viewModel.visibleItems) { item in
-                                        NavigationLink(value: item.target) {
-                                            GoalRowCard(item: item)
-                                        }
-                                        .buttonStyle(.plain)
-                                        .accessibilityIdentifier("goals.open.\(item.target.goalID ?? item.target.draftID ?? item.id)")
-                                    }
-                                }
-                            }
+                    if hasVisibleBoardContent(overview) == false {
+                        EmptyStateCard(
+                            title: overview.emptyTitle,
+                            message: overview.emptyMessage,
+                            icon: "scope"
+                        )
+                    } else {
+                        ForEach(overview.bands) { band in
+                            GoalsBoardBandSection(band: band)
+                                .transition(.ambitionPanel)
                         }
+
+                        GoalsHorizonLadderCard(state: overview.horizonLadder)
+                            .transition(.ambitionPanel)
+
+                        GoalsLowerPriorityDisclosureSection(
+                            state: overview.lowerPriority,
+                            isExpanded: viewModel.isLowerPriorityExpanded,
+                            onToggle: {
+                                viewModel.isLowerPriorityExpanded.toggle()
+                            }
+                        )
+                        .transition(.ambitionPanel)
                     }
                 }
             }
@@ -157,14 +139,22 @@ struct GoalsScreen: View {
         }
     }
 
-    private func emptyMessage(for filter: GoalsFilter, fallback: String) -> String {
-        switch filter {
-        case .active:
-            return fallback
-        case .onHold:
-            return "Nothing is paused right now. Ambitions can stay focused on what is actually in motion."
-        case .achieved:
-            return "Completed goals will collect here once the current wave closes cleanly."
+    private func hasVisibleBoardContent(_ overview: GoalsOverview) -> Bool {
+        overview.bands.contains(where: { $0.cards.isEmpty == false }) || overview.lowerPriority.cards.isEmpty == false
+    }
+
+    private func handlePrimaryAction(_ action: GoalsBoardPrimaryAction) {
+        switch action.kind {
+        case .createGoal:
+            localCreationMessage = nil
+            if let onCreateGoal {
+                onCreateGoal()
+            } else {
+                isCreateGoalPresented = true
+            }
+        case .openGoal, .recoverGoal, .refineStrategy:
+            guard let target = action.target else { return }
+            container.navigation.openGoalDetail(target)
         }
     }
 

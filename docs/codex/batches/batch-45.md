@@ -1,6 +1,6 @@
 ﻿# Batch 45 - Front-End Transformation 06 / Goals rebuild I - direction board and horizon ladder
 ## Status
-Queued
+Active
 ## Program
 Post-hardening Front-End Transformation Program
 ## Canon Source
@@ -21,7 +21,7 @@ Execution classification:
 - later core: Semantic Zoom for Goals, Continuity Ribbon
 ## Start Gate
 - Start only after Batch 38 is complete and stable.
-- Do not activate or implement this batch early; follow the registry and dependency order.
+- Batch 45 is active in the live registry; follow the registry and dependency order for any later batches.
 ## Goal
 Rebuild Goals from a goal list into a living direction board with stronger health, pressure, and ambition structure.
 ## In Scope

@@ -12,7 +12,8 @@ final class AmbitionsUITests: XCTestCase {
         XCTAssertTrue(app.tabBars.buttons["Goals"].waitForExistence(timeout: 10))
         app.tabBars.buttons["Goals"].tap()
 
-        XCTAssertTrue(app.staticTexts["No goals yet"].waitForExistence(timeout: 10))
+        XCTAssertTrue(app.descendants(matching: .any)["goals.screen"].waitForExistence(timeout: 10))
+        XCTAssertTrue(app.descendants(matching: .any)["goals.hero-card"].waitForExistence(timeout: 10))
         XCTAssertTrue(goalCreateButton(in: app).waitForExistence(timeout: 10))
     }
 
@@ -127,7 +128,8 @@ final class AmbitionsUITests: XCTestCase {
         let app = makeApp(bootstrapMode: "preview")
         app.launch()
 
-        let commandButton = app.buttons["shell.global-entry-button"]
+        XCTAssertTrue(waitForTodayScreenReady(in: app))
+        let commandButton = shellCommandButton(in: app)
         XCTAssertTrue(commandButton.waitForExistence(timeout: 10))
         commandButton.tap()
 
@@ -143,7 +145,8 @@ final class AmbitionsUITests: XCTestCase {
         let app = makeApp(bootstrapMode: "preview")
         app.launch()
 
-        let commandButton = app.buttons["shell.global-entry-button"]
+        XCTAssertTrue(waitForTodayScreenReady(in: app))
+        let commandButton = shellCommandButton(in: app)
         XCTAssertTrue(commandButton.waitForExistence(timeout: 10))
         commandButton.tap()
 
@@ -170,7 +173,8 @@ final class AmbitionsUITests: XCTestCase {
         let app = makeApp(bootstrapMode: "preview")
         app.launch()
 
-        let commandButton = app.buttons["shell.global-entry-button"]
+        XCTAssertTrue(waitForTodayScreenReady(in: app))
+        let commandButton = shellCommandButton(in: app)
         XCTAssertTrue(commandButton.waitForExistence(timeout: 10))
         commandButton.tap()
 
@@ -189,8 +193,40 @@ final class AmbitionsUITests: XCTestCase {
         submitButton.tap()
 
         XCTAssertTrue(app.tabBars.buttons["Goals"].waitForExistence(timeout: 10))
-        XCTAssertTrue(app.tabBars.buttons["Goals"].isSelected)
+        XCTAssertTrue(app.descendants(matching: .any)["goals.screen"].waitForExistence(timeout: 10))
         XCTAssertTrue(app.descendants(matching: .any)["goals.creation-message"].waitForExistence(timeout: 30))
+    }
+
+    func testDemoGoalsBoardLoadsCoreModules() throws {
+        let app = makeApp(bootstrapMode: "demo")
+        app.launch()
+
+        XCTAssertTrue(app.tabBars.buttons["Goals"].waitForExistence(timeout: 10))
+        app.tabBars.buttons["Goals"].tap()
+
+        XCTAssertTrue(app.descendants(matching: .any)["goals.screen"].waitForExistence(timeout: 10))
+        XCTAssertTrue(app.descendants(matching: .any)["goals.hero-card"].waitForExistence(timeout: 10))
+        XCTAssertTrue(scrollUntilElementExists("goals.week-pressure", in: app))
+        XCTAssertTrue(scrollUntilElementExists("goals.band.active_direction", in: app))
+        XCTAssertTrue(scrollUntilElementExists("goals.horizon-ladder", in: app, maxAttempts: 20))
+    }
+
+    func testDemoGoalsBoardPrimaryActionAndCardRouteToGoalDetail() throws {
+        let app = makeApp(bootstrapMode: "demo")
+        app.launch()
+
+        XCTAssertTrue(app.tabBars.buttons["Goals"].waitForExistence(timeout: 10))
+        app.tabBars.buttons["Goals"].tap()
+
+        XCTAssertTrue(app.descendants(matching: .any)["goals.hero-card"].waitForExistence(timeout: 10))
+        tapGoalsHeroPrimaryAction(in: app)
+
+        XCTAssertTrue(app.descendants(matching: .any)["goal-detail.screen"].waitForExistence(timeout: 10))
+        app.navigationBars.buttons.element(boundBy: 0).tap()
+
+        tapFirstVisibleGoalCard(in: app)
+
+        XCTAssertTrue(app.descendants(matching: .any)["goal-detail.screen"].waitForExistence(timeout: 10))
     }
 
     func testMemoryLensCanOpenAndRouteToCanonicalWeekDestination() throws {
@@ -323,9 +359,11 @@ final class AmbitionsUITests: XCTestCase {
 
     private func goalCreateButton(in app: XCUIApplication) -> XCUIElement {
         let candidates = [
+            goalsHeroPrimaryAction(in: app),
             app.buttons["goals.create-button"],
             app.buttons["shell.goals.create-button"],
             app.navigationBars.buttons["goals.create-button"],
+            app.buttons["Create your first goal"],
             app.buttons["Create Goal"],
             app.navigationBars.buttons["Create Goal"]
         ]
@@ -335,6 +373,42 @@ final class AmbitionsUITests: XCTestCase {
         }
 
         return app.buttons["goals.create-button"]
+    }
+
+    private func goalsHeroPrimaryAction(in app: XCUIApplication) -> XCUIElement {
+        let button = app.buttons["goals.hero.primary-action"]
+        if button.waitForExistence(timeout: 2) {
+            return button
+        }
+
+        let fallback = app.descendants(matching: .any)["goals.hero.primary-action"]
+        _ = fallback.waitForExistence(timeout: 2)
+        return fallback
+    }
+
+    private func tapGoalsHeroPrimaryAction(in app: XCUIApplication) {
+        let direct = goalsHeroPrimaryAction(in: app)
+        if direct.exists && direct.isHittable {
+            direct.tap()
+            return
+        }
+
+        let heroButton = app.buttons["goals.hero-card"]
+        if heroButton.waitForExistence(timeout: 10) {
+            heroButton.tap()
+            return
+        }
+
+        let heroCard = app.descendants(matching: .any)["goals.hero-card"].firstMatch
+        XCTAssertTrue(heroCard.waitForExistence(timeout: 10))
+        heroCard.coordinate(withNormalizedOffset: CGVector(dx: 0.5, dy: 0.82)).tap()
+    }
+
+    private func tapFirstVisibleGoalCard(in app: XCUIApplication) {
+        app.swipeUp()
+        app.swipeUp()
+        let cardCoordinate = app.coordinate(withNormalizedOffset: CGVector(dx: 0.5, dy: 0.45))
+        cardCoordinate.tap()
     }
 
     private func shellCommandButton(in app: XCUIApplication) -> XCUIElement {
@@ -427,7 +501,7 @@ final class AmbitionsUITests: XCTestCase {
         return button
     }
 
-    private func scrollUntilElementExists(_ identifier: String, in app: XCUIApplication, maxAttempts: Int = 5) -> Bool {
+    private func scrollUntilElementExists(_ identifier: String, in app: XCUIApplication, maxAttempts: Int = 8) -> Bool {
         let element = app.descendants(matching: .any)[identifier]
 
         for _ in 0..<maxAttempts {
