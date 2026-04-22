@@ -59,7 +59,7 @@ The regression pack proves route/function continuity.
 It does not replace manual signoff for:
 
 - scanability
-n- hierarchy
+- hierarchy
 - motion quality
 - reduced motion
 - practical accessibility/readability
