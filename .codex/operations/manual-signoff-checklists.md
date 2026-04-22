@@ -63,7 +63,7 @@ Confirm:
 - practical readability and accessibility are acceptable
 
 ## Plan
-n
+
 Confirm:
 
 - week shape is understandable at a glance
