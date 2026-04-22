@@ -6,8 +6,14 @@ protocol StartupServicing: Sendable {
 }
 
 protocol TodayServicing: Sendable {
-    func loadTodayExperience(userDisplayName: String, now: Date) async throws -> TodayExperience
+    func loadTodayExperience(userDisplayName: String, now: Date, entryContext: TodayEntryContext) async throws -> TodayExperience
     func performAction(_ action: TodayInlineAction, now: Date) async throws -> TodayActionResponse
+}
+
+extension TodayServicing {
+    func loadTodayExperience(userDisplayName: String, now: Date) async throws -> TodayExperience {
+        try await loadTodayExperience(userDisplayName: userDisplayName, now: now, entryContext: .standard)
+    }
 }
 
 protocol GoalsServicing: Sendable {

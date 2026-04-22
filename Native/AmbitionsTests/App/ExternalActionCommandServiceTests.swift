@@ -24,7 +24,7 @@ final class ExternalActionCommandServiceTests: XCTestCase {
         XCTAssertTrue(router.dispatchedRoutes.isEmpty)
     }
 
-    func testSnoozeCommandMapsToDelayThroughTodayService() async {
+    func testSnoozeCommandMapsToDeferThroughTodayService() async {
         let today = RecordingExternalActionTodayService()
         let service = makeService(todayService: today)
 
@@ -38,7 +38,7 @@ final class ExternalActionCommandServiceTests: XCTestCase {
         )
 
         XCTAssertEqual(result.outcome, .performed)
-        XCTAssertEqual(today.performedActions.map(\.kind), [.delay])
+        XCTAssertEqual(today.performedActions.map(\.kind), [.defer])
     }
 
     func testMissingStepTargetFailsSafelyWithoutMutation() async {
@@ -207,9 +207,10 @@ private extension ExternalActionCommandServiceTests {
 private final class RecordingExternalActionTodayService: TodayServicing {
     private(set) var performedActions: [TodayInlineAction] = []
 
-    func loadTodayExperience(userDisplayName: String, now: Date) async throws -> TodayExperience {
+    func loadTodayExperience(userDisplayName: String, now: Date, entryContext: TodayEntryContext) async throws -> TodayExperience {
         _ = userDisplayName
         _ = now
+        _ = entryContext
         return PreviewTodayScenarios.empty
     }
 

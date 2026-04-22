@@ -231,9 +231,10 @@ private struct StaticKnowledgeProvider: KnowledgeProviding {
 private final class RecordingRuntimeTodayService: TodayServicing {
     private(set) var performedActions: [TodayInlineAction] = []
 
-    func loadTodayExperience(userDisplayName: String, now: Date) async throws -> TodayExperience {
+    func loadTodayExperience(userDisplayName: String, now: Date, entryContext: TodayEntryContext) async throws -> TodayExperience {
         _ = userDisplayName
         _ = now
+        _ = entryContext
         return PreviewTodayScenarios.empty
     }
 

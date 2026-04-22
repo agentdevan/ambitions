@@ -47,9 +47,9 @@ struct RepositoryBackedTodayService: TodayServicing {
         self.goalIntelligenceService = goalIntelligenceService
     }
 
-    func loadTodayExperience(userDisplayName: String, now: Date) async throws -> TodayExperience {
+    func loadTodayExperience(userDisplayName: String, now: Date, entryContext: TodayEntryContext) async throws -> TodayExperience {
         let snapshot = try await loadSnapshot()
-        return try await makeExperience(snapshot: snapshot, userDisplayName: userDisplayName, now: now)
+        return try await makeExperience(snapshot: snapshot, userDisplayName: userDisplayName, now: now, entryContext: entryContext)
     }
 
     func performAction(_ action: TodayInlineAction, now: Date) async throws -> TodayActionResponse {
@@ -62,6 +62,8 @@ struct RepositoryBackedTodayService: TodayServicing {
                     state: .selected
                 )
             )
+        case .openPlan, .protectLater:
+            return TodayActionResponse(message: nil)
         case .askForHelp:
             if action.target.goalID != nil, action.target.stepID != nil {
                 return try await performFeedbackAction(action, now: now)
@@ -90,12 +92,17 @@ struct StubTodayService: TodayServicing {
         self.actionResponse = actionResponse
     }
 
-    func loadTodayExperience(userDisplayName: String, now: Date) async throws -> TodayExperience {
-        experience
+    func loadTodayExperience(userDisplayName: String, now: Date, entryContext: TodayEntryContext) async throws -> TodayExperience {
+        _ = userDisplayName
+        _ = now
+        _ = entryContext
+        return experience
     }
 
     func performAction(_ action: TodayInlineAction, now: Date) async throws -> TodayActionResponse {
-        actionResponse ?? TodayActionResponse(message: nil)
+        _ = action
+        _ = now
+        return actionResponse ?? TodayActionResponse(message: nil)
     }
 }
 
@@ -127,7 +134,7 @@ private extension RepositoryBackedTodayService {
         )
     }
 
-    func makeExperience(snapshot: Snapshot, userDisplayName: String, now: Date) async throws -> TodayExperience {
+    func makeExperience(snapshot: Snapshot, userDisplayName: String, now: Date, entryContext: TodayEntryContext) async throws -> TodayExperience {
         let activeGoals = snapshot.goals.filter { $0.state == .active || $0.state == .paused }
         let learningSnapshot = learningService.buildSnapshot(
             goals: activeGoals,
@@ -183,77 +190,441 @@ private extension RepositoryBackedTodayService {
             return .active
         }()
 
+        let header = makeHeader(
+            mode: mode,
+            userDisplayName: userDisplayName,
+            now: now,
+            activeGoals: activeGoals,
+            actionableCount: actionableSteps.count,
+            clarificationCount: clarificationDrafts.count,
+            blockedCount: blockedDrafts.count
+        )
+        let ritual = makeRitual(
+            snapshot: snapshot,
+            activeGoals: activeGoals,
+            learningSnapshot: learningSnapshot,
+            sharedLifeSnapshot: sharedLifeSnapshot,
+            now: now
+        )
+        let dailyTargets = makeDailyTargets(
+            mode: mode,
+            goals: activeGoals,
+            actionableSteps: actionableSteps,
+            draftsByGoalID: draftsByGoalID,
+            completion: (completedSteps, totalSteps),
+            shellSummaries: shellSummaries
+        )
+        let focus = makeFocus(
+            clarificationDrafts: clarificationDrafts,
+            blockedDrafts: blockedDrafts,
+            rankedSelections: rankedSelections,
+            actionableSteps: actionableSteps,
+            goals: activeGoals,
+            draftsByGoalID: draftsByGoalID,
+            feedback: snapshot.feedback,
+            evidence: snapshot.evidence,
+            shellSummaries: shellSummaries
+        )
+        let freeTime = makeFreeTime(
+            goals: activeGoals,
+            actionableSteps: actionableSteps,
+            draftsByGoalID: draftsByGoalID
+        )
+        let milestone = makeMilestone(
+            goals: activeGoals,
+            draftsByGoalID: draftsByGoalID,
+            shellSummaries: shellSummaries
+        )
+        let momentum = makeMomentum(
+            activeGoals: activeGoals,
+            evidence: snapshot.evidence,
+            completedToday: completedToday.count,
+            frictionCount: frictionCount
+        )
+        let quickCapture = makeQuickCapture(goal: activeGoals.first, step: actionableSteps.first)
+        let reflection = makeReflection(
+            now: now,
+            completedToday: completedToday,
+            activeGoals: activeGoals,
+            feedback: snapshot.feedback
+        )
+
+        let posture = dayPosture(
+            mode: mode,
+            entryContext: entryContext,
+            frictionCount: frictionCount,
+            clarificationCount: clarificationDrafts.count,
+            blockedCount: blockedDrafts.count,
+            actionableCount: actionableSteps.count
+        )
+
         return TodayExperience(
             mode: mode,
-            header: makeHeader(
-                mode: mode,
-                userDisplayName: userDisplayName,
-                now: now,
-                activeGoals: activeGoals,
-                actionableCount: actionableSteps.count,
-                clarificationCount: clarificationDrafts.count,
-                blockedCount: blockedDrafts.count
+            hero: makeHero(
+                header: header,
+                ritual: ritual,
+                focus: focus,
+                dailyTargets: dailyTargets,
+                freeTime: freeTime,
+                milestone: milestone,
+                posture: posture,
+                entryContext: entryContext
             ),
-            ritual: makeRitual(snapshot: snapshot, activeGoals: activeGoals, learningSnapshot: learningSnapshot, sharedLifeSnapshot: sharedLifeSnapshot, now: now),
-            dailyTargets: makeDailyTargets(
-                mode: mode,
-                goals: activeGoals,
-                actionableSteps: actionableSteps,
-                draftsByGoalID: draftsByGoalID,
-                completion: (completedSteps, totalSteps),
-                shellSummaries: shellSummaries
-            ),
-            focus: makeFocus(
-                clarificationDrafts: clarificationDrafts,
-                blockedDrafts: blockedDrafts,
-                rankedSelections: rankedSelections,
-                actionableSteps: actionableSteps,
-                goals: activeGoals,
-                draftsByGoalID: draftsByGoalID,
-                feedback: snapshot.feedback,
-                evidence: snapshot.evidence,
-                shellSummaries: shellSummaries
-            ),
-            freeTime: makeFreeTime(
-                goals: activeGoals,
-                actionableSteps: actionableSteps,
-                draftsByGoalID: draftsByGoalID
-            ),
-            milestone: makeMilestone(
-                goals: activeGoals,
-                draftsByGoalID: draftsByGoalID,
-                shellSummaries: shellSummaries
-            ),
-            momentum: makeMomentum(
-                activeGoals: activeGoals,
-                evidence: snapshot.evidence,
-                completedToday: completedToday.count,
-                frictionCount: frictionCount
-            ),
-            celebration: completedToday.isEmpty ? nil : TodayCelebrationState(
-                title: completedToday.count == 1 ? "One clean win landed" : "Momentum is already real",
-                subtitle: completedToday.count == 1
-                    ? "Today has a visible completion on the board."
-                    : "Multiple deliberate moves are already done today.",
-                achievements: completedToday,
-                actions: [
-                    TodayInlineAction(
-                        kind: .dismissCelebration,
-                        title: "Keep going",
-                        systemImage: "arrow.right",
-                        state: .celebration,
-                        target: TodayActionTarget()
-                    )
-                ]
-            ),
-            quickCapture: makeQuickCapture(goal: activeGoals.first, step: actionableSteps.first),
-            reflection: makeReflection(
-                now: now,
-                completedToday: completedToday,
-                activeGoals: activeGoals,
-                feedback: snapshot.feedback
+            support: makeSupportLayer(
+                dailyTargets: dailyTargets,
+                freeTime: freeTime,
+                momentum: momentum,
+                quickCapture: quickCapture,
+                reflection: reflection,
+                completedToday: completedToday
             )
         )
+    }
+
+    func dayPosture(
+        mode: TodayExperienceMode,
+        entryContext: TodayEntryContext,
+        frictionCount: Int,
+        clarificationCount: Int,
+        blockedCount: Int,
+        actionableCount: Int
+    ) -> TodayDayPosture {
+        if mode == .empty {
+            return .noPlan
+        }
+        switch entryContext {
+        case .recovery:
+            return .recovering
+        case .focus:
+            return .stable
+        case .standard:
+            break
+        }
+        if clarificationCount > 0 {
+            return .lowData
+        }
+        if blockedCount > 0 {
+            return .drifted
+        }
+        if frictionCount >= 4 || actionableCount >= 5 {
+            return .overloaded
+        }
+        if frictionCount >= 2 || actionableCount >= 4 {
+            return .tight
+        }
+        return .stable
+    }
+
+    func makeHero(
+        header: TodayHeaderState,
+        ritual: TodayRitualLoopState,
+        focus: TodayFocusState,
+        dailyTargets: TodayDailyTargetsState,
+        freeTime: TodayFreeTimeState,
+        milestone: TodayMilestoneState,
+        posture: TodayDayPosture,
+        entryContext: TodayEntryContext
+    ) -> TodayHeroState {
+        let heroSeed = heroSeed(from: focus, ritual: ritual, milestone: milestone)
+        let trustWhisper = heroSeed.shellSummary.map { summary in
+            TodayTrustWhisperState(
+                title: "Why this now",
+                detail: summary.explanationSummary,
+                state: .selected
+            )
+        }
+        let nextItem = nextHeroItem(from: dailyTargets, excluding: heroSeed.title) ?? nextHeroItem(from: freeTime)
+
+        return TodayHeroState(
+            truth: TodayHeroTruthState(
+                greeting: header.greeting,
+                dominantText: dominantText(for: posture, heroTitle: heroSeed.title),
+                supportingText: heroSupportingText(for: posture, heroDetail: heroSeed.detail, ritual: ritual),
+                nowTitle: heroSeed.title,
+                nowSubtitle: heroSeed.detail,
+                nextTitle: nextItem?.title,
+                nextSubtitle: nextItem?.subtitle,
+                posture: posture,
+                contextPills: header.contextPills,
+                trustWhisper: trustWhisper,
+                shellSummary: heroSeed.shellSummary
+            ),
+            primaryAction: makePrimaryAction(posture: posture, focus: focus, freeTime: freeTime, milestone: milestone),
+            reentry: makeReentryState(entryContext: entryContext)
+        )
+    }
+
+    func makeSupportLayer(
+        dailyTargets: TodayDailyTargetsState,
+        freeTime: TodayFreeTimeState,
+        momentum: TodayMomentumState,
+        quickCapture: TodayQuickCaptureState,
+        reflection: TodayReflectionState,
+        completedToday: [String]
+    ) -> TodaySupportLayerState {
+        TodaySupportLayerState(
+            fixedCommitments: TodayFixedCommitmentsState(
+                title: dailyTargets.title,
+                summary: dailyTargets.subtitle,
+                items: dailyTargets.items.map {
+                    TodaySupportItemState(
+                        id: $0.id,
+                        title: $0.title,
+                        subtitle: $0.subtitle,
+                        label: $0.timingLabel,
+                        state: $0.state,
+                        action: $0.primaryAction ?? $0.secondaryAction
+                    )
+                },
+                emptyMessage: dailyTargets.emptyMessage
+            ),
+            flexibleRoom: TodayFlexibleRoomState(
+                title: freeTime.title,
+                summary: freeTime.subtitle,
+                items: freeTime.opportunities.map {
+                    TodaySupportItemState(
+                        id: $0.id,
+                        title: $0.title,
+                        subtitle: $0.subtitle,
+                        label: $0.timingLabel,
+                        state: $0.state,
+                        action: $0.action
+                    )
+                },
+                emptyMessage: freeTime.opportunities.isEmpty ? "Free space is allowed to stay free." : nil
+            ),
+            momentum: TodayMomentumStripState(
+                title: momentum.title,
+                summary: momentum.subtitle,
+                metrics: momentum.metrics,
+                note: momentum.note,
+                celebrationLine: completedToday.isEmpty ? nil : "Momentum is already visible today."
+            ),
+            quickCaptureAction: quickCapture.actions.first,
+            quickCaptureTitle: quickCapture.title,
+            quickCaptureDetail: quickCapture.helpText,
+            planAction: TodayInlineAction(
+                kind: .openPlan,
+                title: "Open Plan",
+                systemImage: "calendar",
+                state: .default,
+                target: TodayActionTarget()
+            ),
+            reflectionPrompt: reflection.prompt,
+            reflectionHighlights: reflection.highlights
+        )
+    }
+
+    func heroSeed(
+        from focus: TodayFocusState,
+        ritual: TodayRitualLoopState,
+        milestone: TodayMilestoneState
+    ) -> (title: String, detail: String, shellSummary: GoalShellSummaryState?) {
+        switch focus {
+        case let .planned(state):
+            return (state.title, state.reason, state.shellSummary)
+        case let .starter(state):
+            return (state.title, state.subtitle, state.shellSummary)
+        case let .clarification(state):
+            return (state.title, state.subtitle, nil)
+        case let .blocked(state):
+            return (state.title, state.nextBestAction, nil)
+        case let .empty(state):
+            return (
+                milestone.title.isEmpty ? state.title : milestone.title,
+                state.message.isEmpty ? ritual.thesis : state.message,
+                milestone.shellSummary
+            )
+        }
+    }
+
+    func makePrimaryAction(
+        posture: TodayDayPosture,
+        focus: TodayFocusState,
+        freeTime: TodayFreeTimeState,
+        milestone: TodayMilestoneState
+    ) -> TodayPrimaryActionState {
+        let available = primaryActions(from: focus, posture: posture, milestone: milestone, freeTime: freeTime)
+        let primary = available.first ?? TodayInlineAction(
+            kind: .openPlan,
+            title: "Build today",
+            systemImage: "calendar.badge.plus",
+            state: .selected,
+            target: TodayActionTarget()
+        )
+        return TodayPrimaryActionState(
+            title: primary.title,
+            subtitle: primarySubtitle(for: posture, action: primary),
+            action: primary,
+            supportingActions: prioritizedSupportingActions(from: Array(available.dropFirst()))
+        )
+    }
+
+    func prioritizedSupportingActions(from actions: [TodayInlineAction]) -> [TodayInlineAction] {
+        guard actions.count > 4 else { return actions }
+
+        var prioritized: [TodayInlineAction] = []
+        var seen = Set<String>()
+
+        func append(_ action: TodayInlineAction?) {
+            guard let action else { return }
+            let key = action.id
+            guard seen.insert(key).inserted else { return }
+            prioritized.append(action)
+        }
+
+        append(actions.first(where: { $0.kind == .openDetail }))
+        append(actions.first(where: { $0.kind == .split }))
+        append(actions.first(where: { $0.kind == .defer }))
+        append(actions.first(where: { $0.kind == .reschedule }))
+        append(actions.first(where: { $0.kind == .askWhyThisMatters }))
+
+        for action in actions where prioritized.count < 5 {
+            append(action)
+        }
+
+        return Array(prioritized.prefix(5))
+    }
+
+    func primaryActions(
+        from focus: TodayFocusState,
+        posture: TodayDayPosture,
+        milestone: TodayMilestoneState,
+        freeTime: TodayFreeTimeState
+    ) -> [TodayInlineAction] {
+        let focusActions: [TodayInlineAction] = {
+            switch focus {
+            case let .planned(state):
+                state.actions
+            case let .starter(state):
+                state.actions
+            case let .clarification(state):
+                state.actions
+            case let .blocked(state):
+                state.actions
+            case let .empty(state):
+                state.actions
+            }
+        }()
+
+        var actions = focusActions
+        if posture == .tight || posture == .overloaded || posture == .recovering {
+            actions.insert(
+                TodayInlineAction(
+                    kind: .protectLater,
+                    title: "Protect later",
+                    systemImage: "calendar.badge.clock",
+                    state: .selected,
+                    target: TodayActionTarget()
+                ),
+                at: 0
+            )
+        }
+        if actions.isEmpty, let milestoneAction = milestone.action {
+            actions.append(milestoneAction)
+        }
+        if actions.isEmpty, let freeAction = freeTime.opportunities.first?.action {
+            actions.append(freeAction)
+        }
+        return deduplicated(actions)
+    }
+
+    func primarySubtitle(for posture: TodayDayPosture, action: TodayInlineAction) -> String {
+        switch posture {
+        case .stable:
+            return "One clear move matters more than another stack of cards."
+        case .tight:
+            return action.kind == .protectLater ? "Protect the next believable block before pressure turns noisy." : "Keep the day believable without widening scope."
+        case .drifted:
+            return "Use the calmest next move to get traction back."
+        case .overloaded:
+            return "Reduce pressure before adding more intent."
+        case .recovering:
+            return "Come back through one safer lane, not a full reset."
+        case .lowData:
+            return "Clarify the next move before pretending certainty."
+        case .noPlan:
+            return "Start with one bounded move and let the shell own the bigger reshaping."
+        }
+    }
+
+    func dominantText(for posture: TodayDayPosture, heroTitle: String) -> String {
+        switch posture {
+        case .stable:
+            return heroTitle
+        case .tight:
+            return "Hold the day around \(heroTitle.lowercased())"
+        case .drifted:
+            return "Return through \(heroTitle.lowercased())"
+        case .overloaded:
+            return "Lighten the day before it hardens"
+        case .recovering:
+            return "Recover through one believable move"
+        case .lowData:
+            return "Clarify the next move first"
+        case .noPlan:
+            return "Build today from one real move"
+        }
+    }
+
+    func heroSupportingText(for posture: TodayDayPosture, heroDetail: String, ritual: TodayRitualLoopState) -> String {
+        switch posture {
+        case .stable:
+            if ritual.thesis.localizedCaseInsensitiveContains("shared") &&
+                heroDetail.localizedCaseInsensitiveContains("shared") == false {
+                return ritual.thesis
+            }
+            return heroDetail
+        case .tight, .recovering:
+            return ritual.thesis
+        case .drifted, .overloaded:
+            return heroDetail.isEmpty ? ritual.subtitle : heroDetail
+        case .lowData:
+            return heroDetail
+        case .noPlan:
+            return ritual.thesis
+        }
+    }
+
+    func makeReentryState(entryContext: TodayEntryContext) -> TodayReentryState? {
+        switch entryContext {
+        case .standard:
+            return nil
+        case .recovery:
+            return TodayReentryState(
+                eyebrow: "Re-entry",
+                title: "Recovery landed in Today",
+                detail: "This pass is centered on the calmest next move, not the whole backlog.",
+                state: .selected
+            )
+        case .focus:
+            return TodayReentryState(
+                eyebrow: "Re-entry",
+                title: "Focus landed in Today",
+                detail: "The hero is holding the clearest next move at the top of the screen.",
+                state: .success
+            )
+        }
+    }
+
+    func nextHeroItem(from dailyTargets: TodayDailyTargetsState, excluding title: String) -> (title: String, subtitle: String)? {
+        guard let item = dailyTargets.items.first(where: { $0.title != title }) else {
+            return nil
+        }
+        return (item.title, item.subtitle)
+    }
+
+    func nextHeroItem(from freeTime: TodayFreeTimeState) -> (title: String, subtitle: String)? {
+        guard let item = freeTime.opportunities.first else { return nil }
+        return (item.title, item.subtitle)
+    }
+
+    func deduplicated(_ actions: [TodayInlineAction]) -> [TodayInlineAction] {
+        var seen = Set<String>()
+        return actions.filter {
+            let key = "\($0.kind.rawValue)-\($0.target.goalID ?? "none")-\($0.target.stepID ?? "none")"
+            return seen.insert(key).inserted
+        }
     }
 
     func makeRitual(snapshot: Snapshot, activeGoals: [Goal], learningSnapshot: LearningAnticipationSnapshot, sharedLifeSnapshot: SharedLifeCoordinationSnapshot, now: Date) -> TodayRitualLoopState {
@@ -292,13 +663,13 @@ private extension RepositoryBackedTodayService {
             systemImage = "checkmark"
             state = .success
         case .delay:
-            kind = .delay
-            title = "Delay"
+            kind = .defer
+            title = "Defer"
             systemImage = "clock.arrow.circlepath"
             state = .default
         case .askForSmallerStep:
-            kind = .askForSmallerStep
-            title = "Smaller step"
+            kind = .split
+            title = "Split"
             systemImage = "scissors"
             state = .selected
         case .quickLog:
@@ -495,7 +866,7 @@ private extension RepositoryBackedTodayService {
                     : "\"\(selectedStep.title)\" is now reflected in native evidence and feedback.",
                 state: .success
             )
-        case .delay:
+        case .defer:
             let decision = rescheduleDecision(for: action.kind, goal: goal, step: selectedStep, history: events, now: now)
             let adjustment = decision?.timingAdjustment ?? .laterToday
             events.append(.delayed(base: base, timingAdjustment: adjustment, date: decision?.suggestedTime))
@@ -541,7 +912,7 @@ private extension RepositoryBackedTodayService {
                 body: "The step stays in play without pretending it must happen right now.\(deferLine)",
                 state: .selected
             )
-        case .skip:
+        case .reschedule:
             events.append(.skipped(base: base, reasonCode: .notNow))
             let decision = rescheduleDecision(for: action.kind, goal: goal, step: selectedStep, history: events, now: now)
             if let adjustment = decision?.timingAdjustment {
@@ -692,7 +1063,7 @@ private extension RepositoryBackedTodayService {
                 body: calendarEventMessageBody(for: event.title, report: conflictReport),
                 state: .success
             )
-        case .askForSmallerStep:
+        case .split:
             let decision = rescheduleDecision(for: action.kind, goal: goal, step: selectedStep, history: events, now: now)
             events.append(.askedForSmallerVersion(base: base))
             if let adjustment = decision?.timingAdjustment {
@@ -844,7 +1215,7 @@ private extension RepositoryBackedTodayService {
                 body: explanation,
                 state: .selected
             )
-        case .openDetail, .dismissCelebration:
+        case .openDetail, .openPlan, .protectLater, .dismissCelebration:
             break
         }
 
@@ -988,8 +1359,8 @@ private extension RepositoryBackedTodayService {
                     target: TodayActionTarget(goalID: goal.id, stepID: step.id, draftID: draft?.id)
                 ),
                 secondaryAction: TodayInlineAction(
-                    kind: .delay,
-                    title: "Delay",
+                    kind: .defer,
+                    title: "Defer",
                     systemImage: "clock.arrow.circlepath",
                     state: .default,
                     target: TodayActionTarget(goalID: goal.id, stepID: step.id, draftID: draft?.id)
@@ -1093,9 +1464,9 @@ private extension RepositoryBackedTodayService {
                     assumptions: draft?.assumptions.prefix(3).map(\.summary) ?? [],
                     actions: [
                         TodayInlineAction(kind: .complete, title: "Complete", systemImage: "checkmark", state: .success, target: target),
-                        TodayInlineAction(kind: .askForSmallerStep, title: "Smaller step", systemImage: "scissors", state: .selected, target: target),
-                        TodayInlineAction(kind: .createReminder, title: "Reminder", systemImage: "list.bullet.clipboard", state: .default, target: target),
-                        TodayInlineAction(kind: .createCalendarEvent, title: "Calendar event", systemImage: "calendar.badge.plus", state: .default, target: target),
+                        TodayInlineAction(kind: .split, title: "Split", systemImage: "scissors", state: .selected, target: target),
+                        TodayInlineAction(kind: .defer, title: "Defer", systemImage: "clock.arrow.circlepath", state: .default, target: target),
+                        TodayInlineAction(kind: .protectLater, title: "Protect later", systemImage: "calendar.badge.clock", state: .default, target: target),
                         TodayInlineAction(kind: .askWhyThisMatters, title: "Why this matters", systemImage: "questionmark.circle", state: .default, target: target),
                         TodayInlineAction(kind: .openDetail, title: "Open detail", systemImage: "arrow.right.circle", state: .default, target: target)
                     ],
@@ -1115,13 +1486,11 @@ private extension RepositoryBackedTodayService {
                 supportingText: supportingText(for: goal, step: step),
                 actions: [
                     TodayInlineAction(kind: .complete, title: "Complete", systemImage: "checkmark", state: .success, target: target),
-                    TodayInlineAction(kind: .delay, title: "Delay", systemImage: "clock.arrow.circlepath", state: .default, target: target),
-                    TodayInlineAction(kind: .skip, title: "Skip", systemImage: "forward.fill", state: .warning, target: target),
-                    TodayInlineAction(kind: .createReminder, title: "Reminder", systemImage: "list.bullet.clipboard", state: .default, target: target),
-                    TodayInlineAction(kind: .createCalendarEvent, title: "Calendar event", systemImage: "calendar.badge.plus", state: .default, target: target),
-                    TodayInlineAction(kind: .askForSmallerStep, title: "Smaller step", systemImage: "scissors", state: .selected, target: target),
+                    TodayInlineAction(kind: .defer, title: "Defer", systemImage: "clock.arrow.circlepath", state: .default, target: target),
+                    TodayInlineAction(kind: .reschedule, title: "Reschedule", systemImage: "forward.fill", state: .warning, target: target),
+                    TodayInlineAction(kind: .split, title: "Split", systemImage: "scissors", state: .selected, target: target),
+                    TodayInlineAction(kind: .protectLater, title: "Protect later", systemImage: "calendar.badge.clock", state: .default, target: target),
                     TodayInlineAction(kind: .askWhyThisMatters, title: "Why this matters", systemImage: "questionmark.circle", state: .default, target: target),
-                    TodayInlineAction(kind: .markNotRelevant, title: "Not relevant", systemImage: "nosign", state: .warning, target: target),
                     TodayInlineAction(kind: .openDetail, title: "Open detail", systemImage: "arrow.right.circle", state: .default, target: target)
                 ],
                 shellSummary: shellSummary
@@ -1471,15 +1840,15 @@ private extension RepositoryBackedTodayService {
 
     func rescheduleTrigger(for kind: TodayActionKind) -> RescheduleTrigger? {
         switch kind {
-        case .delay:
+        case .defer:
             return .delay
-        case .skip:
+        case .reschedule:
             return .skip
-        case .askForSmallerStep:
+        case .split:
             return .askForSmallerStep
         case .askForHelp:
             return .stuck
-        case .complete, .createReminder, .createCalendarEvent, .askWhyThisMatters, .markNotRelevant, .openDetail, .quickLog, .dismissCelebration:
+        case .complete, .createReminder, .createCalendarEvent, .askWhyThisMatters, .markNotRelevant, .openDetail, .openPlan, .protectLater, .quickLog, .dismissCelebration:
             return nil
         }
     }
@@ -1488,23 +1857,25 @@ private extension RepositoryBackedTodayService {
         switch kind {
         case .complete:
             return "Completed from Today."
-        case .delay:
-            return "Delayed from Today to reduce pressure."
-        case .skip:
-            return "Skipped from Today without punitive language."
+        case .defer:
+            return "Deferred from Today to reduce pressure."
+        case .reschedule:
+            return "Rescheduled from Today without punitive language."
+        case .split:
+            return "Asked for a smaller version from Today."
+        case .askWhyThisMatters:
+            return "Asked why this matters from Today."
+        case .protectLater:
+            return "Protected later from Today."
+        case .quickLog:
+            return "Quick log from Today."
         case .createReminder:
             return "Created reminder from Today."
         case .createCalendarEvent:
             return "Created calendar event from Today."
-        case .askForSmallerStep:
-            return "Asked for a smaller version from Today."
-        case .askWhyThisMatters:
-            return "Asked why this matters from Today."
         case .markNotRelevant:
             return "Marked not relevant from Today."
-        case .quickLog:
-            return "Quick log from Today."
-        case .openDetail, .askForHelp, .dismissCelebration:
+        case .openDetail, .openPlan, .askForHelp, .dismissCelebration:
             return step.title
         }
     }

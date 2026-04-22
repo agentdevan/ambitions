@@ -67,7 +67,7 @@ final class InsightsFeatureServiceTests: XCTestCase {
                 stepID: step.id,
                 evidenceKind: .habitQuickLog,
                 source: .manual,
-                capturedAt: "2026-04-15T12:00:00Z",
+                capturedAt: recentISO(daysAgo: 1, hour: 12, minute: 0),
                 progressDelta: 0.05,
                 confidenceDelta: 0.01,
                 minutesInvested: 10,
@@ -79,7 +79,7 @@ final class InsightsFeatureServiceTests: XCTestCase {
                 stepID: step.id,
                 evidenceKind: .stepCompleted,
                 source: .manual,
-                capturedAt: "2026-04-15T12:55:00Z",
+                capturedAt: recentISO(daysAgo: 1, hour: 12, minute: 55),
                 progressDelta: 0.20,
                 confidenceDelta: 0.08,
                 minutesInvested: 25,
@@ -91,7 +91,7 @@ final class InsightsFeatureServiceTests: XCTestCase {
                 base: GoalFeedbackEventBase(
                     id: "feedback-middle",
                     stepID: step.id,
-                    occurredAt: "2026-04-15T12:30:00Z",
+                    occurredAt: recentISO(daysAgo: 1, hour: 12, minute: 30),
                     note: "Middle feedback"
                 ),
                 timingAdjustment: .laterToday,
@@ -107,7 +107,26 @@ final class InsightsFeatureServiceTests: XCTestCase {
 
 private extension InsightsFeatureServiceTests {
     var isoNow: String {
-        "2026-04-15T12:55:00Z"
+        recentISO(daysAgo: 1, hour: 12, minute: 55)
+    }
+
+    func recentISO(daysAgo: Int, hour: Int, minute: Int) -> String {
+        let calendar = Calendar(identifier: .gregorian)
+        let now = Date()
+        let day = calendar.date(byAdding: .day, value: -daysAgo, to: now) ?? now
+        let components = calendar.dateComponents([.year, .month, .day], from: day)
+        let date = calendar.date(
+            from: DateComponents(
+                calendar: calendar,
+                timeZone: TimeZone(secondsFromGMT: 0),
+                year: components.year,
+                month: components.month,
+                day: components.day,
+                hour: hour,
+                minute: minute
+            )
+        ) ?? now
+        return ISO8601DateFormatter().string(from: date)
     }
 
     func makeRepositories() async throws -> AppRepositories {

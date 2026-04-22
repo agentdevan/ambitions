@@ -7,18 +7,59 @@ enum TodayExperienceMode: String, Sendable {
     case active
 }
 
+enum TodayEntryContext: String, Sendable {
+    case standard
+    case recovery
+    case focus
+}
+
+enum TodayDayPosture: String, Sendable {
+    case stable
+    case tight
+    case drifted
+    case overloaded
+    case recovering
+    case lowData
+    case noPlan
+
+    var label: String {
+        switch self {
+        case .stable: "Stable day"
+        case .tight: "Tight day"
+        case .drifted: "Drifted day"
+        case .overloaded: "Overloaded"
+        case .recovering: "Recovering"
+        case .lowData: "Low-data"
+        case .noPlan: "No plan"
+        }
+    }
+
+    var visualState: AmbitionVisualState {
+        switch self {
+        case .stable:
+            return .success
+        case .tight, .recovering:
+            return .selected
+        case .drifted, .overloaded, .lowData, .noPlan:
+            return .warning
+        }
+    }
+}
+
 enum TodayActionKind: String, Sendable {
     case complete
-    case delay
-    case skip
-    case createReminder
-    case createCalendarEvent
-    case askForSmallerStep
-    case askWhyThisMatters
-    case markNotRelevant
+    case `defer`
+    case split
+    case reschedule
+    case protectLater
     case openDetail
+    case openPlan
     case quickLog
     case askForHelp
+    case askWhyThisMatters
+    case createReminder
+    case createCalendarEvent
+    case markNotRelevant
     case dismissCelebration
 }
 
@@ -62,18 +103,119 @@ struct TodayActionResponse: Sendable {
     let message: TodayInlineMessage?
 }
 
-struct TodayHeaderState: Sendable {
-    let greeting: String
-    let title: String
-    let subtitle: String
-    let contextPills: [TodayPillState]
-}
-
 struct TodayPillState: Identifiable, Hashable, Sendable {
     let id: String
     let title: String
     let icon: String?
     let state: AmbitionVisualState
+}
+
+struct TodayTrustWhisperState: Sendable {
+    let title: String
+    let detail: String
+    let state: AmbitionVisualState
+}
+
+struct TodayReentryState: Sendable {
+    let eyebrow: String
+    let title: String
+    let detail: String
+    let state: AmbitionVisualState
+}
+
+struct TodayHeroTruthState: Sendable {
+    let greeting: String
+    let dominantText: String
+    let supportingText: String
+    let nowTitle: String
+    let nowSubtitle: String
+    let nextTitle: String?
+    let nextSubtitle: String?
+    let posture: TodayDayPosture
+    let contextPills: [TodayPillState]
+    let trustWhisper: TodayTrustWhisperState?
+    let shellSummary: GoalShellSummaryState?
+}
+
+struct TodayPrimaryActionState: Sendable {
+    let title: String
+    let subtitle: String
+    let action: TodayInlineAction
+    let supportingActions: [TodayInlineAction]
+}
+
+struct TodayHeroState: Sendable {
+    let truth: TodayHeroTruthState
+    let primaryAction: TodayPrimaryActionState
+    let reentry: TodayReentryState?
+}
+
+struct TodaySupportItemState: Identifiable, Sendable {
+    let id: String
+    let title: String
+    let subtitle: String
+    let label: String
+    let state: AmbitionVisualState
+    let action: TodayInlineAction?
+}
+
+struct TodayFixedCommitmentsState: Sendable {
+    let title: String
+    let summary: String
+    let items: [TodaySupportItemState]
+    let emptyMessage: String?
+}
+
+struct TodayFlexibleRoomState: Sendable {
+    let title: String
+    let summary: String
+    let items: [TodaySupportItemState]
+    let emptyMessage: String?
+}
+
+struct TodayMetricState: Identifiable, Sendable {
+    let id: String
+    let title: String
+    let value: String
+    let detail: String
+    let icon: String
+    let state: AmbitionVisualState
+}
+
+struct TodayMomentumStripState: Sendable {
+    let title: String
+    let summary: String
+    let metrics: [TodayMetricState]
+    let note: String
+    let celebrationLine: String?
+}
+
+struct TodaySupportLayerState: Sendable {
+    let fixedCommitments: TodayFixedCommitmentsState
+    let flexibleRoom: TodayFlexibleRoomState
+    let momentum: TodayMomentumStripState
+    let quickCaptureAction: TodayInlineAction?
+    let quickCaptureTitle: String
+    let quickCaptureDetail: String
+    let planAction: TodayInlineAction?
+    let reflectionPrompt: String?
+    let reflectionHighlights: [String]
+}
+
+struct TodayExperience: Sendable {
+    let mode: TodayExperienceMode
+    let hero: TodayHeroState
+    let support: TodaySupportLayerState
+}
+
+// Legacy internal projection scaffolding retained to avoid widening Batch 43
+// into planner or service rewrites beyond Today presentation composition.
+
+struct TodayHeaderState: Sendable {
+    let greeting: String
+    let title: String
+    let subtitle: String
+    let contextPills: [TodayPillState]
 }
 
 struct TodayTargetItem: Identifiable, Sendable {
@@ -131,28 +273,6 @@ struct TodayFocusPlannedState: Sendable {
     let supportingText: [String]
     let actions: [TodayInlineAction]
     let shellSummary: GoalShellSummaryState?
-
-    init(
-        title: String,
-        subtitle: String,
-        reason: String,
-        timingLabel: String,
-        energyLabel: String,
-        progress: Double,
-        supportingText: [String],
-        actions: [TodayInlineAction],
-        shellSummary: GoalShellSummaryState? = nil
-    ) {
-        self.title = title
-        self.subtitle = subtitle
-        self.reason = reason
-        self.timingLabel = timingLabel
-        self.energyLabel = energyLabel
-        self.progress = progress
-        self.supportingText = supportingText
-        self.actions = actions
-        self.shellSummary = shellSummary
-    }
 }
 
 struct TodayFocusStarterState: Sendable {
@@ -163,24 +283,6 @@ struct TodayFocusStarterState: Sendable {
     let assumptions: [String]
     let actions: [TodayInlineAction]
     let shellSummary: GoalShellSummaryState?
-
-    init(
-        title: String,
-        subtitle: String,
-        reassurance: String,
-        timingLabel: String,
-        assumptions: [String],
-        actions: [TodayInlineAction],
-        shellSummary: GoalShellSummaryState? = nil
-    ) {
-        self.title = title
-        self.subtitle = subtitle
-        self.reassurance = reassurance
-        self.timingLabel = timingLabel
-        self.assumptions = assumptions
-        self.actions = actions
-        self.shellSummary = shellSummary
-    }
 }
 
 struct TodayClarificationQuestionState: Identifiable, Sendable {
@@ -241,31 +343,6 @@ struct TodayMilestoneState: Sendable {
     let confidenceLabel: String
     let action: TodayInlineAction?
     let shellSummary: GoalShellSummaryState?
-
-    init(
-        title: String,
-        subtitle: String,
-        prompt: String,
-        confidenceLabel: String,
-        action: TodayInlineAction?,
-        shellSummary: GoalShellSummaryState? = nil
-    ) {
-        self.title = title
-        self.subtitle = subtitle
-        self.prompt = prompt
-        self.confidenceLabel = confidenceLabel
-        self.action = action
-        self.shellSummary = shellSummary
-    }
-}
-
-struct TodayMetricState: Identifiable, Sendable {
-    let id: String
-    let title: String
-    let value: String
-    let detail: String
-    let icon: String
-    let state: AmbitionVisualState
 }
 
 struct TodayMomentumState: Sendable {
@@ -273,13 +350,6 @@ struct TodayMomentumState: Sendable {
     let subtitle: String
     let metrics: [TodayMetricState]
     let note: String
-}
-
-struct TodayCelebrationState: Sendable {
-    let title: String
-    let subtitle: String
-    let achievements: [String]
-    let actions: [TodayInlineAction]
 }
 
 struct TodayQuickCaptureState: Sendable {
@@ -306,18 +376,4 @@ struct TodayRitualLoopState: Sendable {
     let stateLabel: String
     let signalLabels: [String]
     let action: TodayInlineAction?
-}
-
-struct TodayExperience: Sendable {
-    let mode: TodayExperienceMode
-    let header: TodayHeaderState
-    let ritual: TodayRitualLoopState
-    let dailyTargets: TodayDailyTargetsState
-    let focus: TodayFocusState
-    let freeTime: TodayFreeTimeState
-    let milestone: TodayMilestoneState
-    let momentum: TodayMomentumState
-    let celebration: TodayCelebrationState?
-    let quickCapture: TodayQuickCaptureState
-    let reflection: TodayReflectionState
 }

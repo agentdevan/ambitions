@@ -340,9 +340,10 @@ private actor RecordingSnapshotWriter: ExternalSurfaceSnapshotWriting {
 }
 
 private struct RecordingTodayService: TodayServicing {
-    func loadTodayExperience(userDisplayName: String, now: Date) async throws -> TodayExperience {
+    func loadTodayExperience(userDisplayName: String, now: Date, entryContext: TodayEntryContext) async throws -> TodayExperience {
         _ = userDisplayName
         _ = now
+        _ = entryContext
         return PreviewTodayScenarios.empty
     }
 

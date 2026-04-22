@@ -48,6 +48,7 @@ final class AppNavigationModel {
     var goalsPath: [GoalRouteTarget]
     var planPath: [PlanRouteTarget]
     var insightsPath: [InsightsRouteTarget]
+    var todayEntryContext: TodayEntryContext
     var activeOverlay: ShellOverlayState?
     var lastExternalRoute: AppExternalRoute?
     var lastExternalRouteSource: AppExternalRouteSource?
@@ -57,6 +58,7 @@ final class AppNavigationModel {
         goalsPath = []
         planPath = []
         insightsPath = []
+        todayEntryContext = .standard
         activeOverlay = nil
         lastExternalRoute = nil
         lastExternalRouteSource = nil
@@ -74,11 +76,20 @@ final class AppNavigationModel {
     func selectTab(_ tab: AppTab) {
         dismissOverlay()
         selectedTab = tab.canonicalTopLevelTab
+        if selectedTab != .today {
+            todayEntryContext = .standard
+        }
         if tab == .captures {
             openCapturesInbox()
         } else if tab == .habits {
             openHabits()
         }
+    }
+
+    func selectToday(entryContext: TodayEntryContext = .standard) {
+        dismissOverlay()
+        selectedTab = .today
+        todayEntryContext = entryContext
     }
 
     func openGoalDetail(_ target: GoalRouteTarget) {
@@ -184,6 +195,12 @@ final class AppNavigationModel {
 
     func fallbackExternalLanding() {
         dismissOverlay()
-        selectedTab = .today
+        selectToday()
+    }
+
+    func takeTodayEntryContext() -> TodayEntryContext {
+        let context = todayEntryContext
+        todayEntryContext = .standard
+        return context
     }
 }

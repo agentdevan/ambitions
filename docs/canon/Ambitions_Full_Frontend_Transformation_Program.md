@@ -236,8 +236,8 @@ Implications:
 | 40 | Front-End Transformation 01 / Shell reconsideration and navigation architecture | Queued | First batch allowed to implement shell changes. |
 | 41 | Front-End Transformation 02 / Design system, materials, motion engine, and controls | Queued | Shared visual + motion language. |
 | 42 | Front-End Transformation 03 / Global compose, search, capture, and command surface | Queued | Contextual Global Compose and Memory Lens foundation. |
-| 43 | Front-End Transformation 04 / Today rebuild I — living hero, now state, and action model | Queued | First half of Today rebuild. |
-| 44 | Front-End Transformation 05 / Today rebuild II — time aperture, recovery bloom, and day logic | Queued | Completes Today redesign plus logic expansion. |
+| 43 | Front-End Transformation 04 / Today rebuild I — living hero, now state, and action model | Completed | First half of Today rebuild delivered as a hero-first flagship execution surface with bounded action/routing seams and no Batch 44 systems shipped. |
+| 44 | Front-End Transformation 05 / Today rebuild II — time aperture, recovery bloom, and day logic | Active | Completes Today redesign plus logic expansion. |
 | 45 | Front-End Transformation 06 / Goals rebuild I — direction board and horizon ladder | Queued | Goals overview rebuild. |
 | 46 | Front-End Transformation 07 / Goal intake and Strategy Composer | Queued | Full create-goal and planning setup redesign. |
 | 47 | Front-End Transformation 08 / Goal Detail rebuild I — strategic chamber and path filmstrip | Queued | Goal Detail composition phase 1. |
@@ -261,7 +261,7 @@ Implications:
 ## Batch 39 — Front-End Transformation 00 / Program canon and shell rewrite foundation
 
 ### Status
-Active
+Completed
 
 ### Goal
 Create the transformation-ready repo and product foundation for a full front-end rewrite program without pretending the work is merely a polish pass.
@@ -317,7 +317,7 @@ Complete only when the transformation program is explicit enough to drive implem
 ## Batch 40 — Front-End Transformation 01 / Shell reconsideration and navigation architecture
 
 ### Status
-Queued
+Active
 
 ### Goal
 Fully reconsider the shell and navigation model, then implement the new canonical shell architecture for the iPhone app.
@@ -368,7 +368,7 @@ Complete only when the new shell is structurally coherent, visually intentional,
 ## Batch 41 — Front-End Transformation 02 / Design system, materials, motion engine, and controls
 
 ### Status
-Queued
+Active
 
 ### Goal
 Implement the full premium visual system and motion grammar used by every later batch.
@@ -421,7 +421,7 @@ Complete only when the app has one real system language rather than per-screen s
 ## Batch 42 — Front-End Transformation 03 / Global compose, search, capture, and command surface
 
 ### Status
-Queued
+Active
 
 ### Goal
 Implement the cross-app command layer that unifies creation, capture, quick recovery, quick planning, and memory recall.
@@ -469,7 +469,7 @@ Complete only when creation, capture, recovery, and recall feel like one coheren
 ## Batch 43 — Front-End Transformation 04 / Today rebuild I — living hero, now state, and action model
 
 ### Status
-Queued
+Active
 
 ### Goal
 Rebuild Today into the flagship living execution surface with a new hero layer, stronger hierarchy, and a first-class action model.
@@ -491,12 +491,16 @@ Rebuild Today into the flagship living execution surface with a new hero layer, 
 ### Deferred to Later Batches, Not Excluded
 - Time Aperture
 - Recovery Bloom full system
+- visible Continuity Ribbon system
 - expanded Today logic changes tied to recovery and time shaping
+- any compatibility seams for those systems must remain non-user-facing in Batch 43
 
 ### Dependency Rules
 - Today must become the strongest surface in the product
 - avoid dense stacked-card dashboard behavior
 - hero truth must be instantly legible
+- keep command, create, and capture shell-owned under Batch 42
+- do not ship visible Time Aperture, full Recovery Bloom, or visible Continuity Ribbon in this batch
 
 ### Exit Criteria
 - Today has one dominant focal structure
@@ -518,7 +522,7 @@ Complete only when Today clearly feels like the product home base.
 ## Batch 44 — Front-End Transformation 05 / Today rebuild II — time aperture, recovery bloom, and day logic
 
 ### Status
-Queued
+Active
 
 ### Goal
 Complete Today by adding the novel time and recovery systems plus any required logic expansion.

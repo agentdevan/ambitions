@@ -19,31 +19,16 @@ final class TodayFreshGoalVisibilityTests: XCTestCase {
         guard case .active = experience.mode else {
             return XCTFail("Expected Today to become active once a created goal exists.")
         }
-        XCTAssertFalse(experience.dailyTargets.items.isEmpty)
-        XCTAssertTrue(experience.dailyTargets.items.contains(where: {
+        XCTAssertFalse(experience.support.fixedCommitments.items.isEmpty)
+        XCTAssertTrue(experience.support.fixedCommitments.items.contains(where: {
             $0.subtitle == "Ship the native create goal flow" &&
-            $0.primaryAction?.target.goalID == created.target.goalID
+            $0.action?.target.goalID == created.target.goalID
         }))
 
-        let focusTitle: String
-        let focusSubtitle: String
-        let focusActions: [TodayInlineAction]
-        switch experience.focus {
-        case let .planned(focus):
-            focusTitle = focus.title
-            focusSubtitle = focus.subtitle
-            focusActions = focus.actions
-        case let .starter(focus):
-            focusTitle = focus.title
-            focusSubtitle = focus.subtitle
-            focusActions = focus.actions
-        case .clarification, .blocked, .empty:
-            return XCTFail("Expected a planned or starter focus state for a freshly created goal.")
-        }
-
-        XCTAssertEqual(focusSubtitle, "Ship the native create goal flow")
-        XCTAssertFalse(focusTitle.isEmpty)
-        XCTAssertTrue(focusActions.contains(where: {
+        XCTAssertEqual(experience.hero.truth.nowSubtitle, "Ship the native create goal flow")
+        XCTAssertFalse(experience.hero.truth.nowTitle.isEmpty)
+        let heroActions = [experience.hero.primaryAction.action] + experience.hero.primaryAction.supportingActions
+        XCTAssertTrue(heroActions.contains(where: {
             $0.kind == .openDetail && $0.target.goalID == created.target.goalID
         }))
     }
@@ -192,7 +177,7 @@ final class TodayFreshGoalVisibilityTests: XCTestCase {
     @MainActor
     func testTodayViewModelActivateRefreshesOnReturnToTodayTab() async {
         let first = PreviewTodayScenarios.empty
-        let second = PreviewTodayScenarios.starter
+        let second = PreviewTodayScenarios.recovery
         let service = MutableTodayService(experience: first)
         let viewModel = TodayViewModel()
 
@@ -214,10 +199,8 @@ final class TodayFreshGoalVisibilityTests: XCTestCase {
         guard case .active = refreshedExperience.mode else {
             return XCTFail("Expected the second activation to reflect the updated active scenario.")
         }
-        guard case let .starter(focus) = refreshedExperience.focus else {
-            return XCTFail("Expected refreshed Today focus to use the updated scenario.")
-        }
-        XCTAssertEqual(focus.title, "Record one rough vocal pass")
+        XCTAssertEqual(refreshedExperience.hero.truth.posture, .recovering)
+        XCTAssertEqual(refreshedExperience.hero.truth.nowTitle, "Split the next move")
     }
 }
 
@@ -250,9 +233,10 @@ private actor MutableTodayService: TodayServicing {
         self.experience = experience
     }
 
-    func loadTodayExperience(userDisplayName: String, now: Date) async throws -> TodayExperience {
+    func loadTodayExperience(userDisplayName: String, now: Date, entryContext: TodayEntryContext) async throws -> TodayExperience {
         _ = userDisplayName
         _ = now
+        _ = entryContext
         return experience
     }
 

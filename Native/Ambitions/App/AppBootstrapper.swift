@@ -111,7 +111,7 @@ final class AppBootstrapper {
 
     #if DEBUG
     private var debugOverrideConfiguration: AppBootstrapConfiguration? {
-        guard let rawValue = ProcessInfo.processInfo.environment["AMBITIONS_BOOTSTRAP_MODE"]?.lowercased() else {
+        guard let rawValue = configuredValue(for: "AMBITIONS_BOOTSTRAP_MODE")?.lowercased() else {
             return nil
         }
 
@@ -140,11 +140,25 @@ final class AppBootstrapper {
     private func queueConfiguredLaunchURLIfNeeded() {
         guard didQueueConfiguredLaunchURL == false else { return }
         didQueueConfiguredLaunchURL = true
-        guard let rawValue = ProcessInfo.processInfo.environment["AMBITIONS_LAUNCH_URL"],
+        guard let rawValue = configuredValue(for: "AMBITIONS_LAUNCH_URL"),
               let url = URL(string: rawValue) else {
             return
         }
         pendingDeepLinks.append(url)
+    }
+
+    private func configuredValue(for key: String) -> String? {
+        if let environmentValue = ProcessInfo.processInfo.environment[key], environmentValue.isEmpty == false {
+            return environmentValue
+        }
+
+        let arguments = ProcessInfo.processInfo.arguments
+        if let index = arguments.firstIndex(of: "-\(key)"), arguments.indices.contains(index + 1) {
+            let argumentValue = arguments[index + 1]
+            return argumentValue.isEmpty ? nil : argumentValue
+        }
+
+        return nil
     }
 
     func requestNotificationAuthorizationOptIn() async -> Bool {

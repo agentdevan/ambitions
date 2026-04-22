@@ -4,12 +4,12 @@ import Foundation
 enum PreviewAppContainerFactory {
     @MainActor
     static var preview: AppContainer {
-        preview(todayExperience: PreviewTodayScenarios.seeded, habitsDashboard: PreviewHabitsScenarios.seeded)
+        preview(todayExperience: PreviewTodayScenarios.stable, habitsDashboard: PreviewHabitsScenarios.seeded)
     }
 
     @MainActor
     static func preview(
-        todayExperience: TodayExperience = PreviewTodayScenarios.seeded,
+        todayExperience: TodayExperience = PreviewTodayScenarios.stable,
         habitsDashboard: HabitsDashboard = PreviewHabitsScenarios.seeded
     ) -> AppContainer {
         let fixtures = PreviewFixtures.default

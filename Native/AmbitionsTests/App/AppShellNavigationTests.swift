@@ -63,6 +63,17 @@ final class AppShellNavigationTests: XCTestCase {
         XCTAssertEqual(navigation.selectedTab, .today)
     }
 
+    @MainActor
+    func testTodayReentryContextCanBeCarriedAndConsumed() {
+        let navigation = AppNavigationModel(selectedTab: .plan)
+
+        navigation.selectToday(entryContext: .recovery)
+
+        XCTAssertEqual(navigation.selectedTab, .today)
+        XCTAssertEqual(navigation.takeTodayEntryContext(), .recovery)
+        XCTAssertEqual(navigation.takeTodayEntryContext(), .standard)
+    }
+
     func testStoredLegacyPreferredTabsLoadIntoCanonicalPreferences() async throws {
         let store = try AmbitionsPersistenceStore(inMemory: true)
         let appState = SwiftDataAppStateRepository(store: store)
@@ -136,45 +147,15 @@ final class AppShellNavigationTests: XCTestCase {
     }
 
     private func todayGoalDetailTarget(from experience: TodayExperience) -> GoalRouteTarget? {
-        if let target = todayGoalDetailTarget(from: experience.focus) {
-            return target
-        }
-
-        if let action = experience.milestone.action, action.kind == .openDetail {
-            return GoalRouteTarget(goalID: action.target.goalID, draftID: action.target.draftID)
-        }
-
-        if let action = experience.reflection.actions.first(where: { $0.kind == .openDetail }) {
-            return GoalRouteTarget(goalID: action.target.goalID, draftID: action.target.draftID)
+        let actions = [experience.hero.primaryAction.action] + experience.hero.primaryAction.supportingActions
+        if let action = actions.first(where: { $0.kind == .openDetail || $0.kind == .askForHelp }) {
+            return GoalRouteTarget(
+                goalID: action.target.goalID,
+                draftID: action.target.draftID,
+                launchContext: action.kind == .askForHelp ? .help : .standard
+            )
         }
 
         return nil
-    }
-
-    private func todayGoalDetailTarget(from focus: TodayFocusState) -> GoalRouteTarget? {
-        let actions: [TodayInlineAction]
-
-        switch focus {
-        case let .planned(state):
-            actions = state.actions
-        case let .starter(state):
-            actions = state.actions
-        case let .clarification(state):
-            actions = state.actions
-        case let .blocked(state):
-            actions = state.actions
-        case let .empty(state):
-            actions = state.actions
-        }
-
-        guard let action = actions.first(where: { $0.kind == .openDetail || $0.kind == .askForHelp }) else {
-            return nil
-        }
-
-        return GoalRouteTarget(
-            goalID: action.target.goalID,
-            draftID: action.target.draftID,
-            launchContext: action.kind == .askForHelp ? .help : .standard
-        )
     }
 }

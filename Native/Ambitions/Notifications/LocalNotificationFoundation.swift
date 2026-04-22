@@ -308,8 +308,8 @@ struct NotificationSchedulingTodayService: TodayServicing {
     let base: any TodayServicing
     let notificationService: any NotificationServicing
 
-    func loadTodayExperience(userDisplayName: String, now: Date) async throws -> TodayExperience {
-        try await base.loadTodayExperience(userDisplayName: userDisplayName, now: now)
+    func loadTodayExperience(userDisplayName: String, now: Date, entryContext: TodayEntryContext) async throws -> TodayExperience {
+        try await base.loadTodayExperience(userDisplayName: userDisplayName, now: now, entryContext: entryContext)
     }
 
     func performAction(_ action: TodayInlineAction, now: Date) async throws -> TodayActionResponse {

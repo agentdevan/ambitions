@@ -28,33 +28,54 @@ final class TodayViewModel {
         self.transientMessage = transientMessage
     }
 
-    func activate(using service: any TodayServicing, userDisplayName: String, now: Date = .now) async {
+    func activate(
+        using service: any TodayServicing,
+        userDisplayName: String,
+        now: Date = .now,
+        entryContext: TodayEntryContext = .standard
+    ) async {
         if hasLoaded {
-            await refresh(using: service, userDisplayName: userDisplayName, now: now)
+            await refresh(using: service, userDisplayName: userDisplayName, now: now, entryContext: entryContext)
         } else {
-            await load(using: service, userDisplayName: userDisplayName, now: now)
+            await load(using: service, userDisplayName: userDisplayName, now: now, entryContext: entryContext)
         }
     }
 
-    func load(using service: any TodayServicing, userDisplayName: String, now: Date = .now) async {
+    func load(
+        using service: any TodayServicing,
+        userDisplayName: String,
+        now: Date = .now,
+        entryContext: TodayEntryContext = .standard
+    ) async {
         guard hasLoaded == false else { return }
         hasLoaded = true
-        await refresh(using: service, userDisplayName: userDisplayName, now: now)
+        await refresh(using: service, userDisplayName: userDisplayName, now: now, entryContext: entryContext)
     }
 
-    func refresh(using service: any TodayServicing, userDisplayName: String, now: Date = .now) async {
+    func refresh(
+        using service: any TodayServicing,
+        userDisplayName: String,
+        now: Date = .now,
+        entryContext: TodayEntryContext = .standard
+    ) async {
         do {
-            state = .loaded(try await service.loadTodayExperience(userDisplayName: userDisplayName, now: now))
+            state = .loaded(try await service.loadTodayExperience(userDisplayName: userDisplayName, now: now, entryContext: entryContext))
         } catch {
             state = .failed("Unable to load Today: \(error.localizedDescription)")
         }
     }
 
-    func handle(_ action: TodayInlineAction, using service: any TodayServicing, userDisplayName: String, now: Date = .now) async {
+    func handle(
+        _ action: TodayInlineAction,
+        using service: any TodayServicing,
+        userDisplayName: String,
+        now: Date = .now,
+        entryContext: TodayEntryContext = .standard
+    ) async {
         do {
             let response = try await service.performAction(action, now: now)
             transientMessage = response.message
-            await refresh(using: service, userDisplayName: userDisplayName, now: now)
+            await refresh(using: service, userDisplayName: userDisplayName, now: now, entryContext: entryContext)
         } catch {
             transientMessage = TodayInlineMessage(
                 title: "Action failed",

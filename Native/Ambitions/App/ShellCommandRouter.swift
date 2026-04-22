@@ -146,8 +146,11 @@ final class DefaultShellCommandRouter: ShellCommandRouting {
         case .quickPlanPatch, .openWeek:
             navigation.selectTab(.plan)
             return ShellCommandExecutionResult(destination: .tab(.plan))
-        case .quickRecovery, .quickFocus:
-            navigation.selectTab(.today)
+        case .quickRecovery:
+            navigation.selectToday(entryContext: .recovery)
+            return ShellCommandExecutionResult(destination: .tab(.today))
+        case .quickFocus:
+            navigation.selectToday(entryContext: .focus)
             return ShellCommandExecutionResult(destination: .tab(.today))
         case .openGoal:
             guard let goalID, goalID.isEmpty == false else {

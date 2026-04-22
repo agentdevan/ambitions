@@ -11,7 +11,7 @@ final class TodayViewModelTests: XCTestCase {
         let experience = try await service.loadTodayExperience(userDisplayName: "   ", now: now)
 
         XCTAssertEqual(experience.mode, .empty)
-        XCTAssertEqual(experience.header.greeting, "Good afternoon")
+        XCTAssertEqual(experience.hero.truth.greeting, "Good afternoon")
     }
 
     func testRepositoryBackedServiceUsesSharedNextStepSelectorForFocus() async throws {
@@ -25,11 +25,8 @@ final class TodayViewModelTests: XCTestCase {
         let experience = try await service.loadTodayExperience(userDisplayName: "", now: now)
         let expected = PlanningNextStepSelector().bestSelection(goals: [later, soon], now: now)
 
-        guard case let .planned(focus) = experience.focus else {
-            return XCTFail("Expected planned focus.")
-        }
-        XCTAssertEqual(focus.title, expected?.step.title)
-        XCTAssertEqual(experience.dailyTargets.items.first?.id, expected?.step.id)
+        XCTAssertEqual(experience.hero.truth.nowTitle, expected?.step.title)
+        XCTAssertEqual(experience.support.fixedCommitments.items.first?.id, expected?.step.id)
     }
 
     func testRepositoryBackedServiceIncludesComputedRitualState() async throws {
@@ -41,10 +38,10 @@ final class TodayViewModelTests: XCTestCase {
 
         let experience = try await service.loadTodayExperience(userDisplayName: "", now: now)
 
-        XCTAssertEqual(experience.ritual.kind, .morningSetup)
-        XCTAssertEqual(experience.ritual.action?.kind, .openDetail)
-        XCTAssertEqual(experience.ritual.action?.target.goalID, "goal-ritual")
-        XCTAssertTrue(experience.ritual.signalLabels.contains("1 active goal"))
+        XCTAssertEqual(experience.hero.truth.posture, .stable)
+        XCTAssertEqual(experience.hero.primaryAction.action.kind, .complete)
+        XCTAssertEqual(experience.hero.primaryAction.action.target.goalID, "goal-ritual")
+        XCTAssertTrue(experience.hero.truth.contextPills.contains(where: { $0.title.contains("1 active goal") }))
     }
 
     func testRepositoryBackedServiceCanSurfaceSharedResponsibilityRitualThesis() async throws {
@@ -89,7 +86,7 @@ final class TodayViewModelTests: XCTestCase {
 
         let experience = try await service.loadTodayExperience(userDisplayName: "", now: now)
 
-        XCTAssertTrue(experience.ritual.thesis.localizedCaseInsensitiveContains("shared"))
+        XCTAssertTrue(experience.hero.truth.supportingText.localizedCaseInsensitiveContains("shared"))
     }
 
     func testSharedNextStepSelectorDeprioritizesBlockedDependencyWork() async throws {
@@ -115,12 +112,9 @@ final class TodayViewModelTests: XCTestCase {
         let experience = try await service.loadTodayExperience(userDisplayName: "", now: now)
         let expected = PlanningNextStepSelector().bestSelection(goals: [blocked, clean], now: now)
 
-        guard case let .planned(focus) = experience.focus else {
-            return XCTFail("Expected planned focus.")
-        }
         XCTAssertEqual(expected?.goal.id, "goal-clean")
-        XCTAssertEqual(focus.title, expected?.step.title)
-        XCTAssertEqual(experience.dailyTargets.items.first?.id, expected?.step.id)
+        XCTAssertEqual(experience.hero.truth.nowTitle, expected?.step.title)
+        XCTAssertEqual(experience.support.fixedCommitments.items.first?.id, expected?.step.id)
     }
 
     @MainActor
@@ -207,9 +201,10 @@ private actor RecordingTodayService: TodayServicing {
         self.actionResponse = actionResponse
     }
 
-    func loadTodayExperience(userDisplayName: String, now: Date) async throws -> TodayExperience {
+    func loadTodayExperience(userDisplayName: String, now: Date, entryContext: TodayEntryContext) async throws -> TodayExperience {
         _ = userDisplayName
         _ = now
+        _ = entryContext
         return experience
     }
 
@@ -229,9 +224,10 @@ private struct FailingTodayService: TodayServicing {
         var errorDescription: String? { "Today failed on purpose." }
     }
 
-    func loadTodayExperience(userDisplayName: String, now: Date) async throws -> TodayExperience {
+    func loadTodayExperience(userDisplayName: String, now: Date, entryContext: TodayEntryContext) async throws -> TodayExperience {
         _ = userDisplayName
         _ = now
+        _ = entryContext
         throw Failure()
     }
 

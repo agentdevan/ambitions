@@ -212,11 +212,76 @@ final class AmbitionsUITests: XCTestCase {
         XCTAssertTrue(app.tabBars.buttons["Plan"].isSelected)
     }
 
+    func testTodaySurfaceShowsDominantHeroAndPrimaryAction() throws {
+        let app = makeApp(bootstrapMode: "demo")
+        app.launch()
+
+        XCTAssertTrue(waitForTodayScreenReady(in: app))
+        XCTAssertTrue(app.descendants(matching: .any)["today.screen"].waitForExistence(timeout: 10))
+        XCTAssertTrue(app.descendants(matching: .any)["today.hero-card"].waitForExistence(timeout: 10))
+        let primaryAction = app.buttons["today.hero.primary-action"]
+        XCTAssertTrue(primaryAction.waitForExistence(timeout: 10))
+        XCTAssertTrue(app.descendants(matching: .any)["today.support-card"].waitForExistence(timeout: 10))
+    }
+
+    func testQuickRecoveryAndQuickFocusReturnToTodayWithExplicitReentry() throws {
+        let app = makeApp(bootstrapMode: "demo")
+        app.launch()
+
+        XCTAssertTrue(waitForTodayScreenReady(in: app))
+        let commandButton = shellCommandButton(in: app)
+        XCTAssertTrue(commandButton.waitForExistence(timeout: 10))
+        commandButton.tap()
+
+        let recoveryAction = app.buttons["shell.command.action.quick_recovery"]
+        XCTAssertTrue(recoveryAction.waitForExistence(timeout: 10))
+        recoveryAction.tap()
+
+        XCTAssertTrue(app.descendants(matching: .any)["today.screen"].waitForExistence(timeout: 10))
+        XCTAssertTrue(app.descendants(matching: .any)["today.hero.reentry"].waitForExistence(timeout: 10))
+
+        let reopenedCommandButton = shellCommandButton(in: app)
+        XCTAssertTrue(reopenedCommandButton.waitForExistence(timeout: 10))
+        reopenedCommandButton.tap()
+        let focusAction = app.buttons["shell.command.action.quick_focus"]
+        XCTAssertTrue(focusAction.waitForExistence(timeout: 10))
+        focusAction.tap()
+
+        XCTAssertTrue(app.descendants(matching: .any)["today.screen"].waitForExistence(timeout: 10))
+        XCTAssertTrue(app.descendants(matching: .any)["today.hero.reentry"].waitForExistence(timeout: 10))
+    }
+
+    func testTodayCanHandOffToGoalDetail() throws {
+        let app = makeApp(bootstrapMode: "demo")
+        app.launch()
+
+        XCTAssertTrue(waitForTodayScreenReady(in: app))
+        let openDetail = todayGoalDetailButton(in: app)
+        XCTAssertTrue(openDetail.waitForExistence(timeout: 10))
+        openDetail.tap()
+
+        XCTAssertTrue(app.descendants(matching: .any)["goal-detail.screen"].waitForExistence(timeout: 10))
+    }
+
+    func testTodayCanHandOffToPlan() throws {
+        let app = makeApp(bootstrapMode: "demo")
+        app.launch()
+
+        XCTAssertTrue(waitForTodayScreenReady(in: app))
+        let openPlan = scrollUntilButtonHittable("today.action.openPlan.none", fallbackLabel: "Open Plan", in: app)
+        XCTAssertTrue(openPlan.waitForExistence(timeout: 10))
+        openPlan.tap()
+
+        XCTAssertTrue(app.descendants(matching: .any)["plan.screen"].waitForExistence(timeout: 10))
+    }
+
     private func makeApp(bootstrapMode: String, launchURL: String? = nil) -> XCUIApplication {
         let app = XCUIApplication()
         app.launchEnvironment["AMBITIONS_BOOTSTRAP_MODE"] = bootstrapMode
+        app.launchArguments += ["-AMBITIONS_BOOTSTRAP_MODE", bootstrapMode]
         if let launchURL {
             app.launchEnvironment["AMBITIONS_LAUNCH_URL"] = launchURL
+            app.launchArguments += ["-AMBITIONS_LAUNCH_URL", launchURL]
         }
         return app
     }
@@ -256,12 +321,65 @@ final class AmbitionsUITests: XCTestCase {
         return app.buttons["goals.create-button"]
     }
 
-    private func scrollUntilButtonHittable(_ identifier: String, in app: XCUIApplication, maxAttempts: Int = 5) -> XCUIElement {
+    private func shellCommandButton(in app: XCUIApplication) -> XCUIElement {
+        let identified = app.buttons["shell.global-entry-button"]
+        if identified.waitForExistence(timeout: 2) {
+            return identified
+        }
+        let labeled = app.buttons["Command"]
+        _ = labeled.waitForExistence(timeout: 2)
+        return labeled
+    }
+
+    private func todayGoalDetailButton(in app: XCUIApplication) -> XCUIElement {
+        let directQueries = [
+            app.buttons.matching(NSPredicate(format: "identifier BEGINSWITH %@", "today.hero.primary-action.openDetail.")).firstMatch,
+            app.buttons.matching(NSPredicate(format: "identifier BEGINSWITH %@", "today.hero.primary-action.askForHelp.")).firstMatch,
+            app.buttons.matching(NSPredicate(format: "identifier BEGINSWITH %@", "today.action.openDetail.")).firstMatch,
+            app.buttons.matching(NSPredicate(format: "identifier BEGINSWITH %@", "today.action.askForHelp.")).firstMatch,
+            app.buttons["Answer"],
+            app.buttons["Open detail"],
+            app.buttons["Ask for help"]
+        ]
+
+        for candidate in directQueries where candidate.waitForExistence(timeout: 2) {
+            return candidate
+        }
+
+        for _ in 0..<8 {
+            for candidate in directQueries where candidate.exists && candidate.isHittable {
+                return candidate
+            }
+            app.swipeUp()
+        }
+
+        return app.buttons.matching(NSPredicate(format: "identifier BEGINSWITH %@", "today.action.openDetail.")).firstMatch
+    }
+
+    private func waitForTodayScreenReady(in app: XCUIApplication, timeout: TimeInterval = 30) -> Bool {
+        let deadline = Date().addingTimeInterval(timeout)
+        let todayScreen = app.descendants(matching: .any)["today.screen"]
+        let heroCard = app.descendants(matching: .any)["today.hero-card"]
+
+        while Date() < deadline {
+            if todayScreen.waitForExistence(timeout: 1), heroCard.waitForExistence(timeout: 1) {
+                return true
+            }
+        }
+
+        return todayScreen.exists && heroCard.exists
+    }
+
+    private func scrollUntilButtonHittable(_ identifier: String, fallbackLabel: String? = nil, in app: XCUIApplication, maxAttempts: Int = 5) -> XCUIElement {
         let button = app.buttons[identifier]
+        let fallbackButton = fallbackLabel.map { app.buttons[$0] }
 
         for _ in 0..<maxAttempts {
             if button.waitForExistence(timeout: 2), button.isHittable {
                 return button
+            }
+            if let fallbackButton, fallbackButton.waitForExistence(timeout: 1), fallbackButton.isHittable {
+                return fallbackButton
             }
             app.swipeUp()
         }
@@ -270,6 +388,9 @@ final class AmbitionsUITests: XCTestCase {
             if button.isHittable {
                 return button
             }
+            if let fallbackButton, fallbackButton.isHittable {
+                return fallbackButton
+            }
             app.swipeDown()
         }
 
@@ -277,6 +398,9 @@ final class AmbitionsUITests: XCTestCase {
             let button = app.buttons[identifier]
             if button.isHittable {
                 return button
+            }
+            if let fallbackButton, fallbackButton.isHittable {
+                return fallbackButton
             }
             app.swipeUp()
         }

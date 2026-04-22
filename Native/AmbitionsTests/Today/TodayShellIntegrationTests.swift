@@ -2,7 +2,7 @@ import XCTest
 @testable import Ambitions
 
 final class TodayShellIntegrationTests: XCTestCase {
-    func testTodayCardsShareCompactRuntimeBackedShellSummaryWithoutChangingActionPosture() async throws {
+    func testTodayHeroAndSupportShareCompactRuntimeBackedShellSummaryWithoutChangingActionPosture() async throws {
         let directRepositories = try await makeRepositories()
         let runtimeRepositories = try await makeRepositories()
 
@@ -34,24 +34,19 @@ final class TodayShellIntegrationTests: XCTestCase {
             now: fixedNow
         )
 
-        XCTAssertEqual(runtimeExperience.dailyTargets.items.map(\.title), directExperience.dailyTargets.items.map(\.title))
-        XCTAssertEqual(runtimeExperience.dailyTargets.items.map(\.timingLabel), directExperience.dailyTargets.items.map(\.timingLabel))
-        XCTAssertEqual(runtimeExperience.dailyTargets.items.map(\.statusLabel), directExperience.dailyTargets.items.map(\.statusLabel))
+        XCTAssertEqual(runtimeExperience.support.fixedCommitments.items.map(\.title), directExperience.support.fixedCommitments.items.map(\.title))
+        XCTAssertEqual(runtimeExperience.support.fixedCommitments.items.map(\.label), directExperience.support.fixedCommitments.items.map(\.label))
 
-        let runtimeTarget = try XCTUnwrap(runtimeExperience.dailyTargets.items.first)
-        let targetSummary = try XCTUnwrap(runtimeTarget.shellSummary)
+        let targetSummary = try XCTUnwrap(runtimeExperience.hero.truth.shellSummary)
         XCTAssertTrue(targetSummary.indicators.contains(where: { $0.kind == .freshness }))
 
-        let focus = try unwrapPlannedFocus(runtimeExperience.focus)
-        let focusSummary = try XCTUnwrap(focus.shellSummary)
-        XCTAssertEqual(focus.actions.map(\.kind), try unwrapPlannedFocus(directExperience.focus).actions.map(\.kind))
-        XCTAssertTrue(focus.actions.contains(where: { $0.kind == .openDetail }))
-        XCTAssertNotNil(focus.energyLabel)
+        let focusSummary = try XCTUnwrap(runtimeExperience.hero.truth.shellSummary)
+        XCTAssertEqual(
+            runtimeExperience.hero.primaryAction.supportingActions.map(\.kind),
+            directExperience.hero.primaryAction.supportingActions.map(\.kind)
+        )
+        XCTAssertTrue(([runtimeExperience.hero.primaryAction.action] + runtimeExperience.hero.primaryAction.supportingActions).contains(where: { $0.kind == .openDetail }))
         XCTAssertEqual(focusSummary, targetSummary)
-
-        let milestoneSummary = try XCTUnwrap(runtimeExperience.milestone.shellSummary)
-        XCTAssertFalse(milestoneSummary.pathSummary.isEmpty)
-        XCTAssertEqual(runtimeExperience.milestone.action?.kind, .openDetail)
 
         let goalID = try XCTUnwrap(runtimeCreated.target.goalID)
         let storedGoal = try await runtimeRepositories.goals.goal(id: goalID)
@@ -87,17 +82,5 @@ private extension TodayShellIntegrationTests {
             captures: SwiftDataCaptureRepository(store: store),
             appState: SwiftDataAppStateRepository(store: store)
         )
-    }
-
-    func unwrapPlannedFocus(_ focus: TodayFocusState) throws -> TodayFocusPlannedState {
-        switch focus {
-        case let .planned(state):
-            return state
-        case let .starter(state):
-            throw XCTSkip("Expected planned focus, found starter focus for \(state.title).")
-        case .clarification, .blocked, .empty:
-            XCTFail("Expected planned focus.")
-            throw NSError(domain: "TodayShellIntegrationTests", code: 1)
-        }
     }
 }

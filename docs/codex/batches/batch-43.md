@@ -1,6 +1,6 @@
 ﻿# Batch 43 - Front-End Transformation 04 / Today rebuild I - living hero, now state, and action model
 ## Status
-Queued
+Completed
 ## Program
 Post-hardening Front-End Transformation Program
 ## Canon Source
@@ -13,12 +13,12 @@ Post-hardening Front-End Transformation Program
 - [novel-interaction-systems-spec.md](../../canon/design/novel-interaction-systems-spec.md)
 
 Key systems in this batch:
-- Continuity Ribbon
-- Recovery Bloom
+- Living Hero Surface
 - Intent-Sensitive Primary Action
+- Trust Whisper (quiet first-layer only)
 
 Execution classification:
-- early core: Intent-Sensitive Primary Action
+- early core: Living Hero Surface, Intent-Sensitive Primary Action, Trust Whisper
 - later core: Recovery Bloom, Continuity Ribbon
 ## Start Gate
 - Start only after Batch 38 is complete and stable.
@@ -41,11 +41,14 @@ Rebuild Today into the flagship living execution surface with a new hero layer, 
 ## Deferred, Not Excluded
 - Time Aperture
 - Recovery Bloom full system
+- visible Continuity Ribbon system
 - expanded Today logic changes tied to recovery and time shaping
 ## Dependency Rules
 - Today must become the strongest surface in the product
 - avoid dense stacked-card dashboard behavior
 - hero truth must be instantly legible
+- keep command, create, and capture shell-owned under Batch 42
+- do not ship visible Time Aperture, full Recovery Bloom, or visible Continuity Ribbon in this batch
 ## Exit Criteria
 - Today has one dominant focal structure
 - daily action flow is materially more obvious
@@ -60,3 +63,6 @@ Rebuild Today into the flagship living execution surface with a new hero layer, 
 Complete only when Today clearly feels like the product home base.
 
 ---
+Completion note:
+- Batch 43 completed by replacing the old Today card stack with a dominant hero, clearer Now/Next truth, compressed fixed/flexible/momentum support, shell-aware quick recovery / quick focus re-entry, and truthful bounded handoffs into Goal Detail and Plan.
+- Validation completed with `xcodegen generate`, native simulator build, targeted Today/unit routing tests, full `AmbitionsTests`, targeted Today UI proof, and direct simulator/a11y review. Time Aperture, full Recovery Bloom, and visible Continuity Ribbon remain deferred to Batch 44+.

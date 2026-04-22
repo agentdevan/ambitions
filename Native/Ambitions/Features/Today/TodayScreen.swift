@@ -6,8 +6,6 @@ struct TodayScreen: View {
     @Environment(\.ambitionTheme) private var theme
     @Environment(\.accessibilityReduceMotion) private var reduceMotion
     @State private var viewModel: TodayViewModel
-    @State private var dailyTargetsExpanded = true
-    @State private var reflectionExpanded = false
 
     private let autoLoad: Bool
     private let showsNavigationChrome: Bool
@@ -35,41 +33,20 @@ struct TodayScreen: View {
                             actionAccessibilityIdentifier: "today.retry-button"
                         ) {
                             Task {
-                                await viewModel.refresh(using: container.todayService, userDisplayName: container.session.userDisplayName)
+                                await refresh()
                             }
                         }
                         .transition(.ambitionPanel)
                     case let .loaded(experience):
-                        TodayHeaderCard(header: experience.header)
+                        TodayHeroCard(hero: experience.hero, onAction: handleAction)
 
                         if let transientMessage = viewModel.transientMessage {
                             TodayMessageCard(message: transientMessage)
                                 .transition(.ambitionPanel)
                         }
 
-                        TodayRitualCard(state: experience.ritual, onAction: handleAction)
-                        TodayDailyTargetsCard(
-                            state: experience.dailyTargets,
-                            expanded: dailyTargetsExpanded,
-                            toggleExpanded: { toggle(&dailyTargetsExpanded) },
-                            onAction: handleAction
-                        )
-                        TodayFocusCard(state: experience.focus, onAction: handleAction)
-                        TodayFreeTimeCard(state: experience.freeTime, onAction: handleAction)
-                        TodayMilestoneCard(state: experience.milestone, onAction: handleAction)
-                        TodayMomentumCard(state: experience.momentum)
-
-                        if let celebration = experience.celebration {
-                            TodayCelebrationCard(state: celebration, onAction: handleAction)
-                        }
-
-                        TodayQuickCaptureCard(state: experience.quickCapture, onAction: handleAction)
-                        TodayReflectionCard(
-                            state: experience.reflection,
-                            expanded: reflectionExpanded,
-                            toggleExpanded: { toggle(&reflectionExpanded) },
-                            onAction: handleAction
-                        )
+                        TodaySupportCard(support: experience.support, onAction: handleAction)
+                        TodayLowerLaneCard(support: experience.support, onAction: handleAction)
                     }
                 }
                 .padding(.horizontal, theme.spacing.lg)
@@ -78,7 +55,7 @@ struct TodayScreen: View {
             .scrollIndicators(.hidden)
             .accessibilityIdentifier("today.screen")
             .refreshable {
-                await viewModel.refresh(using: container.todayService, userDisplayName: container.session.userDisplayName)
+                await refresh()
             }
         }
         .navigationTitle(showsNavigationChrome ? "Today" : "")
@@ -99,54 +76,68 @@ struct TodayScreen: View {
         .onChange(of: container.navigation.selectedTab) { _, selectedTab in
             guard autoLoad, selectedTab == .today else { return }
             Task {
-                await viewModel.activate(
-                    using: container.todayService,
-                    userDisplayName: container.session.userDisplayName
-                )
+                await activate()
+            }
+        }
+        .onChange(of: container.navigation.todayEntryContext) { _, entryContext in
+            guard autoLoad, container.navigation.selectedTab == .today, entryContext != .standard else { return }
+            Task {
+                await activate()
             }
         }
         .task {
             guard autoLoad else { return }
-            await viewModel.activate(
-                using: container.todayService,
-                userDisplayName: container.session.userDisplayName
-            )
+            await activate()
         }
     }
 
+    private func activate() async {
+        await viewModel.activate(
+            using: container.todayService,
+            userDisplayName: container.session.userDisplayName,
+            entryContext: container.navigation.takeTodayEntryContext()
+        )
+    }
+
+    private func refresh() async {
+        await viewModel.refresh(
+            using: container.todayService,
+            userDisplayName: container.session.userDisplayName,
+            entryContext: container.navigation.takeTodayEntryContext()
+        )
+    }
+
     private func handleAction(_ action: TodayInlineAction) {
-        if action.kind == .openDetail || action.kind == .askForHelp {
+        switch action.kind {
+        case .openDetail, .askForHelp:
             container.navigation.openGoalDetail(
                 goalID: action.target.goalID,
                 draftID: action.target.draftID,
                 launchContext: action.kind == .askForHelp ? .help : .standard
             )
-            return
-        }
-
-        if action.kind == .quickLog {
+        case .quickLog:
             container.commandRouter.presentCommandSheet(
                 intent: .quickCapture,
                 source: .todayQuickCapture,
                 presentationContext: .quickCapture
             )
-            return
-        }
-
-        Task {
-            if action.kind == .dismissCelebration {
-                viewModel.transientMessage = nil
-            }
-            await viewModel.handle(action, using: container.todayService, userDisplayName: container.session.userDisplayName)
-        }
-    }
-
-    private func toggle(_ value: inout Bool) {
-        if reduceMotion {
-            value.toggle()
-        } else {
-            withAnimation(theme.motion.animation(reduceMotion: false)) {
-                value.toggle()
+        case .openPlan:
+            container.commandRouter.route(to: .tab(.plan), source: .shellUtility)
+        case .protectLater:
+            container.commandRouter.route(to: .tab(.plan), source: .shellUtility)
+            viewModel.transientMessage = TodayInlineMessage(
+                title: "Protected in Plan",
+                body: "Today handed this off to the canonical planning surface instead of creating a second recovery system here.",
+                state: .selected
+            )
+        default:
+            Task {
+                await viewModel.handle(
+                    action,
+                    using: container.todayService,
+                    userDisplayName: container.session.userDisplayName,
+                    entryContext: .standard
+                )
             }
         }
     }
@@ -160,69 +151,43 @@ struct TodayScreen: View {
 }
 
 #if DEBUG
-#Preview("Today Seeded Light") {
+#Preview("Today Stable") {
     NavigationStack {
-        TodayScreen(viewModel: TodayViewModel(state: .loaded(PreviewTodayScenarios.seeded)), autoLoad: false)
+        TodayScreen(viewModel: TodayViewModel(state: .loaded(PreviewTodayScenarios.stable)), autoLoad: false)
     }
-    .appContainer(PreviewAppContainerFactory.preview(todayExperience: PreviewTodayScenarios.seeded))
-    .ambitionTheme(.light)
-    .preferredColorScheme(.light)
-}
-
-#Preview("Today Seeded Dark") {
-    NavigationStack {
-        TodayScreen(viewModel: TodayViewModel(state: .loaded(PreviewTodayScenarios.seeded)), autoLoad: false)
-    }
-    .appContainer(PreviewAppContainerFactory.preview(todayExperience: PreviewTodayScenarios.seeded))
-    .ambitionTheme(.dark)
-    .preferredColorScheme(.dark)
-}
-
-#Preview("Today Empty") {
-    NavigationStack {
-        TodayScreen(viewModel: TodayViewModel(state: .loaded(PreviewTodayScenarios.empty)), autoLoad: false)
-    }
-    .appContainer(PreviewAppContainerFactory.preview(todayExperience: PreviewTodayScenarios.empty))
+    .appContainer(PreviewAppContainerFactory.preview(todayExperience: PreviewTodayScenarios.stable))
     .ambitionTheme(.dark)
 }
 
-#Preview("Today Starter") {
+#Preview("Today Tight") {
     NavigationStack {
-        TodayScreen(viewModel: TodayViewModel(state: .loaded(PreviewTodayScenarios.starter)), autoLoad: false)
+        TodayScreen(viewModel: TodayViewModel(state: .loaded(PreviewTodayScenarios.tight)), autoLoad: false)
     }
-    .appContainer(PreviewAppContainerFactory.preview(todayExperience: PreviewTodayScenarios.starter))
+    .appContainer(PreviewAppContainerFactory.preview(todayExperience: PreviewTodayScenarios.tight))
     .ambitionTheme(.dark)
 }
 
-#Preview("Today Clarification") {
+#Preview("Today Recovery") {
     NavigationStack {
-        TodayScreen(viewModel: TodayViewModel(state: .loaded(PreviewTodayScenarios.clarification)), autoLoad: false)
+        TodayScreen(viewModel: TodayViewModel(state: .loaded(PreviewTodayScenarios.recovery)), autoLoad: false)
     }
-    .appContainer(PreviewAppContainerFactory.preview(todayExperience: PreviewTodayScenarios.clarification))
+    .appContainer(PreviewAppContainerFactory.preview(todayExperience: PreviewTodayScenarios.recovery))
     .ambitionTheme(.dark)
 }
 
-#Preview("Today Blocked") {
+#Preview("Today Overloaded") {
     NavigationStack {
-        TodayScreen(viewModel: TodayViewModel(state: .loaded(PreviewTodayScenarios.blocked)), autoLoad: false)
+        TodayScreen(viewModel: TodayViewModel(state: .loaded(PreviewTodayScenarios.overloaded)), autoLoad: false)
     }
-    .appContainer(PreviewAppContainerFactory.preview(todayExperience: PreviewTodayScenarios.blocked))
+    .appContainer(PreviewAppContainerFactory.preview(todayExperience: PreviewTodayScenarios.overloaded))
     .ambitionTheme(.dark)
 }
 
-#Preview("Today Fresh Goal") {
+#Preview("Today No Plan") {
     NavigationStack {
-        TodayScreen(viewModel: TodayViewModel(state: .loaded(PreviewTodayScenarios.freshGoal)), autoLoad: false)
+        TodayScreen(viewModel: TodayViewModel(state: .loaded(PreviewTodayScenarios.noPlan)), autoLoad: false)
     }
-    .appContainer(PreviewAppContainerFactory.preview(todayExperience: PreviewTodayScenarios.freshGoal))
-    .ambitionTheme(.dark)
-}
-
-#Preview("Today Loading") {
-    NavigationStack {
-        TodayScreen(viewModel: TodayViewModel(state: .loading), autoLoad: false)
-    }
-    .appContainer(PreviewAppContainerFactory.preview(todayExperience: PreviewTodayScenarios.seeded))
+    .appContainer(PreviewAppContainerFactory.preview(todayExperience: PreviewTodayScenarios.noPlan))
     .ambitionTheme(.dark)
 }
 #endif

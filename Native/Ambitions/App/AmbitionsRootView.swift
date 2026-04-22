@@ -258,6 +258,9 @@ struct AmbitionsRootView: View {
         .buttonStyle(AmbitionPressableButtonStyle(state: .selected))
         .padding(.trailing, 20)
         .padding(.bottom, 88)
+        .accessibilityElement()
+        .accessibilityLabel("Command")
+        .accessibilityHint("Opens the shell-owned command surface.")
         .accessibilityIdentifier("shell.global-entry-button")
         .keyboardShortcut("k", modifiers: [.command])
     }

@@ -74,9 +74,9 @@ final class DefaultRuntimeActionCommandExecutor: RuntimeActionCommandExecuting {
         case .complete:
             return await performTodayCommand(.complete, command: command, now: now)
         case .delay, .snooze:
-            return await performTodayCommand(.delay, command: command, now: now)
+            return await performTodayCommand(.defer, command: command, now: now)
         case .askForSmallerStep:
-            return await performTodayCommand(.askForSmallerStep, command: command, now: now)
+            return await performTodayCommand(.split, command: command, now: now)
         case .openGoal:
             guard let goalID = command.target.goalID, goalID.isEmpty == false else {
                 return RuntimeActionResult(outcome: .missingTarget)
@@ -128,10 +128,10 @@ final class DefaultRuntimeActionCommandExecutor: RuntimeActionCommandExecuting {
         switch kind {
         case .complete:
             return "Complete"
-        case .delay:
+        case .defer:
             return "Snooze"
-        case .askForSmallerStep:
-            return "Smaller step"
+        case .split:
+            return "Split"
         default:
             return "External action"
         }
@@ -141,9 +141,9 @@ final class DefaultRuntimeActionCommandExecutor: RuntimeActionCommandExecuting {
         switch kind {
         case .complete:
             return "checkmark"
-        case .delay:
+        case .defer:
             return "clock.badge"
-        case .askForSmallerStep:
+        case .split:
             return "scissors"
         default:
             return "arrow.right.circle"
@@ -154,7 +154,7 @@ final class DefaultRuntimeActionCommandExecutor: RuntimeActionCommandExecuting {
         switch kind {
         case .complete:
             return .success
-        case .delay, .askForSmallerStep:
+        case .defer, .split:
             return .selected
         default:
             return .default
