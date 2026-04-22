@@ -1,6 +1,6 @@
 ﻿# Batch 46 - Front-End Transformation 07 / Goal intake and Strategy Composer
 ## Status
-Queued
+Active
 ## Program
 Post-hardening Front-End Transformation Program
 ## Canon Source
@@ -13,7 +13,7 @@ Post-hardening Front-End Transformation Program
 - [novel-interaction-systems-spec.md](../../canon/design/novel-interaction-systems-spec.md)
 ## Start Gate
 - Start only after Batch 38 is complete and stable.
-- Do not activate or implement this batch early; follow the registry and dependency order.
+- Batch 46 is active in the live registry; follow the registry and dependency order for later batches.
 ## Goal
 Fully redesign goal creation, intake, ambiguity handling, and initial strategy shaping into a premium composition flow.
 ## In Scope
