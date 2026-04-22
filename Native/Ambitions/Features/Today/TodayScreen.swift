@@ -109,6 +109,8 @@ struct TodayScreen: View {
 
     private func handleAction(_ action: TodayInlineAction) {
         switch action.kind {
+        case .startFocus:
+            container.navigation.selectToday(entryContext: .focus)
         case .openDetail, .askForHelp:
             container.navigation.openGoalDetail(
                 goalID: action.target.goalID,
@@ -175,11 +177,27 @@ struct TodayScreen: View {
     .ambitionTheme(.dark)
 }
 
+#Preview("Today Drifted") {
+    NavigationStack {
+        TodayScreen(viewModel: TodayViewModel(state: .loaded(PreviewTodayScenarios.drifted)), autoLoad: false)
+    }
+    .appContainer(PreviewAppContainerFactory.preview(todayExperience: PreviewTodayScenarios.drifted))
+    .ambitionTheme(.dark)
+}
+
 #Preview("Today Overloaded") {
     NavigationStack {
         TodayScreen(viewModel: TodayViewModel(state: .loaded(PreviewTodayScenarios.overloaded)), autoLoad: false)
     }
     .appContainer(PreviewAppContainerFactory.preview(todayExperience: PreviewTodayScenarios.overloaded))
+    .ambitionTheme(.dark)
+}
+
+#Preview("Today Low Data") {
+    NavigationStack {
+        TodayScreen(viewModel: TodayViewModel(state: .loaded(PreviewTodayScenarios.lowData)), autoLoad: false)
+    }
+    .appContainer(PreviewAppContainerFactory.preview(todayExperience: PreviewTodayScenarios.lowData))
     .ambitionTheme(.dark)
 }
 

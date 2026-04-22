@@ -151,13 +151,26 @@ struct TodaySupportCard: View {
             VStack(alignment: .leading, spacing: theme.spacing.lg) {
                 SectionHeader(
                     eyebrow: "Support",
-                    title: "Fixed, flexible, and momentum",
-                    subtitle: "These modules interpret the hero instead of competing with it."
+                    title: "Time, recovery, and momentum",
+                    subtitle: "These systems deepen the hero instead of competing with it."
                 ) {
                     if let planAction = support.planAction {
                         TodayActionChip(action: planAction, handler: onAction)
                     }
                 }
+
+                if let focusScreenlet = support.focusScreenlet {
+                    TodayFocusScreenletCard(state: focusScreenlet, onAction: onAction)
+                        .accessibilityIdentifier("today.support.focus-screenlet")
+                }
+
+                if let recoveryBloom = support.recoveryBloom {
+                    TodayRecoveryBloomCard(state: recoveryBloom, onAction: onAction)
+                        .accessibilityIdentifier("today.support.recovery-bloom")
+                }
+
+                TodayTimeApertureCard(state: support.timeAperture, onAction: onAction)
+                    .accessibilityIdentifier("today.support.time-aperture")
 
                 TodaySupportSection(
                     eyebrow: "Fixed commitments",
@@ -334,6 +347,225 @@ private struct TodaySupportSection: View {
     }
 }
 
+private struct TodayTimeApertureCard: View {
+    @Environment(\.ambitionTheme) private var theme
+
+    let state: TodayTimeApertureState
+    let onAction: (TodayInlineAction) -> Void
+
+    var body: some View {
+        VStack(alignment: .leading, spacing: theme.spacing.md) {
+            SectionHeader(
+                eyebrow: "Open time",
+                title: state.title,
+                subtitle: state.subtitle
+            )
+
+            HStack(alignment: .top, spacing: theme.spacing.md) {
+                VStack(alignment: .leading, spacing: theme.spacing.xxxs) {
+                    Text(state.pressure.title)
+                        .font(theme.typography.bodyEmphasized)
+                        .foregroundStyle(theme.colors.textPrimary)
+                    Text(state.pressure.detail)
+                        .font(theme.typography.caption)
+                        .foregroundStyle(theme.colors.textSecondary)
+                }
+                Spacer(minLength: theme.spacing.sm)
+                TagPill(state.pressure.label, state: state.pressure.state)
+            }
+
+            VStack(alignment: .leading, spacing: theme.spacing.sm) {
+                Text("Best use of remaining time")
+                    .font(theme.typography.caption)
+                    .foregroundStyle(theme.colors.textTertiary)
+                Text(state.bestUseTitle)
+                    .font(theme.typography.bodyEmphasized)
+                    .foregroundStyle(theme.colors.textPrimary)
+                Text(state.bestUseDetail)
+                    .font(theme.typography.caption)
+                    .foregroundStyle(theme.colors.textSecondary)
+                if let action = state.bestUseAction {
+                    TodayActionChip(action: action, handler: onAction)
+                }
+            }
+            .padding(theme.spacing.sm)
+            .background(
+                RoundedRectangle(cornerRadius: theme.radius.md, style: .continuous)
+                    .fill(theme.colors.surfaceOverlay)
+            )
+            .overlay(
+                RoundedRectangle(cornerRadius: theme.radius.md, style: .continuous)
+                    .stroke(theme.colors.strokeSubtle, lineWidth: 1)
+            )
+
+            if state.windows.isEmpty {
+                Text(state.emptyMessage ?? "No additional open window needs to be filled.")
+                    .font(theme.typography.caption)
+                    .foregroundStyle(theme.colors.textSecondary)
+            } else {
+                ForEach(state.windows) { window in
+                    HStack(alignment: .top, spacing: theme.spacing.md) {
+                        VStack(alignment: .leading, spacing: theme.spacing.xxxs) {
+                            HStack(spacing: theme.spacing.xs) {
+                                Text(window.title)
+                                    .font(theme.typography.bodyEmphasized)
+                                    .foregroundStyle(theme.colors.textPrimary)
+                                TagPill(window.timingLabel, state: window.state)
+                            }
+                            Text(window.subtitle)
+                                .font(theme.typography.caption)
+                                .foregroundStyle(theme.colors.textSecondary)
+                        }
+                        Spacer(minLength: theme.spacing.sm)
+                        if let action = window.action {
+                            TodayActionChip(action: action, handler: onAction)
+                        }
+                    }
+                    .padding(theme.spacing.sm)
+                    .background(
+                        RoundedRectangle(cornerRadius: theme.radius.md, style: .continuous)
+                            .fill(theme.colors.surfaceOverlay)
+                    )
+                    .overlay(
+                        RoundedRectangle(cornerRadius: theme.radius.md, style: .continuous)
+                            .stroke(theme.colors.strokeSubtle, lineWidth: 1)
+                    )
+                }
+            }
+
+            if let whisper = state.trustWhisper {
+                Label {
+                    VStack(alignment: .leading, spacing: theme.spacing.xxxs) {
+                        Text(whisper.title)
+                            .font(theme.typography.caption)
+                            .foregroundStyle(theme.colors.textPrimary)
+                        Text(whisper.detail)
+                            .font(theme.typography.caption)
+                            .foregroundStyle(theme.colors.textSecondary)
+                    }
+                } icon: {
+                    Image(systemName: "sparkle.magnifyingglass")
+                        .foregroundStyle(theme.colors.textSecondary)
+                }
+                .padding(theme.spacing.sm)
+                .background(
+                    RoundedRectangle(cornerRadius: theme.radius.md, style: .continuous)
+                        .fill(theme.colors.surfaceOverlay)
+                )
+                .overlay(
+                    RoundedRectangle(cornerRadius: theme.radius.md, style: .continuous)
+                        .stroke(theme.colors.strokeSubtle, lineWidth: 1)
+                )
+            }
+        }
+    }
+}
+
+private struct TodayRecoveryBloomCard: View {
+    @Environment(\.ambitionTheme) private var theme
+
+    let state: TodayRecoveryBloomState
+    let onAction: (TodayInlineAction) -> Void
+
+    var body: some View {
+        VStack(alignment: .leading, spacing: theme.spacing.md) {
+            SectionHeader(
+                eyebrow: "Recovery",
+                title: state.title,
+                subtitle: state.subtitle
+            )
+
+            Text(state.explanation)
+                .font(theme.typography.caption)
+                .foregroundStyle(theme.colors.textSecondary)
+
+            ForEach(state.options) { option in
+                HStack(alignment: .top, spacing: theme.spacing.md) {
+                    VStack(alignment: .leading, spacing: theme.spacing.xxxs) {
+                        Text(option.title)
+                            .font(theme.typography.bodyEmphasized)
+                            .foregroundStyle(theme.colors.textPrimary)
+                        Text(option.detail)
+                            .font(theme.typography.caption)
+                            .foregroundStyle(theme.colors.textSecondary)
+                    }
+                    Spacer(minLength: theme.spacing.sm)
+                    TodayActionChip(action: option.action, handler: onAction)
+                }
+                .padding(theme.spacing.sm)
+                .background(
+                    RoundedRectangle(cornerRadius: theme.radius.md, style: .continuous)
+                        .fill(theme.colors.surfaceOverlay)
+                )
+                .overlay(
+                    RoundedRectangle(cornerRadius: theme.radius.md, style: .continuous)
+                        .stroke(theme.colors.strokeSubtle, lineWidth: 1)
+                )
+            }
+        }
+        .padding(theme.spacing.md)
+        .background(
+            RoundedRectangle(cornerRadius: theme.radius.lg, style: .continuous)
+                .fill(theme.colors.surfaceOverlay.opacity(0.92))
+        )
+        .overlay(
+            RoundedRectangle(cornerRadius: theme.radius.lg, style: .continuous)
+                .stroke(theme.colors.strokeSubtle, lineWidth: 1)
+        )
+    }
+}
+
+private struct TodayFocusScreenletCard: View {
+    @Environment(\.ambitionTheme) private var theme
+
+    let state: TodayFocusScreenletState
+    let onAction: (TodayInlineAction) -> Void
+
+    var body: some View {
+        VStack(alignment: .leading, spacing: theme.spacing.md) {
+            SectionHeader(
+                eyebrow: "Focus screenlet",
+                title: state.title,
+                subtitle: state.subtitle
+            )
+            Text(state.detail)
+                .font(theme.typography.caption)
+                .foregroundStyle(theme.colors.textSecondary)
+
+            TodayPrimaryActionButton(action: state.primaryAction, handler: onAction)
+
+            if state.secondaryActions.isEmpty == false {
+                TodayActionGrid(actions: state.secondaryActions, handler: onAction)
+            }
+
+            if let whisper = state.trustWhisper {
+                Label {
+                    VStack(alignment: .leading, spacing: theme.spacing.xxxs) {
+                        Text(whisper.title)
+                            .font(theme.typography.caption)
+                            .foregroundStyle(theme.colors.textPrimary)
+                        Text(whisper.detail)
+                            .font(theme.typography.caption)
+                            .foregroundStyle(theme.colors.textSecondary)
+                    }
+                } icon: {
+                    Image(systemName: "scope")
+                        .foregroundStyle(theme.colors.accentWarm)
+                }
+            }
+        }
+        .padding(theme.spacing.md)
+        .background(
+            RoundedRectangle(cornerRadius: theme.radius.lg, style: .continuous)
+                .fill(theme.colors.surfaceOverlay)
+        )
+        .overlay(
+            RoundedRectangle(cornerRadius: theme.radius.lg, style: .continuous)
+                .stroke(theme.colors.strokeSubtle, lineWidth: 1)
+        )
+    }
+}
+
 private struct TodayMomentumStrip: View {
     @Environment(\.ambitionTheme) private var theme
 
@@ -431,6 +663,8 @@ private struct TodayActionAccessibilityHint: ViewModifier {
 
     func body(content: Content) -> some View {
         switch action.kind {
+        case .startFocus:
+            content.accessibilityHint("Narrows Today into the bounded focus screenlet entry.")
         case .askWhyThisMatters:
             content.accessibilityHint("Explains why this step is worth doing now.")
         case .protectLater:

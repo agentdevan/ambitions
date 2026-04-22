@@ -39,9 +39,11 @@ final class TodayViewModelTests: XCTestCase {
         let experience = try await service.loadTodayExperience(userDisplayName: "", now: now)
 
         XCTAssertEqual(experience.hero.truth.posture, .stable)
-        XCTAssertEqual(experience.hero.primaryAction.action.kind, .complete)
+        XCTAssertEqual(experience.hero.primaryAction.action.kind, .startFocus)
         XCTAssertEqual(experience.hero.primaryAction.action.target.goalID, "goal-ritual")
         XCTAssertTrue(experience.hero.truth.contextPills.contains(where: { $0.title.contains("1 active goal") }))
+        XCTAssertFalse(experience.support.timeAperture.windows.isEmpty)
+        XCTAssertNil(experience.support.recoveryBloom)
     }
 
     func testRepositoryBackedServiceCanSurfaceSharedResponsibilityRitualThesis() async throws {
@@ -115,6 +117,28 @@ final class TodayViewModelTests: XCTestCase {
         XCTAssertEqual(expected?.goal.id, "goal-clean")
         XCTAssertEqual(experience.hero.truth.nowTitle, expected?.step.title)
         XCTAssertEqual(experience.support.fixedCommitments.items.first?.id, expected?.step.id)
+        XCTAssertNil(experience.support.recoveryBloom)
+        XCTAssertEqual(experience.support.timeAperture.bestUseTitle, "Next 45 minutes")
+        XCTAssertFalse(experience.support.timeAperture.windows.isEmpty)
+    }
+
+    func testFocusEntryContextSurfacesBoundedFocusScreenlet() async throws {
+        let repositories = try await makeRepositories()
+        let service = RepositoryBackedTodayService(repositories: repositories)
+        let now = try XCTUnwrap(DomainTimestamp.date(from: "2026-04-21T08:00:00Z"))
+        let goal = makeGoal(id: "goal-focus", stepID: "step-focus", stepTitle: "Focus-backed step", dueAt: "2026-04-21T16:00:00Z")
+        try await repositories.goals.saveGoals([goal])
+
+        let experience = try await service.loadTodayExperience(
+            userDisplayName: "",
+            now: now,
+            entryContext: .focus
+        )
+
+        XCTAssertEqual(experience.hero.truth.posture, .stable)
+        XCTAssertEqual(experience.hero.primaryAction.action.kind, .complete)
+        XCTAssertEqual(experience.support.focusScreenlet?.title, "Focus-backed step")
+        XCTAssertEqual(experience.support.focusScreenlet?.primaryAction.kind, .complete)
     }
 
     @MainActor

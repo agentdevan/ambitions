@@ -363,20 +363,14 @@ private struct QuietCommandSheetView: View {
                 goalID: nil,
                 captureID: nil
             )
-        case .quickPlanPatch, .quickRecovery, .quickFocus, .openWeek:
-            Task {
-                let result = await container.commandRouter.execute(
-                    intent: intent,
-                    text: "",
-                    goalID: nil,
-                    captureID: nil,
-                    source: overlay.entrySource,
-                    now: .now
-                )
-                if let title = result.title, result.destination == nil {
-                    executionMessage = title
-                }
-            }
+        case .quickPlanPatch, .openWeek:
+            container.navigation.selectTab(.plan)
+        case .quickRecovery:
+            container.navigation.queueTodaySelectionAfterOverlayDismiss(entryContext: .recovery)
+            onDismiss()
+        case .quickFocus:
+            container.navigation.queueTodaySelectionAfterOverlayDismiss(entryContext: .focus)
+            onDismiss()
         }
     }
 

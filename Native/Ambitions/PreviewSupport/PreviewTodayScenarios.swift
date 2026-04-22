@@ -58,6 +58,22 @@ enum PreviewTodayScenarios {
         celebrationLine: nil
     )
 
+    static let drifted = makeScenario(
+        posture: .drifted,
+        title: "Return through the next believable move",
+        supporting: "The earlier plan slipped, so Today is narrowing the path back to one calmer step.",
+        nowSubtitle: "Ship the native create goal flow",
+        nextTitle: "Protect later",
+        nextSubtitle: "If the step still feels too large, move the shaping into Plan without shame.",
+        primaryAction: TodayInlineAction(kind: .split, title: "Recover calmly", systemImage: "arrow.uturn.left.circle", state: .selected, target: TodayActionTarget(goalID: "goal-2", stepID: "step-2")),
+        supportingActions: [
+            TodayInlineAction(kind: .protectLater, title: "Protect later", systemImage: "calendar.badge.clock", state: .default, target: TodayActionTarget(goalID: "goal-2", stepID: "step-2")),
+            TodayInlineAction(kind: .reschedule, title: "Reschedule", systemImage: "forward.fill", state: .warning, target: TodayActionTarget(goalID: "goal-2", stepID: "step-2"))
+        ],
+        reentry: nil,
+        celebrationLine: nil
+    )
+
     static let overloaded = makeScenario(
         posture: .overloaded,
         title: "Lighten the day first",
@@ -70,6 +86,19 @@ enum PreviewTodayScenarios {
             TodayInlineAction(kind: .reschedule, title: "Reschedule", systemImage: "forward.fill", state: .warning, target: TodayActionTarget(goalID: "goal-1", stepID: "step-1")),
             TodayInlineAction(kind: .split, title: "Split", systemImage: "scissors", state: .selected, target: TodayActionTarget(goalID: "goal-1", stepID: "step-1"))
         ],
+        reentry: nil,
+        celebrationLine: nil
+    )
+
+    static let lowData = makeScenario(
+        posture: .lowData,
+        title: "Clarify the next move first",
+        supporting: "The day has room, but stronger timing claims would be fake until one missing answer lands.",
+        nowSubtitle: "A draft is waiting on one clarification.",
+        nextTitle: "Open detail",
+        nextSubtitle: "Answer the smallest missing question before widening the day.",
+        primaryAction: TodayInlineAction(kind: .openDetail, title: "Answer", systemImage: "arrow.right.circle", state: .selected, target: TodayActionTarget(draftID: "draft-1")),
+        supportingActions: [],
         reentry: nil,
         celebrationLine: nil
     )
@@ -89,6 +118,29 @@ enum PreviewTodayScenarios {
     )
 
     static let empty = noPlan
+
+    static func named(_ name: String) -> TodayExperience? {
+        switch name.trimmingCharacters(in: .whitespacesAndNewlines).lowercased() {
+        case "stable":
+            stable
+        case "tight":
+            tight
+        case "recovery", "recovering":
+            recovery
+        case "drifted":
+            drifted
+        case "overloaded":
+            overloaded
+        case "lowdata", "low-data", "low_data":
+            lowData
+        case "noplan", "no-plan", "no_plan":
+            noPlan
+        case "empty":
+            empty
+        default:
+            nil
+        }
+    }
 
     private static func makeScenario(
         posture: TodayDayPosture,
@@ -142,6 +194,60 @@ enum PreviewTodayScenarios {
                 reentry: reentry
             ),
             support: TodaySupportLayerState(
+                timeAperture: TodayTimeApertureState(
+                    title: "Time Aperture",
+                    subtitle: "Room and pressure stay visible without turning Today into a dense calendar.",
+                    pressure: TodayDayPressureState(
+                        title: pressureTitle(for: posture),
+                        detail: pressureDetail(for: posture),
+                        label: pressureLabel(for: posture),
+                        state: pressureState(for: posture)
+                    ),
+                    windows: mode == .empty ? [] : [
+                        TodayOpenWindowState(
+                            id: "window-1",
+                            title: "Next 45 minutes",
+                            subtitle: posture == .overloaded ? "Protect one clean lane before adding more to today." : "A bounded near-term block is still available.",
+                            timingLabel: "Afternoon room",
+                            state: posture == .overloaded ? .warning : .default,
+                            action: primaryAction.kind == .openPlan ? nil : primaryAction
+                        ),
+                        TodayOpenWindowState(
+                            id: "window-2",
+                            title: "Later today",
+                            subtitle: "If the first block lands, one lighter follow-on move still fits.",
+                            timingLabel: "Later today",
+                            state: .default,
+                            action: supportingActions.first
+                        )
+                    ],
+                    emptyMessage: mode == .empty ? "No open window needs to be filled right now." : nil,
+                    bestUseTitle: posture == .overloaded ? "Lighten the day first" : title,
+                    bestUseDetail: supporting,
+                    bestUseAction: primaryAction,
+                    trustWhisper: TodayTrustWhisperState(
+                        title: posture == .lowData ? "May need confirmation" : "Based on",
+                        detail: posture == .lowData
+                            ? "Time pressure is inferred from the current draft shape and may change as answers land."
+                            : "The remaining-time read is using the current plan shape and runtime summary truth.",
+                        state: pressureState(for: posture)
+                    )
+                ),
+                recoveryBloom: recoveryBloom(for: posture, primaryAction: primaryAction, supportingActions: supportingActions),
+                focusScreenlet: reentry?.title.contains("Focus") == true
+                    ? TodayFocusScreenletState(
+                        title: title,
+                        subtitle: nowSubtitle,
+                        detail: "Focus is narrowed to one move so the rest of Today can stay quiet.",
+                        primaryAction: supportingActions.first ?? primaryAction,
+                        secondaryActions: Array(supportingActions.dropFirst().prefix(2)),
+                        trustWhisper: TodayTrustWhisperState(
+                            title: "Based on",
+                            detail: "The focus handoff keeps the current recommendation visible without redesigning the rest of Today.",
+                            state: .selected
+                        )
+                    )
+                    : nil,
                 fixedCommitments: TodayFixedCommitmentsState(
                     title: "Fixed commitments",
                     summary: "The fixed layer should stay obvious and compact.",
@@ -199,6 +305,76 @@ enum PreviewTodayScenarios {
                 reflectionPrompt: "When tonight arrives, what do you want to feel good about?",
                 reflectionHighlights: mode == .empty ? [] : ["Captured one completed session", "Kept the day from turning into dashboard noise"]
             )
+        )
+    }
+
+    private static func pressureTitle(for posture: TodayDayPosture) -> String {
+        switch posture {
+        case .stable: return "The day still has breathing room"
+        case .tight: return "The day is getting tight"
+        case .drifted: return "The day drifted off its first plan"
+        case .overloaded: return "Too many asks are touching today"
+        case .recovering: return "Recovery is already in progress"
+        case .lowData: return "Time shape is present, but certainty is not"
+        case .noPlan: return "Today has open room"
+        }
+    }
+
+    private static func pressureDetail(for posture: TodayDayPosture) -> String {
+        switch posture {
+        case .stable: return "There is room for one deliberate block without making the day noisy."
+        case .tight: return "One more meaningful move fits, but only if it stays singular."
+        case .drifted: return "The real pressure is re-entry, not forcing more volume."
+        case .overloaded: return "The day needs fewer simultaneous asks before effort goes up."
+        case .recovering: return "Use the remaining room for one safe block, not for catching everything up."
+        case .lowData: return "Clarification matters before stronger timing claims."
+        case .noPlan: return "The first move should stay bounded and real."
+        }
+    }
+
+    private static func pressureLabel(for posture: TodayDayPosture) -> String {
+        switch posture {
+        case .stable: return "Strong fit"
+        case .tight: return "Likely fit"
+        case .drifted: return "Needs recovery"
+        case .overloaded: return "Compressed"
+        case .recovering: return "Recovering"
+        case .lowData: return "Needs confirmation"
+        case .noPlan: return "Open"
+        }
+    }
+
+    private static func pressureState(for posture: TodayDayPosture) -> AmbitionVisualState {
+        switch posture {
+        case .stable: return .success
+        case .tight, .recovering: return .selected
+        case .drifted, .overloaded, .lowData: return .warning
+        case .noPlan: return .default
+        }
+    }
+
+    private static func recoveryBloom(
+        for posture: TodayDayPosture,
+        primaryAction: TodayInlineAction,
+        supportingActions: [TodayInlineAction]
+    ) -> TodayRecoveryBloomState? {
+        guard posture == .tight || posture == .drifted || posture == .recovering || posture == .overloaded else {
+            return nil
+        }
+        let options = ([primaryAction] + supportingActions).prefix(3).enumerated().map { index, action in
+            TodayRecoveryOptionState(
+                id: "recovery-\(index)",
+                title: index == 0 ? "Safest next move" : action.title,
+                detail: index == 0 ? "The first option should feel like relief, not punishment." : "A calmer alternative stays visible if the first move still feels too heavy.",
+                state: action.state,
+                action: action
+            )
+        }
+        return TodayRecoveryBloomState(
+            title: posture == .overloaded ? "Lighten today" : "Recovery Bloom",
+            subtitle: "The safer path appears before any deeper explanation.",
+            explanation: "Recovery reorganizes the day softly so the user never has to fight through a broken-plan feeling.",
+            options: Array(options)
         )
     }
 }

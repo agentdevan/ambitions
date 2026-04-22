@@ -25,7 +25,10 @@ struct AmbitionsRootView: View {
 
             shellGlobalEntryButton
         }
-        .sheet(item: $navigation.activeOverlay) { overlay in
+        .sheet(item: $navigation.activeOverlay, onDismiss: {
+            guard let entryContext = navigation.takePendingTodayEntryContext() else { return }
+            navigation.selectToday(entryContext: entryContext)
+        }) { overlay in
             AppShellOverlayView(
                 overlay: overlay,
                 onDismiss: {

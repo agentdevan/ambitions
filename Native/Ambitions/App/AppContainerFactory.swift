@@ -63,6 +63,7 @@ enum AppContainerFactory {
         let session = try await startupService.prepareSession(source: configuration.sessionSource)
         let navigation = AppNavigationModel(selectedTab: session.initialTab)
         let externalRouter = DefaultAppExternalRouter(navigation: navigation)
+        let todayService = previewTodayServiceOverride(for: configuration.sessionSource) ?? runtime.todayService
         let externalActionService = DefaultExternalActionCommandService(
             runtimeExecutor: runtime.actionExecutor,
             externalRouter: externalRouter
@@ -82,7 +83,7 @@ enum AppContainerFactory {
             appearancePreference: session.appearancePreference,
             accentFamily: session.accentFamily,
             navigation: navigation,
-            todayService: runtime.todayService,
+            todayService: todayService,
             captureService: runtime.captureService,
             goalsService: runtime.goalsService,
             habitsService: runtime.habitsService,
@@ -149,5 +150,19 @@ enum AppContainerFactory {
             teaching: SwiftDataGoalTeachingSignalRepository(store: store),
             appState: SwiftDataAppStateRepository(store: store)
         )
+    }
+
+    private static func previewTodayServiceOverride(for source: AppSession.BootstrapSource) -> (any TodayServicing)? {
+        #if DEBUG
+        guard source == .preview,
+              let scenarioName = ProcessInfo.processInfo.environment["AMBITIONS_PREVIEW_TODAY_SCENARIO"],
+              let experience = PreviewTodayScenarios.named(scenarioName) else {
+            return nil
+        }
+        return StubTodayService(experience: experience)
+        #else
+        _ = source
+        return nil
+        #endif
     }
 }

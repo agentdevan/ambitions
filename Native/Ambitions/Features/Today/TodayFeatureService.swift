@@ -54,6 +54,8 @@ struct RepositoryBackedTodayService: TodayServicing {
 
     func performAction(_ action: TodayInlineAction, now: Date) async throws -> TodayActionResponse {
         switch action.kind {
+        case .startFocus:
+            return TodayActionResponse(message: nil)
         case .openDetail:
             return TodayActionResponse(
                 message: TodayInlineMessage(
@@ -271,12 +273,18 @@ private extension RepositoryBackedTodayService {
                 entryContext: entryContext
             ),
             support: makeSupportLayer(
+                now: now,
+                posture: posture,
+                entryContext: entryContext,
+                focus: focus,
                 dailyTargets: dailyTargets,
                 freeTime: freeTime,
+                milestone: milestone,
                 momentum: momentum,
                 quickCapture: quickCapture,
                 reflection: reflection,
-                completedToday: completedToday
+                completedToday: completedToday,
+                shellSummary: focus.shellSummary ?? milestone.shellSummary
             )
         )
     }
@@ -349,20 +357,52 @@ private extension RepositoryBackedTodayService {
                 trustWhisper: trustWhisper,
                 shellSummary: heroSeed.shellSummary
             ),
-            primaryAction: makePrimaryAction(posture: posture, focus: focus, freeTime: freeTime, milestone: milestone),
+            primaryAction: makePrimaryAction(
+                posture: posture,
+                entryContext: entryContext,
+                focus: focus,
+                freeTime: freeTime,
+                milestone: milestone
+            ),
             reentry: makeReentryState(entryContext: entryContext)
         )
     }
 
     func makeSupportLayer(
+        now: Date,
+        posture: TodayDayPosture,
+        entryContext: TodayEntryContext,
+        focus: TodayFocusState,
         dailyTargets: TodayDailyTargetsState,
         freeTime: TodayFreeTimeState,
+        milestone: TodayMilestoneState,
         momentum: TodayMomentumState,
         quickCapture: TodayQuickCaptureState,
         reflection: TodayReflectionState,
-        completedToday: [String]
+        completedToday: [String],
+        shellSummary: GoalShellSummaryState?
     ) -> TodaySupportLayerState {
         TodaySupportLayerState(
+            timeAperture: makeTimeAperture(
+                now: now,
+                posture: posture,
+                focus: focus,
+                dailyTargets: dailyTargets,
+                freeTime: freeTime,
+                milestone: milestone,
+                shellSummary: shellSummary
+            ),
+            recoveryBloom: makeRecoveryBloom(
+                posture: posture,
+                focus: focus,
+                freeTime: freeTime
+            ),
+            focusScreenlet: makeFocusScreenlet(
+                entryContext: entryContext,
+                focus: focus,
+                posture: posture,
+                shellSummary: shellSummary
+            ),
             fixedCommitments: TodayFixedCommitmentsState(
                 title: dailyTargets.title,
                 summary: dailyTargets.subtitle,
@@ -440,11 +480,18 @@ private extension RepositoryBackedTodayService {
 
     func makePrimaryAction(
         posture: TodayDayPosture,
+        entryContext: TodayEntryContext,
         focus: TodayFocusState,
         freeTime: TodayFreeTimeState,
         milestone: TodayMilestoneState
     ) -> TodayPrimaryActionState {
-        let available = primaryActions(from: focus, posture: posture, milestone: milestone, freeTime: freeTime)
+        let available = primaryActions(
+            from: focus,
+            posture: posture,
+            entryContext: entryContext,
+            milestone: milestone,
+            freeTime: freeTime
+        )
         let primary = available.first ?? TodayInlineAction(
             kind: .openPlan,
             title: "Build today",
@@ -489,6 +536,7 @@ private extension RepositoryBackedTodayService {
     func primaryActions(
         from focus: TodayFocusState,
         posture: TodayDayPosture,
+        entryContext: TodayEntryContext,
         milestone: TodayMilestoneState,
         freeTime: TodayFreeTimeState
     ) -> [TodayInlineAction] {
@@ -508,6 +556,22 @@ private extension RepositoryBackedTodayService {
         }()
 
         var actions = focusActions
+        if entryContext != .focus,
+           posture == .stable,
+           let firstFocusAction = focusActions.first(where: {
+               $0.kind == .complete || $0.kind == .split || $0.kind == .askForHelp
+           }) {
+            actions.insert(
+                TodayInlineAction(
+                    kind: .startFocus,
+                    title: "Start focus",
+                    systemImage: "scope",
+                    state: .selected,
+                    target: firstFocusAction.target
+                ),
+                at: 0
+            )
+        }
         if posture == .tight || posture == .overloaded || posture == .recovering {
             actions.insert(
                 TodayInlineAction(
@@ -617,6 +681,328 @@ private extension RepositoryBackedTodayService {
     func nextHeroItem(from freeTime: TodayFreeTimeState) -> (title: String, subtitle: String)? {
         guard let item = freeTime.opportunities.first else { return nil }
         return (item.title, item.subtitle)
+    }
+
+    func makeTimeAperture(
+        now: Date,
+        posture: TodayDayPosture,
+        focus: TodayFocusState,
+        dailyTargets: TodayDailyTargetsState,
+        freeTime: TodayFreeTimeState,
+        milestone: TodayMilestoneState,
+        shellSummary: GoalShellSummaryState?
+    ) -> TodayTimeApertureState {
+        let pressure = dayPressureState(
+            posture: posture,
+            fixedCount: dailyTargets.items.count,
+            flexibleCount: freeTime.opportunities.count
+        )
+        let windows = openWindows(
+            now: now,
+            posture: posture,
+            focus: focus,
+            dailyTargets: dailyTargets,
+            freeTime: freeTime
+        )
+        let bestUseAction = windows.first?.action ?? milestone.action
+        let bestUseTitle: String
+        let bestUseDetail: String
+        if let window = windows.first {
+            bestUseTitle = window.title
+            bestUseDetail = window.subtitle
+        } else if let opportunity = freeTime.opportunities.first {
+            bestUseTitle = opportunity.title
+            bestUseDetail = opportunity.subtitle
+        } else {
+            bestUseTitle = "Keep the day quiet"
+            bestUseDetail = posture == .overloaded || posture == .drifted || posture == .recovering
+                ? "The best use of the remaining day may be protecting one believable block instead of forcing more movement."
+                : "Unused room is allowed to stay unused when nothing cleanly fits."
+        }
+
+        let whisper = shellSummary.map { summary in
+            TodayTrustWhisperState(
+                title: pressure.label == "Needs confirmation" ? "May need confirmation" : "Based on",
+                detail: pressure.label == "Needs confirmation"
+                    ? "Time pressure is being inferred from current plan shape and may change as newer input lands."
+                    : summary.pathSummary,
+                state: pressure.state
+            )
+        }
+
+        return TodayTimeApertureState(
+            title: "Time Aperture",
+            subtitle: "Room and pressure stay visible without turning Today into a dense calendar.",
+            pressure: pressure,
+            windows: windows,
+            emptyMessage: windows.isEmpty ? "No open window needs to be filled right now." : nil,
+            bestUseTitle: bestUseTitle,
+            bestUseDetail: bestUseDetail,
+            bestUseAction: bestUseAction,
+            trustWhisper: whisper
+        )
+    }
+
+    func dayPressureState(
+        posture: TodayDayPosture,
+        fixedCount: Int,
+        flexibleCount: Int
+    ) -> TodayDayPressureState {
+        switch posture {
+        case .stable:
+            return TodayDayPressureState(
+                title: "The day still has breathing room",
+                detail: flexibleCount > 0
+                    ? "There is space for one deliberate move and one flexible option if the first block lands."
+                    : "The visible work can stay singular without squeezing more into the day.",
+                label: "Strong fit",
+                state: .success
+            )
+        case .tight:
+            return TodayDayPressureState(
+                title: "The day is getting tight",
+                detail: "There is still enough room for one meaningful block, but extra switching will make the day noisier.",
+                label: "Likely fit",
+                state: .selected
+            )
+        case .drifted:
+            return TodayDayPressureState(
+                title: "The day drifted off its first plan",
+                detail: "Pressure is less about time volume and more about getting back to one believable move.",
+                label: "Needs recovery",
+                state: .warning
+            )
+        case .overloaded:
+            return TodayDayPressureState(
+                title: "Too many asks are touching today",
+                detail: "The remaining room is real, but only after the day is lightened back to one safe lane.",
+                label: "Compressed",
+                state: .warning
+            )
+        case .recovering:
+            return TodayDayPressureState(
+                title: "Recovery is already in progress",
+                detail: "Use the remaining room for the smallest safe block, not for catching everything up.",
+                label: "Recovering",
+                state: .selected
+            )
+        case .lowData:
+            return TodayDayPressureState(
+                title: "Time shape is present, but certainty is not",
+                detail: "The day can still hold one small move, but clarification matters before stronger timing claims.",
+                label: "Needs confirmation",
+                state: .warning
+            )
+        case .noPlan:
+            return TodayDayPressureState(
+                title: "Today has open room",
+                detail: fixedCount == 0
+                    ? "Nothing is forcing the day yet, so the first move should stay small and real."
+                    : "One small commitment is enough to make the day useful.",
+                label: "Open",
+                state: .default
+            )
+        }
+    }
+
+    func openWindows(
+        now: Date,
+        posture: TodayDayPosture,
+        focus: TodayFocusState,
+        dailyTargets: TodayDailyTargetsState,
+        freeTime: TodayFreeTimeState
+    ) -> [TodayOpenWindowState] {
+        let calendar = Calendar.current
+        let hour = calendar.component(.hour, from: now)
+        let laneTitles: [(String, String)] = [
+            ("Next 45 minutes", hour < 17 ? "A near-term block is still available if the next move stays bounded." : "A short closing block is still available if it stays gentle."),
+            ("Later today", "There is still room for one follow-on move if the first block resolves cleanly."),
+            ("Protect the evening", "If attention is thinning, preserve one calmer block instead of adding more switching.")
+        ]
+
+        var windows: [TodayOpenWindowState] = []
+        let candidateActions = focus.primaryActionsForRecovery + freeTime.opportunities.compactMap(\.action)
+        for (index, lane) in laneTitles.enumerated() {
+            let action = candidateActions.dropFirst(index).first ?? candidateActions.first
+            let title: String
+            let subtitle: String
+            if let action {
+                title = lane.0
+                subtitle = action.kind == .protectLater
+                    ? "Use this room to preserve the next believable block."
+                    : lane.1
+            } else {
+                title = lane.0
+                subtitle = "No additional move needs to be forced into this window."
+            }
+            windows.append(
+                TodayOpenWindowState(
+                    id: "window-\(index)",
+                    title: title,
+                    subtitle: subtitle,
+                    timingLabel: timingLabelForWindow(index: index, hour: hour),
+                    state: posture == .overloaded && index == 0 ? .warning : .default,
+                    action: action
+                )
+            )
+        }
+
+        if dailyTargets.items.isEmpty && freeTime.opportunities.isEmpty {
+            return []
+        }
+        return Array(windows.prefix(posture == .stable ? 2 : 3))
+    }
+
+    func timingLabelForWindow(index: Int, hour: Int) -> String {
+        switch index {
+        case 0:
+            return hour < 12 ? "Morning room" : hour < 17 ? "Afternoon room" : "Closing room"
+        case 1:
+            return "Later today"
+        default:
+            return "Protect later"
+        }
+    }
+
+    func makeRecoveryBloom(
+        posture: TodayDayPosture,
+        focus: TodayFocusState,
+        freeTime: TodayFreeTimeState
+    ) -> TodayRecoveryBloomState? {
+        guard posture == .drifted || posture == .recovering || posture == .overloaded || posture == .tight else {
+            return nil
+        }
+
+        let options = recoveryOptions(for: posture, focus: focus, freeTime: freeTime)
+        guard options.isEmpty == false else { return nil }
+
+        let title: String
+        let subtitle: String
+        let explanation: String
+        switch posture {
+        case .tight:
+            title = "Keep the day believable"
+            subtitle = "One light adjustment now is calmer than a mess later."
+            explanation = "Recovery here is small on purpose. The app is reducing pressure before the day turns into catch-up theater."
+        case .drifted:
+            title = "Recovery Bloom"
+            subtitle = "The day can still recover through one believable move."
+            explanation = "The safer path is shown first, and the prior plan stays visible only as background context."
+        case .overloaded:
+            title = "Lighten today"
+            subtitle = "The day needs fewer simultaneous asks before effort goes up."
+            explanation = "This is not a failure state. The system is narrowing the day so the next move feels real again."
+        case .recovering:
+            title = "Stay in the recovery lane"
+            subtitle = "Use one gentle move to stabilize the rest of the day."
+            explanation = "The bloom keeps the next step singular so recovery feels relieving instead of corrective."
+        case .stable, .lowData, .noPlan:
+            return nil
+        }
+
+        return TodayRecoveryBloomState(
+            title: title,
+            subtitle: subtitle,
+            explanation: explanation,
+            options: options
+        )
+    }
+
+    func recoveryOptions(
+        for posture: TodayDayPosture,
+        focus: TodayFocusState,
+        freeTime: TodayFreeTimeState
+    ) -> [TodayRecoveryOptionState] {
+        let actions = focus.primaryActionsForRecovery + freeTime.opportunities.compactMap(\.action)
+        var options: [TodayRecoveryOptionState] = []
+
+        func append(_ action: TodayInlineAction?, title: String? = nil, detail: String, state: AmbitionVisualState? = nil) {
+            guard let action else { return }
+            let resolvedTitle = title ?? action.title
+            guard options.contains(where: { $0.action.id == action.id || $0.title == resolvedTitle }) == false else { return }
+            options.append(
+                TodayRecoveryOptionState(
+                    id: "\(action.kind.rawValue)-\(resolvedTitle)",
+                    title: resolvedTitle,
+                    detail: detail,
+                    state: state ?? action.state,
+                    action: action
+                )
+            )
+        }
+
+        append(actions.first(where: { $0.kind == .split }), title: "Smaller version", detail: "Shrink the next move until it feels safe to start.", state: .selected)
+        append(actions.first(where: { $0.kind == .complete || $0.kind == .startFocus }), title: "Safest next move", detail: "If the current step is still believable, stay with the calmest useful action.", state: .success)
+        append(actions.first(where: { $0.kind == .reschedule || $0.kind == .defer }), title: "Reschedule gently", detail: "Move the work without turning the day into a failure narrative.", state: .default)
+        append(actions.first(where: { $0.kind == .protectLater }), title: "Protect later", detail: "Preserve one cleaner block in Plan instead of squeezing it here.", state: .default)
+        append(
+            TodayInlineAction(
+                kind: .openPlan,
+                title: "Accept today's shape",
+                systemImage: "calendar",
+                state: .default,
+                target: actions.first?.target ?? TodayActionTarget()
+            ),
+            detail: "Let the rest of the day stay lighter and carry the shaping into Plan."
+        )
+
+        return Array(options.prefix(4))
+    }
+
+    func makeFocusScreenlet(
+        entryContext: TodayEntryContext,
+        focus: TodayFocusState,
+        posture: TodayDayPosture,
+        shellSummary: GoalShellSummaryState?
+    ) -> TodayFocusScreenletState? {
+        guard entryContext == .focus else { return nil }
+        let fallbackAction = TodayInlineAction(
+            kind: .openPlan,
+            title: "Protect in Plan",
+            systemImage: "calendar",
+            state: .selected,
+            target: TodayActionTarget()
+        )
+        let primary = focus.primaryActionsForRecovery.first(where: { $0.kind != .startFocus }) ?? fallbackAction
+
+        let title: String
+        let subtitle: String
+        switch focus {
+        case let .planned(state):
+            title = state.title
+            subtitle = state.reason
+        case let .starter(state):
+            title = state.title
+            subtitle = state.reassurance
+        case let .clarification(state):
+            title = state.title
+            subtitle = state.subtitle
+        case let .blocked(state):
+            title = state.title
+            subtitle = state.nextBestAction
+        case let .empty(state):
+            title = state.title
+            subtitle = state.message
+        }
+
+        let detail = posture == .stable
+            ? "Focus is narrowed to one move so the rest of Today can stay quiet."
+            : "Focus is being used as a calmer lane back into the day."
+
+        return TodayFocusScreenletState(
+            title: title,
+            subtitle: subtitle,
+            detail: detail,
+            primaryAction: primary,
+            secondaryActions: Array(focus.primaryActionsForRecovery.filter { $0.id != primary.id && $0.kind != .startFocus }.prefix(2)),
+            trustWhisper: shellSummary.map {
+                TodayTrustWhisperState(
+                    title: "Based on",
+                    detail: $0.explanationSummary,
+                    state: .selected
+                )
+            }
+        )
     }
 
     func deduplicated(_ actions: [TodayInlineAction]) -> [TodayInlineAction] {
@@ -1215,7 +1601,7 @@ private extension RepositoryBackedTodayService {
                 body: explanation,
                 state: .selected
             )
-        case .openDetail, .openPlan, .protectLater, .dismissCelebration:
+        case .startFocus, .openDetail, .openPlan, .protectLater, .dismissCelebration:
             break
         }
 
@@ -1840,6 +2226,8 @@ private extension RepositoryBackedTodayService {
 
     func rescheduleTrigger(for kind: TodayActionKind) -> RescheduleTrigger? {
         switch kind {
+        case .startFocus:
+            return nil
         case .defer:
             return .delay
         case .reschedule:
@@ -1855,6 +2243,8 @@ private extension RepositoryBackedTodayService {
 
     func note(for kind: TodayActionKind, step: Step) -> String {
         switch kind {
+        case .startFocus:
+            return "Started focus from Today."
         case .complete:
             return "Completed from Today."
         case .defer:
@@ -2037,5 +2427,33 @@ private extension RepositoryBackedTodayService {
             return "\"\(title)\" was added to Calendar. The day looks tight around that block."
         }
         return "\"\(title)\" was added to Calendar."
+    }
+}
+
+private extension TodayFocusState {
+    var shellSummary: GoalShellSummaryState? {
+        switch self {
+        case let .planned(state):
+            return state.shellSummary
+        case let .starter(state):
+            return state.shellSummary
+        case .clarification, .blocked, .empty:
+            return nil
+        }
+    }
+
+    var primaryActionsForRecovery: [TodayInlineAction] {
+        switch self {
+        case let .planned(state):
+            return state.actions
+        case let .starter(state):
+            return state.actions
+        case let .clarification(state):
+            return state.actions
+        case let .blocked(state):
+            return state.actions
+        case let .empty(state):
+            return state.actions
+        }
     }
 }

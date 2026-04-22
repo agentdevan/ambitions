@@ -20,9 +20,9 @@ This program does **not** rewrite the completed hardening wave.
 Live queue truth in the current repo:
 
 - Batch 38 — Completed
-- Batch 39 — Active
-- Batches 40-59 — Queued
-- the front-end transformation program is active as a canon/control-file program beginning at **Batch 39**
+- Batch 44 — Active
+- Batches 45-59 — Queued
+- the front-end transformation program is active in implementation at **Batch 44**
 
 Batch 39 is a docs-only foundation batch.
 It makes the transformation program explicit enough to guide later implementation batches without authorizing shell implementation, route rewiring, or surface redesign work ahead of Batch 40.

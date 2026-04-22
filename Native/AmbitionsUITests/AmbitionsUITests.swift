@@ -222,6 +222,7 @@ final class AmbitionsUITests: XCTestCase {
         let primaryAction = app.buttons["today.hero.primary-action"]
         XCTAssertTrue(primaryAction.waitForExistence(timeout: 10))
         XCTAssertTrue(app.descendants(matching: .any)["today.support-card"].waitForExistence(timeout: 10))
+        XCTAssertTrue(app.descendants(matching: .any)["today.support.time-aperture"].waitForExistence(timeout: 10))
     }
 
     func testQuickRecoveryAndQuickFocusReturnToTodayWithExplicitReentry() throws {
@@ -239,6 +240,7 @@ final class AmbitionsUITests: XCTestCase {
 
         XCTAssertTrue(app.descendants(matching: .any)["today.screen"].waitForExistence(timeout: 10))
         XCTAssertTrue(app.descendants(matching: .any)["today.hero.reentry"].waitForExistence(timeout: 10))
+        XCTAssertTrue(app.descendants(matching: .any)["today.support.recovery-bloom"].waitForExistence(timeout: 10))
 
         let reopenedCommandButton = shellCommandButton(in: app)
         XCTAssertTrue(reopenedCommandButton.waitForExistence(timeout: 10))
@@ -249,6 +251,20 @@ final class AmbitionsUITests: XCTestCase {
 
         XCTAssertTrue(app.descendants(matching: .any)["today.screen"].waitForExistence(timeout: 10))
         XCTAssertTrue(app.descendants(matching: .any)["today.hero.reentry"].waitForExistence(timeout: 10))
+        XCTAssertTrue(app.descendants(matching: .any)["today.support.focus-screenlet"].waitForExistence(timeout: 10))
+    }
+
+    func testTodayStartFocusCanOpenBoundedFocusScreenlet() throws {
+        let app = makeApp(bootstrapMode: "demo")
+        app.launch()
+
+        XCTAssertTrue(waitForTodayScreenReady(in: app))
+        let startFocus = app.buttons["today.hero.primary-action"]
+        XCTAssertTrue(startFocus.waitForExistence(timeout: 10))
+        XCTAssertEqual(startFocus.label, "Start focus")
+        startFocus.tap()
+
+        XCTAssertTrue(app.descendants(matching: .any)["today.support.focus-screenlet"].waitForExistence(timeout: 10))
     }
 
     func testTodayCanHandOffToGoalDetail() throws {
@@ -332,14 +348,17 @@ final class AmbitionsUITests: XCTestCase {
     }
 
     private func todayGoalDetailButton(in app: XCUIApplication) -> XCUIElement {
+        let heroPrimary = app.buttons["today.hero.primary-action"]
+        if heroPrimary.waitForExistence(timeout: 2),
+           ["Answer", "Open detail", "Ask for help"].contains(heroPrimary.label) {
+            return heroPrimary
+        }
+
         let directQueries = [
             app.buttons.matching(NSPredicate(format: "identifier BEGINSWITH %@", "today.hero.primary-action.openDetail.")).firstMatch,
             app.buttons.matching(NSPredicate(format: "identifier BEGINSWITH %@", "today.hero.primary-action.askForHelp.")).firstMatch,
             app.buttons.matching(NSPredicate(format: "identifier BEGINSWITH %@", "today.action.openDetail.")).firstMatch,
-            app.buttons.matching(NSPredicate(format: "identifier BEGINSWITH %@", "today.action.askForHelp.")).firstMatch,
-            app.buttons["Answer"],
-            app.buttons["Open detail"],
-            app.buttons["Ask for help"]
+            app.buttons.matching(NSPredicate(format: "identifier BEGINSWITH %@", "today.action.askForHelp.")).firstMatch
         ]
 
         for candidate in directQueries where candidate.waitForExistence(timeout: 2) {

@@ -77,8 +77,9 @@ Batch 39 is completed as the post-hardening transformation canon/control-file fo
 Batch 40 is completed as the canonical shell/navigation architecture batch for the post-hardening front-end transformation program.
 Batch 41 is completed as the shared-system design batch for the front-end transformation program.
 Batch 42 is completed as the shell-owned global command, compose, capture, and Memory Lens foundation batch.
-Batch 43 is now the active batch.
-Batches 44-59 remain queued future work.
+Batch 44 is completed as the Today rebuild II batch for time aperture, recovery bloom, and current-day logic polish.
+Batch 45 is now the active batch.
+Batches 46-59 remain queued future work.
 Use the canonical program doc plus the per-batch docs in [batches/](batches/README.md) when working inside this program.
 
 | Batch | Name | Status | Notes |
@@ -88,8 +89,8 @@ Use the canonical program doc plus the per-batch docs in [batches/](batches/READ
 | 41 | Front-End Transformation 02 / Design system, materials, motion engine, and controls | Completed | Landed the shared production design system foundation: expanded dark-first/light-parity tokens, curated accent families, reusable material/layering roles, canonical controls, semantic motion/reduced-motion primitives, async-state visuals, bounded Profile appearance foundations, and token-driven widget/previews parity. Validated with `xcodegen generate`, native simulator build, targeted persistence/profile tests, full `AmbitionsTests`, full `AmbitionsUITests`, and manual human review across the Batch 41 proof surfaces. |
 | 42 | Front-End Transformation 03 / Global compose, search, capture, and command surface | Completed | Landed the first real shell-owned command system on top of the Batch 40 shell and Batch 41 shared design language: structured command/overlay routing, Quiet Command Sheet and Memory Lens foundations, shell-owned create-goal and quick-capture entry, canonical quick-open routing, and normalized external command entry seams. Validated with `xcodegen generate`, native simulator build, targeted command/routing tests, full `AmbitionsTests`, and manual human review confirming shell command, Memory Lens, canonical routing, create-goal, quick-capture, and regression proof without pulling Batch 43 Today rebuild or Batch 46 Strategy Composer redesign forward. |
 | 43 | Front-End Transformation 04 / Today rebuild I - living hero, now state, and action model | Completed | Rebuilt Today into a hero-first flagship execution surface with dominant truth, Now/Next framing, fixed-versus-flexible support compression, shell-aware re-entry, and bounded Batch 43 action routing. Validated with `xcodegen generate`, native simulator build, targeted Today shell/UI proof, full `AmbitionsTests`, and direct simulator/a11y closeout without shipping Time Aperture, full Recovery Bloom, or a visible Continuity Ribbon. |
-| 44 | Front-End Transformation 05 / Today rebuild II - time aperture, recovery bloom, and day logic | Active | Completes the Today rebuild. |
-| 45 | Front-End Transformation 06 / Goals rebuild I - direction board and horizon ladder | Queued | Goals overview rebuild. |
+| 44 | Front-End Transformation 05 / Today rebuild II - time aperture, recovery bloom, and day logic | Completed | Completed the Today rebuild by layering Time Aperture, Recovery Bloom, calm day-pressure/open-window guidance, bounded focus re-entry continuity, and Today-specific trust whisper/support treatment onto the Batch 43 hero-first structure. Validated with `xcodegen generate`, native simulator build, isolated Today UI proofs for hero dominance, quick recovery/quick focus re-entry, Goal Detail handoff, and Plan handoff, full `AmbitionsTests` (`363`), and a manual seven-state simulator audit using deterministic preview Today scenarios. |
+| 45 | Front-End Transformation 06 / Goals rebuild I - direction board and horizon ladder | Active | Goals overview rebuild. |
 | 46 | Front-End Transformation 07 / Goal intake and Strategy Composer | Queued | Goal creation and setup redesign. |
 | 47 | Front-End Transformation 08 / Goal Detail rebuild I - strategic chamber and path filmstrip | Queued | Goal Detail first-layer rebuild. |
 | 48 | Front-End Transformation 09 / Goal Detail rebuild II - trust whisper, correction, audit, and memory | Queued | Goal Detail trust and memory layers. |

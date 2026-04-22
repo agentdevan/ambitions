@@ -49,6 +49,7 @@ final class AppNavigationModel {
     var planPath: [PlanRouteTarget]
     var insightsPath: [InsightsRouteTarget]
     var todayEntryContext: TodayEntryContext
+    var pendingTodayEntryContext: TodayEntryContext?
     var activeOverlay: ShellOverlayState?
     var lastExternalRoute: AppExternalRoute?
     var lastExternalRouteSource: AppExternalRouteSource?
@@ -59,6 +60,7 @@ final class AppNavigationModel {
         planPath = []
         insightsPath = []
         todayEntryContext = .standard
+        pendingTodayEntryContext = nil
         activeOverlay = nil
         lastExternalRoute = nil
         lastExternalRouteSource = nil
@@ -187,6 +189,16 @@ final class AppNavigationModel {
 
     func presentCreateGoal(source: ShellCommandEntrySource) {
         activeOverlay = .createGoal(entrySource: source)
+    }
+
+    func queueTodaySelectionAfterOverlayDismiss(entryContext: TodayEntryContext) {
+        pendingTodayEntryContext = entryContext
+    }
+
+    func takePendingTodayEntryContext() -> TodayEntryContext? {
+        let context = pendingTodayEntryContext
+        pendingTodayEntryContext = nil
+        return context
     }
 
     func dismissOverlay() {

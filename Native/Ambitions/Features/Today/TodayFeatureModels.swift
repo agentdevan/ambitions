@@ -47,6 +47,7 @@ enum TodayDayPosture: String, Sendable {
 }
 
 enum TodayActionKind: String, Sendable {
+    case startFocus
     case complete
     case `defer`
     case split
@@ -191,6 +192,9 @@ struct TodayMomentumStripState: Sendable {
 }
 
 struct TodaySupportLayerState: Sendable {
+    let timeAperture: TodayTimeApertureState
+    let recoveryBloom: TodayRecoveryBloomState?
+    let focusScreenlet: TodayFocusScreenletState?
     let fixedCommitments: TodayFixedCommitmentsState
     let flexibleRoom: TodayFlexibleRoomState
     let momentum: TodayMomentumStripState
@@ -328,6 +332,58 @@ struct TodayOpportunityState: Identifiable, Sendable {
     let timingLabel: String
     let state: AmbitionVisualState
     let action: TodayInlineAction?
+}
+
+struct TodayDayPressureState: Sendable {
+    let title: String
+    let detail: String
+    let label: String
+    let state: AmbitionVisualState
+}
+
+struct TodayOpenWindowState: Identifiable, Sendable {
+    let id: String
+    let title: String
+    let subtitle: String
+    let timingLabel: String
+    let state: AmbitionVisualState
+    let action: TodayInlineAction?
+}
+
+struct TodayTimeApertureState: Sendable {
+    let title: String
+    let subtitle: String
+    let pressure: TodayDayPressureState
+    let windows: [TodayOpenWindowState]
+    let emptyMessage: String?
+    let bestUseTitle: String
+    let bestUseDetail: String
+    let bestUseAction: TodayInlineAction?
+    let trustWhisper: TodayTrustWhisperState?
+}
+
+struct TodayRecoveryOptionState: Identifiable, Sendable {
+    let id: String
+    let title: String
+    let detail: String
+    let state: AmbitionVisualState
+    let action: TodayInlineAction
+}
+
+struct TodayRecoveryBloomState: Sendable {
+    let title: String
+    let subtitle: String
+    let explanation: String
+    let options: [TodayRecoveryOptionState]
+}
+
+struct TodayFocusScreenletState: Sendable {
+    let title: String
+    let subtitle: String
+    let detail: String
+    let primaryAction: TodayInlineAction
+    let secondaryActions: [TodayInlineAction]
+    let trustWhisper: TodayTrustWhisperState?
 }
 
 struct TodayFreeTimeState: Sendable {
