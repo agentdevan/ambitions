@@ -38,6 +38,42 @@ final class ExternalRoutingTests: XCTestCase {
         XCTAssertEqual(route, .openPlanRoute(.capturesInbox))
     }
 
+    func testDeepLinkTranslatorParsesCommandOverlayRoute() throws {
+        let translator = AppExternalRouteTranslator()
+        let url = try XCTUnwrap(URL(string: "ambitions://overlay/quiet-command-sheet?intent=quick_capture"))
+
+        let route = translator.route(fromDeepLink: url)
+
+        XCTAssertEqual(
+            route,
+            .presentOverlay(
+                .commandSheet(
+                    intent: .quickCapture,
+                    entrySource: .deepLink
+                )
+            )
+        )
+    }
+
+    func testDeepLinkTranslatorParsesMemoryLensOverlayRoute() throws {
+        let translator = AppExternalRouteTranslator()
+        let url = try XCTUnwrap(URL(string: "ambitions://overlay/memory-lens?intent=open_goal&q=career"))
+
+        let route = translator.route(fromDeepLink: url)
+
+        XCTAssertEqual(
+            route,
+            .presentOverlay(
+                .memoryLens(
+                    intent: .openGoal,
+                    entrySource: .deepLink,
+                    presentationContext: .recall,
+                    query: "career"
+                )
+            )
+        )
+    }
+
     func testDeepLinkTranslatorFallsBackToGenericExternalEntry() throws {
         let translator = AppExternalRouteTranslator()
         let url = try XCTUnwrap(URL(string: "ambitions://future-entry/new-surface?foo=bar"))
@@ -92,6 +128,19 @@ final class ExternalRoutingTests: XCTestCase {
         XCTAssertEqual(route, .openPlanRoute(.capturesInbox))
     }
 
+    func testWidgetTranslatorRoutesOverlayPayload() {
+        let translator = AppExternalRouteTranslator()
+
+        let route = translator.route(
+            fromWidget: AppWidgetRoutingPayload(
+                action: "open-memory-lens",
+                values: ["overlay": "memory-lens", "intent": "memory_lens"]
+            )
+        )
+
+        XCTAssertEqual(route, .presentOverlay(.memoryLens(entrySource: .widget)))
+    }
+
     func testLegacyTabPayloadsStillParseForCompatibility() {
         let translator = AppExternalRouteTranslator()
 
@@ -111,13 +160,16 @@ final class ExternalRoutingTests: XCTestCase {
         let todayURL = try XCTUnwrap(translator.deepLinkURL(for: .openTab(.today)))
         let goalURL = try XCTUnwrap(translator.deepLinkURL(for: .openGoalDetail(goalID: "goal-123")))
         let capturesURL = try XCTUnwrap(translator.deepLinkURL(for: .openPlanRoute(.capturesInbox)))
+        let memoryURL = try XCTUnwrap(translator.deepLinkURL(for: .presentOverlay(.memoryLens(entrySource: .deepLink))))
 
         XCTAssertEqual(todayURL.absoluteString, "ambitions://tab/today")
         XCTAssertEqual(goalURL.absoluteString, "ambitions://goal/goal-123")
         XCTAssertEqual(capturesURL.absoluteString, "ambitions://captures/inbox")
+        XCTAssertEqual(memoryURL.absoluteString, "ambitions://overlay/memory-lens?intent=memory_lens")
         XCTAssertEqual(translator.route(fromDeepLink: todayURL), .openTab(.today))
         XCTAssertEqual(translator.route(fromDeepLink: goalURL), .openGoalDetail(goalID: "goal-123"))
         XCTAssertEqual(translator.route(fromDeepLink: capturesURL), .openPlanRoute(.capturesInbox))
+        XCTAssertEqual(translator.route(fromDeepLink: memoryURL), .presentOverlay(.memoryLens(entrySource: .deepLink)))
     }
 
     func testNotificationAndWidgetPayloadsUseSharedRoutePayloadShape() {
@@ -175,6 +227,15 @@ final class ExternalRoutingTests: XCTestCase {
         XCTAssertEqual(payload["tab"], AppTab.plan.rawValue)
     }
 
+    func testOverlayPayloadCarriesIntentForCanonicalNormalization() {
+        let translator = AppExternalRouteTranslator()
+        let payload = translator.routePayload(for: .presentOverlay(.commandSheet(intent: .quickCapture, entrySource: .appIntent)))
+
+        XCTAssertEqual(payload["surface"], "overlay")
+        XCTAssertEqual(payload["overlay"], "quiet-command-sheet")
+        XCTAssertEqual(payload["intent"], "quick_capture")
+    }
+
     @MainActor
     func testRouterDispatchesGoalDetailToExistingNavigationModel() {
         let navigation = AppNavigationModel(selectedTab: .today)
@@ -227,5 +288,16 @@ final class ExternalRoutingTests: XCTestCase {
         XCTAssertEqual(navigation.selectedTab, .today)
         XCTAssertTrue(navigation.goalsPath.isEmpty)
         XCTAssertEqual(navigation.lastExternalRouteSource, .deepLink)
+    }
+
+    @MainActor
+    func testRouterDispatchesOverlayIntoStructuredShellState() {
+        let navigation = AppNavigationModel(selectedTab: .today)
+        let router = DefaultAppExternalRouter(navigation: navigation)
+
+        router.dispatch(.presentOverlay(.memoryLens(entrySource: .appIntent)), source: .deepLink)
+
+        XCTAssertEqual(navigation.activeOverlay?.kind, .memoryLens)
+        XCTAssertEqual(navigation.activeOverlay?.intent, .memoryLens)
     }
 }

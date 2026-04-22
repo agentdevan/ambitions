@@ -86,7 +86,7 @@ struct TodayScreen: View {
             if showsNavigationChrome {
                 ToolbarItem(placement: .topBarTrailing) {
                     Button {
-                        container.navigation.openCapturesInbox()
+                        container.commandRouter.route(to: .planRoute(.capturesInbox), source: .shellUtility)
                     } label: {
                         Label("Captures", systemImage: AppTab.captures.systemImage)
                     }
@@ -120,6 +120,15 @@ struct TodayScreen: View {
                 goalID: action.target.goalID,
                 draftID: action.target.draftID,
                 launchContext: action.kind == .askForHelp ? .help : .standard
+            )
+            return
+        }
+
+        if action.kind == .quickLog {
+            container.commandRouter.presentCommandSheet(
+                intent: .quickCapture,
+                source: .todayQuickCapture,
+                presentationContext: .quickCapture
             )
             return
         }

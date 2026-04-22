@@ -114,7 +114,7 @@ struct CapturesScreen: View {
     @ViewBuilder
     private func captureActions(for capture: Capture, activeGoalOptions: [CaptureGoalOption]) -> some View {
         HStack(spacing: theme.spacing.sm) {
-            Button("Seed") {
+            Button("Save as seed") {
                 Task {
                     await viewModel.saveAsSeed(
                         id: capture.id,
@@ -126,7 +126,7 @@ struct CapturesScreen: View {
             .buttonStyle(.bordered)
             .disabled(capture.status.canTransition(to: .seed) == false)
 
-            Button("Goal") {
+            Button("New goal") {
                 Task {
                     if let target = await viewModel.turnIntoGoal(
                         captureID: capture.id,
@@ -140,7 +140,7 @@ struct CapturesScreen: View {
             .buttonStyle(.borderedProminent)
             .disabled(capture.status.canTransition(to: .goalBound) == false)
 
-            Menu("Attach") {
+            Menu("Attach to goal") {
                 if activeGoalOptions.isEmpty {
                     Text("No active goals")
                 } else {

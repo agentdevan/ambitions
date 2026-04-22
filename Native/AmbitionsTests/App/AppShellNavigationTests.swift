@@ -39,9 +39,27 @@ final class AppShellNavigationTests: XCTestCase {
     func testShellOverlayRoutesStayOwnedByTheShellLayer() {
         let navigation = AppNavigationModel(selectedTab: .today)
 
-        navigation.presentOverlay(.memoryLens)
+        navigation.presentMemoryLens(source: .shellUtility)
 
-        XCTAssertEqual(navigation.activeOverlay, .memoryLens)
+        XCTAssertEqual(navigation.activeOverlay?.kind, .memoryLens)
+        XCTAssertEqual(navigation.activeOverlay?.intent, .memoryLens)
+        XCTAssertEqual(navigation.activeOverlay?.entrySource, .shellUtility)
+        XCTAssertEqual(navigation.selectedTab, .today)
+    }
+
+    @MainActor
+    func testNavigationCanPresentCommandSheetWithStructuredIntentContext() {
+        let navigation = AppNavigationModel(selectedTab: .today)
+
+        navigation.presentCommandSheet(
+            intent: .quickCapture,
+            source: .todayQuickCapture,
+            presentationContext: .quickCapture
+        )
+
+        XCTAssertEqual(navigation.activeOverlay?.kind, .quietCommandSheet)
+        XCTAssertEqual(navigation.activeOverlay?.intent, .quickCapture)
+        XCTAssertEqual(navigation.activeOverlay?.presentationContext, .quickCapture)
         XCTAssertEqual(navigation.selectedTab, .today)
     }
 

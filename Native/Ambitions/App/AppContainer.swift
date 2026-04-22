@@ -22,6 +22,8 @@ final class AppContainer {
     let actionRouter: any AppActionRouting
     let externalRouter: any AppExternalRouting
     let externalActionService: any ExternalActionCommandExecuting
+    let commandRouter: any ShellCommandRouting
+    let memoryLensService: any MemoryLensServicing
 
     init(
         session: AppSession,
@@ -40,7 +42,9 @@ final class AppContainer {
         calendarRemindersService: any CalendarRemindersServicing,
         actionRouter: any AppActionRouting,
         externalRouter: any AppExternalRouting,
-        externalActionService: any ExternalActionCommandExecuting
+        externalActionService: any ExternalActionCommandExecuting,
+        commandRouter: any ShellCommandRouting,
+        memoryLensService: any MemoryLensServicing
     ) {
         self.session = session
         self.runtime = runtime
@@ -59,5 +63,7 @@ final class AppContainer {
         self.actionRouter = actionRouter
         self.externalRouter = externalRouter
         self.externalActionService = externalActionService
+        self.commandRouter = commandRouter
+        self.memoryLensService = memoryLensService
     }
 }

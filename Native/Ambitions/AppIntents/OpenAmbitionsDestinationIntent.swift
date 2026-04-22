@@ -5,6 +5,9 @@ enum AmbitionsAppShortcutDestination: String, CaseIterable, AppEnum {
     case today
     case plan
     case capturesInbox = "captures_inbox"
+    case command
+    case memoryLens = "memory_lens"
+    case quickCapture = "quick_capture"
 
     static var typeDisplayRepresentation: TypeDisplayRepresentation = "Destination"
     static var typeDisplayName: LocalizedStringResource = "Destination"
@@ -14,6 +17,9 @@ enum AmbitionsAppShortcutDestination: String, CaseIterable, AppEnum {
             .today: DisplayRepresentation(title: "Today"),
             .plan: DisplayRepresentation(title: "Plan"),
             .capturesInbox: DisplayRepresentation(title: "Captures inbox"),
+            .command: DisplayRepresentation(title: "Command"),
+            .memoryLens: DisplayRepresentation(title: "Memory Lens"),
+            .quickCapture: DisplayRepresentation(title: "Quick capture"),
         ]
     }
 
@@ -25,6 +31,12 @@ enum AmbitionsAppShortcutDestination: String, CaseIterable, AppEnum {
             return .openTab(.plan)
         case .capturesInbox:
             return .openPlanRoute(.capturesInbox)
+        case .command:
+            return .presentOverlay(.commandSheet(entrySource: .appIntent))
+        case .memoryLens:
+            return .presentOverlay(.memoryLens(entrySource: .appIntent))
+        case .quickCapture:
+            return .presentOverlay(.commandSheet(intent: .quickCapture, entrySource: .appIntent, presentationContext: .quickCapture))
         }
     }
 
@@ -36,6 +48,12 @@ enum AmbitionsAppShortcutDestination: String, CaseIterable, AppEnum {
             return "Plan"
         case .capturesInbox:
             return "Captures inbox"
+        case .command:
+            return "Command"
+        case .memoryLens:
+            return "Memory Lens"
+        case .quickCapture:
+            return "Quick capture"
         }
     }
 
@@ -46,7 +64,7 @@ enum AmbitionsAppShortcutDestination: String, CaseIterable, AppEnum {
 
 struct OpenAmbitionsDestinationIntent: AppIntent {
     static let title: LocalizedStringResource = "Open Ambitions destination"
-    static let description = IntentDescription("Open Today, Plan, or the Captures inbox in Ambitions.")
+    static let description = IntentDescription("Open canonical Ambitions destinations or shell-owned command surfaces.")
     static let openAppWhenRun = true
 
     @Parameter(title: "Destination")
@@ -98,6 +116,33 @@ struct AmbitionsShortcutsProvider: AppShortcutsProvider {
             ],
             shortTitle: "Open Captures",
             systemImageName: "tray.full"
+        )
+        AppShortcut(
+            intent: OpenAmbitionsDestinationIntent(destination: .command),
+            phrases: [
+                "Open Command in \(.applicationName)",
+                "Show Command in \(.applicationName)",
+            ],
+            shortTitle: "Open Command",
+            systemImageName: "plus.circle"
+        )
+        AppShortcut(
+            intent: OpenAmbitionsDestinationIntent(destination: .memoryLens),
+            phrases: [
+                "Open Memory Lens in \(.applicationName)",
+                "Show Memory Lens in \(.applicationName)",
+            ],
+            shortTitle: "Memory Lens",
+            systemImageName: "magnifyingglass"
+        )
+        AppShortcut(
+            intent: OpenAmbitionsDestinationIntent(destination: .quickCapture),
+            phrases: [
+                "Quick Capture in \(.applicationName)",
+                "Capture in \(.applicationName)",
+            ],
+            shortTitle: "Quick Capture",
+            systemImageName: "square.and.pencil"
         )
     }
 

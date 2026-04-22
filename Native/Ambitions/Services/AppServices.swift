@@ -55,6 +55,10 @@ protocol CaptureServicing: Sendable {
     func markCaptureArchived(id: String, now: Date) async throws -> Capture?
 }
 
+protocol MemoryLensServicing: Sendable {
+    func search(query: String, seedIntent: ShellCommandIntent?) async -> [MemoryLensResult]
+}
+
 protocol AppActionRouting {
     func handle(_ action: WidgetAction) async
 }

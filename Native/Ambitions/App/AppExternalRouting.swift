@@ -5,7 +5,7 @@ enum AppExternalRoute: Equatable, Sendable {
     case openGoalDetail(goalID: String)
     case openPlanRoute(PlanRouteTarget)
     case openInsightsRoute(InsightsRouteTarget)
-    case presentOverlay(ShellOverlayRoute)
+    case presentOverlay(ShellOverlayState)
     case genericExternalEntry(kind: String, payload: [String: String])
 }
 
@@ -83,6 +83,12 @@ struct AppExternalRouteTranslator {
             }
         }
 
+        if host == "overlay" || host == "command" || host == "compose" || host == "memory" || host == "search" {
+            if let overlay = overlayRoute(host: host, pathSegments: pathSegments, query: query) {
+                return .presentOverlay(overlay)
+            }
+        }
+
         return .genericExternalEntry(
             kind: "deeplink.\(host.isEmpty ? "unknown" : host)",
             payload: normalizedPayload(host: host, pathSegments: pathSegments, query: query)
@@ -100,6 +106,9 @@ struct AppExternalRouteTranslator {
         if payload.action == "open-captures-inbox" || payload.values["surface"] == "captures-inbox" {
             return .openPlanRoute(.capturesInbox)
         }
+        if let overlay = overlayRoute(values: payload.values, fallbackAction: payload.action, source: .notification) {
+            return .presentOverlay(overlay)
+        }
         return .genericExternalEntry(kind: "notification.\(payload.action)", payload: payload.values)
     }
 
@@ -113,6 +122,9 @@ struct AppExternalRouteTranslator {
         }
         if payload.action == "open-captures-inbox" || payload.values["surface"] == "captures-inbox" {
             return .openPlanRoute(.capturesInbox)
+        }
+        if let overlay = overlayRoute(values: payload.values, fallbackAction: payload.action, source: .widget) {
+            return .presentOverlay(overlay)
         }
         return .genericExternalEntry(kind: "widget.\(payload.action)", payload: payload.values)
     }
@@ -140,7 +152,26 @@ struct AppExternalRouteTranslator {
                 return URL(string: "ambitions://insights/history")
             }
         case let .presentOverlay(route):
-            return URL(string: "ambitions://overlay/\(route.rawValue)")
+            var components = URLComponents()
+            components.scheme = "ambitions"
+            components.host = "overlay"
+            components.path = "/\(route.kind.rawValue)"
+
+            var queryItems: [URLQueryItem] = []
+            if let intent = route.intent {
+                queryItems.append(URLQueryItem(name: "intent", value: intent.rawValue))
+            }
+            if route.query.isEmpty == false {
+                queryItems.append(URLQueryItem(name: "q", value: route.query))
+            }
+            if let goalID = route.goalID {
+                queryItems.append(URLQueryItem(name: "goalID", value: goalID))
+            }
+            if let captureID = route.captureID {
+                queryItems.append(URLQueryItem(name: "captureID", value: captureID))
+            }
+            components.queryItems = queryItems.isEmpty ? nil : queryItems
+            return components.url
         case let .genericExternalEntry(kind, payload):
             var components = URLComponents()
             components.scheme = "ambitions"
@@ -196,11 +227,24 @@ struct AppExternalRouteTranslator {
                 ExternalSurfaceActionPayload.Key.tab: AppTab.insights.rawValue
             ]
         case let .presentOverlay(route):
-            return [
+            var values: [String: String] = [
                 ExternalSurfaceActionPayload.Key.surface: "overlay",
-                "overlay": route.rawValue,
+                "overlay": route.kind.rawValue,
                 ExternalSurfaceActionPayload.Key.tab: AppTab.today.rawValue
             ]
+            if let intent = route.intent {
+                values["intent"] = intent.rawValue
+            }
+            if route.query.isEmpty == false {
+                values["query"] = route.query
+            }
+            if let goalID = route.goalID {
+                values["goalID"] = goalID
+            }
+            if let captureID = route.captureID {
+                values["captureID"] = captureID
+            }
+            return values
         case let .genericExternalEntry(kind, payload):
             var values = payload
             values["surface"] = kind
@@ -249,7 +293,7 @@ struct AppExternalRouteTranslator {
         case let .presentOverlay(overlay):
             var values = routePayload(for: route)
             values[ExternalSurfaceActionPayload.Key.action] = actionName.rawValue
-            values["overlay"] = overlay.rawValue
+            values["overlay"] = overlay.kind.rawValue
             return values
         case .genericExternalEntry:
             var values = routePayload(for: route)
@@ -269,6 +313,84 @@ struct AppExternalRouteTranslator {
             payload["path"] = pathSegments.joined(separator: "/")
         }
         return payload
+    }
+
+    private func overlayRoute(
+        host: String,
+        pathSegments: [String],
+        query: [String: String]
+    ) -> ShellOverlayState? {
+        let source: ShellCommandEntrySource = host == "compose" ? .appIntent : .deepLink
+        let first = (pathSegments.first ?? host).lowercased()
+        let intent = query["intent"].flatMap(ShellCommandIntent.init(rawValue:))
+
+        switch first {
+        case "quiet-command-sheet", "command":
+            return .commandSheet(
+                intent: intent,
+                entrySource: source
+            )
+        case "memory-lens", "memory", "search":
+            return .memoryLens(
+                intent: intent ?? .memoryLens,
+                entrySource: source,
+                presentationContext: .recall,
+                query: query["q"] ?? query["query"] ?? "",
+                goalID: query["goalID"],
+                captureID: query["captureID"]
+            )
+        case "create-goal", "goal":
+            return .createGoal(entrySource: source)
+        case "capture":
+            return .commandSheet(
+                intent: .quickCapture,
+                entrySource: source,
+                presentationContext: .quickCapture
+            )
+        default:
+            return nil
+        }
+    }
+
+    private func overlayRoute(
+        values: [String: String],
+        fallbackAction: String,
+        source: ExternalActionSource
+    ) -> ShellOverlayState? {
+        let entrySource: ShellCommandEntrySource = {
+            switch source {
+            case .notification: .notification
+            case .widget: .widget
+            case .deepLink: .deepLink
+            case .futureExternalPayload: .external
+            }
+        }()
+        let intent = values["intent"].flatMap(ShellCommandIntent.init(rawValue:))
+        let overlayName = (values["overlay"] ?? fallbackAction).lowercased()
+
+        switch overlayName {
+        case "quiet-command-sheet", "open-command", "command":
+            return .commandSheet(intent: intent, entrySource: entrySource)
+        case "memory-lens", "open-memory-lens", "memory":
+            return .memoryLens(
+                intent: intent ?? .memoryLens,
+                entrySource: entrySource,
+                presentationContext: .recall,
+                query: values["query"] ?? "",
+                goalID: values["goalID"],
+                captureID: values["captureID"]
+            )
+        case "create-goal":
+            return .createGoal(entrySource: entrySource)
+        case "quick-capture", "capture":
+            return .commandSheet(
+                intent: .quickCapture,
+                entrySource: entrySource,
+                presentationContext: .quickCapture
+            )
+        default:
+            return nil
+        }
     }
 }
 

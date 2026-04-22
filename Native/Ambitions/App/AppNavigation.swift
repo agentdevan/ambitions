@@ -41,14 +41,6 @@ enum InsightsRouteTarget: String, Hashable, Identifiable, Sendable {
     var id: String { rawValue }
 }
 
-enum ShellOverlayRoute: String, Hashable, Identifiable, Sendable {
-    case quietCommandSheet
-    case memoryLens
-    case globalCreateEntry
-
-    var id: String { rawValue }
-}
-
 @MainActor
 @Observable
 final class AppNavigationModel {
@@ -56,7 +48,7 @@ final class AppNavigationModel {
     var goalsPath: [GoalRouteTarget]
     var planPath: [PlanRouteTarget]
     var insightsPath: [InsightsRouteTarget]
-    var activeOverlay: ShellOverlayRoute?
+    var activeOverlay: ShellOverlayState?
     var lastExternalRoute: AppExternalRoute?
     var lastExternalRouteSource: AppExternalRouteSource?
 
@@ -148,8 +140,42 @@ final class AppNavigationModel {
         openInsightsRoute(.history)
     }
 
-    func presentOverlay(_ route: ShellOverlayRoute) {
+    func presentOverlay(_ route: ShellOverlayState) {
         activeOverlay = route
+    }
+
+    func presentCommandSheet(
+        intent: ShellCommandIntent? = nil,
+        source: ShellCommandEntrySource,
+        presentationContext: ShellCommandPresentationContext = .neutral
+    ) {
+        activeOverlay = .commandSheet(
+            intent: intent,
+            entrySource: source,
+            presentationContext: presentationContext
+        )
+    }
+
+    func presentMemoryLens(
+        intent: ShellCommandIntent? = .memoryLens,
+        source: ShellCommandEntrySource,
+        presentationContext: ShellCommandPresentationContext = .recall,
+        query: String = "",
+        goalID: String? = nil,
+        captureID: String? = nil
+    ) {
+        activeOverlay = .memoryLens(
+            intent: intent,
+            entrySource: source,
+            presentationContext: presentationContext,
+            query: query,
+            goalID: goalID,
+            captureID: captureID
+        )
+    }
+
+    func presentCreateGoal(source: ShellCommandEntrySource) {
+        activeOverlay = .createGoal(entrySource: source)
     }
 
     func dismissOverlay() {

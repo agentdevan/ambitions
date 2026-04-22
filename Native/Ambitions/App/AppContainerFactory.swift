@@ -67,6 +67,11 @@ enum AppContainerFactory {
             runtimeExecutor: runtime.actionExecutor,
             externalRouter: externalRouter
         )
+        let commandRouter = DefaultShellCommandRouter(
+            navigation: navigation,
+            captureService: runtime.captureService
+        )
+        let memoryLensService = DefaultMemoryLensService(repositories: repositories)
         await notificationService.registerCategories()
         await runtime.snapshotWriter.refresh(now: .now)
         await notificationService.refreshSchedule(now: .now)
@@ -88,7 +93,9 @@ enum AppContainerFactory {
             calendarRemindersService: calendarRemindersService,
             actionRouter: DefaultAppActionRouter(navigation: navigation),
             externalRouter: externalRouter,
-            externalActionService: externalActionService
+            externalActionService: externalActionService,
+            commandRouter: commandRouter,
+            memoryLensService: memoryLensService
         )
     }
 

@@ -123,6 +123,95 @@ final class AmbitionsUITests: XCTestCase {
         XCTAssertTrue(app.descendants(matching: .any)["captures.screen"].waitForExistence(timeout: 10))
     }
 
+    func testShellCommandSheetCanOpenAndNavigateToPlan() throws {
+        let app = makeApp(bootstrapMode: "preview")
+        app.launch()
+
+        let commandButton = app.buttons["shell.global-entry-button"]
+        XCTAssertTrue(commandButton.waitForExistence(timeout: 10))
+        commandButton.tap()
+
+        XCTAssertTrue(app.buttons["shell.command.action.open_week"].waitForExistence(timeout: 10))
+        app.buttons["shell.command.action.open_week"].tap()
+
+        XCTAssertTrue(app.tabBars.buttons["Plan"].waitForExistence(timeout: 10))
+        XCTAssertTrue(app.tabBars.buttons["Plan"].isSelected)
+        XCTAssertTrue(app.descendants(matching: .any)["plan.screen"].waitForExistence(timeout: 10))
+    }
+
+    func testShellCommandSheetSupportsQuickCaptureFlow() throws {
+        let app = makeApp(bootstrapMode: "preview")
+        app.launch()
+
+        let commandButton = app.buttons["shell.global-entry-button"]
+        XCTAssertTrue(commandButton.waitForExistence(timeout: 10))
+        commandButton.tap()
+
+        let quickCapture = app.buttons["shell.command.action.quick_capture"]
+        XCTAssertTrue(quickCapture.waitForExistence(timeout: 10))
+        quickCapture.tap()
+
+        let field = app.textFields["shell.command.capture-field"]
+        XCTAssertTrue(field.waitForExistence(timeout: 10))
+        field.tap()
+        field.typeText("UI shell capture")
+        dismissKeyboardIfNeeded(in: app)
+
+        let submit = app.buttons["shell.command.submit-capture-button"]
+        XCTAssertTrue(submit.waitForExistence(timeout: 10))
+        submit.tap()
+
+        XCTAssertTrue(app.tabBars.buttons["Plan"].waitForExistence(timeout: 10))
+        XCTAssertTrue(app.tabBars.buttons["Plan"].isSelected)
+        XCTAssertTrue(app.staticTexts["UI shell capture"].waitForExistence(timeout: 10))
+    }
+
+    func testShellOwnedCreateGoalFlowWorksFromCommandSheet() throws {
+        let app = makeApp(bootstrapMode: "preview")
+        app.launch()
+
+        let commandButton = app.buttons["shell.global-entry-button"]
+        XCTAssertTrue(commandButton.waitForExistence(timeout: 10))
+        commandButton.tap()
+
+        let createAction = app.buttons["shell.command.action.new_goal"]
+        XCTAssertTrue(createAction.waitForExistence(timeout: 10))
+        createAction.tap()
+
+        let titleField = app.textFields["create-goal.title-field"]
+        XCTAssertTrue(titleField.waitForExistence(timeout: 10))
+        titleField.tap()
+        titleField.typeText("Shell Goal")
+        dismissKeyboardIfNeeded(in: app)
+
+        let submitButton = scrollUntilButtonHittable("create-goal.submit-button", in: app)
+        XCTAssertTrue(submitButton.waitForExistence(timeout: 10))
+        submitButton.tap()
+
+        XCTAssertTrue(app.tabBars.buttons["Goals"].waitForExistence(timeout: 10))
+        XCTAssertTrue(app.tabBars.buttons["Goals"].isSelected)
+        XCTAssertTrue(app.descendants(matching: .any)["goals.creation-message"].waitForExistence(timeout: 30))
+    }
+
+    func testMemoryLensCanOpenAndRouteToCanonicalWeekDestination() throws {
+        let app = makeApp(bootstrapMode: "preview")
+        app.launch()
+
+        let memoryButton = app.buttons["shell.today.memory-lens-button"]
+        XCTAssertTrue(memoryButton.waitForExistence(timeout: 10))
+        memoryButton.tap()
+
+        let searchField = app.textFields["shell.memory-lens.search-field"]
+        XCTAssertTrue(searchField.waitForExistence(timeout: 10))
+
+        let result = app.buttons["shell.memory-lens.result.memory-week"]
+        XCTAssertTrue(result.waitForExistence(timeout: 10))
+        result.tap()
+
+        XCTAssertTrue(app.tabBars.buttons["Plan"].waitForExistence(timeout: 10))
+        XCTAssertTrue(app.tabBars.buttons["Plan"].isSelected)
+    }
+
     private func makeApp(bootstrapMode: String, launchURL: String? = nil) -> XCUIApplication {
         let app = XCUIApplication()
         app.launchEnvironment["AMBITIONS_BOOTSTRAP_MODE"] = bootstrapMode

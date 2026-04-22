@@ -76,8 +76,9 @@ Current wave status: Ambitions 2.0 is complete through Batch 34, the post-2.0 wh
 Batch 39 is completed as the post-hardening transformation canon/control-file foundation batch.
 Batch 40 is completed as the canonical shell/navigation architecture batch for the post-hardening front-end transformation program.
 Batch 41 is completed as the shared-system design batch for the front-end transformation program.
-Batch 42 is now the active batch.
-Batches 43-59 remain queued future work.
+Batch 42 is completed as the shell-owned global command, compose, capture, and Memory Lens foundation batch.
+Batch 43 is now the active batch.
+Batches 44-59 remain queued future work.
 Use the canonical program doc plus the per-batch docs in [batches/](batches/README.md) when working inside this program.
 
 | Batch | Name | Status | Notes |
@@ -85,8 +86,8 @@ Use the canonical program doc plus the per-batch docs in [batches/](batches/READ
 | 39 | Front-End Transformation 00 / Program canon and shell rewrite foundation | Completed | Activated the transformation canon against the live registry, added shared terminology and validation control files, clarified novelty ownership/tier references, tightened the Batch 39 vs. Batch 40 shell boundary, and formalized cross-device continuity doctrine; validated through docs-truth, link/file, consistency, and boundary review only. |
 | 40 | Front-End Transformation 01 / Shell reconsideration and navigation architecture | Completed | Landed the canonical shell-owned navigation/container architecture: five tabs remain, Captures now canonicalizes to Plan, shell-owned header/container and overlay seams are live, external landing ownership is normalized, and deterministic origin-surface Goal Detail routing proof is closed. No full surface redesigns, no Batch 41 design-system rollout, and no full Batch 42 command behavior shipped; OS-surface Shortcut/App Intent manual verification remains unclosed in this environment, and the last-turn full UITest rerun was not clean due simulator runner instability. |
 | 41 | Front-End Transformation 02 / Design system, materials, motion engine, and controls | Completed | Landed the shared production design system foundation: expanded dark-first/light-parity tokens, curated accent families, reusable material/layering roles, canonical controls, semantic motion/reduced-motion primitives, async-state visuals, bounded Profile appearance foundations, and token-driven widget/previews parity. Validated with `xcodegen generate`, native simulator build, targeted persistence/profile tests, full `AmbitionsTests`, full `AmbitionsUITests`, and manual human review across the Batch 41 proof surfaces. |
-| 42 | Front-End Transformation 03 / Global compose, search, capture, and command surface | Active | Cross-app command, compose, and recall foundation. |
-| 43 | Front-End Transformation 04 / Today rebuild I - living hero, now state, and action model | Queued | First half of the Today rebuild. |
+| 42 | Front-End Transformation 03 / Global compose, search, capture, and command surface | Completed | Landed the first real shell-owned command system on top of the Batch 40 shell and Batch 41 shared design language: structured command/overlay routing, Quiet Command Sheet and Memory Lens foundations, shell-owned create-goal and quick-capture entry, canonical quick-open routing, and normalized external command entry seams. Validated with `xcodegen generate`, native simulator build, targeted command/routing tests, full `AmbitionsTests`, and manual human review confirming shell command, Memory Lens, canonical routing, create-goal, quick-capture, and regression proof without pulling Batch 43 Today rebuild or Batch 46 Strategy Composer redesign forward. |
+| 43 | Front-End Transformation 04 / Today rebuild I - living hero, now state, and action model | Active | First half of the Today rebuild. |
 | 44 | Front-End Transformation 05 / Today rebuild II - time aperture, recovery bloom, and day logic | Queued | Completes the Today rebuild. |
 | 45 | Front-End Transformation 06 / Goals rebuild I - direction board and horizon ladder | Queued | Goals overview rebuild. |
 | 46 | Front-End Transformation 07 / Goal intake and Strategy Composer | Queued | Goal creation and setup redesign. |

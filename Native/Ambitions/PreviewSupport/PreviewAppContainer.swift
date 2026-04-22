@@ -19,6 +19,11 @@ enum PreviewAppContainerFactory {
         let captureService = StubCaptureService(captures: fixtures.captures)
         let goalsService = StubGoalsService()
         let runtime = makePreviewRuntime()
+        let commandRouter = DefaultShellCommandRouter(
+            navigation: navigation,
+            captureService: captureService
+        )
+        let memoryLensService = DefaultMemoryLensService(repositories: runtime.repositories)
         return AppContainer(
             session: AppSession(
                 source: .preview,
@@ -49,7 +54,9 @@ enum PreviewAppContainerFactory {
                 goalsService: goalsService,
                 captureService: captureService,
                 externalRouter: externalRouter
-            )
+            ),
+            commandRouter: commandRouter,
+            memoryLensService: memoryLensService
         )
     }
 

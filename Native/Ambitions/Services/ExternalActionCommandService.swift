@@ -185,6 +185,8 @@ final class DefaultExternalActionCommandService: ExternalActionCommandExecuting 
             return .openGoalDetail(goalID: goalID)
         case .openCapturesInbox:
             return .openPlanRoute(.capturesInbox)
+        case let .presentOverlay(overlay):
+            return .presentOverlay(overlay)
         }
     }
 }
