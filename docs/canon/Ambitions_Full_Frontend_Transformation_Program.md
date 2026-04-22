@@ -21,9 +21,10 @@ Live queue truth in the current repo:
 
 - Batch 38 — Completed
 - Batch 44 — Completed in registry history
-- Batch 45 — Active
-- Batches 46-59 — Queued
-- the front-end transformation program is active in implementation at **Batch 44**
+- Batch 45 — Completed
+- Batch 46 — Active
+- Batches 47-59 — Queued
+- the front-end transformation program is active in implementation at **Batch 46**
 
 Batch 39 is a docs-only foundation batch.
 It makes the transformation program explicit enough to guide later implementation batches without authorizing shell implementation, route rewiring, or surface redesign work ahead of Batch 40.
@@ -238,9 +239,9 @@ Implications:
 | 41 | Front-End Transformation 02 / Design system, materials, motion engine, and controls | Queued | Shared visual + motion language. |
 | 42 | Front-End Transformation 03 / Global compose, search, capture, and command surface | Queued | Contextual Global Compose and Memory Lens foundation. |
 | 43 | Front-End Transformation 04 / Today rebuild I — living hero, now state, and action model | Completed | First half of Today rebuild delivered as a hero-first flagship execution surface with bounded action/routing seams and no Batch 44 systems shipped. |
-| 44 | Front-End Transformation 05 / Today rebuild II — time aperture, recovery bloom, and day logic | Active | Completes Today redesign plus logic expansion. |
-| 45 | Front-End Transformation 06 / Goals rebuild I — direction board and horizon ladder | Active | Goals overview rebuild. |
-| 46 | Front-End Transformation 07 / Goal intake and Strategy Composer | Queued | Full create-goal and planning setup redesign. |
+| 44 | Front-End Transformation 05 / Today rebuild II — time aperture, recovery bloom, and day logic | Completed | Completes Today redesign plus logic expansion. |
+| 45 | Front-End Transformation 06 / Goals rebuild I — direction board and horizon ladder | Completed | Goals overview rebuild. |
+| 46 | Front-End Transformation 07 / Goal intake and Strategy Composer | Active | Full create-goal and planning setup redesign. |
 | 47 | Front-End Transformation 08 / Goal Detail rebuild I — strategic chamber and path filmstrip | Queued | Goal Detail composition phase 1. |
 | 48 | Front-End Transformation 09 / Goal Detail rebuild II — trust whisper, correction, audit, and memory | Queued | Goal Detail composition phase 2. |
 | 49 | Front-End Transformation 10 / Plan rebuild I — elastic week and pressure scrubber | Queued | Plan surface phase 1. |
@@ -523,7 +524,7 @@ Complete only when Today clearly feels like the product home base.
 ## Batch 44 — Front-End Transformation 05 / Today rebuild II — time aperture, recovery bloom, and day logic
 
 ### Status
-Active
+Completed
 
 ### Goal
 Complete Today by adding the novel time and recovery systems plus any required logic expansion.
@@ -570,7 +571,7 @@ Complete only when Today is fully rebuilt, not partially elevated.
 ## Batch 45 — Front-End Transformation 06 / Goals rebuild I — direction board and horizon ladder
 
 ### Status
-Active
+Completed
 
 ### Goal
 Rebuild Goals from a goal list into a living direction board with stronger health, pressure, and ambition structure.
@@ -611,12 +612,15 @@ Rebuild Goals from a goal list into a living direction board with stronger healt
 ### Completion Rule
 Complete only when Goals no longer reads like a list-first surface.
 
+### Completion Note
+Completed on April 22, 2026 after isolated UI reruns plus direct manual simulator review closed the remaining Batch 45 scanability and routing proofs. One combined closeout UI slice remained timing-sensitive around a Today quick-focus guard, but isolated reruns and manual human review were accepted as sufficient closeout evidence.
+
 ---
 
 ## Batch 46 — Front-End Transformation 07 / Goal intake and Strategy Composer
 
 ### Status
-Queued
+Active
 
 ### Goal
 Fully redesign goal creation, intake, ambiguity handling, and initial strategy shaping into a premium composition flow.

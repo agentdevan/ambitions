@@ -1,6 +1,6 @@
 ﻿# Batch 45 - Front-End Transformation 06 / Goals rebuild I - direction board and horizon ladder
 ## Status
-Active
+Completed
 ## Program
 Post-hardening Front-End Transformation Program
 ## Canon Source
@@ -21,7 +21,7 @@ Execution classification:
 - later core: Semantic Zoom for Goals, Continuity Ribbon
 ## Start Gate
 - Start only after Batch 38 is complete and stable.
-- Batch 45 is active in the live registry; follow the registry and dependency order for any later batches.
+- Batch 45 is completed in the live registry; Batch 46 now owns the active slot.
 ## Goal
 Rebuild Goals from a goal list into a living direction board with stronger health, pressure, and ambition structure.
 ## In Scope
@@ -54,5 +54,9 @@ Rebuild Goals from a goal list into a living direction board with stronger healt
 - UI tests for scanability-critical flows
 ## Completion Rule
 Complete only when Goals no longer reads like a list-first surface.
+
+## Completion Note
+- Completed on April 22, 2026 after the Goals surface no longer read as list-first and manual runtime review confirmed active, at-risk, stalled, low-signal, and lower-priority board states plus hero primary action, card-to-detail, create-goal, reduced-motion, practical accessibility/readability, and non-regressed Today usage.
+- One combined closeout UI slice remained timing-sensitive around the Today quick-focus guard, but isolated reruns plus human review were accepted as sufficient closeout evidence for Batch 45.
 
 ---
