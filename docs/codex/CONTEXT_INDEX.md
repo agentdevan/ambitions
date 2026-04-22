@@ -21,6 +21,43 @@ For non-trivial work, read these in order before planning:
 9. [BATCH_REGISTRY.md](BATCH_REGISTRY.md).
 10. Supporting docs linked from [docs/README.md](../README.md).
 
+## Minimal Read Set For Active Batch Execution
+
+Do not reread the full repo canon blindly on every pass.
+For active-batch work, use the narrowest truthful read set:
+
+### Plan Pass
+
+Read:
+
+1. [AGENTS.md](../../AGENTS.md)
+2. [MASTER_PRODUCT_SPEC.md](../../MASTER_PRODUCT_SPEC.md)
+3. the relevant canon roadmap/program files for the active wave
+4. the active batch doc
+5. [BATCH_REGISTRY.md](BATCH_REGISTRY.md)
+6. the relevant operation docs in [../../.codex/operations/](../../.codex/operations/README.md)
+
+### Implementation Pass
+
+Reread only:
+
+1. [AGENTS.md](../../AGENTS.md)
+2. [BATCH_REGISTRY.md](BATCH_REGISTRY.md)
+3. the active batch doc
+4. the specific design/canon files directly governing the touched surface
+5. the relevant operation docs
+
+### Closeout Pass
+
+Reread only:
+
+1. [BATCH_REGISTRY.md](BATCH_REGISTRY.md)
+2. the active batch doc
+3. touched program/control docs
+4. the relevant validation/signoff/flake operations docs
+
+If no scope or control-truth changed since the prior pass, do not restart from the full canonical stack.
+
 ## Precedence Model
 
 When sources conflict, use this precedence:
