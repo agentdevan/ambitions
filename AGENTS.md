@@ -28,6 +28,12 @@
 - Use a lightweight plan for narrow risky changes and a fuller `phase-executor` or `.codex/templates/*-plan.md` plan when the work spans multiple layers or files.
 - For non-trivial work, follow this loop: classify the task, choose the narrowest skill set, plan if risky, execute the smallest safe slice, self-check the result, then either continue, retry more narrowly, or stop and report the block.
 - Keep execution bounded. Prefer one grounded step at a time over batching unrelated edits across app, domain, persistence, docs, or config.
+- For post-hardening frontend transformation batches, follow `.codex/operations/batch-execution-protocol.md`, `.codex/operations/transformation-validation-matrix.md`, `.codex/operations/frontend-regression-pack.md`, `.codex/operations/manual-signoff-checklists.md`, and `.codex/operations/known-flakes.md`.
+- Frontend transformation batches default to a three-pass loop only: `plan`, `implement`, `closeout`. Do not widen to extra passes unless a real bug is found or a user-directed manual signoff decision is required.
+- Start every active-batch execution pass with narrow control-truth reconciliation for the active batch doc, registry, and any touched program-status wording before broader product work.
+- Use a touch budget. Name the primary files first, touch secondary files only when strictly required, and avoid opportunistic edits outside the active batch seam.
+- Prefer the focused regression pack plus batch-specific proof over full `AmbitionsUITests` for surface batches. Run the full UI suite only when the validation matrix calls for it or when focused proof indicates broader instability.
+- A timing-sensitive combined UI flake may be closed only when isolated reruns are green, manual signoff is explicit, the residual risk is documented, and the batch completion note states the caveat truthfully.
 - Retry only when the next attempt is narrower and informed by the last result. Do not repeat the same failed action blindly, and stop after a small number of grounded retries.
 - After meaningful changes, run the relevant generation, build, and test workflow when the environment supports it.
 - Do not claim validation that was not run.
