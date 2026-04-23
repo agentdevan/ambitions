@@ -1,4 +1,4 @@
-﻿# Batch 53 - Front-End Transformation 14 / Onboarding, first-run, permissions, education, and state systems
+﻿# Batch 53 - Front-End Transformation 14 / Progressive Intelligence Onboarding and Degraded-State Orchestrator
 ## Status
 Queued
 ## Program
@@ -14,9 +14,9 @@ Post-hardening Front-End Transformation Program
 - Start only after Batch 38 is complete and stable.
 - Do not activate or implement this batch early; follow the registry and dependency order.
 ## Goal
-Rebuild every first-run and system-state experience so Ambitions feels premium and intelligible from first launch onward.
+Rebuild first-run, permissions, education, and degraded-state experiences so Ambitions feels premium and intelligible from first launch onward.
 ## In Scope
-- onboarding redesign
+- Progressive Intelligence Onboarding redesign
 - first-run shell education
 - permission request sequencing redesign
 - create-first-goal onboarding redesign
@@ -29,6 +29,7 @@ Rebuild every first-run and system-state experience so Ambitions feels premium a
 - drift-return states
 - no-data / low-history reflection states
 - first-widget / first-shortcut / first-notification education patterns
+- Degraded-State Orchestrator framing across low-signal and degraded states
 ## Deferred, Not Excluded
 - full external-surface implementation details
 - future-device onboarding variants

@@ -16,6 +16,10 @@ Use [codex/CONTEXT_INDEX.md](codex/CONTEXT_INDEX.md) for source-of-truth precede
   Batching and work packaging.
 - [canon/Ambitions_Full_Frontend_Transformation_Program.md](canon/Ambitions_Full_Frontend_Transformation_Program.md)
   Queued post-hardening frontend transformation canon. Use with the registry; do not treat it as active work by itself.
+- [canon/Ambitions_Product_Addendum_Continuity_Reality_Execution.md](canon/Ambitions_Product_Addendum_Continuity_Reality_Execution.md)
+  Supporting canon addendum for top-level surface questions, mobile provenance, and consolidated platform-pillar language after Batch 48.
+- [canon/Ambitions_Frontend_Batches_49_60_Revised.md](canon/Ambitions_Frontend_Batches_49_60_Revised.md)
+  Supporting canon queue note for the revised queued Batch 49-60 frontend sequence.
 - [canon/design/README.md](canon/design/README.md)
   Canonical future frontend design-truth set for shell IA, screen architecture, motion, trust UX, copy, external surfaces, and cross-device roles.
 - [canon/design/Ambitions_Frontend_Transformation_Execution_Classification.md](canon/design/Ambitions_Frontend_Transformation_Execution_Classification.md)

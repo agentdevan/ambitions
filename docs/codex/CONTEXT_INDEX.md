@@ -74,6 +74,11 @@ When sources conflict, use this precedence:
 10. [BATCH_REGISTRY.md](BATCH_REGISTRY.md) for active work status.
 11. Supporting docs.
 
+Supporting canon docs that clarify the post-Batch-48 direction without replacing the canonical stack:
+
+- [../canon/Ambitions_Product_Addendum_Continuity_Reality_Execution.md](../canon/Ambitions_Product_Addendum_Continuity_Reality_Execution.md)
+- [../canon/Ambitions_Frontend_Batches_49_60_Revised.md](../canon/Ambitions_Frontend_Batches_49_60_Revised.md)
+
 ## Canonical Planning Stack
 
 These files are permanent canonical context and must stay in repo:

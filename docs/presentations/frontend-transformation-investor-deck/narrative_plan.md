@@ -4,8 +4,8 @@
 - Investors and strategic stakeholders
 
 ## Objective
-- Present the queued future front-end transformation roadmap from Batch 39 through Batch 59 as a polished, coherent, high-conviction product story
-- Stay anchored to the current repo truth: Batch 37 active, Batch 38 queued, future investor focus begins at Batch 39
+- Present the queued future front-end transformation roadmap from Batch 39 through Batch 60 as a polished, coherent, high-conviction product story
+- Stay anchored to the current repo truth: Batch 48 is completed, Batch 49 is active, Batch 50-60 are queued, and the investor-facing future queue begins after the current active batch
 
 ## Narrative Arc
 1. Establish the transformation as a real, fully defined roadmap rather than a loose redesign concept
@@ -17,7 +17,7 @@
 ## Slide List
 1. Cover
 2. Current roadmap status
-3. Roadmap overview from Batch 39 to Batch 59
+3. Roadmap overview from Batch 39 to Batch 60
 4. Batch 39 outcome
 5. Batch 40 outcome
 6. Batch 41 outcome
@@ -39,6 +39,7 @@
 22. Batch 57 outcome
 23. Batch 58 outcome
 24. Batch 59 outcome
+25. Batch 60 outcome
 
 ## Visual System
 - Warm paper background with dark editorial typography

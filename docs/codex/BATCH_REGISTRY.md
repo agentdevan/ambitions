@@ -81,8 +81,9 @@ Batch 44 is completed as the Today rebuild II batch for time aperture, recovery 
 Batch 45 is completed as the Goals rebuild I batch for direction board and horizon ladder.
 Batch 46 is completed.
 Batch 47 is completed.
+Batch 48 is completed.
 Batch 49 is now the active batch.
-Batches 49-59 remain queued future work.
+Batches 50-60 remain queued future work.
 Use the canonical program doc plus the per-batch docs in [batches/](batches/README.md) when working inside this program.
 
 | Batch | Name | Status | Notes |
@@ -96,15 +97,16 @@ Use the canonical program doc plus the per-batch docs in [batches/](batches/READ
 | 45 | Front-End Transformation 06 / Goals rebuild I - direction board and horizon ladder | Completed | Rebuilt Goals into a direction board with pressure-led hero truth, grouped active/pressure/recent-movement bands, a shallow Horizon Ladder, compressed board cards, preserved Goal Detail routing, and non-regressive create-goal entry. Validated with `xcodegen generate`, native simulator build, targeted Goals tests, full `AmbitionsTests` (`366`), isolated UI proofs for board load, hero primary action, card-to-detail routing, create-goal, shell-to-Plan, and Today regression guards, plus direct simulator signoff across active, at-risk, stalled, low-signal, lower-priority, reduced-motion, and practical readability checks. One combined closeout UI slice remained timing-sensitive around a Today quick-focus guard, but isolated reruns and manual human review were accepted as sufficient closeout evidence. |
 | 46 | Front-End Transformation 07 / Goal intake and Strategy Composer | Completed | Shipped the premium Goal Intake / Strategy Composer rebuild with shell-owned and Goals-owned create-goal entry, live clarification and strategy preview, bounded capture promotion continuity, and a fixed runtime preview-refresh path. Validated with `xcodegen generate`, native simulator build, targeted create-goal/setup tests, full `AmbitionsTests` (`370`), focused create-goal/capture UI proofs, closeout regression reruns, and explicit manual runtime signoff for shell entry, Goals entry, clarification/strategy flow, capture continuity, and practical reduced-motion/readability review. |
 | 47 | Front-End Transformation 08 / Goal Detail rebuild I - strategic chamber and path filmstrip | Completed | Rebuilt Goal Detail into a strategic first layer with path-filmstrip anchoring, targeted/manual closeout, and no Batch 48 trust-layer pull-forward. |
-| 48 | Front-End Transformation 09 / Goal Detail rebuild II - trust whisper, correction, audit, and memory | Completed | Completed Goal Detail’s calmer trust layer by adding a trust whisper bridge, subordinate explainability/correction/audit disclosures, and a more productized memory/history narrative while preserving the Batch 47 strategic chamber and filmstrip. Validated with `xcodegen generate`, native simulator build, targeted Goal Detail tests, full `AmbitionsTests` (`377`), focused Goal Detail/Goals/Today UI reruns, and direct simulator inspection; one new isolated disclosure UI proof remained harness-sensitive in this environment, and manual human approval was assumed for closeout per operator direction. |
-| 49 | Front-End Transformation 10 / Plan rebuild I - elastic week and pressure scrubber | Active | First half of the Plan rebuild. |
-| 50 | Front-End Transformation 11 / Plan rebuild II - habits, captures, weekly review, and shaping logic | Queued | Completes the Plan rebuild. |
-| 51 | Front-End Transformation 12 / Insights rebuild and reflection OS | Queued | Reflection and history system rebuild. |
-| 52 | Front-End Transformation 13 / Profile rebuild, Appearance Studio, and Trust Center | Queued | Profile, theming, and trust surfaces. |
-| 53 | Front-End Transformation 14 / Onboarding, first-run, permissions, education, and state systems | Queued | First-run and degraded-state experience rebuild. |
-| 54 | Front-End Transformation 15 / External surfaces I - widgets, Live Activities, notifications | Queued | Ambient and external surface implementation. |
-| 55 | Front-End Transformation 16 / External surfaces II - share extension, App Intents, shortcuts, routing | Queued | External creation and routing implementation. |
-| 56 | Front-End Transformation 17 / Cross-surface command, recall, and ambient coherence | Queued | Recall, command, and handoff coherence pass. |
-| 57 | Front-End Transformation 18 / iPad and Mac surface architecture and first implementation | Queued | Larger-screen continuity work begins. |
-| 58 | Front-End Transformation 19 / Watch and Apple TV ambient surface architecture and first implementation | Queued | Ambient future-device work begins. |
-| 59 | Front-End Transformation 20 / Finish-quality pass, accessibility, performance, and release polish | Queued | Final program closure and polish batch. |
+| 48 | Front-End Transformation 09 / Goal Detail rebuild II - trust whisper, correction, audit, and memory | Completed | Goal Detail trust and memory layers closed while preserving the strategic-first first screen and keeping deeper trust/memory material subordinate. |
+| 49 | Front-End Transformation 10 / Plan rebuild I - Reality Model, elastic week, and pressure scrubber | Active | First half of the Plan rebuild with week-structure truth and pressure shaping. |
+| 50 | Front-End Transformation 11 / Plan rebuild II - Execution Resilience, habits, captures, and review shaping | Queued | Completes the Plan rebuild by integrating resilience, habits, captures, and weekly review shaping. |
+| 51 | Front-End Transformation 12 / Insights rebuild and Reflection OS | Queued | Reflection and learning system rebuild. |
+| 52 | Front-End Transformation 13 / Profile rebuild, Appearance Studio, Trust Center, and Context Vault foundations | Queued | Profile, trust, appearance, and context-vault foundations. |
+| 53 | Front-End Transformation 14 / Progressive Intelligence Onboarding and Degraded-State Orchestrator | Queued | Onboarding, education, permissions, and degraded-state orchestration. |
+| 54 | Front-End Transformation 15 / State Continuity Mesh, sync trust, and real-time continuity contract | Queued | Sync-trust continuity layer before external-surface widening. |
+| 55 | Front-End Transformation 16 / External surfaces I - widgets, Live Activities, notifications, and Focus Screenlet | Queued | Ambient and glanceable external surface implementation. |
+| 56 | Front-End Transformation 17 / External surfaces II - share extension, App Intents, shortcuts, routing, and external creation | Queued | External creation, routing, and OS-surface productization. |
+| 57 | Front-End Transformation 18 / Cross-surface command, recall, and ambient coherence | Queued | Command, recall, provenance, and handoff coherence pass. |
+| 58 | Front-End Transformation 19 / iPad and Mac surface architecture and first implementation | Queued | Larger-screen continuity work begins. |
+| 59 | Front-End Transformation 20 / Watch and Apple TV ambient surface architecture and first implementation | Queued | Ambient future-device work begins. |
+| 60 | Front-End Transformation 21 / Finish-quality pass, accessibility, performance, and release polish | Queued | Final program closure and polish batch. |

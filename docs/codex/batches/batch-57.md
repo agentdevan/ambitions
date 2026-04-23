@@ -1,4 +1,4 @@
-﻿# Batch 57 - Front-End Transformation 18 / iPad and Mac surface architecture and first implementation
+﻿# Batch 57 - Front-End Transformation 18 / Cross-surface command, recall, and ambient coherence
 ## Status
 Queued
 ## Program
@@ -9,42 +9,41 @@ Post-hardening Front-End Transformation Program
 
 ## Design Truth References
 - [shell-ia-spec.md](../../canon/design/shell-ia-spec.md)
-- [screen-architecture-spec.md](../../canon/design/screen-architecture-spec.md)
-- [cross-device-surface-roles-spec.md](../../canon/design/cross-device-surface-roles-spec.md)
+- [trust-explainability-correction-spec.md](../../canon/design/trust-explainability-correction-spec.md)
+- [novel-interaction-systems-spec.md](../../canon/design/novel-interaction-systems-spec.md)
 ## Start Gate
 - Start only after Batch 38 is complete and stable.
 - Do not activate or implement this batch early; follow the registry and dependency order.
 ## Goal
-Begin future-platform implementation with coherent larger-screen versions of Ambitions.
+Complete the command and recall system across app, widgets, notifications, shortcuts, and future device surfaces.
 ## In Scope
-- iPad shell architecture
-- Mac shell architecture
-- larger-screen layout grammar
-- multi-pane patterns where useful
-- sidebar / tab / detail coexistence decisions
-- keyboard command model
-- larger-screen Strategy Composer refinements
-- larger-screen Plan workspace refinements
-- larger-screen Insights and Goal Detail patterns
-- cross-device continuity rules
-- first implementation pass for iPad and Mac surface set
+- Memory Lens full implementation
+- cross-surface recall patterns
+- universal command and recall presentation refinement
+- "what changed" flows
+- "why now" recall flows
+- recent correction and learning recall flows
+- handoff continuity between ambient surfaces and deep in-app destinations
+- command-history and return-entry refinements
+- coherence pass across compose, search, capture, and recall
+- shell / external / detail transition tuning
 ## Deferred, Not Excluded
-- Watch surfaces
-- Apple TV surfaces
+- larger-screen platform implementations
+- final finish-quality pass
 ## Dependency Rules
-- do not simply stretch the iPhone UI
-- larger screens must keep the same product philosophy
-- Mac and iPad should feel native while clearly part of Ambitions
+- recall should feel like mental relief, not archive search
+- command and recall must share one visual and interaction language
+- handoff clarity matters more than feature count
 ## Exit Criteria
-- iPad and Mac have coherent first implementations
-- multi-pane and keyboard interactions feel considered
-- cross-device continuity is real, not conceptual
+- command and recall are coherent everywhere
+- the app feels more like an external brain than a set of screens
+- cross-surface handoff is calm and obvious
 ## Validation
-- platform builds as applicable
-- targeted layout and interaction tests
-- shared logic regression tests
-- manual larger-screen audits
+- build
+- targeted cross-surface routing / recall tests
+- full AmbitionsTests
+- targeted UI tests
 ## Completion Rule
-Complete only when iPad and Mac feel like true Ambitions clients, not enlarged phone ports.
+Complete only when command and recall meaningfully raise the product's "external brain" feel.
 
 ---

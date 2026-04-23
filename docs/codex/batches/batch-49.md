@@ -1,6 +1,6 @@
-﻿# Batch 49 - Front-End Transformation 10 / Plan rebuild I - elastic week and pressure scrubber
+﻿# Batch 49 - Front-End Transformation 10 / Plan rebuild I - Reality Model, elastic week, and pressure scrubber
 ## Status
-Queued
+Active
 ## Program
 Post-hardening Front-End Transformation Program
 ## Canon Source
@@ -23,7 +23,7 @@ Execution classification:
 - Start only after Batch 38 is complete and stable.
 - Do not activate or implement this batch early; follow the registry and dependency order.
 ## Goal
-Rebuild Plan into a premium shaping workspace that makes week structure, room, and pressure legible without dense calendar energy.
+Rebuild Plan into a premium shaping workspace that makes week structure, room, pressure, and reality constraints legible without dense calendar energy.
 ## In Scope
 - Plan IA rewrite
 - Elastic Week View implementation
@@ -32,6 +32,7 @@ Rebuild Plan into a premium shaping workspace that makes week structure, room, a
 - stronger fixed / flexible / protected block treatment
 - open-window and available-capacity redesign
 - week-believability presentation redesign
+- Reality Model framing for week truth, room, and pressure
 - edit / patch / protect / lighten actions redesign
 - visual and motion system for week shaping
 - stronger relationship between Plan and active goals
@@ -40,7 +41,7 @@ Rebuild Plan into a premium shaping workspace that makes week structure, room, a
 - Split-Pane Thinking on iPhone after the base Plan workspace is stable and only in constrained shaping states
 - Habits and Captures integration into Plan
 - weekly review and habit-planning coupling
-- deeper plan-logic expansion
+- deeper execution-resilience shaping
 ## Dependency Rules
 - Plan must feel like a shaping workspace, not a calendar clone
 - density should expand and contract intentionally

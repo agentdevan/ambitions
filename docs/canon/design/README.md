@@ -6,6 +6,8 @@ It exists to remove interpretation drift from future implementation batches.
 Use these specs together with:
 
 - [../Ambitions_Full_Frontend_Transformation_Program.md](../Ambitions_Full_Frontend_Transformation_Program.md)
+- [../Ambitions_Product_Addendum_Continuity_Reality_Execution.md](../Ambitions_Product_Addendum_Continuity_Reality_Execution.md)
+- [../Ambitions_Frontend_Batches_49_60_Revised.md](../Ambitions_Frontend_Batches_49_60_Revised.md)
 - [../../../MASTER_PRODUCT_SPEC.md](../../../MASTER_PRODUCT_SPEC.md)
 - [../../codex/BATCH_REGISTRY.md](../../codex/BATCH_REGISTRY.md)
 
@@ -13,8 +15,9 @@ Use these specs together with:
 
 - These docs define future design truth. They do not activate future UI batches.
 - Batch 38 is completed.
-- Batch 39 is the active docs/control-file foundation batch.
-- Batches 40-59 remain queued future implementation work.
+- Batch 48 is completed in the registry.
+- Batch 49 is the active frontend implementation batch in the registry.
+- Batches 50-60 remain queued future implementation work.
 - Treat iPhone execution truth as primary unless a spec explicitly defines a future-platform role.
 - Prefer these docs over vague "premium" or "modern" interpretation when a future batch needs exact UI direction.
 - If a future implementation task conflicts with current shipping behavior, preserve shipping truth until the relevant frontend batch becomes active.

@@ -1,4 +1,4 @@
-﻿# Batch 56 - Front-End Transformation 17 / Cross-surface command, recall, and ambient coherence
+﻿# Batch 56 - Front-End Transformation 17 / External surfaces II - share extension, App Intents, shortcuts, routing, and external creation
 ## Status
 Queued
 ## Program
@@ -15,35 +15,34 @@ Post-hardening Front-End Transformation Program
 - Start only after Batch 38 is complete and stable.
 - Do not activate or implement this batch early; follow the registry and dependency order.
 ## Goal
-Complete the command and recall system across app, widgets, notifications, shortcuts, and future device surfaces.
+Fully implement the creation, entry, and routing surfaces outside the main app shell.
 ## In Scope
-- Memory Lens full implementation
-- cross-surface recall patterns
-- universal command and recall presentation refinement
-- “what changed” flows
-- “why now” recall flows
-- recent correction and learning recall flows
-- handoff continuity between ambient surfaces and deep in-app destinations
-- command-history and return-entry refinements
-- coherence pass across compose, search, capture, and recall
-- shell / external / detail transition tuning
+- share extension full implementation
+- share extension intake UX
+- App Intents full productization
+- App Shortcuts and shortcut discoverability
+- Spotlight and search landing refinement where supported
+- deep-link and handoff surface polish
+- external-create-to-internal-shell path refinement
+- routing language and transition continuity
+- shortcut-driven quick recovery / quick focus / quick capture / quick plan flows
+- external truth and permissions education
 ## Deferred, Not Excluded
-- larger-screen platform implementations
-- final finish-quality pass
+- iPad / Mac / Watch / Apple TV implementations
 ## Dependency Rules
-- recall should feel like mental relief, not archive search
-- command and recall must share one visual and interaction language
-- handoff clarity matters more than feature count
+- external entry points must land in canonical routes
+- share and shortcut flows should feel like the same OS as the main app
+- do not implement external affordances that create logic islands
 ## Exit Criteria
-- command and recall are coherent everywhere
-- the app feels more like an external brain than a set of screens
-- cross-surface handoff is calm and obvious
+- share extension is real and premium
+- App Intents and shortcuts are discoverable and useful
+- all major external entry points feel canonically aligned
 ## Validation
 - build
-- targeted cross-surface routing / recall tests
+- targeted extension / intent / routing tests
 - full AmbitionsTests
 - targeted UI tests
 ## Completion Rule
-Complete only when command and recall meaningfully raise the product’s “external brain” feel.
+Complete only when external creation and routing feel like first-class product behavior.
 
 ---

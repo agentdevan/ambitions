@@ -1,4 +1,4 @@
-﻿# Batch 59 - Front-End Transformation 20 / Finish-quality pass, accessibility, performance, and release polish
+﻿# Batch 59 - Front-End Transformation 20 / Watch and Apple TV ambient surface architecture and first implementation
 ## Status
 Queued
 ## Program
@@ -22,40 +22,34 @@ Post-hardening Front-End Transformation Program
 - Start only after Batch 38 is complete and stable.
 - Do not activate or implement this batch early; follow the registry and dependency order.
 ## Goal
-Close the transformation program with a whole-product finish pass that raises Ambitions to flagship release quality.
+Begin future ambient and room-scale implementations for Watch and Apple TV.
 ## In Scope
-- motion tuning across the whole app
-- microinteraction coherence pass
-- haptics consistency review
-- accessibility pass including Dynamic Type, VoiceOver, contrast, motion, target size, and hierarchy clarity
-- performance and scroll smoothness review
-- transition and state-change tuning
-- whole-product empty / loading / error consistency pass
-- regression closure for surface interactions
-- preview and screenshot truth pass
-- release-quality visual audit
-- polish for future-platform first implementations as available
+- Watch surface architecture
+- Apple TV surface architecture
+- Focus Screenlet watch adaptation
+- glance and confirm patterns for Watch
+- routine / reminder / momentum / quick-capture ambient patterns for Watch
+- Apple TV reflection / weekly reset / review-oriented ambient concepts where appropriate
+- first implementation pass for Watch and Apple TV priorities
+- cross-device state and continuity treatment
+- ambient copy and interaction refinement for ultra-low-input surfaces
 ## Deferred, Not Excluded
-- none; this is the closure batch for the program
+- final finish-quality pass
 ## Dependency Rules
-- do not treat this as a bug scrub only
-- this batch is for premium closure, not merely pass/fail stability
-- preserve restraint; do not add effects to simulate polish
+- Watch should prioritize clarity, confirmation, momentum, and quick actions
+- Apple TV should prioritize ritual, review, and ambient value, not deep editing
+- future surfaces must inherit the same trust and tone standards
 ## Exit Criteria
-- the product feels singular and finished
-- interaction quality is consistently high
-- accessibility is treated as first-class quality
-- performance and polish gaps are materially reduced
+- Watch and Apple TV have coherent first implementations
+- ambient device roles are meaningful
+- future device work no longer lives only as theory
 ## Validation
-- xcodegen generate
-- full native build(s)
-- full AmbitionsTests
-- full AmbitionsUITests
-- targeted accessibility verification
-- targeted performance checks
-- manual whole-product audit
+- platform build validation as applicable
+- targeted ambient-surface tests
+- shared-state continuity tests
+- manual audits as available
 ## Completion Rule
-Complete only when Ambitions feels authored end-to-end and ready to be judged as a flagship product.
+Complete only when Watch and Apple TV surfaces have real product roles and initial implementation truth.
 
 ---
 

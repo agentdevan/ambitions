@@ -22,8 +22,8 @@ No later platform should inherit iPhone layout literally when a more native comp
 
 - This file defines continuity semantics only.
 - It does not authorize cross-device architecture or product implementation work in Batch 39.
-- iPad and Mac architecture plus first implementation are deferred to Batch 57.
-- Watch and Apple TV architecture plus first implementation are deferred to Batch 58.
+- iPad and Mac architecture plus first implementation are deferred to Batch 58.
+- Watch and Apple TV architecture plus first implementation are deferred to Batch 59.
 
 ## Shared Product Rule
 
@@ -101,7 +101,7 @@ All platforms share:
 
 - room-scale review
 - weekly reset
-- shared reflection or household posture later if approved
+- ambient reflection
 
 ### Not for
 

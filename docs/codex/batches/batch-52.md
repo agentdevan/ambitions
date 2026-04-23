@@ -1,4 +1,4 @@
-﻿# Batch 52 - Front-End Transformation 13 / Profile rebuild, Appearance Studio, and Trust Center
+﻿# Batch 52 - Front-End Transformation 13 / Profile rebuild, Appearance Studio, Trust Center, and Context Vault foundations
 ## Status
 Queued
 ## Program
@@ -15,7 +15,7 @@ Post-hardening Front-End Transformation Program
 - Start only after Batch 38 is complete and stable.
 - Do not activate or implement this batch early; follow the registry and dependency order.
 ## Goal
-Rebuild Profile into a premium utility layer with world-class appearance control, trust framing, and system status.
+Rebuild Profile into a premium utility layer with world-class appearance control, trust framing, system status, and Context Vault foundations.
 ## In Scope
 - Profile IA rewrite
 - Appearance Studio implementation
@@ -24,6 +24,7 @@ Rebuild Profile into a premium utility layer with world-class appearance control
 - live preview experiences
 - trust center redesign
 - sync pulse implementation
+- Context Vault + Signal Policy foundations
 - notification and integration health redesign
 - account / billing / defaults regrouping
 - system- and person-level setting architecture

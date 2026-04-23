@@ -9,10 +9,31 @@ Define exact intended structure, emphasis, disclosure, and interaction posture f
 - Every major screen has one hero zone.
 - Every major screen exposes one primary action cluster.
 - The first screenful must answer "what matters here" without scrolling.
+- Every top-level screen must resolve its dominant surface question before any secondary module competes for attention.
 - Supporting modules must be ordered by decision value, not by data type.
 - Trust must be visible but lightweight by default.
 - Each major surface may expose one intent-sensitive primary action only.
 - Cognitive Mode Lens weighting may reorder emphasis, but it must not multiply visible controls.
+
+## Top-Level Surface Questions
+
+- `Today`: What matters now?
+- `Goals`: Where am I headed?
+- `Plan`: How does this week hold together?
+- `Insights`: What am I learning?
+- `Profile / Trust`: How is my system configured?
+
+These are canonical question anchors for top-level composition and disclosure order.
+
+## Mobile Provenance
+
+On mobile, provenance should be carried through:
+
+- `Origin Chip`
+- `Context Ribbon`
+- `Return Stack Memory`
+
+These patterns communicate source and continuity without falling back to desktop-style breadcrumb chains.
 
 ## Shared Layer Systems
 

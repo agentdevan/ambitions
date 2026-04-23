@@ -21,8 +21,9 @@ Use this with:
 ## Operational Guardrail
 
 - Batch 38 is completed.
-- Batch 39 is active as a docs/control-file foundation batch only.
-- Batches 40-59 remain queued.
+- Batch 48 is completed in the registry.
+- Batch 49 is active in the registry.
+- Batches 50-60 remain queued.
 - Nothing in this document activates future frontend work ahead of the registry.
 - Execution tiering remains sequencing truth only; it does not authorize implementation before the owning batch is active.
 
@@ -214,6 +215,6 @@ Recommended placement:
 
 - Batch 39 owns canon, terminology, doctrine, and validation alignment only.
 - Batches 40-45 should reference only the early-core systems required for shell, shared system language, Today, and Goals.
-- Batches 46-59 should absorb the later-core systems as their owning surfaces mature.
+- Batches 46-60 should absorb the later-core systems as their owning surfaces mature.
 - Batch 48 owns `Path Preview Drawer` as mandatory advanced later-core Goal Detail deepening.
 - Batch 50 owns `Window Magnetism` and `Split-Pane Thinking on iPhone` as mandatory advanced later-core Plan and review-shaping deepening.

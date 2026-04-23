@@ -31,6 +31,18 @@ The transformed iPhone shell keeps five top-level destinations:
 These remain the only persistent top-level destinations.
 `Captures`, `Habits`, `Review`, `History`, `Trust Center`, and `Memory Lens` do not become sixth or seventh tabs.
 
+### Dominant Question Doctrine
+
+Each top-level destination answers one dominant question:
+
+- `Today`: What matters now?
+- `Goals`: Where am I headed?
+- `Plan`: How does this week hold together?
+- `Insights`: What am I learning?
+- `Profile / Trust`: How is my system configured?
+
+Shell hierarchy, header posture, and default disclosure depth should reinforce these questions rather than compete with them.
+
 ## Why Five Tabs Stay
 
 - `Today`, `Goals`, `Plan`, `Insights`, and `Profile` already map to the product's core mental model.
@@ -235,6 +247,22 @@ The shell can host one continuity ribbon directly below the header rail or immed
 - ribbon is dismissible when informational but sticky when structurally important
 - ribbon never becomes a scrolling notification stack
 
+## Mobile Provenance Doctrine
+
+On iPhone, provenance should be communicated through calm product-context signals, not classic breadcrumb chrome.
+
+Preferred patterns:
+
+- `Origin Chip`
+- `Context Ribbon`
+- `Return Stack Memory`
+
+Rules:
+
+- provenance should explain where the user came from or what context is still active
+- provenance should not consume the primary shell hierarchy slot
+- provenance should support return confidence without teaching a desktop navigation model
+
 ## Object-Persistent Navigation
 
 When the same object appears across surfaces, navigation must preserve identity continuity.
@@ -325,7 +353,7 @@ The compose affordance is persistent but restrained.
 ### Placement
 
 - anchored above the tab bar or integrated just above it
-- never floating high over content like a social FAB
+- never floating high over content like a generic floating action button
 
 ### Default action
 

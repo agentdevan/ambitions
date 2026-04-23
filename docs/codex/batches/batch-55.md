@@ -1,4 +1,4 @@
-﻿# Batch 55 - Front-End Transformation 16 / External surfaces II - share extension, App Intents, shortcuts, routing
+﻿# Batch 55 - Front-End Transformation 16 / External surfaces I - widgets, Live Activities, notifications, and Focus Screenlet
 ## Status
 Queued
 ## Program
@@ -8,42 +8,44 @@ Post-hardening Front-End Transformation Program
 - [BATCH_REGISTRY.md](../BATCH_REGISTRY.md)
 
 ## Design Truth References
-- [shell-ia-spec.md](../../canon/design/shell-ia-spec.md)
 - [external-surface-spec.md](../../canon/design/external-surface-spec.md)
-- [trust-explainability-correction-spec.md](../../canon/design/trust-explainability-correction-spec.md)
+- [motion-microinteraction-spec.md](../../canon/design/motion-microinteraction-spec.md)
+- [cross-device-surface-roles-spec.md](../../canon/design/cross-device-surface-roles-spec.md)
 ## Start Gate
 - Start only after Batch 38 is complete and stable.
 - Do not activate or implement this batch early; follow the registry and dependency order.
 ## Goal
-Fully implement the creation, entry, and routing surfaces outside the main app shell.
+Fully implement the first external ambient surfaces as premium first-class product surfaces.
 ## In Scope
-- share extension full implementation
-- share extension intake UX
-- App Intents full productization
-- App Shortcuts and shortcut discoverability
-- Spotlight and search landing refinement where supported
-- deep-link and handoff surface polish
-- external-create-to-internal-shell path refinement
-- routing language and transition continuity
-- shortcut-driven quick recovery / quick focus / quick capture / quick plan flows
-- external truth and permissions education
+- widget redesign and implementation
+- lock screen widget hierarchy
+- home screen widget hierarchy
+- Live Activity redesign and implementation
+- Focus Screenlet implementation
+- notification content and action redesign
+- notification landing logic refinement
+- widget-to-app and activity-to-app shell-aware transitions
+- calm ambient trust language
+- external motion and visual continuity with the main app
+- external state variants for Today, Focus, Goal, and Plan use cases
 ## Deferred, Not Excluded
-- iPad / Mac / Watch / Apple TV implementations
+- share extension
+- App Intents / shortcuts
+- future Watch / TV ambient surfaces
 ## Dependency Rules
-- external entry points must land in canonical routes
-- share and shortcut flows should feel like the same OS as the main app
-- do not implement external affordances that create logic islands
+- external surfaces must inherit canonical truth from the app
+- they must feel useful at glance depth
+- they must not use a different visual language from the main product
 ## Exit Criteria
-- share extension is real and premium
-- App Intents and shortcuts are discoverable and useful
-- all major external entry points feel canonically aligned
+- widgets, activities, notifications, and Focus Screenlet are real product surfaces
+- external landing behavior is coherent
+- ambient surfaces feel premium and useful
 ## Validation
 - build
-- targeted extension / intent / routing tests
+- targeted widget / notification / live activity tests
 - full AmbitionsTests
-- targeted UI tests
-- external-entry manual audit as available
+- manual simulator / platform surface audit as available
 ## Completion Rule
-Complete only when external creation and routing feel like first-class product behavior.
+Complete only when the app's first external surfaces no longer feel conservative or half-shipped.
 
 ---

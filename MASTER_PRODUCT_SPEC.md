@@ -220,6 +220,32 @@ The primary information architecture is:
 
 The tab bar must be polished, simple, and strong enough to support daily repeated use.
 
+### 7.1A Top-level surface question doctrine
+
+Each top-level surface must answer one dominant question:
+
+- `Today`: What matters now?
+- `Goals`: Where am I headed?
+- `Plan`: How does this week hold together?
+- `Insights`: What am I learning?
+- `Profile / Trust`: How is my system configured?
+
+This is product doctrine, not sample copy.
+Each surface may contain supporting modules, but its first screenful must resolve its dominant question before the user scrolls.
+
+### 7.1B Mobile provenance doctrine
+
+On mobile, Ambitions should not rely on classic desktop-style breadcrumbs as the main provenance pattern.
+
+Use:
+
+- `Origin Chip`
+- `Context Ribbon`
+- `Return Stack Memory`
+
+These are calm provenance signals.
+They explain source and continuity without turning the product into navigation chrome.
+
 ### 7.2 Today
 
 Today is the execution center. It must answer immediately:
@@ -338,14 +364,60 @@ These are required product behaviors.
 - The app must tell the truth when a goal, day, or week is unrealistic.
 - The product should make movement feel concrete, especially when the final result is still far away.
 - The user should not need to interpret ambiguous surfaces under stress.
-- The product must reduce paragraph UI and keep reading burden low.
-- Returning after a missed day or week must feel simple and non-threatening.
 
 ---
 
-## 9. Visual and interaction doctrine
+## 9. Forward platform and continuity doctrine
 
-### 9.1 Core mandate
+The future planning direction should stay organized around a small set of platform pillars rather than a loose bag of branded features.
+
+### 9.1 Platform pillars
+
+- `Path Intelligence Layer`
+  - `Readiness Gates`
+  - `Path Draft + Evidence Pack`
+  - `Decision-Swing Clarifications`
+  - `Influence Cards`
+- `State Continuity Mesh`
+  - `Now State Lease`
+  - `Continuity Receipts`
+  - `Sync Health Strip`
+  - `semantic conflict language`
+- `Reality Model`
+  - `Availability Seasons`
+  - `Life Transition Modes`
+  - `Stability Pass`
+  - `Arrival Triggers`
+- `Execution Resilience Stack`
+  - `Equivalent Progress Sets`
+  - `Recovery Cascade`
+- `Context Vault + Signal Policy`
+
+### 9.2 Cross-cutting programs
+
+- `Progressive Intelligence Onboarding`
+  - `60-Second Starting State`
+- `Reflection OS`
+  - `Quiet Gaps`
+  - `Truth Mirror`
+
+### 9.3 Named planning subsystems
+
+These names remain valid when they materially govern execution or future-batch planning:
+
+- `Degraded-State Orchestrator`
+- `Recommendation Object Model`
+- `Surface Contract Matrix`
+
+These constructs should stay explicit in canon and planning, but they should still resolve into calm product behavior rather than feature-label clutter.
+The product must reduce paragraph UI and keep reading burden low.
+Returning after a missed day or week must feel simple and non-threatening.
+
+---
+
+## 10. Visual and interaction doctrine
+
+### 10.1 Core mandate
 
 Rebuild Ambitions so it feels like a real flagship iPhone product, not a productivity template.
 
@@ -377,7 +449,7 @@ The visual target is a product worthy of comparison to the best modern consumer 
 - instant comprehension
 - designed for repeated daily use
 
-### 9.2 Product behavior the UI must reinforce
+### 10.2 Product behavior the UI must reinforce
 
 The UI should always communicate:
 
@@ -390,7 +462,7 @@ The UI should always communicate:
 
 Every screen should support action, not just information.
 
-### 9.3 Design philosophy
+### 10.3 Design philosophy
 
 #### Obvious first, clever second
 
@@ -472,7 +544,7 @@ That means:
 - concise labels
 - bolder primary action framing
 
-### 9.3.1 Canonical design-truth set
+### 10.3.1 Canonical design-truth set
 
 The detailed future frontend design truth lives under `docs/canon/design/`.
 
@@ -491,7 +563,7 @@ Those files define:
 Use those files when planning or implementing any future frontend transformation batch.
 They deepen this master spec; they do not change the current active batch by themselves.
 
-### 9.3.2 Additional signature systems
+### 10.3.2 Additional signature systems
 
 The future transformed frontend should treat the following as named product systems, not vague design inspiration:
 
@@ -515,7 +587,7 @@ These systems must stay:
 - progressively disclosed
 - consumer-native rather than tool-like
 
-### 9.4 Overall look
+### 10.4 Overall look
 
 Use a plain, clean background behind device renders and in presentation materials so the actual UI is obvious.
 
@@ -529,7 +601,7 @@ Inside the app, use a dark-mode-first design system that feels:
 
 Dark mode should not feel gamer, neon, cyberpunk, or fintech.
 
-### 9.5 Color and theming architecture
+### 10.5 Color and theming architecture
 
 #### Base palette direction
 
@@ -615,7 +687,7 @@ Appearance controls should support:
 - Accent selection from a curated palette
 - live preview of theme choice
 
-### 9.6 Surface behavior
+### 10.6 Surface behavior
 
 Cards and containers should feel:
 
@@ -638,7 +710,7 @@ Avoid:
 - flat wireframe feel
 - excessive blur
 
-### 9.7 Typography
+### 10.7 Typography
 
 Typography should be one of the most premium parts of the product.
 
@@ -652,7 +724,7 @@ Use type with:
 
 Text should feel concise, intentional, and never noisy.
 
-### 9.8 Premium button system
+### 10.8 Premium button system
 
 Only three core button tiers should exist.
 
@@ -716,7 +788,7 @@ Every button should have:
 - optional micro highlight shift
 - optional soft haptic feedback on supported platforms
 
-### 9.9 Component guidance
+### 10.9 Component guidance
 
 Cards should be soft, tactile, elegant, scanable, and vertically breathable.
 
@@ -730,7 +802,7 @@ Icons should be clean, modern, easy to parse, and consistent in weight.
 
 The tab bar should feel App Store quality.
 
-### 9.10 Interaction rules
+### 10.10 Interaction rules
 
 Every screen needs one clear primary behavior.
 
@@ -746,7 +818,7 @@ The app should always support re-entry by surfacing:
 - how momentum is going
 - where the user is slipping
 
-### 9.11 Screen-by-screen direction
+### 10.11 Screen-by-screen direction
 
 #### Today
 
@@ -846,7 +918,7 @@ Avoid dense audit-log appearance, excessive metadata, and enterprise status lang
 
 ---
 
-## 10. Language standard
+## 11. Language standard
 
 The product language must be:
 
@@ -875,7 +947,7 @@ Avoid language like:
 
 ---
 
-## 11. Current state and completion alignment
+## 12. Current state and completion alignment
 
 As of the current roadmap state:
 
@@ -898,7 +970,7 @@ Implication:
 
 ---
 
-## 12. Roadmap continuity rules
+## 13. Roadmap continuity rules
 
 The existing roadmap continuity must be preserved.
 
@@ -910,7 +982,7 @@ The existing roadmap continuity must be preserved.
 
 ---
 
-## 13. Phase roadmap going forward
+## 14. Phase roadmap going forward
 
 The roadmap can take as many phases as necessary. The correct priority is not shortest roadmap. The correct priority is strongest product.
 
@@ -1294,7 +1366,7 @@ Acceptance criteria:
 
 ---
 
-## 14. What the finished product must be able to do
+## 15. What the finished product must be able to do
 
 By the end of the roadmap, Ambitions is not complete unless all of these are true:
 
@@ -1317,7 +1389,7 @@ If any of those are missing, the product is still incomplete.
 
 ---
 
-## 15. Non-goals and anti-patterns
+## 16. Non-goals and anti-patterns
 
 Ambitions must aggressively avoid:
 
@@ -1340,7 +1412,7 @@ Ambitions must aggressively avoid:
 
 ---
 
-## 16. Success definition
+## 17. Success definition
 
 Ambitions succeeds when a user feels:
 
@@ -1363,7 +1435,7 @@ That is the product.
 
 ---
 
-## 17. Canonical planning rule
+## 18. Canonical planning rule
 
 From this point forward, Codex phase planning should treat this document as the canonical source of truth for the current shipping product.
 For platform vision, execution order, batch packaging, and active work status, follow [docs/codex/CONTEXT_INDEX.md](docs/codex/CONTEXT_INDEX.md).

@@ -1,4 +1,4 @@
-﻿# Batch 51 - Front-End Transformation 12 / Insights rebuild and reflection OS
+﻿# Batch 51 - Front-End Transformation 12 / Insights rebuild and Reflection OS
 ## Status
 Queued
 ## Program
@@ -31,6 +31,7 @@ Rebuild Insights and reflection surfaces into a narrative truth layer rather tha
 - reflection summary vs deep-history layering
 - review surface coherence redesign
 - momentum, drift, and adaptation presentation rewrite
+- Reflection OS framing across review, learning, and history
 - compare-period interactions
 - route and transition behavior between Insights, Goal Detail, and Plan
 - reflective copy system refinement

@@ -1,4 +1,4 @@
-﻿# Batch 58 - Front-End Transformation 19 / Watch and Apple TV ambient surface architecture and first implementation
+﻿# Batch 58 - Front-End Transformation 19 / iPad and Mac surface architecture and first implementation
 ## Status
 Queued
 ## Program
@@ -8,40 +8,43 @@ Post-hardening Front-End Transformation Program
 - [BATCH_REGISTRY.md](../BATCH_REGISTRY.md)
 
 ## Design Truth References
-- [external-surface-spec.md](../../canon/design/external-surface-spec.md)
+- [shell-ia-spec.md](../../canon/design/shell-ia-spec.md)
+- [screen-architecture-spec.md](../../canon/design/screen-architecture-spec.md)
 - [cross-device-surface-roles-spec.md](../../canon/design/cross-device-surface-roles-spec.md)
-- [novel-interaction-systems-spec.md](../../canon/design/novel-interaction-systems-spec.md)
 ## Start Gate
 - Start only after Batch 38 is complete and stable.
 - Do not activate or implement this batch early; follow the registry and dependency order.
 ## Goal
-Begin future ambient and room-scale implementations for Watch and Apple TV.
+Begin future-platform implementation with coherent larger-screen versions of Ambitions.
 ## In Scope
-- Watch surface architecture
-- Apple TV surface architecture
-- Focus Screenlet watch adaptation
-- glance and confirm patterns for Watch
-- routine / reminder / momentum / quick-capture ambient patterns for Watch
-- Apple TV reflection / weekly reset / household / review-oriented ambient concepts where appropriate
-- first implementation pass for Watch and Apple TV priorities
-- cross-device state and continuity treatment
-- ambient copy and interaction refinement for ultra-low-input surfaces
+- iPad shell architecture
+- Mac shell architecture
+- larger-screen layout grammar
+- multi-pane patterns where useful
+- sidebar / tab / detail coexistence decisions
+- keyboard command model
+- larger-screen Strategy Composer refinements
+- larger-screen Plan workspace refinements
+- larger-screen Insights and Goal Detail patterns
+- cross-device continuity rules
+- first implementation pass for iPad and Mac surface set
 ## Deferred, Not Excluded
-- final finish-quality pass
+- Watch surfaces
+- Apple TV surfaces
 ## Dependency Rules
-- Watch should prioritize clarity, confirmation, momentum, and quick actions
-- Apple TV should prioritize ritual, review, and shared-room value, not deep editing
-- future surfaces must inherit the same trust and tone standards
+- do not simply stretch the iPhone UI
+- larger screens must keep the same product philosophy
+- Mac and iPad should feel native while clearly part of Ambitions
 ## Exit Criteria
-- Watch and Apple TV have coherent first implementations
-- ambient device roles are meaningful
-- future device work no longer lives only as theory
+- iPad and Mac have coherent first implementations
+- multi-pane and keyboard interactions feel considered
+- cross-device continuity is real, not conceptual
 ## Validation
 - platform build validation as applicable
-- targeted ambient-surface tests
-- shared-state continuity tests
-- manual audits as available
+- targeted layout and interaction tests
+- shared logic regression tests
+- manual larger-screen audits
 ## Completion Rule
-Complete only when Watch and Apple TV surfaces have real product roles and initial implementation truth.
+Complete only when iPad and Mac feel like true Ambitions clients, not enlarged phone ports.
 
 ---
