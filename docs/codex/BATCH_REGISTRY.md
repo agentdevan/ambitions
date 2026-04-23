@@ -84,8 +84,9 @@ Batch 47 is completed.
 Batch 48 is completed.
 Batch 49 is completed.
 Batch 50 is completed.
-Batch 51 is now the active batch.
-Batches 52-60 remain queued future work.
+Batch 51 is completed.
+Batch 52 is now the active batch.
+Batches 53-60 remain queued future work.
 Use the canonical program doc plus the per-batch docs in [batches/](batches/README.md) when working inside this program.
 
 | Batch | Name | Status | Notes |
@@ -102,8 +103,8 @@ Use the canonical program doc plus the per-batch docs in [batches/](batches/READ
 | 48 | Front-End Transformation 09 / Goal Detail rebuild II - trust whisper, correction, audit, and memory | Completed | Goal Detail trust and memory layers closed while preserving the strategic-first first screen and keeping deeper trust/memory material subordinate. |
 | 49 | Front-End Transformation 10 / Plan rebuild I - Reality Model, elastic week, and pressure scrubber | Completed | Rebuilt Plan around the Reality Model hero, elastic week structure, pressure scrubber, week-believability framing, and a shaping-action lane tied to active goals; validated with targeted Plan tests, full `AmbitionsTests`, targeted Plan UI reruns, and manual simulator audit, with one combined UI invocation recorded as environment instability after narrowed reruns passed. |
 | 50 | Front-End Transformation 11 / Plan rebuild II - Execution Resilience, habits, captures, and review shaping | Completed | Plan now owns weekly shaping with Execution Resilience, Window Magnetism, Weekly Review continuation, and Plan-owned habits/captures support routes; build, targeted unit coverage, full `AmbitionsTests`, and targeted UI tests were green, and the only residual note was environment-limited manual-audit depth rather than a deterministic regression. |
-| 51 | Front-End Transformation 12 / Insights rebuild and Reflection OS | Active | Reflection and learning system rebuild. |
-| 52 | Front-End Transformation 13 / Profile rebuild, Appearance Studio, Trust Center, and Context Vault foundations | Queued | Profile, trust, appearance, and context-vault foundations. |
+| 51 | Front-End Transformation 12 / Insights rebuild and Reflection OS | Completed | Batch 51 rebuilt Insights into a Reflection OS surface with a dominant narrative hero, compare-period framing, Review Constellation, compact pattern-truth visuals, layered history/reflection routes, and conservative Continuity Ribbon behavior, with build, targeted unit coverage, full AmbitionsTests, targeted UI coverage, and manual simulator audit green; the only residual note was simulator-tooling-limited manual route depth rather than a deterministic product regression. |
+| 52 | Front-End Transformation 13 / Profile rebuild, Appearance Studio, Trust Center, and Context Vault foundations | Active | Profile, trust, appearance, and context-vault foundations. |
 | 53 | Front-End Transformation 14 / Progressive Intelligence Onboarding and Degraded-State Orchestrator | Queued | Onboarding, education, permissions, and degraded-state orchestration. |
 | 54 | Front-End Transformation 15 / State Continuity Mesh, sync trust, and real-time continuity contract | Queued | Sync-trust continuity layer before external-surface widening. |
 | 55 | Front-End Transformation 16 / External surfaces I - widgets, Live Activities, notifications, and Focus Screenlet | Queued | Ambient and glanceable external surface implementation. |

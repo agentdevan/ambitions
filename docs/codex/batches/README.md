@@ -7,8 +7,9 @@ This folder contains the per-batch execution docs for the post-hardening Front-E
 - Batch 48 is completed.
 - Batch 49 is completed.
 - Batch 50 is completed.
-- Batch 51 is the current active transformation batch.
-- Batches 52-60 remain queued future work.
+- Batch 51 is completed.
+- Batch 52 is the current active transformation batch.
+- Batches 53-60 remain queued future work.
 - The transformation program begins only after Batch 38 is complete and stable.
 - Do not activate or implement future transformation batches early.
 

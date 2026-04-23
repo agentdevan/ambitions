@@ -23,9 +23,10 @@ Live queue truth in the current repo:
 - Batches 39-48 — Completed in registry history
 - Batch 49 — Completed
 - Batch 50 — Completed
-- Batch 51 — Active
-- Batches 52-60 — Queued
-- the front-end transformation program is active in implementation at **Batch 51**
+- Batch 51 — Completed
+- Batch 52 — Active
+- Batches 53-60 — Queued
+- the front-end transformation program is active in implementation at **Batch 52**
 
 Batch 39 is a docs-only foundation batch.
 It makes the transformation program explicit enough to guide later implementation batches without authorizing shell implementation, route rewiring, or surface redesign work ahead of Batch 40.

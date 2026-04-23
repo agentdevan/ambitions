@@ -1,6 +1,6 @@
 ﻿# Batch 51 - Front-End Transformation 12 / Insights rebuild and Reflection OS
 ## Status
-Active
+Completed
 ## Program
 Post-hardening Front-End Transformation Program
 ## Canon Source
@@ -54,5 +54,8 @@ Rebuild Insights and reflection surfaces into a narrative truth layer rather tha
 - manual simulator audit
 ## Completion Rule
 Complete only when Insights feels indispensable rather than secondary.
+
+## Completion Note
+Batch 51 rebuilt Insights into a Reflection OS surface with a dominant narrative hero, compare-period framing, Review Constellation, compact pattern-truth visuals, layered history/reflection routes, and conservative Continuity Ribbon behavior, with build, targeted unit coverage, full AmbitionsTests, targeted UI coverage, and manual simulator audit green; the only residual note was simulator-tooling-limited manual route depth rather than a deterministic product regression.
 
 ---

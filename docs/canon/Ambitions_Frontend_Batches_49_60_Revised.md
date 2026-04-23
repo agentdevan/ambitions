@@ -36,5 +36,6 @@ Use this as a compact queue shorthand only; active status still comes from the r
 Batch 48 remains completed.
 Batch 49 remains completed.
 Batch 50 remains completed.
-Batch 51 is the active batch until explicitly completed by the user.
-Completed batch history through Batch 50 remains unchanged.
+Batch 51 is completed.
+Batch 52 is the active batch.
+Completed batch history through Batch 51 remains unchanged.
