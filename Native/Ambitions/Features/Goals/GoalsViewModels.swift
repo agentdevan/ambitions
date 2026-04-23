@@ -51,6 +51,9 @@ final class GoalDetailViewModel {
     var state: AsyncViewState<GoalDetailPresentation>
     var inlineMessage: GoalDetailInlineMessage?
     var lens: GoalDetailLens
+    var isTrustExpanded: Bool
+    var isCorrectionsExpanded: Bool
+    var isMemoryExpanded: Bool
     var clarificationAnswers: [String: String]
 
     private var hasLoaded = false
@@ -60,7 +63,7 @@ final class GoalDetailViewModel {
         case .loading:
             return "loading"
         case let .loaded(detail):
-            return "loaded:\(detail.target.id):\(lens.rawValue)"
+            return "loaded:\(detail.target.id):\(lens.rawValue):\(isTrustExpanded):\(isCorrectionsExpanded):\(isMemoryExpanded)"
         case let .failed(message):
             return "failed:\(message)"
         }
@@ -71,12 +74,18 @@ final class GoalDetailViewModel {
         state: AsyncViewState<GoalDetailPresentation> = .loading,
         inlineMessage: GoalDetailInlineMessage? = nil,
         lens: GoalDetailLens = .tasks,
+        isTrustExpanded: Bool = false,
+        isCorrectionsExpanded: Bool = false,
+        isMemoryExpanded: Bool = false,
         clarificationAnswers: [String: String] = [:]
     ) {
         self.target = target
         self.state = state
         self.inlineMessage = inlineMessage
         self.lens = lens
+        self.isTrustExpanded = isTrustExpanded
+        self.isCorrectionsExpanded = isCorrectionsExpanded
+        self.isMemoryExpanded = isMemoryExpanded
         self.clarificationAnswers = clarificationAnswers
     }
 

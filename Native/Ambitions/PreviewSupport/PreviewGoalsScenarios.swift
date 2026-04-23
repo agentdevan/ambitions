@@ -351,7 +351,7 @@ enum PreviewGoalsScenarios {
                 GoalDetailActionState(kind: .imStuck, title: "I'm stuck", systemImage: "lifepreserver", state: .warning),
                 GoalDetailActionState(kind: .askWhyThisMatters, title: "Why this matters", systemImage: "questionmark.circle", state: .default),
             ],
-            explainability: nil,
+            explainability: trustHeavyExplainabilityState(),
             primaryStepID: "s1",
             canSwitchToUntimed: false,
             supportModeActive: false,
@@ -393,7 +393,7 @@ enum PreviewGoalsScenarios {
                 GoalDetailActionState(kind: .breakThisDownSmaller, title: "Break it down", systemImage: "rectangle.split.3x1", state: .selected),
                 GoalDetailActionState(kind: .switchToUntimed, title: "Switch to untimed", systemImage: "calendar.badge.minus", state: .default),
             ],
-            explainability: nil,
+            explainability: starterExplainabilityState(),
             primaryStepID: "ls1",
             canSwitchToUntimed: false,
             supportModeActive: false,
@@ -501,13 +501,164 @@ enum PreviewGoalsScenarios {
                 GoalDetailActionState(kind: .complete, title: "Complete", systemImage: "checkmark", state: .success),
                 GoalDetailActionState(kind: .showSupportMode, title: "Support mode", systemImage: "person.2.fill", state: .selected),
             ],
-            explainability: nil,
+            explainability: supportExplainabilityState(),
             primaryStepID: "ss1",
             canSwitchToUntimed: true,
             supportModeActive: true,
             defaultLens: .path
         ),
     ]
+
+    private static func trustHeavyExplainabilityState() -> GoalExplainabilityState {
+        GoalExplainabilityState(
+            whisper: GoalTrustWhisperState(
+                title: "Trust whisper",
+                subtitle: "This recommendation is leading because the release-readiness path is tight and the copy drift is still fresh.",
+                pillLine: "Likely fit • Waiting on newer input • Some source context needs review",
+                pills: [
+                    GoalTrustWhisperPillState(id: "confidence", title: "Likely fit", icon: "checkmark.shield", state: .selected),
+                    GoalTrustWhisperPillState(id: "freshness", title: "Waiting on newer input", icon: "clock.badge.exclamationmark", state: .warning),
+                    GoalTrustWhisperPillState(id: "sources", title: "Some source context needs review", icon: "text.magnifyingglass", state: .warning),
+                    GoalTrustWhisperPillState(id: "contradictions", title: "1 conflict needs review", icon: "exclamationmark.bubble", state: .warning)
+                ]
+            ),
+            whyThis: GoalWhyThisState(
+                compactSummary: "The release-readiness path is still being shaped around the smallest truthful documentation fix.",
+                lines: [
+                    "Interpretation: Docs and trust copy are still the leverage point.",
+                    "Path: Refreshing copy unlocks cleaner validation and calmer handoff.",
+                    "Now: Newer platform checks could still change what the app should claim."
+                ]
+            ),
+            sourceAudit: GoalSourceAuditSectionState(rows: [
+                GoalSourceAuditRowState(
+                    id: "source-1",
+                    resourceID: "resource-1",
+                    title: "Manual platform verification notes",
+                    subtitle: "Unsigned release evidence",
+                    detailLabels: ["Provenance: Manual", "Trust: Medium", "Freshness: Stale"],
+                    state: .warning
+                ),
+                GoalSourceAuditRowState(
+                    id: "source-2",
+                    resourceID: "resource-2",
+                    title: "Profile trust copy",
+                    subtitle: "Repo-local source of truth",
+                    detailLabels: ["Provenance: Local", "Trust: High", "Freshness: Fresh"],
+                    state: .default
+                )
+            ]),
+            freshness: GoalFreshnessState(
+                posture: .stale,
+                postureLabel: "Stale",
+                severityLabel: "Warning",
+                detailLabels: ["Flag: manual_follow_up"]
+            ),
+            confidence: GoalConfidenceState(
+                understandingConfidence: .medium,
+                pathConfidence: .medium,
+                detailLabels: ["Understanding: Medium", "Path: Medium", "Uncertainty: manual verification"]
+            ),
+            contradictions: [
+                GoalContradictionSummaryState(
+                    id: "contradiction-1",
+                    code: .inputTimingConflict,
+                    title: "Outdated verification",
+                    summary: "The release note and the latest manual follow-up no longer fully agree.",
+                    severityLabel: "Blocking",
+                    state: .warning
+                )
+            ],
+            correctionControls: [
+                GoalCorrectionControlState(
+                    id: "control-1",
+                    title: "Update this assumption",
+                    subtitle: "The release note should stay conservative until the next manual check lands.",
+                    kind: .dismissContradiction,
+                    artifactKind: .contradictionShape,
+                    teachingSignalKind: .contradictionDispositionCorrection,
+                    payload: .contradictionDisposition(
+                        GoalTeachingContradictionDispositionCorrection(correctedDisposition: .dismissed)
+                    ),
+                    target: GoalTeachingCaptureTarget(
+                        artifactKind: .contradictionShape,
+                        candidateID: "candidate-1",
+                        stageID: "stage-1",
+                        contradictionCode: .inputTimingConflict,
+                        contradictionArtifactRefs: []
+                    ),
+                    state: .warning
+                )
+            ],
+            appliedTeachingBadges: [
+                GoalAppliedTeachingBadgeState(
+                    id: "badge-1",
+                    signalID: "signal-1",
+                    title: "Support Not Relevant",
+                    subtitle: "Previous correction kept copy conservative.",
+                    state: .selected
+                )
+            ]
+        )
+    }
+
+    private static func starterExplainabilityState() -> GoalExplainabilityState {
+        GoalExplainabilityState(
+            whisper: GoalTrustWhisperState(
+                title: "Trust whisper",
+                subtitle: "This starter path is deliberately light because the first real signal matters more than overexplaining.",
+                pillLine: "Needs confirmation • Updated recently • Source context looks stable",
+                pills: [
+                    GoalTrustWhisperPillState(id: "confidence", title: "Needs confirmation", icon: "checkmark.shield", state: .warning),
+                    GoalTrustWhisperPillState(id: "freshness", title: "Updated recently", icon: "clock.arrow.circlepath", state: .success),
+                    GoalTrustWhisperPillState(id: "sources", title: "Source context looks stable", icon: "text.magnifyingglass", state: .success),
+                    GoalTrustWhisperPillState(id: "contradictions", title: "No conflicts surfaced", icon: "checkmark.circle", state: .success)
+                ]
+            ),
+            whyThis: GoalWhyThisState(
+                compactSummary: "The first experiment stays small so the goal can learn from real evidence instead of imaginary certainty.",
+                lines: [
+                    "Interpretation: Learning goals should start with low-pressure signal.",
+                    "Path: One rough pass will teach more than overplanning."
+                ]
+            ),
+            sourceAudit: GoalSourceAuditSectionState(rows: []),
+            freshness: GoalFreshnessState(posture: .currentEnough, postureLabel: "Fresh", severityLabel: "Light", detailLabels: ["Flag: none"]),
+            confidence: GoalConfidenceState(understandingConfidence: .low, pathConfidence: .low, detailLabels: ["Understanding: Low", "Path: Low"]),
+            contradictions: [],
+            correctionControls: [],
+            appliedTeachingBadges: []
+        )
+    }
+
+    private static func supportExplainabilityState() -> GoalExplainabilityState {
+        GoalExplainabilityState(
+            whisper: GoalTrustWhisperState(
+                title: "Trust whisper",
+                subtitle: "This support path is leading with collaborative posture so the plan stays helpful without taking ownership.",
+                pillLine: "Strong fit • Updated recently • Source context looks stable",
+                pills: [
+                    GoalTrustWhisperPillState(id: "confidence", title: "Strong fit", icon: "checkmark.shield", state: .success),
+                    GoalTrustWhisperPillState(id: "freshness", title: "Updated recently", icon: "clock.arrow.circlepath", state: .success),
+                    GoalTrustWhisperPillState(id: "sources", title: "Source context looks stable", icon: "text.magnifyingglass", state: .success),
+                    GoalTrustWhisperPillState(id: "contradictions", title: "No conflicts surfaced", icon: "checkmark.circle", state: .success)
+                ]
+            ),
+            whyThis: GoalWhyThisState(
+                compactSummary: "The next move stays collaborative because support goals should keep the other person as the real owner.",
+                lines: [
+                    "Interpretation: This is a support path, not delegated compliance.",
+                    "Path: A calm check-in preserves momentum without pressure."
+                ]
+            ),
+            sourceAudit: GoalSourceAuditSectionState(rows: []),
+            freshness: GoalFreshnessState(posture: .currentEnough, postureLabel: "Fresh", severityLabel: "Light", detailLabels: ["Flag: none"]),
+            confidence: GoalConfidenceState(understandingConfidence: .high, pathConfidence: .high, detailLabels: ["Understanding: High", "Path: High"]),
+            contradictions: [],
+            correctionControls: [],
+            appliedTeachingBadges: []
+        )
+    }
 
     private static func card(
         id: String,

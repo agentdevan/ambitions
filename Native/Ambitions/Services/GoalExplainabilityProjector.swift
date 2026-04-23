@@ -35,6 +35,13 @@ struct DefaultGoalExplainabilityProjector: GoalExplainabilityProjecting {
         }
 
         return GoalExplainabilityState(
+            whisper: whisperState(
+                whyNow: whyNow,
+                freshness: metadata.resourceGraph.freshness,
+                understandingConfidence: metadata.understanding.confidence.overall,
+                contradictionRows: contradictionRows,
+                resourceRows: resourceRows
+            ),
             whyThis: whyThisState(metadata: metadata, primaryStepID: primaryStepID, whyNow: whyNow),
             sourceAudit: GoalSourceAuditSectionState(rows: resourceRows),
             freshness: freshnessState(metadata.resourceGraph.freshness),
@@ -54,6 +61,54 @@ struct DefaultGoalExplainabilityProjector: GoalExplainabilityProjecting {
 }
 
 private extension DefaultGoalExplainabilityProjector {
+    func whisperState(
+        whyNow: WhyNowExplanationMetadata?,
+        freshness: GoalResourceGraphFreshnessMetadata,
+        understandingConfidence: RecommendationConfidence,
+        contradictionRows: [GoalContradictionSummaryState],
+        resourceRows: [GoalSourceAuditRowState]
+    ) -> GoalTrustWhisperState {
+        let confidencePill = GoalTrustWhisperPillState(
+            id: "trust-confidence",
+            title: humanizedConfidence(understandingConfidence),
+            icon: "checkmark.shield",
+            state: confidenceVisualState(understandingConfidence)
+        )
+        let freshnessPill = GoalTrustWhisperPillState(
+            id: "trust-freshness",
+            title: freshnessLabel(freshness.overallPosture),
+            icon: freshness.overallPosture == .currentEnough ? "clock.arrow.circlepath" : "clock.badge.exclamationmark",
+            state: freshnessVisualState(freshness.overallPosture)
+        )
+        let sourcePill = GoalTrustWhisperPillState(
+            id: "trust-source-posture",
+            title: sourcePostureLabel(resourceRows),
+            icon: "text.magnifyingglass",
+            state: sourcePostureState(resourceRows)
+        )
+        let contradictionPill = contradictionRows.isEmpty
+            ? GoalTrustWhisperPillState(
+                id: "trust-contradictions",
+                title: "No conflicts surfaced",
+                icon: "checkmark.circle",
+                state: .success
+            )
+            : GoalTrustWhisperPillState(
+                id: "trust-contradictions",
+                title: contradictionRows.count == 1 ? "1 conflict needs review" : "\(contradictionRows.count) conflicts need review",
+                icon: "exclamationmark.bubble",
+                state: contradictionRows.contains(where: { $0.state == .warning }) ? .warning : .selected
+            )
+        let subtitle = whyNow?.conciseReason ?? "The app is keeping the recommendation visible while deeper trust details stay on demand."
+
+        return GoalTrustWhisperState(
+            title: "Trust whisper",
+            subtitle: subtitle,
+            pillLine: [confidencePill.title, freshnessPill.title, sourcePill.title].joined(separator: " • "),
+            pills: [confidencePill, freshnessPill, sourcePill, contradictionPill]
+        )
+    }
+
     func whyThisState(
         metadata: GoalOrchestrationMetadata,
         primaryStepID: String?,
@@ -155,6 +210,75 @@ private extension DefaultGoalExplainabilityProjector {
             severityLabel: humanized(record.severity.rawValue),
             state: record.severity.visualState
         )
+    }
+
+    func humanizedConfidence(_ confidence: RecommendationConfidence) -> String {
+        switch confidence {
+        case .high:
+            return "Strong fit"
+        case .medium:
+            return "Likely fit"
+        case .low:
+            return "Needs confirmation"
+        }
+    }
+
+    func confidenceVisualState(_ confidence: RecommendationConfidence) -> AmbitionVisualState {
+        switch confidence {
+        case .high:
+            return .success
+        case .medium:
+            return .selected
+        case .low:
+            return .warning
+        }
+    }
+
+    func freshnessLabel(_ posture: GoalFreshnessPosture) -> String {
+        switch posture {
+        case .currentEnough:
+            return "Updated recently"
+        case .aging:
+            return "Based on older context"
+        case .stale:
+            return "Waiting on newer input"
+        case .expired:
+            return "Expired source context"
+        case .unknownFreshness:
+            return "Freshness is still light"
+        case .blockedMissingEvidence:
+            return "Missing evidence is blocking trust"
+        case .providerUnavailable:
+            return "Provider context is unavailable"
+        }
+    }
+
+    func freshnessVisualState(_ posture: GoalFreshnessPosture) -> AmbitionVisualState {
+        switch posture {
+        case .currentEnough:
+            return .success
+        case .aging, .unknownFreshness:
+            return .selected
+        case .stale, .expired, .blockedMissingEvidence, .providerUnavailable:
+            return .warning
+        }
+    }
+
+    func sourcePostureLabel(_ rows: [GoalSourceAuditRowState]) -> String {
+        if rows.contains(where: { $0.state == .warning }) {
+            return "Some source context needs review"
+        }
+        if rows.isEmpty {
+            return "Source context is light"
+        }
+        return "Source context looks stable"
+    }
+
+    func sourcePostureState(_ rows: [GoalSourceAuditRowState]) -> AmbitionVisualState {
+        if rows.contains(where: { $0.state == .warning }) {
+            return .warning
+        }
+        return rows.isEmpty ? .default : .success
     }
 
     func resourceCorrectionControls(

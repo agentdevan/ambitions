@@ -370,6 +370,35 @@ final class AmbitionsUITests: XCTestCase {
         XCTAssertTrue(app.descendants(matching: .any)["goal-detail.path-filmstrip"].waitForExistence(timeout: 10))
     }
 
+    func testGoalDetailTrustAndMemoryDisclosureStayBelowStrategicLayer() throws {
+        let app = makeApp(bootstrapMode: "demo")
+        app.launch()
+
+        XCTAssertTrue(app.tabBars.buttons["Goals"].waitForExistence(timeout: 10))
+        app.tabBars.buttons["Goals"].tap()
+        XCTAssertTrue(app.descendants(matching: .any)["goals.hero-card"].waitForExistence(timeout: 10))
+        tapGoalsHeroPrimaryAction(in: app)
+
+        XCTAssertTrue(app.descendants(matching: .any)["goal-detail.screen"].waitForExistence(timeout: 10))
+        XCTAssertTrue(app.descendants(matching: .any)["goal-detail.strategic-header"].waitForExistence(timeout: 10))
+        XCTAssertTrue(app.descendants(matching: .any)["goal-detail.path-filmstrip"].waitForExistence(timeout: 10))
+
+        let trustToggle = scrollUntilButtonHittable("goal-detail.trust-toggle", fallbackLabel: "Open trust detail", in: app)
+        XCTAssertTrue(trustToggle.waitForExistence(timeout: 10))
+        trustToggle.tap()
+        XCTAssertTrue(scrollUntilElementExists("goal-detail.trust-panel", in: app) || scrollUntilStaticTextExists("Why this is on deck", in: app))
+
+        let correctionsToggle = scrollUntilButtonHittable("goal-detail.corrections-toggle", fallbackLabel: "Open correction actions", in: app)
+        XCTAssertTrue(correctionsToggle.waitForExistence(timeout: 10))
+        correctionsToggle.tap()
+        XCTAssertTrue(scrollUntilElementExists("goal-detail.corrections-panel", in: app) || scrollUntilStaticTextExists("Already learned", in: app))
+
+        let memoryToggle = scrollUntilButtonHittable("goal-detail.memory-toggle", fallbackLabel: "Open deeper memory", in: app)
+        XCTAssertTrue(memoryToggle.waitForExistence(timeout: 10))
+        memoryToggle.tap()
+        XCTAssertTrue(scrollUntilElementExists("goal-detail.memory-panel", in: app) || scrollUntilStaticTextExists("Evidence", in: app))
+    }
+
     func testTodayCanHandOffToPlan() throws {
         let app = makeApp(bootstrapMode: "demo")
         app.launch()

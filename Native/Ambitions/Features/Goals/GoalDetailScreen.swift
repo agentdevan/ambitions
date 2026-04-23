@@ -62,6 +62,13 @@ struct GoalDetailScreen: View {
 
                     GoalDetailTrajectoryCard(trajectory: detail.trajectory)
 
+                    if let explainability = detail.explainability {
+                        GoalTrustWhisperCard(
+                            state: explainability,
+                            isExpanded: $viewModel.isTrustExpanded
+                        )
+                    }
+
                     if detail.assumptions.isEmpty == false {
                         GoalDetailSectionCard(title: "Starter Assumptions", subtitle: "Visible assumptions keep provisional plans honest.") {
                             VStack(alignment: .leading, spacing: theme.spacing.xs) {
@@ -129,7 +136,10 @@ struct GoalDetailScreen: View {
                         }
                     }
 
-                    GoalDetailRecentMovementCard(movement: detail.recentMovement)
+                    GoalMemoryNarrativeCard(
+                        detail: detail,
+                        isExpanded: $viewModel.isMemoryExpanded
+                    )
 
                     GoalDetailSectionCard(
                         title: "Tactics and detail",
@@ -224,56 +234,12 @@ struct GoalDetailScreen: View {
                     if let explainability = detail.explainability {
                         GoalExplainabilitySection(
                             state: explainability,
+                            isTrustExpanded: $viewModel.isTrustExpanded,
+                            isCorrectionsExpanded: $viewModel.isCorrectionsExpanded,
                             onCorrection: { control in
                                 Task { await viewModel.submitExplainabilityCorrection(control, using: container.goalsService) }
                             }
                         )
-                    }
-
-                    GoalDetailSectionCard(title: "Evidence and History", subtitle: "Real native evidence, feedback, and replanning context.") {
-                        VStack(alignment: .leading, spacing: theme.spacing.md) {
-                            if detail.evidence.isEmpty {
-                                Text("No evidence logged yet.")
-                                    .font(theme.typography.body)
-                                    .foregroundStyle(theme.colors.textSecondary)
-                            } else {
-                                VStack(alignment: .leading, spacing: theme.spacing.xs) {
-                                    ForEach(detail.evidence) { item in
-                                        Label {
-                                            VStack(alignment: .leading, spacing: theme.spacing.xxxs) {
-                                                Text(item.title)
-                                                    .font(theme.typography.bodyEmphasized)
-                                                Text(item.subtitle)
-                                                    .font(theme.typography.caption)
-                                                    .foregroundStyle(theme.colors.textSecondary)
-                                            }
-                                        } icon: {
-                                            Image(systemName: "sparkles")
-                                                .foregroundStyle(theme.colors.accentPrimary)
-                                        }
-                                    }
-                                }
-                            }
-
-                            if detail.history.isEmpty == false {
-                                Divider()
-                                VStack(alignment: .leading, spacing: theme.spacing.xs) {
-                                    ForEach(detail.history) { item in
-                                        HStack(alignment: .top, spacing: theme.spacing.sm) {
-                                            TagPill(item.title, state: item.state)
-                                            VStack(alignment: .leading, spacing: theme.spacing.xxxs) {
-                                                Text(item.subtitle)
-                                                    .font(theme.typography.caption)
-                                                    .foregroundStyle(theme.colors.textSecondary)
-                                                Text(item.timestamp)
-                                                    .font(theme.typography.micro)
-                                                    .foregroundStyle(theme.colors.textTertiary)
-                                            }
-                                        }
-                                    }
-                                }
-                            }
-                        }
                     }
                 }
             }
@@ -307,120 +273,137 @@ private struct GoalExplainabilitySection: View {
     @Environment(\.ambitionTheme) private var theme
 
     let state: GoalExplainabilityState
+    @Binding var isTrustExpanded: Bool
+    @Binding var isCorrectionsExpanded: Bool
     let onCorrection: (GoalCorrectionControlState) -> Void
 
     var body: some View {
-        VStack(alignment: .leading, spacing: theme.spacing.lg) {
-            GoalDetailSectionCard(title: "Why this", subtitle: "Structured rationale from canonical understanding and path metadata.") {
-                VStack(alignment: .leading, spacing: theme.spacing.xs) {
-                    Text(state.whyThis.compactSummary)
-                        .font(theme.typography.bodyEmphasized)
-                        .foregroundStyle(theme.colors.textPrimary)
-
-                    ForEach(Array(state.whyThis.lines.enumerated()), id: \.offset) { _, line in
-                        Text(line)
-                            .font(theme.typography.caption)
-                            .foregroundStyle(theme.colors.textSecondary)
-                    }
-                }
-            }
-
-            GoalDetailSectionCard(title: "Source Audit", subtitle: "Provenance, trust, and freshness as surfaced by the canonical resource graph.") {
-                VStack(alignment: .leading, spacing: theme.spacing.sm) {
-                    ForEach(state.sourceAudit.rows) { row in
-                        AppCard(state: row.state) {
-                            VStack(alignment: .leading, spacing: theme.spacing.xs) {
-                                Text(row.title)
-                                    .font(theme.typography.bodyEmphasized)
-                                    .foregroundStyle(theme.colors.textPrimary)
-                                Text(row.subtitle)
-                                    .font(theme.typography.caption)
-                                    .foregroundStyle(theme.colors.textSecondary)
-                                ForEach(row.detailLabels, id: \.self) { label in
-                                    Text(label)
-                                        .font(theme.typography.micro)
-                                        .foregroundStyle(theme.colors.textTertiary)
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-
-            GoalDetailSectionCard(title: "Freshness", subtitle: "Current posture and severity straight from canonical freshness metadata.") {
-                ExplainabilityLabelList(
-                    title: state.freshness.postureLabel,
-                    subtitle: state.freshness.severityLabel,
-                    labels: state.freshness.detailLabels
-                )
-            }
-
-            GoalDetailSectionCard(title: "Confidence", subtitle: "Understanding and path confidence without view-local reinterpretation.") {
-                ExplainabilityLabelList(
-                    title: humanizedConfidence(state.confidence.understandingConfidence),
-                    subtitle: state.confidence.pathConfidence.map(humanizedConfidence),
-                    labels: state.confidence.detailLabels
-                )
-            }
-
-            if state.contradictions.isEmpty == false {
-                GoalDetailSectionCard(title: "Contradictions", subtitle: "Summary-only contradiction context from the canonical contradiction report.") {
+        if isTrustExpanded {
+            VStack(alignment: .leading, spacing: theme.spacing.lg) {
+                GoalDetailSectionCard(title: "Why this is on deck", subtitle: "Calm reasoning that stays attached to the strategic read instead of taking over the screen.") {
                     VStack(alignment: .leading, spacing: theme.spacing.sm) {
-                        ForEach(state.contradictions) { contradiction in
-                            AppCard(state: contradiction.state) {
-                                VStack(alignment: .leading, spacing: theme.spacing.xs) {
-                                    HStack {
-                                        Text(contradiction.title)
-                                            .font(theme.typography.bodyEmphasized)
-                                            .foregroundStyle(theme.colors.textPrimary)
-                                        Spacer()
-                                        TagPill(contradiction.severityLabel, state: contradiction.state)
-                                    }
-                                    Text(contradiction.summary)
-                                        .font(theme.typography.caption)
-                                        .foregroundStyle(theme.colors.textSecondary)
-                                }
-                            }
+                        Text(state.whyThis.compactSummary)
+                            .font(theme.typography.bodyEmphasized)
+                            .foregroundStyle(theme.colors.textPrimary)
+
+                        ForEach(Array(state.whyThis.lines.enumerated()), id: \.offset) { _, line in
+                            Text(line)
+                                .font(theme.typography.caption)
+                                .foregroundStyle(theme.colors.textSecondary)
                         }
                     }
                 }
-            }
+                .accessibilityIdentifier("goal-detail.trust-panel")
 
-            if state.correctionControls.isEmpty == false || state.appliedTeachingBadges.isEmpty == false {
-                GoalDetailSectionCard(title: "Corrections", subtitle: "Explicit manual corrections only, anchored to visible canonical artifacts.") {
+                GoalDetailSectionCard(title: "Trust posture", subtitle: "Confidence, freshness, and contradictions stay legible before the deeper audit.") {
                     VStack(alignment: .leading, spacing: theme.spacing.sm) {
-                        ForEach(state.correctionControls) { control in
-                            AppCard(state: control.state) {
-                                VStack(alignment: .leading, spacing: theme.spacing.xs) {
-                                    Text(control.title)
-                                        .font(theme.typography.bodyEmphasized)
-                                        .foregroundStyle(theme.colors.textPrimary)
-                                    Text(control.subtitle)
-                                        .font(theme.typography.caption)
-                                        .foregroundStyle(theme.colors.textSecondary)
-                                    Button(control.title) {
-                                        onCorrection(control)
-                                    }
-                                    .buttonStyle(AmbitionPressableButtonStyle(state: control.state))
-                                    .padding(.top, theme.spacing.xs)
-                                }
-                            }
-                        }
+                        ExplainabilityLabelList(
+                            title: humanizedConfidence(state.confidence.understandingConfidence),
+                            subtitle: state.confidence.pathConfidence.map(humanizedConfidence),
+                            labels: state.confidence.detailLabels
+                        )
+                        ExplainabilityLabelList(
+                            title: state.freshness.postureLabel,
+                            subtitle: state.freshness.severityLabel,
+                            labels: state.freshness.detailLabels
+                        )
 
-                        if state.appliedTeachingBadges.isEmpty == false {
+                        if state.contradictions.isEmpty == false {
                             Divider()
-                            VStack(alignment: .leading, spacing: theme.spacing.xs) {
-                                Text("Applied teaching")
+                            VStack(alignment: .leading, spacing: theme.spacing.sm) {
+                                Text("What needs reconciling")
                                     .font(theme.typography.section)
                                     .foregroundStyle(theme.colors.textPrimary)
-                                ForEach(state.appliedTeachingBadges) { badge in
-                                    HStack(alignment: .top, spacing: theme.spacing.sm) {
-                                        TagPill(badge.title, state: badge.state)
-                                        Text(badge.subtitle)
-                                            .font(theme.typography.caption)
-                                            .foregroundStyle(theme.colors.textSecondary)
+                                ForEach(state.contradictions) { contradiction in
+                                    AppCard(state: contradiction.state) {
+                                        VStack(alignment: .leading, spacing: theme.spacing.xs) {
+                                            HStack {
+                                                Text(contradiction.title)
+                                                    .font(theme.typography.bodyEmphasized)
+                                                    .foregroundStyle(theme.colors.textPrimary)
+                                                Spacer()
+                                                TagPill(contradiction.severityLabel, state: contradiction.state)
+                                            }
+                                            Text(contradiction.summary)
+                                                .font(theme.typography.caption)
+                                                .foregroundStyle(theme.colors.textSecondary)
+                                        }
                                     }
                                 }
+                            }
+                        }
+                    }
+                }
+
+                GoalDetailSectionCard(title: "Source context", subtitle: "Audit stays available here without dominating the first layer.") {
+                    VStack(alignment: .leading, spacing: theme.spacing.sm) {
+                        ForEach(state.sourceAudit.rows) { row in
+                            AppCard(state: row.state) {
+                                VStack(alignment: .leading, spacing: theme.spacing.xs) {
+                                    Text(row.title)
+                                        .font(theme.typography.bodyEmphasized)
+                                        .foregroundStyle(theme.colors.textPrimary)
+                                    Text(row.subtitle)
+                                        .font(theme.typography.caption)
+                                        .foregroundStyle(theme.colors.textSecondary)
+                                    ForEach(row.detailLabels, id: \.self) { label in
+                                        Text(label)
+                                            .font(theme.typography.micro)
+                                            .foregroundStyle(theme.colors.textTertiary)
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+                .accessibilityIdentifier("goal-detail.audit-panel")
+
+                if state.correctionControls.isEmpty == false || state.appliedTeachingBadges.isEmpty == false {
+                    GoalDetailSectionCard(title: "Corrections and teaching", subtitle: "Use these when the app needs clearer truth, not more admin.") {
+                        VStack(alignment: .leading, spacing: theme.spacing.sm) {
+                            Button(isCorrectionsExpanded ? "Hide correction actions" : "Open correction actions") {
+                                isCorrectionsExpanded.toggle()
+                            }
+                            .buttonStyle(AmbitionPressableButtonStyle(state: .default))
+                            .accessibilityIdentifier("goal-detail.corrections-toggle")
+
+                            if state.appliedTeachingBadges.isEmpty == false {
+                                VStack(alignment: .leading, spacing: theme.spacing.xs) {
+                                    Text("Already learned")
+                                        .font(theme.typography.section)
+                                        .foregroundStyle(theme.colors.textPrimary)
+                                    ForEach(state.appliedTeachingBadges) { badge in
+                                        HStack(alignment: .top, spacing: theme.spacing.sm) {
+                                            TagPill(badge.title, state: badge.state)
+                                            Text(badge.subtitle)
+                                                .font(theme.typography.caption)
+                                                .foregroundStyle(theme.colors.textSecondary)
+                                        }
+                                    }
+                                }
+                            }
+
+                            if isCorrectionsExpanded {
+                                VStack(alignment: .leading, spacing: theme.spacing.sm) {
+                                    ForEach(state.correctionControls) { control in
+                                        AppCard(state: control.state) {
+                                            VStack(alignment: .leading, spacing: theme.spacing.xs) {
+                                                Text(control.title)
+                                                    .font(theme.typography.bodyEmphasized)
+                                                    .foregroundStyle(theme.colors.textPrimary)
+                                                Text(control.subtitle)
+                                                    .font(theme.typography.caption)
+                                                    .foregroundStyle(theme.colors.textSecondary)
+                                                Button(control.title) {
+                                                    onCorrection(control)
+                                                }
+                                                .buttonStyle(AmbitionPressableButtonStyle(state: control.state))
+                                                .padding(.top, theme.spacing.xs)
+                                            }
+                                        }
+                                    }
+                                }
+                                .accessibilityIdentifier("goal-detail.corrections-panel")
                             }
                         }
                     }
@@ -433,6 +416,157 @@ private struct GoalExplainabilitySection: View {
         confidence.rawValue
             .replacingOccurrences(of: "_", with: " ")
             .capitalized
+    }
+}
+
+private struct GoalTrustWhisperCard: View {
+    @Environment(\.ambitionTheme) private var theme
+
+    let state: GoalExplainabilityState
+    @Binding var isExpanded: Bool
+
+    var body: some View {
+        AppCard {
+            VStack(alignment: .leading, spacing: theme.spacing.md) {
+                HStack(alignment: .top, spacing: theme.spacing.sm) {
+                    VStack(alignment: .leading, spacing: theme.spacing.xxxs) {
+                        Text(state.whisper.title)
+                            .font(theme.typography.section)
+                            .foregroundStyle(theme.colors.textPrimary)
+                        Text(state.whisper.subtitle)
+                            .font(theme.typography.caption)
+                            .foregroundStyle(theme.colors.textSecondary)
+                        Text(state.whisper.pillLine)
+                            .font(theme.typography.micro)
+                            .foregroundStyle(theme.colors.textTertiary)
+                    }
+                    Spacer()
+                    Button(isExpanded ? "Hide trust detail" : "Open trust detail") {
+                        isExpanded.toggle()
+                    }
+                    .buttonStyle(AmbitionPressableButtonStyle(state: .default))
+                    .accessibilityIdentifier("goal-detail.trust-toggle")
+                }
+
+                ScrollView(.horizontal, showsIndicators: false) {
+                    HStack(spacing: theme.spacing.xs) {
+                        ForEach(state.whisper.pills) { pill in
+                            TagPill(pill.title, icon: pill.icon, state: pill.state)
+                        }
+                    }
+                }
+            }
+        }
+        .accessibilityIdentifier("goal-detail.trust-whisper")
+        .ambitionPanelAccessibility()
+    }
+}
+
+private struct GoalMemoryNarrativeCard: View {
+    @Environment(\.ambitionTheme) private var theme
+
+    let detail: GoalDetailPresentation
+    @Binding var isExpanded: Bool
+
+    var body: some View {
+        GoalDetailSectionCard(title: "What changed and why", subtitle: memorySubtitle) {
+            VStack(alignment: .leading, spacing: theme.spacing.md) {
+                if detail.recentMovement.items.isEmpty {
+                    Text("No visible changes have landed yet.")
+                        .font(theme.typography.body)
+                        .foregroundStyle(theme.colors.textSecondary)
+                } else {
+                    VStack(alignment: .leading, spacing: theme.spacing.sm) {
+                        ForEach(detail.recentMovement.items.prefix(2)) { item in
+                            HStack(alignment: .top, spacing: theme.spacing.sm) {
+                                TagPill(item.categoryLabel, state: item.state)
+                                VStack(alignment: .leading, spacing: theme.spacing.xxxs) {
+                                    Text(item.title)
+                                        .font(theme.typography.bodyEmphasized)
+                                        .foregroundStyle(theme.colors.textPrimary)
+                                    Text(item.subtitle)
+                                        .font(theme.typography.caption)
+                                        .foregroundStyle(theme.colors.textSecondary)
+                                    Text(item.timestamp)
+                                        .font(theme.typography.micro)
+                                        .foregroundStyle(theme.colors.textTertiary)
+                                }
+                            }
+                        }
+                    }
+                }
+
+                if detail.evidence.isEmpty == false || detail.history.isEmpty == false {
+                    Button(isExpanded ? "Hide deeper memory" : "Open deeper memory") {
+                        isExpanded.toggle()
+                    }
+                    .buttonStyle(AmbitionPressableButtonStyle(state: .default))
+                    .accessibilityIdentifier("goal-detail.memory-toggle")
+                }
+
+                if isExpanded {
+                    VStack(alignment: .leading, spacing: theme.spacing.md) {
+                        if detail.evidence.isEmpty == false {
+                            VStack(alignment: .leading, spacing: theme.spacing.sm) {
+                                Text("Evidence")
+                                    .font(theme.typography.section)
+                                    .foregroundStyle(theme.colors.textPrimary)
+                                ForEach(detail.evidence) { item in
+                                    HStack(alignment: .top, spacing: theme.spacing.sm) {
+                                        Image(systemName: "sparkles")
+                                            .foregroundStyle(theme.colors.accentPrimary)
+                                        VStack(alignment: .leading, spacing: theme.spacing.xxxs) {
+                                            Text(item.title)
+                                                .font(theme.typography.bodyEmphasized)
+                                                .foregroundStyle(theme.colors.textPrimary)
+                                            Text(item.subtitle)
+                                                .font(theme.typography.caption)
+                                                .foregroundStyle(theme.colors.textSecondary)
+                                            Text(item.timestamp)
+                                                .font(theme.typography.micro)
+                                                .foregroundStyle(theme.colors.textTertiary)
+                                        }
+                                    }
+                                }
+                            }
+                        }
+
+                        if detail.history.isEmpty == false {
+                            VStack(alignment: .leading, spacing: theme.spacing.sm) {
+                                Text("Adjustments")
+                                    .font(theme.typography.section)
+                                    .foregroundStyle(theme.colors.textPrimary)
+                                ForEach(detail.history) { item in
+                                    HStack(alignment: .top, spacing: theme.spacing.sm) {
+                                        TagPill(item.title, state: item.state)
+                                        VStack(alignment: .leading, spacing: theme.spacing.xxxs) {
+                                            Text(item.subtitle)
+                                                .font(theme.typography.caption)
+                                                .foregroundStyle(theme.colors.textSecondary)
+                                            Text(item.timestamp)
+                                                .font(theme.typography.micro)
+                                                .foregroundStyle(theme.colors.textTertiary)
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                    .accessibilityIdentifier("goal-detail.memory-panel")
+                }
+            }
+        }
+        .accessibilityIdentifier("goal-detail.memory-narrative")
+    }
+
+    private var memorySubtitle: String {
+        if detail.recentMovement.items.isEmpty == false {
+            return detail.recentMovement.summary
+        }
+        if detail.evidence.isEmpty == false || detail.history.isEmpty == false {
+            return "The recent story stays readable before the deeper log details."
+        }
+        return "Memory stays available here without turning the screen into a raw log."
     }
 }
 
@@ -532,6 +666,23 @@ private struct ExplainabilityLabelList: View {
                 target: PreviewGoalsScenarios.supportTarget,
                 state: .loaded(PreviewGoalsScenarios.detailScenarios[PreviewGoalsScenarios.supportTarget.id]!),
                 lens: .path
+            )
+        )
+    }
+    .appContainer(PreviewAppContainerFactory.preview)
+    .ambitionTheme(.dark)
+}
+
+#Preview("Goal Detail Trust Heavy") {
+    NavigationStack {
+        GoalDetailScreen(
+            target: PreviewGoalsScenarios.activeTarget,
+            viewModel: GoalDetailViewModel(
+                target: PreviewGoalsScenarios.activeTarget,
+                state: .loaded(PreviewGoalsScenarios.detailScenarios[PreviewGoalsScenarios.activeTarget.id]!),
+                isTrustExpanded: true,
+                isCorrectionsExpanded: true,
+                isMemoryExpanded: true
             )
         )
     }

@@ -121,6 +121,9 @@ private extension GoalDetailExplainabilityActionTests {
         file: StaticString = #filePath,
         line: UInt = #line
     ) {
+        XCTAssertEqual(lhs?.whisper.title, rhs?.whisper.title, file: file, line: line)
+        XCTAssertEqual(lhs?.whisper.subtitle, rhs?.whisper.subtitle, file: file, line: line)
+        XCTAssertEqual(lhs?.whisper.pills.map(\.title), rhs?.whisper.pills.map(\.title), file: file, line: line)
         XCTAssertEqual(lhs?.whyThis.compactSummary, rhs?.whyThis.compactSummary, file: file, line: line)
         XCTAssertEqual(lhs?.whyThis.lines, rhs?.whyThis.lines, file: file, line: line)
         XCTAssertEqual(

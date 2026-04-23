@@ -119,6 +119,16 @@ final class GoalDetailStrategicPresentationTests: XCTestCase {
         XCTAssertNotNil(detail.nextMovement)
         XCTAssertFalse(detail.pathStages.isEmpty)
     }
+
+    func testPreviewTrustHeavyScenarioKeepsTrustSecondAndMemoryAvailable() {
+        let detail = tryUnwrapScenario(PreviewGoalsScenarios.activeTarget.id)
+
+        XCTAssertNotNil(detail.explainability)
+        XCTAssertEqual(detail.strategicStatus.title, "Path is in motion")
+        XCTAssertEqual(detail.nextMovement?.title, "Refresh release docs and trust copy")
+        XCTAssertFalse(detail.recentMovement.items.isEmpty)
+        XCTAssertFalse(detail.history.isEmpty)
+    }
 }
 
 private extension GoalDetailStrategicPresentationTests {

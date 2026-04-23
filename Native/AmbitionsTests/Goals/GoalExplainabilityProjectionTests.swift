@@ -18,6 +18,8 @@ final class GoalExplainabilityProjectionTests: XCTestCase {
         let expectedResourceIDs = metadata.resourceGraph.resources
             .sorted(by: DefaultGoalExplainabilityProjector.resourceOrdering)
             .map(\.id)
+        XCTAssertFalse(state.whisper.title.isEmpty)
+        XCTAssertFalse(state.whisper.pills.isEmpty)
         XCTAssertEqual(state.sourceAudit.rows.map(\.resourceID), expectedResourceIDs)
         XCTAssertEqual(state.freshness.posture, metadata.resourceGraph.freshness.overallPosture)
         XCTAssertEqual(state.confidence.understandingConfidence, metadata.understanding.confidence.overall)

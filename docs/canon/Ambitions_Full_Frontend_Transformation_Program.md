@@ -22,9 +22,12 @@ Live queue truth in the current repo:
 - Batch 38 — Completed
 - Batch 44 — Completed in registry history
 - Batch 45 — Completed
-- Batch 46 — Active
-- Batches 47-59 — Queued
-- the front-end transformation program is active in implementation at **Batch 46**
+- Batch 46 — Completed
+- Batch 47 — Completed
+- Batch 48 — Completed
+- Batch 49 — Active
+- Batches 50-59 — Queued
+- the front-end transformation program is active in implementation at **Batch 49**
 
 Batch 39 is a docs-only foundation batch.
 It makes the transformation program explicit enough to guide later implementation batches without authorizing shell implementation, route rewiring, or surface redesign work ahead of Batch 40.
@@ -243,7 +246,7 @@ Implications:
 | 45 | Front-End Transformation 06 / Goals rebuild I — direction board and horizon ladder | Completed | Goals overview rebuild. |
 | 46 | Front-End Transformation 07 / Goal intake and Strategy Composer | Completed | Full create-goal and planning setup redesign. |
 | 47 | Front-End Transformation 08 / Goal Detail rebuild I — strategic chamber and path filmstrip | Completed | Goal Detail composition phase 1 delivered as the strategic first-layer / path-filmstrip rebuild. |
-| 48 | Front-End Transformation 09 / Goal Detail rebuild II — trust whisper, correction, audit, and memory | Queued | Goal Detail composition phase 2. |
+| 48 | Front-End Transformation 09 / Goal Detail rebuild II — trust whisper, correction, audit, and memory | Active | Goal Detail composition phase 2. |
 | 49 | Front-End Transformation 10 / Plan rebuild I — elastic week and pressure scrubber | Queued | Plan surface phase 1. |
 | 50 | Front-End Transformation 11 / Plan rebuild II — habits, captures, weekly review, and shaping logic | Queued | Plan ecosystem phase 2. |
 | 51 | Front-End Transformation 12 / Insights rebuild and reflection OS | Queued | Includes Activity History and review coherence. |

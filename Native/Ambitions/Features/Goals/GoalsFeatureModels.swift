@@ -529,7 +529,22 @@ struct GoalAppliedTeachingBadgeState: Identifiable, Sendable {
     let state: AmbitionVisualState
 }
 
+struct GoalTrustWhisperPillState: Identifiable, Sendable {
+    let id: String
+    let title: String
+    let icon: String
+    let state: AmbitionVisualState
+}
+
+struct GoalTrustWhisperState: Sendable {
+    let title: String
+    let subtitle: String
+    let pillLine: String
+    let pills: [GoalTrustWhisperPillState]
+}
+
 struct GoalExplainabilityState: Sendable {
+    let whisper: GoalTrustWhisperState
     let whyThis: GoalWhyThisState
     let sourceAudit: GoalSourceAuditSectionState
     let freshness: GoalFreshnessState
