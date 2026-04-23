@@ -16,8 +16,9 @@ Use these specs together with:
 - These docs define future design truth. They do not activate future UI batches.
 - Batch 38 is completed.
 - Batch 48 is completed in the registry.
-- Batch 49 is the active frontend implementation batch in the registry.
-- Batches 50-60 remain queued future implementation work.
+- Batch 49 is completed in the registry.
+- Batch 50 is the active frontend implementation batch in the registry.
+- Batches 51-60 remain queued future implementation work.
 - Treat iPhone execution truth as primary unless a spec explicitly defines a future-platform role.
 - Prefer these docs over vague "premium" or "modern" interpretation when a future batch needs exact UI direction.
 - If a future implementation task conflicts with current shipping behavior, preserve shipping truth until the relevant frontend batch becomes active.

@@ -2,41 +2,38 @@ import XCTest
 @testable import Ambitions
 
 final class PlanFeatureServiceTests: XCTestCase {
-    func testEmptyRepositoriesReturnTruthfulEmptyPlan() async throws {
+    func testEmptyRepositoriesReturnOpenRealityModelWeek() async throws {
         let repositories = try await makeRepositories()
         let service = RepositoryBackedPlanService(repositories: repositories)
 
         let dashboard = try await service.loadPlanDashboard(now: fixedDate)
 
         XCTAssertEqual(dashboard.mode, .empty)
-        XCTAssertEqual(dashboard.emptyTitle, "No weekly plan pressure yet")
-        XCTAssertEqual(dashboard.weeklyIntent.attentionLabel, "Open week")
-        XCTAssertEqual(dashboard.goalShapingItems.count, 0)
-        XCTAssertTrue(dashboard.focusItems.isEmpty)
-        XCTAssertTrue(dashboard.metrics.contains(where: { $0.id == "plan-routines" && $0.value == "0" }))
+        XCTAssertEqual(dashboard.emptyTitle, "No weekly pressure yet")
+        XCTAssertEqual(dashboard.believability.label, "Open")
+        XCTAssertEqual(dashboard.primaryAction.kind, .useRoom)
+        XCTAssertEqual(dashboard.weekDays.count, 7)
+        XCTAssertEqual(dashboard.pressureScrubber.points.count, 7)
+        XCTAssertTrue(dashboard.goalShapingItems.isEmpty)
     }
 
-    func testActiveGoalsProduceWeeklyFocusRowsAndGoalShapingSummaries() async throws {
+    func testActiveGoalsProduceElasticWeekAndGoalRelationshipSignals() async throws {
         let repositories = try await makeRepositories()
-        let goalsService = RepositoryBackedGoalsService(repositories: repositories)
-        _ = try await goalsService.createGoal(
-            CreateGoalRequest(title: "Submit my conference talk proposal by 2026-05-15"),
-            now: fixedDate
-        )
+        try await repositories.goals.saveGoals([makeWeekVisibleGoal()])
         let service = RepositoryBackedPlanService(repositories: repositories)
 
         let dashboard = try await service.loadPlanDashboard(now: fixedDate)
 
         XCTAssertEqual(dashboard.mode, .active)
-        XCTAssertFalse(dashboard.focusItems.isEmpty)
+        XCTAssertEqual(dashboard.weekDays.count, 7)
+        XCTAssertEqual(dashboard.pressureScrubber.points.count, 7)
         XCTAssertFalse(dashboard.goalShapingItems.isEmpty)
-        XCTAssertTrue(dashboard.focusItems.allSatisfy { $0.target?.goalID != nil })
-        XCTAssertTrue(dashboard.goalShapingItems.allSatisfy { $0.target?.goalID != nil })
-        XCTAssertEqual(dashboard.weeklyIntent.title, "This week is carrying real goal work")
-        XCTAssertTrue(dashboard.metrics.contains(where: { $0.id == "plan-week-work" && $0.value != "0" }))
+        XCTAssertEqual(dashboard.shapingActions.map(\.kind), [.edit, .patch, .protect, .lighten])
+        XCTAssertTrue(dashboard.hero.contextPills.contains(where: { $0.title.contains("goals visible") }))
+        XCTAssertNotNil(dashboard.primaryAction.goalTarget)
     }
 
-    func testBlockedDraftsAndOpenCapturesSurfacePlanningPressure() async throws {
+    func testBlockedDraftsAndOpenCapturesSurfaceRealityPressureTruthfully() async throws {
         let repositories = try await makeRepositories()
         let intake = GoalEngineIntakeService()
         let draftBuild = intake.buildGoalDraft(from: "I want to do something", referenceNow: GoalEngineFixtures.fixedNow)
@@ -63,14 +60,14 @@ final class PlanFeatureServiceTests: XCTestCase {
 
         let dashboard = try await service.loadPlanDashboard(now: fixedDate)
 
-        XCTAssertEqual(dashboard.posture.visualState, .warning)
-        XCTAssertEqual(dashboard.weeklyIntent.attentionLabel, "Clarify first")
-        XCTAssertTrue(dashboard.pressureItems.contains(where: { $0.id == "plan-pressure-captures" && $0.valueLabel == "1" }))
-        XCTAssertTrue(dashboard.pressureItems.contains(where: { $0.id == "plan-pressure-clarity" && $0.valueLabel != "0" }))
-        XCTAssertTrue(dashboard.metrics.contains(where: { $0.id == "plan-pressure" && $0.value != "0" }))
+        XCTAssertEqual(dashboard.believability.label, "Needs clarity")
+        XCTAssertEqual(dashboard.believability.visualState, .warning)
+        XCTAssertTrue(dashboard.hero.pressureSummary.contains("captures"))
+        XCTAssertTrue(dashboard.hero.trustWhisper.contains("Clarify"))
+        XCTAssertEqual(dashboard.primaryAction.kind, .shapeWeek)
     }
 
-    func testHabitLikeGoalsRemainRepresentedUnderPlan() async throws {
+    func testHabitLikeGoalsRemainRepresentedUnderPlanSupportLoops() async throws {
         #if DEBUG
         let store = try AmbitionsPersistenceStore(inMemory: true)
         let repositories = try await AppContainerFactory.prepareRepositories(for: .demo, store: store)
@@ -78,8 +75,23 @@ final class PlanFeatureServiceTests: XCTestCase {
 
         let dashboard = try await service.loadPlanDashboard(now: fixedDate)
 
-        XCTAssertTrue(dashboard.metrics.contains(where: { $0.id == "plan-routines" && $0.value != "0" }))
         XCTAssertEqual(dashboard.secondaryDestinations.map(\.id), ["plan-habits"])
+        XCTAssertTrue(dashboard.secondaryDestinations.contains(where: { $0.id == "plan-habits" && $0.valueLabel != "0" }))
+        #else
+        throw XCTSkip("Demo bootstrap fixtures are only available in DEBUG builds.")
+        #endif
+    }
+
+    func testDemoPlanProtectActionRemainsActionable() async throws {
+        #if DEBUG
+        let store = try AmbitionsPersistenceStore(inMemory: true)
+        let repositories = try await AppContainerFactory.prepareRepositories(for: .demo, store: store)
+        let service = RepositoryBackedPlanService(repositories: repositories)
+
+        let dashboard = try await service.loadPlanDashboard(now: fixedDate)
+        let protectAction = try XCTUnwrap(dashboard.shapingActions.first(where: { $0.kind == .protect }))
+
+        XCTAssertTrue(protectAction.goalTarget != nil || protectAction.planRoute != nil)
         #else
         throw XCTSkip("Demo bootstrap fixtures are only available in DEBUG builds.")
         #endif
@@ -100,6 +112,127 @@ private extension PlanFeatureServiceTests {
             feedback: SwiftDataFeedbackEventRepository(store: store),
             captures: SwiftDataCaptureRepository(store: store),
             appState: SwiftDataAppStateRepository(store: store)
+        )
+    }
+
+    func makeWeekVisibleGoal() -> Goal {
+        let actor = GoalActor(
+            actorID: "self",
+            displayName: "You",
+            ownership: .self,
+            roleLabel: "Primary owner",
+            isPrimary: true
+        )
+        let timing = GoalTiming(
+            tempo: .deadlineBased,
+            timingType: .dueAt,
+            startsOn: nil,
+            dueAt: "2026-04-17T12:00:00Z",
+            targetBy: nil,
+            windowStart: nil,
+            windowEnd: nil,
+            suggestedNextAt: nil,
+            repeatEveryDays: nil,
+            progressReviewCadenceDays: 7
+        )
+        let strategy = PlanningStrategy(
+            strategyKind: .adaptive,
+            allowParallelSteps: true,
+            maxActiveSteps: 3,
+            preferredSectionOrder: [.activeSteps],
+            defaultStepType: .actionUnit,
+            autoGenerateReviewSection: true,
+            preferShortSteps: true,
+            revisitCadenceDays: 7
+        )
+        let progress = ProgressStrategy(
+            metricKind: .stepCompletion,
+            rollupMethod: .ratio,
+            targetStepCount: nil,
+            targetEvidenceCount: nil,
+            targetMinutes: nil,
+            supportsUntimedProgress: true,
+            countsChildGoals: false,
+            countsSupportGoals: false
+        )
+        let step = Step(
+            id: "step-plan-visible",
+            sectionID: "section-plan-visible",
+            title: "Draft and submit the proposal",
+            summary: "Finish the visible draft and send it before the deadline.",
+            type: .actionUnit,
+            state: .planned,
+            owner: actor,
+            timing: timing,
+            dependencyStepIDs: [],
+            isOptional: false,
+            isRepeatable: false,
+            evidenceRequired: true,
+            successSignals: ["Proposal submitted"],
+            actionability: StepActionability(
+                action: "Draft and submit the proposal",
+                completionDefinition: "The proposal is submitted.",
+                evidenceOfCompletion: ["Submission confirmation"],
+                fallbackMicroStep: "Open the draft and write the next paragraph.",
+                contextRequirements: []
+            )
+        )
+        let plan = GoalPlan(
+            id: "plan-visible",
+            goalID: "goal-plan-visible",
+            version: goalEnginePlanVersion,
+            generatedAt: GoalEngineFixtures.fixedNow,
+            summary: "Conference proposal work is explicitly carried by this week.",
+            strategy: strategy,
+            sections: [
+                PlanSection(
+                    id: "section-plan-visible",
+                    goalID: "goal-plan-visible",
+                    title: "Active",
+                    summary: nil,
+                    kind: .activeSteps,
+                    orderIndex: 0,
+                    steps: [step]
+                )
+            ],
+            assumptions: [],
+            lint: PlanLintResult(
+                goalID: "goal-plan-visible",
+                planVersion: goalEnginePlanVersion,
+                isValid: true,
+                issueCount: 0,
+                issues: []
+            ),
+            evaluation: PlanningEvaluation(
+                feasibilityScore: 0.84,
+                feasibilityLevel: .comfortable,
+                recommendationConfidence: .high,
+                pressureLevel: .low,
+                fragilityLevel: .low,
+                effortPosture: .steady,
+                reasons: ["The visible step fits cleanly inside the current week."]
+            )
+        )
+        return Goal(
+            schemaVersion: goalEngineSchemaVersion,
+            id: "goal-plan-visible",
+            revision: 1,
+            createdAt: GoalEngineFixtures.fixedNow,
+            updatedAt: GoalEngineFixtures.fixedNow,
+            state: .active,
+            title: "Submit conference proposal",
+            summary: nil,
+            mode: .achievement,
+            relationshipKind: .independent,
+            actor: actor,
+            parentGoalID: nil,
+            childGoalIDs: [],
+            supportGoalIDs: [],
+            tags: [],
+            timing: timing,
+            planningStrategy: strategy,
+            progressStrategy: progress,
+            plan: plan
         )
     }
 }

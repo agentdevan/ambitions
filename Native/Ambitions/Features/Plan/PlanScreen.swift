@@ -6,6 +6,8 @@ struct PlanScreen: View {
     @Environment(\.ambitionTheme) private var theme
     @Environment(\.accessibilityReduceMotion) private var reduceMotion
     @State private var viewModel: PlanViewModel
+    @State private var selectedDayID: String?
+    @State private var selectedActionKind: PlanShapingActionKind = .patch
     private let showsNavigationChrome: Bool
 
     @MainActor
@@ -19,7 +21,7 @@ struct PlanScreen: View {
             LazyVStack(alignment: .leading, spacing: theme.spacing.lg) {
                 switch viewModel.state {
                 case .loading:
-                    AsyncStateCard(.loading(lines: 8))
+                    AsyncStateCard(.loading(lines: 9))
                         .transition(.ambitionPanel)
                 case let .failed(message):
                     AsyncStateCard(
@@ -30,21 +32,41 @@ struct PlanScreen: View {
                     }
                     .transition(.ambitionPanel)
                 case let .loaded(dashboard):
-                    PlanHeroCard(dashboard: dashboard)
-
-                    PlanWeeklyIntentCard(summary: dashboard.weeklyIntent)
+                    PlanHeroCard(hero: dashboard.hero, action: dashboard.primaryAction, onPrimaryAction: handlePrimaryAction)
 
                     if let emptyTitle = dashboard.emptyTitle, let emptyMessage = dashboard.emptyMessage {
                         EmptyStateCard(title: emptyTitle, message: emptyMessage, icon: AppTab.plan.systemImage)
                     }
 
-                    PlanMetricsCard(metrics: dashboard.metrics)
+                    PlanPressureScrubberCard(
+                        scrubber: dashboard.pressureScrubber,
+                        selectedDayID: bindingForSelectedDay(defaultID: dashboard.pressureScrubber.defaultDayID)
+                    )
 
-                    PlanGoalShapingCard(items: dashboard.goalShapingItems)
+                    PlanElasticWeekCard(
+                        days: dashboard.weekDays,
+                        selectedDayID: bindingForSelectedDay(defaultID: dashboard.pressureScrubber.defaultDayID)
+                    )
 
-                    PlanFocusCard(items: dashboard.focusItems)
+                    if let selectedDay = selectedDay(in: dashboard) {
+                        PlanBelievabilityCard(
+                            believability: dashboard.believability,
+                            selectedDay: selectedDay,
+                            onOpenGoal: openGoal,
+                            onOpenWindow: handleOpenWindow
+                        )
+                    }
 
-                    PlanPressureCard(items: dashboard.pressureItems)
+                    PlanShapingActionsCard(
+                        actions: dashboard.shapingActions,
+                        selectedKind: $selectedActionKind,
+                        selectedDay: selectedDay(in: dashboard),
+                        onActivate: handleShapingAction
+                    )
+
+                    PlanGoalRelationshipCard(items: dashboard.goalShapingItems) { target in
+                        openGoal(target)
+                    }
 
                     PlanSecondaryDestinationsCard(destinations: dashboard.secondaryDestinations) { destination in
                         if destination.id == "plan-habits" {
@@ -75,8 +97,12 @@ struct PlanScreen: View {
         }
         .accessibilityIdentifier("plan.screen")
         .animation(theme.motion.animation(reduceMotion: reduceMotion, emphasis: true), value: viewModel.stateKey)
+        .onChange(of: viewModel.stateKey) { _, _ in
+            syncSelection()
+        }
         .task {
             await viewModel.load(using: container.planService)
+            syncSelection()
         }
     }
 
@@ -86,238 +112,677 @@ struct PlanScreen: View {
         }
         return appContainer
     }
-}
 
-private struct PlanWeeklyIntentCard: View {
-    @Environment(\.ambitionTheme) private var theme
+    private func bindingForSelectedDay(defaultID: String) -> Binding<String> {
+        Binding(
+            get: { selectedDayID ?? defaultID },
+            set: { selectedDayID = $0 }
+        )
+    }
 
-    let summary: PlanWeeklyIntentSummary
+    private func selectedDay(in dashboard: PlanDashboard) -> PlanElasticWeekDayState? {
+        let activeID = selectedDayID ?? dashboard.pressureScrubber.defaultDayID
+        return dashboard.weekDays.first(where: { $0.id == activeID }) ?? dashboard.weekDays.first
+    }
 
-    var body: some View {
-        AppCard {
-            VStack(alignment: .leading, spacing: theme.spacing.md) {
-                SectionHeader(
-                    title: "This week",
-                    subtitle: "Plan explains what the current week is trying to carry before it asks for more structure."
-                )
-
-                VStack(alignment: .leading, spacing: theme.spacing.xs) {
-                    Text(summary.title)
-                        .font(theme.typography.section)
-                        .foregroundStyle(theme.colors.textPrimary)
-                    Text(summary.detail)
-                        .font(theme.typography.body)
-                        .foregroundStyle(theme.colors.textSecondary)
-                        .fixedSize(horizontal: false, vertical: true)
-                }
-
-                HStack(spacing: theme.spacing.xs) {
-                    TagPill(summary.attentionLabel, icon: "scope", state: .selected)
-                    TagPill(summary.goalCountLabel, icon: "target", state: .default)
-                }
-            }
+    private func syncSelection() {
+        guard case let .loaded(dashboard) = viewModel.state else { return }
+        if dashboard.weekDays.contains(where: { $0.id == selectedDayID }) == false {
+            selectedDayID = dashboard.pressureScrubber.defaultDayID
         }
-        .accessibilityIdentifier("plan.weekly-intent-card")
+        if dashboard.shapingActions.contains(where: { $0.kind == selectedActionKind }) == false {
+            selectedActionKind = .patch
+        }
+    }
+
+    private func handlePrimaryAction(_ action: PlanWeekPrimaryAction) {
+        if let goalTarget = action.goalTarget {
+            openGoal(goalTarget)
+            return
+        }
+        if let planRoute = action.planRoute {
+            container.navigation.openPlanRoute(planRoute)
+        }
+    }
+
+    private func handleShapingAction(_ action: PlanShapingActionState) {
+        if let goalTarget = action.goalTarget {
+            openGoal(goalTarget)
+            return
+        }
+        if let planRoute = action.planRoute {
+            container.navigation.openPlanRoute(planRoute)
+        }
+    }
+
+    private func handleOpenWindow(_ window: PlanOpenWindowState) {
+        guard let target = window.target else { return }
+        openGoal(target)
+    }
+
+    private func openGoal(_ target: GoalRouteTarget) {
+        container.navigation.openGoalDetail(target)
     }
 }
 
 private struct PlanHeroCard: View {
     @Environment(\.ambitionTheme) private var theme
 
-    let dashboard: PlanDashboard
+    let hero: PlanRealityHeroState
+    let action: PlanWeekPrimaryAction
+    let onPrimaryAction: (PlanWeekPrimaryAction) -> Void
 
     var body: some View {
-        HeroCard(state: dashboard.posture.visualState) {
+        HeroCard(state: action.state) {
             VStack(alignment: .leading, spacing: theme.spacing.md) {
                 VStack(alignment: .leading, spacing: theme.spacing.xxs) {
-                    Text("Plan")
+                    Text(hero.eyebrow)
                         .font(theme.typography.micro)
                         .foregroundStyle(theme.colors.accentWarm)
-                    Text(dashboard.title)
+                    Text(hero.title)
                         .font(theme.typography.hero)
                         .foregroundStyle(theme.colors.textPrimary)
-                    Text(dashboard.subtitle)
+                    Text(hero.subtitle)
                         .font(theme.typography.body)
                         .foregroundStyle(theme.colors.textSecondary)
                 }
 
-                HStack(spacing: theme.spacing.xs) {
-                    TagPill(dashboard.timeframeLabel, icon: "calendar", state: .default)
-                    TagPill(dashboard.posture.label, icon: AppTab.plan.systemImage, state: dashboard.posture.visualState)
-                }
-
-                VStack(alignment: .leading, spacing: theme.spacing.xxxs) {
-                    Text(dashboard.posture.title)
+                VStack(alignment: .leading, spacing: theme.spacing.xs) {
+                    Text(hero.dominantTruth)
                         .font(theme.typography.section)
                         .foregroundStyle(theme.colors.textPrimary)
-                    Text(dashboard.posture.detail)
+                    Text(hero.roomSummary)
                         .font(theme.typography.body)
                         .foregroundStyle(theme.colors.textSecondary)
-                }
-            }
-        }
-        .ambitionPanelAccessibility()
-    }
-}
-
-private struct PlanMetricsCard: View {
-    @Environment(\.ambitionTheme) private var theme
-
-    let metrics: [MetricSummary]
-
-    var body: some View {
-        AppCard {
-            VStack(alignment: .leading, spacing: theme.spacing.md) {
-                SectionHeader(title: "Weekly shape", subtitle: "A compact read on what the current week is trying to carry.")
-
-                LazyVGrid(columns: [GridItem(.adaptive(minimum: 142), spacing: theme.spacing.sm)], spacing: theme.spacing.sm) {
-                    ForEach(metrics) { metric in
-                        StatTile(
-                            title: metric.title,
-                            value: metric.value,
-                            detail: metric.detail,
-                            icon: metric.icon,
-                            state: metric.id == "plan-pressure" && metric.value != "0" ? .warning : .default
-                        )
-                    }
-                }
-            }
-        }
-    }
-}
-
-private struct PlanFocusCard: View {
-    @Environment(\.ambitionTheme) private var theme
-
-    let items: [PlanFocusItem]
-
-    var body: some View {
-        AppCard {
-            VStack(alignment: .leading, spacing: theme.spacing.md) {
-                SectionHeader(
-                    title: "Visible work",
-                    subtitle: items.isEmpty
-                        ? "No current step is pressing into this weekly view."
-                        : "The week is anchored by these goal-linked steps."
-                )
-
-                if items.isEmpty {
-                    Text("Plan is staying quiet because there is no dated or suggested work to promote here.")
-                        .font(theme.typography.body)
-                        .foregroundStyle(theme.colors.textSecondary)
-                } else {
-                    VStack(alignment: .leading, spacing: theme.spacing.sm) {
-                        ForEach(items) { item in
-                            if let target = item.target {
-                                NavigationLink(value: target) {
-                                    PlanFocusRow(item: item)
-                                }
-                                .buttonStyle(.plain)
-                            } else {
-                                PlanFocusRow(item: item)
-                            }
-                        }
-                    }
-                }
-            }
-        }
-    }
-}
-
-private struct PlanFocusRow: View {
-    @Environment(\.ambitionTheme) private var theme
-
-    let item: PlanFocusItem
-
-    var body: some View {
-        VStack(alignment: .leading, spacing: theme.spacing.xs) {
-            HStack(alignment: .top, spacing: theme.spacing.sm) {
-                VStack(alignment: .leading, spacing: theme.spacing.xxxs) {
-                    HStack(spacing: theme.spacing.xs) {
-                        TagPill(item.statusLabel, state: item.visualState)
-                        TagPill(item.timingLabel, state: .default)
-                    }
-                    Text(item.title)
-                        .font(theme.typography.section)
-                        .foregroundStyle(theme.colors.textPrimary)
-                    Text(item.subtitle)
-                        .font(theme.typography.body)
-                        .foregroundStyle(theme.colors.textSecondary)
-                        .fixedSize(horizontal: false, vertical: true)
-                    Text(item.goalLabel)
+                    Text(hero.pressureSummary)
                         .font(theme.typography.caption)
                         .foregroundStyle(theme.colors.textTertiary)
                 }
-                Spacer(minLength: theme.spacing.sm)
-                Image(systemName: "chevron.right")
-                    .font(.system(size: theme.icon.smallSize, weight: theme.icon.symbolWeight))
-                    .foregroundStyle(theme.colors.textTertiary)
+
+                ScrollView(.horizontal, showsIndicators: false) {
+                    HStack(spacing: theme.spacing.xs) {
+                        ForEach(hero.contextPills) { pill in
+                            TagPill(pill.title, icon: pill.icon, state: pill.state)
+                        }
+                    }
+                }
+
+                HStack(alignment: .top, spacing: theme.spacing.sm) {
+                    Image(systemName: "waveform.path.ecg.text")
+                        .font(.system(size: theme.icon.smallSize, weight: theme.icon.symbolWeight))
+                        .foregroundStyle(theme.colors.textTertiary)
+                    Text(hero.trustWhisper)
+                        .font(theme.typography.caption)
+                        .foregroundStyle(theme.colors.textTertiary)
+                        .fixedSize(horizontal: false, vertical: true)
+                }
+
+                Button {
+                    onPrimaryAction(action)
+                } label: {
+                    HStack(alignment: .center, spacing: theme.spacing.sm) {
+                        Image(systemName: action.systemImage)
+                            .font(.system(size: theme.icon.mediumSize, weight: theme.icon.symbolWeight))
+                        VStack(alignment: .leading, spacing: theme.spacing.xxxs) {
+                            Text(action.title)
+                                .font(theme.typography.bodyEmphasized)
+                            Text(action.subtitle)
+                                .font(theme.typography.caption)
+                                .foregroundStyle(theme.colors.textSecondary)
+                        }
+                        Spacer()
+                        Image(systemName: "arrow.right")
+                            .font(.system(size: theme.icon.smallSize, weight: theme.icon.symbolWeight))
+                    }
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                }
+                .buttonStyle(AmbitionButtonStyle(tier: .hero, state: action.state))
+                .accessibilityIdentifier("plan.hero.primary-action")
             }
         }
-        .padding(theme.spacing.md)
-        .background(RoundedRectangle(cornerRadius: theme.radius.lg, style: .continuous).fill(theme.colors.surfaceOverlay))
-        .overlay(RoundedRectangle(cornerRadius: theme.radius.lg, style: .continuous).stroke(theme.colors.strokeSubtle, lineWidth: 1))
+        .accessibilityIdentifier("plan.hero-card")
         .ambitionPanelAccessibility()
     }
 }
 
-private struct PlanPressureCard: View {
+private struct PlanPressureScrubberCard: View {
     @Environment(\.ambitionTheme) private var theme
 
-    let items: [PlanPressureItem]
+    let scrubber: PlanPressureScrubberState
+    @Binding var selectedDayID: String
 
     var body: some View {
         AppCard {
             VStack(alignment: .leading, spacing: theme.spacing.md) {
-                SectionHeader(title: "Planning pressure", subtitle: "Captures, clarity gaps, and friction stay visible before they become daily noise.")
+                SectionHeader(title: scrubber.title, subtitle: scrubber.subtitle)
 
-                VStack(alignment: .leading, spacing: theme.spacing.sm) {
-                    ForEach(items) { item in
-                        PlanInfoRow(title: item.title, detail: item.detail, valueLabel: item.valueLabel, icon: item.icon, state: item.visualState)
-                    }
-                }
-            }
-        }
-    }
-}
+                ScrollView(.horizontal, showsIndicators: false) {
+                    HStack(spacing: theme.spacing.sm) {
+                        ForEach(scrubber.points) { point in
+                            Button {
+                                selectedDayID = point.id
+                            } label: {
+                                VStack(alignment: .leading, spacing: theme.spacing.xs) {
+                                    HStack {
+                                        Text(point.weekdayLabel)
+                                            .font(theme.typography.caption)
+                                        Spacer(minLength: theme.spacing.xs)
+                                        Text(point.dateLabel)
+                                            .font(theme.typography.caption)
+                                    }
+                                    .foregroundStyle(selectedDayID == point.id ? theme.colors.textPrimary : theme.colors.textSecondary)
 
-private struct PlanGoalShapingCard: View {
-    @Environment(\.ambitionTheme) private var theme
+                                    Capsule()
+                                        .fill(theme.stateStyle(for: point.level.visualState).accent.opacity(selectedDayID == point.id ? 0.9 : 0.45))
+                                        .frame(width: CGFloat(72 * point.pressureValue), height: 8)
 
-    let items: [PlanGoalShapingItem]
-
-    var body: some View {
-        AppCard {
-            VStack(alignment: .leading, spacing: theme.spacing.md) {
-                SectionHeader(
-                    title: "Needs shaping attention",
-                    subtitle: items.isEmpty
-                        ? "No active goal is asking for special shaping attention right now."
-                        : "These goals best explain where the week's shaping attention belongs."
-                )
-
-                if items.isEmpty {
-                    Text("The current week already has enough structure that Plan does not need to invent a new problem here.")
-                        .font(theme.typography.body)
-                        .foregroundStyle(theme.colors.textSecondary)
-                } else {
-                    VStack(alignment: .leading, spacing: theme.spacing.sm) {
-                        ForEach(items) { item in
-                            if let target = item.target {
-                                NavigationLink(value: target) {
-                                    PlanGoalShapingRow(item: item)
+                                    Text(point.roomLabel)
+                                        .font(theme.typography.caption)
+                                        .foregroundStyle(theme.colors.textPrimary)
+                                    Text(point.summary)
+                                        .font(theme.typography.caption)
+                                        .foregroundStyle(theme.colors.textTertiary)
+                                        .lineLimit(2)
                                 }
-                                .buttonStyle(.plain)
-                                .accessibilityIdentifier("plan.open-goal.\(target.goalID ?? target.draftID ?? item.id)")
-                            } else {
-                                PlanGoalShapingRow(item: item)
+                                .padding(theme.spacing.sm)
+                                .frame(width: 120, alignment: .leading)
+                                .background(
+                                    RoundedRectangle(cornerRadius: theme.radius.lg, style: .continuous)
+                                        .fill(selectedDayID == point.id ? theme.colors.surfaceOverlay : theme.colors.surfacePrimary)
+                                )
+                                .overlay(
+                                    RoundedRectangle(cornerRadius: theme.radius.lg, style: .continuous)
+                                        .stroke(selectedDayID == point.id ? theme.stateStyle(for: point.level.visualState).accent : theme.colors.strokeSubtle, lineWidth: 1)
+                                )
                             }
+                            .buttonStyle(.plain)
+                            .accessibilityIdentifier("plan.scrubber.point.\(point.id)")
+                            .accessibilityValue(selectedDayID == point.id ? "selected" : "not selected")
                         }
                     }
                 }
             }
         }
-        .accessibilityIdentifier("plan.goal-shaping-card")
+        .accessibilityIdentifier("plan.pressure-scrubber")
+        .ambitionPanelAccessibility()
+    }
+}
+
+private struct PlanElasticWeekCard: View {
+    @Environment(\.ambitionTheme) private var theme
+
+    let days: [PlanElasticWeekDayState]
+    @Binding var selectedDayID: String
+
+    var body: some View {
+        AppCard {
+            VStack(alignment: .leading, spacing: theme.spacing.md) {
+                SectionHeader(
+                    title: "Elastic week",
+                    subtitle: "Dense days expand, quiet days compress, and open room stays visible instead of disappearing into a calendar grid."
+                )
+
+                ScrollView(.horizontal, showsIndicators: false) {
+                    HStack(alignment: .bottom, spacing: theme.spacing.sm) {
+                        ForEach(days) { day in
+                            Button {
+                                selectedDayID = day.id
+                            } label: {
+                                PlanElasticWeekDayColumn(day: day, isSelected: selectedDayID == day.id)
+                            }
+                            .buttonStyle(.plain)
+                            .accessibilityIdentifier("plan.day.\(day.id)")
+                        }
+                    }
+                    .padding(.vertical, theme.spacing.xxs)
+                }
+            }
+        }
+        .accessibilityIdentifier("plan.elastic-week")
+        .ambitionPanelAccessibility()
+    }
+}
+
+private struct PlanElasticWeekDayColumn: View {
+    @Environment(\.ambitionTheme) private var theme
+
+    let day: PlanElasticWeekDayState
+    let isSelected: Bool
+
+    var body: some View {
+        VStack(alignment: .leading, spacing: theme.spacing.sm) {
+            HStack(alignment: .top) {
+                VStack(alignment: .leading, spacing: theme.spacing.xxxs) {
+                    Text(day.weekdayLabel)
+                        .font(theme.typography.caption)
+                        .foregroundStyle(theme.colors.textTertiary)
+                    Text(day.dateLabel)
+                        .font(theme.typography.section)
+                        .foregroundStyle(theme.colors.textPrimary)
+                }
+                Spacer(minLength: theme.spacing.xs)
+                TagPill(day.level.title, icon: day.level.icon, state: day.level.visualState)
+            }
+
+            Text(day.highlight)
+                .font(theme.typography.bodyEmphasized)
+                .foregroundStyle(theme.colors.textPrimary)
+
+            VStack(alignment: .leading, spacing: theme.spacing.xs) {
+                ForEach(day.blocks.prefix(2)) { block in
+                    HStack(alignment: .top, spacing: theme.spacing.xs) {
+                        Image(systemName: block.kind.icon)
+                            .font(.system(size: theme.icon.smallSize, weight: theme.icon.symbolWeight))
+                            .foregroundStyle(theme.stateStyle(for: block.visualState).accent)
+                        VStack(alignment: .leading, spacing: theme.spacing.xxxs) {
+                            Text(block.title)
+                                .font(theme.typography.caption)
+                                .foregroundStyle(theme.colors.textPrimary)
+                                .lineLimit(2)
+                            Text(block.kind.title)
+                                .font(theme.typography.micro)
+                                .foregroundStyle(theme.colors.textTertiary)
+                        }
+                    }
+                }
+                if day.overflowCount > 0 {
+                    Text("+\(day.overflowCount) more")
+                        .font(theme.typography.caption)
+                        .foregroundStyle(theme.colors.textTertiary)
+                }
+            }
+
+            Spacer(minLength: theme.spacing.xs)
+
+            if let openWindow = day.openWindow {
+                VStack(alignment: .leading, spacing: theme.spacing.xxxs) {
+                    Text(openWindow.title)
+                        .font(theme.typography.caption)
+                        .foregroundStyle(theme.colors.textPrimary)
+                    Text(openWindow.suggestionLabel ?? day.roomLabel)
+                        .font(theme.typography.caption)
+                        .foregroundStyle(theme.colors.textSecondary)
+                        .lineLimit(2)
+                }
+                .padding(theme.spacing.xs)
+                .background(
+                    RoundedRectangle(cornerRadius: theme.radius.md, style: .continuous)
+                        .fill(theme.colors.surfacePrimary)
+                )
+            }
+        }
+        .padding(theme.spacing.md)
+        .frame(width: 172)
+        .frame(minHeight: 190 + (day.intensity * 86))
+        .background(
+            RoundedRectangle(cornerRadius: theme.radius.xl, style: .continuous)
+                .fill(isSelected ? theme.colors.surfaceOverlay : theme.colors.surfacePrimary)
+        )
+        .overlay(
+            RoundedRectangle(cornerRadius: theme.radius.xl, style: .continuous)
+                .stroke(isSelected ? theme.stateStyle(for: day.level.visualState).accent : theme.colors.strokeSubtle, lineWidth: 1)
+        )
+        .shadow(color: isSelected ? theme.elevation.raised.color.opacity(0.22) : .clear, radius: 18, y: 10)
+    }
+}
+
+private struct PlanBelievabilityCard: View {
+    @Environment(\.ambitionTheme) private var theme
+
+    let believability: PlanBelievabilityState
+    let selectedDay: PlanElasticWeekDayState
+    let onOpenGoal: (GoalRouteTarget) -> Void
+    let onOpenWindow: (PlanOpenWindowState) -> Void
+
+    var body: some View {
+        AppCard(state: believability.visualState) {
+            VStack(alignment: .leading, spacing: theme.spacing.md) {
+                SectionHeader(
+                    title: "Week believability",
+                    subtitle: "Plan explains why the week feels believable, tight, or overloaded before it asks you to intervene."
+                )
+
+                HStack(spacing: theme.spacing.xs) {
+                    TagPill(believability.label, icon: "scope", state: believability.visualState)
+                    TagPill("\(selectedDay.weekdayLabel) \(selectedDay.dateLabel)", icon: "calendar", state: selectedDay.level.visualState)
+                    TagPill(selectedDay.roomLabel, state: selectedDay.level.visualState)
+                }
+
+                VStack(alignment: .leading, spacing: theme.spacing.xs) {
+                    Text(believability.title)
+                        .font(theme.typography.section)
+                        .foregroundStyle(theme.colors.textPrimary)
+                    Text(believability.detail)
+                        .font(theme.typography.body)
+                        .foregroundStyle(theme.colors.textSecondary)
+                    Text(believability.supportLabel)
+                        .font(theme.typography.caption)
+                        .foregroundStyle(theme.colors.textTertiary)
+                }
+
+                VStack(alignment: .leading, spacing: theme.spacing.sm) {
+                    HStack {
+                        Text("Selected day")
+                            .font(theme.typography.caption)
+                            .foregroundStyle(theme.colors.textTertiary)
+                        Spacer()
+                        Text(selectedDay.capacityLabel)
+                            .font(theme.typography.caption)
+                            .foregroundStyle(theme.colors.textTertiary)
+                    }
+
+                    if selectedDay.blocks.isEmpty {
+                        Text("No explicit block is attached to this day yet.")
+                            .font(theme.typography.body)
+                            .foregroundStyle(theme.colors.textSecondary)
+                    } else {
+                        VStack(alignment: .leading, spacing: theme.spacing.sm) {
+                            ForEach(selectedDay.blocks) { block in
+                                if let target = block.target {
+                                    Button {
+                                        onOpenGoal(target)
+                                    } label: {
+                                        PlanBelievabilityBlockRow(block: block)
+                                    }
+                                    .buttonStyle(.plain)
+                                } else {
+                                    PlanBelievabilityBlockRow(block: block)
+                                }
+                            }
+                        }
+                    }
+                }
+                .accessibilityElement(children: .contain)
+                .accessibilityIdentifier("plan.selected-day.\(selectedDay.id)")
+
+                if let openWindow = selectedDay.openWindow {
+                    Button {
+                        onOpenWindow(openWindow)
+                    } label: {
+                        HStack(alignment: .top, spacing: theme.spacing.sm) {
+                            Image(systemName: "sparkles")
+                                .font(.system(size: theme.icon.smallSize, weight: theme.icon.symbolWeight))
+                                .foregroundStyle(theme.stateStyle(for: openWindow.visualState).accent)
+                            VStack(alignment: .leading, spacing: theme.spacing.xxxs) {
+                                Text(openWindow.title)
+                                    .font(theme.typography.bodyEmphasized)
+                                    .foregroundStyle(theme.colors.textPrimary)
+                                Text(openWindow.detail)
+                                    .font(theme.typography.body)
+                                    .foregroundStyle(theme.colors.textSecondary)
+                                if let suggestionLabel = openWindow.suggestionLabel {
+                                    Text("Best fit: \(suggestionLabel)")
+                                        .font(theme.typography.caption)
+                                        .foregroundStyle(theme.colors.textTertiary)
+                                }
+                            }
+                            Spacer()
+                            if openWindow.target != nil {
+                                Image(systemName: "arrow.right")
+                                    .font(.system(size: theme.icon.smallSize, weight: theme.icon.symbolWeight))
+                                    .foregroundStyle(theme.colors.textTertiary)
+                            }
+                        }
+                        .padding(theme.spacing.md)
+                        .background(
+                            RoundedRectangle(cornerRadius: theme.radius.lg, style: .continuous)
+                                .fill(theme.colors.surfaceOverlay)
+                        )
+                        .overlay(
+                            RoundedRectangle(cornerRadius: theme.radius.lg, style: .continuous)
+                                .stroke(theme.colors.strokeSubtle, lineWidth: 1)
+                        )
+                    }
+                    .buttonStyle(.plain)
+                    .disabled(openWindow.target == nil)
+                }
+            }
+        }
+        .accessibilityIdentifier("plan.believability-card")
+        .ambitionPanelAccessibility()
+    }
+}
+
+private struct PlanBelievabilityBlockRow: View {
+    @Environment(\.ambitionTheme) private var theme
+
+    let block: PlanWeekBlockState
+
+    var body: some View {
+        HStack(alignment: .top, spacing: theme.spacing.sm) {
+            Image(systemName: block.kind.icon)
+                .font(.system(size: theme.icon.smallSize, weight: theme.icon.symbolWeight))
+                .foregroundStyle(theme.stateStyle(for: block.visualState).accent)
+                .frame(width: 18)
+
+            VStack(alignment: .leading, spacing: theme.spacing.xxxs) {
+                HStack(spacing: theme.spacing.xs) {
+                    TagPill(block.kind.title, state: block.visualState)
+                    TagPill(block.timingLabel, state: .default)
+                }
+                Text(block.title)
+                    .font(theme.typography.bodyEmphasized)
+                    .foregroundStyle(theme.colors.textPrimary)
+                Text(block.detail)
+                    .font(theme.typography.body)
+                    .foregroundStyle(theme.colors.textSecondary)
+                    .fixedSize(horizontal: false, vertical: true)
+                Text(block.goalLabel)
+                    .font(theme.typography.caption)
+                    .foregroundStyle(theme.colors.textTertiary)
+            }
+            Spacer(minLength: theme.spacing.sm)
+        }
+        .padding(theme.spacing.md)
+        .background(
+            RoundedRectangle(cornerRadius: theme.radius.lg, style: .continuous)
+                .fill(theme.colors.surfaceOverlay)
+        )
+        .overlay(
+            RoundedRectangle(cornerRadius: theme.radius.lg, style: .continuous)
+                .stroke(theme.colors.strokeSubtle, lineWidth: 1)
+        )
+    }
+}
+
+private struct PlanShapingActionsCard: View {
+    @Environment(\.ambitionTheme) private var theme
+
+    let actions: [PlanShapingActionState]
+    @Binding var selectedKind: PlanShapingActionKind
+    let selectedDay: PlanElasticWeekDayState?
+    let onActivate: (PlanShapingActionState) -> Void
+
+    private var selectedAction: PlanShapingActionState? {
+        actions.first(where: { $0.kind == selectedKind }) ?? actions.first
+    }
+
+    var body: some View {
+        AppCard {
+            VStack(alignment: .leading, spacing: theme.spacing.md) {
+                SectionHeader(
+                    title: "Week-shaping actions",
+                    subtitle: "Keep one shaping lane obvious: edit, patch, protect, or lighten."
+                )
+
+                LazyVGrid(columns: [GridItem(.flexible(), spacing: theme.spacing.sm), GridItem(.flexible(), spacing: theme.spacing.sm)], spacing: theme.spacing.sm) {
+                    ForEach(actions) { action in
+                        Button {
+                            selectedKind = action.kind
+                        } label: {
+                            VStack(alignment: .leading, spacing: theme.spacing.xs) {
+                                HStack {
+                                    Image(systemName: action.systemImage)
+                                        .font(.system(size: theme.icon.smallSize, weight: theme.icon.symbolWeight))
+                                    Spacer()
+                                    TagPill(action.kind.title, state: action.state)
+                                }
+                                .foregroundStyle(theme.colors.textPrimary)
+
+                                Text(action.title)
+                                    .font(theme.typography.bodyEmphasized)
+                                    .foregroundStyle(theme.colors.textPrimary)
+                                Text(action.subtitle)
+                                    .font(theme.typography.caption)
+                                    .foregroundStyle(theme.colors.textSecondary)
+                                    .lineLimit(3)
+                            }
+                            .padding(theme.spacing.md)
+                            .frame(maxWidth: .infinity, alignment: .leading)
+                            .background(
+                                RoundedRectangle(cornerRadius: theme.radius.lg, style: .continuous)
+                                    .fill(selectedKind == action.kind ? theme.colors.surfaceOverlay : theme.colors.surfacePrimary)
+                            )
+                            .overlay(
+                                RoundedRectangle(cornerRadius: theme.radius.lg, style: .continuous)
+                                    .stroke(selectedKind == action.kind ? theme.stateStyle(for: action.state).accent : theme.colors.strokeSubtle, lineWidth: 1)
+                            )
+                        }
+                        .buttonStyle(.plain)
+                        .accessibilityIdentifier("plan.action.select.\(action.kind.rawValue)")
+                    }
+                }
+
+                if let selectedAction {
+                    VStack(alignment: .leading, spacing: theme.spacing.sm) {
+                        Text(selectedAction.recommendation)
+                            .font(theme.typography.body)
+                            .foregroundStyle(theme.colors.textPrimary)
+
+                        if let selectedDay {
+                            Text("Current pressure focus: \(selectedDay.weekdayLabel) \(selectedDay.dateLabel) is \(selectedDay.roomLabel.lowercased()).")
+                                .font(theme.typography.caption)
+                                .foregroundStyle(theme.colors.textTertiary)
+                        }
+
+                        Button {
+                            onActivate(selectedAction)
+                        } label: {
+                            HStack {
+                                Text(callToActionTitle(for: selectedAction))
+                                    .font(theme.typography.bodyEmphasized)
+                                Spacer()
+                                Image(systemName: "arrow.right")
+                                    .font(.system(size: theme.icon.smallSize, weight: theme.icon.symbolWeight))
+                            }
+                            .frame(maxWidth: .infinity, alignment: .leading)
+                            .accessibilityElement(children: .combine)
+                            .accessibilityIdentifier("plan.action.cta")
+                        }
+                        .buttonStyle(AmbitionButtonStyle(tier: .hero, state: selectedAction.state))
+                        .disabled(selectedAction.goalTarget == nil && selectedAction.planRoute == nil)
+                        .accessibilityLabel(callToActionTitle(for: selectedAction))
+                        .accessibilityHint(selectedAction.recommendation)
+                        .accessibilityIdentifier("plan.action.cta")
+                    }
+                    .padding(theme.spacing.md)
+                    .background(
+                        RoundedRectangle(cornerRadius: theme.radius.lg, style: .continuous)
+                            .fill(theme.colors.surfaceOverlay)
+                    )
+                }
+            }
+        }
+        .accessibilityIdentifier("plan.action-lane")
+        .ambitionPanelAccessibility()
+    }
+
+    private func callToActionTitle(for action: PlanShapingActionState) -> String {
+        if action.planRoute == .capturesInbox {
+            return "Open captures"
+        }
+        if action.goalTarget != nil {
+            return "Open goal"
+        }
+        return action.title
+    }
+}
+
+private struct PlanGoalRelationshipCard: View {
+    @Environment(\.ambitionTheme) private var theme
+
+    let items: [PlanGoalShapingItem]
+    let onOpenGoal: (GoalRouteTarget) -> Void
+
+    var body: some View {
+        AppCard {
+            VStack(alignment: .leading, spacing: theme.spacing.md) {
+                SectionHeader(
+                    title: "Goals shaping the week",
+                    subtitle: items.isEmpty
+                        ? "No active goals are asking the week for structure yet."
+                        : "Plan stays tied to active goals instead of turning into a disconnected scheduler."
+                )
+
+                if items.isEmpty {
+                    Text("Once active goals carry real work, they will show up here with their week relationship and next believable move.")
+                        .font(theme.typography.body)
+                        .foregroundStyle(theme.colors.textSecondary)
+                } else {
+                    VStack(alignment: .leading, spacing: theme.spacing.sm) {
+                        ForEach(items) { item in
+                            Button {
+                                guard let target = item.target else { return }
+                                onOpenGoal(target)
+                            } label: {
+                                PlanGoalRelationshipRow(item: item)
+                            }
+                            .buttonStyle(.plain)
+                            .disabled(item.target == nil)
+                            .accessibilityIdentifier("plan.goal.open.\(item.id)")
+                        }
+                    }
+                }
+            }
+        }
+        .accessibilityIdentifier("plan.goal-relationship-card")
+        .ambitionPanelAccessibility()
+    }
+}
+
+private struct PlanGoalRelationshipRow: View {
+    @Environment(\.ambitionTheme) private var theme
+
+    let item: PlanGoalShapingItem
+
+    var body: some View {
+        HStack(alignment: .top, spacing: theme.spacing.sm) {
+            VStack(alignment: .leading, spacing: theme.spacing.xxxs) {
+                HStack(spacing: theme.spacing.xs) {
+                    TagPill(item.pressureLabel, state: item.visualState)
+                    Text(item.weekRelationship)
+                        .font(theme.typography.caption)
+                        .foregroundStyle(theme.colors.textTertiary)
+                }
+                Text(item.goalTitle)
+                    .font(theme.typography.section)
+                    .foregroundStyle(theme.colors.textPrimary)
+                Text(item.attentionReason)
+                    .font(theme.typography.body)
+                    .foregroundStyle(theme.colors.textSecondary)
+                    .fixedSize(horizontal: false, vertical: true)
+                Text("Next believable move: \(item.nextMoveLabel)")
+                    .font(theme.typography.caption)
+                    .foregroundStyle(theme.colors.textTertiary)
+                    .fixedSize(horizontal: false, vertical: true)
+            }
+
+            Spacer(minLength: theme.spacing.sm)
+
+            Image(systemName: "chevron.right")
+                .font(.system(size: theme.icon.smallSize, weight: theme.icon.symbolWeight))
+                .foregroundStyle(theme.colors.textTertiary)
+        }
+        .padding(theme.spacing.md)
+        .background(
+            RoundedRectangle(cornerRadius: theme.radius.lg, style: .continuous)
+                .fill(theme.colors.surfaceOverlay)
+        )
+        .overlay(
+            RoundedRectangle(cornerRadius: theme.radius.lg, style: .continuous)
+                .stroke(theme.colors.strokeSubtle, lineWidth: 1)
+        )
+        .ambitionPanelAccessibility()
     }
 }
 
@@ -330,19 +795,40 @@ private struct PlanSecondaryDestinationsCard: View {
     var body: some View {
         AppCard {
             VStack(alignment: .leading, spacing: theme.spacing.md) {
-                SectionHeader(title: "Supporting loops", subtitle: "These remain part of planning without becoming extra top-level tabs.")
+                SectionHeader(title: "Supporting loops", subtitle: "Routines still help the week hold together without taking over the workspace.")
 
                 VStack(alignment: .leading, spacing: theme.spacing.sm) {
                     ForEach(destinations) { destination in
                         Button {
                             onOpen(destination)
                         } label: {
-                            PlanInfoRow(
-                                title: destination.title,
-                                detail: destination.detail,
-                                valueLabel: destination.valueLabel,
-                                icon: destination.icon,
-                                state: destination.visualState
+                            HStack(alignment: .top, spacing: theme.spacing.sm) {
+                                Image(systemName: destination.icon)
+                                    .font(.system(size: theme.icon.mediumSize, weight: theme.icon.symbolWeight))
+                                    .foregroundStyle(theme.stateStyle(for: destination.visualState).accent)
+                                    .frame(width: 28)
+
+                                VStack(alignment: .leading, spacing: theme.spacing.xxxs) {
+                                    Text(destination.title)
+                                        .font(theme.typography.section)
+                                        .foregroundStyle(theme.colors.textPrimary)
+                                    Text(destination.detail)
+                                        .font(theme.typography.body)
+                                        .foregroundStyle(theme.colors.textSecondary)
+                                        .fixedSize(horizontal: false, vertical: true)
+                                }
+
+                                Spacer(minLength: theme.spacing.sm)
+                                TagPill(destination.valueLabel, state: destination.visualState)
+                            }
+                            .padding(theme.spacing.md)
+                            .background(
+                                RoundedRectangle(cornerRadius: theme.radius.lg, style: .continuous)
+                                    .fill(theme.colors.surfaceOverlay)
+                            )
+                            .overlay(
+                                RoundedRectangle(cornerRadius: theme.radius.lg, style: .continuous)
+                                    .stroke(theme.colors.strokeSubtle, lineWidth: 1)
                             )
                         }
                         .buttonStyle(.plain)
@@ -351,82 +837,6 @@ private struct PlanSecondaryDestinationsCard: View {
                 }
             }
         }
-    }
-}
-
-private struct PlanGoalShapingRow: View {
-    @Environment(\.ambitionTheme) private var theme
-
-    let item: PlanGoalShapingItem
-
-    var body: some View {
-        VStack(alignment: .leading, spacing: theme.spacing.xs) {
-            HStack(alignment: .top, spacing: theme.spacing.sm) {
-                VStack(alignment: .leading, spacing: theme.spacing.xxxs) {
-                    HStack(spacing: theme.spacing.xs) {
-                        TagPill(item.pressureLabel, state: item.visualState)
-                        if let shellSummary = item.shellSummary {
-                            TagPill("\(shellSummary.indicators.count) signals", icon: "sparkles", state: .default)
-                        }
-                    }
-                    Text(item.goalTitle)
-                        .font(theme.typography.section)
-                        .foregroundStyle(theme.colors.textPrimary)
-                    Text(item.summary)
-                        .font(theme.typography.body)
-                        .foregroundStyle(theme.colors.textSecondary)
-                        .fixedSize(horizontal: false, vertical: true)
-                    Text(item.attentionReason)
-                        .font(theme.typography.caption)
-                        .foregroundStyle(theme.colors.textTertiary)
-                        .fixedSize(horizontal: false, vertical: true)
-                }
-                Spacer(minLength: theme.spacing.sm)
-                Image(systemName: "chevron.right")
-                    .font(.system(size: theme.icon.smallSize, weight: theme.icon.symbolWeight))
-                    .foregroundStyle(theme.colors.textTertiary)
-            }
-        }
-        .padding(theme.spacing.md)
-        .background(RoundedRectangle(cornerRadius: theme.radius.lg, style: .continuous).fill(theme.colors.surfaceOverlay))
-        .overlay(RoundedRectangle(cornerRadius: theme.radius.lg, style: .continuous).stroke(theme.colors.strokeSubtle, lineWidth: 1))
-        .ambitionPanelAccessibility()
-    }
-}
-
-private struct PlanInfoRow: View {
-    @Environment(\.ambitionTheme) private var theme
-
-    let title: String
-    let detail: String
-    let valueLabel: String
-    let icon: String
-    let state: AmbitionVisualState
-
-    var body: some View {
-        HStack(alignment: .top, spacing: theme.spacing.sm) {
-            Image(systemName: icon)
-                .font(.system(size: theme.icon.mediumSize, weight: theme.icon.symbolWeight))
-                .foregroundStyle(theme.stateStyle(for: state).accent)
-                .frame(width: 28)
-
-            VStack(alignment: .leading, spacing: theme.spacing.xxxs) {
-                Text(title)
-                    .font(theme.typography.section)
-                    .foregroundStyle(theme.colors.textPrimary)
-                Text(detail)
-                    .font(theme.typography.body)
-                    .foregroundStyle(theme.colors.textSecondary)
-                    .fixedSize(horizontal: false, vertical: true)
-            }
-
-            Spacer(minLength: theme.spacing.sm)
-            TagPill(valueLabel, state: state)
-        }
-        .padding(theme.spacing.md)
-        .background(RoundedRectangle(cornerRadius: theme.radius.lg, style: .continuous).fill(theme.colors.surfaceOverlay))
-        .overlay(RoundedRectangle(cornerRadius: theme.radius.lg, style: .continuous).stroke(theme.colors.strokeSubtle, lineWidth: 1))
-        .ambitionPanelAccessibility()
     }
 }
 

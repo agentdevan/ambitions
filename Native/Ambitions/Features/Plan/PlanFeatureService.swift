@@ -22,7 +22,20 @@ private extension RepositoryBackedPlanService {
     struct StepContext {
         let goal: Goal
         let step: Step
-        let dateKey: String
+        let date: Date
+        let dayIndex: Int
+        let timingLabel: String
+        let blockKind: PlanWeekBlockKind
+        let visualState: AmbitionVisualState
+        let frictionCount: Int
+        let evaluation: PlanningEvaluation?
+    }
+
+    struct GoalWeekSummary {
+        let goal: Goal
+        let contexts: [StepContext]
+        let frictionCount: Int
+        let evaluation: PlanningEvaluation?
     }
 
     func loadSnapshot() async throws -> Snapshot {
@@ -46,275 +59,563 @@ private extension RepositoryBackedPlanService {
         let openCaptures = snapshot.captures.filter { $0.status != .archived }
         let blockedDrafts = snapshot.drafts.filter { $0.latestResultKind == .blocked }
         let clarificationDrafts = snapshot.drafts.filter { $0.latestResultKind == .clarificationRequired }
-        let weekContexts = weekStepContexts(goals: activeGoals, now: now)
-        let activeGoalCoverage = Set(weekContexts.map(\.goal.id)).count
+        let activeGoalSummaries = makeGoalSummaries(goals: activeGoals, feedback: snapshot.feedback, now: now)
+        let weekContexts = activeGoalSummaries.flatMap(\.contexts)
         let habitGoals = activeGoals.filter { goal in
             guard let step = HabitGoalSemantics.preferredStep(in: goal) else { return goal.mode == .habit }
             return goal.mode == .habit || HabitGoalSemantics.isHabitLike(goal: goal, step: step)
         }
         let mode: PlanDashboardMode = activeGoals.isEmpty && snapshot.drafts.isEmpty && openCaptures.isEmpty ? .empty : .active
+        let missingGoalSummaries = activeGoalSummaries.filter { $0.contexts.isEmpty }
+        let mostPressuredGoal = pressuredGoalSummary(from: activeGoalSummaries)
+        let weekDays = makeWeekDays(
+            summaries: activeGoalSummaries,
+            missingGoalSummaries: missingGoalSummaries,
+            now: now
+        )
         let posture = postureState(
-            evaluations: activeGoals.compactMap { $0.plan?.evaluation },
+            evaluations: activeGoalSummaries.compactMap(\.evaluation),
             blockedCount: blockedDrafts.count,
             clarificationCount: clarificationDrafts.count,
             openCaptureCount: openCaptures.count,
-            weekStepCount: weekContexts.count,
+            weekDays: weekDays,
             mode: mode
         )
-        let frictionCount = snapshot.feedback.filter(isFriction).count
+        let representedGoalCount = Set(weekContexts.map(\.goal.id)).count
+        let pressureScrubber = makePressureScrubber(days: weekDays)
+        let believability = makeBelievability(
+            posture: posture,
+            blockedCount: blockedDrafts.count,
+            clarificationCount: clarificationDrafts.count,
+            openCaptureCount: openCaptures.count,
+            missingGoalCount: missingGoalSummaries.count,
+            activeGoalCount: activeGoals.count
+        )
+        let hero = makeHero(
+            posture: posture,
+            timeframeLabel: timeframeLabel(now: now),
+            representedGoalCount: representedGoalCount,
+            activeGoalCount: activeGoals.count,
+            weekDays: weekDays,
+            missingGoalCount: missingGoalSummaries.count,
+            openCaptureCount: openCaptures.count,
+            mode: mode
+        )
+        let primaryAction = makePrimaryAction(
+            mode: mode,
+            posture: posture,
+            missingGoalSummary: missingGoalSummaries.first,
+            pressuredGoalSummary: mostPressuredGoal,
+            openCaptureCount: openCaptures.count,
+            weekDays: weekDays
+        )
 
         return PlanDashboard(
             mode: mode,
-            title: mode == .empty ? "Shape the week around real goals" : "This week has a visible shape",
-            subtitle: mode == .empty
-                ? "Plan will stay honest as goals, captures, and routine work enter the local store."
-                : "Active goals, open planning pressure, and repeatable routines are gathered here before the day gets crowded.",
             timeframeLabel: timeframeLabel(now: now),
-            posture: posture,
-            weeklyIntent: weeklyIntentSummary(
-                activeGoals: activeGoals,
-                weekContexts: weekContexts,
-                blockedDrafts: blockedDrafts,
-                clarificationDrafts: clarificationDrafts,
-                openCaptures: openCaptures,
-                frictionCount: frictionCount,
-                posture: posture,
-                mode: mode
-            ),
-            metrics: [
-                MetricSummary(id: "plan-goal-coverage", title: "Goal coverage", value: "\(activeGoalCoverage)/\(max(activeGoals.count, 1))", detail: activeGoals.isEmpty ? "No active goals yet" : "Active goals with visible work", icon: "target"),
-                MetricSummary(id: "plan-week-work", title: "Visible work", value: "\(weekContexts.count)", detail: "Current steps in this weekly view", icon: "calendar"),
-                MetricSummary(id: "plan-pressure", title: "Planning pressure", value: "\(blockedDrafts.count + clarificationDrafts.count + openCaptures.count)", detail: "Captures, blockers, and clarification", icon: "exclamationmark.triangle"),
-                MetricSummary(id: "plan-routines", title: "Routines", value: "\(habitGoals.count)", detail: "Habit-like goals stay under Plan", icon: "repeat")
-            ],
-            goalShapingItems: goalShapingItems(
-                activeGoals: activeGoals,
-                weekContexts: weekContexts,
-                feedback: snapshot.feedback
-            ),
-            focusItems: focusItems(from: weekContexts),
-            pressureItems: pressureItems(
-                blockedDrafts: blockedDrafts,
-                clarificationDrafts: clarificationDrafts,
-                openCaptures: openCaptures,
-                feedback: snapshot.feedback
+            hero: hero,
+            primaryAction: primaryAction,
+            pressureScrubber: pressureScrubber,
+            weekDays: weekDays,
+            believability: believability,
+            goalShapingItems: goalShapingItems(summaries: activeGoalSummaries),
+            shapingActions: makeShapingActions(
+                summaries: activeGoalSummaries,
+                missingGoalSummaries: missingGoalSummaries,
+                pressuredGoalSummary: mostPressuredGoal,
+                openCaptureCount: openCaptures.count,
+                weekDays: weekDays
             ),
             secondaryDestinations: [
                 PlanSecondaryDestination(
                     id: "plan-habits",
                     title: "Routines and habits",
                     detail: habitGoals.isEmpty
-                        ? "No repeatable loops are live yet. When they exist, they stay subordinate to weekly shaping here."
-                        : "Review the repeatable loops that can steady or crowd this week.",
+                        ? "No repeatable loops are shaping the week yet."
+                        : "Review the repeatable loops that can steady or crowd the week.",
                     valueLabel: "\(habitGoals.count)",
                     icon: AppTab.habits.systemImage,
                     visualState: habitGoals.isEmpty ? .default : .selected
                 )
             ],
-            emptyTitle: mode == .empty ? "No weekly plan pressure yet" : nil,
-            emptyMessage: mode == .empty ? "Create a goal or capture an idea, and Plan will show what needs shaping without inventing work." : nil
+            emptyTitle: mode == .empty ? "No weekly pressure yet" : nil,
+            emptyMessage: mode == .empty ? "As soon as goals, captures, or routines create real constraints, Plan will show where the week still has room." : nil
         )
     }
 
-    func weeklyIntentSummary(
-        activeGoals: [Goal],
-        weekContexts: [StepContext],
-        blockedDrafts: [PersistedGoalDraft],
-        clarificationDrafts: [PersistedGoalDraft],
-        openCaptures: [Capture],
-        frictionCount: Int,
-        posture: PlanPostureState,
-        mode: PlanDashboardMode
-    ) -> PlanWeeklyIntentSummary {
-        guard mode == .active else {
-            return PlanWeeklyIntentSummary(
-                title: "Nothing is claiming the week yet",
-                detail: "Plan stays quiet until real goals, captures, or routine work create something worth shaping.",
-                attentionLabel: "Open week",
-                goalCountLabel: "0 active goals"
-            )
-        }
-
-        let visibleGoalCount = Set(weekContexts.map(\.goal.id)).count
-        let attentionLabel: String
-        if blockedDrafts.isEmpty == false || clarificationDrafts.isEmpty == false {
-            attentionLabel = "Clarify first"
-        } else if openCaptures.isEmpty == false || frictionCount > 0 {
-            attentionLabel = "Review pressure"
-        } else if weekContexts.isEmpty {
-            attentionLabel = "Seed the week"
-        } else {
-            attentionLabel = posture.label
-        }
-
-        let detail: String
-        if weekContexts.isEmpty {
-            detail = activeGoals.isEmpty
-                ? "No active goals are asking the week to carry anything yet."
-                : "Active goals exist, but no current step is visible enough to shape the week around."
-        } else if blockedDrafts.isEmpty == false || clarificationDrafts.isEmpty == false {
-            detail = "The week already has visible work, but some planning is still paused on blockers or open questions."
-        } else if openCaptures.isEmpty == false {
-            detail = "Visible goal work is present, and open captures are the main source of extra planning pressure."
-        } else if frictionCount > 0 {
-            detail = "Visible work exists, but recent friction suggests the week needs smaller asks instead of more volume."
-        } else {
-            detail = "The week is carrying explicit goal-linked work that can be shaped without inventing a new system."
-        }
-
-        return PlanWeeklyIntentSummary(
-            title: weekContexts.isEmpty ? "This week still needs a visible anchor" : "This week is carrying real goal work",
-            detail: detail,
-            attentionLabel: attentionLabel,
-            goalCountLabel: "\(visibleGoalCount) of \(max(activeGoals.count, 1)) goals represented"
-        )
-    }
-
-    func goalShapingItems(
-        activeGoals: [Goal],
-        weekContexts: [StepContext],
-        feedback: [GoalFeedbackEvent]
-    ) -> [PlanGoalShapingItem] {
-        let weekContextsByGoalID = Dictionary(grouping: weekContexts, by: { $0.goal.id })
-
-        return activeGoals.compactMap { goal in
-            let contexts = weekContextsByGoalID[goal.id] ?? []
-            let evaluation = goal.plan?.evaluation
-            let goalSteps = goal.plan?.sections.flatMap(\.steps) ?? []
+    func makeGoalSummaries(goals: [Goal], feedback: [GoalFeedbackEvent], now: Date) -> [GoalWeekSummary] {
+        goals.map { goal in
+            let sections = goal.plan?.sections ?? []
+            let steps = sections.flatMap(\.steps)
             let goalFeedback = feedback.filter { event in
-                goalSteps.contains(where: { $0.id == event.stepID })
+                steps.contains(where: { $0.id == event.stepID })
             }
             let frictionCount = goalFeedback.filter(isFriction).count
-            let summary: String
-            let pressureLabel: String
-            let attentionReason: String
-            let visualState: AmbitionVisualState
-
-            if let firstContext = contexts.first {
-                summary = firstContext.step.summary ?? firstContext.step.actionability.fallbackMicroStep
-                if frictionCount > 0 {
-                    pressureLabel = "Needs gentler scope"
-                    attentionReason = "Recent friction landed on this goal's current work."
-                    visualState = .warning
-                } else if evaluation?.feasibilityLevel == .notBelievable || evaluation?.feasibilityLevel == .fragile {
-                    pressureLabel = "Fragile"
-                    attentionReason = "The current planning evaluation is warning that this goal is straining the week."
-                    visualState = .warning
-                } else if evaluation?.feasibilityLevel == .tight {
-                    pressureLabel = "Tight"
-                    attentionReason = "This goal is represented, but its current plan needs attention before the week gets crowded."
-                    visualState = .selected
-                } else {
-                    pressureLabel = "Visible"
-                    attentionReason = "This goal already has clear work in the week and is the easiest place to shape next."
-                    visualState = .success
-                }
-            } else {
-                summary = "No current step is visible in this week's shaping view yet."
-                pressureLabel = "Missing from week"
-                attentionReason = "This goal is active, but the week does not yet show a believable step for it."
-                visualState = .default
-            }
-
-            return PlanGoalShapingItem(
-                id: "plan-goal-\(goal.id)",
-                target: GoalRouteTarget(goalID: goal.id),
-                goalTitle: goal.title,
-                summary: summary,
-                pressureLabel: pressureLabel,
-                attentionReason: attentionReason,
-                shellSummary: nil,
-                visualState: visualState
+            let contexts = weekStepContexts(goal: goal, frictionCount: frictionCount, now: now)
+            return GoalWeekSummary(
+                goal: goal,
+                contexts: contexts,
+                frictionCount: frictionCount,
+                evaluation: goal.plan?.evaluation
             )
         }
-        .sorted { lhs, rhs in
-            let leftRank = shapingRank(for: lhs.visualState)
-            let rightRank = shapingRank(for: rhs.visualState)
-            if leftRank == rightRank {
-                return lhs.goalTitle.localizedCaseInsensitiveCompare(rhs.goalTitle) == .orderedAscending
-            }
-            return leftRank < rightRank
-        }
-        .prefix(4)
-        .map { $0 }
     }
 
-    func weekStepContexts(goals: [Goal], now: Date) -> [StepContext] {
+    func weekStepContexts(goal: Goal, frictionCount: Int, now: Date) -> [StepContext] {
         let calendar = Calendar.current
         let start = calendar.startOfDay(for: now)
         let end = calendar.date(byAdding: .day, value: 7, to: start) ?? now
+        let evaluation = goal.plan?.evaluation
 
-        var contexts: [StepContext] = []
-
-        for goal in goals {
-            let sections = goal.plan?.sections ?? []
-            let steps = sections.flatMap(\.steps)
-            for step in steps {
-                guard step.state != .completed && step.state != .cancelled else { continue }
-                let key = dateKey(for: step.timing)
-                if let date = parseDate(key), date < start || date > end {
-                    continue
+        return (goal.plan?.sections ?? [])
+            .flatMap(\.steps)
+            .compactMap { step -> StepContext? in
+                guard step.state != .completed, step.state != .cancelled else { return nil }
+                guard let date = plannedDate(for: step.timing) else { return nil }
+                guard date >= start, date < end else { return nil }
+                let dayIndex = calendar.dateComponents([.day], from: start, to: calendar.startOfDay(for: date)).day ?? 0
+                guard (0..<7).contains(dayIndex) else { return nil }
+                return StepContext(
+                    goal: goal,
+                    step: step,
+                    date: date,
+                    dayIndex: dayIndex,
+                    timingLabel: timingLabel(for: step.timing),
+                    blockKind: blockKind(for: step.timing),
+                    visualState: blockVisualState(step: step, evaluation: evaluation, frictionCount: frictionCount),
+                    frictionCount: frictionCount,
+                    evaluation: evaluation
+                )
+            }
+            .sorted { lhs, rhs in
+                if lhs.dayIndex == rhs.dayIndex {
+                    return lhs.date < rhs.date
                 }
-                contexts.append(StepContext(goal: goal, step: step, dateKey: key ?? "9999-12-31T23:59:59Z"))
+                return lhs.dayIndex < rhs.dayIndex
             }
-        }
-
-        return contexts.sorted { lhs, rhs in
-            if lhs.dateKey == rhs.dateKey {
-                return lhs.step.title.localizedCaseInsensitiveCompare(rhs.step.title) == .orderedAscending
-            }
-            return lhs.dateKey < rhs.dateKey
-        }
     }
 
-    func focusItems(from contexts: [StepContext]) -> [PlanFocusItem] {
-        Array(contexts.prefix(6)).map { context in
-            PlanFocusItem(
-                id: "\(context.goal.id)-\(context.step.id)",
-                target: GoalRouteTarget(goalID: context.goal.id),
-                title: context.step.title,
-                subtitle: context.step.summary ?? context.step.actionability.fallbackMicroStep,
-                timingLabel: timingLabel(for: context.step.timing),
-                statusLabel: context.step.state.rawValue.capitalized,
-                goalLabel: context.goal.title,
-                visualState: context.step.state == .blocked ? .warning : .selected
+    func makeWeekDays(
+        summaries: [GoalWeekSummary],
+        missingGoalSummaries: [GoalWeekSummary],
+        now: Date
+    ) -> [PlanElasticWeekDayState] {
+        let calendar = Calendar.current
+        let start = calendar.startOfDay(for: now)
+        let dayFormatter = DateFormatter()
+        dayFormatter.locale = .current
+        dayFormatter.setLocalizedDateFormatFromTemplate("EEE")
+        let dateFormatter = DateFormatter()
+        dateFormatter.locale = .current
+        dateFormatter.setLocalizedDateFormatFromTemplate("d")
+
+        let contextsByDay = Dictionary(grouping: summaries.flatMap(\.contexts), by: \.dayIndex)
+
+        return (0..<7).map { dayIndex in
+            let date = calendar.date(byAdding: .day, value: dayIndex, to: start) ?? start
+            let contexts = (contextsByDay[dayIndex] ?? []).sorted { lhs, rhs in
+                if lhs.visualState == rhs.visualState {
+                    return lhs.date < rhs.date
+                }
+                return shapingRank(for: lhs.visualState) < shapingRank(for: rhs.visualState)
+            }
+            let load = contexts.reduce(0.0) { partial, context in
+                partial + loadWeight(for: context.blockKind, visualState: context.visualState)
+            }
+            let remainingCapacity = 3.0 - load
+            let level: PlanWeekPressureLevel = {
+                if remainingCapacity < -0.3 || contexts.count >= 4 { return .overloaded }
+                if remainingCapacity < 0.7 || contexts.count >= 3 { return .tight }
+                if contexts.isEmpty || remainingCapacity > 1.7 { return .open }
+                return .steady
+            }()
+            let suggestedSummary = missingGoalSummaries.first ?? summaries.first(where: {
+                $0.contexts.contains(where: { $0.dayIndex == dayIndex }) == false && ($0.evaluation?.feasibilityLevel == .tight || $0.evaluation?.feasibilityLevel == .fragile)
+            })
+            let roomLabel = roomLabel(for: level, remainingCapacity: remainingCapacity, contextCount: contexts.count)
+            let openWindow = makeOpenWindow(
+                level: level,
+                remainingCapacity: remainingCapacity,
+                suggestedSummary: suggestedSummary,
+                contextCount: contexts.count
+            )
+            let visibleBlocks = Array(contexts.prefix(level == .overloaded ? 4 : 3)).map { context in
+                PlanWeekBlockState(
+                    id: "\(context.goal.id)-\(context.step.id)",
+                    target: GoalRouteTarget(goalID: context.goal.id),
+                    title: context.step.title,
+                    detail: context.step.summary ?? context.step.actionability.fallbackMicroStep,
+                    goalLabel: context.goal.title,
+                    timingLabel: context.timingLabel,
+                    kind: context.blockKind,
+                    visualState: context.visualState
+                )
+            }
+            let highlight = dayHighlight(
+                level: level,
+                contexts: contexts,
+                suggestedSummary: suggestedSummary
+            )
+
+            return PlanElasticWeekDayState(
+                id: "day-\(dayIndex)",
+                weekdayLabel: dayFormatter.string(from: date),
+                dateLabel: dateFormatter.string(from: date),
+                level: level,
+                intensity: dayIntensity(for: level, blockCount: contexts.count),
+                roomLabel: roomLabel,
+                capacityLabel: contexts.isEmpty ? "No blocks yet" : "\(contexts.count) block\(contexts.count == 1 ? "" : "s")",
+                highlight: highlight,
+                blocks: visibleBlocks,
+                overflowCount: max(contexts.count - visibleBlocks.count, 0),
+                openWindow: openWindow
             )
         }
     }
 
-    func pressureItems(
-        blockedDrafts: [PersistedGoalDraft],
-        clarificationDrafts: [PersistedGoalDraft],
-        openCaptures: [Capture],
-        feedback: [GoalFeedbackEvent]
-    ) -> [PlanPressureItem] {
-        let frictionCount = feedback.filter(isFriction).count
+    func makeOpenWindow(
+        level: PlanWeekPressureLevel,
+        remainingCapacity: Double,
+        suggestedSummary: GoalWeekSummary?,
+        contextCount: Int
+    ) -> PlanOpenWindowState? {
+        guard level != .overloaded || remainingCapacity > -0.1 else {
+            return nil
+        }
+
+        if let suggestedSummary {
+            return PlanOpenWindowState(
+                title: level == .open ? "Open window" : "Usable room",
+                detail: contextCount == 0
+                    ? "This day can carry one believable move without turning calendar-dense."
+                    : "There is still enough room to protect or patch one calmer move.",
+                suggestionLabel: suggestedSummary.goal.title,
+                target: GoalRouteTarget(goalID: suggestedSummary.goal.id),
+                visualState: level == .open ? .success : .selected
+            )
+        }
+
+        return PlanOpenWindowState(
+            title: level == .open ? "Leave this open" : "Keep breathing room",
+            detail: "Not every open pocket needs to be filled. Protected slack keeps the week believable.",
+            suggestionLabel: nil,
+            target: nil,
+            visualState: .default
+        )
+    }
+
+    func makePressureScrubber(days: [PlanElasticWeekDayState]) -> PlanPressureScrubberState {
+        let defaultDayID = days.max { lhs, rhs in
+            if lhs.level == rhs.level {
+                return lhs.intensity < rhs.intensity
+            }
+            return pressureRank(for: lhs.level) < pressureRank(for: rhs.level)
+        }?.id ?? days.first?.id ?? "day-0"
+
+        return PlanPressureScrubberState(
+            title: "Pressure scrubber",
+            subtitle: "Scrub the week to inspect where pressure gathers, where room remains, and which day can take another believable move.",
+            defaultDayID: defaultDayID,
+            points: days.map { day in
+                PlanPressureScrubberPoint(
+                    id: day.id,
+                    weekdayLabel: day.weekdayLabel,
+                    dateLabel: day.dateLabel,
+                    level: day.level,
+                    pressureValue: day.intensity,
+                    roomLabel: day.roomLabel,
+                    summary: day.highlight
+                )
+            }
+        )
+    }
+
+    func makeBelievability(
+        posture: PlanBelievabilityState,
+        blockedCount: Int,
+        clarificationCount: Int,
+        openCaptureCount: Int,
+        missingGoalCount: Int,
+        activeGoalCount: Int
+    ) -> PlanBelievabilityState {
+        let supportLabel: String
+        if blockedCount + clarificationCount > 0 {
+            supportLabel = "Clarify \(blockedCount + clarificationCount) planning gap\(blockedCount + clarificationCount == 1 ? "" : "s") before widening the week."
+        } else if openCaptureCount > 0 {
+            supportLabel = "Open captures are the loudest outside pressure on the current week."
+        } else if missingGoalCount > 0 {
+            supportLabel = "\(missingGoalCount) active goal\(missingGoalCount == 1 ? "" : "s") still need believable room."
+        } else if activeGoalCount == 0 {
+            supportLabel = "The week is intentionally quiet because nothing real is asking it to carry work."
+        } else {
+            supportLabel = "The current shape is believable because active goals already have visible room."
+        }
+
+        return PlanBelievabilityState(
+            title: posture.title,
+            detail: posture.detail,
+            label: posture.label,
+            supportLabel: supportLabel,
+            visualState: posture.visualState
+        )
+    }
+
+    func makeHero(
+        posture: PlanBelievabilityState,
+        timeframeLabel: String,
+        representedGoalCount: Int,
+        activeGoalCount: Int,
+        weekDays: [PlanElasticWeekDayState],
+        missingGoalCount: Int,
+        openCaptureCount: Int,
+        mode: PlanDashboardMode
+    ) -> PlanRealityHeroState {
+        let overloadedDays = weekDays.filter { $0.level == .overloaded }.count
+        let openDays = weekDays.filter { $0.level == .open }.count
+        let tightDays = weekDays.filter { $0.level == .tight }.count
+        let dominantTruth: String = {
+            guard mode == .active else { return "The week is mostly empty, which is useful information." }
+            if overloadedDays > 0 {
+                return "Pressure is clustering into \(overloadedDays) overloaded day\(overloadedDays == 1 ? "" : "s")."
+            }
+            if missingGoalCount > 0 {
+                return "\(missingGoalCount) active goal\(missingGoalCount == 1 ? "" : "s") still need believable room in the week."
+            }
+            if tightDays > 0 {
+                return "The week basically holds, but pressure is already visible on \(tightDays) day\(tightDays == 1 ? "" : "s")."
+            }
+            return "The current week is holding together without calendar-noise density."
+        }()
+
+        let roomSummary: String = {
+            if openDays == 0 { return "Room is scarce, so every new ask needs a tradeoff." }
+            if openDays <= 2 { return "Only a little open room remains; protect it deliberately." }
+            return "\(openDays) day\(openDays == 1 ? "" : "s") still carry visible room for a believable move."
+        }()
+
+        let pressureSummary: String = {
+            if openCaptureCount > 0 {
+                return "Outside pressure is mostly coming from captures that have not yet been attached or discarded."
+            }
+            return posture.supportLabel
+        }()
+
+        return PlanRealityHeroState(
+            eyebrow: "Reality Model",
+            title: "How this week holds together",
+            subtitle: "Plan now reads the week as room, pressure, and protected structure instead of a dense calendar clone.",
+            dominantTruth: dominantTruth,
+            roomSummary: roomSummary,
+            pressureSummary: pressureSummary,
+            contextPills: [
+                PlanHeroPillState(title: timeframeLabel, icon: "calendar", state: .default),
+                PlanHeroPillState(title: posture.label, icon: AppTab.plan.systemImage, state: posture.visualState),
+                PlanHeroPillState(title: "\(representedGoalCount)/\(max(activeGoalCount, 1)) goals visible", icon: "target", state: representedGoalCount == activeGoalCount && activeGoalCount > 0 ? .success : .selected)
+            ],
+            trustWhisper: posture.supportLabel
+        )
+    }
+
+    func makePrimaryAction(
+        mode: PlanDashboardMode,
+        posture: PlanBelievabilityState,
+        missingGoalSummary: GoalWeekSummary?,
+        pressuredGoalSummary: GoalWeekSummary?,
+        openCaptureCount: Int,
+        weekDays: [PlanElasticWeekDayState]
+    ) -> PlanWeekPrimaryAction {
+        if mode == .empty {
+            return PlanWeekPrimaryAction(
+                kind: .useRoom,
+                title: "Use this room",
+                subtitle: "The week is open. Keep it open until a real goal or capture needs shape.",
+                systemImage: "sparkles",
+                state: .success,
+                goalTarget: nil,
+                planRoute: nil
+            )
+        }
+
+        if weekDays.contains(where: { $0.level == .overloaded }) {
+            return PlanWeekPrimaryAction(
+                kind: .lightenWeek,
+                title: "Lighten week",
+                subtitle: openCaptureCount > 0
+                    ? "Reduce outside pressure first so the week stops carrying speculative load."
+                    : "One day is carrying too much. Lighten the loudest lane before adding more.",
+                systemImage: "sun.max",
+                state: .warning,
+                goalTarget: openCaptureCount > 0 ? nil : pressuredGoalSummary.map { GoalRouteTarget(goalID: $0.goal.id) },
+                planRoute: openCaptureCount > 0 ? .capturesInbox : nil
+            )
+        }
+
+        if let missingGoalSummary, weekDays.contains(where: { $0.level == .open }) {
+            return PlanWeekPrimaryAction(
+                kind: .useRoom,
+                title: "Use this room",
+                subtitle: "There is believable room for one calmer move on \(missingGoalSummary.goal.title).",
+                systemImage: "arrow.down.left.and.arrow.up.right",
+                state: .success,
+                goalTarget: GoalRouteTarget(goalID: missingGoalSummary.goal.id),
+                planRoute: nil
+            )
+        }
+
+        if let missingGoalSummary {
+            return PlanWeekPrimaryAction(
+                kind: .resolveCarryover,
+                title: "Resolve carryover",
+                subtitle: "\(missingGoalSummary.goal.title) is active but still not represented in the week.",
+                systemImage: "arrow.triangle.branch",
+                state: .selected,
+                goalTarget: GoalRouteTarget(goalID: missingGoalSummary.goal.id),
+                planRoute: nil
+            )
+        }
+
+        return PlanWeekPrimaryAction(
+            kind: .shapeWeek,
+            title: "Shape this week",
+            subtitle: posture.supportLabel,
+            systemImage: "wand.and.stars",
+            state: posture.visualState == .warning ? .selected : posture.visualState,
+            goalTarget: pressuredGoalSummary.map { GoalRouteTarget(goalID: $0.goal.id) } ?? weekDays.flatMap(\.blocks).first?.target,
+            planRoute: nil
+        )
+    }
+
+    func makeShapingActions(
+        summaries: [GoalWeekSummary],
+        missingGoalSummaries: [GoalWeekSummary],
+        pressuredGoalSummary: GoalWeekSummary?,
+        openCaptureCount: Int,
+        weekDays: [PlanElasticWeekDayState]
+    ) -> [PlanShapingActionState] {
+        let firstVisibleBlock = weekDays.flatMap(\.blocks).first
+        let firstOpenWindow = weekDays.compactMap(\.openWindow).first(where: { $0.target != nil })
+        let noisyDay = weekDays.first(where: { $0.level == .overloaded }) ?? weekDays.first(where: { $0.level == .tight })
+        let missingGoalTarget = missingGoalSummaries.first.map { GoalRouteTarget(goalID: $0.goal.id) }
+        let pressuredTarget = pressuredGoalSummary.map { GoalRouteTarget(goalID: $0.goal.id) }
+
         return [
-            PlanPressureItem(
-                id: "plan-pressure-captures",
-                title: "Open captures",
-                detail: openCaptures.isEmpty ? "The inbox is not adding planning pressure right now." : "Captured ideas are waiting to be seeded, attached, or archived.",
-                valueLabel: "\(openCaptures.count)",
-                icon: AppTab.captures.systemImage,
-                visualState: openCaptures.isEmpty ? .success : .warning
+            PlanShapingActionState(
+                kind: .edit,
+                title: "Edit",
+                subtitle: firstVisibleBlock?.title ?? "Edit the week at the block level.",
+                recommendation: firstVisibleBlock == nil
+                    ? "No dated block is visible yet, so there is nothing to edit directly."
+                    : "Start with the clearest existing block instead of redrawing the whole week.",
+                systemImage: PlanShapingActionKind.edit.systemImage,
+                state: firstVisibleBlock == nil ? .default : .selected,
+                goalTarget: firstVisibleBlock?.target,
+                planRoute: nil
             ),
-            PlanPressureItem(
-                id: "plan-pressure-clarity",
-                title: "Planning questions",
-                detail: clarificationDrafts.isEmpty && blockedDrafts.isEmpty ? "No draft is currently blocked on missing shape." : "Some drafts need clarification before the week can treat them as real work.",
-                valueLabel: "\(clarificationDrafts.count + blockedDrafts.count)",
-                icon: "questionmark.bubble",
-                visualState: clarificationDrafts.isEmpty && blockedDrafts.isEmpty ? .success : .warning
+            PlanShapingActionState(
+                kind: .patch,
+                title: "Patch",
+                subtitle: missingGoalSummaries.isEmpty
+                    ? "Patch the week without changing its calm shape."
+                    : "Give missing goals one believable lane instead of spreading them everywhere.",
+                recommendation: missingGoalSummaries.isEmpty
+                    ? "Use the cleanest open window or the weakest day and make one small adjustment."
+                    : "Patch missing work into the week only where room is actually visible.",
+                systemImage: PlanShapingActionKind.patch.systemImage,
+                state: missingGoalSummaries.isEmpty ? .selected : .warning,
+                goalTarget: missingGoalTarget ?? firstOpenWindow?.target,
+                planRoute: nil
             ),
-            PlanPressureItem(
-                id: "plan-pressure-friction",
-                title: "Recent friction",
-                detail: frictionCount == 0 ? "No correction or drift signals are pressing on the plan yet." : "Correction signals suggest this week may need smaller asks.",
-                valueLabel: "\(frictionCount)",
-                icon: "waveform.path.ecg",
-                visualState: frictionCount == 0 ? .default : .selected
+            PlanShapingActionState(
+                kind: .protect,
+                title: "Protect",
+                subtitle: firstOpenWindow?.title ?? "Protect the parts of the week that already feel believable.",
+                recommendation: firstOpenWindow?.suggestionLabel == nil
+                    ? "The best protection may be leaving one pocket unfilled."
+                    : "Protect the calmest pocket before pressure spills into it.",
+                systemImage: PlanShapingActionKind.protect.systemImage,
+                state: firstOpenWindow == nil ? .default : .success,
+                goalTarget: firstOpenWindow?.target ?? firstVisibleBlock?.target ?? pressuredTarget,
+                planRoute: nil
+            ),
+            PlanShapingActionState(
+                kind: .lighten,
+                title: "Lighten",
+                subtitle: noisyDay?.highlight ?? "Lighten the loudest part of the week first.",
+                recommendation: openCaptureCount > 0
+                    ? "Reduce speculative load before trying to force more commitment into the week."
+                    : "Shrink or move the heaviest ask before the week starts feeling performative.",
+                systemImage: PlanShapingActionKind.lighten.systemImage,
+                state: noisyDay == nil ? .default : .warning,
+                goalTarget: openCaptureCount > 0 ? nil : pressuredTarget,
+                planRoute: openCaptureCount > 0 ? .capturesInbox : nil
             )
         ]
+    }
+
+    func goalShapingItems(summaries: [GoalWeekSummary]) -> [PlanGoalShapingItem] {
+        summaries
+            .map { summary in
+                let represented = summary.contexts.isEmpty == false
+                let nextMove = summary.contexts.first?.step.summary ?? summary.contexts.first?.step.actionability.fallbackMicroStep ?? "Add one believable move."
+                let pressureLabel: String
+                let attentionReason: String
+                let relationship: String
+                let visualState: AmbitionVisualState
+
+                if represented == false {
+                    pressureLabel = "Carryover"
+                    attentionReason = "This goal is active but the current week does not yet give it believable room."
+                    relationship = "Still outside the week"
+                    visualState = .warning
+                } else if summary.frictionCount > 0 {
+                    pressureLabel = "Needs lighter ask"
+                    attentionReason = "Recent friction suggests the current move is heavier than the week can comfortably carry."
+                    relationship = "Visible, but straining"
+                    visualState = .warning
+                } else if summary.evaluation?.feasibilityLevel == .fragile || summary.evaluation?.feasibilityLevel == .notBelievable {
+                    pressureLabel = "Fragile"
+                    attentionReason = "The underlying plan evaluation is already warning that this goal is stressing the week."
+                    relationship = "Present on protected time"
+                    visualState = .warning
+                } else if summary.evaluation?.feasibilityLevel == .tight {
+                    pressureLabel = "Protected"
+                    attentionReason = "This goal fits, but only if its current room stays protected."
+                    relationship = "Visible and narrow"
+                    visualState = .selected
+                } else {
+                    pressureLabel = "Believable"
+                    attentionReason = "This goal has a clear lane in the week and does not currently need heavy intervention."
+                    relationship = "Holding cleanly"
+                    visualState = .success
+                }
+
+                return PlanGoalShapingItem(
+                    id: "plan-goal-\(summary.goal.id)",
+                    target: GoalRouteTarget(goalID: summary.goal.id),
+                    goalTitle: summary.goal.title,
+                    weekRelationship: relationship,
+                    pressureLabel: pressureLabel,
+                    attentionReason: attentionReason,
+                    nextMoveLabel: nextMove,
+                    visualState: visualState
+                )
+            }
+            .sorted { lhs, rhs in
+                let leftRank = shapingRank(for: lhs.visualState)
+                let rightRank = shapingRank(for: rhs.visualState)
+                if leftRank == rightRank {
+                    return lhs.goalTitle.localizedCaseInsensitiveCompare(rhs.goalTitle) == .orderedAscending
+                }
+                return leftRank < rightRank
+            }
+            .prefix(4)
+            .map { $0 }
+    }
+
+    func pressuredGoalSummary(from summaries: [GoalWeekSummary]) -> GoalWeekSummary? {
+        summaries.max { lhs, rhs in
+            pressureScore(for: lhs) < pressureScore(for: rhs)
+        }
     }
 
     func postureState(
@@ -322,49 +623,64 @@ private extension RepositoryBackedPlanService {
         blockedCount: Int,
         clarificationCount: Int,
         openCaptureCount: Int,
-        weekStepCount: Int,
+        weekDays: [PlanElasticWeekDayState],
         mode: PlanDashboardMode
-    ) -> PlanPostureState {
+    ) -> PlanBelievabilityState {
         guard mode == .active else {
-            return PlanPostureState(
+            return PlanBelievabilityState(
                 title: "The week is open",
-                detail: "There is no active local planning pressure yet.",
-                label: "Quiet",
+                detail: "No active goals or captures are pressing for structure yet.",
+                label: "Open",
+                supportLabel: "This is a real state, not missing data.",
                 visualState: .default
             )
         }
 
         if blockedCount + clarificationCount > 0 {
-            return PlanPostureState(
-                title: "Clarify before adding more",
-                detail: "Some planning work is paused on explicit questions or blockers.",
-                label: "Needs shaping",
+            return PlanBelievabilityState(
+                title: "The week is waiting on reality",
+                detail: "Open questions or blockers make the current shape less believable than it looks.",
+                label: "Needs clarity",
+                supportLabel: "Clarify before adding more commitment.",
+                visualState: .warning
+            )
+        }
+
+        if weekDays.contains(where: { $0.level == .overloaded }) {
+            return PlanBelievabilityState(
+                title: "The week is overloaded",
+                detail: "At least one day is carrying more than the current structure can explain calmly.",
+                label: "Overloaded",
+                supportLabel: "Lighten the loudest lane first.",
                 visualState: .warning
             )
         }
 
         if evaluations.contains(where: { $0.feasibilityLevel == .notBelievable || $0.feasibilityLevel == .fragile }) {
-            return PlanPostureState(
-                title: "The plan is fragile",
-                detail: "Existing planning evaluations are warning that this week needs gentler scope.",
+            return PlanBelievabilityState(
+                title: "The week is fragile",
+                detail: "Existing plan evaluations are warning that current commitments need gentler scope.",
                 label: "Fragile",
+                supportLabel: "Protect what is believable and soften the rest.",
                 visualState: .warning
             )
         }
 
-        if evaluations.contains(where: { $0.feasibilityLevel == .tight }) || openCaptureCount > 0 {
-            return PlanPostureState(
+        if evaluations.contains(where: { $0.feasibilityLevel == .tight }) || openCaptureCount > 0 || weekDays.contains(where: { $0.level == .tight }) {
+            return PlanBelievabilityState(
                 title: "The week is believable but tight",
-                detail: "The current plan can hold, but open captures or tight evaluations need review.",
+                detail: "The structure can hold, but room is already limited and pressure is visible.",
                 label: "Tight",
+                supportLabel: "Patch with restraint instead of adding density.",
                 visualState: .selected
             )
         }
 
-        return PlanPostureState(
-            title: weekStepCount == 0 ? "Goals are active, but the week is light" : "The week looks believable",
-            detail: weekStepCount == 0 ? "Active goals exist, but no current step is pressing into this weekly view." : "Existing planning evaluations are not warning about the current shape.",
+        return PlanBelievabilityState(
+            title: "The week looks believable",
+            detail: "Visible work, protected time, and open room are currently in balance.",
             label: "Believable",
+            supportLabel: "You can shape calmly because the week already has a coherent backbone.",
             visualState: .success
         )
     }
@@ -383,19 +699,128 @@ private extension RepositoryBackedPlanService {
             return "Due \(shortDate(dueAt))"
         }
         if let targetBy = timing.targetBy {
-            return "Target \(shortDate(targetBy))"
+            return "Protect \(shortDate(targetBy))"
         }
         if let suggestedNextAt = timing.suggestedNextAt {
-            return "Suggested \(shortDate(suggestedNextAt))"
+            return "Flex \(shortDate(suggestedNextAt))"
         }
         if let repeatEveryDays = timing.repeatEveryDays {
-            return "Every \(repeatEveryDays) days"
+            return "Every \(repeatEveryDays)d"
         }
         return "Flexible"
     }
 
-    func dateKey(for timing: GoalTiming) -> String? {
-        timing.dueAt ?? timing.targetBy ?? timing.suggestedNextAt ?? timing.startsOn
+    func plannedDate(for timing: GoalTiming) -> Date? {
+        parseDate(timing.dueAt ?? timing.targetBy ?? timing.suggestedNextAt ?? timing.startsOn)
+    }
+
+    func blockKind(for timing: GoalTiming) -> PlanWeekBlockKind {
+        if timing.dueAt != nil {
+            return .fixed
+        }
+        if timing.targetBy != nil {
+            return .protected
+        }
+        return .flexible
+    }
+
+    func blockVisualState(step: Step, evaluation: PlanningEvaluation?, frictionCount: Int) -> AmbitionVisualState {
+        if step.state == .blocked || frictionCount > 0 {
+            return .warning
+        }
+        if evaluation?.feasibilityLevel == .fragile || evaluation?.feasibilityLevel == .notBelievable {
+            return .warning
+        }
+        if evaluation?.feasibilityLevel == .tight {
+            return .selected
+        }
+        return .default
+    }
+
+    func loadWeight(for kind: PlanWeekBlockKind, visualState: AmbitionVisualState) -> Double {
+        let base: Double = switch kind {
+        case .fixed: 1.35
+        case .protected: 1.0
+        case .flexible: 0.72
+        }
+        if visualState == .warning {
+            return base + 0.25
+        }
+        if visualState == .selected {
+            return base + 0.1
+        }
+        return base
+    }
+
+    func dayIntensity(for level: PlanWeekPressureLevel, blockCount: Int) -> Double {
+        let base: Double = switch level {
+        case .open: 0.48
+        case .steady: 0.66
+        case .tight: 0.84
+        case .overloaded: 1.0
+        }
+        return min(base + (Double(blockCount) * 0.04), 1.0)
+    }
+
+    func roomLabel(for level: PlanWeekPressureLevel, remainingCapacity: Double, contextCount: Int) -> String {
+        switch level {
+        case .open:
+            return contextCount == 0 ? "Open day" : "Wide room"
+        case .steady:
+            return remainingCapacity > 1.0 ? "Room remains" : "Steady load"
+        case .tight:
+            return "Little room left"
+        case .overloaded:
+            return "Needs relief"
+        }
+    }
+
+    func dayHighlight(
+        level: PlanWeekPressureLevel,
+        contexts: [StepContext],
+        suggestedSummary: GoalWeekSummary?
+    ) -> String {
+        if level == .overloaded {
+            return "Pressure is stacking here."
+        }
+        if level == .tight {
+            return "This day needs protected edges."
+        }
+        if let first = contexts.first {
+            return "\(first.goal.title) is anchoring this day."
+        }
+        if let suggestedSummary {
+            return "\(suggestedSummary.goal.title) could fit here."
+        }
+        return "Keep the room visible."
+    }
+
+    func pressureRank(for level: PlanWeekPressureLevel) -> Int {
+        switch level {
+        case .open: 0
+        case .steady: 1
+        case .tight: 2
+        case .overloaded: 3
+        }
+    }
+
+    func pressureScore(for summary: GoalWeekSummary) -> Double {
+        var score = Double(summary.frictionCount * 3)
+        if summary.contexts.isEmpty {
+            score += 5
+        }
+        switch summary.evaluation?.feasibilityLevel {
+        case .notBelievable:
+            score += 5
+        case .fragile:
+            score += 4
+        case .tight:
+            score += 2
+        default:
+            break
+        }
+        score += Double(summary.contexts.count)
+        return score
     }
 
     func shortDate(_ value: String) -> String {

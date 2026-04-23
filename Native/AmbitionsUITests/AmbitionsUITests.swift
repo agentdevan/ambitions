@@ -64,8 +64,9 @@ final class AmbitionsUITests: XCTestCase {
 
         app.buttons["shell.plan.back-button"].tap()
         XCTAssertTrue(app.descendants(matching: .any)["plan.screen"].waitForExistence(timeout: 10))
-        XCTAssertTrue(app.descendants(matching: .any)["plan.weekly-intent-card"].waitForExistence(timeout: 10))
-        XCTAssertTrue(scrollUntilElementExists("plan.goal-shaping-card", in: app))
+        XCTAssertTrue(app.descendants(matching: .any)["plan.hero-card"].waitForExistence(timeout: 10))
+        XCTAssertTrue(scrollUntilElementExists("plan.pressure-scrubber", in: app))
+        XCTAssertTrue(scrollUntilElementExists("plan.goal-relationship-card", in: app))
         XCTAssertTrue(scrollUntilElementExists("plan.open-plan-habits-button", in: app))
         app.buttons["plan.open-plan-habits-button"].tap()
         XCTAssertTrue(app.staticTexts["No habits are live yet"].waitForExistence(timeout: 10))
@@ -409,6 +410,37 @@ final class AmbitionsUITests: XCTestCase {
         openPlan.tap()
 
         XCTAssertTrue(app.descendants(matching: .any)["plan.screen"].waitForExistence(timeout: 10))
+    }
+
+    func testDemoPlanWorkspaceShowsBatch49CoreModules() throws {
+        let app = makeApp(bootstrapMode: "demo", launchURL: "ambitions://tab/plan")
+        app.launch()
+
+        XCTAssertTrue(app.descendants(matching: .any)["plan.screen"].waitForExistence(timeout: 15))
+        XCTAssertTrue(app.descendants(matching: .any)["plan.hero-card"].waitForExistence(timeout: 10))
+        XCTAssertTrue(scrollUntilElementExists("plan.pressure-scrubber", in: app))
+        XCTAssertTrue(scrollUntilElementExists("plan.elastic-week", in: app))
+        XCTAssertTrue(scrollUntilElementExists("plan.believability-card", in: app))
+        XCTAssertTrue(scrollUntilElementExists("plan.action-lane", in: app))
+    }
+
+    func testDemoPlanPressureScrubberUpdatesSelectedDayAndActionLane() throws {
+        let app = makeApp(bootstrapMode: "demo", launchURL: "ambitions://tab/plan")
+        app.launch()
+
+        XCTAssertTrue(app.descendants(matching: .any)["plan.screen"].waitForExistence(timeout: 15))
+        XCTAssertTrue(scrollUntilElementExists("plan.pressure-scrubber", in: app))
+        let scrubPoint = app.buttons["plan.scrubber.point.day-2"]
+        XCTAssertTrue(scrubPoint.waitForExistence(timeout: 10))
+        scrubPoint.tap()
+        XCTAssertEqual(scrubPoint.value as? String, "selected")
+
+        let protectAction = scrollUntilButtonHittable("plan.action.select.protect", in: app)
+        XCTAssertTrue(protectAction.waitForExistence(timeout: 10))
+        protectAction.tap()
+
+        let actionCTA = scrollUntilButtonHittable("plan.action.cta", fallbackLabel: "Open goal", in: app)
+        XCTAssertTrue(actionCTA.waitForExistence(timeout: 10))
     }
 
     private func makeApp(

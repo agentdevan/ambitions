@@ -1,6 +1,6 @@
 ﻿# Batch 50 - Front-End Transformation 11 / Plan rebuild II - Execution Resilience, habits, captures, and review shaping
 ## Status
-Queued
+Active
 ## Program
 Post-hardening Front-End Transformation Program
 ## Canon Source
