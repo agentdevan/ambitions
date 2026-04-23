@@ -14,6 +14,7 @@ Use it together with:
 ## Purpose
 
 Record the revised queued sequence after Batch 49 activation so the main canon/control files can absorb it cleanly.
+Use this as a compact queue shorthand only; active status still comes from the registry and implementation scope still comes from the master transformation program plus per-batch docs.
 
 ## Revised Queue
 

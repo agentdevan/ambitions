@@ -123,6 +123,20 @@ Named subsystems that should remain explicit in planning when materially relevan
 - `Recommendation Object Model`
 - `Surface Contract Matrix`
 
+## Batch 49-60 Ownership Map
+
+Use this map to keep the revised queue implementation-ready and avoid cross-batch drift:
+
+- `Batch 49` owns the first major `Reality Model` surface expression for week truth, room, pressure, and believability.
+- `Batch 50` owns the first major `Execution Resilience Stack` surface expression for carryover, lighter versions, and week recovery shaping.
+- `Batch 51` owns `Reflection OS`, including `Quiet Gaps` and `Truth Mirror`, inside the Insights rebuild.
+- `Batch 52` owns `Context Vault + Signal Policy` foundations, plus the premium Profile / Trust configuration surface.
+- `Batch 53` owns `Progressive Intelligence Onboarding`, including `60-Second Starting State`, and the user-facing `Degraded-State Orchestrator`.
+- `Batch 54` owns `State Continuity Mesh`, including `Now State Lease`, `Continuity Receipts`, `Sync Health Strip`, and semantic conflict language before external-surface widening.
+- `Batch 55` and `Batch 56` consume the established continuity contract to implement external surfaces without inventing separate truth models.
+- `Batch 57` consolidates cross-surface command, recall, and ambient coherence on top of the earlier pillar work rather than reopening those foundations.
+- `Batch 58`, `Batch 59`, and `Batch 60` extend and finish the already-defined system; they should not redefine core pillar ownership.
+
 ---
 
 ## End-State Product Standard
@@ -295,6 +309,9 @@ Implications:
 
 ## Registry Alignment
 
+This summary must match the live queue in `BATCH_REGISTRY.md`.
+If status language here drifts, the registry controls active-vs-queued truth and this table should be reconciled immediately.
+
 | Batch | Name | Status | Notes |
 | --- | --- | --- | --- |
 | 39 | Front-End Transformation 00 / Program canon and shell rewrite foundation | Completed | Docs/control-file foundation only. |
@@ -306,8 +323,8 @@ Implications:
 | 45 | Front-End Transformation 06 / Goals rebuild I — direction board and horizon ladder | Completed | Goals overview rebuild. |
 | 46 | Front-End Transformation 07 / Goal intake and Strategy Composer | Completed | Full create-goal and planning setup redesign. |
 | 47 | Front-End Transformation 08 / Goal Detail rebuild I — strategic chamber and path filmstrip | Completed | Goal Detail composition phase 1 delivered as the strategic first-layer / path-filmstrip rebuild. |
-| 48 | Front-End Transformation 09 / Goal Detail rebuild II — trust whisper, correction, audit, and memory | Active | Goal Detail composition phase 2. |
-| 49 | Front-End Transformation 10 / Plan rebuild I — Reality Model, elastic week, and pressure scrubber | Queued | Plan surface phase 1 with week-structure truth and pressure shaping. |
+| 48 | Front-End Transformation 09 / Goal Detail rebuild II — trust whisper, correction, audit, and memory | Completed | Goal Detail composition phase 2 closed while keeping trust, correction, audit, and memory subordinate to the strategic first layer. |
+| 49 | Front-End Transformation 10 / Plan rebuild I — Reality Model, elastic week, and pressure scrubber | Active | Plan surface phase 1 with week-structure truth and pressure shaping. |
 | 50 | Front-End Transformation 11 / Plan rebuild II — Execution Resilience, habits, captures, and review shaping | Queued | Plan ecosystem phase 2 with resilience and review integration. |
 | 51 | Front-End Transformation 12 / Insights rebuild and Reflection OS | Queued | Includes activity history, review coherence, and reflection-system language. |
 | 52 | Front-End Transformation 13 / Profile rebuild, Appearance Studio, Trust Center, and Context Vault foundations | Queued | Includes trust controls, appearance, and context-vault foundations. |
@@ -434,7 +451,7 @@ Complete only when the new shell is structurally coherent, visually intentional,
 ## Batch 41 — Front-End Transformation 02 / Design system, materials, motion engine, and controls
 
 ### Status
-Active
+Completed
 
 ### Goal
 Implement the full premium visual system and motion grammar used by every later batch.
@@ -487,7 +504,7 @@ Complete only when the app has one real system language rather than per-screen s
 ## Batch 42 — Front-End Transformation 03 / Global compose, search, capture, and command surface
 
 ### Status
-Active
+Completed
 
 ### Goal
 Implement the cross-app command layer that unifies creation, capture, quick recovery, quick planning, and memory recall.
@@ -535,7 +552,7 @@ Complete only when creation, capture, recovery, and recall feel like one coheren
 ## Batch 43 — Front-End Transformation 04 / Today rebuild I — living hero, now state, and action model
 
 ### Status
-Active
+Completed
 
 ### Goal
 Rebuild Today into the flagship living execution surface with a new hero layer, stronger hierarchy, and a first-class action model.
@@ -684,7 +701,7 @@ Completed on April 22, 2026 after isolated UI reruns plus direct manual simulato
 ## Batch 46 — Front-End Transformation 07 / Goal intake and Strategy Composer
 
 ### Status
-Active
+Completed
 
 ### Goal
 Fully redesign goal creation, intake, ambiguity handling, and initial strategy shaping into a premium composition flow.
@@ -732,7 +749,7 @@ Complete only when goal setup feels like a real premium product moment.
 ## Batch 47 — Front-End Transformation 08 / Goal Detail rebuild I — strategic chamber and path filmstrip
 
 ### Status
-Active
+Completed
 
 ### Goal
 Rebuild Goal Detail into the strategic chamber of Ambitions with clearer composition and path visualization.

@@ -90,7 +90,7 @@ Recommended early-core batch band:
 
 Recommended later-core batch band:
 
-- Batches 46-59 after Batch 39 establishes doctrine and the shell, design system, motion system, Today, and Goals are stable
+- Batches 46-60 after Batch 39 establishes doctrine and the shell, design system, motion system, Today, and Goals are stable
 
 ### Systems
 

@@ -79,6 +79,9 @@ Supporting canon docs that clarify the post-Batch-48 direction without replacing
 - [../canon/Ambitions_Product_Addendum_Continuity_Reality_Execution.md](../canon/Ambitions_Product_Addendum_Continuity_Reality_Execution.md)
 - [../canon/Ambitions_Frontend_Batches_49_60_Revised.md](../canon/Ambitions_Frontend_Batches_49_60_Revised.md)
 
+Use these as clarifying shorthand only.
+Do not let them override live status from `BATCH_REGISTRY.md` or queue scope from `Ambitions_Full_Frontend_Transformation_Program.md`.
+
 ## Canonical Planning Stack
 
 These files are permanent canonical context and must stay in repo:

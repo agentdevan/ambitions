@@ -15,6 +15,7 @@ Its role is to capture doctrine that should be reflected in:
 ## Purpose
 
 Make the post-Batch-48 planning direction explicit without scattering it across future batch prompts.
+This addendum is supporting shorthand only; the master product spec and transformation program remain the primary canon sources.
 
 ## Doctrine
 
