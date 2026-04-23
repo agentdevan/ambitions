@@ -48,6 +48,19 @@ struct RepositoryBackedGoalsService: GoalsServicing {
         return try await makeDetail(target: target, snapshot: snapshot)
     }
 
+    func makePathStagesForTesting(
+        pathSummary: LifePathStateSummary?,
+        sections: [PlanSection],
+        renderState: GoalRenderState
+    ) -> [GoalPathStage] {
+        makePathStages(
+            pathSummary: pathSummary,
+            sections: sections,
+            renderState: renderState,
+            includeSyntheticFallback: true
+        )
+    }
+
     func previewCreateGoal(_ request: CreateGoalPreviewRequest, now: Date) async throws -> CreateGoalPreviewState {
         let trimmedTitle = request.title.trimmingCharacters(in: .whitespacesAndNewlines)
         guard trimmedTitle.isEmpty == false else {
@@ -394,6 +407,8 @@ struct StubGoalsService: GoalsServicing {
                     title: "First pass",
                     summary: "A lightweight starting path based on the current title.",
                     stepCountLabel: "\(seed.steps.count) step\(seed.steps.count == 1 ? "" : "s")",
+                    position: .current,
+                    statusLabel: GoalPathStagePosition.current.title,
                     highlight: seed.steps.first?.title,
                     state: .selected
                 )
@@ -1520,7 +1535,12 @@ private extension RepositoryBackedGoalsService {
                 whyNow: whyNow
             )
         }
-        let pathStages = makePathStages(pathSummary: pathSummary, sections: sections, renderState: renderState)
+        let pathStages = makePathStages(
+            pathSummary: pathSummary,
+            sections: sections,
+            renderState: renderState,
+            includeSyntheticFallback: true
+        )
         let sectionStates = sections.sorted { $0.orderIndex < $1.orderIndex }.map { section in
             GoalDetailSectionState(
                 id: section.id,
@@ -1530,6 +1550,43 @@ private extension RepositoryBackedGoalsService {
                 steps: section.steps.map { makeStepItem(step: $0, goalMode: effectiveMode) }
             )
         }
+        let progressLabel = allSteps.isEmpty ? "Structure forming" : "\(completedCount) of \(allSteps.count) steps landed"
+        let sharedProgressNote = renderState == .clarification
+            ? "Clarification comes before decomposition. Ambitions is surfacing the missing information instead of inventing urgency."
+            : renderState == .blocked
+                ? "The blocker is kept visible so the path can restart cleanly once the missing input arrives."
+                : effectiveMode == .delegatedSupport
+                    ? "Support goals stay non-punitive. Progress reflects what you can support, not what you can force."
+                    : whyNow?.conciseReason ?? "The next step stays small enough to act on without losing the broader path."
+        let strategicStatus = strategicStatus(
+            renderState: renderState,
+            pathSummary: pathSummary,
+            progressValue: progressValue,
+            progressLabel: progressLabel,
+            manualPriorityLabel: manualPriorityLabel(for: context, appState: appState, priorityOrder: priorityOrder),
+            supportModeActive: context.supportModeActive,
+            whyNow: whyNow?.conciseReason
+        )
+        let nextMovement = nextMovementState(
+            primaryStep: context.primaryStep,
+            suggestions: suggestions,
+            whyNow: whyNow?.conciseReason,
+            goalMode: effectiveMode,
+            renderState: renderState
+        )
+        let trajectory = trajectoryState(
+            pathSummary: pathSummary,
+            pathStages: pathStages,
+            sections: sectionStates,
+            evidenceLabel: evidenceLabel,
+            timingNote: timingNote(for: timing, goalMode: effectiveMode),
+            progressNote: sharedProgressNote
+        )
+        let recentMovement = recentMovementState(
+            evidence: Array(context.evidence.prefix(3)),
+            feedback: Array(context.feedback.prefix(3)),
+            evidenceLabel: evidenceLabel
+        )
 
         return GoalDetailPresentation(
             target: context.target,
@@ -1545,21 +1602,18 @@ private extension RepositoryBackedGoalsService {
             outcome: sourceDraft?.summary ?? sourceGoal?.summary ?? detailSubtitle(for: effectiveMode),
             intent: intentText(mode: effectiveMode, actorName: context.actorName, renderState: renderState),
             progress: GoalDetailProgress(
-                label: allSteps.isEmpty ? "Structure forming" : "\(completedCount) of \(allSteps.count) steps landed",
+                label: progressLabel,
                 detail: renderState == .starter
                     ? "Starter-plan assumptions are being treated as temporary scaffolding."
                     : "Progress is reading the real persisted plan and evidence history.",
                 value: progressValue,
                 evidenceLabel: evidenceLabel
             ),
+            strategicStatus: strategicStatus,
+            nextMovement: nextMovement,
+            trajectory: trajectory,
             timingNote: timingNote(for: timing, goalMode: effectiveMode),
-            progressNote: renderState == .clarification
-                ? "Clarification comes before decomposition. Ambitions is surfacing the missing information instead of inventing urgency."
-                : renderState == .blocked
-                    ? "The blocker is kept visible so the path can restart cleanly once the missing input arrives."
-                    : effectiveMode == .delegatedSupport
-                        ? "Support goals stay non-punitive. Progress reflects what you can support, not what you can force."
-                        : whyNow?.conciseReason ?? "The next step stays small enough to act on without losing the broader path.",
+            progressNote: sharedProgressNote,
             manualPriorityLabel: manualPriorityLabel(for: context, appState: appState, priorityOrder: priorityOrder),
             assumptions: context.draft?.assumptions.map(\.summary) ?? [],
             suggestions: suggestions,
@@ -1569,6 +1623,7 @@ private extension RepositoryBackedGoalsService {
             blocked: blockedState(from: context.draft),
             evidence: Array(context.evidence.prefix(6)).map(makeEvidenceItem),
             history: Array(context.feedback.prefix(6)).map(makeFeedbackItem),
+            recentMovement: recentMovement,
             actions: detailActions(
                 for: renderState,
                 primaryStepAvailable: context.primaryStep != nil,
@@ -2923,10 +2978,190 @@ private extension RepositoryBackedGoalsService {
         )
     }
 
+    func strategicStatus(
+        renderState: GoalRenderState,
+        pathSummary: LifePathStateSummary?,
+        progressValue: Double,
+        progressLabel: String,
+        manualPriorityLabel: String,
+        supportModeActive: Bool,
+        whyNow: String?
+    ) -> GoalDetailStrategicStatus {
+        let title: String = {
+            switch renderState {
+            case .active:
+                return supportModeActive ? "Support path is in motion" : "Path is in motion"
+            case .starter:
+                return "Starter path is taking shape"
+            case .clarification:
+                return "Clarification is the real work right now"
+            case .blocked:
+                return "The path is waiting on a real blocker"
+            case .onHold:
+                return "This goal is intentionally quieter"
+            case .achieved:
+                return "This goal is complete"
+            }
+        }()
+
+        let summary: String = {
+            if let pathSummary {
+                if renderState == .blocked || (!pathSummary.blockedPrerequisites.isEmpty || pathSummary.readiness.gapCount > 0) {
+                    return "The current stage is visible, but Ambitions is keeping the blocker explicit instead of faking momentum."
+                }
+                if let activeStage = pathSummary.orderedStages.first(where: { $0.id == pathSummary.activeStageID }) {
+                    return "You are in \(activeStage.title), with \(progressLabel.lowercased()) and the next movement already surfaced."
+                }
+            }
+
+            switch renderState {
+            case .clarification:
+                return "The screen is leading with missing truth so the path can become believable before more decomposition."
+            case .blocked:
+                return "The constraint is staying visible until the path can restart cleanly."
+            case .starter:
+                return "The structure is intentionally provisional so early signal can reshape the plan."
+            case .achieved:
+                return "The path is closed and no longer asking for more movement."
+            case .onHold:
+                return "This goal is paused without losing the strategic framing."
+            case .active:
+                return "The path is active and oriented around the smallest move that still changes the goal."
+            }
+        }()
+
+        return GoalDetailStrategicStatus(
+            title: title,
+            summary: summary,
+            supportingDetail: whyNow ?? "\(manualPriorityLabel) • \(Int(progressValue * 100))% visible progress"
+        )
+    }
+
+    func nextMovementState(
+        primaryStep: Step?,
+        suggestions: [GoalDetailStepItem],
+        whyNow: String?,
+        goalMode: GoalMode,
+        renderState: GoalRenderState
+    ) -> GoalDetailNextMovement? {
+        if let primaryStep {
+            return GoalDetailNextMovement(
+                title: primaryStep.title,
+                summary: primaryStep.summary ?? primaryStep.actionability.fallbackMicroStep,
+                timingLabel: timingLabel(for: primaryStep.timing, goalMode: goalMode),
+                rationale: whyNow ?? "This is the smallest move that keeps the broader path honest.",
+                state: stepVisualState(primaryStep.state)
+            )
+        }
+
+        if let suggestion = suggestions.first {
+            return GoalDetailNextMovement(
+                title: suggestion.title,
+                summary: suggestion.summary,
+                timingLabel: suggestion.timingLabel,
+                rationale: whyNow ?? "This is the calmest next move still available from the current plan.",
+                state: suggestion.state
+            )
+        }
+
+        switch renderState {
+        case .clarification:
+            return GoalDetailNextMovement(
+                title: "Answer the missing question",
+                summary: "Goal Detail is waiting on one real clarification before it treats the path as trustworthy.",
+                timingLabel: "Before new planning",
+                rationale: "Clarifying the truth matters more than generating more tactics here.",
+                state: .warning
+            )
+        case .blocked:
+            return GoalDetailNextMovement(
+                title: "Resolve the blocker",
+                summary: "Unblock the constraint before asking the screen for more decomposition.",
+                timingLabel: "As soon as reality changes",
+                rationale: "Ambitions is refusing to turn uncertainty into performative activity.",
+                state: .warning
+            )
+        case .achieved:
+            return nil
+        case .starter, .active, .onHold:
+            return nil
+        }
+    }
+
+    func trajectoryState(
+        pathSummary: LifePathStateSummary?,
+        pathStages: [GoalPathStage],
+        sections: [GoalDetailSectionState],
+        evidenceLabel: String,
+        timingNote: String,
+        progressNote: String
+    ) -> GoalDetailTrajectoryState {
+        let activeStage = pathStages.first(where: { $0.position == .current || $0.position == .blocked })
+        let phaseTitle = activeStage?.title ?? sections.first?.title ?? "Path overview"
+        let phaseSummary = activeStage?.summary ?? sections.first?.summary ?? "The current path is still forming."
+        let milestoneSummary = activeStage?.highlight ?? pathStages.first(where: { $0.position == .upcoming })?.highlight ?? "No milestone highlight yet"
+        let momentumSummary: String = {
+            if let pathSummary {
+                let completed = pathSummary.progression.completedMilestoneIDs.count
+                let total = pathSummary.progression.totalMilestoneCount
+                if total > 0 {
+                    return "\(completed) of \(total) milestones are already visible."
+                }
+            }
+
+            return evidenceLabel
+        }()
+
+        return GoalDetailTrajectoryState(
+            phaseTitle: phaseTitle,
+            phaseSummary: phaseSummary,
+            milestoneSummary: milestoneSummary,
+            momentumSummary: momentumSummary,
+            timelineSummary: "\(timingNote) \(progressNote)"
+        )
+    }
+
+    func recentMovementState(
+        evidence: [ProgressEvidence],
+        feedback: [GoalFeedbackEvent],
+        evidenceLabel: String
+    ) -> GoalDetailRecentMovementState {
+        let evidenceItems = evidence.prefix(2).map { evidence in
+            GoalDetailRecentMovementItem(
+                id: "evidence-\(evidence.id)",
+                title: evidence.note ?? "Progress signal recorded",
+                subtitle: evidence.evidenceKind.rawValue.replacingOccurrences(of: "_", with: " ").capitalized,
+                timestamp: evidence.capturedAt,
+                categoryLabel: "Evidence",
+                state: .success
+            )
+        }
+        let feedbackItems = feedback.prefix(2).map { feedback in
+            let item = makeFeedbackItem(feedback)
+            return GoalDetailRecentMovementItem(
+                id: "feedback-\(item.id)",
+                title: item.title,
+                subtitle: item.subtitle,
+                timestamp: item.timestamp,
+                categoryLabel: "Adjustment",
+                state: item.state
+            )
+        }
+        let items = Array((evidenceItems + feedbackItems).prefix(4))
+        let summary = items.isEmpty ? evidenceLabel : "Recent movement is visible without turning the screen into a history audit."
+
+        return GoalDetailRecentMovementState(
+            title: "Recent movement",
+            summary: summary,
+            items: items
+        )
+    }
+
     func makePathStages(
         pathSummary: LifePathStateSummary?,
         sections: [PlanSection],
-        renderState: GoalRenderState
+        renderState: GoalRenderState,
+        includeSyntheticFallback: Bool = false
     ) -> [GoalPathStage] {
         if let pathSummary, pathSummary.orderedStages.isEmpty == false {
             return pathSummary.orderedStages.map { stage in
@@ -2936,26 +3171,88 @@ private extension RepositoryBackedGoalsService {
                 let isBlocked = isActive && (!pathSummary.blockedPrerequisites.isEmpty || pathSummary.readiness.gapCount > 0)
                 let highlight = milestones.first(where: { pathSummary.progression.completedMilestoneIDs.contains($0.id) == false })?.title
                     ?? (isBlocked ? pathSummary.blockedPrerequisites.first?.title ?? pathSummary.readiness.gapSignals.first?.title : nil)
+                let position: GoalPathStagePosition = isCompleted ? .completed : (isBlocked ? .blocked : (isActive ? .current : .upcoming))
 
                 return GoalPathStage(
                     id: stage.id,
                     title: stage.title,
                     summary: stage.summary ?? "Path stage",
                     stepCountLabel: "\(milestones.count) milestone\(milestones.count == 1 ? "" : "s")",
+                    position: position,
+                    statusLabel: position.title,
                     highlight: highlight,
                     state: isCompleted ? .success : (isBlocked ? .warning : (isActive ? renderState.visualState : .default))
                 )
             }
         }
 
-        return sections.sorted { $0.orderIndex < $1.orderIndex }.map { section in
-            GoalPathStage(
+        let sortedSections = sections.sorted { $0.orderIndex < $1.orderIndex }
+        if includeSyntheticFallback && sortedSections.isEmpty {
+            let position: GoalPathStagePosition
+            let title: String
+            let summary: String
+            let highlight: String?
+
+            switch renderState {
+            case .active:
+                position = .current
+                title = "Current path"
+                summary = "Movement is already live; stay with the next visible move instead of rebuilding the whole plan."
+                highlight = "Keep the next move visible"
+            case .starter:
+                position = .current
+                title = "Starter path"
+                summary = "The path is still taking shape, but there is enough signal to make the first move visible now."
+                highlight = "Take the first visible step"
+            case .clarification:
+                position = .current
+                title = "Clarify the path"
+                summary = "The path stays provisional until the missing truth is answered clearly."
+                highlight = "Answer the missing question"
+            case .blocked:
+                position = .blocked
+                title = "Blocked path"
+                summary = "A real blocker is preventing movement, so the next move is to clear the obstruction rather than force progress."
+                highlight = "Resolve the blocker"
+            case .onHold:
+                position = .upcoming
+                title = "Held path"
+                summary = "The direction is intentionally quiet for now, but the path remains visible for clean re-entry later."
+                highlight = "Re-enter when the timing is real"
+            case .achieved:
+                position = .completed
+                title = "Completed path"
+                summary = "The path is closed because the outcome has already landed."
+                highlight = "Outcome landed"
+            }
+
+            return [
+                GoalPathStage(
+                    id: "synthetic-\(renderState.rawValue)-path-stage",
+                    title: title,
+                    summary: summary,
+                    stepCountLabel: "Path anchor",
+                    position: position,
+                    statusLabel: position.title,
+                    highlight: highlight,
+                    state: position == .completed ? .success : renderState.visualState
+                )
+            ]
+        }
+
+        return sortedSections.enumerated().map { index, section in
+            let isCompleted = section.steps.allSatisfy { $0.state == .completed }
+            let hasActiveStep = section.steps.contains { $0.state != .completed && $0.state != .cancelled }
+            let position: GoalPathStagePosition = isCompleted ? .completed : (hasActiveStep && index == 0 ? .current : .upcoming)
+            return GoalPathStage(
                 id: section.id,
                 title: section.title,
                 summary: section.summary ?? section.kind.rawValue.replacingOccurrences(of: "_", with: " "),
                 stepCountLabel: "\(section.steps.count) step\(section.steps.count == 1 ? "" : "s")",
+                position: position,
+                statusLabel: position.title,
                 highlight: section.steps.first(where: { $0.state != .completed && $0.state != .cancelled })?.title,
-                state: section.steps.allSatisfy { $0.state == .completed } ? .success : renderState.visualState
+                state: isCompleted ? .success : (position == .current ? renderState.visualState : .default)
             )
         }
     }

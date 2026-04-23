@@ -423,18 +423,210 @@ struct GoalDetailHeroCard: View {
                     state: detail.headline.renderState.visualState
                 )
 
-                Text(detail.intent)
-                    .font(theme.typography.body)
-                    .foregroundStyle(theme.colors.textSecondary)
-
-                if let supportLabel = detail.headline.supportLabel {
-                    Text(supportLabel)
-                        .font(theme.typography.caption)
+                VStack(alignment: .leading, spacing: theme.spacing.xs) {
+                    Text(detail.strategicStatus.title)
+                        .font(theme.typography.section)
+                        .foregroundStyle(theme.colors.textPrimary)
+                    Text(detail.strategicStatus.summary)
+                        .font(theme.typography.body)
                         .foregroundStyle(theme.colors.textSecondary)
+                    Text(detail.strategicStatus.supportingDetail)
+                        .font(theme.typography.caption)
+                        .foregroundStyle(theme.colors.textTertiary)
+                }
+
+                VStack(alignment: .leading, spacing: theme.spacing.xxxs) {
+                    Text(detail.intent)
+                        .font(theme.typography.body)
+                        .foregroundStyle(theme.colors.textSecondary)
+
+                    if let supportLabel = detail.headline.supportLabel {
+                        Text(supportLabel)
+                            .font(theme.typography.caption)
+                            .foregroundStyle(theme.colors.textSecondary)
+                    }
                 }
             }
         }
+        .accessibilityIdentifier("goal-detail.strategic-header")
         .ambitionPanelAccessibility()
+    }
+}
+
+struct GoalDetailFilmstripCard: View {
+    @Environment(\.ambitionTheme) private var theme
+
+    let stages: [GoalPathStage]
+
+    var body: some View {
+        GoalDetailSectionCard(title: "Path filmstrip", subtitle: "Movement stays visible before deeper tactics.") {
+            ScrollView(.horizontal, showsIndicators: false) {
+                HStack(spacing: theme.spacing.sm) {
+                    ForEach(stages) { stage in
+                        VStack(alignment: .leading, spacing: theme.spacing.xs) {
+                            HStack(alignment: .top, spacing: theme.spacing.xs) {
+                                Circle()
+                                    .fill(color(for: stage))
+                                    .frame(width: 10, height: 10)
+                                VStack(alignment: .leading, spacing: theme.spacing.xxxs) {
+                                    Text(stage.statusLabel)
+                                        .font(theme.typography.micro)
+                                        .foregroundStyle(theme.colors.textTertiary)
+                                    Text(stage.title)
+                                        .font(theme.typography.bodyEmphasized)
+                                        .foregroundStyle(theme.colors.textPrimary)
+                                }
+                                Spacer(minLength: theme.spacing.sm)
+                                TagPill(stage.stepCountLabel, state: stage.state)
+                            }
+
+                            Text(stage.summary)
+                                .font(theme.typography.caption)
+                                .foregroundStyle(theme.colors.textSecondary)
+                                .lineLimit(3)
+
+                            if let highlight = stage.highlight {
+                                Text(highlight)
+                                    .font(theme.typography.caption)
+                                    .foregroundStyle(theme.colors.textTertiary)
+                                    .lineLimit(2)
+                            }
+                        }
+                        .frame(width: 220, alignment: .leading)
+                        .padding(theme.spacing.sm)
+                        .background(
+                            RoundedRectangle(cornerRadius: theme.radius.md, style: .continuous)
+                                .fill(theme.colors.surfaceOverlay)
+                        )
+                        .overlay(alignment: .leading) {
+                            Rectangle()
+                                .fill(color(for: stage))
+                                .frame(width: 3)
+                        }
+                    }
+                }
+                .padding(.vertical, 1)
+            }
+        }
+        .accessibilityIdentifier("goal-detail.path-filmstrip")
+    }
+
+    private func color(for stage: GoalPathStage) -> Color {
+        switch stage.position {
+        case .completed:
+            return theme.colors.success
+        case .current:
+            return theme.colors.accentPrimary
+        case .blocked:
+            return theme.colors.warning
+        case .upcoming:
+            return theme.colors.textTertiary
+        }
+    }
+}
+
+struct GoalDetailNextMovementCard: View {
+    @Environment(\.ambitionTheme) private var theme
+
+    let movement: GoalDetailNextMovement
+
+    var body: some View {
+        GoalDetailSectionCard(title: "What matters next", subtitle: "One move first, before the rest of the path.") {
+            VStack(alignment: .leading, spacing: theme.spacing.sm) {
+                HStack(alignment: .top, spacing: theme.spacing.sm) {
+                    VStack(alignment: .leading, spacing: theme.spacing.xxxs) {
+                        Text(movement.title)
+                            .font(theme.typography.section)
+                            .foregroundStyle(theme.colors.textPrimary)
+                        Text(movement.summary)
+                            .font(theme.typography.body)
+                            .foregroundStyle(theme.colors.textSecondary)
+                    }
+                    Spacer()
+                    TagPill(movement.timingLabel, state: movement.state)
+                }
+
+                Text(movement.rationale)
+                    .font(theme.typography.caption)
+                    .foregroundStyle(theme.colors.textTertiary)
+            }
+        }
+        .accessibilityIdentifier("goal-detail.next-movement")
+    }
+}
+
+struct GoalDetailTrajectoryCard: View {
+    @Environment(\.ambitionTheme) private var theme
+
+    let trajectory: GoalDetailTrajectoryState
+
+    var body: some View {
+        GoalDetailSectionCard(title: "Current phase and momentum", subtitle: "Phase truth stays strategic instead of reading like admin.") {
+            VStack(alignment: .leading, spacing: theme.spacing.sm) {
+                VStack(alignment: .leading, spacing: theme.spacing.xxxs) {
+                    Text(trajectory.phaseTitle)
+                        .font(theme.typography.section)
+                        .foregroundStyle(theme.colors.textPrimary)
+                    Text(trajectory.phaseSummary)
+                        .font(theme.typography.body)
+                        .foregroundStyle(theme.colors.textSecondary)
+                }
+
+                VStack(alignment: .leading, spacing: theme.spacing.xs) {
+                    trajectoryLine(title: "Milestone", detail: trajectory.milestoneSummary)
+                    trajectoryLine(title: "Momentum", detail: trajectory.momentumSummary)
+                    trajectoryLine(title: "Timeline", detail: trajectory.timelineSummary)
+                }
+            }
+        }
+    }
+
+    @ViewBuilder
+    private func trajectoryLine(title: String, detail: String) -> some View {
+        VStack(alignment: .leading, spacing: theme.spacing.xxxs) {
+            Text(title)
+                .font(theme.typography.micro)
+                .foregroundStyle(theme.colors.textTertiary)
+            Text(detail)
+                .font(theme.typography.caption)
+                .foregroundStyle(theme.colors.textSecondary)
+        }
+    }
+}
+
+struct GoalDetailRecentMovementCard: View {
+    @Environment(\.ambitionTheme) private var theme
+
+    let movement: GoalDetailRecentMovementState
+
+    var body: some View {
+        GoalDetailSectionCard(title: movement.title, subtitle: movement.summary) {
+            if movement.items.isEmpty {
+                Text("No recent movement is visible yet.")
+                    .font(theme.typography.body)
+                    .foregroundStyle(theme.colors.textSecondary)
+            } else {
+                VStack(alignment: .leading, spacing: theme.spacing.sm) {
+                    ForEach(movement.items) { item in
+                        HStack(alignment: .top, spacing: theme.spacing.sm) {
+                            TagPill(item.categoryLabel, state: item.state)
+                            VStack(alignment: .leading, spacing: theme.spacing.xxxs) {
+                                Text(item.title)
+                                    .font(theme.typography.bodyEmphasized)
+                                    .foregroundStyle(theme.colors.textPrimary)
+                                Text(item.subtitle)
+                                    .font(theme.typography.caption)
+                                    .foregroundStyle(theme.colors.textSecondary)
+                                Text(item.timestamp)
+                                    .font(theme.typography.micro)
+                                    .foregroundStyle(theme.colors.textTertiary)
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        .accessibilityIdentifier("goal-detail.recent-movement")
     }
 }
 

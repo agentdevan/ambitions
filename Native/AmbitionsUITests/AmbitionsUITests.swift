@@ -227,11 +227,16 @@ final class AmbitionsUITests: XCTestCase {
         tapGoalsHeroPrimaryAction(in: app)
 
         XCTAssertTrue(app.descendants(matching: .any)["goal-detail.screen"].waitForExistence(timeout: 10))
+        XCTAssertTrue(app.descendants(matching: .any)["goal-detail.strategic-header"].waitForExistence(timeout: 10))
+        XCTAssertTrue(app.descendants(matching: .any)["goal-detail.path-filmstrip"].waitForExistence(timeout: 10))
+        XCTAssertTrue(scrollUntilElementExists("goal-detail.tactics-region", in: app))
         app.navigationBars.buttons.element(boundBy: 0).tap()
 
         tapFirstVisibleGoalCard(in: app)
 
         XCTAssertTrue(app.descendants(matching: .any)["goal-detail.screen"].waitForExistence(timeout: 10))
+        XCTAssertTrue(app.descendants(matching: .any)["goal-detail.strategic-header"].waitForExistence(timeout: 10))
+        XCTAssertTrue(app.descendants(matching: .any)["goal-detail.path-filmstrip"].waitForExistence(timeout: 10))
     }
 
     func testMemoryLensCanOpenAndRouteToCanonicalWeekDestination() throws {
@@ -361,6 +366,8 @@ final class AmbitionsUITests: XCTestCase {
         openDetail.tap()
 
         XCTAssertTrue(app.descendants(matching: .any)["goal-detail.screen"].waitForExistence(timeout: 10))
+        XCTAssertTrue(app.descendants(matching: .any)["goal-detail.strategic-header"].waitForExistence(timeout: 10))
+        XCTAssertTrue(app.descendants(matching: .any)["goal-detail.path-filmstrip"].waitForExistence(timeout: 10))
     }
 
     func testTodayCanHandOffToPlan() throws {

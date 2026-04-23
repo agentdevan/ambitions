@@ -43,38 +43,6 @@ struct GoalDetailScreen: View {
                         }
                     }
 
-                    GoalDetailSectionCard(title: "Outcome", subtitle: detail.progressNote) {
-                        VStack(alignment: .leading, spacing: theme.spacing.sm) {
-                            Text(detail.outcome)
-                                .font(theme.typography.bodyEmphasized)
-                                .foregroundStyle(theme.colors.textPrimary)
-                            Text(detail.manualPriorityLabel)
-                                .font(theme.typography.caption)
-                                .foregroundStyle(theme.colors.textSecondary)
-                            Text(detail.timingNote)
-                                .font(theme.typography.caption)
-                                .foregroundStyle(theme.colors.textSecondary)
-                            Text(detail.progress.evidenceLabel)
-                                .font(theme.typography.caption)
-                                .foregroundStyle(theme.colors.textTertiary)
-                        }
-                    }
-
-                    GoalDetailSectionCard(title: "Action Rail", subtitle: "These controls write back to the real native plan and feedback history.") {
-                        GoalActionGrid(actions: detail.actions) { action in
-                            Task { await viewModel.perform(action, using: container.goalsService) }
-                        }
-                    }
-
-                    if let explainability = detail.explainability {
-                        GoalExplainabilitySection(
-                            state: explainability,
-                            onCorrection: { control in
-                                Task { await viewModel.submitExplainabilityCorrection(control, using: container.goalsService) }
-                            }
-                        )
-                    }
-
                     if detail.target.launchContext == .help {
                         AppCard(state: .warning) {
                             SectionHeader(
@@ -83,6 +51,16 @@ struct GoalDetailScreen: View {
                             )
                         }
                     }
+
+                    if detail.pathStages.isEmpty == false {
+                        GoalDetailFilmstripCard(stages: detail.pathStages)
+                    }
+
+                    if let movement = detail.nextMovement {
+                        GoalDetailNextMovementCard(movement: movement)
+                    }
+
+                    GoalDetailTrajectoryCard(trajectory: detail.trajectory)
 
                     if detail.assumptions.isEmpty == false {
                         GoalDetailSectionCard(title: "Starter Assumptions", subtitle: "Visible assumptions keep provisional plans honest.") {
@@ -145,9 +123,17 @@ struct GoalDetailScreen: View {
                         }
                     }
 
+                    GoalDetailSectionCard(title: "Action rail", subtitle: "These controls write back to the real native plan and feedback history.") {
+                        GoalActionGrid(actions: detail.actions) { action in
+                            Task { await viewModel.perform(action, using: container.goalsService) }
+                        }
+                    }
+
+                    GoalDetailRecentMovementCard(movement: detail.recentMovement)
+
                     GoalDetailSectionCard(
-                        title: viewModel.lens == .path ? "Path View" : "Task View",
-                        subtitle: viewModel.lens == .path ? "Milestones and workstreams first." : "Section structure and next steps."
+                        title: "Tactics and detail",
+                        subtitle: viewModel.lens == .path ? "Inspect the path structure without displacing the first-screen strategy read." : "Open the underlying sections and steps when you need the tactical layer."
                     ) {
                         SegmentedFilterBar(items: GoalDetailLens.allCases, selection: $viewModel.lens) { $0.title }
                             .padding(.bottom, theme.spacing.sm)
@@ -158,9 +144,14 @@ struct GoalDetailScreen: View {
                                     WidgetCard(state: stage.state) {
                                         VStack(alignment: .leading, spacing: theme.spacing.xs) {
                                             HStack {
-                                                Text(stage.title)
-                                                    .font(theme.typography.section)
-                                                    .foregroundStyle(theme.colors.textPrimary)
+                                                VStack(alignment: .leading, spacing: theme.spacing.xxxs) {
+                                                    Text(stage.title)
+                                                        .font(theme.typography.section)
+                                                        .foregroundStyle(theme.colors.textPrimary)
+                                                    Text(stage.statusLabel)
+                                                        .font(theme.typography.micro)
+                                                        .foregroundStyle(theme.colors.textTertiary)
+                                                }
                                                 Spacer()
                                                 TagPill(stage.stepCountLabel, state: stage.state)
                                             }
@@ -218,6 +209,7 @@ struct GoalDetailScreen: View {
                             }
                         }
                     }
+                    .accessibilityIdentifier("goal-detail.tactics-region")
 
                     if detail.suggestions.isEmpty == false {
                         GoalDetailSectionCard(title: "Suggested Next Steps", subtitle: "The calmest moves that still create signal.") {
@@ -227,6 +219,15 @@ struct GoalDetailScreen: View {
                                 }
                             }
                         }
+                    }
+
+                    if let explainability = detail.explainability {
+                        GoalExplainabilitySection(
+                            state: explainability,
+                            onCorrection: { control in
+                                Task { await viewModel.submitExplainabilityCorrection(control, using: container.goalsService) }
+                            }
+                        )
                     }
 
                     GoalDetailSectionCard(title: "Evidence and History", subtitle: "Real native evidence, feedback, and replanning context.") {

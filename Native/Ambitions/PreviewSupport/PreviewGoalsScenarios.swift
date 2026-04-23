@@ -306,6 +306,9 @@ enum PreviewGoalsScenarios {
             outcome: "Keep the shipped app truthful, validated, and ready for a narrower release-readiness pass.",
             intent: "Understand the next hardening move and the proof that the app's claims still hold.",
             progress: GoalDetailProgress(label: "5 of 11 steps landed", detail: "Progress is tracked through current plan steps, docs cleanup, and validation results.", value: 0.46, evidenceLabel: "85 minutes of visible evidence"),
+            strategicStatus: GoalDetailStrategicStatus(title: "Path is in motion", summary: "You are in the hardening closeout stage with the next move already surfaced.", supportingDetail: "Manual priority #1 • 46% visible progress"),
+            nextMovement: GoalDetailNextMovement(title: "Refresh release docs and trust copy", summary: "Keep Profile, README, and manual notes aligned with current verified behavior.", timingLabel: "Due 2026-04-15", rationale: "This keeps the release-readiness path honest before broader validation closes out.", state: .selected),
+            trajectory: GoalDetailTrajectoryState(phaseTitle: "Truth and trust", phaseSummary: "Repo truth, conservative copy, and release notes are the current chamber.", milestoneSummary: "Refresh release docs and trust copy", momentumSummary: "1 of 2 visible milestones are already moving.", timelineSummary: "The deadline is real, but the path should still stay session-sized. The next step stays small enough to act on without losing the broader path."),
             timingNote: "The deadline is real, but the path should still stay session-sized.",
             progressNote: "The next step stays small enough to act on without losing the broader path.",
             manualPriorityLabel: "Manual priority #1",
@@ -315,8 +318,8 @@ enum PreviewGoalsScenarios {
                 GoalDetailStepItem(id: "s2", title: "Rerun the native validation flow", summary: "Use the existing build and test seams and keep unresolved platform claims conservative.", timingLabel: "Due 2026-04-16", statusLabel: "Planned", state: .default),
             ],
             pathStages: [
-                GoalPathStage(id: "p1", title: "Truth and trust", summary: "Repo truth, conservative copy, and release notes", stepCountLabel: "4 steps", highlight: "Refresh release docs and trust copy", state: .selected),
-                GoalPathStage(id: "p2", title: "Validation closeout", summary: "Focused verification and manual follow-up notes", stepCountLabel: "3 steps", highlight: "Review manual platform checks", state: .default),
+                GoalPathStage(id: "p1", title: "Truth and trust", summary: "Repo truth, conservative copy, and release notes", stepCountLabel: "4 steps", position: .current, statusLabel: "Current", highlight: "Refresh release docs and trust copy", state: .selected),
+                GoalPathStage(id: "p2", title: "Validation closeout", summary: "Focused verification and manual follow-up notes", stepCountLabel: "3 steps", position: .upcoming, statusLabel: "Upcoming", highlight: "Review manual platform checks", state: .default),
             ],
             sections: [
                 GoalDetailSectionState(id: "sec-1", title: "Now", summary: "The highest-leverage work still open.", kindLabel: "Active Steps", steps: [
@@ -336,6 +339,10 @@ enum PreviewGoalsScenarios {
             history: [
                 GoalFeedbackItem(id: "h1", title: "Asked for smaller step", subtitle: "Reduce the first route task to one deterministic pass.", timestamp: "2026-04-13T15:00:00Z", state: .selected),
             ],
+            recentMovement: GoalDetailRecentMovementState(title: "Recent movement", summary: "Recent movement is visible without turning the screen into a history audit.", items: [
+                GoalDetailRecentMovementItem(id: "rm1", title: "Today route state proved out", subtitle: "Session Logged", timestamp: "2026-04-14T11:40:00Z", categoryLabel: "Evidence", state: .success),
+                GoalDetailRecentMovementItem(id: "rm2", title: "Asked for smaller step", subtitle: "Reduce the first route task to one deterministic pass.", timestamp: "2026-04-13T15:00:00Z", categoryLabel: "Adjustment", state: .selected),
+            ]),
             actions: [
                 GoalDetailActionState(kind: .showPath, title: "Show the path", systemImage: "square.split.2x2", state: .default),
                 GoalDetailActionState(kind: .complete, title: "Complete", systemImage: "checkmark", state: .success),
@@ -356,6 +363,9 @@ enum PreviewGoalsScenarios {
             outcome: "Build confidence by learning through small, visible experiments rather than deadline pressure.",
             intent: "Stay oriented to signal and learning, not just task completion.",
             progress: GoalDetailProgress(label: "Starter path in motion", detail: "Starter-plan assumptions are being treated as temporary scaffolding.", value: 0.22, evidenceLabel: "No evidence logged yet"),
+            strategicStatus: GoalDetailStrategicStatus(title: "Starter path is taking shape", summary: "The path is still provisional, but the first layer already shows where the learning loop stands.", supportingDetail: "Manual priority #2 • 22% visible progress"),
+            nextMovement: GoalDetailNextMovement(title: "Record one rough pass", summary: "Capture one take and note the muddiest frequency area.", timingLabel: "Untimed", rationale: "Early signal matters more than polishing the whole system before the first attempt.", state: .selected),
+            trajectory: GoalDetailTrajectoryState(phaseTitle: "Starter path", phaseSummary: "Low-pressure first signal", milestoneSummary: "Record one rough pass", momentumSummary: "No evidence logged yet", timelineSummary: "This goal is intentionally untimed, so progress is visible without an artificial countdown. Starter plans are allowed to be provisional while the system learns what actually helps."),
             timingNote: "This goal is intentionally untimed, so progress is visible without an artificial countdown.",
             progressNote: "Starter plans are allowed to be provisional while the system learns what actually helps.",
             manualPriorityLabel: "Manual priority #2",
@@ -364,7 +374,7 @@ enum PreviewGoalsScenarios {
                 GoalDetailStepItem(id: "ls1", title: "Record one rough pass", summary: "Capture one take and note the muddiest frequency area.", timingLabel: "Untimed", statusLabel: "Planned", state: .selected),
             ],
             pathStages: [
-                GoalPathStage(id: "lp1", title: "Starter path", summary: "Low-pressure first signal", stepCountLabel: "2 steps", highlight: "Record one rough pass", state: .selected),
+                GoalPathStage(id: "lp1", title: "Starter path", summary: "Low-pressure first signal", stepCountLabel: "2 steps", position: .current, statusLabel: "Current", highlight: "Record one rough pass", state: .selected),
             ],
             sections: [
                 GoalDetailSectionState(id: "lsec1", title: "Starter path", summary: "Short, safe first moves.", kindLabel: "Overview", steps: [
@@ -375,6 +385,7 @@ enum PreviewGoalsScenarios {
             blocked: nil,
             evidence: [],
             history: [],
+            recentMovement: GoalDetailRecentMovementState(title: "Recent movement", summary: "No evidence logged yet", items: []),
             actions: [
                 GoalDetailActionState(kind: .showPath, title: "Show the path", systemImage: "square.split.2x2", state: .default),
                 GoalDetailActionState(kind: .complete, title: "Complete", systemImage: "checkmark", state: .success),
@@ -394,6 +405,9 @@ enum PreviewGoalsScenarios {
             outcome: "Build a support plan that helps without taking ownership away from the other person.",
             intent: "The system is protecting plan quality by showing what still needs to be clarified.",
             progress: GoalDetailProgress(label: "Clarification first", detail: "Progress is paused until the missing context is explicit.", value: 0.05, evidenceLabel: "No evidence logged yet"),
+            strategicStatus: GoalDetailStrategicStatus(title: "Clarification is the real work right now", summary: "The screen is leading with missing truth so the path can become believable before more decomposition.", supportingDetail: "Manual priority #4 • 5% visible progress"),
+            nextMovement: GoalDetailNextMovement(title: "Answer the missing question", summary: "Goal Detail is waiting on one real clarification before it treats the path as trustworthy.", timingLabel: "Before new planning", rationale: "Clarifying the truth matters more than generating more tactics here.", state: .warning),
+            trajectory: GoalDetailTrajectoryState(phaseTitle: "Clarification", phaseSummary: "The planner is paused until the missing truth is explicit.", milestoneSummary: "Confirm who this support path is really for", momentumSummary: "No evidence logged yet", timelineSummary: "Support goals should suggest windows, not impose pressure. Clarification comes before decomposition. Ambitions is surfacing the missing information instead of inventing urgency."),
             timingNote: "Support goals should suggest windows, not impose pressure.",
             progressNote: "Clarification comes before decomposition. Ambitions is surfacing the missing information instead of inventing urgency.",
             manualPriorityLabel: "Manual priority #4",
@@ -408,6 +422,7 @@ enum PreviewGoalsScenarios {
             blocked: nil,
             evidence: [],
             history: [],
+            recentMovement: GoalDetailRecentMovementState(title: "Recent movement", summary: "No evidence logged yet", items: []),
             actions: [
                 GoalDetailActionState(kind: .showPath, title: "Show the path", systemImage: "square.split.2x2", state: .default),
                 GoalDetailActionState(kind: .showSupportMode, title: "Support mode", systemImage: "person.2.fill", state: .selected),
@@ -424,6 +439,9 @@ enum PreviewGoalsScenarios {
             outcome: "Explore whether freelancing is worth pursuing without pretending the path is already clear.",
             intent: "The blocker is explicit so you can resolve the actual constraint instead of performing progress.",
             progress: GoalDetailProgress(label: "Blocked state", detail: "The planner kept the constraint explicit instead of inventing fake tasks.", value: 0.04, evidenceLabel: "No evidence logged yet"),
+            strategicStatus: GoalDetailStrategicStatus(title: "The path is waiting on a real blocker", summary: "The current stage is visible, but Ambitions is keeping the blocker explicit instead of faking momentum.", supportingDetail: "Manual priority #5 • 4% visible progress"),
+            nextMovement: GoalDetailNextMovement(title: "Resolve the blocker", summary: "Unblock the constraint before asking the screen for more decomposition.", timingLabel: "As soon as reality changes", rationale: "Ambitions is refusing to turn uncertainty into performative activity.", state: .warning),
+            trajectory: GoalDetailTrajectoryState(phaseTitle: "Blocked planning state", phaseSummary: "The planner kept the constraint explicit instead of generating performative tasks.", milestoneSummary: "Define one real success criterion", momentumSummary: "No evidence logged yet", timelineSummary: "The window matters, but the path still stays flexible. The blocker is kept visible so the path can restart cleanly once the missing input arrives."),
             timingNote: "The window matters, but the path still stays flexible.",
             progressNote: "The blocker is kept visible so the path can restart cleanly once the missing input arrives.",
             manualPriorityLabel: "Manual priority #5",
@@ -435,6 +453,7 @@ enum PreviewGoalsScenarios {
             blocked: GoalBlockedState(title: "Blocked planning state", subtitle: "The planner kept the blocker explicit instead of generating performative tasks.", blockers: ["The decision you are trying to make is still vague.", "The exploration needs one success criterion before decomposition."]),
             evidence: [],
             history: [],
+            recentMovement: GoalDetailRecentMovementState(title: "Recent movement", summary: "No evidence logged yet", items: []),
             actions: [
                 GoalDetailActionState(kind: .showPath, title: "Show the path", systemImage: "square.split.2x2", state: .default),
             ],
@@ -450,6 +469,9 @@ enum PreviewGoalsScenarios {
             outcome: "Create consistent reading support for Maya without turning the relationship into compliance work.",
             intent: "Support Maya with structure that stays collaborative and non-punitive.",
             progress: GoalDetailProgress(label: "2 of 7 support steps landed", detail: "Progress is reading the real persisted plan and evidence history.", value: 0.31, evidenceLabel: "45 minutes of visible evidence"),
+            strategicStatus: GoalDetailStrategicStatus(title: "Support path is in motion", summary: "You are in the support rhythm stage, with the next movement already surfaced.", supportingDetail: "Manual priority #3 • 31% visible progress"),
+            nextMovement: GoalDetailNextMovement(title: "Set up one calm reading check-in", summary: "Invite Maya to choose the time and the book.", timingLabel: "Support window open", rationale: "This keeps the support path collaborative without taking ownership away from Maya.", state: .selected),
+            trajectory: GoalDetailTrajectoryState(phaseTitle: "Support rhythm", phaseSummary: "Create repeatable, calm support loops", milestoneSummary: "Set up one calm reading check-in", momentumSummary: "45 minutes of visible evidence", timelineSummary: "Support goals should suggest windows, not impose pressure. Support goals stay non-punitive. Progress reflects what you can support, not what you can force."),
             timingNote: "Support goals should suggest windows, not impose pressure.",
             progressNote: "Support goals stay non-punitive. Progress reflects what you can support, not what you can force.",
             manualPriorityLabel: "Manual priority #3",
@@ -458,7 +480,7 @@ enum PreviewGoalsScenarios {
                 GoalDetailStepItem(id: "ss1", title: "Set up one calm reading check-in", summary: "Invite Maya to choose the time and the book.", timingLabel: "Support window open", statusLabel: "Planned", state: .selected),
             ],
             pathStages: [
-                GoalPathStage(id: "sp1", title: "Support rhythm", summary: "Create repeatable, calm support loops", stepCountLabel: "3 steps", highlight: "Set up one calm reading check-in", state: .selected),
+                GoalPathStage(id: "sp1", title: "Support rhythm", summary: "Create repeatable, calm support loops", stepCountLabel: "3 steps", position: .current, statusLabel: "Current", highlight: "Set up one calm reading check-in", state: .selected),
             ],
             sections: [
                 GoalDetailSectionState(id: "ssec1", title: "Support rhythm", summary: "Actions you can take without taking ownership away.", kindLabel: "Supporting Work", steps: [
@@ -471,6 +493,9 @@ enum PreviewGoalsScenarios {
                 GoalEvidenceItem(id: "se1", title: "Last check-in felt collaborative", subtitle: "Delegated Update", timestamp: "2026-04-13T18:00:00Z", state: .success),
             ],
             history: [],
+            recentMovement: GoalDetailRecentMovementState(title: "Recent movement", summary: "Recent movement is visible without turning the screen into a history audit.", items: [
+                GoalDetailRecentMovementItem(id: "srm1", title: "Last check-in felt collaborative", subtitle: "Delegated Update", timestamp: "2026-04-13T18:00:00Z", categoryLabel: "Evidence", state: .success),
+            ]),
             actions: [
                 GoalDetailActionState(kind: .showPath, title: "Show the path", systemImage: "square.split.2x2", state: .default),
                 GoalDetailActionState(kind: .complete, title: "Complete", systemImage: "checkmark", state: .success),

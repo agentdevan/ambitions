@@ -1,6 +1,6 @@
 ﻿# Batch 47 - Front-End Transformation 08 / Goal Detail rebuild I - strategic chamber and path filmstrip
 ## Status
-Queued
+Completed
 ## Program
 Post-hardening Front-End Transformation Program
 ## Canon Source
@@ -54,3 +54,5 @@ Rebuild Goal Detail into the strategic chamber of Ambitions with clearer composi
 Complete only when Goal Detail’s first-layer experience is excellent.
 
 ---
+## Completion Note
+Batch 47 rebuilt Goal Detail into the strategic chamber / path-filmstrip first-layer experience, with a stronger strategic header, visible movement anchor, clearer what-matters-next framing, and subordinate tactics/trust positioning. Automated validation was green through `xcodegen generate`, native simulator build, targeted Goal Detail tests, full `AmbitionsTests`, and focused Goal Detail UI proof. Final closure was based on explicit manual signoff for first-screen strategy, filmstrip legibility, Goals/Today continuity, reduced-motion acceptability in practice, and practical readability; no claim is made that full `AmbitionsUITests` ran for closeout.

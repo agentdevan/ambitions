@@ -80,8 +80,9 @@ Batch 42 is completed as the shell-owned global command, compose, capture, and M
 Batch 44 is completed as the Today rebuild II batch for time aperture, recovery bloom, and current-day logic polish.
 Batch 45 is completed as the Goals rebuild I batch for direction board and horizon ladder.
 Batch 46 is completed.
-Batch 47 is now the active batch.
-Batches 48-59 remain queued future work.
+Batch 47 is completed.
+Batch 48 is now the active batch.
+Batches 49-59 remain queued future work.
 Use the canonical program doc plus the per-batch docs in [batches/](batches/README.md) when working inside this program.
 
 | Batch | Name | Status | Notes |
@@ -94,8 +95,8 @@ Use the canonical program doc plus the per-batch docs in [batches/](batches/READ
 | 44 | Front-End Transformation 05 / Today rebuild II - time aperture, recovery bloom, and day logic | Completed | Completed the Today rebuild by layering Time Aperture, Recovery Bloom, calm day-pressure/open-window guidance, bounded focus re-entry continuity, and Today-specific trust whisper/support treatment onto the Batch 43 hero-first structure. Validated with `xcodegen generate`, native simulator build, isolated Today UI proofs for hero dominance, quick recovery/quick focus re-entry, Goal Detail handoff, and Plan handoff, full `AmbitionsTests` (`363`), and a manual seven-state simulator audit using deterministic preview Today scenarios. |
 | 45 | Front-End Transformation 06 / Goals rebuild I - direction board and horizon ladder | Completed | Rebuilt Goals into a direction board with pressure-led hero truth, grouped active/pressure/recent-movement bands, a shallow Horizon Ladder, compressed board cards, preserved Goal Detail routing, and non-regressive create-goal entry. Validated with `xcodegen generate`, native simulator build, targeted Goals tests, full `AmbitionsTests` (`366`), isolated UI proofs for board load, hero primary action, card-to-detail routing, create-goal, shell-to-Plan, and Today regression guards, plus direct simulator signoff across active, at-risk, stalled, low-signal, lower-priority, reduced-motion, and practical readability checks. One combined closeout UI slice remained timing-sensitive around a Today quick-focus guard, but isolated reruns and manual human review were accepted as sufficient closeout evidence. |
 | 46 | Front-End Transformation 07 / Goal intake and Strategy Composer | Completed | Shipped the premium Goal Intake / Strategy Composer rebuild with shell-owned and Goals-owned create-goal entry, live clarification and strategy preview, bounded capture promotion continuity, and a fixed runtime preview-refresh path. Validated with `xcodegen generate`, native simulator build, targeted create-goal/setup tests, full `AmbitionsTests` (`370`), focused create-goal/capture UI proofs, closeout regression reruns, and explicit manual runtime signoff for shell entry, Goals entry, clarification/strategy flow, capture continuity, and practical reduced-motion/readability review. |
-| 47 | Front-End Transformation 08 / Goal Detail rebuild I - strategic chamber and path filmstrip | Active | Goal Detail first-layer rebuild. |
-| 48 | Front-End Transformation 09 / Goal Detail rebuild II - trust whisper, correction, audit, and memory | Queued | Goal Detail trust and memory layers. |
+| 47 | Front-End Transformation 08 / Goal Detail rebuild I - strategic chamber and path filmstrip | Completed | Rebuilt Goal Detail into a strategic first layer with path-filmstrip anchoring, targeted/manual closeout, and no Batch 48 trust-layer pull-forward. |
+| 48 | Front-End Transformation 09 / Goal Detail rebuild II - trust whisper, correction, audit, and memory | Active | Goal Detail trust and memory layers. |
 | 49 | Front-End Transformation 10 / Plan rebuild I - elastic week and pressure scrubber | Queued | First half of the Plan rebuild. |
 | 50 | Front-End Transformation 11 / Plan rebuild II - habits, captures, weekly review, and shaping logic | Queued | Completes the Plan rebuild. |
 | 51 | Front-End Transformation 12 / Insights rebuild and reflection OS | Queued | Reflection and history system rebuild. |

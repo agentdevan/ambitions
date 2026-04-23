@@ -241,8 +241,8 @@ Implications:
 | 43 | Front-End Transformation 04 / Today rebuild I — living hero, now state, and action model | Completed | First half of Today rebuild delivered as a hero-first flagship execution surface with bounded action/routing seams and no Batch 44 systems shipped. |
 | 44 | Front-End Transformation 05 / Today rebuild II — time aperture, recovery bloom, and day logic | Completed | Completes Today redesign plus logic expansion. |
 | 45 | Front-End Transformation 06 / Goals rebuild I — direction board and horizon ladder | Completed | Goals overview rebuild. |
-| 46 | Front-End Transformation 07 / Goal intake and Strategy Composer | Active | Full create-goal and planning setup redesign. |
-| 47 | Front-End Transformation 08 / Goal Detail rebuild I — strategic chamber and path filmstrip | Queued | Goal Detail composition phase 1. |
+| 46 | Front-End Transformation 07 / Goal intake and Strategy Composer | Completed | Full create-goal and planning setup redesign. |
+| 47 | Front-End Transformation 08 / Goal Detail rebuild I — strategic chamber and path filmstrip | Completed | Goal Detail composition phase 1 delivered as the strategic first-layer / path-filmstrip rebuild. |
 | 48 | Front-End Transformation 09 / Goal Detail rebuild II — trust whisper, correction, audit, and memory | Queued | Goal Detail composition phase 2. |
 | 49 | Front-End Transformation 10 / Plan rebuild I — elastic week and pressure scrubber | Queued | Plan surface phase 1. |
 | 50 | Front-End Transformation 11 / Plan rebuild II — habits, captures, weekly review, and shaping logic | Queued | Plan ecosystem phase 2. |
@@ -319,7 +319,7 @@ Complete only when the transformation program is explicit enough to drive implem
 ## Batch 40 — Front-End Transformation 01 / Shell reconsideration and navigation architecture
 
 ### Status
-Active
+Completed
 
 ### Goal
 Fully reconsider the shell and navigation model, then implement the new canonical shell architecture for the iPhone app.
@@ -668,7 +668,7 @@ Complete only when goal setup feels like a real premium product moment.
 ## Batch 47 — Front-End Transformation 08 / Goal Detail rebuild I — strategic chamber and path filmstrip
 
 ### Status
-Queued
+Active
 
 ### Goal
 Rebuild Goal Detail into the strategic chamber of Ambitions with clearer composition and path visualization.

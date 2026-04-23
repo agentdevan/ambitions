@@ -579,6 +579,28 @@ struct GoalDetailProgress: Sendable {
     let evidenceLabel: String
 }
 
+struct GoalDetailStrategicStatus: Sendable {
+    let title: String
+    let summary: String
+    let supportingDetail: String
+}
+
+enum GoalPathStagePosition: String, Sendable {
+    case completed
+    case current
+    case blocked
+    case upcoming
+
+    var title: String {
+        switch self {
+        case .completed: "Completed"
+        case .current: "Current"
+        case .blocked: "Blocked"
+        case .upcoming: "Upcoming"
+        }
+    }
+}
+
 struct GoalDetailStepItem: Identifiable, Sendable {
     let id: String
     let title: String
@@ -601,8 +623,26 @@ struct GoalPathStage: Identifiable, Sendable {
     let title: String
     let summary: String
     let stepCountLabel: String
+    let position: GoalPathStagePosition
+    let statusLabel: String
     let highlight: String?
     let state: AmbitionVisualState
+}
+
+struct GoalDetailNextMovement: Sendable {
+    let title: String
+    let summary: String
+    let timingLabel: String
+    let rationale: String
+    let state: AmbitionVisualState
+}
+
+struct GoalDetailTrajectoryState: Sendable {
+    let phaseTitle: String
+    let phaseSummary: String
+    let milestoneSummary: String
+    let momentumSummary: String
+    let timelineSummary: String
 }
 
 struct GoalEvidenceItem: Identifiable, Sendable {
@@ -619,6 +659,21 @@ struct GoalFeedbackItem: Identifiable, Sendable {
     let subtitle: String
     let timestamp: String
     let state: AmbitionVisualState
+}
+
+struct GoalDetailRecentMovementItem: Identifiable, Sendable {
+    let id: String
+    let title: String
+    let subtitle: String
+    let timestamp: String
+    let categoryLabel: String
+    let state: AmbitionVisualState
+}
+
+struct GoalDetailRecentMovementState: Sendable {
+    let title: String
+    let summary: String
+    let items: [GoalDetailRecentMovementItem]
 }
 
 struct GoalClarificationState: Sendable {
@@ -639,6 +694,9 @@ struct GoalDetailPresentation: Sendable {
     let outcome: String
     let intent: String
     let progress: GoalDetailProgress
+    let strategicStatus: GoalDetailStrategicStatus
+    let nextMovement: GoalDetailNextMovement?
+    let trajectory: GoalDetailTrajectoryState
     let timingNote: String
     let progressNote: String
     let manualPriorityLabel: String
@@ -650,6 +708,7 @@ struct GoalDetailPresentation: Sendable {
     let blocked: GoalBlockedState?
     let evidence: [GoalEvidenceItem]
     let history: [GoalFeedbackItem]
+    let recentMovement: GoalDetailRecentMovementState
     let actions: [GoalDetailActionState]
     let explainability: GoalExplainabilityState?
     let primaryStepID: String?
