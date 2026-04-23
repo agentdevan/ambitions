@@ -148,17 +148,13 @@ struct AmbitionsRootView: View {
                 case .weeklyReview:
                     AppShellScaffold(
                         title: "Weekly Review",
-                        subtitle: "Plan-owned review route",
+                        subtitle: "Plan shaping continuation",
                         posture: .shaping,
                         backButtonAccessibilityIdentifier: "shell.plan.back-button",
                         onBack: { navigation.resetPlanPath() },
                         trailingButtons: shellUtilityButtons(for: .plan)
                     ) {
-                        AppShellPlaceholderRouteView(
-                            title: "Weekly Review",
-                            subtitle: "Batch 40 establishes ownership without shipping the later Plan review redesign.",
-                            message: "Weekly Review now belongs to Plan at the shell layer. The full review surface stays deferred to the later Plan program."
-                        )
+                        WeeklyReviewScreen()
                     }
                 }
             }

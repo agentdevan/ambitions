@@ -42,7 +42,10 @@ enum PreviewAppContainerFactory {
             captureService: captureService,
             goalsService: goalsService,
             habitsService: StubHabitsService(dashboard: habitsDashboard),
-            planService: StubPlanService(dashboard: PreviewPlanScenarios.seeded),
+            planService: StubPlanService(
+                dashboard: PreviewPlanScenarios.seeded,
+                weeklyReviewDashboard: PreviewPlanScenarios.weeklyReview
+            ),
             insightsService: StubInsightsService(fixtures: fixtures),
             profileService: StubProfileService(fixtures: fixtures),
             notificationService: StubNotificationService(),

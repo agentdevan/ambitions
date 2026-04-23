@@ -57,6 +57,12 @@ struct PlanScreen: View {
                         )
                     }
 
+                    PlanExecutionResilienceCard(
+                        resilience: dashboard.resilience,
+                        onOpenGoal: openGoal,
+                        onOpenPlanRoute: openPlanRoute
+                    )
+
                     PlanShapingActionsCard(
                         actions: dashboard.shapingActions,
                         selectedKind: $selectedActionKind,
@@ -69,8 +75,8 @@ struct PlanScreen: View {
                     }
 
                     PlanSecondaryDestinationsCard(destinations: dashboard.secondaryDestinations) { destination in
-                        if destination.id == "plan-habits" {
-                            container.navigation.openHabits()
+                        if let planRoute = destination.planRoute {
+                            openPlanRoute(planRoute)
                         }
                     }
                 }
@@ -158,6 +164,10 @@ struct PlanScreen: View {
     private func handleOpenWindow(_ window: PlanOpenWindowState) {
         guard let target = window.target else { return }
         openGoal(target)
+    }
+
+    private func openPlanRoute(_ route: PlanRouteTarget) {
+        container.navigation.openPlanRoute(route)
     }
 
     private func openGoal(_ target: GoalRouteTarget) {
@@ -585,6 +595,161 @@ private struct PlanBelievabilityBlockRow: View {
     }
 }
 
+private struct PlanExecutionResilienceCard: View {
+    @Environment(\.ambitionTheme) private var theme
+
+    let resilience: PlanExecutionResilienceState
+    let onOpenGoal: (GoalRouteTarget) -> Void
+    let onOpenPlanRoute: (PlanRouteTarget) -> Void
+
+    var body: some View {
+        AppCard {
+            VStack(alignment: .leading, spacing: theme.spacing.md) {
+                SectionHeader(
+                    title: resilience.title,
+                    subtitle: resilience.subtitle
+                )
+
+                VStack(alignment: .leading, spacing: theme.spacing.xs) {
+                    Text(resilience.calmExplanation)
+                        .font(theme.typography.bodyEmphasized)
+                        .foregroundStyle(theme.colors.textPrimary)
+                    Text(resilience.focusProtection)
+                        .font(theme.typography.body)
+                        .foregroundStyle(theme.colors.textSecondary)
+                    Text(resilience.tradeoffFraming)
+                        .font(theme.typography.caption)
+                        .foregroundStyle(theme.colors.textTertiary)
+                }
+
+                VStack(alignment: .leading, spacing: theme.spacing.sm) {
+                    ForEach(resilience.lanes) { lane in
+                        Button {
+                            if let goalTarget = lane.goalTarget {
+                                onOpenGoal(goalTarget)
+                            } else if let planRoute = lane.planRoute {
+                                onOpenPlanRoute(planRoute)
+                            }
+                        } label: {
+                            HStack(alignment: .top, spacing: theme.spacing.sm) {
+                                VStack(alignment: .leading, spacing: theme.spacing.xxxs) {
+                                    HStack(spacing: theme.spacing.xs) {
+                                        TagPill(lane.title, state: lane.state)
+                                        Text(lane.recommendation)
+                                            .font(theme.typography.caption)
+                                            .foregroundStyle(theme.colors.textTertiary)
+                                            .lineLimit(2)
+                                    }
+                                    Text(lane.detail)
+                                        .font(theme.typography.body)
+                                        .foregroundStyle(theme.colors.textSecondary)
+                                        .fixedSize(horizontal: false, vertical: true)
+                                }
+
+                                Spacer(minLength: theme.spacing.sm)
+
+                                if lane.goalTarget != nil || lane.planRoute != nil {
+                                    Image(systemName: "arrow.right")
+                                        .font(.system(size: theme.icon.smallSize, weight: theme.icon.symbolWeight))
+                                        .foregroundStyle(theme.colors.textTertiary)
+                                }
+                            }
+                            .padding(theme.spacing.md)
+                            .background(
+                                RoundedRectangle(cornerRadius: theme.radius.lg, style: .continuous)
+                                    .fill(theme.colors.surfaceOverlay)
+                            )
+                            .overlay(
+                                RoundedRectangle(cornerRadius: theme.radius.lg, style: .continuous)
+                                    .stroke(theme.colors.strokeSubtle, lineWidth: 1)
+                            )
+                        }
+                        .buttonStyle(.plain)
+                        .disabled(lane.goalTarget == nil && lane.planRoute == nil)
+                        .accessibilityIdentifier("plan.resilience.\(lane.id)")
+                    }
+                }
+
+                if let windowMagnetism = resilience.windowMagnetism {
+                    Button {
+                        guard let target = windowMagnetism.target else { return }
+                        onOpenGoal(target)
+                    } label: {
+                        PlanCompactSplitPane(
+                            dominantTitle: windowMagnetism.title,
+                            dominantBody: windowMagnetism.detail,
+                            contextTitle: windowMagnetism.dayLabel,
+                            contextBody: "\(windowMagnetism.suggestionTitle)\n\(windowMagnetism.suggestionDetail)",
+                            state: windowMagnetism.visualState
+                        )
+                    }
+                    .buttonStyle(.plain)
+                    .disabled(windowMagnetism.target == nil)
+                    .accessibilityIdentifier("plan.window-magnetism")
+                }
+            }
+        }
+        .accessibilityIdentifier("plan.execution-resilience")
+        .ambitionPanelAccessibility()
+    }
+}
+
+private struct PlanCompactSplitPane: View {
+    @Environment(\.ambitionTheme) private var theme
+
+    let dominantTitle: String
+    let dominantBody: String
+    let contextTitle: String
+    let contextBody: String
+    let state: AmbitionVisualState
+
+    var body: some View {
+        let stateStyle = theme.stateStyle(for: state)
+
+        VStack(alignment: .leading, spacing: theme.spacing.sm) {
+            VStack(alignment: .leading, spacing: theme.spacing.xxxs) {
+                Text(dominantTitle)
+                    .font(theme.typography.bodyEmphasized)
+                    .foregroundStyle(theme.colors.textPrimary)
+                Text(dominantBody)
+                    .font(theme.typography.body)
+                    .foregroundStyle(theme.colors.textSecondary)
+                    .fixedSize(horizontal: false, vertical: true)
+            }
+
+            HStack(alignment: .top, spacing: theme.spacing.sm) {
+                Capsule()
+                    .fill(stateStyle.accent.opacity(0.85))
+                    .frame(width: 4)
+
+                VStack(alignment: .leading, spacing: theme.spacing.xxxs) {
+                    Text(contextTitle)
+                        .font(theme.typography.caption)
+                        .foregroundStyle(theme.colors.textTertiary)
+                    Text(contextBody)
+                        .font(theme.typography.caption)
+                        .foregroundStyle(theme.colors.textPrimary)
+                        .fixedSize(horizontal: false, vertical: true)
+                }
+            }
+            .padding(theme.spacing.sm)
+            .background(
+                RoundedRectangle(cornerRadius: theme.radius.md, style: .continuous)
+                    .fill(theme.colors.surfacePrimary)
+            )
+        }
+        .padding(theme.spacing.md)
+        .background(
+            RoundedRectangle(cornerRadius: theme.radius.lg, style: .continuous)
+                .fill(theme.colors.surfaceOverlay)
+        )
+        .overlay(
+            RoundedRectangle(cornerRadius: theme.radius.lg, style: .continuous)
+                .stroke(stateStyle.stroke.opacity(0.6), lineWidth: 1)
+        )
+    }
+}
+
 private struct PlanShapingActionsCard: View {
     @Environment(\.ambitionTheme) private var theme
 
@@ -645,15 +810,13 @@ private struct PlanShapingActionsCard: View {
 
                 if let selectedAction {
                     VStack(alignment: .leading, spacing: theme.spacing.sm) {
-                        Text(selectedAction.recommendation)
-                            .font(theme.typography.body)
-                            .foregroundStyle(theme.colors.textPrimary)
-
-                        if let selectedDay {
-                            Text("Current pressure focus: \(selectedDay.weekdayLabel) \(selectedDay.dateLabel) is \(selectedDay.roomLabel.lowercased()).")
-                                .font(theme.typography.caption)
-                                .foregroundStyle(theme.colors.textTertiary)
-                        }
+                        PlanCompactSplitPane(
+                            dominantTitle: selectedAction.title,
+                            dominantBody: selectedAction.recommendation,
+                            contextTitle: selectedDay.map { "Current pressure focus: \($0.weekdayLabel) \($0.dateLabel)" } ?? "Current pressure focus",
+                            contextBody: selectedDay.map { "\($0.roomLabel)\n\($0.highlight)" } ?? "Pick one day and keep the contextual pane compact.",
+                            state: selectedAction.state
+                        )
 
                         Button {
                             onActivate(selectedAction)
@@ -675,11 +838,6 @@ private struct PlanShapingActionsCard: View {
                         .accessibilityHint(selectedAction.recommendation)
                         .accessibilityIdentifier("plan.action.cta")
                     }
-                    .padding(theme.spacing.md)
-                    .background(
-                        RoundedRectangle(cornerRadius: theme.radius.lg, style: .continuous)
-                            .fill(theme.colors.surfaceOverlay)
-                    )
                 }
             }
         }
@@ -795,7 +953,7 @@ private struct PlanSecondaryDestinationsCard: View {
     var body: some View {
         AppCard {
             VStack(alignment: .leading, spacing: theme.spacing.md) {
-                SectionHeader(title: "Supporting loops", subtitle: "Routines still help the week hold together without taking over the workspace.")
+                SectionHeader(title: "Plan-owned support routes", subtitle: "Habits, captures, and review stay subordinate so the week remains the dominant workspace.")
 
                 VStack(alignment: .leading, spacing: theme.spacing.sm) {
                     ForEach(destinations) { destination in

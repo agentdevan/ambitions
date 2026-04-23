@@ -43,3 +43,12 @@ yarn-error.*
 /ios
 /android
 /Ambitions.xcodeproj/
+
+# Xcode build artifacts
+DerivedData/
+output/DerivedData*/
+*.xcresult
+
+# local validation artifacts
+output/logs/
+output/manual-audit/

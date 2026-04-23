@@ -14,6 +14,7 @@ final class PlanFeatureServiceTests: XCTestCase {
         XCTAssertEqual(dashboard.primaryAction.kind, .useRoom)
         XCTAssertEqual(dashboard.weekDays.count, 7)
         XCTAssertEqual(dashboard.pressureScrubber.points.count, 7)
+        XCTAssertEqual(dashboard.secondaryDestinations.map(\.id), ["plan-habits", "plan-captures", "plan-weekly-review"])
         XCTAssertTrue(dashboard.goalShapingItems.isEmpty)
     }
 
@@ -30,6 +31,7 @@ final class PlanFeatureServiceTests: XCTestCase {
         XCTAssertFalse(dashboard.goalShapingItems.isEmpty)
         XCTAssertEqual(dashboard.shapingActions.map(\.kind), [.edit, .patch, .protect, .lighten])
         XCTAssertTrue(dashboard.hero.contextPills.contains(where: { $0.title.contains("goals visible") }))
+        XCTAssertFalse(dashboard.resilience.lanes.isEmpty)
         XCTAssertNotNil(dashboard.primaryAction.goalTarget)
     }
 
@@ -75,11 +77,28 @@ final class PlanFeatureServiceTests: XCTestCase {
 
         let dashboard = try await service.loadPlanDashboard(now: fixedDate)
 
-        XCTAssertEqual(dashboard.secondaryDestinations.map(\.id), ["plan-habits"])
+        XCTAssertEqual(dashboard.secondaryDestinations.map(\.id), ["plan-habits", "plan-captures", "plan-weekly-review"])
         XCTAssertTrue(dashboard.secondaryDestinations.contains(where: { $0.id == "plan-habits" && $0.valueLabel != "0" }))
         #else
         throw XCTSkip("Demo bootstrap fixtures are only available in DEBUG builds.")
         #endif
+    }
+
+    func testWeeklyReviewDashboardBridgesCarryForwardAndSupportRoutes() async throws {
+        let repositories = try await makeRepositories()
+        try await repositories.goals.saveGoals([makeWeekVisibleGoal()])
+        try await DefaultCaptureService(repository: repositories.captures).createCapture(
+            CreateCaptureRequest(rawText: "Review the carry-forward tradeoff", sourceType: .todayQuickCapture),
+            now: fixedDate
+        )
+        let service = RepositoryBackedPlanService(repositories: repositories)
+
+        let dashboard = try await service.loadWeeklyReviewDashboard(now: fixedDate)
+
+        XCTAssertEqual(dashboard.hero.eyebrow, "Weekly Review")
+        XCTAssertFalse(dashboard.carryForwardItems.isEmpty)
+        XCTAssertTrue(dashboard.captureSummary.contains("capture"))
+        XCTAssertEqual(dashboard.returnActionTitle, "Return to Plan")
     }
 
     func testDemoPlanProtectActionRemainsActionable() async throws {

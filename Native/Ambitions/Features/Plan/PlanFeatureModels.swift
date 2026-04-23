@@ -159,6 +159,16 @@ struct PlanOpenWindowState: Sendable {
     let visualState: AmbitionVisualState
 }
 
+struct PlanWindowMagnetismState: Sendable {
+    let title: String
+    let detail: String
+    let dayLabel: String
+    let suggestionTitle: String
+    let suggestionDetail: String
+    let target: GoalRouteTarget?
+    let visualState: AmbitionVisualState
+}
+
 struct PlanElasticWeekDayState: Identifiable, Sendable {
     let id: String
     let weekdayLabel: String
@@ -179,6 +189,26 @@ struct PlanBelievabilityState: Sendable {
     let label: String
     let supportLabel: String
     let visualState: AmbitionVisualState
+}
+
+struct PlanExecutionResilienceLane: Identifiable, Sendable {
+    let id: String
+    let title: String
+    let detail: String
+    let recommendation: String
+    let state: AmbitionVisualState
+    let goalTarget: GoalRouteTarget?
+    let planRoute: PlanRouteTarget?
+}
+
+struct PlanExecutionResilienceState: Sendable {
+    let title: String
+    let subtitle: String
+    let calmExplanation: String
+    let focusProtection: String
+    let tradeoffFraming: String
+    let lanes: [PlanExecutionResilienceLane]
+    let windowMagnetism: PlanWindowMagnetismState?
 }
 
 struct PlanGoalShapingItem: Identifiable, Sendable {
@@ -212,6 +242,39 @@ struct PlanSecondaryDestination: Identifiable, Sendable {
     let valueLabel: String
     let icon: String
     let visualState: AmbitionVisualState
+    let planRoute: PlanRouteTarget?
+}
+
+struct WeeklyReviewHeroState: Sendable {
+    let eyebrow: String
+    let title: String
+    let subtitle: String
+    let dominantTruth: String
+    let continuityLabel: String
+    let contextPills: [PlanHeroPillState]
+}
+
+struct WeeklyReviewCarryForwardItem: Identifiable, Sendable {
+    let id: String
+    let title: String
+    let detail: String
+    let bridgeLabel: String
+    let state: AmbitionVisualState
+    let goalTarget: GoalRouteTarget?
+}
+
+struct WeeklyReviewDashboard: Sendable {
+    let timeframeLabel: String
+    let hero: WeeklyReviewHeroState
+    let summaryTitle: String
+    let summaryDetail: String
+    let carryForwardItems: [WeeklyReviewCarryForwardItem]
+    let captureSummary: String
+    let habitSummary: String
+    let returnActionTitle: String
+    let returnActionSubtitle: String
+    let returnPlanRoute: PlanRouteTarget?
+    let splitPaneContext: PlanWindowMagnetismState?
 }
 
 struct PlanDashboard: Sendable {
@@ -222,6 +285,7 @@ struct PlanDashboard: Sendable {
     let pressureScrubber: PlanPressureScrubberState
     let weekDays: [PlanElasticWeekDayState]
     let believability: PlanBelievabilityState
+    let resilience: PlanExecutionResilienceState
     let goalShapingItems: [PlanGoalShapingItem]
     let shapingActions: [PlanShapingActionState]
     let secondaryDestinations: [PlanSecondaryDestination]

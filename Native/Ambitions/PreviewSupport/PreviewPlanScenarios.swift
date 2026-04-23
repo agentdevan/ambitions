@@ -157,6 +157,29 @@ enum PreviewPlanScenarios {
             supportLabel: "Patch missing work into an open window instead of forcing it into the crowded days.",
             visualState: .selected
         ),
+        resilience: PlanExecutionResilienceState(
+            title: "Execution resilience",
+            subtitle: "Carryover, overload, and recovery shaping stay explainable by keeping one smaller lane obvious at a time.",
+            calmExplanation: "One active goal still needs a believable carryover lane instead of diffuse pressure.",
+            focusProtection: "Protect Wednesday before Tuesday pressure spills into it.",
+            tradeoffFraming: "Open captures should compete with the week honestly. Absorb them, park them, or let them wait.",
+            lanes: [
+                PlanExecutionResilienceLane(id: "carryover", title: "Carryover", detail: "Retention loop still sits outside the week.", recommendation: "Give it one calmer lane instead of widening the whole week.", state: .warning, goalTarget: GoalRouteTarget(goalID: "preview-goal-2"), planRoute: nil),
+                PlanExecutionResilienceLane(id: "overload", title: "Overload", detail: "Tuesday is carrying more than the week can explain calmly.", recommendation: "Lighten shell work before adding anything new.", state: .warning, goalTarget: GoalRouteTarget(goalID: "preview-goal-1"), planRoute: nil),
+                PlanExecutionResilienceLane(id: "habits", title: "Habits", detail: "One routine should support the week shape without crowding it.", recommendation: "Use the habits route to keep the loop lightweight.", state: .selected, goalTarget: nil, planRoute: .habits),
+                PlanExecutionResilienceLane(id: "captures", title: "Captures", detail: "Two open captures still need to be absorbed or parked.", recommendation: "Attach or park capture pressure before polishing the schedule.", state: .warning, goalTarget: nil, planRoute: .capturesInbox),
+                PlanExecutionResilienceLane(id: "review", title: "Weekly review", detail: "Close the current week by shaping what should continue.", recommendation: "Review should feel like a continuation, not a detached ritual.", state: .warning, goalTarget: nil, planRoute: .weeklyReview)
+            ],
+            windowMagnetism: PlanWindowMagnetismState(
+                title: "Window magnetism",
+                detail: "Wednesday is the cleanest place for a calmer suggestion to dock.",
+                dayLabel: "Wed 22",
+                suggestionTitle: "Retention loop",
+                suggestionDetail: "This day can carry one believable move without turning calendar-dense.",
+                target: GoalRouteTarget(goalID: "preview-goal-2"),
+                visualState: .success
+            )
+        ),
         goalShapingItems: [
             PlanGoalShapingItem(
                 id: "plan-goal-native",
@@ -196,7 +219,9 @@ enum PreviewPlanScenarios {
             PlanShapingActionState(kind: .lighten, title: "Lighten", subtitle: "Pressure is stacking here.", recommendation: "Shrink or move the heaviest ask before the week starts feeling performative.", systemImage: "sun.max", state: .warning, goalTarget: nil, planRoute: .capturesInbox)
         ],
         secondaryDestinations: [
-            PlanSecondaryDestination(id: "plan-habits", title: "Routines and habits", detail: "Review the repeatable loops that can steady or crowd the week.", valueLabel: "1", icon: AppTab.habits.systemImage, visualState: .selected)
+            PlanSecondaryDestination(id: "plan-habits", title: "Routines and habits", detail: "Review the repeatable loops that can steady or crowd the week.", valueLabel: "1", icon: AppTab.habits.systemImage, visualState: .selected, planRoute: .habits),
+            PlanSecondaryDestination(id: "plan-captures", title: "Captures into the week", detail: "2 captures still need to be absorbed, attached, or intentionally parked.", valueLabel: "2", icon: AppTab.captures.systemImage, visualState: .warning, planRoute: .capturesInbox),
+            PlanSecondaryDestination(id: "plan-weekly-review", title: "Weekly review", detail: "Close the current week by shaping carry-forward and unresolved capture pressure without leaving Plan.", valueLabel: "Tight", icon: "arrow.triangle.branch", visualState: .selected, planRoute: .weeklyReview)
         ],
         emptyTitle: nil,
         emptyMessage: nil
@@ -266,6 +291,21 @@ enum PreviewPlanScenarios {
             supportLabel: "This is a real state, not missing data.",
             visualState: .default
         ),
+        resilience: PlanExecutionResilienceState(
+            title: "Execution resilience",
+            subtitle: "Carryover, overload, and recovery shaping stay explainable by keeping one smaller lane obvious at a time.",
+            calmExplanation: "This quiet week is real because nothing is asking it to carry more yet.",
+            focusProtection: "Protect the open room until something meaningful needs it.",
+            tradeoffFraming: "Do not manufacture density for the sake of having a plan.",
+            lanes: [
+                PlanExecutionResilienceLane(id: "carryover", title: "Carryover", detail: "No active goal is floating outside the week.", recommendation: "Carry only what the next week can explain calmly.", state: .success, goalTarget: nil, planRoute: nil),
+                PlanExecutionResilienceLane(id: "overload", title: "Overload", detail: "No day is visibly overloaded right now.", recommendation: "Lighten only when something real becomes too loud.", state: .selected, goalTarget: nil, planRoute: nil),
+                PlanExecutionResilienceLane(id: "habits", title: "Habits", detail: "No recurring loop is shaping the week yet.", recommendation: "Keep the week dominant until a routine is truly needed.", state: .default, goalTarget: nil, planRoute: .habits),
+                PlanExecutionResilienceLane(id: "captures", title: "Captures", detail: "No open captures are pushing on this week.", recommendation: "Let the week stay quiet.", state: .default, goalTarget: nil, planRoute: .capturesInbox),
+                PlanExecutionResilienceLane(id: "review", title: "Weekly review", detail: "Review becomes useful once the week has something real to carry forward.", recommendation: "Use review only when the week has earned it.", state: .default, goalTarget: nil, planRoute: .weeklyReview)
+            ],
+            windowMagnetism: nil
+        ),
         goalShapingItems: [],
         shapingActions: [
             PlanShapingActionState(kind: .edit, title: "Edit", subtitle: "No dated block is visible yet.", recommendation: "Plan stays quiet until a real block exists.", systemImage: "square.and.pencil", state: .default, goalTarget: nil, planRoute: nil),
@@ -274,9 +314,48 @@ enum PreviewPlanScenarios {
             PlanShapingActionState(kind: .lighten, title: "Lighten", subtitle: "There is nothing to lighten yet.", recommendation: "No overload is visible right now.", systemImage: "sun.max", state: .default, goalTarget: nil, planRoute: nil)
         ],
         secondaryDestinations: [
-            PlanSecondaryDestination(id: "plan-habits", title: "Routines and habits", detail: "No repeatable loops are shaping the week yet.", valueLabel: "0", icon: AppTab.habits.systemImage, visualState: .default)
+            PlanSecondaryDestination(id: "plan-habits", title: "Routines and habits", detail: "No repeatable loops are shaping the week yet.", valueLabel: "0", icon: AppTab.habits.systemImage, visualState: .default, planRoute: .habits),
+            PlanSecondaryDestination(id: "plan-captures", title: "Captures into the week", detail: "No open captures are pushing on the week right now.", valueLabel: "0", icon: AppTab.captures.systemImage, visualState: .default, planRoute: .capturesInbox),
+            PlanSecondaryDestination(id: "plan-weekly-review", title: "Weekly review", detail: "Review stays available as the eventual closeout path for a real week.", valueLabel: "Open", icon: "arrow.triangle.branch", visualState: .default, planRoute: .weeklyReview)
         ],
         emptyTitle: "No weekly pressure yet",
         emptyMessage: "As soon as goals, captures, or routines create real constraints, Plan will show where the week still has room."
+    )
+
+    static let weeklyReview = WeeklyReviewDashboard(
+        timeframeLabel: "Apr 20-Apr 26",
+        hero: WeeklyReviewHeroState(
+            eyebrow: "Weekly Review",
+            title: "Shape what carries forward",
+            subtitle: "Weekly review now continues the same authored week workspace instead of becoming a detached ritual.",
+            dominantTruth: "Lighten Tuesday first, then carry forward only the moves the next week can still explain.",
+            continuityLabel: "Return to the week with a calmer shape, not a larger list.",
+            contextPills: [
+                PlanHeroPillState(title: "Apr 20-Apr 26", icon: "calendar", state: .default),
+                PlanHeroPillState(title: "Tight", icon: AppTab.plan.systemImage, state: .selected),
+                PlanHeroPillState(title: "3 carry-forward lanes", icon: "arrow.triangle.branch", state: .selected)
+            ]
+        ),
+        summaryTitle: "Why the next week should look different",
+        summaryDetail: "Carryover, capture pressure, and overloaded days need gentler scope before the next week hardens.",
+        carryForwardItems: [
+            WeeklyReviewCarryForwardItem(id: "review-preview-retention", title: "Retention loop", detail: "Still active, but the current week never gave it a believable lane.", bridgeLabel: "Carry forward carefully", state: .warning, goalTarget: GoalRouteTarget(goalID: "preview-goal-2")),
+            WeeklyReviewCarryForwardItem(id: "review-preview-shell", title: "Ship the native shell", detail: "The next week should carry a lighter version so recovery stays believable.", bridgeLabel: "Lighten before it rolls forward", state: .selected, goalTarget: GoalRouteTarget(goalID: "preview-goal-1")),
+            WeeklyReviewCarryForwardItem(id: "review-preview-captures", title: "Capture pressure", detail: "2 captures still need a calm decision before they become next-week clutter.", bridgeLabel: "Clear the inbox inside Plan", state: .warning, goalTarget: nil)
+        ],
+        captureSummary: "2 captures still need to be absorbed, attached, or intentionally parked.",
+        habitSummary: "1 routine should support the next week without crowding it.",
+        returnActionTitle: "Return to Plan",
+        returnActionSubtitle: "Use the reshaped week, then adjust one goal or support route only if it still needs help.",
+        returnPlanRoute: nil,
+        splitPaneContext: PlanWindowMagnetismState(
+            title: "Window magnetism",
+            detail: "Wednesday remains the cleanest place for the next calmer move to dock.",
+            dayLabel: "Wed 22",
+            suggestionTitle: "Retention loop",
+            suggestionDetail: "One believable move still fits without turning the next week dense.",
+            target: GoalRouteTarget(goalID: "preview-goal-2"),
+            visualState: .success
+        )
     )
 }

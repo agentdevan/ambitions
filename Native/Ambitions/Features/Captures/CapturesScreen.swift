@@ -9,9 +9,9 @@ struct CapturesScreen: View {
 
     var body: some View {
         FeatureScaffoldView(
-            eyebrow: "Inbox",
+            eyebrow: "Plan support",
             title: "Captures",
-            subtitle: "Review local captures collected from Ambitions and other on-device entry points."
+            subtitle: "Absorb raw inputs into the current week so captures feel like part of the operating system, not a separate inbox product."
         ) {
             switch viewModel.state {
             case .loading:
@@ -29,10 +29,40 @@ struct CapturesScreen: View {
                 }
                 .transition(.ambitionPanel)
             case let .loaded(viewState):
+                AppCard {
+                    VStack(alignment: .leading, spacing: theme.spacing.md) {
+                        SectionHeader(
+                            title: "Capture-to-week shaping",
+                            subtitle: "Attach, seed, or park captures based on whether they improve how the week holds together."
+                        )
+
+                        Text(viewState.captures.isEmpty
+                             ? "No open capture pressure is pushing on the week right now."
+                             : "\(viewState.captures.count) capture\(viewState.captures.count == 1 ? "" : "s") still need a calm decision before they turn into schedule noise.")
+                            .font(theme.typography.body)
+                            .foregroundStyle(theme.colors.textSecondary)
+
+                        HStack(spacing: theme.spacing.sm) {
+                            Button("Return to Plan") {
+                                container.navigation.resetPlanPath()
+                            }
+                            .buttonStyle(.bordered)
+                            .accessibilityIdentifier("captures.return-to-plan")
+
+                            Button("Weekly Review") {
+                                container.navigation.openWeeklyReview()
+                            }
+                            .buttonStyle(.borderedProminent)
+                            .accessibilityIdentifier("captures.open-weekly-review")
+                        }
+                    }
+                }
+                .transition(.ambitionPanel)
+
                 if viewState.captures.isEmpty {
                     EmptyStateCard(
                         title: "No captures yet",
-                        message: "Local captures created in this build appear here once they are saved. Share Extension is not shipped in this build, and navigation shortcuts do not create captures in this batch.",
+                        message: "Local captures created in this build appear here once they are saved. When captures exist, this route helps you absorb them into the week instead of letting them live as separate admin.",
                         icon: "tray"
                     )
                     .transition(.ambitionPanel)

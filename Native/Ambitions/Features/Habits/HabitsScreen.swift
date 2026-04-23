@@ -38,6 +38,33 @@ struct HabitsScreen: View {
                 case let .loaded(dashboard):
                     HabitsHeroCard(dashboard: dashboard)
 
+                    AppCard {
+                        VStack(alignment: .leading, spacing: theme.spacing.md) {
+                            SectionHeader(
+                                title: "Habits inside Plan",
+                                subtitle: "Routines should support week shape, not compete with it."
+                            )
+
+                            Text("Use this route to soften, protect, or trim repeatable loops based on what the current week can actually carry.")
+                                .font(theme.typography.body)
+                                .foregroundStyle(theme.colors.textSecondary)
+
+                            HStack(spacing: theme.spacing.sm) {
+                                Button("Return to Plan") {
+                                    container.navigation.resetPlanPath()
+                                }
+                                .buttonStyle(.bordered)
+                                .accessibilityIdentifier("habits.return-to-plan")
+
+                                Button("Weekly Review") {
+                                    container.navigation.openWeeklyReview()
+                                }
+                                .buttonStyle(.borderedProminent)
+                                .accessibilityIdentifier("habits.open-weekly-review")
+                            }
+                        }
+                    }
+
                     if let inlineMessage = viewModel.inlineMessage {
                         TodayMessageCard(
                             message: TodayInlineMessage(

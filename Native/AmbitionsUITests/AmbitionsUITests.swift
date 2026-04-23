@@ -69,8 +69,15 @@ final class AmbitionsUITests: XCTestCase {
         XCTAssertTrue(scrollUntilElementExists("plan.goal-relationship-card", in: app))
         XCTAssertTrue(scrollUntilElementExists("plan.open-plan-habits-button", in: app))
         app.buttons["plan.open-plan-habits-button"].tap()
+        XCTAssertTrue(app.buttons["habits.return-to-plan"].waitForExistence(timeout: 10))
         XCTAssertTrue(app.staticTexts["No habits are live yet"].waitForExistence(timeout: 10))
         app.buttons["shell.plan.back-button"].tap()
+        XCTAssertTrue(scrollUntilElementExists("plan.open-plan-weekly-review-button", in: app))
+        app.buttons["plan.open-plan-weekly-review-button"].tap()
+        XCTAssertTrue(app.descendants(matching: .any)["weekly-review.screen"].waitForExistence(timeout: 10))
+        XCTAssertTrue(app.buttons["weekly-review.return-to-plan"].waitForExistence(timeout: 10))
+        app.buttons["weekly-review.return-to-plan"].tap()
+        XCTAssertTrue(app.descendants(matching: .any)["plan.screen"].waitForExistence(timeout: 10))
 
         app.tabBars.buttons["Insights"].tap()
         XCTAssertTrue(app.staticTexts["shell.header.title"].waitForExistence(timeout: 10))
@@ -421,6 +428,7 @@ final class AmbitionsUITests: XCTestCase {
         XCTAssertTrue(scrollUntilElementExists("plan.pressure-scrubber", in: app))
         XCTAssertTrue(scrollUntilElementExists("plan.elastic-week", in: app))
         XCTAssertTrue(scrollUntilElementExists("plan.believability-card", in: app))
+        XCTAssertTrue(scrollUntilElementExists("plan.execution-resilience", in: app))
         XCTAssertTrue(scrollUntilElementExists("plan.action-lane", in: app))
     }
 

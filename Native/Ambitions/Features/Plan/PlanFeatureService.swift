@@ -8,6 +8,11 @@ struct RepositoryBackedPlanService: PlanServicing {
         let snapshot = try await loadSnapshot()
         return makeDashboard(snapshot: snapshot, now: now)
     }
+
+    func loadWeeklyReviewDashboard(now: Date) async throws -> WeeklyReviewDashboard {
+        let snapshot = try await loadSnapshot()
+        return makeWeeklyReviewDashboard(snapshot: snapshot, now: now)
+    }
 }
 
 private extension RepositoryBackedPlanService {
@@ -101,6 +106,14 @@ private extension RepositoryBackedPlanService {
             openCaptureCount: openCaptures.count,
             mode: mode
         )
+        let resilience = makeExecutionResilience(
+            posture: posture,
+            weekDays: weekDays,
+            missingGoalSummaries: missingGoalSummaries,
+            pressuredGoalSummary: mostPressuredGoal,
+            habitGoals: habitGoals,
+            openCaptures: openCaptures
+        )
         let primaryAction = makePrimaryAction(
             mode: mode,
             posture: posture,
@@ -118,6 +131,7 @@ private extension RepositoryBackedPlanService {
             pressureScrubber: pressureScrubber,
             weekDays: weekDays,
             believability: believability,
+            resilience: resilience,
             goalShapingItems: goalShapingItems(summaries: activeGoalSummaries),
             shapingActions: makeShapingActions(
                 summaries: activeGoalSummaries,
@@ -135,11 +149,101 @@ private extension RepositoryBackedPlanService {
                         : "Review the repeatable loops that can steady or crowd the week.",
                     valueLabel: "\(habitGoals.count)",
                     icon: AppTab.habits.systemImage,
-                    visualState: habitGoals.isEmpty ? .default : .selected
+                    visualState: habitGoals.isEmpty ? .default : .selected,
+                    planRoute: .habits
+                ),
+                PlanSecondaryDestination(
+                    id: "plan-captures",
+                    title: "Captures into the week",
+                    detail: openCaptures.isEmpty
+                        ? "No open captures are pushing on the week right now."
+                        : "\(openCaptures.count) capture\(openCaptures.count == 1 ? "" : "s") still need to be absorbed, attached, or intentionally parked.",
+                    valueLabel: "\(openCaptures.count)",
+                    icon: AppTab.captures.systemImage,
+                    visualState: openCaptures.isEmpty ? .default : .warning,
+                    planRoute: .capturesInbox
+                ),
+                PlanSecondaryDestination(
+                    id: "plan-weekly-review",
+                    title: "Weekly review",
+                    detail: "Close the current week by shaping carry-forward, habit pressure, and unresolved captures without leaving Plan.",
+                    valueLabel: posture.label,
+                    icon: "arrow.triangle.branch",
+                    visualState: posture.visualState,
+                    planRoute: .weeklyReview
                 )
             ],
             emptyTitle: mode == .empty ? "No weekly pressure yet" : nil,
             emptyMessage: mode == .empty ? "As soon as goals, captures, or routines create real constraints, Plan will show where the week still has room." : nil
+        )
+    }
+
+    func makeWeeklyReviewDashboard(snapshot: Snapshot, now: Date) -> WeeklyReviewDashboard {
+        let activeGoals = snapshot.goals.filter { $0.state == .active || $0.state == .paused }
+        let openCaptures = snapshot.captures.filter { $0.status != .archived }
+        let activeGoalSummaries = makeGoalSummaries(goals: activeGoals, feedback: snapshot.feedback, now: now)
+        let missingGoalSummaries = activeGoalSummaries.filter { $0.contexts.isEmpty }
+        let pressuredGoalSummary = pressuredGoalSummary(from: activeGoalSummaries)
+        let habitGoals = activeGoals.filter { goal in
+            guard let step = HabitGoalSemantics.preferredStep(in: goal) else { return goal.mode == .habit }
+            return goal.mode == .habit || HabitGoalSemantics.isHabitLike(goal: goal, step: step)
+        }
+        let weekDays = makeWeekDays(
+            summaries: activeGoalSummaries,
+            missingGoalSummaries: missingGoalSummaries,
+            now: now
+        )
+        let posture = postureState(
+            evaluations: activeGoalSummaries.compactMap(\.evaluation),
+            blockedCount: snapshot.drafts.filter { $0.latestResultKind == .blocked }.count,
+            clarificationCount: snapshot.drafts.filter { $0.latestResultKind == .clarificationRequired }.count,
+            openCaptureCount: openCaptures.count,
+            weekDays: weekDays,
+            mode: activeGoals.isEmpty && openCaptures.isEmpty ? .empty : .active
+        )
+        let carryForwardItems = makeWeeklyReviewCarryForwardItems(
+            summaries: activeGoalSummaries,
+            missingGoalSummaries: missingGoalSummaries,
+            pressuredGoalSummary: pressuredGoalSummary,
+            openCaptureCount: openCaptures.count
+        )
+        let splitPaneContext = makeWindowMagnetism(
+            weekDays: weekDays,
+            missingGoalSummaries: missingGoalSummaries,
+            pressuredGoalSummary: pressuredGoalSummary
+        )
+
+        return WeeklyReviewDashboard(
+            timeframeLabel: timeframeLabel(now: now),
+            hero: WeeklyReviewHeroState(
+                eyebrow: "Weekly Review",
+                title: "Shape what carries forward",
+                subtitle: "Weekly review now continues the same authored week workspace instead of becoming a detached ritual.",
+                dominantTruth: posture.visualState == .warning
+                    ? "The review should reduce strain first, then carry forward only the moves the next week can explain."
+                    : "The review can keep what worked, leave room visible, and carry forward only the next believable moves.",
+                continuityLabel: "Return to the week with a calmer shape, not a larger list.",
+                contextPills: [
+                    PlanHeroPillState(title: timeframeLabel(now: now), icon: "calendar", state: .default),
+                    PlanHeroPillState(title: posture.label, icon: AppTab.plan.systemImage, state: posture.visualState),
+                    PlanHeroPillState(title: "\(carryForwardItems.count) carry-forward lanes", icon: "arrow.triangle.branch", state: carryForwardItems.isEmpty ? .default : .selected)
+                ]
+            ),
+            summaryTitle: "Why the next week should look different",
+            summaryDetail: posture.visualState == .warning
+                ? "Carryover, capture pressure, and overloaded days need gentler scope before the next week hardens."
+                : "Keep the backbone that worked, then patch only the few things that still deserve a lane next week.",
+            carryForwardItems: carryForwardItems,
+            captureSummary: openCaptures.isEmpty
+                ? "No open captures are demanding carry-forward attention."
+                : "\(openCaptures.count) capture\(openCaptures.count == 1 ? "" : "s") still need a calm decision before the next week starts.",
+            habitSummary: habitGoals.isEmpty
+                ? "No recurring loops are currently shaping the review."
+                : "\(habitGoals.count) routine\(habitGoals.count == 1 ? "" : "s") should support the next week without crowding it.",
+            returnActionTitle: "Return to Plan",
+            returnActionSubtitle: "Use the reshaped week, then adjust one goal or support route only if it still needs help.",
+            returnPlanRoute: nil,
+            splitPaneContext: splitPaneContext
         )
     }
 
@@ -358,6 +462,160 @@ private extension RepositoryBackedPlanService {
             supportLabel: supportLabel,
             visualState: posture.visualState
         )
+    }
+
+    func makeExecutionResilience(
+        posture: PlanBelievabilityState,
+        weekDays: [PlanElasticWeekDayState],
+        missingGoalSummaries: [GoalWeekSummary],
+        pressuredGoalSummary: GoalWeekSummary?,
+        habitGoals: [Goal],
+        openCaptures: [Capture]
+    ) -> PlanExecutionResilienceState {
+        let overloadedDays = weekDays.filter { $0.level == .overloaded }.count
+        let laneState: AmbitionVisualState = overloadedDays > 0 || missingGoalSummaries.isEmpty == false || openCaptures.isEmpty == false
+            ? .warning
+            : posture.visualState
+
+        return PlanExecutionResilienceState(
+            title: "Execution resilience",
+            subtitle: "Carryover, overload, and recovery shaping stay explainable by keeping one smaller lane obvious at a time.",
+            calmExplanation: missingGoalSummaries.isEmpty
+                ? "This week holds together best when open room stays visible and only the loudest pressure gets reshaped."
+                : "\(missingGoalSummaries.count) active goal\(missingGoalSummaries.count == 1 ? "" : "s") still need a believable carryover lane instead of diffuse pressure.",
+            focusProtection: overloadedDays > 0
+                ? "Protect the clearest focus window before moving anything else. Relief works better than adding another organizing layer."
+                : "Focus windows already exist in the week. Protect them before turning habits or captures into extra structure.",
+            tradeoffFraming: openCaptures.isEmpty
+                ? "Every new ask should either reuse visible room or trade off against the loudest loaded day."
+                : "Open captures should compete with the week honestly. Absorb them, park them, or let them wait.",
+            lanes: [
+                PlanExecutionResilienceLane(
+                    id: "carryover",
+                    title: "Carryover",
+                    detail: missingGoalSummaries.isEmpty
+                        ? "No active goal is currently floating outside the week."
+                        : "Resolve carryover by giving only the missing goal a believable lane instead of widening the whole week.",
+                    recommendation: missingGoalSummaries.first.map { "\($0.goal.title) is the cleanest carry-forward candidate." } ?? "Carry only what the next week can explain calmly.",
+                    state: missingGoalSummaries.isEmpty ? .success : .warning,
+                    goalTarget: missingGoalSummaries.first.map { GoalRouteTarget(goalID: $0.goal.id) },
+                    planRoute: nil
+                ),
+                PlanExecutionResilienceLane(
+                    id: "overload",
+                    title: "Overload",
+                    detail: overloadedDays == 0
+                        ? "No day is visibly overloaded right now."
+                        : "\(overloadedDays) day\(overloadedDays == 1 ? "" : "s") are carrying more than the week can explain without relief.",
+                    recommendation: pressuredGoalSummary.map { "Lighten \($0.goal.title) before adding anything new." } ?? "Lighten the loudest lane first.",
+                    state: overloadedDays == 0 ? .selected : .warning,
+                    goalTarget: pressuredGoalSummary.map { GoalRouteTarget(goalID: $0.goal.id) },
+                    planRoute: nil
+                ),
+                PlanExecutionResilienceLane(
+                    id: "habits",
+                    title: "Habits",
+                    detail: habitGoals.isEmpty
+                        ? "No recurring loop is currently shaping the week."
+                        : "\(habitGoals.count) routine\(habitGoals.count == 1 ? "" : "s") should support the week shape instead of competing with it.",
+                    recommendation: habitGoals.isEmpty
+                        ? "Keep the week dominant until a repeatable loop is truly needed."
+                        : "Use the routines route to soften or trim loops that are crowding the week.",
+                    state: habitGoals.isEmpty ? .default : .selected,
+                    goalTarget: nil,
+                    planRoute: .habits
+                ),
+                PlanExecutionResilienceLane(
+                    id: "captures",
+                    title: "Captures",
+                    detail: openCaptures.isEmpty
+                        ? "No open captures are pushing on this week."
+                        : "\(openCaptures.count) open capture\(openCaptures.count == 1 ? "" : "s") still need to be absorbed or parked.",
+                    recommendation: openCaptures.isEmpty
+                        ? "Let the week stay quiet."
+                        : "Attach or park capture pressure before trying to polish the schedule.",
+                    state: openCaptures.isEmpty ? .default : .warning,
+                    goalTarget: nil,
+                    planRoute: .capturesInbox
+                ),
+                PlanExecutionResilienceLane(
+                    id: "review",
+                    title: "Weekly review",
+                    detail: "Use review as a shaping continuation so next week inherits the right amount of carry-forward truth.",
+                    recommendation: "Close the week by shaping what should continue, not by creating more admin.",
+                    state: laneState,
+                    goalTarget: nil,
+                    planRoute: .weeklyReview
+                )
+            ],
+            windowMagnetism: makeWindowMagnetism(
+                weekDays: weekDays,
+                missingGoalSummaries: missingGoalSummaries,
+                pressuredGoalSummary: pressuredGoalSummary
+            )
+        )
+    }
+
+    func makeWindowMagnetism(
+        weekDays: [PlanElasticWeekDayState],
+        missingGoalSummaries: [GoalWeekSummary],
+        pressuredGoalSummary: GoalWeekSummary?
+    ) -> PlanWindowMagnetismState? {
+        guard let candidateDay = weekDays.first(where: { $0.level == .open && $0.openWindow?.target != nil }) ??
+                weekDays.first(where: { $0.level == .steady && $0.openWindow?.target != nil }),
+              let openWindow = candidateDay.openWindow else {
+            return nil
+        }
+
+        let suggestedGoalTitle = openWindow.suggestionLabel ?? missingGoalSummaries.first?.goal.title ?? pressuredGoalSummary?.goal.title ?? "the next lighter move"
+
+        return PlanWindowMagnetismState(
+            title: "Window magnetism",
+            detail: "When the week has one believable opening, suggestions should dock there calmly instead of making the whole schedule feel reactive.",
+            dayLabel: "\(candidateDay.weekdayLabel) \(candidateDay.dateLabel)",
+            suggestionTitle: suggestedGoalTitle,
+            suggestionDetail: openWindow.detail,
+            target: openWindow.target,
+            visualState: openWindow.visualState
+        )
+    }
+
+    func makeWeeklyReviewCarryForwardItems(
+        summaries: [GoalWeekSummary],
+        missingGoalSummaries: [GoalWeekSummary],
+        pressuredGoalSummary: GoalWeekSummary?,
+        openCaptureCount: Int
+    ) -> [WeeklyReviewCarryForwardItem] {
+        let carryoverItems = missingGoalSummaries.prefix(2).map { summary in
+            WeeklyReviewCarryForwardItem(
+                id: "weekly-review-carry-\(summary.goal.id)",
+                title: summary.goal.title,
+                detail: "Still active, but the current week never gave it a believable lane.",
+                bridgeLabel: "Carry forward carefully",
+                state: .warning,
+                goalTarget: GoalRouteTarget(goalID: summary.goal.id)
+            )
+        }
+        let strainedItem = pressuredGoalSummary.map { summary in
+            WeeklyReviewCarryForwardItem(
+                id: "weekly-review-strain-\(summary.goal.id)",
+                title: summary.goal.title,
+                detail: "The next week should carry a lighter version so recovery stays believable.",
+                bridgeLabel: "Lighten before it rolls forward",
+                state: .selected,
+                goalTarget: GoalRouteTarget(goalID: summary.goal.id)
+            )
+        }
+        let captureItem: WeeklyReviewCarryForwardItem? = openCaptureCount > 0 ? WeeklyReviewCarryForwardItem(
+            id: "weekly-review-captures",
+            title: "Capture pressure",
+            detail: "\(openCaptureCount) capture\(openCaptureCount == 1 ? "" : "s") still need a decision before they become next-week clutter.",
+            bridgeLabel: "Clear the inbox inside Plan",
+            state: .warning,
+            goalTarget: nil
+        ) : nil
+
+        return Array((carryoverItems + [strainedItem, captureItem].compactMap { $0 }).prefix(4))
     }
 
     func makeHero(
