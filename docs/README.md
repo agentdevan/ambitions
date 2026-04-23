@@ -16,6 +16,8 @@ Use [codex/CONTEXT_INDEX.md](codex/CONTEXT_INDEX.md) for source-of-truth precede
   Batching and work packaging.
 - [canon/Ambitions_Full_Frontend_Transformation_Program.md](canon/Ambitions_Full_Frontend_Transformation_Program.md)
   Queued post-hardening frontend transformation canon. Use with the registry; do not treat it as active work by itself.
+- [canon/Ambitions_App_Store_Release_Compliance.md](canon/Ambitions_App_Store_Release_Compliance.md)
+  Canonical App Store release-compliance and final submission-gate truth after the transformation program closes.
 - [canon/Ambitions_Product_Addendum_Continuity_Reality_Execution.md](canon/Ambitions_Product_Addendum_Continuity_Reality_Execution.md)
   Supporting canon addendum for top-level surface questions, mobile provenance, and consolidated platform-pillar language after Batch 48. Use as shorthand only; do not treat it as a parallel master roadmap.
 - [canon/Ambitions_Frontend_Batches_49_60_Revised.md](canon/Ambitions_Frontend_Batches_49_60_Revised.md)
@@ -35,6 +37,8 @@ Older docs in this folder are supporting context and do not override the canonic
 
 - [native-build-and-release.md](native-build-and-release.md)
   Native source-of-truth build, test, archive, and CI validation guidance for the current SwiftUI iOS app.
+- [codex/Release_Candidate_Review_Checklist.md](codex/Release_Candidate_Review_Checklist.md)
+  Short operator checklist for final release-candidate review, reviewer access, privacy/disclosure, and App Store submission prep.
 - [codex/BATCH_REGISTRY.md](codex/BATCH_REGISTRY.md)
   Current batch status for active Ambitions work.
 - [rc1-native-finish-pass.md](rc1-native-finish-pass.md)

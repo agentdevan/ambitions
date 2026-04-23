@@ -34,5 +34,7 @@ Use this as a compact queue shorthand only; active status still comes from the r
 ## Integration Rule
 
 Batch 48 remains completed.
-Batch 49 remains active until explicitly completed by the user.
-Completed batch history through Batch 48 remains unchanged.
+Batch 49 remains completed.
+Batch 50 remains completed.
+Batch 51 is the active batch until explicitly completed by the user.
+Completed batch history through Batch 50 remains unchanged.

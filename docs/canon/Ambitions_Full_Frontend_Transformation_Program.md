@@ -22,9 +22,10 @@ Live queue truth in the current repo:
 - Batch 38 — Completed
 - Batches 39-48 — Completed in registry history
 - Batch 49 — Completed
-- Batch 50 — Active
-- Batches 51-60 — Queued
-- the front-end transformation program is active in implementation at **Batch 50**
+- Batch 50 — Completed
+- Batch 51 — Active
+- Batches 52-60 — Queued
+- the front-end transformation program is active in implementation at **Batch 51**
 
 Batch 39 is a docs-only foundation batch.
 It makes the transformation program explicit enough to guide later implementation batches without authorizing shell implementation, route rewiring, or surface redesign work ahead of Batch 40.
@@ -325,9 +326,9 @@ If status language here drifts, the registry controls active-vs-queued truth and
 | 46 | Front-End Transformation 07 / Goal intake and Strategy Composer | Completed | Full create-goal and planning setup redesign. |
 | 47 | Front-End Transformation 08 / Goal Detail rebuild I — strategic chamber and path filmstrip | Completed | Goal Detail composition phase 1 delivered as the strategic first-layer / path-filmstrip rebuild. |
 | 48 | Front-End Transformation 09 / Goal Detail rebuild II — trust whisper, correction, audit, and memory | Completed | Goal Detail composition phase 2 closed while keeping trust, correction, audit, and memory subordinate to the strategic first layer. |
-| 49 | Front-End Transformation 10 / Plan rebuild I — Reality Model, elastic week, and pressure scrubber | Active | Plan surface phase 1 with week-structure truth and pressure shaping. |
-| 50 | Front-End Transformation 11 / Plan rebuild II — Execution Resilience, habits, captures, and review shaping | Queued | Plan ecosystem phase 2 with resilience and review integration. |
-| 51 | Front-End Transformation 12 / Insights rebuild and Reflection OS | Queued | Includes activity history, review coherence, and reflection-system language. |
+| 49 | Front-End Transformation 10 / Plan rebuild I — Reality Model, elastic week, and pressure scrubber | Completed | Plan surface phase 1 with week-structure truth and pressure shaping. |
+| 50 | Front-End Transformation 11 / Plan rebuild II — Execution Resilience, habits, captures, and review shaping | Completed | Plan now owns weekly shaping with Execution Resilience, Window Magnetism, Weekly Review continuation, and Plan-owned habits/captures support routes; build, targeted unit coverage, full `AmbitionsTests`, and targeted UI tests were green, with the remaining manual-audit limitation proven environment-only. |
+| 51 | Front-End Transformation 12 / Insights rebuild and Reflection OS | Active | Includes activity history, review coherence, and reflection-system language. |
 | 52 | Front-End Transformation 13 / Profile rebuild, Appearance Studio, Trust Center, and Context Vault foundations | Queued | Includes trust controls, appearance, and context-vault foundations. |
 | 53 | Front-End Transformation 14 / Progressive Intelligence Onboarding and Degraded-State Orchestrator | Queued | Includes permissions, education, empty/loading/error, and degraded-state orchestration. |
 | 54 | Front-End Transformation 15 / State Continuity Mesh, sync trust, and real-time continuity contract | Queued | Cross-device/state continuity before external-surface widening. |
@@ -336,7 +337,7 @@ If status language here drifts, the registry controls active-vs-queued truth and
 | 57 | Front-End Transformation 18 / Cross-surface command, recall, and ambient coherence | Queued | Command, recall, provenance, and handoff coherence. |
 | 58 | Front-End Transformation 19 / iPad and Mac surface architecture and first implementation | Queued | Future-platform implementation begins. |
 | 59 | Front-End Transformation 20 / Watch and Apple TV ambient surface architecture and first implementation | Queued | Ambient and room-scale future surfaces begin. |
-| 60 | Front-End Transformation 21 / Finish-quality pass, accessibility, performance, and release polish | Queued | Final visual + interaction closure. |
+| 60 | Front-End Transformation 21 / Finish-quality pass, accessibility, performance, and release polish | Queued | Final visual + interaction closure and the RC-review build target before the dedicated release-compliance gate. |
 
 ---
 
@@ -842,7 +843,7 @@ Complete only when Goal Detail is fully rebuilt across all three trust layers.
 ## Batch 49 — Front-End Transformation 10 / Plan rebuild I — Reality Model, elastic week, and pressure scrubber
 
 ### Status
-Active
+Completed
 
 ### Goal
 Rebuild Plan into a premium shaping workspace that makes week structure, room, pressure, and reality constraints legible without dense calendar energy.
@@ -890,7 +891,12 @@ Complete only when Plan feels like a true premium weekly workspace.
 ## Batch 50 — Front-End Transformation 11 / Plan rebuild II — Execution Resilience, habits, captures, and review shaping
 
 ### Status
-Queued
+Completed
+
+### Completion Note
+- Plan now owns weekly shaping with Execution Resilience framing, Window Magnetism, Weekly Review continuation, and stronger Plan-owned habits/captures support routes.
+- Clean native build, targeted Batch 50 unit coverage, full `AmbitionsTests`, and targeted UI tests were green.
+- Remaining manual-audit depth was environment-limited rather than a deterministic regression.
 
 ### Goal
 Complete Plan by integrating the Execution Resilience Stack with habits, captures, weekly review, and required shaping logic expansions.
@@ -936,7 +942,7 @@ Complete only when Plan and its support routes feel like one authored system.
 ## Batch 51 — Front-End Transformation 12 / Insights rebuild and Reflection OS
 
 ### Status
-Queued
+Active
 
 ### Goal
 Rebuild Insights and reflection surfaces into a narrative truth layer rather than a generic analytics screen.
@@ -1352,6 +1358,9 @@ Queued
 
 ### Goal
 Close the transformation program with a whole-product finish pass that raises Ambitions to flagship release quality.
+
+Batch 60 is the finish-quality and RC-review build target for the roadmap, not the final App Store submission gate.
+Final submission still passes through [Ambitions_App_Store_Release_Compliance.md](Ambitions_App_Store_Release_Compliance.md).
 
 ### In Scope
 - motion tuning across the whole app

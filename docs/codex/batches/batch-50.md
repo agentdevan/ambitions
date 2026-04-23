@@ -1,6 +1,6 @@
 ﻿# Batch 50 - Front-End Transformation 11 / Plan rebuild II - Execution Resilience, habits, captures, and review shaping
 ## Status
-Active
+Completed
 ## Program
 Post-hardening Front-End Transformation Program
 ## Canon Source
@@ -59,5 +59,10 @@ Complete Plan by integrating the Execution Resilience Stack with habits, capture
 - targeted UI tests
 ## Completion Rule
 Complete only when Plan and its support routes feel like one authored system.
+
+## Completion Note
+- Plan now owns weekly shaping with Execution Resilience framing, Window Magnetism, Weekly Review continuation, and stronger Plan-owned habits/captures support routes.
+- Clean native build, targeted Batch 50 unit coverage, full `AmbitionsTests`, and targeted UI tests were green.
+- Remaining manual-audit depth was limited by environment/tooling blockers rather than a deterministic product regression.
 
 ---

@@ -17,8 +17,9 @@ Use these specs together with:
 - Batch 38 is completed.
 - Batch 48 is completed in the registry.
 - Batch 49 is completed in the registry.
-- Batch 50 is the active frontend implementation batch in the registry.
-- Batches 51-60 remain queued future implementation work.
+- Batch 50 is completed in the registry.
+- Batch 51 is the active frontend implementation batch in the registry.
+- Batches 52-60 remain queued future implementation work.
 - Treat iPhone execution truth as primary unless a spec explicitly defines a future-platform role.
 - Prefer these docs over vague "premium" or "modern" interpretation when a future batch needs exact UI direction.
 - If a future implementation task conflicts with current shipping behavior, preserve shipping truth until the relevant frontend batch becomes active.
@@ -67,3 +68,4 @@ Use these specs in this order when planning a frontend batch:
 - `Weekly Review`, `Monthly Review`, and `History` are treated as designed supporting routes, not top-level shell destinations.
 - `Widgets`, `Live Activities`, `notifications`, `App Intents`, and `share extension` are specified here as future surfaces only.
 - Additional named systems such as `Cognitive Mode Lens`, `Continuity Ribbon`, `Semantic Zoom`, `Quiet Command Sheet`, `Object-Persistent Navigation`, `Pressure Map`, `Review Constellation`, `Window Magnetism`, `Living Capture`, and `Intent-Sensitive Primary Action` are integrated into the existing specs below rather than split into a separate parallel doc set.
+- Final App Store submission gating lives in [../Ambitions_App_Store_Release_Compliance.md](../Ambitions_App_Store_Release_Compliance.md); this design folder does not replace release-compliance review.

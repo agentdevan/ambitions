@@ -23,8 +23,9 @@ Use this with:
 - Batch 38 is completed.
 - Batch 48 is completed in the registry.
 - Batch 49 is completed in the registry.
-- Batch 50 is active in the registry.
-- Batches 51-60 remain queued.
+- Batch 50 is completed in the registry.
+- Batch 51 is active in the registry.
+- Batches 52-60 remain queued.
 - Nothing in this document activates future frontend work ahead of the registry.
 - Execution tiering remains sequencing truth only; it does not authorize implementation before the owning batch is active.
 

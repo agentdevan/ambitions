@@ -18,8 +18,9 @@ For non-trivial work, read these in order before planning:
 6. [Ambitions_Full_Frontend_Transformation_Program.md](../canon/Ambitions_Full_Frontend_Transformation_Program.md) when the task involves the queued post-hardening frontend transformation program.
 7. [design/README.md](../canon/design/README.md) when the task needs explicit frontend design truth for the queued transformation program.
 8. [Ambitions_Frontend_Transformation_Execution_Classification.md](../canon/design/Ambitions_Frontend_Transformation_Execution_Classification.md) when the task needs explicit frontend sequencing truth.
-9. [BATCH_REGISTRY.md](BATCH_REGISTRY.md).
-10. Supporting docs linked from [docs/README.md](../README.md).
+9. [Ambitions_App_Store_Release_Compliance.md](../canon/Ambitions_App_Store_Release_Compliance.md) when the task involves release-candidate or App Store submission gating.
+10. [BATCH_REGISTRY.md](BATCH_REGISTRY.md).
+11. Supporting docs linked from [docs/README.md](../README.md).
 
 ## Minimal Read Set For Active Batch Execution
 
@@ -71,8 +72,9 @@ When sources conflict, use this precedence:
 7. [Ambitions_Full_Frontend_Transformation_Program.md](../canon/Ambitions_Full_Frontend_Transformation_Program.md) for queued post-hardening frontend transformation scope and batch intent.
 8. [design/README.md](../canon/design/README.md) for explicit future frontend design truth.
 9. [Ambitions_Frontend_Transformation_Execution_Classification.md](../canon/design/Ambitions_Frontend_Transformation_Execution_Classification.md) for explicit future frontend execution tiering.
-10. [BATCH_REGISTRY.md](BATCH_REGISTRY.md) for active work status.
-11. Supporting docs.
+10. [Ambitions_App_Store_Release_Compliance.md](../canon/Ambitions_App_Store_Release_Compliance.md) for final release-candidate and App Store submission gating.
+11. [BATCH_REGISTRY.md](BATCH_REGISTRY.md) for active work status.
+12. Supporting docs.
 
 Supporting canon docs that clarify the post-Batch-48 direction without replacing the canonical stack:
 
@@ -90,6 +92,7 @@ These files are permanent canonical context and must stay in repo:
 - [../canon/Ambitions_Surgical_Execution_Plan.md](../canon/Ambitions_Surgical_Execution_Plan.md)
 - [../canon/Ambitions_Codex_Batch_Plan.md](../canon/Ambitions_Codex_Batch_Plan.md)
 - [../canon/Ambitions_Full_Frontend_Transformation_Program.md](../canon/Ambitions_Full_Frontend_Transformation_Program.md)
+- [../canon/Ambitions_App_Store_Release_Compliance.md](../canon/Ambitions_App_Store_Release_Compliance.md)
 - [../canon/design/README.md](../canon/design/README.md)
 - [../canon/design/Ambitions_Frontend_Transformation_Execution_Classification.md](../canon/design/Ambitions_Frontend_Transformation_Execution_Classification.md)
 
