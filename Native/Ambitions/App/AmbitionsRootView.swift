@@ -183,32 +183,24 @@ struct AmbitionsRootView: View {
                 case .monthlyReview:
                     AppShellScaffold(
                         title: "Monthly Review",
-                        subtitle: "Insights-owned review route",
+                        subtitle: "Reflection",
                         posture: .reflection,
                         backButtonAccessibilityIdentifier: "shell.insights.back-button",
                         onBack: { navigation.resetInsightsPath() },
                         trailingButtons: shellUtilityButtons(for: .insights)
                     ) {
-                        AppShellPlaceholderRouteView(
-                            title: "Monthly Review",
-                            subtitle: "Batch 40 establishes ownership without starting the later reflection rebuild.",
-                            message: "Monthly Review now belongs to Insights at the shell layer. The full surface stays deferred to the later reflection work."
-                        )
+                        InsightsMonthlyReviewScreen()
                     }
                 case .history:
                     AppShellScaffold(
                         title: "History",
-                        subtitle: "Insights-owned history route",
+                        subtitle: "Reflection",
                         posture: .reflection,
                         backButtonAccessibilityIdentifier: "shell.insights.back-button",
                         onBack: { navigation.resetInsightsPath() },
                         trailingButtons: shellUtilityButtons(for: .insights)
                     ) {
-                        AppShellPlaceholderRouteView(
-                            title: "History",
-                            subtitle: "Batch 40 establishes ownership without activating the later history redesign.",
-                            message: "History now belongs to Insights at the shell layer. Deeper recall and reflection remain deferred to later batches."
-                        )
+                        InsightsHistoryScreen()
                     }
                 }
             }

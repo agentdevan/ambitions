@@ -37,9 +37,13 @@ final class InsightsFeatureServiceTests: XCTestCase {
         let dashboard = try await RepositoryBackedInsightsService(repositories: repositories).loadInsightsDashboard()
 
         XCTAssertEqual(dashboard.posture.label, "Adapting")
-        XCTAssertFalse(dashboard.changeSummaries.isEmpty)
+        XCTAssertEqual(dashboard.hero.postureLabel, "Adapting")
+        XCTAssertFalse(dashboard.patternClusters.isEmpty)
+        XCTAssertFalse(dashboard.reviewConstellation.items.isEmpty)
+        XCTAssertFalse(dashboard.historyLayer.previewItems.isEmpty)
         XCTAssertFalse(dashboard.goalStatuses.isEmpty)
         XCTAssertEqual(dashboard.goalStatuses.first?.target?.goalID, goal.id)
+        XCTAssertEqual(dashboard.continuityRibbon?.planRoute, .weeklyReview)
     }
 
     func testSparseEvidenceDoesNotOverclaimGoalStatus() async throws {
@@ -52,6 +56,8 @@ final class InsightsFeatureServiceTests: XCTestCase {
         XCTAssertNotEqual(dashboard.goalStatuses.first?.statusLabel, "Believable")
         XCTAssertNotEqual(dashboard.goalStatuses.first?.visualState, .success)
         XCTAssertEqual(dashboard.posture.visualState, .default)
+        XCTAssertEqual(dashboard.hero.visualState, .default)
+        XCTAssertEqual(dashboard.comparePeriod.metrics.count, 3)
     }
 
     func testRecentActivitiesSortByActualTimestampInsteadOfLocalizedLabel() async throws {
@@ -102,6 +108,7 @@ final class InsightsFeatureServiceTests: XCTestCase {
         let dashboard = try await RepositoryBackedInsightsService(repositories: repositories).loadInsightsDashboard()
 
         XCTAssertEqual(Array(dashboard.activities.map(\.id).prefix(3)), ["evidence-newest", "feedback-middle", "evidence-older"])
+        XCTAssertEqual(Array(dashboard.historyLayer.timelineItems.map(\.id).prefix(3)), ["evidence-newest", "feedback-middle", "evidence-older"])
     }
 }
 

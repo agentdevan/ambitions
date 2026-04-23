@@ -82,8 +82,10 @@ final class AmbitionsUITests: XCTestCase {
         app.tabBars.buttons["Insights"].tap()
         XCTAssertTrue(app.staticTexts["shell.header.title"].waitForExistence(timeout: 10))
         XCTAssertTrue(app.descendants(matching: .any)["insights.screen"].waitForExistence(timeout: 10))
-        XCTAssertTrue(app.descendants(matching: .any)["insights.posture-card"].waitForExistence(timeout: 10))
-        XCTAssertTrue(app.descendants(matching: .any)["insights.change-card"].waitForExistence(timeout: 10))
+        XCTAssertTrue(app.descendants(matching: .any)["insights.hero-card"].waitForExistence(timeout: 10))
+        XCTAssertTrue(app.descendants(matching: .any)["insights.compare-period"].waitForExistence(timeout: 10))
+        XCTAssertTrue(scrollUntilElementExists("insights.review-constellation", in: app))
+        XCTAssertTrue(scrollUntilElementExists("insights.history-layer", in: app))
 
         app.tabBars.buttons["Profile"].tap()
         XCTAssertTrue(app.staticTexts["shell.header.title"].waitForExistence(timeout: 10))
@@ -245,6 +247,38 @@ final class AmbitionsUITests: XCTestCase {
         XCTAssertTrue(app.descendants(matching: .any)["goal-detail.screen"].waitForExistence(timeout: 10))
         XCTAssertTrue(app.descendants(matching: .any)["goal-detail.strategic-header"].waitForExistence(timeout: 10))
         XCTAssertTrue(app.descendants(matching: .any)["goal-detail.path-filmstrip"].waitForExistence(timeout: 10))
+    }
+
+    func testPreviewInsightsRoutesExposeReflectionHistoryAndMonthlyReview() throws {
+        let app = makeApp(bootstrapMode: "preview", launchURL: "ambitions://tab/insights")
+        app.launch()
+
+        XCTAssertTrue(app.descendants(matching: .any)["insights.screen"].waitForExistence(timeout: 10))
+        XCTAssertTrue(app.descendants(matching: .any)["insights.hero-card"].waitForExistence(timeout: 10))
+        XCTAssertTrue(scrollUntilElementExists("insights.compare-period", in: app))
+        XCTAssertTrue(scrollUntilElementExists("insights.review-constellation", in: app))
+        XCTAssertTrue(scrollUntilElementExists("insights.history-layer", in: app))
+    }
+
+    func testPreviewInsightsMonthlyReviewCanHandOffToPlan() throws {
+        let app = makeApp(bootstrapMode: "preview", launchURL: "ambitions://insights/monthly-review")
+        app.launch()
+
+        XCTAssertTrue(app.descendants(matching: .any)["insights.monthly-review.screen"].waitForExistence(timeout: 10))
+        XCTAssertTrue(scrollUntilElementExists("insights.review-constellation", in: app))
+        XCTAssertTrue(scrollUntilStaticTextExists("Review shaping", in: app))
+    }
+
+    func testPreviewInsightsHistoryRouteCanHandOffToPlan() throws {
+        let app = makeApp(bootstrapMode: "preview", launchURL: "ambitions://insights/history")
+        app.launch()
+
+        XCTAssertTrue(app.descendants(matching: .any)["insights.history.screen"].waitForExistence(timeout: 10))
+        let planButton = scrollUntilButtonHittable("insights.history.open-weekly-review", in: app)
+        XCTAssertTrue(planButton.waitForExistence(timeout: 10))
+        planButton.tap()
+
+        XCTAssertTrue(app.descendants(matching: .any)["weekly-review.screen"].waitForExistence(timeout: 10))
     }
 
     func testMemoryLensCanOpenAndRouteToCanonicalWeekDestination() throws {
@@ -685,42 +719,49 @@ final class AmbitionsUITests: XCTestCase {
         return todayScreen.exists && heroCard.exists
     }
 
-    private func scrollUntilButtonHittable(_ identifier: String, fallbackLabel: String? = nil, in app: XCUIApplication, maxAttempts: Int = 5) -> XCUIElement {
-        let button = app.buttons[identifier]
-        let fallbackButton = fallbackLabel.map { app.buttons[$0] }
+    private func scrollUntilButtonHittable(_ identifier: String, fallbackLabel: String? = nil, in app: XCUIApplication, maxAttempts: Int = 8) -> XCUIElement {
+        let fallbackButton = fallbackLabel.map {
+            app.buttons.matching(NSPredicate(format: "label == %@", $0)).firstMatch
+        }
+        let fallbackAny = fallbackLabel.map {
+            app.descendants(matching: .any).matching(NSPredicate(format: "label == %@", $0)).firstMatch
+        }
+
+        func candidates() -> [XCUIElement] {
+            var results: [XCUIElement] = [
+                app.buttons[identifier],
+                app.descendants(matching: .any)[identifier]
+            ]
+
+            if let fallbackButton {
+                results.append(fallbackButton)
+            }
+            if let fallbackAny {
+                results.append(fallbackAny)
+            }
+
+            return results
+        }
 
         for _ in 0..<maxAttempts {
-            if button.waitForExistence(timeout: 2), button.isHittable {
-                return button
-            }
-            if let fallbackButton, fallbackButton.waitForExistence(timeout: 1), fallbackButton.isHittable {
-                return fallbackButton
+            for candidate in candidates() where candidate.waitForExistence(timeout: 1) && candidate.isHittable {
+                return candidate
             }
             app.swipeUp()
         }
 
         for _ in 0..<maxAttempts {
-            if button.isHittable {
-                return button
-            }
-            if let fallbackButton, fallbackButton.isHittable {
-                return fallbackButton
+            for candidate in candidates() where candidate.isHittable {
+                return candidate
             }
             app.swipeDown()
         }
 
-        for _ in 0..<maxAttempts {
-            let button = app.buttons[identifier]
-            if button.isHittable {
-                return button
-            }
-            if let fallbackButton, fallbackButton.isHittable {
-                return fallbackButton
-            }
-            app.swipeUp()
+        if let fallbackAny, fallbackAny.exists {
+            return fallbackAny
         }
 
-        return button
+        return app.descendants(matching: .any)[identifier]
     }
 
     private func scrollUntilElementExists(_ identifier: String, in app: XCUIApplication, maxAttempts: Int = 8) -> Bool {

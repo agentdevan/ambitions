@@ -1,5 +1,4 @@
 import AmbitionsDesignSystem
-import AmbitionsWidgetUI
 import SwiftUI
 
 struct InsightsScreen: View {
@@ -16,57 +15,45 @@ struct InsightsScreen: View {
     }
 
     var body: some View {
-        FeatureScaffoldView(
-            eyebrow: "Review",
-            title: "Insights",
-            subtitle: "Review the patterns behind progress, drift, and useful adaptation without leaving the native planning surface."
-        ) {
-            switch viewModel.state {
-            case .loading:
-                AsyncStateCard(.loading(lines: 8))
-                    .transition(.ambitionPanel)
-            case let .failed(message):
-                AsyncStateCard(
-                    .error(title: "Insights are unavailable", message: message, icon: "chart.line.uptrend.xyaxis", actionTitle: "Retry"),
-                    actionAccessibilityIdentifier: "insights.retry-button"
-                ) {
-                    Task { await viewModel.refresh(using: container.insightsService) }
-                }
-                .transition(.ambitionPanel)
-            case let .loaded(dashboard):
-                VStack(alignment: .leading, spacing: theme.spacing.lg) {
-                    AppCard {
-                        SectionHeader(
-                            title: dashboard.title,
-                            subtitle: dashboard.summary
-                        ) {
-                            TagPill(dashboard.timeframeLabel, state: .selected)
-                        }
+        ScrollView {
+            LazyVStack(alignment: .leading, spacing: theme.spacing.lg) {
+                switch viewModel.state {
+                case .loading:
+                    AsyncStateCard(.loading(lines: 10))
+                        .transition(.ambitionPanel)
+                case let .failed(message):
+                    AsyncStateCard(
+                        .error(title: "Insights are unavailable", message: message, icon: "chart.line.uptrend.xyaxis", actionTitle: "Retry"),
+                        actionAccessibilityIdentifier: "insights.retry-button"
+                    ) {
+                        Task { await viewModel.refresh(using: container.insightsService) }
                     }
                     .transition(.ambitionPanel)
+                case let .loaded(dashboard):
+                    InsightsHeroCard(hero: dashboard.hero, onPrimaryAction: handle(heroAction:))
 
-                    InsightsPostureCard(posture: dashboard.posture, summary: dashboard.summary)
-
-                    InsightsChangeCard(items: dashboard.changeSummaries)
-
-                    InsightsGoalStatusCard(items: dashboard.goalStatuses) { target in
-                        container.navigation.openGoalDetail(target)
+                    if let ribbon = dashboard.continuityRibbon {
+                        InsightsContinuityRibbonCard(ribbon: ribbon, onOpen: handle(ribbon:))
                     }
 
-                    WidgetFeed(items: [
-                        WidgetFeedItem(id: "insight-stats", priority: .hero, variant: .expanded) {
-                            InsightStatsWidget(viewModel: statsViewModel(dashboard))
-                        },
-                        WidgetFeedItem(id: "insight-trend", priority: .high, variant: .expanded) {
-                            WeeklyTrendWidget(viewModel: trendViewModel(dashboard))
-                        },
-                        WidgetFeedItem(id: "insight-activity", priority: .standard, variant: .expanded) {
-                            RecentActivityWidget(viewModel: activitiesViewModel(dashboard))
-                        }
-                    ])
+                    InsightsComparePeriodCard(compare: dashboard.comparePeriod)
+
+                    InsightsPatternTruthCard(items: dashboard.patternClusters, onOpenGoal: openGoal, onOpenPlanRoute: openPlanRoute)
+
+                    InsightsReviewConstellationCard(state: dashboard.reviewConstellation, onOpenGoal: openGoal, onOpenPlanRoute: openPlanRoute)
+
+                    InsightsHistoryLayerCard(
+                        history: dashboard.historyLayer,
+                        onOpenItem: openTimelineItem,
+                        onOpenHistory: { openInsightsRoute(.history) },
+                        onOpenReview: { openInsightsRoute(.monthlyReview) }
+                    )
                 }
             }
+            .padding(.horizontal, theme.spacing.lg)
+            .padding(.vertical, theme.spacing.md)
         }
+        .scrollIndicators(.hidden)
         .navigationTitle(showsNavigationChrome ? "Insights" : "")
         .refreshable {
             await viewModel.refresh(using: container.insightsService)
@@ -78,90 +65,54 @@ struct InsightsScreen: View {
         }
     }
 
-    private func statsViewModel(_ dashboard: InsightsDashboard) -> InsightStatsWidgetViewModel {
-        InsightStatsWidgetViewModel(
-            snapshot: WidgetSnapshot(
-                metadata: WidgetMetadata(
-                    identity: WidgetIdentity(family: .insightStats, instanceID: "primary"),
-                    priority: .hero,
-                    variant: .expanded,
-                    chrome: .appCard,
-                    supportedActions: []
-                ),
-                state: .ready(
-                    InsightStatsContent(
-                        title: dashboard.title,
-                        subtitle: dashboard.subtitle,
-                        stats: dashboard.stats.map {
-                            WidgetStat(
-                                id: $0.id,
-                                title: $0.title,
-                                value: $0.value,
-                                detail: $0.detail,
-                                icon: $0.icon
-                            )
-                        },
-                        summary: dashboard.summary,
-                        actions: []
-                    )
-                )
-            )
-        )
+    private func handle(heroAction action: InsightsHeroAction) {
+        if let goalTarget = action.goalTarget {
+            openGoal(goalTarget)
+            return
+        }
+        if let planRoute = action.planRoute {
+            openPlanRoute(planRoute)
+            return
+        }
+        if let route = action.insightsRoute {
+            openInsightsRoute(route)
+        }
     }
 
-    private func trendViewModel(_ dashboard: InsightsDashboard) -> WeeklyTrendWidgetViewModel {
-        WeeklyTrendWidgetViewModel(
-            snapshot: WidgetSnapshot(
-                metadata: WidgetMetadata(
-                    identity: WidgetIdentity(family: .weeklyTrend, instanceID: "primary"),
-                    priority: .high,
-                    variant: .expanded,
-                    chrome: .appCard,
-                    supportedActions: []
-                ),
-                state: .ready(
-                    WeeklyTrendContent(
-                        title: dashboard.trendTitle,
-                        subtitle: dashboard.trendSubtitle,
-                        timeframeLabel: dashboard.timeframeLabel,
-                        points: dashboard.trendPoints.map { WidgetTrendPoint(id: $0.id, label: $0.label, value: $0.value) },
-                        summary: dashboard.trendSummary,
-                        actions: []
-                    )
-                )
-            )
-        )
+    private func handle(ribbon: InsightsContinuityRibbon) {
+        if let goalTarget = ribbon.goalTarget {
+            openGoal(goalTarget)
+            return
+        }
+        if let planRoute = ribbon.planRoute {
+            openPlanRoute(planRoute)
+            return
+        }
+        if let route = ribbon.insightsRoute {
+            openInsightsRoute(route)
+        }
     }
 
-    private func activitiesViewModel(_ dashboard: InsightsDashboard) -> RecentActivityWidgetViewModel {
-        RecentActivityWidgetViewModel(
-            snapshot: WidgetSnapshot(
-                metadata: WidgetMetadata(
-                    identity: WidgetIdentity(family: .recentActivity, instanceID: "primary"),
-                    priority: .standard,
-                    variant: .expanded,
-                    chrome: .appCard,
-                    supportedActions: []
-                ),
-                state: .ready(
-                    RecentActivityContent(
-                        title: dashboard.activitiesTitle,
-                        subtitle: dashboard.activitiesSubtitle,
-                        activities: dashboard.activities.map {
-                            WidgetActivityItem(
-                                id: $0.id,
-                                title: $0.title,
-                                subtitle: $0.subtitle,
-                                timestamp: $0.timestamp,
-                                icon: $0.icon,
-                                badge: $0.badge
-                            )
-                        },
-                        actions: []
-                    )
-                )
-            )
-        )
+    private func openGoal(_ target: GoalRouteTarget) {
+        container.navigation.openGoalDetail(target)
+    }
+
+    private func openPlanRoute(_ route: PlanRouteTarget) {
+        container.navigation.openPlanRoute(route)
+    }
+
+    private func openInsightsRoute(_ route: InsightsRouteTarget) {
+        container.navigation.openInsightsRoute(route)
+    }
+
+    private func openTimelineItem(_ item: InsightsTimelineItem) {
+        if let goalTarget = item.goalTarget {
+            openGoal(goalTarget)
+            return
+        }
+        if let planRoute = item.planRoute {
+            openPlanRoute(planRoute)
+        }
     }
 
     private var container: AppContainer {
@@ -172,169 +123,708 @@ struct InsightsScreen: View {
     }
 }
 
-private struct InsightsPostureCard: View {
-    @Environment(\.ambitionTheme) private var theme
-
-    let posture: InsightsPostureSummary
-    let summary: String
-
+struct InsightsMonthlyReviewScreen: View {
     var body: some View {
-        AppCard(state: posture.visualState) {
-            VStack(alignment: .leading, spacing: theme.spacing.md) {
-                SectionHeader(
-                    title: posture.title,
-                    subtitle: posture.detail
-                ) {
-                    TagPill(posture.label, state: posture.visualState)
-                }
-                Text(summary)
-                    .font(theme.typography.body)
-                    .foregroundStyle(theme.colors.textSecondary)
-                    .fixedSize(horizontal: false, vertical: true)
-            }
-        }
-        .accessibilityIdentifier("insights.posture-card")
-    }
-}
-
-private struct InsightsChangeCard: View {
-    @Environment(\.ambitionTheme) private var theme
-
-    let items: [InsightsChangeSummary]
-
-    var body: some View {
-        AppCard {
-            VStack(alignment: .leading, spacing: theme.spacing.md) {
-                SectionHeader(
-                    title: "What is changing",
-                    subtitle: "Insights stays useful when it can explain how current signals are changing the plan, not just count them."
+        InsightsReflectionRouteScreen(accessibilityIdentifier: "insights.monthly-review.screen") { dashboard, actions in
+            AnyView(VStack(alignment: .leading, spacing: actions.theme.spacing.lg) {
+                InsightsRouteHeroCard(
+                    eyebrow: "Review",
+                    title: "Monthly reflection",
+                    subtitle: "Carry the strongest pattern truth into a calmer review layer rather than a report.",
+                    dominantTruth: dashboard.hero.editorialSummary,
+                    trustWhisper: dashboard.hero.trustWhisper,
+                    state: dashboard.hero.visualState
                 )
 
-                VStack(alignment: .leading, spacing: theme.spacing.sm) {
-                    ForEach(items) { item in
-                        InsightsInfoRow(
-                            title: item.title,
-                            detail: item.detail,
-                            valueLabel: item.valueLabel,
-                            icon: item.icon,
-                            state: item.visualState
+                InsightsComparePeriodCard(compare: dashboard.comparePeriod)
+
+                InsightsReviewConstellationCard(
+                    state: dashboard.reviewConstellation,
+                    onOpenGoal: actions.openGoal,
+                    onOpenPlanRoute: actions.openPlanRoute
+                )
+
+                AppCard {
+                    VStack(alignment: .leading, spacing: actions.theme.spacing.md) {
+                        SectionHeader(
+                            title: "Review shaping",
+                            subtitle: "Reflection matters when it changes what the next review protects, lightens, or questions."
                         )
-                    }
-                }
-            }
-        }
-        .accessibilityIdentifier("insights.change-card")
-    }
-}
+                        Text("Use Weekly Review when this pattern truth should reshape the week. Use Goal Detail when the learning belongs to one active path.")
+                            .font(actions.theme.typography.body)
+                            .foregroundStyle(actions.theme.colors.textSecondary)
 
-private struct InsightsGoalStatusCard: View {
-    @Environment(\.ambitionTheme) private var theme
+                        VStack(alignment: .leading, spacing: actions.theme.spacing.sm) {
+                            Button {
+                                actions.openPlanRoute(.weeklyReview)
+                            } label: {
+                                InsightsRouteActionRow(
+                                    title: "Open weekly review",
+                                    subtitle: "Carry this reflection back into the week without losing context.",
+                                    state: .selected
+                                )
+                            }
+                            .buttonStyle(.plain)
+                            .accessibilityIdentifier("insights.monthly-review.open-weekly-review")
 
-    let items: [InsightsGoalStatusItem]
-    let onOpen: (GoalRouteTarget) -> Void
-
-    var body: some View {
-        AppCard {
-            VStack(alignment: .leading, spacing: theme.spacing.md) {
-                SectionHeader(
-                    title: "Goal read",
-                    subtitle: items.isEmpty
-                        ? "No active goals are producing a useful goal-level read yet."
-                        : "These goal-level reads keep Insights connected to the real portfolio instead of floating above it."
-                )
-
-                if items.isEmpty {
-                    Text("Once active goals produce evidence, corrections, or planning strain, their current posture will stay visible here.")
-                        .font(theme.typography.body)
-                        .foregroundStyle(theme.colors.textSecondary)
-                } else {
-                    VStack(alignment: .leading, spacing: theme.spacing.sm) {
-                        ForEach(items) { item in
-                            if let target = item.target {
+                            if let goalTarget = dashboard.reviewConstellation.items.first(where: { $0.goalTarget != nil })?.goalTarget {
                                 Button {
-                                    onOpen(target)
+                                    actions.openGoal(goalTarget)
                                 } label: {
-                                    InsightsGoalStatusRow(item: item)
+                                    InsightsRouteActionRow(
+                                        title: "Open the clearest active goal",
+                                        subtitle: "Inspect the path where this reflection is most actionable.",
+                                        state: .default
+                                    )
                                 }
                                 .buttonStyle(.plain)
-                                .accessibilityIdentifier("insights.open-goal.\(target.goalID ?? target.draftID ?? item.id)")
-                            } else {
-                                InsightsGoalStatusRow(item: item)
+                                .accessibilityIdentifier("insights.monthly-review.open-goal")
                             }
                         }
                     }
                 }
-            }
+            })
         }
-        .accessibilityIdentifier("insights.goal-status-card")
     }
 }
 
-private struct InsightsGoalStatusRow: View {
-    @Environment(\.ambitionTheme) private var theme
+struct InsightsHistoryScreen: View {
+    var body: some View {
+        InsightsReflectionRouteScreen(accessibilityIdentifier: "insights.history.screen") { dashboard, actions in
+            AnyView(VStack(alignment: .leading, spacing: actions.theme.spacing.lg) {
+                InsightsRouteHeroCard(
+                    eyebrow: "History",
+                    title: "Deep history",
+                    subtitle: "The summary layer stays fast. This route makes the recent evidence and corrections feel alive and trustworthy.",
+                    dominantTruth: dashboard.historyLayer.summaryTitle,
+                    trustWhisper: dashboard.historyLayer.summaryDetail,
+                    state: dashboard.hero.visualState
+                )
 
-    let item: InsightsGoalStatusItem
+                InsightsTimelineCard(
+                    title: dashboard.historyLayer.title,
+                    subtitle: dashboard.historyLayer.subtitle,
+                    items: dashboard.historyLayer.timelineItems,
+                    onOpenItem: actions.openTimelineItem
+                )
+
+                AppCard {
+                    VStack(alignment: .leading, spacing: actions.theme.spacing.md) {
+                        SectionHeader(
+                            title: "Return with continuity",
+                            subtitle: "History should lead somewhere useful, not strand you in recall."
+                        )
+                        Button {
+                            actions.openPlanRoute(.weeklyReview)
+                        } label: {
+                            InsightsRouteActionRow(
+                                title: "Open weekly review",
+                                subtitle: "Use the recent timeline to decide what to protect, lighten, or leave behind.",
+                                state: .selected
+                            )
+                        }
+                        .buttonStyle(.plain)
+                        .accessibilityIdentifier("insights.history.open-weekly-review")
+                    }
+                }
+            })
+        }
+    }
+}
+
+private struct InsightsReflectionRouteScreen: View {
+    @Environment(\.appContainer) private var appContainer
+    @Environment(\.ambitionTheme) private var theme
+    @Environment(\.accessibilityReduceMotion) private var reduceMotion
+    @State private var viewModel = InsightsViewModel()
+    let accessibilityIdentifier: String
+    let content: (InsightsDashboard, RouteActions) -> AnyView
+
+    init(
+        accessibilityIdentifier: String,
+        content: @escaping (InsightsDashboard, RouteActions) -> AnyView
+    ) {
+        self.accessibilityIdentifier = accessibilityIdentifier
+        self.content = content
+    }
 
     var body: some View {
-        HStack(alignment: .top, spacing: theme.spacing.sm) {
-            VStack(alignment: .leading, spacing: theme.spacing.xxxs) {
-                HStack(spacing: theme.spacing.xs) {
-                    TagPill(item.statusLabel, state: item.visualState)
+        ScrollView {
+            LazyVStack(alignment: .leading, spacing: theme.spacing.lg) {
+                switch viewModel.state {
+                case .loading:
+                    AsyncStateCard(.loading(lines: 8))
+                case let .failed(message):
+                    AsyncStateCard(
+                        .error(title: "Reflection is unavailable", message: message, icon: "chart.line.uptrend.xyaxis", actionTitle: "Retry"),
+                        actionAccessibilityIdentifier: "insights.route.retry-button"
+                    ) {
+                        Task { await viewModel.refresh(using: container.insightsService) }
+                    }
+                case let .loaded(dashboard):
+                    content(dashboard, routeActions)
                 }
-                Text(item.title)
+            }
+            .padding(.horizontal, theme.spacing.lg)
+            .padding(.vertical, theme.spacing.md)
+        }
+        .scrollIndicators(.hidden)
+        .refreshable {
+            await viewModel.refresh(using: container.insightsService)
+        }
+        .accessibilityIdentifier(accessibilityIdentifier)
+        .animation(theme.motion.animation(reduceMotion: reduceMotion, emphasis: true), value: viewModel.stateKey)
+        .task {
+            await viewModel.load(using: container.insightsService)
+        }
+    }
+
+    private var routeActions: RouteActions {
+        RouteActions(
+            theme: theme,
+            openGoal: { container.navigation.openGoalDetail($0) },
+            openPlanRoute: { container.navigation.openPlanRoute($0) },
+            openTimelineItem: { item in
+                if let goalTarget = item.goalTarget {
+                    container.navigation.openGoalDetail(goalTarget)
+                } else if let planRoute = item.planRoute {
+                    container.navigation.openPlanRoute(planRoute)
+                }
+            }
+        )
+    }
+
+    private var container: AppContainer {
+        guard let appContainer else {
+            preconditionFailure("App container must be injected.")
+        }
+        return appContainer
+    }
+
+    struct RouteActions {
+        let theme: AmbitionTheme
+        let openGoal: (GoalRouteTarget) -> Void
+        let openPlanRoute: (PlanRouteTarget) -> Void
+        let openTimelineItem: (InsightsTimelineItem) -> Void
+    }
+}
+
+private struct InsightsHeroCard: View {
+    @Environment(\.ambitionTheme) private var theme
+
+    let hero: InsightsHeroState
+    let onPrimaryAction: (InsightsHeroAction) -> Void
+
+    var body: some View {
+        HeroCard(state: hero.visualState) {
+            VStack(alignment: .leading, spacing: theme.spacing.md) {
+                VStack(alignment: .leading, spacing: theme.spacing.xxs) {
+                    Text(hero.eyebrow)
+                        .font(theme.typography.micro)
+                        .foregroundStyle(theme.colors.accentWarm)
+                    Text(hero.title)
+                        .font(theme.typography.hero)
+                        .foregroundStyle(theme.colors.textPrimary)
+                    Text(hero.subtitle)
+                        .font(theme.typography.body)
+                        .foregroundStyle(theme.colors.textSecondary)
+                }
+
+                TagPill(hero.postureLabel, state: hero.visualState)
+
+                Text(hero.dominantTruth)
                     .font(theme.typography.section)
                     .foregroundStyle(theme.colors.textPrimary)
-                Text(item.summary)
+
+                Text(hero.editorialSummary)
                     .font(theme.typography.body)
                     .foregroundStyle(theme.colors.textSecondary)
                     .fixedSize(horizontal: false, vertical: true)
-            }
 
-            Spacer(minLength: theme.spacing.sm)
-            Image(systemName: "chevron.right")
-                .font(.system(size: theme.icon.smallSize, weight: theme.icon.symbolWeight))
-                .foregroundStyle(theme.colors.textTertiary)
+                ScrollView(.horizontal, showsIndicators: false) {
+                    HStack(spacing: theme.spacing.xs) {
+                        ForEach(hero.contextPills) { pill in
+                            TagPill(pill.title, icon: pill.icon, state: pill.visualState)
+                        }
+                    }
+                }
+
+                HStack(alignment: .top, spacing: theme.spacing.sm) {
+                    Image(systemName: "sparkle.magnifyingglass")
+                        .font(.system(size: theme.icon.smallSize, weight: theme.icon.symbolWeight))
+                        .foregroundStyle(theme.colors.textTertiary)
+                    Text(hero.trustWhisper)
+                        .font(theme.typography.caption)
+                        .foregroundStyle(theme.colors.textTertiary)
+                        .fixedSize(horizontal: false, vertical: true)
+                }
+
+                Button {
+                    onPrimaryAction(hero.primaryAction)
+                } label: {
+                    HStack(alignment: .center, spacing: theme.spacing.sm) {
+                        Image(systemName: hero.primaryAction.systemImage)
+                            .font(.system(size: theme.icon.mediumSize, weight: theme.icon.symbolWeight))
+                        VStack(alignment: .leading, spacing: theme.spacing.xxxs) {
+                            Text(hero.primaryAction.title)
+                                .font(theme.typography.bodyEmphasized)
+                            Text(hero.primaryAction.subtitle)
+                                .font(theme.typography.caption)
+                                .foregroundStyle(theme.colors.textSecondary)
+                        }
+                        Spacer()
+                        Image(systemName: "arrow.right")
+                            .font(.system(size: theme.icon.smallSize, weight: theme.icon.symbolWeight))
+                    }
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                }
+                .buttonStyle(AmbitionButtonStyle(tier: .hero, state: hero.primaryAction.visualState))
+                .accessibilityIdentifier("insights.hero.primary-action")
+            }
         }
-        .padding(theme.spacing.md)
-        .background(RoundedRectangle(cornerRadius: theme.radius.lg, style: .continuous).fill(theme.colors.surfaceOverlay))
-        .overlay(RoundedRectangle(cornerRadius: theme.radius.lg, style: .continuous).stroke(theme.colors.strokeSubtle, lineWidth: 1))
+        .accessibilityIdentifier("insights.hero-card")
         .ambitionPanelAccessibility()
     }
 }
 
-private struct InsightsInfoRow: View {
+private struct InsightsContinuityRibbonCard: View {
+    @Environment(\.ambitionTheme) private var theme
+
+    let ribbon: InsightsContinuityRibbon
+    let onOpen: (InsightsContinuityRibbon) -> Void
+
+    var body: some View {
+        Button {
+            onOpen(ribbon)
+        } label: {
+            HStack(alignment: .top, spacing: theme.spacing.sm) {
+                Image(systemName: ribbon.icon)
+                    .font(.system(size: theme.icon.smallSize, weight: theme.icon.symbolWeight))
+                    .foregroundStyle(theme.stateStyle(for: ribbon.visualState).accent)
+                    .padding(.top, 2)
+
+                VStack(alignment: .leading, spacing: theme.spacing.xxxs) {
+                    Text(ribbon.title)
+                        .font(theme.typography.bodyEmphasized)
+                        .foregroundStyle(theme.colors.textPrimary)
+                    Text(ribbon.detail)
+                        .font(theme.typography.caption)
+                        .foregroundStyle(theme.colors.textSecondary)
+                        .fixedSize(horizontal: false, vertical: true)
+                }
+
+                Spacer()
+                Image(systemName: "arrow.right")
+                    .font(.system(size: theme.icon.smallSize, weight: theme.icon.symbolWeight))
+                    .foregroundStyle(theme.colors.textTertiary)
+            }
+            .padding(theme.spacing.md)
+            .background(RoundedRectangle(cornerRadius: theme.radius.lg, style: .continuous).fill(theme.colors.surfaceOverlay))
+            .overlay(RoundedRectangle(cornerRadius: theme.radius.lg, style: .continuous).stroke(theme.colors.strokeSubtle, lineWidth: 1))
+        }
+        .buttonStyle(.plain)
+        .accessibilityIdentifier("insights.continuity-ribbon")
+    }
+}
+
+private struct InsightsComparePeriodCard: View {
+    @Environment(\.ambitionTheme) private var theme
+
+    let compare: InsightsComparePeriodState
+
+    var body: some View {
+        AppCard {
+            VStack(alignment: .leading, spacing: theme.spacing.md) {
+                SectionHeader(title: compare.title, subtitle: compare.subtitle)
+
+                HStack(alignment: .top, spacing: theme.spacing.sm) {
+                    ForEach(compare.metrics) { metric in
+                        VStack(alignment: .leading, spacing: theme.spacing.xs) {
+                            Text(metric.title)
+                                .font(theme.typography.caption)
+                                .foregroundStyle(theme.colors.textSecondary)
+                            Text(metric.currentLabel)
+                                .font(theme.typography.titleCompact)
+                                .foregroundStyle(theme.colors.textPrimary)
+                            Text("Last week \(metric.previousLabel)")
+                                .font(theme.typography.caption)
+                                .foregroundStyle(theme.colors.textTertiary)
+                            TagPill(metric.deltaLabel, state: metric.visualState)
+                        }
+                        .frame(maxWidth: .infinity, alignment: .leading)
+                        .padding(theme.spacing.md)
+                        .background(RoundedRectangle(cornerRadius: theme.radius.lg, style: .continuous).fill(theme.colors.surfaceOverlay))
+                        .overlay(RoundedRectangle(cornerRadius: theme.radius.lg, style: .continuous).stroke(theme.colors.strokeSubtle, lineWidth: 1))
+                    }
+                }
+
+                Text(compare.summary)
+                    .font(theme.typography.body)
+                    .foregroundStyle(theme.colors.textSecondary)
+                    .fixedSize(horizontal: false, vertical: true)
+            }
+        }
+        .accessibilityIdentifier("insights.compare-period")
+        .ambitionPanelAccessibility()
+    }
+}
+
+private struct InsightsPatternTruthCard: View {
+    @Environment(\.ambitionTheme) private var theme
+
+    let items: [InsightsPatternCluster]
+    let onOpenGoal: (GoalRouteTarget) -> Void
+    let onOpenPlanRoute: (PlanRouteTarget) -> Void
+
+    var body: some View {
+        AppCard {
+            VStack(alignment: .leading, spacing: theme.spacing.md) {
+                SectionHeader(
+                    title: "Pattern truth",
+                    subtitle: "Charts support reflection here. They stay compact so the narrative remains the primary layer."
+                )
+
+                VStack(alignment: .leading, spacing: theme.spacing.sm) {
+                    ForEach(items) { item in
+                        Button {
+                            if let goalTarget = item.goalTarget {
+                                onOpenGoal(goalTarget)
+                            } else if let planRoute = item.planRoute {
+                                onOpenPlanRoute(planRoute)
+                            }
+                        } label: {
+                            VStack(alignment: .leading, spacing: theme.spacing.sm) {
+                                HStack(alignment: .top, spacing: theme.spacing.sm) {
+                                    VStack(alignment: .leading, spacing: theme.spacing.xxxs) {
+                                        HStack(spacing: theme.spacing.xs) {
+                                            TagPill(item.emphasisLabel, state: item.visualState)
+                                            Text(item.deltaLabel)
+                                                .font(theme.typography.caption)
+                                                .foregroundStyle(theme.colors.textTertiary)
+                                        }
+                                        Text(item.title)
+                                            .font(theme.typography.section)
+                                            .foregroundStyle(theme.colors.textPrimary)
+                                        Text(item.summary)
+                                            .font(theme.typography.body)
+                                            .foregroundStyle(theme.colors.textSecondary)
+                                            .fixedSize(horizontal: false, vertical: true)
+                                    }
+
+                                    Spacer(minLength: theme.spacing.sm)
+                                    if item.goalTarget != nil || item.planRoute != nil {
+                                        Image(systemName: "arrow.right")
+                                            .font(.system(size: theme.icon.smallSize, weight: theme.icon.symbolWeight))
+                                            .foregroundStyle(theme.colors.textTertiary)
+                                    }
+                                }
+
+                                InsightsMicroChart(points: item.points, state: item.visualState)
+                            }
+                            .padding(theme.spacing.md)
+                            .background(RoundedRectangle(cornerRadius: theme.radius.lg, style: .continuous).fill(theme.colors.surfaceOverlay))
+                            .overlay(RoundedRectangle(cornerRadius: theme.radius.lg, style: .continuous).stroke(theme.colors.strokeSubtle, lineWidth: 1))
+                        }
+                        .buttonStyle(.plain)
+                        .disabled(item.goalTarget == nil && item.planRoute == nil)
+                    }
+                }
+            }
+        }
+        .accessibilityIdentifier("insights.pattern-truth")
+        .ambitionPanelAccessibility()
+    }
+}
+
+private struct InsightsReviewConstellationCard: View {
+    @Environment(\.ambitionTheme) private var theme
+
+    let state: InsightsReviewConstellationState
+    let onOpenGoal: (GoalRouteTarget) -> Void
+    let onOpenPlanRoute: (PlanRouteTarget) -> Void
+
+    var body: some View {
+        AppCard {
+            VStack(alignment: .leading, spacing: theme.spacing.md) {
+                SectionHeader(title: state.title, subtitle: state.subtitle)
+
+                VStack(alignment: .leading, spacing: theme.spacing.sm) {
+                    ForEach(Array(state.items.enumerated()), id: \.element.id) { index, item in
+                        Button {
+                            if let goalTarget = item.goalTarget {
+                                onOpenGoal(goalTarget)
+                            } else if let planRoute = item.planRoute {
+                                onOpenPlanRoute(planRoute)
+                            }
+                        } label: {
+                            HStack(alignment: .top, spacing: theme.spacing.sm) {
+                                VStack(alignment: .leading, spacing: theme.spacing.xxxs) {
+                                    TagPill(item.signalLabel, state: item.visualState)
+                                    Text(item.title)
+                                        .font(theme.typography.bodyEmphasized)
+                                        .foregroundStyle(theme.colors.textPrimary)
+                                    Text(item.summary)
+                                        .font(theme.typography.body)
+                                        .foregroundStyle(theme.colors.textSecondary)
+                                        .fixedSize(horizontal: false, vertical: true)
+                                }
+                                Spacer(minLength: theme.spacing.sm)
+                                if item.goalTarget != nil || item.planRoute != nil {
+                                    Image(systemName: "arrow.right")
+                                        .font(.system(size: theme.icon.smallSize, weight: theme.icon.symbolWeight))
+                                        .foregroundStyle(theme.colors.textTertiary)
+                                }
+                            }
+                            .padding(theme.spacing.md)
+                            .background(RoundedRectangle(cornerRadius: theme.radius.lg, style: .continuous).fill(theme.colors.surfaceOverlay))
+                            .overlay(RoundedRectangle(cornerRadius: theme.radius.lg, style: .continuous).stroke(theme.colors.strokeSubtle, lineWidth: 1))
+                        }
+                        .buttonStyle(.plain)
+                        .disabled(item.goalTarget == nil && item.planRoute == nil)
+                        .accessibilityIdentifier(reviewConstellationIdentifier(item: item, index: index))
+                    }
+                }
+            }
+        }
+        .accessibilityIdentifier("insights.review-constellation")
+        .ambitionPanelAccessibility()
+    }
+
+    private func reviewConstellationIdentifier(item: InsightsReviewConstellationItem, index: Int) -> String {
+        if item.planRoute != nil && item.goalTarget == nil {
+            return "insights.review-constellation.constellation-plan"
+        }
+        if item.goalTarget != nil && index == state.items.firstIndex(where: { $0.goalTarget != nil }) {
+            return "insights.review-constellation.primary-goal"
+        }
+        return "insights.review-constellation.\(item.id)"
+    }
+}
+
+private struct InsightsHistoryLayerCard: View {
+    @Environment(\.ambitionTheme) private var theme
+
+    let history: InsightsHistoryLayerState
+    let onOpenItem: (InsightsTimelineItem) -> Void
+    let onOpenHistory: () -> Void
+    let onOpenReview: () -> Void
+
+    var body: some View {
+        AppCard {
+            VStack(alignment: .leading, spacing: theme.spacing.md) {
+                SectionHeader(title: history.title, subtitle: history.subtitle)
+
+                VStack(alignment: .leading, spacing: theme.spacing.xxs) {
+                    Text(history.summaryTitle)
+                        .font(theme.typography.section)
+                        .foregroundStyle(theme.colors.textPrimary)
+                    Text(history.summaryDetail)
+                        .font(theme.typography.body)
+                        .foregroundStyle(theme.colors.textSecondary)
+                        .fixedSize(horizontal: false, vertical: true)
+                }
+
+                InsightsTimelineCard(
+                    title: "Recent timeline",
+                    subtitle: "Summary first, deeper history on demand.",
+                    items: history.previewItems,
+                    onOpenItem: onOpenItem
+                )
+
+                HStack(spacing: theme.spacing.sm) {
+                    Button("Open deeper history", action: onOpenHistory)
+                        .buttonStyle(AmbitionButtonStyle(tier: .secondary, state: .selected))
+                        .accessibilityIdentifier("insights.open-history")
+
+                    Button("Open monthly review", action: onOpenReview)
+                        .buttonStyle(AmbitionButtonStyle(tier: .tertiary, state: .default))
+                        .accessibilityIdentifier("insights.open-monthly-review")
+                }
+            }
+        }
+        .accessibilityIdentifier("insights.history-layer")
+        .ambitionPanelAccessibility()
+    }
+}
+
+private struct InsightsTimelineCard: View {
     @Environment(\.ambitionTheme) private var theme
 
     let title: String
-    let detail: String
-    let valueLabel: String
-    let icon: String
+    let subtitle: String
+    let items: [InsightsTimelineItem]
+    let onOpenItem: (InsightsTimelineItem) -> Void
+
+    var body: some View {
+        VStack(alignment: .leading, spacing: theme.spacing.md) {
+            SectionHeader(title: title, subtitle: subtitle)
+
+            VStack(alignment: .leading, spacing: theme.spacing.sm) {
+                ForEach(items) { item in
+                    Button {
+                        onOpenItem(item)
+                    } label: {
+                        HStack(alignment: .top, spacing: theme.spacing.sm) {
+                            Image(systemName: item.icon)
+                                .font(.system(size: theme.icon.smallSize, weight: theme.icon.symbolWeight))
+                                .foregroundStyle(theme.stateStyle(for: item.visualState).accent)
+                                .padding(.top, 2)
+
+                            VStack(alignment: .leading, spacing: theme.spacing.xxxs) {
+                                HStack(spacing: theme.spacing.xs) {
+                                    Text(item.title)
+                                        .font(theme.typography.bodyEmphasized)
+                                        .foregroundStyle(theme.colors.textPrimary)
+                                    if let badge = item.badge {
+                                        TagPill(badge, state: item.visualState)
+                                    }
+                                }
+                                Text(item.subtitle)
+                                    .font(theme.typography.body)
+                                    .foregroundStyle(theme.colors.textSecondary)
+                                Text(item.timestamp)
+                                    .font(theme.typography.caption)
+                                    .foregroundStyle(theme.colors.textTertiary)
+                            }
+
+                            Spacer(minLength: theme.spacing.sm)
+                            if item.goalTarget != nil || item.planRoute != nil {
+                                Image(systemName: "arrow.right")
+                                    .font(.system(size: theme.icon.smallSize, weight: theme.icon.symbolWeight))
+                                    .foregroundStyle(theme.colors.textTertiary)
+                            }
+                        }
+                        .padding(theme.spacing.md)
+                        .background(RoundedRectangle(cornerRadius: theme.radius.lg, style: .continuous).fill(theme.colors.surfaceOverlay))
+                        .overlay(RoundedRectangle(cornerRadius: theme.radius.lg, style: .continuous).stroke(theme.colors.strokeSubtle, lineWidth: 1))
+                    }
+                    .buttonStyle(.plain)
+                    .disabled(item.goalTarget == nil && item.planRoute == nil)
+                }
+            }
+        }
+    }
+}
+
+private struct InsightsRouteHeroCard: View {
+    @Environment(\.ambitionTheme) private var theme
+
+    let eyebrow: String
+    let title: String
+    let subtitle: String
+    let dominantTruth: String
+    let trustWhisper: String
+    let state: AmbitionVisualState
+
+    var body: some View {
+        HeroCard(state: state) {
+            VStack(alignment: .leading, spacing: theme.spacing.md) {
+                VStack(alignment: .leading, spacing: theme.spacing.xxs) {
+                    Text(eyebrow)
+                        .font(theme.typography.micro)
+                        .foregroundStyle(theme.colors.accentWarm)
+                    Text(title)
+                        .font(theme.typography.hero)
+                        .foregroundStyle(theme.colors.textPrimary)
+                    Text(subtitle)
+                        .font(theme.typography.body)
+                        .foregroundStyle(theme.colors.textSecondary)
+                }
+
+                Text(dominantTruth)
+                    .font(theme.typography.section)
+                    .foregroundStyle(theme.colors.textPrimary)
+                Text(trustWhisper)
+                    .font(theme.typography.caption)
+                    .foregroundStyle(theme.colors.textTertiary)
+            }
+        }
+        .ambitionPanelAccessibility()
+    }
+}
+
+private struct InsightsRouteActionRow: View {
+    @Environment(\.ambitionTheme) private var theme
+
+    let title: String
+    let subtitle: String
     let state: AmbitionVisualState
 
     var body: some View {
         HStack(alignment: .top, spacing: theme.spacing.sm) {
-            Image(systemName: icon)
-                .font(.system(size: theme.icon.mediumSize, weight: theme.icon.symbolWeight))
-                .foregroundStyle(theme.stateStyle(for: state).accent)
-                .frame(width: 28)
-
             VStack(alignment: .leading, spacing: theme.spacing.xxxs) {
                 Text(title)
-                    .font(theme.typography.section)
+                    .font(theme.typography.bodyEmphasized)
                     .foregroundStyle(theme.colors.textPrimary)
-                Text(detail)
+                Text(subtitle)
                     .font(theme.typography.body)
                     .foregroundStyle(theme.colors.textSecondary)
                     .fixedSize(horizontal: false, vertical: true)
             }
-
             Spacer(minLength: theme.spacing.sm)
-            TagPill(valueLabel, state: state)
+            Image(systemName: "arrow.right")
+                .font(.system(size: theme.icon.smallSize, weight: theme.icon.symbolWeight))
+                .foregroundStyle(theme.stateStyle(for: state).accent)
         }
         .padding(theme.spacing.md)
         .background(RoundedRectangle(cornerRadius: theme.radius.lg, style: .continuous).fill(theme.colors.surfaceOverlay))
         .overlay(RoundedRectangle(cornerRadius: theme.radius.lg, style: .continuous).stroke(theme.colors.strokeSubtle, lineWidth: 1))
-        .ambitionPanelAccessibility()
+    }
+}
+
+private struct InsightsMicroChart: View {
+    @Environment(\.ambitionTheme) private var theme
+
+    let points: [TrendPoint]
+    let state: AmbitionVisualState
+
+    var body: some View {
+        GeometryReader { geometry in
+            let height = max(geometry.size.height, 1)
+            let width = max(geometry.size.width, 1)
+            let step = points.count > 1 ? width / CGFloat(points.count - 1) : width
+            let accent = theme.stateStyle(for: state).accent
+
+            ZStack(alignment: .bottomLeading) {
+                RoundedRectangle(cornerRadius: theme.radius.md, style: .continuous)
+                    .fill(theme.colors.surfaceOverlay)
+
+                Path { path in
+                    for (index, point) in points.enumerated() {
+                        let x = CGFloat(index) * step
+                        let y = height - (CGFloat(point.value) * height)
+                        if index == 0 {
+                            path.move(to: CGPoint(x: x, y: y))
+                        } else {
+                            path.addLine(to: CGPoint(x: x, y: y))
+                        }
+                    }
+                }
+                .stroke(accent, style: StrokeStyle(lineWidth: 2.5, lineCap: .round, lineJoin: .round))
+
+                HStack(alignment: .bottom, spacing: theme.spacing.xs) {
+                    ForEach(points) { point in
+                        VStack(spacing: theme.spacing.xxxs) {
+                            Capsule()
+                                .fill(accent.opacity(0.25))
+                                .frame(height: max(8, CGFloat(point.value) * 36))
+                            Text(point.label)
+                                .font(theme.typography.micro)
+                                .foregroundStyle(theme.colors.textTertiary)
+                        }
+                        .frame(maxWidth: .infinity)
+                    }
+                }
+                .padding(.horizontal, theme.spacing.xs)
+                .padding(.vertical, theme.spacing.xs)
+            }
+        }
+        .frame(height: 74)
+        .padding(theme.spacing.sm)
+        .background(RoundedRectangle(cornerRadius: theme.radius.md, style: .continuous).fill(theme.colors.surfaceOverlay))
+        .overlay(RoundedRectangle(cornerRadius: theme.radius.md, style: .continuous).stroke(theme.colors.strokeSubtle, lineWidth: 1))
+        .accessibilityElement(children: .ignore)
+        .accessibilityLabel("Pattern chart")
     }
 }
 
@@ -351,6 +841,15 @@ private struct InsightsInfoRow: View {
 #Preview("Insights Dark") {
     NavigationStack {
         InsightsScreen(viewModel: InsightsViewModel(state: .loaded(PreviewFixtures.default.insightsDashboard)))
+    }
+    .appContainer(PreviewAppContainerFactory.preview)
+    .ambitionTheme(.dark)
+    .preferredColorScheme(.dark)
+}
+
+#Preview("Monthly Review Route") {
+    NavigationStack {
+        InsightsMonthlyReviewScreen()
     }
     .appContainer(PreviewAppContainerFactory.preview)
     .ambitionTheme(.dark)
