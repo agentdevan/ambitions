@@ -19,6 +19,7 @@ extension TodayServicing {
 protocol GoalsServicing: Sendable {
     func loadOverview() async throws -> GoalsOverview
     func loadDetail(target: GoalRouteTarget) async throws -> GoalDetailPresentation
+    func previewCreateGoal(_ request: CreateGoalPreviewRequest, now: Date) async throws -> CreateGoalPreviewState
     func createGoal(_ request: CreateGoalRequest, now: Date) async throws -> CreateGoalResponse
     func performAction(_ request: GoalDetailActionRequest, now: Date) async throws -> GoalDetailActionResponse
     func submitClarificationAnswer(_ request: GoalClarificationAnswerRequest, now: Date) async throws -> GoalDetailActionResponse

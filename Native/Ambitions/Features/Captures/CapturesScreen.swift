@@ -127,18 +127,15 @@ struct CapturesScreen: View {
             .disabled(capture.status.canTransition(to: .seed) == false)
 
             Button("New goal") {
-                Task {
-                    if let target = await viewModel.turnIntoGoal(
-                        captureID: capture.id,
-                        captureService: container.captureService,
-                        goalsService: container.goalsService
-                    ) {
-                        openGoal(target)
-                    }
-                }
+                container.commandRouter.presentCreateGoal(
+                    source: .capturesScreen,
+                    seedText: capture.rawText,
+                    captureID: capture.id
+                )
             }
             .buttonStyle(.borderedProminent)
-            .disabled(capture.status.canTransition(to: .goalBound) == false)
+            .disabled(canPromoteCaptureToGoal(capture) == false)
+            .accessibilityIdentifier("captures.new-goal.\(capture.id)")
 
             Menu("Attach to goal") {
                 if activeGoalOptions.isEmpty {
@@ -180,6 +177,15 @@ struct CapturesScreen: View {
     private func openGoal(_ target: GoalRouteTarget) {
         guard let goalID = target.goalID else { return }
         container.navigation.openGoalDetail(goalID: goalID, draftID: target.draftID)
+    }
+
+    private func canPromoteCaptureToGoal(_ capture: Capture) -> Bool {
+        switch capture.status {
+        case .seed, .actionable:
+            return true
+        case .goalBound, .scheduled, .delegated, .archived:
+            return false
+        }
     }
 
     private var container: AppContainer {

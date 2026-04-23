@@ -27,7 +27,7 @@ protocol ShellCommandRouting: AnyObject {
         goalID: String?,
         captureID: String?
     )
-    func presentCreateGoal(source: ShellCommandEntrySource)
+    func presentCreateGoal(source: ShellCommandEntrySource, seedText: String, captureID: String?)
     func route(to destination: ShellCommandDestination, source: ShellCommandEntrySource)
     func execute(
         intent: ShellCommandIntent,
@@ -37,6 +37,12 @@ protocol ShellCommandRouting: AnyObject {
         source: ShellCommandEntrySource,
         now: Date
     ) async -> ShellCommandExecutionResult
+}
+
+extension ShellCommandRouting {
+    func presentCreateGoal(source: ShellCommandEntrySource) {
+        presentCreateGoal(source: source, seedText: "", captureID: nil)
+    }
 }
 
 @MainActor
@@ -82,8 +88,12 @@ final class DefaultShellCommandRouter: ShellCommandRouting {
         )
     }
 
-    func presentCreateGoal(source: ShellCommandEntrySource) {
-        navigation.presentCreateGoal(source: source)
+    func presentCreateGoal(
+        source: ShellCommandEntrySource,
+        seedText: String = "",
+        captureID: String? = nil
+    ) {
+        navigation.presentCreateGoal(source: source, seedText: seedText, captureID: captureID)
     }
 
     func route(to destination: ShellCommandDestination, source: ShellCommandEntrySource) {

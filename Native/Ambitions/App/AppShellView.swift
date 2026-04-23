@@ -163,7 +163,7 @@ private struct AppShellHeaderRail: View {
 struct AppShellOverlayView: View {
     let overlay: ShellOverlayState
     let onDismiss: () -> Void
-    let onGoalCreated: (CreateGoalResponse) -> Void
+    let onGoalCreated: (ShellOverlayState, CreateGoalResponse) -> Void
 
     var body: some View {
         switch overlay.kind {
@@ -173,8 +173,14 @@ struct AppShellOverlayView: View {
             MemoryLensOverlayView(overlay: overlay, onDismiss: onDismiss)
         case .createGoal:
             NavigationStack {
-                CreateGoalScreen { response in
-                    onGoalCreated(response)
+                CreateGoalScreen(
+                    viewModel: CreateGoalViewModel(
+                        title: overlay.query,
+                        entrySource: overlay.entrySource,
+                        captureID: overlay.captureID
+                    )
+                ) { response in
+                    onGoalCreated(overlay, response)
                 }
             }
         }
@@ -335,7 +341,7 @@ private struct QuietCommandSheetView: View {
             selectedIntent = .quickCapture
             isCaptureFieldFocused = true
         case .newGoal:
-            container.commandRouter.presentCreateGoal(source: overlay.entrySource)
+            container.commandRouter.presentCreateGoal(source: overlay.entrySource, seedText: "", captureID: nil)
         case .openGoal:
             container.commandRouter.presentMemoryLens(
                 intent: .openGoal,

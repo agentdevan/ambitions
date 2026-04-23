@@ -52,4 +52,20 @@ final class ShellCommandRouterTests: XCTestCase {
         XCTAssertEqual(navigation.selectedTab, .goals)
         XCTAssertEqual(navigation.goalsPath.first?.goalID, "goal-123")
     }
+
+    func testPresentCreateGoalCarriesSeedTextAndCaptureContext() {
+        let navigation = AppNavigationModel(selectedTab: .plan)
+        let router = DefaultShellCommandRouter(navigation: navigation, captureService: StubCaptureService(captures: []))
+
+        router.presentCreateGoal(
+            source: .capturesScreen,
+            seedText: "Turn this capture into a believable goal",
+            captureID: "capture-123"
+        )
+
+        XCTAssertEqual(navigation.activeOverlay?.kind, .createGoal)
+        XCTAssertEqual(navigation.activeOverlay?.entrySource, .capturesScreen)
+        XCTAssertEqual(navigation.activeOverlay?.query, "Turn this capture into a believable goal")
+        XCTAssertEqual(navigation.activeOverlay?.captureID, "capture-123")
+    }
 }

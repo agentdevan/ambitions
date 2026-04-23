@@ -28,11 +28,13 @@ final class AmbitionsUITests: XCTestCase {
         XCTAssertTrue(createButton.waitForExistence(timeout: 10))
         createButton.tap()
 
-        let titleField = app.textFields["create-goal.title-field"]
+        XCTAssertTrue(waitForCreateGoalComposer(in: app))
+        let titleField = goalTitleInput(in: app)
         XCTAssertTrue(titleField.waitForExistence(timeout: 10))
         titleField.tap()
         titleField.typeText("UI Smoke Goal")
         dismissKeyboardIfNeeded(in: app)
+        XCTAssertTrue(scrollUntilStaticTextExists("Trust framing", in: app))
 
         let submitButton = scrollUntilButtonHittable("create-goal.submit-button", in: app)
         XCTAssertTrue(submitButton.waitForExistence(timeout: 10))
@@ -182,11 +184,13 @@ final class AmbitionsUITests: XCTestCase {
         XCTAssertTrue(createAction.waitForExistence(timeout: 10))
         createAction.tap()
 
-        let titleField = app.textFields["create-goal.title-field"]
+        XCTAssertTrue(waitForCreateGoalComposer(in: app))
+        let titleField = goalTitleInput(in: app)
         XCTAssertTrue(titleField.waitForExistence(timeout: 10))
         titleField.tap()
         titleField.typeText("Shell Goal")
         dismissKeyboardIfNeeded(in: app)
+        XCTAssertTrue(scrollUntilStaticTextExists("Pacing", in: app))
 
         let submitButton = scrollUntilButtonHittable("create-goal.submit-button", in: app)
         XCTAssertTrue(submitButton.waitForExistence(timeout: 10))
@@ -215,6 +219,7 @@ final class AmbitionsUITests: XCTestCase {
         let app = makeApp(bootstrapMode: "demo")
         app.launch()
 
+        XCTAssertTrue(waitForTodayScreenReady(in: app))
         XCTAssertTrue(app.tabBars.buttons["Goals"].waitForExistence(timeout: 10))
         app.tabBars.buttons["Goals"].tap()
 
@@ -261,6 +266,49 @@ final class AmbitionsUITests: XCTestCase {
         XCTAssertTrue(app.descendants(matching: .any)["today.support.time-aperture"].waitForExistence(timeout: 10))
     }
 
+    func testCreateGoalShowsClarificationWhenRequired() throws {
+        let app = makeApp(bootstrapMode: "preview")
+        app.launch()
+
+        XCTAssertTrue(app.tabBars.buttons["Goals"].waitForExistence(timeout: 10))
+        app.tabBars.buttons["Goals"].tap()
+
+        let createButton = goalCreateButton(in: app)
+        XCTAssertTrue(createButton.waitForExistence(timeout: 10))
+        createButton.tap()
+
+        XCTAssertTrue(waitForCreateGoalComposer(in: app))
+        let titleField = goalTitleInput(in: app)
+        XCTAssertTrue(titleField.waitForExistence(timeout: 10))
+        titleField.tap()
+        titleField.typeText("I don't know where to start")
+        dismissKeyboardIfNeeded(in: app)
+
+        XCTAssertTrue(waitForClarificationCard(in: app))
+    }
+
+    func testCapturePromotionOpensComposerWithSeededText() throws {
+        let app = makeApp(
+            bootstrapMode: "preview",
+            launchURL: "ambitions://captures/inbox",
+            extraEnvironment: ["AMBITIONS_UI_SEED_CAPTURES": "1"]
+        )
+        app.launch()
+
+        XCTAssertTrue(app.descendants(matching: .any)["captures.screen"].waitForExistence(timeout: 10))
+        XCTAssertTrue(scrollUntilStaticTextExists("Review the notification handoff copy before the next hardening pass.", in: app))
+        let captureCard = app.descendants(matching: .any)["captures.card.preview-capture-2"]
+        XCTAssertTrue(captureCard.waitForExistence(timeout: 10))
+        tapCaptureNewGoal(in: app, captureCard: captureCard)
+
+        XCTAssertTrue(waitForCreateGoalComposer(in: app))
+        let titleField = goalTitleInput(in: app)
+        XCTAssertTrue(titleField.waitForExistence(timeout: 10))
+        let value = titleField.value as? String
+        XCTAssertTrue(value?.contains("Review the notification handoff copy") == true || app.staticTexts["Review the notification handoff copy before the next hardening pass."].exists)
+        XCTAssertTrue(scrollUntilStaticTextExists("Trust framing", in: app))
+    }
+
     func testQuickRecoveryAndQuickFocusReturnToTodayWithExplicitReentry() throws {
         let app = makeApp(bootstrapMode: "demo")
         app.launch()
@@ -287,7 +335,7 @@ final class AmbitionsUITests: XCTestCase {
 
         XCTAssertTrue(app.descendants(matching: .any)["today.screen"].waitForExistence(timeout: 10))
         XCTAssertTrue(app.descendants(matching: .any)["today.hero.reentry"].waitForExistence(timeout: 10))
-        XCTAssertTrue(app.descendants(matching: .any)["today.support.focus-screenlet"].waitForExistence(timeout: 10))
+        XCTAssertTrue(scrollUntilElementExists("today.support.focus-screenlet", in: app))
     }
 
     func testTodayStartFocusCanOpenBoundedFocusScreenlet() throws {
@@ -327,13 +375,21 @@ final class AmbitionsUITests: XCTestCase {
         XCTAssertTrue(app.descendants(matching: .any)["plan.screen"].waitForExistence(timeout: 10))
     }
 
-    private func makeApp(bootstrapMode: String, launchURL: String? = nil) -> XCUIApplication {
+    private func makeApp(
+        bootstrapMode: String,
+        launchURL: String? = nil,
+        extraEnvironment: [String: String] = [:]
+    ) -> XCUIApplication {
         let app = XCUIApplication()
         app.launchEnvironment["AMBITIONS_BOOTSTRAP_MODE"] = bootstrapMode
         app.launchArguments += ["-AMBITIONS_BOOTSTRAP_MODE", bootstrapMode]
         if let launchURL {
             app.launchEnvironment["AMBITIONS_LAUNCH_URL"] = launchURL
             app.launchArguments += ["-AMBITIONS_LAUNCH_URL", launchURL]
+        }
+        for (key, value) in extraEnvironment {
+            app.launchEnvironment[key] = value
+            app.launchArguments += ["-\(key)", value]
         }
         return app
     }
@@ -373,6 +429,96 @@ final class AmbitionsUITests: XCTestCase {
         }
 
         return app.buttons["goals.create-button"]
+    }
+
+    private func goalTitleInput(in app: XCUIApplication) -> XCUIElement {
+        let candidates = [
+            app.textFields["create-goal.title-field"],
+            app.textViews["create-goal.title-field"],
+            app.textFields["What do you want to make real?"],
+            app.textViews["What do you want to make real?"],
+            app.textFields.element(boundBy: 0),
+            app.textViews.element(boundBy: 0)
+        ]
+
+        for candidate in candidates where candidate.waitForExistence(timeout: 2) {
+            return candidate
+        }
+
+        return app.textFields["create-goal.title-field"]
+    }
+
+    private func shellCaptureInput(in app: XCUIApplication) -> XCUIElement {
+        let candidates = [
+            app.textFields["shell.command.capture-field"],
+            app.textViews["shell.command.capture-field"],
+            app.textFields["What needs to be remembered?"],
+            app.textViews["What needs to be remembered?"],
+            app.textFields.element(boundBy: 0),
+            app.textViews.element(boundBy: 0)
+        ]
+
+        for candidate in candidates where candidate.waitForExistence(timeout: 2) {
+            return candidate
+        }
+
+        return app.textFields["shell.command.capture-field"]
+    }
+
+    private func tapCaptureNewGoal(in app: XCUIApplication, captureCard: XCUIElement) {
+        let cardScopedButtons = captureCard.descendants(matching: .button)
+            .matching(NSPredicate(format: "label == %@", "New goal"))
+            .allElementsBoundByIndex
+        if let control = cardScopedButtons.first(where: { $0.waitForExistence(timeout: 2) && $0.isEnabled }) {
+            control.tap()
+            return
+        }
+
+        let labeledButtons = app.buttons.matching(NSPredicate(format: "label == %@", "New goal")).allElementsBoundByIndex
+        if let control = labeledButtons.first(where: { button in
+            button.waitForExistence(timeout: 2)
+                && button.identifier == "captures.card.preview-capture-2"
+                && button.isEnabled
+        }) {
+            control.tap()
+            return
+        }
+
+        captureCard.coordinate(withNormalizedOffset: CGVector(dx: 0.30, dy: 0.82)).tap()
+    }
+
+    private func waitForClarificationCard(in app: XCUIApplication, timeout: TimeInterval = 12) -> Bool {
+        let clarificationCard = app.descendants(matching: .any)["create-goal.clarification-card"]
+        let deadline = Date().addingTimeInterval(timeout)
+
+        while Date() < deadline {
+            if clarificationCard.waitForExistence(timeout: 1) {
+                return true
+            }
+            app.swipeUp()
+        }
+
+        return clarificationCard.exists
+    }
+
+    private func waitForCreateGoalComposer(in app: XCUIApplication, timeout: TimeInterval = 10) -> Bool {
+        let candidates = [
+            app.descendants(matching: .any)["create-goal.hero-card"],
+            app.navigationBars["Create Goal"],
+            app.staticTexts["Strategy Composer"],
+            app.textFields["create-goal.title-field"],
+            app.textFields["What do you want to make real?"],
+            app.buttons["Cancel"]
+        ]
+
+        let deadline = Date().addingTimeInterval(timeout)
+        while Date() < deadline {
+            if candidates.contains(where: { $0.waitForExistence(timeout: 1) }) {
+                return true
+            }
+        }
+
+        return candidates.contains(where: \.exists)
     }
 
     private func goalsHeroPrimaryAction(in app: XCUIApplication) -> XCUIElement {

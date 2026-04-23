@@ -1,6 +1,6 @@
 ﻿# Batch 46 - Front-End Transformation 07 / Goal intake and Strategy Composer
 ## Status
-Active
+Completed
 ## Program
 Post-hardening Front-End Transformation Program
 ## Canon Source
@@ -13,7 +13,7 @@ Post-hardening Front-End Transformation Program
 - [novel-interaction-systems-spec.md](../../canon/design/novel-interaction-systems-spec.md)
 ## Start Gate
 - Start only after Batch 38 is complete and stable.
-- Batch 46 is active in the live registry; follow the registry and dependency order for later batches.
+- Batch 46 is completed in the live registry; follow the registry and dependency order for later batches.
 ## Goal
 Fully redesign goal creation, intake, ambiguity handling, and initial strategy shaping into a premium composition flow.
 ## In Scope
@@ -50,3 +50,9 @@ Fully redesign goal creation, intake, ambiguity handling, and initial strategy s
 Complete only when goal setup feels like a real premium product moment.
 
 ---
+## Completion Note
+Batch 46 shipped as the Goal Intake / Strategy Composer rebuild.
+The original live composer refresh defect was fixed so typed input now surfaces clarification and downstream strategy shaping in runtime.
+Non-UI validation was green, including `xcodegen generate`, native simulator build, targeted create-goal/setup tests, and full `AmbitionsTests`.
+Focused create-goal/capture UI proof was green, and final closure also included explicit manual signoff for shell entry, Goals entry, clarification/strategy flow, capture continuity, and practical reduced-motion/readability review.
+No full `AmbitionsUITests` overclaim is made by this closeout note.

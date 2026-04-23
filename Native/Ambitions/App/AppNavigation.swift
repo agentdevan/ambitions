@@ -187,8 +187,16 @@ final class AppNavigationModel {
         )
     }
 
-    func presentCreateGoal(source: ShellCommandEntrySource) {
-        activeOverlay = .createGoal(entrySource: source)
+    func presentCreateGoal(
+        source: ShellCommandEntrySource,
+        seedText: String = "",
+        captureID: String? = nil
+    ) {
+        activeOverlay = .createGoal(
+            entrySource: source,
+            query: seedText,
+            captureID: captureID
+        )
     }
 
     func queueTodaySelectionAfterOverlayDismiss(entryContext: TodayEntryContext) {

@@ -27,6 +27,10 @@ struct SnapshotRefreshingGoalsService: GoalsServicing {
         try await base.loadDetail(target: target)
     }
 
+    func previewCreateGoal(_ request: CreateGoalPreviewRequest, now: Date) async throws -> CreateGoalPreviewState {
+        try await base.previewCreateGoal(request, now: now)
+    }
+
     func createGoal(_ request: CreateGoalRequest, now: Date) async throws -> CreateGoalResponse {
         let response = try await base.createGoal(request, now: now)
         await snapshotWriter.refresh(now: now)

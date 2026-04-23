@@ -134,11 +134,24 @@ enum AppContainerFactory {
     private static func applySeedPolicy(_ seedPolicy: AppBootstrapConfiguration.SeedPolicy, to repositories: AppRepositories) async throws {
         switch seedPolicy {
         case .never:
+            #if DEBUG
+            try await applyPreviewCaptureSeedIfNeeded(to: repositories)
+            #endif
             return
         case .whenExplicit:
             try await DemoSeedPipeline(repositories: repositories).seedIfNeeded(force: true)
         }
     }
+
+    #if DEBUG
+    private static func applyPreviewCaptureSeedIfNeeded(to repositories: AppRepositories) async throws {
+        guard ProcessInfo.processInfo.environment["AMBITIONS_UI_SEED_CAPTURES"] == "1" else {
+            return
+        }
+
+        try await repositories.captures.saveCaptures(PreviewFixtures.default.captures)
+    }
+    #endif
 
     private static func makeRepositories(store: AmbitionsPersistenceStore) -> AppRepositories {
         AppRepositories(

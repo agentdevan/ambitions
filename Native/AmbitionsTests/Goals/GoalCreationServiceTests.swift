@@ -114,6 +114,41 @@ final class GoalCreationServiceTests: XCTestCase {
         XCTAssertTrue(goals.isEmpty)
     }
 
+    func testPreviewExposesClarificationStateForAmbiguousGoalSetup() async throws {
+        let repositories = try await makeRepositories()
+        let service = RepositoryBackedGoalsService(repositories: repositories)
+
+        let preview = try await service.previewCreateGoal(
+            CreateGoalPreviewRequest(
+                title: "I don't know where to start",
+                entrySource: .goalsCreate
+            ),
+            now: fixedNow
+        )
+
+        XCTAssertEqual(preview.resultKind, .clarificationRequired)
+        XCTAssertEqual(preview.renderState, .clarification)
+        XCTAssertNotNil(preview.clarification)
+        XCTAssertTrue(preview.pathStages.isEmpty)
+    }
+
+    func testPreviewAddsDeadlineGuidanceForFragileDeadline() async throws {
+        let repositories = try await makeRepositories()
+        let service = RepositoryBackedGoalsService(repositories: repositories)
+
+        let preview = try await service.previewCreateGoal(
+            CreateGoalPreviewRequest(
+                title: "Submit my conference talk proposal by 2024-04-10",
+                entrySource: .goalsCreate
+            ),
+            now: fixedNow
+        )
+
+        XCTAssertNotNil(preview.feasibility)
+        XCTAssertNotNil(preview.deadlineGuidance)
+        XCTAssertFalse(preview.paceOptions.isEmpty)
+    }
+
     func testServiceCreatesConservativeLifeGraphOnlyForClearSignals() async throws {
         let repositories = try await makeRepositories()
         let service = RepositoryBackedGoalsService(repositories: repositories)

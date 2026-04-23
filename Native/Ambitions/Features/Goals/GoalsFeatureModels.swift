@@ -283,10 +283,28 @@ struct GoalsOverview: Sendable {
 struct CreateGoalRequest: Sendable {
     let title: String
     let mode: GoalMode?
+    let entrySource: ShellCommandEntrySource?
+    let clarifiedFields: [MissingFieldKey: String]
+    let preferredPace: StrategyComposerPaceChoice?
+    let targetDateOverride: String?
+    let captureID: String?
 
-    init(title: String, mode: GoalMode? = nil) {
+    init(
+        title: String,
+        mode: GoalMode? = nil,
+        entrySource: ShellCommandEntrySource? = nil,
+        clarifiedFields: [MissingFieldKey: String] = [:],
+        preferredPace: StrategyComposerPaceChoice? = nil,
+        targetDateOverride: String? = nil,
+        captureID: String? = nil
+    ) {
         self.title = title
         self.mode = mode
+        self.entrySource = entrySource
+        self.clarifiedFields = clarifiedFields
+        self.preferredPace = preferredPace
+        self.targetDateOverride = targetDateOverride
+        self.captureID = captureID
     }
 }
 
@@ -307,6 +325,92 @@ struct CreateGoalResponse: Sendable {
         self.resultKind = resultKind
         self.planningEvaluation = planningEvaluation
     }
+}
+
+enum StrategyComposerPaceChoice: String, CaseIterable, Identifiable, Sendable {
+    case conservative
+    case balanced
+    case aggressive
+
+    var id: String { rawValue }
+}
+
+struct StrategyComposerPaceOptionState: Identifiable, Sendable {
+    let choice: StrategyComposerPaceChoice
+    let title: String
+    let subtitle: String
+    let badgeTitle: String
+    let state: AmbitionVisualState
+
+    var id: StrategyComposerPaceChoice { choice }
+}
+
+struct StrategyComposerFeasibilityState: Sendable {
+    let title: String
+    let summary: String
+    let details: [String]
+    let state: AmbitionVisualState
+}
+
+struct StrategyComposerDeadlineGuidanceState: Sendable {
+    let title: String
+    let body: String
+    let suggestedDate: String
+    let badgeTitle: String
+    let state: AmbitionVisualState
+}
+
+struct StrategyComposerTrustState: Sendable {
+    let title: String
+    let lines: [String]
+    let badgeTitle: String
+    let state: AmbitionVisualState
+}
+
+struct CreateGoalPreviewRequest: Sendable {
+    let title: String
+    let mode: GoalMode?
+    let entrySource: ShellCommandEntrySource
+    let clarifiedFields: [MissingFieldKey: String]
+    let preferredPace: StrategyComposerPaceChoice
+    let targetDateOverride: String?
+    let captureID: String?
+
+    init(
+        title: String,
+        mode: GoalMode? = nil,
+        entrySource: ShellCommandEntrySource,
+        clarifiedFields: [MissingFieldKey: String] = [:],
+        preferredPace: StrategyComposerPaceChoice = .balanced,
+        targetDateOverride: String? = nil,
+        captureID: String? = nil
+    ) {
+        self.title = title
+        self.mode = mode
+        self.entrySource = entrySource
+        self.clarifiedFields = clarifiedFields
+        self.preferredPace = preferredPace
+        self.targetDateOverride = targetDateOverride
+        self.captureID = captureID
+    }
+}
+
+struct CreateGoalPreviewState: Sendable {
+    let normalizedTitle: String
+    let summary: String
+    let modeLabel: String
+    let resultKind: GoalOrchestrationResultKind
+    let renderState: GoalRenderState
+    let selectedPace: StrategyComposerPaceChoice
+    let paceOptions: [StrategyComposerPaceOptionState]
+    let feasibility: StrategyComposerFeasibilityState?
+    let deadlineGuidance: StrategyComposerDeadlineGuidanceState?
+    let pathStages: [GoalPathStage]
+    let milestonePreview: [GoalDetailStepItem]
+    let clarification: GoalClarificationState?
+    let blocked: GoalBlockedState?
+    let trust: StrategyComposerTrustState
+    let planningEvaluation: PlanningEvaluation?
 }
 
 struct GoalDetailActionState: Identifiable, Sendable {

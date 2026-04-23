@@ -34,8 +34,10 @@ struct AmbitionsRootView: View {
                 onDismiss: {
                     navigation.dismissOverlay()
                 },
-                onGoalCreated: { response in
-                    handleCreatedGoal(response)
+                onGoalCreated: { overlayState, response in
+                    Task {
+                        await handleCreatedGoal(response, from: overlayState)
+                    }
                 }
             )
         }
@@ -268,8 +270,8 @@ struct AmbitionsRootView: View {
         .keyboardShortcut("k", modifiers: [.command])
     }
 
-    private func handleCreatedGoal(_ response: CreateGoalResponse) {
-        let body: String = {
+    private func handleCreatedGoal(_ response: CreateGoalResponse, from overlay: ShellOverlayState) async {
+        var body: String = {
             switch response.resultKind {
             case .planned:
                 return "\(response.blueprint.title) is now in the portfolio with a canonical plan."
@@ -281,6 +283,18 @@ struct AmbitionsRootView: View {
                 return "\(response.blueprint.title) was saved as a blocked draft with the missing constraint visible."
             }
         }()
+
+        if let captureID = overlay.captureID, let goalID = response.target.goalID {
+            do {
+                let binding = try await attachCaptureToCreatedGoal(captureID: captureID, goalID: goalID)
+                if binding != nil {
+                    body += " The capture stayed connected to this goal."
+                }
+            } catch {
+                body += " The goal was created, but the capture could not be attached yet."
+            }
+        }
+
         creationMessage = GoalDetailInlineMessage(
             title: "Goal created",
             body: body,
@@ -288,12 +302,45 @@ struct AmbitionsRootView: View {
         )
         goalsRefreshID += 1
         navigation.dismissOverlay()
-        navigation.selectTab(.goals)
+        switch response.resultKind {
+        case .planned, .starterPlanned:
+            navigation.selectTab(.goals)
+        case .clarificationRequired, .blocked:
+            navigation.openGoalDetail(response.target)
+        }
     }
 
-    private func presentCreateGoal(from source: ShellCommandEntrySource) {
+    private func presentCreateGoal(
+        from source: ShellCommandEntrySource,
+        seedText: String = "",
+        captureID: String? = nil
+    ) {
         creationMessage = nil
-        container.commandRouter.presentCreateGoal(source: source)
+        container.commandRouter.presentCreateGoal(source: source, seedText: seedText, captureID: captureID)
+    }
+
+    private func attachCaptureToCreatedGoal(captureID: String, goalID: String) async throws -> CaptureGoalBinding? {
+        do {
+            return try await container.captureService.attachCaptureToGoal(
+                AttachCaptureToGoalRequest(captureID: captureID, goalID: goalID),
+                now: .now
+            )
+        } catch let error as CaptureServiceError {
+            guard case let .invalidTransition(from, to) = error,
+                  from == .seed,
+                  to == .goalBound else {
+                throw error
+            }
+
+            _ = try await container.captureService.updateCaptureState(
+                CaptureStateUpdateRequest(id: captureID, status: .actionable),
+                now: .now
+            )
+            return try await container.captureService.attachCaptureToGoal(
+                AttachCaptureToGoalRequest(captureID: captureID, goalID: goalID),
+                now: .now
+            )
+        }
     }
 
     private func presentMemoryLens(from source: ShellCommandEntrySource) {

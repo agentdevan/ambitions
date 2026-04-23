@@ -169,12 +169,18 @@ struct ShellOverlayState: Hashable, Identifiable, Sendable, Codable {
         )
     }
 
-    static func createGoal(entrySource: ShellCommandEntrySource) -> ShellOverlayState {
+    static func createGoal(
+        entrySource: ShellCommandEntrySource,
+        query: String = "",
+        captureID: String? = nil
+    ) -> ShellOverlayState {
         ShellOverlayState(
             kind: .createGoal,
             intent: .newGoal,
             entrySource: entrySource,
-            presentationContext: .createGoal
+            presentationContext: .createGoal,
+            query: query,
+            captureID: captureID
         )
     }
 }

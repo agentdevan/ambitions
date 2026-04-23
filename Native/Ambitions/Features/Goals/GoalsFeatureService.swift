@@ -48,6 +48,83 @@ struct RepositoryBackedGoalsService: GoalsServicing {
         return try await makeDetail(target: target, snapshot: snapshot)
     }
 
+    func previewCreateGoal(_ request: CreateGoalPreviewRequest, now: Date) async throws -> CreateGoalPreviewState {
+        let trimmedTitle = request.title.trimmingCharacters(in: .whitespacesAndNewlines)
+        guard trimmedTitle.isEmpty == false else {
+            throw GoalsFeatureError.invalidTitle
+        }
+
+        let composedTitle = composerTitle(
+            from: trimmedTitle,
+            targetDateOverride: request.targetDateOverride
+        )
+        let referenceNow = DomainTimestamp.string(from: now)
+        let result = orchestrator.compileGoal(
+            composedTitle,
+            context: composerContext(
+                entrySource: request.entrySource,
+                clarifiedFields: request.clarifiedFields,
+                preferredPace: request.preferredPace,
+                referenceNow: referenceNow
+            )
+        )
+
+        switch result {
+        case let .planned(planned):
+            return makeCreateGoalPreview(
+                draft: planned.draft,
+                plan: planned.plan,
+                metadata: planned.metadata,
+                assumptions: [],
+                blockers: [],
+                resultKind: .planned,
+                preferredPace: request.preferredPace,
+                entrySource: request.entrySource,
+                captureID: request.captureID,
+                now: now
+            )
+        case let .starterPlanned(starter):
+            return makeCreateGoalPreview(
+                draft: starter.draft,
+                plan: starter.plan,
+                metadata: starter.metadata,
+                assumptions: starter.assumptions,
+                blockers: [],
+                resultKind: .starterPlanned,
+                preferredPace: request.preferredPace,
+                entrySource: request.entrySource,
+                captureID: request.captureID,
+                now: now
+            )
+        case let .clarificationRequired(required):
+            return makeCreateGoalPreview(
+                draft: required.draft,
+                plan: nil,
+                metadata: required.metadata,
+                assumptions: required.metadata.reasoning.assumptions,
+                blockers: [],
+                resultKind: .clarificationRequired,
+                preferredPace: request.preferredPace,
+                entrySource: request.entrySource,
+                captureID: request.captureID,
+                now: now
+            )
+        case let .blocked(blocked):
+            return makeCreateGoalPreview(
+                draft: blocked.draft,
+                plan: nil,
+                metadata: blocked.metadata,
+                assumptions: blocked.metadata.reasoning.assumptions,
+                blockers: blocked.blockers.map(\.reason),
+                resultKind: .blocked,
+                preferredPace: request.preferredPace,
+                entrySource: request.entrySource,
+                captureID: request.captureID,
+                now: now
+            )
+        }
+    }
+
     func createGoal(_ request: CreateGoalRequest, now: Date) async throws -> CreateGoalResponse {
         let trimmedTitle = request.title.trimmingCharacters(in: .whitespacesAndNewlines)
         guard trimmedTitle.isEmpty == false else {
@@ -57,10 +134,17 @@ struct RepositoryBackedGoalsService: GoalsServicing {
         let createdAt = DomainTimestamp.string(from: now)
         let goalID = DomainIdentifier.prefixed("goal")
         let draftID = DomainIdentifier.prefixed("draft")
+        let composedTitle = composerTitle(
+            from: trimmedTitle,
+            targetDateOverride: request.targetDateOverride
+        )
         let result = orchestrator.compileGoal(
-            trimmedTitle,
-            context: GoalEngineOrchestrationContext(
+            composedTitle,
+            context: composerContext(
                 goalID: goalID,
+                entrySource: request.entrySource ?? .goalsCreate,
+                clarifiedFields: request.clarifiedFields,
+                preferredPace: request.preferredPace ?? .balanced,
                 referenceNow: createdAt
             )
         )
@@ -282,6 +366,60 @@ struct StubGoalsService: GoalsServicing {
         )
     }
 
+    func previewCreateGoal(_ request: CreateGoalPreviewRequest, now: Date) async throws -> CreateGoalPreviewState {
+        _ = now
+        let seed = DeterministicGoalPlanner().plan(for: request.title, preferredMode: request.mode)
+        return CreateGoalPreviewState(
+            normalizedTitle: seed.blueprint.title,
+            summary: seed.blueprint.summary ?? "A preview-safe local strategy with a believable first pass.",
+            modeLabel: seed.blueprint.mode.displayTitle,
+            resultKind: .planned,
+            renderState: .active,
+            selectedPace: request.preferredPace,
+            paceOptions: [
+                StrategyComposerPaceOptionState(choice: .conservative, title: "Conservative", subtitle: "Preserve room for recovery.", badgeTitle: "More room", state: request.preferredPace == .conservative ? .selected : .default),
+                StrategyComposerPaceOptionState(choice: .balanced, title: "Balanced", subtitle: "Keep a believable weekly load.", badgeTitle: "Believable", state: request.preferredPace == .balanced ? .selected : .default),
+                StrategyComposerPaceOptionState(choice: .aggressive, title: "Aggressive", subtitle: "Accept tighter pressure to keep the original push.", badgeTitle: "Tighter", state: request.preferredPace == .aggressive ? .selected : .default)
+            ],
+            feasibility: StrategyComposerFeasibilityState(
+                title: "Believable first pass",
+                summary: "Preview mode keeps the first path readable without writing to persistence.",
+                details: [],
+                state: .selected
+            ),
+            deadlineGuidance: nil,
+            pathStages: [
+                GoalPathStage(
+                    id: "preview-first-pass",
+                    title: "First pass",
+                    summary: "A lightweight starting path based on the current title.",
+                    stepCountLabel: "\(seed.steps.count) step\(seed.steps.count == 1 ? "" : "s")",
+                    highlight: seed.steps.first?.title,
+                    state: .selected
+                )
+            ],
+            milestonePreview: seed.steps.prefix(3).map {
+                GoalDetailStepItem(
+                    id: $0.id,
+                    title: $0.title,
+                    summary: $0.summary ?? "Preview step",
+                    timingLabel: $0.timing.dueAt ?? $0.timing.targetBy ?? "Flexible",
+                    statusLabel: "Planned",
+                    state: .default
+                )
+            },
+            clarification: nil,
+            blocked: nil,
+            trust: StrategyComposerTrustState(
+                title: "Trust framing",
+                lines: ["Preview bootstrap keeps the composer local and non-persisting."],
+                badgeTitle: "Preview safe",
+                state: .selected
+            ),
+            planningEvaluation: nil
+        )
+    }
+
     func performAction(_ request: GoalDetailActionRequest, now: Date) async throws -> GoalDetailActionResponse {
         let title: String
         let body: String
@@ -330,6 +468,51 @@ struct StubGoalsService: GoalsServicing {
     }
 }
 #endif
+
+extension GoalsServicing {
+    func previewCreateGoal(_ request: CreateGoalPreviewRequest, now: Date) async throws -> CreateGoalPreviewState {
+        if let repository = self as? RepositoryBackedGoalsService {
+            return try await repository.previewCreateGoal(request, now: now)
+        }
+
+        if let snapshotRefreshing = self as? SnapshotRefreshingGoalsService {
+            return try await snapshotRefreshing.base.previewCreateGoal(request, now: now)
+        }
+
+        if let stub = self as? StubGoalsService {
+            return try await stub.previewCreateGoal(request, now: now)
+        }
+
+        let planner = DeterministicGoalPlanner()
+        let seed = planner.plan(for: request.title, preferredMode: request.mode)
+        return CreateGoalPreviewState(
+            normalizedTitle: seed.blueprint.title,
+            summary: seed.blueprint.summary ?? "Ambitions shaped a lightweight local preview.",
+            modeLabel: seed.blueprint.mode.displayTitle,
+            resultKind: .planned,
+            renderState: .active,
+            selectedPace: request.preferredPace,
+            paceOptions: [
+                StrategyComposerPaceOptionState(choice: .conservative, title: "Conservative", subtitle: "Preserve room.", badgeTitle: "Room", state: request.preferredPace == .conservative ? .selected : .default),
+                StrategyComposerPaceOptionState(choice: .balanced, title: "Balanced", subtitle: "Stay believable.", badgeTitle: "Believable", state: request.preferredPace == .balanced ? .selected : .default),
+                StrategyComposerPaceOptionState(choice: .aggressive, title: "Aggressive", subtitle: "Accept more pressure.", badgeTitle: "Tighter", state: request.preferredPace == .aggressive ? .selected : .default)
+            ],
+            feasibility: nil,
+            deadlineGuidance: nil,
+            pathStages: [],
+            milestonePreview: [],
+            clarification: nil,
+            blocked: nil,
+            trust: StrategyComposerTrustState(
+                title: "Trust framing",
+                lines: ["This fallback preview keeps the composer readable when a specialized preview seam is unavailable."],
+                badgeTitle: "Local fallback",
+                state: .default
+            ),
+            planningEvaluation: nil
+        )
+    }
+}
 
 private enum GoalsFeatureError: LocalizedError {
     case notFound
@@ -2173,6 +2356,261 @@ private extension RepositoryBackedGoalsService {
             subtitle: "The planner kept the blocker explicit instead of generating performative tasks.",
             blockers: draft?.blockers.map(\.reason) ?? ["A blocking condition is still unresolved."]
         )
+    }
+
+    func composerContext(
+        goalID: String? = nil,
+        entrySource: ShellCommandEntrySource,
+        clarifiedFields: [MissingFieldKey: String],
+        preferredPace: StrategyComposerPaceChoice,
+        referenceNow: String
+    ) -> GoalEngineOrchestrationContext {
+        let strictness: GoalPlanningStrictness
+        switch preferredPace {
+        case .conservative:
+            strictness = .starterFriendly
+        case .balanced:
+            strictness = .balanced
+        case .aggressive:
+            strictness = .strict
+        }
+
+        return GoalEngineOrchestrationContext(
+            goalID: goalID,
+            preferredPlanningStrictness: strictness,
+            sourceScreen: "goal_composer",
+            sourceFlow: entrySource.rawValue,
+            clarifiedFields: clarifiedFields,
+            referenceNow: referenceNow
+        )
+    }
+
+    func composerTitle(from title: String, targetDateOverride: String?) -> String {
+        guard let targetDateOverride, targetDateOverride.isEmpty == false else {
+            return title
+        }
+
+        let pattern = #"\b\d{4}-\d{2}-\d{2}\b"#
+        guard let range = title.range(of: pattern, options: .regularExpression) else {
+            return "\(title) by \(targetDateOverride)"
+        }
+
+        var updated = title
+        updated.replaceSubrange(range, with: targetDateOverride)
+        return updated
+    }
+
+    func makeCreateGoalPreview(
+        draft: GoalDraft,
+        plan: GoalPlan?,
+        metadata: GoalOrchestrationMetadata,
+        assumptions: [PlanAssumption],
+        blockers: [String],
+        resultKind: GoalOrchestrationResultKind,
+        preferredPace: StrategyComposerPaceChoice,
+        entrySource: ShellCommandEntrySource,
+        captureID: String?,
+        now: Date
+    ) -> CreateGoalPreviewState {
+        let renderState = renderState(for: resultKind)
+        let evaluation = plan?.evaluation
+        let sections = plan?.sections ?? []
+        let pathSummary = LifeGraphResolver.pathStateSummary(for: draft, plan: plan)
+        let pathStages = makePathStages(pathSummary: pathSummary, sections: sections, renderState: renderState)
+        let milestonePreview = sections
+            .flatMap(\.steps)
+            .filter { $0.state != .completed && $0.state != .cancelled }
+            .prefix(3)
+            .map { makeStepItem(step: $0, goalMode: draft.mode) }
+
+        let persistedDraft = PersistedGoalDraft(
+            id: "preview-draft",
+            createdAt: DomainTimestamp.string(from: now),
+            updatedAt: DomainTimestamp.string(from: now),
+            draft: draft,
+            classification: nil,
+            clarification: metadata.clarification,
+            stagedPlan: plan,
+            assumptions: assumptions,
+            blockers: blockers.enumerated().map { index, reason in
+                GoalPlanningBlocker(code: "preview-\(index)", reason: reason, suggestedQuestion: nil)
+            },
+            metadata: metadata,
+            plannedGoalID: nil,
+            latestResultKind: resultKind
+        )
+
+        return CreateGoalPreviewState(
+            normalizedTitle: draft.title,
+            summary: draft.summary ?? detailSubtitle(for: draft.mode),
+            modeLabel: draft.mode.displayTitle,
+            resultKind: resultKind,
+            renderState: renderState,
+            selectedPace: preferredPace,
+            paceOptions: composerPaceOptions(
+                selected: preferredPace,
+                evaluation: evaluation,
+                deadlineGuidance: composerDeadlineGuidance(for: draft.timing, evaluation: evaluation)
+            ),
+            feasibility: composerFeasibilityState(for: evaluation, timing: draft.timing, mode: draft.mode),
+            deadlineGuidance: composerDeadlineGuidance(for: draft.timing, evaluation: evaluation),
+            pathStages: pathStages,
+            milestonePreview: milestonePreview,
+            clarification: clarificationState(from: persistedDraft),
+            blocked: blockedState(from: persistedDraft),
+            trust: composerTrustState(
+                metadata: metadata,
+                resultKind: resultKind,
+                entrySource: entrySource,
+                captureID: captureID
+            ),
+            planningEvaluation: evaluation
+        )
+    }
+
+    func composerFeasibilityState(
+        for evaluation: PlanningEvaluation?,
+        timing: GoalTiming,
+        mode: GoalMode
+    ) -> StrategyComposerFeasibilityState? {
+        guard let evaluation else { return nil }
+
+        let title: String
+        let summary: String
+        let state: AmbitionVisualState
+
+        switch evaluation.feasibilityLevel {
+        case .comfortable:
+            title = "Believable path"
+            summary = "This setup looks comfortably believable at the current timing."
+            state = .success
+        case .tight:
+            title = "Tight but workable"
+            summary = "This path can work, but the timing will need steadier follow-through."
+            state = .selected
+        case .fragile:
+            title = "Fragile setup"
+            summary = "This path is understandable, but it likely needs more room or a lighter ask."
+            state = .warning
+        case .notBelievable:
+            title = "Current timing is not believable"
+            summary = "Ambitions can show the path, but the deadline probably needs to move or the scope needs to soften."
+            state = .warning
+        }
+
+        return StrategyComposerFeasibilityState(
+            title: title,
+            summary: "\(summary) \(timingNote(for: timing, goalMode: mode))",
+            details: evaluation.reasons,
+            state: state
+        )
+    }
+
+    func composerPaceOptions(
+        selected: StrategyComposerPaceChoice,
+        evaluation: PlanningEvaluation?,
+        deadlineGuidance: StrategyComposerDeadlineGuidanceState?
+    ) -> [StrategyComposerPaceOptionState] {
+        StrategyComposerPaceChoice.allCases.map { choice in
+            let badgeTitle: String
+            let subtitle: String
+            let state: AmbitionVisualState
+
+            switch choice {
+            case .conservative:
+                badgeTitle = deadlineGuidance == nil ? "More room" : "Safer timing"
+                subtitle = "Preserve recovery room and keep the path honest."
+                state = selected == choice ? .selected : .default
+            case .balanced:
+                badgeTitle = "Believable"
+                subtitle = "Keep the week believable without turning the goal into drift."
+                state = selected == choice ? .selected : .default
+            case .aggressive:
+                badgeTitle = "Tighter"
+                subtitle = "Hold the current push and accept less margin for recovery."
+                let risky = evaluation?.feasibilityLevel == .fragile || evaluation?.feasibilityLevel == .notBelievable
+                state = selected == choice ? (risky ? .warning : .selected) : (risky ? .warning : .default)
+            }
+
+            return StrategyComposerPaceOptionState(
+                choice: choice,
+                title: String(choice.rawValue.prefix(1)).uppercased() + choice.rawValue.dropFirst(),
+                subtitle: subtitle,
+                badgeTitle: badgeTitle,
+                state: state
+            )
+        }
+    }
+
+    func composerDeadlineGuidance(
+        for timing: GoalTiming,
+        evaluation: PlanningEvaluation?
+    ) -> StrategyComposerDeadlineGuidanceState? {
+        guard let evaluation,
+              evaluation.feasibilityLevel == .fragile || evaluation.feasibilityLevel == .notBelievable,
+              let current = parseDate(timing.dueAt ?? timing.targetBy)
+        else {
+            return nil
+        }
+
+        let shiftDays = evaluation.feasibilityLevel == .notBelievable ? 21 : 10
+        let revised = Calendar(identifier: .gregorian).date(byAdding: .day, value: shiftDays, to: current) ?? current
+        let suggestedDate = Self.iso.string(from: revised)
+
+        return StrategyComposerDeadlineGuidanceState(
+            title: "Try a calmer date",
+            body: "Moving the date to \(suggestedDate) keeps the goal believable without pretending the current pressure is fine.",
+            suggestedDate: suggestedDate,
+            badgeTitle: evaluation.feasibilityLevel == .notBelievable ? "Needs more room" : "Could use margin",
+            state: .warning
+        )
+    }
+
+    func composerTrustState(
+        metadata: GoalOrchestrationMetadata,
+        resultKind: GoalOrchestrationResultKind,
+        entrySource: ShellCommandEntrySource,
+        captureID: String?
+    ) -> StrategyComposerTrustState {
+        var lines = [
+            "This setup stays local and uses the current goal engine before anything is committed.",
+            metadata.reasoning.assumptions.isEmpty
+                ? "Ambitions is using the current intake signal directly."
+                : "Ambitions is showing its current assumptions instead of hiding them."
+        ]
+
+        if let captureID, captureID.isEmpty == false {
+            lines.append("This path is seeded from a capture and will only attach that capture after a live goal is created.")
+        }
+
+        switch resultKind {
+        case .planned, .starterPlanned:
+            lines.append("You are looking at a believable first path, not a promise that the plan will never need to adapt.")
+        case .clarificationRequired:
+            lines.append("Ambitions is pausing before it invents structure from ambiguous input.")
+        case .blocked:
+            lines.append("The current blocker stays visible so the setup does not fake certainty.")
+        }
+
+        return StrategyComposerTrustState(
+            title: "Trust framing",
+            lines: lines,
+            badgeTitle: entrySource == .capturesScreen ? "Capture-led" : "Local first",
+            state: .selected
+        )
+    }
+
+    func renderState(for resultKind: GoalOrchestrationResultKind) -> GoalRenderState {
+        switch resultKind {
+        case .planned:
+            return .active
+        case .starterPlanned:
+            return .starter
+        case .clarificationRequired:
+            return .clarification
+        case .blocked:
+            return .blocked
+        }
     }
 
     func normalizedPriorityOrder(snapshot: Snapshot) -> [String] {
