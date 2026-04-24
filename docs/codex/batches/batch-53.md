@@ -1,6 +1,6 @@
 ﻿# Batch 53 - Front-End Transformation 14 / Progressive Intelligence Onboarding and Degraded-State Orchestrator
 ## Status
-Queued
+Active
 ## Program
 Post-hardening Front-End Transformation Program
 ## Canon Source
@@ -11,7 +11,7 @@ Post-hardening Front-End Transformation Program
 - [screen-architecture-spec.md](../../canon/design/screen-architecture-spec.md)
 - [copy-state-language-spec.md](../../canon/design/copy-state-language-spec.md)
 ## Start Gate
-- Start only after Batch 38 is complete and stable.
+- Start only after Batch 52 is complete and stable.
 - Do not activate or implement this batch early; follow the registry and dependency order.
 ## Goal
 Rebuild first-run, permissions, education, and degraded-state experiences so Ambitions feels premium and intelligible from first launch onward.

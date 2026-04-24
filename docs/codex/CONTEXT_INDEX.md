@@ -15,12 +15,15 @@ For non-trivial work, read these in order before planning:
 3. [Ambitions_OS_Master_Roadmap.md](../canon/Ambitions_OS_Master_Roadmap.md).
 4. [Ambitions_Surgical_Execution_Plan.md](../canon/Ambitions_Surgical_Execution_Plan.md).
 5. [Ambitions_Codex_Batch_Plan.md](../canon/Ambitions_Codex_Batch_Plan.md).
-6. [Ambitions_Full_Frontend_Transformation_Program.md](../canon/Ambitions_Full_Frontend_Transformation_Program.md) when the task involves the queued post-hardening frontend transformation program.
+6. [Ambitions_Full_Frontend_Transformation_Program.md](../canon/Ambitions_Full_Frontend_Transformation_Program.md) when the task involves the post-hardening frontend transformation program.
 7. [design/README.md](../canon/design/README.md) when the task needs explicit frontend design truth for the queued transformation program.
 8. [Ambitions_Frontend_Transformation_Execution_Classification.md](../canon/design/Ambitions_Frontend_Transformation_Execution_Classification.md) when the task needs explicit frontend sequencing truth.
 9. [Ambitions_App_Store_Release_Compliance.md](../canon/Ambitions_App_Store_Release_Compliance.md) when the task involves release-candidate or App Store submission gating.
-10. [BATCH_REGISTRY.md](BATCH_REGISTRY.md).
-11. Supporting docs linked from [docs/README.md](../README.md).
+10. [Ambitions_Launch_Master_Checklist.md](../canon/Ambitions_Launch_Master_Checklist.md) when the task involves locked launch strategy, launch planning, launch blockers, or launch-phase coordination.
+11. [Ambitions_Accessibility_Nutrition_Labels_Audit.md](../canon/Ambitions_Accessibility_Nutrition_Labels_Audit.md) when the task involves accessibility-label review or launch accessibility claims.
+12. [Launch_Operator_Runbook.md](Launch_Operator_Runbook.md) when the task involves App Store Connect setup, TestFlight, metadata, reviewer notes, submission operations, or launch monitoring.
+13. [BATCH_REGISTRY.md](BATCH_REGISTRY.md).
+14. Supporting docs linked from [docs/README.md](../README.md).
 
 ## Minimal Read Set For Active Batch Execution
 
@@ -69,12 +72,15 @@ When sources conflict, use this precedence:
 4. [Ambitions_OS_Master_Roadmap.md](../canon/Ambitions_OS_Master_Roadmap.md) for platform and endgame vision.
 5. [Ambitions_Surgical_Execution_Plan.md](../canon/Ambitions_Surgical_Execution_Plan.md) for execution order and dependency hierarchy.
 6. [Ambitions_Codex_Batch_Plan.md](../canon/Ambitions_Codex_Batch_Plan.md) for batching and work packaging.
-7. [Ambitions_Full_Frontend_Transformation_Program.md](../canon/Ambitions_Full_Frontend_Transformation_Program.md) for queued post-hardening frontend transformation scope and batch intent.
+7. [Ambitions_Full_Frontend_Transformation_Program.md](../canon/Ambitions_Full_Frontend_Transformation_Program.md) for post-hardening frontend transformation scope and batch intent.
 8. [design/README.md](../canon/design/README.md) for explicit future frontend design truth.
 9. [Ambitions_Frontend_Transformation_Execution_Classification.md](../canon/design/Ambitions_Frontend_Transformation_Execution_Classification.md) for explicit future frontend execution tiering.
 10. [Ambitions_App_Store_Release_Compliance.md](../canon/Ambitions_App_Store_Release_Compliance.md) for final release-candidate and App Store submission gating.
-11. [BATCH_REGISTRY.md](BATCH_REGISTRY.md) for active work status.
-12. Supporting docs.
+11. [Ambitions_Launch_Master_Checklist.md](../canon/Ambitions_Launch_Master_Checklist.md) for locked launch strategy and now-to-launch planning.
+12. [Ambitions_Accessibility_Nutrition_Labels_Audit.md](../canon/Ambitions_Accessibility_Nutrition_Labels_Audit.md) for accessibility-label claim auditing.
+13. [Launch_Operator_Runbook.md](Launch_Operator_Runbook.md) for operator execution steps that do not replace compliance canon.
+14. [BATCH_REGISTRY.md](BATCH_REGISTRY.md) for active work status.
+15. Supporting docs.
 
 Supporting canon docs that clarify the post-Batch-48 direction without replacing the canonical stack:
 
@@ -93,8 +99,16 @@ These files are permanent canonical context and must stay in repo:
 - [../canon/Ambitions_Codex_Batch_Plan.md](../canon/Ambitions_Codex_Batch_Plan.md)
 - [../canon/Ambitions_Full_Frontend_Transformation_Program.md](../canon/Ambitions_Full_Frontend_Transformation_Program.md)
 - [../canon/Ambitions_App_Store_Release_Compliance.md](../canon/Ambitions_App_Store_Release_Compliance.md)
+- [../canon/Ambitions_Launch_Master_Checklist.md](../canon/Ambitions_Launch_Master_Checklist.md)
+- [../canon/Ambitions_Accessibility_Nutrition_Labels_Audit.md](../canon/Ambitions_Accessibility_Nutrition_Labels_Audit.md)
 - [../canon/design/README.md](../canon/design/README.md)
 - [../canon/design/Ambitions_Frontend_Transformation_Execution_Classification.md](../canon/design/Ambitions_Frontend_Transformation_Execution_Classification.md)
+
+Launch-planning note:
+
+- `Ambitions_Launch_Master_Checklist.md` supplements roadmap and compliance canon with locked launch strategy and operating phases.
+- `Ambitions_Accessibility_Nutrition_Labels_Audit.md` is the launch accessibility-claim audit artifact.
+- `Launch_Operator_Runbook.md` is execution guidance only and does not replace submission-gate truth from `Ambitions_App_Store_Release_Compliance.md`.
 
 Do not replace these with external copies or duplicate canon locations.
 

@@ -24,9 +24,10 @@ Live queue truth in the current repo:
 - Batch 49 — Completed
 - Batch 50 — Completed
 - Batch 51 — Completed
-- Batch 52 — Active
-- Batches 53-60 — Queued
-- the front-end transformation program is active in implementation at **Batch 52**
+- Batch 52 — Completed
+- Batch 53 — Active
+- Batches 54-60 — Queued
+- the front-end transformation program is active in implementation at **Batch 53**
 
 Batch 39 is a docs-only foundation batch.
 It makes the transformation program explicit enough to guide later implementation batches without authorizing shell implementation, route rewiring, or surface redesign work ahead of Batch 40.
@@ -329,9 +330,9 @@ If status language here drifts, the registry controls active-vs-queued truth and
 | 48 | Front-End Transformation 09 / Goal Detail rebuild II — trust whisper, correction, audit, and memory | Completed | Goal Detail composition phase 2 closed while keeping trust, correction, audit, and memory subordinate to the strategic first layer. |
 | 49 | Front-End Transformation 10 / Plan rebuild I — Reality Model, elastic week, and pressure scrubber | Completed | Plan surface phase 1 with week-structure truth and pressure shaping. |
 | 50 | Front-End Transformation 11 / Plan rebuild II — Execution Resilience, habits, captures, and review shaping | Completed | Plan now owns weekly shaping with Execution Resilience, Window Magnetism, Weekly Review continuation, and Plan-owned habits/captures support routes; build, targeted unit coverage, full `AmbitionsTests`, and targeted UI tests were green, with the remaining manual-audit limitation proven environment-only. |
-| 51 | Front-End Transformation 12 / Insights rebuild and Reflection OS | Active | Includes activity history, review coherence, and reflection-system language. |
-| 52 | Front-End Transformation 13 / Profile rebuild, Appearance Studio, Trust Center, and Context Vault foundations | Queued | Includes trust controls, appearance, and context-vault foundations. |
-| 53 | Front-End Transformation 14 / Progressive Intelligence Onboarding and Degraded-State Orchestrator | Queued | Includes permissions, education, empty/loading/error, and degraded-state orchestration. |
+| 51 | Front-End Transformation 12 / Insights rebuild and Reflection OS | Completed | Includes activity history, review coherence, and reflection-system language. |
+| 52 | Front-End Transformation 13 / Profile rebuild, Appearance Studio, Trust Center, and Context Vault foundations | Completed | Profile rebuilt as a premium system-configuration and trust surface with Appearance Studio, Trust Center with sync pulse, Context Vault foundations, regrouped defaults/integrations/account surfaces, and profile-scoped presentation refinement. |
+| 53 | Front-End Transformation 14 / Progressive Intelligence Onboarding and Degraded-State Orchestrator | Active | Includes permissions, education, empty/loading/error, and degraded-state orchestration. |
 | 54 | Front-End Transformation 15 / State Continuity Mesh, sync trust, and real-time continuity contract | Queued | Cross-device/state continuity before external-surface widening. |
 | 55 | Front-End Transformation 16 / External surfaces I — widgets, Live Activities, notifications, and Focus Screenlet | Queued | First external-surface implementation wave. |
 | 56 | Front-End Transformation 17 / External surfaces II — share extension, App Intents, shortcuts, routing, and external creation | Queued | External creation and OS-surface productization. |
@@ -943,7 +944,7 @@ Complete only when Plan and its support routes feel like one authored system.
 ## Batch 51 — Front-End Transformation 12 / Insights rebuild and Reflection OS
 
 ### Status
-Active
+Completed
 
 ### Goal
 Rebuild Insights and reflection surfaces into a narrative truth layer rather than a generic analytics screen.
@@ -991,7 +992,7 @@ Complete only when Insights feels indispensable rather than secondary.
 ## Batch 52 — Front-End Transformation 13 / Profile rebuild, Appearance Studio, Trust Center, and Context Vault foundations
 
 ### Status
-Queued
+Completed
 
 ### Goal
 Rebuild Profile into a premium utility layer with world-class appearance control, trust framing, system status, and Context Vault foundations.
@@ -1025,20 +1026,24 @@ Rebuild Profile into a premium utility layer with world-class appearance control
 - trust / sync / defaults are clearer and better organized
 
 ### Validation
-- build
-- targeted Profile / settings / theming tests
-- full AmbitionsTests
-- targeted UI tests
+- native build: green
+- targeted Profile / settings / theming tests: green
+- full AmbitionsTests: last known green signal
+- targeted Batch 52 Profile UI slice: green, 3 tests, 0 failures
+- manual simulator audit: sufficient for closeout across appearance, trust, context, integrations, defaults, and account/billing grouping
 
 ### Completion Rule
-Complete only when Profile matches the rest of the product in finish quality.
+Completed when Profile matched the rest of the product in finish quality.
+
+### Completion Note
+Batch 52 rebuilt Profile into a premium system-configuration and trust surface with Appearance Studio, Trust Center with sync pulse, Context Vault foundations, regrouped defaults/integrations/account surfaces, and profile-scoped presentation refinement. Closeout validation included green build, targeted Profile/settings/theming tests, full AmbitionsTests signal, green targeted Profile UI slice, and sufficient manual simulator audit covering appearance, trust, context, integrations, defaults, and account/billing grouping.
 
 ---
 
 ## Batch 53 — Front-End Transformation 14 / Progressive Intelligence Onboarding and Degraded-State Orchestrator
 
 ### Status
-Queued
+Active
 
 ### Goal
 Rebuild first-run, permissions, education, and degraded-state experiences so Ambitions feels premium and intelligible from first launch onward.

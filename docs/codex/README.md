@@ -10,11 +10,14 @@ Before non-trivial planning or implementation, read:
 4. [../canon/Ambitions_OS_Master_Roadmap.md](../canon/Ambitions_OS_Master_Roadmap.md)
 5. [../canon/Ambitions_Surgical_Execution_Plan.md](../canon/Ambitions_Surgical_Execution_Plan.md)
 6. [../canon/Ambitions_Codex_Batch_Plan.md](../canon/Ambitions_Codex_Batch_Plan.md)
-7. [../canon/Ambitions_Full_Frontend_Transformation_Program.md](../canon/Ambitions_Full_Frontend_Transformation_Program.md) for the queued post-hardening frontend transformation program
+7. [../canon/Ambitions_Full_Frontend_Transformation_Program.md](../canon/Ambitions_Full_Frontend_Transformation_Program.md) for the post-hardening frontend transformation program
 8. [../canon/design/README.md](../canon/design/README.md) for explicit future frontend design truth
 9. [../canon/design/Ambitions_Frontend_Transformation_Execution_Classification.md](../canon/design/Ambitions_Frontend_Transformation_Execution_Classification.md) for frontend sequencing truth
 10. [../canon/Ambitions_App_Store_Release_Compliance.md](../canon/Ambitions_App_Store_Release_Compliance.md) for final release-candidate and App Store submission gating
-11. [BATCH_REGISTRY.md](BATCH_REGISTRY.md)
+11. [../canon/Ambitions_Launch_Master_Checklist.md](../canon/Ambitions_Launch_Master_Checklist.md) when the task involves locked launch strategy, launch tracks, or now-to-launch planning
+12. [../canon/Ambitions_Accessibility_Nutrition_Labels_Audit.md](../canon/Ambitions_Accessibility_Nutrition_Labels_Audit.md) when the task involves accessibility-label evaluation or accessibility launch claims
+13. [Launch_Operator_Runbook.md](Launch_Operator_Runbook.md) when the task involves App Store Connect, TestFlight, metadata entry, submission operations, or launch-week operator work
+14. [BATCH_REGISTRY.md](BATCH_REGISTRY.md)
 
 ## Batch Execution
 
@@ -23,10 +26,13 @@ It does not override the higher-level product vision, dependency hierarchy, or b
 
 Codex runs should implement only the active batch unless the user explicitly changes scope.
 Use Ask mode or a brief plan before code changes for larger work.
-Queued post-hardening frontend transformation batches are documented under [batches/README.md](batches/README.md) and must not be activated ahead of the registry.
+Post-hardening frontend transformation batches are documented under [batches/README.md](batches/README.md) and must not be activated ahead of the registry.
 The matching design-truth set for those queued batches lives under [../canon/design/README.md](../canon/design/README.md).
 The matching execution-tiering truth for those queued batches lives under [../canon/design/Ambitions_Frontend_Transformation_Execution_Classification.md](../canon/design/Ambitions_Frontend_Transformation_Execution_Classification.md).
 Final App Store submission gating lives under [../canon/Ambitions_App_Store_Release_Compliance.md](../canon/Ambitions_App_Store_Release_Compliance.md), with the short execution checklist in [Release_Candidate_Review_Checklist.md](Release_Candidate_Review_Checklist.md).
+Locked launch strategy and now-to-launch planning live under [../canon/Ambitions_Launch_Master_Checklist.md](../canon/Ambitions_Launch_Master_Checklist.md).
+Accessibility-label audit truth lives under [../canon/Ambitions_Accessibility_Nutrition_Labels_Audit.md](../canon/Ambitions_Accessibility_Nutrition_Labels_Audit.md).
+Operator execution tasks for App Store Connect, TestFlight, metadata, and launch-day monitoring live under [Launch_Operator_Runbook.md](Launch_Operator_Runbook.md).
 
 ## Supporting Files
 

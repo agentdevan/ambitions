@@ -13,6 +13,15 @@ Its job is to answer a narrower question:
 
 This is a submission-gate document, not a guarantee of approval.
 
+Related launch-planning documents:
+
+- [Ambitions_Launch_Master_Checklist.md](Ambitions_Launch_Master_Checklist.md)
+  Canonical locked launch strategy, doctrine, launch tracks, and now-to-launch phase plan.
+- [Ambitions_Accessibility_Nutrition_Labels_Audit.md](Ambitions_Accessibility_Nutrition_Labels_Audit.md)
+  Dedicated audit artifact for Accessibility Nutrition Labels and evidence-backed claim review.
+- [../codex/Launch_Operator_Runbook.md](../codex/Launch_Operator_Runbook.md)
+  Short operator execution runbook for App Store Connect, metadata, TestFlight, submission, and launch-day operations.
+
 ## Source Of Truth
 
 Use these sources together:

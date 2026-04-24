@@ -10,6 +10,7 @@ final class ProfileViewModel {
     var appearancePreference: AppAppearancePreference
     var accentFamily: AmbitionAccentFamily
     var reviewCadenceDays: Int
+    var isSaving = false
 
     private var hasLoaded = false
 
@@ -18,7 +19,7 @@ final class ProfileViewModel {
         case .loading:
             return "loading"
         case let .loaded(dashboard):
-            return "loaded:\(dashboard.stats.count):\(dashboard.planningSummary.items.count):\(dashboard.preferencesSection.items.count):\(dashboard.trustSection.items.count)"
+            return "loaded:\(dashboard.hero.stats.count):\(dashboard.trustCenter.items.count):\(dashboard.contextVault.items.count):\(dashboard.integrationsSection.items.count)"
         case let .failed(message):
             return "failed:\(message)"
         }
@@ -35,6 +36,14 @@ final class ProfileViewModel {
         appearancePreference = .system
         accentFamily = .sage
         reviewCadenceDays = 7
+    }
+
+    var hasUnsavedChanges: Bool {
+        guard let dashboard = loadedDashboard else { return false }
+        return preferredTab != dashboard.preferences.preferredTab ||
+            appearancePreference != dashboard.preferences.appearancePreference ||
+            accentFamily != dashboard.preferences.accentFamily ||
+            reviewCadenceDays != dashboard.preferences.reviewCadenceDays
     }
 
     func load(using service: any ProfileServicing) async {
@@ -54,6 +63,9 @@ final class ProfileViewModel {
     }
 
     func save(using service: any ProfileServicing) async {
+        guard hasUnsavedChanges else { return }
+        isSaving = true
+        defer { isSaving = false }
         do {
             let dashboard = try await service.saveProfilePreferences(
                 ProfilePreferencesUpdate(

@@ -15,9 +15,13 @@ Use [codex/CONTEXT_INDEX.md](codex/CONTEXT_INDEX.md) for source-of-truth precede
 - [canon/Ambitions_Codex_Batch_Plan.md](canon/Ambitions_Codex_Batch_Plan.md)
   Batching and work packaging.
 - [canon/Ambitions_Full_Frontend_Transformation_Program.md](canon/Ambitions_Full_Frontend_Transformation_Program.md)
-  Queued post-hardening frontend transformation canon. Use with the registry; do not treat it as active work by itself.
+  Post-hardening frontend transformation canon. Use with the registry; do not treat it as active work by itself.
 - [canon/Ambitions_App_Store_Release_Compliance.md](canon/Ambitions_App_Store_Release_Compliance.md)
   Canonical App Store release-compliance and final submission-gate truth after the transformation program closes.
+- [canon/Ambitions_Launch_Master_Checklist.md](canon/Ambitions_Launch_Master_Checklist.md)
+  Canonical launch-planning layer for locked launch strategy, launch doctrine, tracks, and now-to-launch phases. It supplements the roadmap and release-compliance canon without replacing them.
+- [canon/Ambitions_Accessibility_Nutrition_Labels_Audit.md](canon/Ambitions_Accessibility_Nutrition_Labels_Audit.md)
+  Canonical accessibility-label audit artifact for honest, device-specific launch accessibility claims.
 - [canon/Ambitions_Product_Addendum_Continuity_Reality_Execution.md](canon/Ambitions_Product_Addendum_Continuity_Reality_Execution.md)
   Supporting canon addendum for top-level surface questions, mobile provenance, and consolidated platform-pillar language after Batch 48. Use as shorthand only; do not treat it as a parallel master roadmap.
 - [canon/Ambitions_Frontend_Batches_49_60_Revised.md](canon/Ambitions_Frontend_Batches_49_60_Revised.md)
@@ -29,7 +33,7 @@ Use [codex/CONTEXT_INDEX.md](codex/CONTEXT_INDEX.md) for source-of-truth precede
 - [codex/BATCH_REGISTRY.md](codex/BATCH_REGISTRY.md)
   Active work status only.
 - [codex/batches/README.md](codex/batches/README.md)
-  Per-batch execution docs for the queued post-hardening frontend transformation program.
+  Per-batch execution docs for the post-hardening frontend transformation program.
 
 Older docs in this folder are supporting context and do not override the canonical planning stack.
 
@@ -37,6 +41,8 @@ Older docs in this folder are supporting context and do not override the canonic
 
 - [native-build-and-release.md](native-build-and-release.md)
   Native source-of-truth build, test, archive, and CI validation guidance for the current SwiftUI iOS app.
+- [codex/Launch_Operator_Runbook.md](codex/Launch_Operator_Runbook.md)
+  Short operator runbook for App Store Connect, TestFlight, metadata, reviewer notes, and launch-day operations.
 - [codex/Release_Candidate_Review_Checklist.md](codex/Release_Candidate_Review_Checklist.md)
   Short operator checklist for final release-candidate review, reviewer access, privacy/disclosure, and App Store submission prep.
 - [codex/BATCH_REGISTRY.md](codex/BATCH_REGISTRY.md)
@@ -64,3 +70,4 @@ Older docs in this folder are supporting context and do not override the canonic
 - Navigation-only App Intents: Available in this build, manual verification still required.
 - Share Extension: Not shipped in this build.
 - Sync, auth, and account deletion backend flows are not current shipping features.
+- Launch planning and submission operations now have dedicated docs under `docs/canon/` and `docs/codex/`; they supplement but do not replace the roadmap or compliance canon.

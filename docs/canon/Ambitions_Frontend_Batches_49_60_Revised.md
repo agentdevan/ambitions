@@ -37,5 +37,6 @@ Batch 48 remains completed.
 Batch 49 remains completed.
 Batch 50 remains completed.
 Batch 51 is completed.
-Batch 52 is the active batch.
-Completed batch history through Batch 51 remains unchanged.
+Batch 52 is completed.
+Batch 53 is the active batch.
+Completed batch history through Batch 52 remains unchanged.

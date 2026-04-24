@@ -158,6 +158,19 @@ This repo does not include signing identities, provisioning profiles, or App Sto
 
 GitHub Actions does not perform these signed validation or distribution steps.
 
+## Launch Planning And Submission Operations
+
+Use the following documents together when the task is no longer just build/test/archive validation:
+
+- [canon/Ambitions_Launch_Master_Checklist.md](canon/Ambitions_Launch_Master_Checklist.md)
+  Locked launch strategy, launch doctrine, launch tracks, and now-to-launch phases.
+- [canon/Ambitions_App_Store_Release_Compliance.md](canon/Ambitions_App_Store_Release_Compliance.md)
+  Final submission-gate canon and conditional gate truth.
+- [canon/Ambitions_Accessibility_Nutrition_Labels_Audit.md](canon/Ambitions_Accessibility_Nutrition_Labels_Audit.md)
+  Honest accessibility-label audit and evidence requirements.
+- [codex/Launch_Operator_Runbook.md](codex/Launch_Operator_Runbook.md)
+  Short operator checklist for App Store Connect, TestFlight, metadata, reviewer notes, submission, and launch monitoring.
+
 ## GitHub Actions CI Coverage
 
 The native CI workflow lives in [.github/workflows/ios-validate.yml](../.github/workflows/ios-validate.yml) and runs on `macos-15`.

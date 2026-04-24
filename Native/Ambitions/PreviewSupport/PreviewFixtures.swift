@@ -233,48 +233,110 @@ struct PreviewFixtures: Sendable {
             ]
         ),
         profileDashboard: ProfileDashboard(
-            title: "Preview User",
-            subtitle: "Defaults, personalization, and local-only trust status all stay explicit here without turning Profile into a workflow surface.",
-            initials: "PU",
-            badges: ["Local-first", "Hardening pass", "Design system"],
-            stats: [
-                MetricSummary(id: "profile-1", title: "Open ambitions", value: "3", detail: "In active review", icon: "target"),
-                MetricSummary(id: "profile-2", title: "Tracked habits", value: "6", detail: "Current set", icon: "repeat"),
-                MetricSummary(id: "profile-3", title: "Review cadence", value: "Weekly", detail: "Sunday reset", icon: "calendar"),
-                MetricSummary(id: "profile-4", title: "Appearance", value: "System", detail: "Follows the device by default", icon: "circle.lefthalf.filled")
-            ],
-            planningSummary: ProfilePlanningSummary(
-                title: "Planning defaults",
-                subtitle: "Profile keeps the current local planning posture legible without taking over day-to-day workflow.",
-                items: [
-                    SettingsItem(id: "profile-plan-1", title: "Active goals", subtitle: "Goals currently shaping the local portfolio.", icon: "target", valueLabel: "3"),
-                    SettingsItem(id: "profile-plan-2", title: "Review cadence", subtitle: "How often the app frames a reset.", icon: "clock.arrow.circlepath", valueLabel: "Weekly"),
-                    SettingsItem(id: "profile-plan-3", title: "Needs clarification", subtitle: "One planning draft remains visible before it can become trusted work.", icon: "questionmark.bubble", valueLabel: "1"),
-                    SettingsItem(id: "profile-plan-4", title: "Recent planning friction", subtitle: "Recent feedback suggests some work still needs gentler scope.", icon: "waveform.path.ecg", valueLabel: "1")
+            hero: ProfileHeroState(
+                title: "Preview User's system",
+                subtitle: "Configuration, trust, and optional personalization stay calm and explicit here.",
+                dominantTruth: "Appearance is curated, trust is local-first, and optional context remains inspectable.",
+                supportingTruth: "System configuration stays separate from workflow. Optional context stays inspectable, local-first, and reversible.",
+                trustWhisper: "Current trust posture: Ambitions is running in explicit local-only mode. Notifications are not requested for local reminders.",
+                status: .selected,
+                pills: [
+                    ProfileStatusPill(id: "profile-pill-appearance", title: "System mode with Sage", icon: "paintpalette", state: .selected),
+                    ProfileStatusPill(id: "profile-pill-sync", title: "Ambitions is running in explicit local-only mode.", icon: "lock.shield", state: .selected),
+                    ProfileStatusPill(id: "profile-pill-context", title: "6 context signals on device", icon: "waveform.path.ecg", state: .default)
+                ],
+                stats: [
+                    MetricSummary(id: "profile-1", title: "Open goals", value: "3", detail: "In active review", icon: "target"),
+                    MetricSummary(id: "profile-2", title: "Tracked habits", value: "6", detail: "Current set", icon: "repeat"),
+                    MetricSummary(id: "profile-3", title: "Review cadence", value: "Weekly", detail: "Sunday reset", icon: "calendar"),
+                    MetricSummary(id: "profile-4", title: "Context signals", value: "6", detail: "Evidence, feedback, and teaching", icon: "sparkles")
                 ]
             ),
-            preferencesSection: ProfileSectionGroup(
-                title: "Personalization",
-                subtitle: "These controls write directly into the persisted app state the shell already uses.",
+            appearanceStudio: ProfileAppearanceStudioState(
+                title: "Appearance Studio",
+                subtitle: "Curated, authored control over mode and accent so the shell feels personal without turning into a skin chooser.",
+                previewSummary: "Preview the current palette against system-style hierarchy before you save.",
+                modeOptions: [
+                    ProfileAppearanceOption(id: "appearance-system", title: "System", subtitle: "Follow the device while keeping Ambitions hierarchy intact.", preference: .system),
+                    ProfileAppearanceOption(id: "appearance-light", title: "Light", subtitle: "Use the warm light palette full time.", preference: .light),
+                    ProfileAppearanceOption(id: "appearance-dark", title: "Dark", subtitle: "Use the flagship dark palette full time.", preference: .dark)
+                ],
+                accentOptions: [
+                    ProfileAccentOption(id: "accent-sage", title: "Sage", subtitle: "Quiet, grounded, and balanced.", family: .sage),
+                    ProfileAccentOption(id: "accent-blue-gray", title: "Blue Gray", subtitle: "Cooler and architectural.", family: .blueGray),
+                    ProfileAccentOption(id: "accent-muted-gold", title: "Muted Gold", subtitle: "Warm emphasis with restrained glow.", family: .mutedGold),
+                    ProfileAccentOption(id: "accent-copper", title: "Copper", subtitle: "Richer warmth for stronger highlights.", family: .copper),
+                    ProfileAccentOption(id: "accent-sand", title: "Sand", subtitle: "Soft neutral warmth with gentle contrast.", family: .sand)
+                ],
+                previewSwatches: [
+                    ProfilePreviewSwatch(id: "preview-now", title: "Current shell", subtitle: "How the core hierarchy will render after save.", eyebrow: "System", accentFamily: .sage, appearancePreference: .system, state: .selected),
+                    ProfilePreviewSwatch(id: "preview-trust", title: "Trust calm", subtitle: "Trust status keeps a quieter layer than hero actions.", eyebrow: "Trust", accentFamily: .sage, appearancePreference: .system, state: .default),
+                    ProfilePreviewSwatch(id: "preview-context", title: "Context optionality", subtitle: "Optional context stays helpful, not invasive.", eyebrow: "Context", accentFamily: .sage, appearancePreference: .system, state: .default)
+                ],
+                footer: "Appearance changes use the existing shared theme system. Save keeps the choice for the next launch; leaving without saving preserves the current persisted default."
+            ),
+            trustCenter: ProfileTrustCenterState(
+                title: "Trust Center",
+                subtitle: "Trust should read as configuration truth, not a debug console. The pulse below stays calm and human-readable.",
+                pulse: ProfileTrustPulseState(
+                    title: "Sync pulse",
+                    subtitle: "Local-first and stable",
+                    detail: "Portable continuity stays explicit and local-first in this build. Future cloud or continuity productization remains deferred.",
+                    state: .selected
+                ),
                 items: [
-                    SettingsItem(id: "profile-setting-1", title: "Planning storage", subtitle: "Native persistence is active for goals, habits, and evidence", icon: "internaldrive", valueLabel: "Local-first"),
-                    SettingsItem(id: "profile-setting-2", title: "Default tab", subtitle: "Used on the next cold launch", icon: "square.grid.2x2", valueLabel: "Today"),
-                    SettingsItem(id: "profile-setting-3", title: "Appearance", subtitle: "System follows the device while explicit themes stay selectable", icon: "circle.lefthalf.filled", valueLabel: "System"),
-                    SettingsItem(id: "profile-setting-4", title: "Accent family", subtitle: "Curated accents keep the shared system expressive without turning personalization into a toy.", icon: "paintpalette", valueLabel: "Sage"),
-                    SettingsItem(id: "profile-setting-5", title: "Review cadence", subtitle: "The same reset rhythm used by the current local planning flow.", icon: "calendar", valueLabel: "Weekly")
+                    SettingsItem(id: "profile-trust-sync", title: "System trust posture", subtitle: "The current runtime runs from on-device storage, portable backup/restore, and no implied live cloud backend.", icon: "lock.shield", valueLabel: "Ambitions is running in explicit local-only mode."),
+                    SettingsItem(id: "profile-trust-notifications", title: "Notification pulse", subtitle: "Local reminder scheduling exists on the current runtime. Authorization stays explicit here so ambient trust never feels hidden.", icon: "bell.badge", valueLabel: "Not requested"),
+                    SettingsItem(id: "profile-trust-routing", title: "System status", subtitle: "\(ExternalSurfaceTruth.verifiedRoutingTruth). External routes stay on canonical destinations, and unverified surfaces keep conservative copy.", icon: "arrow.triangle.branch", valueLabel: "Calm")
+                ],
+                footer: "Batch 52 establishes the trust framing layer only. Batch 54 owns deeper continuity/sync-trust productization, so this surface stays truthful about what exists today."
+            ),
+            contextVault: ProfileContextVaultState(
+                title: "Context Vault",
+                subtitle: "Optional personal context is inspectable here before later compliance work deepens policy and export surfaces.",
+                items: [
+                    ProfileContextVaultItem(id: "profile-vault-signals", title: "Signals in use", subtitle: "These are the current categories the app can already read from its native repositories.", icon: "tray.full", detail: "2 evidence records, 2 feedback events, 2 teaching signals"),
+                    ProfileContextVaultItem(id: "profile-vault-planning", title: "Planning memory", subtitle: "Clarifications, blocked drafts, and open captures stay visible so future intelligence work remains auditable.", icon: "rectangle.stack.badge.person.crop", detail: "1 draft signal, 1 open capture"),
+                    ProfileContextVaultItem(id: "profile-vault-identity", title: "Personal defaults", subtitle: "Name, launch defaults, and appearance stay separate from the execution surfaces they influence.", icon: "person.text.rectangle", detail: "Preview User")
+                ],
+                policyItems: [
+                    ProfileSignalPolicyItem(id: "profile-policy-optional", title: "Optional by design", detail: "Context is there to improve fit and trust. It is not required to use the core planning system.", state: .default),
+                    ProfileSignalPolicyItem(id: "profile-policy-local", title: "Local-first posture", detail: "Signals stay on device in this build and should remain inspectable before any future continuity expansion.", state: .selected),
+                    ProfileSignalPolicyItem(id: "profile-policy-explicit", title: "Inspectable and understandable", detail: "The app should be able to explain what signal types exist without feeling invasive or technical.", state: .default)
+                ],
+                footer: "This is a foundation layer, not a full privacy admin surface. It prepares future compliance and trust work without inventing Batch 53 or Batch 54 flows early."
+            ),
+            integrationsSection: ProfileSectionGroup(
+                title: "Integrations and permissions",
+                subtitle: "Only the system edges that materially affect trust or routing belong here.",
+                items: [
+                    SettingsItem(id: "profile-integration-notifications", title: "Notifications", subtitle: "Authorization: Not requested yet. Local reminders stay on-device and bounded to the current runtime.", icon: "bell.badge", valueLabel: "Not requested"),
+                    SettingsItem(id: "profile-integration-reminders", title: "Reminders integration", subtitle: "Reminder write paths exist on the current EventKit seam. Authorization stays explicit so scheduling trust is legible.", icon: "checklist", valueLabel: "Not requested"),
+                    SettingsItem(id: "profile-integration-calendar", title: "Calendar integration", subtitle: "Calendar event creation and conflict detection exist on the shared EventKit seam. Read depth depends on authorization level.", icon: "calendar.badge.clock", valueLabel: "Not requested"),
+                    SettingsItem(id: "profile-integration-widgets", title: "Widgets and Live Activity", subtitle: "\(ExternalSurfaceTruth.availableButNeedsManualVerification). These surfaces are read-only in the current batch and still need direct manual review.", icon: "rectangle.3.group", valueLabel: ExternalSurfaceTruth.availableButNeedsManualVerification),
+                    SettingsItem(id: "profile-integration-shortcuts", title: "Navigation shortcuts", subtitle: "\(ExternalSurfaceTruth.availableButNeedsManualVerification). App Intents stay navigation-only and keep canonical routing ownership.", icon: "sparkles.rectangle.stack", valueLabel: ExternalSurfaceTruth.availableButNeedsManualVerification),
+                    SettingsItem(id: "profile-integration-share", title: "Share Extension", subtitle: "\(ExternalSurfaceTruth.notShippedInThisBuild). Share intake remains deferred until a dedicated extension target and handoff path exist.", icon: "square.and.arrow.up", valueLabel: ExternalSurfaceTruth.notShippedInThisBuild)
+                ],
+                footer: "Notification and integration status should answer whether anything important needs attention without turning Profile into an admin checklist."
+            ),
+            defaultsSection: ProfileSectionGroup(
+                title: "Personal defaults",
+                subtitle: "These choices shape the shell, not the truth of your goals or day.",
+                items: [
+                    SettingsItem(id: "profile-default-tab", title: "Default landing tab", subtitle: "Used on the next cold launch so re-entry starts where you prefer.", icon: "square.grid.2x2", valueLabel: "Today"),
+                    SettingsItem(id: "profile-default-review", title: "Review cadence", subtitle: "How often the app frames a planning reset using the current local planning loop.", icon: "clock.arrow.circlepath", valueLabel: "Weekly"),
+                    SettingsItem(id: "profile-default-storage", title: "Storage mode", subtitle: "Goals, captures, evidence, and teaching signals persist through the native on-device repositories.", icon: "internaldrive", valueLabel: "Local-only")
                 ],
                 footer: nil
             ),
-            trustSection: ProfileSectionGroup(
-                title: "Trust and external status",
-                subtitle: "\(ExternalSurfaceTruth.verifiedRoutingTruth). Other external surfaces stay conservative here until manual checks confirm them.",
+            accountSection: ProfileSectionGroup(
+                title: "Account and billing",
+                subtitle: "This build stays explicit about what is not configured yet so Profile never implies hidden account requirements.",
                 items: [
-                    SettingsItem(id: "profile-setting-6", title: "Notifications", subtitle: "\(ExternalSurfaceTruth.availableButNeedsManualVerification). Authorization: Not requested yet.", icon: "bell.badge", valueLabel: "Not requested"),
-                    SettingsItem(id: "profile-setting-7", title: "Widgets and Live Activity", subtitle: "\(ExternalSurfaceTruth.availableButNeedsManualVerification). These surfaces stay read-only and still need explicit manual checks.", icon: "rectangle.3.group", valueLabel: ExternalSurfaceTruth.availableButNeedsManualVerification),
-                    SettingsItem(id: "profile-setting-8", title: "Navigation shortcuts", subtitle: "\(ExternalSurfaceTruth.availableButNeedsManualVerification). App Intents stay navigation-only and open Today, Plan, or the Captures inbox without creating or mutating records.", icon: "sparkles.rectangle.stack", valueLabel: ExternalSurfaceTruth.availableButNeedsManualVerification),
-                    SettingsItem(id: "profile-setting-9", title: "Share Extension", subtitle: "\(ExternalSurfaceTruth.notShippedInThisBuild). Share intake remains deferred until a dedicated extension target and handoff path exist.", icon: "square.and.arrow.up", valueLabel: ExternalSurfaceTruth.notShippedInThisBuild)
+                    SettingsItem(id: "profile-account-mode", title: "Account mode", subtitle: "No sign-in or cloud account is required for the current shipping native experience.", icon: "person.crop.circle", valueLabel: "On-device only"),
+                    SettingsItem(id: "profile-account-billing", title: "Billing", subtitle: "Subscriptions, digital unlocks, and purchase flows are not active product scope in this build.", icon: "creditcard", valueLabel: "Not active")
                 ],
-                footer: "Everything in this version runs from an explicit local-only trust posture. Capture storage is live under Today, routine review lives under Plan, portable backup and restore can stay local-first, routing truth stays explicit, and unverified platform surfaces stay conservative in copy."
+                footer: "Future account or monetization work should land only when canon and release-compliance truth explicitly activate it."
             ),
             notificationAuthorization: ProfileNotificationAuthorization(
                 statusLabel: "Not requested",

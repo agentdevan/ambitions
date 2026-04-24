@@ -89,19 +89,33 @@ final class AmbitionsUITests: XCTestCase {
 
         app.tabBars.buttons["Profile"].tap()
         XCTAssertTrue(app.staticTexts["shell.header.title"].waitForExistence(timeout: 10))
-        XCTAssertTrue(scrollUntilElementExists("profile.personalization-card", in: app))
-        XCTAssertTrue(scrollUntilElementExists("profile.planning-summary-card", in: app))
-        XCTAssertTrue(scrollUntilElementExists("profile.trust-card", in: app))
+        XCTAssertTrue(scrollUntilElementExists("profile.hero-card", in: app))
+        XCTAssertTrue(scrollUntilElementExists("profile.appearance-studio-card", in: app))
+        XCTAssertTrue(scrollUntilElementExists("profile.trust-center-card", in: app))
+        XCTAssertTrue(scrollUntilElementExists("profile.context-vault-card", in: app))
     }
 
-    func testProfilePreferencesControlsAreAccessibleFromKeyboardAndTouch() throws {
+    func testProfileAppearanceStudioControlsAreAccessibleFromKeyboardAndTouch() throws {
         let app = makeApp(bootstrapMode: "preview")
         app.launch()
 
         app.tabBars.buttons["Profile"].tap()
-        XCTAssertTrue(scrollUntilElementExists("profile.personalization-card", in: app))
-        XCTAssertTrue(scrollUntilElementExists("profile.planning-summary-card", in: app))
-        XCTAssertTrue(scrollUntilElementExists("profile.trust-card", in: app))
+        XCTAssertTrue(scrollUntilStaticTextExists("Appearance Studio", in: app, maxAttempts: 8))
+        XCTAssertTrue(scrollUntilStaticTextExists("Accent family", in: app, maxAttempts: 8))
+        XCTAssertTrue(scrollUntilStaticTextExists("Live preview", in: app, maxAttempts: 8))
+        XCTAssertTrue(scrollUntilStaticTextExists("No unsaved changes", in: app, maxAttempts: 8))
+        XCTAssertTrue(scrollUntilStaticTextExists("Persist the curated setup for future launches.", in: app, maxAttempts: 8))
+    }
+
+    func testProfilePersonalDefaultsRemainVisibleBeneathAppearanceStudio() throws {
+        let app = makeApp(bootstrapMode: "preview")
+        app.launch()
+
+        app.tabBars.buttons["Profile"].tap()
+        XCTAssertTrue(scrollUntilStaticTextExists("Appearance Studio", in: app, maxAttempts: 8))
+        XCTAssertTrue(scrollUntilStaticTextExists("Personal defaults", in: app, maxAttempts: 8))
+        XCTAssertTrue(scrollUntilStaticTextExists("Default landing tab", in: app, maxAttempts: 8))
+        XCTAssertTrue(scrollUntilStaticTextExists("Review cadence", in: app, maxAttempts: 8))
     }
 
     func testProfileTrustSurfaceShowsConservativeExternalStatusLabels() throws {
@@ -110,8 +124,8 @@ final class AmbitionsUITests: XCTestCase {
 
         app.tabBars.buttons["Profile"].tap()
 
-        XCTAssertTrue(scrollUntilElementExists("profile.trust-card", in: app))
-        XCTAssertTrue(scrollUntilStaticTextExists("Trust and external status", in: app))
+        XCTAssertTrue(scrollUntilElementExists("profile.trust-center-card", in: app))
+        XCTAssertTrue(scrollUntilStaticTextExists("Trust Center", in: app))
         XCTAssertTrue(scrollUntilStaticTextExists("Notifications", in: app))
         XCTAssertTrue(scrollUntilStaticTextExists("Navigation shortcuts", in: app))
         XCTAssertTrue(scrollUntilStaticTextExists("Share Extension", in: app))

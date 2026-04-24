@@ -1,7 +1,7 @@
 import AmbitionsDesignSystem
 import Foundation
 
-struct SettingsItem: Identifiable, Sendable {
+struct SettingsItem: Identifiable, Sendable, Equatable {
     let id: String
     let title: String
     let subtitle: String?
@@ -16,13 +16,97 @@ struct ProfileNotificationAuthorization: Sendable, Equatable {
     let actionTitle: String?
 }
 
-struct ProfilePlanningSummary: Sendable {
+struct ProfileStatusPill: Identifiable, Sendable, Equatable {
+    let id: String
     let title: String
-    let subtitle: String
-    let items: [SettingsItem]
+    let icon: String?
+    let state: AmbitionVisualState
 }
 
-struct ProfileSectionGroup: Sendable {
+struct ProfileHeroState: Sendable, Equatable {
+    let title: String
+    let subtitle: String
+    let dominantTruth: String
+    let supportingTruth: String
+    let trustWhisper: String
+    let status: AmbitionVisualState
+    let pills: [ProfileStatusPill]
+    let stats: [MetricSummary]
+}
+
+struct ProfileAppearanceOption: Identifiable, Sendable, Equatable {
+    let id: String
+    let title: String
+    let subtitle: String
+    let preference: AppAppearancePreference
+}
+
+struct ProfileAccentOption: Identifiable, Sendable, Equatable {
+    let id: String
+    let title: String
+    let subtitle: String
+    let family: AmbitionAccentFamily
+}
+
+struct ProfilePreviewSwatch: Identifiable, Sendable, Equatable {
+    let id: String
+    let title: String
+    let subtitle: String
+    let eyebrow: String
+    let accentFamily: AmbitionAccentFamily
+    let appearancePreference: AppAppearancePreference
+    let state: AmbitionVisualState
+}
+
+struct ProfileAppearanceStudioState: Sendable, Equatable {
+    let title: String
+    let subtitle: String
+    let previewSummary: String
+    let modeOptions: [ProfileAppearanceOption]
+    let accentOptions: [ProfileAccentOption]
+    let previewSwatches: [ProfilePreviewSwatch]
+    let footer: String
+}
+
+struct ProfileTrustPulseState: Sendable, Equatable {
+    let title: String
+    let subtitle: String
+    let detail: String
+    let state: AmbitionVisualState
+}
+
+struct ProfileTrustCenterState: Sendable, Equatable {
+    let title: String
+    let subtitle: String
+    let pulse: ProfileTrustPulseState
+    let items: [SettingsItem]
+    let footer: String
+}
+
+struct ProfileContextVaultItem: Identifiable, Sendable, Equatable {
+    let id: String
+    let title: String
+    let subtitle: String
+    let icon: String
+    let detail: String
+}
+
+struct ProfileSignalPolicyItem: Identifiable, Sendable, Equatable {
+    let id: String
+    let title: String
+    let detail: String
+    let state: AmbitionVisualState
+}
+
+struct ProfileContextVaultState: Sendable, Equatable {
+    let title: String
+    let subtitle: String
+    let items: [ProfileContextVaultItem]
+    let policyItems: [ProfileSignalPolicyItem]
+    let footer: String
+}
+
+struct ProfileSectionGroup: Sendable, Equatable {
     let title: String
     let subtitle: String
     let items: [SettingsItem]
@@ -45,15 +129,14 @@ struct ProfilePreferencesUpdate: Sendable, Equatable {
     let localOnlyModeEnabled: Bool
 }
 
-struct ProfileDashboard: Sendable {
-    let title: String
-    let subtitle: String
-    let initials: String
-    let badges: [String]
-    let stats: [MetricSummary]
-    let planningSummary: ProfilePlanningSummary
-    let preferencesSection: ProfileSectionGroup
-    let trustSection: ProfileSectionGroup
+struct ProfileDashboard: Sendable, Equatable {
+    let hero: ProfileHeroState
+    let appearanceStudio: ProfileAppearanceStudioState
+    let trustCenter: ProfileTrustCenterState
+    let contextVault: ProfileContextVaultState
+    let integrationsSection: ProfileSectionGroup
+    let defaultsSection: ProfileSectionGroup
+    let accountSection: ProfileSectionGroup
     let notificationAuthorization: ProfileNotificationAuthorization
     let preferences: ProfilePreferencesState
 }

@@ -8,16 +8,15 @@ final class ProfileFeatureServiceTests: XCTestCase {
 
         let dashboard = try await service.loadProfileDashboard()
 
-        XCTAssertTrue(dashboard.subtitle.contains("local-only"))
-        XCTAssertTrue(dashboard.trustSection.subtitle.contains(ExternalSurfaceTruth.verifiedRoutingTruth))
-        XCTAssertTrue(dashboard.trustSection.items.contains(where: { $0.id == "profile-trust" && $0.valueLabel == "Ambitions is running in explicit local-only mode." }))
-        XCTAssertTrue(dashboard.trustSection.items.contains(where: { $0.id == "profile-notifications" && $0.valueLabel == "Not requested" }))
-        XCTAssertTrue(dashboard.trustSection.items.contains(where: { $0.id == "profile-app-intents" && $0.valueLabel == ExternalSurfaceTruth.availableButNeedsManualVerification }))
-        XCTAssertTrue(dashboard.trustSection.items.contains(where: { $0.id == "profile-share-extension" && $0.valueLabel == ExternalSurfaceTruth.notShippedInThisBuild }))
-        XCTAssertTrue(dashboard.trustSection.footer?.contains("local-only trust posture") == true)
-        XCTAssertTrue(dashboard.trustSection.footer?.contains("routing truth stays explicit") == true)
-        XCTAssertTrue(dashboard.trustSection.footer?.contains("unverified platform surfaces stay conservative") == true)
-        XCTAssertFalse(dashboard.subtitle.contains("are available as local device features"))
+        XCTAssertTrue(dashboard.hero.subtitle.contains("Configuration"))
+        XCTAssertTrue(dashboard.trustCenter.pulse.subtitle.contains("Local-first"))
+        XCTAssertTrue(dashboard.trustCenter.items.contains(where: { $0.id == "profile-trust-sync" && $0.valueLabel == "Ambitions is running in explicit local-only mode." }))
+        XCTAssertTrue(dashboard.integrationsSection.items.contains(where: { $0.id == "profile-integration-notifications" && $0.valueLabel == "Not requested" }))
+        XCTAssertTrue(dashboard.integrationsSection.items.contains(where: { $0.id == "profile-integration-shortcuts" && $0.valueLabel == ExternalSurfaceTruth.availableButNeedsManualVerification }))
+        XCTAssertTrue(dashboard.integrationsSection.items.contains(where: { $0.id == "profile-integration-share" && $0.valueLabel == ExternalSurfaceTruth.notShippedInThisBuild }))
+        XCTAssertTrue(dashboard.trustCenter.footer.contains("Batch 54"))
+        XCTAssertTrue(dashboard.accountSection.items.contains(where: { $0.id == "profile-account-billing" && $0.valueLabel == "Not active" }))
+        XCTAssertFalse(dashboard.hero.supportingTruth.contains("local device features"))
     }
 
     func testSavingPreferencesKeepsStorageOnDeviceOnly() async throws {
@@ -52,11 +51,11 @@ final class ProfileFeatureServiceTests: XCTestCase {
 
         let dashboard = try await service.loadProfileDashboard()
 
-        XCTAssertEqual(dashboard.title, "Your profile")
-        XCTAssertEqual(dashboard.initials, "U")
+        XCTAssertEqual(dashboard.hero.title, "Your system")
         XCTAssertEqual(dashboard.preferences.appearancePreference, .system)
         XCTAssertEqual(dashboard.preferences.accentFamily, .sage)
-        XCTAssertTrue(dashboard.preferencesSection.items.contains(where: { $0.id == "profile-appearance" && $0.valueLabel == "System" }))
+        XCTAssertTrue(dashboard.defaultsSection.items.contains(where: { $0.id == "profile-default-storage" && $0.valueLabel == "Local-only" }))
+        XCTAssertTrue(dashboard.contextVault.items.contains(where: { $0.id == "profile-vault-identity" && $0.detail == "No display name stored" }))
     }
 
     func testDashboardUsesInjectedRuntimeSyncCapabilityStatus() async throws {
@@ -75,7 +74,7 @@ final class ProfileFeatureServiceTests: XCTestCase {
 
         let dashboard = try await service.loadProfileDashboard()
 
-        XCTAssertTrue(dashboard.trustSection.items.contains(where: { $0.id == "profile-trust" && $0.valueLabel == "Injected runtime trust posture." }))
+        XCTAssertTrue(dashboard.trustCenter.items.contains(where: { $0.id == "profile-trust-sync" && $0.valueLabel == "Injected runtime trust posture." }))
     }
 
     func testDashboardMapsNotificationAuthorizationIntoNarrowTrustSurface() async throws {
@@ -90,7 +89,8 @@ final class ProfileFeatureServiceTests: XCTestCase {
         XCTAssertEqual(dashboard.notificationAuthorization.statusLabel, "Allowed")
         XCTAssertFalse(dashboard.notificationAuthorization.canRequestAuthorization)
         XCTAssertNil(dashboard.notificationAuthorization.actionTitle)
-        XCTAssertTrue(dashboard.trustSection.items.contains(where: { $0.id == "profile-notifications" && $0.valueLabel == "Allowed" }))
+        XCTAssertTrue(dashboard.trustCenter.items.contains(where: { $0.id == "profile-trust-notifications" && $0.valueLabel == "Allowed" }))
+        XCTAssertTrue(dashboard.integrationsSection.items.contains(where: { $0.id == "profile-integration-notifications" && $0.valueLabel == "Allowed" }))
     }
 
     func testDashboardMapsDeniedNotificationAuthorizationIntoConservativeTrustSurface() async throws {
@@ -105,23 +105,24 @@ final class ProfileFeatureServiceTests: XCTestCase {
         XCTAssertEqual(dashboard.notificationAuthorization.statusLabel, "Denied")
         XCTAssertFalse(dashboard.notificationAuthorization.canRequestAuthorization)
         XCTAssertNil(dashboard.notificationAuthorization.actionTitle)
-        XCTAssertTrue(dashboard.trustSection.items.contains(where: {
-            $0.id == "profile-notifications" &&
+        XCTAssertTrue(dashboard.integrationsSection.items.contains(where: {
+            $0.id == "profile-integration-notifications" &&
             $0.valueLabel == "Denied" &&
-            ($0.subtitle?.contains(ExternalSurfaceTruth.availableButNeedsManualVerification) ?? false)
+            ($0.subtitle?.contains("Denied in system settings") ?? false)
         }))
     }
 
-    func testDashboardAddsPlanningSummaryWithoutTurningProfileIntoWorkflow() async throws {
+    func testDashboardAddsContextVaultAndDefaultsWithoutTurningProfileIntoWorkflow() async throws {
         let repositories = try await makeRepositories()
         let service = RepositoryBackedProfileService(repositories: repositories)
 
         let dashboard = try await service.loadProfileDashboard()
 
-        XCTAssertEqual(dashboard.planningSummary.title, "Planning defaults")
-        XCTAssertTrue(dashboard.planningSummary.items.contains(where: { $0.id == "profile-plan-review-cadence" }))
-        XCTAssertTrue(dashboard.preferencesSection.items.contains(where: { $0.id == "profile-tab" }))
-        XCTAssertTrue(dashboard.trustSection.items.contains(where: { $0.id == "profile-widgets" }))
+        XCTAssertEqual(dashboard.contextVault.title, "Context Vault")
+        XCTAssertTrue(dashboard.contextVault.items.contains(where: { $0.id == "profile-vault-planning" }))
+        XCTAssertTrue(dashboard.defaultsSection.items.contains(where: { $0.id == "profile-default-tab" }))
+        XCTAssertTrue(dashboard.integrationsSection.items.contains(where: { $0.id == "profile-integration-widgets" }))
+        XCTAssertEqual(dashboard.appearanceStudio.title, "Appearance Studio")
     }
 }
 
