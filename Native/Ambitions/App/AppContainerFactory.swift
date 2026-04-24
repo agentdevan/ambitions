@@ -167,6 +167,7 @@ enum AppContainerFactory {
             feedback: SwiftDataFeedbackEventRepository(store: store),
             captures: SwiftDataCaptureRepository(store: store),
             teaching: SwiftDataGoalTeachingSignalRepository(store: store),
+            eventLedger: SwiftDataEventLedgerRepository(store: store),
             appState: SwiftDataAppStateRepository(store: store)
         )
     }

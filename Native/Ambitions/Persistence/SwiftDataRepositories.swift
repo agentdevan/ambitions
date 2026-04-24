@@ -426,6 +426,90 @@ private enum RepositoryMapping {
         throw PersistenceError.invalidStoredValue("Teaching signal snapshots must decode into GoalTeachingSignal.")
     }
 
+    static func eventLedgerRecord(from event: EventLedgerEntry) throws -> EventLedgerRecord {
+        EventLedgerRecord(
+            id: event.id,
+            kindRaw: event.kind.rawValue,
+            occurredAt: event.occurredAt,
+            sourceRaw: event.source.rawValue,
+            goalID: event.goalID,
+            captureID: event.captureID,
+            planID: event.planID,
+            planScope: event.planScope,
+            reviewID: event.reviewID,
+            title: event.title,
+            summaryText: event.summary,
+            semanticState: event.semanticState,
+            toneRaw: event.tone.rawValue,
+            schemaVersion: event.schemaVersion,
+            privacyRaw: event.privacy.rawValue,
+            localOnly: event.localOnly,
+            createdAt: event.createdAt,
+            updatedAt: event.updatedAt,
+            evidenceReferencesData: try PersistenceCoding.encode(event.evidenceReferences),
+            metadataData: try PersistenceCoding.encode(event.metadata),
+            payloadData: try PersistenceCoding.encode(event.payload),
+            trustData: try PersistenceCoding.encode(event.trust),
+            snapshotData: try PersistenceCoding.encode(event)
+        )
+    }
+
+    static func apply(_ event: EventLedgerEntry, to record: EventLedgerRecord) throws {
+        record.kindRaw = event.kind.rawValue
+        record.occurredAt = event.occurredAt
+        record.sourceRaw = event.source.rawValue
+        record.goalID = event.goalID
+        record.captureID = event.captureID
+        record.planID = event.planID
+        record.planScope = event.planScope
+        record.reviewID = event.reviewID
+        record.title = event.title
+        record.summaryText = event.summary
+        record.semanticState = event.semanticState
+        record.toneRaw = event.tone.rawValue
+        record.schemaVersion = event.schemaVersion
+        record.privacyRaw = event.privacy.rawValue
+        record.localOnly = event.localOnly
+        record.createdAt = event.createdAt
+        record.updatedAt = event.updatedAt
+        record.evidenceReferencesData = try PersistenceCoding.encode(event.evidenceReferences)
+        record.metadataData = try PersistenceCoding.encode(event.metadata)
+        record.payloadData = try PersistenceCoding.encode(event.payload)
+        record.trustData = try PersistenceCoding.encode(event.trust)
+        record.snapshotData = try PersistenceCoding.encode(event)
+    }
+
+    static func eventLedgerEntry(from record: EventLedgerRecord) throws -> EventLedgerEntry {
+        if let snapshot = try? PersistenceCoding.decode(EventLedgerEntry.self, from: record.snapshotData) {
+            return snapshot
+        }
+
+        return EventLedgerEntry(
+            id: record.id,
+            kind: EventLedgerKind(rawValue: record.kindRaw) ?? .goalUpdated,
+            occurredAt: record.occurredAt,
+            source: EventLedgerSource(rawValue: record.sourceRaw) ?? .system,
+            goalID: record.goalID,
+            captureID: record.captureID,
+            planID: record.planID,
+            planScope: record.planScope,
+            reviewID: record.reviewID,
+            title: record.title,
+            summary: record.summaryText,
+            semanticState: record.semanticState,
+            tone: EventLedgerTone(rawValue: record.toneRaw) ?? .neutral,
+            trust: (try? PersistenceCoding.decode(EventLedgerTrustMetadata.self, from: record.trustData)) ?? EventLedgerTrustMetadata(),
+            evidenceReferences: (try? PersistenceCoding.decode([EventLedgerEvidenceReference].self, from: record.evidenceReferencesData)) ?? [],
+            metadata: (try? PersistenceCoding.decode([String: String].self, from: record.metadataData)) ?? [:],
+            payload: (try? PersistenceCoding.decode([String: String].self, from: record.payloadData)) ?? [:],
+            schemaVersion: record.schemaVersion,
+            privacy: EventLedgerPrivacyClassification(rawValue: record.privacyRaw) ?? .standard,
+            localOnly: record.localOnly,
+            createdAt: record.createdAt,
+            updatedAt: record.updatedAt
+        )
+    }
+
     static func captureStatus(from rawValue: String) -> CaptureStatus {
         switch rawValue {
         case "pending":
@@ -834,6 +918,128 @@ actor InMemoryGoalTeachingSignalRepository: GoalTeachingSignalRepository {
         let incomingByID = Dictionary(uniqueKeysWithValues: signals.map { ($0.id, $0) })
         self.signals.removeAll { incomingByID[$0.id] != nil }
         self.signals.append(contentsOf: signals)
+    }
+}
+
+actor InMemoryEventLedgerRepository: EventLedgerRepository {
+    private var events: [EventLedgerEntry] = []
+
+    func append(_ event: EventLedgerEntry) async throws {
+        events.removeAll { $0.id == event.id }
+        events.append(event)
+    }
+
+    func fetchRecent(limit: Int) async throws -> [EventLedgerEntry] {
+        Array(sorted(events).prefix(max(0, limit)))
+    }
+
+    func fetchEvents(goalID: String) async throws -> [EventLedgerEntry] {
+        sorted(events.filter { $0.goalID == goalID })
+    }
+
+    func fetchEvents(captureID: String) async throws -> [EventLedgerEntry] {
+        sorted(events.filter { $0.captureID == captureID })
+    }
+
+    func fetchEvents(kind: EventLedgerKind) async throws -> [EventLedgerEntry] {
+        sorted(events.filter { $0.kind == kind })
+    }
+
+    func fetchEvents(from start: String, through end: String) async throws -> [EventLedgerEntry] {
+        sorted(events.filter { $0.occurredAt >= start && $0.occurredAt <= end })
+    }
+
+    func redactEvent(id: String, at timestamp: String) async throws {
+        events = events.map { event in
+            event.id == id ? event.redacted(at: timestamp) : event
+        }
+    }
+
+    func deleteEvent(id: String) async throws {
+        events.removeAll { $0.id == id }
+    }
+
+    private func sorted(_ events: [EventLedgerEntry]) -> [EventLedgerEntry] {
+        events.sorted {
+            if $0.occurredAt != $1.occurredAt {
+                return $0.occurredAt > $1.occurredAt
+            }
+            return $0.id > $1.id
+        }
+    }
+}
+
+struct SwiftDataEventLedgerRepository: EventLedgerRepository {
+    let store: AmbitionsPersistenceStore
+
+    func append(_ event: EventLedgerEntry) async throws {
+        try await store.write { context in
+            if let record = try context.fetch(FetchDescriptor<EventLedgerRecord>()).first(where: { $0.id == event.id }) {
+                try RepositoryMapping.apply(event, to: record)
+            } else {
+                context.insert(try RepositoryMapping.eventLedgerRecord(from: event))
+            }
+        }
+    }
+
+    func fetchRecent(limit: Int) async throws -> [EventLedgerEntry] {
+        let boundedLimit = max(0, limit)
+        let events = try await fetchAll { _ in true }
+        return events.prefixArray(boundedLimit)
+    }
+
+    func fetchEvents(goalID: String) async throws -> [EventLedgerEntry] {
+        try await fetchAll { $0.goalID == goalID }
+    }
+
+    func fetchEvents(captureID: String) async throws -> [EventLedgerEntry] {
+        try await fetchAll { $0.captureID == captureID }
+    }
+
+    func fetchEvents(kind: EventLedgerKind) async throws -> [EventLedgerEntry] {
+        try await fetchAll { $0.kindRaw == kind.rawValue }
+    }
+
+    func fetchEvents(from start: String, through end: String) async throws -> [EventLedgerEntry] {
+        try await fetchAll { $0.occurredAt >= start && $0.occurredAt <= end }
+    }
+
+    func redactEvent(id: String, at timestamp: String) async throws {
+        try await store.write { context in
+            guard let record = try context.fetch(FetchDescriptor<EventLedgerRecord>()).first(where: { $0.id == id }) else {
+                return
+            }
+            let redacted = try RepositoryMapping.eventLedgerEntry(from: record).redacted(at: timestamp)
+            try RepositoryMapping.apply(redacted, to: record)
+        }
+    }
+
+    func deleteEvent(id: String) async throws {
+        try await store.write { context in
+            for record in try context.fetch(FetchDescriptor<EventLedgerRecord>()) where record.id == id {
+                context.delete(record)
+            }
+        }
+    }
+
+    private func fetchAll(where isIncluded: @escaping (EventLedgerRecord) -> Bool) async throws -> [EventLedgerEntry] {
+        try await store.read { context in
+            try context.fetch(FetchDescriptor<EventLedgerRecord>())
+                .filter(isIncluded)
+                .sorted {
+                    if $0.occurredAt != $1.occurredAt {
+                        return $0.occurredAt > $1.occurredAt
+                    }
+                    return $0.id > $1.id
+                }
+                .map(RepositoryMapping.eventLedgerEntry(from:))
+        }
+    }
+}
+
+private extension Array where Element == EventLedgerEntry {
+    func prefixArray(_ count: Int) -> [EventLedgerEntry] {
+        Array(prefix(count))
     }
 }
 

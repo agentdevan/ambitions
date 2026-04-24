@@ -47,12 +47,13 @@ This document defines the consolidated Ambitions 2.0 systems. Product surfaces c
 ## Memory / Event Ledger
 
 - Purpose: Durable local record of meaningful events and learning inputs.
-- Owned concepts: action completed, delayed, skipped, moved, split, recovered, reviewed, corrected, imported/exported, scheduled, unscheduled.
+- Owned concepts: action completed, delayed, skipped, moved, split, recovered, reviewed, corrected, imported/exported, scheduled, unscheduled, priority/reality changes, commitment capture/routing, Context Lens changes/inferences, goal scope, deliverables, deadlines, displacement, and priority-conflict recovery.
 - Consumed by: Now State, Reviews, Path Intelligence, Explanation, Accessibility Nutrition, sync/export.
 - Dependencies: persistence boundaries, Command Pipeline.
 - Must not be duplicated: parallel histories inside features.
 - Ambitions 2.0 scope: local-first ledger and review projections.
 - Later scope: cross-device merge policy after Apple-first sync verification.
+- Batch 65 implementation status: The canonical local ledger foundation exists as `EventLedgerEntry` / `EventLedgerKind` with repository, SwiftData, in-memory, redaction/delete, and adapter helpers for current evidence, feedback, and teaching signals. Its taxonomy includes future-safe event hooks for Priority Reality Model, Context Lens, Commitment Capture, and Goal Container scope changes without implementing those behaviors. Broad feature emission, review projections, portable snapshot inclusion, sync merge policy, and UI history surfaces remain deferred to their owning batches.
 
 ## Command Pipeline
 

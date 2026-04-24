@@ -312,6 +312,17 @@ protocol GoalTeachingSignalRepository: Sendable {
     func saveSignals(_ signals: [GoalTeachingSignal]) async throws
 }
 
+protocol EventLedgerRepository: Sendable {
+    func append(_ event: EventLedgerEntry) async throws
+    func fetchRecent(limit: Int) async throws -> [EventLedgerEntry]
+    func fetchEvents(goalID: String) async throws -> [EventLedgerEntry]
+    func fetchEvents(captureID: String) async throws -> [EventLedgerEntry]
+    func fetchEvents(kind: EventLedgerKind) async throws -> [EventLedgerEntry]
+    func fetchEvents(from start: String, through end: String) async throws -> [EventLedgerEntry]
+    func redactEvent(id: String, at timestamp: String) async throws
+    func deleteEvent(id: String) async throws
+}
+
 protocol AppStateRepository: Sendable {
     func loadState() async throws -> AppStateSnapshot
     func saveState(_ state: AppStateSnapshot) async throws
@@ -328,6 +339,7 @@ struct AppRepositories: Sendable {
     let feedback: any FeedbackEventRepository
     let captures: any CaptureRepository
     let teaching: any GoalTeachingSignalRepository
+    let eventLedger: any EventLedgerRepository
     let appState: any AppStateRepository
 
     init(
@@ -337,6 +349,7 @@ struct AppRepositories: Sendable {
         feedback: any FeedbackEventRepository,
         captures: any CaptureRepository,
         teaching: any GoalTeachingSignalRepository = InMemoryGoalTeachingSignalRepository(),
+        eventLedger: any EventLedgerRepository = InMemoryEventLedgerRepository(),
         appState: any AppStateRepository
     ) {
         self.goals = goals
@@ -345,6 +358,7 @@ struct AppRepositories: Sendable {
         self.feedback = feedback
         self.captures = captures
         self.teaching = teaching
+        self.eventLedger = eventLedger
         self.appState = appState
     }
 }

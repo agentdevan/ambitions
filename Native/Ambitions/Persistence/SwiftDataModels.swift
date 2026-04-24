@@ -425,6 +425,83 @@ final class TeachingSignalRecord {
 }
 
 @Model
+final class EventLedgerRecord {
+    @Attribute(.unique) var id: String
+    var kindRaw: String
+    var occurredAt: String
+    var sourceRaw: String
+    var goalID: String?
+    var captureID: String?
+    var planID: String?
+    var planScope: String?
+    var reviewID: String?
+    var title: String
+    var summaryText: String?
+    var semanticState: String?
+    var toneRaw: String
+    var schemaVersion: String
+    var privacyRaw: String
+    var localOnly: Bool
+    var createdAt: String
+    var updatedAt: String
+    var evidenceReferencesData: Data
+    var metadataData: Data
+    var payloadData: Data
+    var trustData: Data
+    var snapshotData: Data
+
+    init(
+        id: String,
+        kindRaw: String,
+        occurredAt: String,
+        sourceRaw: String,
+        goalID: String?,
+        captureID: String?,
+        planID: String?,
+        planScope: String?,
+        reviewID: String?,
+        title: String,
+        summaryText: String?,
+        semanticState: String?,
+        toneRaw: String,
+        schemaVersion: String,
+        privacyRaw: String,
+        localOnly: Bool,
+        createdAt: String,
+        updatedAt: String,
+        evidenceReferencesData: Data,
+        metadataData: Data,
+        payloadData: Data,
+        trustData: Data,
+        snapshotData: Data
+    ) {
+        self.id = id
+        self.kindRaw = kindRaw
+        self.occurredAt = occurredAt
+        self.sourceRaw = sourceRaw
+        self.goalID = goalID
+        self.captureID = captureID
+        self.planID = planID
+        self.planScope = planScope
+        self.reviewID = reviewID
+        self.title = title
+        self.summaryText = summaryText
+        self.semanticState = semanticState
+        self.toneRaw = toneRaw
+        self.schemaVersion = schemaVersion
+        self.privacyRaw = privacyRaw
+        self.localOnly = localOnly
+        self.createdAt = createdAt
+        self.updatedAt = updatedAt
+        self.evidenceReferencesData = evidenceReferencesData
+        self.metadataData = metadataData
+        self.payloadData = payloadData
+        self.trustData = trustData
+        self.snapshotData = snapshotData
+    }
+}
+
+@Model
 final class AppStateRecord {
     @Attribute(.unique) var id: String
     var preferredTabRaw: String
