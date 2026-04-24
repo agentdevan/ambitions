@@ -30,9 +30,10 @@ Live queue truth in the current repo:
 - Batch 55 — Completed
 - Batch 56 — Completed
 - Batch 57 — Completed
-- Batch 58 — Active
-- Batches 59-60 — Queued
-- the front-end transformation program has completed implementation through **Batch 57** and is active at **Batch 58**
+- Batch 58 — Completed
+- Batch 59 — Completed
+- Batch 60 — Active
+- the front-end transformation program has completed implementation through **Batch 59** and is active at **Batch 60**
 
 Batch 39 is a docs-only foundation batch.
 It makes the transformation program explicit enough to guide later implementation batches without authorizing shell implementation, route rewiring, or surface redesign work ahead of Batch 40.
@@ -342,9 +343,9 @@ If status language here drifts, the registry controls active-vs-queued truth and
 | 55 | Front-End Transformation 16 / External surfaces I — widgets, Live Activities, notifications, and Focus Screenlet | Completed | First external-surface implementation wave. |
 | 56 | Front-End Transformation 17 / External surfaces II — share extension, App Intents, shortcuts, routing, and external creation | Completed | Share Extension, App Intents/App Shortcuts, external creation queue/import, and origin-preserving canonical routing/handoff landed with green automated validation; OS visual/discoverability checks remain release/platform review items. |
 | 57 | Front-End Transformation 18 / Cross-surface command, recall, and ambient coherence | Completed | Cross-surface command, recall, provenance, and handoff coherence landed with shared Memory Lens and continuity presentation; SpringBoard-level widget, notification, Live Activity, and shortcut visual presentation remains release/platform checklist review. |
-| 58 | Front-End Transformation 19 / iPad and Mac surface architecture and first implementation | Active | Future-platform implementation begins. |
-| 59 | Front-End Transformation 20 / Watch and Apple TV ambient surface architecture and first implementation | Queued | Ambient and room-scale future surfaces begin. |
-| 60 | Front-End Transformation 21 / Finish-quality pass, accessibility, performance, and release polish | Queued | Final visual + interaction closure and the RC-review build target before the dedicated release-compliance gate. |
+| 58 | Front-End Transformation 19 / iPad and Mac surface architecture and first implementation | Completed | iPad and Mac larger-screen implementation is intentionally deferred out of v1 under the locked iPhone-only launch strategy; existing adaptive iPhone behavior must not regress, and future iPad/Mac exploration remains post-launch optionality. |
+| 59 | Front-End Transformation 20 / Watch and Apple TV ambient surface architecture and first implementation | Completed | Watch and Apple TV implementation is intentionally deferred out of v1 under the locked iPhone-only launch strategy; Watch remains the first likely post-launch expansion target, TV remains future/optional, and external-surface contracts stay future-compatible. |
+| 60 | Front-End Transformation 21 / Finish-quality pass, accessibility, performance, and release polish | Active | Final visual + interaction closure and the RC-review build target before the dedicated release-compliance gate. |
 
 ---
 
@@ -1289,89 +1290,85 @@ Completed as a cross-surface command, recall, and ambient coherence pass. Memory
 ## Batch 58 — Front-End Transformation 19 / iPad and Mac surface architecture and first implementation
 
 ### Status
-Active
+Completed
 
 ### Goal
-Begin future-platform implementation with coherent larger-screen versions of Ambitions.
+Align launch scope so iPad and Mac stay intentionally out of v1 while the iPhone app remains the only required launch client.
 
 ### In Scope
-- iPad shell architecture
-- Mac shell architecture
-- larger-screen layout grammar
-- multi-pane patterns where useful
-- sidebar / tab / detail coexistence decisions
-- keyboard command model
-- larger-screen Strategy Composer refinements
-- larger-screen Plan workspace refinements
-- larger-screen Insights and Goal Detail patterns
-- cross-device continuity rules
-- first implementation pass for iPad and Mac surface set
+- launch-scope wording that keeps v1 iPhone-only
+- confirmation that existing adaptive iPhone behavior should not regress
+- future optionality language for iPad and Mac post-launch exploration
+- control-layer consistency across launch docs and batch registry
 
 ### Deferred to Later Batches, Not Excluded
-- Watch surfaces
-- Apple TV surfaces
+- iPad and Mac surface implementation
+- larger-screen layout, keyboard, and multi-pane product work
+- all future iPad and Mac surface prototypes until after v1
 
 ### Dependency Rules
-- do not simply stretch the iPhone UI
-- larger screens must keep the same product philosophy
-- Mac and iPad should feel native while clearly part of Ambitions
+- do not regress existing iPhone adaptive behavior
+- keep the locked launch strategy iPhone-only, portrait-only, and U.S.-only
+- treat iPad and Mac exploration as optional post-launch work
 
 ### Exit Criteria
-- iPad and Mac have coherent first implementations
-- multi-pane and keyboard interactions feel considered
-- cross-device continuity is real, not conceptual
+- launch-scope docs agree that iPad and Mac are intentionally deferred from v1
+- existing iPhone behavior remains stable and adaptive where needed
+- no product implementation was required for this batch under the locked launch strategy
 
 ### Validation
-- platform builds as applicable
-- targeted layout and interaction tests
-- shared logic regression tests
-- manual larger-screen audits
+- docs/control reconciliation only
+- registry and roadmap consistency checks
+- no product build or implementation work required
 
 ### Completion Rule
-Complete only when iPad and Mac feel like true Ambitions clients, not enlarged phone ports.
+Complete only when the launch strategy clearly records iPad and Mac as post-launch optionality rather than a v1 requirement.
+
+### Completion Note
+Completed as a scope-alignment batch. iPad and Mac larger-screen implementation is intentionally deferred out of v1, the launch remains iPhone-only/portrait-only/U.S.-only, existing adaptive iPhone behavior must not regress, and future iPad/Mac exploration is post-launch optionality rather than required product work.
 
 ---
 
 ## Batch 59 — Front-End Transformation 20 / Watch and Apple TV ambient surface architecture and first implementation
 
 ### Status
-Queued
+Completed
 
 ### Goal
-Begin future ambient and room-scale implementations for Watch and Apple TV.
+Align launch scope so Watch and Apple TV stay intentionally out of v1 while preserving future-compatible ambient contracts.
 
 ### In Scope
-- Watch surface architecture
-- Apple TV surface architecture
-- Focus Screenlet watch adaptation
-- glance and confirm patterns for Watch
-- routine / reminder / momentum / quick-capture ambient patterns for Watch
-- Apple TV reflection / weekly reset / review-oriented ambient concepts where appropriate
-- first implementation pass for Watch and Apple TV priorities
-- cross-device state and continuity treatment
-- ambient copy and interaction refinement for ultra-low-input surfaces
+- launch-scope wording that keeps Watch and Apple TV out of v1
+- future-compatibility language for existing ambient and external contracts
+- confirmation that Watch is the first likely post-launch expansion target
+- confirmation that TV remains future/optional and outside release-candidate scope
 
 ### Deferred to Later Batches, Not Excluded
-- final finish-quality pass
+- Watch implementation
+- Apple TV implementation
+- all ambient and room-scale surface product work until after v1
 
 ### Dependency Rules
-- Watch should prioritize clarity, confirmation, momentum, and quick actions
-- Apple TV should prioritize ritual, review, and ambient value, not deep editing
-- future surfaces must inherit the same trust and tone standards
+- preserve future-compatible external-surface and continuity contracts
+- keep the locked launch strategy iPhone-only, portrait-only, and U.S.-only
+- keep Watch as the first likely post-launch expansion target
+- keep TV as future/optional, not release-candidate scope
 
 ### Exit Criteria
-- Watch and Apple TV have coherent first implementations
-- ambient device roles are meaningful
-- future device work no longer lives only as theory
+- launch-scope docs agree that Watch and Apple TV are intentionally deferred from v1
+- future ambient contracts remain compatible with later expansion
+- no product implementation was required for this batch under the locked launch strategy
 
 ### Validation
-- platform build validation as applicable
-- targeted ambient-surface tests
-- shared-state continuity tests
-- manual audits as available
+- docs/control reconciliation only
+- registry and roadmap consistency checks
+- no product build or implementation work required
 
 ### Completion Rule
-Complete only when Watch and Apple TV surfaces have real product roles and initial implementation truth.
+Complete only when the launch strategy clearly records Watch as a likely post-launch target and Apple TV as future/optional rather than a v1 requirement.
+
+### Completion Note
+Completed as a scope-alignment batch. Watch and Apple TV implementation is intentionally deferred out of v1, Watch remains the first likely post-launch expansion target, Apple TV remains future/optional and outside release-candidate scope, existing external-surface contracts stay future-compatible, and no product implementation was required under the locked launch strategy.
 
 ---
 
@@ -1397,7 +1394,7 @@ Final submission still passes through [Ambitions_App_Store_Release_Compliance.md
 - regression closure for surface interactions
 - preview and screenshot truth pass
 - release-quality visual audit
-- polish for future-platform first implementations as available
+- polish for shipped iPhone and v1 external surfaces only
 
 ### Deferred to Later Batches, Not Excluded
 - none; this is the closure batch for the program

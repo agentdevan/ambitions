@@ -1,6 +1,6 @@
 ﻿# Batch 60 - Front-End Transformation 21 / Finish-quality pass, accessibility, performance, and release polish
 ## Status
-Queued
+Active
 ## Program
 Post-hardening Front-End Transformation Program
 ## Canon Source
@@ -34,7 +34,7 @@ Close the transformation program with a whole-product finish pass that raises Am
 - regression closure for surface interactions
 - preview and screenshot truth pass
 - release-quality visual audit
-- polish for future-platform first implementations as available
+- polish for shipped iPhone and v1 external surfaces only
 ## Deferred, Not Excluded
 - none; this is the closure batch for the program
 ## Dependency Rules

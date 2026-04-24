@@ -242,8 +242,8 @@ Batch 54 does not implement:
 - Batch 55 consumes this contract for widgets, Live Activities, notifications, and Focus Screenlet.
 - Batch 56 consumes this contract for share extension, App Intents, shortcuts, routing, and external creation.
 - Batch 57 may refine cross-surface command, recall, and ambient coherence, but must not redefine the continuity primitives.
-- Batch 58 applies the contract to iPad and Mac surface architecture and first implementation.
-- Batch 59 applies the contract to Watch and Apple TV ambient architecture and first implementation.
+- Batch 58 records iPad and Mac as intentionally deferred from v1 while preserving continuity semantics for later optional expansion.
+- Batch 59 records Watch and Apple TV as intentionally deferred from v1 while preserving continuity semantics for later optional expansion.
 - Batch 60 validates finish quality, accessibility, performance, and release readiness without reopening this doctrine unless a real implementation contradiction is found.
 
 ## Validation Expectations

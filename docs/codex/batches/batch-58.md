@@ -1,6 +1,6 @@
 ﻿# Batch 58 - Front-End Transformation 19 / iPad and Mac surface architecture and first implementation
 ## Status
-Active
+Completed
 ## Program
 Post-hardening Front-End Transformation Program
 ## Canon Source
@@ -15,36 +15,32 @@ Post-hardening Front-End Transformation Program
 - Start only after Batch 38 is complete and stable.
 - Do not activate or implement this batch early; follow the registry and dependency order.
 ## Goal
-Begin future-platform implementation with coherent larger-screen versions of Ambitions.
+Align launch scope so iPad and Mac stay intentionally out of v1 while the iPhone app remains the only required launch client.
 ## In Scope
-- iPad shell architecture
-- Mac shell architecture
-- larger-screen layout grammar
-- multi-pane patterns where useful
-- sidebar / tab / detail coexistence decisions
-- keyboard command model
-- larger-screen Strategy Composer refinements
-- larger-screen Plan workspace refinements
-- larger-screen Insights and Goal Detail patterns
-- cross-device continuity rules
-- first implementation pass for iPad and Mac surface set
+- launch-scope wording that keeps v1 iPhone-only
+- confirmation that existing adaptive iPhone behavior should not regress
+- future optionality language for iPad and Mac post-launch exploration
+- control-layer consistency across launch docs and batch registry
 ## Deferred, Not Excluded
-- Watch surfaces
-- Apple TV surfaces
+- iPad and Mac surface implementation
+- larger-screen layout, keyboard, and multi-pane product work
+- all future iPad and Mac surface prototypes until after v1
 ## Dependency Rules
-- do not simply stretch the iPhone UI
-- larger screens must keep the same product philosophy
-- Mac and iPad should feel native while clearly part of Ambitions
+- do not regress existing iPhone adaptive behavior
+- keep the locked launch strategy iPhone-only, portrait-only, and U.S.-only
+- treat iPad and Mac exploration as optional post-launch work
 ## Exit Criteria
-- iPad and Mac have coherent first implementations
-- multi-pane and keyboard interactions feel considered
-- cross-device continuity is real, not conceptual
+- launch-scope docs agree that iPad and Mac are intentionally deferred from v1
+- existing iPhone behavior remains stable and adaptive where needed
+- no product implementation was required for this batch under the locked launch strategy
 ## Validation
-- platform build validation as applicable
-- targeted layout and interaction tests
-- shared logic regression tests
-- manual larger-screen audits
+- docs/control reconciliation only
+- registry and roadmap consistency checks
+- no product build or implementation work required
 ## Completion Rule
-Complete only when iPad and Mac feel like true Ambitions clients, not enlarged phone ports.
+Complete only when the launch strategy clearly records iPad and Mac as post-launch optionality rather than a v1 requirement.
+
+## Completion Note
+Completed as a scope-alignment batch. iPad and Mac larger-screen implementation is intentionally deferred out of v1, the launch remains iPhone-only/portrait-only/U.S.-only, existing adaptive iPhone behavior must not regress, and future iPad/Mac exploration is post-launch optionality rather than required product work.
 
 ---

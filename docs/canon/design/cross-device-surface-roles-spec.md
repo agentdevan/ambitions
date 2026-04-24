@@ -28,8 +28,8 @@ No later platform should inherit iPhone layout literally when a more native comp
 - Batch 54 defined the State Continuity Mesh contract.
 - Batch 55 may consume that contract for widgets, Live Activities, notifications, and Focus Screenlet.
 - Batch 56 may consume that contract for share extension, App Intents, shortcuts, routing, and external creation.
-- iPad and Mac architecture plus first implementation are deferred to Batch 58.
-- Watch and Apple TV architecture plus first implementation are deferred to Batch 59.
+- Batch 58 is a deferred/alignment batch that keeps iPad and Mac out of v1 while preserving future optionality.
+- Batch 59 is a deferred/alignment batch that keeps Watch and Apple TV out of v1 while preserving future compatibility.
 
 ## Shared Product Rule
 
