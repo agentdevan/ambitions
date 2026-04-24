@@ -8,6 +8,7 @@ enum ExternalActionKind: Equatable, Sendable {
     case openGoal
     case openToday
     case openCapturesInbox
+    case openMemoryLens
     case unsupported(String)
 }
 
@@ -94,6 +95,8 @@ struct ExternalActionCommand: Equatable, Sendable {
             return .openToday
         case "open-captures-inbox":
             return .openCapturesInbox
+        case "open-memory-lens", "memory-lens":
+            return .openMemoryLens
         default:
             return .unsupported(rawAction)
         }
@@ -158,7 +161,7 @@ final class DefaultExternalActionCommandService: ExternalActionCommandExecuting 
                 messageTitle: result.messageTitle
             )
         }
-        return route(appRoute(for: routeRequest), source: command.source)
+        return route(appRoute(for: routeRequest, source: command.source), source: command.source)
     }
 
     private func route(_ route: AppExternalRoute, source: ExternalActionSource) -> ExternalActionResult {
@@ -177,7 +180,7 @@ final class DefaultExternalActionCommandService: ExternalActionCommandExecuting 
         }
     }
 
-    private func appRoute(for request: RuntimeRouteRequest) -> AppExternalRoute {
+    private func appRoute(for request: RuntimeRouteRequest, source: ExternalActionSource) -> AppExternalRoute {
         switch request {
         case .openToday:
             return .openTab(.today)
@@ -185,8 +188,19 @@ final class DefaultExternalActionCommandService: ExternalActionCommandExecuting 
             return .openGoalDetail(goalID: goalID)
         case .openCapturesInbox:
             return .openPlanRoute(.capturesInbox)
+        case .openMemoryLens:
+            return .presentOverlay(.memoryLens(entrySource: entrySource(for: source)))
         case let .presentOverlay(overlay):
             return .presentOverlay(overlay)
+        }
+    }
+
+    private func entrySource(for source: ExternalActionSource) -> ShellCommandEntrySource {
+        switch source {
+        case .deepLink: .deepLink
+        case .notification: .notification
+        case .widget: .widget
+        case .futureExternalPayload: .external
         }
     }
 }

@@ -297,4 +297,5 @@ enum ExternalSurfaceCommandKind: String, Codable, Sendable {
     case openGoal
     case openToday
     case openCapturesInbox
+    case openMemoryLens
 }

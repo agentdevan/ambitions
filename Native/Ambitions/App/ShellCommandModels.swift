@@ -87,6 +87,22 @@ enum ShellCommandEntrySource: String, Hashable, Sendable, Codable {
     case widget
     case shareExtension
     case external
+
+    var displayTitle: String {
+        switch self {
+        case .shellCompose: "Command"
+        case .shellUtility: "Shell"
+        case .goalsCreate: "Goals"
+        case .todayQuickCapture: "Today"
+        case .capturesScreen: "Captures"
+        case .deepLink: "Deep link"
+        case .appIntent: "Shortcut"
+        case .notification: "Notification"
+        case .widget: "Widget"
+        case .shareExtension: "Share"
+        case .external: "External surface"
+        }
+    }
 }
 
 enum ShellCommandPresentationContext: String, Hashable, Sendable, Codable {
@@ -186,10 +202,90 @@ struct ShellOverlayState: Hashable, Identifiable, Sendable, Codable {
     }
 }
 
+struct ShellCommandHistoryEntry: Hashable, Identifiable, Sendable, Codable {
+    let id: String
+    let title: String
+    let subtitle: String
+    let source: ShellCommandEntrySource
+    let presentationContext: ShellCommandPresentationContext
+    let destinationLabel: String
+    let recordedAt: String
+
+    init(
+        id: String = UUID().uuidString,
+        title: String,
+        subtitle: String,
+        source: ShellCommandEntrySource,
+        presentationContext: ShellCommandPresentationContext,
+        destinationLabel: String,
+        recordedAt: String
+    ) {
+        self.id = id
+        self.title = title
+        self.subtitle = subtitle
+        self.source = source
+        self.presentationContext = presentationContext
+        self.destinationLabel = destinationLabel
+        self.recordedAt = recordedAt
+    }
+
+    var sourceLabel: String { source.displayTitle }
+}
+
+struct ShellContinuityReceipt: Hashable, Identifiable, Sendable, Codable {
+    let id: String
+    let title: String
+    let body: String
+    let source: ShellCommandEntrySource
+    let destinationLabel: String
+
+    init(
+        id: String = UUID().uuidString,
+        title: String,
+        body: String,
+        source: ShellCommandEntrySource,
+        destinationLabel: String
+    ) {
+        self.id = id
+        self.title = title
+        self.body = body
+        self.source = source
+        self.destinationLabel = destinationLabel
+    }
+
+    var sourceLabel: String { source.displayTitle }
+}
+
 enum ShellCommandDestination: Hashable, Sendable {
     case tab(AppTab)
     case goal(String)
     case planRoute(PlanRouteTarget)
     case insightsRoute(InsightsRouteTarget)
     case overlay(ShellOverlayState)
+
+    var displayLabel: String {
+        switch self {
+        case let .tab(tab):
+            tab.title
+        case .goal:
+            "Goal Detail"
+        case let .planRoute(target):
+            switch target {
+            case .capturesInbox: "Captures"
+            case .habits: "Habits"
+            case .weeklyReview: "Weekly Review"
+            }
+        case let .insightsRoute(target):
+            switch target {
+            case .monthlyReview: "Monthly Review"
+            case .history: "History"
+            }
+        case let .overlay(overlay):
+            switch overlay.kind {
+            case .quietCommandSheet: "Command"
+            case .memoryLens: "Memory Lens"
+            case .createGoal: "Create Goal"
+            }
+        }
+    }
 }

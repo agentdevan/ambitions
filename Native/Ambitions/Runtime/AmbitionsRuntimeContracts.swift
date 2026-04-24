@@ -83,6 +83,7 @@ enum RuntimeRouteRequest: Codable, Sendable, Equatable {
     case openToday
     case openGoalDetail(goalID: String)
     case openCapturesInbox
+    case openMemoryLens
     case presentOverlay(ShellOverlayState)
 }
 

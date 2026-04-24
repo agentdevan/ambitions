@@ -257,6 +257,8 @@ private struct QuietCommandSheetView: View {
                     }
                     .padding(theme.spacing.lg)
                 }
+
+                commandHistoryCard
             }
             .navigationTitle("Command")
             .toolbar {
@@ -271,6 +273,37 @@ private struct QuietCommandSheetView: View {
             if selectedIntent == .quickCapture {
                 isCaptureFieldFocused = true
             }
+        }
+    }
+
+    @ViewBuilder
+    private var commandHistoryCard: some View {
+        let history = Array(container.navigation.recentCommandHistory.prefix(3))
+        if history.isEmpty == false {
+            AppCard {
+                VStack(alignment: .leading, spacing: theme.spacing.md) {
+                    SectionHeader(
+                        title: "Recent return paths",
+                        subtitle: "Small reminders of where command and recall last carried context."
+                    )
+
+                    ForEach(history) { entry in
+                        HStack(alignment: .top, spacing: theme.spacing.sm) {
+                            TagPill(entry.sourceLabel, state: .default)
+                            VStack(alignment: .leading, spacing: theme.spacing.xxxs) {
+                                Text(entry.title)
+                                    .font(theme.typography.bodyEmphasized)
+                                    .foregroundStyle(theme.colors.textPrimary)
+                                Text("\(entry.subtitle) Returned to \(entry.destinationLabel).")
+                                    .font(theme.typography.caption)
+                                    .foregroundStyle(theme.colors.textSecondary)
+                            }
+                        }
+                    }
+                }
+                .padding(theme.spacing.lg)
+            }
+            .accessibilityIdentifier("shell.command.history-card")
         }
     }
 
@@ -431,14 +464,16 @@ private struct MemoryLensOverlayView: View {
                 title: title,
                 subtitle: subtitle
             ) {
+                recallContextCard
+
                 AppCard {
                     VStack(alignment: .leading, spacing: theme.spacing.md) {
                         SectionHeader(
-                            title: "Search and open",
-                            subtitle: "Bounded recall across shipped goals, captures, recent plan changes, and explicit corrections."
+                            title: "Ask what changed",
+                            subtitle: "Search across goals, captures, recent plan shifts, corrections, learning, and handoff context."
                         )
 
-                        TextField("Search goals, captures, and recent changes", text: $query)
+                        TextField("Try \"why now\", \"what changed\", or a goal name", text: $query)
                             .textFieldStyle(.roundedBorder)
                             .focused($isSearchFocused)
                             .accessibilityIdentifier("shell.memory-lens.search-field")
@@ -455,29 +490,7 @@ private struct MemoryLensOverlayView: View {
                                     Button {
                                         container.commandRouter.route(to: result.destination, source: overlay.entrySource)
                                     } label: {
-                                        HStack(alignment: .top, spacing: theme.spacing.md) {
-                                            Image(systemName: result.systemImage)
-                                                .font(.system(size: theme.icon.mediumSize, weight: .semibold))
-                                                .foregroundStyle(theme.colors.accentWarm)
-                                                .frame(width: 28, height: 28)
-
-                                            VStack(alignment: .leading, spacing: theme.spacing.xxs) {
-                                                HStack(spacing: theme.spacing.xs) {
-                                                    Text(result.title)
-                                                        .font(theme.typography.bodyEmphasized)
-                                                        .foregroundStyle(theme.colors.textPrimary)
-                                                    TagPill(result.badgeTitle, state: result.state)
-                                                }
-                                                Text(result.subtitle)
-                                                    .font(theme.typography.caption)
-                                                    .foregroundStyle(theme.colors.textSecondary)
-                                                    .multilineTextAlignment(.leading)
-                                            }
-
-                                            Spacer(minLength: theme.spacing.sm)
-                                        }
-                                        .frame(maxWidth: .infinity, alignment: .leading)
-                                        .padding(.vertical, theme.spacing.xxs)
+                                        memoryLensResultRow(result)
                                     }
                                     .buttonStyle(.plain)
                                     .accessibilityIdentifier("shell.memory-lens.result.\(result.id)")
@@ -502,6 +515,56 @@ private struct MemoryLensOverlayView: View {
         .task {
             isSearchFocused = true
         }
+    }
+
+    private var recallContextCard: some View {
+        AppCard(state: overlay.entrySource == .shellUtility || overlay.entrySource == .shellCompose ? .default : .selected) {
+            VStack(alignment: .leading, spacing: theme.spacing.sm) {
+                HStack(spacing: theme.spacing.xs) {
+                    TagPill("From \(overlay.entrySource.displayTitle)", icon: "arrow.down.forward", state: .default)
+                    TagPill(overlay.presentationContext == .recall ? "Recall" : overlay.presentationContext.rawValue.capitalized, state: .selected)
+                }
+                Text("Memory Lens explains useful recent context and returns to owning surfaces. It does not expose a raw activity log.")
+                    .font(theme.typography.caption)
+                    .foregroundStyle(theme.colors.textSecondary)
+            }
+            .padding(theme.spacing.lg)
+        }
+        .accessibilityIdentifier("shell.memory-lens.context-card")
+    }
+
+    private func memoryLensResultRow(_ result: MemoryLensResult) -> some View {
+        HStack(alignment: .top, spacing: theme.spacing.md) {
+            Image(systemName: result.systemImage)
+                .font(.system(size: theme.icon.mediumSize, weight: .semibold))
+                .foregroundStyle(theme.colors.accentWarm)
+                .frame(width: 28, height: 28)
+
+            VStack(alignment: .leading, spacing: theme.spacing.xs) {
+                HStack(spacing: theme.spacing.xs) {
+                    TagPill(result.facetTitle, state: result.state)
+                    TagPill(result.badgeTitle, state: .default)
+                }
+                Text(result.title)
+                    .font(theme.typography.bodyEmphasized)
+                    .foregroundStyle(theme.colors.textPrimary)
+                Text(result.subtitle)
+                    .font(theme.typography.caption)
+                    .foregroundStyle(theme.colors.textSecondary)
+                    .multilineTextAlignment(.leading)
+                Text(result.explanation)
+                    .font(theme.typography.micro)
+                    .foregroundStyle(theme.colors.textTertiary)
+                    .multilineTextAlignment(.leading)
+                Text(result.actionTitle)
+                    .font(theme.typography.caption)
+                    .foregroundStyle(theme.colors.accentPrimary)
+            }
+
+            Spacer(minLength: theme.spacing.sm)
+        }
+        .frame(maxWidth: .infinity, alignment: .leading)
+        .padding(.vertical, theme.spacing.xs)
     }
 
     private var searchKey: String {

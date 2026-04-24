@@ -111,6 +111,7 @@ struct ExternalSurfaceSnapshotBuilder: Sendable {
         var commands = [
             ExternalSurfaceCommandDescriptor(kind: .openToday, requiresGoalID: false, requiresStepID: false),
             ExternalSurfaceCommandDescriptor(kind: .openCapturesInbox, requiresGoalID: false, requiresStepID: false),
+            ExternalSurfaceCommandDescriptor(kind: .openMemoryLens, requiresGoalID: false, requiresStepID: false),
         ]
 
         if hasNextAction {

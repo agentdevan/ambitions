@@ -8,6 +8,7 @@ enum ExternalSurfaceActionName: String, Codable, Sendable, Equatable {
     case askForSmallerStep = "ask-for-smaller-step"
     case openToday = "open-today"
     case openCapturesInbox = "open-captures-inbox"
+    case openMemoryLens = "open-memory-lens"
 
     init(rawAction: String) {
         switch rawAction.lowercased() {
@@ -23,6 +24,8 @@ enum ExternalSurfaceActionName: String, Codable, Sendable, Equatable {
             self = .openToday
         case "open-captures-inbox":
             self = .openCapturesInbox
+        case "open-memory-lens", "memory-lens":
+            self = .openMemoryLens
         default:
             self = .open
         }
@@ -143,6 +146,7 @@ struct ExternalSurfaceGlanceState: Sendable, Equatable {
             ritualCue = nil
             supportedCommands = [
                 ExternalSurfaceCommandDescriptor(kind: .openToday, requiresGoalID: false, requiresStepID: false),
+                ExternalSurfaceCommandDescriptor(kind: .openMemoryLens, requiresGoalID: false, requiresStepID: false),
             ]
             ambientState = nil
             continuity = ExternalSurfaceContinuityState(
@@ -184,6 +188,7 @@ struct ExternalSurfaceGlanceState: Sendable, Equatable {
                 ExternalSurfaceCommandDescriptor(kind: .snooze, requiresGoalID: true, requiresStepID: true),
                 ExternalSurfaceCommandDescriptor(kind: .openGoal, requiresGoalID: true, requiresStepID: false),
                 ExternalSurfaceCommandDescriptor(kind: .openToday, requiresGoalID: false, requiresStepID: false),
+                ExternalSurfaceCommandDescriptor(kind: .openMemoryLens, requiresGoalID: false, requiresStepID: false),
             ]
         } else {
             primaryReference = nil
@@ -194,6 +199,7 @@ struct ExternalSurfaceGlanceState: Sendable, Equatable {
             ritualCue = nil
             supportedCommands = [
                 ExternalSurfaceCommandDescriptor(kind: .openToday, requiresGoalID: false, requiresStepID: false),
+                ExternalSurfaceCommandDescriptor(kind: .openMemoryLens, requiresGoalID: false, requiresStepID: false),
             ]
         }
 

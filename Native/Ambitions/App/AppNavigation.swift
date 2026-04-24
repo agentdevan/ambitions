@@ -53,6 +53,8 @@ final class AppNavigationModel {
     var activeOverlay: ShellOverlayState?
     var lastExternalRoute: AppExternalRoute?
     var lastExternalRouteSource: AppExternalRouteSource?
+    var recentCommandHistory: [ShellCommandHistoryEntry]
+    var continuityReceipt: ShellContinuityReceipt?
 
     init(selectedTab: AppTab) {
         self.selectedTab = selectedTab.canonicalTopLevelTab
@@ -64,6 +66,8 @@ final class AppNavigationModel {
         activeOverlay = nil
         lastExternalRoute = nil
         lastExternalRouteSource = nil
+        recentCommandHistory = []
+        continuityReceipt = nil
 
         switch selectedTab {
         case .captures:
@@ -155,6 +159,13 @@ final class AppNavigationModel {
 
     func presentOverlay(_ route: ShellOverlayState) {
         activeOverlay = route
+        recordCommandHistory(
+            title: route.intent?.title ?? route.kind.id.replacingOccurrences(of: "-", with: " ").capitalized,
+            subtitle: route.presentationContext.historySubtitle,
+            source: route.entrySource,
+            presentationContext: route.presentationContext,
+            destinationLabel: ShellCommandDestination.overlay(route).displayLabel
+        )
     }
 
     func presentCommandSheet(
@@ -166,6 +177,13 @@ final class AppNavigationModel {
             intent: intent,
             entrySource: source,
             presentationContext: presentationContext
+        )
+        recordCommandHistory(
+            title: intent?.title ?? "Command",
+            subtitle: presentationContext.historySubtitle,
+            source: source,
+            presentationContext: presentationContext,
+            destinationLabel: "Command"
         )
     }
 
@@ -185,6 +203,13 @@ final class AppNavigationModel {
             goalID: goalID,
             captureID: captureID
         )
+        recordCommandHistory(
+            title: intent?.title ?? "Memory Lens",
+            subtitle: query.isEmpty ? presentationContext.historySubtitle : "Recalled \"\(query)\".",
+            source: source,
+            presentationContext: presentationContext,
+            destinationLabel: "Memory Lens"
+        )
     }
 
     func presentCreateGoal(
@@ -196,6 +221,13 @@ final class AppNavigationModel {
             entrySource: source,
             query: seedText,
             captureID: captureID
+        )
+        recordCommandHistory(
+            title: "New goal",
+            subtitle: seedText.isEmpty ? "Opened Strategy Composer from \(source.displayTitle)." : "Started from saved context.",
+            source: source,
+            presentationContext: .createGoal,
+            destinationLabel: "Create Goal"
         )
     }
 
@@ -213,6 +245,36 @@ final class AppNavigationModel {
         activeOverlay = nil
     }
 
+    func recordRoute(
+        title: String,
+        source: ShellCommandEntrySource,
+        presentationContext: ShellCommandPresentationContext,
+        destination: ShellCommandDestination,
+        receiptBody: String? = nil
+    ) {
+        recordCommandHistory(
+            title: title,
+            subtitle: presentationContext.historySubtitle,
+            source: source,
+            presentationContext: presentationContext,
+            destinationLabel: destination.displayLabel
+        )
+        if let receiptBody {
+            continuityReceipt = ShellContinuityReceipt(
+                title: "Context carried",
+                body: receiptBody,
+                source: source,
+                destinationLabel: destination.displayLabel
+            )
+        }
+    }
+
+    func takeContinuityReceipt() -> ShellContinuityReceipt? {
+        let receipt = continuityReceipt
+        continuityReceipt = nil
+        return receipt
+    }
+
     func fallbackExternalLanding() {
         dismissOverlay()
         selectToday()
@@ -222,5 +284,39 @@ final class AppNavigationModel {
         let context = todayEntryContext
         todayEntryContext = .standard
         return context
+    }
+
+    private func recordCommandHistory(
+        title: String,
+        subtitle: String,
+        source: ShellCommandEntrySource,
+        presentationContext: ShellCommandPresentationContext,
+        destinationLabel: String
+    ) {
+        let entry = ShellCommandHistoryEntry(
+            title: title,
+            subtitle: subtitle,
+            source: source,
+            presentationContext: presentationContext,
+            destinationLabel: destinationLabel,
+            recordedAt: ISO8601DateFormatter().string(from: Date())
+        )
+        recentCommandHistory.removeAll { $0.title == entry.title && $0.source == entry.source && $0.destinationLabel == entry.destinationLabel }
+        recentCommandHistory.insert(entry, at: 0)
+        recentCommandHistory = Array(recentCommandHistory.prefix(4))
+    }
+}
+
+private extension ShellCommandPresentationContext {
+    var historySubtitle: String {
+        switch self {
+        case .neutral: "Opened from the shared shell command surface."
+        case .quickCapture: "Captured without leaving the shared command language."
+        case .createGoal: "Started from the shell-owned goal creation path."
+        case .recall: "Recalled context without opening a raw history log."
+        case .recovery: "Returned to a calmer recovery posture."
+        case .focus: "Returned to the current focus posture."
+        case .plan: "Opened the week-shaping context."
+        }
     }
 }

@@ -80,15 +80,21 @@ final class ExternalActionCommandServiceTests: XCTestCase {
             ExternalActionCommand(kind: .openCapturesInbox, source: .futureExternalPayload),
             now: .now
         )
+        _ = await service.execute(
+            ExternalActionCommand(kind: .openMemoryLens, source: .widget),
+            now: .now
+        )
 
         XCTAssertEqual(router.dispatchedRoutes.map(\.route), [
             .openTab(.today),
             .openGoalDetail(goalID: "goal-123"),
             .openPlanRoute(.capturesInbox),
+            .presentOverlay(.memoryLens(entrySource: .widget)),
         ])
         XCTAssertEqual(router.dispatchedRoutes.map(\.source), [
             .widgetAction,
             .notificationAction,
+            .widgetAction,
             .widgetAction,
         ])
     }

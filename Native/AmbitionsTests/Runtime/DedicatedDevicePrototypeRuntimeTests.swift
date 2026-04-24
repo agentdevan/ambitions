@@ -24,8 +24,8 @@ final class DedicatedDevicePrototypeRuntimeTests: XCTestCase {
         XCTAssertEqual(projection.openCaptureUrgency, .low)
         XCTAssertEqual(projection.blockerSummary, ExternalSurfaceBlockerSummary(waitingCount: 1, blockedCount: 2))
         XCTAssertEqual(projection.ritualCue?.kind, .middayReset)
-        XCTAssertEqual(projection.commandOptions.map(\.descriptor.kind), [.complete, .snooze, .openGoal, .openToday, .openCapturesInbox])
-        XCTAssertEqual(projection.commandOptions.map(\.disposition), [.deviceSafeQuickAction, .deviceSafeQuickAction, .fallbackToPhone, .fallbackToPhone, .fallbackToPhone])
+        XCTAssertEqual(projection.commandOptions.map(\.descriptor.kind), [.complete, .snooze, .openGoal, .openToday, .openCapturesInbox, .openMemoryLens])
+        XCTAssertEqual(projection.commandOptions.map(\.disposition), [.deviceSafeQuickAction, .deviceSafeQuickAction, .fallbackToPhone, .fallbackToPhone, .fallbackToPhone, .fallbackToPhone])
         XCTAssertEqual(projection.defaultFallbackRouteRequest, .openToday)
     }
 
@@ -37,8 +37,8 @@ final class DedicatedDevicePrototypeRuntimeTests: XCTestCase {
         XCTAssertEqual(projection.todayPosture, .empty)
         XCTAssertEqual(projection.pressureLevel, .open)
         XCTAssertEqual(projection.openCaptureUrgency, .none)
-        XCTAssertEqual(projection.commandOptions.map(\.descriptor.kind), [.openToday])
-        XCTAssertEqual(projection.commandOptions.map(\.disposition), [.fallbackToPhone])
+        XCTAssertEqual(projection.commandOptions.map(\.descriptor.kind), [.openToday, .openMemoryLens])
+        XCTAssertEqual(projection.commandOptions.map(\.disposition), [.fallbackToPhone, .fallbackToPhone])
         XCTAssertEqual(projection.defaultFallbackRouteRequest, .openToday)
     }
 
@@ -185,6 +185,7 @@ private extension DedicatedDevicePrototypeRuntimeTests {
                     ExternalSurfaceCommandDescriptor(kind: .openGoal, requiresGoalID: true, requiresStepID: false),
                     ExternalSurfaceCommandDescriptor(kind: .openToday, requiresGoalID: false, requiresStepID: false),
                     ExternalSurfaceCommandDescriptor(kind: .openCapturesInbox, requiresGoalID: false, requiresStepID: false),
+                    ExternalSurfaceCommandDescriptor(kind: .openMemoryLens, requiresGoalID: false, requiresStepID: false),
                 ]
             )
         )

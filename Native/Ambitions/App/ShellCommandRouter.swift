@@ -119,6 +119,13 @@ final class DefaultShellCommandRouter: ShellCommandRouting {
                 )
             )
         }
+        navigation.recordRoute(
+            title: destination.displayLabel,
+            source: source,
+            presentationContext: .recall,
+            destination: destination,
+            receiptBody: receiptBody(for: destination, source: source)
+        )
     }
 
     func execute(
@@ -142,6 +149,13 @@ final class DefaultShellCommandRouter: ShellCommandRouting {
                     now: now
                 )
                 navigation.openCapturesInbox()
+                navigation.recordRoute(
+                    title: "Capture saved",
+                    source: source,
+                    presentationContext: .quickCapture,
+                    destination: .planRoute(.capturesInbox),
+                    receiptBody: "Capture saved locally and opened in Plan-owned captures."
+                )
                 return ShellCommandExecutionResult(
                     title: "Capture saved",
                     destination: .planRoute(.capturesInbox),
@@ -155,12 +169,33 @@ final class DefaultShellCommandRouter: ShellCommandRouting {
             return ShellCommandExecutionResult(destination: .overlay(.createGoal(entrySource: source)))
         case .quickPlanPatch, .openWeek:
             navigation.selectTab(.plan)
+            navigation.recordRoute(
+                title: intent.title,
+                source: source,
+                presentationContext: .plan,
+                destination: .tab(.plan),
+                receiptBody: "Returned to Plan from \(source.displayTitle)."
+            )
             return ShellCommandExecutionResult(destination: .tab(.plan))
         case .quickRecovery:
             navigation.selectToday(entryContext: .recovery)
+            navigation.recordRoute(
+                title: intent.title,
+                source: source,
+                presentationContext: .recovery,
+                destination: .tab(.today),
+                receiptBody: "Recovery context opened from \(source.displayTitle)."
+            )
             return ShellCommandExecutionResult(destination: .tab(.today))
         case .quickFocus:
             navigation.selectToday(entryContext: .focus)
+            navigation.recordRoute(
+                title: intent.title,
+                source: source,
+                presentationContext: .focus,
+                destination: .tab(.today),
+                receiptBody: "Focus context opened from \(source.displayTitle)."
+            )
             return ShellCommandExecutionResult(destination: .tab(.today))
         case .openGoal:
             guard let goalID, goalID.isEmpty == false else {
@@ -172,10 +207,24 @@ final class DefaultShellCommandRouter: ShellCommandRouting {
                 return ShellCommandExecutionResult(destination: .overlay(.memoryLens(intent: .openGoal, entrySource: source)))
             }
             navigation.openGoalDetail(goalID: goalID)
+            navigation.recordRoute(
+                title: "Open goal",
+                source: source,
+                presentationContext: .recall,
+                destination: .goal(goalID),
+                receiptBody: "Opened the canonical Goal Detail from \(source.displayTitle)."
+            )
             return ShellCommandExecutionResult(destination: .goal(goalID))
         case .openCapture:
             _ = captureID
             navigation.openCapturesInbox()
+            navigation.recordRoute(
+                title: "Open capture",
+                source: source,
+                presentationContext: .recall,
+                destination: .planRoute(.capturesInbox),
+                receiptBody: "Opened the Plan-owned captures inbox from \(source.displayTitle)."
+            )
             return ShellCommandExecutionResult(destination: .planRoute(.capturesInbox))
         case .memoryLens:
             presentMemoryLens(
@@ -187,6 +236,15 @@ final class DefaultShellCommandRouter: ShellCommandRouting {
                 captureID: captureID
             )
             return ShellCommandExecutionResult(destination: .overlay(.memoryLens(entrySource: source, query: text, goalID: goalID, captureID: captureID)))
+        }
+    }
+
+    private func receiptBody(for destination: ShellCommandDestination, source: ShellCommandEntrySource) -> String? {
+        switch source {
+        case .widget, .notification, .shareExtension, .appIntent, .external, .deepLink:
+            return "Opened \(destination.displayLabel) from \(source.displayTitle) with source context preserved."
+        case .shellCompose, .shellUtility, .goalsCreate, .todayQuickCapture, .capturesScreen:
+            return nil
         }
     }
 }

@@ -29,9 +29,10 @@ Live queue truth in the current repo:
 - Batch 54 — Completed
 - Batch 55 — Completed
 - Batch 56 — Completed
-- Batch 57 — Active
-- Batches 58-60 — Queued
-- the front-end transformation program has completed implementation through **Batch 56** and is active at **Batch 57**
+- Batch 57 — Completed
+- Batch 58 — Active
+- Batches 59-60 — Queued
+- the front-end transformation program has completed implementation through **Batch 57** and is active at **Batch 58**
 
 Batch 39 is a docs-only foundation batch.
 It makes the transformation program explicit enough to guide later implementation batches without authorizing shell implementation, route rewiring, or surface redesign work ahead of Batch 40.
@@ -340,8 +341,8 @@ If status language here drifts, the registry controls active-vs-queued truth and
 | 54 | Front-End Transformation 15 / State Continuity Mesh, sync trust, and real-time continuity contract | Completed | State Continuity Mesh contract established in [Ambitions_State_Continuity_Mesh.md](Ambitions_State_Continuity_Mesh.md) before external-surface widening. |
 | 55 | Front-End Transformation 16 / External surfaces I — widgets, Live Activities, notifications, and Focus Screenlet | Completed | First external-surface implementation wave. |
 | 56 | Front-End Transformation 17 / External surfaces II — share extension, App Intents, shortcuts, routing, and external creation | Completed | Share Extension, App Intents/App Shortcuts, external creation queue/import, and origin-preserving canonical routing/handoff landed with green automated validation; OS visual/discoverability checks remain release/platform review items. |
-| 57 | Front-End Transformation 18 / Cross-surface command, recall, and ambient coherence | Active | Command, recall, provenance, and handoff coherence. |
-| 58 | Front-End Transformation 19 / iPad and Mac surface architecture and first implementation | Queued | Future-platform implementation begins. |
+| 57 | Front-End Transformation 18 / Cross-surface command, recall, and ambient coherence | Completed | Cross-surface command, recall, provenance, and handoff coherence landed with shared Memory Lens and continuity presentation; SpringBoard-level widget, notification, Live Activity, and shortcut visual presentation remains release/platform checklist review. |
+| 58 | Front-End Transformation 19 / iPad and Mac surface architecture and first implementation | Active | Future-platform implementation begins. |
 | 59 | Front-End Transformation 20 / Watch and Apple TV ambient surface architecture and first implementation | Queued | Ambient and room-scale future surfaces begin. |
 | 60 | Front-End Transformation 21 / Finish-quality pass, accessibility, performance, and release polish | Queued | Final visual + interaction closure and the RC-review build target before the dedicated release-compliance gate. |
 
@@ -1240,7 +1241,7 @@ Completed with a real Share Extension target and premium intake UX, a shared ext
 ## Batch 57 — Front-End Transformation 18 / Cross-surface command, recall, and ambient coherence
 
 ### Status
-Active
+Completed
 
 ### Goal
 Complete the command and recall system across app, widgets, notifications, shortcuts, and future device surfaces.
@@ -1280,12 +1281,15 @@ Complete the command and recall system across app, widgets, notifications, short
 ### Completion Rule
 Complete only when command and recall meaningfully raise the product's "external brain" feel.
 
+### Completion Note
+Completed as a cross-surface command, recall, and ambient coherence pass. Memory Lens now covers what changed, why now, recent correction, recent learning, and handoff context; command history, continuity receipts, and external-surface command descriptors preserve origin through canonical app routes without creating account/backend sync work, larger-screen platform work, or final polish scope.
+
 ---
 
 ## Batch 58 — Front-End Transformation 19 / iPad and Mac surface architecture and first implementation
 
 ### Status
-Queued
+Active
 
 ### Goal
 Begin future-platform implementation with coherent larger-screen versions of Ambitions.

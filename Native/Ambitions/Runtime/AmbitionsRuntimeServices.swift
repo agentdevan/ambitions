@@ -86,6 +86,8 @@ final class DefaultRuntimeActionCommandExecutor: RuntimeActionCommandExecuting {
             return RuntimeActionResult(outcome: .routed, routeRequest: .openToday)
         case .openCapturesInbox:
             return RuntimeActionResult(outcome: .routed, routeRequest: .openCapturesInbox)
+        case .openMemoryLens:
+            return RuntimeActionResult(outcome: .routed, routeRequest: .openMemoryLens)
         case .unsupported:
             return RuntimeActionResult(outcome: .unsupported)
         }

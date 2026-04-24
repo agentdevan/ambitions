@@ -484,22 +484,100 @@ final class DefaultAppExternalRouter: AppExternalRouting {
     func dispatch(_ route: AppExternalRoute, source: AppExternalRouteSource) {
         navigation.lastExternalRoute = route
         navigation.lastExternalRouteSource = source
+        let entrySource = source.entrySource
 
         switch route {
         case let .openTab(tab):
             navigation.selectTab(tab)
+            navigation.recordRoute(
+                title: "Open \(tab.title)",
+                source: entrySource,
+                presentationContext: .recall,
+                destination: .tab(tab),
+                receiptBody: receiptBody(for: .tab(tab), source: entrySource)
+            )
         case let .openToday(context):
             navigation.selectToday(entryContext: context)
+            navigation.recordRoute(
+                title: context == .standard ? "Open Today" : context.title,
+                source: entrySource,
+                presentationContext: context.presentationContext,
+                destination: .tab(.today),
+                receiptBody: receiptBody(for: .tab(.today), source: entrySource)
+            )
         case let .openGoalDetail(goalID):
             navigation.openGoalDetail(goalID: goalID)
+            navigation.recordRoute(
+                title: "Open goal",
+                source: entrySource,
+                presentationContext: .recall,
+                destination: .goal(goalID),
+                receiptBody: receiptBody(for: .goal(goalID), source: entrySource)
+            )
         case let .openPlanRoute(target):
             navigation.openPlanRoute(target)
+            navigation.recordRoute(
+                title: "Open \(ShellCommandDestination.planRoute(target).displayLabel)",
+                source: entrySource,
+                presentationContext: .plan,
+                destination: .planRoute(target),
+                receiptBody: receiptBody(for: .planRoute(target), source: entrySource)
+            )
         case let .openInsightsRoute(target):
             navigation.openInsightsRoute(target)
+            navigation.recordRoute(
+                title: "Open \(ShellCommandDestination.insightsRoute(target).displayLabel)",
+                source: entrySource,
+                presentationContext: .recall,
+                destination: .insightsRoute(target),
+                receiptBody: receiptBody(for: .insightsRoute(target), source: entrySource)
+            )
         case let .presentOverlay(route):
             navigation.presentOverlay(route)
         case .genericExternalEntry:
             navigation.fallbackExternalLanding()
+            navigation.recordRoute(
+                title: "External entry",
+                source: entrySource,
+                presentationContext: .recall,
+                destination: .tab(.today),
+                receiptBody: "Opened Today from \(entrySource.displayTitle) because the incoming route was not specific enough."
+            )
+        }
+    }
+
+    private func receiptBody(for destination: ShellCommandDestination, source: ShellCommandEntrySource) -> String {
+        "Opened \(destination.displayLabel) from \(source.displayTitle) with source context preserved."
+    }
+}
+
+private extension AppExternalRouteSource {
+    var entrySource: ShellCommandEntrySource {
+        switch self {
+        case .deepLink: .deepLink
+        case .notificationAction: .notification
+        case .widgetAction: .widget
+        case .liveActivity: .external
+        case .shareExtension: .shareExtension
+        case .appIntent: .appIntent
+        }
+    }
+}
+
+private extension TodayEntryContext {
+    var title: String {
+        switch self {
+        case .standard: "Open Today"
+        case .recovery: "Quick recovery"
+        case .focus: "Quick focus"
+        }
+    }
+
+    var presentationContext: ShellCommandPresentationContext {
+        switch self {
+        case .standard: .recall
+        case .recovery: .recovery
+        case .focus: .focus
         }
     }
 }

@@ -1,6 +1,6 @@
 ﻿# Batch 57 - Front-End Transformation 18 / Cross-surface command, recall, and ambient coherence
 ## Status
-Active
+Completed
 ## Program
 Post-hardening Front-End Transformation Program
 ## Canon Source
@@ -45,5 +45,8 @@ Complete the command and recall system across app, widgets, notifications, short
 - targeted UI tests
 ## Completion Rule
 Complete only when command and recall meaningfully raise the product's "external brain" feel.
+
+## Completion Note
+Completed as a cross-surface command, recall, and ambient coherence pass. Memory Lens now explains what changed, why now, recent corrections, recent learning, and handoff context with shared command/recall presentation; shell command history and continuity receipts preserve origin without adding raw-log or debug-history UI; widgets, notifications, App Intents/shortcuts, share-extension routes, and future-device fallback descriptors all route through shared shell/external command semantics and origin/provenance-aware handoffs. Verified with XcodeGen generation, native simulator build, focused cross-surface routing/recall tests, full `AmbitionsTests` (`398`), targeted UI command/recall/route tests, and isolated reruns for simulator-state UI flakes. SpringBoard-level widget, notification, Live Activity, and shortcut visual presentation remains deferred to the release/platform checklist.
 
 ---

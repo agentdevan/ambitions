@@ -37,6 +37,59 @@ final class MemoryLensServiceTests: XCTestCase {
         XCTAssertEqual(results.first?.kind, .week)
         XCTAssertEqual(results.first?.destination, .tab(.plan))
     }
+
+    func testSearchSurfacesWhyNowLearningCorrectionAndHandoffRecall() async throws {
+        let store = try AmbitionsPersistenceStore(inMemory: true)
+        let repositories = makeRepositories(store: store)
+        let goal = try XCTUnwrap(goalFromFixture(id: "clear-timed-self-goal"))
+        let step = try XCTUnwrap(goal.plan?.sections.flatMap(\.steps).first)
+        try await repositories.goals.saveGoals([goal])
+        try await repositories.feedback.saveEvents([
+            .askedForSmallerVersion(
+                base: GoalFeedbackEventBase(
+                    id: "feedback-small",
+                    stepID: step.id,
+                    occurredAt: "2026-04-22T10:00:00Z",
+                    note: "Make this smaller next time."
+                )
+            )
+        ], goalID: goal.id)
+        try await repositories.teaching.saveSignals([
+            GoalTeachingSignal(
+                id: "teaching-energy",
+                goalID: goal.id,
+                createdAt: "2026-04-22T11:00:00Z",
+                updatedAt: "2026-04-22T11:00:00Z",
+                source: .explicitManualCorrection,
+                kind: .energyFitCorrection,
+                disposition: .active,
+                anchor: GoalTeachingStableAnchor(
+                    artifactKind: .energyEvaluation,
+                    canonicalField: nil,
+                    candidateID: nil,
+                    stageID: nil,
+                    stepID: step.id,
+                    targetFingerprint: "energy::\(step.id)",
+                    contradictionCode: nil,
+                    contradictionArtifactRefs: []
+                ),
+                payload: .energyFit(.init(correctedDisposition: .lighterVersionNeeded)),
+                applicationKey: "goal##energy##step",
+                userNote: "Use a lighter version"
+            )
+        ])
+        let service = DefaultMemoryLensService(repositories: repositories)
+
+        let whyNow = await service.search(query: "why now", seedIntent: .memoryLens)
+        let learning = await service.search(query: "recent learning", seedIntent: .memoryLens)
+        let correction = await service.search(query: "recent correction", seedIntent: .memoryLens)
+        let handoff = await service.search(query: "handoff", seedIntent: .memoryLens)
+
+        XCTAssertTrue(whyNow.contains(where: { $0.kind == .whyNow && $0.facet == .whyNow && $0.destination == .goal(goal.id) }))
+        XCTAssertTrue(learning.contains(where: { $0.kind == .learning && $0.facet == .recentLearning }))
+        XCTAssertTrue(correction.contains(where: { $0.kind == .teaching && $0.facet == .recentCorrection }))
+        XCTAssertTrue(handoff.contains(where: { $0.kind == .handoff && $0.facet == .handoff }))
+    }
 }
 
 private extension MemoryLensServiceTests {

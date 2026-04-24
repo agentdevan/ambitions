@@ -35,6 +35,7 @@ struct NextStepProvider: TimelineProvider {
                     blockerSummary: ExternalSurfaceBlockerSummary(waitingCount: 0, blockedCount: 0),
                     supportedCommands: [
                         ExternalSurfaceCommandDescriptor(kind: .openToday, requiresGoalID: false, requiresStepID: false),
+                        ExternalSurfaceCommandDescriptor(kind: .openMemoryLens, requiresGoalID: false, requiresStepID: false),
                     ]
                 ),
                 ambientState: ExternalSurfaceAmbientState(

@@ -26,6 +26,7 @@ struct AmbitionsRootView: View {
                 profileNavigation()
             }
 
+            shellContinuityReceipt
             shellGlobalEntryButton
         }
         .sheet(item: $navigation.activeOverlay, onDismiss: {
@@ -275,6 +276,42 @@ struct AmbitionsRootView: View {
         .accessibilityHint("Opens the shell-owned command surface.")
         .accessibilityIdentifier("shell.global-entry-button")
         .keyboardShortcut("k", modifiers: [.command])
+    }
+
+    @ViewBuilder
+    private var shellContinuityReceipt: some View {
+        if let receipt = navigation.continuityReceipt {
+            VStack(alignment: .leading, spacing: 6) {
+                HStack(spacing: 8) {
+                    Image(systemName: "arrow.triangle.2.circlepath")
+                    Text(receipt.title)
+                        .font(.caption.weight(.semibold))
+                    Spacer(minLength: 8)
+                    Button {
+                        navigation.continuityReceipt = nil
+                    } label: {
+                        Image(systemName: "xmark")
+                            .font(.caption.weight(.semibold))
+                    }
+                    .buttonStyle(.plain)
+                    .accessibilityLabel("Dismiss context receipt")
+                }
+                Text(receipt.body)
+                    .font(.caption2)
+                    .lineLimit(2)
+            }
+            .padding(.horizontal, 14)
+            .padding(.vertical, 10)
+            .frame(maxWidth: 310, alignment: .leading)
+            .background(.regularMaterial, in: RoundedRectangle(cornerRadius: 16, style: .continuous))
+            .overlay(
+                RoundedRectangle(cornerRadius: 16, style: .continuous)
+                    .stroke(.white.opacity(0.18), lineWidth: 1)
+            )
+            .padding(.trailing, 20)
+            .padding(.bottom, 152)
+            .accessibilityIdentifier("shell.continuity-receipt")
+        }
     }
 
     private func handleCreatedGoal(_ response: CreateGoalResponse, from overlay: ShellOverlayState) async {

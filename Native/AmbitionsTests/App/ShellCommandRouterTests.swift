@@ -51,6 +51,18 @@ final class ShellCommandRouterTests: XCTestCase {
 
         XCTAssertEqual(navigation.selectedTab, .goals)
         XCTAssertEqual(navigation.goalsPath.first?.goalID, "goal-123")
+        XCTAssertEqual(navigation.recentCommandHistory.first?.destinationLabel, "Goal Detail")
+    }
+
+    func testExternalSourceRouteCreatesCalmContinuityReceipt() {
+        let navigation = AppNavigationModel(selectedTab: .today)
+        let router = DefaultShellCommandRouter(navigation: navigation, captureService: StubCaptureService(captures: []))
+
+        router.route(to: .goal("goal-123"), source: .widget)
+
+        XCTAssertEqual(navigation.continuityReceipt?.source, .widget)
+        XCTAssertEqual(navigation.continuityReceipt?.destinationLabel, "Goal Detail")
+        XCTAssertTrue(navigation.continuityReceipt?.body.contains("source context preserved") == true)
     }
 
     func testPresentCreateGoalCarriesSeedTextAndCaptureContext() {

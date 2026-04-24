@@ -31,7 +31,7 @@ final class ExternalSurfaceSnapshotTests: XCTestCase {
         XCTAssertEqual(snapshot.nowState?.openCaptureUrgency, ExternalSurfaceCaptureUrgency.none)
         XCTAssertEqual(snapshot.nowState?.ritualCue?.kind, .morningSetup)
         XCTAssertEqual(snapshot.nowState?.ritualCue?.templateKey, "ritual_morning_setup")
-        XCTAssertEqual(snapshot.nowState?.supportedCommands.map(\.kind), [.complete, .snooze, .openGoal, .openToday, .openCapturesInbox])
+        XCTAssertEqual(snapshot.nowState?.supportedCommands.map(\.kind), [.complete, .snooze, .openGoal, .openToday, .openCapturesInbox, .openMemoryLens])
         XCTAssertEqual(snapshot.ambientState?.today.kind, .today)
         XCTAssertEqual(snapshot.ambientState?.focus.kind, .focus)
         XCTAssertEqual(snapshot.ambientState?.goal.privacySummary, "Goal names stay private here")
