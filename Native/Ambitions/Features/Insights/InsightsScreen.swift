@@ -21,16 +21,32 @@ struct InsightsScreen: View {
                 case .loading:
                     AsyncStateCard(.loading(lines: 10))
                         .transition(.ambitionPanel)
-                case let .failed(message):
-                    AsyncStateCard(
-                        .error(title: "Insights are unavailable", message: message, icon: "chart.line.uptrend.xyaxis", actionTitle: "Retry"),
-                        actionAccessibilityIdentifier: "insights.retry-button"
-                    ) {
-                        Task { await viewModel.refresh(using: container.insightsService) }
-                    }
+                case .failed:
+                    DegradedStateCard(
+                        state: DegradedStateOrchestrator.unavailable(surface: "Insights"),
+                        primaryAccessibilityIdentifier: "insights.retry-button",
+                        onPrimaryAction: {
+                            Task { await viewModel.refresh(using: container.insightsService) }
+                        }
+                    )
                     .transition(.ambitionPanel)
                 case let .loaded(dashboard):
                     InsightsHeroCard(hero: dashboard.hero, onPrimaryAction: handle(heroAction:))
+
+                    if dashboard.isLowHistory {
+                        DegradedStateCard(
+                            state: DegradedStateOrchestrator.insightsLowHistory(),
+                            primaryAccessibilityIdentifier: "insights.low-history.open-today",
+                            secondaryAccessibilityIdentifier: "insights.low-history.open-plan",
+                            onPrimaryAction: {
+                                container.navigation.selectTab(.today)
+                            },
+                            onSecondaryAction: {
+                                container.navigation.selectTab(.plan)
+                            }
+                        )
+                        .transition(.ambitionPanel)
+                    }
 
                     if let ribbon = dashboard.continuityRibbon {
                         InsightsContinuityRibbonCard(ribbon: ribbon, onOpen: handle(ribbon:))

@@ -9,12 +9,55 @@ final class AmbitionsUITests: XCTestCase {
         let app = makeApp(bootstrapMode: "preview")
         app.launch()
 
+        XCTAssertFalse(app.descendants(matching: .any)["onboarding.screen"].waitForExistence(timeout: 2))
         XCTAssertTrue(app.tabBars.buttons["Goals"].waitForExistence(timeout: 10))
         app.tabBars.buttons["Goals"].tap()
 
         XCTAssertTrue(app.descendants(matching: .any)["goals.screen"].waitForExistence(timeout: 10))
         XCTAssertTrue(app.descendants(matching: .any)["goals.hero-card"].waitForExistence(timeout: 10))
         XCTAssertTrue(goalCreateButton(in: app).waitForExistence(timeout: 10))
+    }
+
+    func testForcedOnboardingCreateFirstGoalPathOpensComposer() throws {
+        let app = makeApp(
+            bootstrapMode: "preview",
+            extraEnvironment: ["AMBITIONS_FORCE_ONBOARDING": "1"]
+        )
+        app.launch()
+
+        XCTAssertTrue(app.descendants(matching: .any)["onboarding.screen"].waitForExistence(timeout: 10))
+        XCTAssertTrue(app.buttons["onboarding.next-button"].waitForExistence(timeout: 10))
+        app.buttons["onboarding.next-button"].tap()
+        XCTAssertTrue(app.buttons["onboarding.choice.create_first_goal"].waitForExistence(timeout: 10))
+        app.buttons["onboarding.choice.create_first_goal"].tap()
+        app.buttons["onboarding.next-button"].tap()
+        XCTAssertTrue(app.staticTexts["No Ambitions login"].waitForExistence(timeout: 10))
+        app.buttons["onboarding.start-button"].tap()
+
+        XCTAssertTrue(waitForCreateGoalComposer(in: app))
+        XCTAssertTrue(goalTitleInput(in: app).waitForExistence(timeout: 10))
+    }
+
+    func testForcedOnboardingCaptureFirstPathOpensQuickCapture() throws {
+        let app = makeApp(
+            bootstrapMode: "preview",
+            extraEnvironment: ["AMBITIONS_FORCE_ONBOARDING": "1"]
+        )
+        app.launch()
+
+        XCTAssertTrue(app.descendants(matching: .any)["onboarding.screen"].waitForExistence(timeout: 10))
+        app.buttons["onboarding.next-button"].tap()
+        let captureChoice = app.buttons["onboarding.choice.capture_first"]
+        if captureChoice.waitForExistence(timeout: 2) == false {
+            app.swipeUp()
+        }
+        XCTAssertTrue(captureChoice.waitForExistence(timeout: 10))
+        captureChoice.tap()
+        app.buttons["onboarding.next-button"].tap()
+        XCTAssertTrue(app.staticTexts["No hidden analytics"].waitForExistence(timeout: 10))
+        app.buttons["onboarding.start-button"].tap()
+
+        XCTAssertTrue(shellCaptureInput(in: app).waitForExistence(timeout: 10))
     }
 
     func testPreviewBootstrapCanCreateGoalFromEmptyState() throws {
@@ -540,6 +583,7 @@ final class AmbitionsUITests: XCTestCase {
     private func goalCreateButton(in app: XCUIApplication) -> XCUIElement {
         let candidates = [
             goalsHeroPrimaryAction(in: app),
+            app.buttons["goals.empty.create-goal"],
             app.buttons["goals.create-button"],
             app.buttons["shell.goals.create-button"],
             app.navigationBars.buttons["goals.create-button"],

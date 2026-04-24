@@ -58,6 +58,7 @@ struct AppSession: Sendable {
     let accentFamily: AmbitionAccentFamily
     let launchedAt: Date
     let startupNote: String
+    let shouldShowOnboarding: Bool
 }
 
 struct AppPreferences: Sendable {

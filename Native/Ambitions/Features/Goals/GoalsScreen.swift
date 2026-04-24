@@ -43,10 +43,14 @@ struct GoalsScreen: View {
                         )
                     }
                     AsyncStateCard(.loading(lines: 8))
-                case let .failed(message):
-                    AsyncStateCard(.error(title: "Goals are unavailable", message: message, actionTitle: "Retry")) {
-                        Task { await viewModel.refresh(using: container.goalsService) }
-                    }
+                case .failed:
+                    DegradedStateCard(
+                        state: DegradedStateOrchestrator.unavailable(surface: "Goals"),
+                        primaryAccessibilityIdentifier: "goals.retry-button",
+                        onPrimaryAction: {
+                            Task { await viewModel.refresh(using: container.goalsService) }
+                        }
+                    )
                 case let .loaded(overview):
                     GoalsHeroCard(overview: overview, onPrimaryAction: handlePrimaryAction)
                     GoalsWeekPressureCard(summary: overview.weekPressureSummary)
@@ -67,10 +71,25 @@ struct GoalsScreen: View {
                     }
 
                     if hasVisibleBoardContent(overview) == false {
-                        EmptyStateCard(
-                            title: overview.emptyTitle,
-                            message: overview.emptyMessage,
-                            icon: "scope"
+                        DegradedStateCard(
+                            state: DegradedStateOrchestrator.goalsEmpty(),
+                            primaryAccessibilityIdentifier: "goals.empty.create-goal",
+                            secondaryAccessibilityIdentifier: "goals.empty.capture-first",
+                            onPrimaryAction: {
+                                localCreationMessage = nil
+                                if let onCreateGoal {
+                                    onCreateGoal()
+                                } else {
+                                    isCreateGoalPresented = true
+                                }
+                            },
+                            onSecondaryAction: {
+                                container.commandRouter.presentCommandSheet(
+                                    intent: .quickCapture,
+                                    source: .shellCompose,
+                                    presentationContext: .quickCapture
+                                )
+                            }
                         )
                     } else {
                         ForEach(overview.bands) { band in

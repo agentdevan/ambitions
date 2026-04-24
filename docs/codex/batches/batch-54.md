@@ -1,6 +1,6 @@
 ﻿# Batch 54 - Front-End Transformation 15 / State Continuity Mesh, sync trust, and real-time continuity contract
 ## Status
-Queued
+Active
 ## Program
 Post-hardening Front-End Transformation Program
 ## Canon Source
@@ -11,7 +11,7 @@ Post-hardening Front-End Transformation Program
 - [cross-device-surface-roles-spec.md](../../canon/design/cross-device-surface-roles-spec.md)
 - [trust-explainability-correction-spec.md](../../canon/design/trust-explainability-correction-spec.md)
 ## Start Gate
-- Start only after Batch 38 is complete and stable.
+- Start only after Batch 53 is complete and stable.
 - Do not activate or implement this batch early; follow the registry and dependency order.
 ## Goal
 Establish the State Continuity Mesh and sync-trust continuity contract before external-surface widening.

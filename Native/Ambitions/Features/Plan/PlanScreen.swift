@@ -23,19 +23,32 @@ struct PlanScreen: View {
                 case .loading:
                     AsyncStateCard(.loading(lines: 9))
                         .transition(.ambitionPanel)
-                case let .failed(message):
-                    AsyncStateCard(
-                        .error(title: "Plan is unavailable", message: message, icon: AppTab.plan.systemImage, actionTitle: "Retry"),
-                        actionAccessibilityIdentifier: "plan.retry-button"
-                    ) {
-                        Task { await viewModel.refresh(using: container.planService) }
-                    }
+                case .failed:
+                    DegradedStateCard(
+                        state: DegradedStateOrchestrator.unavailable(surface: "Plan"),
+                        primaryAccessibilityIdentifier: "plan.retry-button",
+                        onPrimaryAction: {
+                            Task { await viewModel.refresh(using: container.planService) }
+                        }
+                    )
                     .transition(.ambitionPanel)
                 case let .loaded(dashboard):
                     PlanHeroCard(hero: dashboard.hero, action: dashboard.primaryAction, onPrimaryAction: handlePrimaryAction)
 
                     if let emptyTitle = dashboard.emptyTitle, let emptyMessage = dashboard.emptyMessage {
-                        EmptyStateCard(title: emptyTitle, message: emptyMessage, icon: AppTab.plan.systemImage)
+                        DegradedStateCard(
+                            state: DegradedStateOrchestrator.planEmpty(),
+                            primaryAccessibilityIdentifier: "plan.empty.create-goal",
+                            secondaryAccessibilityIdentifier: "plan.empty.open-captures",
+                            onPrimaryAction: {
+                                _ = emptyTitle
+                                _ = emptyMessage
+                                container.commandRouter.presentCreateGoal(source: .shellCompose)
+                            },
+                            onSecondaryAction: {
+                                container.navigation.openPlanRoute(.capturesInbox)
+                            }
+                        )
                     }
 
                     PlanPressureScrubberCard(

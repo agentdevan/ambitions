@@ -225,6 +225,8 @@ private struct QuietCommandSheetView: View {
                     .transition(.ambitionTransition(.correction))
                 }
 
+                quickCaptureComposer
+
                 AppCard {
                     VStack(alignment: .leading, spacing: theme.spacing.md) {
                         SectionHeader(
@@ -255,33 +257,6 @@ private struct QuietCommandSheetView: View {
                     }
                     .padding(theme.spacing.lg)
                 }
-
-                if selectedIntent == .quickCapture {
-                    AppCard(state: .selected) {
-                        VStack(alignment: .leading, spacing: theme.spacing.md) {
-                            SectionHeader(
-                                title: "Quick capture",
-                                subtitle: "Save one thought into the canonical captures inbox without leaving the shell-owned compose path."
-                            )
-
-                            TextField("What needs to be remembered?", text: $captureText)
-                                .textFieldStyle(.roundedBorder)
-                                .focused($isCaptureFieldFocused)
-                                .accessibilityIdentifier("shell.command.capture-field")
-
-                            Button {
-                                Task { await submitCapture() }
-                            } label: {
-                                Text("Capture")
-                                    .frame(maxWidth: .infinity)
-                            }
-                            .buttonStyle(AmbitionPressableButtonStyle(state: .selected))
-                            .accessibilityIdentifier("shell.command.submit-capture-button")
-                        }
-                        .padding(theme.spacing.lg)
-                    }
-                    .transition(.ambitionPanel)
-                }
             }
             .navigationTitle("Command")
             .toolbar {
@@ -296,6 +271,36 @@ private struct QuietCommandSheetView: View {
             if selectedIntent == .quickCapture {
                 isCaptureFieldFocused = true
             }
+        }
+    }
+
+    @ViewBuilder
+    private var quickCaptureComposer: some View {
+        if selectedIntent == .quickCapture {
+            AppCard(state: .selected) {
+                VStack(alignment: .leading, spacing: theme.spacing.md) {
+                    SectionHeader(
+                        title: "Quick capture",
+                        subtitle: "Save one thought into the canonical captures inbox without leaving the shell-owned compose path."
+                    )
+
+                    TextField("What needs to be remembered?", text: $captureText)
+                        .textFieldStyle(.roundedBorder)
+                        .focused($isCaptureFieldFocused)
+                        .accessibilityIdentifier("shell.command.capture-field")
+
+                    Button {
+                        Task { await submitCapture() }
+                    } label: {
+                        Text("Capture")
+                            .frame(maxWidth: .infinity)
+                    }
+                    .buttonStyle(AmbitionPressableButtonStyle(state: .selected))
+                    .accessibilityIdentifier("shell.command.submit-capture-button")
+                }
+                .padding(theme.spacing.lg)
+            }
+            .transition(.ambitionPanel)
         }
     }
 

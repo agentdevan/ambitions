@@ -73,6 +73,7 @@ enum AppContainerFactory {
             captureService: runtime.captureService
         )
         let memoryLensService = DefaultMemoryLensService(repositories: repositories)
+        let onboardingService = RepositoryBackedOnboardingService(appStateRepository: repositories.appState)
         await notificationService.registerCategories()
         await runtime.snapshotWriter.refresh(now: .now)
         await notificationService.refreshSchedule(now: .now)
@@ -96,7 +97,8 @@ enum AppContainerFactory {
             externalRouter: externalRouter,
             externalActionService: externalActionService,
             commandRouter: commandRouter,
-            memoryLensService: memoryLensService
+            memoryLensService: memoryLensService,
+            onboardingService: onboardingService
         )
     }
 

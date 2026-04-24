@@ -32,7 +32,8 @@ enum PreviewAppContainerFactory {
                 appearancePreference: fixtures.preferences.appearancePreference,
                 accentFamily: fixtures.preferences.accentFamily,
                 launchedAt: .now,
-                startupNote: "Preview bootstrap uses isolated in-memory fixtures."
+                startupNote: "Preview bootstrap uses isolated in-memory fixtures.",
+                shouldShowOnboarding: false
             ),
             runtime: runtime,
             appearancePreference: fixtures.preferences.appearancePreference,
@@ -59,7 +60,8 @@ enum PreviewAppContainerFactory {
                 externalRouter: externalRouter
             ),
             commandRouter: commandRouter,
-            memoryLensService: memoryLensService
+            memoryLensService: memoryLensService,
+            onboardingService: RepositoryBackedOnboardingService(appStateRepository: runtime.repositories.appState)
         )
     }
 

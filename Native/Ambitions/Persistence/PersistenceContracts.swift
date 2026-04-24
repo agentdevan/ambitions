@@ -25,6 +25,10 @@ struct AppStateSnapshot: Identifiable, Codable, Sendable, Equatable {
     var reviewCadenceDays: Int
     var localOnlyModeEnabled: Bool
     var hasCompletedBootstrap: Bool
+    var hasCompletedOnboarding: Bool
+    var onboardingVersion: Int
+    var onboardingCompletedAt: String?
+    var onboardingEntryChoice: OnboardingEntryChoice?
     var lastBootstrapSource: AppSession.BootstrapSource?
     var lastBootstrapAt: String?
     var lastSeedVersion: String?
@@ -42,6 +46,10 @@ struct AppStateSnapshot: Identifiable, Codable, Sendable, Equatable {
         case reviewCadenceDays
         case localOnlyModeEnabled
         case hasCompletedBootstrap
+        case hasCompletedOnboarding
+        case onboardingVersion
+        case onboardingCompletedAt
+        case onboardingEntryChoice
         case lastBootstrapSource
         case lastBootstrapAt
         case lastSeedVersion
@@ -60,6 +68,10 @@ struct AppStateSnapshot: Identifiable, Codable, Sendable, Equatable {
         reviewCadenceDays: 7,
         localOnlyModeEnabled: true,
         hasCompletedBootstrap: false,
+        hasCompletedOnboarding: false,
+        onboardingVersion: 1,
+        onboardingCompletedAt: nil,
+        onboardingEntryChoice: nil,
         lastBootstrapSource: nil,
         lastBootstrapAt: nil,
         lastSeedVersion: nil,
@@ -87,6 +99,10 @@ struct AppStateSnapshot: Identifiable, Codable, Sendable, Equatable {
         reviewCadenceDays: Int,
         localOnlyModeEnabled: Bool,
         hasCompletedBootstrap: Bool,
+        hasCompletedOnboarding: Bool,
+        onboardingVersion: Int,
+        onboardingCompletedAt: String?,
+        onboardingEntryChoice: OnboardingEntryChoice?,
         lastBootstrapSource: AppSession.BootstrapSource?,
         lastBootstrapAt: String?,
         lastSeedVersion: String?,
@@ -103,6 +119,10 @@ struct AppStateSnapshot: Identifiable, Codable, Sendable, Equatable {
         self.reviewCadenceDays = reviewCadenceDays
         self.localOnlyModeEnabled = localOnlyModeEnabled
         self.hasCompletedBootstrap = hasCompletedBootstrap
+        self.hasCompletedOnboarding = hasCompletedOnboarding
+        self.onboardingVersion = onboardingVersion
+        self.onboardingCompletedAt = onboardingCompletedAt
+        self.onboardingEntryChoice = onboardingEntryChoice
         self.lastBootstrapSource = lastBootstrapSource
         self.lastBootstrapAt = lastBootstrapAt
         self.lastSeedVersion = lastSeedVersion
@@ -122,6 +142,10 @@ struct AppStateSnapshot: Identifiable, Codable, Sendable, Equatable {
         reviewCadenceDays = try container.decode(Int.self, forKey: .reviewCadenceDays)
         localOnlyModeEnabled = try container.decode(Bool.self, forKey: .localOnlyModeEnabled)
         hasCompletedBootstrap = try container.decode(Bool.self, forKey: .hasCompletedBootstrap)
+        hasCompletedOnboarding = try container.decodeIfPresent(Bool.self, forKey: .hasCompletedOnboarding) ?? hasCompletedBootstrap
+        onboardingVersion = try container.decodeIfPresent(Int.self, forKey: .onboardingVersion) ?? 1
+        onboardingCompletedAt = try container.decodeIfPresent(String.self, forKey: .onboardingCompletedAt)
+        onboardingEntryChoice = try container.decodeIfPresent(OnboardingEntryChoice.self, forKey: .onboardingEntryChoice)
         lastBootstrapSource = try container.decodeIfPresent(AppSession.BootstrapSource.self, forKey: .lastBootstrapSource)
         lastBootstrapAt = try container.decodeIfPresent(String.self, forKey: .lastBootstrapAt)
         lastSeedVersion = try container.decodeIfPresent(String.self, forKey: .lastSeedVersion)
@@ -141,6 +165,10 @@ struct AppStateSnapshot: Identifiable, Codable, Sendable, Equatable {
         try container.encode(reviewCadenceDays, forKey: .reviewCadenceDays)
         try container.encode(localOnlyModeEnabled, forKey: .localOnlyModeEnabled)
         try container.encode(hasCompletedBootstrap, forKey: .hasCompletedBootstrap)
+        try container.encode(hasCompletedOnboarding, forKey: .hasCompletedOnboarding)
+        try container.encode(onboardingVersion, forKey: .onboardingVersion)
+        try container.encodeIfPresent(onboardingCompletedAt, forKey: .onboardingCompletedAt)
+        try container.encodeIfPresent(onboardingEntryChoice, forKey: .onboardingEntryChoice)
         try container.encodeIfPresent(lastBootstrapSource, forKey: .lastBootstrapSource)
         try container.encodeIfPresent(lastBootstrapAt, forKey: .lastBootstrapAt)
         try container.encodeIfPresent(lastSeedVersion, forKey: .lastSeedVersion)
@@ -149,6 +177,12 @@ struct AppStateSnapshot: Identifiable, Codable, Sendable, Equatable {
         try container.encodeIfPresent(lastOpenedGoalID, forKey: .lastOpenedGoalID)
         try container.encode(goalPriorityOrder, forKey: .goalPriorityOrder)
     }
+}
+
+enum OnboardingEntryChoice: String, Codable, Sendable, Equatable {
+    case createFirstGoal = "create_first_goal"
+    case captureFirst = "capture_first"
+    case enterToday = "enter_today"
 }
 
 enum LegacyGoalType: String, Codable, Sendable {

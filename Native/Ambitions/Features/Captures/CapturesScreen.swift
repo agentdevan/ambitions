@@ -17,16 +17,14 @@ struct CapturesScreen: View {
             case .loading:
                 LoadingSkeletonCard(lineCount: 6)
                     .transition(.ambitionPanel)
-            case let .failed(message):
-                EmptyStateCard(
-                    title: "Captures are unavailable",
-                    message: message,
-                    icon: "tray.full",
-                    actionTitle: "Retry",
-                    actionAccessibilityIdentifier: "captures.retry-button"
-                ) {
-                    Task { await load() }
-                }
+            case .failed:
+                DegradedStateCard(
+                    state: DegradedStateOrchestrator.unavailable(surface: "Captures"),
+                    primaryAccessibilityIdentifier: "captures.retry-button",
+                    onPrimaryAction: {
+                        Task { await load() }
+                    }
+                )
                 .transition(.ambitionPanel)
             case let .loaded(viewState):
                 AppCard {
@@ -60,10 +58,20 @@ struct CapturesScreen: View {
                 .transition(.ambitionPanel)
 
                 if viewState.captures.isEmpty {
-                    EmptyStateCard(
-                        title: "No captures yet",
-                        message: "Local captures created in this build appear here once they are saved. When captures exist, this route helps you absorb them into the week instead of letting them live as separate admin.",
-                        icon: "tray"
+                    DegradedStateCard(
+                        state: DegradedStateOrchestrator.capturesEmpty(),
+                        primaryAccessibilityIdentifier: "captures.empty.capture-now",
+                        secondaryAccessibilityIdentifier: "captures.empty.return-plan",
+                        onPrimaryAction: {
+                            container.commandRouter.presentCommandSheet(
+                                intent: .quickCapture,
+                                source: .capturesScreen,
+                                presentationContext: .quickCapture
+                            )
+                        },
+                        onSecondaryAction: {
+                            container.navigation.resetPlanPath()
+                        }
                     )
                     .transition(.ambitionPanel)
                 } else {

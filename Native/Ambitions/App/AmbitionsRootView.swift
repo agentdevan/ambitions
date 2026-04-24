@@ -7,10 +7,13 @@ struct AmbitionsRootView: View {
     @State private var navigation: AppNavigationModel
     @State private var creationMessage: GoalDetailInlineMessage?
     @State private var goalsRefreshID = 0
+    @State private var isOnboardingPresented: Bool
+    @State private var onboardingError: String?
 
     init(container: AppContainer) {
         self.container = container
         _navigation = State(initialValue: container.navigation)
+        _isOnboardingPresented = State(initialValue: container.session.shouldShowOnboarding)
     }
 
     var body: some View {
@@ -39,6 +42,22 @@ struct AmbitionsRootView: View {
                         await handleCreatedGoal(response, from: overlayState)
                     }
                 }
+            )
+        }
+        .fullScreenCover(isPresented: $isOnboardingPresented) {
+            ProgressiveIntelligenceOnboardingView { choice in
+                Task {
+                    await completeOnboarding(choice: choice)
+                }
+            }
+            .interactiveDismissDisabled()
+            .appContainer(container)
+            .preferredColorScheme(container.appearancePreference.preferredColorScheme)
+            .ambitionTheme(
+                container.appearancePreference.resolveTheme(
+                    systemColorScheme: systemColorScheme,
+                    accentFamily: container.accentFamily
+                )
             )
         }
         .appContainer(container)
@@ -348,5 +367,28 @@ struct AmbitionsRootView: View {
             source: source,
             presentationContext: .neutral
         )
+    }
+
+    private func completeOnboarding(choice: OnboardingEntryChoice) async {
+        do {
+            let decision = try await container.onboardingService.complete(choice: choice, now: .now)
+            onboardingError = nil
+            isOnboardingPresented = false
+            navigation.selectTab(decision.selectedTab)
+            switch decision.choice {
+            case .createFirstGoal:
+                presentCreateGoal(from: decision.overlaySource ?? .shellCompose)
+            case .captureFirst:
+                container.commandRouter.presentCommandSheet(
+                    intent: decision.overlayIntent,
+                    source: decision.overlaySource ?? .shellCompose,
+                    presentationContext: decision.presentationContext
+                )
+            case .enterToday:
+                navigation.selectToday(entryContext: .standard)
+            }
+        } catch {
+            onboardingError = "Unable to finish onboarding: \(error.localizedDescription)"
+        }
     }
 }

@@ -27,18 +27,38 @@ struct TodayScreen: View {
                     case .loading:
                         AsyncStateCard(.loading(lines: 6))
                             .transition(.ambitionPanel)
-                    case let .failed(message):
-                        AsyncStateCard(
-                            .error(title: "Today is unavailable", message: message, icon: "exclamationmark.triangle", actionTitle: "Retry"),
-                            actionAccessibilityIdentifier: "today.retry-button"
-                        ) {
-                            Task {
-                                await refresh()
+                    case .failed:
+                        DegradedStateCard(
+                            state: DegradedStateOrchestrator.unavailable(surface: "Today"),
+                            primaryAccessibilityIdentifier: "today.retry-button",
+                            onPrimaryAction: {
+                                Task {
+                                    await refresh()
+                                }
                             }
-                        }
+                        )
                         .transition(.ambitionPanel)
                     case let .loaded(experience):
                         TodayHeroCard(hero: experience.hero, onAction: handleAction)
+
+                        if experience.mode == .empty {
+                            DegradedStateCard(
+                                state: DegradedStateOrchestrator.todayEmpty(),
+                                primaryAccessibilityIdentifier: "today.empty.create-goal",
+                                secondaryAccessibilityIdentifier: "today.empty.capture-first",
+                                onPrimaryAction: {
+                                    container.commandRouter.presentCreateGoal(source: .shellCompose)
+                                },
+                                onSecondaryAction: {
+                                    container.commandRouter.presentCommandSheet(
+                                        intent: .quickCapture,
+                                        source: .todayQuickCapture,
+                                        presentationContext: .quickCapture
+                                    )
+                                }
+                            )
+                            .transition(.ambitionPanel)
+                        }
 
                         if let transientMessage = viewModel.transientMessage {
                             TodayMessageCard(message: transientMessage)

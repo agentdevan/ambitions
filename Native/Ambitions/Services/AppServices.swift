@@ -77,8 +77,11 @@ struct DefaultStartupService: StartupServicing {
 
     func prepareSession(source: AppSession.BootstrapSource) async throws -> AppSession {
         let preferences = try await preferencesStore.loadPreferences()
+        let forceOnboarding = ProcessInfo.processInfo.environment["AMBITIONS_FORCE_ONBOARDING"] == "1"
+        var shouldShowOnboarding = false
         if let appStateRepository {
             var state = try await appStateRepository.loadState()
+            shouldShowOnboarding = forceOnboarding || (source == .live && state.hasCompletedOnboarding == false)
             state.hasCompletedBootstrap = true
             state.lastBootstrapSource = source
             state.lastBootstrapAt = ISO8601DateFormatter().string(from: .now)
@@ -91,7 +94,8 @@ struct DefaultStartupService: StartupServicing {
             appearancePreference: preferences.appearancePreference,
             accentFamily: preferences.accentFamily,
             launchedAt: Date(),
-            startupNote: startupNote(for: source)
+            startupNote: startupNote(for: source),
+            shouldShowOnboarding: shouldShowOnboarding
         )
     }
 

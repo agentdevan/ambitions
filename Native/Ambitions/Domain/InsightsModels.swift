@@ -168,4 +168,8 @@ struct InsightsDashboard: Sendable {
     let activitiesTitle: String
     let activitiesSubtitle: String
     let activities: [ActivitySummary]
+
+    var isLowHistory: Bool {
+        activities.isEmpty && goalStatuses.isEmpty
+    }
 }

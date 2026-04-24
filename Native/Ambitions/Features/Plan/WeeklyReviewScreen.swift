@@ -46,18 +46,27 @@ struct WeeklyReviewScreen: View {
                 switch viewModel.state {
                 case .loading:
                     AsyncStateCard(.loading(lines: 8))
-                case let .failed(message):
-                    AsyncStateCard(
-                        .error(title: "Weekly Review is unavailable", message: message, icon: "arrow.triangle.branch", actionTitle: "Retry"),
-                        actionAccessibilityIdentifier: "weekly-review.retry-button"
-                    ) {
-                        Task { await viewModel.refresh(using: container.planService) }
-                    }
+                case .failed:
+                    DegradedStateCard(
+                        state: DegradedStateOrchestrator.unavailable(surface: "Weekly Review"),
+                        primaryAccessibilityIdentifier: "weekly-review.retry-button",
+                        onPrimaryAction: {
+                            Task { await viewModel.refresh(using: container.planService) }
+                        }
+                    )
                 case let .loaded(dashboard):
                     WeeklyReviewHeroCard(dashboard: dashboard)
                     WeeklyReviewSummaryCard(dashboard: dashboard)
 
-                    if !dashboard.carryForwardItems.isEmpty {
+                    if dashboard.carryForwardItems.isEmpty {
+                        DegradedStateCard(
+                            state: DegradedStateOrchestrator.weeklyReviewEmpty(),
+                            primaryAccessibilityIdentifier: "weekly-review.empty.return-plan",
+                            onPrimaryAction: {
+                                container.navigation.resetPlanPath()
+                            }
+                        )
+                    } else {
                         WeeklyReviewCarryForwardCard(items: dashboard.carryForwardItems, onOpenGoal: openGoal)
                     }
 
@@ -302,4 +311,3 @@ private struct WeeklyReviewContextCard: View {
         .ambitionPanelAccessibility()
     }
 }
-

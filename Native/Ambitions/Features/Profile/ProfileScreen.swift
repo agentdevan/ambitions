@@ -1,5 +1,8 @@
 import AmbitionsDesignSystem
 import SwiftUI
+#if canImport(UIKit)
+import UIKit
+#endif
 
 struct ProfileScreen: View {
     @Environment(\.appContainer) private var appContainer
@@ -53,6 +56,23 @@ struct ProfileScreen: View {
                         onEnableNotifications: requestNotificationAuthorization
                     )
 
+                    if let permissionState = notificationPermissionState(for: dashboard) {
+                        DegradedStateCard(
+                            state: permissionState,
+                            primaryAccessibilityIdentifier: "profile.notification-permission.primary",
+                            secondaryAccessibilityIdentifier: "profile.notification-permission.secondary",
+                            onPrimaryAction: {
+                                if dashboard.notificationAuthorization.canRequestAuthorization {
+                                    requestNotificationAuthorization()
+                                }
+                            },
+                            onSecondaryAction: {
+                                openSystemSettingsIfAvailable()
+                            }
+                        )
+                        .transition(.ambitionPanel)
+                    }
+
                     ProfileContextVaultCard(contextVault: dashboard.contextVault)
 
                     ProfileSectionCard(
@@ -104,6 +124,23 @@ struct ProfileScreen: View {
             }
             await refresh()
         }
+    }
+
+    private func notificationPermissionState(for dashboard: ProfileDashboard) -> DegradedStatePresentation? {
+        if dashboard.notificationAuthorization.statusLabel == "Denied" {
+            return DegradedStateOrchestrator.permissionDeniedNotifications()
+        }
+        if dashboard.notificationAuthorization.canRequestAuthorization {
+            return DegradedStateOrchestrator.permissionNeededNotifications()
+        }
+        return nil
+    }
+
+    private func openSystemSettingsIfAvailable() {
+        #if canImport(UIKit)
+        guard let url = URL(string: UIApplication.openSettingsURLString) else { return }
+        UIApplication.shared.open(url)
+        #endif
     }
 
     private func syncAppearanceFromLoadedDashboard() {

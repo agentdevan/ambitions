@@ -25,9 +25,10 @@ Live queue truth in the current repo:
 - Batch 50 — Completed
 - Batch 51 — Completed
 - Batch 52 — Completed
-- Batch 53 — Active
-- Batches 54-60 — Queued
-- the front-end transformation program is active in implementation at **Batch 53**
+- Batch 53 — Completed
+- Batch 54 — Active
+- Batches 55-60 — Queued
+- the front-end transformation program is active in implementation at **Batch 54**
 
 Batch 39 is a docs-only foundation batch.
 It makes the transformation program explicit enough to guide later implementation batches without authorizing shell implementation, route rewiring, or surface redesign work ahead of Batch 40.
@@ -332,8 +333,8 @@ If status language here drifts, the registry controls active-vs-queued truth and
 | 50 | Front-End Transformation 11 / Plan rebuild II — Execution Resilience, habits, captures, and review shaping | Completed | Plan now owns weekly shaping with Execution Resilience, Window Magnetism, Weekly Review continuation, and Plan-owned habits/captures support routes; build, targeted unit coverage, full `AmbitionsTests`, and targeted UI tests were green, with the remaining manual-audit limitation proven environment-only. |
 | 51 | Front-End Transformation 12 / Insights rebuild and Reflection OS | Completed | Includes activity history, review coherence, and reflection-system language. |
 | 52 | Front-End Transformation 13 / Profile rebuild, Appearance Studio, Trust Center, and Context Vault foundations | Completed | Profile rebuilt as a premium system-configuration and trust surface with Appearance Studio, Trust Center with sync pulse, Context Vault foundations, regrouped defaults/integrations/account surfaces, and profile-scoped presentation refinement. |
-| 53 | Front-End Transformation 14 / Progressive Intelligence Onboarding and Degraded-State Orchestrator | Active | Includes permissions, education, empty/loading/error, and degraded-state orchestration. |
-| 54 | Front-End Transformation 15 / State Continuity Mesh, sync trust, and real-time continuity contract | Queued | Cross-device/state continuity before external-surface widening. |
+| 53 | Front-End Transformation 14 / Progressive Intelligence Onboarding and Degraded-State Orchestrator | Completed | Progressive Intelligence Onboarding, additive onboarding persistence, the shared Degraded-State Orchestrator, contextual permission education, privacy-first trust copy, and no-data/low-history/degraded-state coverage landed with green automated validation and sufficient manual simulator audit. |
+| 54 | Front-End Transformation 15 / State Continuity Mesh, sync trust, and real-time continuity contract | Active | Cross-device/state continuity before external-surface widening. |
 | 55 | Front-End Transformation 16 / External surfaces I — widgets, Live Activities, notifications, and Focus Screenlet | Queued | First external-surface implementation wave. |
 | 56 | Front-End Transformation 17 / External surfaces II — share extension, App Intents, shortcuts, routing, and external creation | Queued | External creation and OS-surface productization. |
 | 57 | Front-End Transformation 18 / Cross-surface command, recall, and ambient coherence | Queued | Command, recall, provenance, and handoff coherence. |
@@ -1043,7 +1044,7 @@ Batch 52 rebuilt Profile into a premium system-configuration and trust surface w
 ## Batch 53 — Front-End Transformation 14 / Progressive Intelligence Onboarding and Degraded-State Orchestrator
 
 ### Status
-Active
+Completed
 
 ### Goal
 Rebuild first-run, permissions, education, and degraded-state experiences so Ambitions feels premium and intelligible from first launch onward.
@@ -1087,12 +1088,15 @@ Rebuild first-run, permissions, education, and degraded-state experiences so Amb
 ### Completion Rule
 Complete only when Ambitions feels intentional from cold start through degraded state.
 
+### Completion Note
+Completed with Progressive Intelligence Onboarding, additive onboarding persistence, a shared Degraded-State Orchestrator, contextual permission education, privacy-first trust copy, no-data/low-history/degraded-state coverage across the major surfaces, green automated validation, and sufficient manual simulator audit.
+
 ---
 
 ## Batch 54 — Front-End Transformation 15 / State Continuity Mesh, sync trust, and real-time continuity contract
 
 ### Status
-Queued
+Active
 
 ### Goal
 Establish the State Continuity Mesh and sync-trust continuity contract before external-surface widening.

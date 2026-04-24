@@ -25,16 +25,14 @@ struct HabitsScreen: View {
                         )
                     }
                     LoadingSkeletonCard(lineCount: 10)
-                case let .failed(message):
-                    EmptyStateCard(
-                        title: "Habits are unavailable",
-                        message: message,
-                        icon: "exclamationmark.triangle",
-                        actionTitle: "Retry",
-                        actionAccessibilityIdentifier: "habits.retry-button"
-                    ) {
-                        Task { await viewModel.refresh(using: container.habitsService) }
-                    }
+                case .failed:
+                    DegradedStateCard(
+                        state: DegradedStateOrchestrator.unavailable(surface: "Habits"),
+                        primaryAccessibilityIdentifier: "habits.retry-button",
+                        onPrimaryAction: {
+                            Task { await viewModel.refresh(using: container.habitsService) }
+                        }
+                    )
                 case let .loaded(dashboard):
                     HabitsHeroCard(dashboard: dashboard)
 
@@ -76,7 +74,15 @@ struct HabitsScreen: View {
                     }
 
                     if let emptyTitle = dashboard.emptyTitle, let emptyMessage = dashboard.emptyMessage {
-                        EmptyStateCard(title: emptyTitle, message: emptyMessage, icon: "repeat")
+                        DegradedStateCard(
+                            state: DegradedStateOrchestrator.habitsEmpty(),
+                            primaryAccessibilityIdentifier: "habits.empty.return-plan",
+                            onPrimaryAction: {
+                                _ = emptyTitle
+                                _ = emptyMessage
+                                container.navigation.resetPlanPath()
+                            }
+                        )
                     } else {
                         if !dashboard.habits.isEmpty {
                             habitsSection(

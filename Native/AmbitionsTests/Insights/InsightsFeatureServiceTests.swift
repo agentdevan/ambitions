@@ -3,6 +3,16 @@ import XCTest
 @testable import Ambitions
 
 final class InsightsFeatureServiceTests: XCTestCase {
+    func testDashboardMarksEmptyHistoryAsLowHistory() async throws {
+        let repositories = try await makeRepositories()
+
+        let dashboard = try await RepositoryBackedInsightsService(repositories: repositories).loadInsightsDashboard()
+
+        XCTAssertTrue(dashboard.isLowHistory)
+        XCTAssertTrue(dashboard.activities.isEmpty)
+        XCTAssertTrue(dashboard.goalStatuses.isEmpty)
+    }
+
     func testDashboardBuildsNarrativePostureAndGoalStatusFromExistingSignals() async throws {
         let repositories = try await makeRepositories()
         let goal = try XCTUnwrap(goalFromFixture(id: "clear-timed-self-goal"))

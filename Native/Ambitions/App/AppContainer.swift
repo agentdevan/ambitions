@@ -24,6 +24,7 @@ final class AppContainer {
     let externalActionService: any ExternalActionCommandExecuting
     let commandRouter: any ShellCommandRouting
     let memoryLensService: any MemoryLensServicing
+    let onboardingService: any OnboardingServicing
 
     init(
         session: AppSession,
@@ -44,7 +45,8 @@ final class AppContainer {
         externalRouter: any AppExternalRouting,
         externalActionService: any ExternalActionCommandExecuting,
         commandRouter: any ShellCommandRouting,
-        memoryLensService: any MemoryLensServicing
+        memoryLensService: any MemoryLensServicing,
+        onboardingService: any OnboardingServicing
     ) {
         self.session = session
         self.runtime = runtime
@@ -65,5 +67,6 @@ final class AppContainer {
         self.externalActionService = externalActionService
         self.commandRouter = commandRouter
         self.memoryLensService = memoryLensService
+        self.onboardingService = onboardingService
     }
 }
