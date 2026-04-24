@@ -81,6 +81,7 @@ struct AppShellScaffold<Content: View>: View {
 
 private struct AppShellHeaderRail: View {
     @Environment(\.ambitionTheme) private var theme
+    @Environment(\.dynamicTypeSize) private var dynamicTypeSize
 
     let title: String
     let subtitle: String?
@@ -118,14 +119,29 @@ private struct AppShellHeaderRail: View {
                             .foregroundStyle(theme.colors.textPrimary)
                             .accessibilityIdentifier("shell.header.title")
 
-                        HStack(spacing: theme.spacing.xs) {
-                            TagPill(posture.title, icon: posture.systemImage, state: .default)
-                            if let subtitle {
-                                Text(subtitle)
+                        if dynamicTypeSize.isAccessibilitySize {
+                            HStack(alignment: .firstTextBaseline, spacing: theme.spacing.xs) {
+                                Image(systemName: posture.systemImage)
+                                    .font(.system(size: theme.icon.smallSize, weight: theme.icon.symbolWeight))
+                                    .foregroundStyle(theme.colors.textSecondary)
+
+                                Text(subtitle ?? posture.title)
                                     .font(theme.typography.caption)
                                     .foregroundStyle(theme.colors.textSecondary)
-                                    .lineLimit(1)
+                                    .lineLimit(2)
+                                    .minimumScaleFactor(0.8)
                                     .accessibilityIdentifier("shell.header.subtitle")
+                            }
+                        } else {
+                            HStack(spacing: theme.spacing.xs) {
+                                TagPill(posture.title, icon: posture.systemImage, state: .default)
+                                if let subtitle {
+                                    Text(subtitle)
+                                        .font(theme.typography.caption)
+                                        .foregroundStyle(theme.colors.textSecondary)
+                                        .lineLimit(1)
+                                        .accessibilityIdentifier("shell.header.subtitle")
+                                }
                             }
                         }
                     }

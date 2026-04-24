@@ -85,6 +85,27 @@ Rules:
 - only move to `Claim` with evidence
 - use `Not Applicable` sparingly and explain why
 
+## Batch 60 RC Evidence Notes - April 24, 2026
+
+Batch 60 produced RC-readiness evidence only. These notes are not a final publish decision and do not mark any Accessibility Nutrition Label as publish-ready.
+
+Evidence captured:
+- simulator iPhone portrait audit across Today, Goals, Plan, Insights, Profile, onboarding/primary route surfaces, command/Memory Lens/recall, privacy/trust copy, and represented no-data/degraded states
+- code inspection of VoiceOver labels, accessibility identifiers, reduce-motion handling, permission/privacy copy, and local-first trust language
+- Dynamic Type and increased-contrast simulator screenshot pass on Plan after fixing shell header metadata and continuity receipt readability at accessibility text sizes
+- targeted UI route smoke passed after the accessibility polish fix
+
+| Label Category | Batch 60 Readiness Classification | Evidence Note |
+| --- | --- | --- |
+| VoiceOver | Likely claimable after final real-device audit | Labels and grouped accessibility surfaces were inspected in code and route smoke coverage remained green, but no real VoiceOver run was captured. |
+| Voice Control | Not enough evidence yet | No dedicated Voice Control command pass was captured. |
+| Larger Text | Likely claimable after final real-device audit | Simulator accessibility-size audit found and fixed a deterministic shell/receipt readability issue; final device-band screenshots are still required. |
+| Sufficient Contrast | Likely claimable after final real-device audit | Increased-contrast simulator pass showed no obvious blocking issue after the Dynamic Type fix, but no full contrast measurement or real-device evidence is recorded. |
+| Reduced Motion | Likely claimable after final real-device audit | Reduce-motion code paths were inspected and shared motion helpers disable animations where represented; a real-device toggle pass is still required. |
+| Captions | Not applicable | Ambitions launch surfaces do not include audio/video content requiring captions. |
+| Switch Control | Not enough evidence yet | No Switch Control traversal pass was captured. |
+| Other Apple label categories | Not enough evidence yet | Evaluate only against the final App Store Connect label taxonomy at submission time. |
+
 ## Evidence Capture Expectations
 
 Evidence should include as appropriate:

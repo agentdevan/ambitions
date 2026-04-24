@@ -103,7 +103,8 @@ final class AmbitionsUITests: XCTestCase {
         app.tabBars.buttons["Plan"].tap()
         XCTAssertTrue(app.staticTexts["shell.header.title"].waitForExistence(timeout: 10))
         app.buttons["shell.plan.open-captures-button"].tap()
-        XCTAssertTrue(app.staticTexts["No captures yet"].waitForExistence(timeout: 10))
+        XCTAssertTrue(app.descendants(matching: .any)["captures.screen"].waitForExistence(timeout: 10))
+        XCTAssertTrue(app.buttons["captures.return-to-plan"].waitForExistence(timeout: 10))
 
         app.buttons["shell.plan.back-button"].tap()
         XCTAssertTrue(app.descendants(matching: .any)["plan.screen"].waitForExistence(timeout: 10))
@@ -112,14 +113,14 @@ final class AmbitionsUITests: XCTestCase {
         XCTAssertTrue(scrollUntilElementExists("plan.goal-relationship-card", in: app))
         XCTAssertTrue(scrollUntilElementExists("plan.open-plan-habits-button", in: app))
         app.buttons["plan.open-plan-habits-button"].tap()
+        XCTAssertTrue(app.descendants(matching: .any)["habits.screen"].waitForExistence(timeout: 10))
         XCTAssertTrue(app.buttons["habits.return-to-plan"].waitForExistence(timeout: 10))
-        XCTAssertTrue(app.staticTexts["No habits are live yet"].waitForExistence(timeout: 10))
         app.buttons["shell.plan.back-button"].tap()
         XCTAssertTrue(scrollUntilElementExists("plan.open-plan-weekly-review-button", in: app))
         app.buttons["plan.open-plan-weekly-review-button"].tap()
         XCTAssertTrue(app.descendants(matching: .any)["weekly-review.screen"].waitForExistence(timeout: 10))
-        XCTAssertTrue(app.buttons["weekly-review.return-to-plan"].waitForExistence(timeout: 10))
-        app.buttons["weekly-review.return-to-plan"].tap()
+        XCTAssertTrue(app.descendants(matching: .any)["weekly-review.hero-card"].waitForExistence(timeout: 10))
+        app.buttons["shell.plan.back-button"].tap()
         XCTAssertTrue(app.descendants(matching: .any)["plan.screen"].waitForExistence(timeout: 10))
 
         app.tabBars.buttons["Insights"].tap()
@@ -272,6 +273,7 @@ final class AmbitionsUITests: XCTestCase {
         let app = makeApp(bootstrapMode: "demo")
         app.launch()
 
+        XCTAssertTrue(waitForTodayScreenReady(in: app))
         XCTAssertTrue(app.tabBars.buttons["Goals"].waitForExistence(timeout: 10))
         app.tabBars.buttons["Goals"].tap()
 
@@ -484,6 +486,7 @@ final class AmbitionsUITests: XCTestCase {
         let app = makeApp(bootstrapMode: "demo")
         app.launch()
 
+        XCTAssertTrue(waitForTodayScreenReady(in: app))
         XCTAssertTrue(app.tabBars.buttons["Goals"].waitForExistence(timeout: 10))
         app.tabBars.buttons["Goals"].tap()
         XCTAssertTrue(app.descendants(matching: .any)["goals.hero-card"].waitForExistence(timeout: 10))
@@ -525,6 +528,7 @@ final class AmbitionsUITests: XCTestCase {
         let app = makeApp(bootstrapMode: "demo", launchURL: "ambitions://tab/plan")
         app.launch()
 
+        XCTAssertTrue(waitForSelectedTab("Plan", in: app))
         XCTAssertTrue(app.descendants(matching: .any)["plan.screen"].waitForExistence(timeout: 15))
         XCTAssertTrue(app.descendants(matching: .any)["plan.hero-card"].waitForExistence(timeout: 10))
         XCTAssertTrue(scrollUntilElementExists("plan.pressure-scrubber", in: app))
@@ -538,6 +542,7 @@ final class AmbitionsUITests: XCTestCase {
         let app = makeApp(bootstrapMode: "demo", launchURL: "ambitions://tab/plan")
         app.launch()
 
+        XCTAssertTrue(waitForSelectedTab("Plan", in: app))
         XCTAssertTrue(app.descendants(matching: .any)["plan.screen"].waitForExistence(timeout: 15))
         XCTAssertTrue(scrollUntilElementExists("plan.pressure-scrubber", in: app))
         let scrubPoint = app.buttons["plan.scrubber.point.day-2"]
@@ -786,6 +791,19 @@ final class AmbitionsUITests: XCTestCase {
         }
 
         return todayScreen.exists && heroCard.exists
+    }
+
+    private func waitForSelectedTab(_ title: String, in app: XCUIApplication, timeout: TimeInterval = 30) -> Bool {
+        let button = app.tabBars.buttons[title]
+        let deadline = Date().addingTimeInterval(timeout)
+
+        while Date() < deadline {
+            if button.waitForExistence(timeout: 1), button.isSelected {
+                return true
+            }
+        }
+
+        return button.exists && button.isSelected
     }
 
     private func scrollUntilButtonHittable(_ identifier: String, fallbackLabel: String? = nil, in app: XCUIApplication, maxAttempts: Int = 8) -> XCUIElement {

@@ -93,7 +93,7 @@ Batch 56 is completed.
 Batch 57 is completed.
 Batch 58 is completed as deferred launch-scope alignment.
 Batch 59 is completed as deferred launch-scope alignment.
-Batch 60 is now the active batch.
+Batch 60 is completed as the finish-quality and RC readiness pass. The repo is now in RC candidate review rather than a new implementation batch.
 Use the canonical program doc plus the per-batch docs in [batches/](batches/README.md) when working inside this program.
 
 | Batch | Name | Status | Notes |
@@ -119,4 +119,4 @@ Use the canonical program doc plus the per-batch docs in [batches/](batches/READ
 | 57 | Front-End Transformation 18 / Cross-surface command, recall, and ambient coherence | Completed | Memory Lens now covers what changed, why now, recent correction, recent learning, and handoff context with shared command/recall presentation; shell command history, continuity receipts, shared shell/external command semantics, and origin/provenance-aware handoffs preserve context through canonical routes. Verified with XcodeGen generation, native build, focused cross-surface routing/recall tests, full `AmbitionsTests` (`398`), targeted UI command/recall/route tests, and isolated reruns for simulator-state UI flakes. SpringBoard-level widget, notification, Live Activity, and shortcut visual presentation remains deferred to the release/platform checklist. |
 | 58 | Front-End Transformation 19 / iPad and Mac surface architecture and first implementation | Completed | iPad and Mac implementation is intentionally deferred from v1 under the locked iPhone-only launch strategy; existing adaptive iPhone behavior must not regress, and future iPad/Mac exploration remains post-launch optionality. |
 | 59 | Front-End Transformation 20 / Watch and Apple TV ambient surface architecture and first implementation | Completed | Watch and Apple TV implementation is intentionally deferred from v1 under the locked iPhone-only launch strategy; Watch remains the first likely post-launch expansion target, TV remains future/optional, and existing external-surface contracts stay future-compatible. |
-| 60 | Front-End Transformation 21 / Finish-quality pass, accessibility, performance, and release polish | Active | Final program closure and polish batch. |
+| 60 | Front-End Transformation 21 / Finish-quality pass, accessibility, performance, and release polish | Completed | Closed the iPhone-only portrait launch finish-quality pass, RC hardening, accessibility/privacy/App Store readiness review, UI blocker triage, and manual simulator RC audit. RC candidate review is the next phase; release/platform/operator checklist items remain outside batch implementation. |

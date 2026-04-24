@@ -3,6 +3,7 @@ import SwiftUI
 
 struct AmbitionsRootView: View {
     @Environment(\.colorScheme) private var systemColorScheme
+    @Environment(\.dynamicTypeSize) private var dynamicTypeSize
     private let container: AppContainer
     @State private var navigation: AppNavigationModel
     @State private var creationMessage: GoalDetailInlineMessage?
@@ -286,6 +287,8 @@ struct AmbitionsRootView: View {
                     Image(systemName: "arrow.triangle.2.circlepath")
                     Text(receipt.title)
                         .font(.caption.weight(.semibold))
+                        .lineLimit(1)
+                        .minimumScaleFactor(0.75)
                     Spacer(minLength: 8)
                     Button {
                         navigation.continuityReceipt = nil
@@ -298,11 +301,12 @@ struct AmbitionsRootView: View {
                 }
                 Text(receipt.body)
                     .font(.caption2)
-                    .lineLimit(2)
+                    .lineLimit(dynamicTypeSize.isAccessibilitySize ? 3 : 2)
+                    .minimumScaleFactor(0.85)
             }
             .padding(.horizontal, 14)
             .padding(.vertical, 10)
-            .frame(maxWidth: 310, alignment: .leading)
+            .frame(maxWidth: dynamicTypeSize.isAccessibilitySize ? 360 : 310, alignment: .leading)
             .background(.regularMaterial, in: RoundedRectangle(cornerRadius: 16, style: .continuous))
             .overlay(
                 RoundedRectangle(cornerRadius: 16, style: .continuous)
@@ -310,6 +314,8 @@ struct AmbitionsRootView: View {
             )
             .padding(.trailing, 20)
             .padding(.bottom, 152)
+            .accessibilityElement(children: .combine)
+            .accessibilityLabel("\(receipt.title). \(receipt.body)")
             .accessibilityIdentifier("shell.continuity-receipt")
         }
     }

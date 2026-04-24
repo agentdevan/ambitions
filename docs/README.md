@@ -69,7 +69,7 @@ Older docs in this folder are supporting context and do not override the canonic
 - External routes are registered and shell-validated for canonical Plan and Captures inbox entry points.
 - Notifications: Productized in this build, platform review still required.
 - Widgets and Live Activity: Productized in this build, platform review still required.
-- Navigation-only App Intents: Available in this build, manual verification still required.
-- Share Extension: Not shipped in this build.
+- App Intents and shortcuts: Productized in this build, platform review still required.
+- Share Extension: Productized in this build, platform review still required.
 - Sync, auth, and account deletion backend flows are not current shipping features.
 - Launch planning and submission operations now have dedicated docs under `docs/canon/` and `docs/codex/`; they supplement but do not replace the roadmap or compliance canon.

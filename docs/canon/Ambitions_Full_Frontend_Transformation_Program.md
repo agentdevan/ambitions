@@ -2,7 +2,7 @@
 
 ## Status
 
-Active **post-hardening full transformation program** for Ambitions at the canon/control-file layer.
+Completed **post-hardening full transformation program** for Ambitions at the canon/control-file layer; the repo is now in RC candidate review.
 
 This document supersedes the narrower UI excellence wave framing. It assumes the user has explicitly approved:
 
@@ -32,8 +32,9 @@ Live queue truth in the current repo:
 - Batch 57 — Completed
 - Batch 58 — Completed
 - Batch 59 — Completed
-- Batch 60 — Active
-- the front-end transformation program has completed implementation through **Batch 59** and is active at **Batch 60**
+- Batch 60 — Completed
+- the front-end transformation program has completed implementation through **Batch 60**
+- the next phase is RC candidate review and release/platform/operator checklist signoff
 
 Batch 39 is a docs-only foundation batch.
 It makes the transformation program explicit enough to guide later implementation batches without authorizing shell implementation, route rewiring, or surface redesign work ahead of Batch 40.
@@ -345,7 +346,7 @@ If status language here drifts, the registry controls active-vs-queued truth and
 | 57 | Front-End Transformation 18 / Cross-surface command, recall, and ambient coherence | Completed | Cross-surface command, recall, provenance, and handoff coherence landed with shared Memory Lens and continuity presentation; SpringBoard-level widget, notification, Live Activity, and shortcut visual presentation remains release/platform checklist review. |
 | 58 | Front-End Transformation 19 / iPad and Mac surface architecture and first implementation | Completed | iPad and Mac larger-screen implementation is intentionally deferred out of v1 under the locked iPhone-only launch strategy; existing adaptive iPhone behavior must not regress, and future iPad/Mac exploration remains post-launch optionality. |
 | 59 | Front-End Transformation 20 / Watch and Apple TV ambient surface architecture and first implementation | Completed | Watch and Apple TV implementation is intentionally deferred out of v1 under the locked iPhone-only launch strategy; Watch remains the first likely post-launch expansion target, TV remains future/optional, and external-surface contracts stay future-compatible. |
-| 60 | Front-End Transformation 21 / Finish-quality pass, accessibility, performance, and release polish | Active | Final visual + interaction closure and the RC-review build target before the dedicated release-compliance gate. |
+| 60 | Front-End Transformation 21 / Finish-quality pass, accessibility, performance, and release polish | Completed | Final visual + interaction closure and the RC-review build target before the dedicated release-compliance gate. |
 
 ---
 
@@ -1375,7 +1376,7 @@ Completed as a scope-alignment batch. Watch and Apple TV implementation is inten
 ## Batch 60 — Front-End Transformation 21 / Finish-quality pass, accessibility, performance, and release polish
 
 ### Status
-Queued
+Completed
 
 ### Goal
 Close the transformation program with a whole-product finish pass that raises Ambitions to flagship release quality.
@@ -1421,6 +1422,11 @@ Final submission still passes through [Ambitions_App_Store_Release_Compliance.md
 
 ### Completion Rule
 Complete only when Ambitions feels authored end-to-end and ready to be judged as a flagship product.
+
+### Completion Note
+Batch 60 closed on April 24, 2026 with the iPhone-only portrait launch configuration preserved, accessibility/performance/privacy/App Store readiness hardening completed, original UI blockers resolved or classified, and manual simulator RC audit evidence captured for top-level iPhone portrait flows, primary planning/capture/focus/recovery surfaces, Memory Lens/command/recall, privacy/trust copy, degraded/no-data states, and accessibility sanity.
+
+This completion moves the repo into RC candidate review. It does not guarantee App Store approval and does not close final release/platform/operator checklist items such as real-device Accessibility Nutrition Labels evidence, SpringBoard-level widget/Live Activity/notification verification, Share Extension/App Shortcut/App Intent presentation checks, and final support/privacy/accessibility URL signoff.
 
 ---
 
