@@ -22,6 +22,7 @@ final class AppContainer {
     let actionRouter: any AppActionRouting
     let externalRouter: any AppExternalRouting
     let externalActionService: any ExternalActionCommandExecuting
+    let externalCreationImportService: any ExternalCreationImporting
     let commandRouter: any ShellCommandRouting
     let memoryLensService: any MemoryLensServicing
     let onboardingService: any OnboardingServicing
@@ -44,6 +45,7 @@ final class AppContainer {
         actionRouter: any AppActionRouting,
         externalRouter: any AppExternalRouting,
         externalActionService: any ExternalActionCommandExecuting,
+        externalCreationImportService: any ExternalCreationImporting,
         commandRouter: any ShellCommandRouting,
         memoryLensService: any MemoryLensServicing,
         onboardingService: any OnboardingServicing
@@ -65,6 +67,7 @@ final class AppContainer {
         self.actionRouter = actionRouter
         self.externalRouter = externalRouter
         self.externalActionService = externalActionService
+        self.externalCreationImportService = externalCreationImportService
         self.commandRouter = commandRouter
         self.memoryLensService = memoryLensService
         self.onboardingService = onboardingService

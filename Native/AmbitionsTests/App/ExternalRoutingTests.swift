@@ -20,6 +20,16 @@ final class ExternalRoutingTests: XCTestCase {
         XCTAssertEqual(route, .openTab(.plan))
     }
 
+    func testDeepLinkTranslatorParsesTodayEntryContextRoute() throws {
+        let translator = AppExternalRouteTranslator()
+        let url = try XCTUnwrap(URL(string: "ambitions://tab/today?context=focus&origin=app_intent"))
+
+        let route = translator.route(fromDeepLink: url)
+
+        XCTAssertEqual(route, .openToday(.focus))
+        XCTAssertEqual(translator.source(fromDeepLink: url), .appIntent)
+    }
+
     func testDeepLinkTranslatorParsesGoalRoute() throws {
         let translator = AppExternalRouteTranslator()
         let url = try XCTUnwrap(URL(string: "ambitions://goal/goal-123"))
@@ -33,9 +43,13 @@ final class ExternalRoutingTests: XCTestCase {
         let translator = AppExternalRouteTranslator()
         let widgetURL = try XCTUnwrap(URL(string: "ambitions://goal/goal-123?origin=widget"))
         let activityURL = try XCTUnwrap(URL(string: "ambitions://goal/goal-123?origin=live_activity"))
+        let shareURL = try XCTUnwrap(URL(string: "ambitions://captures/inbox?origin=share_extension"))
+        let intentURL = try XCTUnwrap(URL(string: "ambitions://captures/inbox?origin=app_intent"))
 
         XCTAssertEqual(translator.source(fromDeepLink: widgetURL), .widgetAction)
         XCTAssertEqual(translator.source(fromDeepLink: activityURL), .liveActivity)
+        XCTAssertEqual(translator.source(fromDeepLink: shareURL), .shareExtension)
+        XCTAssertEqual(translator.source(fromDeepLink: intentURL), .appIntent)
     }
 
     func testDeepLinkTranslatorParsesCapturesInboxRoute() throws {
@@ -59,6 +73,24 @@ final class ExternalRoutingTests: XCTestCase {
                 .commandSheet(
                     intent: .quickCapture,
                     entrySource: .deepLink
+                )
+            )
+        )
+    }
+
+    func testDeepLinkTranslatorPreservesAppIntentEntrySourceOnOverlayRoute() throws {
+        let translator = AppExternalRouteTranslator()
+        let url = try XCTUnwrap(URL(string: "ambitions://overlay/quiet-command-sheet?intent=quick_focus&origin=app_intent"))
+
+        let route = translator.route(fromDeepLink: url)
+
+        XCTAssertEqual(
+            route,
+            .presentOverlay(
+                .commandSheet(
+                    intent: .quickFocus,
+                    entrySource: .appIntent,
+                    presentationContext: .neutral
                 )
             )
         )

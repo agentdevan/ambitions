@@ -85,6 +85,7 @@ enum ShellCommandEntrySource: String, Hashable, Sendable, Codable {
     case appIntent
     case notification
     case widget
+    case shareExtension
     case external
 }
 

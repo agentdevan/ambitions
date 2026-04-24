@@ -271,16 +271,16 @@ private extension RepositoryBackedProfileService {
                     SettingsItem(
                         id: "profile-integration-shortcuts",
                         title: "Navigation shortcuts",
-                        subtitle: "\(ExternalSurfaceTruth.availableButNeedsManualVerification). App Intents stay navigation-only and keep canonical routing ownership.",
+                        subtitle: "\(ExternalSurfaceTruth.productizedNeedsPlatformReview). Shortcuts support quick capture, focus, recovery, plan, and canonical open routes through the shared external handoff path.",
                         icon: "sparkles.rectangle.stack",
-                        valueLabel: ExternalSurfaceTruth.availableButNeedsManualVerification
+                        valueLabel: ExternalSurfaceTruth.productizedNeedsPlatformReview
                     ),
                     SettingsItem(
                         id: "profile-integration-share",
                         title: "Share Extension",
-                        subtitle: "\(ExternalSurfaceTruth.notShippedInThisBuild). Share intake remains deferred until a dedicated extension target and handoff path exist.",
+                        subtitle: "\(ExternalSurfaceTruth.productizedNeedsPlatformReview). Shared text and URLs enter local Ambitions captures first, then land in the normal review or goal-creation path.",
                         icon: "square.and.arrow.up",
-                        valueLabel: ExternalSurfaceTruth.notShippedInThisBuild
+                        valueLabel: ExternalSurfaceTruth.productizedNeedsPlatformReview
                     )
                 ],
                 footer: "Notification and integration status should answer whether anything important needs attention without turning Profile into an admin checklist."

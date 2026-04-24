@@ -59,6 +59,10 @@ enum PreviewAppContainerFactory {
                 captureService: captureService,
                 externalRouter: externalRouter
             ),
+            externalCreationImportService: DefaultExternalCreationImportService(
+                store: SharedExternalCreationStore(baseURL: FileManager.default.temporaryDirectory),
+                captureService: captureService
+            ),
             commandRouter: commandRouter,
             memoryLensService: memoryLensService,
             onboardingService: RepositoryBackedOnboardingService(appStateRepository: runtime.repositories.appState)

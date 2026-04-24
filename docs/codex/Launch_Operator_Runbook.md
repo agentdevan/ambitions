@@ -81,6 +81,19 @@ Metadata truth rules:
 - explain any navigation-only App Intents or external routes if relevant to review
 - provide any required reproduction instructions for non-obvious surfaces
 
+## External Surface Platform Review Checklist
+
+- verify Share Sheet presentation
+- verify Share Extension intake UX on real device or simulator where available
+- verify App Shortcuts discoverability
+- verify Quick Capture shortcut
+- verify Quick Focus shortcut
+- verify Quick Plan shortcut
+- verify Quick Recovery shortcut
+- verify Spotlight/Search landing where supported
+- verify external-create-to-app-shell handoff
+- verify origin/provenance behavior from `share_extension` and `app_intent`
+
 ## Export Compliance Checklist
 
 - answer Apple export-compliance questions truthfully for the actual build

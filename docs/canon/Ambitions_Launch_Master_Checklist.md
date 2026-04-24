@@ -168,6 +168,19 @@ Interpretation rules:
 - Prepare reviewer-access notes showing no login is required
 - Prepare any widget, Live Activity, or external-surface explanation needed for review
 
+### External Surface Platform Review
+
+- Verify Share Sheet presentation
+- Verify Share Extension intake UX on real device or simulator where available
+- Verify App Shortcuts discoverability
+- Verify Quick Capture shortcut OS behavior
+- Verify Quick Focus shortcut OS behavior
+- Verify Quick Plan shortcut OS behavior
+- Verify Quick Recovery shortcut OS behavior
+- Verify Spotlight/Search landing where supported
+- Verify external-create-to-app-shell handoff
+- Verify origin/provenance behavior from `share_extension` and `app_intent`
+
 ### Website And Support Operations
 
 - Publish the launch website pages required for submission and trust

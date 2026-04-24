@@ -68,6 +68,9 @@ enum AppContainerFactory {
             runtimeExecutor: runtime.actionExecutor,
             externalRouter: externalRouter
         )
+        let externalCreationImportService = DefaultExternalCreationImportService(
+            captureService: runtime.captureService
+        )
         let commandRouter = DefaultShellCommandRouter(
             navigation: navigation,
             captureService: runtime.captureService
@@ -96,6 +99,7 @@ enum AppContainerFactory {
             actionRouter: DefaultAppActionRouter(navigation: navigation),
             externalRouter: externalRouter,
             externalActionService: externalActionService,
+            externalCreationImportService: externalCreationImportService,
             commandRouter: commandRouter,
             memoryLensService: memoryLensService,
             onboardingService: onboardingService

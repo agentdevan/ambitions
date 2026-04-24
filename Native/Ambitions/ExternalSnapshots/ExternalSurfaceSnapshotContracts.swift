@@ -225,6 +225,8 @@ enum ExternalSurfaceOrigin: String, Codable, Sendable {
     case widget
     case liveActivity = "live_activity"
     case notification
+    case shareExtension = "share_extension"
+    case appIntent = "app_intent"
 }
 
 struct ExternalSurfaceActionReference: Codable, Sendable, Equatable {

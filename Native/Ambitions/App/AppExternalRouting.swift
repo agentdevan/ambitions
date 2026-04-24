@@ -2,6 +2,7 @@ import Foundation
 
 enum AppExternalRoute: Equatable, Sendable {
     case openTab(AppTab)
+    case openToday(TodayEntryContext)
     case openGoalDetail(goalID: String)
     case openPlanRoute(PlanRouteTarget)
     case openInsightsRoute(InsightsRouteTarget)
@@ -14,6 +15,8 @@ enum AppExternalRouteSource: String, Sendable {
     case notificationAction
     case widgetAction
     case liveActivity
+    case shareExtension
+    case appIntent
 }
 
 struct AppNotificationRoutingPayload: Equatable, Sendable {
@@ -34,6 +37,10 @@ struct AppExternalRouteTranslator {
         }
 
         switch origin {
+        case "share_extension":
+            return .shareExtension
+        case "app_intent":
+            return .appIntent
         case ExternalSurfaceOrigin.widget.rawValue:
             return .widgetAction
         case ExternalSurfaceOrigin.liveActivity.rawValue:
@@ -62,6 +69,9 @@ struct AppExternalRouteTranslator {
         if host == "tab" || host == "tabs" {
             let rawTab = pathSegments.first ?? query["name"] ?? query["tab"]
             if let rawTab, let tab = AppTab(rawValue: rawTab.lowercased()) {
+                if tab == .today, let context = query["context"].flatMap(TodayEntryContext.init(rawValue:)) {
+                    return .openToday(context)
+                }
                 return .openTab(tab)
             }
         }
@@ -152,6 +162,13 @@ struct AppExternalRouteTranslator {
         switch route {
         case let .openTab(tab):
             return ExternalSurfaceActionPayload.deepLinkURL(surface: .tab, tab: tab.rawValue)
+        case let .openToday(context):
+            var components = URLComponents()
+            components.scheme = "ambitions"
+            components.host = "tab"
+            components.path = "/today"
+            components.queryItems = context == .standard ? nil : [URLQueryItem(name: "context", value: context.rawValue)]
+            return components.url
         case let .openGoalDetail(goalID):
             return ExternalSurfaceActionPayload.deepLinkURL(surface: .goalDetail, goalID: goalID)
         case let .openPlanRoute(target):
@@ -215,6 +232,10 @@ struct AppExternalRouteTranslator {
         switch route {
         case let .openTab(tab):
             return ExternalSurfaceActionPayload.routePayload(surface: .tab, tab: tab.rawValue)
+        case let .openToday(context):
+            var values = ExternalSurfaceActionPayload.routePayload(surface: .tab, tab: AppTab.today.rawValue)
+            values["context"] = context.rawValue
+            return values
         case let .openGoalDetail(goalID):
             return ExternalSurfaceActionPayload.routePayload(
                 surface: .goalDetail,
@@ -280,6 +301,11 @@ struct AppExternalRouteTranslator {
                 surface: .tab,
                 tab: tab.rawValue
             )
+        case let .openToday(context):
+            var values = routePayload(for: route)
+            values[ExternalSurfaceActionPayload.Key.action] = actionName.rawValue
+            values["context"] = context.rawValue
+            return values
         case let .openGoalDetail(goalID):
             return ExternalSurfaceActionPayload.commandPayload(
                 action: actionName,
@@ -339,7 +365,15 @@ struct AppExternalRouteTranslator {
         pathSegments: [String],
         query: [String: String]
     ) -> ShellOverlayState? {
-        let source: ShellCommandEntrySource = host == "compose" ? .appIntent : .deepLink
+        let source: ShellCommandEntrySource = {
+            if query["origin"] == ExternalSurfaceOrigin.appIntent.rawValue {
+                return .appIntent
+            }
+            if query["origin"] == ExternalSurfaceOrigin.shareExtension.rawValue {
+                return .shareExtension
+            }
+            return host == "compose" ? .appIntent : .deepLink
+        }()
         let first = (pathSegments.first ?? host).lowercased()
         let intent = query["intent"].flatMap(ShellCommandIntent.init(rawValue:))
 
@@ -454,6 +488,8 @@ final class DefaultAppExternalRouter: AppExternalRouting {
         switch route {
         case let .openTab(tab):
             navigation.selectTab(tab)
+        case let .openToday(context):
+            navigation.selectToday(entryContext: context)
         case let .openGoalDetail(goalID):
             navigation.openGoalDetail(goalID: goalID)
         case let .openPlanRoute(target):

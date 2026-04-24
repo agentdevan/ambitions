@@ -18,11 +18,13 @@ struct AmbitionsApp: App {
                 }
                 .onAppear {
                     NotificationRuntime.shared.bootstrapper = bootstrapper
+                    bootstrapper.consumePendingExternalCreationsIfNeeded()
                     bootstrapper.consumePendingAppIntentLaunchIfNeeded()
                 }
                 .onChange(of: scenePhase) { _, newPhase in
                     guard newPhase == .active else { return }
                     NotificationRuntime.shared.bootstrapper = bootstrapper
+                    bootstrapper.consumePendingExternalCreationsIfNeeded()
                     bootstrapper.consumePendingAppIntentLaunchIfNeeded()
                 }
         }

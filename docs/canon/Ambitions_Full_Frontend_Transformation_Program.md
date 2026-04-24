@@ -28,9 +28,10 @@ Live queue truth in the current repo:
 - Batch 53 — Completed
 - Batch 54 — Completed
 - Batch 55 — Completed
-- Batch 56 — Active
-- Batches 57-60 — Queued
-- the front-end transformation program has completed implementation through **Batch 55** and is active at **Batch 56**
+- Batch 56 — Completed
+- Batch 57 — Active
+- Batches 58-60 — Queued
+- the front-end transformation program has completed implementation through **Batch 56** and is active at **Batch 57**
 
 Batch 39 is a docs-only foundation batch.
 It makes the transformation program explicit enough to guide later implementation batches without authorizing shell implementation, route rewiring, or surface redesign work ahead of Batch 40.
@@ -338,8 +339,8 @@ If status language here drifts, the registry controls active-vs-queued truth and
 | 53 | Front-End Transformation 14 / Progressive Intelligence Onboarding and Degraded-State Orchestrator | Completed | Progressive Intelligence Onboarding, additive onboarding persistence, the shared Degraded-State Orchestrator, contextual permission education, privacy-first trust copy, and no-data/low-history/degraded-state coverage landed with green automated validation and sufficient manual simulator audit. |
 | 54 | Front-End Transformation 15 / State Continuity Mesh, sync trust, and real-time continuity contract | Completed | State Continuity Mesh contract established in [Ambitions_State_Continuity_Mesh.md](Ambitions_State_Continuity_Mesh.md) before external-surface widening. |
 | 55 | Front-End Transformation 16 / External surfaces I — widgets, Live Activities, notifications, and Focus Screenlet | Completed | First external-surface implementation wave. |
-| 56 | Front-End Transformation 17 / External surfaces II — share extension, App Intents, shortcuts, routing, and external creation | Active | External creation and OS-surface productization. |
-| 57 | Front-End Transformation 18 / Cross-surface command, recall, and ambient coherence | Queued | Command, recall, provenance, and handoff coherence. |
+| 56 | Front-End Transformation 17 / External surfaces II — share extension, App Intents, shortcuts, routing, and external creation | Completed | Share Extension, App Intents/App Shortcuts, external creation queue/import, and origin-preserving canonical routing/handoff landed with green automated validation; OS visual/discoverability checks remain release/platform review items. |
+| 57 | Front-End Transformation 18 / Cross-surface command, recall, and ambient coherence | Active | Command, recall, provenance, and handoff coherence. |
 | 58 | Front-End Transformation 19 / iPad and Mac surface architecture and first implementation | Queued | Future-platform implementation begins. |
 | 59 | Front-End Transformation 20 / Watch and Apple TV ambient surface architecture and first implementation | Queued | Ambient and room-scale future surfaces begin. |
 | 60 | Front-End Transformation 21 / Finish-quality pass, accessibility, performance, and release polish | Queued | Final visual + interaction closure and the RC-review build target before the dedicated release-compliance gate. |
@@ -1192,7 +1193,7 @@ Completed with shared Today/Focus/Goal/Plan ambient snapshot variants, Now State
 ## Batch 56 — Front-End Transformation 17 / External surfaces II — share extension, App Intents, shortcuts, routing, and external creation
 
 ### Status
-Active
+Completed
 
 ### Goal
 Fully implement the creation, entry, and routing surfaces outside the main app shell.
@@ -1232,12 +1233,14 @@ Fully implement the creation, entry, and routing surfaces outside the main app s
 ### Completion Rule
 Complete only when external creation and routing feel like first-class product behavior.
 
+Completed with a real Share Extension target and premium intake UX, a shared external creation queue/import path into canonical capture state, productized App Intents and App Shortcuts for quick capture, quick focus, quick plan, and quick recovery, and canonical shell routing/handoff that preserves `share_extension` and `app_intent` provenance. Automated validation is green: XcodeGen generation, native build, focused extension/intent/routing tests (`47`), full `AmbitionsTests` (`396`), and targeted UI proof for Plan inbox deep link, quick recovery/focus reentry, shell quick capture, and Profile trust labels. Share Sheet presentation, Share Extension intake UX on real device/simulator where available, App Shortcuts discoverability, Quick Capture/Focus/Plan/Recovery shortcut OS presentation, Spotlight/Search landing where supported, external-create-to-app-shell handoff, and origin/provenance behavior remain deferred to release/platform checklist review rather than open deterministic app blockers.
+
 ---
 
 ## Batch 57 — Front-End Transformation 18 / Cross-surface command, recall, and ambient coherence
 
 ### Status
-Queued
+Active
 
 ### Goal
 Complete the command and recall system across app, widgets, notifications, shortcuts, and future device surfaces.

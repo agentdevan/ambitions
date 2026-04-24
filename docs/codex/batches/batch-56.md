@@ -1,6 +1,6 @@
 ﻿# Batch 56 - Front-End Transformation 17 / External surfaces II - share extension, App Intents, shortcuts, routing, and external creation
 ## Status
-Active
+Completed
 ## Program
 Post-hardening Front-End Transformation Program
 ## Canon Source
@@ -44,5 +44,8 @@ Fully implement the creation, entry, and routing surfaces outside the main app s
 - targeted UI tests
 ## Completion Rule
 Complete only when external creation and routing feel like first-class product behavior.
+
+## Completion Note
+Completed with a real Share Extension target and premium intake UX, a shared external creation queue/import path that feeds canonical capture state, productized App Intents and App Shortcuts for quick capture, quick focus, quick plan, and quick recovery, and origin-preserving canonical routing/handoff for `share_extension` and `app_intent` entry. Automated validation is green: `xcodegen generate`, native build, focused extension/intent/routing tests (`47`), full `AmbitionsTests` (`396`), and targeted UI tests for Plan inbox deep link, quick recovery/focus Today reentry, shell quick capture, and Profile trust labels. No deterministic app or test blocker remains. Share Sheet presentation, Share Extension intake UX on real device/simulator where available, App Shortcuts discoverability, Quick Capture/Focus/Plan/Recovery shortcut OS presentation, Spotlight/Search landing where supported, external-create-to-app-shell handoff, and origin/provenance behavior from `share_extension` and `app_intent` remain release/platform checklist review items.
 
 ---

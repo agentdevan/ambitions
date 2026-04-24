@@ -41,6 +41,7 @@ final class AppBootstrapper {
         do {
             let container = try await AppContainerFactory.make(configuration: resolvedConfiguration)
             phase = .ready(container)
+            await importPendingExternalCreations(using: container)
             flushPendingDeepLinks(using: container)
         } catch {
             phase = .failed("Bootstrap failed: \(error.localizedDescription)")
@@ -64,6 +65,13 @@ final class AppBootstrapper {
     func consumePendingAppIntentLaunchIfNeeded() {
         guard let url = AppIntentLaunchRouter.shared.consumePendingURL() else { return }
         handleDeepLink(url)
+    }
+
+    func consumePendingExternalCreationsIfNeeded() {
+        guard case let .ready(container) = phase else { return }
+        Task {
+            await importPendingExternalCreations(using: container)
+        }
     }
 
     func handleNotificationPayload(_ payload: AppNotificationRoutingPayload) {
@@ -134,6 +142,26 @@ final class AppBootstrapper {
         pendingDeepLinks.removeAll(keepingCapacity: false)
         for url in queued {
             container.externalRouter.handleDeepLink(url)
+        }
+    }
+
+    private func importPendingExternalCreations(using container: AppContainer) async {
+        let result = await container.externalCreationImportService.importPendingCreations(now: .now)
+        guard result.importedCount > 0 else { return }
+        let routeSource: AppExternalRouteSource = result.source == .appIntent ? .appIntent : .shareExtension
+        let entrySource: ShellCommandEntrySource = result.source == .appIntent ? .appIntent : .shareExtension
+
+        switch result.preferredLanding {
+        case .createGoal:
+            container.externalRouter.dispatch(
+                .presentOverlay(.createGoal(entrySource: entrySource)),
+                source: routeSource
+            )
+        case .capturesInbox, .none:
+            container.externalRouter.dispatch(
+                .openPlanRoute(.capturesInbox),
+                source: routeSource
+            )
         }
     }
 

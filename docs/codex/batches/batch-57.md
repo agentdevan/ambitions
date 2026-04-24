@@ -1,6 +1,6 @@
 ﻿# Batch 57 - Front-End Transformation 18 / Cross-surface command, recall, and ambient coherence
 ## Status
-Queued
+Active
 ## Program
 Post-hardening Front-End Transformation Program
 ## Canon Source
@@ -12,7 +12,7 @@ Post-hardening Front-End Transformation Program
 - [trust-explainability-correction-spec.md](../../canon/design/trust-explainability-correction-spec.md)
 - [novel-interaction-systems-spec.md](../../canon/design/novel-interaction-systems-spec.md)
 ## Start Gate
-- Start only after Batch 38 is complete and stable.
+- Start only after Batch 56 is complete and stable.
 - Do not activate or implement this batch early; follow the registry and dependency order.
 ## Goal
 Complete the command and recall system across app, widgets, notifications, shortcuts, and future device surfaces.

@@ -89,8 +89,9 @@ Batch 52 is completed.
 Batch 53 is completed.
 Batch 54 is completed.
 Batch 55 is completed.
-Batch 56 is now the active batch.
-Batches 57-60 remain queued future work.
+Batch 56 is completed.
+Batch 57 is now the active batch.
+Batches 58-60 remain queued future work.
 Use the canonical program doc plus the per-batch docs in [batches/](batches/README.md) when working inside this program.
 
 | Batch | Name | Status | Notes |
@@ -112,8 +113,8 @@ Use the canonical program doc plus the per-batch docs in [batches/](batches/READ
 | 53 | Front-End Transformation 14 / Progressive Intelligence Onboarding and Degraded-State Orchestrator | Completed | Progressive Intelligence Onboarding, additive onboarding persistence, the shared Degraded-State Orchestrator, contextual permission education, privacy-first trust copy, and no-data/low-history/degraded-state coverage landed with green automated validation and sufficient manual simulator audit. |
 | 54 | Front-End Transformation 15 / State Continuity Mesh, sync trust, and real-time continuity contract | Completed | State Continuity Mesh contract established with Now State Lease, Continuity Receipts, Sync Health Strip, semantic conflict language, provenance-preserving handoff/return rules, degraded-sync states, and local-first plus Apple-account-based sync launch truth; no backend sync, account/login, product-code, external-surface, or future-device implementation was added. |
 | 55 | Front-End Transformation 16 / External surfaces I - widgets, Live Activities, notifications, and Focus Screenlet | Completed | Productized the first ambient external surfaces: shared Today/Focus/Goal/Plan external snapshot variants, Now State Lease and sync-health language, Home Screen and Lock Screen widget hierarchy, bounded Live Activity/Dynamic Island content, calm notification actions, and origin-preserving widget/activity/notification landing. Automated and app-side validation is green; direct SpringBoard widget placement, Lock Screen widget rendering, notification UI, and Live Activity/Dynamic Island visual behavior are deferred to the release/platform checklist. |
-| 56 | Front-End Transformation 17 / External surfaces II - share extension, App Intents, shortcuts, routing, and external creation | Active | External creation, routing, and OS-surface productization. |
-| 57 | Front-End Transformation 18 / Cross-surface command, recall, and ambient coherence | Queued | Command, recall, provenance, and handoff coherence pass. |
+| 56 | Front-End Transformation 17 / External surfaces II - share extension, App Intents, shortcuts, routing, and external creation | Completed | Implemented the Share Extension target and intake UX, shared external creation queue/import path, productized App Intents and App Shortcuts for quick capture/focus/plan/recovery, and origin-preserving canonical routing/handoff for share extension and app-intent entry. Automated validation is green: XcodeGen generation, native build, focused extension/intent/routing tests (`47`), full `AmbitionsTests` (`396`), and targeted UI proof for Plan inbox deep link, quick recovery/focus reentry, shell quick capture, and Profile trust labels. Share Sheet presentation, Share Extension intake UX on real device/simulator where available, App Shortcuts discoverability, Quick Capture/Focus/Plan/Recovery shortcut OS presentation, Spotlight/Search landing where supported, external-create-to-app-shell handoff, and `share_extension` / `app_intent` provenance behavior remain explicit release/platform checklist review items rather than deterministic batch blockers. |
+| 57 | Front-End Transformation 18 / Cross-surface command, recall, and ambient coherence | Active | Command, recall, provenance, and handoff coherence pass. |
 | 58 | Front-End Transformation 19 / iPad and Mac surface architecture and first implementation | Queued | Larger-screen continuity work begins. |
 | 59 | Front-End Transformation 20 / Watch and Apple TV ambient surface architecture and first implementation | Queued | Ambient future-device work begins. |
 | 60 | Front-End Transformation 21 / Finish-quality pass, accessibility, performance, and release polish | Queued | Final program closure and polish batch. |
