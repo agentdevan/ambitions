@@ -104,17 +104,17 @@ actor LocalNotificationFoundation: NotificationServicing {
                 actions: [
                     LocalNotificationActionDescriptor(
                         identifier: AppNotificationConstants.openActionID,
-                        title: "Open",
+                        title: "Open Today",
                         opensApp: true
                     ),
                     LocalNotificationActionDescriptor(
                         identifier: AppNotificationConstants.snoozeActionID,
-                        title: "Snooze",
+                        title: "Not now",
                         opensApp: false
                     ),
                     LocalNotificationActionDescriptor(
                         identifier: AppNotificationConstants.completeActionID,
-                        title: "Complete",
+                        title: "Done",
                         opensApp: false
                     ),
                 ]
@@ -139,19 +139,25 @@ struct NextStepLocalNotificationPlanner: Sendable {
             .notificationPayload(for: .openGoalDetail(goalID: next.goalID), action: "open")
             .values
         userInfo["stepID"] = next.stepID
+        userInfo["origin"] = ExternalSurfaceOrigin.notification.rawValue
+        userInfo["continuity"] = snapshot?.continuity.syncHealth.state.rawValue ?? ExternalSurfaceSyncHealthState.localFirst.rawValue
+        userInfo["lease"] = snapshot?.continuity.lease.status.rawValue ?? ExternalSurfaceLeaseStatus.current.rawValue
 
         return LocalNotificationScheduleRequest(
             identifier: AppNotificationConstants.nextStepRequestID,
-            title: title(for: snapshot?.nowState?.ritualCue),
-            body: body(for: snapshot?.nowState?.ritualCue),
+            title: title(for: snapshot),
+            body: body(for: snapshot),
             categoryIdentifier: AppNotificationConstants.nextStepCategoryID,
             userInfo: userInfo,
             timeInterval: scheduleInterval(for: next.display.urgency)
         )
     }
 
-    private func title(for ritualCue: ExternalSurfaceRitualCue?) -> String {
-        guard let ritualCue else { return "Ambitions reminder" }
+    private func title(for snapshot: ExternalSurfaceSnapshot?) -> String {
+        if let ambientTitle = snapshot?.ambientState?.focus.title {
+            return ambientTitle
+        }
+        guard let ritualCue = snapshot?.nowState?.ritualCue else { return "Next move ready" }
         switch ritualCue.kind {
         case .morningSetup:
             return "Morning setup"
@@ -164,8 +170,14 @@ struct NextStepLocalNotificationPlanner: Sendable {
         }
     }
 
-    private func body(for ritualCue: ExternalSurfaceRitualCue?) -> String {
-        guard let ritualCue else { return "Your next step is ready." }
+    private func body(for snapshot: ExternalSurfaceSnapshot?) -> String {
+        if let focus = snapshot?.ambientState?.focus,
+           let continuity = snapshot?.continuity {
+            return "\(focus.detail) \(continuity.syncHealth.detail)."
+        }
+        guard let ritualCue = snapshot?.nowState?.ritualCue else {
+            return "A bounded next step is available from your latest local plan."
+        }
         switch ritualCue.kind {
         case .morningSetup:
             return "One next move is ready."

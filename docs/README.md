@@ -67,8 +67,8 @@ Older docs in this folder are supporting context and do not override the canonic
 - The current shipped native surface is local-first and on-device first.
 - Today quick capture persists to the native Captures tab.
 - External routes are registered and shell-validated for canonical Plan and Captures inbox entry points.
-- Notifications: Available in this build, manual verification still required.
-- Widgets and Live Activity: Available in this build, manual verification still required.
+- Notifications: Productized in this build, platform review still required.
+- Widgets and Live Activity: Productized in this build, platform review still required.
 - Navigation-only App Intents: Available in this build, manual verification still required.
 - Share Extension: Not shipped in this build.
 - Sync, auth, and account deletion backend flows are not current shipping features.

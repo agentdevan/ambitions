@@ -54,8 +54,11 @@ final class LocalNotificationFoundationTests: XCTestCase {
         XCTAssertEqual(request?.userInfo["goalID"], "goal-123")
         XCTAssertEqual(request?.userInfo["stepID"], "step-456")
         XCTAssertEqual(request?.timeInterval, 300)
-        XCTAssertEqual(request?.title, "Ambitions reminder")
-        XCTAssertEqual(request?.body, "Your next step is ready.")
+        XCTAssertEqual(request?.title, "Next move ready")
+        XCTAssertEqual(request?.body, "A bounded next step is available from your latest local plan.")
+        XCTAssertEqual(request?.userInfo["origin"], "notification")
+        XCTAssertEqual(request?.userInfo["continuity"], "local_first")
+        XCTAssertEqual(request?.userInfo["lease"], "current")
     }
 
     func testSchedulingClearsPendingWhenNoNextActionExists() async {

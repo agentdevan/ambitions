@@ -32,6 +32,12 @@ final class ExternalSurfaceSnapshotTests: XCTestCase {
         XCTAssertEqual(snapshot.nowState?.ritualCue?.kind, .morningSetup)
         XCTAssertEqual(snapshot.nowState?.ritualCue?.templateKey, "ritual_morning_setup")
         XCTAssertEqual(snapshot.nowState?.supportedCommands.map(\.kind), [.complete, .snooze, .openGoal, .openToday, .openCapturesInbox])
+        XCTAssertEqual(snapshot.ambientState?.today.kind, .today)
+        XCTAssertEqual(snapshot.ambientState?.focus.kind, .focus)
+        XCTAssertEqual(snapshot.ambientState?.goal.privacySummary, "Goal names stay private here")
+        XCTAssertEqual(snapshot.ambientState?.plan.action.tab, "plan")
+        XCTAssertEqual(snapshot.continuity.syncHealth.state, .localFirst)
+        XCTAssertEqual(snapshot.continuity.lease.freshnessLabel, "Updated recently")
         XCTAssertFalse(json.contains(sensitiveStepTitle))
         XCTAssertFalse(json.contains("Very Personal Goal"))
     }
@@ -101,6 +107,8 @@ final class ExternalSurfaceSnapshotTests: XCTestCase {
 
         XCTAssertNil(decoded.nextAction)
         XCTAssertNil(decoded.nowState)
+        XCTAssertNil(decoded.ambientState)
+        XCTAssertEqual(decoded.continuity.syncHealth.state, .localFirst)
     }
 
     func testLiveActivityContentStatePrefersNowStateAndFallsBackToNextAction() throws {
@@ -142,6 +150,8 @@ final class ExternalSurfaceSnapshotTests: XCTestCase {
         XCTAssertEqual(state.goalID, "goal-now")
         XCTAssertEqual(state.stepID, "step-now")
         XCTAssertEqual(state.pressureLevel, .elevated)
+        XCTAssertEqual(state.title, "Focus step ready")
+        XCTAssertEqual(state.leaseLabel, "Updated recently")
         XCTAssertEqual(legacyState.goalID, "goal-old")
         XCTAssertEqual(legacyState.stepID, "step-old")
         XCTAssertEqual(legacyState.pressureLevel, .steady)

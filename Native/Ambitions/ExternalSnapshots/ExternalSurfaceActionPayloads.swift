@@ -94,7 +94,8 @@ enum ExternalSurfaceActionPayload {
     static func deepLinkURL(
         surface: ExternalSurfacePayloadSurface,
         goalID: String? = nil,
-        tab: String? = nil
+        tab: String? = nil,
+        origin: ExternalSurfaceOrigin? = nil
     ) -> URL? {
         var components = URLComponents()
         components.scheme = "ambitions"
@@ -112,6 +113,9 @@ enum ExternalSurfaceActionPayload {
             components.path = "/inbox"
         }
 
+        if let origin {
+            components.queryItems = [URLQueryItem(name: "origin", value: origin.rawValue)]
+        }
         return components.url
     }
 }
@@ -124,6 +128,8 @@ struct ExternalSurfaceGlanceState: Sendable, Equatable {
     let blockerSummary: ExternalSurfaceBlockerSummary
     let ritualCue: ExternalSurfaceRitualCue?
     let supportedCommands: [ExternalSurfaceCommandDescriptor]
+    let ambientState: ExternalSurfaceAmbientState?
+    let continuity: ExternalSurfaceContinuityState
     let urgency: ExternalSurfaceUrgency
     let timing: ExternalSurfaceTiming
 
@@ -138,6 +144,21 @@ struct ExternalSurfaceGlanceState: Sendable, Equatable {
             supportedCommands = [
                 ExternalSurfaceCommandDescriptor(kind: .openToday, requiresGoalID: false, requiresStepID: false),
             ]
+            ambientState = nil
+            continuity = ExternalSurfaceContinuityState(
+                lease: ExternalSurfaceNowStateLease(
+                    status: .unavailable,
+                    generatedAt: nil,
+                    freshnessLabel: "Open Ambitions to refresh",
+                    staleActionLabel: "Open Ambitions to confirm"
+                ),
+                syncHealth: ExternalSurfaceSyncHealth(
+                    state: .unavailable,
+                    label: "This surface may be behind",
+                    detail: "Local app truth is available when Ambitions opens"
+                ),
+                receipt: nil
+            )
             urgency = .anytime
             timing = .untimed
             return
@@ -176,14 +197,16 @@ struct ExternalSurfaceGlanceState: Sendable, Equatable {
             ]
         }
 
+        ambientState = snapshot.ambientState
+        continuity = snapshot.continuity
         urgency = snapshot.nextAction?.display.urgency ?? .anytime
         timing = snapshot.nextAction?.display.timing ?? .untimed
     }
 
     var primaryURL: URL? {
         if let goalID = primaryReference?.goalID {
-            return ExternalSurfaceActionPayload.deepLinkURL(surface: .goalDetail, goalID: goalID)
+            return ExternalSurfaceActionPayload.deepLinkURL(surface: .goalDetail, goalID: goalID, origin: .widget)
         }
-        return ExternalSurfaceActionPayload.deepLinkURL(surface: .tab, tab: "today")
+        return ExternalSurfaceActionPayload.deepLinkURL(surface: .tab, tab: "today", origin: .widget)
     }
 }

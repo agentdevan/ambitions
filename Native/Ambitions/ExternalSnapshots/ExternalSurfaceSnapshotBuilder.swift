@@ -5,10 +5,14 @@ struct ExternalSurfaceSnapshotBuilder: Sendable {
 
     func makeSnapshot(goals: [Goal], captures: [Capture] = [], now: Date) -> ExternalSurfaceSnapshot {
         let nextAction = nextAction(from: goals, now: now)
+        let generatedAt = Self.iso.string(from: now)
+        let state = nowState(goals: goals, captures: captures, nextAction: nextAction, now: now)
         return ExternalSurfaceSnapshot(
-            generatedAt: Self.iso.string(from: now),
+            generatedAt: generatedAt,
             nextAction: nextAction,
-            nowState: nowState(goals: goals, captures: captures, nextAction: nextAction, now: now)
+            nowState: state,
+            ambientState: ambientState(goals: goals, captures: captures, nextAction: nextAction, nowState: state),
+            continuity: ExternalSurfaceContinuityState.localFirst(generatedAt: generatedAt)
         )
     }
 
@@ -118,6 +122,122 @@ struct ExternalSurfaceSnapshotBuilder: Sendable {
         }
 
         return commands
+    }
+
+    private func ambientState(
+        goals: [Goal],
+        captures: [Capture],
+        nextAction: ExternalSurfaceNextAction?,
+        nowState: ExternalSurfaceNowState
+    ) -> ExternalSurfaceAmbientState {
+        let activeGoals = goals.filter { $0.state == .active || $0.state == .paused }
+        let activeGoalCount = activeGoals.count
+        let openCaptureCount = captures.filter { $0.status != .archived }.count
+        let blockedCount = nowState.blockerSummary.blockedCount
+        let primaryReference = nowState.activeFocus ?? nowState.bestNextStep
+
+        return ExternalSurfaceAmbientState(
+            today: ExternalSurfaceVariantState(
+                kind: .today,
+                title: todayVariantTitle(posture: nowState.todayPosture),
+                detail: todayVariantDetail(posture: nowState.todayPosture, pressure: nowState.pressureLevel),
+                privacySummary: "Glance-safe next move only",
+                action: ExternalSurfaceVariantAction(title: "Open Today", surface: .tab, tab: "today"),
+                reference: primaryReference,
+                prominence: nowState.pressureLevel == .overloaded || nowState.pressureLevel == .elevated ? .elevated : .standard
+            ),
+            focus: ExternalSurfaceVariantState(
+                kind: .focus,
+                title: primaryReference == nil ? "Focus when ready" : "Focus step ready",
+                detail: focusVariantDetail(urgency: nextAction?.display.urgency, pressure: nowState.pressureLevel),
+                privacySummary: "Details stay inside Ambitions",
+                action: ExternalSurfaceVariantAction(title: "Open Focus", surface: .tab, tab: "today"),
+                reference: primaryReference,
+                prominence: primaryReference == nil ? .quiet : .elevated
+            ),
+            goal: ExternalSurfaceVariantState(
+                kind: .goal,
+                title: activeGoalCount == 0 ? "No active goal pressure" : "\(activeGoalCount) active goals",
+                detail: blockedCount == 0 ? "Momentum is readable from your local plan." : "\(blockedCount) blocked steps need a calmer next pass.",
+                privacySummary: "Goal names stay private here",
+                action: ExternalSurfaceVariantAction(title: "Open Goals", surface: .tab, tab: "goals"),
+                reference: primaryReference,
+                prominence: blockedCount > 0 ? .elevated : .standard
+            ),
+            plan: ExternalSurfaceVariantState(
+                kind: .plan,
+                title: planVariantTitle(pressure: nowState.pressureLevel),
+                detail: openCaptureCount == 0 ? "The week can be shaped from the latest local state." : "\(openCaptureCount) captures are waiting for review.",
+                privacySummary: "Plan detail opens in app",
+                action: ExternalSurfaceVariantAction(title: "Open Plan", surface: .tab, tab: "plan"),
+                reference: primaryReference,
+                prominence: nowState.openCaptureUrgency == .elevated ? .elevated : .standard
+            )
+        )
+    }
+
+    private func todayVariantTitle(posture: ExternalSurfaceTodayPosture) -> String {
+        switch posture {
+        case .empty:
+            return "Today is open"
+        case .active:
+            return "Today has a next move"
+        case .waiting:
+            return "Today needs confirmation"
+        case .recovery:
+            return "Recovery is ready"
+        }
+    }
+
+    private func todayVariantDetail(posture: ExternalSurfaceTodayPosture, pressure: ExternalSurfacePressureLevel) -> String {
+        switch posture {
+        case .empty:
+            return "Open Ambitions to set the first useful move."
+        case .waiting:
+            return "A blocker is visible; open Ambitions before committing."
+        case .recovery:
+            return "Use the smallest safe step from your local plan."
+        case .active:
+            switch pressure {
+            case .open:
+                return "Room is available for a calm next step."
+            case .steady:
+                return "Your next move is still believable."
+            case .elevated:
+                return "Pressure is rising; keep the step small."
+            case .overloaded:
+                return "Open Ambitions to triage before pushing."
+            }
+        }
+    }
+
+    private func focusVariantDetail(urgency: ExternalSurfaceUrgency?, pressure: ExternalSurfacePressureLevel) -> String {
+        guard let urgency else {
+            return "Open Ambitions when you want a bounded session."
+        }
+        switch urgency {
+        case .overdue:
+            return "Start only if this still fits right now."
+        case .soon:
+            return "A bounded focus window is useful soon."
+        case .normal:
+            return pressure == .elevated ? "Keep the focus narrow." : "A clean focus step is available."
+        case .anytime:
+            return "Flexible timing; no pressure added."
+        }
+    }
+
+    private func planVariantTitle(pressure: ExternalSurfacePressureLevel) -> String {
+        switch pressure {
+        case .open:
+            return "Week has room"
+        case .steady:
+            return "Week is holding"
+        case .elevated:
+            return "Week needs shaping"
+        case .overloaded:
+            return "Week needs triage"
+        }
     }
 
     private func urgency(for timing: GoalTiming, now: Date) -> ExternalSurfaceUrgency {

@@ -6,37 +6,49 @@ import WidgetKit
 struct NextStepLiveActivityWidget: Widget {
     var body: some WidgetConfiguration {
         ActivityConfiguration(for: NextStepActivityAttributes.self) { context in
-            HStack {
+            HStack(spacing: 14) {
+                Image(systemName: "scope")
+                    .font(.title3.weight(.semibold))
+                    .frame(width: 34, height: 34)
+                    .background(.thinMaterial, in: Circle())
                 VStack(alignment: .leading, spacing: 4) {
-                    Text("Ambitions")
-                        .font(.caption)
-                        .foregroundStyle(.secondary)
-                    Text("Next step active")
+                    Text(context.state.title)
                         .font(.headline)
-                    Text(urgencyLabel(context.state.urgency))
+                        .lineLimit(1)
+                    Text(context.state.detail)
                         .font(.subheadline)
                         .foregroundStyle(.secondary)
-                    Text(pressureLabel(context.state.pressureLevel))
+                        .lineLimit(2)
+                    Text("\(context.state.syncLabel) · \(context.state.leaseLabel)")
                         .font(.caption2)
                         .foregroundStyle(.tertiary)
+                        .lineLimit(1)
                 }
-                Spacer()
+                Spacer(minLength: 0)
                 Link(destination: deepLinkURL(goalID: context.state.goalID)) {
-                    Image(systemName: "arrow.up.right.square")
+                    Label("Return", systemImage: "arrow.up.right.square")
+                        .labelStyle(.iconOnly)
                 }
             }
             .padding()
+            .activityBackgroundTint(Color(red: 0.08, green: 0.10, blue: 0.12))
+            .activitySystemActionForegroundColor(Color(red: 0.96, green: 0.72, blue: 0.42))
         } dynamicIsland: { context in
             DynamicIsland {
                 DynamicIslandExpandedRegion(.center) {
-                    VStack(alignment: .leading) {
-                        Text("Next step")
+                    VStack(alignment: .leading, spacing: 5) {
+                        Text("Ambitions Focus")
                             .font(.caption)
                             .foregroundStyle(.secondary)
-                        Text(urgencyLabel(context.state.urgency))
+                        Text(context.state.title)
                             .font(.headline)
-                        Link("Open in Ambitions", destination: deepLinkURL(goalID: context.state.goalID))
+                            .lineLimit(1)
+                        Text(context.state.detail)
                             .font(.subheadline)
+                            .foregroundStyle(.secondary)
+                            .lineLimit(2)
+                        Link("Return to Ambitions", destination: deepLinkURL(goalID: context.state.goalID))
+                            .font(.caption.weight(.semibold))
                     }
                 }
             } compactLeading: {
@@ -77,8 +89,8 @@ struct NextStepLiveActivityWidget: Widget {
     }
 
     private func deepLinkURL(goalID: String) -> URL {
-        ExternalSurfaceActionPayload.deepLinkURL(surface: .goalDetail, goalID: goalID)
-            ?? ExternalSurfaceActionPayload.deepLinkURL(surface: .tab, tab: "today")!
+        ExternalSurfaceActionPayload.deepLinkURL(surface: .goalDetail, goalID: goalID, origin: .liveActivity)
+            ?? ExternalSurfaceActionPayload.deepLinkURL(surface: .tab, tab: "today", origin: .liveActivity)!
     }
 
     private func pressureLabel(_ pressure: ExternalSurfacePressureLevel) -> String {

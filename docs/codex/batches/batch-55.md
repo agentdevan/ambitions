@@ -1,6 +1,6 @@
 ﻿# Batch 55 - Front-End Transformation 16 / External surfaces I - widgets, Live Activities, notifications, and Focus Screenlet
 ## Status
-Active
+Completed
 ## Program
 Post-hardening Front-End Transformation Program
 ## Canon Source
@@ -14,8 +14,8 @@ Post-hardening Front-End Transformation Program
 - [cross-device-surface-roles-spec.md](../../canon/design/cross-device-surface-roles-spec.md)
 ## Start Gate
 - Start only after Batch 54 is complete and stable.
-- Batch 55 is active in the registry after Batch 54 closeout.
-- Do not begin Batch 56+ work while this batch is active.
+- Batch 55 was active in the registry after Batch 54 closeout.
+- Batch 56 activates only after Batch 55 closeout.
 ## Goal
 Fully implement the first external ambient surfaces as premium first-class product surfaces.
 ## In Scope
@@ -52,3 +52,11 @@ Fully implement the first external ambient surfaces as premium first-class produ
 Complete only when the app's first external surfaces no longer feel conservative or half-shipped.
 
 ---
+
+## Closeout Notes
+- Implemented a canonical ambient external snapshot layer with Today, Focus, Goal, and Plan variants plus Now State Lease, Sync Health Strip language, and source-preserving origins.
+- Redesigned widgets for Home Screen and Lock Screen families using the shared snapshot contract.
+- Redesigned Live Activity and Dynamic Island content around bounded focus/execution continuity with stale-date behavior.
+- Refined notifications with calm action labels, continuity payload metadata, and canonical landing routes.
+- Preserved Batch 56 boundaries: no share extension implementation and no App Intents / shortcuts productization beyond existing navigation-only support.
+- Validation has passed with `xcodegen generate`, native simulator build, targeted external-surface tests, full `AmbitionsTests`, targeted launch-route UI tests, and the focused Focus Screenlet UI proof. App-side widget, notification, and Live Activity handoff routes are verified. Direct SpringBoard widget placement, Lock Screen widget rendering, notification banner / Notification Center UI, and Live Activity / Dynamic Island visual behavior are deferred to the release/platform checklist, so Batch 55 closeout is earned without claiming final platform review.

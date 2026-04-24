@@ -15,14 +15,14 @@ actor NextStepLiveActivityService: NextStepLiveActivityServicing {
         }
 
         if let existing = Activity<NextStepActivityAttributes>.activities.first {
-            await existing.update(ActivityContent(state: contentState, staleDate: nil))
+            await existing.update(ActivityContent(state: contentState, staleDate: staleDate(from: now)))
             return
         }
 
         let attributes = NextStepActivityAttributes(contextID: "next-step")
         _ = try? Activity<NextStepActivityAttributes>.request(
             attributes: attributes,
-            content: ActivityContent(state: contentState, staleDate: nil)
+            content: ActivityContent(state: contentState, staleDate: staleDate(from: now))
         )
     }
 
@@ -30,6 +30,10 @@ actor NextStepLiveActivityService: NextStepLiveActivityServicing {
         for activity in Activity<NextStepActivityAttributes>.activities {
             await activity.end(nil, dismissalPolicy: .immediate)
         }
+    }
+
+    private func staleDate(from now: Date) -> Date {
+        now.addingTimeInterval(45 * 60)
     }
 }
 

@@ -29,6 +29,15 @@ final class ExternalRoutingTests: XCTestCase {
         XCTAssertEqual(route, .openGoalDetail(goalID: "goal-123"))
     }
 
+    func testDeepLinkTranslatorPreservesExternalOriginSource() throws {
+        let translator = AppExternalRouteTranslator()
+        let widgetURL = try XCTUnwrap(URL(string: "ambitions://goal/goal-123?origin=widget"))
+        let activityURL = try XCTUnwrap(URL(string: "ambitions://goal/goal-123?origin=live_activity"))
+
+        XCTAssertEqual(translator.source(fromDeepLink: widgetURL), .widgetAction)
+        XCTAssertEqual(translator.source(fromDeepLink: activityURL), .liveActivity)
+    }
+
     func testDeepLinkTranslatorParsesCapturesInboxRoute() throws {
         let translator = AppExternalRouteTranslator()
         let url = try XCTUnwrap(URL(string: "ambitions://captures/inbox"))

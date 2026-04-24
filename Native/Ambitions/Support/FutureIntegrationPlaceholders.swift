@@ -32,7 +32,7 @@ enum FutureIntegrationPlaceholders {
 
     static let widgetsLiveActivities = FutureIntegrationPlaceholderContext(
         surface: .widgetsLiveActivities,
-        notes: "\(ExternalSurfaceTruth.availableButNeedsManualVerification). Widgets and Live Activity are read-only surfaces in this batch; only validation or narrow compatibility fixes belong here."
+        notes: "\(ExternalSurfaceTruth.productizedNeedsPlatformReview). Widgets and Live Activity now consume shared external snapshot and continuity state; future work should stay on that seam."
     )
 
     static let shareExtension = FutureIntegrationPlaceholderContext(

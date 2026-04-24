@@ -181,7 +181,7 @@ private extension RepositoryBackedProfileService {
                     SettingsItem(
                         id: "profile-trust-routing",
                         title: "System status",
-                        subtitle: "\(ExternalSurfaceTruth.verifiedRoutingTruth). External routes stay on canonical destinations, and unverified surfaces keep conservative copy.",
+                        subtitle: "\(ExternalSurfaceTruth.verifiedRoutingTruth). External routes stay on canonical destinations, and ambient surfaces preserve local-first continuity language.",
                         icon: "arrow.triangle.branch",
                         valueLabel: "Calm"
                     )
@@ -264,9 +264,9 @@ private extension RepositoryBackedProfileService {
                     SettingsItem(
                         id: "profile-integration-widgets",
                         title: "Widgets and Live Activity",
-                        subtitle: "\(ExternalSurfaceTruth.availableButNeedsManualVerification). These surfaces are read-only in the current batch and still need direct manual review.",
+                        subtitle: "\(ExternalSurfaceTruth.productizedNeedsPlatformReview). Widgets and Live Activity read the shared external snapshot, Now State Lease, and local-first continuity posture.",
                         icon: "rectangle.3.group",
-                        valueLabel: ExternalSurfaceTruth.availableButNeedsManualVerification
+                        valueLabel: ExternalSurfaceTruth.productizedNeedsPlatformReview
                     ),
                     SettingsItem(
                         id: "profile-integration-shortcuts",

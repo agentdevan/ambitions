@@ -1,6 +1,6 @@
 ﻿# Batch 56 - Front-End Transformation 17 / External surfaces II - share extension, App Intents, shortcuts, routing, and external creation
 ## Status
-Queued
+Active
 ## Program
 Post-hardening Front-End Transformation Program
 ## Canon Source
@@ -12,8 +12,8 @@ Post-hardening Front-End Transformation Program
 - [trust-explainability-correction-spec.md](../../canon/design/trust-explainability-correction-spec.md)
 - [novel-interaction-systems-spec.md](../../canon/design/novel-interaction-systems-spec.md)
 ## Start Gate
-- Start only after Batch 38 is complete and stable.
-- Do not activate or implement this batch early; follow the registry and dependency order.
+- Start only after Batch 55 is complete and stable.
+- Follow the registry and dependency order; do not widen beyond this batch.
 ## Goal
 Fully implement the creation, entry, and routing surfaces outside the main app shell.
 ## In Scope

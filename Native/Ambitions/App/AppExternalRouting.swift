@@ -13,6 +13,7 @@ enum AppExternalRouteSource: String, Sendable {
     case deepLink
     case notificationAction
     case widgetAction
+    case liveActivity
 }
 
 struct AppNotificationRoutingPayload: Equatable, Sendable {
@@ -26,6 +27,24 @@ struct AppWidgetRoutingPayload: Equatable, Sendable {
 }
 
 struct AppExternalRouteTranslator {
+    func source(fromDeepLink url: URL) -> AppExternalRouteSource {
+        guard let components = URLComponents(url: url, resolvingAgainstBaseURL: false),
+              let origin = components.queryItems?.first(where: { $0.name == "origin" })?.value else {
+            return .deepLink
+        }
+
+        switch origin {
+        case ExternalSurfaceOrigin.widget.rawValue:
+            return .widgetAction
+        case ExternalSurfaceOrigin.liveActivity.rawValue:
+            return .liveActivity
+        case ExternalSurfaceOrigin.notification.rawValue:
+            return .notificationAction
+        default:
+            return .deepLink
+        }
+    }
+
     func route(fromDeepLink url: URL) -> AppExternalRoute? {
         guard let components = URLComponents(url: url, resolvingAgainstBaseURL: false) else {
             return nil
@@ -417,7 +436,7 @@ final class DefaultAppExternalRouter: AppExternalRouting {
 
     func handleDeepLink(_ url: URL) {
         guard let route = translator.route(fromDeepLink: url) else { return }
-        dispatch(route, source: .deepLink)
+        dispatch(route, source: translator.source(fromDeepLink: url))
     }
 
     func handleNotificationPayload(_ payload: AppNotificationRoutingPayload) {

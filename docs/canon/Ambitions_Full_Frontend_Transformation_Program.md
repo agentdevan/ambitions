@@ -27,9 +27,10 @@ Live queue truth in the current repo:
 - Batch 52 — Completed
 - Batch 53 — Completed
 - Batch 54 — Completed
-- Batch 55 — Active
-- Batches 56-60 — Queued
-- the front-end transformation program is active in implementation at **Batch 55**
+- Batch 55 — Completed
+- Batch 56 — Active
+- Batches 57-60 — Queued
+- the front-end transformation program has completed implementation through **Batch 55** and is active at **Batch 56**
 
 Batch 39 is a docs-only foundation batch.
 It makes the transformation program explicit enough to guide later implementation batches without authorizing shell implementation, route rewiring, or surface redesign work ahead of Batch 40.
@@ -336,8 +337,8 @@ If status language here drifts, the registry controls active-vs-queued truth and
 | 52 | Front-End Transformation 13 / Profile rebuild, Appearance Studio, Trust Center, and Context Vault foundations | Completed | Profile rebuilt as a premium system-configuration and trust surface with Appearance Studio, Trust Center with sync pulse, Context Vault foundations, regrouped defaults/integrations/account surfaces, and profile-scoped presentation refinement. |
 | 53 | Front-End Transformation 14 / Progressive Intelligence Onboarding and Degraded-State Orchestrator | Completed | Progressive Intelligence Onboarding, additive onboarding persistence, the shared Degraded-State Orchestrator, contextual permission education, privacy-first trust copy, and no-data/low-history/degraded-state coverage landed with green automated validation and sufficient manual simulator audit. |
 | 54 | Front-End Transformation 15 / State Continuity Mesh, sync trust, and real-time continuity contract | Completed | State Continuity Mesh contract established in [Ambitions_State_Continuity_Mesh.md](Ambitions_State_Continuity_Mesh.md) before external-surface widening. |
-| 55 | Front-End Transformation 16 / External surfaces I — widgets, Live Activities, notifications, and Focus Screenlet | Active | First external-surface implementation wave. |
-| 56 | Front-End Transformation 17 / External surfaces II — share extension, App Intents, shortcuts, routing, and external creation | Queued | External creation and OS-surface productization. |
+| 55 | Front-End Transformation 16 / External surfaces I — widgets, Live Activities, notifications, and Focus Screenlet | Completed | First external-surface implementation wave. |
+| 56 | Front-End Transformation 17 / External surfaces II — share extension, App Intents, shortcuts, routing, and external creation | Active | External creation and OS-surface productization. |
 | 57 | Front-End Transformation 18 / Cross-surface command, recall, and ambient coherence | Queued | Command, recall, provenance, and handoff coherence. |
 | 58 | Front-End Transformation 19 / iPad and Mac surface architecture and first implementation | Queued | Future-platform implementation begins. |
 | 59 | Front-End Transformation 20 / Watch and Apple TV ambient surface architecture and first implementation | Queued | Ambient and room-scale future surfaces begin. |
@@ -1141,7 +1142,7 @@ Completed as a docs/control continuity contract pass with [Ambitions_State_Conti
 ## Batch 55 — Front-End Transformation 16 / External surfaces I — widgets, Live Activities, notifications, and Focus Screenlet
 
 ### Status
-Active
+Completed
 
 ### Goal
 Fully implement the first external ambient surfaces as premium first-class product surfaces.
@@ -1184,12 +1185,14 @@ Fully implement the first external ambient surfaces as premium first-class produ
 ### Completion Rule
 Complete only when the app’s first external surfaces no longer feel conservative or half-shipped.
 
+Completed with shared Today/Focus/Goal/Plan ambient snapshot variants, Now State Lease and Sync Health Strip inheritance, Home Screen and Lock Screen widget hierarchy, bounded Live Activity/Dynamic Island content, calm notification actions, and origin-preserving landing. Automated and app-side validation is green; direct SpringBoard widget placement, Lock Screen widget rendering, notification banner / Notification Center UI, and Live Activity / Dynamic Island visual behavior are deferred to release/platform review.
+
 ---
 
 ## Batch 56 — Front-End Transformation 17 / External surfaces II — share extension, App Intents, shortcuts, routing, and external creation
 
 ### Status
-Queued
+Active
 
 ### Goal
 Fully implement the creation, entry, and routing surfaces outside the main app shell.

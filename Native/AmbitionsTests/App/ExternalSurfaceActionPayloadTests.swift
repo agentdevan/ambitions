@@ -27,10 +27,12 @@ final class ExternalSurfaceActionPayloadTests: XCTestCase {
         let goalURL = try XCTUnwrap(ExternalSurfaceActionPayload.deepLinkURL(surface: .goalDetail, goalID: "goal-123"))
         let todayURL = try XCTUnwrap(ExternalSurfaceActionPayload.deepLinkURL(surface: .tab, tab: "today"))
         let capturesURL = try XCTUnwrap(ExternalSurfaceActionPayload.deepLinkURL(surface: .capturesInbox))
+        let widgetURL = try XCTUnwrap(ExternalSurfaceActionPayload.deepLinkURL(surface: .tab, tab: "today", origin: .widget))
 
         XCTAssertEqual(goalURL.absoluteString, "ambitions://goal/goal-123")
         XCTAssertEqual(todayURL.absoluteString, "ambitions://tab/today")
         XCTAssertEqual(capturesURL.absoluteString, "ambitions://captures/inbox")
+        XCTAssertEqual(widgetURL.absoluteString, "ambitions://tab/today?origin=widget")
         XCTAssertFalse(goalURL.absoluteString.contains("Private"))
     }
 
@@ -69,6 +71,7 @@ final class ExternalSurfaceActionPayloadTests: XCTestCase {
         XCTAssertEqual(glance.todayPosture, .waiting)
         XCTAssertEqual(glance.pressureLevel, .elevated)
         XCTAssertEqual(glance.openCaptureUrgency, .low)
+        XCTAssertEqual(glance.continuity.syncHealth.label, "Local-first and stable")
 
         let legacy = ExternalSurfaceGlanceState(
             snapshot: ExternalSurfaceSnapshot(
@@ -81,5 +84,16 @@ final class ExternalSurfaceActionPayloadTests: XCTestCase {
         XCTAssertEqual(legacy.primaryReference?.stepID, "step-old")
         XCTAssertEqual(legacy.todayPosture, .active)
         XCTAssertEqual(legacy.pressureLevel, .steady)
+    }
+
+    func testGlanceStateUsesCalmUnavailableLanguageWhenSnapshotIsMissing() throws {
+        let glance = ExternalSurfaceGlanceState(snapshot: nil)
+
+        XCTAssertEqual(glance.continuity.lease.status, .unavailable)
+        XCTAssertEqual(glance.continuity.lease.freshnessLabel, "Open Ambitions to refresh")
+        XCTAssertEqual(glance.continuity.syncHealth.state, .unavailable)
+        XCTAssertEqual(glance.continuity.syncHealth.label, "This surface may be behind")
+        XCTAssertEqual(glance.continuity.syncHealth.detail, "Local app truth is available when Ambitions opens")
+        XCTAssertEqual(glance.primaryURL?.absoluteString, "ambitions://tab/today?origin=widget")
     }
 }

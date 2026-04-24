@@ -447,12 +447,23 @@ final class AmbitionsUITests: XCTestCase {
         app.launch()
 
         XCTAssertTrue(waitForTodayScreenReady(in: app))
-        let startFocus = app.buttons["today.hero.primary-action"]
-        XCTAssertTrue(startFocus.waitForExistence(timeout: 10))
-        XCTAssertEqual(startFocus.label, "Start focus")
-        startFocus.tap()
+        let primaryAction = app.buttons["today.hero.primary-action"]
+        XCTAssertTrue(primaryAction.waitForExistence(timeout: 10))
 
-        XCTAssertTrue(app.descendants(matching: .any)["today.support.focus-screenlet"].waitForExistence(timeout: 10))
+        if primaryAction.label == "Start focus" {
+            primaryAction.tap()
+        } else {
+            XCTAssertEqual(primaryAction.label, "Answer")
+            let commandButton = shellCommandButton(in: app)
+            XCTAssertTrue(commandButton.waitForExistence(timeout: 10))
+            commandButton.tap()
+
+            let focusAction = app.buttons["shell.command.action.quick_focus"]
+            XCTAssertTrue(focusAction.waitForExistence(timeout: 10))
+            focusAction.tap()
+        }
+
+        XCTAssertTrue(scrollUntilElementExists("today.support.focus-screenlet", in: app))
     }
 
     func testTodayCanHandOffToGoalDetail() throws {
