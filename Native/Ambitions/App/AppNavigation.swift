@@ -70,11 +70,11 @@ final class AppNavigationModel {
         continuityReceipt = nil
 
         switch selectedTab {
-        case .captures:
-            planPath = [.capturesInbox]
         case .habits:
             planPath = [.habits]
-        case .today, .goals, .plan, .insights, .profile:
+        case .insights:
+            insightsPath = [.history]
+        case .today, .captures, .goals, .plan, .profile:
             break
         }
     }
@@ -85,10 +85,10 @@ final class AppNavigationModel {
         if selectedTab != .today {
             todayEntryContext = .standard
         }
-        if tab == .captures {
-            openCapturesInbox()
-        } else if tab == .habits {
+        if tab == .habits {
             openHabits()
+        } else if tab == .insights {
+            openHistory()
         }
     }
 
@@ -119,6 +119,11 @@ final class AppNavigationModel {
 
     func openPlanRoute(_ target: PlanRouteTarget) {
         dismissOverlay()
+        if target == .capturesInbox {
+            selectedTab = .captures
+            planPath = []
+            return
+        }
         selectedTab = .plan
         planPath = [target]
     }
@@ -129,7 +134,7 @@ final class AppNavigationModel {
 
     func openInsightsRoute(_ target: InsightsRouteTarget) {
         dismissOverlay()
-        selectedTab = .insights
+        selectedTab = .profile
         insightsPath = [target]
     }
 

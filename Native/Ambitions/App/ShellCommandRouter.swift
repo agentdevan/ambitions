@@ -154,7 +154,7 @@ final class DefaultShellCommandRouter: ShellCommandRouting {
                     source: source,
                     presentationContext: .quickCapture,
                     destination: .planRoute(.capturesInbox),
-                    receiptBody: "Capture saved locally and opened in Plan-owned captures."
+                    receiptBody: "Capture saved locally and opened in Capture."
                 )
                 return ShellCommandExecutionResult(
                     title: "Capture saved",
@@ -223,7 +223,7 @@ final class DefaultShellCommandRouter: ShellCommandRouting {
                 source: source,
                 presentationContext: .recall,
                 destination: .planRoute(.capturesInbox),
-                receiptBody: "Opened the Plan-owned captures inbox from \(source.displayTitle)."
+                receiptBody: "Opened Capture from \(source.displayTitle)."
             )
             return ShellCommandExecutionResult(destination: .planRoute(.capturesInbox))
         case .memoryLens:

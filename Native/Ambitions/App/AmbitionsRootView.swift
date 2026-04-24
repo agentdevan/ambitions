@@ -22,8 +22,8 @@ struct AmbitionsRootView: View {
             TabView(selection: $navigation.selectedTab) {
                 todayNavigation()
                 goalsNavigation()
+                captureNavigation()
                 planNavigation()
-                insightsNavigation()
                 profileNavigation()
             }
 
@@ -130,15 +130,7 @@ struct AmbitionsRootView: View {
                 title: "Plan",
                 subtitle: "Shaping",
                 posture: .shaping,
-                trailingButtons: [
-                    AppShellHeaderButton(
-                        title: "Captures",
-                        systemImage: AppTab.captures.systemImage,
-                        accessibilityIdentifier: "shell.plan.open-captures-button"
-                    ) {
-                        container.commandRouter.route(to: .planRoute(.capturesInbox), source: .shellUtility)
-                    }
-                ] + shellUtilityButtons(for: .plan)
+                trailingButtons: shellUtilityButtons(for: .plan)
             ) {
                 PlanScreen(showsNavigationChrome: false)
             }
@@ -189,15 +181,32 @@ struct AmbitionsRootView: View {
         }
     }
 
-    private func insightsNavigation() -> some View {
+    private func captureNavigation() -> some View {
+        NavigationStack {
+            AppShellScaffold(
+                title: "Capture",
+                subtitle: "Intake",
+                posture: .shaping,
+                trailingButtons: shellUtilityButtons(for: .captures)
+            ) {
+                CapturesScreen(shellMode: .topLevelCapture)
+            }
+        }
+        .tag(AppTab.captures)
+        .tabItem {
+            Label(AppTab.captures.title, systemImage: AppTab.captures.systemImage)
+        }
+    }
+
+    private func profileNavigation() -> some View {
         NavigationStack(path: $navigation.insightsPath) {
             AppShellScaffold(
-                title: "Insights",
-                subtitle: "Reflection",
-                posture: .reflection,
-                trailingButtons: shellUtilityButtons(for: .insights)
+                title: "You",
+                subtitle: "Utility",
+                posture: .utility,
+                trailingButtons: shellUtilityButtons(for: .profile)
             ) {
-                InsightsScreen(showsNavigationChrome: false)
+                ProfileScreen(showsNavigationChrome: false)
             }
             .navigationDestination(for: InsightsRouteTarget.self) { target in
                 switch target {
@@ -206,9 +215,9 @@ struct AmbitionsRootView: View {
                         title: "Monthly Review",
                         subtitle: "Reflection",
                         posture: .reflection,
-                        backButtonAccessibilityIdentifier: "shell.insights.back-button",
+                        backButtonAccessibilityIdentifier: "shell.you.back-button",
                         onBack: { navigation.resetInsightsPath() },
-                        trailingButtons: shellUtilityButtons(for: .insights)
+                        trailingButtons: shellUtilityButtons(for: .profile)
                     ) {
                         InsightsMonthlyReviewScreen()
                     }
@@ -217,30 +226,13 @@ struct AmbitionsRootView: View {
                         title: "History",
                         subtitle: "Reflection",
                         posture: .reflection,
-                        backButtonAccessibilityIdentifier: "shell.insights.back-button",
+                        backButtonAccessibilityIdentifier: "shell.you.back-button",
                         onBack: { navigation.resetInsightsPath() },
-                        trailingButtons: shellUtilityButtons(for: .insights)
+                        trailingButtons: shellUtilityButtons(for: .profile)
                     ) {
                         InsightsHistoryScreen()
                     }
                 }
-            }
-        }
-        .tag(AppTab.insights)
-        .tabItem {
-            Label(AppTab.insights.title, systemImage: AppTab.insights.systemImage)
-        }
-    }
-
-    private func profileNavigation() -> some View {
-        NavigationStack {
-            AppShellScaffold(
-                title: "Profile",
-                subtitle: "Utility",
-                posture: .utility,
-                trailingButtons: shellUtilityButtons(for: .profile)
-            ) {
-                ProfileScreen(showsNavigationChrome: false)
             }
         }
         .tag(AppTab.profile)

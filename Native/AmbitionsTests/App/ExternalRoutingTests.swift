@@ -259,13 +259,13 @@ final class ExternalRoutingTests: XCTestCase {
         XCTAssertEqual(translator.route(fromNotification: oldCapturesPayload), .openPlanRoute(.capturesInbox))
     }
 
-    func testCapturesInboxPayloadUsesCanonicalPlanTabHint() {
+    func testCapturesInboxPayloadUsesCanonicalCaptureTabHint() {
         let translator = AppExternalRouteTranslator()
 
         let payload = translator.routePayload(for: .openPlanRoute(.capturesInbox))
 
         XCTAssertEqual(payload["surface"], "captures-inbox")
-        XCTAssertEqual(payload["tab"], AppTab.plan.rawValue)
+        XCTAssertEqual(payload["tab"], AppTab.captures.rawValue)
     }
 
     func testOverlayPayloadCarriesIntentForCanonicalNormalization() {
@@ -292,26 +292,26 @@ final class ExternalRoutingTests: XCTestCase {
     }
 
     @MainActor
-    func testRouterDispatchesCapturesInboxToPlanOwnedInbox() {
+    func testRouterDispatchesCapturesInboxToTopLevelCapture() {
         let navigation = AppNavigationModel(selectedTab: .insights)
         let router = DefaultAppExternalRouter(navigation: navigation)
 
         router.dispatch(.openPlanRoute(.capturesInbox), source: .widgetAction)
 
-        XCTAssertEqual(navigation.selectedTab, .plan)
-        XCTAssertEqual(navigation.planPath, [.capturesInbox])
+        XCTAssertEqual(navigation.selectedTab, .captures)
+        XCTAssertTrue(navigation.planPath.isEmpty)
         XCTAssertEqual(navigation.lastExternalRoute, .openPlanRoute(.capturesInbox))
         XCTAssertEqual(navigation.lastExternalRouteSource, .widgetAction)
     }
 
     @MainActor
-    func testRouterDispatchesLegacyCapturesAndHabitsTabsIntoSecondaryDestinations() {
+    func testRouterDispatchesCaptureTabAndLegacyHabitsTabIntoCanonicalDestinations() {
         let navigation = AppNavigationModel(selectedTab: .today)
         let router = DefaultAppExternalRouter(navigation: navigation)
 
         router.dispatch(.openTab(.captures), source: .deepLink)
-        XCTAssertEqual(navigation.selectedTab, .plan)
-        XCTAssertEqual(navigation.planPath, [.capturesInbox])
+        XCTAssertEqual(navigation.selectedTab, .captures)
+        XCTAssertTrue(navigation.planPath.isEmpty)
 
         router.dispatch(.openTab(.habits), source: .deepLink)
         XCTAssertEqual(navigation.selectedTab, .plan)

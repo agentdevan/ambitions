@@ -85,7 +85,7 @@ struct TodayScreen: View {
                     Button {
                         container.commandRouter.route(to: .planRoute(.capturesInbox), source: .shellUtility)
                     } label: {
-                        Label("Captures", systemImage: AppTab.captures.systemImage)
+                        Label("Capture", systemImage: AppTab.captures.systemImage)
                     }
                     .accessibilityIdentifier("today.open-captures-button")
                 }

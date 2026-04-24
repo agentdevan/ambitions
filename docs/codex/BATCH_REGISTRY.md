@@ -42,7 +42,7 @@ Use [../canon/Ambitions_2_0_Batch_Plan.md](../canon/Ambitions_2_0_Batch_Plan.md)
 
 ## Active Queue
 
-Current wave status: Ambitions 2.0 post-Batch-60 canon is adopted. Batch 61 is active. Batches 62-86 are the only incomplete planned batches.
+Current wave status: Ambitions 2.0 post-Batch-60 canon is adopted. Batch 62 is active. Batches 63-86 remain queued.
 
 | Batch | Name | Status | Notes |
 | --- | --- | --- | --- |
@@ -93,8 +93,8 @@ These rows are the active planning state for the new post-Batch-60 Ambitions 2.0
 | Batch | Name | Status | Notes |
 | --- | --- | --- | --- |
 | 60 | Release-candidate polish batch | Completed | Marked complete for planning by explicit user instruction on 2026-04-24; existing repo docs did not independently verify implementation details during this docs-only canon update. |
-| 61 | Repo Truth and Ambitions 2.0 Capability Matrix | Active | First active batch in the post-Batch-60 Ambitions 2.0 canon. Verify repo truth and fill the capability matrix before implementation work. |
-| 62 | Ambitions 2.0 Shell IA | Queued | New Ambitions 2.0 batch; do not start until Batch 61 is complete. |
+| 61 | Repo Truth and Ambitions 2.0 Capability Matrix | Completed | Repo truth and capability matrix verification completed enough to allow Batch 62 shell IA work by explicit user direction. |
+| 62 | Ambitions 2.0 Shell IA | Active | Implement the locked Today / Goals / Capture / Plan / You shell; do not mark complete until explicit closeout decision. |
 | 63 | Rich Panel Design System | Queued | New Ambitions 2.0 batch; do not start until prior dependencies are complete. |
 | 64 | Accessibility Nutrition Layer | Queued | New Ambitions 2.0 batch; do not start until prior dependencies are complete. |
 | 65 | Memory / Event Ledger Foundation | Queued | New Ambitions 2.0 batch; do not start until prior dependencies are complete. |

@@ -91,22 +91,23 @@ final class AmbitionsUITests: XCTestCase {
         let app = makeApp(bootstrapMode: "preview")
         app.launch()
 
-        for tab in ["Today", "Goals", "Plan", "Insights", "Profile"] {
+        for tab in ["Today", "Goals", "Capture", "Plan", "You"] {
             XCTAssertTrue(app.tabBars.buttons[tab].waitForExistence(timeout: 10), "Missing top-level tab \(tab)")
         }
         XCTAssertFalse(app.tabBars.buttons["More"].exists)
         XCTAssertFalse(app.tabBars.buttons["Captures"].exists)
+        XCTAssertFalse(app.tabBars.buttons["Insights"].exists)
+        XCTAssertFalse(app.tabBars.buttons["Profile"].exists)
         XCTAssertFalse(app.tabBars.buttons["Habits"].exists)
         XCTAssertTrue(app.tabBars.buttons["Today"].isSelected)
         XCTAssertTrue(app.staticTexts["shell.header.title"].waitForExistence(timeout: 10))
 
+        app.tabBars.buttons["Capture"].tap()
+        XCTAssertTrue(app.descendants(matching: .any)["captures.screen"].waitForExistence(timeout: 10))
+        XCTAssertFalse(app.buttons["captures.return-to-plan"].exists)
+
         app.tabBars.buttons["Plan"].tap()
         XCTAssertTrue(app.staticTexts["shell.header.title"].waitForExistence(timeout: 10))
-        app.buttons["shell.plan.open-captures-button"].tap()
-        XCTAssertTrue(app.descendants(matching: .any)["captures.screen"].waitForExistence(timeout: 10))
-        XCTAssertTrue(app.buttons["captures.return-to-plan"].waitForExistence(timeout: 10))
-
-        app.buttons["shell.plan.back-button"].tap()
         XCTAssertTrue(app.descendants(matching: .any)["plan.screen"].waitForExistence(timeout: 10))
         XCTAssertTrue(app.descendants(matching: .any)["plan.hero-card"].waitForExistence(timeout: 10))
         XCTAssertTrue(scrollUntilElementExists("plan.pressure-scrubber", in: app))
@@ -123,15 +124,7 @@ final class AmbitionsUITests: XCTestCase {
         app.buttons["shell.plan.back-button"].tap()
         XCTAssertTrue(app.descendants(matching: .any)["plan.screen"].waitForExistence(timeout: 10))
 
-        app.tabBars.buttons["Insights"].tap()
-        XCTAssertTrue(app.staticTexts["shell.header.title"].waitForExistence(timeout: 10))
-        XCTAssertTrue(app.descendants(matching: .any)["insights.screen"].waitForExistence(timeout: 10))
-        XCTAssertTrue(app.descendants(matching: .any)["insights.hero-card"].waitForExistence(timeout: 10))
-        XCTAssertTrue(app.descendants(matching: .any)["insights.compare-period"].waitForExistence(timeout: 10))
-        XCTAssertTrue(scrollUntilElementExists("insights.review-constellation", in: app))
-        XCTAssertTrue(scrollUntilElementExists("insights.history-layer", in: app))
-
-        app.tabBars.buttons["Profile"].tap()
+        app.tabBars.buttons["You"].tap()
         XCTAssertTrue(app.staticTexts["shell.header.title"].waitForExistence(timeout: 10))
         XCTAssertTrue(scrollUntilElementExists("profile.hero-card", in: app))
         XCTAssertTrue(scrollUntilElementExists("profile.appearance-studio-card", in: app))
@@ -143,7 +136,7 @@ final class AmbitionsUITests: XCTestCase {
         let app = makeApp(bootstrapMode: "preview")
         app.launch()
 
-        app.tabBars.buttons["Profile"].tap()
+        app.tabBars.buttons["You"].tap()
         XCTAssertTrue(scrollUntilStaticTextExists("Appearance Studio", in: app, maxAttempts: 8))
         XCTAssertTrue(scrollUntilStaticTextExists("Accent family", in: app, maxAttempts: 8))
         XCTAssertTrue(scrollUntilStaticTextExists("Live preview", in: app, maxAttempts: 8))
@@ -155,7 +148,7 @@ final class AmbitionsUITests: XCTestCase {
         let app = makeApp(bootstrapMode: "preview")
         app.launch()
 
-        app.tabBars.buttons["Profile"].tap()
+        app.tabBars.buttons["You"].tap()
         XCTAssertTrue(scrollUntilStaticTextExists("Appearance Studio", in: app, maxAttempts: 8))
         XCTAssertTrue(scrollUntilStaticTextExists("Personal defaults", in: app, maxAttempts: 8))
         XCTAssertTrue(scrollUntilStaticTextExists("Default landing tab", in: app, maxAttempts: 8))
@@ -166,7 +159,7 @@ final class AmbitionsUITests: XCTestCase {
         let app = makeApp(bootstrapMode: "preview")
         app.launch()
 
-        app.tabBars.buttons["Profile"].tap()
+        app.tabBars.buttons["You"].tap()
 
         XCTAssertTrue(scrollUntilElementExists("profile.trust-center-card", in: app))
         XCTAssertTrue(scrollUntilStaticTextExists("Trust Center", in: app))
@@ -185,12 +178,12 @@ final class AmbitionsUITests: XCTestCase {
         XCTAssertTrue(app.descendants(matching: .any)["plan.screen"].waitForExistence(timeout: 10))
     }
 
-    func testLaunchURLCanLandOnPlanOwnedCapturesInbox() throws {
+    func testLaunchURLCanLandOnTopLevelCapture() throws {
         let app = makeApp(bootstrapMode: "preview", launchURL: "ambitions://captures/inbox")
         app.launch()
 
-        XCTAssertTrue(app.tabBars.buttons["Plan"].waitForExistence(timeout: 10))
-        XCTAssertTrue(app.tabBars.buttons["Plan"].isSelected)
+        XCTAssertTrue(app.tabBars.buttons["Capture"].waitForExistence(timeout: 10))
+        XCTAssertTrue(app.tabBars.buttons["Capture"].isSelected)
         XCTAssertTrue(app.descendants(matching: .any)["captures.screen"].waitForExistence(timeout: 10))
     }
 
@@ -308,15 +301,13 @@ final class AmbitionsUITests: XCTestCase {
         XCTAssertTrue(app.descendants(matching: .any)["goal-detail.path-filmstrip"].waitForExistence(timeout: 10))
     }
 
-    func testPreviewInsightsRoutesExposeReflectionHistoryAndMonthlyReview() throws {
+    func testPreviewLegacyInsightsTabRouteLandsUnderYouHistory() throws {
         let app = makeApp(bootstrapMode: "preview", launchURL: "ambitions://tab/insights")
         app.launch()
 
-        XCTAssertTrue(app.descendants(matching: .any)["insights.screen"].waitForExistence(timeout: 10))
-        XCTAssertTrue(app.descendants(matching: .any)["insights.hero-card"].waitForExistence(timeout: 10))
-        XCTAssertTrue(scrollUntilElementExists("insights.compare-period", in: app))
-        XCTAssertTrue(scrollUntilElementExists("insights.review-constellation", in: app))
-        XCTAssertTrue(scrollUntilElementExists("insights.history-layer", in: app))
+        XCTAssertTrue(app.tabBars.buttons["You"].waitForExistence(timeout: 10))
+        XCTAssertTrue(app.tabBars.buttons["You"].isSelected)
+        XCTAssertTrue(app.descendants(matching: .any)["insights.history.screen"].waitForExistence(timeout: 10))
     }
 
     func testPreviewInsightsMonthlyReviewCanHandOffToPlan() throws {

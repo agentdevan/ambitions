@@ -190,10 +190,10 @@ struct AmbitionsShortcutsProvider: AppShortcutsProvider {
         AppShortcut(
             intent: OpenAmbitionsDestinationIntent(destination: .capturesInbox),
             phrases: [
-                "Open Captures in \(.applicationName)",
-                "Show Captures inbox in \(.applicationName)",
+                "Open Capture in \(.applicationName)",
+                "Show Capture in \(.applicationName)",
             ],
-            shortTitle: "Open Captures",
+            shortTitle: "Open Capture",
             systemImageName: "tray.full"
         )
         AppShortcut(

@@ -3,7 +3,7 @@ import XCTest
 
 @MainActor
 final class ShellCommandRouterTests: XCTestCase {
-    func testQuickCaptureCreatesCaptureAndRoutesToPlanInbox() async throws {
+    func testQuickCaptureCreatesCaptureAndRoutesToTopLevelCapture() async throws {
         let navigation = AppNavigationModel(selectedTab: .today)
         let repository = PreviewCaptureRepository()
         let captureService = DefaultCaptureService(repository: repository, idProvider: { "capture-shell" })
@@ -20,8 +20,8 @@ final class ShellCommandRouterTests: XCTestCase {
 
         let captures = try await repository.listCaptures()
         XCTAssertEqual(captures.map(\.rawText), ["Capture this idea"])
-        XCTAssertEqual(navigation.selectedTab, .plan)
-        XCTAssertEqual(navigation.planPath, [.capturesInbox])
+        XCTAssertEqual(navigation.selectedTab, .captures)
+        XCTAssertTrue(navigation.planPath.isEmpty)
         XCTAssertEqual(result.destination, .planRoute(.capturesInbox))
     }
 

@@ -1,17 +1,27 @@
 import AmbitionsDesignSystem
 import SwiftUI
 
+enum CapturesScreenShellMode: Equatable {
+    case planSupport
+    case topLevelCapture
+}
+
 struct CapturesScreen: View {
     @Environment(\.appContainer) private var appContainer
     @Environment(\.ambitionTheme) private var theme
     @Environment(\.accessibilityReduceMotion) private var reduceMotion
     @State private var viewModel = CapturesViewModel()
+    private let shellMode: CapturesScreenShellMode
+
+    init(shellMode: CapturesScreenShellMode = .planSupport) {
+        self.shellMode = shellMode
+    }
 
     var body: some View {
         FeatureScaffoldView(
-            eyebrow: "Plan support",
-            title: "Captures",
-            subtitle: "Absorb raw inputs into the current week so captures feel like part of the operating system, not a separate inbox product."
+            eyebrow: shellMode.eyebrow,
+            title: shellMode.title,
+            subtitle: shellMode.subtitle
         ) {
             switch viewModel.state {
             case .loading:
@@ -40,18 +50,20 @@ struct CapturesScreen: View {
                             .font(theme.typography.body)
                             .foregroundStyle(theme.colors.textSecondary)
 
-                        HStack(spacing: theme.spacing.sm) {
-                            Button("Return to Plan") {
-                                container.navigation.resetPlanPath()
-                            }
-                            .buttonStyle(.bordered)
-                            .accessibilityIdentifier("captures.return-to-plan")
+                        if shellMode == .planSupport {
+                            HStack(spacing: theme.spacing.sm) {
+                                Button("Return to Plan") {
+                                    container.navigation.resetPlanPath()
+                                }
+                                .buttonStyle(.bordered)
+                                .accessibilityIdentifier("captures.return-to-plan")
 
-                            Button("Weekly Review") {
-                                container.navigation.openWeeklyReview()
+                                Button("Weekly Review") {
+                                    container.navigation.openWeeklyReview()
+                                }
+                                .buttonStyle(.borderedProminent)
+                                .accessibilityIdentifier("captures.open-weekly-review")
                             }
-                            .buttonStyle(.borderedProminent)
-                            .accessibilityIdentifier("captures.open-weekly-review")
                         }
                     }
                 }
@@ -114,7 +126,7 @@ struct CapturesScreen: View {
                 }
             }
         }
-        .navigationTitle("Captures")
+        .navigationTitle(shellMode.title)
         .refreshable {
             await load()
         }
@@ -231,6 +243,31 @@ struct CapturesScreen: View {
             preconditionFailure("App container must be injected.")
         }
         return appContainer
+    }
+}
+
+private extension CapturesScreenShellMode {
+    var eyebrow: String {
+        switch self {
+        case .planSupport: "Plan support"
+        case .topLevelCapture: "Top-level intake"
+        }
+    }
+
+    var title: String {
+        switch self {
+        case .planSupport: "Captures"
+        case .topLevelCapture: "Capture"
+        }
+    }
+
+    var subtitle: String {
+        switch self {
+        case .planSupport:
+            "Absorb raw inputs into the current week so captures feel like part of the operating system, not a separate inbox product."
+        case .topLevelCapture:
+            "Hold raw inputs in one calm place until they are ready to become a goal, plan adjustment, seed, or archive."
+        }
     }
 }
 

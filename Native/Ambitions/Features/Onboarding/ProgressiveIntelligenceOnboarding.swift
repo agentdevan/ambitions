@@ -94,9 +94,9 @@ struct ProgressiveIntelligenceOnboardingView: View {
             rows: [
                 ("Today", "What matters now?", AppTab.today.systemImage),
                 ("Goals", "Where am I headed?", AppTab.goals.systemImage),
+                ("Capture", "What needs a calm place to land?", AppTab.captures.systemImage),
                 ("Plan", "How does this week hold together?", AppTab.plan.systemImage),
-                ("Insights", "What am I learning?", AppTab.insights.systemImage),
-                ("Profile / Trust", "How is my system configured?", AppTab.profile.systemImage)
+                ("You", "How is my system configured?", AppTab.profile.systemImage)
             ]
         )
     }

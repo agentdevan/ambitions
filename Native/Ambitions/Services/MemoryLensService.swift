@@ -200,13 +200,13 @@ private extension DefaultMemoryLensService {
                 title: capture.rawText,
                 subtitle: capture.triage?.destination?.title ?? capture.status.title,
                 explanation: capture.linkedGoalID == nil
-                    ? "This thought still belongs in the Plan-owned captures inbox before it becomes work."
+                    ? "This thought still belongs in Capture before it becomes work."
                     : "This capture already carries goal context, so recall can return to the linked goal.",
                 queryText: [capture.rawText, capture.triage?.destination?.title, capture.status.title].compactMap { $0 }.joined(separator: " "),
                 timestamp: capture.updatedAt,
                 kind: .capture,
                 facet: .open,
-                actionTitle: capture.linkedGoalID == nil ? "Open captures" : "Open goal",
+                actionTitle: capture.linkedGoalID == nil ? "Open Capture" : "Open goal",
                 destination: destination
             )
         }
@@ -259,8 +259,8 @@ private extension DefaultMemoryLensService {
                 timestamp: event.base.occurredAt,
                 kind: .recentChange,
                 facet: .whatChanged,
-                actionTitle: goalID == nil ? "Open Insights" : "Open goal",
-                destination: goalID.map { .goal($0) } ?? .tab(.insights)
+                actionTitle: goalID == nil ? "Open history" : "Open goal",
+                destination: goalID.map { .goal($0) } ?? .insightsRoute(.history)
             )
         }
     }

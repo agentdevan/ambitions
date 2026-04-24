@@ -44,7 +44,7 @@ enum ShellCommandIntent: String, CaseIterable, Hashable, Identifiable, Sendable,
         case .quickFocus: "Return to Today and center the next move."
         case .openGoal: "Find and open one goal in its canonical destination."
         case .openWeek: "Open Plan as the canonical week surface."
-        case .openCapture: "Open Plan-owned captures."
+        case .openCapture: "Open Capture."
         case .memoryLens: "Search goals, captures, and recent changes."
         }
     }
@@ -271,7 +271,7 @@ enum ShellCommandDestination: Hashable, Sendable {
             "Goal Detail"
         case let .planRoute(target):
             switch target {
-            case .capturesInbox: "Captures"
+            case .capturesInbox: "Capture"
             case .habits: "Habits"
             case .weeklyReview: "Weekly Review"
             }

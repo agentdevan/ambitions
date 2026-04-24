@@ -10,7 +10,7 @@ enum AppTab: String, CaseIterable, Hashable, Identifiable, Codable {
     case profile
 
     static var allCases: [AppTab] {
-        [.today, .goals, .plan, .insights, .profile]
+        [.today, .goals, .captures, .plan, .profile]
     }
 
     var id: String { rawValue }
@@ -18,10 +18,12 @@ enum AppTab: String, CaseIterable, Hashable, Identifiable, Codable {
     var canonicalTopLevelTab: AppTab {
         switch self {
         case .captures:
-            return .plan
+            return .captures
         case .habits:
             return .plan
-        case .today, .goals, .plan, .insights, .profile:
+        case .insights:
+            return .profile
+        case .today, .goals, .plan, .profile:
             return self
         }
     }
@@ -33,12 +35,12 @@ enum AppTab: String, CaseIterable, Hashable, Identifiable, Codable {
     var title: String {
         switch self {
         case .today: "Today"
-        case .captures: "Captures"
+        case .captures: "Capture"
         case .goals: "Goals"
         case .habits: "Habits"
         case .plan: "Plan"
         case .insights: "Insights"
-        case .profile: "Profile"
+        case .profile: "You"
         }
     }
 

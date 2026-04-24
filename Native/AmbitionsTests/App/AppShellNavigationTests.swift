@@ -3,26 +3,30 @@ import XCTest
 
 final class AppShellNavigationTests: XCTestCase {
     func testCanonicalTopLevelTabsMatchProductSpec() {
-        XCTAssertEqual(AppTab.allCases, [.today, .goals, .plan, .insights, .profile])
-        XCTAssertFalse(AppTab.allCases.contains(.captures))
+        XCTAssertEqual(AppTab.allCases, [.today, .goals, .captures, .plan, .profile])
+        XCTAssertEqual(AppTab.allCases.map(\.title), ["Today", "Goals", "Capture", "Plan", "You"])
+        XCTAssertFalse(AppTab.allCases.contains(.insights))
         XCTAssertFalse(AppTab.allCases.contains(.habits))
     }
 
     func testLegacyTabRawValuesRemainDecodableAndNormalizeSafely() {
         XCTAssertEqual(AppTab(rawValue: "captures"), .captures)
         XCTAssertEqual(AppTab(rawValue: "habits"), .habits)
-        XCTAssertEqual(AppTab.captures.canonicalTopLevelTab, .plan)
+        XCTAssertEqual(AppTab(rawValue: "insights"), .insights)
+        XCTAssertEqual(AppTab.captures.canonicalTopLevelTab, .captures)
         XCTAssertEqual(AppTab.habits.canonicalTopLevelTab, .plan)
-        XCTAssertFalse(AppTab.captures.isCanonicalTopLevel)
+        XCTAssertEqual(AppTab.insights.canonicalTopLevelTab, .profile)
+        XCTAssertTrue(AppTab.captures.isCanonicalTopLevel)
         XCTAssertFalse(AppTab.habits.isCanonicalTopLevel)
+        XCTAssertFalse(AppTab.insights.isCanonicalTopLevel)
     }
 
     @MainActor
-    func testNavigationInitializesLegacyCapturesPreferenceIntoPlanInboxRoute() {
+    func testNavigationInitializesCapturePreferenceIntoTopLevelCaptureRoute() {
         let navigation = AppNavigationModel(selectedTab: .captures)
 
-        XCTAssertEqual(navigation.selectedTab, .plan)
-        XCTAssertEqual(navigation.planPath, [.capturesInbox])
+        XCTAssertEqual(navigation.selectedTab, .captures)
+        XCTAssertTrue(navigation.planPath.isEmpty)
         XCTAssertTrue(navigation.insightsPath.isEmpty)
     }
 
@@ -33,6 +37,14 @@ final class AppShellNavigationTests: XCTestCase {
         XCTAssertEqual(navigation.selectedTab, .plan)
         XCTAssertEqual(navigation.planPath, [.habits])
         XCTAssertTrue(navigation.insightsPath.isEmpty)
+    }
+
+    @MainActor
+    func testNavigationInitializesLegacyInsightsPreferenceIntoYouSupportRoute() {
+        let navigation = AppNavigationModel(selectedTab: .insights)
+
+        XCTAssertEqual(navigation.selectedTab, .profile)
+        XCTAssertEqual(navigation.insightsPath, [.history])
     }
 
     @MainActor
