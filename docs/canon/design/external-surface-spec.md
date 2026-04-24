@@ -4,9 +4,12 @@
 
 Define explicit future design truth for widgets, Live Activities, notifications, App Intents and shortcuts posture, share extension, and lock-screen or glance surfaces.
 
+External surfaces consume the continuity, sync-trust, handoff, return, and degraded-sync contract in [../Ambitions_State_Continuity_Mesh.md](../Ambitions_State_Continuity_Mesh.md).
+
 ## Shared Rules
 
 - external surfaces inherit the same truth model as the main app
+- external surfaces inherit State Continuity Mesh semantics and must not create separate continuity or sync-trust models
 - they must feel useful at glance depth
 - they must not invent parallel business logic
 - every external action must land in a canonical in-app route

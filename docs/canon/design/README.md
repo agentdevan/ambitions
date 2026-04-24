@@ -21,8 +21,9 @@ Use these specs together with:
 - Batch 51 is completed in the registry.
 - Batch 52 is completed in the registry.
 - Batch 53 is completed in the registry.
-- Batch 54 is the active frontend implementation batch in the registry.
-- Batches 55-60 remain queued future implementation work.
+- Batch 54 is completed in the registry.
+- Batch 55 is the active frontend implementation batch in the registry.
+- Batches 56-60 remain queued future implementation work.
 - Treat iPhone execution truth as primary unless a spec explicitly defines a future-platform role.
 - Prefer these docs over vague "premium" or "modern" interpretation when a future batch needs exact UI direction.
 - If a future implementation task conflicts with current shipping behavior, preserve shipping truth until the relevant frontend batch becomes active.
@@ -42,6 +43,8 @@ Use these specs together with:
 - [novel-interaction-systems-spec.md](novel-interaction-systems-spec.md)
 - [Ambitions_Frontend_Transformation_Execution_Classification.md](Ambitions_Frontend_Transformation_Execution_Classification.md)
 - [transformation-validation-standard.md](transformation-validation-standard.md)
+
+Continuity, sync-trust, handoff, return, and degraded-sync doctrine are governed by [../Ambitions_State_Continuity_Mesh.md](../Ambitions_State_Continuity_Mesh.md).
 
 ## Application Order
 

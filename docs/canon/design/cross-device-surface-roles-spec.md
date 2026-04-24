@@ -8,6 +8,9 @@ Define future platform roles without turning this planning task into implementat
 
 Cross-device continuity means shared product semantics, not shared layouts.
 
+The governing State Continuity Mesh contract lives in [../Ambitions_State_Continuity_Mesh.md](../Ambitions_State_Continuity_Mesh.md).
+Future platforms inherit its continuity semantics; they do not invent separate sync, provenance, handoff, or degraded-state truth.
+
 Every future platform must preserve the same meaning for:
 
 - what the current dominant truth is
@@ -21,7 +24,10 @@ No later platform should inherit iPhone layout literally when a more native comp
 ## Batch Boundary
 
 - This file defines continuity semantics only.
-- It does not authorize cross-device architecture or product implementation work in Batch 39.
+- It does not authorize cross-device architecture or product implementation work before the relevant active batch.
+- Batch 54 defined the State Continuity Mesh contract.
+- Batch 55 may consume that contract for widgets, Live Activities, notifications, and Focus Screenlet.
+- Batch 56 may consume that contract for share extension, App Intents, shortcuts, routing, and external creation.
 - iPad and Mac architecture plus first implementation are deferred to Batch 58.
 - Watch and Apple TV architecture plus first implementation are deferred to Batch 59.
 
@@ -37,6 +43,7 @@ All platforms share:
 ## Inheritance Rules
 
 - iPhone remains the primary source of future surface semantics.
+- State Continuity Mesh remains the source for continuity, sync-trust, provenance, and degraded-sync semantics.
 - iPad, Mac, Watch, and Apple TV inherit product meaning, hierarchy intent, and trust posture, not phone-specific layout rules.
 - Command and recall flows may widen on larger screens, but they must preserve the same consumer-facing meaning.
 - Recovery, trust, and continuity cues may simplify on smaller ambient surfaces, but they must not reverse their meaning.

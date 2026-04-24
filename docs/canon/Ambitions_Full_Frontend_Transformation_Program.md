@@ -26,9 +26,10 @@ Live queue truth in the current repo:
 - Batch 51 — Completed
 - Batch 52 — Completed
 - Batch 53 — Completed
-- Batch 54 — Active
-- Batches 55-60 — Queued
-- the front-end transformation program is active in implementation at **Batch 54**
+- Batch 54 — Completed
+- Batch 55 — Active
+- Batches 56-60 — Queued
+- the front-end transformation program is active in implementation at **Batch 55**
 
 Batch 39 is a docs-only foundation batch.
 It makes the transformation program explicit enough to guide later implementation batches without authorizing shell implementation, route rewiring, or surface redesign work ahead of Batch 40.
@@ -137,7 +138,7 @@ Use this map to keep the revised queue implementation-ready and avoid cross-batc
 - `Batch 51` owns `Reflection OS`, including `Quiet Gaps` and `Truth Mirror`, inside the Insights rebuild.
 - `Batch 52` owns `Context Vault + Signal Policy` foundations, plus the premium Profile / Trust configuration surface.
 - `Batch 53` owns `Progressive Intelligence Onboarding`, including `60-Second Starting State`, and the user-facing `Degraded-State Orchestrator`.
-- `Batch 54` owns `State Continuity Mesh`, including `Now State Lease`, `Continuity Receipts`, `Sync Health Strip`, and semantic conflict language before external-surface widening.
+- `Batch 54` owns `State Continuity Mesh`, including `Now State Lease`, `Continuity Receipts`, `Sync Health Strip`, and semantic conflict language before external-surface widening. Its governing contract lives in [Ambitions_State_Continuity_Mesh.md](Ambitions_State_Continuity_Mesh.md).
 - `Batch 55` and `Batch 56` consume the established continuity contract to implement external surfaces without inventing separate truth models.
 - `Batch 57` consolidates cross-surface command, recall, and ambient coherence on top of the earlier pillar work rather than reopening those foundations.
 - `Batch 58`, `Batch 59`, and `Batch 60` extend and finish the already-defined system; they should not redefine core pillar ownership.
@@ -334,8 +335,8 @@ If status language here drifts, the registry controls active-vs-queued truth and
 | 51 | Front-End Transformation 12 / Insights rebuild and Reflection OS | Completed | Includes activity history, review coherence, and reflection-system language. |
 | 52 | Front-End Transformation 13 / Profile rebuild, Appearance Studio, Trust Center, and Context Vault foundations | Completed | Profile rebuilt as a premium system-configuration and trust surface with Appearance Studio, Trust Center with sync pulse, Context Vault foundations, regrouped defaults/integrations/account surfaces, and profile-scoped presentation refinement. |
 | 53 | Front-End Transformation 14 / Progressive Intelligence Onboarding and Degraded-State Orchestrator | Completed | Progressive Intelligence Onboarding, additive onboarding persistence, the shared Degraded-State Orchestrator, contextual permission education, privacy-first trust copy, and no-data/low-history/degraded-state coverage landed with green automated validation and sufficient manual simulator audit. |
-| 54 | Front-End Transformation 15 / State Continuity Mesh, sync trust, and real-time continuity contract | Active | Cross-device/state continuity before external-surface widening. |
-| 55 | Front-End Transformation 16 / External surfaces I — widgets, Live Activities, notifications, and Focus Screenlet | Queued | First external-surface implementation wave. |
+| 54 | Front-End Transformation 15 / State Continuity Mesh, sync trust, and real-time continuity contract | Completed | State Continuity Mesh contract established in [Ambitions_State_Continuity_Mesh.md](Ambitions_State_Continuity_Mesh.md) before external-surface widening. |
+| 55 | Front-End Transformation 16 / External surfaces I — widgets, Live Activities, notifications, and Focus Screenlet | Active | First external-surface implementation wave. |
 | 56 | Front-End Transformation 17 / External surfaces II — share extension, App Intents, shortcuts, routing, and external creation | Queued | External creation and OS-surface productization. |
 | 57 | Front-End Transformation 18 / Cross-surface command, recall, and ambient coherence | Queued | Command, recall, provenance, and handoff coherence. |
 | 58 | Front-End Transformation 19 / iPad and Mac surface architecture and first implementation | Queued | Future-platform implementation begins. |
@@ -1096,7 +1097,7 @@ Completed with Progressive Intelligence Onboarding, additive onboarding persiste
 ## Batch 54 — Front-End Transformation 15 / State Continuity Mesh, sync trust, and real-time continuity contract
 
 ### Status
-Active
+Completed
 
 ### Goal
 Establish the State Continuity Mesh and sync-trust continuity contract before external-surface widening.
@@ -1132,12 +1133,15 @@ Establish the State Continuity Mesh and sync-trust continuity contract before ex
 ### Completion Rule
 Complete only when the continuity contract is clear enough to govern later sync-trust and external-surface work.
 
+### Completion Note
+Completed as a docs/control continuity contract pass with [Ambitions_State_Continuity_Mesh.md](Ambitions_State_Continuity_Mesh.md) defining Now State Lease, Continuity Receipts, Sync Health Strip, semantic conflict language, provenance-preserving handoff/return rules, degraded-sync states, local-first plus Apple-account-based sync launch truth, and the inheritance boundary for Batches 55-60. No backend sync, account/login work, product code, external-surface implementation, or future-device implementation was added.
+
 ---
 
 ## Batch 55 — Front-End Transformation 16 / External surfaces I — widgets, Live Activities, notifications, and Focus Screenlet
 
 ### Status
-Queued
+Active
 
 ### Goal
 Fully implement the first external ambient surfaces as premium first-class product surfaces.

@@ -43,6 +43,7 @@ The following decisions are treated as settled launch strategy unless canon is e
 - Apple-account-based sync only
 - Local-first behavior remains primary, with sync treated as an enhancement rather than a prerequisite
 - New-phone recovery is iCloud/CloudKit restore first, with manual export/import as the fallback path
+- State continuity, sync trust, handoff, and degraded-sync language are governed by [Ambitions_State_Continuity_Mesh.md](Ambitions_State_Continuity_Mesh.md)
 - If future authentication is ever required later, `Sign in with Apple` is the first acceptable direction
 
 ### Business Model
@@ -182,17 +183,18 @@ Interpretation rules:
 
 ## F. Now-To-Launch Phase Plan
 
-### Phase A: Current Through Batch 54
+### Phase A: Completed Through Batch 54
 
-- Complete active Profile / Trust / Context Vault and onboarding/degraded-state/trust continuity work already queued through Batch 54
-- Stabilize launch truth around no account, no in-app login, Apple-account-based sync only, and local-first behavior
+- Complete Profile / Trust / Context Vault and onboarding/degraded-state/trust continuity work queued through Batch 54
+- Stabilize launch truth around no account, no in-app login, Apple-account-based sync only, local-first behavior, and the State Continuity Mesh contract
 - Preserve truthful export/import fallback framing
 - Keep Batch 52-54 work aligned to launch trust instead of speculative scale features
 
-### Phase B: Batches 55-57
+### Phase B: Active Batch 55 Through Batch 57
 
 - Close widgets, Live Activities, notifications, Focus surface, App Intents, shortcuts, share extension, and cross-surface handoff work that remains in queued launch-facing scope
 - Treat widgets and Live Activities as hard launch blockers while they remain in scope
+- Consume the Batch 54 State Continuity Mesh contract without inventing separate continuity or sync-trust models
 - Keep review package notes current for external and ambient surfaces
 - Validate permission timing and external-surface honesty on real devices
 

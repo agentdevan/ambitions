@@ -140,8 +140,11 @@ Avoid:
 ## Sync and Trust Wording
 
 - local-first by default when true
+- Apple-account-based sync is launch direction, not generic cloud account copy
+- no Ambitions account or in-app login should be implied at launch
 - pending sync or stale state must be understandable in one line
 - never expose raw system-state jargon as the first layer
+- use the State Continuity Mesh contract in [../Ambitions_State_Continuity_Mesh.md](../Ambitions_State_Continuity_Mesh.md) for Now State Lease, Continuity Receipts, Sync Health Strip, semantic conflict language, and degraded-sync state wording
 
 ## Premium Restraint Rules
 

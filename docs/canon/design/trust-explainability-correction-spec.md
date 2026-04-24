@@ -4,6 +4,8 @@
 
 Define the consumer-facing trust model for recommendations, assumptions, freshness, contradictions, corrections, and audit depth.
 
+For continuity, sync-trust, handoff, return, and degraded-sync doctrine, use [../Ambitions_State_Continuity_Mesh.md](../Ambitions_State_Continuity_Mesh.md).
+
 ## Core Trust Posture
 
 - calm
@@ -152,6 +154,7 @@ When reconciliation is needed, the UI should state:
 - Trust Whisper may appear inline, in a continuity ribbon, or inside a shallow sheet depending on urgency and surface density.
 - If a trust issue changes the recommended action, the trust signal must be visible before the user commits.
 - trust signals must remain consumer-readable inside widgets, notifications, and other external surfaces.
+- sync and continuity trust must stay local-first, Apple-account-based for launch direction, and must not imply an Ambitions account, in-app login, third-party analytics, server-side AI over private content, or a public/shared private-data cloud database.
 
 ## Correction and Calm Explanation Rules
 

@@ -17,6 +17,8 @@ Related launch-planning documents:
 
 - [Ambitions_Launch_Master_Checklist.md](Ambitions_Launch_Master_Checklist.md)
   Canonical locked launch strategy, doctrine, launch tracks, and now-to-launch phase plan.
+- [Ambitions_State_Continuity_Mesh.md](Ambitions_State_Continuity_Mesh.md)
+  Canonical continuity, sync-trust, handoff, return, and degraded-sync contract for external-surface inheritance.
 - [Ambitions_Accessibility_Nutrition_Labels_Audit.md](Ambitions_Accessibility_Nutrition_Labels_Audit.md)
   Dedicated audit artifact for Accessibility Nutrition Labels and evidence-backed claim review.
 - [../codex/Launch_Operator_Runbook.md](../codex/Launch_Operator_Runbook.md)
@@ -55,7 +57,7 @@ Classification: partially covered plus operational checklist item
 Roadmap support:
 
 - Batch 53 improves onboarding, permissions, degraded-state clarity, and reviewer-facing first-run comprehension.
-- Batch 54 improves continuity and trust before wider surface expansion.
+- Batch 54 completed the State Continuity Mesh contract for continuity and trust before wider surface expansion.
 - Batch 60 improves final finish quality and release polish.
 
 Operational submission requirements:
@@ -74,7 +76,7 @@ Roadmap support:
 
 - Batch 52 contributes to trust, configuration, appearance, and context-vault foundations
 - Batch 53 contributes to permission clarity, degraded-state explanation, and onboarding trust
-- Batch 54 contributes continuity and sync-trust framing before external-surface widening
+- Batch 54 contributes the canonical State Continuity Mesh, sync-trust, handoff, return, and degraded-sync contract before external-surface widening
 - Batch 60 contributes final polish and accessibility/stability closure
 
 Operational submission requirements:
@@ -109,7 +111,7 @@ Classification: roadmap-covered plus operational checklist item
 
 Roadmap support:
 
-- Batch 54 establishes continuity and trust before external widening
+- Batch 54 established continuity and trust before external widening through [Ambitions_State_Continuity_Mesh.md](Ambitions_State_Continuity_Mesh.md)
 - Batch 55 covers widgets, Live Activities, notifications, and Focus Screenlet
 - Batch 56 covers share extension, App Intents, shortcuts, routing, and external creation
 - Batch 57 consolidates cross-surface command, recall, and ambient coherence
@@ -193,7 +195,7 @@ Use the roadmap batches as contribution layers, not as automatic compliance proo
 
 - Batch 52 contributes to trust/configuration/privacy readiness
 - Batch 53 contributes to onboarding, permissions, reviewer clarity, and degraded-state explanation
-- Batch 54 contributes to continuity/sync-trust before ambient widening
+- Batch 54 contributes to continuity/sync-trust before ambient widening through the State Continuity Mesh contract
 - Batch 55 and Batch 56 contribute to widgets, Live Activities, notifications, App Intents, shortcuts, routing, and other external-surface review readiness
 - Batch 57 contributes cross-surface coherence and external handoff truth
 - Batch 60 contributes accessibility, performance, stability, and finish-quality closure

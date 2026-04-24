@@ -2,7 +2,7 @@
 
 ## Status
 
-Supporting canon queue note for the queued post-Batch-48 frontend program.
+Supporting canon queue note for the post-Batch-48 frontend program.
 
 This file does not activate future work by itself.
 Use it together with:
@@ -38,5 +38,7 @@ Batch 49 remains completed.
 Batch 50 remains completed.
 Batch 51 is completed.
 Batch 52 is completed.
-Batch 53 is the active batch.
-Completed batch history through Batch 52 remains unchanged.
+Batch 53 is completed.
+Batch 54 is completed.
+Batch 55 is the active batch.
+Completed batch history through Batch 54 remains unchanged.

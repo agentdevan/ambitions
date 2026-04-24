@@ -16,6 +16,8 @@ Use [codex/CONTEXT_INDEX.md](codex/CONTEXT_INDEX.md) for source-of-truth precede
   Batching and work packaging.
 - [canon/Ambitions_Full_Frontend_Transformation_Program.md](canon/Ambitions_Full_Frontend_Transformation_Program.md)
   Post-hardening frontend transformation canon. Use with the registry; do not treat it as active work by itself.
+- [canon/Ambitions_State_Continuity_Mesh.md](canon/Ambitions_State_Continuity_Mesh.md)
+  Canonical State Continuity Mesh contract for Now State Lease, Continuity Receipts, Sync Health Strip, semantic conflict language, provenance-preserving handoff/return, degraded-sync states, and local-first plus Apple-account-based sync launch truth.
 - [canon/Ambitions_App_Store_Release_Compliance.md](canon/Ambitions_App_Store_Release_Compliance.md)
   Canonical App Store release-compliance and final submission-gate truth after the transformation program closes.
 - [canon/Ambitions_Launch_Master_Checklist.md](canon/Ambitions_Launch_Master_Checklist.md)

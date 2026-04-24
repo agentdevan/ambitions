@@ -51,6 +51,7 @@ At minimum, audit these task flows:
 - Profile / Trust
 - widgets / Live Activities if those remain in launch scope
 - settings / export-import / reset / sync-trust surfaces
+- continuity, handoff, and degraded-sync states governed by [Ambitions_State_Continuity_Mesh.md](Ambitions_State_Continuity_Mesh.md)
 
 ## Per-Device Evaluation Matrix
 
