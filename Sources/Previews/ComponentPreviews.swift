@@ -72,6 +72,16 @@ private struct DesignSystemPreviewGallery: View {
                         .font(.caption)
                 }
 
+                SectionHeader(eyebrow: "Batch 63", title: "Rich Panel Foundations", subtitle: "Canonical panel types with semantic state, action, explanation, and visual slots.")
+
+                ForEach(AmbitionPanelKind.allCases) { kind in
+                    AmbitionRichPanel(panelConfiguration(for: kind)) {
+                        previewVisualSlot(for: kind)
+                    } contentSlot: {
+                        previewContentSlot(for: kind)
+                    }
+                }
+
                 CompactChartShell(title: "CompactChartShell", subtitle: "Chart content drops into the shell later.") {
                     HStack(alignment: .bottom, spacing: 10) {
                         ForEach([0.35, 0.50, 0.44, 0.70, 0.58], id: \.self) { value in
@@ -124,6 +134,105 @@ private struct DesignSystemPreviewGallery: View {
         case .goals: "target"
         case .plan: "calendar"
         case .profile: "person.crop.circle"
+        }
+    }
+
+    private func panelConfiguration(for kind: AmbitionPanelKind) -> AmbitionRichPanelConfiguration {
+        AmbitionRichPanelConfiguration(
+            kind: kind,
+            title: panelTitle(for: kind),
+            subtitle: "Reusable foundation for later surface batches without changing app behavior today.",
+            semanticState: kind.defaultSemanticState,
+            confidenceLabel: kind == .progress ? "Medium confidence" : nil,
+            progressValue: kind == .progress ? 0.64 : nil,
+            explanation: "State is paired with text, iconography, and accessibility values so color is never the only signal.",
+            primaryAction: .init(id: "\(kind.rawValue)-primary", title: "Primary", role: .primary),
+            secondaryAction: .init(id: "\(kind.rawValue)-why", title: "Why this", icon: "questionmark.circle", role: .tertiary)
+        )
+    }
+
+    private func panelTitle(for kind: AmbitionPanelKind) -> String {
+        switch kind {
+        case .heroDecision: "Choose the next believable move"
+        case .progress: "Pace is holding"
+        case .timeline: "Three recent changes"
+        case .schedule: "Open window later today"
+        case .insight: "Capacity is the constraint"
+        case .recovery: "Recover without rewriting the day"
+        case .trust: "Based on local plan evidence"
+        case .capture: "Triage this capture"
+        case .review: "What changed this week"
+        case .settingsPreference: "Calendar-aware planning"
+        }
+    }
+
+    @ViewBuilder
+    private func previewVisualSlot(for kind: AmbitionPanelKind) -> some View {
+        switch kind {
+        case .timeline:
+            VStack(alignment: .leading, spacing: 10) {
+                previewTimelineRow("Moved", detail: "Draft session shifted to a calmer window.")
+                previewTimelineRow("Protected", detail: "Deep work kept outside the busy block.")
+                previewTimelineRow("Recovered", detail: "Smaller version preserved momentum.")
+            }
+        case .schedule:
+            HStack(spacing: 8) {
+                ForEach(["9", "12", "3", "6"], id: \.self) { hour in
+                    VStack(spacing: 6) {
+                        RoundedRectangle(cornerRadius: 8, style: .continuous)
+                            .fill(hour == "3" ? Color.orange.opacity(0.55) : Color.teal.opacity(0.34))
+                            .frame(height: hour == "3" ? 76 : 46)
+                        Text(hour)
+                            .font(.caption2)
+                    }
+                    .frame(maxWidth: .infinity)
+                }
+            }
+        case .progress:
+            ProgressRail(title: "Believable pace", progress: 0.64, trailingValue: "64%", state: .selected)
+        default:
+            EmptyView()
+        }
+    }
+
+    @ViewBuilder
+    private func previewContentSlot(for kind: AmbitionPanelKind) -> some View {
+        switch kind {
+        case .capture:
+            HStack {
+                AmbitionChip("Raw", role: .capture)
+                AmbitionChip("Plan seed", role: .domain)
+                AmbitionChip("10 min", role: .time)
+            }
+        case .recovery:
+            HStack {
+                AmbitionChip("Smaller", role: .recovery)
+                AmbitionChip("Later", role: .waiting)
+                AmbitionChip("Protect", role: .protected)
+            }
+        case .trust:
+            HStack {
+                AmbitionChip("Local", role: .state, semanticState: .trust)
+                AmbitionChip("Not synced", role: .state, semanticState: .waiting)
+            }
+        default:
+            EmptyView()
+        }
+    }
+
+    private func previewTimelineRow(_ title: String, detail: String) -> some View {
+        HStack(alignment: .top, spacing: 10) {
+            Circle()
+                .fill(Color.orange.opacity(0.8))
+                .frame(width: 8, height: 8)
+                .padding(.top, 5)
+            VStack(alignment: .leading, spacing: 2) {
+                Text(title)
+                    .font(.caption.weight(.semibold))
+                Text(detail)
+                    .font(.caption2)
+                    .foregroundStyle(.secondary)
+            }
         }
     }
 }

@@ -102,6 +102,8 @@ targets:
         GENERATE_INFOPLIST_FILE: YES
     dependencies:
       - target: Ambitions
+      - package: AmbitionsPackages
+        product: AmbitionsDesignSystem
   AmbitionsUITests:
     type: bundle.ui-testing
     platform: iOS

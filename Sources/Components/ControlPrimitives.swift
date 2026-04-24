@@ -2,9 +2,13 @@
 import SwiftUI
 
 public enum AmbitionButtonTier: Sendable {
+    case primary
     case hero
     case secondary
     case tertiary
+    case recovery
+    case destructive
+    case compact
 }
 
 public struct AmbitionButtonStyle: ButtonStyle {
@@ -44,25 +48,37 @@ public struct AmbitionButtonStyle: ButtonStyle {
 
     private var font: Font {
         switch tier {
+        case .primary: theme.typography.bodyEmphasized
         case .hero: theme.typography.bodyEmphasized
         case .secondary: theme.typography.bodyEmphasized
         case .tertiary: theme.typography.caption
+        case .recovery: theme.typography.bodyEmphasized
+        case .destructive: theme.typography.bodyEmphasized
+        case .compact: theme.typography.caption
         }
     }
 
     private var minHeight: CGFloat {
         switch tier {
+        case .primary: 48
         case .hero: 48
         case .secondary: 44
         case .tertiary: 32
+        case .recovery: 44
+        case .destructive: 44
+        case .compact: 32
         }
     }
 
     private var horizontalPadding: CGFloat {
         switch tier {
+        case .primary: theme.spacing.md
         case .hero: theme.spacing.md
         case .secondary: theme.spacing.sm
         case .tertiary: theme.spacing.xs
+        case .recovery: theme.spacing.sm
+        case .destructive: theme.spacing.sm
+        case .compact: theme.spacing.xs
         }
     }
 
@@ -72,34 +88,46 @@ public struct AmbitionButtonStyle: ButtonStyle {
 
     private func fill(for resolved: AmbitionStateStyle) -> Color {
         switch tier {
-        case .hero:
+        case .primary, .hero:
             return resolved.accent
         case .secondary:
             return resolved.fill
-        case .tertiary:
+        case .tertiary, .compact:
             return .clear
+        case .recovery:
+            return theme.semanticColors.recovery.opacity(theme.mode == .dark ? 0.22 : 0.13)
+        case .destructive:
+            return theme.semanticColors.risk.opacity(theme.mode == .dark ? 0.20 : 0.12)
         }
     }
 
     private func stroke(for resolved: AmbitionStateStyle) -> Color {
         switch tier {
-        case .hero:
+        case .primary, .hero:
             return resolved.accent.opacity(0.9)
         case .secondary:
             return resolved.stroke
-        case .tertiary:
+        case .tertiary, .compact:
             return .clear
+        case .recovery:
+            return theme.semanticColors.recovery.opacity(theme.borders.semanticOpacity)
+        case .destructive:
+            return theme.semanticColors.risk.opacity(theme.borders.semanticOpacity)
         }
     }
 
     private func foregroundColor(for resolved: AmbitionStateStyle) -> Color {
         switch tier {
-        case .hero:
+        case .primary, .hero:
             return theme.colors.textInverse
         case .secondary:
             return resolved.foreground
-        case .tertiary:
+        case .tertiary, .compact:
             return resolved.accent
+        case .recovery:
+            return theme.mode == .dark ? theme.colors.textPrimary : theme.semanticColors.recovery
+        case .destructive:
+            return theme.semanticColors.risk
         }
     }
 }
@@ -142,6 +170,91 @@ public struct StatusChip: View {
         .padding(.vertical, theme.spacing.xxxs)
         .background(RoundedRectangle(cornerRadius: theme.radius.chip, style: .continuous).fill(style.fill))
         .overlay(RoundedRectangle(cornerRadius: theme.radius.chip, style: .continuous).stroke(style.stroke, lineWidth: 1))
+    }
+}
+
+public enum AmbitionChipRole: String, CaseIterable, Sendable {
+    case confidence
+    case state
+    case domain
+    case time
+    case recovery
+    case waiting
+    case protected
+    case focus
+    case capture
+}
+
+public struct AmbitionChip: View {
+    @Environment(\.ambitionTheme) private var theme
+
+    private let title: String
+    private let icon: String?
+    private let role: AmbitionChipRole
+    private let semanticState: AmbitionSemanticState?
+
+    public init(
+        _ title: String,
+        icon: String? = nil,
+        role: AmbitionChipRole = .state,
+        semanticState: AmbitionSemanticState? = nil
+    ) {
+        self.title = title
+        self.icon = icon
+        self.role = role
+        self.semanticState = semanticState
+    }
+
+    public var body: some View {
+        let state = semanticState ?? defaultSemanticState
+        let style = theme.semanticStyle(for: state)
+
+        HStack(spacing: theme.spacing.xxxs) {
+            Image(systemName: icon ?? state.icon)
+                .font(.system(size: theme.icon.smallSize, weight: theme.icon.symbolWeight))
+
+            Text(title)
+                .font(theme.typography.micro)
+                .lineLimit(1)
+                .minimumScaleFactor(0.8)
+        }
+        .foregroundStyle(style.foreground)
+        .padding(.horizontal, theme.spacing.xs)
+        .padding(.vertical, theme.spacing.xxxs)
+        .background(RoundedRectangle(cornerRadius: theme.radius.chip, style: .continuous).fill(style.fill))
+        .overlay(RoundedRectangle(cornerRadius: theme.radius.chip, style: .continuous).stroke(style.stroke, lineWidth: 1))
+        .accessibilityElement(children: .ignore)
+        .accessibilityLabel("\(role.accessibilityTitle), \(title), \(state.accessibilityText)")
+    }
+
+    private var defaultSemanticState: AmbitionSemanticState {
+        switch role {
+        case .confidence: .confidenceMedium
+        case .state: .neutral
+        case .domain: .focus
+        case .time: .calendarDerived
+        case .recovery: .recovery
+        case .waiting: .waiting
+        case .protected: .protected
+        case .focus: .focus
+        case .capture: .capture
+        }
+    }
+}
+
+public extension AmbitionChipRole {
+    var accessibilityTitle: String {
+        switch self {
+        case .confidence: "Confidence"
+        case .state: "State"
+        case .domain: "Domain"
+        case .time: "Time"
+        case .recovery: "Recovery"
+        case .waiting: "Waiting"
+        case .protected: "Protected"
+        case .focus: "Focus"
+        case .capture: "Capture"
+        }
     }
 }
 

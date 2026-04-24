@@ -61,6 +61,52 @@ public struct AmbitionTheme: Sendable {
         public let skeletonHighlight: Color
     }
 
+    public struct NeutralPalette: Sendable {
+        public let warmDarkBase: Color
+        public let warmDarkElevated: Color
+        public let warmDarkSubtle: Color
+        public let warmLightBase: Color
+        public let warmLightElevated: Color
+        public let warmLightSubtle: Color
+    }
+
+    public struct SemanticColors: Sendable {
+        public let confidenceHigh: Color
+        public let confidenceMedium: Color
+        public let confidenceLow: Color
+        public let recovery: Color
+        public let waiting: Color
+        public let protected: Color
+        public let focus: Color
+        public let capture: Color
+        public let trust: Color
+        public let review: Color
+        public let risk: Color
+        public let calendarDerived: Color
+        public let accessibilityVerified: Color
+        public let accessibilityUnverified: Color
+    }
+
+    public struct BorderTokens: Sendable {
+        public let hairline: Color
+        public let quiet: Color
+        public let emphasized: Color
+        public let semanticOpacity: Double
+        public let selectedWidth: CGFloat
+    }
+
+    public struct PanelTokens: Sendable {
+        public let heroRadius: CGFloat
+        public let standardRadius: CGFloat
+        public let compactRadius: CGFloat
+        public let heroPadding: CGFloat
+        public let standardPadding: CGFloat
+        public let compactPadding: CGFloat
+        public let minimumTapTarget: CGFloat
+        public let visualSlotMinimumHeight: CGFloat
+        public let timelineDotSize: CGFloat
+    }
+
     public struct Tone: Sendable {
         public let canvasBase: Color
         public let canvasWash: Color
@@ -254,6 +300,10 @@ public struct AmbitionTheme: Sendable {
     public let accentFamily: AmbitionAccentFamily
     public let accentPalette: AccentPalette
     public let colors: Colors
+    public let neutrals: NeutralPalette
+    public let semanticColors: SemanticColors
+    public let borders: BorderTokens
+    public let panel: PanelTokens
     public let tone: Tone
     public let materials: Materials
     public let surfaces: Surfaces
@@ -273,6 +323,10 @@ public struct AmbitionTheme: Sendable {
         accentFamily: AmbitionAccentFamily,
         accentPalette: AccentPalette,
         colors: Colors,
+        neutrals: NeutralPalette,
+        semanticColors: SemanticColors,
+        borders: BorderTokens,
+        panel: PanelTokens,
         tone: Tone,
         materials: Materials,
         surfaces: Surfaces,
@@ -291,6 +345,10 @@ public struct AmbitionTheme: Sendable {
         self.accentFamily = accentFamily
         self.accentPalette = accentPalette
         self.colors = colors
+        self.neutrals = neutrals
+        self.semanticColors = semanticColors
+        self.borders = borders
+        self.panel = panel
         self.tone = tone
         self.materials = materials
         self.surfaces = surfaces
@@ -313,9 +371,13 @@ public extension AmbitionTheme {
         accentFamily: AmbitionAccentFamily = .sage
     ) -> AmbitionTheme {
         let accent = accentPalette(for: accentFamily, mode: mode)
+        let neutrals = neutralPalette(for: mode)
         let colors = colors(for: mode, accent: accent)
+        let semanticColors = semanticColors(for: mode, accent: accent)
         let tone = tone(for: mode, accent: accent)
         let materials = materials(for: mode, tone: tone)
+        let spacing = Spacing()
+        let radius = Radius()
         let timing = Timing(quick: 0.18, regular: 0.34, emphasis: 0.48, settle: 0.22, route: 0.42)
         let depth = depth(for: mode)
         let elevation = Elevation(
@@ -345,6 +407,24 @@ public extension AmbitionTheme {
             opacity: mode == .dark ? 0.20 : 0.16,
             ringOpacity: mode == .dark ? 0.45 : 0.30
         )
+        let borders = BorderTokens(
+            hairline: colors.strokeSubtle,
+            quiet: colors.strokeSubtle.opacity(mode == .dark ? 0.80 : 0.72),
+            emphasized: colors.strokeStrong,
+            semanticOpacity: mode == .dark ? 0.42 : 0.34,
+            selectedWidth: 1.2
+        )
+        let panel = PanelTokens(
+            heroRadius: radius.xl,
+            standardRadius: radius.lg,
+            compactRadius: radius.md,
+            heroPadding: spacing.xl,
+            standardPadding: spacing.lg,
+            compactPadding: spacing.sm,
+            minimumTapTarget: 44,
+            visualSlotMinimumHeight: 96,
+            timelineDotSize: 10
+        )
         let icon = IconTreatment(
             smallSize: 15,
             mediumSize: 18,
@@ -367,6 +447,10 @@ public extension AmbitionTheme {
             accentFamily: accentFamily,
             accentPalette: accent,
             colors: colors,
+            neutrals: neutrals,
+            semanticColors: semanticColors,
+            borders: borders,
+            panel: panel,
             tone: tone,
             materials: materials,
             surfaces: surfaces,
@@ -431,6 +515,29 @@ public extension AmbitionTheme {
 }
 
 private extension AmbitionTheme {
+    static func neutralPalette(for mode: AmbitionThemeMode) -> NeutralPalette {
+        switch mode {
+        case .dark:
+            return .init(
+                warmDarkBase: Color(red: 0.055, green: 0.060, blue: 0.070),
+                warmDarkElevated: Color(red: 0.115, green: 0.118, blue: 0.135),
+                warmDarkSubtle: Color(red: 0.155, green: 0.150, blue: 0.158),
+                warmLightBase: Color(red: 0.965, green: 0.952, blue: 0.930),
+                warmLightElevated: Color(red: 0.990, green: 0.982, blue: 0.962),
+                warmLightSubtle: Color(red: 0.925, green: 0.910, blue: 0.885)
+            )
+        case .light:
+            return .init(
+                warmDarkBase: Color(red: 0.055, green: 0.060, blue: 0.070),
+                warmDarkElevated: Color(red: 0.115, green: 0.118, blue: 0.135),
+                warmDarkSubtle: Color(red: 0.155, green: 0.150, blue: 0.158),
+                warmLightBase: Color(red: 0.965, green: 0.952, blue: 0.930),
+                warmLightElevated: Color(red: 0.990, green: 0.982, blue: 0.962),
+                warmLightSubtle: Color(red: 0.925, green: 0.910, blue: 0.885)
+            )
+        }
+    }
+
     static func accentPalette(for family: AmbitionAccentFamily, mode: AmbitionThemeMode) -> AccentPalette {
         switch (family, mode) {
         case (.sage, .dark):
@@ -500,11 +607,11 @@ private extension AmbitionTheme {
         switch mode {
         case .dark:
             return .init(
-                canvas: Color(red: 0.06, green: 0.07, blue: 0.09),
-                canvasElevated: Color(red: 0.10, green: 0.11, blue: 0.14),
-                canvasSubtle: Color(red: 0.13, green: 0.14, blue: 0.17),
-                surfacePrimary: Color(red: 0.14, green: 0.15, blue: 0.19),
-                surfaceSecondary: Color(red: 0.17, green: 0.18, blue: 0.22),
+                canvas: Color(red: 0.055, green: 0.060, blue: 0.070),
+                canvasElevated: Color(red: 0.115, green: 0.118, blue: 0.135),
+                canvasSubtle: Color(red: 0.155, green: 0.150, blue: 0.158),
+                surfacePrimary: Color(red: 0.135, green: 0.135, blue: 0.155),
+                surfaceSecondary: Color(red: 0.170, green: 0.165, blue: 0.180),
                 surfaceOverlay: Color.white.opacity(0.08),
                 textPrimary: Color(red: 0.95, green: 0.94, blue: 0.92),
                 textSecondary: Color(red: 0.76, green: 0.76, blue: 0.73),
@@ -524,11 +631,11 @@ private extension AmbitionTheme {
             )
         case .light:
             return .init(
-                canvas: Color(red: 0.96, green: 0.95, blue: 0.93),
-                canvasElevated: Color.white,
-                canvasSubtle: Color(red: 0.91, green: 0.90, blue: 0.88),
-                surfacePrimary: Color.white,
-                surfaceSecondary: Color(red: 0.95, green: 0.94, blue: 0.92),
+                canvas: Color(red: 0.965, green: 0.952, blue: 0.930),
+                canvasElevated: Color(red: 0.990, green: 0.982, blue: 0.962),
+                canvasSubtle: Color(red: 0.925, green: 0.910, blue: 0.885),
+                surfacePrimary: Color(red: 0.990, green: 0.982, blue: 0.962),
+                surfaceSecondary: Color(red: 0.950, green: 0.936, blue: 0.912),
                 surfaceOverlay: Color.black.opacity(0.03),
                 textPrimary: Color(red: 0.10, green: 0.11, blue: 0.14),
                 textSecondary: Color(red: 0.31, green: 0.33, blue: 0.37),
@@ -549,30 +656,69 @@ private extension AmbitionTheme {
         }
     }
 
+    static func semanticColors(for mode: AmbitionThemeMode, accent: AccentPalette) -> SemanticColors {
+        switch mode {
+        case .dark:
+            return .init(
+                confidenceHigh: Color(red: 0.55, green: 0.76, blue: 0.62),
+                confidenceMedium: Color(red: 0.86, green: 0.68, blue: 0.43),
+                confidenceLow: Color(red: 0.86, green: 0.50, blue: 0.45),
+                recovery: Color(red: 0.68, green: 0.62, blue: 0.88),
+                waiting: Color(red: 0.68, green: 0.72, blue: 0.78),
+                protected: Color(red: 0.78, green: 0.66, blue: 0.46),
+                focus: accent.primary,
+                capture: Color(red: 0.62, green: 0.74, blue: 0.82),
+                trust: Color(red: 0.57, green: 0.71, blue: 0.70),
+                review: Color(red: 0.80, green: 0.65, blue: 0.78),
+                risk: Color(red: 0.88, green: 0.47, blue: 0.42),
+                calendarDerived: Color(red: 0.48, green: 0.62, blue: 0.78),
+                accessibilityVerified: Color(red: 0.54, green: 0.74, blue: 0.58),
+                accessibilityUnverified: Color(red: 0.82, green: 0.62, blue: 0.38)
+            )
+        case .light:
+            return .init(
+                confidenceHigh: Color(red: 0.26, green: 0.52, blue: 0.36),
+                confidenceMedium: Color(red: 0.66, green: 0.45, blue: 0.20),
+                confidenceLow: Color(red: 0.68, green: 0.30, blue: 0.28),
+                recovery: Color(red: 0.47, green: 0.39, blue: 0.68),
+                waiting: Color(red: 0.43, green: 0.48, blue: 0.56),
+                protected: Color(red: 0.60, green: 0.45, blue: 0.23),
+                focus: accent.primary,
+                capture: Color(red: 0.32, green: 0.52, blue: 0.62),
+                trust: Color(red: 0.34, green: 0.55, blue: 0.53),
+                review: Color(red: 0.58, green: 0.39, blue: 0.56),
+                risk: Color(red: 0.67, green: 0.25, blue: 0.23),
+                calendarDerived: Color(red: 0.31, green: 0.45, blue: 0.64),
+                accessibilityVerified: Color(red: 0.28, green: 0.53, blue: 0.34),
+                accessibilityUnverified: Color(red: 0.66, green: 0.44, blue: 0.18)
+            )
+        }
+    }
+
     static func tone(for mode: AmbitionThemeMode, accent: AccentPalette) -> Tone {
         switch mode {
         case .dark:
             return .init(
-                canvasBase: Color(red: 0.06, green: 0.07, blue: 0.09),
+                canvasBase: Color(red: 0.055, green: 0.060, blue: 0.070),
                 canvasWash: accent.secondary.opacity(0.16),
                 heroStart: accent.primary.opacity(0.34),
                 heroMiddle: accent.secondary.opacity(0.18),
-                heroEnd: Color(red: 0.12, green: 0.11, blue: 0.17),
-                elevatedStart: Color(red: 0.16, green: 0.17, blue: 0.22),
-                elevatedEnd: Color(red: 0.12, green: 0.13, blue: 0.17),
+                heroEnd: Color(red: 0.125, green: 0.112, blue: 0.130),
+                elevatedStart: Color(red: 0.165, green: 0.160, blue: 0.178),
+                elevatedEnd: Color(red: 0.118, green: 0.118, blue: 0.135),
                 bandStart: Color.white.opacity(0.07),
                 bandEnd: accent.primary.opacity(0.08),
                 overlayTint: Color.white.opacity(0.12)
             )
         case .light:
             return .init(
-                canvasBase: Color(red: 0.96, green: 0.95, blue: 0.93),
+                canvasBase: Color(red: 0.965, green: 0.952, blue: 0.930),
                 canvasWash: accent.secondary.opacity(0.08),
                 heroStart: accent.primary.opacity(0.16),
                 heroMiddle: accent.secondary.opacity(0.10),
-                heroEnd: Color.white,
-                elevatedStart: Color.white,
-                elevatedEnd: Color(red: 0.95, green: 0.95, blue: 0.93),
+                heroEnd: Color(red: 0.990, green: 0.982, blue: 0.962),
+                elevatedStart: Color(red: 0.990, green: 0.982, blue: 0.962),
+                elevatedEnd: Color(red: 0.950, green: 0.936, blue: 0.912),
                 bandStart: Color.black.opacity(0.01),
                 bandEnd: accent.primary.opacity(0.04),
                 overlayTint: Color.black.opacity(0.04)

@@ -115,6 +115,22 @@ public extension View {
     func ambitionPanelAccessibility() -> some View {
         accessibilityElement(children: .contain)
     }
+
+    func ambitionPanelAccessibility(
+        label: String,
+        value: String? = nil,
+        hint: String? = nil
+    ) -> some View {
+        accessibilityElement(children: .contain)
+            .accessibilityLabel(label)
+            .accessibilityValue(value ?? "")
+            .accessibilityHint(hint ?? "")
+    }
+
+    func ambitionMinimumTapTarget(_ size: CGFloat = 44) -> some View {
+        frame(minWidth: size, minHeight: size)
+            .contentShape(Rectangle())
+    }
 }
 
 /// General-purpose content container for primary in-app modules.

@@ -262,6 +262,14 @@ Each needs its own:
 - activated: higher relevance, stronger action readiness
 - parked: quiet and intentionally low-pressure
 
+## Batch 63 Implementation Note
+
+Batch 63 adds the first Ambitions 2.0 rich panel foundation in `Sources/Components/RichPanelPrimitives.swift` and extends shared tokens in `Sources/Theme/AmbitionTheme.swift`.
+
+The reusable foundation is intentionally additive. Existing `AppCard`, `WidgetCard`, `HeroCard`, `TagPill`, `StatusChip`, and button styles remain compatible. New work should prefer `AmbitionRichPanel` or the canonical wrappers for hero decision, progress, timeline, schedule, insight, recovery, trust, capture, review, and settings/preference panels when building future 2.0 surfaces.
+
+Semantic state must use text and icon support in addition to color. Batch 63 includes semantic states for confidence, recovery, waiting, protected, focus, capture, trust, review, calendar-derived context, and accessibility verification readiness. These primitives do not redesign Today, Goals, Capture, Plan, or You; later surface batches consume them.
+
 ## Accessibility Baseline
 
 - dynamic type must preserve hero and action hierarchy
