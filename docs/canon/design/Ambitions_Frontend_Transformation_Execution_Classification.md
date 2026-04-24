@@ -2,7 +2,9 @@
 
 ## Purpose
 
-This document classifies future frontend transformation systems and surface programs into the correct implementation tier so later Codex execution stays safe, coherent, and flagship-focused.
+This historical document classified the completed pre-Batch-61 frontend transformation systems and surface programs.
+
+For active Ambitions 2.0 Batch 61+ execution, use [../Ambitions_2_0_Batch_Plan.md](../Ambitions_2_0_Batch_Plan.md), [../Ambitions_2_0_Roadmap.md](../Ambitions_2_0_Roadmap.md), and [../Ambitions_2_0_Visual_System.md](../Ambitions_2_0_Visual_System.md).
 
 It is the canonical sequencing truth for:
 
@@ -16,22 +18,11 @@ Use this with:
 - [../Ambitions_Full_Frontend_Transformation_Program.md](../Ambitions_Full_Frontend_Transformation_Program.md)
 - [../../../MASTER_PRODUCT_SPEC.md](../../../MASTER_PRODUCT_SPEC.md)
 - [../../codex/batches/README.md](../../codex/batches/README.md)
-- [transformation-terminology-spec.md](transformation-terminology-spec.md)
 
 ## Operational Guardrail
 
-- Batch 38 is completed.
-- Batch 48 is completed in the registry.
-- Batch 49 is completed in the registry.
-- Batch 50 is completed in the registry.
-- Batch 51 is completed in the registry.
-- Batch 52 is completed in the registry.
-- Batch 53 is completed in the registry.
-- Batch 54 is completed in the registry.
-- Batch 55 is active in the registry.
-- Batches 56-60 remain queued.
-- Nothing in this document activates future frontend work ahead of the registry.
-- Execution tiering remains sequencing truth only; it does not authorize implementation before the owning batch is active.
+- All batches before Batch 61 are complete for planning purposes.
+- Nothing in this document activates work outside the active Batch 61-86 registry sequence.
 
 ## Classification Rubric
 
@@ -66,7 +57,7 @@ Use when the item is:
 
 Recommended early-core batch band:
 
-- Batch 39 for canon/control-file foundation, then Batches 40-45 as the first implementation tranche for transformed shell and flagship surfaces
+- Batches 39-45 as the transformed shell and first flagship-surface tranche
 
 ### Systems
 
@@ -96,7 +87,7 @@ Recommended early-core batch band:
 
 Recommended later-core batch band:
 
-- Batches 46-60 after Batch 39 establishes doctrine and the shell, design system, motion system, Today, and Goals are stable
+- Batches 46-59 after the shell, design system, motion system, Today, and Goals are stable
 
 ### Systems
 
@@ -219,8 +210,7 @@ Recommended placement:
 
 ## Batch Alignment Notes
 
-- Batch 39 owns canon, terminology, doctrine, and validation alignment only.
-- Batches 40-45 should reference only the early-core systems required for shell, shared system language, Today, and Goals.
-- Batches 46-60 should absorb the later-core systems as their owning surfaces mature.
+- Batches 39-45 should reference only the early-core systems required for shell, shared system language, Today, and Goals.
+- Batches 46-59 should absorb the later-core systems as their owning surfaces mature.
 - Batch 48 owns `Path Preview Drawer` as mandatory advanced later-core Goal Detail deepening.
 - Batch 50 owns `Window Magnetism` and `Split-Pane Thinking on iPhone` as mandatory advanced later-core Plan and review-shaping deepening.

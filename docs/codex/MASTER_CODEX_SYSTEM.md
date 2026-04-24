@@ -12,13 +12,17 @@ Do not rely on prior chat memory.
 Before non-trivial planning or implementation, read:
 
 1. [../../AGENTS.md](../../AGENTS.md)
-2. [../../MASTER_PRODUCT_SPEC.md](../../MASTER_PRODUCT_SPEC.md)
-3. [../canon/Ambitions_OS_Master_Roadmap.md](../canon/Ambitions_OS_Master_Roadmap.md)
-4. [../canon/Ambitions_Surgical_Execution_Plan.md](../canon/Ambitions_Surgical_Execution_Plan.md)
-5. [../canon/Ambitions_Codex_Batch_Plan.md](../canon/Ambitions_Codex_Batch_Plan.md)
-6. [BATCH_REGISTRY.md](BATCH_REGISTRY.md)
+2. [CONTEXT_INDEX.md](CONTEXT_INDEX.md)
+3. [../canon/Ambitions_2_0_Master_Plan.md](../canon/Ambitions_2_0_Master_Plan.md)
+4. [../canon/Ambitions_2_0_Product_Architecture.md](../canon/Ambitions_2_0_Product_Architecture.md)
+5. [../canon/Ambitions_2_0_Systems_Architecture.md](../canon/Ambitions_2_0_Systems_Architecture.md)
+6. [../canon/Ambitions_2_0_Visual_System.md](../canon/Ambitions_2_0_Visual_System.md)
+7. [../canon/Ambitions_2_0_Roadmap.md](../canon/Ambitions_2_0_Roadmap.md)
+8. [../canon/Ambitions_2_0_Batch_Plan.md](../canon/Ambitions_2_0_Batch_Plan.md)
+9. [BATCH_REGISTRY.md](BATCH_REGISTRY.md)
+10. [../../MASTER_PRODUCT_SPEC.md](../../MASTER_PRODUCT_SPEC.md) for current shipping product truth where not superseded by the new Ambitions 2.0 canon
 
-Do not skip ahead of the surgical execution order or active batch unless direct user instructions explicitly change scope.
+Do not skip ahead of the Batch 61-86 execution order or active batch unless direct user instructions explicitly change scope.
 
 ## Product identity
 

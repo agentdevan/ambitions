@@ -1,6 +1,6 @@
 ﻿# Batch 41 - Front-End Transformation 02 / Design system, materials, motion engine, and controls
 ## Status
-Completed
+Completed for planning purposes
 ## Program
 Post-hardening Front-End Transformation Program
 ## Canon Source
@@ -12,9 +12,8 @@ Post-hardening Front-End Transformation Program
 - [motion-microinteraction-spec.md](../../canon/design/motion-microinteraction-spec.md)
 - [copy-state-language-spec.md](../../canon/design/copy-state-language-spec.md)
 ## Start Gate
-- Batch 40 is complete.
-- Batch 41 was activated in `docs/codex/BATCH_REGISTRY.md` before implementation began.
-- Follow the live registry as the operational source of truth.
+- Start only after Batch 38 is complete and stable.
+- Do not activate or implement this batch early; follow the registry and dependency order.
 ## Goal
 Implement the full premium visual system and motion grammar used by every later batch.
 ## In Scope
@@ -56,5 +55,3 @@ Implement the full premium visual system and motion grammar used by every later 
 Complete only when the app has one real system language rather than per-screen styling decisions.
 
 ---
-## Completion Note
-Batch 41 shipped the shared-system foundation rather than surface-by-surface rebuilds: the production token architecture expanded across color, tone, depth, spacing, radii, typography, timing, motion, and haptics intent; dark-first/light-parity theming and curated accent families now flow through app state and persistence; reusable material layers, canonical controls, motion primitives, and loading/empty/error primitives are live; and bounded appearance foundations landed without pulling Batch 52 forward. Validation included docs-truth checks, `xcodegen generate`, native simulator build, targeted persistence/profile tests, full `AmbitionsTests`, full `AmbitionsUITests`, and final human review of the Batch 41 proof surfaces before closeout.

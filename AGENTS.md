@@ -2,24 +2,28 @@
 
 - Before non-trivial planning or implementation, read `docs/codex/CONTEXT_INDEX.md` and follow its source-of-truth precedence.
 - Ambitions 1.0 foundation work is complete through registry Batch 18. Preserve that completion history exactly as historical foundation work.
-- Ambitions 2.0 is the active canon program. It begins at registry Batch 19 and continues the existing operational numbering instead of renumbering prior work.
+- All phases and batches before Batch 61 are complete for planning purposes.
+- Ambitions 2.0 Batch 61+ is the active canon program. The newly added `docs/canon/Ambitions_2_0_*.md` files are the top-level source of truth.
 - The permanent canonical planning stack is:
-  - `MASTER_PRODUCT_SPEC.md` for current shipping product truth.
-  - `docs/canon/Ambitions_OS_Master_Roadmap.md` for platform and endgame vision.
-  - `docs/canon/Ambitions_Surgical_Execution_Plan.md` for execution order and dependency hierarchy.
-  - `docs/canon/Ambitions_Codex_Batch_Plan.md` for batching and work packaging.
-  - `docs/canon/Ambitions_Full_Frontend_Transformation_Program.md` for the queued post-hardening frontend transformation program only.
-  - `docs/canon/design/README.md` for explicit queued frontend design truth only.
-  - `docs/canon/design/Ambitions_Frontend_Transformation_Execution_Classification.md` for queued frontend execution tiering only.
+  - `docs/canon/Ambitions_2_0_Master_Plan.md` for active post-Batch-60 product truth.
+  - `docs/canon/Ambitions_2_0_Product_Architecture.md` for product architecture.
+  - `docs/canon/Ambitions_2_0_Systems_Architecture.md` for shared systems architecture.
+  - `docs/canon/Ambitions_2_0_Visual_System.md` for visual system truth.
+  - `docs/canon/Ambitions_2_0_Roadmap.md` for roadmap programs.
+  - `docs/canon/Ambitions_2_0_Batch_Plan.md` for Batch 61-86 execution order.
+  - `docs/canon/Ambitions_2_0_Accessibility_Nutrition.md` for accessibility trust infrastructure.
+  - `docs/canon/Ambitions_2_0_Decision_Log.md` for locked decisions.
+  - `docs/canon/Ambitions_2_0_Capability_Matrix.md` for Batch 61 verification.
+  - `docs/codex/Ambitions_2_0_Codex_Execution_Guide.md` for Codex operating rules.
   - `docs/codex/BATCH_REGISTRY.md` for active work status only.
+  - `MASTER_PRODUCT_SPEC.md` for current shipping product truth where not superseded by the new Ambitions 2.0 canon.
+  - Older roadmap, surgical, batch, frontend transformation, and design docs are preserved historical context where not superseded.
 - Work on `main` only unless the user explicitly requests branch-based work. Do not create, switch to, or suggest branches for normal Ambitions execution.
-- Do not skip ahead of the execution order in `docs/canon/Ambitions_Surgical_Execution_Plan.md`.
+- Do not skip ahead of the Batch 61-86 execution order in `docs/canon/Ambitions_2_0_Batch_Plan.md`.
 - Do not build surfaces before engines/services exist; do not build extension-heavy features before shared container/data boundaries exist; do not build sync backend logic before sync boundary/export-import/conflict policy are defined; do not begin device work before runtime separation exists.
-- Implement only the active batch from `docs/canon/Ambitions_Codex_Batch_Plan.md` and `docs/codex/BATCH_REGISTRY.md` unless the user explicitly changes scope.
-- Treat `docs/canon/Ambitions_Full_Frontend_Transformation_Program.md` as future-program canon that starts only after the hardening wave closes; it does not activate future UI batches by itself.
-- Treat `docs/canon/design/README.md` and the files beneath it as future design truth for those queued frontend batches only; they do not activate redesign work ahead of the registry.
-- Treat `docs/canon/design/Ambitions_Frontend_Transformation_Execution_Classification.md` as the single classification source for what must build early, what is later core, and what is advanced later core inside that queued frontend program.
-- Older roadmap, backlog, audit, release, or implementation docs are supporting context only when they conflict with the canonical planning stack.
+- Implement only the active batch from `docs/canon/Ambitions_2_0_Batch_Plan.md` and `docs/codex/BATCH_REGISTRY.md` unless the user explicitly changes scope.
+- Treat `docs/canon/Ambitions_Full_Frontend_Transformation_Program.md`, `docs/canon/design/README.md`, and related frontend classification docs as historical context where not superseded by the new Ambitions 2.0 canon.
+- Older roadmap, backlog, audit, release, or implementation docs are supporting context only when they conflict with the new Ambitions 2.0 canonical planning stack.
 - `Native/Ambitions/` is the source of truth for the shipping app. Treat older Expo/TypeScript material as reference-only unless a task explicitly targets it.
 - Use XcodeGen. Edit `project.yml` and regenerate the project instead of relying on a checked-in `.xcodeproj`.
 - Preserve architecture boundaries: app and routing in `Native/Ambitions/App`, domain logic in `Native/Ambitions/Domain`, services in `Native/Ambitions/Services`, persistence in `Native/Ambitions/Persistence`, feature UI in `Native/Ambitions/Features`, shared UI in `Sources/` and `AppUI/Sources/`.

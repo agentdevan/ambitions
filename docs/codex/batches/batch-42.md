@@ -1,6 +1,6 @@
-# Batch 42 - Front-End Transformation 03 / Global compose, search, capture, and command surface
+﻿# Batch 42 - Front-End Transformation 03 / Global compose, search, capture, and command surface
 ## Status
-Completed
+Completed for planning purposes
 ## Program
 Post-hardening Front-End Transformation Program
 ## Canon Source
@@ -13,7 +13,7 @@ Post-hardening Front-End Transformation Program
 - [novel-interaction-systems-spec.md](../../canon/design/novel-interaction-systems-spec.md)
 ## Start Gate
 - Start only after Batch 38 is complete and stable.
-- The live registry is the operational source of truth for activation state.
+- Do not activate or implement this batch early; follow the registry and dependency order.
 ## Goal
 Implement the cross-app command layer that unifies creation, capture, quick recovery, quick planning, and memory recall.
 ## In Scope
@@ -48,9 +48,5 @@ Implement the cross-app command layer that unifies creation, capture, quick reco
 - targeted UI tests
 ## Completion Rule
 Complete only when creation, capture, recovery, and recall feel like one coherent system.
-
-## Completion Note
-- Landed a shell-owned command system with structured overlay state, Quiet Command Sheet and Memory Lens foundations, canonical quick-open routing, shell-owned create-goal and quick-capture entry, normalized capture triage language, and external-entry routing through the same command contracts.
-- Validated with `xcodegen generate`, native simulator build, targeted command/routing tests, full `AmbitionsTests`, targeted UI coverage added for command and Memory Lens seams, and manual human review confirming command-sheet opening, Memory Lens opening, canonical routing, create-goal, quick-capture, shell placement/readability, reduced-motion review, and regression checks for Goals create, Today quick capture, Plan-owned Captures, and external deep-link landing.
 
 ---

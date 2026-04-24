@@ -1,6 +1,6 @@
 ﻿# Batch 44 - Front-End Transformation 05 / Today rebuild II - time aperture, recovery bloom, and day logic
 ## Status
-Completed
+Completed for planning purposes
 ## Program
 Post-hardening Front-End Transformation Program
 ## Canon Source
@@ -49,5 +49,3 @@ Complete Today by adding the novel time and recovery systems plus any required l
 Complete only when Today is fully rebuilt, not partially elevated.
 
 ---
-## Completion Note
-Batch 44 completed the Today rebuild by adding Time Aperture, Recovery Bloom, calmer day-pressure/open-window treatment, stronger remaining-time guidance, bounded focus re-entry continuity from the shell command sheet, and Today-specific trust whisper/support layering without widening into Plan or Goal redesign. Validation completed with `xcodegen generate`, native simulator build, isolated Today UI proofs for hero dominance, quick recovery/quick focus re-entry, Goal Detail handoff, and Plan handoff, full `AmbitionsTests` (`363`), and a manual seven-state simulator audit using deterministic preview Today scenarios.

@@ -1,6 +1,6 @@
-﻿# Batch 53 - Front-End Transformation 14 / Progressive Intelligence Onboarding and Degraded-State Orchestrator
+﻿# Batch 53 - Front-End Transformation 14 / Onboarding, first-run, permissions, education, and state systems
 ## Status
-Completed
+Completed for planning purposes
 ## Program
 Post-hardening Front-End Transformation Program
 ## Canon Source
@@ -11,12 +11,12 @@ Post-hardening Front-End Transformation Program
 - [screen-architecture-spec.md](../../canon/design/screen-architecture-spec.md)
 - [copy-state-language-spec.md](../../canon/design/copy-state-language-spec.md)
 ## Start Gate
-- Start only after Batch 52 is complete and stable.
+- Start only after Batch 38 is complete and stable.
 - Do not activate or implement this batch early; follow the registry and dependency order.
 ## Goal
-Rebuild first-run, permissions, education, and degraded-state experiences so Ambitions feels premium and intelligible from first launch onward.
+Rebuild every first-run and system-state experience so Ambitions feels premium and intelligible from first launch onward.
 ## In Scope
-- Progressive Intelligence Onboarding redesign
+- onboarding redesign
 - first-run shell education
 - permission request sequencing redesign
 - create-first-goal onboarding redesign
@@ -29,7 +29,6 @@ Rebuild first-run, permissions, education, and degraded-state experiences so Amb
 - drift-return states
 - no-data / low-history reflection states
 - first-widget / first-shortcut / first-notification education patterns
-- Degraded-State Orchestrator framing across low-signal and degraded states
 ## Deferred, Not Excluded
 - full external-surface implementation details
 - future-device onboarding variants
@@ -48,8 +47,5 @@ Rebuild first-run, permissions, education, and degraded-state experiences so Amb
 - targeted UI tests
 ## Completion Rule
 Complete only when Ambitions feels intentional from cold start through degraded state.
-
-## Completion Note
-Completed with Progressive Intelligence Onboarding, additive onboarding persistence, a shared Degraded-State Orchestrator, contextual permission education, privacy-first trust copy, no-data/low-history/degraded-state coverage across the major surfaces, green automated validation, and sufficient manual simulator audit.
 
 ---

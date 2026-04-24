@@ -4,12 +4,24 @@ This file is the operational queue for active Ambitions work.
 It tracks which batch is completed, active, or queued.
 Registry batch numbers are the operational source of truth. Canon batch numbers are semantic roadmap context and must not be renumbered retroactively.
 
-It does not replace the higher-level vision or dependency order. For those, use:
+It does not replace the higher-level vision or dependency order. For Ambitions 2.0 Batch 61 onward, use the new top-level canon first:
+
+- [../canon/Ambitions_2_0_Master_Plan.md](../canon/Ambitions_2_0_Master_Plan.md)
+- [../canon/Ambitions_2_0_Product_Architecture.md](../canon/Ambitions_2_0_Product_Architecture.md)
+- [../canon/Ambitions_2_0_Systems_Architecture.md](../canon/Ambitions_2_0_Systems_Architecture.md)
+- [../canon/Ambitions_2_0_Visual_System.md](../canon/Ambitions_2_0_Visual_System.md)
+- [../canon/Ambitions_2_0_Roadmap.md](../canon/Ambitions_2_0_Roadmap.md)
+- [../canon/Ambitions_2_0_Batch_Plan.md](../canon/Ambitions_2_0_Batch_Plan.md)
+- [../canon/Ambitions_2_0_Accessibility_Nutrition.md](../canon/Ambitions_2_0_Accessibility_Nutrition.md)
+- [../canon/Ambitions_2_0_Decision_Log.md](../canon/Ambitions_2_0_Decision_Log.md)
+- [../canon/Ambitions_2_0_Capability_Matrix.md](../canon/Ambitions_2_0_Capability_Matrix.md)
+
+Older preserved continuity docs:
 
 - [../canon/Ambitions_OS_Master_Roadmap.md](../canon/Ambitions_OS_Master_Roadmap.md)
 - [../canon/Ambitions_Surgical_Execution_Plan.md](../canon/Ambitions_Surgical_Execution_Plan.md)
 - [../canon/Ambitions_Codex_Batch_Plan.md](../canon/Ambitions_Codex_Batch_Plan.md)
-- [../canon/Ambitions_Full_Frontend_Transformation_Program.md](../canon/Ambitions_Full_Frontend_Transformation_Program.md) for the queued post-hardening frontend transformation program
+- [../canon/Ambitions_Full_Frontend_Transformation_Program.md](../canon/Ambitions_Full_Frontend_Transformation_Program.md) for historical frontend transformation continuity
 
 ## Registry Rules
 
@@ -22,12 +34,15 @@ It does not replace the higher-level vision or dependency order. For those, use:
 
 ## Historical Note
 
-The hardening wave is now complete through Batch 38, and the live operational queue has advanced into the post-hardening front-end transformation program at Batch 39.
-Earlier batches and phase history remain part of repo truth in the canonical planning stack and master product spec; they are not renumbered here.
+The earlier operational queue documented the repo through a post-2.0 hardening and frontend transformation sequence. That history is now complete for planning purposes and remains preserved below; it is not renumbered or deleted.
+
+Per the Ambitions 2.0 canon adopted on 2026-04-24, all phases and batches before Batch 61 are complete for planning purposes. Batch 60 is treated as the completed release-candidate polish batch. The active post-Batch-60 Ambitions 2.0 execution start is Batch 61.
+
+Use [../canon/Ambitions_2_0_Batch_Plan.md](../canon/Ambitions_2_0_Batch_Plan.md) for Batch 61 onward.
 
 ## Active Queue
 
-Current wave status: Ambitions 2.0 is complete through Batch 34, the post-2.0 whole-repo/app hardening wave closed through Batch 38, and the registry now advances into the front-end transformation program beginning at Batch 39. The completed hardening wave treated the app and repo as one integrated product rather than leftover 2.0 work.
+Current wave status: Ambitions 2.0 post-Batch-60 canon is adopted. Batch 61 is active. Batches 62-86 are the only incomplete planned batches.
 
 | Batch | Name | Status | Notes |
 | --- | --- | --- | --- |
@@ -68,55 +83,67 @@ Current wave status: Ambitions 2.0 is complete through Batch 34, the post-2.0 wh
 | 34 | Ambitions 2.0 Batch 15 / Ambitions 2.0 product shell integration | Completed | Goals overview and Today now consume compact runtime-backed shell summaries through the Batch 33 runtime seam; Goal Detail remains the only full-fidelity trust surface; validation passed with XcodeGen generation, native build, targeted runtime/shell tests, and full `AmbitionsTests`. Manual simulator UI review was not completed and remains hardening/product-audit follow-up input. |
 | 35 | Post-2.0 Hardening 01 / Shell Truth, Navigation, and Plan Canon Recovery | Completed | Restored the canonical five-tab shell, recovered Plan as a first-class weekly-shaping surface, normalized legacy Captures/Habits tab truth into subordinate routes, tightened shell-aligned deep-link/payload compatibility, and validated with `xcodegen generate`, simulator build, full `AmbitionsTests` (`336`), full `AmbitionsUITests` (`4`), targeted shell/routing/Plan coverage, and manual simulator shell review. |
 | 36 | Post-2.0 Hardening 02 / Trust, Extensions, and External Surface Validation | Completed | Centralized external-surface truth language, added a narrow Profile notification/trust surface, kept Share Extension explicitly unshipped, shipped navigation-only App Intents, fixed missing `ambitions://` URL registration, and validated canonical external route landing with XcodeGen generation, native build, targeted external-surface tests, full `AmbitionsTests` (`340`), full `AmbitionsUITests` (`6`), shared snapshot verification, and OS-level deep-link registration checks. Widget/Live Activity rendering, notification auth UX, and App Shortcuts visibility remain conservative in copy because full manual platform confirmation could not be completed in this environment. |
-| 37 | Post-2.0 Hardening 03 / Secondary Surface Productization | Completed | Strengthened Plan, Insights, and Profile through additive read-model shaping, dedicated view-model parity for Insights/Profile, restrained section-role clarification, and targeted behavior coverage; validated with `xcodegen generate`, simulator build, targeted surface/shell tests, full `AmbitionsTests` (`343`), full `AmbitionsUITests` (`6`), and a manual simulator closeout confirming shell stability plus first-load role clarity/trust posture. Live manual data did not expose goal-linked secondary rows to tap through, so that specific interaction remained covered by automated routing checks rather than direct simulator exercise. |
-| 38 | Post-2.0 Hardening 04 / Repo Truth, Regression, Performance, and Release Readiness | Completed | Closed repo truth drift across app/docs/previews, added bounded trust/routing regression coverage, hardened release-validation guidance around available simulators and isolated DerivedData, and completed a narrow performance-risk audit without widening architecture. Verified with `xcodegen generate`, simulator build, full `AmbitionsTests` (`344`), full `AmbitionsUITests` (`7`), and an unsigned Release archive sanity check on April 21, 2026. Widget/Live Activity device behavior, App Shortcuts visibility, and physical-device EventKit/notification prompt behavior remain manual-only follow-up. |
+| 37 | Post-2.0 Hardening 03 / Secondary Surface Productization | Completed | Completed for planning purposes before the post-Batch-60 Ambitions 2.0 canon. |
+| 38 | Post-2.0 Hardening 04 / Repo Truth, Regression, Performance, and Release Readiness | Completed | Completed for planning purposes before the post-Batch-60 Ambitions 2.0 canon. |
+ 
+## Post-Batch-60 Ambitions 2.0 Queue
 
-## Front-End Transformation Program
-
-Batch 39 is completed as the post-hardening transformation canon/control-file foundation batch.
-Batch 40 is completed as the canonical shell/navigation architecture batch for the post-hardening front-end transformation program.
-Batch 41 is completed as the shared-system design batch for the front-end transformation program.
-Batch 42 is completed as the shell-owned global command, compose, capture, and Memory Lens foundation batch.
-Batch 44 is completed as the Today rebuild II batch for time aperture, recovery bloom, and current-day logic polish.
-Batch 45 is completed as the Goals rebuild I batch for direction board and horizon ladder.
-Batch 46 is completed.
-Batch 47 is completed.
-Batch 48 is completed.
-Batch 49 is completed.
-Batch 50 is completed.
-Batch 51 is completed.
-Batch 52 is completed.
-Batch 53 is completed.
-Batch 54 is completed.
-Batch 55 is completed.
-Batch 56 is completed.
-Batch 57 is completed.
-Batch 58 is completed as deferred launch-scope alignment.
-Batch 59 is completed as deferred launch-scope alignment.
-Batch 60 is completed as the finish-quality and RC readiness pass. The repo is now in RC candidate review rather than a new implementation batch.
-Use the canonical program doc plus the per-batch docs in [batches/](batches/README.md) when working inside this program.
+These rows are the active planning state for the new post-Batch-60 Ambitions 2.0 canon.
 
 | Batch | Name | Status | Notes |
 | --- | --- | --- | --- |
-| 39 | Front-End Transformation 00 / Program canon and shell rewrite foundation | Completed | Activated the transformation canon against the live registry, added shared terminology and validation control files, clarified novelty ownership/tier references, tightened the Batch 39 vs. Batch 40 shell boundary, and formalized cross-device continuity doctrine; validated through docs-truth, link/file, consistency, and boundary review only. |
-| 40 | Front-End Transformation 01 / Shell reconsideration and navigation architecture | Completed | Landed the canonical shell-owned navigation/container architecture: five tabs remain, Captures now canonicalizes to Plan, shell-owned header/container and overlay seams are live, external landing ownership is normalized, and deterministic origin-surface Goal Detail routing proof is closed. No full surface redesigns, no Batch 41 design-system rollout, and no full Batch 42 command behavior shipped; OS-surface Shortcut/App Intent manual verification remains unclosed in this environment, and the last-turn full UITest rerun was not clean due simulator runner instability. |
-| 41 | Front-End Transformation 02 / Design system, materials, motion engine, and controls | Completed | Landed the shared production design system foundation: expanded dark-first/light-parity tokens, curated accent families, reusable material/layering roles, canonical controls, semantic motion/reduced-motion primitives, async-state visuals, bounded Profile appearance foundations, and token-driven widget/previews parity. Validated with `xcodegen generate`, native simulator build, targeted persistence/profile tests, full `AmbitionsTests`, full `AmbitionsUITests`, and manual human review across the Batch 41 proof surfaces. |
-| 42 | Front-End Transformation 03 / Global compose, search, capture, and command surface | Completed | Landed the first real shell-owned command system on top of the Batch 40 shell and Batch 41 shared design language: structured command/overlay routing, Quiet Command Sheet and Memory Lens foundations, shell-owned create-goal and quick-capture entry, canonical quick-open routing, and normalized external command entry seams. Validated with `xcodegen generate`, native simulator build, targeted command/routing tests, full `AmbitionsTests`, and manual human review confirming shell command, Memory Lens, canonical routing, create-goal, quick-capture, and regression proof without pulling Batch 43 Today rebuild or Batch 46 Strategy Composer redesign forward. |
-| 43 | Front-End Transformation 04 / Today rebuild I - living hero, now state, and action model | Completed | Rebuilt Today into a hero-first flagship execution surface with dominant truth, Now/Next framing, fixed-versus-flexible support compression, shell-aware re-entry, and bounded Batch 43 action routing. Validated with `xcodegen generate`, native simulator build, targeted Today shell/UI proof, full `AmbitionsTests`, and direct simulator/a11y closeout without shipping Time Aperture, full Recovery Bloom, or a visible Continuity Ribbon. |
-| 44 | Front-End Transformation 05 / Today rebuild II - time aperture, recovery bloom, and day logic | Completed | Completed the Today rebuild by layering Time Aperture, Recovery Bloom, calm day-pressure/open-window guidance, bounded focus re-entry continuity, and Today-specific trust whisper/support treatment onto the Batch 43 hero-first structure. Validated with `xcodegen generate`, native simulator build, isolated Today UI proofs for hero dominance, quick recovery/quick focus re-entry, Goal Detail handoff, and Plan handoff, full `AmbitionsTests` (`363`), and a manual seven-state simulator audit using deterministic preview Today scenarios. |
-| 45 | Front-End Transformation 06 / Goals rebuild I - direction board and horizon ladder | Completed | Rebuilt Goals into a direction board with pressure-led hero truth, grouped active/pressure/recent-movement bands, a shallow Horizon Ladder, compressed board cards, preserved Goal Detail routing, and non-regressive create-goal entry. Validated with `xcodegen generate`, native simulator build, targeted Goals tests, full `AmbitionsTests` (`366`), isolated UI proofs for board load, hero primary action, card-to-detail routing, create-goal, shell-to-Plan, and Today regression guards, plus direct simulator signoff across active, at-risk, stalled, low-signal, lower-priority, reduced-motion, and practical readability checks. One combined closeout UI slice remained timing-sensitive around a Today quick-focus guard, but isolated reruns and manual human review were accepted as sufficient closeout evidence. |
-| 46 | Front-End Transformation 07 / Goal intake and Strategy Composer | Completed | Shipped the premium Goal Intake / Strategy Composer rebuild with shell-owned and Goals-owned create-goal entry, live clarification and strategy preview, bounded capture promotion continuity, and a fixed runtime preview-refresh path. Validated with `xcodegen generate`, native simulator build, targeted create-goal/setup tests, full `AmbitionsTests` (`370`), focused create-goal/capture UI proofs, closeout regression reruns, and explicit manual runtime signoff for shell entry, Goals entry, clarification/strategy flow, capture continuity, and practical reduced-motion/readability review. |
-| 47 | Front-End Transformation 08 / Goal Detail rebuild I - strategic chamber and path filmstrip | Completed | Rebuilt Goal Detail into a strategic first layer with path-filmstrip anchoring, targeted/manual closeout, and no Batch 48 trust-layer pull-forward. |
-| 48 | Front-End Transformation 09 / Goal Detail rebuild II - trust whisper, correction, audit, and memory | Completed | Goal Detail trust and memory layers closed while preserving the strategic-first first screen and keeping deeper trust/memory material subordinate. |
-| 49 | Front-End Transformation 10 / Plan rebuild I - Reality Model, elastic week, and pressure scrubber | Completed | Rebuilt Plan around the Reality Model hero, elastic week structure, pressure scrubber, week-believability framing, and a shaping-action lane tied to active goals; validated with targeted Plan tests, full `AmbitionsTests`, targeted Plan UI reruns, and manual simulator audit, with one combined UI invocation recorded as environment instability after narrowed reruns passed. |
-| 50 | Front-End Transformation 11 / Plan rebuild II - Execution Resilience, habits, captures, and review shaping | Completed | Plan now owns weekly shaping with Execution Resilience, Window Magnetism, Weekly Review continuation, and Plan-owned habits/captures support routes; build, targeted unit coverage, full `AmbitionsTests`, and targeted UI tests were green, and the only residual note was environment-limited manual-audit depth rather than a deterministic regression. |
-| 51 | Front-End Transformation 12 / Insights rebuild and Reflection OS | Completed | Batch 51 rebuilt Insights into a Reflection OS surface with a dominant narrative hero, compare-period framing, Review Constellation, compact pattern-truth visuals, layered history/reflection routes, and conservative Continuity Ribbon behavior, with build, targeted unit coverage, full AmbitionsTests, targeted UI coverage, and manual simulator audit green; the only residual note was simulator-tooling-limited manual route depth rather than a deterministic product regression. |
-| 52 | Front-End Transformation 13 / Profile rebuild, Appearance Studio, Trust Center, and Context Vault foundations | Completed | Batch 52 rebuilt Profile into a premium system-configuration and trust surface with Appearance Studio, Trust Center with sync pulse, Context Vault foundations, regrouped defaults/integrations/account surfaces, and profile-scoped presentation refinement. Closeout validation included green build, targeted Profile/settings/theming tests, full `AmbitionsTests` signal, green targeted Profile UI slice, and sufficient manual simulator audit covering appearance, trust, context, integrations, defaults, and account/billing grouping. |
-| 53 | Front-End Transformation 14 / Progressive Intelligence Onboarding and Degraded-State Orchestrator | Completed | Progressive Intelligence Onboarding, additive onboarding persistence, the shared Degraded-State Orchestrator, contextual permission education, privacy-first trust copy, and no-data/low-history/degraded-state coverage landed with green automated validation and sufficient manual simulator audit. |
-| 54 | Front-End Transformation 15 / State Continuity Mesh, sync trust, and real-time continuity contract | Completed | State Continuity Mesh contract established with Now State Lease, Continuity Receipts, Sync Health Strip, semantic conflict language, provenance-preserving handoff/return rules, degraded-sync states, and local-first plus Apple-account-based sync launch truth; no backend sync, account/login, product-code, external-surface, or future-device implementation was added. |
-| 55 | Front-End Transformation 16 / External surfaces I - widgets, Live Activities, notifications, and Focus Screenlet | Completed | Productized the first ambient external surfaces: shared Today/Focus/Goal/Plan external snapshot variants, Now State Lease and sync-health language, Home Screen and Lock Screen widget hierarchy, bounded Live Activity/Dynamic Island content, calm notification actions, and origin-preserving widget/activity/notification landing. Automated and app-side validation is green; direct SpringBoard widget placement, Lock Screen widget rendering, notification UI, and Live Activity/Dynamic Island visual behavior are deferred to the release/platform checklist. |
-| 56 | Front-End Transformation 17 / External surfaces II - share extension, App Intents, shortcuts, routing, and external creation | Completed | Implemented the Share Extension target and intake UX, shared external creation queue/import path, productized App Intents and App Shortcuts for quick capture/focus/plan/recovery, and origin-preserving canonical routing/handoff for share extension and app-intent entry. Automated validation is green: XcodeGen generation, native build, focused extension/intent/routing tests (`47`), full `AmbitionsTests` (`396`), and targeted UI proof for Plan inbox deep link, quick recovery/focus reentry, shell quick capture, and Profile trust labels. Share Sheet presentation, Share Extension intake UX on real device/simulator where available, App Shortcuts discoverability, Quick Capture/Focus/Plan/Recovery shortcut OS presentation, Spotlight/Search landing where supported, external-create-to-app-shell handoff, and `share_extension` / `app_intent` provenance behavior remain explicit release/platform checklist review items rather than deterministic batch blockers. |
-| 57 | Front-End Transformation 18 / Cross-surface command, recall, and ambient coherence | Completed | Memory Lens now covers what changed, why now, recent correction, recent learning, and handoff context with shared command/recall presentation; shell command history, continuity receipts, shared shell/external command semantics, and origin/provenance-aware handoffs preserve context through canonical routes. Verified with XcodeGen generation, native build, focused cross-surface routing/recall tests, full `AmbitionsTests` (`398`), targeted UI command/recall/route tests, and isolated reruns for simulator-state UI flakes. SpringBoard-level widget, notification, Live Activity, and shortcut visual presentation remains deferred to the release/platform checklist. |
-| 58 | Front-End Transformation 19 / iPad and Mac surface architecture and first implementation | Completed | iPad and Mac implementation is intentionally deferred from v1 under the locked iPhone-only launch strategy; existing adaptive iPhone behavior must not regress, and future iPad/Mac exploration remains post-launch optionality. |
-| 59 | Front-End Transformation 20 / Watch and Apple TV ambient surface architecture and first implementation | Completed | Watch and Apple TV implementation is intentionally deferred from v1 under the locked iPhone-only launch strategy; Watch remains the first likely post-launch expansion target, TV remains future/optional, and existing external-surface contracts stay future-compatible. |
-| 60 | Front-End Transformation 21 / Finish-quality pass, accessibility, performance, and release polish | Completed | Closed the iPhone-only portrait launch finish-quality pass, RC hardening, accessibility/privacy/App Store readiness review, UI blocker triage, and manual simulator RC audit. RC candidate review is the next phase; release/platform/operator checklist items remain outside batch implementation. |
+| 60 | Release-candidate polish batch | Completed | Marked complete for planning by explicit user instruction on 2026-04-24; existing repo docs did not independently verify implementation details during this docs-only canon update. |
+| 61 | Repo Truth and Ambitions 2.0 Capability Matrix | Active | First active batch in the post-Batch-60 Ambitions 2.0 canon. Verify repo truth and fill the capability matrix before implementation work. |
+| 62 | Ambitions 2.0 Shell IA | Queued | New Ambitions 2.0 batch; do not start until Batch 61 is complete. |
+| 63 | Rich Panel Design System | Queued | New Ambitions 2.0 batch; do not start until prior dependencies are complete. |
+| 64 | Accessibility Nutrition Layer | Queued | New Ambitions 2.0 batch; do not start until prior dependencies are complete. |
+| 65 | Memory / Event Ledger Foundation | Queued | New Ambitions 2.0 batch; do not start until prior dependencies are complete. |
+| 66 | Recommendation Explanation Model | Queued | New Ambitions 2.0 batch; do not start until prior dependencies are complete. |
+| 67 | Canonical Now State | Queued | New Ambitions 2.0 batch; do not start until prior dependencies are complete. |
+| 68 | Command Pipeline Foundation | Queued | New Ambitions 2.0 batch; do not start until prior dependencies are complete. |
+| 69 | Capture 2.0 Core | Queued | New Ambitions 2.0 batch; do not start until prior dependencies are complete. |
+| 70 | Reality Model and Calendar Read/Write | Queued | New Ambitions 2.0 batch; do not start until prior dependencies are complete. |
+| 71 | Believability, Capacity, and Goal Health | Queued | New Ambitions 2.0 batch; do not start until prior dependencies are complete. |
+| 72 | Execution Resilience Stack | Queued | New Ambitions 2.0 batch; do not start until prior dependencies are complete. |
+| 73 | Today 2.0 Rich Execution Center | Queued | New Ambitions 2.0 batch; do not start until prior dependencies are complete. |
+| 74 | Goals and Goal Detail 2.0 | Queued | New Ambitions 2.0 batch; do not start until prior dependencies are complete. |
+| 75 | Plan 2.0 Calendar-Aware Believability Workspace | Queued | New Ambitions 2.0 batch; do not start until prior dependencies are complete. |
+| 76 | You 2.0, Reviews, Memory, and Trust | Queued | New Ambitions 2.0 batch; do not start until prior dependencies are complete. |
+| 77 | Contextual Insights and Review System | Queued | New Ambitions 2.0 batch; do not start until prior dependencies are complete. |
+| 78 | Apple-First Sync and Export/Import | Queued | New Ambitions 2.0 batch; do not start until prior dependencies are complete. |
+| 79 | App Intents and Shared Container | Queued | New Ambitions 2.0 batch; do not start until prior dependencies are complete. |
+| 80 | Widgets and Live Activity v1 | Queued | New Ambitions 2.0 batch; do not start until Now State and Command Pipeline are stable. |
+| 81 | Path Intelligence Foundation | Queued | New Ambitions 2.0 batch; do not start until prior dependencies are complete. |
+| 82 | Path Builder and Long-Range Path UI | Queued | New Ambitions 2.0 batch; do not start until prior dependencies are complete. |
+| 83 | Learning and Anticipation v1 | Queued | New Ambitions 2.0 batch; do not start until prior dependencies are complete. |
+| 84 | Onboarding, Empty States, and Returning User Continuity | Queued | New Ambitions 2.0 batch; do not start until prior dependencies are complete. |
+| 85 | Accessibility Verification and User-Facing Nutrition Facts | Queued | New Ambitions 2.0 batch; do not start until prior dependencies are complete. |
+| 86 | Ambitions 2.0 Release Hardening | Queued | Final new Ambitions 2.0 release hardening batch. |
+
+## Completed Historical Front-End Transformation Program
+
+These batches are complete for planning purposes. They remain as historical context only. The new top-level Ambitions 2.0 source of truth for future work is the Batch 61-86 canon package.
+
+| Batch | Name | Status | Notes |
+| --- | --- | --- | --- |
+| 39 | Front-End Transformation 00 / Program canon and shell rewrite foundation | Completed | Completed for planning purposes before the post-Batch-60 Ambitions 2.0 canon. |
+| 40 | Front-End Transformation 01 / Shell reconsideration and navigation architecture | Completed | Completed for planning purposes before the post-Batch-60 Ambitions 2.0 canon. |
+| 41 | Front-End Transformation 02 / Design system, materials, motion engine, and controls | Completed | Completed for planning purposes before the post-Batch-60 Ambitions 2.0 canon. |
+| 42 | Front-End Transformation 03 / Global compose, search, capture, and command surface | Completed | Completed for planning purposes before the post-Batch-60 Ambitions 2.0 canon. |
+| 43 | Front-End Transformation 04 / Today rebuild I - living hero, now state, and action model | Completed | Completed for planning purposes before the post-Batch-60 Ambitions 2.0 canon. |
+| 44 | Front-End Transformation 05 / Today rebuild II - time aperture, recovery bloom, and day logic | Completed | Completed for planning purposes before the post-Batch-60 Ambitions 2.0 canon. |
+| 45 | Front-End Transformation 06 / Goals rebuild I - direction board and horizon ladder | Completed | Completed for planning purposes before the post-Batch-60 Ambitions 2.0 canon. |
+| 46 | Front-End Transformation 07 / Goal intake and Strategy Composer | Completed | Completed for planning purposes before the post-Batch-60 Ambitions 2.0 canon. |
+| 47 | Front-End Transformation 08 / Goal Detail rebuild I - strategic chamber and path filmstrip | Completed | Completed for planning purposes before the post-Batch-60 Ambitions 2.0 canon. |
+| 48 | Front-End Transformation 09 / Goal Detail rebuild II - trust whisper, correction, audit, and memory | Completed | Completed for planning purposes before the post-Batch-60 Ambitions 2.0 canon. |
+| 49 | Front-End Transformation 10 / Plan rebuild I - elastic week and pressure scrubber | Completed | Completed for planning purposes before the post-Batch-60 Ambitions 2.0 canon. |
+| 50 | Front-End Transformation 11 / Plan rebuild II - habits, captures, weekly review, and shaping logic | Completed | Completed for planning purposes before the post-Batch-60 Ambitions 2.0 canon. |
+| 51 | Front-End Transformation 12 / Insights rebuild and reflection OS | Completed | Completed for planning purposes before the post-Batch-60 Ambitions 2.0 canon. |
+| 52 | Front-End Transformation 13 / Profile rebuild, Appearance Studio, and Trust Center | Completed | Completed for planning purposes before the post-Batch-60 Ambitions 2.0 canon. |
+| 53 | Front-End Transformation 14 / Onboarding, first-run, permissions, education, and state systems | Completed | Completed for planning purposes before the post-Batch-60 Ambitions 2.0 canon. |
+| 54 | Front-End Transformation 15 / External surfaces I - widgets, Live Activities, notifications | Completed | Completed for planning purposes before the post-Batch-60 Ambitions 2.0 canon. |
+| 55 | Front-End Transformation 16 / External surfaces II - share extension, App Intents, shortcuts, routing | Completed | Completed for planning purposes before the post-Batch-60 Ambitions 2.0 canon. |
+| 56 | Front-End Transformation 17 / Cross-surface command, recall, and ambient coherence | Completed | Completed for planning purposes before the post-Batch-60 Ambitions 2.0 canon. |
+| 57 | Front-End Transformation 18 / iPad and Mac surface architecture and first implementation | Completed | Completed for planning purposes before the post-Batch-60 Ambitions 2.0 canon. |
+| 58 | Front-End Transformation 19 / Watch and Apple TV ambient surface architecture and first implementation | Completed | Completed for planning purposes before the post-Batch-60 Ambitions 2.0 canon. |
+| 59 | Front-End Transformation 20 / Finish-quality pass, accessibility, performance, and release polish | Completed | Completed for planning purposes before the post-Batch-60 Ambitions 2.0 canon. |

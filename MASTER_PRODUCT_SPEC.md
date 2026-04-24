@@ -4,6 +4,26 @@
 
 ---
 
+## Ambitions 2.0 Post-Batch-60 Update
+
+As of 2026-04-24, the active post-Batch-60 canon is the Ambitions 2.0 major transformation package under `docs/canon/Ambitions_2_0_*.md`. Those newly added files are the top-level source of truth for future Ambitions 2.0 work.
+
+All phases and batches before Batch 61 are complete for planning purposes. Older phase language below is historical where it conflicts with the new Ambitions 2.0 canon.
+
+"Ambitions is a premium personal execution system that turns meaningful goals into believable daily action, explains why each action matters, and helps the user recover when real life disrupts the plan."
+
+Locked 2.0 direction:
+
+- top-level tabs are Today, Goals, Capture, Plan, and You
+- Insights is demoted from top-level navigation
+- Habits is absorbed into Plan, rituals, Today execution, and Reviews/pattern reflection
+- visual direction is "Calm shell, rich panels, meaningful visual state."
+- execution direction is "Verify truth first, build shared systems once, then transform surfaces, then ship Apple-native external surfaces."
+
+For detail, use [docs/canon/Ambitions_2_0_Master_Plan.md](docs/canon/Ambitions_2_0_Master_Plan.md), [docs/canon/Ambitions_2_0_Product_Architecture.md](docs/canon/Ambitions_2_0_Product_Architecture.md), [docs/canon/Ambitions_2_0_Systems_Architecture.md](docs/canon/Ambitions_2_0_Systems_Architecture.md), [docs/canon/Ambitions_2_0_Visual_System.md](docs/canon/Ambitions_2_0_Visual_System.md), [docs/canon/Ambitions_2_0_Roadmap.md](docs/canon/Ambitions_2_0_Roadmap.md), and [docs/canon/Ambitions_2_0_Batch_Plan.md](docs/canon/Ambitions_2_0_Batch_Plan.md).
+
+---
+
 ## 1. Product thesis
 
 Ambitions is a calm, premium, iPhone-first personal execution system for individuals.
@@ -560,7 +580,7 @@ Those files define:
 - cross-device surface roles
 - signature interaction systems
 
-Use those files when planning or implementing any future frontend transformation batch.
+Use the new Ambitions 2.0 canon files when planning or implementing active Batch 61+ work. The detailed frontend files remain historical design context where not superseded.
 They deepen this master spec; they do not change the current active batch by themselves.
 
 ### 10.3.2 Additional signature systems
@@ -998,7 +1018,7 @@ Already landed and established:
 - scheduling impact from weekly shaping
 - initial Insights / Profile / Plan integration
 
-### Phase 18.1 — In progress / hardening pass
+### Phase 18.1 — Completed / historical hardening pass
 **Weekly hardening + navigation correction**
 
 Required outcome:
@@ -1439,7 +1459,7 @@ That is the product.
 
 From this point forward, Codex phase planning should treat this document as the canonical source of truth for the current shipping product.
 For platform vision, execution order, batch packaging, and active work status, follow [docs/codex/CONTEXT_INDEX.md](docs/codex/CONTEXT_INDEX.md).
-For explicit future frontend design truth, use [docs/canon/design/README.md](docs/canon/design/README.md) together with [docs/canon/Ambitions_Full_Frontend_Transformation_Program.md](docs/canon/Ambitions_Full_Frontend_Transformation_Program.md).
+For active Ambitions 2.0 Batch 61+ design truth, use [docs/canon/Ambitions_2_0_Visual_System.md](docs/canon/Ambitions_2_0_Visual_System.md) together with the new Ambitions 2.0 canon package. The older frontend design docs remain historical context where not superseded.
 
 When there is conflict between:
 

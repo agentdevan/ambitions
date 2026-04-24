@@ -1,6 +1,6 @@
-﻿# Batch 59 - Front-End Transformation 20 / Watch and Apple TV ambient surface architecture and first implementation
+﻿# Batch 59 - Front-End Transformation 20 / Finish-quality pass, accessibility, performance, and release polish
 ## Status
-Completed
+Completed for planning purposes
 ## Program
 Post-hardening Front-End Transformation Program
 ## Canon Source
@@ -22,34 +22,40 @@ Post-hardening Front-End Transformation Program
 - Start only after Batch 38 is complete and stable.
 - Do not activate or implement this batch early; follow the registry and dependency order.
 ## Goal
-Align launch scope so Watch and Apple TV stay intentionally out of v1 while preserving future-compatible ambient contracts.
+Close the transformation program with a whole-product finish pass that raises Ambitions to flagship release quality.
 ## In Scope
-- launch-scope wording that keeps Watch and Apple TV out of v1
-- future-compatibility language for existing ambient and external contracts
-- confirmation that Watch is the first likely post-launch expansion target
-- confirmation that TV remains future/optional and outside release-candidate scope
+- motion tuning across the whole app
+- microinteraction coherence pass
+- haptics consistency review
+- accessibility pass including Dynamic Type, VoiceOver, contrast, motion, target size, and hierarchy clarity
+- performance and scroll smoothness review
+- transition and state-change tuning
+- whole-product empty / loading / error consistency pass
+- regression closure for surface interactions
+- preview and screenshot truth pass
+- release-quality visual audit
+- polish for future-platform first implementations as available
 ## Deferred, Not Excluded
-- Watch implementation
-- Apple TV implementation
-- all ambient and room-scale surface product work until after v1
+- none; this is the closure batch for the program
 ## Dependency Rules
-- preserve future-compatible external-surface and continuity contracts
-- keep the locked launch strategy iPhone-only, portrait-only, and U.S.-only
-- keep Watch as the first likely post-launch expansion target
-- keep TV as future/optional, not release-candidate scope
+- do not treat this as a bug scrub only
+- this batch is for premium closure, not merely pass/fail stability
+- preserve restraint; do not add effects to simulate polish
 ## Exit Criteria
-- launch-scope docs agree that Watch and Apple TV are intentionally deferred from v1
-- future ambient contracts remain compatible with later expansion
-- no product implementation was required for this batch under the locked launch strategy
+- the product feels singular and finished
+- interaction quality is consistently high
+- accessibility is treated as first-class quality
+- performance and polish gaps are materially reduced
 ## Validation
-- docs/control reconciliation only
-- registry and roadmap consistency checks
-- no product build or implementation work required
+- xcodegen generate
+- full native build(s)
+- full AmbitionsTests
+- full AmbitionsUITests
+- targeted accessibility verification
+- targeted performance checks
+- manual whole-product audit
 ## Completion Rule
-Complete only when the launch strategy clearly records Watch as a likely post-launch target and Apple TV as future/optional rather than a v1 requirement.
-
-## Completion Note
-Completed as a scope-alignment batch. Watch and Apple TV implementation is intentionally deferred out of v1, Watch remains the first likely post-launch expansion target, Apple TV remains future/optional and outside release-candidate scope, existing external-surface contracts stay future-compatible, and no product implementation was required under the locked launch strategy.
+Complete only when Ambitions feels authored end-to-end and ready to be judged as a flagship product.
 
 ---
 

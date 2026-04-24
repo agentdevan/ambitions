@@ -1,5 +1,11 @@
 # Ambitions Codex Batch Plan
 
+## Post-Batch-60 Ambitions 2.0 Supersession Note
+
+As of 2026-04-24, the active post-Batch-60 Ambitions 2.0 plan lives in [Ambitions_2_0_Batch_Plan.md](Ambitions_2_0_Batch_Plan.md).
+
+All phases and batches described below are complete for planning purposes. This file is preserved for prior Ambitions 2.0 intelligence-wave and batch-history continuity. Do not delete or renumber its historical content. Where this file conflicts with the post-Batch-60 Batch 61+ plan, [Ambitions_2_0_Batch_Plan.md](Ambitions_2_0_Batch_Plan.md) wins.
+
 ## Status
 
 Ambitions 1.0 is complete through registry Batch 18. Those batches remain completed historical foundation work and must not be renumbered, erased, or rewritten into a new numbering system.

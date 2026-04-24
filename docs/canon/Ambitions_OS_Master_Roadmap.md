@@ -1,5 +1,11 @@
 # Ambitions OS — Master Roadmap (Ambitions 2.0)
 
+## Post-Batch-60 Supersession Note
+
+As of 2026-04-24, the active post-Batch-60 Ambitions 2.0 roadmap is defined by [Ambitions_2_0_Master_Plan.md](Ambitions_2_0_Master_Plan.md) and [Ambitions_2_0_Roadmap.md](Ambitions_2_0_Roadmap.md).
+
+All phases and batches described below are complete for planning purposes. This file remains preserved for platform/endgame and prior Ambitions 2.0 intelligence-wave continuity. Where it conflicts with the post-Batch-60 canon, the new Ambitions 2.0 files win.
+
 ## Status
 
 Ambitions 1.0 is complete through registry Batch 18. That work remains the historical foundation: native SwiftUI app, domain services, persistence, planning/recovery/time foundations, ambient surfaces, sync-trust boundary, life graph/path systems, learning, shared-life context, runtime separation, and a narrow dedicated-device prototype seam.

@@ -1,6 +1,6 @@
-﻿# Batch 50 - Front-End Transformation 11 / Plan rebuild II - Execution Resilience, habits, captures, and review shaping
+﻿# Batch 50 - Front-End Transformation 11 / Plan rebuild II - habits, captures, weekly review, and shaping logic
 ## Status
-Completed
+Completed for planning purposes
 ## Program
 Post-hardening Front-End Transformation Program
 ## Canon Source
@@ -24,12 +24,11 @@ Execution classification:
 - Start only after Batch 38 is complete and stable.
 - Do not activate or implement this batch early; follow the registry and dependency order.
 ## Goal
-Complete Plan by integrating the Execution Resilience Stack with habits, captures, weekly review, and required shaping logic expansions.
+Complete Plan by integrating Habits, Captures, weekly review, and any required shaping logic expansions.
 ## In Scope
 - habits-inside-Plan redesign
 - capture-to-week integration redesign
 - weekly review entry and return flows redesign
-- Execution Resilience framing for carryover, overload, and recovery shaping
 - Window Magnetism implementation after base Plan pressure grammar is stable
 - constrained Split-Pane Thinking on iPhone for selected Plan shaping and Weekly Review carry-forward states
 - carryover / overload / lighten-week logic expansion where needed
@@ -59,10 +58,5 @@ Complete Plan by integrating the Execution Resilience Stack with habits, capture
 - targeted UI tests
 ## Completion Rule
 Complete only when Plan and its support routes feel like one authored system.
-
-## Completion Note
-- Plan now owns weekly shaping with Execution Resilience framing, Window Magnetism, Weekly Review continuation, and stronger Plan-owned habits/captures support routes.
-- Clean native build, targeted Batch 50 unit coverage, full `AmbitionsTests`, and targeted UI tests were green.
-- Remaining manual-audit depth was limited by environment/tooling blockers rather than a deterministic product regression.
 
 ---

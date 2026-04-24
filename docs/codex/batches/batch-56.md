@@ -1,6 +1,6 @@
-﻿# Batch 56 - Front-End Transformation 17 / External surfaces II - share extension, App Intents, shortcuts, routing, and external creation
+﻿# Batch 56 - Front-End Transformation 17 / Cross-surface command, recall, and ambient coherence
 ## Status
-Completed
+Completed for planning purposes
 ## Program
 Post-hardening Front-End Transformation Program
 ## Canon Source
@@ -12,40 +12,38 @@ Post-hardening Front-End Transformation Program
 - [trust-explainability-correction-spec.md](../../canon/design/trust-explainability-correction-spec.md)
 - [novel-interaction-systems-spec.md](../../canon/design/novel-interaction-systems-spec.md)
 ## Start Gate
-- Start only after Batch 55 is complete and stable.
-- Follow the registry and dependency order; do not widen beyond this batch.
+- Start only after Batch 38 is complete and stable.
+- Do not activate or implement this batch early; follow the registry and dependency order.
 ## Goal
-Fully implement the creation, entry, and routing surfaces outside the main app shell.
+Complete the command and recall system across app, widgets, notifications, shortcuts, and future device surfaces.
 ## In Scope
-- share extension full implementation
-- share extension intake UX
-- App Intents full productization
-- App Shortcuts and shortcut discoverability
-- Spotlight and search landing refinement where supported
-- deep-link and handoff surface polish
-- external-create-to-internal-shell path refinement
-- routing language and transition continuity
-- shortcut-driven quick recovery / quick focus / quick capture / quick plan flows
-- external truth and permissions education
+- Memory Lens full implementation
+- cross-surface recall patterns
+- universal command and recall presentation refinement
+- “what changed” flows
+- “why now” recall flows
+- recent correction and learning recall flows
+- handoff continuity between ambient surfaces and deep in-app destinations
+- command-history and return-entry refinements
+- coherence pass across compose, search, capture, and recall
+- shell / external / detail transition tuning
 ## Deferred, Not Excluded
-- iPad / Mac / Watch / Apple TV implementations
+- larger-screen platform implementations
+- final finish-quality pass
 ## Dependency Rules
-- external entry points must land in canonical routes
-- share and shortcut flows should feel like the same OS as the main app
-- do not implement external affordances that create logic islands
+- recall should feel like mental relief, not archive search
+- command and recall must share one visual and interaction language
+- handoff clarity matters more than feature count
 ## Exit Criteria
-- share extension is real and premium
-- App Intents and shortcuts are discoverable and useful
-- all major external entry points feel canonically aligned
+- command and recall are coherent everywhere
+- the app feels more like an external brain than a set of screens
+- cross-surface handoff is calm and obvious
 ## Validation
 - build
-- targeted extension / intent / routing tests
+- targeted cross-surface routing / recall tests
 - full AmbitionsTests
 - targeted UI tests
 ## Completion Rule
-Complete only when external creation and routing feel like first-class product behavior.
-
-## Completion Note
-Completed with a real Share Extension target and premium intake UX, a shared external creation queue/import path that feeds canonical capture state, productized App Intents and App Shortcuts for quick capture, quick focus, quick plan, and quick recovery, and origin-preserving canonical routing/handoff for `share_extension` and `app_intent` entry. Automated validation is green: `xcodegen generate`, native build, focused extension/intent/routing tests (`47`), full `AmbitionsTests` (`396`), and targeted UI tests for Plan inbox deep link, quick recovery/focus Today reentry, shell quick capture, and Profile trust labels. No deterministic app or test blocker remains. Share Sheet presentation, Share Extension intake UX on real device/simulator where available, App Shortcuts discoverability, Quick Capture/Focus/Plan/Recovery shortcut OS presentation, Spotlight/Search landing where supported, external-create-to-app-shell handoff, and origin/provenance behavior from `share_extension` and `app_intent` remain release/platform checklist review items.
+Complete only when command and recall meaningfully raise the product’s “external brain” feel.
 
 ---

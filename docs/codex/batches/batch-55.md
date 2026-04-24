@@ -1,62 +1,49 @@
-﻿# Batch 55 - Front-End Transformation 16 / External surfaces I - widgets, Live Activities, notifications, and Focus Screenlet
+﻿# Batch 55 - Front-End Transformation 16 / External surfaces II - share extension, App Intents, shortcuts, routing
 ## Status
-Completed
+Completed for planning purposes
 ## Program
 Post-hardening Front-End Transformation Program
 ## Canon Source
 - [Ambitions_Full_Frontend_Transformation_Program.md](../../canon/Ambitions_Full_Frontend_Transformation_Program.md)
-- [Ambitions_State_Continuity_Mesh.md](../../canon/Ambitions_State_Continuity_Mesh.md)
 - [BATCH_REGISTRY.md](../BATCH_REGISTRY.md)
 
 ## Design Truth References
+- [shell-ia-spec.md](../../canon/design/shell-ia-spec.md)
 - [external-surface-spec.md](../../canon/design/external-surface-spec.md)
-- [motion-microinteraction-spec.md](../../canon/design/motion-microinteraction-spec.md)
-- [cross-device-surface-roles-spec.md](../../canon/design/cross-device-surface-roles-spec.md)
+- [trust-explainability-correction-spec.md](../../canon/design/trust-explainability-correction-spec.md)
 ## Start Gate
-- Start only after Batch 54 is complete and stable.
-- Batch 55 was active in the registry after Batch 54 closeout.
-- Batch 56 activates only after Batch 55 closeout.
+- Start only after Batch 38 is complete and stable.
+- Do not activate or implement this batch early; follow the registry and dependency order.
 ## Goal
-Fully implement the first external ambient surfaces as premium first-class product surfaces.
+Fully implement the creation, entry, and routing surfaces outside the main app shell.
 ## In Scope
-- widget redesign and implementation
-- lock screen widget hierarchy
-- home screen widget hierarchy
-- Live Activity redesign and implementation
-- Focus Screenlet implementation
-- notification content and action redesign
-- notification landing logic refinement
-- widget-to-app and activity-to-app shell-aware transitions
-- calm ambient trust language
-- external motion and visual continuity with the main app
-- external state variants for Today, Focus, Goal, and Plan use cases
+- share extension full implementation
+- share extension intake UX
+- App Intents full productization
+- App Shortcuts and shortcut discoverability
+- Spotlight and search landing refinement where supported
+- deep-link and handoff surface polish
+- external-create-to-internal-shell path refinement
+- routing language and transition continuity
+- shortcut-driven quick recovery / quick focus / quick capture / quick plan flows
+- external truth and permissions education
 ## Deferred, Not Excluded
-- share extension
-- App Intents / shortcuts
-- future Watch / TV ambient surfaces
+- iPad / Mac / Watch / Apple TV implementations
 ## Dependency Rules
-- external surfaces must inherit canonical truth from the app
-- external surfaces must inherit the Batch 54 State Continuity Mesh contract
-- they must feel useful at glance depth
-- they must not use a different visual language from the main product
+- external entry points must land in canonical routes
+- share and shortcut flows should feel like the same OS as the main app
+- do not implement external affordances that create logic islands
 ## Exit Criteria
-- widgets, activities, notifications, and Focus Screenlet are real product surfaces
-- external landing behavior is coherent
-- ambient surfaces feel premium and useful
+- share extension is real and premium
+- App Intents and shortcuts are discoverable and useful
+- all major external entry points feel canonically aligned
 ## Validation
 - build
-- targeted widget / notification / live activity tests
+- targeted extension / intent / routing tests
 - full AmbitionsTests
-- manual simulator / platform surface audit as available
+- targeted UI tests
+- external-entry manual audit as available
 ## Completion Rule
-Complete only when the app's first external surfaces no longer feel conservative or half-shipped.
+Complete only when external creation and routing feel like first-class product behavior.
 
 ---
-
-## Closeout Notes
-- Implemented a canonical ambient external snapshot layer with Today, Focus, Goal, and Plan variants plus Now State Lease, Sync Health Strip language, and source-preserving origins.
-- Redesigned widgets for Home Screen and Lock Screen families using the shared snapshot contract.
-- Redesigned Live Activity and Dynamic Island content around bounded focus/execution continuity with stale-date behavior.
-- Refined notifications with calm action labels, continuity payload metadata, and canonical landing routes.
-- Preserved Batch 56 boundaries: no share extension implementation and no App Intents / shortcuts productization beyond existing navigation-only support.
-- Validation has passed with `xcodegen generate`, native simulator build, targeted external-surface tests, full `AmbitionsTests`, targeted launch-route UI tests, and the focused Focus Screenlet UI proof. App-side widget, notification, and Live Activity handoff routes are verified. Direct SpringBoard widget placement, Lock Screen widget rendering, notification banner / Notification Center UI, and Live Activity / Dynamic Island visual behavior are deferred to the release/platform checklist, so Batch 55 closeout is earned without claiming final platform review.

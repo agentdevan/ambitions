@@ -1,5 +1,13 @@
 # Ambitions Surgical Execution Plan
 
+## Post-Batch-60 Ambitions 2.0 Note
+
+As of 2026-04-24, the active post-Batch-60 Ambitions 2.0 canon includes calendar read/write, Apple-first sync, rich widget-like panels, full long-range Path Intelligence, and Accessibility Nutrition Facts.
+
+The dependency rule still holds: shared systems must precede external surfaces. Do not build widgets, Live Activities, App Intents expansion, or sync behavior before the required data model, Canonical Now State, Command Pipeline, and trust/export boundaries are verified or implemented by their owning batches.
+
+All phases and batches described below are complete for planning purposes. Use [Ambitions_2_0_Batch_Plan.md](Ambitions_2_0_Batch_Plan.md) for Batch 61 onward. Preserve the historical execution plan below for prior-wave continuity.
+
 ## Status
 
 Ambitions 1.0 foundation work exists already and is complete through registry Batch 18. That history remains intact in `docs/codex/BATCH_REGISTRY.md`.
