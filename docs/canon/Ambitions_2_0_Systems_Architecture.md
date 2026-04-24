@@ -37,12 +37,14 @@ This document defines the consolidated Ambitions 2.0 systems. Product surfaces c
 ## Recommendation Explanation Model
 
 - Purpose: Explain why an action, plan change, recovery, or path recommendation exists.
-- Owned concepts: why this, why changed, evidence, assumption, memory, calendar-derived context, uncertainty, user correction.
+- Owned concepts: why this, why now, why changed, why scheduled, why deferred, why recovered, why prioritized, why displaced, why routed, why goal/plan changed, why context lens, why calendar-aware, why believable/not believable, evidence, assumption, memory, calendar-derived context, priority/urgency/consequence/effort tradeoffs, deadline, capacity, path, deliverable, scope change, uncertainty, and user correction.
 - Consumed by: Today panels, Goal Detail, Plan prompts, Reviews, You trust surfaces.
 - Dependencies: Memory / Event Ledger, Reality Model, Path Intelligence, Command Pipeline.
 - Must not be duplicated: screen-specific rationale strings that invent their own logic.
-- Ambitions 2.0 scope: reusable explanation object and `Why This` / `Why Changed` surfaces.
+- Ambitions 2.0 scope: reusable explanation object and future `Why This` / `Why Changed` surfaces.
 - Later scope: deeper source audit when retrieval-backed sources expand.
+- Batch 66 implementation status: The shared value-model foundation exists as `RecommendationExplanation` with explanation/evidence/correction taxonomies, assumptions, uncertainty, related goal/capture/plan/review/Event Ledger ids, local-only/privacy metadata, calendar-derived/context-lens/priority/deadline/goal-scope markers, Event Ledger evidence helpers, and a narrow adapter from existing goal explainability state. It does not implement full explanation sheets, Priority Reality Model scoring, Context Lens runtime behavior, Commitment Capture classification, calendar behavior, recommendation history persistence, or Living Goal Container UI.
+- Future batches must use this model while implementing the Priority Reality Model, Context Lens, Commitment Capture, Living Goal Containers, and the obvious destination for every user-created item. Those systems should provide the evidence; the explanation model should describe it without becoming a parallel planner or classifier.
 
 ## Memory / Event Ledger
 
