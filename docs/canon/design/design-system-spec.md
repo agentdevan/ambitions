@@ -276,3 +276,11 @@ Semantic state must use text and icon support in addition to color. Batch 63 inc
 - minimum comfortable touch targets
 - contrast must remain strong in both modes
 - color cannot be the only meaning carrier
+
+## Batch 64 Accessibility Nutrition Note
+
+Batch 64 adds the internal Accessibility Nutrition checklist model in `Sources/Accessibility/AccessibilityNutrition.swift`. Future surface batches should use the checklist categories when recording audits for screens, sheets, rich panels, widgets, and external entry points.
+
+Rich panels may expose accessibility verification readiness through semantic state, text, icon, label, value, and hint support. They must not present verified accessibility support to users until a screen-level audit records current evidence and Batch 85 promotes the relevant claim.
+
+Batch 85 owns the final user-facing `You -> Accessibility` summary. It should consume verified, partially supported, unverified, and not-applicable states from the checklist/audit evidence rather than inventing new claim categories.

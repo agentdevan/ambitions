@@ -42,7 +42,7 @@ Use [../canon/Ambitions_2_0_Batch_Plan.md](../canon/Ambitions_2_0_Batch_Plan.md)
 
 ## Active Queue
 
-Current wave status: Ambitions 2.0 post-Batch-60 canon is adopted. Batch 62 is active. Batches 63-86 remain queued.
+Current wave status: Ambitions 2.0 post-Batch-60 canon is adopted. Batch 64 is active. Batches 61-63 are complete for planning purposes; Batches 65-86 remain queued.
 
 | Batch | Name | Status | Notes |
 | --- | --- | --- | --- |
@@ -94,9 +94,9 @@ These rows are the active planning state for the new post-Batch-60 Ambitions 2.0
 | --- | --- | --- | --- |
 | 60 | Release-candidate polish batch | Completed | Marked complete for planning by explicit user instruction on 2026-04-24; existing repo docs did not independently verify implementation details during this docs-only canon update. |
 | 61 | Repo Truth and Ambitions 2.0 Capability Matrix | Completed | Repo truth and capability matrix verification completed enough to allow Batch 62 shell IA work by explicit user direction. |
-| 62 | Ambitions 2.0 Shell IA | Active | Implement the locked Today / Goals / Capture / Plan / You shell; do not mark complete until explicit closeout decision. |
-| 63 | Rich Panel Design System | Queued | New Ambitions 2.0 batch; do not start until prior dependencies are complete. |
-| 64 | Accessibility Nutrition Layer | Queued | New Ambitions 2.0 batch; do not start until prior dependencies are complete. |
+| 62 | Ambitions 2.0 Shell IA | Completed | Locked Today / Goals / Capture / Plan / You shell implemented per current verified state; deeper 2.0 surface work remains deferred to owning batches. |
+| 63 | Rich Panel Design System | Completed | Ambitions 2.0 rich panel design-system foundation added with semantic state/accessibility hooks per current verified state; broad surface redesign remains deferred. |
+| 64 | Accessibility Nutrition Layer | Active | Establish internal accessibility nutrition checklist, screen audit template, code-backed model/tests where practical, and Batch 85 handoff criteria without publishing user-facing claims. |
 | 65 | Memory / Event Ledger Foundation | Queued | New Ambitions 2.0 batch; do not start until prior dependencies are complete. |
 | 66 | Recommendation Explanation Model | Queued | New Ambitions 2.0 batch; do not start until prior dependencies are complete. |
 | 67 | Canonical Now State | Queued | New Ambitions 2.0 batch; do not start until prior dependencies are complete. |
