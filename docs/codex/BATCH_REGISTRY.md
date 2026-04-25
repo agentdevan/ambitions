@@ -42,7 +42,7 @@ Use [../canon/Ambitions_2_0_Batch_Plan.md](../canon/Ambitions_2_0_Batch_Plan.md)
 
 ## Active Queue
 
-Current wave status: Ambitions 2.0 post-Batch-60 canon is adopted. Batches 61-70 are complete for planning purposes; Batches 71-86 remain queued.
+Current wave status: Ambitions 2.0 post-Batch-60 canon is adopted. Batches 61-71 are complete for planning purposes; Batches 72-86 remain queued.
 
 | Batch | Name | Status | Notes |
 | --- | --- | --- | --- |
@@ -103,7 +103,7 @@ These rows are the active planning state for the new post-Batch-60 Ambitions 2.0
 | 68 | Command Pipeline Foundation | Completed | Shared command model, validation states, execution results, conservative local executor, quick-capture command execution, route-only open-destination result, Event Ledger emission for executed quick captures only, and NowAction mapping helpers landed without App Intents productization, widgets, Live Activities, Capture 2.0, Plan 2.0, calendar behavior, sync/export, UI redesign, full Priority Reality scoring, or runtime Context Lens switching. |
 | 69 | Capture 2.0 Core | Completed | Capture 2.0 domain taxonomy, conservative classification, Plan-seed representation, goal attachment, waiting/optional/archive routing, truthful Event Ledger emission, command alignment, and calm Capture tab workflow landed without Plan 2.0 scheduling, calendar behavior, Goals 2.0, Today 2.0, full Priority Reality scoring, runtime Context Lens switching, widgets, App Intents productization, sync/export, or Path Intelligence UI. |
 | 70 | Reality Model and Calendar Read/Write | Completed | Reality Model domain contracts, deterministic no-permission/calendar-aware projection, Plan-owned calendar read permission hook, local-only derived busy/open-window support, confirmed calendar block-write boundary, Event Ledger/explanation/Now/Command integration, and focused tests landed without Plan 2.0 UI, automatic scheduling, Today/Goals/Capture/You redesign, sync/export, widgets, Live Activities, App Intents productization, Path Intelligence UI, onboarding, or Reviews. |
-| 71 | Believability, Capacity, and Goal Health | Queued | New Ambitions 2.0 batch; do not start until prior dependencies are complete. |
+| 71 | Believability, Capacity, and Goal Health | Completed | Shared deterministic believability/goal-health taxonomy, assessment models, capacity/deadline/context/priority reality projector, Capture/Goal/Plan-seed assessment support, explanation generation, Event Ledger reference safety, and side-effect-free Now/Command adapters landed without Goals 2.0, Goal Detail 2.0, Plan 2.0, Today 2.0, automatic scheduling, calendar writes, calendar permission prompts, full recovery, widgets, App Intents productization, sync/export, Path Intelligence UI, onboarding, or Reviews. |
 | 72 | Execution Resilience Stack | Queued | New Ambitions 2.0 batch; do not start until prior dependencies are complete. |
 | 73 | Today 2.0 Rich Execution Center | Queued | New Ambitions 2.0 batch; do not start until prior dependencies are complete. |
 | 74 | Goals and Goal Detail 2.0 | Queued | New Ambitions 2.0 batch; do not start until prior dependencies are complete. |
