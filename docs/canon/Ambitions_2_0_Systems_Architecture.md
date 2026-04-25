@@ -68,6 +68,8 @@ This document defines the consolidated Ambitions 2.0 systems. Product surfaces c
 - Must not be duplicated: separate command paths for widgets, intents, or shortcuts.
 - Ambitions 2.0 scope: stable local command execution and external-safe command descriptors.
 - Later scope: broader automation only after sync and conflict rules hold.
+- Batch 68 implementation status: The shared foundation exists as `AmbitionsCommand` with command id/kind/source/target/payload/validation/execution/result timing/actor/relation/privacy/schema fields, plus `AmbitionsCommandKind`, `AmbitionsCommandSource`, target/payload/priority-hint models, validation states, execution statuses, and a `NowAction` mapping helper. `AmbitionsCommandExecutor` validates commands deterministically, executes open-destination as route-only results, executes quick capture through the existing capture service when available, and emits Event Ledger entries only for actually executed quick-capture commands. Unsupported future commands return explicit unsupported/blocked results without fake state changes or ledger history.
+- Batch 68 does not productize App Intents, widgets, Live Activities, notifications, Capture 2.0, Plan 2.0, scheduling, calendar behavior, runtime Context Lens switching, full Priority Reality scoring, recovery stack execution, or broad UI action rewiring. Future batches should consume this foundation rather than adding parallel command paths.
 
 ## Path Intelligence Layer
 

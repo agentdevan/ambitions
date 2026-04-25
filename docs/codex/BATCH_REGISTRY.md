@@ -42,7 +42,7 @@ Use [../canon/Ambitions_2_0_Batch_Plan.md](../canon/Ambitions_2_0_Batch_Plan.md)
 
 ## Active Queue
 
-Current wave status: Ambitions 2.0 post-Batch-60 canon is adopted. Batches 61-67 are complete for planning purposes; Batches 68-86 remain queued.
+Current wave status: Ambitions 2.0 post-Batch-60 canon is adopted. Batches 61-68 are complete for planning purposes; Batches 69-86 remain queued.
 
 | Batch | Name | Status | Notes |
 | --- | --- | --- | --- |
@@ -100,7 +100,7 @@ These rows are the active planning state for the new post-Batch-60 Ambitions 2.0
 | 65 | Memory / Event Ledger Foundation | Completed | Canonical local Event Ledger domain model, taxonomy, repository boundary, SwiftData/in-memory persistence, adapter helpers for existing memory fragments, and focused tests landed without surface redesign, sync, or calendar behavior. |
 | 66 | Recommendation Explanation Model | Completed | Shared recommendation explanation contract, taxonomy, assumption/correction support, Event Ledger evidence references, and goal explainability adapter tests landed without explanation sheets, surface redesign, priority engine, context lens runtime, calendar behavior, or Capture 2.0. |
 | 67 | Canonical Now State | Completed | Canonical Now State domain contract, context lens taxonomy, deterministic local projection service, Event Ledger/Recommendation Explanation references, and focused tests landed without Today redesign, Context Lens UI, calendar behavior, widgets, Live Activities, App Intents productization, Capture 2.0, Plan 2.0, sync/export, or priority-engine implementation. |
-| 68 | Command Pipeline Foundation | Queued | New Ambitions 2.0 batch; do not start until prior dependencies are complete. |
+| 68 | Command Pipeline Foundation | Completed | Shared command model, validation states, execution results, conservative local executor, quick-capture command execution, route-only open-destination result, Event Ledger emission for executed quick captures only, and NowAction mapping helpers landed without App Intents productization, widgets, Live Activities, Capture 2.0, Plan 2.0, calendar behavior, sync/export, UI redesign, full Priority Reality scoring, or runtime Context Lens switching. |
 | 69 | Capture 2.0 Core | Queued | New Ambitions 2.0 batch; do not start until prior dependencies are complete. |
 | 70 | Reality Model and Calendar Read/Write | Queued | New Ambitions 2.0 batch; do not start until prior dependencies are complete. |
 | 71 | Believability, Capacity, and Goal Health | Queued | New Ambitions 2.0 batch; do not start until prior dependencies are complete. |
