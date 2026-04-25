@@ -41,12 +41,13 @@ This document defines the consolidated Ambitions 2.0 systems. Product surfaces c
 ## Execution Resilience Stack
 
 - Purpose: Turn disruption into recovery instead of shame.
-- Owned concepts: drift, missed work, split action, smaller version, reschedule, protect later, replan, review prompt.
+- Owned concepts: drift, missed work, slipped deadlines, overloaded days, no open window, blocked/waiting pressure removal, priority conflict, displaced lower-priority work, passive work deferral, split action, smaller version, reschedule representation, protect deadline work, replan/open destination prompt, review prompt.
 - Consumed by: Today, Plan, Goal Detail, Reviews, Command Pipeline.
-- Dependencies: Canonical Now State, Reality Model, Memory / Event Ledger.
+- Dependencies: Canonical Now State, Reality Model, Believability/Goal Health, Recommendation Explanation Model, Memory / Event Ledger, Command Pipeline.
 - Must not be duplicated: per-screen skip/delay/recovery rules.
 - Ambitions 2.0 scope: shared recovery decisions and surface-safe actions.
 - Later scope: more personalized recovery once enough verified memory exists.
+- Batch 72 implementation status: The shared foundation now exists as `ExecutionResilienceSnapshot`, `ExecutionResilienceAssessment`, `ExecutionRecoveryOption`, `ExecutionRecoveryStrategy`, `ExecutionDisruption`, `ExecutionDisruptionKind`, `ExecutionRecoveryStatus`, `ExecutionRecoveryReason`, `ExecutionRecoveryRecommendation`, `ExecutionResilienceInput`, `RecoveryTradeoff`, `DisplacedWorkSummary`, and `ProtectedWorkSummary`, with `ExecutionResilienceProjector` producing deterministic, side-effect-free recovery assessments from Goal Believability assessments/snapshots, Reality snapshots, Canonical Now State, Capture 2.0 models, Event Ledger references, Recommendation Explanations, and Command descriptors. It distinguishes deadline-bound high-consequence work from passive/flexible goals, blocked/waiting items, no-open-window commitments, calendar conflict markers, overloaded days, scope increases, and added deliverables. It can generate explanation objects and representational commands for recovery/open/waiting/split/delay paths, but unsupported recovery commands remain blocked or unsupported in the command executor without side effects. Batch 72 does not build Today 2.0, Plan 2.0, Goals/Goal Detail 2.0, Reviews, automatic scheduling, calendar writes, calendar permission prompts, widgets, Live Activities, App Intents productization, sync/export, Path Intelligence UI, onboarding, or You/Profile redesign.
 
 ## Recommendation Explanation Model
 
