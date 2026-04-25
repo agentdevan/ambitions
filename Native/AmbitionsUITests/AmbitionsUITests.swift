@@ -49,7 +49,9 @@ final class AmbitionsUITests: XCTestCase {
         app.buttons["onboarding.next-button"].tap()
         let captureChoice = app.buttons["onboarding.choice.capture_first"]
         if captureChoice.waitForExistence(timeout: 2) == false {
-            app.swipeUp()
+            let start = app.coordinate(withNormalizedOffset: CGVector(dx: 0.5, dy: 0.72))
+            let end = app.coordinate(withNormalizedOffset: CGVector(dx: 0.5, dy: 0.52))
+            start.press(forDuration: 0.01, thenDragTo: end)
         }
         XCTAssertTrue(captureChoice.waitForExistence(timeout: 10))
         captureChoice.tap()
@@ -394,9 +396,7 @@ final class AmbitionsUITests: XCTestCase {
 
         XCTAssertTrue(app.descendants(matching: .any)["captures.screen"].waitForExistence(timeout: 10))
         XCTAssertTrue(scrollUntilStaticTextExists("Review the notification handoff copy before the next hardening pass.", in: app))
-        let captureCard = app.descendants(matching: .any)["captures.card.preview-capture-2"]
-        XCTAssertTrue(captureCard.waitForExistence(timeout: 10))
-        tapCaptureNewGoal(in: app, captureCard: captureCard)
+        tapFirstHittableButton(identifier: "captures.new-goal.preview-capture-2", named: "New goal", in: app, timeout: 30)
 
         XCTAssertTrue(waitForCreateGoalComposer(in: app))
         let titleField = goalTitleInput(in: app)
@@ -644,7 +644,7 @@ final class AmbitionsUITests: XCTestCase {
         let cardScopedButtons = captureCard.descendants(matching: .button)
             .matching(NSPredicate(format: "label == %@", "New goal"))
             .allElementsBoundByIndex
-        if let control = cardScopedButtons.first(where: { $0.waitForExistence(timeout: 2) && $0.isEnabled }) {
+        if let control = cardScopedButtons.first(where: { $0.waitForExistence(timeout: 2) && $0.isEnabled && $0.isHittable }) {
             control.tap()
             return
         }
@@ -654,12 +654,32 @@ final class AmbitionsUITests: XCTestCase {
             button.waitForExistence(timeout: 2)
                 && button.identifier == "captures.card.preview-capture-2"
                 && button.isEnabled
+                && button.isHittable
         }) {
             control.tap()
             return
         }
 
         captureCard.coordinate(withNormalizedOffset: CGVector(dx: 0.30, dy: 0.82)).tap()
+    }
+
+    private func tapFirstHittableButton(identifier: String? = nil, named label: String, in app: XCUIApplication, timeout: TimeInterval = 10) {
+        let deadline = Date().addingTimeInterval(timeout)
+        while Date() < deadline {
+            let controls: [XCUIElement]
+            if let identifier {
+                controls = app.buttons.matching(identifier: identifier).allElementsBoundByIndex
+                    + app.buttons.matching(NSPredicate(format: "label == %@", label)).allElementsBoundByIndex
+            } else {
+                controls = app.buttons.matching(NSPredicate(format: "label == %@", label)).allElementsBoundByIndex
+            }
+            if let control = controls.first(where: { $0.waitForExistence(timeout: 1) && $0.isEnabled && $0.isHittable }) {
+                control.tap()
+                return
+            }
+            app.swipeUp()
+        }
+        XCTFail("Could not find hittable button named \(label).")
     }
 
     private func waitForClarificationCard(in app: XCUIApplication, timeout: TimeInterval = 12) -> Bool {

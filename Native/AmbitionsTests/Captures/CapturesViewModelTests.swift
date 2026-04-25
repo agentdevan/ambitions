@@ -37,7 +37,57 @@ final class CapturesViewModelTests: XCTestCase {
         stored = await captureService.capture(id: "capture-2")
         XCTAssertEqual(stored?.status, .seed)
         XCTAssertEqual(stored?.triage?.destination, .saveAsSeed)
+        XCTAssertEqual(stored?.kind, .goalSeed)
+        XCTAssertEqual(stored?.route, .captureInbox)
         XCTAssertEqual(viewModel.actionMessage?.title, "Saved as seed")
+    }
+
+    func testCaptureRouteActionsCallServiceAndRefresh() async {
+        let captureService = MutableCaptureService(captures: [
+            capture(id: "plan", rawText: "Create spreadsheet"),
+            capture(id: "waiting", rawText: "Waiting on invoice"),
+            capture(id: "someday", rawText: "Learn piano"),
+            capture(id: "deliverable", rawText: "Add another song")
+        ])
+        let goalsService = StaticGoalsService(items: [])
+        let viewModel = CapturesViewModel()
+
+        await viewModel.routeToPlan(id: "plan", captureService: captureService, goalsService: goalsService, now: fixedNow)
+        var stored = await captureService.capture(id: "plan")
+        XCTAssertEqual(stored?.kind, .oneTimeCommitment)
+        XCTAssertEqual(stored?.route, .planSeed)
+        XCTAssertEqual(stored?.status, .scheduled)
+        XCTAssertEqual(viewModel.actionMessage?.title, "Routed to Plan seed")
+
+        await viewModel.markWaiting(id: "waiting", captureService: captureService, goalsService: goalsService, now: fixedNow)
+        stored = await captureService.capture(id: "waiting")
+        XCTAssertEqual(stored?.kind, .waitingItem)
+        XCTAssertEqual(stored?.route, .waiting)
+        XCTAssertEqual(stored?.status, .waiting)
+
+        await viewModel.markOptionalSomeday(id: "someday", captureService: captureService, goalsService: goalsService, now: fixedNow)
+        stored = await captureService.capture(id: "someday")
+        XCTAssertEqual(stored?.kind, .optionalSomeday)
+        XCTAssertEqual(stored?.route, .optionalSomeday)
+        XCTAssertEqual(stored?.status, .optionalSomeday)
+
+        await viewModel.markDeliverableSeed(id: "deliverable", text: "Add another song", captureService: captureService, goalsService: goalsService, now: fixedNow)
+        stored = await captureService.capture(id: "deliverable")
+        XCTAssertEqual(stored?.kind, .deliverableSeed)
+        XCTAssertEqual(stored?.route, .deliverableSeed)
+        XCTAssertEqual(stored?.status, .seed)
+    }
+
+    func testQuickCapturePreservesInputWhenCreateFails() async {
+        let captureService = MutableCaptureService(captures: [], shouldThrow: true)
+        let goalsService = StaticGoalsService(items: [])
+        let viewModel = CapturesViewModel()
+        viewModel.draftText = "  Keep this thought  "
+
+        await viewModel.createQuickCapture(captureService: captureService, goalsService: goalsService, now: fixedNow)
+
+        XCTAssertEqual(viewModel.draftText, "  Keep this thought  ")
+        XCTAssertEqual(viewModel.draftError, "Test capture failure")
     }
 
     func testAttachReturnsGoalRouteTarget() async {
@@ -154,9 +204,35 @@ private actor MutableCaptureService: CaptureServicing {
     }
 
     func createCapture(_ request: CreateCaptureRequest, now: Date) async throws -> Capture {
-        _ = request
-        _ = now
-        throw TestCaptureError.failure
+        if shouldThrow { throw TestCaptureError.failure }
+        let timestamp = DomainTimestamp.string(from: now)
+        let capture = Capture(
+            id: "capture-created-\(captures.count)",
+            createdAt: timestamp,
+            updatedAt: timestamp,
+            rawText: request.rawText.trimmingCharacters(in: .whitespacesAndNewlines),
+            sourceType: request.sourceType,
+            status: .needsTriage,
+            linkedGoalID: request.linkedGoalID,
+            triage: request.triage,
+            revisitAfter: request.revisitAfter,
+            kind: request.kind ?? .raw,
+            route: request.route ?? .captureInbox,
+            triageStatus: request.triageStatus ?? .needsTriage,
+            commitmentKind: request.commitmentKind,
+            deadlineText: request.deadlineText,
+            deadlineKind: request.deadlineKind,
+            contextLensHint: request.contextLensHint,
+            priorityHints: request.priorityHints,
+            goalRelationship: request.goalRelationship,
+            deliverableHint: request.deliverableHint,
+            scopeItemHint: request.scopeItemHint,
+            waitingMetadata: request.waitingMetadata,
+            assumptionSummary: request.assumptionSummary,
+            recommendationExplanationIDs: request.recommendationExplanationIDs
+        )
+        captures[capture.id] = capture
+        return capture
     }
 
     func listCaptures() async throws -> [Capture] {
@@ -175,10 +251,90 @@ private actor MutableCaptureService: CaptureServicing {
             status: request.status,
             linkedGoalID: existing.linkedGoalID,
             triage: request.triage,
-            revisitAfter: request.revisitAfter
+            revisitAfter: request.revisitAfter,
+            kind: request.kind ?? existing.kind,
+            route: request.route ?? existing.route,
+            triageStatus: request.triageStatus ?? existing.triageStatus,
+            commitmentKind: request.commitmentKind ?? existing.commitmentKind,
+            deadlineText: request.deadlineText ?? existing.deadlineText,
+            deadlineKind: request.deadlineKind ?? existing.deadlineKind,
+            contextLensHint: request.contextLensHint ?? existing.contextLensHint,
+            priorityHints: request.priorityHints ?? existing.priorityHints,
+            goalRelationship: request.goalRelationship ?? existing.goalRelationship,
+            deliverableHint: request.deliverableHint ?? existing.deliverableHint,
+            scopeItemHint: request.scopeItemHint ?? existing.scopeItemHint,
+            waitingMetadata: request.waitingMetadata ?? existing.waitingMetadata,
+            assumptionSummary: request.assumptionSummary ?? existing.assumptionSummary,
+            correctionActions: request.correctionActions ?? existing.correctionActions,
+            recommendationExplanationIDs: request.recommendationExplanationIDs ?? existing.recommendationExplanationIDs
         )
         captures[request.id] = updated
         return updated
+    }
+
+    func updateCaptureRoute(_ request: CaptureRouteUpdateRequest, now: Date) async throws -> Capture? {
+        if shouldThrow { throw TestCaptureError.failure }
+        guard let existing = captures[request.id] else { return nil }
+        let updated = Capture(
+            id: existing.id,
+            createdAt: existing.createdAt,
+            updatedAt: DomainTimestamp.string(from: now),
+            rawText: existing.rawText,
+            sourceType: existing.sourceType,
+            status: status(for: request.route),
+            linkedGoalID: request.goalRelationship?.goalID ?? existing.linkedGoalID,
+            triage: CaptureTriageMetadata(destination: request.route.triageDestination, hint: request.assumptionSummary),
+            revisitAfter: existing.revisitAfter,
+            kind: request.kind,
+            route: request.route,
+            triageStatus: request.userCorrection ? .userCorrected : .assumedRoute,
+            commitmentKind: commitmentKind(for: request.kind),
+            deadlineText: request.deadlineText ?? existing.deadlineText,
+            deadlineKind: request.deadlineText == nil ? existing.deadlineKind : .hard,
+            contextLensHint: request.contextLensHint ?? existing.contextLensHint,
+            priorityHints: request.priorityHints ?? existing.priorityHints,
+            goalRelationship: request.goalRelationship ?? existing.goalRelationship,
+            deliverableHint: request.deliverableHint ?? existing.deliverableHint,
+            scopeItemHint: request.scopeItemHint ?? existing.scopeItemHint,
+            waitingMetadata: request.waitingMetadata ?? existing.waitingMetadata,
+            assumptionSummary: request.assumptionSummary ?? existing.assumptionSummary,
+            correctionActions: existing.correctionActions,
+            recommendationExplanationIDs: existing.recommendationExplanationIDs
+        )
+        captures[request.id] = updated
+        return updated
+    }
+
+    func markAsOneTimeCommitment(id: String, deadlineText: String?, contextLensHint: NowContextLens?, now: Date) async throws -> Capture? {
+        try await updateCaptureRoute(CaptureRouteUpdateRequest(id: id, kind: .oneTimeCommitment, route: .planSeed, deadlineText: deadlineText, contextLensHint: contextLensHint), now: now)
+    }
+
+    func markAsDeadlineTask(id: String, deadlineText: String, contextLensHint: NowContextLens?, now: Date) async throws -> Capture? {
+        try await updateCaptureRoute(CaptureRouteUpdateRequest(id: id, kind: .deadlineTask, route: .planSeed, deadlineText: deadlineText, contextLensHint: contextLensHint), now: now)
+    }
+
+    func markAsGoalSeed(id: String, now: Date) async throws -> Capture? {
+        try await updateCaptureRoute(CaptureRouteUpdateRequest(id: id, kind: .goalSeed, route: .goalSeed), now: now)
+    }
+
+    func markAsGoalSupportingTask(id: String, goalID: String?, now: Date) async throws -> Capture? {
+        try await updateCaptureRoute(CaptureRouteUpdateRequest(id: id, kind: .goalSupportingTask, route: .goalAttachment, goalRelationship: CaptureGoalRelationship(goalID: goalID, relationshipKind: .nextAction)), now: now)
+    }
+
+    func markAsDeliverableSeed(id: String, deliverableHint: String?, now: Date) async throws -> Capture? {
+        try await updateCaptureRoute(CaptureRouteUpdateRequest(id: id, kind: .deliverableSeed, route: .deliverableSeed, deliverableHint: deliverableHint), now: now)
+    }
+
+    func markAsWaiting(id: String, waitingMetadata: CaptureWaitingMetadata?, now: Date) async throws -> Capture? {
+        try await updateCaptureRoute(CaptureRouteUpdateRequest(id: id, kind: .waitingItem, route: .waiting, waitingMetadata: waitingMetadata), now: now)
+    }
+
+    func markAsOptionalSomeday(id: String, now: Date) async throws -> Capture? {
+        try await updateCaptureRoute(CaptureRouteUpdateRequest(id: id, kind: .optionalSomeday, route: .optionalSomeday, priorityHints: CapturePriorityHints(optionalSomeday: true, passive: true)), now: now)
+    }
+
+    func routeToPlanSeed(id: String, now: Date) async throws -> Capture? {
+        try await updateCaptureRoute(CaptureRouteUpdateRequest(id: id, kind: .oneTimeCommitment, route: .planSeed), now: now)
     }
 
     func attachCaptureToGoal(_ request: AttachCaptureToGoalRequest, now: Date) async throws -> CaptureGoalBinding? {
@@ -216,10 +372,59 @@ private actor MutableCaptureService: CaptureServicing {
             status: .goalBound,
             linkedGoalID: goalID,
             triage: existing.triage,
-            revisitAfter: existing.revisitAfter
+            revisitAfter: existing.revisitAfter,
+            kind: .goalSupportingTask,
+            route: .goalAttachment,
+            triageStatus: .routed,
+            commitmentKind: .goalSupporting,
+            deadlineText: existing.deadlineText,
+            deadlineKind: existing.deadlineKind,
+            contextLensHint: existing.contextLensHint,
+            priorityHints: CapturePriorityHints(goalSupporting: true),
+            goalRelationship: CaptureGoalRelationship(goalID: goalID, relationshipKind: .nextAction),
+            deliverableHint: existing.deliverableHint,
+            scopeItemHint: existing.scopeItemHint,
+            waitingMetadata: existing.waitingMetadata,
+            assumptionSummary: existing.assumptionSummary,
+            correctionActions: existing.correctionActions,
+            recommendationExplanationIDs: existing.recommendationExplanationIDs
         )
         captures[id] = updated
         return updated
+    }
+
+    private func status(for route: CaptureRoute) -> CaptureStatus {
+        switch route {
+        case .captureInbox:
+            .actionable
+        case .planSeed:
+            .scheduled
+        case .goalSeed, .deliverableSeed:
+            .seed
+        case .goalAttachment:
+            .goalBound
+        case .waiting:
+            .waiting
+        case .optionalSomeday:
+            .optionalSomeday
+        case .archive:
+            .archived
+        }
+    }
+
+    private func commitmentKind(for kind: CaptureKind) -> NowCommitmentKind? {
+        switch kind {
+        case .oneTimeCommitment, .deadlineTask:
+            .oneTime
+        case .goalSupportingTask:
+            .goalSupporting
+        case .waitingItem:
+            .waiting
+        case .optionalSomeday:
+            .optionalSomeday
+        case .raw, .goalSeed, .deliverableSeed, .archiveItem:
+            nil
+        }
     }
 }
 

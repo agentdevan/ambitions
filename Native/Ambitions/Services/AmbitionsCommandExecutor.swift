@@ -66,6 +66,20 @@ struct AmbitionsCommandExecutor: CommandExecuting {
             )
         case .quickCapture:
             return await executeQuickCapture(command, context: context)
+        case .routeCommitment:
+            return await executeRouteCommitment(command, context: context)
+        case .markWaiting:
+            return await executeCaptureRoute(command, context: context, kind: .waitingItem, route: .waiting)
+        case .archiveItem:
+            return await executeArchive(command, context: context)
+        case .attachToGoal:
+            return await executeAttachToGoal(command, context: context)
+        case .setDeadline:
+            return await executeDeadlineChange(command, context: context)
+        case .setPriority, .setUrgency:
+            return await executePriorityChange(command, context: context)
+        case .createPlanItem, .scheduleItem:
+            return await executePlanSeedRepresentation(command, context: context)
         default:
             return AmbitionsCommandExecutionResult(
                 status: .unsupported,
@@ -105,7 +119,14 @@ private extension AmbitionsCommandExecutor {
                     sourceType: captureSourceType(for: command.source),
                     linkedGoalID: command.target.goalID,
                     triage: nil,
-                    revisitAfter: nil
+                    revisitAfter: nil,
+                    kind: captureKind(for: command.payload.commitmentKind),
+                    route: route(for: command.payload.destinationRoute),
+                    commitmentKind: command.payload.commitmentKind,
+                    deadlineText: command.payload.deadlineText ?? command.payload.dueText,
+                    deadlineKind: command.payload.deadlineText == nil && command.payload.dueText == nil ? .none : .hard,
+                    contextLensHint: command.payload.contextLens,
+                    priorityHints: CapturePriorityHints(commandHints: command.payload.priorityHints)
                 ),
                 now: context.now
             )
@@ -151,6 +172,169 @@ private extension AmbitionsCommandExecutor {
                 metadata: ["error": String(describing: error)]
             )
         }
+    }
+
+    func executeRouteCommitment(
+        _ command: AmbitionsCommand,
+        context: CommandExecutionContext
+    ) async -> AmbitionsCommandExecutionResult {
+        guard let captureService else {
+            return AmbitionsCommandExecutionResult(status: .blocked, summary: "Commitment routing is unavailable without capture persistence.", target: command.target, metadata: ["blockedBy": "missing_capture_service"])
+        }
+
+        do {
+            let capture: Capture?
+            if let captureID = command.target.captureID {
+                capture = try await captureService.markAsOneTimeCommitment(
+                    id: captureID,
+                    deadlineText: command.payload.deadlineText ?? command.payload.dueText,
+                    contextLensHint: command.payload.contextLens,
+                    now: context.now
+                )
+            } else if let text = command.payload.primaryText {
+                capture = try await captureService.createCapture(
+                    CreateCaptureRequest(
+                        rawText: text,
+                        sourceType: captureSourceType(for: command.source),
+                        kind: .oneTimeCommitment,
+                        route: .planSeed,
+                        commitmentKind: .oneTime,
+                        deadlineText: command.payload.deadlineText ?? command.payload.dueText,
+                        deadlineKind: command.payload.deadlineText == nil && command.payload.dueText == nil ? .none : .hard,
+                        contextLensHint: command.payload.contextLens,
+                        priorityHints: CapturePriorityHints(commandHints: command.payload.priorityHints),
+                        assumptionSummary: "I treated this as a one-time commitment."
+                    ),
+                    now: context.now
+                )
+            } else {
+                return blockedResult(for: .invalid, command: command)
+            }
+
+            guard let capture else {
+                return AmbitionsCommandExecutionResult(status: .blocked, summary: "Capture not found for commitment routing.", target: command.target, metadata: ["blockedBy": "missing_capture"])
+            }
+            return captureResult(command: command, capture: capture, summary: "Commitment represented as a Plan seed. Scheduling remains deferred to Plan.")
+        } catch {
+            return AmbitionsCommandExecutionResult(status: .failed, summary: error.localizedDescription, target: command.target, metadata: ["error": String(describing: error)])
+        }
+    }
+
+    func executeCaptureRoute(
+        _ command: AmbitionsCommand,
+        context: CommandExecutionContext,
+        kind: CaptureKind,
+        route: CaptureRoute
+    ) async -> AmbitionsCommandExecutionResult {
+        guard let captureService else {
+            return AmbitionsCommandExecutionResult(status: .blocked, summary: "Capture routing is unavailable without capture persistence.", target: command.target, metadata: ["blockedBy": "missing_capture_service"])
+        }
+        guard let captureID = command.target.captureID else {
+            return blockedResult(for: .needsMissingTarget, command: command)
+        }
+
+        do {
+            let capture = try await captureService.updateCaptureRoute(
+                CaptureRouteUpdateRequest(
+                    id: captureID,
+                    kind: kind,
+                    route: route,
+                    deadlineText: command.payload.deadlineText ?? command.payload.dueText,
+                    contextLensHint: command.payload.contextLens,
+                    priorityHints: CapturePriorityHints(commandHints: command.payload.priorityHints),
+                    waitingMetadata: route == .waiting ? CaptureWaitingMetadata(blockedBy: command.payload.notes, waitingOn: command.payload.title) : nil
+                ),
+                now: context.now
+            )
+            guard let capture else {
+                return AmbitionsCommandExecutionResult(status: .blocked, summary: "Capture not found for routing.", target: command.target, metadata: ["blockedBy": "missing_capture"])
+            }
+            return captureResult(command: command, capture: capture, summary: "Capture route updated.")
+        } catch {
+            return AmbitionsCommandExecutionResult(status: .failed, summary: error.localizedDescription, target: command.target, metadata: ["error": String(describing: error)])
+        }
+    }
+
+    func executeArchive(_ command: AmbitionsCommand, context: CommandExecutionContext) async -> AmbitionsCommandExecutionResult {
+        guard let captureService else {
+            return AmbitionsCommandExecutionResult(status: .blocked, summary: "Archive is unavailable without capture persistence.", target: command.target, metadata: ["blockedBy": "missing_capture_service"])
+        }
+        guard let captureID = command.target.captureID else {
+            return blockedResult(for: .needsMissingTarget, command: command)
+        }
+
+        do {
+            guard let capture = try await captureService.markCaptureArchived(id: captureID, now: context.now) else {
+                return AmbitionsCommandExecutionResult(status: .blocked, summary: "Capture not found for archive.", target: command.target, metadata: ["blockedBy": "missing_capture"])
+            }
+            return captureResult(command: command, capture: capture, summary: "Capture archived.")
+        } catch {
+            return AmbitionsCommandExecutionResult(status: .failed, summary: error.localizedDescription, target: command.target, metadata: ["error": String(describing: error)])
+        }
+    }
+
+    func executeAttachToGoal(_ command: AmbitionsCommand, context: CommandExecutionContext) async -> AmbitionsCommandExecutionResult {
+        guard let captureService else {
+            return AmbitionsCommandExecutionResult(status: .blocked, summary: "Goal attachment is unavailable without capture persistence.", target: command.target, metadata: ["blockedBy": "missing_capture_service"])
+        }
+        guard let captureID = command.target.captureID, let goalID = command.target.goalID else {
+            return blockedResult(for: .needsMissingTarget, command: command)
+        }
+
+        do {
+            guard let binding = try await captureService.attachCaptureToGoal(AttachCaptureToGoalRequest(captureID: captureID, goalID: goalID), now: context.now) else {
+                return AmbitionsCommandExecutionResult(status: .blocked, summary: "Capture not found for goal attachment.", target: command.target, metadata: ["blockedBy": "missing_capture"])
+            }
+            return captureResult(command: command, capture: binding.capture, summary: "Capture attached to goal.")
+        } catch {
+            return AmbitionsCommandExecutionResult(status: .failed, summary: error.localizedDescription, target: command.target, metadata: ["error": String(describing: error)])
+        }
+    }
+
+    func executeDeadlineChange(_ command: AmbitionsCommand, context: CommandExecutionContext) async -> AmbitionsCommandExecutionResult {
+        guard command.target.captureID != nil else {
+            return AmbitionsCommandExecutionResult(status: .unsupported, summary: "Deadline changes are executable for captures only in this build.", target: command.target, metadata: ["blockedBy": "owning_system_not_implemented"])
+        }
+        return await executeCaptureRoute(command, context: context, kind: command.payload.commitmentKind == .oneTime ? .deadlineTask : .raw, route: .planSeed)
+    }
+
+    func executePriorityChange(_ command: AmbitionsCommand, context: CommandExecutionContext) async -> AmbitionsCommandExecutionResult {
+        guard command.target.captureID != nil else {
+            return AmbitionsCommandExecutionResult(status: .unsupported, summary: "Priority changes are executable for captures only in this build.", target: command.target, metadata: ["blockedBy": "owning_system_not_implemented"])
+        }
+        return await executeCaptureRoute(command, context: context, kind: .raw, route: .captureInbox)
+    }
+
+    func executePlanSeedRepresentation(_ command: AmbitionsCommand, context: CommandExecutionContext) async -> AmbitionsCommandExecutionResult {
+        guard let captureService else {
+            return AmbitionsCommandExecutionResult(status: .blocked, summary: "Plan seed representation is unavailable without capture persistence.", target: command.target, metadata: ["blockedBy": "missing_capture_service"])
+        }
+        guard let captureID = command.target.captureID else {
+            return AmbitionsCommandExecutionResult(status: .unsupported, summary: "Creating new Plan items is represented through Capture 2.0 only when a capture target exists.", target: command.target, metadata: ["blockedBy": "plan_2_not_implemented"])
+        }
+        do {
+            guard let capture = try await captureService.routeToPlanSeed(id: captureID, now: context.now) else {
+                return AmbitionsCommandExecutionResult(status: .blocked, summary: "Capture not found for Plan seed routing.", target: command.target, metadata: ["blockedBy": "missing_capture"])
+            }
+            return captureResult(command: command, capture: capture, summary: "Capture represented as a Plan seed. Scheduling is not implemented in this batch.")
+        } catch {
+            return AmbitionsCommandExecutionResult(status: .failed, summary: error.localizedDescription, target: command.target, metadata: ["error": String(describing: error)])
+        }
+    }
+
+    func captureResult(command: AmbitionsCommand, capture: Capture, summary: String) -> AmbitionsCommandExecutionResult {
+        AmbitionsCommandExecutionResult(
+            status: .succeeded,
+            summary: summary,
+            route: .capturesInbox,
+            target: AmbitionsCommandTarget(goalID: capture.linkedGoalID ?? command.target.goalID, captureID: capture.id, destination: .capturesInbox),
+            recommendationExplanationIDs: command.relations.recommendationExplanationIDs + capture.recommendationExplanationIDs,
+            metadata: [
+                "captureID": capture.id,
+                "captureKind": capture.kind.rawValue,
+                "captureRoute": capture.route.rawValue
+            ]
+        )
     }
 
     func blockedResult(
@@ -210,6 +394,55 @@ private extension AmbitionsCommandExecutor {
         default:
             return .todayQuickCapture
         }
+    }
+
+    func captureKind(for commitmentKind: NowCommitmentKind?) -> CaptureKind? {
+        switch commitmentKind {
+        case .oneTime:
+            return .oneTimeCommitment
+        case .goalSupporting:
+            return .goalSupportingTask
+        case .waiting:
+            return .waitingItem
+        case .optionalSomeday:
+            return .optionalSomeday
+        case .recurring, .scheduledBlock, nil:
+            return nil
+        }
+    }
+
+    func route(for destinationRoute: String?) -> CaptureRoute? {
+        guard let destinationRoute else { return nil }
+        switch destinationRoute {
+        case "plan", CaptureRoute.planSeed.rawValue:
+            return .planSeed
+        case "goal", CaptureRoute.goalSeed.rawValue:
+            return .goalSeed
+        case CaptureRoute.goalAttachment.rawValue:
+            return .goalAttachment
+        case CaptureRoute.waiting.rawValue:
+            return .waiting
+        case CaptureRoute.optionalSomeday.rawValue:
+            return .optionalSomeday
+        case CaptureRoute.archive.rawValue:
+            return .archive
+        default:
+            return .captureInbox
+        }
+    }
+}
+
+private extension CapturePriorityHints {
+    init(commandHints: AmbitionsCommandPriorityHints) {
+        self.init(
+            importance: commandHints.importance,
+            urgency: commandHints.urgency,
+            consequence: commandHints.consequence,
+            deadline: commandHints.deadline,
+            effort: commandHints.effort,
+            contextFit: commandHints.contextFit,
+            goalSupporting: commandHints.goalRelationship != nil
+        )
     }
 }
 

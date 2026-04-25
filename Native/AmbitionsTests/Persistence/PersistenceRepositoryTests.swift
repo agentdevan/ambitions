@@ -388,5 +388,5 @@ private extension PersistenceRepositoryTests {
 }
 
 private extension CaptureStatus {
-    static let allCasesForTests: [CaptureStatus] = [.seed, .actionable, .goalBound, .scheduled, .delegated, .archived]
+    static let allCasesForTests: [CaptureStatus] = [.needsTriage, .seed, .actionable, .goalBound, .scheduled, .delegated, .waiting, .optionalSomeday, .archived]
 }

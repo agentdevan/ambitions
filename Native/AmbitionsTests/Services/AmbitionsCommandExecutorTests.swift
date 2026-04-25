@@ -58,6 +58,11 @@ final class AmbitionsCommandExecutorTests: XCTestCase {
         XCTAssertEqual(result.target?.captureID, "capture-command")
         XCTAssertEqual(captures.map(\.rawText), ["Create spreadsheet and send it to Kaylee by EOD Tuesday"])
         XCTAssertEqual(captures.first?.sourceType, .todayQuickCapture)
+        XCTAssertEqual(captures.first?.kind, .oneTimeCommitment)
+        XCTAssertEqual(captures.first?.route, .planSeed)
+        XCTAssertEqual(captures.first?.deadlineText, "EOD Tuesday")
+        XCTAssertEqual(captures.first?.contextLensHint, .work)
+        XCTAssertEqual(captures.first?.priorityHints.importance, .high)
         XCTAssertEqual(events.count, 1)
         XCTAssertEqual(events.first?.id, "ledger.command.command-capture")
         XCTAssertEqual(events.first?.kind, .captureCreated)
@@ -105,7 +110,6 @@ final class AmbitionsCommandExecutorTests: XCTestCase {
             id: "command-schedule",
             kind: .scheduleItem,
             source: .plan,
-            target: AmbitionsCommandTarget(captureID: "capture-1"),
             payload: AmbitionsCommandPayload(
                 title: "Schedule work block",
                 deadlineText: "Tuesday",
@@ -121,11 +125,80 @@ final class AmbitionsCommandExecutorTests: XCTestCase {
         )
 
         XCTAssertEqual(result.status, .unsupported)
-        XCTAssertEqual(result.metadata["blockedBy"], "owning_system_not_implemented")
+        XCTAssertEqual(result.metadata["blockedBy"], "plan_2_not_implemented")
         let events = try await ledger.fetchRecent(limit: 10)
         let captures = try await captureRepository.listCaptures()
         XCTAssertTrue(events.isEmpty)
         XCTAssertTrue(captures.isEmpty)
+    }
+
+    func testPlanSeedCommandRepresentsExistingCaptureWithoutScheduling() async throws {
+        let captureRepository = PreviewCaptureRepository()
+        let captureService = DefaultCaptureService(repository: captureRepository, idProvider: { "capture-plan-seed" })
+        let ledger = InMemoryEventLedgerRepository()
+        let executor = AmbitionsCommandExecutor(captureService: captureService, eventLedger: ledger)
+        let now = Date(timeIntervalSince1970: 1_777_113_600)
+        _ = try await captureService.createCapture(CreateCaptureRequest(rawText: "Create spreadsheet"), now: now)
+        let command = AmbitionsCommand(
+            id: "command-plan-seed",
+            kind: .scheduleItem,
+            source: .plan,
+            target: AmbitionsCommandTarget(captureID: "capture-plan-seed"),
+            payload: AmbitionsCommandPayload(deadlineText: "Tuesday", contextLens: .work),
+            createdAt: DomainTimestamp.string(from: now)
+        )
+
+        let result = await executor.execute(command, context: CommandExecutionContext(now: now.addingTimeInterval(60)))
+        let captures = try await captureRepository.listCaptures()
+        let events = try await ledger.fetchRecent(limit: 10)
+
+        XCTAssertEqual(result.status, .succeeded)
+        XCTAssertEqual(result.summary, "Capture represented as a Plan seed. Scheduling is not implemented in this batch.")
+        XCTAssertEqual(result.metadata["captureRoute"], CaptureRoute.planSeed.rawValue)
+        XCTAssertEqual(captures.first?.kind, .oneTimeCommitment)
+        XCTAssertEqual(captures.first?.route, .planSeed)
+        XCTAssertTrue(events.isEmpty)
+    }
+
+    func testRouteCommitmentAndWaitingCommandsUseCaptureRouteModel() async throws {
+        let captureRepository = PreviewCaptureRepository()
+        let captureService = DefaultCaptureService(repository: captureRepository, idProvider: { "capture-routes" })
+        let executor = AmbitionsCommandExecutor(captureService: captureService)
+        let now = Date(timeIntervalSince1970: 1_777_113_600)
+        _ = try await captureService.createCapture(CreateCaptureRequest(rawText: "Raw captured thought"), now: now)
+        let commitment = AmbitionsCommand(
+            id: "command-route-commitment",
+            kind: .routeCommitment,
+            source: .capture,
+            target: AmbitionsCommandTarget(captureID: "capture-routes"),
+            payload: AmbitionsCommandPayload(deadlineText: "EOD Tuesday", contextLens: .work),
+            createdAt: DomainTimestamp.string(from: now)
+        )
+
+        let commitmentResult = await executor.execute(commitment, context: CommandExecutionContext(now: now.addingTimeInterval(60)))
+        let committedCapture = try await captureRepository.capture(id: "capture-routes")
+        var stored = try XCTUnwrap(committedCapture)
+        XCTAssertEqual(commitmentResult.status, .succeeded)
+        XCTAssertEqual(stored.kind, .oneTimeCommitment)
+        XCTAssertEqual(stored.route, .planSeed)
+        XCTAssertEqual(stored.deadlineText, "EOD Tuesday")
+
+        let waiting = AmbitionsCommand(
+            id: "command-waiting",
+            kind: .markWaiting,
+            source: .capture,
+            target: AmbitionsCommandTarget(captureID: "capture-routes"),
+            payload: AmbitionsCommandPayload(title: "Kaylee", notes: "blocked by reply"),
+            createdAt: DomainTimestamp.string(from: now)
+        )
+
+        let waitingResult = await executor.execute(waiting, context: CommandExecutionContext(now: now.addingTimeInterval(120)))
+        let waitingCapture = try await captureRepository.capture(id: "capture-routes")
+        stored = try XCTUnwrap(waitingCapture)
+        XCTAssertEqual(waitingResult.status, .succeeded)
+        XCTAssertEqual(stored.kind, .waitingItem)
+        XCTAssertEqual(stored.route, .waiting)
+        XCTAssertEqual(stored.waitingMetadata?.waitingOn, "Kaylee")
     }
 
     func testMissingTargetAndInvalidPayloadBlockBeforeExecution() async throws {

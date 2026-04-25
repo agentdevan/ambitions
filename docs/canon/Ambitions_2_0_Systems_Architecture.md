@@ -58,6 +58,7 @@ This document defines the consolidated Ambitions 2.0 systems. Product surfaces c
 - Ambitions 2.0 scope: local-first ledger and review projections.
 - Later scope: cross-device merge policy after Apple-first sync verification.
 - Batch 65 implementation status: The canonical local ledger foundation exists as `EventLedgerEntry` / `EventLedgerKind` with repository, SwiftData, in-memory, redaction/delete, and adapter helpers for current evidence, feedback, and teaching signals. Its taxonomy includes future-safe event hooks for Priority Reality Model, Context Lens, Commitment Capture, and Goal Container scope changes without implementing those behaviors. Broad feature emission, review projections, portable snapshot inclusion, sync merge policy, and UI history surfaces remain deferred to their owning batches.
+- Batch 69 implementation status: Capture 2.0 actions now write truthful ledger events for executed capture creation, triage, goal attachment, archive, commitment capture/routing, deadline changes, priority changes, urgency changes, and user corrections when the capture service has a ledger repository. Unsupported or blocked capture operations do not emit success history.
 
 ## Command Pipeline
 
@@ -70,6 +71,18 @@ This document defines the consolidated Ambitions 2.0 systems. Product surfaces c
 - Later scope: broader automation only after sync and conflict rules hold.
 - Batch 68 implementation status: The shared foundation exists as `AmbitionsCommand` with command id/kind/source/target/payload/validation/execution/result timing/actor/relation/privacy/schema fields, plus `AmbitionsCommandKind`, `AmbitionsCommandSource`, target/payload/priority-hint models, validation states, execution statuses, and a `NowAction` mapping helper. `AmbitionsCommandExecutor` validates commands deterministically, executes open-destination as route-only results, executes quick capture through the existing capture service when available, and emits Event Ledger entries only for actually executed quick-capture commands. Unsupported future commands return explicit unsupported/blocked results without fake state changes or ledger history.
 - Batch 68 does not productize App Intents, widgets, Live Activities, notifications, Capture 2.0, Plan 2.0, scheduling, calendar behavior, runtime Context Lens switching, full Priority Reality scoring, recovery stack execution, or broad UI action rewiring. Future batches should consume this foundation rather than adding parallel command paths.
+- Batch 69 implementation status: The executor now aligns with Capture-owned commands for quick capture, route commitment, attach to goal, mark waiting, archive, set capture deadline/priority/urgency, and representational Plan-seed routing when a capture target exists. Plan item creation and schedule commands remain representation-only through Capture; no Plan 2.0 scheduling, calendar writes, or Today/Goals runtime rewiring is implemented.
+
+## Capture 2.0 Core
+
+- Purpose: First-class local intake and routing for thoughts, commitments, seeds, waiting items, optional items, and archive decisions.
+- Owned concepts: capture kind, route, triage status, commitment kind, deadline text/kind, context lens hint, priority hints, goal relationship, deliverable/scope hints, waiting metadata, assumption summary, correction actions, privacy/local-only markers.
+- Consumed by: Capture tab, Command Pipeline, Memory / Event Ledger, future Plan, future Goals, future Today, future reviews.
+- Dependencies: capture repository, existing goal repository for safe attachment, Event Ledger repository when available, Recommendation Explanation references, Canonical Now State context-lens taxonomy.
+- Must not be duplicated: parallel inbox models, feature-specific waiting/seed/archive stores, or Plan-owned scheduling behavior inside Capture.
+- Ambitions 2.0 scope: local capture intake, conservative deterministic classification, visible assumptions, correction actions, Plan-seed representation, safe goal attachment, waiting/optional/archive routing, and truthful ledger emission.
+- Later scope: full natural-language parsing, Priority Reality scoring, Context Lens runtime switching, Goal Container UI, Seed Vault expansion, Plan 2.0 scheduling, Today 2.0 execution, sync/export inclusion, widgets, App Intents productization, and Path Intelligence UI.
+- Batch 69 implementation status: `Capture` now stores additive Capture 2.0 metadata with legacy decode defaults; `DefaultCaptureService` creates and routes raw captures, one-time commitments, deadline tasks, goal seeds, goal-supporting tasks, deliverable seeds, waiting items, optional/someday items, and archive items. The Capture tab exposes a calm quick-intake panel, grouped route states, visible assumptions, correction actions, goal attach when supported, and empty/error behavior that preserves user input.
 
 ## Path Intelligence Layer
 

@@ -392,7 +392,7 @@ struct AmbitionsCommandValidator: Sendable {
         case .clearContextLensOverride:
             return .valid
         case .routeCommitment:
-            return command.payload.primaryText == nil ? .invalid : .valid
+            return command.payload.primaryText == nil && command.target.captureID == nil ? .invalid : .valid
         case .addDeliverable:
             return command.target.goalID == nil || command.payload.title == nil ? .needsMissingTarget : .valid
         case .removeDeliverable:

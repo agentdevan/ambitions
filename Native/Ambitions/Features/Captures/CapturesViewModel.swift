@@ -22,6 +22,8 @@ struct CaptureActionMessage: Sendable, Equatable {
 final class CapturesViewModel {
     var state: AsyncViewState<CapturesViewState>
     var actionMessage: CaptureActionMessage?
+    var draftText = ""
+    var draftError: String?
 
     init(
         state: AsyncViewState<CapturesViewState> = .loading,
@@ -55,13 +57,38 @@ final class CapturesViewModel {
         }
     }
 
+    func createQuickCapture(captureService: any CaptureServicing, goalsService: any GoalsServicing, now: Date = .now) async {
+        let text = draftText.trimmingCharacters(in: .whitespacesAndNewlines)
+        guard text.isEmpty == false else {
+            draftError = "Write the thing first. It can be messy."
+            return
+        }
+
+        do {
+            let capture = try await captureService.createCapture(
+                CreateCaptureRequest(rawText: text, sourceType: .todayQuickCapture),
+                now: now
+            )
+            draftText = ""
+            draftError = nil
+            actionMessage = CaptureActionMessage(title: "Captured", body: capture.assumptionSummary ?? "Saved to Capture for triage.")
+            await load(captureService: captureService, goalsService: goalsService)
+        } catch {
+            draftError = error.localizedDescription
+        }
+    }
+
     func saveAsSeed(id: String, captureService: any CaptureServicing, goalsService: any GoalsServicing, now: Date = .now) async {
         _ = await performAndReload(captureService: captureService, goalsService: goalsService, now: now) {
             _ = try await captureService.updateCaptureState(
                 CaptureStateUpdateRequest(
                     id: id,
                     status: .seed,
-                    triage: CaptureTriageMetadata(destination: .saveAsSeed)
+                    triage: CaptureTriageMetadata(destination: .saveAsSeed),
+                    kind: .goalSeed,
+                    route: .captureInbox,
+                    triageStatus: .userCorrected,
+                    assumptionSummary: "This is saved as a seed instead of active work."
                 ),
                 now: now
             )
@@ -81,6 +108,38 @@ final class CapturesViewModel {
                 now: now
             )
             actionMessage = CaptureActionMessage(title: "Archived", body: "This capture is out of the active inbox.")
+            return nil
+        }
+    }
+
+    func routeToPlan(id: String, captureService: any CaptureServicing, goalsService: any GoalsServicing, now: Date = .now) async {
+        _ = await performAndReload(captureService: captureService, goalsService: goalsService, now: now) {
+            _ = try await captureService.routeToPlanSeed(id: id, now: now)
+            actionMessage = CaptureActionMessage(title: "Routed to Plan seed", body: "This is represented for Plan without scheduling it yet.")
+            return nil
+        }
+    }
+
+    func markWaiting(id: String, captureService: any CaptureServicing, goalsService: any GoalsServicing, now: Date = .now) async {
+        _ = await performAndReload(captureService: captureService, goalsService: goalsService, now: now) {
+            _ = try await captureService.markAsWaiting(id: id, waitingMetadata: nil, now: now)
+            actionMessage = CaptureActionMessage(title: "Marked waiting", body: "This is parked until someone or something unblocks it.")
+            return nil
+        }
+    }
+
+    func markOptionalSomeday(id: String, captureService: any CaptureServicing, goalsService: any GoalsServicing, now: Date = .now) async {
+        _ = await performAndReload(captureService: captureService, goalsService: goalsService, now: now) {
+            _ = try await captureService.markAsOptionalSomeday(id: id, now: now)
+            actionMessage = CaptureActionMessage(title: "Parked for someday", body: "This will not compete with active commitments.")
+            return nil
+        }
+    }
+
+    func markDeliverableSeed(id: String, text: String, captureService: any CaptureServicing, goalsService: any GoalsServicing, now: Date = .now) async {
+        _ = await performAndReload(captureService: captureService, goalsService: goalsService, now: now) {
+            _ = try await captureService.markAsDeliverableSeed(id: id, deliverableHint: text, now: now)
+            actionMessage = CaptureActionMessage(title: "Saved as deliverable seed", body: "This is ready for future goal container work without building that UI here.")
             return nil
         }
     }

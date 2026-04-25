@@ -57,6 +57,15 @@ protocol CaptureServicing: Sendable {
     func createCapture(_ request: CreateCaptureRequest, now: Date) async throws -> Capture
     func listCaptures() async throws -> [Capture]
     func updateCaptureState(_ request: CaptureStateUpdateRequest, now: Date) async throws -> Capture?
+    func updateCaptureRoute(_ request: CaptureRouteUpdateRequest, now: Date) async throws -> Capture?
+    func markAsOneTimeCommitment(id: String, deadlineText: String?, contextLensHint: NowContextLens?, now: Date) async throws -> Capture?
+    func markAsDeadlineTask(id: String, deadlineText: String, contextLensHint: NowContextLens?, now: Date) async throws -> Capture?
+    func markAsGoalSeed(id: String, now: Date) async throws -> Capture?
+    func markAsGoalSupportingTask(id: String, goalID: String?, now: Date) async throws -> Capture?
+    func markAsDeliverableSeed(id: String, deliverableHint: String?, now: Date) async throws -> Capture?
+    func markAsWaiting(id: String, waitingMetadata: CaptureWaitingMetadata?, now: Date) async throws -> Capture?
+    func markAsOptionalSomeday(id: String, now: Date) async throws -> Capture?
+    func routeToPlanSeed(id: String, now: Date) async throws -> Capture?
     func attachCaptureToGoal(_ request: AttachCaptureToGoalRequest, now: Date) async throws -> CaptureGoalBinding?
     func turnCaptureIntoGoal(_ request: TurnCaptureIntoGoalRequest, now: Date) async throws -> CaptureGoalBinding?
     func markCaptureProcessed(id: String, now: Date) async throws -> Capture?
@@ -174,7 +183,21 @@ struct StubCaptureService: CaptureServicing {
             rawText: request.rawText,
             sourceType: request.sourceType,
             status: .actionable,
-            linkedGoalID: request.linkedGoalID
+            linkedGoalID: request.linkedGoalID,
+            kind: request.kind ?? .raw,
+            route: request.route ?? .captureInbox,
+            triageStatus: request.triageStatus ?? .needsTriage,
+            commitmentKind: request.commitmentKind,
+            deadlineText: request.deadlineText,
+            deadlineKind: request.deadlineKind,
+            contextLensHint: request.contextLensHint,
+            priorityHints: request.priorityHints,
+            goalRelationship: request.goalRelationship,
+            deliverableHint: request.deliverableHint,
+            scopeItemHint: request.scopeItemHint,
+            waitingMetadata: request.waitingMetadata,
+            assumptionSummary: request.assumptionSummary,
+            recommendationExplanationIDs: request.recommendationExplanationIDs
         )
     }
 
@@ -195,6 +218,59 @@ struct StubCaptureService: CaptureServicing {
     func updateCaptureState(_ request: CaptureStateUpdateRequest, now: Date) async throws -> Capture? {
         _ = now
         return captures.first(where: { $0.id == request.id })
+    }
+
+    func updateCaptureRoute(_ request: CaptureRouteUpdateRequest, now: Date) async throws -> Capture? {
+        _ = request
+        _ = now
+        return captures.first
+    }
+
+    func markAsOneTimeCommitment(id: String, deadlineText: String?, contextLensHint: NowContextLens?, now: Date) async throws -> Capture? {
+        _ = deadlineText
+        _ = contextLensHint
+        _ = now
+        return captures.first(where: { $0.id == id })
+    }
+
+    func markAsDeadlineTask(id: String, deadlineText: String, contextLensHint: NowContextLens?, now: Date) async throws -> Capture? {
+        _ = deadlineText
+        _ = contextLensHint
+        _ = now
+        return captures.first(where: { $0.id == id })
+    }
+
+    func markAsGoalSeed(id: String, now: Date) async throws -> Capture? {
+        _ = now
+        return captures.first(where: { $0.id == id })
+    }
+
+    func markAsGoalSupportingTask(id: String, goalID: String?, now: Date) async throws -> Capture? {
+        _ = goalID
+        _ = now
+        return captures.first(where: { $0.id == id })
+    }
+
+    func markAsDeliverableSeed(id: String, deliverableHint: String?, now: Date) async throws -> Capture? {
+        _ = deliverableHint
+        _ = now
+        return captures.first(where: { $0.id == id })
+    }
+
+    func markAsWaiting(id: String, waitingMetadata: CaptureWaitingMetadata?, now: Date) async throws -> Capture? {
+        _ = waitingMetadata
+        _ = now
+        return captures.first(where: { $0.id == id })
+    }
+
+    func markAsOptionalSomeday(id: String, now: Date) async throws -> Capture? {
+        _ = now
+        return captures.first(where: { $0.id == id })
+    }
+
+    func routeToPlanSeed(id: String, now: Date) async throws -> Capture? {
+        _ = now
+        return captures.first(where: { $0.id == id })
     }
 
     func attachCaptureToGoal(_ request: AttachCaptureToGoalRequest, now: Date) async throws -> CaptureGoalBinding? {

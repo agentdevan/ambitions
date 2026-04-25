@@ -276,6 +276,58 @@ private struct RecordingExternalActionCaptureService: CaptureServicing {
         _ = now
         return nil
     }
+    func updateCaptureRoute(_ request: CaptureRouteUpdateRequest, now: Date) async throws -> Capture? {
+        _ = request
+        _ = now
+        return nil
+    }
+    func markAsOneTimeCommitment(id: String, deadlineText: String?, contextLensHint: NowContextLens?, now: Date) async throws -> Capture? {
+        _ = id
+        _ = deadlineText
+        _ = contextLensHint
+        _ = now
+        return nil
+    }
+    func markAsDeadlineTask(id: String, deadlineText: String, contextLensHint: NowContextLens?, now: Date) async throws -> Capture? {
+        _ = id
+        _ = deadlineText
+        _ = contextLensHint
+        _ = now
+        return nil
+    }
+    func markAsGoalSeed(id: String, now: Date) async throws -> Capture? {
+        _ = id
+        _ = now
+        return nil
+    }
+    func markAsGoalSupportingTask(id: String, goalID: String?, now: Date) async throws -> Capture? {
+        _ = id
+        _ = goalID
+        _ = now
+        return nil
+    }
+    func markAsDeliverableSeed(id: String, deliverableHint: String?, now: Date) async throws -> Capture? {
+        _ = id
+        _ = deliverableHint
+        _ = now
+        return nil
+    }
+    func markAsWaiting(id: String, waitingMetadata: CaptureWaitingMetadata?, now: Date) async throws -> Capture? {
+        _ = id
+        _ = waitingMetadata
+        _ = now
+        return nil
+    }
+    func markAsOptionalSomeday(id: String, now: Date) async throws -> Capture? {
+        _ = id
+        _ = now
+        return nil
+    }
+    func routeToPlanSeed(id: String, now: Date) async throws -> Capture? {
+        _ = id
+        _ = now
+        return nil
+    }
     func attachCaptureToGoal(_ request: AttachCaptureToGoalRequest, now: Date) async throws -> CaptureGoalBinding? {
         _ = request
         _ = now
