@@ -13,6 +13,8 @@ This document defines the consolidated Ambitions 2.0 systems. Product surfaces c
 - Must not be duplicated: per-surface "now" calculations, widget-specific next-action logic, notification-only state.
 - Ambitions 2.0 scope: stable projection and local consumers.
 - Later scope: richer cross-device projections after sync stability.
+- Batch 67 implementation status: The internal shared contract exists as `CanonicalNowState` with context lens/source/override fields, current and best next action references, confidence and explanation references, schedule/priority/deadline pressure, active focus reference, capture urgency, blockers/waiting, recovery state, urgent outside-lens summary, active and passive goal pressure, Event Ledger and Recommendation Explanation references, privacy/local-only markers, and schema versioning. `CanonicalNowStateProjector` provides a deterministic, local-only projection from existing goals, captures, progress evidence, feedback, recent Event Ledger entries, and optional Recommendation Explanation objects without requiring calendar permission, fixed work schedules, surface redesign, widgets, Live Activities, App Intents productization, Capture 2.0, Plan 2.0, or a full Priority Reality Model.
+- Future batches should consume this contract through their owning systems rather than adding separate per-surface "now" calculations. Batch 67 does not persist Now State and does not implement runtime context switching, calendar-aware scheduling, Command Pipeline mutation, Today 2.0 UI, or external-surface productization.
 
 ## Reality Model
 

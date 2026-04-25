@@ -1,6 +1,6 @@
 # Ambitions 2.0 Capability Matrix
 
-Batch 61 verified repo truth after Batch 60. Batch 66 updates this matrix only where the Recommendation Explanation Model changed current repo truth.
+Batch 61 verified repo truth after Batch 60. Batch 67 updates this matrix only where the Canonical Now State foundation changed current repo truth.
 
 Status values are restricted to: Verified complete, Partially implemented, Missing, Stale / legacy, Unknown until deeper implementation batch, Deferred by Ambitions 2.0 scope, Blocked by missing foundation, Needs manual platform verification.
 
@@ -9,7 +9,7 @@ Status values are restricted to: Verified complete, Partially implemented, Missi
 ### What is definitely implemented
 
 - The native iOS project structure exists and is wired through XcodeGen: `project.yml`, `Native/Ambitions/`, `Native/AmbitionsTests/`, `Native/AmbitionsUITests/`, `Native/AmbitionsWidgetExtension/`, `Native/AmbitionsShareExtension/`, `Sources/`, and `AppUI/Sources/`.
-- Batch 60 through Batch 66 are recorded as complete for planning in `docs/codex/BATCH_REGISTRY.md`.
+- Batch 60 through Batch 67 are recorded as complete for planning in `docs/codex/BATCH_REGISTRY.md`.
 - The Ambitions 2.0 canon package is present: master plan, product architecture, systems architecture, visual system, roadmap, batch plan, accessibility nutrition, and decision log.
 - Capture persistence is implemented for the current app model through `DefaultCaptureService`, SwiftData repositories, and capture/persistence tests.
 
@@ -17,6 +17,7 @@ Status values are restricted to: Verified complete, Partially implemented, Missi
 
 - Today, Goals, Plan, Reviews, memory, command routing, external snapshots, EventKit, portable export/import, App Intents, widgets, Live Activities, and path intelligence all have real code, but they do not yet match the full Ambitions 2.0 architecture.
 - The Batch 66 shared Recommendation Explanation Model now exists with reusable why-this/why-now/why-changed/why-prioritized/why-deferred/why-routed/why-scheduled/why-displaced/why-recovered/context-lens/calendar-aware/believability taxonomy, evidence categories, assumption/uncertainty/correction support, Event Ledger evidence references, local-only/privacy flags, and a narrow adapter from existing goal explainability state.
+- The Batch 67 Canonical Now State foundation now exists with context lens/source/override contracts, current/best action references, confidence and explanation references, schedule/priority/deadline pressure, capture urgency, blockers/waiting, recovery state, urgent outside-lens summary, active/passive goal pressure, Event Ledger references, local-only/privacy markers, and a deterministic local projection service.
 - Rich panel/design-system readiness exists through Batch 63 shared primitives, semantic states, panel tokens, and tests, but later surface batches still need to consume the system.
 - Accessibility support is present across primitives and screens, and Batch 64 added an internal Accessibility Nutrition checklist model; user-facing Accessibility Nutrition Facts are not implemented or manually verified.
 - The Batch 65 local Memory / Event Ledger foundation exists with a canonical domain model, taxonomy, repository boundary, SwiftData/in-memory persistence, and adapter helpers from current evidence, feedback, and teaching-signal fragments. Its taxonomy also includes future-safe hooks for priority/reality changes, commitment capture/routing, Context Lens changes/inferences, goal scope items, deliverables, deadlines, scheduling displacement, and priority-conflict recovery without implementing those behaviors.
@@ -25,7 +26,7 @@ Status values are restricted to: Verified complete, Partially implemented, Missi
 
 - The locked Ambitions 2.0 top-level shell now exists after Batch 62 implementation. Current top-level tabs are Today, Goals, Capture, Plan, and You.
 - Apple-first sync is not implemented; the repo currently exposes a local-only sync capability.
-- Full long-range Path Builder UI, Plan-owned calendar permission UX, and a unified Canonical Now State are not complete.
+- Full long-range Path Builder UI and Plan-owned calendar permission UX are not complete. Canonical Now State exists as a foundation, but later surfaces still need to consume it.
 
 ### What is unknown
 
@@ -86,7 +87,7 @@ Status values are restricted to: Verified complete, Partially implemented, Missi
 | Memory / Event Ledger | Partially implemented | Code/tests: `EventLedgerEntry`, `EventLedgerKind`, `EventLedgerRepository`, `SwiftDataEventLedgerRepository`, `InMemoryEventLedgerRepository`, `EventLedgerModelsTests`, `EventLedgerRepositoryTests`, plus existing `ProgressEvidence`, `GoalFeedbackEvent`, `GoalTeachingSignal`, repositories, and `MemoryLensService`. | Batch 65 adds the canonical local ledger foundation and adapters, including future-safe taxonomy coverage for priority/reality, commitment capture/routing, Context Lens, scope/deliverable/deadline, scheduling displacement, and priority-conflict recovery events; current feature flows are not broadly migrated to emit or read ledger events. | If overclaimed, future surfaces may assume every historical event is already recorded in the ledger. | 65, 66, 67, 68, 76, 78, 83 | Future batches should migrate writes through Command Pipeline/feature seams deliberately and decide when portable snapshot/sync export includes ledger rows. |
 | Recommendation Explanation Model | Verified complete for Batch 66 shared contract | Code/tests: `Native/Ambitions/Domain/RecommendationExplanationModels.swift`, `Native/Ambitions/Services/RecommendationExplanationAdapter.swift`, `Native/AmbitionsTests/Domain/RecommendationExplanationModelsTests.swift`, `Native/AmbitionsTests/Services/RecommendationExplanationAdapterTests.swift`, plus preserved existing `GoalExplainabilityProjector`, `GoalExplainabilityState`, `GoalWhyThisState`, and `GoalExplainabilityProjectionTests`. | Later Today, Goals, Plan, Reviews, and You surfaces can consume one shared explanation object for why-this, why-now, why-changed, priority tradeoffs, context-lens reasoning, calendar-derived reasoning, route/schedule/defer/displacement/recovery reasoning, assumptions, uncertainty, and corrections. Full explanation sheets remain deferred. | If overclaimed, future batches may assume Priority Reality Model, Context Lens runtime, Commitment Capture, Living Goal Containers, or Why Changed UI already exist. | 66, 73, 74, 75, 76, 83 | Consume the shared model in later surface/system batches; implement Priority Reality Model, Context Lens, Commitment Capture, Living Goal Containers, and obvious item destinations in their owning batches. |
 | Why This / Why Changed UI | Partially implemented | Code: Goal Detail why/explainability panels, Today `askWhyThisMatters`; no dedicated `WhyChanged` surface found. | Why This exists in places; Why Changed is not complete. | If wrong, users may lack transparent change explanations. | 66, 73, 74, 75 | Build shared sheet behavior after explanation model is defined. |
-| Canonical Now State | Partially implemented | Code/tests: `ExternalSurfaceNowState`, `ExternalSurfaceSnapshotBuilder`, `ExternalSurfaceSnapshotTests`; no final internal Canonical Now State service. | External snapshot foundation exists, but app-wide Now State is incomplete. | If overclaimed, widgets/commands/Today may disagree. | 67 | Batch 67 should define single Now State contract. |
+| Canonical Now State | Verified complete for Batch 67 shared contract | Code/tests: `Native/Ambitions/Domain/CanonicalNowStateModels.swift`, `Native/Ambitions/Services/CanonicalNowStateProjector.swift`, `Native/AmbitionsTests/Domain/CanonicalNowStateModelsTests.swift`, `Native/AmbitionsTests/Services/CanonicalNowStateProjectorTests.swift`, plus existing `ExternalSurfaceNowState`, `ExternalSurfaceSnapshotBuilder`, and `ExternalSurfaceSnapshotTests` as external-snapshot context. | A single internal Now State contract and deterministic local projection foundation exist for later Today, Plan, widgets, Live Activities, App Intents, notifications, recovery, and reviews. It can represent context lens/source/override, best/current action, pressures, recovery, capture urgency, blockers/waiting, urgent outside-lens items, active/passive goal pressure, Event Ledger references, and Recommendation Explanation references. | If overclaimed, future batches may assume Today 2.0 UI, runtime lens switching, full priority scoring, calendar-aware scheduling, persistence, widgets, Live Activities, App Intents productization, Capture 2.0, or Plan 2.0 already exist. | 67, 68, 73, 75, 79, 80 | Consume this contract in owning batches; do not duplicate per-surface now calculations. |
 | Command Pipeline | Partially implemented | Code/tests: `ShellCommandModels`, `ShellCommandRouter`, `ExternalActionCommandService`, `ShellCommandRouterTests`, `ExternalActionCommandServiceTests`. | Command routing exists, but final validated pipeline/event emission is incomplete. | If wrong, external actions and Today actions may fork behavior. | 68 | Batch 68 should centralize command execution and logging. |
 | Search | Partially implemented | Code/tests: `MemoryLensService.search`, `MemoryLensScreen`, `MemoryLensServiceTests`. | Search exists through Memory Lens, not as full app-wide Search. | If overclaimed, future UI may rely on unavailable global search affordances. | 76, 77, 83 | Keep Memory Lens as current search-like surface; expand only when scheduled. |
 | App Intents | Needs manual platform verification | Code/tests: `Native/Ambitions/AppIntents/OpenAmbitionsDestinationIntent.swift`, `AppIntentRoutingTests`, external routing tests. | App Intent code exists, but system presentation and shortcut behavior need device/simulator verification. | If overclaimed, Siri/Shortcuts entry points may fail outside tests. | 79 | Verify and harden in Batch 79. |
@@ -124,9 +125,9 @@ Status values are restricted to: Verified complete, Partially implemented, Missi
 
 ## Active Batch Recommendation
 
-Batch 67 should remain **Canonical Now State** after Batch 66 closeout.
+Batch 68 should remain **Command Pipeline Foundation** after Batch 67 closeout, but it has not been started by this matrix update.
 
-Repo truth supports the planned sequence: the shared Event Ledger and Recommendation Explanation Model foundations now exist, but the app still needs a single Canonical Now State before Command Pipeline, Capture 2.0, Reality Model, and primary surface transformation work.
+Repo truth supports the planned sequence: Event Ledger, Recommendation Explanation Model, and Canonical Now State foundations now exist, but Command Pipeline, Capture 2.0, Reality Model, and primary surface transformation work remain deferred to their owning batches.
 
 ## No-Drift Warnings
 
