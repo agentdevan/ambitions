@@ -36,4 +36,12 @@ final class PlanViewModel {
             state = .failed("Unable to load Plan: \(error.localizedDescription)")
         }
     }
+
+    func makeCalendarAware(using service: any PlanServicing, now: Date = .now) async {
+        do {
+            state = .loaded(try await service.makePlanCalendarAware(now: now))
+        } catch {
+            state = .failed("Unable to make Plan calendar-aware: \(error.localizedDescription)")
+        }
+    }
 }

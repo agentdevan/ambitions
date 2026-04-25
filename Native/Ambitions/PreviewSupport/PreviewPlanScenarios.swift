@@ -157,6 +157,16 @@ enum PreviewPlanScenarios {
             supportLabel: "Patch missing work into an open window instead of forcing it into the crowded days.",
             visualState: .selected
         ),
+        calendarAwareness: PlanCalendarAwarenessState(
+            status: .baseline,
+            title: "Make Plan calendar-aware",
+            detail: "Plan works without access. With your confirmation, it can read derived busy time locally to find real open windows.",
+            primaryActionTitle: "Make Plan calendar-aware",
+            primaryActionSystemImage: "calendar.badge.plus",
+            valueLabel: "Optional",
+            visualState: .default,
+            canRequestCalendarRead: true
+        ),
         resilience: PlanExecutionResilienceState(
             title: "Execution resilience",
             subtitle: "Carryover, overload, and recovery shaping stay explainable by keeping one smaller lane obvious at a time.",
@@ -290,6 +300,16 @@ enum PreviewPlanScenarios {
             label: "Open",
             supportLabel: "This is a real state, not missing data.",
             visualState: .default
+        ),
+        calendarAwareness: PlanCalendarAwarenessState(
+            status: .baseline,
+            title: "Make Plan calendar-aware",
+            detail: "Plan works without access. With your confirmation, it can read derived busy time locally to find real open windows.",
+            primaryActionTitle: "Make Plan calendar-aware",
+            primaryActionSystemImage: "calendar.badge.plus",
+            valueLabel: "Optional",
+            visualState: .default,
+            canRequestCalendarRead: true
         ),
         resilience: PlanExecutionResilienceState(
             title: "Execution resilience",

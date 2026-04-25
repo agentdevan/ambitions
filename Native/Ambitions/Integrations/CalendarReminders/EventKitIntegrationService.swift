@@ -33,6 +33,23 @@ enum CalendarRemindersAuthorizationState: Sendable, Equatable {
     }
 }
 
+extension CalendarPermissionState {
+    init(calendarRemindersState: CalendarRemindersAuthorizationState) {
+        switch calendarRemindersState {
+        case .notDetermined:
+            self = .notDetermined
+        case .denied:
+            self = .denied
+        case .restricted:
+            self = .restricted
+        case .authorized, .fullAccess:
+            self = .readWrite
+        case .writeOnly:
+            self = .writeOnly
+        }
+    }
+}
+
 enum CalendarSchedulePressure: String, Sendable, Equatable {
     case low
     case moderate
@@ -83,6 +100,29 @@ struct CreatedCalendarEventRecord: Sendable, Equatable {
     let endDate: Date
 }
 
+struct CalendarRealityReadRequest: Sendable, Equatable {
+    let horizon: DateInterval
+    let userInitiatedPlanAction: String
+    let minimumWindowMinutes: Int
+
+    init(
+        horizon: DateInterval,
+        userInitiatedPlanAction: String,
+        minimumWindowMinutes: Int = 30
+    ) {
+        self.horizon = horizon
+        self.userInitiatedPlanAction = userInitiatedPlanAction
+        self.minimumWindowMinutes = max(15, minimumWindowMinutes)
+    }
+}
+
+struct CalendarRealityReadResult: Sendable, Equatable {
+    let permissionState: CalendarPermissionState
+    let derivedBusyWindows: [RealityWindow]
+    let calendarContext: CalendarDerivedContext
+    let openWindowCandidates: [OpenWindowCandidate]
+}
+
 enum CalendarRemindersError: LocalizedError, Equatable {
     case missingEventStartDate
     case authorizationDenied(scope: CalendarRemindersScope)
@@ -120,6 +160,21 @@ protocol CalendarRemindersServicing: Sendable {
     func createCalendarEvent(for selection: NextStepSchedulingSelection, durationMinutes: Int, now: Date) async throws -> CreatedCalendarEventRecord
     // Reserved for Canon Batch 5B. Batch 5A keeps this hook only to avoid broad churn.
     func detectConflicts(for selection: NextStepSchedulingSelection, durationMinutes: Int, now: Date) async -> CalendarConflictReport?
+}
+
+protocol CalendarPermissionServicing: Sendable {
+    func calendarPermissionState() async -> CalendarPermissionState
+    func requestCalendarReadAccessFromPlan(actionName: String) async -> CalendarPermissionState
+    func requestCalendarWriteAccessForConfirmedBlock(intent: ScheduledBlockWriteIntent) async -> CalendarPermissionState
+}
+
+protocol CalendarRealityServicing: CalendarPermissionServicing {
+    func fetchDerivedBusyWindows(for range: DateInterval) async -> [RealityWindow]
+    func findOpenWindows(request: CalendarRealityReadRequest) async -> CalendarRealityReadResult
+}
+
+protocol CalendarBlockWriting: Sendable {
+    func createCalendarBlock(intent: ScheduledBlockWriteIntent, now: Date) async throws -> ScheduledAmbitionsBlock
 }
 
 struct StubCalendarRemindersService: CalendarRemindersServicing {
@@ -171,6 +226,90 @@ struct StubCalendarRemindersService: CalendarRemindersServicing {
         _ = durationMinutes
         _ = now
         return conflictReport
+    }
+}
+
+extension StubCalendarRemindersService: CalendarRealityServicing, CalendarBlockWriting {
+    func calendarPermissionState() async -> CalendarPermissionState {
+        CalendarPermissionState(calendarRemindersState: calendarAuthorizationState)
+    }
+
+    func requestCalendarReadAccessFromPlan(actionName: String) async -> CalendarPermissionState {
+        _ = actionName
+        return await calendarPermissionState()
+    }
+
+    func requestCalendarWriteAccessForConfirmedBlock(intent: ScheduledBlockWriteIntent) async -> CalendarPermissionState {
+        _ = intent
+        return await calendarPermissionState()
+    }
+
+    func fetchDerivedBusyWindows(for range: DateInterval) async -> [RealityWindow] {
+        guard calendarAuthorizationState.canReadCalendarContext else { return [] }
+        guard let report = conflictReport else { return [] }
+        return report.conflicts.enumerated().map { index, conflict in
+            RealityWindow(
+                id: "stub.calendar.busy.\(index)",
+                kind: .calendarDerivedBusy,
+                source: .calendarDerived,
+                start: max(conflict.startDate, range.start),
+                end: min(conflict.endDate, range.end),
+                title: conflict.isAllDay ? "Calendar all-day busy time" : "Calendar busy time",
+                contextLens: .all
+            )
+        }.filter { $0.end > $0.start }
+    }
+
+    func findOpenWindows(request: CalendarRealityReadRequest) async -> CalendarRealityReadResult {
+        let permission = await calendarPermissionState()
+        let busy = await fetchDerivedBusyWindows(for: request.horizon)
+        let context = CalendarDerivedContext(
+            permissionState: permission,
+            observedRangeStart: request.horizon.start,
+            observedRangeEnd: request.horizon.end,
+            derivedBusyWindowCount: busy.count,
+            userInitiatedPlanAction: request.userInitiatedPlanAction,
+            explanation: permission.canRead
+                ? "Plan used derived calendar busy time locally to find open windows."
+                : "Plan still works without calendar access; no calendar busy time was read."
+        )
+        let snapshot = RealityModelProjector().project(
+            input: RealityProjectionInput(
+                now: request.horizon.start,
+                horizon: request.horizon,
+                calendarBusyWindows: busy,
+                calendarContext: context,
+                minimumWindowMinutes: request.minimumWindowMinutes
+            )
+        )
+        return CalendarRealityReadResult(
+            permissionState: permission,
+            derivedBusyWindows: busy,
+            calendarContext: context,
+            openWindowCandidates: snapshot.openWindowCandidates
+        )
+    }
+
+    func createCalendarBlock(intent: ScheduledBlockWriteIntent, now: Date) async throws -> ScheduledAmbitionsBlock {
+        _ = now
+        guard intent.isExecutable else {
+            throw CalendarRemindersError.missingEventStartDate
+        }
+        guard calendarAuthorizationState.canWrite else {
+            throw CalendarRemindersError.authorizationDenied(scope: .calendarEvents)
+        }
+        return ScheduledAmbitionsBlock(
+            id: intent.block.id,
+            title: intent.block.title,
+            start: intent.block.start,
+            end: intent.block.end,
+            contextLens: intent.block.contextLens,
+            relatedGoalID: intent.block.relatedGoalID,
+            relatedCaptureID: intent.block.relatedCaptureID,
+            relatedPlanID: intent.block.relatedPlanID,
+            isUserConfirmed: true,
+            calendarEventIdentifier: calendarResult?.identifier ?? "stub-event"
+        )
     }
 }
 
@@ -373,6 +512,114 @@ actor EventKitIntegrationService: CalendarRemindersServicing {
     }
 }
 
+extension EventKitIntegrationService: CalendarRealityServicing, CalendarBlockWriting {
+    func calendarPermissionState() async -> CalendarPermissionState {
+        await CalendarPermissionState(calendarRemindersState: authorizationState(for: .calendarEvents))
+    }
+
+    func requestCalendarReadAccessFromPlan(actionName: String) async -> CalendarPermissionState {
+        guard actionName.isEmpty == false else {
+            return await calendarPermissionState()
+        }
+        return await CalendarPermissionState(calendarRemindersState: requestAuthorizationIfNeeded(for: .calendarEvents))
+    }
+
+    func requestCalendarWriteAccessForConfirmedBlock(intent: ScheduledBlockWriteIntent) async -> CalendarPermissionState {
+        guard intent.isExecutable else {
+            return await calendarPermissionState()
+        }
+        let state = await authorizationState(for: .calendarEvents)
+        guard state == .notDetermined else {
+            return CalendarPermissionState(calendarRemindersState: state)
+        }
+        return await CalendarPermissionState(calendarRemindersState: storeClient.requestWriteOnlyAuthorizationForEvents())
+    }
+
+    func fetchDerivedBusyWindows(for range: DateInterval) async -> [RealityWindow] {
+        let authorization = await authorizationState(for: .calendarEvents)
+        guard authorization.canReadCalendarContext else { return [] }
+        let events = await storeClient.fetchEvents(in: range)
+        return events.enumerated().compactMap { index, event in
+            let start = max(event.startDate, range.start)
+            let end = min(event.endDate, range.end)
+            guard end > start else { return nil }
+            return RealityWindow(
+                id: "calendar.busy.\(index).\(Int(start.timeIntervalSince1970))",
+                kind: .calendarDerivedBusy,
+                source: .calendarDerived,
+                start: start,
+                end: end,
+                title: event.isAllDay ? "Calendar all-day busy time" : "Calendar busy time",
+                contextLens: .all
+            )
+        }
+    }
+
+    func findOpenWindows(request: CalendarRealityReadRequest) async -> CalendarRealityReadResult {
+        let permission = await requestCalendarReadAccessFromPlan(actionName: request.userInitiatedPlanAction)
+        let busy: [RealityWindow]
+        if permission.canRead {
+            busy = await fetchDerivedBusyWindows(for: request.horizon)
+        } else {
+            busy = []
+        }
+        let context = CalendarDerivedContext(
+            permissionState: permission,
+            observedRangeStart: request.horizon.start,
+            observedRangeEnd: request.horizon.end,
+            derivedBusyWindowCount: busy.count,
+            userInitiatedPlanAction: request.userInitiatedPlanAction,
+            explanation: permission.canRead
+                ? "Plan used derived calendar busy time locally to find open windows."
+                : "Plan still works without calendar access; no calendar busy time was read."
+        )
+        let snapshot = RealityModelProjector().project(
+            input: RealityProjectionInput(
+                now: request.horizon.start,
+                horizon: request.horizon,
+                calendarBusyWindows: busy,
+                calendarContext: context,
+                minimumWindowMinutes: request.minimumWindowMinutes
+            )
+        )
+        return CalendarRealityReadResult(
+            permissionState: permission,
+            derivedBusyWindows: busy,
+            calendarContext: context,
+            openWindowCandidates: snapshot.openWindowCandidates
+        )
+    }
+
+    func createCalendarBlock(intent: ScheduledBlockWriteIntent, now: Date) async throws -> ScheduledAmbitionsBlock {
+        guard intent.isExecutable else {
+            throw CalendarRemindersError.authorizationDenied(scope: .calendarEvents)
+        }
+        let permission = await requestCalendarWriteAccessForConfirmedBlock(intent: intent)
+        guard permission.canWrite else {
+            throw CalendarRemindersError.authorizationDenied(scope: .calendarEvents)
+        }
+        let payload = EventKitEventPayload(
+            title: intent.block.title,
+            notes: "Created by Ambitions after explicit Plan confirmation.",
+            startDate: intent.block.start,
+            endDate: intent.block.end
+        )
+        let identifier = try await storeClient.saveEvent(payload)
+        return ScheduledAmbitionsBlock(
+            id: intent.block.id,
+            title: intent.block.title,
+            start: intent.block.start,
+            end: intent.block.end,
+            contextLens: intent.block.contextLens,
+            relatedGoalID: intent.block.relatedGoalID,
+            relatedCaptureID: intent.block.relatedCaptureID,
+            relatedPlanID: intent.block.relatedPlanID,
+            isUserConfirmed: true,
+            calendarEventIdentifier: identifier
+        )
+    }
+}
+
 struct EventKitReminderPayload: Sendable, Equatable {
     let title: String
     let notes: String
@@ -396,6 +643,7 @@ struct EventKitCalendarEventSnapshot: Sendable, Equatable {
 protocol EventKitStoreClient: Sendable {
     func authorizationState(for scope: CalendarRemindersScope) async -> CalendarRemindersAuthorizationState
     func requestAuthorization(for scope: CalendarRemindersScope) async -> CalendarRemindersAuthorizationState
+    func requestWriteOnlyAuthorizationForEvents() async -> CalendarRemindersAuthorizationState
     func saveReminder(_ payload: EventKitReminderPayload) async throws -> String
     func saveEvent(_ payload: EventKitEventPayload) async throws -> String
     // Reserved for Canon Batch 5B read-path work. Batch 5A does not call this.
@@ -442,6 +690,19 @@ actor EventKitStoreClientLive: EventKitStoreClient {
             }
         }
         return await authorizationState(for: scope)
+    }
+
+    func requestWriteOnlyAuthorizationForEvents() async -> CalendarRemindersAuthorizationState {
+        if #available(iOS 17.0, *) {
+            _ = try? await request { completion in
+                store.requestWriteOnlyAccessToEvents(completion: completion)
+            }
+        } else {
+            _ = try? await request { completion in
+                store.requestAccess(to: .event, completion: completion)
+            }
+        }
+        return await authorizationState(for: .calendarEvents)
     }
 
     func saveReminder(_ payload: EventKitReminderPayload) async throws -> String {

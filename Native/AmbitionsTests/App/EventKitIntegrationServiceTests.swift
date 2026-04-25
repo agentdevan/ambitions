@@ -155,6 +155,12 @@ private actor RecordingEventKitStoreClient: EventKitStoreClient {
         return response
     }
 
+    func requestWriteOnlyAuthorizationForEvents() async -> CalendarRemindersAuthorizationState {
+        let response = authorizationResponseByScope[key(for: .calendarEvents)] ?? .denied
+        authorizationByScope[key(for: .calendarEvents)] = response
+        return response
+    }
+
     func saveReminder(_ payload: EventKitReminderPayload) async throws -> String {
         lastReminderPayload = payload
         return "reminder-1"

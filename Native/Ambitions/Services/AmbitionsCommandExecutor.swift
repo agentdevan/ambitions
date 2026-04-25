@@ -78,6 +78,17 @@ struct AmbitionsCommandExecutor: CommandExecuting {
             return await executeDeadlineChange(command, context: context)
         case .setPriority, .setUrgency:
             return await executePriorityChange(command, context: context)
+        case .scheduleItem where command.payload.metadata["calendarWriteIntent"] == "true":
+            return AmbitionsCommandExecutionResult(
+                status: .unsupported,
+                summary: "Calendar write intents require the Plan-owned calendar block writer and explicit user confirmation; this command path does not write calendar data.",
+                target: command.target,
+                recommendationExplanationIDs: command.relations.recommendationExplanationIDs,
+                metadata: [
+                    "blockedBy": "plan_calendar_writer_required",
+                    "calendarWriteIntent": "true"
+                ]
+            )
         case .createPlanItem, .scheduleItem:
             return await executePlanSeedRepresentation(command, context: context)
         default:

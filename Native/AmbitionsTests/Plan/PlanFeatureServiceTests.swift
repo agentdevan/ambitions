@@ -115,6 +115,27 @@ final class PlanFeatureServiceTests: XCTestCase {
         throw XCTSkip("Demo bootstrap fixtures are only available in DEBUG builds.")
         #endif
     }
+
+    func testPlanCalendarAwareActionIsPlanOwnedAndWritesPrivacyLedger() async throws {
+        let ledger = InMemoryEventLedgerRepository()
+        let repositories = try await makeRepositories(eventLedger: ledger)
+        let calendar = RecordingPlanCalendarRealityService()
+        let service = RepositoryBackedPlanService(
+            repositories: repositories,
+            calendarRealityService: calendar
+        )
+
+        let dashboard = try await service.makePlanCalendarAware(now: fixedDate)
+        let events = try await ledger.fetchRecent(limit: 5)
+
+        let requestedActionNames = await calendar.currentRequestedActionNames()
+        XCTAssertEqual(requestedActionNames, ["Make Plan calendar-aware"])
+        XCTAssertEqual(dashboard.calendarAwareness.status, .calendarAware)
+        XCTAssertTrue(dashboard.calendarAwareness.detail.contains("open window"))
+        XCTAssertEqual(events.first?.kind, .calendarContextObserved)
+        XCTAssertEqual(events.first?.privacy, .calendarDerived)
+        XCTAssertEqual(events.first?.source, .plan)
+    }
 }
 
 private extension PlanFeatureServiceTests {
@@ -122,7 +143,7 @@ private extension PlanFeatureServiceTests {
         ISO8601DateFormatter().date(from: GoalEngineFixtures.fixedNow) ?? Date(timeIntervalSince1970: 1_712_692_800)
     }
 
-    func makeRepositories() async throws -> AppRepositories {
+    func makeRepositories(eventLedger: (any EventLedgerRepository)? = nil) async throws -> AppRepositories {
         let store = try AmbitionsPersistenceStore(inMemory: true)
         return AppRepositories(
             goals: SwiftDataGoalRepository(store: store),
@@ -130,6 +151,7 @@ private extension PlanFeatureServiceTests {
             evidence: SwiftDataProgressEvidenceRepository(store: store),
             feedback: SwiftDataFeedbackEventRepository(store: store),
             captures: SwiftDataCaptureRepository(store: store),
+            eventLedger: eventLedger ?? InMemoryEventLedgerRepository(),
             appState: SwiftDataAppStateRepository(store: store)
         )
     }
@@ -253,5 +275,67 @@ private extension PlanFeatureServiceTests {
             progressStrategy: progress,
             plan: plan
         )
+    }
+}
+
+private actor RecordingPlanCalendarRealityService: CalendarRealityServicing {
+    private(set) var requestedActionNames: [String] = []
+
+    func calendarPermissionState() async -> CalendarPermissionState {
+        .notDetermined
+    }
+
+    func requestCalendarReadAccessFromPlan(actionName: String) async -> CalendarPermissionState {
+        requestedActionNames.append(actionName)
+        return .readWrite
+    }
+
+    func requestCalendarWriteAccessForConfirmedBlock(intent: ScheduledBlockWriteIntent) async -> CalendarPermissionState {
+        _ = intent
+        return .readWrite
+    }
+
+    func fetchDerivedBusyWindows(for range: DateInterval) async -> [RealityWindow] {
+        [
+            RealityWindow(
+                id: "calendar-busy",
+                kind: .calendarDerivedBusy,
+                source: .calendarDerived,
+                start: range.start.addingTimeInterval(3_600),
+                end: range.start.addingTimeInterval(5_400),
+                title: "Calendar busy time"
+            )
+        ]
+    }
+
+    func findOpenWindows(request: CalendarRealityReadRequest) async -> CalendarRealityReadResult {
+        let permission = await requestCalendarReadAccessFromPlan(actionName: request.userInitiatedPlanAction)
+        let busy = await fetchDerivedBusyWindows(for: request.horizon)
+        let context = CalendarDerivedContext(
+            permissionState: permission,
+            observedRangeStart: request.horizon.start,
+            observedRangeEnd: request.horizon.end,
+            derivedBusyWindowCount: busy.count,
+            userInitiatedPlanAction: request.userInitiatedPlanAction,
+            explanation: "Plan used derived busy time locally."
+        )
+        let snapshot = RealityModelProjector().project(
+            input: RealityProjectionInput(
+                now: request.horizon.start,
+                horizon: request.horizon,
+                calendarBusyWindows: busy,
+                calendarContext: context
+            )
+        )
+        return CalendarRealityReadResult(
+            permissionState: permission,
+            derivedBusyWindows: busy,
+            calendarContext: context,
+            openWindowCandidates: snapshot.openWindowCandidates
+        )
+    }
+
+    func currentRequestedActionNames() -> [String] {
+        requestedActionNames
     }
 }

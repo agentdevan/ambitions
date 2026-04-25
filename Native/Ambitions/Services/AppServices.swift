@@ -42,6 +42,13 @@ protocol HabitsServicing: Sendable {
 protocol PlanServicing: Sendable {
     func loadPlanDashboard(now: Date) async throws -> PlanDashboard
     func loadWeeklyReviewDashboard(now: Date) async throws -> WeeklyReviewDashboard
+    func makePlanCalendarAware(now: Date) async throws -> PlanDashboard
+}
+
+extension PlanServicing {
+    func makePlanCalendarAware(now: Date) async throws -> PlanDashboard {
+        try await loadPlanDashboard(now: now)
+    }
 }
 
 protocol InsightsServicing: Sendable {
@@ -153,6 +160,11 @@ struct StubPlanService: PlanServicing {
     func loadWeeklyReviewDashboard(now: Date) async throws -> WeeklyReviewDashboard {
         _ = now
         return weeklyReviewDashboard
+    }
+
+    func makePlanCalendarAware(now: Date) async throws -> PlanDashboard {
+        _ = now
+        return dashboard
     }
 }
 

@@ -374,6 +374,10 @@ struct AmbitionsCommandValidator: Sendable {
         case .createPlanItem:
             return command.payload.primaryText == nil ? .needsConfirmation : .valid
         case .scheduleItem:
+            if command.payload.metadata["calendarWriteIntent"] == "true",
+               command.payload.metadata["userConfirmed"] != "true" {
+                return .needsConfirmation
+            }
             return command.target.captureID == nil && command.target.planID == nil && command.payload.primaryText == nil ? .needsMissingTarget : .valid
         case .startFocus, .completeAction, .delayAction, .splitAction:
             return command.target.goalID == nil || command.target.stepID == nil ? .needsMissingTarget : .valid

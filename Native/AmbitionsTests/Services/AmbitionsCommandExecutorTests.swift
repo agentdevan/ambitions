@@ -260,4 +260,42 @@ final class AmbitionsCommandExecutorTests: XCTestCase {
         XCTAssertEqual(result.status, .blocked)
         XCTAssertEqual(result.metadata["blockedBy"], "missing_capture_service")
     }
+
+    func testScheduleCalendarWriteIntentRequiresConfirmationAndDoesNotWrite() async {
+        let executor = AmbitionsCommandExecutor()
+        let unconfirmed = AmbitionsCommand(
+            id: "command-calendar-write",
+            kind: .scheduleItem,
+            source: .plan,
+            target: AmbitionsCommandTarget(planID: "plan-1"),
+            payload: AmbitionsCommandPayload(
+                title: "Draft proposal",
+                metadata: ["calendarWriteIntent": "true"]
+            ),
+            createdAt: "2026-04-25T12:00:00Z"
+        )
+
+        XCTAssertEqual(executor.validate(unconfirmed), .needsConfirmation)
+
+        let confirmed = AmbitionsCommand(
+            id: "command-calendar-write-confirmed",
+            kind: .scheduleItem,
+            source: .plan,
+            target: AmbitionsCommandTarget(planID: "plan-1"),
+            payload: AmbitionsCommandPayload(
+                title: "Draft proposal",
+                metadata: ["calendarWriteIntent": "true", "userConfirmed": "true"]
+            ),
+            createdAt: "2026-04-25T12:00:00Z"
+        )
+
+        let result = await executor.execute(
+            confirmed,
+            context: CommandExecutionContext(now: Date(timeIntervalSince1970: 1_714_000_000))
+        )
+
+        XCTAssertEqual(result.status, .unsupported)
+        XCTAssertEqual(result.metadata["calendarWriteIntent"], "true")
+        XCTAssertTrue(result.eventLedgerEntryIDs.isEmpty)
+    }
 }

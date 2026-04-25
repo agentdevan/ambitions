@@ -1432,11 +1432,11 @@ private extension RepositoryBackedTodayService {
             )
         case .createCalendarEvent:
             let selection = nextStepSchedulingSelection(goal: goal, step: selectedStep)
-            let authorization = await calendarRemindersService.requestAuthorizationIfNeeded(for: .calendarEvents)
+            let authorization = await calendarRemindersService.authorizationState(for: .calendarEvents)
             guard authorization.canWrite else {
                 message = TodayInlineMessage(
-                    title: "Calendar permission needed",
-                    body: "Enable Calendar access to add next-step events from Ambitions.",
+                    title: "Use Plan for Calendar access",
+                    body: "Plan works without Calendar. To add calendar-aware blocks, open Plan and choose Make Plan calendar-aware first.",
                     state: .warning
                 )
                 break

@@ -94,6 +94,25 @@ enum PlanShapingActionKind: String, Sendable, CaseIterable {
     }
 }
 
+enum PlanCalendarAwarenessStatus: String, Sendable {
+    case unavailable
+    case baseline
+    case calendarAware
+    case denied
+    case writeOnly
+}
+
+struct PlanCalendarAwarenessState: Sendable {
+    let status: PlanCalendarAwarenessStatus
+    let title: String
+    let detail: String
+    let primaryActionTitle: String
+    let primaryActionSystemImage: String
+    let valueLabel: String
+    let visualState: AmbitionVisualState
+    let canRequestCalendarRead: Bool
+}
+
 struct PlanHeroPillState: Identifiable, Sendable, Hashable {
     let title: String
     let icon: String?
@@ -285,6 +304,7 @@ struct PlanDashboard: Sendable {
     let pressureScrubber: PlanPressureScrubberState
     let weekDays: [PlanElasticWeekDayState]
     let believability: PlanBelievabilityState
+    let calendarAwareness: PlanCalendarAwarenessState
     let resilience: PlanExecutionResilienceState
     let goalShapingItems: [PlanGoalShapingItem]
     let shapingActions: [PlanShapingActionState]

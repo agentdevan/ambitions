@@ -70,6 +70,11 @@ struct PlanScreen: View {
                         )
                     }
 
+                    PlanCalendarAwarenessCard(
+                        state: dashboard.calendarAwareness,
+                        onPrimaryAction: handleCalendarAwarenessAction
+                    )
+
                     PlanExecutionResilienceCard(
                         resilience: dashboard.resilience,
                         onOpenGoal: openGoal,
@@ -179,12 +184,75 @@ struct PlanScreen: View {
         openGoal(target)
     }
 
+    private func handleCalendarAwarenessAction(_ state: PlanCalendarAwarenessState) {
+        guard state.canRequestCalendarRead else { return }
+        Task {
+            await viewModel.makeCalendarAware(using: container.planService)
+        }
+    }
+
     private func openPlanRoute(_ route: PlanRouteTarget) {
         container.navigation.openPlanRoute(route)
     }
 
     private func openGoal(_ target: GoalRouteTarget) {
         container.navigation.openGoalDetail(target)
+    }
+}
+
+private struct PlanCalendarAwarenessCard: View {
+    @Environment(\.ambitionTheme) private var theme
+
+    let state: PlanCalendarAwarenessState
+    let onPrimaryAction: (PlanCalendarAwarenessState) -> Void
+
+    var body: some View {
+        SchedulePanel(
+            AmbitionRichPanelConfiguration(
+                kind: .schedule,
+                eyebrow: "Calendar",
+                title: state.title,
+                subtitle: state.detail,
+                icon: state.primaryActionSystemImage,
+                semanticState: semanticState,
+                accessibilityLabel: "\(state.title). \(state.detail)"
+            ),
+            visualSlot: {
+                EmptyView()
+            },
+            contentSlot: {
+                VStack(alignment: .leading, spacing: theme.spacing.md) {
+                    HStack(spacing: theme.spacing.sm) {
+                        TagPill(state.valueLabel, icon: "lock.shield", state: state.visualState)
+                        TagPill("Local only", icon: "iphone", state: .default)
+                        TagPill("Plan action", icon: "hand.tap", state: .default)
+                    }
+
+                    Button {
+                        onPrimaryAction(state)
+                    } label: {
+                        Label(state.primaryActionTitle, systemImage: state.primaryActionSystemImage)
+                            .frame(maxWidth: .infinity, alignment: .leading)
+                    }
+                    .buttonStyle(.borderedProminent)
+                    .disabled(state.canRequestCalendarRead == false)
+                    .accessibilityIdentifier("plan.calendar-aware.primary")
+                }
+            }
+        )
+        .accessibilityElement(children: .combine)
+        .accessibilityLabel("\(state.title). \(state.detail)")
+    }
+
+    private var semanticState: AmbitionSemanticState {
+        switch state.status {
+        case .calendarAware:
+            return .calendarDerived
+        case .denied, .writeOnly:
+            return .caution
+        case .baseline, .unavailable:
+            return .neutral
+        }
     }
 }
 

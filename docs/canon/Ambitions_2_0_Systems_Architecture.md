@@ -25,6 +25,7 @@ This document defines the consolidated Ambitions 2.0 systems. Product surfaces c
 - Must not be duplicated: calendar parsing, capacity math, believability scoring.
 - Ambitions 2.0 scope: calendar read/write, no-permission fallback, local-first derived insight policy.
 - Later scope: richer external integrations only after trust boundaries exist.
+- Batch 70 implementation status: The shared foundation now exists as `RealitySnapshot`, `RealityWindow`, `AvailabilitySummary`, `OpenWindowCandidate`, `CalendarDerivedContext`, `RealityConflictSummary`, `ScheduledAmbitionsBlock`, `CapacityEstimate`, `CalendarPermissionState`, and `ScheduledBlockWriteIntent`, with `RealityModelProjector` building deterministic no-permission and calendar-aware snapshots. EventKit is behind `CalendarRealityServicing`, `CalendarPermissionServicing`, and `CalendarBlockWriting`; calendar read is requested only through Plan's explicit calendar-aware action, derived busy windows discard raw event titles, and confirmed calendar block writes require a user-confirmed intent. Batch 70 does not implement full Plan 2.0 UI, automatic scheduling, sync/export, Today redesign, widgets, Live Activities, App Intents productization, Path Intelligence UI, onboarding, or Reviews.
 
 ## Execution Resilience Stack
 

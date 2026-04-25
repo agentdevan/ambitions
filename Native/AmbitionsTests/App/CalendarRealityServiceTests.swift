@@ -1,0 +1,162 @@
+import XCTest
+@testable import Ambitions
+
+final class CalendarRealityServiceTests: XCTestCase {
+    func testFindOpenWindowsRequestsReadOnlyFromExplicitPlanActionAndDropsRawTitles() async {
+        let store = RecordingRealityEventKitStoreClient()
+        let now = Date(timeIntervalSince1970: 1_714_000_000)
+        await store.setAuthorization(state: .notDetermined, for: .calendarEvents)
+        await store.setAuthorizationResponse(state: .fullAccess, for: .calendarEvents)
+        await store.setEvents([
+            EventKitCalendarEventSnapshot(
+                title: "Sensitive appointment title",
+                startDate: now.addingTimeInterval(3_600),
+                endDate: now.addingTimeInterval(5_400),
+                isAllDay: false
+            )
+        ])
+        let service = EventKitIntegrationService(storeClient: store)
+
+        let result = await service.findOpenWindows(
+            request: CalendarRealityReadRequest(
+                horizon: DateInterval(start: now, end: now.addingTimeInterval(4 * 3_600)),
+                userInitiatedPlanAction: "Find real open windows"
+            )
+        )
+        let requestedScopes = await store.requestedScopes
+
+        XCTAssertEqual(requestedScopes, [.calendarEvents])
+        XCTAssertEqual(result.permissionState, .readWrite)
+        XCTAssertEqual(result.derivedBusyWindows.count, 1)
+        XCTAssertEqual(result.derivedBusyWindows.first?.title, "Calendar busy time")
+        XCTAssertFalse(result.derivedBusyWindows.contains { $0.title.contains("Sensitive") })
+        XCTAssertTrue(result.calendarContext.localOnly)
+        XCTAssertEqual(result.calendarContext.privacy, .calendarDerived)
+        XCTAssertFalse(result.openWindowCandidates.isEmpty)
+    }
+
+    func testDeniedCalendarAccessDegradesWithoutFetchingEvents() async {
+        let store = RecordingRealityEventKitStoreClient()
+        let now = Date(timeIntervalSince1970: 1_714_000_000)
+        await store.setAuthorization(state: .denied, for: .calendarEvents)
+        let service = EventKitIntegrationService(storeClient: store)
+
+        let result = await service.findOpenWindows(
+            request: CalendarRealityReadRequest(
+                horizon: DateInterval(start: now, end: now.addingTimeInterval(2 * 3_600)),
+                userInitiatedPlanAction: "Make Plan calendar-aware"
+            )
+        )
+
+        XCTAssertEqual(result.permissionState, .denied)
+        XCTAssertTrue(result.derivedBusyWindows.isEmpty)
+        XCTAssertTrue(result.calendarContext.explanation.contains("Plan still works without calendar access"))
+        let fetchCount = await store.currentFetchCount()
+        XCTAssertEqual(fetchCount, 0)
+    }
+
+    func testConfirmedBlockWriteRequestsWriteAndCreatesAmbitionsBlock() async throws {
+        let store = RecordingRealityEventKitStoreClient()
+        let now = Date(timeIntervalSince1970: 1_714_000_000)
+        await store.setAuthorization(state: .notDetermined, for: .calendarEvents)
+        await store.setWriteOnlyAuthorizationResponse(state: .writeOnly)
+        let service = EventKitIntegrationService(storeClient: store)
+        let block = ScheduledAmbitionsBlock(
+            id: "block-1",
+            title: "Draft proposal",
+            start: now.addingTimeInterval(3_600),
+            end: now.addingTimeInterval(5_400),
+            contextLens: .work,
+            relatedPlanID: "plan-1",
+            isUserConfirmed: true
+        )
+
+        let written = try await service.createCalendarBlock(
+            intent: ScheduledBlockWriteIntent(id: "intent-1", block: block, requestedAt: now),
+            now: now
+        )
+        let payload = await store.lastEventPayload
+        let writeOnlyRequestCount = await store.currentWriteOnlyRequestCount()
+
+        XCTAssertEqual(written.calendarEventIdentifier, "event-1")
+        XCTAssertEqual(writeOnlyRequestCount, 1)
+        XCTAssertEqual(payload?.title, "Draft proposal")
+        XCTAssertEqual(payload?.notes, "Created by Ambitions after explicit Plan confirmation.")
+    }
+}
+
+private actor RecordingRealityEventKitStoreClient: EventKitStoreClient {
+    private var authorizationByScope: [String: CalendarRemindersAuthorizationState] = [:]
+    private var authorizationResponseByScope: [String: CalendarRemindersAuthorizationState] = [:]
+    private var writeOnlyAuthorizationResponse: CalendarRemindersAuthorizationState = .denied
+    private var events: [EventKitCalendarEventSnapshot] = []
+    private(set) var requestedScopes: [CalendarRemindersScope] = []
+    private(set) var writeOnlyRequestCount = 0
+    private(set) var fetchCount = 0
+    private(set) var lastEventPayload: EventKitEventPayload?
+
+    func authorizationState(for scope: CalendarRemindersScope) async -> CalendarRemindersAuthorizationState {
+        authorizationByScope[key(for: scope)] ?? .notDetermined
+    }
+
+    func requestAuthorization(for scope: CalendarRemindersScope) async -> CalendarRemindersAuthorizationState {
+        requestedScopes.append(scope)
+        let response = authorizationResponseByScope[key(for: scope)] ?? .denied
+        authorizationByScope[key(for: scope)] = response
+        return response
+    }
+
+    func requestWriteOnlyAuthorizationForEvents() async -> CalendarRemindersAuthorizationState {
+        writeOnlyRequestCount += 1
+        authorizationByScope[key(for: .calendarEvents)] = writeOnlyAuthorizationResponse
+        return writeOnlyAuthorizationResponse
+    }
+
+    func saveReminder(_ payload: EventKitReminderPayload) async throws -> String {
+        _ = payload
+        return "reminder-1"
+    }
+
+    func saveEvent(_ payload: EventKitEventPayload) async throws -> String {
+        lastEventPayload = payload
+        return "event-1"
+    }
+
+    func fetchEvents(in interval: DateInterval) async -> [EventKitCalendarEventSnapshot] {
+        fetchCount += 1
+        return events.filter { $0.startDate < interval.end && $0.endDate > interval.start }
+    }
+
+    func setAuthorization(state: CalendarRemindersAuthorizationState, for scope: CalendarRemindersScope) {
+        authorizationByScope[key(for: scope)] = state
+    }
+
+    func setAuthorizationResponse(state: CalendarRemindersAuthorizationState, for scope: CalendarRemindersScope) {
+        authorizationResponseByScope[key(for: scope)] = state
+    }
+
+    func setWriteOnlyAuthorizationResponse(state: CalendarRemindersAuthorizationState) {
+        writeOnlyAuthorizationResponse = state
+    }
+
+    func setEvents(_ events: [EventKitCalendarEventSnapshot]) {
+        self.events = events
+    }
+
+    func currentWriteOnlyRequestCount() -> Int {
+        writeOnlyRequestCount
+    }
+
+    func currentFetchCount() -> Int {
+        fetchCount
+    }
+
+    private func key(for scope: CalendarRemindersScope) -> String {
+        switch scope {
+        case .reminders:
+            return "reminders"
+        case .calendarEvents:
+            return "calendarEvents"
+        }
+    }
+}

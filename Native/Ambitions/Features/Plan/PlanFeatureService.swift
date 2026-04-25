@@ -3,15 +3,63 @@ import Foundation
 
 struct RepositoryBackedPlanService: PlanServicing {
     let repositories: AppRepositories
+    let calendarRealityService: (any CalendarRealityServicing)?
+
+    init(
+        repositories: AppRepositories,
+        calendarRealityService: (any CalendarRealityServicing)? = nil
+    ) {
+        self.repositories = repositories
+        self.calendarRealityService = calendarRealityService
+    }
 
     func loadPlanDashboard(now: Date) async throws -> PlanDashboard {
         let snapshot = try await loadSnapshot()
-        return makeDashboard(snapshot: snapshot, now: now)
+        let permission = await calendarRealityService?.calendarPermissionState() ?? .unavailable
+        return makeDashboard(snapshot: snapshot, now: now, calendarAwareness: makeCalendarAwarenessState(permission: permission, openWindowCount: nil))
     }
 
     func loadWeeklyReviewDashboard(now: Date) async throws -> WeeklyReviewDashboard {
         let snapshot = try await loadSnapshot()
         return makeWeeklyReviewDashboard(snapshot: snapshot, now: now)
+    }
+
+    func makePlanCalendarAware(now: Date) async throws -> PlanDashboard {
+        let snapshot = try await loadSnapshot()
+        guard let calendarRealityService else {
+            return makeDashboard(snapshot: snapshot, now: now, calendarAwareness: makeCalendarAwarenessState(permission: .unavailable, openWindowCount: nil))
+        }
+        let result = await calendarRealityService.findOpenWindows(
+            request: CalendarRealityReadRequest(
+                horizon: weekHorizon(now: now),
+                userInitiatedPlanAction: "Make Plan calendar-aware",
+                minimumWindowMinutes: 30
+            )
+        )
+        let realitySnapshot = RealityModelProjector().project(
+            input: RealityProjectionInput(
+                now: now,
+                horizon: weekHorizon(now: now),
+                activeContextLens: .all,
+                calendarBusyWindows: result.derivedBusyWindows,
+                calendarContext: result.calendarContext,
+                minimumWindowMinutes: 30
+            )
+        )
+        let event = RealityIntegrationAdapter.calendarContextObservedEntry(
+            snapshot: realitySnapshot,
+            occurredAt: now,
+            actionName: "Make Plan calendar-aware"
+        )
+        try? await repositories.eventLedger.append(event)
+        return makeDashboard(
+            snapshot: snapshot,
+            now: now,
+            calendarAwareness: makeCalendarAwarenessState(
+                permission: result.permissionState,
+                openWindowCount: result.openWindowCandidates.count
+            )
+        )
     }
 }
 
@@ -59,7 +107,75 @@ private extension RepositoryBackedPlanService {
         )
     }
 
-    func makeDashboard(snapshot: Snapshot, now: Date) -> PlanDashboard {
+    func weekHorizon(now: Date) -> DateInterval {
+        let calendar = Calendar.current
+        let start = calendar.startOfDay(for: now)
+        let end = calendar.date(byAdding: .day, value: 7, to: start) ?? start.addingTimeInterval(7 * 86_400)
+        return DateInterval(start: start, end: end)
+    }
+
+    func makeCalendarAwarenessState(permission: CalendarPermissionState, openWindowCount: Int?) -> PlanCalendarAwarenessState {
+        switch permission {
+        case .readWrite:
+            return PlanCalendarAwarenessState(
+                status: .calendarAware,
+                title: "Calendar-aware planning",
+                detail: openWindowCount.map { "Plan used calendar-derived busy time locally and found \($0) open window\($0 == 1 ? "" : "s")." }
+                    ?? "Plan can use calendar-derived busy time locally when you ask for real open windows.",
+                primaryActionTitle: "Find real open windows",
+                primaryActionSystemImage: "calendar.badge.clock",
+                valueLabel: "Aware",
+                visualState: .success,
+                canRequestCalendarRead: true
+            )
+        case .writeOnly:
+            return PlanCalendarAwarenessState(
+                status: .writeOnly,
+                title: "Calendar write is available",
+                detail: "Plan can write confirmed blocks, but it cannot read availability until calendar read access is granted.",
+                primaryActionTitle: "Make Plan calendar-aware",
+                primaryActionSystemImage: "calendar.badge.clock",
+                valueLabel: "Write only",
+                visualState: .warning,
+                canRequestCalendarRead: true
+            )
+        case .denied, .restricted:
+            return PlanCalendarAwarenessState(
+                status: .denied,
+                title: "Plan works without Calendar",
+                detail: "Calendar access is unavailable, so Plan uses Ambitions data and baseline windows without reading events.",
+                primaryActionTitle: "Find real open windows",
+                primaryActionSystemImage: "calendar.badge.exclamationmark",
+                valueLabel: "Denied",
+                visualState: .warning,
+                canRequestCalendarRead: false
+            )
+        case .notDetermined:
+            return PlanCalendarAwarenessState(
+                status: .baseline,
+                title: "Make Plan calendar-aware",
+                detail: "Plan works without access. With your confirmation, it can read derived busy time locally to find real open windows.",
+                primaryActionTitle: "Make Plan calendar-aware",
+                primaryActionSystemImage: "calendar.badge.plus",
+                valueLabel: "Optional",
+                visualState: .default,
+                canRequestCalendarRead: true
+            )
+        case .unavailable:
+            return PlanCalendarAwarenessState(
+                status: .unavailable,
+                title: "Calendar-aware mode unavailable",
+                detail: "Plan is using Ambitions data only in this runtime.",
+                primaryActionTitle: "Find real open windows",
+                primaryActionSystemImage: "calendar",
+                valueLabel: "Local",
+                visualState: .default,
+                canRequestCalendarRead: false
+            )
+        }
+    }
+
+    func makeDashboard(snapshot: Snapshot, now: Date, calendarAwareness: PlanCalendarAwarenessState) -> PlanDashboard {
         let activeGoals = snapshot.goals.filter { $0.state == .active || $0.state == .paused }
         let openCaptures = snapshot.captures.filter { $0.status != .archived }
         let blockedDrafts = snapshot.drafts.filter { $0.latestResultKind == .blocked }
@@ -131,6 +247,7 @@ private extension RepositoryBackedPlanService {
             pressureScrubber: pressureScrubber,
             weekDays: weekDays,
             believability: believability,
+            calendarAwareness: calendarAwareness,
             resilience: resilience,
             goalShapingItems: goalShapingItems(summaries: activeGoalSummaries),
             shapingActions: makeShapingActions(
