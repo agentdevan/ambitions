@@ -464,6 +464,14 @@ private actor StaticGoalsService: GoalsServicing {
                 pill: GoalsHeroPillState(title: "Calm", icon: "leaf", state: .success)
             ),
             lowerPriority: GoalsLowerPriorityState(title: "Lower priority", subtitle: "Test goals", disclosureTitle: "Show quieter goals", cards: []),
+            lifecycleRail: [
+                GoalLifecycleRailSegment(id: "previous", title: "Previous", count: 0, subtitle: "None", state: .default),
+                GoalLifecycleRailSegment(id: "active", title: "Active", count: items.count, subtitle: "Test goals", state: .selected),
+                GoalLifecycleRailSegment(id: "future", title: "Future", count: 0, subtitle: "None", state: .default),
+            ],
+            stateChips: [],
+            atlasPreview: nil,
+            archiveSummary: GoalPortfolioArchiveSummary(title: "Archive is quiet", subtitle: "No archive test goals", chips: []),
             items: items,
             isSeeded: false,
             emptyTitle: "No goals",

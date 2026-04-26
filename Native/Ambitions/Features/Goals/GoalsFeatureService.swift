@@ -789,12 +789,12 @@ private extension RepositoryBackedGoalsService {
                 learningSummary: learningSnapshot.goalSummaries[item.target.goalID ?? ""]
             )
         }
-        let activeCards = cards.filter { $0.renderState == .active || $0.renderState == .starter }
+        let activeCards = cards.filter { $0.lifecycleState.isCurrentPortfolioState || $0.renderState == .starter }
         let activeDirectionCards = activeCards
-            .filter { $0.posture == .active }
+            .filter { $0.posture == .active || $0.lifecycleState == .protected }
             .sorted(by: boardPriorityDescriptor)
         let pressuredCards = cards
-            .filter { [.atRisk, .crowded, .stalled].contains($0.posture) }
+            .filter { [.atRisk, .crowded, .stalled].contains($0.posture) || $0.lifecycleState == .waiting || $0.lifecycleState == .blocked }
             .sorted(by: boardPriorityDescriptor)
         let recentMovementCards = activeCards
             .sorted(by: recentMovementDescriptor)
@@ -857,11 +857,15 @@ private extension RepositoryBackedGoalsService {
             ),
             weekPressureSummary: weekPressureSummary,
             lowerPriority: GoalsLowerPriorityState(
-                title: "Lower-priority and closed loops",
-                subtitle: "Paused or already-closed goals stay available without competing with live direction pressure.",
-                disclosureTitle: "Show quieter goals",
+                title: "Archive and quieter goals",
+                subtitle: "Parked, completed, and cancelled goals stay part of the progress history without competing with live direction.",
+                disclosureTitle: "Show archive",
                 cards: lowerPriorityCards
             ),
+            lifecycleRail: makeLifecycleRail(cards: cards),
+            stateChips: makeStateChips(cards: cards),
+            atlasPreview: makeAtlasPreview(snapshot: snapshot, cards: cards),
+            archiveSummary: makeArchiveSummary(cards: cards),
             items: items,
             isSeeded: seeded,
             emptyTitle: "No goals yet",
@@ -1121,6 +1125,33 @@ private extension RepositoryBackedGoalsService {
             ?? item.shellSummary?.pathSummary
             ?? item.progressLabel
         let milestoneSummary = milestoneSummary(for: item, pathSummary: pathSummary)
+        let sourceGoal = item.target.goalID.flatMap { goalID in snapshot.goals.first(where: { $0.id == goalID }) }
+        let sourceDraft = item.target.draftID.flatMap { draftID in snapshot.drafts.first(where: { $0.id == draftID }) }
+        let goalEvidence = item.target.goalID.map { goalID in snapshot.evidence.filter { $0.goalID == goalID } } ?? []
+        let lifecycleState = portfolioLifecycleState(
+            item: item,
+            goal: sourceGoal,
+            draft: sourceDraft,
+            pathSummary: pathSummary,
+            learningSummary: learningSummary,
+            evidence: goalEvidence
+        )
+        let proofSummary = proofSummary(for: item, evidence: goalEvidence)
+        let nextVisibleStep = nextVisibleStep(for: item, goal: sourceGoal, draft: sourceDraft)
+        let weather = weatherState(
+            lifecycleState: lifecycleState,
+            posture: posture,
+            proofSummary: proofSummary,
+            nextVisibleStep: nextVisibleStep,
+            pathSummary: pathSummary
+        )
+        let momentumIntegrity = momentumIntegrity(
+            lifecycleState: lifecycleState,
+            posture: posture,
+            proofSummary: proofSummary,
+            nextVisibleStep: nextVisibleStep,
+            evidence: goalEvidence
+        )
 
         return GoalsBoardCardState(
             id: item.id,
@@ -1138,6 +1169,12 @@ private extension RepositoryBackedGoalsService {
             milestoneSummary: milestoneSummary,
             pressureSummary: pressureSummary(for: item, posture: posture, learningSummary: learningSummary),
             nextStepHint: item.nextStepHint,
+            lifecycleState: lifecycleState,
+            weather: weather,
+            weatherSummary: weatherSummary(for: weather, lifecycleState: lifecycleState, posture: posture, proofSummary: proofSummary, nextVisibleStep: nextVisibleStep),
+            proofSummary: proofSummary,
+            nextVisibleStep: nextVisibleStep,
+            momentumIntegrity: momentumIntegrity,
             supportLabel: item.supportLabel,
             priorityLabel: "Priority #\(item.manualPriorityRank + 1)",
             manualPriorityRank: item.manualPriorityRank,
@@ -1276,6 +1313,240 @@ private extension RepositoryBackedGoalsService {
             return "This goal is intentionally quieter right now."
         case .achieved:
             return "This loop is closed and no longer competing for attention."
+        }
+    }
+
+    func portfolioLifecycleState(
+        item: GoalListItem,
+        goal: Goal?,
+        draft: PersistedGoalDraft?,
+        pathSummary: LifePathStateSummary?,
+        learningSummary: GoalLearningSummary?,
+        evidence: [ProgressEvidence]
+    ) -> GoalPortfolioLifecycleState {
+        if item.renderState == .blocked || draft?.latestResultKind == .blocked {
+            return .blocked
+        }
+
+        if item.renderState == .clarification {
+            return .active
+        }
+
+        if let goal {
+            switch goal.state {
+            case .completed:
+                return .completed
+            case .archived:
+                return goal.plan?.sections.flatMap(\.steps).contains(where: { $0.state == .completed }) == true ? .previous : .cancelledDropped
+            case .paused:
+                return .parked
+            case .draft:
+                return .future
+            case .active:
+                break
+            }
+
+            if goal.plan?.sections.flatMap(\.steps).contains(where: { $0.state == .blocked }) == true ||
+                pathSummary?.blockedPrerequisites.isEmpty == false {
+                return .blocked
+            }
+
+            if hasFutureStart(goal.timing) {
+                return .future
+            }
+        }
+
+        if pathSummary?.readiness.gapCount ?? 0 > 0 {
+            return .waiting
+        }
+
+        if learningSummary?.timelineRisk.riskScore ?? 0 >= 0.8,
+           item.manualPriorityRank == 0 {
+            return .protected
+        }
+
+        if item.manualPriorityRank == 0,
+           item.urgencyScore >= 0.58,
+           item.renderState == .active {
+            return .protected
+        }
+
+        if item.mode == .maintenance || item.mode == .learning || item.mode == .exploration {
+            if item.manualPriorityRank > 1 && evidence.isEmpty {
+                return .passive
+            }
+        }
+
+        if item.renderState == .onHold {
+            return .passive
+        }
+
+        return item.renderState == .starter ? .passive : .active
+    }
+
+    func proofSummary(for item: GoalListItem, evidence: [ProgressEvidence]) -> GoalProofSummary {
+        let sortedEvidence = evidence.sorted { lhs, rhs in
+            (parseDate(lhs.capturedAt) ?? .distantPast) > (parseDate(rhs.capturedAt) ?? .distantPast)
+        }
+        let count = sortedEvidence.count
+        let latest = sortedEvidence.first
+        let title: String
+        let detail: String
+        let visualState: AmbitionVisualState
+
+        if count == 0 {
+            title = "No proof yet"
+            detail = "Needs evidence"
+            visualState = .default
+        } else if let latest {
+            title = count == 1 ? "1 proof point" : "\(count) proof points"
+            detail = "Last proof: \(proofTitle(for: latest))"
+            visualState = .selected
+        } else {
+            title = "Proof building"
+            detail = "Receipts available"
+            visualState = .selected
+        }
+
+        return GoalProofSummary(
+            title: title,
+            detail: detail,
+            count: count,
+            latestTitle: latest.map(proofTitle(for:)),
+            visualState: visualState
+        )
+    }
+
+    func nextVisibleStep(for item: GoalListItem, goal: Goal?, draft: PersistedGoalDraft?) -> GoalNextVisibleStep {
+        let step = (goal?.plan ?? draft?.stagedPlan)?.sections
+            .flatMap(\.steps)
+            .first { $0.state != .completed && $0.state != .cancelled }
+
+        if let step {
+            let effort = step.actionability.fallbackMicroStep.isEmpty ? nil : step.actionability.fallbackMicroStep
+            let timing = nextStepTimingLabel(for: step.timing)
+            let proof = step.evidenceRequired ? "proof useful" : nil
+            return GoalNextVisibleStep(
+                title: step.title,
+                detail: [effort, timing, proof].compactMap { $0 }.joined(separator: " · "),
+                isAvailable: true
+            )
+        }
+
+        let hint = item.nextStepHint.trimmingCharacters(in: .whitespacesAndNewlines)
+        if hint.isEmpty == false, hint.lowercased().contains("open detail") == false {
+            return GoalNextVisibleStep(title: hint, detail: "Ready to clarify", isAvailable: true)
+        }
+
+        return GoalNextVisibleStep(title: "Needs a next step", detail: "Ready to clarify", isAvailable: false)
+    }
+
+    func weatherState(
+        lifecycleState: GoalPortfolioLifecycleState,
+        posture: GoalsBoardPosture,
+        proofSummary: GoalProofSummary,
+        nextVisibleStep: GoalNextVisibleStep,
+        pathSummary: LifePathStateSummary?
+    ) -> GoalWeatherState {
+        if lifecycleState == .protected {
+            return .protected
+        }
+        if lifecycleState == .blocked || posture == .atRisk || pathSummary?.blockedPrerequisites.isEmpty == false {
+            return .stormy
+        }
+        if proofSummary.count == 0 {
+            return .foggy
+        }
+        if nextVisibleStep.isAvailable == false || nextVisibleStep.title.lowercased().contains("clarify") {
+            return .cloudy
+        }
+        return .clear
+    }
+
+    func weatherSummary(
+        for weather: GoalWeatherState,
+        lifecycleState: GoalPortfolioLifecycleState,
+        posture: GoalsBoardPosture,
+        proofSummary: GoalProofSummary,
+        nextVisibleStep: GoalNextVisibleStep
+    ) -> String {
+        switch weather {
+        case .clear:
+            return "Proof and the next move are visible."
+        case .cloudy:
+            return "Progress exists, but the next move needs more shape."
+        case .stormy:
+            return lifecycleState == .blocked ? "A blocker is visible." : posture == .atRisk ? "Risk is visible." : "Pressure needs attention."
+        case .foggy:
+            return proofSummary.count == 0 ? "Proof is still missing." : "Clarity is still forming."
+        case .protected:
+            return "This goal should be defended from distraction."
+        }
+    }
+
+    func momentumIntegrity(
+        lifecycleState: GoalPortfolioLifecycleState,
+        posture: GoalsBoardPosture,
+        proofSummary: GoalProofSummary,
+        nextVisibleStep: GoalNextVisibleStep,
+        evidence: [ProgressEvidence]
+    ) -> GoalMomentumIntegrity {
+        if lifecycleState == .blocked {
+            return GoalMomentumIntegrity(title: "Blocked", detail: "Do not treat activity as progress until the blocker moves.", visualState: .warning)
+        }
+        if lifecycleState == .waiting {
+            return GoalMomentumIntegrity(title: "Waiting", detail: "Momentum depends on an outside answer, date, or condition.", visualState: .warning)
+        }
+        if lifecycleState == .parked {
+            return GoalMomentumIntegrity(title: "Parked", detail: "Intentionally quiet for later.", visualState: .default)
+        }
+        if lifecycleState == .protected {
+            return GoalMomentumIntegrity(title: "Protected", detail: "Keep the next move visible.", visualState: .selected)
+        }
+        if proofSummary.count > 0 && nextVisibleStep.isAvailable {
+            return GoalMomentumIntegrity(title: "Building proof", detail: "Evidence and a next move both exist.", visualState: .selected)
+        }
+        if proofSummary.count == 0 && nextVisibleStep.isAvailable {
+            return GoalMomentumIntegrity(title: "Needs proof", detail: "The next move is clear; evidence has not landed yet.", visualState: .default)
+        }
+        if posture == .stalled || evidence.isEmpty {
+            return GoalMomentumIntegrity(title: "Losing shape", detail: "Add one concrete next step or proof point.", visualState: .warning)
+        }
+        return GoalMomentumIntegrity(title: "Clear next step", detail: "Momentum can stay simple.", visualState: .selected)
+    }
+
+    func hasFutureStart(_ timing: GoalTiming) -> Bool {
+        guard let startsOn = parseDate(timing.startsOn) else { return false }
+        return startsOn > Date()
+    }
+
+    func nextStepTimingLabel(for timing: GoalTiming) -> String? {
+        if let suggested = timing.suggestedNextAt ?? timing.startsOn,
+           let date = parseDate(suggested) {
+            let days = Calendar.current.dateComponents([.day], from: Date(), to: date).day ?? 0
+            if days <= 0 { return "today" }
+            if days <= 7 { return "soon" }
+            return "later"
+        }
+        return nil
+    }
+
+    func proofTitle(for evidence: ProgressEvidence) -> String {
+        if let note = evidence.note?.trimmingCharacters(in: .whitespacesAndNewlines),
+           note.isEmpty == false {
+            return note
+        }
+
+        return switch evidence.evidenceKind {
+        case .stepCompleted: "Completed step"
+        case .habitCompletion: "Habit completion"
+        case .habitMinimumVersion: "Minimum version"
+        case .habitQuickLog: "Quick log"
+        case .sessionLogged: "Session logged"
+        case .reflectionLogged: "Reflection"
+        case .delegatedUpdate: "Delegated update"
+        case .observationLogged: "Observation"
+        case .milestoneReached: "Milestone reached"
         }
     }
 
@@ -1444,6 +1715,99 @@ private extension RepositoryBackedGoalsService {
             title: "Horizon ladder",
             subtitle: "A shallow read on where the live goals sit in their current phase or path without opening Goal Detail.",
             rungs: rungs
+        )
+    }
+
+    func makeLifecycleRail(cards: [GoalsBoardCardState]) -> [GoalLifecycleRailSegment] {
+        let previousCount = cards.filter { [.completed, .cancelledDropped, .previous, .parked].contains($0.lifecycleState) }.count
+        let activeCount = cards.filter(\.lifecycleState.isCurrentPortfolioState).count
+        let futureCount = cards.filter { $0.lifecycleState == .future }.count
+
+        return [
+            GoalLifecycleRailSegment(
+                id: "previous",
+                title: "Previous",
+                count: previousCount,
+                subtitle: previousCount == 0 ? "History will stay visible here" : "Closed, parked, or transformed",
+                state: .default
+            ),
+            GoalLifecycleRailSegment(
+                id: "active",
+                title: "Active",
+                count: activeCount,
+                subtitle: activeCount == 0 ? "No live pursuit right now" : "Currently shaping attention",
+                state: activeCount == 0 ? .default : .selected
+            ),
+            GoalLifecycleRailSegment(
+                id: "future",
+                title: "Future",
+                count: futureCount,
+                subtitle: futureCount == 0 ? "No scheduled future goals" : "Planned, not active yet",
+                state: .default
+            )
+        ]
+    }
+
+    func makeStateChips(cards: [GoalsBoardCardState]) -> [GoalStateChipState] {
+        let chipStates: [GoalPortfolioLifecycleState] = [.protected, .waiting, .blocked, .parked, .completed, .cancelledDropped]
+        return chipStates.map { state in
+            GoalStateChipState(lifecycleState: state, count: cards.filter { $0.lifecycleState == state }.count)
+        }
+    }
+
+    func makeArchiveSummary(cards: [GoalsBoardCardState]) -> GoalPortfolioArchiveSummary {
+        let archiveChips = makeStateChips(cards: cards).filter {
+            [.parked, .completed, .cancelledDropped].contains($0.lifecycleState)
+        }
+        let count = archiveChips.map(\.count).reduce(0, +)
+        return GoalPortfolioArchiveSummary(
+            title: count == 0 ? "Archive is quiet" : "\(count) goals in archive states",
+            subtitle: count == 0
+                ? "Completed, parked, and cancelled goals will remain part of your progress history."
+                : "Completed, parked, and cancelled goals are preserved without being treated as failure.",
+            chips: archiveChips
+        )
+    }
+
+    func makeAtlasPreview(snapshot: Snapshot, cards: [GoalsBoardCardState]) -> GoalAtlasPreviewState? {
+        guard snapshot.goals.isEmpty == false else { return nil }
+        let cardsByGoalID = Dictionary(uniqueKeysWithValues: cards.compactMap { card in
+            card.target.goalID.map { ($0, card) }
+        })
+        let grouped = LifeGraphResolver.groupGoalsByPrimaryDomain(snapshot.goals)
+        let groups = grouped
+            .map { domain, goals -> GoalAtlasPreviewGroup in
+                let orderedGoals = goals.sorted { lhs, rhs in
+                    (cardsByGoalID[lhs.id]?.manualPriorityRank ?? Int.max) < (cardsByGoalID[rhs.id]?.manualPriorityRank ?? Int.max)
+                }
+                let items = orderedGoals.prefix(3).map { goal in
+                    let card = cardsByGoalID[goal.id]
+                    return GoalAtlasPreviewItem(
+                        id: goal.id,
+                        title: goal.title,
+                        subtitle: card?.nextVisibleStep.title ?? card?.phaseSummary ?? "Relationship data is still thin.",
+                        state: card?.lifecycleState.visualState ?? .default
+                    )
+                }
+                return GoalAtlasPreviewGroup(
+                    id: domain?.rawValue ?? "uncategorized",
+                    title: domain?.portfolioTitle ?? "Unsorted",
+                    subtitle: "\(goals.count) goal\(goals.count == 1 ? "" : "s") connected here",
+                    items: items
+                )
+            }
+            .sorted { lhs, rhs in
+                if lhs.id == "uncategorized" { return false }
+                if rhs.id == "uncategorized" { return true }
+                return lhs.title.localizedCaseInsensitiveCompare(rhs.title) == .orderedAscending
+            }
+            .prefix(3)
+
+        guard groups.isEmpty == false else { return nil }
+        return GoalAtlasPreviewState(
+            title: "Goal Atlas preview",
+            subtitle: "A lightweight grouping by life area. Full path mapping stays owned by later batches.",
+            groups: Array(groups)
         )
     }
 
@@ -3592,5 +3956,20 @@ private extension RepositoryBackedGoalsService {
             return "\"\(title)\" was added to Calendar. The day looks tight around that block."
         }
         return "\"\(title)\" was added to Calendar."
+    }
+}
+
+private extension LifeDomainKey {
+    var portfolioTitle: String {
+        switch self {
+        case .career: "Career"
+        case .education: "Education"
+        case .health: "Health"
+        case .finance: "Finance"
+        case .home: "Home"
+        case .relationships: "Relationships"
+        case .creativity: "Creativity"
+        case .personalGrowth: "Personal growth"
+        }
     }
 }

@@ -12,7 +12,8 @@ final class GoalsOverviewBoardTests: XCTestCase {
         )
         let blocked = makeClarificationDraft(
             id: "draft-clarify-start",
-            title: "I don't know where to start"
+            title: "I don't know where to start",
+            resultKind: .blocked
         )
 
         try await repositories.goals.saveGoals([liveGoal])
@@ -85,6 +86,74 @@ final class GoalsOverviewBoardTests: XCTestCase {
         XCTAssertFalse(rung.milestoneLabel.isEmpty)
         XCTAssertTrue(rung.milestoneLabel.contains("steps") || rung.milestoneLabel.contains("milestones"))
     }
+
+    func testOverviewProjectsPortfolioWeatherProofAndNextVisibleStep() async throws {
+        let repositories = try await makeRepositories()
+        let service = RepositoryBackedGoalsService(repositories: repositories)
+        let protectedGoal = makeGoal(
+            id: "goal-protected-proof",
+            title: "Ship the Goals portfolio",
+            dueInDays: 10
+        )
+        let blockedDraft = makeClarificationDraft(
+            id: "draft-blocked-portfolio",
+            title: "Plan the blocked move",
+            resultKind: .blocked
+        )
+
+        try await repositories.goals.saveGoals([protectedGoal])
+        try await repositories.drafts.saveDrafts([blockedDraft])
+        try await repositories.evidence.saveEvidence([
+            evidence(goalID: protectedGoal.id, stepID: "step-\(protectedGoal.id)", note: "Drafted portfolio proof")
+        ])
+        try await savePriorityOrder([protectedGoal.id, blockedDraft.id], repositories: repositories)
+
+        let overview = try await service.loadOverview()
+        let cards = overview.bands.flatMap(\.cards) + overview.lowerPriority.cards
+        let protectedCard = try XCTUnwrap(cards.first(where: { $0.target == GoalRouteTarget(goalID: protectedGoal.id, draftID: nil) }))
+        let blockedCard = try XCTUnwrap(cards.first(where: { $0.target == GoalRouteTarget(draftID: blockedDraft.id) }))
+
+        XCTAssertEqual(protectedCard.lifecycleState, .protected)
+        XCTAssertEqual(protectedCard.weather, .protected)
+        XCTAssertEqual(protectedCard.proofSummary.count, 1)
+        XCTAssertEqual(protectedCard.proofSummary.latestTitle, "Drafted portfolio proof")
+        XCTAssertTrue(protectedCard.nextVisibleStep.isAvailable)
+        XCTAssertEqual(protectedCard.momentumIntegrity.title, "Protected")
+
+        XCTAssertEqual(blockedCard.lifecycleState, .blocked)
+        XCTAssertEqual(blockedCard.weather, .stormy)
+        XCTAssertEqual(blockedCard.proofSummary.title, "No proof yet")
+        XCTAssertTrue(overview.stateChips.contains(where: { $0.lifecycleState == .blocked && $0.count == 1 }))
+        XCTAssertEqual(overview.lifecycleRail.first(where: { $0.id == "active" })?.count, 2)
+    }
+
+    func testOverviewKeepsCompletedAndCancelledArchiveStatesDistinct() async throws {
+        let repositories = try await makeRepositories()
+        let service = RepositoryBackedGoalsService(repositories: repositories)
+        let completed = makeGoal(
+            id: "goal-completed-portfolio",
+            title: "Finish launch checklist",
+            dueInDays: -1,
+            state: .completed
+        )
+        let cancelled = makeGoal(
+            id: "goal-cancelled-portfolio",
+            title: "Retire stale experiment",
+            dueInDays: -1,
+            state: .archived
+        )
+
+        try await repositories.goals.saveGoals([completed, cancelled])
+        try await savePriorityOrder([completed.id, cancelled.id], repositories: repositories)
+
+        let overview = try await service.loadOverview()
+        let archiveCards = overview.lowerPriority.cards
+
+        XCTAssertTrue(archiveCards.contains(where: { $0.target.goalID == completed.id && $0.lifecycleState == .completed }))
+        XCTAssertTrue(archiveCards.contains(where: { $0.target.goalID == cancelled.id && $0.lifecycleState == .cancelledDropped }))
+        XCTAssertTrue(overview.archiveSummary.chips.contains(where: { $0.lifecycleState == .completed && $0.count == 1 }))
+        XCTAssertTrue(overview.archiveSummary.chips.contains(where: { $0.lifecycleState == .cancelledDropped && $0.count == 1 }))
+    }
 }
 
 private extension GoalsOverviewBoardTests {
@@ -110,7 +179,7 @@ private extension GoalsOverviewBoardTests {
         try await repositories.appState.saveState(state)
     }
 
-    func makeGoal(id: String, title: String, dueInDays: Int) -> Goal {
+    func makeGoal(id: String, title: String, dueInDays: Int, state: GoalLifecycleState = .active) -> Goal {
         let actor = GoalActor(actorID: "self", displayName: "You", ownership: .self, roleLabel: "Primary owner", isPrimary: true)
         let timing = GoalTiming(
             tempo: .deadlineBased,
@@ -194,7 +263,7 @@ private extension GoalsOverviewBoardTests {
             revision: 1,
             createdAt: isoDate(daysFromNow: -2),
             updatedAt: isoDate(daysFromNow: -1),
-            state: .active,
+            state: state,
             title: title,
             summary: nil,
             mode: .project,
@@ -211,7 +280,26 @@ private extension GoalsOverviewBoardTests {
         )
     }
 
-    func makeClarificationDraft(id: String, title: String) -> PersistedGoalDraft {
+    func evidence(goalID: String, stepID: String, note: String) -> ProgressEvidence {
+        ProgressEvidence(
+            id: "evidence-\(goalID)",
+            goalID: goalID,
+            stepID: stepID,
+            evidenceKind: .stepCompleted,
+            source: .manual,
+            capturedAt: isoDate(daysFromNow: 0),
+            progressDelta: nil,
+            confidenceDelta: nil,
+            minutesInvested: nil,
+            note: note
+        )
+    }
+
+    func makeClarificationDraft(
+        id: String,
+        title: String,
+        resultKind: GoalOrchestrationResultKind = .clarificationRequired
+    ) -> PersistedGoalDraft {
         let actor = GoalActor(actorID: "self", displayName: "You", ownership: .self, roleLabel: "Primary owner", isPrimary: true)
         let draft = GoalDraft(
             schemaVersion: goalEngineSchemaVersion,
@@ -269,7 +357,7 @@ private extension GoalsOverviewBoardTests {
             blockers: [],
             metadata: nil,
             plannedGoalID: nil,
-            latestResultKind: .clarificationRequired
+            latestResultKind: resultKind
         )
     }
 

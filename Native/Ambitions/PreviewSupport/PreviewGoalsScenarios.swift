@@ -207,6 +207,41 @@ enum PreviewGoalsScenarios {
                 ),
             ]
         ),
+        lifecycleRail: [
+            GoalLifecycleRailSegment(id: "previous", title: "Previous", count: 2, subtitle: "Closed or parked", state: .default),
+            GoalLifecycleRailSegment(id: "active", title: "Active", count: 4, subtitle: "Currently shaping attention", state: .selected),
+            GoalLifecycleRailSegment(id: "future", title: "Future", count: 0, subtitle: "No scheduled future goals", state: .default),
+        ],
+        stateChips: [
+            GoalStateChipState(lifecycleState: .protected, count: 1),
+            GoalStateChipState(lifecycleState: .waiting, count: 0),
+            GoalStateChipState(lifecycleState: .blocked, count: 1),
+            GoalStateChipState(lifecycleState: .parked, count: 1),
+            GoalStateChipState(lifecycleState: .completed, count: 1),
+            GoalStateChipState(lifecycleState: .cancelledDropped, count: 0),
+        ],
+        atlasPreview: GoalAtlasPreviewState(
+            title: "Goal Atlas preview",
+            subtitle: "A lightweight grouping by life area. Full path mapping stays owned by later batches.",
+            groups: [
+                GoalAtlasPreviewGroup(id: "career", title: "Career", subtitle: "2 goals connected here", items: [
+                    GoalAtlasPreviewItem(id: "goal-native", title: "Close the hardening pass", subtitle: "Refresh release docs and trust copy", state: .selected),
+                    GoalAtlasPreviewItem(id: "draft-blocked", title: "Plan a freelance pivot", subtitle: "Clarify the real decision target", state: .warning),
+                ]),
+                GoalAtlasPreviewGroup(id: "creativity", title: "Creativity", subtitle: "1 goal connected here", items: [
+                    GoalAtlasPreviewItem(id: "goal-learning", title: "Learn advanced vocal mixing", subtitle: "Record one rough pass", state: .default),
+                ]),
+            ]
+        ),
+        archiveSummary: GoalPortfolioArchiveSummary(
+            title: "2 goals in archive states",
+            subtitle: "Completed, parked, and cancelled goals are preserved without being treated as failure.",
+            chips: [
+                GoalStateChipState(lifecycleState: .parked, count: 1),
+                GoalStateChipState(lifecycleState: .completed, count: 1),
+                GoalStateChipState(lifecycleState: .cancelledDropped, count: 0),
+            ]
+        ),
         items: [],
         isSeeded: true,
         emptyTitle: "No goals yet",
@@ -292,6 +327,37 @@ enum PreviewGoalsScenarios {
             subtitle: "Paused or already-closed goals stay available without competing with live direction pressure.",
             disclosureTitle: "Show quieter goals",
             cards: []
+        ),
+        lifecycleRail: [
+            GoalLifecycleRailSegment(id: "previous", title: "Previous", count: 0, subtitle: "History will stay visible here", state: .default),
+            GoalLifecycleRailSegment(id: "active", title: "Active", count: 1, subtitle: "Currently shaping attention", state: .selected),
+            GoalLifecycleRailSegment(id: "future", title: "Future", count: 0, subtitle: "No scheduled future goals", state: .default),
+        ],
+        stateChips: [
+            GoalStateChipState(lifecycleState: .protected, count: 1),
+            GoalStateChipState(lifecycleState: .waiting, count: 0),
+            GoalStateChipState(lifecycleState: .blocked, count: 0),
+            GoalStateChipState(lifecycleState: .parked, count: 0),
+            GoalStateChipState(lifecycleState: .completed, count: 0),
+            GoalStateChipState(lifecycleState: .cancelledDropped, count: 0),
+        ],
+        atlasPreview: GoalAtlasPreviewState(
+            title: "Goal Atlas preview",
+            subtitle: "A lightweight grouping by life area. Full path mapping stays owned by later batches.",
+            groups: [
+                GoalAtlasPreviewGroup(id: "personal_growth", title: "Personal growth", subtitle: "1 goal connected here", items: [
+                    GoalAtlasPreviewItem(id: "goal-created", title: "Build a calmer weekly review ritual", subtitle: "Define scope", state: .selected),
+                ])
+            ]
+        ),
+        archiveSummary: GoalPortfolioArchiveSummary(
+            title: "Archive is quiet",
+            subtitle: "Completed, parked, and cancelled goals will remain part of your progress history.",
+            chips: [
+                GoalStateChipState(lifecycleState: .parked, count: 0),
+                GoalStateChipState(lifecycleState: .completed, count: 0),
+                GoalStateChipState(lifecycleState: .cancelledDropped, count: 0),
+            ]
         ),
         items: [],
         isSeeded: false,
@@ -676,10 +742,15 @@ enum PreviewGoalsScenarios {
         milestoneSummary: String,
         pressureSummary: String,
         nextStepHint: String,
+        lifecycleState: GoalPortfolioLifecycleState = .active,
+        weather: GoalWeatherState = .clear,
+        proofSummary: GoalProofSummary = GoalProofSummary(title: "2 proof points", detail: "Last proof: Goal list structure drafted", count: 2, latestTitle: "Goal list structure drafted", visualState: .selected),
+        momentumIntegrity: GoalMomentumIntegrity = GoalMomentumIntegrity(title: "Building proof", detail: "Evidence and a next move both exist.", visualState: .selected),
         supportLabel: String? = nil,
         priorityLabel: String
     ) -> GoalsBoardCardState {
-        GoalsBoardCardState(
+        let nextVisibleStep = GoalNextVisibleStep(title: nextStepHint, detail: "soon · proof useful", isAvailable: true)
+        return GoalsBoardCardState(
             id: id,
             target: target,
             title: title,
@@ -695,6 +766,12 @@ enum PreviewGoalsScenarios {
             milestoneSummary: milestoneSummary,
             pressureSummary: pressureSummary,
             nextStepHint: nextStepHint,
+            lifecycleState: lifecycleState,
+            weather: weather,
+            weatherSummary: weather == .clear ? "Proof and the next move are visible." : "This goal needs attention.",
+            proofSummary: proofSummary,
+            nextVisibleStep: nextVisibleStep,
+            momentumIntegrity: momentumIntegrity,
             supportLabel: supportLabel,
             priorityLabel: priorityLabel,
             manualPriorityRank: Int(priorityLabel.components(separatedBy: CharacterSet.decimalDigits.inverted).joined()) ?? 0,

@@ -43,7 +43,7 @@ Use [../canon/Ambitions_2_0_Batch_Plan.md](../canon/Ambitions_2_0_Batch_Plan.md)
 
 ## Active Queue
 
-Current execution status: Ambitions 2.0 post-Batch-60 canon is adopted. Batches 00-82 are complete for planning purposes. Batch 83 is the next queued / next uncompleted batch. Batches 84-120 remain future planned roadmap work.
+Current execution status: Ambitions 2.0 post-Batch-60 canon is adopted. Batches 00-83 are complete for planning purposes. Batch 84 is the next queued / next uncompleted batch. Batches 85-120 remain future planned roadmap work.
 
 | Batch | Name | Status | Notes |
 | --- | --- | --- | --- |
@@ -116,7 +116,7 @@ These rows are the active planning state for the new post-Batch-60 Ambitions 2.0
 | 80 | Action Closure and Receipt System v1 | Completed | Marked complete for planning by repo-wide status correction; do not infer additional feature validation from this status row beyond existing evidence. |
 | 81 | Safe Automation Boundary and Undo Rules | Completed | Marked complete for planning by repo-wide status correction; do not infer additional feature validation from this status row beyond existing evidence. |
 | 82 | Foundation Performance and Persistence Budget Pass | Completed | Marked complete for planning by repo-wide status correction; do not infer additional feature validation from this status row beyond existing evidence. |
-| 83 | Goals 2.0 / Portfolio, Health, and Proof v1 | Queued | Next queued / next uncompleted batch; newly integrated planned canon includes Goal Lifecycle Rail, Goal Weather v1, Goal Atlas preview, Completion Archive states, Next Visible Step on every active goal card, and compact lifecycle timeline; consumes global chrome, Life Graph, proof, and Action Closure foundations. |
+| 83 | Goals 2.0 / Portfolio, Health, and Proof v1 | Completed | Implemented the top-level Goals portfolio overview with Goal Lifecycle Rail, calm state chips, Goal Weather v1, proof summaries, Next Visible Step on active cards, Momentum Integrity v1, Goal Atlas preview, and archive states; validated with XcodeGen generation, focused Goals tests, simulator build, and full `AmbitionsTests` on iPhone 17 / iOS 26.3.1. |
 | 84 | Goal Detail 2.0 / Mission Control, Assumptions, Proof Rail | Queued | Future Goal Detail surface batch; newly integrated planned canon includes goal-specific lifecycle timeline, Proof Spine as Proof Rail expression, Decision Trail, Milestone Cards, Kanban-lite Task Lane, connected Goal Atlas goals, dominant Next Visible Step, end-state summaries, and Weather explanation; no full Path Builder. |
 | 85 | Plan 2.0 / Believability Kernel and Plan Treaty | Queued | Future Plan surface/system batch; newly integrated planned canon includes Weekly Plan Strip, Next Visible Step selection, Goal Weather/proof-density believability inputs, active-goal plan window, Plan Treaty Decision Trail notes, and Next/Doing task weighting; preserves Plan-owned calendar permission and no silent rescheduling. |
 | 86 | Reality Reflow v1 and Recovery Gradient | Queued | Future recovery/reflow batch; broad reflows require safe confirmation. |

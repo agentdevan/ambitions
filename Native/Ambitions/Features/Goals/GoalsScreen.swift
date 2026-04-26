@@ -53,7 +53,9 @@ struct GoalsScreen: View {
                     )
                 case let .loaded(overview):
                     GoalsHeroCard(overview: overview, onPrimaryAction: handlePrimaryAction)
-                    GoalsWeekPressureCard(summary: overview.weekPressureSummary)
+                    GoalsLifecycleRailCard(segments: overview.lifecycleRail)
+                        .transition(.ambitionPanel)
+                    GoalStateChipsCard(chips: overview.stateChips)
                         .transition(.ambitionPanel)
 
                     if let activeCreationMessage {
@@ -98,6 +100,14 @@ struct GoalsScreen: View {
                         }
 
                         GoalsHorizonLadderCard(state: overview.horizonLadder)
+                            .transition(.ambitionPanel)
+
+                        if let atlasPreview = overview.atlasPreview {
+                            GoalAtlasPreviewCard(state: atlasPreview)
+                                .transition(.ambitionPanel)
+                        }
+
+                        GoalArchiveSummaryCard(summary: overview.archiveSummary)
                             .transition(.ambitionPanel)
 
                         GoalsLowerPriorityDisclosureSection(

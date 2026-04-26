@@ -82,6 +82,164 @@ enum GoalsBoardBandKind: String, Hashable, Sendable {
     case lowerPriority = "lower_priority"
 }
 
+enum GoalPortfolioLifecycleState: String, Hashable, Sendable, CaseIterable {
+    case active
+    case passive
+    case waiting
+    case blocked
+    case parked
+    case protected
+    case completed
+    case cancelledDropped = "cancelled_dropped"
+    case previous
+    case future
+
+    var title: String {
+        switch self {
+        case .active: "Active"
+        case .passive: "Passive"
+        case .waiting: "Waiting"
+        case .blocked: "Blocked"
+        case .parked: "Parked"
+        case .protected: "Protected"
+        case .completed: "Completed"
+        case .cancelledDropped: "Cancelled"
+        case .previous: "Previous"
+        case .future: "Future"
+        }
+    }
+
+    var visualState: AmbitionVisualState {
+        switch self {
+        case .active, .protected: .selected
+        case .completed: .success
+        case .waiting, .blocked: .warning
+        case .cancelledDropped, .parked, .passive, .previous, .future: .default
+        }
+    }
+
+    var icon: String {
+        switch self {
+        case .active: "scope"
+        case .passive: "moon"
+        case .waiting: "hourglass"
+        case .blocked: "exclamationmark.triangle"
+        case .parked: "pause.circle"
+        case .protected: "lock.shield"
+        case .completed: "checkmark.circle"
+        case .cancelledDropped: "xmark.circle"
+        case .previous: "clock.arrow.circlepath"
+        case .future: "sparkle"
+        }
+    }
+
+    var isCurrentPortfolioState: Bool {
+        switch self {
+        case .active, .passive, .waiting, .blocked, .protected:
+            true
+        case .parked, .completed, .cancelledDropped, .previous, .future:
+            false
+        }
+    }
+}
+
+enum GoalWeatherState: String, Hashable, Sendable {
+    case clear
+    case cloudy
+    case stormy
+    case foggy
+    case protected
+
+    var title: String {
+        switch self {
+        case .clear: "Clear"
+        case .cloudy: "Cloudy"
+        case .stormy: "Stormy"
+        case .foggy: "Foggy"
+        case .protected: "Protected"
+        }
+    }
+
+    var icon: String {
+        switch self {
+        case .clear: "circle.lefthalf.filled"
+        case .cloudy: "cloud"
+        case .stormy: "cloud.bolt"
+        case .foggy: "cloud.fog"
+        case .protected: "lock.shield"
+        }
+    }
+
+    var visualState: AmbitionVisualState {
+        switch self {
+        case .clear, .protected: .selected
+        case .cloudy, .foggy: .default
+        case .stormy: .warning
+        }
+    }
+}
+
+struct GoalProofSummary: Sendable, Hashable {
+    let title: String
+    let detail: String
+    let count: Int
+    let latestTitle: String?
+    let visualState: AmbitionVisualState
+}
+
+struct GoalNextVisibleStep: Sendable, Hashable {
+    let title: String
+    let detail: String
+    let isAvailable: Bool
+}
+
+struct GoalMomentumIntegrity: Sendable, Hashable {
+    let title: String
+    let detail: String
+    let visualState: AmbitionVisualState
+}
+
+struct GoalLifecycleRailSegment: Identifiable, Sendable, Hashable {
+    let id: String
+    let title: String
+    let count: Int
+    let subtitle: String
+    let state: AmbitionVisualState
+}
+
+struct GoalStateChipState: Identifiable, Sendable, Hashable {
+    let lifecycleState: GoalPortfolioLifecycleState
+    let count: Int
+
+    var id: String { lifecycleState.rawValue }
+}
+
+struct GoalPortfolioArchiveSummary: Sendable, Hashable {
+    let title: String
+    let subtitle: String
+    let chips: [GoalStateChipState]
+}
+
+struct GoalAtlasPreviewItem: Identifiable, Sendable, Hashable {
+    let id: String
+    let title: String
+    let subtitle: String
+    let state: AmbitionVisualState
+}
+
+struct GoalAtlasPreviewGroup: Identifiable, Sendable, Hashable {
+    let id: String
+    let title: String
+    let subtitle: String
+    let items: [GoalAtlasPreviewItem]
+}
+
+struct GoalAtlasPreviewState: Sendable, Hashable {
+    let title: String
+    let subtitle: String
+    let groups: [GoalAtlasPreviewGroup]
+}
+
 enum GoalsBoardPrimaryActionKind: String, Hashable, Sendable {
     case openGoal = "open_goal"
     case recoverGoal = "recover_goal"
@@ -204,6 +362,12 @@ struct GoalsBoardCardState: Identifiable, Sendable {
     let milestoneSummary: String
     let pressureSummary: String
     let nextStepHint: String
+    let lifecycleState: GoalPortfolioLifecycleState
+    let weather: GoalWeatherState
+    let weatherSummary: String
+    let proofSummary: GoalProofSummary
+    let nextVisibleStep: GoalNextVisibleStep
+    let momentumIntegrity: GoalMomentumIntegrity
     let supportLabel: String?
     let priorityLabel: String
     let manualPriorityRank: Int
@@ -250,6 +414,10 @@ struct GoalsOverview: Sendable {
     let horizonLadder: GoalsHorizonLadderState
     let weekPressureSummary: GoalsWeekPressureSummary
     let lowerPriority: GoalsLowerPriorityState
+    let lifecycleRail: [GoalLifecycleRailSegment]
+    let stateChips: [GoalStateChipState]
+    let atlasPreview: GoalAtlasPreviewState?
+    let archiveSummary: GoalPortfolioArchiveSummary
     let items: [GoalListItem]
     let isSeeded: Bool
     let emptyTitle: String
@@ -262,6 +430,10 @@ struct GoalsOverview: Sendable {
         horizonLadder: GoalsHorizonLadderState,
         weekPressureSummary: GoalsWeekPressureSummary,
         lowerPriority: GoalsLowerPriorityState,
+        lifecycleRail: [GoalLifecycleRailSegment],
+        stateChips: [GoalStateChipState],
+        atlasPreview: GoalAtlasPreviewState?,
+        archiveSummary: GoalPortfolioArchiveSummary,
         items: [GoalListItem],
         isSeeded: Bool,
         emptyTitle: String,
@@ -273,6 +445,10 @@ struct GoalsOverview: Sendable {
         self.horizonLadder = horizonLadder
         self.weekPressureSummary = weekPressureSummary
         self.lowerPriority = lowerPriority
+        self.lifecycleRail = lifecycleRail
+        self.stateChips = stateChips
+        self.atlasPreview = atlasPreview
+        self.archiveSummary = archiveSummary
         self.items = items
         self.isSeeded = isSeeded
         self.emptyTitle = emptyTitle
