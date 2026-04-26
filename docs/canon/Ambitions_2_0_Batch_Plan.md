@@ -35,20 +35,23 @@ This is the active post-Batch-60 execution plan. It begins at Batch 61 and super
 | 70 | Reality Model and Calendar Read/Write | Core execution systems |
 | 71 | Believability, Capacity, and Goal Health | Core execution systems |
 | 72 | Execution Resilience Stack | Core execution systems |
-| 73 | Today 2.0 Rich Execution Center | Primary surface transformation |
-| 74 | Goals and Goal Detail 2.0 | Primary surface transformation |
-| 75 | Plan 2.0 Calendar-Aware Believability Workspace | Primary surface transformation |
-| 76 | You 2.0, Reviews, Memory, and Trust | Primary surface transformation |
-| 77 | Contextual Insights and Review System | Primary surface transformation |
-| 78 | Apple-First Sync and Export/Import | Apple platform completion |
-| 79 | App Intents and Shared Container | Apple platform completion |
-| 80 | Widgets and Live Activity v1 | Apple platform completion |
-| 81 | Path Intelligence Foundation | Full path intelligence |
-| 82 | Path Builder and Long-Range Path UI | Full path intelligence |
-| 83 | Learning and Anticipation v1 | Learning, onboarding, and release hardening |
-| 84 | Onboarding, Empty States, and Returning User Continuity | Learning, onboarding, and release hardening |
-| 85 | Accessibility Verification and User-Facing Nutrition Facts | Learning, onboarding, and release hardening |
-| 86 | Ambitions 2.0 Release Hardening | Learning, onboarding, and release hardening |
+| 73 | Today 2.0 / Daily Operating Contract | Primary loop transformation |
+| 74 | Global Shell Chrome and Visual Alignment | Primary loop transformation |
+| 75 | Life Graph v1 and Object Relationships | Primary loop transformation |
+| 76 | Action Closure and Receipt System | Primary loop transformation |
+| 77 | Goals and Goal Detail 2.0 | Primary loop transformation |
+| 78 | Plan 2.0 and Reality Reflow | Primary loop transformation |
+| 79 | You 2.0, Personal Operating Constitution, and Trust Center | Primary loop transformation |
+| 80 | Reviews and Review Constellation | Primary loop transformation |
+| 81 | Sync / Export / Import Trust | Apple platform completion |
+| 82 | App Intents and Shared Container | Apple platform completion |
+| 83 | Widgets and Live Activity v1 | Apple platform completion |
+| 84 | Path Intelligence Foundation | Full path intelligence |
+| 85 | Path Builder / Life Path Simulation UI | Full path intelligence |
+| 86 | Learning and Anticipation | Learning, onboarding, and release hardening |
+| 87 | Onboarding, Empty States, and Returning User Continuity | Learning, onboarding, and release hardening |
+| 88 | Accessibility Verification and User-Facing Nutrition Facts | Learning, onboarding, and release hardening |
+| 89 | Release Hardening / Indispensability QA | Learning, onboarding, and release hardening |
 
 ## Batch 61 - Repo Truth and Ambitions 2.0 Capability Matrix
 
@@ -121,7 +124,7 @@ Work on main only. ACTIVE BATCH: Batch 63 - Rich Panel Design System. Implement 
 - Exact scope: Checklist storage/docs, audit templates, code/docs hooks where appropriate.
 - Likely areas affected: accessibility docs, QA docs, possibly shared UI metadata if verified necessary.
 - Dependencies: Batch 63 complete.
-- Implementation notes: Internal checklist first; no user-facing claims until Batch 85 verification.
+- Implementation notes: Internal checklist first; no user-facing claims until Batch 88 verification.
 - UI/UX expectations: Panels remain auditable for Dynamic Type, VoiceOver, contrast, motion, and tap targets.
 - Acceptance criteria: Screen-level audit template and internal workflow exist.
 - Testing requirements: Markdown validation and any targeted accessibility/unit checks for touched code.
@@ -286,268 +289,138 @@ Work on main only. ACTIVE BATCH: Batch 71 - Believability, Capacity, and Goal He
 Work on main only. ACTIVE BATCH: Batch 72 - Execution Resilience Stack. Implement shared recovery/resilience logic only. Do not rebuild Today or Reviews. Report changed files and validation.
 ```
 
-## Batch 73 - Today 2.0 Rich Execution Center
+## Batch 73 - Today 2.0 / Daily Operating Contract
 
-- Purpose: Transform Today into the rich execution center.
-- Exact scope: Today hero decision panel, supporting panels, Now State, recovery, contextual insight hooks.
-- Likely areas affected: Today feature, shared panels, view models, tests.
-- Dependencies: Batches 63, 67, 68, 72 complete.
-- Implementation notes: Today consumes shared systems; no duplicated current-state logic.
-- UI/UX expectations: One dominant hero panel, one or two supporting panels, deeper content below fold.
-- Acceptance criteria: Today is calm, actionable, explainable, and recovery-aware.
-- Testing requirements: Targeted Today tests, UI tests, native build, relevant full tests, manual simulator review.
-- Out-of-scope items: Goals/Plan/You redesign, widgets.
-- Risk notes: Avoid dense task-list dashboard behavior.
-- Completion definition: Today matches 2.0 visual/product architecture.
-- Ready-to-paste Codex prompt:
+- Purpose: Transform Today into the user's current agreement with reality.
+- Exact scope: Daily Operating Contract, Today Contract, Daily Operating Brief, one protected must-do, one best next move, one intentionally-not-today item, one recovery fallback, one reason this matters, one Action Closure entry path, Friction Radar v1, Recovery Autopilot entry, Save the Day entry if safe, Attention Shield, Anti-Plan / Not Today summary, Ambient Status Orb candidate, One Move Doctrine, rich visual quality bar, and Mode Lens awareness without hidden navigation.
+- Dependencies: Batches 63, 67, 68, 71, and 72 complete.
+- Out-of-scope items: Goals/Plan/You redesign, global chrome implementation beyond safe Today consumption, widgets, sync, full Path Builder.
+- Completion definition: Today is calm, believable, recovery-aware, receipt-aware, and useful as the first step in the operating loop without closing any other batch.
 
-```text
-Work on main only. ACTIVE BATCH: Batch 73 - Today 2.0 Rich Execution Center. Rebuild only Today using the shared panel system, Now State, Command Pipeline, and Execution Resilience Stack. Do not redesign other tabs or start widgets. Report changed files and validation.
-```
+## Batch 74 - Global Shell Chrome and Visual Alignment
 
-## Batch 74 - Goals and Goal Detail 2.0
+- Purpose: Unify app-level shell/header/bottom-tab visual presentation with the Ambitions 2.0 design language before the remaining major surface redesigns.
+- Exact scope: near-black navy shell canvas, premium bottom tab bar, amber active tab treatment, muted blue-gray inactive treatment, shared safe-area and scroll-edge behavior, centralized spacing, centralized shell tokens only, top-level and detail header patterns, sheet/modal header pattern, optional Continuity Ribbon v1, Not Today / Anti-Plan strip candidate, stale capture/status candidate, Action Closure Tray presentation, Mode Lens, Ambient Status Orb placement rules, Life Graph Breadcrumb rules, Mission Control Lanes rules, Proof Rail rules, Trust Badge rules, Save the Day entry placement rules, Appearance Studio preservation, and Accessibility Nutrition handoff.
+- Dependencies: Batches 62, 63, 64, and 73 complete.
+- Non-goals: no tab IA changes, no tab renames, no restored Insights/Profile/Habits top-level labels, no full Today/Goals/Plan/You redesigns, no product logic, no hidden navigation, no second command pipeline, no generic toast system, no hard-coded screen colors, and no Appearance Studio or accessibility bypass.
+- Completion definition: Later surface batches can consume one coherent shell/chrome system.
 
-- Purpose: Transform Goals and Goal Detail around goal health, path progress, and explanations.
-- Exact scope: Goals overview, Goal Detail rich panels, explanation surfaces, path preview hooks.
-- Likely areas affected: Goals feature, Goal Detail, shared panels, tests.
-- Dependencies: Batches 63, 66, 71 complete.
-- Implementation notes: Detail may be denser; top-level Goals remains capped.
-- UI/UX expectations: Goal health visible without analytics density; explanations available without clutter.
-- Acceptance criteria: Goals and Goal Detail present believable progress and why-this reasoning.
-- Testing requirements: Targeted Goals/Goal Detail tests, UI tests, native build, manual review.
-- Out-of-scope items: Full path builder, Plan redesign, sync.
-- Risk notes: Avoid long-range promises before Batch 81/82.
-- Completion definition: Goals surfaces match 2.0 architecture using existing systems.
-- Ready-to-paste Codex prompt:
+## Batch 75 - Life Graph v1 and Object Relationships
 
-```text
-Work on main only. ACTIVE BATCH: Batch 74 - Goals and Goal Detail 2.0. Transform only Goals and Goal Detail with rich panels, goal health, and explanation hooks. Do not build the full Path Builder or redesign Plan. Report changed files and validation.
-```
+- Purpose: Establish Life Graph v1 as the shared object relationship layer before remaining surface expansion.
+- Exact scope: goals, milestones, actions, blockers, people, commitments, waiting items, resources, evidence, windows, constraints, decisions, memories, corrections, receipts, dependencies, prerequisites, proof types, Resource Graph v1, Promise Ledger / lightweight people relationships, Commitments and Waiting Room relationship model, Life Graph Breadcrumb data, Proof Rail data, and Mission Control Lens foundations.
+- Dependencies: Batches 65, 66, 68, 69, 71, 72 complete.
+- Out-of-scope items: full Path Builder UI, sync backend logic, external integrations, and broad surface redesign.
+- Completion definition: Capture, Goals, Plan, You, Reviews, Path Intelligence, Action Closure, Proof of Progress, and Waiting Room can use one relationship model.
 
-## Batch 75 - Plan 2.0 Calendar-Aware Believability Workspace
+## Batch 76 - Action Closure and Receipt System
 
-- Purpose: Transform Plan into the calendar-aware believability workspace.
-- Exact scope: Plan hero, open windows, fixed/flexible blocks, rituals/habit absorption, calendar-aware actions, recovery/review prompts.
-- Likely areas affected: Plan feature, calendar services, shared panels, tests.
-- Dependencies: Batches 63, 70, 71, 72 complete.
-- Implementation notes: Permission actions are explicit and Plan-owned.
-- UI/UX expectations: Calm shaping workspace, not a calendar clone.
-- Acceptance criteria: Plan works without permission and improves with calendar access.
-- Testing requirements: Targeted Plan/calendar tests, UI tests, native build, manual permission review.
-- Out-of-scope items: Apple-first sync, widgets, full Reviews rebuild.
-- Risk notes: Avoid calendar data overcollection and habit standalone resurrection.
-- Completion definition: Plan 2.0 is usable, believable, and permission-safe.
-- Ready-to-paste Codex prompt:
+- Purpose: Establish Action Closure as a shared trust system before later surfaces and external actions consume it.
+- Exact scope: receipt model, result states, undo eligibility, correction entry, why-changed linkage, safe failure states, external action receipt format, calendar write receipts, export/import receipts, Trust Ledger handoff, Safe Automation Boundary v1, and premium Action Closure Tray integration points.
+- Dependencies: Batches 65, 66, 68, 70, 72, and 74 complete.
+- Out-of-scope items: automatic scheduling, generic toast spam, broad automation, sync backend implementation, and external surface productization.
+- Completion definition: meaningful commands can answer what happened, what changed, why, what is next, what can be undone, and what can be corrected.
 
-```text
-Work on main only. ACTIVE BATCH: Batch 75 - Plan 2.0 Calendar-Aware Believability Workspace. Transform only Plan using Reality Model, calendar read/write, believability, rituals, and recovery. Do not add sync/widgets or rebuild You. Report changed files and validation.
-```
+## Batch 77 - Goals and Goal Detail 2.0
 
-## Batch 76 - You 2.0, Reviews, Memory, and Trust
+- Purpose: Transform Goals and Goal Detail around portfolio clarity, proof, assumptions, constraints, and living goal containers.
+- Exact scope: Goal Scope Governor, Goal Health MRI, Path Filmstrip, Goal Contract, Assumption Ledger / Assumption Watchtower, Proof of Progress v1, Proof-Weighted Progress, active/passive/waiting/blocked/parked/protected/completed states, Ambition Portfolio Manager v1, Goal Weather, Momentum Integrity Engine, Mission Control lanes v1 (Path, Now, Proof, Risk), Life Graph Breadcrumb, Proof Rail, Ambient Status Orb for goal health, and Action Closure receipts for goal changes.
+- Dependencies: Batches 63, 66, 71, 74, 75, and 76 complete.
+- Out-of-scope items: full Path Builder, Plan redesign, sync, and unsupported path-family expansion.
+- Completion definition: Goals shows what is active, at risk, blocked, parked, proven, or protected without becoming an analytics dashboard.
 
-- Purpose: Transform You into trust, memory, reviews, preferences, and export/sync entry.
-- Exact scope: You shell, Reviews home, Memory summaries, trust panels, preferences, Accessibility placeholder state.
-- Likely areas affected: You/Profile feature, Reviews routes, shared panels, tests.
-- Dependencies: Batches 63, 65, 66 complete.
-- Implementation notes: User-facing Accessibility Nutrition remains unverified until Batch 85.
-- UI/UX expectations: Utility surface is calm and not core workflow.
-- Acceptance criteria: You owns reviews, memory, trust, and preferences without overloading top level.
-- Testing requirements: Targeted You/Profile/Review tests, UI tests, native build.
-- Out-of-scope items: Verified Accessibility Nutrition summary, sync implementation, release hardening.
-- Risk notes: Avoid claiming sync/accessibility support beyond evidence.
-- Completion definition: You 2.0 owns trust and review entry points.
-- Ready-to-paste Codex prompt:
+## Batch 78 - Plan 2.0 and Reality Reflow
 
-```text
-Work on main only. ACTIVE BATCH: Batch 76 - You 2.0, Reviews, Memory, and Trust. Transform only You/Profile, review entry, memory summaries, and trust panels using existing shared systems. Do not claim verified Accessibility Nutrition or implement sync. Report changed files and validation.
-```
+- Purpose: Transform Plan into the calendar-aware believability and Reality Reflow workspace.
+- Exact scope: Plan Negotiator, Window Magnetism, Opportunity Window Engine, Ambition Debt, Decision Debt Engine, Conflict Court, Calendar Boundary Contract, Plan Treaty, Personal Capacity Envelope, Context Switching Toll, Constraint Gravity Engine, Believability Kernel consumption, Save the Day deeper handling, manual availability fallback when calendar is denied, Reality Reflow Engine v1, confirmed calendar writes with receipts and undo where safe, Not Today / Anti-Plan integration, Action Closure receipts, Ambient Status Orb for week pressure, and no calendar clone UI.
+- Dependencies: Batches 63, 70, 71, 72, 74, and 76 complete.
+- Out-of-scope items: silent rescheduling, automatic calendar writes, sync, widgets, full Reviews rebuild.
+- Completion definition: Plan prevents overcommitment, reflows reality safely, and preserves Plan-owned calendar permission.
 
-## Batch 77 - Contextual Insights and Review System
+## Batch 79 - You 2.0, Personal Operating Constitution, and Trust Center
 
-- Purpose: Complete Insights demotion into contextual surfaces and reviews.
-- Exact scope: Today insight panels, Plan evidence prompts, Goal Detail explanation links, You -> Reviews, `Why This` / `Why Changed` sheets.
-- Likely areas affected: Today, Plan, Goals, You/Reviews, shared explanation UI, tests.
-- Dependencies: Batches 66, 73, 74, 75, 76 complete.
-- Implementation notes: Do not recreate Insights as a top-level tab.
-- UI/UX expectations: Insight appears where decisions happen.
-- Acceptance criteria: Insight destinations match demotion architecture.
-- Testing requirements: Targeted cross-surface review/explanation tests, UI tests, native build.
-- Out-of-scope items: New analytics tab, sync, widgets.
-- Risk notes: Cross-surface work can sprawl; keep to insight/review routing.
-- Completion definition: Insights is fully productized outside top-level nav.
-- Ready-to-paste Codex prompt:
+- Purpose: Transform You into the control surface for trust, memory, constitution, correction, privacy, and Appearance Studio.
+- Exact scope: Trust Center, Memory Receipts, Correction Center, Personal Operating Constitution, Constitution Violation behavior, Disaster Drill entry, local-first/privacy/calendar-data explanations, sync/export status placeholders until implementation, Trust Badge / Trust status treatment, memory correction/forgetting controls where appropriate, Appearance Studio preservation, Safe Automation Boundary controls where appropriate, and Trust Ledger consumption.
+- Dependencies: Batches 63, 64, 65, 66, 74, and 76 complete.
+- Out-of-scope items: verified Accessibility Nutrition summary, unverified sync claims, actual sync backend, and unrelated settings sprawl.
+- Completion definition: The user can trust and tune the system without You becoming a junk drawer.
 
-```text
-Work on main only. ACTIVE BATCH: Batch 77 - Contextual Insights and Review System. Implement only contextual insight/review placement after Insights demotion. Do not recreate a top-level Insights tab or build unrelated analytics. Report changed files and validation.
-```
+## Batch 80 - Reviews and Review Constellation
 
-## Batch 78 - Apple-First Sync and Export/Import
+- Purpose: Turn reviews into tactical recovery loops and narrative memory artifacts instead of analytics.
+- Exact scope: Recovery Review, 90-second Review, Weekly Life OS Receipt, Goal Review, Pattern Review, Memory Review, Correction Review, Why Changed Log, Review-to-Action Compiler, Review Constellation, Pattern Reflection, anti-guilt missed-week recovery review, Outcome Receipts consumption, Proof of Progress consumption, Memory Receipts consumption, Narrative Memory Map, Re-entry Engine, Clarity Debt Engine, and rich-panel insight styling.
+- Dependencies: Batches 65, 66, 76, 77, 78, and 79 complete.
+- Out-of-scope items: restored top-level Insights tab, generic analytics dashboard, sync/export implementation.
+- Completion definition: Reviews explain what changed, what worked, what repeated, what Ambitions learned, what the user corrected, what remains believable, and what should be protected next.
 
-- Purpose: Implement trustable Apple-first sync direction and export/import fallback.
-- Exact scope: Verified data model boundary, sync status, conflict policy, export/import UX and tests.
-- Likely areas affected: persistence, services, You trust surfaces, tests, release/privacy docs.
-- Dependencies: Batch 61 verification and Batch 65 ledger complete; relevant data model evidence complete.
-- Implementation notes: Export/import is required even if sync is available.
-- UI/UX expectations: Calm trust panels with clear local/synced/export states.
-- Acceptance criteria: Sync and export/import claims match implementation evidence.
-- Testing requirements: Targeted persistence/export/import/sync-boundary tests, native build, relevant full tests.
-- Out-of-scope items: Non-Apple sync providers, widgets, HealthKit.
-- Risk notes: Do not ship sync behavior before conflict policy is explicit.
-- Completion definition: Apple-first sync/export trust layer is implemented or precisely bounded by verified status.
-- Ready-to-paste Codex prompt:
+## Batch 81 - Sync / Export / Import Trust
 
-```text
-Work on main only. ACTIVE BATCH: Batch 78 - Apple-First Sync and Export/Import. Implement only verified Apple-first sync/export/import trust scope after data model verification. Preserve export/import as fallback. Do not add non-Apple sync or external surfaces. Report changed files and validation.
-```
+- Purpose: Implement trustable Apple-first continuity and export/import fallback.
+- Exact scope: export/import proof, Apple-first sync, conflict policy, disaster drill handoff, user-facing trust receipts, Trust Badge states, Trust Ledger entries, cross-device ambient continuity, new-phone/export-restore scenario, stale state truth, and no unverified sync claims.
+- Dependencies: Batches 65, 76, 79 complete and data model evidence verified.
+- Out-of-scope items: non-Apple sync providers, widgets, HealthKit, and unverified platform claims.
+- Completion definition: Sync/export/import claims match implementation evidence and preserve user trust.
 
-## Batch 79 - App Intents and Shared Container
+## Batch 82 - App Intents and Shared Container
 
-- Purpose: Productize App Intents and shared container boundaries over stable commands.
-- Exact scope: App Intents, shared container data, route payloads, command pipeline integration, tests.
-- Likely areas affected: App Intents target, shared models, routing, project.yml, tests.
-- Dependencies: Batches 67, 68, 78 complete or explicitly verified not required for local intent scope.
-- Implementation notes: Intents execute through Command Pipeline.
-- UI/UX expectations: External entry lands in canonical shell context.
-- Acceptance criteria: Intents are useful, safe, and do not duplicate command logic.
-- Testing requirements: XcodeGen, native build, intent/routing tests, relevant full tests.
-- Out-of-scope items: Widgets/Live Activities UI, share extension unless explicitly in scope.
-- Risk notes: Shared container payloads must remain privacy-safe.
-- Completion definition: App Intents and shared container are stable for external surfaces.
-- Ready-to-paste Codex prompt:
+- Purpose: Productize App Intents and shared container boundaries over stable commands, receipts, and external continuity.
+- Exact scope: external action receipts, correction-safe commands, External Continuity Contract, `capture thought`, `what should I do now?`, `I am stuck`, `move this later`, `make it smaller`, `why this?`, Action Closure result states, stale/failed-safe command states, privacy-safe payloads, and no duplicate command logic.
+- Dependencies: Batches 67, 68, 76, and 81 complete or explicitly verified not required for local-only intent scope.
+- Out-of-scope items: widgets/Live Activities UI and share extension expansion unless explicitly scoped.
+- Completion definition: App Intents land in canonical shell context and return trustworthy results.
 
-```text
-Work on main only. ACTIVE BATCH: Batch 79 - App Intents and Shared Container. Implement only App Intents/shared container integration through Canonical Now State and Command Pipeline. Do not build widgets or Live Activities yet. Report changed files and validation.
-```
+## Batch 83 - Widgets and Live Activity v1
 
-## Batch 80 - Widgets and Live Activity v1
+- Purpose: Ship simple polished first versions of widgets and Live Activities as ambient continuity surfaces.
+- Exact scope: Lock Screen Next Move, Protected Block Live Activity, stale snapshot handling, denied-permission behavior, external surface validation gate, ambient continuity, Action Closure handoff where possible, Trust/status handling for stale data, and no mini-dashboard clutter.
+- Dependencies: Batches 67, 68, 74, and 82 complete.
+- Out-of-scope items: complex external controls, non-phone hardware, Watch/TV, and unverified platform claims.
+- Completion definition: External surfaces render useful current state, expose stale/trust status, and land correctly in app as far as the environment can verify.
 
-- Purpose: Ship simple polished first versions of widgets and Live Activities.
-- Exact scope: v1 widget(s), v1 Live Activity, payloads, landing routes, tests.
-- Likely areas affected: widget/activity targets, shared snapshots, routing, project.yml, tests.
-- Dependencies: Batches 67, 68, 79 complete.
-- Implementation notes: Simple polished v1 only; consume Now State and Command Pipeline.
-- UI/UX expectations: Glanceable, warm, rich panels consistent with app visual system.
-- Acceptance criteria: External surfaces render useful current state and land correctly in app.
-- Testing requirements: XcodeGen, native build, widget/activity tests where possible, manual platform review as available.
-- Out-of-scope items: Complex external controls, non-phone hardware, Watch/TV.
-- Risk notes: Avoid overpromising platform validation not run.
-- Completion definition: v1 external surfaces are real, simple, and validated as far as environment allows.
-- Ready-to-paste Codex prompt:
+## Batch 84 - Path Intelligence Foundation
 
-```text
-Work on main only. ACTIVE BATCH: Batch 80 - Widgets and Live Activity v1. Implement only simple polished v1 widgets and Live Activity surfaces after Now State and Command Pipeline stability. Do not add advanced external behavior or non-phone hardware. Report changed files and validation.
-```
+- Purpose: Establish Life Path Simulation contracts for broad coherent path families.
+- Exact scope: Path Forks, Path Fork Simulator contracts, Domain Path Pack contracts, people/stakeholders, proof types, dependencies, prerequisites, fallback paths, pause/limited-time simulations, Future Self Simulator, `what if I pause?`, and `what can I do with 90 minutes?`.
+- Dependencies: Batches 65, 66, 71, 75, 77, and 78 complete.
+- Out-of-scope items: Path Builder UI, HealthKit, food/calorie sync, household/shared life, and unsupported domain specificity.
+- Completion definition: Path contracts support simulation without fake certainty or template sprawl.
 
-## Batch 81 - Path Intelligence Foundation
+## Batch 85 - Path Builder / Life Path Simulation UI
 
-- Purpose: Establish full long-range path intelligence contracts.
-- Exact scope: Path families, stage models, prerequisites, readiness, alternatives, capacity/explanation hooks, tests.
-- Likely areas affected: domain/services, path intelligence tests, docs.
-- Dependencies: Batches 65, 66, 71 complete.
-- Implementation notes: Include Career, Education / Certification, Creative, Finance, Health / Fitness without HealthKit, Home / Life Admin, Relationships / Personal Life solo only.
-- UI/UX expectations: No full path builder UI yet.
-- Acceptance criteria: Path contracts support broad coherent families without template sprawl.
-- Testing requirements: Targeted path tests, native build, relevant full tests.
-- Out-of-scope items: HealthKit, household/shared life, food/calorie sync, long-range UI.
-- Risk notes: Avoid unsupported domain specificity.
-- Completion definition: Path Intelligence foundation is testable and reusable.
-- Ready-to-paste Codex prompt:
+- Purpose: Surface Life Path Simulation in Path Builder and long-range Goal Detail UI.
+- Exact scope: Domain Path Packs visible in UI, path-specific Mission Control lanes, proof/resource/people/waiting integration, Path Fork UI, Future Self Simulator UI, pause and limited-time simulations, long-range visual roadmap using the established visual system, Life Graph Breadcrumb, Proof Rail, and Ambient Status Orb for path health/pressure.
+- Dependencies: Batch 84 complete.
+- Out-of-scope items: new path families beyond approved scope, HealthKit, household/shared life.
+- Completion definition: Users can inspect, compare, and adjust long-range paths connected to daily action.
 
-```text
-Work on main only. ACTIVE BATCH: Batch 81 - Path Intelligence Foundation. Implement only shared long-range path intelligence contracts for the approved path families. Do not build Path Builder UI or deferred HealthKit/household/food features. Report changed files and validation.
-```
+## Batch 86 - Learning and Anticipation
 
-## Batch 82 - Path Builder and Long-Range Path UI
+- Purpose: Add local, evidence-derived learning and anticipation without black-box claims.
+- Exact scope: Correction Cards, Memory Receipts learning loop, Memory Confidence Engine, wrong-assumption feedback, never-suggest-this-again feedback, user-confirmed learning only, Mode Lens learning boundaries where relevant, Narrative Memory Map consumption, and no black-box claims.
+- Dependencies: Batches 65, 66, 75, 80, 84, and 85 complete.
+- Out-of-scope items: retrieval expansion, unverified automation, HealthKit, household/shared life.
+- Completion definition: Learning influences recommendations only when evidence and correction paths are clear.
 
-- Purpose: Surface Path Intelligence in builder and long-range Goal Detail UI.
-- Exact scope: Path Builder, long-range path panels, path edit/review flows, tests.
-- Likely areas affected: Goals/Goal Detail, path services, shared panels, tests.
-- Dependencies: Batch 81 complete.
-- Implementation notes: UI consumes path contracts; it does not create path logic.
-- UI/UX expectations: Detail can be denser; top-level Goals remains calm.
-- Acceptance criteria: Users can inspect and adjust long-range paths connected to daily action.
-- Testing requirements: Targeted path UI/tests, native build, UI tests, manual review.
-- Out-of-scope items: New path families beyond approved scope, HealthKit, household/shared life.
-- Risk notes: Avoid fantasy planning and excessive density.
-- Completion definition: Long-range path UI is usable and grounded.
-- Ready-to-paste Codex prompt:
+## Batch 87 - Onboarding, Empty States, and Returning User Continuity
 
-```text
-Work on main only. ACTIVE BATCH: Batch 82 - Path Builder and Long-Range Path UI. Build only Path Builder and long-range path UI over Batch 81 contracts. Do not add new path families or deferred integrations. Report changed files and validation.
-```
+- Purpose: Make first-run, empty, degraded, and returning-user states match the operating-loop canon.
+- Exact scope: Activation Contract, Return Path, Re-entry Engine consumption, first meaningful goal, first Today Contract, first recovery example, first explanation receipt, first Action Closure receipt, first trust/export message, introduction to singular Capture, Mode Lens introduction only if implemented, and empty-state rules for all primary surfaces.
+- Dependencies: Primary loop, surface, and trust batches complete enough to avoid false education.
+- Out-of-scope items: new core systems and release hardening closure.
+- Completion definition: New and returning users understand what to do without stale/demo copy or guilt.
 
-## Batch 83 - Learning and Anticipation v1
+## Batch 88 - Accessibility Verification and User-Facing Nutrition Facts
 
-- Purpose: Add first learning/anticipation layer from verified local behavior.
-- Exact scope: Derived learning from events, anticipation signals, recommendation adjustments, tests.
-- Likely areas affected: services/domain, Memory/Event Ledger, explanation, tests.
-- Dependencies: Batches 65, 66, 81, 82 complete.
-- Implementation notes: Learn from local evidence; user-correctable; no black-box claims.
-- UI/UX expectations: Subtle panels or explanations only where useful.
-- Acceptance criteria: Learning influences recommendations with explanation and correction path.
-- Testing requirements: Targeted learning tests, native build, relevant full tests.
-- Out-of-scope items: Retrieval expansion, HealthKit, household/shared life.
-- Risk notes: Avoid claiming certainty from sparse data.
-- Completion definition: v1 learning is local, explainable, and bounded.
-- Ready-to-paste Codex prompt:
+- Purpose: Verify accessibility and publish truthful You -> Accessibility summary only after evidence exists.
+- Exact scope: user-facing Accessibility Nutrition Facts only after verified, visual-system contrast verification, Dynamic Type / VoiceOver / Reduce Motion / tap target checks for rich panels, global chrome, Mode Lens, Continuity Ribbon, Action Closure Tray, bottom tabs, top headers, receipt/correction controls, widgets, and Live Activity if present.
+- Dependencies: Batches 64 and 83 complete.
+- Out-of-scope items: new product features and unverified claims.
+- Completion definition: Accessibility Nutrition claims are backed by audit evidence or remain conservative/deferred.
 
-```text
-Work on main only. ACTIVE BATCH: Batch 83 - Learning and Anticipation v1. Implement only local, evidence-derived learning and anticipation v1 with explanation support. Do not add black-box AI behavior or deferred integrations. Report changed files and validation.
-```
+## Batch 89 - Release Hardening / Indispensability QA
 
-## Batch 84 - Onboarding, Empty States, and Returning User Continuity
-
-- Purpose: Make first-run, empty, degraded, and returning-user states match Ambitions 2.0.
-- Exact scope: Onboarding, empty states, error/degraded states, re-entry continuity, permission education.
-- Likely areas affected: onboarding/launch, Today, Goals, Capture, Plan, You, shared panels, tests.
-- Dependencies: Primary surface batches complete.
-- Implementation notes: Permission education must match Plan calendar policy and sync/export truth.
-- UI/UX expectations: Warm, calm, low cognitive load, rich panels.
-- Acceptance criteria: New and returning users understand what to do without stale/demo copy.
-- Testing requirements: Targeted UI tests, native build, manual state review.
-- Out-of-scope items: New core systems, release hardening closure.
-- Risk notes: Avoid copy that claims unverified accessibility/sync/platform support.
-- Completion definition: First-run and re-entry states are coherent and truthful.
-- Ready-to-paste Codex prompt:
-
-```text
-Work on main only. ACTIVE BATCH: Batch 84 - Onboarding, Empty States, and Returning User Continuity. Update only onboarding, empty/degraded states, permission education, and return continuity. Do not add new core systems. Report changed files and validation.
-```
-
-## Batch 85 - Accessibility Verification and User-Facing Nutrition Facts
-
-- Purpose: Verify accessibility and publish truthful You -> Accessibility summary.
-- Exact scope: Audit five tabs, Goal Detail, Capture triage, Plan calendar flow, Why sheets, Reviews, widgets/Live Activity if present; add user-facing summary.
-- Likely areas affected: accessibility records, You -> Accessibility, shared UI fixes, tests/docs.
-- Dependencies: Batches 64 and 80 complete.
-- Implementation notes: User-facing claims must match verification.
-- UI/UX expectations: Summary is plain, calm, and specific about verified/unverified support.
-- Acceptance criteria: Accessibility Nutrition claims are backed by audit evidence.
-- Testing requirements: Dynamic Type, VoiceOver, Reduce Motion, contrast, tap target, gesture alternative review; automated tests where available.
-- Out-of-scope items: New product features, unrelated redesign.
-- Risk notes: Manual verification may require real device/simulator limits to be documented.
-- Completion definition: Verified accessibility summary is live or blocked with precise unverified items.
-- Ready-to-paste Codex prompt:
-
-```text
-Work on main only. ACTIVE BATCH: Batch 85 - Accessibility Verification and User-Facing Nutrition Facts. Perform and record accessibility verification, fix only scoped accessibility issues, and add user-facing You -> Accessibility summary only for verified claims. Do not add unrelated features. Report changed files and validation.
-```
-
-## Batch 86 - Ambitions 2.0 Release Hardening
-
-- Purpose: Close Ambitions 2.0 release readiness.
-- Exact scope: Regression fixes, docs truth, performance review, release docs, screenshots/store readiness notes, validation closure.
-- Likely areas affected: docs, tests, small bug fixes across touched areas, release assets if required.
-- Dependencies: Batches 61-85 complete.
-- Implementation notes: Hardening only; no new scope.
-- UI/UX expectations: Preserve 2.0 visual system and calm shell.
-- Acceptance criteria: Release docs, validation, known limitations, and registry status are truthful.
-- Testing requirements: XcodeGen, native build, full unit/UI tests where environment supports, archive sanity if documented, manual audit list.
-- Out-of-scope items: New systems, new external surfaces, deferred scope.
-- Risk notes: Do not claim Apple-side signing/App Store validation unless run.
+- Purpose: Close Ambitions 2.0 release readiness and test whether the product feels indispensable.
+- Exact scope: Indispensability QA, global chrome QA, shell consistency QA, rich-panel visual consistency QA, Appearance Studio regression QA, docs truth, performance review, release docs, validation closure, and scenario scripts for missed day/week, calendar denied, new phone/export restore, five competing goals, urgent deadline, vague capture, wrong recommendation, blocked goal, returning after a month, widget stale state, Live Activity interrupted, VoiceOver/Dynamic Type, move apartments in 45 days, transition into Product in 12 months, finish an EP in 90 days, plan around a new baby, pay off debt while preserving rent, and study for certification while working full-time.
+- Dependencies: Batches 61-88 complete.
+- Out-of-scope items: new systems, new external surfaces, deferred scope, and unverified App Store claims.
 - Completion definition: Ambitions 2.0 is release-candidate ready or has a precise blocker list.
-- Ready-to-paste Codex prompt:
-
-```text
-Work on main only. ACTIVE BATCH: Batch 86 - Ambitions 2.0 Release Hardening. Perform release hardening only: regression closure, docs truth, validation, performance/accessibility follow-up, and release readiness. Do not add new features or deferred scope. Report changed files, validation, unresolved blockers, and registry recommendation.
-```

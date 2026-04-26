@@ -6,7 +6,9 @@ Adoption date: 2026-04-24
 
 Ambitions 2.0 is a major app transformation, not a minor polish wave.
 
-"Ambitions is a premium personal execution system that turns meaningful goals into believable daily action, explains why each action matters, and helps the user recover when real life disrupts the plan."
+"Ambitions is a personal operating system for protecting meaningful progress under real-life conditions."
+
+Ambitions 2.0 is not merely a planner, habit tracker, goal app, calendar wrapper, analytics dashboard, or beautiful productivity app. It is the daily operating loop that keeps life objects continuous, believable, provable, recoverable, correctable, trusted, remembered, focused, strategically pathed, and calm.
 
 The product direction is:
 
@@ -38,6 +40,10 @@ This plan supersedes prior roadmap direction after Batch 60 where conflicts exis
 - Export/import remains required as a trust fallback.
 - Widgets and Live Activities are in Ambitions 2.0 scope, after Canonical Now State and Command Pipeline are stable.
 - Full long-range Path Intelligence is in Ambitions 2.0 scope.
+- Life Graph v1 is in Ambitions 2.0 scope as the shared relationship layer for goals, milestones, actions, blockers, people, commitments, resources, evidence, windows, constraints, decisions, memories, corrections, and receipts.
+- Action Closure is in Ambitions 2.0 scope as a trust layer: every meaningful command must produce a visible result/receipt, explain what changed and why, offer correction, and offer undo where safely supported.
+- Reality Reflow is in Ambitions 2.0 scope as the shared plan-mutation/recovery system. It must never silently reschedule work and must preserve Plan-owned calendar permission policy.
+- The global shell/chrome is an Ambitions 2.0 product system, not incidental styling. A dedicated future batch must align the persistent app frame before later major surface redesigns consume it.
 - Accessibility Nutrition Facts are required: internal checklist first, user-facing `You -> Accessibility` summary only after verification.
 - Dedicated device runtime is an architecture guardrail only in Ambitions 2.0. Do not build active hardware/runtime surfaces unless they naturally fall out of sync, Now State, or Command Pipeline work.
 
@@ -53,7 +59,7 @@ Goal portfolio and Goal Detail entry. Shows active direction, goal health, path 
 
 ### Capture
 
-Fast intake and triage. Owns raw capture, quick goal seeds, plan seeds, waiting items, archive, and routing into Goals or Plan.
+Fast intake and triage. Owns raw capture, quick goal seeds, plan seeds, waiting items, archive, and routing into Goals or Plan. Capture remains singular.
 
 ### Plan
 
@@ -120,6 +126,10 @@ Ambitions 2.0 includes:
 - Memory / Event Ledger
 - Command Pipeline
 - Path Intelligence across broad coherent families
+- Life Graph v1 and object relationships as the connector between Capture, Today, Goals, Plan, You, Reviews, Path Intelligence, Proof of Progress, Commitments, Waiting Room, corrections, and receipts
+- Action Closure and receipts across app actions, calendar writes, export/import, external surfaces, corrections, safe failures, and undo-eligible changes
+- Living Capture, Commitments and Waiting Room, Proof of Progress, Correction Cards, Anti-Plan / Not Today, Personal Operating Constitution, Review Constellation, and Life OS Receipt as Ambitions 2.0 v1 commitments where scoped by owning batches
+- bounded Ambitions-specific engines such as Believability Kernel, Constraint Gravity, Decision Debt, Attention Shield, Opportunity Window, Momentum Integrity, Memory Confidence, Assumption Watchtower, Proof Rail, Trust Ledger, Narrative Memory Map, Re-entry, Safe Automation Boundary, and One Move Doctrine, clustered into roadmap layers rather than one batch per invention
 - Accessibility Nutrition Layer
 - Apple-first sync
 - export/import trust fallback
@@ -162,6 +172,27 @@ These may remain historical or later-vision ideas, but they are not active 2.0 i
 8. Top-level surfaces must stay calm.
 9. Build shared systems once before surfaces consume them.
 10. Apple-native external surfaces follow stable internal truth.
+11. One Move Doctrine: when the user is overwhelmed, Ambitions collapses complexity into one believable move.
+12. Proof over theater: progress must be backed by actions, artifacts, decisions, feedback, resolved blockers, calendar completions, notes, files, links, photos, or reflections rather than fake percentages alone.
+13. Correction over black boxes: recommendations, assumptions, memory, and actions must be correctable and future behavior must learn only from evidence and user-confirmed signals.
+14. Do Less Better: Ambitions may recommend dropping, shrinking, parking, or reviewing instead of adding work.
+
+## Daily Continuity Loop
+
+Ambitions 2.0 must become a daily continuity loop:
+
+1. Capture messy life.
+2. Classify what kind of life object it is.
+3. Attach it to goals, people, time, resources, proof, or waiting.
+4. Show one believable next move.
+5. Protect what matters when reality breaks.
+6. Produce a receipt for what changed.
+7. Let the user correct memory, assumptions, recommendations, and actions.
+8. Carry that learning into tomorrow.
+9. Review what changed without guilt.
+10. Preserve continuity across devices, external surfaces, export/import, and returning-user states.
+
+The remaining roadmap must produce this loop, not five polished but separate tabs.
 
 ## Success Definition
 

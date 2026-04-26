@@ -42,7 +42,7 @@ Use [../canon/Ambitions_2_0_Batch_Plan.md](../canon/Ambitions_2_0_Batch_Plan.md)
 
 ## Active Queue
 
-Current wave status: Ambitions 2.0 post-Batch-60 canon is adopted. Batches 61-72 are complete for planning purposes; Batches 73-86 remain queued.
+Current wave status: Ambitions 2.0 post-Batch-60 canon is adopted. Batches 61-72 are complete for planning purposes; Batches 73-89 remain queued. Batch 73 is not closed out by the roadmap/canon amendment.
 
 | Batch | Name | Status | Notes |
 | --- | --- | --- | --- |
@@ -96,7 +96,7 @@ These rows are the active planning state for the new post-Batch-60 Ambitions 2.0
 | 61 | Repo Truth and Ambitions 2.0 Capability Matrix | Completed | Repo truth and capability matrix verification completed enough to allow Batch 62 shell IA work by explicit user direction. |
 | 62 | Ambitions 2.0 Shell IA | Completed | Locked Today / Goals / Capture / Plan / You shell implemented per current verified state; deeper 2.0 surface work remains deferred to owning batches. |
 | 63 | Rich Panel Design System | Completed | Ambitions 2.0 rich panel design-system foundation added with semantic state/accessibility hooks per current verified state; broad surface redesign remains deferred. |
-| 64 | Accessibility Nutrition Layer | Completed | Internal accessibility nutrition checklist, screen audit template, code-backed model/tests, and Batch 85 handoff criteria were added without publishing user-facing claims. |
+| 64 | Accessibility Nutrition Layer | Completed | Internal accessibility nutrition checklist, screen audit template, code-backed model/tests, and user-facing accessibility verification handoff criteria were added without publishing user-facing claims. |
 | 65 | Memory / Event Ledger Foundation | Completed | Canonical local Event Ledger domain model, taxonomy, repository boundary, SwiftData/in-memory persistence, adapter helpers for existing memory fragments, and focused tests landed without surface redesign, sync, or calendar behavior. |
 | 66 | Recommendation Explanation Model | Completed | Shared recommendation explanation contract, taxonomy, assumption/correction support, Event Ledger evidence references, and goal explainability adapter tests landed without explanation sheets, surface redesign, priority engine, context lens runtime, calendar behavior, or Capture 2.0. |
 | 67 | Canonical Now State | Completed | Canonical Now State domain contract, context lens taxonomy, deterministic local projection service, Event Ledger/Recommendation Explanation references, and focused tests landed without Today redesign, Context Lens UI, calendar behavior, widgets, Live Activities, App Intents productization, Capture 2.0, Plan 2.0, sync/export, or priority-engine implementation. |
@@ -105,24 +105,27 @@ These rows are the active planning state for the new post-Batch-60 Ambitions 2.0
 | 70 | Reality Model and Calendar Read/Write | Completed | Reality Model domain contracts, deterministic no-permission/calendar-aware projection, Plan-owned calendar read permission hook, local-only derived busy/open-window support, confirmed calendar block-write boundary, Event Ledger/explanation/Now/Command integration, and focused tests landed without Plan 2.0 UI, automatic scheduling, Today/Goals/Capture/You redesign, sync/export, widgets, Live Activities, App Intents productization, Path Intelligence UI, onboarding, or Reviews. |
 | 71 | Believability, Capacity, and Goal Health | Completed | Shared deterministic believability/goal-health taxonomy, assessment models, capacity/deadline/context/priority reality projector, Capture/Goal/Plan-seed assessment support, explanation generation, Event Ledger reference safety, and side-effect-free Now/Command adapters landed without Goals 2.0, Goal Detail 2.0, Plan 2.0, Today 2.0, automatic scheduling, calendar writes, calendar permission prompts, full recovery, widgets, App Intents productization, sync/export, Path Intelligence UI, onboarding, or Reviews. |
 | 72 | Execution Resilience Stack | Completed | Shared Execution Resilience domain model, deterministic projector/service, disruption/recovery taxonomy, protected/displaced/passive/waiting summaries, explanation generation, Now helper projection, and representational command mapping landed without Today 2.0, Plan 2.0, Goals/Goal Detail 2.0, Reviews, automatic scheduling, calendar writes, calendar permission prompts, widgets, Live Activities, App Intents productization, sync/export, Path Intelligence UI, onboarding, or You/Profile redesign. |
-| 73 | Today 2.0 Rich Execution Center | Queued | New Ambitions 2.0 batch; do not start until prior dependencies are complete. |
-| 74 | Goals and Goal Detail 2.0 | Queued | New Ambitions 2.0 batch; do not start until prior dependencies are complete. |
-| 75 | Plan 2.0 Calendar-Aware Believability Workspace | Queued | New Ambitions 2.0 batch; do not start until prior dependencies are complete. |
-| 76 | You 2.0, Reviews, Memory, and Trust | Queued | New Ambitions 2.0 batch; do not start until prior dependencies are complete. |
-| 77 | Contextual Insights and Review System | Queued | New Ambitions 2.0 batch; do not start until prior dependencies are complete. |
-| 78 | Apple-First Sync and Export/Import | Queued | New Ambitions 2.0 batch; do not start until prior dependencies are complete. |
-| 79 | App Intents and Shared Container | Queued | New Ambitions 2.0 batch; do not start until prior dependencies are complete. |
-| 80 | Widgets and Live Activity v1 | Queued | New Ambitions 2.0 batch; do not start until Now State and Command Pipeline are stable. |
-| 81 | Path Intelligence Foundation | Queued | New Ambitions 2.0 batch; do not start until prior dependencies are complete. |
-| 82 | Path Builder and Long-Range Path UI | Queued | New Ambitions 2.0 batch; do not start until prior dependencies are complete. |
-| 83 | Learning and Anticipation v1 | Queued | New Ambitions 2.0 batch; do not start until prior dependencies are complete. |
-| 84 | Onboarding, Empty States, and Returning User Continuity | Queued | New Ambitions 2.0 batch; do not start until prior dependencies are complete. |
-| 85 | Accessibility Verification and User-Facing Nutrition Facts | Queued | New Ambitions 2.0 batch; do not start until prior dependencies are complete. |
-| 86 | Ambitions 2.0 Release Hardening | Queued | Final new Ambitions 2.0 release hardening batch. |
+| 73 | Today 2.0 / Daily Operating Contract | Queued | Roadmap/canon amendment renamed the queued batch; do not close out until implemented and validated. |
+| 74 | Global Shell Chrome and Visual Alignment | Queued | New dedicated future chrome/header/tab visual alignment batch; do not start until Batch 73 is ready for handoff. |
+| 75 | Life Graph v1 and Object Relationships | Queued | Future foundation batch; do not start until prior dependencies are complete. |
+| 76 | Action Closure and Receipt System | Queued | Future foundation batch; do not start until prior dependencies are complete. |
+| 77 | Goals and Goal Detail 2.0 | Queued | Future surface batch; consumes global chrome, Life Graph, and Action Closure foundations. |
+| 78 | Plan 2.0 and Reality Reflow | Queued | Future surface/system batch; preserves Plan-owned calendar permission and no silent rescheduling. |
+| 79 | You 2.0, Personal Operating Constitution, and Trust Center | Queued | Future trust/control batch; do not claim sync/accessibility verification before owning batches. |
+| 80 | Reviews and Review Constellation | Queued | Future review batch; no restored top-level Insights tab. |
+| 81 | Sync / Export / Import Trust | Queued | Future trust/continuity batch; no unverified sync claims. |
+| 82 | App Intents and Shared Container | Queued | Future external action batch; must consume shared commands, receipts, and external continuity contract. |
+| 83 | Widgets and Live Activity v1 | Queued | Future external surface batch; do not start until Now State, Command Pipeline, and App Intents/shared-container boundaries are stable. |
+| 84 | Path Intelligence Foundation | Queued | Future Life Path Simulation contract batch; no Path Builder UI yet. |
+| 85 | Path Builder / Life Path Simulation UI | Queued | Future UI batch over Batch 84 contracts. |
+| 86 | Learning and Anticipation | Queued | Future learning batch; evidence-derived and correction-aware only. |
+| 87 | Onboarding, Empty States, and Returning User Continuity | Queued | Future continuity batch; no false education for unimplemented systems. |
+| 88 | Accessibility Verification and User-Facing Nutrition Facts | Queued | Future verification batch; publish user-facing claims only after evidence. |
+| 89 | Release Hardening / Indispensability QA | Queued | Final Ambitions 2.0 release hardening and indispensability QA batch. |
 
 ## Completed Historical Front-End Transformation Program
 
-These batches are complete for planning purposes. They remain as historical context only. The new top-level Ambitions 2.0 source of truth for future work is the Batch 61-86 canon package.
+These batches are complete for planning purposes. They remain as historical context only. The new top-level Ambitions 2.0 source of truth for future work is the Batch 61-89 canon package.
 
 | Batch | Name | Status | Notes |
 | --- | --- | --- | --- |

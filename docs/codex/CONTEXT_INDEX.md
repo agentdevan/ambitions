@@ -83,7 +83,7 @@ Do not replace these with external copies or duplicate canon locations.
 - Do not build extension-heavy features before shared container and data boundaries exist.
 - Do not build sync backend logic before sync boundary, export/import, and conflict policy are defined.
 - Do not begin device work before runtime separation exists.
-- Implement only the active batch from [Ambitions_2_0_Batch_Plan.md](../canon/Ambitions_2_0_Batch_Plan.md) and [BATCH_REGISTRY.md](BATCH_REGISTRY.md) unless explicitly told otherwise. The active Ambitions 2.0 execution start is Batch 61, and Batches 62-86 remain queued until their turn.
+- Implement only the active batch from [Ambitions_2_0_Batch_Plan.md](../canon/Ambitions_2_0_Batch_Plan.md) and [BATCH_REGISTRY.md](BATCH_REGISTRY.md) unless explicitly told otherwise. The active Ambitions 2.0 execution start is Batch 61, and Batches 62-89 remain queued until their turn.
 - For Batch 66 onward, preserve the intelligence standards in [Ambitions_2_0_Intelligence_Standards.md](../canon/Ambitions_2_0_Intelligence_Standards.md): Priority Reality Model, Context Lens, Commitment Capture, Living Goal Containers, obvious destination rules for every user-created item, user-correctable assumptions, and anti-clutter progressive-disclosure product intelligence.
 - Treat [Ambitions_Full_Frontend_Transformation_Program.md](../canon/Ambitions_Full_Frontend_Transformation_Program.md), [design/README.md](../canon/design/README.md), and [Ambitions_Frontend_Transformation_Execution_Classification.md](../canon/design/Ambitions_Frontend_Transformation_Execution_Classification.md) as historical context where not superseded by the active Batch 61+ Ambitions 2.0 canon.
 

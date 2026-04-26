@@ -22,7 +22,7 @@ Before non-trivial planning or implementation, read:
 9. [BATCH_REGISTRY.md](BATCH_REGISTRY.md)
 10. [../../MASTER_PRODUCT_SPEC.md](../../MASTER_PRODUCT_SPEC.md) for current shipping product truth where not superseded by the new Ambitions 2.0 canon
 
-Do not skip ahead of the Batch 61-86 execution order or active batch unless direct user instructions explicitly change scope.
+Do not skip ahead of the Batch 61-89 execution order or active batch unless direct user instructions explicitly change scope.
 
 ## Product identity
 

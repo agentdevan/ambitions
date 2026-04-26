@@ -20,6 +20,10 @@ The sellable reason to use Ambitions is:
 
 > Drop your life into Ambitions, and it shows what matters now, where it fits, why it matters, and how it connects to the bigger map.
 
+The operating-system reason to keep using Ambitions is:
+
+> Ambitions protects meaningful progress under real-life conditions by preserving continuity, believability, proof, recovery, correction, trust, memory, focus, strategic pathing, and calmness.
+
 ## Non-Negotiable Product Standard
 
 Every user-created item must have an obvious destination and lifecycle.
@@ -219,12 +223,18 @@ These standards must influence all future batches, especially:
 - Batch 70: Reality Model must place commitments into real time and understand work/free-time/context fit.
 - Batch 71: Believability, Capacity, and Goal Health must weigh priority, urgency, consequence, available time, passive versus active status, and deadline credibility.
 - Batch 72: Execution Resilience must handle missed high-priority items, displaced lower-priority tasks, deadline compression, and too many commitments for available context/time.
-- Batch 73: Today 2.0 must expose the current lens, one best next move, urgent outside-lens items, and why-this-now without becoming a dashboard.
-- Batch 74: Goals and Goal Detail 2.0 must support living goal containers, deliverables, scope changes, visible roadmaps, completed work, remaining work, and passive versus active goals.
-- Batch 75: Plan 2.0 must show context blocks, calendar-aware fit, priority conflicts, displaced items, protected high-priority work, and calmly deferred lower-priority work.
-- Batch 76: You 2.0 must make preferences, memory, trust, review, and correction paths visible without becoming a junk drawer.
-- Batch 77: Contextual insights and reviews must explain what changed, what remains believable, and what action follows.
-- Batch 81-82: Path Intelligence and Path Builder must connect long-range paths to living goal containers, deliverables, milestones, and daily actions.
+- Batch 73: Today 2.0 / Daily Operating Contract must expose the current lens, one best next move, urgent outside-lens items, one protected must-do, one intentionally-not-today item, one recovery fallback, Save the Day, Action Closure entry, and why-this-now without becoming a dashboard.
+- Batch 74: Global Shell Chrome and Visual Alignment must make Mode Lens, Continuity Ribbon, Action Closure Tray, Ambient Status Orb, Life Graph Breadcrumb, Mission Control Lanes, Anti-Plan strip, Proof Rail, and Trust Badge usable as shared shell/detail patterns without changing top-level IA.
+- Batch 75: Life Graph v1 must make goals, milestones, actions, blockers, people, commitments, resources, evidence, windows, constraints, decisions, memories, corrections, and receipts first-class relationships.
+- Batch 76: Action Closure must define receipt states, undo eligibility where safe, correction entry, why-changed linkage, safe failures, calendar/export/import/external receipts, Trust Ledger handoff, and Safe Automation Boundary v1.
+- Batch 77: Goals and Goal Detail 2.0 must support living goal containers, deliverables, scope changes, visible roadmaps, completed work, remaining work, passive/active/waiting/blocked/parked/protected/completed states, proof-weighted progress, assumptions, Mission Control lanes, and Life Graph Breadcrumb.
+- Batch 78: Plan 2.0 / Reality Reflow must show context blocks, calendar-aware fit, priority conflicts, displaced items, protected high-priority work, calmly deferred lower-priority work, Plan Treaty, Personal Capacity Envelope, Constraint Gravity, Decision Debt, Opportunity Windows, and no silent rescheduling.
+- Batch 79: You 2.0 must make Personal Operating Constitution, preferences, memory, trust, review, correction paths, Trust Center, Safe Automation Boundary, and Appearance Studio visible without becoming a junk drawer.
+- Batch 80: Reviews and Review Constellation must explain what changed, what remains believable, what was corrected, what was learned, what was protected, and what action follows without recreating a top-level Insights tab.
+- Batches 81-83: Sync/export/import, App Intents, widgets, and Live Activities must use External Continuity Contract, Action Closure receipts, stale-state truth, and no duplicate command logic.
+- Batches 84-85: Path Intelligence and Path Builder must connect long-range paths, path forks, Domain Path Packs, proof requirements, prerequisites, fallback paths, future-self simulations, and limited-time/pause scenarios to living goal containers and daily actions.
+- Batch 86: Learning and Anticipation must learn only from evidence and user-confirmed signals, expose Memory Confidence, support Correction Cards, and avoid black-box claims.
+- Batches 87-89: onboarding, accessibility verification, and release hardening must verify the operating loop, rich panels, global chrome, Appearance Studio, and indispensability scenarios truthfully.
 
 ## Anti-Patterns
 

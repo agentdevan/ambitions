@@ -65,7 +65,7 @@ Rules:
 
 ### Backgrounds
 
-- dark mode: warm charcoal to espresso-black family
+- dark mode: warm charcoal / blue-black / near-black navy family; never pure black as the primary app canvas
 - light mode: warm-neutral off-white, never stark pure white
 
 ### Surfaces
@@ -73,6 +73,8 @@ Rules:
 - use tonal lift before border emphasis
 - borders are faint, not structural
 - material use is subtle and never decorative by default
+- glassy elevated surfaces may use translucent dark fills, soft borders, inner light, subtle gradients, rounded corners, and restrained depth
+- avoid heavy fake shadows, flat generic cards, and per-screen hard-coded surface colors
 
 ## Card Rules
 
@@ -115,6 +117,44 @@ Rules:
 - visually lighter than the hero but stronger than secondary meta text
 - may include one direct action only
 - should read as a through-line, not a notification
+- may carry Save the Day availability, one plan/recovery/status message, stale capture pressure, or one continuity fact
+- must be token-driven, accessible, and dismissible where appropriate
+
+## Global Chrome Rules
+
+Global chrome includes the persistent app frame: safe-area/status-bar treatment, app canvas, top header/navigation bar, logo, title behavior, Mode Lens pill, notification/back/overflow controls, bottom tab bar, scroll-edge behavior, sheet/modal headers, screen-edge spacing, panel-to-background relationship, receipt placement, and continuity/status messaging.
+
+Rules:
+
+- near-black navy shell canvas is the flagship dark identity
+- amber is the sparse active accent for active tab, primary action, selected focus, protected action, and completion warmth
+- inactive tabs and secondary shell controls use muted blue-gray
+- bottom tab, header, sheet, receipt, and panel materials must come from centralized tokens
+- no one-off tab treatments
+- no per-screen shell hacks
+- no hidden navigation layers
+- no generic toast system for meaningful commands
+- Appearance Studio must remain able to influence shell and panel tokens safely
+- light mode must retain the same hierarchy and interaction logic
+- Dynamic Type, VoiceOver, Reduce Motion, contrast, tap targets, and non-color distinguishability must be verified before claims
+
+## Mode Lens Rules
+
+Mode Lens may expose Focus, Triage, Plan, Recover, and Review as contextual emphasis states. It must not add tabs, hide source-of-truth ownership, or route users into a second navigation system.
+
+## Action Closure Tray Rules
+
+Meaningful commands close with a premium receipt tray/panel instead of disposable toast spam. The tray should show what happened, what changed, why, undo where safely supported, correction, next action when relevant, and safe failure states.
+
+## Proof Rail Rules
+
+Proof Rail is a compact evidence layer for Goal Detail, Reviews, and Path Builder. It may summarize proof on top-level Goals, but should not become a dense artifact dashboard.
+
+Proof examples include notes, links, files, calendar completions, reflections, photos, milestone evidence, decisions, feedback received, blocker resolution, and external artifacts.
+
+## Trust Badge Rules
+
+Trust Badge / Trust status is a small treatment for You and Trust Center, surfaced globally only when action is needed. Candidate states include Local only, Synced, Export ready, Calendar local, Needs backup, and Stale widget. Avoid anxiety-inducing always-on warnings.
 
 ## Drawer and Split-Layer Rules
 
@@ -281,6 +321,6 @@ Semantic state must use text and icon support in addition to color. Batch 63 inc
 
 Batch 64 adds the internal Accessibility Nutrition checklist model in `Sources/Accessibility/AccessibilityNutrition.swift`. Future surface batches should use the checklist categories when recording audits for screens, sheets, rich panels, widgets, and external entry points.
 
-Rich panels may expose accessibility verification readiness through semantic state, text, icon, label, value, and hint support. They must not present verified accessibility support to users until a screen-level audit records current evidence and Batch 85 promotes the relevant claim.
+Rich panels may expose accessibility verification readiness through semantic state, text, icon, label, value, and hint support. They must not present verified accessibility support to users until a screen-level audit records current evidence and Batch 88 promotes the relevant claim.
 
-Batch 85 owns the final user-facing `You -> Accessibility` summary. It should consume verified, partially supported, unverified, and not-applicable states from the checklist/audit evidence rather than inventing new claim categories.
+Batch 88 owns the final user-facing `You -> Accessibility` summary. It should consume verified, partially supported, unverified, and not-applicable states from the checklist/audit evidence rather than inventing new claim categories.

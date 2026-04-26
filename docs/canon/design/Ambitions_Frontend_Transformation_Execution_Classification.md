@@ -22,7 +22,7 @@ Use this with:
 ## Operational Guardrail
 
 - All batches before Batch 61 are complete for planning purposes.
-- Nothing in this document activates work outside the active Batch 61-86 registry sequence.
+- Nothing in this document activates work outside the active Batch 61-89 registry sequence.
 
 ## Classification Rubric
 

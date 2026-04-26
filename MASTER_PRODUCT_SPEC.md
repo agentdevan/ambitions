@@ -10,7 +10,9 @@ As of 2026-04-24, the active post-Batch-60 canon is the Ambitions 2.0 major tran
 
 All phases and batches before Batch 61 are complete for planning purposes. Older phase language below is historical where it conflicts with the new Ambitions 2.0 canon.
 
-"Ambitions is a premium personal execution system that turns meaningful goals into believable daily action, explains why each action matters, and helps the user recover when real life disrupts the plan."
+"Ambitions is a personal operating system for protecting meaningful progress under real-life conditions."
+
+Ambitions 2.0 is not merely a planner, habit tracker, goal app, calendar wrapper, analytics dashboard, or beautiful productivity app. The active canon directs the product toward a daily life operating loop with continuity, believability, proof, recovery, correction, trust, memory, focus, strategic pathing, and calmness.
 
 Locked 2.0 direction:
 
@@ -341,12 +343,12 @@ This surface exists to make the system feel alive and trustworthy rather than st
 
 The transformed frontend may redesign shell behavior, but these route-ownership rules remain the canonical design direction unless a later canon update explicitly replaces them:
 
-- `Captures` is a first-class product surface but not a sixth persistent tab.
-- `Habits` is a first-class product surface but not a sixth persistent tab.
+- `Capture` is a singular first-class top-level product surface.
+- `Habits` is absorbed into Plan, rituals, Today execution, and Reviews/pattern reflection rather than treated as a standalone top-level product area.
 - `Weekly Review` is a supporting route owned by planning and review flows, not a top-level shell destination.
 - `Monthly Review` is a supporting reflection route, not a top-level shell destination.
 - `Memory Lens` is a shell-level recall utility surface, not a tab.
-- `Trust Center` is a Profile-owned utility and trust surface, not a separate top-level destination.
+- `Trust Center` is a You-owned utility and trust surface, not a separate top-level destination.
 
 ### 7.9 Cognitive posture truth
 

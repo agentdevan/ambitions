@@ -10,7 +10,7 @@
   - `docs/canon/Ambitions_2_0_Systems_Architecture.md` for shared systems architecture.
   - `docs/canon/Ambitions_2_0_Visual_System.md` for visual system truth.
   - `docs/canon/Ambitions_2_0_Roadmap.md` for roadmap programs.
-  - `docs/canon/Ambitions_2_0_Batch_Plan.md` for Batch 61-86 execution order.
+  - `docs/canon/Ambitions_2_0_Batch_Plan.md` for Batch 61-89 execution order.
   - `docs/canon/Ambitions_2_0_Accessibility_Nutrition.md` for accessibility trust infrastructure.
   - `docs/canon/Ambitions_2_0_Decision_Log.md` for locked decisions.
   - `docs/canon/Ambitions_2_0_Capability_Matrix.md` for Batch 61 verification.
@@ -19,7 +19,7 @@
   - `MASTER_PRODUCT_SPEC.md` for current shipping product truth where not superseded by the new Ambitions 2.0 canon.
   - Older roadmap, surgical, batch, frontend transformation, and design docs are preserved historical context where not superseded.
 - Work on `main` only unless the user explicitly requests branch-based work. Do not create, switch to, or suggest branches for normal Ambitions execution.
-- Do not skip ahead of the Batch 61-86 execution order in `docs/canon/Ambitions_2_0_Batch_Plan.md`.
+- Do not skip ahead of the Batch 61-89 execution order in `docs/canon/Ambitions_2_0_Batch_Plan.md`.
 - Do not build surfaces before engines/services exist; do not build extension-heavy features before shared container/data boundaries exist; do not build sync backend logic before sync boundary/export-import/conflict policy are defined; do not begin device work before runtime separation exists.
 - Implement only the active batch from `docs/canon/Ambitions_2_0_Batch_Plan.md` and `docs/codex/BATCH_REGISTRY.md` unless the user explicitly changes scope.
 - Treat `docs/canon/Ambitions_Full_Frontend_Transformation_Program.md`, `docs/canon/design/README.md`, and related frontend classification docs as historical context where not superseded by the new Ambitions 2.0 canon.

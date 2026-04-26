@@ -4,6 +4,94 @@
 
 This document defines the consolidated Ambitions 2.0 systems. Product surfaces consume these systems; they do not duplicate them.
 
+Ambitions 2.0 systems should be clustered into a small set of product layers instead of one engine per screen or one batch per invention:
+
+- Life Graph / Relationship Layer
+- Action Closure / Trust Layer
+- Daily Execution / Today Layer
+- Reality / Plan Layer
+- Goals / Portfolio Layer
+- Memory / Learning / Reviews Layer
+- Long-Range Strategy Layer
+- Shell / Ambient Continuity Layer
+
+Each layer must stay local-first, explainable, correction-aware, and conservative about automation.
+
+## Life Graph / Relationship Layer
+
+- Purpose: First-class object graph for goals, milestones, actions, blockers, people, commitments, waiting items, resources, evidence, windows, constraints, decisions, memories, corrections, and receipts.
+- Owned concepts: Life Graph v1, Resource Graph v1, Promise Ledger, lightweight Person / Commitment / Waiting relationships, proof types, dependencies, prerequisites, constraints, memory/correction links, Life Graph Breadcrumb data, Proof Rail relationships, and Mission Control Lens foundations.
+- Consumed by: Capture, Today, Goals, Goal Detail, Plan, You, Reviews, Path Intelligence, Action Closure, Memory, Commitments, Waiting Room, and Proof of Progress.
+- Dependencies: Capture 2.0, Event Ledger, Recommendation Explanation Model, Command Pipeline, existing goal/path/resource foundations.
+- Must not be duplicated: feature-specific object relationship stores, isolated waiting lists, per-surface proof attachments, or path-only graph logic.
+- Ambitions 2.0 scope: v1 graph relationships and proof/commitment/resource links before major Goals/Plan/You surface expansion.
+- Later scope: richer external integrations only after sync/export and Safe Automation Boundary are verified.
+
+## Action Closure / Trust Layer
+
+- Purpose: Every meaningful command must produce a visible, actionable result that tells the user what happened, what changed, why, what is next, what can be undone, and what can be corrected.
+- Owned concepts: Action Closure, Action Closure Tray, receipt model, result states, undo eligibility, correction entry, why-changed links, safe failure states, external action receipts, calendar write receipts, export/import receipts, Trust Ledger handoff, and Safe Automation Boundary v1.
+- Result states include: created, changed, scheduled, moved, attached, exported, drafted/prepared, completed, failed safely, needs confirmation, and undo available where safely supported.
+- Consumed by: app UI, Command Pipeline, Plan calendar writes, Capture routing, Goals changes, Reviews, You Trust Center, App Intents, widgets, Live Activities, export/import, and future prepared actions.
+- Dependencies: Command Pipeline, Event Ledger, Recommendation Explanation Model, Reality Model, sync/export policy.
+- Must not be duplicated: generic toast systems, per-feature success copy, external-surface-specific command result logic, or silent mutation paths.
+- Ambitions 2.0 scope: shared receipt model and UI presentation before Goals/Plan/You/Reviews/App Intents/Widgets/Sync consume it.
+- Later scope: more automation only through the Safe Automation Boundary.
+
+## Daily Execution / Today Layer
+
+- Purpose: Turn the current day into a Daily Operating Contract: one protected must-do, one best next move, one intentionally-not-today item, one recovery fallback, one reason this matters, one Action Closure path, and one Save the Day escape hatch.
+- Owned concepts: Daily Operating Contract, Today Contract, Daily Operating Brief, One Move Doctrine, Attention Shield, Save the Day Mode, Recovery Gradient, Anti-Plan / Not Today summary, Friction Radar v1, Ambient Status Orb for day believability, and Mode Lens awareness.
+- Consumed by: Today, Plan, Capture, Reviews, widgets, App Intents.
+- Dependencies: Canonical Now State, Reality Model, Goal Believability, Execution Resilience, Action Closure, Life Graph relationships.
+- Must not be duplicated: Today-only priority logic, dense dashboards, or hidden navigation modes.
+- Ambitions 2.0 scope: v1 daily contract and rescue flow in Today 2.0, with deeper plan handling in Plan 2.0.
+
+## Reality / Plan Layer
+
+- Purpose: Decide whether a day, week, plan, commitment, goal, or path is actually believable under current constraints, then reflow safely when reality changes.
+- Owned concepts: Believability Kernel, Reality Reflow Engine, Constraint Gravity Engine, Plan Treaty, Opportunity Window Engine, Window Magnetism, Personal Capacity Envelope, Context Switching Toll, Calendar Boundary Contract, Decision Debt Engine, and confirmed calendar writes with receipts/undo where safe.
+- Consumed by: Plan, Today, Goals, Reviews, Path Builder, Action Closure.
+- Dependencies: Reality Model, calendar permission boundary, Goal Believability, Execution Resilience, Personal Operating Constitution.
+- Must not be duplicated: screen-specific feasibility labels, silent rescheduling, calendar clone UI, or Plan-independent calendar writes.
+- Ambitions 2.0 scope: Reality Reflow v1 and Plan Treaty in Plan 2.0, with no silent rescheduling and Plan-owned calendar permission preserved.
+
+## Goals / Portfolio Layer
+
+- Purpose: Treat goals as a capacity-limited portfolio with proof-weighted progress, constraints, assumptions, and status.
+- Owned concepts: Ambition Portfolio Manager, Goal Scope Governor, Goal Weather, Momentum Integrity Engine, Proof-Weighted Progress, Assumption Watchtower, Goal Contract, Goal Health MRI, Path Filmstrip, active/passive/waiting/blocked/parked/protected/completed states, early Mission Control lanes, Life Graph Breadcrumb, Proof Rail, and Ambient Status Orb for goal health.
+- Consumed by: Goals, Goal Detail, Plan, Today, Reviews, Path Builder.
+- Dependencies: Life Graph, Proof Rail Engine, Believability Kernel, Event Ledger, Path Intelligence, Action Closure.
+- Must not be duplicated: fake progress percentages, equal-weight goal dashboards, or full Path Builder logic inside Goal Detail before the owning path batches.
+- Ambitions 2.0 scope: Goals / Goal Detail 2.0 consumes Life Graph and Action Closure foundations, but does not build full Path Builder yet.
+
+## Memory / Learning / Reviews Layer
+
+- Purpose: Convert experience into future behavior without black-box personalization.
+- Owned concepts: Memory Confidence Engine, Correction Cards, Narrative Memory Map, Review Constellation, Life OS Receipt, Why Changed Log, Re-entry Engine, Clarity Debt Engine, Recovery Review, Pattern Review, Memory Review, Correction Review, and Memory Receipts.
+- Consumed by: Reviews, You, Today, Goals, Plan, Path Builder, Learning and Anticipation.
+- Dependencies: Event Ledger, Recommendation Explanation Model, Action Closure receipts, Life Graph, Proof of Progress.
+- Must not be duplicated: analytics dashboards, uncorrectable recommendations, or claims that Ambitions learned without evidence.
+- Ambitions 2.0 scope: Reviews and Learning batches must use evidence, user-confirmed signals, corrections, and memory confidence states.
+
+## Long-Range Strategy Layer
+
+- Purpose: Simulate believable life paths and alternatives without fantasy planning.
+- Owned concepts: Life Path Simulation, Path Forks, Path Fork Simulator, Domain Path Packs, Future Self Simulator, pause/limited-time simulations, fallback paths, people/stakeholders, prerequisites, dependencies, proof requirements, and resource links.
+- Consumed by: Goals, Goal Detail, Path Builder, Plan, Reviews.
+- Dependencies: Life Graph, Reality / Plan layer, Goals / Portfolio layer, Proof Rail Engine, Memory / Reviews layer.
+- Must not be duplicated: per-feature path templates, unsupported domain specificity, or strategy UI before contracts exist.
+- Ambitions 2.0 scope: Path Intelligence Foundation owns contracts; Path Builder owns UI over those contracts.
+
+## Shell / Ambient Continuity Layer
+
+- Purpose: Make Ambitions feel like one coherent personal operating system instead of five separate tabs.
+- Owned concepts: Global Chrome, Mode Lens, Continuity Ribbon, Trust Badge, Ambient Status Orb placement, Action Closure Tray placement, External Continuity Contract, stale-state handling, privacy-safe payloads, app landing routes, and no separate external logic.
+- Consumed by: all tabs, details, sheets, App Intents, widgets, Live Activities, onboarding, release hardening.
+- Dependencies: Visual System, Appearance Studio, Accessibility Nutrition, Now State, Command Pipeline, Action Closure, Sync/Export Trust.
+- Must not be duplicated: per-screen shell hacks, hidden tabs, generic toasts, or hard-coded screen colors.
+- Ambitions 2.0 scope: dedicated global chrome batch after Today 2.0 and before remaining major surface redesigns.
+
 ## Canonical Now State
 
 - Purpose: Single current-state projection for Today, widgets, Live Activities, App Intents, Plan, and recovery.

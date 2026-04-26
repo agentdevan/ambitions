@@ -58,15 +58,33 @@ This document defines the product architecture for Ambitions 2.0. It governs sur
 - Unverified accessibility claims.
 - Calendar permission prompts without a user-initiated Plan action.
 
+## Primary Operating Loop
+
+Ambitions 2.0 is organized around one daily life operating loop:
+
+1. Life enters through Capture.
+2. Life objects connect through Life Graph.
+3. Ambitions selects one believable next move.
+4. Reality changes.
+5. Ambitions reflows the plan safely.
+6. Every action closes with a receipt.
+7. The user can correct assumptions, memory, recommendations, and actions.
+8. Memory learns only from evidence and user-confirmed signals.
+9. Reviews convert experience into future behavior.
+10. Sync, export/import, widgets, Live Activities, App Intents, and returning-user states preserve continuity.
+
+Future surface work must show how it contributes to continuity, believability, proof, recovery, correction, trust, memory, focus, strategic pathing, or calmness. A batch that only polishes a tab without strengthening the loop is not enough.
+
 ## Primary Flow: Goal -> Path -> Plan -> Today -> Action -> Recovery -> Review
 
 1. User creates or refines a goal.
 2. Path Intelligence proposes a believable path with assumptions and broad domain fit.
 3. Plan turns the path into scheduled or unscheduled work based on capacity and calendar availability when allowed.
 4. Today selects the next believable action from Canonical Now State.
-5. The user acts, delays, splits, skips, or asks why.
-6. Execution Resilience converts disruption into a recovery path.
-7. Review captures what happened, what changed, and what the system should learn.
+5. The user acts, delays, splits, skips, asks why, or corrects the recommendation.
+6. Action Closure produces a receipt for what happened, what changed, why it changed, whether undo is safely available, and what can be corrected.
+7. Reality Reflow converts disruption into a safe recovery path without silent rescheduling.
+8. Review captures what happened, what changed, what was protected, what remains believable, and what the system should learn.
 
 ## Primary Flow: Capture -> Triage -> Goal / Plan / Seed / Waiting / Archive
 
@@ -75,7 +93,9 @@ This document defines the product architecture for Ambitions 2.0. It governs sur
 3. User confirms or changes the route.
 4. Goal-bound items attach to Goals or Goal Detail.
 5. Plan-bound items become plan seeds, schedule candidates, or rituals.
-6. Waiting/archive items remain retrievable through Capture and You memory surfaces.
+6. Commitment and waiting items attach to a lightweight Person, Commitment, Waiting item, Follow-Up, or sensitivity marker where useful without becoming generic tasks.
+7. Resource and proof items attach to Life Graph as files, links, notes, evidence, external references, documents, project artifacts, or reflections.
+8. Waiting/archive items remain retrievable through Capture and You memory surfaces.
 
 ## Primary Flow: Plan -> Calendar-Aware Mode -> Scheduled Block -> Recovery / Review
 
@@ -84,8 +104,46 @@ This document defines the product architecture for Ambitions 2.0. It governs sur
 3. Permission rationale explains local-first calendar use.
 4. Calendar read enables open-window and conflict detection.
 5. Calendar write creates user-confirmed blocks only.
-6. Scheduled blocks feed Now State, Today, and review.
-7. Missed or disrupted blocks enter recovery and later review.
+6. Calendar writes produce Action Closure receipts and undo where safely supported.
+7. Scheduled blocks feed Now State, Today, and review.
+8. Missed or disrupted blocks enter Reality Reflow, recovery, and later review.
+
+## Global Shell / Chrome Architecture
+
+Global chrome is the persistent app frame around every screen. It is not feature content and must not create new top-level navigation.
+
+Global chrome owns:
+
+- status-bar and safe-area background behavior
+- global app canvas color
+- top header and navigation bar behavior
+- logo treatment
+- page title behavior
+- Mode Lens pill behavior
+- notification, back, and overflow button treatment
+- bottom tab bar active/inactive states
+- scroll-edge behavior
+- sheet/modal header style
+- shared spacing from screen edges
+- how content panels sit inside the shell
+- how rich panels visually relate to the background
+- command/result receipt placement
+- continuity/status messaging placement
+
+The dedicated global chrome batch should establish the permanent shell, contextual top header, optional Continuity Ribbon / Anti-Plan strip, and Action Closure Tray presentation before the later Goals, Plan, You, Reviews, and external-surface batches consume those patterns.
+
+## Shell Inventions
+
+- Mode Lens: a visible shell pill or contextual treatment for Focus, Triage, Plan, Recover, and Review. It changes emphasis, not navigation, and must not create hidden tabs or duplicate ownership.
+- Continuity Ribbon: a compact, calm strip under the header that shows the one continuity fact the user most needs.
+- Action Closure Tray: a premium receipt panel for meaningful commands, not a generic toast system.
+- Save the Day entry: a reachable rescue affordance that returns one protected must-do, one move/drop/shrink action, and one recovery explanation.
+- Ambient Status Orb: a reusable qualitative marker for states such as Clear, Steady, Tight, Fragile, At risk, Recovered, and Protected.
+- Life Graph Breadcrumb: a drill-down aid showing where an object lives in the user's life system; it should not clutter top-level screens.
+- Mission Control Lanes: an object-level detail pattern for Path, Now, Proof, and Risk first, with People, Resources, and Decisions later when supported.
+- Not Today / Anti-Plan strip: a protective treatment for work intentionally parked away from today.
+- Proof Rail: a compact proof-artifact rail for Goal Detail, Reviews, Path Builder, and top-level Goals summaries where useful.
+- Trust Badge / Trust status: a small trust treatment for You and Trust Center, surfaced globally only when action is needed.
 
 ## Reviews Architecture
 
@@ -93,10 +151,14 @@ Reviews live primarily under `You -> Reviews` with contextual entry from Today, 
 
 Reviews include:
 
-- daily recovery/re-entry review
-- weekly planning review
-- goal review
-- pattern reflection
+- Recovery Review
+- 90-second Review
+- Weekly Life OS Receipt
+- Goal Review
+- Pattern Review
+- Memory Review
+- Correction Review
+- Review Constellation narrative memory
 - accessibility summary after verification
 - memory and change summaries
 
