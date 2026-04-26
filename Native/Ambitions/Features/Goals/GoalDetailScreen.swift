@@ -30,6 +30,12 @@ struct GoalDetailScreen: View {
                 case let .loaded(detail):
                     GoalDetailHeroCard(detail: detail)
 
+                    if let missionControl = detail.missionControl {
+                        GoalDetailMissionControlCard(state: missionControl)
+                        GoalDetailBreadcrumbCard(state: missionControl.breadcrumb)
+                        GoalDetailTimelineCard(state: missionControl.timeline)
+                    }
+
                     if let inlineMessage = viewModel.inlineMessage {
                         AppCard(state: inlineMessage.state) {
                             VStack(alignment: .leading, spacing: theme.spacing.xs) {
@@ -79,6 +85,12 @@ struct GoalDetailScreen: View {
                                 }
                             }
                         }
+                    }
+
+                    if let missionControl = detail.missionControl {
+                        GoalDetailAssumptionsCard(assumptions: missionControl.assumptions)
+                        GoalDetailProofRailCard(state: missionControl.proofRail)
+                        GoalDetailReceiptsCard(state: missionControl.receipts)
                     }
 
                     if let clarification = detail.clarification {
@@ -266,6 +278,274 @@ struct GoalDetailScreen: View {
             preconditionFailure("App container must be injected.")
         }
         return appContainer
+    }
+}
+
+private struct GoalDetailMissionControlCard: View {
+    @Environment(\.ambitionTheme) private var theme
+
+    let state: GoalDetailMissionControlState
+
+    var body: some View {
+        AppCard(state: .selected) {
+            VStack(alignment: .leading, spacing: theme.spacing.md) {
+                VStack(alignment: .leading, spacing: theme.spacing.xxs) {
+                    Text("Mission Control")
+                        .font(theme.typography.micro)
+                        .foregroundStyle(theme.colors.accentWarm)
+                    Text(state.currentTruth)
+                        .font(theme.typography.section)
+                        .foregroundStyle(theme.colors.textPrimary)
+                    Text(state.primaryNextMove.title)
+                        .font(theme.typography.body)
+                        .foregroundStyle(theme.colors.textSecondary)
+                }
+
+                LazyVGrid(columns: [GridItem(.adaptive(minimum: 154), spacing: theme.spacing.sm)], alignment: .leading, spacing: theme.spacing.sm) {
+                    ForEach(state.lanes) { lane in
+                        GoalDetailMissionLaneCard(lane: lane)
+                    }
+                }
+            }
+        }
+        .accessibilityElement(children: .contain)
+        .accessibilityIdentifier("goal-detail.mission-control")
+        .ambitionPanelAccessibility()
+    }
+}
+
+private struct GoalDetailMissionLaneCard: View {
+    @Environment(\.ambitionTheme) private var theme
+
+    let lane: GoalDetailMissionLaneState
+
+    var body: some View {
+        VStack(alignment: .leading, spacing: theme.spacing.xs) {
+            HStack(alignment: .center, spacing: theme.spacing.xs) {
+                Image(systemName: lane.systemImage)
+                    .font(.system(size: theme.icon.smallSize, weight: theme.icon.symbolWeight))
+                    .foregroundStyle(theme.stateStyle(for: lane.state).accent)
+                Text(lane.title)
+                    .font(theme.typography.caption)
+                    .foregroundStyle(theme.colors.textTertiary)
+                Spacer(minLength: theme.spacing.xs)
+                TagPill(lane.badgeTitle, state: lane.state)
+            }
+
+            Text(lane.headline)
+                .font(theme.typography.bodyEmphasized)
+                .foregroundStyle(theme.colors.textPrimary)
+                .fixedSize(horizontal: false, vertical: true)
+            Text(lane.summary)
+                .font(theme.typography.caption)
+                .foregroundStyle(theme.colors.textSecondary)
+                .fixedSize(horizontal: false, vertical: true)
+            if lane.detail.isEmpty == false {
+                Text(lane.detail)
+                    .font(theme.typography.micro)
+                    .foregroundStyle(theme.colors.textTertiary)
+                    .fixedSize(horizontal: false, vertical: true)
+            }
+        }
+        .frame(maxWidth: .infinity, minHeight: 148, alignment: .topLeading)
+        .padding(theme.spacing.sm)
+        .background(RoundedRectangle(cornerRadius: theme.radius.md, style: .continuous).fill(theme.colors.surfaceOverlay))
+        .overlay(RoundedRectangle(cornerRadius: theme.radius.md, style: .continuous).stroke(theme.stateStyle(for: lane.state).stroke, lineWidth: 1))
+        .accessibilityElement(children: .combine)
+        .accessibilityLabel("\(lane.title). \(lane.headline). \(lane.summary)")
+        .accessibilityIdentifier(lane.kind.accessibilityIdentifier)
+    }
+}
+
+private struct GoalDetailBreadcrumbCard: View {
+    @Environment(\.ambitionTheme) private var theme
+
+    let state: GoalDetailBreadcrumbState
+
+    var body: some View {
+        AppCard {
+            VStack(alignment: .leading, spacing: theme.spacing.sm) {
+                SectionHeader(
+                    title: state.title,
+                    subtitle: state.fallbackUsed ? "Relationship data is thin, so this falls back to the current goal." : "Where this goal sits in the larger system."
+                )
+                ScrollView(.horizontal, showsIndicators: false) {
+                    HStack(spacing: theme.spacing.xs) {
+                        ForEach(Array(state.labels.enumerated()), id: \.offset) { index, label in
+                            HStack(spacing: theme.spacing.xs) {
+                                Text(label)
+                                    .font(theme.typography.caption)
+                                    .foregroundStyle(index == state.labels.count - 1 ? theme.colors.textPrimary : theme.colors.textSecondary)
+                                    .padding(.horizontal, theme.spacing.sm)
+                                    .padding(.vertical, theme.spacing.xs)
+                                    .background(RoundedRectangle(cornerRadius: theme.radius.sm, style: .continuous).fill(theme.colors.surfaceOverlay))
+                                if index < state.labels.count - 1 {
+                                    Image(systemName: "chevron.right")
+                                        .font(.system(size: theme.icon.smallSize, weight: theme.icon.symbolWeight))
+                                        .foregroundStyle(theme.colors.textTertiary)
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        .accessibilityElement(children: .combine)
+        .accessibilityLabel(state.labels.joined(separator: ", "))
+        .accessibilityIdentifier("goal-detail.breadcrumb")
+        .ambitionPanelAccessibility()
+    }
+}
+
+private struct GoalDetailTimelineCard: View {
+    @Environment(\.ambitionTheme) private var theme
+
+    let state: GoalDetailTimelineState
+
+    var body: some View {
+        AppCard {
+            VStack(alignment: .leading, spacing: theme.spacing.md) {
+                SectionHeader(title: state.title, subtitle: state.subtitle)
+
+                VStack(alignment: .leading, spacing: theme.spacing.sm) {
+                    ForEach(state.items) { item in
+                        HStack(alignment: .top, spacing: theme.spacing.sm) {
+                            VStack(spacing: 0) {
+                                Circle()
+                                    .fill(theme.stateStyle(for: item.state).accent)
+                                    .frame(width: 10, height: 10)
+                                Rectangle()
+                                    .fill(theme.colors.strokeSubtle)
+                                    .frame(width: 1, height: 34)
+                            }
+                            VStack(alignment: .leading, spacing: theme.spacing.xxxs) {
+                                HStack(spacing: theme.spacing.xs) {
+                                    Text(item.kind.title)
+                                        .font(theme.typography.micro)
+                                        .foregroundStyle(theme.colors.textTertiary)
+                                    if item.isFuture {
+                                        TagPill("Possible next", state: .default)
+                                    }
+                                }
+                                Text(item.title)
+                                    .font(theme.typography.bodyEmphasized)
+                                    .foregroundStyle(theme.colors.textPrimary)
+                                Text(item.summary)
+                                    .font(theme.typography.caption)
+                                    .foregroundStyle(theme.colors.textSecondary)
+                                    .fixedSize(horizontal: false, vertical: true)
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        .accessibilityElement(children: .contain)
+        .accessibilityIdentifier("goal-detail.timeline")
+        .ambitionPanelAccessibility()
+    }
+}
+
+private struct GoalDetailAssumptionsCard: View {
+    @Environment(\.ambitionTheme) private var theme
+
+    let assumptions: [GoalDetailAssumptionState]
+
+    var body: some View {
+        GoalDetailSectionCard(title: "Assumptions", subtitle: "Correctable reads Ambitions is using for this goal.") {
+            VStack(alignment: .leading, spacing: theme.spacing.sm) {
+                ForEach(assumptions) { assumption in
+                    AppCard(state: assumption.state) {
+                        VStack(alignment: .leading, spacing: theme.spacing.xs) {
+                            HStack(alignment: .top, spacing: theme.spacing.sm) {
+                                Text(assumption.title)
+                                    .font(theme.typography.bodyEmphasized)
+                                    .foregroundStyle(theme.colors.textPrimary)
+                                Spacer()
+                                TagPill(assumption.status, state: assumption.state)
+                            }
+                            Text(assumption.whyItMatters)
+                                .font(theme.typography.caption)
+                                .foregroundStyle(theme.colors.textSecondary)
+                            if let correctionLabel = assumption.correctionLabel {
+                                Text(correctionLabel)
+                                    .font(theme.typography.micro)
+                                    .foregroundStyle(theme.colors.textTertiary)
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        .accessibilityIdentifier("goal-detail.assumptions")
+    }
+}
+
+private struct GoalDetailProofRailCard: View {
+    @Environment(\.ambitionTheme) private var theme
+
+    let state: GoalDetailProofRailState
+
+    var body: some View {
+        GoalDetailSectionCard(title: state.title, subtitle: state.subtitle) {
+            if state.items.isEmpty {
+                EmptyStateCard(title: state.emptyTitle, message: state.emptyMessage, icon: "checkmark.seal")
+            } else {
+                VStack(alignment: .leading, spacing: theme.spacing.sm) {
+                    ForEach(state.items) { item in
+                        HStack(alignment: .top, spacing: theme.spacing.sm) {
+                            Image(systemName: "checkmark.seal.fill")
+                                .foregroundStyle(theme.stateStyle(for: item.state).accent)
+                            VStack(alignment: .leading, spacing: theme.spacing.xxxs) {
+                                Text(item.title)
+                                    .font(theme.typography.bodyEmphasized)
+                                    .foregroundStyle(theme.colors.textPrimary)
+                                Text(item.subtitle)
+                                    .font(theme.typography.caption)
+                                    .foregroundStyle(theme.colors.textSecondary)
+                                Text(item.timestamp)
+                                    .font(theme.typography.micro)
+                                    .foregroundStyle(theme.colors.textTertiary)
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        .accessibilityIdentifier("goal-detail.proof-rail")
+    }
+}
+
+private struct GoalDetailReceiptsCard: View {
+    @Environment(\.ambitionTheme) private var theme
+
+    let state: GoalDetailReceiptsState
+
+    var body: some View {
+        GoalDetailSectionCard(title: state.title, subtitle: state.subtitle) {
+            if state.items.isEmpty {
+                EmptyStateCard(title: state.emptyTitle, message: state.emptyMessage, icon: "doc.text.magnifyingglass")
+            } else {
+                VStack(alignment: .leading, spacing: theme.spacing.sm) {
+                    ForEach(state.items) { item in
+                        AppCard(state: item.state) {
+                            VStack(alignment: .leading, spacing: theme.spacing.xs) {
+                                Text(item.title)
+                                    .font(theme.typography.bodyEmphasized)
+                                    .foregroundStyle(theme.colors.textPrimary)
+                                Text(item.summary)
+                                    .font(theme.typography.caption)
+                                    .foregroundStyle(theme.colors.textSecondary)
+                                Text(item.timestamp)
+                                    .font(theme.typography.micro)
+                                    .foregroundStyle(theme.colors.textTertiary)
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        .accessibilityIdentifier("goal-detail.receipts")
     }
 }
 

@@ -566,10 +566,13 @@ private extension RepositoryBackedGoalsService {
         let feedback: [GoalFeedbackEvent]
 
         var primaryStep: Step? {
-            goal?.plan?.sections
-                .flatMap(\.steps)
-                .first(where: { $0.state != .completed && $0.state != .cancelled })
-                ?? draft?.stagedPlan?.sections
+            if let goal {
+                return goal.plan?.sections
+                    .flatMap(\.steps)
+                    .first(where: { $0.state != .completed && $0.state != .cancelled })
+            }
+
+            return draft?.stagedPlan?.sections
                 .flatMap(\.steps)
                 .first(where: { $0.state != .completed && $0.state != .cancelled })
         }
@@ -1951,6 +1954,23 @@ private extension RepositoryBackedGoalsService {
             feedback: Array(context.feedback.prefix(3)),
             evidenceLabel: evidenceLabel
         )
+        let missionControl = missionControlState(
+            context: context,
+            title: sourceGoal?.title ?? sourceDraft?.title ?? "Goal",
+            renderState: renderState,
+            timing: timing,
+            pathSummary: pathSummary,
+            pathStages: pathStages,
+            sections: sectionStates,
+            suggestions: suggestions,
+            evidenceItems: Array(context.evidence.prefix(6)).map(makeEvidenceItem),
+            feedbackItems: Array(context.feedback.prefix(6)).map(makeFeedbackItem),
+            nextMovement: nextMovement,
+            trajectory: trajectory,
+            progressLabel: progressLabel,
+            evidenceLabel: evidenceLabel,
+            currentTruth: strategicStatus.summary
+        )
 
         return GoalDetailPresentation(
             target: context.target,
@@ -1998,8 +2018,304 @@ private extension RepositoryBackedGoalsService {
             primaryStepID: context.primaryStep?.id,
             canSwitchToUntimed: canSwitchToUntimed(mode: effectiveMode, timing: timing),
             supportModeActive: context.supportModeActive,
-            defaultLens: context.target.launchContext == .help || renderState == .clarification || renderState == .blocked ? .path : .tasks
+            defaultLens: context.target.launchContext == .help || renderState == .clarification || renderState == .blocked ? .path : .tasks,
+            missionControl: missionControl
         )
+    }
+
+    func missionControlState(
+        context: DetailContext,
+        title: String,
+        renderState: GoalRenderState,
+        timing: GoalTiming,
+        pathSummary: LifePathStateSummary?,
+        pathStages: [GoalPathStage],
+        sections: [GoalDetailSectionState],
+        suggestions: [GoalDetailStepItem],
+        evidenceItems: [GoalEvidenceItem],
+        feedbackItems: [GoalFeedbackItem],
+        nextMovement: GoalDetailNextMovement?,
+        trajectory: GoalDetailTrajectoryState,
+        progressLabel: String,
+        evidenceLabel: String,
+        currentTruth: String
+    ) -> GoalDetailMissionControlState {
+        let nextStep = nextMovement.map {
+            GoalNextVisibleStep(title: $0.title, detail: $0.summary, isAvailable: true)
+        } ?? GoalNextVisibleStep(
+            title: renderState == .blocked ? "Resolve the blocker" : "Needs a next step",
+            detail: renderState == .blocked ? "The path should not add more work until this clears." : "Clarify one real move before adding more tasks.",
+            isAvailable: false
+        )
+        let proofSummary = goalDetailProofSummary(evidenceItems: evidenceItems, evidenceLabel: evidenceLabel)
+        let risks = goalDetailRisks(
+            context: context,
+            renderState: renderState,
+            pathSummary: pathSummary,
+            suggestions: suggestions,
+            evidenceItems: evidenceItems,
+            timing: timing
+        )
+        let currentPhase = pathStages.first(where: { $0.position == .current || $0.position == .blocked }) ?? pathStages.first
+        let nextMilestone = pathSummary.flatMap(nextMilestoneTitle(for:)) ?? suggestions.first?.title ?? nextMovement?.title
+        let pathDetail = currentPhase?.summary ?? trajectory.phaseSummary
+        let riskHeadline = risks.first?.title ?? "No major visible risk"
+        let riskDetail = risks.first?.summary ?? "Nothing in the current goal data is asking for rescue."
+
+        return GoalDetailMissionControlState(
+            currentTruth: currentTruth,
+            primaryNextMove: nextStep,
+            breadcrumb: goalDetailBreadcrumb(context: context, title: title),
+            lanes: [
+                GoalDetailMissionLaneState(
+                    kind: .path,
+                    title: "Path",
+                    headline: currentPhase?.title ?? trajectory.phaseTitle,
+                    summary: nextMilestone.map { "Next milestone: \($0)" } ?? "The route is still forming.",
+                    detail: pathDetail,
+                    badgeTitle: currentPhase?.statusLabel ?? "Current",
+                    systemImage: "point.topleft.down.curvedto.point.bottomright.up",
+                    state: currentPhase?.state ?? .default
+                ),
+                GoalDetailMissionLaneState(
+                    kind: .now,
+                    title: "Now",
+                    headline: nextStep.title,
+                    summary: nextStep.detail,
+                    detail: nextStep.isAvailable ? "Keep this as the primary move." : "This goal needs one safe next move before the tactical list grows.",
+                    badgeTitle: nextStep.isAvailable ? "Next move" : "Needs review",
+                    systemImage: "scope",
+                    state: nextStep.isAvailable ? .selected : .warning
+                ),
+                GoalDetailMissionLaneState(
+                    kind: .proof,
+                    title: "Proof",
+                    headline: proofSummary.title,
+                    summary: proofSummary.detail,
+                    detail: proofSummary.latestTitle.map { "Latest: \($0)" } ?? "No proof has been recorded for this goal yet.",
+                    badgeTitle: proofSummary.count == 0 ? "No proof yet" : "Evidence visible",
+                    systemImage: "checkmark.seal",
+                    state: proofSummary.visualState
+                ),
+                GoalDetailMissionLaneState(
+                    kind: .risk,
+                    title: "Risk",
+                    headline: riskHeadline,
+                    summary: riskDetail,
+                    detail: risks.dropFirst().map(\.title).joined(separator: " · "),
+                    badgeTitle: risks.isEmpty ? "Calm" : "Needs review",
+                    systemImage: "exclamationmark.triangle",
+                    state: risks.isEmpty ? .success : .warning
+                )
+            ],
+            timeline: goalDetailTimeline(
+                context: context,
+                renderState: renderState,
+                pathStages: pathStages,
+                evidenceItems: evidenceItems,
+                feedbackItems: feedbackItems,
+                nextMovement: nextMovement,
+                progressLabel: progressLabel
+            ),
+            assumptions: goalDetailAssumptions(
+                context: context,
+                renderState: renderState,
+                timing: timing,
+                evidenceItems: evidenceItems,
+                suggestions: suggestions,
+                risks: risks
+            ),
+            proofRail: GoalDetailProofRailState(
+                title: "Proof",
+                subtitle: proofSummary.count == 0 ? "Evidence will appear here when it is recorded." : proofSummary.detail,
+                items: evidenceItems,
+                emptyTitle: "No proof yet",
+                emptyMessage: "Add proof later when there is something real to show."
+            ),
+            receipts: GoalDetailReceiptsState(
+                title: "What changed",
+                subtitle: "Goal-related receipts stay visible here when the current data source provides them.",
+                items: [],
+                emptyTitle: "No receipts yet",
+                emptyMessage: "Receipts will appear here after goal changes are recorded."
+            )
+        )
+    }
+
+    func goalDetailProofSummary(evidenceItems: [GoalEvidenceItem], evidenceLabel: String) -> GoalProofSummary {
+        guard let latest = evidenceItems.first else {
+            return GoalProofSummary(title: "No proof yet", detail: "Needs evidence", count: 0, latestTitle: nil, visualState: .default)
+        }
+        return GoalProofSummary(
+            title: evidenceItems.count == 1 ? "1 proof point" : "\(evidenceItems.count) proof points",
+            detail: evidenceLabel,
+            count: evidenceItems.count,
+            latestTitle: latest.title,
+            visualState: .selected
+        )
+    }
+
+    func goalDetailBreadcrumb(context: DetailContext, title: String) -> GoalDetailBreadcrumbState {
+        let graph = context.goal?.lifeGraph ?? context.draft?.draft.lifeGraph
+        var labels: [String] = []
+        if let domain = graph?.domains.max(by: { lhs, rhs in lhs.priority < rhs.priority })?.domain {
+            labels.append(domain.portfolioTitle)
+        }
+        if let pathTitle = graph?.path?.title, pathTitle.isEmpty == false {
+            labels.append(pathTitle)
+        }
+        labels.append(title)
+        let compact = Array(labels.prefix(4))
+        return GoalDetailBreadcrumbState(
+            title: "Path",
+            labels: compact.isEmpty ? [title] : compact,
+            fallbackUsed: compact.count <= 1
+        )
+    }
+
+    func goalDetailRisks(
+        context: DetailContext,
+        renderState: GoalRenderState,
+        pathSummary: LifePathStateSummary?,
+        suggestions: [GoalDetailStepItem],
+        evidenceItems: [GoalEvidenceItem],
+        timing: GoalTiming
+    ) -> [GoalDetailTimelineItemState] {
+        var risks: [GoalDetailTimelineItemState] = []
+        if renderState == .blocked || context.draft?.blockers.isEmpty == false || pathSummary?.blockedPrerequisites.isEmpty == false {
+            risks.append(GoalDetailTimelineItemState(id: "risk-blocked", kind: .waiting, title: "Blocked", summary: "A blocker is visible, so the goal should not pretend to be moving normally.", timestamp: nil, state: .warning, isFuture: false))
+        }
+        if pathSummary?.readiness.gapCount ?? 0 > 0 {
+            risks.append(GoalDetailTimelineItemState(id: "risk-waiting", kind: .waiting, title: "Waiting", summary: "One readiness gap needs an answer before the path is fully believable.", timestamp: nil, state: .warning, isFuture: false))
+        }
+        if suggestions.isEmpty {
+            risks.append(GoalDetailTimelineItemState(id: "risk-next-step", kind: .current, title: "Needs a next step", summary: "The goal has no clear next move in the current plan.", timestamp: nil, state: .warning, isFuture: false))
+        }
+        if evidenceItems.isEmpty {
+            risks.append(GoalDetailTimelineItemState(id: "risk-proof", kind: .proof, title: "Proof is thin", summary: "No proof has been recorded yet.", timestamp: nil, state: .default, isFuture: false))
+        }
+        if timing.dueAt != nil || timing.targetBy != nil {
+            risks.append(GoalDetailTimelineItemState(id: "risk-timing", kind: .current, title: "Timing needs review", summary: "The date is visible; keep the next move believable before adding more pressure.", timestamp: nil, state: .default, isFuture: false))
+        }
+        return Array(risks.prefix(4))
+    }
+
+    func goalDetailTimeline(
+        context: DetailContext,
+        renderState: GoalRenderState,
+        pathStages: [GoalPathStage],
+        evidenceItems: [GoalEvidenceItem],
+        feedbackItems: [GoalFeedbackItem],
+        nextMovement: GoalDetailNextMovement?,
+        progressLabel: String
+    ) -> GoalDetailTimelineState {
+        var items: [GoalDetailTimelineItemState] = [
+            GoalDetailTimelineItemState(
+                id: "started",
+                kind: .started,
+                title: "Started",
+                summary: context.goal?.createdAt ?? context.draft?.createdAt ?? "Start date is not available.",
+                timestamp: context.goal?.createdAt ?? context.draft?.createdAt,
+                state: .default,
+                isFuture: false
+            )
+        ]
+
+        if let previous = pathStages.first(where: { $0.position == .completed }) {
+            items.append(GoalDetailTimelineItemState(id: "previous-\(previous.id)", kind: .previous, title: previous.title, summary: previous.summary, timestamp: nil, state: previous.state, isFuture: false))
+        }
+        if let current = pathStages.first(where: { $0.position == .current || $0.position == .blocked }) ?? pathStages.first {
+            items.append(GoalDetailTimelineItemState(id: "current-\(current.id)", kind: current.position == .blocked ? .waiting : .current, title: current.title, summary: current.highlight ?? current.summary, timestamp: nil, state: current.state, isFuture: false))
+        }
+        if let proof = evidenceItems.first {
+            items.append(GoalDetailTimelineItemState(id: "proof-\(proof.id)", kind: .proof, title: proof.title, summary: proof.subtitle, timestamp: proof.timestamp, state: proof.state, isFuture: false))
+        }
+        if let decision = feedbackItems.first {
+            items.append(GoalDetailTimelineItemState(id: "decision-\(decision.id)", kind: .decision, title: decision.title, summary: decision.subtitle, timestamp: decision.timestamp, state: decision.state, isFuture: false))
+        }
+        if renderState == .onHold {
+            items.append(GoalDetailTimelineItemState(id: "parked", kind: .parked, title: "Parked", summary: "This goal is intentionally quiet.", timestamp: nil, state: .default, isFuture: false))
+        }
+        if renderState == .achieved || context.goal?.state == .completed {
+            items.append(GoalDetailTimelineItemState(id: "completed", kind: .completed, title: "Completed", summary: progressLabel, timestamp: context.goal?.updatedAt, state: .success, isFuture: false))
+        }
+        if context.goal?.state == .archived && renderState != .achieved {
+            items.append(GoalDetailTimelineItemState(id: "cancelled", kind: .cancelled, title: "Cancelled", summary: "This goal is closed without being treated as active work.", timestamp: context.goal?.updatedAt, state: .default, isFuture: false))
+        }
+        if let nextMovement, renderState != .achieved, context.goal?.state != .archived {
+            items.append(GoalDetailTimelineItemState(id: "next", kind: .next, title: nextMovement.title, summary: nextMovement.summary, timestamp: nil, state: nextMovement.state, isFuture: true))
+        }
+
+        return GoalDetailTimelineState(
+            title: "Storyline",
+            subtitle: "A compact read on what happened, what is current, and what is only a possible next move.",
+            items: Array(items.prefix(7))
+        )
+    }
+
+    func goalDetailAssumptions(
+        context: DetailContext,
+        renderState: GoalRenderState,
+        timing: GoalTiming,
+        evidenceItems: [GoalEvidenceItem],
+        suggestions: [GoalDetailStepItem],
+        risks: [GoalDetailTimelineItemState]
+    ) -> [GoalDetailAssumptionState] {
+        var assumptions: [GoalDetailAssumptionState] = [
+            GoalDetailAssumptionState(
+                id: "next-step",
+                title: "This goal has a next step.",
+                status: suggestions.isEmpty ? "Needs review" : "Visible",
+                whyItMatters: "The screen should lead with one move, not a long task dump.",
+                correctionLabel: suggestions.isEmpty ? "Review next step" : "Change next step",
+                state: suggestions.isEmpty ? .warning : .selected
+            ),
+            GoalDetailAssumptionState(
+                id: "proof",
+                title: "This goal has enough proof.",
+                status: evidenceItems.isEmpty ? "No proof yet" : "Proof visible",
+                whyItMatters: "Progress should be backed by something observable.",
+                correctionLabel: "Add proof later",
+                state: evidenceItems.isEmpty ? .default : .selected
+            ),
+            GoalDetailAssumptionState(
+                id: "blocked",
+                title: "This goal is not blocked.",
+                status: risks.contains(where: { $0.id == "risk-blocked" }) ? "Blocked" : "No blocker visible",
+                whyItMatters: "Blocked goals need a clearing move before more planning.",
+                correctionLabel: risks.contains(where: { $0.id == "risk-blocked" }) ? "Review blocker" : nil,
+                state: risks.contains(where: { $0.id == "risk-blocked" }) ? .warning : .success
+            ),
+            GoalDetailAssumptionState(
+                id: "timing",
+                title: "This timing is still believable.",
+                status: timing.dueAt == nil && timing.targetBy == nil ? "Untimed" : "Needs review",
+                whyItMatters: "Dates should not create fake pressure.",
+                correctionLabel: timing.dueAt == nil && timing.targetBy == nil ? nil : "Review timing",
+                state: timing.dueAt == nil && timing.targetBy == nil ? .default : .warning
+            ),
+            GoalDetailAssumptionState(
+                id: "active",
+                title: "This goal is active, not parked.",
+                status: renderState == .onHold ? "Parked" : renderState == .achieved ? "Completed" : "Active",
+                whyItMatters: "Closed or parked goals should not compete with live direction.",
+                correctionLabel: renderState == .onHold ? "Review parked state" : nil,
+                state: renderState == .onHold ? .default : renderState == .achieved ? .success : .selected
+            )
+        ]
+
+        assumptions.append(contentsOf: context.draft?.assumptions.prefix(2).map { assumption in
+            GoalDetailAssumptionState(
+                id: "draft-\(assumption.id)",
+                title: assumption.summary,
+                status: "Provisional",
+                whyItMatters: "Starter assumptions should stay visible until corrected by real use.",
+                correctionLabel: "Correct later",
+                state: .default
+            )
+        } ?? [])
+
+        return Array(assumptions.prefix(7))
     }
 
     func performMutation(

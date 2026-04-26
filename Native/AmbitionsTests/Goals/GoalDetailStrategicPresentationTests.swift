@@ -20,6 +20,197 @@ final class GoalDetailStrategicPresentationTests: XCTestCase {
         XCTAssertFalse(detail.trajectory.phaseTitle.isEmpty)
     }
 
+    func testMissionControlLanesExistForNormalActiveGoal() async throws {
+        let repositories = try await makeRepositories()
+        let service = RepositoryBackedGoalsService(repositories: repositories)
+        let created = try await service.createGoal(
+            CreateGoalRequest(title: "Submit my conference talk proposal by 2026-05-15"),
+            now: fixedNow
+        )
+
+        let detail = try await service.loadDetail(target: created.target)
+        let missionControl = try XCTUnwrap(detail.missionControl)
+
+        XCTAssertEqual(missionControl.lanes.map(\.kind), [.path, .now, .proof, .risk])
+        XCTAssertFalse(missionControl.currentTruth.isEmpty)
+        XCTAssertEqual(missionControl.lanes.first(where: { $0.kind == .now })?.badgeTitle, "Next move")
+        XCTAssertFalse(missionControl.timeline.items.isEmpty)
+    }
+
+    func testProofRailShowsProofSummaryAndEmptyStateTruthfully() async throws {
+        let repositories = try await makeRepositories()
+        let service = RepositoryBackedGoalsService(repositories: repositories)
+        let created = try await service.createGoal(
+            CreateGoalRequest(title: "Create a public demo"),
+            now: fixedNow
+        )
+
+        var emptyDetail = try await service.loadDetail(target: created.target)
+        var missionControl = try XCTUnwrap(emptyDetail.missionControl)
+        XCTAssertEqual(missionControl.proofRail.emptyTitle, "No proof yet")
+        XCTAssertTrue(missionControl.proofRail.items.isEmpty)
+        XCTAssertEqual(missionControl.lanes.first(where: { $0.kind == .proof })?.headline, "No proof yet")
+
+        try await repositories.evidence.saveEvidence([
+            ProgressEvidence(
+                id: "evidence-demo",
+                goalID: try XCTUnwrap(created.target.goalID),
+                stepID: emptyDetail.primaryStepID,
+                evidenceKind: .milestoneReached,
+                source: .manual,
+                capturedAt: "2026-04-26T12:00:00Z",
+                progressDelta: nil,
+                confidenceDelta: nil,
+                minutesInvested: 30,
+                note: "Demo shipped"
+            )
+        ])
+
+        emptyDetail = try await service.loadDetail(target: created.target)
+        missionControl = try XCTUnwrap(emptyDetail.missionControl)
+        XCTAssertEqual(missionControl.proofRail.items.first?.title, "Demo shipped")
+        XCTAssertEqual(missionControl.lanes.first(where: { $0.kind == .proof })?.badgeTitle, "Evidence visible")
+    }
+
+    func testMissionControlDegradesWhenGoalHasNoNextStep() async throws {
+        let repositories = try await makeRepositories()
+        let service = RepositoryBackedGoalsService(repositories: repositories)
+        let created = try await service.createGoal(
+            CreateGoalRequest(title: "Publish a tiny field guide"),
+            now: fixedNow
+        )
+        let goals = try await repositories.goals.listGoals()
+        var goal = try XCTUnwrap(goals.first)
+        let completedPlan = try XCTUnwrap(goal.plan)
+        goal = Goal(
+            schemaVersion: goal.schemaVersion,
+            id: goal.id,
+            revision: goal.revision + 1,
+            createdAt: goal.createdAt,
+            updatedAt: goal.updatedAt,
+            state: goal.state,
+            title: goal.title,
+            summary: goal.summary,
+            mode: goal.mode,
+            relationshipKind: goal.relationshipKind,
+            actor: goal.actor,
+            parentGoalID: goal.parentGoalID,
+            childGoalIDs: goal.childGoalIDs,
+            supportGoalIDs: goal.supportGoalIDs,
+            tags: goal.tags,
+            timing: goal.timing,
+            planningStrategy: goal.planningStrategy,
+            progressStrategy: goal.progressStrategy,
+            plan: GoalPlan(
+                id: completedPlan.id,
+                goalID: completedPlan.goalID,
+                version: completedPlan.version,
+                generatedAt: completedPlan.generatedAt,
+                summary: completedPlan.summary,
+                strategy: completedPlan.strategy,
+                sections: completedPlan.sections.map { section in
+                    PlanSection(
+                        id: section.id,
+                        goalID: section.goalID,
+                        title: section.title,
+                        summary: section.summary,
+                        kind: section.kind,
+                        orderIndex: section.orderIndex,
+                        steps: section.steps.map { step in
+                            Step(
+                                id: step.id,
+                                sectionID: step.sectionID,
+                                title: step.title,
+                                summary: step.summary,
+                                type: step.type,
+                                state: .completed,
+                                owner: step.owner,
+                                timing: step.timing,
+                                dependencyStepIDs: step.dependencyStepIDs,
+                                isOptional: step.isOptional,
+                                isRepeatable: step.isRepeatable,
+                                evidenceRequired: step.evidenceRequired,
+                                successSignals: step.successSignals,
+                                actionability: step.actionability
+                            )
+                        }
+                    )
+                },
+                assumptions: completedPlan.assumptions,
+                lint: completedPlan.lint
+            ),
+            lifeGraph: goal.lifeGraph
+        )
+        try await repositories.goals.saveGoals([goal])
+
+        let detail = try await service.loadDetail(target: created.target)
+        let missionControl = try XCTUnwrap(detail.missionControl)
+
+        XCTAssertEqual(missionControl.primaryNextMove.title, "Needs a next step")
+        XCTAssertEqual(missionControl.lanes.first(where: { $0.kind == .now })?.badgeTitle, "Needs review")
+        XCTAssertTrue(missionControl.assumptions.contains(where: { $0.id == "next-step" && $0.status == "Needs review" }))
+    }
+
+    func testBlockedGoalSurfacesRiskLaneAndDistinctState() throws {
+        let detail = tryUnwrapScenario(PreviewGoalsScenarios.blockedTarget.id)
+        let missionControl = try XCTUnwrap(detail.missionControl)
+
+        XCTAssertEqual(detail.headline.renderState, .blocked)
+        XCTAssertEqual(missionControl.lanes.first(where: { $0.kind == .risk })?.headline, "Blocked")
+        XCTAssertTrue(missionControl.timeline.items.contains(where: { $0.kind == .waiting || $0.kind == .current }))
+    }
+
+    func testCompletedCancelledAndParkedTimelineStatesStayDistinct() throws {
+        let completed = tryUnwrapScenario(PreviewGoalsScenarios.completedTarget.id)
+        let parked = tryUnwrapScenario(PreviewGoalsScenarios.parkedTarget.id)
+        let cancelled = tryUnwrapScenario(PreviewGoalsScenarios.cancelledTarget.id)
+
+        XCTAssertTrue(completed.missionControl?.timeline.items.contains(where: { $0.kind == .completed }) == true)
+        XCTAssertTrue(parked.missionControl?.timeline.items.contains(where: { $0.kind == .parked }) == true)
+        XCTAssertTrue(cancelled.missionControl?.timeline.items.contains(where: { $0.kind == .cancelled }) == true)
+    }
+
+    func testBreadcrumbTimelineAssumptionsAndReceiptsStayTruthful() async throws {
+        let repositories = try await makeRepositories()
+        let service = RepositoryBackedGoalsService(repositories: repositories)
+        let created = try await service.createGoal(
+            CreateGoalRequest(title: "Build a calm portfolio sample"),
+            now: fixedNow
+        )
+
+        let detail = try await service.loadDetail(target: created.target)
+        let missionControl = try XCTUnwrap(detail.missionControl)
+
+        XCTAssertEqual(missionControl.breadcrumb.labels.last, "Build a calm portfolio sample")
+        XCTAssertTrue(missionControl.breadcrumb.fallbackUsed)
+        XCTAssertTrue(missionControl.timeline.items.contains(where: { $0.kind == .current }))
+        XCTAssertTrue(missionControl.timeline.items.contains(where: { $0.kind == .next && $0.isFuture }))
+        XCTAssertFalse(missionControl.assumptions.isEmpty)
+        XCTAssertTrue(missionControl.assumptions.contains(where: { $0.correctionLabel != nil }))
+        XCTAssertTrue(missionControl.receipts.items.isEmpty)
+        XCTAssertEqual(missionControl.receipts.emptyMessage, "Receipts will appear here after goal changes are recorded.")
+    }
+
+    func testMissionControlCopyAvoidsTechnicalEngineNames() async throws {
+        let repositories = try await makeRepositories()
+        let service = RepositoryBackedGoalsService(repositories: repositories)
+        let created = try await service.createGoal(
+            CreateGoalRequest(title: "Build a proof-backed launch note"),
+            now: fixedNow
+        )
+
+        let detail = try await service.loadDetail(target: created.target)
+        let missionControl = try XCTUnwrap(detail.missionControl)
+        let copy = ([missionControl.currentTruth, missionControl.receipts.subtitle, missionControl.proofRail.subtitle]
+            + missionControl.lanes.flatMap { [$0.title, $0.headline, $0.summary, $0.detail] }
+            + missionControl.assumptions.flatMap { [$0.title, $0.status, $0.whyItMatters, $0.correctionLabel ?? ""] }
+        ).joined(separator: " ")
+
+        for forbidden in ["Life Graph", "Believability Kernel", "Action Closure Layer", "Proof Graph", "Promise Ledger", "Safe Automation Boundary", "Assumption Watchtower", "RC maturity"] {
+            XCTAssertFalse(copy.contains(forbidden), "Unexpected technical copy: \(forbidden)")
+        }
+    }
+
     func testStarterPreviewKeepsFirstLayerStrategicReadVisible() {
         let detail = tryUnwrapScenario(PreviewGoalsScenarios.starterTarget.id)
 

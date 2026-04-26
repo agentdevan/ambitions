@@ -7,6 +7,9 @@ enum PreviewGoalsScenarios {
     static let clarificationTarget = GoalRouteTarget(draftID: "draft-clarify")
     static let blockedTarget = GoalRouteTarget(draftID: "draft-blocked", launchContext: .help)
     static let supportTarget = GoalRouteTarget(goalID: "goal-support", draftID: "draft-support")
+    static let completedTarget = GoalRouteTarget(goalID: "goal-detail-completed")
+    static let parkedTarget = GoalRouteTarget(goalID: "goal-detail-parked")
+    static let cancelledTarget = GoalRouteTarget(goalID: "goal-detail-cancelled")
 
     static let overview = GoalsOverview(
         hero: GoalsBoardHeroState(
@@ -421,7 +424,17 @@ enum PreviewGoalsScenarios {
             primaryStepID: "s1",
             canSwitchToUntimed: false,
             supportModeActive: false,
-            defaultLens: .tasks
+            defaultLens: .tasks,
+            missionControl: previewMissionControl(
+                title: "Close the hardening pass",
+                currentTruth: "You are in the hardening closeout stage with the next move already surfaced.",
+                nextTitle: "Refresh release docs and trust copy",
+                proofItems: [
+                    GoalEvidenceItem(id: "e1", title: "Today route state proved out", subtitle: "Session Logged", timestamp: "2026-04-14T11:40:00Z", state: .success),
+                    GoalEvidenceItem(id: "e2", title: "Goal list structure drafted", subtitle: "Session Logged", timestamp: "2026-04-14T10:25:00Z", state: .success),
+                ],
+                timelineKind: .current
+            )
         ),
         starterTarget.id: GoalDetailPresentation(
             target: starterTarget,
@@ -463,7 +476,14 @@ enum PreviewGoalsScenarios {
             primaryStepID: "ls1",
             canSwitchToUntimed: false,
             supportModeActive: false,
-            defaultLens: .path
+            defaultLens: .path,
+            missionControl: previewMissionControl(
+                title: "Learn advanced vocal mixing",
+                currentTruth: "The path is still provisional, but the first learning signal is visible.",
+                nextTitle: "Record one rough pass",
+                proofItems: [],
+                timelineKind: .current
+            )
         ),
         clarificationTarget.id: GoalDetailPresentation(
             target: clarificationTarget,
@@ -497,7 +517,15 @@ enum PreviewGoalsScenarios {
             primaryStepID: nil,
             canSwitchToUntimed: false,
             supportModeActive: true,
-            defaultLens: .path
+            defaultLens: .path,
+            missionControl: previewMissionControl(
+                title: "Break this down for someone else",
+                currentTruth: "The real work is answering the missing support question before planning continues.",
+                nextTitle: "Answer the missing question",
+                proofItems: [],
+                timelineKind: .current,
+                riskTitle: "Needs a next step"
+            )
         ),
         blockedTarget.id: GoalDetailPresentation(
             target: blockedTarget,
@@ -527,7 +555,15 @@ enum PreviewGoalsScenarios {
             primaryStepID: nil,
             canSwitchToUntimed: true,
             supportModeActive: false,
-            defaultLens: .path
+            defaultLens: .path,
+            missionControl: previewMissionControl(
+                title: "Plan a freelance pivot",
+                currentTruth: "The current stage is visible, but the blocker should stay explicit.",
+                nextTitle: "Resolve the blocker",
+                proofItems: [],
+                timelineKind: .waiting,
+                riskTitle: "Blocked"
+            )
         ),
         supportTarget.id: GoalDetailPresentation(
             target: supportTarget,
@@ -571,9 +607,149 @@ enum PreviewGoalsScenarios {
             primaryStepID: "ss1",
             canSwitchToUntimed: true,
             supportModeActive: true,
-            defaultLens: .path
+            defaultLens: .path,
+            missionControl: previewMissionControl(
+                title: "Help Maya rebuild a reading rhythm",
+                currentTruth: "The support path is in motion and stays collaborative.",
+                nextTitle: "Set up one calm reading check-in",
+                proofItems: [
+                    GoalEvidenceItem(id: "se1", title: "Last check-in felt collaborative", subtitle: "Delegated Update", timestamp: "2026-04-13T18:00:00Z", state: .success),
+                ],
+                timelineKind: .current
+            )
+        ),
+        completedTarget.id: GoalDetailPresentation(
+            target: completedTarget,
+            headline: GoalDetailHeadline(eyebrow: "Goal Detail", title: "Stabilize the five-tab shell", subtitle: "The shell loop is closed and preserved as learning.", renderState: .achieved, modeLabel: "Achievement", timingLabel: "Completed", supportLabel: nil),
+            outcome: "The shell is complete.",
+            intent: "Keep the completed story readable without competing for attention.",
+            progress: GoalDetailProgress(label: "Complete", detail: "Closed work stays visible.", value: 1, evidenceLabel: "Proof visible"),
+            strategicStatus: GoalDetailStrategicStatus(title: "Completed", summary: "This goal is complete and no longer needs a next move.", supportingDetail: "Closed loop"),
+            nextMovement: nil,
+            trajectory: GoalDetailTrajectoryState(phaseTitle: "Completed", phaseSummary: "The loop is closed.", milestoneSummary: "All milestones landed", momentumSummary: "Proof visible", timelineSummary: "Completed goals stay part of the story."),
+            timingNote: "Completed",
+            progressNote: "Closed work stays visible.",
+            manualPriorityLabel: "Archive",
+            assumptions: [],
+            suggestions: [],
+            pathStages: [],
+            sections: [],
+            clarification: nil,
+            blocked: nil,
+            evidence: [],
+            history: [],
+            recentMovement: GoalDetailRecentMovementState(title: "Recent movement", summary: "Closed loop", items: []),
+            actions: [],
+            explainability: nil,
+            primaryStepID: nil,
+            canSwitchToUntimed: false,
+            supportModeActive: false,
+            defaultLens: .path,
+            missionControl: previewMissionControl(title: "Stabilize the five-tab shell", currentTruth: "This goal is complete and preserved.", nextTitle: "No next move needed", proofItems: [], timelineKind: .completed)
+        ),
+        parkedTarget.id: GoalDetailPresentation(
+            target: parkedTarget,
+            headline: GoalDetailHeadline(eyebrow: "Goal Detail", title: "Refresh the onboarding copy", subtitle: "Useful later, deliberately quiet now.", renderState: .onHold, modeLabel: "Maintenance", timingLabel: "Parked", supportLabel: nil),
+            outcome: "Keep this parked until the current goals flow is settled.",
+            intent: "Do not let quiet work compete with live direction.",
+            progress: GoalDetailProgress(label: "Parked", detail: "Paused work is not failure.", value: 0.12, evidenceLabel: "No proof yet"),
+            strategicStatus: GoalDetailStrategicStatus(title: "Parked", summary: "This goal is intentionally quiet.", supportingDetail: "Archive"),
+            nextMovement: nil,
+            trajectory: GoalDetailTrajectoryState(phaseTitle: "Parked", phaseSummary: "Intentionally quiet.", milestoneSummary: "Revisit later", momentumSummary: "No proof yet", timelineSummary: "Parked goals remain findable."),
+            timingNote: "Parked",
+            progressNote: "Paused work is not failure.",
+            manualPriorityLabel: "Archive",
+            assumptions: [],
+            suggestions: [],
+            pathStages: [],
+            sections: [],
+            clarification: nil,
+            blocked: nil,
+            evidence: [],
+            history: [],
+            recentMovement: GoalDetailRecentMovementState(title: "Recent movement", summary: "No recent movement", items: []),
+            actions: [],
+            explainability: nil,
+            primaryStepID: nil,
+            canSwitchToUntimed: false,
+            supportModeActive: false,
+            defaultLens: .path,
+            missionControl: previewMissionControl(title: "Refresh the onboarding copy", currentTruth: "This goal is intentionally quiet.", nextTitle: "Revisit later", proofItems: [], timelineKind: .parked)
+        ),
+        cancelledTarget.id: GoalDetailPresentation(
+            target: cancelledTarget,
+            headline: GoalDetailHeadline(eyebrow: "Goal Detail", title: "Retire stale experiment", subtitle: "Closed because it no longer fits the current direction.", renderState: .onHold, modeLabel: "Exploration", timingLabel: "Cancelled", supportLabel: nil),
+            outcome: "The experiment is closed.",
+            intent: "Preserve what changed without treating it as active work.",
+            progress: GoalDetailProgress(label: "Cancelled", detail: "Closed without a next move.", value: 0, evidenceLabel: "No proof yet"),
+            strategicStatus: GoalDetailStrategicStatus(title: "Cancelled", summary: "This goal is closed and should not compete for attention.", supportingDetail: "Archive"),
+            nextMovement: nil,
+            trajectory: GoalDetailTrajectoryState(phaseTitle: "Cancelled", phaseSummary: "Closed exploration.", milestoneSummary: "No next milestone", momentumSummary: "No proof yet", timelineSummary: "Cancelled goals remain part of the record."),
+            timingNote: "Cancelled",
+            progressNote: "Closed without a next move.",
+            manualPriorityLabel: "Archive",
+            assumptions: [],
+            suggestions: [],
+            pathStages: [],
+            sections: [],
+            clarification: nil,
+            blocked: nil,
+            evidence: [],
+            history: [],
+            recentMovement: GoalDetailRecentMovementState(title: "Recent movement", summary: "No recent movement", items: []),
+            actions: [],
+            explainability: nil,
+            primaryStepID: nil,
+            canSwitchToUntimed: false,
+            supportModeActive: false,
+            defaultLens: .path,
+            missionControl: previewMissionControl(title: "Retire stale experiment", currentTruth: "This goal is closed and preserved.", nextTitle: "No next move needed", proofItems: [], timelineKind: .cancelled)
         ),
     ]
+
+    private static func previewMissionControl(
+        title: String,
+        currentTruth: String,
+        nextTitle: String,
+        proofItems: [GoalEvidenceItem],
+        timelineKind: GoalDetailTimelineItemKind,
+        riskTitle: String = "No major visible risk"
+    ) -> GoalDetailMissionControlState {
+        let hasProof = proofItems.isEmpty == false
+        let riskIsCalm = riskTitle == "No major visible risk"
+        let nextAvailable = nextTitle != "No next move needed"
+        let proofHeadline = hasProof ? "\(proofItems.count) proof point\(proofItems.count == 1 ? "" : "s")" : "No proof yet"
+        return GoalDetailMissionControlState(
+            currentTruth: currentTruth,
+            primaryNextMove: GoalNextVisibleStep(
+                title: nextTitle,
+                detail: nextAvailable ? "Keep this as the primary move." : "This goal is not asking for action.",
+                isAvailable: nextAvailable
+            ),
+            breadcrumb: GoalDetailBreadcrumbState(title: "Path", labels: ["Career", title], fallbackUsed: false),
+            lanes: [
+                GoalDetailMissionLaneState(kind: .path, title: "Path", headline: "Current phase", summary: "Next milestone: \(nextTitle)", detail: "Preview path data is bounded to this goal.", badgeTitle: "Current", systemImage: "point.topleft.down.curvedto.point.bottomright.up", state: .selected),
+                GoalDetailMissionLaneState(kind: .now, title: "Now", headline: nextTitle, summary: nextAvailable ? "Keep this as the primary move." : "No action is needed right now.", detail: "", badgeTitle: nextAvailable ? "Next move" : "Closed", systemImage: "scope", state: nextAvailable ? .selected : .default),
+                GoalDetailMissionLaneState(kind: .proof, title: "Proof", headline: proofHeadline, summary: hasProof ? "Evidence is visible." : "Needs evidence", detail: proofItems.first.map { "Latest: \($0.title)" } ?? "No proof has been recorded for this goal yet.", badgeTitle: hasProof ? "Evidence visible" : "No proof yet", systemImage: "checkmark.seal", state: hasProof ? .selected : .default),
+                GoalDetailMissionLaneState(kind: .risk, title: "Risk", headline: riskTitle, summary: riskIsCalm ? "Nothing in this preview is asking for rescue." : "This goal needs review before more planning.", detail: "", badgeTitle: riskIsCalm ? "Calm" : "Needs review", systemImage: "exclamationmark.triangle", state: riskIsCalm ? .success : .warning),
+            ],
+            timeline: GoalDetailTimelineState(
+                title: "Storyline",
+                subtitle: "A compact read on what happened, what is current, and what is only a possible next move.",
+                items: [
+                    GoalDetailTimelineItemState(id: "started-\(title)", kind: .started, title: "Started", summary: "Preview start", timestamp: nil, state: .default, isFuture: false),
+                    GoalDetailTimelineItemState(id: "current-\(title)", kind: timelineKind, title: timelineKind.title, summary: currentTruth, timestamp: nil, state: timelineKind == .completed ? .success : timelineKind == .waiting ? .warning : .default, isFuture: false),
+                    GoalDetailTimelineItemState(id: "next-\(title)", kind: .next, title: nextTitle, summary: nextAvailable ? "Possible next move." : "No future certainty is claimed.", timestamp: nil, state: nextAvailable ? .selected : .default, isFuture: nextAvailable),
+                ]
+            ),
+            assumptions: [
+                GoalDetailAssumptionState(id: "next-step", title: "This goal has a next step.", status: nextAvailable ? "Visible" : "Closed", whyItMatters: "The screen should lead with one move, not a long task dump.", correctionLabel: nextAvailable ? "Change next step" : nil, state: nextAvailable ? .selected : .default),
+                GoalDetailAssumptionState(id: "proof", title: "This goal has enough proof.", status: hasProof ? "Proof visible" : "No proof yet", whyItMatters: "Progress should be backed by something observable.", correctionLabel: "Add proof later", state: hasProof ? .selected : .default),
+            ],
+            proofRail: GoalDetailProofRailState(title: "Proof", subtitle: hasProof ? "Evidence is visible." : "Evidence will appear here when it is recorded.", items: proofItems, emptyTitle: "No proof yet", emptyMessage: "Add proof later when there is something real to show."),
+            receipts: GoalDetailReceiptsState(title: "What changed", subtitle: "Goal-related receipts stay visible here when the current data source provides them.", items: [], emptyTitle: "No receipts yet", emptyMessage: "Receipts will appear here after goal changes are recorded.")
+        )
+    }
 
     private static func trustHeavyExplainabilityState() -> GoalExplainabilityState {
         GoalExplainabilityState(

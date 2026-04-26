@@ -867,6 +867,133 @@ struct GoalDetailRecentMovementState: Sendable {
     let items: [GoalDetailRecentMovementItem]
 }
 
+enum GoalDetailMissionLaneKind: String, Sendable, CaseIterable {
+    case path
+    case now
+    case proof
+    case risk
+
+    var title: String {
+        switch self {
+        case .path: "Path"
+        case .now: "Now"
+        case .proof: "Proof"
+        case .risk: "Risk"
+        }
+    }
+
+    var accessibilityIdentifier: String {
+        "goal-detail.lane.\(rawValue)"
+    }
+}
+
+struct GoalDetailMissionLaneState: Identifiable, Sendable {
+    let kind: GoalDetailMissionLaneKind
+    let title: String
+    let headline: String
+    let summary: String
+    let detail: String
+    let badgeTitle: String
+    let systemImage: String
+    let state: AmbitionVisualState
+
+    var id: String { kind.rawValue }
+}
+
+struct GoalDetailBreadcrumbState: Sendable {
+    let title: String
+    let labels: [String]
+    let fallbackUsed: Bool
+}
+
+enum GoalDetailTimelineItemKind: String, Sendable {
+    case started
+    case previous
+    case current
+    case next
+    case proof
+    case decision
+    case waiting
+    case parked
+    case completed
+    case cancelled
+
+    var title: String {
+        switch self {
+        case .started: "Started"
+        case .previous: "Previous"
+        case .current: "Current"
+        case .next: "Next"
+        case .proof: "Proof"
+        case .decision: "Decision"
+        case .waiting: "Waiting"
+        case .parked: "Parked"
+        case .completed: "Completed"
+        case .cancelled: "Cancelled"
+        }
+    }
+}
+
+struct GoalDetailTimelineItemState: Identifiable, Sendable {
+    let id: String
+    let kind: GoalDetailTimelineItemKind
+    let title: String
+    let summary: String
+    let timestamp: String?
+    let state: AmbitionVisualState
+    let isFuture: Bool
+}
+
+struct GoalDetailTimelineState: Sendable {
+    let title: String
+    let subtitle: String
+    let items: [GoalDetailTimelineItemState]
+}
+
+struct GoalDetailAssumptionState: Identifiable, Sendable {
+    let id: String
+    let title: String
+    let status: String
+    let whyItMatters: String
+    let correctionLabel: String?
+    let state: AmbitionVisualState
+}
+
+struct GoalDetailProofRailState: Sendable {
+    let title: String
+    let subtitle: String
+    let items: [GoalEvidenceItem]
+    let emptyTitle: String
+    let emptyMessage: String
+}
+
+struct GoalDetailReceiptItemState: Identifiable, Sendable {
+    let id: String
+    let title: String
+    let summary: String
+    let timestamp: String
+    let state: AmbitionVisualState
+}
+
+struct GoalDetailReceiptsState: Sendable {
+    let title: String
+    let subtitle: String
+    let items: [GoalDetailReceiptItemState]
+    let emptyTitle: String
+    let emptyMessage: String
+}
+
+struct GoalDetailMissionControlState: Sendable {
+    let currentTruth: String
+    let primaryNextMove: GoalNextVisibleStep
+    let breadcrumb: GoalDetailBreadcrumbState
+    let lanes: [GoalDetailMissionLaneState]
+    let timeline: GoalDetailTimelineState
+    let assumptions: [GoalDetailAssumptionState]
+    let proofRail: GoalDetailProofRailState
+    let receipts: GoalDetailReceiptsState
+}
+
 struct GoalClarificationState: Sendable {
     let title: String
     let subtitle: String
@@ -906,6 +1033,65 @@ struct GoalDetailPresentation: Sendable {
     let canSwitchToUntimed: Bool
     let supportModeActive: Bool
     let defaultLens: GoalDetailLens
+    let missionControl: GoalDetailMissionControlState?
+
+    init(
+        target: GoalRouteTarget,
+        headline: GoalDetailHeadline,
+        outcome: String,
+        intent: String,
+        progress: GoalDetailProgress,
+        strategicStatus: GoalDetailStrategicStatus,
+        nextMovement: GoalDetailNextMovement?,
+        trajectory: GoalDetailTrajectoryState,
+        timingNote: String,
+        progressNote: String,
+        manualPriorityLabel: String,
+        assumptions: [String],
+        suggestions: [GoalDetailStepItem],
+        pathStages: [GoalPathStage],
+        sections: [GoalDetailSectionState],
+        clarification: GoalClarificationState?,
+        blocked: GoalBlockedState?,
+        evidence: [GoalEvidenceItem],
+        history: [GoalFeedbackItem],
+        recentMovement: GoalDetailRecentMovementState,
+        actions: [GoalDetailActionState],
+        explainability: GoalExplainabilityState?,
+        primaryStepID: String?,
+        canSwitchToUntimed: Bool,
+        supportModeActive: Bool,
+        defaultLens: GoalDetailLens,
+        missionControl: GoalDetailMissionControlState? = nil
+    ) {
+        self.target = target
+        self.headline = headline
+        self.outcome = outcome
+        self.intent = intent
+        self.progress = progress
+        self.strategicStatus = strategicStatus
+        self.nextMovement = nextMovement
+        self.trajectory = trajectory
+        self.timingNote = timingNote
+        self.progressNote = progressNote
+        self.manualPriorityLabel = manualPriorityLabel
+        self.assumptions = assumptions
+        self.suggestions = suggestions
+        self.pathStages = pathStages
+        self.sections = sections
+        self.clarification = clarification
+        self.blocked = blocked
+        self.evidence = evidence
+        self.history = history
+        self.recentMovement = recentMovement
+        self.actions = actions
+        self.explainability = explainability
+        self.primaryStepID = primaryStepID
+        self.canSwitchToUntimed = canSwitchToUntimed
+        self.supportModeActive = supportModeActive
+        self.defaultLens = defaultLens
+        self.missionControl = missionControl
+    }
 }
 
 extension GoalMode {
