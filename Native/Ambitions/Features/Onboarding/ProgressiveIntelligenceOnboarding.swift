@@ -39,7 +39,7 @@ struct RepositoryBackedOnboardingService: OnboardingServicing {
         case .captureFirst:
             return OnboardingRouteDecision(
                 choice: choice,
-                selectedTab: .plan,
+                selectedTab: .captures,
                 overlayIntent: .quickCapture,
                 overlaySource: .shellCompose,
                 presentationContext: .quickCapture
@@ -87,53 +87,54 @@ struct ProgressiveIntelligenceOnboardingView: View {
     }
 
     private var orientationPage: some View {
-        onboardingPage(
+        return onboardingPage(
             eyebrow: "Ambitions",
-            title: "Know what matters without setting up your whole life",
-            subtitle: "Start with one real signal. The system becomes useful as it sees goals, captures, plans, and reflection over time.",
-            rows: [
-                ("Today", "What matters now?", AppTab.today.systemImage),
-                ("Goals", "Where am I headed?", AppTab.goals.systemImage),
-                ("Capture", "What needs a calm place to land?", AppTab.captures.systemImage),
-                ("Plan", "How does this week hold together?", AppTab.plan.systemImage),
-                ("You", "How is my system configured?", AppTab.profile.systemImage)
-            ]
+            title: ActivationContract.orientationTitle,
+            subtitle: ActivationContract.orientationSubtitle,
+            rows: ActivationContract.onboardingSurfaceRows
         )
     }
 
     private var startPage: some View {
-        onboardingPage(
+        let goalPromise = ActivationContract.promise(for: .firstMeaningfulGoal)
+        let capturePromise = ActivationContract.promise(for: .firstCapturedLifeObject)
+        let todayPromise = ActivationContract.promise(for: .firstTodayContract)
+
+        return onboardingPage(
             eyebrow: "Start small",
-            title: "Choose the first useful move",
-            subtitle: "You can create a first goal or capture a loose thought. Either path keeps setup short.",
+            title: ActivationContract.startTitle,
+            subtitle: ActivationContract.startSubtitle,
             rows: []
         ) {
             choiceRow(
                 choice: .createFirstGoal,
-                title: "Create first goal",
-                subtitle: "Name one ambition and let Ambitions shape the first believable path.",
+                title: goalPromise.primaryActionTitle ?? goalPromise.title,
+                subtitle: goalPromise.explanation,
                 icon: "target"
             )
             choiceRow(
                 choice: .captureFirst,
-                title: "Capture something first",
-                subtitle: "Save a thought without forcing it into a full plan yet.",
+                title: capturePromise.primaryActionTitle ?? capturePromise.title,
+                subtitle: capturePromise.explanation,
                 icon: "tray.and.arrow.down"
+            )
+            choiceRow(
+                choice: .enterToday,
+                title: todayPromise.primaryActionTitle ?? todayPromise.title,
+                subtitle: todayPromise.explanation,
+                icon: AppTab.today.systemImage
             )
         }
     }
 
     private var trustPage: some View {
-        onboardingPage(
+        let trustMessage = ActivationContract.trustMessage
+
+        return onboardingPage(
             eyebrow: "Trust",
-            title: "Private by default, useful by choice",
-            subtitle: "No Ambitions account is required at launch. Your planning data is local-first, Apple-account-based sync is the continuity path, and permissions stay contextual.",
-            rows: [
-                ("No Ambitions login", "There is no in-app account setup at launch.", "person.crop.circle.badge.xmark"),
-                ("Local-first", "Private goal content stays on device or in your Apple-controlled sync path.", "lock.shield"),
-                ("No hidden analytics", "No third-party analytics SDKs and no server-side AI processing of private content.", "hand.raised"),
-                ("Contextual permissions", "Notifications, Calendar, and Reminders are optional and asked for only when useful.", "bell.badge")
-            ]
+            title: trustMessage.title,
+            subtitle: trustMessage.explanation,
+            rows: trustMessage.rows
         )
     }
 
@@ -142,7 +143,7 @@ struct ProgressiveIntelligenceOnboardingView: View {
         eyebrow: String,
         title: String,
         subtitle: String,
-        rows: [(String, String, String)],
+        rows: [ActivationCopyRow],
         @ViewBuilder extraContent: () -> some View = { EmptyView() }
     ) -> some View {
         ScrollView {
@@ -166,17 +167,17 @@ struct ProgressiveIntelligenceOnboardingView: View {
                 if rows.isEmpty == false {
                     AppCard {
                         VStack(alignment: .leading, spacing: theme.spacing.sm) {
-                            ForEach(rows, id: \.0) { row in
+                            ForEach(rows, id: \.title) { row in
                                 HStack(alignment: .top, spacing: theme.spacing.sm) {
-                                    Image(systemName: row.2)
+                                    Image(systemName: row.icon)
                                         .font(.system(size: theme.icon.smallSize, weight: theme.icon.symbolWeight))
                                         .foregroundStyle(theme.colors.textSecondary)
                                         .frame(width: 24)
                                     VStack(alignment: .leading, spacing: theme.spacing.xxxs) {
-                                        Text(row.0)
+                                        Text(row.title)
                                             .font(theme.typography.bodyEmphasized)
                                             .foregroundStyle(theme.colors.textPrimary)
-                                        Text(row.1)
+                                        Text(row.detail)
                                             .font(theme.typography.caption)
                                             .foregroundStyle(theme.colors.textSecondary)
                                     }

@@ -80,7 +80,7 @@ final class OnboardingAndDegradedStateTests: XCTestCase {
     func testCaptureFirstRouteDecision() {
         let decision = RepositoryBackedOnboardingService.routeDecision(for: .captureFirst)
 
-        XCTAssertEqual(decision.selectedTab, .plan)
+        XCTAssertEqual(decision.selectedTab, .captures)
         XCTAssertEqual(decision.overlayIntent, .quickCapture)
         XCTAssertEqual(decision.presentationContext, .quickCapture)
     }
@@ -106,6 +106,8 @@ final class OnboardingAndDegradedStateTests: XCTestCase {
         XCTAssertEqual(DegradedStateOrchestrator.todayEmpty().kind, .empty)
         XCTAssertEqual(DegradedStateOrchestrator.goalsEmpty().primaryAction.routingHint, .createGoal)
         XCTAssertEqual(DegradedStateOrchestrator.planEmpty().secondaryAction?.routingHint, .captures)
+        XCTAssertEqual(DegradedStateOrchestrator.capturesEmpty().title, "Capture messy life here")
+        XCTAssertEqual(DegradedStateOrchestrator.youEmpty().primaryAction.routingHint, .profileTrust)
     }
 }
 

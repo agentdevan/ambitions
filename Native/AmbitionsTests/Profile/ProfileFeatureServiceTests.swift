@@ -14,7 +14,8 @@ final class ProfileFeatureServiceTests: XCTestCase {
         XCTAssertTrue(dashboard.integrationsSection.items.contains(where: { $0.id == "profile-integration-notifications" && $0.valueLabel == "Not requested" }))
         XCTAssertTrue(dashboard.integrationsSection.items.contains(where: { $0.id == "profile-integration-shortcuts" && $0.valueLabel == ExternalSurfaceTruth.productizedNeedsPlatformReview }))
         XCTAssertTrue(dashboard.integrationsSection.items.contains(where: { $0.id == "profile-integration-share" && $0.valueLabel == ExternalSurfaceTruth.productizedNeedsPlatformReview }))
-        XCTAssertTrue(dashboard.trustCenter.footer.contains("Batch 54"))
+        XCTAssertTrue(dashboard.trustCenter.footer.contains("states what is local now"))
+        XCTAssertFalse(dashboard.trustCenter.footer.contains("Batch 54"))
         XCTAssertTrue(dashboard.accountSection.items.contains(where: { $0.id == "profile-account-billing" && $0.valueLabel == "Not active" }))
         XCTAssertFalse(dashboard.hero.supportingTruth.contains("local device features"))
     }

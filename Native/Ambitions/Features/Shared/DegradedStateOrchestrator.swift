@@ -73,54 +73,72 @@ struct DegradedStatePresentation: Identifiable, Sendable, Equatable {
 
 enum DegradedStateOrchestrator {
     static func todayEmpty() -> DegradedStatePresentation {
-        DegradedStatePresentation(
+        let rule = ActivationContract.emptyStateRule(for: .today)
+        return DegradedStatePresentation(
             id: "degraded.today.empty",
             kind: .empty,
-            title: "Today is waiting for a real signal",
-            explanation: "Add one goal or capture one thought. Today will stay calm until there is something worth acting on.",
-            primaryAction: DegradedStateAction(title: "Create first goal", systemImage: "target", routingHint: .createGoal),
-            secondaryAction: DegradedStateAction(title: "Capture first", systemImage: "tray.and.arrow.down", routingHint: .quickCapture),
+            title: rule.title,
+            explanation: rule.explanation,
+            primaryAction: rule.primaryAction,
+            secondaryAction: rule.secondaryAction,
             tone: .selected,
-            icon: "sun.max"
+            icon: rule.icon
         )
     }
 
     static func goalsEmpty() -> DegradedStatePresentation {
-        DegradedStatePresentation(
+        let rule = ActivationContract.emptyStateRule(for: .goals)
+        return DegradedStatePresentation(
             id: "degraded.goals.empty",
             kind: .empty,
-            title: "Your direction board is ready",
-            explanation: "Start with one ambition in plain language. Ambitions will shape the first believable path before the board gets busy.",
-            primaryAction: DegradedStateAction(title: "Create goal", systemImage: "plus", routingHint: .createGoal),
-            secondaryAction: DegradedStateAction(title: "Capture an idea", systemImage: "tray.and.arrow.down", routingHint: .quickCapture),
+            title: rule.title,
+            explanation: rule.explanation,
+            primaryAction: rule.primaryAction,
+            secondaryAction: rule.secondaryAction,
             tone: .selected,
-            icon: "scope"
+            icon: rule.icon
         )
     }
 
     static func planEmpty() -> DegradedStatePresentation {
-        DegradedStatePresentation(
+        let rule = ActivationContract.emptyStateRule(for: .plan)
+        return DegradedStatePresentation(
             id: "degraded.plan.empty",
             kind: .empty,
-            title: "The week has room",
-            explanation: "Nothing is asking the week for structure yet. Add a goal or capture, then Plan will show what still fits.",
-            primaryAction: DegradedStateAction(title: "Create goal", systemImage: "target", routingHint: .createGoal),
-            secondaryAction: DegradedStateAction(title: "Open captures", systemImage: "tray.full", routingHint: .captures),
+            title: rule.title,
+            explanation: rule.explanation,
+            primaryAction: rule.primaryAction,
+            secondaryAction: rule.secondaryAction,
             tone: .success,
-            icon: AppTab.plan.systemImage
+            icon: rule.icon
         )
     }
 
     static func capturesEmpty() -> DegradedStatePresentation {
-        DegradedStatePresentation(
+        let rule = ActivationContract.emptyStateRule(for: .capture)
+        return DegradedStatePresentation(
             id: "degraded.captures.empty",
             kind: .empty,
-            title: "No loose thoughts are waiting",
-            explanation: "Captures will appear here when an idea needs a calm home in a goal, a week, or the seed vault.",
-            primaryAction: DegradedStateAction(title: "Capture now", systemImage: "square.and.pencil", routingHint: .quickCapture),
-            secondaryAction: DegradedStateAction(title: "Return to Plan", systemImage: AppTab.plan.systemImage, routingHint: .plan),
+            title: rule.title,
+            explanation: rule.explanation,
+            primaryAction: rule.primaryAction,
+            secondaryAction: rule.secondaryAction,
             tone: .default,
-            icon: "tray"
+            icon: rule.icon
+        )
+    }
+
+    static func youEmpty() -> DegradedStatePresentation {
+        let rule = ActivationContract.emptyStateRule(for: .you)
+        return DegradedStatePresentation(
+            id: "degraded.you.empty",
+            kind: .empty,
+            title: rule.title,
+            explanation: rule.explanation,
+            primaryAction: rule.primaryAction,
+            secondaryAction: rule.secondaryAction,
+            tone: .default,
+            icon: rule.icon
         )
     }
 

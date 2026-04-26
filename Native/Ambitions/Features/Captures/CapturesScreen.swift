@@ -41,11 +41,20 @@ struct CapturesScreen: View {
                 .transition(.ambitionPanel)
 
                 if viewState.captures.isEmpty {
-                    EmptyStateCard(
-                        title: "Nothing waiting in Capture",
-                        message: "Capture is for getting things out of your head first. One-time tasks, waiting items, seeds, and raw ideas can live here before they become anything bigger.",
-                        icon: "tray",
-                        actionTitle: nil
+                    DegradedStateCard(
+                        state: DegradedStateOrchestrator.capturesEmpty(),
+                        primaryAccessibilityIdentifier: "captures.empty.capture-now",
+                        secondaryAccessibilityIdentifier: shellMode == .planSupport ? "captures.empty.return-to-plan" : nil,
+                        onPrimaryAction: {
+                            container.commandRouter.presentCommandSheet(
+                                intent: .quickCapture,
+                                source: .capturesScreen,
+                                presentationContext: .quickCapture
+                            )
+                        },
+                        onSecondaryAction: shellMode == .planSupport ? {
+                            container.navigation.resetPlanPath()
+                        } : nil
                     )
                     .accessibilityIdentifier("captures.empty")
                     .transition(.ambitionPanel)

@@ -109,7 +109,7 @@ private extension RepositoryBackedProfileService {
                     appearanceSummary: appearanceSummary
                 ),
                 supportingTruth: "System configuration stays separate from workflow. Optional context stays inspectable, local-first, and reversible.",
-                trustWhisper: "Current trust posture: \(syncStatus.detail) Notifications are \(notificationStatus.statusLabel.lowercased()) for local reminders.",
+                trustWhisper: "Current trust posture: your work starts locally, and optional permissions can wait.",
                 status: syncState,
                 pills: [
                     ProfileStatusPill(id: "profile-pill-appearance", title: appearanceSummary, icon: "paintpalette", state: .selected),
@@ -158,16 +158,16 @@ private extension RepositoryBackedProfileService {
                 title: "Trust Center",
                 subtitle: "Trust should read as configuration truth, not a debug console. The pulse below stays calm and human-readable.",
                 pulse: ProfileTrustPulseState(
-                    title: "Sync pulse",
+                    title: "Local trust pulse",
                     subtitle: syncPulseTitle(for: syncStatus),
-                    detail: "Portable continuity stays explicit and local-first in this build. Future cloud or continuity productization remains deferred.",
+                    detail: ActivationContract.trustMessage.explanation,
                     state: syncState
                 ),
                 items: [
                     SettingsItem(
                         id: "profile-trust-sync",
                         title: "System trust posture",
-                        subtitle: "The current runtime runs from on-device storage, portable backup/restore, and no implied live cloud backend.",
+                        subtitle: "The current runtime uses on-device storage and does not present live cloud sync or export as ready.",
                         icon: "lock.shield",
                         valueLabel: syncStatus.detail
                     ),
@@ -186,11 +186,11 @@ private extension RepositoryBackedProfileService {
                         valueLabel: "Calm"
                     )
                 ],
-                footer: "Batch 52 establishes the trust framing layer only. Batch 54 owns deeper continuity/sync-trust productization, so this surface stays truthful about what exists today."
+                footer: "This first-run trust layer states what is local now and avoids requiring external connections before they are useful."
             ),
             contextVault: ProfileContextVaultState(
                 title: "Context Vault",
-                subtitle: "Optional personal context is inspectable here before later compliance work deepens policy and export surfaces.",
+                subtitle: "Optional personal context is inspectable here before any future trust work changes what is available.",
                 items: [
                     ProfileContextVaultItem(
                         id: "profile-vault-signals",
@@ -234,7 +234,7 @@ private extension RepositoryBackedProfileService {
                         state: .default
                     )
                 ],
-                footer: "This is a foundation layer, not a full privacy admin surface. It prepares future compliance and trust work without inventing Batch 53 or Batch 54 flows early."
+                footer: "This is a foundation layer, not a full privacy admin surface. It keeps current local context understandable without inventing account, sync, or export flows."
             ),
             integrationsSection: ProfileSectionGroup(
                 title: "Integrations and permissions",
