@@ -20,13 +20,13 @@ For Ambitions 2.0 tasks, read:
 
 ## Execution Rules
 
-- Use Batch 61 as the first active Ambitions 2.0 batch after Batch 60.
+- Current execution status: Batch 00-82 are complete for planning, Batch 83 is the next queued / next uncompleted batch, and Batch 84+ are future planned roadmap work.
 - Work one batch at a time.
 - Work on `main` only.
 - Do not create, switch to, or suggest branches unless the user explicitly asks.
 - Start with a plan pass before an implementation pass for non-trivial or multi-file work.
 - Do not do feature work outside the active batch.
-- Do not skip ahead into Batch 61 implementation unless Batch 61 is the active user request.
+- Do not skip ahead into Batch 84+ implementation unless a direct user request explicitly changes scope.
 - Do not build surfaces before shared systems exist.
 - Do not build widgets or Live Activities before Canonical Now State and Command Pipeline are stable.
 - Do not do sync work before data model and capability verification.

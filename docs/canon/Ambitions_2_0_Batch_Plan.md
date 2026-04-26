@@ -328,14 +328,14 @@ Work on main only. ACTIVE BATCH: Batch 72 - Execution Resilience Stack. Implemen
 
 The detailed maturity gate model, dependency map, scenario fixtures, safe undo categories, external surface proof gates, performance strategy, and batch template live in [Ambitions_2_0_RC_Maturity_Plan.md](Ambitions_2_0_RC_Maturity_Plan.md).
 
-Every future batch below inherits the required template:
+Every batch definition below inherits the required template:
 
 - Purpose, user-facing promise, maturity gate advanced, smallest useful v1 or mature target.
 - Sources of truth consumed, receipt/explanation produced, correction path, undo/safety boundary where relevant, failure/degraded state.
 - Performance budget, accessibility requirement, no-fake-precision boundary, indispensability scenario improved.
 - Likely files/areas affected, dependencies, out-of-scope items, validation requirements, concrete acceptance criteria, and ready-to-paste Codex prompt.
 
-The compact batch definitions below are canonical sequencing. The active-batch implementation prompt must expand the inherited template before edits.
+The compact batch definitions below are canonical sequencing. Current execution status: Batch 00-82 are complete for planning, Batch 83 is the next queued / next uncompleted batch, and Batch 84+ are future planned roadmap work. Ready prompts for completed batches are retained as historical implementation prompts, not current execution state.
 
 ## Phase A - Daily Value, Shell, Activation
 
@@ -351,7 +351,7 @@ Milestone A starts here. Goal: prove the daily operating loop without starting b
 - Performance / accessibility: Today top-level remains one hero plus one or two support panels; no dashboard clutter or expensive scroll animation.
 - Dependencies: Batches 63, 67, 68, 71, and 72 complete.
 - Out of scope: Goals/Plan/You redesign, global chrome implementation beyond safe Today consumption, widgets, sync, full Path Builder, Batch 74 shell work.
-- Concrete acceptance criteria: Today shows exactly the daily contract elements above; urgent outside-lens items are not hidden; copy avoids engine names; no top-level IA changes; Batch 73 remains not closed until validated.
+- Concrete acceptance criteria: Today shows exactly the daily contract elements above; urgent outside-lens items are not hidden; copy avoids engine names; no top-level IA changes. Batch 73 is complete for planning per registry status; do not infer additional feature validation from this status row beyond existing evidence.
 - Ready prompt: Implement only Batch 73 Today Daily Operating Contract v1 on main; do not start Batch 74, do not change top-level IA, and report validation truthfully.
 
 ### Batch 74 - Global Shell Chrome and Visual Alignment

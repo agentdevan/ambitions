@@ -136,11 +136,13 @@ Includes mature Life Graph, Action Closure, Proof / Progress, Plan / Reality / R
 
 Target batch range: 101-120.
 
-## Future Batch Stretch
+## Batch Coverage And Status
 
-Completed Batches 61-72 remain complete and unchanged for planning history.
-Batch 73 remains queued until implemented and validated.
-No batch after 72 is marked complete by this maturity plan.
+Completed Batches 61-82 remain complete and unchanged for planning history.
+Batch 83 remains queued until implemented and validated.
+No batch after 82 is marked complete by this maturity plan.
+
+Rows 73-82 below are preserved as completed roadmap coverage; Batch 83 is the next queued / next uncompleted batch and Batch 84+ remain future planned roadmap work.
 
 | Batch | Name | Primary maturity gate |
 | --- | --- | --- |
