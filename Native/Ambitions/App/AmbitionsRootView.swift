@@ -1,5 +1,8 @@
 import AmbitionsDesignSystem
 import SwiftUI
+#if canImport(UIKit)
+import UIKit
+#endif
 
 struct AmbitionsRootView: View {
     @Environment(\.colorScheme) private var systemColorScheme
@@ -18,6 +21,11 @@ struct AmbitionsRootView: View {
     }
 
     var body: some View {
+        let resolvedTheme = container.appearancePreference.resolveTheme(
+            systemColorScheme: systemColorScheme,
+            accentFamily: container.accentFamily
+        )
+
         ZStack(alignment: .bottomTrailing) {
             TabView(selection: $navigation.selectedTab) {
                 todayNavigation()
@@ -26,9 +34,26 @@ struct AmbitionsRootView: View {
                 planNavigation()
                 profileNavigation()
             }
+            .tint(resolvedTheme.shell.activeTabForeground)
+            .toolbarBackground(resolvedTheme.shell.bottomBarMaterial, for: .tabBar)
+            .toolbarBackground(.visible, for: .tabBar)
+            .toolbarColorScheme(resolvedTheme.mode == .dark ? .dark : .light, for: .tabBar)
 
             shellContinuityReceipt
-            shellGlobalEntryButton
+            shellGlobalEntryButton(theme: resolvedTheme)
+        }
+        .background(resolvedTheme.shell.canvasGradient.ignoresSafeArea())
+        .onAppear {
+            configureTabBarAppearance(with: resolvedTheme)
+        }
+        .onChange(of: systemColorScheme) { _, _ in
+            configureTabBarAppearance(with: resolvedTheme)
+        }
+        .onChange(of: container.accentFamily) { _, _ in
+            configureTabBarAppearance(with: resolvedTheme)
+        }
+        .onChange(of: container.appearancePreference) { _, _ in
+            configureTabBarAppearance(with: resolvedTheme)
         }
         .sheet(item: $navigation.activeOverlay, onDismiss: {
             guard let entryContext = navigation.takePendingTodayEntryContext() else { return }
@@ -64,12 +89,7 @@ struct AmbitionsRootView: View {
         }
         .appContainer(container)
         .preferredColorScheme(container.appearancePreference.preferredColorScheme)
-        .ambitionTheme(
-            container.appearancePreference.resolveTheme(
-                systemColorScheme: systemColorScheme,
-                accentFamily: container.accentFamily
-            )
-        )
+        .ambitionTheme(resolvedTheme)
     }
 
     private func todayNavigation() -> some View {
@@ -253,7 +273,7 @@ struct AmbitionsRootView: View {
         ]
     }
 
-    private var shellGlobalEntryButton: some View {
+    private func shellGlobalEntryButton(theme: AmbitionTheme) -> some View {
         Button {
             presentCommandSheet(from: .shellCompose)
         } label: {
@@ -262,8 +282,8 @@ struct AmbitionsRootView: View {
                 .frame(width: 52, height: 52)
         }
         .buttonStyle(AmbitionPressableButtonStyle(state: .selected))
-        .padding(.trailing, 20)
-        .padding(.bottom, 88)
+        .padding(.trailing, theme.spacing.md)
+        .padding(.bottom, theme.spacing.xxl + theme.spacing.xl)
         .accessibilityElement()
         .accessibilityLabel("Command")
         .accessibilityHint("Opens the shell-owned command surface.")
@@ -274,40 +294,16 @@ struct AmbitionsRootView: View {
     @ViewBuilder
     private var shellContinuityReceipt: some View {
         if let receipt = navigation.continuityReceipt {
-            VStack(alignment: .leading, spacing: 6) {
-                HStack(spacing: 8) {
-                    Image(systemName: "arrow.triangle.2.circlepath")
-                    Text(receipt.title)
-                        .font(.caption.weight(.semibold))
-                        .lineLimit(1)
-                        .minimumScaleFactor(0.75)
-                    Spacer(minLength: 8)
-                    Button {
-                        navigation.continuityReceipt = nil
-                    } label: {
-                        Image(systemName: "xmark")
-                            .font(.caption.weight(.semibold))
-                    }
-                    .buttonStyle(.plain)
-                    .accessibilityLabel("Dismiss context receipt")
-                }
-                Text(receipt.body)
-                    .font(.caption2)
-                    .lineLimit(dynamicTypeSize.isAccessibilitySize ? 3 : 2)
-                    .minimumScaleFactor(0.85)
+            AmbitionActionClosureTray(
+                title: receipt.title,
+                message: receipt.body,
+                status: .steady
+            ) {
+                navigation.continuityReceipt = nil
             }
-            .padding(.horizontal, 14)
-            .padding(.vertical, 10)
             .frame(maxWidth: dynamicTypeSize.isAccessibilitySize ? 360 : 310, alignment: .leading)
-            .background(.regularMaterial, in: RoundedRectangle(cornerRadius: 16, style: .continuous))
-            .overlay(
-                RoundedRectangle(cornerRadius: 16, style: .continuous)
-                    .stroke(.white.opacity(0.18), lineWidth: 1)
-            )
             .padding(.trailing, 20)
             .padding(.bottom, 152)
-            .accessibilityElement(children: .combine)
-            .accessibilityLabel("\(receipt.title). \(receipt.body)")
             .accessibilityIdentifier("shell.continuity-receipt")
         }
     }
@@ -425,5 +421,29 @@ struct AmbitionsRootView: View {
         } catch {
             onboardingError = "Unable to finish onboarding: \(error.localizedDescription)"
         }
+    }
+
+    private func configureTabBarAppearance(with theme: AmbitionTheme) {
+        #if canImport(UIKit)
+        let appearance = UITabBarAppearance()
+        appearance.configureWithTransparentBackground()
+        appearance.backgroundColor = UIColor(theme.colors.canvasElevated)
+        appearance.shadowColor = UIColor(theme.shell.divider)
+
+        let selectedColor = UIColor(theme.shell.activeTabForeground)
+        let inactiveColor = UIColor(theme.shell.inactiveTabForeground)
+
+        [appearance.stackedLayoutAppearance, appearance.inlineLayoutAppearance, appearance.compactInlineLayoutAppearance].forEach { itemAppearance in
+            itemAppearance.selected.iconColor = selectedColor
+            itemAppearance.selected.titleTextAttributes = [.foregroundColor: selectedColor]
+            itemAppearance.normal.iconColor = inactiveColor
+            itemAppearance.normal.titleTextAttributes = [.foregroundColor: inactiveColor]
+        }
+
+        UITabBar.appearance().standardAppearance = appearance
+        UITabBar.appearance().scrollEdgeAppearance = appearance
+        UITabBar.appearance().tintColor = selectedColor
+        UITabBar.appearance().unselectedItemTintColor = inactiveColor
+        #endif
     }
 }

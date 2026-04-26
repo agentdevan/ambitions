@@ -18,6 +18,26 @@ enum AppShellHeaderPosture: String, Sendable {
         }
     }
 
+    var modeLens: AmbitionModeLens {
+        switch self {
+        case .execution: .focus
+        case .direction: .focus
+        case .shaping: .plan
+        case .reflection: .review
+        case .utility: .focus
+        }
+    }
+
+    var ambientStatus: AmbitionAmbientStatus {
+        switch self {
+        case .execution: .protected
+        case .direction: .steady
+        case .shaping: .tight
+        case .reflection: .clear
+        case .utility: .steady
+        }
+    }
+
     var systemImage: String {
         switch self {
         case .execution: "bolt.fill"
@@ -111,6 +131,21 @@ private struct AppShellHeaderRail: View {
                         }
                         .buttonStyle(.plain)
                         .accessibilityIdentifier(backButtonAccessibilityIdentifier ?? "shell.header.back-button")
+                        .accessibilityLabel("Back")
+                    } else {
+                        Circle()
+                            .fill(theme.shell.activeTabBackground)
+                            .overlay(
+                                Text("A")
+                                    .font(theme.typography.caption)
+                                    .foregroundStyle(theme.shell.activeTabForeground)
+                            )
+                            .overlay(
+                                Circle()
+                                    .stroke(theme.shell.activeTabForeground.opacity(0.34), lineWidth: 1)
+                            )
+                            .frame(width: 36, height: 36)
+                            .accessibilityHidden(true)
                     }
 
                     VStack(alignment: .leading, spacing: theme.spacing.xxxs) {
@@ -121,11 +156,7 @@ private struct AppShellHeaderRail: View {
 
                         if dynamicTypeSize.isAccessibilitySize {
                             HStack(alignment: .firstTextBaseline, spacing: theme.spacing.xs) {
-                                Image(systemName: posture.systemImage)
-                                    .font(.system(size: theme.icon.smallSize, weight: theme.icon.symbolWeight))
-                                    .foregroundStyle(theme.colors.textSecondary)
-
-                                Text(subtitle ?? posture.title)
+                                Text("\(posture.modeLens.title). \(subtitle ?? posture.title)")
                                     .font(theme.typography.caption)
                                     .foregroundStyle(theme.colors.textSecondary)
                                     .lineLimit(2)
@@ -134,7 +165,7 @@ private struct AppShellHeaderRail: View {
                             }
                         } else {
                             HStack(spacing: theme.spacing.xs) {
-                                TagPill(posture.title, icon: posture.systemImage, state: .default)
+                                AmbitionModeLensPill(posture.modeLens)
                                 if let subtitle {
                                     Text(subtitle)
                                         .font(theme.typography.caption)
@@ -142,6 +173,7 @@ private struct AppShellHeaderRail: View {
                                         .lineLimit(1)
                                         .accessibilityIdentifier("shell.header.subtitle")
                                 }
+                                AmbitionAmbientStatusOrb(posture.ambientStatus, showsLabel: false)
                             }
                         }
                     }
@@ -166,13 +198,13 @@ private struct AppShellHeaderRail: View {
             .padding(.horizontal, theme.spacing.lg)
             .padding(.top, theme.spacing.sm)
             .padding(.bottom, theme.spacing.sm)
-            .background(theme.surfaces.overlayGradient.opacity(theme.surfaces.backgroundBlurOpacity))
+            .background(theme.shell.headerMaterial.opacity(theme.surfaces.backgroundBlurOpacity))
 
             Rectangle()
-                .fill(theme.colors.strokeSubtle)
+                .fill(theme.shell.divider)
                 .frame(height: 1)
         }
-        .background(theme.surfaces.overlayGradient.opacity(theme.surfaces.backgroundBlurOpacity))
+        .background(theme.shell.headerMaterial.opacity(theme.surfaces.backgroundBlurOpacity))
     }
 }
 

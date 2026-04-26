@@ -150,6 +150,30 @@ public struct AmbitionTheme: Sendable {
         public var cardGradient: LinearGradient { elevatedGradient }
     }
 
+    public struct ShellTokens: Sendable {
+        public let canvasGradient: LinearGradient
+        public let elevatedMaterial: LinearGradient
+        public let headerMaterial: LinearGradient
+        public let bottomBarMaterial: LinearGradient
+        public let ribbonMaterial: LinearGradient
+        public let receiptMaterial: LinearGradient
+        public let activeTabForeground: Color
+        public let activeTabBackground: Color
+        public let inactiveTabForeground: Color
+        public let controlForeground: Color
+        public let controlBackground: Color
+        public let divider: Color
+        public let depthAccent: Color
+        public let statusClear: Color
+        public let statusSteady: Color
+        public let statusTight: Color
+        public let statusFragile: Color
+        public let statusAtRisk: Color
+        public let statusRecovered: Color
+        public let statusProtected: Color
+        public let trustBadgeSurface: Color
+    }
+
     public struct Typography: Sendable {
         public init() {}
 
@@ -307,6 +331,7 @@ public struct AmbitionTheme: Sendable {
     public let tone: Tone
     public let materials: Materials
     public let surfaces: Surfaces
+    public let shell: ShellTokens
     public let typography: Typography
     public let spacing: Spacing
     public let radius: Radius
@@ -330,6 +355,7 @@ public struct AmbitionTheme: Sendable {
         tone: Tone,
         materials: Materials,
         surfaces: Surfaces,
+        shell: ShellTokens,
         typography: Typography = Typography(),
         spacing: Spacing = Spacing(),
         radius: Radius = Radius(),
@@ -352,6 +378,7 @@ public struct AmbitionTheme: Sendable {
         self.tone = tone
         self.materials = materials
         self.surfaces = surfaces
+        self.shell = shell
         self.typography = typography
         self.spacing = spacing
         self.radius = radius
@@ -401,6 +428,7 @@ public extension AmbitionTheme {
             bottomStrokeOpacity: mode == .dark ? 0.10 : 0.08,
             backgroundBlurOpacity: mode == .dark ? 0.84 : 0.96
         )
+        let shell = shellTokens(for: mode, colors: colors, semanticColors: semanticColors, materials: materials, accent: accent)
         let glow = Glow(
             tint: accent.warm,
             radius: mode == .dark ? 18 : 16,
@@ -454,6 +482,7 @@ public extension AmbitionTheme {
             tone: tone,
             materials: materials,
             surfaces: surfaces,
+            shell: shell,
             depth: depth,
             elevation: elevation,
             glow: glow,
@@ -751,6 +780,79 @@ private extension AmbitionTheme {
                 successGradient: LinearGradient(colors: [Color(red: 0.86, green: 0.95, blue: 0.88), Color.white], startPoint: .topLeading, endPoint: .bottomTrailing),
                 warningGradient: LinearGradient(colors: [Color(red: 0.98, green: 0.92, blue: 0.84), Color.white], startPoint: .topLeading, endPoint: .bottomTrailing),
                 celebrationGradient: LinearGradient(colors: [Color(red: 0.98, green: 0.90, blue: 0.93), Color.white], startPoint: .topLeading, endPoint: .bottomTrailing)
+            )
+        }
+    }
+
+    static func shellTokens(
+        for mode: AmbitionThemeMode,
+        colors: Colors,
+        semanticColors: SemanticColors,
+        materials: Materials,
+        accent: AccentPalette
+    ) -> ShellTokens {
+        switch mode {
+        case .dark:
+            return .init(
+                canvasGradient: materials.canvasGradient,
+                elevatedMaterial: materials.elevatedGradient,
+                headerMaterial: materials.overlayGradient,
+                bottomBarMaterial: LinearGradient(
+                    colors: [
+                        Color(red: 0.088, green: 0.096, blue: 0.122).opacity(0.98),
+                        Color(red: 0.052, green: 0.058, blue: 0.074).opacity(0.98)
+                    ],
+                    startPoint: .top,
+                    endPoint: .bottom
+                ),
+                ribbonMaterial: materials.bandGradient,
+                receiptMaterial: materials.elevatedGradient,
+                activeTabForeground: accent.warm,
+                activeTabBackground: accent.warm.opacity(0.18),
+                inactiveTabForeground: Color(red: 0.58, green: 0.66, blue: 0.74),
+                controlForeground: colors.textPrimary,
+                controlBackground: colors.surfaceOverlay,
+                divider: colors.strokeSubtle,
+                depthAccent: accent.secondary.opacity(0.22),
+                statusClear: semanticColors.confidenceHigh,
+                statusSteady: semanticColors.focus,
+                statusTight: colors.warning,
+                statusFragile: semanticColors.recovery,
+                statusAtRisk: semanticColors.risk,
+                statusRecovered: semanticColors.recovery,
+                statusProtected: semanticColors.protected,
+                trustBadgeSurface: semanticColors.trust.opacity(0.18)
+            )
+        case .light:
+            return .init(
+                canvasGradient: materials.canvasGradient,
+                elevatedMaterial: materials.elevatedGradient,
+                headerMaterial: materials.overlayGradient,
+                bottomBarMaterial: LinearGradient(
+                    colors: [
+                        Color(red: 0.990, green: 0.982, blue: 0.962).opacity(0.98),
+                        Color(red: 0.944, green: 0.928, blue: 0.900).opacity(0.98)
+                    ],
+                    startPoint: .top,
+                    endPoint: .bottom
+                ),
+                ribbonMaterial: materials.bandGradient,
+                receiptMaterial: materials.elevatedGradient,
+                activeTabForeground: accent.warm,
+                activeTabBackground: accent.warm.opacity(0.16),
+                inactiveTabForeground: Color(red: 0.39, green: 0.45, blue: 0.52),
+                controlForeground: colors.textPrimary,
+                controlBackground: colors.surfaceOverlay,
+                divider: colors.strokeSubtle,
+                depthAccent: accent.secondary.opacity(0.12),
+                statusClear: semanticColors.confidenceHigh,
+                statusSteady: semanticColors.focus,
+                statusTight: colors.warning,
+                statusFragile: semanticColors.recovery,
+                statusAtRisk: semanticColors.risk,
+                statusRecovered: semanticColors.recovery,
+                statusProtected: semanticColors.protected,
+                trustBadgeSurface: semanticColors.trust.opacity(0.12)
             )
         }
     }

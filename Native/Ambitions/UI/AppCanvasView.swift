@@ -12,7 +12,7 @@ struct AppCanvasView<Content: View>: View {
 
     var body: some View {
         ZStack {
-            theme.surfaces.canvasGradient
+            theme.shell.canvasGradient
                 .ignoresSafeArea()
 
             content
