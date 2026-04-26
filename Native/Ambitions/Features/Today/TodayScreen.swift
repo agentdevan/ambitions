@@ -39,7 +39,7 @@ struct TodayScreen: View {
                         )
                         .transition(.ambitionPanel)
                     case let .loaded(experience):
-                        TodayHeroCard(hero: experience.hero, onAction: handleAction)
+                        TodayExecutionHeroPanel(state: experience.execution, onAction: handleAction)
 
                         if experience.mode == .empty {
                             DegradedStateCard(
@@ -65,8 +65,8 @@ struct TodayScreen: View {
                                 .transition(.ambitionPanel)
                         }
 
-                        TodaySupportCard(support: experience.support, onAction: handleAction)
-                        TodayLowerLaneCard(support: experience.support, onAction: handleAction)
+                        TodayExecutionSupportPanels(state: experience.execution, onAction: handleAction)
+                        TodayExecutionDeepDive(state: experience.execution, onAction: handleAction)
                     }
                 }
                 .padding(.horizontal, theme.spacing.lg)

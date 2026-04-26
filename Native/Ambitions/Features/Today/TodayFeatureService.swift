@@ -115,6 +115,7 @@ private extension RepositoryBackedTodayService {
         let evidence: [ProgressEvidence]
         let feedback: [GoalFeedbackEvent]
         let captures: [Capture]
+        let eventLedger: [EventLedgerEntry]
         let appState: AppStateSnapshot
     }
 
@@ -124,6 +125,7 @@ private extension RepositoryBackedTodayService {
         async let evidence = repositories.evidence.listEvidence(goalID: nil)
         async let feedback = repositories.feedback.listEvents(goalID: nil)
         async let captures = repositories.captures.listCaptures()
+        async let eventLedger = repositories.eventLedger.fetchRecent(limit: 20)
         async let appState = repositories.appState.loadState()
 
         return try await Snapshot(
@@ -132,6 +134,7 @@ private extension RepositoryBackedTodayService {
             evidence: evidence,
             feedback: feedback,
             captures: captures,
+            eventLedger: eventLedger,
             appState: appState
         )
     }
@@ -260,33 +263,222 @@ private extension RepositoryBackedTodayService {
             actionableCount: actionableSteps.count
         )
 
+        let hero = makeHero(
+            header: header,
+            ritual: ritual,
+            focus: focus,
+            dailyTargets: dailyTargets,
+            freeTime: freeTime,
+            milestone: milestone,
+            posture: posture,
+            entryContext: entryContext
+        )
+        let support = makeSupportLayer(
+            now: now,
+            posture: posture,
+            entryContext: entryContext,
+            focus: focus,
+            dailyTargets: dailyTargets,
+            freeTime: freeTime,
+            milestone: milestone,
+            momentum: momentum,
+            quickCapture: quickCapture,
+            reflection: reflection,
+            completedToday: completedToday,
+            shellSummary: focus.shellSummary ?? milestone.shellSummary
+        )
+        let execution = makeExecutionViewState(
+            mode: mode,
+            snapshot: snapshot,
+            activeGoals: activeGoals,
+            hero: hero,
+            support: support,
+            now: now,
+            entryContext: entryContext
+        )
+
         return TodayExperience(
             mode: mode,
-            hero: makeHero(
-                header: header,
-                ritual: ritual,
-                focus: focus,
-                dailyTargets: dailyTargets,
-                freeTime: freeTime,
-                milestone: milestone,
-                posture: posture,
-                entryContext: entryContext
-            ),
-            support: makeSupportLayer(
+            hero: hero,
+            support: support,
+            execution: execution
+        )
+    }
+
+    func makeExecutionViewState(
+        mode: TodayExperienceMode,
+        snapshot: Snapshot,
+        activeGoals: [Goal],
+        hero: TodayHeroState,
+        support: TodaySupportLayerState,
+        now: Date,
+        entryContext: TodayEntryContext
+    ) -> TodayExecutionViewState {
+        let activeLens = activeContextLens(entryContext: entryContext, goals: activeGoals, captures: snapshot.captures)
+        let reality = makeRealitySnapshot(now: now, lens: activeLens, goals: activeGoals, captures: snapshot.captures)
+        let believabilityProjector = GoalBelievabilityProjector()
+        let goalAssessments = activeGoals.flatMap { goal in
+            goalBelievabilityInputs(goal: goal, reality: reality, now: now, activeLens: activeLens, eventLedger: snapshot.eventLedger).map {
+                believabilityProjector.assess($0)
+            }
+        }
+        let captureAssessments = snapshot.captures.prefix(8).map { capture in
+            believabilityProjector.assess(
+                GoalBelievabilityInput(
+                    subjectKind: .captureCommitment,
+                    capture: capture,
+                    planID: capture.route == .planSeed ? "plan.today" : nil,
+                    generatedAt: now,
+                    activeContextLens: activeLens,
+                    realitySnapshot: reality,
+                    eventLedgerEntries: snapshot.eventLedger
+                )
+            )
+        }
+        let believability = goalAssessments + captureAssessments
+        let believabilityExplanations = believability.prefix(6).map {
+            believabilityProjector.makeExplanation(for: $0, type: .whyPrioritized)
+        }
+        let nowState = CanonicalNowStateProjector(selector: selector).project(
+            input: NowStateProjectionInput(
                 now: now,
-                posture: posture,
-                entryContext: entryContext,
-                focus: focus,
-                dailyTargets: dailyTargets,
-                freeTime: freeTime,
-                milestone: milestone,
-                momentum: momentum,
-                quickCapture: quickCapture,
-                reflection: reflection,
-                completedToday: completedToday,
-                shellSummary: focus.shellSummary ?? milestone.shellSummary
+                activeContextLens: activeLens,
+                lensSource: entryContext == .recovery ? .recovery : .domain,
+                goals: snapshot.goals,
+                captures: snapshot.captures,
+                progressEvidence: snapshot.evidence,
+                feedbackEvents: snapshot.feedback,
+                eventLedgerEntries: snapshot.eventLedger,
+                recommendationExplanations: believabilityExplanations
             )
         )
+        let resilienceProjector = ExecutionResilienceProjector()
+        let resilience = resilienceProjector.assess(
+            ExecutionResilienceInput(
+                generatedAt: now,
+                activeContextLens: activeLens,
+                believabilityAssessments: believability,
+                realitySnapshot: reality,
+                nowState: nowState,
+                captures: snapshot.captures,
+                eventLedgerEntries: snapshot.eventLedger,
+                recommendationExplanations: believabilityExplanations,
+                planID: "plan.today"
+            )
+        )
+        let recoveryExplanation = resilienceProjector.makeExplanation(
+            for: resilience,
+            option: resilience.recommendedRecoveryOption,
+            type: resilience.status == .stable ? .whyNow : .whyRecovered
+        )
+        return TodayExecutionProjector().project(
+            TodayExecutionProjectionInput(
+                mode: mode,
+                legacyHero: hero,
+                legacySupport: support,
+                nowState: nowState,
+                realitySnapshot: reality,
+                believabilityAssessments: believability,
+                resilienceAssessment: resilience,
+                explanations: believabilityExplanations + [recoveryExplanation],
+                captures: snapshot.captures
+            )
+        )
+    }
+
+    func activeContextLens(entryContext: TodayEntryContext, goals: [Goal], captures: [Capture]) -> NowContextLens {
+        switch entryContext {
+        case .recovery:
+            return .recovery
+        case .focus:
+            return .deepFocus
+        case .standard:
+            break
+        }
+        if let captureLens = captures.compactMap(\.contextLensHint).first {
+            return captureLens
+        }
+        let goalLenses = goals.compactMap { goal -> NowContextLens? in
+            guard let domain = goal.lifeGraph?.domains.first?.domain else { return nil }
+            switch domain {
+            case .career, .education:
+                return .work
+            case .finance, .home:
+                return .admin
+            case .creativity:
+                return .creative
+            case .health:
+                return .recovery
+            case .relationships, .personalGrowth:
+                return .personal
+            }
+        }
+        return goalLenses.first ?? .all
+    }
+
+    func makeRealitySnapshot(now: Date, lens: NowContextLens, goals: [Goal], captures: [Capture]) -> RealitySnapshot {
+        let horizon = DateInterval(start: now, end: now.addingTimeInterval(24 * 60 * 60))
+        let deadlineHints = deadlineDates(goals: goals, captures: captures)
+        return RealityModelProjector().project(
+            input: RealityProjectionInput(
+                now: now,
+                horizon: horizon,
+                activeContextLens: lens,
+                deadlineHints: deadlineHints,
+                minimumWindowMinutes: 30
+            )
+        )
+    }
+
+    func goalBelievabilityInputs(
+        goal: Goal,
+        reality: RealitySnapshot,
+        now: Date,
+        activeLens: NowContextLens,
+        eventLedger: [EventLedgerEntry]
+    ) -> [GoalBelievabilityInput] {
+        let steps = goal.plan?.sections.flatMap(\.steps).filter { $0.state != .completed && $0.state != .cancelled } ?? []
+        let selectedSteps = steps.isEmpty ? [nil] : Array(steps.prefix(2).map(Optional.some))
+        return selectedSteps.map { step in
+            GoalBelievabilityInput(
+                subjectKind: step == nil ? .goal : .goalNextAction,
+                goal: goal,
+                step: step,
+                planID: goal.plan?.id,
+                generatedAt: now,
+                activeContextLens: activeLens,
+                realitySnapshot: reality,
+                eventLedgerEntries: eventLedger
+            )
+        }
+    }
+
+    func deadlineDates(goals: [Goal], captures: [Capture]) -> [Date] {
+        let goalDates = goals.flatMap { goal -> [Date] in
+            let goalDate = date(from: goal.timing.dueAt ?? goal.timing.targetBy ?? goal.timing.windowEnd)
+            let stepDates = goal.plan?.sections.flatMap(\.steps).compactMap { step in
+                date(from: step.timing.dueAt ?? step.timing.targetBy ?? step.timing.windowEnd)
+            } ?? []
+            return [goalDate].compactMap { $0 } + stepDates
+        }
+        let captureDates = captures.compactMap { capture -> Date? in
+            guard capture.deadlineKind == .hard || capture.priorityHints.deadline == .high || capture.priorityHints.deadline == .critical else {
+                return nil
+            }
+            return date(from: capture.revisitAfter)
+        }
+        return goalDates + captureDates
+    }
+
+    func date(from value: String?) -> Date? {
+        guard let value else { return nil }
+        if let full = DomainTimestamp.date(from: value) { return full }
+        let formatter = DateFormatter()
+        formatter.calendar = Calendar(identifier: .gregorian)
+        formatter.locale = Locale(identifier: "en_US_POSIX")
+        formatter.timeZone = TimeZone(secondsFromGMT: 0)
+        formatter.dateFormat = "yyyy-MM-dd"
+        return formatter.date(from: value)
     }
 
     func dayPosture(
@@ -1403,7 +1595,10 @@ private extension RepositoryBackedTodayService {
                 CreateCaptureRequest(
                     rawText: "Quick log for \"\(selectedStep.title)\".",
                     sourceType: .todayQuickCapture,
-                    linkedGoalID: goalID
+                    linkedGoalID: goalID,
+                    kind: .goalSupportingTask,
+                    route: .captureInbox,
+                    goalRelationship: CaptureGoalRelationship(goalID: goalID, relationshipKind: .nextAction)
                 ),
                 now: now
             )
@@ -1431,23 +1626,10 @@ private extension RepositoryBackedTodayService {
                 state: .success
             )
         case .createCalendarEvent:
-            let selection = nextStepSchedulingSelection(goal: goal, step: selectedStep)
-            let authorization = await calendarRemindersService.authorizationState(for: .calendarEvents)
-            guard authorization.canWrite else {
-                message = TodayInlineMessage(
-                    title: "Use Plan for Calendar access",
-                    body: "Plan works without Calendar. To add calendar-aware blocks, open Plan and choose Make Plan calendar-aware first.",
-                    state: .warning
-                )
-                break
-            }
-
-            let conflictReport = await calendarRemindersService.detectConflicts(for: selection, durationMinutes: 45, now: now)
-            let event = try await calendarRemindersService.createCalendarEvent(for: selection, durationMinutes: 45, now: now)
             message = TodayInlineMessage(
-                title: "Calendar event created",
-                body: calendarEventMessageBody(for: event.title, report: conflictReport),
-                state: .success
+                title: "Use Plan for Calendar access",
+                body: "Today will not request Calendar permission or write calendar blocks. Open Plan to make planning calendar-aware from there.",
+                state: .warning
             )
         case .split:
             let decision = rescheduleDecision(for: action.kind, goal: goal, step: selectedStep, history: events, now: now)

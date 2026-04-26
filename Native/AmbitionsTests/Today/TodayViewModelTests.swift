@@ -1,6 +1,6 @@
+@testable import Ambitions
 import Foundation
 import XCTest
-@testable import Ambitions
 
 final class TodayViewModelTests: XCTestCase {
     func testRepositoryBackedServiceUsesNeutralGreetingForBlankName() async throws {
@@ -44,6 +44,159 @@ final class TodayViewModelTests: XCTestCase {
         XCTAssertTrue(experience.hero.truth.contextPills.contains(where: { $0.title.contains("1 active goal") }))
         XCTAssertFalse(experience.support.timeAperture.windows.isEmpty)
         XCTAssertNil(experience.support.recoveryBloom)
+    }
+
+    func testToday2StableHeroShowsContextLensBestMoveExplanationAndCommands() async throws {
+        let repositories = try await makeRepositories()
+        let service = RepositoryBackedTodayService(repositories: repositories)
+        let now = try XCTUnwrap(DomainTimestamp.date(from: "2026-04-15T12:00:00Z"))
+        let goal = makeGoal(
+            id: "goal-work",
+            stepID: "step-work",
+            stepTitle: "Send the client spreadsheet",
+            dueAt: "2026-04-15T20:00:00Z",
+            domain: .career
+        )
+        try await repositories.goals.saveGoals([goal])
+
+        let experience = try await service.loadTodayExperience(userDisplayName: "", now: now)
+
+        XCTAssertEqual(experience.execution.hero.kind, .nextAction)
+        XCTAssertEqual(experience.execution.activeLens.title, "Work")
+        XCTAssertEqual(experience.execution.hero.smallestUsefulNextStep, "Send the client spreadsheet")
+        XCTAssertEqual(experience.execution.protectedMustDo.title, "Protect this")
+        XCTAssertEqual(experience.execution.bestNextMove.subtitle, "Send the client spreadsheet")
+        XCTAssertEqual(experience.execution.notToday.title, "Not today")
+        XCTAssertEqual(experience.execution.recoveryFallback.title, "Fallback")
+        XCTAssertEqual(experience.execution.whyThisMatters.title, "Why this matters")
+        XCTAssertEqual(experience.execution.actionClosureEntry.value, "Entry only")
+        XCTAssertEqual(experience.execution.dayState, .steady)
+        XCTAssertEqual(experience.execution.frictionSignal.kind, .friction)
+        XCTAssertEqual(experience.execution.supportingPanels.count, 2)
+        XCTAssertNotNil(experience.execution.hero.explanation)
+        XCTAssertNotNil(experience.execution.saveTheDayAction)
+        XCTAssertTrue(experience.execution.commandMappings.contains { $0.actionKind == .startFocus && $0.commandKind == .startFocus })
+        XCTAssertTrue(experience.execution.commandMappings.contains { $0.actionKind == .askWhyThisMatters && $0.commandKind == .askWhy })
+    }
+
+    func testToday2RecoveryHeroProtectsHighConsequenceDeadlineAndDefersPassiveWork() async throws {
+        let repositories = try await makeRepositories()
+        let service = RepositoryBackedTodayService(repositories: repositories)
+        let now = try XCTUnwrap(DomainTimestamp.date(from: "2026-04-15T12:00:00Z"))
+        let crib = makeGoal(
+            id: "goal-crib",
+            stepID: "step-crib",
+            stepTitle: "Build the baby crib",
+            dueAt: "2026-04-15T14:00:00Z",
+            domain: .home
+        )
+        let piano = makeGoal(
+            id: "goal-piano",
+            stepID: "step-piano",
+            stepTitle: "Practice piano",
+            dueAt: "2026-06-01T12:00:00Z",
+            state: .paused,
+            mode: .learning,
+            domain: .creativity
+        )
+        let skipped = EventLedgerEntry(
+            id: "ledger-skipped",
+            kind: .actionSkipped,
+            occurredAt: DomainTimestamp.string(from: now),
+            source: .today,
+            goalID: crib.id,
+            title: "Skipped"
+        )
+        try await repositories.goals.saveGoals([piano, crib])
+        try await repositories.eventLedger.append(skipped)
+
+        let experience = try await service.loadTodayExperience(userDisplayName: "", now: now)
+
+        XCTAssertEqual(experience.execution.hero.kind, .recovery)
+        XCTAssertEqual(experience.execution.recoveryFallback.value, "Recovery ready")
+        XCTAssertEqual(experience.execution.notToday.value, "Parked")
+        XCTAssertEqual(experience.execution.frictionSignal.value, "Needs recovery")
+        XCTAssertEqual(experience.execution.saveTheDayAction?.title, "Save the day")
+        XCTAssertTrue(experience.execution.deeperSections.flatMap(\.rows).contains { $0.title == "Protected" })
+        XCTAssertTrue(experience.execution.deeperSections.flatMap(\.rows).contains { $0.title == "Can move slowly" })
+        XCTAssertFalse(experience.execution.supportingPanels.contains { $0.value.localizedCaseInsensitiveContains("piano") })
+    }
+
+    func testToday2OutsideLensAndWaitingStaySummarized() async throws {
+        let repositories = try await makeRepositories()
+        let service = RepositoryBackedTodayService(repositories: repositories)
+        let now = try XCTUnwrap(DomainTimestamp.date(from: "2026-04-15T12:00:00Z"))
+        let personal = makeGoal(
+            id: "goal-personal",
+            stepID: "step-personal",
+            stepTitle: "Clean personal notes",
+            dueAt: "2026-04-30T12:00:00Z",
+            domain: .personalGrowth
+        )
+        let work = makeGoal(
+            id: "goal-work",
+            stepID: "step-work",
+            stepTitle: "Send the client sheet",
+            dueAt: "2026-04-15T13:00:00Z",
+            domain: .career
+        )
+        let waiting = Capture(
+            id: "capture-waiting",
+            createdAt: DomainTimestamp.string(from: now),
+            updatedAt: DomainTimestamp.string(from: now),
+            rawText: "Waiting on Kaylee",
+            sourceType: .todayQuickCapture,
+            status: .waiting,
+            linkedGoalID: nil,
+            kind: .waitingItem,
+            route: .waiting,
+            triageStatus: .waiting,
+            commitmentKind: .waiting,
+            contextLensHint: .personal
+        )
+        try await repositories.goals.saveGoals([personal, work])
+        try await repositories.captures.saveCaptures([waiting])
+
+        let experience = try await service.loadTodayExperience(userDisplayName: "", now: now)
+
+        XCTAssertEqual(experience.execution.activeLens.title, "Personal")
+        XCTAssertTrue(experience.execution.supportingPanels.contains { $0.kind == .contextLens && $0.value == "1 item" })
+        XCTAssertTrue(experience.execution.deeperSections.flatMap(\.rows).contains { $0.kind == .waiting && $0.value.contains("waiting") })
+    }
+
+    func testToday2CaptureUrgencyAndPlanGuidanceStayRouteOnly() async throws {
+        let repositories = try await makeRepositories()
+        let service = RepositoryBackedTodayService(repositories: repositories)
+        let now = try XCTUnwrap(DomainTimestamp.date(from: "2026-04-15T12:00:00Z"))
+        try await repositories.captures.saveCaptures([
+            Capture(id: "capture-1", createdAt: DomainTimestamp.string(from: now), updatedAt: DomainTimestamp.string(from: now), rawText: "Create spreadsheet and send it to Kaylee by EOD Tuesday", sourceType: .todayQuickCapture, status: .actionable, linkedGoalID: nil, kind: .oneTimeCommitment, route: .planSeed, triageStatus: .assumedRoute, commitmentKind: .oneTime, deadlineText: "EOD Tuesday", deadlineKind: .hard, contextLensHint: .work),
+            Capture(id: "capture-2", createdAt: DomainTimestamp.string(from: now), updatedAt: DomainTimestamp.string(from: now), rawText: "Book dentist", sourceType: .todayQuickCapture, status: .actionable, linkedGoalID: nil),
+        ])
+
+        let experience = try await service.loadTodayExperience(userDisplayName: "", now: now)
+        let capturePanel = try XCTUnwrap(experience.execution.supportingPanels.first { $0.kind == .capture })
+
+        XCTAssertNotEqual(capturePanel.value, "No pressure")
+        XCTAssertFalse(experience.execution.planRequestsCalendarPermission)
+        XCTAssertTrue(experience.execution.commandMappings.contains { $0.actionKind == .openPlan && $0.destination == .plan })
+    }
+
+    func testToday2EmptyStateDoesNotBecomeBlankDashboard() async throws {
+        let repositories = try await makeRepositories()
+        let service = RepositoryBackedTodayService(repositories: repositories)
+        let now = try XCTUnwrap(DomainTimestamp.date(from: "2026-04-15T12:00:00Z"))
+
+        let experience = try await service.loadTodayExperience(userDisplayName: "", now: now)
+
+        XCTAssertEqual(experience.mode, .empty)
+        XCTAssertEqual(experience.execution.hero.kind, .empty)
+        XCTAssertEqual(experience.execution.protectedMustDo.value, "No must-do yet")
+        XCTAssertEqual(experience.execution.notToday.value, "Nothing heavy")
+        XCTAssertEqual(experience.execution.actionClosureEntry.value, "Entry only")
+        XCTAssertNil(experience.execution.saveTheDayAction)
+        XCTAssertNotNil(experience.execution.emptyGuidance)
+        XCTAssertFalse(experience.execution.supportingPanels.isEmpty)
+        XCTAssertFalse(experience.execution.planRequestsCalendarPermission)
     }
 
     func testRepositoryBackedServiceCanSurfaceSharedResponsibilityRitualThesis() async throws {
@@ -202,6 +355,9 @@ private extension TodayViewModelTests {
         stepID: String,
         stepTitle: String,
         dueAt: String,
+        state: GoalLifecycleState = .active,
+        mode: GoalMode = .project,
+        domain: LifeDomainKey? = nil,
         stepState: StepLifecycleState = .planned,
         dependencyStepIDs: [String] = []
     ) -> Goal {
@@ -211,7 +367,28 @@ private extension TodayViewModelTests {
         let progress = ProgressStrategy(metricKind: .stepCompletion, rollupMethod: .ratio, targetStepCount: nil, targetEvidenceCount: nil, targetMinutes: nil, supportsUntimedProgress: true, countsChildGoals: false, countsSupportGoals: false)
         let step = Step(id: stepID, sectionID: "section-\(id)", title: stepTitle, summary: nil, type: .actionUnit, state: stepState, owner: actor, timing: timing, dependencyStepIDs: dependencyStepIDs, isOptional: false, isRepeatable: false, evidenceRequired: true, successSignals: ["Done"], actionability: StepActionability(action: "Do it", completionDefinition: "Done", evidenceOfCompletion: ["Done"], fallbackMicroStep: "Start", contextRequirements: []))
         let plan = GoalPlan(id: "plan-\(id)", goalID: id, version: goalEnginePlanVersion, generatedAt: "2026-04-15T12:00:00Z", summary: nil, strategy: strategy, sections: [PlanSection(id: "section-\(id)", goalID: id, title: "Active", summary: nil, kind: .activeSteps, orderIndex: 0, steps: [step])], assumptions: [], lint: PlanLintResult(goalID: id, planVersion: goalEnginePlanVersion, isValid: true, issueCount: 0, issues: []))
-        return Goal(schemaVersion: goalEngineSchemaVersion, id: id, revision: 1, createdAt: "2026-04-15T12:00:00Z", updatedAt: "2026-04-15T12:00:00Z", state: .active, title: id, summary: nil, mode: .project, relationshipKind: .independent, actor: actor, parentGoalID: nil, childGoalIDs: [], supportGoalIDs: [], tags: [], timing: timing, planningStrategy: strategy, progressStrategy: progress, plan: plan)
+        return Goal(
+            schemaVersion: goalEngineSchemaVersion,
+            id: id,
+            revision: 1,
+            createdAt: "2026-04-15T12:00:00Z",
+            updatedAt: "2026-04-15T12:00:00Z",
+            state: state,
+            title: id,
+            summary: nil,
+            mode: mode,
+            relationshipKind: .independent,
+            actor: actor,
+            parentGoalID: nil,
+            childGoalIDs: [],
+            supportGoalIDs: [],
+            tags: [],
+            timing: timing,
+            planningStrategy: strategy,
+            progressStrategy: progress,
+            plan: plan,
+            lifeGraph: domain.map { LifeGraphContext(domains: [LifeDomainAssignment(domain: $0)]) }
+        )
     }
 }
 
@@ -245,7 +422,9 @@ private actor RecordingTodayService: TodayServicing {
 
 private struct FailingTodayService: TodayServicing {
     struct Failure: LocalizedError {
-        var errorDescription: String? { "Today failed on purpose." }
+        var errorDescription: String? {
+            "Today failed on purpose."
+        }
     }
 
     func loadTodayExperience(userDisplayName: String, now: Date, entryContext: TodayEntryContext) async throws -> TodayExperience {
