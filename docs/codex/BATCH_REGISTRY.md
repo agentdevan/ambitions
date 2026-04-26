@@ -12,6 +12,7 @@ It does not replace the higher-level vision or dependency order. For Ambitions 2
 - [../canon/Ambitions_2_0_Visual_System.md](../canon/Ambitions_2_0_Visual_System.md)
 - [../canon/Ambitions_2_0_Roadmap.md](../canon/Ambitions_2_0_Roadmap.md)
 - [../canon/Ambitions_2_0_Batch_Plan.md](../canon/Ambitions_2_0_Batch_Plan.md)
+- [../canon/Ambitions_2_0_RC_Maturity_Plan.md](../canon/Ambitions_2_0_RC_Maturity_Plan.md)
 - [../canon/Ambitions_2_0_Accessibility_Nutrition.md](../canon/Ambitions_2_0_Accessibility_Nutrition.md)
 - [../canon/Ambitions_2_0_Decision_Log.md](../canon/Ambitions_2_0_Decision_Log.md)
 - [../canon/Ambitions_2_0_Capability_Matrix.md](../canon/Ambitions_2_0_Capability_Matrix.md)
@@ -42,7 +43,7 @@ Use [../canon/Ambitions_2_0_Batch_Plan.md](../canon/Ambitions_2_0_Batch_Plan.md)
 
 ## Active Queue
 
-Current wave status: Ambitions 2.0 post-Batch-60 canon is adopted. Batches 61-72 are complete for planning purposes; Batches 73-89 remain queued. Batch 73 is not closed out by the roadmap/canon amendment.
+Current wave status: Ambitions 2.0 post-Batch-60 canon is adopted. Batches 61-72 are complete for planning purposes; Batches 73-120 remain queued. Batch 73 is not closed out by the roadmap/canon amendment.
 
 | Batch | Name | Status | Notes |
 | --- | --- | --- | --- |
@@ -105,23 +106,54 @@ These rows are the active planning state for the new post-Batch-60 Ambitions 2.0
 | 70 | Reality Model and Calendar Read/Write | Completed | Reality Model domain contracts, deterministic no-permission/calendar-aware projection, Plan-owned calendar read permission hook, local-only derived busy/open-window support, confirmed calendar block-write boundary, Event Ledger/explanation/Now/Command integration, and focused tests landed without Plan 2.0 UI, automatic scheduling, Today/Goals/Capture/You redesign, sync/export, widgets, Live Activities, App Intents productization, Path Intelligence UI, onboarding, or Reviews. |
 | 71 | Believability, Capacity, and Goal Health | Completed | Shared deterministic believability/goal-health taxonomy, assessment models, capacity/deadline/context/priority reality projector, Capture/Goal/Plan-seed assessment support, explanation generation, Event Ledger reference safety, and side-effect-free Now/Command adapters landed without Goals 2.0, Goal Detail 2.0, Plan 2.0, Today 2.0, automatic scheduling, calendar writes, calendar permission prompts, full recovery, widgets, App Intents productization, sync/export, Path Intelligence UI, onboarding, or Reviews. |
 | 72 | Execution Resilience Stack | Completed | Shared Execution Resilience domain model, deterministic projector/service, disruption/recovery taxonomy, protected/displaced/passive/waiting summaries, explanation generation, Now helper projection, and representational command mapping landed without Today 2.0, Plan 2.0, Goals/Goal Detail 2.0, Reviews, automatic scheduling, calendar writes, calendar permission prompts, widgets, Live Activities, App Intents productization, sync/export, Path Intelligence UI, onboarding, or You/Profile redesign. |
-| 73 | Today 2.0 / Daily Operating Contract | Queued | Roadmap/canon amendment renamed the queued batch; do not close out until implemented and validated. |
-| 74 | Global Shell Chrome and Visual Alignment | Queued | New dedicated future chrome/header/tab visual alignment batch; do not start until Batch 73 is ready for handoff. |
-| 75 | Life Graph v1 and Object Relationships | Queued | Future foundation batch; do not start until prior dependencies are complete. |
-| 76 | Action Closure and Receipt System | Queued | Future foundation batch; do not start until prior dependencies are complete. |
-| 77 | Goals and Goal Detail 2.0 | Queued | Future surface batch; consumes global chrome, Life Graph, and Action Closure foundations. |
-| 78 | Plan 2.0 and Reality Reflow | Queued | Future surface/system batch; preserves Plan-owned calendar permission and no silent rescheduling. |
-| 79 | You 2.0, Personal Operating Constitution, and Trust Center | Queued | Future trust/control batch; do not claim sync/accessibility verification before owning batches. |
-| 80 | Reviews and Review Constellation | Queued | Future review batch; no restored top-level Insights tab. |
-| 81 | Sync / Export / Import Trust | Queued | Future trust/continuity batch; no unverified sync claims. |
-| 82 | App Intents and Shared Container | Queued | Future external action batch; must consume shared commands, receipts, and external continuity contract. |
-| 83 | Widgets and Live Activity v1 | Queued | Future external surface batch; do not start until Now State, Command Pipeline, and App Intents/shared-container boundaries are stable. |
-| 84 | Path Intelligence Foundation | Queued | Future Life Path Simulation contract batch; no Path Builder UI yet. |
-| 85 | Path Builder / Life Path Simulation UI | Queued | Future UI batch over Batch 84 contracts. |
-| 86 | Learning and Anticipation | Queued | Future learning batch; evidence-derived and correction-aware only. |
-| 87 | Onboarding, Empty States, and Returning User Continuity | Queued | Future continuity batch; no false education for unimplemented systems. |
-| 88 | Accessibility Verification and User-Facing Nutrition Facts | Queued | Future verification batch; publish user-facing claims only after evidence. |
-| 89 | Release Hardening / Indispensability QA | Queued | Final Ambitions 2.0 release hardening and indispensability QA batch. |
+| 73 | Today 2.0 / Daily Operating Contract v1 | Queued | Active next queued batch; not closed out until implemented and validated. |
+| 74 | Global Shell Chrome and Visual Alignment | Queued | Dedicated chrome/header/tab visual alignment batch; do not start until Batch 73 is ready for handoff. |
+| 75 | Activation Contract and First-Run Promise Spec | Queued | Future activation spec batch; no false education for unimplemented systems. |
+| 76 | Daily Loop Alpha QA and Performance Baseline | Queued | Dedicated daily-loop QA/performance baseline; no new feature systems. |
+| 77 | Life Graph v1 Minimal Object Relationships | Queued | Future foundation batch; do not start until prior dependencies are complete. |
+| 78 | Proof and Resource Graph v1 | Queued | Future proof/resource foundation; manual-first and no provider claims. |
+| 79 | Commitment, Waiting Room, and Promise Ledger v1 | Queued | Future commitment/waiting foundation; local/manual-first people relationships only. |
+| 80 | Action Closure and Receipt System v1 | Queued | Future receipt foundation; consumes shared commands and produces trustable results. |
+| 81 | Safe Automation Boundary and Undo Rules | Queued | Future safety/undo boundary; conservative and confirmation-first. |
+| 82 | Foundation Performance and Persistence Budget Pass | Queued | Dedicated foundation performance/persistence hardening pass. |
+| 83 | Goals 2.0 / Portfolio, Health, and Proof v1 | Queued | Future Goals surface batch; consumes global chrome, Life Graph, proof, and Action Closure foundations. |
+| 84 | Goal Detail 2.0 / Mission Control, Assumptions, Proof Rail | Queued | Future Goal Detail surface batch; no full Path Builder. |
+| 85 | Plan 2.0 / Believability Kernel and Plan Treaty | Queued | Future Plan surface/system batch; preserves Plan-owned calendar permission and no silent rescheduling. |
+| 86 | Reality Reflow v1 and Recovery Gradient | Queued | Future recovery/reflow batch; broad reflows require safe confirmation. |
+| 87 | You 2.0 / Trust Center, Constitution, Memory Controls | Queued | Future trust/control batch; do not claim sync/accessibility verification before owning batches. |
+| 88 | Reviews v1 / Recovery Review and Life OS Receipt | Queued | Future review batch; no restored top-level Insights tab. |
+| 89 | Core Surface Integration QA and Performance Pass | Queued | Dedicated core-surface integration/performance pass. |
+| 90 | Export / Import Proof and Disaster Drill | Queued | Future trust fallback batch; no fake sync claims. |
+| 91 | Apple-First Sync and Conflict Policy | Queued | Future Apple-first sync/conflict-policy batch; no required backend. |
+| 92 | App Intents and Shared Container Receipts | Queued | Future external action batch; must consume shared commands, receipts, and external continuity contract. |
+| 93 | Widgets and Live Activity Ambient Continuity | Queued | Future external surface batch; lightweight snapshots only. |
+| 94 | External Surface Platform Verification and Performance Pass | Queued | Dedicated external proof/performance pass before production-ready claims. |
+| 95 | Path Intelligence Foundation / Life Path Simulation | Queued | Future Life Path Simulation contract batch; no Path Builder UI yet. |
+| 96 | Domain Path Packs and Path Fork Simulator | Queued | Future path pack/fork foundation; broad coherent families only. |
+| 97 | Path Builder UI / Long-Range Roadmap v1 | Queued | Future UI batch over path contracts. |
+| 98 | Learning and Anticipation v1 | Queued | Future learning batch; evidence-derived and user-confirmed only. |
+| 99 | Memory Confidence, Correction Cards, and Narrative Memory Map | Queued | Future memory/correction surface batch; no black-box claims. |
+| 100 | Strategy / Learning Integration QA and Performance Pass | Queued | Dedicated strategy/learning integration and performance pass. |
+| 101 | Life Graph Mature Relationship Audit | Queued | Future RC maturity audit. |
+| 102 | Action Closure Mature Receipt / Undo / Trust Audit | Queued | Future RC maturity audit. |
+| 103 | Proof-Weighted Progress and Momentum Integrity Maturity | Queued | Future RC maturity audit. |
+| 104 | Commitments, Waiting, Promise Ledger, and Social Load Maturity | Queued | Future RC maturity audit. |
+| 105 | Believability Kernel, Constraint Gravity, and Plan Treaty Maturity | Queued | Future RC maturity audit. |
+| 106 | Reality Reflow, Recovery Gradient, and Save the Day Maturity | Queued | Future RC maturity audit. |
+| 107 | Ambition Portfolio Manager, Goal Weather, and Goal Scope Maturity | Queued | Future RC maturity audit. |
+| 108 | Personal Operating Constitution and Calm Intervention Maturity | Queued | Future RC maturity audit. |
+| 109 | Reviews, Life OS Receipt, and Narrative Memory Maturity | Queued | Future RC maturity audit. |
+| 110 | Path Forks, Future Self Simulation, and Domain Pack Maturity | Queued | Future RC maturity audit. |
+| 111 | Cross-Surface Continuity and Mode Lens Maturity | Queued | Future RC maturity audit. |
+| 112 | Mature Invention Performance Pass | Queued | Dedicated mature-invention performance pass. |
+| 113 | Onboarding, Empty States, and Returning User Continuity | Queued | Future continuity batch after mature systems exist. |
+| 114 | Representative Scenario Fixtures and Indispensability QA v1 | Queued | Future scenario validation batch. |
+| 115 | Accessibility Verification and User-Facing Nutrition Facts | Queued | Future verification batch; publish user-facing claims only after evidence. |
+| 116 | Visual Polish, Appearance Studio, and Shell Regression | Queued | Future visual/shell regression batch; no tab IA drift. |
+| 117 | Offline, Data Safety, Migration, and Reliability Hardening | Queued | Future data/reliability hardening batch. |
+| 118 | Final Performance, Memory, and Responsiveness Pass | Queued | Final performance pass before RC audit. |
+| 119 | Ambitions 2.0 RC Audit | Queued | Future RC blocker/deferral audit. |
+| 120 | Ambitions 2.0 Release Candidate Lock | Queued | Future RC lock only after validation evidence supports it. |
 
 ## Completed Historical Front-End Transformation Program
 

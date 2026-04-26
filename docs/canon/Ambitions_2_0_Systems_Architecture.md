@@ -17,6 +17,24 @@ Ambitions 2.0 systems should be clustered into a small set of product layers ins
 
 Each layer must stay local-first, explainable, correction-aware, and conservative about automation.
 
+Future implementation must follow the maturity gates in [Ambitions_2_0_RC_Maturity_Plan.md](Ambitions_2_0_RC_Maturity_Plan.md). Foundations are not enough for RC: each major system needs a first useful surface, cross-surface integration, trust/correction/degraded behavior, performance/accessibility proof, and RC verification before release-candidate lock.
+
+## Source Of Truth Ownership
+
+Do not create duplicate engines when inventions overlap:
+
+- Believability Kernel owns believable / not-believable state.
+- Constraint Gravity owns dominant constraint detection.
+- Reality Reflow owns mutation suggestions.
+- Action Closure owns receipts and undo/correction presentation.
+- Trust Ledger owns user-facing trust-impacting history.
+- Event Ledger remains raw event history.
+- Proof Rail Engine owns proof organization and presentation.
+- Memory Confidence Engine owns confidence state of learned memories.
+- Safe Automation Boundary owns what Ambitions may suggest, prepare, confirm, execute, or never automate.
+- Ambition Portfolio Manager owns portfolio-level goal pressure.
+- Goal Scope Governor owns scope expansion, shrink, park, and protect logic.
+
 ## Life Graph / Relationship Layer
 
 - Purpose: First-class object graph for goals, milestones, actions, blockers, people, commitments, waiting items, resources, evidence, windows, constraints, decisions, memories, corrections, and receipts.

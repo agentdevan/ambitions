@@ -137,6 +137,8 @@ Rules:
 - Appearance Studio must remain able to influence shell and panel tokens safely
 - light mode must retain the same hierarchy and interaction logic
 - Dynamic Type, VoiceOver, Reduce Motion, contrast, tap targets, and non-color distinguishability must be verified before claims
+- rich shell effects must avoid excessive blur stacking, expensive scroll-tied animations, and repeated calculations that should come from shared projections
+- widgets, Live Activities, and other external surfaces must use lightweight snapshots rather than heavy live computation
 
 ## Mode Lens Rules
 
@@ -321,6 +323,6 @@ Semantic state must use text and icon support in addition to color. Batch 63 inc
 
 Batch 64 adds the internal Accessibility Nutrition checklist model in `Sources/Accessibility/AccessibilityNutrition.swift`. Future surface batches should use the checklist categories when recording audits for screens, sheets, rich panels, widgets, and external entry points.
 
-Rich panels may expose accessibility verification readiness through semantic state, text, icon, label, value, and hint support. They must not present verified accessibility support to users until a screen-level audit records current evidence and Batch 88 promotes the relevant claim.
+Rich panels may expose accessibility verification readiness through semantic state, text, icon, label, value, and hint support. They must not present verified accessibility support to users until a screen-level audit records current evidence and Batch 115 promotes the relevant claim.
 
-Batch 88 owns the final user-facing `You -> Accessibility` summary. It should consume verified, partially supported, unverified, and not-applicable states from the checklist/audit evidence rather than inventing new claim categories.
+Batch 115 owns the final user-facing `You -> Accessibility` summary. It should consume verified, partially supported, unverified, and not-applicable states from the checklist/audit evidence rather than inventing new claim categories.

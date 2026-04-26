@@ -44,6 +44,7 @@ This plan supersedes prior roadmap direction after Batch 60 where conflicts exis
 - Action Closure is in Ambitions 2.0 scope as a trust layer: every meaningful command must produce a visible result/receipt, explain what changed and why, offer correction, and offer undo where safely supported.
 - Reality Reflow is in Ambitions 2.0 scope as the shared plan-mutation/recovery system. It must never silently reschedule work and must preserve Plan-owned calendar permission policy.
 - The global shell/chrome is an Ambitions 2.0 product system, not incidental styling. A dedicated future batch must align the persistent app frame before later major surface redesigns consume it.
+- The remaining roadmap must mature major Ambitions 2.0 inventions before release candidate rather than stopping at v1 foundations. [Ambitions_2_0_RC_Maturity_Plan.md](Ambitions_2_0_RC_Maturity_Plan.md) owns the maturity gates, RC milestones, batch size ceiling, dependency map, performance strategy, and mature-invention coverage.
 - Accessibility Nutrition Facts are required: internal checklist first, user-facing `You -> Accessibility` summary only after verification.
 - Dedicated device runtime is an architecture guardrail only in Ambitions 2.0. Do not build active hardware/runtime surfaces unless they naturally fall out of sync, Now State, or Command Pipeline work.
 
@@ -136,6 +137,9 @@ Ambitions 2.0 includes:
 - App Intents and shared container readiness
 - simple polished Widgets and Live Activity v1 after Now State and Command Pipeline stability
 - onboarding, empty states, returning-user continuity, verification, and release hardening
+- maturity gates for every major invention: foundation, first useful surface, cross-surface integration, trust/correction/degraded state, performance/accessibility, and RC verification
+- recurring and dedicated performance passes after major feature waves
+- representative scenario validation before RC
 
 ## Path Families
 
@@ -176,6 +180,8 @@ These may remain historical or later-vision ideas, but they are not active 2.0 i
 12. Proof over theater: progress must be backed by actions, artifacts, decisions, feedback, resolved blockers, calendar completions, notes, files, links, photos, or reflections rather than fake percentages alone.
 13. Correction over black boxes: recommendations, assumptions, memory, and actions must be correctable and future behavior must learn only from evidence and user-confirmed signals.
 14. Do Less Better: Ambitions may recommend dropping, shrinking, parking, or reviewing instead of adding work.
+15. Maturity over novelty: a major invention is not release-ready until it is coherent, correctable, accessible, performant, trusted, and verified across its required surfaces.
+16. No hidden complexity: when the product becomes smarter, the user's next decision must become easier.
 
 ## Daily Continuity Loop
 

@@ -75,6 +75,8 @@ Ambitions 2.0 is organized around one daily life operating loop:
 
 Future surface work must show how it contributes to continuity, believability, proof, recovery, correction, trust, memory, focus, strategic pathing, or calmness. A batch that only polishes a tab without strengthening the loop is not enough.
 
+Future surface work must also state which maturity gate from [Ambitions_2_0_RC_Maturity_Plan.md](Ambitions_2_0_RC_Maturity_Plan.md) it advances. A surface is not release-candidate ready until it has a useful v1, cross-surface integration, trust/correction/degraded behavior, performance/accessibility proof, and representative scenario validation where relevant.
+
 ## Primary Flow: Goal -> Path -> Plan -> Today -> Action -> Recovery -> Review
 
 1. User creates or refines a goal.
@@ -145,6 +147,8 @@ The dedicated global chrome batch should establish the permanent shell, contextu
 - Proof Rail: a compact proof-artifact rail for Goal Detail, Reviews, Path Builder, and top-level Goals summaries where useful.
 - Trust Badge / Trust status: a small trust treatment for You and Trust Center, surfaced globally only when action is needed.
 
+Mode Lens changes emphasis, priority, and presentation only. It must not change object ownership, create hidden tabs, hide required actions, create separate state, duplicate navigation, or change the source of truth.
+
 ## Reviews Architecture
 
 Reviews live primarily under `You -> Reviews` with contextual entry from Today, Plan, and Goal Detail.
@@ -152,17 +156,16 @@ Reviews live primarily under `You -> Reviews` with contextual entry from Today, 
 Reviews include:
 
 - Recovery Review
-- 90-second Review
+- Daily Receipt
 - Weekly Life OS Receipt
 - Goal Review
-- Pattern Review
 - Memory Review
 - Correction Review
 - Review Constellation narrative memory
 - accessibility summary after verification
 - memory and change summaries
 
-Reviews are not generic analytics. Each review must answer what happened, what changed, what remains believable, and what action follows.
+Reviews are not generic analytics. Recovery Review should be immediate and 30-90 seconds, Weekly Life OS Receipt is the main recurring review, Goal Review is object-specific, Memory Review lives under You, and Correction Review audits wrong assumptions, never-suggest feedback, and memory corrections. Each review must answer what happened, what changed, what remains believable, and what action follows.
 
 ## Insights Demotion Architecture
 

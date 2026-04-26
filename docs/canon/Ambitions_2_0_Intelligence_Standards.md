@@ -212,6 +212,25 @@ Explanations should be able to describe:
 
 The explanation must distinguish evidence from assumption. It should prefer adult, practical language over technical model terms.
 
+## Intelligence Levels
+
+Future intelligent features should identify their intelligence level when useful:
+
+- Level 0: deterministic rules
+- Level 1: local pattern summaries
+- Level 2: user-confirmed learning
+- Level 3: optional AI-assisted drafting/explanation
+- Level 4: external knowledge/provider-backed suggestions
+- Level 5: automation with explicit confirmation only
+
+Ambitions 2.0 RC must not require external/cloud intelligence. User-confirmed learning is preferred, and manual-first fallbacks are required for external-data-shaped areas such as finance, people, resources, proof, calendar-denied planning, path packs, personal capacity, commitments, and life friction.
+
+## No-Fake-Precision Rule
+
+Use qualitative states unless there is strong evidence. This applies to believability, Goal Weather, Momentum Integrity, Path Simulation, Future Self Simulator, Proof-Weighted Progress, Daily Contract state, Ambient Status Orb, goal health, Plan believability, progress, path readiness, and memory confidence.
+
+Prefer clear, steady, tight, fragile, blocked, waiting, protected, recovered, not for today, needs proof, or needs review over precise percentages or scores that cannot be defended.
+
 ## Batch Mapping
 
 These standards must influence all future batches, especially:
@@ -225,16 +244,17 @@ These standards must influence all future batches, especially:
 - Batch 72: Execution Resilience must handle missed high-priority items, displaced lower-priority tasks, deadline compression, and too many commitments for available context/time.
 - Batch 73: Today 2.0 / Daily Operating Contract must expose the current lens, one best next move, urgent outside-lens items, one protected must-do, one intentionally-not-today item, one recovery fallback, Save the Day, Action Closure entry, and why-this-now without becoming a dashboard.
 - Batch 74: Global Shell Chrome and Visual Alignment must make Mode Lens, Continuity Ribbon, Action Closure Tray, Ambient Status Orb, Life Graph Breadcrumb, Mission Control Lanes, Anti-Plan strip, Proof Rail, and Trust Badge usable as shared shell/detail patterns without changing top-level IA.
-- Batch 75: Life Graph v1 must make goals, milestones, actions, blockers, people, commitments, resources, evidence, windows, constraints, decisions, memories, corrections, and receipts first-class relationships.
-- Batch 76: Action Closure must define receipt states, undo eligibility where safe, correction entry, why-changed linkage, safe failures, calendar/export/import/external receipts, Trust Ledger handoff, and Safe Automation Boundary v1.
-- Batch 77: Goals and Goal Detail 2.0 must support living goal containers, deliverables, scope changes, visible roadmaps, completed work, remaining work, passive/active/waiting/blocked/parked/protected/completed states, proof-weighted progress, assumptions, Mission Control lanes, and Life Graph Breadcrumb.
-- Batch 78: Plan 2.0 / Reality Reflow must show context blocks, calendar-aware fit, priority conflicts, displaced items, protected high-priority work, calmly deferred lower-priority work, Plan Treaty, Personal Capacity Envelope, Constraint Gravity, Decision Debt, Opportunity Windows, and no silent rescheduling.
-- Batch 79: You 2.0 must make Personal Operating Constitution, preferences, memory, trust, review, correction paths, Trust Center, Safe Automation Boundary, and Appearance Studio visible without becoming a junk drawer.
-- Batch 80: Reviews and Review Constellation must explain what changed, what remains believable, what was corrected, what was learned, what was protected, and what action follows without recreating a top-level Insights tab.
-- Batches 81-83: Sync/export/import, App Intents, widgets, and Live Activities must use External Continuity Contract, Action Closure receipts, stale-state truth, and no duplicate command logic.
-- Batches 84-85: Path Intelligence and Path Builder must connect long-range paths, path forks, Domain Path Packs, proof requirements, prerequisites, fallback paths, future-self simulations, and limited-time/pause scenarios to living goal containers and daily actions.
-- Batch 86: Learning and Anticipation must learn only from evidence and user-confirmed signals, expose Memory Confidence, support Correction Cards, and avoid black-box claims.
-- Batches 87-89: onboarding, accessibility verification, and release hardening must verify the operating loop, rich panels, global chrome, Appearance Studio, and indispensability scenarios truthfully.
+- Batch 77: Life Graph v1 must make goals, milestones, actions, blockers, people, commitments, waiting items, proof, resources, decisions, corrections, and receipts first-class relationships.
+- Batch 80: Action Closure must define receipt states, undo eligibility where safe, correction entry, why-changed linkage, safe failures, calendar/export/import/external receipts, and Trust Ledger handoff.
+- Batch 81: Safe Automation Boundary must define what Ambitions may suggest, prepare, confirm, execute, or never automate.
+- Batches 83-84: Goals and Goal Detail 2.0 must support living goal containers, deliverables, scope changes, visible roadmaps, completed work, remaining work, passive/active/waiting/blocked/parked/protected/completed states, proof-weighted progress, assumptions, Mission Control lanes, and Life Graph Breadcrumb.
+- Batches 85-86: Plan 2.0 / Reality Reflow must show context blocks, calendar-aware fit, priority conflicts, displaced items, protected high-priority work, calmly deferred lower-priority work, Plan Treaty, Personal Capacity Envelope, Constraint Gravity, Decision Debt, Opportunity Windows, and no silent rescheduling.
+- Batch 87: You 2.0 must make Personal Operating Constitution, preferences, memory, trust, review, correction paths, Trust Center, Safe Automation Boundary, and Appearance Studio visible without becoming a junk drawer.
+- Batch 88: Reviews must explain what changed, what remains believable, what was corrected, what was learned, what was protected, and what action follows without recreating a top-level Insights tab.
+- Batches 90-94: Sync/export/import, App Intents, widgets, and Live Activities must use External Continuity Contract, Action Closure receipts, stale-state truth, and no duplicate command logic.
+- Batches 95-97: Path Intelligence and Path Builder must connect long-range paths, path forks, Domain Path Packs, proof requirements, prerequisites, fallback paths, future-self simulations, and limited-time/pause scenarios to living goal containers and daily actions.
+- Batches 98-99: Learning and Anticipation must learn only from evidence and user-confirmed signals, expose Memory Confidence, support Correction Cards, and avoid black-box claims.
+- Batches 113-120: onboarding, accessibility verification, scenario QA, reliability, performance, RC audit, and release-candidate lock must verify the operating loop, rich panels, global chrome, Appearance Studio, and indispensability scenarios truthfully.
 
 ## Anti-Patterns
 

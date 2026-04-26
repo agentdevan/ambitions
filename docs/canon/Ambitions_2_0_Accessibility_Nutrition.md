@@ -4,7 +4,7 @@
 
 Accessibility is product trust infrastructure for Ambitions 2.0. Batch 64 establishes the internal checklist, audit model, documentation, and code-backed support needed to verify accessibility consistently before any user-facing Accessibility Nutrition Facts appear.
 
-This document is not a public claim. It is the internal source of truth for what must be checked, how claim status is recorded, and what Batch 88 must prove before `You -> Accessibility` can publish a summary.
+This document is not a public claim. It is the internal source of truth for what must be checked, how claim status is recorded, and what Batch 115 must prove before `You -> Accessibility` can publish a summary.
 
 ## Batch 64 Current Status
 
@@ -137,12 +137,12 @@ All categories default to `Unverified` until evidence promotes them. Historical 
 - Partial support must not be phrased as full support.
 - Unverified means "do not claim as shipped."
 - Not applicable must be rare and justified.
-- Release notes, App Store copy, website copy, onboarding, Profile/You copy, and support docs must not imply verified accessibility support before Batch 88 signoff.
+- Release notes, App Store copy, website copy, onboarding, Profile/You copy, and support docs must not imply verified accessibility support before Batch 115 signoff.
 - Accessibility-related rich panel states must show verified/unverified status with text or icon support, never color alone.
 
 ## User-Facing You -> Accessibility Summary Requirements
 
-The user-facing summary may appear only after Batch 88 verification.
+The user-facing summary may appear only after Batch 115 verification.
 
 It must show:
 
@@ -304,9 +304,9 @@ Before release or public Accessibility Nutrition Facts, audit:
 
 Record verified and unverified claims before release notes, App Store copy, or support docs are written.
 
-## Batch 88 Verification Handoff Criteria
+## Batch 115 Verification Handoff Criteria
 
-Batch 88 may build and publish the user-facing `You -> Accessibility` summary only when:
+Batch 115 may build and publish the user-facing `You -> Accessibility` summary only when:
 
 - the code-backed checklist still covers every required category
 - each public claim has current evidence
@@ -318,4 +318,4 @@ Batch 88 may build and publish the user-facing `You -> Accessibility` summary on
 - App Store Accessibility Nutrition Label decisions are reconciled with `docs/canon/Ambitions_Accessibility_Nutrition_Labels_Audit.md`
 - release notes and product copy avoid unsupported claims
 
-If any evidence is incomplete, Batch 88 must keep the user-facing summary conservative or defer publication.
+If any evidence is incomplete, Batch 115 must keep the user-facing summary conservative or defer publication.

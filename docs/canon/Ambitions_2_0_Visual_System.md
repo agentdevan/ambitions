@@ -63,6 +63,8 @@ Global chrome must be token-driven and centralized:
 - no generic toast spam
 - no bypass of Appearance Studio
 - no bypass of Accessibility Nutrition
+- no excessive blur stacking
+- no expensive animations on every scroll
 
 Top-level header pattern:
 
@@ -192,6 +194,21 @@ Bad richness:
 - Panels must avoid cognitive overload through too many simultaneous decisions.
 - Mode Lens, Continuity Ribbon, Action Closure Tray, bottom tabs, top headers, receipt/correction controls, Trust Badge, Ambient Status Orb, and Proof Rail require Dynamic Type, VoiceOver, Reduce Motion, contrast, distinguishability without color alone, and tap-target verification before user-facing claims.
 
+## Performance Expectations
+
+Visual richness must stay fast. Future rich-panel, chrome, external-surface, and mature-invention batches must set a performance budget and avoid repeated duplicate calculations when shared projections exist.
+
+Guidance:
+
+- top-level first meaningful content should remain fast on supported devices
+- content-heavy scrolling should remain smooth
+- widgets and Live Activities should consume lightweight snapshots
+- rich panel effects should degrade gracefully under Reduce Motion or lower performance conditions
+- large graph, ledger, proof, and trust queries should not recompute the whole world on every render
+- motion must clarify state and must not be required to understand state
+
 ## Appearance Studio Preservation
 
 Appearance Studio remains integral. Dark mode is the flagship identity, light mode remains intentionally supported, and accent/theme customization must not be broken by global chrome work. Shell, panel, tab, header, ribbon, receipt, proof, and trust treatments must flow through centralized design tokens so Appearance Studio can influence them safely.
+
+Appearance Studio may control accent color, light/dark/system appearance, contrast preference, motion preference, future panel density, active tab treatment through tokens, and header/chrome treatment through tokens. It must not break accessibility, contrast minimums, tab IA, semantic state clarity, product identity, reduced motion, core shell readability, or trust/safety states.
