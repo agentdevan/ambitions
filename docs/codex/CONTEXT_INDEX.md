@@ -22,17 +22,18 @@ For non-trivial work, read these in order before planning:
 8. [Ambitions_2_0_RC_Maturity_Plan.md](../canon/Ambitions_2_0_RC_Maturity_Plan.md) for future batch maturity gates, RC milestones, dependency map, performance strategy, and mature-invention coverage.
 9. [Ambitions_2_0_Intelligence_Standards.md](../canon/Ambitions_2_0_Intelligence_Standards.md) for active Ambitions 2.0 intelligence standards, recommendation explanations, priority reality, context lens, commitment capture, living goal containers, and obvious destination rules.
 10. [Ambitions_2_0_Accessibility_Nutrition.md](../canon/Ambitions_2_0_Accessibility_Nutrition.md) when the task touches accessibility, UI, release, or trust claims.
-11. [Ambitions_2_0_Capability_Matrix.md](../canon/Ambitions_2_0_Capability_Matrix.md) when verifying status or starting Batch 61.
-12. [Ambitions_2_0_Codex_Execution_Guide.md](Ambitions_2_0_Codex_Execution_Guide.md).
-13. [BATCH_REGISTRY.md](BATCH_REGISTRY.md).
-14. [MASTER_PRODUCT_SPEC.md](../../MASTER_PRODUCT_SPEC.md) for current shipping product truth where not superseded by the new Ambitions 2.0 canon.
-15. [Ambitions_OS_Master_Roadmap.md](../canon/Ambitions_OS_Master_Roadmap.md) for historical platform/endgame continuity where not superseded by the post-Batch-60 canon.
-16. [Ambitions_Surgical_Execution_Plan.md](../canon/Ambitions_Surgical_Execution_Plan.md) for dependency hierarchy where not superseded by the post-Batch-60 canon.
-17. [Ambitions_Codex_Batch_Plan.md](../canon/Ambitions_Codex_Batch_Plan.md) for preserved prior batch history and supersession notes.
-18. [Ambitions_Full_Frontend_Transformation_Program.md](../canon/Ambitions_Full_Frontend_Transformation_Program.md) when investigating historical frontend transformation context.
-19. [design/README.md](../canon/design/README.md) when investigating historical frontend design context.
-20. [Ambitions_Frontend_Transformation_Execution_Classification.md](../canon/design/Ambitions_Frontend_Transformation_Execution_Classification.md) when investigating historical frontend sequencing context.
-21. Supporting docs linked from [docs/README.md](../README.md).
+11. [Ambitions_2_0_Daily_Loop_QA_Baseline.md](../canon/Ambitions_2_0_Daily_Loop_QA_Baseline.md) when validating Phase A daily-loop QA, performance, accessibility, and stability truth.
+12. [Ambitions_2_0_Capability_Matrix.md](../canon/Ambitions_2_0_Capability_Matrix.md) when verifying status or starting Batch 61.
+13. [Ambitions_2_0_Codex_Execution_Guide.md](Ambitions_2_0_Codex_Execution_Guide.md).
+14. [BATCH_REGISTRY.md](BATCH_REGISTRY.md).
+15. [MASTER_PRODUCT_SPEC.md](../../MASTER_PRODUCT_SPEC.md) for current shipping product truth where not superseded by the new Ambitions 2.0 canon.
+16. [Ambitions_OS_Master_Roadmap.md](../canon/Ambitions_OS_Master_Roadmap.md) for historical platform/endgame continuity where not superseded by the post-Batch-60 canon.
+17. [Ambitions_Surgical_Execution_Plan.md](../canon/Ambitions_Surgical_Execution_Plan.md) for dependency hierarchy where not superseded by the post-Batch-60 canon.
+18. [Ambitions_Codex_Batch_Plan.md](../canon/Ambitions_Codex_Batch_Plan.md) for preserved prior batch history and supersession notes.
+19. [Ambitions_Full_Frontend_Transformation_Program.md](../canon/Ambitions_Full_Frontend_Transformation_Program.md) when investigating historical frontend transformation context.
+20. [design/README.md](../canon/design/README.md) when investigating historical frontend design context.
+21. [Ambitions_Frontend_Transformation_Execution_Classification.md](../canon/design/Ambitions_Frontend_Transformation_Execution_Classification.md) when investigating historical frontend sequencing context.
+22. Supporting docs linked from [docs/README.md](../README.md).
 
 ## Precedence Model
 
@@ -67,6 +68,7 @@ These files are permanent canonical context and must stay in repo:
 - [../canon/Ambitions_2_0_RC_Maturity_Plan.md](../canon/Ambitions_2_0_RC_Maturity_Plan.md)
 - [../canon/Ambitions_2_0_Intelligence_Standards.md](../canon/Ambitions_2_0_Intelligence_Standards.md)
 - [../canon/Ambitions_2_0_Accessibility_Nutrition.md](../canon/Ambitions_2_0_Accessibility_Nutrition.md)
+- [../canon/Ambitions_2_0_Daily_Loop_QA_Baseline.md](../canon/Ambitions_2_0_Daily_Loop_QA_Baseline.md)
 - [../canon/Ambitions_2_0_Decision_Log.md](../canon/Ambitions_2_0_Decision_Log.md)
 - [../canon/Ambitions_2_0_Capability_Matrix.md](../canon/Ambitions_2_0_Capability_Matrix.md)
 - [Ambitions_2_0_Codex_Execution_Guide.md](Ambitions_2_0_Codex_Execution_Guide.md)

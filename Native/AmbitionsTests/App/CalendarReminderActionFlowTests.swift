@@ -95,12 +95,12 @@ final class CalendarReminderActionFlowTests: XCTestCase {
         let message = try XCTUnwrap(response.message)
         let selection = await calendarService.lastCalendarSelection
 
-        XCTAssertEqual(message.title, "Calendar event created")
-        XCTAssertEqual(message.body, "\"\(scheduledStep.title)\" was added to Calendar.")
-        XCTAssertEqual(selection?.goalID, goalID)
-        XCTAssertEqual(selection?.stepID, scheduledStep.id)
-        XCTAssertEqual(selection?.stepTitle, scheduledStep.title)
-        XCTAssertEqual(selection?.suggestedDate, suggestedDate(for: scheduledStep))
+        XCTAssertEqual(message.title, "Use Plan for Calendar access")
+        XCTAssertEqual(
+            message.body,
+            "Today will not request Calendar permission or write calendar blocks. Open Plan to make planning calendar-aware from there."
+        )
+        XCTAssertNil(selection)
     }
 }
 
