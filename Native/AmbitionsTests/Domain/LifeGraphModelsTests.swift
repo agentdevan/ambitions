@@ -195,6 +195,120 @@ final class LifeGraphModelsTests: XCTestCase {
         XCTAssertEqual(summary.structuralSupportGoalCount, 1)
         XCTAssertTrue(summary.reasons.contains(where: { $0.localizedCaseInsensitiveContains("support") }))
     }
+
+    func testLifeGraphObjectKindsCoverBatch77RelationshipReferences() {
+        let supportedKinds = Set(LifeGraphObjectKind.allCases)
+
+        XCTAssertTrue(supportedKinds.isSuperset(of: [
+            .goal,
+            .action,
+            .step,
+            .capture,
+            .commitment,
+            .waitingItem,
+            .proof,
+            .evidence,
+            .resource,
+            .decision,
+            .correction,
+            .receipt
+        ]))
+        XCTAssertTrue(LifeGraphObjectKind.commitment.isPlaceholderOnlyInV1)
+        XCTAssertTrue(LifeGraphObjectKind.waitingItem.isPlaceholderOnlyInV1)
+        XCTAssertTrue(LifeGraphObjectKind.proof.isPlaceholderOnlyInV1)
+        XCTAssertTrue(LifeGraphObjectKind.resource.isPlaceholderOnlyInV1)
+        XCTAssertTrue(LifeGraphObjectKind.receipt.isPlaceholderOnlyInV1)
+        XCTAssertFalse(LifeGraphObjectKind.goal.isPlaceholderOnlyInV1)
+        XCTAssertFalse(LifeGraphObjectKind.capture.isPlaceholderOnlyInV1)
+    }
+
+    func testRelationshipRejectsMalformedEndpointsAndSelfRelationships() {
+        let goal = LifeGraphObjectReference(kind: .goal, id: "goal-1", label: "Launch app", sourceDomain: .goals)
+        let malformed = LifeGraphObjectReference(kind: .capture, id: "   ", label: "Capture")
+        let sourceInvalid = LifeGraphRelationship(kind: .contains, source: malformed, target: goal)
+        let targetInvalid = LifeGraphRelationship(kind: .supports, source: goal, target: malformed)
+        let selfRelationship = LifeGraphRelationship(kind: .relatesTo, source: goal, target: goal)
+
+        XCTAssertEqual(sourceInvalid.integrity, .invalidSource)
+        XCTAssertEqual(targetInvalid.integrity, .invalidTarget)
+        XCTAssertEqual(selfRelationship.integrity, .selfRelationship)
+
+        let projection = LifeGraphRelationshipProjection(relationships: [sourceInvalid, targetInvalid, selfRelationship])
+        XCTAssertTrue(projection.relationships.isEmpty)
+    }
+
+    func testRelationshipProjectionDeduplicatesAndOrdersDeterministically() {
+        let goal = LifeGraphObjectReference(kind: .goal, id: "goal-1", label: "Launch app", sourceDomain: .goals)
+        let stepA = LifeGraphObjectReference(kind: .step, id: "step-a", parentContextID: goal.id, label: "Build importer", sourceDomain: .goalEngine)
+        let stepB = LifeGraphObjectReference(kind: .step, id: "step-b", parentContextID: goal.id, label: "Audit launch copy", sourceDomain: .goalEngine)
+        let containsB = LifeGraphRelationship(kind: .contains, source: goal, target: stepB)
+        let containsA = LifeGraphRelationship(kind: .contains, source: goal, target: stepA)
+
+        let projection = LifeGraphRelationshipProjection(relationships: [containsB, containsA, containsA])
+
+        XCTAssertEqual(projection.relationships.map(\.id), [containsA.id, containsB.id])
+        XCTAssertEqual(projection.outgoing(from: goal).map(\.target.id), ["step-a", "step-b"])
+        XCTAssertEqual(projection.incoming(to: stepA).map(\.source.id), ["goal-1"])
+        XCTAssertEqual(projection.relatedObjects(from: goal, kind: .contains).map(\.id), ["step-b", "step-a"])
+    }
+
+    func testProjectionCreatesRelationshipsAndQueriesIncomingOutgoingObjects() {
+        let goal = LifeGraphObjectReference(kind: .goal, id: "goal-1", label: "Launch app", sourceDomain: .goals)
+        let action = LifeGraphObjectReference(kind: .action, id: "action-1", parentContextID: goal.id, label: "Ship build", sourceDomain: .goalEngine)
+        let capture = LifeGraphObjectReference(kind: .capture, id: "capture-1", label: "Release checklist", sourceDomain: .capture)
+        let proof = LifeGraphObjectReference(kind: .proof, id: "proof-placeholder-1", parentContextID: action.id, label: "Build artifact")
+
+        var projection = LifeGraphRelationshipProjection()
+
+        XCTAssertTrue(projection.add(LifeGraphRelationship(kind: .contains, source: goal, target: action)))
+        XCTAssertFalse(projection.add(LifeGraphRelationship(kind: .contains, source: goal, target: action)))
+        XCTAssertTrue(projection.add(LifeGraphRelationship(kind: .createdFrom, source: action, target: capture)))
+        XCTAssertTrue(projection.add(LifeGraphRelationship(kind: .proves, source: proof, target: action)))
+
+        XCTAssertEqual(projection.outgoing(from: goal, kind: .contains).map(\.target.id), ["action-1"])
+        XCTAssertEqual(projection.relatedObjects(from: action, kind: .createdFrom).map(\.id), ["capture-1"])
+        XCTAssertEqual(projection.sourceObjects(to: action, kind: .proves).map(\.id), ["proof-placeholder-1"])
+        XCTAssertEqual(projection.relationships(involving: action, inMissionControlLane: .proof).map(\.source.id), ["proof-placeholder-1"])
+    }
+
+    func testBreadcrumbBuildsOrderedPathWithCycleProtection() {
+        let goal = LifeGraphObjectReference(kind: .goal, id: "goal-1", label: "Launch app")
+        let milestone = LifeGraphObjectReference(kind: .milestone, id: "milestone-1", parentContextID: goal.id, label: "Beta")
+        let action = LifeGraphObjectReference(kind: .action, id: "action-1", parentContextID: milestone.id, label: "Invite testers")
+        let orphan = LifeGraphObjectReference(kind: .decision, id: "decision-1", label: "Pause scope")
+
+        let projection = LifeGraphRelationshipProjection(relationships: [
+            LifeGraphRelationship(kind: .contains, source: goal, target: milestone),
+            LifeGraphRelationship(kind: .contains, source: milestone, target: action),
+            LifeGraphRelationship(kind: .belongsTo, source: goal, target: action)
+        ])
+
+        XCTAssertEqual(projection.breadcrumb(to: action).labels, ["Launch app", "Beta", "Invite testers"])
+        XCTAssertEqual(projection.breadcrumb(to: orphan).labels, ["Pause scope"])
+    }
+
+    func testMissionControlLaneHelpersRemainStructuralOnly() {
+        let goal = LifeGraphObjectReference(kind: .goal, id: "goal-1", label: "Launch app")
+        let action = LifeGraphObjectReference(kind: .action, id: "action-1", label: "Ship build")
+        let blocker = LifeGraphObjectReference(kind: .blocker, id: "blocker-1", label: "Missing certificate")
+        let resource = LifeGraphObjectReference(kind: .resource, id: "resource-placeholder-1", label: "Release guide")
+        let decision = LifeGraphObjectReference(kind: .decision, id: "decision-placeholder-1", label: "Use phased release")
+        let receipt = LifeGraphObjectReference(kind: .receipt, id: "receipt-placeholder-1", label: "Build uploaded")
+
+        let projection = LifeGraphRelationshipProjection(relationships: [
+            LifeGraphRelationship(kind: .contains, source: goal, target: action),
+            LifeGraphRelationship(kind: .blocks, source: blocker, target: action),
+            LifeGraphRelationship(kind: .attachedTo, source: resource, target: action),
+            LifeGraphRelationship(kind: .explains, source: decision, target: action),
+            LifeGraphRelationship(kind: .produces, source: action, target: receipt)
+        ])
+
+        XCTAssertEqual(projection.relationships(involving: action, inMissionControlLane: .path).count, 1)
+        XCTAssertEqual(projection.relationships(involving: action, inMissionControlLane: .risk).map(\.source.id), ["blocker-1"])
+        XCTAssertEqual(projection.relationships(involving: action, inMissionControlLane: .resources).map(\.source.id), ["resource-placeholder-1"])
+        XCTAssertEqual(projection.relationships(involving: action, inMissionControlLane: .decisions).map(\.source.id), ["decision-placeholder-1"])
+        XCTAssertEqual(projection.relationships(involving: action, inMissionControlLane: .receipts).map(\.target.id), ["receipt-placeholder-1"])
+    }
 }
 
 private extension LifeGraphModelsTests {
