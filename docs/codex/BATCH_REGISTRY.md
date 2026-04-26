@@ -116,9 +116,9 @@ These rows are the active planning state for the new post-Batch-60 Ambitions 2.0
 | 80 | Action Closure and Receipt System v1 | Queued | Future receipt foundation; consumes shared commands and produces trustable results. |
 | 81 | Safe Automation Boundary and Undo Rules | Queued | Future safety/undo boundary; conservative and confirmation-first. |
 | 82 | Foundation Performance and Persistence Budget Pass | Queued | Dedicated foundation performance/persistence hardening pass. |
-| 83 | Goals 2.0 / Portfolio, Health, and Proof v1 | Queued | Future Goals surface batch; consumes global chrome, Life Graph, proof, and Action Closure foundations. |
-| 84 | Goal Detail 2.0 / Mission Control, Assumptions, Proof Rail | Queued | Future Goal Detail surface batch; no full Path Builder. |
-| 85 | Plan 2.0 / Believability Kernel and Plan Treaty | Queued | Future Plan surface/system batch; preserves Plan-owned calendar permission and no silent rescheduling. |
+| 83 | Goals 2.0 / Portfolio, Health, and Proof v1 | Queued | Future Goals surface batch; newly integrated planned canon includes Goal Lifecycle Rail, Goal Weather v1, Goal Atlas preview, Completion Archive states, Next Visible Step on every active goal card, and compact lifecycle timeline; consumes global chrome, Life Graph, proof, and Action Closure foundations. |
+| 84 | Goal Detail 2.0 / Mission Control, Assumptions, Proof Rail | Queued | Future Goal Detail surface batch; newly integrated planned canon includes goal-specific lifecycle timeline, Proof Spine as Proof Rail expression, Decision Trail, Milestone Cards, Kanban-lite Task Lane, connected Goal Atlas goals, dominant Next Visible Step, end-state summaries, and Weather explanation; no full Path Builder. |
+| 85 | Plan 2.0 / Believability Kernel and Plan Treaty | Queued | Future Plan surface/system batch; newly integrated planned canon includes Weekly Plan Strip, Next Visible Step selection, Goal Weather/proof-density believability inputs, active-goal plan window, Plan Treaty Decision Trail notes, and Next/Doing task weighting; preserves Plan-owned calendar permission and no silent rescheduling. |
 | 86 | Reality Reflow v1 and Recovery Gradient | Queued | Future recovery/reflow batch; broad reflows require safe confirmation. |
 | 87 | You 2.0 / Trust Center, Constitution, Memory Controls | Queued | Future trust/control batch; do not claim sync/accessibility verification before owning batches. |
 | 88 | Reviews v1 / Recovery Review and Life OS Receipt | Queued | Future review batch; no restored top-level Insights tab. |
@@ -126,11 +126,11 @@ These rows are the active planning state for the new post-Batch-60 Ambitions 2.0
 | 90 | Export / Import Proof and Disaster Drill | Queued | Future trust fallback batch; no fake sync claims. |
 | 91 | Apple-First Sync and Conflict Policy | Queued | Future Apple-first sync/conflict-policy batch; no required backend. |
 | 92 | App Intents and Shared Container Receipts | Queued | Future external action batch; must consume shared commands, receipts, and external continuity contract. |
-| 93 | Widgets and Live Activity Ambient Continuity | Queued | Future external surface batch; lightweight snapshots only. |
+| 93 | Widgets and Live Activity Ambient Continuity | Queued | Future external surface batch; newly integrated planned canon includes calm snapshots for Next Visible Step, Active Goal Timeline, Goal Portfolio, Next Milestone, Protected Goal, Weekly Plan Strip, and next proof action; lightweight snapshots only. |
 | 94 | External Surface Platform Verification and Performance Pass | Queued | Dedicated external proof/performance pass before production-ready claims. |
 | 95 | Path Intelligence Foundation / Life Path Simulation | Queued | Future Life Path Simulation contract batch; no Path Builder UI yet. |
 | 96 | Domain Path Packs and Path Fork Simulator | Queued | Future path pack/fork foundation; broad coherent families only. |
-| 97 | Path Builder UI / Long-Range Roadmap v1 | Queued | Future UI batch over path contracts. |
+| 97 | Path Builder UI / Long-Range Roadmap v1 | Queued | Future UI batch over path contracts; newly integrated planned canon expands Goal Atlas into Path Builder, turns milestones into roadmap nodes, extends lifecycle timeline, shows Decision Trail across roadmap changes, and rolls Weekly Plan Strips into longer phases. |
 | 98 | Learning and Anticipation v1 | Queued | Future learning batch; evidence-derived and user-confirmed only. |
 | 99 | Memory Confidence, Correction Cards, and Narrative Memory Map | Queued | Future memory/correction surface batch; no black-box claims. |
 | 100 | Strategy / Learning Integration QA and Performance Pass | Queued | Dedicated strategy/learning integration and performance pass. |
@@ -140,7 +140,7 @@ These rows are the active planning state for the new post-Batch-60 Ambitions 2.0
 | 104 | Commitments, Waiting, Promise Ledger, and Social Load Maturity | Queued | Future RC maturity audit. |
 | 105 | Believability Kernel, Constraint Gravity, and Plan Treaty Maturity | Queued | Future RC maturity audit. |
 | 106 | Reality Reflow, Recovery Gradient, and Save the Day Maturity | Queued | Future RC maturity audit. |
-| 107 | Ambition Portfolio Manager, Goal Weather, and Goal Scope Maturity | Queued | Future RC maturity audit. |
+| 107 | Ambition Portfolio Manager, Goal Weather, and Goal Scope Maturity | Queued | Future RC maturity audit; newly integrated planned canon matures Goal Weather, Completion Archive intelligence, portfolio-level proof maturity, cancelled/dropped learning summaries, Goal Atlas as portfolio view, stuck-task detection, proof comparison, and goal scope maturity. |
 | 108 | Personal Operating Constitution and Calm Intervention Maturity | Queued | Future RC maturity audit. |
 | 109 | Reviews, Life OS Receipt, and Narrative Memory Maturity | Queued | Future RC maturity audit. |
 | 110 | Path Forks, Future Self Simulation, and Domain Pack Maturity | Queued | Future RC maturity audit. |

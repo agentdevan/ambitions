@@ -154,6 +154,19 @@ Proof Rail is a compact evidence layer for Goal Detail, Reviews, and Path Builde
 
 Proof examples include notes, links, files, calendar completions, reflections, photos, milestone evidence, decisions, feedback received, blocker resolution, and external artifacts.
 
+Proof Spine is the vertical, receipt-like Goal Detail expression of Proof Rail. It should feel elegant and earned without becoming a productivity streak.
+
+## Goal / Plan / Task Visual Rules
+
+- Goal Lifecycle Rail is a premium Goals overview timeline, not a segmented control. It should show Previous -> Active -> Future with calm counts and supporting state chips for Protected, Waiting, Blocked, Parked, Completed, and Cancelled / Dropped.
+- Goal Weather is the user-facing visual language for goal health. Use restrained, sophisticated signals for Clear, Cloudy, Stormy, Foggy, and Protected, and provide drilldown explanation.
+- Goal Atlas is the visual relationship map for goals. Keep previews compact until Path Builder or Portfolio Manager owns the denser map.
+- Decision Trail is editorial and journal-like. It should make changed, paused, cancelled, or replaced goals feel intelligent rather than shameful.
+- Milestone Cards are spacious checkpoints with title, status, next action, proof count, and blockers. Details belong in drilldown.
+- Kanban-lite Task Lane belongs only inside Goal Detail with Later, Next, Doing, Waiting, and Done. Never make it the top-level product identity.
+- Weekly Plan Strip is a seven-day strip that makes the week feel calm and possible, including buffer, rest, or recovery where appropriate.
+- Completion Archive is a premium archive, not a trash bin. Completed, cancelled, parked, merged, or transformed goals remain learning artifacts.
+
 ## Trust Badge Rules
 
 Trust Badge / Trust status is a small treatment for You and Trust Center, surfaced globally only when action is needed. Candidate states include Local only, Synced, Export ready, Calendar local, Needs backup, and Stale widget. Avoid anxiety-inducing always-on warnings.

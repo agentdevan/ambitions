@@ -17,6 +17,7 @@ This document defines the product architecture for Ambitions 2.0. It governs sur
 
 - Owns goal inventory, active direction, goal health, path progress, and Goal Detail entry.
 - Shows goal status without becoming an analytics dashboard.
+- Presents goals as an ambition portfolio: current direction first, compact lifecycle context, readable weather, and one Next Visible Step for every active goal.
 - Goal Detail owns deeper explanation, evidence, path inspection, and history.
 
 ### Capture
@@ -29,6 +30,7 @@ This document defines the product architecture for Ambitions 2.0. It governs sur
 ### Plan
 
 - Owns day/week shaping, believability, rituals, absorbed habits, calendar-aware mode, scheduled blocks, and recovery/review prompts.
+- Connects active goals to the current week through a calm Weekly Plan Strip, believable plan window, protected work, proof creation, and explicit scope/defer/renegotiate decisions.
 - Works without calendar permission.
 - Requests calendar access only from an explicit Plan action.
 
@@ -80,13 +82,43 @@ Future surface work must also state which maturity gate from [Ambitions_2_0_RC_M
 ## Primary Flow: Goal -> Path -> Plan -> Today -> Action -> Recovery -> Review
 
 1. User creates or refines a goal.
-2. Path Intelligence proposes a believable path with assumptions and broad domain fit.
-3. Plan turns the path into scheduled or unscheduled work based on capacity and calendar availability when allowed.
-4. Today selects the next believable action from Canonical Now State.
-5. The user acts, delays, splits, skips, asks why, or corrects the recommendation.
-6. Action Closure produces a receipt for what happened, what changed, why it changed, whether undo is safely available, and what can be corrected.
-7. Reality Reflow converts disruption into a safe recovery path without silent rescheduling.
-8. Review captures what happened, what changed, what was protected, what remains believable, and what the system should learn.
+2. Goal Detail keeps the goal oriented with lifecycle state, Goal Weather, connected goals, proof, risks, decisions, milestones, and one dominant Next Visible Step.
+3. Path Intelligence proposes a believable path with assumptions and broad domain fit.
+4. Plan turns the path into scheduled or unscheduled work based on capacity, proof density, Goal Weather, and calendar availability when allowed.
+5. Today selects the next believable action from Canonical Now State.
+6. The user acts, delays, splits, skips, asks why, or corrects the recommendation.
+7. Action Closure produces a receipt for what happened, what changed, why it changed, whether undo is safely available, and what can be corrected.
+8. Reality Reflow converts disruption into a safe recovery path without silent rescheduling.
+9. Review captures what happened, what changed, what was protected, what remains believable, and what the system should learn.
+
+## Goal / Plan / Task Information Hierarchy
+
+Ambitions uses the following visual hierarchy across Goals, Goal Detail, Plan, Today, widgets, Path Builder, Reviews, and Portfolio Manager:
+
+- Goal = direction.
+- Plan = believable path.
+- Milestone = meaningful checkpoint.
+- Task = concrete action.
+- Proof = evidence of real progress.
+- Decision = reason the path changed.
+- Weather = readable health signal.
+- Archive = memory and learning.
+
+Top-level screens must remain calm, visual, and low-copy. Drilldowns can be deep, but the user should never lose orientation or have to infer a life direction from an undifferentiated task list.
+
+Planned object-level systems:
+
+- Goal Lifecycle Rail: a premium lifecycle view with Previous, Active, Future, Parked, Blocked, Waiting, Protected, Completed, and Cancelled / Dropped as distinct states. Completed means successfully finished; Cancelled / Dropped means intentionally ended and preserves the reason why.
+- Goal Atlas: the visual map of related goals that begins as a Goals overview preview, appears as connected goals in Mission Control, expands into Path Builder, and matures into the portfolio map.
+- Proof Spine: the vertical, receipt-like visual expression of Proof Rail for a goal, showing evidence that the goal is becoming real without gamified streak pressure.
+- Next Visible Step: the single obvious next action for every active goal and the highest-priority ADHD-friendly orientation affordance.
+- Goal Weather: the user-facing visual language for goal health, with Clear, Cloudy, Stormy, Foggy, and Protected states plus drilldown explanation.
+- Decision Trail: the journal-like record of why a goal or plan changed, paused, completed, cancelled, merged, or was replaced.
+- Timeline View: compact or detailed time context for goals, milestones, tasks, decisions, proof, pauses, and recovery.
+- Milestone Cards: the primary way goals break into meaningful checkpoints before exposing task detail.
+- Kanban-lite Task Lane: a restrained goal-detail-only task lane with Later, Next, Doing, Waiting, and Done; it must not become the app's top-level identity.
+- Weekly Plan Strip: the seven-day visual strip that shows how active goals become real this week, including buffer/rest/recovery where appropriate.
+- Completion Archive: a premium archive for completed, cancelled, dropped, parked, merged, replaced, or no-longer-relevant goals that preserves proof, decisions, lessons, and final status.
 
 ## Primary Flow: Capture -> Triage -> Goal / Plan / Seed / Waiting / Archive
 

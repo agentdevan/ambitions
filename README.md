@@ -13,6 +13,12 @@ Ambitions is a native iOS SwiftUI application.
 Use [docs/codex/CONTEXT_INDEX.md](docs/codex/CONTEXT_INDEX.md) for the full source-of-truth hierarchy.
 The permanent planning docs live in [docs/canon](docs/canon):
 
+- [Ambitions_2_0_Master_Plan.md](docs/canon/Ambitions_2_0_Master_Plan.md)
+- [Ambitions_2_0_Product_Architecture.md](docs/canon/Ambitions_2_0_Product_Architecture.md)
+- [Ambitions_2_0_Systems_Architecture.md](docs/canon/Ambitions_2_0_Systems_Architecture.md)
+- [Ambitions_2_0_Visual_System.md](docs/canon/Ambitions_2_0_Visual_System.md)
+- [Ambitions_2_0_Roadmap.md](docs/canon/Ambitions_2_0_Roadmap.md)
+- [Ambitions_2_0_Batch_Plan.md](docs/canon/Ambitions_2_0_Batch_Plan.md)
 - [Ambitions_OS_Master_Roadmap.md](docs/canon/Ambitions_OS_Master_Roadmap.md)
 - [Ambitions_Surgical_Execution_Plan.md](docs/canon/Ambitions_Surgical_Execution_Plan.md)
 - [Ambitions_Codex_Batch_Plan.md](docs/canon/Ambitions_Codex_Batch_Plan.md)

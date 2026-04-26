@@ -30,10 +30,14 @@ Do not create duplicate engines when inventions overlap:
 - Trust Ledger owns user-facing trust-impacting history.
 - Event Ledger remains raw event history.
 - Proof Rail Engine owns proof organization and presentation.
+- Proof Spine is the vertical Goal Detail / Mission Control expression of Proof Rail, not a separate proof engine.
 - Memory Confidence Engine owns confidence state of learned memories.
 - Safe Automation Boundary owns what Ambitions may suggest, prepare, confirm, execute, or never automate.
 - Ambition Portfolio Manager owns portfolio-level goal pressure.
 - Goal Scope Governor owns scope expansion, shrink, park, and protect logic.
+- Goal Weather is the user-facing visual language for goal health, not a separate health engine.
+- Goal Atlas is the portfolio/map layer over Life Graph and Path Builder relationships, not a parallel path store.
+- Decision Trail is the user-facing goal/plan change history over Event Ledger, Action Closure, and Plan Treaty decisions, not a second event log.
 
 ## Life Graph / Relationship Layer
 
@@ -68,20 +72,24 @@ Do not create duplicate engines when inventions overlap:
 ## Reality / Plan Layer
 
 - Purpose: Decide whether a day, week, plan, commitment, goal, or path is actually believable under current constraints, then reflow safely when reality changes.
-- Owned concepts: Believability Kernel, Reality Reflow Engine, Constraint Gravity Engine, Plan Treaty, Opportunity Window Engine, Window Magnetism, Personal Capacity Envelope, Context Switching Toll, Calendar Boundary Contract, Decision Debt Engine, and confirmed calendar writes with receipts/undo where safe.
+- Owned concepts: Believability Kernel, Reality Reflow Engine, Constraint Gravity Engine, Plan Treaty, Opportunity Window Engine, Window Magnetism, Personal Capacity Envelope, Context Switching Toll, Calendar Boundary Contract, Decision Debt Engine, Weekly Plan Strip, Next Visible Step selection for the plan window, and confirmed calendar writes with receipts/undo where safe.
 - Consumed by: Plan, Today, Goals, Reviews, Path Builder, Action Closure.
 - Dependencies: Reality Model, calendar permission boundary, Goal Believability, Execution Resilience, Personal Operating Constitution.
 - Must not be duplicated: screen-specific feasibility labels, silent rescheduling, calendar clone UI, or Plan-independent calendar writes.
 - Ambitions 2.0 scope: Reality Reflow v1 and Plan Treaty in Plan 2.0, with no silent rescheduling and Plan-owned calendar permission preserved.
+- Batch 85 planned scope: Weekly Plan Strip shows the seven-day path from active goals into the current week; Plan believability consumes Goal Weather and proof density; Plan Treaty writes Decision Trail notes when major scope changes occur; only Next and Doing task-lane items heavily influence Today/Plan.
 
 ## Goals / Portfolio Layer
 
 - Purpose: Treat goals as a capacity-limited portfolio with proof-weighted progress, constraints, assumptions, and status.
-- Owned concepts: Ambition Portfolio Manager, Goal Scope Governor, Goal Weather, Momentum Integrity Engine, Proof-Weighted Progress, Assumption Watchtower, Goal Contract, Goal Health MRI, Path Filmstrip, active/passive/waiting/blocked/parked/protected/completed states, early Mission Control lanes, Life Graph Breadcrumb, Proof Rail, and Ambient Status Orb for goal health.
+- Owned concepts: Ambition Portfolio Manager, Goal Scope Governor, Goal Lifecycle Rail, Goal Atlas, Goal Weather, Momentum Integrity Engine, Proof-Weighted Progress, Proof Spine, Next Visible Step, Decision Trail, Timeline View, Milestone Cards, Kanban-lite Task Lane, Completion Archive, Assumption Watchtower, Goal Contract, Goal Health MRI, Path Filmstrip, Previous/Active/Future/Parked/Blocked/Waiting/Protected/Completed/Cancelled / Dropped states, early Mission Control lanes, Life Graph Breadcrumb, Proof Rail, and Ambient Status Orb for goal health.
 - Consumed by: Goals, Goal Detail, Plan, Today, Reviews, Path Builder.
 - Dependencies: Life Graph, Proof Rail Engine, Believability Kernel, Event Ledger, Path Intelligence, Action Closure.
-- Must not be duplicated: fake progress percentages, equal-weight goal dashboards, or full Path Builder logic inside Goal Detail before the owning path batches.
+- Must not be duplicated: fake progress percentages, equal-weight goal dashboards, generic top-level task boards, separate proof spines outside Proof Rail, separate health/weather engines, or full Path Builder logic inside Goal Detail before the owning path batches.
 - Ambitions 2.0 scope: Goals / Goal Detail 2.0 consumes Life Graph and Action Closure foundations, but does not build full Path Builder yet.
+- Batch 83 planned scope: Goals overview becomes a premium ambition portfolio with a hero for current ambition portfolio, Lifecycle Rail for Previous -> Active -> Future, state chips for Protected / Waiting / Blocked / Parked / Completed / Cancelled, visual goal cards, Next Visible Step on every active goal card, Goal Weather v1, compact lifecycle timeline, Completion Archive states, and optional Goal Atlas preview.
+- Batch 84 planned scope: Goal Detail becomes Mission Control with Path, Now, Proof, Risk, Decisions, and Tasks lanes; it includes goal-specific lifecycle timeline, Proof Spine, Decision Trail, Milestone Cards, Kanban-lite Task Lane, connected goals from Goal Atlas, dominant Next Visible Step, end-state summaries for completed/parked/cancelled goals, and Goal Weather explanations.
+- Batch 107 planned scope: Ambition Portfolio Manager matures Goal Weather, Completion Archive intelligence, proof maturity comparison, cancelled/dropped learning summaries, Goal Atlas as the mature portfolio view, stuck-task detection, and goal scope maturity.
 
 ## Memory / Learning / Reviews Layer
 
@@ -95,7 +103,7 @@ Do not create duplicate engines when inventions overlap:
 ## Long-Range Strategy Layer
 
 - Purpose: Simulate believable life paths and alternatives without fantasy planning.
-- Owned concepts: Life Path Simulation, Path Forks, Path Fork Simulator, Domain Path Packs, Future Self Simulator, pause/limited-time simulations, fallback paths, people/stakeholders, prerequisites, dependencies, proof requirements, and resource links.
+- Owned concepts: Life Path Simulation, Path Forks, Path Fork Simulator, Domain Path Packs, Future Self Simulator, Goal Atlas expansion into Path Builder, milestone roadmap nodes, lifecycle timeline as long-range planning, Decision Trail visibility across roadmap changes, Weekly Plan Strip rollups, pause/limited-time simulations, fallback paths, people/stakeholders, prerequisites, dependencies, proof requirements, and resource links.
 - Consumed by: Goals, Goal Detail, Path Builder, Plan, Reviews.
 - Dependencies: Life Graph, Reality / Plan layer, Goals / Portfolio layer, Proof Rail Engine, Memory / Reviews layer.
 - Must not be duplicated: per-feature path templates, unsupported domain specificity, or strategy UI before contracts exist.

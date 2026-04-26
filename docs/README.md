@@ -8,6 +8,18 @@ Use [codex/CONTEXT_INDEX.md](codex/CONTEXT_INDEX.md) for source-of-truth precede
 
 - [../MASTER_PRODUCT_SPEC.md](../MASTER_PRODUCT_SPEC.md)
   Current shipping product truth.
+- [canon/Ambitions_2_0_Master_Plan.md](canon/Ambitions_2_0_Master_Plan.md)
+  Active post-Batch-60 product canon, including the Goal / Plan / Task visual doctrine.
+- [canon/Ambitions_2_0_Product_Architecture.md](canon/Ambitions_2_0_Product_Architecture.md)
+  Active surface ownership, drilldown rules, and Goal / Plan / Task information hierarchy.
+- [canon/Ambitions_2_0_Systems_Architecture.md](canon/Ambitions_2_0_Systems_Architecture.md)
+  Active shared-system ownership for Life Graph, Action Closure, Plan, Goals/Portfolio, Path, and ambient continuity.
+- [canon/Ambitions_2_0_Visual_System.md](canon/Ambitions_2_0_Visual_System.md)
+  Active rich-panel and visual-system truth, including Goal Lifecycle Rail, Goal Weather, Proof Spine, Decision Trail, Milestone Cards, Weekly Plan Strip, and Completion Archive treatments.
+- [canon/Ambitions_2_0_Roadmap.md](canon/Ambitions_2_0_Roadmap.md)
+  Active Ambitions 2.0 roadmap.
+- [canon/Ambitions_2_0_Batch_Plan.md](canon/Ambitions_2_0_Batch_Plan.md)
+  Active Batch 61-120 execution order and owning batch scopes.
 - [canon/Ambitions_OS_Master_Roadmap.md](canon/Ambitions_OS_Master_Roadmap.md)
   Platform and endgame vision.
 - [canon/Ambitions_Surgical_Execution_Plan.md](canon/Ambitions_Surgical_Execution_Plan.md)

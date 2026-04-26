@@ -30,6 +30,9 @@ This plan supersedes prior roadmap direction after Batch 60 where conflicts exis
 - Top-level screens stay capped and calm: one dominant hero panel, one or two supporting panels, and deeper content below the fold.
 - Detail screens can be denser when the density explains, edits, reviews, or audits a specific object.
 - Rich widget-like panels are the default presentation model. Plain text cards are not the 2.0 design target.
+- Ambitions is not a task manager with goals attached. It is a visual life execution system where Goal, Plan, Milestone, Task, Proof, Decision, Weather, and Archive stay connected by design.
+- The Goal / Plan / Task visual systems are planned canon, not current UI completion: Goal Lifecycle Rail, Goal Atlas, Proof Spine as the vertical visual expression of Proof Rail, Next Visible Step, Goal Weather, Decision Trail, Timeline View, Milestone Cards, Kanban-lite Task Lane, Weekly Plan Strip, and Completion Archive.
+- Every active goal must resolve to one obvious Next Visible Step; every plan must explain why the week is believable; every task must visibly serve a goal and create or support proof.
 - Dark mode is flagship and uses warm charcoal / blue-black, never pure black or cold midnight.
 - Light mode receives equal design priority with warm off-white surfaces.
 - Calendar read and write are in Ambitions 2.0 scope.
@@ -182,6 +185,37 @@ These may remain historical or later-vision ideas, but they are not active 2.0 i
 14. Do Less Better: Ambitions may recommend dropping, shrinking, parking, or reviewing instead of adding work.
 15. Maturity over novelty: a major invention is not release-ready until it is coherent, correctable, accessible, performant, trusted, and verified across its required surfaces.
 16. No hidden complexity: when the product becomes smarter, the user's next decision must become easier.
+17. Goal direction before task volume: the user should never have to translate a giant task list into a life direction; Ambitions must show the direction, path, next action, and proof relationship directly.
+18. Archive as intelligence: completed, cancelled, dropped, parked, merged, or transformed goals preserve why they changed and what was learned instead of becoming dead clutter.
+
+## Goal / Plan / Task Visual Doctrine
+
+The canonical hierarchy is:
+
+- Goal = direction.
+- Plan = believable path.
+- Milestone = meaningful checkpoint.
+- Task = concrete action.
+- Proof = evidence of real progress.
+- Decision = reason the path changed.
+- Weather = readable health signal.
+- Archive = memory and learning.
+
+The app visually prioritizes:
+
+1. Current goal direction.
+2. Next Visible Step.
+3. Current plan window.
+4. Proof of momentum.
+5. Risk/blocker clarity.
+6. Timeline context.
+7. Archive/learning.
+
+Every goal should answer what it is, why it matters, what state it is in, what the next visible step is, what proof exists, what could block it, what changed, and what happens next.
+
+Every plan should answer whether it is believable, which goal it serves, what proof it creates, what is protected this week, and what needs to be reduced, deferred, or renegotiated.
+
+Every task should answer what goal it serves, why now, how much effort it requires, what proof it will create, and whether it is later, next, doing, waiting, or done.
 
 ## Daily Continuity Loop
 

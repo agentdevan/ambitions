@@ -14,6 +14,8 @@ The flagship visual direction is a warm, near-black navy operating canvas with g
 - Detail screens: denser panels are allowed when they explain or edit one object.
 - Reviews and evidence: dense only after the user has chosen to inspect.
 - No top-level screen should become a wall of equal-weight modules.
+- Goals, Plan, and Today must prioritize current goal direction, Next Visible Step, current plan window, proof of momentum, risk/blocker clarity, timeline context, and archive/learning in that order.
+- Task-board density belongs only inside Goal Detail as a Kanban-lite Task Lane; the app must never visually present itself as a generic task manager.
 
 ## Dark Mode Direction
 
@@ -91,8 +93,17 @@ Sheet/modal header pattern should reuse the same token, spacing, button, and con
 - Ambient Status Orb: qualitative state marker, not fake precision. Candidate states: Clear, Steady, Tight, Fragile, At risk, Recovered, Protected.
 - Life Graph Breadcrumb: compact detail-screen path only; never clutter top-level screens.
 - Mission Control Lanes: object-level lanes for Path, Now, Proof, and Risk in v1; not top-level navigation.
+- Goal Lifecycle Rail: premium horizontal rail on Goals overview for Previous -> Active -> Future, with calm lifecycle labels and small counts. It should feel like a life timeline, not a segmented control.
+- Goal Atlas: visual relationship map for goals. It begins as a compact preview, appears as connected goals in Goal Detail, expands in Path Builder, and matures in Portfolio Manager.
 - Not Today / Anti-Plan strip: protective parked-work treatment, not negative or punitive.
 - Proof Rail: compact visual rail for artifacts/evidence in Goal Detail, Reviews, and Path Builder.
+- Proof Spine: vertical, elegant, receipt-like Proof Rail expression for one goal. It should show accumulated proof without becoming a streak or gamified productivity mechanic.
+- Goal Weather: restrained, sophisticated visual signal for Clear, Cloudy, Stormy, Foggy, and Protected goal conditions. Avoid childish weather graphics; every state needs drilldown explanation.
+- Decision Trail: editorial, journal-like, high-trust record of why a goal or plan changed. It should make changed plans feel intelligent, not shameful.
+- Milestone Cards: spacious, scannable goal checkpoints with title, status, next action, proof count, and blockers, with details kept in drilldown.
+- Kanban-lite Task Lane: restrained Goal Detail-only task lane for Later, Next, Doing, Waiting, and Done. Never make it the app's top-level identity.
+- Weekly Plan Strip: calm seven-day visual strip showing how active goals become real this week, including buffer, rest, or recovery where appropriate.
+- Completion Archive: premium archive treatment for completed, cancelled, dropped, parked, merged, or transformed goals. It is not a trash bin.
 - Trust Badge / Trust status: small trust treatment for You and Trust Center, surfaced globally only when action is needed.
 
 ## Typography, Spacing, And Radius Principles
@@ -125,6 +136,30 @@ Shows progress, pace, confidence, or goal health with visual state and concise c
 
 Shows ordered events, path stages, plan changes, or review history for detail contexts.
 
+### Goal Lifecycle Rail
+
+Shows Previous, Active, Future, and supporting state chips for Protected, Waiting, Blocked, Parked, Completed, and Cancelled / Dropped goals. It is a premium timeline treatment, not a dense analytics control.
+
+### Goal Weather
+
+Shows a qualitative goal-health signal: Clear when momentum is healthy, Cloudy when progress exists but the next step is vague, Stormy when risks/blockers/abandoned tasks are too high, Foggy when clarity or proof is missing, and Protected when the goal needs defense from distraction.
+
+### Proof Spine
+
+Shows accumulated proof vertically for a single goal, including actions, artifacts, feedback, decisions, resolved blockers, and reflections. It is the visual timeline expression of Proof Rail.
+
+### Decision Trail
+
+Shows why the path changed, including started, paused, resumed, cancelled, completed, merged, replaced, or parked decisions. It should preserve learning and dignity around cancelled or dropped goals.
+
+### Milestone Cards
+
+Show meaningful checkpoints before task detail. Each card may summarize tasks, notes, proof, blockers, deadlines, assumptions, risks, and decision notes without exposing an endless task list.
+
+### Weekly Plan Strip
+
+Shows the seven-day expression of the active plan window. It should make the week feel calm and possible, not overloaded.
+
 ### Schedule Panel
 
 Shows fixed/flexible blocks, open windows, conflicts, and calendar-aware context.
@@ -148,6 +183,10 @@ Shows what happened, what changed, why it changed, undo eligibility where safely
 ### Proof Rail
 
 Shows compact evidence artifacts such as notes, links, files, calendar completions, reflections, photos, milestones, decisions, feedback, and resolved blockers.
+
+### Completion Archive
+
+Shows completed, cancelled intentionally, parked for later, replaced by better goal, merged into larger goal, or no-longer-relevant goals as learning artifacts with what happened, why it ended, proof collected, what replaced it, decision trail, and final status.
 
 ### Capture Panel
 

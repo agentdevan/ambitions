@@ -9,6 +9,26 @@ This roadmap now runs through Ambitions 2.0 RC maturity instead of stopping at v
 - Milestone C - Ambitions 2.0 RC1: mature the strategic system through Path Intelligence, Domain Path Packs, Path Fork Simulator, Path Builder v1, learning/correction, Memory Confidence, Narrative Memory Map, mature Reality Reflow, mature Goal Portfolio, and strategy/learning performance proof.
 - Milestone D - Ambitions 2.0 RC2: mature all inventions and harden release through mature audits, onboarding/re-entry, Accessibility Nutrition verification, Appearance Studio/shell regression, data safety, performance, RC audit, and release-candidate lock.
 
+## Goal / Plan / Task Visual Systems Integration
+
+The Goal / Plan / Task visual systems are newly integrated planned canon. They do not change current implementation status until their owning batches run.
+
+Ambitions must be a beautiful, visual, low-stress representation of a person's goals, plans, and tasks. A goal shows the desired direction. A plan shows the believable path. A task shows the next visible action. Proof shows the goal becoming real. The user should never have to mentally translate a giant task list into a life direction.
+
+Integrated systems:
+
+- Goal Lifecycle Rail: Goals overview timeline and lifecycle states including Previous, Active, Future, Parked, Blocked, Waiting, Protected, Completed, and Cancelled / Dropped.
+- Goal Atlas: visual map of related life goals; preview in Goals, connected goals in Goal Detail, full map in Path Builder, mature portfolio map in Batch 107.
+- Proof Spine: vertical Goal Detail expression of Proof Rail.
+- Next Visible Step: one visually obvious next action for every active goal, selected by Goals/Goal Detail/Plan and consumed by Today/widgets.
+- Goal Weather: user-facing visual language for goal health with Clear, Cloudy, Stormy, Foggy, and Protected states.
+- Decision Trail: human-readable record of goal and plan changes, including pause, resume, cancel, complete, merge, replace, and scope decisions.
+- Timeline View: compact and detailed goal/milestone/task timeline context.
+- Milestone Cards: meaningful goal checkpoints that prevent endless task-list presentation.
+- Kanban-lite Task Lane: Goal Detail-only task board with Later, Next, Doing, Waiting, and Done.
+- Weekly Plan Strip: seven-day plan visualization connecting active goals to this week.
+- Completion Archive: premium archive for completed, cancelled, dropped, parked, merged, and transformed goals as learning artifacts.
+
 ## Program 1 - Truth, Shell, And Visual Foundation
 
 - Goal: Verify repo truth, lock the Today / Goals / Capture / Plan / You shell, and establish the rich panel design system.
@@ -61,6 +81,9 @@ Primary-surface sequencing is loop-first and now continues through maturity:
 - Batch 76 verifies the Daily Loop Alpha and performance baseline.
 - Batches 77-82 establish Life Graph, Proof / Resource Graph, Commitments / Waiting, Action Closure, Safe Automation, and foundation performance.
 - Batches 83-89 transform Goals, Goal Detail, Plan, Reality Reflow, You, and Reviews around proof, recovery, correction, trust, memory, and continuity.
+- Batch 83 establishes Goals as a premium ambition portfolio with Goal Lifecycle Rail, Goal Weather v1, Goal Atlas preview, Completion Archive states, Next Visible Step on every active goal card, and compact lifecycle timeline.
+- Batch 84 makes Goal Detail feel like Mission Control with goal-specific lifecycle timeline, Proof Spine, Decision Trail, Milestone Cards, Kanban-lite Task Lane, connected goals, dominant Next Visible Step, end-state summaries, and Weather explanation.
+- Batch 85 makes Plan 2.0 visual and believable with Weekly Plan Strip, Next Visible Step selection, Goal Weather and proof density in believability, Plan Treaty Decision Trail notes, active-goal plan window, and Next/Doing task-lane weighting.
 
 ## Program 5 - Trust, Ambient Continuity, And Apple Platform Completion
 
@@ -72,6 +95,7 @@ Primary-surface sequencing is loop-first and now continues through maturity:
 - Risks: sync before model verification, external command duplication, overbuilding widgets, stale external state without visible trust status, or external actions without receipts.
 - Dependencies: stable Now State, Command Pipeline, verified data model.
 - Not included yet: non-phone hardware prototype, HealthKit, household/shared life.
+- Batch 93 widgets and Live Activity ambient continuity include calm snapshot concepts for Next Visible Step, Active Goal Timeline, Goal Portfolio, Next Milestone, Protected Goal, Weekly Plan Strip, and next proof action. They must stay ambient and must not show every goal.
 
 ## Program 6 - Full Path Intelligence And Learning Foundations
 
@@ -83,6 +107,7 @@ Primary-surface sequencing is loop-first and now continues through maturity:
 - Risks: template sprawl, unsupported domains, ungrounded advice, fake certainty, or full path UI before Life Graph/proof/action-closure foundations exist.
 - Dependencies: Memory, Explanation, Reality Model, surface transformation.
 - Not included yet: HealthKit, food/calorie sync, household/shared life.
+- Batch 97 expands Goal Atlas into full Path Builder, turns Milestone Cards into roadmap nodes, expands lifecycle timeline into long-range visual planning, makes Decision Trail visible across roadmap changes, and rolls Weekly Plan Strips into longer roadmap phases.
 
 ## Program 7 - Mature Invention Passes
 
@@ -94,6 +119,7 @@ Primary-surface sequencing is loop-first and now continues through maturity:
 - Risks: endless polish, late discovery of duplicated engines, performance regression, or cognitive load growth.
 - Dependencies: Programs 1-6.
 - Not included yet: release lock or user-facing accessibility claims without verification.
+- Batch 107 matures Ambition Portfolio Manager with mature Goal Weather, Completion Archive intelligence, portfolio-level proof maturity, cancelled/dropped learning summaries, Goal Atlas as the mature portfolio view, too-many-stuck-tasks detection, proof maturity comparison, and Goal Scope Maturity.
 
 ## Program 8 - Onboarding, Accessibility, And Release Hardening
 

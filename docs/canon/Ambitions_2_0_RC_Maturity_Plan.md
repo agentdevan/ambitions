@@ -222,10 +222,14 @@ Future implementation must clarify source of truth rather than create parallel s
 - Trust Ledger owns user-facing trust-impacting history.
 - Event Ledger remains raw event history.
 - Proof Rail Engine owns proof organization and presentation.
+- Proof Spine is the vertical Goal Detail / Mission Control presentation of Proof Rail, not a separate proof engine.
 - Memory Confidence Engine owns confidence state of learned memories.
 - Safe Automation Boundary owns what Ambitions may suggest, prepare, confirm, execute, or never automate.
 - Ambition Portfolio Manager owns portfolio-level goal pressure.
 - Goal Scope Governor owns scope expansion, shrink, park, and protect logic.
+- Goal Weather is the user-facing visual language for goal health, not a parallel scoring system.
+- Goal Atlas is the portfolio/map layer over Life Graph and Path Builder relationships, not a separate path store.
+- Decision Trail is the user-facing record of goal and plan changes over Event Ledger, Action Closure, and Plan Treaty decisions, not a second event log.
 
 ## Naming Rule
 
@@ -445,7 +449,15 @@ The following inventions must reach Gate 6 before the release-candidate lock or 
 - Personal Capacity Envelope
 - Ambition Portfolio Manager
 - Goal Scope Governor
+- Goal Lifecycle Rail
+- Goal Atlas
 - Goal Weather
+- Decision Trail
+- Timeline View
+- Milestone Cards
+- Kanban-lite Task Lane
+- Weekly Plan Strip
+- Completion Archive
 - Assumption Watchtower
 - Personal Operating Constitution
 - Constitution Violation behavior

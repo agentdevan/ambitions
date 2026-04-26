@@ -59,6 +59,52 @@ It is a shell-level utility surface for search and recall, not a top-level tab.
 The feeling that state, object identity, trust cues, and active context persist coherently across surfaces and platforms.
 Continuity carries meaning forward without forcing the user to reconstruct context.
 
+## Goal / Plan / Task Canonical Terms
+
+### Goal Lifecycle Rail
+
+Premium lifecycle timeline for goals. Canonical states are Previous, Active, Future, Parked, Blocked, Waiting, Protected, Completed, and Cancelled / Dropped. Completed means successfully finished; Cancelled / Dropped means intentionally ended and preserves why.
+
+### Goal Atlas
+
+Visual map of related life goals. It begins as a Goals overview preview, appears as connected goals in Goal Detail, expands into Path Builder, and matures into the Ambition Portfolio Manager view.
+
+### Proof Spine
+
+Vertical, receipt-like expression of Proof Rail for one goal. It shows evidence that the goal is becoming real without turning proof into a streak mechanic.
+
+### Next Visible Step
+
+The single visually obvious next action for an active goal. It reduces interpretation burden and prevents Goals or Plan from becoming vague dashboards.
+
+### Goal Weather
+
+User-facing visual language for goal health. Canonical states are Clear, Cloudy, Stormy, Foggy, and Protected, with explanation available in drilldown.
+
+### Decision Trail
+
+Human-readable record of why a goal or plan changed, paused, resumed, completed, cancelled, merged, replaced, or was parked. It is the visible product expression of relevant Event Ledger, Action Closure, and Plan Treaty decisions.
+
+### Timeline View
+
+Clean horizontal or vertical time context for goals, milestones, tasks, proof, decisions, pauses, and recovery moments.
+
+### Milestone Cards
+
+Goal-detail checkpoint cards that show meaningful progress structure before exposing detailed tasks. They may summarize tasks, notes, proof, blockers, deadlines, assumptions, risks, and decision notes.
+
+### Kanban-lite Task Lane
+
+Restrained goal-specific task lane with Later, Next, Doing, Waiting, and Done columns. It belongs inside Goal Detail and must not become Ambitions' top-level identity.
+
+### Weekly Plan Strip
+
+Seven-day visual strip showing how active goals become real this week. It should include buffer, rest, and recovery when those make the week believable.
+
+### Completion Archive
+
+Premium archive for completed, cancelled, dropped, parked, replaced, merged, transformed, or no-longer-relevant goals. It preserves what happened, why, proof collected, what replaced the goal, Decision Trail, and final status.
+
 ## Shell Layer Terms
 
 ### Persistent shell layer

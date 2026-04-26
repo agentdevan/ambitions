@@ -21,8 +21,29 @@ Locked 2.0 direction:
 - Habits is absorbed into Plan, rituals, Today execution, and Reviews/pattern reflection
 - visual direction is "Calm shell, rich panels, meaningful visual state."
 - execution direction is "Verify truth first, build shared systems once, then transform surfaces, then ship Apple-native external surfaces."
+- Goal / Plan / Task visual canon is newly integrated as planned future work: Goal Lifecycle Rail, Goal Atlas, Proof Spine, Next Visible Step, Goal Weather, Decision Trail, Timeline View, Milestone Cards, Kanban-lite Task Lane, Weekly Plan Strip, and Completion Archive.
+- Ambitions is not a task manager with goals attached. It is a visual life execution system where goals, plans, milestones, tasks, proof, decisions, weather, and archive learning stay connected by design.
 
 For detail, use [docs/canon/Ambitions_2_0_Master_Plan.md](docs/canon/Ambitions_2_0_Master_Plan.md), [docs/canon/Ambitions_2_0_Product_Architecture.md](docs/canon/Ambitions_2_0_Product_Architecture.md), [docs/canon/Ambitions_2_0_Systems_Architecture.md](docs/canon/Ambitions_2_0_Systems_Architecture.md), [docs/canon/Ambitions_2_0_Visual_System.md](docs/canon/Ambitions_2_0_Visual_System.md), [docs/canon/Ambitions_2_0_Roadmap.md](docs/canon/Ambitions_2_0_Roadmap.md), and [docs/canon/Ambitions_2_0_Batch_Plan.md](docs/canon/Ambitions_2_0_Batch_Plan.md).
+
+### Goal / Plan / Task visual systems
+
+The active 2.0 canon defines this hierarchy:
+
+- Goal = direction.
+- Plan = believable path.
+- Milestone = meaningful checkpoint.
+- Task = concrete action.
+- Proof = evidence of real progress.
+- Decision = reason the path changed.
+- Weather = readable health signal.
+- Archive = memory and learning.
+
+The product should visually prioritize current goal direction, Next Visible Step, current plan window, proof of momentum, risk/blocker clarity, timeline context, and archive/learning.
+
+Every active goal should show one Next Visible Step. Goal Weather is the user-facing visual language for goal health. Proof Spine is the vertical Goal Detail expression of Proof Rail. Goal Atlas is the visual portfolio/map layer that later expands into Path Builder. Plan Treaty changes should create Decision Trail notes when scope changes. Completion Archive must preserve completed, cancelled, dropped, parked, merged, and transformed goals as learning artifacts, not trash.
+
+This section records product canon only. It does not claim these surfaces are implemented before their owning batches.
 
 ---
 

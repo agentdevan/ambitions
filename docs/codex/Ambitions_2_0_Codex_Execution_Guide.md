@@ -31,6 +31,8 @@ For Ambitions 2.0 tasks, read:
 - Do not build widgets or Live Activities before Canonical Now State and Command Pipeline are stable.
 - Do not do sync work before data model and capability verification.
 - Do not add HealthKit, household/shared-life, food/calorie sync, or non-phone hardware work in Ambitions 2.0.
+- Future batches must preserve the Goal -> Plan -> Task -> Proof relationship: goals show direction, plans show the believable path, milestones show meaningful checkpoints, tasks show concrete next action, proof shows real progress, decisions explain change, weather shows readable health, and archive preserves learning.
+- Batches 83, 84, 85, 93, 97, and 107 inherit the newly integrated Goal / Plan / Task visual systems from the active canon; do not implement them early, rename them locally, or split overlapping concepts into duplicate engines.
 - Preserve old launch/release history as historical docs unless a specific batch supersedes it.
 - Report changed files and validation steps every time.
 
