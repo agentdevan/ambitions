@@ -210,6 +210,23 @@ struct TodayExperience: Sendable {
     let mode: TodayExperienceMode
     let hero: TodayHeroState
     let support: TodaySupportLayerState
+    let execution: TodayExecutionViewState
+
+    init(
+        mode: TodayExperienceMode,
+        hero: TodayHeroState,
+        support: TodaySupportLayerState,
+        execution: TodayExecutionViewState? = nil
+    ) {
+        self.mode = mode
+        self.hero = hero
+        self.support = support
+        self.execution = execution ?? TodayExecutionViewState.compatibility(
+            mode: mode,
+            hero: hero,
+            support: support
+        )
+    }
 }
 
 // Legacy internal projection scaffolding retained to avoid widening Batch 43

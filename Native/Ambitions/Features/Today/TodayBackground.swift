@@ -1,11 +1,12 @@
 import Foundation
 import SwiftUI
 #if canImport(UIKit)
-import UIKit
+    import UIKit
 #endif
 
 struct TodayBackgroundView: View {
     @Environment(\.accessibilityReduceMotion) private var reduceMotion
+    @Environment(\.colorScheme) private var colorScheme
 
     var body: some View {
         TimelineView(.periodic(from: .now, by: reduceMotion ? 300 : 60)) { context in
@@ -34,7 +35,11 @@ struct TodayBackgroundView: View {
                 }
 
                 LinearGradient(
-                    colors: [.clear, Color.black.opacity(0.08), Color.black.opacity(0.22)],
+                    colors: [
+                        colorScheme == .dark ? Color.black.opacity(0.20) : Color.white.opacity(0.20),
+                        colorScheme == .dark ? Color.black.opacity(0.30) : Color.white.opacity(0.28),
+                        colorScheme == .dark ? Color.black.opacity(0.46) : Color(red: 0.98, green: 0.94, blue: 0.86).opacity(0.42),
+                    ],
                     startPoint: .top,
                     endPoint: .bottom
                 )
@@ -52,7 +57,7 @@ private struct TodayStarField: View {
         GeometryReader { _ in
             Canvas { context, size in
                 let twinkle = CGFloat((sin(date.timeIntervalSinceReferenceDate / 180) + 1) * 0.5)
-                for index in 0..<24 {
+                for index in 0 ..< 24 {
                     var path = Path()
                     let point = pointForStar(index: index, in: size)
                     let radius = CGFloat((index % 3) + 1)
@@ -84,11 +89,11 @@ private struct TodaySkyPalette {
     init(date: Date) {
         let calendar = Calendar.current
         let seconds = calendar.dateComponents([.hour, .minute, .second], from: date)
-        let hour: Double = Double(seconds.hour ?? 0)
-        let minute: Double = Double(seconds.minute ?? 0)
-        let second: Double = Double(seconds.second ?? 0)
+        let hour = Double(seconds.hour ?? 0)
+        let minute = Double(seconds.minute ?? 0)
+        let second = Double(seconds.second ?? 0)
         let totalSeconds: Double = hour * 3600 + minute * 60 + second
-        let dayProgress = totalSeconds / 86_400
+        let dayProgress = totalSeconds / 86400
         let solar = max(0, sin((dayProgress - 0.25) * .pi))
         let dawnGlow = Foundation.exp(-Foundation.pow((dayProgress - 0.23) / 0.06, 2))
         let duskGlow = Foundation.exp(-Foundation.pow((dayProgress - 0.76) / 0.07, 2))
@@ -138,14 +143,14 @@ private extension Color {
 
     var components: Components {
         #if canImport(UIKit)
-        var red: CGFloat = 0
-        var green: CGFloat = 0
-        var blue: CGFloat = 0
-        var alpha: CGFloat = 0
-        UIColor(self).getRed(&red, green: &green, blue: &blue, alpha: &alpha)
-        return Components(red: red, green: green, blue: blue, opacity: alpha)
+            var red: CGFloat = 0
+            var green: CGFloat = 0
+            var blue: CGFloat = 0
+            var alpha: CGFloat = 0
+            UIColor(self).getRed(&red, green: &green, blue: &blue, alpha: &alpha)
+            return Components(red: red, green: green, blue: blue, opacity: alpha)
         #else
-        return Components(red: 0, green: 0, blue: 0, opacity: 1)
+            return Components(red: 0, green: 0, blue: 0, opacity: 1)
         #endif
     }
 }

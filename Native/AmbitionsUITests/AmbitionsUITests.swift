@@ -361,8 +361,8 @@ final class AmbitionsUITests: XCTestCase {
         XCTAssertTrue(app.descendants(matching: .any)["today.hero-card"].waitForExistence(timeout: 10))
         let primaryAction = app.buttons["today.hero.primary-action"]
         XCTAssertTrue(primaryAction.waitForExistence(timeout: 10))
+        XCTAssertTrue(app.descendants(matching: .any)["today.context-lens"].waitForExistence(timeout: 10))
         XCTAssertTrue(app.descendants(matching: .any)["today.support-card"].waitForExistence(timeout: 10))
-        XCTAssertTrue(app.descendants(matching: .any)["today.support.time-aperture"].waitForExistence(timeout: 10))
     }
 
     func testCreateGoalShowsClarificationWhenRequired() throws {
