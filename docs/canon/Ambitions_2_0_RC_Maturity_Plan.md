@@ -142,7 +142,7 @@ Completed Batches 61-87 remain complete for planning history.
 Batch 88 is complete for planning purposes after implementation and local validation.
 No batch after 87 is marked complete by this maturity plan.
 
-Rows 73-88 below are preserved as completed roadmap coverage; Batch 89 is the next queued / next uncompleted batch and Batches 90-120 remain future planned roadmap work.
+Rows 73-88 below are preserved as completed roadmap coverage. After the Design Constitution delta backlog and [Ambitions_2_0_Roadmap_Merge_Audit.md](Ambitions_2_0_Roadmap_Merge_Audit.md), D01 is the next dependency-safe implementation batch, while original Batches 89-120 remain future planned roadmap work only through the merge audit classifications and dependencies.
 
 | Batch | Name | Primary maturity gate |
 | --- | --- | --- |
@@ -280,8 +280,8 @@ Every feature batch must include a performance budget. Dedicated performance/har
 
 - daily loop / chrome wave: Batch 76
 - foundation wave: Batch 82
-- core surface wave: Batch 89
-- external surface wave: Batch 94
+- core surface wave: original Batch 89, resequenced after D10-D21 by the roadmap merge audit
+- external surface wave: original Batch 94, absorbed into D22-D26 by the roadmap merge audit
 - strategy / learning wave: Batch 100
 - mature invention wave: Batch 112
 - final RC hardening: Batch 118

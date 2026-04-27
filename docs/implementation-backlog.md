@@ -197,6 +197,12 @@ Recommended delta order:
 
 The exact recommended next implementation batch from this audit is `Shell IA / Tab Alignment Delta`, because it is the smallest dependency-safe place to preserve the five-tab shell, confirm Capture opens the full surface, add current-tab tap behavior, and keep legacy Profile/Insights/Habits naming internal before component and surface work consumes navigation assumptions.
 
+## Roadmap merge audit note
+
+[canon/Ambitions_2_0_Roadmap_Merge_Audit.md](canon/Ambitions_2_0_Roadmap_Merge_Audit.md) maps the original Batches 89-120 against D01-D26. D01-D26 take precedence wherever old roadmap wording conflicts with the Design Constitution. Original Batch 89-120 work remains preserved future intent only where resequenced, absorbed, deferred, or rewritten by that audit.
+
+Do not start Batch 89 as the next implementation batch unless a future user instruction explicitly overrides the D backlog and the merge audit dependency gates. The dependency-safe next implementation batch remains D01.
+
 ## Design Constitution Coverage Checklist
 
 The backlog now tracks the following as future implementation coverage, not shipped proof: Life Areas Overview / Atlas, North Stars / dormant Ambitions, One-Step Goals, Task/Step distinction, Smart Attachment with receipts/correction, You Personal System Center, Trust Center, What Ambitions Knows, GroupedNavigationList, Panel Size, Display Density, screen/component/UX writing matrices, Accessibility Nutrition verification, external surfaces contract, widgets, Live Activities, App Intents/Shortcuts, notification frequency/privacy controls, receipt search/history, local-first calendar-derived insight, Plan-owned calendar permission, motion/Reduce Motion, Semantic Zoom fallbacks, safe-zone modularity, Today Plan Layer, and Life Areas / North Stars / Goals semantic zoom.

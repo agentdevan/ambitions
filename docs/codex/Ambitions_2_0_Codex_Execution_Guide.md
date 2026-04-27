@@ -23,18 +23,19 @@ For Ambitions 2.0 tasks, read:
 15. `docs/canon/Ambitions_2_0_Accessibility_Nutrition.md` when accessibility, UI, release, or trust claims are involved
 16. `docs/canon/Ambitions_2_0_Capability_Matrix.md` when verifying status or starting a roadmap reconciliation pass
 17. `docs/canon/Ambitions_2_0_Implementation_Gap_Audit.md` when planning Design Constitution alignment or checking implementation gaps
-18. `docs/review/VISUAL_REVIEW_CHECKLIST.md` when the task changes visible UI, navigation, empty states, or user-facing language
-19. `docs/review/FRICTION_LOG.md` when observed product friction needs to be captured without expanding active batch scope
+18. `docs/canon/Ambitions_2_0_Roadmap_Merge_Audit.md` before planning any original Batch 89-120 work
+19. `docs/review/VISUAL_REVIEW_CHECKLIST.md` when the task changes visible UI, navigation, empty states, or user-facing language
+20. `docs/review/FRICTION_LOG.md` when observed product friction needs to be captured without expanding active batch scope
 
 ## Execution Rules
 
-- Current execution status: Batches 00-88 are complete for planning purposes. Batch 89 is the next queued / next uncompleted batch. Batches 90-120 remain future planned roadmap work.
+- Current execution status: Batches 00-88 are complete for planning purposes. D01 is the next dependency-safe implementation batch. Original Batches 89-120 remain future planned roadmap work only through the classifications and dependencies in `docs/canon/Ambitions_2_0_Roadmap_Merge_Audit.md`.
 - Work one batch at a time.
 - Work on `main` only.
 - Do not create, switch to, or suggest branches unless the user explicitly asks.
 - Start with a plan pass before an implementation pass for non-trivial or multi-file work.
 - Do not do feature work outside the active batch.
-- Do not skip ahead into Batch 89+ implementation unless a direct user request explicitly changes scope.
+- Do not skip ahead into Batch 89+ implementation unless a direct user request explicitly changes scope and the roadmap merge audit dependencies are satisfied.
 - Do not build surfaces before shared systems exist.
 - Do not build widgets or Live Activities before Canonical Now State and Command Pipeline are stable.
 - Do not do sync work before data model and capability verification.

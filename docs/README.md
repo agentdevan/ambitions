@@ -35,6 +35,8 @@ For the current free Codex workflow, also read:
   Active Batch 61-120 execution order and owning batch scopes.
 - [canon/Ambitions_2_0_Implementation_Gap_Audit.md](canon/Ambitions_2_0_Implementation_Gap_Audit.md)
   Active repo-wide gap audit and D01-D26 delta/alignment batch source.
+- [canon/Ambitions_2_0_Roadmap_Merge_Audit.md](canon/Ambitions_2_0_Roadmap_Merge_Audit.md)
+  Active merge map for original Batches 89-120 against D01-D26.
 - [canon/Documentation_Cleanup_Audit.md](canon/Documentation_Cleanup_Audit.md)
   Active markdown inventory and cleanup classification audit.
 - [canon/README.md](canon/README.md)

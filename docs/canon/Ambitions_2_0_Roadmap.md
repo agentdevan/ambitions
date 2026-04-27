@@ -4,6 +4,8 @@ This roadmap now runs through Ambitions 2.0 RC maturity instead of stopping at v
 
 [design/Ambitions_Design_Constitution.md](design/Ambitions_Design_Constitution.md) is the active design source of truth for IA, UX writing, component naming, interaction, trust, accessibility, and external-surface contracts. Future roadmap work must reconcile against it before implementation.
 
+[Ambitions_2_0_Roadmap_Merge_Audit.md](Ambitions_2_0_Roadmap_Merge_Audit.md) is the active merge map between original Batches 89-120 and the newer D01-D26 Design Constitution delta/alignment backlog. D01-D26 take precedence over Batches 89-120 wherever there is any conflict.
+
 ## Shippable Milestones
 
 - Milestone A - Ambitions 2.0 Alpha: prove the daily operating loop across Today, Global Chrome, Activation Contract, Life Graph foundation, Proof / Resource foundation, Commitments / Waiting, Action Closure v1, Goals/Goal Detail proof loop v1, Plan believability/Reflow v1, and daily-loop performance baseline.
@@ -147,6 +149,8 @@ Dependency-safe delta order:
 26. Release Candidate Validation.
 
 The next implementation prompt should start with D01 unless a direct user instruction chooses another delta. Do not implement Smart Attachment, Life Areas, North Stars, One-Step Goals, external surfaces, or accessibility claims before their prerequisites are satisfied.
+
+Original Batches 89-120 remain preserved future roadmap intent, but they are no longer the next unchanged execution sequence. Use [Ambitions_2_0_Roadmap_Merge_Audit.md](Ambitions_2_0_Roadmap_Merge_Audit.md) before planning any Batch 89-120 work; no original batch may run before the D batch that owns its required Constitution foundation.
 
 ## Program 1 - Truth, Shell, And Visual Foundation
 

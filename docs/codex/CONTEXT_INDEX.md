@@ -7,7 +7,7 @@ Ambitions 1.0 foundation work is complete through registry Batch 18.
 All phases and batches before Batch 61 are complete for planning purposes.
 The active Ambitions 2.0 canon is the post-Batch-60 transformation package beginning at Batch 61. It supersedes prior roadmap direction where conflicts exist after Batch 60 without erasing older launch, hardening, frontend transformation, or release-candidate history.
 
-Current execution status: Batches 00-88 are complete for planning purposes. Batch 89 is the next queued / next uncompleted batch. Batches 90-120 remain future planned roadmap work.
+Current execution status: Batches 00-88 are complete for planning purposes. D01 is the next dependency-safe implementation batch from the Design Constitution delta/alignment backlog. Original Batches 89-120 remain future planned roadmap work only through the classifications and dependencies in [Ambitions_2_0_Roadmap_Merge_Audit.md](../canon/Ambitions_2_0_Roadmap_Merge_Audit.md).
 
 ## Required Read Order
 
@@ -29,16 +29,17 @@ For non-trivial work, read these in order before planning:
 14. [Ambitions_2_0_Foundation_Performance_Persistence_Budget.md](../canon/Ambitions_2_0_Foundation_Performance_Persistence_Budget.md) when validating Phase B foundation performance, bounded-query, persistence, migration, export/import, and sync-readiness posture.
 15. [Ambitions_2_0_Capability_Matrix.md](../canon/Ambitions_2_0_Capability_Matrix.md) when verifying implementation status or running roadmap reconciliation.
 16. [Ambitions_2_0_Implementation_Gap_Audit.md](../canon/Ambitions_2_0_Implementation_Gap_Audit.md) when planning Design Constitution alignment or checking implementation gaps.
-17. [Documentation_Cleanup_Audit.md](../canon/Documentation_Cleanup_Audit.md) when cleaning or classifying markdown docs.
-18. [Ambitions_2_0_Codex_Execution_Guide.md](Ambitions_2_0_Codex_Execution_Guide.md).
-19. [MASTER_CODEX_SYSTEM.md](MASTER_CODEX_SYSTEM.md).
-20. [BATCH_REGISTRY.md](BATCH_REGISTRY.md).
-21. [VISUAL_REVIEW_CHECKLIST.md](../review/VISUAL_REVIEW_CHECKLIST.md) when visible UI, navigation, empty states, copy, or hierarchy changes.
-22. [FRICTION_LOG.md](../review/FRICTION_LOG.md) when observed product friction needs to be captured without expanding active scope.
-23. [MASTER_PRODUCT_SPEC.md](../../MASTER_PRODUCT_SPEC.md) for current shipping product truth where not superseded by the new Ambitions 2.0 canon.
-24. [canon/README.md](../canon/README.md) for active canon index and historical-doc status.
-25. [archive/README.md](../archive/README.md) when investigating superseded design or frontend transformation context.
-26. Supporting docs linked from [docs/README.md](../README.md).
+17. [Ambitions_2_0_Roadmap_Merge_Audit.md](../canon/Ambitions_2_0_Roadmap_Merge_Audit.md) before planning any original Batch 89-120 work.
+18. [Documentation_Cleanup_Audit.md](../canon/Documentation_Cleanup_Audit.md) when cleaning or classifying markdown docs.
+19. [Ambitions_2_0_Codex_Execution_Guide.md](Ambitions_2_0_Codex_Execution_Guide.md).
+20. [MASTER_CODEX_SYSTEM.md](MASTER_CODEX_SYSTEM.md).
+21. [BATCH_REGISTRY.md](BATCH_REGISTRY.md).
+22. [VISUAL_REVIEW_CHECKLIST.md](../review/VISUAL_REVIEW_CHECKLIST.md) when visible UI, navigation, empty states, copy, or hierarchy changes.
+23. [FRICTION_LOG.md](../review/FRICTION_LOG.md) when observed product friction needs to be captured without expanding active scope.
+24. [MASTER_PRODUCT_SPEC.md](../../MASTER_PRODUCT_SPEC.md) for current shipping product truth where not superseded by the new Ambitions 2.0 canon.
+25. [canon/README.md](../canon/README.md) for active canon index and historical-doc status.
+26. [archive/README.md](../archive/README.md) when investigating superseded design or frontend transformation context.
+27. Supporting docs linked from [docs/README.md](../README.md).
 
 ## Precedence Model
 
@@ -76,6 +77,7 @@ These files are the active Ambitions source-of-truth stack:
 - [../canon/Ambitions_2_0_Decision_Log.md](../canon/Ambitions_2_0_Decision_Log.md)
 - [../canon/Ambitions_2_0_Capability_Matrix.md](../canon/Ambitions_2_0_Capability_Matrix.md)
 - [../canon/Ambitions_2_0_Implementation_Gap_Audit.md](../canon/Ambitions_2_0_Implementation_Gap_Audit.md)
+- [../canon/Ambitions_2_0_Roadmap_Merge_Audit.md](../canon/Ambitions_2_0_Roadmap_Merge_Audit.md)
 - [../canon/Documentation_Cleanup_Audit.md](../canon/Documentation_Cleanup_Audit.md)
 - [Ambitions_2_0_Codex_Execution_Guide.md](Ambitions_2_0_Codex_Execution_Guide.md)
 - [FREE_WORKFLOW_OPERATING_SYSTEM.md](FREE_WORKFLOW_OPERATING_SYSTEM.md)

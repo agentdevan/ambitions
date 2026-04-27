@@ -16,6 +16,8 @@ It does not replace the higher-level vision or dependency order. For Ambitions 2
 - [../canon/Ambitions_2_0_Accessibility_Nutrition.md](../canon/Ambitions_2_0_Accessibility_Nutrition.md)
 - [../canon/Ambitions_2_0_Decision_Log.md](../canon/Ambitions_2_0_Decision_Log.md)
 - [../canon/Ambitions_2_0_Capability_Matrix.md](../canon/Ambitions_2_0_Capability_Matrix.md)
+- [../canon/Ambitions_2_0_Implementation_Gap_Audit.md](../canon/Ambitions_2_0_Implementation_Gap_Audit.md)
+- [../canon/Ambitions_2_0_Roadmap_Merge_Audit.md](../canon/Ambitions_2_0_Roadmap_Merge_Audit.md)
 
 Older preserved continuity docs:
 
@@ -43,11 +45,13 @@ Use [../canon/Ambitions_2_0_Batch_Plan.md](../canon/Ambitions_2_0_Batch_Plan.md)
 
 ## Active Queue
 
-Current execution status: Ambitions 2.0 post-Batch-60 canon is adopted. Batches 00-88 are complete for planning purposes. Batch 89 is the next queued / next uncompleted batch. Batches 90-120 remain future planned roadmap work.
+Current execution status: Ambitions 2.0 post-Batch-60 canon is adopted. Batches 00-88 are complete for planning purposes. D01 is the next dependency-safe implementation batch from the Design Constitution delta/alignment backlog. Original Batches 89-120 remain future planned roadmap work only through the classifications and dependencies in [../canon/Ambitions_2_0_Roadmap_Merge_Audit.md](../canon/Ambitions_2_0_Roadmap_Merge_Audit.md).
 
 Docs-only reconciliation note: Design Constitution canon reconciliation was performed as a user-directed canon/design-system integration pass after Batch 88 planning status. It created the active design constitution and supporting matrices/specs without starting Batch 89 feature work, changing branch, changing app code, or claiming future implementation completion.
 
 Implementation gap audit note: A repo-wide Design Constitution implementation gap audit was added after roadmap verification. It preserves completed batch history and creates future delta/alignment batches for Constitution gaps without starting Batch 89 feature work or marking any delta complete.
+
+Roadmap merge audit note: The original Batches 89-120 were audited against D01-D26 after the Design Constitution. D01-D26 take precedence wherever there is conflict. Batch 89 is retained as future core-surface QA intent after D10-D21 or inside D26, not as the next runnable implementation batch.
 
 | Batch | Name | Status | Notes |
 | --- | --- | --- | --- |
@@ -91,9 +95,42 @@ Implementation gap audit note: A repo-wide Design Constitution implementation ga
 | 37 | Post-2.0 Hardening 03 / Secondary Surface Productization | Completed | Completed for planning purposes before the post-Batch-60 Ambitions 2.0 canon. |
 | 38 | Post-2.0 Hardening 04 / Repo Truth, Regression, Performance, and Release Readiness | Completed | Completed for planning purposes before the post-Batch-60 Ambitions 2.0 canon. |
  
+## Design Constitution Delta Queue
+
+These rows are planned future implementation work from the Design Constitution implementation gap audit. They are not completed and do not erase the original Batch 89-120 roadmap history.
+
+| Delta | Name | Status | Notes |
+| --- | --- | --- | --- |
+| D01 | Shell IA / Tab Alignment Delta | Planned | Next dependency-safe implementation batch. |
+| D02 | Shared Object Terminology Cleanup | Planned | Depends on D01. |
+| D03 | GroupedNavigationList Component | Planned | Shared component foundation. |
+| D04 | Panel Size + Display Density | Planned | Shared panel preference foundation. |
+| D05 | Receipt / Action Closure Search and Privacy Contract | Planned | Receipt search/history and redaction foundation. |
+| D06 | Smart Attachment Foundation | Planned | Depends on D02, D05, Command Pipeline, and Capture. |
+| D07 | Life Areas Overview / Atlas Object Model | Planned | Depends on D02 and Life Graph. |
+| D08 | North Stars / Dormant Ambitions Object Model | Planned | Depends on D07. |
+| D09 | One-Step Goals Object Model | Planned | Depends on D02 and D05. |
+| D10 | Screen Contract Matrix Implementation Pass | Planned | Depends on D03-D09. |
+| D11 | Today 2.0 Design Constitution Alignment | Planned | Depends on D04, D09-D10, Now State, and Plan believability. |
+| D12 | Capture + Quiet Command Sheet Alignment | Planned | Depends on D06, D09-D10. |
+| D13 | Goals / Life Areas / North Stars Transformation and Semantic Zoom | Planned | Depends on D07-D10. |
+| D14 | Goal Detail Mission Control Lanes Alignment | Planned | Depends on D09-D10 and D13. |
+| D15 | Plan Believability + Timeline Widget Alignment | Planned | Depends on D05, D10, and Reality Model. |
+| D16 | Ritual Split Alignment | Planned | Depends on D11, D15, and You foundation. |
+| D17 | You Personal System Center Alignment | Planned | Depends on D03-D05 and D10. |
+| D18 | Trust Center Alignment | Planned | Depends on D05 and D17. |
+| D19 | What Ambitions Knows | Planned | Depends on D05 and D17-D18. |
+| D20 | UX Writing Cleanup | Planned | Depends on D11-D19. |
+| D21 | Accessibility Nutrition Verification | Planned | Depends on D03-D20. |
+| D22 | External Surfaces Contract Alignment | Planned | Depends on D05, D20-D21, Now State, and Command Pipeline. |
+| D23 | Widgets Alignment | Planned | Depends on D22. |
+| D24 | Live Activities Alignment | Planned | Depends on D22. |
+| D25 | App Intents / Shortcuts Alignment | Planned | Depends on D22. |
+| D26 | Release Candidate Validation | Planned | Depends on D01-D25. |
+
 ## Post-Batch-60 Ambitions 2.0 Queue
 
-These rows are the active planning state for the new post-Batch-60 Ambitions 2.0 canon.
+These rows preserve the original post-Batch-60 Ambitions 2.0 roadmap history. Rows 89-120 are future / resequenced after the roadmap merge audit and must follow D01-D26 dependencies before implementation.
 
 | Batch | Name | Status | Notes |
 | --- | --- | --- | --- |
@@ -126,42 +163,42 @@ These rows are the active planning state for the new post-Batch-60 Ambitions 2.0
 | 86 | Reality Reflow v1 and Recovery Gradient | Completed | Implemented Plan-safe Reality Reflow projection, ordered recovery gradient, Save the Day plan handling, receipt preview, confirmation/undo/calendar boundaries, and manual fallback behavior without silent mutation or calendar writes; validated with XcodeGen generation, simulator build, focused Plan/foundation tests, full `AmbitionsTests`, and canonical five-tab UI smoke on iPhone 17. |
 | 87 | You 2.0 / Trust Center, Constitution, Memory Controls | Completed | Implemented the You 2.0 trust/control room with Trust Center hero, Personal Operating Constitution summary, Memory Controls, corrections/assumptions status, safe automation boundaries, compact receipt/audit posture, conservative external-surface labels, and preserved Appearance Studio; validated with XcodeGen generation, simulator build, focused Profile/safety/memory/receipt/shell tests, full `AmbitionsTests` (`588`), and focused You UI smoke on iPhone 17. Sync, export/import proof, accessibility verification, cloud/account systems, Reviews v1, and destructive memory deletion remain future-owned or unavailable. |
 | 88 | Reviews v1 / Recovery Review and Life OS Receipt | Completed | Implemented a local-first Reviews v1 projection and You-owned review surface with Recovery Review, Life OS Receipt, proof highlights, correction prompts, carry-forward guidance, and unavailable/future-owned trust notes while preserving the five-tab shell and not restoring Insights as a top-level tab; validated with XcodeGen generation, focused Reviews/Profile tests, and simulator build on iPhone 17. Sync, account systems, cloud intelligence, production accessibility verification, and future export/import proof remain unavailable or future-owned. |
-| 89 | Core Surface Integration QA and Performance Pass | Queued | Dedicated core-surface integration/performance pass. |
-| 90 | Export / Import Proof and Disaster Drill | Queued | Future trust fallback batch; no fake sync claims. |
-| 91 | Apple-First Sync and Conflict Policy | Queued | Future Apple-first sync/conflict-policy batch; no required backend. |
-| 92 | App Intents and Shared Container Receipts | Queued | Future external action batch; must consume shared commands, receipts, and external continuity contract. |
-| 93 | Widgets and Live Activity Ambient Continuity | Queued | Future external surface batch; newly integrated planned canon includes calm snapshots for Next Visible Step, Active Goal Timeline, Goal Portfolio, Next Milestone, Protected Goal, Weekly Plan Strip, and next proof action; lightweight snapshots only. |
-| 94 | External Surface Platform Verification and Performance Pass | Queued | Dedicated external proof/performance pass before production-ready claims. |
-| 95 | Path Intelligence Foundation / Life Path Simulation | Queued | Future Life Path Simulation contract batch; no Path Builder UI yet. |
-| 96 | Domain Path Packs and Path Fork Simulator | Queued | Future path pack/fork foundation; broad coherent families only. |
-| 97 | Path Builder UI / Long-Range Roadmap v1 | Queued | Future UI batch over path contracts; newly integrated planned canon expands Goal Atlas into Path Builder, turns milestones into roadmap nodes, extends lifecycle timeline, shows Decision Trail across roadmap changes, and rolls Weekly Plan Strips into longer phases. |
-| 98 | Learning and Anticipation v1 | Queued | Future learning batch; evidence-derived and user-confirmed only. |
-| 99 | Memory Confidence, Correction Cards, and Narrative Memory Map | Queued | Future memory/correction surface batch; no black-box claims. |
-| 100 | Strategy / Learning Integration QA and Performance Pass | Queued | Dedicated strategy/learning integration and performance pass. |
-| 101 | Life Graph Mature Relationship Audit | Queued | Future RC maturity audit. |
-| 102 | Action Closure Mature Receipt / Undo / Trust Audit | Queued | Future RC maturity audit. |
-| 103 | Proof-Weighted Progress and Momentum Integrity Maturity | Queued | Future RC maturity audit. |
-| 104 | Commitments, Waiting, Promise Ledger, and Social Load Maturity | Queued | Future RC maturity audit. |
-| 105 | Believability Kernel, Constraint Gravity, and Plan Treaty Maturity | Queued | Future RC maturity audit. |
-| 106 | Reality Reflow, Recovery Gradient, and Save the Day Maturity | Queued | Future RC maturity audit. |
-| 107 | Ambition Portfolio Manager, Goal Weather, and Goal Scope Maturity | Queued | Future RC maturity audit; newly integrated planned canon matures Goal Weather, Completion Archive intelligence, portfolio-level proof maturity, cancelled/dropped learning summaries, Goal Atlas as portfolio view, stuck-task detection, proof comparison, and goal scope maturity. |
-| 108 | Personal Operating Constitution and Calm Intervention Maturity | Queued | Future RC maturity audit. |
-| 109 | Reviews, Life OS Receipt, and Narrative Memory Maturity | Queued | Future RC maturity audit. |
-| 110 | Path Forks, Future Self Simulation, and Domain Pack Maturity | Queued | Future RC maturity audit. |
-| 111 | Cross-Surface Continuity and Mode Lens Maturity | Queued | Future RC maturity audit. |
-| 112 | Mature Invention Performance Pass | Queued | Dedicated mature-invention performance pass. |
-| 113 | Onboarding, Empty States, and Returning User Continuity | Queued | Future continuity batch after mature systems exist. |
-| 114 | Representative Scenario Fixtures and Indispensability QA v1 | Queued | Future scenario validation batch. |
-| 115 | Accessibility Verification and User-Facing Nutrition Facts | Queued | Future verification batch; publish user-facing claims only after evidence. |
-| 116 | Visual Polish, Appearance Studio, and Shell Regression | Queued | Future visual/shell regression batch; no tab IA drift. |
-| 117 | Offline, Data Safety, Migration, and Reliability Hardening | Queued | Future data/reliability hardening batch. |
-| 118 | Final Performance, Memory, and Responsiveness Pass | Queued | Final performance pass before RC audit. |
-| 119 | Ambitions 2.0 RC Audit | Queued | Future RC blocker/deferral audit. |
-| 120 | Ambitions 2.0 Release Candidate Lock | Queued | Future RC lock only after validation evidence supports it. |
+| 89 | Core Surface Integration QA and Performance Pass | Future / resequenced | Dedicated core-surface integration/performance pass. |
+| 90 | Export / Import Proof and Disaster Drill | Future / resequenced | Future trust fallback batch; no fake sync claims. |
+| 91 | Apple-First Sync and Conflict Policy | Future / resequenced | Future Apple-first sync/conflict-policy batch; no required backend. |
+| 92 | App Intents and Shared Container Receipts | Future / resequenced | Future external action batch; must consume shared commands, receipts, and external continuity contract. |
+| 93 | Widgets and Live Activity Ambient Continuity | Future / resequenced | Future external surface batch; newly integrated planned canon includes calm snapshots for Next Visible Step, Active Goal Timeline, Goal Portfolio, Next Milestone, Protected Goal, Weekly Plan Strip, and next proof action; lightweight snapshots only. |
+| 94 | External Surface Platform Verification and Performance Pass | Future / resequenced | Dedicated external proof/performance pass before production-ready claims. |
+| 95 | Path Intelligence Foundation / Life Path Simulation | Future / resequenced | Future Life Path Simulation contract batch; no Path Builder UI yet. |
+| 96 | Domain Path Packs and Path Fork Simulator | Future / resequenced | Future path pack/fork foundation; broad coherent families only. |
+| 97 | Path Builder UI / Long-Range Roadmap v1 | Future / resequenced | Future UI batch over path contracts; newly integrated planned canon expands Goal Atlas into Path Builder, turns milestones into roadmap nodes, extends lifecycle timeline, shows Decision Trail across roadmap changes, and rolls Weekly Plan Strips into longer phases. |
+| 98 | Learning and Anticipation v1 | Future / resequenced | Future learning batch; evidence-derived and user-confirmed only. |
+| 99 | Memory Confidence, Correction Cards, and Narrative Memory Map | Future / resequenced | Future memory/correction surface batch; no black-box claims. |
+| 100 | Strategy / Learning Integration QA and Performance Pass | Future / resequenced | Dedicated strategy/learning integration and performance pass. |
+| 101 | Life Graph Mature Relationship Audit | Future / resequenced | Future RC maturity audit. |
+| 102 | Action Closure Mature Receipt / Undo / Trust Audit | Future / resequenced | Future RC maturity audit. |
+| 103 | Proof-Weighted Progress and Momentum Integrity Maturity | Future / resequenced | Future RC maturity audit. |
+| 104 | Commitments, Waiting, Promise Ledger, and Social Load Maturity | Future / resequenced | Future RC maturity audit. |
+| 105 | Believability Kernel, Constraint Gravity, and Plan Treaty Maturity | Future / resequenced | Future RC maturity audit. |
+| 106 | Reality Reflow, Recovery Gradient, and Save the Day Maturity | Future / resequenced | Future RC maturity audit. |
+| 107 | Ambition Portfolio Manager, Goal Weather, and Goal Scope Maturity | Future / resequenced | Future RC maturity audit; newly integrated planned canon matures Goal Weather, Completion Archive intelligence, portfolio-level proof maturity, cancelled/dropped learning summaries, Goal Atlas as portfolio view, stuck-task detection, proof comparison, and goal scope maturity. |
+| 108 | Personal Operating Constitution and Calm Intervention Maturity | Future / resequenced | Future RC maturity audit. |
+| 109 | Reviews, Life OS Receipt, and Narrative Memory Maturity | Future / resequenced | Future RC maturity audit. |
+| 110 | Path Forks, Future Self Simulation, and Domain Pack Maturity | Future / resequenced | Future RC maturity audit. |
+| 111 | Cross-Surface Continuity and Mode Lens Maturity | Future / resequenced | Future RC maturity audit. |
+| 112 | Mature Invention Performance Pass | Future / resequenced | Dedicated mature-invention performance pass. |
+| 113 | Onboarding, Empty States, and Returning User Continuity | Future / resequenced | Future continuity batch after mature systems exist. |
+| 114 | Representative Scenario Fixtures and Indispensability QA v1 | Future / resequenced | Future scenario validation batch. |
+| 115 | Accessibility Verification and User-Facing Nutrition Facts | Future / resequenced | Future verification batch; publish user-facing claims only after evidence. |
+| 116 | Visual Polish, Appearance Studio, and Shell Regression | Future / resequenced | Future visual/shell regression batch; no tab IA drift. |
+| 117 | Offline, Data Safety, Migration, and Reliability Hardening | Future / resequenced | Future data/reliability hardening batch. |
+| 118 | Final Performance, Memory, and Responsiveness Pass | Future / resequenced | Final performance pass before RC audit. |
+| 119 | Ambitions 2.0 RC Audit | Future / resequenced | Future RC blocker/deferral audit. |
+| 120 | Ambitions 2.0 Release Candidate Lock | Future / resequenced | Future RC lock only after validation evidence supports it. |
 
 ## Completed Historical Front-End Transformation Program
 
-These batches are complete for planning purposes. They remain as historical context only. The new top-level Ambitions 2.0 source of truth for future work is the Batch 61-89 canon package.
+These batches are complete for planning purposes. They remain as historical context only. The top-level Ambitions 2.0 source of truth for future work is the active canon stack plus the D01-D26 delta backlog and roadmap merge audit.
 
 | Batch | Name | Status | Notes |
 | --- | --- | --- | --- |

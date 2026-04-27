@@ -14,6 +14,7 @@ This folder contains active Ambitions canon plus preserved historical support do
 - [Ambitions_2_0_Batch_Plan.md](Ambitions_2_0_Batch_Plan.md)
 - [Ambitions_2_0_Decision_Log.md](Ambitions_2_0_Decision_Log.md)
 - [Ambitions_2_0_Implementation_Gap_Audit.md](Ambitions_2_0_Implementation_Gap_Audit.md)
+- [Ambitions_2_0_Roadmap_Merge_Audit.md](Ambitions_2_0_Roadmap_Merge_Audit.md)
 - [Documentation_Cleanup_Audit.md](Documentation_Cleanup_Audit.md)
 
 ## Active Supporting Canon
