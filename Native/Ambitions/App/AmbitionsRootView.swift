@@ -38,6 +38,15 @@ struct AmbitionsRootView: View {
             .toolbarBackground(resolvedTheme.shell.bottomBarMaterial, for: .tabBar)
             .toolbarBackground(.visible, for: .tabBar)
             .toolbarColorScheme(resolvedTheme.mode == .dark ? .dark : .light, for: .tabBar)
+            #if canImport(UIKit)
+            .background(
+                ShellTabReselectionObserver { _ in
+                    navigation.handleCurrentTabReselection()
+                }
+                .frame(width: 0, height: 0)
+                .accessibilityHidden(true)
+            )
+            #endif
 
             shellContinuityReceipt
             shellGlobalEntryButton(theme: resolvedTheme)
@@ -158,8 +167,8 @@ struct AmbitionsRootView: View {
                 switch target {
                 case .capturesInbox:
                     AppShellScaffold(
-                        title: "Captures",
-                        subtitle: "Plan-owned inbox",
+                        title: "Capture",
+                        subtitle: "Plan support route",
                         posture: .shaping,
                         backButtonAccessibilityIdentifier: "shell.plan.back-button",
                         onBack: { navigation.resetPlanPath() },
@@ -169,7 +178,7 @@ struct AmbitionsRootView: View {
                     }
                 case .habits:
                     AppShellScaffold(
-                        title: "Habits",
+                        title: "Rituals",
                         subtitle: "Plan-owned loop view",
                         posture: .shaping,
                         backButtonAccessibilityIdentifier: "shell.plan.back-button",
@@ -277,7 +286,7 @@ struct AmbitionsRootView: View {
         Button {
             presentCommandSheet(from: .shellCompose)
         } label: {
-            Label("Command", systemImage: "plus")
+            Label("Quiet Command Sheet", systemImage: "plus")
                 .labelStyle(.iconOnly)
                 .frame(width: 52, height: 52)
         }
@@ -285,8 +294,8 @@ struct AmbitionsRootView: View {
         .padding(.trailing, theme.spacing.md)
         .padding(.bottom, theme.spacing.xxl + theme.spacing.xl)
         .accessibilityElement()
-        .accessibilityLabel("Command")
-        .accessibilityHint("Opens the shell-owned command surface.")
+        .accessibilityLabel("Quiet Command Sheet")
+        .accessibilityHint("Opens the separate global quick action surface.")
         .accessibilityIdentifier("shell.global-entry-button")
         .keyboardShortcut("k", modifiers: [.command])
     }

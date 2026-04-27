@@ -37,9 +37,9 @@ enum AppTab: String, CaseIterable, Hashable, Identifiable, Codable {
         case .today: "Today"
         case .captures: "Capture"
         case .goals: "Goals"
-        case .habits: "Habits"
+        case .habits: "Rituals"
         case .plan: "Plan"
-        case .insights: "Insights"
+        case .insights: "History"
         case .profile: "You"
         }
     }

@@ -154,7 +154,7 @@ final class DefaultShellCommandRouter: ShellCommandRouting {
                     source: source,
                     presentationContext: .quickCapture,
                     destination: .planRoute(.capturesInbox),
-                    receiptBody: "Capture saved locally and opened in Capture."
+                    receiptBody: "Capture saved locally and opened in the Capture tab."
                 )
                 return ShellCommandExecutionResult(
                     title: "Capture saved",

@@ -37,7 +37,7 @@ enum ShellCommandIntent: String, CaseIterable, Hashable, Identifiable, Sendable,
 
     var subtitle: String {
         switch self {
-        case .quickCapture: "Save an idea into the canonical captures inbox."
+        case .quickCapture: "Save an idea into Capture without leaving the separate global quick action surface."
         case .newGoal: "Open the existing create-goal flow inside the shell-owned compose path."
         case .quickPlanPatch: "Land in Plan to reshape the current week."
         case .quickRecovery: "Return to Today with recovery posture in view."
@@ -90,11 +90,11 @@ enum ShellCommandEntrySource: String, Hashable, Sendable, Codable {
 
     var displayTitle: String {
         switch self {
-        case .shellCompose: "Command"
+        case .shellCompose: "Quiet Command Sheet"
         case .shellUtility: "Shell"
         case .goalsCreate: "Goals"
         case .todayQuickCapture: "Today"
-        case .capturesScreen: "Captures"
+        case .capturesScreen: "Capture"
         case .deepLink: "Deep link"
         case .appIntent: "Shortcut"
         case .notification: "Notification"
@@ -272,7 +272,7 @@ enum ShellCommandDestination: Hashable, Sendable {
         case let .planRoute(target):
             switch target {
             case .capturesInbox: "Capture"
-            case .habits: "Habits"
+            case .habits: "Rituals"
             case .weeklyReview: "Weekly Review"
             }
         case let .insightsRoute(target):
@@ -282,7 +282,7 @@ enum ShellCommandDestination: Hashable, Sendable {
             }
         case let .overlay(overlay):
             switch overlay.kind {
-            case .quietCommandSheet: "Command"
+            case .quietCommandSheet: "Quiet Command Sheet"
             case .memoryLens: "Memory Lens"
             case .createGoal: "Create Goal"
             }

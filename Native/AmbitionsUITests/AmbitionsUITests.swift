@@ -755,7 +755,7 @@ final class AmbitionsUITests: XCTestCase {
         if identified.waitForExistence(timeout: 2) {
             return identified
         }
-        let labeled = app.buttons["Command"]
+        let labeled = app.buttons["Quiet Command Sheet"]
         _ = labeled.waitForExistence(timeout: 2)
         return labeled
     }

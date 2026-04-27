@@ -16,6 +16,8 @@ final class AppShellNavigationTests: XCTestCase {
         XCTAssertEqual(AppTab.captures.canonicalTopLevelTab, .captures)
         XCTAssertEqual(AppTab.habits.canonicalTopLevelTab, .plan)
         XCTAssertEqual(AppTab.insights.canonicalTopLevelTab, .profile)
+        XCTAssertEqual(AppTab.habits.title, "Rituals")
+        XCTAssertEqual(AppTab.insights.title, "History")
         XCTAssertTrue(AppTab.captures.isCanonicalTopLevel)
         XCTAssertFalse(AppTab.habits.isCanonicalTopLevel)
         XCTAssertFalse(AppTab.insights.isCanonicalTopLevel)
@@ -73,6 +75,32 @@ final class AppShellNavigationTests: XCTestCase {
         XCTAssertEqual(navigation.activeOverlay?.intent, .quickCapture)
         XCTAssertEqual(navigation.activeOverlay?.presentationContext, .quickCapture)
         XCTAssertEqual(navigation.selectedTab, .today)
+    }
+
+    @MainActor
+    func testCurrentTabReselectionFirstTapRequestsScrollThenSecondTapReturnsToRoot() {
+        let navigation = AppNavigationModel(selectedTab: .plan)
+        navigation.openHabits()
+
+        let firstTap = navigation.handleCurrentTabReselection(now: Date(timeIntervalSince1970: 100))
+        XCTAssertEqual(firstTap, .scrollToTop)
+        XCTAssertEqual(navigation.selectedTab, .plan)
+        XCTAssertEqual(navigation.planPath, [.habits])
+
+        let secondTap = navigation.handleCurrentTabReselection(now: Date(timeIntervalSince1970: 100.4))
+        XCTAssertEqual(secondTap, .returnToRoot)
+        XCTAssertEqual(navigation.selectedTab, .plan)
+        XCTAssertTrue(navigation.planPath.isEmpty)
+    }
+
+    @MainActor
+    func testCurrentTabReselectionThresholdKeepsLaterTapAsScrollOnly() {
+        let navigation = AppNavigationModel(selectedTab: .goals)
+        navigation.openGoalDetail(goalID: "goal-shell")
+
+        XCTAssertEqual(navigation.handleCurrentTabReselection(now: Date(timeIntervalSince1970: 100)), .scrollToTop)
+        XCTAssertEqual(navigation.handleCurrentTabReselection(now: Date(timeIntervalSince1970: 101)), .scrollToTop)
+        XCTAssertEqual(navigation.goalsPath.first?.goalID, "goal-shell")
     }
 
     @MainActor

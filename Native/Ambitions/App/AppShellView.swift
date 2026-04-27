@@ -258,9 +258,9 @@ private struct QuietCommandSheetView: View {
     var body: some View {
         NavigationStack {
             FeatureScaffoldView(
-                eyebrow: "Command",
-                title: "Command",
-                subtitle: "One shell-owned place to capture, create, recover, reshape, and open canonical destinations."
+                eyebrow: "Quiet Command Sheet",
+                title: "Quiet Command Sheet",
+                subtitle: "A separate global action surface for capture, creation, recovery, plan shaping, and canonical destinations."
             ) {
                 if let executionMessage {
                     AppCard(state: .warning) {
@@ -295,7 +295,7 @@ private struct QuietCommandSheetView: View {
                     VStack(alignment: .leading, spacing: theme.spacing.md) {
                         SectionHeader(
                             title: "Open and recall",
-                            subtitle: "Open goals, the current week, captures, or the bounded recall surface."
+                            subtitle: "Open goals, the current week, Capture, or the bounded recall surface."
                         )
 
                         commandOption(for: .openGoal)
@@ -308,7 +308,7 @@ private struct QuietCommandSheetView: View {
 
                 commandHistoryCard
             }
-            .navigationTitle("Command")
+            .navigationTitle("Quiet Command Sheet")
             .toolbar {
                 ToolbarItem(placement: .topBarTrailing) {
                     Button("Done", action: onDismiss)
@@ -332,7 +332,7 @@ private struct QuietCommandSheetView: View {
                 VStack(alignment: .leading, spacing: theme.spacing.md) {
                     SectionHeader(
                         title: "Recent return paths",
-                        subtitle: "Small reminders of where command and recall last carried context."
+                        subtitle: "Small reminders of where quick actions and recall last carried context."
                     )
 
                     ForEach(history) { entry in
@@ -362,7 +362,7 @@ private struct QuietCommandSheetView: View {
                 VStack(alignment: .leading, spacing: theme.spacing.md) {
                     SectionHeader(
                         title: "Quick capture",
-                        subtitle: "Save one thought into the canonical captures inbox without leaving the shell-owned compose path."
+                        subtitle: "Save one thought into Capture without leaving the separate global quick action surface."
                     )
 
                     TextField("What needs to be remembered?", text: $captureText)

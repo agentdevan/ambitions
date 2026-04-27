@@ -38,7 +38,7 @@ final class HabitsViewModel {
         do {
             state = .loaded(try await service.loadDashboard(now: now))
         } catch {
-            state = .failed("Unable to load Habits: \(error.localizedDescription)")
+            state = .failed("Unable to load Rituals: \(error.localizedDescription)")
         }
     }
 

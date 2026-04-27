@@ -157,7 +157,7 @@ struct PlanScreen: View {
                     Button {
                         container.navigation.openHabits()
                     } label: {
-                        Label("Habits", systemImage: AppTab.habits.systemImage)
+                        Label("Rituals", systemImage: AppTab.habits.systemImage)
                     }
                     .accessibilityIdentifier("plan.open-habits-button")
                 }
@@ -1704,7 +1704,7 @@ private struct PlanShapingActionsCard: View {
 
     private func callToActionTitle(for action: PlanShapingActionState) -> String {
         if action.planRoute == .capturesInbox {
-            return "Open captures"
+            return "Open Capture"
         }
         if action.goalTarget != nil {
             return "Open goal"
@@ -1810,7 +1810,7 @@ private struct PlanSecondaryDestinationsCard: View {
     var body: some View {
         AppCard {
             VStack(alignment: .leading, spacing: theme.spacing.md) {
-                SectionHeader(title: "Plan-owned support routes", subtitle: "Habits, captures, and review stay subordinate so the week remains the dominant workspace.")
+                SectionHeader(title: "Plan-owned support routes", subtitle: "Rituals, Capture, and review stay subordinate so the week remains the dominant workspace.")
 
                 VStack(alignment: .leading, spacing: theme.spacing.sm) {
                     ForEach(destinations) { destination in

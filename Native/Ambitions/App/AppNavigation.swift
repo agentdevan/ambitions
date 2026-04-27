@@ -41,9 +41,16 @@ enum InsightsRouteTarget: String, Hashable, Identifiable, Sendable {
     var id: String { rawValue }
 }
 
+enum TopLevelTabReselectionAction: Equatable, Sendable {
+    case scrollToTop
+    case returnToRoot
+}
+
 @MainActor
 @Observable
 final class AppNavigationModel {
+    private static let tabReselectionRootThreshold: TimeInterval = 0.8
+
     var selectedTab: AppTab
     var goalsPath: [GoalRouteTarget]
     var planPath: [PlanRouteTarget]
@@ -55,6 +62,8 @@ final class AppNavigationModel {
     var lastExternalRouteSource: AppExternalRouteSource?
     var recentCommandHistory: [ShellCommandHistoryEntry]
     var continuityReceipt: ShellContinuityReceipt?
+    private var lastReselectedTopLevelTab: AppTab?
+    private var lastTopLevelTabReselectionDate: Date?
 
     init(selectedTab: AppTab) {
         self.selectedTab = selectedTab.canonicalTopLevelTab
@@ -68,6 +77,8 @@ final class AppNavigationModel {
         lastExternalRouteSource = nil
         recentCommandHistory = []
         continuityReceipt = nil
+        lastReselectedTopLevelTab = nil
+        lastTopLevelTabReselectionDate = nil
 
         switch selectedTab {
         case .habits:
@@ -90,6 +101,25 @@ final class AppNavigationModel {
         } else if tab == .insights {
             openHistory()
         }
+    }
+
+    func handleCurrentTabReselection(now: Date = .now) -> TopLevelTabReselectionAction {
+        let tab = selectedTab.canonicalTopLevelTab
+
+        guard
+            lastReselectedTopLevelTab == tab,
+            let previousDate = lastTopLevelTabReselectionDate,
+            now.timeIntervalSince(previousDate) <= Self.tabReselectionRootThreshold
+        else {
+            lastReselectedTopLevelTab = tab
+            lastTopLevelTabReselectionDate = now
+            return .scrollToTop
+        }
+
+        resetRoot(for: tab)
+        lastReselectedTopLevelTab = nil
+        lastTopLevelTabReselectionDate = nil
+        return .returnToRoot
     }
 
     func selectToday(entryContext: TodayEntryContext = .standard) {
@@ -184,11 +214,11 @@ final class AppNavigationModel {
             presentationContext: presentationContext
         )
         recordCommandHistory(
-            title: intent?.title ?? "Command",
+            title: intent?.title ?? "Quiet Command Sheet",
             subtitle: presentationContext.historySubtitle,
             source: source,
             presentationContext: presentationContext,
-            destinationLabel: "Command"
+            destinationLabel: "Quiet Command Sheet"
         )
     }
 
@@ -310,13 +340,30 @@ final class AppNavigationModel {
         recentCommandHistory.insert(entry, at: 0)
         recentCommandHistory = Array(recentCommandHistory.prefix(4))
     }
+
+    private func resetRoot(for tab: AppTab) {
+        switch tab.canonicalTopLevelTab {
+        case .today:
+            todayEntryContext = .standard
+        case .goals:
+            goalsPath = []
+        case .captures:
+            break
+        case .plan:
+            planPath = []
+        case .profile:
+            insightsPath = []
+        case .habits, .insights:
+            break
+        }
+    }
 }
 
 private extension ShellCommandPresentationContext {
     var historySubtitle: String {
         switch self {
-        case .neutral: "Opened from the shared shell command surface."
-        case .quickCapture: "Captured without leaving the shared command language."
+        case .neutral: "Opened from the Quiet Command Sheet."
+        case .quickCapture: "Captured without leaving the separate global quick action surface."
         case .createGoal: "Started from the shell-owned goal creation path."
         case .recall: "Recalled context without opening a raw history log."
         case .recovery: "Returned to a calmer recovery posture."

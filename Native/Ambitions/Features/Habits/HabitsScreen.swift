@@ -19,7 +19,7 @@ struct HabitsScreen: View {
                 case .loading:
                     HeroCard {
                         SectionHeader(
-                            eyebrow: "Habits",
+                            eyebrow: "Rituals",
                             title: "Consistency that stays usable",
                             subtitle: "Loading recurring loops, recovery signals, and the lightest valid next actions."
                         )
@@ -27,7 +27,7 @@ struct HabitsScreen: View {
                     LoadingSkeletonCard(lineCount: 10)
                 case .failed:
                     DegradedStateCard(
-                        state: DegradedStateOrchestrator.unavailable(surface: "Habits"),
+                        state: DegradedStateOrchestrator.unavailable(surface: "Rituals"),
                         primaryAccessibilityIdentifier: "habits.retry-button",
                         onPrimaryAction: {
                             Task { await viewModel.refresh(using: container.habitsService) }
@@ -39,7 +39,7 @@ struct HabitsScreen: View {
                     AppCard {
                         VStack(alignment: .leading, spacing: theme.spacing.md) {
                             SectionHeader(
-                                title: "Habits inside Plan",
+                                title: "Rituals inside Plan",
                                 subtitle: "Routines should support week shape, not compete with it."
                             )
 
@@ -115,7 +115,7 @@ struct HabitsScreen: View {
         .refreshable {
             await viewModel.refresh(using: container.habitsService)
         }
-        .navigationTitle("Habits")
+        .navigationTitle("Rituals")
         .accessibilityIdentifier("habits.screen")
         .animation(theme.motion.animation(reduceMotion: reduceMotion, emphasis: true), value: viewModel.stateKey)
         .task {

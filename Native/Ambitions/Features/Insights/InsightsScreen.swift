@@ -23,7 +23,7 @@ struct InsightsScreen: View {
                         .transition(.ambitionPanel)
                 case .failed:
                     DegradedStateCard(
-                        state: DegradedStateOrchestrator.unavailable(surface: "Insights"),
+                        state: DegradedStateOrchestrator.unavailable(surface: "History"),
                         primaryAccessibilityIdentifier: "insights.retry-button",
                         onPrimaryAction: {
                             Task { await viewModel.refresh(using: container.insightsService) }
@@ -70,7 +70,7 @@ struct InsightsScreen: View {
             .padding(.vertical, theme.spacing.md)
         }
         .scrollIndicators(.hidden)
-        .navigationTitle(showsNavigationChrome ? "Insights" : "")
+        .navigationTitle(showsNavigationChrome ? "History" : "")
         .refreshable {
             await viewModel.refresh(using: container.insightsService)
         }

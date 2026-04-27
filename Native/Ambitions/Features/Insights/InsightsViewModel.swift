@@ -33,7 +33,7 @@ final class InsightsViewModel {
         do {
             state = .loaded(try await service.loadInsightsDashboard())
         } catch {
-            state = .failed("Unable to load Insights: \(error.localizedDescription)")
+            state = .failed("Unable to load History: \(error.localizedDescription)")
         }
     }
 }

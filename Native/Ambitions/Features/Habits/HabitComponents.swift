@@ -10,7 +10,7 @@ struct HabitsHeroCard: View {
         HeroCard(state: heroState) {
             VStack(alignment: .leading, spacing: theme.spacing.md) {
                 VStack(alignment: .leading, spacing: theme.spacing.xxs) {
-                    Text("Habits")
+                    Text("Rituals")
                         .font(theme.typography.micro)
                         .foregroundStyle(theme.colors.accentWarm)
                     Text(dashboard.title)

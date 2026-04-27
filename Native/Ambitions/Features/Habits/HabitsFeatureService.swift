@@ -657,7 +657,7 @@ private extension RepositoryBackedHabitsService {
 
     static let completeNote = "Habit completion from Habits."
     static let quickLogNote = "Quick log from Habits."
-    static let minimumNotePrefix = "Minimum version from Habits: "
+    static let minimumNotePrefix = "Minimum version from Rituals: "
 
     static let iso: ISO8601DateFormatter = {
         let formatter = ISO8601DateFormatter()

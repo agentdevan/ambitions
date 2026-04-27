@@ -29,7 +29,7 @@ struct CapturesScreen: View {
                     .transition(.ambitionPanel)
             case .failed:
                 DegradedStateCard(
-                    state: DegradedStateOrchestrator.unavailable(surface: "Captures"),
+                    state: DegradedStateOrchestrator.unavailable(surface: "Capture"),
                     primaryAccessibilityIdentifier: "captures.retry-button",
                     onPrimaryAction: {
                         Task { await load() }
@@ -425,7 +425,7 @@ private extension CapturesScreenShellMode {
 
     var title: String {
         switch self {
-        case .planSupport: "Captures"
+        case .planSupport: "Capture"
         case .topLevelCapture: "Capture"
         }
     }

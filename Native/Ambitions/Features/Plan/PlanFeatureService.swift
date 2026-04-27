@@ -348,7 +348,7 @@ private extension RepositoryBackedPlanService {
             secondaryDestinations: [
                 PlanSecondaryDestination(
                     id: "plan-habits",
-                    title: "Routines and habits",
+                    title: "Rituals",
                     detail: habitGoals.isEmpty
                         ? "No repeatable loops are shaping the week yet."
                         : "Review the repeatable loops that can steady or crowd the week.",
@@ -359,7 +359,7 @@ private extension RepositoryBackedPlanService {
                 ),
                 PlanSecondaryDestination(
                     id: "plan-captures",
-                    title: "Captures into the week",
+                    title: "Capture into the week",
                     detail: openCaptures.isEmpty
                         ? "No open captures are pushing on the week right now."
                         : "\(openCaptures.count) capture\(openCaptures.count == 1 ? "" : "s") still need to be absorbed, attached, or intentionally parked.",
@@ -371,7 +371,7 @@ private extension RepositoryBackedPlanService {
                 PlanSecondaryDestination(
                     id: "plan-weekly-review",
                     title: "Weekly review",
-                    detail: "Close the current week by shaping carry-forward, habit pressure, and unresolved captures without leaving Plan.",
+                    detail: "Close the current week by shaping carry-forward, ritual pressure, and unresolved captures without leaving Plan.",
                     valueLabel: posture.label,
                     icon: "arrow.triangle.branch",
                     visualState: posture.visualState,
@@ -719,7 +719,7 @@ private extension RepositoryBackedPlanService {
                 ),
                 PlanExecutionResilienceLane(
                     id: "habits",
-                    title: "Habits",
+                    title: "Rituals",
                     detail: habitGoals.isEmpty
                         ? "No recurring loop is currently shaping the week."
                         : "\(habitGoals.count) routine\(habitGoals.count == 1 ? "" : "s") should support the week shape instead of competing with it.",
@@ -732,7 +732,7 @@ private extension RepositoryBackedPlanService {
                 ),
                 PlanExecutionResilienceLane(
                     id: "captures",
-                    title: "Captures",
+                    title: "Capture",
                     detail: openCaptures.isEmpty
                         ? "No open captures are pushing on this week."
                         : "\(openCaptures.count) open capture\(openCaptures.count == 1 ? "" : "s") still need to be absorbed or parked.",
