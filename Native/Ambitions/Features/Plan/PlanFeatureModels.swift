@@ -10,6 +10,7 @@ enum PlanWeekPressureLevel: String, Sendable, CaseIterable {
     case open
     case steady
     case tight
+    case fragile
     case overloaded
 
     var title: String {
@@ -17,6 +18,7 @@ enum PlanWeekPressureLevel: String, Sendable, CaseIterable {
         case .open: "Open room"
         case .steady: "Steady"
         case .tight: "Tight"
+        case .fragile: "Fragile"
         case .overloaded: "Overloaded"
         }
     }
@@ -26,6 +28,7 @@ enum PlanWeekPressureLevel: String, Sendable, CaseIterable {
         case .open: "sparkles"
         case .steady: "circle.lefthalf.filled"
         case .tight: "calendar.badge.clock"
+        case .fragile: "exclamationmark.shield"
         case .overloaded: "exclamationmark.triangle.fill"
         }
     }
@@ -35,6 +38,7 @@ enum PlanWeekPressureLevel: String, Sendable, CaseIterable {
         case .open: .success
         case .steady: .selected
         case .tight: .warning
+        case .fragile: .warning
         case .overloaded: .warning
         }
     }
@@ -254,6 +258,131 @@ struct PlanShapingActionState: Identifiable, Sendable {
     var id: String { kind.rawValue }
 }
 
+struct PlanTreatyState: Sendable {
+    let title: String
+    let summary: String
+    let protectedWork: String
+    let flexibleWork: String
+    let notTodayWork: String
+    let recoveryAllowance: String
+    let calendarBoundary: String
+    let primaryActionTitle: String
+    let primaryActionSubtitle: String
+    let visualState: AmbitionVisualState
+}
+
+struct PlanCapacityEnvelopeState: Sendable {
+    let title: String
+    let detail: String
+    let label: String
+    let availableCapacity: String
+    let pressure: String
+    let protectedFocus: String
+    let recoveryMargin: String
+    let visualState: AmbitionVisualState
+}
+
+struct PlanGoalLifecycleRailSegment: Identifiable, Sendable, Hashable {
+    let lifecycleState: GoalPortfolioLifecycleState
+    let count: Int
+    let subtitle: String
+
+    var id: String { lifecycleState.rawValue }
+}
+
+struct PlanGoalLifecycleRailState: Sendable {
+    let title: String
+    let subtitle: String
+    let segments: [PlanGoalLifecycleRailSegment]
+}
+
+enum PlanTimelineItemKind: String, Sendable, Hashable {
+    case previous
+    case active
+    case future
+    case outside
+
+    var title: String {
+        switch self {
+        case .previous: "Previous"
+        case .active: "Active"
+        case .future: "Future"
+        case .outside: "Outside"
+        }
+    }
+}
+
+struct PlanTimelineItemState: Identifiable, Sendable, Hashable {
+    let id: String
+    let title: String
+    let detail: String
+    let timingLabel: String
+    let kind: PlanTimelineItemKind
+    let visualState: AmbitionVisualState
+    let target: GoalRouteTarget?
+}
+
+struct PlanTimelineStripState: Sendable {
+    let title: String
+    let subtitle: String
+    let items: [PlanTimelineItemState]
+}
+
+struct PlanOpportunityWindowItem: Identifiable, Sendable, Hashable {
+    let id: String
+    let title: String
+    let detail: String
+    let modeLabel: String
+    let timingLabel: String
+    let visualState: AmbitionVisualState
+    let target: GoalRouteTarget?
+}
+
+struct PlanOpportunityWindowsState: Sendable {
+    let title: String
+    let subtitle: String
+    let windows: [PlanOpportunityWindowItem]
+}
+
+struct PlanDecisionItemState: Identifiable, Sendable, Hashable {
+    let id: String
+    let title: String
+    let detail: String
+    let suggestion: String
+    let visualState: AmbitionVisualState
+    let target: GoalRouteTarget?
+    let planRoute: PlanRouteTarget?
+}
+
+struct PlanDecisionDebtState: Sendable {
+    let title: String
+    let subtitle: String
+    let items: [PlanDecisionItemState]
+}
+
+struct PlanConflictCourtState: Sendable {
+    let title: String
+    let subtitle: String
+    let conflicts: [PlanDecisionItemState]
+}
+
+struct PlanCalendarBoundaryContractState: Sendable {
+    let title: String
+    let detail: String
+    let permissionLabel: String
+    let manualFallback: String
+    let writeBoundary: String
+    let visualState: AmbitionVisualState
+    let canRequestCalendarRead: Bool
+}
+
+struct PlanRecoveryEntryState: Sendable {
+    let title: String
+    let detail: String
+    let suggestions: [PlanDecisionItemState]
+    let boundary: String
+}
+
 struct PlanSecondaryDestination: Identifiable, Sendable {
     let id: String
     let title: String
@@ -301,6 +430,15 @@ struct PlanDashboard: Sendable {
     let timeframeLabel: String
     let hero: PlanRealityHeroState
     let primaryAction: PlanWeekPrimaryAction
+    let treaty: PlanTreatyState
+    let capacityEnvelope: PlanCapacityEnvelopeState
+    let lifecycleRail: PlanGoalLifecycleRailState
+    let timelineStrip: PlanTimelineStripState
+    let opportunityWindows: PlanOpportunityWindowsState
+    let decisionDebt: PlanDecisionDebtState
+    let conflictCourt: PlanConflictCourtState
+    let calendarBoundary: PlanCalendarBoundaryContractState
+    let recoveryEntry: PlanRecoveryEntryState
     let pressureScrubber: PlanPressureScrubberState
     let weekDays: [PlanElasticWeekDayState]
     let believability: PlanBelievabilityState

@@ -35,6 +35,14 @@ struct PlanScreen: View {
                 case let .loaded(dashboard):
                     PlanHeroCard(hero: dashboard.hero, action: dashboard.primaryAction, onPrimaryAction: handlePrimaryAction)
 
+                    PlanTreatyCard(treaty: dashboard.treaty)
+
+                    PlanCapacityEnvelopeCard(envelope: dashboard.capacityEnvelope)
+
+                    PlanGoalLifecycleRailCard(rail: dashboard.lifecycleRail)
+
+                    PlanTimelineStripCard(strip: dashboard.timelineStrip, onOpenGoal: openGoal)
+
                     if let emptyTitle = dashboard.emptyTitle, let emptyMessage = dashboard.emptyMessage {
                         DegradedStateCard(
                             state: DegradedStateOrchestrator.planEmpty(),
@@ -56,6 +64,16 @@ struct PlanScreen: View {
                         selectedDayID: bindingForSelectedDay(defaultID: dashboard.pressureScrubber.defaultDayID)
                     )
 
+                    PlanGoalRelationshipCard(items: dashboard.goalShapingItems) { target in
+                        openGoal(target)
+                    }
+
+                    PlanSecondaryDestinationsCard(destinations: dashboard.secondaryDestinations) { destination in
+                        if let planRoute = destination.planRoute {
+                            openPlanRoute(planRoute)
+                        }
+                    }
+
                     PlanElasticWeekCard(
                         days: dashboard.weekDays,
                         selectedDayID: bindingForSelectedDay(defaultID: dashboard.pressureScrubber.defaultDayID)
@@ -75,6 +93,37 @@ struct PlanScreen: View {
                         onPrimaryAction: handleCalendarAwarenessAction
                     )
 
+                    PlanOpportunityWindowsCard(windows: dashboard.opportunityWindows, onOpenGoal: openGoal)
+
+                    PlanDecisionListCard(
+                        title: dashboard.decisionDebt.title,
+                        subtitle: dashboard.decisionDebt.subtitle,
+                        emptyTitle: "No decision needed",
+                        emptyDetail: "The current plan is not asking for another decision right now.",
+                        items: dashboard.decisionDebt.items,
+                        accessibilityIdentifier: "plan.decision-debt",
+                        onActivate: handleDecisionItem
+                    )
+
+                    PlanDecisionListCard(
+                        title: dashboard.conflictCourt.title,
+                        subtitle: dashboard.conflictCourt.subtitle,
+                        emptyTitle: "No conflict to negotiate",
+                        emptyDetail: "Nothing visible is competing hard enough to need attention.",
+                        items: dashboard.conflictCourt.conflicts,
+                        accessibilityIdentifier: "plan.conflict-court",
+                        onActivate: handleDecisionItem
+                    )
+
+                    PlanCalendarBoundaryContractCard(
+                        boundary: dashboard.calendarBoundary,
+                        onPrimaryAction: {
+                            handleCalendarAwarenessAction(dashboard.calendarAwareness)
+                        }
+                    )
+
+                    PlanRecoveryEntryCard(recovery: dashboard.recoveryEntry, onActivate: handleDecisionItem)
+
                     PlanExecutionResilienceCard(
                         resilience: dashboard.resilience,
                         onOpenGoal: openGoal,
@@ -87,16 +136,6 @@ struct PlanScreen: View {
                         selectedDay: selectedDay(in: dashboard),
                         onActivate: handleShapingAction
                     )
-
-                    PlanGoalRelationshipCard(items: dashboard.goalShapingItems) { target in
-                        openGoal(target)
-                    }
-
-                    PlanSecondaryDestinationsCard(destinations: dashboard.secondaryDestinations) { destination in
-                        if let planRoute = destination.planRoute {
-                            openPlanRoute(planRoute)
-                        }
-                    }
                 }
             }
             .padding(.horizontal, theme.spacing.lg)
@@ -191,12 +230,265 @@ struct PlanScreen: View {
         }
     }
 
+    private func handleDecisionItem(_ item: PlanDecisionItemState) {
+        if let target = item.target {
+            openGoal(target)
+            return
+        }
+        if let route = item.planRoute {
+            openPlanRoute(route)
+        }
+    }
+
     private func openPlanRoute(_ route: PlanRouteTarget) {
         container.navigation.openPlanRoute(route)
     }
 
     private func openGoal(_ target: GoalRouteTarget) {
         container.navigation.openGoalDetail(target)
+    }
+}
+
+private struct PlanTreatyCard: View {
+    @Environment(\.ambitionTheme) private var theme
+
+    let treaty: PlanTreatyState
+
+    var body: some View {
+        AppCard(state: treaty.visualState) {
+            VStack(alignment: .leading, spacing: theme.spacing.md) {
+                SectionHeader(title: treaty.title, subtitle: treaty.summary)
+
+                LazyVGrid(columns: [GridItem(.flexible(), spacing: theme.spacing.sm), GridItem(.flexible(), spacing: theme.spacing.sm)], spacing: theme.spacing.sm) {
+                    PlanTreatyTile(title: "Protect", detail: treaty.protectedWork, icon: "lock.shield", state: .selected)
+                    PlanTreatyTile(title: "Flex", detail: treaty.flexibleWork, icon: "arrow.left.and.right", state: .default)
+                    PlanTreatyTile(title: "Not today", detail: treaty.notTodayWork, icon: "tray", state: .warning)
+                    PlanTreatyTile(title: "Recovery", detail: treaty.recoveryAllowance, icon: "sun.max", state: treaty.visualState)
+                }
+
+                VStack(alignment: .leading, spacing: theme.spacing.xs) {
+                    Text(treaty.calendarBoundary)
+                        .font(theme.typography.body)
+                        .foregroundStyle(theme.colors.textSecondary)
+                    HStack(alignment: .top, spacing: theme.spacing.sm) {
+                        Image(systemName: "arrow.right.circle")
+                            .font(.system(size: theme.icon.smallSize, weight: theme.icon.symbolWeight))
+                            .foregroundStyle(theme.stateStyle(for: treaty.visualState).accent)
+                        VStack(alignment: .leading, spacing: theme.spacing.xxxs) {
+                            Text(treaty.primaryActionTitle)
+                                .font(theme.typography.bodyEmphasized)
+                                .foregroundStyle(theme.colors.textPrimary)
+                            Text(treaty.primaryActionSubtitle)
+                                .font(theme.typography.caption)
+                                .foregroundStyle(theme.colors.textTertiary)
+                        }
+                    }
+                }
+            }
+        }
+        .accessibilityIdentifier("plan.treaty")
+        .accessibilityElement(children: .contain)
+        .ambitionPanelAccessibility()
+    }
+}
+
+private struct PlanTreatyTile: View {
+    @Environment(\.ambitionTheme) private var theme
+
+    let title: String
+    let detail: String
+    let icon: String
+    let state: AmbitionVisualState
+
+    var body: some View {
+        VStack(alignment: .leading, spacing: theme.spacing.xs) {
+            HStack(spacing: theme.spacing.xs) {
+                Image(systemName: icon)
+                    .font(.system(size: theme.icon.smallSize, weight: theme.icon.symbolWeight))
+                Text(title)
+                    .font(theme.typography.caption)
+            }
+            .foregroundStyle(theme.stateStyle(for: state).accent)
+
+            Text(detail)
+                .font(theme.typography.body)
+                .foregroundStyle(theme.colors.textSecondary)
+                .fixedSize(horizontal: false, vertical: true)
+        }
+        .padding(theme.spacing.md)
+        .frame(maxWidth: .infinity, alignment: .leading)
+        .background(
+            RoundedRectangle(cornerRadius: theme.radius.lg, style: .continuous)
+                .fill(theme.colors.surfaceOverlay)
+        )
+        .overlay(
+            RoundedRectangle(cornerRadius: theme.radius.lg, style: .continuous)
+                .stroke(theme.stateStyle(for: state).stroke.opacity(0.5), lineWidth: 1)
+        )
+    }
+}
+
+private struct PlanCapacityEnvelopeCard: View {
+    @Environment(\.ambitionTheme) private var theme
+
+    let envelope: PlanCapacityEnvelopeState
+
+    var body: some View {
+        AppCard(state: envelope.visualState) {
+            VStack(alignment: .leading, spacing: theme.spacing.md) {
+                SectionHeader(title: envelope.title, subtitle: envelope.detail)
+
+                HStack(spacing: theme.spacing.xs) {
+                    TagPill(envelope.label, icon: "gauge.with.dots.needle.bottom.50percent", state: envelope.visualState)
+                    TagPill(envelope.availableCapacity, icon: "calendar", state: envelope.visualState)
+                }
+
+                VStack(alignment: .leading, spacing: theme.spacing.sm) {
+                    PlanKeyValueRow(label: "Pressure", value: envelope.pressure, state: envelope.visualState)
+                    PlanKeyValueRow(label: "Protected focus", value: envelope.protectedFocus, state: .selected)
+                    PlanKeyValueRow(label: "Recovery margin", value: envelope.recoveryMargin, state: envelope.visualState)
+                }
+            }
+        }
+        .accessibilityIdentifier("plan.capacity-envelope")
+        .ambitionPanelAccessibility()
+    }
+}
+
+private struct PlanKeyValueRow: View {
+    @Environment(\.ambitionTheme) private var theme
+
+    let label: String
+    let value: String
+    let state: AmbitionVisualState
+
+    var body: some View {
+        HStack(alignment: .top, spacing: theme.spacing.sm) {
+            Circle()
+                .fill(theme.stateStyle(for: state).accent)
+                .frame(width: 7, height: 7)
+                .padding(.top, 7)
+            VStack(alignment: .leading, spacing: theme.spacing.xxxs) {
+                Text(label)
+                    .font(theme.typography.caption)
+                    .foregroundStyle(theme.colors.textTertiary)
+                Text(value)
+                    .font(theme.typography.body)
+                    .foregroundStyle(theme.colors.textPrimary)
+            }
+            Spacer()
+        }
+    }
+}
+
+private struct PlanGoalLifecycleRailCard: View {
+    @Environment(\.ambitionTheme) private var theme
+
+    let rail: PlanGoalLifecycleRailState
+
+    var body: some View {
+        AppCard {
+            VStack(alignment: .leading, spacing: theme.spacing.md) {
+                SectionHeader(title: rail.title, subtitle: rail.subtitle)
+
+                ScrollView(.horizontal, showsIndicators: false) {
+                    HStack(spacing: theme.spacing.sm) {
+                        ForEach(rail.segments) { segment in
+                            VStack(alignment: .leading, spacing: theme.spacing.xs) {
+                                HStack(spacing: theme.spacing.xs) {
+                                    Image(systemName: segment.lifecycleState.icon)
+                                        .font(.system(size: theme.icon.smallSize, weight: theme.icon.symbolWeight))
+                                    Text(segment.lifecycleState.title)
+                                        .font(theme.typography.caption)
+                                }
+                                .foregroundStyle(theme.stateStyle(for: segment.lifecycleState.visualState).accent)
+
+                                Text("\(segment.count)")
+                                    .font(theme.typography.section)
+                                    .foregroundStyle(theme.colors.textPrimary)
+                                Text(segment.subtitle)
+                                    .font(theme.typography.caption)
+                                    .foregroundStyle(theme.colors.textTertiary)
+                                    .lineLimit(2)
+                            }
+                            .padding(theme.spacing.md)
+                            .frame(width: 128, alignment: .leading)
+                            .background(
+                                RoundedRectangle(cornerRadius: theme.radius.lg, style: .continuous)
+                                    .fill(theme.colors.surfaceOverlay)
+                            )
+                            .overlay(
+                                RoundedRectangle(cornerRadius: theme.radius.lg, style: .continuous)
+                                    .stroke(theme.colors.strokeSubtle, lineWidth: 1)
+                            )
+                        }
+                    }
+                }
+            }
+        }
+        .accessibilityIdentifier("plan.goal-lifecycle-rail")
+        .ambitionPanelAccessibility()
+    }
+}
+
+private struct PlanTimelineStripCard: View {
+    @Environment(\.ambitionTheme) private var theme
+
+    let strip: PlanTimelineStripState
+    let onOpenGoal: (GoalRouteTarget) -> Void
+
+    var body: some View {
+        AppCard {
+            VStack(alignment: .leading, spacing: theme.spacing.md) {
+                SectionHeader(title: strip.title, subtitle: strip.subtitle)
+
+                if strip.items.isEmpty {
+                    Text("Goal movement will appear here when this plan has real pressure to carry.")
+                        .font(theme.typography.body)
+                        .foregroundStyle(theme.colors.textSecondary)
+                } else {
+                    ScrollView(.horizontal, showsIndicators: false) {
+                        HStack(alignment: .top, spacing: theme.spacing.sm) {
+                            ForEach(strip.items) { item in
+                                Button {
+                                    guard let target = item.target else { return }
+                                    onOpenGoal(target)
+                                } label: {
+                                    VStack(alignment: .leading, spacing: theme.spacing.xs) {
+                                        TagPill(item.kind.title, state: item.visualState)
+                                        Text(item.title)
+                                            .font(theme.typography.bodyEmphasized)
+                                            .foregroundStyle(theme.colors.textPrimary)
+                                            .lineLimit(2)
+                                        Text(item.detail)
+                                            .font(theme.typography.caption)
+                                            .foregroundStyle(theme.colors.textSecondary)
+                                            .lineLimit(3)
+                                        Text(item.timingLabel)
+                                            .font(theme.typography.micro)
+                                            .foregroundStyle(theme.colors.textTertiary)
+                                    }
+                                    .padding(theme.spacing.md)
+                                    .frame(width: 176, alignment: .leading)
+                                    .background(
+                                        RoundedRectangle(cornerRadius: theme.radius.lg, style: .continuous)
+                                            .fill(theme.colors.surfaceOverlay)
+                                    )
+                                    .overlay(
+                                        RoundedRectangle(cornerRadius: theme.radius.lg, style: .continuous)
+                                            .stroke(theme.stateStyle(for: item.visualState).stroke.opacity(0.6), lineWidth: 1)
+                                    )
+                                }
+                                .buttonStyle(.plain)
+                                .disabled(item.target == nil)
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        .accessibilityIdentifier("plan.timeline-strip")
+        .ambitionPanelAccessibility()
     }
 }
 
@@ -253,6 +545,238 @@ private struct PlanCalendarAwarenessCard: View {
         case .baseline, .unavailable:
             return .neutral
         }
+    }
+}
+
+private struct PlanOpportunityWindowsCard: View {
+    @Environment(\.ambitionTheme) private var theme
+
+    let windows: PlanOpportunityWindowsState
+    let onOpenGoal: (GoalRouteTarget) -> Void
+
+    var body: some View {
+        AppCard {
+            VStack(alignment: .leading, spacing: theme.spacing.md) {
+                SectionHeader(title: windows.title, subtitle: windows.subtitle)
+
+                VStack(alignment: .leading, spacing: theme.spacing.sm) {
+                    ForEach(windows.windows) { window in
+                        Button {
+                            guard let target = window.target else { return }
+                            onOpenGoal(target)
+                        } label: {
+                            HStack(alignment: .top, spacing: theme.spacing.sm) {
+                                Image(systemName: window.modeLabel == "Recovery" ? "sun.max" : "sparkles")
+                                    .font(.system(size: theme.icon.mediumSize, weight: theme.icon.symbolWeight))
+                                    .foregroundStyle(theme.stateStyle(for: window.visualState).accent)
+                                    .frame(width: 28)
+                                VStack(alignment: .leading, spacing: theme.spacing.xxxs) {
+                                    HStack(spacing: theme.spacing.xs) {
+                                        TagPill(window.modeLabel, state: window.visualState)
+                                        TagPill(window.timingLabel, state: .default)
+                                    }
+                                    Text(window.title)
+                                        .font(theme.typography.bodyEmphasized)
+                                        .foregroundStyle(theme.colors.textPrimary)
+                                    Text(window.detail)
+                                        .font(theme.typography.body)
+                                        .foregroundStyle(theme.colors.textSecondary)
+                                        .fixedSize(horizontal: false, vertical: true)
+                                }
+                                Spacer()
+                                if window.target != nil {
+                                    Image(systemName: "chevron.right")
+                                        .font(.system(size: theme.icon.smallSize, weight: theme.icon.symbolWeight))
+                                        .foregroundStyle(theme.colors.textTertiary)
+                                }
+                            }
+                            .padding(theme.spacing.md)
+                            .background(
+                                RoundedRectangle(cornerRadius: theme.radius.lg, style: .continuous)
+                                    .fill(theme.colors.surfaceOverlay)
+                            )
+                            .overlay(
+                                RoundedRectangle(cornerRadius: theme.radius.lg, style: .continuous)
+                                    .stroke(theme.colors.strokeSubtle, lineWidth: 1)
+                            )
+                        }
+                        .buttonStyle(.plain)
+                        .disabled(window.target == nil)
+                    }
+                }
+            }
+        }
+        .accessibilityIdentifier("plan.opportunity-windows")
+        .ambitionPanelAccessibility()
+    }
+}
+
+private struct PlanDecisionListCard: View {
+    @Environment(\.ambitionTheme) private var theme
+
+    let title: String
+    let subtitle: String
+    let emptyTitle: String
+    let emptyDetail: String
+    let items: [PlanDecisionItemState]
+    let accessibilityIdentifier: String
+    let onActivate: (PlanDecisionItemState) -> Void
+
+    var body: some View {
+        AppCard {
+            VStack(alignment: .leading, spacing: theme.spacing.md) {
+                SectionHeader(title: title, subtitle: subtitle)
+
+                if items.isEmpty {
+                    VStack(alignment: .leading, spacing: theme.spacing.xs) {
+                        Text(emptyTitle)
+                            .font(theme.typography.bodyEmphasized)
+                            .foregroundStyle(theme.colors.textPrimary)
+                        Text(emptyDetail)
+                            .font(theme.typography.body)
+                            .foregroundStyle(theme.colors.textSecondary)
+                    }
+                    .padding(theme.spacing.md)
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                    .background(
+                        RoundedRectangle(cornerRadius: theme.radius.lg, style: .continuous)
+                            .fill(theme.colors.surfaceOverlay)
+                    )
+                } else {
+                    VStack(alignment: .leading, spacing: theme.spacing.sm) {
+                        ForEach(items) { item in
+                            Button {
+                                onActivate(item)
+                            } label: {
+                                PlanDecisionItemRow(item: item)
+                            }
+                            .buttonStyle(.plain)
+                            .disabled(item.target == nil && item.planRoute == nil)
+                        }
+                    }
+                }
+            }
+        }
+        .accessibilityIdentifier(accessibilityIdentifier)
+        .ambitionPanelAccessibility()
+    }
+}
+
+private struct PlanDecisionItemRow: View {
+    @Environment(\.ambitionTheme) private var theme
+
+    let item: PlanDecisionItemState
+
+    var body: some View {
+        HStack(alignment: .top, spacing: theme.spacing.sm) {
+            Image(systemName: item.visualState == .warning ? "exclamationmark.circle" : "circle.dotted")
+                .font(.system(size: theme.icon.smallSize, weight: theme.icon.symbolWeight))
+                .foregroundStyle(theme.stateStyle(for: item.visualState).accent)
+                .frame(width: 18)
+
+            VStack(alignment: .leading, spacing: theme.spacing.xxxs) {
+                Text(item.title)
+                    .font(theme.typography.bodyEmphasized)
+                    .foregroundStyle(theme.colors.textPrimary)
+                Text(item.detail)
+                    .font(theme.typography.body)
+                    .foregroundStyle(theme.colors.textSecondary)
+                    .fixedSize(horizontal: false, vertical: true)
+                Text(item.suggestion)
+                    .font(theme.typography.caption)
+                    .foregroundStyle(theme.colors.textTertiary)
+                    .fixedSize(horizontal: false, vertical: true)
+            }
+
+            Spacer()
+            if item.target != nil || item.planRoute != nil {
+                Image(systemName: "chevron.right")
+                    .font(.system(size: theme.icon.smallSize, weight: theme.icon.symbolWeight))
+                    .foregroundStyle(theme.colors.textTertiary)
+            }
+        }
+        .padding(theme.spacing.md)
+        .background(
+            RoundedRectangle(cornerRadius: theme.radius.lg, style: .continuous)
+                .fill(theme.colors.surfaceOverlay)
+        )
+        .overlay(
+            RoundedRectangle(cornerRadius: theme.radius.lg, style: .continuous)
+                .stroke(theme.colors.strokeSubtle, lineWidth: 1)
+        )
+    }
+}
+
+private struct PlanCalendarBoundaryContractCard: View {
+    @Environment(\.ambitionTheme) private var theme
+
+    let boundary: PlanCalendarBoundaryContractState
+    let onPrimaryAction: () -> Void
+
+    var body: some View {
+        AppCard(state: boundary.visualState) {
+            VStack(alignment: .leading, spacing: theme.spacing.md) {
+                SectionHeader(title: boundary.title, subtitle: boundary.detail)
+
+                VStack(alignment: .leading, spacing: theme.spacing.sm) {
+                    HStack(spacing: theme.spacing.xs) {
+                        TagPill(boundary.permissionLabel, icon: "calendar", state: boundary.visualState)
+                        TagPill("Manual fallback", icon: "hand.draw", state: .default)
+                    }
+                    Text(boundary.manualFallback)
+                        .font(theme.typography.body)
+                        .foregroundStyle(theme.colors.textSecondary)
+                    Text(boundary.writeBoundary)
+                        .font(theme.typography.caption)
+                        .foregroundStyle(theme.colors.textTertiary)
+                }
+
+                Button {
+                    onPrimaryAction()
+                } label: {
+                    Label("Find real open windows", systemImage: "calendar.badge.clock")
+                        .frame(maxWidth: .infinity, alignment: .leading)
+                }
+                .buttonStyle(AmbitionButtonStyle(tier: .secondary, state: boundary.visualState))
+                .disabled(boundary.canRequestCalendarRead == false)
+                .accessibilityIdentifier("plan.calendar-boundary.primary")
+            }
+        }
+        .accessibilityIdentifier("plan.calendar-boundary")
+        .ambitionPanelAccessibility()
+    }
+}
+
+private struct PlanRecoveryEntryCard: View {
+    @Environment(\.ambitionTheme) private var theme
+
+    let recovery: PlanRecoveryEntryState
+    let onActivate: (PlanDecisionItemState) -> Void
+
+    var body: some View {
+        AppCard {
+            VStack(alignment: .leading, spacing: theme.spacing.md) {
+                SectionHeader(title: recovery.title, subtitle: recovery.detail)
+
+                VStack(alignment: .leading, spacing: theme.spacing.sm) {
+                    ForEach(recovery.suggestions) { suggestion in
+                        Button {
+                            onActivate(suggestion)
+                        } label: {
+                            PlanDecisionItemRow(item: suggestion)
+                        }
+                        .buttonStyle(.plain)
+                        .disabled(suggestion.target == nil && suggestion.planRoute == nil)
+                    }
+                }
+
+                Text(recovery.boundary)
+                    .font(theme.typography.caption)
+                    .foregroundStyle(theme.colors.textTertiary)
+            }
+        }
+        .accessibilityIdentifier("plan.recovery-entry")
+        .ambitionPanelAccessibility()
     }
 }
 

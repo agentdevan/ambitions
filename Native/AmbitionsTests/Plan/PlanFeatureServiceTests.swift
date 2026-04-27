@@ -16,6 +16,10 @@ final class PlanFeatureServiceTests: XCTestCase {
         XCTAssertEqual(dashboard.pressureScrubber.points.count, 7)
         XCTAssertEqual(dashboard.secondaryDestinations.map(\.id), ["plan-habits", "plan-captures", "plan-weekly-review"])
         XCTAssertTrue(dashboard.goalShapingItems.isEmpty)
+        XCTAssertEqual(dashboard.treaty.title, "This week's agreement")
+        XCTAssertEqual(dashboard.capacityEnvelope.label, "Light")
+        XCTAssertFalse(dashboard.calendarBoundary.writeBoundary.lowercased().contains("sync"))
+        XCTAssertFalse(dashboard.recoveryEntry.detail.contains("Reality Reflow"))
     }
 
     func testActiveGoalsProduceElasticWeekAndGoalRelationshipSignals() async throws {
@@ -33,6 +37,12 @@ final class PlanFeatureServiceTests: XCTestCase {
         XCTAssertTrue(dashboard.hero.contextPills.contains(where: { $0.title.contains("goals visible") }))
         XCTAssertFalse(dashboard.resilience.lanes.isEmpty)
         XCTAssertNotNil(dashboard.primaryAction.goalTarget)
+        XCTAssertEqual(dashboard.treaty.title, "This week's agreement")
+        XCTAssertFalse(dashboard.treaty.summary.contains("Kernel"))
+        XCTAssertTrue(["Light", "Steady", "Tight", "Overloaded", "Fragile"].contains(dashboard.capacityEnvelope.label))
+        XCTAssertFalse(dashboard.opportunityWindows.windows.isEmpty)
+        XCTAssertLessThanOrEqual(dashboard.opportunityWindows.windows.count, 4)
+        XCTAssertFalse(dashboard.timelineStrip.items.isEmpty)
     }
 
     func testBlockedDraftsAndOpenCapturesSurfaceRealityPressureTruthfully() async throws {
@@ -54,7 +64,7 @@ final class PlanFeatureServiceTests: XCTestCase {
             latestResultKind: .clarificationRequired
         )
         try await repositories.drafts.saveDrafts([persistedDraft])
-        try await DefaultCaptureService(repository: repositories.captures).createCapture(
+        _ = try await DefaultCaptureService(repository: repositories.captures).createCapture(
             CreateCaptureRequest(rawText: "Clarify the weekly commitment", sourceType: .todayQuickCapture),
             now: fixedDate
         )
@@ -87,7 +97,7 @@ final class PlanFeatureServiceTests: XCTestCase {
     func testWeeklyReviewDashboardBridgesCarryForwardAndSupportRoutes() async throws {
         let repositories = try await makeRepositories()
         try await repositories.goals.saveGoals([makeWeekVisibleGoal()])
-        try await DefaultCaptureService(repository: repositories.captures).createCapture(
+        _ = try await DefaultCaptureService(repository: repositories.captures).createCapture(
             CreateCaptureRequest(rawText: "Review the carry-forward tradeoff", sourceType: .todayQuickCapture),
             now: fixedDate
         )
@@ -136,6 +146,112 @@ final class PlanFeatureServiceTests: XCTestCase {
         XCTAssertEqual(events.first?.privacy, .calendarDerived)
         XCTAssertEqual(events.first?.source, .plan)
     }
+
+    func testCalendarDeniedProducesManualFallbackWithoutFakeClaims() async throws {
+        let repositories = try await makeRepositories()
+        let service = RepositoryBackedPlanService(
+            repositories: repositories,
+            calendarRealityService: FixedPermissionCalendarRealityService(permission: .denied)
+        )
+
+        let dashboard = try await service.loadPlanDashboard(now: fixedDate)
+
+        XCTAssertEqual(dashboard.calendarAwareness.status, .denied)
+        XCTAssertFalse(dashboard.calendarBoundary.canRequestCalendarRead)
+        XCTAssertTrue(dashboard.calendarBoundary.manualFallback.contains("Manual planning still works"))
+        XCTAssertTrue(dashboard.calendarBoundary.writeBoundary.contains("never silently writes"))
+        XCTAssertFalse(dashboard.calendarBoundary.detail.lowercased().contains("sync"))
+        XCTAssertFalse(dashboard.calendarBoundary.detail.lowercased().contains("export"))
+    }
+
+    func testPlanLifecycleRailDistinguishesCarriedAndOutsideGoalStates() async throws {
+        let repositories = try await makeRepositories()
+        try await repositories.goals.saveGoals([
+            makeWeekVisibleGoal(id: "goal-active", title: "Active carried goal"),
+            makeWeekVisibleGoal(id: "goal-future", title: "Future goal", state: .draft),
+            makeWeekVisibleGoal(id: "goal-completed", title: "Completed goal", state: .completed),
+            makeWeekVisibleGoal(id: "goal-cancelled", title: "Cancelled goal", state: .archived, stepState: .cancelled),
+            makeWeekVisibleGoal(id: "goal-parked", title: "Parked goal", state: .paused),
+            makeWeekVisibleGoal(id: "goal-blocked", title: "Blocked goal", stepState: .blocked),
+            makeWeekVisibleGoal(id: "goal-waiting", title: "Waiting goal", mode: .delegatedSupport, relationshipKind: .delegated)
+        ])
+        let service = RepositoryBackedPlanService(repositories: repositories)
+
+        let dashboard = try await service.loadPlanDashboard(now: fixedDate)
+        let counts = Dictionary(uniqueKeysWithValues: dashboard.lifecycleRail.segments.map { ($0.lifecycleState, $0.count) })
+
+        XCTAssertGreaterThanOrEqual(counts[.active, default: 0], 1)
+        XCTAssertGreaterThanOrEqual(counts[.future, default: 0], 1)
+        XCTAssertEqual(counts[.completed], 1)
+        XCTAssertEqual(counts[.cancelledDropped], 1)
+        XCTAssertEqual(counts[.parked], 1)
+        XCTAssertEqual(counts[.blocked], 1)
+        XCTAssertEqual(counts[.waiting], 1)
+        XCTAssertEqual(dashboard.lifecycleRail.segments.map(\.lifecycleState), [.previous, .active, .future, .waiting, .blocked, .parked, .protected, .completed, .cancelledDropped])
+    }
+
+    func testPlanTimelineIncludesActiveFutureAndPreviousWithoutFakeCertainty() async throws {
+        let repositories = try await makeRepositories()
+        try await repositories.goals.saveGoals([
+            makeWeekVisibleGoal(id: "goal-active", title: "Active carried goal"),
+            makeWeekVisibleGoal(id: "goal-future", title: "Future goal", state: .draft),
+            makeWeekVisibleGoal(id: "goal-previous", title: "Previous goal", state: .archived, stepState: .completed)
+        ])
+        let service = RepositoryBackedPlanService(repositories: repositories)
+
+        let dashboard = try await service.loadPlanDashboard(now: fixedDate)
+
+        XCTAssertTrue(dashboard.timelineStrip.items.contains(where: { $0.kind == .active }))
+        XCTAssertTrue(dashboard.timelineStrip.items.contains(where: { $0.kind == .future }))
+        XCTAssertTrue(dashboard.timelineStrip.items.contains(where: { $0.kind == .previous }))
+        XCTAssertFalse(dashboard.timelineStrip.items.map(\.detail).joined(separator: " ").contains("%"))
+    }
+
+    func testCapacityEnvelopeUsesQualitativeStates() async throws {
+        let lightRepositories = try await makeRepositories()
+        let lightDashboard = try await RepositoryBackedPlanService(repositories: lightRepositories).loadPlanDashboard(now: fixedDate)
+        XCTAssertEqual(lightDashboard.capacityEnvelope.label, "Light")
+
+        let steadyRepositories = try await makeRepositories()
+        try await steadyRepositories.goals.saveGoals([makeWeekVisibleGoal()])
+        let steadyDashboard = try await RepositoryBackedPlanService(repositories: steadyRepositories).loadPlanDashboard(now: fixedDate)
+        XCTAssertTrue(["Steady", "Tight"].contains(steadyDashboard.capacityEnvelope.label))
+
+        let tightRepositories = try await makeRepositories()
+        try await tightRepositories.goals.saveGoals([
+            makeWeekVisibleGoal(id: "tight-1", title: "Tight one"),
+            makeWeekVisibleGoal(id: "tight-2", title: "Tight two"),
+            makeWeekVisibleGoal(id: "tight-3", title: "Tight three")
+        ])
+        let tightDashboard = try await RepositoryBackedPlanService(repositories: tightRepositories).loadPlanDashboard(now: fixedDate)
+        XCTAssertTrue(["Tight", "Overloaded"].contains(tightDashboard.capacityEnvelope.label))
+
+        let overloadedRepositories = try await makeRepositories()
+        try await overloadedRepositories.goals.saveGoals((0..<6).map { makeWeekVisibleGoal(id: "overloaded-\($0)", title: "Overloaded \($0)") })
+        let overloadedDashboard = try await RepositoryBackedPlanService(repositories: overloadedRepositories).loadPlanDashboard(now: fixedDate)
+        XCTAssertEqual(overloadedDashboard.capacityEnvelope.label, "Overloaded")
+    }
+
+    func testDecisionDebtConflictCourtAndRecoveryAreSuggestionOnly() async throws {
+        let repositories = try await makeRepositories()
+        try await repositories.goals.saveGoals([
+            makeWeekVisibleGoal(id: "goal-proof-thin", title: "Proof thin goal"),
+            makeWeekVisibleGoal(id: "goal-blocked", title: "Blocked goal", stepState: .blocked)
+        ])
+        _ = try await DefaultCaptureService(repository: repositories.captures).createCapture(
+            CreateCaptureRequest(rawText: "Waiting on partner response", sourceType: .todayQuickCapture),
+            now: fixedDate
+        )
+        let service = RepositoryBackedPlanService(repositories: repositories)
+
+        let dashboard = try await service.loadPlanDashboard(now: fixedDate)
+
+        XCTAssertFalse(dashboard.decisionDebt.items.isEmpty)
+        XCTAssertFalse(dashboard.conflictCourt.conflicts.isEmpty)
+        XCTAssertFalse(dashboard.recoveryEntry.suggestions.isEmpty)
+        XCTAssertTrue(dashboard.recoveryEntry.boundary.contains("No schedule changes"))
+        XCTAssertTrue(dashboard.conflictCourt.subtitle.contains("not alarms") || dashboard.conflictCourt.conflicts.isEmpty)
+    }
 }
 
 private extension PlanFeatureServiceTests {
@@ -156,7 +272,14 @@ private extension PlanFeatureServiceTests {
         )
     }
 
-    func makeWeekVisibleGoal() -> Goal {
+    func makeWeekVisibleGoal(
+        id: String = "goal-plan-visible",
+        title: String = "Submit conference proposal",
+        state: GoalLifecycleState = .active,
+        mode: GoalMode = .achievement,
+        relationshipKind: GoalRelationshipKind = .independent,
+        stepState: StepLifecycleState = .planned
+    ) -> Goal {
         let actor = GoalActor(
             actorID: "self",
             displayName: "You",
@@ -197,12 +320,12 @@ private extension PlanFeatureServiceTests {
             countsSupportGoals: false
         )
         let step = Step(
-            id: "step-plan-visible",
-            sectionID: "section-plan-visible",
+            id: "step-\(id)",
+            sectionID: "section-\(id)",
             title: "Draft and submit the proposal",
             summary: "Finish the visible draft and send it before the deadline.",
             type: .actionUnit,
-            state: .planned,
+            state: stepState,
             owner: actor,
             timing: timing,
             dependencyStepIDs: [],
@@ -219,16 +342,16 @@ private extension PlanFeatureServiceTests {
             )
         )
         let plan = GoalPlan(
-            id: "plan-visible",
-            goalID: "goal-plan-visible",
+            id: "plan-\(id)",
+            goalID: id,
             version: goalEnginePlanVersion,
             generatedAt: GoalEngineFixtures.fixedNow,
             summary: "Conference proposal work is explicitly carried by this week.",
             strategy: strategy,
             sections: [
                 PlanSection(
-                    id: "section-plan-visible",
-                    goalID: "goal-plan-visible",
+                    id: "section-\(id)",
+                    goalID: id,
                     title: "Active",
                     summary: nil,
                     kind: .activeSteps,
@@ -238,7 +361,7 @@ private extension PlanFeatureServiceTests {
             ],
             assumptions: [],
             lint: PlanLintResult(
-                goalID: "goal-plan-visible",
+                goalID: id,
                 planVersion: goalEnginePlanVersion,
                 isValid: true,
                 issueCount: 0,
@@ -256,15 +379,15 @@ private extension PlanFeatureServiceTests {
         )
         return Goal(
             schemaVersion: goalEngineSchemaVersion,
-            id: "goal-plan-visible",
+            id: id,
             revision: 1,
             createdAt: GoalEngineFixtures.fixedNow,
             updatedAt: GoalEngineFixtures.fixedNow,
-            state: .active,
-            title: "Submit conference proposal",
+            state: state,
+            title: title,
             summary: nil,
-            mode: .achievement,
-            relationshipKind: .independent,
+            mode: mode,
+            relationshipKind: relationshipKind,
             actor: actor,
             parentGoalID: nil,
             childGoalIDs: [],
@@ -337,5 +460,44 @@ private actor RecordingPlanCalendarRealityService: CalendarRealityServicing {
 
     func currentRequestedActionNames() -> [String] {
         requestedActionNames
+    }
+}
+
+private struct FixedPermissionCalendarRealityService: CalendarRealityServicing {
+    let permission: CalendarPermissionState
+
+    func calendarPermissionState() async -> CalendarPermissionState {
+        permission
+    }
+
+    func requestCalendarReadAccessFromPlan(actionName: String) async -> CalendarPermissionState {
+        _ = actionName
+        return permission
+    }
+
+    func requestCalendarWriteAccessForConfirmedBlock(intent: ScheduledBlockWriteIntent) async -> CalendarPermissionState {
+        _ = intent
+        return permission
+    }
+
+    func fetchDerivedBusyWindows(for range: DateInterval) async -> [RealityWindow] {
+        _ = range
+        return []
+    }
+
+    func findOpenWindows(request: CalendarRealityReadRequest) async -> CalendarRealityReadResult {
+        CalendarRealityReadResult(
+            permissionState: permission,
+            derivedBusyWindows: [],
+            calendarContext: CalendarDerivedContext(
+                permissionState: permission,
+                observedRangeStart: request.horizon.start,
+                observedRangeEnd: request.horizon.end,
+                derivedBusyWindowCount: 0,
+                userInitiatedPlanAction: request.userInitiatedPlanAction,
+                explanation: "Calendar permission unavailable."
+            ),
+            openWindowCandidates: []
+        )
     }
 }

@@ -6,7 +6,7 @@ enum PreviewPlanScenarios {
         mode: .active,
         timeframeLabel: "Apr 20-Apr 26",
         hero: PlanRealityHeroState(
-            eyebrow: "Reality Model",
+            eyebrow: "Plan",
             title: "How this week holds together",
             subtitle: "Plan reads the week as room, pressure, and protected structure instead of a dense calendar clone.",
             dominantTruth: "Pressure is clustering into one overloaded day, while two calmer windows still have believable room.",
@@ -27,6 +27,91 @@ enum PreviewPlanScenarios {
             state: .success,
             goalTarget: GoalRouteTarget(goalID: "preview-goal-2"),
             planRoute: nil
+        ),
+        treaty: PlanTreatyState(
+            title: "This week's agreement",
+            summary: "Protect shell work, flex the retention loop, keep one capture outside today, and leave recovery room visible.",
+            protectedWork: "3 protected or fixed moves should stay defended.",
+            flexibleWork: "4 flexible moves can bend around real life.",
+            notTodayWork: "2 items should wait, clarify, or stay outside today's pressure.",
+            recoveryAllowance: "2 open days keep recovery room visible.",
+            calendarBoundary: "Manual planning still works without calendar access.",
+            primaryActionTitle: "Use this room",
+            primaryActionSubtitle: "Wednesday still has believable room for the retention loop.",
+            visualState: .selected
+        ),
+        capacityEnvelope: PlanCapacityEnvelopeState(
+            title: "Capacity envelope",
+            detail: "Manual availability is enough to keep shaping this plan. The envelope stays qualitative so it does not pretend to know more than the data shows.",
+            label: "Tight",
+            availableCapacity: "2 open days",
+            pressure: "Pressure is visible",
+            protectedFocus: "3 protected moves",
+            recoveryMargin: "Recovery room exists",
+            visualState: .warning
+        ),
+        lifecycleRail: PlanGoalLifecycleRailState(
+            title: "What this plan is carrying",
+            subtitle: "Goals stay visible by lifecycle, including work that belongs outside this week's pressure.",
+            segments: [
+                PlanGoalLifecycleRailSegment(lifecycleState: .previous, count: 1, subtitle: "Closed, parked, or transformed"),
+                PlanGoalLifecycleRailSegment(lifecycleState: .active, count: 2, subtitle: "Currently shaping attention"),
+                PlanGoalLifecycleRailSegment(lifecycleState: .future, count: 1, subtitle: "Planned, not active yet"),
+                PlanGoalLifecycleRailSegment(lifecycleState: .waiting, count: 1, subtitle: "Waiting on an answer"),
+                PlanGoalLifecycleRailSegment(lifecycleState: .blocked, count: 1, subtitle: "Needs unblock"),
+                PlanGoalLifecycleRailSegment(lifecycleState: .parked, count: 1, subtitle: "Intentionally outside pressure"),
+                PlanGoalLifecycleRailSegment(lifecycleState: .protected, count: 1, subtitle: "Should be defended"),
+                PlanGoalLifecycleRailSegment(lifecycleState: .completed, count: 1, subtitle: "Done and preserved"),
+                PlanGoalLifecycleRailSegment(lifecycleState: .cancelledDropped, count: 1, subtitle: "Dropped without shame")
+            ]
+        ),
+        timelineStrip: PlanTimelineStripState(
+            title: "Plan timeline",
+            subtitle: "A compact strip of previous, active, future, and outside pressure.",
+            items: [
+                PlanTimelineItemState(id: "preview-previous", title: "Launch audit", detail: "Kept outside current pressure.", timingLabel: "Previous", kind: .previous, visualState: .default, target: nil),
+                PlanTimelineItemState(id: "preview-active", title: "Ship the native shell", detail: "Fix shell regressions", timingLabel: "Due Apr 21", kind: .active, visualState: .warning, target: GoalRouteTarget(goalID: "preview-goal-1")),
+                PlanTimelineItemState(id: "preview-future", title: "Retention loop", detail: "Planned later, not part of this week's load.", timingLabel: "Future", kind: .future, visualState: .default, target: GoalRouteTarget(goalID: "preview-goal-2"))
+            ]
+        ),
+        opportunityWindows: PlanOpportunityWindowsState(
+            title: "Opportunity windows",
+            subtitle: "Windows are work modes, not a calendar grid.",
+            windows: [
+                PlanOpportunityWindowItem(id: "preview-window-focus", title: "Good window for one focused move", detail: "Wednesday can carry one believable move without turning calendar-dense.", modeLabel: "Focus", timingLabel: "Wed 22", visualState: .success, target: GoalRouteTarget(goalID: "preview-goal-2")),
+                PlanOpportunityWindowItem(id: "preview-window-admin", title: "Better for admin", detail: "Thursday can hold only lightweight follow-up.", modeLabel: "Admin", timingLabel: "Thu 23", visualState: .default, target: nil)
+            ]
+        ),
+        decisionDebt: PlanDecisionDebtState(
+            title: "Needs a decision",
+            subtitle: "Small decisions prevent the plan from becoming a dense task manager.",
+            items: [
+                PlanDecisionItemState(id: "preview-decision", title: "Needs a decision", detail: "Retention loop is active but not represented in this plan window.", suggestion: "Give it one next move, park it, or leave it intentionally outside today.", visualState: .warning, target: GoalRouteTarget(goalID: "preview-goal-2"), planRoute: nil)
+            ]
+        ),
+        conflictCourt: PlanConflictCourtState(
+            title: "Conflicts to negotiate",
+            subtitle: "These are negotiation items, not alarms.",
+            conflicts: [
+                PlanDecisionItemState(id: "preview-conflict", title: "Protected goals are competing", detail: "Two protected goals are asking the same week to defend them.", suggestion: "Choose the one that must stay protected and let the other flex.", visualState: .warning, target: GoalRouteTarget(goalID: "preview-goal-1"), planRoute: nil)
+            ]
+        ),
+        calendarBoundary: PlanCalendarBoundaryContractState(
+            title: "Calendar stays optional",
+            detail: "Plan works without access. With your confirmation, it can read derived busy time locally to find real open windows.",
+            permissionLabel: "Optional",
+            manualFallback: "Manual planning still works without calendar access.",
+            writeBoundary: "Plan never silently writes or reschedules calendar blocks.",
+            visualState: .default,
+            canRequestCalendarRead: true
+        ),
+        recoveryEntry: PlanRecoveryEntryState(
+            title: "Recovery room",
+            detail: "Save the Day stays suggestion-only here. Broad reflow waits for confirmed recovery tools.",
+            suggestions: [
+                PlanDecisionItemState(id: "preview-recovery", title: "Shrink one move", detail: "Ship the native shell is the clearest place to reduce pressure.", suggestion: "Make the next move smaller before moving anything else.", visualState: .warning, target: GoalRouteTarget(goalID: "preview-goal-1"), planRoute: nil)
+            ],
+            boundary: "No schedule changes happen from this card."
         ),
         pressureScrubber: PlanPressureScrubberState(
             title: "Pressure scrubber",
@@ -241,7 +326,7 @@ enum PreviewPlanScenarios {
         mode: .empty,
         timeframeLabel: "Apr 20-Apr 26",
         hero: PlanRealityHeroState(
-            eyebrow: "Reality Model",
+            eyebrow: "Plan",
             title: "How this week holds together",
             subtitle: "Plan stays calm until real goals, captures, or routines create week pressure worth shaping.",
             dominantTruth: "The week is mostly empty, which is useful information.",
@@ -262,6 +347,82 @@ enum PreviewPlanScenarios {
             state: .success,
             goalTarget: nil,
             planRoute: nil
+        ),
+        treaty: PlanTreatyState(
+            title: "This week's agreement",
+            summary: "The plan is allowed to stay open until real work needs shape.",
+            protectedWork: "Nothing is marked as protected yet.",
+            flexibleWork: "No flexible work is asking for placement right now.",
+            notTodayWork: "Nothing obvious needs to be kept outside today.",
+            recoveryAllowance: "7 open days keep recovery room visible.",
+            calendarBoundary: "Manual planning still works without calendar access.",
+            primaryActionTitle: "Use this room",
+            primaryActionSubtitle: "The week is open. Keep it open until a real goal or capture needs shape.",
+            visualState: .success
+        ),
+        capacityEnvelope: PlanCapacityEnvelopeState(
+            title: "Capacity envelope",
+            detail: "Manual availability is enough to keep shaping this plan. The envelope stays qualitative so it does not pretend to know more than the data shows.",
+            label: "Light",
+            availableCapacity: "7 open days",
+            pressure: "Pressure is readable",
+            protectedFocus: "Protected focus is not explicit yet",
+            recoveryMargin: "Recovery room exists",
+            visualState: .success
+        ),
+        lifecycleRail: PlanGoalLifecycleRailState(
+            title: "What this plan is carrying",
+            subtitle: "Goals stay visible by lifecycle, including work that belongs outside this week's pressure.",
+            segments: [
+                PlanGoalLifecycleRailSegment(lifecycleState: .previous, count: 0, subtitle: "No prior pressure"),
+                PlanGoalLifecycleRailSegment(lifecycleState: .active, count: 0, subtitle: "No live load"),
+                PlanGoalLifecycleRailSegment(lifecycleState: .future, count: 0, subtitle: "Nothing scheduled later"),
+                PlanGoalLifecycleRailSegment(lifecycleState: .waiting, count: 0, subtitle: "No waiting goal"),
+                PlanGoalLifecycleRailSegment(lifecycleState: .blocked, count: 0, subtitle: "No blocked goal"),
+                PlanGoalLifecycleRailSegment(lifecycleState: .parked, count: 0, subtitle: "Nothing parked"),
+                PlanGoalLifecycleRailSegment(lifecycleState: .protected, count: 0, subtitle: "Nothing protected"),
+                PlanGoalLifecycleRailSegment(lifecycleState: .completed, count: 0, subtitle: "No completion here"),
+                PlanGoalLifecycleRailSegment(lifecycleState: .cancelledDropped, count: 0, subtitle: "No dropped goal")
+            ]
+        ),
+        timelineStrip: PlanTimelineStripState(
+            title: "Plan timeline",
+            subtitle: "No goal movement is visible yet.",
+            items: []
+        ),
+        opportunityWindows: PlanOpportunityWindowsState(
+            title: "Opportunity windows",
+            subtitle: "Windows are work modes, not a calendar grid.",
+            windows: [
+                PlanOpportunityWindowItem(id: "preview-empty-window", title: "Keep this light", detail: "No believable window is asking to be filled.", modeLabel: "Recovery", timingLabel: "Manual", visualState: .default, target: nil)
+            ]
+        ),
+        decisionDebt: PlanDecisionDebtState(
+            title: "Needs a decision",
+            subtitle: "No unresolved planning decision is loud right now.",
+            items: []
+        ),
+        conflictCourt: PlanConflictCourtState(
+            title: "Conflicts to negotiate",
+            subtitle: "No visible conflict needs court right now.",
+            conflicts: []
+        ),
+        calendarBoundary: PlanCalendarBoundaryContractState(
+            title: "Calendar stays optional",
+            detail: "Plan works without access. With your confirmation, it can read derived busy time locally to find real open windows.",
+            permissionLabel: "Optional",
+            manualFallback: "Manual planning still works without calendar access.",
+            writeBoundary: "Plan never silently writes or reschedules calendar blocks.",
+            visualState: .default,
+            canRequestCalendarRead: true
+        ),
+        recoveryEntry: PlanRecoveryEntryState(
+            title: "Recovery room",
+            detail: "Save the Day stays suggestion-only here. Broad reflow waits for confirmed recovery tools.",
+            suggestions: [
+                PlanDecisionItemState(id: "preview-empty-recovery", title: "Protect recovery room", detail: "The safest move is keeping an open pocket unfilled.", suggestion: "Recovery room is part of the plan, not a failure to optimize.", visualState: .success, target: nil, planRoute: nil)
+            ],
+            boundary: "No schedule changes happen from this card."
         ),
         pressureScrubber: PlanPressureScrubberState(
             title: "Pressure scrubber",

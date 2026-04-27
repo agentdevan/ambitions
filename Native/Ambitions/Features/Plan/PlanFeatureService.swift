@@ -182,6 +182,7 @@ private extension RepositoryBackedPlanService {
         let clarificationDrafts = snapshot.drafts.filter { $0.latestResultKind == .clarificationRequired }
         let activeGoalSummaries = makeGoalSummaries(goals: activeGoals, feedback: snapshot.feedback, now: now)
         let weekContexts = activeGoalSummaries.flatMap(\.contexts)
+        let evidenceByGoal = Dictionary(grouping: snapshot.evidence, by: \.goalID)
         let habitGoals = activeGoals.filter { goal in
             guard let step = HabitGoalSemantics.preferredStep(in: goal) else { return goal.mode == .habit }
             return goal.mode == .habit || HabitGoalSemantics.isHabitLike(goal: goal, step: step)
@@ -238,12 +239,73 @@ private extension RepositoryBackedPlanService {
             openCaptureCount: openCaptures.count,
             weekDays: weekDays
         )
+        let capacityEnvelope = makeCapacityEnvelope(
+            posture: posture,
+            weekDays: weekDays,
+            visibleBlockCount: weekContexts.count,
+            protectedCount: weekContexts.filter { $0.blockKind == .protected || $0.blockKind == .fixed }.count,
+            missingGoalCount: missingGoalSummaries.count,
+            openCaptureCount: openCaptures.count,
+            calendarAwareness: calendarAwareness
+        )
+        let lifecycleRail = makeGoalLifecycleRail(goals: snapshot.goals, summaries: activeGoalSummaries, evidenceByGoal: evidenceByGoal, now: now)
+        let timelineStrip = makeTimelineStrip(
+            goals: snapshot.goals,
+            weekContexts: weekContexts,
+            evidenceByGoal: evidenceByGoal,
+            now: now
+        )
+        let opportunityWindows = makeOpportunityWindows(weekDays: weekDays, missingGoalSummaries: missingGoalSummaries)
+        let decisionDebt = makeDecisionDebt(
+            activeGoals: activeGoals,
+            summaries: activeGoalSummaries,
+            missingGoalSummaries: missingGoalSummaries,
+            weekDays: weekDays,
+            openCaptures: openCaptures,
+            blockedDraftCount: blockedDrafts.count,
+            clarificationDraftCount: clarificationDrafts.count,
+            evidenceByGoal: evidenceByGoal,
+            calendarAwareness: calendarAwareness
+        )
+        let conflictCourt = makeConflictCourt(
+            activeGoals: activeGoals,
+            summaries: activeGoalSummaries,
+            weekDays: weekDays,
+            openCaptures: openCaptures,
+            evidenceByGoal: evidenceByGoal
+        )
+        let recoveryEntry = makeRecoveryEntry(
+            weekDays: weekDays,
+            missingGoalSummaries: missingGoalSummaries,
+            openCaptures: openCaptures,
+            pressuredGoalSummary: mostPressuredGoal
+        )
+        let calendarBoundary = makeCalendarBoundaryContract(calendarAwareness)
+        let treaty = makeTreaty(
+            posture: posture,
+            capacityEnvelope: capacityEnvelope,
+            calendarBoundary: calendarBoundary,
+            weekContexts: weekContexts,
+            missingGoalCount: missingGoalSummaries.count,
+            openCaptureCount: openCaptures.count,
+            weekDays: weekDays,
+            primaryAction: primaryAction
+        )
 
         return PlanDashboard(
             mode: mode,
             timeframeLabel: timeframeLabel(now: now),
             hero: hero,
             primaryAction: primaryAction,
+            treaty: treaty,
+            capacityEnvelope: capacityEnvelope,
+            lifecycleRail: lifecycleRail,
+            timelineStrip: timelineStrip,
+            opportunityWindows: opportunityWindows,
+            decisionDebt: decisionDebt,
+            conflictCourt: conflictCourt,
+            calendarBoundary: calendarBoundary,
+            recoveryEntry: recoveryEntry,
             pressureScrubber: pressureScrubber,
             weekDays: weekDays,
             believability: believability,
@@ -776,7 +838,7 @@ private extension RepositoryBackedPlanService {
         }()
 
         return PlanRealityHeroState(
-            eyebrow: "Reality Model",
+            eyebrow: "Plan",
             title: "How this week holds together",
             subtitle: "Plan now reads the week as room, pressure, and protected structure instead of a dense calendar clone.",
             dominantTruth: dominantTruth,
@@ -927,6 +989,514 @@ private extension RepositoryBackedPlanService {
         ]
     }
 
+    func makeTreaty(
+        posture: PlanBelievabilityState,
+        capacityEnvelope: PlanCapacityEnvelopeState,
+        calendarBoundary: PlanCalendarBoundaryContractState,
+        weekContexts: [StepContext],
+        missingGoalCount: Int,
+        openCaptureCount: Int,
+        weekDays: [PlanElasticWeekDayState],
+        primaryAction: PlanWeekPrimaryAction
+    ) -> PlanTreatyState {
+        let protectedCount = weekContexts.filter { $0.blockKind == .protected || $0.blockKind == .fixed }.count
+        let flexibleCount = weekContexts.filter { $0.blockKind == .flexible }.count
+        let openDays = weekDays.filter { $0.level == .open }.count
+        let overloadedDays = weekDays.filter { $0.level == .overloaded || $0.level == .fragile }.count
+
+        return PlanTreatyState(
+            title: "This week's agreement",
+            summary: posture.visualState == .warning
+                ? "This plan can still be kind, but it needs one honest adjustment before more work is added."
+                : "This plan is a calm agreement between protected work, flexible work, and room you are allowed to keep.",
+            protectedWork: protectedCount == 0
+                ? "Nothing is marked as protected yet."
+                : "\(protectedCount) protected or fixed move\(protectedCount == 1 ? "" : "s") should stay defended.",
+            flexibleWork: flexibleCount == 0
+                ? "No flexible work is asking for placement right now."
+                : "\(flexibleCount) flexible move\(flexibleCount == 1 ? "" : "s") can bend around real life.",
+            notTodayWork: missingGoalCount + openCaptureCount == 0
+                ? "Nothing obvious needs to be kept outside today."
+                : "\(missingGoalCount + openCaptureCount) item\(missingGoalCount + openCaptureCount == 1 ? "" : "s") should wait, clarify, or stay outside today's pressure.",
+            recoveryAllowance: overloadedDays == 0 && openDays > 0
+                ? "\(openDays) open day\(openDays == 1 ? "" : "s") keep recovery room visible."
+                : "Recovery room is thin; move one thing, not everything.",
+            calendarBoundary: calendarBoundary.manualFallback,
+            primaryActionTitle: primaryAction.title,
+            primaryActionSubtitle: primaryAction.subtitle,
+            visualState: capacityEnvelope.visualState
+        )
+    }
+
+    func makeCapacityEnvelope(
+        posture: PlanBelievabilityState,
+        weekDays: [PlanElasticWeekDayState],
+        visibleBlockCount: Int,
+        protectedCount: Int,
+        missingGoalCount: Int,
+        openCaptureCount: Int,
+        calendarAwareness: PlanCalendarAwarenessState
+    ) -> PlanCapacityEnvelopeState {
+        let overloadedDays = weekDays.filter { $0.level == .overloaded }.count
+        let tightDays = weekDays.filter { $0.level == .tight }.count
+        let openDays = weekDays.filter { $0.level == .open }.count
+        let fragile = posture.label == "Fragile" || missingGoalCount >= 2
+        let level: (String, AmbitionVisualState)
+
+        if overloadedDays > 0 || visibleBlockCount >= 12 {
+            level = ("Overloaded", .warning)
+        } else if fragile {
+            level = ("Fragile", .warning)
+        } else if tightDays >= 2 || openCaptureCount >= 3 {
+            level = ("Tight", .warning)
+        } else if visibleBlockCount >= 4 || protectedCount > 0 {
+            level = ("Steady", .selected)
+        } else {
+            level = ("Light", .success)
+        }
+
+        let calendarCopy = calendarAwareness.status == .calendarAware
+            ? "Calendar-derived busy time is informing open windows locally."
+            : "Manual availability is enough to keep shaping this plan."
+
+        return PlanCapacityEnvelopeState(
+            title: "Capacity envelope",
+            detail: "\(calendarCopy) The envelope stays qualitative so it does not pretend to know more than the data shows.",
+            label: level.0,
+            availableCapacity: openDays == 0 ? "No obvious open day" : "\(openDays) open day\(openDays == 1 ? "" : "s")",
+            pressure: overloadedDays > 0 ? "Pressure is stacked" : tightDays > 0 ? "Pressure is visible" : "Pressure is readable",
+            protectedFocus: protectedCount == 0 ? "Protected focus is not explicit yet" : "\(protectedCount) protected move\(protectedCount == 1 ? "" : "s")",
+            recoveryMargin: openDays >= 2 ? "Recovery room exists" : openDays == 1 ? "Recovery room is narrow" : "Recovery room needs protection",
+            visualState: level.1
+        )
+    }
+
+    func makeGoalLifecycleRail(
+        goals: [Goal],
+        summaries: [GoalWeekSummary],
+        evidenceByGoal: [String: [ProgressEvidence]],
+        now: Date
+    ) -> PlanGoalLifecycleRailState {
+        let states = goals.map { goalLifecycleState(goal: $0, evidence: evidenceByGoal[$0.id] ?? [], now: now) }
+        let representedGoalIDs = Set(summaries.filter { $0.contexts.isEmpty == false }.map(\.goal.id))
+        let sequence: [GoalPortfolioLifecycleState] = [.previous, .active, .future, .waiting, .blocked, .parked, .protected, .completed, .cancelledDropped]
+        let segments = sequence.map { state in
+            let count: Int
+            if state == .active {
+                count = states.filter { $0 == .active }.count + representedGoalIDs.count
+            } else {
+                count = states.filter { $0 == state }.count
+            }
+            return PlanGoalLifecycleRailSegment(
+                lifecycleState: state,
+                count: count,
+                subtitle: lifecycleSubtitle(for: state, count: count)
+            )
+        }
+
+        return PlanGoalLifecycleRailState(
+            title: "What this plan is carrying",
+            subtitle: "Goals stay visible by lifecycle, including work that belongs outside this week's pressure.",
+            segments: segments
+        )
+    }
+
+    func makeTimelineStrip(
+        goals: [Goal],
+        weekContexts: [StepContext],
+        evidenceByGoal: [String: [ProgressEvidence]],
+        now: Date
+    ) -> PlanTimelineStripState {
+        let activeItems = weekContexts.prefix(5).map { context in
+            PlanTimelineItemState(
+                id: "timeline-\(context.goal.id)-\(context.step.id)",
+                title: context.goal.title,
+                detail: context.step.title,
+                timingLabel: context.timingLabel,
+                kind: .active,
+                visualState: context.visualState,
+                target: GoalRouteTarget(goalID: context.goal.id)
+            )
+        }
+        let previousItems = goals
+            .filter { goalLifecycleState(goal: $0, evidence: evidenceByGoal[$0.id] ?? [], now: now) == .previous || $0.state == .completed }
+            .prefix(2)
+            .map { goal in
+                PlanTimelineItemState(
+                    id: "timeline-previous-\(goal.id)",
+                    title: goal.title,
+                    detail: "Kept outside current pressure.",
+                    timingLabel: "Previous",
+                    kind: .previous,
+                    visualState: goal.state == .completed ? .success : .default,
+                    target: GoalRouteTarget(goalID: goal.id)
+                )
+            }
+        let futureItems = goals
+            .filter { goalLifecycleState(goal: $0, evidence: evidenceByGoal[$0.id] ?? [], now: now) == .future }
+            .prefix(2)
+            .map { goal in
+                PlanTimelineItemState(
+                    id: "timeline-future-\(goal.id)",
+                    title: goal.title,
+                    detail: "Planned later, not part of this week's load.",
+                    timingLabel: futureTimingLabel(for: goal, now: now),
+                    kind: .future,
+                    visualState: .default,
+                    target: GoalRouteTarget(goalID: goal.id)
+                )
+            }
+        let outsideItems = goals
+            .filter { [.paused, .archived].contains($0.state) }
+            .prefix(2)
+            .map { goal in
+                PlanTimelineItemState(
+                    id: "timeline-outside-\(goal.id)",
+                    title: goal.title,
+                    detail: goal.state == .paused ? "Parked outside current pressure." : "Closed or dropped outside this plan.",
+                    timingLabel: goal.state == .paused ? "Parked" : "Outside",
+                    kind: .outside,
+                    visualState: .default,
+                    target: GoalRouteTarget(goalID: goal.id)
+                )
+            }
+        let items = Array((previousItems + activeItems + futureItems + outsideItems).prefix(8))
+
+        return PlanTimelineStripState(
+            title: "Plan timeline",
+            subtitle: items.isEmpty
+                ? "No goal movement is visible yet."
+                : "A compact strip of previous, active, future, and outside pressure.",
+            items: items
+        )
+    }
+
+    func makeOpportunityWindows(
+        weekDays: [PlanElasticWeekDayState],
+        missingGoalSummaries: [GoalWeekSummary]
+    ) -> PlanOpportunityWindowsState {
+        let windows = weekDays.compactMap { day -> PlanOpportunityWindowItem? in
+            guard let window = day.openWindow else { return nil }
+            let modeLabel: String
+            let title: String
+            switch day.level {
+            case .open:
+                modeLabel = window.target == nil ? "Recovery" : "Focus"
+                title = window.target == nil ? "Recovery window" : "Good window for one focused move"
+            case .steady:
+                modeLabel = "Follow-up"
+                title = "Good for follow-up"
+            case .tight:
+                modeLabel = "Admin"
+                title = "Better for admin"
+            case .fragile, .overloaded:
+                return nil
+            }
+            return PlanOpportunityWindowItem(
+                id: "window-\(day.id)",
+                title: title,
+                detail: window.detail,
+                modeLabel: modeLabel,
+                timingLabel: "\(day.weekdayLabel) \(day.dateLabel)",
+                visualState: window.visualState,
+                target: window.target
+            )
+        }
+
+        let fallback: [PlanOpportunityWindowItem] = windows.isEmpty ? [
+            PlanOpportunityWindowItem(
+                id: "window-manual",
+                title: missingGoalSummaries.isEmpty ? "Keep this light" : "Manual window needed",
+                detail: missingGoalSummaries.isEmpty ? "No believable window is asking to be filled." : "Choose one small pocket manually before adding this goal to the week.",
+                modeLabel: missingGoalSummaries.isEmpty ? "Recovery" : "Focus",
+                timingLabel: "Manual",
+                visualState: missingGoalSummaries.isEmpty ? .default : .warning,
+                target: missingGoalSummaries.first.map { GoalRouteTarget(goalID: $0.goal.id) }
+            )
+        ] : []
+
+        return PlanOpportunityWindowsState(
+            title: "Opportunity windows",
+            subtitle: "Windows are work modes, not a calendar grid.",
+            windows: Array((windows + fallback).prefix(4))
+        )
+    }
+
+    func makeDecisionDebt(
+        activeGoals: [Goal],
+        summaries: [GoalWeekSummary],
+        missingGoalSummaries: [GoalWeekSummary],
+        weekDays: [PlanElasticWeekDayState],
+        openCaptures: [Capture],
+        blockedDraftCount: Int,
+        clarificationDraftCount: Int,
+        evidenceByGoal: [String: [ProgressEvidence]],
+        calendarAwareness: PlanCalendarAwarenessState
+    ) -> PlanDecisionDebtState {
+        var items: [PlanDecisionItemState] = []
+
+        items += missingGoalSummaries.prefix(2).map { summary in
+            PlanDecisionItemState(
+                id: "decision-next-step-\(summary.goal.id)",
+                title: "Needs a decision",
+                detail: "\(summary.goal.title) is active but not represented in this plan window.",
+                suggestion: "Give it one next move, park it, or leave it intentionally outside today.",
+                visualState: .warning,
+                target: GoalRouteTarget(goalID: summary.goal.id),
+                planRoute: nil
+            )
+        }
+
+        if activeGoals.count > 5 {
+            items.append(PlanDecisionItemState(
+                id: "decision-active-goals",
+                title: "Too many active goals",
+                detail: "\(activeGoals.count) active goals are competing for the same planning window.",
+                suggestion: "Protect the few that matter now and park the rest.",
+                visualState: .warning,
+                target: nil,
+                planRoute: nil
+            ))
+        }
+
+        if openCaptures.contains(where: { $0.status == .waiting || $0.status == .delegated }) {
+            items.append(PlanDecisionItemState(
+                id: "decision-waiting-captures",
+                title: "Waiting item needs follow-up",
+                detail: "A waiting or delegated capture is still influencing the week.",
+                suggestion: "Follow up, attach it, or keep it outside the plan.",
+                visualState: .warning,
+                target: nil,
+                planRoute: .capturesInbox
+            ))
+        }
+
+        if blockedDraftCount + clarificationDraftCount > 0 {
+            items.append(PlanDecisionItemState(
+                id: "decision-clarify-drafts",
+                title: "Clarify before planning more",
+                detail: "\(blockedDraftCount + clarificationDraftCount) draft\(blockedDraftCount + clarificationDraftCount == 1 ? "" : "s") need an answer before they become real plan pressure.",
+                suggestion: "Resolve the smallest missing answer first.",
+                visualState: .warning,
+                target: nil,
+                planRoute: .capturesInbox
+            ))
+        }
+
+        if let noProof = summaries.first(where: { evidenceByGoal[$0.goal.id, default: []].isEmpty && $0.contexts.isEmpty == false }) {
+            items.append(PlanDecisionItemState(
+                id: "decision-proof-\(noProof.goal.id)",
+                title: "Proof is thin",
+                detail: "\(noProof.goal.title) has work in the plan but no proof recorded yet.",
+                suggestion: "Keep the next move small enough to leave evidence.",
+                visualState: .default,
+                target: GoalRouteTarget(goalID: noProof.goal.id),
+                planRoute: nil
+            ))
+        }
+
+        if calendarAwareness.canRequestCalendarRead && calendarAwareness.status != .calendarAware {
+            items.append(PlanDecisionItemState(
+                id: "decision-calendar-boundary",
+                title: "Calendar boundary is optional",
+                detail: "Manual planning still works; calendar-derived windows require your action.",
+                suggestion: "Use manual availability or ask Plan to find local open windows.",
+                visualState: .default,
+                target: nil,
+                planRoute: nil
+            ))
+        }
+
+        if weekDays.contains(where: { $0.level == .overloaded }) {
+            items.append(PlanDecisionItemState(
+                id: "decision-overloaded-week",
+                title: "Clarify overloaded week",
+                detail: "At least one day is carrying too much to stay believable.",
+                suggestion: "Move one thing, not everything.",
+                visualState: .warning,
+                target: nil,
+                planRoute: nil
+            ))
+        }
+
+        return PlanDecisionDebtState(
+            title: "Needs a decision",
+            subtitle: items.isEmpty ? "No unresolved planning decision is loud right now." : "Small decisions prevent the plan from becoming a dense task manager.",
+            items: Array(items.prefix(5))
+        )
+    }
+
+    func makeConflictCourt(
+        activeGoals: [Goal],
+        summaries: [GoalWeekSummary],
+        weekDays: [PlanElasticWeekDayState],
+        openCaptures: [Capture],
+        evidenceByGoal: [String: [ProgressEvidence]]
+    ) -> PlanConflictCourtState {
+        var conflicts: [PlanDecisionItemState] = []
+        let protectedSummaries = summaries.filter { summary in
+            summary.contexts.contains(where: { $0.blockKind == .protected || $0.blockKind == .fixed })
+        }
+
+        if protectedSummaries.count >= 2,
+           let first = protectedSummaries.first {
+            conflicts.append(PlanDecisionItemState(
+                id: "conflict-protected-goals",
+                title: "Protected goals are competing",
+                detail: "\(protectedSummaries.count) protected goals are asking the same week to defend them.",
+                suggestion: "Choose the one that must stay protected and let the other flex.",
+                visualState: .warning,
+                target: GoalRouteTarget(goalID: first.goal.id),
+                planRoute: nil
+            ))
+        }
+
+        if let blocked = summaries.first(where: { $0.contexts.contains(where: { $0.step.state == .blocked }) }) {
+            conflicts.append(PlanDecisionItemState(
+                id: "conflict-blocked-\(blocked.goal.id)",
+                title: "Blocked goal is still active",
+                detail: "\(blocked.goal.title) has blocked work inside the current plan.",
+                suggestion: "Treat this as waiting or unblock it before protecting more time.",
+                visualState: .warning,
+                target: GoalRouteTarget(goalID: blocked.goal.id),
+                planRoute: nil
+            ))
+        }
+
+        if activeGoals.count > 5 {
+            conflicts.append(PlanDecisionItemState(
+                id: "conflict-active-count",
+                title: "Active goals are crowded",
+                detail: "\(activeGoals.count) active goals make the week negotiate too many directions.",
+                suggestion: "Protect fewer goals so the plan remains believable.",
+                visualState: .warning,
+                target: nil,
+                planRoute: nil
+            ))
+        }
+
+        if openCaptures.contains(where: { $0.status == .waiting || $0.status == .delegated }) && summaries.isEmpty == false {
+            conflicts.append(PlanDecisionItemState(
+                id: "conflict-commitment-goal",
+                title: "Follow-up is competing with goal work",
+                detail: "A waiting commitment and current goal work both want attention.",
+                suggestion: "Follow up first if it unlocks the move; otherwise keep it outside today.",
+                visualState: .warning,
+                target: nil,
+                planRoute: .capturesInbox
+            ))
+        }
+
+        if let thinProof = summaries.first(where: { evidenceByGoal[$0.goal.id, default: []].isEmpty && $0.contexts.count >= 2 }) {
+            conflicts.append(PlanDecisionItemState(
+                id: "conflict-proof-\(thinProof.goal.id)",
+                title: "Work is moving without proof",
+                detail: "\(thinProof.goal.title) has multiple plan blocks but no proof yet.",
+                suggestion: "Make the next move receipt-friendly.",
+                visualState: .default,
+                target: GoalRouteTarget(goalID: thinProof.goal.id),
+                planRoute: nil
+            ))
+        }
+
+        if weekDays.filter({ $0.level == .open }).isEmpty && summaries.isEmpty == false {
+            conflicts.append(PlanDecisionItemState(
+                id: "conflict-recovery-margin",
+                title: "No recovery margin",
+                detail: "The plan is using every visible day.",
+                suggestion: "Protect one pocket as recovery room.",
+                visualState: .warning,
+                target: nil,
+                planRoute: nil
+            ))
+        }
+
+        return PlanConflictCourtState(
+            title: "Conflicts to negotiate",
+            subtitle: conflicts.isEmpty ? "No visible conflict needs court right now." : "These are negotiation items, not alarms.",
+            conflicts: Array(conflicts.prefix(4))
+        )
+    }
+
+    func makeCalendarBoundaryContract(_ calendarAwareness: PlanCalendarAwarenessState) -> PlanCalendarBoundaryContractState {
+        PlanCalendarBoundaryContractState(
+            title: "Calendar stays optional",
+            detail: calendarAwareness.detail,
+            permissionLabel: calendarAwareness.valueLabel,
+            manualFallback: calendarAwareness.status == .calendarAware
+                ? "Plan can use derived busy time after your action."
+                : "Manual planning still works without calendar access.",
+            writeBoundary: "Plan never silently writes or reschedules calendar blocks.",
+            visualState: calendarAwareness.visualState,
+            canRequestCalendarRead: calendarAwareness.canRequestCalendarRead
+        )
+    }
+
+    func makeRecoveryEntry(
+        weekDays: [PlanElasticWeekDayState],
+        missingGoalSummaries: [GoalWeekSummary],
+        openCaptures: [Capture],
+        pressuredGoalSummary: GoalWeekSummary?
+    ) -> PlanRecoveryEntryState {
+        let overloaded = weekDays.contains(where: { $0.level == .overloaded || $0.level == .fragile })
+        var suggestions: [PlanDecisionItemState] = []
+
+        if overloaded, let pressuredGoalSummary {
+            suggestions.append(PlanDecisionItemState(
+                id: "recovery-shrink-\(pressuredGoalSummary.goal.id)",
+                title: "Shrink one move",
+                detail: "\(pressuredGoalSummary.goal.title) is the clearest place to reduce pressure.",
+                suggestion: "Make the next move smaller before moving anything else.",
+                visualState: .warning,
+                target: GoalRouteTarget(goalID: pressuredGoalSummary.goal.id),
+                planRoute: nil
+            ))
+        }
+
+        if let missing = missingGoalSummaries.first {
+            suggestions.append(PlanDecisionItemState(
+                id: "recovery-defer-\(missing.goal.id)",
+                title: "Defer what has no room",
+                detail: "\(missing.goal.title) is active but outside the current week.",
+                suggestion: "Leave it not today unless a real open window appears.",
+                visualState: .default,
+                target: GoalRouteTarget(goalID: missing.goal.id),
+                planRoute: nil
+            ))
+        }
+
+        if openCaptures.isEmpty == false {
+            suggestions.append(PlanDecisionItemState(
+                id: "recovery-captures",
+                title: "Park capture pressure",
+                detail: "\(openCaptures.count) capture\(openCaptures.count == 1 ? "" : "s") can wait outside the plan.",
+                suggestion: "Attach, park, or archive only after reviewing the inbox.",
+                visualState: .warning,
+                target: nil,
+                planRoute: .capturesInbox
+            ))
+        }
+
+        if suggestions.isEmpty {
+            suggestions.append(PlanDecisionItemState(
+                id: "recovery-protect-room",
+                title: "Protect recovery room",
+                detail: "The safest move is keeping an open pocket unfilled.",
+                suggestion: "Recovery room is part of the plan, not a failure to optimize.",
+                visualState: .success,
+                target: nil,
+                planRoute: nil
+            ))
+        }
+
+        return PlanRecoveryEntryState(
+            title: "Recovery room",
+            detail: "Save the Day stays suggestion-only here. Broad reflow waits for confirmed recovery tools.",
+            suggestions: Array(suggestions.prefix(3)),
+            boundary: "No schedule changes happen from this card."
+        )
+    }
+
     func goalShapingItems(summaries: [GoalWeekSummary]) -> [PlanGoalShapingItem] {
         summaries
             .map { summary in
@@ -991,6 +1561,91 @@ private extension RepositoryBackedPlanService {
         summaries.max { lhs, rhs in
             pressureScore(for: lhs) < pressureScore(for: rhs)
         }
+    }
+
+    func goalLifecycleState(goal: Goal, evidence: [ProgressEvidence], now: Date) -> GoalPortfolioLifecycleState {
+        switch goal.state {
+        case .completed:
+            return .completed
+        case .archived:
+            return goal.plan?.sections.flatMap(\.steps).contains(where: { $0.state == .completed }) == true ? .previous : .cancelledDropped
+        case .paused:
+            return .parked
+        case .draft:
+            return .future
+        case .active:
+            break
+        }
+
+        let steps = goal.plan?.sections.flatMap(\.steps) ?? []
+        if steps.contains(where: { $0.state == .blocked }) {
+            return .blocked
+        }
+        if hasFutureStart(goal.timing, now: now) {
+            return .future
+        }
+        if goal.mode == .delegatedSupport || goal.relationshipKind == .delegated {
+            return .waiting
+        }
+        if goal.mode == .maintenance || goal.mode == .learning || goal.mode == .exploration {
+            if evidence.isEmpty && steps.filter({ $0.state != .completed && $0.state != .cancelled }).count <= 1 {
+                return .waiting
+            }
+        }
+        if goal.timing.dueAt != nil || goal.timing.targetBy != nil {
+            return .protected
+        }
+        return .active
+    }
+
+    func lifecycleSubtitle(for state: GoalPortfolioLifecycleState, count: Int) -> String {
+        if count == 0 {
+            switch state {
+            case .previous: return "No prior pressure"
+            case .active: return "No live load"
+            case .future: return "Nothing scheduled later"
+            case .waiting: return "No waiting goal"
+            case .blocked: return "No blocked goal"
+            case .parked: return "Nothing parked"
+            case .protected: return "Nothing protected"
+            case .completed: return "No completion here"
+            case .cancelledDropped: return "No dropped goal"
+            case .passive: return "No passive goal"
+            }
+        }
+
+        switch state {
+        case .previous: return "Closed, parked, or transformed"
+        case .active: return "Currently shaping attention"
+        case .future: return "Planned, not active yet"
+        case .waiting: return "Waiting on an answer"
+        case .blocked: return "Needs unblock"
+        case .parked: return "Intentionally outside pressure"
+        case .protected: return "Should be defended"
+        case .completed: return "Done and preserved"
+        case .cancelledDropped: return "Dropped without shame"
+        case .passive: return "Quiet support"
+        }
+    }
+
+    func hasFutureStart(_ timing: GoalTiming, now: Date) -> Bool {
+        guard let startsOn = timing.startsOn, let date = parseDate(startsOn) else {
+            return false
+        }
+        return date > now
+    }
+
+    func futureTimingLabel(for goal: Goal, now: Date) -> String {
+        if hasFutureStart(goal.timing, now: now), let startsOn = goal.timing.startsOn {
+            return "Starts \(shortDate(startsOn))"
+        }
+        if let targetBy = goal.timing.targetBy {
+            return "Later \(shortDate(targetBy))"
+        }
+        if let dueAt = goal.timing.dueAt {
+            return "Due later \(shortDate(dueAt))"
+        }
+        return "Future"
     }
 
     func postureState(
@@ -1132,6 +1787,7 @@ private extension RepositoryBackedPlanService {
         case .open: 0.48
         case .steady: 0.66
         case .tight: 0.84
+        case .fragile: 0.92
         case .overloaded: 1.0
         }
         return min(base + (Double(blockCount) * 0.04), 1.0)
@@ -1145,6 +1801,8 @@ private extension RepositoryBackedPlanService {
             return remainingCapacity > 1.0 ? "Room remains" : "Steady load"
         case .tight:
             return "Little room left"
+        case .fragile:
+            return "Fragile room"
         case .overloaded:
             return "Needs relief"
         }
@@ -1157,6 +1815,9 @@ private extension RepositoryBackedPlanService {
     ) -> String {
         if level == .overloaded {
             return "Pressure is stacking here."
+        }
+        if level == .fragile {
+            return "This day needs recovery room."
         }
         if level == .tight {
             return "This day needs protected edges."
@@ -1175,7 +1836,8 @@ private extension RepositoryBackedPlanService {
         case .open: 0
         case .steady: 1
         case .tight: 2
-        case .overloaded: 3
+        case .fragile: 3
+        case .overloaded: 4
         }
     }
 

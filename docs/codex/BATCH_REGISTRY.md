@@ -43,7 +43,7 @@ Use [../canon/Ambitions_2_0_Batch_Plan.md](../canon/Ambitions_2_0_Batch_Plan.md)
 
 ## Active Queue
 
-Current execution status: Ambitions 2.0 post-Batch-60 canon is adopted. Batches 00-84 are complete for planning purposes. Batch 85 is the next queued / next uncompleted batch. Batches 86-120 remain future planned roadmap work.
+Current execution status: Ambitions 2.0 post-Batch-60 canon is adopted. Batches 00-85 are complete for planning purposes. Batch 86 is the next queued / next uncompleted batch. Batches 87-120 remain future planned roadmap work.
 
 | Batch | Name | Status | Notes |
 | --- | --- | --- | --- |
@@ -118,7 +118,7 @@ These rows are the active planning state for the new post-Batch-60 Ambitions 2.0
 | 82 | Foundation Performance and Persistence Budget Pass | Completed | Marked complete for planning by repo-wide status correction; do not infer additional feature validation from this status row beyond existing evidence. |
 | 83 | Goals 2.0 / Portfolio, Health, and Proof v1 | Completed | Implemented the top-level Goals portfolio overview with Goal Lifecycle Rail, calm state chips, Goal Weather v1, proof summaries, Next Visible Step on active cards, Momentum Integrity v1, Goal Atlas preview, and archive states; validated with XcodeGen generation, focused Goals tests, simulator build, and full `AmbitionsTests` on iPhone 17 / iOS 26.3.1. |
 | 84 | Goal Detail 2.0 / Mission Control, Assumptions, Proof Rail | Completed | Implemented Goal Detail Mission Control with Path, Now, Proof, and Risk lanes, Life Graph Breadcrumb fallback, goal storyline timeline, assumption review affordances, Proof Rail, truthful receipt empty state, and focused Goal Detail tests; validated with XcodeGen generation, simulator build, focused Goal Detail/foundation tests, full AmbitionsTests, and the canonical five-tab UI smoke on iPhone 17. |
-| 85 | Plan 2.0 / Believability Kernel and Plan Treaty | Queued | Future Plan surface/system batch; newly integrated planned canon includes Weekly Plan Strip, Next Visible Step selection, Goal Weather/proof-density believability inputs, active-goal plan window, Plan Treaty Decision Trail notes, and Next/Doing task weighting; preserves Plan-owned calendar permission and no silent rescheduling. |
+| 85 | Plan 2.0 / Believability Kernel and Plan Treaty | Completed | Implemented Plan as a believable planning surface with Plan Treaty hero, qualitative capacity envelope, goal lifecycle rail, compact timeline strip, bounded opportunity windows, calm decision/conflict negotiation, Plan-owned calendar boundary with manual fallback, and suggestion-only recovery entry; validated with XcodeGen generation, simulator build, focused Plan tests, targeted foundation regressions, full `AmbitionsTests`, and canonical five-tab UI smoke on iPhone 17. |
 | 86 | Reality Reflow v1 and Recovery Gradient | Queued | Future recovery/reflow batch; broad reflows require safe confirmation. |
 | 87 | You 2.0 / Trust Center, Constitution, Memory Controls | Queued | Future trust/control batch; do not claim sync/accessibility verification before owning batches. |
 | 88 | Reviews v1 / Recovery Review and Life OS Receipt | Queued | Future review batch; no restored top-level Insights tab. |
