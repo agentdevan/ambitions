@@ -2,9 +2,20 @@
 
 This folder contains the current Swift-native documentation for the Ambitions repo.
 
-## Canonical planning stack
+## Start here
 
 Use [codex/CONTEXT_INDEX.md](codex/CONTEXT_INDEX.md) for source-of-truth precedence before non-trivial work.
+
+For the current free Codex workflow, also read:
+
+- [codex/FREE_WORKFLOW_OPERATING_SYSTEM.md](codex/FREE_WORKFLOW_OPERATING_SYSTEM.md)
+  Free, non-agent, non-GitHub-Actions operating procedure for batch lifecycle, prompt modes, local validation, anti-cost rules, acceptance gates, and reconciliation cadence.
+- [review/VISUAL_REVIEW_CHECKLIST.md](review/VISUAL_REVIEW_CHECKLIST.md)
+  Manual review checklist for visible UI, navigation, empty states, copy, hierarchy, and accessibility nutrition after UI batches.
+- [review/FRICTION_LOG.md](review/FRICTION_LOG.md)
+  Observed product friction parking lot. Use it for real friction found during testing/review, not as a parallel roadmap.
+
+## Canonical planning stack
 
 - [../MASTER_PRODUCT_SPEC.md](../MASTER_PRODUCT_SPEC.md)
   Current shipping product truth.
