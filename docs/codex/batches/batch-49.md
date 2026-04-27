@@ -8,9 +8,9 @@ Post-hardening Front-End Transformation Program
 - [BATCH_REGISTRY.md](../BATCH_REGISTRY.md)
 
 ## Design Truth References
-- [screen-architecture-spec.md](../../canon/design/screen-architecture-spec.md)
-- [motion-microinteraction-spec.md](../../canon/design/motion-microinteraction-spec.md)
-- [novel-interaction-systems-spec.md](../../canon/design/novel-interaction-systems-spec.md)
+- [screen-architecture-spec.md](../../archive/superseded-design-canon/design/screen-architecture-spec.md)
+- [motion-microinteraction-spec.md](../../archive/superseded-design-canon/design/motion-microinteraction-spec.md)
+- [novel-interaction-systems-spec.md](../../archive/superseded-design-canon/design/novel-interaction-systems-spec.md)
 
 Key systems in this batch:
 - Pressure Map

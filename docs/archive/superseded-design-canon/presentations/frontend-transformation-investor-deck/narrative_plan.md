@@ -1,3 +1,14 @@
+> Superseded document.
+>
+> This file is preserved for historical context only.
+> Active canon now lives in:
+> - `docs/canon/design/Ambitions_Design_Constitution.md`
+> - `docs/canon/Ambitions_2_0_Implementation_Gap_Audit.md`
+> - `docs/canon/Ambitions_2_0_Roadmap.md`
+> - `docs/canon/Ambitions_2_0_Batch_Plan.md`
+>
+> Do not use this file as implementation source of truth.
+
 # Ambitions Front-End Transformation Investor Deck
 
 ## Audience

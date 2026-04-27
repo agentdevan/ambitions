@@ -15,10 +15,12 @@ For the current free Codex workflow, also read:
 - [review/FRICTION_LOG.md](review/FRICTION_LOG.md)
   Observed product friction parking lot. Use it for real friction found during testing/review, not as a parallel roadmap.
 
-## Canonical planning stack
+## Active Source-Of-Truth Docs
 
 - [../MASTER_PRODUCT_SPEC.md](../MASTER_PRODUCT_SPEC.md)
   Current shipping product truth.
+- [canon/design/Ambitions_Design_Constitution.md](canon/design/Ambitions_Design_Constitution.md)
+  Active design, IA, UX writing, interaction, trust, accessibility, and external-surface source of truth.
 - [canon/Ambitions_2_0_Master_Plan.md](canon/Ambitions_2_0_Master_Plan.md)
   Active post-Batch-60 product canon, including the Goal / Plan / Task visual doctrine.
 - [canon/Ambitions_2_0_Product_Architecture.md](canon/Ambitions_2_0_Product_Architecture.md)
@@ -31,36 +33,25 @@ For the current free Codex workflow, also read:
   Active Ambitions 2.0 roadmap.
 - [canon/Ambitions_2_0_Batch_Plan.md](canon/Ambitions_2_0_Batch_Plan.md)
   Active Batch 61-120 execution order and owning batch scopes.
-- [canon/Ambitions_OS_Master_Roadmap.md](canon/Ambitions_OS_Master_Roadmap.md)
-  Platform and endgame vision.
-- [canon/Ambitions_Surgical_Execution_Plan.md](canon/Ambitions_Surgical_Execution_Plan.md)
-  Execution order and dependency hierarchy.
-- [canon/Ambitions_Codex_Batch_Plan.md](canon/Ambitions_Codex_Batch_Plan.md)
-  Batching and work packaging.
-- [canon/Ambitions_Full_Frontend_Transformation_Program.md](canon/Ambitions_Full_Frontend_Transformation_Program.md)
-  Post-hardening frontend transformation canon. Use with the registry; do not treat it as active work by itself.
-- [canon/Ambitions_State_Continuity_Mesh.md](canon/Ambitions_State_Continuity_Mesh.md)
-  Canonical State Continuity Mesh contract for Now State Lease, Continuity Receipts, Sync Health Strip, semantic conflict language, provenance-preserving handoff/return, degraded-sync states, and local-first plus Apple-account-based sync launch truth.
-- [canon/Ambitions_App_Store_Release_Compliance.md](canon/Ambitions_App_Store_Release_Compliance.md)
-  Canonical App Store release-compliance and final submission-gate truth after the transformation program closes.
-- [canon/Ambitions_Launch_Master_Checklist.md](canon/Ambitions_Launch_Master_Checklist.md)
-  Canonical launch-planning layer for locked launch strategy, launch doctrine, tracks, and now-to-launch phases. It supplements the roadmap and release-compliance canon without replacing them.
-- [canon/Ambitions_Accessibility_Nutrition_Labels_Audit.md](canon/Ambitions_Accessibility_Nutrition_Labels_Audit.md)
-  Canonical accessibility-label audit artifact for honest, device-specific launch accessibility claims.
-- [canon/Ambitions_Product_Addendum_Continuity_Reality_Execution.md](canon/Ambitions_Product_Addendum_Continuity_Reality_Execution.md)
-  Supporting canon addendum for top-level surface questions, mobile provenance, and consolidated platform-pillar language after Batch 48. Use as shorthand only; do not treat it as a parallel master roadmap.
-- [canon/Ambitions_Frontend_Batches_49_60_Revised.md](canon/Ambitions_Frontend_Batches_49_60_Revised.md)
-  Supporting canon queue note for the revised queued Batch 49-60 frontend sequence. Registry status and the master transformation program still govern execution.
+- [canon/Ambitions_2_0_Implementation_Gap_Audit.md](canon/Ambitions_2_0_Implementation_Gap_Audit.md)
+  Active repo-wide gap audit and D01-D26 delta/alignment batch source.
+- [canon/Documentation_Cleanup_Audit.md](canon/Documentation_Cleanup_Audit.md)
+  Active markdown inventory and cleanup classification audit.
+- [canon/README.md](canon/README.md)
+  Canon index for active source-of-truth, supporting canon, historical docs, and archived docs.
 - [canon/design/README.md](canon/design/README.md)
-  Canonical future frontend design-truth set for shell IA, screen architecture, motion, trust UX, copy, external surfaces, and cross-device roles.
-- [canon/design/Ambitions_Frontend_Transformation_Execution_Classification.md](canon/design/Ambitions_Frontend_Transformation_Execution_Classification.md)
-  Canonical future frontend execution-tiering source for early-core, later-core, and optional-experimental systems and surface programs.
+  Active design contract index.
 - [codex/BATCH_REGISTRY.md](codex/BATCH_REGISTRY.md)
   Active work status only.
 - [codex/batches/README.md](codex/batches/README.md)
   Per-batch execution docs for the post-hardening frontend transformation program.
 
-Older docs in this folder are supporting context and do not override the canonical planning stack.
+## Superseded / Archived Docs
+
+- [archive/README.md](archive/README.md)
+  Superseded design, historical RC, and frontend transformation docs preserved for context only.
+
+Older docs in this folder are supporting context and do not override the active source-of-truth stack.
 
 ## Current shipping native docs
 
@@ -72,7 +63,7 @@ Older docs in this folder are supporting context and do not override the canonic
   Short operator checklist for final release-candidate review, reviewer access, privacy/disclosure, and App Store submission prep.
 - [codex/BATCH_REGISTRY.md](codex/BATCH_REGISTRY.md)
   Current batch status for active Ambitions work.
-- [rc1-native-finish-pass.md](rc1-native-finish-pass.md)
+- [rc1-native-finish-pass.md](archive/superseded-design-canon/rc1-native-finish-pass.md)
   Historical native polish/release-candidate notes that still describe the current native app direction accurately where not superseded by newer build/release docs.
 - [implementation-backlog.md](implementation-backlog.md)
   Supporting backlog translation aligned to the live native codebase where it does not conflict with the canonical planning stack.

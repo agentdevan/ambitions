@@ -8,8 +8,8 @@ Post-hardening Front-End Transformation Program
 - [BATCH_REGISTRY.md](../BATCH_REGISTRY.md)
 
 ## Design Truth References
-- [screen-architecture-spec.md](../../canon/design/screen-architecture-spec.md)
-- [copy-state-language-spec.md](../../canon/design/copy-state-language-spec.md)
+- [screen-architecture-spec.md](../../archive/superseded-design-canon/design/screen-architecture-spec.md)
+- [copy-state-language-spec.md](../../archive/superseded-design-canon/design/copy-state-language-spec.md)
 ## Start Gate
 - Start only after Batch 38 is complete and stable.
 - Do not activate or implement this batch early; follow the registry and dependency order.

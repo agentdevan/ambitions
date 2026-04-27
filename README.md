@@ -13,15 +13,17 @@ Ambitions is a native iOS SwiftUI application.
 Use [docs/codex/CONTEXT_INDEX.md](docs/codex/CONTEXT_INDEX.md) for the full source-of-truth hierarchy.
 The permanent planning docs live in [docs/canon](docs/canon):
 
+- [Ambitions_Design_Constitution.md](docs/canon/design/Ambitions_Design_Constitution.md)
 - [Ambitions_2_0_Master_Plan.md](docs/canon/Ambitions_2_0_Master_Plan.md)
 - [Ambitions_2_0_Product_Architecture.md](docs/canon/Ambitions_2_0_Product_Architecture.md)
 - [Ambitions_2_0_Systems_Architecture.md](docs/canon/Ambitions_2_0_Systems_Architecture.md)
 - [Ambitions_2_0_Visual_System.md](docs/canon/Ambitions_2_0_Visual_System.md)
 - [Ambitions_2_0_Roadmap.md](docs/canon/Ambitions_2_0_Roadmap.md)
 - [Ambitions_2_0_Batch_Plan.md](docs/canon/Ambitions_2_0_Batch_Plan.md)
-- [Ambitions_OS_Master_Roadmap.md](docs/canon/Ambitions_OS_Master_Roadmap.md)
-- [Ambitions_Surgical_Execution_Plan.md](docs/canon/Ambitions_Surgical_Execution_Plan.md)
-- [Ambitions_Codex_Batch_Plan.md](docs/canon/Ambitions_Codex_Batch_Plan.md)
+- [Ambitions_2_0_Implementation_Gap_Audit.md](docs/canon/Ambitions_2_0_Implementation_Gap_Audit.md)
+- [Canon index](docs/canon/README.md)
+
+Superseded and historical docs are indexed from [docs/archive/README.md](docs/archive/README.md) or marked as historical in [docs/canon/README.md](docs/canon/README.md).
 
 ## Native structure
 
@@ -30,11 +32,11 @@ The permanent planning docs live in [docs/canon](docs/canon):
 - `Native/Ambitions/Domain`
   Native domain models for launch/session and first-pass dashboard contracts.
 - `Native/Ambitions/Services`
-  Startup and feature service protocols plus repository-backed implementations for Today, Goals, Habits, Insights, and Profile.
+  Startup and feature service protocols plus repository-backed implementations for the active Today / Goals / Capture / Plan / You shell. Some internal compatibility seams still use older Habits, Insights, or Profile names.
 - `Native/Ambitions/Persistence`
   SwiftData-backed native persistence for goals, drafts, evidence, feedback, and app preferences.
 - `Native/Ambitions/Features`
-  Today, Captures, Goals, Habits, Insights, and Profile screens.
+  Today, Capture, Goals, Plan, and You-facing screens. Some folder names remain compatibility-oriented until their owning delta batches rename or absorb them.
 - `Native/Ambitions/UI`
   Shared shell UI like the launch gate and background canvas.
 - `Native/Ambitions/PreviewSupport`
@@ -94,7 +96,7 @@ Local reproduction, including exact build, unit test, UI test, and archive comma
 
 ## Runtime behavior
 
-- Appearance defaults to `System` and can be explicitly switched to Light or Dark from Profile.
+- Appearance defaults to `System` and can be explicitly switched to Light or Dark from You.
 - First-run identity is blank and neutral until the user enters personal data; preview/demo fixtures remain clearly non-production.
 - The current shipped surface is local-first and on-device first.
 - Today quick capture persists into the Captures tab through the native capture service.
@@ -105,4 +107,4 @@ Local reproduction, including exact build, unit test, UI test, and archive comma
 
 ## Current status
 
-The repo is now Swift-native and XcodeGen-driven. The app boots through the native SwiftUI entry point, persists state through SwiftData, and ships repository-backed Today, Captures, Goals, Habits, Insights, and Profile surfaces without a retained TypeScript / Expo / React Native runtime path.
+The repo is now Swift-native and XcodeGen-driven. The app boots through the native SwiftUI entry point, persists state through SwiftData, and preserves the active Today / Goals / Capture / Plan / You shell. Older internal Captures, Habits, Insights, and Profile naming remains compatibility-only where it still exists.

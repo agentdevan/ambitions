@@ -13,7 +13,7 @@ This folder contains historical per-batch execution docs for completed pre-Batch
 
 - [Ambitions_Full_Frontend_Transformation_Program.md](../../canon/Ambitions_Full_Frontend_Transformation_Program.md)
 - [design/README.md](../../canon/design/README.md)
-- [Ambitions_Frontend_Transformation_Execution_Classification.md](../../canon/design/Ambitions_Frontend_Transformation_Execution_Classification.md)
+- [Ambitions_Frontend_Transformation_Execution_Classification.md](../../archive/superseded-design-canon/design/Ambitions_Frontend_Transformation_Execution_Classification.md)
 - [BATCH_REGISTRY.md](../BATCH_REGISTRY.md)
 - [CONTEXT_INDEX.md](../CONTEXT_INDEX.md)
 

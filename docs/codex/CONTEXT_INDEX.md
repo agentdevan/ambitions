@@ -29,19 +29,16 @@ For non-trivial work, read these in order before planning:
 14. [Ambitions_2_0_Foundation_Performance_Persistence_Budget.md](../canon/Ambitions_2_0_Foundation_Performance_Persistence_Budget.md) when validating Phase B foundation performance, bounded-query, persistence, migration, export/import, and sync-readiness posture.
 15. [Ambitions_2_0_Capability_Matrix.md](../canon/Ambitions_2_0_Capability_Matrix.md) when verifying implementation status or running roadmap reconciliation.
 16. [Ambitions_2_0_Implementation_Gap_Audit.md](../canon/Ambitions_2_0_Implementation_Gap_Audit.md) when planning Design Constitution alignment or checking implementation gaps.
-17. [Ambitions_2_0_Codex_Execution_Guide.md](Ambitions_2_0_Codex_Execution_Guide.md).
-18. [MASTER_CODEX_SYSTEM.md](MASTER_CODEX_SYSTEM.md).
-19. [BATCH_REGISTRY.md](BATCH_REGISTRY.md).
-20. [VISUAL_REVIEW_CHECKLIST.md](../review/VISUAL_REVIEW_CHECKLIST.md) when visible UI, navigation, empty states, copy, or hierarchy changes.
-21. [FRICTION_LOG.md](../review/FRICTION_LOG.md) when observed product friction needs to be captured without expanding active scope.
-22. [MASTER_PRODUCT_SPEC.md](../../MASTER_PRODUCT_SPEC.md) for current shipping product truth where not superseded by the new Ambitions 2.0 canon.
-23. [Ambitions_OS_Master_Roadmap.md](../canon/Ambitions_OS_Master_Roadmap.md) for historical platform/endgame continuity where not superseded by the post-Batch-60 canon.
-24. [Ambitions_Surgical_Execution_Plan.md](../canon/Ambitions_Surgical_Execution_Plan.md) for dependency hierarchy where not superseded by the post-Batch-60 canon.
-25. [Ambitions_Codex_Batch_Plan.md](../canon/Ambitions_Codex_Batch_Plan.md) for preserved prior batch history and supersession notes.
-26. [Ambitions_Full_Frontend_Transformation_Program.md](../canon/Ambitions_Full_Frontend_Transformation_Program.md) when investigating historical frontend transformation context.
-27. [design/README.md](../canon/design/README.md) when investigating historical frontend design context.
-28. [Ambitions_Frontend_Transformation_Execution_Classification.md](../canon/design/Ambitions_Frontend_Transformation_Execution_Classification.md) when investigating historical frontend sequencing context.
-29. Supporting docs linked from [docs/README.md](../README.md).
+17. [Documentation_Cleanup_Audit.md](../canon/Documentation_Cleanup_Audit.md) when cleaning or classifying markdown docs.
+18. [Ambitions_2_0_Codex_Execution_Guide.md](Ambitions_2_0_Codex_Execution_Guide.md).
+19. [MASTER_CODEX_SYSTEM.md](MASTER_CODEX_SYSTEM.md).
+20. [BATCH_REGISTRY.md](BATCH_REGISTRY.md).
+21. [VISUAL_REVIEW_CHECKLIST.md](../review/VISUAL_REVIEW_CHECKLIST.md) when visible UI, navigation, empty states, copy, or hierarchy changes.
+22. [FRICTION_LOG.md](../review/FRICTION_LOG.md) when observed product friction needs to be captured without expanding active scope.
+23. [MASTER_PRODUCT_SPEC.md](../../MASTER_PRODUCT_SPEC.md) for current shipping product truth where not superseded by the new Ambitions 2.0 canon.
+24. [canon/README.md](../canon/README.md) for active canon index and historical-doc status.
+25. [archive/README.md](../archive/README.md) when investigating superseded design or frontend transformation context.
+26. Supporting docs linked from [docs/README.md](../README.md).
 
 ## Precedence Model
 
@@ -56,21 +53,14 @@ When sources conflict, use this precedence:
 7. [MASTER_CODEX_SYSTEM.md](MASTER_CODEX_SYSTEM.md) and [Ambitions_2_0_Codex_Execution_Guide.md](Ambitions_2_0_Codex_Execution_Guide.md) for standing Codex behavior.
 8. [VISUAL_REVIEW_CHECKLIST.md](../review/VISUAL_REVIEW_CHECKLIST.md) and [FRICTION_LOG.md](../review/FRICTION_LOG.md) for manual review and observed friction only; they are not product canon.
 9. [MASTER_PRODUCT_SPEC.md](../../MASTER_PRODUCT_SPEC.md) for current shipping product truth where not superseded by the new Ambitions 2.0 canon.
-10. [Ambitions_OS_Master_Roadmap.md](../canon/Ambitions_OS_Master_Roadmap.md) for historical platform and endgame vision where not superseded.
-11. [Ambitions_Surgical_Execution_Plan.md](../canon/Ambitions_Surgical_Execution_Plan.md) for dependency hierarchy where not superseded.
-12. [Ambitions_Codex_Batch_Plan.md](../canon/Ambitions_Codex_Batch_Plan.md) for preserved prior batch history and supersession notes.
-13. [Ambitions_Full_Frontend_Transformation_Program.md](../canon/Ambitions_Full_Frontend_Transformation_Program.md) for historical frontend transformation context where not superseded.
-14. [design/README.md](../canon/design/README.md) for historical frontend design truth where not superseded.
-15. [Ambitions_Frontend_Transformation_Execution_Classification.md](../canon/design/Ambitions_Frontend_Transformation_Execution_Classification.md) for historical frontend execution tiering where not superseded.
-16. Supporting docs.
+10. [canon/README.md](../canon/README.md) for historical/supporting canon status.
+11. [archive/README.md](../archive/README.md) for superseded design and frontend transformation context.
+12. Supporting docs.
 
-## Canonical Planning Stack
+## Active Source-Of-Truth Docs
 
-These files are permanent canonical context and must stay in repo:
+These files are the active Ambitions source-of-truth stack:
 
-- [../canon/Ambitions_OS_Master_Roadmap.md](../canon/Ambitions_OS_Master_Roadmap.md)
-- [../canon/Ambitions_Surgical_Execution_Plan.md](../canon/Ambitions_Surgical_Execution_Plan.md)
-- [../canon/Ambitions_Codex_Batch_Plan.md](../canon/Ambitions_Codex_Batch_Plan.md)
 - [../canon/Ambitions_2_0_Master_Plan.md](../canon/Ambitions_2_0_Master_Plan.md)
 - [../canon/Ambitions_2_0_Product_Architecture.md](../canon/Ambitions_2_0_Product_Architecture.md)
 - [../canon/Ambitions_2_0_Systems_Architecture.md](../canon/Ambitions_2_0_Systems_Architecture.md)
@@ -86,13 +76,17 @@ These files are permanent canonical context and must stay in repo:
 - [../canon/Ambitions_2_0_Decision_Log.md](../canon/Ambitions_2_0_Decision_Log.md)
 - [../canon/Ambitions_2_0_Capability_Matrix.md](../canon/Ambitions_2_0_Capability_Matrix.md)
 - [../canon/Ambitions_2_0_Implementation_Gap_Audit.md](../canon/Ambitions_2_0_Implementation_Gap_Audit.md)
+- [../canon/Documentation_Cleanup_Audit.md](../canon/Documentation_Cleanup_Audit.md)
 - [Ambitions_2_0_Codex_Execution_Guide.md](Ambitions_2_0_Codex_Execution_Guide.md)
 - [FREE_WORKFLOW_OPERATING_SYSTEM.md](FREE_WORKFLOW_OPERATING_SYSTEM.md)
-- [../canon/Ambitions_Full_Frontend_Transformation_Program.md](../canon/Ambitions_Full_Frontend_Transformation_Program.md)
 - [../canon/design/README.md](../canon/design/README.md)
-- [../canon/design/Ambitions_Frontend_Transformation_Execution_Classification.md](../canon/design/Ambitions_Frontend_Transformation_Execution_Classification.md)
 
 Do not replace these with external copies or duplicate canon locations.
+
+## Superseded / Archived Docs
+
+- [../archive/README.md](../archive/README.md) indexes superseded design/frontend transformation docs.
+- Older roadmap, surgical, and batch docs preserved in [../canon/README.md](../canon/README.md) are historical/supporting only.
 
 ## Review and Workflow Support Docs
 
@@ -113,7 +107,7 @@ These files improve the process but do not override canon:
 - Do not begin device work before runtime separation exists.
 - Implement only the active or next queued batch from [Ambitions_2_0_Batch_Plan.md](../canon/Ambitions_2_0_Batch_Plan.md) and [BATCH_REGISTRY.md](BATCH_REGISTRY.md) unless explicitly told otherwise.
 - For Batch 66 onward, preserve the intelligence standards in [Ambitions_2_0_Intelligence_Standards.md](../canon/Ambitions_2_0_Intelligence_Standards.md): Priority Reality Model, Context Lens, Commitment Capture, Living Goal Containers, obvious destination rules for every user-created item, user-correctable assumptions, and anti-clutter progressive-disclosure product intelligence.
-- Treat [Ambitions_Full_Frontend_Transformation_Program.md](../canon/Ambitions_Full_Frontend_Transformation_Program.md), [design/README.md](../canon/design/README.md), and [Ambitions_Frontend_Transformation_Execution_Classification.md](../canon/design/Ambitions_Frontend_Transformation_Execution_Classification.md) as historical context where not superseded by the active Batch 61+ Ambitions 2.0 canon.
+- Treat archived frontend transformation docs as historical context only where not superseded by the active Batch 61+ Ambitions 2.0 canon.
 - Do not add paid infrastructure, GitHub Actions, scheduled agents, paid cloud runners, or external paid QA services unless the user explicitly authorizes it.
 
 ## Older Docs

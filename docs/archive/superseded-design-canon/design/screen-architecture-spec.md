@@ -1,3 +1,14 @@
+> Superseded document.
+>
+> This file is preserved for historical context only.
+> Active canon now lives in:
+> - `docs/canon/design/Ambitions_Design_Constitution.md`
+> - `docs/canon/Ambitions_2_0_Implementation_Gap_Audit.md`
+> - `docs/canon/Ambitions_2_0_Roadmap.md`
+> - `docs/canon/Ambitions_2_0_Batch_Plan.md`
+>
+> Do not use this file as implementation source of truth.
+
 # Screen Architecture Spec
 
 Historical/superseded note: This file is preserved pre-Batch-61 frontend transformation context. Active Ambitions 2.0 screen truth now lives in [Ambitions_Design_Constitution.md](Ambitions_Design_Constitution.md) and [screen-contract-matrix.md](screen-contract-matrix.md). If this file references Insights, Profile, Habits, Captures, or older shell behavior as primary surfaces, treat those references as historical unless explicitly reaffirmed by the Design Constitution.

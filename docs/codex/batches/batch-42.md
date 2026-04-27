@@ -8,9 +8,9 @@ Post-hardening Front-End Transformation Program
 - [BATCH_REGISTRY.md](../BATCH_REGISTRY.md)
 
 ## Design Truth References
-- [shell-ia-spec.md](../../canon/design/shell-ia-spec.md)
-- [screen-architecture-spec.md](../../canon/design/screen-architecture-spec.md)
-- [novel-interaction-systems-spec.md](../../canon/design/novel-interaction-systems-spec.md)
+- [shell-ia-spec.md](../../archive/superseded-design-canon/design/shell-ia-spec.md)
+- [screen-architecture-spec.md](../../archive/superseded-design-canon/design/screen-architecture-spec.md)
+- [novel-interaction-systems-spec.md](../../archive/superseded-design-canon/design/novel-interaction-systems-spec.md)
 ## Start Gate
 - Start only after Batch 38 is complete and stable.
 - Do not activate or implement this batch early; follow the registry and dependency order.

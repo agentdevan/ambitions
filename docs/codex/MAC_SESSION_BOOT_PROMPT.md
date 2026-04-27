@@ -2,9 +2,11 @@ Read and use ./docs/codex/CONTEXT_INDEX.md first, then ./docs/codex/MASTER_CODEX
 
 For non-trivial work, also read:
 - ./MASTER_PRODUCT_SPEC.md
-- ./docs/canon/Ambitions_OS_Master_Roadmap.md
-- ./docs/canon/Ambitions_Surgical_Execution_Plan.md
-- ./docs/canon/Ambitions_Codex_Batch_Plan.md
+- ./docs/canon/design/Ambitions_Design_Constitution.md
+- ./docs/canon/Ambitions_2_0_Master_Plan.md
+- ./docs/canon/Ambitions_2_0_Roadmap.md
+- ./docs/canon/Ambitions_2_0_Batch_Plan.md
+- ./docs/canon/Ambitions_2_0_Implementation_Gap_Audit.md
 - ./docs/codex/BATCH_REGISTRY.md
 
 Before making any change:

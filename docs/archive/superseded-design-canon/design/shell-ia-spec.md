@@ -1,3 +1,14 @@
+> Superseded document.
+>
+> This file is preserved for historical context only.
+> Active canon now lives in:
+> - `docs/canon/design/Ambitions_Design_Constitution.md`
+> - `docs/canon/Ambitions_2_0_Implementation_Gap_Audit.md`
+> - `docs/canon/Ambitions_2_0_Roadmap.md`
+> - `docs/canon/Ambitions_2_0_Batch_Plan.md`
+>
+> Do not use this file as implementation source of truth.
+
 # Shell IA Spec
 
 Historical/superseded note: This file is preserved pre-Batch-61 frontend transformation context. Active Ambitions 2.0 shell truth is Today / Goals / Capture / Plan / You and now lives in [Ambitions_Design_Constitution.md](Ambitions_Design_Constitution.md). If this file references Today / Goals / Plan / Insights / Profile, Insights as a top-level tab, Profile as the user-facing name, or Habits as a standalone product area, treat those references as historical/superseded.

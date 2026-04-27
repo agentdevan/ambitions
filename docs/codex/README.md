@@ -7,14 +7,12 @@ Before non-trivial planning or implementation, read:
 1. [CONTEXT_INDEX.md](CONTEXT_INDEX.md)
 2. [../../AGENTS.md](../../AGENTS.md)
 3. [../../MASTER_PRODUCT_SPEC.md](../../MASTER_PRODUCT_SPEC.md)
-4. [../canon/Ambitions_OS_Master_Roadmap.md](../canon/Ambitions_OS_Master_Roadmap.md)
-5. [../canon/Ambitions_Surgical_Execution_Plan.md](../canon/Ambitions_Surgical_Execution_Plan.md)
-6. [../canon/Ambitions_Codex_Batch_Plan.md](../canon/Ambitions_Codex_Batch_Plan.md)
-7. [../canon/Ambitions_2_0_Batch_Plan.md](../canon/Ambitions_2_0_Batch_Plan.md) for active Batch 61-89 execution truth
-8. [../canon/Ambitions_Full_Frontend_Transformation_Program.md](../canon/Ambitions_Full_Frontend_Transformation_Program.md) for historical frontend transformation context only
-9. [../canon/design/README.md](../canon/design/README.md) for historical frontend design context only
-9. [../canon/design/Ambitions_Frontend_Transformation_Execution_Classification.md](../canon/design/Ambitions_Frontend_Transformation_Execution_Classification.md) for frontend sequencing truth
-10. [BATCH_REGISTRY.md](BATCH_REGISTRY.md)
+4. [../canon/design/Ambitions_Design_Constitution.md](../canon/design/Ambitions_Design_Constitution.md)
+5. [../canon/Ambitions_2_0_Master_Plan.md](../canon/Ambitions_2_0_Master_Plan.md)
+6. [../canon/Ambitions_2_0_Roadmap.md](../canon/Ambitions_2_0_Roadmap.md)
+7. [../canon/Ambitions_2_0_Batch_Plan.md](../canon/Ambitions_2_0_Batch_Plan.md)
+8. [../canon/Ambitions_2_0_Implementation_Gap_Audit.md](../canon/Ambitions_2_0_Implementation_Gap_Audit.md)
+9. [BATCH_REGISTRY.md](BATCH_REGISTRY.md)
 
 ## Batch Execution
 
@@ -23,9 +21,8 @@ It does not override the higher-level product vision, dependency hierarchy, or b
 
 Codex runs should implement only the active batch unless the user explicitly changes scope.
 Use Ask mode or a brief plan before code changes for larger work.
-Historical post-hardening frontend transformation batches are documented under [batches/README.md](batches/README.md). For active work, use the Batch 61-89 plan.
-The matching design-truth set for those queued batches lives under [../canon/design/README.md](../canon/design/README.md).
-The matching execution-tiering truth for those queued batches lives under [../canon/design/Ambitions_Frontend_Transformation_Execution_Classification.md](../canon/design/Ambitions_Frontend_Transformation_Execution_Classification.md).
+Historical post-hardening frontend transformation batches are documented under [batches/README.md](batches/README.md). For active work, use the Ambitions 2.0 canon and the D01-D26 delta/alignment backlog.
+Archived frontend transformation design docs live under [../archive/README.md](../archive/README.md) and are historical only.
 
 ## Supporting Files
 

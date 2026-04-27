@@ -8,9 +8,9 @@ Post-hardening Front-End Transformation Program
 - [BATCH_REGISTRY.md](../BATCH_REGISTRY.md)
 
 ## Design Truth References
-- [shell-ia-spec.md](../../canon/design/shell-ia-spec.md)
-- [motion-microinteraction-spec.md](../../canon/design/motion-microinteraction-spec.md)
-- [novel-interaction-systems-spec.md](../../canon/design/novel-interaction-systems-spec.md)
+- [shell-ia-spec.md](../../archive/superseded-design-canon/design/shell-ia-spec.md)
+- [motion-microinteraction-spec.md](../../archive/superseded-design-canon/design/motion-microinteraction-spec.md)
+- [novel-interaction-systems-spec.md](../../archive/superseded-design-canon/design/novel-interaction-systems-spec.md)
 
 Key systems in this batch:
 - Cognitive Mode Lens

@@ -8,9 +8,9 @@ Post-hardening Front-End Transformation Program
 - [BATCH_REGISTRY.md](../BATCH_REGISTRY.md)
 
 ## Design Truth References
-- [external-surface-spec.md](../../canon/design/external-surface-spec.md)
-- [motion-microinteraction-spec.md](../../canon/design/motion-microinteraction-spec.md)
-- [cross-device-surface-roles-spec.md](../../canon/design/cross-device-surface-roles-spec.md)
+- [external-surface-spec.md](../../archive/superseded-design-canon/design/external-surface-spec.md)
+- [motion-microinteraction-spec.md](../../archive/superseded-design-canon/design/motion-microinteraction-spec.md)
+- [cross-device-surface-roles-spec.md](../../archive/superseded-design-canon/design/cross-device-surface-roles-spec.md)
 ## Start Gate
 - Start only after Batch 38 is complete and stable.
 - Do not activate or implement this batch early; follow the registry and dependency order.
