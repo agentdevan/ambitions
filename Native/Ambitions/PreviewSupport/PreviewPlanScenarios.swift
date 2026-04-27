@@ -113,6 +113,83 @@ enum PreviewPlanScenarios {
             ],
             boundary: "No schedule changes happen from this card."
         ),
+        realityReflow: PlanRealityReflowState(
+            title: "Reality changed",
+            detail: "Move one thing, not everything. These are suggestions until you confirm a change.",
+            reasonKind: .overloadedPlan,
+            reasonDetail: "Tuesday is carrying more than this plan can calmly explain.",
+            recommendedAdjustment: "Protect this",
+            noChangeCopy: "Nothing changed yet.",
+            suggestions: [
+                PlanReflowSuggestionState(
+                    id: "preview-reflow-protect",
+                    kind: .protectOneItem,
+                    title: "Protect this",
+                    detail: "Keep shell regression work defended before changing the rest.",
+                    impactLabel: "Smallest useful adjustment",
+                    boundary: PlanReflowBoundaryState(actionKind: .changePlanWindow, confirmationRequirement: .notRequired, undoAvailability: .availableLocal, safetyLabel: "Safe/local"),
+                    visualState: .selected,
+                    target: GoalRouteTarget(goalID: "preview-goal-1"),
+                    planRoute: nil
+                ),
+                PlanReflowSuggestionState(
+                    id: "preview-reflow-shrink",
+                    kind: .shrinkAction,
+                    title: "Make it smaller",
+                    detail: "Close only the top regression before moving anything else.",
+                    impactLabel: "Local suggestion only",
+                    boundary: PlanReflowBoundaryState(actionKind: .shrinkAction, confirmationRequirement: .notRequired, undoAvailability: .availableLocal, safetyLabel: "Safe/local"),
+                    visualState: .warning,
+                    target: GoalRouteTarget(goalID: "preview-goal-1"),
+                    planRoute: nil
+                ),
+                PlanReflowSuggestionState(
+                    id: "preview-reflow-confirm",
+                    kind: .askForConfirmation,
+                    title: "Needs confirmation",
+                    detail: "Confirm before applying any broad reflow or calendar-impacting change.",
+                    impactLabel: "Nothing changes until confirmed",
+                    boundary: PlanReflowBoundaryState(actionKind: .changePlanWindow, confirmationRequirement: .requiredForBroadReflow, undoAvailability: .notSupportedYet, safetyLabel: "Confirm first"),
+                    visualState: .warning,
+                    target: nil,
+                    planRoute: nil
+                )
+            ],
+            visualState: .warning
+        ),
+        recoveryGradient: PlanRecoveryGradientState(
+            title: "Recovery options",
+            detail: "Start with the least disruptive option that still makes the plan believable.",
+            options: [
+                PlanRecoveryGradientOptionState(id: "preview-gradient-protect", order: 0, kind: .protectOneItem, title: "Protect this", detail: "Keep one must-do defended.", boundary: PlanReflowBoundaryState(actionKind: .changePlanWindow, confirmationRequirement: .notRequired, undoAvailability: .availableLocal, safetyLabel: "Safe/local"), visualState: .selected),
+                PlanRecoveryGradientOptionState(id: "preview-gradient-shrink", order: 1, kind: .shrinkAction, title: "Make it smaller", detail: "Reduce the ask before moving it.", boundary: PlanReflowBoundaryState(actionKind: .shrinkAction, confirmationRequirement: .notRequired, undoAvailability: .availableLocal, safetyLabel: "Safe/local"), visualState: .default),
+                PlanRecoveryGradientOptionState(id: "preview-gradient-split", order: 2, kind: .splitAction, title: "Split it", detail: "Carry only the first clear part.", boundary: PlanReflowBoundaryState(actionKind: .splitAction, confirmationRequirement: .notRequired, undoAvailability: .availableLocal, safetyLabel: "Safe/local"), visualState: .default),
+                PlanRecoveryGradientOptionState(id: "preview-gradient-move", order: 3, kind: .moveLocalActionLater, title: "Move this later", detail: "Move one local item after confirmation.", boundary: PlanReflowBoundaryState(actionKind: .moveActionLater, confirmationRequirement: .requiredForBroadReflow, undoAvailability: .requiresConfirmation, safetyLabel: "Confirm first"), visualState: .default),
+                PlanRecoveryGradientOptionState(id: "preview-gradient-defer", order: 4, kind: .deferGoalOrItem, title: "Defer this", detail: "Leave lower-priority work outside this window.", boundary: PlanReflowBoundaryState(actionKind: .deferAction, confirmationRequirement: .requiredForBroadReflow, undoAvailability: .requiresConfirmation, safetyLabel: "Confirm first"), visualState: .default),
+                PlanRecoveryGradientOptionState(id: "preview-gradient-drop", order: 5, kind: .dropOptionalWork, title: "Drop optional work", detail: "Remove optional work only with confirmation.", boundary: PlanReflowBoundaryState(actionKind: .dropAction, confirmationRequirement: .requiredForDestructiveChange, undoAvailability: .unsafe, safetyLabel: "Confirm drop"), visualState: .warning),
+                PlanRecoveryGradientOptionState(id: "preview-gradient-recover", order: 6, kind: .recoverRest, title: "Recover", detail: "Protect rest or recovery as real plan material.", boundary: PlanReflowBoundaryState(actionKind: .noOp, confirmationRequirement: .notRequired, undoAvailability: .availableLocal, safetyLabel: "Safe/local"), visualState: .success)
+            ]
+        ),
+        saveTheDay: PlanSaveTheDayState(
+            title: "Save the Day in Plan",
+            detail: "Plan handles the deeper recovery shape without changing anything for you.",
+            oneQuestion: "What is the one thing that still needs protection?",
+            protectedItem: "Fix shell regressions",
+            adjustment: "Make it smaller",
+            recoveryExplanation: "Recovery works by protecting one thing, reducing one thing, and leaving the rest unchanged until you confirm.",
+            boundary: "No silent rescheduling. No calendar write. Nothing changed yet.",
+            visualState: .warning
+        ),
+        reflowReceiptPreview: PlanReflowReceiptPreviewState(
+            title: "Before anything changes",
+            detail: "A reflow receipt preview shows the tradeoff before action, not after a silent mutation.",
+            whatChanged: ["Protect: Fix shell regressions", "Adjust: Make it smaller", "Receipt would show the suggested change before action."],
+            whatWouldNotChange: ["Calendar blocks are not written.", "The plan is not silently rescheduled.", "Sync, export, widgets, and future systems are not touched."],
+            confirmationRequired: "Safe local suggestion",
+            undoAvailability: "Undo can be local",
+            safeFailureFallback: "If you decline confirmation, Ambitions keeps the plan as-is and leaves manual planning available.",
+            visualState: .warning
+        ),
         pressureScrubber: PlanPressureScrubberState(
             title: "Pressure scrubber",
             subtitle: "Scrub the week to inspect where pressure gathers and where room remains.",
@@ -423,6 +500,61 @@ enum PreviewPlanScenarios {
                 PlanDecisionItemState(id: "preview-empty-recovery", title: "Protect recovery room", detail: "The safest move is keeping an open pocket unfilled.", suggestion: "Recovery room is part of the plan, not a failure to optimize.", visualState: .success, target: nil, planRoute: nil)
             ],
             boundary: "No schedule changes happen from this card."
+        ),
+        realityReflow: PlanRealityReflowState(
+            title: "Not enough plan data yet",
+            detail: "Create or choose one plan item before reflowing anything.",
+            reasonKind: .lowData,
+            reasonDetail: "There is not enough plan pressure to reflow yet.",
+            recommendedAdjustment: "Keep plan unchanged",
+            noChangeCopy: "Nothing changed yet.",
+            suggestions: [
+                PlanReflowSuggestionState(
+                    id: "preview-empty-reflow-keep",
+                    kind: .keepPlanUnchanged,
+                    title: "Keep plan unchanged",
+                    detail: "Create or choose one plan item before reflowing anything.",
+                    impactLabel: "No plan mutation",
+                    boundary: PlanReflowBoundaryState(actionKind: .noOp, confirmationRequirement: .notRequired, undoAvailability: .availableLocal, safetyLabel: "Safe/local"),
+                    visualState: .default,
+                    target: nil,
+                    planRoute: nil
+                )
+            ],
+            visualState: .default
+        ),
+        recoveryGradient: PlanRecoveryGradientState(
+            title: "Recovery options",
+            detail: "No recovery is needed, but the order stays ready if reality changes.",
+            options: [
+                PlanRecoveryGradientOptionState(id: "preview-empty-gradient-protect", order: 0, kind: .protectOneItem, title: "Protect this", detail: "Keep one must-do defended.", boundary: PlanReflowBoundaryState(actionKind: .changePlanWindow, confirmationRequirement: .notRequired, undoAvailability: .availableLocal, safetyLabel: "Safe/local"), visualState: .selected),
+                PlanRecoveryGradientOptionState(id: "preview-empty-gradient-shrink", order: 1, kind: .shrinkAction, title: "Make it smaller", detail: "Reduce the ask before moving it.", boundary: PlanReflowBoundaryState(actionKind: .shrinkAction, confirmationRequirement: .notRequired, undoAvailability: .availableLocal, safetyLabel: "Safe/local"), visualState: .default),
+                PlanRecoveryGradientOptionState(id: "preview-empty-gradient-split", order: 2, kind: .splitAction, title: "Split it", detail: "Carry only the first clear part.", boundary: PlanReflowBoundaryState(actionKind: .splitAction, confirmationRequirement: .notRequired, undoAvailability: .availableLocal, safetyLabel: "Safe/local"), visualState: .default),
+                PlanRecoveryGradientOptionState(id: "preview-empty-gradient-move", order: 3, kind: .moveLocalActionLater, title: "Move this later", detail: "Move one local item after confirmation.", boundary: PlanReflowBoundaryState(actionKind: .moveActionLater, confirmationRequirement: .requiredForBroadReflow, undoAvailability: .requiresConfirmation, safetyLabel: "Confirm first"), visualState: .default),
+                PlanRecoveryGradientOptionState(id: "preview-empty-gradient-defer", order: 4, kind: .deferGoalOrItem, title: "Defer this", detail: "Leave lower-priority work outside this window.", boundary: PlanReflowBoundaryState(actionKind: .deferAction, confirmationRequirement: .requiredForBroadReflow, undoAvailability: .requiresConfirmation, safetyLabel: "Confirm first"), visualState: .default),
+                PlanRecoveryGradientOptionState(id: "preview-empty-gradient-drop", order: 5, kind: .dropOptionalWork, title: "Drop optional work", detail: "Remove optional work only with confirmation.", boundary: PlanReflowBoundaryState(actionKind: .dropAction, confirmationRequirement: .requiredForDestructiveChange, undoAvailability: .unsafe, safetyLabel: "Confirm drop"), visualState: .warning),
+                PlanRecoveryGradientOptionState(id: "preview-empty-gradient-recover", order: 6, kind: .recoverRest, title: "Recover", detail: "Protect rest or recovery as real plan material.", boundary: PlanReflowBoundaryState(actionKind: .noOp, confirmationRequirement: .notRequired, undoAvailability: .availableLocal, safetyLabel: "Safe/local"), visualState: .success)
+            ]
+        ),
+        saveTheDay: PlanSaveTheDayState(
+            title: "Save the Day in Plan",
+            detail: "Plan handles the deeper recovery shape without changing anything for you.",
+            oneQuestion: nil,
+            protectedItem: "One must-do",
+            adjustment: "Keep the plan unchanged",
+            recoveryExplanation: "No rescue is needed; keep recovery room visible.",
+            boundary: "No silent rescheduling. No calendar write. Nothing changed yet.",
+            visualState: .default
+        ),
+        reflowReceiptPreview: PlanReflowReceiptPreviewState(
+            title: "Before anything changes",
+            detail: "A reflow receipt preview shows the tradeoff before action, not after a silent mutation.",
+            whatChanged: ["Protect: One must-do", "Adjust: Keep the plan unchanged", "No reflow would be applied."],
+            whatWouldNotChange: ["Calendar blocks are not written.", "The plan is not silently rescheduled.", "Sync, export, widgets, and future systems are not touched."],
+            confirmationRequired: "Safe local suggestion",
+            undoAvailability: "Undo can be local",
+            safeFailureFallback: "If you decline confirmation, Ambitions keeps the plan as-is and leaves manual planning available.",
+            visualState: .default
         ),
         pressureScrubber: PlanPressureScrubberState(
             title: "Pressure scrubber",

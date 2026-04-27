@@ -124,6 +124,14 @@ struct PlanScreen: View {
 
                     PlanRecoveryEntryCard(recovery: dashboard.recoveryEntry, onActivate: handleDecisionItem)
 
+                    PlanRealityReflowCard(reflow: dashboard.realityReflow, onActivate: handleReflowSuggestion)
+
+                    PlanRecoveryGradientCard(gradient: dashboard.recoveryGradient)
+
+                    PlanSaveTheDayCard(saveTheDay: dashboard.saveTheDay)
+
+                    PlanReflowReceiptPreviewCard(preview: dashboard.reflowReceiptPreview)
+
                     PlanExecutionResilienceCard(
                         resilience: dashboard.resilience,
                         onOpenGoal: openGoal,
@@ -236,6 +244,16 @@ struct PlanScreen: View {
             return
         }
         if let route = item.planRoute {
+            openPlanRoute(route)
+        }
+    }
+
+    private func handleReflowSuggestion(_ suggestion: PlanReflowSuggestionState) {
+        if let target = suggestion.target {
+            openGoal(target)
+            return
+        }
+        if let route = suggestion.planRoute {
             openPlanRoute(route)
         }
     }
@@ -777,6 +795,240 @@ private struct PlanRecoveryEntryCard: View {
         }
         .accessibilityIdentifier("plan.recovery-entry")
         .ambitionPanelAccessibility()
+    }
+}
+
+private struct PlanRealityReflowCard: View {
+    @Environment(\.ambitionTheme) private var theme
+
+    let reflow: PlanRealityReflowState
+    let onActivate: (PlanReflowSuggestionState) -> Void
+
+    var body: some View {
+        AppCard(state: reflow.visualState) {
+            VStack(alignment: .leading, spacing: theme.spacing.md) {
+                SectionHeader(title: reflow.title, subtitle: reflow.detail)
+
+                VStack(alignment: .leading, spacing: theme.spacing.xs) {
+                    TagPill(reflow.reasonKind.title, icon: reflow.reasonKind == .stillBelievable ? "checkmark.seal" : "waveform.path.ecg", state: reflow.visualState)
+                    Text(reflow.reasonDetail)
+                        .font(theme.typography.body)
+                        .foregroundStyle(theme.colors.textPrimary)
+                        .fixedSize(horizontal: false, vertical: true)
+                    Text(reflow.recommendedAdjustment)
+                        .font(theme.typography.caption)
+                        .foregroundStyle(theme.colors.textTertiary)
+                }
+
+                VStack(alignment: .leading, spacing: theme.spacing.sm) {
+                    ForEach(reflow.suggestions.prefix(3)) { suggestion in
+                        Button {
+                            onActivate(suggestion)
+                        } label: {
+                            PlanReflowSuggestionRow(suggestion: suggestion)
+                        }
+                        .buttonStyle(.plain)
+                        .disabled(suggestion.target == nil && suggestion.planRoute == nil)
+                    }
+                }
+
+                Text(reflow.noChangeCopy)
+                    .font(theme.typography.caption)
+                    .foregroundStyle(theme.colors.textTertiary)
+            }
+        }
+        .accessibilityIdentifier("plan.reality-reflow")
+        .accessibilityElement(children: .contain)
+        .ambitionPanelAccessibility()
+    }
+}
+
+private struct PlanReflowSuggestionRow: View {
+    @Environment(\.ambitionTheme) private var theme
+
+    let suggestion: PlanReflowSuggestionState
+
+    var body: some View {
+        HStack(alignment: .top, spacing: theme.spacing.sm) {
+            Image(systemName: suggestion.kind.icon)
+                .font(.system(size: theme.icon.smallSize, weight: theme.icon.symbolWeight))
+                .foregroundStyle(theme.stateStyle(for: suggestion.visualState).accent)
+                .frame(width: 20)
+
+            VStack(alignment: .leading, spacing: theme.spacing.xxxs) {
+                HStack(spacing: theme.spacing.xs) {
+                    Text(suggestion.title)
+                        .font(theme.typography.bodyEmphasized)
+                        .foregroundStyle(theme.colors.textPrimary)
+                    TagPill(suggestion.boundary.safetyLabel, state: suggestion.visualState)
+                }
+                Text(suggestion.detail)
+                    .font(theme.typography.body)
+                    .foregroundStyle(theme.colors.textSecondary)
+                    .fixedSize(horizontal: false, vertical: true)
+                Text("\(suggestion.impactLabel). \(suggestion.boundary.confirmationLabel). \(suggestion.boundary.undoLabel).")
+                    .font(theme.typography.caption)
+                    .foregroundStyle(theme.colors.textTertiary)
+                    .fixedSize(horizontal: false, vertical: true)
+            }
+
+            Spacer(minLength: theme.spacing.sm)
+
+            if suggestion.target != nil || suggestion.planRoute != nil {
+                Image(systemName: "chevron.right")
+                    .font(.system(size: theme.icon.smallSize, weight: theme.icon.symbolWeight))
+                    .foregroundStyle(theme.colors.textTertiary)
+            }
+        }
+        .padding(theme.spacing.md)
+        .background(
+            RoundedRectangle(cornerRadius: theme.radius.lg, style: .continuous)
+                .fill(theme.colors.surfaceOverlay)
+        )
+        .overlay(
+            RoundedRectangle(cornerRadius: theme.radius.lg, style: .continuous)
+                .stroke(theme.colors.strokeSubtle, lineWidth: 1)
+        )
+        .accessibilityElement(children: .combine)
+        .accessibilityLabel("\(suggestion.title). \(suggestion.detail). \(suggestion.boundary.confirmationLabel). \(suggestion.boundary.undoLabel).")
+    }
+}
+
+private struct PlanRecoveryGradientCard: View {
+    @Environment(\.ambitionTheme) private var theme
+
+    let gradient: PlanRecoveryGradientState
+
+    var body: some View {
+        AppCard {
+            VStack(alignment: .leading, spacing: theme.spacing.md) {
+                SectionHeader(title: gradient.title, subtitle: gradient.detail)
+
+                VStack(alignment: .leading, spacing: theme.spacing.sm) {
+                    ForEach(gradient.options) { option in
+                        HStack(alignment: .top, spacing: theme.spacing.sm) {
+                            Text("\(option.order + 1)")
+                                .font(theme.typography.caption)
+                                .foregroundStyle(theme.stateStyle(for: option.visualState).accent)
+                                .frame(width: 22, height: 22)
+                                .background(
+                                    Circle()
+                                        .fill(theme.colors.surfaceOverlay)
+                                )
+                            VStack(alignment: .leading, spacing: theme.spacing.xxxs) {
+                                HStack(spacing: theme.spacing.xs) {
+                                    Image(systemName: option.kind.icon)
+                                        .font(.system(size: theme.icon.smallSize, weight: theme.icon.symbolWeight))
+                                    Text(option.title)
+                                        .font(theme.typography.bodyEmphasized)
+                                }
+                                .foregroundStyle(theme.colors.textPrimary)
+                                Text(option.detail)
+                                    .font(theme.typography.body)
+                                    .foregroundStyle(theme.colors.textSecondary)
+                                Text("\(option.boundary.confirmationLabel). \(option.boundary.undoLabel).")
+                                    .font(theme.typography.caption)
+                                    .foregroundStyle(theme.colors.textTertiary)
+                            }
+                        }
+                        .padding(.vertical, theme.spacing.xs)
+                    }
+                }
+            }
+        }
+        .accessibilityIdentifier("plan.recovery-gradient")
+        .accessibilityElement(children: .contain)
+        .ambitionPanelAccessibility()
+    }
+}
+
+private struct PlanSaveTheDayCard: View {
+    @Environment(\.ambitionTheme) private var theme
+
+    let saveTheDay: PlanSaveTheDayState
+
+    var body: some View {
+        AppCard(state: saveTheDay.visualState) {
+            VStack(alignment: .leading, spacing: theme.spacing.md) {
+                SectionHeader(title: saveTheDay.title, subtitle: saveTheDay.detail)
+
+                if let question = saveTheDay.oneQuestion {
+                    Label(question, systemImage: "questionmark.circle")
+                        .font(theme.typography.bodyEmphasized)
+                        .foregroundStyle(theme.colors.textPrimary)
+                }
+
+                VStack(alignment: .leading, spacing: theme.spacing.sm) {
+                    PlanKeyValueRow(label: "Protect", value: saveTheDay.protectedItem, state: .selected)
+                    PlanKeyValueRow(label: "Adjust", value: saveTheDay.adjustment, state: saveTheDay.visualState)
+                    PlanKeyValueRow(label: "Recover", value: saveTheDay.recoveryExplanation, state: .success)
+                }
+
+                Text(saveTheDay.boundary)
+                    .font(theme.typography.caption)
+                    .foregroundStyle(theme.colors.textTertiary)
+            }
+        }
+        .accessibilityIdentifier("plan.save-the-day")
+        .accessibilityElement(children: .contain)
+        .ambitionPanelAccessibility()
+    }
+}
+
+private struct PlanReflowReceiptPreviewCard: View {
+    @Environment(\.ambitionTheme) private var theme
+
+    let preview: PlanReflowReceiptPreviewState
+
+    var body: some View {
+        AppCard(state: preview.visualState) {
+            VStack(alignment: .leading, spacing: theme.spacing.md) {
+                SectionHeader(title: preview.title, subtitle: preview.detail)
+
+                HStack(spacing: theme.spacing.xs) {
+                    TagPill(preview.confirmationRequired, icon: "hand.tap", state: preview.visualState)
+                    TagPill(preview.undoAvailability, icon: "arrow.uturn.backward", state: .default)
+                }
+
+                PlanReceiptFactGroup(title: "Would change", facts: preview.whatChanged, state: preview.visualState)
+                PlanReceiptFactGroup(title: "Would not change", facts: preview.whatWouldNotChange, state: .default)
+
+                Text(preview.safeFailureFallback)
+                    .font(theme.typography.caption)
+                    .foregroundStyle(theme.colors.textTertiary)
+                    .fixedSize(horizontal: false, vertical: true)
+            }
+        }
+        .accessibilityIdentifier("plan.reflow-receipt-preview")
+        .accessibilityElement(children: .contain)
+        .ambitionPanelAccessibility()
+    }
+}
+
+private struct PlanReceiptFactGroup: View {
+    @Environment(\.ambitionTheme) private var theme
+
+    let title: String
+    let facts: [String]
+    let state: AmbitionVisualState
+
+    var body: some View {
+        VStack(alignment: .leading, spacing: theme.spacing.xs) {
+            Text(title)
+                .font(theme.typography.caption)
+                .foregroundStyle(theme.colors.textTertiary)
+            ForEach(facts, id: \.self) { fact in
+                HStack(alignment: .top, spacing: theme.spacing.xs) {
+                    Image(systemName: title == "Would change" ? "circle.dotted" : "lock")
+                        .font(.system(size: theme.icon.smallSize, weight: theme.icon.symbolWeight))
+                        .foregroundStyle(theme.stateStyle(for: state).accent)
+                    Text(fact)
+                        .font(theme.typography.body)
+                        .foregroundStyle(theme.colors.textSecondary)
+                        .fixedSize(horizontal: false, vertical: true)
+                }
+            }
+        }
     }
 }
 

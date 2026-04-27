@@ -383,6 +383,191 @@ struct PlanRecoveryEntryState: Sendable {
     let boundary: String
 }
 
+enum PlanRealityBreakReasonKind: String, Sendable, CaseIterable {
+    case missedDay = "missed_day"
+    case overloadedPlan = "overloaded_plan"
+    case noRecoveryMargin = "no_recovery_margin"
+    case blockedGoal = "blocked_goal"
+    case waitingOnPersonOrResource = "waiting_on_person_or_resource"
+    case noNextStep = "no_next_step"
+    case calendarUnavailableOrDenied = "calendar_unavailable_or_denied"
+    case tooManyActiveGoals = "too_many_active_goals"
+    case proofMissing = "proof_missing"
+    case urgentOutsideItem = "urgent_outside_item"
+    case lowCapacityFragileDay = "low_capacity_fragile_day"
+    case lowData = "low_data"
+    case stillBelievable = "still_believable"
+
+    var title: String {
+        switch self {
+        case .missedDay: "Missed day"
+        case .overloadedPlan: "Overloaded plan"
+        case .noRecoveryMargin: "No recovery margin"
+        case .blockedGoal: "Blocked goal"
+        case .waitingOnPersonOrResource: "Waiting item"
+        case .noNextStep: "No next step"
+        case .calendarUnavailableOrDenied: "Calendar unavailable"
+        case .tooManyActiveGoals: "Too many active goals"
+        case .proofMissing: "Proof missing"
+        case .urgentOutsideItem: "Outside item"
+        case .lowCapacityFragileDay: "Fragile day"
+        case .lowData: "Not enough plan data yet"
+        case .stillBelievable: "Plan is still believable"
+        }
+    }
+}
+
+enum PlanReflowSuggestionKind: String, Sendable, CaseIterable {
+    case protectOneItem = "protect_one_item"
+    case shrinkAction = "shrink_action"
+    case splitAction = "split_action"
+    case moveLocalActionLater = "move_local_action_later"
+    case deferGoalOrItem = "defer_goal_or_item"
+    case dropOptionalWork = "drop_optional_work"
+    case parkGoal = "park_goal"
+    case markWaiting = "mark_waiting"
+    case recoverRest = "recover_rest"
+    case askForConfirmation = "ask_for_confirmation"
+    case keepPlanUnchanged = "keep_plan_unchanged"
+
+    var title: String {
+        switch self {
+        case .protectOneItem: "Protect this"
+        case .shrinkAction: "Make it smaller"
+        case .splitAction: "Split it"
+        case .moveLocalActionLater: "Move this later"
+        case .deferGoalOrItem: "Defer this"
+        case .dropOptionalWork: "Drop optional work"
+        case .parkGoal: "Park goal"
+        case .markWaiting: "Mark waiting"
+        case .recoverRest: "Recover"
+        case .askForConfirmation: "Needs confirmation"
+        case .keepPlanUnchanged: "Keep plan unchanged"
+        }
+    }
+
+    var icon: String {
+        switch self {
+        case .protectOneItem: "lock.shield"
+        case .shrinkAction: "arrow.down.right.and.arrow.up.left"
+        case .splitAction: "square.split.2x1"
+        case .moveLocalActionLater: "clock.arrow.circlepath"
+        case .deferGoalOrItem: "tray.and.arrow.down"
+        case .dropOptionalWork: "minus.circle"
+        case .parkGoal: "pause.circle"
+        case .markWaiting: "hourglass"
+        case .recoverRest: "sun.max"
+        case .askForConfirmation: "hand.tap"
+        case .keepPlanUnchanged: "checkmark.seal"
+        }
+    }
+
+    var safeAutomationActionKind: SafeAutomationActionKind {
+        switch self {
+        case .protectOneItem: .changePlanWindow
+        case .shrinkAction: .shrinkAction
+        case .splitAction: .splitAction
+        case .moveLocalActionLater: .moveActionLater
+        case .deferGoalOrItem: .deferAction
+        case .dropOptionalWork: .dropAction
+        case .parkGoal: .changePlanWindow
+        case .markWaiting: .markWaiting
+        case .recoverRest: .noOp
+        case .askForConfirmation: .changePlanWindow
+        case .keepPlanUnchanged: .noOp
+        }
+    }
+}
+
+struct PlanReflowBoundaryState: Sendable, Hashable {
+    let actionKind: SafeAutomationActionKind
+    let confirmationRequirement: SafeAutomationConfirmationRequirement
+    let undoAvailability: ActionReceiptUndoAvailability
+    let safetyLabel: String
+
+    var confirmationLabel: String {
+        switch confirmationRequirement {
+        case .notRequired: "Safe local suggestion"
+        case .required: "Needs confirmation"
+        case .requiredForExternalEffect: "External change needs confirmation"
+        case .requiredForDestructiveChange: "Drop needs confirmation"
+        case .requiredForBroadReflow: "Broad reflow needs confirmation"
+        case .notAllowed: "Not supported"
+        }
+    }
+
+    var undoLabel: String {
+        switch undoAvailability {
+        case .availableLocal: "Undo can be local"
+        case .requiresConfirmation: "Undo needs confirmation"
+        case .unavailable: "Undo unavailable"
+        case .unsafe: "Undo unsafe"
+        case .notSupportedYet: "Undo not supported yet"
+        }
+    }
+}
+
+struct PlanReflowSuggestionState: Identifiable, Sendable, Hashable {
+    let id: String
+    let kind: PlanReflowSuggestionKind
+    let title: String
+    let detail: String
+    let impactLabel: String
+    let boundary: PlanReflowBoundaryState
+    let visualState: AmbitionVisualState
+    let target: GoalRouteTarget?
+    let planRoute: PlanRouteTarget?
+}
+
+struct PlanRealityReflowState: Sendable {
+    let title: String
+    let detail: String
+    let reasonKind: PlanRealityBreakReasonKind
+    let reasonDetail: String
+    let recommendedAdjustment: String
+    let noChangeCopy: String
+    let suggestions: [PlanReflowSuggestionState]
+    let visualState: AmbitionVisualState
+}
+
+struct PlanRecoveryGradientOptionState: Identifiable, Sendable, Hashable {
+    let id: String
+    let order: Int
+    let kind: PlanReflowSuggestionKind
+    let title: String
+    let detail: String
+    let boundary: PlanReflowBoundaryState
+    let visualState: AmbitionVisualState
+}
+
+struct PlanRecoveryGradientState: Sendable {
+    let title: String
+    let detail: String
+    let options: [PlanRecoveryGradientOptionState]
+}
+
+struct PlanSaveTheDayState: Sendable {
+    let title: String
+    let detail: String
+    let oneQuestion: String?
+    let protectedItem: String
+    let adjustment: String
+    let recoveryExplanation: String
+    let boundary: String
+    let visualState: AmbitionVisualState
+}
+
+struct PlanReflowReceiptPreviewState: Sendable {
+    let title: String
+    let detail: String
+    let whatChanged: [String]
+    let whatWouldNotChange: [String]
+    let confirmationRequired: String
+    let undoAvailability: String
+    let safeFailureFallback: String
+    let visualState: AmbitionVisualState
+}
+
 struct PlanSecondaryDestination: Identifiable, Sendable {
     let id: String
     let title: String
@@ -439,6 +624,10 @@ struct PlanDashboard: Sendable {
     let conflictCourt: PlanConflictCourtState
     let calendarBoundary: PlanCalendarBoundaryContractState
     let recoveryEntry: PlanRecoveryEntryState
+    let realityReflow: PlanRealityReflowState
+    let recoveryGradient: PlanRecoveryGradientState
+    let saveTheDay: PlanSaveTheDayState
+    let reflowReceiptPreview: PlanReflowReceiptPreviewState
     let pressureScrubber: PlanPressureScrubberState
     let weekDays: [PlanElasticWeekDayState]
     let believability: PlanBelievabilityState

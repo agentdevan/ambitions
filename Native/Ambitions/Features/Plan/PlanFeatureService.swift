@@ -281,6 +281,28 @@ private extension RepositoryBackedPlanService {
             pressuredGoalSummary: mostPressuredGoal
         )
         let calendarBoundary = makeCalendarBoundaryContract(calendarAwareness)
+        let realityReflow = makeRealityReflow(
+            mode: mode,
+            activeGoals: activeGoals,
+            summaries: activeGoalSummaries,
+            missingGoalSummaries: missingGoalSummaries,
+            weekDays: weekDays,
+            openCaptures: openCaptures,
+            blockedDraftCount: blockedDrafts.count,
+            clarificationDraftCount: clarificationDrafts.count,
+            evidenceByGoal: evidenceByGoal,
+            calendarAwareness: calendarAwareness,
+            pressuredGoalSummary: mostPressuredGoal
+        )
+        let recoveryGradient = makeRecoveryGradient(reflow: realityReflow, calendarAwareness: calendarAwareness)
+        let saveTheDay = makeSaveTheDay(
+            reflow: realityReflow,
+            weekDays: weekDays,
+            missingGoalSummaries: missingGoalSummaries,
+            pressuredGoalSummary: mostPressuredGoal,
+            openCaptures: openCaptures
+        )
+        let reflowReceiptPreview = makeReflowReceiptPreview(reflow: realityReflow, saveTheDay: saveTheDay)
         let treaty = makeTreaty(
             posture: posture,
             capacityEnvelope: capacityEnvelope,
@@ -306,6 +328,10 @@ private extension RepositoryBackedPlanService {
             conflictCourt: conflictCourt,
             calendarBoundary: calendarBoundary,
             recoveryEntry: recoveryEntry,
+            realityReflow: realityReflow,
+            recoveryGradient: recoveryGradient,
+            saveTheDay: saveTheDay,
+            reflowReceiptPreview: reflowReceiptPreview,
             pressureScrubber: pressureScrubber,
             weekDays: weekDays,
             believability: believability,
@@ -1495,6 +1521,334 @@ private extension RepositoryBackedPlanService {
             suggestions: Array(suggestions.prefix(3)),
             boundary: "No schedule changes happen from this card."
         )
+    }
+
+    func makeRealityReflow(
+        mode: PlanDashboardMode,
+        activeGoals: [Goal],
+        summaries: [GoalWeekSummary],
+        missingGoalSummaries: [GoalWeekSummary],
+        weekDays: [PlanElasticWeekDayState],
+        openCaptures: [Capture],
+        blockedDraftCount: Int,
+        clarificationDraftCount: Int,
+        evidenceByGoal: [String: [ProgressEvidence]],
+        calendarAwareness: PlanCalendarAwarenessState,
+        pressuredGoalSummary: GoalWeekSummary?
+    ) -> PlanRealityReflowState {
+        let overloadedDays = weekDays.filter { $0.level == .overloaded }.count
+        let fragileDays = weekDays.filter { $0.level == .fragile }.count
+        let openDays = weekDays.filter { $0.level == .open }.count
+        let blockedSummary = summaries.first { summary in
+            summary.contexts.contains(where: { $0.step.state == .blocked })
+        }
+        let waitingCaptureExists = openCaptures.contains { $0.status == .waiting || $0.status == .delegated }
+        let proofMissingSummary = summaries.first { summary in
+            summary.contexts.count >= 2 && evidenceByGoal[summary.goal.id, default: []].isEmpty
+        }
+
+        let reasonKind: PlanRealityBreakReasonKind
+        let reasonDetail: String
+        let visualState: AmbitionVisualState
+
+        if mode == .empty {
+            reasonKind = .lowData
+            reasonDetail = "There is not enough plan pressure to reflow yet."
+            visualState = .default
+        } else if overloadedDays > 0 {
+            reasonKind = .overloadedPlan
+            reasonDetail = "\(overloadedDays) day\(overloadedDays == 1 ? "" : "s") are carrying more than this plan can calmly explain."
+            visualState = .warning
+        } else if fragileDays > 0 {
+            reasonKind = .lowCapacityFragileDay
+            reasonDetail = "\(fragileDays) day\(fragileDays == 1 ? "" : "s") need recovery room before more work is added."
+            visualState = .warning
+        } else if openDays == 0 && summaries.isEmpty == false {
+            reasonKind = .noRecoveryMargin
+            reasonDetail = "The plan is using every visible day, so one pocket should stay protected."
+            visualState = .warning
+        } else if let blockedSummary {
+            reasonKind = .blockedGoal
+            reasonDetail = "\(blockedSummary.goal.title) is still active while a planned move is blocked."
+            visualState = .warning
+        } else if waitingCaptureExists {
+            reasonKind = .waitingOnPersonOrResource
+            reasonDetail = "A waiting item is still influencing the week and should not silently become more work."
+            visualState = .warning
+        } else if missingGoalSummaries.isEmpty == false {
+            reasonKind = .noNextStep
+            reasonDetail = "\(missingGoalSummaries.count) active goal\(missingGoalSummaries.count == 1 ? "" : "s") need one believable next step or an intentional park."
+            visualState = .warning
+        } else if calendarAwareness.status == .denied {
+            reasonKind = .calendarUnavailableOrDenied
+            reasonDetail = "Manual planning still works; calendar access is not required for recovery suggestions."
+            visualState = .default
+        } else if activeGoals.count > 5 {
+            reasonKind = .tooManyActiveGoals
+            reasonDetail = "\(activeGoals.count) active goals are asking this plan to defend too many directions."
+            visualState = .warning
+        } else if let proofMissingSummary {
+            reasonKind = .proofMissing
+            reasonDetail = "\(proofMissingSummary.goal.title) has plan work but no proof yet, so the next move should be receipt-ready."
+            visualState = .default
+        } else if openCaptures.isEmpty == false {
+            reasonKind = .urgentOutsideItem
+            reasonDetail = "\(openCaptures.count) capture\(openCaptures.count == 1 ? "" : "s") should be absorbed, parked, or left outside the plan with confirmation."
+            visualState = .warning
+        } else {
+            reasonKind = .stillBelievable
+            reasonDetail = "No visible disruption needs a plan change right now."
+            visualState = .success
+        }
+
+        let suggestions = makeReflowSuggestions(
+            reasonKind: reasonKind,
+            activeGoals: activeGoals,
+            missingGoalSummaries: missingGoalSummaries,
+            openCaptures: openCaptures,
+            pressuredGoalSummary: pressuredGoalSummary,
+            blockedSummary: blockedSummary,
+            calendarAwareness: calendarAwareness
+        )
+        let recommendedAdjustment = suggestions.first?.title ?? "Keep plan unchanged"
+
+        return PlanRealityReflowState(
+            title: reasonKind == .stillBelievable ? "Plan is still believable" : "Reality changed",
+            detail: reasonKind == .stillBelievable
+                ? "Nothing changed yet, and no recovery action is needed."
+                : "Move one thing, not everything. These are suggestions until you confirm a change.",
+            reasonKind: reasonKind,
+            reasonDetail: reasonDetail,
+            recommendedAdjustment: recommendedAdjustment,
+            noChangeCopy: "Nothing changed yet.",
+            suggestions: suggestions,
+            visualState: visualState
+        )
+    }
+
+    func makeReflowSuggestions(
+        reasonKind: PlanRealityBreakReasonKind,
+        activeGoals: [Goal],
+        missingGoalSummaries: [GoalWeekSummary],
+        openCaptures: [Capture],
+        pressuredGoalSummary: GoalWeekSummary?,
+        blockedSummary: GoalWeekSummary?,
+        calendarAwareness: PlanCalendarAwarenessState
+    ) -> [PlanReflowSuggestionState] {
+        let targetGoal = pressuredGoalSummary?.goal ?? missingGoalSummaries.first?.goal ?? blockedSummary?.goal ?? activeGoals.first
+        var suggestions: [PlanReflowSuggestionState] = []
+
+        func append(
+            _ kind: PlanReflowSuggestionKind,
+            detail: String,
+            impact: String,
+            state: AmbitionVisualState,
+            target: GoalRouteTarget? = targetGoal.map { GoalRouteTarget(goalID: $0.id) },
+            planRoute: PlanRouteTarget? = nil
+        ) {
+            suggestions.append(PlanReflowSuggestionState(
+                id: "reflow-\(kind.rawValue)-\(suggestions.count)",
+                kind: kind,
+                title: kind.title,
+                detail: detail,
+                impactLabel: impact,
+                boundary: reflowBoundary(for: kind, calendarAwareness: calendarAwareness),
+                visualState: state,
+                target: target,
+                planRoute: planRoute
+            ))
+        }
+
+        switch reasonKind {
+        case .stillBelievable:
+            append(.keepPlanUnchanged, detail: "The current plan still has a believable path.", impact: "No change", state: .success, target: nil)
+        case .lowData:
+            append(.keepPlanUnchanged, detail: "Create or choose one plan item before reflowing anything.", impact: "No plan mutation", state: .default, target: nil)
+        case .blockedGoal:
+            append(.markWaiting, detail: "Keep the blocked work visible as waiting instead of adding more pressure.", impact: "Waiting state only after confirmation", state: .warning)
+            append(.protectOneItem, detail: "Protect the one unblocked move that still matters.", impact: "Protects one item", state: .selected)
+        case .waitingOnPersonOrResource:
+            append(.markWaiting, detail: "Treat the dependency as waiting and keep the rest of the plan calm.", impact: "Keeps follow-up explicit", state: .warning, target: nil, planRoute: .capturesInbox)
+            append(.moveLocalActionLater, detail: "Move only the local follow-up later if it is not the protected item.", impact: "Local suggestion only", state: .default, target: nil, planRoute: .capturesInbox)
+        case .noNextStep:
+            append(.protectOneItem, detail: "Choose one must-do and leave the rest outside today.", impact: "Protects one item", state: .selected)
+            append(.parkGoal, detail: "Park the goal that has no believable next step yet.", impact: "Broad change needs confirmation", state: .warning)
+        case .calendarUnavailableOrDenied:
+            append(.protectOneItem, detail: "Pick the one item to protect manually.", impact: "Manual planning still works", state: .selected)
+            append(.moveLocalActionLater, detail: "Move a local action later without writing to Calendar.", impact: "No calendar write", state: .default)
+        case .tooManyActiveGoals:
+            append(.protectOneItem, detail: "Protect the one goal that must stay active now.", impact: "Narrows focus", state: .selected)
+            append(.parkGoal, detail: "Park one active goal until it has real room.", impact: "Broad change needs confirmation", state: .warning)
+        case .proofMissing:
+            append(.shrinkAction, detail: "Make the next move small enough to leave proof.", impact: "Receipt-ready adjustment", state: .default)
+            append(.splitAction, detail: "Split the work so the first part can close cleanly.", impact: "Local draft suggestion", state: .default)
+        case .urgentOutsideItem:
+            append(.deferGoalOrItem, detail: "Defer the item that does not belong in this plan window.", impact: "Needs confirmation", state: .warning, target: nil, planRoute: openCaptures.isEmpty ? nil : .capturesInbox)
+            append(.dropOptionalWork, detail: "Drop optional work only after you confirm it is not needed.", impact: "Destructive choice gated", state: .warning, target: nil, planRoute: openCaptures.isEmpty ? nil : .capturesInbox)
+        case .missedDay, .overloadedPlan, .noRecoveryMargin, .lowCapacityFragileDay:
+            append(.protectOneItem, detail: "Keep one must-do defended before changing the rest.", impact: "Smallest useful adjustment", state: .selected)
+            append(.shrinkAction, detail: targetGoal.map { "Make \($0.title)'s next move smaller." } ?? "Make the next move smaller.", impact: "Local suggestion only", state: .warning)
+            append(.splitAction, detail: "Split the work so today carries only the first clear part.", impact: "Local draft suggestion", state: .default)
+            append(.moveLocalActionLater, detail: "Move one local action later without touching Calendar.", impact: "Needs confirmation before mutation", state: .default)
+            append(.deferGoalOrItem, detail: "Defer the lower-priority item that no longer fits.", impact: "Broad change needs confirmation", state: .warning)
+            append(.dropOptionalWork, detail: "Drop only optional work, and only after confirmation.", impact: "Destructive choice gated", state: .warning)
+            append(.recoverRest, detail: "Protect recovery or rest as part of the plan.", impact: "No shame recovery", state: .success, target: nil)
+        }
+
+        if reasonKind != .stillBelievable && suggestions.contains(where: { $0.kind == .askForConfirmation }) == false {
+            append(.askForConfirmation, detail: "Confirm before applying any broad reflow or calendar-impacting change.", impact: "Nothing changes until confirmed", state: .warning, target: nil)
+        }
+
+        return Array(suggestions.prefix(8))
+    }
+
+    func makeRecoveryGradient(
+        reflow: PlanRealityReflowState,
+        calendarAwareness: PlanCalendarAwarenessState
+    ) -> PlanRecoveryGradientState {
+        let kinds: [PlanReflowSuggestionKind] = [
+            .protectOneItem,
+            .shrinkAction,
+            .splitAction,
+            .moveLocalActionLater,
+            .deferGoalOrItem,
+            .dropOptionalWork,
+            .recoverRest
+        ]
+        let options = kinds.enumerated().map { index, kind in
+            PlanRecoveryGradientOptionState(
+                id: "gradient-\(kind.rawValue)",
+                order: index,
+                kind: kind,
+                title: kind.title,
+                detail: gradientDetail(for: kind),
+                boundary: reflowBoundary(for: kind, calendarAwareness: calendarAwareness),
+                visualState: kind == .protectOneItem ? .selected : kind == .recoverRest ? .success : .default
+            )
+        }
+
+        return PlanRecoveryGradientState(
+            title: "Recovery options",
+            detail: reflow.reasonKind == .stillBelievable
+                ? "No recovery is needed, but the order stays ready if reality changes."
+                : "Start with the least disruptive option that still makes the plan believable.",
+            options: options
+        )
+    }
+
+    func makeSaveTheDay(
+        reflow: PlanRealityReflowState,
+        weekDays: [PlanElasticWeekDayState],
+        missingGoalSummaries: [GoalWeekSummary],
+        pressuredGoalSummary: GoalWeekSummary?,
+        openCaptures: [Capture]
+    ) -> PlanSaveTheDayState {
+        let protected = pressuredGoalSummary?.contexts.first?.step.title
+            ?? pressuredGoalSummary?.goal.title
+            ?? weekDays.flatMap(\.blocks).first(where: { $0.kind == .protected || $0.kind == .fixed })?.title
+            ?? missingGoalSummaries.first?.goal.title
+            ?? "One must-do"
+        let adjustment = reflow.suggestions.first { suggestion in
+            [.shrinkAction, .moveLocalActionLater, .dropOptionalWork, .deferGoalOrItem].contains(suggestion.kind)
+        }?.title ?? "Keep the plan unchanged"
+        let question = openCaptures.isEmpty && missingGoalSummaries.isEmpty
+            ? nil
+            : "What is the one thing that still needs protection?"
+
+        return PlanSaveTheDayState(
+            title: "Save the Day in Plan",
+            detail: "Plan handles the deeper recovery shape without changing anything for you.",
+            oneQuestion: question,
+            protectedItem: protected,
+            adjustment: adjustment,
+            recoveryExplanation: reflow.reasonKind == .stillBelievable
+                ? "No rescue is needed; keep recovery room visible."
+                : "Recovery works by protecting one thing, reducing one thing, and leaving the rest unchanged until you confirm.",
+            boundary: "No silent rescheduling. No calendar write. Nothing changed yet.",
+            visualState: reflow.visualState
+        )
+    }
+
+    func makeReflowReceiptPreview(
+        reflow: PlanRealityReflowState,
+        saveTheDay: PlanSaveTheDayState
+    ) -> PlanReflowReceiptPreviewState {
+        let primary = reflow.suggestions.first
+        let confirmationRequired = primary?.boundary.confirmationLabel ?? "Safe local suggestion"
+        let undoAvailability = primary?.boundary.undoLabel ?? "Undo unavailable"
+        let wouldChange = [
+            "Protect: \(saveTheDay.protectedItem)",
+            "Adjust: \(saveTheDay.adjustment)",
+            reflow.reasonKind == .stillBelievable ? "No reflow would be applied." : "Receipt would show the suggested change before action."
+        ]
+        let wouldNotChange = [
+            "Calendar blocks are not written.",
+            "The plan is not silently rescheduled.",
+            "Sync, export, widgets, and future systems are not touched."
+        ]
+
+        return PlanReflowReceiptPreviewState(
+            title: "Before anything changes",
+            detail: "A reflow receipt preview shows the tradeoff before action, not after a silent mutation.",
+            whatChanged: wouldChange,
+            whatWouldNotChange: wouldNotChange,
+            confirmationRequired: confirmationRequired,
+            undoAvailability: undoAvailability,
+            safeFailureFallback: "If you decline confirmation, Ambitions keeps the plan as-is and leaves manual planning available.",
+            visualState: primary?.visualState ?? reflow.visualState
+        )
+    }
+
+    func reflowBoundary(
+        for kind: PlanReflowSuggestionKind,
+        calendarAwareness: PlanCalendarAwarenessState
+    ) -> PlanReflowBoundaryState {
+        switch kind {
+        case .protectOneItem, .shrinkAction, .splitAction, .recoverRest, .keepPlanUnchanged:
+            return PlanReflowBoundaryState(
+                actionKind: kind.safeAutomationActionKind,
+                confirmationRequirement: .notRequired,
+                undoAvailability: .availableLocal,
+                safetyLabel: "Safe/local"
+            )
+        case .moveLocalActionLater, .deferGoalOrItem, .parkGoal, .markWaiting:
+            return PlanReflowBoundaryState(
+                actionKind: kind.safeAutomationActionKind,
+                confirmationRequirement: .requiredForBroadReflow,
+                undoAvailability: .requiresConfirmation,
+                safetyLabel: "Confirm first"
+            )
+        case .dropOptionalWork:
+            return PlanReflowBoundaryState(
+                actionKind: kind.safeAutomationActionKind,
+                confirmationRequirement: .requiredForDestructiveChange,
+                undoAvailability: .unsafe,
+                safetyLabel: "Confirm drop"
+            )
+        case .askForConfirmation:
+            return PlanReflowBoundaryState(
+                actionKind: calendarAwareness.status == .calendarAware ? .writeCalendarBlock : .changePlanWindow,
+                confirmationRequirement: calendarAwareness.status == .calendarAware ? .requiredForExternalEffect : .requiredForBroadReflow,
+                undoAvailability: .notSupportedYet,
+                safetyLabel: calendarAwareness.status == .calendarAware ? "Plan action required" : "Confirm first"
+            )
+        }
+    }
+
+    func gradientDetail(for kind: PlanReflowSuggestionKind) -> String {
+        switch kind {
+        case .protectOneItem: "Keep one must-do defended."
+        case .shrinkAction: "Reduce the ask before moving it."
+        case .splitAction: "Carry only the first clear part."
+        case .moveLocalActionLater: "Move one local item after confirmation."
+        case .deferGoalOrItem: "Leave lower-priority work outside this window."
+        case .dropOptionalWork: "Remove optional work only with confirmation."
+        case .recoverRest: "Protect rest or recovery as real plan material."
+        case .parkGoal: "Pause a goal until there is believable room."
+        case .markWaiting: "Name the dependency instead of pushing harder."
+        case .askForConfirmation: "Confirm before broad or external effects."
+        case .keepPlanUnchanged: "Leave the current plan as-is."
+        }
     }
 
     func goalShapingItems(summaries: [GoalWeekSummary]) -> [PlanGoalShapingItem] {

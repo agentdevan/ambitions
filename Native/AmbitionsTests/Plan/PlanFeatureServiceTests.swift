@@ -252,6 +252,151 @@ final class PlanFeatureServiceTests: XCTestCase {
         XCTAssertTrue(dashboard.recoveryEntry.boundary.contains("No schedule changes"))
         XCTAssertTrue(dashboard.conflictCourt.subtitle.contains("not alarms") || dashboard.conflictCourt.conflicts.isEmpty)
     }
+
+    func testRealityReflowNoReflowNeededProducesCalmStillBelievableState() async throws {
+        let repositories = try await makeRepositories()
+        try await repositories.goals.saveGoals([makeWeekVisibleGoal()])
+        let service = RepositoryBackedPlanService(repositories: repositories)
+
+        let dashboard = try await service.loadPlanDashboard(now: fixedDate)
+
+        XCTAssertEqual(dashboard.realityReflow.reasonKind, .stillBelievable)
+        XCTAssertEqual(dashboard.realityReflow.title, "Plan is still believable")
+        XCTAssertTrue(dashboard.realityReflow.suggestions.contains(where: { $0.kind == .keepPlanUnchanged }))
+        XCTAssertTrue(dashboard.realityReflow.noChangeCopy.contains("Nothing changed"))
+    }
+
+    func testOverloadedPlanProducesRealityReflowRecommendationWithoutMutation() async throws {
+        let repositories = try await makeRepositories()
+        let goals = (0..<6).map { makeWeekVisibleGoal(id: "reflow-overload-\($0)", title: "Reflow overload \($0)") }
+        try await repositories.goals.saveGoals(goals)
+        let before = try await repositories.goals.listGoals()
+        let service = RepositoryBackedPlanService(repositories: repositories)
+
+        let dashboard = try await service.loadPlanDashboard(now: fixedDate)
+        let after = try await repositories.goals.listGoals()
+
+        XCTAssertEqual(dashboard.realityReflow.reasonKind, .overloadedPlan)
+        XCTAssertTrue(dashboard.realityReflow.suggestions.contains(where: { $0.kind == .protectOneItem }))
+        XCTAssertTrue(dashboard.realityReflow.suggestions.contains(where: { $0.kind == .shrinkAction }))
+        XCTAssertTrue(dashboard.realityReflow.suggestions.contains(where: { $0.kind == .moveLocalActionLater }))
+        XCTAssertEqual(before, after)
+    }
+
+    func testNoRecoveryMarginSuggestsSmallAdjustmentsBeforeBroadChanges() async throws {
+        let repositories = try await makeRepositories()
+        try await repositories.goals.saveGoals((0..<6).map { makeWeekVisibleGoal(id: "margin-\($0)", title: "Margin \($0)") })
+        let service = RepositoryBackedPlanService(repositories: repositories)
+
+        let dashboard = try await service.loadPlanDashboard(now: fixedDate)
+        let orderedKinds = dashboard.recoveryGradient.options.map(\.kind)
+
+        XCTAssertEqual(Array(orderedKinds.prefix(4)), [.protectOneItem, .shrinkAction, .splitAction, .moveLocalActionLater])
+        XCTAssertTrue(dashboard.realityReflow.suggestions.first?.boundary.confirmationRequirement == .notRequired)
+        XCTAssertFalse(dashboard.realityReflow.suggestions.first?.detail.lowercased().contains("reschedule") ?? true)
+    }
+
+    func testBlockedAndWaitingPlanSurfacesAppropriateRealityReasons() async throws {
+        let blockedRepositories = try await makeRepositories()
+        try await blockedRepositories.goals.saveGoals([makeWeekVisibleGoal(id: "blocked-reflow", title: "Blocked reflow", stepState: .blocked)])
+        let blockedDashboard = try await RepositoryBackedPlanService(repositories: blockedRepositories).loadPlanDashboard(now: fixedDate)
+
+        XCTAssertEqual(blockedDashboard.realityReflow.reasonKind, .blockedGoal)
+        XCTAssertTrue(blockedDashboard.realityReflow.suggestions.contains(where: { $0.kind == .markWaiting }))
+
+        let waitingRepositories = try await makeRepositories()
+        try await waitingRepositories.captures.saveCaptures([makeWaitingCapture()])
+        let waitingDashboard = try await RepositoryBackedPlanService(repositories: waitingRepositories).loadPlanDashboard(now: fixedDate)
+
+        XCTAssertEqual(waitingDashboard.realityReflow.reasonKind, .waitingOnPersonOrResource)
+        XCTAssertTrue(waitingDashboard.realityReflow.suggestions.contains(where: { $0.kind == .markWaiting }))
+    }
+
+    func testCalendarDeniedStillProducesManualRecoveryOptions() async throws {
+        let repositories = try await makeRepositories()
+        try await repositories.goals.saveGoals([makeWeekVisibleGoal()])
+        let service = RepositoryBackedPlanService(
+            repositories: repositories,
+            calendarRealityService: FixedPermissionCalendarRealityService(permission: .denied)
+        )
+
+        let dashboard = try await service.loadPlanDashboard(now: fixedDate)
+
+        XCTAssertEqual(dashboard.calendarAwareness.status, .denied)
+        XCTAssertTrue(dashboard.calendarBoundary.manualFallback.contains("Manual planning still works"))
+        XCTAssertTrue(dashboard.realityReflow.suggestions.contains(where: { $0.kind == .protectOneItem || $0.kind == .keepPlanUnchanged }))
+        XCTAssertTrue(dashboard.reflowReceiptPreview.whatWouldNotChange.contains(where: { $0.contains("Calendar blocks are not written") }))
+    }
+
+    func testBroadReflowAndCalendarImpactingChangesRequireConfirmation() async throws {
+        let repositories = try await makeRepositories()
+        try await repositories.goals.saveGoals((0..<6).map { makeWeekVisibleGoal(id: "confirm-\($0)", title: "Confirm \($0)") })
+        let service = RepositoryBackedPlanService(repositories: repositories)
+
+        let dashboard = try await service.loadPlanDashboard(now: fixedDate)
+
+        let moveLater = try XCTUnwrap(dashboard.realityReflow.suggestions.first(where: { $0.kind == .moveLocalActionLater }))
+        let drop = try XCTUnwrap(dashboard.realityReflow.suggestions.first(where: { $0.kind == .dropOptionalWork }))
+        let confirm = try XCTUnwrap(dashboard.realityReflow.suggestions.first(where: { $0.kind == .askForConfirmation }))
+
+        XCTAssertEqual(moveLater.boundary.confirmationRequirement, .requiredForBroadReflow)
+        XCTAssertEqual(drop.boundary.confirmationRequirement, .requiredForDestructiveChange)
+        XCTAssertNotEqual(confirm.boundary.confirmationRequirement, .notRequired)
+        XCTAssertTrue(dashboard.calendarBoundary.writeBoundary.contains("never silently writes"))
+    }
+
+    func testReceiptPreviewIncludesWouldChangeAndWouldNotChange() async throws {
+        let repositories = try await makeRepositories()
+        try await repositories.goals.saveGoals((0..<6).map { makeWeekVisibleGoal(id: "receipt-\($0)", title: "Receipt \($0)") })
+        let service = RepositoryBackedPlanService(repositories: repositories)
+
+        let dashboard = try await service.loadPlanDashboard(now: fixedDate)
+
+        XCTAssertFalse(dashboard.reflowReceiptPreview.whatChanged.isEmpty)
+        XCTAssertFalse(dashboard.reflowReceiptPreview.whatWouldNotChange.isEmpty)
+        XCTAssertTrue(dashboard.reflowReceiptPreview.whatWouldNotChange.contains(where: { $0.contains("not silently rescheduled") }))
+        XCTAssertTrue(dashboard.reflowReceiptPreview.confirmationRequired.contains("Safe local") || dashboard.reflowReceiptPreview.confirmationRequired.contains("confirmation"))
+        XCTAssertFalse(dashboard.reflowReceiptPreview.safeFailureFallback.isEmpty)
+    }
+
+    func testSaveTheDayReturnsProtectedAdjustmentAndExplanation() async throws {
+        let repositories = try await makeRepositories()
+        try await repositories.goals.saveGoals((0..<6).map { makeWeekVisibleGoal(id: "save-\($0)", title: "Save \($0)") })
+        let service = RepositoryBackedPlanService(repositories: repositories)
+
+        let dashboard = try await service.loadPlanDashboard(now: fixedDate)
+
+        XCTAssertFalse(dashboard.saveTheDay.protectedItem.isEmpty)
+        XCTAssertFalse(dashboard.saveTheDay.adjustment.isEmpty)
+        XCTAssertFalse(dashboard.saveTheDay.recoveryExplanation.isEmpty)
+        XCTAssertTrue(dashboard.saveTheDay.boundary.contains("No silent rescheduling"))
+    }
+
+    func testReflowCopyAvoidsFakeFutureSystemClaims() async throws {
+        let repositories = try await makeRepositories()
+        try await repositories.goals.saveGoals((0..<6).map { makeWeekVisibleGoal(id: "copy-\($0)", title: "Copy \($0)") })
+        let dashboard = try await RepositoryBackedPlanService(repositories: repositories).loadPlanDashboard(now: fixedDate)
+
+        let copy = [
+            dashboard.realityReflow.title,
+            dashboard.realityReflow.detail,
+            dashboard.saveTheDay.boundary,
+            dashboard.reflowReceiptPreview.detail,
+            dashboard.reflowReceiptPreview.safeFailureFallback
+        ].joined(separator: " ").lowercased()
+
+        XCTAssertFalse(copy.contains("automatically"))
+        XCTAssertFalse(copy.contains("will sync"))
+        XCTAssertFalse(copy.contains("exported"))
+        XCTAssertFalse(copy.contains("calendar written"))
+    }
+
+    func testTopLevelIARemainsCanonicalFiveTabShell() {
+        XCTAssertEqual(AppTab.allCases.map(\.title), ["Today", "Goals", "Capture", "Plan", "You"])
+        XCTAssertFalse(AppTab.allCases.map(\.title).contains("Captures"))
+        XCTAssertFalse(AppTab.allCases.map(\.title).contains("Insights"))
+        XCTAssertFalse(AppTab.allCases.map(\.title).contains("Profile"))
+    }
 }
 
 private extension PlanFeatureServiceTests {
@@ -397,6 +542,22 @@ private extension PlanFeatureServiceTests {
             planningStrategy: strategy,
             progressStrategy: progress,
             plan: plan
+        )
+    }
+
+    func makeWaitingCapture() -> Capture {
+        Capture(
+            id: "capture-waiting-reflow",
+            createdAt: GoalEngineFixtures.fixedNow,
+            updatedAt: GoalEngineFixtures.fixedNow,
+            rawText: "Waiting on partner response",
+            sourceType: .todayQuickCapture,
+            status: .waiting,
+            linkedGoalID: nil,
+            kind: .waitingItem,
+            route: .waiting,
+            triageStatus: .waiting,
+            waitingMetadata: CaptureWaitingMetadata(blockedBy: "Partner response", waitingOn: "Partner")
         )
     }
 }
