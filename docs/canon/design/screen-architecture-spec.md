@@ -1,5 +1,7 @@
 # Screen Architecture Spec
 
+Historical/superseded note: This file is preserved pre-Batch-61 frontend transformation context. Active Ambitions 2.0 screen truth now lives in [Ambitions_Design_Constitution.md](Ambitions_Design_Constitution.md) and [screen-contract-matrix.md](screen-contract-matrix.md). If this file references Insights, Profile, Habits, Captures, or older shell behavior as primary surfaces, treat those references as historical unless explicitly reaffirmed by the Design Constitution.
+
 ## Purpose
 
 Define exact intended structure, emphasis, disclosure, and interaction posture for every major transformed frontend surface.

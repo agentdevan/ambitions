@@ -6,7 +6,29 @@
 
 Ambitions 2.0 uses rich widget-like panels throughout. A panel is a compact product object with state, hierarchy, action, and explanation. It is not a flat text card.
 
+The active design source of truth is [design/Ambitions_Design_Constitution.md](design/Ambitions_Design_Constitution.md). Supporting contracts live in [design/component-contract-matrix.md](design/component-contract-matrix.md), [design/panel-density-size-spec.md](design/panel-density-size-spec.md), and [design/grouped-navigation-list-spec.md](design/grouped-navigation-list-spec.md).
+
 The flagship visual direction is a warm, near-black navy operating canvas with glassy elevated surfaces, restrained amber active accents, muted blue-gray inactive states, and short high-contrast hierarchy. It should feel premium, calm, coherent, intelligent, continuous, operating-system-like, visually grounded, and unlike a generic productivity dashboard.
+
+## Display Density And Panel Size
+
+Display Density:
+
+- Minimal.
+- Balanced.
+- Detailed.
+
+Panel Size:
+
+- Compact.
+- Comfortable.
+- Large.
+
+Default: Balanced + Comfortable.
+
+Density controls how much information appears. Size controls how large the same information feels. Large panels show fewer things at once. Compact panels must not become cramped. Large panels must not feel like stretched UI.
+
+Hero panels are anchored. Critical panels cannot fully hide. Supporting panels can reorder only within safe zones. Noncritical panels can hide. Critical panels collapse into a signal, ribbon, badge, or required state. Modularity must not become dashboard-builder behavior.
 
 ## Density Rules
 
@@ -121,6 +143,10 @@ Sheet/modal header pattern should reuse the same token, spacing, button, and con
 - Reduce Motion must have equivalent non-motion state clarity.
 - Haptics support meaningful confirmations only.
 - Never use motion to compensate for unclear hierarchy.
+- Motion explains state change first, premium feel second, and delight only when earned.
+- Future feature batches must set performance budgets for motion and visual richness.
+- Smart Attachment motion communicates where the item went, not AI thinking or magic.
+- Plan Reflow motion communicates cause, result, and deadline impact.
 
 ## Panel Types
 
@@ -180,6 +206,18 @@ Shows source, memory, calendar-derived context, sync/export status, verified/unv
 
 Shows what happened, what changed, why it changed, undo eligibility where safely supported, correction entry, and next action. It is a trust object, not a disposable toast.
 
+### Today Plan Panel
+
+Shows the planned day beyond the current step: planned items, compact timeline, open-window/free-busy awareness, and recovery signals.
+
+### Life Areas Panel
+
+Shows Life Areas as a primary organization lens inside Goals and You, including connected North Stars, goals, proof, decisions, and reviews. It must not imply a sixth tab.
+
+### One-Step Goals Panel
+
+Shows standalone Tasks without turning them into a top-level Tasks tab. It supports complete, attach to Goal, promote to Goal, convert to Ritual, and receipt-backed demotion from Goal where appropriate.
+
 ### Proof Rail
 
 Shows compact evidence artifacts such as notes, links, files, calendar completions, reflections, photos, milestones, decisions, feedback, and resolved blockers.
@@ -199,6 +237,10 @@ Shows what happened, what changed, what remains believable, and what follows.
 ### Settings / Preference Panel
 
 Shows a user-controlled preference with current value, consequence, and verification/trust status where relevant.
+
+### GroupedNavigationList
+
+Official categorized navigation/settings/depth pattern. It contains Navigation Sections, Navigation Rows, Disclosure Navigation Rows, Preference Rows, Status Navigation Rows, and Destructive Action Rows. It is used heavily in You and selectively in Goal Detail, Plan, Capture, Trust Center, Memory, and Settings. It is not the primary execution UI.
 
 ## Good Richness vs Bad Richness
 
@@ -231,6 +273,7 @@ Bad richness:
 - Tap targets must be comfortable and stable.
 - Gestures need button/menu alternatives.
 - Panels must avoid cognitive overload through too many simultaneous decisions.
+- Panel Size and Display Density combinations must be tested before claims.
 - Mode Lens, Continuity Ribbon, Action Closure Tray, bottom tabs, top headers, receipt/correction controls, Trust Badge, Ambient Status Orb, and Proof Rail require Dynamic Type, VoiceOver, Reduce Motion, contrast, distinguishability without color alone, and tap-target verification before user-facing claims.
 
 ## Performance Expectations
@@ -245,6 +288,9 @@ Guidance:
 - rich panel effects should degrade gracefully under Reduce Motion or lower performance conditions
 - large graph, ledger, proof, and trust queries should not recompute the whole world on every render
 - motion must clarify state and must not be required to understand state
+- Semantic Zoom must provide accessible list fallbacks and bounded rendering before it is used for Goals, Life Areas, North Stars, or Path Builder.
+- Safe-zone modularity must be validated across Display Density and Panel Size variants before user-facing customization claims.
+- Notification and external-surface visual treatments must preserve privacy defaults and concise operational wording.
 
 ## Appearance Studio Preservation
 

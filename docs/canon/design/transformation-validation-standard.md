@@ -1,5 +1,7 @@
 # Transformation Validation Standard
 
+Historical/superseded note: This file is preserved pre-Batch-61 frontend transformation context. Active Ambitions 2.0 validation truth now lives in [Ambitions_Design_Constitution.md](Ambitions_Design_Constitution.md), [accessibility-nutrition-screen-matrix.md](accessibility-nutrition-screen-matrix.md), and the current Ambitions 2.0 canon.
+
 ## Purpose
 
 Define the reusable validation doctrine for later front-end transformation batches.

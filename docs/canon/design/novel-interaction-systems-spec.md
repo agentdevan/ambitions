@@ -1,5 +1,7 @@
 # Novel Interaction Systems Spec
 
+Historical/superseded note: This file is preserved pre-Batch-61 frontend transformation context. Active Ambitions 2.0 interaction truth now lives in [Ambitions_Design_Constitution.md](Ambitions_Design_Constitution.md). If this file references Insights, Profile, Habits, Captures, or older shell behavior as primary surfaces, treat those references as historical unless explicitly reaffirmed by the Design Constitution.
+
 ## Purpose
 
 Turn the named frontend transformation inventions into explicit product systems with clear use, placement, and fallback rules.

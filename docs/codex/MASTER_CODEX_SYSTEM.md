@@ -21,10 +21,12 @@ Before non-trivial planning or implementation, read:
 7. [../canon/Ambitions_2_0_Visual_System.md](../canon/Ambitions_2_0_Visual_System.md)
 8. [../canon/Ambitions_2_0_Roadmap.md](../canon/Ambitions_2_0_Roadmap.md)
 9. [../canon/Ambitions_2_0_Batch_Plan.md](../canon/Ambitions_2_0_Batch_Plan.md)
-10. [BATCH_REGISTRY.md](BATCH_REGISTRY.md)
-11. [../../MASTER_PRODUCT_SPEC.md](../../MASTER_PRODUCT_SPEC.md) for current shipping product truth where not superseded by the new Ambitions 2.0 canon
-12. [../review/VISUAL_REVIEW_CHECKLIST.md](../review/VISUAL_REVIEW_CHECKLIST.md) when visible UI, navigation, empty states, copy, or hierarchy changes
-13. [../review/FRICTION_LOG.md](../review/FRICTION_LOG.md) when observed product friction needs to be captured without expanding scope
+10. [../canon/design/Ambitions_Design_Constitution.md](../canon/design/Ambitions_Design_Constitution.md) when the task touches design, IA, UX writing, interaction, trust, accessibility, or external surfaces
+11. [../canon/Ambitions_2_0_Implementation_Gap_Audit.md](../canon/Ambitions_2_0_Implementation_Gap_Audit.md) when planning Design Constitution alignment or checking implementation gaps
+12. [BATCH_REGISTRY.md](BATCH_REGISTRY.md)
+13. [../../MASTER_PRODUCT_SPEC.md](../../MASTER_PRODUCT_SPEC.md) for current shipping product truth where not superseded by the new Ambitions 2.0 canon
+14. [../review/VISUAL_REVIEW_CHECKLIST.md](../review/VISUAL_REVIEW_CHECKLIST.md) when visible UI, navigation, empty states, copy, or hierarchy changes
+15. [../review/FRICTION_LOG.md](../review/FRICTION_LOG.md) when observed product friction needs to be captured without expanding scope
 
 Current execution status is Batches 00-88 complete for planning purposes, Batch 89 next queued / next uncompleted, and Batches 90-120 future planned roadmap work. Do not skip ahead of the Batch 89+ execution order or active batch unless direct user instructions explicitly change scope.
 
@@ -32,6 +34,7 @@ Current execution status is Batches 00-88 complete for planning purposes, Batch 
 
 Ambitions is:
 - a calm, intelligent life operating system
+- a personal life organization system that gives concrete next steps
 - premium, modern, minimal
 - built for real daily use
 - emotionally intelligent but not manipulative
@@ -42,6 +45,10 @@ Ambitions is not:
 - a corporate productivity dashboard
 - a gamified habit tracker
 - a cluttered feature pile
+- a chat-first AI wrapper
+- a dashboard builder
+
+Active shell is Today / Goals / Capture / Plan / You. Insights is contextual, Habits are absorbed into Rituals, Profile is user-facing You, and Tasks are standalone One-Step Goals rather than a top-level tab.
 
 Target quality:
 - Apple / OpenAI / Meta / Google-level polish

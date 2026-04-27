@@ -1,5 +1,7 @@
 # Trust Explainability and Correction UX Spec
 
+Historical/superseded note: This file is preserved pre-Batch-61 frontend transformation context. Active Ambitions 2.0 trust, memory, receipt, and correction truth now lives in [Ambitions_Design_Constitution.md](Ambitions_Design_Constitution.md), [component-contract-matrix.md](component-contract-matrix.md), and [ux-writing-state-language-matrix.md](ux-writing-state-language-matrix.md). If this file conflicts with the active constitution, the constitution wins.
+
 ## Purpose
 
 Define the consumer-facing trust model for recommendations, assumptions, freshness, contradictions, corrections, and audit depth.

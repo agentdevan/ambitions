@@ -1,5 +1,7 @@
 # Transformation Terminology Spec
 
+Historical/superseded note: This file is preserved pre-Batch-61 frontend transformation context. Active Ambitions 2.0 terminology now lives in [Ambitions_Design_Constitution.md](Ambitions_Design_Constitution.md), including `Task = standalone One-Step Goal` and `Step = contained action inside a Goal, Path, or Plan`.
+
 ## Purpose
 
 Define the shared language for the front-end transformation program so later batches use one consistent vocabulary.

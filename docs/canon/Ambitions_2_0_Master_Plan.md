@@ -6,7 +6,13 @@ Adoption date: 2026-04-24
 
 Ambitions 2.0 is a major app transformation, not a minor polish wave.
 
-"Ambitions is a personal operating system for protecting meaningful progress under real-life conditions."
+"Ambitions makes my life feel organized, and gives me the concrete steps to accomplish anything I set my mind to."
+
+Expanded thesis:
+
+"Ambitions exists to unlock people's lives by turning ambitions, goals, tasks, plans, and real-world constraints into clear next steps, believable plans, proof of progress, and calm recovery when life changes."
+
+The active design source of truth is [design/Ambitions_Design_Constitution.md](design/Ambitions_Design_Constitution.md). It wins for design, IA, UX writing, component naming, interaction, trust, accessibility, and external-surface contracts when older active docs conflict.
 
 Ambitions 2.0 is not merely a planner, habit tracker, goal app, calendar wrapper, analytics dashboard, or beautiful productivity app. It is the daily operating loop that keeps life objects continuous, believable, provable, recoverable, correctable, trusted, remembered, focused, strategically pathed, and calm.
 
@@ -27,6 +33,13 @@ This plan supersedes prior roadmap direction after Batch 60 where conflicts exis
 - `Capture` is singular.
 - `Insights` is demoted from top-level navigation now.
 - `Habits` is absorbed now and must not remain a standalone top-level product area.
+- `You` is the Personal System Center: profile, personalization, What Ambitions Knows, Reviews, Analytics, Trust & Explanations, Privacy, Sync / Export, Integrations, Appearance, Notifications, Accessibility, and Settings.
+- Life Areas are visible organization lenses inside Goals and You, not a sixth tab.
+- North Stars are long-range dormant or identity-level ambitions under Life Areas.
+- `Task = standalone One-Step Goal`; `Step = action inside a Goal, Path, or Plan`.
+- Smart Attachment is the named Capture routing/correction system for attaching captured material to Life Areas, Ambitions, Goals, Plans, Steps, Tasks, Proof, Decisions, Rituals, or Waiting items.
+- Panel Size and Display Density are active design controls: `Compact / Comfortable / Large` and `Minimal / Balanced / Detailed`, defaulting to `Balanced + Comfortable`.
+- `GroupedNavigationList` is the official categorized settings/depth pattern. It is not primary execution UI.
 - Top-level screens stay capped and calm: one dominant hero panel, one or two supporting panels, and deeper content below the fold.
 - Detail screens can be denser when the density explains, edits, reviews, or audits a specific object.
 - Rich widget-like panels are the default presentation model. Plain text cards are not the 2.0 design target.
@@ -49,6 +62,7 @@ This plan supersedes prior roadmap direction after Batch 60 where conflicts exis
 - The global shell/chrome is an Ambitions 2.0 product system, not incidental styling. A dedicated future batch must align the persistent app frame before later major surface redesigns consume it.
 - The remaining roadmap must mature major Ambitions 2.0 inventions before release candidate rather than stopping at v1 foundations. [Ambitions_2_0_RC_Maturity_Plan.md](Ambitions_2_0_RC_Maturity_Plan.md) owns the maturity gates, RC milestones, batch size ceiling, dependency map, performance strategy, and mature-invention coverage.
 - Accessibility Nutrition Facts are required: internal checklist first, user-facing `You -> Accessibility` summary only after verification.
+- Accessibility claims remain unverified until audited; no user-facing accessibility claim should be published without evidence.
 - Dedicated device runtime is an architecture guardrail only in Ambitions 2.0. Do not build active hardware/runtime surfaces unless they naturally fall out of sync, Now State, or Command Pipeline work.
 
 ## Top-Level IA
@@ -113,6 +127,26 @@ Top-level surfaces use:
 
 Detail surfaces may use denser timelines, evidence groups, and settings clusters when they are attached to a specific goal, plan, review, capture, or trust object.
 
+## Object Model And Life Organization
+
+Canonical object hierarchy:
+
+```text
+Life Area
+-> Ambition / North Star
+-> Goal
+-> Path
+-> Plan
+-> Milestone
+-> Step
+-> Proof
+-> Receipt / Review
+```
+
+Tasks are standalone One-Step Goals. They can exist without a Life Area, Ambition, Goal, or Plan; they can still carry category, time, reminder, location, priority, proof, history, and review value; and they can be promoted into Goals, attached to Goals, or converted into Rituals. A Goal can be demoted into a Task when the structure is too heavy, with a receipt.
+
+Life Areas and North Stars are primary organization lenses inside Goals and You. Life Areas Overview is the plain user-facing surface. Life Areas Atlas is the richer visual system name. Neither creates a sixth tab.
+
 ## Scope
 
 Ambitions 2.0 includes:
@@ -120,6 +154,12 @@ Ambitions 2.0 includes:
 - top-level shell IA change to Today / Goals / Capture / Plan / You
 - Insights demotion
 - Habits absorption
+- You Personal System Center
+- Life Areas / North Stars
+- One-Step Goals
+- Smart Attachment
+- GroupedNavigationList
+- Panel Size and Display Density controls
 - rich panel visual system
 - calendar read/write through Plan
 - local-first calendar-derived insight policy
@@ -195,7 +235,8 @@ The canonical hierarchy is:
 - Goal = direction.
 - Plan = believable path.
 - Milestone = meaningful checkpoint.
-- Task = concrete action.
+- Task = standalone One-Step Goal.
+- Step = contained action inside a Goal, Path, or Plan.
 - Proof = evidence of real progress.
 - Decision = reason the path changed.
 - Weather = readable health signal.
@@ -215,7 +256,45 @@ Every goal should answer what it is, why it matters, what state it is in, what t
 
 Every plan should answer whether it is believable, which goal it serves, what proof it creates, what is protected this week, and what needs to be reduced, deferred, or renegotiated.
 
-Every task should answer what goal it serves, why now, how much effort it requires, what proof it will create, and whether it is later, next, doing, waiting, or done.
+Every Task should answer whether it stands alone, what it may attach to, why now, how much effort it requires, what proof it will create, and whether it is later, next, doing, waiting, or done. Every Step should answer which larger Goal, Path, or Plan it serves.
+
+## P0 / P1 Design Risk Resolution References
+
+The Design Constitution and supporting specs resolve the completed design audit risks by name:
+
+- [design/Ambitions_Design_Constitution.md](design/Ambitions_Design_Constitution.md) locks IA, Insights demotion, Habits absorption, Task/Step distinction, Life Areas/North Stars, You Personal System Center, calendar permission timing, accessibility truth, motion doctrine, and external-surface gates.
+- [design/screen-contract-matrix.md](design/screen-contract-matrix.md) locks screen contracts.
+- [design/component-contract-matrix.md](design/component-contract-matrix.md) locks component contracts and accessibility requirements.
+- [design/panel-density-size-spec.md](design/panel-density-size-spec.md) locks Panel Size, Display Density, and modularity safe zones.
+- [design/grouped-navigation-list-spec.md](design/grouped-navigation-list-spec.md) locks GroupedNavigationList naming and usage.
+- [design/smart-attachment-spec.md](design/smart-attachment-spec.md) locks Smart Attachment behavior.
+- [design/ux-writing-state-language-matrix.md](design/ux-writing-state-language-matrix.md) locks writing and state language.
+- [design/accessibility-nutrition-screen-matrix.md](design/accessibility-nutrition-screen-matrix.md) keeps Accessibility Nutrition unverified until audited.
+- [design/external-surfaces-contract.md](design/external-surfaces-contract.md) locks notification, widget, Live Activity, App Intent, Shortcut, and future Focus Filter contracts.
+
+## Design Constitution Implementation Sequencing
+
+The Design Constitution is documented and ready for future implementation, but this plan does not claim the surfaces are fully implemented. Future roadmap work should preserve this order:
+
+1. Canon/source-of-truth cleanup.
+2. Shared object terminology.
+3. Shared component primitives.
+4. GroupedNavigationList foundation.
+5. Panel Size + Display Density foundation.
+6. Receipt / Action Closure contract.
+7. Smart Attachment contract.
+8. Life Areas / North Stars object model.
+9. One-Step Goals object model.
+10. Screen contract implementation.
+11. Today transformation with Today Plan Layer.
+12. Capture transformation with Smart Attachment.
+13. Goals / Life Areas / North Stars transformation with accessible Semantic Zoom.
+14. Plan / Timeline / Rituals transformation with local-first calendar-derived insight and Plan-owned permission.
+15. You Personal System Center.
+16. Trust Center / What Ambitions Knows with receipt search/history.
+17. Accessibility Nutrition verification.
+18. External surfaces after Now State, Command Pipeline, receipts, and privacy snapshots.
+19. Release-candidate validation.
 
 ## Daily Continuity Loop
 

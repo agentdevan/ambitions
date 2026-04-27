@@ -45,6 +45,10 @@ Use [../canon/Ambitions_2_0_Batch_Plan.md](../canon/Ambitions_2_0_Batch_Plan.md)
 
 Current execution status: Ambitions 2.0 post-Batch-60 canon is adopted. Batches 00-88 are complete for planning purposes. Batch 89 is the next queued / next uncompleted batch. Batches 90-120 remain future planned roadmap work.
 
+Docs-only reconciliation note: Design Constitution canon reconciliation was performed as a user-directed canon/design-system integration pass after Batch 88 planning status. It created the active design constitution and supporting matrices/specs without starting Batch 89 feature work, changing branch, changing app code, or claiming future implementation completion.
+
+Implementation gap audit note: A repo-wide Design Constitution implementation gap audit was added after roadmap verification. It preserves completed batch history and creates future delta/alignment batches for Constitution gaps without starting Batch 89 feature work or marking any delta complete.
+
 | Batch | Name | Status | Notes |
 | --- | --- | --- | --- |
 | 00 | Repo operating system / canon alignment | Completed | Repo truth and control-file alignment completed enough to move Batch 01 into the active slot. |

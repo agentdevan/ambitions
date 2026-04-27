@@ -8,6 +8,8 @@ This is the active post-Batch-60 execution plan. It begins at Batch 61 and super
 
 "Verify truth first, build shared systems once, then transform surfaces, then ship Apple-native external surfaces."
 
+[design/Ambitions_Design_Constitution.md](design/Ambitions_Design_Constitution.md) is the active design source of truth for IA, UX writing, component naming, interaction, trust, accessibility, and external-surface contracts.
+
 ## Execution Rules
 
 - Work on `main` only.
@@ -21,6 +23,7 @@ This is the active post-Batch-60 execution plan. It begins at Batch 61 and super
 - Every future batch must name the maturity gate it advances from [Ambitions_2_0_RC_Maturity_Plan.md](Ambitions_2_0_RC_Maturity_Plan.md).
 - Every feature batch must include a performance budget, accessibility requirement, degraded-state behavior, correction path, no-fake-precision boundary, and concrete acceptance criteria.
 - Every future Goals, Goal Detail, Plan, widget, Path Builder, and Portfolio batch must preserve the Goal -> Plan -> Task -> Proof relationship: goal direction, believable path, meaningful milestone, concrete task, evidence of progress, decision trail, readable weather, and archive learning.
+- Every future batch touching design must preserve the Design Constitution: Today / Goals / Capture / Plan / You shell; You as Personal System Center; Insights contextual; Habits absorbed into Rituals; `Task = standalone One-Step Goal`; `Step = contained action`; no top-level Tasks tab; Plan-owned calendar permission; no onboarding permission prompts; no user-facing accessibility claims before verification.
 - Do not mark a maturity, hardening, verification, or RC-lock batch complete until the owning validation evidence exists.
 
 ## Batch List
@@ -87,6 +90,123 @@ This is the active post-Batch-60 execution plan. It begins at Batch 61 and super
 | 118 | Final Performance, Memory, and Responsiveness Pass | Phase G - onboarding, accessibility, release |
 | 119 | Ambitions 2.0 RC Audit | Phase G - onboarding, accessibility, release |
 | 120 | Ambitions 2.0 Release Candidate Lock | Phase G - onboarding, accessibility, release |
+
+## Design Constitution Future Ownership
+
+These are future implementation responsibilities, not completed implementation claims:
+
+| Contract area | Owning future batch family |
+| --- | --- |
+| Life Areas Overview / Life Areas Atlas | Goals, Path Builder, Portfolio maturity, You |
+| North Stars | Goals, Life Areas, Path Intelligence, Portfolio maturity |
+| One-Step Goals | Capture, Today, Goals, Goal Detail, Plan, Reviews, Recovery |
+| Smart Attachment | Capture, Command Pipeline, receipts, correction/memory |
+| You Personal System Center | You, Trust Center, What Ambitions Knows, Reviews, Sync / Export, Settings |
+| GroupedNavigationList | You, Trust Center, Memory, Settings, Goal Detail depth, Plan controls |
+| Panel Size + Display Density | Rich Panel system, Appearance Studio, Accessibility verification, Visual polish |
+| Screen Contract Matrix implementation | Core surface integration QA and later maturity passes |
+| Component Contract Matrix implementation | Rich panels, global chrome, trust, review, external surfaces |
+| Trust Center / What Ambitions Knows | You, memory confidence, correction, receipt maturity |
+| External surface contracts | App Intents, widgets, Live Activities, notifications, Shortcuts, verification |
+| Accessibility Nutrition verification | Batch 115 user-facing verification only after evidence |
+
+## Design Constitution Sequencing Overlay
+
+This overlay is the dependency-safe order for future implementation planning. It does not renumber completed batches and does not claim that any listed feature is implemented.
+
+| Order | Implementation batch theme | Depends on | Existing / future owner |
+| --- | --- | --- | --- |
+| 1 | Canon and source-of-truth cleanup | none | completed docs reconciliation plus future repo-truth passes |
+| 2 | Shared object model terminology and docs | 1 | Life Graph, Master Plan, Product Architecture |
+| 3 | Shared component primitives | 1-2 | Rich Panel Design System / future component contract pass |
+| 4 | GroupedNavigationList foundation | 3 | future shared component batch before You/Trust/Settings expansion |
+| 5 | Panel Size + Display Density foundation | 3 | future design-token / Appearance Studio / accessibility batch |
+| 6 | Receipt / Action Closure design contract | 2-3 | Action Closure and receipt maturity |
+| 7 | Smart Attachment design/data contract | 2, 6 | Capture, Command Pipeline, receipts, correction/memory |
+| 8 | Life Areas / North Stars object model | 2, 6 | Life Graph, Goals, Path Intelligence |
+| 9 | One-Step Goals object model | 2, 6 | Capture, Today, Goals, Goal Detail, Plan |
+| 10 | Screen contract implementation pass | 3-9 | Core surface integration QA and surface maturity |
+| 11 | Today surface transformation | 5, 6, 9, 10, Now State, Reality Model, Plan believability | Today / Daily Operating Contract and QA |
+| 12 | Capture surface transformation | 7, 9, 10, Command Pipeline | Capture 2.0 hardening / Smart Attachment |
+| 13 | Goals / Life Areas / North Stars transformation | 8, 9, 10, semantic zoom fallback | Goals, Goal Detail, Path Builder, Portfolio |
+| 14 | Plan / Timeline / Rituals transformation | 6, 10, Reality Model, calendar policy | Plan, Reality Reflow, Rituals |
+| 15 | You Personal System Center transformation | 4, 6, 10 | You, Reviews, settings, trust entry |
+| 16 | Trust Center / What Ambitions Knows | 6, 15, memory/correction contracts | Trust Center, memory confidence, correction |
+| 17 | Accessibility Nutrition verification | 3-16 | Batch 115 or later verification work |
+| 18 | External surfaces: widgets, Live Activities, App Intents | Now State, Command Pipeline, receipts, privacy snapshots, 17 where claims are made | Batches 92-94 or future external hardening |
+| 19 | Release-candidate validation | 1-18 | Batches 119-120 |
+
+## Design Constitution Coverage Checklist
+
+Every future batch touching these areas must use planned, documented, or requires implementation batch language until repo evidence proves implementation.
+
+| Required coverage | Owning plan area |
+| --- | --- |
+| Life Areas Overview / Life Areas Atlas | Orders 8, 13, 16 |
+| North Stars / dormant Ambitions | Orders 8, 13 |
+| One-Step Goals | Orders 9, 11-14 |
+| Task = standalone One-Step Goal | Order 2 and Order 9 |
+| Step = contained plan/path/goal action | Order 2 and Order 13-14 |
+| Smart Attachment | Order 7 and Order 12 |
+| Smart Attachment receipts and correction | Orders 6-7, 12, 16 |
+| You as Personal System Center | Order 15 |
+| Trust Center | Order 16 |
+| What Ambitions Knows | Order 16 |
+| GroupedNavigationList | Order 4 and Order 15-16 |
+| Panel Size: Compact / Comfortable / Large | Order 5 and Order 17 |
+| Display Density: Minimal / Balanced / Detailed | Order 5 and Order 17 |
+| Screen Contract Matrix implementation | Order 10 |
+| Component Contract Matrix implementation | Orders 3-5, 10 |
+| UX Writing / State Language Matrix implementation | Orders 10-18 |
+| Accessibility Nutrition screen verification | Order 17 |
+| External Surfaces Contract | Order 18 |
+| Widgets after Now State stability | Order 18 |
+| Live Activities after Now State and Command Pipeline stability | Order 18 |
+| App Intents / Shortcuts | Order 18 |
+| Notification frequency/privacy controls | Orders 15-16, 18 |
+| Receipt search/history | Orders 6, 16 |
+| Local-first calendar-derived insight | Order 14 |
+| Plan-owned calendar permission | Order 14 |
+| Motion grammar and Reduce Motion variants | Orders 3, 5, 17 |
+| Semantic Zoom with accessibility/performance fallbacks | Orders 10, 13, 17 |
+| Safe-zone modularity rules | Orders 5, 10, 17 |
+| Today Plan Layer | Orders 10-11, 14 |
+| Life Areas / North Stars / Goals semantic zoom | Orders 10, 13, 17 |
+
+## Post-Audit Delta / Alignment Batch Backlog
+
+The repo-wide implementation gap audit lives in [Ambitions_2_0_Implementation_Gap_Audit.md](Ambitions_2_0_Implementation_Gap_Audit.md). The rows below are future delta/alignment batches created from that audit. They do not renumber or reopen completed batches; they provide dependency-safe follow-up work where the Design Constitution is stricter than existing implementation.
+
+| Delta | Name | Depends on | Status |
+| --- | --- | --- | --- |
+| D01 | Shell IA / Tab Alignment Delta | Design Constitution, current shell evidence | Planned |
+| D02 | Shared Object Terminology Cleanup | D01 | Planned |
+| D03 | GroupedNavigationList Component | shared component primitives | Planned |
+| D04 | Panel Size + Display Density | shared component primitives | Planned |
+| D05 | Receipt / Action Closure Search and Privacy Contract | Action Closure v1 | Planned |
+| D06 | Smart Attachment Foundation | D02, D05, Command Pipeline, Capture | Planned |
+| D07 | Life Areas Overview / Atlas Object Model | D02, Life Graph | Planned |
+| D08 | North Stars / Dormant Ambitions Object Model | D07 | Planned |
+| D09 | One-Step Goals Object Model | D02, D05 | Planned |
+| D10 | Screen Contract Matrix Implementation Pass | D03-D09 | Planned |
+| D11 | Today 2.0 Design Constitution Alignment | D04, D09-D10, Now State, Plan believability | Planned |
+| D12 | Capture + Quiet Command Sheet Alignment | D06, D09-D10 | Planned |
+| D13 | Goals / Life Areas / North Stars Transformation and Semantic Zoom | D07-D10 | Planned |
+| D14 | Goal Detail Mission Control Lanes Alignment | D09-D10, D13 | Planned |
+| D15 | Plan Believability + Timeline Widget Alignment | D05, D10, Reality Model | Planned |
+| D16 | Ritual Split Alignment | D11, D15, You foundation | Planned |
+| D17 | You Personal System Center Alignment | D03-D05, D10 | Planned |
+| D18 | Trust Center Alignment | D05, D17 | Planned |
+| D19 | What Ambitions Knows | D05, D17-D18 | Planned |
+| D20 | UX Writing Cleanup | D11-D19 | Planned |
+| D21 | Accessibility Nutrition Verification | D03-D20 | Planned |
+| D22 | External Surfaces Contract Alignment | D05, D20-D21, Now State, Command Pipeline | Planned |
+| D23 | Widgets Alignment | D22 | Planned |
+| D24 | Live Activities Alignment | D22 | Planned |
+| D25 | App Intents / Shortcuts Alignment | D22 | Planned |
+| D26 | Release Candidate Validation | D01-D25 | Planned |
+
+Do not mark any delta complete until its implementation, validation evidence, docs/status truth, and handoff are aligned. Do not treat this backlog as authorization to skip Batch 89 unless a direct user instruction explicitly changes scope.
 
 ## Batch 61 - Repo Truth and Ambitions 2.0 Capability Matrix
 

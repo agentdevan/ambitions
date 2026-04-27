@@ -1,5 +1,7 @@
 # Cross-Device Surface Roles Spec
 
+Historical/superseded note: This file is preserved pre-Batch-61 frontend transformation context. Active Ambitions 2.0 external-surface truth now lives in [Ambitions_Design_Constitution.md](Ambitions_Design_Constitution.md) and [external-surfaces-contract.md](external-surfaces-contract.md). If this file conflicts with the active constitution, the constitution wins.
+
 ## Purpose
 
 Define future platform roles without turning this planning task into implementation work.

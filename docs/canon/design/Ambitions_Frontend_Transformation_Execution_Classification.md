@@ -1,5 +1,7 @@
 # Ambitions Frontend Transformation Execution Classification
 
+Historical/superseded note: This file is preserved pre-Batch-61 frontend transformation context. Active Ambitions 2.0 design truth now lives in [Ambitions_Design_Constitution.md](Ambitions_Design_Constitution.md) and its supporting contract files. If this file references Insights, Profile, Habits, Captures, or older shell behavior as primary surfaces, treat those references as historical unless explicitly reaffirmed by the Design Constitution.
+
 ## Purpose
 
 This historical document classified the completed pre-Batch-61 frontend transformation systems and surface programs.

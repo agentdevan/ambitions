@@ -2,7 +2,9 @@
 
 ## Purpose
 
-This document defines the product architecture for Ambitions 2.0. It governs surface responsibilities, drill-down rules, flow ownership, Insights demotion, Habits absorption, calendar permission behavior, and local-first calendar insight policy.
+This document defines the product architecture for Ambitions 2.0. It governs surface responsibilities, drill-down rules, flow ownership, Insights demotion, Habits absorption, Life Areas / North Stars, One-Step Goals, Smart Attachment, calendar permission behavior, and local-first calendar insight policy.
+
+The active design source of truth is [design/Ambitions_Design_Constitution.md](design/Ambitions_Design_Constitution.md). It wins for design, IA, UX writing, component naming, interaction, trust, accessibility, and external-surface contracts when older active docs conflict.
 
 ## Surface Responsibilities
 
@@ -18,12 +20,14 @@ This document defines the product architecture for Ambitions 2.0. It governs sur
 - Owns goal inventory, active direction, goal health, path progress, and Goal Detail entry.
 - Shows goal status without becoming an analytics dashboard.
 - Presents goals as an ambition portfolio: current direction first, compact lifecycle context, readable weather, and one Next Visible Step for every active goal.
+- Hosts Life Areas preview, Life Areas Overview entry, North Stars rail, and controlled One-Step Goals section.
 - Goal Detail owns deeper explanation, evidence, path inspection, and history.
 
 ### Capture
 
 - Owns fast intake and triage.
 - Accepts raw thought, task, goal seed, plan seed, waiting item, and archive item.
+- Owns Smart Attachment receipts and correction when a capture likely belongs to a Life Area, Ambition, Goal, Plan, Step, Task, Proof item, Decision, Ritual, or Waiting item.
 - Routes capture outputs to goal, plan, seed, waiting, or archive states.
 - Does not become a long-term inbox that competes with Plan.
 
@@ -36,7 +40,7 @@ This document defines the product architecture for Ambitions 2.0. It governs sur
 
 ### You
 
-- Owns reviews, memory, trust, accessibility, sync/export, preferences, integrations, and account-style settings if needed.
+- Owns the Personal System Center: profile, personalization, memory / What Ambitions Knows, reviews, analytics, trust and explanations, privacy, sync/export, integrations, appearance, notifications, accessibility, and settings.
 - `You -> Reviews` becomes the main home for historical insight.
 - `You -> Accessibility` may show user-facing Accessibility Nutrition only after verification.
 
@@ -75,6 +79,28 @@ Ambitions 2.0 is organized around one daily life operating loop:
 9. Reviews convert experience into future behavior.
 10. Sync, export/import, widgets, Live Activities, App Intents, and returning-user states preserve continuity.
 
+## Object Hierarchy
+
+Canonical object hierarchy:
+
+```text
+Life Area
+-> Ambition / North Star
+-> Goal
+-> Path
+-> Plan
+-> Milestone
+-> Step
+-> Proof
+-> Receipt / Review
+```
+
+`Task = standalone One-Step Goal`. `Step = action inside a Goal, Path, or Plan`.
+
+A Task can exist without a Life Area, Ambition, Goal, or Plan; it can have category, time, reminder, location, priority, proof, history, and review value; it can be promoted into a Goal, attached to an existing Goal, or become a Ritual. A Goal can be demoted into a Task when the structure was too heavy, with a receipt. This does not create a top-level Tasks tab.
+
+Life Areas are visible inside Goals and You. Life Areas Overview is the plain user-facing surface; Life Areas Atlas is the richer visual system name. North Stars are long-range dormant or identity-level ambitions under Life Areas.
+
 Future surface work must show how it contributes to continuity, believability, proof, recovery, correction, trust, memory, focus, strategic pathing, or calmness. A batch that only polishes a tab without strengthening the loop is not enough.
 
 Future surface work must also state which maturity gate from [Ambitions_2_0_RC_Maturity_Plan.md](Ambitions_2_0_RC_Maturity_Plan.md) it advances. A surface is not release-candidate ready until it has a useful v1, cross-surface integration, trust/correction/degraded behavior, performance/accessibility proof, and representative scenario validation where relevant.
@@ -91,14 +117,15 @@ Future surface work must also state which maturity gate from [Ambitions_2_0_RC_M
 8. Reality Reflow converts disruption into a safe recovery path without silent rescheduling.
 9. Review captures what happened, what changed, what was protected, what remains believable, and what the system should learn.
 
-## Goal / Plan / Task Information Hierarchy
+## Goal / Plan / Task / Step Information Hierarchy
 
 Ambitions uses the following visual hierarchy across Goals, Goal Detail, Plan, Today, widgets, Path Builder, Reviews, and Portfolio Manager:
 
 - Goal = direction.
 - Plan = believable path.
 - Milestone = meaningful checkpoint.
-- Task = concrete action.
+- Task = standalone One-Step Goal.
+- Step = contained action inside a Goal, Path, or Plan.
 - Proof = evidence of real progress.
 - Decision = reason the path changed.
 - Weather = readable health signal.
@@ -123,13 +150,14 @@ Planned object-level systems:
 ## Primary Flow: Capture -> Triage -> Goal / Plan / Seed / Waiting / Archive
 
 1. User captures a thought quickly.
-2. Capture classifies the item as raw, goal candidate, plan patch, seed, waiting, or archive.
-3. User confirms or changes the route.
-4. Goal-bound items attach to Goals or Goal Detail.
-5. Plan-bound items become plan seeds, schedule candidates, or rituals.
-6. Commitment and waiting items attach to a lightweight Person, Commitment, Waiting item, Follow-Up, or sensitivity marker where useful without becoming generic tasks.
-7. Resource and proof items attach to Life Graph as files, links, notes, evidence, external references, documents, project artifacts, or reflections.
-8. Waiting/archive items remain retrievable through Capture and You memory surfaces.
+2. Smart Attachment infers whether the item belongs to a Life Area, Ambition, Goal, Plan, Step, Task, Proof item, Decision, Ritual, or Waiting item.
+3. High-confidence captures attach automatically with editable receipt; medium-confidence captures save standalone with an attachment suggestion; low-confidence captures save to Needs a Place; clarification uses compact choices, not chat.
+4. User confirms or changes the route.
+5. Goal-bound items attach to Goals or Goal Detail.
+6. Plan-bound items become plan seeds, schedule candidates, or rituals.
+7. Commitment and waiting items attach to a lightweight Person, Commitment, Waiting item, Follow-Up, or sensitivity marker where useful without becoming generic tasks.
+8. Resource and proof items attach to Life Graph as files, links, notes, evidence, external references, documents, project artifacts, or reflections.
+9. Waiting/archive items remain retrievable through Capture and You memory surfaces.
 
 ## Primary Flow: Plan -> Calendar-Aware Mode -> Scheduled Block -> Recovery / Review
 
@@ -181,6 +209,25 @@ The dedicated global chrome batch should establish the permanent shell, contextu
 
 Mode Lens changes emphasis, priority, and presentation only. It must not change object ownership, create hidden tabs, hide required actions, create separate state, duplicate navigation, or change the source of truth.
 
+## Canonical Detail And Tab Stack Behavior
+
+- Each top-level tab preserves its own navigation stack.
+- Tap current tab once scrolls the current view to top.
+- Tap current tab twice returns to that tab root.
+- The same object always opens the same canonical detail screen.
+- Origin Chip, stable title, and object identity header preserve orientation without desktop breadcrumb clutter.
+- Semantic Zoom must have accessible list fallbacks and performance-safe progressive disclosure.
+
+## Constitution Implementation Dependency Rules
+
+- Shared object terminology must land before surface transformation.
+- Shared component primitives, GroupedNavigationList, Panel Size, and Display Density must land before screens depend on them.
+- Receipt / Action Closure contract must land before Smart Attachment correction, Trust Center history, App Intents, widgets, or Live Activities rely on action results.
+- Life Areas / North Stars and One-Step Goals object models must land before Goals semantic zoom or Today/Plan One-Step Goal surfacing.
+- Screen contract implementation must precede full Today, Capture, Goals, Plan, and You transformation.
+- Accessibility Nutrition verification follows implementation evidence; user-facing claims remain unavailable until verified.
+- External surfaces require Now State, Command Pipeline, receipts, privacy-safe snapshots, and platform verification.
+
 ## Reviews Architecture
 
 Reviews live primarily under `You -> Reviews` with contextual entry from Today, Plan, and Goal Detail.
@@ -221,6 +268,7 @@ Habit-shaped work becomes:
 - repeatable actions in Today
 - pattern evidence in Reviews
 - goal-supporting routines in Goal Detail
+- preference/history/reflection under You
 
 Habits must not create a separate planning model. Repeat behavior consumes shared plan, memory, execution, and review systems.
 

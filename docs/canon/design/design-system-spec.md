@@ -1,5 +1,7 @@
 # Design System Spec
 
+Historical/superseded note: This file is preserved pre-Batch-61 frontend transformation context. Active Ambitions 2.0 visual/component truth now lives in [Ambitions_Design_Constitution.md](Ambitions_Design_Constitution.md), [component-contract-matrix.md](component-contract-matrix.md), and [panel-density-size-spec.md](panel-density-size-spec.md). If this file conflicts with the active constitution, the constitution wins.
+
 ## Purpose
 
 Define exact shared visual rules for transformed Ambitions surfaces.

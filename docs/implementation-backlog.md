@@ -12,7 +12,9 @@ When this backlog conflicts with the canonical platform vision, surgical executi
 
 - The shipping product is the native SwiftUI app.
 - The live native target is local-first and on-device first.
-- The app currently ships repository-backed Today, Captures, Goals, Habits, Insights, and Profile surfaces backed by SwiftData repositories for goals, drafts, plans, steps, evidence, feedback, captures, and app state.
+- The active Ambitions 2.0 shell canon is Today / Goals / Capture / Plan / You. Older code and historical notes may still use Captures, Habits, Insights, or Profile compatibility naming, but those are not active top-level IA promises.
+- The active design source of truth is [canon/design/Ambitions_Design_Constitution.md](canon/design/Ambitions_Design_Constitution.md).
+- Active canon treats Insights as contextual intelligence, Habits as absorbed into Rituals/Plan/Today/You, Profile as user-facing You, and Tasks as standalone One-Step Goals rather than a top-level Tasks tab.
 - `project.yml` currently defines the `Ambitions` app target, the `AmbitionsWidgetExtension` target, and the unit/UI test bundles.
 - The current native codebase already includes capture persistence, create-goal submission, external routing, snapshot export, local notification scheduling, EventKit integration, and widget/live-activity code paths.
 - The repo no longer retains an active TypeScript / Expo / React Native runtime path.
@@ -95,6 +97,7 @@ Goals:
 - Keep backend/sync notes boundary-level and provider-agnostic until a native sync decision exists.
 - Keep implementation docs aligned with the current native service, routing, capture, and extension boundaries.
 - Remove ambiguity about what is implemented versus what has merely been scaffolded.
+- Keep active docs aligned to the Design Constitution before implementation batches consume the contracts.
 
 Deliverables:
 - `docs/README.md`
@@ -113,7 +116,19 @@ Deliverables:
 - follow-up fixes for any notification/widget/EventKit drift found during validation
 - truth-checked docs describing verified behavior versus unverified foundations
 
-### Phase C. Sync decision and historical-doc containment
+### Phase C. Design Constitution implementation follow-through
+
+Goals:
+- Implement Life Areas Overview / Atlas, North Stars, One-Step Goals, Smart Attachment, You Personal System Center, GroupedNavigationList, Panel Size + Display Density, Screen Contract Matrix, Component Contract Matrix, Trust Center / What Ambitions Knows, external surface contracts, and Accessibility Nutrition verification in their owning future batches.
+- Preserve the current shell and do not create top-level Insights, Profile, Habits, or Tasks tabs.
+- Keep calendar permission Plan-owned and onboarding free of upfront permission requests.
+
+Deliverables:
+- targeted implementation in owning future batches only
+- updated tests and validation evidence per batch
+- user-facing claims only when repo evidence supports them
+
+### Phase D. Sync decision and historical-doc containment
 
 Goals:
 - Make an explicit native sync decision before any provider-specific implementation resumes.
@@ -125,26 +140,66 @@ Deliverables:
 
 ## Proposed implementation order
 
-### 0. Baseline and docs cleanup
+1. Canon and source-of-truth cleanup.
+2. Shared object model terminology and docs.
+3. Shared component primitives.
+4. GroupedNavigationList foundation.
+5. Panel Size + Display Density foundation.
+6. Receipt / Action Closure design contract.
+7. Smart Attachment design/data contract.
+8. Life Areas / North Stars object model.
+9. One-Step Goals object model.
+10. Screen contract implementation pass.
+11. Today surface transformation.
+12. Capture surface transformation.
+13. Goals / Life Areas / North Stars transformation.
+14. Plan / Timeline / Rituals transformation.
+15. You Personal System Center transformation.
+16. Trust Center / What Ambitions Knows.
+17. Accessibility Nutrition verification.
+18. External surfaces: widgets, Live Activities, App Intents.
+19. Release-candidate validation.
 
-- Keep native-only source-of-truth rules explicit.
-- Add `docs/README.md` with live vs historical doc status.
-- Keep backend/provider-specific docs out of the active native doc set unless a native sync track is approved.
+Existing native foundations should be validated as they are consumed by the sequence above. Do not recreate capture persistence, notification foundation, EventKit preparation, external routing, widget/live-activity scaffolding, or reschedule infrastructure as greenfield work. Decide sync before reviving backend/provider-specific work.
 
-### 1. Validate the existing native foundations
+## Post-audit delta batches
 
-- Validate create-goal, capture persistence, external routing, notification scheduling, EventKit behavior, and widget/live-activity reads against the current code.
-- Fix only the gaps exposed by that validation pass.
+The repo-wide gap audit is [canon/Ambitions_2_0_Implementation_Gap_Audit.md](canon/Ambitions_2_0_Implementation_Gap_Audit.md). It confirms that existing foundations should be preserved, but several completed historical surfaces need new Constitution-alignment batches. These are planned future work only.
 
-### 2. Harden capture and external-surface behavior on the existing seams
+Recommended delta order:
 
-- Extend the current capture service/repository path instead of rebuilding capture foundations.
-- Keep routing work inside `AppExternalRouting`, snapshot export, and the existing service layer.
+1. Shell IA / Tab Alignment Delta.
+2. Shared Object Terminology Cleanup.
+3. GroupedNavigationList Component.
+4. Panel Size + Display Density.
+5. Receipt / Action Closure Search and Privacy Contract.
+6. Smart Attachment Foundation.
+7. Life Areas Overview / Atlas Object Model.
+8. North Stars / Dormant Ambitions Object Model.
+9. One-Step Goals Object Model.
+10. Screen Contract Matrix Implementation Pass.
+11. Today 2.0 Design Constitution Alignment.
+12. Capture + Quiet Command Sheet Alignment.
+13. Goals / Life Areas / North Stars Transformation and Semantic Zoom.
+14. Goal Detail Mission Control Lanes Alignment.
+15. Plan Believability + Timeline Widget Alignment.
+16. Ritual Split Alignment.
+17. You Personal System Center Alignment.
+18. Trust Center Alignment.
+19. What Ambitions Knows.
+20. UX Writing Cleanup.
+21. Accessibility Nutrition Verification.
+22. External Surfaces Contract Alignment.
+23. Widgets Alignment.
+24. Live Activities Alignment.
+25. App Intents / Shortcuts Alignment.
+26. Release Candidate Validation.
 
-### 3. Decide sync before reviving backend work
+The exact recommended next implementation batch from this audit is `Shell IA / Tab Alignment Delta`, because it is the smallest dependency-safe place to preserve the five-tab shell, confirm Capture opens the full surface, add current-tab tap behavior, and keep legacy Profile/Insights/Habits naming internal before component and surface work consumes navigation assumptions.
 
-- Make the backend/sync decision explicit before adding provider-specific backend work back into the repo.
-- Keep the app local-first until a native sync path is deliberately approved.
+## Design Constitution Coverage Checklist
+
+The backlog now tracks the following as future implementation coverage, not shipped proof: Life Areas Overview / Atlas, North Stars / dormant Ambitions, One-Step Goals, Task/Step distinction, Smart Attachment with receipts/correction, You Personal System Center, Trust Center, What Ambitions Knows, GroupedNavigationList, Panel Size, Display Density, screen/component/UX writing matrices, Accessibility Nutrition verification, external surfaces contract, widgets, Live Activities, App Intents/Shortcuts, notification frequency/privacy controls, receipt search/history, local-first calendar-derived insight, Plan-owned calendar permission, motion/Reduce Motion, Semantic Zoom fallbacks, safe-zone modularity, Today Plan Layer, and Life Areas / North Stars / Goals semantic zoom.
 
 ## Suggested work items by repo area
 
@@ -171,6 +226,7 @@ Deliverables:
 - `Native/Ambitions/Features/Today/`
   - keep quick capture on the current repository-backed path
 - `Native/Ambitions/Features/Profile/`
+  - compatibility folder may host user-facing You surfaces until renamed by an owning batch
   - host connected-feature status, permissions education, and sync readiness states only when verified product behavior exists
 - `Native/Ambitions/Features/Goals/`
   - keep create-goal, reschedule, and optional calendar/reminder work on the current service layer

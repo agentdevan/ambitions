@@ -8,9 +8,49 @@
 
 As of 2026-04-24, the active post-Batch-60 canon is the Ambitions 2.0 major transformation package under `docs/canon/Ambitions_2_0_*.md`. Those newly added files are the top-level source of truth for future Ambitions 2.0 work.
 
+## Ambitions 2.0 Active Design Constitution
+
+As of the design constitution reconciliation, [docs/canon/design/Ambitions_Design_Constitution.md](docs/canon/design/Ambitions_Design_Constitution.md) is the active design source of truth for IA, UX writing, object naming, screen contracts, visual/component contracts, interaction, trust, accessibility posture, and external-surface contracts.
+
+Source-of-truth hierarchy:
+
+1. [docs/canon/design/Ambitions_Design_Constitution.md](docs/canon/design/Ambitions_Design_Constitution.md)
+2. [docs/canon/Ambitions_2_0_Master_Plan.md](docs/canon/Ambitions_2_0_Master_Plan.md)
+3. [docs/canon/Ambitions_2_0_Product_Architecture.md](docs/canon/Ambitions_2_0_Product_Architecture.md)
+4. [docs/canon/Ambitions_2_0_Visual_System.md](docs/canon/Ambitions_2_0_Visual_System.md)
+5. Supporting design matrices/specs under [docs/canon/design](docs/canon/design)
+
+Final product promise:
+
+> Ambitions makes my life feel organized, and gives me the concrete steps to accomplish anything I set my mind to.
+
+Expanded thesis:
+
+> Ambitions exists to unlock people's lives by turning ambitions, goals, tasks, plans, and real-world constraints into clear next steps, believable plans, proof of progress, and calm recovery when life changes.
+
+Active product language: Ambitions is an intelligent product, not an AI product. It should not sound like a chat-first AI wrapper.
+
+Active shell: `Today / Goals / Capture / Plan / You`.
+
+`You` is the Personal System Center. `Profile` may remain in compatibility code, but user-facing active canon uses `You`.
+
+Task and Step are not interchangeable: `Task = standalone One-Step Goal`; `Step = action inside a Goal, Path, or Plan`. Tasks can be promoted into Goals, attached to Goals, turned into Rituals, or remain standalone without creating a top-level Tasks tab.
+
+Life Areas and North Stars are active canon. Life Areas are visible inside Goals and You, not a sixth tab. North Stars are long-range dormant or identity-level ambitions under Life Areas.
+
+Smart Attachment is the named Capture system for routing captures to Life Areas, Ambitions, Goals, Plans, Steps, Tasks, Proof, Decisions, Rituals, or Waiting items with editable receipts.
+
+Panel Size and Display Density are active design controls: `Minimal / Balanced / Detailed` and `Compact / Comfortable / Large`, defaulting to `Balanced + Comfortable`.
+
+The official categorized settings/depth pattern is `GroupedNavigationList` with Navigation Section, Navigation Row, Disclosure Navigation Row, Preference Row, Status Navigation Row, and Destructive Action Row.
+
+Calendar permission remains Plan-owned. Calendar read is requested only after explicit Plan action, calendar write requires explicit confirmation, Plan works without calendar access, and onboarding must not request calendar permission.
+
+Notifications are sparse by default, privacy-safe, and operational. Accessibility Nutrition remains unverified until audited; no user-facing accessibility claims should appear before verification evidence exists.
+
 All phases and batches before Batch 61 are complete for planning purposes. Older phase language below is historical where it conflicts with the new Ambitions 2.0 canon.
 
-"Ambitions is a personal operating system for protecting meaningful progress under real-life conditions."
+"Ambitions is a personal life organization system."
 
 Ambitions 2.0 is not merely a planner, habit tracker, goal app, calendar wrapper, analytics dashboard, or beautiful productivity app. The active canon directs the product toward a daily life operating loop with continuity, believability, proof, recovery, correction, trust, memory, focus, strategic pathing, and calmness.
 
@@ -19,6 +59,9 @@ Locked 2.0 direction:
 - top-level tabs are Today, Goals, Capture, Plan, and You
 - Insights is demoted from top-level navigation
 - Habits is absorbed into Plan, rituals, Today execution, and Reviews/pattern reflection
+- Life Areas and North Stars are first-class organization lenses inside Goals and You, not extra tabs
+- Task means standalone One-Step Goal; Step means contained action inside a Goal, Path, or Plan
+- Smart Attachment is the named Capture routing and correction system
 - visual direction is "Calm shell, rich panels, meaningful visual state."
 - execution direction is "Verify truth first, build shared systems once, then transform surfaces, then ship Apple-native external surfaces."
 - Goal / Plan / Task visual canon is newly integrated as planned future work: Goal Lifecycle Rail, Goal Atlas, Proof Spine, Next Visible Step, Goal Weather, Decision Trail, Timeline View, Milestone Cards, Kanban-lite Task Lane, Weekly Plan Strip, and Completion Archive.
@@ -239,13 +282,15 @@ These principles are the product’s operating laws.
 
 Ambitions should resolve downward like this:
 
-**Ambition → Goal → Milestone → Task → Time Block → Today**
+**Life Area → Ambition / North Star → Goal → Path → Plan → Milestone → Step → Proof → Receipt / Review**
 
 And upward like this:
 
-**Today → Progress → Goal pace → Ambition direction**
+**Today → Proof → Plan believability → Goal pace → Ambition / North Star direction → Life Area**
 
 This is what makes the product feel like an operating system rather than a task app.
+
+`Task` is a standalone One-Step Goal. `Step` is an action contained by a larger Goal, Path, or Plan. A Task can be promoted into a Goal, attached to an existing Goal, become a Ritual, or remain standalone with category, time, reminder, location, priority, proof, history, and review value. A top-level Tasks tab is not part of Ambitions canon.
 
 ---
 
@@ -257,9 +302,9 @@ The primary information architecture is:
 
 1. Today
 2. Goals
-3. Plan
-4. Insights
-5. Profile
+3. Capture
+4. Plan
+5. You
 
 The tab bar must be polished, simple, and strong enough to support daily repeated use.
 
@@ -269,9 +314,9 @@ Each top-level surface must answer one dominant question:
 
 - `Today`: What matters now?
 - `Goals`: Where am I headed?
-- `Plan`: How does this week hold together?
-- `Insights`: What am I learning?
-- `Profile / Trust`: How is my system configured?
+- `Capture`: What needs a place?
+- `Plan`: Does this hold together?
+- `You`: How is my system working for me?
 
 This is product doctrine, not sample copy.
 Each surface may contain supporting modules, but its first screenful must resolve its dominant question before the user scrolls.
@@ -310,7 +355,20 @@ Goals must not be a disconnected list. They must show:
 - whether pace is believable
 - confidence to deadline
 
-### 7.4 Plan
+### 7.4 Capture
+
+Capture is the intake and routing surface. It must show:
+
+- fast input
+- Needs a Place
+- suggested routes
+- recent captures
+- Smart Attachment
+- editable receipts
+
+Quick Capture is a separate global action that opens the Quiet Command Sheet. The Capture tab opens the full Capture surface.
+
+### 7.5 Plan
 
 Plan is the weekly shaping surface. It must show:
 
@@ -320,34 +378,42 @@ Plan is the weekly shaping surface. It must show:
 - carryover pressure
 - whether the week is believable
 - how the week serves active goals
+- rituals and recurring execution structures
+- calendar-aware mode only after explicit Plan action
 
-### 7.5 Insights
+### 7.6 You
 
-Insights is the truth layer. It must show:
+You is the Personal System Center. It must show:
 
-- momentum
-- consistency
-- completion patterns
-- drift
-- plan changes
-- whether goals are still on pace
-- how adaptation is changing the plan
+- profile card
+- personal system status
+- light analytics summary
+- next review / trust signal
+- categorized Grouped Navigation Lists
+- What Ambitions Knows
+- Reviews
+- Trust Center
+- Privacy
+- Sync / Export
+- Integrations
+- Appearance
+- Notifications
+- Accessibility
+- Settings
 
-### 7.6 Profile
+### 7.7 Contextual Insights
 
-Profile is for controls, trust, and personalization. It must not hold core workflow.
+Insights is not a top-level tab. Insights is contextual intelligence at the decision point.
 
-It should contain:
+Insight placement:
 
-- appearance
-- habits and defaults
-- notification controls
-- account and sync state
-- integrations health
-- billing if applicable
-- trust and data surfaces
+- Today: contextual insight tied to today's action
+- Goals: goal health, path explanation, and proof
+- Goal Detail: Why This / Why Changed / Decision Trail
+- Plan: believability, pressure, and calendar evidence
+- You: Reviews, memory, personal analytics, and trust
 
-### 7.7 Activity History / Timeline drill-down
+### 7.8 Activity History / Timeline drill-down
 
 Activity History is a supporting drill-down surface, not a top-level tab.
 
@@ -360,7 +426,7 @@ It must show:
 
 This surface exists to make the system feel alive and trustworthy rather than static.
 
-### 7.8 Supporting-route truth
+### 7.9 Supporting-route truth
 
 The transformed frontend may redesign shell behavior, but these route-ownership rules remain the canonical design direction unless a later canon update explicitly replaces them:
 
@@ -371,7 +437,7 @@ The transformed frontend may redesign shell behavior, but these route-ownership 
 - `Memory Lens` is a shell-level recall utility surface, not a tab.
 - `Trust Center` is a You-owned utility and trust surface, not a separate top-level destination.
 
-### 7.9 Cognitive posture truth
+### 7.10 Cognitive posture truth
 
 The transformed frontend uses four product-level cognitive postures that reweight content without turning the shell into a mode-heavy power-user system:
 
@@ -388,8 +454,7 @@ Default posture by top-level surface:
 - `Today`: Focus
 - `Goals`: Triage or Shape depending on whether the user is inspecting or composing direction
 - `Plan`: Shape
-- `Insights`: Reflect
-- `Profile`: Utility, outside the main cognitive set unless trust work is active
+- `You`: Reflect or Utility depending on whether the user is reviewing or configuring trust
 
 Mode shifts must remain obvious, calm, and low-ceremony.
 They should feel like the app is reweighting relevance, not like the user is entering a different operating mode that needs setup.
@@ -1074,12 +1139,14 @@ Acceptance criteria:
 - accent choices do not cheapen the product
 - core components no longer look generic or template-driven
 
-### Phase 18.3 — App shell, navigation, and hierarchy correction
+### Phase 18.3 — Completed / historical app shell, navigation, and hierarchy correction
 **Five-tab shell alignment + hero-first screen structure**
+
+Historical note: this pre-Batch-61 phase is superseded by the Ambitions 2.0 shell and Design Constitution. The active top-level shell is `Today / Goals / Capture / Plan / You`; Insights is contextual and Profile is user-facing `You`.
 
 Must accomplish:
 
-- five-tab IA locked to Today / Goals / Plan / Insights / Profile
+- historical five-tab IA formerly targeted Today / Goals / Plan / Insights / Profile; active canon supersedes this with Today / Goals / Capture / Plan / You
 - premium tab-bar treatment and active-state clarity
 - stronger header behavior and section hierarchy
 - one-main-action-per-view enforcement at top-level surfaces

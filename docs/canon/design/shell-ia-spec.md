@@ -1,5 +1,7 @@
 # Shell IA Spec
 
+Historical/superseded note: This file is preserved pre-Batch-61 frontend transformation context. Active Ambitions 2.0 shell truth is Today / Goals / Capture / Plan / You and now lives in [Ambitions_Design_Constitution.md](Ambitions_Design_Constitution.md). If this file references Today / Goals / Plan / Insights / Profile, Insights as a top-level tab, Profile as the user-facing name, or Habits as a standalone product area, treat those references as historical/superseded.
+
 ## Purpose
 
 Define the canonical iPhone shell, route ownership, entry posture, and cross-route continuity rules for the future frontend transformation program.

@@ -1,5 +1,7 @@
 # Motion and Microinteraction Spec
 
+Historical/superseded note: This file is preserved pre-Batch-61 frontend transformation context. Active Ambitions 2.0 motion truth now lives in [Ambitions_Design_Constitution.md](Ambitions_Design_Constitution.md). If this file conflicts with the active constitution, the constitution wins.
+
 ## Purpose
 
 Define concrete motion grammar, interaction meaning, and haptic intent for transformed Ambitions surfaces.
