@@ -4,6 +4,7 @@ You are working on Ambitions — a premium personal execution app.
 
 This file is standing behavior context for Codex sessions.
 For source-of-truth precedence, read [CONTEXT_INDEX.md](CONTEXT_INDEX.md) first.
+For the free, non-agent, non-GitHub-Actions operating procedure, read [FREE_WORKFLOW_OPERATING_SYSTEM.md](FREE_WORKFLOW_OPERATING_SYSTEM.md).
 When this file conflicts with [CONTEXT_INDEX.md](CONTEXT_INDEX.md), the context index wins.
 Do not rely on prior chat memory.
 
@@ -13,16 +14,19 @@ Before non-trivial planning or implementation, read:
 
 1. [../../AGENTS.md](../../AGENTS.md)
 2. [CONTEXT_INDEX.md](CONTEXT_INDEX.md)
-3. [../canon/Ambitions_2_0_Master_Plan.md](../canon/Ambitions_2_0_Master_Plan.md)
-4. [../canon/Ambitions_2_0_Product_Architecture.md](../canon/Ambitions_2_0_Product_Architecture.md)
-5. [../canon/Ambitions_2_0_Systems_Architecture.md](../canon/Ambitions_2_0_Systems_Architecture.md)
-6. [../canon/Ambitions_2_0_Visual_System.md](../canon/Ambitions_2_0_Visual_System.md)
-7. [../canon/Ambitions_2_0_Roadmap.md](../canon/Ambitions_2_0_Roadmap.md)
-8. [../canon/Ambitions_2_0_Batch_Plan.md](../canon/Ambitions_2_0_Batch_Plan.md)
-9. [BATCH_REGISTRY.md](BATCH_REGISTRY.md)
-10. [../../MASTER_PRODUCT_SPEC.md](../../MASTER_PRODUCT_SPEC.md) for current shipping product truth where not superseded by the new Ambitions 2.0 canon
+3. [FREE_WORKFLOW_OPERATING_SYSTEM.md](FREE_WORKFLOW_OPERATING_SYSTEM.md)
+4. [../canon/Ambitions_2_0_Master_Plan.md](../canon/Ambitions_2_0_Master_Plan.md)
+5. [../canon/Ambitions_2_0_Product_Architecture.md](../canon/Ambitions_2_0_Product_Architecture.md)
+6. [../canon/Ambitions_2_0_Systems_Architecture.md](../canon/Ambitions_2_0_Systems_Architecture.md)
+7. [../canon/Ambitions_2_0_Visual_System.md](../canon/Ambitions_2_0_Visual_System.md)
+8. [../canon/Ambitions_2_0_Roadmap.md](../canon/Ambitions_2_0_Roadmap.md)
+9. [../canon/Ambitions_2_0_Batch_Plan.md](../canon/Ambitions_2_0_Batch_Plan.md)
+10. [BATCH_REGISTRY.md](BATCH_REGISTRY.md)
+11. [../../MASTER_PRODUCT_SPEC.md](../../MASTER_PRODUCT_SPEC.md) for current shipping product truth where not superseded by the new Ambitions 2.0 canon
+12. [../review/VISUAL_REVIEW_CHECKLIST.md](../review/VISUAL_REVIEW_CHECKLIST.md) when visible UI, navigation, empty states, copy, or hierarchy changes
+13. [../review/FRICTION_LOG.md](../review/FRICTION_LOG.md) when observed product friction needs to be captured without expanding scope
 
-Current execution status is Batch 00-82 complete for planning, Batch 83 next queued / next uncompleted, and Batch 84+ future planned roadmap work. Do not skip ahead of the Batch 83+ execution order or active batch unless direct user instructions explicitly change scope.
+Current execution status is Batch 00-85 complete for planning purposes, Batch 86 next queued / next uncompleted, and Batch 87+ future planned roadmap work. Do not skip ahead of the Batch 86+ execution order or active batch unless direct user instructions explicitly change scope.
 
 ## Product identity
 
@@ -132,7 +136,10 @@ Always follow this sequence:
 3. propose the smallest clean plan
 4. implement with minimal integrated changes
 5. verify behavior and UI consistency
-6. summarize clearly
+6. run the relevant free validation routine from `FREE_WORKFLOW_OPERATING_SYSTEM.md`
+7. perform visual review with `docs/review/VISUAL_REVIEW_CHECKLIST.md` when UI changed
+8. document real friction in `docs/review/FRICTION_LOG.md` without expanding active scope
+9. summarize clearly
 
 Never skip directly to coding.
 
@@ -168,6 +175,14 @@ Use when editing documentation.
 - avoid speculation
 - keep instructions actionable
 
+### Review mode
+Use when auditing Codex work.
+- do not change files unless explicitly asked
+- compare completion claims against validation evidence
+- check registry/doc status alignment
+- check for stale batch references
+- identify blockers before the next batch prompt
+
 ## Implementation rules
 
 Before coding:
@@ -184,6 +199,7 @@ After coding:
 - verify UI
 - verify no regressions
 - ensure product tone is preserved
+- run a stale-reference audit before claiming completion
 
 ## Required output format
 
@@ -194,7 +210,9 @@ Always return:
 4. Implementation summary
 5. Files changed
 6. Validation steps
-7. Risks / follow-up work
+7. Visual review result when relevant
+8. Risks / follow-up work
+9. Completion claim
 
 ## Quality bar
 
@@ -217,6 +235,24 @@ Always bias toward:
 - premium feel
 - strong UX decisions
 - cohesive system behavior
+
+## Cost discipline
+
+Do not add paid infrastructure by default.
+
+Avoid unless explicitly approved:
+- GitHub Actions workflows
+- scheduled agents
+- paid cloud runners
+- external paid QA tools
+- new SaaS project-management dependencies
+
+Prefer:
+- local Xcode validation
+- local grep/search audits
+- manual visual review
+- repo-native Markdown checklists
+- clear Codex prompt modes
 
 ## Final rule
 
