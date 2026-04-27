@@ -19,7 +19,7 @@ final class ProfileViewModel {
         case .loading:
             return "loading"
         case let .loaded(dashboard):
-            return "loaded:\(dashboard.hero.stats.count):\(dashboard.trustCenter.items.count):\(dashboard.contextVault.items.count):\(dashboard.integrationsSection.items.count)"
+            return "loaded:\(dashboard.hero.stats.count):\(dashboard.trustCenter.items.count):\(dashboard.controlRoom.entries.count):\(dashboard.memoryControls.items.count):\(dashboard.contextVault.items.count):\(dashboard.integrationsSection.items.count)"
         case let .failed(message):
             return "failed:\(message)"
         }

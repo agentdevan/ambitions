@@ -335,7 +335,7 @@ Every batch definition below inherits the required template:
 - Performance budget, accessibility requirement, no-fake-precision boundary, indispensability scenario improved.
 - Likely files/areas affected, dependencies, out-of-scope items, validation requirements, concrete acceptance criteria, and ready-to-paste Codex prompt.
 
-The compact batch definitions below are canonical sequencing. Current execution status: Batches 00-86 are complete for planning purposes, Batch 87 is the next queued / next uncompleted batch, and Batches 88-120 remain future planned roadmap work. Ready prompts for completed batches are retained as historical implementation prompts, not current execution state.
+The compact batch definitions below are canonical sequencing. Current execution status: Batches 00-88 are complete for planning purposes, Batch 89 is the next queued / next uncompleted batch, and Batches 90-120 remain future planned roadmap work. Ready prompts for completed batches are retained as historical implementation prompts, not current execution state.
 
 ## Phase A - Daily Value, Shell, Activation
 

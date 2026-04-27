@@ -129,9 +129,8 @@ final class AmbitionsUITests: XCTestCase {
         app.tabBars.buttons["You"].tap()
         XCTAssertTrue(app.staticTexts["shell.header.title"].waitForExistence(timeout: 10))
         XCTAssertTrue(scrollUntilElementExists("profile.hero-card", in: app))
-        XCTAssertTrue(scrollUntilElementExists("profile.appearance-studio-card", in: app))
+        XCTAssertTrue(scrollUntilElementExists("profile.control-room-card", in: app))
         XCTAssertTrue(scrollUntilElementExists("profile.trust-center-card", in: app))
-        XCTAssertTrue(scrollUntilElementExists("profile.context-vault-card", in: app))
     }
 
     func testProfileAppearanceStudioControlsAreAccessibleFromKeyboardAndTouch() throws {
@@ -163,12 +162,11 @@ final class AmbitionsUITests: XCTestCase {
 
         app.tabBars.buttons["You"].tap()
 
+        XCTAssertTrue(scrollUntilElementExists("profile.control-room-card", in: app))
         XCTAssertTrue(scrollUntilElementExists("profile.trust-center-card", in: app))
         XCTAssertTrue(scrollUntilStaticTextExists("Trust Center", in: app))
-        XCTAssertTrue(scrollUntilStaticTextExists("Notifications", in: app))
-        XCTAssertTrue(scrollUntilStaticTextExists("Navigation shortcuts", in: app))
-        XCTAssertTrue(scrollUntilStaticTextExists("Share Extension", in: app))
-        XCTAssertTrue(scrollUntilButtonExists("Enable notifications", in: app))
+        XCTAssertTrue(scrollUntilStaticTextExists("Personal Operating Constitution", in: app))
+        XCTAssertTrue(scrollUntilStaticTextExists("Memory Controls", in: app))
     }
 
     func testLaunchURLCanLandOnCanonicalPlanSurface() throws {

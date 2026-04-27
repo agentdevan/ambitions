@@ -7,7 +7,7 @@ Ambitions 1.0 foundation work is complete through registry Batch 18.
 All phases and batches before Batch 61 are complete for planning purposes.
 The active Ambitions 2.0 canon is the post-Batch-60 transformation package beginning at Batch 61. It supersedes prior roadmap direction where conflicts exist after Batch 60 without erasing older launch, hardening, frontend transformation, or release-candidate history.
 
-Current execution status: Batches 00-86 are complete for planning purposes. Batch 87 is the next queued / next uncompleted batch. Batches 88-120 remain future planned roadmap work.
+Current execution status: Batches 00-88 are complete for planning purposes. Batch 89 is the next queued / next uncompleted batch. Batches 90-120 remain future planned roadmap work.
 
 ## Required Read Order
 

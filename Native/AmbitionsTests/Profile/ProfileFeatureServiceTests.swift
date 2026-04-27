@@ -8,13 +8,15 @@ final class ProfileFeatureServiceTests: XCTestCase {
 
         let dashboard = try await service.loadProfileDashboard()
 
-        XCTAssertTrue(dashboard.hero.subtitle.contains("Configuration"))
+        XCTAssertTrue(dashboard.hero.subtitle.contains("Trust Center"))
         XCTAssertTrue(dashboard.trustCenter.pulse.subtitle.contains("Local-first"))
         XCTAssertTrue(dashboard.trustCenter.items.contains(where: { $0.id == "profile-trust-sync" && $0.valueLabel == "Ambitions is running in explicit local-only mode." }))
+        XCTAssertTrue(dashboard.trustCenter.items.contains(where: { $0.id == "profile-trust-accessibility" && $0.valueLabel == "Unverified" }))
+        XCTAssertTrue(dashboard.trustCenter.items.contains(where: { $0.id == "profile-trust-export-import" && $0.valueLabel == "Future planned" }))
         XCTAssertTrue(dashboard.integrationsSection.items.contains(where: { $0.id == "profile-integration-notifications" && $0.valueLabel == "Not requested" }))
         XCTAssertTrue(dashboard.integrationsSection.items.contains(where: { $0.id == "profile-integration-shortcuts" && $0.valueLabel == ExternalSurfaceTruth.productizedNeedsPlatformReview }))
         XCTAssertTrue(dashboard.integrationsSection.items.contains(where: { $0.id == "profile-integration-share" && $0.valueLabel == ExternalSurfaceTruth.productizedNeedsPlatformReview }))
-        XCTAssertTrue(dashboard.trustCenter.footer.contains("states what is local now"))
+        XCTAssertTrue(dashboard.trustCenter.footer.contains("does not claim live sync"))
         XCTAssertFalse(dashboard.trustCenter.footer.contains("Batch 54"))
         XCTAssertTrue(dashboard.accountSection.items.contains(where: { $0.id == "profile-account-billing" && $0.valueLabel == "Not active" }))
         XCTAssertFalse(dashboard.hero.supportingTruth.contains("local device features"))
@@ -119,11 +121,128 @@ final class ProfileFeatureServiceTests: XCTestCase {
 
         let dashboard = try await service.loadProfileDashboard()
 
-        XCTAssertEqual(dashboard.contextVault.title, "Context Vault")
+        XCTAssertEqual(dashboard.contextVault.title, "Local memory map")
         XCTAssertTrue(dashboard.contextVault.items.contains(where: { $0.id == "profile-vault-planning" }))
         XCTAssertTrue(dashboard.defaultsSection.items.contains(where: { $0.id == "profile-default-tab" }))
         XCTAssertTrue(dashboard.integrationsSection.items.contains(where: { $0.id == "profile-integration-widgets" }))
         XCTAssertEqual(dashboard.appearanceStudio.title, "Appearance Studio")
+    }
+
+    func testYouControlRoomProjectsBatch87TrustAreasWithoutFutureBatchClaims() async throws {
+        let repositories = try await makeRepositories()
+        let service = RepositoryBackedProfileService(repositories: repositories)
+
+        let dashboard = try await service.loadProfileDashboard()
+
+        XCTAssertEqual(dashboard.controlRoom.entries.map(\.id), [
+            "profile-control-constitution",
+            "profile-control-memory",
+            "profile-control-corrections",
+            "profile-control-receipts"
+        ])
+        XCTAssertEqual(dashboard.constitution.title, "Personal Operating Constitution")
+        XCTAssertTrue(dashboard.constitution.rules.contains(where: { $0.id == "constitution-calendar" && $0.detail.contains("never silent") }))
+        XCTAssertTrue(dashboard.receiptAudit.items.contains(where: { $0.id == "profile-receipts-review" && $0.title == "Reviews v1" }))
+        XCTAssertTrue(dashboard.receiptAudit.subtitle.contains("Reviews now"))
+    }
+
+    func testReviewsV1IsYouOwnedAndTruthfulWithoutRestoringInsightsTab() async throws {
+        let repositories = try await makeRepositories()
+        try await repositories.eventLedger.append(
+            EventLedgerEntry(
+                id: "ledger-review-action",
+                kind: .actionCompleted,
+                occurredAt: "2026-04-27T10:30:00Z",
+                source: .today,
+                title: "Action completed",
+                summary: "Finished one protected move.",
+                tone: .positive
+            )
+        )
+        let service = RepositoryBackedProfileService(repositories: repositories)
+
+        let dashboard = try await service.loadProfileDashboard()
+
+        XCTAssertEqual(dashboard.reviews.title, "Reviews")
+        XCTAssertEqual(dashboard.reviews.projection.lifeOSReceipt.statusLabel, "Based on recent actions")
+        XCTAssertTrue(dashboard.reviews.projection.lifeOSReceipt.meaningfulEvents.contains(where: { $0.valueLabel == "Completed" }))
+        XCTAssertTrue(dashboard.reviews.footer.contains("does not restore Insights as a tab"))
+        XCTAssertFalse(AppTab.allCases.map(\.title).contains("Insights"))
+        XCTAssertTrue(dashboard.reviews.projection.period.trustWhisper.contains("No live sync"))
+        XCTAssertFalse(dashboard.reviews.projection.period.trustWhisper.localizedCaseInsensitiveContains("synced everywhere"))
+        XCTAssertFalse(dashboard.reviews.projection.period.trustWhisper.localizedCaseInsensitiveContains("verified accessible"))
+    }
+
+    func testMemoryControlsDoNotExposeUnsupportedDestructiveDeletion() async throws {
+        let repositories = try await makeRepositories()
+        let service = RepositoryBackedProfileService(repositories: repositories)
+
+        let dashboard = try await service.loadProfileDashboard()
+
+        let forget = try XCTUnwrap(dashboard.memoryControls.items.first(where: { $0.id == "profile-memory-forget" }))
+        XCTAssertEqual(forget.valueLabel, "Unavailable")
+        XCTAssertTrue(forget.subtitle?.contains("Destructive memory deletion is not exposed here") ?? false)
+        XCTAssertTrue(dashboard.automationBoundary.rules.contains(where: {
+            $0.id == "automation-memory" &&
+            $0.statusLabel == "Blocked safely"
+        }))
+        XCTAssertTrue(dashboard.automationBoundary.footer.contains("does not execute"))
+    }
+
+    func testCorrectionsAndLedgerCountsUseExistingLocalRepositories() async throws {
+        let repositories = try await makeRepositories()
+        try await repositories.teaching.saveSignals([
+            GoalTeachingSignal(
+                id: "teaching-1",
+                goalID: "goal-1",
+                createdAt: "2026-04-27T10:00:00Z",
+                updatedAt: "2026-04-27T10:00:00Z",
+                source: .explicitManualCorrection,
+                kind: .energyFitCorrection,
+                disposition: .active,
+                anchor: GoalTeachingStableAnchor(
+                    artifactKind: .energyEvaluation,
+                    canonicalField: nil,
+                    candidateID: nil,
+                    stageID: nil,
+                    stepID: "step-1",
+                    targetFingerprint: "energy::step-1",
+                    contradictionCode: nil,
+                    contradictionArtifactRefs: []
+                ),
+                payload: .energyFit(.init(correctedDisposition: .lighterVersionNeeded)),
+                applicationKey: "goal##energy##step",
+                userNote: "Use a lighter version"
+            )
+        ])
+        try await repositories.eventLedger.append(
+            EventLedgerEntry(
+                id: "ledger-correction",
+                kind: .userCorrectionAdded,
+                occurredAt: "2026-04-27T10:01:00Z",
+                source: .you,
+                title: "Correction recorded",
+                summary: "Use a lighter version.",
+                tone: .correction,
+                privacy: .standard,
+                localOnly: true
+            )
+        )
+        let service = RepositoryBackedProfileService(repositories: repositories)
+
+        let dashboard = try await service.loadProfileDashboard()
+
+        XCTAssertTrue(dashboard.memoryControls.items.contains(where: { $0.id == "profile-memory-corrections" && $0.valueLabel == "1 local" }))
+        XCTAssertTrue(dashboard.assumptionCorrections.items.contains(where: { $0.id == "profile-correction-active" && $0.valueLabel == "1 active" }))
+        XCTAssertTrue(dashboard.assumptionCorrections.items.contains(where: { $0.id == "profile-correction-ledger" && $0.valueLabel == "1 recent" }))
+        XCTAssertTrue(dashboard.contextVault.items.contains(where: { $0.id == "profile-vault-signals" && $0.detail.contains("1 recent ledger events") }))
+    }
+
+    func testTopLevelShellStillExcludesLegacyProfileInsightsAndHabitsTabs() {
+        XCTAssertEqual(AppTab.allCases.map(\.title), ["Today", "Goals", "Capture", "Plan", "You"])
+        XCTAssertFalse(AppTab.allCases.map(\.title).contains("Profile"))
+        XCTAssertFalse(AppTab.allCases.map(\.title).contains("Insights"))
+        XCTAssertFalse(AppTab.allCases.map(\.title).contains("Habits"))
     }
 }
 

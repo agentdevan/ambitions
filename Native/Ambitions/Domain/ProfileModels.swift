@@ -83,6 +83,73 @@ struct ProfileTrustCenterState: Sendable, Equatable {
     let footer: String
 }
 
+struct ProfileControlRoomEntry: Identifiable, Sendable, Equatable {
+    let id: String
+    let title: String
+    let subtitle: String
+    let icon: String
+    let statusLabel: String
+    let state: AmbitionVisualState
+}
+
+struct ProfileControlRoomState: Sendable, Equatable {
+    let title: String
+    let subtitle: String
+    let entries: [ProfileControlRoomEntry]
+    let footer: String
+}
+
+struct ProfileConstitutionRule: Identifiable, Sendable, Equatable {
+    let id: String
+    let title: String
+    let detail: String
+    let statusLabel: String
+    let state: AmbitionVisualState
+}
+
+struct ProfileConstitutionState: Sendable, Equatable {
+    let title: String
+    let subtitle: String
+    let postureSummary: String
+    let rules: [ProfileConstitutionRule]
+    let footer: String
+}
+
+struct ProfileMemoryControlState: Sendable, Equatable {
+    let title: String
+    let subtitle: String
+    let items: [SettingsItem]
+    let footer: String
+}
+
+struct ProfileAssumptionCorrectionState: Sendable, Equatable {
+    let title: String
+    let subtitle: String
+    let items: [SettingsItem]
+    let footer: String
+}
+
+struct ProfileAutomationBoundaryState: Sendable, Equatable {
+    let title: String
+    let subtitle: String
+    let rules: [ProfileConstitutionRule]
+    let footer: String
+}
+
+struct ProfileReceiptAuditState: Sendable, Equatable {
+    let title: String
+    let subtitle: String
+    let items: [SettingsItem]
+    let footer: String
+}
+
+struct ProfileReviewsState: Sendable, Equatable {
+    let projection: ReviewsV1Projection
+    let title: String
+    let subtitle: String
+    let footer: String
+}
+
 struct ProfileContextVaultItem: Identifiable, Sendable, Equatable {
     let id: String
     let title: String
@@ -131,6 +198,13 @@ struct ProfilePreferencesUpdate: Sendable, Equatable {
 
 struct ProfileDashboard: Sendable, Equatable {
     let hero: ProfileHeroState
+    let controlRoom: ProfileControlRoomState
+    let constitution: ProfileConstitutionState
+    let memoryControls: ProfileMemoryControlState
+    let assumptionCorrections: ProfileAssumptionCorrectionState
+    let automationBoundary: ProfileAutomationBoundaryState
+    let receiptAudit: ProfileReceiptAuditState
+    let reviews: ProfileReviewsState
     let appearanceStudio: ProfileAppearanceStudioState
     let trustCenter: ProfileTrustCenterState
     let contextVault: ProfileContextVaultState

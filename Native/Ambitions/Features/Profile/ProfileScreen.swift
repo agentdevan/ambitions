@@ -35,6 +35,44 @@ struct ProfileScreen: View {
                 case let .loaded(dashboard):
                     ProfileHeroCard(hero: dashboard.hero)
 
+                    ProfileControlRoomCard(controlRoom: dashboard.controlRoom)
+
+                    ProfileTrustCenterCard(
+                        trustCenter: dashboard.trustCenter,
+                        notificationActionTitle: dashboard.notificationAuthorization.actionTitle,
+                        onEnableNotifications: requestNotificationAuthorization
+                    )
+
+                    ProfileConstitutionCard(constitution: dashboard.constitution)
+
+                    ProfileMemoryControlsCard(memoryControls: dashboard.memoryControls)
+
+                    ProfileSectionCard(
+                        eyebrow: "Correction",
+                        section: ProfileSectionGroup(
+                            title: dashboard.assumptionCorrections.title,
+                            subtitle: dashboard.assumptionCorrections.subtitle,
+                            items: dashboard.assumptionCorrections.items,
+                            footer: dashboard.assumptionCorrections.footer
+                        ),
+                        accessibilityIdentifier: "profile.corrections-card"
+                    )
+
+                    ProfileAutomationBoundaryCard(boundary: dashboard.automationBoundary)
+
+                    ProfileSectionCard(
+                        eyebrow: "Receipts",
+                        section: ProfileSectionGroup(
+                            title: dashboard.receiptAudit.title,
+                            subtitle: dashboard.receiptAudit.subtitle,
+                            items: dashboard.receiptAudit.items,
+                            footer: dashboard.receiptAudit.footer
+                        ),
+                        accessibilityIdentifier: "profile.receipts-card"
+                    )
+
+                    ProfileReviewsCard(reviews: dashboard.reviews)
+
                     ProfileAppearanceStudioCard(
                         studio: dashboard.appearanceStudio,
                         appearancePreference: $viewModel.appearancePreference,
@@ -48,12 +86,6 @@ struct ProfileScreen: View {
                         section: dashboard.defaultsSection,
                         preferredTab: $viewModel.preferredTab,
                         reviewCadenceDays: $viewModel.reviewCadenceDays
-                    )
-
-                    ProfileTrustCenterCard(
-                        trustCenter: dashboard.trustCenter,
-                        notificationActionTitle: dashboard.notificationAuthorization.actionTitle,
-                        onEnableNotifications: requestNotificationAuthorization
                     )
 
                     if let permissionState = notificationPermissionState(for: dashboard) {
@@ -92,7 +124,7 @@ struct ProfileScreen: View {
             .padding(.vertical, theme.spacing.md)
         }
         .scrollIndicators(.hidden)
-        .navigationTitle(showsNavigationChrome ? "Profile" : "")
+        .navigationTitle(showsNavigationChrome ? "You" : "")
         .refreshable {
             await refresh()
         }
@@ -166,7 +198,7 @@ private struct ProfileHeroCard: View {
         HeroCard(state: hero.status) {
             VStack(alignment: .leading, spacing: theme.spacing.md) {
                 VStack(alignment: .leading, spacing: theme.spacing.xxs) {
-                    Text("Profile / Trust")
+                    Text("You / Trust")
                         .font(theme.typography.micro)
                         .foregroundStyle(theme.colors.accentWarm)
                     Text(hero.title)
@@ -194,7 +226,7 @@ private struct ProfileHeroCard: View {
                     }
                 }
 
-                LazyVGrid(columns: [GridItem(.flexible()), GridItem(.flexible())], spacing: theme.spacing.sm) {
+                LazyVGrid(columns: [GridItem(.flexible())], spacing: theme.spacing.sm) {
                     ForEach(hero.stats) { metric in
                         ProfileMetricTile(metric: metric)
                     }
@@ -213,6 +245,427 @@ private struct ProfileHeroCard: View {
         }
         .accessibilityIdentifier("profile.hero-card")
         .ambitionPanelAccessibility()
+    }
+}
+
+private struct ProfileControlRoomCard: View {
+    @Environment(\.ambitionTheme) private var theme
+
+    let controlRoom: ProfileControlRoomState
+
+    var body: some View {
+        AppCard {
+            VStack(alignment: .leading, spacing: theme.spacing.md) {
+                SectionHeader(
+                    eyebrow: "Trust map",
+                    title: controlRoom.title,
+                    subtitle: controlRoom.subtitle
+                )
+
+                LazyVGrid(columns: [GridItem(.flexible()), GridItem(.flexible())], spacing: theme.spacing.sm) {
+                    ForEach(controlRoom.entries) { entry in
+                        VStack(alignment: .leading, spacing: theme.spacing.xs) {
+                            HStack(alignment: .top, spacing: theme.spacing.xs) {
+                                Image(systemName: entry.icon)
+                                    .font(.system(size: theme.icon.mediumSize, weight: theme.icon.symbolWeight))
+                                    .foregroundStyle(theme.colors.accentPrimary)
+                                    .frame(width: 24)
+                                Spacer()
+                                TagPill(entry.statusLabel, state: entry.state)
+                            }
+
+                            Text(entry.title)
+                                .font(theme.typography.section)
+                                .foregroundStyle(theme.colors.textPrimary)
+                            Text(entry.subtitle)
+                                .font(theme.typography.caption)
+                                .foregroundStyle(theme.colors.textSecondary)
+                                .fixedSize(horizontal: false, vertical: true)
+                        }
+                        .frame(maxWidth: .infinity, minHeight: 150, alignment: .topLeading)
+                        .padding(theme.spacing.sm)
+                        .background(RoundedRectangle(cornerRadius: theme.radius.lg, style: .continuous).fill(theme.colors.surfaceOverlay))
+                        .overlay(RoundedRectangle(cornerRadius: theme.radius.lg, style: .continuous).stroke(theme.colors.strokeSubtle, lineWidth: 1))
+                    }
+                }
+
+                Text(controlRoom.footer)
+                    .font(theme.typography.caption)
+                    .foregroundStyle(theme.colors.textTertiary)
+                    .fixedSize(horizontal: false, vertical: true)
+            }
+        }
+        .accessibilityIdentifier("profile.control-room-card")
+        .ambitionPanelAccessibility()
+    }
+}
+
+private struct ProfileConstitutionCard: View {
+    @Environment(\.ambitionTheme) private var theme
+
+    let constitution: ProfileConstitutionState
+
+    var body: some View {
+        AppCard {
+            VStack(alignment: .leading, spacing: theme.spacing.md) {
+                SectionHeader(
+                    eyebrow: "Constitution",
+                    title: constitution.title,
+                    subtitle: constitution.subtitle
+                )
+
+                HStack(alignment: .top, spacing: theme.spacing.sm) {
+                    Image(systemName: "checkmark.shield")
+                        .font(.system(size: theme.icon.mediumSize, weight: theme.icon.symbolWeight))
+                        .foregroundStyle(theme.colors.accentPrimary)
+                    Text(constitution.postureSummary)
+                        .font(theme.typography.section)
+                        .foregroundStyle(theme.colors.textPrimary)
+                        .fixedSize(horizontal: false, vertical: true)
+                    Spacer()
+                }
+                .padding(theme.spacing.md)
+                .background(RoundedRectangle(cornerRadius: theme.radius.lg, style: .continuous).fill(theme.colors.surfaceOverlay))
+                .overlay(RoundedRectangle(cornerRadius: theme.radius.lg, style: .continuous).stroke(theme.colors.strokeSubtle, lineWidth: 1))
+
+                VStack(alignment: .leading, spacing: theme.spacing.sm) {
+                    ForEach(constitution.rules) { rule in
+                        ProfileRuleRow(rule: rule)
+                    }
+                }
+
+                Text(constitution.footer)
+                    .font(theme.typography.caption)
+                    .foregroundStyle(theme.colors.textTertiary)
+                    .fixedSize(horizontal: false, vertical: true)
+            }
+        }
+        .accessibilityIdentifier("profile.constitution-card")
+        .ambitionPanelAccessibility()
+    }
+}
+
+private struct ProfileMemoryControlsCard: View {
+    let memoryControls: ProfileMemoryControlState
+
+    var body: some View {
+        ProfileSectionCard(
+            eyebrow: "Memory",
+            section: ProfileSectionGroup(
+                title: memoryControls.title,
+                subtitle: memoryControls.subtitle,
+                items: memoryControls.items,
+                footer: memoryControls.footer
+            ),
+            accessibilityIdentifier: "profile.memory-controls-card"
+        )
+    }
+}
+
+private struct ProfileAutomationBoundaryCard: View {
+    @Environment(\.ambitionTheme) private var theme
+
+    let boundary: ProfileAutomationBoundaryState
+
+    var body: some View {
+        AppCard {
+            VStack(alignment: .leading, spacing: theme.spacing.md) {
+                SectionHeader(
+                    eyebrow: "Boundaries",
+                    title: boundary.title,
+                    subtitle: boundary.subtitle
+                )
+
+                VStack(alignment: .leading, spacing: theme.spacing.sm) {
+                    ForEach(boundary.rules) { rule in
+                        ProfileRuleRow(rule: rule)
+                    }
+                }
+
+                Text(boundary.footer)
+                    .font(theme.typography.caption)
+                    .foregroundStyle(theme.colors.textTertiary)
+                    .fixedSize(horizontal: false, vertical: true)
+            }
+        }
+        .accessibilityIdentifier("profile.automation-boundary-card")
+        .ambitionPanelAccessibility()
+    }
+}
+
+private struct ProfileReviewsCard: View {
+    @Environment(\.ambitionTheme) private var theme
+
+    let reviews: ProfileReviewsState
+
+    var body: some View {
+        let projection = reviews.projection
+
+        AppCard {
+            VStack(alignment: .leading, spacing: theme.spacing.md) {
+                SectionHeader(
+                    eyebrow: "Reviews",
+                    title: reviews.title,
+                    subtitle: reviews.subtitle
+                )
+
+                VStack(alignment: .leading, spacing: theme.spacing.sm) {
+                    HStack(alignment: .top, spacing: theme.spacing.sm) {
+                        Image(systemName: "rectangle.stack.badge.play")
+                            .font(.system(size: theme.icon.mediumSize, weight: theme.icon.symbolWeight))
+                            .foregroundStyle(theme.colors.accentPrimary)
+                        VStack(alignment: .leading, spacing: theme.spacing.xxxs) {
+                            Text(projection.period.timeframeLabel)
+                                .font(theme.typography.micro)
+                                .foregroundStyle(theme.colors.accentWarm)
+                            Text(projection.period.title)
+                                .font(theme.typography.titleCompact)
+                                .foregroundStyle(theme.colors.textPrimary)
+                            Text(projection.period.dominantTruth)
+                                .font(theme.typography.body)
+                                .foregroundStyle(theme.colors.textSecondary)
+                                .fixedSize(horizontal: false, vertical: true)
+                        }
+                        Spacer()
+                        TagPill(projection.lifeOSReceipt.statusLabel, state: projection.period.state)
+                    }
+                    .padding(theme.spacing.md)
+                    .background(RoundedRectangle(cornerRadius: theme.radius.lg, style: .continuous).fill(theme.colors.surfaceOverlay))
+                    .overlay(RoundedRectangle(cornerRadius: theme.radius.lg, style: .continuous).stroke(theme.colors.strokeSubtle, lineWidth: 1))
+
+                    Text(projection.period.trustWhisper)
+                        .font(theme.typography.caption)
+                        .foregroundStyle(theme.colors.textTertiary)
+                        .fixedSize(horizontal: false, vertical: true)
+                }
+
+                ProfileReviewCluster(
+                    title: projection.recovery.title,
+                    subtitle: projection.recovery.subtitle,
+                    emptyTitle: projection.recovery.emptyStateTitle,
+                    emptyDetail: projection.recovery.emptyStateDetail,
+                    items: Array((projection.recovery.whatRecovered + projection.recovery.whatWasProtected + projection.recovery.needsReview).prefix(4))
+                )
+
+                ProfileReviewCluster(
+                    title: projection.lifeOSReceipt.title,
+                    subtitle: projection.lifeOSReceipt.subtitle,
+                    emptyTitle: projection.lifeOSReceipt.emptyStateTitle,
+                    emptyDetail: projection.lifeOSReceipt.emptyStateDetail,
+                    items: Array((projection.lifeOSReceipt.receiptHighlights + projection.lifeOSReceipt.meaningfulEvents).prefix(4))
+                )
+
+                if projection.proofHighlights.isEmpty == false {
+                    VStack(alignment: .leading, spacing: theme.spacing.sm) {
+                        SectionHeader(title: "Proof highlights", subtitle: "Recent evidence that can make the next review more grounded.")
+                        ForEach(projection.proofHighlights) { proof in
+                            ProfileReviewProofRow(proof: proof)
+                        }
+                    }
+                }
+
+                VStack(alignment: .leading, spacing: theme.spacing.sm) {
+                    SectionHeader(title: "Carry forward", subtitle: "The smallest useful thing to keep visible after this review.")
+                    ForEach(projection.carryForward) { item in
+                        ProfileCarryForwardRow(item: item)
+                    }
+                }
+
+                if projection.correctionPrompts.isEmpty == false {
+                    VStack(alignment: .leading, spacing: theme.spacing.sm) {
+                        SectionHeader(title: "Corrections", subtitle: "Existing correction paths stay user-directed.")
+                        ForEach(projection.correctionPrompts.prefix(2)) { prompt in
+                            ProfileCorrectionPromptRow(prompt: prompt)
+                        }
+                    }
+                }
+
+                VStack(alignment: .leading, spacing: theme.spacing.sm) {
+                    SectionHeader(title: "Unavailable here", subtitle: "Trust notes for what this review does not claim.")
+                    ForEach(projection.unavailableNotes.prefix(3)) { note in
+                        ProfileReviewSignalRow(item: note)
+                    }
+                }
+
+                Text(reviews.footer)
+                    .font(theme.typography.caption)
+                    .foregroundStyle(theme.colors.textTertiary)
+                    .fixedSize(horizontal: false, vertical: true)
+            }
+        }
+        .accessibilityIdentifier("profile.reviews-card")
+        .ambitionPanelAccessibility()
+    }
+}
+
+private struct ProfileReviewCluster: View {
+    @Environment(\.ambitionTheme) private var theme
+
+    let title: String
+    let subtitle: String
+    let emptyTitle: String
+    let emptyDetail: String
+    let items: [ReviewSignalItem]
+
+    var body: some View {
+        VStack(alignment: .leading, spacing: theme.spacing.sm) {
+            SectionHeader(title: title, subtitle: subtitle)
+
+            if items.isEmpty {
+                VStack(alignment: .leading, spacing: theme.spacing.xs) {
+                    TagPill("Available after more activity", icon: "clock", state: .default)
+                    Text(emptyTitle)
+                        .font(theme.typography.section)
+                        .foregroundStyle(theme.colors.textPrimary)
+                    Text(emptyDetail)
+                        .font(theme.typography.body)
+                        .foregroundStyle(theme.colors.textSecondary)
+                        .fixedSize(horizontal: false, vertical: true)
+                }
+                .frame(maxWidth: .infinity, alignment: .leading)
+                .padding(theme.spacing.md)
+                .background(RoundedRectangle(cornerRadius: theme.radius.lg, style: .continuous).fill(theme.colors.surfaceOverlay))
+                .overlay(RoundedRectangle(cornerRadius: theme.radius.lg, style: .continuous).stroke(theme.colors.strokeSubtle, lineWidth: 1))
+            } else {
+                ForEach(items) { item in
+                    ProfileReviewSignalRow(item: item)
+                }
+            }
+        }
+    }
+}
+
+private struct ProfileReviewSignalRow: View {
+    @Environment(\.ambitionTheme) private var theme
+
+    let item: ReviewSignalItem
+
+    var body: some View {
+        HStack(alignment: .top, spacing: theme.spacing.sm) {
+            Image(systemName: item.icon)
+                .font(.system(size: theme.icon.smallSize, weight: theme.icon.symbolWeight))
+                .foregroundStyle(theme.colors.accentPrimary)
+                .frame(width: 22)
+            VStack(alignment: .leading, spacing: theme.spacing.xxxs) {
+                Text(item.title)
+                    .font(theme.typography.bodyEmphasized)
+                    .foregroundStyle(theme.colors.textPrimary)
+                Text(item.detail)
+                    .font(theme.typography.caption)
+                    .foregroundStyle(theme.colors.textSecondary)
+                    .fixedSize(horizontal: false, vertical: true)
+            }
+            Spacer(minLength: theme.spacing.sm)
+            TagPill(item.valueLabel, state: item.state)
+        }
+        .padding(theme.spacing.sm)
+        .background(RoundedRectangle(cornerRadius: theme.radius.md, style: .continuous).fill(theme.colors.surfaceOverlay))
+        .overlay(RoundedRectangle(cornerRadius: theme.radius.md, style: .continuous).stroke(theme.colors.strokeSubtle, lineWidth: 1))
+    }
+}
+
+private struct ProfileReviewProofRow: View {
+    @Environment(\.ambitionTheme) private var theme
+
+    let proof: ReviewProofHighlight
+
+    var body: some View {
+        HStack(alignment: .top, spacing: theme.spacing.sm) {
+            Image(systemName: "checkmark.seal")
+                .font(.system(size: theme.icon.smallSize, weight: theme.icon.symbolWeight))
+                .foregroundStyle(theme.colors.accentPrimary)
+            VStack(alignment: .leading, spacing: theme.spacing.xxxs) {
+                Text(proof.title)
+                    .font(theme.typography.bodyEmphasized)
+                    .foregroundStyle(theme.colors.textPrimary)
+                Text(proof.detail)
+                    .font(theme.typography.caption)
+                    .foregroundStyle(theme.colors.textSecondary)
+                    .fixedSize(horizontal: false, vertical: true)
+            }
+            Spacer()
+            TagPill(proof.valueLabel, state: proof.state)
+        }
+        .padding(theme.spacing.sm)
+        .background(RoundedRectangle(cornerRadius: theme.radius.md, style: .continuous).fill(theme.colors.surfaceOverlay))
+        .overlay(RoundedRectangle(cornerRadius: theme.radius.md, style: .continuous).stroke(theme.colors.strokeSubtle, lineWidth: 1))
+    }
+}
+
+private struct ProfileCarryForwardRow: View {
+    @Environment(\.ambitionTheme) private var theme
+
+    let item: ReviewCarryForwardItem
+
+    var body: some View {
+        VStack(alignment: .leading, spacing: theme.spacing.xs) {
+            TagPill(item.actionLabel, icon: "arrow.forward", state: item.state)
+            Text(item.title)
+                .font(theme.typography.section)
+                .foregroundStyle(theme.colors.textPrimary)
+            Text(item.detail)
+                .font(theme.typography.body)
+                .foregroundStyle(theme.colors.textSecondary)
+                .fixedSize(horizontal: false, vertical: true)
+        }
+        .frame(maxWidth: .infinity, alignment: .leading)
+        .padding(theme.spacing.md)
+        .background(RoundedRectangle(cornerRadius: theme.radius.lg, style: .continuous).fill(theme.colors.surfaceOverlay))
+        .overlay(RoundedRectangle(cornerRadius: theme.radius.lg, style: .continuous).stroke(theme.colors.strokeSubtle, lineWidth: 1))
+    }
+}
+
+private struct ProfileCorrectionPromptRow: View {
+    @Environment(\.ambitionTheme) private var theme
+
+    let prompt: ReviewCorrectionPrompt
+
+    var body: some View {
+        HStack(alignment: .top, spacing: theme.spacing.sm) {
+            Image(systemName: "checkmark.bubble")
+                .font(.system(size: theme.icon.smallSize, weight: theme.icon.symbolWeight))
+                .foregroundStyle(theme.colors.accentPrimary)
+            VStack(alignment: .leading, spacing: theme.spacing.xxxs) {
+                Text(prompt.title)
+                    .font(theme.typography.bodyEmphasized)
+                    .foregroundStyle(theme.colors.textPrimary)
+                Text(prompt.detail)
+                    .font(theme.typography.caption)
+                    .foregroundStyle(theme.colors.textSecondary)
+                    .fixedSize(horizontal: false, vertical: true)
+            }
+            Spacer()
+            TagPill(prompt.actionLabel, state: prompt.state)
+        }
+        .padding(theme.spacing.sm)
+        .background(RoundedRectangle(cornerRadius: theme.radius.md, style: .continuous).fill(theme.colors.surfaceOverlay))
+        .overlay(RoundedRectangle(cornerRadius: theme.radius.md, style: .continuous).stroke(theme.colors.strokeSubtle, lineWidth: 1))
+    }
+}
+
+private struct ProfileRuleRow: View {
+    @Environment(\.ambitionTheme) private var theme
+
+    let rule: ProfileConstitutionRule
+
+    var body: some View {
+        VStack(alignment: .leading, spacing: theme.spacing.xs) {
+            TagPill(rule.statusLabel, state: rule.state)
+
+            VStack(alignment: .leading, spacing: theme.spacing.xxxs) {
+                Text(rule.title)
+                    .font(theme.typography.section)
+                    .foregroundStyle(theme.colors.textPrimary)
+                Text(rule.detail)
+                    .font(theme.typography.body)
+                    .foregroundStyle(theme.colors.textSecondary)
+                    .fixedSize(horizontal: false, vertical: true)
+            }
+        }
+        .frame(maxWidth: .infinity, alignment: .leading)
+        .padding(theme.spacing.md)
+        .background(RoundedRectangle(cornerRadius: theme.radius.lg, style: .continuous).fill(theme.colors.surfaceOverlay))
+        .overlay(RoundedRectangle(cornerRadius: theme.radius.lg, style: .continuous).stroke(theme.colors.strokeSubtle, lineWidth: 1))
     }
 }
 

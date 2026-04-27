@@ -57,7 +57,25 @@ Candidate owner: Batch XX / Future batch / Docs reconciliation / Unknown
 
 ## Open friction
 
-_No open friction logged yet._
+## 2026-04-27 — You trust rows wrap too narrowly during review
+
+Status: Open
+Severity: Medium
+Surface: You
+Observed in: Simulator screenshot review
+Candidate owner: Future batch
+
+### What happened
+- During Batch 88 wrap-up review on iPhone 17, several existing You trust/control rows wrapped labels and body copy into very narrow columns, making cards like Accessibility Nutrition, Event Ledger, and Active corrections harder to scan.
+
+### Why it matters
+- The copy remains truthful, but the visual hierarchy is harder to understand quickly and weakens the calm trust-center feel.
+
+### Desired outcome
+- Revisit row layout constraints so labels, status pills, and body copy keep a readable measure without changing the top-level shell or adding new surfaces.
+
+### Notes / evidence
+- Observed while navigating the existing You surface during simulator visual review; this was not required to complete Batch 88 and was not fixed in the wrap-up pass.
 
 ## Resolved friction
 

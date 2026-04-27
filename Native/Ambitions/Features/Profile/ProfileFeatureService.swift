@@ -54,6 +54,7 @@ private extension RepositoryBackedProfileService {
         let feedback: [GoalFeedbackEvent]
         let captures: [Capture]
         let teachingSignals: [GoalTeachingSignal]
+        let eventLedger: [EventLedgerEntry]
         let appState: AppStateSnapshot
     }
 
@@ -64,6 +65,7 @@ private extension RepositoryBackedProfileService {
         async let feedback = repositories.feedback.listEvents(goalID: nil)
         async let captures = repositories.captures.listCaptures()
         async let teachingSignals = repositories.teaching.listSignals(goalID: nil)
+        async let eventLedger = repositories.eventLedger.fetchRecent(limit: 12)
         async let appState = repositories.appState.loadState()
 
         return try await Snapshot(
@@ -73,6 +75,7 @@ private extension RepositoryBackedProfileService {
             feedback: feedback,
             captures: captures,
             teachingSignals: teachingSignals,
+            eventLedger: eventLedger,
             appState: appState
         )
     }
@@ -85,10 +88,6 @@ private extension RepositoryBackedProfileService {
         calendarAuthorization: CalendarRemindersAuthorizationState
     ) -> ProfileDashboard {
         let activeGoals = snapshot.goals.filter { $0.state == .active }.count
-        let liveHabits = snapshot.goals.filter { goal in
-            guard let step = HabitGoalSemantics.preferredStep(in: goal) else { return false }
-            return HabitGoalSemantics.isHabitLike(goal: goal, step: step)
-        }.count
         let clarificationCount = snapshot.drafts.filter { $0.latestResultKind == .clarificationRequired }.count
         let blockedCount = snapshot.drafts.filter { $0.latestResultKind == .blocked }.count
         let openCaptures = snapshot.captures.filter { $0.status != .archived }.count
@@ -97,37 +96,95 @@ private extension RepositoryBackedProfileService {
         let notificationStatus = notificationAuthorizationStatus(notificationAuthorization)
         let syncState = syncVisualState(syncStatus)
         let appearanceSummary = "\(snapshot.appState.appearancePreference.title) mode with \(snapshot.appState.accentFamily.title)"
-        let contextSignals = snapshot.evidence.count + snapshot.feedback.count + snapshot.teachingSignals.count
+        let eventLedgerCount = snapshot.eventLedger.count
+        let contextSignals = snapshot.evidence.count + snapshot.feedback.count + snapshot.teachingSignals.count + eventLedgerCount
+        let safetySamples = safetyBoundarySamples()
+        let policyReceipts = makePolicyReceipts(safetySamples: safetySamples)
+        let reviews = makeReviews(
+            snapshot: snapshot,
+            receipts: policyReceipts,
+            calendarAuthorization: calendarAuthorization
+        )
 
         return ProfileDashboard(
             hero: ProfileHeroState(
                 title: profileTitle,
-                subtitle: "Configuration, trust, and optional personalization stay calm and explicit here.",
+                subtitle: "Your Trust Center for what Ambitions knows, what it can do, and what it will not change silently.",
                 dominantTruth: dominantTruth(
                     syncStatus: syncStatus,
                     notificationStatus: notificationStatus,
                     appearanceSummary: appearanceSummary
                 ),
-                supportingTruth: "System configuration stays separate from workflow. Optional context stays inspectable, local-first, and reversible.",
-                trustWhisper: "Current trust posture: your work starts locally, and optional permissions can wait.",
+                supportingTruth: "Ambitions starts local-first, keeps risky actions confirmation-gated, and treats memory as something you can inspect and correct.",
+                trustWhisper: "No silent calendar changes. No active cloud sync claim. No destructive memory deletion from this surface.",
                 status: syncState,
                 pills: [
                     ProfileStatusPill(id: "profile-pill-appearance", title: appearanceSummary, icon: "paintpalette", state: .selected),
                     ProfileStatusPill(id: "profile-pill-sync", title: syncStatus.detail, icon: "lock.shield", state: syncState),
                     ProfileStatusPill(
                         id: "profile-pill-context",
-                        title: contextSignals == 0 ? "No optional context signals yet" : "\(contextSignals) context signals on device",
+                        title: contextSignals == 0 ? "No local memory signals yet" : "\(contextSignals) local memory signals",
                         icon: "waveform.path.ecg",
                         state: contextSignals == 0 ? .default : .default
                     )
                 ],
                 stats: [
                     MetricSummary(id: "profile-active-goals", title: "Open goals", value: "\(activeGoals)", detail: "Active native goals", icon: "target"),
-                    MetricSummary(id: "profile-habits", title: "Tracked habits", value: "\(liveHabits)", detail: "Recurring loops in the same system", icon: "repeat"),
-                    MetricSummary(id: "profile-review", title: "Review cadence", value: reviewLabel(days: snapshot.appState.reviewCadenceDays), detail: "Reset rhythm", icon: "calendar"),
-                    MetricSummary(id: "profile-context", title: "Context signals", value: "\(contextSignals)", detail: "Evidence, feedback, and teaching", icon: "sparkles")
+                    MetricSummary(id: "profile-confirmation", title: "Confirmation rules", value: "\(safetySamples.confirmationRequired)", detail: "Sampled risky actions", icon: "hand.raised"),
+                    MetricSummary(id: "profile-corrections", title: "Corrections", value: "\(snapshot.teachingSignals.count)", detail: "User teaching signals", icon: "checkmark.seal"),
+                    MetricSummary(id: "profile-context", title: "Memory areas", value: "\(contextSignals)", detail: "Evidence, feedback, teaching, ledger", icon: "sparkles")
                 ]
             ),
+            controlRoom: ProfileControlRoomState(
+                title: "Control room",
+                subtitle: "A short map of the trust areas you can inspect without turning You into a settings dump.",
+                entries: [
+                    ProfileControlRoomEntry(
+                        id: "profile-control-constitution",
+                        title: "Personal Operating Constitution",
+                        subtitle: "Recommendation posture, recovery tone, planning strictness, and confirmation rules.",
+                        icon: "scroll",
+                        statusLabel: "Local defaults",
+                        state: .selected
+                    ),
+                    ProfileControlRoomEntry(
+                        id: "profile-control-memory",
+                        title: "Memory Controls",
+                        subtitle: "Local evidence, feedback, corrections, captures, and event history Ambitions may use.",
+                        icon: "brain.head.profile",
+                        statusLabel: "Stored on this device",
+                        state: .default
+                    ),
+                    ProfileControlRoomEntry(
+                        id: "profile-control-corrections",
+                        title: "Corrections and assumptions",
+                        subtitle: "Assumptions can be corrected through existing teaching and explanation paths.",
+                        icon: "checkmark.bubble",
+                        statusLabel: snapshot.teachingSignals.isEmpty ? "Available when present" : "\(snapshot.teachingSignals.count) active",
+                        state: snapshot.teachingSignals.isEmpty ? .default : .success
+                    ),
+                    ProfileControlRoomEntry(
+                        id: "profile-control-receipts",
+                        title: "Receipts and audit posture",
+                        subtitle: "Reviews turns local receipts, recovery, proof, and corrections into a calm receipt layer.",
+                        icon: "doc.text.magnifyingglass",
+                        statusLabel: reviews.projection.period.title,
+                        state: .default
+                    )
+                ],
+                footer: "Open detail from the owning surfaces for deep review. This page stays oriented around trust, control, and next-safe status."
+            ),
+            constitution: makeConstitution(
+                snapshot: snapshot,
+                calendarAuthorization: calendarAuthorization,
+                notificationStatus: notificationStatus,
+                safetySamples: safetySamples
+            ),
+            memoryControls: makeMemoryControls(snapshot: snapshot),
+            assumptionCorrections: makeAssumptionCorrections(snapshot: snapshot),
+            automationBoundary: makeAutomationBoundary(safetySamples: safetySamples),
+            receiptAudit: makeReceiptAudit(snapshot: snapshot, receipts: policyReceipts),
+            reviews: reviews,
             appearanceStudio: ProfileAppearanceStudioState(
                 title: "Appearance Studio",
                 subtitle: "Curated, authored control over mode and accent so the shell feels personal without turning into a skin chooser.",
@@ -156,20 +213,27 @@ private extension RepositoryBackedProfileService {
             ),
             trustCenter: ProfileTrustCenterState(
                 title: "Trust Center",
-                subtitle: "Trust should read as configuration truth, not a debug console. The pulse below stays calm and human-readable.",
+                subtitle: "Truthful status for local-first data, permissions, external surfaces, sync, automation, and recovery.",
                 pulse: ProfileTrustPulseState(
                     title: "Local trust pulse",
                     subtitle: syncPulseTitle(for: syncStatus),
-                    detail: ActivationContract.trustMessage.explanation,
+                    detail: "Stored on this device. Optional permissions are explicit. Future sync and external surfaces remain labeled until verified.",
                     state: syncState
                 ),
                 items: [
                     SettingsItem(
                         id: "profile-trust-sync",
                         title: "System trust posture",
-                        subtitle: "The current runtime uses on-device storage and does not present live cloud sync or export as ready.",
+                        subtitle: "The current runtime uses on-device storage. Apple-first sync is future-owned and not currently connected.",
                         icon: "lock.shield",
                         valueLabel: syncStatus.detail
+                    ),
+                    SettingsItem(
+                        id: "profile-trust-calendar",
+                        title: "Calendar boundary",
+                        subtitle: "Plan may request calendar awareness after a clear action. Ambitions does not silently write calendar changes.",
+                        icon: "calendar.badge.clock",
+                        valueLabel: calendarAuthorizationLabel(calendarAuthorization)
                     ),
                     SettingsItem(
                         id: "profile-trust-notifications",
@@ -184,20 +248,34 @@ private extension RepositoryBackedProfileService {
                         subtitle: "\(ExternalSurfaceTruth.verifiedRoutingTruth). External routes stay on canonical destinations, and ambient surfaces preserve local-first continuity language.",
                         icon: "arrow.triangle.branch",
                         valueLabel: "Calm"
+                    ),
+                    SettingsItem(
+                        id: "profile-trust-accessibility",
+                        title: "Accessibility Nutrition",
+                        subtitle: "Internal checklist infrastructure exists. User-facing verification remains unavailable until a later verification batch.",
+                        icon: "figure",
+                        valueLabel: "Unverified"
+                    ),
+                    SettingsItem(
+                        id: "profile-trust-export-import",
+                        title: "Export and disaster recovery",
+                        subtitle: "Portable snapshot foundations exist, but Batch 90 owns the proof drill. This surface does not claim export is production-ready.",
+                        icon: "externaldrive.badge.icloud",
+                        valueLabel: "Future planned"
                     )
                 ],
-                footer: "This first-run trust layer states what is local now and avoids requiring external connections before they are useful."
+                footer: "Trust-sensitive features are labeled as available, manual, unavailable, or future planned. Ambitions does not claim live sync, account systems, or verified accessibility here."
             ),
             contextVault: ProfileContextVaultState(
-                title: "Context Vault",
-                subtitle: "Optional personal context is inspectable here before any future trust work changes what is available.",
+                title: "Local memory map",
+                subtitle: "A compact inventory of local signal types, not a black-box profile.",
                 items: [
                     ProfileContextVaultItem(
                         id: "profile-vault-signals",
-                        title: "Signals in use",
-                        subtitle: "These are the current categories the app can already read from its native repositories.",
+                        title: "Recommendation evidence",
+                        subtitle: "These categories can explain recommendations without claiming cloud intelligence.",
                         icon: "tray.full",
-                        detail: "\(snapshot.evidence.count) evidence records, \(snapshot.feedback.count) feedback events, \(snapshot.teachingSignals.count) teaching signals"
+                        detail: "\(snapshot.evidence.count) evidence records, \(snapshot.feedback.count) feedback events, \(snapshot.teachingSignals.count) teaching signals, \(eventLedgerCount) recent ledger events"
                     ),
                     ProfileContextVaultItem(
                         id: "profile-vault-planning",
@@ -380,6 +458,285 @@ private extension RepositoryBackedProfileService {
         ]
     }
 
+    struct SafetyBoundarySamples {
+        let calendarWrite: SafeAutomationPolicyDecision
+        let broadReflow: SafeAutomationPolicyDecision
+        let forgetMemory: SafeAutomationPolicyDecision
+        let prepareExport: SafeAutomationPolicyDecision
+        let localCorrection: SafeAutomationPolicyDecision
+
+        var confirmationRequired: Int {
+            [calendarWrite, broadReflow, forgetMemory, prepareExport, localCorrection]
+                .filter(\.mustNeverBeSilent)
+                .count
+        }
+
+        var destructiveBlocked: Bool {
+            forgetMemory.permissionLevel == .neverAutomate &&
+                forgetMemory.receiptRecommendation.resultState == .failedSafely
+        }
+    }
+
+    func safetyBoundarySamples() -> SafetyBoundarySamples {
+        let evaluator = SafeAutomationPolicyEvaluator()
+        let planBlock = LifeGraphObjectReference(kind: .action, id: "you-policy-calendar-write", sourceDomain: .plan)
+        let planStep = LifeGraphObjectReference(kind: .step, id: "you-policy-reflow", sourceDomain: .plan)
+        let memoryObject = LifeGraphObjectReference(kind: .correction, id: "you-policy-memory", sourceDomain: .you)
+        let correctionObject = LifeGraphObjectReference(kind: .correction, id: "you-policy-correction", sourceDomain: .you)
+
+        return SafetyBoundarySamples(
+            calendarWrite: evaluator.evaluate(
+                SafeAutomationProposedAction(kind: .writeCalendarBlock, sourceDomain: .plan, targetObjects: [planBlock])
+            ),
+            broadReflow: evaluator.evaluate(
+                SafeAutomationProposedAction(kind: .splitAction, sourceDomain: .plan, targetObjects: [planStep])
+            ),
+            forgetMemory: evaluator.evaluate(
+                SafeAutomationProposedAction(kind: .forgetMemory, sourceDomain: .you, targetObjects: [memoryObject])
+            ),
+            prepareExport: evaluator.evaluate(
+                SafeAutomationProposedAction(kind: .prepareExport, sourceDomain: .you)
+            ),
+            localCorrection: evaluator.evaluate(
+                SafeAutomationProposedAction(kind: .correctRecommendation, sourceDomain: .you, targetObjects: [correctionObject])
+            )
+        )
+    }
+
+    func makeConstitution(
+        snapshot: Snapshot,
+        calendarAuthorization: CalendarRemindersAuthorizationState,
+        notificationStatus: ProfileNotificationAuthorization,
+        safetySamples: SafetyBoundarySamples
+    ) -> ProfileConstitutionState {
+        ProfileConstitutionState(
+            title: "Personal Operating Constitution",
+            subtitle: "The local rules Ambitions uses to stay useful without becoming pushy or silent.",
+            postureSummary: "Calm, conservative, correction-aware, and local-first by default.",
+            rules: [
+                ProfileConstitutionRule(
+                    id: "constitution-local-first",
+                    title: "Start from local truth",
+                    detail: "Goals, captures, evidence, corrections, and recent ledger events are read from this device. Sync is not currently connected.",
+                    statusLabel: "Stored on this device",
+                    state: .selected
+                ),
+                ProfileConstitutionRule(
+                    id: "constitution-recommendation-posture",
+                    title: "Recommend one believable move",
+                    detail: "Suggestions should be explainable by goal, plan, evidence, or recent feedback, not vague intelligence claims.",
+                    statusLabel: snapshot.eventLedger.isEmpty ? "Evidence-light" : "Uses local evidence",
+                    state: .default
+                ),
+                ProfileConstitutionRule(
+                    id: "constitution-recovery-tone",
+                    title: "Recover without shame",
+                    detail: "Delays, skips, and smaller-version requests are treated as recovery context, not blame.",
+                    statusLabel: "Calm recovery",
+                    state: .success
+                ),
+                ProfileConstitutionRule(
+                    id: "constitution-calendar",
+                    title: "Ask before calendar writes",
+                    detail: "Calendar access is explicit and Plan-owned. Calendar writes require confirmation and are never silent.",
+                    statusLabel: calendarAuthorizationLabel(calendarAuthorization),
+                    state: safetySamples.calendarWrite.mustNeverBeSilent ? .warning : .default
+                ),
+                ProfileConstitutionRule(
+                    id: "constitution-interruptions",
+                    title: "Interruptions stay optional",
+                    detail: "Notifications can support reminders, but Ambitions still works when notification access is denied or not requested.",
+                    statusLabel: notificationStatus.statusLabel,
+                    state: notificationStatus.statusLabel == "Denied" ? .warning : .default
+                )
+            ],
+            footer: "These are current local defaults, not a broad account/preferences system. Batch 108 owns deeper Constitution maturity."
+        )
+    }
+
+    func makeMemoryControls(snapshot: Snapshot) -> ProfileMemoryControlState {
+        let correctionCount = snapshot.teachingSignals.count
+        let correctionStatus = correctionCount == 0 ? "None yet" : "\(correctionCount) local"
+        return ProfileMemoryControlState(
+            title: "Memory Controls",
+            subtitle: "What Ambitions may use locally to explain recommendations and recovery.",
+            items: [
+                SettingsItem(
+                    id: "profile-memory-ledger",
+                    title: "Event Ledger",
+                    subtitle: "Recent meaningful actions and changes can support explanations. Full raw history stays off this top-level surface.",
+                    icon: "list.bullet.rectangle",
+                    valueLabel: snapshot.eventLedger.isEmpty ? "No recent events" : "\(snapshot.eventLedger.count) recent"
+                ),
+                SettingsItem(
+                    id: "profile-memory-evidence",
+                    title: "Proof and feedback",
+                    subtitle: "Progress evidence and feedback help Ambitions avoid relying only on intention.",
+                    icon: "checkmark.seal",
+                    valueLabel: "\(snapshot.evidence.count + snapshot.feedback.count) local"
+                ),
+                SettingsItem(
+                    id: "profile-memory-corrections",
+                    title: "Corrections and teaching",
+                    subtitle: "User-confirmed corrections can adjust future explanations where existing teaching signals support it.",
+                    icon: "slider.horizontal.3",
+                    valueLabel: correctionStatus
+                ),
+                SettingsItem(
+                    id: "profile-memory-captures",
+                    title: "Open captures",
+                    subtitle: "Unarchived captures remain visible to the local planning loop until routed or archived.",
+                    icon: "tray.full",
+                    valueLabel: "\(snapshot.captures.filter { $0.status != .archived }.count) open"
+                ),
+                SettingsItem(
+                    id: "profile-memory-forget",
+                    title: "Forget or clear memory",
+                    subtitle: "Destructive memory deletion is not exposed here because safe review, confirmation, and undo coverage are not complete.",
+                    icon: "trash.slash",
+                    valueLabel: "Unavailable"
+                )
+            ],
+            footer: "You can inspect memory areas here. Broad forgetting and deletion remain manual/future until the safe boundary can prove the result."
+        )
+    }
+
+    func makeAssumptionCorrections(snapshot: Snapshot) -> ProfileAssumptionCorrectionState {
+        let activeSignals = snapshot.teachingSignals.filter { $0.disposition == .active }
+        let correctionEvents = snapshot.eventLedger.filter { $0.kind == .userCorrectionAdded }
+        return ProfileAssumptionCorrectionState(
+            title: "Corrections and assumptions",
+            subtitle: "Ambitions should be teachable without asking you to understand its internals.",
+            items: [
+                SettingsItem(
+                    id: "profile-correction-active",
+                    title: "Active corrections",
+                    subtitle: "Existing teaching signals are the current correction path. They are local and bounded to the artifacts they reference.",
+                    icon: "checkmark.bubble",
+                    valueLabel: activeSignals.isEmpty ? "None yet" : "\(activeSignals.count) active"
+                ),
+                SettingsItem(
+                    id: "profile-correction-ledger",
+                    title: "Correction events",
+                    subtitle: "Correction-shaped ledger entries can be used as evidence for why future recommendations changed.",
+                    icon: "clock.arrow.circlepath",
+                    valueLabel: correctionEvents.isEmpty ? "No recent entries" : "\(correctionEvents.count) recent"
+                ),
+                SettingsItem(
+                    id: "profile-correction-availability",
+                    title: "You can correct this",
+                    subtitle: "Goal Detail explanations and existing teaching flows remain the supported place to correct assumptions.",
+                    icon: "pencil.and.list.clipboard",
+                    valueLabel: "Supported where shown"
+                )
+            ],
+            footer: "This is an entry point into existing correction systems, not a second memory model or a full Correction Review."
+        )
+    }
+
+    func makeAutomationBoundary(safetySamples: SafetyBoundarySamples) -> ProfileAutomationBoundaryState {
+        ProfileAutomationBoundaryState(
+            title: "What Ambitions will not do silently",
+            subtitle: "The safe automation policy keeps external, broad, destructive, and unsupported changes confirmation-gated or blocked.",
+            rules: [
+                ProfileConstitutionRule(
+                    id: "automation-calendar",
+                    title: "No silent calendar changes",
+                    detail: safetySamples.calendarWrite.reasons.map(\.userFacingSummary).joined(separator: " "),
+                    statusLabel: "Requires confirmation",
+                    state: .warning
+                ),
+                ProfileConstitutionRule(
+                    id: "automation-reflow",
+                    title: "No silent broad reflow",
+                    detail: safetySamples.broadReflow.reasons.map(\.userFacingSummary).joined(separator: " "),
+                    statusLabel: "Requires confirmation",
+                    state: .warning
+                ),
+                ProfileConstitutionRule(
+                    id: "automation-memory",
+                    title: "No unsupported forgetting",
+                    detail: safetySamples.forgetMemory.blockedFacts.first ?? "No memory was forgotten.",
+                    statusLabel: safetySamples.destructiveBlocked ? "Blocked safely" : "Unavailable",
+                    state: .warning
+                ),
+                ProfileConstitutionRule(
+                    id: "automation-correction",
+                    title: "Corrections stay user-directed",
+                    detail: "Correcting a recommendation is a local policy-recognized action when tied to an existing target.",
+                    statusLabel: "User controlled",
+                    state: .success
+                )
+            ],
+            footer: "This describes policy decisions only. It does not execute calendar writes, sync resolution, deletion, or undo."
+        )
+    }
+
+    func makePolicyReceipts(safetySamples: SafetyBoundarySamples) -> [ActionReceipt] {
+        [
+            safetySamples.calendarWrite.recommendedReceipt(occurredAt: "2026-04-27T00:00:00Z"),
+            safetySamples.forgetMemory.recommendedReceipt(occurredAt: "2026-04-27T00:00:01Z"),
+            safetySamples.localCorrection.recommendedReceipt(occurredAt: "2026-04-27T00:00:02Z")
+        ]
+    }
+
+    func makeReceiptAudit(snapshot: Snapshot, receipts: [ActionReceipt]) -> ProfileReceiptAuditState {
+        let projection = ActionReceiptProjection(receipts: receipts)
+        return ProfileReceiptAuditState(
+            title: "Receipts and audit posture",
+            subtitle: "A compact trust summary of what can explain actions today. Reviews now turns these signals into a calm receipt layer.",
+            items: [
+                SettingsItem(
+                    id: "profile-receipts-domain",
+                    title: "Action Closure receipts",
+                    subtitle: "The receipt model can summarize what changed, why, correction availability, safe fallback, and undo status where supported.",
+                    icon: "doc.text.magnifyingglass",
+                    valueLabel: "\(projection.displaySummaries(limit: 3).count) policy examples"
+                ),
+                SettingsItem(
+                    id: "profile-receipts-ledger",
+                    title: "Recent Event Ledger",
+                    subtitle: "Recent ledger entries remain local evidence. This page shows counts and status rather than raw logs.",
+                    icon: "clock",
+                    valueLabel: snapshot.eventLedger.isEmpty ? "No recent events" : "\(snapshot.eventLedger.count) recent"
+                ),
+                SettingsItem(
+                    id: "profile-receipts-review",
+                    title: "Reviews v1",
+                    subtitle: "Recovery Review and Life OS Receipt summarize local events, receipts, proof, and corrections without creating a top-level Insights tab.",
+                    icon: "rectangle.stack.badge.play",
+                    valueLabel: snapshot.eventLedger.isEmpty ? "Nothing to review yet" : "Ready to review"
+                )
+            ],
+            footer: "Receipts are exposed here as trust posture, not as a full history browser."
+        )
+    }
+
+    func makeReviews(
+        snapshot: Snapshot,
+        receipts: [ActionReceipt],
+        calendarAuthorization: CalendarRemindersAuthorizationState
+    ) -> ProfileReviewsState {
+        let projection = ReviewsV1Projector().project(
+            ReviewsV1ProjectionInput(
+                generatedAt: DomainTimestamp.string(from: .now),
+                timeframeLabel: "Recent local review",
+                eventLedgerEntries: snapshot.eventLedger,
+                receipts: receipts,
+                proofEvidence: snapshot.evidence,
+                teachingSignals: snapshot.teachingSignals,
+                calendarStatusLabel: calendarAuthorizationLabel(calendarAuthorization)
+            )
+        )
+
+        return ProfileReviewsState(
+            projection: projection,
+            title: "Reviews",
+            subtitle: "Recovery Review and Life OS Receipt for what happened, what changed, and what should carry forward.",
+            footer: "Reviews uses existing local ledgers, receipts, proof, and correction signals. It does not restore Insights as a tab or claim live sync, account systems, or verified accessibility."
+        )
+    }
+
     func dominantTruth(
         syncStatus: SyncCapabilityStatus,
         notificationStatus: ProfileNotificationAuthorization,
@@ -388,7 +745,7 @@ private extension RepositoryBackedProfileService {
         if notificationStatus.statusLabel == "Denied" {
             return "Appearance is configured, but one trust edge still needs attention: notifications are denied."
         }
-        return "Appearance is curated, trust is \(syncStatus.trustPosture == .localOnly ? "local-first" : "bounded"), and optional context remains inspectable."
+        return "Trust is \(syncStatus.trustPosture == .localOnly ? "local-first" : "bounded"), memory is inspectable, and risky changes require confirmation."
     }
 
     func syncPulseTitle(for status: SyncCapabilityStatus) -> String {

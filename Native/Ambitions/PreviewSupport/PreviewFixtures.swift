@@ -252,6 +252,113 @@ struct PreviewFixtures: Sendable {
                     MetricSummary(id: "profile-4", title: "Context signals", value: "6", detail: "Evidence, feedback, and teaching", icon: "sparkles")
                 ]
             ),
+            controlRoom: ProfileControlRoomState(
+                title: "Control room",
+                subtitle: "A short map of the trust areas you can inspect without turning You into a settings dump.",
+                entries: [
+                    ProfileControlRoomEntry(id: "profile-control-constitution", title: "Personal Operating Constitution", subtitle: "Recommendation posture, recovery tone, planning strictness, and confirmation rules.", icon: "scroll", statusLabel: "Local defaults", state: .selected),
+                    ProfileControlRoomEntry(id: "profile-control-memory", title: "Memory Controls", subtitle: "Local evidence, feedback, corrections, captures, and event history Ambitions may use.", icon: "brain.head.profile", statusLabel: "Stored on this device", state: .default),
+                    ProfileControlRoomEntry(id: "profile-control-corrections", title: "Corrections and assumptions", subtitle: "Assumptions can be corrected through existing teaching and explanation paths.", icon: "checkmark.bubble", statusLabel: "2 active", state: .success),
+                    ProfileControlRoomEntry(id: "profile-control-receipts", title: "Receipts and audit posture", subtitle: "Reviews turns local receipts, recovery, proof, and corrections into a calm receipt layer.", icon: "doc.text.magnifyingglass", statusLabel: "Ready to review", state: .default)
+                ],
+                footer: "Open detail from the owning surfaces for deep review. This page stays oriented around trust, control, and next-safe status."
+            ),
+            constitution: ProfileConstitutionState(
+                title: "Personal Operating Constitution",
+                subtitle: "The local rules Ambitions uses to stay useful without becoming pushy or silent.",
+                postureSummary: "Calm, conservative, correction-aware, and local-first by default.",
+                rules: [
+                    ProfileConstitutionRule(id: "constitution-local-first", title: "Start from local truth", detail: "Goals, captures, evidence, corrections, and recent ledger events are read from this device. Sync is not currently connected.", statusLabel: "Stored on this device", state: .selected),
+                    ProfileConstitutionRule(id: "constitution-recovery-tone", title: "Recover without shame", detail: "Delays, skips, and smaller-version requests are treated as recovery context, not blame.", statusLabel: "Calm recovery", state: .success),
+                    ProfileConstitutionRule(id: "constitution-calendar", title: "Ask before calendar writes", detail: "Calendar access is explicit and Plan-owned. Calendar writes require confirmation and are never silent.", statusLabel: "Not requested", state: .warning)
+                ],
+                footer: "These are current local defaults, not a broad account/preferences system. Batch 108 owns deeper Constitution maturity."
+            ),
+            memoryControls: ProfileMemoryControlState(
+                title: "Memory Controls",
+                subtitle: "What Ambitions may use locally to explain recommendations and recovery.",
+                items: [
+                    SettingsItem(id: "profile-memory-ledger", title: "Event Ledger", subtitle: "Recent meaningful actions and changes can support explanations. Full raw history stays off this top-level surface.", icon: "list.bullet.rectangle", valueLabel: "2 recent"),
+                    SettingsItem(id: "profile-memory-evidence", title: "Proof and feedback", subtitle: "Progress evidence and feedback help Ambitions avoid relying only on intention.", icon: "checkmark.seal", valueLabel: "4 local"),
+                    SettingsItem(id: "profile-memory-corrections", title: "Corrections and teaching", subtitle: "User-confirmed corrections can adjust future explanations where existing teaching signals support it.", icon: "slider.horizontal.3", valueLabel: "2 local"),
+                    SettingsItem(id: "profile-memory-forget", title: "Forget or clear memory", subtitle: "Destructive memory deletion is not exposed here because safe review, confirmation, and undo coverage are not complete.", icon: "trash.slash", valueLabel: "Unavailable")
+                ],
+                footer: "You can inspect memory areas here. Broad forgetting and deletion remain manual/future until the safe boundary can prove the result."
+            ),
+            assumptionCorrections: ProfileAssumptionCorrectionState(
+                title: "Corrections and assumptions",
+                subtitle: "Ambitions should be teachable without asking you to understand its internals.",
+                items: [
+                    SettingsItem(id: "profile-correction-active", title: "Active corrections", subtitle: "Existing teaching signals are the current correction path.", icon: "checkmark.bubble", valueLabel: "2 active"),
+                    SettingsItem(id: "profile-correction-availability", title: "You can correct this", subtitle: "Goal Detail explanations and existing teaching flows remain the supported place to correct assumptions.", icon: "pencil.and.list.clipboard", valueLabel: "Supported where shown")
+                ],
+                footer: "This is an entry point into existing correction systems, not a second memory model or a full Correction Review."
+            ),
+            automationBoundary: ProfileAutomationBoundaryState(
+                title: "What Ambitions will not do silently",
+                subtitle: "The safe automation policy keeps external, broad, destructive, and unsupported changes confirmation-gated or blocked.",
+                rules: [
+                    ProfileConstitutionRule(id: "automation-calendar", title: "No silent calendar changes", detail: "Calendar changes must be confirmed from Plan.", statusLabel: "Requires confirmation", state: .warning),
+                    ProfileConstitutionRule(id: "automation-reflow", title: "No silent broad reflow", detail: "This would change more than one part of the plan.", statusLabel: "Requires confirmation", state: .warning),
+                    ProfileConstitutionRule(id: "automation-memory", title: "No unsupported forgetting", detail: "No memory was forgotten.", statusLabel: "Blocked safely", state: .warning)
+                ],
+                footer: "This describes policy decisions only. It does not execute calendar writes, sync resolution, deletion, or undo."
+            ),
+            receiptAudit: ProfileReceiptAuditState(
+                title: "Receipts and audit posture",
+                subtitle: "A compact trust summary of what can explain actions today. Reviews now turns these signals into a calm receipt layer.",
+                items: [
+                    SettingsItem(id: "profile-receipts-domain", title: "Action Closure receipts", subtitle: "The receipt model can summarize what changed, why, correction availability, safe fallback, and undo status where supported.", icon: "doc.text.magnifyingglass", valueLabel: "3 policy examples"),
+                    SettingsItem(id: "profile-receipts-review", title: "Reviews v1", subtitle: "Recovery Review and Life OS Receipt summarize local events, receipts, proof, and corrections without creating a top-level Insights tab.", icon: "rectangle.stack.badge.play", valueLabel: "Ready to review")
+                ],
+                footer: "Receipts are exposed here as trust posture, not as a full history browser."
+            ),
+            reviews: ProfileReviewsState(
+                projection: ReviewsV1Projector().project(
+                    ReviewsV1ProjectionInput(
+                        generatedAt: "2026-04-27T12:00:00Z",
+                        timeframeLabel: "Recent local review",
+                        eventLedgerEntries: [
+                            EventLedgerEntry(
+                                id: "preview-review-completed",
+                                kind: .actionCompleted,
+                                occurredAt: "2026-04-27T11:00:00Z",
+                                source: .today,
+                                title: "Completed deep work block",
+                                summary: "A meaningful action closed with local proof.",
+                                tone: .positive
+                            ),
+                            EventLedgerEntry(
+                                id: "preview-review-recovery",
+                                kind: .recoveryAccepted,
+                                occurredAt: "2026-04-27T10:00:00Z",
+                                source: .plan,
+                                title: "Recovery path accepted",
+                                summary: "A smaller next move was selected without changing Calendar.",
+                                tone: .recovering
+                            )
+                        ],
+                        proofEvidence: [
+                            ProgressEvidence(
+                                id: "preview-proof-review",
+                                goalID: "goal-native",
+                                stepID: "step-native",
+                                evidenceKind: .stepCompleted,
+                                source: .manual,
+                                capturedAt: "2026-04-27T11:02:00Z",
+                                progressDelta: nil,
+                                confidenceDelta: nil,
+                                minutesInvested: 45,
+                                note: "Validated the review surface copy."
+                            )
+                        ],
+                        calendarStatusLabel: "Not requested"
+                    )
+                ),
+                title: "Reviews",
+                subtitle: "Recovery Review and Life OS Receipt for what happened, what changed, and what should carry forward.",
+                footer: "Reviews uses existing local ledgers, receipts, proof, and correction signals. It does not restore Insights as a tab or claim live sync, account systems, or verified accessibility."
+            ),
             appearanceStudio: ProfileAppearanceStudioState(
                 title: "Appearance Studio",
                 subtitle: "Curated, authored control over mode and accent so the shell feels personal without turning into a skin chooser.",

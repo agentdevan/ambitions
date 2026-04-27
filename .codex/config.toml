@@ -9,6 +9,7 @@ model_reasoning_effort = "medium"
 project_doc_max_bytes = 49152
 project_root_markers = [".git", "project.yml", "Package.swift"]
 
+approval_policy = "never"
 [profiles.small-edit]
 # Quick copy cleanup, single-file maintenance, or narrow docs truth fixes.
 # Prefer this for one-file edits where a heavyweight plan would be unnecessary.
