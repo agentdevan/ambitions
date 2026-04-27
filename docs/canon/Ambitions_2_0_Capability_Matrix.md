@@ -1,6 +1,6 @@
 # Ambitions 2.0 Capability Matrix
 
-Batch 61 verified repo truth after Batch 60. This matrix has been status-corrected so Batch 00-82 are complete for planning, Batch 83 is the next queued / next uncompleted batch, and Batch 84+ remain future planned roadmap work.
+Batch 61 verified repo truth after Batch 60. This matrix has been status-corrected so Batches 00-86 are complete for planning purposes, Batch 87 is the next queued / next uncompleted batch, and Batches 88-120 remain future planned roadmap work.
 
 Status values are restricted to: Verified complete, Partially implemented, Missing, Stale / legacy, Unknown until deeper implementation batch, Deferred by Ambitions 2.0 scope, Blocked by missing foundation, Needs manual platform verification.
 
@@ -9,7 +9,7 @@ Status values are restricted to: Verified complete, Partially implemented, Missi
 ### What is definitely implemented
 
 - The native iOS project structure exists and is wired through XcodeGen: `project.yml`, `Native/Ambitions/`, `Native/AmbitionsTests/`, `Native/AmbitionsUITests/`, `Native/AmbitionsWidgetExtension/`, `Native/AmbitionsShareExtension/`, `Sources/`, and `AppUI/Sources/`.
-- Batch 00 through Batch 82 are recorded as complete for planning in `docs/codex/BATCH_REGISTRY.md`.
+- Batches 00-86 are recorded as complete for planning in `docs/codex/BATCH_REGISTRY.md`.
 - The Ambitions 2.0 canon package is present: master plan, product architecture, systems architecture, visual system, roadmap, batch plan, accessibility nutrition, and decision log.
 - Capture persistence and Capture 2.0 routing are implemented through `DefaultCaptureService`, SwiftData repositories, command alignment, Event Ledger emission, and focused capture/command/view-model/persistence tests.
 
@@ -52,7 +52,7 @@ Status values are restricted to: Verified complete, Partially implemented, Missi
 | Capability | Current status | Evidence | Product implication | Risk | Related Ambitions 2.0 batch | Recommended next action |
 | --- | --- | --- | --- | --- | --- | --- |
 | Repo / project structure | Verified complete | Code/config: `project.yml` defines app, tests, widget, share extension, Swift packages; source folders under `Native/Ambitions/`, `Native/AmbitionsTests/`, `Native/AmbitionsUITests/`, `Sources/`, `AppUI/Sources/`. | Repo has the expected native foundation for Ambitions 2.0 work. | If wrong, future batches target the wrong source tree or project generator. | 61 | Keep XcodeGen as the project truth; no feature work in Batch 61. |
-| Batch registry and post-Batch-60 status | Verified complete | Registry/docs: `docs/codex/BATCH_REGISTRY.md` records Batch 00 through Batch 82 complete for planning, Batch 83 queued as the next uncompleted batch, and Batch 84+ as future planned roadmap work. | Batch 83 is the next queued execution target; Batch 84+ remain planned future work. | If wrong, work could skip a required hardening or canon step. | 61-82 | Leave registry history intact; only start or close Batch 83 after explicit active-batch execution and validation. |
+| Batch registry and post-Batch-60 status | Verified complete | Registry/docs: `docs/codex/BATCH_REGISTRY.md` records Batches 00-86 complete for planning, Batch 87 queued as the next uncompleted batch, and Batches 88-120 as future planned roadmap work. | Batch 87 is the next queued execution target; Batches 88-120 remain planned future work. | If wrong, work could skip a required hardening or canon step. | 61-86 | Leave registry history intact; only start or close Batch 87 after explicit active-batch execution and validation. |
 | Current tab shell | Verified complete for Batch 62 shell IA | Code/tests: `Native/Ambitions/App/AppTab.swift` `AppTab.allCases` returns Today, Goals, Capture, Plan, You; `AmbitionsRootView` builds those tabs; `AppShellNavigationTests` and focused `AmbitionsUITests` validate the shell. | Locked Ambitions 2.0 IA is now the active app shell, while deeper 2.0 surfaces remain deferred. | If overclaimed, later batches may skip Capture 2.0, You 2.0, Reviews, or contextual insights work. | 62 | Preserve the shell; defer surface redesign and workflow expansion to owning batches. |
 | Today surface | Partially implemented | Code/tests: `TodayScreen`, `TodayViewModel`, `TodayFeatureService.makeExperience`, `nextHeroItem`, `TodayFreshGoalVisibilityTests`, `TodayShellIntegrationTests`, `TodayViewModelTests`. | Today exists and has recommendation/recovery behavior, but current implementation evidence still governs any claims about the final 2.0 rich-panel execution surface. | If overclaimed, future batches may assume richer Today behavior than current evidence supports. | 73 | Treat Batch 73 as complete for planning per registry status; preserve current behavior unless a future user request explicitly scopes Today follow-up work. |
 | Goals surface | Partially implemented | Code/tests: `GoalsScreen`, `GoalDetailScreen`, `GoalsFeatureService.loadDetail`, `GoalDetailPresentation`, `GoalExplainabilityProjectionTests`, `GoalDetailStrategicPresentationTests`. | Goals and detail surfaces exist with explainability and planning logic, but not final 2.0 goal-detail composition. | If overclaimed, confidence/believability and long-range path work may be missed. | 77 | Keep current Goals surface; defer redesign/detail expansion to Batch 77 after global chrome, Life Graph, and Action Closure foundations. |
@@ -129,9 +129,9 @@ Status values are restricted to: Verified complete, Partially implemented, Missi
 
 ## Active Batch Recommendation
 
-Batch 72 **Execution Resilience Stack** is complete for the shared local resilience/recovery foundation.
+Batch 86 **Reality Reflow v1 and Recovery Gradient** is complete for planning purposes per `docs/codex/BATCH_REGISTRY.md`.
 
-Repo truth supports the planned sequence: Event Ledger, Recommendation Explanation Model, Canonical Now State, Command Pipeline, Capture 2.0 Core, Batch 70 Reality Model/calendar read-write foundations, Batch 71 Believability/Capacity/Goal Health foundation, and Batch 72 Execution Resilience Stack foundation now exist, but Plan/Today/Goals surface transformations, recovery UI execution, App Intents productization, widgets, Live Activities, sync/export, and Path Intelligence UI remain deferred to their owning batches.
+Repo truth supports the planned sequence through Batch 86 for planning purposes. Batch 87 is the next queued / next uncompleted batch; Batches 88-120 remain future planned roadmap work.
 
 ## No-Drift Warnings
 

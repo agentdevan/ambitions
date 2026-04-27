@@ -75,7 +75,7 @@ git log --oneline -10
 Adjust the batch numbers to the current registry state before running.
 
 ```bash
-grep -R "Batch 83\|Batch 84\|Batch 85\|Batch 86\|next queued\|next uncompleted\|Current execution status" docs AGENTS.md MASTER_PRODUCT_SPEC.md -n
+grep -R "Batch 86\|Batch 87\|Batch 88\|next queued\|next uncompleted\|Current execution status" docs AGENTS.md MASTER_PRODUCT_SPEC.md -n
 ```
 
 ### Xcode project generation

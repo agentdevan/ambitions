@@ -138,11 +138,11 @@ Target batch range: 101-120.
 
 ## Batch Coverage And Status
 
-Completed Batches 61-82 remain complete and unchanged for planning history.
-Batch 83 remains queued until implemented and validated.
-No batch after 82 is marked complete by this maturity plan.
+Completed Batches 61-86 remain complete for planning history.
+Batch 87 remains queued until implemented and validated.
+No batch after 86 is marked complete by this maturity plan.
 
-Rows 73-82 below are preserved as completed roadmap coverage; Batch 83 is the next queued / next uncompleted batch and Batch 84+ remain future planned roadmap work.
+Rows 73-86 below are preserved as completed roadmap coverage; Batch 87 is the next queued / next uncompleted batch and Batches 88-120 remain future planned roadmap work.
 
 | Batch | Name | Primary maturity gate |
 | --- | --- | --- |
