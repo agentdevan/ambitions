@@ -2,7 +2,7 @@
 
 Status: Active canon consolidation layer.
 
-Purpose: Consolidate the Ambitions object model into one implementation-readable reference. This document extracts existing truth from the Master Product Spec, Design Constitution, Product Architecture, Systems Architecture, Visual System, Intelligence Standards, and product decision Waves 1-2. It does not replace those documents; it makes their object language easier to implement consistently.
+Purpose: Consolidate the Ambitions object model into one implementation-readable reference. This document extracts existing truth from the Master Product Spec, Design Constitution, Product Architecture, Systems Architecture, Visual System, Intelligence Standards, and product decision Waves 1-3. It does not replace those documents; it makes their object language easier to implement consistently.
 
 ## Canonical Hierarchy
 
@@ -27,7 +27,9 @@ Step = action inside a Goal, Path, or Plan.
 
 A Task can exist without a Goal. A Step cannot.
 
-## Wave 1 Locked Decisions
+## Locked Product Decisions
+
+### Wave 1
 
 - Ambitions is user-facing as a life organization system and internally as a personal life operating system / external brain.
 - Primary opening feeling: `My life feels organized`.
@@ -44,7 +46,7 @@ A Task can exist without a Goal. A Step cannot.
 - Emotional rule: the user never feels punished for drifting.
 - Product-shape rule: the app stays deep, not wide.
 
-## Wave 2 Locked Decisions
+### Wave 2
 
 - Internal `dropped` state should normally render as `No Longer Relevant` in UI.
 - `cancelled` and `dropped` are internally separate, but launch UI may simplify.
@@ -57,6 +59,23 @@ A Task can exist without a Goal. A Step cannot.
 - Delete memory and calendar write require confirmation.
 - Completed goals remain visibly emphasized for 30 days by default; major goals may remain emphasized longer.
 - Product/design language is `Completion Archive`; normal UI language is `Archive`.
+
+### Wave 3
+
+- Low-risk memories may be auto-created with visibility.
+- Sensitive or high-impact memories should be suggested for user confirmation first.
+- Memory confirmation is required for health, relationship/family, financial, location, calendar-derived, and sensitive Life Area memories.
+- Display/density preferences, recovery preferences, and repeated task routing may auto-create with receipt/visibility.
+- Work/career memory is contextual.
+- Users can pause memory learning globally and by category.
+- Users can mark any Life Area sensitive.
+- Sensitive Life Area launch behavior: hide details in notifications/widgets, collapse details on Today, use generic labels such as `Private item`.
+- Advanced sensitive behavior later: Face ID, export exclusion, local-only enforcement, screenshot hiding.
+- Trust Center uses qualitative status sections, not a numerical Trust Score.
+- Trust Center top status: `You are in control`.
+- User-facing memory section: `What Ambitions Knows`.
+- Object/type name: `Memory`.
+- Users can delete all memory from Trust Center with confirmation and export/reminder first.
 
 ## Object Ownership Summary
 
@@ -130,6 +149,8 @@ Useful future fields:
 - `displayNameOverride`
 - `iconToken`
 - `accentToken`
+- `isSensitive`
+- `sensitiveSummaryLabel`
 - `hiddenSensitiveDetails`
 - `northStarIds`
 - `goalIds`
@@ -145,6 +166,9 @@ Rules:
 - Ambitions may infer a Life Area, but the user must be able to correct it.
 - Life Area assignment should not block Capture or first-run flow.
 - Renaming a Life Area should use receipt + undo, not confirmation.
+- User can mark any Life Area sensitive.
+- Sensitive launch behavior hides details in notifications/widgets, collapses details on Today, and uses generic labels such as `Private item`.
+- Do not claim Face ID, export exclusion, local-only enforcement, or screenshot hiding until implemented and verified.
 
 ### Ambition / North Star
 
@@ -308,6 +332,7 @@ Rules:
 - Plan owns calendar permission.
 - Calendar read requires explicit Plan action.
 - Calendar write requires explicit confirmation.
+- Calendar-derived patterns require confirmation before becoming memory.
 - Plan works without calendar access.
 - No silent rescheduling.
 - Major deadline changes require confirmation or an explicit reviewed change flow.
@@ -504,6 +529,7 @@ Recommended fields:
 - `whatChanged`
 - `whyChanged`
 - `undoEligibility`
+- `undoDurationPolicy`
 - `correctionRoute`
 - `source`
 - `privacyLevel`
@@ -523,13 +549,61 @@ Result states:
 - needs confirmation
 - undo available
 
+Undo duration policy:
+
+- Quick UI actions: 5-10 seconds.
+- Route changes / attach / move: until screen exit or review tray dismissal.
+- Rename/display changes: 30 seconds.
+- Destructive/external writes: confirmation first, undo only if platform-safe.
+
 Rules:
 
 - Receipts are trust objects, not generic toasts.
 - Meaningful commands should close with a receipt.
 - Sensitive receipts hide details by default.
 - Ordinary local reversible changes should prefer receipt + undo.
-- Delete memory, calendar write, destructive actions, external writes, and major deadline changes require confirmation.
+- Delete memory, delete all memory, calendar write, destructive actions, external writes, and major deadline changes require confirmation.
+
+### Memory
+
+Memory is user-visible remembered context. The user-facing section is `What Ambitions Knows`; the object/type name is `Memory`.
+
+Minimum fields:
+
+- `id`
+- `memoryType`
+- `summary`
+- `source`
+- `freshnessState`
+- `confidenceState`
+- `createdAt`
+- `updatedAt`
+
+Recommended fields:
+
+- `evidenceIds`
+- `relatedObjectIds`
+- `correctionHistoryIds`
+- `privacyLevel`
+- `requiresConfirmation`
+- `isConfirmed`
+- `categoryLearningPaused`
+- `reviewedAt?`
+- `expiresAt?`
+
+Memory creation policy:
+
+- Low-risk memories may auto-create with visibility.
+- Sensitive/high-impact memories should be suggested for confirmation first.
+- Confirmation required: health, relationship/family, financial, location, calendar-derived, sensitive Life Area details.
+- Can auto-create with receipt/visibility: display/density preferences, recovery preferences, repeated task routing.
+- Contextual: work/career goals.
+
+Memory controls:
+
+- Users can pause memory learning globally and by category.
+- Users can delete all memory from Trust Center with confirmation and export/reminder first.
+- Delete all memory should not delete goals/tasks/plans unless explicitly included in a separate destructive action.
 
 ### Review
 
@@ -560,6 +634,7 @@ Rules:
 - One Capture can become or attach to a Task, Step, Goal, Plan seed, Proof item, Decision, Ritual, Waiting item, or Archive item.
 - One Receipt can reference multiple objects when a command changes more than one thing.
 - Memory can influence recommendations only when it is evidence-backed, freshness-aware, and correctable.
+- Sensitive Life Area state should affect external surfaces and compact summaries.
 
 ## Product Rules
 
@@ -609,6 +684,20 @@ Rules:
 - Major completed goals may remain emphasized longer depending on importance.
 - Cancelled, No Longer Relevant, Merged, Replaced, and Parked histories should preserve reason, proof, and decision trail.
 
+## Trust Center
+
+Top status:
+
+```text
+You are in control.
+```
+
+Rules:
+
+- No numerical Trust Score at launch.
+- Use qualitative status sections.
+- Supporting rows should show memory, receipts, privacy, sync/export truth, calendar access, and accessibility verification state.
+
 ## Implementation Guardrails
 
 - Do not duplicate object relationship stores per surface.
@@ -617,7 +706,7 @@ Rules:
 - Do not let Plan become a calendar clone.
 - Do not let You become a junk drawer.
 - Do not use AI/model language in user-facing object labels.
-- Do not claim sync, accessibility, memory, or automation behavior before verified implementation evidence exists.
+- Do not claim sync, accessibility, memory, sensitive privacy, Face ID, export exclusion, local-only enforcement, screenshot hiding, or automation behavior before verified implementation evidence exists.
 - Distinguish planned canon from shipped code in every implementation summary.
 - Prefer drill-downs and contextual intelligence over new top-level tabs.
 
@@ -643,9 +732,25 @@ Rules:
 - Completed goals stay visibly emphasized for 30 days by default; major goals may remain emphasized longer.
 - Product/design language is Completion Archive; normal UI language is Archive.
 
+## Resolved Wave 3 Questions
+
+- Low-risk memories can be auto-created with visibility; sensitive/high-impact memories are suggested for confirmation first.
+- Health, relationship/family, financial, location, calendar-derived, and sensitive Life Area memories require confirmation.
+- Display/density preferences, recovery preferences, and repeated task routing can auto-create with receipt/visibility.
+- Work/career memory is contextual.
+- Users can pause memory learning globally and by category.
+- User can mark any Life Area sensitive.
+- Sensitive launch behavior: hide details in notifications/widgets, collapse details on Today, generic `Private item` labels.
+- Advanced sensitive behavior later: Face ID, export exclusion, local-only enforcement, screenshot hiding.
+- Undo duration depends on action type.
+- No numerical Trust Score at launch; use qualitative status sections.
+- Trust Center top status is `You are in control`.
+- User-facing memory section is `What Ambitions Knows`; object/type name is `Memory`.
+- Users can delete all memory from Trust Center with confirmation and export/reminder first.
+
 ## Open Questions For Future Waves
 
 - Which state changes should create a visible Decision Trail entry versus only a receipt?
 - How detailed should the End Goal reason picker be?
-- How long should undo remain available by action type?
-- Which memories require explicit confirmation before use?
+- What exact data belongs in export/import v1?
+- Should sensitive Life Areas have per-surface toggles?
