@@ -2,16 +2,26 @@
 
 Status: Active canon consolidation layer.
 
-Purpose: Make the Ambitions execution lifecycle explicit enough for implementation, QA, and future Codex batches. This document consolidates lifecycle truth from Product Architecture, Systems Architecture, Visual System, Intelligence Standards, and the Design Constitution.
+Purpose: Make the Ambitions execution lifecycle explicit enough for implementation, QA, and future Codex batches. This document consolidates lifecycle truth from Product Architecture, Systems Architecture, Visual System, Intelligence Standards, the Design Constitution, and Wave 1 product decisions.
 
 ## Core Doctrine
 
 Ambitions is not a task manager with goals attached. It is a visual life execution system where goals, plans, milestones, steps, proof, decisions, weather, and archive learning remain connected.
 
+Wave 1 product rules:
+
+```text
+Every item has a place.
+Every goal has a next step.
+Every plan must be believable.
+The user never feels punished for drifting.
+The app stays deep, not wide.
+```
+
 Hierarchy:
 
 ```text
-Goal = direction
+Goal = meaningful outcome that may need a plan
 Path = strategic route
 Plan = believable execution shape
 Milestone = meaningful checkpoint
@@ -22,6 +32,18 @@ Decision = reason the path changed
 Receipt = action closure
 Review = learning loop
 Archive = memory and learning
+```
+
+User-facing language:
+
+```text
+Task
+```
+
+Internal/design language:
+
+```text
+One-Step Goal
 ```
 
 ## Primary Lifecycle Loop
@@ -46,11 +68,14 @@ Every meaningful object should have:
 - a visible current state
 - a next possible action
 - a reason it is shown
+- a place or route
 - a receipt after meaningful change
 - a way to correct or undo where safe
 - a history trail when the change matters
 
 ## Goal Lifecycle
+
+A Goal is a meaningful outcome that may need a plan.
 
 ### Goal states
 
@@ -105,6 +130,7 @@ Rules:
 - Every Parked, Cancelled, Dropped, Merged, or Replaced goal should create a Decision Trail entry.
 - Completed is not the same as Cancelled or Dropped.
 - Archive is not trash.
+- Goal recovery must never punish the user for drifting.
 
 ## Goal Weather Lifecycle
 
@@ -188,13 +214,17 @@ Goals / Tasks / Rituals / Commitments enter Plan
 
 Rules:
 
+- Every plan must communicate whether it is believable.
 - Plan owns calendar permission.
 - Plan must work without calendar access.
 - Calendar write always requires explicit confirmation.
 - Plan should not silently reschedule.
 - Major Plan Treaty changes create Decision Trail notes.
+- Recovery language must stay non-shaming.
 
 ## Task / One-Step Goal Lifecycle
+
+A Task is a standalone One-Step Goal. It can exist without a Goal.
 
 Task states:
 
@@ -228,10 +258,12 @@ Capture / Create
 Rules:
 
 - A Task is allowed to stay standalone.
+- Ambitions should suggest attaching or promoting a Task when useful.
 - A Task can be attached to a Goal when it supports larger direction.
 - A Task can be promoted to a Goal when it has too much structure.
 - A Goal can be demoted to a Task when the structure was too heavy, with a receipt.
 - No top-level Tasks tab.
+- Normal UI says `Task`; internal/design canon can say `One-Step Goal`.
 
 ## Step Lifecycle
 
@@ -392,6 +424,32 @@ Rules:
 - Recovery should never hide deadline impact.
 - Unsupported recovery commands must fail safely without fake state changes.
 
+## Life Area Lifecycle
+
+Life Areas are inferred/recommended and correctable, not mandatory friction.
+
+Default Life Areas:
+
+```text
+Career
+Creative
+Finance
+Health
+Home
+Relationships
+Education
+Personal
+Admin
+```
+
+Rules:
+
+- Life Areas should help every item have a place.
+- User-facing names can be renamed.
+- Internal canonical type should remain stable for routing and intelligence.
+- Items can temporarily exist without confirmed Life Area when routing is uncertain.
+- Smart Attachment receipts should allow Life Area correction.
+
 ## Acceptance Criteria
 
 A lifecycle implementation is acceptable only when:
@@ -403,6 +461,17 @@ A lifecycle implementation is acceptable only when:
 - Detail screens provide explanation and correction.
 - Archived/completed/cancelled/dropped objects preserve learning.
 - QA can distinguish implemented behavior from planned canon.
+- The user can recover from drift without punitive language.
+- New depth is added through drill-downs/contextual intelligence rather than unnecessary top-level surfaces.
+
+## Resolved Wave 1 Questions
+
+- A Goal is a meaningful outcome that may need a plan.
+- User-facing standalone action language is Task; internal/design term is One-Step Goal.
+- A Task can exist without a Goal and should be attachable/promotable when useful.
+- Life Areas are inferred/recommended and correctable.
+- Default Life Areas are Career, Creative, Finance, Health, Home, Relationships, Education, Personal, Admin.
+- Default Life Areas can be renamed while keeping canonical type.
 
 ## Open Questions For Future Waves
 
