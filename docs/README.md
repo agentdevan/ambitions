@@ -71,6 +71,7 @@ These focused docs extract already-existing doctrine into implementation-readabl
 - [canon/GOAL_PLAN_TASK_LIFECYCLE.md](canon/GOAL_PLAN_TASK_LIFECYCLE.md)
 - [canon/GOALS_GOAL_DETAIL.md](canon/GOALS_GOAL_DETAIL.md)
 - [canon/TODAY_NOW_STATE.md](canon/TODAY_NOW_STATE.md)
+- [canon/YOU_PROFILE_REVIEWS.md](canon/YOU_PROFILE_REVIEWS.md)
 - [canon/ONBOARDING_SPEC.md](canon/ONBOARDING_SPEC.md)
 - [canon/CAPTURE_SMART_ATTACHMENT.md](canon/CAPTURE_SMART_ATTACHMENT.md)
 - [canon/PLAN_CALENDAR_BELIEVABILITY.md](canon/PLAN_CALENDAR_BELIEVABILITY.md)
