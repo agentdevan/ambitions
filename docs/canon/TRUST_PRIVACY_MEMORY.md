@@ -2,7 +2,7 @@
 
 Status: Active canon consolidation layer.
 
-Purpose: Make trust, privacy, memory, receipts, explanation, correction, and user control explicit enough for implementation and QA. This document extracts existing doctrine from the Design Constitution, Product Architecture, Systems Architecture, Intelligence Standards, UX Writing Matrix, and product decision Waves 1-2.
+Purpose: Make trust, privacy, memory, receipts, explanation, correction, and user control explicit enough for implementation and QA. This document extracts existing doctrine from the Design Constitution, Product Architecture, Systems Architecture, Intelligence Standards, UX Writing Matrix, and product decision Waves 1-3.
 
 ## Trust Thesis
 
@@ -47,20 +47,91 @@ Completion Archive = product/design language.
 Archive = normal UI language.
 ```
 
+## Wave 3 Trust Decisions
+
+Memory creation:
+
+```text
+Low-risk memories may be auto-created with visibility.
+Sensitive or high-impact memories should be suggested for user confirmation first.
+```
+
+Memory confirmation required:
+
+```text
+Health-related preferences
+Relationship/family details
+Financial goals or constraints
+Location patterns
+Calendar-derived patterns
+Sensitive Life Area details
+```
+
+Can auto-create with receipt/visibility:
+
+```text
+Display/density preferences
+Recovery preferences
+Repeated task routing
+```
+
+Contextual:
+
+```text
+Work/career goals
+```
+
+Memory controls:
+
+```text
+Users can pause memory learning globally and by category.
+Users can delete all memory from Trust Center with confirmation and export/reminder first.
+```
+
+Sensitive Life Areas:
+
+```text
+User can mark any Life Area sensitive.
+Launch behavior: hide details in notifications/widgets, collapse details on Today, and use generic labels like Private item.
+Later/advanced behavior: Face ID, export exclusion, local-only enforcement, screenshot hiding.
+```
+
+Trust Center:
+
+```text
+No numerical Trust Score at launch.
+Use qualitative status sections.
+Top status: You are in control.
+User-facing memory section: What Ambitions Knows.
+Object/type name: Memory.
+```
+
+Undo:
+
+```text
+Undo duration depends on action type.
+Quick UI actions: 5-10 seconds.
+Route changes / attach / move: until screen exit or review tray dismissal.
+Rename/display changes: 30 seconds.
+Destructive/external writes: confirmation first, undo only if platform-safe.
+```
+
 ## Trust Principles
 
 1. The user can see what Ambitions knows.
 2. The user can correct what Ambitions got wrong.
 3. The user can delete or hide sensitive memory where supported.
-4. Meaningful changes close with receipts.
-5. Recommendations explain evidence and assumptions.
-6. External writes require explicit confirmation.
-7. Destructive actions and major deadline changes require confirmation.
-8. Reversible local changes prefer receipt + undo.
-9. Permissions are requested only when a user action makes the value clear.
-10. Planned intelligence is never described as shipped behavior.
-11. Ambitions is an intelligent product, not a chat-first AI product.
-12. Trust-critical states degrade safely.
+4. The user can pause memory learning globally and by category.
+5. Meaningful changes close with receipts.
+6. Recommendations explain evidence and assumptions.
+7. External writes require explicit confirmation.
+8. Destructive actions and major deadline changes require confirmation.
+9. Reversible local changes prefer receipt + undo.
+10. Permissions are requested only when a user action makes the value clear.
+11. Planned intelligence is never described as shipped behavior.
+12. Ambitions is an intelligent product, not a chat-first AI product.
+13. Trust-critical states degrade safely.
+14. No numerical Trust Score at launch; trust uses qualitative status sections.
 
 ## Primary Trust Surfaces
 
@@ -68,7 +139,7 @@ Archive = normal UI language.
 | --- | --- |
 | Contextual panels | Explain why an action, route, or recommendation appears. |
 | Receipt / Action Closure Tray | Shows what happened, what changed, why, undo/correction, and source. |
-| You -> Trust Center | Main control center for explanation, privacy, receipts, sync/export status, safe automation, and platform surface truth. |
+| You -> Trust Center | Main control center for explanation, privacy, receipts, sync/export status, safe automation, and platform surface truth. Top status: `You are in control.` |
 | You -> What Ambitions Knows | Main user-facing memory surface. |
 | You -> Reviews | Shows what changed, what was learned, and what should be corrected or carried forward. |
 | Capture receipts | Shows where items went and how to change route. |
@@ -78,6 +149,18 @@ Archive = normal UI language.
 ## Memory Model
 
 Memory is user-visible remembered context that can shape future recommendations only when evidence-backed and correctable.
+
+Section name:
+
+```text
+What Ambitions Knows
+```
+
+Object/type name:
+
+```text
+Memory
+```
 
 Memory types:
 
@@ -91,6 +174,8 @@ Memory types:
 - completed review learning
 - trust/safety preference
 - display/density/accessibility preference
+- sensitive Life Area flag
+- memory learning control
 
 Memory required fields:
 
@@ -109,8 +194,42 @@ Recommended fields:
 - `relatedObjectIds`
 - `correctionHistoryIds`
 - `privacyLevel`
+- `requiresConfirmation`
+- `isConfirmed`
+- `categoryLearningPaused`
 - `reviewedAt?`
 - `expiresAt?`
+
+## Memory Creation Policy
+
+Low-risk memories may be auto-created when they remain visible and correctable.
+
+Auto-create with receipt/visibility:
+
+- display/density preferences
+- recovery preferences
+- repeated task routing
+
+Require explicit confirmation before memory use:
+
+- health-related preferences
+- relationship/family details
+- financial goals or constraints
+- location patterns
+- calendar-derived patterns
+- sensitive Life Area details
+
+Contextual memory:
+
+- work/career goals can be auto-created only when low-risk and obvious
+- request confirmation when work/career memory affects priority, planning, identity, or sensitive context
+
+Rules:
+
+- Ambitions should not silently build a large hidden profile.
+- Sensitive or high-impact memory should be suggested for confirmation first.
+- Calendar-derived patterns require confirmation before becoming memory.
+- Memory suggestions should explain what was noticed and how it would be used.
 
 ## Memory Freshness
 
@@ -145,6 +264,18 @@ User-facing copy should not say `model confidence`. Use plain explanation:
 - `This may need review.`
 - `Updated from your correction.`
 
+## Memory Learning Controls
+
+Users can pause memory learning globally and by category.
+
+Rules:
+
+- Pausing memory learning should not delete existing memory.
+- Global pause belongs in Trust Center.
+- Per-category controls belong in What Ambitions Knows or a Memory Settings route.
+- Existing memory should remain inspectable, correctable, and deletable while learning is paused.
+- Resuming learning should be explicit.
+
 ## What Ambitions Knows
 
 `You -> What Ambitions Knows` should show memory categories with freshness and correction controls.
@@ -158,6 +289,8 @@ Required categories:
 - Repeated routes / corrections
 - Display and focus preferences
 - Trust and privacy choices
+- Sensitive areas
+- Memory learning controls
 
 Each memory category should support:
 
@@ -165,11 +298,15 @@ Each memory category should support:
 - correct
 - delete where safe
 - review source/evidence where useful
+- pause/resume learning for that category where implemented
 
 Rules:
 
 - Correcting memory should create a receipt.
 - Deleting memory requires confirmation.
+- Deleting all memory requires confirmation and export/reminder first.
+- If export is not implemented, say so plainly and provide the safest available confirmation path.
+- Delete all memory should not delete goals/tasks/plans unless explicitly included in a separate destructive action.
 - Display/density preference changes should prefer receipt + undo.
 
 ## Receipts
@@ -211,10 +348,18 @@ Receipt + undo first:
 Confirmation required instead:
 
 - Delete memory.
+- Delete all memory.
 - Calendar write.
 - Major deadline changes.
 - Destructive actions.
 - External writes.
+
+Undo duration by action type:
+
+- Quick UI actions: 5-10 seconds.
+- Route changes / attach / move: until screen exit or review tray dismissal.
+- Rename/display changes: 30 seconds.
+- Destructive/external writes: confirmation first, undo only if platform-safe.
 
 Receipt rules:
 
@@ -259,6 +404,10 @@ Goal Weather rule:
 - Users should correct inputs that affect Goal Weather rather than manually setting weather directly.
 - Inputs include deadline, proof, blocker, next step, scope, waiting state, and assumptions.
 
+Memory suggestion rule:
+
+- Sensitive or high-impact memory suggestions must explain what Ambitions noticed, how it would be used, and how to decline.
+
 ## Privacy Levels
 
 Recommended privacy states:
@@ -279,6 +428,29 @@ Rules:
 - Sync/export status must be truthful.
 - User-facing privacy claims require implementation evidence.
 
+## Sensitive Life Areas
+
+User can mark any Life Area sensitive.
+
+Launch behavior:
+
+- hide details in notifications/widgets
+- collapse details on Today
+- use generic labels such as `Private item`
+
+Later/advanced behavior:
+
+- require Face ID to open
+- exclude from export by default
+- keep local-only
+- hide from screenshots/previews
+
+Rules:
+
+- Sensitivity applies to default, renamed, and custom Life Areas.
+- Do not claim Face ID, export exclusion, local-only enforcement, or screenshot hiding until implemented and verified.
+- Sensitive mode should affect external surfaces and compact summaries.
+
 ## Permission Trust
 
 ### Calendar
@@ -286,6 +458,7 @@ Rules:
 - Plan owns calendar permission.
 - Calendar read permission is requested only after explicit Plan action.
 - Calendar write requires explicit confirmation.
+- Calendar-derived patterns require confirmation before becoming memory.
 - Plan works without calendar access.
 - Denied permission should degrade gracefully.
 
@@ -300,12 +473,14 @@ Allowed triggers:
 - Privacy-safe by default.
 - Operational, calm, and specific.
 - Request only after user chooses reminder/notification value.
+- Sensitive Life Area details should be hidden by default.
 
 ### Sync / Export
 
 - Local-first behavior must remain clear.
 - Export/import receipts should explain what changed.
 - Sync unavailable or unverified states must be explicit.
+- Delete all memory should offer export/reminder first where export exists.
 
 ## Safe Automation Boundary
 
@@ -326,6 +501,7 @@ Ambitions must not silently:
 - send/share/export personal information
 - claim learning without evidence
 - hide uncertainty
+- create sensitive/high-impact memory without confirmation
 
 Automation levels:
 
@@ -337,6 +513,18 @@ Automation levels:
 - Level 5: automation with explicit confirmation only
 
 ## Trust Center Structure
+
+Top status:
+
+```text
+You are in control.
+```
+
+Trust status style:
+
+```text
+No numerical Trust Score at launch. Use qualitative status sections.
+```
 
 Recommended Grouped Navigation List sections:
 
@@ -353,10 +541,13 @@ Recommended Grouped Navigation List sections:
 - Memory Review
 - Corrections
 - Freshness
+- Pause Memory Learning
+- Delete All Memory
 
 ### Privacy
 
 - Sensitive Details
+- Sensitive Life Areas
 - Calendar Data
 - Notifications Privacy
 - Export Data
@@ -418,21 +609,33 @@ This was saved locally, but export did not complete.
 Ambitions is not sure where this belongs. It is saved to Needs a Place.
 ```
 
+```text
+Export is not available yet. You can still delete memory after confirmation.
+```
+
 ## QA Acceptance Criteria
 
 Trust implementation is acceptable when:
 
 - User can inspect and correct memory.
+- Low-risk memories are visible and correctable.
+- Sensitive/high-impact memories require confirmation before use.
+- User can pause memory learning globally and by category where implemented.
+- User can mark any Life Area sensitive.
+- Sensitive Life Area details hide in notifications/widgets and collapse on Today at launch.
+- Trust Center uses `You are in control` and qualitative status sections, not a numerical Trust Score.
 - Meaningful actions create receipts.
 - Reversible local actions prefer receipt + undo.
+- Undo duration is action-appropriate and truthfully represented.
 - Destructive actions, external writes, and major deadline changes require confirmation.
 - Explanations distinguish evidence from assumptions.
 - Sensitive details are hidden by default in external surfaces.
 - Permission requests are user-action triggered.
 - Calendar write requires confirmation.
+- Calendar-derived memory requires confirmation.
 - Sync/export/accessibility claims are truthful.
 - Failed actions state what remains safe.
-- Memory deletion requires confirmation.
+- Memory deletion and delete-all-memory require confirmation.
 - No AI/model terminology appears in normal UI.
 
 ## Resolved Wave 2 Questions
@@ -448,11 +651,25 @@ Trust implementation is acceptable when:
 - Completed goals stay visibly emphasized for 30 days by default; major goals may remain emphasized longer.
 - Product/design language is Completion Archive; normal UI language is Archive.
 
+## Resolved Wave 3 Questions
+
+- Low-risk memories can be auto-created with visibility; sensitive/high-impact memories are suggested for confirmation first.
+- Health, relationship/family, financial, location, calendar-derived, and sensitive Life Area memories require confirmation.
+- Display/density preferences, recovery preferences, and repeated task routing can auto-create with receipt/visibility.
+- Work/career memory is contextual.
+- Users can pause memory learning globally and by category.
+- User can mark any Life Area sensitive.
+- Sensitive launch behavior: hide details in notifications/widgets, collapse details on Today, generic `Private item` labels.
+- Advanced sensitive behavior later: Face ID, export exclusion, local-only enforcement, screenshot hiding.
+- Undo duration depends on action type.
+- No numerical Trust Score at launch; use qualitative status sections.
+- Trust Center top status is `You are in control`.
+- User-facing section is `What Ambitions Knows`; object/type name is `Memory`.
+- Users can delete all memory from Trust Center with confirmation and export/reminder first.
+
 ## Open Questions For Future Waves
 
-- Which memories should be auto-created versus suggested for confirmation?
-- How long should undo remain available for each receipt type?
-- Should users be able to pause memory learning globally?
-- Should sensitive Life Areas have a privacy mode?
 - What exact data belongs in export/import v1?
-- Should Trust Center show a single status score or avoid scoring entirely?
+- Should sensitive Life Areas have per-surface toggles?
+- Should memory suggestions appear as receipts, review cards, or Trust Center prompts?
+- Should Trust Center qualitative status have named states such as Clear, Needs Review, Limited, or Attention?
