@@ -2,7 +2,7 @@
 
 Status: Active canon consolidation layer.
 
-Purpose: Define what “done” means for future Ambitions implementation work. This document consolidates acceptance expectations from the roadmap, batch plan, visual review checklist, RC maturity plan, design contracts, accessibility posture, systems architecture, and product decision Waves 1-4.
+Purpose: Define what “done” means for future Ambitions implementation work. This document consolidates acceptance expectations from the roadmap, batch plan, visual review checklist, RC maturity plan, design contracts, accessibility posture, systems architecture, and product decision Waves 1-19.
 
 ## Core Standard
 
@@ -18,6 +18,7 @@ A feature is done when it is:
 - resilient to empty/error/recovery cases
 - honest about shipped versus planned behavior
 - covered by practical validation evidence
+- updated in docs/status where required
 
 ## Required Pre-Implementation Gate
 
@@ -31,31 +32,36 @@ Before implementing a non-trivial Ambitions change, the implementer must identif
 6. Whether the work is UI, domain model, system logic, QA, release, or docs-only.
 7. What must not be touched.
 8. Planned-canon versus shipped-code distinction.
+9. Whether any unresolved question needs a canon proposal or decision-log entry.
 
 Required reading order:
 
 1. `docs/codex/BATCH_REGISTRY.md`
 2. `docs/canon/SOURCE_OF_TRUTH_MAP.md`
 3. `docs/canon/PRODUCT_DECISIONS.md`
-4. batch file if one exists
-5. relevant product/design/system docs from the source map
-6. current implementation files
-7. tests/previews/fixtures affected by the change
+4. `docs/canon/AMBITION_CANON_COMPLETION_REPORT.md`
+5. batch file if one exists
+6. relevant product/design/system/focused canon docs from the source map
+7. current implementation files
+8. tests/previews/fixtures affected by the change
 
 ## Canon Alignment Gate
 
 A change passes canon alignment when:
 
 - It does not contradict `MASTER_PRODUCT_SPEC.md`.
+- It follows `PRODUCT_DECISIONS.md` for Waves 1-19.
 - It follows `Ambitions_Design_Constitution.md` for design, IA, UX writing, interaction, trust, accessibility, and external-surface behavior.
 - It follows Product Architecture for surface ownership.
 - It follows Systems Architecture for engine ownership.
-- It follows `PRODUCT_DECISIONS.md` for resolved product wording/state decisions.
-- It does not recreate a standalone Insights tab, Habits tab, Tasks tab, or sixth Life Areas tab.
+- It follows focused canon docs for implementation detail.
+- It does not recreate a standalone Insights tab, Habits tab, Tasks tab, Calendar tab, Life Areas tab, or Profile tab.
 - It preserves the locked shell: Today, Goals, Capture, Plan, You.
 - It distinguishes Profile compatibility code from user-facing `You` canon.
 - It distinguishes Task from Step.
+- It distinguishes shipped, planned, and deferred behavior.
 - It does not treat archived docs as active canon.
+- It does not introduce new canon unless explicitly labeled as a canon proposal.
 
 ## System Ownership Gate
 
@@ -88,13 +94,43 @@ A change passes surface ownership when content lives in the right place.
 | Surface | Owns | Does not own |
 | --- | --- | --- |
 | Onboarding | first useful object, static preview, first-run route receipt, safe skip-to-Today | upfront calendar, notifications, account setup, display-density setup, full questionnaire |
-| Today | immediate execution, best next action, daily recovery | full analytics, dense histories, raw ledgers |
-| Goals | direction, goal portfolio, health, lifecycle, goal detail entry | standalone task manager, dense KPI dashboard |
-| Capture | intake, Needs a Place, Smart Attachment, route receipts | long-term graveyard inbox, chat-first AI |
-| Plan | day/week shaping, believability, rituals, calendar-aware planning | onboarding permissions, raw calendar clone |
-| You | personalization, memory, reviews, trust, settings | primary execution UI |
-| Trust Center | trust, receipts, privacy, memory controls, sync/export truth, platform status | numerical trust score at launch, marketing claims |
+| Today | best next action, Now State, immediate execution, full daily schedule below main action, recovery | task dump, calendar clone, analytics dashboard, motivation wall |
+| Goals | direction, protected goal, portfolio health, goal detail, Goal Weather, Proof | standalone task manager, project-management-board top level, KPI dashboard |
+| Capture | Quiet Command Sheet, intake, Needs a Place, Smart Attachment, route receipts | long-term graveyard inbox, chat-first AI, generic notes app |
+| Plan | believable day/week shaping, daily schedule, rituals, calendar-aware planning | onboarding permissions, raw calendar clone, silent rescheduling |
+| You | personal system center, settings, trust, memory, reviews, personalization, data controls | generic settings page, junk drawer, social profile, primary execution UI |
+| Trust Center | trust, receipts, privacy, memory controls, sync/export truth, platform status | numerical trust score at launch, marketing claims, paywalled privacy |
 | What Ambitions Knows | user-visible Memory inspection, correction, confirmation, pause/delete controls | hidden profiling or unreviewable memory |
+
+## Launch Scope Gate
+
+A launch-bound change passes when it supports the launch proof:
+
+```text
+Ambitions can make one meaningful goal feel organized, believable, and actionable.
+```
+
+Rules:
+
+- Prefer fewer complete loops over more partial features.
+- Do not ship fake AI, broken sync claims, unclear data controls, or dead-end flows.
+- Advanced canon may remain planned/deferred when labeled accurately.
+- Delay sync, advanced memory, widgets / Live Activities, and native AI-style suggestions if not excellent.
+- MVP must not mean ugly, untrustworthy, incomplete, or confusing.
+
+## Roadmap Governance Gate
+
+A roadmap or batch change passes when:
+
+- It optimizes for coherent product loops.
+- It respects dependency order.
+- It distinguishes shipped, planned, deferred, duplicate, superseded, and needs-canon-proposal work.
+- It does not add tabs casually.
+- It does not rename canon casually.
+- It does not implement fake capability.
+- It does not skip validation/status updates.
+- Canon conflicts pause implementation until resolved.
+- Unresolved questions become canon proposals or decision-log entries.
 
 ## Onboarding Gate
 
@@ -118,16 +154,111 @@ An onboarding or first-run change passes when:
 - Skipping onboarding lands in Today with a strong empty state and Capture action.
 - The static preview has an equivalent VoiceOver description.
 
+## Capture Gate
+
+A Capture change passes when:
+
+- Capture feels like a Quiet Command Sheet.
+- Primary placeholder is `What needs a place?`.
+- Nothing gets lost.
+- Every capture gets a clear next route.
+- Low-confidence capture asks one question or saves to Needs a Place.
+- Capture routes use launch/core routes unless an advanced route is explicitly scoped.
+- No general Notes object is introduced at launch.
+- Task-to-goal promotion is user-confirmed.
+- Route receipts use `Saved as...` / `Attached as...` patterns.
+
+## Today / Now State Gate
+
+A Today change passes when:
+
+- It helps the user know what matters now.
+- It prioritizes one best next action first.
+- It shows the full daily schedule below the main next action when shown.
+- It uses Now State as best current execution context.
+- Broken-day behavior offers recovery and asks what to protect.
+- Main recovery action is `Save the Day`.
+- Rituals/routines appear only if relevant now.
+- Sensitive/private items collapse as `Private item` at launch.
+- Today does not become a task dump, calendar clone, analytics dashboard, or motivation wall.
+
+## Goals Gate
+
+A Goals change passes when:
+
+- It helps the user choose and protect direction.
+- Top-level Goals prioritizes one protected/most important goal and goal portfolio health.
+- Goal Detail leads with `What is the next visible step?`.
+- Goal Detail also answers `Is this goal still believable?`.
+- Goal Weather communicates believability / risk / clarity, not fake progress.
+- Progress percentages appear only when measurable and honest.
+- Proof can include completed steps, artifacts, decisions, feedback, blockers resolved, and reviews.
+- Manual proof attaches to a goal, milestone, or step.
+- Missing next step asks/suggests rather than merely warning.
+- Top-level Goals does not become a project management board, spreadsheet, KPI dashboard, or quote wall.
+
+## Plan Gate
+
+A Plan change passes when:
+
+- It shapes a believable day/week.
+- It can build the daily schedule as part of making goals executable.
+- It remains plan-first with optional calendar awareness.
+- It answers `Can this week actually hold?`.
+- It supports `What daily schedule makes this hold?`.
+- Calendar-aware behavior reads events, suggests open windows, and compares against commitments.
+- Calendar writes require explicit confirmation every time.
+- First calendar CTA is `Make Plan calendar-aware`.
+- Overload behavior suggests a lighter plan and asks what to protect.
+- Rituals/routines do not become a standalone Habits tab.
+- Plan does not shame, silently reschedule, pretend impossible weeks are fine, or become a raw calendar clone.
+
+## You / Reviews Gate
+
+A You change passes when:
+
+- User-facing language uses `You`, not `Profile`, except legacy compatibility references.
+- You functions as a personal system center.
+- You contains settings, trust, memory, reviews, and personalization.
+- Top status is `You are in control`.
+- Settings-style areas use Grouped Navigation Lists.
+- Reviews turn what happened into what should happen next.
+- Analytics appear only as Reviews/Patterns, not dashboard analytics.
+- Export/import appears only when implemented and through Trust Center / Data controls.
+- Appearance Studio belongs in You.
+- You does not become a junk drawer, analytics dashboard, generic settings page, or social profile.
+
+## Intelligence / Automation Gate
+
+An intelligence or automation change passes when:
+
+- It primarily explains, suggests, and prepares.
+- Normal UI avoids AI/model language.
+- Suggestions feel like calm options.
+- Meaningful suggestions include why this, evidence/assumption, user control, and dismiss/change option.
+- Confidence is qualitative in normal UI; numeric only in debug/internal contexts.
+- Important plan/goal changes require user confirmation.
+- Safe local reversible actions can use receipt + undo.
+- External actions require confirmation.
+- Intelligence never hides uncertainty, pretends certainty, shames the user, or makes external changes silently.
+
 ## Visual Quality Gate
 
 A UI change passes visual quality when:
 
+- It feels like a premium calm OS.
 - It uses the calm shell / rich panel / meaningful state model.
 - It uses shared tokens/components where available.
 - It has one dominant first-screen decision or purpose.
 - It avoids equal-weight card walls.
+- It avoids dense dashboards.
 - It avoids paragraph-heavy top-level UI.
-- It respects spacing, radius, typography, and surface hierarchy.
+- It avoids too many exposed controls.
+- Rich panels communicate meaningful state, hierarchy, and context.
+- Motion is subtle and meaningful.
+- Motion communicates where things went, what changed, or state transitions.
+- Reduce Motion preserves equivalent clarity.
+- Celebration is rare and reserved for meaningful completions.
 - It works in dark and light mode if the surface is user-visible.
 - It avoids hard-coded one-off colors when tokens exist.
 - It preserves Appearance Studio compatibility.
@@ -142,6 +273,7 @@ A copy/UI-language change passes when:
 - It uses Wave 2 state language: `No Longer Relevant` for dropped goals, `End Goal` for intentional ending, `Park Goal` for pause, `Needs Protection` for fragile plan state, and `No Longer Holds` for broken plan state.
 - It uses Wave 3 trust language: `You are in control` for Trust Center top status, `What Ambitions Knows` for the memory section, and `Memory` for the object/type.
 - It uses Wave 4 onboarding language: `What do you want to organize?`, `Organize This`, and contextual first-run route receipts.
+- It uses `Focus Support`, not ADHD Mode or Neurodivergent Mode.
 - It avoids numerical Trust Score language at launch.
 - It avoids AI/model terminology in normal UI.
 - It avoids shame language.
@@ -160,28 +292,70 @@ A trust-sensitive change passes when:
 - Destructive actions, external writes, and major deadline changes require confirmation.
 - Calendar write requires confirmation.
 - Memory deletion and delete-all-memory require confirmation.
+- Delete-all-memory affects memory only.
 - Delete-all-memory offers export/reminder first where export exists, or truthfully states export is unavailable.
 - Low-risk memories are visible and correctable.
 - Sensitive/high-impact memories require confirmation before use.
 - Health, relationship/family, financial, location, calendar-derived, and sensitive Life Area memories require confirmation.
 - Display/density preferences, recovery preferences, and repeated task routing may auto-create with receipt/visibility.
-- Work/career memory is treated contextually.
 - Users can pause memory learning globally and by category where implemented.
 - User can mark any Life Area sensitive.
 - Sensitive Life Area details hide in notifications/widgets and collapse on Today at launch.
 - Sensitive Life Areas use generic labels such as `Private item` in compact surfaces.
 - Explanation distinguishes evidence from assumption.
 - Goal Weather correction happens through inputs, not direct manual override.
-- Sensitive details hide by default in external surfaces.
 - Permission prompts occur only after relevant user action.
+- Trust/privacy/data controls are not paywalled.
 - Sync/export/accessibility/platform claims are truthful.
 - Advanced sensitive privacy claims such as Face ID, export exclusion, local-only enforcement, or screenshot hiding are not made until implemented and verified.
 - Failure states explain what remains safe.
+
+## Data / Local-First Gate
+
+A data/model change passes when:
+
+- Default data posture remains local-first.
+- Launch does not require an account.
+- Launch does not claim sync.
+- Export exists before cloud sync if cloud sync is introduced.
+- Export uses user-selectable categories when implemented.
+- Export does not feel hostage.
+- Data controls live under You -> Trust Center / Data controls.
+- UI does not show sync/export claims before implementation.
+- Export failure explains data remains safe, offers retry, and offers review export option.
+- User can understand what is stored, remembered, exported, and deleted.
+- It is additive or migration-safe where possible.
+- It preserves existing local data.
+- It handles legacy decode/default values.
+- It avoids fake successful writes.
+- It emits Event Ledger / receipt history only for actual executed changes.
+- It distinguishes representation-only future commands from real executed mutations.
+- It does not introduce duplicate stores for shared objects.
+- It preserves internal separation between `cancelled` and `dropped` where the domain model requires it, even if launch UI simplifies wording.
+- It preserves memory learning pause without deleting existing memory.
+- It preserves first-run user input on save failure.
+
+## External Surfaces Gate
+
+An external surface change passes when:
+
+- It surfaces the right next thing safely.
+- External-surface north star is calm continuity.
+- Notifications are sparse by default and calm/operational.
+- Sensitive/private details collapse as `Private item` at launch.
+- Widgets show best next action / Today slice, not dashboards.
+- Live Activities show active focus/protected block or time-sensitive plan slice.
+- App Intents / Shortcuts support capture without losing input.
+- Safe local actions create receipts where meaningful.
+- External writes require app confirmation.
+- External surfaces do not expose private details, spam the user, show fake urgency, or replace core app context.
 
 ## Accessibility Gate
 
 A user-visible change passes the baseline accessibility gate when:
 
+- Accessibility is treated as core product quality.
+- Focus Support reduces decisions and protects next-action clarity.
 - Dynamic Type does not hide the primary action.
 - VoiceOver labels summarize purpose, state, and action.
 - Interactive rows/buttons have stable tap targets.
@@ -192,6 +366,20 @@ A user-visible change passes the baseline accessibility gate when:
 - Screen readers can understand status/value rows.
 - Static previews have equivalent VoiceOver descriptions.
 - No user-facing accessibility claims appear before verification evidence exists.
+- Focus Support does not infantilize, remove depth, label the user, or turn the app into training wheels.
+
+## Monetization Gate
+
+A monetization change passes when:
+
+- Business model feels like a premium life OS.
+- No ads are introduced.
+- Free tier is useful but limited and proves one meaningful goal can become organized.
+- Paid value comes from deep planning, reviews, memory, personalization, and advanced external surfaces.
+- Export does not feel hostage.
+- Trust/privacy/data controls are not paywalled.
+- Monetization avoids shame, artificial friction, manipulative urgency, and data lock-in.
+- Pricing posture remains premium but accessible.
 
 ## Empty / Error / Recovery Gate
 
@@ -218,22 +406,6 @@ A screen or flow passes this gate when it handles:
 - receipt + undo for reversible local changes where safe
 
 The state must offer one useful next action and no dead end.
-
-## Data And Persistence Gate
-
-A data/model change passes when:
-
-- It is additive or migration-safe where possible.
-- It preserves existing local data.
-- It handles legacy decode/default values.
-- It avoids fake successful writes.
-- It emits Event Ledger / receipt history only for actual executed changes.
-- It distinguishes representation-only future commands from real executed mutations.
-- It does not introduce duplicate stores for shared objects.
-- It preserves internal separation between `cancelled` and `dropped` where the domain model requires it, even if launch UI simplifies wording.
-- It does not allow delete-all-memory to delete goals/tasks/plans unless explicitly included in a separate destructive action.
-- It preserves memory learning pause without deleting existing memory.
-- It preserves first-run user input on save failure.
 
 ## Test / Validation Gate
 
@@ -269,6 +441,7 @@ A change passes documentation gate when:
 
 - The relevant source-of-truth doc is updated only if doctrine changed.
 - `PRODUCT_DECISIONS.md` is updated when a product ambiguity is resolved.
+- New canon is introduced only as a canon proposal unless explicitly approved.
 - Batch registry/status is updated only when status changed.
 - New docs are added to the right index.
 - Superseded docs are marked historical rather than silently contradicted.
@@ -289,18 +462,23 @@ A batch is complete only when:
 9. Onboarding behavior matches Wave 4 gates where relevant.
 10. Completion summary distinguishes implemented behavior from planned future canon.
 11. `BATCH_REGISTRY.md` is updated if the batch status changed.
-12. Follow-up work is captured without moving the active batch prematurely.
+12. Shipped/planned/deferred status is clear.
+13. Follow-up work is captured without moving the active batch prematurely.
 
 ## Red Flags
 
 Stop or revise if a change:
 
 - creates a new top-level tab without canon approval
-- reintroduces Insights, Habits, or Tasks as standalone top-level surfaces
+- reintroduces Insights, Habits, Tasks, Calendar, Life Areas, or Profile as standalone top-level surfaces
 - requests calendar permission during onboarding
 - requests notification permission during onboarding
 - asks for display density during onboarding
 - uses onboarding completion as the first-run success metric instead of useful-object creation
+- requires account creation at launch
+- claims launch sync
+- makes export feel hostage
+- paywalls trust/privacy/data controls
 - silently changes calendar/user data
 - silently changes major deadlines
 - deletes memory without confirmation
@@ -313,11 +491,12 @@ Stop or revise if a change:
 - uses AI/model terminology in normal UI
 - uses `Dropped`, `Fragile`, or `Broken` as normal user-facing copy when softer Wave 2 labels apply
 - uses a numerical Trust Score at launch
-- claims sync, memory, automation, or accessibility that is not verified
+- claims sync, memory, automation, export, accessibility, privacy, or platform behavior that is not verified
 - breaks local-first behavior
 - removes correction/undo paths from meaningful actions
 - turns top-level screens into dense dashboards
 - changes roadmap status without evidence
+- implements unresolved questions instead of creating canon proposals
 
 ## Completion Summary Template
 
@@ -335,6 +514,7 @@ Use this structure for Codex completion summaries:
 - Surface owner:
 - System owner:
 - Planned-vs-shipped distinction:
+- Shipped/planned/deferred status:
 
 ## Validation
 - Commands run:
@@ -344,21 +524,30 @@ Use this structure for Codex completion summaries:
 ## Acceptance Gates
 - Canon alignment:
 - System ownership:
+- Surface ownership:
 - Visual/UX:
 - Accessibility:
 - Empty/error/recovery:
 - Trust/privacy:
+- Data/local-first:
+- External surfaces:
 - Confirmation/receipt behavior:
 - Memory/sensitive-area behavior:
 - Onboarding behavior:
+- Launch scope:
+- Roadmap governance:
 
 ## Remaining Gaps
 - ...
+
+## Canon Proposals Needed
+- ...
 ```
 
-## Open Questions For Future Waves
+## Open Questions
 
 - Should every future batch include a formal gate checklist in its batch doc?
-- Should the repo enforce doc-index checks for new canon docs?
+- Should canon proposals live in their own folder or inside decision docs?
+- What exact validation commands should be required by batch type?
 - Should visual UI batches require screenshot artifacts before completion?
 - Should completion summaries require before/after implementation-state wording?
