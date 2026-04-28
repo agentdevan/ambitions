@@ -70,6 +70,7 @@ These focused docs extract already-existing doctrine into implementation-readabl
 - [canon/DOMAIN_MODEL.md](canon/DOMAIN_MODEL.md)
 - [canon/GOAL_PLAN_TASK_LIFECYCLE.md](canon/GOAL_PLAN_TASK_LIFECYCLE.md)
 - [canon/ONBOARDING_SPEC.md](canon/ONBOARDING_SPEC.md)
+- [canon/CAPTURE_SMART_ATTACHMENT.md](canon/CAPTURE_SMART_ATTACHMENT.md)
 - [canon/TRUST_PRIVACY_MEMORY.md](canon/TRUST_PRIVACY_MEMORY.md)
 - [canon/EMPTY_ERROR_RECOVERY_STATES.md](canon/EMPTY_ERROR_RECOVERY_STATES.md)
 - [canon/IMPLEMENTATION_ACCEPTANCE_GATES.md](canon/IMPLEMENTATION_ACCEPTANCE_GATES.md)
