@@ -2,7 +2,7 @@
 
 Status: Active canon decision log for product-definition waves.
 
-Purpose: Preserve explicit product decisions made after canon consolidation. This document records decisions that clarify ambiguity across product, design, onboarding, lifecycle, memory, trust, and implementation acceptance.
+Purpose: Preserve explicit product decisions made after canon consolidation. This document records decisions that clarify ambiguity across product, design, onboarding, lifecycle, memory, trust, capture, and implementation acceptance.
 
 ## Decision Authority
 
@@ -15,6 +15,7 @@ This document records resolved product decisions. It does not replace:
 - `docs/canon/GOAL_PLAN_TASK_LIFECYCLE.md` for lifecycle detail
 - `docs/canon/TRUST_PRIVACY_MEMORY.md` for trust/memory/privacy detail
 - `docs/canon/ONBOARDING_SPEC.md` for first-run flow detail
+- `docs/canon/design/smart-attachment-spec.md` for Capture / Smart Attachment routing detail
 
 When these decisions clarify an ambiguity, future docs and batch prompts should follow them unless a later explicit canon decision supersedes them.
 
@@ -285,6 +286,141 @@ User creates any useful object.
 
 ---
 
+# Wave 5 — Capture And Smart Attachment
+
+Adoption date: 2026-04-27
+
+## Resolved Decisions
+
+- The main Capture input should feel like a `Quiet Command Sheet`.
+- Capture should not feel like search, chat, a generic note app, or an inbox form.
+- Primary Capture placeholder:
+
+```text
+What needs a place?
+```
+
+- Onboarding keeps its separate first prompt:
+
+```text
+What do you want to organize?
+```
+
+## Route Confidence Behavior
+
+When Ambitions is unsure where a capture belongs, behavior depends on confidence:
+
+```text
+High confidence: route + receipt
+Medium confidence: route + receipt + easy Change
+Low confidence: ask 1 question or save to Needs a Place
+```
+
+Temporary holding area:
+
+```text
+Needs a Place
+```
+
+## Allowed Capture Routes
+
+Launch/core routes:
+
+```text
+Task
+Goal
+Idea
+Proof
+Waiting
+Plan
+```
+
+Later/advanced routes:
+
+```text
+Contextual Note
+Reminder
+Ritual
+Archive
+Decision
+```
+
+## Notes Policy
+
+Resolved decision:
+
+```text
+No general Notes object at launch. Allow contextual notes attached to objects.
+```
+
+Implementation implication:
+
+- Avoid turning Ambitions into a general notes app.
+- Notes should be attached to goals, tasks, proof, reviews, decisions, plans, or other meaningful objects.
+- A larger notes surface can be reconsidered later after core execution is mature.
+
+## Capture Receipt Pattern
+
+Successful capture receipts should use the `Saved as...` / `Attached as...` pattern.
+
+Examples:
+
+```text
+Saved as Task · Today
+Saved as Goal · Creative
+Saved to Needs a Place
+Attached as Proof · Music Goal
+```
+
+Rules:
+
+- Receipt should show object type, destination, and route correction where safe.
+- Avoid generic `Captured`, `Routed`, or `Added to Ambitions` as primary success copy.
+
+## Task-To-Goal Promotion
+
+Resolved decision:
+
+```text
+Capture should suggest task-to-goal promotion; user confirms before promotion.
+```
+
+Implementation implication:
+
+- Do not auto-promote tasks into goals.
+- When a task appears to have too much structure, Ambitions can suggest `Turn Into Goal`.
+- Promotion creates a receipt and preserves the original capture context.
+
+## Voice Input
+
+Resolved decision:
+
+```text
+Use iOS dictation first. Native voice capture can come later.
+```
+
+Implementation implication:
+
+- Do not build a separate voice system at launch.
+- Do not claim voice capture beyond platform dictation until implemented.
+
+## Highest Capture Rule
+
+Resolved rule stack:
+
+```text
+Nothing gets lost.
+Every capture gets a clear next route.
+```
+
+Implementation implication:
+
+- Failed saves preserve text.
+- Low-confidence captures have a safe place.
+- Capture should be fast, but not at the cost of losing or misplacing user intent.
+
+---
+
 # Active Follow-Up Targets
 
 These decisions should be reflected in:
@@ -295,4 +431,5 @@ These decisions should be reflected in:
 - `TRUST_PRIVACY_MEMORY.md`
 - `EMPTY_ERROR_RECOVERY_STATES.md`
 - `IMPLEMENTATION_ACCEPTANCE_GATES.md`
-- future batch prompts involving onboarding, Life Areas, Capture routing, Today empty states, Goals, Plan, You, Trust Center, receipts, sensitive Life Areas, notifications/widgets, export/import, or privacy controls.
+- `docs/canon/design/smart-attachment-spec.md`
+- future batch prompts involving onboarding, Life Areas, Capture routing, Today empty states, Goals, Plan, You, Trust Center, receipts, sensitive Life Areas, notifications/widgets, export/import, privacy controls, Smart Attachment, Needs a Place, or Capture input behavior.
