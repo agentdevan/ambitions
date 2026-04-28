@@ -21,7 +21,7 @@ When a future planning, design, roadmap, or implementation task needs context, u
 11. `docs/canon/Ambitions_2_0_Systems_Architecture.md` for shared engines, local-first systems, and system ownership.
 12. `docs/canon/Ambitions_2_0_Visual_System.md` plus `docs/canon/design/*` for visual, component, panel, density, grouped-list, accessibility, and UX-writing contracts.
 13. Focused consolidation docs for implementation-readable detail.
-14. `docs/canon/Ambitions_2_0_Roadmap.md`, `docs/canon/Ambitions_2_0_Batch_Plan.md`, and `docs/codex/batches/*` for execution sequencing after canon reconciliation.
+14. `docs/canon/Ambitions_2_0_Roadmap.md`, `docs/canon/Ambitions_2_0_Batch_Plan.md`, `docs/canon/POST_D26_MATURITY_ROADMAP.md`, and `docs/codex/batches/*` for execution sequencing after canon reconciliation.
 15. QA, review, and release docs for acceptance evidence.
 16. Archived docs only when explicitly marked as historical context and only where they do not conflict with active canon.
 
@@ -33,6 +33,7 @@ When a future planning, design, roadmap, or implementation task needs context, u
 | Product decisions | `PRODUCT_DECISIONS.md` | focused canon docs | Resolved Wave 1-19 decision ledger. |
 | Golden launch loop / product-strength cutline | `GOLDEN_LAUNCH_LOOP.md` | `ROADMAP_BATCH_CLASSIFICATION.md`, `LAUNCH_SCOPE_MVP_QUALITY_BAR.md`, Roadmap Governance, Acceptance Gates | Defines the smallest undeniable loop: capture, place, plan, do today, recover, save proof. Launch-critical work must map here. |
 | Roadmap/batch classification | `ROADMAP_BATCH_CLASSIFICATION.md` | `GOLDEN_LAUNCH_LOOP.md`, Roadmap Governance, Batch Registry, Batch Plan | Classifies D01-D26 as launch-critical, soon-after-launch, post-launch, deferred, decision-gated, or infrastructure-unlock. |
+| Post-D26 maturity roadmap | `POST_D26_MATURITY_ROADMAP.md` | Roadmap Merge Audit, Batch Registry, Roadmap/Batch Governance, Acceptance Gates | Rewrites original Batches 89-120 into M-series maturity batches and R-series release-readiness gates after D26. Planning only; does not mark D01-D26 complete. |
 | Human user-facing language | `HUMAN_LANGUAGE_REVIEW.md` | `ux-writing-state-language-matrix.md`, Acceptance Gates, Today canon | Plain, human UI copy. Rejects AI/producty language such as protected/protection, anchor, optimize, AI/model/confidence in normal UI. |
 | Final canon status | `AMBITION_CANON_COMPLETION_REPORT.md` | `ROADMAP_BATCH_GOVERNANCE.md` | Completion report, open questions, no-drift rules, next Codex prompt. |
 | Top-level shell | `IA_NAVIGATION_DRILLDOWN.md` | `Ambitions_Design_Constitution.md`, Product Architecture | Locked shell: Today, Goals, Capture, Plan, You. |
@@ -52,13 +53,13 @@ When a future planning, design, roadmap, or implementation task needs context, u
 | Data / local-first / sync / export | `DATA_LOCAL_SYNC_EXPORT.md` | Trust/Memory, Systems Architecture | Local-first, no account required at launch, no launch sync, export before sync. |
 | Monetization | `MONETIZATION_PRICING_BUSINESS_MODEL.md` | Launch Scope, Data canon | Premium but accessible; no ads; no data hostage; trust controls not paywalled. |
 | Launch scope / MVP / quality | `LAUNCH_SCOPE_MVP_QUALITY_BAR.md` | Golden Launch Loop, Acceptance Gates, Roadmap Governance | Launch proves one meaningful goal can become organized, believable, actionable. |
-| Roadmap / batch governance | `ROADMAP_BATCH_GOVERNANCE.md` | `ROADMAP_BATCH_CLASSIFICATION.md`, Golden Launch Loop, Batch Registry, Batch Plan | No-drift execution, canon proposals, shipped/planned/deferred discipline. |
+| Roadmap / batch governance | `ROADMAP_BATCH_GOVERNANCE.md` | `ROADMAP_BATCH_CLASSIFICATION.md`, `POST_D26_MATURITY_ROADMAP.md`, Golden Launch Loop, Batch Registry, Batch Plan | No-drift execution, canon proposals, shipped/planned/deferred discipline. |
 | Trust, privacy, memory, receipts | `TRUST_PRIVACY_MEMORY.md` | Design Constitution, Systems Architecture, Data canon | Trust Center, What Ambitions Knows, receipts, sensitive Life Areas. |
 | Onboarding | `ONBOARDING_SPEC.md` | Design Constitution, Today, Capture, Golden Launch Loop | First useful object, safe skip, permission timing. |
 | Empty/error/recovery states | `EMPTY_ERROR_RECOVERY_STATES.md` | UX writing matrix, Human Language Review, Acceptance Gates | Screen-state behavior and recovery standards. |
 | Completion and QA gates | `IMPLEMENTATION_ACCEPTANCE_GATES.md` | Golden Launch Loop, Human Language Review, Visual Review Checklist, RC Maturity Plan, focused canon docs | Definition of done and validation requirements. |
 | Design tokens | `design/DESIGN_TOKENS.md` | Visual System, component matrix | Implementation naming for visual primitives. |
-| Roadmap and batch sequencing | `Ambitions_2_0_Roadmap.md`, `Ambitions_2_0_Batch_Plan.md` | `ROADMAP_BATCH_CLASSIFICATION.md`, `GOLDEN_LAUNCH_LOOP.md`, `ROADMAP_BATCH_GOVERNANCE.md`, `BATCH_REGISTRY.md` | Pending reconciliation against Waves 1-19 and Golden Launch Loop cutline. |
+| Roadmap and batch sequencing | `Ambitions_2_0_Roadmap.md`, `Ambitions_2_0_Batch_Plan.md`, `POST_D26_MATURITY_ROADMAP.md` | `ROADMAP_BATCH_CLASSIFICATION.md`, `GOLDEN_LAUNCH_LOOP.md`, `ROADMAP_BATCH_GOVERNANCE.md`, `BATCH_REGISTRY.md` | D01-D26 remain the active Layer 1 execution track; Post-D26 Maturity Roadmap plans Layer 2/3 after D26 without marking D batches complete. |
 | Canon weakness/gap analysis | `CANON_CONSOLIDATION_GAP_AUDIT.md` | Completion Report | Documentation architecture audit, not feature gap audit. |
 
 ## Active Focused Canon Set
@@ -90,6 +91,7 @@ The focused consolidation set now includes:
 - `docs/canon/TRUST_PRIVACY_MEMORY.md`
 - `docs/canon/EMPTY_ERROR_RECOVERY_STATES.md`
 - `docs/canon/IMPLEMENTATION_ACCEPTANCE_GATES.md`
+- `docs/canon/POST_D26_MATURITY_ROADMAP.md`
 - `docs/canon/design/DESIGN_TOKENS.md`
 
 ## Settled Canon Rules
@@ -100,6 +102,7 @@ Future work must preserve these settled rules unless a later explicit canon deci
 - Ambitions stays deep, not wide.
 - Launch-critical work must map to the Golden Launch Loop: capture, place, plan, do today, recover, save proof.
 - D01-D26 classification must follow `ROADMAP_BATCH_CLASSIFICATION.md` unless a later explicit decision supersedes it.
+- Post-D26 maturity work must follow `POST_D26_MATURITY_ROADMAP.md` after D26 and must not mark D01-D26 complete by assumption.
 - Today is not a task dump.
 - Goals is not a project-management board.
 - Plan is not a raw calendar clone.
@@ -116,7 +119,7 @@ Future work must preserve these settled rules unless a later explicit canon deci
 
 ## Reconciliation Rule
 
-The next operating phase is roadmap/batch reconciliation, not more product-definition waves.
+The active implementation phase remains D01-D26 until D26 is complete. Do not treat post-D26 M-batches as runnable implementation work until D26 is complete or the user explicitly authorizes planning-only scenario preparation.
 
 Do not create more major docs by default. Reconcile the active roadmap, batch plan, batch registry, implementation gap audit, and batch docs against:
 
@@ -124,6 +127,7 @@ Do not create more major docs by default. Reconcile the active roadmap, batch pl
 - `GOLDEN_LAUNCH_LOOP.md`
 - `ROADMAP_BATCH_CLASSIFICATION.md`
 - `HUMAN_LANGUAGE_REVIEW.md`
+- `POST_D26_MATURITY_ROADMAP.md` when planning Layer 2/3 after D26
 - `AMBITION_CANON_COMPLETION_REPORT.md`
 - the focused canon set above
 
@@ -133,6 +137,12 @@ Every future Codex prompt should include this instruction:
 
 ```text
 Before implementation, read docs/canon/SOURCE_OF_TRUTH_MAP.md and follow its source-of-truth order. Do not treat archived or superseded docs as active canon. Do not create duplicate engines when Systems Architecture already assigns ownership. Distinguish planned canon from shipped code. Preserve Waves 1-19 decisions, the Golden Launch Loop, Roadmap/Batch Classification, and the Human Language Review unless a later explicit canon decision supersedes them. Launch-critical work must map to capture/place/plan/do today/recover/save proof. Normal UI must sound human, plain, and obvious; do not ship AI/model/confidence/protected/protection/anchor/optimize/execution-context language in visible copy.
+```
+
+For future M-batches after D26, also include:
+
+```text
+D01-D26 are assumed complete for this planning/execution layer only. Do not alter D-batch completion history unless the registry already says they are complete. Preserve the five-tab shell, Golden Launch Loop, Human Language Review, Object Terminology, Design Constitution, local-first trust posture, receipt/privacy boundaries, and accessibility evidence requirements. Do not restore old 89-120 scope that conflicts with the newer canon. Follow docs/canon/POST_D26_MATURITY_ROADMAP.md.
 ```
 
 ## Archive Rule
@@ -146,4 +156,4 @@ Do not delete or archive active docs casually. Archive only after:
 
 ## Next Step
 
-Run the roadmap/batch reconciliation prompt inside `ROADMAP_BATCH_CLASSIFICATION.md`, then run the user-facing language cleanup prompt inside `HUMAN_LANGUAGE_REVIEW.md` before visual/UI release work.
+Continue D01-D26 implementation. After D26, reopen `POST_D26_MATURITY_ROADMAP.md` for evidence-based adjustment before starting M01.
