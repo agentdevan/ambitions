@@ -2,7 +2,7 @@
 
 Status: Active canon consolidation layer.
 
-Purpose: Define product-wide state behavior so Ambitions feels polished outside the ideal path. This document expands the UX Writing Matrix into a screen-by-screen implementation reference.
+Purpose: Define product-wide state behavior so Ambitions feels polished outside the ideal path. This document expands the UX Writing Matrix into a screen-by-screen implementation reference and reflects product decision Waves 1-2.
 
 ## State Doctrine
 
@@ -14,6 +14,18 @@ Every non-ideal state should answer:
 2. What remains safe or true?
 3. What is the next useful action?
 4. Can the user correct, retry, recover, or move on?
+
+## Wave 2 State Language Rules
+
+- Internal `Dropped` should render as `No Longer Relevant` in normal UI.
+- Cancelled and Dropped are internally separate, but launch UI may simplify.
+- Intentional ending action: `End Goal`, then ask reason.
+- Pause action: `Park Goal`; state is `Parked`.
+- Goal Weather is corrected through inputs, not direct manual override.
+- UI Plan labels should prefer `Believable`, `Tight`, `Needs Protection`, and `No Longer Holds`.
+- Destructive actions, external writes, and major deadline changes require confirmation.
+- Reversible local changes should prefer receipt + undo.
+- Product/design language is `Completion Archive`; normal UI language is `Archive`.
 
 ## Voice Rules
 
@@ -32,6 +44,8 @@ Avoid:
 - lazy
 - behind again
 - streak lost
+- broken as normal user-facing plan copy
+- dropped as normal user-facing goal copy
 - AI/model language
 - fake certainty
 - marketing claims
@@ -159,12 +173,12 @@ Open Plan
 | Goals | No active goals; invite first meaningful goal or Life Area | Could not load goals; existing local data remains safe | Goal stale, blocked, waiting, or no Next Visible Step | Add Goal / Review Goal |
 | Goal Detail | Goal has no plan/proof/steps yet | Could not load detail; goal remains available from Goals | Goal at risk, blocked, scope too large, deadline no longer believable | Add First Step / Replan |
 | Capture | Nothing needs a place | Could not save capture; preserve user input | Low-confidence route, needs clarification, failed attachment | Save / Change Route |
-| Plan | No plan created yet | Calendar unavailable, plan still works manually | Week tight, fragile, broken, overloaded, conflict detected | Shape Week / Save the Week |
+| Plan | No plan created yet | Calendar unavailable, plan still works manually | Week tight, needs protection, no longer holds, overloaded, conflict detected | Shape Week / Save the Week |
 | You | No reviews/memory/history yet | Could not load settings/memory; core app remains usable | Memory may need review, trust item needs correction | Review Memory / Open Trust Center |
 | Trust Center | No receipts or trust issues yet | Could not load trust history; privacy controls remain available | Memory stale, sync/export failed, permission denied | Inspect / Correct |
 | What Ambitions Knows | No memories yet | Could not load memory; no new memory applied | Memory stale or contradicted by correction | Add Preference / Review |
-| Reviews | No reviews yet | Could not build review; historical data remains safe | Carryover, drift, correction, plan no longer believable | Start Review |
-| Archive | No archived learning yet | Could not load archive; active work unaffected | Restore, inspect, or learn from cancelled/dropped item | Open Item / Restore |
+| Reviews | No reviews yet | Could not build review; historical data remains safe | Carryover, drift, correction, plan no longer holds | Start Review |
+| Archive | No archived learning yet | Could not load archive; active work unaffected | Restore, inspect, or learn from ended/no-longer-relevant item | Open Item / Restore |
 
 ## Today States
 
@@ -302,6 +316,64 @@ Actions:
 - `Protect`
 - `Move Deadline`
 
+### Goal Ended
+
+Copy:
+
+```text
+This goal ended intentionally. The reason is preserved so future plans get smarter.
+```
+
+Actions:
+
+- `Review`
+- `Open Decision Trail`
+- `Restore`
+
+Rules:
+
+- Use `End Goal` as the action before this state.
+- Ask for reason before finalizing when practical.
+- Preserve proof, decision trail, and learning.
+
+### Goal No Longer Relevant
+
+Copy:
+
+```text
+This is no longer relevant. Ambitions will keep what was learned.
+```
+
+Actions:
+
+- `Review`
+- `Open Decision Trail`
+- `Archive`
+
+Rules:
+
+- Use `No Longer Relevant` in UI instead of `Dropped`.
+- Avoid judgmental wording.
+
+### Goal Parked
+
+Copy:
+
+```text
+This is parked for later.
+```
+
+Actions:
+
+- `Resume`
+- `Review`
+- `Archive`
+
+Rules:
+
+- Parked means intentionally paused.
+- Parked does not mean failed.
+
 ## Capture States
 
 ### Empty Capture
@@ -399,7 +471,26 @@ Actions:
 - `Move Flexible Work`
 - `Save Week`
 
-### Week Broken
+### Week Needs Protection
+
+Copy:
+
+```text
+This week needs protection to hold.
+```
+
+Actions:
+
+- `Protect Priority`
+- `Move Flexible Work`
+- `Make Lighter`
+
+Rules:
+
+- This is the normal UI label for internal `fragile`.
+- Do not overuse alarm language.
+
+### Week No Longer Holds
 
 Copy:
 
@@ -415,7 +506,8 @@ Actions:
 
 Rules:
 
-- Broken is serious but not punitive.
+- This is the normal UI label for internal `broken`.
+- Serious but not punitive.
 - Always offer a recovery path.
 
 ## You / Trust / Memory States
@@ -453,6 +545,10 @@ Actions:
 - `Keep`
 - `Delete`
 
+Rules:
+
+- `Delete` requires confirmation.
+
 ### Export Failed
 
 Copy:
@@ -476,12 +572,25 @@ Copy:
 Completed and ended goals will appear here as learning, not trash.
 ```
 
-### Cancelled / Dropped Goal
+### Completed Goal In Archive
 
 Copy:
 
 ```text
-This ended intentionally. The reason is preserved so future plans get smarter.
+This was completed. The proof and final review are preserved here.
+```
+
+Rules:
+
+- Completed goals remain visibly emphasized for 30 days by default before archive emphasis changes.
+- Major goals may remain emphasized longer.
+
+### Ended / No Longer Relevant Goal
+
+Copy:
+
+```text
+This ended. The reason is preserved so future plans get smarter.
 ```
 
 Actions:
@@ -489,6 +598,11 @@ Actions:
 - `Review`
 - `Restore`
 - `Open Decision Trail`
+
+Rules:
+
+- Use `Archive` in normal UI.
+- Use `Completion Archive` in product/design docs when describing the full system.
 
 ## Receipt Failure States
 
@@ -524,6 +638,25 @@ Actions:
 - `Confirm`
 - `Cancel`
 
+## Confirmation vs Receipt Rules
+
+Receipt + undo first:
+
+- Mark Done.
+- Move task.
+- Park task.
+- Attach task to goal.
+- Rename Life Area.
+- Change display density.
+
+Confirmation required:
+
+- Delete memory.
+- Calendar write.
+- Major deadline changes.
+- Destructive actions.
+- External writes.
+
 ## QA Acceptance Criteria
 
 Every screen-level state must satisfy:
@@ -535,16 +668,30 @@ Every screen-level state must satisfy:
 - preserved user input where relevant
 - correction or route change where relevant
 - receipt after meaningful change
+- confirmation for destructive/external/major deadline changes
+- receipt + undo for reversible local changes where safe
 - Dynamic Type support
 - VoiceOver labels/values/hints
 - no color-only meaning
 - no hidden required gestures
 - no unverified claims
 
+## Resolved Wave 2 Questions
+
+- Internal `Dropped` renders as `No Longer Relevant` in normal UI.
+- Cancelled and Dropped remain internally separate; launch UI may simplify.
+- Intentional goal ending action is `End Goal`, followed by a reason.
+- Intentional pause action is `Park Goal`; state is Parked.
+- Goal Weather is corrected through inputs, not direct manual override.
+- UI Plan labels should use `Needs Protection` and `No Longer Holds` instead of exposing `Fragile`/`Broken` by default.
+- Destructive actions, external writes, and major deadline changes require confirmation.
+- Mark Done, Move task, Park task, Attach task to goal, Rename Life Area, and Change display density prefer receipt + undo.
+- Completed goals stay visibly emphasized for 30 days by default; major goals may remain emphasized longer.
+- Product/design language is Completion Archive; normal UI language is Archive.
+
 ## Open Questions For Future Waves
 
-- Should the app use the word `Broken` for Plan state, or a softer label?
 - Should Capture low-confidence choices be Task / Goal / Idea, or Task / Goal / Later?
 - Should Today empty state emphasize Capture or Goal creation first?
 - Which errors deserve inline treatment versus full-screen state?
-- Should archived cancelled/dropped goals be recoverable by default?
+- Should archived ended/no-longer-relevant goals be recoverable by default?
