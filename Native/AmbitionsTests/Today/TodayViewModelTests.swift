@@ -73,10 +73,66 @@ final class TodayViewModelTests: XCTestCase {
         XCTAssertEqual(experience.execution.dayState, .steady)
         XCTAssertEqual(experience.execution.frictionSignal.kind, .friction)
         XCTAssertEqual(experience.execution.supportingPanels.count, 2)
+        XCTAssertEqual(experience.execution.todayPlanLayer.title, "Today Plan")
+        XCTAssertFalse(experience.execution.todayPlanLayer.items.isEmpty)
+        XCTAssertEqual(experience.execution.todayPlanLayer.calendarSourceLabel, "Based on your plan")
+        XCTAssertFalse(experience.execution.todayPlanLayer.openWindowLabel.isEmpty)
         XCTAssertNotNil(experience.execution.hero.explanation)
         XCTAssertNotNil(experience.execution.saveTheDayAction)
         XCTAssertTrue(experience.execution.commandMappings.contains { $0.actionKind == .startFocus && $0.commandKind == .startFocus })
         XCTAssertTrue(experience.execution.commandMappings.contains { $0.actionKind == .askWhyThisMatters && $0.commandKind == .askWhy })
+    }
+
+    func testTodayD11ScreenContractSnapshotSatisfiesImplementationGate() async throws {
+        let repositories = try await makeRepositories()
+        let service = RepositoryBackedTodayService(repositories: repositories)
+        let now = try XCTUnwrap(DomainTimestamp.date(from: "2026-04-15T12:00:00Z"))
+        let goal = makeGoal(
+            id: "goal-contract",
+            stepID: "step-contract",
+            stepTitle: "Protect the launch review",
+            dueAt: "2026-04-15T20:00:00Z",
+            domain: .career
+        )
+        try await repositories.goals.saveGoals([goal])
+
+        let experience = try await service.loadTodayExperience(userDisplayName: "", now: now)
+        let contract = ScreenContractRegistry.contract(for: .today)
+        let issues = ScreenContractValidator.validate(
+            snapshot: experience.execution.screenContractSnapshot(),
+            against: contract
+        )
+
+        XCTAssertTrue(issues.isEmpty, issues.map(\.message).joined(separator: "\n"))
+    }
+
+    func testTodayD11OneStepGoalsSurfaceStandaloneCaptureWithoutTasksTab() async throws {
+        let repositories = try await makeRepositories()
+        let service = RepositoryBackedTodayService(repositories: repositories)
+        let now = try XCTUnwrap(DomainTimestamp.date(from: "2026-04-15T12:00:00Z"))
+        try await repositories.captures.saveCaptures([
+            Capture(
+                id: "capture-task",
+                createdAt: DomainTimestamp.string(from: now),
+                updatedAt: DomainTimestamp.string(from: now),
+                rawText: "Book dentist",
+                sourceType: .todayQuickCapture,
+                status: .actionable,
+                linkedGoalID: nil,
+                kind: .oneTimeCommitment,
+                route: .planSeed,
+                triageStatus: .assumedRoute,
+                commitmentKind: .oneTime
+            )
+        ])
+
+        let experience = try await service.loadTodayExperience(userDisplayName: "", now: now)
+
+        XCTAssertEqual(experience.execution.oneStepGoalsPanel.title, "One-Step Goals")
+        XCTAssertEqual(experience.execution.oneStepGoalsPanel.value, "1 open")
+        XCTAssertEqual(experience.execution.oneStepGoalsPanel.previews.first?.title, "Book dentist")
+        XCTAssertEqual(ScreenContractValidator.canonicalTopLevelTabs, ["Today", "Goals", "Capture", "Plan", "You"])
+        XCTAssertFalse(ScreenContractValidator.canonicalTopLevelTabs.contains("Tasks"))
     }
 
     func testToday2RecoveryHeroProtectsHighConsequenceDeadlineAndDefersPassiveWork() async throws {

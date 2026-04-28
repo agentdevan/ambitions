@@ -11,6 +11,8 @@ enum TodayExecutionPanelKind: String, Equatable {
     case contextLens
     case capture
     case plan
+    case todayPlan
+    case oneStepGoals
     case priority
     case recovery
     case waiting
@@ -106,6 +108,51 @@ struct TodayExecutionDeepDiveState: Identifiable, Equatable {
     let rows: [TodayExecutionPanelState]
 }
 
+struct TodayPlanLayerItemState: Identifiable, Equatable {
+    let id: String
+    let title: String
+    let subtitle: String
+    let timingLabel: String
+    let sourceLabel: String
+    let semanticState: AmbitionSemanticState
+    let action: TodayInlineAction?
+}
+
+struct TodayPlanLayerState: Equatable {
+    let title: String
+    let subtitle: String
+    let compactTimelineLabel: String
+    let openWindowLabel: String
+    let calendarSourceLabel: String
+    let items: [TodayPlanLayerItemState]
+    let moveAction: TodayInlineAction
+    let parkAction: TodayInlineAction
+    let markDoneAction: TodayInlineAction?
+    let accessibilityLabel: String
+    let accessibilityValue: String
+    let accessibilityHint: String
+}
+
+struct TodayOneStepGoalPreviewState: Identifiable, Equatable {
+    let id: String
+    let title: String
+    let subtitle: String
+    let statusLabel: String
+    let semanticState: AmbitionSemanticState
+    let action: TodayInlineAction?
+}
+
+struct TodayOneStepGoalsPanelState: Equatable {
+    let title: String
+    let subtitle: String
+    let value: String
+    let previews: [TodayOneStepGoalPreviewState]
+    let emptyMessage: String
+    let accessibilityLabel: String
+    let accessibilityValue: String
+    let accessibilityHint: String
+}
+
 struct TodayExecutionViewState: Equatable {
     let activeLens: TodayLensChipState
     let availableLenses: [TodayLensChipState]
@@ -121,6 +168,8 @@ struct TodayExecutionViewState: Equatable {
     let saveTheDayAction: TodayInlineAction?
     let frictionSignal: TodayExecutionPanelState
     let hero: TodayExecutionHeroState
+    let todayPlanLayer: TodayPlanLayerState
+    let oneStepGoalsPanel: TodayOneStepGoalsPanelState
     let supportingPanels: [TodayExecutionPanelState]
     let deeperSections: [TodayExecutionDeepDiveState]
     let commandMappings: [TodayCommandMappingState]
@@ -253,6 +302,44 @@ struct TodayExecutionViewState: Equatable {
             action: support.planAction,
             explanation: nil
         )
+        let planItems = support.fixedCommitments.items.prefix(3).map {
+            TodayPlanLayerItemState(
+                id: "today2.plan.compat.\($0.id)",
+                title: $0.title.shortened(maxLength: 48),
+                subtitle: $0.subtitle.todayShortSentence,
+                timingLabel: $0.label,
+                sourceLabel: "Based on your plan",
+                semanticState: semanticState(for: hero.truth.posture),
+                action: $0.action ?? primary
+            )
+        }
+        let timeline = planItems.isEmpty
+            ? "No fixed plan yet"
+            : planItems.map(\.timingLabel).prefix(3).joined(separator: " / ")
+        let todayPlanLayer = TodayPlanLayerState(
+            title: "Today Plan",
+            subtitle: planItems.isEmpty ? "Start with one real move." : "The planned day stays visible.",
+            compactTimelineLabel: timeline,
+            openWindowLabel: support.timeAperture.bestUseTitle,
+            calendarSourceLabel: "Based on your plan",
+            items: Array(planItems),
+            moveAction: TodayInlineAction(kind: .openPlan, title: "Move This", systemImage: "arrow.right.arrow.left", state: .default, target: primary.target),
+            parkAction: TodayInlineAction(kind: .defer, title: "Park / Not Today", systemImage: "pause.circle", state: .default, target: primary.target),
+            markDoneAction: primary.kind == .complete ? primary : TodayInlineAction(kind: .complete, title: "Mark Done", systemImage: "checkmark.circle", state: .success, target: primary.target),
+            accessibilityLabel: "Today Plan",
+            accessibilityValue: planItems.isEmpty ? "No fixed plan yet." : "\(planItems.count) planned item\(planItems.count == 1 ? "" : "s"). \(timeline).",
+            accessibilityHint: "Shows the planned day without requesting calendar access here."
+        )
+        let oneStepGoalsPanel = TodayOneStepGoalsPanelState(
+            title: "One-Step Goals",
+            subtitle: "Standalone tasks stay small.",
+            value: "None today",
+            previews: [],
+            emptyMessage: "No One-Step Goals on Today",
+            accessibilityLabel: "One-Step Goals",
+            accessibilityValue: "No standalone task is pulling on Today.",
+            accessibilityHint: "Tasks are standalone One-Step Goals. Steps remain inside Goals, Paths, or Plans."
+        )
         return TodayExecutionViewState(
             activeLens: activeLens,
             availableLenses: [activeLens],
@@ -268,6 +355,8 @@ struct TodayExecutionViewState: Equatable {
             saveTheDayAction: support.recoveryBloom?.options.first?.action ?? support.planAction,
             frictionSignal: friction,
             hero: executionHero,
+            todayPlanLayer: todayPlanLayer,
+            oneStepGoalsPanel: oneStepGoalsPanel,
             supportingPanels: [capturePanel, planPanel],
             deeperSections: [],
             commandMappings: commandMappings(for: [primary] + hero.primaryAction.supportingActions + [support.quickCaptureAction, support.planAction].compactMap { $0 }, explanations: [], recoveryOptionID: nil),
@@ -321,6 +410,7 @@ struct TodayExecutionProjectionInput {
     let resilienceAssessment: ExecutionResilienceAssessment
     let explanations: [RecommendationExplanation]
     let captures: [Capture]
+    let oneStepGoalsProjection: OneStepGoalsProjection
 }
 
 struct TodayExecutionProjector {
@@ -330,6 +420,8 @@ struct TodayExecutionProjector {
         let hero = heroState(input)
         let contract = contractEntries(input, hero: hero)
         let friction = frictionSignal(input)
+        let todayPlan = todayPlanLayer(input, hero: hero)
+        let oneStepGoals = oneStepGoalsPanel(input)
         let saveTheDay = saveTheDayAction(input, hero: hero)
         let support = supportingPanels(input)
         let deeper = deeperSections(input)
@@ -343,11 +435,19 @@ struct TodayExecutionProjector {
             saveTheDay,
             friction.action,
         ].compactMap { $0 }
+        let planActions = todayPlan.items.compactMap(\.action) + [
+            todayPlan.moveAction,
+            todayPlan.parkAction,
+            todayPlan.markDoneAction,
+        ].compactMap { $0 }
+        let oneStepGoalActions = oneStepGoals.previews.compactMap(\.action)
         let supportActions = support.compactMap(\.action)
         let deeperActions = deeper.flatMap { section in section.rows.compactMap(\.action) }
         var actions = [hero.primaryAction]
         actions.append(contentsOf: hero.secondaryActions)
         actions.append(contentsOf: contractActions)
+        actions.append(contentsOf: planActions)
+        actions.append(contentsOf: oneStepGoalActions)
         actions.append(contentsOf: supportActions)
         actions.append(contentsOf: deeperActions)
 
@@ -366,6 +466,8 @@ struct TodayExecutionProjector {
             saveTheDayAction: saveTheDay,
             frictionSignal: friction,
             hero: hero,
+            todayPlanLayer: todayPlan,
+            oneStepGoalsPanel: oneStepGoals,
             supportingPanels: [friction] + Array(support.filter { $0.id != friction.id }.prefix(1)),
             deeperSections: deeper,
             commandMappings: TodayExecutionViewState.commandMappings(
@@ -375,6 +477,46 @@ struct TodayExecutionProjector {
             ),
             planRequestsCalendarPermission: false,
             emptyGuidance: input.mode == .empty ? emptyGuidance(input) : nil
+        )
+    }
+}
+
+extension TodayExecutionViewState {
+    func screenContractSnapshot(
+        topLevelTabTitles: [String] = ScreenContractValidator.canonicalTopLevelTabs
+    ) -> ScreenContractImplementationSnapshot {
+        ScreenContractImplementationSnapshot(
+            screenID: .today,
+            firstScreenContent: [
+                "Hero Decision Panel",
+                "Now Layer",
+                "Today Plan Layer",
+                "Compact timeline",
+                "Relevant One-Step Goals",
+                "Open-window awareness",
+                "Recovery"
+            ],
+            panels: [.heroDecision, .nowLayer, .todayPlan, .compactTimeline, .oneStepGoals, .schedule, .recovery],
+            actions: [.start, .move, .parkNotToday, .markDone, .saveTheDay],
+            drillDowns: ["Goal Detail", "Plan", "Receipt", "Review"],
+            copySamples: [
+                hero.title,
+                hero.subtitle,
+                todayPlanLayer.title,
+                todayPlanLayer.subtitle,
+                todayPlanLayer.calendarSourceLabel,
+                todayPlanLayer.openWindowLabel,
+                oneStepGoalsPanel.title,
+                oneStepGoalsPanel.subtitle,
+                oneStepGoalsPanel.emptyMessage,
+                saveTheDayAction?.title ?? "Save the day"
+            ],
+            topLevelTabTitles: topLevelTabTitles,
+            supportsDensityBehavior: true,
+            supportsPanelSizeBehavior: true,
+            hasAccessibilitySummary: true,
+            hasPrivacySafeState: true,
+            hasGestureAlternative: true
         )
     }
 }
@@ -609,6 +751,126 @@ private extension TodayExecutionProjector {
         )
     }
 
+    func todayPlanLayer(_ input: TodayExecutionProjectionInput, hero: TodayExecutionHeroState) -> TodayPlanLayerState {
+        var items: [TodayPlanLayerItemState] = input.legacySupport.fixedCommitments.items.prefix(3).map {
+            TodayPlanLayerItemState(
+                id: "today2.plan.fixed.\($0.id)",
+                title: $0.title.shortened(maxLength: 48),
+                subtitle: $0.subtitle.todayShortSentence,
+                timingLabel: $0.label,
+                sourceLabel: calendarSourceLabel(input),
+                semanticState: .protected,
+                action: $0.action ?? hero.primaryAction
+            )
+        }
+
+        if items.count < 3 {
+            let flexibleItems = input.legacySupport.flexibleRoom.items.prefix(3 - items.count).map {
+                TodayPlanLayerItemState(
+                    id: "today2.plan.flexible.\($0.id)",
+                    title: $0.title.shortened(maxLength: 48),
+                    subtitle: $0.subtitle.todayShortSentence,
+                    timingLabel: $0.label,
+                    sourceLabel: "Based on your plan",
+                    semanticState: .trust,
+                    action: $0.action
+                )
+            }
+            items.append(contentsOf: flexibleItems)
+        }
+
+        if items.isEmpty, input.mode != .empty {
+            items.append(
+                TodayPlanLayerItemState(
+                    id: "today2.plan.best-next",
+                    title: hero.smallestUsefulNextStep?.shortened(maxLength: 48) ?? hero.title,
+                    subtitle: hero.subtitle.todayShortSentence,
+                    timingLabel: "Now",
+                    sourceLabel: "Based on your plan",
+                    semanticState: hero.semanticState,
+                    action: hero.primaryAction
+                )
+            )
+        }
+
+        let compactTimeline = items.isEmpty
+            ? "No fixed plan yet"
+            : items.map(\.timingLabel).prefix(3).joined(separator: " / ")
+        let openWindow = input.realitySnapshot?.openWindowCandidates.first?.fitSummary.todayShortSentence
+            ?? input.legacySupport.timeAperture.bestUseTitle
+        let source = calendarSourceLabel(input)
+        let moveAction = TodayInlineAction(
+            kind: .openPlan,
+            title: "Move This",
+            systemImage: "arrow.right.arrow.left",
+            state: .default,
+            target: hero.primaryAction.target
+        )
+        let parkAction = TodayInlineAction(
+            kind: .defer,
+            title: "Park / Not Today",
+            systemImage: "pause.circle",
+            state: .default,
+            target: hero.primaryAction.target
+        )
+        let markDoneAction = TodayInlineAction(
+            kind: .complete,
+            title: "Mark Done",
+            systemImage: "checkmark.circle",
+            state: .success,
+            target: hero.primaryAction.target
+        )
+        return TodayPlanLayerState(
+            title: "Today Plan",
+            subtitle: items.isEmpty ? "Start with one real move." : "The planned day stays visible.",
+            compactTimelineLabel: compactTimeline,
+            openWindowLabel: openWindow,
+            calendarSourceLabel: source,
+            items: items,
+            moveAction: moveAction,
+            parkAction: parkAction,
+            markDoneAction: markDoneAction,
+            accessibilityLabel: "Today Plan",
+            accessibilityValue: items.isEmpty
+                ? "No fixed plan yet. \(source). \(openWindow)."
+                : "\(items.count) planned item\(items.count == 1 ? "" : "s"). \(compactTimeline). \(source). \(openWindow).",
+            accessibilityHint: "Shows the planned day and visible buttons to start, move, park, or mark done without requesting calendar access here."
+        )
+    }
+
+    func oneStepGoalsPanel(_ input: TodayExecutionProjectionInput) -> TodayOneStepGoalsPanelState {
+        let summaries = input.oneStepGoalsProjection.areas.flatMap(\.oneStepGoals)
+            .filter { $0.status.isOpen }
+            .prefix(3)
+        let previews = summaries.map { summary in
+            TodayOneStepGoalPreviewState(
+                id: summary.id.rawValue,
+                title: summary.title.shortened(maxLength: 48),
+                subtitle: oneStepGoalSubtitle(summary),
+                statusLabel: summary.status.displayName,
+                semanticState: oneStepGoalSemanticState(summary.status),
+                action: TodayInlineAction(
+                    kind: .openPlan,
+                    title: "Review",
+                    systemImage: "arrow.right.circle",
+                    state: .default,
+                    target: TodayActionTarget()
+                )
+            )
+        }
+        let total = input.oneStepGoalsProjection.counts.openCount
+        return TodayOneStepGoalsPanelState(
+            title: "One-Step Goals",
+            subtitle: total == 0 ? "No standalone task is pulling on Today." : "Standalone tasks stay small.",
+            value: total == 0 ? "None today" : "\(total) open",
+            previews: Array(previews),
+            emptyMessage: "No One-Step Goals on Today",
+            accessibilityLabel: "One-Step Goals",
+            accessibilityValue: total == 0 ? "No standalone task is pulling on Today." : "\(total) open standalone task\(total == 1 ? "" : "s").",
+            accessibilityHint: "Tasks are standalone One-Step Goals. Steps remain inside Goals, Paths, or Plans."
+        )
+    }
+
     func dayState(_ input: TodayExecutionProjectionInput) -> TodayQualitativeDayState {
         switch input.resilienceAssessment.status {
         case .recovering:
@@ -711,7 +973,7 @@ private extension TodayExecutionProjector {
         let summary = input.realitySnapshot?.availability.summary ?? input.nowState.schedulePressure.summary
         let calendarLine = input.realitySnapshot?.calendarContext?.hasCalendarReadAccess == true
             ? "Calendar-aware and local."
-            : "Plan can get smarter from Calendar."
+            : "Plan works without calendar access."
         return TodayExecutionPanelState(
             id: "today2.plan",
             kind: .plan,
@@ -722,6 +984,41 @@ private extension TodayExecutionProjector {
             action: openPlanAction(),
             explanation: nil
         )
+    }
+
+    func calendarSourceLabel(_ input: TodayExecutionProjectionInput) -> String {
+        if input.realitySnapshot?.calendarContext?.hasCalendarReadAccess == true {
+            return "From your calendar"
+        }
+        if input.realitySnapshot?.scheduledBlocks.isEmpty == false {
+            return "Created in Ambitions"
+        }
+        return "Based on your plan"
+    }
+
+    func oneStepGoalSubtitle(_ summary: OneStepGoalSummary) -> String {
+        [
+            summary.timingLabel,
+            summary.linkedActiveGoalCount > 0 ? "\(summary.linkedActiveGoalCount) linked goal\(summary.linkedActiveGoalCount == 1 ? "" : "s")" : nil,
+            summary.suggestedNextAction
+        ].compactMap { $0 }.joined(separator: " · ").todayShortSentence
+    }
+
+    func oneStepGoalSemanticState(_ status: OneStepGoalStatus) -> AmbitionSemanticState {
+        switch status {
+        case .today, .ready:
+            return .focus
+        case .scheduled:
+            return .calendarDerived
+        case .waiting:
+            return .waiting
+        case .reviewLater, .parked:
+            return .trust
+        case .completed:
+            return .success
+        case .archived:
+            return .review
+        }
     }
 
     func priorityPanel(_ input: TodayExecutionProjectionInput) -> TodayExecutionPanelState {

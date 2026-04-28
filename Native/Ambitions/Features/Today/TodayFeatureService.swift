@@ -371,6 +371,11 @@ private extension RepositoryBackedTodayService {
             option: resilience.recommendedRecoveryOption,
             type: resilience.status == .stable ? .whyNow : .whyRecovered
         )
+        let oneStepGoalsProjection = oneStepGoalsProjection(
+            from: snapshot.captures,
+            goals: activeGoals,
+            now: now
+        )
         return TodayExecutionProjector().project(
             TodayExecutionProjectionInput(
                 mode: mode,
@@ -381,9 +386,68 @@ private extension RepositoryBackedTodayService {
                 believabilityAssessments: believability,
                 resilienceAssessment: resilience,
                 explanations: believabilityExplanations + [recoveryExplanation],
-                captures: snapshot.captures
+                captures: snapshot.captures,
+                oneStepGoalsProjection: oneStepGoalsProjection
             )
         )
+    }
+
+    func oneStepGoalsProjection(from captures: [Capture], goals: [Goal], now: Date) -> OneStepGoalsProjection {
+        let oneStepGoals = captures.compactMap { capture -> OneStepGoal? in
+            guard capture.linkedGoalID == nil else { return nil }
+            switch capture.kind {
+            case .oneTimeCommitment, .deadlineTask:
+                break
+            case .raw, .goalSeed, .goalSupportingTask, .deliverableSeed, .waitingItem, .optionalSomeday, .archiveItem:
+                return nil
+            }
+
+            return OneStepGoal(
+                id: OneStepGoalID(rawValue: "capture.\(capture.id)"),
+                title: capture.rawText,
+                note: nil,
+                lifeAreaID: nil,
+                status: oneStepGoalStatus(for: capture),
+                timing: OneStepGoalTimingMetadata(
+                    dueAt: nil,
+                    dueLabel: capture.deadlineText,
+                    reminderAt: nil,
+                    reminderLabel: nil,
+                    reviewAfter: nil
+                ),
+                source: .capture,
+                sourceCaptureID: capture.id,
+                createdAt: capture.createdAt,
+                updatedAt: capture.updatedAt,
+                lastReferencedAt: DomainTimestamp.string(from: now)
+            )
+        }
+
+        return OneStepGoalProjector().projection(
+            from: OneStepGoalProjector.Input(
+                oneStepGoals: oneStepGoals,
+                goals: goals,
+                includeArchived: false,
+                maxOneStepGoalsPerArea: 3
+            )
+        )
+    }
+
+    func oneStepGoalStatus(for capture: Capture) -> OneStepGoalStatus {
+        switch capture.status {
+        case .scheduled:
+            return .scheduled
+        case .waiting, .delegated:
+            return .waiting
+        case .optionalSomeday:
+            return .parked
+        case .archived:
+            return .archived
+        case .needsTriage, .seed:
+            return .reviewLater
+        case .actionable, .goalBound:
+            return capture.deadlineKind == .hard ? .today : .ready
+        }
     }
 
     func activeContextLens(entryContext: TodayEntryContext, goals: [Goal], captures: [Capture]) -> NowContextLens {

@@ -38,6 +38,12 @@ struct TodayExecutionHeroPanel: View {
                 ], onAction: onAction)
                 .accessibilityIdentifier("today.daily-contract")
 
+                TodayPlanLayerStrip(state: state.todayPlanLayer, onAction: onAction)
+                    .accessibilityIdentifier("today.plan-layer")
+
+                TodayOneStepGoalsStrip(state: state.oneStepGoalsPanel, onAction: onAction)
+                    .accessibilityIdentifier("today.one-step-goals")
+
                 TodayPrimaryActionButton(action: state.hero.primaryAction, handler: onAction)
                     .accessibilityIdentifier("today.hero.primary-action")
 
@@ -75,6 +81,10 @@ struct TodayExecutionSupportPanels: View {
             "today.support.capture-pressure"
         case .plan:
             "today.support.plan-guidance"
+        case .todayPlan:
+            "today.support.today-plan"
+        case .oneStepGoals:
+            "today.support.one-step-goals"
         case .priority:
             "today.support.priority"
         case .recovery:
@@ -120,6 +130,252 @@ struct TodayExecutionDeepDive: View {
             }
         }
         .accessibilityIdentifier("today.deep-dive")
+    }
+}
+
+private struct TodayPlanLayerStrip: View {
+    @Environment(\.ambitionTheme) private var theme
+
+    let state: TodayPlanLayerState
+    let onAction: (TodayInlineAction) -> Void
+
+    var body: some View {
+        VStack(alignment: .leading, spacing: theme.spacing.sm) {
+            HStack(alignment: .top, spacing: theme.spacing.sm) {
+                Image(systemName: "calendar")
+                    .font(.system(size: 16, weight: .semibold))
+                    .foregroundStyle(theme.semanticAccent(for: .calendarDerived))
+                    .frame(width: 30, height: 30)
+                    .background(Circle().fill(theme.semanticStyle(for: .calendarDerived).fill))
+                    .accessibilityHidden(true)
+
+                VStack(alignment: .leading, spacing: theme.spacing.xxs) {
+                    HStack(alignment: .firstTextBaseline, spacing: theme.spacing.xs) {
+                        Text(state.title)
+                            .font(theme.typography.caption)
+                            .foregroundStyle(theme.colors.textTertiary)
+                        AmbitionChip(state.calendarSourceLabel, role: .state, semanticState: .calendarDerived)
+                    }
+                    Text(state.subtitle)
+                        .font(theme.typography.bodyEmphasized)
+                        .foregroundStyle(theme.colors.textPrimary)
+                        .fixedSize(horizontal: false, vertical: true)
+                    Text("\(state.compactTimelineLabel) · \(state.openWindowLabel)")
+                        .font(theme.typography.caption)
+                        .foregroundStyle(theme.colors.textSecondary)
+                        .fixedSize(horizontal: false, vertical: true)
+                        .accessibilityIdentifier("today.compact-timeline")
+                }
+                Spacer(minLength: theme.spacing.sm)
+            }
+
+            if state.items.isEmpty {
+                Text("No fixed plan yet")
+                    .font(theme.typography.caption)
+                    .foregroundStyle(theme.colors.textSecondary)
+            } else {
+                VStack(alignment: .leading, spacing: theme.spacing.xs) {
+                    ForEach(state.items.prefix(2)) { item in
+                        TodayPlanLayerItemRow(item: item, onAction: onAction)
+                    }
+                }
+            }
+
+            HStack(spacing: theme.spacing.xs) {
+                TodayTinyActionButton(action: state.moveAction, onAction: onAction)
+                TodayTinyActionButton(action: state.parkAction, onAction: onAction)
+                if let markDoneAction = state.markDoneAction {
+                    TodayTinyActionButton(action: markDoneAction, onAction: onAction)
+                }
+            }
+        }
+        .padding(theme.spacing.sm)
+        .background(
+            RoundedRectangle(cornerRadius: theme.radius.md, style: .continuous)
+                .fill(theme.colors.surfaceSecondary.opacity(0.74))
+        )
+        .overlay(
+            RoundedRectangle(cornerRadius: theme.radius.md, style: .continuous)
+                .stroke(theme.semanticAccent(for: .calendarDerived).opacity(0.18), lineWidth: 1)
+        )
+        .accessibilityElement(children: .combine)
+        .accessibilityLabel(state.accessibilityLabel)
+        .accessibilityValue(state.accessibilityValue)
+        .accessibilityHint(state.accessibilityHint)
+    }
+}
+
+private struct TodayPlanLayerItemRow: View {
+    @Environment(\.ambitionTheme) private var theme
+
+    let item: TodayPlanLayerItemState
+    let onAction: (TodayInlineAction) -> Void
+
+    var body: some View {
+        Group {
+            if let action = item.action {
+                Button {
+                    onAction(action)
+                } label: {
+                    rowBody
+                }
+                .buttonStyle(.plain)
+                .modifier(TodayActionAccessibilityHint(action: action))
+            } else {
+                rowBody
+            }
+        }
+        .accessibilityElement(children: .combine)
+        .accessibilityLabel(item.title)
+        .accessibilityValue("\(item.timingLabel). \(item.sourceLabel). \(item.subtitle)")
+    }
+
+    private var rowBody: some View {
+        HStack(alignment: .firstTextBaseline, spacing: theme.spacing.xs) {
+            Text(item.timingLabel)
+                .font(theme.typography.micro)
+                .foregroundStyle(theme.colors.textTertiary)
+                .frame(minWidth: 52, alignment: .leading)
+            Text(item.title)
+                .font(theme.typography.caption)
+                .foregroundStyle(theme.colors.textPrimary)
+                .lineLimit(1)
+            Spacer(minLength: theme.spacing.xs)
+            Image(systemName: "chevron.right")
+                .font(.caption2.weight(.semibold))
+                .foregroundStyle(theme.colors.textTertiary)
+        }
+    }
+}
+
+private struct TodayOneStepGoalsStrip: View {
+    @Environment(\.ambitionTheme) private var theme
+
+    let state: TodayOneStepGoalsPanelState
+    let onAction: (TodayInlineAction) -> Void
+
+    var body: some View {
+        VStack(alignment: .leading, spacing: theme.spacing.sm) {
+            HStack(alignment: .top, spacing: theme.spacing.sm) {
+                Image(systemName: "checkmark.circle")
+                    .font(.system(size: 16, weight: .semibold))
+                    .foregroundStyle(theme.semanticAccent(for: .focus))
+                    .frame(width: 30, height: 30)
+                    .background(Circle().fill(theme.semanticStyle(for: .focus).fill))
+                    .accessibilityHidden(true)
+
+                VStack(alignment: .leading, spacing: theme.spacing.xxxs) {
+                    HStack(alignment: .firstTextBaseline, spacing: theme.spacing.xs) {
+                        Text(state.title)
+                            .font(theme.typography.caption)
+                            .foregroundStyle(theme.colors.textTertiary)
+                        AmbitionChip(state.value, role: .state, semanticState: state.previews.isEmpty ? .trust : .focus)
+                    }
+                    Text(state.subtitle)
+                        .font(theme.typography.bodyEmphasized)
+                        .foregroundStyle(theme.colors.textPrimary)
+                        .fixedSize(horizontal: false, vertical: true)
+                }
+                Spacer(minLength: theme.spacing.sm)
+            }
+
+            if state.previews.isEmpty {
+                Text(state.emptyMessage)
+                    .font(theme.typography.caption)
+                    .foregroundStyle(theme.colors.textSecondary)
+                    .fixedSize(horizontal: false, vertical: true)
+            } else {
+                VStack(alignment: .leading, spacing: theme.spacing.xs) {
+                    ForEach(state.previews.prefix(2)) { preview in
+                        TodayOneStepGoalRow(preview: preview, onAction: onAction)
+                    }
+                }
+            }
+        }
+        .padding(theme.spacing.sm)
+        .background(
+            RoundedRectangle(cornerRadius: theme.radius.md, style: .continuous)
+                .fill(theme.colors.surfaceSecondary.opacity(0.74))
+        )
+        .overlay(
+            RoundedRectangle(cornerRadius: theme.radius.md, style: .continuous)
+                .stroke(theme.semanticAccent(for: state.previews.isEmpty ? .trust : .focus).opacity(0.16), lineWidth: 1)
+        )
+        .accessibilityElement(children: .combine)
+        .accessibilityLabel(state.accessibilityLabel)
+        .accessibilityValue(state.accessibilityValue)
+        .accessibilityHint(state.accessibilityHint)
+    }
+}
+
+private struct TodayOneStepGoalRow: View {
+    @Environment(\.ambitionTheme) private var theme
+
+    let preview: TodayOneStepGoalPreviewState
+    let onAction: (TodayInlineAction) -> Void
+
+    var body: some View {
+        Group {
+            if let action = preview.action {
+                Button {
+                    onAction(action)
+                } label: {
+                    rowBody
+                }
+                .buttonStyle(.plain)
+                .modifier(TodayActionAccessibilityHint(action: action))
+            } else {
+                rowBody
+            }
+        }
+        .accessibilityElement(children: .combine)
+        .accessibilityLabel(preview.title)
+        .accessibilityValue("\(preview.statusLabel). \(preview.subtitle)")
+    }
+
+    private var rowBody: some View {
+        HStack(alignment: .firstTextBaseline, spacing: theme.spacing.xs) {
+            AmbitionChip(preview.statusLabel, role: .state, semanticState: preview.semanticState)
+            Text(preview.title)
+                .font(theme.typography.caption)
+                .foregroundStyle(theme.colors.textPrimary)
+                .lineLimit(1)
+            Spacer(minLength: theme.spacing.xs)
+            Image(systemName: "chevron.right")
+                .font(.caption2.weight(.semibold))
+                .foregroundStyle(theme.colors.textTertiary)
+        }
+    }
+}
+
+private struct TodayTinyActionButton: View {
+    @Environment(\.ambitionTheme) private var theme
+
+    let action: TodayInlineAction
+    let onAction: (TodayInlineAction) -> Void
+
+    var body: some View {
+        Button {
+            onAction(action)
+        } label: {
+            Label(action.title, systemImage: action.systemImage)
+                .font(theme.typography.caption)
+                .lineLimit(1)
+                .labelStyle(.titleAndIcon)
+                .padding(.horizontal, theme.spacing.sm)
+                .padding(.vertical, theme.spacing.xs)
+                .background(
+                    Capsule()
+                        .fill(theme.stateStyle(for: action.state).fill)
+                )
+                .overlay(
+                    Capsule()
+                        .stroke(theme.stateStyle(for: action.state).stroke, lineWidth: 1)
+                )
+        }
+        .buttonStyle(.plain)
+        .foregroundStyle(theme.colors.textPrimary)
+        .modifier(TodayActionAccessibilityHint(action: action))
     }
 }
 
@@ -536,8 +792,10 @@ private struct TodayPanelVisual: View {
         switch panel.kind {
         case .capture:
             dotCluster
-        case .plan:
+        case .plan, .todayPlan:
             timeRunway
+        case .oneStepGoals:
+            balanceStrip
         case .priority:
             balanceStrip
         case .recovery:
@@ -722,8 +980,10 @@ private struct TodayExecutionPanel: View {
         switch panel.kind {
         case .capture:
             CapturePanel(configuration, visualSlot: { TodayPanelVisual(panel: panel) }, contentSlot: content)
-        case .plan:
+        case .plan, .todayPlan:
             SchedulePanel(configuration, visualSlot: { TodayPanelVisual(panel: panel) }, contentSlot: content)
+        case .oneStepGoals:
+            ProgressPanel(configuration, visualSlot: { TodayPanelVisual(panel: panel) }, contentSlot: content)
         case .recovery:
             RecoveryPanel(configuration, visualSlot: { TodayPanelVisual(panel: panel) }, contentSlot: content)
         case .priority:
@@ -754,9 +1014,9 @@ private extension TodayExecutionPanelState {
         switch kind {
         case .capture:
             .capture
-        case .plan:
+        case .plan, .todayPlan:
             .schedule
-        case .priority:
+        case .priority, .oneStepGoals:
             .progress
         case .recovery:
             .recovery
@@ -774,6 +1034,8 @@ private extension TodayExecutionPanelKind {
         case .contextLens: "Lens"
         case .capture: "Capture"
         case .plan: "Plan"
+        case .todayPlan: "Today Plan"
+        case .oneStepGoals: "One-Step Goals"
         case .priority: "Priority"
         case .recovery: "Recovery"
         case .waiting: "Waiting"
@@ -787,6 +1049,8 @@ private extension TodayExecutionPanelKind {
         case .contextLens: "viewfinder"
         case .capture: "tray.and.arrow.down.fill"
         case .plan: "calendar.badge.clock"
+        case .todayPlan: "calendar"
+        case .oneStepGoals: "checkmark.circle.fill"
         case .priority: "scope"
         case .recovery: "arrow.uturn.backward.circle.fill"
         case .waiting: "hourglass"
