@@ -2,7 +2,7 @@
 
 Status: Active canon consolidation layer.
 
-Purpose: Define what “done” means for future Ambitions implementation work. This document consolidates acceptance expectations from the roadmap, batch plan, visual review checklist, RC maturity plan, design contracts, accessibility posture, systems architecture, and product decision Waves 1-3.
+Purpose: Define what “done” means for future Ambitions implementation work. This document consolidates acceptance expectations from the roadmap, batch plan, visual review checklist, RC maturity plan, design contracts, accessibility posture, systems architecture, and product decision Waves 1-4.
 
 ## Core Standard
 
@@ -87,6 +87,7 @@ A change passes surface ownership when content lives in the right place.
 
 | Surface | Owns | Does not own |
 | --- | --- | --- |
+| Onboarding | first useful object, static preview, first-run route receipt, safe skip-to-Today | upfront calendar, notifications, account setup, display-density setup, full questionnaire |
 | Today | immediate execution, best next action, daily recovery | full analytics, dense histories, raw ledgers |
 | Goals | direction, goal portfolio, health, lifecycle, goal detail entry | standalone task manager, dense KPI dashboard |
 | Capture | intake, Needs a Place, Smart Attachment, route receipts | long-term graveyard inbox, chat-first AI |
@@ -94,6 +95,28 @@ A change passes surface ownership when content lives in the right place.
 | You | personalization, memory, reviews, trust, settings | primary execution UI |
 | Trust Center | trust, receipts, privacy, memory controls, sync/export truth, platform status | numerical trust score at launch, marketing claims |
 | What Ambitions Knows | user-visible Memory inspection, correction, confirmation, pause/delete controls | hidden profiling or unreviewable memory |
+
+## Onboarding Gate
+
+An onboarding or first-run change passes when:
+
+- It uses a static premium preview at launch; animation is optional later, not required.
+- The first prompt is `What do you want to organize?`.
+- First-run success is any useful object created.
+- First object creation shows the receipt inside the destination.
+- The route receipt includes object type, destination, next useful action, and correction route.
+- Life Area is inferred when possible and asked only when uncertain.
+- Life Area remains correctable from the receipt.
+- Display density is not asked during onboarding.
+- Default display setting is `Balanced + Comfortable`.
+- Calendar permission is not requested during onboarding.
+- Notification permission is not requested during onboarding.
+- Calendar permission is only requested from Plan after a calendar-aware planning action.
+- Notification permission is only requested after reminder/protected-block value.
+- Default examples cover Career, Creative, Finance, Health, Home, and Relationships / Family.
+- Baby/family examples appear only when contextually relevant.
+- Skipping onboarding lands in Today with a strong empty state and Capture action.
+- The static preview has an equivalent VoiceOver description.
 
 ## Visual Quality Gate
 
@@ -118,6 +141,7 @@ A copy/UI-language change passes when:
 - It uses approved labels such as `Why This`, `Why Now`, `Why Changed`, `What This Uses`, `Needs Confirmation`, and `Update This`.
 - It uses Wave 2 state language: `No Longer Relevant` for dropped goals, `End Goal` for intentional ending, `Park Goal` for pause, `Needs Protection` for fragile plan state, and `No Longer Holds` for broken plan state.
 - It uses Wave 3 trust language: `You are in control` for Trust Center top status, `What Ambitions Knows` for the memory section, and `Memory` for the object/type.
+- It uses Wave 4 onboarding language: `What do you want to organize?`, `Organize This`, and contextual first-run route receipts.
 - It avoids numerical Trust Score language at launch.
 - It avoids AI/model terminology in normal UI.
 - It avoids shame language.
@@ -166,6 +190,7 @@ A user-visible change passes the baseline accessibility gate when:
 - Required gestures have visible alternatives.
 - Destructive actions require confirmation.
 - Screen readers can understand status/value rows.
+- Static previews have equivalent VoiceOver descriptions.
 - No user-facing accessibility claims appear before verification evidence exists.
 
 ## Empty / Error / Recovery Gate
@@ -188,6 +213,8 @@ A screen or flow passes this gate when it handles:
 - delete-all-memory confirmation
 - memory learning paused states where implemented
 - sensitive Life Area collapsed/private-item states where relevant
+- onboarding skip state
+- first-run save failure with preserved input
 - receipt + undo for reversible local changes where safe
 
 The state must offer one useful next action and no dead end.
@@ -206,6 +233,7 @@ A data/model change passes when:
 - It preserves internal separation between `cancelled` and `dropped` where the domain model requires it, even if launch UI simplifies wording.
 - It does not allow delete-all-memory to delete goals/tasks/plans unless explicitly included in a separate destructive action.
 - It preserves memory learning pause without deleting existing memory.
+- It preserves first-run user input on save failure.
 
 ## Test / Validation Gate
 
@@ -217,6 +245,7 @@ Recommended evidence:
 - view model tests for state mapping
 - UI tests for shell/navigation-critical behavior
 - preview scenarios for major visual states
+- onboarding skip and first-object scenarios for onboarding work
 - manual visual review checklist for UI batches
 - accessibility checklist for visible components
 - build/test command output in completion summary
@@ -257,9 +286,10 @@ A batch is complete only when:
 6. Empty/error/recovery states are not broken.
 7. Confirmation/receipt behavior matches trust gates.
 8. Memory/sensitive-area behavior matches Wave 3 gates where relevant.
-9. Completion summary distinguishes implemented behavior from planned future canon.
-10. `BATCH_REGISTRY.md` is updated if the batch status changed.
-11. Follow-up work is captured without moving the active batch prematurely.
+9. Onboarding behavior matches Wave 4 gates where relevant.
+10. Completion summary distinguishes implemented behavior from planned future canon.
+11. `BATCH_REGISTRY.md` is updated if the batch status changed.
+12. Follow-up work is captured without moving the active batch prematurely.
 
 ## Red Flags
 
@@ -268,6 +298,9 @@ Stop or revise if a change:
 - creates a new top-level tab without canon approval
 - reintroduces Insights, Habits, or Tasks as standalone top-level surfaces
 - requests calendar permission during onboarding
+- requests notification permission during onboarding
+- asks for display density during onboarding
+- uses onboarding completion as the first-run success metric instead of useful-object creation
 - silently changes calendar/user data
 - silently changes major deadlines
 - deletes memory without confirmation
@@ -317,6 +350,7 @@ Use this structure for Codex completion summaries:
 - Trust/privacy:
 - Confirmation/receipt behavior:
 - Memory/sensitive-area behavior:
+- Onboarding behavior:
 
 ## Remaining Gaps
 - ...
