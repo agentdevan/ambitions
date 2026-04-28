@@ -10,6 +10,8 @@ For current canon ownership and consolidation, read:
 
 - [canon/SOURCE_OF_TRUTH_MAP.md](canon/SOURCE_OF_TRUTH_MAP.md)
   Active document ownership map and source-of-truth reading order. Use this before non-trivial product, design, roadmap, or implementation work.
+- [canon/PRODUCT_DECISIONS.md](canon/PRODUCT_DECISIONS.md)
+  Active product decision log for question waves and ambiguity resolution.
 - [canon/CANON_CONSOLIDATION_GAP_AUDIT.md](canon/CANON_CONSOLIDATION_GAP_AUDIT.md)
   Documentation architecture audit showing what already existed, what was consolidated, and what still needs product decisions.
 
@@ -26,6 +28,8 @@ For the current free Codex workflow, also read:
 
 - [canon/SOURCE_OF_TRUTH_MAP.md](canon/SOURCE_OF_TRUTH_MAP.md)
   Active source-of-truth map and reading order.
+- [canon/PRODUCT_DECISIONS.md](canon/PRODUCT_DECISIONS.md)
+  Active product decision log for resolved product-definition waves.
 - [../MASTER_PRODUCT_SPEC.md](../MASTER_PRODUCT_SPEC.md)
   Current shipping product truth.
 - [canon/design/Ambitions_Design_Constitution.md](canon/design/Ambitions_Design_Constitution.md)
@@ -61,6 +65,7 @@ For the current free Codex workflow, also read:
 
 These focused docs extract already-existing doctrine into implementation-readable references. They clarify the active canon; they do not create a parallel roadmap.
 
+- [canon/PRODUCT_DECISIONS.md](canon/PRODUCT_DECISIONS.md)
 - [canon/CANON_CONSOLIDATION_GAP_AUDIT.md](canon/CANON_CONSOLIDATION_GAP_AUDIT.md)
 - [canon/DOMAIN_MODEL.md](canon/DOMAIN_MODEL.md)
 - [canon/GOAL_PLAN_TASK_LIFECYCLE.md](canon/GOAL_PLAN_TASK_LIFECYCLE.md)
