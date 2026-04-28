@@ -245,13 +245,13 @@ public struct AmbitionChip: View {
 public extension AmbitionChipRole {
     var accessibilityTitle: String {
         switch self {
-        case .confidence: "Confidence"
+        case .confidence: "Suggestion"
         case .state: "State"
-        case .domain: "Domain"
+        case .domain: "Area"
         case .time: "Time"
         case .recovery: "Recovery"
         case .waiting: "Waiting"
-        case .protected: "Protected"
+        case .protected: "Private"
         case .focus: "Focus"
         case .capture: "Capture"
         }
