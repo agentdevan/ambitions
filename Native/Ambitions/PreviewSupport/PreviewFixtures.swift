@@ -22,7 +22,7 @@ struct PreviewFixtures: Sendable {
             subtitle: "Three deliberate moves are enough to keep momentum today.",
             completionLabel: "58% aligned",
             targets: [
-                DashboardProgressItem(id: "today-1", title: "Tighten external-surface truth", detail: "Keep docs, Profile, and previews aligned", progress: 0.82, trailingValue: "82%", statusLabel: "In flight"),
+                DashboardProgressItem(id: "today-1", title: "Tighten external-surface truth", detail: "Keep docs, You, and previews aligned", progress: 0.82, trailingValue: "82%", statusLabel: "In flight"),
                 DashboardProgressItem(id: "today-2", title: "Review validation coverage", detail: "Keep routing, trust copy, and EventKit checks current", progress: 0.45, trailingValue: "45%", statusLabel: "Queued"),
                 DashboardProgressItem(id: "today-3", title: "Prepare release notes", detail: "Make local build and test guidance reproducible", progress: 0.67, trailingValue: "67%", statusLabel: "Ready")
             ],
@@ -131,7 +131,7 @@ struct PreviewFixtures: Sendable {
             ),
             stats: [
                 MetricSummary(id: "insight-1", title: "Follow-through", value: "4", detail: "Completions and minimum versions this week", icon: "checkmark.circle"),
-                MetricSummary(id: "insight-2", title: "Consistency", value: "63%", detail: "Habit rhythm this week", icon: "repeat"),
+                MetricSummary(id: "insight-2", title: "Consistency", value: "63%", detail: "Ritual rhythm this week", icon: "repeat"),
                 MetricSummary(id: "insight-3", title: "Adaptation", value: "Building", detail: "How quickly corrections turned back into movement", icon: "arrow.triangle.branch"),
                 MetricSummary(id: "insight-4", title: "Needs care", value: "1", detail: "Open clarification or blocked drafts", icon: "lifepreserver")
             ],
@@ -424,7 +424,7 @@ struct PreviewFixtures: Sendable {
                     SettingsItem(id: "profile-integration-shortcuts", title: "Navigation shortcuts", subtitle: "\(ExternalSurfaceTruth.availableButNeedsManualVerification). App Intents stay navigation-only and keep canonical routing ownership.", icon: "sparkles.rectangle.stack", valueLabel: ExternalSurfaceTruth.availableButNeedsManualVerification),
                     SettingsItem(id: "profile-integration-share", title: "Share Extension", subtitle: "\(ExternalSurfaceTruth.notShippedInThisBuild). Share intake remains deferred until a dedicated extension target and handoff path exist.", icon: "square.and.arrow.up", valueLabel: ExternalSurfaceTruth.notShippedInThisBuild)
                 ],
-                footer: "Notification and integration status should answer whether anything important needs attention without turning Profile into an admin checklist."
+                footer: "Notification and integration status should answer whether anything important needs attention without turning You into an admin checklist."
             ),
             defaultsSection: ProfileSectionGroup(
                 title: "Personal defaults",
@@ -438,7 +438,7 @@ struct PreviewFixtures: Sendable {
             ),
             accountSection: ProfileSectionGroup(
                 title: "Account and billing",
-                subtitle: "This build stays explicit about what is not configured yet so Profile never implies hidden account requirements.",
+                subtitle: "This build stays explicit about what is not configured yet so You never implies hidden account requirements.",
                 items: [
                     SettingsItem(id: "profile-account-mode", title: "Account mode", subtitle: "No sign-in or cloud account is required for the current shipping native experience.", icon: "person.crop.circle", valueLabel: "On-device only"),
                     SettingsItem(id: "profile-account-billing", title: "Billing", subtitle: "Subscriptions, digital unlocks, and purchase flows are not active product scope in this build.", icon: "creditcard", valueLabel: "Not active")

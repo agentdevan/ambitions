@@ -12,6 +12,8 @@ This is the active post-Batch-60 execution plan. It begins at Batch 61 and super
 
 [Ambitions_2_0_Roadmap_Merge_Audit.md](Ambitions_2_0_Roadmap_Merge_Audit.md) governs how the original Batches 89-120 merge with the D01-D26 Design Constitution delta/alignment backlog. D01-D26 take precedence over Batches 89-120 wherever there is any conflict, and original Batch 89-120 work must not run before its required D-batch foundation.
 
+[Ambitions_2_0_Object_Terminology.md](Ambitions_2_0_Object_Terminology.md) locks the shared object language for D02 and later batches. It is the active reference for Task/Step, Life Area, North Star, Ritual, Receipt, Review, Archive, Waiting, Decision, and Memory terminology.
+
 ## Execution Rules
 
 - Work on `main` only.
@@ -181,8 +183,8 @@ The repo-wide implementation gap audit lives in [Ambitions_2_0_Implementation_Ga
 
 | Delta | Name | Depends on | Status |
 | --- | --- | --- | --- |
-| D01 | Shell IA / Tab Alignment Delta | Design Constitution, current shell evidence | Planned |
-| D02 | Shared Object Terminology Cleanup | D01 | Planned |
+| D01 | Shell IA / Tab Alignment Delta | Design Constitution, current shell evidence | Completed |
+| D02 | Shared Object Terminology Cleanup | D01 | Completed |
 | D03 | GroupedNavigationList Component | shared component primitives | Planned |
 | D04 | Panel Size + Display Density | shared component primitives | Planned |
 | D05 | Receipt / Action Closure Search and Privacy Contract | Action Closure v1 | Planned |
@@ -208,9 +210,9 @@ The repo-wide implementation gap audit lives in [Ambitions_2_0_Implementation_Ga
 | D25 | App Intents / Shortcuts Alignment | D22 | Planned |
 | D26 | Release Candidate Validation | D01-D25 | Planned |
 
-Do not mark any delta complete until its implementation, validation evidence, docs/status truth, and handoff are aligned. After the roadmap merge audit, D01-D26 are the active dependency-safe implementation sequence; original Batch 89 work is retained only after its D10-D21 foundations or inside D26.
+Do not mark any delta complete until its implementation, validation evidence, docs/status truth, and handoff are aligned. After the roadmap merge audit and D02 terminology cleanup, D03 is the next dependency-safe implementation batch; original Batch 89 work is retained only after its D10-D21 foundations or inside D26.
 
-Roadmap merge audit note: [Ambitions_2_0_Roadmap_Merge_Audit.md](Ambitions_2_0_Roadmap_Merge_Audit.md) now explicitly maps Batches 89-120 against D01-D26. It preserves useful Batch 89-120 intent, but D01 is the next dependency-safe implementation batch and Batch 89 is not runnable before its D10-D21 foundations.
+Roadmap merge audit note: [Ambitions_2_0_Roadmap_Merge_Audit.md](Ambitions_2_0_Roadmap_Merge_Audit.md) now explicitly maps Batches 89-120 against D01-D26. It preserves useful Batch 89-120 intent, but D03 is the next dependency-safe implementation batch after D02 and Batch 89 is not runnable before its D10-D21 foundations.
 
 ## Batch 61 - Repo Truth and Ambitions 2.0 Capability Matrix
 
@@ -459,7 +461,7 @@ Every batch definition below inherits the required template:
 - Performance budget, accessibility requirement, no-fake-precision boundary, indispensability scenario improved.
 - Likely files/areas affected, dependencies, out-of-scope items, validation requirements, concrete acceptance criteria, and ready-to-paste Codex prompt.
 
-The compact batch definitions below preserve the original Batch 61-120 roadmap sequencing. Current execution status after the Design Constitution delta backlog and roadmap merge audit: Batches 00-88 are complete for planning purposes, D01 is the next dependency-safe implementation batch, and original Batches 89-120 remain future planned roadmap work only through the classifications and sequencing in [Ambitions_2_0_Roadmap_Merge_Audit.md](Ambitions_2_0_Roadmap_Merge_Audit.md). Ready prompts for completed batches are retained as historical implementation prompts, not current execution state.
+The compact batch definitions below preserve the original Batch 61-120 roadmap sequencing. Current execution status after the Design Constitution delta backlog, D01 shell alignment, D02 terminology cleanup, and roadmap merge audit: Batches 00-88 and D01-D02 are complete for planning purposes, D03 is the next dependency-safe implementation batch, and original Batches 89-120 remain future planned roadmap work only through the classifications and sequencing in [Ambitions_2_0_Roadmap_Merge_Audit.md](Ambitions_2_0_Roadmap_Merge_Audit.md). Ready prompts for completed batches are retained as historical implementation prompts, not current execution state.
 
 ## Phase A - Daily Value, Shell, Activation
 

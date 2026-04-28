@@ -5,8 +5,7 @@ This file defines the standing source-of-truth hierarchy for future Ambitions wo
 ## Current Operating Truth
 
 - Product-decision Waves 1-19 are complete.
-- The next phase is documentation/roadmap/batch reconciliation, then D01 implementation.
-- Current execution status remains: Batches 00-88 are complete for planning purposes; D01 is the next dependency-safe implementation batch from the Design Constitution delta/alignment backlog.
+- Current execution status remains: Batches 00-88 and D01-D02 are complete for planning purposes; D03 is the next dependency-safe implementation batch from the Design Constitution delta/alignment backlog.
 - D01-D26 classification now lives in `docs/canon/ROADMAP_BATCH_CLASSIFICATION.md` and distinguishes launch-critical, soon-after-launch, post-launch, deferred, decision-gated, and infrastructure-unlock work.
 - Original Batches 89-120 remain future planned roadmap work only through the classifications and dependencies in `docs/canon/Ambitions_2_0_Roadmap_Merge_Audit.md`.
 - The locked top-level shell is `Today / Goals / Capture / Plan / You`.
@@ -29,15 +28,16 @@ For non-trivial work, read these in order before planning:
 9. [DOCS_RECONCILIATION_REVIEW.md](../canon/DOCS_RECONCILIATION_REVIEW.md) when doing documentation cleanup, source-order updates, roadmap/batch reconciliation, or archive-candidate review.
 10. [MASTER_PRODUCT_SPEC.md](../../MASTER_PRODUCT_SPEC.md) for current shipping product truth and product promise.
 11. [Ambitions_Design_Constitution.md](../canon/design/Ambitions_Design_Constitution.md) for design, IA, UX writing, interaction, trust, accessibility, and external-surface authority.
-12. [Ambitions_2_0_Product_Architecture.md](../canon/Ambitions_2_0_Product_Architecture.md) for surface ownership and drilldown rules.
-13. [Ambitions_2_0_Systems_Architecture.md](../canon/Ambitions_2_0_Systems_Architecture.md) for shared engines, local-first systems, and system ownership.
-14. [Ambitions_2_0_Visual_System.md](../canon/Ambitions_2_0_Visual_System.md) plus focused visual/design docs when UI or component work is involved.
-15. Relevant focused canon docs listed in [SOURCE_OF_TRUTH_MAP.md](../canon/SOURCE_OF_TRUTH_MAP.md).
-16. [Ambitions_2_0_Roadmap.md](../canon/Ambitions_2_0_Roadmap.md), [Ambitions_2_0_Batch_Plan.md](../canon/Ambitions_2_0_Batch_Plan.md), [Ambitions_2_0_Implementation_Gap_Audit.md](../canon/Ambitions_2_0_Implementation_Gap_Audit.md), and [Ambitions_2_0_Roadmap_Merge_Audit.md](../canon/Ambitions_2_0_Roadmap_Merge_Audit.md) for execution sequencing after source-map alignment.
-17. [FREE_WORKFLOW_OPERATING_SYSTEM.md](FREE_WORKFLOW_OPERATING_SYSTEM.md), [Ambitions_2_0_Codex_Execution_Guide.md](Ambitions_2_0_Codex_Execution_Guide.md), and [MASTER_CODEX_SYSTEM.md](MASTER_CODEX_SYSTEM.md) for Codex/process behavior.
-18. [VISUAL_REVIEW_CHECKLIST.md](../review/VISUAL_REVIEW_CHECKLIST.md) when visible UI, navigation, empty states, copy, or hierarchy changes.
-19. [FRICTION_LOG.md](../review/FRICTION_LOG.md) when observed product friction needs to be captured without expanding active scope.
-20. [docs/README.md](../README.md), [canon/README.md](../canon/README.md), and [archive/README.md](../archive/README.md) for index/navigation support.
+12. [Ambitions_2_0_Object_Terminology.md](../canon/Ambitions_2_0_Object_Terminology.md) for shared object terminology.
+13. [Ambitions_2_0_Product_Architecture.md](../canon/Ambitions_2_0_Product_Architecture.md) for surface ownership and drilldown rules.
+14. [Ambitions_2_0_Systems_Architecture.md](../canon/Ambitions_2_0_Systems_Architecture.md) for shared engines, local-first systems, and system ownership.
+15. [Ambitions_2_0_Visual_System.md](../canon/Ambitions_2_0_Visual_System.md) plus focused visual/design docs when UI or component work is involved.
+16. Relevant focused canon docs listed in [SOURCE_OF_TRUTH_MAP.md](../canon/SOURCE_OF_TRUTH_MAP.md).
+17. [Ambitions_2_0_Roadmap.md](../canon/Ambitions_2_0_Roadmap.md), [Ambitions_2_0_Batch_Plan.md](../canon/Ambitions_2_0_Batch_Plan.md), [Ambitions_2_0_Implementation_Gap_Audit.md](../canon/Ambitions_2_0_Implementation_Gap_Audit.md), and [Ambitions_2_0_Roadmap_Merge_Audit.md](../canon/Ambitions_2_0_Roadmap_Merge_Audit.md) for execution sequencing after source-map alignment.
+18. [FREE_WORKFLOW_OPERATING_SYSTEM.md](FREE_WORKFLOW_OPERATING_SYSTEM.md), [Ambitions_2_0_Codex_Execution_Guide.md](Ambitions_2_0_Codex_Execution_Guide.md), and [MASTER_CODEX_SYSTEM.md](MASTER_CODEX_SYSTEM.md) for Codex/process behavior.
+19. [VISUAL_REVIEW_CHECKLIST.md](../review/VISUAL_REVIEW_CHECKLIST.md) when visible UI, navigation, empty states, copy, or hierarchy changes.
+20. [FRICTION_LOG.md](../review/FRICTION_LOG.md) when observed product friction needs to be captured without expanding active scope.
+21. [docs/README.md](../README.md), [canon/README.md](../canon/README.md), and [archive/README.md](../archive/README.md) for index/navigation support.
 
 ## Precedence Model
 
@@ -69,6 +69,7 @@ Use these entry points instead of duplicating a separate active-doc list here:
 - [GOLDEN_LAUNCH_LOOP.md](../canon/GOLDEN_LAUNCH_LOOP.md)
 - [ROADMAP_BATCH_CLASSIFICATION.md](../canon/ROADMAP_BATCH_CLASSIFICATION.md)
 - [HUMAN_LANGUAGE_REVIEW.md](../canon/HUMAN_LANGUAGE_REVIEW.md)
+- [Ambitions_2_0_Object_Terminology.md](../canon/Ambitions_2_0_Object_Terminology.md)
 - [AMBITION_CANON_COMPLETION_REPORT.md](../canon/AMBITION_CANON_COMPLETION_REPORT.md)
 - [DOCS_RECONCILIATION_REVIEW.md](../canon/DOCS_RECONCILIATION_REVIEW.md)
 - [canon/README.md](../canon/README.md)
@@ -103,4 +104,4 @@ Use these entry points instead of duplicating a separate active-doc list here:
 
 ## Next Operating Step
 
-Continue targeted user-facing string cleanup, then apply [ROADMAP_BATCH_CLASSIFICATION.md](../canon/ROADMAP_BATCH_CLASSIFICATION.md) to active roadmap and batch docs before resuming implementation with D01 unless the user explicitly changes the execution order.
+Continue with D03 - GroupedNavigationList Foundation unless the user explicitly changes the execution order.

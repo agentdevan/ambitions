@@ -58,7 +58,7 @@ final class ProfileViewModel {
             syncEditor(with: dashboard)
             state = .loaded(dashboard)
         } catch {
-            state = .failed("Unable to load Profile: \(error.localizedDescription)")
+            state = .failed("Unable to load You: \(error.localizedDescription)")
         }
     }
 
@@ -79,7 +79,7 @@ final class ProfileViewModel {
             syncEditor(with: dashboard)
             state = .loaded(dashboard)
         } catch {
-            state = .failed("Unable to save Profile: \(error.localizedDescription)")
+            state = .failed("Unable to save You: \(error.localizedDescription)")
         }
     }
 

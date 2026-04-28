@@ -845,7 +845,7 @@ private struct InsightsMicroChart: View {
 }
 
 #if DEBUG
-#Preview("Insights Light") {
+#Preview("Contextual Insights Light") {
     NavigationStack {
         InsightsScreen(viewModel: InsightsViewModel(state: .loaded(PreviewFixtures.default.insightsDashboard)))
     }
@@ -854,7 +854,7 @@ private struct InsightsMicroChart: View {
     .preferredColorScheme(.light)
 }
 
-#Preview("Insights Dark") {
+#Preview("Contextual Insights Dark") {
     NavigationStack {
         InsightsScreen(viewModel: InsightsViewModel(state: .loaded(PreviewFixtures.default.insightsDashboard)))
     }

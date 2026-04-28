@@ -351,7 +351,7 @@ public struct WidgetFeedItem: Identifiable {
 }
 
 /// Reusable vertical feed for stacking mixed-size widgets inside screens such
-/// as Today, Goals, Habits, Insights, and Profile.
+/// as Today, Goals, Rituals, contextual insights, and You.
 public struct WidgetFeed: View {
     private let items: [WidgetFeedItem]
 

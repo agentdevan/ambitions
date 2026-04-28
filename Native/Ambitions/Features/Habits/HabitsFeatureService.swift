@@ -13,7 +13,7 @@ struct RepositoryBackedHabitsService: HabitsServicing {
               let step = goal.plan?.sections.flatMap(\.steps).first(where: { $0.id == request.target.stepID }) else {
             return HabitActionResponse(
                 message: HabitInlineMessage(
-                    title: "Habit moved",
+                    title: "Ritual moved",
                     body: "That routine is no longer available in the current native snapshot.",
                     state: .warning
                 )
@@ -53,7 +53,7 @@ struct RepositoryBackedHabitsService: HabitsServicing {
             goal = advance(goal: goal, step: step, now: now, cadenceDays: cadenceDays)
             try await repositories.goals.saveGoals([goal])
             message = HabitInlineMessage(
-                title: "Habit logged",
+                title: "Ritual logged",
                 body: "Today's full version is recorded. The rhythm stays active without pretending the loop is finished forever.",
                 state: .success
             )
@@ -259,7 +259,7 @@ private extension RepositoryBackedHabitsService {
             mode: mode,
             title: heroTitle(for: mode),
             subtitle: heroSubtitle(for: mode, totalHabits: totalHabits, recoveryCount: recoveryCount),
-            summaryLabel: "\(completedToday + minimumToday) of \(max(totalHabits, 1)) habits touched today",
+            summaryLabel: "\(completedToday + minimumToday) of \(max(totalHabits, 1)) rituals touched today",
             summaryDetail: summaryDetail(mode: mode, completedToday: completedToday, minimumToday: minimumToday, recoveryCount: recoveryCount),
             stats: [
                 MetricSummary(id: "habit-stat-complete", title: "Completed", value: "\(completedToday)", detail: "Full versions today", icon: "checkmark.circle.fill"),
@@ -285,9 +285,9 @@ private extension RepositoryBackedHabitsService {
             ),
             guidanceTitle: guidanceTitle(for: mode),
             guidanceBody: guidanceBody(for: mode),
-            emptyTitle: mode == .empty ? "No habits are live yet" : nil,
+            emptyTitle: mode == .empty ? "No rituals are live yet" : nil,
             emptyMessage: mode == .empty
-                ? "As soon as a recurring goal or routine exists in the native planner, Habits will read it directly from the same repository Today and Goals use."
+                ? "As soon as a recurring goal or routine exists in the native planner, Rituals will read it directly from the same repository Today and Goals use."
                 : nil
         )
     }
@@ -435,13 +435,13 @@ private extension RepositoryBackedHabitsService {
     func heroSubtitle(for mode: HabitsExperienceMode, totalHabits: Int, recoveryCount: Int) -> String {
         switch mode {
         case .empty:
-            return "Habits becomes real as soon as a recurring goal or routine exists. There is no detached subsystem behind this screen."
+            return "Rituals become real as soon as a recurring goal or routine exists. There is no detached subsystem behind this screen."
         case .seeded:
-            return "Habits is already reading from the same native goal, evidence, and feedback records that power Today and Goal Detail."
+            return "Rituals are already reading from the same native goal, evidence, and feedback records that power Today and Goal Detail."
         case .active:
             return totalHabits == 1
-                ? "One habit loop is active. The goal is clarity and repeatability, not pressure."
-                : "\(totalHabits) habit loops are active. Fast logging keeps them lightweight enough to survive real days."
+                ? "One ritual loop is active. The goal is clarity and repeatability, not pressure."
+                : "\(totalHabits) ritual loops are active. Fast logging keeps them lightweight enough to survive real days."
         case .recovery:
             return recoveryCount == 1
                 ? "One loop needs a gentler restart. Ambitions keeps that visible without turning it punitive."
@@ -453,7 +453,7 @@ private extension RepositoryBackedHabitsService {
         _ = completedToday
         switch mode {
         case .empty:
-            return "When planning adds recurring structure, Habits will translate it into a quick daily interaction surface automatically."
+            return "When planning adds recurring structure, Rituals will translate it into a quick daily interaction surface automatically."
         case .seeded, .active:
             if recoveryCount == 0 {
                 return minimumToday > 0
@@ -468,7 +468,7 @@ private extension RepositoryBackedHabitsService {
 
     func guidanceTitle(for mode: HabitsExperienceMode) -> String {
         switch mode {
-        case .empty: "How Habits will wake up"
+        case .empty: "How Rituals will wake up"
         case .seeded: "Why this feels native"
         case .active: "How to use the screen"
         case .recovery: "How to recover cleanly"
@@ -478,7 +478,7 @@ private extension RepositoryBackedHabitsService {
     func guidanceBody(for mode: HabitsExperienceMode) -> String {
         switch mode {
         case .empty:
-            "Habits is waiting on recurring structure from the native planner and goal engine, not on a separate tracker."
+            "Rituals are waiting on recurring structure from the native planner and goal engine, not on a separate tracker."
         case .seeded:
             "Every card here is derived from live native goal records, steps, evidence, and feedback, with starter data only filling the gap before personal history builds up."
         case .active:
@@ -528,14 +528,14 @@ private extension RepositoryBackedHabitsService {
 
     func note(for action: HabitActionKind, step: Step) -> String {
         switch action {
-        case .complete: "Completed from Habits."
-        case .skip: "Skipped from Habits without punitive language."
-        case .delay: "Delayed from Habits to soften pressure."
-        case .minimumVersion: "Minimum version completed from Habits."
-        case .quickLog: "Quick log from Habits."
+        case .complete: "Completed from Rituals."
+        case .skip: "Skipped from Rituals without punitive language."
+        case .delay: "Delayed from Rituals to soften pressure."
+        case .minimumVersion: "Minimum version completed from Rituals."
+        case .quickLog: "Quick log from Rituals."
         case .openDetail: step.title
-        case .needsEasierVersion: "Asked for an easier version from Habits."
-        case .markNotRelevant: "Marked habit plan as not relevant from Habits."
+        case .needsEasierVersion: "Asked for an easier version from Rituals."
+        case .markNotRelevant: "Marked ritual plan as not relevant from Rituals."
         }
     }
 
@@ -655,8 +655,8 @@ private extension RepositoryBackedHabitsService {
         return Self.iso.date(from: value) ?? Self.isoFallback.date(from: value)
     }
 
-    static let completeNote = "Habit completion from Habits."
-    static let quickLogNote = "Quick log from Habits."
+    static let completeNote = "Ritual completion from Rituals."
+    static let quickLogNote = "Quick log from Rituals."
     static let minimumNotePrefix = "Minimum version from Rituals: "
 
     static let iso: ISO8601DateFormatter = {

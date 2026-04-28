@@ -131,7 +131,7 @@ private extension RepositoryBackedInsightsService {
             continuityRibbon: continuityRibbon,
             stats: [
                 MetricSummary(id: "insights-focus", title: "Follow-through", value: "\(currentMetrics.visibleFollowThrough)", detail: "Completions and minimum versions this week", icon: "checkmark.circle"),
-                MetricSummary(id: "insights-consistency", title: "Consistency", value: "\(consistency(for: habitGoals, metrics: currentMetrics))%", detail: habitGoals.isEmpty ? "No recurring loops yet" : "Habit rhythm this week", icon: "repeat"),
+                MetricSummary(id: "insights-consistency", title: "Consistency", value: "\(consistency(for: habitGoals, metrics: currentMetrics))%", detail: habitGoals.isEmpty ? "No recurring loops yet" : "Ritual rhythm this week", icon: "repeat"),
                 MetricSummary(id: "insights-recovery", title: "Adaptation", value: adaptationLabel(currentMetrics, previous: previousMetrics), detail: "How quickly corrections turned back into movement", icon: "arrow.triangle.branch"),
                 MetricSummary(id: "insights-care", title: "Needs care", value: "\(blockedCount)", detail: "Open clarification or blocked drafts", icon: "lifepreserver")
             ],
@@ -906,7 +906,7 @@ private extension RepositoryBackedInsightsService {
         case .habitMinimumVersion:
             return "Minimum version logged"
         case .habitQuickLog:
-            return "Habit signal captured"
+            return "Ritual signal captured"
         case .sessionLogged:
             return "Session logged"
         case .reflectionLogged:

@@ -1542,7 +1542,7 @@ private extension RepositoryBackedGoalsService {
 
         return switch evidence.evidenceKind {
         case .stepCompleted: "Completed step"
-        case .habitCompletion: "Habit completion"
+        case .habitCompletion: "Ritual completion"
         case .habitMinimumVersion: "Minimum version"
         case .habitQuickLog: "Quick log"
         case .sessionLogged: "Session logged"
@@ -2419,7 +2419,7 @@ private extension RepositoryBackedGoalsService {
             try await repositories.goals.saveGoals([goal])
             return GoalDetailActionResponse(
                 message: GoalDetailInlineMessage(
-                    title: HabitGoalSemantics.isHabitLike(goal: goal, step: selectedStep) ? "Habit logged" : "Completion recorded",
+                    title: HabitGoalSemantics.isHabitLike(goal: goal, step: selectedStep) ? "Ritual logged" : "Completion recorded",
                     body: HabitGoalSemantics.isHabitLike(goal: goal, step: selectedStep)
                         ? "\"\(selectedStep.title)\" now lands in native evidence while staying active as a recurring rhythm."
                         : "\"\(selectedStep.title)\" now lands in native evidence and plan history.",

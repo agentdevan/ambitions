@@ -16,20 +16,21 @@ For Ambitions 2.0 tasks, read:
 8. `docs/canon/Ambitions_2_0_Product_Architecture.md`
 9. `docs/canon/Ambitions_2_0_Systems_Architecture.md`
 10. `docs/canon/Ambitions_2_0_Visual_System.md`
-11. `docs/canon/Ambitions_2_0_Roadmap.md`
-12. `docs/canon/Ambitions_2_0_Batch_Plan.md`
-13. `docs/canon/design/Ambitions_Design_Constitution.md` when the task touches design, IA, UX writing, interaction, trust, accessibility, or external surfaces
-14. `docs/canon/Ambitions_2_0_Intelligence_Standards.md`
-15. `docs/canon/Ambitions_2_0_Accessibility_Nutrition.md` when accessibility, UI, release, or trust claims are involved
-16. `docs/canon/Ambitions_2_0_Capability_Matrix.md` when verifying status or starting a roadmap reconciliation pass
-17. `docs/canon/Ambitions_2_0_Implementation_Gap_Audit.md` when planning Design Constitution alignment or checking implementation gaps
-18. `docs/canon/Ambitions_2_0_Roadmap_Merge_Audit.md` before planning any original Batch 89-120 work
-19. `docs/review/VISUAL_REVIEW_CHECKLIST.md` when the task changes visible UI, navigation, empty states, or user-facing language
-20. `docs/review/FRICTION_LOG.md` when observed product friction needs to be captured without expanding active batch scope
+11. `docs/canon/design/Ambitions_Design_Constitution.md` when the task touches design, IA, UX writing, interaction, trust, accessibility, or external surfaces
+12. `docs/canon/Ambitions_2_0_Object_Terminology.md` when the task touches shared object naming or copy
+13. `docs/canon/Ambitions_2_0_Roadmap.md`
+14. `docs/canon/Ambitions_2_0_Batch_Plan.md`
+15. `docs/canon/Ambitions_2_0_Intelligence_Standards.md`
+16. `docs/canon/Ambitions_2_0_Accessibility_Nutrition.md` when accessibility, UI, release, or trust claims are involved
+17. `docs/canon/Ambitions_2_0_Capability_Matrix.md` when verifying status or starting a roadmap reconciliation pass
+18. `docs/canon/Ambitions_2_0_Implementation_Gap_Audit.md` when planning Design Constitution alignment or checking implementation gaps
+19. `docs/canon/Ambitions_2_0_Roadmap_Merge_Audit.md` before planning any original Batch 89-120 work
+20. `docs/review/VISUAL_REVIEW_CHECKLIST.md` when the task changes visible UI, navigation, empty states, or user-facing language
+21. `docs/review/FRICTION_LOG.md` when observed product friction needs to be captured without expanding active batch scope
 
 ## Execution Rules
 
-- Current execution status: Batches 00-88 are complete for planning purposes. D01 is the next dependency-safe implementation batch. Original Batches 89-120 remain future planned roadmap work only through the classifications and dependencies in `docs/canon/Ambitions_2_0_Roadmap_Merge_Audit.md`.
+- Current execution status: Batches 00-88 and D01-D02 are complete for planning purposes. D03 is the next dependency-safe implementation batch. Original Batches 89-120 remain future planned roadmap work only through the classifications and dependencies in `docs/canon/Ambitions_2_0_Roadmap_Merge_Audit.md`.
 - Work one batch at a time.
 - Work on `main` only.
 - Do not create, switch to, or suggest branches unless the user explicitly asks.

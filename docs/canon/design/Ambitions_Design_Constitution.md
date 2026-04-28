@@ -4,6 +4,8 @@ Status: Active Ambitions 2.0 design source of truth.
 
 This constitution supersedes conflicting active design, IA, UX writing, interaction, trust, accessibility, and external-surface language. Historical docs may remain when clearly marked as superseded.
 
+Shared object names are locked in [../Ambitions_2_0_Object_Terminology.md](../Ambitions_2_0_Object_Terminology.md). Use that terminology source when changing docs, source copy, tests, previews, or compatibility notes.
+
 ## Source-Of-Truth Hierarchy
 
 1. `docs/canon/design/Ambitions_Design_Constitution.md`
@@ -101,6 +103,8 @@ Placement:
 Do not treat Habits as a standalone top-level product area.
 
 ## 5. Object Model
+
+Detailed definitions live in [../Ambitions_2_0_Object_Terminology.md](../Ambitions_2_0_Object_Terminology.md).
 
 Canonical hierarchy:
 

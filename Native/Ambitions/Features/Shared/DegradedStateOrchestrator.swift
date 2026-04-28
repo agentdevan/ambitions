@@ -147,7 +147,7 @@ enum DegradedStateOrchestrator {
             id: "degraded.habits.empty",
             kind: .empty,
             title: "No routines are shaping the week yet",
-            explanation: "Habits stay quiet until a repeatable loop is useful enough to support the week.",
+            explanation: "Rituals stay quiet until a repeatable loop is useful enough to support the week.",
             primaryAction: DegradedStateAction(title: "Return to Plan", systemImage: AppTab.plan.systemImage, routingHint: .plan),
             tone: .default,
             icon: "repeat"

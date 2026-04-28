@@ -338,7 +338,7 @@ enum PreviewPlanScenarios {
             lanes: [
                 PlanExecutionResilienceLane(id: "carryover", title: "Carryover", detail: "Retention loop still sits outside the week.", recommendation: "Give it one calmer lane instead of widening the whole week.", state: .warning, goalTarget: GoalRouteTarget(goalID: "preview-goal-2"), planRoute: nil),
                 PlanExecutionResilienceLane(id: "overload", title: "Overload", detail: "Tuesday is carrying more than the week can explain calmly.", recommendation: "Lighten shell work before adding anything new.", state: .warning, goalTarget: GoalRouteTarget(goalID: "preview-goal-1"), planRoute: nil),
-                PlanExecutionResilienceLane(id: "habits", title: "Habits", detail: "One routine should support the week shape without crowding it.", recommendation: "Use the habits route to keep the loop lightweight.", state: .selected, goalTarget: nil, planRoute: .habits),
+                PlanExecutionResilienceLane(id: "habits", title: "Rituals", detail: "One routine should support the week shape without crowding it.", recommendation: "Use the rituals route to keep the loop lightweight.", state: .selected, goalTarget: nil, planRoute: .habits),
                 PlanExecutionResilienceLane(id: "captures", title: "Captures", detail: "Two open captures still need to be absorbed or parked.", recommendation: "Attach or park capture pressure before polishing the schedule.", state: .warning, goalTarget: nil, planRoute: .capturesInbox),
                 PlanExecutionResilienceLane(id: "review", title: "Weekly review", detail: "Close the current week by shaping what should continue.", recommendation: "Review should feel like a continuation, not a detached ritual.", state: .warning, goalTarget: nil, planRoute: .weeklyReview)
             ],
@@ -613,7 +613,7 @@ enum PreviewPlanScenarios {
             lanes: [
                 PlanExecutionResilienceLane(id: "carryover", title: "Carryover", detail: "No active goal is floating outside the week.", recommendation: "Carry only what the next week can explain calmly.", state: .success, goalTarget: nil, planRoute: nil),
                 PlanExecutionResilienceLane(id: "overload", title: "Overload", detail: "No day is visibly overloaded right now.", recommendation: "Lighten only when something real becomes too loud.", state: .selected, goalTarget: nil, planRoute: nil),
-                PlanExecutionResilienceLane(id: "habits", title: "Habits", detail: "No recurring loop is shaping the week yet.", recommendation: "Keep the week dominant until a routine is truly needed.", state: .default, goalTarget: nil, planRoute: .habits),
+                PlanExecutionResilienceLane(id: "habits", title: "Rituals", detail: "No recurring loop is shaping the week yet.", recommendation: "Keep the week dominant until a routine is truly needed.", state: .default, goalTarget: nil, planRoute: .habits),
                 PlanExecutionResilienceLane(id: "captures", title: "Captures", detail: "No open captures are pushing on this week.", recommendation: "Let the week stay quiet.", state: .default, goalTarget: nil, planRoute: .capturesInbox),
                 PlanExecutionResilienceLane(id: "review", title: "Weekly review", detail: "Review becomes useful once the week has something real to carry forward.", recommendation: "Use review only when the week has earned it.", state: .default, goalTarget: nil, planRoute: .weeklyReview)
             ],

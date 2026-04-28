@@ -1438,7 +1438,7 @@ private extension RepositoryBackedTodayService {
             }
             try await repositories.goals.saveGoals([goal])
             message = TodayInlineMessage(
-                title: HabitGoalSemantics.isHabitLike(goal: goal, step: selectedStep) ? "Habit logged" : "Completion recorded",
+                title: HabitGoalSemantics.isHabitLike(goal: goal, step: selectedStep) ? "Ritual logged" : "Completion recorded",
                 body: HabitGoalSemantics.isHabitLike(goal: goal, step: selectedStep)
                     ? "\"\(selectedStep.title)\" was recorded for today and kept alive as an ongoing rhythm."
                     : "\"\(selectedStep.title)\" is now reflected in native evidence and feedback.",

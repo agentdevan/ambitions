@@ -6,6 +6,8 @@ This document defines the product architecture for Ambitions 2.0. It governs sur
 
 The active design source of truth is [design/Ambitions_Design_Constitution.md](design/Ambitions_Design_Constitution.md). It wins for design, IA, UX writing, component naming, interaction, trust, accessibility, and external-surface contracts when older active docs conflict.
 
+Shared object terminology is locked in [Ambitions_2_0_Object_Terminology.md](Ambitions_2_0_Object_Terminology.md). Use it for Task/Step, Life Area, North Star, Ritual, Receipt, Review, Archive, Waiting, Decision, and Memory language.
+
 ## Surface Responsibilities
 
 ### Today
@@ -80,6 +82,8 @@ Ambitions 2.0 is organized around one daily life operating loop:
 10. Sync, export/import, widgets, Live Activities, App Intents, and returning-user states preserve continuity.
 
 ## Object Hierarchy
+
+Detailed object definitions live in [Ambitions_2_0_Object_Terminology.md](Ambitions_2_0_Object_Terminology.md).
 
 Canonical object hierarchy:
 

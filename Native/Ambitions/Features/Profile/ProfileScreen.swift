@@ -26,7 +26,7 @@ struct ProfileScreen: View {
                         .transition(.ambitionPanel)
                 case let .failed(message):
                     AsyncStateCard(
-                        .error(title: "Profile is unavailable", message: message, icon: "person.crop.circle.badge.exclamationmark", actionTitle: "Retry"),
+                        .error(title: "You is unavailable", message: message, icon: "person.crop.circle.badge.exclamationmark", actionTitle: "Retry"),
                         actionAccessibilityIdentifier: "profile.retry-button"
                     ) {
                         Task { await refresh() }
@@ -1193,7 +1193,7 @@ private struct ProfileSettingRow: View {
 }
 
 #if DEBUG
-#Preview("Profile Light") {
+#Preview("You Light") {
     NavigationStack {
         ProfileScreen(viewModel: ProfileViewModel(state: .loaded(PreviewFixtures.default.profileDashboard)))
     }
@@ -1202,7 +1202,7 @@ private struct ProfileSettingRow: View {
     .preferredColorScheme(.light)
 }
 
-#Preview("Profile Dark") {
+#Preview("You Dark") {
     NavigationStack {
         ProfileScreen(viewModel: ProfileViewModel(state: .loaded(PreviewFixtures.default.profileDashboard)))
     }

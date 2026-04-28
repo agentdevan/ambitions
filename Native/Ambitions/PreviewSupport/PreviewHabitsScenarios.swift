@@ -4,8 +4,8 @@ enum PreviewHabitsScenarios {
     static let active = HabitsDashboard(
         mode: .active,
         title: "Consistency that stays calm",
-        subtitle: "Three habit loops are active today, and the screen is biasing toward fast logging instead of guilt-inducing noise.",
-        summaryLabel: "2 of 3 habits touched today",
+        subtitle: "Three ritual loops are active today, and the screen is biasing toward fast logging instead of guilt-inducing noise.",
+        summaryLabel: "2 of 3 rituals touched today",
         summaryDetail: "A minimum version already counted, so the rhythm is protected even without a perfect day.",
         stats: [
             MetricSummary(id: "active-complete", title: "Completed", value: "1", detail: "Full versions today", icon: "checkmark.circle.fill"),
@@ -28,7 +28,7 @@ enum PreviewHabitsScenarios {
                 MetricSummary(id: "streak-b", title: "Consistency", value: "62%", detail: "Last 14 days", icon: "checkmark.seal"),
                 MetricSummary(id: "streak-c", title: "Recovered slips", value: "3", detail: "Recent rebounds", icon: "waveform.path.ecg")
             ],
-            recoveryNote: "If a habit is slipping, shrink the next version before you ask for more discipline."
+            recoveryNote: "If a ritual is slipping, shrink the next version before you ask for more discipline."
         ),
         guidanceTitle: "How to use the screen",
         guidanceBody: "Use full completion when the full routine landed, minimum version when the smallest valid version happened, and quick log when signal matters more than ceremony.",
@@ -40,7 +40,7 @@ enum PreviewHabitsScenarios {
         mode: .recovery,
         title: "Recovery is part of consistency",
         subtitle: "Several loops need a gentler restart, so the screen is prioritizing easier versions and plan correction first.",
-        summaryLabel: "0 of 2 habits touched today",
+        summaryLabel: "0 of 2 rituals touched today",
         summaryDetail: "Recovery is leading the screen today so the next action gets easier instead of louder.",
         stats: [
             MetricSummary(id: "recovery-complete", title: "Completed", value: "0", detail: "Full versions today", icon: "checkmark.circle.fill"),
@@ -73,7 +73,7 @@ enum PreviewHabitsScenarios {
         mode: .seeded,
         title: "Consistency that already lives in native data",
         subtitle: "The native demo seed is driving this surface through the real repository layer, not through a detached tracker.",
-        summaryLabel: "2 of 4 habits touched today",
+        summaryLabel: "2 of 4 rituals touched today",
         summaryDetail: "The screen is already reading seeded native records through goals, steps, evidence, and feedback.",
         stats: active.stats,
         habits: active.habits,
@@ -88,9 +88,9 @@ enum PreviewHabitsScenarios {
     static let empty = HabitsDashboard(
         mode: .empty,
         title: "Consistency, once it exists",
-        subtitle: "Habits becomes real as soon as a recurring goal or routine exists. There is no detached subsystem behind this screen.",
-        summaryLabel: "0 habits are active yet",
-        summaryDetail: "When planning adds recurring structure, Habits will translate it into a quick daily interaction surface automatically.",
+        subtitle: "Rituals become real as soon as a recurring goal or routine exists. There is no detached subsystem behind this screen.",
+        summaryLabel: "0 rituals are active yet",
+        summaryDetail: "When planning adds recurring structure, Rituals will translate it into a quick daily interaction surface automatically.",
         stats: [
             MetricSummary(id: "empty-a", title: "Completed", value: "0", detail: "Full versions today", icon: "checkmark.circle.fill"),
             MetricSummary(id: "empty-b", title: "Minimum versions", value: "0", detail: "Today", icon: "leaf.circle"),
@@ -103,14 +103,14 @@ enum PreviewHabitsScenarios {
             title: "Consistency will appear here",
             subtitle: "Once a recurring routine exists, streak and recovery interpretation will be derived from native evidence.",
             stats: [
-                MetricSummary(id: "empty-streak-a", title: "Current streak", value: "0", detail: "Waiting on first habit", icon: "flame"),
+                MetricSummary(id: "empty-streak-a", title: "Current streak", value: "0", detail: "Waiting on first ritual", icon: "flame"),
                 MetricSummary(id: "empty-streak-b", title: "Consistency", value: "0%", detail: "No tracked windows yet", icon: "checkmark.seal")
             ],
-            recoveryNote: "Habits is waiting on recurring structure from the native planner and goal engine, not on a separate tracker."
+            recoveryNote: "Rituals are waiting on recurring structure from the native planner and goal engine, not on a separate tracker."
         ),
-        guidanceTitle: "How Habits will wake up",
-        guidanceBody: "As soon as a recurring goal or routine exists in the native planner, Habits will read it directly from the same repository Today and Goals use.",
-        emptyTitle: "No habits are live yet",
+        guidanceTitle: "How Rituals will wake up",
+        guidanceBody: "As soon as a recurring goal or routine exists in the native planner, Rituals will read it directly from the same repository Today and Goals use.",
+        emptyTitle: "No rituals are live yet",
         emptyMessage: "Create or import a recurring goal, maintenance loop, or recovery routine and this screen will begin rendering it natively."
     )
 

@@ -2,12 +2,13 @@ import AmbitionsDesignSystem
 import Foundation
 
 enum GoalDetailLens: String, CaseIterable, Hashable, Sendable {
+    // Compatibility case name retained; this lens displays contained Goal/Path/Plan steps.
     case tasks
     case path
 
     var title: String {
         switch self {
-        case .tasks: "Tasks"
+        case .tasks: "Steps"
         case .path: "Path"
         }
     }
@@ -1099,7 +1100,7 @@ extension GoalMode {
         switch self {
         case .achievement: "Achievement"
         case .project: "Project"
-        case .habit: "Habit"
+        case .habit: "Ritual"
         case .learning: "Learning"
         case .exploration: "Exploration"
         case .maintenance: "Maintenance"

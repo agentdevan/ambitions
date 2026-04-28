@@ -361,7 +361,7 @@ private extension RepositoryBackedProfileService {
                         valueLabel: ExternalSurfaceTruth.productizedNeedsPlatformReview
                     )
                 ],
-                footer: "Notification and integration status should answer whether anything important needs attention without turning Profile into an admin checklist."
+                footer: "Notification and integration status should answer whether anything important needs attention without turning You into an admin checklist."
             ),
             defaultsSection: ProfileSectionGroup(
                 title: "Personal defaults",
@@ -393,7 +393,7 @@ private extension RepositoryBackedProfileService {
             ),
             accountSection: ProfileSectionGroup(
                 title: "Account and billing",
-                subtitle: "This build stays explicit about what is not configured yet so Profile never implies hidden account requirements.",
+                subtitle: "This build stays explicit about what is not configured yet so You never implies hidden account requirements.",
                 items: [
                     SettingsItem(
                         id: "profile-account-mode",

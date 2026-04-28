@@ -11,7 +11,7 @@ private enum PreviewTab: String, CaseIterable {
     case today = "Today"
     case goals = "Goals"
     case plan = "Plan"
-    case profile = "Profile"
+    case profile = "You"
 }
 
 private struct DesignSystemPreviewGallery: View {
@@ -143,7 +143,7 @@ private struct DesignSystemPreviewGallery: View {
             title: panelTitle(for: kind),
             subtitle: "Reusable foundation for later surface batches without changing app behavior today.",
             semanticState: kind.defaultSemanticState,
-            confidenceLabel: kind == .progress ? "Medium confidence" : nil,
+            confidenceLabel: kind == .progress ? "Medium certainty" : nil,
             progressValue: kind == .progress ? 0.64 : nil,
             explanation: "State is paired with text, iconography, and accessibility values so color is never the only signal.",
             primaryAction: .init(id: "\(kind.rawValue)-primary", title: "Primary", role: .primary),

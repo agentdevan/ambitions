@@ -8,6 +8,8 @@ This roadmap now runs through Ambitions 2.0 RC maturity instead of stopping at v
 
 [ROADMAP_BATCH_CLASSIFICATION.md](ROADMAP_BATCH_CLASSIFICATION.md) is the active launch-classification layer for D01-D26. It distinguishes launch-critical, soon-after-launch, post-launch, deferred, decision-gated, and infrastructure-unlock work. Any future roadmap interpretation must preserve that classification unless a later explicit canon decision supersedes it.
 
+[Ambitions_2_0_Object_Terminology.md](Ambitions_2_0_Object_Terminology.md) is the active shared terminology source for Life Area, Ambition, North Star, Goal, Path, Plan, Milestone, Step, Task / One-Step Goal, Proof, Receipt, Review, Archive, Ritual, Waiting, Decision, and Memory / What Ambitions Knows.
+
 ## Launch Cutline
 
 First launch should prove the Golden Launch Loop, not the entire life operating system.
@@ -177,7 +179,7 @@ Dependency-safe delta order:
 25. App Intents / Shortcuts Alignment. Post-launch except safe capture/open routes.
 26. Release Candidate Validation. Launch-critical final gate.
 
-The next implementation prompt should start with D01 unless a direct user instruction chooses another delta. Do not implement Smart Attachment, Life Areas, North Stars, One-Step Goals, external surfaces, or accessibility claims before their prerequisites are satisfied.
+The next implementation prompt should start with D03 unless a direct user instruction chooses another delta. D01 shell alignment and D02 shared object terminology cleanup are complete for planning purposes; do not implement Smart Attachment, Life Areas, North Stars, One-Step Goals, external surfaces, or accessibility claims before their prerequisites are satisfied.
 
 Original Batches 89-120 remain preserved future roadmap intent, but they are no longer the next unchanged execution sequence. Use [Ambitions_2_0_Roadmap_Merge_Audit.md](Ambitions_2_0_Roadmap_Merge_Audit.md) before planning any Batch 89-120 work; no original batch may run before the D batch that owns its required Constitution foundation.
 

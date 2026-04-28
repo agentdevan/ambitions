@@ -14,6 +14,7 @@ When this backlog conflicts with the canonical platform vision, surgical executi
 - The live native target is local-first and on-device first.
 - The active Ambitions 2.0 shell canon is Today / Goals / Capture / Plan / You. Older code and historical notes may still use Captures, Habits, Insights, or Profile compatibility naming, but those are not active top-level IA promises.
 - The active design source of truth is [canon/design/Ambitions_Design_Constitution.md](canon/design/Ambitions_Design_Constitution.md).
+- Shared object terminology is locked in [canon/Ambitions_2_0_Object_Terminology.md](canon/Ambitions_2_0_Object_Terminology.md).
 - Active canon treats Insights as contextual intelligence, Habits as absorbed into Rituals/Plan/Today/You, Profile as user-facing You, and Tasks as standalone One-Step Goals rather than a top-level Tasks tab.
 - `project.yml` currently defines the `Ambitions` app target, the `AmbitionsWidgetExtension` target, and the unit/UI test bundles.
 - The current native codebase already includes capture persistence, create-goal submission, external routing, snapshot export, local notification scheduling, EventKit integration, and widget/live-activity code paths.
@@ -195,13 +196,13 @@ Recommended delta order:
 25. App Intents / Shortcuts Alignment.
 26. Release Candidate Validation.
 
-The exact recommended next implementation batch from this audit is `Shell IA / Tab Alignment Delta`, because it is the smallest dependency-safe place to preserve the five-tab shell, confirm Capture opens the full surface, add current-tab tap behavior, and keep legacy Profile/Insights/Habits naming internal before component and surface work consumes navigation assumptions.
+The exact recommended next implementation batch after D02 is `GroupedNavigationList Component`. D01 shell alignment and D02 shared object terminology cleanup are complete for planning purposes, so the next dependency-safe foundation is the grouped list and row taxonomy needed by later You, Trust, Memory, Goal Detail, and Plan control surfaces.
 
 ## Roadmap merge audit note
 
 [canon/Ambitions_2_0_Roadmap_Merge_Audit.md](canon/Ambitions_2_0_Roadmap_Merge_Audit.md) maps the original Batches 89-120 against D01-D26. D01-D26 take precedence wherever old roadmap wording conflicts with the Design Constitution. Original Batch 89-120 work remains preserved future intent only where resequenced, absorbed, deferred, or rewritten by that audit.
 
-Do not start Batch 89 as the next implementation batch unless a future user instruction explicitly overrides the D backlog and the merge audit dependency gates. The dependency-safe next implementation batch remains D01.
+Do not start Batch 89 as the next implementation batch unless a future user instruction explicitly overrides the D backlog and the merge audit dependency gates. The dependency-safe next implementation batch after D02 is D03.
 
 ## Design Constitution Coverage Checklist
 

@@ -87,7 +87,7 @@ struct HabitsScreen: View {
                         if !dashboard.habits.isEmpty {
                             habitsSection(
                                 title: "Today",
-                                subtitle: "Fast logging keeps recurring behavior lightweight enough to use every day.",
+                                subtitle: "Fast logging keeps recurring rituals lightweight enough to use every day.",
                                 habits: dashboard.habits
                             )
                         }
@@ -95,7 +95,7 @@ struct HabitsScreen: View {
                         if !dashboard.recoveryHabits.isEmpty {
                             habitsSection(
                                 title: "Recovery",
-                                subtitle: "These loops need a gentler restart, a smaller version, or a habit-plan correction.",
+                                subtitle: "These loops need a gentler restart, a smaller version, or a ritual-plan correction.",
                                 habits: dashboard.recoveryHabits
                             )
                         }
@@ -160,7 +160,7 @@ struct HabitsScreen: View {
 }
 
 #if DEBUG
-#Preview("Habits Active Light") {
+#Preview("Rituals Active Light") {
     NavigationStack {
         HabitsScreen(viewModel: HabitsViewModel(state: .loaded(PreviewHabitsScenarios.active)))
     }
@@ -169,7 +169,7 @@ struct HabitsScreen: View {
     .preferredColorScheme(.light)
 }
 
-#Preview("Habits Active Dark") {
+#Preview("Rituals Active Dark") {
     NavigationStack {
         HabitsScreen(viewModel: HabitsViewModel(state: .loaded(PreviewHabitsScenarios.active)))
     }
@@ -178,7 +178,7 @@ struct HabitsScreen: View {
     .preferredColorScheme(.dark)
 }
 
-#Preview("Habits Recovery") {
+#Preview("Rituals Recovery") {
     NavigationStack {
         HabitsScreen(viewModel: HabitsViewModel(state: .loaded(PreviewHabitsScenarios.recovery)))
     }
@@ -186,7 +186,7 @@ struct HabitsScreen: View {
     .ambitionTheme(.dark)
 }
 
-#Preview("Habits Empty") {
+#Preview("Rituals Empty") {
     NavigationStack {
         HabitsScreen(viewModel: HabitsViewModel(state: .loaded(PreviewHabitsScenarios.empty)))
     }
@@ -194,7 +194,7 @@ struct HabitsScreen: View {
     .ambitionTheme(.dark)
 }
 
-#Preview("Habits Seeded") {
+#Preview("Rituals Seeded") {
     NavigationStack {
         HabitsScreen(viewModel: HabitsViewModel(state: .loaded(PreviewHabitsScenarios.seeded)))
     }

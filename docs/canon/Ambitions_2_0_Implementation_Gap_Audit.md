@@ -5,6 +5,8 @@ Date: 2026-04-27.
 
 This audit compares the current repo and native app against [design/Ambitions_Design_Constitution.md](design/Ambitions_Design_Constitution.md). It does not reopen, renumber, or erase completed historical batches. Completed batches remain completed for history; gaps created by the Design Constitution become future delta/alignment batches.
 
+D02 evidence: [Ambitions_2_0_Object_Terminology.md](Ambitions_2_0_Object_Terminology.md) now locks shared object language before later feature batches consume those objects.
+
 ## 1. Executive Summary
 
 The repo has substantial native foundations: the five-tab shell, local-first SwiftUI app, Capture persistence, Command Pipeline, Event Ledger, Action Closure receipt models, Plan-owned calendar action boundary, rich panel primitives, Accessibility Nutrition infrastructure, Profile-backed You trust surface, local notification foundation, App Intents, widgets, and Live Activity scaffolding.
@@ -225,7 +227,7 @@ These are future delta/alignment batches. They do not replace the existing Batch
 | Delta | Batch name | Purpose |
 | --- | --- | --- |
 | D01 | Shell IA / Tab Alignment Delta | Preserve five tabs, add current-tab tap behavior, clean active copy/naming, keep compatibility internal. |
-| D02 | Shared Object Terminology Cleanup | Align Task/Step, Life Area, North Star, Ritual, Receipt, Review, and Archive naming before surfaces consume them. |
+| D02 | Shared Object Terminology Cleanup | Align Task/Step, Life Area, North Star, Ritual, Receipt, Review, and Archive naming before surfaces consume them; canonical terminology doc now exists. |
 | D03 | GroupedNavigationList Component | Implement shared grouped list and row taxonomy. |
 | D04 | Panel Size + Display Density | Add Compact/Comfortable/Large and Minimal/Balanced/Detailed foundations. |
 | D05 | Receipt / Action Closure Search and Privacy Contract | Add searchable receipt history, privacy redaction, and display rules. |

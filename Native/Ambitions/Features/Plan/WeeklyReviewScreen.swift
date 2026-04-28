@@ -86,7 +86,7 @@ struct WeeklyReviewScreen: View {
                         VStack(alignment: .leading, spacing: theme.spacing.md) {
                             SectionHeader(
                                 title: "Support systems inside the review",
-                                subtitle: "Habits and captures should change the next week only when they improve how the week holds together."
+                                subtitle: "Rituals and captures should change the next week only when they improve how the week holds together."
                             )
                             Text(dashboard.habitSummary)
                                 .font(theme.typography.body)

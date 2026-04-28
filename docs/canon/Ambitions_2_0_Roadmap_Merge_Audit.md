@@ -16,7 +16,7 @@ The correct merge posture is:
 - No Batch 89-120 work may run before the D batch that provides its required foundation.
 - No Batch 89-120 wording may reintroduce Insights/Profile/Habits as top-level tabs, Task/Step ambiguity, a top-level Tasks tab, AI-wrapper language, onboarding permission prompts, non-Plan calendar permission, premature external surfaces, or user-facing accessibility claims without evidence.
 
-The next recommended implementation batch remains D01 - Shell IA / Tab Alignment Delta.
+After D01 and D02 completion, the next recommended implementation batch is D03 - GroupedNavigationList Foundation.
 
 ## 2. Non-Negotiable Precedence Statement
 
@@ -247,9 +247,9 @@ Batch 89 is no longer the next runnable implementation batch. Its core-surface Q
 
 ## 13. Next Recommended Batch
 
-Next recommended implementation batch: D01 - Shell IA / Tab Alignment Delta.
+Next recommended implementation batch: D03 - GroupedNavigationList Foundation.
 
-D01 should not start in this audit pass. It remains planned future implementation work.
+D03 should not start in this audit pass. It remains planned future implementation work after D02 closeout.
 
 ## 14. Validation
 

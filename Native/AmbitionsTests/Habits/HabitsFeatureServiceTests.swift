@@ -9,7 +9,7 @@ final class HabitsFeatureServiceTests: XCTestCase {
         let dashboard = try await service.loadDashboard(now: .now)
 
         XCTAssertEqual(dashboard.mode, .empty)
-        XCTAssertEqual(dashboard.emptyTitle, "No habits are live yet")
+        XCTAssertEqual(dashboard.emptyTitle, "No rituals are live yet")
     }
 
     func testQuickLogAddsEvidenceAndShowsPartialStatus() async throws {

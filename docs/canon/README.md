@@ -17,6 +17,7 @@ This folder contains active Ambitions canon plus preserved historical support do
 - [Ambitions_2_0_Product_Architecture.md](Ambitions_2_0_Product_Architecture.md)
 - [Ambitions_2_0_Systems_Architecture.md](Ambitions_2_0_Systems_Architecture.md)
 - [Ambitions_2_0_Visual_System.md](Ambitions_2_0_Visual_System.md)
+- [Ambitions_2_0_Object_Terminology.md](Ambitions_2_0_Object_Terminology.md)
 - [Ambitions_2_0_Roadmap.md](Ambitions_2_0_Roadmap.md)
 - [Ambitions_2_0_Batch_Plan.md](Ambitions_2_0_Batch_Plan.md)
 - [Ambitions_2_0_Decision_Log.md](Ambitions_2_0_Decision_Log.md)

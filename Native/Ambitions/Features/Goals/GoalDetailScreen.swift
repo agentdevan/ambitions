@@ -234,7 +234,7 @@ struct GoalDetailScreen: View {
                     .accessibilityIdentifier("goal-detail.tactics-region")
 
                     if detail.suggestions.isEmpty == false {
-                        GoalDetailSectionCard(title: "Suggested Next Steps", subtitle: "The calmest moves that still create signal.") {
+                        GoalDetailSectionCard(title: "Suggested Steps", subtitle: "The calmest contained moves that still create signal.") {
                             VStack(alignment: .leading, spacing: theme.spacing.sm) {
                                 ForEach(detail.suggestions) { step in
                                     GoalSuggestionCard(step: step)

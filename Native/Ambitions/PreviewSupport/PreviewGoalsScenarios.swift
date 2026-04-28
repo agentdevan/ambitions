@@ -376,14 +376,14 @@ enum PreviewGoalsScenarios {
             intent: "Understand the next hardening move and the proof that the app's claims still hold.",
             progress: GoalDetailProgress(label: "5 of 11 steps landed", detail: "Progress is tracked through current plan steps, docs cleanup, and validation results.", value: 0.46, evidenceLabel: "85 minutes of visible evidence"),
             strategicStatus: GoalDetailStrategicStatus(title: "Path is in motion", summary: "You are in the hardening closeout stage with the next move already surfaced.", supportingDetail: "Manual priority #1 • 46% visible progress"),
-            nextMovement: GoalDetailNextMovement(title: "Refresh release docs and trust copy", summary: "Keep Profile, README, and manual notes aligned with current verified behavior.", timingLabel: "Due 2026-04-15", rationale: "This keeps the release-readiness path honest before broader validation closes out.", state: .selected),
+            nextMovement: GoalDetailNextMovement(title: "Refresh release docs and trust copy", summary: "Keep You, README, and manual notes aligned with current verified behavior.", timingLabel: "Due 2026-04-15", rationale: "This keeps the release-readiness path honest before broader validation closes out.", state: .selected),
             trajectory: GoalDetailTrajectoryState(phaseTitle: "Truth and trust", phaseSummary: "Repo truth, conservative copy, and release notes are the current chamber.", milestoneSummary: "Refresh release docs and trust copy", momentumSummary: "1 of 2 visible milestones are already moving.", timelineSummary: "The deadline is real, but the path should still stay session-sized. The next step stays small enough to act on without losing the broader path."),
             timingNote: "The deadline is real, but the path should still stay session-sized.",
             progressNote: "The next step stays small enough to act on without losing the broader path.",
             manualPriorityLabel: "Manual priority #1",
             assumptions: [],
             suggestions: [
-                GoalDetailStepItem(id: "s1", title: "Refresh release docs and trust copy", summary: "Keep Profile, README, and manual notes aligned with current verified behavior.", timingLabel: "Due 2026-04-15", statusLabel: "Planned", state: .selected),
+                GoalDetailStepItem(id: "s1", title: "Refresh release docs and trust copy", summary: "Keep You, README, and manual notes aligned with current verified behavior.", timingLabel: "Due 2026-04-15", statusLabel: "Planned", state: .selected),
                 GoalDetailStepItem(id: "s2", title: "Rerun the native validation flow", summary: "Use the existing build and test seams and keep unresolved platform claims conservative.", timingLabel: "Due 2026-04-16", statusLabel: "Planned", state: .default),
             ],
             pathStages: [
@@ -392,7 +392,7 @@ enum PreviewGoalsScenarios {
             ],
             sections: [
                 GoalDetailSectionState(id: "sec-1", title: "Now", summary: "The highest-leverage work still open.", kindLabel: "Active Steps", steps: [
-                    GoalDetailStepItem(id: "s1", title: "Refresh release docs and trust copy", summary: "Keep Profile, README, and manual notes aligned with current verified behavior.", timingLabel: "Due 2026-04-15", statusLabel: "Planned", state: .selected),
+                    GoalDetailStepItem(id: "s1", title: "Refresh release docs and trust copy", summary: "Keep You, README, and manual notes aligned with current verified behavior.", timingLabel: "Due 2026-04-15", statusLabel: "Planned", state: .selected),
                     GoalDetailStepItem(id: "s2", title: "Rerun the native validation flow", summary: "Use the existing build and test seams and keep unresolved platform claims conservative.", timingLabel: "Due 2026-04-16", statusLabel: "Planned", state: .default),
                 ]),
                 GoalDetailSectionState(id: "sec-2", title: "Path", summary: "Broader structure beyond the next move.", kindLabel: "Upcoming", steps: [
@@ -784,7 +784,7 @@ enum PreviewGoalsScenarios {
                 GoalSourceAuditRowState(
                     id: "source-2",
                     resourceID: "resource-2",
-                    title: "Profile trust copy",
+                    title: "You trust copy",
                     subtitle: "Repo-local source of truth",
                     detailLabels: ["Provenance: Local", "Trust: High", "Freshness: Fresh"],
                     state: .default

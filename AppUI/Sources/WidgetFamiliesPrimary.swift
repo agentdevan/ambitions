@@ -382,7 +382,7 @@ public struct HabitSummaryWidget: View {
         case let .ready(content):
             WidgetSurface(chrome: .appCard) {
                 VStack(alignment: .leading, spacing: theme.spacing.md) {
-                    WidgetTitleBlock(eyebrow: "Habits", title: content.title, subtitle: content.subtitle)
+                    WidgetTitleBlock(eyebrow: "Rituals", title: content.title, subtitle: content.subtitle)
                     WidgetMetricGrid(stats: content.stats)
                     WidgetProgressList(items: content.habits)
                     WidgetActionBar(identity: identity, actions: content.actions, handler: handler)

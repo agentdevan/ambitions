@@ -48,7 +48,7 @@ public struct InsightStatsWidget: View {
         case let .ready(content):
             WidgetSurface(chrome: .appCard) {
                 VStack(alignment: .leading, spacing: theme.spacing.md) {
-                    WidgetTitleBlock(eyebrow: "Insights", title: content.title, subtitle: content.subtitle)
+                    WidgetTitleBlock(eyebrow: "Reviews", title: content.title, subtitle: content.subtitle)
                     WidgetMetricGrid(stats: content.stats)
                     Text(content.summary)
                         .font(theme.typography.body)

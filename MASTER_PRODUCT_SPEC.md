@@ -10,7 +10,7 @@ As of 2026-04-24, the active post-Batch-60 canon is the Ambitions 2.0 major tran
 
 ## Ambitions 2.0 Active Design Constitution
 
-As of the design constitution reconciliation, [docs/canon/design/Ambitions_Design_Constitution.md](docs/canon/design/Ambitions_Design_Constitution.md) is the active design source of truth for IA, UX writing, object naming, screen contracts, visual/component contracts, interaction, trust, accessibility posture, and external-surface contracts.
+As of the design constitution reconciliation, [docs/canon/design/Ambitions_Design_Constitution.md](docs/canon/design/Ambitions_Design_Constitution.md) is the active design source of truth for IA, UX writing, object naming, screen contracts, visual/component contracts, interaction, trust, accessibility posture, and external-surface contracts. Shared object naming is further locked in [docs/canon/Ambitions_2_0_Object_Terminology.md](docs/canon/Ambitions_2_0_Object_Terminology.md).
 
 Source-of-truth hierarchy:
 
@@ -18,7 +18,8 @@ Source-of-truth hierarchy:
 2. [docs/canon/Ambitions_2_0_Master_Plan.md](docs/canon/Ambitions_2_0_Master_Plan.md)
 3. [docs/canon/Ambitions_2_0_Product_Architecture.md](docs/canon/Ambitions_2_0_Product_Architecture.md)
 4. [docs/canon/Ambitions_2_0_Visual_System.md](docs/canon/Ambitions_2_0_Visual_System.md)
-5. Supporting design matrices/specs under [docs/canon/design](docs/canon/design)
+5. [docs/canon/Ambitions_2_0_Object_Terminology.md](docs/canon/Ambitions_2_0_Object_Terminology.md)
+6. Supporting design matrices/specs under [docs/canon/design](docs/canon/design)
 
 Final product promise:
 
@@ -76,7 +77,8 @@ The active 2.0 canon defines this hierarchy:
 - Goal = direction.
 - Plan = believable path.
 - Milestone = meaningful checkpoint.
-- Task = concrete action.
+- Task = standalone One-Step Goal.
+- Step = contained action inside a Goal, Path, or Plan.
 - Proof = evidence of real progress.
 - Decision = reason the path changed.
 - Weather = readable health signal.
