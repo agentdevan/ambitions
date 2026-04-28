@@ -2,7 +2,7 @@
 
 Status: Active canon decision log for product-definition waves.
 
-Purpose: Preserve explicit product decisions made after canon consolidation. This document records decisions that clarify ambiguity across product, design, onboarding, lifecycle, memory, trust, capture, and implementation acceptance.
+Purpose: Preserve explicit product decisions made after canon consolidation. This document records decisions that clarify ambiguity across product, design, onboarding, lifecycle, memory, trust, capture, plan/calendar, and implementation acceptance.
 
 ## Decision Authority
 
@@ -421,6 +421,156 @@ Implementation implication:
 
 ---
 
+# Wave 6 — Plan, Calendar, And Believability
+
+Adoption date: 2026-04-27
+
+## Resolved Decisions
+
+Plan's core job:
+
+```text
+Shape a believable day/week.
+Build the daily schedule as part of making goals executable.
+```
+
+Implementation implication:
+
+- Plan is not a calendar clone.
+- Plan is not only a due-soon list.
+- Plan should make goals executable by shaping a believable day/week and constructing a usable daily schedule.
+
+## Plan Visual / IA Direction
+
+Resolved decision:
+
+```text
+Plan-first with optional calendar awareness.
+```
+
+Rules:
+
+- Plan should not look like a raw calendar first.
+- Calendar views can support Plan, but they do not own Plan.
+- A weekly calendar view can come later if it serves believability and execution.
+
+## Plan Main Question
+
+Resolved main question:
+
+```text
+Can this week actually hold?
+```
+
+Supporting daily question:
+
+```text
+What daily schedule makes this hold?
+```
+
+Implementation implication:
+
+- Weekly believability is the main Plan question.
+- Daily schedule construction is an important sub-job of Plan.
+- Plan should show the truth when the week cannot hold.
+
+## Calendar-Aware Meaning
+
+Calendar-aware means:
+
+```text
+Read calendar events.
+Suggest open windows.
+Compare Ambitions plan against real commitments.
+Write calendar events only after explicit user confirmation.
+```
+
+Rules:
+
+- Calendar writes require confirmation every time.
+- Calendar read permission should be requested from Plan after calendar-aware value is clear.
+- Calendar-derived patterns require memory confirmation before becoming memory.
+
+## First Calendar Permission CTA
+
+Primary CTA:
+
+```text
+Make Plan calendar-aware
+```
+
+Supporting phrase:
+
+```text
+Find real open windows
+```
+
+Avoid as primary CTA:
+
+```text
+Sync Calendar
+```
+
+## Overload Behavior
+
+When the week is overloaded, Plan should:
+
+```text
+Suggest a lighter plan.
+Ask what to protect.
+```
+
+Rules:
+
+- Do not only show a warning.
+- Do not automatically move tasks.
+- Do not pretend impossible weeks are fine.
+- Recovery should stay non-shaming.
+
+## Rituals / Routines
+
+Resolved decision:
+
+```text
+Plan includes rituals/routines, but not as a standalone Habits tab.
+```
+
+Implementation implication:
+
+- Rituals belong in Plan, Today, Goal Detail, and You/Reviews where useful.
+- Do not recreate a standalone Habits tab.
+
+## Believability Definition
+
+Believable means:
+
+```text
+Enough time exists.
+It fits energy and context.
+The user has done similar before where evidence exists.
+It does not conflict with real commitments.
+No fake precision.
+```
+
+Rules:
+
+- Believability should be evidence-aware and correction-friendly.
+- It should avoid exact confidence theater.
+- It should show why the plan holds or does not hold.
+
+## Plan Must Never
+
+Plan must never:
+
+```text
+Shame the user.
+Silently reschedule.
+Pretend impossible weeks are fine.
+Become a raw calendar clone.
+```
+
+---
+
 # Active Follow-Up Targets
 
 These decisions should be reflected in:
@@ -431,5 +581,7 @@ These decisions should be reflected in:
 - `TRUST_PRIVACY_MEMORY.md`
 - `EMPTY_ERROR_RECOVERY_STATES.md`
 - `IMPLEMENTATION_ACCEPTANCE_GATES.md`
+- `docs/canon/CAPTURE_SMART_ATTACHMENT.md`
+- `docs/canon/PLAN_CALENDAR_BELIEVABILITY.md`
 - `docs/canon/design/smart-attachment-spec.md`
-- future batch prompts involving onboarding, Life Areas, Capture routing, Today empty states, Goals, Plan, You, Trust Center, receipts, sensitive Life Areas, notifications/widgets, export/import, privacy controls, Smart Attachment, Needs a Place, or Capture input behavior.
+- future batch prompts involving onboarding, Life Areas, Capture routing, Today empty states, Goals, Plan, calendar-aware planning, believability, daily schedule, rituals, You, Trust Center, receipts, sensitive Life Areas, notifications/widgets, export/import, privacy controls, Smart Attachment, Needs a Place, or Capture input behavior.
