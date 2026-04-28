@@ -428,3 +428,200 @@ These decisions should be reflected in:
 - `TRUST_PRIVACY_MEMORY.md`
 - `IMPLEMENTATION_ACCEPTANCE_GATES.md`
 - future batch prompts involving Goal Detail, Plan, Archive, Recovery, Receipts, or Trust Center.
+
+---
+
+# Wave 3 — Trust, Memory, And Receipts
+
+Adoption date: 2026-04-27
+
+## 1. Memory Creation
+
+Resolved decision:
+
+```text
+Low-risk memories may be auto-created with visibility. Sensitive or high-impact memories should be suggested for user confirmation first.
+```
+
+Implementation implication:
+
+- Ambitions should not silently build a large hidden profile.
+- Low-risk preference/pattern memory can be created if surfaced in `What Ambitions Knows` and receipt/review paths.
+- Sensitive or consequential memory must ask the user first.
+
+## 2. Memories Requiring Explicit Confirmation
+
+Resolved decision:
+
+Require confirmation:
+
+```text
+Health-related preferences
+Relationship/family details
+Financial goals or constraints
+Location patterns
+Calendar-derived patterns
+Sensitive Life Area details
+```
+
+Can auto-create with receipt/visibility:
+
+```text
+Display/density preferences
+Recovery preferences
+Repeated task routing
+```
+
+Contextual:
+
+```text
+Work/career goals
+```
+
+Implementation implication:
+
+- Work/career memory can be auto-created only when low-risk and obvious, but should request confirmation when it affects priority, planning, identity, or sensitive context.
+- Calendar-derived patterns require confirmation before becoming memory.
+- Display and density changes should be visible and reversible.
+
+## 3. Pause Memory Learning
+
+Resolved decision:
+
+```text
+Users can pause memory learning globally and by category.
+```
+
+Implementation implication:
+
+- Trust Center should include global memory-learning control.
+- `What Ambitions Knows` should eventually support per-category memory controls.
+- Pausing memory learning should not delete existing memory unless the user chooses deletion.
+
+## 4. Sensitive / Private Life Areas
+
+Resolved decision:
+
+```text
+User can mark any Life Area sensitive.
+```
+
+Implementation implication:
+
+- Sensitivity is not limited to default categories.
+- Sensitive treatment should apply to renamed/custom Life Areas as well.
+- Sensitive mode should affect external surfaces and compact summaries.
+
+## 5. Sensitive Mode Behavior
+
+Resolved launch behavior:
+
+```text
+Hide details in notifications/widgets.
+Collapse details on Today.
+Use generic labels like Private item.
+```
+
+Later/advanced behavior:
+
+```text
+Require Face ID to open.
+Exclude from export by default.
+Keep local-only.
+Hide from screenshots/previews.
+```
+
+Implementation implication:
+
+- Launch sensitive mode should be useful without overpromising platform-level privacy.
+- Do not claim Face ID, export exclusion, local-only enforcement, or screenshot hiding until implemented and verified.
+
+## 6. Undo Duration
+
+Resolved decision:
+
+```text
+Undo duration depends on action type.
+```
+
+Suggested default:
+
+```text
+Quick UI actions: 5–10 seconds.
+Route changes / attach / move: until screen exit or review tray dismissal.
+Rename/display changes: 30 seconds.
+Destructive/external writes: confirmation first, undo only if platform-safe.
+```
+
+Implementation implication:
+
+- Undo availability must be truthful.
+- Destructive and external actions should not rely on undo as the primary safety control.
+- Receipts should disclose whether undo is available.
+
+## 7. Trust Center Score
+
+Resolved decision:
+
+```text
+No numerical Trust Score at launch. Use qualitative status sections.
+```
+
+Implementation implication:
+
+- Avoid fake precision in trust.
+- Trust Center should show reviewable status sections rather than a gamified score.
+- Qualitative status may be used if useful.
+
+## 8. Trust Center Top Status
+
+Resolved decision:
+
+```text
+Top status: You are in control.
+```
+
+Implementation implication:
+
+- Supporting rows can show memory status, receipts, privacy, sync/export truth, calendar access, and accessibility verification state.
+- Avoid overclaiming `system healthy` if platform or sync capabilities are not verified.
+
+## 9. Memory Naming
+
+Resolved decision:
+
+```text
+Section name: What Ambitions Knows.
+Object/type name: Memory.
+```
+
+Implementation implication:
+
+- Use `What Ambitions Knows` for the user-facing section under You/Trust.
+- Use `Memory` for object models, detail pages, receipts, and internal language.
+- Avoid `Knowledge` as the primary user-facing term.
+
+## 10. Delete All Memory
+
+Resolved decision:
+
+```text
+Users can delete all memory from Trust Center, with confirmation and export/reminder first.
+```
+
+Implementation implication:
+
+- Deleting all memory is destructive and requires confirmation.
+- Offer export/reminder first where export exists.
+- If export is not implemented, say so plainly and provide the safest available confirmation path.
+- Delete all memory should not delete goals/tasks/plans unless explicitly included in a separate destructive action.
+
+## Wave 3 Follow-Up Targets
+
+These decisions should be reflected in:
+
+- `TRUST_PRIVACY_MEMORY.md`
+- `DOMAIN_MODEL.md`
+- `EMPTY_ERROR_RECOVERY_STATES.md`
+- `IMPLEMENTATION_ACCEPTANCE_GATES.md`
+- future batch prompts involving Trust Center, What Ambitions Knows, receipts, sensitive Life Areas, notifications/widgets, export/import, or privacy controls.
