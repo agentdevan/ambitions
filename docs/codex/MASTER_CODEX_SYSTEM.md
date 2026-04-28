@@ -28,7 +28,7 @@ Before non-trivial planning or implementation, read:
 14. [../review/VISUAL_REVIEW_CHECKLIST.md](../review/VISUAL_REVIEW_CHECKLIST.md) when visible UI, navigation, empty states, copy, or hierarchy changes
 15. [../review/FRICTION_LOG.md](../review/FRICTION_LOG.md) when observed product friction needs to be captured without expanding scope
 
-Current execution status is Batches 00-88 complete for planning purposes, Batch 89 next queued / next uncompleted, and Batches 90-120 future planned roadmap work. Do not skip ahead of the Batch 89+ execution order or active batch unless direct user instructions explicitly change scope.
+Current execution status is Batches 00-88 and D01-D04 complete for planning purposes, D05 next queued / next uncompleted, and original Batches 89-120 future planned roadmap work through the roadmap merge audit classifications. Do not skip ahead of the active delta queue unless direct user instructions explicitly change scope.
 
 ## Product identity
 

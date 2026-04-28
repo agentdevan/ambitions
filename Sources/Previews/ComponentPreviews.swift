@@ -150,6 +150,22 @@ private struct DesignSystemPreviewGallery: View {
                     }
                 }
 
+                SectionHeader(eyebrow: "D04", title: "Panel Size + Display Density", subtitle: "Shared comfort foundation. Required information stays visible while extra detail can collapse.")
+
+                LazyVGrid(
+                    columns: [GridItem(.adaptive(minimum: 220), spacing: 12, alignment: .top)],
+                    alignment: .leading,
+                    spacing: 12
+                ) {
+                    ForEach(AmbitionDisplayDensity.allCases) { density in
+                        ForEach(AmbitionPanelSize.allCases) { size in
+                            panelDensityMatrixTile(
+                                configuration: .init(density: density, size: size)
+                            )
+                        }
+                    }
+                }
+
                 SectionHeader(eyebrow: "Batch 63", title: "Rich Panel Foundations", subtitle: "Canonical panel types with semantic state, action, explanation, and visual slots.")
 
                 ForEach(AmbitionPanelKind.allCases) { kind in
@@ -221,7 +237,7 @@ private struct DesignSystemPreviewGallery: View {
             title: panelTitle(for: kind),
             subtitle: "Reusable foundation for later surface batches without changing app behavior today.",
             semanticState: kind.defaultSemanticState,
-            confidenceLabel: kind == .progress ? "Medium certainty" : nil,
+            confidenceLabel: kind == .progress ? "Useful signal" : nil,
             progressValue: kind == .progress ? 0.64 : nil,
             explanation: "State is paired with text, iconography, and accessibility values so color is never the only signal.",
             primaryAction: .init(id: "\(kind.rawValue)-primary", title: "Primary", role: .primary),
@@ -250,7 +266,7 @@ private struct DesignSystemPreviewGallery: View {
         case .timeline:
             VStack(alignment: .leading, spacing: 10) {
                 previewTimelineRow("Moved", detail: "Draft session shifted to a calmer window.")
-                previewTimelineRow("Protected", detail: "Deep work kept outside the busy block.")
+                previewTimelineRow("Kept", detail: "Deep work stayed outside the busy block.")
                 previewTimelineRow("Recovered", detail: "Smaller version preserved momentum.")
             }
         case .schedule:
@@ -286,7 +302,7 @@ private struct DesignSystemPreviewGallery: View {
             HStack {
                 AmbitionChip("Smaller", role: .recovery)
                 AmbitionChip("Later", role: .waiting)
-                AmbitionChip("Protect", role: .protected)
+                AmbitionChip("Keep", role: .protected)
             }
         case .trust:
             HStack {
@@ -311,6 +327,90 @@ private struct DesignSystemPreviewGallery: View {
                     .font(.caption2)
                     .foregroundStyle(.secondary)
             }
+        }
+    }
+
+    private func panelDensityMatrixTile(
+        configuration: AmbitionPanelDisplayConfiguration
+    ) -> some View {
+        let required = AmbitionTheme.dark.panelDisplayDecision(
+            for: .todayPlan,
+            configuration: configuration
+        )
+        let optional = AmbitionTheme.dark.panelDisplayDecision(
+            for: .optional,
+            configuration: configuration
+        )
+
+        return WidgetCard {
+            VStack(alignment: .leading, spacing: required.metrics.verticalSpacing) {
+                HStack(alignment: .firstTextBaseline) {
+                    VStack(alignment: .leading, spacing: 4) {
+                        Text(configuration.density.title)
+                            .font(.headline.weight(.semibold))
+                        Text(configuration.size.title)
+                            .font(.caption)
+                            .foregroundStyle(.secondary)
+                    }
+
+                    Spacer()
+
+                    AmbitionChip(
+                        required.visibility.previewTitle,
+                        role: .state,
+                        semanticState: .trust
+                    )
+                }
+
+                Text("Required information stays visible.")
+                    .font(.caption)
+                    .foregroundStyle(.secondary)
+                    .fixedSize(horizontal: false, vertical: true)
+
+                if required.showsSupportingDetail {
+                    Text("Looks doable.")
+                        .font(.caption.weight(.semibold))
+                }
+
+                if optional.visibility == .hidden {
+                    Text("Extra detail hidden.")
+                        .font(.caption2)
+                        .foregroundStyle(.secondary)
+                } else {
+                    Text(optional.visibility == .full ? "More detail shown." : "Extra detail summarized.")
+                        .font(.caption2)
+                        .foregroundStyle(.secondary)
+                }
+
+                Button("Make today doable") {}
+                    .buttonStyle(AmbitionButtonStyle(tier: .compact, state: .selected))
+                    .frame(minHeight: required.metrics.minimumTapTarget)
+            }
+            .padding(required.metrics.panelPadding)
+            .ambitionPanelDisplayConfiguration(configuration)
+            .accessibilityElement(children: .combine)
+            .accessibilityLabel("\(configuration.density.title), \(configuration.size.title)")
+            .accessibilityValue("Required information stays visible. \(optional.visibility.previewAccessibilityText)")
+        }
+    }
+}
+
+private extension AmbitionPanelVisibility {
+    var previewTitle: String {
+        switch self {
+        case .full: "Full"
+        case .summarized: "Summary"
+        case .collapsedSignal: "Signal"
+        case .hidden: "Hidden"
+        }
+    }
+
+    var previewAccessibilityText: String {
+        switch self {
+        case .full: "Extra detail is shown."
+        case .summarized: "Extra detail is summarized."
+        case .collapsedSignal: "Extra detail uses a signal."
+        case .hidden: "Extra detail is hidden."
         }
     }
 }

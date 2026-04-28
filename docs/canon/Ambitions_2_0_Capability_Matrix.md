@@ -1,6 +1,6 @@
 # Ambitions 2.0 Capability Matrix
 
-Batch 61 verified repo truth after Batch 60. This matrix is preserved as implementation-status evidence, but execution sequencing is now superseded by the Design Constitution delta backlog and [Ambitions_2_0_Roadmap_Merge_Audit.md](Ambitions_2_0_Roadmap_Merge_Audit.md): Batches 00-88 are complete for planning purposes, D01-D02 are complete, D03 is the next dependency-safe implementation batch, and original Batches 89-120 remain future planned roadmap work only through the merge audit classifications.
+Batch 61 verified repo truth after Batch 60. This matrix is preserved as implementation-status evidence, but execution sequencing is now superseded by the Design Constitution delta backlog and [Ambitions_2_0_Roadmap_Merge_Audit.md](Ambitions_2_0_Roadmap_Merge_Audit.md): Batches 00-88 and D01-D04 are complete for planning purposes, D05 is the next dependency-safe implementation batch, and original Batches 89-120 remain future planned roadmap work only through the merge audit classifications.
 
 Status values are restricted to: Verified complete, Partially implemented, Missing, Stale / legacy, Unknown until deeper implementation batch, Deferred by Ambitions 2.0 scope, Blocked by missing foundation, Needs manual platform verification.
 

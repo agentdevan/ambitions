@@ -30,7 +30,7 @@ For Ambitions 2.0 tasks, read:
 
 ## Execution Rules
 
-- Current execution status: Batches 00-88 and D01-D02 are complete for planning purposes. D03 is the next dependency-safe implementation batch. Original Batches 89-120 remain future planned roadmap work only through the classifications and dependencies in `docs/canon/Ambitions_2_0_Roadmap_Merge_Audit.md`.
+- Current execution status: Batches 00-88 and D01-D04 are complete for planning purposes. D05 is the next dependency-safe implementation batch. Original Batches 89-120 remain future planned roadmap work only through the classifications and dependencies in `docs/canon/Ambitions_2_0_Roadmap_Merge_Audit.md`.
 - Work one batch at a time.
 - Work on `main` only.
 - Do not create, switch to, or suggest branches unless the user explicitly asks.
