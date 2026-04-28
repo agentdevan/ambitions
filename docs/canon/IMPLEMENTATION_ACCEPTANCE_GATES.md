@@ -2,7 +2,7 @@
 
 Status: Active canon consolidation layer.
 
-Purpose: Define what “done” means for future Ambitions implementation work. This document consolidates acceptance expectations from the roadmap, batch plan, visual review checklist, RC maturity plan, design contracts, accessibility posture, systems architecture, and product decision Waves 1-19.
+Purpose: Define what “done” means for future Ambitions implementation work. This document consolidates acceptance expectations from the roadmap, batch plan, visual review checklist, RC maturity plan, design contracts, accessibility posture, systems architecture, product decision Waves 1-19, and the Human Language Review.
 
 ## Core Standard
 
@@ -11,6 +11,7 @@ A feature is not done because code compiles.
 A feature is done when it is:
 
 - aligned with active canon
+- written in human, obvious language where user-facing
 - integrated with the correct owning system
 - visually coherent
 - understandable in the first few seconds
@@ -27,23 +28,25 @@ Before implementing a non-trivial Ambitions change, the implementer must identif
 1. Active batch or roadmap owner.
 2. Current shipping behavior.
 3. Active canon documents read.
-4. Surface owner.
-5. System owner.
-6. Whether the work is UI, domain model, system logic, QA, release, or docs-only.
-7. What must not be touched.
-8. Planned-canon versus shipped-code distinction.
-9. Whether any unresolved question needs a canon proposal or decision-log entry.
+4. Whether `HUMAN_LANGUAGE_REVIEW.md` applies to visible copy.
+5. Surface owner.
+6. System owner.
+7. Whether the work is UI, domain model, system logic, QA, release, or docs-only.
+8. What must not be touched.
+9. Planned-canon versus shipped-code distinction.
+10. Whether any unresolved question needs a canon proposal or decision-log entry.
 
 Required reading order:
 
 1. `docs/codex/BATCH_REGISTRY.md`
 2. `docs/canon/SOURCE_OF_TRUTH_MAP.md`
 3. `docs/canon/PRODUCT_DECISIONS.md`
-4. `docs/canon/AMBITION_CANON_COMPLETION_REPORT.md`
-5. batch file if one exists
-6. relevant product/design/system/focused canon docs from the source map
-7. current implementation files
-8. tests/previews/fixtures affected by the change
+4. `docs/canon/HUMAN_LANGUAGE_REVIEW.md` for user-facing language work
+5. `docs/canon/AMBITION_CANON_COMPLETION_REPORT.md`
+6. batch file if one exists
+7. relevant product/design/system/focused canon docs from the source map
+8. current implementation files
+9. tests/previews/fixtures affected by the change
 
 ## Canon Alignment Gate
 
@@ -51,6 +54,7 @@ A change passes canon alignment when:
 
 - It does not contradict `MASTER_PRODUCT_SPEC.md`.
 - It follows `PRODUCT_DECISIONS.md` for Waves 1-19.
+- It follows `HUMAN_LANGUAGE_REVIEW.md` for normal user-facing copy.
 - It follows `Ambitions_Design_Constitution.md` for design, IA, UX writing, interaction, trust, accessibility, and external-surface behavior.
 - It follows Product Architecture for surface ownership.
 - It follows Systems Architecture for engine ownership.
@@ -94,11 +98,11 @@ A change passes surface ownership when content lives in the right place.
 | Surface | Owns | Does not own |
 | --- | --- | --- |
 | Onboarding | first useful object, static preview, first-run route receipt, safe skip-to-Today | upfront calendar, notifications, account setup, display-density setup, full questionnaire |
-| Today | best next action, Now State, immediate execution, full daily schedule below main action, recovery | task dump, calendar clone, analytics dashboard, motivation wall |
-| Goals | direction, protected goal, portfolio health, goal detail, Goal Weather, Proof | standalone task manager, project-management-board top level, KPI dashboard |
+| Today | next action, right-now explanation, immediate execution, full daily schedule below main action, recovery | task dump, calendar clone, analytics dashboard, motivation wall, AI/producty copy |
+| Goals | direction, most important goal, goal detail, Goal Weather, Proof | standalone task manager, project-management-board top level, KPI dashboard |
 | Capture | Quiet Command Sheet, intake, Needs a Place, Smart Attachment, route receipts | long-term graveyard inbox, chat-first AI, generic notes app |
-| Plan | believable day/week shaping, daily schedule, rituals, calendar-aware planning | onboarding permissions, raw calendar clone, silent rescheduling |
-| You | personal system center, settings, trust, memory, reviews, personalization, data controls | generic settings page, junk drawer, social profile, primary execution UI |
+| Plan | doable day/week shaping, daily schedule, rituals, calendar-aware planning | onboarding permissions, raw calendar clone, silent rescheduling |
+| You | settings, trust, memory, reviews, personalization, data controls | generic settings page, junk drawer, social profile, primary execution UI, data-console language |
 | Trust Center | trust, receipts, privacy, memory controls, sync/export truth, platform status | numerical trust score at launch, marketing claims, paywalled privacy |
 | What Ambitions Knows | user-visible Memory inspection, correction, confirmation, pause/delete controls | hidden profiling or unreviewable memory |
 
@@ -148,7 +152,7 @@ An onboarding or first-run change passes when:
 - Calendar permission is not requested during onboarding.
 - Notification permission is not requested during onboarding.
 - Calendar permission is only requested from Plan after a calendar-aware planning action.
-- Notification permission is only requested after reminder/protected-block value.
+- Notification permission is only requested after reminder value.
 - Default examples cover Career, Creative, Finance, Health, Home, and Relationships / Family.
 - Baby/family examples appear only when contextually relevant.
 - Skipping onboarding lands in Today with a strong empty state and Capture action.
@@ -167,50 +171,55 @@ A Capture change passes when:
 - No general Notes object is introduced at launch.
 - Task-to-goal promotion is user-confirmed.
 - Route receipts use `Saved as...` / `Attached as...` patterns.
+- Normal UI uses plain copy such as `Suggested place` or `Move it here?`, not AI/classification/confidence language.
 
 ## Today / Now State Gate
 
 A Today change passes when:
 
 - It helps the user know what matters now.
-- It prioritizes one best next action first.
-- It shows the full daily schedule below the main next action when shown.
-- It uses Now State as best current execution context.
-- Broken-day behavior offers recovery and asks what to protect.
-- Main recovery action is `Save the Day`.
+- It prioritizes one next action first.
+- Normal UI says `Do this next` or equivalent plain copy.
+- It shows the full daily schedule below the main action when shown.
+- It uses Now State as an internal concept, but user-facing copy says `Right now` / `Why this now`.
+- Broken-day behavior offers recovery and asks what should stay on today.
+- Recovery uses plain copy such as `Too much for today` and `Make today doable`.
+- Main recovery concept is `Save the Day`, but supporting copy stays human and obvious.
 - Rituals/routines appear only if relevant now.
 - Sensitive/private items collapse as `Private item` at launch.
-- Today does not become a task dump, calendar clone, analytics dashboard, or motivation wall.
+- Today does not become a task dump, calendar clone, analytics dashboard, motivation wall, or AI-feeling command center.
 
 ## Goals Gate
 
 A Goals change passes when:
 
-- It helps the user choose and protect direction.
-- Top-level Goals prioritizes one protected/most important goal and goal portfolio health.
-- Goal Detail leads with `What is the next visible step?`.
-- Goal Detail also answers `Is this goal still believable?`.
-- Goal Weather communicates believability / risk / clarity, not fake progress.
+- It helps the user choose direction.
+- Top-level Goals prioritizes the most important goal and goal status/health.
+- Goal Detail leads with `What is next?` or `What is the next visible step?`.
+- Goal Detail also answers `Is this goal still doable?` / `Is this goal still believable?`.
+- Goal Weather communicates how the goal is going without fake progress.
 - Progress percentages appear only when measurable and honest.
 - Proof can include completed steps, artifacts, decisions, feedback, blockers resolved, and reviews.
 - Manual proof attaches to a goal, milestone, or step.
 - Missing next step asks/suggests rather than merely warning.
+- Normal UI says `Most important goal`, not `protected goal`.
 - Top-level Goals does not become a project management board, spreadsheet, KPI dashboard, or quote wall.
 
 ## Plan Gate
 
 A Plan change passes when:
 
-- It shapes a believable day/week.
+- It shapes a doable day/week.
 - It can build the daily schedule as part of making goals executable.
 - It remains plan-first with optional calendar awareness.
 - It answers `Can this week actually hold?`.
 - It supports `What daily schedule makes this hold?`.
 - Calendar-aware behavior reads events, suggests open windows, and compares against commitments.
 - Calendar writes require explicit confirmation every time.
-- First calendar CTA is `Make Plan calendar-aware`.
-- Overload behavior suggests a lighter plan and asks what to protect.
+- First calendar CTA may internally be calendar-aware, but normal UI should prefer plain copy such as `Find open time from Calendar`.
+- Overload behavior suggests a lighter plan and asks what should stay.
 - Rituals/routines do not become a standalone Habits tab.
+- Visible state labels prefer `Looks doable`, `Tight`, `Too much planned`, and `No longer works`.
 - Plan does not shame, silently reschedule, pretend impossible weeks are fine, or become a raw calendar clone.
 
 ## You / Reviews Gate
@@ -218,14 +227,14 @@ A Plan change passes when:
 A You change passes when:
 
 - User-facing language uses `You`, not `Profile`, except legacy compatibility references.
-- You functions as a personal system center.
-- You contains settings, trust, memory, reviews, and personalization.
+- You functions as the user's settings, trust, memory, reviews, and personalization area.
 - Top status is `You are in control`.
 - Settings-style areas use Grouped Navigation Lists.
 - Reviews turn what happened into what should happen next.
 - Analytics appear only as Reviews/Patterns, not dashboard analytics.
 - Export/import appears only when implemented and through Trust Center / Data controls.
 - Appearance Studio belongs in You.
+- Normal UI avoids data-console language such as `user model`, `memory graph`, `system center`, or `identity substrate`.
 - You does not become a junk drawer, analytics dashboard, generic settings page, or social profile.
 
 ## Intelligence / Automation Gate
@@ -236,7 +245,7 @@ An intelligence or automation change passes when:
 - Normal UI avoids AI/model language.
 - Suggestions feel like calm options.
 - Meaningful suggestions include why this, evidence/assumption, user control, and dismiss/change option.
-- Confidence is qualitative in normal UI; numeric only in debug/internal contexts.
+- Confidence is qualitative only outside normal UI; normal UI should not say confidence/model.
 - Important plan/goal changes require user confirmation.
 - Safe local reversible actions can use receipt + undo.
 - External actions require confirmation.
@@ -268,14 +277,17 @@ A UI change passes visual quality when:
 
 A copy/UI-language change passes when:
 
-- It is calm, adult, specific, clear, and non-shaming.
-- It uses approved labels such as `Why This`, `Why Now`, `Why Changed`, `What This Uses`, `Needs Confirmation`, and `Update This`.
-- It uses Wave 2 state language: `No Longer Relevant` for dropped goals, `End Goal` for intentional ending, `Park Goal` for pause, `Needs Protection` for fragile plan state, and `No Longer Holds` for broken plan state.
+- It is calm, adult, specific, clear, non-shaming, and human.
+- It follows `HUMAN_LANGUAGE_REVIEW.md`.
+- It prefers plain phrases such as `Do this next`, `Most important today`, `Too much for today`, `Make today doable`, `Move this later`, `Keep this on today`, `Looks doable`, and `No longer works` where they fit.
+- It uses approved explanation labels such as `Why This`, `Why Now`, `Why Changed`, `What This Uses`, `Needs Confirmation`, and `Update This`.
+- It uses Wave 2 state language only where still appropriate and translates internal labels into human UI copy when needed.
 - It uses Wave 3 trust language: `You are in control` for Trust Center top status, `What Ambitions Knows` for the memory section, and `Memory` for the object/type.
 - It uses Wave 4 onboarding language: `What do you want to organize?`, `Organize This`, and contextual first-run route receipts.
 - It uses `Focus Support`, not ADHD Mode or Neurodivergent Mode.
 - It avoids numerical Trust Score language at launch.
-- It avoids AI/model terminology in normal UI.
+- It avoids AI/model/confidence terminology in normal UI.
+- It avoids `protected/protection/protect`, `anchor`, `execution context`, `optimize`, `leverage`, `engine`, `graph`, and other product/system language in normal UI unless literally about privacy/security.
 - It avoids shame language.
 - It avoids exposing `Dropped`, `Fragile`, or `Broken` as normal user-facing copy unless the context explicitly requires internal/debug language.
 - Buttons are verb-led and specific.
@@ -343,11 +355,12 @@ An external surface change passes when:
 - External-surface north star is calm continuity.
 - Notifications are sparse by default and calm/operational.
 - Sensitive/private details collapse as `Private item` at launch.
-- Widgets show best next action / Today slice, not dashboards.
-- Live Activities show active focus/protected block or time-sensitive plan slice.
+- Widgets show next action / Today slice, not dashboards.
+- Live Activities show active focus time or time-sensitive plan slice.
 - App Intents / Shortcuts support capture without losing input.
 - Safe local actions create receipts where meaningful.
 - External writes require app confirmation.
+- External copy stays especially plain because it appears out of context.
 - External surfaces do not expose private details, spam the user, show fake urgency, or replace core app context.
 
 ## Accessibility Gate
@@ -355,7 +368,7 @@ An external surface change passes when:
 A user-visible change passes the baseline accessibility gate when:
 
 - Accessibility is treated as core product quality.
-- Focus Support reduces decisions and protects next-action clarity.
+- Focus Support reduces decisions and keeps the next action clear.
 - Dynamic Type does not hide the primary action.
 - VoiceOver labels summarize purpose, state, and action.
 - Interactive rows/buttons have stable tap targets.
@@ -454,16 +467,17 @@ A batch is complete only when:
 1. Scope matches the batch file.
 2. No unrelated roadmap drift was introduced.
 3. Required source-of-truth docs remain aligned.
-4. Tests or validation appropriate to the change were run or explicitly not run.
-5. Visual/UX/accessibility acceptance is satisfied for user-visible work.
-6. Empty/error/recovery states are not broken.
-7. Confirmation/receipt behavior matches trust gates.
-8. Memory/sensitive-area behavior matches Wave 3 gates where relevant.
-9. Onboarding behavior matches Wave 4 gates where relevant.
-10. Completion summary distinguishes implemented behavior from planned future canon.
-11. `BATCH_REGISTRY.md` is updated if the batch status changed.
-12. Shipped/planned/deferred status is clear.
-13. Follow-up work is captured without moving the active batch prematurely.
+4. User-facing copy follows `HUMAN_LANGUAGE_REVIEW.md`.
+5. Tests or validation appropriate to the change were run or explicitly not run.
+6. Visual/UX/accessibility acceptance is satisfied for user-visible work.
+7. Empty/error/recovery states are not broken.
+8. Confirmation/receipt behavior matches trust gates.
+9. Memory/sensitive-area behavior matches Wave 3 gates where relevant.
+10. Onboarding behavior matches Wave 4 gates where relevant.
+11. Completion summary distinguishes implemented behavior from planned future canon.
+12. `BATCH_REGISTRY.md` is updated if the batch status changed.
+13. Shipped/planned/deferred status is clear.
+14. Follow-up work is captured without moving the active batch prematurely.
 
 ## Red Flags
 
@@ -488,8 +502,9 @@ Stop or revise if a change:
 - exposes sensitive Life Area details in notifications/widgets or Today compact summaries
 - claims Face ID, export exclusion, local-only enforcement, or screenshot hiding without verified implementation
 - creates duplicate now/plan/recovery/goal-health logic
-- uses AI/model terminology in normal UI
-- uses `Dropped`, `Fragile`, or `Broken` as normal user-facing copy when softer Wave 2 labels apply
+- uses AI/model/confidence terminology in normal UI
+- uses protected/protection/protect, anchor, execution context, optimize, leverage, engine, graph, or system-center language in normal UI unless literally about privacy/security
+- uses `Dropped`, `Fragile`, or `Broken` as normal user-facing copy when softer labels apply
 - uses a numerical Trust Score at launch
 - claims sync, memory, automation, export, accessibility, privacy, or platform behavior that is not verified
 - breaks local-first behavior
@@ -513,6 +528,7 @@ Use this structure for Codex completion summaries:
 - Active docs read:
 - Surface owner:
 - System owner:
+- Human language review:
 - Planned-vs-shipped distinction:
 - Shipped/planned/deferred status:
 
@@ -526,6 +542,7 @@ Use this structure for Codex completion summaries:
 - System ownership:
 - Surface ownership:
 - Visual/UX:
+- Human language:
 - Accessibility:
 - Empty/error/recovery:
 - Trust/privacy:
