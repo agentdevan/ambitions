@@ -23,6 +23,7 @@ This folder contains active Ambitions canon plus preserved historical support do
 - [Ambitions_2_0_Decision_Log.md](Ambitions_2_0_Decision_Log.md)
 - [Ambitions_2_0_Implementation_Gap_Audit.md](Ambitions_2_0_Implementation_Gap_Audit.md)
 - [Ambitions_2_0_Roadmap_Merge_Audit.md](Ambitions_2_0_Roadmap_Merge_Audit.md)
+- [POST_D26_MATURITY_ROADMAP.md](POST_D26_MATURITY_ROADMAP.md)
 - [Documentation_Cleanup_Audit.md](Documentation_Cleanup_Audit.md)
 
 ## Active Consolidation Canon
@@ -60,6 +61,8 @@ These docs extract existing canon into narrower implementation-readable specs. T
 
 ## Active Supporting Canon
 
+- [POST_D26_MATURITY_ROADMAP.md](POST_D26_MATURITY_ROADMAP.md)
+  Post-D26 Layer 2/Layer 3 roadmap that rewrites original Batches 89-120 into M-series maturity batches and R-series release-readiness gates. Planning only; does not mark D01-D26 complete.
 - [Ambitions_2_0_Accessibility_Nutrition.md](Ambitions_2_0_Accessibility_Nutrition.md)
 - [Ambitions_2_0_Capability_Matrix.md](Ambitions_2_0_Capability_Matrix.md)
 - [Ambitions_2_0_Daily_Loop_QA_Baseline.md](Ambitions_2_0_Daily_Loop_QA_Baseline.md)
