@@ -25,12 +25,12 @@ public enum AmbitionSemanticState: String, CaseIterable, Sendable, Identifiable 
     public var label: String {
         switch self {
         case .neutral: "Calm"
-        case .confidenceHigh: "High confidence"
-        case .confidenceMedium: "Medium confidence"
-        case .confidenceLow: "Low confidence"
+        case .confidenceHigh: "Strong signal"
+        case .confidenceMedium: "Useful signal"
+        case .confidenceLow: "Needs review"
         case .recovery: "Recovery"
         case .waiting: "Waiting"
-        case .protected: "Protected"
+        case .protected: "Private"
         case .focus: "Focus"
         case .capture: "Capture"
         case .trust: "Trust"
@@ -38,7 +38,7 @@ public enum AmbitionSemanticState: String, CaseIterable, Sendable, Identifiable 
         case .success: "Stable"
         case .caution: "Watch"
         case .risk: "Risk"
-        case .calendarDerived: "Calendar-derived"
+        case .calendarDerived: "From calendar"
         case .accessibilityVerified: "Verified"
         case .accessibilityUnverified: "Unverified"
         }
@@ -68,13 +68,13 @@ public enum AmbitionSemanticState: String, CaseIterable, Sendable, Identifiable 
 
     public var accessibilityText: String {
         switch self {
-        case .neutral: "neutral state"
-        case .confidenceHigh: "high confidence state"
-        case .confidenceMedium: "medium confidence state"
-        case .confidenceLow: "low confidence state"
+        case .neutral: "calm state"
+        case .confidenceHigh: "strong signal"
+        case .confidenceMedium: "useful signal"
+        case .confidenceLow: "needs review"
         case .recovery: "recovery option"
         case .waiting: "waiting state"
-        case .protected: "protected time or decision"
+        case .protected: "private item"
         case .focus: "current focus"
         case .capture: "capture state"
         case .trust: "trust or source status"
@@ -82,7 +82,7 @@ public enum AmbitionSemanticState: String, CaseIterable, Sendable, Identifiable 
         case .success: "stable state"
         case .caution: "needs attention"
         case .risk: "risk state"
-        case .calendarDerived: "calendar-derived context"
+        case .calendarDerived: "from calendar"
         case .accessibilityVerified: "accessibility verified"
         case .accessibilityUnverified: "accessibility not yet verified"
         }
