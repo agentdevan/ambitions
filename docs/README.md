@@ -12,6 +12,8 @@ For current canon ownership and consolidation, read:
   Active document ownership map and source-of-truth reading order. Use this before non-trivial product, design, roadmap, or implementation work.
 - [canon/PRODUCT_DECISIONS.md](canon/PRODUCT_DECISIONS.md)
   Active product decision log for question waves and ambiguity resolution.
+- [canon/GOLDEN_LAUNCH_LOOP.md](canon/GOLDEN_LAUNCH_LOOP.md)
+  Active product-strength cutline defining the smallest undeniable launch loop and launch-critical mapping rules.
 - [canon/HUMAN_LANGUAGE_REVIEW.md](canon/HUMAN_LANGUAGE_REVIEW.md)
   Active language correction layer ensuring normal UI copy sounds human, obvious, and not AI/producty.
 - [canon/AMBITION_CANON_COMPLETION_REPORT.md](canon/AMBITION_CANON_COMPLETION_REPORT.md)
@@ -36,6 +38,8 @@ For the current free Codex workflow, also read:
   Active source-of-truth map and reading order.
 - [canon/PRODUCT_DECISIONS.md](canon/PRODUCT_DECISIONS.md)
   Active product decision log for resolved product-definition waves.
+- [canon/GOLDEN_LAUNCH_LOOP.md](canon/GOLDEN_LAUNCH_LOOP.md)
+  Active Golden Launch Loop, demo story, launch cutline, and product-strength rules.
 - [canon/HUMAN_LANGUAGE_REVIEW.md](canon/HUMAN_LANGUAGE_REVIEW.md)
   Active user-facing language review and replacement table.
 - [canon/AMBITION_CANON_COMPLETION_REPORT.md](canon/AMBITION_CANON_COMPLETION_REPORT.md)
@@ -78,6 +82,7 @@ For the current free Codex workflow, also read:
 These focused docs extract already-existing doctrine into implementation-readable references. They clarify the active canon; they do not create a parallel roadmap.
 
 - [canon/PRODUCT_DECISIONS.md](canon/PRODUCT_DECISIONS.md)
+- [canon/GOLDEN_LAUNCH_LOOP.md](canon/GOLDEN_LAUNCH_LOOP.md)
 - [canon/HUMAN_LANGUAGE_REVIEW.md](canon/HUMAN_LANGUAGE_REVIEW.md)
 - [canon/AMBITION_CANON_COMPLETION_REPORT.md](canon/AMBITION_CANON_COMPLETION_REPORT.md)
 - [canon/DOCS_RECONCILIATION_REVIEW.md](canon/DOCS_RECONCILIATION_REVIEW.md)
