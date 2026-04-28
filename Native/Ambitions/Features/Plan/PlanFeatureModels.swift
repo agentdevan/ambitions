@@ -18,7 +18,7 @@ enum PlanWeekPressureLevel: String, Sendable, CaseIterable {
         case .open: "Open room"
         case .steady: "Steady"
         case .tight: "Tight"
-        case .fragile: "Fragile"
+        case .fragile: "Too much planned"
         case .overloaded: "Overloaded"
         }
     }
@@ -28,7 +28,7 @@ enum PlanWeekPressureLevel: String, Sendable, CaseIterable {
         case .open: "sparkles"
         case .steady: "circle.lefthalf.filled"
         case .tight: "calendar.badge.clock"
-        case .fragile: "exclamationmark.shield"
+        case .fragile: "exclamationmark.triangle"
         case .overloaded: "exclamationmark.triangle.fill"
         }
     }
@@ -53,7 +53,7 @@ enum PlanWeekBlockKind: String, Sendable {
         switch self {
         case .fixed: "Fixed"
         case .flexible: "Flexible"
-        case .protected: "Protected"
+        case .protected: "Time set aside"
         }
     }
 
@@ -61,7 +61,7 @@ enum PlanWeekBlockKind: String, Sendable {
         switch self {
         case .fixed: "pin.fill"
         case .flexible: "arrow.left.and.right"
-        case .protected: "shield.lefthalf.filled"
+        case .protected: "clock.badge.checkmark"
         }
     }
 }
@@ -83,7 +83,7 @@ enum PlanShapingActionKind: String, Sendable, CaseIterable {
         switch self {
         case .edit: "Edit"
         case .patch: "Patch"
-        case .protect: "Protect"
+        case .protect: "Keep this"
         case .lighten: "Lighten"
         }
     }
@@ -92,7 +92,7 @@ enum PlanShapingActionKind: String, Sendable, CaseIterable {
         switch self {
         case .edit: "square.and.pencil"
         case .patch: "wand.and.stars"
-        case .protect: "shield"
+        case .protect: "checkmark.circle"
         case .lighten: "sun.max"
         }
     }
@@ -402,7 +402,7 @@ enum PlanRealityBreakReasonKind: String, Sendable, CaseIterable {
         switch self {
         case .missedDay: "Missed day"
         case .overloadedPlan: "Overloaded plan"
-        case .noRecoveryMargin: "No recovery margin"
+        case .noRecoveryMargin: "No room to recover"
         case .blockedGoal: "Blocked goal"
         case .waitingOnPersonOrResource: "Waiting item"
         case .noNextStep: "No next step"
@@ -410,9 +410,9 @@ enum PlanRealityBreakReasonKind: String, Sendable, CaseIterable {
         case .tooManyActiveGoals: "Too many active goals"
         case .proofMissing: "Proof missing"
         case .urgentOutsideItem: "Outside item"
-        case .lowCapacityFragileDay: "Fragile day"
+        case .lowCapacityFragileDay: "Too much for today"
         case .lowData: "Not enough plan data yet"
-        case .stillBelievable: "Plan is still believable"
+        case .stillBelievable: "Plan still looks doable"
         }
     }
 }
@@ -432,7 +432,7 @@ enum PlanReflowSuggestionKind: String, Sendable, CaseIterable {
 
     var title: String {
         switch self {
-        case .protectOneItem: "Protect this"
+        case .protectOneItem: "Keep this"
         case .shrinkAction: "Make it smaller"
         case .splitAction: "Split it"
         case .moveLocalActionLater: "Move this later"
@@ -448,7 +448,7 @@ enum PlanReflowSuggestionKind: String, Sendable, CaseIterable {
 
     var icon: String {
         switch self {
-        case .protectOneItem: "lock.shield"
+        case .protectOneItem: "checkmark.circle"
         case .shrinkAction: "arrow.down.right.and.arrow.up.left"
         case .splitAction: "square.split.2x1"
         case .moveLocalActionLater: "clock.arrow.circlepath"
