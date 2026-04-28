@@ -2,7 +2,7 @@
 
 Status: Active canon decision log for product-definition waves.
 
-Purpose: Preserve explicit product decisions made after canon consolidation. This document records decisions that clarify ambiguity across product, design, onboarding, lifecycle, memory, trust, capture, plan/calendar, goals, and implementation acceptance.
+Purpose: Preserve explicit product decisions made after canon consolidation. This document records decisions that clarify ambiguity across product, design, onboarding, lifecycle, memory, trust, capture, plan/calendar, goals, today/now state, and implementation acceptance.
 
 ## Decision Authority
 
@@ -722,6 +722,135 @@ Motivation quote wall.
 
 ---
 
+# Wave 8 — Today And Now State
+
+Adoption date: 2026-04-27
+
+## Resolved Decisions
+
+Today's core job:
+
+```text
+Help the user know what matters now.
+```
+
+Today should prioritize first:
+
+```text
+One best next action.
+```
+
+Full daily schedule behavior:
+
+```text
+Show the full daily schedule below the main next action.
+```
+
+Implementation implication:
+
+- Today is not only a task list.
+- Today is not a dashboard.
+- Today can show the daily schedule, but it should not outrank the best next action.
+
+## Broken Day Behavior
+
+When the day breaks, Today should:
+
+```text
+Offer recovery.
+Ask what to protect.
+```
+
+Main recovery action:
+
+```text
+Save the Day
+```
+
+Rules:
+
+- Do not only warn.
+- Do not auto-reschedule.
+- Do not hide missed work.
+- Keep recovery non-shaming.
+
+## Rituals / Routines In Today
+
+Resolved decision:
+
+```text
+Today includes rituals/routines only if relevant now.
+```
+
+Implementation implication:
+
+- Rituals can appear in Today when they affect the current/next slice.
+- Today should not become a habit tracker or routine dashboard.
+
+## Sensitive / Private Items In Today
+
+Resolved decision:
+
+```text
+Sensitive/private items collapse as Private item at launch.
+```
+
+Implementation implication:
+
+- Do not expose sensitive Life Area details in Today compact surfaces.
+- Do not require Face ID at launch unless implemented and verified.
+
+## Empty Today
+
+When there is nothing planned, Today should:
+
+```text
+Ask user to capture something.
+Suggest a goal.
+```
+
+Priority:
+
+```text
+Capture is primary.
+Goal suggestion is secondary.
+```
+
+## Now State Meaning
+
+Now State means:
+
+```text
+Best current execution context.
+```
+
+Now State is not only:
+
+```text
+Current task.
+Time of day.
+User mood.
+Calendar status.
+```
+
+Implementation implication:
+
+- Now State should combine relevant execution context from goals, plan, schedule, tasks, rituals, commitments, and recovery state.
+- Now State should help explain why the best next action is shown.
+
+## Today Must Never Become
+
+Today must never become:
+
+```text
+Task dump.
+Calendar clone.
+Analytics dashboard.
+Motivation quote wall.
+```
+
+---
+
 # Active Follow-Up Targets
 
 These decisions should be reflected in:
@@ -735,5 +864,6 @@ These decisions should be reflected in:
 - `docs/canon/CAPTURE_SMART_ATTACHMENT.md`
 - `docs/canon/PLAN_CALENDAR_BELIEVABILITY.md`
 - `docs/canon/GOALS_GOAL_DETAIL.md`
+- `docs/canon/TODAY_NOW_STATE.md`
 - `docs/canon/design/smart-attachment-spec.md`
-- future batch prompts involving onboarding, Life Areas, Capture routing, Today empty states, Goals, Goal Detail, Goal Weather, Proof, Plan, calendar-aware planning, believability, daily schedule, rituals, You, Trust Center, receipts, sensitive Life Areas, notifications/widgets, export/import, privacy controls, Smart Attachment, Needs a Place, or Capture input behavior.
+- future batch prompts involving onboarding, Life Areas, Capture routing, Today, Now State, empty states, recovery, best next action, Goals, Goal Detail, Goal Weather, Proof, Plan, calendar-aware planning, believability, daily schedule, rituals, You, Trust Center, receipts, sensitive Life Areas, notifications/widgets, export/import, privacy controls, Smart Attachment, Needs a Place, or Capture input behavior.
