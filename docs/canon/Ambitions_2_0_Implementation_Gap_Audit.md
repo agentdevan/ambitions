@@ -74,11 +74,10 @@ Several implemented surfaces are valid foundations but need alignment: Today, Ca
 - Full Life Areas Overview / Life Areas Atlas surface transformation beyond the foundation object/projection layer.
 - North Stars / dormant Ambitions rails/detail surfaces beyond the foundation object/projection layer.
 - One-Step Goals panels/detail surfaces and cross-surface behavior beyond the D09 model/projection foundation.
-- Smart Attachment named system with confidence behavior, editable receipts, correction, and learning.
-- GroupedNavigationList and official row types.
-- Panel Size: Compact / Comfortable / Large.
-- Display Density: Minimal / Balanced / Detailed.
-- Screen Contract Matrix implementation pass.
+- Smart Attachment full surface adoption with editable receipts, correction, and learning beyond the D06 foundation.
+- Broad GroupedNavigationList adoption across You/Trust/Goal Detail beyond the D03 component foundation.
+- Broad Panel Size and Display Density adoption across active surfaces beyond the D04 design-system foundation.
+- ScreenContractRegistry snapshot adoption inside D11-D19 surface tests beyond the D10 contract gate.
 - Component Contract Matrix implementation pass.
 - UX Writing / State Language Matrix implementation pass.
 - Full Trust Center and What Ambitions Knows.
@@ -239,7 +238,7 @@ These are future delta/alignment batches. They do not replace the existing Batch
 | D07 | Life Areas Overview / Atlas Object Model | Completed foundation: Life Areas are now a canonical object/projection layer and visible organization lens, not a tab. Full surface transformation remains D13. |
 | D08 | North Stars / Dormant Ambitions Object Model | Completed foundation: North Stars / Dormant Ambitions are now canonical objects under Life Areas with deterministic local projection, privacy/accessibility fields, relationship hooks, and shaping metadata. Full detail/rail surfaces remain D13. |
 | D09 | One-Step Goals Object Model | Completed foundation: Task is now a standalone One-Step Goal model/projection with promotion/attachment/demotion receipt metadata, privacy/accessibility fields, Life Graph references, and Life Area hooks. Full UI/workflow integration remains D11-D14. |
-| D10 | Screen Contract Matrix Implementation Pass | Wire the screen matrix into implementation acceptance criteria before surface deltas. |
+| D10 | Screen Contract Matrix Implementation Pass | Completed contract gate: `ScreenContractRegistry` and `ScreenContractValidator` now cover screen-matrix rows, canonical five-tab IA, D03-D09 dependencies, density/size, accessibility/privacy, forbidden old IA/copy detection, external-surface contract status, and D11-D19 handoff ownership. Surface transformations remain owned by D11-D19. |
 | D11 | Today 2.0 Design Constitution Alignment | Add Today Plan Layer, One-Step Goals surfacing, planned-day view, and Constitution copy. |
 | D12 | Capture + Quiet Command Sheet Alignment | Align Capture with Needs a Place and make global command sheet feel like the Quiet Command Sheet. |
 | D13 | Goals / Life Areas / North Stars Transformation and Semantic Zoom | Add Life Areas, North Stars, One-Step Goals section, and accessible semantic zoom. |

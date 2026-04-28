@@ -28,7 +28,7 @@ Before non-trivial planning or implementation, read:
 14. [../review/VISUAL_REVIEW_CHECKLIST.md](../review/VISUAL_REVIEW_CHECKLIST.md) when visible UI, navigation, empty states, copy, or hierarchy changes
 15. [../review/FRICTION_LOG.md](../review/FRICTION_LOG.md) when observed product friction needs to be captured without expanding scope
 
-Current execution status is Batches 00-88 and D01-D09 complete for planning purposes, D10 / Screen Contract Matrix Implementation Pass next queued / next uncompleted, and original Batches 89-120 future planned roadmap work through the roadmap merge audit classifications. Do not skip ahead of the active delta queue unless direct user instructions explicitly change scope.
+Current execution status is Batches 00-88 and D01-D10 complete for planning purposes, D11 / Today 2.0 Design Constitution Alignment next queued / next uncompleted, and original Batches 89-120 future planned roadmap work through the roadmap merge audit classifications. Do not skip ahead of the active delta queue unless direct user instructions explicitly change scope.
 
 ## Product identity
 

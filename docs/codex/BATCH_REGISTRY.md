@@ -46,13 +46,13 @@ Use [../canon/Ambitions_2_0_Batch_Plan.md](../canon/Ambitions_2_0_Batch_Plan.md)
 
 ## Active Queue
 
-Current execution status: Ambitions 2.0 post-Batch-60 canon is adopted. Batches 00-88 and D01-D09 are complete for planning purposes. D10 / Screen Contract Matrix Implementation Pass is the next dependency-safe implementation batch from the Design Constitution delta/alignment backlog. Original Batches 89-120 remain future planned roadmap work only through the classifications and dependencies in [../canon/Ambitions_2_0_Roadmap_Merge_Audit.md](../canon/Ambitions_2_0_Roadmap_Merge_Audit.md).
+Current execution status: Ambitions 2.0 post-Batch-60 canon is adopted. Batches 00-88 and D01-D10 are complete for planning purposes. D11 / Today 2.0 Design Constitution Alignment is the next dependency-safe implementation batch from the Design Constitution delta/alignment backlog. Original Batches 89-120 remain future planned roadmap work only through the classifications and dependencies in [../canon/Ambitions_2_0_Roadmap_Merge_Audit.md](../canon/Ambitions_2_0_Roadmap_Merge_Audit.md).
 
 Docs-only reconciliation note: Design Constitution canon reconciliation was performed as a user-directed canon/design-system integration pass after Batch 88 planning status. It created the active design constitution and supporting matrices/specs without starting Batch 89 feature work, changing branch, changing app code, or claiming future implementation completion.
 
 Implementation gap audit note: A repo-wide Design Constitution implementation gap audit was added after roadmap verification. It preserves completed batch history and creates future delta/alignment batches for Constitution gaps without starting Batch 89 feature work or marking any delta complete.
 
-Roadmap merge audit note: The original Batches 89-120 were audited against D01-D26 after the Design Constitution. D01-D26 take precedence wherever there is conflict. Batch 89 is retained as future core-surface QA intent after D10-D21 or inside D26, not as the next runnable implementation batch.
+Roadmap merge audit note: The original Batches 89-120 were audited against D01-D26 after the Design Constitution. D01-D26 take precedence wherever there is conflict. Batch 89 is retained as future core-surface QA intent after the remaining D11-D21 surface/verification foundations or inside D26, not as the next runnable implementation batch.
 
 | Batch | Name | Status | Notes |
 | --- | --- | --- | --- |
@@ -111,8 +111,8 @@ These rows are planned future implementation work from the Design Constitution i
 | D07 | Life Areas Overview / Atlas Object Model | Completed | Added canonical Life Area / Life Areas Overview / Life Areas Atlas domain models, deterministic local projection over Life Graph goals, privacy/accessibility projections, and a minimal Goal Atlas preview adapter without adding a tab, North Stars, One-Step Goals, semantic zoom, or broad surface redesign. |
 | D08 | North Stars / Dormant Ambitions Object Model | Completed | Added canonical North Star / Dormant Ambition domain models, Life Area association, deterministic local projection, privacy-safe compact/redacted summaries, accessibility labels/values/hints, relationship hooks, and minimal Life Areas Atlas count integration without adding tabs, One-Step Goals, semantic zoom, detail rails, or surface redesign. |
 | D09 | One-Step Goals Object Model | Completed | Added canonical Task / One-Step Goal domain models, standalone Task vs contained Step semantics, deterministic local projection, privacy-safe compact/redacted summaries, accessibility labels/values/hints, promotion/attachment/demotion receipt metadata, Life Graph object activation, and minimal Life Areas Atlas count/reference hooks without adding a top-level Tasks tab, detail surface, or surface redesign. |
-| D10 | Screen Contract Matrix Implementation Pass | Planned / next | Depends on D03-D09. |
-| D11 | Today 2.0 Design Constitution Alignment | Planned | Depends on D04, D09-D10, Now State, and Plan believability. |
+| D10 | Screen Contract Matrix Implementation Pass | Completed | Added a screen-contract registry and validator covering Today, Goals, Goal Detail, Capture, Plan, You, Trust Center / What Ambitions Knows, detail/foundation screens, archive, and external-surface contracts. The tests lock the canonical five-tab shell, D03-D09 dependencies, density/size, accessibility/privacy requirements, forbidden old IA/copy detection, and D11-D19 handoff ownership without redesigning surfaces. |
+| D11 | Today 2.0 Design Constitution Alignment | Planned / next | Depends on D04, D09-D10, Now State, and Plan believability. |
 | D12 | Capture + Quiet Command Sheet Alignment | Planned | Depends on D06, D09-D10. |
 | D13 | Goals / Life Areas / North Stars Transformation and Semantic Zoom | Planned | Depends on D07-D10. |
 | D14 | Goal Detail Mission Control Lanes Alignment | Planned | Depends on D09-D10 and D13. |
