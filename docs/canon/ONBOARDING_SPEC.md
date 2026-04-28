@@ -11,8 +11,36 @@ Onboarding should get the user to one useful life object quickly.
 Ambitions should not start by asking for permissions, forcing a giant setup questionnaire, or explaining the whole operating system. The first session should prove the product promise:
 
 ```text
-My life feels more organized, and I know the next concrete step.
+My life feels organized, I know what matters now, and I know the next concrete step.
 ```
+
+User-facing category:
+
+```text
+Life organization system
+```
+
+Internal ambition:
+
+```text
+Personal life operating system / external brain
+```
+
+## Wave 1 Locked Decisions
+
+- Opening feeling: `My life feels organized`.
+- Immediate proof: `I know what matters now` and `I know the next concrete step`.
+- Life Areas are inferred/recommended and correctable, not required onboarding friction.
+- Default Life Areas: Career, Creative, Finance, Health, Home, Relationships, Education, Personal, Admin.
+- Default Life Areas can be renamed while preserving internal canonical type.
+- `North Star` is deeper-view language; use `long-term ambition` earlier.
+- A Goal is a meaningful outcome that may need a plan.
+- User-facing standalone action language is `Task`; internal/design term is `One-Step Goal`.
+- Tasks can exist without Goals, but Ambitions should suggest attaching/promoting when useful.
+- System rule: every item has a place.
+- Execution rules: every goal has a next step; every plan must be believable.
+- Emotional rule: the user never feels punished for drifting.
+- Product-shape rule: the app stays deep, not wide.
 
 ## First-Run Success Definition
 
@@ -33,6 +61,7 @@ A first-run session succeeds when the user has:
 - No dense explanation of the full app model.
 - No unverified accessibility, sync, automation, or memory claims.
 - User can skip or exit setup and still land in a safe usable app state.
+- Do not expose `North Star` too early; use simpler long-term ambition language if needed.
 
 ## Default Onboarding Flow
 
@@ -43,8 +72,15 @@ Purpose: Establish what Ambitions does in plain language.
 Primary content:
 
 ```text
-Organize what matters.
+Organize your life around what matters.
 Turn goals, tasks, plans, and real life into clear next steps.
+```
+
+Alternate shorter option:
+
+```text
+Organize what matters.
+Know what to do next.
 ```
 
 Primary action:
@@ -64,6 +100,7 @@ Rules:
 - Keep copy short.
 - Do not describe every feature.
 - Do not use hype language.
+- Do not reduce Ambitions to a goal app, planner, habit tracker, or calendar wrapper.
 
 ### Step 2: First Useful Input
 
@@ -100,6 +137,7 @@ Rules:
 - This is not a chat interface.
 - The input should feel like Capture / Quiet Command Sheet.
 - The user should be able to enter a goal, task, commitment, plan seed, or raw idea.
+- The first input should make the user feel their life is becoming more organized.
 
 ### Step 3: Compact Clarification
 
@@ -116,7 +154,7 @@ Goal / Task / Idea
 
 ```text
 Where does this belong?
-Career / Creative / Home / Finance / Personal
+Career / Creative / Finance / Health / Home / Relationships / Education / Personal / Admin
 ```
 
 ```text
@@ -129,6 +167,7 @@ Rules:
 - Ask at most two clarification rounds before creating something usable.
 - Do not expose the full domain model.
 - Let Ambitions proceed with a receipt if the user chooses not to clarify.
+- Life Area should be inferred/recommended and correctable, not required friction.
 
 ### Step 4: Route Receipt
 
@@ -143,7 +182,7 @@ Change
 ```
 
 ```text
-Saved as Task · Work · Tuesday
+Saved as Task · Career · Tuesday
 Next: Add it to Plan
 Change
 ```
@@ -166,6 +205,7 @@ Rules:
 - Receipts establish trust.
 - Avoid model/confidence language.
 - Show correction affordance.
+- Every item should have a place, even if the temporary place is Needs a Place.
 
 ### Step 5: First Next Step
 
@@ -179,6 +219,7 @@ If first object is a Goal:
 If first object is a Task:
 
 - offer `Add to Today`, `Schedule`, or `Keep for Later`
+- suggest attach/promote only when useful, not as mandatory friction
 
 If first object is an Idea/Seed:
 
@@ -193,6 +234,7 @@ Rules:
 - One primary action only.
 - Avoid long plans before the user asks.
 - Make the app feel useful immediately.
+- Every goal should gain or point toward one clear next step.
 
 ### Step 6: Light Personalization
 
@@ -223,12 +265,14 @@ Optional later:
 - Appearance: Dark / Light / System
 - Accent selection
 - Notification style: Essential / Balanced / Supportive
+- Rename Life Areas
 
 Rules:
 
 - Personalization is skippable.
 - Do not ask for every preference.
 - Do not mention ADHD Mode; user-facing language is Focus Support.
+- Renaming Life Areas should preserve internal canonical type.
 
 ### Step 7: Land In App
 
@@ -349,16 +393,25 @@ Onboarding is acceptable when:
 - User can create a Goal, Task, commitment, or idea from the same input pattern.
 - Route receipt appears after creation.
 - User can change the route.
+- Life Area is inferred/recommended and correctable.
 - No permissions are requested before explicit value/action.
 - User lands somewhere useful.
 - Skipping onboarding produces a safe empty state.
 - Dynamic Type and VoiceOver remain usable.
 - No unverified claims appear.
+- The experience proves organization, next action, and calm recovery without explaining the whole system.
+
+## Resolved Wave 1 Questions
+
+- Life Area is inferred/recommended and correctable, not required onboarding friction.
+- Default Life Areas are Career, Creative, Finance, Health, Home, Relationships, Education, Personal, Admin.
+- North Star should not be heavily exposed during onboarding.
+- Goal means a meaningful outcome that may need a plan.
+- Standalone action UI language is Task.
 
 ## Known Gaps / Future Questions
 
 - Should onboarding show one animated product preview or stay entirely input-first?
-- Should Life Area be required during onboarding, optional, or inferred?
 - Should first object creation default to Capture receipt or directly to Goal/Plan detail?
 - Should appearance setup happen during onboarding or only in You?
 - Should examples be personalized by selected Life Area?
