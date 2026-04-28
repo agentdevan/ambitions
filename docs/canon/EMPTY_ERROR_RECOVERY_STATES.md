@@ -2,7 +2,7 @@
 
 Status: Active canon consolidation layer.
 
-Purpose: Define product-wide state behavior so Ambitions feels polished outside the ideal path. This document expands the UX Writing Matrix into a screen-by-screen implementation reference and reflects product decision Waves 1-2.
+Purpose: Define product-wide state behavior so Ambitions feels polished outside the ideal path. This document expands the UX Writing Matrix into a screen-by-screen implementation reference and reflects product decision Waves 1-3.
 
 ## State Doctrine
 
@@ -27,6 +27,20 @@ Every non-ideal state should answer:
 - Reversible local changes should prefer receipt + undo.
 - Product/design language is `Completion Archive`; normal UI language is `Archive`.
 
+## Wave 3 Trust / Memory State Rules
+
+- Low-risk memories may be auto-created with visibility.
+- Sensitive/high-impact memories should be suggested for confirmation first.
+- Health, relationship/family, financial, location, calendar-derived, and sensitive Life Area memories require confirmation.
+- Users can pause memory learning globally and by category.
+- User can mark any Life Area sensitive.
+- Sensitive launch behavior: hide details in notifications/widgets, collapse details on Today, and use generic labels such as `Private item`.
+- No numerical Trust Score at launch.
+- Trust Center top status: `You are in control`.
+- User-facing memory section: `What Ambitions Knows`.
+- Object/type name: `Memory`.
+- Delete all memory requires confirmation and export/reminder first.
+
 ## Voice Rules
 
 Use language that is:
@@ -50,6 +64,7 @@ Avoid:
 - fake certainty
 - marketing claims
 - blame
+- numerical Trust Score language at launch
 
 ## Universal State Patterns
 
@@ -169,14 +184,14 @@ Open Plan
 
 | Surface | Empty state | Error state | Recovery state | Primary action |
 | --- | --- | --- | --- | --- |
-| Today | No planned work yet; explain that Today gets useful after one object exists | Could not load current plan; local data remains safe | Day drifted, no open window, overloaded, missed protected item | Capture Something / Save the Day |
+| Today | No planned work yet; explain that Today gets useful after one object exists | Could not load current plan; local data remains safe | Day drifted, no open window, overloaded, missed protected item, sensitive item collapsed | Capture Something / Save the Day |
 | Goals | No active goals; invite first meaningful goal or Life Area | Could not load goals; existing local data remains safe | Goal stale, blocked, waiting, or no Next Visible Step | Add Goal / Review Goal |
 | Goal Detail | Goal has no plan/proof/steps yet | Could not load detail; goal remains available from Goals | Goal at risk, blocked, scope too large, deadline no longer believable | Add First Step / Replan |
 | Capture | Nothing needs a place | Could not save capture; preserve user input | Low-confidence route, needs clarification, failed attachment | Save / Change Route |
 | Plan | No plan created yet | Calendar unavailable, plan still works manually | Week tight, needs protection, no longer holds, overloaded, conflict detected | Shape Week / Save the Week |
 | You | No reviews/memory/history yet | Could not load settings/memory; core app remains usable | Memory may need review, trust item needs correction | Review Memory / Open Trust Center |
-| Trust Center | No receipts or trust issues yet | Could not load trust history; privacy controls remain available | Memory stale, sync/export failed, permission denied | Inspect / Correct |
-| What Ambitions Knows | No memories yet | Could not load memory; no new memory applied | Memory stale or contradicted by correction | Add Preference / Review |
+| Trust Center | No receipts or trust issues yet; top status says You are in control | Could not load trust history; privacy controls remain available | Memory stale, sync/export failed, permission denied, learning paused | Inspect / Correct |
+| What Ambitions Knows | No memories yet | Could not load memory; no new memory applied | Memory stale, contradicted by correction, needs confirmation, learning paused | Add Preference / Review |
 | Reviews | No reviews yet | Could not build review; historical data remains safe | Carryover, drift, correction, plan no longer holds | Start Review |
 | Archive | No archived learning yet | Could not load archive; active work unaffected | Restore, inspect, or learn from ended/no-longer-relevant item | Open Item / Restore |
 
@@ -207,6 +222,31 @@ Rules:
 - Do not show a blank dashboard.
 - Do not imply the user is behind.
 - If there are captures/goals elsewhere, show one route to pull something into Today.
+
+### Sensitive Item Collapsed
+
+Copy:
+
+```text
+Private item
+```
+
+Supporting copy:
+
+```text
+Details are hidden here.
+```
+
+Actions:
+
+- `Open`
+- `Privacy`
+
+Rules:
+
+- Use this for sensitive Life Areas on Today at launch.
+- Do not expose sensitive details in compact summaries.
+- Do not claim Face ID/screenshot hiding/export exclusion until implemented and verified.
 
 ### Drifted Today
 
@@ -457,6 +497,25 @@ Actions:
 - `Keep Planning`
 - `Review Access`
 
+### Calendar Pattern Memory Needs Confirmation
+
+Copy:
+
+```text
+Ambitions noticed a calendar pattern. Confirm before it becomes memory.
+```
+
+Actions:
+
+- `Confirm`
+- `Not Now`
+- `What This Uses`
+
+Rules:
+
+- Calendar-derived patterns require confirmation before becoming memory.
+- Explain how it will be used.
+
 ### Week Tight
 
 Copy:
@@ -512,6 +571,28 @@ Rules:
 
 ## You / Trust / Memory States
 
+### Trust Center Top State
+
+Copy:
+
+```text
+You are in control.
+```
+
+Supporting rows:
+
+- Memory
+- Receipts
+- Privacy
+- Calendar access
+- Sync / Export
+- Accessibility verification
+
+Rules:
+
+- Do not use a numerical Trust Score at launch.
+- Use qualitative status sections.
+
 ### No Memory
 
 Copy:
@@ -528,8 +609,48 @@ Add Preference
 
 Rules:
 
+- Section is `What Ambitions Knows`.
+- Object/type is `Memory`.
 - Do not claim memory exists before it does.
 - Do not imply cloud memory unless implemented.
+
+### Memory Suggestion Needs Confirmation
+
+Copy:
+
+```text
+Ambitions noticed something that may help future plans.
+```
+
+Actions:
+
+- `Confirm`
+- `Not Now`
+- `What This Uses`
+
+Rules:
+
+- Use for sensitive/high-impact memory suggestions.
+- Required for health, relationship/family, financial, location, calendar-derived, and sensitive Life Area details.
+- Explain what was noticed and how it would be used.
+
+### Memory Learning Paused
+
+Copy:
+
+```text
+Memory learning is paused.
+```
+
+Actions:
+
+- `Resume`
+- `Review Existing Memory`
+
+Rules:
+
+- Pausing memory learning does not delete existing memory.
+- Support global and category-level states where implemented.
 
 ### Memory Needs Review
 
@@ -548,6 +669,26 @@ Actions:
 Rules:
 
 - `Delete` requires confirmation.
+
+### Delete All Memory
+
+Copy:
+
+```text
+This removes what Ambitions remembers about you. Your goals, tasks, and plans stay unless you delete them separately.
+```
+
+Actions:
+
+- `Export First` where export exists
+- `Delete Memory`
+- `Cancel`
+
+Rules:
+
+- Requires confirmation.
+- Offer export/reminder first where export exists.
+- If export is unavailable, say so plainly.
 
 ### Export Failed
 
@@ -638,6 +779,17 @@ Actions:
 - `Confirm`
 - `Cancel`
 
+If export is unavailable before delete-all-memory:
+
+```text
+Export is not available yet. You can still delete memory after confirmation.
+```
+
+Actions:
+
+- `Delete Memory`
+- `Cancel`
+
 ## Confirmation vs Receipt Rules
 
 Receipt + undo first:
@@ -652,10 +804,19 @@ Receipt + undo first:
 Confirmation required:
 
 - Delete memory.
+- Delete all memory.
 - Calendar write.
 - Major deadline changes.
 - Destructive actions.
 - External writes.
+- Sensitive/high-impact memory creation.
+
+Undo duration policy:
+
+- Quick UI actions: 5-10 seconds.
+- Route changes / attach / move: until screen exit or review tray dismissal.
+- Rename/display changes: 30 seconds.
+- Destructive/external writes: confirmation first, undo only if platform-safe.
 
 ## QA Acceptance Criteria
 
@@ -669,7 +830,11 @@ Every screen-level state must satisfy:
 - correction or route change where relevant
 - receipt after meaningful change
 - confirmation for destructive/external/major deadline changes
+- confirmation for sensitive/high-impact memory creation
 - receipt + undo for reversible local changes where safe
+- action-appropriate undo duration
+- sensitive Life Area details hidden/collapsed in launch surfaces
+- no numerical Trust Score at launch
 - Dynamic Type support
 - VoiceOver labels/values/hints
 - no color-only meaning
@@ -689,9 +854,26 @@ Every screen-level state must satisfy:
 - Completed goals stay visibly emphasized for 30 days by default; major goals may remain emphasized longer.
 - Product/design language is Completion Archive; normal UI language is Archive.
 
+## Resolved Wave 3 Questions
+
+- Low-risk memories can be auto-created with visibility; sensitive/high-impact memories are suggested for confirmation first.
+- Health, relationship/family, financial, location, calendar-derived, and sensitive Life Area memories require confirmation.
+- Display/density preferences, recovery preferences, and repeated task routing can auto-create with receipt/visibility.
+- Work/career memory is contextual.
+- Users can pause memory learning globally and by category.
+- User can mark any Life Area sensitive.
+- Sensitive launch behavior: hide details in notifications/widgets, collapse details on Today, generic `Private item` labels.
+- Advanced sensitive behavior later: Face ID, export exclusion, local-only enforcement, screenshot hiding.
+- Undo duration depends on action type.
+- No numerical Trust Score at launch; use qualitative status sections.
+- Trust Center top status is `You are in control`.
+- User-facing memory section is `What Ambitions Knows`; object/type name is `Memory`.
+- Users can delete all memory from Trust Center with confirmation and export/reminder first.
+
 ## Open Questions For Future Waves
 
 - Should Capture low-confidence choices be Task / Goal / Idea, or Task / Goal / Later?
 - Should Today empty state emphasize Capture or Goal creation first?
 - Which errors deserve inline treatment versus full-screen state?
 - Should archived ended/no-longer-relevant goals be recoverable by default?
+- Should memory suggestions appear as receipts, review cards, or Trust Center prompts?
