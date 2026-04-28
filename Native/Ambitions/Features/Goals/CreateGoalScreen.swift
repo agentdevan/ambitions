@@ -29,7 +29,7 @@ struct CreateGoalScreen: View {
                             .font(theme.typography.micro)
                             .foregroundStyle(theme.colors.accentWarm)
 
-                        Text("Strategy Composer")
+                        Text("Set up this goal")
                             .font(theme.typography.hero)
                             .foregroundStyle(theme.colors.textPrimary)
 
@@ -65,7 +65,7 @@ struct CreateGoalScreen: View {
                     AppCard(state: .warning) {
                         VStack(alignment: .leading, spacing: theme.spacing.sm) {
                             SectionHeader(
-                                title: "Strategy preview paused",
+                                title: "Goal preview paused",
                                 subtitle: "Ambitions could not shape the path just yet."
                             )
                             Text(message)
@@ -145,7 +145,7 @@ struct CreateGoalScreen: View {
         AppCard(state: heroVisualState) {
             VStack(alignment: .leading, spacing: theme.spacing.md) {
                 SectionHeader(
-                    eyebrow: "Setup posture",
+                    eyebrow: "Goal setup",
                     title: heroTitle,
                     subtitle: heroBody
                 ) {
@@ -158,7 +158,7 @@ struct CreateGoalScreen: View {
                         TagPill("Date \(selectedTargetDate)", icon: "calendar", state: .default)
                     }
                     if viewModel.captureID != nil {
-                        TagPill("Capture-led", icon: "tray.full", state: .default)
+                        TagPill("From Capture", icon: "tray.full", state: .default)
                     }
                 }
             }
@@ -173,7 +173,7 @@ struct CreateGoalScreen: View {
             VStack(alignment: .leading, spacing: theme.spacing.md) {
                 SectionHeader(
                     title: "Describe the goal plainly",
-                    subtitle: "Name the outcome in normal language. Ambitions will shape the first believable path before anything is committed."
+                    subtitle: "Name the outcome in normal language. Ambitions will shape a first path before anything is saved."
                 )
 
                 TextField("What do you want to make real?", text: $viewModel.title)
@@ -182,7 +182,7 @@ struct CreateGoalScreen: View {
                     .focused($isTitleFieldFocused)
                     .accessibilityIdentifier("create-goal.title-field")
 
-                Picker("Goal framing", selection: Binding<GoalMode?>(
+                Picker("Goal type", selection: Binding<GoalMode?>(
                     get: { viewModel.selectedMode },
                     set: { viewModel.selectedMode = $0 }
                 )) {
@@ -194,7 +194,7 @@ struct CreateGoalScreen: View {
                 .pickerStyle(.menu)
                 .disabled(viewModel.isSubmitting)
 
-                Text("The composer keeps the first read focused on clarity, feasibility, and believable pacing.")
+                Text("The first read keeps the goal focused on clarity, timing, and what can happen next.")
                     .font(theme.typography.caption)
                     .foregroundStyle(theme.colors.textSecondary)
             }
@@ -241,7 +241,7 @@ struct CreateGoalScreen: View {
         AppCard(state: preview.renderState.visualState) {
             VStack(alignment: .leading, spacing: theme.spacing.md) {
                 SectionHeader(
-                    eyebrow: "Ambition to path",
+                    eyebrow: "Goal to path",
                     title: preview.normalizedTitle,
                     subtitle: preview.summary
                 ) {
@@ -258,7 +258,7 @@ struct CreateGoalScreen: View {
                             .foregroundStyle(theme.colors.textPrimary)
 
                         if preview.pathStages.isEmpty {
-                            Text("Ambitions is holding off on path structure until the intake is clearer.")
+                            Text("Ambitions is holding off on a path until the goal is clearer.")
                                 .font(theme.typography.body)
                                 .foregroundStyle(theme.colors.textSecondary)
                         } else {
@@ -344,7 +344,7 @@ struct CreateGoalScreen: View {
 
                 if feasibility.details.isEmpty == false {
                     VStack(alignment: .leading, spacing: theme.spacing.xs) {
-                        Text("Why it reads this way")
+                        Text("Why it looks this way")
                             .font(theme.typography.bodyEmphasized)
                             .foregroundStyle(theme.colors.textPrimary)
                         ForEach(Array(feasibility.details.prefix(3).enumerated()), id: \.offset) { entry in
@@ -417,7 +417,7 @@ struct CreateGoalScreen: View {
             VStack(alignment: .leading, spacing: theme.spacing.md) {
                 SectionHeader(
                     title: trust.title,
-                    subtitle: "A calm first-layer read on what Ambitions is using and what it is not pretending to know."
+                    subtitle: "A calm first read on what Ambitions is using and what it is not pretending to know."
                 ) {
                     TagPill(trust.badgeTitle, state: trust.state)
                 }
@@ -436,8 +436,8 @@ struct CreateGoalScreen: View {
 
     private var heroSubtitle: String {
         viewModel.captureID == nil
-            ? "Shape a believable path before you commit the goal."
-            : "Use the capture as the seed, then confirm a believable path before it becomes a live goal."
+            ? "Shape a first path before you save the goal."
+            : "Use the capture as the starting point, then confirm the path before it becomes a live goal."
     }
 
     private var heroTitle: String {
@@ -451,7 +451,7 @@ struct CreateGoalScreen: View {
         case let .loaded(preview):
             switch preview.resultKind {
             case .planned, .starterPlanned:
-                return "A believable first path is visible"
+                return "A first path is visible"
             case .clarificationRequired:
                 return "One clarification keeps the path honest"
             case .blocked:
@@ -463,9 +463,9 @@ struct CreateGoalScreen: View {
     private var heroBody: String {
         switch viewModel.previewState {
         case .idle:
-            return "Start with the goal in plain language. Ambitions will keep the first read focused on clarity, pace, and feasibility."
+            return "Start with the goal in plain language. Ambitions will keep the first read focused on clarity, timing, and what can happen next."
         case .loading:
-            return "Ambitions is shaping the setup without committing anything yet."
+            return "Ambitions is shaping the setup without saving anything yet."
         case let .failed(message):
             return message
         case let .loaded(preview):
