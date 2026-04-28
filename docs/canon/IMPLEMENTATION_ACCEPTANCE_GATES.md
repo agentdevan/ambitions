@@ -2,7 +2,7 @@
 
 Status: Active canon consolidation layer.
 
-Purpose: Define what “done” means for future Ambitions implementation work. This document consolidates acceptance expectations from the roadmap, batch plan, visual review checklist, RC maturity plan, design contracts, accessibility posture, and systems architecture.
+Purpose: Define what “done” means for future Ambitions implementation work. This document consolidates acceptance expectations from the roadmap, batch plan, visual review checklist, RC maturity plan, design contracts, accessibility posture, systems architecture, and product decision Waves 1-2.
 
 ## Core Standard
 
@@ -36,10 +36,11 @@ Required reading order:
 
 1. `docs/codex/BATCH_REGISTRY.md`
 2. `docs/canon/SOURCE_OF_TRUTH_MAP.md`
-3. batch file if one exists
-4. relevant product/design/system docs from the source map
-5. current implementation files
-6. tests/previews/fixtures affected by the change
+3. `docs/canon/PRODUCT_DECISIONS.md`
+4. batch file if one exists
+5. relevant product/design/system docs from the source map
+6. current implementation files
+7. tests/previews/fixtures affected by the change
 
 ## Canon Alignment Gate
 
@@ -49,6 +50,7 @@ A change passes canon alignment when:
 - It follows `Ambitions_Design_Constitution.md` for design, IA, UX writing, interaction, trust, accessibility, and external-surface behavior.
 - It follows Product Architecture for surface ownership.
 - It follows Systems Architecture for engine ownership.
+- It follows `PRODUCT_DECISIONS.md` for resolved product wording/state decisions.
 - It does not recreate a standalone Insights tab, Habits tab, Tasks tab, or sixth Life Areas tab.
 - It preserves the locked shell: Today, Goals, Capture, Plan, You.
 - It distinguishes Profile compatibility code from user-facing `You` canon.
@@ -112,8 +114,10 @@ A copy/UI-language change passes when:
 
 - It is calm, adult, specific, clear, and non-shaming.
 - It uses approved labels such as `Why This`, `Why Now`, `Why Changed`, `What This Uses`, `Needs Confirmation`, and `Update This`.
+- It uses Wave 2 state language: `No Longer Relevant` for dropped goals, `End Goal` for intentional ending, `Park Goal` for pause, `Needs Protection` for fragile plan state, and `No Longer Holds` for broken plan state.
 - It avoids AI/model terminology in normal UI.
 - It avoids shame language.
+- It avoids exposing `Dropped`, `Fragile`, or `Broken` as normal user-facing copy unless the context explicitly requires internal/debug language.
 - Buttons are verb-led and specific.
 - Empty/error/recovery states say what happened, what remains safe, and what action follows.
 - User-facing claims are backed by implementation evidence.
@@ -123,9 +127,13 @@ A copy/UI-language change passes when:
 A trust-sensitive change passes when:
 
 - Meaningful actions create receipts.
-- External writes require confirmation.
+- Ordinary reversible local changes prefer receipt + undo.
+- Destructive actions, external writes, and major deadline changes require confirmation.
+- Calendar write requires confirmation.
+- Memory deletion requires confirmation.
 - Memory is visible, editable, correctable, and deletable where safe.
 - Explanation distinguishes evidence from assumption.
+- Goal Weather correction happens through inputs, not direct manual override.
 - Sensitive details hide by default in external surfaces.
 - Permission prompts occur only after relevant user action.
 - Sync/export/accessibility/platform claims are truthful.
@@ -159,6 +167,9 @@ A screen or flow passes this gate when it handles:
 - unsupported future action
 - recovery / drift
 - destructive confirmation where needed
+- external-write confirmation where needed
+- major-deadline-change confirmation where needed
+- receipt + undo for reversible local changes where safe
 
 The state must offer one useful next action and no dead end.
 
@@ -173,6 +184,7 @@ A data/model change passes when:
 - It emits Event Ledger / receipt history only for actual executed changes.
 - It distinguishes representation-only future commands from real executed mutations.
 - It does not introduce duplicate stores for shared objects.
+- It preserves internal separation between `cancelled` and `dropped` where the domain model requires it, even if launch UI simplifies wording.
 
 ## Test / Validation Gate
 
@@ -206,6 +218,7 @@ A rich UI or system change passes when:
 A change passes documentation gate when:
 
 - The relevant source-of-truth doc is updated only if doctrine changed.
+- `PRODUCT_DECISIONS.md` is updated when a product ambiguity is resolved.
 - Batch registry/status is updated only when status changed.
 - New docs are added to the right index.
 - Superseded docs are marked historical rather than silently contradicted.
@@ -221,9 +234,10 @@ A batch is complete only when:
 4. Tests or validation appropriate to the change were run or explicitly not run.
 5. Visual/UX/accessibility acceptance is satisfied for user-visible work.
 6. Empty/error/recovery states are not broken.
-7. Completion summary distinguishes implemented behavior from planned future canon.
-8. `BATCH_REGISTRY.md` is updated if the batch status changed.
-9. Follow-up work is captured without moving the active batch prematurely.
+7. Confirmation/receipt behavior matches trust gates.
+8. Completion summary distinguishes implemented behavior from planned future canon.
+9. `BATCH_REGISTRY.md` is updated if the batch status changed.
+10. Follow-up work is captured without moving the active batch prematurely.
 
 ## Red Flags
 
@@ -233,8 +247,11 @@ Stop or revise if a change:
 - reintroduces Insights, Habits, or Tasks as standalone top-level surfaces
 - requests calendar permission during onboarding
 - silently changes calendar/user data
+- silently changes major deadlines
+- deletes memory without confirmation
 - creates duplicate now/plan/recovery/goal-health logic
 - uses AI/model terminology in normal UI
+- uses `Dropped`, `Fragile`, or `Broken` as normal user-facing copy when softer Wave 2 labels apply
 - claims sync, memory, automation, or accessibility that is not verified
 - breaks local-first behavior
 - removes correction/undo paths from meaningful actions
@@ -270,6 +287,7 @@ Use this structure for Codex completion summaries:
 - Accessibility:
 - Empty/error/recovery:
 - Trust/privacy:
+- Confirmation/receipt behavior:
 
 ## Remaining Gaps
 - ...
