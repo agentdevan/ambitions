@@ -2,7 +2,7 @@
 
 Status: Active canon consolidation layer.
 
-Purpose: Make the Ambitions execution lifecycle explicit enough for implementation, QA, and future Codex batches. This document consolidates lifecycle truth from Product Architecture, Systems Architecture, Visual System, Intelligence Standards, the Design Constitution, and Wave 1 product decisions.
+Purpose: Make the Ambitions execution lifecycle explicit enough for implementation, QA, and future Codex batches. This document consolidates lifecycle truth from Product Architecture, Systems Architecture, Visual System, Intelligence Standards, the Design Constitution, and product decision Waves 1-2.
 
 ## Core Doctrine
 
@@ -16,6 +16,19 @@ Every goal has a next step.
 Every plan must be believable.
 The user never feels punished for drifting.
 The app stays deep, not wide.
+```
+
+Wave 2 state-language rules:
+
+```text
+Internal Dropped state renders as No Longer Relevant in normal UI.
+Cancelled and Dropped are internally separate, but launch UI may simplify.
+Intentional goal ending action: End Goal, then ask reason.
+Intentional pause action: Park Goal. State: Parked.
+Goal Weather is corrected through inputs, not direct manual override.
+Internal Plan states may be strong; UI labels should be softer.
+Destructive actions, external writes, and major deadline changes require confirmation.
+Reversible local changes prefer receipt + undo.
 ```
 
 Hierarchy:
@@ -60,7 +73,7 @@ Capture
 -> Reflow Reality
 -> Review
 -> Learn / Correct
--> Complete / Park / Cancel / Archive
+-> Complete / Park / End / Archive
 ```
 
 Every meaningful object should have:
@@ -79,20 +92,20 @@ A Goal is a meaningful outcome that may need a plan.
 
 ### Goal states
 
-| State | Meaning | User-facing behavior |
-| --- | --- | --- |
-| Seed | Possible goal, not yet committed | Lives in Capture, Life Area, or Goal seed area; can be clarified or promoted. |
-| Active | Current committed outcome | Appears in Goals, Plan, Today when relevant, and Goal Detail. |
-| Protected | Active goal needing defense from distraction or drift | Gets elevated in Today/Plan and Goal Weather explanation. |
-| Waiting | Goal depends on outside event/person/info | Removed from unnecessary daily pressure; remains visible as waiting. |
-| Blocked | Goal cannot move until blocker resolves | Shows blocker, recovery, and unblock path. |
-| Parked | Intentionally paused | Preserved without shame; can resume later. |
-| Completed | Successfully finished | Moves to Completion Archive with proof and final review. |
-| Cancelled | Intentionally ended | Preserves reason and learning; not treated as trash. |
-| Dropped | Ended through non-continuation or relevance loss | Preserves why it drifted/died and what was learned. |
-| Merged | Folded into a larger or related goal | Creates decision receipt and pointer to new owner. |
-| Replaced | Superseded by a better goal/path | Creates decision receipt and pointer to replacement. |
-| Archived | Preserved historical object | Searchable/reviewable learning artifact. |
+| Internal state | Preferred UI label | Meaning | User-facing behavior |
+| --- | --- | --- | --- |
+| Seed | Seed / Idea | Possible goal, not yet committed | Lives in Capture, Life Area, or Goal seed area; can be clarified or promoted. |
+| Active | Active | Current committed outcome | Appears in Goals, Plan, Today when relevant, and Goal Detail. |
+| Protected | Protected | Active goal needing defense from distraction or drift | Gets elevated in Today/Plan and Goal Weather explanation. |
+| Waiting | Waiting | Goal depends on outside event/person/info | Removed from unnecessary daily pressure; remains visible as waiting. |
+| Blocked | Blocked | Goal cannot move until blocker resolves | Shows blocker, recovery, and unblock path. |
+| Parked | Parked | Intentionally paused | Preserved without shame; can resume later. |
+| Completed | Completed | Successfully finished | Remains visibly emphasized for 30 days by default, then moves toward Archive/Completion Archive treatment. Major goals may remain emphasized longer. |
+| Cancelled | Ended | Intentionally ended | User action is `End Goal`; preserves reason and learning; not treated as trash. |
+| Dropped | No Longer Relevant | Ended through non-continuation or relevance loss | Preserves why it drifted/died and what was learned without judgmental wording. |
+| Merged | Merged | Folded into a larger or related goal | Creates decision receipt and pointer to new owner. |
+| Replaced | Replaced | Superseded by a better goal/path | Creates decision receipt and pointer to replacement. |
+| Archived | Archive | Preserved historical object | Searchable/reviewable learning artifact. |
 
 ### Goal state transitions
 
@@ -129,6 +142,10 @@ Rules:
 - Every Blocked or Waiting goal should show what it is waiting on.
 - Every Parked, Cancelled, Dropped, Merged, or Replaced goal should create a Decision Trail entry.
 - Completed is not the same as Cancelled or Dropped.
+- Cancelled and Dropped remain internally separate, but launch UI may simplify.
+- `Dropped` should usually render as `No Longer Relevant` in normal UI.
+- `End Goal` is the general intentional-ending action and should ask the reason.
+- `Park Goal` is the pause action and creates the Parked state.
 - Archive is not trash.
 - Goal recovery must never punish the user for drifting.
 
@@ -147,6 +164,8 @@ Goal Weather is the qualitative user-facing signal for goal health. It is not a 
 Rules:
 
 - Weather must be explainable through Why This / Why Changed.
+- Users should not manually override weather directly.
+- Users should be able to correct inputs that affect weather: deadline, proof, blocker, next step, scope, waiting state, assumptions.
 - Avoid fake precision.
 - Do not use childish weather graphics.
 - Weather should influence Plan believability and Today priority without silently mutating state.
@@ -186,17 +205,17 @@ Rules:
 
 Plan states:
 
-| State | Meaning |
-| --- | --- |
-| Draft | Plan is being shaped. |
-| Believable | Plan appears to fit current constraints. |
-| Tight | Plan can hold, but with pressure. |
-| Fragile | Plan is likely to break without change. |
-| Broken | Plan no longer holds. |
-| Reflowing | User or system is adjusting plan after reality changed. |
-| Saved | Plan accepted for day/week. |
-| Reviewed | Plan outcome was reviewed. |
-| Archived | Historical plan record. |
+| Internal state | Preferred UI label | Meaning |
+| --- | --- | --- |
+| Draft | Draft | Plan is being shaped. |
+| Believable | Believable | Plan appears to fit current constraints. |
+| Tight | Tight | Plan can hold, but with pressure. |
+| Fragile | Needs Protection | Plan is likely to break without change. |
+| Broken | No Longer Holds | Plan no longer holds. |
+| Reflowing | Adjusting | User or system is adjusting plan after reality changed. |
+| Saved | Saved | Plan accepted for day/week. |
+| Reviewed | Reviewed | Plan outcome was reviewed. |
+| Archived | Archive | Historical plan record. |
 
 Plan flow:
 
@@ -215,9 +234,12 @@ Goals / Tasks / Rituals / Commitments enter Plan
 Rules:
 
 - Every plan must communicate whether it is believable.
+- Internal states can remain strong for logic and QA.
+- UI should generally render `Fragile` as `Needs Protection` and `Broken` as `No Longer Holds`.
 - Plan owns calendar permission.
 - Plan must work without calendar access.
 - Calendar write always requires explicit confirmation.
+- Major deadline changes require confirmation or an explicit reviewed change flow.
 - Plan should not silently reschedule.
 - Major Plan Treaty changes create Decision Trail notes.
 - Recovery language must stay non-shaming.
@@ -264,6 +286,7 @@ Rules:
 - A Goal can be demoted to a Task when the structure was too heavy, with a receipt.
 - No top-level Tasks tab.
 - Normal UI says `Task`; internal/design canon can say `One-Step Goal`.
+- Mark Done, Move task, Park task, Attach task to goal, Rename Life Area, and Change display density should prefer receipt + undo.
 
 ## Step Lifecycle
 
@@ -349,6 +372,8 @@ Rules:
 
 - Decision Trail is the user-facing version of meaningful change history.
 - Decisions should make changed plans feel intelligent and dignified, not shameful.
+- Destructive actions, external writes, and major deadline changes require confirmation.
+- Ordinary local reversible changes should prefer receipt + undo.
 
 ## Receipt Lifecycle
 
@@ -371,11 +396,28 @@ Receipt anatomy:
 - correction route if relevant
 - timestamp/source when useful
 
+Receipt + undo first:
+
+- Mark Done.
+- Move task.
+- Park task.
+- Attach task to goal.
+- Rename Life Area.
+- Change display density.
+
+Confirmation required:
+
+- Delete memory.
+- Calendar write.
+- Major deadline changes.
+- Other destructive actions.
+
 Rules:
 
 - Receipts are not generic toasts.
 - Receipts are searchable trust history.
 - Sensitive receipt details hide by default.
+- Do not over-confirm reversible local actions.
 
 ## Review Lifecycle
 
@@ -449,6 +491,28 @@ Rules:
 - Internal canonical type should remain stable for routing and intelligence.
 - Items can temporarily exist without confirmed Life Area when routing is uncertain.
 - Smart Attachment receipts should allow Life Area correction.
+- Renaming Life Area should prefer receipt + undo, not confirmation.
+
+## Archive / Completion Archive
+
+Product/design language:
+
+```text
+Completion Archive
+```
+
+Normal UI language:
+
+```text
+Archive
+```
+
+Rules:
+
+- Archive preserves learning; it is not trash.
+- Completed goals remain visibly emphasized for 30 days by default.
+- Major completed goals may remain emphasized longer depending on importance.
+- Cancelled, No Longer Relevant, Merged, Replaced, and Parked histories should preserve reason, proof, and decision trail.
 
 ## Acceptance Criteria
 
@@ -459,7 +523,7 @@ A lifecycle implementation is acceptable only when:
 - Major path/goal/plan changes create decisions.
 - Top-level screens remain calm and do not expose lifecycle machinery as clutter.
 - Detail screens provide explanation and correction.
-- Archived/completed/cancelled/dropped objects preserve learning.
+- Archived/completed/cancelled/no-longer-relevant objects preserve learning.
 - QA can distinguish implemented behavior from planned canon.
 - The user can recover from drift without punitive language.
 - New depth is added through drill-downs/contextual intelligence rather than unnecessary top-level surfaces.
@@ -473,11 +537,22 @@ A lifecycle implementation is acceptable only when:
 - Default Life Areas are Career, Creative, Finance, Health, Home, Relationships, Education, Personal, Admin.
 - Default Life Areas can be renamed while keeping canonical type.
 
+## Resolved Wave 2 Questions
+
+- Internal `Dropped` renders as `No Longer Relevant` in normal UI.
+- Cancelled and Dropped remain internally separate; launch UI may simplify.
+- Intentional goal ending action is `End Goal`, followed by a reason.
+- Intentional pause action is `Park Goal`; state is Parked.
+- Goal Weather is corrected through inputs, not direct manual override.
+- Internal Plan states can be strong; UI should use `Needs Protection` and `No Longer Holds`.
+- Destructive actions, external writes, and major deadline changes require confirmation.
+- Mark Done, Move task, Park task, Attach task to goal, Rename Life Area, and Change display density prefer receipt + undo.
+- Completed goals stay visibly emphasized for 30 days by default; major goals may remain emphasized longer.
+- Product/design language is Completion Archive; normal UI language is Archive.
+
 ## Open Questions For Future Waves
 
-- Should `Dropped` be user-facing, or should user-facing copy say `No Longer Relevant`?
-- Should `Cancelled` and `Dropped` be separate at launch?
-- Which state changes require confirmation versus receipt + undo?
-- How long should completed goals remain visible before archive emphasis changes?
-- Should Goal Weather be manually overrideable?
-- Should Plan states use `Tight / Fragile / Broken` or softer labels?
+- Which state changes should create a visible Decision Trail entry versus only a receipt?
+- How detailed should the End Goal reason picker be?
+- How long should undo remain available by action type?
+- Which memories require explicit confirmation before use?
