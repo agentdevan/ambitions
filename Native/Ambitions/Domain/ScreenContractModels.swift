@@ -489,7 +489,7 @@ enum ScreenContractRegistry {
         evidenceAnchors: [
             screenMatrixAnchor,
             accessibilityMatrixAnchor,
-            .init(kind: .sourceSurface, path: "Native/Ambitions/Features/Goals/GoalsOverview.swift", note: "Current Goals surface"),
+            .init(kind: .sourceSurface, path: "Native/Ambitions/Features/Goals/GoalsScreen.swift", note: "Current Goals surface"),
             .init(kind: .sourceService, path: "Native/Ambitions/Features/Goals/GoalsFeatureService.swift", note: "Goals projection source"),
             .init(kind: .testCoverage, path: "Native/AmbitionsTests/Goals", note: "Focused Goals tests")
         ]

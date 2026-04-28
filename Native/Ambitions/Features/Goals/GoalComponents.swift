@@ -207,6 +207,330 @@ struct GoalStateChipsCard: View {
     }
 }
 
+struct GoalsLifeAreasPanel: View {
+    @Environment(\.ambitionTheme) private var theme
+
+    let state: GoalsLifeAreasOverviewState
+    let zoomMode: GoalsSemanticZoomMode
+    let onZoomModeChange: (GoalsSemanticZoomMode) -> Void
+
+    var body: some View {
+        AppCard {
+            VStack(alignment: .leading, spacing: theme.spacing.md) {
+                SectionHeader(title: state.title, subtitle: state.subtitle)
+
+                SegmentedFilterBar(
+                    items: state.availableZoomModes,
+                    selection: Binding(
+                        get: { zoomMode },
+                        set: onZoomModeChange
+                    )
+                ) { $0.title }
+                .accessibilityIdentifier("goals.semantic-zoom-mode")
+                .accessibilityLabel("Life Areas view")
+                .accessibilityHint("Switches between map and list presentations.")
+
+                if state.items.isEmpty {
+                    EmptyStateCard(
+                        title: state.emptyTitle,
+                        message: state.emptyMessage,
+                        icon: "square.grid.2x2"
+                    )
+                } else if zoomMode == .map {
+                    LazyVGrid(columns: [GridItem(.adaptive(minimum: 172), spacing: theme.spacing.sm)], alignment: .leading, spacing: theme.spacing.sm) {
+                        ForEach(state.items) { item in
+                            LifeAreaMapTile(item: item)
+                        }
+                    }
+                } else {
+                    VStack(alignment: .leading, spacing: theme.spacing.sm) {
+                        ForEach(state.items) { item in
+                            LifeAreaListRow(item: item)
+                        }
+                    }
+                }
+            }
+        }
+        .accessibilityElement(children: .contain)
+        .accessibilityLabel(state.accessibilityLabel)
+        .accessibilityValue(state.accessibilityValue)
+        .accessibilityHint(state.accessibilityHint)
+        .accessibilityIdentifier("goals.life-areas-panel")
+        .ambitionPanelAccessibility()
+    }
+}
+
+private struct LifeAreaMapTile: View {
+    @Environment(\.ambitionTheme) private var theme
+
+    let item: GoalsLifeAreaItemState
+
+    var body: some View {
+        VStack(alignment: .leading, spacing: theme.spacing.xs) {
+            HStack(alignment: .top, spacing: theme.spacing.xs) {
+                VStack(alignment: .leading, spacing: theme.spacing.xxxs) {
+                    Text(item.title)
+                        .font(theme.typography.bodyEmphasized)
+                        .foregroundStyle(theme.colors.textPrimary)
+                    Text(item.subtitle)
+                        .font(theme.typography.caption)
+                        .foregroundStyle(theme.colors.textSecondary)
+                        .lineLimit(2)
+                }
+                Spacer(minLength: theme.spacing.xs)
+                TagPill(item.nextFocus, state: item.state)
+                    .lineLimit(2)
+            }
+
+            HStack(spacing: theme.spacing.xs) {
+                countPill(title: "Goals", count: item.activeGoalCount, state: item.state)
+                countPill(title: "North Stars", count: item.northStarCount, state: item.northStarCount > 0 ? .selected : .default)
+                countPill(title: "One-Step", count: item.oneStepGoalCount, state: item.oneStepGoalCount > 0 ? .selected : .default)
+            }
+        }
+        .frame(maxWidth: .infinity, minHeight: 132, alignment: .topLeading)
+        .padding(theme.spacing.sm)
+        .background(RoundedRectangle(cornerRadius: theme.radius.md, style: .continuous).fill(theme.colors.surfaceOverlay))
+        .overlay(RoundedRectangle(cornerRadius: theme.radius.md, style: .continuous).stroke(theme.stateStyle(for: item.state).stroke, lineWidth: 1))
+        .accessibilityElement(children: .ignore)
+        .accessibilityLabel(item.accessibilityLabel)
+        .accessibilityValue(item.accessibilityValue)
+        .accessibilityHint(item.accessibilityHint)
+    }
+
+    @ViewBuilder
+    private func countPill(title: String, count: Int, state: AmbitionVisualState) -> some View {
+        TagPill("\(title) \(count)", state: count == 0 ? .default : state)
+            .accessibilityLabel("\(count) \(title)")
+    }
+}
+
+private struct LifeAreaListRow: View {
+    @Environment(\.ambitionTheme) private var theme
+
+    let item: GoalsLifeAreaItemState
+
+    var body: some View {
+        VStack(alignment: .leading, spacing: theme.spacing.xs) {
+            HStack(alignment: .firstTextBaseline, spacing: theme.spacing.sm) {
+                VStack(alignment: .leading, spacing: theme.spacing.xxxs) {
+                    Text(item.title)
+                        .font(theme.typography.bodyEmphasized)
+                        .foregroundStyle(theme.colors.textPrimary)
+                    Text(item.nextFocus)
+                        .font(theme.typography.caption)
+                        .foregroundStyle(theme.colors.textSecondary)
+                }
+                Spacer()
+                TagPill(item.subtitle, state: item.state)
+            }
+
+            if item.goalReferences.isEmpty == false {
+                VStack(alignment: .leading, spacing: theme.spacing.xs) {
+                    ForEach(item.goalReferences) { goal in
+                        HStack(alignment: .top, spacing: theme.spacing.xs) {
+                            Image(systemName: "scope")
+                                .font(.system(size: theme.icon.smallSize, weight: theme.icon.symbolWeight))
+                                .foregroundStyle(theme.stateStyle(for: goal.state).accent)
+                            VStack(alignment: .leading, spacing: theme.spacing.xxxs) {
+                                Text(goal.title)
+                                    .font(theme.typography.caption)
+                                    .foregroundStyle(theme.colors.textPrimary)
+                                Text(goal.subtitle)
+                                    .font(theme.typography.caption)
+                                    .foregroundStyle(theme.colors.textSecondary)
+                                    .lineLimit(2)
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        .frame(maxWidth: .infinity, alignment: .leading)
+        .padding(theme.spacing.sm)
+        .background(RoundedRectangle(cornerRadius: theme.radius.md, style: .continuous).fill(theme.colors.surfaceOverlay))
+        .accessibilityElement(children: .ignore)
+        .accessibilityLabel(item.accessibilityLabel)
+        .accessibilityValue(item.accessibilityValue)
+        .accessibilityHint(item.accessibilityHint)
+    }
+}
+
+struct GoalsNorthStarsRailCard: View {
+    @Environment(\.ambitionTheme) private var theme
+
+    let state: GoalsNorthStarsRailState
+
+    var body: some View {
+        AppCard {
+            VStack(alignment: .leading, spacing: theme.spacing.md) {
+                SectionHeader(title: state.title, subtitle: state.subtitle)
+
+                if state.items.isEmpty {
+                    EmptyStateCard(
+                        title: state.emptyTitle,
+                        message: state.emptyMessage,
+                        icon: "north.star"
+                    )
+                } else {
+                    ScrollView(.horizontal, showsIndicators: false) {
+                        HStack(alignment: .top, spacing: theme.spacing.sm) {
+                            ForEach(state.items) { item in
+                                NorthStarRailItem(item: item)
+                                    .frame(width: 240)
+                            }
+                        }
+                        .padding(.vertical, 1)
+                    }
+                }
+            }
+        }
+        .accessibilityElement(children: .contain)
+        .accessibilityLabel(state.accessibilityLabel)
+        .accessibilityValue(state.accessibilityValue)
+        .accessibilityHint(state.accessibilityHint)
+        .accessibilityIdentifier("goals.north-stars-rail")
+        .ambitionPanelAccessibility()
+    }
+}
+
+private struct NorthStarRailItem: View {
+    @Environment(\.ambitionTheme) private var theme
+
+    let item: GoalsNorthStarRailItemState
+
+    var body: some View {
+        VStack(alignment: .leading, spacing: theme.spacing.xs) {
+            HStack(alignment: .top, spacing: theme.spacing.xs) {
+                Image(systemName: "north.star")
+                    .font(.system(size: theme.icon.mediumSize, weight: theme.icon.symbolWeight))
+                    .foregroundStyle(theme.stateStyle(for: item.state).accent)
+                VStack(alignment: .leading, spacing: theme.spacing.xxxs) {
+                    Text(item.title)
+                        .font(theme.typography.bodyEmphasized)
+                        .foregroundStyle(theme.colors.textPrimary)
+                    Text(item.lifeAreaLabel)
+                        .font(theme.typography.caption)
+                        .foregroundStyle(theme.colors.textTertiary)
+                }
+            }
+
+            Text(item.subtitle)
+                .font(theme.typography.caption)
+                .foregroundStyle(theme.colors.textSecondary)
+                .lineLimit(3)
+
+            HStack(spacing: theme.spacing.xs) {
+                TagPill(item.postureLabel, state: item.state)
+                TagPill(item.readinessLabel, state: item.canBeShaped ? .selected : .default)
+            }
+
+            Text(item.canBeShaped ? item.shapeIntoGoalLabel : item.suggestedNextAction)
+                .font(theme.typography.caption)
+                .foregroundStyle(theme.colors.textSecondary)
+                .fixedSize(horizontal: false, vertical: true)
+        }
+        .padding(theme.spacing.sm)
+        .background(RoundedRectangle(cornerRadius: theme.radius.md, style: .continuous).fill(theme.colors.surfaceOverlay))
+        .overlay(RoundedRectangle(cornerRadius: theme.radius.md, style: .continuous).stroke(theme.stateStyle(for: item.state).stroke, lineWidth: 1))
+        .accessibilityElement(children: .ignore)
+        .accessibilityLabel(item.accessibilityLabel)
+        .accessibilityValue(item.accessibilityValue)
+        .accessibilityHint(item.accessibilityHint)
+    }
+}
+
+struct GoalsOneStepGoalsPanel: View {
+    @Environment(\.ambitionTheme) private var theme
+
+    let state: GoalsOneStepGoalsPanelState
+    let onPromote: (GoalsOneStepGoalPanelItemState) -> Void
+
+    var body: some View {
+        AppCard {
+            VStack(alignment: .leading, spacing: theme.spacing.md) {
+                SectionHeader(title: state.title, subtitle: state.subtitle)
+
+                if state.items.isEmpty {
+                    EmptyStateCard(
+                        title: state.emptyTitle,
+                        message: state.emptyMessage,
+                        icon: "checkmark.circle"
+                    )
+                } else {
+                    VStack(alignment: .leading, spacing: theme.spacing.sm) {
+                        ForEach(state.items) { item in
+                            OneStepGoalPanelRow(item: item, onPromote: onPromote)
+                        }
+                    }
+                }
+            }
+        }
+        .accessibilityElement(children: .contain)
+        .accessibilityLabel(state.accessibilityLabel)
+        .accessibilityValue(state.accessibilityValue)
+        .accessibilityHint(state.accessibilityHint)
+        .accessibilityIdentifier("goals.one-step-goals-panel")
+        .ambitionPanelAccessibility()
+    }
+}
+
+private struct OneStepGoalPanelRow: View {
+    @Environment(\.ambitionTheme) private var theme
+
+    let item: GoalsOneStepGoalPanelItemState
+    let onPromote: (GoalsOneStepGoalPanelItemState) -> Void
+
+    var body: some View {
+        VStack(alignment: .leading, spacing: theme.spacing.sm) {
+            HStack(alignment: .top, spacing: theme.spacing.sm) {
+                VStack(alignment: .leading, spacing: theme.spacing.xxxs) {
+                    Text(item.title)
+                        .font(theme.typography.bodyEmphasized)
+                        .foregroundStyle(theme.colors.textPrimary)
+                    Text(item.subtitle)
+                        .font(theme.typography.caption)
+                        .foregroundStyle(theme.colors.textSecondary)
+                        .lineLimit(2)
+                }
+                Spacer()
+                VStack(alignment: .trailing, spacing: theme.spacing.xxxs) {
+                    TagPill(item.statusLabel, state: item.state)
+                    Text(item.areaLabel)
+                        .font(theme.typography.micro)
+                        .foregroundStyle(theme.colors.textTertiary)
+                }
+            }
+
+            HStack(alignment: .center, spacing: theme.spacing.xs) {
+                if let timingLabel = item.timingLabel {
+                    TagPill(timingLabel, icon: "calendar", state: item.state)
+                }
+                TagPill(item.suggestedNextAction, state: item.state)
+                Spacer(minLength: theme.spacing.xs)
+                if item.canPromoteToGoal {
+                    Button {
+                        onPromote(item)
+                    } label: {
+                        Label(item.promoteLabel, systemImage: "arrow.up.right.circle")
+                            .font(theme.typography.caption)
+                    }
+                    .buttonStyle(AmbitionPressableButtonStyle(state: .selected))
+                    .accessibilityHint("Opens goal creation. No Goal is created automatically.")
+                }
+            }
+        }
+        .frame(maxWidth: .infinity, alignment: .leading)
+        .padding(theme.spacing.sm)
+        .background(RoundedRectangle(cornerRadius: theme.radius.md, style: .continuous).fill(theme.colors.surfaceOverlay))
+        .overlay(RoundedRectangle(cornerRadius: theme.radius.md, style: .continuous).stroke(theme.stateStyle(for: item.state).stroke, lineWidth: 1))
+        .accessibilityElement(children: .ignore)
+        .accessibilityLabel(item.accessibilityLabel)
+        .accessibilityValue(item.accessibilityValue)
+        .accessibilityHint(item.accessibilityHint)
+    }
+}
+
 struct GoalsBoardBandSection: View {
     @Environment(\.ambitionTheme) private var theme
 

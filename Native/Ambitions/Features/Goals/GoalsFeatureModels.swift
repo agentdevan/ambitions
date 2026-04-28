@@ -241,6 +241,157 @@ struct GoalAtlasPreviewState: Sendable, Hashable {
     let groups: [GoalAtlasPreviewGroup]
 }
 
+enum GoalsSemanticZoomMode: String, CaseIterable, Hashable, Sendable {
+    case map
+    case list
+
+    var title: String {
+        switch self {
+        case .map:
+            return "Map"
+        case .list:
+            return "List"
+        }
+    }
+}
+
+struct GoalsLifeAreaItemState: Identifiable, Sendable, Hashable {
+    let id: String
+    let title: String
+    let subtitle: String
+    let nextFocus: String
+    let activeGoalCount: Int
+    let parkedGoalCount: Int
+    let northStarCount: Int
+    let oneStepGoalCount: Int
+    let goalReferences: [GoalAtlasPreviewItem]
+    let state: AmbitionVisualState
+    let accessibilityLabel: String
+    let accessibilityValue: String
+    let accessibilityHint: String
+}
+
+struct GoalsLifeAreasOverviewState: Sendable, Hashable {
+    let title: String
+    let subtitle: String
+    let items: [GoalsLifeAreaItemState]
+    let contentAreaCount: Int
+    let emptyTitle: String
+    let emptyMessage: String
+    let availableZoomModes: [GoalsSemanticZoomMode]
+    let supportsListFallback: Bool
+    let maxVisibleAreas: Int
+    let accessibilityLabel: String
+    let accessibilityValue: String
+    let accessibilityHint: String
+
+    static var empty: GoalsLifeAreasOverviewState {
+        GoalsLifeAreasOverviewState(
+            title: "Life Areas",
+            subtitle: "Goals stay organized by the parts of life they belong to.",
+            items: [],
+            contentAreaCount: 0,
+            emptyTitle: "No Life Areas are active yet",
+            emptyMessage: "Life Areas will take shape as goals, North Stars, or One-Step Goals appear.",
+            availableZoomModes: GoalsSemanticZoomMode.allCases,
+            supportsListFallback: true,
+            maxVisibleAreas: 6,
+            accessibilityLabel: "Life Areas",
+            accessibilityValue: "No active Life Areas yet.",
+            accessibilityHint: "Map and list views are available when areas have content."
+        )
+    }
+}
+
+struct GoalsNorthStarRailItemState: Identifiable, Sendable, Hashable {
+    let id: String
+    let title: String
+    let subtitle: String
+    let lifeAreaLabel: String
+    let postureLabel: String
+    let readinessLabel: String
+    let suggestedNextAction: String
+    let linkedActiveGoalCount: Int
+    let canBeShaped: Bool
+    let shapeIntoGoalLabel: String
+    let state: AmbitionVisualState
+    let accessibilityLabel: String
+    let accessibilityValue: String
+    let accessibilityHint: String
+}
+
+struct GoalsNorthStarsRailState: Sendable, Hashable {
+    let title: String
+    let subtitle: String
+    let items: [GoalsNorthStarRailItemState]
+    let totalCount: Int
+    let emptyTitle: String
+    let emptyMessage: String
+    let accessibilityLabel: String
+    let accessibilityValue: String
+    let accessibilityHint: String
+
+    static var empty: GoalsNorthStarsRailState {
+        GoalsNorthStarsRailState(
+            title: "North Stars",
+            subtitle: "Long-range direction can stay held without pressure.",
+            items: [],
+            totalCount: 0,
+            emptyTitle: "No North Stars here yet",
+            emptyMessage: "Save long-range direction under a Life Area without turning it into an active goal.",
+            accessibilityLabel: "North Stars",
+            accessibilityValue: "No North Stars yet.",
+            accessibilityHint: "North Stars are held under Life Areas and do not become goals automatically."
+        )
+    }
+}
+
+struct GoalsOneStepGoalPanelItemState: Identifiable, Sendable, Hashable {
+    let id: String
+    let title: String
+    let subtitle: String
+    let areaLabel: String
+    let statusLabel: String
+    let timingLabel: String?
+    let suggestedNextAction: String
+    let canPromoteToGoal: Bool
+    let canAttachToGoal: Bool
+    let promoteLabel: String
+    let attachLabel: String
+    let state: AmbitionVisualState
+    let accessibilityLabel: String
+    let accessibilityValue: String
+    let accessibilityHint: String
+}
+
+struct GoalsOneStepGoalsPanelState: Sendable, Hashable {
+    let title: String
+    let subtitle: String
+    let items: [GoalsOneStepGoalPanelItemState]
+    let openCount: Int
+    let parkedCount: Int
+    let emptyTitle: String
+    let emptyMessage: String
+    let accessibilityLabel: String
+    let accessibilityValue: String
+    let accessibilityHint: String
+
+    static var empty: GoalsOneStepGoalsPanelState {
+        GoalsOneStepGoalsPanelState(
+            title: "One-Step Goals",
+            subtitle: "Standalone Tasks that do not need a full goal yet.",
+            items: [],
+            openCount: 0,
+            parkedCount: 0,
+            emptyTitle: "No One-Step Goals yet",
+            emptyMessage: "Small standalone work can stay here without becoming a full goal.",
+            accessibilityLabel: "One-Step Goals",
+            accessibilityValue: "No One-Step Goals yet.",
+            accessibilityHint: "Tasks are standalone One-Step Goals. Steps stay inside Goals, Paths, or Plans."
+        )
+    }
+}
+
 enum GoalsBoardPrimaryActionKind: String, Hashable, Sendable {
     case openGoal = "open_goal"
     case recoverGoal = "recover_goal"
@@ -417,6 +568,9 @@ struct GoalsOverview: Sendable {
     let lowerPriority: GoalsLowerPriorityState
     let lifecycleRail: [GoalLifecycleRailSegment]
     let stateChips: [GoalStateChipState]
+    let lifeAreas: GoalsLifeAreasOverviewState
+    let northStars: GoalsNorthStarsRailState
+    let oneStepGoals: GoalsOneStepGoalsPanelState
     let atlasPreview: GoalAtlasPreviewState?
     let archiveSummary: GoalPortfolioArchiveSummary
     let items: [GoalListItem]
@@ -433,6 +587,9 @@ struct GoalsOverview: Sendable {
         lowerPriority: GoalsLowerPriorityState,
         lifecycleRail: [GoalLifecycleRailSegment],
         stateChips: [GoalStateChipState],
+        lifeAreas: GoalsLifeAreasOverviewState = .empty,
+        northStars: GoalsNorthStarsRailState = .empty,
+        oneStepGoals: GoalsOneStepGoalsPanelState = .empty,
         atlasPreview: GoalAtlasPreviewState?,
         archiveSummary: GoalPortfolioArchiveSummary,
         items: [GoalListItem],
@@ -448,12 +605,51 @@ struct GoalsOverview: Sendable {
         self.lowerPriority = lowerPriority
         self.lifecycleRail = lifecycleRail
         self.stateChips = stateChips
+        self.lifeAreas = lifeAreas
+        self.northStars = northStars
+        self.oneStepGoals = oneStepGoals
         self.atlasPreview = atlasPreview
         self.archiveSummary = archiveSummary
         self.items = items
         self.isSeeded = isSeeded
         self.emptyTitle = emptyTitle
         self.emptyMessage = emptyMessage
+    }
+
+    func screenContractSnapshot(
+        topLevelTabTitles: [String] = ScreenContractValidator.canonicalTopLevelTabs
+    ) -> ScreenContractImplementationSnapshot {
+        ScreenContractImplementationSnapshot(
+            screenID: .goals,
+            firstScreenContent: [
+                "Direction hero",
+                "Goal Lifecycle Rail",
+                "Active goals",
+                "Life Areas preview",
+                "North Stars rail",
+                "Controlled One-Step Goals"
+            ],
+            panels: [.progress, .lifeAreas, .oneStepGoals, .goalLifecycleRail, .northStarsRail],
+            actions: [.openGoal, .createGoal, .promoteTask, .reviewParked],
+            drillDowns: ["Goal Detail", "Life Areas Overview", "North Star Detail", "Archive"],
+            copySamples: [
+                hero.title,
+                hero.subtitle,
+                lifeAreas.title,
+                lifeAreas.subtitle,
+                northStars.title,
+                northStars.emptyTitle,
+                oneStepGoals.title,
+                oneStepGoals.subtitle,
+                lowerPriority.disclosureTitle
+            ],
+            topLevelTabTitles: topLevelTabTitles,
+            supportsDensityBehavior: true,
+            supportsPanelSizeBehavior: true,
+            hasAccessibilitySummary: lifeAreas.supportsListFallback,
+            hasPrivacySafeState: true,
+            hasGestureAlternative: true
+        )
     }
 }
 

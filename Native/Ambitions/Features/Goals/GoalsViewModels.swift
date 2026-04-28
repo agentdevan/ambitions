@@ -6,6 +6,7 @@ import Observation
 final class GoalsViewModel {
     var state: AsyncViewState<GoalsOverview>
     var isLowerPriorityExpanded: Bool
+    var semanticZoomMode: GoalsSemanticZoomMode
 
     private var hasLoaded = false
 
@@ -15,7 +16,7 @@ final class GoalsViewModel {
             return "loading"
         case let .loaded(overview):
             let cardCount = overview.bands.reduce(0) { $0 + $1.cards.count } + overview.lowerPriority.cards.count
-            return "loaded:\(cardCount):\(isLowerPriorityExpanded)"
+            return "loaded:\(cardCount):\(overview.lifeAreas.contentAreaCount):\(overview.northStars.totalCount):\(overview.oneStepGoals.openCount):\(isLowerPriorityExpanded):\(semanticZoomMode.rawValue)"
         case let .failed(message):
             return "failed:\(message)"
         }
@@ -23,10 +24,12 @@ final class GoalsViewModel {
 
     init(
         state: AsyncViewState<GoalsOverview> = .loading,
-        isLowerPriorityExpanded: Bool = false
+        isLowerPriorityExpanded: Bool = false,
+        semanticZoomMode: GoalsSemanticZoomMode = .map
     ) {
         self.state = state
         self.isLowerPriorityExpanded = isLowerPriorityExpanded
+        self.semanticZoomMode = semanticZoomMode
     }
 
     func load(using service: any GoalsServicing) async {

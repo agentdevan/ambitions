@@ -74,6 +74,22 @@ struct GoalsScreen: View {
                         .accessibilityIdentifier("goals.creation-message")
                     }
 
+                    GoalsLifeAreasPanel(
+                        state: overview.lifeAreas,
+                        zoomMode: viewModel.semanticZoomMode,
+                        onZoomModeChange: { viewModel.semanticZoomMode = $0 }
+                    )
+                    .transition(.ambitionPanel)
+
+                    GoalsNorthStarsRailCard(state: overview.northStars)
+                        .transition(.ambitionPanel)
+
+                    GoalsOneStepGoalsPanel(
+                        state: overview.oneStepGoals,
+                        onPromote: handlePromoteOneStepGoal
+                    )
+                    .transition(.ambitionPanel)
+
                     if hasVisibleBoardContent(overview) == false {
                         DegradedStateCard(
                             state: DegradedStateOrchestrator.goalsEmpty(),
@@ -186,6 +202,19 @@ struct GoalsScreen: View {
         case .openGoal, .recoverGoal, .refineStrategy:
             guard let target = action.target else { return }
             container.navigation.openGoalDetail(target)
+        }
+    }
+
+    private func handlePromoteOneStepGoal(_ item: GoalsOneStepGoalPanelItemState) {
+        localCreationMessage = GoalDetailInlineMessage(
+            title: "This can become a goal later",
+            body: "\(item.title) is still a standalone Task until you confirm a Goal.",
+            state: .selected
+        )
+        if let onCreateGoal {
+            onCreateGoal()
+        } else {
+            isCreateGoalPresented = true
         }
     }
 

@@ -555,6 +555,7 @@ private extension RepositoryBackedGoalsService {
         let drafts: [PersistedGoalDraft]
         let evidence: [ProgressEvidence]
         let feedback: [GoalFeedbackEvent]
+        let captures: [Capture]
         let appState: AppStateSnapshot
     }
 
@@ -740,6 +741,7 @@ private extension RepositoryBackedGoalsService {
         async let drafts = repositories.drafts.listDrafts()
         async let evidence = repositories.evidence.listEvidence(goalID: nil)
         async let feedback = repositories.feedback.listEvents(goalID: nil)
+        async let captures = repositories.captures.listCaptures()
         async let appState = repositories.appState.loadState()
 
         return try await Snapshot(
@@ -747,6 +749,7 @@ private extension RepositoryBackedGoalsService {
             drafts: drafts,
             evidence: evidence,
             feedback: feedback,
+            captures: captures,
             appState: appState
         )
     }
@@ -810,6 +813,22 @@ private extension RepositoryBackedGoalsService {
             pressuredCards: pressuredCards,
             cards: cards
         )
+        let oneStepGoals = oneStepGoals(from: snapshot.captures, now: .now)
+        let northStars: [NorthStar] = []
+        let lifeAreasState = makeLifeAreasState(
+            snapshot: snapshot,
+            cards: cards,
+            northStars: northStars,
+            oneStepGoals: oneStepGoals
+        )
+        let northStarsState = makeNorthStarsRailState(
+            northStars: northStars,
+            goals: snapshot.goals
+        )
+        let oneStepGoalsState = makeOneStepGoalsPanelState(
+            oneStepGoals: oneStepGoals,
+            goals: snapshot.goals
+        )
         let weekPressureSummary = makeWeekPressureSummary(
             activeCount: activeCards.count,
             pressuredCount: pressuredCards.count,
@@ -867,7 +886,10 @@ private extension RepositoryBackedGoalsService {
             ),
             lifecycleRail: makeLifecycleRail(cards: cards),
             stateChips: makeStateChips(cards: cards),
-            atlasPreview: makeAtlasPreview(snapshot: snapshot, cards: cards),
+            lifeAreas: lifeAreasState,
+            northStars: northStarsState,
+            oneStepGoals: oneStepGoalsState,
+            atlasPreview: makeAtlasPreview(snapshot: snapshot, cards: cards, northStars: northStars, oneStepGoals: oneStepGoals),
             archiveSummary: makeArchiveSummary(cards: cards),
             items: items,
             isSeeded: seeded,
@@ -1772,12 +1794,235 @@ private extension RepositoryBackedGoalsService {
         )
     }
 
-    func makeAtlasPreview(snapshot: Snapshot, cards: [GoalsBoardCardState]) -> GoalAtlasPreviewState? {
+    func makeLifeAreasState(
+        snapshot: Snapshot,
+        cards: [GoalsBoardCardState],
+        northStars: [NorthStar],
+        oneStepGoals: [OneStepGoal]
+    ) -> GoalsLifeAreasOverviewState {
+        let cardsByGoalID = Dictionary(uniqueKeysWithValues: cards.compactMap { card in
+            card.target.goalID.map { ($0, card) }
+        })
+        let projection = LifeAreaAtlasProjector().overview(
+            from: .init(
+                goals: snapshot.goals,
+                northStars: northStars,
+                oneStepGoals: oneStepGoals,
+                maxGoalReferencesPerArea: 3
+            )
+        )
+        let contentAreas = projection.areas.filter(\.counts.hasContent)
+        let maxVisibleAreas = 6
+        let items = contentAreas.prefix(maxVisibleAreas).map { area in
+            let goalReferences = (area.activeGoals + area.parkedGoals)
+                .sorted { lhs, rhs in
+                    (cardsByGoalID[lhs.id]?.manualPriorityRank ?? Int.max) < (cardsByGoalID[rhs.id]?.manualPriorityRank ?? Int.max)
+                }
+                .prefix(3)
+                .map { goal in
+                    let card = cardsByGoalID[goal.id]
+                    return GoalAtlasPreviewItem(
+                        id: goal.id,
+                        title: goal.title,
+                        subtitle: card?.nextVisibleStep.title ?? goal.summary ?? "Held in this Life Area",
+                        state: card?.lifecycleState.visualState ?? visualState(for: goal.state)
+                    )
+                }
+            return GoalsLifeAreaItemState(
+                id: area.id.rawValue,
+                title: area.definition.displayName,
+                subtitle: area.compactSummary,
+                nextFocus: area.nextFocus ?? area.emptyMessage,
+                activeGoalCount: area.counts.activeGoalCount,
+                parkedGoalCount: area.counts.parkedGoalCount,
+                northStarCount: area.counts.northStarCount,
+                oneStepGoalCount: area.counts.oneStepGoalCount,
+                goalReferences: Array(goalReferences),
+                state: visualState(for: area.posture),
+                accessibilityLabel: area.accessibility.label,
+                accessibilityValue: area.accessibility.value,
+                accessibilityHint: "Map and list views are available. \(area.accessibility.hint)"
+            )
+        }
+
+        return GoalsLifeAreasOverviewState(
+            title: "Life Areas",
+            subtitle: contentAreas.isEmpty
+                ? "Life Areas will fill in as goals, North Stars, and One-Step Goals appear."
+                : "Goals, North Stars, and standalone Tasks stay organized by the parts of life they belong to.",
+            items: Array(items),
+            contentAreaCount: contentAreas.count,
+            emptyTitle: projection.emptyTitle,
+            emptyMessage: projection.emptyMessage,
+            availableZoomModes: GoalsSemanticZoomMode.allCases,
+            supportsListFallback: true,
+            maxVisibleAreas: maxVisibleAreas,
+            accessibilityLabel: projection.accessibility.label,
+            accessibilityValue: projection.accessibility.value,
+            accessibilityHint: "Map view has a list fallback and never adds a top-level tab."
+        )
+    }
+
+    func makeNorthStarsRailState(
+        northStars: [NorthStar],
+        goals: [Goal]
+    ) -> GoalsNorthStarsRailState {
+        let projection = NorthStarProjector().projection(
+            from: NorthStarProjector.Input(
+                northStars: northStars,
+                goals: goals,
+                includeArchived: false,
+                maxNorthStarsPerArea: 4
+            )
+        )
+        let items = projection.areas.flatMap { area in
+            area.northStars.map { northStar in
+                GoalsNorthStarRailItemState(
+                    id: northStar.id.rawValue,
+                    title: northStar.title,
+                    subtitle: northStar.summary ?? northStar.activationReadiness.displayName,
+                    lifeAreaLabel: area.definition?.displayName ?? "Area unavailable",
+                    postureLabel: northStar.posture.displayName,
+                    readinessLabel: northStar.activationReadiness.displayName,
+                    suggestedNextAction: northStar.suggestedNextAction ?? "Held without pressure",
+                    linkedActiveGoalCount: northStar.linkedActiveGoalCount,
+                    canBeShaped: northStar.canBeShaped,
+                    shapeIntoGoalLabel: northStar.shapeIntoGoalLabel,
+                    state: visualState(for: northStar.posture),
+                    accessibilityLabel: northStar.accessibility.label,
+                    accessibilityValue: northStar.accessibility.value,
+                    accessibilityHint: northStar.accessibility.hint
+                )
+            }
+        }
+
+        return GoalsNorthStarsRailState(
+            title: projection.title,
+            subtitle: projection.subtitle,
+            items: Array(items.prefix(6)),
+            totalCount: projection.counts.total,
+            emptyTitle: projection.emptyTitle,
+            emptyMessage: projection.emptyMessage,
+            accessibilityLabel: projection.accessibility.label,
+            accessibilityValue: projection.accessibility.value,
+            accessibilityHint: projection.accessibility.hint
+        )
+    }
+
+    func makeOneStepGoalsPanelState(
+        oneStepGoals: [OneStepGoal],
+        goals: [Goal]
+    ) -> GoalsOneStepGoalsPanelState {
+        let projection = OneStepGoalProjector().projection(
+            from: OneStepGoalProjector.Input(
+                oneStepGoals: oneStepGoals,
+                goals: goals,
+                includeArchived: false,
+                maxOneStepGoalsPerArea: 4
+            )
+        )
+        let items = projection.areas.flatMap { area in
+            area.oneStepGoals.map { oneStepGoal in
+                GoalsOneStepGoalPanelItemState(
+                    id: oneStepGoal.id.rawValue,
+                    title: oneStepGoal.title,
+                    subtitle: oneStepGoal.note ?? oneStepGoal.suggestedNextAction,
+                    areaLabel: area.displayName,
+                    statusLabel: oneStepGoal.status.displayName,
+                    timingLabel: oneStepGoal.timingLabel,
+                    suggestedNextAction: oneStepGoal.suggestedNextAction,
+                    canPromoteToGoal: oneStepGoal.canPromoteToGoal,
+                    canAttachToGoal: oneStepGoal.canAttachToGoal,
+                    promoteLabel: "Make this a goal",
+                    attachLabel: "Attach to goal",
+                    state: visualState(for: oneStepGoal.status),
+                    accessibilityLabel: oneStepGoal.accessibility.label,
+                    accessibilityValue: oneStepGoal.accessibility.value,
+                    accessibilityHint: oneStepGoal.accessibility.hint
+                )
+            }
+        }
+
+        return GoalsOneStepGoalsPanelState(
+            title: projection.title,
+            subtitle: projection.subtitle,
+            items: Array(items.prefix(5)),
+            openCount: projection.counts.openCount,
+            parkedCount: projection.counts.parked,
+            emptyTitle: projection.emptyTitle,
+            emptyMessage: projection.emptyMessage,
+            accessibilityLabel: projection.accessibility.label,
+            accessibilityValue: projection.accessibility.value,
+            accessibilityHint: projection.accessibility.hint
+        )
+    }
+
+    func oneStepGoals(from captures: [Capture], now: Date) -> [OneStepGoal] {
+        captures.compactMap { capture -> OneStepGoal? in
+            guard capture.linkedGoalID == nil else { return nil }
+            switch capture.kind {
+            case .oneTimeCommitment, .deadlineTask:
+                break
+            case .raw, .goalSeed, .goalSupportingTask, .deliverableSeed, .waitingItem, .optionalSomeday, .archiveItem:
+                return nil
+            }
+
+            return OneStepGoal(
+                id: OneStepGoalID(rawValue: "capture.\(capture.id)"),
+                title: capture.rawText,
+                note: nil,
+                lifeAreaID: nil,
+                status: oneStepGoalStatus(for: capture),
+                timing: OneStepGoalTimingMetadata(
+                    dueAt: nil,
+                    dueLabel: capture.deadlineText,
+                    reminderAt: nil,
+                    reminderLabel: nil,
+                    reviewAfter: nil
+                ),
+                source: .capture,
+                sourceCaptureID: capture.id,
+                createdAt: capture.createdAt,
+                updatedAt: capture.updatedAt,
+                lastReferencedAt: DomainTimestamp.string(from: now)
+            )
+        }
+    }
+
+    func oneStepGoalStatus(for capture: Capture) -> OneStepGoalStatus {
+        switch capture.status {
+        case .scheduled:
+            return .scheduled
+        case .waiting, .delegated:
+            return .waiting
+        case .optionalSomeday:
+            return .parked
+        case .archived:
+            return .archived
+        case .needsTriage, .seed:
+            return .reviewLater
+        case .actionable, .goalBound:
+            return capture.deadlineKind == .hard ? .today : .ready
+        }
+    }
+
+    func makeAtlasPreview(
+        snapshot: Snapshot,
+        cards: [GoalsBoardCardState],
+        northStars: [NorthStar],
+        oneStepGoals: [OneStepGoal]
+    ) -> GoalAtlasPreviewState? {
         guard snapshot.goals.isEmpty == false else { return nil }
         let cardsByGoalID = Dictionary(uniqueKeysWithValues: cards.compactMap { card in
             card.target.goalID.map { ($0, card) }
         })
-        let overview = LifeAreaAtlasProjector().overview(from: .init(goals: snapshot.goals))
+        let overview = LifeAreaAtlasProjector().overview(
+            from: .init(
+                goals: snapshot.goals,
+                northStars: northStars,
+                oneStepGoals: oneStepGoals
+            )
+        )
         let groups = overview.areas
             .filter { $0.counts.hasContent }
             .map { area -> GoalAtlasPreviewGroup in
@@ -1810,6 +2055,52 @@ private extension RepositoryBackedGoalsService {
             subtitle: "A lightweight grouping by life area. Full path mapping stays owned by later batches.",
             groups: Array(groups)
         )
+    }
+
+    func visualState(for posture: LifeAreaPosture) -> AmbitionVisualState {
+        switch posture {
+        case .active:
+            return .selected
+        case .needsAttention:
+            return .warning
+        case .light, .empty, .unavailable:
+            return .default
+        }
+    }
+
+    func visualState(for posture: NorthStarPosture) -> AmbitionVisualState {
+        switch posture {
+        case .activeDirection, .readyToShape:
+            return .selected
+        case .needsReview:
+            return .warning
+        case .dormant, .parked, .archived:
+            return .default
+        }
+    }
+
+    func visualState(for status: OneStepGoalStatus) -> AmbitionVisualState {
+        switch status {
+        case .ready, .today:
+            return .selected
+        case .waiting, .reviewLater:
+            return .warning
+        case .completed:
+            return .success
+        case .scheduled, .parked, .archived:
+            return .default
+        }
+    }
+
+    func visualState(for lifecycleState: GoalLifecycleState) -> AmbitionVisualState {
+        switch lifecycleState {
+        case .active:
+            return .selected
+        case .completed:
+            return .success
+        case .paused, .draft, .archived:
+            return .default
+        }
     }
 
     func boardPriorityDescriptor(lhs: GoalsBoardCardState, rhs: GoalsBoardCardState) -> Bool {

@@ -46,13 +46,13 @@ Use [../canon/Ambitions_2_0_Batch_Plan.md](../canon/Ambitions_2_0_Batch_Plan.md)
 
 ## Active Queue
 
-Current execution status: Ambitions 2.0 post-Batch-60 canon is adopted. Batches 00-88 and D01-D12 are complete for planning purposes. D13 / Goals / Life Areas / North Stars Transformation and Semantic Zoom is the next dependency-safe implementation batch from the Design Constitution delta/alignment backlog. Original Batches 89-120 remain future planned roadmap work only through the classifications and dependencies in [../canon/Ambitions_2_0_Roadmap_Merge_Audit.md](../canon/Ambitions_2_0_Roadmap_Merge_Audit.md).
+Current execution status: Ambitions 2.0 post-Batch-60 canon is adopted. Batches 00-88 and D01-D13 are complete for planning purposes. D14 / Goal Detail Mission Control Lanes Alignment is the next dependency-safe implementation batch from the Design Constitution delta/alignment backlog. Original Batches 89-120 remain future planned roadmap work only through the classifications and dependencies in [../canon/Ambitions_2_0_Roadmap_Merge_Audit.md](../canon/Ambitions_2_0_Roadmap_Merge_Audit.md).
 
 Docs-only reconciliation note: Design Constitution canon reconciliation was performed as a user-directed canon/design-system integration pass after Batch 88 planning status. It created the active design constitution and supporting matrices/specs without starting Batch 89 feature work, changing branch, changing app code, or claiming future implementation completion.
 
 Implementation gap audit note: A repo-wide Design Constitution implementation gap audit was added after roadmap verification. It preserves completed batch history and creates future delta/alignment batches for Constitution gaps without starting Batch 89 feature work or marking any delta complete.
 
-Roadmap merge audit note: The original Batches 89-120 were audited against D01-D26 after the Design Constitution. D01-D26 take precedence wherever there is conflict. Batch 89 is retained as future core-surface QA intent after the remaining D13-D21 surface/verification foundations or inside D26, not as the next runnable implementation batch.
+Roadmap merge audit note: The original Batches 89-120 were audited against D01-D26 after the Design Constitution. D01-D26 take precedence wherever there is conflict. Batch 89 is retained as future core-surface QA intent after the remaining D14-D21 surface/verification foundations or inside D26, not as the next runnable implementation batch.
 
 | Batch | Name | Status | Notes |
 | --- | --- | --- | --- |
@@ -114,8 +114,8 @@ These rows are planned future implementation work from the Design Constitution i
 | D10 | Screen Contract Matrix Implementation Pass | Completed | Added a screen-contract registry and validator covering Today, Goals, Goal Detail, Capture, Plan, You, Trust Center / What Ambitions Knows, detail/foundation screens, archive, and external-surface contracts. The tests lock the canonical five-tab shell, D03-D09 dependencies, density/size, accessibility/privacy requirements, forbidden old IA/copy detection, and D11-D19 handoff ownership without redesigning surfaces. |
 | D11 | Today 2.0 Design Constitution Alignment | Completed | Added a compact Today Plan Layer, open-window/source labels, D09-backed One-Step Goals projection consumption from standalone captures, visible Move/Park/Mark Done affordances, and a D10 screen-contract snapshot without adding tabs, calendar permission prompts, or broad surface redesign. |
 | D12 | Capture + Quiet Command Sheet Alignment | Completed | Added Smart Attachment-backed Capture and Quiet Command Sheet routing previews/receipts, Needs a Place hold behavior, compact clarification choices, and explicit quick-capture-to-Capture handoff without adding tabs, chat UI, calendar behavior, or broad surface redesign. |
-| D13 | Goals / Life Areas / North Stars Transformation and Semantic Zoom | Planned / next | Depends on D07-D10. |
-| D14 | Goal Detail Mission Control Lanes Alignment | Planned | Depends on D09-D10 and D13. |
+| D13 | Goals / Life Areas / North Stars Transformation and Semantic Zoom | Completed | Goals now consumes Life Areas, North Stars, and One-Step Goals projections through a bounded portfolio surface with Map/List semantic zoom fallback, a North Stars rail, controlled One-Step Goals panel, D10 contract snapshot coverage, and no new tabs or detail workflows. |
+| D14 | Goal Detail Mission Control Lanes Alignment | Planned / next | Depends on D09-D10 and D13. |
 | D15 | Plan Believability + Timeline Widget Alignment | Planned | Depends on D05, D10, and Reality Model. |
 | D16 | Ritual Split Alignment | Planned | Depends on D11, D15, and You foundation. |
 | D17 | You Personal System Center Alignment | Planned | Depends on D03-D05 and D10. |

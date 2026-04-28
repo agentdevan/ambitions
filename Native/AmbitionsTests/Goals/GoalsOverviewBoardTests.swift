@@ -180,6 +180,73 @@ final class GoalsOverviewBoardTests: XCTestCase {
         XCTAssertEqual(atlasPreview.title, "Goal Atlas preview")
         XCTAssertEqual(atlasPreview.groups.map(\.title), ["Career", "Money"])
         XCTAssertTrue(atlasPreview.groups.contains(where: { $0.id == "finance" && $0.items.map(\.id) == [moneyGoal.id] }))
+        XCTAssertEqual(overview.lifeAreas.title, "Life Areas")
+        XCTAssertEqual(overview.lifeAreas.items.map(\.title), ["Career", "Money"])
+        XCTAssertTrue(overview.lifeAreas.supportsListFallback)
+        XCTAssertEqual(overview.lifeAreas.availableZoomModes, [.map, .list])
+        XCTAssertLessThanOrEqual(overview.lifeAreas.items.count, overview.lifeAreas.maxVisibleAreas)
+    }
+
+    func testD13GoalsProjectionSurfacesNorthStarsAndOneStepFoundationsWithoutNewTabs() async throws {
+        let repositories = try await makeRepositories()
+        let service = RepositoryBackedGoalsService(repositories: repositories)
+        let careerGoal = makeGoal(
+            id: "goal-career-d13",
+            title: "Prepare portfolio review",
+            dueInDays: 14,
+            lifeDomain: .career
+        )
+        let taskCapture = makeOneStepCapture(
+            id: "capture-one-step-d13",
+            title: "Book dentist",
+            status: .actionable,
+            deadlineText: "Today",
+            deadlineKind: .hard
+        )
+
+        try await repositories.goals.saveGoals([careerGoal])
+        try await repositories.captures.saveCaptures([taskCapture])
+        try await savePriorityOrder([careerGoal.id], repositories: repositories)
+
+        let overview = try await service.loadOverview()
+
+        XCTAssertEqual(overview.northStars.title, "North Stars")
+        XCTAssertEqual(overview.northStars.emptyTitle, "No North Stars here yet")
+        XCTAssertEqual(overview.northStars.totalCount, 0)
+
+        XCTAssertEqual(overview.oneStepGoals.title, "One-Step Goals")
+        XCTAssertEqual(overview.oneStepGoals.openCount, 1)
+        let item = try XCTUnwrap(overview.oneStepGoals.items.first)
+        XCTAssertEqual(item.id, "capture.\(taskCapture.id)")
+        XCTAssertEqual(item.title, "Book dentist")
+        XCTAssertEqual(item.statusLabel, "Today")
+        XCTAssertEqual(item.timingLabel, "Today")
+        XCTAssertTrue(item.canPromoteToGoal)
+        XCTAssertTrue(item.accessibilityHint.contains("Standalone task"))
+
+        XCTAssertEqual(ScreenContractValidator.canonicalTopLevelTabs, ["Today", "Goals", "Capture", "Plan", "You"])
+    }
+
+    func testD13GoalsScreenContractSnapshotSatisfiesImplementationGate() async throws {
+        let repositories = try await makeRepositories()
+        let service = RepositoryBackedGoalsService(repositories: repositories)
+        let goal = makeGoal(
+            id: "goal-contract-d13",
+            title: "Ship the Goals Life Areas transformation",
+            dueInDays: 18,
+            lifeDomain: .career
+        )
+        try await repositories.goals.saveGoals([goal])
+        try await savePriorityOrder([goal.id], repositories: repositories)
+
+        let overview = try await service.loadOverview()
+        let contract = ScreenContractRegistry.contract(for: .goals)
+        let issues = ScreenContractValidator.validate(
+            snapshot: overview.screenContractSnapshot(),
+            against: contract
+        )
+
+        XCTAssertTrue(issues.isEmpty, issues.map(\.message).joined(separator: "\n"))
     }
 }
 
@@ -392,6 +459,39 @@ private extension GoalsOverviewBoardTests {
             metadata: nil,
             plannedGoalID: nil,
             latestResultKind: resultKind
+        )
+    }
+
+    func makeOneStepCapture(
+        id: String,
+        title: String,
+        status: CaptureStatus,
+        deadlineText: String?,
+        deadlineKind: CaptureDeadlineKind
+    ) -> Capture {
+        Capture(
+            id: id,
+            createdAt: isoDate(daysFromNow: -1),
+            updatedAt: isoDate(daysFromNow: 0),
+            rawText: title,
+            sourceType: .todayQuickCapture,
+            status: status,
+            linkedGoalID: nil,
+            triage: CaptureTriageMetadata(destination: .planSeed, hint: "Saved as Task · Today"),
+            revisitAfter: nil,
+            kind: .deadlineTask,
+            route: .planSeed,
+            triageStatus: .routed,
+            commitmentKind: .oneTime,
+            deadlineText: deadlineText,
+            deadlineKind: deadlineKind,
+            contextLensHint: nil,
+            priorityHints: CapturePriorityHints(deadline: .high),
+            goalRelationship: nil,
+            deliverableHint: nil,
+            scopeItemHint: nil,
+            waitingMetadata: nil,
+            assumptionSummary: "Saved as a standalone Task because no existing local destination was reliable enough."
         )
     }
 
