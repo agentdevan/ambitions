@@ -2,7 +2,7 @@
 
 Status: Active canon consolidation layer.
 
-Purpose: Consolidate the Ambitions object model into one implementation-readable reference. This document extracts existing truth from the Master Product Spec, Design Constitution, Product Architecture, Systems Architecture, Visual System, and Intelligence Standards. It does not replace those documents; it makes their object language easier to implement consistently.
+Purpose: Consolidate the Ambitions object model into one implementation-readable reference. This document extracts existing truth from the Master Product Spec, Design Constitution, Product Architecture, Systems Architecture, Visual System, Intelligence Standards, and Wave 1 product decisions. It does not replace those documents; it makes their object language easier to implement consistently.
 
 ## Canonical Hierarchy
 
@@ -27,19 +27,36 @@ Step = action inside a Goal, Path, or Plan.
 
 A Task can exist without a Goal. A Step cannot.
 
+## Wave 1 Locked Decisions
+
+- Ambitions is user-facing as a life organization system and internally as a personal life operating system / external brain.
+- Primary opening feeling: `My life feels organized`.
+- Immediate proof: `I know what matters now` and `I know the next concrete step`.
+- Life Areas are inferred/recommended and correctable, not mandatory friction.
+- Default Life Areas: Career, Creative, Finance, Health, Home, Relationships, Education, Personal, Admin.
+- Default Life Areas are renameable while preserving an internal canonical type.
+- `North Star` is deeper-view language; new-user/top-level copy may use `long-term ambition`.
+- A Goal is a meaningful outcome that may need a plan.
+- User-facing term is `Task`; internal/design term is `One-Step Goal`.
+- A Task can exist without a Goal, but Ambitions should suggest attaching or promoting when useful.
+- System rule: every item has a place.
+- Execution rules: every goal has a next step; every plan must be believable.
+- Emotional rule: the user never feels punished for drifting.
+- Product-shape rule: the app stays deep, not wide.
+
 ## Object Ownership Summary
 
 | Object | Plain meaning | Primary owner surface | Supporting surfaces |
 | --- | --- | --- | --- |
-| Life Area | A major life lens such as Career, Creative, Finance, Health, Home, Relationships, Education, Admin | Goals, You | Capture, Reviews |
+| Life Area | A major life lens such as Career, Creative, Finance, Health, Home, Relationships, Education, Personal, Admin | Goals, You | Capture, Reviews |
 | Ambition | A broad future direction that may contain goals | Goals | You, Reviews |
-| North Star | Dormant or identity-level long-range ambition | Goals, Life Areas | You, Path Builder |
-| Goal | Active meaningful outcome | Goals, Goal Detail | Today, Plan, Reviews |
+| North Star | Dormant or identity-level long-range ambition; user-facing mostly in deeper views | Goals, Life Areas | You, Path Builder |
+| Goal | Meaningful outcome that may need a plan | Goals, Goal Detail | Today, Plan, Reviews |
 | Path | Strategic route from current state to goal | Goal Detail, Path Builder | Plan, Reviews |
 | Plan | Believable execution shape over day/week/phase | Plan | Today, Goals |
 | Milestone | Meaningful checkpoint before task detail | Goal Detail | Goals, Plan |
 | Step | Contained action inside a Goal, Path, or Plan | Goal Detail, Today, Plan | Reviews |
-| Task / One-Step Goal | Standalone concrete action not requiring a goal container | Today, Capture, You | Goals, Plan |
+| Task / One-Step Goal | Standalone concrete action not requiring a goal container; UI says Task | Today, Capture, You | Goals, Plan |
 | Proof | Evidence that progress happened | Goal Detail, Reviews | Goals, You |
 | Decision | Reason a path, scope, plan, or goal state changed | Goal Detail, Plan, Reviews | You, Trust Center |
 | Receipt | Action closure record explaining what happened and what changed | Global / Trust Layer | You, Reviews, Capture, Plan |
@@ -56,17 +73,46 @@ A Task can exist without a Goal. A Step cannot.
 
 A Life Area is a primary organization lens. It is visible inside Goals and You, not a sixth tab.
 
+Default Life Areas:
+
+```text
+Career
+Creative
+Finance
+Health
+Home
+Relationships
+Education
+Personal
+Admin
+```
+
 Minimum fields:
 
 - `id`
 - `name`
+- `canonicalType`
 - `status`
 - `sortOrder`
 - `createdAt`
 - `updatedAt`
 
+Canonical type values:
+
+- `career`
+- `creative`
+- `finance`
+- `health`
+- `home`
+- `relationships`
+- `education`
+- `personal`
+- `admin`
+- `custom`
+
 Useful future fields:
 
+- `displayNameOverride`
 - `iconToken`
 - `accentToken`
 - `hiddenSensitiveDetails`
@@ -80,6 +126,9 @@ Rules:
 - Life Areas help the user understand where life objects belong.
 - They must not turn Ambitions into a dashboard of categories.
 - A Life Area can exist without active goals.
+- A user can rename a default Life Area, but the internal canonical type remains stable.
+- Ambitions may infer a Life Area, but the user must be able to correct it.
+- Life Area assignment should not block Capture or first-run flow.
 
 ### Ambition / North Star
 
@@ -106,12 +155,14 @@ Useful future fields:
 Rules:
 
 - North Stars should not force immediate planning.
+- `North Star` is premium deeper-view language.
+- New-user/top-level UI may use `long-term ambition` before introducing `North Star`.
 - A North Star can be promoted into an active goal or spawn one or more goals.
 - Long-range certainty must be qualitative, not fake precision.
 
 ### Goal
 
-A Goal is an active meaningful outcome. It is direction, not a task list.
+A Goal is a meaningful outcome that may need a plan. It is direction, not a task list.
 
 Minimum fields:
 
@@ -157,10 +208,11 @@ Goal states:
 
 Rules:
 
-- Every active goal should have one Next Visible Step.
+- Every active goal should have one Next Visible Step unless blocked/waiting.
 - Every significant goal change should be explainable.
 - Completed, cancelled, dropped, merged, replaced, and parked goals remain learning artifacts, not trash.
 - Goal Weather is user-facing visual language, not a separate engine.
+- A goal should be important enough to justify direction, plan, proof, lifecycle, and review.
 
 ### Path
 
@@ -223,6 +275,7 @@ Rules:
 - Calendar write requires explicit confirmation.
 - Plan works without calendar access.
 - No silent rescheduling.
+- Every plan should communicate whether it is believable, tight, fragile, or no longer holds.
 
 ### Milestone
 
@@ -280,6 +333,18 @@ Rules:
 
 A Task is a standalone One-Step Goal. It should not force creation of a full Goal.
 
+User-facing language:
+
+```text
+Task
+```
+
+Internal/design language:
+
+```text
+One-Step Goal
+```
+
 Minimum fields:
 
 - `id`
@@ -311,8 +376,11 @@ Allowed transformations:
 
 Rules:
 
+- A Task can exist without a Goal.
+- Ambitions should suggest attaching or promoting a Task when useful.
 - Do not create a top-level Tasks tab.
 - One-Step Goals can appear in Today, Capture, Goals, Plan, and You when contextually useful.
+- Avoid `To-Do` as the primary Ambitions object name.
 
 ### Proof
 
@@ -453,6 +521,33 @@ Rules:
 - One Receipt can reference multiple objects when a command changes more than one thing.
 - Memory can influence recommendations only when it is evidence-backed, freshness-aware, and correctable.
 
+## Product Rules
+
+System rule:
+
+```text
+Every item has a place.
+```
+
+Execution rules:
+
+```text
+Every goal has a next step.
+Every plan must be believable.
+```
+
+Emotional rule:
+
+```text
+The user never feels punished for drifting.
+```
+
+Product-shape rule:
+
+```text
+The app stays deep, not wide.
+```
+
 ## Implementation Guardrails
 
 - Do not duplicate object relationship stores per surface.
@@ -463,12 +558,19 @@ Rules:
 - Do not use AI/model language in user-facing object labels.
 - Do not claim sync, accessibility, memory, or automation behavior before verified implementation evidence exists.
 - Distinguish planned canon from shipped code in every implementation summary.
+- Prefer drill-downs and contextual intelligence over new top-level tabs.
+
+## Resolved Wave 1 Questions
+
+- Default Life Areas are Career, Creative, Finance, Health, Home, Relationships, Education, Personal, Admin.
+- Users can rename default Life Areas while preserving internal canonical types.
+- Life Areas are inferred/recommended and correctable, not required friction.
+- A Goal is a meaningful outcome that may need a plan.
+- User-facing standalone action language is Task; internal/design term is One-Step Goal.
+- A Task can exist without a Goal.
 
 ## Open Questions For Future Waves
 
-- Which Life Areas ship as defaults?
-- Can users rename default Life Areas?
-- Should every Goal require a Life Area, or can it remain uncategorized?
 - Which Goal states are visible to users on day one?
 - How much of Decision Trail is automatically created versus user-authored?
 - How long should undoable receipts remain undoable?
