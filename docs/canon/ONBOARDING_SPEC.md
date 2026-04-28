@@ -2,7 +2,7 @@
 
 Status: Active canon consolidation layer.
 
-Purpose: Define the first-run experience clearly enough for product design, implementation, and QA. This document extracts existing onboarding doctrine from the Design Constitution and external-surface contracts and turns it into a screen-level spec.
+Purpose: Define the first-run experience clearly enough for product design, implementation, and QA. This document extracts existing onboarding doctrine from the Design Constitution and external-surface contracts and turns it into a screen-level spec. It reflects product decision Waves 1 and 4.
 
 ## Onboarding Thesis
 
@@ -26,7 +26,9 @@ Internal ambition:
 Personal life operating system / external brain
 ```
 
-## Wave 1 Locked Decisions
+## Locked Onboarding Decisions
+
+### Wave 1
 
 - Opening feeling: `My life feels organized`.
 - Immediate proof: `I know what matters now` and `I know the next concrete step`.
@@ -42,32 +44,65 @@ Personal life operating system / external brain
 - Emotional rule: the user never feels punished for drifting.
 - Product-shape rule: the app stays deep, not wide.
 
+### Wave 4
+
+- Onboarding should show a static premium product preview at launch.
+- Animation can come later.
+- First onboarding prompt: `What do you want to organize?`
+- First object creation should show the receipt inside the destination.
+- Do not ask for display density up front.
+- Default display setting: `Balanced + Comfortable`.
+- Display density and panel size can be adjusted later in `You`.
+- Infer Life Area when possible.
+- Ask for Life Area only when Ambitions is uncertain.
+- Life Area assignment remains correctable from the receipt.
+- Do not ask for notifications during onboarding.
+- Notification permission should only be requested after the user sets a reminder or protected block.
+- Do not ask for calendar access during onboarding.
+- Calendar access should only be requested from Plan after the user asks for calendar-aware planning.
+- Default onboarding examples should cover Career, Creative, Finance, Health, Home, and Relationships / Family.
+- Baby/family examples can appear later when contextually relevant.
+- If the user skips onboarding, land in Today with a strong empty state and Capture action.
+- First-run success metric: user creates any useful object.
+
 ## First-Run Success Definition
 
 A first-run session succeeds when the user has:
 
-1. Created one useful object.
+1. Created any useful object.
 2. Seen where it went.
-3. Understood the next step.
-4. Been shown that Ambitions can organize life without requiring calendar, sync, notifications, or account setup upfront.
+3. Seen a receipt inside the destination.
+4. Understood the next step.
+5. Been shown that Ambitions can organize life without requiring calendar, sync, notifications, account setup, display-density setup, or full planning upfront.
+
+First-run success does not require:
+
+- completing all onboarding screens
+- connecting calendar
+- enabling notifications
+- creating a full plan
+- building a complete goal hierarchy
+- choosing display density
 
 ## Non-Negotiable Rules
 
 - No upfront calendar permission request.
 - No upfront notification permission request.
 - No sync/account dependency for first value.
+- No display-density prompt before first value.
 - No chat-first AI framing.
 - No giant preference questionnaire.
 - No dense explanation of the full app model.
 - No unverified accessibility, sync, automation, or memory claims.
 - User can skip or exit setup and still land in a safe usable app state.
 - Do not expose `North Star` too early; use simpler long-term ambition language if needed.
+- Do not make first-run success depend on anything beyond one useful object, a visible destination, a receipt, and a next action.
 
 ## Default Onboarding Flow
 
-### Step 1: Opening Promise
+### Step 1: Opening Promise + Static Preview
 
-Purpose: Establish what Ambitions does in plain language.
+Purpose: Establish what Ambitions does in plain language and show one premium static preview of the product shape.
 
 Primary content:
 
@@ -82,6 +117,13 @@ Alternate shorter option:
 Organize what matters.
 Know what to do next.
 ```
+
+Static preview guidance:
+
+- Show one calm, premium preview, not a carousel.
+- Preview should imply Today / Goal / Plan organization without teaching the entire app.
+- Keep preview static at launch.
+- Animation can be introduced later only if it improves clarity without distraction.
 
 Primary action:
 
@@ -101,6 +143,7 @@ Rules:
 - Do not describe every feature.
 - Do not use hype language.
 - Do not reduce Ambitions to a goal app, planner, habit tracker, or calendar wrapper.
+- Do not request permissions here.
 
 ### Step 2: First Useful Input
 
@@ -112,13 +155,25 @@ Prompt:
 What do you want to organize?
 ```
 
-Input examples:
+Default example set should cover:
 
-- `Release 3 songs by August 1`
-- `Build the baby crib before the due date`
-- `Create spreadsheet and send it to Kaylee by EOD Tuesday`
+- Career
+- Creative
+- Finance
+- Health
+- Home
+- Relationships / Family
+
+Example inputs:
+
 - `Get a data analyst job in 6 months`
+- `Release 3 songs by August 1`
 - `Pay off $5,000 of debt by December 1`
+- `Get back into a consistent gym routine`
+- `Build the baby crib before the due date`
+- `Plan a better weekly rhythm with Alexandra`
+
+Baby/family examples can appear later when contextually relevant. They should not dominate default onboarding.
 
 Primary action:
 
@@ -139,7 +194,7 @@ Rules:
 - The user should be able to enter a goal, task, commitment, plan seed, or raw idea.
 - The first input should make the user feel their life is becoming more organized.
 
-### Step 3: Compact Clarification
+### Step 3: Compact Clarification Only If Needed
 
 Purpose: Ask only what is needed to route the first object.
 
@@ -167,11 +222,15 @@ Rules:
 - Ask at most two clarification rounds before creating something usable.
 - Do not expose the full domain model.
 - Let Ambitions proceed with a receipt if the user chooses not to clarify.
-- Life Area should be inferred/recommended and correctable, not required friction.
+- Life Area should be inferred when possible.
+- Ask for Life Area only when Ambitions is uncertain.
+- Life Area remains correctable from the receipt.
 
-### Step 4: Route Receipt
+### Step 4: Create Object + Show Receipt Inside Destination
 
-Purpose: Show where the item went and why.
+Purpose: Show where the item went and why while proving the destination is useful.
+
+The receipt should appear inside the destination rather than as a disconnected interstitial.
 
 Examples:
 
@@ -198,7 +257,7 @@ Required anatomy:
 - destination
 - next useful action
 - `Change` route option
-- `Open` or `Continue` route
+- `Open` or `Continue` route where needed
 
 Rules:
 
@@ -206,6 +265,7 @@ Rules:
 - Avoid model/confidence language.
 - Show correction affordance.
 - Every item should have a place, even if the temporary place is Needs a Place.
+- The object should remain visible behind or near the receipt.
 
 ### Step 5: First Next Step
 
@@ -236,23 +296,9 @@ Rules:
 - Make the app feel useful immediately.
 - Every goal should gain or point toward one clear next step.
 
-### Step 6: Light Personalization
+### Step 6: Optional Later Personalization In You
 
-Purpose: Let the user tune complexity without delaying first value.
-
-Ask after first object is created.
-
-Recommended controls:
-
-```text
-How much detail do you want by default?
-Minimal / Balanced / Detailed
-```
-
-```text
-Panel size
-Compact / Comfortable / Large
-```
+Purpose: Let the user tune complexity after first value, not during onboarding.
 
 Default:
 
@@ -260,16 +306,26 @@ Default:
 Balanced + Comfortable
 ```
 
-Optional later:
+Do not ask during first-run onboarding:
+
+- display density
+- panel size
+- notification style
+- calendar permission
+- sync/account setup
+
+Adjust later in `You`:
 
 - Appearance: Dark / Light / System
 - Accent selection
+- Display density: Minimal / Balanced / Detailed
+- Panel size: Compact / Comfortable / Large
 - Notification style: Essential / Balanced / Supportive
 - Rename Life Areas
 
 Rules:
 
-- Personalization is skippable.
+- Personalization is available, not blocking.
 - Do not ask for every preference.
 - Do not mention ADHD Mode; user-facing language is Focus Support.
 - Renaming Life Areas should preserve internal canonical type.
@@ -280,16 +336,18 @@ Destination depends on first object:
 
 | First object | Landing destination |
 | --- | --- |
-| Goal | Goal Detail or Goals with receipt visible |
-| Task / One-Step Goal | Today or Plan, depending on timing |
+| Goal | Goal Detail or Goals with receipt visible inside the destination |
+| Task / One-Step Goal | Today or Plan, depending on timing, with receipt visible |
 | Deadline commitment | Plan with receipt visible |
-| Raw idea | Capture Needs a Place |
-| Waiting item | Capture/Waiting route or relevant Goal Detail |
+| Raw idea | Capture Needs a Place with receipt visible |
+| Waiting item | Capture/Waiting route or relevant Goal Detail with receipt visible |
+| User skips onboarding | Today with strong empty state and Capture action |
 
 Required landing content:
 
 - object is visible
 - next step is visible
+- receipt is visible in context
 - route correction remains available
 - no permission prompt appears automatically
 
@@ -310,6 +368,11 @@ Required rationale:
 - Plan works without access
 - calendar write requires confirmation
 
+Rules:
+
+- Do not request calendar access during onboarding.
+- Calendar access should only be requested from Plan after the user asks for calendar-aware planning.
+
 ### Notifications
 
 Notifications should be requested only after the user sees value and chooses a reminder/notification feature.
@@ -319,6 +382,10 @@ Recommended trigger:
 - setting a reminder
 - enabling Essential reminders
 - starting a protected block
+
+Rules:
+
+- Do not request notification permission during onboarding.
 
 ### Sync / Account
 
@@ -335,7 +402,7 @@ Recommended trigger:
 If onboarding was abandoned:
 
 - preserve input if possible
-- land in Capture or Today with a simple prompt
+- land in Today with a simple prompt and Capture action
 - do not restart the full sequence unnecessarily
 
 Copy example:
@@ -372,6 +439,12 @@ Primary action:
 Capture Something
 ```
 
+Secondary action:
+
+```text
+Use Example
+```
+
 ## Accessibility And Focus Support
 
 Requirements:
@@ -384,19 +457,27 @@ Requirements:
 - Short screen copy.
 - Stable primary action placement.
 - Skippable setup.
+- Static preview must have equivalent VoiceOver description.
 
 ## QA Acceptance Criteria
 
 Onboarding is acceptable when:
 
+- User can create any useful object, not only a Goal.
 - A user can complete first value in under a few screens.
 - User can create a Goal, Task, commitment, or idea from the same input pattern.
-- Route receipt appears after creation.
-- User can change the route.
-- Life Area is inferred/recommended and correctable.
+- A static premium preview appears without requiring animation.
+- Route receipt appears inside the destination after creation.
+- User can change the route from the receipt.
+- Life Area is inferred when possible and asked only when uncertain.
+- Life Area remains correctable.
+- Default display setting is Balanced + Comfortable.
+- Display density is not asked during onboarding.
 - No permissions are requested before explicit value/action.
+- Calendar permission is only Plan-triggered.
+- Notification permission is only reminder/protected-block triggered.
 - User lands somewhere useful.
-- Skipping onboarding produces a safe empty state.
+- Skipping onboarding lands in Today with a safe empty state and Capture action.
 - Dynamic Type and VoiceOver remain usable.
 - No unverified claims appear.
 - The experience proves organization, next action, and calm recovery without explaining the whole system.
@@ -409,10 +490,22 @@ Onboarding is acceptable when:
 - Goal means a meaningful outcome that may need a plan.
 - Standalone action UI language is Task.
 
+## Resolved Wave 4 Questions
+
+- Static premium product preview at launch; animation later.
+- First prompt: `What do you want to organize?`
+- First object creation shows receipt inside destination.
+- Display density is not asked during onboarding; default is Balanced + Comfortable.
+- Life Area is inferred when possible and asked only when uncertain.
+- Notifications are requested only after reminder/protected-block value.
+- Calendar access is requested only from Plan after calendar-aware planning action.
+- Default examples cover Career, Creative, Finance, Health, Home, and Relationships / Family.
+- Baby/family examples can appear later when contextually relevant.
+- Skipping onboarding lands in Today with strong empty state and Capture action.
+- First-run success metric is any useful object created.
+
 ## Known Gaps / Future Questions
 
-- Should onboarding show one animated product preview or stay entirely input-first?
-- Should first object creation default to Capture receipt or directly to Goal/Plan detail?
-- Should appearance setup happen during onboarding or only in You?
-- Should examples be personalized by selected Life Area?
-- Should onboarding include pregnancy/family, career, creative, finance, health, and home examples by default?
+- Should examples be personalized after the user creates enough context?
+- Should baby/family examples be triggered by user-confirmed family context or explicit Life Area selection?
+- Should the static preview show Today, Goal Detail, or Plan as the hero representation?
