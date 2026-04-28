@@ -14,6 +14,8 @@ Use [docs/codex/CONTEXT_INDEX.md](docs/codex/CONTEXT_INDEX.md) for the Codex/ses
 
 - [SOURCE_OF_TRUTH_MAP.md](docs/canon/SOURCE_OF_TRUTH_MAP.md)
 - [PRODUCT_DECISIONS.md](docs/canon/PRODUCT_DECISIONS.md)
+- [GOLDEN_LAUNCH_LOOP.md](docs/canon/GOLDEN_LAUNCH_LOOP.md)
+- [HUMAN_LANGUAGE_REVIEW.md](docs/canon/HUMAN_LANGUAGE_REVIEW.md)
 - [AMBITION_CANON_COMPLETION_REPORT.md](docs/canon/AMBITION_CANON_COMPLETION_REPORT.md)
 - [DOCS_RECONCILIATION_REVIEW.md](docs/canon/DOCS_RECONCILIATION_REVIEW.md)
 - [Canon index](docs/canon/README.md)
@@ -32,7 +34,7 @@ The permanent planning docs live in [docs/canon](docs/canon). Core active docs i
 - [Ambitions_2_0_Roadmap_Merge_Audit.md](docs/canon/Ambitions_2_0_Roadmap_Merge_Audit.md)
 - [IMPLEMENTATION_ACCEPTANCE_GATES.md](docs/canon/IMPLEMENTATION_ACCEPTANCE_GATES.md)
 
-Superseded and historical docs are indexed from [docs/archive/README.md](docs/archive/README.md) or marked as historical in [docs/canon/README.md](docs/canon/README.md). Historical docs are context only and do not override the current source map, decision ledger, or focused canon docs.
+Superseded and historical docs are indexed from [docs/archive/README.md](docs/archive/README.md) or marked as historical in [docs/canon/README.md](docs/canon/README.md). Historical docs are context only and do not override the current source map, decision ledger, Golden Launch Loop, Human Language Review, or focused canon docs.
 
 ## Native structure
 
@@ -56,6 +58,7 @@ Superseded and historical docs are indexed from [docs/archive/README.md](docs/ar
 - Do not add new production UI work outside `Native/Ambitions/`, `Sources/`, or `AppUI/Sources/`.
 - Do not reintroduce Expo, React Native, or TypeScript runtime files.
 - Do not add top-level tabs casually. The active shell is Today / Goals / Capture / Plan / You.
+- Do not treat non-Golden-Launch-Loop work as launch-critical without explicit justification.
 - Do not claim sync, export, AI, accessibility, privacy, platform behavior, or production readiness before implementation evidence exists.
 
 ## Running the native app
@@ -120,4 +123,4 @@ Local reproduction, including exact build, unit test, UI test, and archive comma
 
 The repo is now Swift-native and XcodeGen-driven. The app boots through the native SwiftUI entry point, persists state through SwiftData, and preserves the active Today / Goals / Capture / Plan / You shell. Older internal Captures, Habits, Insights, and Profile naming remains compatibility-only where it still exists.
 
-Product-definition Waves 1-19 are complete. The docs-control reconciliation pass is partially complete; roadmap/batch shipped/planned/deferred reconciliation and later archive cleanup remain pending before treating the docs layer as fully clean.
+Product-definition Waves 1-19 are complete. The Golden Launch Loop and Human Language Review are active product-strength gates. Roadmap/batch shipped/planned/deferred reconciliation, user-facing string cleanup, and later archive cleanup remain pending before treating the docs layer as fully clean.
