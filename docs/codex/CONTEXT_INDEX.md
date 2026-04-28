@@ -5,10 +5,11 @@ This file defines the standing source-of-truth hierarchy for future Ambitions wo
 ## Current Operating Truth
 
 - Product-decision Waves 1-19 are complete.
-- Current execution status remains: Batches 00-88 and D01-D06 are complete for planning purposes; D07 / Life Areas Overview / Atlas Object Model is the next dependency-safe implementation batch from the Design Constitution delta/alignment backlog.
+- Current execution status remains: Batches 00-88 and D01-D07 are complete for planning purposes; D08 / North Stars / Dormant Ambitions Object Model is the next dependency-safe implementation batch from the Design Constitution delta/alignment backlog.
 - D04 Panel Size + Display Density foundation exists as shared design-system support; future batches own broad surface adoption.
 - D05 Receipt / Action Closure Search and Privacy Contract exists as a local-first receipt history/search foundation over existing Action Closure receipts, with typed filters, deterministic ordering, redacted/full-detail projections, privacy levels, safe-to-show flags, undo/proof/trust labels, and calm missing-detail fallback.
 - D06 Smart Attachment Foundation exists as a local-first routing/confidence/clarification contract over Capture and Command, with deterministic bounded local classification, Needs a Place fallback, D05-compatible receipts, redacted/full-detail projections, and correction/change affordances.
+- D07 Life Areas Overview / Atlas Object Model exists as a local-first Life Areas object/projection foundation over existing Life Graph domains and goals, with canonical labels, deterministic overview ordering, privacy-safe compact/redacted projection, accessibility labels/values/hints, and a minimal Goal Atlas preview adapter. It does not implement North Stars, One-Step Goals, semantic zoom, a sixth tab, or broad surface redesign.
 - D01-D26 classification now lives in `docs/canon/ROADMAP_BATCH_CLASSIFICATION.md` and distinguishes launch-critical, soon-after-launch, post-launch, deferred, decision-gated, and infrastructure-unlock work.
 - Original Batches 89-120 remain future planned roadmap work only through the classifications and dependencies in `docs/canon/Ambitions_2_0_Roadmap_Merge_Audit.md`.
 - Post-D26 Layer 2/Layer 3 maturity planning now lives in `docs/canon/POST_D26_MATURITY_ROADMAP.md`. It rewrites original Batches 89-120 into M-series maturity batches and R-series release-readiness gates. It is planning only and does not mark D01-D26 complete.

@@ -46,7 +46,7 @@ Use [../canon/Ambitions_2_0_Batch_Plan.md](../canon/Ambitions_2_0_Batch_Plan.md)
 
 ## Active Queue
 
-Current execution status: Ambitions 2.0 post-Batch-60 canon is adopted. Batches 00-88 and D01-D06 are complete for planning purposes. D07 / Life Areas Overview / Atlas Object Model is the next dependency-safe implementation batch from the Design Constitution delta/alignment backlog. Original Batches 89-120 remain future planned roadmap work only through the classifications and dependencies in [../canon/Ambitions_2_0_Roadmap_Merge_Audit.md](../canon/Ambitions_2_0_Roadmap_Merge_Audit.md).
+Current execution status: Ambitions 2.0 post-Batch-60 canon is adopted. Batches 00-88 and D01-D07 are complete for planning purposes. D08 / North Stars / Dormant Ambitions Object Model is the next dependency-safe implementation batch from the Design Constitution delta/alignment backlog. Original Batches 89-120 remain future planned roadmap work only through the classifications and dependencies in [../canon/Ambitions_2_0_Roadmap_Merge_Audit.md](../canon/Ambitions_2_0_Roadmap_Merge_Audit.md).
 
 Docs-only reconciliation note: Design Constitution canon reconciliation was performed as a user-directed canon/design-system integration pass after Batch 88 planning status. It created the active design constitution and supporting matrices/specs without starting Batch 89 feature work, changing branch, changing app code, or claiming future implementation completion.
 
@@ -108,8 +108,8 @@ These rows are planned future implementation work from the Design Constitution i
 | D04 | Panel Size + Display Density | Completed | Added shared Display Density and Panel Size design-system foundation with default Balanced + Comfortable, reusable panel decision helpers, 3x3 preview matrix coverage, and focused D04 tests. Validated with XcodeGen generation, simulator build, focused D04 tests, full `AmbitionsTests`, and no major app surface adoption or redesign. |
 | D05 | Receipt / Action Closure Search and Privacy Contract | Completed | Added a local-first receipt/action-closure history and search contract over existing Action Closure receipts, including typed filters, deterministic sorting, full-detail vs redacted projections, privacy levels, safe-to-show flags, undo/proof/trust/missing-detail labels, and focused D05 coverage. Validated with `xcodegen generate`, simulator build, focused receipt/action-closure tests, and full `AmbitionsTests` on iPhone 17. |
 | D06 | Smart Attachment Foundation | Completed | Added a local-first Smart Attachment domain/service foundation with launch route types, confidence bands, compact clarification, Needs a Place fallback, deterministic bounded local ranking, D05-compatible receipt/privacy projections, correction/change affordances, and minimal Capture/Command integration. Validated with `xcodegen generate` and focused Smart Attachment/receipt/Capture/Command tests on iPhone 17. |
-| D07 | Life Areas Overview / Atlas Object Model | Planned | Next dependency-safe batch. Depends on D02 and Life Graph. |
-| D08 | North Stars / Dormant Ambitions Object Model | Planned | Depends on D07. |
+| D07 | Life Areas Overview / Atlas Object Model | Completed | Added canonical Life Area / Life Areas Overview / Life Areas Atlas domain models, deterministic local projection over Life Graph goals, privacy/accessibility projections, and a minimal Goal Atlas preview adapter without adding a tab, North Stars, One-Step Goals, semantic zoom, or broad surface redesign. |
+| D08 | North Stars / Dormant Ambitions Object Model | Planned / next | Depends on D07. |
 | D09 | One-Step Goals Object Model | Planned | Depends on D02 and D05. |
 | D10 | Screen Contract Matrix Implementation Pass | Planned | Depends on D03-D09. |
 | D11 | Today 2.0 Design Constitution Alignment | Planned | Depends on D04, D09-D10, Now State, and Plan believability. |

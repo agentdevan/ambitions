@@ -1777,32 +1777,30 @@ private extension RepositoryBackedGoalsService {
         let cardsByGoalID = Dictionary(uniqueKeysWithValues: cards.compactMap { card in
             card.target.goalID.map { ($0, card) }
         })
-        let grouped = LifeGraphResolver.groupGoalsByPrimaryDomain(snapshot.goals)
-        let groups = grouped
-            .map { domain, goals -> GoalAtlasPreviewGroup in
-                let orderedGoals = goals.sorted { lhs, rhs in
-                    (cardsByGoalID[lhs.id]?.manualPriorityRank ?? Int.max) < (cardsByGoalID[rhs.id]?.manualPriorityRank ?? Int.max)
-                }
-                let items = orderedGoals.prefix(3).map { goal in
-                    let card = cardsByGoalID[goal.id]
-                    return GoalAtlasPreviewItem(
-                        id: goal.id,
-                        title: goal.title,
-                        subtitle: card?.nextVisibleStep.title ?? card?.phaseSummary ?? "Relationship data is still thin.",
-                        state: card?.lifecycleState.visualState ?? .default
-                    )
-                }
+        let overview = LifeAreaAtlasProjector().overview(from: .init(goals: snapshot.goals))
+        let groups = overview.areas
+            .filter { $0.counts.hasContent }
+            .map { area -> GoalAtlasPreviewGroup in
+                let orderedItems = (area.activeGoals + area.parkedGoals)
+                    .sorted { lhs, rhs in
+                        (cardsByGoalID[lhs.id]?.manualPriorityRank ?? Int.max) < (cardsByGoalID[rhs.id]?.manualPriorityRank ?? Int.max)
+                    }
+                    .prefix(3)
+                    .map { goal in
+                        let card = cardsByGoalID[goal.id]
+                        return GoalAtlasPreviewItem(
+                            id: goal.id,
+                            title: goal.title,
+                            subtitle: card?.nextVisibleStep.title ?? card?.phaseSummary ?? "Relationship data is still thin.",
+                            state: card?.lifecycleState.visualState ?? .default
+                        )
+                    }
                 return GoalAtlasPreviewGroup(
-                    id: domain?.rawValue ?? "uncategorized",
-                    title: domain?.portfolioTitle ?? "Unsorted",
-                    subtitle: "\(goals.count) goal\(goals.count == 1 ? "" : "s") connected here",
-                    items: items
+                    id: area.id.rawValue,
+                    title: area.definition.displayName,
+                    subtitle: "\(area.counts.activeGoalCount + area.counts.parkedGoalCount) goal\(area.counts.activeGoalCount + area.counts.parkedGoalCount == 1 ? "" : "s") connected here",
+                    items: Array(orderedItems)
                 )
-            }
-            .sorted { lhs, rhs in
-                if lhs.id == "uncategorized" { return false }
-                if rhs.id == "uncategorized" { return true }
-                return lhs.title.localizedCaseInsensitiveCompare(rhs.title) == .orderedAscending
             }
             .prefix(3)
 
@@ -2159,7 +2157,7 @@ private extension RepositoryBackedGoalsService {
         let graph = context.goal?.lifeGraph ?? context.draft?.draft.lifeGraph
         var labels: [String] = []
         if let domain = graph?.domains.max(by: { lhs, rhs in lhs.priority < rhs.priority })?.domain {
-            labels.append(domain.portfolioTitle)
+            labels.append(domain.lifeAreaDisplayName)
         }
         if let pathTitle = graph?.path?.title, pathTitle.isEmpty == false {
             labels.append(pathTitle)
@@ -4272,20 +4270,5 @@ private extension RepositoryBackedGoalsService {
             return "\"\(title)\" was added to Calendar. The day looks tight around that block."
         }
         return "\"\(title)\" was added to Calendar."
-    }
-}
-
-private extension LifeDomainKey {
-    var portfolioTitle: String {
-        switch self {
-        case .career: "Career"
-        case .education: "Education"
-        case .health: "Health"
-        case .finance: "Finance"
-        case .home: "Home"
-        case .relationships: "Relationships"
-        case .creativity: "Creativity"
-        case .personalGrowth: "Personal growth"
-        }
     }
 }

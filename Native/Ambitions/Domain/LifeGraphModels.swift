@@ -314,6 +314,7 @@ struct LifeGraphContext: Codable, Sendable, Equatable, Hashable {
 let lifeGraphRelationshipSchemaVersion = "life_graph_relationship.native.v1"
 
 enum LifeGraphObjectKind: String, Codable, Sendable, Equatable, Hashable, CaseIterable {
+    case lifeArea = "life_area"
     case goal
     case milestone
     case action
@@ -334,7 +335,7 @@ enum LifeGraphObjectKind: String, Codable, Sendable, Equatable, Hashable, CaseIt
         switch self {
         case .commitment, .waitingItem, .proof, .resource, .decision, .correction, .receipt, .blocker, .person:
             return true
-        case .goal, .milestone, .action, .step, .capture, .evidence:
+        case .lifeArea, .goal, .milestone, .action, .step, .capture, .evidence:
             return false
         }
     }

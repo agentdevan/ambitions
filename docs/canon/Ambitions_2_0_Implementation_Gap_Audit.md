@@ -232,7 +232,7 @@ These are future delta/alignment batches. They do not replace the existing Batch
 | D04 | Panel Size + Display Density | Add Compact/Comfortable/Large and Minimal/Balanced/Detailed foundations. |
 | D05 | Receipt / Action Closure Search and Privacy Contract | Add searchable receipt history, privacy redaction, and display rules. |
 | D06 | Smart Attachment Foundation | Implement named routing/confidence/clarification/receipt/correction behavior. |
-| D07 | Life Areas Overview / Atlas Object Model | Implement Life Areas as visible organization lens, not a tab. |
+| D07 | Life Areas Overview / Atlas Object Model | Completed foundation: Life Areas are now a canonical object/projection layer and visible organization lens, not a tab. Full surface transformation remains D13. |
 | D08 | North Stars / Dormant Ambitions Object Model | Add dormant ambition semantics and detail surfaces. |
 | D09 | One-Step Goals Object Model | Add Task as standalone One-Step Goal and promotion/demotion/attachment rules. |
 | D10 | Screen Contract Matrix Implementation Pass | Wire the screen matrix into implementation acceptance criteria before surface deltas. |

@@ -154,6 +154,33 @@ final class GoalsOverviewBoardTests: XCTestCase {
         XCTAssertTrue(overview.archiveSummary.chips.contains(where: { $0.lifecycleState == .completed && $0.count == 1 }))
         XCTAssertTrue(overview.archiveSummary.chips.contains(where: { $0.lifecycleState == .cancelledDropped && $0.count == 1 }))
     }
+
+    func testGoalAtlasPreviewConsumesLifeAreasProjectionWithoutRedesigningSurface() async throws {
+        let repositories = try await makeRepositories()
+        let service = RepositoryBackedGoalsService(repositories: repositories)
+        let moneyGoal = makeGoal(
+            id: "goal-money-area",
+            title: "Build an emergency fund",
+            dueInDays: 30,
+            lifeDomain: .finance
+        )
+        let careerGoal = makeGoal(
+            id: "goal-career-area",
+            title: "Prepare portfolio review",
+            dueInDays: 14,
+            lifeDomain: .career
+        )
+
+        try await repositories.goals.saveGoals([moneyGoal, careerGoal])
+        try await savePriorityOrder([moneyGoal.id, careerGoal.id], repositories: repositories)
+
+        let overview = try await service.loadOverview()
+        let atlasPreview = try XCTUnwrap(overview.atlasPreview)
+
+        XCTAssertEqual(atlasPreview.title, "Goal Atlas preview")
+        XCTAssertEqual(atlasPreview.groups.map(\.title), ["Career", "Money"])
+        XCTAssertTrue(atlasPreview.groups.contains(where: { $0.id == "finance" && $0.items.map(\.id) == [moneyGoal.id] }))
+    }
 }
 
 private extension GoalsOverviewBoardTests {
@@ -179,7 +206,13 @@ private extension GoalsOverviewBoardTests {
         try await repositories.appState.saveState(state)
     }
 
-    func makeGoal(id: String, title: String, dueInDays: Int, state: GoalLifecycleState = .active) -> Goal {
+    func makeGoal(
+        id: String,
+        title: String,
+        dueInDays: Int,
+        state: GoalLifecycleState = .active,
+        lifeDomain: LifeDomainKey? = nil
+    ) -> Goal {
         let actor = GoalActor(actorID: "self", displayName: "You", ownership: .self, roleLabel: "Primary owner", isPrimary: true)
         let timing = GoalTiming(
             tempo: .deadlineBased,
@@ -276,7 +309,8 @@ private extension GoalsOverviewBoardTests {
             timing: timing,
             planningStrategy: strategy,
             progressStrategy: progress,
-            plan: plan
+            plan: plan,
+            lifeGraph: lifeDomain.map { LifeGraphContext(domains: [LifeDomainAssignment(domain: $0)]) }
         )
     }
 
