@@ -18,6 +18,8 @@ For current canon ownership and consolidation, read:
   Active D01-D26 classification layer separating launch-critical, soon-after-launch, post-launch, deferred, decision-gated, and infrastructure-unlock work.
 - [canon/HUMAN_LANGUAGE_REVIEW.md](canon/HUMAN_LANGUAGE_REVIEW.md)
   Active language correction layer ensuring normal UI copy sounds human, obvious, and not AI/producty.
+- [canon/Ambitions_2_0_Object_Terminology.md](canon/Ambitions_2_0_Object_Terminology.md)
+  Active D02 object terminology canon for Goal, Plan, Task / One-Step Goal, Step, Ritual, Receipt, and Proof naming.
 - [canon/AMBITION_CANON_COMPLETION_REPORT.md](canon/AMBITION_CANON_COMPLETION_REPORT.md)
   Final canon completion report for Waves 1-19, including settled canon, open questions, no-drift rules, archive candidates, and the next Codex reconciliation prompt.
 - [canon/DOCS_RECONCILIATION_REVIEW.md](canon/DOCS_RECONCILIATION_REVIEW.md)
@@ -46,6 +48,8 @@ For the current free Codex workflow, also read:
   Active roadmap/batch classification and launch spine for D01-D26.
 - [canon/HUMAN_LANGUAGE_REVIEW.md](canon/HUMAN_LANGUAGE_REVIEW.md)
   Active user-facing language review and replacement table.
+- [canon/Ambitions_2_0_Object_Terminology.md](canon/Ambitions_2_0_Object_Terminology.md)
+  Active object terminology canon from D02.
 - [canon/AMBITION_CANON_COMPLETION_REPORT.md](canon/AMBITION_CANON_COMPLETION_REPORT.md)
   Final canon completion report and next reconciliation prompt.
 - [canon/DOCS_RECONCILIATION_REVIEW.md](canon/DOCS_RECONCILIATION_REVIEW.md)
@@ -89,6 +93,7 @@ These focused docs extract already-existing doctrine into implementation-readabl
 - [canon/GOLDEN_LAUNCH_LOOP.md](canon/GOLDEN_LAUNCH_LOOP.md)
 - [canon/ROADMAP_BATCH_CLASSIFICATION.md](canon/ROADMAP_BATCH_CLASSIFICATION.md)
 - [canon/HUMAN_LANGUAGE_REVIEW.md](canon/HUMAN_LANGUAGE_REVIEW.md)
+- [canon/Ambitions_2_0_Object_Terminology.md](canon/Ambitions_2_0_Object_Terminology.md)
 - [canon/AMBITION_CANON_COMPLETION_REPORT.md](canon/AMBITION_CANON_COMPLETION_REPORT.md)
 - [canon/DOCS_RECONCILIATION_REVIEW.md](canon/DOCS_RECONCILIATION_REVIEW.md)
 - [canon/CANON_CONSOLIDATION_GAP_AUDIT.md](canon/CANON_CONSOLIDATION_GAP_AUDIT.md)
