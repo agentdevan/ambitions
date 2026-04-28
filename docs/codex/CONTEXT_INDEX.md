@@ -1,45 +1,38 @@
 # Ambitions Codex Context Index
 
-This file defines the standing source-of-truth hierarchy for future Ambitions work.
-Use it before planning or implementing any non-trivial task.
+This file defines the standing source-of-truth hierarchy for future Ambitions work. Use it before planning or implementing any non-trivial task.
 
-Ambitions 1.0 foundation work is complete through registry Batch 18.
-All phases and batches before Batch 61 are complete for planning purposes.
-The active Ambitions 2.0 canon is the post-Batch-60 transformation package beginning at Batch 61. It supersedes prior roadmap direction where conflicts exist after Batch 60 without erasing older launch, hardening, frontend transformation, or release-candidate history.
+## Current Operating Truth
 
-Current execution status: Batches 00-88 are complete for planning purposes. D01 is the next dependency-safe implementation batch from the Design Constitution delta/alignment backlog. Original Batches 89-120 remain future planned roadmap work only through the classifications and dependencies in [Ambitions_2_0_Roadmap_Merge_Audit.md](../canon/Ambitions_2_0_Roadmap_Merge_Audit.md).
+- Product-decision Waves 1-19 are complete.
+- The next phase is documentation/roadmap/batch reconciliation, then D01 implementation.
+- Current execution status remains: Batches 00-88 are complete for planning purposes; D01 is the next dependency-safe implementation batch from the Design Constitution delta/alignment backlog.
+- Original Batches 89-120 remain future planned roadmap work only through the classifications and dependencies in `docs/canon/Ambitions_2_0_Roadmap_Merge_Audit.md`.
+- The locked top-level shell is `Today / Goals / Capture / Plan / You`.
+- Launch posture is local-first: no required account, no launch sync, export before sync.
+- Archived and historical docs are context only. They do not override active canon.
 
 ## Required Read Order
 
 For non-trivial work, read these in order before planning:
 
 1. [AGENTS.md](../../AGENTS.md) and any more-specific scoped `AGENTS.md`.
-2. [FREE_WORKFLOW_OPERATING_SYSTEM.md](FREE_WORKFLOW_OPERATING_SYSTEM.md) for the free, non-agent, non-GitHub-Actions operating procedure.
-3. [Ambitions_2_0_Master_Plan.md](../canon/Ambitions_2_0_Master_Plan.md) for active post-Batch-60 Ambitions 2.0 product canon.
-4. [Ambitions_2_0_Product_Architecture.md](../canon/Ambitions_2_0_Product_Architecture.md).
-5. [Ambitions_2_0_Systems_Architecture.md](../canon/Ambitions_2_0_Systems_Architecture.md).
-6. [Ambitions_2_0_Visual_System.md](../canon/Ambitions_2_0_Visual_System.md).
-7. [Ambitions_Design_Constitution.md](../canon/design/Ambitions_Design_Constitution.md) for active design, IA, UX writing, component naming, interaction, trust, accessibility, and external-surface contracts.
-8. [Ambitions_2_0_Roadmap.md](../canon/Ambitions_2_0_Roadmap.md).
-9. [Ambitions_2_0_Batch_Plan.md](../canon/Ambitions_2_0_Batch_Plan.md).
-10. [Ambitions_2_0_RC_Maturity_Plan.md](../canon/Ambitions_2_0_RC_Maturity_Plan.md) for future batch maturity gates, RC milestones, dependency map, performance strategy, and mature-invention coverage.
-11. [Ambitions_2_0_Intelligence_Standards.md](../canon/Ambitions_2_0_Intelligence_Standards.md) for active Ambitions 2.0 intelligence standards, recommendation explanations, priority reality, context lens, commitment capture, living goal containers, and obvious destination rules.
-12. [Ambitions_2_0_Accessibility_Nutrition.md](../canon/Ambitions_2_0_Accessibility_Nutrition.md) when the task touches accessibility, UI, release, or trust claims.
-13. [Ambitions_2_0_Daily_Loop_QA_Baseline.md](../canon/Ambitions_2_0_Daily_Loop_QA_Baseline.md) when validating Phase A daily-loop QA, performance, accessibility, and stability truth.
-14. [Ambitions_2_0_Foundation_Performance_Persistence_Budget.md](../canon/Ambitions_2_0_Foundation_Performance_Persistence_Budget.md) when validating Phase B foundation performance, bounded-query, persistence, migration, export/import, and sync-readiness posture.
-15. [Ambitions_2_0_Capability_Matrix.md](../canon/Ambitions_2_0_Capability_Matrix.md) when verifying implementation status or running roadmap reconciliation.
-16. [Ambitions_2_0_Implementation_Gap_Audit.md](../canon/Ambitions_2_0_Implementation_Gap_Audit.md) when planning Design Constitution alignment or checking implementation gaps.
-17. [Ambitions_2_0_Roadmap_Merge_Audit.md](../canon/Ambitions_2_0_Roadmap_Merge_Audit.md) before planning any original Batch 89-120 work.
-18. [Documentation_Cleanup_Audit.md](../canon/Documentation_Cleanup_Audit.md) when cleaning or classifying markdown docs.
-19. [Ambitions_2_0_Codex_Execution_Guide.md](Ambitions_2_0_Codex_Execution_Guide.md).
-20. [MASTER_CODEX_SYSTEM.md](MASTER_CODEX_SYSTEM.md).
-21. [BATCH_REGISTRY.md](BATCH_REGISTRY.md).
-22. [VISUAL_REVIEW_CHECKLIST.md](../review/VISUAL_REVIEW_CHECKLIST.md) when visible UI, navigation, empty states, copy, or hierarchy changes.
-23. [FRICTION_LOG.md](../review/FRICTION_LOG.md) when observed product friction needs to be captured without expanding active scope.
-24. [MASTER_PRODUCT_SPEC.md](../../MASTER_PRODUCT_SPEC.md) for current shipping product truth where not superseded by the new Ambitions 2.0 canon.
-25. [canon/README.md](../canon/README.md) for active canon index and historical-doc status.
-26. [archive/README.md](../archive/README.md) when investigating superseded design or frontend transformation context.
-27. Supporting docs linked from [docs/README.md](../README.md).
+2. [BATCH_REGISTRY.md](BATCH_REGISTRY.md) for active work status only.
+3. [SOURCE_OF_TRUTH_MAP.md](../canon/SOURCE_OF_TRUTH_MAP.md) for document ownership and reading order.
+4. [PRODUCT_DECISIONS.md](../canon/PRODUCT_DECISIONS.md) for resolved Waves 1-19 product decisions.
+5. [AMBITION_CANON_COMPLETION_REPORT.md](../canon/AMBITION_CANON_COMPLETION_REPORT.md) for completion status, open questions, no-drift rules, archive candidates, and next reconciliation prompt.
+6. [DOCS_RECONCILIATION_REVIEW.md](../canon/DOCS_RECONCILIATION_REVIEW.md) when doing documentation cleanup, source-order updates, roadmap/batch reconciliation, or archive-candidate review.
+7. [MASTER_PRODUCT_SPEC.md](../../MASTER_PRODUCT_SPEC.md) for current shipping product truth and product promise.
+8. [Ambitions_Design_Constitution.md](../canon/design/Ambitions_Design_Constitution.md) for design, IA, UX writing, interaction, trust, accessibility, and external-surface authority.
+9. [Ambitions_2_0_Product_Architecture.md](../canon/Ambitions_2_0_Product_Architecture.md) for surface ownership and drilldown rules.
+10. [Ambitions_2_0_Systems_Architecture.md](../canon/Ambitions_2_0_Systems_Architecture.md) for shared engines, local-first systems, and system ownership.
+11. [Ambitions_2_0_Visual_System.md](../canon/Ambitions_2_0_Visual_System.md) plus focused visual/design docs when UI or component work is involved.
+12. Relevant focused canon docs listed in [SOURCE_OF_TRUTH_MAP.md](../canon/SOURCE_OF_TRUTH_MAP.md).
+13. [Ambitions_2_0_Roadmap.md](../canon/Ambitions_2_0_Roadmap.md), [Ambitions_2_0_Batch_Plan.md](../canon/Ambitions_2_0_Batch_Plan.md), [Ambitions_2_0_Implementation_Gap_Audit.md](../canon/Ambitions_2_0_Implementation_Gap_Audit.md), and [Ambitions_2_0_Roadmap_Merge_Audit.md](../canon/Ambitions_2_0_Roadmap_Merge_Audit.md) for execution sequencing after source-map alignment.
+14. [FREE_WORKFLOW_OPERATING_SYSTEM.md](FREE_WORKFLOW_OPERATING_SYSTEM.md), [Ambitions_2_0_Codex_Execution_Guide.md](Ambitions_2_0_Codex_Execution_Guide.md), and [MASTER_CODEX_SYSTEM.md](MASTER_CODEX_SYSTEM.md) for Codex/process behavior.
+15. [VISUAL_REVIEW_CHECKLIST.md](../review/VISUAL_REVIEW_CHECKLIST.md) when visible UI, navigation, empty states, copy, or hierarchy changes.
+16. [FRICTION_LOG.md](../review/FRICTION_LOG.md) when observed product friction needs to be captured without expanding active scope.
+17. [docs/README.md](../README.md), [canon/README.md](../canon/README.md), and [archive/README.md](../archive/README.md) for index/navigation support.
 
 ## Precedence Model
 
@@ -47,72 +40,54 @@ When sources conflict, use this precedence:
 
 1. Direct user task instructions.
 2. Root [AGENTS.md](../../AGENTS.md) and any more-specific scoped `AGENTS.md`.
-3. [Ambitions_Design_Constitution.md](../canon/design/Ambitions_Design_Constitution.md) for active design, IA, UX writing, component naming, interaction, trust, accessibility, and external-surface contracts.
-4. The Ambitions 2.0 post-Batch-60 canon files listed above for active Batch 61+ product, architecture, visual, roadmap, batch, intelligence standards, accessibility, and execution truth.
-5. [FREE_WORKFLOW_OPERATING_SYSTEM.md](FREE_WORKFLOW_OPERATING_SYSTEM.md) for process, validation, prompt modes, anti-cost guardrails, and batch lifecycle.
-6. [BATCH_REGISTRY.md](BATCH_REGISTRY.md) for active work status.
-7. [MASTER_CODEX_SYSTEM.md](MASTER_CODEX_SYSTEM.md) and [Ambitions_2_0_Codex_Execution_Guide.md](Ambitions_2_0_Codex_Execution_Guide.md) for standing Codex behavior.
-8. [VISUAL_REVIEW_CHECKLIST.md](../review/VISUAL_REVIEW_CHECKLIST.md) and [FRICTION_LOG.md](../review/FRICTION_LOG.md) for manual review and observed friction only; they are not product canon.
-9. [MASTER_PRODUCT_SPEC.md](../../MASTER_PRODUCT_SPEC.md) for current shipping product truth where not superseded by the new Ambitions 2.0 canon.
-10. [canon/README.md](../canon/README.md) for historical/supporting canon status.
-11. [archive/README.md](../archive/README.md) for superseded design and frontend transformation context.
-12. Supporting docs.
+3. [BATCH_REGISTRY.md](BATCH_REGISTRY.md) for operational status only.
+4. [SOURCE_OF_TRUTH_MAP.md](../canon/SOURCE_OF_TRUTH_MAP.md) for document ownership and reading order.
+5. [PRODUCT_DECISIONS.md](../canon/PRODUCT_DECISIONS.md) for resolved Waves 1-19 product decisions.
+6. [AMBITION_CANON_COMPLETION_REPORT.md](../canon/AMBITION_CANON_COMPLETION_REPORT.md) and [DOCS_RECONCILIATION_REVIEW.md](../canon/DOCS_RECONCILIATION_REVIEW.md) for post-canon reconciliation status and no-drift instructions.
+7. [MASTER_PRODUCT_SPEC.md](../../MASTER_PRODUCT_SPEC.md) for shipping product truth where not superseded by later canon decisions.
+8. [Ambitions_Design_Constitution.md](../canon/design/Ambitions_Design_Constitution.md) for design/IA/UX/trust/accessibility/external-surface authority.
+9. Product, systems, visual, and focused canon docs listed in [SOURCE_OF_TRUTH_MAP.md](../canon/SOURCE_OF_TRUTH_MAP.md).
+10. Roadmap, batch, gap, and merge-audit docs for sequencing after reconciliation.
+11. Codex workflow docs for process behavior.
+12. Review/friction docs for support only.
+13. Archived and historical docs for context only.
 
-## Active Source-Of-Truth Docs
+## Active Source-Of-Truth Entry Points
 
-These files are the active Ambitions source-of-truth stack:
+Use these entry points instead of duplicating a separate active-doc list here:
 
-- [../canon/Ambitions_2_0_Master_Plan.md](../canon/Ambitions_2_0_Master_Plan.md)
-- [../canon/Ambitions_2_0_Product_Architecture.md](../canon/Ambitions_2_0_Product_Architecture.md)
-- [../canon/Ambitions_2_0_Systems_Architecture.md](../canon/Ambitions_2_0_Systems_Architecture.md)
-- [../canon/Ambitions_2_0_Visual_System.md](../canon/Ambitions_2_0_Visual_System.md)
-- [../canon/design/Ambitions_Design_Constitution.md](../canon/design/Ambitions_Design_Constitution.md)
-- [../canon/Ambitions_2_0_Roadmap.md](../canon/Ambitions_2_0_Roadmap.md)
-- [../canon/Ambitions_2_0_Batch_Plan.md](../canon/Ambitions_2_0_Batch_Plan.md)
-- [../canon/Ambitions_2_0_RC_Maturity_Plan.md](../canon/Ambitions_2_0_RC_Maturity_Plan.md)
-- [../canon/Ambitions_2_0_Intelligence_Standards.md](../canon/Ambitions_2_0_Intelligence_Standards.md)
-- [../canon/Ambitions_2_0_Accessibility_Nutrition.md](../canon/Ambitions_2_0_Accessibility_Nutrition.md)
-- [../canon/Ambitions_2_0_Daily_Loop_QA_Baseline.md](../canon/Ambitions_2_0_Daily_Loop_QA_Baseline.md)
-- [../canon/Ambitions_2_0_Foundation_Performance_Persistence_Budget.md](../canon/Ambitions_2_0_Foundation_Performance_Persistence_Budget.md)
-- [../canon/Ambitions_2_0_Decision_Log.md](../canon/Ambitions_2_0_Decision_Log.md)
-- [../canon/Ambitions_2_0_Capability_Matrix.md](../canon/Ambitions_2_0_Capability_Matrix.md)
-- [../canon/Ambitions_2_0_Implementation_Gap_Audit.md](../canon/Ambitions_2_0_Implementation_Gap_Audit.md)
-- [../canon/Ambitions_2_0_Roadmap_Merge_Audit.md](../canon/Ambitions_2_0_Roadmap_Merge_Audit.md)
-- [../canon/Documentation_Cleanup_Audit.md](../canon/Documentation_Cleanup_Audit.md)
-- [Ambitions_2_0_Codex_Execution_Guide.md](Ambitions_2_0_Codex_Execution_Guide.md)
-- [FREE_WORKFLOW_OPERATING_SYSTEM.md](FREE_WORKFLOW_OPERATING_SYSTEM.md)
-- [../canon/design/README.md](../canon/design/README.md)
+- [SOURCE_OF_TRUTH_MAP.md](../canon/SOURCE_OF_TRUTH_MAP.md)
+- [PRODUCT_DECISIONS.md](../canon/PRODUCT_DECISIONS.md)
+- [AMBITION_CANON_COMPLETION_REPORT.md](../canon/AMBITION_CANON_COMPLETION_REPORT.md)
+- [DOCS_RECONCILIATION_REVIEW.md](../canon/DOCS_RECONCILIATION_REVIEW.md)
+- [canon/README.md](../canon/README.md)
+- [docs/README.md](../README.md)
 
-Do not replace these with external copies or duplicate canon locations.
+## Historical / Archived Docs
 
-## Superseded / Archived Docs
-
-- [../archive/README.md](../archive/README.md) indexes superseded design/frontend transformation docs.
-- Older roadmap, surgical, and batch docs preserved in [../canon/README.md](../canon/README.md) are historical/supporting only.
-
-## Review and Workflow Support Docs
-
-These files improve the process but do not override canon:
-
-- [FREE_WORKFLOW_OPERATING_SYSTEM.md](FREE_WORKFLOW_OPERATING_SYSTEM.md) — batch lifecycle, prompt modes, acceptance gate, free validation, anti-cost rules.
-- [VISUAL_REVIEW_CHECKLIST.md](../review/VISUAL_REVIEW_CHECKLIST.md) — manual UI review after visible changes.
-- [FRICTION_LOG.md](../review/FRICTION_LOG.md) — observed friction parking lot for later triage.
+- [archive/README.md](../archive/README.md) indexes superseded design/frontend transformation docs.
+- Older roadmap, surgical, frontend-transformation, and continuity docs preserved in `docs/canon/` are historical/supporting only unless the source map says otherwise.
+- Do not treat older batch prompts as runnable active prompts unless they have been reconciled against Waves 1-19.
 
 ## Execution Guardrails
 
 - Work on `main` only unless the user explicitly requests branch-based work.
 - Do not create, switch to, or suggest branches for normal Ambitions execution.
-- Do not skip ahead of the execution order in [BATCH_REGISTRY.md](BATCH_REGISTRY.md) and [Ambitions_2_0_Batch_Plan.md](../canon/Ambitions_2_0_Batch_Plan.md).
-- Do not build surfaces before engines or services exist.
-- Do not build extension-heavy features before shared container and data boundaries exist.
-- Do not build sync backend logic before sync boundary, export/import, and conflict policy are defined.
-- Do not begin device work before runtime separation exists.
-- Implement only the active or next queued batch from [Ambitions_2_0_Batch_Plan.md](../canon/Ambitions_2_0_Batch_Plan.md) and [BATCH_REGISTRY.md](BATCH_REGISTRY.md) unless explicitly told otherwise.
-- For Batch 66 onward, preserve the intelligence standards in [Ambitions_2_0_Intelligence_Standards.md](../canon/Ambitions_2_0_Intelligence_Standards.md): Priority Reality Model, Context Lens, Commitment Capture, Living Goal Containers, obvious destination rules for every user-created item, user-correctable assumptions, and anti-clutter progressive-disclosure product intelligence.
-- Treat archived frontend transformation docs as historical context only where not superseded by the active Batch 61+ Ambitions 2.0 canon.
-- Do not add paid infrastructure, GitHub Actions, scheduled agents, paid cloud runners, or external paid QA services unless the user explicitly authorizes it.
+- Do not skip ahead of the execution order in [BATCH_REGISTRY.md](BATCH_REGISTRY.md), [Ambitions_2_0_Batch_Plan.md](../canon/Ambitions_2_0_Batch_Plan.md), and the delta queue unless explicitly told otherwise.
+- Do not add top-level tabs casually.
+- Do not reintroduce top-level Insights, Habits, Tasks, Calendar, Life Areas, or Profile tabs.
+- Do not rename canon casually.
+- Do not implement fake capability.
+- Do not claim sync, export, AI, accessibility, privacy, platform behavior, or production readiness before implementation evidence exists.
+- Do not require an account at launch.
+- Do not build launch sync.
+- Do not paywall trust/privacy/data controls.
+- Do not make external writes silently.
+- Do not build surfaces before their owning engines/services exist.
+- Do not build extension-heavy features before shared container, receipts, command, privacy, and external-surface boundaries exist.
+- Do not build sync backend logic before export/import, trust, failure states, and conflict policy are strong.
+- If an unresolved question is found, create a canon proposal or decision-log entry rather than silently implementing it.
 
-## Older Docs
+## Next Operating Step
 
-Older roadmap, backlog, audit, release, or implementation notes are supporting context only.
-If they conflict with the canonical planning stack, demote them in place and follow the precedence model above.
+Finish the documentation-control cleanup identified in [DOCS_RECONCILIATION_REVIEW.md](../canon/DOCS_RECONCILIATION_REVIEW.md), then resume implementation with D01 unless the user explicitly changes the execution order.
