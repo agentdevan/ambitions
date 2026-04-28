@@ -1,5 +1,11 @@
 # Ambitions 2.0 Decision Log
 
+Status: Historical/supporting Ambitions 2.0 decision log.
+
+Active decision ledger: [PRODUCT_DECISIONS.md](PRODUCT_DECISIONS.md) records the resolved Waves 1-19 product decisions and should be treated as the active product-decision ledger for future canon work.
+
+This file remains useful as the original Ambitions 2.0 adoption log from 2026-04-24. If it conflicts with `PRODUCT_DECISIONS.md`, `SOURCE_OF_TRUTH_MAP.md`, or focused canon docs, the newer Waves 1-19 canon wins.
+
 Adoption date: 2026-04-24
 
 ## Locked Decisions
