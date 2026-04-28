@@ -2,7 +2,7 @@
 
 Status: Active canon consolidation layer.
 
-Purpose: Make trust, privacy, memory, receipts, explanation, correction, and user control explicit enough for implementation and QA. This document extracts existing doctrine from the Design Constitution, Product Architecture, Systems Architecture, Intelligence Standards, and UX Writing Matrix.
+Purpose: Make trust, privacy, memory, receipts, explanation, correction, and user control explicit enough for implementation and QA. This document extracts existing doctrine from the Design Constitution, Product Architecture, Systems Architecture, Intelligence Standards, UX Writing Matrix, and product decision Waves 1-2.
 
 ## Trust Thesis
 
@@ -14,6 +14,39 @@ Trust = privacy + explanation + correction + receipts + user control.
 
 Ambitions is intended to organize a person's life. That requires a higher trust bar than a generic productivity app.
 
+## Wave 2 Trust Decisions
+
+Confirmation required:
+
+```text
+Destructive actions
+External writes
+Major deadline changes
+Delete memory
+Calendar write
+```
+
+Receipt + undo first:
+
+```text
+Mark Done
+Move task
+Park task
+Attach task to goal
+Rename Life Area
+Change display density
+```
+
+Goal and archive language:
+
+```text
+End Goal = intentional ending action, followed by reason.
+Park Goal = intentional pause action.
+Dropped internal state = No Longer Relevant in normal UI.
+Completion Archive = product/design language.
+Archive = normal UI language.
+```
+
 ## Trust Principles
 
 1. The user can see what Ambitions knows.
@@ -22,10 +55,12 @@ Ambitions is intended to organize a person's life. That requires a higher trust 
 4. Meaningful changes close with receipts.
 5. Recommendations explain evidence and assumptions.
 6. External writes require explicit confirmation.
-7. Permissions are requested only when a user action makes the value clear.
-8. Planned intelligence is never described as shipped behavior.
-9. Ambitions is an intelligent product, not a chat-first AI product.
-10. Trust-critical states degrade safely.
+7. Destructive actions and major deadline changes require confirmation.
+8. Reversible local changes prefer receipt + undo.
+9. Permissions are requested only when a user action makes the value clear.
+10. Planned intelligence is never described as shipped behavior.
+11. Ambitions is an intelligent product, not a chat-first AI product.
+12. Trust-critical states degrade safely.
 
 ## Primary Trust Surfaces
 
@@ -38,6 +73,7 @@ Ambitions is intended to organize a person's life. That requires a higher trust 
 | You -> Reviews | Shows what changed, what was learned, and what should be corrected or carried forward. |
 | Capture receipts | Shows where items went and how to change route. |
 | Plan permission panels | Explain calendar access and no-permission fallback. |
+| Archive / Completion Archive | Preserves learning from completed, ended, no-longer-relevant, merged, replaced, or parked work. |
 
 ## Memory Model
 
@@ -89,7 +125,7 @@ Rules:
 - Older context should not appear equally trusted to current confirmed context.
 - Important memories should have a review path.
 - Memory correction should generate a receipt.
-- Memory deletion should be confirmed when destructive.
+- Memory deletion requires confirmation.
 
 ## Memory Confidence
 
@@ -130,6 +166,12 @@ Each memory category should support:
 - delete where safe
 - review source/evidence where useful
 
+Rules:
+
+- Correcting memory should create a receipt.
+- Deleting memory requires confirmation.
+- Display/density preference changes should prefer receipt + undo.
+
 ## Receipts
 
 Receipts are trust objects, not disposable toast messages.
@@ -157,6 +199,23 @@ Receipt result states:
 - needs confirmation
 - undo available
 
+Receipt + undo first:
+
+- Mark Done.
+- Move task.
+- Park task.
+- Attach task to goal.
+- Rename Life Area.
+- Change display density.
+
+Confirmation required instead:
+
+- Delete memory.
+- Calendar write.
+- Major deadline changes.
+- Destructive actions.
+- External writes.
+
 Receipt rules:
 
 - Meaningful commands should produce a receipt.
@@ -165,6 +224,7 @@ Receipt rules:
 - Failed actions should say what remains safe.
 - Undo availability must be truthful.
 - Correction is not the same as undo.
+- Do not over-confirm ordinary reversible local actions.
 
 ## Explanation Model
 
@@ -193,6 +253,11 @@ Every explanation should distinguish:
 - defaults
 - uncertainty
 - correction path
+
+Goal Weather rule:
+
+- Users should correct inputs that affect Goal Weather rather than manually setting weather directly.
+- Inputs include deadline, proof, blocker, next step, scope, waiting state, and assumptions.
 
 ## Privacy Levels
 
@@ -312,6 +377,25 @@ Recommended Grouped Navigation List sections:
 - Calendar Access
 - Accessibility Verification
 
+## Goal Ending And Archive Trust
+
+User-facing actions:
+
+```text
+End Goal
+Park Goal
+Archive
+```
+
+Rules:
+
+- `End Goal` should ask the reason before finalizing when practical.
+- Ended goals preserve proof, decision trail, and learning.
+- Internal `dropped` should render as `No Longer Relevant` in normal UI.
+- Completed goals remain visibly emphasized for 30 days by default; major goals may stay emphasized longer.
+- Product/design docs may say `Completion Archive`; normal UI should usually say `Archive`.
+- Archive is not trash.
+
 ## Failure And Degraded Trust States
 
 If something fails, the app should say:
@@ -340,14 +424,29 @@ Trust implementation is acceptable when:
 
 - User can inspect and correct memory.
 - Meaningful actions create receipts.
+- Reversible local actions prefer receipt + undo.
+- Destructive actions, external writes, and major deadline changes require confirmation.
 - Explanations distinguish evidence from assumptions.
 - Sensitive details are hidden by default in external surfaces.
 - Permission requests are user-action triggered.
 - Calendar write requires confirmation.
 - Sync/export/accessibility claims are truthful.
 - Failed actions state what remains safe.
-- Destructive memory/privacy changes require confirmation.
+- Memory deletion requires confirmation.
 - No AI/model terminology appears in normal UI.
+
+## Resolved Wave 2 Questions
+
+- Internal `Dropped` renders as `No Longer Relevant` in normal UI.
+- Cancelled and Dropped remain internally separate; launch UI may simplify.
+- Intentional goal ending action is `End Goal`, followed by a reason.
+- Intentional pause action is `Park Goal`; state is Parked.
+- Goal Weather is corrected through inputs, not direct manual override.
+- Destructive actions, external writes, and major deadline changes require confirmation.
+- Mark Done, Move task, Park task, Attach task to goal, Rename Life Area, and Change display density prefer receipt + undo.
+- Delete memory and calendar write require confirmation.
+- Completed goals stay visibly emphasized for 30 days by default; major goals may remain emphasized longer.
+- Product/design language is Completion Archive; normal UI language is Archive.
 
 ## Open Questions For Future Waves
 
