@@ -2,7 +2,7 @@
 
 Status: Active canon consolidation layer.
 
-Purpose: Define what “done” means for future Ambitions implementation work. This document consolidates acceptance expectations from the roadmap, batch plan, visual review checklist, RC maturity plan, design contracts, accessibility posture, systems architecture, and product decision Waves 1-2.
+Purpose: Define what “done” means for future Ambitions implementation work. This document consolidates acceptance expectations from the roadmap, batch plan, visual review checklist, RC maturity plan, design contracts, accessibility posture, systems architecture, and product decision Waves 1-3.
 
 ## Core Standard
 
@@ -92,6 +92,8 @@ A change passes surface ownership when content lives in the right place.
 | Capture | intake, Needs a Place, Smart Attachment, route receipts | long-term graveyard inbox, chat-first AI |
 | Plan | day/week shaping, believability, rituals, calendar-aware planning | onboarding permissions, raw calendar clone |
 | You | personalization, memory, reviews, trust, settings | primary execution UI |
+| Trust Center | trust, receipts, privacy, memory controls, sync/export truth, platform status | numerical trust score at launch, marketing claims |
+| What Ambitions Knows | user-visible Memory inspection, correction, confirmation, pause/delete controls | hidden profiling or unreviewable memory |
 
 ## Visual Quality Gate
 
@@ -115,6 +117,8 @@ A copy/UI-language change passes when:
 - It is calm, adult, specific, clear, and non-shaming.
 - It uses approved labels such as `Why This`, `Why Now`, `Why Changed`, `What This Uses`, `Needs Confirmation`, and `Update This`.
 - It uses Wave 2 state language: `No Longer Relevant` for dropped goals, `End Goal` for intentional ending, `Park Goal` for pause, `Needs Protection` for fragile plan state, and `No Longer Holds` for broken plan state.
+- It uses Wave 3 trust language: `You are in control` for Trust Center top status, `What Ambitions Knows` for the memory section, and `Memory` for the object/type.
+- It avoids numerical Trust Score language at launch.
 - It avoids AI/model terminology in normal UI.
 - It avoids shame language.
 - It avoids exposing `Dropped`, `Fragile`, or `Broken` as normal user-facing copy unless the context explicitly requires internal/debug language.
@@ -128,15 +132,26 @@ A trust-sensitive change passes when:
 
 - Meaningful actions create receipts.
 - Ordinary reversible local changes prefer receipt + undo.
+- Undo duration is action-appropriate and truthfully represented.
 - Destructive actions, external writes, and major deadline changes require confirmation.
 - Calendar write requires confirmation.
-- Memory deletion requires confirmation.
-- Memory is visible, editable, correctable, and deletable where safe.
+- Memory deletion and delete-all-memory require confirmation.
+- Delete-all-memory offers export/reminder first where export exists, or truthfully states export is unavailable.
+- Low-risk memories are visible and correctable.
+- Sensitive/high-impact memories require confirmation before use.
+- Health, relationship/family, financial, location, calendar-derived, and sensitive Life Area memories require confirmation.
+- Display/density preferences, recovery preferences, and repeated task routing may auto-create with receipt/visibility.
+- Work/career memory is treated contextually.
+- Users can pause memory learning globally and by category where implemented.
+- User can mark any Life Area sensitive.
+- Sensitive Life Area details hide in notifications/widgets and collapse on Today at launch.
+- Sensitive Life Areas use generic labels such as `Private item` in compact surfaces.
 - Explanation distinguishes evidence from assumption.
 - Goal Weather correction happens through inputs, not direct manual override.
 - Sensitive details hide by default in external surfaces.
 - Permission prompts occur only after relevant user action.
 - Sync/export/accessibility/platform claims are truthful.
+- Advanced sensitive privacy claims such as Face ID, export exclusion, local-only enforcement, or screenshot hiding are not made until implemented and verified.
 - Failure states explain what remains safe.
 
 ## Accessibility Gate
@@ -169,6 +184,10 @@ A screen or flow passes this gate when it handles:
 - destructive confirmation where needed
 - external-write confirmation where needed
 - major-deadline-change confirmation where needed
+- sensitive/high-impact memory confirmation where needed
+- delete-all-memory confirmation
+- memory learning paused states where implemented
+- sensitive Life Area collapsed/private-item states where relevant
 - receipt + undo for reversible local changes where safe
 
 The state must offer one useful next action and no dead end.
@@ -185,6 +204,8 @@ A data/model change passes when:
 - It distinguishes representation-only future commands from real executed mutations.
 - It does not introduce duplicate stores for shared objects.
 - It preserves internal separation between `cancelled` and `dropped` where the domain model requires it, even if launch UI simplifies wording.
+- It does not allow delete-all-memory to delete goals/tasks/plans unless explicitly included in a separate destructive action.
+- It preserves memory learning pause without deleting existing memory.
 
 ## Test / Validation Gate
 
@@ -235,9 +256,10 @@ A batch is complete only when:
 5. Visual/UX/accessibility acceptance is satisfied for user-visible work.
 6. Empty/error/recovery states are not broken.
 7. Confirmation/receipt behavior matches trust gates.
-8. Completion summary distinguishes implemented behavior from planned future canon.
-9. `BATCH_REGISTRY.md` is updated if the batch status changed.
-10. Follow-up work is captured without moving the active batch prematurely.
+8. Memory/sensitive-area behavior matches Wave 3 gates where relevant.
+9. Completion summary distinguishes implemented behavior from planned future canon.
+10. `BATCH_REGISTRY.md` is updated if the batch status changed.
+11. Follow-up work is captured without moving the active batch prematurely.
 
 ## Red Flags
 
@@ -249,9 +271,15 @@ Stop or revise if a change:
 - silently changes calendar/user data
 - silently changes major deadlines
 - deletes memory without confirmation
+- deletes all memory without confirming scope and preserving goals/tasks/plans unless explicitly requested
+- creates sensitive/high-impact memory without confirmation
+- creates calendar-derived memory without confirmation
+- exposes sensitive Life Area details in notifications/widgets or Today compact summaries
+- claims Face ID, export exclusion, local-only enforcement, or screenshot hiding without verified implementation
 - creates duplicate now/plan/recovery/goal-health logic
 - uses AI/model terminology in normal UI
 - uses `Dropped`, `Fragile`, or `Broken` as normal user-facing copy when softer Wave 2 labels apply
+- uses a numerical Trust Score at launch
 - claims sync, memory, automation, or accessibility that is not verified
 - breaks local-first behavior
 - removes correction/undo paths from meaningful actions
@@ -288,6 +316,7 @@ Use this structure for Codex completion summaries:
 - Empty/error/recovery:
 - Trust/privacy:
 - Confirmation/receipt behavior:
+- Memory/sensitive-area behavior:
 
 ## Remaining Gaps
 - ...
