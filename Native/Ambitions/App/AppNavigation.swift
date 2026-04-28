@@ -214,11 +214,11 @@ final class AppNavigationModel {
             presentationContext: presentationContext
         )
         recordCommandHistory(
-            title: intent?.title ?? "Quiet Command Sheet",
+            title: intent?.title ?? "Add something",
             subtitle: presentationContext.historySubtitle,
             source: source,
             presentationContext: presentationContext,
-            destinationLabel: "Quiet Command Sheet"
+            destinationLabel: "Add something"
         )
     }
 
@@ -239,11 +239,11 @@ final class AppNavigationModel {
             captureID: captureID
         )
         recordCommandHistory(
-            title: intent?.title ?? "Memory Lens",
-            subtitle: query.isEmpty ? presentationContext.historySubtitle : "Recalled \"\(query)\".",
+            title: intent?.title ?? "What Ambitions knows",
+            subtitle: query.isEmpty ? presentationContext.historySubtitle : "Looked up \"\(query)\".",
             source: source,
             presentationContext: presentationContext,
-            destinationLabel: "Memory Lens"
+            destinationLabel: "What Ambitions knows"
         )
     }
 
@@ -259,7 +259,7 @@ final class AppNavigationModel {
         )
         recordCommandHistory(
             title: "New goal",
-            subtitle: seedText.isEmpty ? "Opened Strategy Composer from \(source.displayTitle)." : "Started from saved context.",
+            subtitle: seedText.isEmpty ? "Opened goal setup from \(source.displayTitle)." : "Started from saved context.",
             source: source,
             presentationContext: .createGoal,
             destinationLabel: "Create Goal"
@@ -362,10 +362,10 @@ final class AppNavigationModel {
 private extension ShellCommandPresentationContext {
     var historySubtitle: String {
         switch self {
-        case .neutral: "Opened from the Quiet Command Sheet."
-        case .quickCapture: "Captured without leaving the separate global quick action surface."
-        case .createGoal: "Started from the shell-owned goal creation path."
-        case .recall: "Recalled context without opening a raw history log."
+        case .neutral: "Opened from Add something."
+        case .quickCapture: "Captured without leaving the global quick action surface."
+        case .createGoal: "Started from the goal setup path."
+        case .recall: "Opened what Ambitions knows without showing raw history."
         case .recovery: "Returned to a calmer recovery posture."
         case .focus: "Returned to the current focus posture."
         case .plan: "Opened the week-shaping context."
