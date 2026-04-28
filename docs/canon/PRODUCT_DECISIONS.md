@@ -232,3 +232,199 @@ These decisions should be reflected in:
 - `TRUST_PRIVACY_MEMORY.md`
 - `EMPTY_ERROR_RECOVERY_STATES.md`
 - future batch prompts involving Life Areas, Capture routing, onboarding, Goals, Plan, or You.
+
+---
+
+# Wave 2 — Lifecycle And State Language
+
+Adoption date: 2026-04-27
+
+## 1. Dropped State Language
+
+Resolved decision:
+
+```text
+Internal state: Dropped.
+User-facing label: No Longer Relevant.
+```
+
+Implementation implication:
+
+- System/domain docs may keep `dropped` as an internal lifecycle state.
+- Normal UI should avoid making the user feel judged; use `No Longer Relevant` when the goal ended through drift, non-continuation, or relevance loss.
+
+## 2. Cancelled vs Dropped At Launch
+
+Resolved decision:
+
+```text
+Cancelled and Dropped remain internally separate, but the UI can simplify at launch.
+```
+
+Implementation implication:
+
+- Internal state should preserve useful distinction for learning and future reviews.
+- Launch UI can present simpler end-state choices and hide unnecessary taxonomy.
+- Archive can reveal richer distinction in deeper views.
+
+## 3. Intentional Goal Ending Action
+
+Resolved decision:
+
+```text
+Primary action: End Goal.
+Then ask the reason.
+```
+
+Implementation implication:
+
+- Avoid making `Cancel Goal` the primary general action.
+- `End Goal` should open a reason/route choice rather than immediately destroying state.
+- Ended goals preserve proof, decision trail, and learning.
+
+## 4. Goal Pause Action
+
+Resolved decision:
+
+```text
+Primary action: Park Goal.
+State: Parked.
+```
+
+Implementation implication:
+
+- Use `Park Goal` for intentional pause.
+- Parked means intentionally paused and preserved.
+- Parked goals can resume later and should not feel like failure.
+
+## 5. Goal Weather Correction
+
+Resolved decision:
+
+```text
+Goal Weather is not manually overridden directly. The user can correct inputs that affect weather.
+```
+
+Implementation implication:
+
+- Do not add a simple `Set Weather` control as the main UI.
+- Provide correction routes for deadline, proof, blocker, next step, scope, waiting state, and assumptions.
+- Weather remains explainable through `Why This` / `Why Changed`.
+
+## 6. Plan State Language
+
+Resolved decision:
+
+```text
+Internal states can be strong.
+UI labels should be softer.
+```
+
+Internal states:
+
+```text
+Believable
+Tight
+Fragile
+Broken
+```
+
+User-facing labels:
+
+```text
+Believable
+Tight
+Needs Protection
+No Longer Holds
+```
+
+Implementation implication:
+
+- Preserve strong internal meaning for logic and QA.
+- Avoid unnecessarily harsh UI language.
+- `Broken` should generally render as `No Longer Holds` in normal UI.
+- `Fragile` should generally render as `Needs Protection` in normal UI.
+
+## 7. Confirmation Requirements
+
+Resolved decision:
+
+```text
+Require confirmation for destructive actions, external writes, and major deadline changes.
+```
+
+Implementation implication:
+
+- Destructive memory/privacy changes require confirmation.
+- Calendar writes require confirmation.
+- Major deadline changes require confirmation or an explicit reviewed change flow.
+- Ordinary local reversible changes should prefer receipt + undo.
+
+## 8. Receipt + Undo vs Confirmation
+
+Resolved decision:
+
+Receipt + undo first:
+
+```text
+Mark Done
+Move task
+Park task
+Attach task to goal
+Rename Life Area
+Change display density
+```
+
+Confirmation required:
+
+```text
+Delete memory
+Calendar write
+```
+
+Implementation implication:
+
+- Do not over-confirm reversible actions.
+- Meaningful reversible changes should close with a receipt.
+- Destructive/privacy/external actions require confirmation.
+
+## 9. Completed Goal Visibility
+
+Resolved decision:
+
+```text
+Default: completed goals stay visibly emphasized for 30 days.
+Major goals may remain emphasized longer depending on importance.
+```
+
+Implementation implication:
+
+- Completion should feel meaningful, not instantly hidden.
+- After the emphasis window, completed goals move toward Archive/Completion Archive treatment.
+- Major goals can stay visible longer or receive richer completion summaries.
+
+## 10. Archive Naming
+
+Resolved decision:
+
+```text
+Product/design docs: Completion Archive.
+Normal UI: Archive.
+```
+
+Implementation implication:
+
+- Use `Completion Archive` in canon when describing the full system.
+- Use simpler `Archive` in everyday navigation/copy unless extra clarity is needed.
+- Archive preserves learning; it is not trash.
+
+## Wave 2 Follow-Up Targets
+
+These decisions should be reflected in:
+
+- `GOAL_PLAN_TASK_LIFECYCLE.md`
+- `DOMAIN_MODEL.md`
+- `EMPTY_ERROR_RECOVERY_STATES.md`
+- `TRUST_PRIVACY_MEMORY.md`
+- `IMPLEMENTATION_ACCEPTANCE_GATES.md`
+- future batch prompts involving Goal Detail, Plan, Archive, Recovery, Receipts, or Trust Center.
