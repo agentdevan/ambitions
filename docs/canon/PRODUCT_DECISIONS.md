@@ -2,7 +2,7 @@
 
 Status: Active canon decision log for product-definition waves.
 
-Purpose: Preserve explicit product decisions made after canon consolidation. This document records decisions that clarify ambiguity across product, design, onboarding, lifecycle, memory, trust, capture, plan/calendar, goals, today/now state, You/profile/settings/reviews, IA/navigation, intelligence/automation, and implementation acceptance.
+Purpose: Preserve explicit product decisions made after canon consolidation. This document records decisions that clarify ambiguity across product, design, onboarding, lifecycle, memory, trust, capture, plan/calendar, goals, today/now state, You/profile/settings/reviews, IA/navigation, intelligence/automation, visual system/components/motion, and implementation acceptance.
 
 ## Decision Authority
 
@@ -399,6 +399,91 @@ Make external changes silently.
 
 ---
 
+# Wave 12 — Visual System, Components, And Motion
+
+Adoption date: 2026-04-27
+
+## Resolved Decisions
+
+Visual system feel:
+
+```text
+Premium calm OS.
+```
+
+Top-level screens should avoid:
+
+```text
+Equal-weight card walls.
+Dense dashboards.
+Long paragraphs.
+Too many exposed controls.
+```
+
+Rich panels should be used for:
+
+```text
+Meaningful state, hierarchy, and context.
+```
+
+Motion should be:
+
+```text
+Subtle and meaningful.
+```
+
+Motion should communicate:
+
+```text
+Where things went.
+What changed.
+State transitions.
+```
+
+Celebratory effects:
+
+```text
+Rarely, for meaningful completions.
+```
+
+Component priority:
+
+```text
+Build reusable components and tokens.
+```
+
+Theme support:
+
+```text
+Light and dark mode both matter, with dark preferred if needed.
+```
+
+Visual design must never:
+
+```text
+Reduce readability.
+Create fake depth.
+Use decoration without meaning.
+Hide primary action.
+```
+
+Visual north star:
+
+```text
+Calm intelligent life OS.
+```
+
+## Implementation Implications
+
+- Visual beauty must support comprehension, trust, and action.
+- Top-level screens should have clear hierarchy and one dominant purpose.
+- Reusable components/tokens should be preferred over one-off beautiful screens.
+- Motion should clarify routing, state changes, and action closure; it should not become ambience or personality theater.
+- Reduce Motion must preserve equivalent clarity.
+- Celebration should be reserved for meaningful completions, not ordinary task churn.
+
+---
+
 # Active Follow-Up Targets
 
 These decisions should be reflected in:
@@ -416,5 +501,6 @@ These decisions should be reflected in:
 - `docs/canon/YOU_PROFILE_REVIEWS.md`
 - `docs/canon/IA_NAVIGATION_DRILLDOWN.md`
 - `docs/canon/INTELLIGENCE_AUTOMATION_SUGGESTIONS.md`
+- `docs/canon/VISUAL_SYSTEM_COMPONENTS_MOTION.md`
 - `docs/canon/design/smart-attachment-spec.md`
-- future batch prompts involving onboarding, IA, navigation, drilldown, breadcrumbs, tabs, Life Areas, Capture routing, Today, Now State, empty states, recovery, best next action, Goals, Goal Detail, Goal Weather, Proof, Plan, calendar-aware planning, believability, daily schedule, rituals, You, Profile migration, Settings, Reviews, Trust Center, Appearance Studio, intelligence, suggestions, automation, receipts, sensitive Life Areas, notifications/widgets, export/import, privacy controls, Smart Attachment, Needs a Place, or Capture input behavior.
+- future batch prompts involving onboarding, IA, navigation, drilldown, breadcrumbs, tabs, Life Areas, Capture routing, Today, Now State, empty states, recovery, best next action, Goals, Goal Detail, Goal Weather, Proof, Plan, calendar-aware planning, believability, daily schedule, rituals, You, Profile migration, Settings, Reviews, Trust Center, Appearance Studio, intelligence, suggestions, automation, visual system, components, motion, receipts, sensitive Life Areas, notifications/widgets, export/import, privacy controls, Smart Attachment, Needs a Place, or Capture input behavior.
