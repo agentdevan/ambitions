@@ -19,13 +19,13 @@ enum AmbitionsAppShortcutDestination: String, CaseIterable, AppEnum {
         [
             .today: DisplayRepresentation(title: "Today"),
             .plan: DisplayRepresentation(title: "Plan"),
-            .capturesInbox: DisplayRepresentation(title: "Captures inbox"),
-            .command: DisplayRepresentation(title: "Command"),
-            .memoryLens: DisplayRepresentation(title: "Memory Lens"),
+            .capturesInbox: DisplayRepresentation(title: "Capture"),
+            .command: DisplayRepresentation(title: "Add something"),
+            .memoryLens: DisplayRepresentation(title: "What Ambitions knows"),
             .quickCapture: DisplayRepresentation(title: "Quick capture"),
-            .quickRecovery: DisplayRepresentation(title: "Quick recovery"),
-            .quickFocus: DisplayRepresentation(title: "Quick focus"),
-            .quickPlanPatch: DisplayRepresentation(title: "Quick plan"),
+            .quickRecovery: DisplayRepresentation(title: "Make today doable"),
+            .quickFocus: DisplayRepresentation(title: "Focus"),
+            .quickPlanPatch: DisplayRepresentation(title: "Adjust Plan"),
         ]
     }
 
@@ -59,19 +59,19 @@ enum AmbitionsAppShortcutDestination: String, CaseIterable, AppEnum {
         case .plan:
             return "Plan"
         case .capturesInbox:
-            return "Captures inbox"
+            return "Capture"
         case .command:
-            return "Command"
+            return "Add something"
         case .memoryLens:
-            return "Memory Lens"
+            return "What Ambitions knows"
         case .quickCapture:
             return "Quick capture"
         case .quickRecovery:
-            return "Quick recovery"
+            return "Make today doable"
         case .quickFocus:
-            return "Quick focus"
+            return "Focus"
         case .quickPlanPatch:
-            return "Quick plan"
+            return "Adjust Plan"
         }
     }
 
@@ -91,8 +91,8 @@ enum AmbitionsAppShortcutDestination: String, CaseIterable, AppEnum {
 }
 
 struct OpenAmbitionsDestinationIntent: AppIntent {
-    static let title: LocalizedStringResource = "Open Ambitions destination"
-    static let description = IntentDescription("Open canonical Ambitions destinations or shell-owned command surfaces.")
+    static let title: LocalizedStringResource = "Open Ambitions"
+    static let description = IntentDescription("Open Today, Plan, Capture, or another Ambitions surface.")
     static let openAppWhenRun = true
 
     @Parameter(title: "Destination")
@@ -118,7 +118,7 @@ struct OpenAmbitionsDestinationIntent: AppIntent {
 
 struct CreateAmbitionsCaptureIntent: AppIntent {
     static let title: LocalizedStringResource = "Capture in Ambitions"
-    static let description = IntentDescription("Save a thought into the canonical Ambitions captures inbox.")
+    static let description = IntentDescription("Save something to Ambitions so it has a place.")
     static let openAppWhenRun = true
 
     @Parameter(title: "Capture")
@@ -154,7 +154,7 @@ struct CreateAmbitionsCaptureIntent: AppIntent {
             }
         }
 
-        return .result(dialog: IntentDialog("Saved to Ambitions captures."))
+        return .result(dialog: IntentDialog("Saved to Ambitions."))
     }
 }
 
@@ -199,19 +199,19 @@ struct AmbitionsShortcutsProvider: AppShortcutsProvider {
         AppShortcut(
             intent: OpenAmbitionsDestinationIntent(destination: .command),
             phrases: [
-                "Open Command in \(.applicationName)",
-                "Show Command in \(.applicationName)",
+                "Add something in \(.applicationName)",
+                "Open add sheet in \(.applicationName)",
             ],
-            shortTitle: "Open Command",
+            shortTitle: "Add Something",
             systemImageName: "plus.circle"
         )
         AppShortcut(
             intent: OpenAmbitionsDestinationIntent(destination: .memoryLens),
             phrases: [
-                "Open Memory Lens in \(.applicationName)",
-                "Show Memory Lens in \(.applicationName)",
+                "Open what \(.applicationName) knows",
+                "Show what \(.applicationName) knows",
             ],
-            shortTitle: "Memory Lens",
+            shortTitle: "What It Knows",
             systemImageName: "magnifyingglass"
         )
         AppShortcut(
@@ -226,28 +226,28 @@ struct AmbitionsShortcutsProvider: AppShortcutsProvider {
         AppShortcut(
             intent: OpenAmbitionsDestinationIntent(destination: .quickFocus),
             phrases: [
-                "Quick Focus in \(.applicationName)",
                 "Focus in \(.applicationName)",
+                "Open Focus in \(.applicationName)",
             ],
-            shortTitle: "Quick Focus",
+            shortTitle: "Focus",
             systemImageName: "scope"
         )
         AppShortcut(
             intent: OpenAmbitionsDestinationIntent(destination: .quickRecovery),
             phrases: [
-                "Quick Recovery in \(.applicationName)",
-                "Recover in \(.applicationName)",
+                "Make today doable in \(.applicationName)",
+                "Fix today in \(.applicationName)",
             ],
-            shortTitle: "Recover",
+            shortTitle: "Make Today Doable",
             systemImageName: "arrow.uturn.left.circle"
         )
         AppShortcut(
             intent: OpenAmbitionsDestinationIntent(destination: .quickPlanPatch),
             phrases: [
-                "Quick Plan in \(.applicationName)",
-                "Patch Plan in \(.applicationName)",
+                "Adjust Plan in \(.applicationName)",
+                "Open Plan in \(.applicationName)",
             ],
-            shortTitle: "Quick Plan",
+            shortTitle: "Adjust Plan",
             systemImageName: "calendar.badge.clock"
         )
     }
