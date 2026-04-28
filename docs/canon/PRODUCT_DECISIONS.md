@@ -2,22 +2,20 @@
 
 Status: Active canon decision log for product-definition waves.
 
-Purpose: Preserve explicit product decisions made after canon consolidation. This document records decisions that clarify ambiguity across product, design, onboarding, lifecycle, memory, trust, capture, plan/calendar, goals, today/now state, and implementation acceptance.
+Purpose: Preserve explicit product decisions made after canon consolidation. This document records decisions that clarify ambiguity across product, design, onboarding, lifecycle, memory, trust, capture, plan/calendar, goals, today/now state, You/profile/settings/reviews, and implementation acceptance.
 
 ## Decision Authority
 
 This document records resolved product decisions. It does not replace:
 
-- `MASTER_PRODUCT_SPEC.md` for product truth
-- `docs/canon/design/Ambitions_Design_Constitution.md` for design/IA/UX authority
-- `docs/canon/Ambitions_2_0_Product_Architecture.md` for surface ownership
-- `docs/canon/DOMAIN_MODEL.md` for object model detail
-- `docs/canon/GOAL_PLAN_TASK_LIFECYCLE.md` for lifecycle detail
-- `docs/canon/TRUST_PRIVACY_MEMORY.md` for trust/memory/privacy detail
-- `docs/canon/ONBOARDING_SPEC.md` for first-run flow detail
-- `docs/canon/design/smart-attachment-spec.md` for Capture / Smart Attachment routing detail
+- `MASTER_PRODUCT_SPEC.md` for product truth.
+- `docs/canon/design/Ambitions_Design_Constitution.md` for design/IA/UX authority.
+- `docs/canon/Ambitions_2_0_Product_Architecture.md` for surface ownership.
+- `docs/canon/DOMAIN_MODEL.md` for object model detail.
+- `docs/canon/GOAL_PLAN_TASK_LIFECYCLE.md` for lifecycle detail.
+- focused consolidation docs under `docs/canon/` for implementation-readable detail.
 
-When these decisions clarify an ambiguity, future docs and batch prompts should follow them unless a later explicit canon decision supersedes them.
+When these decisions clarify ambiguity, future docs and batch prompts should follow them unless a later explicit canon decision supersedes them.
 
 ---
 
@@ -27,56 +25,26 @@ Adoption date: 2026-04-27
 
 ## Resolved Decisions
 
-- Ambitions is user-facing as a **life organization system**.
-- Internally, Ambitions is a **personal life operating system / external brain** for goals, plans, tasks, memory, and recovery.
-- The primary opening feeling is: `My life feels organized`.
-- The immediate proof is: `I know what matters now` and `I know the next concrete step`.
+- User-facing category: `Life organization system`.
+- Internal ambition: `Personal life operating system / external brain`.
+- Primary opening feeling: `My life feels organized`.
+- Immediate proof: `I know what matters now` and `I know the next concrete step`.
 - Life Areas are inferred/recommended and correctable, not mandatory friction.
-- Default Life Areas:
-
-```text
-Career
-Creative
-Finance
-Health
-Home
-Relationships
-Education
-Personal
-Admin
-```
-
-- Users can rename default Life Areas while preserving an internal canonical type.
+- Default Life Areas: Career, Creative, Finance, Health, Home, Relationships, Education, Personal, Admin.
+- Users can rename default Life Areas while preserving internal canonical type.
 - `North Star` is deeper-view language; top-level/new-user copy may use `long-term ambition`.
-- A Goal is a meaningful outcome that may need a plan.
-- User-facing standalone action language is `Task`.
-- Internal/design term for a standalone task is `One-Step Goal`.
-- A Task can exist without a Goal, but Ambitions should suggest attaching or promoting when useful.
+- Goal = meaningful outcome that may need a plan.
+- User-facing standalone action language: `Task`.
+- Internal/design term for standalone task: `One-Step Goal`.
+- A Task can exist without a Goal, but Ambitions should suggest attaching/promoting when useful.
 
 ## Non-Negotiable Rules
 
-System rule:
-
 ```text
 Every item has a place.
-```
-
-Execution rules:
-
-```text
 Every goal has a next step.
 Every plan must be believable.
-```
-
-Emotional rule:
-
-```text
 The user never feels punished for drifting.
-```
-
-Product-shape rule:
-
-```text
 The app stays deep, not wide.
 ```
 
@@ -90,50 +58,16 @@ Adoption date: 2026-04-27
 
 - Internal state: `Dropped`.
 - User-facing label for dropped goals: `No Longer Relevant`.
-- `Cancelled` and `Dropped` remain internally separate, but the UI can simplify at launch.
-- Intentional goal ending action: `End Goal`, then ask the reason.
-- Goal pause action: `Park Goal`.
-- Pause state: `Parked`.
-- Goal Weather is not directly manually overridden. The user corrects inputs that affect weather.
-- Internal Plan states may use stronger language:
-
-```text
-Believable
-Tight
-Fragile
-Broken
-```
-
-- User-facing Plan labels should be softer:
-
-```text
-Believable
-Tight
-Needs Protection
-No Longer Holds
-```
-
-- Confirmation is required for destructive actions, external writes, and major deadline changes.
-- Receipt + undo should be used for reversible local actions:
-
-```text
-Mark Done
-Move task
-Park task
-Attach task to goal
-Rename Life Area
-Change display density
-```
-
-- Confirmation is required for:
-
-```text
-Delete memory
-Calendar write
-```
-
-- Completed goals stay visibly emphasized for 30 days by default.
-- Major completed goals may remain emphasized longer depending on importance.
+- `Cancelled` and `Dropped` remain internally separate, but launch UI can simplify.
+- Intentional goal ending action: `End Goal`, then ask reason.
+- Goal pause action: `Park Goal`; state: `Parked`.
+- Goal Weather is corrected through inputs, not direct manual override.
+- Internal Plan states: Believable, Tight, Fragile, Broken.
+- User-facing Plan labels: Believable, Tight, Needs Protection, No Longer Holds.
+- Confirmation required for destructive actions, external writes, and major deadline changes.
+- Receipt + undo preferred for Mark Done, Move task, Park task, Attach task to goal, Rename Life Area, Change display density.
+- Confirmation required for Delete memory and Calendar write.
+- Completed goals stay visibly emphasized for 30 days by default; major goals may remain emphasized longer.
 - Product/design language: `Completion Archive`.
 - Normal UI language: `Archive`.
 
@@ -146,80 +80,24 @@ Adoption date: 2026-04-27
 ## Resolved Decisions
 
 - Low-risk memories may be auto-created with visibility.
-- Sensitive or high-impact memories should be suggested for user confirmation first.
-
-Confirmation required:
-
-```text
-Health-related preferences
-Relationship/family details
-Financial goals or constraints
-Location patterns
-Calendar-derived patterns
-Sensitive Life Area details
-```
-
-Can auto-create with receipt/visibility:
-
-```text
-Display/density preferences
-Recovery preferences
-Repeated task routing
-```
-
-Contextual:
-
-```text
-Work/career goals
-```
-
+- Sensitive/high-impact memories should be suggested for confirmation first.
+- Confirmation required for health-related preferences, relationship/family details, financial goals/constraints, location patterns, calendar-derived patterns, and sensitive Life Area details.
+- Display/density preferences, recovery preferences, and repeated task routing can auto-create with receipt/visibility.
+- Work/career goals are contextual.
 - Users can pause memory learning globally and by category.
 - User can mark any Life Area sensitive.
-
-Sensitive launch behavior:
-
-```text
-Hide details in notifications/widgets
-Collapse details on Today
-Use generic labels like Private item
-```
-
-Later/advanced sensitive behavior:
-
-```text
-Require Face ID to open
-Exclude from export by default
-Keep local-only
-Hide from screenshots/previews
-```
-
-Undo duration depends on action type:
-
-```text
-Quick UI actions: 5-10 seconds
-Route changes / attach / move: until screen exit or review tray dismissal
-Rename/display changes: 30 seconds
-Destructive/external writes: confirmation first, undo only if platform-safe
-```
-
-Trust Center:
-
-- No numerical Trust Score at launch.
-- Use qualitative status sections.
-- Top status: `You are in control`.
-
-Memory naming:
-
-- User-facing section: `What Ambitions Knows`.
+- Sensitive launch behavior: hide details in notifications/widgets, collapse details on Today, use generic labels like `Private item`.
+- Advanced sensitive behavior later: Face ID, export exclusion, local-only enforcement, screenshot hiding.
+- Undo duration depends on action type:
+  - Quick UI actions: 5-10 seconds.
+  - Route changes / attach / move: until screen exit or review tray dismissal.
+  - Rename/display changes: 30 seconds.
+  - Destructive/external writes: confirmation first, undo only if platform-safe.
+- No numerical Trust Score at launch; use qualitative status sections.
+- Trust Center top status: `You are in control`.
+- User-facing memory section: `What Ambitions Knows`.
 - Object/type name: `Memory`.
-
-Delete all memory:
-
-- Allowed from Trust Center.
-- Requires confirmation.
-- Offer export/reminder first where export exists.
-- If export is not implemented, say so plainly.
-- Does not delete goals/tasks/plans unless explicitly included separately.
+- Delete all memory is allowed from Trust Center, requires confirmation, offers export/reminder first where export exists, and does not delete goals/tasks/plans unless explicitly included separately.
 
 ---
 
@@ -229,60 +107,20 @@ Adoption date: 2026-04-27
 
 ## Resolved Decisions
 
-- Onboarding should show a static premium product preview at launch.
-- Animation can come later.
-- The first onboarding prompt is:
-
-```text
-What do you want to organize?
-```
-
-- First object creation should show the receipt inside the destination.
-
-Example receipt:
-
-```text
-Saved as Goal · Creative
-Next: Shape the first milestone
-Change
-```
-
-- Onboarding should not ask for display density up front.
+- Static premium product preview at launch; animation can come later.
+- First onboarding prompt: `What do you want to organize?`
+- First object creation shows receipt inside the destination.
+- Do not ask for display density during onboarding.
 - Default display setting: `Balanced + Comfortable`.
-- Display density and panel size can be adjusted later in `You`.
-- Life Area should be inferred when possible.
-- Life Area should be asked only when Ambitions is uncertain.
-- Life Area assignment must remain correctable from the receipt.
-- Notifications should not be requested during onboarding.
-- Notification permission should only be requested after the user sets a reminder or protected block.
-- Calendar access should not be requested during onboarding.
-- Calendar access should only be requested from Plan after the user asks for calendar-aware planning.
-
-Default onboarding examples should cover:
-
-```text
-Career
-Creative
-Finance
-Health
-Home
-Relationships / Family
-```
-
+- Display density/panel size can be adjusted later in You.
+- Life Area is inferred when possible and asked only when Ambitions is uncertain.
+- Life Area assignment remains correctable from the receipt.
+- Notifications are requested only after reminder/protected-block value.
+- Calendar access is requested only from Plan after calendar-aware planning action.
+- Default examples cover Career, Creative, Finance, Health, Home, Relationships / Family.
 - Baby/family examples can appear later when contextually relevant.
-- If the user skips onboarding, land in Today with a strong empty state and a Capture action.
-- First-run success metric:
-
-```text
-User creates any useful object.
-```
-
-## Implementation Implications
-
-- Do not optimize onboarding around finishing every setup screen.
-- Do not make first-run success depend on calendar, notifications, a full plan, or a full goal hierarchy.
-- First value comes from one useful object, one visible destination, one clear receipt, and one next action.
-- Onboarding must prove organization before asking for permissions or preferences.
+- If onboarding is skipped, land in Today with strong empty state and Capture action.
+- First-run success metric: user creates any useful object.
 
 ---
 
@@ -292,132 +130,22 @@ Adoption date: 2026-04-27
 
 ## Resolved Decisions
 
-- The main Capture input should feel like a `Quiet Command Sheet`.
-- Capture should not feel like search, chat, a generic note app, or an inbox form.
-- Primary Capture placeholder:
-
-```text
-What needs a place?
-```
-
-- Onboarding keeps its separate first prompt:
-
-```text
-What do you want to organize?
-```
-
-## Route Confidence Behavior
-
-When Ambitions is unsure where a capture belongs, behavior depends on confidence:
-
-```text
-High confidence: route + receipt
-Medium confidence: route + receipt + easy Change
-Low confidence: ask 1 question or save to Needs a Place
-```
-
-Temporary holding area:
-
-```text
-Needs a Place
-```
-
-## Allowed Capture Routes
-
-Launch/core routes:
-
-```text
-Task
-Goal
-Idea
-Proof
-Waiting
-Plan
-```
-
-Later/advanced routes:
-
-```text
-Contextual Note
-Reminder
-Ritual
-Archive
-Decision
-```
-
-## Notes Policy
-
-Resolved decision:
-
-```text
-No general Notes object at launch. Allow contextual notes attached to objects.
-```
-
-Implementation implication:
-
-- Avoid turning Ambitions into a general notes app.
-- Notes should be attached to goals, tasks, proof, reviews, decisions, plans, or other meaningful objects.
-- A larger notes surface can be reconsidered later after core execution is mature.
-
-## Capture Receipt Pattern
-
-Successful capture receipts should use the `Saved as...` / `Attached as...` pattern.
-
-Examples:
-
-```text
-Saved as Task · Today
-Saved as Goal · Creative
-Saved to Needs a Place
-Attached as Proof · Music Goal
-```
-
-Rules:
-
-- Receipt should show object type, destination, and route correction where safe.
-- Avoid generic `Captured`, `Routed`, or `Added to Ambitions` as primary success copy.
-
-## Task-To-Goal Promotion
-
-Resolved decision:
-
-```text
-Capture should suggest task-to-goal promotion; user confirms before promotion.
-```
-
-Implementation implication:
-
-- Do not auto-promote tasks into goals.
-- When a task appears to have too much structure, Ambitions can suggest `Turn Into Goal`.
-- Promotion creates a receipt and preserves the original capture context.
-
-## Voice Input
-
-Resolved decision:
-
-```text
-Use iOS dictation first. Native voice capture can come later.
-```
-
-Implementation implication:
-
-- Do not build a separate voice system at launch.
-- Do not claim voice capture beyond platform dictation until implemented.
-
-## Highest Capture Rule
-
-Resolved rule stack:
-
-```text
-Nothing gets lost.
-Every capture gets a clear next route.
-```
-
-Implementation implication:
-
-- Failed saves preserve text.
-- Low-confidence captures have a safe place.
-- Capture should be fast, but not at the cost of losing or misplacing user intent.
+- Capture input feel: `Quiet Command Sheet`.
+- Capture should not feel like search, chat, generic notes, or inbox form.
+- Capture placeholder: `What needs a place?`
+- Onboarding prompt remains: `What do you want to organize?`
+- Confidence behavior:
+  - High confidence: route + receipt.
+  - Medium confidence: route + receipt + easy Change.
+  - Low confidence: ask 1 question or save to Needs a Place.
+- Temporary holding area: `Needs a Place`.
+- Launch/core capture routes: Task, Goal, Idea, Proof, Waiting, Plan.
+- Later/advanced routes: Contextual Note, Reminder, Ritual, Archive, Decision.
+- No general Notes object at launch; contextual notes only, attached to meaningful objects.
+- Successful capture receipts use `Saved as...` / `Attached as...` pattern.
+- Task-to-goal promotion is suggested and user-confirmed, not automatic.
+- Voice input uses iOS dictation first; native voice capture can come later.
+- Highest rules: `Nothing gets lost` and `Every capture gets a clear next route`.
 
 ---
 
@@ -427,147 +155,17 @@ Adoption date: 2026-04-27
 
 ## Resolved Decisions
 
-Plan's core job:
-
-```text
-Shape a believable day/week.
-Build the daily schedule as part of making goals executable.
-```
-
-Implementation implication:
-
-- Plan is not a calendar clone.
-- Plan is not only a due-soon list.
-- Plan should make goals executable by shaping a believable day/week and constructing a usable daily schedule.
-
-## Plan Visual / IA Direction
-
-Resolved decision:
-
-```text
-Plan-first with optional calendar awareness.
-```
-
-Rules:
-
-- Plan should not look like a raw calendar first.
-- Calendar views can support Plan, but they do not own Plan.
-- A weekly calendar view can come later if it serves believability and execution.
-
-## Plan Main Question
-
-Resolved main question:
-
-```text
-Can this week actually hold?
-```
-
-Supporting daily question:
-
-```text
-What daily schedule makes this hold?
-```
-
-Implementation implication:
-
-- Weekly believability is the main Plan question.
-- Daily schedule construction is an important sub-job of Plan.
-- Plan should show the truth when the week cannot hold.
-
-## Calendar-Aware Meaning
-
-Calendar-aware means:
-
-```text
-Read calendar events.
-Suggest open windows.
-Compare Ambitions plan against real commitments.
-Write calendar events only after explicit user confirmation.
-```
-
-Rules:
-
-- Calendar writes require confirmation every time.
-- Calendar read permission should be requested from Plan after calendar-aware value is clear.
-- Calendar-derived patterns require memory confirmation before becoming memory.
-
-## First Calendar Permission CTA
-
-Primary CTA:
-
-```text
-Make Plan calendar-aware
-```
-
-Supporting phrase:
-
-```text
-Find real open windows
-```
-
-Avoid as primary CTA:
-
-```text
-Sync Calendar
-```
-
-## Overload Behavior
-
-When the week is overloaded, Plan should:
-
-```text
-Suggest a lighter plan.
-Ask what to protect.
-```
-
-Rules:
-
-- Do not only show a warning.
-- Do not automatically move tasks.
-- Do not pretend impossible weeks are fine.
-- Recovery should stay non-shaming.
-
-## Rituals / Routines
-
-Resolved decision:
-
-```text
-Plan includes rituals/routines, but not as a standalone Habits tab.
-```
-
-Implementation implication:
-
-- Rituals belong in Plan, Today, Goal Detail, and You/Reviews where useful.
-- Do not recreate a standalone Habits tab.
-
-## Believability Definition
-
-Believable means:
-
-```text
-Enough time exists.
-It fits energy and context.
-The user has done similar before where evidence exists.
-It does not conflict with real commitments.
-No fake precision.
-```
-
-Rules:
-
-- Believability should be evidence-aware and correction-friendly.
-- It should avoid exact confidence theater.
-- It should show why the plan holds or does not hold.
-
-## Plan Must Never
-
-Plan must never:
-
-```text
-Shame the user.
-Silently reschedule.
-Pretend impossible weeks are fine.
-Become a raw calendar clone.
-```
+- Plan core job: shape a believable day/week and build the daily schedule as part of making goals executable.
+- Plan direction: plan-first with optional calendar awareness.
+- Plan main question: `Can this week actually hold?`
+- Supporting daily question: `What daily schedule makes this hold?`
+- Calendar-aware means: read calendar events, suggest open windows, compare Ambitions plan against real commitments, and write calendar events only after explicit confirmation.
+- Calendar writes are never automatic and require confirmation every time.
+- First calendar CTA: `Make Plan calendar-aware`; supporting phrase: `Find real open windows`.
+- Overload behavior: suggest a lighter plan and ask what to protect.
+- Rituals/routines belong in Plan but not as a standalone Habits tab.
+- Believable means enough time exists, it fits energy/context, user has done similar before where evidence exists, it does not conflict with real commitments, and no fake precision is used.
+- Plan must never shame, silently reschedule, pretend impossible weeks are fine, or become a raw calendar clone.
 
 ---
 
@@ -577,148 +175,18 @@ Adoption date: 2026-04-27
 
 ## Resolved Decisions
 
-Goals' core job:
-
-```text
-Help the user choose and protect direction.
-```
-
-Goals top screen should prioritize:
-
-```text
-One protected / most important goal.
-Goal portfolio health.
-```
-
-Supporting content below:
-
-```text
-Goal list.
-Life Areas.
-Recent progress.
-```
-
-## Goals Surface Direction
-
-Resolved direction:
-
-```text
-Top-level Goals should not look like a project management board.
-```
-
-Rules:
-
-- Deep detail may use structured milestone/step views where useful.
-- Top-level Goals should not become a task board, spreadsheet, KPI dashboard, or project management surface.
-- Goals should protect direction before exposing management detail.
-
-## Goal Detail Main Questions
-
-Primary question:
-
-```text
-What is the next visible step?
-```
-
-Secondary question:
-
-```text
-Is this goal still believable?
-```
-
-Implementation implication:
-
-- Goal Detail should lead with next action clarity.
-- Believability/risk should be visible enough to avoid false confidence.
-- Task lists, progress metrics, and history should support these questions, not replace them.
-
-## Goal Weather Meaning
-
-Goal Weather primarily communicates:
-
-```text
-Believability / risk / clarity.
-```
-
-Rules:
-
-- Goal Weather is not a progress percentage.
-- Goal Weather is not mood.
-- Goal Weather is not motivation decoration.
-- Goal Weather can include deadline pressure, but it is not deadline pressure only.
-
-## Progress Percentages
-
-Resolved decision:
-
-```text
-Only show progress percentages when measurable and honest.
-```
-
-Rules:
-
-- Do not show fake precision.
-- Do not make percentages the primary goal health signal.
-- Prefer milestone/proof/next-step clarity when the goal is not honestly quantifiable.
-
-## Proof Definition
-
-Proof includes:
-
-```text
-Completed step.
-Artifact created.
-Decision made.
-Feedback received.
-Blocker resolved.
-Reflection / review.
-```
-
-Rules:
-
-- Proof is evidence of real progress.
-- Proof is broader than task completion.
-- Proof should support trust, Goal Weather, reviews, and archive learning.
-
-## Manual Proof
-
-Resolved decision:
-
-```text
-Users can manually add proof, but it should attach to a goal, milestone, or step.
-```
-
-Implementation implication:
-
-- Manual proof should not float as a disconnected object.
-- Proof attachment should create a receipt where meaningful.
-- Proof should remain correctable if attached to the wrong object.
-
-## Missing Next Step
-
-When a goal has no next step, Ambitions should:
-
-```text
-Ask the user to choose one.
-Suggest one.
-```
-
-Rules:
-
-- Do not merely warn.
-- Do not hide the goal from Today solely because the next step is missing.
-- Help the user restore forward motion.
-
-## Goals Must Never Become
-
-Goals must never become:
-
-```text
-Project management board.
-Spreadsheet.
-KPI dashboard.
-Motivation quote wall.
-```
+- Goals core job: help the user choose and protect direction.
+- Goals top screen priority: one protected / most important goal and goal portfolio health.
+- Supporting content: goal list, Life Areas, recent progress.
+- Top-level Goals should not look like a project management board; deep detail may use structured milestone/step views.
+- Goal Detail primary question: `What is the next visible step?`
+- Goal Detail secondary question: `Is this goal still believable?`
+- Goal Weather communicates believability / risk / clarity.
+- Progress percentages appear only when measurable and honest.
+- Proof includes completed step, artifact created, decision made, feedback received, blocker resolved, and reflection/review.
+- Manual proof is allowed but should attach to a goal, milestone, or step.
+- When a goal has no next step, Ambitions should ask the user to choose one and suggest one.
+- Goals must never become a project management board, spreadsheet, KPI dashboard, or motivation quote wall.
 
 ---
 
@@ -728,126 +196,45 @@ Adoption date: 2026-04-27
 
 ## Resolved Decisions
 
-Today's core job:
+- Today core job: help the user know what matters now.
+- Today prioritizes one best next action first.
+- Full daily schedule appears below the main next action.
+- When the day breaks, Today should offer recovery and ask what to protect.
+- Main recovery action: `Save the Day`.
+- Today includes rituals/routines only if relevant now.
+- Sensitive/private items collapse as `Private item` at launch.
+- Empty Today: Capture Something is primary; goal suggestion is secondary.
+- Now State means best current execution context.
+- Now State is not only current task, time of day, user mood, or calendar status.
+- Today must never become a task dump, calendar clone, analytics dashboard, or motivation quote wall.
 
-```text
-Help the user know what matters now.
-```
+---
 
-Today should prioritize first:
+# Wave 9 — You, Profile, Settings, And Reviews
 
-```text
-One best next action.
-```
+Adoption date: 2026-04-27
 
-Full daily schedule behavior:
+## Resolved Decisions
 
-```text
-Show the full daily schedule below the main next action.
-```
+- You core job: `Personal system center`.
+- You contains settings, trust, memory, reviews, and personalization.
+- You may show analytics only as Reviews/Patterns, not dashboard analytics.
+- Reviews primarily turn what happened into what should happen next.
+- Main You top status: `You are in control`.
+- Settings should use the official pattern: `Grouped Navigation List`.
+- Visual descriptor: `Settings-style grouped list`.
+- Naming direction: canonical naming should move fully to `You`; `Profile` should be treated as legacy compatibility terminology during migration only.
+- Export/import belongs in You when implemented, surfaced through Trust Center / Data controls.
+- Appearance Studio belongs in You.
+- You must never become a junk drawer, analytics dashboard, generic settings page, or social profile.
 
-Implementation implication:
+## Implementation Implications
 
-- Today is not only a task list.
-- Today is not a dashboard.
-- Today can show the daily schedule, but it should not outrank the best next action.
-
-## Broken Day Behavior
-
-When the day breaks, Today should:
-
-```text
-Offer recovery.
-Ask what to protect.
-```
-
-Main recovery action:
-
-```text
-Save the Day
-```
-
-Rules:
-
-- Do not only warn.
-- Do not auto-reschedule.
-- Do not hide missed work.
-- Keep recovery non-shaming.
-
-## Rituals / Routines In Today
-
-Resolved decision:
-
-```text
-Today includes rituals/routines only if relevant now.
-```
-
-Implementation implication:
-
-- Rituals can appear in Today when they affect the current/next slice.
-- Today should not become a habit tracker or routine dashboard.
-
-## Sensitive / Private Items In Today
-
-Resolved decision:
-
-```text
-Sensitive/private items collapse as Private item at launch.
-```
-
-Implementation implication:
-
-- Do not expose sensitive Life Area details in Today compact surfaces.
-- Do not require Face ID at launch unless implemented and verified.
-
-## Empty Today
-
-When there is nothing planned, Today should:
-
-```text
-Ask user to capture something.
-Suggest a goal.
-```
-
-Priority:
-
-```text
-Capture is primary.
-Goal suggestion is secondary.
-```
-
-## Now State Meaning
-
-Now State means:
-
-```text
-Best current execution context.
-```
-
-Now State is not only:
-
-```text
-Current task.
-Time of day.
-User mood.
-Calendar status.
-```
-
-Implementation implication:
-
-- Now State should combine relevant execution context from goals, plan, schedule, tasks, rituals, commitments, and recovery state.
-- Now State should help explain why the best next action is shown.
-
-## Today Must Never Become
-
-Today must never become:
-
-```text
-Task dump.
-Calendar clone.
-Analytics dashboard.
-Motivation quote wall.
-```
+- New user-facing copy should say `You`, not `Profile`.
+- New docs should use `You` as canonical surface language.
+- Existing code paths named `Profile` should be migrated deliberately to `You` where safe.
+- Temporary compatibility shims may remain during migration only when needed to avoid breaking the app.
+- Product, design, and future batch prompts should avoid introducing new `Profile` terminology except to reference legacy code.
 
 ---
 
@@ -865,5 +252,6 @@ These decisions should be reflected in:
 - `docs/canon/PLAN_CALENDAR_BELIEVABILITY.md`
 - `docs/canon/GOALS_GOAL_DETAIL.md`
 - `docs/canon/TODAY_NOW_STATE.md`
+- `docs/canon/YOU_PROFILE_REVIEWS.md`
 - `docs/canon/design/smart-attachment-spec.md`
-- future batch prompts involving onboarding, Life Areas, Capture routing, Today, Now State, empty states, recovery, best next action, Goals, Goal Detail, Goal Weather, Proof, Plan, calendar-aware planning, believability, daily schedule, rituals, You, Trust Center, receipts, sensitive Life Areas, notifications/widgets, export/import, privacy controls, Smart Attachment, Needs a Place, or Capture input behavior.
+- future batch prompts involving onboarding, Life Areas, Capture routing, Today, Now State, empty states, recovery, best next action, Goals, Goal Detail, Goal Weather, Proof, Plan, calendar-aware planning, believability, daily schedule, rituals, You, Profile migration, Settings, Reviews, Trust Center, Appearance Studio, receipts, sensitive Life Areas, notifications/widgets, export/import, privacy controls, Smart Attachment, Needs a Place, or Capture input behavior.
