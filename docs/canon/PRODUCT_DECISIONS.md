@@ -2,7 +2,7 @@
 
 Status: Active canon decision log for product-definition waves.
 
-Purpose: Preserve explicit product decisions made after canon consolidation. This document records decisions that clarify ambiguity across product, design, onboarding, lifecycle, memory, trust, capture, plan/calendar, goals, today/now state, You/profile/settings/reviews, IA/navigation, intelligence/automation, visual system/components/motion, accessibility/focus support, external surfaces/notifications/widgets/live activities, and implementation acceptance.
+Purpose: Preserve explicit product decisions made after canon consolidation. This document records decisions that clarify ambiguity across product, design, onboarding, lifecycle, memory, trust, capture, plan/calendar, goals, today/now state, You/profile/settings/reviews, IA/navigation, intelligence/automation, visual system/components/motion, accessibility/focus support, external surfaces/notifications/widgets/live activities, data/local-first/sync/export, and implementation acceptance.
 
 ## Decision Authority
 
@@ -650,6 +650,86 @@ Calm continuity.
 
 ---
 
+# Wave 15 — Data, Local-First, Sync, And Export
+
+Adoption date: 2026-04-27
+
+## Resolved Decisions
+
+Default data posture:
+
+```text
+Local-first.
+```
+
+Launch account requirement:
+
+```text
+No account required at launch.
+```
+
+Sync posture:
+
+```text
+No launch sync.
+Sync later only after trust/export is strong.
+```
+
+Export before cloud sync:
+
+```text
+Export should exist before cloud sync.
+```
+
+Export should include:
+
+```text
+User-selectable categories.
+```
+
+Delete-all-memory affects:
+
+```text
+Memory only.
+```
+
+Data controls live under:
+
+```text
+You -> Trust Center / Data controls.
+```
+
+Sync/export claims before implementation:
+
+```text
+Do not show sync/export claims before implemented.
+```
+
+Export failure should:
+
+```text
+Explain data remains safe.
+Offer retry.
+Offer review export option.
+```
+
+Data trust north star:
+
+```text
+User understands what is stored, remembered, exported, and deleted.
+```
+
+## Implementation Implications
+
+- First-run value must not depend on account, backend, cloud, or sync.
+- Local-first should be treated as a trust posture and product constraint, not merely an implementation detail.
+- Export/import surfaces should be truthful and only appear as available when implemented.
+- Delete-all-memory must not delete goals, tasks, plans, or other app data unless the user separately chooses a broader destructive action.
+- Data controls belong in You through Trust Center / Data controls, not a separate tab.
+- Sync should not launch until trust, export, recovery, failure states, and user comprehension are strong enough.
+
+---
+
 # Active Follow-Up Targets
 
 These decisions should be reflected in:
@@ -670,5 +750,6 @@ These decisions should be reflected in:
 - `docs/canon/VISUAL_SYSTEM_COMPONENTS_MOTION.md`
 - `docs/canon/ACCESSIBILITY_FOCUS_SUPPORT.md`
 - `docs/canon/EXTERNAL_SURFACES_NOTIFICATIONS_WIDGETS.md`
+- `docs/canon/DATA_LOCAL_SYNC_EXPORT.md`
 - `docs/canon/design/smart-attachment-spec.md`
-- future batch prompts involving onboarding, IA, navigation, drilldown, breadcrumbs, tabs, Life Areas, Capture routing, Today, Now State, empty states, recovery, best next action, Goals, Goal Detail, Goal Weather, Proof, Plan, calendar-aware planning, believability, daily schedule, rituals, You, Profile migration, Settings, Reviews, Trust Center, Appearance Studio, intelligence, suggestions, automation, visual system, components, motion, accessibility, Focus Support, Dynamic Type, VoiceOver, Reduce Motion, external surfaces, notifications, widgets, Live Activities, App Intents, Shortcuts, receipts, sensitive Life Areas, export/import, privacy controls, Smart Attachment, Needs a Place, or Capture input behavior.
+- future batch prompts involving onboarding, IA, navigation, drilldown, breadcrumbs, tabs, Life Areas, Capture routing, Today, Now State, empty states, recovery, best next action, Goals, Goal Detail, Goal Weather, Proof, Plan, calendar-aware planning, believability, daily schedule, rituals, You, Profile migration, Settings, Reviews, Trust Center, Appearance Studio, intelligence, suggestions, automation, visual system, components, motion, accessibility, Focus Support, Dynamic Type, VoiceOver, Reduce Motion, external surfaces, notifications, widgets, Live Activities, App Intents, Shortcuts, data controls, local-first behavior, sync, export/import, delete-all-memory, receipts, sensitive Life Areas, privacy controls, Smart Attachment, Needs a Place, or Capture input behavior.
