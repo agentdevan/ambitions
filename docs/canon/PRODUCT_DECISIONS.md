@@ -2,7 +2,7 @@
 
 Status: Active canon decision log for product-definition waves.
 
-Purpose: Preserve explicit product decisions made after canon consolidation. This document records decisions that clarify ambiguity across product, design, onboarding, lifecycle, memory, trust, capture, plan/calendar, goals, today/now state, You/profile/settings/reviews, and implementation acceptance.
+Purpose: Preserve explicit product decisions made after canon consolidation. This document records decisions that clarify ambiguity across product, design, onboarding, lifecycle, memory, trust, capture, plan/calendar, goals, today/now state, You/profile/settings/reviews, IA/navigation, and implementation acceptance.
 
 ## Decision Authority
 
@@ -238,6 +238,76 @@ Adoption date: 2026-04-27
 
 ---
 
+# Wave 10 — IA, Navigation, And Drilldown
+
+Adoption date: 2026-04-27
+
+## Resolved Decisions
+
+Locked top-level tab structure:
+
+```text
+Today / Goals / Capture / Plan / You
+```
+
+Top-level tab policy:
+
+```text
+Keep locked five-tab shell.
+Do not add more top-level tabs later without explicit canon change.
+```
+
+Feature placement:
+
+```text
+Analytics: You -> Reviews / Patterns
+Habits: Plan / Today / Goal Detail as rituals
+Tasks: Today + Capture + Plan + contextual Goal Detail
+Life Areas: Goals + You + contextual routing
+```
+
+Main navigation principle:
+
+```text
+Fewer top-level surfaces, deeper drilldowns.
+```
+
+Breadcrumbs:
+
+```text
+Use breadcrumbs where depth can cause disorientation.
+```
+
+Grouped Navigation Lists should be used for:
+
+```text
+Settings
+Trust
+Memory
+Reviews
+Data controls
+Deeper object menus
+```
+
+IA must never:
+
+```text
+Add top-level tabs casually.
+Hide everything in settings.
+Turn the app into dashboards.
+Create duplicate homes for the same object.
+```
+
+## Implementation Implications
+
+- Do not reintroduce top-level Insights, Habits, Tasks, Calendar, Life Areas, or Profile tabs.
+- `You` replaces user-facing `Profile` as the canonical fifth tab.
+- Drilldowns should support depth without widening the app.
+- Every object should have a clear primary home and contextual appearances elsewhere.
+- Navigation should preserve orientation, especially in deep goal/plan/trust/review flows.
+
+---
+
 # Active Follow-Up Targets
 
 These decisions should be reflected in:
@@ -253,5 +323,6 @@ These decisions should be reflected in:
 - `docs/canon/GOALS_GOAL_DETAIL.md`
 - `docs/canon/TODAY_NOW_STATE.md`
 - `docs/canon/YOU_PROFILE_REVIEWS.md`
+- `docs/canon/IA_NAVIGATION_DRILLDOWN.md`
 - `docs/canon/design/smart-attachment-spec.md`
-- future batch prompts involving onboarding, Life Areas, Capture routing, Today, Now State, empty states, recovery, best next action, Goals, Goal Detail, Goal Weather, Proof, Plan, calendar-aware planning, believability, daily schedule, rituals, You, Profile migration, Settings, Reviews, Trust Center, Appearance Studio, receipts, sensitive Life Areas, notifications/widgets, export/import, privacy controls, Smart Attachment, Needs a Place, or Capture input behavior.
+- future batch prompts involving onboarding, IA, navigation, drilldown, breadcrumbs, tabs, Life Areas, Capture routing, Today, Now State, empty states, recovery, best next action, Goals, Goal Detail, Goal Weather, Proof, Plan, calendar-aware planning, believability, daily schedule, rituals, You, Profile migration, Settings, Reviews, Trust Center, Appearance Studio, receipts, sensitive Life Areas, notifications/widgets, export/import, privacy controls, Smart Attachment, Needs a Place, or Capture input behavior.
