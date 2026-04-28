@@ -231,7 +231,7 @@ struct AmbitionsRootView: View {
         NavigationStack(path: $navigation.insightsPath) {
             AppShellScaffold(
                 title: "You",
-                subtitle: "Utility",
+                subtitle: "Control",
                 posture: .utility,
                 trailingButtons: shellUtilityButtons(for: .profile)
             ) {
@@ -273,7 +273,7 @@ struct AmbitionsRootView: View {
     private func shellUtilityButtons(for tab: AppTab) -> [AppShellHeaderButton] {
         [
             AppShellHeaderButton(
-                title: "Memory Lens",
+                title: "What Ambitions knows",
                 systemImage: "magnifyingglass",
                 accessibilityIdentifier: "shell.\(tab.rawValue).memory-lens-button"
             ) {
@@ -286,7 +286,7 @@ struct AmbitionsRootView: View {
         Button {
             presentCommandSheet(from: .shellCompose)
         } label: {
-            Label("Quiet Command Sheet", systemImage: "plus")
+            Label("Add something", systemImage: "plus")
                 .labelStyle(.iconOnly)
                 .frame(width: 52, height: 52)
         }
@@ -294,8 +294,8 @@ struct AmbitionsRootView: View {
         .padding(.trailing, theme.spacing.md)
         .padding(.bottom, theme.spacing.xxl + theme.spacing.xl)
         .accessibilityElement()
-        .accessibilityLabel("Quiet Command Sheet")
-        .accessibilityHint("Opens the separate global quick action surface.")
+        .accessibilityLabel("Add something")
+        .accessibilityHint("Opens the global quick action surface.")
         .accessibilityIdentifier("shell.global-entry-button")
         .keyboardShortcut("k", modifiers: [.command])
     }
@@ -321,13 +321,13 @@ struct AmbitionsRootView: View {
         var body: String = {
             switch response.resultKind {
             case .planned:
-                return "\(response.blueprint.title) is now in the portfolio with a canonical plan."
+                return "\(response.blueprint.title) is now in Goals with a plan."
             case .starterPlanned:
-                return "\(response.blueprint.title) is now in the portfolio with a starter plan."
+                return "\(response.blueprint.title) is now in Goals with a starter plan."
             case .clarificationRequired:
-                return "\(response.blueprint.title) needs one clarification before Ambitions treats it as a live goal."
+                return "\(response.blueprint.title) needs one clarification before it becomes a live goal."
             case .blocked:
-                return "\(response.blueprint.title) was saved as a blocked draft with the missing constraint visible."
+                return "\(response.blueprint.title) was saved as a blocked draft with the missing piece visible."
             }
         }()
 
