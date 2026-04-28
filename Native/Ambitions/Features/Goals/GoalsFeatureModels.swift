@@ -1065,17 +1065,23 @@ struct GoalDetailRecentMovementState: Sendable {
 }
 
 enum GoalDetailMissionLaneKind: String, Sendable, CaseIterable {
+    case overview
     case path
-    case now
+    case steps
     case proof
-    case risk
+    case decisions
+    case risks
+    case archive
 
     var title: String {
         switch self {
+        case .overview: "Overview"
         case .path: "Path"
-        case .now: "Now"
+        case .steps: "Steps"
         case .proof: "Proof"
-        case .risk: "Risk"
+        case .decisions: "Decisions"
+        case .risks: "Risks"
+        case .archive: "Archive"
         }
     }
 
@@ -1180,6 +1186,45 @@ struct GoalDetailReceiptsState: Sendable {
     let emptyMessage: String
 }
 
+struct GoalDetailDecisionItemState: Identifiable, Sendable {
+    let id: String
+    let title: String
+    let summary: String
+    let timestamp: String
+    let state: AmbitionVisualState
+}
+
+struct GoalDetailDecisionsState: Sendable {
+    let title: String
+    let subtitle: String
+    let items: [GoalDetailDecisionItemState]
+    let emptyTitle: String
+    let emptyMessage: String
+}
+
+struct GoalDetailRiskState: Identifiable, Sendable {
+    let id: String
+    let title: String
+    let summary: String
+    let state: AmbitionVisualState
+}
+
+struct GoalDetailRisksState: Sendable {
+    let title: String
+    let subtitle: String
+    let items: [GoalDetailRiskState]
+    let emptyTitle: String
+    let emptyMessage: String
+}
+
+struct GoalDetailArchiveState: Sendable {
+    let title: String
+    let statusLabel: String
+    let summary: String
+    let learning: String
+    let state: AmbitionVisualState
+}
+
 struct GoalDetailMissionControlState: Sendable {
     let currentTruth: String
     let primaryNextMove: GoalNextVisibleStep
@@ -1188,6 +1233,9 @@ struct GoalDetailMissionControlState: Sendable {
     let timeline: GoalDetailTimelineState
     let assumptions: [GoalDetailAssumptionState]
     let proofRail: GoalDetailProofRailState
+    let decisions: GoalDetailDecisionsState
+    let risks: GoalDetailRisksState
+    let archive: GoalDetailArchiveState
     let receipts: GoalDetailReceiptsState
 }
 
@@ -1288,6 +1336,48 @@ struct GoalDetailPresentation: Sendable {
         self.supportModeActive = supportModeActive
         self.defaultLens = defaultLens
         self.missionControl = missionControl
+    }
+
+    func screenContractSnapshot(
+        topLevelTabTitles: [String] = ScreenContractValidator.canonicalTopLevelTabs
+    ) -> ScreenContractImplementationSnapshot {
+        ScreenContractImplementationSnapshot(
+            screenID: .goalDetail,
+            firstScreenContent: [
+                "Object identity header",
+                "Mission Control lanes"
+            ],
+            panels: [
+                .objectIdentityHeader,
+                .missionControlLanes,
+                .progress,
+                .timeline,
+                .proofRail,
+                .recovery,
+                .trust,
+                .receipt
+            ],
+            actions: [.startStep, .addProof, .changePath, .park, .archive],
+            drillDowns: GoalDetailMissionLaneKind.allCases.map(\.title),
+            copySamples: [
+                headline.title,
+                headline.subtitle,
+                strategicStatus.title,
+                strategicStatus.summary,
+                missionControl?.lanes.map(\.title).joined(separator: " ") ?? "",
+                missionControl?.proofRail.title ?? "",
+                missionControl?.decisions.title ?? "",
+                missionControl?.risks.title ?? "",
+                missionControl?.archive.title ?? "",
+                missionControl?.receipts.title ?? ""
+            ],
+            topLevelTabTitles: topLevelTabTitles,
+            supportsDensityBehavior: true,
+            supportsPanelSizeBehavior: true,
+            hasAccessibilitySummary: missionControl?.lanes.isEmpty == false,
+            hasPrivacySafeState: true,
+            hasGestureAlternative: true
+        )
     }
 }
 

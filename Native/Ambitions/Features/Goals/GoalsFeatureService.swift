@@ -894,7 +894,7 @@ private extension RepositoryBackedGoalsService {
             items: items,
             isSeeded: seeded,
             emptyTitle: "No goals yet",
-            emptyMessage: "Once a goal or planning draft exists, this screen will immediately explain the path, not just dump tasks."
+            emptyMessage: "Once a goal or planning draft exists, this screen will immediately explain the path, not just dump steps."
         )
     }
 
@@ -2333,11 +2333,11 @@ private extension RepositoryBackedGoalsService {
             GoalNextVisibleStep(title: $0.title, detail: $0.summary, isAvailable: true)
         } ?? GoalNextVisibleStep(
             title: renderState == .blocked ? "Resolve the blocker" : "Needs a next step",
-            detail: renderState == .blocked ? "The path should not add more work until this clears." : "Clarify one real move before adding more tasks.",
+            detail: renderState == .blocked ? "The path should not add more work until this clears." : "Clarify one real move before adding more steps.",
             isAvailable: false
         )
         let proofSummary = goalDetailProofSummary(evidenceItems: evidenceItems, evidenceLabel: evidenceLabel)
-        let risks = goalDetailRisks(
+        let riskItems = goalDetailRisks(
             context: context,
             renderState: renderState,
             pathSummary: pathSummary,
@@ -2345,17 +2345,38 @@ private extension RepositoryBackedGoalsService {
             evidenceItems: evidenceItems,
             timing: timing
         )
+        let decisions = goalDetailDecisions(context: context, feedbackItems: feedbackItems)
+        let risks = GoalDetailRisksState(
+            title: "Risks",
+            subtitle: riskItems.isEmpty ? "No major risk is visible from this goal data." : "Risks stay explicit so recovery can stay calm.",
+            items: riskItems,
+            emptyTitle: "No major risk visible",
+            emptyMessage: "Nothing in this goal is asking for rescue right now."
+        )
+        let archive = goalDetailArchive(context: context, renderState: renderState, evidenceItems: evidenceItems, feedbackItems: feedbackItems, progressLabel: progressLabel)
         let currentPhase = pathStages.first(where: { $0.position == .current || $0.position == .blocked }) ?? pathStages.first
         let nextMilestone = pathSummary.flatMap(nextMilestoneTitle(for:)) ?? suggestions.first?.title ?? nextMovement?.title
         let pathDetail = currentPhase?.summary ?? trajectory.phaseSummary
-        let riskHeadline = risks.first?.title ?? "No major visible risk"
-        let riskDetail = risks.first?.summary ?? "Nothing in the current goal data is asking for rescue."
+        let riskHeadline = riskItems.first?.title ?? risks.emptyTitle
+        let riskDetail = riskItems.first?.summary ?? risks.emptyMessage
+        let decisionHeadline = decisions.items.first?.title ?? decisions.emptyTitle
+        let decisionDetail = decisions.items.first?.summary ?? decisions.emptyMessage
 
         return GoalDetailMissionControlState(
             currentTruth: currentTruth,
             primaryNextMove: nextStep,
             breadcrumb: goalDetailBreadcrumb(context: context, title: title),
             lanes: [
+                GoalDetailMissionLaneState(
+                    kind: .overview,
+                    title: "Overview",
+                    headline: renderState.title,
+                    summary: currentTruth,
+                    detail: "Next: \(nextStep.title)",
+                    badgeTitle: "State",
+                    systemImage: "rectangle.and.text.magnifyingglass",
+                    state: renderState.visualState
+                ),
                 GoalDetailMissionLaneState(
                     kind: .path,
                     title: "Path",
@@ -2367,11 +2388,11 @@ private extension RepositoryBackedGoalsService {
                     state: currentPhase?.state ?? .default
                 ),
                 GoalDetailMissionLaneState(
-                    kind: .now,
-                    title: "Now",
+                    kind: .steps,
+                    title: "Steps",
                     headline: nextStep.title,
                     summary: nextStep.detail,
-                    detail: nextStep.isAvailable ? "Keep this as the primary move." : "This goal needs one safe next move before the tactical list grows.",
+                    detail: nextStep.isAvailable ? "Keep this as the primary contained Step." : "This goal needs one safe next Step before the tactical list grows.",
                     badgeTitle: nextStep.isAvailable ? "Next move" : "Needs review",
                     systemImage: "scope",
                     state: nextStep.isAvailable ? .selected : .warning
@@ -2387,14 +2408,34 @@ private extension RepositoryBackedGoalsService {
                     state: proofSummary.visualState
                 ),
                 GoalDetailMissionLaneState(
-                    kind: .risk,
-                    title: "Risk",
+                    kind: .decisions,
+                    title: "Decisions",
+                    headline: decisionHeadline,
+                    summary: decisionDetail,
+                    detail: decisions.items.dropFirst().map(\.title).joined(separator: " · "),
+                    badgeTitle: decisions.items.isEmpty ? "No decisions" : "\(decisions.items.count) recorded",
+                    systemImage: "arrow.triangle.branch",
+                    state: decisions.items.first?.state ?? .default
+                ),
+                GoalDetailMissionLaneState(
+                    kind: .risks,
+                    title: "Risks",
                     headline: riskHeadline,
                     summary: riskDetail,
-                    detail: risks.dropFirst().map(\.title).joined(separator: " · "),
-                    badgeTitle: risks.isEmpty ? "Calm" : "Needs review",
+                    detail: riskItems.dropFirst().map(\.title).joined(separator: " · "),
+                    badgeTitle: riskItems.isEmpty ? "Calm" : "Needs review",
                     systemImage: "exclamationmark.triangle",
-                    state: risks.isEmpty ? .success : .warning
+                    state: riskItems.isEmpty ? .success : .warning
+                ),
+                GoalDetailMissionLaneState(
+                    kind: .archive,
+                    title: "Archive",
+                    headline: archive.title,
+                    summary: archive.summary,
+                    detail: archive.learning,
+                    badgeTitle: archive.statusLabel,
+                    systemImage: "archivebox",
+                    state: archive.state
                 )
             ],
             timeline: goalDetailTimeline(
@@ -2412,7 +2453,7 @@ private extension RepositoryBackedGoalsService {
                 timing: timing,
                 evidenceItems: evidenceItems,
                 suggestions: suggestions,
-                risks: risks
+                risks: riskItems
             ),
             proofRail: GoalDetailProofRailState(
                 title: "Proof",
@@ -2421,6 +2462,9 @@ private extension RepositoryBackedGoalsService {
                 emptyTitle: "No proof yet",
                 emptyMessage: "Add proof later when there is something real to show."
             ),
+            decisions: decisions,
+            risks: risks,
+            archive: archive,
             receipts: GoalDetailReceiptsState(
                 title: "What changed",
                 subtitle: "Goal-related receipts stay visible here when the current data source provides them.",
@@ -2469,24 +2513,104 @@ private extension RepositoryBackedGoalsService {
         suggestions: [GoalDetailStepItem],
         evidenceItems: [GoalEvidenceItem],
         timing: GoalTiming
-    ) -> [GoalDetailTimelineItemState] {
-        var risks: [GoalDetailTimelineItemState] = []
+    ) -> [GoalDetailRiskState] {
+        var risks: [GoalDetailRiskState] = []
         if renderState == .blocked || context.draft?.blockers.isEmpty == false || pathSummary?.blockedPrerequisites.isEmpty == false {
-            risks.append(GoalDetailTimelineItemState(id: "risk-blocked", kind: .waiting, title: "Blocked", summary: "A blocker is visible, so the goal should not pretend to be moving normally.", timestamp: nil, state: .warning, isFuture: false))
+            risks.append(GoalDetailRiskState(id: "risk-blocked", title: "Blocked", summary: "A blocker is visible, so the goal should not pretend to be moving normally.", state: .warning))
         }
         if pathSummary?.readiness.gapCount ?? 0 > 0 {
-            risks.append(GoalDetailTimelineItemState(id: "risk-waiting", kind: .waiting, title: "Waiting", summary: "One readiness gap needs an answer before the path is fully believable.", timestamp: nil, state: .warning, isFuture: false))
+            risks.append(GoalDetailRiskState(id: "risk-waiting", title: "Waiting", summary: "One readiness gap needs an answer before the path is fully believable.", state: .warning))
         }
         if suggestions.isEmpty {
-            risks.append(GoalDetailTimelineItemState(id: "risk-next-step", kind: .current, title: "Needs a next step", summary: "The goal has no clear next move in the current plan.", timestamp: nil, state: .warning, isFuture: false))
+            risks.append(GoalDetailRiskState(id: "risk-next-step", title: "Needs a next step", summary: "The goal has no clear next move in the current plan.", state: .warning))
         }
         if evidenceItems.isEmpty {
-            risks.append(GoalDetailTimelineItemState(id: "risk-proof", kind: .proof, title: "Proof is thin", summary: "No proof has been recorded yet.", timestamp: nil, state: .default, isFuture: false))
+            risks.append(GoalDetailRiskState(id: "risk-proof", title: "Proof is thin", summary: "No proof has been recorded yet.", state: .default))
         }
         if timing.dueAt != nil || timing.targetBy != nil {
-            risks.append(GoalDetailTimelineItemState(id: "risk-timing", kind: .current, title: "Timing needs review", summary: "The date is visible; keep the next move believable before adding more pressure.", timestamp: nil, state: .default, isFuture: false))
+            risks.append(GoalDetailRiskState(id: "risk-timing", title: "Timing needs review", summary: "The date is visible; keep the next move believable before adding more pressure.", state: .default))
         }
         return Array(risks.prefix(4))
+    }
+
+    func goalDetailDecisions(
+        context: DetailContext,
+        feedbackItems: [GoalFeedbackItem]
+    ) -> GoalDetailDecisionsState {
+        let items = feedbackItems.prefix(5).map { item in
+            GoalDetailDecisionItemState(
+                id: item.id,
+                title: item.title,
+                summary: item.subtitle,
+                timestamp: item.timestamp,
+                state: item.state
+            )
+        }
+
+        let title = "Decisions"
+        if items.isEmpty {
+            return GoalDetailDecisionsState(
+                title: title,
+                subtitle: "Decision trail stays here when this goal changes.",
+                items: [],
+                emptyTitle: "No decisions yet",
+                emptyMessage: context.goal == nil ? "Starter decisions will appear after this becomes an active goal." : "When you move, park, change, or explain this goal, the reason will stay visible here."
+            )
+        }
+
+        return GoalDetailDecisionsState(
+            title: title,
+            subtitle: "\(items.count) goal decision\(items.count == 1 ? "" : "s") recorded from real history.",
+            items: Array(items),
+            emptyTitle: "No decisions yet",
+            emptyMessage: "When this goal changes, the reason will stay visible here."
+        )
+    }
+
+    func goalDetailArchive(
+        context: DetailContext,
+        renderState: GoalRenderState,
+        evidenceItems: [GoalEvidenceItem],
+        feedbackItems: [GoalFeedbackItem],
+        progressLabel: String
+    ) -> GoalDetailArchiveState {
+        if renderState == .achieved || context.goal?.state == .completed {
+            return GoalDetailArchiveState(
+                title: "Completed",
+                statusLabel: "Completed",
+                summary: progressLabel,
+                learning: evidenceItems.first.map { "Latest proof: \($0.title)" } ?? "Completion can still carry proof and reflection later.",
+                state: .success
+            )
+        }
+
+        if context.goal?.state == .archived {
+            return GoalDetailArchiveState(
+                title: "Archived",
+                statusLabel: "Closed",
+                summary: "This goal is closed without being treated as failure.",
+                learning: feedbackItems.first.map { "Last change: \($0.title)" } ?? "Archive keeps the history available for later review.",
+                state: .default
+            )
+        }
+
+        if renderState == .onHold {
+            return GoalDetailArchiveState(
+                title: "Parked",
+                statusLabel: "Review later",
+                summary: "This goal is intentionally quiet for now.",
+                learning: "Parking keeps the direction without forcing action today.",
+                state: .default
+            )
+        }
+
+        return GoalDetailArchiveState(
+            title: "Archive ready",
+            statusLabel: "Active",
+            summary: "Archive learning will appear when this goal is parked, completed, or closed.",
+            learning: "Nothing needs to be archived right now.",
+            state: .selected
+        )
     }
 
     func goalDetailTimeline(
@@ -2548,14 +2672,14 @@ private extension RepositoryBackedGoalsService {
         timing: GoalTiming,
         evidenceItems: [GoalEvidenceItem],
         suggestions: [GoalDetailStepItem],
-        risks: [GoalDetailTimelineItemState]
+        risks: [GoalDetailRiskState]
     ) -> [GoalDetailAssumptionState] {
         var assumptions: [GoalDetailAssumptionState] = [
             GoalDetailAssumptionState(
                 id: "next-step",
                 title: "This goal has a next step.",
                 status: suggestions.isEmpty ? "Needs review" : "Visible",
-                whyItMatters: "The screen should lead with one move, not a long task dump.",
+                whyItMatters: "The screen should lead with one move, not a long step dump.",
                 correctionLabel: suggestions.isEmpty ? "Review next step" : "Change next step",
                 state: suggestions.isEmpty ? .warning : .selected
             ),
@@ -3377,7 +3501,7 @@ private extension RepositoryBackedGoalsService {
 
         return GoalBlockedState(
             title: "Blocked planning state",
-            subtitle: "The planner kept the blocker explicit instead of generating performative tasks.",
+            subtitle: "The planner kept the blocker explicit instead of generating performative steps.",
             blockers: draft?.blockers.map(\.reason) ?? ["A blocking condition is still unresolved."]
         )
     }
@@ -3742,7 +3866,7 @@ private extension RepositoryBackedGoalsService {
             case .delegatedSupport:
                 return "Support \(actorName) with structure that stays collaborative and non-punitive."
             case .learning, .exploration:
-                return "Stay oriented to signal and learning, not just task completion."
+                return "Stay oriented to signal and learning, not just step completion."
             case .recovery:
                 return "Keep the next move gentle enough that it still happens."
             default:

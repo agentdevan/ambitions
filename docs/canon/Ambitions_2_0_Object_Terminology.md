@@ -23,15 +23,15 @@ Step = action inside a Goal, Path, or Plan.
 
 | Term | Definition | Current posture |
 | --- | --- | --- |
-| Life Area | Visible organization lens for life domains such as Health, Career, Home, Relationships, or Money. It is not a sixth tab. | Active canon; first-class object/projection foundation exists and later surface transformation remains D13 work. |
+| Life Area | Visible organization lens for life domains such as Health, Career, Home, Relationships, or Money. It is not a sixth tab. | Active canon; first-class object/projection foundation exists and D13 bounded Goals portfolio consumption exists. |
 | Ambition | Meaningful direction the user may want to pursue. Ambitions can be active, dormant, identity-level, or refined into Goals. | Active canon; use as direction language before overbuilding a model. |
-| North Star | Long-range dormant or identity-level Ambition that can live under a Life Area without active goals or plans. | Active canon; first-class model/projection foundation exists and detail/surface transformation remains future D13 work. |
-| Goal | Concrete outcome with enough structure to carry a path, plan, milestones, steps, proof, decisions, and archive learning. | Implemented foundation exists; later surface alignment continues in D13-D14. |
+| North Star | Long-range dormant or identity-level Ambition that can live under a Life Area without active goals or plans. | Active canon; first-class model/projection foundation exists and D13 bounded Goals rail consumption exists; full detail remains future maturity work. |
+| Goal | Concrete outcome with enough structure to carry a path, plan, milestones, steps, proof, decisions, and archive learning. | Implemented foundation exists; D13 Goals portfolio consumption and D14 Goal Detail lane alignment exist. |
 | Path | Believable route through a Goal or Ambition, including assumptions, stages, prerequisites, risks, and alternatives. | Existing foundations exist; future path surfaces must consume this terminology. |
 | Plan | Current agreement with time, capacity, constraints, rituals, recovery, and protected work. Calendar permission remains Plan-owned. | Implemented foundation exists; timeline/ritual alignment continues later. |
 | Milestone | Meaningful checkpoint on the way to a Goal, larger than a Step and more concrete than broad direction. | Planned/partial depending on surface; do not flatten into generic tasks. |
 | Step | Contained action inside a Goal, Path, or Plan. A Step belongs to a larger structure. | Existing goal/plan code uses Step heavily and should keep this meaning. |
-| Task / One-Step Goal | Standalone one-off outcome that can exist without a parent Goal, Path, Plan, or Life Area. | Active canon; first-class model/projection foundation exists; full detail and surface integration remain future D11-D14 work. |
+| Task / One-Step Goal | Standalone one-off outcome that can exist without a parent Goal, Path, Plan, or Life Area. | Active canon; first-class model/projection foundation exists; D11-D14 consume the distinction without adding a top-level Tasks tab. Full standalone detail and broader promotion workflows remain future work. |
 | Proof | Evidence that progress, completion, a decision, or a result happened. | Implemented foundations exist; future surfaces should keep proof qualitative. |
 | Receipt | User-facing result/trust record that says what happened, what changed, why, and what can be corrected or undone. | Implemented foundations exist; search/privacy maturity remains future D05 work. |
 | Review | Reflection, recovery, history, and carry-forward surface. It is not the same as analytics. | You-owned Reviews v1 exists; future maturity remains planned. |

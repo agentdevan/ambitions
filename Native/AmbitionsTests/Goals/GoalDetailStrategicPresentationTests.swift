@@ -31,10 +31,31 @@ final class GoalDetailStrategicPresentationTests: XCTestCase {
         let detail = try await service.loadDetail(target: created.target)
         let missionControl = try XCTUnwrap(detail.missionControl)
 
-        XCTAssertEqual(missionControl.lanes.map(\.kind), [.path, .now, .proof, .risk])
+        XCTAssertEqual(missionControl.lanes.map(\.kind), [.overview, .path, .steps, .proof, .decisions, .risks, .archive])
         XCTAssertFalse(missionControl.currentTruth.isEmpty)
-        XCTAssertEqual(missionControl.lanes.first(where: { $0.kind == .now })?.badgeTitle, "Next move")
+        XCTAssertEqual(missionControl.lanes.first(where: { $0.kind == .steps })?.badgeTitle, "Next move")
+        XCTAssertEqual(missionControl.decisions.emptyTitle, "No decisions yet")
+        XCTAssertEqual(missionControl.risks.emptyTitle, "No major risk visible")
+        XCTAssertFalse(missionControl.archive.title.isEmpty)
         XCTAssertFalse(missionControl.timeline.items.isEmpty)
+    }
+
+    func testD14GoalDetailScreenContractSnapshotSatisfiesImplementationGate() async throws {
+        let repositories = try await makeRepositories()
+        let service = RepositoryBackedGoalsService(repositories: repositories)
+        let created = try await service.createGoal(
+            CreateGoalRequest(title: "Align the Goal Detail lanes"),
+            now: fixedNow
+        )
+
+        let detail = try await service.loadDetail(target: created.target)
+        let contract = ScreenContractRegistry.contract(for: .goalDetail)
+        let issues = ScreenContractValidator.validate(
+            snapshot: detail.screenContractSnapshot(),
+            against: contract
+        )
+
+        XCTAssertTrue(issues.isEmpty, issues.map(\.message).joined(separator: "\n"))
     }
 
     func testProofRailShowsProofSummaryAndEmptyStateTruthfully() async throws {
@@ -147,7 +168,7 @@ final class GoalDetailStrategicPresentationTests: XCTestCase {
         let missionControl = try XCTUnwrap(detail.missionControl)
 
         XCTAssertEqual(missionControl.primaryNextMove.title, "Needs a next step")
-        XCTAssertEqual(missionControl.lanes.first(where: { $0.kind == .now })?.badgeTitle, "Needs review")
+        XCTAssertEqual(missionControl.lanes.first(where: { $0.kind == .steps })?.badgeTitle, "Needs review")
         XCTAssertTrue(missionControl.assumptions.contains(where: { $0.id == "next-step" && $0.status == "Needs review" }))
     }
 
@@ -156,7 +177,8 @@ final class GoalDetailStrategicPresentationTests: XCTestCase {
         let missionControl = try XCTUnwrap(detail.missionControl)
 
         XCTAssertEqual(detail.headline.renderState, .blocked)
-        XCTAssertEqual(missionControl.lanes.first(where: { $0.kind == .risk })?.headline, "Blocked")
+        XCTAssertEqual(missionControl.lanes.first(where: { $0.kind == .risks })?.headline, "Blocked")
+        XCTAssertEqual(missionControl.risks.items.first?.title, "Blocked")
         XCTAssertTrue(missionControl.timeline.items.contains(where: { $0.kind == .waiting || $0.kind == .current }))
     }
 

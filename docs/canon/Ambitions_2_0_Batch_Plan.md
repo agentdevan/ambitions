@@ -196,8 +196,8 @@ The repo-wide implementation gap audit lives in [Ambitions_2_0_Implementation_Ga
 | D11 | Today 2.0 Design Constitution Alignment | D04, D09-D10, Now State, Plan believability | Completed |
 | D12 | Capture + Quiet Command Sheet Alignment | D06, D09-D10 | Completed |
 | D13 | Goals / Life Areas / North Stars Transformation and Semantic Zoom | D07-D10 | Completed |
-| D14 | Goal Detail Mission Control Lanes Alignment | D09-D10, D13 | Planned / next |
-| D15 | Plan Believability + Timeline Widget Alignment | D05, D10, Reality Model | Planned |
+| D14 | Goal Detail Mission Control Lanes Alignment | D09-D10, D13 | Completed |
+| D15 | Plan Believability + Timeline Widget Alignment | D05, D10, Reality Model | Planned / next |
 | D16 | Ritual Split Alignment | D11, D15, You foundation | Planned |
 | D17 | You Personal System Center Alignment | D03-D05, D10 | Planned |
 | D18 | Trust Center Alignment | D05, D17 | Planned |
@@ -210,9 +210,9 @@ The repo-wide implementation gap audit lives in [Ambitions_2_0_Implementation_Ga
 | D25 | App Intents / Shortcuts Alignment | D22 | Planned |
 | D26 | Release Candidate Validation | D01-D25 | Planned |
 
-Do not mark any delta complete until its implementation, validation evidence, docs/status truth, and handoff are aligned. After D13 Goals / Life Areas / North Stars Transformation and Semantic Zoom, D14 is the next dependency-safe implementation batch; original Batch 89 work is retained only after the remaining D14-D21 foundations or inside D26.
+Do not mark any delta complete until its implementation, validation evidence, docs/status truth, and handoff are aligned. After D14 Goal Detail Mission Control Lanes Alignment, D15 is the next dependency-safe implementation batch; original Batch 89 work is retained only after the remaining D15-D21 foundations or inside D26.
 
-Roadmap merge audit note: [Ambitions_2_0_Roadmap_Merge_Audit.md](Ambitions_2_0_Roadmap_Merge_Audit.md) now explicitly maps Batches 89-120 against D01-D26. It preserves useful Batch 89-120 intent, but D14 is the next dependency-safe implementation batch after D13 and Batch 89 is not runnable before the remaining D14-D21 foundations.
+Roadmap merge audit note: [Ambitions_2_0_Roadmap_Merge_Audit.md](Ambitions_2_0_Roadmap_Merge_Audit.md) now explicitly maps Batches 89-120 against D01-D26. It preserves useful Batch 89-120 intent, but D15 is the next dependency-safe implementation batch after D14 and Batch 89 is not runnable before the remaining D15-D21 foundations.
 
 ## Batch 61 - Repo Truth and Ambitions 2.0 Capability Matrix
 
@@ -461,7 +461,7 @@ Every batch definition below inherits the required template:
 - Performance budget, accessibility requirement, no-fake-precision boundary, indispensability scenario improved.
 - Likely files/areas affected, dependencies, out-of-scope items, validation requirements, concrete acceptance criteria, and ready-to-paste Codex prompt.
 
-The compact batch definitions below preserve the original Batch 61-120 roadmap sequencing. Current execution status after the Design Constitution delta backlog, D01 shell alignment, D02 terminology cleanup, D03 grouped navigation foundation, D04 panel density/size foundation, D05 receipt/action-closure search and privacy foundation, D06 Smart Attachment foundation, D07 Life Areas Overview / Atlas Object Model foundation, D08 North Stars / Dormant Ambitions Object Model foundation, D09 One-Step Goals Object Model foundation, D10 Screen Contract Matrix Implementation Pass, D11 Today 2.0 Design Constitution Alignment, D12 Capture + Quiet Command Sheet Alignment, D13 Goals / Life Areas / North Stars Transformation and Semantic Zoom, and roadmap merge audit: Batches 00-88 and D01-D13 are complete for planning purposes, D14 is the next dependency-safe implementation batch, and original Batches 89-120 remain future planned roadmap work only through the classifications and sequencing in [Ambitions_2_0_Roadmap_Merge_Audit.md](Ambitions_2_0_Roadmap_Merge_Audit.md). Ready prompts for completed batches are retained as historical implementation prompts, not current execution state.
+The compact batch definitions below preserve the original Batch 61-120 roadmap sequencing. Current execution status after the Design Constitution delta backlog, D01 shell alignment, D02 terminology cleanup, D03 grouped navigation foundation, D04 panel density/size foundation, D05 receipt/action-closure search and privacy foundation, D06 Smart Attachment foundation, D07 Life Areas Overview / Atlas Object Model foundation, D08 North Stars / Dormant Ambitions Object Model foundation, D09 One-Step Goals Object Model foundation, D10 Screen Contract Matrix Implementation Pass, D11 Today 2.0 Design Constitution Alignment, D12 Capture + Quiet Command Sheet Alignment, D13 Goals / Life Areas / North Stars Transformation and Semantic Zoom, D14 Goal Detail Mission Control Lanes Alignment, and roadmap merge audit: Batches 00-88 and D01-D14 are complete for planning purposes, D15 is the next dependency-safe implementation batch, and original Batches 89-120 remain future planned roadmap work only through the classifications and sequencing in [Ambitions_2_0_Roadmap_Merge_Audit.md](Ambitions_2_0_Roadmap_Merge_Audit.md). Ready prompts for completed batches are retained as historical implementation prompts, not current execution state.
 
 ## Phase A - Daily Value, Shell, Activation
 

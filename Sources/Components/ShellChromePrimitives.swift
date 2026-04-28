@@ -101,28 +101,37 @@ public enum AmbitionTrustBadgeState: String, CaseIterable, Sendable, Identifiabl
 }
 
 public enum AmbitionMissionLane: String, CaseIterable, Sendable, Identifiable {
+    case overview
     case path
-    case now
+    case steps
     case proof
-    case risk
+    case decisions
+    case risks
+    case archive
 
     public var id: String { rawValue }
 
     public var title: String {
         switch self {
+        case .overview: "Overview"
         case .path: "Path"
-        case .now: "Now"
+        case .steps: "Steps"
         case .proof: "Proof"
-        case .risk: "Watch"
+        case .decisions: "Decisions"
+        case .risks: "Risks"
+        case .archive: "Archive"
         }
     }
 
     public var systemImage: String {
         switch self {
+        case .overview: "rectangle.and.text.magnifyingglass"
         case .path: "point.topleft.down.curvedto.point.bottomright.up"
-        case .now: "scope"
+        case .steps: "scope"
         case .proof: "checkmark.seal"
-        case .risk: "exclamationmark.triangle"
+        case .decisions: "arrow.triangle.branch"
+        case .risks: "exclamationmark.triangle"
+        case .archive: "archivebox"
         }
     }
 }

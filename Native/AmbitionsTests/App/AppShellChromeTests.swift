@@ -18,7 +18,7 @@ final class AppShellChromeTests: XCTestCase {
     }
 
     func testMissionControlLaneLabelsDoNotCreateTopLevelTabs() {
-        XCTAssertEqual(AmbitionMissionLane.allCases.map(\.title), ["Path", "Now", "Proof", "Watch"])
+        XCTAssertEqual(AmbitionMissionLane.allCases.map(\.title), ["Overview", "Path", "Steps", "Proof", "Decisions", "Risks", "Archive"])
         XCTAssertEqual(AppTab.allCases.map(\.title), ["Today", "Goals", "Capture", "Plan", "You"])
     }
 

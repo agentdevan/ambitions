@@ -90,6 +90,9 @@ struct GoalDetailScreen: View {
                     if let missionControl = detail.missionControl {
                         GoalDetailAssumptionsCard(assumptions: missionControl.assumptions)
                         GoalDetailProofRailCard(state: missionControl.proofRail)
+                        GoalDetailDecisionsCard(state: missionControl.decisions)
+                        GoalDetailRisksCard(state: missionControl.risks)
+                        GoalDetailArchiveCard(state: missionControl.archive)
                         GoalDetailReceiptsCard(state: missionControl.receipts)
                     }
 
@@ -546,6 +549,106 @@ private struct GoalDetailReceiptsCard: View {
             }
         }
         .accessibilityIdentifier("goal-detail.receipts")
+    }
+}
+
+private struct GoalDetailDecisionsCard: View {
+    @Environment(\.ambitionTheme) private var theme
+
+    let state: GoalDetailDecisionsState
+
+    var body: some View {
+        GoalDetailSectionCard(title: state.title, subtitle: state.subtitle) {
+            if state.items.isEmpty {
+                EmptyStateCard(title: state.emptyTitle, message: state.emptyMessage, icon: "arrow.triangle.branch")
+            } else {
+                VStack(alignment: .leading, spacing: theme.spacing.sm) {
+                    ForEach(state.items) { item in
+                        HStack(alignment: .top, spacing: theme.spacing.sm) {
+                            Image(systemName: "arrow.triangle.branch")
+                                .foregroundStyle(theme.stateStyle(for: item.state).accent)
+                            VStack(alignment: .leading, spacing: theme.spacing.xxxs) {
+                                Text(item.title)
+                                    .font(theme.typography.bodyEmphasized)
+                                    .foregroundStyle(theme.colors.textPrimary)
+                                Text(item.summary)
+                                    .font(theme.typography.caption)
+                                    .foregroundStyle(theme.colors.textSecondary)
+                                Text(item.timestamp)
+                                    .font(theme.typography.micro)
+                                    .foregroundStyle(theme.colors.textTertiary)
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        .accessibilityElement(children: .contain)
+        .accessibilityIdentifier("goal-detail.decisions")
+    }
+}
+
+private struct GoalDetailRisksCard: View {
+    @Environment(\.ambitionTheme) private var theme
+
+    let state: GoalDetailRisksState
+
+    var body: some View {
+        GoalDetailSectionCard(title: state.title, subtitle: state.subtitle) {
+            if state.items.isEmpty {
+                EmptyStateCard(title: state.emptyTitle, message: state.emptyMessage, icon: "checkmark.shield")
+            } else {
+                VStack(alignment: .leading, spacing: theme.spacing.sm) {
+                    ForEach(state.items) { item in
+                        HStack(alignment: .top, spacing: theme.spacing.sm) {
+                            Image(systemName: "exclamationmark.triangle")
+                                .foregroundStyle(theme.stateStyle(for: item.state).accent)
+                            VStack(alignment: .leading, spacing: theme.spacing.xxxs) {
+                                Text(item.title)
+                                    .font(theme.typography.bodyEmphasized)
+                                    .foregroundStyle(theme.colors.textPrimary)
+                                Text(item.summary)
+                                    .font(theme.typography.caption)
+                                    .foregroundStyle(theme.colors.textSecondary)
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        .accessibilityElement(children: .contain)
+        .accessibilityIdentifier("goal-detail.risks")
+    }
+}
+
+private struct GoalDetailArchiveCard: View {
+    @Environment(\.ambitionTheme) private var theme
+
+    let state: GoalDetailArchiveState
+
+    var body: some View {
+        GoalDetailSectionCard(title: "Archive", subtitle: "What this goal should remember when its active work changes.") {
+            VStack(alignment: .leading, spacing: theme.spacing.xs) {
+                HStack(alignment: .firstTextBaseline, spacing: theme.spacing.sm) {
+                    Text(state.title)
+                        .font(theme.typography.bodyEmphasized)
+                        .foregroundStyle(theme.colors.textPrimary)
+                    Spacer()
+                    TagPill(state.statusLabel, state: state.state)
+                }
+                Text(state.summary)
+                    .font(theme.typography.caption)
+                    .foregroundStyle(theme.colors.textSecondary)
+                Text(state.learning)
+                    .font(theme.typography.micro)
+                    .foregroundStyle(theme.colors.textTertiary)
+            }
+            .padding(theme.spacing.sm)
+            .background(RoundedRectangle(cornerRadius: theme.radius.md, style: .continuous).fill(theme.colors.surfaceOverlay))
+        }
+        .accessibilityElement(children: .combine)
+        .accessibilityLabel("Archive. \(state.title). \(state.summary)")
+        .accessibilityIdentifier("goal-detail.archive")
     }
 }
 

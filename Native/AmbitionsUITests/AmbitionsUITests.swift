@@ -294,15 +294,16 @@ final class AmbitionsUITests: XCTestCase {
 
         XCTAssertTrue(app.descendants(matching: .any)["goal-detail.screen"].waitForExistence(timeout: 10))
         XCTAssertTrue(app.descendants(matching: .any)["goal-detail.strategic-header"].waitForExistence(timeout: 10))
-        XCTAssertTrue(app.descendants(matching: .any)["goal-detail.path-filmstrip"].waitForExistence(timeout: 10))
+        XCTAssertTrue(app.descendants(matching: .any)["goal-detail.mission-control"].waitForExistence(timeout: 10))
+        XCTAssertTrue(scrollUntilElementExists("goal-detail.lane.overview", in: app))
+        XCTAssertTrue(scrollUntilElementExists("goal-detail.lane.steps", in: app))
+        XCTAssertTrue(scrollUntilElementExists("goal-detail.lane.decisions", in: app))
+        XCTAssertTrue(scrollUntilElementExists("goal-detail.lane.risks", in: app))
+        XCTAssertTrue(scrollUntilElementExists("goal-detail.lane.archive", in: app))
+        XCTAssertTrue(scrollUntilElementExists("goal-detail.decisions", in: app))
+        XCTAssertTrue(scrollUntilElementExists("goal-detail.risks", in: app))
+        XCTAssertTrue(scrollUntilElementExists("goal-detail.archive", in: app))
         XCTAssertTrue(scrollUntilElementExists("goal-detail.tactics-region", in: app))
-        app.navigationBars.buttons.element(boundBy: 0).tap()
-
-        tapFirstVisibleGoalCard(in: app)
-
-        XCTAssertTrue(app.descendants(matching: .any)["goal-detail.screen"].waitForExistence(timeout: 10))
-        XCTAssertTrue(app.descendants(matching: .any)["goal-detail.strategic-header"].waitForExistence(timeout: 10))
-        XCTAssertTrue(app.descendants(matching: .any)["goal-detail.path-filmstrip"].waitForExistence(timeout: 10))
     }
 
     func testPreviewLegacyInsightsTabRouteLandsUnderYouHistory() throws {

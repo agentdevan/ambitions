@@ -248,7 +248,7 @@ enum PreviewGoalsScenarios {
         items: [],
         isSeeded: true,
         emptyTitle: "No goals yet",
-        emptyMessage: "Once a goal or planning draft exists, this screen will immediately explain the path, not just dump tasks."
+        emptyMessage: "Once a goal or planning draft exists, this screen will immediately explain the path, not just dump steps."
     )
 
     static let createdOverview = GoalsOverview(
@@ -365,7 +365,7 @@ enum PreviewGoalsScenarios {
         items: [],
         isSeeded: false,
         emptyTitle: "No goals yet",
-        emptyMessage: "Once a goal or planning draft exists, this screen will immediately explain the path, not just dump tasks."
+        emptyMessage: "Once a goal or planning draft exists, this screen will immediately explain the path, not just dump steps."
     )
 
     static let detailScenarios: [String: GoalDetailPresentation] = [
@@ -440,7 +440,7 @@ enum PreviewGoalsScenarios {
             target: starterTarget,
             headline: GoalDetailHeadline(eyebrow: "Goal Detail", title: "Learn advanced vocal mixing", subtitle: "A learning track that should stay untimed and evidence-based.", renderState: .starter, modeLabel: "Learning", timingLabel: "Untimed", supportLabel: nil),
             outcome: "Build confidence by learning through small, visible experiments rather than deadline pressure.",
-            intent: "Stay oriented to signal and learning, not just task completion.",
+            intent: "Stay oriented to signal and learning, not just step completion.",
             progress: GoalDetailProgress(label: "Starter path in motion", detail: "Starter-plan assumptions are being treated as temporary scaffolding.", value: 0.22, evidenceLabel: "No evidence logged yet"),
             strategicStatus: GoalDetailStrategicStatus(title: "Starter path is taking shape", summary: "The path is still provisional, but the first layer already shows where the learning loop stands.", supportingDetail: "Manual priority #2 • 22% visible progress"),
             nextMovement: GoalDetailNextMovement(title: "Record one rough pass", summary: "Capture one take and note the muddiest frequency area.", timingLabel: "Untimed", rationale: "Early signal matters more than polishing the whole system before the first attempt.", state: .selected),
@@ -532,10 +532,10 @@ enum PreviewGoalsScenarios {
             headline: GoalDetailHeadline(eyebrow: "Goal Detail", title: "Plan a freelance pivot", subtitle: "The planner is blocked until the real constraint is clarified.", renderState: .blocked, modeLabel: "Exploration", timingLabel: "Flexible window", supportLabel: nil),
             outcome: "Explore whether freelancing is worth pursuing without pretending the path is already clear.",
             intent: "The blocker is explicit so you can resolve the actual constraint instead of performing progress.",
-            progress: GoalDetailProgress(label: "Blocked state", detail: "The planner kept the constraint explicit instead of inventing fake tasks.", value: 0.04, evidenceLabel: "No evidence logged yet"),
+            progress: GoalDetailProgress(label: "Blocked state", detail: "The planner kept the constraint explicit instead of inventing fake steps.", value: 0.04, evidenceLabel: "No evidence logged yet"),
             strategicStatus: GoalDetailStrategicStatus(title: "The path is waiting on a real blocker", summary: "The current stage is visible, but Ambitions is keeping the blocker explicit instead of faking momentum.", supportingDetail: "Manual priority #5 • 4% visible progress"),
             nextMovement: GoalDetailNextMovement(title: "Resolve the blocker", summary: "Unblock the constraint before asking the screen for more decomposition.", timingLabel: "As soon as reality changes", rationale: "Ambitions is refusing to turn uncertainty into performative activity.", state: .warning),
-            trajectory: GoalDetailTrajectoryState(phaseTitle: "Blocked planning state", phaseSummary: "The planner kept the constraint explicit instead of generating performative tasks.", milestoneSummary: "Define one real success criterion", momentumSummary: "No evidence logged yet", timelineSummary: "The window matters, but the path still stays flexible. The blocker is kept visible so the path can restart cleanly once the missing input arrives."),
+            trajectory: GoalDetailTrajectoryState(phaseTitle: "Blocked planning state", phaseSummary: "The planner kept the constraint explicit instead of generating performative steps.", milestoneSummary: "Define one real success criterion", momentumSummary: "No evidence logged yet", timelineSummary: "The window matters, but the path still stays flexible. The blocker is kept visible so the path can restart cleanly once the missing input arrives."),
             timingNote: "The window matters, but the path still stays flexible.",
             progressNote: "The blocker is kept visible so the path can restart cleanly once the missing input arrives.",
             manualPriorityLabel: "Manual priority #5",
@@ -544,7 +544,7 @@ enum PreviewGoalsScenarios {
             pathStages: [],
             sections: [],
             clarification: nil,
-            blocked: GoalBlockedState(title: "Blocked planning state", subtitle: "The planner kept the blocker explicit instead of generating performative tasks.", blockers: ["The decision you are trying to make is still vague.", "The exploration needs one success criterion before decomposition."]),
+            blocked: GoalBlockedState(title: "Blocked planning state", subtitle: "The planner kept the blocker explicit instead of generating performative steps.", blockers: ["The decision you are trying to make is still vague.", "The exploration needs one success criterion before decomposition."]),
             evidence: [],
             history: [],
             recentMovement: GoalDetailRecentMovementState(title: "Recent movement", summary: "No evidence logged yet", items: []),
@@ -719,19 +719,37 @@ enum PreviewGoalsScenarios {
         let riskIsCalm = riskTitle == "No major visible risk"
         let nextAvailable = nextTitle != "No next move needed"
         let proofHeadline = hasProof ? "\(proofItems.count) proof point\(proofItems.count == 1 ? "" : "s")" : "No proof yet"
+        let riskItems = riskIsCalm ? [] : [
+            GoalDetailRiskState(
+                id: "preview-risk-\(title)",
+                title: riskTitle,
+                summary: "This goal needs review before more planning.",
+                state: .warning
+            )
+        ]
+        let archiveState = GoalDetailArchiveState(
+            title: timelineKind == .completed ? "Completed" : timelineKind == .cancelled ? "Archived" : timelineKind == .parked ? "Parked" : "Archive ready",
+            statusLabel: timelineKind == .completed ? "Completed" : timelineKind == .cancelled ? "Closed" : timelineKind == .parked ? "Review later" : "Active",
+            summary: timelineKind == .completed ? "This goal is complete and preserved." : timelineKind == .cancelled ? "This goal is closed without being treated as failure." : timelineKind == .parked ? "This goal is intentionally quiet for now." : "Archive learning will appear when this goal is parked, completed, or closed.",
+            learning: timelineKind == .completed ? "Latest proof stays attached when available." : "Nothing needs to be archived right now.",
+            state: timelineKind == .completed ? .success : timelineKind == .parked ? .default : .selected
+        )
         return GoalDetailMissionControlState(
             currentTruth: currentTruth,
             primaryNextMove: GoalNextVisibleStep(
                 title: nextTitle,
-                detail: nextAvailable ? "Keep this as the primary move." : "This goal is not asking for action.",
+                detail: nextAvailable ? "Keep this as the primary contained Step." : "This goal is not asking for action.",
                 isAvailable: nextAvailable
             ),
             breadcrumb: GoalDetailBreadcrumbState(title: "Path", labels: ["Career", title], fallbackUsed: false),
             lanes: [
+                GoalDetailMissionLaneState(kind: .overview, title: "Overview", headline: timelineKind.title, summary: currentTruth, detail: "Next: \(nextTitle)", badgeTitle: "State", systemImage: "rectangle.and.text.magnifyingglass", state: .selected),
                 GoalDetailMissionLaneState(kind: .path, title: "Path", headline: "Current phase", summary: "Next milestone: \(nextTitle)", detail: "Preview path data is bounded to this goal.", badgeTitle: "Current", systemImage: "point.topleft.down.curvedto.point.bottomright.up", state: .selected),
-                GoalDetailMissionLaneState(kind: .now, title: "Now", headline: nextTitle, summary: nextAvailable ? "Keep this as the primary move." : "No action is needed right now.", detail: "", badgeTitle: nextAvailable ? "Next move" : "Closed", systemImage: "scope", state: nextAvailable ? .selected : .default),
+                GoalDetailMissionLaneState(kind: .steps, title: "Steps", headline: nextTitle, summary: nextAvailable ? "Keep this as the primary contained Step." : "No action is needed right now.", detail: "", badgeTitle: nextAvailable ? "Next move" : "Closed", systemImage: "scope", state: nextAvailable ? .selected : .default),
                 GoalDetailMissionLaneState(kind: .proof, title: "Proof", headline: proofHeadline, summary: hasProof ? "Evidence is visible." : "Needs evidence", detail: proofItems.first.map { "Latest: \($0.title)" } ?? "No proof has been recorded for this goal yet.", badgeTitle: hasProof ? "Evidence visible" : "No proof yet", systemImage: "checkmark.seal", state: hasProof ? .selected : .default),
-                GoalDetailMissionLaneState(kind: .risk, title: "Risk", headline: riskTitle, summary: riskIsCalm ? "Nothing in this preview is asking for rescue." : "This goal needs review before more planning.", detail: "", badgeTitle: riskIsCalm ? "Calm" : "Needs review", systemImage: "exclamationmark.triangle", state: riskIsCalm ? .success : .warning),
+                GoalDetailMissionLaneState(kind: .decisions, title: "Decisions", headline: "No decisions yet", summary: "Decision trail stays here when this goal changes.", detail: "", badgeTitle: "No decisions", systemImage: "arrow.triangle.branch", state: .default),
+                GoalDetailMissionLaneState(kind: .risks, title: "Risks", headline: riskItems.first?.title ?? "No major risk visible", summary: riskItems.first?.summary ?? "Nothing in this preview is asking for rescue.", detail: "", badgeTitle: riskIsCalm ? "Calm" : "Needs review", systemImage: "exclamationmark.triangle", state: riskIsCalm ? .success : .warning),
+                GoalDetailMissionLaneState(kind: .archive, title: "Archive", headline: archiveState.title, summary: archiveState.summary, detail: archiveState.learning, badgeTitle: archiveState.statusLabel, systemImage: "archivebox", state: archiveState.state),
             ],
             timeline: GoalDetailTimelineState(
                 title: "Storyline",
@@ -743,10 +761,13 @@ enum PreviewGoalsScenarios {
                 ]
             ),
             assumptions: [
-                GoalDetailAssumptionState(id: "next-step", title: "This goal has a next step.", status: nextAvailable ? "Visible" : "Closed", whyItMatters: "The screen should lead with one move, not a long task dump.", correctionLabel: nextAvailable ? "Change next step" : nil, state: nextAvailable ? .selected : .default),
+                GoalDetailAssumptionState(id: "next-step", title: "This goal has a next step.", status: nextAvailable ? "Visible" : "Closed", whyItMatters: "The screen should lead with one move, not a long step dump.", correctionLabel: nextAvailable ? "Change next step" : nil, state: nextAvailable ? .selected : .default),
                 GoalDetailAssumptionState(id: "proof", title: "This goal has enough proof.", status: hasProof ? "Proof visible" : "No proof yet", whyItMatters: "Progress should be backed by something observable.", correctionLabel: "Add proof later", state: hasProof ? .selected : .default),
             ],
             proofRail: GoalDetailProofRailState(title: "Proof", subtitle: hasProof ? "Evidence is visible." : "Evidence will appear here when it is recorded.", items: proofItems, emptyTitle: "No proof yet", emptyMessage: "Add proof later when there is something real to show."),
+            decisions: GoalDetailDecisionsState(title: "Decisions", subtitle: "Decision trail stays here when this goal changes.", items: [], emptyTitle: "No decisions yet", emptyMessage: "When you move, park, change, or explain this goal, the reason will stay visible here."),
+            risks: GoalDetailRisksState(title: "Risks", subtitle: riskItems.isEmpty ? "No major risk is visible from this goal data." : "Risks stay explicit so recovery can stay calm.", items: riskItems, emptyTitle: "No major risk visible", emptyMessage: "Nothing in this goal is asking for rescue right now."),
+            archive: archiveState,
             receipts: GoalDetailReceiptsState(title: "What changed", subtitle: "Goal-related receipts stay visible here when the current data source provides them.", items: [], emptyTitle: "No receipts yet", emptyMessage: "Receipts will appear here after goal changes are recorded.")
         )
     }
