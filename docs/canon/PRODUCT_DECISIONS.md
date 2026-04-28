@@ -2,7 +2,7 @@
 
 Status: Active canon decision log for product-definition waves.
 
-Purpose: Preserve explicit product decisions made after canon consolidation. This document records decisions that clarify ambiguity across product, design, onboarding, lifecycle, memory, trust, capture, plan/calendar, goals, today/now state, You/profile/settings/reviews, IA/navigation, intelligence/automation, visual system/components/motion, and implementation acceptance.
+Purpose: Preserve explicit product decisions made after canon consolidation. This document records decisions that clarify ambiguity across product, design, onboarding, lifecycle, memory, trust, capture, plan/calendar, goals, today/now state, You/profile/settings/reviews, IA/navigation, intelligence/automation, visual system/components/motion, accessibility/focus support, and implementation acceptance.
 
 ## Decision Authority
 
@@ -484,6 +484,89 @@ Calm intelligent life OS.
 
 ---
 
+# Wave 13 — Accessibility And Focus Support
+
+Adoption date: 2026-04-27
+
+## Resolved Decisions
+
+Accessibility means:
+
+```text
+Core product quality.
+```
+
+ADHD support user-facing name:
+
+```text
+Focus Support.
+```
+
+Focus Support should primarily:
+
+```text
+Reduce decisions and protect next action clarity.
+```
+
+Ambitions should avoid for users with attention/executive-function challenges:
+
+```text
+Card overload.
+Shame language.
+Unclear next action.
+Dense dashboards.
+```
+
+Dynamic Type:
+
+```text
+Core requirement.
+```
+
+VoiceOver:
+
+```text
+Core requirement.
+```
+
+Color-only meaning:
+
+```text
+Never use color as the only meaning carrier.
+```
+
+Reduce Motion:
+
+```text
+Preserve meaning.
+```
+
+Focus Support must never:
+
+```text
+Infantilize.
+Remove depth.
+Label the user.
+Turn the app into training wheels.
+```
+
+Accessibility north star:
+
+```text
+Anyone can understand what matters next.
+```
+
+## Implementation Implications
+
+- Accessibility is not a late compliance pass.
+- Focus Support should improve clarity while preserving depth.
+- The app should not expose `ADHD Mode` or label the user.
+- Dynamic Type and VoiceOver must be considered in core UI, not only settings.
+- Visual/motion systems must preserve state meaning without relying only on color or animation.
+- Focus Support should reduce decision load, not remove important capability.
+
+---
+
 # Active Follow-Up Targets
 
 These decisions should be reflected in:
@@ -502,5 +585,6 @@ These decisions should be reflected in:
 - `docs/canon/IA_NAVIGATION_DRILLDOWN.md`
 - `docs/canon/INTELLIGENCE_AUTOMATION_SUGGESTIONS.md`
 - `docs/canon/VISUAL_SYSTEM_COMPONENTS_MOTION.md`
+- `docs/canon/ACCESSIBILITY_FOCUS_SUPPORT.md`
 - `docs/canon/design/smart-attachment-spec.md`
-- future batch prompts involving onboarding, IA, navigation, drilldown, breadcrumbs, tabs, Life Areas, Capture routing, Today, Now State, empty states, recovery, best next action, Goals, Goal Detail, Goal Weather, Proof, Plan, calendar-aware planning, believability, daily schedule, rituals, You, Profile migration, Settings, Reviews, Trust Center, Appearance Studio, intelligence, suggestions, automation, visual system, components, motion, receipts, sensitive Life Areas, notifications/widgets, export/import, privacy controls, Smart Attachment, Needs a Place, or Capture input behavior.
+- future batch prompts involving onboarding, IA, navigation, drilldown, breadcrumbs, tabs, Life Areas, Capture routing, Today, Now State, empty states, recovery, best next action, Goals, Goal Detail, Goal Weather, Proof, Plan, calendar-aware planning, believability, daily schedule, rituals, You, Profile migration, Settings, Reviews, Trust Center, Appearance Studio, intelligence, suggestions, automation, visual system, components, motion, accessibility, Focus Support, Dynamic Type, VoiceOver, Reduce Motion, receipts, sensitive Life Areas, notifications/widgets, export/import, privacy controls, Smart Attachment, Needs a Place, or Capture input behavior.
