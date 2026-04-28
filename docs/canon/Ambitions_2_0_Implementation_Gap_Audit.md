@@ -7,11 +7,13 @@ This audit compares the current repo and native app against [design/Ambitions_De
 
 D02 evidence: [Ambitions_2_0_Object_Terminology.md](Ambitions_2_0_Object_Terminology.md) now locks shared object language before later feature batches consume those objects.
 
+D08 evidence: `Native/Ambitions/Domain/NorthStarModels.swift` and `Native/Ambitions/Services/NorthStarProjector.swift` now provide the canonical North Star / Dormant Ambition model and deterministic local projection foundation under Life Areas. Full North Star rails/detail UI and semantic zoom remain future D13 surface work.
+
 ## 1. Executive Summary
 
 The repo has substantial native foundations: the five-tab shell, local-first SwiftUI app, Capture persistence, Command Pipeline, Event Ledger, Action Closure receipt models, Plan-owned calendar action boundary, rich panel primitives, Accessibility Nutrition infrastructure, Profile-backed You trust surface, local notification foundation, App Intents, widgets, and Live Activity scaffolding.
 
-The app is not yet Constitution-complete. The biggest gaps are first-class Life Areas / North Stars, Tasks as standalone One-Step Goals, Smart Attachment as a named routing/receipt/correction system, GroupedNavigationList, Panel Size + Display Density, searchable receipt history, Today Plan Layer, full You Personal System Center structure, What Ambitions Knows, semantic zoom, and verified Accessibility Nutrition.
+The app is not yet Constitution-complete. The biggest gaps are first-class North Star surfaces, Tasks as standalone One-Step Goals, Today Plan Layer, full You Personal System Center structure, What Ambitions Knows, semantic zoom, and verified Accessibility Nutrition. Life Areas and North Stars now have foundation object/projection layers, but their full Goals/You surface transformation remains future D13 work.
 
 Several implemented surfaces are valid foundations but need alignment: Today, Capture, Goals, Goal Detail, Plan, You/Profile, external surfaces, notification controls, and shell/navigation behavior. The correct next move is not to reopen old batches; it is to add future alignment batches in dependency order.
 
@@ -56,7 +58,7 @@ Several implemented surfaces are valid foundations but need alignment: Today, Ca
 | Quiet Command Sheet | Exists, but user-facing copy centers on `Command`, not the Quiet Command Sheet / Smart Attachment contract. | Capture + Quiet Command Sheet alignment. |
 | Capture | Uses `Needs a route`, `Plan seed`, `Seed`, `Attach`; does not consistently use `Needs a Place` or Smart Attachment receipts. | Capture + Smart Attachment batches. |
 | Today | Has Hero Decision Panel, Save the Day, support panels, and drift handling, but no explicit Today Plan Layer, One-Step Goals panel, or full planned-day matrix. | Today 2.0 Design Constitution Alignment. |
-| Goals | Has Goal Lifecycle Rail, Goal Weather, Goal Atlas preview, archive summary, active cards. Life Areas, North Stars rail, One-Step Goals section, and semantic zoom are not first-class. | Goals / Life Areas / North Stars transformation. |
+| Goals | Has Goal Lifecycle Rail, Goal Weather, Goal Atlas preview, archive summary, active cards, and foundation Life Area / North Star projection hooks. North Stars rail, One-Step Goals section, and semantic zoom are not first-class surfaces. | Goals / Life Areas / North Stars transformation. |
 | Goal Detail | Has Mission Control, breadcrumb, timeline, Proof Rail, receipts, tactics/tasks lens. Constitution lanes are not exactly `Overview / Path / Steps / Proof / Decisions / Risks / Archive`; Tasks/Steps wording needs alignment. | Goal Detail Mission Control lanes alignment. |
 | Plan | Has Plan Treaty, capacity, lifecycle rail, timeline strip, believability, calendar boundary, recovery/reflow. It still exposes a `Habits` toolbar route and needs Rich Timeline Widget/Ritual language alignment. | Plan believability + timeline widget and Ritual split alignment. |
 | You | Profile-backed You has Trust Center, memory controls, receipts, reviews, appearance, integrations, notification permission; it is not yet the categorized Personal System Center using GroupedNavigationList. | You Personal System Center alignment. |
@@ -67,8 +69,8 @@ Several implemented surfaces are valid foundations but need alignment: Today, Ca
 
 ## 5. Planned But Not Implemented
 
-- Life Areas Overview / Life Areas Atlas.
-- North Stars / dormant Ambitions as first-class objects and surfaces.
+- Full Life Areas Overview / Life Areas Atlas surface transformation beyond the foundation object/projection layer.
+- North Stars / dormant Ambitions rails/detail surfaces beyond the foundation object/projection layer.
 - One-Step Goals as standalone Tasks with promotion/demotion/attachment behavior.
 - Smart Attachment named system with confidence behavior, editable receipts, correction, and learning.
 - GroupedNavigationList and official row types.
@@ -89,8 +91,8 @@ Several implemented surfaces are valid foundations but need alignment: Today, Ca
 | Requirement | Current repo truth | Missing work |
 | --- | --- | --- |
 | Task = standalone One-Step Goal | Existing code mostly uses `Step` inside goals/plans and capture route labels. | First-class Task/One-Step Goal model, detail surface, promotion/demotion/attachment, tests. |
-| Life Area first-class object | `LifeGraphContext` has domains/assignments, but not Constitution Life Areas Overview/Atlas. | Life Area object model and surfaces. |
-| North Star detail | No first-class North Star model/detail surface found. | Dormant ambition/North Star model, detail, and rails. |
+| Life Area first-class object | Canonical Life Area object/projection foundation exists. | Full Life Areas Overview/Atlas surface transformation remains D13 work. |
+| North Star detail | Canonical North Star / Dormant Ambition object and projection foundation exists; no full detail surface or rails exist. | North Star detail, rails, and semantic zoom remain D13 work. |
 | GroupedNavigationList component | `ListChevronRow` exists, but no `GroupedNavigationList` component/row taxonomy found. | Shared component and usage pass. |
 | Panel size/density controls | No source references found for `Panel Size` or `Display Density`. | Preferences, tokens, rendering behavior, tests. |
 | What Ambitions Knows | Memory Lens and Profile memory controls exist, but no named surface matching the Constitution. | You-owned memory center. |
@@ -119,8 +121,8 @@ Several implemented surfaces are valid foundations but need alignment: Today, Ca
 | Capture | Fast input, routing actions, recent captures, attach to goal. | Needs a Place, Smart Attachment, editable Smart Attachment receipts, 1-3 clarification choices. | Capture + Quiet Command Sheet; Smart Attachment. |
 | Plan | Believability, Plan Treaty, timeline strip, calendar boundary, recovery/reflow. | Rich Timeline Widget, Ritual language, local-first calendar labels, Plan-owned permission proof. | Plan Believability + Timeline Widget; Ritual split. |
 | You | Profile-backed You, Trust Center card, memory controls, reviews, appearance, integrations. | Personal System Center categories, GroupedNavigationList, What Ambitions Knows, full privacy/export/import controls. | You Personal System Center; Trust Center; What Ambitions Knows. |
-| Life Areas Overview | Goal Atlas preview only. | Full Life Areas Overview / Atlas absent. | Life Areas Overview / Atlas. |
-| North Star Detail | Not found. | Full surface absent. | North Stars / Dormant Ambitions. |
+| Life Areas Overview | Foundation Life Area object/projection layer and Goal Atlas preview hooks exist. | Full Goals/You surface transformation remains future. | Goals / Life Areas / North Stars transformation. |
+| North Star Detail | Foundation North Star object/projection layer exists. | Full surface absent. | Goals / Life Areas / North Stars transformation. |
 | Task / One-Step Goal Detail | Not found. | Full object/detail absent. | One-Step Goals Object Model. |
 | Review | Reviews v1 is You-owned. | Needs receipt/search/memory maturity and Constitution copy pass. | Reviews/receipt maturity. |
 | Trust Center | Present as Profile/You card. | Needs dedicated navigation and GroupedNavigationList structure. | Trust Center Alignment. |
@@ -134,7 +136,7 @@ Several implemented surfaces are valid foundations but need alignment: Today, Ca
 | Panel system | Rich panel primitives exist. | Constitution panel jobs/types incomplete; density/size absent. |
 | Hero Decision Panel | Used in Today/rich panels. | Needs contract verification across screens. |
 | Today Plan Panel | Not found as named component. | Implement in Today alignment. |
-| Life Areas Panel | Not found as named component. | Implement with Life Areas Atlas. |
+| Life Areas Panel | Foundation Life Area data exists; not found as named component. | Implement with Life Areas Atlas surface work. |
 | One-Step Goals Panel | Not found as named component. | Implement with One-Step Goals. |
 | GroupedNavigationList | Not found. | New shared component required. |
 | Navigation Rows | `ListChevronRow` exists. | Official row taxonomy missing. |
@@ -143,7 +145,7 @@ Several implemented surfaces are valid foundations but need alignment: Today, Ca
 | Timeline Widget | Timeline strip/cards exist. | Needs official widget contract. |
 | Goal Lifecycle Rail | Goals and Plan lifecycle rails exist. | Needs Life Areas/North Stars/semantic zoom integration. |
 | Proof Rail | Goal Detail Proof Rail exists. | Needs proof/receipt/search maturity. |
-| North Stars Rail | Not found. | New component. |
+| North Stars Rail | Foundation North Star data exists; rail not found. | New component in future surface transformation. |
 | Continuity Ribbon | External continuity model exists. | Named UI component not found. |
 | Quiet Command Sheet | Shell sheet exists. | Smart Attachment receipt/clarification behavior missing. |
 | Smart Attachment Receipt | Not found. | New component/contract. |
@@ -152,8 +154,8 @@ Several implemented surfaces are valid foundations but need alignment: Today, Ca
 
 | Object | Current implementation | Constitution status |
 | --- | --- | --- |
-| Life Area | Life graph domain/context exists. | Needs first-class Life Area model and surface. |
-| Ambition / North Star | Long-range/path concepts exist. | North Star not first-class. |
+| Life Area | Canonical Life Area object/projection foundation exists. | Needs full surface transformation. |
+| Ambition / North Star | Canonical North Star / Dormant Ambition object/projection foundation exists under Life Areas. | Needs full rails/detail surface transformation. |
 | Goal | Implemented. | Valid foundation. |
 | Path | Path/life graph foundations exist. | Needs Constitution-facing path surfaces later. |
 | Plan | Implemented as Plan 2.0 surface/foundation. | Needs timeline/ritual alignment. |
@@ -233,7 +235,7 @@ These are future delta/alignment batches. They do not replace the existing Batch
 | D05 | Receipt / Action Closure Search and Privacy Contract | Add searchable receipt history, privacy redaction, and display rules. |
 | D06 | Smart Attachment Foundation | Implement named routing/confidence/clarification/receipt/correction behavior. |
 | D07 | Life Areas Overview / Atlas Object Model | Completed foundation: Life Areas are now a canonical object/projection layer and visible organization lens, not a tab. Full surface transformation remains D13. |
-| D08 | North Stars / Dormant Ambitions Object Model | Add dormant ambition semantics and detail surfaces. |
+| D08 | North Stars / Dormant Ambitions Object Model | Completed foundation: North Stars / Dormant Ambitions are now canonical objects under Life Areas with deterministic local projection, privacy/accessibility fields, relationship hooks, and shaping metadata. Full detail/rail surfaces remain D13. |
 | D09 | One-Step Goals Object Model | Add Task as standalone One-Step Goal and promotion/demotion/attachment rules. |
 | D10 | Screen Contract Matrix Implementation Pass | Wire the screen matrix into implementation acceptance criteria before surface deltas. |
 | D11 | Today 2.0 Design Constitution Alignment | Add Today Plan Layer, One-Step Goals surfacing, planned-day view, and Constitution copy. |

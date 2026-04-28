@@ -103,6 +103,47 @@ final class LifeAreaAtlasProjectorTests: XCTestCase {
         XCTAssertEqual(creativityHooks.goalReferences.map(\.id), ["goal-creative"])
         XCTAssertTrue(creativityHooks.supportsOneStepGoalGrouping)
     }
+
+    func testAtlasCarriesNorthStarCountsWithoutRedesigningGoalsSurface() {
+        let projector = LifeAreaAtlasProjector()
+        let northStar = NorthStar(
+            id: NorthStarID(rawValue: "astronaut"),
+            title: "Become an Astronaut",
+            primaryLifeAreaID: LifeAreaID(domain: .career),
+            posture: .dormant
+        )
+
+        let atlas = projector.atlas(from: .init(goals: [], northStars: [northStar]))
+        let career = tryUnwrap(atlas.overview.areas.first { $0.definition.domainKey == .career })
+
+        XCTAssertEqual(career.counts.northStarCount, 1)
+        XCTAssertEqual(career.nextFocus, "Held without pressure")
+        XCTAssertEqual(career.relationshipHooks.futureNorthStarCount, 1)
+        XCTAssertTrue(career.relationshipHooks.hasDormantDirection)
+        XCTAssertEqual(atlas.futureNorthStarCount, 1)
+        XCTAssertTrue(atlas.hasDormantDirection)
+    }
+
+    func testLifeAreaCountsDecodeOlderPayloadsWithoutNorthStars() throws {
+        let data = """
+        {
+          "activeGoalCount": 1,
+          "parkedGoalCount": 2,
+          "waitingCount": 3,
+          "proofCount": 4,
+          "receiptCount": 5
+        }
+        """.data(using: .utf8)!
+
+        let counts = try JSONDecoder().decode(LifeAreaCounts.self, from: data)
+
+        XCTAssertEqual(counts.activeGoalCount, 1)
+        XCTAssertEqual(counts.parkedGoalCount, 2)
+        XCTAssertEqual(counts.northStarCount, 0)
+        XCTAssertEqual(counts.waitingCount, 3)
+        XCTAssertEqual(counts.proofCount, 4)
+        XCTAssertEqual(counts.receiptCount, 5)
+    }
 }
 
 private extension LifeAreaAtlasProjectorTests {

@@ -3,6 +3,7 @@ import Foundation
 struct LifeAreaAtlasProjector: Sendable {
     struct Input: Sendable {
         let goals: [Goal]
+        let northStars: [NorthStar]
         let proofProjection: ProofResourceGraphProjection?
         let receiptProjection: ActionReceiptProjection?
         let hiddenAreaIDs: Set<LifeAreaID>
@@ -11,6 +12,7 @@ struct LifeAreaAtlasProjector: Sendable {
 
         init(
             goals: [Goal],
+            northStars: [NorthStar] = [],
             proofProjection: ProofResourceGraphProjection? = nil,
             receiptProjection: ActionReceiptProjection? = nil,
             hiddenAreaIDs: Set<LifeAreaID> = [],
@@ -18,6 +20,7 @@ struct LifeAreaAtlasProjector: Sendable {
             maxGoalReferencesPerArea: Int = 3
         ) {
             self.goals = goals
+            self.northStars = northStars
             self.proofProjection = proofProjection
             self.receiptProjection = receiptProjection
             self.hiddenAreaIDs = hiddenAreaIDs
@@ -32,8 +35,14 @@ struct LifeAreaAtlasProjector: Sendable {
 
     func overview(from input: Input) -> LifeAreasOverviewProjection {
         let grouped = LifeGraphResolver.groupGoalsByPrimaryDomain(input.goals)
+        let northStarsByArea = Dictionary(grouping: input.northStars.filter { $0.posture.isArchived == false }, by: \.primaryLifeAreaID)
         let summaries = LifeAreaDefinition.canonical.map { definition in
-            areaSummary(definition: definition, goals: grouped[definition.domainKey] ?? [], input: input)
+            areaSummary(
+                definition: definition,
+                goals: grouped[definition.domainKey] ?? [],
+                northStars: northStarsByArea[definition.id] ?? [],
+                input: input
+            )
         }
 
         return LifeAreasOverviewProjection(
@@ -45,6 +54,7 @@ struct LifeAreaAtlasProjector: Sendable {
     private func areaSummary(
         definition: LifeAreaDefinition,
         goals: [Goal],
+        northStars: [NorthStar],
         input: Input
     ) -> LifeAreaSummary {
         let isRedacted = input.hiddenAreaIDs.contains(definition.id) || input.privacyLevel == .redacted
@@ -58,6 +68,7 @@ struct LifeAreaAtlasProjector: Sendable {
         let counts = LifeAreaCounts(
             activeGoalCount: activeGoals.count,
             parkedGoalCount: parkedGoals.count,
+            northStarCount: northStars.count,
             waitingCount: waitingReferences.count,
             proofCount: proofHooks.count,
             receiptCount: receiptHooks.count
@@ -70,8 +81,8 @@ struct LifeAreaAtlasProjector: Sendable {
             proofReferences: proofHooks,
             receiptReferences: receiptHooks,
             waitingReferences: waitingReferences,
-            futureNorthStarCount: 0,
-            hasDormantDirection: false,
+            futureNorthStarCount: northStars.count,
+            hasDormantDirection: northStars.contains { $0.posture.isDormantDirection },
             supportsNorthStarGrouping: true,
             supportsOneStepGoalGrouping: true
         )
@@ -98,7 +109,7 @@ struct LifeAreaAtlasProjector: Sendable {
         if counts.activeGoalCount > 0 {
             return .active
         }
-        if counts.parkedGoalCount > 0 || counts.proofCount > 0 || counts.receiptCount > 0 {
+        if counts.parkedGoalCount > 0 || counts.northStarCount > 0 || counts.proofCount > 0 || counts.receiptCount > 0 {
             return .light
         }
         return .empty
@@ -116,6 +127,9 @@ struct LifeAreaAtlasProjector: Sendable {
         }
         if let active = activeGoals.first {
             return active.title
+        }
+        if counts.northStarCount > 0 {
+            return "Held without pressure"
         }
         if parkedGoals.isEmpty == false {
             return "Organize this area"
@@ -141,7 +155,7 @@ struct LifeAreaAtlasProjector: Sendable {
 
     private func areaRank(_ area: LifeAreaSummary) -> Int {
         if area.counts.activeGoalCount > 0 { return 0 }
-        if area.counts.parkedGoalCount > 0 || area.counts.waitingCount > 0 || area.counts.proofCount > 0 || area.counts.receiptCount > 0 { return 1 }
+        if area.counts.parkedGoalCount > 0 || area.counts.northStarCount > 0 || area.counts.waitingCount > 0 || area.counts.proofCount > 0 || area.counts.receiptCount > 0 { return 1 }
         return 2
     }
 

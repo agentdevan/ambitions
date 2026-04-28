@@ -190,8 +190,8 @@ The repo-wide implementation gap audit lives in [Ambitions_2_0_Implementation_Ga
 | D05 | Receipt / Action Closure Search and Privacy Contract | Action Closure v1 | Completed |
 | D06 | Smart Attachment Foundation | D02, D05, Command Pipeline, Capture | Completed |
 | D07 | Life Areas Overview / Atlas Object Model | D02, Life Graph | Completed |
-| D08 | North Stars / Dormant Ambitions Object Model | D07 | Planned / next |
-| D09 | One-Step Goals Object Model | D02, D05 | Planned |
+| D08 | North Stars / Dormant Ambitions Object Model | D07 | Completed |
+| D09 | One-Step Goals Object Model | D02, D05 | Planned / next |
 | D10 | Screen Contract Matrix Implementation Pass | D03-D09 | Planned |
 | D11 | Today 2.0 Design Constitution Alignment | D04, D09-D10, Now State, Plan believability | Planned |
 | D12 | Capture + Quiet Command Sheet Alignment | D06, D09-D10 | Planned |
@@ -210,9 +210,9 @@ The repo-wide implementation gap audit lives in [Ambitions_2_0_Implementation_Ga
 | D25 | App Intents / Shortcuts Alignment | D22 | Planned |
 | D26 | Release Candidate Validation | D01-D25 | Planned |
 
-Do not mark any delta complete until its implementation, validation evidence, docs/status truth, and handoff are aligned. After D07 Life Areas Overview / Atlas Object Model, D08 is the next dependency-safe implementation batch; original Batch 89 work is retained only after its D10-D21 foundations or inside D26.
+Do not mark any delta complete until its implementation, validation evidence, docs/status truth, and handoff are aligned. After D08 North Stars / Dormant Ambitions Object Model, D09 is the next dependency-safe implementation batch; original Batch 89 work is retained only after its D10-D21 foundations or inside D26.
 
-Roadmap merge audit note: [Ambitions_2_0_Roadmap_Merge_Audit.md](Ambitions_2_0_Roadmap_Merge_Audit.md) now explicitly maps Batches 89-120 against D01-D26. It preserves useful Batch 89-120 intent, but D08 is the next dependency-safe implementation batch after D07 and Batch 89 is not runnable before its D10-D21 foundations.
+Roadmap merge audit note: [Ambitions_2_0_Roadmap_Merge_Audit.md](Ambitions_2_0_Roadmap_Merge_Audit.md) now explicitly maps Batches 89-120 against D01-D26. It preserves useful Batch 89-120 intent, but D09 is the next dependency-safe implementation batch after D08 and Batch 89 is not runnable before its D10-D21 foundations.
 
 ## Batch 61 - Repo Truth and Ambitions 2.0 Capability Matrix
 
@@ -461,7 +461,7 @@ Every batch definition below inherits the required template:
 - Performance budget, accessibility requirement, no-fake-precision boundary, indispensability scenario improved.
 - Likely files/areas affected, dependencies, out-of-scope items, validation requirements, concrete acceptance criteria, and ready-to-paste Codex prompt.
 
-The compact batch definitions below preserve the original Batch 61-120 roadmap sequencing. Current execution status after the Design Constitution delta backlog, D01 shell alignment, D02 terminology cleanup, D03 grouped navigation foundation, D04 panel density/size foundation, D05 receipt/action-closure search and privacy foundation, D06 Smart Attachment foundation, D07 Life Areas Overview / Atlas Object Model foundation, and roadmap merge audit: Batches 00-88 and D01-D07 are complete for planning purposes, D08 is the next dependency-safe implementation batch, and original Batches 89-120 remain future planned roadmap work only through the classifications and sequencing in [Ambitions_2_0_Roadmap_Merge_Audit.md](Ambitions_2_0_Roadmap_Merge_Audit.md). Ready prompts for completed batches are retained as historical implementation prompts, not current execution state.
+The compact batch definitions below preserve the original Batch 61-120 roadmap sequencing. Current execution status after the Design Constitution delta backlog, D01 shell alignment, D02 terminology cleanup, D03 grouped navigation foundation, D04 panel density/size foundation, D05 receipt/action-closure search and privacy foundation, D06 Smart Attachment foundation, D07 Life Areas Overview / Atlas Object Model foundation, D08 North Stars / Dormant Ambitions Object Model foundation, and roadmap merge audit: Batches 00-88 and D01-D08 are complete for planning purposes, D09 is the next dependency-safe implementation batch, and original Batches 89-120 remain future planned roadmap work only through the classifications and sequencing in [Ambitions_2_0_Roadmap_Merge_Audit.md](Ambitions_2_0_Roadmap_Merge_Audit.md). Ready prompts for completed batches are retained as historical implementation prompts, not current execution state.
 
 ## Phase A - Daily Value, Shell, Activation
 

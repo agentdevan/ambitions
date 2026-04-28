@@ -151,12 +151,48 @@ struct LifeAreaGoalReference: Codable, Sendable, Equatable, Hashable, Identifiab
 struct LifeAreaCounts: Codable, Sendable, Equatable, Hashable {
     let activeGoalCount: Int
     let parkedGoalCount: Int
+    let northStarCount: Int
     let waitingCount: Int
     let proofCount: Int
     let receiptCount: Int
 
+    private enum CodingKeys: String, CodingKey {
+        case activeGoalCount
+        case parkedGoalCount
+        case northStarCount
+        case waitingCount
+        case proofCount
+        case receiptCount
+    }
+
+    init(
+        activeGoalCount: Int,
+        parkedGoalCount: Int,
+        northStarCount: Int = 0,
+        waitingCount: Int,
+        proofCount: Int,
+        receiptCount: Int
+    ) {
+        self.activeGoalCount = activeGoalCount
+        self.parkedGoalCount = parkedGoalCount
+        self.northStarCount = northStarCount
+        self.waitingCount = waitingCount
+        self.proofCount = proofCount
+        self.receiptCount = receiptCount
+    }
+
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        self.activeGoalCount = try container.decode(Int.self, forKey: .activeGoalCount)
+        self.parkedGoalCount = try container.decode(Int.self, forKey: .parkedGoalCount)
+        self.northStarCount = try container.decodeIfPresent(Int.self, forKey: .northStarCount) ?? 0
+        self.waitingCount = try container.decode(Int.self, forKey: .waitingCount)
+        self.proofCount = try container.decode(Int.self, forKey: .proofCount)
+        self.receiptCount = try container.decode(Int.self, forKey: .receiptCount)
+    }
+
     var hasContent: Bool {
-        activeGoalCount > 0 || parkedGoalCount > 0 || waitingCount > 0 || proofCount > 0 || receiptCount > 0
+        activeGoalCount > 0 || parkedGoalCount > 0 || northStarCount > 0 || waitingCount > 0 || proofCount > 0 || receiptCount > 0
     }
 }
 
@@ -215,6 +251,9 @@ struct LifeAreaSummary: Codable, Sendable, Equatable, Hashable, Identifiable {
         }
         if counts.parkedGoalCount > 0 {
             return "\(counts.parkedGoalCount) parked goal\(counts.parkedGoalCount == 1 ? "" : "s")"
+        }
+        if counts.northStarCount > 0 {
+            return "\(counts.northStarCount) North Star\(counts.northStarCount == 1 ? "" : "s")"
         }
         return emptyTitle
     }
@@ -280,6 +319,7 @@ struct LifeAreaSummary: Codable, Sendable, Equatable, Hashable, Identifiable {
                 posture.displayName,
                 "\(counts.activeGoalCount) active",
                 "\(counts.parkedGoalCount) parked",
+                "\(counts.northStarCount) North Stars",
                 "\(counts.waitingCount) waiting",
                 "\(counts.proofCount) proof",
                 "\(counts.receiptCount) receipts"

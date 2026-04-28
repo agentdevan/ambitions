@@ -23,9 +23,9 @@ Step = action inside a Goal, Path, or Plan.
 
 | Term | Definition | Current posture |
 | --- | --- | --- |
-| Life Area | Visible organization lens for life domains such as Health, Career, Home, Relationships, or Money. It is not a sixth tab. | Active canon; first-class object model and overview remain future D07 work. |
+| Life Area | Visible organization lens for life domains such as Health, Career, Home, Relationships, or Money. It is not a sixth tab. | Active canon; first-class object/projection foundation exists and later surface transformation remains D13 work. |
 | Ambition | Meaningful direction the user may want to pursue. Ambitions can be active, dormant, identity-level, or refined into Goals. | Active canon; use as direction language before overbuilding a model. |
-| North Star | Long-range dormant or identity-level Ambition that can live under a Life Area without active goals or plans. | Active canon; first-class model/detail remains future D08 work. |
+| North Star | Long-range dormant or identity-level Ambition that can live under a Life Area without active goals or plans. | Active canon; first-class model/projection foundation exists and detail/surface transformation remains future D13 work. |
 | Goal | Concrete outcome with enough structure to carry a path, plan, milestones, steps, proof, decisions, and archive learning. | Implemented foundation exists; later surface alignment continues in D13-D14. |
 | Path | Believable route through a Goal or Ambition, including assumptions, stages, prerequisites, risks, and alternatives. | Existing foundations exist; future path surfaces must consume this terminology. |
 | Plan | Current agreement with time, capacity, constraints, rituals, recovery, and protected work. Calendar permission remains Plan-owned. | Implemented foundation exists; timeline/ritual alignment continues later. |

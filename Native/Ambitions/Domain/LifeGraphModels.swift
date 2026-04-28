@@ -315,10 +315,14 @@ let lifeGraphRelationshipSchemaVersion = "life_graph_relationship.native.v1"
 
 enum LifeGraphObjectKind: String, Codable, Sendable, Equatable, Hashable, CaseIterable {
     case lifeArea = "life_area"
+    case ambition
+    case northStar = "north_star"
     case goal
+    case path
     case milestone
     case action
     case step
+    case oneStepGoal = "one_step_goal"
     case capture
     case commitment
     case waitingItem = "waiting_item"
@@ -328,14 +332,15 @@ enum LifeGraphObjectKind: String, Codable, Sendable, Equatable, Hashable, CaseIt
     case decision
     case correction
     case receipt
+    case review
     case blocker
     case person
 
     var isPlaceholderOnlyInV1: Bool {
         switch self {
-        case .commitment, .waitingItem, .proof, .resource, .decision, .correction, .receipt, .blocker, .person:
+        case .ambition, .path, .oneStepGoal, .commitment, .waitingItem, .proof, .resource, .decision, .correction, .receipt, .review, .blocker, .person:
             return true
-        case .lifeArea, .goal, .milestone, .action, .step, .capture, .evidence:
+        case .lifeArea, .northStar, .goal, .milestone, .action, .step, .capture, .evidence:
             return false
         }
     }

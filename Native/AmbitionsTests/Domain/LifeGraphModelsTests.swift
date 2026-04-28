@@ -200,6 +200,8 @@ final class LifeGraphModelsTests: XCTestCase {
         let supportedKinds = Set(LifeGraphObjectKind.allCases)
 
         XCTAssertTrue(supportedKinds.isSuperset(of: [
+            .lifeArea,
+            .northStar,
             .goal,
             .action,
             .step,
@@ -213,11 +215,16 @@ final class LifeGraphModelsTests: XCTestCase {
             .correction,
             .receipt
         ]))
+        XCTAssertTrue(LifeGraphObjectKind.ambition.isPlaceholderOnlyInV1)
+        XCTAssertTrue(LifeGraphObjectKind.path.isPlaceholderOnlyInV1)
+        XCTAssertTrue(LifeGraphObjectKind.oneStepGoal.isPlaceholderOnlyInV1)
         XCTAssertTrue(LifeGraphObjectKind.commitment.isPlaceholderOnlyInV1)
         XCTAssertTrue(LifeGraphObjectKind.waitingItem.isPlaceholderOnlyInV1)
         XCTAssertTrue(LifeGraphObjectKind.proof.isPlaceholderOnlyInV1)
         XCTAssertTrue(LifeGraphObjectKind.resource.isPlaceholderOnlyInV1)
         XCTAssertTrue(LifeGraphObjectKind.receipt.isPlaceholderOnlyInV1)
+        XCTAssertTrue(LifeGraphObjectKind.review.isPlaceholderOnlyInV1)
+        XCTAssertFalse(LifeGraphObjectKind.northStar.isPlaceholderOnlyInV1)
         XCTAssertFalse(LifeGraphObjectKind.goal.isPlaceholderOnlyInV1)
         XCTAssertFalse(LifeGraphObjectKind.capture.isPlaceholderOnlyInV1)
     }
