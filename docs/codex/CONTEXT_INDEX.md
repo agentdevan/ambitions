@@ -5,9 +5,10 @@ This file defines the standing source-of-truth hierarchy for future Ambitions wo
 ## Current Operating Truth
 
 - Product-decision Waves 1-19 are complete.
-- Current execution status remains: Batches 00-88 and D01-D05 are complete for planning purposes; D06 / Smart Attachment Foundation is the next dependency-safe implementation batch from the Design Constitution delta/alignment backlog.
+- Current execution status remains: Batches 00-88 and D01-D06 are complete for planning purposes; D07 / Life Areas Overview / Atlas Object Model is the next dependency-safe implementation batch from the Design Constitution delta/alignment backlog.
 - D04 Panel Size + Display Density foundation exists as shared design-system support; future batches own broad surface adoption.
 - D05 Receipt / Action Closure Search and Privacy Contract exists as a local-first receipt history/search foundation over existing Action Closure receipts, with typed filters, deterministic ordering, redacted/full-detail projections, privacy levels, safe-to-show flags, undo/proof/trust labels, and calm missing-detail fallback.
+- D06 Smart Attachment Foundation exists as a local-first routing/confidence/clarification contract over Capture and Command, with deterministic bounded local classification, Needs a Place fallback, D05-compatible receipts, redacted/full-detail projections, and correction/change affordances.
 - D01-D26 classification now lives in `docs/canon/ROADMAP_BATCH_CLASSIFICATION.md` and distinguishes launch-critical, soon-after-launch, post-launch, deferred, decision-gated, and infrastructure-unlock work.
 - Original Batches 89-120 remain future planned roadmap work only through the classifications and dependencies in `docs/canon/Ambitions_2_0_Roadmap_Merge_Audit.md`.
 - Post-D26 Layer 2/Layer 3 maturity planning now lives in `docs/canon/POST_D26_MATURITY_ROADMAP.md`. It rewrites original Batches 89-120 into M-series maturity batches and R-series release-readiness gates. It is planning only and does not mark D01-D26 complete.
@@ -112,4 +113,4 @@ Use these entry points instead of duplicating a separate active-doc list here:
 
 ## Next Operating Step
 
-Continue with D06 - Smart Attachment Foundation unless the user explicitly changes the execution order. Post-D26 M/R work remains planning-only until D26 is complete or the user explicitly authorizes otherwise.
+Continue with D07 - Life Areas Overview / Atlas Object Model unless the user explicitly changes the execution order. Post-D26 M/R work remains planning-only until D26 is complete or the user explicitly authorizes otherwise.

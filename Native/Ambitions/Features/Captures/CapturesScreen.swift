@@ -108,8 +108,8 @@ struct CapturesScreen: View {
             AmbitionRichPanelConfiguration(
                 kind: .capture,
                 eyebrow: "Fast intake",
-                title: "What do you need to get out of your head?",
-                subtitle: "Capture first. Then route it as a one-time commitment, seed, waiting item, goal-supporting task, deliverable, someday item, or archive.",
+                title: "What needs a place?",
+                subtitle: "Capture first. Then keep it in Needs a Place, save it as a Task, Goal, Idea, Proof, Waiting item, or Plan item.",
                 icon: "tray.and.arrow.down",
                 explanationTitle: viewState.captures.isEmpty ? "Empty state" : "Open routing",
                 explanation: viewState.captures.isEmpty ? "Not everything needs to become a goal." : "\(viewState.captures.filter { $0.status != .archived }.count) item\(viewState.captures.filter { $0.status != .archived }.count == 1 ? "" : "s") still have a visible destination.",
@@ -189,8 +189,8 @@ struct CapturesScreen: View {
         let routed = captures.filter { [.seed, .goalBound, .scheduled, .delegated].contains($0.status) }
         let parked = captures.filter { [.waiting, .optionalSomeday, .archived].contains($0.status) }
         return [
-            CaptureGroup(title: "Needs a route", subtitle: "Raw thoughts and assumptions that should stay correctable.", captures: active),
-            CaptureGroup(title: "Routed", subtitle: "Items with an obvious destination but no Plan 2.0 scheduling here.", captures: routed),
+            CaptureGroup(title: "Needs a Place", subtitle: "Raw thoughts and assumptions that should stay correctable.", captures: active),
+            CaptureGroup(title: "Placed", subtitle: "Items with a visible destination but no Plan scheduling here.", captures: routed),
             CaptureGroup(title: "Parked", subtitle: "Waiting, someday, and archived items stay findable without crowding the day.", captures: parked)
         ].filter { $0.captures.isEmpty == false }
     }

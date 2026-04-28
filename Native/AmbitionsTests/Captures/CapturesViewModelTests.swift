@@ -57,7 +57,7 @@ final class CapturesViewModelTests: XCTestCase {
         XCTAssertEqual(stored?.kind, .oneTimeCommitment)
         XCTAssertEqual(stored?.route, .planSeed)
         XCTAssertEqual(stored?.status, .scheduled)
-        XCTAssertEqual(viewModel.actionMessage?.title, "Routed to Plan seed")
+        XCTAssertEqual(viewModel.actionMessage?.title, "Saved as Plan · This Week")
 
         await viewModel.markWaiting(id: "waiting", captureService: captureService, goalsService: goalsService, now: fixedNow)
         stored = await captureService.capture(id: "waiting")

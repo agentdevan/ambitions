@@ -71,7 +71,7 @@ final class CapturesViewModel {
             )
             draftText = ""
             draftError = nil
-            actionMessage = CaptureActionMessage(title: "Captured", body: capture.assumptionSummary ?? "Saved to Capture for triage.")
+            actionMessage = CaptureActionMessage(title: receiptTitle(for: capture), body: capture.assumptionSummary ?? "Saved to Needs a Place.")
             await load(captureService: captureService, goalsService: goalsService)
         } catch {
             draftError = error.localizedDescription
@@ -115,7 +115,7 @@ final class CapturesViewModel {
     func routeToPlan(id: String, captureService: any CaptureServicing, goalsService: any GoalsServicing, now: Date = .now) async {
         _ = await performAndReload(captureService: captureService, goalsService: goalsService, now: now) {
             _ = try await captureService.routeToPlanSeed(id: id, now: now)
-            actionMessage = CaptureActionMessage(title: "Routed to Plan seed", body: "This is represented for Plan without scheduling it yet.")
+            actionMessage = CaptureActionMessage(title: "Saved as Plan · This Week", body: "This is represented for Plan without scheduling it yet.")
             return nil
         }
     }
@@ -197,6 +197,27 @@ final class CapturesViewModel {
             actionMessage = CaptureActionMessage(title: "Capture action failed", body: error.localizedDescription)
             await load(captureService: captureService, goalsService: goalsService)
             return nil
+        }
+    }
+
+    private func receiptTitle(for capture: Capture) -> String {
+        switch capture.route {
+        case .captureInbox:
+            return "Saved to Needs a Place"
+        case .planSeed:
+            return "Saved as Task · Today"
+        case .goalSeed:
+            return "Saved as Goal · Creative"
+        case .goalAttachment:
+            return "Attached as Proof"
+        case .waiting:
+            return "Saved as Waiting"
+        case .deliverableSeed:
+            return "Saved as Idea"
+        case .optionalSomeday:
+            return "Saved as Idea"
+        case .archive:
+            return "Saved to Needs a Place"
         }
     }
 

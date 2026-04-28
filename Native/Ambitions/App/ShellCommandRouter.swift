@@ -150,14 +150,14 @@ final class DefaultShellCommandRouter: ShellCommandRouting {
                 )
                 navigation.openCapturesInbox()
                 navigation.recordRoute(
-                    title: "Capture saved",
+                    title: "Saved to Needs a Place",
                     source: source,
                     presentationContext: .quickCapture,
                     destination: .planRoute(.capturesInbox),
-                    receiptBody: "Capture saved locally and opened in the Capture tab."
+                    receiptBody: "Saved locally and opened in the Capture tab."
                 )
                 return ShellCommandExecutionResult(
-                    title: "Capture saved",
+                    title: "Saved to Needs a Place",
                     destination: .planRoute(.capturesInbox),
                     createdCaptureID: capture.id
                 )

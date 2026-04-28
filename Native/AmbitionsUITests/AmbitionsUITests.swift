@@ -227,9 +227,8 @@ final class AmbitionsUITests: XCTestCase {
         XCTAssertTrue(submit.waitForExistence(timeout: 10))
         submit.tap()
 
-        XCTAssertTrue(app.tabBars.buttons["Plan"].waitForExistence(timeout: 10))
-        XCTAssertTrue(app.tabBars.buttons["Plan"].isSelected)
-        XCTAssertTrue(app.staticTexts["UI shell capture"].waitForExistence(timeout: 10))
+        XCTAssertTrue(app.tabBars.buttons["Capture"].waitForExistence(timeout: 10))
+        XCTAssertTrue(app.descendants(matching: .any)["captures.screen"].waitForExistence(timeout: 10))
     }
 
     func testShellOwnedCreateGoalFlowWorksFromCommandSheet() throws {
@@ -754,6 +753,10 @@ final class AmbitionsUITests: XCTestCase {
         let identified = app.buttons["shell.global-entry-button"]
         if identified.waitForExistence(timeout: 2) {
             return identified
+        }
+        let currentLabel = app.buttons["Add something"]
+        if currentLabel.waitForExistence(timeout: 2) {
+            return currentLabel
         }
         let labeled = app.buttons["Quiet Command Sheet"]
         _ = labeled.waitForExistence(timeout: 2)

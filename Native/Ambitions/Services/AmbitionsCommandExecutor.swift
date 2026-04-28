@@ -27,15 +27,18 @@ protocol CommandExecuting: Sendable {
 struct AmbitionsCommandExecutor: CommandExecuting {
     private let captureService: (any CaptureServicing)?
     private let eventLedger: (any EventLedgerRepository)?
+    private let smartAttachmentService: (any SmartAttachmentRouting)?
     private let validator: AmbitionsCommandValidator
 
     init(
         captureService: (any CaptureServicing)? = nil,
         eventLedger: (any EventLedgerRepository)? = nil,
+        smartAttachmentService: (any SmartAttachmentRouting)? = DefaultSmartAttachmentService(),
         validator: AmbitionsCommandValidator = AmbitionsCommandValidator()
     ) {
         self.captureService = captureService
         self.eventLedger = eventLedger
+        self.smartAttachmentService = smartAttachmentService
         self.validator = validator
     }
 
@@ -124,6 +127,18 @@ private extension AmbitionsCommandExecutor {
         }
 
         do {
+            let smartAttachment = smartAttachmentService?.route(
+                SmartAttachmentInput(
+                    rawText: text,
+                    sourceContext: SmartAttachmentSourceContext(
+                        sourceType: captureSourceType(for: command.source),
+                        sourceSurface: context.sourceSurface,
+                        commandID: command.id
+                    )
+                ),
+                candidates: [],
+                maxCandidateCount: 5
+            )
             let capture = try await captureService.createCapture(
                 CreateCaptureRequest(
                     rawText: text,
@@ -131,13 +146,15 @@ private extension AmbitionsCommandExecutor {
                     linkedGoalID: command.target.goalID,
                     triage: nil,
                     revisitAfter: nil,
-                    kind: captureKind(for: command.payload.commitmentKind),
-                    route: route(for: command.payload.destinationRoute),
+                    kind: captureKind(for: command.payload.commitmentKind) ?? smartAttachment?.captureKind,
+                    route: route(for: command.payload.destinationRoute) ?? smartAttachment?.captureRoute,
+                    triageStatus: smartAttachment?.triageStatus,
                     commitmentKind: command.payload.commitmentKind,
                     deadlineText: command.payload.deadlineText ?? command.payload.dueText,
                     deadlineKind: command.payload.deadlineText == nil && command.payload.dueText == nil ? .none : .hard,
                     contextLensHint: command.payload.contextLens,
-                    priorityHints: CapturePriorityHints(commandHints: command.payload.priorityHints)
+                    priorityHints: CapturePriorityHints(commandHints: command.payload.priorityHints),
+                    assumptionSummary: smartAttachment?.captureAssumptionSummary
                 ),
                 now: context.now
             )
@@ -147,6 +164,13 @@ private extension AmbitionsCommandExecutor {
                 "commandKind": command.kind.rawValue,
                 "commandSource": command.source.rawValue
             ]
+            if let smartAttachment {
+                metadata["smartAttachmentResult"] = smartAttachment.resultState.rawValue
+                metadata["smartAttachmentConfidence"] = smartAttachment.confidence.rawValue
+                metadata["smartAttachmentReceipt"] = smartAttachment.receiptLine
+                metadata["smartAttachmentRoute"] = smartAttachment.selectedCandidate?.target.routeType.rawValue
+                metadata["smartAttachmentDestination"] = smartAttachment.selectedCandidate?.target.destinationKind.rawValue
+            }
 
             if context.allowsEventLedgerEmission, let eventLedger {
                 let event = EventLedgerEntry.commandCaptureCreated(
@@ -164,7 +188,7 @@ private extension AmbitionsCommandExecutor {
 
             return AmbitionsCommandExecutionResult(
                 status: .succeeded,
-                summary: "Capture saved through the shared command pipeline.",
+                summary: smartAttachment?.receiptLine ?? "Saved to Needs a Place",
                 route: .capturesInbox,
                 target: AmbitionsCommandTarget(
                     goalID: command.target.goalID,
