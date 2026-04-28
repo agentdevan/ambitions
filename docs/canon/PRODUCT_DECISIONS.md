@@ -2,7 +2,7 @@
 
 Status: Active canon decision log for product-definition waves.
 
-Purpose: Preserve explicit product decisions made after canon consolidation. This document records decisions that clarify ambiguity across product, design, onboarding, lifecycle, memory, trust, capture, plan/calendar, goals, today/now state, You/profile/settings/reviews, IA/navigation, and implementation acceptance.
+Purpose: Preserve explicit product decisions made after canon consolidation. This document records decisions that clarify ambiguity across product, design, onboarding, lifecycle, memory, trust, capture, plan/calendar, goals, today/now state, You/profile/settings/reviews, IA/navigation, intelligence/automation, and implementation acceptance.
 
 ## Decision Authority
 
@@ -308,6 +308,97 @@ Create duplicate homes for the same object.
 
 ---
 
+# Wave 11 — Intelligence, Automation, And Suggestions
+
+Adoption date: 2026-04-27
+
+## Resolved Decisions
+
+Ambitions intelligence should primarily:
+
+```text
+Explain, suggest, and prepare.
+```
+
+User-facing AI/model language policy:
+
+```text
+Do not expose AI/model language in normal UI.
+```
+
+Suggestions should feel like:
+
+```text
+Calm options.
+```
+
+Plan/goal changes:
+
+```text
+Ambitions should only auto-change plans/goals after user confirmation.
+```
+
+Suggestion requirements:
+
+```text
+Why this.
+Evidence or assumption.
+User control.
+Dismiss/change option.
+```
+
+Confidence display:
+
+```text
+Qualitative only in normal UI.
+Numeric/debug confidence only in debug/internal contexts.
+```
+
+Smart means:
+
+```text
+Predictive.
+Personalized.
+Explainable.
+Correctable.
+Explainable/correctable first.
+```
+
+Acting without user input:
+
+```text
+Safe local reversible actions are allowed.
+External actions require confirmation.
+```
+
+Safe automation boundary:
+
+```text
+Confirm before important changes.
+Safe local reversible actions allowed.
+```
+
+Intelligence must never:
+
+```text
+Hide uncertainty.
+Pretend certainty.
+Shame the user.
+Make external changes silently.
+```
+
+## Implementation Implications
+
+- Ambitions should not be chat-first.
+- Suggestions must preserve user control.
+- Important changes require confirmation.
+- External actions require confirmation.
+- Reversible local actions may use receipt + undo where safe.
+- Suggestions should expose why they appear and how to dismiss/change them.
+- Intelligence should be useful without fake certainty or scoring the user.
+
+---
+
 # Active Follow-Up Targets
 
 These decisions should be reflected in:
@@ -324,5 +415,6 @@ These decisions should be reflected in:
 - `docs/canon/TODAY_NOW_STATE.md`
 - `docs/canon/YOU_PROFILE_REVIEWS.md`
 - `docs/canon/IA_NAVIGATION_DRILLDOWN.md`
+- `docs/canon/INTELLIGENCE_AUTOMATION_SUGGESTIONS.md`
 - `docs/canon/design/smart-attachment-spec.md`
-- future batch prompts involving onboarding, IA, navigation, drilldown, breadcrumbs, tabs, Life Areas, Capture routing, Today, Now State, empty states, recovery, best next action, Goals, Goal Detail, Goal Weather, Proof, Plan, calendar-aware planning, believability, daily schedule, rituals, You, Profile migration, Settings, Reviews, Trust Center, Appearance Studio, receipts, sensitive Life Areas, notifications/widgets, export/import, privacy controls, Smart Attachment, Needs a Place, or Capture input behavior.
+- future batch prompts involving onboarding, IA, navigation, drilldown, breadcrumbs, tabs, Life Areas, Capture routing, Today, Now State, empty states, recovery, best next action, Goals, Goal Detail, Goal Weather, Proof, Plan, calendar-aware planning, believability, daily schedule, rituals, You, Profile migration, Settings, Reviews, Trust Center, Appearance Studio, intelligence, suggestions, automation, receipts, sensitive Life Areas, notifications/widgets, export/import, privacy controls, Smart Attachment, Needs a Place, or Capture input behavior.
