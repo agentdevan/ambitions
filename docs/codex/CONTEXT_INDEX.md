@@ -10,6 +10,7 @@ This file defines the standing source-of-truth hierarchy for future Ambitions wo
 - D05 Receipt / Action Closure Search and Privacy Contract exists as a local-first receipt history/search foundation over existing Action Closure receipts, with typed filters, deterministic ordering, redacted/full-detail projections, privacy levels, safe-to-show flags, undo/proof/trust labels, and calm missing-detail fallback.
 - D01-D26 classification now lives in `docs/canon/ROADMAP_BATCH_CLASSIFICATION.md` and distinguishes launch-critical, soon-after-launch, post-launch, deferred, decision-gated, and infrastructure-unlock work.
 - Original Batches 89-120 remain future planned roadmap work only through the classifications and dependencies in `docs/canon/Ambitions_2_0_Roadmap_Merge_Audit.md`.
+- Post-D26 Layer 2/Layer 3 maturity planning now lives in `docs/canon/POST_D26_MATURITY_ROADMAP.md`. It rewrites original Batches 89-120 into M-series maturity batches and R-series release-readiness gates. It is planning only and does not mark D01-D26 complete.
 - The locked top-level shell is `Today / Goals / Capture / Plan / You`.
 - Launch-critical work must map to the Golden Launch Loop: capture, place, plan, do today, recover, save proof.
 - Launch posture is local-first: no required account, no launch sync, export before sync.
@@ -36,10 +37,11 @@ For non-trivial work, read these in order before planning:
 15. [Ambitions_2_0_Visual_System.md](../canon/Ambitions_2_0_Visual_System.md) plus focused visual/design docs when UI or component work is involved.
 16. Relevant focused canon docs listed in [SOURCE_OF_TRUTH_MAP.md](../canon/SOURCE_OF_TRUTH_MAP.md).
 17. [Ambitions_2_0_Roadmap.md](../canon/Ambitions_2_0_Roadmap.md), [Ambitions_2_0_Batch_Plan.md](../canon/Ambitions_2_0_Batch_Plan.md), [Ambitions_2_0_Implementation_Gap_Audit.md](../canon/Ambitions_2_0_Implementation_Gap_Audit.md), and [Ambitions_2_0_Roadmap_Merge_Audit.md](../canon/Ambitions_2_0_Roadmap_Merge_Audit.md) for execution sequencing after source-map alignment.
-18. [FREE_WORKFLOW_OPERATING_SYSTEM.md](FREE_WORKFLOW_OPERATING_SYSTEM.md), [Ambitions_2_0_Codex_Execution_Guide.md](Ambitions_2_0_Codex_Execution_Guide.md), and [MASTER_CODEX_SYSTEM.md](MASTER_CODEX_SYSTEM.md) for Codex/process behavior.
-19. [VISUAL_REVIEW_CHECKLIST.md](../review/VISUAL_REVIEW_CHECKLIST.md) when visible UI, navigation, empty states, copy, or hierarchy changes.
-20. [FRICTION_LOG.md](../review/FRICTION_LOG.md) when observed product friction needs to be captured without expanding active scope.
-21. [docs/README.md](../README.md), [canon/README.md](../canon/README.md), and [archive/README.md](../archive/README.md) for index/navigation support.
+18. [POST_D26_MATURITY_ROADMAP.md](../canon/POST_D26_MATURITY_ROADMAP.md) only when planning Layer 2/Layer 3 after D26, or when explicitly asked to plan post-D26 work without changing current D-batch status.
+19. [FREE_WORKFLOW_OPERATING_SYSTEM.md](FREE_WORKFLOW_OPERATING_SYSTEM.md), [Ambitions_2_0_Codex_Execution_Guide.md](Ambitions_2_0_Codex_Execution_Guide.md), and [MASTER_CODEX_SYSTEM.md](MASTER_CODEX_SYSTEM.md) for Codex/process behavior.
+20. [VISUAL_REVIEW_CHECKLIST.md](../review/VISUAL_REVIEW_CHECKLIST.md) when visible UI, navigation, empty states, copy, or hierarchy changes.
+21. [FRICTION_LOG.md](../review/FRICTION_LOG.md) when observed product friction needs to be captured without expanding active scope.
+22. [docs/README.md](../README.md), [canon/README.md](../canon/README.md), and [archive/README.md](../archive/README.md) for index/navigation support.
 
 ## Precedence Model
 
@@ -52,15 +54,16 @@ When sources conflict, use this precedence:
 5. [PRODUCT_DECISIONS.md](../canon/PRODUCT_DECISIONS.md) for resolved Waves 1-19 product decisions.
 6. [GOLDEN_LAUNCH_LOOP.md](../canon/GOLDEN_LAUNCH_LOOP.md) for launch-critical scope and product-strength cutline.
 7. [ROADMAP_BATCH_CLASSIFICATION.md](../canon/ROADMAP_BATCH_CLASSIFICATION.md) for D01-D26 classification and launch spine.
-8. [HUMAN_LANGUAGE_REVIEW.md](../canon/HUMAN_LANGUAGE_REVIEW.md) for visible language quality.
-9. [AMBITION_CANON_COMPLETION_REPORT.md](../canon/AMBITION_CANON_COMPLETION_REPORT.md) and [DOCS_RECONCILIATION_REVIEW.md](../canon/DOCS_RECONCILIATION_REVIEW.md) for post-canon reconciliation status and no-drift instructions.
-10. [MASTER_PRODUCT_SPEC.md](../../MASTER_PRODUCT_SPEC.md) for shipping product truth where not superseded by later canon decisions.
-11. [Ambitions_Design_Constitution.md](../canon/design/Ambitions_Design_Constitution.md) for design/IA/UX/trust/accessibility/external-surface authority.
-12. Product, systems, visual, and focused canon docs listed in [SOURCE_OF_TRUTH_MAP.md](../canon/SOURCE_OF_TRUTH_MAP.md).
-13. Roadmap, batch, gap, and merge-audit docs for sequencing after reconciliation.
-14. Codex workflow docs for process behavior.
-15. Review/friction docs for support only.
-16. Archived and historical docs for context only.
+8. [POST_D26_MATURITY_ROADMAP.md](../canon/POST_D26_MATURITY_ROADMAP.md) for Layer 2/Layer 3 maturity sequencing after D26 only.
+9. [HUMAN_LANGUAGE_REVIEW.md](../canon/HUMAN_LANGUAGE_REVIEW.md) for visible language quality.
+10. [AMBITION_CANON_COMPLETION_REPORT.md](../canon/AMBITION_CANON_COMPLETION_REPORT.md) and [DOCS_RECONCILIATION_REVIEW.md](../canon/DOCS_RECONCILIATION_REVIEW.md) for post-canon reconciliation status and no-drift instructions.
+11. [MASTER_PRODUCT_SPEC.md](../../MASTER_PRODUCT_SPEC.md) for shipping product truth where not superseded by later canon decisions.
+12. [Ambitions_Design_Constitution.md](../canon/design/Ambitions_Design_Constitution.md) for design/IA/UX/trust/accessibility/external-surface authority.
+13. Product, systems, visual, and focused canon docs listed in [SOURCE_OF_TRUTH_MAP.md](../canon/SOURCE_OF_TRUTH_MAP.md).
+14. Roadmap, batch, gap, and merge-audit docs for sequencing after reconciliation.
+15. Codex workflow docs for process behavior.
+16. Review/friction docs for support only.
+17. Archived and historical docs for context only.
 
 ## Active Source-Of-Truth Entry Points
 
@@ -72,6 +75,7 @@ Use these entry points instead of duplicating a separate active-doc list here:
 - [ROADMAP_BATCH_CLASSIFICATION.md](../canon/ROADMAP_BATCH_CLASSIFICATION.md)
 - [HUMAN_LANGUAGE_REVIEW.md](../canon/HUMAN_LANGUAGE_REVIEW.md)
 - [Ambitions_2_0_Object_Terminology.md](../canon/Ambitions_2_0_Object_Terminology.md)
+- [POST_D26_MATURITY_ROADMAP.md](../canon/POST_D26_MATURITY_ROADMAP.md)
 - [AMBITION_CANON_COMPLETION_REPORT.md](../canon/AMBITION_CANON_COMPLETION_REPORT.md)
 - [DOCS_RECONCILIATION_REVIEW.md](../canon/DOCS_RECONCILIATION_REVIEW.md)
 - [canon/README.md](../canon/README.md)
@@ -81,17 +85,19 @@ Use these entry points instead of duplicating a separate active-doc list here:
 
 - [archive/README.md](../archive/README.md) indexes superseded design/frontend transformation docs.
 - Older roadmap, surgical, frontend-transformation, and continuity docs preserved in `docs/canon/` are historical/supporting only unless the source map says otherwise.
-- Do not treat older batch prompts as runnable active prompts unless they have been reconciled against Waves 1-19, the Golden Launch Loop, and Roadmap/Batch Classification.
+- Do not treat older batch prompts as runnable active prompts unless they have been reconciled against Waves 1-19, the Golden Launch Loop, Roadmap/Batch Classification, and the post-D26 maturity roadmap when relevant.
 
 ## Execution Guardrails
 
 - Work on `main` only unless the user explicitly requests branch-based work.
 - Do not create, switch to, or suggest branches for normal Ambitions execution.
 - Do not skip ahead of the execution order in [BATCH_REGISTRY.md](BATCH_REGISTRY.md), [Ambitions_2_0_Batch_Plan.md](../canon/Ambitions_2_0_Batch_Plan.md), and the delta queue unless explicitly told otherwise.
+- Do not start M01 or other post-D26 M/R work before D26 unless the user explicitly authorizes planning-only scenario preparation.
 - Do not add top-level tabs casually.
 - Do not reintroduce top-level Insights, Habits, Tasks, Calendar, Life Areas, or Profile tabs.
 - Do not treat non-Golden-Launch-Loop work as launch-critical without explicit justification.
 - Do not ignore the classifications in [ROADMAP_BATCH_CLASSIFICATION.md](../canon/ROADMAP_BATCH_CLASSIFICATION.md).
+- Do not ignore [POST_D26_MATURITY_ROADMAP.md](../canon/POST_D26_MATURITY_ROADMAP.md) when planning or executing post-D26 M/R work.
 - Do not rename canon casually.
 - Do not implement fake capability.
 - Do not claim sync, export, AI, accessibility, privacy, platform behavior, or production readiness before implementation evidence exists.
@@ -106,4 +112,4 @@ Use these entry points instead of duplicating a separate active-doc list here:
 
 ## Next Operating Step
 
-Continue with D06 - Smart Attachment Foundation unless the user explicitly changes the execution order.
+Continue with D06 - Smart Attachment Foundation unless the user explicitly changes the execution order. Post-D26 M/R work remains planning-only until D26 is complete or the user explicitly authorizes otherwise.
