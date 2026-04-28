@@ -1,15 +1,21 @@
-# Front-End Transformation Batch Docs
+# Historical Front-End Transformation Batch Docs
 
-This folder contains historical per-batch execution docs for completed pre-Batch-61 work.
+This folder contains historical per-batch execution docs for completed pre-Batch-61 frontend transformation work.
 
-## Queue Rules
+These files are preserved for context only. They are not active prompts, not future runnable batch plans, and not active product canon.
 
-- These docs are future work only.
-- All batches before Batch 61 are complete for planning purposes.
+## Use Rules
+
+- All batches in this folder are complete for planning purposes.
 - Do not use these historical batch files as active prompts.
-- For active work, use [../../canon/Ambitions_2_0_Batch_Plan.md](../../canon/Ambitions_2_0_Batch_Plan.md).
+- Do not treat older frontend-transformation language as active canon when it conflicts with Waves 1-19.
+- Do not restore top-level Insights, Habits, Tasks, Calendar, Life Areas, or Profile tabs from these historical docs.
+- For active source-of-truth order, use [../CONTEXT_INDEX.md](../CONTEXT_INDEX.md) and [../../canon/SOURCE_OF_TRUTH_MAP.md](../../canon/SOURCE_OF_TRUTH_MAP.md).
+- For active batch execution, use [../BATCH_REGISTRY.md](../BATCH_REGISTRY.md), [../../canon/Ambitions_2_0_Batch_Plan.md](../../canon/Ambitions_2_0_Batch_Plan.md), and the Design Constitution delta queue.
 
-## Canon Sources
+## Historical Sources / Context
+
+These sources explain where the historical frontend transformation batch docs came from. They do not override active canon:
 
 - [Ambitions_Full_Frontend_Transformation_Program.md](../../canon/Ambitions_Full_Frontend_Transformation_Program.md)
 - [design/README.md](../../canon/design/README.md)
