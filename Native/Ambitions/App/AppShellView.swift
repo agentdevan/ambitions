@@ -258,8 +258,8 @@ private struct QuietCommandSheetView: View {
     var body: some View {
         NavigationStack {
             FeatureScaffoldView(
-                eyebrow: "Quiet Command Sheet",
-                title: "Quiet Command Sheet",
+                eyebrow: "Add something",
+                title: "Add something",
                 subtitle: "A separate global action surface for capture, creation, recovery, plan shaping, and canonical destinations."
             ) {
                 if let executionMessage {
@@ -308,7 +308,7 @@ private struct QuietCommandSheetView: View {
 
                 commandHistoryCard
             }
-            .navigationTitle("Quiet Command Sheet")
+            .navigationTitle("Add something")
             .toolbar {
                 ToolbarItem(placement: .topBarTrailing) {
                     Button("Done", action: onDismiss)
@@ -572,7 +572,7 @@ private struct MemoryLensOverlayView: View {
                     TagPill("From \(overlay.entrySource.displayTitle)", icon: "arrow.down.forward", state: .default)
                     TagPill(overlay.presentationContext == .recall ? "Recall" : overlay.presentationContext.rawValue.capitalized, state: .selected)
                 }
-                Text("Memory Lens explains useful recent context and returns to owning surfaces. It does not expose a raw activity log.")
+                Text("What Ambitions knows explains useful recent context and returns to owning surfaces. It does not expose a raw activity log.")
                     .font(theme.typography.caption)
                     .foregroundStyle(theme.colors.textSecondary)
             }
@@ -628,7 +628,7 @@ private struct MemoryLensOverlayView: View {
         case .openWeek:
             return "Open week"
         default:
-            return "Memory Lens"
+            return "What Ambitions knows"
         }
     }
 

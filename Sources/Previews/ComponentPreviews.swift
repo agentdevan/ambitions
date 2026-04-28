@@ -17,6 +17,8 @@ private enum PreviewTab: String, CaseIterable {
 private struct DesignSystemPreviewGallery: View {
     @State private var filter: PreviewFilter = .week
     @State private var tab: PreviewTab = .today
+    @State private var privateItems = true
+    @State private var notifications = false
 
     var body: some View {
         ScrollView {
@@ -70,6 +72,82 @@ private struct DesignSystemPreviewGallery: View {
                     Image(systemName: "paintpalette")
                     Text("Band treatment carries lightweight continuity without turning every module into a heavy card.")
                         .font(.caption)
+                }
+
+                SectionHeader(eyebrow: "D03", title: "Grouped Navigation List", subtitle: "Settings-style grouped rows for secondary navigation, preferences, status, and caller-confirmed destructive actions.")
+
+                GroupedNavigationList {
+                    GroupedNavigationSection(title: "Privacy", footer: "Destructive actions open a confirmation step owned by the caller.") {
+                        GroupedDisclosureNavigationRow(
+                            title: "You are in control",
+                            subtitle: "Review settings and history.",
+                            systemImage: "person.crop.circle",
+                            trailingValue: "3 areas",
+                            accessibilityHint: "Opens control settings.",
+                            action: {}
+                        )
+
+                        GroupedStatusNavigationRow(
+                            title: "What Ambitions knows",
+                            subtitle: "Review saved context.",
+                            systemImage: "checkmark.shield",
+                            value: "Local",
+                            state: .trust,
+                            accessibilityHint: "Shows where saved context is stored.",
+                            action: {}
+                        )
+
+                        GroupedPreferenceRow(
+                            title: "Private item",
+                            subtitle: "Hide details in shared views.",
+                            systemImage: "lock",
+                            isOn: $privateItems,
+                            accessibilityHint: "Turns private display on or off."
+                        )
+
+                        GroupedDestructiveActionRow(
+                            title: "Delete review history",
+                            subtitle: "Starts a confirmation step before anything changes.",
+                            systemImage: "trash",
+                            accessibilityHint: "Opens delete confirmation.",
+                            action: {}
+                        )
+                    }
+
+                    GroupedNavigationSection(title: "Settings") {
+                        GroupedNavigationRow(
+                            title: "Appearance",
+                            subtitle: "Color and display preferences.",
+                            systemImage: "paintpalette",
+                            trailingValue: "Balanced",
+                            action: {}
+                        )
+
+                        GroupedPreferenceRow(
+                            title: "Notifications",
+                            subtitle: "Choose what should interrupt you.",
+                            systemImage: "bell",
+                            isOn: $notifications,
+                            accessibilityHint: "Turns notification preferences on or off."
+                        )
+
+                        GroupedStatusNavigationRow(
+                            title: "Accessibility",
+                            subtitle: "Text size and motion preferences.",
+                            systemImage: "accessibility",
+                            value: "Review",
+                            state: .accessibilityUnverified,
+                            action: {}
+                        )
+
+                        GroupedDisclosureNavigationRow(
+                            title: "Review history",
+                            subtitle: "Open past reviews and receipts.",
+                            systemImage: "clock.arrow.circlepath",
+                            badge: .init("Receipts", icon: "doc.text", state: .review),
+                            action: {}
+                        )
+                    }
                 }
 
                 SectionHeader(eyebrow: "Batch 63", title: "Rich Panel Foundations", subtitle: "Canonical panel types with semantic state, action, explanation, and visual slots.")

@@ -31,7 +31,7 @@ enum ShellCommandIntent: String, CaseIterable, Hashable, Identifiable, Sendable,
         case .openGoal: "Open goal"
         case .openWeek: "Open week"
         case .openCapture: "Open capture"
-        case .memoryLens: "Memory Lens"
+        case .memoryLens: "What Ambitions knows"
         }
     }
 
@@ -90,7 +90,7 @@ enum ShellCommandEntrySource: String, Hashable, Sendable, Codable {
 
     var displayTitle: String {
         switch self {
-        case .shellCompose: "Quiet Command Sheet"
+        case .shellCompose: "Add something"
         case .shellUtility: "Shell"
         case .goalsCreate: "Goals"
         case .todayQuickCapture: "Today"
@@ -282,8 +282,8 @@ enum ShellCommandDestination: Hashable, Sendable {
             }
         case let .overlay(overlay):
             switch overlay.kind {
-            case .quietCommandSheet: "Quiet Command Sheet"
-            case .memoryLens: "Memory Lens"
+            case .quietCommandSheet: "Add something"
+            case .memoryLens: "What Ambitions knows"
             case .createGoal: "Create Goal"
             }
         }

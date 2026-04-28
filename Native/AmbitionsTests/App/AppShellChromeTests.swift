@@ -4,24 +4,27 @@ import XCTest
 
 final class AppShellChromeTests: XCTestCase {
     func testModeLensUsesPresentationLabelsOnly() {
-        XCTAssertEqual(AmbitionModeLens.allCases.map(\.title), ["Focus", "Triage", "Plan", "Recover", "Review"])
+        XCTAssertEqual(AmbitionModeLens.allCases.map(\.title), ["Focus", "Sort", "Plan", "Recover", "Review"])
     }
 
     func testAmbientStatusOrbStatesStayQualitative() {
-        XCTAssertEqual(AmbitionAmbientStatus.allCases.map(\.title), ["Clear", "Steady", "Tight", "Fragile", "At risk", "Recovered", "Protected"])
+        XCTAssertEqual(AmbitionAmbientStatus.allCases.map(\.title), ["Clear", "Steady", "Tight", "Too much planned", "Needs attention", "Recovered", "Private"])
         XCTAssertFalse(AmbitionAmbientStatus.allCases.map(\.title).contains { title in
-            title.contains("%") || title.contains("score")
+            title.contains("%") ||
+            title.localizedCaseInsensitiveContains("score") ||
+            title.localizedCaseInsensitiveContains("confidence") ||
+            title.localizedCaseInsensitiveContains("protected")
         })
     }
 
     func testMissionControlLaneLabelsDoNotCreateTopLevelTabs() {
-        XCTAssertEqual(AmbitionMissionLane.allCases.map(\.title), ["Path", "Now", "Proof", "Risk"])
+        XCTAssertEqual(AmbitionMissionLane.allCases.map(\.title), ["Path", "Now", "Proof", "Watch"])
         XCTAssertEqual(AppTab.allCases.map(\.title), ["Today", "Goals", "Capture", "Plan", "You"])
     }
 
     func testTrustBadgeCopyDoesNotClaimGlobalSyncByDefault() {
         XCTAssertEqual(AmbitionTrustBadgeState.localOnly.title, "Local only")
-        XCTAssertEqual(AmbitionTrustBadgeState.calendarLocal.title, "Calendar local")
+        XCTAssertEqual(AmbitionTrustBadgeState.calendarLocal.title, "From calendar")
         XCTAssertEqual(AmbitionTrustBadgeState.needsBackup.title, "Needs backup")
     }
 

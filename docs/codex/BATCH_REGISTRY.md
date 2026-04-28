@@ -46,7 +46,7 @@ Use [../canon/Ambitions_2_0_Batch_Plan.md](../canon/Ambitions_2_0_Batch_Plan.md)
 
 ## Active Queue
 
-Current execution status: Ambitions 2.0 post-Batch-60 canon is adopted. Batches 00-88 and D01-D02 are complete for planning purposes. D03 is the next dependency-safe implementation batch from the Design Constitution delta/alignment backlog. Original Batches 89-120 remain future planned roadmap work only through the classifications and dependencies in [../canon/Ambitions_2_0_Roadmap_Merge_Audit.md](../canon/Ambitions_2_0_Roadmap_Merge_Audit.md).
+Current execution status: Ambitions 2.0 post-Batch-60 canon is adopted. Batches 00-88 and D01-D03 are complete for planning purposes. D04 is the next dependency-safe implementation batch from the Design Constitution delta/alignment backlog. Original Batches 89-120 remain future planned roadmap work only through the classifications and dependencies in [../canon/Ambitions_2_0_Roadmap_Merge_Audit.md](../canon/Ambitions_2_0_Roadmap_Merge_Audit.md).
 
 Docs-only reconciliation note: Design Constitution canon reconciliation was performed as a user-directed canon/design-system integration pass after Batch 88 planning status. It created the active design constitution and supporting matrices/specs without starting Batch 89 feature work, changing branch, changing app code, or claiming future implementation completion.
 
@@ -104,7 +104,7 @@ These rows are planned future implementation work from the Design Constitution i
 | --- | --- | --- | --- |
 | D01 | Shell IA / Tab Alignment Delta | Completed | Completed and pushed at commit `3cc68eec`; preserves the five-tab shell and keeps legacy names internal. |
 | D02 | Shared Object Terminology Cleanup | Completed | Added [../canon/Ambitions_2_0_Object_Terminology.md](../canon/Ambitions_2_0_Object_Terminology.md), aligned active docs/source copy, and locked Task vs Step terminology. |
-| D03 | GroupedNavigationList Component | Planned | Next dependency-safe implementation batch; shared component foundation. |
+| D03 | GroupedNavigationList Component | Completed | Added shared `GroupedNavigationList` component foundation with sectioned navigation, disclosure, preference, status, and destructive action rows. No major app surface adoption or redesign was performed. Validated with XcodeGen generation, simulator build, and focused D03 tests on iPhone 17; full scheme test exposed unrelated existing shell/UI expectation failures. |
 | D04 | Panel Size + Display Density | Planned | Shared panel preference foundation. |
 | D05 | Receipt / Action Closure Search and Privacy Contract | Planned | Receipt search/history and redaction foundation. |
 | D06 | Smart Attachment Foundation | Planned | Depends on D02, D05, Command Pipeline, and Capture. |

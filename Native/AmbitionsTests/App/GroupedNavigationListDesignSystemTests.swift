@@ -1,0 +1,87 @@
+import AmbitionsDesignSystem
+import SwiftUI
+import XCTest
+
+final class GroupedNavigationListDesignSystemTests: XCTestCase {
+    func testD03RowKindsCoverCanonicalGroupedNavigationVariants() {
+        XCTAssertEqual(Set(GroupedNavigationRowKind.allCases), [
+            .navigation,
+            .disclosure,
+            .preference,
+            .status,
+            .destructive
+        ])
+
+        for kind in GroupedNavigationRowKind.allCases {
+            XCTAssertFalse(kind.accessibilityRole.isEmpty)
+        }
+    }
+
+    func testD03GroupedRowsCompileWithHumanCopyAndAccessibilityInputs() {
+        _ = GroupedNavigationList {
+            GroupedNavigationSection(
+                title: "Privacy",
+                footer: "Destructive actions require confirmation."
+            ) {
+                GroupedNavigationRow(
+                    title: "Privacy",
+                    subtitle: "Review what is visible.",
+                    systemImage: "lock",
+                    trailingValue: "On",
+                    accessibilityValue: "On",
+                    accessibilityHint: "Opens privacy settings.",
+                    action: {}
+                )
+
+                GroupedDisclosureNavigationRow(
+                    title: "What Ambitions knows",
+                    subtitle: "Review saved context.",
+                    systemImage: "checkmark.shield",
+                    badge: .init("Local", state: .trust),
+                    accessibilityValue: "Local",
+                    accessibilityHint: "Opens saved context.",
+                    action: {}
+                )
+
+                GroupedPreferenceRow(
+                    title: "Private item",
+                    subtitle: "Hide details in shared views.",
+                    systemImage: "eye.slash",
+                    isOn: .constant(true),
+                    accessibilityHint: "Turns private display on or off."
+                )
+
+                GroupedStatusNavigationRow(
+                    title: "Looks doable",
+                    subtitle: "Current planning state.",
+                    systemImage: "checkmark.circle",
+                    value: "On track",
+                    state: .success,
+                    accessibilityValue: "On track",
+                    accessibilityHint: "Opens planning details.",
+                    action: {}
+                )
+
+                GroupedDestructiveActionRow(
+                    title: "Delete review history",
+                    subtitle: "Opens a confirmation step.",
+                    systemImage: "trash",
+                    accessibilityHint: "Opens delete confirmation.",
+                    action: {}
+                )
+            }
+        }
+    }
+
+    func testD03ThemeTokensProvideAccessibleGroupedRowTargets() {
+        for mode in AmbitionThemeMode.allCases {
+            let theme = AmbitionTheme.theme(for: mode)
+
+            XCTAssertGreaterThanOrEqual(theme.panel.minimumTapTarget, 44)
+            XCTAssertGreaterThanOrEqual(theme.spacing.compact, 12)
+            XCTAssertGreaterThanOrEqual(theme.radius.md, 12)
+            XCTAssertFalse(AmbitionSemanticState.trust.accessibilityText.isEmpty)
+            XCTAssertFalse(AmbitionSemanticState.accessibilityUnverified.accessibilityText.isEmpty)
+        }
+    }
+}
