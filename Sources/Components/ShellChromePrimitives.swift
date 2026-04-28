@@ -13,7 +13,7 @@ public enum AmbitionModeLens: String, CaseIterable, Sendable, Identifiable {
     public var title: String {
         switch self {
         case .focus: "Focus"
-        case .triage: "Triage"
+        case .triage: "Sort"
         case .plan: "Plan"
         case .recover: "Recover"
         case .review: "Review"
@@ -47,10 +47,10 @@ public enum AmbitionAmbientStatus: String, CaseIterable, Sendable, Identifiable 
         case .clear: "Clear"
         case .steady: "Steady"
         case .tight: "Tight"
-        case .fragile: "Fragile"
-        case .atRisk: "At risk"
+        case .fragile: "Too much planned"
+        case .atRisk: "Needs attention"
         case .recovered: "Recovered"
-        case .protected: "Protected"
+        case .protected: "Private"
         }
     }
 
@@ -82,7 +82,7 @@ public enum AmbitionTrustBadgeState: String, CaseIterable, Sendable, Identifiabl
         case .localOnly: "Local only"
         case .synced: "Synced"
         case .exportReady: "Export ready"
-        case .calendarLocal: "Calendar local"
+        case .calendarLocal: "From calendar"
         case .needsBackup: "Needs backup"
         case .staleWidget: "Needs refresh"
         }
@@ -113,7 +113,7 @@ public enum AmbitionMissionLane: String, CaseIterable, Sendable, Identifiable {
         case .path: "Path"
         case .now: "Now"
         case .proof: "Proof"
-        case .risk: "Risk"
+        case .risk: "Watch"
         }
     }
 
@@ -159,8 +159,8 @@ public struct AmbitionModeLensPill: View {
             .background(Capsule().fill(theme.shell.activeTabBackground))
             .overlay(Capsule().stroke(theme.shell.activeTabForeground.opacity(0.34), lineWidth: 1))
             .accessibilityElement(children: .combine)
-            .accessibilityLabel("Mode \(lens.title)")
-            .accessibilityValue("Changes emphasis only")
+            .accessibilityLabel("\(lens.title) view")
+            .accessibilityValue("Changes what this screen emphasizes")
     }
 }
 
@@ -389,7 +389,7 @@ public struct AmbitionMissionControlLanes: View {
             }
         }
         .accessibilityElement(children: .combine)
-        .accessibilityLabel("Path, Now, Proof, Risk")
+        .accessibilityLabel("Path, Now, Proof, Watch")
     }
 }
 
