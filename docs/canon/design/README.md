@@ -6,12 +6,15 @@ For active Ambitions 2.0 Batch 61+ work, the top-level design source of truth is
 
 The top-level visual source of truth remains [../Ambitions_2_0_Visual_System.md](../Ambitions_2_0_Visual_System.md) where it does not conflict with the Design Constitution.
 
+[DESIGN_TOKENS.md](DESIGN_TOKENS.md) is the implementation-readable token consolidation layer for color, typography, spacing, radius, elevation, motion, haptics, density, and semantic states. It clarifies the Visual System; it does not replace it.
+
 It exists to remove interpretation drift from future implementation batches.
 Use these active specs together with:
 
 - [Ambitions_Design_Constitution.md](Ambitions_Design_Constitution.md)
 - [../../../MASTER_PRODUCT_SPEC.md](../../../MASTER_PRODUCT_SPEC.md)
 - [../../codex/BATCH_REGISTRY.md](../../codex/BATCH_REGISTRY.md)
+- [../SOURCE_OF_TRUTH_MAP.md](../SOURCE_OF_TRUTH_MAP.md)
 
 ## Use Rules
 
@@ -19,7 +22,7 @@ Use these active specs together with:
 - Older transformation docs were moved to [../../archive/README.md](../../archive/README.md) and are historical only.
 - All batches before Batch 61 are complete for planning purposes.
 - Treat iPhone execution truth as primary unless a spec explicitly defines a future-platform role.
-- Prefer [Ambitions_Design_Constitution.md](Ambitions_Design_Constitution.md) and [../Ambitions_2_0_Visual_System.md](../Ambitions_2_0_Visual_System.md) for future active UI direction.
+- Prefer [Ambitions_Design_Constitution.md](Ambitions_Design_Constitution.md), [../Ambitions_2_0_Visual_System.md](../Ambitions_2_0_Visual_System.md), and [DESIGN_TOKENS.md](DESIGN_TOKENS.md) for future active UI direction.
 - If a future implementation task conflicts with current shipping behavior, preserve shipping truth until the relevant frontend batch becomes active.
 
 ## Active Constitution And Contract Set
@@ -33,6 +36,7 @@ Use these active specs together with:
 - [smart-attachment-spec.md](smart-attachment-spec.md)
 - [grouped-navigation-list-spec.md](grouped-navigation-list-spec.md)
 - [panel-density-size-spec.md](panel-density-size-spec.md)
+- [DESIGN_TOKENS.md](DESIGN_TOKENS.md)
 
 ## Superseded / Archived Docs
 
@@ -45,14 +49,17 @@ The previous frontend transformation specs were archived under [../../archive/su
 Use these specs in this order when planning a frontend batch:
 
 1. Design Constitution.
-2. Screen contract matrix.
-3. Component contract matrix.
-4. Panel density/size spec.
-5. GroupedNavigationList and Smart Attachment specs.
-6. UX writing/state language matrix.
-7. Accessibility Nutrition screen matrix.
-8. External surfaces contract.
-9. Archived historical specs only where they do not conflict with active canon.
+2. Source-of-truth map when document ownership is unclear.
+3. Visual System.
+4. Design Tokens for implementation naming.
+5. Screen contract matrix.
+6. Component contract matrix.
+7. Panel density/size spec.
+8. GroupedNavigationList and Smart Attachment specs.
+9. UX writing/state language matrix.
+10. Accessibility Nutrition screen matrix.
+11. External surfaces contract.
+12. Archived historical specs only where they do not conflict with active canon.
 
 ## Scope Notes
 
