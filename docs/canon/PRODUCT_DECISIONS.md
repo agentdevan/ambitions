@@ -355,10 +355,28 @@ Adoption date: 2026-04-27
 
 ---
 
+# Wave 19 — Final Canon Completion And Reconciliation
+
+Adoption date: 2026-04-27
+
+- Create a final consolidated Ambitions Canon Completion Report.
+- The completion report should list every active canon doc and its owner.
+- The completion report should identify remaining open questions.
+- The completion report should identify duplicate/overlapping docs that can be archived later.
+- The completion report should produce a next Codex prompt to reconcile roadmap/batch docs against all new canon.
+- Implementation acceptance gates should be updated based on Waves 1-18.
+- The source-of-truth map should be updated based on all new focused docs.
+- The completion report should include `What is still not decided?`.
+- The completion report should include `What must not drift?`.
+- Final canon completion should optimize for one clear map of what is settled, what is open, and what Codex must reconcile next.
+
+---
+
 # Active Follow-Up Targets
 
 These decisions should be reflected in:
 
+- `SOURCE_OF_TRUTH_MAP.md`
 - `DOMAIN_MODEL.md`
 - `GOAL_PLAN_TASK_LIFECYCLE.md`
 - `ONBOARDING_SPEC.md`
@@ -379,4 +397,5 @@ These decisions should be reflected in:
 - `docs/canon/MONETIZATION_PRICING_BUSINESS_MODEL.md`
 - `docs/canon/LAUNCH_SCOPE_MVP_QUALITY_BAR.md`
 - `docs/canon/ROADMAP_BATCH_GOVERNANCE.md`
-- future batch prompts involving roadmap governance, batch execution, no-drift rules, canon proposals, acceptance gates, validation, shipped/planned/deferred status, launch scope, MVP, quality bar, onboarding, IA, navigation, drilldown, breadcrumbs, tabs, Life Areas, Capture routing, Today, Now State, empty states, recovery, best next action, Goals, Goal Detail, Goal Weather, Proof, Plan, calendar-aware planning, believability, daily schedule, rituals, You, Profile migration, Settings, Reviews, Trust Center, Appearance Studio, intelligence, suggestions, automation, visual system, components, motion, accessibility, Focus Support, external surfaces, notifications, widgets, Live Activities, App Intents, Shortcuts, data controls, local-first behavior, sync, export/import, monetization, pricing, free tier, paid tier, receipts, sensitive Life Areas, privacy controls, Smart Attachment, Needs a Place, or Capture input behavior.
+- `docs/canon/AMBITION_CANON_COMPLETION_REPORT.md`
+- future batch prompts involving final canon reconciliation, roadmap governance, batch execution, no-drift rules, canon proposals, acceptance gates, validation, shipped/planned/deferred status, launch scope, MVP, quality bar, onboarding, IA, navigation, drilldown, breadcrumbs, tabs, Life Areas, Capture routing, Today, Now State, empty states, recovery, best next action, Goals, Goal Detail, Goal Weather, Proof, Plan, calendar-aware planning, believability, daily schedule, rituals, You, Profile migration, Settings, Reviews, Trust Center, Appearance Studio, intelligence, suggestions, automation, visual system, components, motion, accessibility, Focus Support, external surfaces, notifications, widgets, Live Activities, App Intents, Shortcuts, data controls, local-first behavior, sync, export/import, monetization, pricing, free tier, paid tier, receipts, sensitive Life Areas, privacy controls, Smart Attachment, Needs a Place, or Capture input behavior.
