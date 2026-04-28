@@ -2,7 +2,7 @@
 
 Status: Active canon decision log for product-definition waves.
 
-Purpose: Preserve explicit product decisions made after canon consolidation. This document records decisions that clarify ambiguity across product, design, onboarding, lifecycle, memory, trust, capture, plan/calendar, and implementation acceptance.
+Purpose: Preserve explicit product decisions made after canon consolidation. This document records decisions that clarify ambiguity across product, design, onboarding, lifecycle, memory, trust, capture, plan/calendar, goals, and implementation acceptance.
 
 ## Decision Authority
 
@@ -571,6 +571,157 @@ Become a raw calendar clone.
 
 ---
 
+# Wave 7 — Goals And Goal Detail
+
+Adoption date: 2026-04-27
+
+## Resolved Decisions
+
+Goals' core job:
+
+```text
+Help the user choose and protect direction.
+```
+
+Goals top screen should prioritize:
+
+```text
+One protected / most important goal.
+Goal portfolio health.
+```
+
+Supporting content below:
+
+```text
+Goal list.
+Life Areas.
+Recent progress.
+```
+
+## Goals Surface Direction
+
+Resolved direction:
+
+```text
+Top-level Goals should not look like a project management board.
+```
+
+Rules:
+
+- Deep detail may use structured milestone/step views where useful.
+- Top-level Goals should not become a task board, spreadsheet, KPI dashboard, or project management surface.
+- Goals should protect direction before exposing management detail.
+
+## Goal Detail Main Questions
+
+Primary question:
+
+```text
+What is the next visible step?
+```
+
+Secondary question:
+
+```text
+Is this goal still believable?
+```
+
+Implementation implication:
+
+- Goal Detail should lead with next action clarity.
+- Believability/risk should be visible enough to avoid false confidence.
+- Task lists, progress metrics, and history should support these questions, not replace them.
+
+## Goal Weather Meaning
+
+Goal Weather primarily communicates:
+
+```text
+Believability / risk / clarity.
+```
+
+Rules:
+
+- Goal Weather is not a progress percentage.
+- Goal Weather is not mood.
+- Goal Weather is not motivation decoration.
+- Goal Weather can include deadline pressure, but it is not deadline pressure only.
+
+## Progress Percentages
+
+Resolved decision:
+
+```text
+Only show progress percentages when measurable and honest.
+```
+
+Rules:
+
+- Do not show fake precision.
+- Do not make percentages the primary goal health signal.
+- Prefer milestone/proof/next-step clarity when the goal is not honestly quantifiable.
+
+## Proof Definition
+
+Proof includes:
+
+```text
+Completed step.
+Artifact created.
+Decision made.
+Feedback received.
+Blocker resolved.
+Reflection / review.
+```
+
+Rules:
+
+- Proof is evidence of real progress.
+- Proof is broader than task completion.
+- Proof should support trust, Goal Weather, reviews, and archive learning.
+
+## Manual Proof
+
+Resolved decision:
+
+```text
+Users can manually add proof, but it should attach to a goal, milestone, or step.
+```
+
+Implementation implication:
+
+- Manual proof should not float as a disconnected object.
+- Proof attachment should create a receipt where meaningful.
+- Proof should remain correctable if attached to the wrong object.
+
+## Missing Next Step
+
+When a goal has no next step, Ambitions should:
+
+```text
+Ask the user to choose one.
+Suggest one.
+```
+
+Rules:
+
+- Do not merely warn.
+- Do not hide the goal from Today solely because the next step is missing.
+- Help the user restore forward motion.
+
+## Goals Must Never Become
+
+Goals must never become:
+
+```text
+Project management board.
+Spreadsheet.
+KPI dashboard.
+Motivation quote wall.
+```
+
+---
+
 # Active Follow-Up Targets
 
 These decisions should be reflected in:
@@ -583,5 +734,6 @@ These decisions should be reflected in:
 - `IMPLEMENTATION_ACCEPTANCE_GATES.md`
 - `docs/canon/CAPTURE_SMART_ATTACHMENT.md`
 - `docs/canon/PLAN_CALENDAR_BELIEVABILITY.md`
+- `docs/canon/GOALS_GOAL_DETAIL.md`
 - `docs/canon/design/smart-attachment-spec.md`
-- future batch prompts involving onboarding, Life Areas, Capture routing, Today empty states, Goals, Plan, calendar-aware planning, believability, daily schedule, rituals, You, Trust Center, receipts, sensitive Life Areas, notifications/widgets, export/import, privacy controls, Smart Attachment, Needs a Place, or Capture input behavior.
+- future batch prompts involving onboarding, Life Areas, Capture routing, Today empty states, Goals, Goal Detail, Goal Weather, Proof, Plan, calendar-aware planning, believability, daily schedule, rituals, You, Trust Center, receipts, sensitive Life Areas, notifications/widgets, export/import, privacy controls, Smart Attachment, Needs a Place, or Capture input behavior.
