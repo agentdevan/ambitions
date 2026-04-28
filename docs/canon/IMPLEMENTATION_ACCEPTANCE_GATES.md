@@ -2,7 +2,7 @@
 
 Status: Active canon consolidation layer.
 
-Purpose: Define what “done” means for future Ambitions implementation work. This document consolidates acceptance expectations from the roadmap, batch plan, visual review checklist, RC maturity plan, design contracts, accessibility posture, systems architecture, product decision Waves 1-19, and the Human Language Review.
+Purpose: Define what “done” means for future Ambitions implementation work. This document consolidates acceptance expectations from the roadmap, batch plan, visual review checklist, RC maturity plan, design contracts, accessibility posture, systems architecture, product decision Waves 1-19, the Golden Launch Loop, and the Human Language Review.
 
 ## Core Standard
 
@@ -11,6 +11,7 @@ A feature is not done because code compiles.
 A feature is done when it is:
 
 - aligned with active canon
+- mapped to the Golden Launch Loop when launch-bound
 - written in human, obvious language where user-facing
 - integrated with the correct owning system
 - visually coherent
@@ -28,25 +29,27 @@ Before implementing a non-trivial Ambitions change, the implementer must identif
 1. Active batch or roadmap owner.
 2. Current shipping behavior.
 3. Active canon documents read.
-4. Whether `HUMAN_LANGUAGE_REVIEW.md` applies to visible copy.
-5. Surface owner.
-6. System owner.
-7. Whether the work is UI, domain model, system logic, QA, release, or docs-only.
-8. What must not be touched.
-9. Planned-canon versus shipped-code distinction.
-10. Whether any unresolved question needs a canon proposal or decision-log entry.
+4. Whether `GOLDEN_LAUNCH_LOOP.md` applies to launch-critical scope.
+5. Whether `HUMAN_LANGUAGE_REVIEW.md` applies to visible copy.
+6. Surface owner.
+7. System owner.
+8. Whether the work is UI, domain model, system logic, QA, release, or docs-only.
+9. What must not be touched.
+10. Planned-canon versus shipped-code distinction.
+11. Whether any unresolved question needs a canon proposal or decision-log entry.
 
 Required reading order:
 
 1. `docs/codex/BATCH_REGISTRY.md`
 2. `docs/canon/SOURCE_OF_TRUTH_MAP.md`
 3. `docs/canon/PRODUCT_DECISIONS.md`
-4. `docs/canon/HUMAN_LANGUAGE_REVIEW.md` for user-facing language work
-5. `docs/canon/AMBITION_CANON_COMPLETION_REPORT.md`
-6. batch file if one exists
-7. relevant product/design/system/focused canon docs from the source map
-8. current implementation files
-9. tests/previews/fixtures affected by the change
+4. `docs/canon/GOLDEN_LAUNCH_LOOP.md` for launch scope and product-strength cutline
+5. `docs/canon/HUMAN_LANGUAGE_REVIEW.md` for user-facing language work
+6. `docs/canon/AMBITION_CANON_COMPLETION_REPORT.md`
+7. batch file if one exists
+8. relevant product/design/system/focused canon docs from the source map
+9. current implementation files
+10. tests/previews/fixtures affected by the change
 
 ## Canon Alignment Gate
 
@@ -54,6 +57,7 @@ A change passes canon alignment when:
 
 - It does not contradict `MASTER_PRODUCT_SPEC.md`.
 - It follows `PRODUCT_DECISIONS.md` for Waves 1-19.
+- It follows `GOLDEN_LAUNCH_LOOP.md` for launch-critical scope and roadmap/batch cutline.
 - It follows `HUMAN_LANGUAGE_REVIEW.md` for normal user-facing copy.
 - It follows `Ambitions_Design_Constitution.md` for design, IA, UX writing, interaction, trust, accessibility, and external-surface behavior.
 - It follows Product Architecture for surface ownership.
@@ -63,9 +67,43 @@ A change passes canon alignment when:
 - It preserves the locked shell: Today, Goals, Capture, Plan, You.
 - It distinguishes Profile compatibility code from user-facing `You` canon.
 - It distinguishes Task from Step.
-- It distinguishes shipped, planned, and deferred behavior.
+- It distinguishes shipped, planned, deferred, and decision-gated behavior.
 - It does not treat archived docs as active canon.
 - It does not introduce new canon unless explicitly labeled as a canon proposal.
+
+## Golden Launch Loop Gate
+
+A launch-bound change passes when it strengthens at least one step in the Golden Launch Loop:
+
+```text
+1. Capture one meaningful goal or task.
+2. Put it in the right place.
+3. Turn it into a doable plan.
+4. Show what to do today.
+5. When today is too much, make it doable.
+6. Save proof that progress happened.
+```
+
+Required mapping for launch-bound roadmap or batch work:
+
+```markdown
+## Golden Launch Loop Mapping
+- Capture:
+- Place/routing:
+- Plan/doable path:
+- Today/next action:
+- Recovery:
+- Proof/receipt:
+- Trust/privacy:
+- Launch status: launch-critical / post-launch / deferred / decision-gated
+```
+
+Rules:
+
+- If every mapping line is empty, the work is not launch-critical.
+- Launch-critical work must make one meaningful goal easier to organize, make doable, act on today, recover, or prove.
+- Post-launch, deferred, and decision-gated work may stay in roadmap docs, but must not be treated as required for launch.
+- The recommended demo story is `Release 3 songs by August 1`, unless a later explicit decision picks a different example.
 
 ## System Ownership Gate
 
@@ -111,16 +149,17 @@ A change passes surface ownership when content lives in the right place.
 A launch-bound change passes when it supports the launch proof:
 
 ```text
-Ambitions can make one meaningful goal feel organized, believable, and actionable.
+A meaningful goal can become organized, doable, and actionable today.
 ```
 
 Rules:
 
+- It must map to the Golden Launch Loop when launch-critical.
 - Prefer fewer complete loops over more partial features.
-- Do not ship fake AI, broken sync claims, unclear data controls, or dead-end flows.
+- Do not ship fake AI, broken sync claims, unclear data controls, dead-end flows, or AI-feeling copy.
 - Advanced canon may remain planned/deferred when labeled accurately.
-- Delay sync, advanced memory, widgets / Live Activities, and native AI-style suggestions if not excellent.
-- MVP must not mean ugly, untrustworthy, incomplete, or confusing.
+- Delay sync, advanced memory, widgets / Live Activities, native AI-style suggestions, advanced reviews, and long-range path intelligence if not excellent.
+- MVP must not mean ugly, untrustworthy, incomplete, confusing, or robotic.
 
 ## Roadmap Governance Gate
 
@@ -128,7 +167,8 @@ A roadmap or batch change passes when:
 
 - It optimizes for coherent product loops.
 - It respects dependency order.
-- It distinguishes shipped, planned, deferred, duplicate, superseded, and needs-canon-proposal work.
+- It maps launch-critical work to the Golden Launch Loop.
+- It distinguishes shipped, planned, deferred, duplicate, superseded, decision-gated, and needs-canon-proposal work.
 - It does not add tabs casually.
 - It does not rename canon casually.
 - It does not implement fake capability.
@@ -467,17 +507,18 @@ A batch is complete only when:
 1. Scope matches the batch file.
 2. No unrelated roadmap drift was introduced.
 3. Required source-of-truth docs remain aligned.
-4. User-facing copy follows `HUMAN_LANGUAGE_REVIEW.md`.
-5. Tests or validation appropriate to the change were run or explicitly not run.
-6. Visual/UX/accessibility acceptance is satisfied for user-visible work.
-7. Empty/error/recovery states are not broken.
-8. Confirmation/receipt behavior matches trust gates.
-9. Memory/sensitive-area behavior matches Wave 3 gates where relevant.
-10. Onboarding behavior matches Wave 4 gates where relevant.
-11. Completion summary distinguishes implemented behavior from planned future canon.
-12. `BATCH_REGISTRY.md` is updated if the batch status changed.
-13. Shipped/planned/deferred status is clear.
-14. Follow-up work is captured without moving the active batch prematurely.
+4. Launch-bound work maps to the Golden Launch Loop or is marked post-launch/deferred/decision-gated.
+5. User-facing copy follows `HUMAN_LANGUAGE_REVIEW.md`.
+6. Tests or validation appropriate to the change were run or explicitly not run.
+7. Visual/UX/accessibility acceptance is satisfied for user-visible work.
+8. Empty/error/recovery states are not broken.
+9. Confirmation/receipt behavior matches trust gates.
+10. Memory/sensitive-area behavior matches Wave 3 gates where relevant.
+11. Onboarding behavior matches Wave 4 gates where relevant.
+12. Completion summary distinguishes implemented behavior from planned future canon.
+13. `BATCH_REGISTRY.md` is updated if the batch status changed.
+14. Shipped/planned/deferred/decision-gated status is clear.
+15. Follow-up work is captured without moving the active batch prematurely.
 
 ## Red Flags
 
@@ -485,6 +526,7 @@ Stop or revise if a change:
 
 - creates a new top-level tab without canon approval
 - reintroduces Insights, Habits, Tasks, Calendar, Life Areas, or Profile as standalone top-level surfaces
+- treats a non-Golden-Launch-Loop feature as launch-critical without justification
 - requests calendar permission during onboarding
 - requests notification permission during onboarding
 - asks for display density during onboarding
@@ -528,9 +570,10 @@ Use this structure for Codex completion summaries:
 - Active docs read:
 - Surface owner:
 - System owner:
+- Golden Launch Loop mapping:
 - Human language review:
 - Planned-vs-shipped distinction:
-- Shipped/planned/deferred status:
+- Shipped/planned/deferred/decision-gated status:
 
 ## Validation
 - Commands run:
@@ -539,6 +582,7 @@ Use this structure for Codex completion summaries:
 
 ## Acceptance Gates
 - Canon alignment:
+- Golden Launch Loop:
 - System ownership:
 - Surface ownership:
 - Visual/UX:
