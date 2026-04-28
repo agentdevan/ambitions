@@ -10,8 +10,16 @@ Ambitions is a native iOS SwiftUI application.
 
 ## Canonical planning stack
 
-Use [docs/codex/CONTEXT_INDEX.md](docs/codex/CONTEXT_INDEX.md) for the full source-of-truth hierarchy.
-The permanent planning docs live in [docs/canon](docs/canon):
+Use [docs/codex/CONTEXT_INDEX.md](docs/codex/CONTEXT_INDEX.md) for the Codex/session read order, but start product, design, roadmap, and implementation reasoning from the completed Waves 1-19 canon-control docs:
+
+- [SOURCE_OF_TRUTH_MAP.md](docs/canon/SOURCE_OF_TRUTH_MAP.md)
+- [PRODUCT_DECISIONS.md](docs/canon/PRODUCT_DECISIONS.md)
+- [AMBITION_CANON_COMPLETION_REPORT.md](docs/canon/AMBITION_CANON_COMPLETION_REPORT.md)
+- [DOCS_RECONCILIATION_REVIEW.md](docs/canon/DOCS_RECONCILIATION_REVIEW.md)
+- [Canon index](docs/canon/README.md)
+- [Docs index](docs/README.md)
+
+The permanent planning docs live in [docs/canon](docs/canon). Core active docs include:
 
 - [Ambitions_Design_Constitution.md](docs/canon/design/Ambitions_Design_Constitution.md)
 - [Ambitions_2_0_Master_Plan.md](docs/canon/Ambitions_2_0_Master_Plan.md)
@@ -21,9 +29,10 @@ The permanent planning docs live in [docs/canon](docs/canon):
 - [Ambitions_2_0_Roadmap.md](docs/canon/Ambitions_2_0_Roadmap.md)
 - [Ambitions_2_0_Batch_Plan.md](docs/canon/Ambitions_2_0_Batch_Plan.md)
 - [Ambitions_2_0_Implementation_Gap_Audit.md](docs/canon/Ambitions_2_0_Implementation_Gap_Audit.md)
-- [Canon index](docs/canon/README.md)
+- [Ambitions_2_0_Roadmap_Merge_Audit.md](docs/canon/Ambitions_2_0_Roadmap_Merge_Audit.md)
+- [IMPLEMENTATION_ACCEPTANCE_GATES.md](docs/canon/IMPLEMENTATION_ACCEPTANCE_GATES.md)
 
-Superseded and historical docs are indexed from [docs/archive/README.md](docs/archive/README.md) or marked as historical in [docs/canon/README.md](docs/canon/README.md).
+Superseded and historical docs are indexed from [docs/archive/README.md](docs/archive/README.md) or marked as historical in [docs/canon/README.md](docs/canon/README.md). Historical docs are context only and do not override the current source map, decision ledger, or focused canon docs.
 
 ## Native structure
 
@@ -46,6 +55,8 @@ Superseded and historical docs are indexed from [docs/archive/README.md](docs/ar
 
 - Do not add new production UI work outside `Native/Ambitions/`, `Sources/`, or `AppUI/Sources/`.
 - Do not reintroduce Expo, React Native, or TypeScript runtime files.
+- Do not add top-level tabs casually. The active shell is Today / Goals / Capture / Plan / You.
+- Do not claim sync, export, AI, accessibility, privacy, platform behavior, or production readiness before implementation evidence exists.
 
 ## Running the native app
 
@@ -66,7 +77,7 @@ Batch control status for active work now lives in [docs/codex/BATCH_REGISTRY.md]
 
 ## Codex workflow
 
-Shared Codex behavior starts with [docs/codex/CONTEXT_INDEX.md](docs/codex/CONTEXT_INDEX.md), then [docs/codex/MASTER_CODEX_SYSTEM.md](docs/codex/MASTER_CODEX_SYSTEM.md). Windows and Mac Codex sessions should both pull the latest repo state from GitHub and use those files as standing session context; Mac sessions can start from [docs/codex/MAC_SESSION_BOOT_PROMPT.md](docs/codex/MAC_SESSION_BOOT_PROMPT.md).
+Shared Codex behavior starts with [docs/codex/CONTEXT_INDEX.md](docs/codex/CONTEXT_INDEX.md), then follows [docs/canon/SOURCE_OF_TRUTH_MAP.md](docs/canon/SOURCE_OF_TRUTH_MAP.md) for source-of-truth order. Windows and Mac Codex sessions should both pull the latest repo state from GitHub and use those files as standing session context; Mac sessions can start from [docs/codex/MAC_SESSION_BOOT_PROMPT.md](docs/codex/MAC_SESSION_BOOT_PROMPT.md).
 
 ## iOS native validation
 
@@ -108,3 +119,5 @@ Local reproduction, including exact build, unit test, UI test, and archive comma
 ## Current status
 
 The repo is now Swift-native and XcodeGen-driven. The app boots through the native SwiftUI entry point, persists state through SwiftData, and preserves the active Today / Goals / Capture / Plan / You shell. Older internal Captures, Habits, Insights, and Profile naming remains compatibility-only where it still exists.
+
+Product-definition Waves 1-19 are complete. The docs-control reconciliation pass is partially complete; roadmap/batch shipped/planned/deferred reconciliation and later archive cleanup remain pending before treating the docs layer as fully clean.
