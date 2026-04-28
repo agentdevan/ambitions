@@ -4,6 +4,7 @@ This folder contains active Ambitions canon plus preserved historical support do
 
 ## Active Source-Of-Truth Docs
 
+- [SOURCE_OF_TRUTH_MAP.md](SOURCE_OF_TRUTH_MAP.md)
 - [../../MASTER_PRODUCT_SPEC.md](../../MASTER_PRODUCT_SPEC.md)
 - [design/Ambitions_Design_Constitution.md](design/Ambitions_Design_Constitution.md)
 - [Ambitions_2_0_Master_Plan.md](Ambitions_2_0_Master_Plan.md)
@@ -16,6 +17,18 @@ This folder contains active Ambitions canon plus preserved historical support do
 - [Ambitions_2_0_Implementation_Gap_Audit.md](Ambitions_2_0_Implementation_Gap_Audit.md)
 - [Ambitions_2_0_Roadmap_Merge_Audit.md](Ambitions_2_0_Roadmap_Merge_Audit.md)
 - [Documentation_Cleanup_Audit.md](Documentation_Cleanup_Audit.md)
+
+## Active Consolidation Canon
+
+These docs extract existing canon into narrower implementation-readable specs. They clarify; they do not replace the active source-of-truth stack above.
+
+- [SOURCE_OF_TRUTH_MAP.md](SOURCE_OF_TRUTH_MAP.md)
+- [DOMAIN_MODEL.md](DOMAIN_MODEL.md)
+- [GOAL_PLAN_TASK_LIFECYCLE.md](GOAL_PLAN_TASK_LIFECYCLE.md)
+- [ONBOARDING_SPEC.md](ONBOARDING_SPEC.md)
+- [TRUST_PRIVACY_MEMORY.md](TRUST_PRIVACY_MEMORY.md)
+- [EMPTY_ERROR_RECOVERY_STATES.md](EMPTY_ERROR_RECOVERY_STATES.md)
+- [IMPLEMENTATION_ACCEPTANCE_GATES.md](IMPLEMENTATION_ACCEPTANCE_GATES.md)
 
 ## Active Supporting Canon
 
@@ -37,6 +50,7 @@ This folder contains active Ambitions canon plus preserved historical support do
 - [design/smart-attachment-spec.md](design/smart-attachment-spec.md)
 - [design/grouped-navigation-list-spec.md](design/grouped-navigation-list-spec.md)
 - [design/panel-density-size-spec.md](design/panel-density-size-spec.md)
+- [design/DESIGN_TOKENS.md](design/DESIGN_TOKENS.md)
 
 ## Historical But Useful Docs
 
