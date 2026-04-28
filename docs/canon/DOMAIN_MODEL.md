@@ -2,7 +2,7 @@
 
 Status: Active canon consolidation layer.
 
-Purpose: Consolidate the Ambitions object model into one implementation-readable reference. This document extracts existing truth from the Master Product Spec, Design Constitution, Product Architecture, Systems Architecture, Visual System, Intelligence Standards, and Wave 1 product decisions. It does not replace those documents; it makes their object language easier to implement consistently.
+Purpose: Consolidate the Ambitions object model into one implementation-readable reference. This document extracts existing truth from the Master Product Spec, Design Constitution, Product Architecture, Systems Architecture, Visual System, Intelligence Standards, and product decision Waves 1-2. It does not replace those documents; it makes their object language easier to implement consistently.
 
 ## Canonical Hierarchy
 
@@ -44,6 +44,20 @@ A Task can exist without a Goal. A Step cannot.
 - Emotional rule: the user never feels punished for drifting.
 - Product-shape rule: the app stays deep, not wide.
 
+## Wave 2 Locked Decisions
+
+- Internal `dropped` state should normally render as `No Longer Relevant` in UI.
+- `cancelled` and `dropped` are internally separate, but launch UI may simplify.
+- General intentional-ending action is `End Goal`, followed by a reason.
+- Goal pause action is `Park Goal`; state is `parked`.
+- Goal Weather is not directly manually overridden; users correct inputs that affect weather.
+- Internal Plan states may be strong; UI should render `fragile` as `Needs Protection` and `broken` as `No Longer Holds`.
+- Confirmation is required for destructive actions, external writes, and major deadline changes.
+- Receipt + undo is preferred for Mark Done, Move task, Park task, Attach task to goal, Rename Life Area, and Change display density.
+- Delete memory and calendar write require confirmation.
+- Completed goals remain visibly emphasized for 30 days by default; major goals may remain emphasized longer.
+- Product/design language is `Completion Archive`; normal UI language is `Archive`.
+
 ## Object Ownership Summary
 
 | Object | Plain meaning | Primary owner surface | Supporting surfaces |
@@ -66,6 +80,7 @@ A Task can exist without a Goal. A Step cannot.
 | Waiting Item | Something blocked by another person/event/context | Capture, Plan | Goal Detail, You |
 | Memory | User-visible remembered preference, pattern, or context | You -> What Ambitions Knows | Trust Center, Reviews |
 | Schedule Block | Planned time block or calendar-aware work window | Plan | Today, Reviews |
+| Archive / Completion Archive | Preserved learning from completed, ended, parked, merged, or replaced objects | Goals, You -> Reviews | Trust Center, Archive detail |
 
 ## Core Entities
 
@@ -129,6 +144,7 @@ Rules:
 - A user can rename a default Life Area, but the internal canonical type remains stable.
 - Ambitions may infer a Life Area, but the user must be able to correct it.
 - Life Area assignment should not block Capture or first-run flow.
+- Renaming a Life Area should use receipt + undo, not confirmation.
 
 ### Ambition / North Star
 
@@ -191,20 +207,22 @@ Recommended fields:
 - `scopeState`
 - `archiveState?`
 
-Goal states:
+Goal states and preferred UI labels:
 
-- `seed`
-- `active`
-- `protected`
-- `waiting`
-- `blocked`
-- `parked`
-- `completed`
-- `cancelled`
-- `dropped`
-- `merged`
-- `replaced`
-- `archived`
+| Internal state | Preferred UI label |
+| --- | --- |
+| `seed` | Seed / Idea |
+| `active` | Active |
+| `protected` | Protected |
+| `waiting` | Waiting |
+| `blocked` | Blocked |
+| `parked` | Parked |
+| `completed` | Completed |
+| `cancelled` | Ended |
+| `dropped` | No Longer Relevant |
+| `merged` | Merged |
+| `replaced` | Replaced |
+| `archived` | Archive |
 
 Rules:
 
@@ -213,6 +231,9 @@ Rules:
 - Completed, cancelled, dropped, merged, replaced, and parked goals remain learning artifacts, not trash.
 - Goal Weather is user-facing visual language, not a separate engine.
 - A goal should be important enough to justify direction, plan, proof, lifecycle, and review.
+- `End Goal` is the general intentional-ending action and should ask the reason.
+- `Park Goal` is the pause action and creates the Parked state.
+- Completed goals remain visibly emphasized for 30 days by default; major goals may remain emphasized longer.
 
 ### Path
 
@@ -268,6 +289,20 @@ Recommended fields:
 - `receiptIds`
 - `reviewIds`
 
+Plan states and preferred UI labels:
+
+| Internal state | Preferred UI label |
+| --- | --- |
+| `draft` | Draft |
+| `believable` | Believable |
+| `tight` | Tight |
+| `fragile` | Needs Protection |
+| `broken` | No Longer Holds |
+| `reflowing` | Adjusting |
+| `saved` | Saved |
+| `reviewed` | Reviewed |
+| `archived` | Archive |
+
 Rules:
 
 - Plan owns calendar permission.
@@ -275,7 +310,8 @@ Rules:
 - Calendar write requires explicit confirmation.
 - Plan works without calendar access.
 - No silent rescheduling.
-- Every plan should communicate whether it is believable, tight, fragile, or no longer holds.
+- Major deadline changes require confirmation or an explicit reviewed change flow.
+- Every plan should communicate whether it is believable, tight, needs protection, or no longer holds.
 
 ### Milestone
 
@@ -381,6 +417,7 @@ Rules:
 - Do not create a top-level Tasks tab.
 - One-Step Goals can appear in Today, Capture, Goals, Plan, and You when contextually useful.
 - Avoid `To-Do` as the primary Ambitions object name.
+- Mark Done, Move task, Park task, and Attach task to goal should prefer receipt + undo.
 
 ### Proof
 
@@ -447,6 +484,7 @@ Rules:
 
 - Major Plan Treaty and Goal Scope changes create Decision Trail entries.
 - Decision Trail is user-facing change history over Event Ledger / Action Closure / Plan Treaty decisions.
+- Destructive actions, external writes, and major deadline changes require confirmation.
 
 ### Receipt
 
@@ -490,6 +528,8 @@ Rules:
 - Receipts are trust objects, not generic toasts.
 - Meaningful commands should close with a receipt.
 - Sensitive receipts hide details by default.
+- Ordinary local reversible changes should prefer receipt + undo.
+- Delete memory, calendar write, destructive actions, external writes, and major deadline changes require confirmation.
 
 ### Review
 
@@ -548,6 +588,27 @@ Product-shape rule:
 The app stays deep, not wide.
 ```
 
+## Archive / Completion Archive
+
+Product/design language:
+
+```text
+Completion Archive
+```
+
+Normal UI language:
+
+```text
+Archive
+```
+
+Rules:
+
+- Archive preserves learning; it is not trash.
+- Completed goals remain visibly emphasized for 30 days by default.
+- Major completed goals may remain emphasized longer depending on importance.
+- Cancelled, No Longer Relevant, Merged, Replaced, and Parked histories should preserve reason, proof, and decision trail.
+
 ## Implementation Guardrails
 
 - Do not duplicate object relationship stores per surface.
@@ -569,9 +630,22 @@ The app stays deep, not wide.
 - User-facing standalone action language is Task; internal/design term is One-Step Goal.
 - A Task can exist without a Goal.
 
+## Resolved Wave 2 Questions
+
+- Internal `dropped` renders as `No Longer Relevant` in normal UI.
+- Cancelled and Dropped remain internally separate; launch UI may simplify.
+- Intentional goal ending action is `End Goal`, followed by a reason.
+- Intentional pause action is `Park Goal`; state is Parked.
+- Goal Weather is corrected through inputs, not direct manual override.
+- Internal Plan states can be strong; UI should use `Needs Protection` and `No Longer Holds`.
+- Destructive actions, external writes, and major deadline changes require confirmation.
+- Mark Done, Move task, Park task, Attach task to goal, Rename Life Area, and Change display density prefer receipt + undo.
+- Completed goals stay visibly emphasized for 30 days by default; major goals may remain emphasized longer.
+- Product/design language is Completion Archive; normal UI language is Archive.
+
 ## Open Questions For Future Waves
 
-- Which Goal states are visible to users on day one?
-- How much of Decision Trail is automatically created versus user-authored?
-- How long should undoable receipts remain undoable?
+- Which state changes should create a visible Decision Trail entry versus only a receipt?
+- How detailed should the End Goal reason picker be?
+- How long should undo remain available by action type?
 - Which memories require explicit confirmation before use?
