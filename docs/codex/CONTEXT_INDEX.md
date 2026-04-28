@@ -5,8 +5,9 @@ This file defines the standing source-of-truth hierarchy for future Ambitions wo
 ## Current Operating Truth
 
 - Product-decision Waves 1-19 are complete.
-- Current execution status remains: Batches 00-88 and D01-D04 are complete for planning purposes; D05 is the next dependency-safe implementation batch from the Design Constitution delta/alignment backlog.
+- Current execution status remains: Batches 00-88 and D01-D05 are complete for planning purposes; D06 / Smart Attachment Foundation is the next dependency-safe implementation batch from the Design Constitution delta/alignment backlog.
 - D04 Panel Size + Display Density foundation exists as shared design-system support; future batches own broad surface adoption.
+- D05 Receipt / Action Closure Search and Privacy Contract exists as a local-first receipt history/search foundation over existing Action Closure receipts, with typed filters, deterministic ordering, redacted/full-detail projections, privacy levels, safe-to-show flags, undo/proof/trust labels, and calm missing-detail fallback.
 - D01-D26 classification now lives in `docs/canon/ROADMAP_BATCH_CLASSIFICATION.md` and distinguishes launch-critical, soon-after-launch, post-launch, deferred, decision-gated, and infrastructure-unlock work.
 - Original Batches 89-120 remain future planned roadmap work only through the classifications and dependencies in `docs/canon/Ambitions_2_0_Roadmap_Merge_Audit.md`.
 - The locked top-level shell is `Today / Goals / Capture / Plan / You`.
@@ -105,4 +106,4 @@ Use these entry points instead of duplicating a separate active-doc list here:
 
 ## Next Operating Step
 
-Continue with D05 - Receipt / Action Closure Search and Privacy Contract unless the user explicitly changes the execution order.
+Continue with D06 - Smart Attachment Foundation unless the user explicitly changes the execution order.

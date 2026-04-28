@@ -269,6 +269,382 @@ struct ActionReceiptDisplaySummary: Sendable, Equatable, Identifiable {
     let safetyState: ActionReceiptSafetyState
 }
 
+enum ActionReceiptPrivacyLevel: String, Codable, Sendable, Equatable, Hashable, CaseIterable {
+    case safeToShow = "safe_to_show"
+    case privateItem = "private"
+    case sensitive
+    case redacted
+    case unavailable
+
+    var requiresRedactionByDefault: Bool {
+        switch self {
+        case .safeToShow:
+            return false
+        case .privateItem, .sensitive, .redacted, .unavailable:
+            return true
+        }
+    }
+}
+
+enum ActionReceiptProjectionDetail: String, Codable, Sendable, Equatable, Hashable, CaseIterable {
+    case fullDetail = "full_detail"
+    case redacted
+}
+
+enum ActionReceiptTrustStatus: String, Codable, Sendable, Equatable, Hashable, CaseIterable {
+    case safeToShow = "safe_to_show"
+    case needsReview = "needs_review"
+    case confirmationRequired = "confirmation_required"
+    case safeFailure = "safe_failure"
+    case missingDetail = "missing_detail"
+}
+
+enum ActionReceiptProofRelevance: String, Codable, Sendable, Equatable, Hashable, CaseIterable {
+    case notProof = "not_proof"
+    case mayCountAsProof = "may_count_as_proof"
+    case countsAsProof = "counts_as_proof"
+    case needsConfirmation = "needs_confirmation"
+}
+
+struct ActionReceiptHistoryRecord: Sendable, Equatable, Identifiable {
+    let receipt: ActionReceipt
+    let privacyLevel: ActionReceiptPrivacyLevel
+    let localOnly: Bool
+    let proofRelevance: ActionReceiptProofRelevance
+    let requiresConfirmationBeforeBroaderUse: Bool
+
+    init(
+        receipt: ActionReceipt,
+        privacyLevel: ActionReceiptPrivacyLevel = .safeToShow,
+        localOnly: Bool = true,
+        proofRelevance: ActionReceiptProofRelevance? = nil,
+        requiresConfirmationBeforeBroaderUse: Bool? = nil
+    ) {
+        self.receipt = receipt
+        self.privacyLevel = privacyLevel
+        self.localOnly = localOnly
+        self.proofRelevance = proofRelevance ?? Self.inferredProofRelevance(receipt)
+        self.requiresConfirmationBeforeBroaderUse = requiresConfirmationBeforeBroaderUse ?? Self.inferredConfirmationNeed(receipt)
+    }
+
+    var id: String { receipt.id }
+
+    var relatedGoalIDs: [String] {
+        relatedObjectIDs(kind: .goal)
+    }
+
+    var relatedCaptureIDs: [String] {
+        relatedObjectIDs(kind: .capture)
+    }
+
+    var relatedPlanItemIDs: [String] {
+        receipt.affectedObjects.filter { object in
+            object.sourceDomain == .plan || object.kind == .step || object.kind == .action
+        }.map(\.id).sorted()
+    }
+
+    var trustStatus: ActionReceiptTrustStatus {
+        if hasMissingDetail || privacyLevel == .unavailable {
+            return .missingDetail
+        }
+        if receipt.resultState == .needsConfirmation || receipt.safetyState == .confirmationRequired || requiresConfirmationBeforeBroaderUse {
+            return .confirmationRequired
+        }
+        if receipt.resultState == .failedSafely || receipt.safetyState == .safeFailure {
+            return .safeFailure
+        }
+        if receipt.correctionAvailability.isAvailable {
+            return .needsReview
+        }
+        return .safeToShow
+    }
+
+    var safeToShowInExternalSurface: Bool {
+        localOnly &&
+            privacyLevel == .safeToShow &&
+            receipt.safetyState == .normal &&
+            receipt.resultState != .needsConfirmation &&
+            requiresConfirmationBeforeBroaderUse == false
+    }
+
+    var hasMissingDetail: Bool {
+        receipt.summary.isEmpty ||
+            (receipt.changedFacts.isEmpty && receipt.safeFailure == nil && receipt.why == nil)
+    }
+
+    func projection(detail: ActionReceiptProjectionDetail) -> ActionReceiptSearchResult {
+        let shouldRedact = detail == .redacted || privacyLevel.requiresRedactionByDefault
+        let redactedTitle = privacyLevel == .unavailable || hasMissingDetail ? "Detail hidden" : "Private item"
+        let title = shouldRedact ? redactedTitle : receipt.title
+        let summary = shouldRedact ? redactedSummary : receipt.summary
+
+        return ActionReceiptSearchResult(
+            id: "receipt.search.\(receipt.id)",
+            receiptID: receipt.id,
+            title: title,
+            summary: summary,
+            resultState: receipt.resultState,
+            occurredAt: receipt.occurredAt,
+            sourceDomain: receipt.sourceDomain,
+            privacyLevel: shouldRedact ? .redacted : privacyLevel,
+            trustStatus: trustStatus,
+            proofRelevance: proofRelevance,
+            localOnly: localOnly,
+            safeToShowInExternalSurface: shouldRedact ? false : safeToShowInExternalSurface,
+            undoLabel: receipt.undoAvailability.isAvailable ? "Undo available" : "Undo not available",
+            proofLabel: proofLabel,
+            relatedObjectLabels: relatedObjectLabels,
+            changedFactSummaries: shouldRedact ? redactedChangedFactSummaries : receipt.changedFacts.map(\.summary),
+            hiddenDetailLabel: shouldRedact ? "Detail hidden" : nil
+        )
+    }
+
+    private var redactedSummary: String {
+        if privacyLevel == .unavailable || hasMissingDetail {
+            return "Detail hidden"
+        }
+        return "Private item"
+    }
+
+    private var redactedChangedFactSummaries: [String] {
+        if hasMissingDetail {
+            return ["Detail hidden"]
+        }
+        return receipt.changedFacts.isEmpty ? ["Detail hidden"] : receipt.changedFacts.map { _ in "Detail hidden" }
+    }
+
+    private var proofLabel: String {
+        switch proofRelevance {
+        case .notProof:
+            return "Receipt"
+        case .mayCountAsProof:
+            return "May count as proof"
+        case .countsAsProof:
+            return "Added to proof"
+        case .needsConfirmation:
+            return "Needs confirmation"
+        }
+    }
+
+    private var relatedObjectLabels: [String] {
+        receipt.affectedObjects.map { object in
+            switch object.kind {
+            case .goal:
+                return "Linked to goal"
+            case .capture:
+                return "Linked to capture"
+            case .step, .action:
+                return "Linked to plan"
+            case .proof, .evidence:
+                return "Linked to proof"
+            default:
+                return "Linked item"
+            }
+        }
+    }
+
+    private func relatedObjectIDs(kind: LifeGraphObjectKind) -> [String] {
+        receipt.affectedObjects.filter { $0.kind == kind }.map(\.id).sorted()
+    }
+
+    private static func inferredProofRelevance(_ receipt: ActionReceipt) -> ActionReceiptProofRelevance {
+        if receipt.resultState == .needsConfirmation {
+            return .needsConfirmation
+        }
+        if receipt.affectedObjects.contains(where: { $0.kind == .proof || $0.kind == .evidence }) ||
+            receipt.sourceDomain == .proof ||
+            receipt.changedFacts.contains(where: { $0.kind == .completedAction }) {
+            return .countsAsProof
+        }
+        if receipt.resultState == .completed {
+            return .mayCountAsProof
+        }
+        return .notProof
+    }
+
+    private static func inferredConfirmationNeed(_ receipt: ActionReceipt) -> Bool {
+        receipt.resultState == .needsConfirmation ||
+            receipt.safetyState == .confirmationRequired ||
+            receipt.undoAvailability == .requiresConfirmation ||
+            receipt.correctionAvailability == .availableWithReason
+    }
+}
+
+struct ActionReceiptSearchQuery: Sendable, Equatable {
+    let startDate: String?
+    let endDate: String?
+    let actionKinds: Set<ActionReceiptChangedFactKind>
+    let resultStates: Set<ActionReceiptResultState>
+    let relatedGoalID: String?
+    let relatedCaptureID: String?
+    let relatedPlanItemID: String?
+    let sourceDomains: Set<ActionReceiptSourceDomain>
+    let privacyLevels: Set<ActionReceiptPrivacyLevel>
+    let undoAvailability: Set<ActionReceiptUndoAvailability>
+    let trustStatuses: Set<ActionReceiptTrustStatus>
+    let proofRelevance: Set<ActionReceiptProofRelevance>
+    let searchText: String?
+    let limit: Int?
+    let projectionDetail: ActionReceiptProjectionDetail
+
+    init(
+        startDate: String? = nil,
+        endDate: String? = nil,
+        actionKinds: Set<ActionReceiptChangedFactKind> = [],
+        resultStates: Set<ActionReceiptResultState> = [],
+        relatedGoalID: String? = nil,
+        relatedCaptureID: String? = nil,
+        relatedPlanItemID: String? = nil,
+        sourceDomains: Set<ActionReceiptSourceDomain> = [],
+        privacyLevels: Set<ActionReceiptPrivacyLevel> = [],
+        undoAvailability: Set<ActionReceiptUndoAvailability> = [],
+        trustStatuses: Set<ActionReceiptTrustStatus> = [],
+        proofRelevance: Set<ActionReceiptProofRelevance> = [],
+        searchText: String? = nil,
+        limit: Int? = nil,
+        projectionDetail: ActionReceiptProjectionDetail = .redacted
+    ) {
+        self.startDate = ActionReceiptChangedFact.normalizedOptional(startDate)
+        self.endDate = ActionReceiptChangedFact.normalizedOptional(endDate)
+        self.actionKinds = actionKinds
+        self.resultStates = resultStates
+        self.relatedGoalID = ActionReceiptChangedFact.normalizedOptional(relatedGoalID)
+        self.relatedCaptureID = ActionReceiptChangedFact.normalizedOptional(relatedCaptureID)
+        self.relatedPlanItemID = ActionReceiptChangedFact.normalizedOptional(relatedPlanItemID)
+        self.sourceDomains = sourceDomains
+        self.privacyLevels = privacyLevels
+        self.undoAvailability = undoAvailability
+        self.trustStatuses = trustStatuses
+        self.proofRelevance = proofRelevance
+        self.searchText = ActionReceiptChangedFact.normalizedOptional(searchText)
+        self.limit = limit
+        self.projectionDetail = projectionDetail
+    }
+}
+
+struct ActionReceiptSearchResult: Sendable, Equatable, Identifiable {
+    let id: String
+    let receiptID: String
+    let title: String
+    let summary: String
+    let resultState: ActionReceiptResultState
+    let occurredAt: String
+    let sourceDomain: ActionReceiptSourceDomain
+    let privacyLevel: ActionReceiptPrivacyLevel
+    let trustStatus: ActionReceiptTrustStatus
+    let proofRelevance: ActionReceiptProofRelevance
+    let localOnly: Bool
+    let safeToShowInExternalSurface: Bool
+    let undoLabel: String
+    let proofLabel: String
+    let relatedObjectLabels: [String]
+    let changedFactSummaries: [String]
+    let hiddenDetailLabel: String?
+
+    var isRedacted: Bool {
+        hiddenDetailLabel != nil || privacyLevel == .redacted
+    }
+}
+
+struct ActionReceiptSearchProjection: Sendable, Equatable {
+    let query: ActionReceiptSearchQuery
+    let results: [ActionReceiptSearchResult]
+    let totalMatchCount: Int
+    let emptyTitle: String
+    let emptyDetail: String
+    let localOnly: Bool
+
+    var isEmpty: Bool {
+        results.isEmpty
+    }
+}
+
+struct ActionReceiptHistoryProjection: Sendable, Equatable {
+    let records: [ActionReceiptHistoryRecord]
+    let rejectedReceiptIDs: [String]
+
+    init(records: [ActionReceiptHistoryRecord]) {
+        var seen = Set<String>()
+        var accepted: [ActionReceiptHistoryRecord] = []
+        var rejected: [String] = []
+
+        for record in records {
+            guard record.receipt.isWellFormed, seen.insert(record.receipt.dedupeKey).inserted else {
+                rejected.append(record.receipt.id.isEmpty ? "malformed-receipt" : record.receipt.id)
+                continue
+            }
+            accepted.append(record)
+        }
+
+        self.records = accepted.sorted(by: Self.receiptSort)
+        self.rejectedReceiptIDs = rejected.sorted()
+    }
+
+    func search(_ query: ActionReceiptSearchQuery = ActionReceiptSearchQuery()) -> ActionReceiptSearchProjection {
+        let matched = records.filter { record in
+            matches(record, query: query)
+        }
+        let limited: [ActionReceiptHistoryRecord]
+        if let limit = query.limit {
+            limited = Array(matched.prefix(max(0, limit)))
+        } else {
+            limited = matched
+        }
+
+        return ActionReceiptSearchProjection(
+            query: query,
+            results: limited.map { $0.projection(detail: query.projectionDetail) },
+            totalMatchCount: matched.count,
+            emptyTitle: "Nothing matched",
+            emptyDetail: "Try a different filter.",
+            localOnly: true
+        )
+    }
+
+    private func matches(_ record: ActionReceiptHistoryRecord, query: ActionReceiptSearchQuery) -> Bool {
+        if let startDate = query.startDate, record.receipt.occurredAt < startDate { return false }
+        if let endDate = query.endDate, record.receipt.occurredAt > endDate { return false }
+        if query.actionKinds.isEmpty == false && record.receipt.changedFacts.contains(where: { query.actionKinds.contains($0.kind) }) == false { return false }
+        if query.resultStates.isEmpty == false && query.resultStates.contains(record.receipt.resultState) == false { return false }
+        if let relatedGoalID = query.relatedGoalID, record.relatedGoalIDs.contains(relatedGoalID) == false { return false }
+        if let relatedCaptureID = query.relatedCaptureID, record.relatedCaptureIDs.contains(relatedCaptureID) == false { return false }
+        if let relatedPlanItemID = query.relatedPlanItemID, record.relatedPlanItemIDs.contains(relatedPlanItemID) == false { return false }
+        if query.sourceDomains.isEmpty == false && query.sourceDomains.contains(record.receipt.sourceDomain) == false { return false }
+        if query.privacyLevels.isEmpty == false && query.privacyLevels.contains(record.privacyLevel) == false { return false }
+        if query.undoAvailability.isEmpty == false && query.undoAvailability.contains(record.receipt.undoAvailability) == false { return false }
+        if query.trustStatuses.isEmpty == false && query.trustStatuses.contains(record.trustStatus) == false { return false }
+        if query.proofRelevance.isEmpty == false && query.proofRelevance.contains(record.proofRelevance) == false { return false }
+        if let searchText = query.searchText, record.searchIndex.contains(searchText.lowercased()) == false { return false }
+        return true
+    }
+
+    private static func receiptSort(_ lhs: ActionReceiptHistoryRecord, _ rhs: ActionReceiptHistoryRecord) -> Bool {
+        if lhs.receipt.occurredAt != rhs.receipt.occurredAt {
+            return lhs.receipt.occurredAt > rhs.receipt.occurredAt
+        }
+        if lhs.receipt.createdAt != rhs.receipt.createdAt {
+            return lhs.receipt.createdAt > rhs.receipt.createdAt
+        }
+        return lhs.receipt.id < rhs.receipt.id
+    }
+}
+
+private extension ActionReceiptHistoryRecord {
+    var searchIndex: String {
+        ([
+            receipt.id,
+            receipt.title,
+            receipt.summary,
+            receipt.sourceDomain.rawValue,
+            receipt.resultState.rawValue
+        ] + receipt.changedFacts.flatMap { fact in
+            [fact.kind.rawValue, fact.summary, fact.fieldName, fact.previousValueSummary, fact.newValueSummary].compactMap { $0 }
+        } + receipt.affectedObjects.flatMap { object in
+            [object.kind.rawValue, object.id, object.label, object.sourceDomain?.rawValue].compactMap { $0 }
+        }).joined(separator: " ").lowercased()
+    }
+}
+
 struct ActionReceipt: Codable, Sendable, Equatable, Hashable, Identifiable {
     let id: String
     let resultState: ActionReceiptResultState
@@ -454,6 +830,36 @@ struct ActionReceiptProjection: Sendable, Equatable {
         let summaries = receipts.map(\.displaySummary)
         guard let limit else { return summaries }
         return Array(summaries.prefix(max(0, limit)))
+    }
+
+    func historyProjection(
+        privacyByReceiptID: [String: ActionReceiptPrivacyLevel] = [:],
+        localOnlyByReceiptID: [String: Bool] = [:],
+        proofRelevanceByReceiptID: [String: ActionReceiptProofRelevance] = [:]
+    ) -> ActionReceiptHistoryProjection {
+        ActionReceiptHistoryProjection(
+            records: receipts.map { receipt in
+                ActionReceiptHistoryRecord(
+                    receipt: receipt,
+                    privacyLevel: privacyByReceiptID[receipt.id] ?? .safeToShow,
+                    localOnly: localOnlyByReceiptID[receipt.id] ?? true,
+                    proofRelevance: proofRelevanceByReceiptID[receipt.id]
+                )
+            }
+        )
+    }
+
+    func searchReceipts(
+        _ query: ActionReceiptSearchQuery = ActionReceiptSearchQuery(),
+        privacyByReceiptID: [String: ActionReceiptPrivacyLevel] = [:],
+        localOnlyByReceiptID: [String: Bool] = [:],
+        proofRelevanceByReceiptID: [String: ActionReceiptProofRelevance] = [:]
+    ) -> ActionReceiptSearchProjection {
+        historyProjection(
+            privacyByReceiptID: privacyByReceiptID,
+            localOnlyByReceiptID: localOnlyByReceiptID,
+            proofRelevanceByReceiptID: proofRelevanceByReceiptID
+        ).search(query)
     }
 
     func relationshipProjection(for object: LifeGraphObjectReference) -> LifeGraphRelationshipProjection {

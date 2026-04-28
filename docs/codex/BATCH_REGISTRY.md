@@ -46,7 +46,7 @@ Use [../canon/Ambitions_2_0_Batch_Plan.md](../canon/Ambitions_2_0_Batch_Plan.md)
 
 ## Active Queue
 
-Current execution status: Ambitions 2.0 post-Batch-60 canon is adopted. Batches 00-88 and D01-D04 are complete for planning purposes. D05 is the next dependency-safe implementation batch from the Design Constitution delta/alignment backlog. Original Batches 89-120 remain future planned roadmap work only through the classifications and dependencies in [../canon/Ambitions_2_0_Roadmap_Merge_Audit.md](../canon/Ambitions_2_0_Roadmap_Merge_Audit.md).
+Current execution status: Ambitions 2.0 post-Batch-60 canon is adopted. Batches 00-88 and D01-D05 are complete for planning purposes. D06 / Smart Attachment Foundation is the next dependency-safe implementation batch from the Design Constitution delta/alignment backlog. Original Batches 89-120 remain future planned roadmap work only through the classifications and dependencies in [../canon/Ambitions_2_0_Roadmap_Merge_Audit.md](../canon/Ambitions_2_0_Roadmap_Merge_Audit.md).
 
 Docs-only reconciliation note: Design Constitution canon reconciliation was performed as a user-directed canon/design-system integration pass after Batch 88 planning status. It created the active design constitution and supporting matrices/specs without starting Batch 89 feature work, changing branch, changing app code, or claiming future implementation completion.
 
@@ -106,7 +106,7 @@ These rows are planned future implementation work from the Design Constitution i
 | D02 | Shared Object Terminology Cleanup | Completed | Added [../canon/Ambitions_2_0_Object_Terminology.md](../canon/Ambitions_2_0_Object_Terminology.md), aligned active docs/source copy, and locked Task vs Step terminology. |
 | D03 | GroupedNavigationList Component | Completed | Added shared `GroupedNavigationList` component foundation with sectioned navigation, disclosure, preference, status, and destructive action rows. No major app surface adoption or redesign was performed. Validated with XcodeGen generation, simulator build, focused D03 tests, and stabilization follow-up on iPhone 17. |
 | D04 | Panel Size + Display Density | Completed | Added shared Display Density and Panel Size design-system foundation with default Balanced + Comfortable, reusable panel decision helpers, 3x3 preview matrix coverage, and focused D04 tests. Validated with XcodeGen generation, simulator build, focused D04 tests, full `AmbitionsTests`, and no major app surface adoption or redesign. |
-| D05 | Receipt / Action Closure Search and Privacy Contract | Planned | Receipt search/history and redaction foundation. |
+| D05 | Receipt / Action Closure Search and Privacy Contract | Completed | Added a local-first receipt/action-closure history and search contract over existing Action Closure receipts, including typed filters, deterministic sorting, full-detail vs redacted projections, privacy levels, safe-to-show flags, undo/proof/trust/missing-detail labels, and focused D05 coverage. Validated with `xcodegen generate`, simulator build, focused receipt/action-closure tests, and full `AmbitionsTests` on iPhone 17. |
 | D06 | Smart Attachment Foundation | Planned | Depends on D02, D05, Command Pipeline, and Capture. |
 | D07 | Life Areas Overview / Atlas Object Model | Planned | Depends on D02 and Life Graph. |
 | D08 | North Stars / Dormant Ambitions Object Model | Planned | Depends on D07. |

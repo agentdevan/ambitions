@@ -263,6 +263,215 @@ final class ActionClosureReceiptModelsTests: XCTestCase {
         XCTAssertEqual(receipt.safeFailure?.whyFailed, "plan_calendar_writer_required")
         XCTAssertEqual(receipt.safeFailure?.unchangedFacts, ["No calendar, export, sync, external surface, or unsupported app data was changed."])
     }
+
+    func testReceiptHistorySearchFiltersSortsAndLimitsDeterministically() {
+        let goal = object(.goal, "goal-1", label: "Launch app", sourceDomain: .goals)
+        let capture = object(.capture, "capture-1", label: "Release checklist", sourceDomain: .capture)
+        let planItem = object(.action, "plan-item-1", label: "Finish proof", sourceDomain: .plan)
+        let older = receipt(
+            id: "receipt-older",
+            resultState: .attached,
+            title: "Attached",
+            occurredAt: "2026-04-26T09:00:00Z",
+            affectedObjects: [goal, capture],
+            changedFacts: [
+                ActionReceiptChangedFact(
+                    id: "fact-attached",
+                    kind: .attachedCaptureToGoal,
+                    object: capture,
+                    summary: "Linked to goal."
+                )
+            ],
+            sourceDomain: .capture,
+            undoAvailability: .availableLocal
+        )
+        let matchingNewerB = receipt(
+            id: "receipt-b",
+            resultState: .completed,
+            title: "Finished proof",
+            occurredAt: "2026-04-26T12:00:00Z",
+            affectedObjects: [goal, planItem],
+            changedFacts: [
+                ActionReceiptChangedFact(
+                    id: "fact-completed-b",
+                    kind: .completedAction,
+                    object: planItem,
+                    summary: "Saved proof for launch."
+                )
+            ],
+            sourceDomain: .plan,
+            undoAvailability: .requiresConfirmation
+        )
+        let matchingNewerA = receipt(
+            id: "receipt-a",
+            resultState: .completed,
+            title: "Finished step",
+            occurredAt: "2026-04-26T12:00:00Z",
+            affectedObjects: [goal, planItem],
+            changedFacts: [
+                ActionReceiptChangedFact(
+                    id: "fact-completed-a",
+                    kind: .completedAction,
+                    object: planItem,
+                    summary: "Step done."
+                )
+            ],
+            sourceDomain: .plan,
+            undoAvailability: .requiresConfirmation
+        )
+
+        let projection = ActionReceiptProjection(receipts: [older, matchingNewerB, matchingNewerA])
+        let search = projection.searchReceipts(
+            ActionReceiptSearchQuery(
+                startDate: "2026-04-26T10:00:00Z",
+                actionKinds: [.completedAction],
+                relatedGoalID: "goal-1",
+                relatedPlanItemID: "plan-item-1",
+                sourceDomains: [.plan],
+                undoAvailability: [.requiresConfirmation],
+                searchText: "saved proof",
+                limit: 1,
+                projectionDetail: .fullDetail
+            )
+        )
+
+        XCTAssertEqual(search.totalMatchCount, 1)
+        XCTAssertEqual(search.results.map(\.receiptID), ["receipt-b"])
+        XCTAssertEqual(search.results.first?.title, "Finished proof")
+        XCTAssertEqual(search.results.first?.undoLabel, "Undo available")
+        XCTAssertEqual(search.results.first?.proofLabel, "Added to proof")
+        XCTAssertTrue(search.localOnly)
+    }
+
+    func testReceiptHistorySearchUsesStableTieBreakOrdering() {
+        let goal = object(.goal, "goal-1", label: "Launch app", sourceDomain: .goals)
+        let receiptB = receipt(
+            id: "receipt-b",
+            resultState: .changed,
+            title: "Changed B",
+            occurredAt: "2026-04-26T12:00:00Z",
+            affectedObjects: [goal],
+            changedFacts: [
+                ActionReceiptChangedFact(id: "fact-b", kind: .changedField, object: goal, summary: "Changed B.")
+            ]
+        )
+        let receiptA = receipt(
+            id: "receipt-a",
+            resultState: .changed,
+            title: "Changed A",
+            occurredAt: "2026-04-26T12:00:00Z",
+            affectedObjects: [goal],
+            changedFacts: [
+                ActionReceiptChangedFact(id: "fact-a", kind: .changedField, object: goal, summary: "Changed A.")
+            ]
+        )
+
+        let results = ActionReceiptProjection(receipts: [receiptB, receiptA])
+            .searchReceipts(ActionReceiptSearchQuery(projectionDetail: .fullDetail))
+            .results
+
+        XCTAssertEqual(results.map(\.receiptID), ["receipt-a", "receipt-b"])
+    }
+
+    func testReceiptHistoryRedactsPrivateSensitiveAndMissingDetails() {
+        let goal = object(.goal, "goal-private", label: "Private launch goal", sourceDomain: .goals)
+        let privateReceipt = receipt(
+            id: "receipt-private",
+            resultState: .changed,
+            title: "Private wording changed",
+            affectedObjects: [goal],
+            changedFacts: [
+                ActionReceiptChangedFact(
+                    id: "fact-private",
+                    kind: .changedField,
+                    object: goal,
+                    fieldName: "title",
+                    previousValueSummary: "Old private wording",
+                    newValueSummary: "New private wording",
+                    summary: "Private goal wording changed."
+                )
+            ],
+            undoAvailability: .availableLocal
+        )
+        let missingDetail = receipt(
+            id: "receipt-missing",
+            resultState: .changed,
+            title: "Changed",
+            affectedObjects: [goal]
+        )
+
+        let projection = ActionReceiptProjection(receipts: [privateReceipt, missingDetail])
+        let results = projection.searchReceipts(
+            ActionReceiptSearchQuery(projectionDetail: .redacted),
+            privacyByReceiptID: [
+                "receipt-private": .sensitive,
+                "receipt-missing": .unavailable
+            ]
+        ).results
+
+        let privateResult = results.first { $0.receiptID == "receipt-private" }
+        let missingResult = results.first { $0.receiptID == "receipt-missing" }
+
+        XCTAssertEqual(privateResult?.title, "Private item")
+        XCTAssertEqual(privateResult?.summary, "Private item")
+        XCTAssertEqual(privateResult?.changedFactSummaries, ["Detail hidden"])
+        XCTAssertEqual(privateResult?.hiddenDetailLabel, "Detail hidden")
+        XCTAssertEqual(privateResult?.privacyLevel, .redacted)
+        XCTAssertEqual(privateResult?.safeToShowInExternalSurface, false)
+        XCTAssertEqual(missingResult?.title, "Detail hidden")
+        XCTAssertEqual(missingResult?.summary, "Detail hidden")
+        XCTAssertEqual(missingResult?.trustStatus, .missingDetail)
+    }
+
+    func testReceiptHistoryDistinguishesFullDetailFromRedactedProjection() {
+        let capture = object(.capture, "capture-1", label: "Release checklist", sourceDomain: .capture)
+        let receipt = receipt(
+            id: "receipt-safe",
+            resultState: .created,
+            title: "Saved",
+            affectedObjects: [capture],
+            changedFacts: [
+                ActionReceiptChangedFact(id: "fact-created", kind: .createdCapture, object: capture, summary: "Saved checklist.")
+            ],
+            sourceDomain: .capture,
+            undoAvailability: .availableLocal
+        )
+        let projection = ActionReceiptProjection(receipts: [receipt])
+
+        let full = projection.searchReceipts(ActionReceiptSearchQuery(projectionDetail: .fullDetail)).results.first
+        let redacted = projection.searchReceipts(ActionReceiptSearchQuery(projectionDetail: .redacted)).results.first
+
+        XCTAssertEqual(full?.title, "Saved")
+        XCTAssertEqual(full?.summary, "Saved summary.")
+        XCTAssertEqual(full?.privacyLevel, .safeToShow)
+        XCTAssertEqual(full?.isRedacted, false)
+        XCTAssertEqual(redacted?.title, "Private item")
+        XCTAssertEqual(redacted?.summary, "Private item")
+        XCTAssertEqual(redacted?.privacyLevel, .redacted)
+        XCTAssertEqual(redacted?.isRedacted, true)
+    }
+
+    func testReceiptHistoryEmptySearchReturnsCalmLocalOnlyFallback() {
+        let capture = object(.capture, "capture-1", label: "Release checklist", sourceDomain: .capture)
+        let projection = ActionReceiptProjection(receipts: [
+            receipt(
+                id: "receipt-safe",
+                resultState: .created,
+                title: "Saved",
+                affectedObjects: [capture],
+                changedFacts: [
+                    ActionReceiptChangedFact(id: "fact-created", kind: .createdCapture, object: capture, summary: "Saved checklist.")
+                ]
+            )
+        ])
+
+        let search = projection.searchReceipts(ActionReceiptSearchQuery(relatedGoalID: "missing-goal"))
+
+        XCTAssertTrue(search.isEmpty)
+        XCTAssertEqual(search.emptyTitle, "Nothing matched")
+        XCTAssertEqual(search.emptyDetail, "Try a different filter.")
+        XCTAssertTrue(search.localOnly)
+    }
 }
 
 private extension ActionClosureReceiptModelsTests {
@@ -286,6 +495,8 @@ private extension ActionClosureReceiptModelsTests {
         title: String,
         occurredAt: String = "2026-04-26T12:00:00Z",
         affectedObjects: [LifeGraphObjectReference],
+        changedFacts: [ActionReceiptChangedFact] = [],
+        sourceDomain: ActionReceiptSourceDomain = .system,
         correctionAvailability: ActionReceiptCorrectionAvailability = .unavailable,
         undoAvailability: ActionReceiptUndoAvailability = .unavailable
     ) -> ActionReceipt {
@@ -294,9 +505,10 @@ private extension ActionClosureReceiptModelsTests {
             resultState: resultState,
             title: title,
             summary: "\(title) summary.",
-            sourceDomain: .system,
+            sourceDomain: sourceDomain,
             occurredAt: occurredAt,
             affectedObjects: affectedObjects,
+            changedFacts: changedFacts,
             correctionAvailability: correctionAvailability,
             undoAvailability: undoAvailability
         )

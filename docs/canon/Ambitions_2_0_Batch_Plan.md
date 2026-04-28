@@ -187,7 +187,7 @@ The repo-wide implementation gap audit lives in [Ambitions_2_0_Implementation_Ga
 | D02 | Shared Object Terminology Cleanup | D01 | Completed |
 | D03 | GroupedNavigationList Component | shared component primitives | Planned |
 | D04 | Panel Size + Display Density | shared component primitives | Completed |
-| D05 | Receipt / Action Closure Search and Privacy Contract | Action Closure v1 | Planned |
+| D05 | Receipt / Action Closure Search and Privacy Contract | Action Closure v1 | Completed |
 | D06 | Smart Attachment Foundation | D02, D05, Command Pipeline, Capture | Planned |
 | D07 | Life Areas Overview / Atlas Object Model | D02, Life Graph | Planned |
 | D08 | North Stars / Dormant Ambitions Object Model | D07 | Planned |
@@ -461,7 +461,7 @@ Every batch definition below inherits the required template:
 - Performance budget, accessibility requirement, no-fake-precision boundary, indispensability scenario improved.
 - Likely files/areas affected, dependencies, out-of-scope items, validation requirements, concrete acceptance criteria, and ready-to-paste Codex prompt.
 
-The compact batch definitions below preserve the original Batch 61-120 roadmap sequencing. Current execution status after the Design Constitution delta backlog, D01 shell alignment, D02 terminology cleanup, D03 grouped navigation foundation, D04 panel density/size foundation, and roadmap merge audit: Batches 00-88 and D01-D04 are complete for planning purposes, D05 is the next dependency-safe implementation batch, and original Batches 89-120 remain future planned roadmap work only through the classifications and sequencing in [Ambitions_2_0_Roadmap_Merge_Audit.md](Ambitions_2_0_Roadmap_Merge_Audit.md). Ready prompts for completed batches are retained as historical implementation prompts, not current execution state.
+The compact batch definitions below preserve the original Batch 61-120 roadmap sequencing. Current execution status after the Design Constitution delta backlog, D01 shell alignment, D02 terminology cleanup, D03 grouped navigation foundation, D04 panel density/size foundation, D05 receipt/action-closure search and privacy foundation, and roadmap merge audit: Batches 00-88 and D01-D05 are complete for planning purposes, D06 is the next dependency-safe implementation batch, and original Batches 89-120 remain future planned roadmap work only through the classifications and sequencing in [Ambitions_2_0_Roadmap_Merge_Audit.md](Ambitions_2_0_Roadmap_Merge_Audit.md). Ready prompts for completed batches are retained as historical implementation prompts, not current execution state.
 
 ## Phase A - Daily Value, Shell, Activation
 
