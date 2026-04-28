@@ -6,12 +6,33 @@ Status: Active supporting design canon.
 
 - Calm, adult, specific, non-shaming, clear, direct, emotionally safe, action-oriented.
 - Prefer concrete next steps over abstract encouragement.
+- Prefer plain human language over branded, strategic, or AI-coded language.
 - Use truthful capability language: stored locally, requires confirmation, manual fallback available, future planned, unavailable, not verified, suggested not applied.
-- Ambitions is an intelligent product, not an AI product.
+- Ambitions may be intelligent internally, but normal UI should not sound like an AI product.
+- Follow [../HUMAN_LANGUAGE_REVIEW.md](../HUMAN_LANGUAGE_REVIEW.md) for user-facing language cleanup.
 
-## Disallowed Language
+## Plain Language Rule
+
+Normal UI should sound like a calm person helping the user decide what to do.
+
+Prefer:
+
+- `Do this next`.
+- `Most important today`.
+- `Too much for today`.
+- `Make today doable`.
+- `Move this later`.
+- `Keep this on today`.
+- `What should stay on today?`.
+- `Looks doable`.
+- `No longer works`.
+- `Nothing moved automatically`.
+
+Avoid in normal UI:
 
 - `AI Explanation`, `AI Confidence`, `Model Reasoning`, `Fix AI`.
+- `protected`, `protection`, or `protect` unless the feature is literally about privacy/security.
+- `anchor`, `execution context`, `optimization`, `leverage`, `intelligent system`, `engine`, `graph`, `model`, or `confidence`.
 - `ADHD Mode`; use `Focus Support`.
 - Shame language such as failed, lazy, behind again, streak lost.
 - Claims of verified accessibility, sync, cloud memory, silent automation, or production platform support without evidence.
@@ -20,7 +41,7 @@ Status: Active supporting design canon.
 
 - Verb-led.
 - 1-3 words where possible.
-- Exact labels for meaningful actions: `Start`, `Move This`, `Park`, `Mark Done`, `Open Plan`, `Save the Day`, `Change Route`, `Attach`.
+- Exact labels for meaningful actions: `Start`, `Move This`, `Move Later`, `Keep This`, `Park`, `Mark Done`, `Open Plan`, `Save the Day`, `Make Today Doable`, `Change Route`, `Attach`.
 - `OK`, `Continue`, or `Done` only when harmless and no semantic action is hidden.
 
 ## Capture Receipts
@@ -36,12 +57,20 @@ Status: Active supporting design canon.
 
 - `Save the Day`.
 - `Save the Week`.
+- `Make Today Doable`.
 - `Make Lighter`.
-- `Move This`.
-- `Protect Later`.
+- `Move This Later`.
+- `Keep This On Today`.
 - `Needs a New Place`.
 - `Drifted`.
 - `Not Today`.
+
+Avoid:
+
+- `Protect Later`.
+- `Protect This`.
+- `Needs Protection`.
+- `Protected block`.
 
 ## Trust / Explanation Labels
 
@@ -94,16 +123,17 @@ Status: Active supporting design canon.
 
 - Sparse, calm, operational, and privacy-aware.
 - Hide sensitive goal names by default.
-- Examples: `Your next step is ready`, `A protected block is starting`, `Open Plan to adjust today`.
+- Examples: `Do this next`, `Time for your next step`, `Open Plan to adjust today`, `Private item`.
+- Avoid: `A protected block is starting`, `Your execution context changed`, `AI found an issue`, `Your plan is fragile`.
 
 ## Density-Scaled Copy Examples
 
 - Minimal: `Next: Draft outline`.
-- Balanced: `Next: Draft outline. It protects your Career goal today.`
-- Detailed: `Next: Draft outline. It protects Become an Astronaut, fits the open 45-minute window, and creates proof for this week.`
+- Balanced: `Next: Draft outline. It fits today.`
+- Detailed: `Next: Draft outline. It fits the open 45-minute window and helps move your goal forward this week.`
 
 ## Expertise-Scaled Copy Examples
 
 - New user: `This is suggested because it fits today.`
-- Returning user: `Suggested because this goal needs proof this week.`
+- Returning user: `Suggested because this goal needs a real step this week.`
 - Expert/deep view: `Based on your plan, deadline pressure, and open window.`
