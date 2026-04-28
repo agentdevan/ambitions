@@ -12,6 +12,8 @@ For current canon ownership and consolidation, read:
   Active document ownership map and source-of-truth reading order. Use this before non-trivial product, design, roadmap, or implementation work.
 - [canon/PRODUCT_DECISIONS.md](canon/PRODUCT_DECISIONS.md)
   Active product decision log for question waves and ambiguity resolution.
+- [canon/AMBITION_CANON_COMPLETION_REPORT.md](canon/AMBITION_CANON_COMPLETION_REPORT.md)
+  Final canon completion report for Waves 1-19, including settled canon, open questions, no-drift rules, archive candidates, and the next Codex reconciliation prompt.
 - [canon/CANON_CONSOLIDATION_GAP_AUDIT.md](canon/CANON_CONSOLIDATION_GAP_AUDIT.md)
   Documentation architecture audit showing what already existed, what was consolidated, and what still needs product decisions.
 
@@ -30,6 +32,8 @@ For the current free Codex workflow, also read:
   Active source-of-truth map and reading order.
 - [canon/PRODUCT_DECISIONS.md](canon/PRODUCT_DECISIONS.md)
   Active product decision log for resolved product-definition waves.
+- [canon/AMBITION_CANON_COMPLETION_REPORT.md](canon/AMBITION_CANON_COMPLETION_REPORT.md)
+  Final canon completion report and next reconciliation prompt.
 - [../MASTER_PRODUCT_SPEC.md](../MASTER_PRODUCT_SPEC.md)
   Current shipping product truth.
 - [canon/design/Ambitions_Design_Constitution.md](canon/design/Ambitions_Design_Constitution.md)
@@ -66,6 +70,7 @@ For the current free Codex workflow, also read:
 These focused docs extract already-existing doctrine into implementation-readable references. They clarify the active canon; they do not create a parallel roadmap.
 
 - [canon/PRODUCT_DECISIONS.md](canon/PRODUCT_DECISIONS.md)
+- [canon/AMBITION_CANON_COMPLETION_REPORT.md](canon/AMBITION_CANON_COMPLETION_REPORT.md)
 - [canon/CANON_CONSOLIDATION_GAP_AUDIT.md](canon/CANON_CONSOLIDATION_GAP_AUDIT.md)
 - [canon/DOMAIN_MODEL.md](canon/DOMAIN_MODEL.md)
 - [canon/GOAL_PLAN_TASK_LIFECYCLE.md](canon/GOAL_PLAN_TASK_LIFECYCLE.md)
