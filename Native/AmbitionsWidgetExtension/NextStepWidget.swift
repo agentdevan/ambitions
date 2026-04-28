@@ -42,7 +42,7 @@ struct NextStepProvider: TimelineProvider {
                     today: ExternalSurfaceVariantState(
                         kind: .today,
                         title: "Today has a next move",
-                        detail: "Your next move is still believable.",
+                        detail: "Your next move still looks doable.",
                         privacySummary: "Glance-safe next move only",
                         action: ExternalSurfaceVariantAction(title: "Open Today", surface: .tab, tab: "today"),
                         reference: ExternalSurfaceActionReference(goalID: "goal-placeholder", stepID: "step-placeholder"),
@@ -50,8 +50,8 @@ struct NextStepProvider: TimelineProvider {
                     ),
                     focus: ExternalSurfaceVariantState(
                         kind: .focus,
-                        title: "Focus step ready",
-                        detail: "A bounded focus step is available.",
+                        title: "Focus time ready",
+                        detail: "A small focus step is available.",
                         privacySummary: "Details stay inside Ambitions",
                         action: ExternalSurfaceVariantAction(title: "Open Focus", surface: .tab, tab: "today"),
                         reference: ExternalSurfaceActionReference(goalID: "goal-placeholder", stepID: "step-placeholder"),
@@ -60,7 +60,7 @@ struct NextStepProvider: TimelineProvider {
                     goal: ExternalSurfaceVariantState(
                         kind: .goal,
                         title: "1 active goal",
-                        detail: "Momentum is readable from your local plan.",
+                        detail: "Progress comes from your local plan.",
                         privacySummary: "Goal names stay private here",
                         action: ExternalSurfaceVariantAction(title: "Open Goals", surface: .tab, tab: "goals"),
                         reference: ExternalSurfaceActionReference(goalID: "goal-placeholder", stepID: "step-placeholder"),
@@ -68,8 +68,8 @@ struct NextStepProvider: TimelineProvider {
                     ),
                     plan: ExternalSurfaceVariantState(
                         kind: .plan,
-                        title: "Week is holding",
-                        detail: "The week can be shaped from the latest local state.",
+                        title: "Week looks doable",
+                        detail: "Open Plan to adjust the week from your latest local state.",
                         privacySummary: "Plan detail opens in app",
                         action: ExternalSurfaceVariantAction(title: "Open Plan", surface: .tab, tab: "plan"),
                         reference: ExternalSurfaceActionReference(goalID: "goal-placeholder", stepID: "step-placeholder"),
@@ -321,7 +321,7 @@ private struct NextStepWidgetView: View {
         }
         switch glance.todayPosture {
         case .waiting:
-            return "Open Ambitions for the safest next move."
+            return "Open Ambitions for the next useful move."
         case .empty:
             return "Open Ambitions to refresh your plan."
         case .active, .recovery:
@@ -399,9 +399,9 @@ private struct NextStepWidgetView: View {
         case .steady:
             return "Steady"
         case .elevated:
-            return "Elevated pressure"
+            return "Getting tight"
         case .overloaded:
-            return "Needs triage"
+            return "Too much planned"
         }
     }
 
@@ -412,9 +412,9 @@ private struct NextStepWidgetView: View {
         case .steady:
             return "Now"
         case .elevated:
-            return "Shape"
+            return "Tight"
         case .overloaded:
-            return "Triage"
+            return "Too much"
         }
     }
 }
