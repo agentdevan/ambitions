@@ -321,6 +321,23 @@ Adoption date: 2026-04-27
 
 ---
 
+# Wave 17 — Launch Scope, MVP, And Quality Bar
+
+Adoption date: 2026-04-27
+
+- Launch should prove Ambitions can organize one meaningful goal into a believable execution system.
+- Launch should not include every canon idea.
+- Launch quality bar: stable, understandable, useful, and trustworthy.
+- Fewer complete loops are better than more partial features.
+- Do not ship fake AI, broken sync claims, unclear data controls, or dead-end flows.
+- Advanced canon may remain planned.
+- Launch acceptance requires core loop, empty states, error states, accessibility, and privacy truth.
+- MVP must never mean ugly, untrustworthy, incomplete core loop, or confusing.
+- Delay sync, advanced memory, widgets / Live Activities, and native AI-style suggestions if not excellent.
+- Launch north star: prove Ambitions can make a meaningful goal feel organized, believable, and actionable.
+
+---
+
 # Active Follow-Up Targets
 
 These decisions should be reflected in:
@@ -343,4 +360,5 @@ These decisions should be reflected in:
 - `docs/canon/EXTERNAL_SURFACES_NOTIFICATIONS_WIDGETS.md`
 - `docs/canon/DATA_LOCAL_SYNC_EXPORT.md`
 - `docs/canon/MONETIZATION_PRICING_BUSINESS_MODEL.md`
-- future batch prompts involving onboarding, IA, navigation, drilldown, breadcrumbs, tabs, Life Areas, Capture routing, Today, Now State, empty states, recovery, best next action, Goals, Goal Detail, Goal Weather, Proof, Plan, calendar-aware planning, believability, daily schedule, rituals, You, Profile migration, Settings, Reviews, Trust Center, Appearance Studio, intelligence, suggestions, automation, visual system, components, motion, accessibility, Focus Support, external surfaces, notifications, widgets, Live Activities, App Intents, Shortcuts, data controls, local-first behavior, sync, export/import, monetization, pricing, free tier, paid tier, receipts, sensitive Life Areas, privacy controls, Smart Attachment, Needs a Place, or Capture input behavior.
+- `docs/canon/LAUNCH_SCOPE_MVP_QUALITY_BAR.md`
+- future batch prompts involving launch scope, MVP, acceptance gates, quality bar, onboarding, IA, navigation, drilldown, breadcrumbs, tabs, Life Areas, Capture routing, Today, Now State, empty states, recovery, best next action, Goals, Goal Detail, Goal Weather, Proof, Plan, calendar-aware planning, believability, daily schedule, rituals, You, Profile migration, Settings, Reviews, Trust Center, Appearance Studio, intelligence, suggestions, automation, visual system, components, motion, accessibility, Focus Support, external surfaces, notifications, widgets, Live Activities, App Intents, Shortcuts, data controls, local-first behavior, sync, export/import, monetization, pricing, free tier, paid tier, receipts, sensitive Life Areas, privacy controls, Smart Attachment, Needs a Place, or Capture input behavior.
