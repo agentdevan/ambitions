@@ -6,6 +6,7 @@ This folder contains active Ambitions canon plus preserved historical support do
 
 - [SOURCE_OF_TRUTH_MAP.md](SOURCE_OF_TRUTH_MAP.md)
 - [PRODUCT_DECISIONS.md](PRODUCT_DECISIONS.md)
+- [AMBITION_CANON_COMPLETION_REPORT.md](AMBITION_CANON_COMPLETION_REPORT.md)
 - [../../MASTER_PRODUCT_SPEC.md](../../MASTER_PRODUCT_SPEC.md)
 - [design/Ambitions_Design_Constitution.md](design/Ambitions_Design_Constitution.md)
 - [Ambitions_2_0_Master_Plan.md](Ambitions_2_0_Master_Plan.md)
@@ -25,6 +26,7 @@ These docs extract existing canon into narrower implementation-readable specs. T
 
 - [SOURCE_OF_TRUTH_MAP.md](SOURCE_OF_TRUTH_MAP.md)
 - [PRODUCT_DECISIONS.md](PRODUCT_DECISIONS.md)
+- [AMBITION_CANON_COMPLETION_REPORT.md](AMBITION_CANON_COMPLETION_REPORT.md)
 - [CANON_CONSOLIDATION_GAP_AUDIT.md](CANON_CONSOLIDATION_GAP_AUDIT.md)
 - [DOMAIN_MODEL.md](DOMAIN_MODEL.md)
 - [GOAL_PLAN_TASK_LIFECYCLE.md](GOAL_PLAN_TASK_LIFECYCLE.md)
