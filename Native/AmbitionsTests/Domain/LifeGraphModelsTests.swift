@@ -205,6 +205,7 @@ final class LifeGraphModelsTests: XCTestCase {
             .goal,
             .action,
             .step,
+            .oneStepGoal,
             .capture,
             .commitment,
             .waitingItem,
@@ -217,7 +218,7 @@ final class LifeGraphModelsTests: XCTestCase {
         ]))
         XCTAssertTrue(LifeGraphObjectKind.ambition.isPlaceholderOnlyInV1)
         XCTAssertTrue(LifeGraphObjectKind.path.isPlaceholderOnlyInV1)
-        XCTAssertTrue(LifeGraphObjectKind.oneStepGoal.isPlaceholderOnlyInV1)
+        XCTAssertFalse(LifeGraphObjectKind.oneStepGoal.isPlaceholderOnlyInV1)
         XCTAssertTrue(LifeGraphObjectKind.commitment.isPlaceholderOnlyInV1)
         XCTAssertTrue(LifeGraphObjectKind.waitingItem.isPlaceholderOnlyInV1)
         XCTAssertTrue(LifeGraphObjectKind.proof.isPlaceholderOnlyInV1)

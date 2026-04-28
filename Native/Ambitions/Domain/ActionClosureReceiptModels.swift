@@ -110,8 +110,14 @@ enum ActionReceiptSourceDomain: String, Codable, Sendable, Equatable, Hashable, 
 enum ActionReceiptChangedFactKind: String, Codable, Sendable, Equatable, Hashable, CaseIterable {
     case createdCapture = "created_capture"
     case attachedCaptureToGoal = "attached_capture_to_goal"
+    case createdOneStepGoal = "created_one_step_goal"
+    case attachedTaskToGoal = "attached_task_to_goal"
+    case promotedTaskToGoal = "promoted_task_to_goal"
+    case demotedGoalToTask = "demoted_goal_to_task"
     case movedActionToLater = "moved_action_to_later"
     case completedAction = "completed_action"
+    case completedTask = "completed_task"
+    case archivedTask = "archived_task"
     case markedWaiting = "marked_waiting"
     case preparedExport = "prepared_export"
     case preparedDraft = "prepared_draft"
@@ -431,6 +437,8 @@ struct ActionReceiptHistoryRecord: Sendable, Equatable, Identifiable {
             switch object.kind {
             case .goal:
                 return "Linked to goal"
+            case .oneStepGoal:
+                return "Linked to task"
             case .capture:
                 return "Linked to capture"
             case .step, .action:
@@ -453,7 +461,7 @@ struct ActionReceiptHistoryRecord: Sendable, Equatable, Identifiable {
         }
         if receipt.affectedObjects.contains(where: { $0.kind == .proof || $0.kind == .evidence }) ||
             receipt.sourceDomain == .proof ||
-            receipt.changedFacts.contains(where: { $0.kind == .completedAction }) {
+            receipt.changedFacts.contains(where: { $0.kind == .completedAction || $0.kind == .completedTask }) {
             return .countsAsProof
         }
         if receipt.resultState == .completed {

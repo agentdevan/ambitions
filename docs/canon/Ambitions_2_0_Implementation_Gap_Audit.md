@@ -9,11 +9,13 @@ D02 evidence: [Ambitions_2_0_Object_Terminology.md](Ambitions_2_0_Object_Termino
 
 D08 evidence: `Native/Ambitions/Domain/NorthStarModels.swift` and `Native/Ambitions/Services/NorthStarProjector.swift` now provide the canonical North Star / Dormant Ambition model and deterministic local projection foundation under Life Areas. Full North Star rails/detail UI and semantic zoom remain future D13 surface work.
 
+D09 evidence: `Native/Ambitions/Domain/OneStepGoalModels.swift` and `Native/Ambitions/Services/OneStepGoalProjector.swift` now provide the canonical Task / One-Step Goal model and deterministic local projection foundation, including standalone Task vs contained Step semantics, privacy/accessibility projections, receipt-compatible promote/attach/demote metadata, Life Graph references, and Life Area count/reference hooks. Full One-Step Goal panels/detail UI and surface integration remain future D11-D14 work.
+
 ## 1. Executive Summary
 
 The repo has substantial native foundations: the five-tab shell, local-first SwiftUI app, Capture persistence, Command Pipeline, Event Ledger, Action Closure receipt models, Plan-owned calendar action boundary, rich panel primitives, Accessibility Nutrition infrastructure, Profile-backed You trust surface, local notification foundation, App Intents, widgets, and Live Activity scaffolding.
 
-The app is not yet Constitution-complete. The biggest gaps are first-class North Star surfaces, Tasks as standalone One-Step Goals, Today Plan Layer, full You Personal System Center structure, What Ambitions Knows, semantic zoom, and verified Accessibility Nutrition. Life Areas and North Stars now have foundation object/projection layers, but their full Goals/You surface transformation remains future D13 work.
+The app is not yet Constitution-complete. The biggest gaps are first-class North Star surfaces, One-Step Goal panels/detail integration beyond the foundation model, Today Plan Layer, full You Personal System Center structure, What Ambitions Knows, semantic zoom, and verified Accessibility Nutrition. Life Areas, North Stars, and One-Step Goals now have foundation object/projection layers, but their full Goals/Today/You surface transformation remains future D11-D14 work.
 
 Several implemented surfaces are valid foundations but need alignment: Today, Capture, Goals, Goal Detail, Plan, You/Profile, external surfaces, notification controls, and shell/navigation behavior. The correct next move is not to reopen old batches; it is to add future alignment batches in dependency order.
 
@@ -71,7 +73,7 @@ Several implemented surfaces are valid foundations but need alignment: Today, Ca
 
 - Full Life Areas Overview / Life Areas Atlas surface transformation beyond the foundation object/projection layer.
 - North Stars / dormant Ambitions rails/detail surfaces beyond the foundation object/projection layer.
-- One-Step Goals as standalone Tasks with promotion/demotion/attachment behavior.
+- One-Step Goals panels/detail surfaces and cross-surface behavior beyond the D09 model/projection foundation.
 - Smart Attachment named system with confidence behavior, editable receipts, correction, and learning.
 - GroupedNavigationList and official row types.
 - Panel Size: Compact / Comfortable / Large.
@@ -90,7 +92,7 @@ Several implemented surfaces are valid foundations but need alignment: Today, Ca
 
 | Requirement | Current repo truth | Missing work |
 | --- | --- | --- |
-| Task = standalone One-Step Goal | Existing code mostly uses `Step` inside goals/plans and capture route labels. | First-class Task/One-Step Goal model, detail surface, promotion/demotion/attachment, tests. |
+| Task = standalone One-Step Goal | Canonical Task / One-Step Goal model and projection foundation exists; existing `Step` remains contained inside goals/plans. | Full detail/panel surfaces and cross-surface promotion/attachment workflows remain future D11-D14 work. |
 | Life Area first-class object | Canonical Life Area object/projection foundation exists. | Full Life Areas Overview/Atlas surface transformation remains D13 work. |
 | North Star detail | Canonical North Star / Dormant Ambition object and projection foundation exists; no full detail surface or rails exist. | North Star detail, rails, and semantic zoom remain D13 work. |
 | GroupedNavigationList component | `ListChevronRow` exists, but no `GroupedNavigationList` component/row taxonomy found. | Shared component and usage pass. |
@@ -123,7 +125,7 @@ Several implemented surfaces are valid foundations but need alignment: Today, Ca
 | You | Profile-backed You, Trust Center card, memory controls, reviews, appearance, integrations. | Personal System Center categories, GroupedNavigationList, What Ambitions Knows, full privacy/export/import controls. | You Personal System Center; Trust Center; What Ambitions Knows. |
 | Life Areas Overview | Foundation Life Area object/projection layer and Goal Atlas preview hooks exist. | Full Goals/You surface transformation remains future. | Goals / Life Areas / North Stars transformation. |
 | North Star Detail | Foundation North Star object/projection layer exists. | Full surface absent. | Goals / Life Areas / North Stars transformation. |
-| Task / One-Step Goal Detail | Not found. | Full object/detail absent. | One-Step Goals Object Model. |
+| Task / One-Step Goal Detail | Model/projection foundation exists; full detail surface not found. | Detail and panel UI remain future surface work after D10 contracts. | Today/Goals/Goal Detail alignment. |
 | Review | Reviews v1 is You-owned. | Needs receipt/search/memory maturity and Constitution copy pass. | Reviews/receipt maturity. |
 | Trust Center | Present as Profile/You card. | Needs dedicated navigation and GroupedNavigationList structure. | Trust Center Alignment. |
 | What Ambitions Knows | Memory Lens and memory controls exist. | Named center absent. | What Ambitions Knows. |
@@ -137,7 +139,7 @@ Several implemented surfaces are valid foundations but need alignment: Today, Ca
 | Hero Decision Panel | Used in Today/rich panels. | Needs contract verification across screens. |
 | Today Plan Panel | Not found as named component. | Implement in Today alignment. |
 | Life Areas Panel | Foundation Life Area data exists; not found as named component. | Implement with Life Areas Atlas surface work. |
-| One-Step Goals Panel | Not found as named component. | Implement with One-Step Goals. |
+| One-Step Goals Panel | Foundation data exists; panel not found as named component. | Implement in Today/Goals surface alignment. |
 | GroupedNavigationList | Not found. | New shared component required. |
 | Navigation Rows | `ListChevronRow` exists. | Official row taxonomy missing. |
 | Receipt Panels | Receipts cards exist in Goal Detail/You. | Search/history/redaction contract missing. |
@@ -161,7 +163,7 @@ Several implemented surfaces are valid foundations but need alignment: Today, Ca
 | Plan | Implemented as Plan 2.0 surface/foundation. | Needs timeline/ritual alignment. |
 | Milestone | Goal plan sections/stages exist. | Needs visual milestone contract verification. |
 | Step | Implemented inside goal/plan structures. | Must be reserved for contained actions. |
-| Task | Not first-class as standalone One-Step Goal. | Major missing object model. |
+| Task | First-class standalone One-Step Goal model/projection foundation exists. | Needs panel/detail surfaces and workflow integration. |
 | Proof | Evidence/proof graph and Proof Rail exist. | Needs cross-surface maturity. |
 | Receipt | Model and surface snippets exist. | Needs searchable history/privacy display. |
 | Review | Reviews v1 exists. | Needs maturity and memory/receipt connection. |
@@ -236,7 +238,7 @@ These are future delta/alignment batches. They do not replace the existing Batch
 | D06 | Smart Attachment Foundation | Implement named routing/confidence/clarification/receipt/correction behavior. |
 | D07 | Life Areas Overview / Atlas Object Model | Completed foundation: Life Areas are now a canonical object/projection layer and visible organization lens, not a tab. Full surface transformation remains D13. |
 | D08 | North Stars / Dormant Ambitions Object Model | Completed foundation: North Stars / Dormant Ambitions are now canonical objects under Life Areas with deterministic local projection, privacy/accessibility fields, relationship hooks, and shaping metadata. Full detail/rail surfaces remain D13. |
-| D09 | One-Step Goals Object Model | Add Task as standalone One-Step Goal and promotion/demotion/attachment rules. |
+| D09 | One-Step Goals Object Model | Completed foundation: Task is now a standalone One-Step Goal model/projection with promotion/attachment/demotion receipt metadata, privacy/accessibility fields, Life Graph references, and Life Area hooks. Full UI/workflow integration remains D11-D14. |
 | D10 | Screen Contract Matrix Implementation Pass | Wire the screen matrix into implementation acceptance criteria before surface deltas. |
 | D11 | Today 2.0 Design Constitution Alignment | Add Today Plan Layer, One-Step Goals surfacing, planned-day view, and Constitution copy. |
 | D12 | Capture + Quiet Command Sheet Alignment | Align Capture with Needs a Place and make global command sheet feel like the Quiet Command Sheet. |
@@ -305,7 +307,7 @@ These are future delta/alignment batches. They do not replace the existing Batch
 - `rg -n "Insights|Profile|Habits|Tasks|Task|Step|AI|calendar|permission|accessibility|widgets|Live Activities|App Intents" Native/Ambitions AppUI Sources Tests project.yml`
   - Result: produced useful output but exited with an error because `Tests` does not exist at repo root.
 - `rg -n "GroupedNavigationList|Navigation Row|Panel Size|Display Density|NorthStar|North Star|Life Area|Life Areas|One-Step|OneStep|Needs a Place|Why This|Why Now|Why Changed|What This Uses|Update This|Save the Week|Park / Not Today|Drifted|AI Confidence|AI Explanation|ADHD Mode|Focus Support" Native/Ambitions AppUI Sources Native/AmbitionsTests Native/AmbitionsUITests project.yml`
-  - Result: found only `Drifted` in Today source; no source hits for GroupedNavigationList, Panel Size, Display Density, North Star, One-Step, Needs a Place, AI Confidence, AI Explanation, ADHD Mode, or Focus Support.
+  - Result at audit time: found only `Drifted` in Today source; no source hits for GroupedNavigationList, Panel Size, Display Density, North Star, One-Step, Needs a Place, AI Confidence, AI Explanation, ADHD Mode, or Focus Support. Later D08/D09 work added North Star and One-Step Goal model/projection source hits without changing the remaining gap classifications.
 - Targeted `sed` reads over shell, navigation, Today, Capture, Goals, Goal Detail, Plan, Profile/You, onboarding, App Intents, notifications, external snapshots, widget extension, shared components, accessibility, roadmap, batch plan, backlog, context, and registry files.
   - Result: evidence captured in this audit.
 

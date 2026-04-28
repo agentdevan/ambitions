@@ -373,6 +373,28 @@ final class ActionClosureReceiptModelsTests: XCTestCase {
         XCTAssertEqual(results.map(\.receiptID), ["receipt-a", "receipt-b"])
     }
 
+    func testReceiptProjectionLabelsOneStepGoalReferencesAsTasks() {
+        let task = object(.oneStepGoal, "task-1", label: "Email portfolio", sourceDomain: .goals)
+        let receipt = receipt(
+            id: "receipt-task",
+            resultState: .completed,
+            title: "Task done",
+            affectedObjects: [task],
+            changedFacts: [
+                ActionReceiptChangedFact(id: "fact-task-done", kind: .completedTask, object: task, summary: "Completed standalone task.")
+            ],
+            sourceDomain: .goals
+        )
+
+        let result = ActionReceiptProjection(receipts: [receipt])
+            .searchReceipts(ActionReceiptSearchQuery(actionKinds: [.completedTask], projectionDetail: .fullDetail))
+            .results
+            .first
+
+        XCTAssertEqual(result?.relatedObjectLabels, ["Linked to task"])
+        XCTAssertEqual(result?.proofLabel, "Added to proof")
+    }
+
     func testReceiptHistoryRedactsPrivateSensitiveAndMissingDetails() {
         let goal = object(.goal, "goal-private", label: "Private launch goal", sourceDomain: .goals)
         let privateReceipt = receipt(

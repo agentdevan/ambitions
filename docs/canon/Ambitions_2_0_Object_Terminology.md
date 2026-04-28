@@ -31,7 +31,7 @@ Step = action inside a Goal, Path, or Plan.
 | Plan | Current agreement with time, capacity, constraints, rituals, recovery, and protected work. Calendar permission remains Plan-owned. | Implemented foundation exists; timeline/ritual alignment continues later. |
 | Milestone | Meaningful checkpoint on the way to a Goal, larger than a Step and more concrete than broad direction. | Planned/partial depending on surface; do not flatten into generic tasks. |
 | Step | Contained action inside a Goal, Path, or Plan. A Step belongs to a larger structure. | Existing goal/plan code uses Step heavily and should keep this meaning. |
-| Task / One-Step Goal | Standalone one-off outcome that can exist without a parent Goal, Path, Plan, or Life Area. | Active canon; first-class model/detail remains future D09 work. |
+| Task / One-Step Goal | Standalone one-off outcome that can exist without a parent Goal, Path, Plan, or Life Area. | Active canon; first-class model/projection foundation exists; full detail and surface integration remain future D11-D14 work. |
 | Proof | Evidence that progress, completion, a decision, or a result happened. | Implemented foundations exist; future surfaces should keep proof qualitative. |
 | Receipt | User-facing result/trust record that says what happened, what changed, why, and what can be corrected or undone. | Implemented foundations exist; search/privacy maturity remains future D05 work. |
 | Review | Reflection, recovery, history, and carry-forward surface. It is not the same as analytics. | You-owned Reviews v1 exists; future maturity remains planned. |

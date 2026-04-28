@@ -338,9 +338,9 @@ enum LifeGraphObjectKind: String, Codable, Sendable, Equatable, Hashable, CaseIt
 
     var isPlaceholderOnlyInV1: Bool {
         switch self {
-        case .ambition, .path, .oneStepGoal, .commitment, .waitingItem, .proof, .resource, .decision, .correction, .receipt, .review, .blocker, .person:
+        case .ambition, .path, .commitment, .waitingItem, .proof, .resource, .decision, .correction, .receipt, .review, .blocker, .person:
             return true
-        case .lifeArea, .northStar, .goal, .milestone, .action, .step, .capture, .evidence:
+        case .lifeArea, .northStar, .goal, .milestone, .action, .step, .oneStepGoal, .capture, .evidence:
             return false
         }
     }

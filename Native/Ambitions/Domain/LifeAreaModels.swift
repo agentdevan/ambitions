@@ -152,6 +152,7 @@ struct LifeAreaCounts: Codable, Sendable, Equatable, Hashable {
     let activeGoalCount: Int
     let parkedGoalCount: Int
     let northStarCount: Int
+    let oneStepGoalCount: Int
     let waitingCount: Int
     let proofCount: Int
     let receiptCount: Int
@@ -160,6 +161,7 @@ struct LifeAreaCounts: Codable, Sendable, Equatable, Hashable {
         case activeGoalCount
         case parkedGoalCount
         case northStarCount
+        case oneStepGoalCount
         case waitingCount
         case proofCount
         case receiptCount
@@ -169,6 +171,7 @@ struct LifeAreaCounts: Codable, Sendable, Equatable, Hashable {
         activeGoalCount: Int,
         parkedGoalCount: Int,
         northStarCount: Int = 0,
+        oneStepGoalCount: Int = 0,
         waitingCount: Int,
         proofCount: Int,
         receiptCount: Int
@@ -176,6 +179,7 @@ struct LifeAreaCounts: Codable, Sendable, Equatable, Hashable {
         self.activeGoalCount = activeGoalCount
         self.parkedGoalCount = parkedGoalCount
         self.northStarCount = northStarCount
+        self.oneStepGoalCount = oneStepGoalCount
         self.waitingCount = waitingCount
         self.proofCount = proofCount
         self.receiptCount = receiptCount
@@ -186,44 +190,78 @@ struct LifeAreaCounts: Codable, Sendable, Equatable, Hashable {
         self.activeGoalCount = try container.decode(Int.self, forKey: .activeGoalCount)
         self.parkedGoalCount = try container.decode(Int.self, forKey: .parkedGoalCount)
         self.northStarCount = try container.decodeIfPresent(Int.self, forKey: .northStarCount) ?? 0
+        self.oneStepGoalCount = try container.decodeIfPresent(Int.self, forKey: .oneStepGoalCount) ?? 0
         self.waitingCount = try container.decode(Int.self, forKey: .waitingCount)
         self.proofCount = try container.decode(Int.self, forKey: .proofCount)
         self.receiptCount = try container.decode(Int.self, forKey: .receiptCount)
     }
 
     var hasContent: Bool {
-        activeGoalCount > 0 || parkedGoalCount > 0 || northStarCount > 0 || waitingCount > 0 || proofCount > 0 || receiptCount > 0
+        activeGoalCount > 0 || parkedGoalCount > 0 || northStarCount > 0 || oneStepGoalCount > 0 || waitingCount > 0 || proofCount > 0 || receiptCount > 0
     }
 }
 
 struct LifeAreaRelationshipHooks: Codable, Sendable, Equatable, Hashable {
     let goalReferences: [LifeGraphObjectReference]
+    let oneStepGoalReferences: [LifeGraphObjectReference]
     let proofReferences: [LifeGraphObjectReference]
     let receiptReferences: [LifeGraphObjectReference]
     let waitingReferences: [LifeGraphObjectReference]
     let futureNorthStarCount: Int
+    let oneStepGoalCount: Int
     let hasDormantDirection: Bool
     let supportsNorthStarGrouping: Bool
     let supportsOneStepGoalGrouping: Bool
 
+    private enum CodingKeys: String, CodingKey {
+        case goalReferences
+        case oneStepGoalReferences
+        case proofReferences
+        case receiptReferences
+        case waitingReferences
+        case futureNorthStarCount
+        case oneStepGoalCount
+        case hasDormantDirection
+        case supportsNorthStarGrouping
+        case supportsOneStepGoalGrouping
+    }
+
     init(
         goalReferences: [LifeGraphObjectReference] = [],
+        oneStepGoalReferences: [LifeGraphObjectReference] = [],
         proofReferences: [LifeGraphObjectReference] = [],
         receiptReferences: [LifeGraphObjectReference] = [],
         waitingReferences: [LifeGraphObjectReference] = [],
         futureNorthStarCount: Int = 0,
+        oneStepGoalCount: Int = 0,
         hasDormantDirection: Bool = false,
         supportsNorthStarGrouping: Bool = true,
         supportsOneStepGoalGrouping: Bool = true
     ) {
         self.goalReferences = goalReferences
+        self.oneStepGoalReferences = oneStepGoalReferences
         self.proofReferences = proofReferences
         self.receiptReferences = receiptReferences
         self.waitingReferences = waitingReferences
         self.futureNorthStarCount = futureNorthStarCount
+        self.oneStepGoalCount = oneStepGoalCount
         self.hasDormantDirection = hasDormantDirection
         self.supportsNorthStarGrouping = supportsNorthStarGrouping
         self.supportsOneStepGoalGrouping = supportsOneStepGoalGrouping
+    }
+
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        self.goalReferences = try container.decodeIfPresent([LifeGraphObjectReference].self, forKey: .goalReferences) ?? []
+        self.oneStepGoalReferences = try container.decodeIfPresent([LifeGraphObjectReference].self, forKey: .oneStepGoalReferences) ?? []
+        self.proofReferences = try container.decodeIfPresent([LifeGraphObjectReference].self, forKey: .proofReferences) ?? []
+        self.receiptReferences = try container.decodeIfPresent([LifeGraphObjectReference].self, forKey: .receiptReferences) ?? []
+        self.waitingReferences = try container.decodeIfPresent([LifeGraphObjectReference].self, forKey: .waitingReferences) ?? []
+        self.futureNorthStarCount = try container.decodeIfPresent(Int.self, forKey: .futureNorthStarCount) ?? 0
+        self.oneStepGoalCount = try container.decodeIfPresent(Int.self, forKey: .oneStepGoalCount) ?? 0
+        self.hasDormantDirection = try container.decodeIfPresent(Bool.self, forKey: .hasDormantDirection) ?? false
+        self.supportsNorthStarGrouping = try container.decodeIfPresent(Bool.self, forKey: .supportsNorthStarGrouping) ?? true
+        self.supportsOneStepGoalGrouping = try container.decodeIfPresent(Bool.self, forKey: .supportsOneStepGoalGrouping) ?? true
     }
 }
 
@@ -254,6 +292,9 @@ struct LifeAreaSummary: Codable, Sendable, Equatable, Hashable, Identifiable {
         }
         if counts.northStarCount > 0 {
             return "\(counts.northStarCount) North Star\(counts.northStarCount == 1 ? "" : "s")"
+        }
+        if counts.oneStepGoalCount > 0 {
+            return "\(counts.oneStepGoalCount) One-Step Goal\(counts.oneStepGoalCount == 1 ? "" : "s")"
         }
         return emptyTitle
     }
@@ -320,6 +361,7 @@ struct LifeAreaSummary: Codable, Sendable, Equatable, Hashable, Identifiable {
                 "\(counts.activeGoalCount) active",
                 "\(counts.parkedGoalCount) parked",
                 "\(counts.northStarCount) North Stars",
+                "\(counts.oneStepGoalCount) One-Step Goals",
                 "\(counts.waitingCount) waiting",
                 "\(counts.proofCount) proof",
                 "\(counts.receiptCount) receipts"
@@ -392,6 +434,7 @@ struct LifeAreasAtlasProjection: Codable, Sendable, Equatable, Hashable {
     let supportsFutureSemanticZoom: Bool
     let supportsFutureArchiveReviewLearning: Bool
     let futureNorthStarCount: Int
+    let oneStepGoalCount: Int
     let hasDormantDirection: Bool
 
     init(
@@ -411,6 +454,7 @@ struct LifeAreasAtlasProjection: Codable, Sendable, Equatable, Hashable {
         self.supportsFutureSemanticZoom = true
         self.supportsFutureArchiveReviewLearning = true
         self.futureNorthStarCount = overview.areas.map(\.relationshipHooks.futureNorthStarCount).reduce(0, +)
+        self.oneStepGoalCount = overview.areas.map(\.relationshipHooks.oneStepGoalCount).reduce(0, +)
         self.hasDormantDirection = overview.areas.contains { $0.relationshipHooks.hasDormantDirection }
     }
 }

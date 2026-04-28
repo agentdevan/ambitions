@@ -86,7 +86,7 @@ final class LifeAreaAtlasProjectorTests: XCTestCase {
         XCTAssertEqual(compact.areas.count, LifeDomainKey.allCases.count)
     }
 
-    func testAtlasIsFutureReadyWithoutCreatingNorthStarOrTaskObjects() {
+    func testAtlasCarriesFutureGroupingHooksWithoutCreatingTaskSurfaces() {
         let projector = LifeAreaAtlasProjector()
         let goal = makeGoal(id: "goal-creative", title: "Finish song", domain: .creativity)
 
@@ -99,6 +99,7 @@ final class LifeAreaAtlasProjectorTests: XCTestCase {
         XCTAssertTrue(atlas.supportsFutureNorthStarGrouping)
         XCTAssertTrue(atlas.supportsFutureSemanticZoom)
         XCTAssertEqual(atlas.futureNorthStarCount, 0)
+        XCTAssertEqual(atlas.oneStepGoalCount, 0)
         XCTAssertFalse(atlas.hasDormantDirection)
         XCTAssertEqual(creativityHooks.goalReferences.map(\.id), ["goal-creative"])
         XCTAssertTrue(creativityHooks.supportsOneStepGoalGrouping)
@@ -124,7 +125,26 @@ final class LifeAreaAtlasProjectorTests: XCTestCase {
         XCTAssertTrue(atlas.hasDormantDirection)
     }
 
-    func testLifeAreaCountsDecodeOlderPayloadsWithoutNorthStars() throws {
+    func testAtlasCarriesOneStepGoalCountsAndReferencesWithoutRedesigningGoalsSurface() {
+        let projector = LifeAreaAtlasProjector()
+        let task = OneStepGoal(
+            id: OneStepGoalID(rawValue: "email-portfolio"),
+            title: "Email portfolio",
+            lifeAreaID: LifeAreaID(domain: .career),
+            status: .today
+        )
+
+        let atlas = projector.atlas(from: .init(goals: [], oneStepGoals: [task]))
+        let career = tryUnwrap(atlas.overview.areas.first { $0.definition.domainKey == .career })
+
+        XCTAssertEqual(career.counts.oneStepGoalCount, 1)
+        XCTAssertEqual(career.nextFocus, "One-Step Goals available")
+        XCTAssertEqual(career.relationshipHooks.oneStepGoalCount, 1)
+        XCTAssertEqual(career.relationshipHooks.oneStepGoalReferences.map(\.kind), [.oneStepGoal])
+        XCTAssertEqual(atlas.oneStepGoalCount, 1)
+    }
+
+    func testLifeAreaCountsDecodeOlderPayloadsWithoutNorthStarsOrOneStepGoals() throws {
         let data = """
         {
           "activeGoalCount": 1,
@@ -140,9 +160,31 @@ final class LifeAreaAtlasProjectorTests: XCTestCase {
         XCTAssertEqual(counts.activeGoalCount, 1)
         XCTAssertEqual(counts.parkedGoalCount, 2)
         XCTAssertEqual(counts.northStarCount, 0)
+        XCTAssertEqual(counts.oneStepGoalCount, 0)
         XCTAssertEqual(counts.waitingCount, 3)
         XCTAssertEqual(counts.proofCount, 4)
         XCTAssertEqual(counts.receiptCount, 5)
+    }
+
+    func testLifeAreaRelationshipHooksDecodeOlderPayloadsWithoutOneStepGoals() throws {
+        let data = """
+        {
+          "goalReferences": [],
+          "proofReferences": [],
+          "receiptReferences": [],
+          "waitingReferences": [],
+          "futureNorthStarCount": 0,
+          "hasDormantDirection": false,
+          "supportsNorthStarGrouping": true,
+          "supportsOneStepGoalGrouping": true
+        }
+        """.data(using: .utf8)!
+
+        let hooks = try JSONDecoder().decode(LifeAreaRelationshipHooks.self, from: data)
+
+        XCTAssertEqual(hooks.oneStepGoalReferences, [])
+        XCTAssertEqual(hooks.oneStepGoalCount, 0)
+        XCTAssertTrue(hooks.supportsOneStepGoalGrouping)
     }
 }
 
