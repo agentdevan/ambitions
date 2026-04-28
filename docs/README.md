@@ -6,6 +6,13 @@ This folder contains the current Swift-native documentation for the Ambitions re
 
 Use [codex/CONTEXT_INDEX.md](codex/CONTEXT_INDEX.md) for source-of-truth precedence before non-trivial work.
 
+For current canon ownership and consolidation, read:
+
+- [canon/SOURCE_OF_TRUTH_MAP.md](canon/SOURCE_OF_TRUTH_MAP.md)
+  Active document ownership map and source-of-truth reading order. Use this before non-trivial product, design, roadmap, or implementation work.
+- [canon/CANON_CONSOLIDATION_GAP_AUDIT.md](canon/CANON_CONSOLIDATION_GAP_AUDIT.md)
+  Documentation architecture audit showing what already existed, what was consolidated, and what still needs product decisions.
+
 For the current free Codex workflow, also read:
 
 - [codex/FREE_WORKFLOW_OPERATING_SYSTEM.md](codex/FREE_WORKFLOW_OPERATING_SYSTEM.md)
@@ -17,6 +24,8 @@ For the current free Codex workflow, also read:
 
 ## Active Source-Of-Truth Docs
 
+- [canon/SOURCE_OF_TRUTH_MAP.md](canon/SOURCE_OF_TRUTH_MAP.md)
+  Active source-of-truth map and reading order.
 - [../MASTER_PRODUCT_SPEC.md](../MASTER_PRODUCT_SPEC.md)
   Current shipping product truth.
 - [canon/design/Ambitions_Design_Constitution.md](canon/design/Ambitions_Design_Constitution.md)
@@ -47,6 +56,19 @@ For the current free Codex workflow, also read:
   Active work status only.
 - [codex/batches/README.md](codex/batches/README.md)
   Per-batch execution docs for the post-hardening frontend transformation program.
+
+## Active Consolidation Canon
+
+These focused docs extract already-existing doctrine into implementation-readable references. They clarify the active canon; they do not create a parallel roadmap.
+
+- [canon/CANON_CONSOLIDATION_GAP_AUDIT.md](canon/CANON_CONSOLIDATION_GAP_AUDIT.md)
+- [canon/DOMAIN_MODEL.md](canon/DOMAIN_MODEL.md)
+- [canon/GOAL_PLAN_TASK_LIFECYCLE.md](canon/GOAL_PLAN_TASK_LIFECYCLE.md)
+- [canon/ONBOARDING_SPEC.md](canon/ONBOARDING_SPEC.md)
+- [canon/TRUST_PRIVACY_MEMORY.md](canon/TRUST_PRIVACY_MEMORY.md)
+- [canon/EMPTY_ERROR_RECOVERY_STATES.md](canon/EMPTY_ERROR_RECOVERY_STATES.md)
+- [canon/IMPLEMENTATION_ACCEPTANCE_GATES.md](canon/IMPLEMENTATION_ACCEPTANCE_GATES.md)
+- [canon/design/DESIGN_TOKENS.md](canon/design/DESIGN_TOKENS.md)
 
 ## Superseded / Archived Docs
 
