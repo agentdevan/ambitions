@@ -2,7 +2,7 @@
 
 Status: Active canon consolidation layer.
 
-Purpose: Consolidate Today, Now State, best next action, current/next schedule, rituals, recovery, empty state, and sensitive-item behavior into one implementation-readable reference. This document reflects Wave 8 product decisions.
+Purpose: Consolidate Today, Now State, best next action, current/next schedule, rituals, recovery, empty state, and sensitive-item behavior into one implementation-readable reference. This document reflects Wave 8 product decisions plus the post-canon human-language correction layer in `HUMAN_LANGUAGE_REVIEW.md`.
 
 ## Core Today Doctrine
 
@@ -14,10 +14,16 @@ Core job:
 Help the user know what matters now.
 ```
 
-Today should prioritize first:
+Internal/product concept:
 
 ```text
 One best next action.
+```
+
+Preferred normal UI copy:
+
+```text
+Do this next.
 ```
 
 Today is not:
@@ -32,41 +38,85 @@ Today is not:
 
 Recommended top-level priority:
 
-1. Best Next Action.
-2. Why this matters now / Now State explanation.
+1. `Do this next` / one best next action.
+2. Plain explanation: `Why this now`.
 3. Current or next schedule slice.
-4. Full daily schedule below the main next action.
+4. Full daily schedule below the main action.
 5. Relevant rituals/routines if they matter now.
-6. Recovery affordance when the day no longer holds.
+6. Recovery affordance when the day no longer works.
 7. Capture action for empty or uncertain states.
 
 Rules:
 
-- The full daily schedule can appear, but it should not outrank the best next action.
+- The full daily schedule can appear, but it should not outrank the next thing to do.
 - Today should not lead with a long task list.
 - Today should not expose full analytics.
+- Today should use the plainest language in the app.
+
+## Human Language Rule For Today
+
+Today must sound like a calm person helping the user decide what still matters.
+
+Use:
+
+```text
+Do this next.
+Most important today.
+Too much for today.
+Make today doable.
+Move this later.
+Keep this on today.
+What should stay on today?
+If there is time.
+Nothing moved automatically.
+```
+
+Avoid normal UI copy such as:
+
+```text
+Best Next Action.
+Protected.
+Protection.
+Protect this.
+Protect later.
+Today’s anchor.
+Execution context.
+Optimize.
+AI.
+Model.
+Confidence.
+```
+
+Internal docs may still use terms such as Best Next Action or Now State when describing systems. Normal UI should translate them into plain language.
 
 ## Full Daily Schedule Behavior
 
 Resolved direction:
 
 ```text
-Show the full daily schedule below the main next action.
+Show the full daily schedule below the main action.
 ```
 
 Rules:
 
 - The daily schedule supports action clarity.
 - The daily schedule should stay secondary to the current/next decision.
-- Plan shapes the schedule; Today consumes the current execution shape.
+- Plan shapes the schedule; Today shows what helps right now.
 - Schedule display should not become a raw calendar clone.
 
 ## Now State Meaning
 
-Now State means:
+Internal concept:
 
 ```text
 Best current execution context.
+```
+
+Preferred normal UI copy:
+
+```text
+Right now.
+Why this now.
 ```
 
 Now State is not only:
@@ -90,10 +140,11 @@ Now State should combine relevant signals from:
 
 Rules:
 
-- Now State should help explain why the best next action is shown.
+- Now State should help explain why this next action is shown.
 - Now State should be explainable through plain language.
 - Avoid fake precision.
 - Avoid mood inference unless explicitly supported by user input or future verified feature.
+- Do not expose `execution context` as normal UI copy.
 
 ## Broken Day / Recovery Behavior
 
@@ -101,7 +152,7 @@ When the day breaks, Today should:
 
 ```text
 Offer recovery.
-Ask what to protect.
+Ask what should stay on today.
 ```
 
 Main recovery action:
@@ -110,20 +161,33 @@ Main recovery action:
 Save the Day
 ```
 
+Preferred plain recovery CTA:
+
+```text
+Make today doable
+```
+
 Rules:
 
 - Do not only warn.
 - Do not auto-reschedule.
 - Do not hide missed work.
 - Keep recovery non-shaming.
-- Recovery should explain what changed, what is at risk, and what can still fit.
+- Recovery should explain what changed, what no longer fits, and what can still fit.
+- Do not use `protect/protected/protection` language unless the feature is literally about privacy or security.
+
+Recommended recovery copy:
+
+```text
+Too much for today.
+Pick what still needs to happen, and move the rest later.
+```
 
 Recommended recovery actions:
 
-- `Save the Day`
-- `Make Lighter`
-- `Protect This`
-- `Move This`
+- `Make today doable`
+- `Move this later`
+- `Keep this on today`
 - `Park`
 - `Open Plan`
 
@@ -198,21 +262,22 @@ Rules:
 - Do not imply the user is behind.
 - If user skipped onboarding, land in Today with this empty state and Capture action.
 
-## Best Next Action
+## Do This Next
 
-Best Next Action should answer:
+The next-action area should answer:
 
 - What matters now?
 - Why this, not everything else?
 - What is the smallest useful next move?
-- What happens if the day no longer holds?
+- What happens if the day no longer works?
 
 Rules:
 
-- Best Next Action should be one dominant recommendation or action.
+- The next action should be one dominant recommendation or action.
 - Alternatives can exist below, but should not dilute the main decision.
 - The user should be able to inspect `Why This` or similar explanation.
 - Sensitive items should respect private-item behavior.
+- Normal UI should say `Do this next`, not `Best Next Action`.
 
 ## Today Must Never Become
 
@@ -230,20 +295,22 @@ Motivation quote wall.
 Today / Now State is acceptable when:
 
 - Today helps the user know what matters now.
-- One best next action is prioritized first.
-- Full daily schedule appears below the main next action, not above it.
-- Broken day behavior offers recovery and asks what to protect.
-- Main recovery action is `Save the Day`.
+- One next action is prioritized first.
+- Normal UI says `Do this next` or equivalent plain copy.
+- Full daily schedule appears below the main action, not above it.
+- Broken-day behavior offers recovery and asks what should stay on today.
+- Recovery uses plain copy such as `Too much for today` and `Make today doable`.
+- `protect/protected/protection`, `anchor`, `execution context`, `AI`, `model`, and `confidence` do not appear in normal Today UI copy.
+- Main recovery concept remains `Save the Day`, but supporting copy stays human and obvious.
 - Rituals/routines appear only if relevant now.
 - Sensitive/private items collapse as `Private item` at launch.
 - Empty Today asks user to capture something, with goal suggestion secondary.
-- Now State means best current execution context.
-- Now State does not collapse to only current task, time of day, mood, or calendar status.
+- Now State remains an internal concept for best current execution context and appears to users as plain `Right now` / `Why this now` copy.
 - Today does not become a task dump, calendar clone, analytics dashboard, or motivation quote wall.
 
 ## Open Questions For Future Waves
 
-- What exact card design should Best Next Action use?
+- What exact card design should the next-action area use?
 - Should Today show one recovery rail or a compact recovery sheet?
 - How much of the daily schedule should be visible above the fold?
 - Should Now State have named labels, or stay descriptive and contextual?
