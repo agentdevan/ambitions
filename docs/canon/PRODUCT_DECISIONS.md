@@ -2,7 +2,7 @@
 
 Status: Active canon decision log for product-definition waves.
 
-Purpose: Preserve explicit product decisions made after canon consolidation. This document records decisions that clarify ambiguity across product, design, onboarding, lifecycle, memory, trust, capture, plan/calendar, goals, today/now state, You/profile/settings/reviews, IA/navigation, intelligence/automation, visual system/components/motion, accessibility/focus support, and implementation acceptance.
+Purpose: Preserve explicit product decisions made after canon consolidation. This document records decisions that clarify ambiguity across product, design, onboarding, lifecycle, memory, trust, capture, plan/calendar, goals, today/now state, You/profile/settings/reviews, IA/navigation, intelligence/automation, visual system/components/motion, accessibility/focus support, external surfaces/notifications/widgets/live activities, and implementation acceptance.
 
 ## Decision Authority
 
@@ -567,6 +567,89 @@ Anyone can understand what matters next.
 
 ---
 
+# Wave 14 — External Surfaces, Notifications, Widgets, And Live Activities
+
+Adoption date: 2026-04-27
+
+## Resolved Decisions
+
+External surfaces should primarily:
+
+```text
+Surface the right next thing safely.
+```
+
+Notification frequency:
+
+```text
+Sparse by default.
+User controls later.
+```
+
+Notification tone:
+
+```text
+Calm and operational.
+```
+
+Sensitive/private details in notifications/widgets:
+
+```text
+Collapse as Private item at launch.
+```
+
+Widgets should show:
+
+```text
+Best next action / Today slice.
+```
+
+Live Activities should show:
+
+```text
+Active focus/protected block or time-sensitive plan slice.
+```
+
+App Intents / Shortcuts:
+
+```text
+Should support capture.
+```
+
+External-surface data changes:
+
+```text
+Safe local actions with receipts are allowed.
+External writes require app confirmation.
+```
+
+External surfaces must never:
+
+```text
+Expose private details.
+Spam user.
+Show fake urgency.
+Replace core app context.
+```
+
+External-surface north star:
+
+```text
+Calm continuity.
+```
+
+## Implementation Implications
+
+- External surfaces should support continuity, not engagement loops.
+- Notifications should be rare, useful, and operational.
+- Widgets should not become dashboards.
+- Live Activities should be reserved for active protected/focus blocks or time-sensitive plan slices.
+- Capture through App Intents/Shortcuts should preserve routing, receipts, and privacy boundaries.
+- Sensitive Life Area details should not appear directly on external surfaces at launch.
+- External surfaces can support safe local actions where receipts exist; important or external writes require app confirmation.
+
+---
+
 # Active Follow-Up Targets
 
 These decisions should be reflected in:
@@ -586,5 +669,6 @@ These decisions should be reflected in:
 - `docs/canon/INTELLIGENCE_AUTOMATION_SUGGESTIONS.md`
 - `docs/canon/VISUAL_SYSTEM_COMPONENTS_MOTION.md`
 - `docs/canon/ACCESSIBILITY_FOCUS_SUPPORT.md`
+- `docs/canon/EXTERNAL_SURFACES_NOTIFICATIONS_WIDGETS.md`
 - `docs/canon/design/smart-attachment-spec.md`
-- future batch prompts involving onboarding, IA, navigation, drilldown, breadcrumbs, tabs, Life Areas, Capture routing, Today, Now State, empty states, recovery, best next action, Goals, Goal Detail, Goal Weather, Proof, Plan, calendar-aware planning, believability, daily schedule, rituals, You, Profile migration, Settings, Reviews, Trust Center, Appearance Studio, intelligence, suggestions, automation, visual system, components, motion, accessibility, Focus Support, Dynamic Type, VoiceOver, Reduce Motion, receipts, sensitive Life Areas, notifications/widgets, export/import, privacy controls, Smart Attachment, Needs a Place, or Capture input behavior.
+- future batch prompts involving onboarding, IA, navigation, drilldown, breadcrumbs, tabs, Life Areas, Capture routing, Today, Now State, empty states, recovery, best next action, Goals, Goal Detail, Goal Weather, Proof, Plan, calendar-aware planning, believability, daily schedule, rituals, You, Profile migration, Settings, Reviews, Trust Center, Appearance Studio, intelligence, suggestions, automation, visual system, components, motion, accessibility, Focus Support, Dynamic Type, VoiceOver, Reduce Motion, external surfaces, notifications, widgets, Live Activities, App Intents, Shortcuts, receipts, sensitive Life Areas, export/import, privacy controls, Smart Attachment, Needs a Place, or Capture input behavior.
