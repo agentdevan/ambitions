@@ -20,9 +20,13 @@ final class ShellCommandRouterTests: XCTestCase {
 
         let captures = try await repository.listCaptures()
         XCTAssertEqual(captures.map(\.rawText), ["Capture this idea"])
+        XCTAssertEqual(captures.first?.route, .captureInbox)
+        XCTAssertEqual(captures.first?.assumptionSummary, "Saved as an Idea so it stays findable without becoming scheduled work.")
         XCTAssertEqual(navigation.selectedTab, .captures)
         XCTAssertTrue(navigation.planPath.isEmpty)
+        XCTAssertEqual(result.title, "Saved as Idea")
         XCTAssertEqual(result.destination, .planRoute(.capturesInbox))
+        XCTAssertEqual(navigation.recentCommandHistory.first?.title, "Saved as Idea")
     }
 
     func testOpenGoalWithoutIdentifierFallsBackToMemoryLensOverlay() async {

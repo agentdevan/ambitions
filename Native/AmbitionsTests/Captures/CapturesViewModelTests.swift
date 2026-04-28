@@ -22,7 +22,7 @@ final class CapturesViewModelTests: XCTestCase {
         ])
     }
 
-    func testArchiveAndSaveAsSeedCallServiceAndRefresh() async {
+    func testArchiveAndSaveToNeedsPlaceCallServiceAndRefresh() async {
         let captureService = MutableCaptureService(captures: [capture(id: "capture-1", rawText: "First")])
         let goalsService = StaticGoalsService(items: [])
         let viewModel = CapturesViewModel()
@@ -33,13 +33,13 @@ final class CapturesViewModelTests: XCTestCase {
         XCTAssertEqual(viewModel.actionMessage?.title, "Archived")
 
         await captureService.setCaptures([capture(id: "capture-2", rawText: "Second")])
-        await viewModel.saveAsSeed(id: "capture-2", captureService: captureService, goalsService: goalsService, now: fixedNow)
+        await viewModel.saveToNeedsPlace(id: "capture-2", captureService: captureService, goalsService: goalsService, now: fixedNow)
         stored = await captureService.capture(id: "capture-2")
-        XCTAssertEqual(stored?.status, .seed)
-        XCTAssertEqual(stored?.triage?.destination, .saveAsSeed)
-        XCTAssertEqual(stored?.kind, .goalSeed)
+        XCTAssertEqual(stored?.status, .needsTriage)
+        XCTAssertEqual(stored?.triage?.destination, .needsTriage)
+        XCTAssertEqual(stored?.kind, .raw)
         XCTAssertEqual(stored?.route, .captureInbox)
-        XCTAssertEqual(viewModel.actionMessage?.title, "Saved as seed")
+        XCTAssertEqual(viewModel.actionMessage?.title, "Saved to Needs a Place")
     }
 
     func testCaptureRouteActionsCallServiceAndRefresh() async {
@@ -57,25 +57,78 @@ final class CapturesViewModelTests: XCTestCase {
         XCTAssertEqual(stored?.kind, .oneTimeCommitment)
         XCTAssertEqual(stored?.route, .planSeed)
         XCTAssertEqual(stored?.status, .scheduled)
-        XCTAssertEqual(viewModel.actionMessage?.title, "Saved as Plan · This Week")
+        XCTAssertEqual(viewModel.actionMessage?.title, "Saved as Task · Today")
 
         await viewModel.markWaiting(id: "waiting", captureService: captureService, goalsService: goalsService, now: fixedNow)
         stored = await captureService.capture(id: "waiting")
         XCTAssertEqual(stored?.kind, .waitingItem)
         XCTAssertEqual(stored?.route, .waiting)
         XCTAssertEqual(stored?.status, .waiting)
+        XCTAssertEqual(viewModel.actionMessage?.title, "Saved as Waiting")
 
         await viewModel.markOptionalSomeday(id: "someday", captureService: captureService, goalsService: goalsService, now: fixedNow)
         stored = await captureService.capture(id: "someday")
         XCTAssertEqual(stored?.kind, .optionalSomeday)
         XCTAssertEqual(stored?.route, .optionalSomeday)
         XCTAssertEqual(stored?.status, .optionalSomeday)
+        XCTAssertEqual(viewModel.actionMessage?.title, "Review later")
 
         await viewModel.markDeliverableSeed(id: "deliverable", text: "Add another song", captureService: captureService, goalsService: goalsService, now: fixedNow)
         stored = await captureService.capture(id: "deliverable")
         XCTAssertEqual(stored?.kind, .deliverableSeed)
         XCTAssertEqual(stored?.route, .deliverableSeed)
         XCTAssertEqual(stored?.status, .seed)
+        XCTAssertEqual(viewModel.actionMessage?.title, "Saved as Idea")
+    }
+
+    func testD12DraftPreviewUsesSmartAttachmentAndCompactChoices() async {
+        let captureService = MutableCaptureService(captures: [])
+        let goalsService = StaticGoalsService(items: [
+            goalItem(id: "goal-music", title: "Music Goal", renderState: .active)
+        ])
+        let viewModel = CapturesViewModel()
+
+        await viewModel.load(captureService: captureService, goalsService: goalsService)
+        viewModel.updateDraftText("NASA")
+
+        XCTAssertEqual(viewModel.draftRoutePreview?.receiptTitle, "Saved to Needs a Place")
+        XCTAssertEqual(viewModel.draftRoutePreview?.clarificationQuestion, "What should this become?")
+        XCTAssertEqual(viewModel.draftRoutePreview?.choices.map(\.title), ["Task", "Goal", "Needs a Place"])
+        XCTAssertEqual(viewModel.draftRoutePreview?.choices.count, 3)
+
+        viewModel.selectDraftRoute(.task)
+
+        XCTAssertEqual(viewModel.draftRoutePreview?.receiptTitle, "Saved as Task · Today")
+        XCTAssertEqual(viewModel.draftRoutePreview?.choices.first?.isSelected, true)
+    }
+
+    func testD12QuickCapturePersistsSmartAttachmentReceiptAndRoute() async {
+        let captureService = MutableCaptureService(captures: [])
+        let goalsService = StaticGoalsService(items: [])
+        let viewModel = CapturesViewModel()
+
+        await viewModel.load(captureService: captureService, goalsService: goalsService)
+        viewModel.updateDraftText("Book dentist")
+        await viewModel.createQuickCapture(captureService: captureService, goalsService: goalsService, now: fixedNow)
+
+        let stored = await captureService.capture(id: "capture-created-0")
+        XCTAssertEqual(stored?.kind, .oneTimeCommitment)
+        XCTAssertEqual(stored?.route, .planSeed)
+        XCTAssertEqual(stored?.status, .scheduled)
+        XCTAssertEqual(stored?.assumptionSummary, "Saved as a standalone Task because no existing local destination was reliable enough.")
+        XCTAssertEqual(viewModel.actionMessage?.title, "Saved as Task · Today")
+        XCTAssertNil(viewModel.draftRoutePreview)
+    }
+
+    func testD12CaptureScreenContractSnapshotSatisfiesImplementationGate() {
+        let snapshot = CapturesViewState(
+            captures: [],
+            activeGoalOptions: []
+        ).screenContractSnapshot()
+        let contract = try! XCTUnwrap(ScreenContractRegistry.contract(for: .capture))
+        let issues = ScreenContractValidator.validate(snapshot: snapshot, against: contract)
+
+        XCTAssertTrue(issues.isEmpty, issues.map(\.message).joined(separator: "\n"))
     }
 
     func testQuickCapturePreservesInputWhenCreateFails() async {
@@ -98,6 +151,7 @@ final class CapturesViewModelTests: XCTestCase {
         let target = await viewModel.attachToGoal(
             captureID: "capture-attach",
             goalID: "goal-active",
+            goalTitle: "Active goal",
             captureService: captureService,
             goalsService: goalsService,
             now: fixedNow
@@ -107,7 +161,7 @@ final class CapturesViewModelTests: XCTestCase {
         XCTAssertEqual(target?.goalID, "goal-active")
         XCTAssertEqual(stored?.status, .goalBound)
         XCTAssertEqual(stored?.linkedGoalID, "goal-active")
-        XCTAssertEqual(viewModel.actionMessage?.title, "Attached to goal")
+        XCTAssertEqual(viewModel.actionMessage?.title, "Attached as Proof · Active goal")
     }
 
     func testTurnIntoGoalReturnsCreatedGoalRouteTarget() async {
@@ -126,7 +180,7 @@ final class CapturesViewModelTests: XCTestCase {
         XCTAssertEqual(target?.goalID, "goal-created-capture-goal")
         XCTAssertEqual(stored?.status, .goalBound)
         XCTAssertEqual(stored?.linkedGoalID, "goal-created-capture-goal")
-        XCTAssertEqual(viewModel.actionMessage?.title, "Goal created")
+        XCTAssertEqual(viewModel.actionMessage?.title, "Saved as Goal · Creative")
     }
 
     func testFailuresAreSurfacedWithoutChangingDomainRulesInViewModel() async {
@@ -206,18 +260,20 @@ private actor MutableCaptureService: CaptureServicing {
     func createCapture(_ request: CreateCaptureRequest, now: Date) async throws -> Capture {
         if shouldThrow { throw TestCaptureError.failure }
         let timestamp = DomainTimestamp.string(from: now)
+        let kind = request.kind ?? .raw
+        let route = request.route ?? .captureInbox
         let capture = Capture(
             id: "capture-created-\(captures.count)",
             createdAt: timestamp,
             updatedAt: timestamp,
             rawText: request.rawText.trimmingCharacters(in: .whitespacesAndNewlines),
             sourceType: request.sourceType,
-            status: .needsTriage,
+            status: route == .captureInbox && kind == .raw ? .needsTriage : status(for: route),
             linkedGoalID: request.linkedGoalID,
             triage: request.triage,
             revisitAfter: request.revisitAfter,
-            kind: request.kind ?? .raw,
-            route: request.route ?? .captureInbox,
+            kind: kind,
+            route: route,
             triageStatus: request.triageStatus ?? .needsTriage,
             commitmentKind: request.commitmentKind,
             deadlineText: request.deadlineText,

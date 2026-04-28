@@ -120,4 +120,39 @@ final class SmartAttachmentServiceTests: XCTestCase {
         XCTAssertEqual(result.captureRoute, .planSeed)
         XCTAssertEqual(result.captureAssumptionSummary, "Saved as a Plan item without scheduling or calendar changes.")
     }
+
+    func testD12CaptureAdapterCreatesRequestFromSmartAttachmentDecision() {
+        let adapter = SmartAttachmentCaptureAdapter()
+
+        let decision = adapter.decision(
+            rawText: "Book dentist",
+            sourceType: .todayQuickCapture,
+            sourceSurface: "Capture"
+        )
+        let request = decision?.createCaptureRequest(rawText: "Book dentist", sourceType: .todayQuickCapture)
+
+        XCTAssertEqual(decision?.receiptLine, "Saved as Task · Today")
+        XCTAssertEqual(request?.kind, .oneTimeCommitment)
+        XCTAssertEqual(request?.route, .planSeed)
+        XCTAssertEqual(request?.triageStatus, .assumedRoute)
+        XCTAssertEqual(request?.assumptionSummary, "Saved as a standalone Task because no existing local destination was reliable enough.")
+    }
+
+    func testD12CaptureAdapterManualNeedsPlaceChoiceStaysPressureFree() {
+        let adapter = SmartAttachmentCaptureAdapter()
+
+        let decision = adapter.decision(
+            rawText: "NASA",
+            sourceType: .todayQuickCapture,
+            sourceSurface: "Capture",
+            selectedRouteType: .idea
+        )
+        let request = decision?.createCaptureRequest(rawText: "NASA", sourceType: .todayQuickCapture)
+
+        XCTAssertEqual(decision?.receiptLine, "Saved to Needs a Place")
+        XCTAssertEqual(decision?.summary, "Held without pressure until you choose a clearer route.")
+        XCTAssertEqual(request?.kind, .raw)
+        XCTAssertEqual(request?.route, .captureInbox)
+        XCTAssertEqual(request?.triageStatus, .needsTriage)
+    }
 }

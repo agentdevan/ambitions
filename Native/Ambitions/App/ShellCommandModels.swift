@@ -37,7 +37,7 @@ enum ShellCommandIntent: String, CaseIterable, Hashable, Identifiable, Sendable,
 
     var subtitle: String {
         switch self {
-        case .quickCapture: "Save an idea into Capture without leaving the separate global quick action surface."
+        case .quickCapture: "Save what needs a place with Smart Attachment and a changeable receipt."
         case .newGoal: "Open the existing create-goal flow inside the shell-owned compose path."
         case .quickPlanPatch: "Land in Plan to reshape the current week."
         case .quickRecovery: "Return to Today with recovery posture in view."
@@ -90,7 +90,7 @@ enum ShellCommandEntrySource: String, Hashable, Sendable, Codable {
 
     var displayTitle: String {
         switch self {
-        case .shellCompose: "Add something"
+        case .shellCompose: "Quiet Command"
         case .shellUtility: "Shell"
         case .goalsCreate: "Goals"
         case .todayQuickCapture: "Today"
@@ -282,7 +282,7 @@ enum ShellCommandDestination: Hashable, Sendable {
             }
         case let .overlay(overlay):
             switch overlay.kind {
-            case .quietCommandSheet: "Add something"
+            case .quietCommandSheet: "Quiet Command Sheet"
             case .memoryLens: "What Ambitions knows"
             case .createGoal: "Create Goal"
             }

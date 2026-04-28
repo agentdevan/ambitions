@@ -185,6 +185,7 @@ final class AmbitionsUITests: XCTestCase {
         XCTAssertTrue(app.tabBars.buttons["Capture"].waitForExistence(timeout: 10))
         XCTAssertTrue(app.tabBars.buttons["Capture"].isSelected)
         XCTAssertTrue(app.descendants(matching: .any)["captures.screen"].waitForExistence(timeout: 10))
+        XCTAssertTrue(app.staticTexts["What needs a place?"].waitForExistence(timeout: 10))
     }
 
     func testShellCommandSheetCanOpenAndNavigateToPlan() throws {
@@ -215,6 +216,7 @@ final class AmbitionsUITests: XCTestCase {
 
         let quickCapture = app.buttons["shell.command.action.quick_capture"]
         XCTAssertTrue(quickCapture.waitForExistence(timeout: 10))
+        XCTAssertTrue(app.staticTexts["Quiet Command Sheet"].waitForExistence(timeout: 10))
         quickCapture.tap()
 
         let field = app.textFields["shell.command.capture-field"]

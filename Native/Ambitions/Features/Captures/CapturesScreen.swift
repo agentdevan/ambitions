@@ -109,7 +109,7 @@ struct CapturesScreen: View {
                 kind: .capture,
                 eyebrow: "Fast intake",
                 title: "What needs a place?",
-                subtitle: "Capture first. Then keep it in Needs a Place, save it as a Task, Goal, Idea, Proof, Waiting item, or Plan item.",
+                subtitle: "Capture first. Smart Attachment suggests a place, saves a receipt, and keeps the route easy to change.",
                 icon: "tray.and.arrow.down",
                 explanationTitle: viewState.captures.isEmpty ? "Empty state" : "Open routing",
                 explanation: viewState.captures.isEmpty ? "Not everything needs to become a goal." : "\(viewState.captures.filter { $0.status != .archived }.count) item\(viewState.captures.filter { $0.status != .archived }.count == 1 ? "" : "s") still have a visible destination.",
@@ -119,23 +119,42 @@ struct CapturesScreen: View {
             EmptyView()
         } contentSlot: {
             VStack(alignment: .leading, spacing: theme.spacing.sm) {
-                TextEditor(text: $viewModel.draftText)
-                    .font(theme.typography.body)
-                    .foregroundStyle(theme.colors.textPrimary)
-                    .frame(minHeight: 92)
-                    .scrollContentBackground(.hidden)
-                    .padding(theme.spacing.sm)
-                    .background(theme.colors.surfaceSecondary, in: RoundedRectangle(cornerRadius: theme.radius.md, style: .continuous))
-                    .overlay(
-                        RoundedRectangle(cornerRadius: theme.radius.md, style: .continuous)
-                            .stroke(theme.colors.strokeSubtle)
-                    )
-                    .accessibilityIdentifier("captures.quick-input")
+                ZStack(alignment: .topLeading) {
+                    TextEditor(text: Binding(
+                        get: { viewModel.draftText },
+                        set: { viewModel.updateDraftText($0) }
+                    ))
+                        .font(theme.typography.body)
+                        .foregroundStyle(theme.colors.textPrimary)
+                        .frame(minHeight: 92)
+                        .scrollContentBackground(.hidden)
+                        .padding(theme.spacing.sm)
+                        .background(theme.colors.surfaceSecondary, in: RoundedRectangle(cornerRadius: theme.radius.md, style: .continuous))
+                        .overlay(
+                            RoundedRectangle(cornerRadius: theme.radius.md, style: .continuous)
+                                .stroke(theme.colors.strokeSubtle)
+                        )
+                        .accessibilityIdentifier("captures.quick-input")
+                        .accessibilityLabel("What needs a place?")
+
+                    if viewModel.draftText.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
+                        Text("What needs a place?")
+                            .font(theme.typography.body)
+                            .foregroundStyle(theme.colors.textTertiary)
+                            .padding(.horizontal, theme.spacing.md)
+                            .padding(.vertical, theme.spacing.md)
+                            .allowsHitTesting(false)
+                    }
+                }
 
                 if let draftError = viewModel.draftError {
                     Text(draftError)
                         .font(theme.typography.caption)
                         .foregroundStyle(theme.colors.warning)
+                }
+
+                if let routePreview = viewModel.draftRoutePreview {
+                    draftRoutePreviewCard(routePreview)
                 }
 
                 HStack(spacing: theme.spacing.sm) {
@@ -147,7 +166,7 @@ struct CapturesScreen: View {
                             )
                         }
                     } label: {
-                        Label("Capture", systemImage: "plus.circle.fill")
+                        Label("Save", systemImage: "plus.circle.fill")
                     }
                     .buttonStyle(.borderedProminent)
                     .accessibilityIdentifier("captures.quick-submit")
@@ -163,6 +182,12 @@ struct CapturesScreen: View {
                     }
                 }
             }
+        }
+    }
+
+    private func draftRoutePreviewCard(_ preview: CaptureDraftRoutePreview) -> some View {
+        CaptureDraftRoutePreviewCard(preview: preview) { routeType in
+            viewModel.selectDraftRoute(routeType)
         }
     }
 
@@ -249,7 +274,7 @@ struct CapturesScreen: View {
                         )
                     }
                 } label: {
-                    Label("Plan seed", systemImage: "calendar.badge.plus")
+                    Label("Task", systemImage: "checkmark.circle")
                 }
                 .buttonStyle(.bordered)
                 .disabled(capture.status.canTransition(to: .scheduled) == false)
@@ -271,19 +296,19 @@ struct CapturesScreen: View {
             HStack(spacing: theme.spacing.sm) {
                 Button {
                     Task {
-                        await viewModel.saveAsSeed(
+                        await viewModel.saveToNeedsPlace(
                             id: capture.id,
                             captureService: container.captureService,
                             goalsService: container.goalsService
                         )
                     }
                 } label: {
-                    Label("Seed", systemImage: "sparkles")
+                    Label("Keep here", systemImage: "tray.full")
                 }
                 .buttonStyle(.bordered)
-                .disabled(capture.status.canTransition(to: .seed) == false)
+                .disabled(capture.status.canTransition(to: .needsTriage) == false)
 
-                Menu("Attach") {
+                Menu("Attach proof") {
                     if activeGoalOptions.isEmpty {
                         Text("No active goals")
                     } else {
@@ -293,6 +318,7 @@ struct CapturesScreen: View {
                                     if let target = await viewModel.attachToGoal(
                                         captureID: capture.id,
                                         goalID: option.id,
+                                        goalTitle: option.title,
                                         captureService: container.captureService,
                                         goalsService: container.goalsService
                                     ) {
@@ -317,7 +343,7 @@ struct CapturesScreen: View {
                         )
                     }
                 } label: {
-                    Label("Deliverable", systemImage: "shippingbox")
+                    Label("Idea", systemImage: "lightbulb")
                 }
                 .buttonStyle(.bordered)
                 .disabled(capture.status.canTransition(to: .seed) == false)
@@ -347,7 +373,7 @@ struct CapturesScreen: View {
                         )
                     }
                 } label: {
-                    Label("Someday", systemImage: "moon")
+                    Label("Review later", systemImage: "moon")
                 }
                 .buttonStyle(.bordered)
                 .disabled(capture.status.canTransition(to: .optionalSomeday) == false)
@@ -398,6 +424,80 @@ private struct CaptureGroup {
     let title: String
     let subtitle: String
     let captures: [Capture]
+}
+
+private struct CaptureDraftRoutePreviewCard: View {
+    @Environment(\.ambitionTheme) private var theme
+
+    let preview: CaptureDraftRoutePreview
+    let onSelect: (SmartAttachmentRouteType) -> Void
+
+    private var visualState: AmbitionVisualState {
+        preview.semanticState == SmartAttachmentResultState.needsClarification.rawValue ? .warning : .selected
+    }
+
+    var body: some View {
+        AppCard(state: visualState) {
+            VStack(alignment: .leading, spacing: theme.spacing.sm) {
+                routeSummary
+                clarificationQuestion
+                routeChoices
+            }
+            .padding(theme.spacing.md)
+        }
+        .accessibilityElement(children: .combine)
+        .accessibilityLabel(preview.accessibilityLabel)
+        .accessibilityValue(preview.accessibilityValue)
+        .accessibilityHint(preview.accessibilityHint ?? "Choose a different route if this is not right.")
+        .accessibilityIdentifier("captures.smart-attachment-preview")
+    }
+
+    private var routeSummary: some View {
+        HStack(alignment: .top, spacing: theme.spacing.sm) {
+            Image(systemName: "arrow.triangle.branch")
+                .font(.system(size: theme.icon.smallSize, weight: .semibold))
+                .foregroundStyle(theme.colors.accentWarm)
+                .accessibilityHidden(true)
+
+            VStack(alignment: .leading, spacing: theme.spacing.xxs) {
+                Text(preview.receiptTitle)
+                    .font(theme.typography.bodyEmphasized)
+                    .foregroundStyle(theme.colors.textPrimary)
+                Text(preview.summary)
+                    .font(theme.typography.caption)
+                    .foregroundStyle(theme.colors.textSecondary)
+                Text(preview.destinationLabel)
+                    .font(theme.typography.caption)
+                    .foregroundStyle(theme.colors.textTertiary)
+            }
+            .frame(maxWidth: .infinity, alignment: .leading)
+        }
+    }
+
+    @ViewBuilder
+    private var clarificationQuestion: some View {
+        if let question = preview.clarificationQuestion {
+            Text(question)
+                .font(theme.typography.caption)
+                .foregroundStyle(theme.colors.textPrimary)
+        }
+    }
+
+    private var routeChoices: some View {
+        HStack(spacing: theme.spacing.xs) {
+            ForEach(preview.choices) { choice in
+                Button {
+                    onSelect(choice.routeType)
+                } label: {
+                    Text(choice.title)
+                        .lineLimit(1)
+                        .minimumScaleFactor(0.8)
+                }
+                .buttonStyle(AmbitionPressableButtonStyle(state: choice.isSelected ? .selected : .default))
+                .accessibilityIdentifier("captures.route-choice.\(choice.routeType.rawValue)")
+            }
+        }
+    }
 }
 
 private extension NowContextLens {

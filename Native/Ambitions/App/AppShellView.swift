@@ -258,9 +258,9 @@ private struct QuietCommandSheetView: View {
     var body: some View {
         NavigationStack {
             FeatureScaffoldView(
-                eyebrow: "Add something",
-                title: "Add something",
-                subtitle: "A separate global action surface for capture, creation, recovery, plan shaping, and canonical destinations."
+                eyebrow: "Quiet Command Sheet",
+                title: "Quiet Command Sheet",
+                subtitle: "Capture, route, recover, or open the right place without turning this into chat."
             ) {
                 if let executionMessage {
                     AppCard(state: .warning) {
@@ -308,7 +308,7 @@ private struct QuietCommandSheetView: View {
 
                 commandHistoryCard
             }
-            .navigationTitle("Add something")
+            .navigationTitle("Quiet Command Sheet")
             .toolbar {
                 ToolbarItem(placement: .topBarTrailing) {
                     Button("Done", action: onDismiss)
@@ -361,19 +361,20 @@ private struct QuietCommandSheetView: View {
             AppCard(state: .selected) {
                 VStack(alignment: .leading, spacing: theme.spacing.md) {
                     SectionHeader(
-                        title: "Quick capture",
-                        subtitle: "Save one thought into Capture without leaving the separate global quick action surface."
+                        title: "What needs a place?",
+                        subtitle: "Smart Attachment saves the route with a receipt you can change in Capture."
                     )
 
-                    TextField("What needs to be remembered?", text: $captureText)
+                    TextField("What needs a place?", text: $captureText)
                         .textFieldStyle(.roundedBorder)
                         .focused($isCaptureFieldFocused)
                         .accessibilityIdentifier("shell.command.capture-field")
+                        .accessibilityLabel("What needs a place?")
 
                     Button {
                         Task { await submitCapture() }
                     } label: {
-                        Text("Capture")
+                        Text("Save")
                             .frame(maxWidth: .infinity)
                     }
                     .buttonStyle(AmbitionPressableButtonStyle(state: .selected))
@@ -475,8 +476,12 @@ private struct QuietCommandSheetView: View {
             source: overlay.entrySource,
             now: .now
         )
-        if let title = result.title, result.destination == nil {
+        if let title = result.title {
             executionMessage = title
+        }
+        if result.createdCaptureID != nil {
+            captureText = ""
+            onDismiss()
         }
     }
 

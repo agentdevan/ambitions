@@ -49,13 +49,16 @@ extension ShellCommandRouting {
 final class DefaultShellCommandRouter: ShellCommandRouting {
     private let navigation: AppNavigationModel
     private let captureService: any CaptureServicing
+    private let smartAttachmentAdapter: SmartAttachmentCaptureAdapter
 
     init(
         navigation: AppNavigationModel,
-        captureService: any CaptureServicing
+        captureService: any CaptureServicing,
+        smartAttachmentAdapter: SmartAttachmentCaptureAdapter = SmartAttachmentCaptureAdapter()
     ) {
         self.navigation = navigation
         self.captureService = captureService
+        self.smartAttachmentAdapter = smartAttachmentAdapter
     }
 
     func presentCommandSheet(
@@ -144,20 +147,28 @@ final class DefaultShellCommandRouter: ShellCommandRouting {
             }
 
             do {
+                let decision = smartAttachmentAdapter.decision(
+                    rawText: trimmed,
+                    sourceType: captureSourceType(for: source),
+                    sourceSurface: source.displayTitle
+                )
                 let capture = try await captureService.createCapture(
-                    CreateCaptureRequest(rawText: trimmed),
+                    (decision ?? fallbackDecision(for: trimmed, source: source)).createCaptureRequest(
+                        rawText: trimmed,
+                        sourceType: captureSourceType(for: source)
+                    ),
                     now: now
                 )
                 navigation.openCapturesInbox()
                 navigation.recordRoute(
-                    title: "Saved to Needs a Place",
+                    title: decision?.receiptLine ?? "Saved to Needs a Place",
                     source: source,
                     presentationContext: .quickCapture,
                     destination: .planRoute(.capturesInbox),
-                    receiptBody: "Saved locally and opened in the Capture tab."
+                    receiptBody: "Saved locally with a Smart Attachment receipt and opened in Capture."
                 )
                 return ShellCommandExecutionResult(
-                    title: "Saved to Needs a Place",
+                    title: decision?.receiptLine ?? "Saved to Needs a Place",
                     destination: .planRoute(.capturesInbox),
                     createdCaptureID: capture.id
                 )
@@ -246,5 +257,29 @@ final class DefaultShellCommandRouter: ShellCommandRouting {
         case .shellCompose, .shellUtility, .goalsCreate, .todayQuickCapture, .capturesScreen:
             return nil
         }
+    }
+
+    private func captureSourceType(for source: ShellCommandEntrySource) -> CaptureSourceType? {
+        switch source {
+        case .todayQuickCapture:
+            return .todayQuickCapture
+        case .appIntent:
+            return .appIntent
+        case .notification:
+            return .notification
+        case .shareExtension:
+            return .shareExtensionText
+        case .shellCompose, .shellUtility, .goalsCreate, .capturesScreen, .deepLink, .widget, .external:
+            return nil
+        }
+    }
+
+    private func fallbackDecision(for text: String, source: ShellCommandEntrySource) -> SmartAttachmentCaptureDecision {
+        SmartAttachmentCaptureAdapter().decision(
+            rawText: text,
+            sourceType: captureSourceType(for: source),
+            sourceSurface: source.displayTitle,
+            selectedRouteType: .idea
+        )!
     }
 }
