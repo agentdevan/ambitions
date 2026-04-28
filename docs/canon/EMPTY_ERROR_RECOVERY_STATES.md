@@ -2,7 +2,7 @@
 
 Status: Active canon consolidation layer.
 
-Purpose: Define product-wide state behavior so Ambitions feels polished outside the ideal path. This document expands the UX Writing Matrix into a screen-by-screen implementation reference and reflects product decision Waves 1-3.
+Purpose: Define product-wide state behavior so Ambitions feels polished outside the ideal path. This document expands the UX Writing Matrix into a screen-by-screen implementation reference and reflects product decision Waves 1-4.
 
 ## State Doctrine
 
@@ -40,6 +40,18 @@ Every non-ideal state should answer:
 - User-facing memory section: `What Ambitions Knows`.
 - Object/type name: `Memory`.
 - Delete all memory requires confirmation and export/reminder first.
+
+## Wave 4 Onboarding State Rules
+
+- Onboarding shows a static premium preview at launch; animation can come later.
+- First prompt: `What do you want to organize?`
+- First object creation shows the receipt inside the destination.
+- Display density is not asked during onboarding; default is `Balanced + Comfortable`.
+- Life Area is inferred when possible and asked only when uncertain.
+- Notifications are requested only after reminder/protected-block value.
+- Calendar access is requested only from Plan after calendar-aware planning action.
+- If onboarding is skipped, land in Today with a strong empty state and Capture action.
+- First-run success metric is any useful object created.
 
 ## Voice Rules
 
@@ -184,6 +196,7 @@ Open Plan
 
 | Surface | Empty state | Error state | Recovery state | Primary action |
 | --- | --- | --- | --- | --- |
+| Onboarding | Static preview + first prompt | Preserve input and allow retry/skip | Uncertain route or Life Area | Organize This / Skip |
 | Today | No planned work yet; explain that Today gets useful after one object exists | Could not load current plan; local data remains safe | Day drifted, no open window, overloaded, missed protected item, sensitive item collapsed | Capture Something / Save the Day |
 | Goals | No active goals; invite first meaningful goal or Life Area | Could not load goals; existing local data remains safe | Goal stale, blocked, waiting, or no Next Visible Step | Add Goal / Review Goal |
 | Goal Detail | Goal has no plan/proof/steps yet | Could not load detail; goal remains available from Goals | Goal at risk, blocked, scope too large, deadline no longer believable | Add First Step / Replan |
@@ -194,6 +207,108 @@ Open Plan
 | What Ambitions Knows | No memories yet | Could not load memory; no new memory applied | Memory stale, contradicted by correction, needs confirmation, learning paused | Add Preference / Review |
 | Reviews | No reviews yet | Could not build review; historical data remains safe | Carryover, drift, correction, plan no longer holds | Start Review |
 | Archive | No archived learning yet | Could not load archive; active work unaffected | Restore, inspect, or learn from ended/no-longer-relevant item | Open Item / Restore |
+
+## Onboarding States
+
+### Static Preview
+
+Copy:
+
+```text
+Organize what matters. Know what to do next.
+```
+
+Primary action:
+
+```text
+Start
+```
+
+Rules:
+
+- Static premium preview at launch.
+- No animation requirement.
+- Do not request permissions here.
+- VoiceOver must describe the preview meaningfully.
+
+### First Prompt
+
+Copy:
+
+```text
+What do you want to organize?
+```
+
+Primary action:
+
+```text
+Organize This
+```
+
+Rules:
+
+- User can create any useful object.
+- First-run success is not limited to Goal creation.
+
+### Onboarding Save Failed
+
+Copy:
+
+```text
+This did not save. Your text is still here.
+```
+
+Actions:
+
+- `Try Again`
+- `Skip for Now`
+
+Rules:
+
+- Preserve input.
+- Never discard first-run text.
+
+### Onboarding Route Receipt
+
+Copy pattern:
+
+```text
+Saved as Goal · Creative
+Next: Shape the first milestone
+Change
+```
+
+Rules:
+
+- Receipt appears inside the destination.
+- Life Area is correctable from receipt.
+- Do not show detached confirmation interstitial.
+
+### Skipped Onboarding
+
+Copy:
+
+```text
+Today gets useful after you add one thing that matters.
+```
+
+Primary action:
+
+```text
+Capture Something
+```
+
+Secondary action:
+
+```text
+Use Example
+```
+
+Rules:
+
+- Land in Today.
+- Strong empty state with Capture action.
+- No permission prompt.
 
 ## Today States
 
@@ -829,6 +944,9 @@ Every screen-level state must satisfy:
 - preserved user input where relevant
 - correction or route change where relevant
 - receipt after meaningful change
+- receipt appears inside destination for first-run object creation
+- no onboarding permission prompts
+- skipped onboarding lands in Today with Capture action
 - confirmation for destructive/external/major deadline changes
 - confirmation for sensitive/high-impact memory creation
 - receipt + undo for reversible local changes where safe
@@ -870,10 +988,24 @@ Every screen-level state must satisfy:
 - User-facing memory section is `What Ambitions Knows`; object/type name is `Memory`.
 - Users can delete all memory from Trust Center with confirmation and export/reminder first.
 
+## Resolved Wave 4 Questions
+
+- Static premium product preview at launch; animation later.
+- First prompt: `What do you want to organize?`
+- First object creation shows receipt inside destination.
+- Display density is not asked during onboarding; default is Balanced + Comfortable.
+- Life Area is inferred when possible and asked only when uncertain.
+- Notifications are requested only after reminder/protected-block value.
+- Calendar access is requested only from Plan after calendar-aware planning action.
+- Default examples cover Career, Creative, Finance, Health, Home, and Relationships / Family.
+- Baby/family examples can appear later when contextually relevant.
+- Skipping onboarding lands in Today with strong empty state and Capture action.
+- First-run success metric is any useful object created.
+
 ## Open Questions For Future Waves
 
 - Should Capture low-confidence choices be Task / Goal / Idea, or Task / Goal / Later?
-- Should Today empty state emphasize Capture or Goal creation first?
 - Which errors deserve inline treatment versus full-screen state?
 - Should archived ended/no-longer-relevant goals be recoverable by default?
 - Should memory suggestions appear as receipts, review cards, or Trust Center prompts?
+- Should the static onboarding preview show Today, Goal Detail, or Plan?
