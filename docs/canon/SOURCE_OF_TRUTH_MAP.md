@@ -12,17 +12,18 @@ When a future planning, design, roadmap, or implementation task needs context, u
 2. `docs/canon/SOURCE_OF_TRUTH_MAP.md` for document ownership and reading order.
 3. `docs/canon/PRODUCT_DECISIONS.md` for resolved product decisions from Waves 1-19.
 4. `docs/canon/GOLDEN_LAUNCH_LOOP.md` for the smallest undeniable launch loop, launch-critical cutline, demo story, and product-strength rules.
-5. `docs/canon/HUMAN_LANGUAGE_REVIEW.md` for user-facing language rules and AI/producty copy rejection.
-6. `docs/canon/AMBITION_CANON_COMPLETION_REPORT.md` for completion status, open questions, no-drift rules, and next reconciliation prompt.
-7. `MASTER_PRODUCT_SPEC.md` for current shipping product truth and product promise.
-8. `docs/canon/design/Ambitions_Design_Constitution.md` for design, IA, UX writing, interaction, trust, accessibility posture, and external-surface behavior.
-9. `docs/canon/Ambitions_2_0_Product_Architecture.md` for surface ownership, drilldown rules, object hierarchy, and operating loops.
-10. `docs/canon/Ambitions_2_0_Systems_Architecture.md` for shared engines, local-first systems, and system ownership.
-11. `docs/canon/Ambitions_2_0_Visual_System.md` plus `docs/canon/design/*` for visual, component, panel, density, grouped-list, accessibility, and UX-writing contracts.
-12. Focused consolidation docs for implementation-readable detail.
-13. `docs/canon/Ambitions_2_0_Roadmap.md`, `docs/canon/Ambitions_2_0_Batch_Plan.md`, and `docs/codex/batches/*` for execution sequencing after canon reconciliation.
-14. QA, review, and release docs for acceptance evidence.
-15. Archived docs only when explicitly marked as historical context and only where they do not conflict with active canon.
+5. `docs/canon/ROADMAP_BATCH_CLASSIFICATION.md` for launch-critical / soon-after-launch / post-launch / deferred / decision-gated classification of D01-D26.
+6. `docs/canon/HUMAN_LANGUAGE_REVIEW.md` for user-facing language rules and AI/producty copy rejection.
+7. `docs/canon/AMBITION_CANON_COMPLETION_REPORT.md` for completion status, open questions, no-drift rules, and next reconciliation prompt.
+8. `MASTER_PRODUCT_SPEC.md` for current shipping product truth and product promise.
+9. `docs/canon/design/Ambitions_Design_Constitution.md` for design, IA, UX writing, interaction, trust, accessibility posture, and external-surface behavior.
+10. `docs/canon/Ambitions_2_0_Product_Architecture.md` for surface ownership, drilldown rules, object hierarchy, and operating loops.
+11. `docs/canon/Ambitions_2_0_Systems_Architecture.md` for shared engines, local-first systems, and system ownership.
+12. `docs/canon/Ambitions_2_0_Visual_System.md` plus `docs/canon/design/*` for visual, component, panel, density, grouped-list, accessibility, and UX-writing contracts.
+13. Focused consolidation docs for implementation-readable detail.
+14. `docs/canon/Ambitions_2_0_Roadmap.md`, `docs/canon/Ambitions_2_0_Batch_Plan.md`, and `docs/codex/batches/*` for execution sequencing after canon reconciliation.
+15. QA, review, and release docs for acceptance evidence.
+16. Archived docs only when explicitly marked as historical context and only where they do not conflict with active canon.
 
 ## Active Ownership Map
 
@@ -30,7 +31,8 @@ When a future planning, design, roadmap, or implementation task needs context, u
 | --- | --- | --- | --- |
 | Product identity and promise | `MASTER_PRODUCT_SPEC.md` | `PRODUCT_DECISIONS.md`, `Ambitions_Design_Constitution.md` | Ambitions is a life organization system / personal life OS. |
 | Product decisions | `PRODUCT_DECISIONS.md` | focused canon docs | Resolved Wave 1-19 decision ledger. |
-| Golden launch loop / product-strength cutline | `GOLDEN_LAUNCH_LOOP.md` | `LAUNCH_SCOPE_MVP_QUALITY_BAR.md`, Roadmap Governance, Acceptance Gates | Defines the smallest undeniable loop: capture, place, plan, do today, recover, save proof. Launch-critical work must map here. |
+| Golden launch loop / product-strength cutline | `GOLDEN_LAUNCH_LOOP.md` | `ROADMAP_BATCH_CLASSIFICATION.md`, `LAUNCH_SCOPE_MVP_QUALITY_BAR.md`, Roadmap Governance, Acceptance Gates | Defines the smallest undeniable loop: capture, place, plan, do today, recover, save proof. Launch-critical work must map here. |
+| Roadmap/batch classification | `ROADMAP_BATCH_CLASSIFICATION.md` | `GOLDEN_LAUNCH_LOOP.md`, Roadmap Governance, Batch Registry, Batch Plan | Classifies D01-D26 as launch-critical, soon-after-launch, post-launch, deferred, decision-gated, or infrastructure-unlock. |
 | Human user-facing language | `HUMAN_LANGUAGE_REVIEW.md` | `ux-writing-state-language-matrix.md`, Acceptance Gates, Today canon | Plain, human UI copy. Rejects AI/producty language such as protected/protection, anchor, optimize, AI/model/confidence in normal UI. |
 | Final canon status | `AMBITION_CANON_COMPLETION_REPORT.md` | `ROADMAP_BATCH_GOVERNANCE.md` | Completion report, open questions, no-drift rules, next Codex prompt. |
 | Top-level shell | `IA_NAVIGATION_DRILLDOWN.md` | `Ambitions_Design_Constitution.md`, Product Architecture | Locked shell: Today, Goals, Capture, Plan, You. |
@@ -50,13 +52,13 @@ When a future planning, design, roadmap, or implementation task needs context, u
 | Data / local-first / sync / export | `DATA_LOCAL_SYNC_EXPORT.md` | Trust/Memory, Systems Architecture | Local-first, no account required at launch, no launch sync, export before sync. |
 | Monetization | `MONETIZATION_PRICING_BUSINESS_MODEL.md` | Launch Scope, Data canon | Premium but accessible; no ads; no data hostage; trust controls not paywalled. |
 | Launch scope / MVP / quality | `LAUNCH_SCOPE_MVP_QUALITY_BAR.md` | Golden Launch Loop, Acceptance Gates, Roadmap Governance | Launch proves one meaningful goal can become organized, believable, actionable. |
-| Roadmap / batch governance | `ROADMAP_BATCH_GOVERNANCE.md` | Golden Launch Loop, Batch Registry, Batch Plan | No-drift execution, canon proposals, shipped/planned/deferred discipline. |
+| Roadmap / batch governance | `ROADMAP_BATCH_GOVERNANCE.md` | `ROADMAP_BATCH_CLASSIFICATION.md`, Golden Launch Loop, Batch Registry, Batch Plan | No-drift execution, canon proposals, shipped/planned/deferred discipline. |
 | Trust, privacy, memory, receipts | `TRUST_PRIVACY_MEMORY.md` | Design Constitution, Systems Architecture, Data canon | Trust Center, What Ambitions Knows, receipts, sensitive Life Areas. |
 | Onboarding | `ONBOARDING_SPEC.md` | Design Constitution, Today, Capture, Golden Launch Loop | First useful object, safe skip, permission timing. |
 | Empty/error/recovery states | `EMPTY_ERROR_RECOVERY_STATES.md` | UX writing matrix, Human Language Review, Acceptance Gates | Screen-state behavior and recovery standards. |
 | Completion and QA gates | `IMPLEMENTATION_ACCEPTANCE_GATES.md` | Golden Launch Loop, Human Language Review, Visual Review Checklist, RC Maturity Plan, focused canon docs | Definition of done and validation requirements. |
 | Design tokens | `design/DESIGN_TOKENS.md` | Visual System, component matrix | Implementation naming for visual primitives. |
-| Roadmap and batch sequencing | `Ambitions_2_0_Roadmap.md`, `Ambitions_2_0_Batch_Plan.md` | `GOLDEN_LAUNCH_LOOP.md`, `ROADMAP_BATCH_GOVERNANCE.md`, `BATCH_REGISTRY.md` | Pending reconciliation against Waves 1-19 and Golden Launch Loop cutline. |
+| Roadmap and batch sequencing | `Ambitions_2_0_Roadmap.md`, `Ambitions_2_0_Batch_Plan.md` | `ROADMAP_BATCH_CLASSIFICATION.md`, `GOLDEN_LAUNCH_LOOP.md`, `ROADMAP_BATCH_GOVERNANCE.md`, `BATCH_REGISTRY.md` | Pending reconciliation against Waves 1-19 and Golden Launch Loop cutline. |
 | Canon weakness/gap analysis | `CANON_CONSOLIDATION_GAP_AUDIT.md` | Completion Report | Documentation architecture audit, not feature gap audit. |
 
 ## Active Focused Canon Set
@@ -79,6 +81,7 @@ The focused consolidation set now includes:
 - `docs/canon/LAUNCH_SCOPE_MVP_QUALITY_BAR.md`
 - `docs/canon/ROADMAP_BATCH_GOVERNANCE.md`
 - `docs/canon/GOLDEN_LAUNCH_LOOP.md`
+- `docs/canon/ROADMAP_BATCH_CLASSIFICATION.md`
 - `docs/canon/HUMAN_LANGUAGE_REVIEW.md`
 - `docs/canon/AMBITION_CANON_COMPLETION_REPORT.md`
 - `docs/canon/ONBOARDING_SPEC.md`
@@ -96,6 +99,7 @@ Future work must preserve these settled rules unless a later explicit canon deci
 - Top-level shell stays `Today / Goals / Capture / Plan / You`.
 - Ambitions stays deep, not wide.
 - Launch-critical work must map to the Golden Launch Loop: capture, place, plan, do today, recover, save proof.
+- D01-D26 classification must follow `ROADMAP_BATCH_CLASSIFICATION.md` unless a later explicit decision supersedes it.
 - Today is not a task dump.
 - Goals is not a project-management board.
 - Plan is not a raw calendar clone.
@@ -108,7 +112,7 @@ Future work must preserve these settled rules unless a later explicit canon deci
 - Trust/privacy/data controls are not paywalled.
 - Accessibility and Focus Support are core product quality.
 - Launch proves one meaningful goal can become organized, doable, and actionable today.
-- Roadmap/batch work must prevent drift and distinguish shipped, planned, deferred, and decision-gated.
+- Roadmap/batch work must prevent drift and distinguish shipped, planned, deferred, decision-gated, and infrastructure-unlock work.
 
 ## Reconciliation Rule
 
@@ -118,6 +122,7 @@ Do not create more major docs by default. Reconcile the active roadmap, batch pl
 
 - `PRODUCT_DECISIONS.md`
 - `GOLDEN_LAUNCH_LOOP.md`
+- `ROADMAP_BATCH_CLASSIFICATION.md`
 - `HUMAN_LANGUAGE_REVIEW.md`
 - `AMBITION_CANON_COMPLETION_REPORT.md`
 - the focused canon set above
@@ -127,7 +132,7 @@ Do not create more major docs by default. Reconcile the active roadmap, batch pl
 Every future Codex prompt should include this instruction:
 
 ```text
-Before implementation, read docs/canon/SOURCE_OF_TRUTH_MAP.md and follow its source-of-truth order. Do not treat archived or superseded docs as active canon. Do not create duplicate engines when Systems Architecture already assigns ownership. Distinguish planned canon from shipped code. Preserve Waves 1-19 decisions, the Golden Launch Loop, and the Human Language Review unless a later explicit canon decision supersedes them. Launch-critical work must map to capture/place/plan/do today/recover/save proof. Normal UI must sound human, plain, and obvious; do not ship AI/model/confidence/protected/protection/anchor/optimize/execution-context language in visible copy.
+Before implementation, read docs/canon/SOURCE_OF_TRUTH_MAP.md and follow its source-of-truth order. Do not treat archived or superseded docs as active canon. Do not create duplicate engines when Systems Architecture already assigns ownership. Distinguish planned canon from shipped code. Preserve Waves 1-19 decisions, the Golden Launch Loop, Roadmap/Batch Classification, and the Human Language Review unless a later explicit canon decision supersedes them. Launch-critical work must map to capture/place/plan/do today/recover/save proof. Normal UI must sound human, plain, and obvious; do not ship AI/model/confidence/protected/protection/anchor/optimize/execution-context language in visible copy.
 ```
 
 ## Archive Rule
@@ -141,4 +146,4 @@ Do not delete or archive active docs casually. Archive only after:
 
 ## Next Step
 
-Run the roadmap/batch reconciliation prompt inside `GOLDEN_LAUNCH_LOOP.md` and `AMBITION_CANON_COMPLETION_REPORT.md`, then run the user-facing language cleanup prompt inside `HUMAN_LANGUAGE_REVIEW.md` before visual/UI release work.
+Run the roadmap/batch reconciliation prompt inside `ROADMAP_BATCH_CLASSIFICATION.md`, then run the user-facing language cleanup prompt inside `HUMAN_LANGUAGE_REVIEW.md` before visual/UI release work.
