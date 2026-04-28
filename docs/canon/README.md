@@ -5,6 +5,7 @@ This folder contains active Ambitions canon plus preserved historical support do
 ## Active Source-Of-Truth Docs
 
 - [SOURCE_OF_TRUTH_MAP.md](SOURCE_OF_TRUTH_MAP.md)
+- [PRODUCT_DECISIONS.md](PRODUCT_DECISIONS.md)
 - [../../MASTER_PRODUCT_SPEC.md](../../MASTER_PRODUCT_SPEC.md)
 - [design/Ambitions_Design_Constitution.md](design/Ambitions_Design_Constitution.md)
 - [Ambitions_2_0_Master_Plan.md](Ambitions_2_0_Master_Plan.md)
@@ -23,6 +24,7 @@ This folder contains active Ambitions canon plus preserved historical support do
 These docs extract existing canon into narrower implementation-readable specs. They clarify; they do not replace the active source-of-truth stack above.
 
 - [SOURCE_OF_TRUTH_MAP.md](SOURCE_OF_TRUTH_MAP.md)
+- [PRODUCT_DECISIONS.md](PRODUCT_DECISIONS.md)
 - [CANON_CONSOLIDATION_GAP_AUDIT.md](CANON_CONSOLIDATION_GAP_AUDIT.md)
 - [DOMAIN_MODEL.md](DOMAIN_MODEL.md)
 - [GOAL_PLAN_TASK_LIFECYCLE.md](GOAL_PLAN_TASK_LIFECYCLE.md)
