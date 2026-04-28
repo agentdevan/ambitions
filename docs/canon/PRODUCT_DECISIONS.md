@@ -338,6 +338,23 @@ Adoption date: 2026-04-27
 
 ---
 
+# Wave 18 — Roadmap, Batch Governance, And No-Drift Execution
+
+Adoption date: 2026-04-27
+
+- Roadmap should optimize for completing coherent product loops.
+- Batches may introduce new canon only when explicitly labeled as a canon proposal.
+- When a batch conflicts with canon, pause and resolve conflict.
+- Batch completion requires acceptance gates pass and docs/status updated.
+- Roadmap order should prioritize dependencies.
+- Future roadmap docs should distinguish shipped, planned, and deferred.
+- Codex prompts should always include relevant canon docs, acceptance gates, no-drift rules, and validation command expectations.
+- Batch execution must never add tabs casually, rename canon casually, implement fake capability, or skip validation/status updates.
+- Unresolved questions become canon proposals or decision log entries.
+- Roadmap governance north star: no drift from the product Ambitions is becoming.
+
+---
+
 # Active Follow-Up Targets
 
 These decisions should be reflected in:
@@ -361,4 +378,5 @@ These decisions should be reflected in:
 - `docs/canon/DATA_LOCAL_SYNC_EXPORT.md`
 - `docs/canon/MONETIZATION_PRICING_BUSINESS_MODEL.md`
 - `docs/canon/LAUNCH_SCOPE_MVP_QUALITY_BAR.md`
-- future batch prompts involving launch scope, MVP, acceptance gates, quality bar, onboarding, IA, navigation, drilldown, breadcrumbs, tabs, Life Areas, Capture routing, Today, Now State, empty states, recovery, best next action, Goals, Goal Detail, Goal Weather, Proof, Plan, calendar-aware planning, believability, daily schedule, rituals, You, Profile migration, Settings, Reviews, Trust Center, Appearance Studio, intelligence, suggestions, automation, visual system, components, motion, accessibility, Focus Support, external surfaces, notifications, widgets, Live Activities, App Intents, Shortcuts, data controls, local-first behavior, sync, export/import, monetization, pricing, free tier, paid tier, receipts, sensitive Life Areas, privacy controls, Smart Attachment, Needs a Place, or Capture input behavior.
+- `docs/canon/ROADMAP_BATCH_GOVERNANCE.md`
+- future batch prompts involving roadmap governance, batch execution, no-drift rules, canon proposals, acceptance gates, validation, shipped/planned/deferred status, launch scope, MVP, quality bar, onboarding, IA, navigation, drilldown, breadcrumbs, tabs, Life Areas, Capture routing, Today, Now State, empty states, recovery, best next action, Goals, Goal Detail, Goal Weather, Proof, Plan, calendar-aware planning, believability, daily schedule, rituals, You, Profile migration, Settings, Reviews, Trust Center, Appearance Studio, intelligence, suggestions, automation, visual system, components, motion, accessibility, Focus Support, external surfaces, notifications, widgets, Live Activities, App Intents, Shortcuts, data controls, local-first behavior, sync, export/import, monetization, pricing, free tier, paid tier, receipts, sensitive Life Areas, privacy controls, Smart Attachment, Needs a Place, or Capture input behavior.
