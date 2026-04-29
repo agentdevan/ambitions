@@ -2,6 +2,7 @@ import Foundation
 
 protocol PortableSnapshotServicing: Sendable {
     func exportSnapshot() async throws -> PortableAppSnapshot
+    func exportSnapshot(selection: PortableExportSelection) async throws -> PortableAppSnapshot
     func importSnapshot(_ snapshot: PortableAppSnapshot, mode: PortableImportMode) async throws -> PortableImportReport
 }
 
@@ -18,6 +19,10 @@ struct PortableSnapshotService: PortableSnapshotServicing {
     }
 
     func exportSnapshot() async throws -> PortableAppSnapshot {
+        try await exportSnapshot(selection: .all)
+    }
+
+    func exportSnapshot(selection: PortableExportSelection) async throws -> PortableAppSnapshot {
         async let goals = repositories.goals.listGoals()
         async let drafts = repositories.drafts.listDrafts()
         async let evidence = repositories.evidence.listEvidence(goalID: nil)
@@ -26,43 +31,71 @@ struct PortableSnapshotService: PortableSnapshotServicing {
         async let teachingSignals = repositories.teaching.listSignals(goalID: nil)
         async let appState = repositories.appState.loadState()
 
-        return try await PortableAppSnapshot(
+        let loadedGoals = try await goals
+        let loadedDrafts = try await drafts
+        let loadedEvidence = try await evidence
+        let loadedFeedback = try await feedback
+        let loadedCaptures = try await captures
+        let loadedTeachingSignals = try await teachingSignals
+        let loadedAppState = try await appState
+
+        let exportedGoals = selection.includes(.goalsAndPlans) ? loadedGoals : []
+        let exportedDrafts = selection.includes(.goalsAndPlans) ? loadedDrafts : []
+        let exportedEvidence = selection.includes(.proof) ? loadedEvidence : []
+        let exportedFeedback = selection.includes(.receipts) ? loadedFeedback : []
+        let exportedCaptures = selection.includes(.captures) ? loadedCaptures : []
+        let exportedTeachingSignals = selection.includes(.memory) ? loadedTeachingSignals : []
+        let exportedAppState = selection.includes(.settings) ? loadedAppState : .default
+
+        return PortableAppSnapshot(
             metadata: PortableAppSnapshotMetadata(
                 schemaVersion: .v1,
                 exportedAt: DomainTimestamp.string(from: .now),
                 source: "native.local.repositories",
                 trustPosture: .localOnly
             ),
-            goals: goals,
-            drafts: drafts,
-            evidence: evidence,
-            feedback: feedback,
-            captures: captures,
-            teachingSignals: teachingSignals,
-            appState: appState
+            goals: exportedGoals,
+            drafts: exportedDrafts,
+            evidence: exportedEvidence,
+            feedback: exportedFeedback,
+            captures: exportedCaptures,
+            teachingSignals: exportedTeachingSignals,
+            appState: exportedAppState,
+            manifest: PortableExportManifest.make(
+                selection: selection,
+                goals: exportedGoals,
+                drafts: exportedDrafts,
+                evidence: exportedEvidence,
+                feedback: exportedFeedback,
+                captures: exportedCaptures,
+                teachingSignals: exportedTeachingSignals,
+                appState: exportedAppState
+            )
         )
     }
 
     func importSnapshot(_ snapshot: PortableAppSnapshot, mode: PortableImportMode) async throws -> PortableImportReport {
-        try validate(snapshot.metadata.schemaVersion)
+        let warnings = try validate(snapshot)
 
         switch mode {
         case .replaceLocalStore:
-            return try await replaceLocalStore(with: snapshot)
+            return try await replaceLocalStore(with: snapshot, warnings: warnings)
         case .mergeWithConflictReport:
-            return try await mergeWithConflictReport(snapshot)
+            return try await mergeWithConflictReport(snapshot, warnings: warnings)
         }
     }
 }
 
 private extension PortableSnapshotService {
-    func validate(_ version: PortableSnapshotSchemaVersion) throws {
-        guard version == .v1 else {
-            throw PortableSnapshotError.unsupportedSchemaVersion(version.rawValue)
+    func validate(_ snapshot: PortableAppSnapshot) throws -> [PortableImportWarning] {
+        guard snapshot.metadata.schemaVersion == .v1 else {
+            throw PortableSnapshotError.unsupportedSchemaVersion(snapshot.metadata.schemaVersion.rawValue)
         }
+
+        return manifestWarnings(for: snapshot)
     }
 
-    func replaceLocalStore(with snapshot: PortableAppSnapshot) async throws -> PortableImportReport {
+    func replaceLocalStore(with snapshot: PortableAppSnapshot, warnings: [PortableImportWarning]) async throws -> PortableImportReport {
         try await resetStore()
         try await repositories.goals.saveGoals(snapshot.goals)
         try await repositories.drafts.saveDrafts(snapshot.drafts)
@@ -102,11 +135,11 @@ private extension PortableSnapshotService {
             importedTeachingSignalCount: snapshot.teachingSignals.count,
             importedAppStateCount: 1,
             conflicts: [],
-            warnings: []
+            warnings: warnings
         )
     }
 
-    func mergeWithConflictReport(_ snapshot: PortableAppSnapshot) async throws -> PortableImportReport {
+    func mergeWithConflictReport(_ snapshot: PortableAppSnapshot, warnings: [PortableImportWarning]) async throws -> PortableImportReport {
         async let localGoals = repositories.goals.listGoals()
         async let localDrafts = repositories.drafts.listDrafts()
         async let localEvidence = repositories.evidence.listEvidence(goalID: nil)
@@ -169,8 +202,33 @@ private extension PortableSnapshotService {
             importedTeachingSignalCount: teachingResult.accepted.count,
             importedAppStateCount: appStateResult.accepted ? 1 : 0,
             conflicts: goalResult.conflicts + draftResult.conflicts + evidenceResult.conflicts + feedbackResult.conflicts + captureResult.conflicts + teachingResult.conflicts + appStateResult.conflicts,
-            warnings: []
+            warnings: warnings
         )
+    }
+
+    func manifestWarnings(for snapshot: PortableAppSnapshot) -> [PortableImportWarning] {
+        let expectedCounts: [PortableExportCategory: Int] = [
+            .goalsAndPlans: snapshot.goals.count + snapshot.drafts.count,
+            .captures: snapshot.captures.count,
+            .proof: snapshot.evidence.count,
+            .receipts: snapshot.feedback.count,
+            .memory: snapshot.teachingSignals.count,
+            .settings: snapshot.appState == .default ? 0 : 1
+        ]
+
+        return PortableExportCategory.allCases.compactMap { category in
+            guard let summary = snapshot.manifest.summary(for: category) else {
+                return PortableImportWarning(
+                    id: "manifest.missing.\(category.rawValue)",
+                    message: "\(category.title) is missing from the package manifest. Review this package before import."
+                )
+            }
+            guard summary.itemCount != expectedCounts[category] else { return nil }
+            return PortableImportWarning(
+                id: "manifest.count.\(category.rawValue)",
+                message: "\(category.title) count does not match the package contents. Review this package before import."
+            )
+        }
     }
 
     func compareGoals(incoming: [Goal], local: [Goal]) -> (accepted: [Goal], conflicts: [PortableConflict]) {

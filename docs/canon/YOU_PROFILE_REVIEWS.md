@@ -207,6 +207,13 @@ Rules:
 - Export failure should explain what remains safe.
 - Delete-all-memory should offer export/reminder first where export exists.
 
+M02 status:
+
+- Service-level portable export/import proof now exists through `PortableAppSnapshot` and `PortableSnapshotService`.
+- Export packages name selected categories, privacy preview rules, and excluded cloud/calendar/external-rendered state.
+- Import reports include safety summaries and warnings.
+- A user-facing You / Trust Center export/import surface is still future-owned; do not present a finished UI unless that surface is implemented.
+
 ## Appearance Studio
 
 Resolved direction:

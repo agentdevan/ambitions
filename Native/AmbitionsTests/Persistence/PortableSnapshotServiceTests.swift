@@ -33,6 +33,13 @@ final class PortableSnapshotServiceTests: XCTestCase {
         XCTAssertEqual(snapshot.metadata.schemaVersion, .v1)
         XCTAssertEqual(snapshot.metadata.trustPosture, .localOnly)
         XCTAssertEqual(snapshot.metadata.source, "native.local.repositories")
+        XCTAssertEqual(snapshot.manifest.userSummary, "This package can move selected local Ambitions data without requiring an account or cloud sync.")
+        XCTAssertEqual(snapshot.manifest.summary(for: .goalsAndPlans)?.itemCount, 2)
+        XCTAssertEqual(snapshot.manifest.summary(for: .proof)?.itemCount, 1)
+        XCTAssertEqual(snapshot.manifest.summary(for: .receipts)?.itemCount, 1)
+        XCTAssertEqual(snapshot.manifest.summary(for: .memory)?.itemCount, 1)
+        XCTAssertTrue(snapshot.manifest.privacyRules.contains("Preview surfaces must use redacted receipt/proof summaries for private or sensitive details."))
+        XCTAssertTrue(snapshot.manifest.exclusions.contains { $0.id == "excluded.cloud-sync-account" })
         XCTAssertEqual(snapshot.goals.map(\.id), [goal.id])
         XCTAssertEqual(snapshot.drafts.map(\.id), [draft.id])
         XCTAssertEqual(snapshot.evidence.map(\.id), [evidence.id])
@@ -40,6 +47,39 @@ final class PortableSnapshotServiceTests: XCTestCase {
         XCTAssertEqual(snapshot.captures.map(\.id), [capture.id])
         XCTAssertEqual(snapshot.teachingSignals.map(\.id), [teaching.id])
         XCTAssertEqual(snapshot.appState.userDisplayName, "Portable User")
+    }
+
+    func testExportSnapshotSupportsUserSelectedCategoriesWithoutClaimingSync() async throws {
+        let store = try AmbitionsPersistenceStore(inMemory: true)
+        let repositories = makeRepositories(store: store)
+        let goal = try XCTUnwrap(sampleGoal(id: "goal-selected", revision: 1, updatedAt: "2026-04-18T10:00:00Z"))
+        let evidence = sampleEvidence(id: "evidence-selected", goalID: goal.id, capturedAt: "2026-04-18T12:00:00Z")
+        let capture = sampleCapture(id: "capture-selected", updatedAt: "2026-04-18T14:00:00Z")
+        var state = AppStateSnapshot.default
+        state.userDisplayName = "Selective User"
+
+        try await repositories.goals.saveGoals([goal])
+        try await repositories.evidence.saveEvidence([evidence])
+        try await repositories.captures.saveCaptures([capture])
+        try await repositories.appState.saveState(state)
+
+        let service = PortableSnapshotService(
+            repositories: repositories,
+            resetStore: { try await store.resetAllData() }
+        )
+
+        let snapshot = try await service.exportSnapshot(
+            selection: PortableExportSelection(categories: [.goalsAndPlans, .settings])
+        )
+
+        XCTAssertEqual(snapshot.goals.map(\.id), [goal.id])
+        XCTAssertTrue(snapshot.evidence.isEmpty)
+        XCTAssertTrue(snapshot.captures.isEmpty)
+        XCTAssertEqual(snapshot.appState.userDisplayName, "Selective User")
+        XCTAssertEqual(snapshot.manifest.summary(for: .proof)?.isIncluded, false)
+        XCTAssertEqual(snapshot.manifest.summary(for: .captures)?.isIncluded, false)
+        XCTAssertTrue(snapshot.manifest.exclusions.contains { $0.id == "excluded.proof" })
+        XCTAssertTrue(snapshot.manifest.exclusions.contains { $0.id == "excluded.raw-calendar-events" })
     }
 
     func testReplaceLocalStoreClearsExistingDataAndRestoresSnapshot() async throws {
@@ -170,6 +210,109 @@ final class PortableSnapshotServiceTests: XCTestCase {
         await XCTAssertThrowsErrorAsync(try await service.importSnapshot(snapshot, mode: .replaceLocalStore)) { error in
             XCTAssertEqual(error as? PortableSnapshotError, .unsupportedSchemaVersion("portable_app_snapshot.v999"))
         }
+    }
+
+    func testImportSnapshotReportsManifestWarningsWithoutSilentlyDroppingLocalData() async throws {
+        let store = try AmbitionsPersistenceStore(inMemory: true)
+        let repositories = makeRepositories(store: store)
+        let localGoal = try XCTUnwrap(sampleGoal(id: "goal-local", revision: 1, updatedAt: "2026-04-18T10:00:00Z", title: "Local Goal"))
+        let incomingGoal = try XCTUnwrap(sampleGoal(id: "goal-incoming-warning", revision: 1, updatedAt: "2026-04-19T10:00:00Z", title: "Incoming Goal"))
+        try await repositories.goals.saveGoals([localGoal])
+
+        let service = PortableSnapshotService(
+            repositories: repositories,
+            resetStore: { try await store.resetAllData() }
+        )
+        let staleManifest = PortableExportManifest.make(
+            selection: .all,
+            goals: [],
+            drafts: [],
+            evidence: [],
+            feedback: [],
+            captures: [],
+            teachingSignals: [],
+            appState: .default
+        )
+        let snapshot = PortableAppSnapshot(
+            metadata: PortableAppSnapshotMetadata(
+                schemaVersion: .v1,
+                exportedAt: "2026-04-19T15:00:00Z",
+                source: "native.local.repositories",
+                trustPosture: .localOnly
+            ),
+            goals: [incomingGoal],
+            drafts: [],
+            evidence: [],
+            feedback: [],
+            captures: [],
+            teachingSignals: [],
+            appState: .default,
+            manifest: staleManifest
+        )
+
+        let report = try await service.importSnapshot(snapshot, mode: .mergeWithConflictReport)
+        let loadedGoals = try await repositories.goals.listGoals()
+
+        XCTAssertEqual(report.importedGoalCount, 1)
+        XCTAssertEqual(report.warnings.map(\.id), ["manifest.count.goals_and_plans"])
+        XCTAssertEqual(report.safetySummary.warningMessages, ["Goals and plans count does not match the package contents. Review this package before import."])
+        XCTAssertEqual(Set(loadedGoals.map(\.id)), [localGoal.id, incomingGoal.id])
+    }
+
+    func testNewPhoneDisasterDrillRestoresEncodedPackageIntoFreshStore() async throws {
+        let sourceStore = try AmbitionsPersistenceStore(inMemory: true)
+        let sourceRepositories = makeRepositories(store: sourceStore)
+        let goal = try XCTUnwrap(sampleGoal(id: "goal-new-phone", revision: 2, updatedAt: "2026-04-18T10:00:00Z"))
+        let evidence = sampleEvidence(id: "evidence-new-phone", goalID: goal.id, capturedAt: "2026-04-18T12:00:00Z")
+        let feedback = sampleFeedback(stepID: "step-new-phone", occurredAt: "2026-04-18T13:00:00Z")
+        let capture = sampleCapture(id: "capture-new-phone", updatedAt: "2026-04-18T14:00:00Z")
+        let teaching = sampleTeachingSignal(goalID: goal.id, updatedAt: "2026-04-18T14:30:00Z")
+        var state = AppStateSnapshot.default
+        state.userDisplayName = "Restored New Phone"
+        state.lastOpenedGoalID = goal.id
+
+        try await sourceRepositories.goals.saveGoals([goal])
+        try await sourceRepositories.evidence.saveEvidence([evidence])
+        try await sourceRepositories.feedback.saveEvents([feedback], goalID: goal.id)
+        try await sourceRepositories.captures.saveCaptures([capture])
+        try await sourceRepositories.teaching.saveSignals([teaching])
+        try await sourceRepositories.appState.saveState(state)
+
+        let sourceService = PortableSnapshotService(
+            repositories: sourceRepositories,
+            resetStore: { try await sourceStore.resetAllData() }
+        )
+        let exported = try await sourceService.exportSnapshot()
+        let packageData = try PersistenceCoding.encoder.encode(exported)
+        let decodedPackage = try PersistenceCoding.decoder.decode(PortableAppSnapshot.self, from: packageData)
+
+        let freshStore = try AmbitionsPersistenceStore(inMemory: true)
+        let freshRepositories = makeRepositories(store: freshStore)
+        let freshService = PortableSnapshotService(
+            repositories: freshRepositories,
+            resetStore: { try await freshStore.resetAllData() }
+        )
+
+        let report = try await freshService.importSnapshot(decodedPackage, mode: .replaceLocalStore)
+        let restoredGoals = try await freshRepositories.goals.listGoals()
+        let restoredEvidence = try await freshRepositories.evidence.listEvidence(goalID: nil)
+        let restoredFeedback = try await freshRepositories.feedback.listEvents(goalID: nil)
+        let restoredCaptures = try await freshRepositories.captures.listCaptures()
+        let restoredTeaching = try await freshRepositories.teaching.listSignals(goalID: goal.id)
+        let restoredState = try await freshRepositories.appState.loadState()
+
+        XCTAssertEqual(report.importedGoalCount, 1)
+        XCTAssertEqual(report.importedEvidenceCount, 1)
+        XCTAssertEqual(report.importedFeedbackCount, 1)
+        XCTAssertEqual(report.importedCaptureCount, 1)
+        XCTAssertEqual(report.importedTeachingSignalCount, 1)
+        XCTAssertTrue(report.safetySummary.requiresExplicitConfirmation)
+        XCTAssertEqual(restoredGoals.map(\.id), [goal.id])
+        XCTAssertEqual(restoredEvidence.map(\.id), [evidence.id])
+        XCTAssertEqual(restoredFeedback.map(\.base.id), [feedback.base.id])
+        XCTAssertEqual(restoredCaptures.map(\.id), [capture.id])
+        XCTAssertEqual(restoredTeaching.map(\.id), [teaching.id])
+        XCTAssertEqual(restoredState.userDisplayName, "Restored New Phone")
     }
 
     func testPortableSnapshotRoundTripsAdditiveSharedLifeMetadata() async throws {

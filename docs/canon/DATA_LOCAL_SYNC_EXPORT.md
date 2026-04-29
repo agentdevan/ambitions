@@ -97,6 +97,15 @@ Rules:
 - Sensitive categories should be clear before export.
 - Export should create a receipt when implemented.
 
+M02 implementation evidence:
+
+- `PortableAppSnapshot` is the current service-level export/import package.
+- The package manifest names selected categories: Goals and plans, Captures, Proof, Receipts and history, Memory, and Settings.
+- The package manifest explicitly excludes raw calendar events, cloud sync or account data, and rendered widget / Live Activity state.
+- Category selection exists at the portable snapshot service level; a full user-facing You / Trust Center export/import surface remains future-owned.
+- Proof is represented by `ProgressEvidence`; receipt/history continuity is represented by `GoalFeedbackEvent` and existing receipt/history projections where available.
+- Memory is represented by explicit teaching/correction signals; hidden inference or cloud memory is not included.
+
 ## Delete-All-Memory Scope
 
 Delete-all-memory affects:
@@ -177,6 +186,21 @@ Rules:
 - Do not fake successful export.
 - Preserve the user's selections where possible.
 - Show what did and did not happen.
+
+M02 implementation evidence:
+
+- Import reports carry safety summaries and warnings.
+- Manifest mismatch warnings are reported before import results are trusted.
+- Merge mode imports safe new records and reports conflicts instead of silently overwriting newer or ambiguous local data.
+- Replace-local-store mode is isolated to the portable snapshot service and is marked as requiring explicit confirmation before use.
+- An encoded portable package restore into a fresh in-memory store is covered by `PortableSnapshotServiceTests`.
+
+Remaining M03 hardening:
+
+- prove corrupt/partial package behavior,
+- prove migration and offline no-lost-data posture,
+- prove broader receipt/history integrity through failure cases,
+- and keep unsupported sync truth explicit.
 
 ## Local-First Failure States
 

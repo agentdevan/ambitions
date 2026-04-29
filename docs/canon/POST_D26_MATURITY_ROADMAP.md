@@ -4,7 +4,7 @@ Status: Active planning roadmap for Layer 2 and Layer 3 after the D01-D26 Design
 
 Purpose: Rewrite, rename, resequence, and rescope original Batches 89-120 against the newer canon docs and the D01-D26 Design Constitution delta/alignment backlog.
 
-This document does not independently mark D01-D26 or M-series batches complete. Operational status remains owned by `docs/codex/BATCH_REGISTRY.md`, which now records D01-D26 and M01 complete for planning purposes after M01 core-surface integration QA. M02 is the next runnable maturity batch.
+This document does not independently mark D01-D26 or M-series batches complete. Operational status remains owned by `docs/codex/BATCH_REGISTRY.md`, which now records D01-D26 and M01-M02 complete for planning purposes after M02 export/import proof. M03 is the next runnable maturity batch.
 
 ## Planning Layers
 
@@ -152,6 +152,8 @@ Acceptance:
 - no data-hostage posture.
 
 Earliest timing: after M01, D05, D18-D19 foundations.
+
+Status after M02: completed with a local-only portable snapshot manifest, selected export categories, privacy/redaction preview rules, explicit non-exported data categories, import safety summaries, manifest mismatch warnings, and an encoded fresh-store restore drill. Validation evidence: `xcodegen generate`; focused `PortableSnapshotServiceTests` (`9` tests, `0` failures); adjacent persistence/trust/receipt/memory regression lane (`66` tests, `0` failures); native simulator build on `iPhone 17`; full `AmbitionsTests` (`693` tests, `0` failures); and diff whitespace checks. Active limitations: no user-facing export/import UI, no cloud/account/sync, no real-device file sharing proof, and no full migration/corrupt/partial-data/no-lost-data hardening until M03.
 
 ### M03 — Data Safety, Migration, Offline Reliability, and No-Lost-Data Hardening
 
@@ -736,4 +738,4 @@ After D26 validation, use this roadmap as the active M/R execution sequence. M01
 - known blockers,
 - and device/platform constraints.
 
-M01 is complete for planning purposes. M02 is now the next dependency-safe implementation batch. Preserve the D01-D26 and M01 completion history and do not skip ahead to M03 or R-gates until M02 is implemented, validated, documented, committed, and pushed.
+M01-M02 are complete for planning purposes. M03 is now the next dependency-safe implementation batch. Preserve the D01-D26 and M01-M02 completion history and do not skip ahead to M04 or R-gates until M03 is implemented, validated, documented, committed, and pushed.
