@@ -35,4 +35,41 @@ final class AppShellChromeTests: XCTestCase {
         XCTAssertEqual(AppShellHeaderPosture.reflection.modeLens, .review)
         XCTAssertEqual(AppShellHeaderPosture.utility.modeLens, .focus)
     }
+
+    func testM12HeaderPosturesExposeContinuityWithoutHiddenNavigation() {
+        let messages = [
+            AppShellHeaderPosture.execution.continuityMessage,
+            AppShellHeaderPosture.direction.continuityMessage,
+            AppShellHeaderPosture.shaping.continuityMessage,
+            AppShellHeaderPosture.reflection.continuityMessage,
+            AppShellHeaderPosture.utility.continuityMessage
+        ]
+
+        XCTAssertEqual(messages.count, Set(messages).count)
+        XCTAssertTrue(messages.allSatisfy { $0.isEmpty == false })
+        XCTAssertFalse(messages.contains { message in
+            message.localizedCaseInsensitiveContains("dashboard") ||
+            message.localizedCaseInsensitiveContains("AI") ||
+            message.localizedCaseInsensitiveContains("sync") ||
+            message.localizedCaseInsensitiveContains("sixth tab")
+        })
+    }
+
+    func testM12ContinuityMaturityReportCoversRequiredSurfacesAndLayer3Blockers() {
+        XCTAssertEqual(
+            CrossSurfaceContinuityMaturityReport.handoffs.map(\.surface),
+            [.today, .capture, .goals, .plan, .you, .reviews, .externalSurfaces, .goalDetail]
+        )
+        XCTAssertTrue(CrossSurfaceContinuityMaturityReport.handoffs.contains { $0.id == "path-builder" })
+        XCTAssertTrue(CrossSurfaceContinuityMaturityReport.handoffs.allSatisfy { $0.owningRoute.isEmpty == false })
+        XCTAssertFalse(CrossSurfaceContinuityMaturityReport.handoffs.contains { $0.continuityBehavior.localizedCaseInsensitiveContains("top-level Insights") })
+        XCTAssertFalse(CrossSurfaceContinuityMaturityReport.handoffs.contains { $0.continuityBehavior.localizedCaseInsensitiveContains("Tasks tab") })
+
+        XCTAssertEqual(
+            CrossSurfaceContinuityMaturityReport.performanceChecks.map(\.id),
+            ["life-graph", "ledger-receipts", "trust-memory", "path-portfolio", "external-snapshots", "device-responsiveness"]
+        )
+        XCTAssertEqual(CrossSurfaceContinuityMaturityReport.layer3Blockers.map(\.ownerBatch), ["R01", "R02", "R03", "R04-R05"])
+        XCTAssertTrue(CrossSurfaceContinuityMaturityReport.completionSummary.contains("R01 is next"))
+    }
 }

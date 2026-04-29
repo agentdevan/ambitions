@@ -4,7 +4,7 @@ Status: Active planning roadmap for Layer 2 and Layer 3 after the D01-D26 Design
 
 Purpose: Rewrite, rename, resequence, and rescope original Batches 89-120 against the newer canon docs and the D01-D26 Design Constitution delta/alignment backlog.
 
-This document does not independently mark D01-D26 or M-series batches complete. Operational status remains owned by `docs/codex/BATCH_REGISTRY.md`, which now records D01-D26 and M01-M11 complete for planning purposes after M11 Plan, Recovery, Commitment, Waiting, and Save-the-Day Maturity. M12 is the next runnable maturity batch.
+This document does not independently mark D01-D26 or M-series batches complete. Operational status remains owned by `docs/codex/BATCH_REGISTRY.md`, which now records D01-D26 and M01-M12 complete for planning purposes after M12 Cross-Surface Continuity, Mode Lens, Mature Invention Performance. R01 is the next runnable release-readiness gate.
 
 ## Planning Layers
 
@@ -498,6 +498,8 @@ Acceptance:
 
 Earliest timing: after M01-M11 as relevant; final version after D22-D25 if external surfaces ship.
 
+Status after M12: Completed for planning purposes by adding a visible shell continuity ribbon under the existing Mode Lens header and a code-backed `CrossSurfaceContinuityMaturityReport` for Today, Capture, Goals, Plan, You, Reviews, external surfaces, and Goal Detail Path Builder handoffs. The report also records mature performance evidence and R01-R05 blockers without adding hidden global modes, new top-level surfaces, rendered external-platform claims, public accessibility claims, TestFlight readiness, App Store readiness, or RC lock. Validation evidence is recorded in `docs/codex/BATCH_REGISTRY.md`; R01 is next.
+
 ## Layer 3: RC Lock / TestFlight / App Store Path
 
 Layer 3 should begin only after D26 and the chosen Layer 2 maturity slices have enough evidence.
@@ -756,4 +758,4 @@ After D26 validation, use this roadmap as the active M/R execution sequence. M01
 - known blockers,
 - and device/platform constraints.
 
-M01-M11 are complete for planning purposes. M12 is now the next dependency-safe implementation batch. Preserve the D01-D26 and M01-M11 completion history and do not skip ahead to R-gates until M12 is implemented, validated, documented, committed, and pushed.
+M01-M12 are complete for planning purposes. R01 is now the next dependency-safe implementation batch. Preserve the D01-D26 and M01-M12 completion history and do not skip ahead to later R-gates until R01 is implemented, validated, documented, committed, and pushed.

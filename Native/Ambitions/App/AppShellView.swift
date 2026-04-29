@@ -47,6 +47,21 @@ enum AppShellHeaderPosture: String, Sendable {
         case .utility: "slider.horizontal.3"
         }
     }
+
+    var continuityMessage: String {
+        switch self {
+        case .execution:
+            "Today keeps one protected move in view."
+        case .direction:
+            "Goals keeps direction connected to the next step."
+        case .shaping:
+            "Plan reshapes the week only with confirmation."
+        case .reflection:
+            "Reviews carry proof forward without changing plans silently."
+        case .utility:
+            "You keeps controls, memory, and privacy visible."
+        }
+    }
 }
 
 struct AppShellHeaderButton {
@@ -199,6 +214,14 @@ private struct AppShellHeaderRail: View {
             .padding(.top, theme.spacing.sm)
             .padding(.bottom, theme.spacing.sm)
             .background(theme.shell.headerMaterial.opacity(theme.surfaces.backgroundBlurOpacity))
+
+            AmbitionContinuityRibbon(
+                message: posture.continuityMessage,
+                status: posture.ambientStatus
+            )
+            .padding(.horizontal, theme.spacing.lg)
+            .padding(.bottom, theme.spacing.sm)
+            .accessibilityIdentifier("shell.continuity-ribbon")
 
             Rectangle()
                 .fill(theme.shell.divider)

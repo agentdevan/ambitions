@@ -103,6 +103,7 @@ final class AmbitionsUITests: XCTestCase {
         XCTAssertFalse(app.tabBars.buttons["Habits"].exists)
         XCTAssertTrue(app.tabBars.buttons["Today"].isSelected)
         XCTAssertTrue(app.staticTexts["shell.header.title"].waitForExistence(timeout: 10))
+        XCTAssertTrue(app.descendants(matching: .any)["shell.continuity-ribbon"].waitForExistence(timeout: 10))
 
         app.tabBars.buttons["Capture"].tap()
         XCTAssertTrue(app.descendants(matching: .any)["captures.screen"].waitForExistence(timeout: 10))

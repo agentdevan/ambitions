@@ -54,7 +54,7 @@ final class CoreSurfaceIntegrationScenarioTests: XCTestCase {
         XCTAssertTrue(ownerBatches.contains("M08"))
         XCTAssertTrue(ownerBatches.contains("M09"))
         XCTAssertTrue(ownerBatches.contains("M10-M11"))
-        XCTAssertTrue(ownerBatches.contains("M12/R02"))
+        XCTAssertTrue(ownerBatches.contains("R02"))
         XCTAssertTrue(ownerBatches.contains("R01"))
         XCTAssertTrue(ownerBatches.contains("R03-R05"))
         XCTAssertTrue(blockers.contains { $0.severity == .blocking })
