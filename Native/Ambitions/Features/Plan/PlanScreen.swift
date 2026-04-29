@@ -485,6 +485,7 @@ private struct PlanTimelineStripCard: View {
                                         Text(item.timingLabel)
                                             .font(theme.typography.micro)
                                             .foregroundStyle(theme.colors.textTertiary)
+                                        TagPill(item.sourceLabel, state: .default)
                                     }
                                     .padding(theme.spacing.md)
                                     .frame(width: 176, alignment: .leading)
@@ -499,6 +500,8 @@ private struct PlanTimelineStripCard: View {
                                 }
                                 .buttonStyle(.plain)
                                 .disabled(item.target == nil)
+                                .accessibilityElement(children: .combine)
+                                .accessibilityLabel("\(item.title). \(item.detail). \(item.timingLabel). \(item.sourceLabel).")
                             }
                         }
                     }
@@ -534,7 +537,7 @@ private struct PlanCalendarAwarenessCard: View {
                 VStack(alignment: .leading, spacing: theme.spacing.md) {
                     HStack(spacing: theme.spacing.sm) {
                         TagPill(state.valueLabel, icon: "lock.shield", state: state.visualState)
-                        TagPill("Local only", icon: "iphone", state: .default)
+                        TagPill(state.sourceLabel, icon: state.status == .calendarAware ? "calendar" : "iphone", state: .default)
                         TagPill("Plan action", icon: "hand.tap", state: .default)
                     }
 
@@ -552,6 +555,7 @@ private struct PlanCalendarAwarenessCard: View {
         )
         .accessibilityElement(children: .combine)
         .accessibilityLabel("\(state.title). \(state.detail)")
+        .accessibilityIdentifier("plan.calendar-awareness")
     }
 
     private var semanticState: AmbitionSemanticState {
@@ -739,6 +743,7 @@ private struct PlanCalendarBoundaryContractCard: View {
                 VStack(alignment: .leading, spacing: theme.spacing.sm) {
                     HStack(spacing: theme.spacing.xs) {
                         TagPill(boundary.permissionLabel, icon: "calendar", state: boundary.visualState)
+                        TagPill(boundary.sourceLabel, icon: boundary.sourceLabel == "From your calendar" ? "calendar.badge.clock" : "iphone", state: .default)
                         TagPill("Manual fallback", icon: "hand.draw", state: .default)
                     }
                     Text(boundary.manualFallback)
@@ -1185,7 +1190,7 @@ private struct PlanElasticWeekCard: View {
         AppCard {
             VStack(alignment: .leading, spacing: theme.spacing.md) {
                 SectionHeader(
-                    title: "Elastic week",
+                    title: "Weekly Plan Strip",
                     subtitle: "Dense days expand, quiet days compress, and open room stays visible instead of disappearing into a calendar grid."
                 )
 
@@ -1205,7 +1210,7 @@ private struct PlanElasticWeekCard: View {
                 }
             }
         }
-        .accessibilityIdentifier("plan.elastic-week")
+        .accessibilityIdentifier("plan.weekly-plan-strip")
         .ambitionPanelAccessibility()
     }
 }

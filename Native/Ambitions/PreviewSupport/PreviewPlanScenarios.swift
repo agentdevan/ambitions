@@ -7,7 +7,7 @@ enum PreviewPlanScenarios {
         timeframeLabel: "Apr 20-Apr 26",
         hero: PlanRealityHeroState(
             eyebrow: "Plan",
-            title: "How this week holds together",
+            title: "Does this hold together?",
             subtitle: "Plan reads the week as room, pressure, and protected structure instead of a dense calendar clone.",
             dominantTruth: "Pressure is clustering into one overloaded day, while two calmer windows still have believable room.",
             roomSummary: "Wednesday and Saturday can still carry one small move without collapsing into calendar noise.",
@@ -66,12 +66,12 @@ enum PreviewPlanScenarios {
             ]
         ),
         timelineStrip: PlanTimelineStripState(
-            title: "Plan timeline",
-            subtitle: "A compact strip of previous, active, future, and outside pressure.",
+            title: "Rich Timeline",
+            subtitle: "A compact strip of previous, active, future, and outside pressure with local source labels.",
             items: [
-                PlanTimelineItemState(id: "preview-previous", title: "Launch audit", detail: "Kept outside current pressure.", timingLabel: "Previous", kind: .previous, visualState: .default, target: nil),
-                PlanTimelineItemState(id: "preview-active", title: "Ship the native shell", detail: "Fix shell regressions", timingLabel: "Due Apr 21", kind: .active, visualState: .warning, target: GoalRouteTarget(goalID: "preview-goal-1")),
-                PlanTimelineItemState(id: "preview-future", title: "Retention loop", detail: "Planned later, not part of this week's load.", timingLabel: "Future", kind: .future, visualState: .default, target: GoalRouteTarget(goalID: "preview-goal-2"))
+                PlanTimelineItemState(id: "preview-previous", title: "Launch audit", detail: "Kept outside current pressure.", timingLabel: "Previous", sourceLabel: "Created in Ambitions", kind: .previous, visualState: .default, target: nil),
+                PlanTimelineItemState(id: "preview-active", title: "Ship the native shell", detail: "Fix shell regressions", timingLabel: "Due Apr 21", sourceLabel: "Based on your plan", kind: .active, visualState: .warning, target: GoalRouteTarget(goalID: "preview-goal-1")),
+                PlanTimelineItemState(id: "preview-future", title: "Retention loop", detail: "Planned later, not part of this week's load.", timingLabel: "Future", sourceLabel: "Based on your plan", kind: .future, visualState: .default, target: GoalRouteTarget(goalID: "preview-goal-2"))
             ]
         ),
         opportunityWindows: PlanOpportunityWindowsState(
@@ -100,6 +100,7 @@ enum PreviewPlanScenarios {
             title: "Calendar stays optional",
             detail: "Plan works without access. With your confirmation, it can read derived busy time locally to find real open windows.",
             permissionLabel: "Optional",
+            sourceLabel: "Based on your plan",
             manualFallback: "Manual planning still works without calendar access.",
             writeBoundary: "Plan never silently writes or reschedules calendar blocks.",
             visualState: .default,
@@ -326,6 +327,7 @@ enum PreviewPlanScenarios {
             primaryActionTitle: "Make Plan calendar-aware",
             primaryActionSystemImage: "calendar.badge.plus",
             valueLabel: "Optional",
+            sourceLabel: "Based on your plan",
             visualState: .default,
             canRequestCalendarRead: true
         ),
@@ -404,7 +406,7 @@ enum PreviewPlanScenarios {
         timeframeLabel: "Apr 20-Apr 26",
         hero: PlanRealityHeroState(
             eyebrow: "Plan",
-            title: "How this week holds together",
+            title: "Does this hold together?",
             subtitle: "Plan stays calm until real goals, captures, or routines create week pressure worth shaping.",
             dominantTruth: "The week is mostly empty, which is useful information.",
             roomSummary: "All seven days are carrying visible room right now.",
@@ -463,7 +465,7 @@ enum PreviewPlanScenarios {
             ]
         ),
         timelineStrip: PlanTimelineStripState(
-            title: "Plan timeline",
+            title: "Rich Timeline",
             subtitle: "No goal movement is visible yet.",
             items: []
         ),
@@ -488,6 +490,7 @@ enum PreviewPlanScenarios {
             title: "Calendar stays optional",
             detail: "Plan works without access. With your confirmation, it can read derived busy time locally to find real open windows.",
             permissionLabel: "Optional",
+            sourceLabel: "Based on your plan",
             manualFallback: "Manual planning still works without calendar access.",
             writeBoundary: "Plan never silently writes or reschedules calendar blocks.",
             visualState: .default,
@@ -601,6 +604,7 @@ enum PreviewPlanScenarios {
             primaryActionTitle: "Make Plan calendar-aware",
             primaryActionSystemImage: "calendar.badge.plus",
             valueLabel: "Optional",
+            sourceLabel: "Based on your plan",
             visualState: .default,
             canRequestCalendarRead: true
         ),

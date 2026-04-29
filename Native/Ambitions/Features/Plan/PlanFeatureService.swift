@@ -125,6 +125,7 @@ private extension RepositoryBackedPlanService {
                 primaryActionTitle: "Find real open windows",
                 primaryActionSystemImage: "calendar.badge.clock",
                 valueLabel: "Aware",
+                sourceLabel: "From your calendar",
                 visualState: .success,
                 canRequestCalendarRead: true
             )
@@ -136,6 +137,7 @@ private extension RepositoryBackedPlanService {
                 primaryActionTitle: "Make Plan calendar-aware",
                 primaryActionSystemImage: "calendar.badge.clock",
                 valueLabel: "Write only",
+                sourceLabel: "Created in Ambitions",
                 visualState: .warning,
                 canRequestCalendarRead: true
             )
@@ -147,6 +149,7 @@ private extension RepositoryBackedPlanService {
                 primaryActionTitle: "Find real open windows",
                 primaryActionSystemImage: "calendar.badge.exclamationmark",
                 valueLabel: "Denied",
+                sourceLabel: "Created in Ambitions",
                 visualState: .warning,
                 canRequestCalendarRead: false
             )
@@ -158,6 +161,7 @@ private extension RepositoryBackedPlanService {
                 primaryActionTitle: "Make Plan calendar-aware",
                 primaryActionSystemImage: "calendar.badge.plus",
                 valueLabel: "Optional",
+                sourceLabel: "Based on your plan",
                 visualState: .default,
                 canRequestCalendarRead: true
             )
@@ -169,6 +173,7 @@ private extension RepositoryBackedPlanService {
                 primaryActionTitle: "Find real open windows",
                 primaryActionSystemImage: "calendar",
                 valueLabel: "Local",
+                sourceLabel: "Created in Ambitions",
                 visualState: .default,
                 canRequestCalendarRead: false
             )
@@ -865,7 +870,7 @@ private extension RepositoryBackedPlanService {
 
         return PlanRealityHeroState(
             eyebrow: "Plan",
-            title: "How this week holds together",
+            title: "Does this hold together?",
             subtitle: "Plan now reads the week as room, pressure, and protected structure instead of a dense calendar clone.",
             dominantTruth: dominantTruth,
             roomSummary: roomSummary,
@@ -1139,6 +1144,7 @@ private extension RepositoryBackedPlanService {
                 title: context.goal.title,
                 detail: context.step.title,
                 timingLabel: context.timingLabel,
+                sourceLabel: "Based on your plan",
                 kind: .active,
                 visualState: context.visualState,
                 target: GoalRouteTarget(goalID: context.goal.id)
@@ -1153,6 +1159,7 @@ private extension RepositoryBackedPlanService {
                     title: goal.title,
                     detail: "Kept outside current pressure.",
                     timingLabel: "Previous",
+                    sourceLabel: "Created in Ambitions",
                     kind: .previous,
                     visualState: goal.state == .completed ? .success : .default,
                     target: GoalRouteTarget(goalID: goal.id)
@@ -1167,6 +1174,7 @@ private extension RepositoryBackedPlanService {
                     title: goal.title,
                     detail: "Planned later, not part of this week's load.",
                     timingLabel: futureTimingLabel(for: goal, now: now),
+                    sourceLabel: "Based on your plan",
                     kind: .future,
                     visualState: .default,
                     target: GoalRouteTarget(goalID: goal.id)
@@ -1181,6 +1189,7 @@ private extension RepositoryBackedPlanService {
                     title: goal.title,
                     detail: goal.state == .paused ? "Parked outside current pressure." : "Closed or dropped outside this plan.",
                     timingLabel: goal.state == .paused ? "Parked" : "Outside",
+                    sourceLabel: "Created in Ambitions",
                     kind: .outside,
                     visualState: .default,
                     target: GoalRouteTarget(goalID: goal.id)
@@ -1189,10 +1198,10 @@ private extension RepositoryBackedPlanService {
         let items = Array((previousItems + activeItems + futureItems + outsideItems).prefix(8))
 
         return PlanTimelineStripState(
-            title: "Plan timeline",
+            title: "Rich Timeline",
             subtitle: items.isEmpty
                 ? "No goal movement is visible yet."
-                : "A compact strip of previous, active, future, and outside pressure.",
+                : "A compact strip of previous, active, future, and outside pressure with local source labels.",
             items: items
         )
     }
@@ -1449,6 +1458,7 @@ private extension RepositoryBackedPlanService {
             title: "Calendar stays optional",
             detail: calendarAwareness.detail,
             permissionLabel: calendarAwareness.valueLabel,
+            sourceLabel: calendarAwareness.sourceLabel,
             manualFallback: calendarAwareness.status == .calendarAware
                 ? "Plan can use derived busy time after your action."
                 : "Manual planning still works without calendar access.",

@@ -528,8 +528,11 @@ final class AmbitionsUITests: XCTestCase {
         XCTAssertTrue(app.descendants(matching: .any)["plan.screen"].waitForExistence(timeout: 15))
         XCTAssertTrue(app.descendants(matching: .any)["plan.hero-card"].waitForExistence(timeout: 10))
         XCTAssertTrue(scrollUntilElementExists("plan.pressure-scrubber", in: app))
-        XCTAssertTrue(scrollUntilElementExists("plan.elastic-week", in: app))
+        XCTAssertTrue(scrollUntilElementExists("plan.timeline-strip", in: app))
+        XCTAssertTrue(scrollUntilElementExists("plan.weekly-plan-strip", in: app))
         XCTAssertTrue(scrollUntilElementExists("plan.believability-card", in: app))
+        XCTAssertTrue(scrollUntilElementExists("plan.calendar-awareness", in: app))
+        XCTAssertTrue(scrollUntilElementExists("plan.calendar-boundary", in: app))
         XCTAssertTrue(scrollUntilElementExists("plan.execution-resilience", in: app))
         XCTAssertTrue(scrollUntilElementExists("plan.action-lane", in: app))
     }

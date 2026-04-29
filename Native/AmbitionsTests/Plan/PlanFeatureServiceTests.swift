@@ -16,8 +16,10 @@ final class PlanFeatureServiceTests: XCTestCase {
         XCTAssertEqual(dashboard.pressureScrubber.points.count, 7)
         XCTAssertEqual(dashboard.secondaryDestinations.map(\.id), ["plan-habits", "plan-captures", "plan-weekly-review"])
         XCTAssertTrue(dashboard.goalShapingItems.isEmpty)
+        XCTAssertEqual(dashboard.hero.title, "Does this hold together?")
         XCTAssertEqual(dashboard.treaty.title, "This week's agreement")
         XCTAssertEqual(dashboard.capacityEnvelope.label, "Light")
+        XCTAssertEqual(dashboard.timelineStrip.title, "Rich Timeline")
         XCTAssertFalse(dashboard.calendarBoundary.writeBoundary.lowercased().contains("sync"))
         XCTAssertFalse(dashboard.recoveryEntry.detail.contains("Reality Reflow"))
     }
@@ -37,6 +39,7 @@ final class PlanFeatureServiceTests: XCTestCase {
         XCTAssertTrue(dashboard.hero.contextPills.contains(where: { $0.title.contains("goals visible") }))
         XCTAssertFalse(dashboard.resilience.lanes.isEmpty)
         XCTAssertNotNil(dashboard.primaryAction.goalTarget)
+        XCTAssertEqual(dashboard.hero.title, "Does this hold together?")
         XCTAssertEqual(dashboard.treaty.title, "This week's agreement")
         XCTAssertFalse(dashboard.treaty.summary.contains("Kernel"))
         XCTAssertTrue(["Light", "Steady", "Tight", "Overloaded", "Fragile"].contains(dashboard.capacityEnvelope.label))
@@ -141,6 +144,8 @@ final class PlanFeatureServiceTests: XCTestCase {
         let requestedActionNames = await calendar.currentRequestedActionNames()
         XCTAssertEqual(requestedActionNames, ["Make Plan calendar-aware"])
         XCTAssertEqual(dashboard.calendarAwareness.status, .calendarAware)
+        XCTAssertEqual(dashboard.calendarAwareness.sourceLabel, "From your calendar")
+        XCTAssertEqual(dashboard.calendarBoundary.sourceLabel, "From your calendar")
         XCTAssertTrue(dashboard.calendarAwareness.detail.contains("open window"))
         XCTAssertEqual(events.first?.kind, .calendarContextObserved)
         XCTAssertEqual(events.first?.privacy, .calendarDerived)
@@ -158,6 +163,7 @@ final class PlanFeatureServiceTests: XCTestCase {
 
         XCTAssertEqual(dashboard.calendarAwareness.status, .denied)
         XCTAssertFalse(dashboard.calendarBoundary.canRequestCalendarRead)
+        XCTAssertEqual(dashboard.calendarAwareness.sourceLabel, "Created in Ambitions")
         XCTAssertTrue(dashboard.calendarBoundary.manualFallback.contains("Manual planning still works"))
         XCTAssertTrue(dashboard.calendarBoundary.writeBoundary.contains("never silently writes"))
         XCTAssertFalse(dashboard.calendarBoundary.detail.lowercased().contains("sync"))
@@ -204,6 +210,9 @@ final class PlanFeatureServiceTests: XCTestCase {
         XCTAssertTrue(dashboard.timelineStrip.items.contains(where: { $0.kind == .active }))
         XCTAssertTrue(dashboard.timelineStrip.items.contains(where: { $0.kind == .future }))
         XCTAssertTrue(dashboard.timelineStrip.items.contains(where: { $0.kind == .previous }))
+        XCTAssertEqual(dashboard.timelineStrip.title, "Rich Timeline")
+        XCTAssertTrue(dashboard.timelineStrip.items.map(\.sourceLabel).contains("Based on your plan"))
+        XCTAssertTrue(dashboard.timelineStrip.items.map(\.sourceLabel).contains("Created in Ambitions"))
         XCTAssertFalse(dashboard.timelineStrip.items.map(\.detail).joined(separator: " ").contains("%"))
     }
 
@@ -396,6 +405,22 @@ final class PlanFeatureServiceTests: XCTestCase {
         XCTAssertFalse(AppTab.allCases.map(\.title).contains("Captures"))
         XCTAssertFalse(AppTab.allCases.map(\.title).contains("Insights"))
         XCTAssertFalse(AppTab.allCases.map(\.title).contains("Profile"))
+    }
+
+    func testD15PlanScreenContractSnapshotSatisfiesImplementationGate() async throws {
+        let repositories = try await makeRepositories()
+        try await repositories.goals.saveGoals([makeWeekVisibleGoal()])
+        let service = RepositoryBackedPlanService(repositories: repositories)
+
+        let dashboard = try await service.loadPlanDashboard(now: fixedDate)
+        let contract = ScreenContractRegistry.contract(for: .plan)
+        let snapshot = dashboard.screenContractSnapshot()
+
+        XCTAssertEqual(snapshot.screenID, .plan)
+        XCTAssertEqual(snapshot.topLevelTabTitles, ["Today", "Goals", "Capture", "Plan", "You"])
+        XCTAssertTrue(snapshot.copySamples.contains("Does this hold together?"))
+        XCTAssertTrue(snapshot.copySamples.contains("Based on your plan"))
+        XCTAssertTrue(ScreenContractValidator.validate(snapshot: snapshot, against: contract).isEmpty)
     }
 }
 

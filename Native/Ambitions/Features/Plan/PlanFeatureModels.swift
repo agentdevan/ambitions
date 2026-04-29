@@ -113,6 +113,7 @@ struct PlanCalendarAwarenessState: Sendable {
     let primaryActionTitle: String
     let primaryActionSystemImage: String
     let valueLabel: String
+    let sourceLabel: String
     let visualState: AmbitionVisualState
     let canRequestCalendarRead: Bool
 }
@@ -317,6 +318,7 @@ struct PlanTimelineItemState: Identifiable, Sendable, Hashable {
     let title: String
     let detail: String
     let timingLabel: String
+    let sourceLabel: String
     let kind: PlanTimelineItemKind
     let visualState: AmbitionVisualState
     let target: GoalRouteTarget?
@@ -370,6 +372,7 @@ struct PlanCalendarBoundaryContractState: Sendable {
     let title: String
     let detail: String
     let permissionLabel: String
+    let sourceLabel: String
     let manualFallback: String
     let writeBoundary: String
     let visualState: AmbitionVisualState
@@ -638,4 +641,42 @@ struct PlanDashboard: Sendable {
     let secondaryDestinations: [PlanSecondaryDestination]
     let emptyTitle: String?
     let emptyMessage: String?
+}
+
+extension PlanDashboard {
+    func screenContractSnapshot(
+        topLevelTabTitles: [String] = ScreenContractValidator.canonicalTopLevelTabs
+    ) -> ScreenContractImplementationSnapshot {
+        ScreenContractImplementationSnapshot(
+            screenID: .plan,
+            firstScreenContent: [
+                "Believability hero",
+                "Weekly Plan Strip",
+                "Rich Timeline Widget",
+                "Rituals",
+                "Scheduling",
+                "Open windows"
+            ],
+            panels: [.heroDecision, .schedule, .timeline, .weeklyPlanStrip, .recovery, .trust],
+            actions: [.makeCalendarAware, .findWindows, .move, .protect, .saveTheWeek],
+            drillDowns: ["Calendar mode", "Rituals", "Review archive", "Receipts"],
+            copySamples: [
+                hero.title,
+                hero.subtitle,
+                treaty.title,
+                capacityEnvelope.title,
+                timelineStrip.title,
+                calendarAwareness.sourceLabel,
+                calendarBoundary.writeBoundary,
+                recoveryEntry.title,
+                saveTheDay.title
+            ] + timelineStrip.items.map(\.sourceLabel),
+            topLevelTabTitles: topLevelTabTitles,
+            supportsDensityBehavior: true,
+            supportsPanelSizeBehavior: true,
+            hasAccessibilitySummary: true,
+            hasPrivacySafeState: true,
+            hasGestureAlternative: true
+        )
+    }
 }

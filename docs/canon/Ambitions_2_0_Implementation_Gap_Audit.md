@@ -21,7 +21,7 @@ D14 evidence: `Native/Ambitions/Features/Goals/GoalsFeatureModels.swift`, `Nativ
 
 The repo has substantial native foundations: the five-tab shell, local-first SwiftUI app, Capture persistence, Command Pipeline, Event Ledger, Action Closure receipt models, Plan-owned calendar action boundary, rich panel primitives, Accessibility Nutrition infrastructure, Profile-backed You trust surface, local notification foundation, App Intents, widgets, and Live Activity scaffolding.
 
-The app is not yet Constitution-complete. The biggest gaps are Plan timeline/calendar-trust alignment, Ritual language split, full You Personal System Center structure, Trust Center / What Ambitions Knows, systematic UX writing cleanup, external-surface contracts, and verified Accessibility Nutrition. Life Areas, North Stars, and One-Step Goals now have foundation object/projection layers; Today has its D11 plan/One-Step preview alignment; Capture has its D12 Smart Attachment / Needs a Place alignment; Goals has D13 bounded portfolio consumption with accessible Map/List fallback; and Goal Detail has D14 Mission Control lane alignment.
+The app is not yet Constitution-complete. The biggest gaps are Ritual language split, full You Personal System Center structure, Trust Center / What Ambitions Knows, systematic UX writing cleanup, external-surface contracts, and verified Accessibility Nutrition. Life Areas, North Stars, and One-Step Goals now have foundation object/projection layers; Today has its D11 plan/One-Step preview alignment; Capture has its D12 Smart Attachment / Needs a Place alignment; Goals has D13 bounded portfolio consumption with accessible Map/List fallback; Goal Detail has D14 Mission Control lane alignment; and Plan has D15 believability, Rich Timeline, Weekly Plan Strip, and local-first calendar evidence alignment.
 
 Several implemented surfaces are valid foundations but need alignment: Today, Capture, Goals, Goal Detail, Plan, You/Profile, external surfaces, notification controls, and shell/navigation behavior. The correct next move is not to reopen old batches; it is to add future alignment batches in dependency order.
 
@@ -49,7 +49,7 @@ Several implemented surfaces are valid foundations but need alignment: Today, Ca
 | Capture persistence/routing | `CaptureModels.swift`, `CaptureService.swift`, `CapturesViewModel.swift`, `CapturesScreen.swift`. | Valid foundation. |
 | Command Pipeline | `AmbitionsCommandExecutor.swift`, command tests. | Valid foundation. |
 | Action Closure receipt model | `ActionClosureReceiptModels.swift` includes results, undo/correction availability, explanation, source, safety. | Valid foundation, needs search/history UI. |
-| Plan-owned calendar action | `PlanScreen.handleCalendarAwarenessAction` calls Plan service only when the Plan card allows it; onboarding does not request calendar access. | Valid foundation, needs full local-first evidence labeling pass. |
+| Plan-owned calendar action | `PlanScreen.handleCalendarAwarenessAction` calls Plan service only when the Plan card allows it; onboarding does not request calendar access; D15 adds local-first evidence labels for `From your calendar`, `Created in Ambitions`, and `Based on your plan`. | Valid foundation. |
 | Rich panel primitives | `Sources/Components/RichPanelPrimitives.swift` defines panel kinds, semantic states, accessibility hooks. | Valid foundation, needs Constitution panel taxonomy expansion. |
 | Accessibility Nutrition infrastructure | `Sources/Accessibility/AccessibilityNutrition.swift`, `AccessibilityNutritionChecklistTests.swift`. | Valid internal infrastructure; verification remains unverified. |
 | You trust/control foundation | `ProfileScreen.swift` user-facing title is `You`; Profile service builds Trust Center, memory controls, receipts, conservative status. | Valid foundation, not full Personal System Center. |
@@ -68,7 +68,7 @@ Several implemented surfaces are valid foundations but need alignment: Today, Ca
 | Today | Has Hero Decision Panel, Save the Day, support panels, and drift handling, but no explicit Today Plan Layer, One-Step Goals panel, or full planned-day matrix. | Today 2.0 Design Constitution Alignment. |
 | Goals | Has Goal Lifecycle Rail, Goal Weather, Goal Atlas preview, archive summary, active cards, and D13 Life Areas / North Stars / One-Step Goals portfolio panels with Map/List fallback. | Later maturity work can deepen Path Builder and long-range portfolio behavior after D14-D26. |
 | Goal Detail | Has exact Mission Control lanes `Overview / Path / Steps / Proof / Decisions / Risks / Archive`, breadcrumb/object identity, timeline, Proof Rail, decisions, risks, archive learning, receipts, and Step-safe contained action language. | Later maturity work can deepen Path Builder, review/search, and archive learning after D15-D26. |
-| Plan | Has Plan Treaty, capacity, lifecycle rail, timeline strip, believability, calendar boundary, recovery/reflow. It still exposes a `Habits` toolbar route and needs Rich Timeline Widget/Ritual language alignment. | Plan believability + timeline widget and Ritual split alignment. |
+| Plan | Has Plan Treaty, capacity, lifecycle rail, Rich Timeline source labels, Weekly Plan Strip naming, believability, calendar boundary, recovery/reflow, and D10 Plan screen-contract snapshot coverage. It still exposes a `Habits` toolbar route and needs Ritual language alignment. | Ritual split alignment. |
 | You | Profile-backed You has Trust Center, memory controls, receipts, reviews, appearance, integrations, notification permission; it is not yet the categorized Personal System Center using GroupedNavigationList. | You Personal System Center alignment. |
 | Trust / memory | Trust Center and memory controls exist, but `What Ambitions Knows` is not a named full surface and editable/deletable/recoverable memory contracts are incomplete. | Trust Center / What Ambitions Knows batches. |
 | Receipts | Receipt domain and You audit card exist; searchable receipt history and privacy-safe display rules are not implemented as a cross-surface product surface. | Receipt search/history batch. |
@@ -126,7 +126,7 @@ Several implemented surfaces are valid foundations but need alignment: Today, Ca
 | Goals | Direction hero, lifecycle rail, Goal Weather, archive, Atlas preview, Life Areas panel, North Stars rail, One-Step Goals panel, and Map/List fallback. | Later maturity work can deepen Path Builder, long-range portfolio behavior, and performance evidence. | Portfolio/path maturity. |
 | Goal Detail | Mission Control, breadcrumb, timeline, Proof Rail, decisions, risks, archive, receipts, and exact `Overview / Path / Steps / Proof / Decisions / Risks / Archive` lanes. | Later maturity can deepen Path Builder, review/search, and archive learning. | Portfolio/path maturity. |
 | Capture | Fast input, routing actions, recent captures, attach to goal. | Needs a Place, Smart Attachment, editable Smart Attachment receipts, 1-3 clarification choices. | Capture + Quiet Command Sheet; Smart Attachment. |
-| Plan | Believability, Plan Treaty, timeline strip, calendar boundary, recovery/reflow. | Rich Timeline Widget, Ritual language, local-first calendar labels, Plan-owned permission proof. | Plan Believability + Timeline Widget; Ritual split. |
+| Plan | Believability, Plan Treaty, Rich Timeline Widget/source labels, Weekly Plan Strip naming, calendar boundary, recovery/reflow, and Plan-owned permission proof. | Ritual language remains visible where compatibility routes still say Habits. | Ritual split. |
 | You | Profile-backed You, Trust Center card, memory controls, reviews, appearance, integrations. | Personal System Center categories, GroupedNavigationList, What Ambitions Knows, full privacy/export/import controls. | You Personal System Center; Trust Center; What Ambitions Knows. |
 | Life Areas Overview | Foundation Life Area object/projection layer, Goal Atlas preview hooks, and D13 Goals portfolio panel exist. | Dedicated detail/deeper transformation remains future maturity work. | Portfolio/path maturity. |
 | North Star Detail | Foundation North Star object/projection layer and D13 Goals rail exist. | Full detail surface absent. | Portfolio/path maturity. |
@@ -148,8 +148,8 @@ Several implemented surfaces are valid foundations but need alignment: Today, Ca
 | GroupedNavigationList | Not found. | New shared component required. |
 | Navigation Rows | `ListChevronRow` exists. | Official row taxonomy missing. |
 | Receipt Panels | Receipts cards exist in Goal Detail/You. | Search/history/redaction contract missing. |
-| Weekly Plan Strip | Plan timeline strip exists. | Needs Rich Timeline Widget/Constitution naming alignment. |
-| Timeline Widget | Timeline strip/cards exist. | Needs official widget contract. |
+| Weekly Plan Strip | D15 names and exposes the Plan week view as Weekly Plan Strip. | Future maturity can deepen interactions after Ritual split and UX writing. |
+| Timeline Widget | D15 aligns the Rich Timeline with local source labels: `Based on your plan`, `Created in Ambitions`, and `From your calendar` where calendar-derived mode is active. | Future maturity can deepen long-range/path timeline behavior. |
 | Goal Lifecycle Rail | Goals and Plan lifecycle rails exist. | Needs Life Areas/North Stars/semantic zoom integration. |
 | Proof Rail | Goal Detail Proof Rail exists. | Needs proof/receipt/search maturity. |
 | North Stars Rail | D13 adds a bounded Goals North Stars rail over the D08 projection. | Full North Star detail remains future maturity work. |
@@ -249,8 +249,8 @@ These are future delta/alignment batches. They do not replace the existing Batch
 | D12 | Capture + Quiet Command Sheet Alignment | Completed alignment: Capture and the Quiet Command Sheet now use Smart Attachment-backed route previews/receipts, Needs a Place hold behavior, compact route choices, and post-save Capture handoff without chat UI, new tabs, calendar behavior, or broad surface redesign. |
 | D13 | Goals / Life Areas / North Stars Transformation and Semantic Zoom | Completed alignment: Goals now consumes Life Areas, North Stars, and One-Step Goals projections with bounded portfolio panels, accessible Map/List fallback, North Stars rail, One-Step Goals panel, and D10 contract snapshot coverage without adding tabs or detail workflows. |
 | D14 | Goal Detail Mission Control Lanes Alignment | Completed alignment: Goal Detail now uses exact Mission Control lanes, Step-safe contained action language, decisions/risks/archive projection cards, proof/receipt continuity, and D10 contract snapshot coverage without Goals overview redesign or Path Builder. |
-| D15 | Plan Believability + Timeline Widget Alignment | Next: align timeline widget, open windows, local-first labels. |
-| D16 | Ritual Split Alignment | Replace standalone habit posture with Rituals across Plan/Today/You. |
+| D15 | Plan Believability + Timeline Widget Alignment | Completed alignment: Plan now asks `Does this hold together?`, validates a D10 Plan screen-contract snapshot, labels Rich Timeline and calendar evidence, names Weekly Plan Strip, and preserves Plan-owned calendar permission/write boundaries. |
+| D16 | Ritual Split Alignment | Next: replace standalone habit posture with Rituals across Plan/Today/You. |
 | D17 | You Personal System Center Alignment | Build categorized You structure without a settings dump. |
 | D18 | Trust Center Alignment | Make Trust Center navigable, privacy-safe, and receipt-aware. |
 | D19 | What Ambitions Knows | Build visible/editable/correctable memory center. |
