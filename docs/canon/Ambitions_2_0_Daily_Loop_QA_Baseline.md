@@ -61,3 +61,43 @@ Manual QA that remains useful before Batch 77:
 - inspect VoiceOver order for Today hero, Save the Day, shell command, Capture empty state, and Plan calendar-aware action
 - inspect dark and light shell chrome for contrast and semantic state text
 - confirm no sync/export/widget/App Intent copy appears in first-run or empty states
+
+## M01 Core Surface Integration QA Addendum
+
+M01 upgrades this baseline from the Phase A daily-loop alpha into a post-D26 scenario catalog for the aligned app. The code-backed catalog lives in `Native/Ambitions/Support/CoreSurfaceIntegrationScenarios.swift`, with focused coverage in `Native/AmbitionsTests/App/CoreSurfaceIntegrationScenarioTests.swift`.
+
+The catalog is not release readiness. It is the first maturity-layer proof that the five-tab app can be reviewed as one coherent daily life system before export/import, data-safety, external-platform, path, memory, review, portfolio, recovery, performance, accessibility-claims, and RC-lock batches deepen the evidence.
+
+Validation evidence after M01 closeout: `xcodegen generate`; focused M01/activation/daily-loop tests (`21` tests, `0` failures); adjacent shell/screen/Today/Capture/Goals/Goal Detail/Plan/You/reviews/receipts/accessibility regression lane (`138` tests, `0` failures); native simulator build on `iPhone 17`; full `AmbitionsTests` (`690` tests, `0` failures); and diff whitespace checks.
+
+Active limitations after M01: this remains simulator/unit/docs evidence plus a manual checklist. It does not prove export/import, migration/no-lost-data recovery, rendered widgets, Live Activity lifecycle delivery, real Shortcuts/Siri behavior, notification delivery, public accessibility claims, TestFlight readiness, App Store readiness, or final RC lock.
+
+### M01 Scenario Fixtures
+
+| Scenario | Primary surfaces | Golden Launch Loop coverage | Manual evidence |
+| --- | --- | --- | --- |
+| Create a meaningful goal | Goals, Goal Detail, Today, Plan | Plan / doable path, Today / next action, Proof / receipt, Trust / privacy | Goal exists; next step visible; contained Steps language; no Tasks tab. |
+| Capture a loose thought and place it | Capture, Goals, Plan, Today | Capture, Place / routing, Proof / receipt, Trust / privacy | Capture saved; Suggested place or Needs a Place; route receipt; correction available. |
+| Recover from a missed day | Today, Plan, Reviews, You | Today / next action, Recovery, Proof / receipt, Trust / privacy | Recovery copy is non-shaming; no silent calendar write; review/receipt context visible. |
+| Resolve an overloaded week | Plan, Today, Goals, You | Plan / doable path, Recovery, Proof / receipt, Trust / privacy | Too much planned state; confirmation boundary; no silent external write. |
+| Review proof and receipts | Goal Detail, Reviews, You | Proof / receipt, Trust / privacy | Proof visible; receipt summary; privacy-safe wording. |
+| Inspect What Ambitions Knows | You, Reviews | Trust / privacy | Source labels; freshness labels; used-for copy; safe blocked controls. |
+| Use denied-calendar fallback | Plan, Today, You | Plan / doable path, Today / next action, Recovery, Trust / privacy | Manual fallback; Plan-owned permission boundary; no connected-calendar claim. |
+| Start with a One-Step Goal | Capture, Today, Goals | Capture, Place / routing, Today / next action, Proof / receipt | Task is standalone; Steps remain contained; no Tasks tab. |
+| Park, defer, or drop noncritical work | Today, Plan, Goals, Reviews | Today / next action, Recovery, Proof / receipt | Park/defer/drop available where supported; non-shaming copy; change remains explainable. |
+| Return after a week away | Today, Plan, Goals, Reviews, You | Today / next action, Recovery, Proof / receipt, Trust / privacy | One re-entry move; stale context visible; review need visible. |
+
+### M01 Blocker Classification
+
+| Blocker | Owner batch | Severity | Evidence needed |
+| --- | --- | --- | --- |
+| Export/import disaster drill is still unproven | M02 | Blocking | Portable export/import scenario, safe failure state, and restore proof. |
+| No-lost-data and migration hardening needs dedicated proof | M03 | Blocking | Offline, migration, corrupt/partial data, and receipt integrity tests. |
+| External surfaces need platform verification | M04 | High | Rendered widget, Live Activity, notification, App Intent, shortcut, and shared-container proof where available. |
+| Path intelligence and Path Builder remain maturity work | M05-M07 | Medium | Qualitative path contract, domain packs, fork comparison, accessible roadmap UI. |
+| Memory correction and narrative memory need deeper controls | M08 | High | Editable/correctable memory flows, review signals, pause/delete boundaries, and receipts. |
+| Reviews and Life OS Receipt need scenario maturity | M09 | Medium | Weekly/monthly/recovery review scenarios tied to proof, decisions, and carry/drop guidance. |
+| Portfolio and recovery maturity need broad scenario proof | M10-M11 | Medium | Goal Weather/scope checks, waiting/commitment behavior, Save-the-Day maturity, and undo/receipt proof. |
+| Cross-surface continuity and mature performance remain unmeasured | M12/R02 | High | Continuity handoff proof and realistic performance measurements. |
+| Public accessibility claims remain locked | R01 | Blocking | VoiceOver, Dynamic Type, Reduce Motion, contrast, motor, and external-surface accessibility review. |
+| Device QA, App Store materials, and RC lock need human/device gates | R03-R05 | Blocking | Real-device QA, TestFlight/readiness evidence, privacy/demo materials, and explicit human approval gate. |
