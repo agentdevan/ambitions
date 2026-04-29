@@ -382,6 +382,13 @@ private extension RepositoryBackedProfileService {
                         valueLabel: reviewLabel(days: snapshot.appState.reviewCadenceDays)
                     ),
                     SettingsItem(
+                        id: "profile-default-rituals",
+                        title: "Rituals",
+                        subtitle: "Recurring support lives under Plan, Today, Goal Detail, and Reviews instead of a standalone area.",
+                        icon: "repeat",
+                        valueLabel: "Plan-owned"
+                    ),
+                    SettingsItem(
                         id: "profile-default-storage",
                         title: "Storage mode",
                         subtitle: "Goals, captures, evidence, and teaching signals persist through the native on-device repositories.",

@@ -507,7 +507,7 @@ private extension DefaultGoalClarificationService {
         case .project:
             return "Treat the goal as a multi-step project with structured sequencing."
         case .habit:
-            return "Treat the goal as a repeatable habit rather than a one-time deliverable."
+            return "Treat the goal as a repeatable ritual rather than a one-time deliverable."
         case .learning:
             return "Treat the goal as a learning path with checkpoints and evidence of understanding."
         case .exploration:

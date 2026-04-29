@@ -159,13 +159,13 @@ struct RepositoryBackedHabitsService: HabitsServicing {
             try await repositories.goals.saveGoals([goal])
             message = HabitInlineMessage(
                 title: "Plan flagged for review",
-                body: "This routine has been softened out of the active loop until the habit plan is corrected.",
+                body: "This routine has been softened out of the active loop until the ritual plan is corrected.",
                 state: .warning
             )
         case .openDetail:
             message = HabitInlineMessage(
-                title: "Opening habit context",
-                body: "This habit is linked back to the full goal context so cadence, support language, and replanning all stay aligned.",
+                title: "Opening ritual context",
+                body: "This ritual is linked back to the full goal context so cadence, support language, and replanning all stay aligned.",
                 state: .selected
             )
         }
@@ -460,7 +460,7 @@ private extension RepositoryBackedHabitsService {
                     ? "Minimum versions are already being counted as real wins today."
                     : "The screen is emphasizing only the moves that help today's rhythm stay alive."
             }
-            return "Some habits need recovery framing, but the rest can stay quick and obvious."
+            return "Some rituals need recovery framing, but the rest can stay quick and obvious."
         case .recovery:
             return "Recovery is leading the screen today so the next action gets easier instead of louder."
         }
@@ -497,8 +497,8 @@ private extension RepositoryBackedHabitsService {
         case .skipped: "A skipped day is visible here so the next repetition can restart cleanly."
         case .recovery: "This loop wants a gentler restart or a smaller ask."
         case .needsEasierVersion: "The plan is asking for a smaller version before it asks for more consistency."
-        case .notRelevant: "The routine was flagged because the current habit plan no longer fits."
-        case .supportive: "This habit is framed as supportive structure, not as control over someone else."
+        case .notRelevant: "The routine was flagged because the current ritual plan no longer fits."
+        case .supportive: "This ritual is framed as supportive structure, not as control over someone else."
         case .ready: "The next repetition is still small enough to do quickly."
         }
     }

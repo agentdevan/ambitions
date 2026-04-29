@@ -695,7 +695,7 @@ private extension RepositoryBackedPlanService {
                 : "\(missingGoalSummaries.count) active goal\(missingGoalSummaries.count == 1 ? "" : "s") still need a believable carryover lane instead of diffuse pressure.",
             focusProtection: overloadedDays > 0
                 ? "Protect the clearest focus window before moving anything else. Relief works better than adding another organizing layer."
-                : "Focus windows already exist in the week. Protect them before turning habits or captures into extra structure.",
+                : "Focus windows already exist in the week. Protect them before turning rituals or captures into extra structure.",
             tradeoffFraming: openCaptures.isEmpty
                 ? "Every new ask should either reuse visible room or trade off against the loudest loaded day."
                 : "Open captures should compete with the week honestly. Absorb them, park them, or let them wait.",

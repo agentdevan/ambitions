@@ -2,6 +2,11 @@ import XCTest
 @testable import Ambitions
 
 final class GoalCreationServiceTests: XCTestCase {
+    func testD16HabitModeDisplaysAsRitualForGoalSurfaces() {
+        XCTAssertEqual(GoalMode.habit.displayTitle, "Ritual")
+        XCTAssertFalse(AppTab.allCases.map(\.title).contains("Habits"))
+    }
+
     func testPlannerIsDeterministicForSameInput() {
         let planner = DeterministicGoalPlanner()
 

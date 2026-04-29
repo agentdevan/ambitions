@@ -97,6 +97,34 @@ final class PlanFeatureServiceTests: XCTestCase {
         #endif
     }
 
+    func testD16RitualRouteIsPlanOwnedAndDoesNotRestoreStandaloneHabitsCopy() async throws {
+        #if DEBUG
+        let store = try AmbitionsPersistenceStore(inMemory: true)
+        let repositories = try await AppContainerFactory.prepareRepositories(for: .demo, store: store)
+        let service = RepositoryBackedPlanService(repositories: repositories)
+
+        let dashboard = try await service.loadPlanDashboard(now: fixedDate)
+        let ritualDestination = try XCTUnwrap(dashboard.secondaryDestinations.first(where: { $0.planRoute == .habits }))
+        let ritualLane = try XCTUnwrap(dashboard.resilience.lanes.first(where: { $0.planRoute == .habits }))
+        let planCopy = [
+            ritualDestination.title,
+            ritualDestination.detail,
+            ritualLane.title,
+            ritualLane.detail,
+            ritualLane.recommendation,
+            dashboard.resilience.focusProtection
+        ].joined(separator: " ")
+
+        XCTAssertEqual(ritualDestination.title, "Rituals")
+        XCTAssertEqual(ritualLane.title, "Rituals")
+        XCTAssertTrue(planCopy.localizedCaseInsensitiveContains("ritual"))
+        XCTAssertFalse(planCopy.localizedCaseInsensitiveContains("habit"))
+        XCTAssertFalse(AppTab.allCases.map(\.title).contains("Habits"))
+        #else
+        throw XCTSkip("Demo bootstrap fixtures are only available in DEBUG builds.")
+        #endif
+    }
+
     func testWeeklyReviewDashboardBridgesCarryForwardAndSupportRoutes() async throws {
         let repositories = try await makeRepositories()
         try await repositories.goals.saveGoals([makeWeekVisibleGoal()])

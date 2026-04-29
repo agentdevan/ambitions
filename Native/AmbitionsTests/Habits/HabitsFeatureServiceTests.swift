@@ -42,9 +42,70 @@ final class HabitsFeatureServiceTests: XCTestCase {
         throw XCTSkip("Demo bootstrap fixtures are only available in DEBUG builds.")
         #endif
     }
+
+    func testD16RitualSurfaceCopyDoesNotPresentStandaloneHabitsPosture() async throws {
+        #if DEBUG
+        let store = try AmbitionsPersistenceStore(inMemory: true)
+        let repositories = try await AppContainerFactory.prepareRepositories(for: .demo, store: store)
+        let service = RepositoryBackedHabitsService(repositories: repositories)
+        let formatter = ISO8601DateFormatter()
+        formatter.formatOptions = [.withInternetDateTime]
+        let now = try XCTUnwrap(formatter.date(from: GoalEngineFixtures.fixedNow))
+
+        let dashboard = try await service.loadDashboard(now: now)
+        let surfaceCopy = userFacingCopy(from: dashboard).joined(separator: " ")
+
+        XCTAssertTrue(surfaceCopy.localizedCaseInsensitiveContains("ritual"))
+        XCTAssertFalse(surfaceCopy.localizedCaseInsensitiveContains("habit"))
+
+        let firstRitual = try XCTUnwrap((dashboard.habits + dashboard.recoveryHabits).first)
+        let openDetail = try XCTUnwrap(firstRitual.actions.first(where: { $0.kind == .openDetail }))
+        let response = try await service.performAction(
+            HabitActionRequest(kind: openDetail.kind, target: openDetail.target),
+            now: now
+        )
+
+        let message = try XCTUnwrap(response.message)
+        XCTAssertTrue(message.title.localizedCaseInsensitiveContains("ritual"))
+        XCTAssertTrue(message.body.localizedCaseInsensitiveContains("ritual"))
+        XCTAssertFalse(message.title.localizedCaseInsensitiveContains("habit"))
+        XCTAssertFalse(message.body.localizedCaseInsensitiveContains("habit"))
+        #else
+        throw XCTSkip("Demo bootstrap fixtures are only available in DEBUG builds.")
+        #endif
+    }
 }
 
 private extension HabitsFeatureServiceTests {
+    func userFacingCopy(from dashboard: HabitsDashboard) -> [String] {
+        var copy = [
+            dashboard.title,
+            dashboard.subtitle,
+            dashboard.summaryLabel,
+            dashboard.summaryDetail,
+            dashboard.streak.title,
+            dashboard.streak.subtitle,
+            dashboard.streak.recoveryNote,
+            dashboard.guidanceTitle,
+            dashboard.guidanceBody
+        ]
+        copy.append(contentsOf: dashboard.stats.flatMap { [$0.title, $0.value, $0.detail ?? ""] })
+        copy.append(contentsOf: dashboard.streak.stats.flatMap { [$0.title, $0.value, $0.detail ?? ""] })
+        copy.append(contentsOf: (dashboard.habits + dashboard.recoveryHabits).flatMap { summary in
+            [
+                summary.cadenceLabel,
+                summary.streakLabel,
+                summary.consistencyLabel,
+                summary.progressLabel,
+                summary.status.title,
+                summary.note,
+                summary.minimumVersionLabel ?? "",
+                summary.supportLabel ?? ""
+            ] + summary.actions.map(\.title)
+        })
+        return copy.filter { !$0.isEmpty }
+    }
+
     func makeRepositories() async throws -> AppRepositories {
         let store = try AmbitionsPersistenceStore(inMemory: true)
         return AppRepositories(

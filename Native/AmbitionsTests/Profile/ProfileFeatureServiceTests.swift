@@ -124,6 +124,7 @@ final class ProfileFeatureServiceTests: XCTestCase {
         XCTAssertEqual(dashboard.contextVault.title, "Local memory map")
         XCTAssertTrue(dashboard.contextVault.items.contains(where: { $0.id == "profile-vault-planning" }))
         XCTAssertTrue(dashboard.defaultsSection.items.contains(where: { $0.id == "profile-default-tab" }))
+        XCTAssertTrue(dashboard.defaultsSection.items.contains(where: { $0.id == "profile-default-rituals" && $0.valueLabel == "Plan-owned" }))
         XCTAssertTrue(dashboard.integrationsSection.items.contains(where: { $0.id == "profile-integration-widgets" }))
         XCTAssertEqual(dashboard.appearanceStudio.title, "Appearance Studio")
     }
