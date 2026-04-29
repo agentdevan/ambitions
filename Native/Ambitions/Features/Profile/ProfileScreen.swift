@@ -730,6 +730,24 @@ private struct ProfileReviewsCard: View {
                     items: Array((projection.lifeOSReceipt.receiptHighlights + projection.lifeOSReceipt.meaningfulEvents).prefix(4))
                 )
 
+                VStack(alignment: .leading, spacing: theme.spacing.sm) {
+                    SectionHeader(title: "Review rhythms", subtitle: "Weekly, monthly, and recovery reviews stay under You, Plan, and Goal context.")
+                    ForEach(projection.cadences) { cadence in
+                        ProfileReviewCadenceRow(cadence: cadence)
+                    }
+                }
+                .accessibilityIdentifier("profile.review-cadences-section")
+
+                if projection.progressLines.isEmpty == false {
+                    VStack(alignment: .leading, spacing: theme.spacing.sm) {
+                        SectionHeader(title: "Progress receipt", subtitle: "A plain record of what changed, what has proof, and what should carry forward.")
+                        ForEach(projection.progressLines) { line in
+                            ProfileProgressReceiptLineRow(line: line)
+                        }
+                    }
+                    .accessibilityIdentifier("profile.progress-receipt-section")
+                }
+
                 if projection.proofHighlights.isEmpty == false {
                     VStack(alignment: .leading, spacing: theme.spacing.sm) {
                         SectionHeader(title: "Proof highlights", subtitle: "Recent evidence that can make the next review more grounded.")
@@ -745,6 +763,14 @@ private struct ProfileReviewsCard: View {
                         ProfileCarryForwardRow(item: item)
                     }
                 }
+
+                VStack(alignment: .leading, spacing: theme.spacing.sm) {
+                    SectionHeader(title: "Planning handoff", subtitle: "Review can suggest where to go next, but it does not change the plan silently.")
+                    ForEach(projection.planningHandoffs) { handoff in
+                        ProfilePlanningHandoffRow(handoff: handoff)
+                    }
+                }
+                .accessibilityIdentifier("profile.review-planning-handoff-section")
 
                 if projection.correctionPrompts.isEmpty == false {
                     VStack(alignment: .leading, spacing: theme.spacing.sm) {
@@ -807,6 +833,86 @@ private struct ProfileReviewCluster: View {
                 }
             }
         }
+    }
+}
+
+private struct ProfileReviewCadenceRow: View {
+    @Environment(\.ambitionTheme) private var theme
+
+    let cadence: ReviewCadenceSummary
+
+    var body: some View {
+        HStack(alignment: .top, spacing: theme.spacing.sm) {
+            Image(systemName: cadenceIcon)
+                .font(.system(size: theme.icon.smallSize, weight: theme.icon.symbolWeight))
+                .foregroundStyle(theme.colors.accentPrimary)
+                .frame(width: 22)
+            VStack(alignment: .leading, spacing: theme.spacing.xxxs) {
+                Text(cadence.contextLabel)
+                    .font(theme.typography.micro)
+                    .foregroundStyle(theme.colors.accentWarm)
+                Text(cadence.title)
+                    .font(theme.typography.bodyEmphasized)
+                    .foregroundStyle(theme.colors.textPrimary)
+                Text(cadence.detail)
+                    .font(theme.typography.caption)
+                    .foregroundStyle(theme.colors.textSecondary)
+                    .fixedSize(horizontal: false, vertical: true)
+            }
+            Spacer(minLength: theme.spacing.sm)
+            TagPill(cadence.statusLabel, state: cadence.state)
+        }
+        .padding(theme.spacing.sm)
+        .background(RoundedRectangle(cornerRadius: theme.radius.md, style: .continuous).fill(theme.colors.surfaceOverlay))
+        .overlay(RoundedRectangle(cornerRadius: theme.radius.md, style: .continuous).stroke(theme.colors.strokeSubtle, lineWidth: 1))
+        .accessibilityElement(children: .combine)
+        .accessibilityLabel(cadence.title)
+        .accessibilityValue("\(cadence.contextLabel). \(cadence.statusLabel).")
+        .accessibilityHint(cadence.detail)
+    }
+
+    private var cadenceIcon: String {
+        switch cadence.cadence {
+        case .weekly:
+            return "calendar"
+        case .monthly:
+            return "calendar.badge.clock"
+        case .recovery:
+            return "lifepreserver"
+        }
+    }
+}
+
+private struct ProfileProgressReceiptLineRow: View {
+    @Environment(\.ambitionTheme) private var theme
+
+    let line: LifeOSReceiptProgressLine
+
+    var body: some View {
+        VStack(alignment: .leading, spacing: theme.spacing.xs) {
+            HStack(alignment: .top, spacing: theme.spacing.sm) {
+                VStack(alignment: .leading, spacing: theme.spacing.xxxs) {
+                    Text(line.title)
+                        .font(theme.typography.bodyEmphasized)
+                        .foregroundStyle(theme.colors.textPrimary)
+                    Text(line.detail)
+                        .font(theme.typography.caption)
+                        .foregroundStyle(theme.colors.textSecondary)
+                        .fixedSize(horizontal: false, vertical: true)
+                }
+                Spacer(minLength: theme.spacing.sm)
+                TagPill(line.sourceLabel, state: line.state)
+            }
+
+            TagPill(line.privacyLabel, icon: "lock.shield", state: .default)
+        }
+        .padding(theme.spacing.sm)
+        .background(RoundedRectangle(cornerRadius: theme.radius.md, style: .continuous).fill(theme.colors.surfaceOverlay))
+        .overlay(RoundedRectangle(cornerRadius: theme.radius.md, style: .continuous).stroke(theme.colors.strokeSubtle, lineWidth: 1))
+        .accessibilityElement(children: .combine)
+        .accessibilityLabel(line.title)
+        .accessibilityValue("\(line.sourceLabel). \(line.privacyLabel).")
+        .accessibilityHint(line.detail)
     }
 }
 
@@ -887,6 +993,42 @@ private struct ProfileCarryForwardRow: View {
         .padding(theme.spacing.md)
         .background(RoundedRectangle(cornerRadius: theme.radius.lg, style: .continuous).fill(theme.colors.surfaceOverlay))
         .overlay(RoundedRectangle(cornerRadius: theme.radius.lg, style: .continuous).stroke(theme.colors.strokeSubtle, lineWidth: 1))
+    }
+}
+
+private struct ProfilePlanningHandoffRow: View {
+    @Environment(\.ambitionTheme) private var theme
+
+    let handoff: ReviewPlanningHandoff
+
+    var body: some View {
+        VStack(alignment: .leading, spacing: theme.spacing.xs) {
+            HStack(alignment: .top, spacing: theme.spacing.sm) {
+                Image(systemName: "arrowshape.turn.up.right")
+                    .font(.system(size: theme.icon.smallSize, weight: theme.icon.symbolWeight))
+                    .foregroundStyle(theme.colors.accentPrimary)
+                VStack(alignment: .leading, spacing: theme.spacing.xxxs) {
+                    Text(handoff.title)
+                        .font(theme.typography.bodyEmphasized)
+                        .foregroundStyle(theme.colors.textPrimary)
+                    Text(handoff.detail)
+                        .font(theme.typography.caption)
+                        .foregroundStyle(theme.colors.textSecondary)
+                        .fixedSize(horizontal: false, vertical: true)
+                }
+                Spacer(minLength: theme.spacing.sm)
+                TagPill(handoff.destinationLabel, state: handoff.state)
+            }
+
+            TagPill(handoff.safetyLabel, icon: "hand.raised", state: handoff.state)
+        }
+        .padding(theme.spacing.sm)
+        .background(RoundedRectangle(cornerRadius: theme.radius.md, style: .continuous).fill(theme.colors.surfaceOverlay))
+        .overlay(RoundedRectangle(cornerRadius: theme.radius.md, style: .continuous).stroke(theme.colors.strokeSubtle, lineWidth: 1))
+        .accessibilityElement(children: .combine)
+        .accessibilityLabel(handoff.title)
+        .accessibilityValue("\(handoff.destinationLabel). \(handoff.safetyLabel).")
+        .accessibilityHint(handoff.detail)
     }
 }
 

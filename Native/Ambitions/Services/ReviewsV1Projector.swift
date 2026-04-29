@@ -28,6 +28,21 @@ struct ReviewsV1Projector: ReviewsV1Projecting {
             corrections: corrections,
             meaningfulEvents: meaningfulEvents
         )
+        let recoveryCount = recoveryItems.count + protectedItems.count + reviewItems.count
+        let progressLines = progressReceiptLines(
+            receiptHighlights: receiptHighlights,
+            meaningfulEvents: meaningfulEvents,
+            recoveryItems: recoveryItems + protectedItems + reviewItems,
+            proof: proof,
+            corrections: corrections,
+            carryForward: carryForward
+        )
+        let cadences = cadenceSummaries(
+            input: input,
+            signalCount: meaningfulEvents.count + receiptHighlights.count + recoveryCount + proof.count + corrections.count,
+            recoveryCount: recoveryCount
+        )
+        let planningHandoffs = planningHandoffItems(carryForward: carryForward, reviewItems: reviewItems, proof: proof)
         let unavailable = unavailableNotes(calendarStatusLabel: input.calendarStatusLabel)
 
         return ReviewsV1Projection(
@@ -37,9 +52,10 @@ struct ReviewsV1Projector: ReviewsV1Projecting {
                 input: input,
                 meaningfulCount: meaningfulEvents.count,
                 receiptCount: receiptHighlights.count,
-                recoveryCount: recoveryItems.count + protectedItems.count + reviewItems.count,
+                recoveryCount: recoveryCount,
                 correctionCount: corrections.count
             ),
+            cadences: cadences,
             recovery: RecoveryReviewSummary(
                 title: "Recovery Review",
                 subtitle: "What changed, what stayed protected, and what still needs your decision.",
@@ -60,9 +76,11 @@ struct ReviewsV1Projector: ReviewsV1Projecting {
                 emptyStateTitle: "No receipt yet",
                 emptyStateDetail: "Meaningful actions will appear here after Ambitions has a local event or Action Closure receipt to explain."
             ),
+            progressLines: progressLines,
             proofHighlights: proof,
             correctionPrompts: corrections,
             carryForward: carryForward,
+            planningHandoffs: planningHandoffs,
             unavailableNotes: unavailable,
             eventLedgerEntryIDs: events.map(\.id),
             receiptIDs: receipts.map(\.id),
@@ -73,6 +91,42 @@ struct ReviewsV1Projector: ReviewsV1Projecting {
 }
 
 private extension ReviewsV1Projector {
+    func cadenceSummaries(
+        input: ReviewsV1ProjectionInput,
+        signalCount: Int,
+        recoveryCount: Int
+    ) -> [ReviewCadenceSummary] {
+        [
+            ReviewCadenceSummary(
+                id: "review.cadence.weekly",
+                cadence: .weekly,
+                title: "Weekly Review",
+                detail: signalCount == 0 ? "Weekly review appears after local actions, proof, receipts, or corrections exist." : "Turns recent local activity into keep, change, carry, and drop decisions.",
+                statusLabel: signalCount == 0 ? "Waiting for local activity" : "Ready from local evidence",
+                contextLabel: "You and Plan",
+                state: signalCount == 0 ? .default : .selected
+            ),
+            ReviewCadenceSummary(
+                id: "review.cadence.monthly",
+                cadence: .monthly,
+                title: "Monthly Review",
+                detail: "Summarizes direction and proof without adding analytics dashboards or scores.",
+                statusLabel: input.proofEvidence.isEmpty ? "Needs proof over time" : "Proof-aware summary",
+                contextLabel: "You and Goals",
+                state: input.proofEvidence.isEmpty ? .default : .success
+            ),
+            ReviewCadenceSummary(
+                id: "review.cadence.recovery",
+                cadence: .recovery,
+                title: "Recovery Review",
+                detail: recoveryCount == 0 ? "Shows up when a day or week changes shape." : "Names what recovered, what stayed protected, and what still needs a decision.",
+                statusLabel: recoveryCount == 0 ? "Available when needed" : "Needs your review",
+                contextLabel: "You, Plan, and Today",
+                state: recoveryCount == 0 ? .default : .warning
+            )
+        ]
+    }
+
     func periodSummary(
         input: ReviewsV1ProjectionInput,
         meaningfulCount: Int,
@@ -312,6 +366,83 @@ private extension ReviewsV1Projector {
         return unique(prompts)
     }
 
+    func progressReceiptLines(
+        receiptHighlights: [ReviewSignalItem],
+        meaningfulEvents: [ReviewSignalItem],
+        recoveryItems: [ReviewSignalItem],
+        proof: [ReviewProofHighlight],
+        corrections: [ReviewCorrectionPrompt],
+        carryForward: [ReviewCarryForwardItem]
+    ) -> [LifeOSReceiptProgressLine] {
+        var lines: [LifeOSReceiptProgressLine] = []
+
+        if let event = meaningfulEvents.first {
+            lines.append(LifeOSReceiptProgressLine(
+                id: "review.progress.changed",
+                title: "What changed",
+                detail: event.detail,
+                sourceLabel: event.valueLabel,
+                privacyLabel: "Local event",
+                state: event.state
+            ))
+        } else if let receipt = receiptHighlights.first {
+            lines.append(LifeOSReceiptProgressLine(
+                id: "review.progress.changed",
+                title: "What changed",
+                detail: receipt.detail,
+                sourceLabel: receipt.valueLabel,
+                privacyLabel: "Receipt summary",
+                state: receipt.state
+            ))
+        }
+
+        if let proof = proof.first {
+            lines.append(LifeOSReceiptProgressLine(
+                id: "review.progress.proof",
+                title: "Proof",
+                detail: proof.detail,
+                sourceLabel: proof.valueLabel,
+                privacyLabel: "Sensitive detail hidden",
+                state: proof.state
+            ))
+        }
+
+        if let recovery = recoveryItems.first {
+            lines.append(LifeOSReceiptProgressLine(
+                id: "review.progress.recovery",
+                title: "Recovery",
+                detail: recovery.detail,
+                sourceLabel: recovery.valueLabel,
+                privacyLabel: "Suggested, not applied",
+                state: recovery.state
+            ))
+        }
+
+        if let correction = corrections.first {
+            lines.append(LifeOSReceiptProgressLine(
+                id: "review.progress.correction",
+                title: "Correction",
+                detail: correction.detail,
+                sourceLabel: correction.actionLabel,
+                privacyLabel: "User-directed",
+                state: correction.state
+            ))
+        }
+
+        if let carry = carryForward.first, carry.id != "review.carry.empty" {
+            lines.append(LifeOSReceiptProgressLine(
+                id: "review.progress.carry-forward",
+                title: "Carry forward",
+                detail: carry.detail,
+                sourceLabel: carry.actionLabel,
+                privacyLabel: "Needs confirmation",
+                state: carry.state
+            ))
+        }
+
+        return Array(lines.prefix(5))
+    }
+
     func carryForwardItems(
         recoveryItems: [ReviewSignalItem],
         protectedItems: [ReviewSignalItem],
@@ -387,6 +518,60 @@ private extension ReviewsV1Projector {
         }
 
         return Array(items.prefix(3))
+    }
+
+    func planningHandoffItems(
+        carryForward: [ReviewCarryForwardItem],
+        reviewItems: [ReviewSignalItem],
+        proof: [ReviewProofHighlight]
+    ) -> [ReviewPlanningHandoff] {
+        var handoffs: [ReviewPlanningHandoff] = []
+
+        if let review = reviewItems.first {
+            handoffs.append(ReviewPlanningHandoff(
+                id: "review.handoff.decision",
+                title: "Decide before changing the plan",
+                detail: review.detail,
+                destinationLabel: "Open Plan",
+                safetyLabel: "Requires confirmation",
+                state: .warning
+            ))
+        }
+
+        if let carry = carryForward.first {
+            handoffs.append(ReviewPlanningHandoff(
+                id: "review.handoff.carry-forward",
+                title: carry.title,
+                detail: carry.detail,
+                destinationLabel: "Carry into Plan",
+                safetyLabel: "Suggested, not applied",
+                state: carry.state
+            ))
+        }
+
+        if reviewItems.isEmpty, let proof = proof.first {
+            handoffs.append(ReviewPlanningHandoff(
+                id: "review.handoff.proof",
+                title: "Use proof for the next plan",
+                detail: proof.detail,
+                destinationLabel: "Open Goal",
+                safetyLabel: "No automatic change",
+                state: proof.state
+            ))
+        }
+
+        if handoffs.isEmpty {
+            handoffs.append(ReviewPlanningHandoff(
+                id: "review.handoff.empty",
+                title: "No planning handoff yet",
+                detail: "After more review evidence, this will name what can move into Plan or Goal Detail.",
+                destinationLabel: "Available later",
+                safetyLabel: "No change made",
+                state: .default
+            ))
+        }
+
+        return Array(handoffs.prefix(3))
     }
 
     func unavailableNotes(calendarStatusLabel: String?) -> [ReviewSignalItem] {

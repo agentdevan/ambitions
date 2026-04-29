@@ -4,7 +4,7 @@ Status: Active planning roadmap for Layer 2 and Layer 3 after the D01-D26 Design
 
 Purpose: Rewrite, rename, resequence, and rescope original Batches 89-120 against the newer canon docs and the D01-D26 Design Constitution delta/alignment backlog.
 
-This document does not independently mark D01-D26 or M-series batches complete. Operational status remains owned by `docs/codex/BATCH_REGISTRY.md`, which now records D01-D26 and M01-M08 complete for planning purposes after M08 Learning, Anticipation, Memory Correction, and Narrative Memory Maturity. M09 is the next runnable maturity batch.
+This document does not independently mark D01-D26 or M-series batches complete. Operational status remains owned by `docs/codex/BATCH_REGISTRY.md`, which now records D01-D26 and M01-M09 complete for planning purposes after M09 Reviews, Life OS Receipt, and Narrative Progress Maturity. M10 is the next runnable maturity batch.
 
 ## Planning Layers
 
@@ -365,7 +365,7 @@ Acceptance:
 
 Earliest timing: after D18-D20 and M01.
 
-Status after M08: Completed for planning purposes by adding a bounded What Ambitions Knows maturity layer for reviewable narrative memory and conservative pattern signals. The implementation exposes source/freshness/use labels, sensitive-detail posture, safe correction routes, confirmation-gated delete/pause status, and accessibility labels/values/hints from explicit local evidence such as corrections, receipts/proof, feedback, event ledger records, reviews, or confirmations. It does not add broad destructive deletion, global pause/forget preferences, cloud/account/sync memory, sensitive identity inference, raw memory graph language, confidence-score UI, black-box recommendation copy, real-device/manual UI proof, or rendered accessibility proof. Validation evidence is recorded in `docs/codex/BATCH_REGISTRY.md`; M09 is next.
+Status after M08: Completed for planning purposes by adding a bounded What Ambitions Knows maturity layer for reviewable narrative memory and conservative pattern signals. The implementation exposes source/freshness/use labels, sensitive-detail posture, safe correction routes, confirmation-gated delete/pause status, and accessibility labels/values/hints from explicit local evidence such as corrections, receipts/proof, feedback, event ledger records, reviews, or confirmations. It does not add broad destructive deletion, global pause/forget preferences, cloud/account/sync memory, sensitive identity inference, raw memory graph language, confidence-score UI, black-box recommendation copy, real-device/manual UI proof, or rendered accessibility proof. Validation evidence is recorded in `docs/codex/BATCH_REGISTRY.md`; M09 followed and is now complete.
 
 ### M09 — Reviews, Life OS Receipt, and Narrative Progress Maturity
 
@@ -394,6 +394,8 @@ Acceptance:
 - receipts/proof are visible and privacy-safe,
 - review copy is calm and human,
 - review output affects Plan/Today only through confirmed/safe paths.
+
+Status after M09: Completed for planning purposes by maturing the existing You-owned Reviews v1 projection with weekly/monthly/recovery cadence summaries, Life OS Receipt progress lines, proof/recovery/correction/carry-forward narrative, and safe Plan/Goal handoffs that remain suggested/not applied or confirmation-gated. It does not add a top-level Insights tab, analytics dashboard, broad review archive/search UI, automatic Plan/Today mutation, real-device/manual UI proof, rendered accessibility proof, or release-readiness claims. Validation evidence is recorded in `docs/codex/BATCH_REGISTRY.md`; M10 is next.
 
 Earliest timing: after D19-D21, M08 optional.
 
@@ -750,4 +752,4 @@ After D26 validation, use this roadmap as the active M/R execution sequence. M01
 - known blockers,
 - and device/platform constraints.
 
-M01-M08 are complete for planning purposes. M09 is now the next dependency-safe implementation batch. Preserve the D01-D26 and M01-M08 completion history and do not skip ahead to M10 or R-gates until M09 is implemented, validated, documented, committed, and pushed.
+M01-M09 are complete for planning purposes. M10 is now the next dependency-safe implementation batch. Preserve the D01-D26 and M01-M09 completion history and do not skip ahead to M11 or R-gates until M10 is implemented, validated, documented, committed, and pushed.

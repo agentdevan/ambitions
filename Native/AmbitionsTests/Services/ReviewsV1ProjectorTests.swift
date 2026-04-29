@@ -66,6 +66,82 @@ final class ReviewsV1ProjectorTests: XCTestCase {
         XCTAssertTrue(first.period.trustWhisper.contains("Stored locally"))
     }
 
+    func testM09ReviewsMatureCadenceProgressReceiptAndSafePlanningHandoff() {
+        let recoveryEvent = EventLedgerEntry(
+            id: "ledger-recovery",
+            kind: .recoveryDueToPriorityConflict,
+            occurredAt: "2026-04-28T09:00:00Z",
+            source: .plan,
+            title: "Protected the must-do",
+            summary: "Moved lower-stakes work so the important promise stayed visible.",
+            tone: .recovering
+        )
+        let correctionEvent = EventLedgerEntry(
+            id: "ledger-correction",
+            kind: .userCorrectionAdded,
+            occurredAt: "2026-04-28T08:00:00Z",
+            source: .you,
+            title: "Corrected review wording",
+            summary: "The user corrected what should carry forward.",
+            tone: .correction
+        )
+        let receipt = ActionReceipt(
+            id: "receipt-plan",
+            resultState: .needsConfirmation,
+            title: "Plan handoff prepared",
+            summary: "Review suggested the next planning move without changing the plan.",
+            sourceDomain: .reviews,
+            occurredAt: "2026-04-28T09:05:00Z",
+            affectedObjects: [
+                LifeGraphObjectReference(kind: .review, id: "review-week", sourceDomain: .plan)
+            ],
+            changedFacts: [
+                ActionReceiptChangedFact(
+                    id: "fact-confirm",
+                    kind: .needsConfirmation,
+                    summary: "Requires confirmation before any plan change."
+                )
+            ],
+            correctionAvailability: .availableWithReason,
+            undoAvailability: .requiresConfirmation,
+            safetyState: .confirmationRequired
+        )
+
+        let projection = ReviewsV1Projector().project(
+            ReviewsV1ProjectionInput(
+                generatedAt: "2026-04-28T12:00:00Z",
+                timeframeLabel: "This week",
+                eventLedgerEntries: [correctionEvent, recoveryEvent],
+                receipts: [receipt],
+                proofEvidence: [
+                    ProgressEvidence(
+                        id: "proof-week",
+                        goalID: "goal-1",
+                        stepID: "step-1",
+                        evidenceKind: .milestoneReached,
+                        source: .manual,
+                        capturedAt: "2026-04-28T09:10:00Z",
+                        progressDelta: nil,
+                        confidenceDelta: nil,
+                        minutesInvested: 45,
+                        note: "Milestone proof"
+                    )
+                ],
+                calendarStatusLabel: "Manual fallback available"
+            )
+        )
+
+        XCTAssertEqual(projection.cadences.map { $0.cadence }, [ReviewCadenceKind.weekly, .monthly, .recovery])
+        XCTAssertTrue(projection.cadences.contains(where: { $0.contextLabel == "You and Plan" && $0.statusLabel == "Ready from local evidence" }))
+        XCTAssertTrue(projection.cadences.contains(where: { $0.contextLabel == "You and Goals" && $0.statusLabel == "Proof-aware summary" }))
+        XCTAssertTrue(projection.progressLines.contains(where: { $0.title == "What changed" && $0.privacyLabel == "Local event" }))
+        XCTAssertTrue(projection.progressLines.contains(where: { $0.title == "Proof" && $0.privacyLabel == "Sensitive detail hidden" }))
+        XCTAssertTrue(projection.progressLines.contains(where: { $0.title == "Carry forward" && $0.privacyLabel == "Needs confirmation" }))
+        XCTAssertTrue(projection.planningHandoffs.contains(where: { $0.destinationLabel == "Carry into Plan" && $0.safetyLabel == "Suggested, not applied" }))
+        XCTAssertFalse(projection.period.dominantTruth.localizedCaseInsensitiveContains("insights dashboard"))
+        XCTAssertFalse(projection.progressLines.map(\.detail).joined(separator: " ").localizedCaseInsensitiveContains("analytics dashboard"))
+    }
+
     func testEmptyAndDegradedStatesStayCalmAndTruthful() {
         let projection = ReviewsV1Projector().project(
             ReviewsV1ProjectionInput(

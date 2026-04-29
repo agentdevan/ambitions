@@ -13,6 +13,12 @@ enum ReviewItemKind: String, Sendable, Equatable, Hashable, CaseIterable {
     case trustNote = "trust_note"
 }
 
+enum ReviewCadenceKind: String, Sendable, Equatable, Hashable, CaseIterable {
+    case weekly
+    case monthly
+    case recovery
+}
+
 struct ReviewPeriodSummary: Sendable, Equatable {
     let title: String
     let subtitle: String
@@ -29,6 +35,16 @@ struct ReviewSignalItem: Identifiable, Sendable, Equatable {
     let detail: String
     let valueLabel: String
     let icon: String
+    let state: AmbitionVisualState
+}
+
+struct ReviewCadenceSummary: Identifiable, Sendable, Equatable {
+    let id: String
+    let cadence: ReviewCadenceKind
+    let title: String
+    let detail: String
+    let statusLabel: String
+    let contextLabel: String
     let state: AmbitionVisualState
 }
 
@@ -52,6 +68,15 @@ struct LifeOSReceiptSummary: Sendable, Equatable {
     let meaningfulEvents: [ReviewSignalItem]
     let emptyStateTitle: String
     let emptyStateDetail: String
+}
+
+struct LifeOSReceiptProgressLine: Identifiable, Sendable, Equatable {
+    let id: String
+    let title: String
+    let detail: String
+    let sourceLabel: String
+    let privacyLabel: String
+    let state: AmbitionVisualState
 }
 
 struct ReviewProofHighlight: Identifiable, Sendable, Equatable {
@@ -78,15 +103,27 @@ struct ReviewCarryForwardItem: Identifiable, Sendable, Equatable {
     let state: AmbitionVisualState
 }
 
+struct ReviewPlanningHandoff: Identifiable, Sendable, Equatable {
+    let id: String
+    let title: String
+    let detail: String
+    let destinationLabel: String
+    let safetyLabel: String
+    let state: AmbitionVisualState
+}
+
 struct ReviewsV1Projection: Sendable, Equatable {
     let id: String
     let generatedAt: String
     let period: ReviewPeriodSummary
+    let cadences: [ReviewCadenceSummary]
     let recovery: RecoveryReviewSummary
     let lifeOSReceipt: LifeOSReceiptSummary
+    let progressLines: [LifeOSReceiptProgressLine]
     let proofHighlights: [ReviewProofHighlight]
     let correctionPrompts: [ReviewCorrectionPrompt]
     let carryForward: [ReviewCarryForwardItem]
+    let planningHandoffs: [ReviewPlanningHandoff]
     let unavailableNotes: [ReviewSignalItem]
     let eventLedgerEntryIDs: [String]
     let receiptIDs: [String]
@@ -99,6 +136,7 @@ struct ReviewsV1Projection: Sendable, Equatable {
             recovery.needsReview.isEmpty &&
             lifeOSReceipt.receiptHighlights.isEmpty &&
             lifeOSReceipt.meaningfulEvents.isEmpty &&
+            progressLines.isEmpty &&
             proofHighlights.isEmpty &&
             correctionPrompts.isEmpty
     }
