@@ -219,6 +219,46 @@ struct GoalPortfolioArchiveSummary: Sendable, Hashable {
     let title: String
     let subtitle: String
     let chips: [GoalStateChipState]
+    let learningLines: [String]
+}
+
+struct GoalPortfolioMaturitySignal: Identifiable, Sendable, Hashable {
+    let id: String
+    let title: String
+    let detail: String
+    let state: AmbitionVisualState
+}
+
+struct GoalPortfolioMaturitySummary: Sendable, Hashable {
+    let title: String
+    let subtitle: String
+    let scopeSignal: GoalPortfolioMaturitySignal
+    let stuckWorkSignal: GoalPortfolioMaturitySignal
+    let proofSignal: GoalPortfolioMaturitySignal
+    let nextStepSignal: GoalPortfolioMaturitySignal
+    let archiveLearning: [String]
+    let accessibilityLabel: String
+    let accessibilityValue: String
+    let accessibilityHint: String
+
+    static var empty: GoalPortfolioMaturitySummary {
+        let scope = GoalPortfolioMaturitySignal(id: "scope", title: "Scope is quiet", detail: "No live ambitions are competing for attention yet.", state: .default)
+        let stuck = GoalPortfolioMaturitySignal(id: "stuck-work", title: "No stuck work is loud", detail: "No blockers, waiting states, or overloaded standalone Tasks are driving the board.", state: .selected)
+        let proof = GoalPortfolioMaturitySignal(id: "proof", title: "Proof will appear here", detail: "Proof maturity starts after a goal has evidence or receipts.", state: .default)
+        let next = GoalPortfolioMaturitySignal(id: "next-step", title: "Next moves will appear here", detail: "Create or shape a goal to make the next move visible.", state: .default)
+        return GoalPortfolioMaturitySummary(
+            title: "Portfolio maturity",
+            subtitle: "A qualitative read on scope, proof, stuck work, and what should move next.",
+            scopeSignal: scope,
+            stuckWorkSignal: stuck,
+            proofSignal: proof,
+            nextStepSignal: next,
+            archiveLearning: ["Archive learning will appear after a goal is completed, parked, or closed."],
+            accessibilityLabel: "Portfolio maturity",
+            accessibilityValue: [scope.title, stuck.title, proof.title, next.title].joined(separator: ". "),
+            accessibilityHint: "Review scope, stuck work, proof, and next-step clarity before adding more goals."
+        )
+    }
 }
 
 struct GoalAtlasPreviewItem: Identifiable, Sendable, Hashable {
@@ -573,6 +613,7 @@ struct GoalsOverview: Sendable {
     let oneStepGoals: GoalsOneStepGoalsPanelState
     let atlasPreview: GoalAtlasPreviewState?
     let archiveSummary: GoalPortfolioArchiveSummary
+    let maturitySummary: GoalPortfolioMaturitySummary
     let items: [GoalListItem]
     let isSeeded: Bool
     let emptyTitle: String
@@ -592,6 +633,7 @@ struct GoalsOverview: Sendable {
         oneStepGoals: GoalsOneStepGoalsPanelState = .empty,
         atlasPreview: GoalAtlasPreviewState?,
         archiveSummary: GoalPortfolioArchiveSummary,
+        maturitySummary: GoalPortfolioMaturitySummary,
         items: [GoalListItem],
         isSeeded: Bool,
         emptyTitle: String,
@@ -610,6 +652,7 @@ struct GoalsOverview: Sendable {
         self.oneStepGoals = oneStepGoals
         self.atlasPreview = atlasPreview
         self.archiveSummary = archiveSummary
+        self.maturitySummary = maturitySummary
         self.items = items
         self.isSeeded = isSeeded
         self.emptyTitle = emptyTitle

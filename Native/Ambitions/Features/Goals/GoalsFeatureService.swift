@@ -835,6 +835,12 @@ private extension RepositoryBackedGoalsService {
             crowdedCount: pressuredCards.filter { $0.posture == .crowded }.count,
             stalledCount: pressuredCards.filter { $0.posture == .stalled }.count
         )
+        let archiveSummary = makeArchiveSummary(cards: cards)
+        let maturitySummary = makePortfolioMaturitySummary(
+            cards: cards,
+            oneStepGoals: oneStepGoals,
+            archiveSummary: archiveSummary
+        )
         let seeded = snapshot.appState.lastSeedVersion == DemoSeedPipeline.seedVersion
 
         return GoalsOverview(
@@ -890,7 +896,8 @@ private extension RepositoryBackedGoalsService {
             northStars: northStarsState,
             oneStepGoals: oneStepGoalsState,
             atlasPreview: makeAtlasPreview(snapshot: snapshot, cards: cards, northStars: northStars, oneStepGoals: oneStepGoals),
-            archiveSummary: makeArchiveSummary(cards: cards),
+            archiveSummary: archiveSummary,
+            maturitySummary: maturitySummary,
             items: items,
             isSeeded: seeded,
             emptyTitle: "No goals yet",
@@ -1785,13 +1792,125 @@ private extension RepositoryBackedGoalsService {
             [.parked, .completed, .cancelledDropped].contains($0.lifecycleState)
         }
         let count = archiveChips.map(\.count).reduce(0, +)
+        let learningLines = archiveLearningLines(cards: cards)
         return GoalPortfolioArchiveSummary(
             title: count == 0 ? "Archive is quiet" : "\(count) goals in archive states",
             subtitle: count == 0
                 ? "Completed, parked, and cancelled goals will remain part of your progress history."
                 : "Completed, parked, and cancelled goals are preserved without being treated as failure.",
-            chips: archiveChips
+            chips: archiveChips,
+            learningLines: learningLines
         )
+    }
+
+    func makePortfolioMaturitySummary(
+        cards: [GoalsBoardCardState],
+        oneStepGoals: [OneStepGoal],
+        archiveSummary: GoalPortfolioArchiveSummary
+    ) -> GoalPortfolioMaturitySummary {
+        let liveCards = cards.filter { $0.lifecycleState.isCurrentPortfolioState || $0.renderState == .starter }
+        let prooflessLiveCount = liveCards.filter { $0.proofSummary.count == 0 }.count
+        let blockedOrWaitingCount = liveCards.filter { [.blocked, .waiting].contains($0.lifecycleState) }.count
+        let crowdedOrStalledCount = liveCards.filter { [.crowded, .stalled, .atRisk].contains($0.posture) }.count
+        let missingNextStepCount = liveCards.filter { $0.nextVisibleStep.isAvailable == false }.count
+        let openOneStepCount = oneStepGoals.filter(\.status.isOpen).count
+
+        let scopeSignal = GoalPortfolioMaturitySignal(
+            id: "scope",
+            title: liveCards.count <= 3 ? "Scope is readable" : "Scope needs review",
+            detail: liveCards.count <= 3
+                ? "\(liveCards.count) live ambitions are competing for attention."
+                : "\(liveCards.count) live ambitions are active; choose what should stay protected.",
+            state: liveCards.count <= 3 ? .selected : .warning
+        )
+        let stuckWorkSignal = GoalPortfolioMaturitySignal(
+            id: "stuck-work",
+            title: blockedOrWaitingCount + crowdedOrStalledCount == 0 ? "No stuck work is loud" : "Stuck work is visible",
+            detail: stuckWorkDetail(
+                blockedOrWaitingCount: blockedOrWaitingCount,
+                crowdedOrStalledCount: crowdedOrStalledCount,
+                openOneStepCount: openOneStepCount
+            ),
+            state: blockedOrWaitingCount + crowdedOrStalledCount == 0 ? .selected : .warning
+        )
+        let proofSignal = GoalPortfolioMaturitySignal(
+            id: "proof",
+            title: prooflessLiveCount == 0 ? "Proof is visible" : "Proof is thin",
+            detail: prooflessLiveCount == 0
+                ? "Live ambitions have proof or receipts attached."
+                : "\(prooflessLiveCount) live ambitions need a proof point before momentum is easy to trust.",
+            state: prooflessLiveCount == 0 ? .selected : .default
+        )
+        let nextStepSignal = GoalPortfolioMaturitySignal(
+            id: "next-step",
+            title: missingNextStepCount == 0 ? "Next moves are clear" : "Some next moves need shape",
+            detail: missingNextStepCount == 0
+                ? "Every live ambition has a current next visible step."
+                : "\(missingNextStepCount) live ambitions need one concrete next step before they can carry attention.",
+            state: missingNextStepCount == 0 ? .selected : .warning
+        )
+
+        let accessibilityValue = [
+            scopeSignal.title,
+            stuckWorkSignal.title,
+            proofSignal.title,
+            nextStepSignal.title
+        ].joined(separator: ". ")
+
+        return GoalPortfolioMaturitySummary(
+            title: "Portfolio maturity",
+            subtitle: "A qualitative read on scope, proof, stuck work, and what should move next.",
+            scopeSignal: scopeSignal,
+            stuckWorkSignal: stuckWorkSignal,
+            proofSignal: proofSignal,
+            nextStepSignal: nextStepSignal,
+            archiveLearning: archiveSummary.learningLines,
+            accessibilityLabel: "Portfolio maturity",
+            accessibilityValue: accessibilityValue,
+            accessibilityHint: "Review scope, stuck work, proof, and next-step clarity before adding more goals."
+        )
+    }
+
+    func stuckWorkDetail(
+        blockedOrWaitingCount: Int,
+        crowdedOrStalledCount: Int,
+        openOneStepCount: Int
+    ) -> String {
+        var parts: [String] = []
+        if blockedOrWaitingCount > 0 {
+            parts.append("\(blockedOrWaitingCount) waiting or blocked")
+        }
+        if crowdedOrStalledCount > 0 {
+            parts.append("\(crowdedOrStalledCount) crowded or stalled")
+        }
+        if openOneStepCount > 3 {
+            parts.append("\(openOneStepCount) open One-Step Goals")
+        }
+        return parts.isEmpty ? "No blockers, waiting states, or overloaded standalone Tasks are driving the board." : parts.joined(separator: " · ")
+    }
+
+    func archiveLearningLines(cards: [GoalsBoardCardState]) -> [String] {
+        let archivedCards = cards.filter {
+            [.parked, .completed, .cancelledDropped, .previous].contains($0.lifecycleState)
+        }
+        guard archivedCards.isEmpty == false else {
+            return ["Archive learning will appear after a goal is completed, parked, or closed."]
+        }
+
+        return archivedCards.prefix(3).map { card in
+            switch card.lifecycleState {
+            case .completed:
+                return "\(card.title): completed with \(card.proofSummary.title.lowercased())."
+            case .cancelledDropped:
+                return "\(card.title): closed without being treated as failure."
+            case .parked:
+                return "\(card.title): parked so attention can stay honest."
+            case .previous:
+                return "\(card.title): preserved as previous progress."
+            default:
+                return "\(card.title): kept in history."
+            }
+        }
     }
 
     func makeLifeAreasState(

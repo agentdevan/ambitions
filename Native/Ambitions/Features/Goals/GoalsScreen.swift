@@ -55,6 +55,8 @@ struct GoalsScreen: View {
                     GoalsHeroCard(overview: overview, onPrimaryAction: handlePrimaryAction)
                     GoalsWeekPressureCard(summary: overview.weekPressureSummary)
                         .transition(.ambitionPanel)
+                    GoalsPortfolioMaturityCard(summary: overview.maturitySummary)
+                        .transition(.ambitionPanel)
                     GoalsLifecycleRailCard(segments: overview.lifecycleRail)
                         .transition(.ambitionPanel)
                     GoalStateChipsCard(chips: overview.stateChips)

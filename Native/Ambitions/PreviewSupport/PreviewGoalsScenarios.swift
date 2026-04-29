@@ -243,8 +243,13 @@ enum PreviewGoalsScenarios {
                 GoalStateChipState(lifecycleState: .parked, count: 1),
                 GoalStateChipState(lifecycleState: .completed, count: 1),
                 GoalStateChipState(lifecycleState: .cancelledDropped, count: 0),
+            ],
+            learningLines: [
+                "Finish launch checklist: completed with proof visible.",
+                "Park the old weekly board: parked so attention can stay honest."
             ]
         ),
+        maturitySummary: previewMaturitySummary,
         items: [],
         isSeeded: true,
         emptyTitle: "No goals yet",
@@ -360,12 +365,30 @@ enum PreviewGoalsScenarios {
                 GoalStateChipState(lifecycleState: .parked, count: 0),
                 GoalStateChipState(lifecycleState: .completed, count: 0),
                 GoalStateChipState(lifecycleState: .cancelledDropped, count: 0),
-            ]
+            ],
+            learningLines: ["Archive learning will appear after a goal is completed, parked, or closed."]
         ),
+        maturitySummary: .empty,
         items: [],
         isSeeded: false,
         emptyTitle: "No goals yet",
         emptyMessage: "Once a goal or planning draft exists, this screen will immediately explain the path, not just dump steps."
+    )
+
+    static let previewMaturitySummary = GoalPortfolioMaturitySummary(
+        title: "Portfolio maturity",
+        subtitle: "A qualitative read on scope, proof, stuck work, and what should move next.",
+        scopeSignal: GoalPortfolioMaturitySignal(id: "scope", title: "Scope needs review", detail: "4 live ambitions are active; choose what should stay protected.", state: .warning),
+        stuckWorkSignal: GoalPortfolioMaturitySignal(id: "stuck-work", title: "Stuck work is visible", detail: "1 waiting or blocked · 2 crowded or stalled", state: .warning),
+        proofSignal: GoalPortfolioMaturitySignal(id: "proof", title: "Proof is thin", detail: "2 live ambitions need a proof point before momentum is easy to trust.", state: .default),
+        nextStepSignal: GoalPortfolioMaturitySignal(id: "next-step", title: "Next moves are clear", detail: "Every live ambition has a current next visible step.", state: .selected),
+        archiveLearning: [
+            "Finish launch checklist: completed with proof visible.",
+            "Park the old weekly board: parked so attention can stay honest."
+        ],
+        accessibilityLabel: "Portfolio maturity",
+        accessibilityValue: "Scope needs review. Stuck work is visible. Proof is thin. Next moves are clear.",
+        accessibilityHint: "Review scope, stuck work, proof, and next-step clarity before adding more goals."
     )
 
     static let detailScenarios: [String: GoalDetailPresentation] = [

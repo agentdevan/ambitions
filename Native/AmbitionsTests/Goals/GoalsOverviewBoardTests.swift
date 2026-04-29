@@ -153,6 +153,55 @@ final class GoalsOverviewBoardTests: XCTestCase {
         XCTAssertTrue(archiveCards.contains(where: { $0.target.goalID == cancelled.id && $0.lifecycleState == .cancelledDropped }))
         XCTAssertTrue(overview.archiveSummary.chips.contains(where: { $0.lifecycleState == .completed && $0.count == 1 }))
         XCTAssertTrue(overview.archiveSummary.chips.contains(where: { $0.lifecycleState == .cancelledDropped && $0.count == 1 }))
+        XCTAssertTrue(overview.archiveSummary.learningLines.contains(where: { $0.contains("completed") }))
+        XCTAssertTrue(overview.archiveSummary.learningLines.contains(where: { $0.contains("closed without being treated as failure") }))
+    }
+
+    func testM10PortfolioMaturitySummarizesScopeStuckWorkProofAndArchiveLearning() async throws {
+        let repositories = try await makeRepositories()
+        let service = RepositoryBackedGoalsService(repositories: repositories)
+        let goals = [
+            makeGoal(id: "goal-m10-primary", title: "Ship the portfolio maturity pass", dueInDays: 7),
+            makeGoal(id: "goal-m10-second", title: "Prepare the launch story", dueInDays: 10),
+            makeGoal(id: "goal-m10-third", title: "Tighten investor demo", dueInDays: 12),
+            makeGoal(id: "goal-m10-fourth", title: "Clean up support docs", dueInDays: 14),
+            makeGoal(id: "goal-m10-closed", title: "Retire stale dashboard idea", dueInDays: -2, state: .archived),
+        ]
+        let blocked = makeClarificationDraft(
+            id: "draft-m10-blocked",
+            title: "Figure out the blocked portfolio move",
+            resultKind: .blocked
+        )
+        let captures = (0..<4).map { index in
+            makeOneStepCapture(
+                id: "capture-m10-task-\(index)",
+                title: "Handle loose standalone task \(index + 1)",
+                status: .actionable,
+                deadlineText: "Today",
+                deadlineKind: .hard
+            )
+        }
+
+        try await repositories.goals.saveGoals(goals)
+        try await repositories.drafts.saveDrafts([blocked])
+        try await repositories.captures.saveCaptures(captures)
+        try await repositories.evidence.saveEvidence([
+            evidence(goalID: "goal-m10-primary", stepID: "step-goal-m10-primary", note: "Portfolio maturity proof")
+        ])
+        try await savePriorityOrder(goals.map(\.id) + [blocked.id], repositories: repositories)
+
+        let overview = try await service.loadOverview()
+        let maturity = overview.maturitySummary
+
+        XCTAssertEqual(maturity.title, "Portfolio maturity")
+        XCTAssertEqual(maturity.scopeSignal.title, "Scope needs review")
+        XCTAssertEqual(maturity.stuckWorkSignal.title, "Stuck work is visible")
+        XCTAssertTrue(maturity.stuckWorkSignal.detail.contains("waiting or blocked"))
+        XCTAssertTrue(maturity.stuckWorkSignal.detail.contains("open One-Step Goals"))
+        XCTAssertEqual(maturity.proofSignal.title, "Proof is thin")
+        XCTAssertEqual(maturity.nextStepSignal.title, "Some next moves need shape")
+        XCTAssertTrue(maturity.archiveLearning.contains(where: { $0.contains("closed without being treated as failure") }))
+        XCTAssertFalse(maturity.accessibilityValue.localizedCaseInsensitiveContains("score"))
     }
 
     func testGoalAtlasPreviewConsumesLifeAreasProjectionWithoutRedesigningSurface() async throws {

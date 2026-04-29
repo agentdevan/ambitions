@@ -278,6 +278,7 @@ final class AmbitionsUITests: XCTestCase {
         XCTAssertTrue(app.descendants(matching: .any)["goals.screen"].waitForExistence(timeout: 10))
         XCTAssertTrue(app.descendants(matching: .any)["goals.hero-card"].waitForExistence(timeout: 10))
         XCTAssertTrue(scrollUntilElementExists("goals.week-pressure", in: app))
+        XCTAssertTrue(scrollUntilElementExists("goals.portfolio-maturity", in: app))
         XCTAssertTrue(scrollUntilElementExists("goals.life-areas-panel", in: app))
         XCTAssertTrue(scrollUntilElementExists("goals.north-stars-rail", in: app))
         XCTAssertTrue(scrollUntilElementExists("goals.one-step-goals-panel", in: app))

@@ -139,6 +139,68 @@ struct GoalsWeekPressureCard: View {
     }
 }
 
+struct GoalsPortfolioMaturityCard: View {
+    @Environment(\.ambitionTheme) private var theme
+
+    let summary: GoalPortfolioMaturitySummary
+
+    var body: some View {
+        AppCard {
+            VStack(alignment: .leading, spacing: theme.spacing.md) {
+                SectionHeader(title: summary.title, subtitle: summary.subtitle)
+
+                LazyVGrid(columns: [GridItem(.adaptive(minimum: 150), spacing: theme.spacing.sm)], spacing: theme.spacing.sm) {
+                    maturitySignal(summary.scopeSignal)
+                    maturitySignal(summary.stuckWorkSignal)
+                    maturitySignal(summary.proofSignal)
+                    maturitySignal(summary.nextStepSignal)
+                }
+
+                if summary.archiveLearning.isEmpty == false {
+                    VStack(alignment: .leading, spacing: theme.spacing.xs) {
+                        Text("Archive learning")
+                            .font(theme.typography.caption)
+                            .foregroundStyle(theme.colors.textTertiary)
+                        ForEach(summary.archiveLearning, id: \.self) { line in
+                            Text(line)
+                                .font(theme.typography.caption)
+                                .foregroundStyle(theme.colors.textSecondary)
+                                .fixedSize(horizontal: false, vertical: true)
+                        }
+                    }
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                    .padding(theme.spacing.sm)
+                    .background(RoundedRectangle(cornerRadius: theme.radius.md, style: .continuous).fill(theme.colors.surfaceOverlay))
+                }
+            }
+        }
+        .accessibilityElement(children: .ignore)
+        .accessibilityLabel(summary.accessibilityLabel)
+        .accessibilityValue(summary.accessibilityValue)
+        .accessibilityHint(summary.accessibilityHint)
+        .accessibilityIdentifier("goals.portfolio-maturity")
+        .ambitionPanelAccessibility()
+    }
+
+    @ViewBuilder
+    private func maturitySignal(_ signal: GoalPortfolioMaturitySignal) -> some View {
+        let style = theme.stateStyle(for: signal.state)
+        VStack(alignment: .leading, spacing: theme.spacing.xxxs) {
+            Text(signal.title)
+                .font(theme.typography.bodyEmphasized)
+                .foregroundStyle(theme.colors.textPrimary)
+            Text(signal.detail)
+                .font(theme.typography.caption)
+                .foregroundStyle(theme.colors.textSecondary)
+                .fixedSize(horizontal: false, vertical: true)
+        }
+        .frame(maxWidth: .infinity, minHeight: 96, alignment: .topLeading)
+        .padding(theme.spacing.sm)
+        .background(RoundedRectangle(cornerRadius: theme.radius.md, style: .continuous).fill(style.fill))
+        .overlay(RoundedRectangle(cornerRadius: theme.radius.md, style: .continuous).stroke(style.stroke, lineWidth: 1))
+    }
+}
+
 struct GoalsLifecycleRailCard: View {
     @Environment(\.ambitionTheme) private var theme
 

@@ -4,7 +4,7 @@ Status: Active planning roadmap for Layer 2 and Layer 3 after the D01-D26 Design
 
 Purpose: Rewrite, rename, resequence, and rescope original Batches 89-120 against the newer canon docs and the D01-D26 Design Constitution delta/alignment backlog.
 
-This document does not independently mark D01-D26 or M-series batches complete. Operational status remains owned by `docs/codex/BATCH_REGISTRY.md`, which now records D01-D26 and M01-M09 complete for planning purposes after M09 Reviews, Life OS Receipt, and Narrative Progress Maturity. M10 is the next runnable maturity batch.
+This document does not independently mark D01-D26 or M-series batches complete. Operational status remains owned by `docs/codex/BATCH_REGISTRY.md`, which now records D01-D26 and M01-M10 complete for planning purposes after M10 Portfolio, Goal Weather, Goal Scope, and Momentum Maturity. M11 is the next runnable maturity batch.
 
 ## Planning Layers
 
@@ -429,6 +429,8 @@ Acceptance:
 - scope signals are actionable,
 - Goals remains calm and visually obvious.
 
+Status after M10: Completed for planning purposes by adding a bounded Goals-owned portfolio maturity summary with qualitative scope, stuck-work, proof, next-step clarity, and archive-learning signals. It reuses the existing Goals overview, Goal Weather, One-Step Goal, proof, and archive seams without fake numerical certainty, kanban structure, a full archive browser, path editing, a top-level Tasks tab, real-device/manual UI proof, rendered accessibility proof, or release-readiness claims. Validation evidence is recorded in `docs/codex/BATCH_REGISTRY.md`; M11 is next.
+
 Earliest timing: after D13-D14, D20-D21, M01.
 
 ### M11 — Plan, Recovery, Commitment, Waiting, and Save-the-Day Maturity
@@ -752,4 +754,4 @@ After D26 validation, use this roadmap as the active M/R execution sequence. M01
 - known blockers,
 - and device/platform constraints.
 
-M01-M09 are complete for planning purposes. M10 is now the next dependency-safe implementation batch. Preserve the D01-D26 and M01-M09 completion history and do not skip ahead to M11 or R-gates until M10 is implemented, validated, documented, committed, and pushed.
+M01-M10 are complete for planning purposes. M11 is now the next dependency-safe implementation batch. Preserve the D01-D26 and M01-M10 completion history and do not skip ahead to M12 or R-gates until M11 is implemented, validated, documented, committed, and pushed.
