@@ -269,3 +269,5 @@ CI intentionally does not claim the following:
 - App Store Connect validation
 - App Store distribution
 - physical-device install or runtime behavior
+
+R03 adds a code-backed simulator/source readiness ledger in `ReleaseDeviceQAReadinessReport`, but it does not replace this physical-device gate. Do not use TestFlight-ready, real-device verified, or App Store-ready language until the device checks above have separate evidence.

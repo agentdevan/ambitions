@@ -9,7 +9,7 @@ final class ReleasePerformanceResponsivenessReportTests: XCTestCase {
         )
 
         XCTAssertEqual(ReleasePerformanceResponsivenessReport.checks.count, 9)
-        XCTAssertTrue(ReleasePerformanceResponsivenessReport.readinessSummary.contains("R03 is next"))
+        XCTAssertTrue(ReleasePerformanceResponsivenessReport.readinessSummary.contains("device and TestFlight proof remain separate gates"))
     }
 
     func testR02ReportKeepsReadinessClaimsEvidenceBounded() {

@@ -74,7 +74,7 @@ final class AccessibilityNutritionChecklistTests: XCTestCase {
         XCTAssertTrue(entries.contains { $0.limitation.localizedCaseInsensitiveContains("Reduce Motion") })
         XCTAssertTrue(entries.contains { $0.limitation.localizedCaseInsensitiveContains("contrast") })
         XCTAssertTrue(entries.contains { $0.scope == .externalSurfaces && $0.limitation.localizedCaseInsensitiveContains("external-surface") })
-        XCTAssertTrue(AccessibilityClaimsLock.summary.contains("R02 is next"))
+        XCTAssertTrue(AccessibilityClaimsLock.summary.contains("claims locked until manual proof exists"))
     }
 
     func testScreenAuditDescriptorCarriesCompleteChecklist() {

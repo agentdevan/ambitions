@@ -120,7 +120,7 @@ enum ReleasePerformanceResponsivenessReport {
     ]
 
     static var readinessSummary: String {
-        "R02 records \(checks.count) performance and responsiveness checks for simulator/source evidence; R03 is next for device and TestFlight proof."
+        "R02 records \(checks.count) performance and responsiveness checks for simulator/source evidence; device and TestFlight proof remain separate gates."
     }
 
     static var unverifiedReadinessClaims: [String] {

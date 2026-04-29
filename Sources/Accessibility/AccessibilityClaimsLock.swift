@@ -126,6 +126,6 @@ public enum AccessibilityClaimsLock {
     }
 
     public static var summary: String {
-        "R01 keeps public accessibility claims locked until manual proof exists; R02 is next."
+        "R01 keeps public accessibility claims locked until manual proof exists."
     }
 }

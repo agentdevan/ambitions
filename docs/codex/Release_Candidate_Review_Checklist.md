@@ -10,6 +10,13 @@ It is the short execution companion to [../canon/Ambitions_App_Store_Release_Com
 - Confirm the intended release candidate is stable on real devices, not simulator-only.
 - Confirm critical routes, URLs, and first-run flows are fully functional.
 
+## R03 Device QA Gate
+
+- Treat `ReleaseDeviceQAReadinessReport` as the simulator/source readiness ledger, not as physical-device proof.
+- Complete physical-device smoke before using TestFlight-ready language.
+- Verify fresh install, returning user, denied permissions, no-data, lots-of-data, missed-week, export/import, and external-surface journeys on device where possible.
+- Keep representative family/shared-life, career, creative, finance/life-admin, and home/life-admin journeys as QA fixtures only; do not hardcode them into product defaults.
+
 ## Reviewer Access And Completeness
 
 - Confirm the submitted build is not incomplete, placeholder-heavy, or obviously broken.
@@ -35,6 +42,7 @@ It is the short execution companion to [../canon/Ambitions_App_Store_Release_Com
 - Review widgets, Live Activities, notifications, App Intents, shortcuts, and related external routes on real devices.
 - Confirm ambient surfaces are glanceable, bounded, and tied to defined tasks or events.
 - Confirm ambient surfaces do not expose sensitive info casually and do not behave like ads/promotions.
+- Confirm rendered widget gallery behavior, Live Activity Lock Screen/Dynamic Island lifecycle, notification delivery, Shortcuts/Siri invocation, and installed-device app-group I/O before claiming platform readiness.
 
 ## Final Gate
 

@@ -31,7 +31,7 @@ final class AmbitionsUITests: XCTestCase {
         XCTAssertTrue(app.buttons["onboarding.choice.create_first_goal"].waitForExistence(timeout: 10))
         app.buttons["onboarding.choice.create_first_goal"].tap()
         app.buttons["onboarding.next-button"].tap()
-        XCTAssertTrue(app.staticTexts["No Ambitions login"].waitForExistence(timeout: 10))
+        XCTAssertTrue(app.staticTexts["No account required"].waitForExistence(timeout: 10))
         app.buttons["onboarding.start-button"].tap()
 
         XCTAssertTrue(waitForCreateGoalComposer(in: app))

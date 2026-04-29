@@ -4,7 +4,7 @@ Status: Active planning roadmap for Layer 2 and Layer 3 after the D01-D26 Design
 
 Purpose: Rewrite, rename, resequence, and rescope original Batches 89-120 against the newer canon docs and the D01-D26 Design Constitution delta/alignment backlog.
 
-This document does not independently mark D01-D26, M-series batches, or R-series batches complete. Operational status remains owned by `docs/codex/BATCH_REGISTRY.md`, which now records D01-D26, M01-M12, and R01-R02 complete for planning purposes after Final Performance, Memory, and Responsiveness Pass. R03 is the next runnable release-readiness gate.
+This document does not independently mark D01-D26, M-series batches, or R-series batches complete. Operational status remains owned by `docs/codex/BATCH_REGISTRY.md`, which now records D01-D26, M01-M12, and R01-R03 complete for planning purposes after Device QA, TestFlight Readiness, and Scenario Review. R04 is the next runnable release-readiness gate.
 
 ## Planning Layers
 
@@ -498,7 +498,7 @@ Acceptance:
 
 Earliest timing: after M01-M11 as relevant; final version after D22-D25 if external surfaces ship.
 
-Status after M12: Completed for planning purposes by adding a visible shell continuity ribbon under the existing Mode Lens header and a code-backed `CrossSurfaceContinuityMaturityReport` for Today, Capture, Goals, Plan, You, Reviews, external surfaces, and Goal Detail Path Builder handoffs. The report also records mature performance evidence and R01-R05 blockers without adding hidden global modes, new top-level surfaces, rendered external-platform claims, public accessibility claims, TestFlight readiness, App Store readiness, or RC lock. Validation evidence is recorded in `docs/codex/BATCH_REGISTRY.md`; R01 was completed by the accessibility claims lock, and R02 is next.
+Status after M12: Completed for planning purposes by adding a visible shell continuity ribbon under the existing Mode Lens header and a code-backed `CrossSurfaceContinuityMaturityReport` for Today, Capture, Goals, Plan, You, Reviews, external surfaces, and Goal Detail Path Builder handoffs. The report also records mature performance evidence and R01-R05 blockers without adding hidden global modes, new top-level surfaces, rendered external-platform claims, public accessibility claims, TestFlight readiness, App Store readiness, or RC lock. Validation evidence is recorded in `docs/codex/BATCH_REGISTRY.md`; R01-R03 are now complete, and R04 is next.
 
 ## Layer 3: RC Lock / TestFlight / App Store Path
 
@@ -526,7 +526,7 @@ Acceptance:
 - unsupported claims are removed,
 - blockers are listed and owned.
 
-Status after R01: Completed for planning purposes by adding a code-backed `AccessibilityClaimsLock` over Dynamic Type, VoiceOver, Reduce Motion, contrast, motor/tap-target, external surfaces, and App Store accessibility-summary scopes. R01 maps internal evidence to limitations, keeps `publishableClaims` empty, and updates You/Profile accessibility copy to `Claims locked` without claiming verified support. Validation evidence is recorded in `docs/codex/BATCH_REGISTRY.md`; R02 is next. Active limitations: no manual VoiceOver traversal, Dynamic Type screenshots, toggled Reduce Motion walkthrough, measured contrast pass, launch-band motor/tap-target pass, rendered external-surface accessibility proof, real-device proof, TestFlight readiness, App Store readiness, or RC lock.
+Status after R01: Completed for planning purposes by adding a code-backed `AccessibilityClaimsLock` over Dynamic Type, VoiceOver, Reduce Motion, contrast, motor/tap-target, external surfaces, and App Store accessibility-summary scopes. R01 maps internal evidence to limitations, keeps `publishableClaims` empty, and updates You/Profile accessibility copy to `Claims locked` without claiming verified support. Validation evidence is recorded in `docs/codex/BATCH_REGISTRY.md`; R02 later completed. Active limitations: no manual VoiceOver traversal, Dynamic Type screenshots, toggled Reduce Motion walkthrough, measured contrast pass, launch-band motor/tap-target pass, rendered external-surface accessibility proof, real-device proof, TestFlight readiness, App Store readiness, or RC lock.
 
 ### R02 — Final Performance, Memory, and Responsiveness Pass
 
@@ -552,7 +552,7 @@ Acceptance:
 - regressions are fixed or deferred explicitly,
 - user-facing surfaces feel fast enough for testing.
 
-Status after R02: Completed for planning purposes by adding a code-backed `ReleasePerformanceResponsivenessReport` over launch, tab switching, Today, Goal Detail, Plan, receipt/history, memory/review, path/portfolio, and external snapshot performance scopes. R02 records simulator/source-budget evidence, avoids fake timing thresholds, and keeps cold-start timing, memory pressure, touch latency, large-data scrolling, rendered external-platform performance, real-device responsiveness, TestFlight readiness, App Store readiness, and RC lock as explicit R03-R05 limitations. Validation evidence is recorded in `docs/codex/BATCH_REGISTRY.md`; R03 is next.
+Status after R02: Completed for planning purposes by adding a code-backed `ReleasePerformanceResponsivenessReport` over launch, tab switching, Today, Goal Detail, Plan, receipt/history, memory/review, path/portfolio, and external snapshot performance scopes. R02 records simulator/source-budget evidence, avoids fake timing thresholds, and keeps cold-start timing, memory pressure, touch latency, large-data scrolling, rendered external-platform performance, real-device responsiveness, TestFlight readiness, App Store readiness, and RC lock as explicit R03-R05 limitations. Validation evidence is recorded in `docs/codex/BATCH_REGISTRY.md`; R03 later completed, and R04 is now next.
 
 ### R03 — Device QA, TestFlight Readiness, and Scenario Review
 
@@ -570,13 +570,15 @@ Scope:
 - missed week,
 - export/import if implemented,
 - external surfaces if implemented,
-- pregnancy/family/career/creative/finance-style representative scenarios only as fixtures, not hardcoded domains unless productized.
+- family/career/creative/finance/home-style representative scenarios only as fixtures, not hardcoded domains unless productized.
 
 Acceptance:
 
 - TestFlight candidate is justified by evidence,
 - blockers are owned,
 - screenshots/demo states are accurate.
+
+Status after R03: Completed for planning purposes by adding a code-backed `ReleaseDeviceQAReadinessReport` over real-device smoke, fresh install, returning user, denied permissions, no data, lots of data, missed week, export/import, external surfaces, and representative scenario fixtures. R03 records simulator/source evidence and keeps representative family/shared-life, career, creative, finance/life-admin, and home/life-admin journeys as QA fixtures only, not product defaults. Validation evidence is recorded in `docs/codex/BATCH_REGISTRY.md`; R04 is next. Active limitations: no physical-device smoke, high-volume device scrolling, rendered widget/gallery proof, Live Activity Lock Screen/Dynamic Island lifecycle proof, notification delivery proof, Shortcuts/Siri device proof, installed-device app-group I/O proof, TestFlight upload readiness, App Store readiness, or RC lock.
 
 ### R04 — App Store, Privacy, Marketing, and Investor Demo Readiness
 
@@ -762,4 +764,4 @@ After D26 validation, use this roadmap as the active M/R execution sequence. M01
 - known blockers,
 - and device/platform constraints.
 
-M01-M12 and R01-R02 are complete for planning purposes. R03 is now the next dependency-safe implementation batch. Preserve the D01-D26, M01-M12, and R01-R02 completion history and do not skip ahead to later R-gates until R03 is implemented, validated, documented, committed, and pushed.
+M01-M12 and R01-R03 are complete for planning purposes. R04 is now the next dependency-safe implementation batch. Preserve the D01-D26, M01-M12, and R01-R03 completion history and do not skip ahead to R05 until R04 is implemented, validated, documented, committed, and pushed.
