@@ -1,6 +1,6 @@
 # External Surfaces Contract
 
-Status: Active supporting design canon. D22 adds a code-backed shared contract foundation in `ExternalSurfaceContractRegistry` and `ExternalSurfacePrivacySnapshotPolicy`; D23 aligns widget projection/rendering to that contract. Live Activity, App Intent, Shortcuts, notification delivery, rendered widget gallery/device behavior, and real-device readiness remain later verification work.
+Status: Active supporting design canon. D22 adds a code-backed shared contract foundation in `ExternalSurfaceContractRegistry` and `ExternalSurfacePrivacySnapshotPolicy`; D23 aligns widget projection/rendering to that contract; D24 aligns Live Activity content state/rendering to privacy, stale-state, bounded-window, fallback-route, and concise accessibility requirements. App Intent, Shortcuts, notification delivery, rendered widget/gallery/Dynamic Island/Lock Screen behavior, ActivityKit lifecycle delivery, and real-device readiness remain later verification work.
 
 External surfaces must consume shared Now State, Command Pipeline, receipts, and privacy rules. They must not create parallel command logic or make production-ready claims before verification.
 

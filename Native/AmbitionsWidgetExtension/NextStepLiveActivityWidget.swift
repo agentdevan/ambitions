@@ -23,9 +23,13 @@ struct NextStepLiveActivityWidget: Widget {
                         .font(.caption2)
                         .foregroundStyle(.tertiary)
                         .lineLimit(1)
+                    Text(context.state.privacyLabel)
+                        .font(.caption2)
+                        .foregroundStyle(.tertiary)
+                        .lineLimit(1)
                 }
                 Spacer(minLength: 0)
-                Link(destination: deepLinkURL(goalID: context.state.goalID)) {
+                Link(destination: deepLinkURL(state: context.state)) {
                     Label("Return", systemImage: "arrow.up.right.square")
                         .labelStyle(.iconOnly)
                 }
@@ -33,11 +37,12 @@ struct NextStepLiveActivityWidget: Widget {
             .padding()
             .activityBackgroundTint(Color(red: 0.08, green: 0.10, blue: 0.12))
             .activitySystemActionForegroundColor(Color(red: 0.96, green: 0.72, blue: 0.42))
+            .accessibilityLabel(accessibilityLabel(state: context.state))
         } dynamicIsland: { context in
             DynamicIsland {
                 DynamicIslandExpandedRegion(.center) {
                     VStack(alignment: .leading, spacing: 5) {
-                        Text("Ambitions Focus")
+                        Text(context.state.stateLabel)
                             .font(.caption)
                             .foregroundStyle(.secondary)
                         Text(context.state.title)
@@ -47,7 +52,11 @@ struct NextStepLiveActivityWidget: Widget {
                             .font(.subheadline)
                             .foregroundStyle(.secondary)
                             .lineLimit(2)
-                        Link("Return to Ambitions", destination: deepLinkURL(goalID: context.state.goalID))
+                        Text(context.state.privacyLabel)
+                            .font(.caption2)
+                            .foregroundStyle(.tertiary)
+                            .lineLimit(1)
+                        Link("Return to Ambitions", destination: deepLinkURL(state: context.state))
                             .font(.caption.weight(.semibold))
                     }
                 }
@@ -58,7 +67,7 @@ struct NextStepLiveActivityWidget: Widget {
             } minimal: {
                 Image(systemName: "scope")
             }
-            .widgetURL(deepLinkURL(goalID: context.state.goalID))
+            .widgetURL(deepLinkURL(state: context.state))
         }
     }
 
@@ -88,21 +97,12 @@ struct NextStepLiveActivityWidget: Widget {
         }
     }
 
-    private func deepLinkURL(goalID: String) -> URL {
-        ExternalSurfaceActionPayload.deepLinkURL(surface: .goalDetail, goalID: goalID, origin: .liveActivity)
-            ?? ExternalSurfaceActionPayload.deepLinkURL(surface: .tab, tab: "today", origin: .liveActivity)!
+    private func deepLinkURL(state: NextStepActivityAttributes.ContentState) -> URL {
+        URL(string: state.deepLinkURLString)
+            ?? ExternalSurfaceActionPayload.safeDeepLinkURL(surface: .goalDetail, goalID: state.goalID, origin: .liveActivity, fallbackTab: "plan")!
     }
 
-    private func pressureLabel(_ pressure: ExternalSurfacePressureLevel) -> String {
-        switch pressure {
-        case .open:
-            return "Open"
-        case .steady:
-            return "Steady"
-        case .elevated:
-            return "Elevated pressure"
-        case .overloaded:
-            return "Needs triage"
-        }
+    private func accessibilityLabel(state: NextStepActivityAttributes.ContentState) -> String {
+        "\(state.stateLabel). \(state.title). \(state.detail). \(state.privacyLabel). \(state.leaseLabel)."
     }
 }

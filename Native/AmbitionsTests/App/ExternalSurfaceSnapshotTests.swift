@@ -188,9 +188,68 @@ final class ExternalSurfaceSnapshotTests: XCTestCase {
         XCTAssertEqual(state.pressureLevel, .elevated)
         XCTAssertEqual(state.title, "Focus step ready")
         XCTAssertEqual(state.leaseLabel, "Updated recently")
+        XCTAssertEqual(state.privacyLabel, "Details stay private until you open Ambitions.")
+        XCTAssertEqual(state.stateLabel, "Current focus window")
+        XCTAssertEqual(state.deepLinkURLString, "ambitions://goal/goal-now?origin=live_activity")
+        XCTAssertEqual(state.endsAt, "2026-04-15T13:00:00Z")
         XCTAssertEqual(legacyState.goalID, "goal-old")
         XCTAssertEqual(legacyState.stepID, "step-old")
         XCTAssertEqual(legacyState.pressureLevel, .steady)
+    }
+
+    func testD24LiveActivityContentStateCarriesStalePrivacyAndBoundedWindow() throws {
+        let now = try XCTUnwrap(ISO8601DateFormatter().date(from: "2026-04-15T12:00:00Z"))
+        let snapshot = ExternalSurfaceSnapshot(
+            generatedAt: "2026-04-15T11:00:00Z",
+            nextAction: ExternalSurfaceNextAction(
+                goalID: "goal-private",
+                stepID: "step-private",
+                display: ExternalSurfaceDisplayMetadata(
+                    templateKey: "next_tiny_step",
+                    goalMode: .project,
+                    stepState: .planned,
+                    urgency: .soon,
+                    timing: .window
+                )
+            ),
+            continuity: ExternalSurfaceContinuityState(
+                lease: ExternalSurfaceNowStateLease(
+                    status: .stale,
+                    generatedAt: "2026-04-15T11:00:00Z",
+                    freshnessLabel: "This may be behind",
+                    staleActionLabel: "Open Ambitions to refresh"
+                ),
+                syncHealth: ExternalSurfaceSyncHealth(
+                    state: .stale,
+                    label: "Local state may be behind",
+                    detail: "Open Ambitions before acting from this surface."
+                ),
+                receipt: ExternalSurfaceContinuityReceipt(origin: .liveActivity, label: "Opened from Live Activity")
+            )
+        )
+
+        let state = try XCTUnwrap(NextStepActivityAttributes.ContentState(snapshot: snapshot, now: now))
+
+        XCTAssertEqual(state.title, "Focus step ready")
+        XCTAssertEqual(state.detail, "Return to the bounded next move.")
+        XCTAssertEqual(state.privacyLabel, "This may be behind. Open Ambitions to refresh.")
+        XCTAssertEqual(state.stateLabel, "May need refresh")
+        XCTAssertEqual(state.deepLinkURLString, "ambitions://goal/goal-private?origin=live_activity")
+        XCTAssertEqual(state.endsAt, "2026-04-15T13:00:00Z")
+        XCTAssertFalse(state.title.contains("Private Tax Debt Goal"))
+        XCTAssertFalse(state.detail.contains("private numbers"))
+    }
+
+    func testD24LiveActivityDoesNotStartWithoutAConcreteStep() throws {
+        let now = try XCTUnwrap(ISO8601DateFormatter().date(from: "2026-04-15T12:00:00Z"))
+
+        XCTAssertNil(NextStepActivityAttributes.ContentState(snapshot: nil, now: now))
+        XCTAssertNil(
+            NextStepActivityAttributes.ContentState(
+                snapshot: ExternalSurfaceSnapshot(generatedAt: "2026-04-15T12:00:00Z", nextAction: nil),
+                now: now
+            )
+        )
     }
 
     func testSnapshotRitualCueIsPrivacySafeAndBackwardDecodable() throws {
