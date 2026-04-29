@@ -170,7 +170,7 @@ final class AmbitionsUITests: XCTestCase {
         XCTAssertTrue(scrollUntilStaticTextExists("Receipts, corrections, and explanations", in: app))
         XCTAssertTrue(scrollUntilStaticTextExists("Recent trust receipts", in: app))
         XCTAssertTrue(scrollUntilStaticTextExists("Personal Operating Constitution", in: app))
-        XCTAssertTrue(scrollUntilStaticTextExists("Memory Controls", in: app))
+        XCTAssertTrue(scrollUntilStaticTextExists("What Ambitions Knows", in: app))
     }
 
     func testLaunchURLCanLandOnCanonicalPlanSurface() throws {

@@ -39,7 +39,7 @@ Step = action inside a Goal, Path, or Plan.
 | Ritual | Recurring execution structure that supports Goals, Plan, Today, and You. Ritual replaces user-facing standalone Habits posture. | D16 aligns user-facing copy to Rituals; compatibility code may still say Habit/Habits where saved-data, route, or service compatibility requires it. |
 | Waiting / Waiting Room | Place for commitments, dependencies, follow-ups, and paused items waiting on something real. | Implemented foundation exists; future surfaces should keep it distinct from generic tasks. |
 | Decision | Human-readable reason a Goal, Path, Plan, Step, Task, or Receipt changed. | Implemented/partial through decision trails and receipts. |
-| Memory / What Ambitions Knows | User-visible memory/control concept for what Ambitions stores, uses, can correct, and can forget. | Memory controls exist; named full surface remains future D19 work. |
+| Memory / What Ambitions Knows | User-visible memory/control concept for what Ambitions stores, uses, can correct, and can forget. | D19 adds the named You-owned local memory center; full edit/delete/pause/recovery maturity remains future-owned until confirmation and undo boundaries exist. |
 
 ## Required Examples
 

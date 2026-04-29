@@ -298,7 +298,7 @@ struct PreviewFixtures: Sendable {
                 subtitle: "A short map of the trust areas you can inspect without turning You into a settings dump.",
                 entries: [
                     ProfileControlRoomEntry(id: "profile-control-constitution", title: "Personal Operating Constitution", subtitle: "Recommendation posture, recovery tone, planning strictness, and confirmation rules.", icon: "scroll", statusLabel: "Local defaults", state: .selected),
-                    ProfileControlRoomEntry(id: "profile-control-memory", title: "Memory Controls", subtitle: "Local evidence, feedback, corrections, captures, and event history Ambitions may use.", icon: "brain.head.profile", statusLabel: "Stored on this device", state: .default),
+                    ProfileControlRoomEntry(id: "profile-control-memory", title: "What Ambitions Knows", subtitle: "Local evidence, feedback, corrections, captures, and event history Ambitions can explain and let you correct.", icon: "brain.head.profile", statusLabel: "Stored on this device", state: .default),
                     ProfileControlRoomEntry(id: "profile-control-corrections", title: "Corrections and assumptions", subtitle: "Assumptions can be corrected through existing teaching and explanation paths.", icon: "checkmark.bubble", statusLabel: "2 active", state: .success),
                     ProfileControlRoomEntry(id: "profile-control-receipts", title: "Receipts and audit posture", subtitle: "Reviews turns local receipts, recovery, proof, and corrections into a calm receipt layer.", icon: "doc.text.magnifyingglass", statusLabel: "Ready to review", state: .default)
                 ],
@@ -316,15 +316,82 @@ struct PreviewFixtures: Sendable {
                 footer: "These are current local defaults, not a broad account/preferences system. Deeper Constitution maturity remains future-owned."
             ),
             memoryControls: ProfileMemoryControlState(
-                title: "Memory Controls",
-                subtitle: "What Ambitions may use locally to explain recommendations and recovery.",
+                title: "What Ambitions Knows",
+                subtitle: "Local memory areas Ambitions can use, what each one is for, and where you can correct it.",
                 items: [
                     SettingsItem(id: "profile-memory-ledger", title: "Event Ledger", subtitle: "Recent meaningful actions and changes can support explanations. Full raw history stays off this top-level surface.", icon: "list.bullet.rectangle", valueLabel: "2 recent"),
                     SettingsItem(id: "profile-memory-evidence", title: "Proof and feedback", subtitle: "Progress evidence and feedback help Ambitions avoid relying only on intention.", icon: "checkmark.seal", valueLabel: "4 local"),
                     SettingsItem(id: "profile-memory-corrections", title: "Corrections and teaching", subtitle: "User-confirmed corrections can adjust future explanations where existing teaching signals support it.", icon: "slider.horizontal.3", valueLabel: "2 local"),
                     SettingsItem(id: "profile-memory-forget", title: "Forget or clear memory", subtitle: "Destructive memory deletion is not exposed here because safe review, confirmation, and undo coverage are not complete.", icon: "trash.slash", valueLabel: "Unavailable")
                 ],
-                footer: "You can inspect memory areas here. Broad forgetting and deletion remain manual/future until the safe boundary can prove the result."
+                groups: [
+                    ProfileMemoryGroup(
+                        id: "memory-group-current",
+                        title: "Current local memory",
+                        subtitle: "Used only from local Ambitions records available in this runtime.",
+                        footer: "Current does not mean permanent. It means the source is active in the local app right now.",
+                        items: [
+                            ProfileMemoryItem(
+                                id: "memory-item-ledger",
+                                title: "Recent actions and changes",
+                                detail: "2 recent local events are available for explanation and review context.",
+                                sourceLabel: "Event Ledger",
+                                freshness: .current,
+                                usedFor: "Used for Why Changed, reviews, recovery summaries, and receipt context.",
+                                privacyLabel: "Private by default",
+                                actions: [
+                                    ProfileMemoryAction(id: "inspect-ledger", title: "Inspect", statusLabel: "Available", detail: "Review happens through receipts, reviews, and owning surfaces.", state: .success),
+                                    ProfileMemoryAction(id: "delete-ledger", title: "Delete", statusLabel: "Not exposed", detail: "Raw destructive deletion waits for a safe confirmation and undo boundary.", state: .warning)
+                                ],
+                                accessibilityLabel: "Recent actions and changes memory",
+                                accessibilityValue: "Current. Private by default.",
+                                accessibilityHint: "Shows what the event ledger is used for and why deletion is not exposed here."
+                            ),
+                            ProfileMemoryItem(
+                                id: "memory-item-proof-feedback",
+                                title: "Proof and feedback",
+                                detail: "4 proof or feedback records can ground progress and review language.",
+                                sourceLabel: "Proof and feedback",
+                                freshness: .current,
+                                usedFor: "Used for progress summaries, Goal Weather, review receipts, and avoiding intention-only recommendations.",
+                                privacyLabel: "Detail hidden in compact views",
+                                actions: [
+                                    ProfileMemoryAction(id: "update-proof", title: "Update this", statusLabel: "Use owning surface", detail: "Proof and feedback stay corrected from Goal Detail, Capture, or Review context.", state: .default),
+                                    ProfileMemoryAction(id: "pause-proof", title: "Pause use", statusLabel: "Review later", detail: "Pause is represented as a review need here until a safe preference exists.", state: .warning)
+                                ],
+                                accessibilityLabel: "Proof and feedback memory",
+                                accessibilityValue: "Current. Detail hidden in compact views.",
+                                accessibilityHint: "Shows what proof and feedback memory is used for and where it can be corrected."
+                            )
+                        ]
+                    ),
+                    ProfileMemoryGroup(
+                        id: "memory-group-corrections",
+                        title: "Corrections and review signals",
+                        subtitle: "User-corrected context is kept explicit and source-tied.",
+                        footer: "No sensitive identity categories are inferred here.",
+                        items: [
+                            ProfileMemoryItem(
+                                id: "memory-item-corrections",
+                                title: "Corrections and teaching",
+                                detail: "2 local teaching signals can influence future explanation language.",
+                                sourceLabel: "Manual corrections",
+                                freshness: .current,
+                                usedFor: "Used for Why Changed, lighter-version preferences, and future recommendations that cite local evidence.",
+                                privacyLabel: "Correctable",
+                                actions: [
+                                    ProfileMemoryAction(id: "correct-teaching", title: "Correct", statusLabel: "Available", detail: "Corrections stay tied to existing teaching and explanation paths.", state: .success),
+                                    ProfileMemoryAction(id: "delete-teaching", title: "Delete", statusLabel: "Needs confirmation", detail: "Deletion is not claimed until safe review, confirmation, and undo coverage exist.", state: .warning)
+                                ],
+                                accessibilityLabel: "Corrections and teaching memory",
+                                accessibilityValue: "Current. Correctable.",
+                                accessibilityHint: "Shows how corrections affect future explanations and why deletion requires confirmation."
+                            )
+                        ]
+                    )
+                ],
+                recoverySummary: "Memory can be reviewed and corrected from the owning surfaces. Broad delete, forget, and pause controls remain confirmation-gated or future-owned.",
+                footer: "What Ambitions Knows is local, inspectable, and correctable through existing safe seams. Broad forgetting and deletion remain manual/future until the safe boundary can prove the result."
             ),
             assumptionCorrections: ProfileAssumptionCorrectionState(
                 title: "Corrections and assumptions",

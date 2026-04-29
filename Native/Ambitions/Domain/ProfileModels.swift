@@ -158,10 +158,64 @@ struct ProfileConstitutionState: Sendable, Equatable {
     let footer: String
 }
 
+enum ProfileMemoryFreshness: String, Sendable, Equatable {
+    case current
+    case mayNeedReview
+    case basedOnOlderContext
+
+    var label: String {
+        switch self {
+        case .current: "Current"
+        case .mayNeedReview: "May Need Review"
+        case .basedOnOlderContext: "Based on Older Context"
+        }
+    }
+
+    var visualState: AmbitionVisualState {
+        switch self {
+        case .current: .success
+        case .mayNeedReview: .warning
+        case .basedOnOlderContext: .default
+        }
+    }
+}
+
+struct ProfileMemoryAction: Identifiable, Sendable, Equatable {
+    let id: String
+    let title: String
+    let statusLabel: String
+    let detail: String
+    let state: AmbitionVisualState
+}
+
+struct ProfileMemoryItem: Identifiable, Sendable, Equatable {
+    let id: String
+    let title: String
+    let detail: String
+    let sourceLabel: String
+    let freshness: ProfileMemoryFreshness
+    let usedFor: String
+    let privacyLabel: String
+    let actions: [ProfileMemoryAction]
+    let accessibilityLabel: String
+    let accessibilityValue: String
+    let accessibilityHint: String
+}
+
+struct ProfileMemoryGroup: Identifiable, Sendable, Equatable {
+    let id: String
+    let title: String
+    let subtitle: String
+    let footer: String?
+    let items: [ProfileMemoryItem]
+}
+
 struct ProfileMemoryControlState: Sendable, Equatable {
     let title: String
     let subtitle: String
     let items: [SettingsItem]
+    let groups: [ProfileMemoryGroup]
+    let recoverySummary: String
     let footer: String
 }
 

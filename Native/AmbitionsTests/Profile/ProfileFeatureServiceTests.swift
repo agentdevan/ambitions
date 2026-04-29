@@ -279,6 +279,71 @@ final class ProfileFeatureServiceTests: XCTestCase {
         XCTAssertTrue(dashboard.automationBoundary.footer.contains("does not execute"))
     }
 
+    func testD19WhatAmbitionsKnowsNamesMemoryFreshnessUseAndSafeControls() async throws {
+        let repositories = try await makeRepositories()
+        try await repositories.teaching.saveSignals([
+            GoalTeachingSignal(
+                id: "teaching-d19",
+                goalID: "goal-1",
+                createdAt: "2026-04-27T10:00:00Z",
+                updatedAt: "2026-04-27T10:00:00Z",
+                source: .explicitManualCorrection,
+                kind: .energyFitCorrection,
+                disposition: .active,
+                anchor: GoalTeachingStableAnchor(
+                    artifactKind: .energyEvaluation,
+                    canonicalField: nil,
+                    candidateID: nil,
+                    stageID: nil,
+                    stepID: "step-1",
+                    targetFingerprint: "energy::step-1",
+                    contradictionCode: nil,
+                    contradictionArtifactRefs: []
+                ),
+                payload: .energyFit(.init(correctedDisposition: .lighterVersionNeeded)),
+                applicationKey: "goal##energy##step",
+                userNote: "Use a lighter version"
+            )
+        ])
+        let service = RepositoryBackedProfileService(repositories: repositories)
+
+        let dashboard = try await service.loadProfileDashboard()
+        let groups = dashboard.memoryControls.groups
+        let items = groups.flatMap(\.items)
+        let actions = items.flatMap(\.actions)
+
+        XCTAssertEqual(dashboard.memoryControls.title, "What Ambitions Knows")
+        XCTAssertEqual(groups.map(\.id), ["memory-group-current", "memory-group-corrections"])
+        XCTAssertTrue(items.contains(where: {
+            $0.id == "memory-item-ledger" &&
+            $0.sourceLabel == "Event Ledger" &&
+            $0.usedFor.contains("Why Changed") &&
+            $0.privacyLabel == "Private by default"
+        }))
+        XCTAssertTrue(items.contains(where: {
+            $0.id == "memory-item-proof-feedback" &&
+            $0.freshness == .mayNeedReview &&
+            $0.usedFor.contains("Goal Weather")
+        }))
+        XCTAssertTrue(items.contains(where: {
+            $0.id == "memory-item-corrections" &&
+            $0.freshness == .current &&
+            $0.privacyLabel == "Correctable"
+        }))
+        XCTAssertTrue(actions.contains(where: {
+            $0.id == "delete-teaching" &&
+            $0.statusLabel == "Needs confirmation" &&
+            $0.detail.contains("Deletion is not claimed")
+        }))
+        XCTAssertTrue(actions.contains(where: {
+            $0.id == "pause-proof" &&
+            $0.statusLabel == "Review later"
+        }))
+        XCTAssertTrue(dashboard.memoryControls.recoverySummary.contains("Broad delete, forget, and pause controls remain confirmation-gated"))
+        XCTAssertFalse(dashboard.memoryControls.footer.localizedCaseInsensitiveContains("confidence"))
+        XCTAssertFalse(dashboard.memoryControls.footer.localizedCaseInsensitiveContains("cloud memory"))
+    }
+
     func testCorrectionsAndLedgerCountsUseExistingLocalRepositories() async throws {
         let repositories = try await makeRepositories()
         try await repositories.teaching.saveSignals([

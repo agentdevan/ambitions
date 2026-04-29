@@ -396,18 +396,124 @@ private struct ProfileConstitutionCard: View {
 }
 
 private struct ProfileMemoryControlsCard: View {
+    @Environment(\.ambitionTheme) private var theme
+
     let memoryControls: ProfileMemoryControlState
 
     var body: some View {
-        ProfileSectionCard(
-            eyebrow: "Memory",
-            section: ProfileSectionGroup(
-                title: memoryControls.title,
-                subtitle: memoryControls.subtitle,
-                items: memoryControls.items,
-                footer: memoryControls.footer
-            ),
-            accessibilityIdentifier: "profile.memory-controls-card"
+        AppCard {
+            VStack(alignment: .leading, spacing: theme.spacing.md) {
+                SectionHeader(
+                    eyebrow: "Memory",
+                    title: memoryControls.title,
+                    subtitle: memoryControls.subtitle
+                )
+
+                VStack(alignment: .leading, spacing: theme.spacing.sm) {
+                    ForEach(memoryControls.items) { item in
+                        ProfileSettingRow(item: item)
+                    }
+                }
+
+                ForEach(memoryControls.groups) { group in
+                    VStack(alignment: .leading, spacing: theme.spacing.sm) {
+                        SectionHeader(
+                            eyebrow: "What this uses",
+                            title: group.title,
+                            subtitle: group.subtitle
+                        )
+
+                        ForEach(group.items) { item in
+                            ProfileMemoryItemRow(item: item)
+                        }
+
+                        if let footer = group.footer {
+                            Text(footer)
+                                .font(theme.typography.caption)
+                                .foregroundStyle(theme.colors.textTertiary)
+                                .fixedSize(horizontal: false, vertical: true)
+                        }
+                    }
+                }
+
+                Text(memoryControls.recoverySummary)
+                    .font(theme.typography.caption)
+                    .foregroundStyle(theme.colors.textSecondary)
+                    .fixedSize(horizontal: false, vertical: true)
+
+                Text(memoryControls.footer)
+                    .font(theme.typography.caption)
+                    .foregroundStyle(theme.colors.textTertiary)
+                    .fixedSize(horizontal: false, vertical: true)
+            }
+        }
+        .accessibilityIdentifier("profile.memory-controls-card")
+        .ambitionPanelAccessibility(
+            label: memoryControls.title,
+            value: "Local memory groups, freshness labels, and safe correction controls.",
+            hint: "Review what Ambitions stores and how it can be corrected."
+        )
+    }
+}
+
+private struct ProfileMemoryItemRow: View {
+    @Environment(\.ambitionTheme) private var theme
+
+    let item: ProfileMemoryItem
+
+    var body: some View {
+        VStack(alignment: .leading, spacing: theme.spacing.sm) {
+            HStack(alignment: .top, spacing: theme.spacing.sm) {
+                Image(systemName: "brain.head.profile")
+                    .font(.system(size: theme.icon.mediumSize, weight: theme.icon.symbolWeight))
+                    .foregroundStyle(theme.colors.accentPrimary)
+                    .frame(width: 28)
+
+                VStack(alignment: .leading, spacing: theme.spacing.xxxs) {
+                    Text(item.title)
+                        .font(theme.typography.bodyEmphasized)
+                        .foregroundStyle(theme.colors.textPrimary)
+                    Text(item.detail)
+                        .font(theme.typography.body)
+                        .foregroundStyle(theme.colors.textSecondary)
+                        .fixedSize(horizontal: false, vertical: true)
+                    Text(item.usedFor)
+                        .font(theme.typography.caption)
+                        .foregroundStyle(theme.colors.textTertiary)
+                        .fixedSize(horizontal: false, vertical: true)
+                }
+
+                Spacer(minLength: theme.spacing.sm)
+            }
+
+            HStack(spacing: theme.spacing.xs) {
+                TagPill(item.freshness.label, state: item.freshness.visualState)
+                TagPill(item.sourceLabel, state: .default)
+                TagPill(item.privacyLabel, state: .default)
+            }
+
+            VStack(alignment: .leading, spacing: theme.spacing.xs) {
+                ForEach(item.actions) { action in
+                    HStack(alignment: .firstTextBaseline, spacing: theme.spacing.xs) {
+                        TagPill(action.title, state: action.state)
+                        Text(action.statusLabel)
+                            .font(theme.typography.caption.weight(.semibold))
+                            .foregroundStyle(theme.colors.textSecondary)
+                        Text(action.detail)
+                            .font(theme.typography.caption)
+                            .foregroundStyle(theme.colors.textTertiary)
+                            .fixedSize(horizontal: false, vertical: true)
+                    }
+                }
+            }
+        }
+        .padding(theme.spacing.md)
+        .background(RoundedRectangle(cornerRadius: theme.radius.lg, style: .continuous).fill(theme.colors.surfaceOverlay))
+        .overlay(RoundedRectangle(cornerRadius: theme.radius.lg, style: .continuous).stroke(theme.colors.strokeSubtle, lineWidth: 1))
+        .ambitionPanelAccessibility(
+            label: item.accessibilityLabel,
+            value: item.accessibilityValue,
+            hint: item.accessibilityHint
         )
     }
 }

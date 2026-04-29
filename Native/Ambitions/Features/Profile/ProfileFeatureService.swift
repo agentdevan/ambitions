@@ -158,8 +158,8 @@ private extension RepositoryBackedProfileService {
                     ),
                     ProfileControlRoomEntry(
                         id: "profile-control-memory",
-                        title: "Memory Controls",
-                        subtitle: "Local evidence, feedback, corrections, captures, and event history Ambitions may use.",
+                        title: "What Ambitions Knows",
+                        subtitle: "Local evidence, feedback, corrections, captures, and event history Ambitions can explain and let you correct.",
                         icon: "brain.head.profile",
                         statusLabel: "Stored on this device",
                         state: .default
@@ -641,7 +641,7 @@ private extension RepositoryBackedProfileService {
                 ProfileSystemCenterSection(
                     id: "profile-system-memory-trust",
                     title: "Memory and trust",
-                    footer: "Trust Center and What Ambitions Knows deepen later. This map stays navigable without claiming those details are complete.",
+                    footer: "Trust Center and What Ambitions Knows now have bounded You-owned structure. Later maturity can deepen search, export/import, and recovery.",
                     items: [
                         ProfileSystemCenterItem(
                             id: "profile-system-memory",
@@ -872,9 +872,13 @@ private extension RepositoryBackedProfileService {
     func makeMemoryControls(snapshot: Snapshot) -> ProfileMemoryControlState {
         let correctionCount = snapshot.teachingSignals.count
         let correctionStatus = correctionCount == 0 ? "None yet" : "\(correctionCount) local"
+        let openCaptures = snapshot.captures.filter { $0.status != .archived }.count
+        let proofFeedbackCount = snapshot.evidence.count + snapshot.feedback.count
+        let eventCount = snapshot.eventLedger.count
+        let hasRecentMemory = eventCount + proofFeedbackCount + correctionCount + openCaptures > 0
         return ProfileMemoryControlState(
-            title: "Memory Controls",
-            subtitle: "What Ambitions may use locally to explain recommendations and recovery.",
+            title: "What Ambitions Knows",
+            subtitle: "Local memory areas Ambitions can use, what each one is for, and where you can correct it.",
             items: [
                 SettingsItem(
                     id: "profile-memory-ledger",
@@ -912,7 +916,105 @@ private extension RepositoryBackedProfileService {
                     valueLabel: "Unavailable"
                 )
             ],
-            footer: "You can inspect memory areas here. Broad forgetting and deletion remain manual/future until the safe boundary can prove the result."
+            groups: [
+                ProfileMemoryGroup(
+                    id: "memory-group-current",
+                    title: "Current local memory",
+                    subtitle: "Used only from local Ambitions records available in this runtime.",
+                    footer: "Current does not mean permanent. It means the source is active in the local app right now.",
+                    items: [
+                        ProfileMemoryItem(
+                            id: "memory-item-ledger",
+                            title: "Recent actions and changes",
+                            detail: eventCount == 0 ? "No recent local events are available yet." : "\(eventCount) recent local events are available for explanation and review context.",
+                            sourceLabel: "Event Ledger",
+                            freshness: eventCount == 0 ? .basedOnOlderContext : .current,
+                            usedFor: "Used for Why Changed, reviews, recovery summaries, and receipt context.",
+                            privacyLabel: "Private by default",
+                            actions: [
+                                memoryAction(id: "inspect-ledger", title: "Inspect", statusLabel: eventCount == 0 ? "Empty" : "Available", detail: "Review happens through receipts, reviews, and owning surfaces.", state: eventCount == 0 ? .default : .success),
+                                memoryAction(id: "delete-ledger", title: "Delete", statusLabel: "Not exposed", detail: "Raw destructive deletion waits for a safe confirmation and undo boundary.", state: .warning)
+                            ],
+                            accessibilityLabel: "Recent actions and changes memory",
+                            accessibilityValue: eventCount == 0 ? "Based on older context. Private by default." : "Current. Private by default.",
+                            accessibilityHint: "Shows what the event ledger is used for and why deletion is not exposed here."
+                        ),
+                        ProfileMemoryItem(
+                            id: "memory-item-proof-feedback",
+                            title: "Proof and feedback",
+                            detail: proofFeedbackCount == 0 ? "No proof or feedback records are available yet." : "\(proofFeedbackCount) proof or feedback records can ground progress and review language.",
+                            sourceLabel: "Proof and feedback",
+                            freshness: proofFeedbackCount == 0 ? .mayNeedReview : .current,
+                            usedFor: "Used for progress summaries, Goal Weather, review receipts, and avoiding intention-only recommendations.",
+                            privacyLabel: "Detail hidden in compact views",
+                            actions: [
+                                memoryAction(id: "update-proof", title: "Update this", statusLabel: "Use owning surface", detail: "Proof and feedback stay corrected from Goal Detail, Capture, or Review context.", state: .default),
+                                memoryAction(id: "pause-proof", title: "Pause use", statusLabel: "Review later", detail: "Pause is represented as a review need here until a safe preference exists.", state: .warning)
+                            ],
+                            accessibilityLabel: "Proof and feedback memory",
+                            accessibilityValue: "\(proofFeedbackCount == 0 ? ProfileMemoryFreshness.mayNeedReview.label : ProfileMemoryFreshness.current.label). Detail hidden in compact views.",
+                            accessibilityHint: "Shows what proof and feedback memory is used for and where it can be corrected."
+                        ),
+                        ProfileMemoryItem(
+                            id: "memory-item-captures",
+                            title: "Open captures",
+                            detail: openCaptures == 0 ? "No open captures need placement." : "\(openCaptures) open captures may still need routing, review, or archiving.",
+                            sourceLabel: "Capture",
+                            freshness: openCaptures == 0 ? .current : .mayNeedReview,
+                            usedFor: "Used for Needs a Place routing, planning prompts, and safe follow-up.",
+                            privacyLabel: "Stored on this device",
+                            actions: [
+                                memoryAction(id: "edit-captures", title: "Edit", statusLabel: openCaptures == 0 ? "Nothing open" : "Available in Capture", detail: "Capture owns editing, routing, archiving, and receipts for captured items.", state: openCaptures == 0 ? .default : .success)
+                            ],
+                            accessibilityLabel: "Open captures memory",
+                            accessibilityValue: openCaptures == 0 ? "Current. No open captures." : "May Need Review. Stored on this device.",
+                            accessibilityHint: "Shows whether captures are contributing to local memory."
+                        )
+                    ]
+                ),
+                ProfileMemoryGroup(
+                    id: "memory-group-corrections",
+                    title: "Corrections and review signals",
+                    subtitle: "User-corrected context is kept explicit and source-tied.",
+                    footer: "No sensitive identity categories are inferred here. Correction signals stay bounded to the artifacts that created them.",
+                    items: [
+                        ProfileMemoryItem(
+                            id: "memory-item-corrections",
+                            title: "Corrections and teaching",
+                            detail: correctionCount == 0 ? "No active teaching signals are saved yet." : "\(correctionCount) local teaching signals can influence future explanation language.",
+                            sourceLabel: "Manual corrections",
+                            freshness: correctionCount == 0 ? .basedOnOlderContext : .current,
+                            usedFor: "Used for Why Changed, lighter-version preferences, and future recommendations that cite local evidence.",
+                            privacyLabel: "Correctable",
+                            actions: [
+                                memoryAction(id: "correct-teaching", title: "Correct", statusLabel: correctionCount == 0 ? "Available when present" : "Available", detail: "Corrections stay tied to existing teaching and explanation paths.", state: correctionCount == 0 ? .default : .success),
+                                memoryAction(id: "delete-teaching", title: "Delete", statusLabel: "Needs confirmation", detail: "Deletion is not claimed until safe review, confirmation, and undo coverage exist.", state: .warning)
+                            ],
+                            accessibilityLabel: "Corrections and teaching memory",
+                            accessibilityValue: correctionCount == 0 ? "Based on Older Context. Correctable when present." : "Current. Correctable.",
+                            accessibilityHint: "Shows how corrections affect future explanations and why deletion requires confirmation."
+                        )
+                    ]
+                )
+            ],
+            recoverySummary: hasRecentMemory ? "Memory can be reviewed and corrected from the owning surfaces. Broad delete, forget, and pause controls remain confirmation-gated or future-owned." : "There is little local memory yet. Ambitions should say when a recommendation is evidence-light instead of pretending it knows more.",
+            footer: "What Ambitions Knows is local, inspectable, and correctable through existing safe seams. Broad forgetting and deletion remain manual/future until the safe boundary can prove the result."
+        )
+    }
+
+    func memoryAction(
+        id: String,
+        title: String,
+        statusLabel: String,
+        detail: String,
+        state: AmbitionVisualState
+    ) -> ProfileMemoryAction {
+        ProfileMemoryAction(
+            id: id,
+            title: title,
+            statusLabel: statusLabel,
+            detail: detail,
+            state: state
         )
     }
 
