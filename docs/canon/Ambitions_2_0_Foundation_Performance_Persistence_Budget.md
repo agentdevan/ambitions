@@ -70,3 +70,9 @@ Batch 82 keeps the Phase B foundations ready for surface consumption without add
 - Do not recompute full graph, receipt, promise, proof/resource, or safe automation projections in SwiftUI body code.
 - Prefer object-scoped, lane-scoped, type-scoped, time-windowed, or explicitly limited helpers.
 - Do not add timing thresholds, fake measured claims, scores, confidence percentages, or readiness percentages to satisfy this budget.
+
+## R02 Release Performance Addendum
+
+R02 keeps this budget qualitative and evidence-backed. `Native/Ambitions/Support/ReleasePerformanceResponsivenessReport.swift` records release-performance checks for app launch, tab switching, Today load, Goal Detail load, Plan load, receipt/history queries, memory/review queries, path/portfolio queries, and external snapshots.
+
+The R02 report is simulator/source evidence, not real-device certification. It keeps cold-start timing, memory pressure, touch latency, large-data scrolling, rendered widget/Live Activity performance, Shortcuts/Siri execution speed, TestFlight readiness, App Store readiness, and final RC lock out of scope until R03-R05 provide the missing device/platform/human evidence.
