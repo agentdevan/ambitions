@@ -4,7 +4,7 @@ Status: Active planning roadmap for Layer 2 and Layer 3 after the D01-D26 Design
 
 Purpose: Rewrite, rename, resequence, and rescope original Batches 89-120 against the newer canon docs and the D01-D26 Design Constitution delta/alignment backlog.
 
-This document does not independently mark D01-D26 or M-series batches complete. Operational status remains owned by `docs/codex/BATCH_REGISTRY.md`, which now records D01-D26 and M01-M12 complete for planning purposes after M12 Cross-Surface Continuity, Mode Lens, Mature Invention Performance. R01 is the next runnable release-readiness gate.
+This document does not independently mark D01-D26, M-series batches, or R-series batches complete. Operational status remains owned by `docs/codex/BATCH_REGISTRY.md`, which now records D01-D26, M01-M12, and R01 complete for planning purposes after Final Accessibility Verification and Claims Lock. R02 is the next runnable release-readiness gate.
 
 ## Planning Layers
 
@@ -498,7 +498,7 @@ Acceptance:
 
 Earliest timing: after M01-M11 as relevant; final version after D22-D25 if external surfaces ship.
 
-Status after M12: Completed for planning purposes by adding a visible shell continuity ribbon under the existing Mode Lens header and a code-backed `CrossSurfaceContinuityMaturityReport` for Today, Capture, Goals, Plan, You, Reviews, external surfaces, and Goal Detail Path Builder handoffs. The report also records mature performance evidence and R01-R05 blockers without adding hidden global modes, new top-level surfaces, rendered external-platform claims, public accessibility claims, TestFlight readiness, App Store readiness, or RC lock. Validation evidence is recorded in `docs/codex/BATCH_REGISTRY.md`; R01 is next.
+Status after M12: Completed for planning purposes by adding a visible shell continuity ribbon under the existing Mode Lens header and a code-backed `CrossSurfaceContinuityMaturityReport` for Today, Capture, Goals, Plan, You, Reviews, external surfaces, and Goal Detail Path Builder handoffs. The report also records mature performance evidence and R01-R05 blockers without adding hidden global modes, new top-level surfaces, rendered external-platform claims, public accessibility claims, TestFlight readiness, App Store readiness, or RC lock. Validation evidence is recorded in `docs/codex/BATCH_REGISTRY.md`; R01 was completed by the accessibility claims lock, and R02 is next.
 
 ## Layer 3: RC Lock / TestFlight / App Store Path
 
@@ -525,6 +525,8 @@ Acceptance:
 - claims map to evidence,
 - unsupported claims are removed,
 - blockers are listed and owned.
+
+Status after R01: Completed for planning purposes by adding a code-backed `AccessibilityClaimsLock` over Dynamic Type, VoiceOver, Reduce Motion, contrast, motor/tap-target, external surfaces, and App Store accessibility-summary scopes. R01 maps internal evidence to limitations, keeps `publishableClaims` empty, and updates You/Profile accessibility copy to `Claims locked` without claiming verified support. Validation evidence is recorded in `docs/codex/BATCH_REGISTRY.md`; R02 is next. Active limitations: no manual VoiceOver traversal, Dynamic Type screenshots, toggled Reduce Motion walkthrough, measured contrast pass, launch-band motor/tap-target pass, rendered external-surface accessibility proof, real-device proof, TestFlight readiness, App Store readiness, or RC lock.
 
 ### R02 — Final Performance, Memory, and Responsiveness Pass
 
@@ -758,4 +760,4 @@ After D26 validation, use this roadmap as the active M/R execution sequence. M01
 - known blockers,
 - and device/platform constraints.
 
-M01-M12 are complete for planning purposes. R01 is now the next dependency-safe implementation batch. Preserve the D01-D26 and M01-M12 completion history and do not skip ahead to later R-gates until R01 is implemented, validated, documented, committed, and pushed.
+M01-M12 and R01 are complete for planning purposes. R02 is now the next dependency-safe implementation batch. Preserve the D01-D26, M01-M12, and R01 completion history and do not skip ahead to later R-gates until R02 is implemented, validated, documented, committed, and pushed.

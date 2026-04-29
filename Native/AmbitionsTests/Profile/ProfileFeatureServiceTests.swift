@@ -11,7 +11,7 @@ final class ProfileFeatureServiceTests: XCTestCase {
         XCTAssertTrue(dashboard.hero.subtitle.contains("Trust Center"))
         XCTAssertTrue(dashboard.trustCenter.pulse.subtitle.contains("Local-first"))
         XCTAssertTrue(dashboard.trustCenter.items.contains(where: { $0.id == "profile-trust-sync" && $0.valueLabel == "Ambitions is running in explicit local-only mode." }))
-        XCTAssertTrue(dashboard.trustCenter.items.contains(where: { $0.id == "profile-trust-accessibility" && $0.valueLabel == "Unverified" }))
+        XCTAssertTrue(dashboard.trustCenter.items.contains(where: { $0.id == "profile-trust-accessibility" && $0.valueLabel == "Claims locked" }))
         XCTAssertTrue(dashboard.trustCenter.items.contains(where: { $0.id == "profile-trust-export-import" && $0.valueLabel == "Future planned" }))
         XCTAssertTrue(dashboard.integrationsSection.items.contains(where: { $0.id == "profile-integration-notifications" && $0.valueLabel == "Not requested" }))
         XCTAssertTrue(dashboard.integrationsSection.items.contains(where: { $0.id == "profile-integration-shortcuts" && $0.valueLabel == ExternalSurfaceTruth.productizedNeedsPlatformReview }))

@@ -27,7 +27,17 @@ D21 records implementation-backed internal evidence for the active screen/compon
 - Every category except verified user-facing claims is marked `Partially supported` for internal tracking only; verified user-facing claims remain `Unverified`.
 - No audit row has `canPublishAsUserFacingClaim == true`.
 - External-surface accessibility evidence remains contract-level until D22-D25 finish widget, Live Activity, and App Intent alignment.
-- Manual VoiceOver traversal, Dynamic Type screenshots, Reduce Motion toggled review, contrast measurement, and real-device launch-band verification remain required before R01 or release publication.
+- Manual VoiceOver traversal, Dynamic Type screenshots, Reduce Motion toggled review, contrast measurement, and real-device launch-band verification remain required before release publication.
+
+## R01 Current Status
+
+R01 records the final accessibility claims lock for the current release-readiness sequence. It does not publish Accessibility Nutrition Facts, App Store accessibility claims, or a broad "fully accessible" claim.
+
+- The R01 claim lock lives in `AccessibilityClaimsLock.r01Entries` in `Sources/Accessibility/AccessibilityClaimsLock.swift`.
+- It maps Dynamic Type, VoiceOver, Reduce Motion, contrast, motor/tap-target, external-surface, and App Store accessibility-summary scopes to current internal evidence and explicit limitations.
+- `AccessibilityClaimsLock.publishableClaims` is intentionally empty until manual proof exists.
+- You/Profile copy uses `Claims locked` for public accessibility status rather than `Verified`.
+- Manual VoiceOver traversal, Dynamic Type screenshots, Reduce Motion toggled review, measured contrast, motor/tap-target review, rendered external-surface accessibility proof, and real-device launch-band verification remain required before any public claim or App Store accessibility summary can publish.
 
 ## Internal Accessibility Nutrition Checklist
 

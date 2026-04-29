@@ -1,6 +1,6 @@
 # Accessibility Nutrition Screen Matrix
 
-Status: Active supporting design canon. D21 records internal source/design/test evidence for each row below, but user-facing accessibility claims remain `Unverified` until manual device-band verification and R01 claim lock.
+Status: Active supporting design canon. D21 records internal source/design/test evidence for each row below, and R01 records a code-backed claims lock. User-facing accessibility claims remain locked until manual device-band verification proves the specific claim scope.
 
 | Screen / component group | Dynamic Type | VoiceOver | Reduce Motion | Contrast | No color-only meaning | Target size | Gesture alternatives | Focus not obscured | Consistent help | Redundant entry avoidance | Offline/degraded state | Verification status | Evidence needed before user-facing claim |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |

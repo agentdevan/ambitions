@@ -261,9 +261,9 @@ private extension RepositoryBackedProfileService {
                     SettingsItem(
                         id: "profile-trust-accessibility",
                         title: "Accessibility Nutrition",
-                        subtitle: "Internal checklist infrastructure exists. User-facing verification remains unavailable until a later verification batch.",
+                        subtitle: "Internal checklist infrastructure exists. Public claims are locked until manual verification is recorded.",
                         icon: "figure",
-                        valueLabel: "Unverified"
+                        valueLabel: "Claims locked"
                     ),
                     SettingsItem(
                         id: "profile-trust-export-import",
@@ -571,9 +571,9 @@ private extension RepositoryBackedProfileService {
                     ProfileTrustCenterRoute(
                         id: "trust-route-accessibility-claims",
                         title: "Accessibility claims",
-                        subtitle: "Internal accessibility evidence exists, but user-facing claims wait for verification.",
+                        subtitle: "Internal evidence exists. Public claims stay locked until manual VoiceOver, Dynamic Type, Reduce Motion, contrast, and motor review is recorded.",
                         icon: "figure",
-                        statusLabel: "Unverified",
+                        statusLabel: "Claims locked",
                         semanticState: .accessibilityUnverified,
                         accessibilityHint: "Shows accessibility claim status."
                     )
@@ -725,9 +725,9 @@ private extension RepositoryBackedProfileService {
                         ProfileSystemCenterItem(
                             id: "profile-system-accessibility",
                             title: "Accessibility",
-                            subtitle: "Internal checklist evidence exists; user-facing verification waits for the accessibility claims batch.",
+                            subtitle: "Internal checklist evidence exists; public claims are locked until manual verification is recorded.",
                             icon: "figure",
-                            statusLabel: "Unverified",
+                            statusLabel: "Claims locked",
                             semanticState: .accessibilityUnverified,
                             accessibilityHint: "Shows accessibility verification status."
                         )

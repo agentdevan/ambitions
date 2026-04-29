@@ -51,6 +51,7 @@ final class AccessibilityNutritionChecklistTests: XCTestCase {
         XCTAssertEqual(unverifiedSummary.count, AccessibilityNutritionChecklist.items.count)
         XCTAssertTrue(unverifiedSummary.allSatisfy { $0.status == .unverified })
         XCTAssertTrue(unverifiedSummary.allSatisfy { $0.canPublishAsUserFacingClaim == false })
+        XCTAssertTrue(unverifiedSummary.allSatisfy { $0.detail.localizedCaseInsensitiveContains("claims locked") })
 
         let verifiedSummaryItem = AccessibilityNutritionSummaryItem(
             category: .dynamicType,
@@ -58,6 +59,22 @@ final class AccessibilityNutritionChecklistTests: XCTestCase {
             detail: "Verified on a specific build and device band."
         )
         XCTAssertTrue(verifiedSummaryItem.canPublishAsUserFacingClaim)
+    }
+
+    func testR01ClaimLockKeepsPublicAccessibilityClaimsUnavailableWithoutManualEvidence() {
+        let entries = AccessibilityClaimsLock.r01Entries
+
+        XCTAssertEqual(Set(entries.map(\.scope)), Set(AccessibilityClaimScope.allCases))
+        XCTAssertTrue(AccessibilityClaimsLock.publishableClaims.isEmpty)
+        XCTAssertEqual(entries.first { $0.scope == .appStoreSummary }?.state, .locked)
+        XCTAssertTrue(entries.allSatisfy { $0.ownerBatch == "R01" })
+        XCTAssertTrue(entries.allSatisfy { !$0.evidence.isEmpty && !$0.limitation.isEmpty })
+        XCTAssertTrue(entries.contains { $0.limitation.localizedCaseInsensitiveContains("VoiceOver") })
+        XCTAssertTrue(entries.contains { $0.scope == .dynamicType && $0.limitation.localizedCaseInsensitiveContains("screenshots") })
+        XCTAssertTrue(entries.contains { $0.limitation.localizedCaseInsensitiveContains("Reduce Motion") })
+        XCTAssertTrue(entries.contains { $0.limitation.localizedCaseInsensitiveContains("contrast") })
+        XCTAssertTrue(entries.contains { $0.scope == .externalSurfaces && $0.limitation.localizedCaseInsensitiveContains("external-surface") })
+        XCTAssertTrue(AccessibilityClaimsLock.summary.contains("R02 is next"))
     }
 
     func testScreenAuditDescriptorCarriesCompleteChecklist() {

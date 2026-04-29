@@ -287,7 +287,7 @@ struct PreviewFixtures: Sendable {
                         items: [
                             ProfileSystemCenterItem(id: "profile-system-integrations", title: "Integrations", subtitle: "Calendar, reminders, widgets, Live Activities, Shortcuts, and Share Extension status remain bounded.", icon: "rectangle.connected.to.line.below", statusLabel: "Not requested", semanticState: .calendarDerived, accessibilityHint: "Shows integration permission status."),
                             ProfileSystemCenterItem(id: "profile-system-notifications", title: "Notifications", subtitle: "Local reminders require explicit notification permission and are not needed to use the app.", icon: "bell.badge", statusLabel: "Not requested", semanticState: .neutral, accessibilityHint: "Shows notification permission status."),
-                            ProfileSystemCenterItem(id: "profile-system-accessibility", title: "Accessibility", subtitle: "Internal checklist evidence exists; user-facing verification waits for the accessibility claims batch.", icon: "figure", statusLabel: "Unverified", semanticState: .accessibilityUnverified, accessibilityHint: "Shows accessibility verification status.")
+                            ProfileSystemCenterItem(id: "profile-system-accessibility", title: "Accessibility", subtitle: "Internal checklist evidence exists; public claims are locked until manual verification is recorded.", icon: "figure", statusLabel: "Claims locked", semanticState: .accessibilityUnverified, accessibilityHint: "Shows accessibility verification status.")
                         ]
                     )
                 ],
@@ -561,7 +561,7 @@ struct PreviewFixtures: Sendable {
                         routes: [
                             ProfileTrustCenterRoute(id: "trust-route-privacy", title: "Privacy defaults", subtitle: "Sensitive details should be hidden on compact and external surfaces unless the user chooses otherwise.", icon: "hand.raised", statusLabel: "Private by default", semanticState: .protected, accessibilityHint: "Shows privacy-safe display posture."),
                             ProfileTrustCenterRoute(id: "trust-route-sync-export", title: "Sync / Export truth", subtitle: "Sync is not connected. Export and import proof remain future-owned.", icon: "externaldrive", statusLabel: "Ambitions is running in explicit local-only mode.", semanticState: .caution, accessibilityHint: "Shows sync and export truth."),
-                            ProfileTrustCenterRoute(id: "trust-route-accessibility-claims", title: "Accessibility claims", subtitle: "Internal accessibility evidence exists, but user-facing claims wait for verification.", icon: "figure", statusLabel: "Unverified", semanticState: .accessibilityUnverified, accessibilityHint: "Shows accessibility claim status.")
+                            ProfileTrustCenterRoute(id: "trust-route-accessibility-claims", title: "Accessibility claims", subtitle: "Internal evidence exists. Public claims stay locked until manual VoiceOver, Dynamic Type, Reduce Motion, contrast, and motor review is recorded.", icon: "figure", statusLabel: "Claims locked", semanticState: .accessibilityUnverified, accessibilityHint: "Shows accessibility claim status.")
                         ]
                     )
                 ],

@@ -254,7 +254,7 @@ public enum AccessibilityNutritionChecklist {
             AccessibilityNutritionSummaryItem(
                 category: $0.category,
                 status: $0.defaultStatus,
-                detail: "Not yet verified for user-facing Accessibility Nutrition Facts."
+                detail: "Claims locked until manual verification evidence is recorded."
             )
         }
     }
