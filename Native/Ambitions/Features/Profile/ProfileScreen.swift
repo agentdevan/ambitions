@@ -345,7 +345,7 @@ private struct ProfileSystemCenterCard: View {
         .ambitionPanelAccessibility(
             label: systemCenter.title,
             value: "\(systemCenter.sections.flatMap(\.items).count) grouped areas",
-            hint: "Personal System Center categories for You."
+            hint: "Categories for You."
         )
     }
 }

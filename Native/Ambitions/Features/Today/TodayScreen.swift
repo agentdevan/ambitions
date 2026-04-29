@@ -148,7 +148,7 @@ struct TodayScreen: View {
         case .protectLater:
             container.commandRouter.route(to: .tab(.plan), source: .shellUtility)
             viewModel.transientMessage = TodayInlineMessage(
-                title: "Protected in Plan",
+                title: "Moved to Plan",
                 body: "Today handed this off to the canonical planning surface instead of creating a second recovery system here.",
                 state: .selected
             )

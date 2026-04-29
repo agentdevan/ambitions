@@ -491,7 +491,7 @@ private extension RepositoryBackedHabitsService {
     func note(for status: HabitTodayState) -> String {
         switch status {
         case .completed: "Today's full version is already in the log."
-        case .minimumDone: "The minimum version counted today. That still protects the rhythm."
+        case .minimumDone: "The minimum version counted today. That still keeps the rhythm alive."
         case .partial: "Partial signal is recorded, so you do not need to start from zero mentally."
         case .delayed: "This was delayed to soften pressure, not to create debt."
         case .skipped: "A skipped day is visible here so the next repetition can restart cleanly."

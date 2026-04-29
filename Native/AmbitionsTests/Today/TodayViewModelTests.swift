@@ -64,7 +64,7 @@ final class TodayViewModelTests: XCTestCase {
         XCTAssertEqual(experience.execution.hero.kind, .nextAction)
         XCTAssertEqual(experience.execution.activeLens.title, "Work")
         XCTAssertEqual(experience.execution.hero.smallestUsefulNextStep, "Send the client spreadsheet")
-        XCTAssertEqual(experience.execution.protectedMustDo.title, "Protect this")
+        XCTAssertEqual(experience.execution.protectedMustDo.title, "Keep this")
         XCTAssertEqual(experience.execution.bestNextMove.subtitle, "Send the client spreadsheet")
         XCTAssertEqual(experience.execution.notToday.title, "Not today")
         XCTAssertEqual(experience.execution.recoveryFallback.title, "Fallback")
@@ -173,7 +173,7 @@ final class TodayViewModelTests: XCTestCase {
         XCTAssertEqual(experience.execution.notToday.value, "Parked")
         XCTAssertEqual(experience.execution.frictionSignal.value, "Needs recovery")
         XCTAssertEqual(experience.execution.saveTheDayAction?.title, "Save the day")
-        XCTAssertTrue(experience.execution.deeperSections.flatMap(\.rows).contains { $0.title == "Protected" })
+        XCTAssertTrue(experience.execution.deeperSections.flatMap(\.rows).contains { $0.title == "Kept in view" })
         XCTAssertTrue(experience.execution.deeperSections.flatMap(\.rows).contains { $0.title == "Can move slowly" })
         XCTAssertFalse(experience.execution.supportingPanels.contains { $0.value.localizedCaseInsensitiveContains("piano") })
     }

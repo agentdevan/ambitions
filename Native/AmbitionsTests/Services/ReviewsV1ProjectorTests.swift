@@ -7,7 +7,7 @@ final class ReviewsV1ProjectorTests: XCTestCase {
             id: "receipt-recovery",
             resultState: .needsConfirmation,
             title: "Recovery prepared",
-            summary: "Protected the must-do and left the plan unchanged until confirmation.",
+            summary: "Kept the must-do and left the plan unchanged until confirmation.",
             sourceDomain: .plan,
             occurredAt: "2026-04-27T10:10:00Z",
             affectedObjects: [

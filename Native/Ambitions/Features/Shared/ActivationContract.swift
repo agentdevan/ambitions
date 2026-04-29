@@ -62,7 +62,7 @@ struct ActivationTrustMessage: Sendable, Equatable {
 }
 
 enum ActivationContract {
-    static let firstTenMinutesPromise = "Start with one real thing. Ambitions will turn it into one believable next move, show why it matters, give you a safe fallback, and stay honest about what is local."
+    static let firstTenMinutesPromise = "Start with one real thing. Ambitions will turn it into one doable next move, show why it matters, give you a safe fallback, and stay honest about what is local."
 
     static let orientationTitle = "Start with one real thing"
     static let orientationSubtitle = "Ambitions becomes useful from one meaningful goal, one messy capture, or one calm return to Today. You do not need to set up your whole life first."
@@ -82,7 +82,7 @@ enum ActivationContract {
     )
 
     static let onboardingSurfaceRows: [ActivationCopyRow] = [
-        ActivationCopyRow(title: "Today", detail: "Protect one believable next move.", icon: AppTab.today.systemImage),
+        ActivationCopyRow(title: "Today", detail: "Choose one doable next move.", icon: AppTab.today.systemImage),
         ActivationCopyRow(title: "Goals", detail: "Name one meaningful direction.", icon: AppTab.goals.systemImage),
         ActivationCopyRow(title: "Capture", detail: "Put messy life here first.", icon: AppTab.captures.systemImage),
         ActivationCopyRow(title: "Plan", detail: "Shape the week only when something real asks for room.", icon: AppTab.plan.systemImage),
@@ -95,7 +95,7 @@ enum ActivationContract {
             return ActivationPromise(
                 kind: kind,
                 title: "First meaningful goal",
-                explanation: "Start with one specific ambition in plain language. Ambitions should shape a believable first move without asking for a giant life plan.",
+                explanation: "Start with one specific ambition in plain language. Ambitions should shape a doable first move without asking for a giant life plan.",
                 primaryActionTitle: "Create first goal",
                 primaryRoutingHint: .createGoal
             )
@@ -111,7 +111,7 @@ enum ActivationContract {
             return ActivationPromise(
                 kind: kind,
                 title: "First Today Contract",
-                explanation: "Today protects one believable move and keeps support panels subordinate to the day instead of becoming a dashboard.",
+                explanation: "Today keeps one doable move visible and keeps support panels subordinate to the day instead of becoming a dashboard.",
                 primaryActionTitle: "Enter Today",
                 primaryRoutingHint: .today
             )
@@ -156,7 +156,7 @@ enum ActivationContract {
             return ActivationSurfaceEmptyStateRule(
                 surface: surface,
                 title: "Today is waiting for one real thing",
-                explanation: "Add one meaningful goal or capture one loose thought. Today will protect one believable move when there is something real to act on.",
+                explanation: "Add one meaningful goal or capture one loose thought. Today will keep one doable move visible when there is something real to act on.",
                 primaryAction: DegradedStateAction(title: "Create first goal", systemImage: "target", routingHint: .createGoal),
                 secondaryAction: DegradedStateAction(title: "Capture first", systemImage: "tray.and.arrow.down", routingHint: .quickCapture),
                 icon: "sun.max"
@@ -165,7 +165,7 @@ enum ActivationContract {
             return ActivationSurfaceEmptyStateRule(
                 surface: surface,
                 title: "Start with one meaningful goal",
-                explanation: "Name one specific ambition in plain language. Ambitions will shape a first believable path without asking for a whole life plan.",
+                explanation: "Name one specific ambition in plain language. Ambitions will shape a first doable path without asking for a whole life plan.",
                 primaryAction: DegradedStateAction(title: "Create goal", systemImage: "plus", routingHint: .createGoal),
                 secondaryAction: DegradedStateAction(title: "Capture an idea", systemImage: "tray.and.arrow.down", routingHint: .quickCapture),
                 icon: "scope"

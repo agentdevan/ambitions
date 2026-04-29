@@ -832,7 +832,7 @@ private extension RepositoryBackedTodayService {
             actions.insert(
                 TodayInlineAction(
                     kind: .protectLater,
-                    title: "Protect later",
+                    title: "Move later",
                     systemImage: "calendar.badge.clock",
                     state: .selected,
                     target: TodayActionTarget()
@@ -854,7 +854,7 @@ private extension RepositoryBackedTodayService {
         case .stable:
             return "One clear move matters more than another stack of cards."
         case .tight:
-            return action.kind == .protectLater ? "Protect the next believable block before pressure turns noisy." : "Keep the day believable without widening scope."
+            return action.kind == .protectLater ? "Move this into Plan before pressure turns noisy." : "Keep the day doable without widening scope."
         case .drifted:
             return "Use the calmest next move to get traction back."
         case .overloaded:
@@ -1116,7 +1116,7 @@ private extension RepositoryBackedTodayService {
         case 1:
             return "Later today"
         default:
-            return "Protect later"
+            return "Move later"
         }
     }
 
@@ -1188,9 +1188,9 @@ private extension RepositoryBackedTodayService {
         }
 
         append(actions.first(where: { $0.kind == .split }), title: "Smaller version", detail: "Shrink the next move until it feels safe to start.", state: .selected)
-        append(actions.first(where: { $0.kind == .complete || $0.kind == .startFocus }), title: "Safest next move", detail: "If the current step is still believable, stay with the calmest useful action.", state: .success)
+        append(actions.first(where: { $0.kind == .complete || $0.kind == .startFocus }), title: "Safest next move", detail: "If the current step is still doable, stay with the calmest useful action.", state: .success)
         append(actions.first(where: { $0.kind == .reschedule || $0.kind == .defer }), title: "Reschedule gently", detail: "Move the work without turning the day into a failure narrative.", state: .default)
-        append(actions.first(where: { $0.kind == .protectLater }), title: "Protect later", detail: "Preserve one cleaner block in Plan instead of squeezing it here.", state: .default)
+        append(actions.first(where: { $0.kind == .protectLater }), title: "Move later", detail: "Move one cleaner block into Plan instead of squeezing it here.", state: .default)
         append(
             TodayInlineAction(
                 kind: .openPlan,
@@ -1214,7 +1214,7 @@ private extension RepositoryBackedTodayService {
         guard entryContext == .focus else { return nil }
         let fallbackAction = TodayInlineAction(
             kind: .openPlan,
-            title: "Protect in Plan",
+            title: "Open Plan",
             systemImage: "calendar",
             state: .selected,
             target: TodayActionTarget()
@@ -2098,7 +2098,7 @@ private extension RepositoryBackedTodayService {
                         TodayInlineAction(kind: .complete, title: "Complete", systemImage: "checkmark", state: .success, target: target),
                         TodayInlineAction(kind: .split, title: "Split", systemImage: "scissors", state: .selected, target: target),
                         TodayInlineAction(kind: .defer, title: "Defer", systemImage: "clock.arrow.circlepath", state: .default, target: target),
-                        TodayInlineAction(kind: .protectLater, title: "Protect later", systemImage: "calendar.badge.clock", state: .default, target: target),
+                        TodayInlineAction(kind: .protectLater, title: "Move later", systemImage: "calendar.badge.clock", state: .default, target: target),
                         TodayInlineAction(kind: .askWhyThisMatters, title: "Why this matters", systemImage: "questionmark.circle", state: .default, target: target),
                         TodayInlineAction(kind: .openDetail, title: "Open detail", systemImage: "arrow.right.circle", state: .default, target: target)
                     ],
@@ -2121,7 +2121,7 @@ private extension RepositoryBackedTodayService {
                     TodayInlineAction(kind: .defer, title: "Defer", systemImage: "clock.arrow.circlepath", state: .default, target: target),
                     TodayInlineAction(kind: .reschedule, title: "Reschedule", systemImage: "forward.fill", state: .warning, target: target),
                     TodayInlineAction(kind: .split, title: "Split", systemImage: "scissors", state: .selected, target: target),
-                    TodayInlineAction(kind: .protectLater, title: "Protect later", systemImage: "calendar.badge.clock", state: .default, target: target),
+                    TodayInlineAction(kind: .protectLater, title: "Move later", systemImage: "calendar.badge.clock", state: .default, target: target),
                     TodayInlineAction(kind: .askWhyThisMatters, title: "Why this matters", systemImage: "questionmark.circle", state: .default, target: target),
                     TodayInlineAction(kind: .openDetail, title: "Open detail", systemImage: "arrow.right.circle", state: .default, target: target)
                 ],
@@ -2502,7 +2502,7 @@ private extension RepositoryBackedTodayService {
         case .askWhyThisMatters:
             return "Asked why this matters from Today."
         case .protectLater:
-            return "Protected later from Today."
+            return "Moved later from Today."
         case .quickLog:
             return "Quick log from Today."
         case .createReminder:

@@ -102,7 +102,7 @@ enum GoalPortfolioLifecycleState: String, Hashable, Sendable, CaseIterable {
         case .waiting: "Waiting"
         case .blocked: "Blocked"
         case .parked: "Parked"
-        case .protected: "Protected"
+        case .protected: "Kept in view"
         case .completed: "Completed"
         case .cancelledDropped: "Cancelled"
         case .previous: "Previous"
@@ -157,7 +157,7 @@ enum GoalWeatherState: String, Hashable, Sendable {
         case .cloudy: "Cloudy"
         case .stormy: "Stormy"
         case .foggy: "Foggy"
-        case .protected: "Protected"
+        case .protected: "Kept in view"
         }
     }
 
@@ -1345,7 +1345,7 @@ struct GoalDetailPresentation: Sendable {
             screenID: .goalDetail,
             firstScreenContent: [
                 "Object identity header",
-                "Mission Control lanes"
+                "Goal detail lanes"
             ],
             panels: [
                 .objectIdentityHeader,

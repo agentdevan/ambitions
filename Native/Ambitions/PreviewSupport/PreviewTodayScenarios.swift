@@ -27,7 +27,7 @@ enum PreviewTodayScenarios {
         nowSubtitle: "Submit my conference talk proposal",
         nextTitle: "Record one rough vocal pass",
         nextSubtitle: "Keep this flexible unless the main block slips.",
-        primaryAction: TodayInlineAction(kind: .protectLater, title: "Protect later", systemImage: "calendar.badge.clock", state: .selected, target: TodayActionTarget(goalID: "goal-1", stepID: "step-1")),
+        primaryAction: TodayInlineAction(kind: .protectLater, title: "Move later", systemImage: "calendar.badge.clock", state: .selected, target: TodayActionTarget(goalID: "goal-1", stepID: "step-1")),
         supportingActions: [
             TodayInlineAction(kind: .complete, title: "Complete", systemImage: "checkmark", state: .success, target: TodayActionTarget(goalID: "goal-1", stepID: "step-1")),
             TodayInlineAction(kind: .defer, title: "Defer", systemImage: "clock.arrow.circlepath", state: .default, target: TodayActionTarget(goalID: "goal-1", stepID: "step-1")),
@@ -46,7 +46,7 @@ enum PreviewTodayScenarios {
         nextSubtitle: "If the day still feels too heavy, protect the block there.",
         primaryAction: TodayInlineAction(kind: .split, title: "Split", systemImage: "scissors", state: .selected, target: TodayActionTarget(goalID: "goal-2", stepID: "step-2")),
         supportingActions: [
-            TodayInlineAction(kind: .protectLater, title: "Protect later", systemImage: "calendar.badge.clock", state: .default, target: TodayActionTarget(goalID: "goal-2", stepID: "step-2")),
+            TodayInlineAction(kind: .protectLater, title: "Move later", systemImage: "calendar.badge.clock", state: .default, target: TodayActionTarget(goalID: "goal-2", stepID: "step-2")),
             TodayInlineAction(kind: .askForHelp, title: "Ask for help", systemImage: "lifepreserver", state: .default, target: TodayActionTarget(goalID: "goal-2", stepID: "step-2"))
         ],
         reentry: TodayReentryState(
@@ -63,11 +63,11 @@ enum PreviewTodayScenarios {
         title: "Return through the next believable move",
         supporting: "The earlier plan slipped, so Today is narrowing the path back to one calmer step.",
         nowSubtitle: "Ship the native create goal flow",
-        nextTitle: "Protect later",
+        nextTitle: "Move later",
         nextSubtitle: "If the step still feels too large, move the shaping into Plan without shame.",
         primaryAction: TodayInlineAction(kind: .split, title: "Recover calmly", systemImage: "arrow.uturn.left.circle", state: .selected, target: TodayActionTarget(goalID: "goal-2", stepID: "step-2")),
         supportingActions: [
-            TodayInlineAction(kind: .protectLater, title: "Protect later", systemImage: "calendar.badge.clock", state: .default, target: TodayActionTarget(goalID: "goal-2", stepID: "step-2")),
+            TodayInlineAction(kind: .protectLater, title: "Move later", systemImage: "calendar.badge.clock", state: .default, target: TodayActionTarget(goalID: "goal-2", stepID: "step-2")),
             TodayInlineAction(kind: .reschedule, title: "Reschedule", systemImage: "forward.fill", state: .warning, target: TodayActionTarget(goalID: "goal-2", stepID: "step-2"))
         ],
         reentry: nil,
@@ -79,9 +79,9 @@ enum PreviewTodayScenarios {
         title: "Lighten the day first",
         supporting: "There are too many active asks right now, so pressure needs to come down before new effort goes up.",
         nowSubtitle: "Four active goals are pulling on the same day.",
-        nextTitle: "Protect later",
+        nextTitle: "Move later",
         nextSubtitle: "Use Plan to protect one block instead of trying to do all of it now.",
-        primaryAction: TodayInlineAction(kind: .protectLater, title: "Protect later", systemImage: "calendar.badge.clock", state: .selected, target: TodayActionTarget()),
+        primaryAction: TodayInlineAction(kind: .protectLater, title: "Move later", systemImage: "calendar.badge.clock", state: .selected, target: TodayActionTarget()),
         supportingActions: [
             TodayInlineAction(kind: .reschedule, title: "Reschedule", systemImage: "forward.fill", state: .warning, target: TodayActionTarget(goalID: "goal-1", stepID: "step-1")),
             TodayInlineAction(kind: .split, title: "Split", systemImage: "scissors", state: .selected, target: TodayActionTarget(goalID: "goal-1", stepID: "step-1"))

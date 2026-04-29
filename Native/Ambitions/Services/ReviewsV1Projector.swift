@@ -148,7 +148,7 @@ private extension ReviewsV1Projector {
                 kind: .recovery,
                 title: item.title,
                 detail: item.summary,
-                valueLabel: "Protected from silent changes",
+                valueLabel: "Safe from silent changes",
                 icon: "lock.shield",
                 state: .selected
             )
@@ -524,7 +524,7 @@ private extension EventLedgerKind {
         case .recoveryDeclined:
             return "Not applied"
         case .itemDisplacedByHigherPriority:
-            return "Protected priority"
+            return "Kept in view"
         case .captureCreated, .captureTriaged, .captureAttachedToGoal, .captureArchived,
              .commitmentCaptured, .commitmentRouted:
             return "Routed"

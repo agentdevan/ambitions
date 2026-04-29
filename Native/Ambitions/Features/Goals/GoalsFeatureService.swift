@@ -1526,7 +1526,7 @@ private extension RepositoryBackedGoalsService {
             return GoalMomentumIntegrity(title: "Parked", detail: "Intentionally quiet for later.", visualState: .default)
         }
         if lifecycleState == .protected {
-            return GoalMomentumIntegrity(title: "Protected", detail: "Keep the next move visible.", visualState: .selected)
+            return GoalMomentumIntegrity(title: "Kept in view", detail: "Keep the next move visible.", visualState: .selected)
         }
         if proofSummary.count > 0 && nextVisibleStep.isAvailable {
             return GoalMomentumIntegrity(title: "Building proof", detail: "Evidence and a next move both exist.", visualState: .selected)
@@ -4324,7 +4324,7 @@ private extension RepositoryBackedGoalsService {
                     id: "synthetic-\(renderState.rawValue)-path-stage",
                     title: title,
                     summary: summary,
-                    stepCountLabel: "Path anchor",
+                    stepCountLabel: "Path marker",
                     position: position,
                     statusLabel: position.title,
                     highlight: highlight,

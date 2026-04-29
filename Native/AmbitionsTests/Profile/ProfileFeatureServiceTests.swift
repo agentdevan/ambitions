@@ -155,7 +155,7 @@ final class ProfileFeatureServiceTests: XCTestCase {
         let items = dashboard.systemCenter.sections.flatMap(\.items)
         let titles = items.map(\.title)
 
-        XCTAssertEqual(dashboard.systemCenter.title, "Personal System Center")
+        XCTAssertEqual(dashboard.systemCenter.title, "You")
         XCTAssertTrue(dashboard.systemCenter.subtitle.contains("without adding more top-level tabs"))
         XCTAssertEqual(Set(titles), Set([
             "Profile",
@@ -323,7 +323,7 @@ final class ProfileFeatureServiceTests: XCTestCase {
         XCTAssertTrue(items.contains(where: {
             $0.id == "memory-item-proof-feedback" &&
             $0.freshness == .mayNeedReview &&
-            $0.usedFor.contains("Goal Weather")
+            $0.usedFor.contains("progress summaries")
         }))
         XCTAssertTrue(items.contains(where: {
             $0.id == "memory-item-corrections" &&

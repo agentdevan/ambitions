@@ -36,7 +36,7 @@ enum TodayQualitativeDayState: String, Equatable {
     case fragile = "Fragile"
     case atRisk = "At risk"
     case recovered = "Recovered"
-    case protected = "Protected"
+    case protected = "Kept in view"
 }
 
 struct TodayLensChipState: Identifiable, Equatable {
@@ -209,7 +209,7 @@ struct TodayExecutionViewState: Equatable {
         let bestNext = TodayContractEntryState(
             id: "today2.contract.best-next",
             kind: .bestNextMove,
-            title: "Best next move",
+            title: "Do this next",
             subtitle: hero.truth.nowTitle.shortened(maxLength: 56),
             value: hero.truth.nowSubtitle.todayShortSentence,
             semanticState: semanticState(for: hero.truth.posture),
@@ -219,9 +219,9 @@ struct TodayExecutionViewState: Equatable {
         let protectedMustDo = TodayContractEntryState(
             id: "today2.contract.protected",
             kind: .protectedMustDo,
-            title: "Protect this",
+            title: "Keep this",
             subtitle: hero.truth.dominantText.shortened(maxLength: 56),
-            value: hero.truth.posture == .noPlan ? "No must-do yet" : "Protected",
+            value: hero.truth.posture == .noPlan ? "No must-do yet" : "Kept on today",
             semanticState: .protected,
             action: primary,
             explanation: nil
@@ -600,21 +600,21 @@ private extension TodayExecutionProjector {
         let protected = TodayContractEntryState(
             id: "today2.contract.protected",
             kind: .protectedMustDo,
-            title: "Protect this",
+            title: "Keep this",
             subtitle: (protectedSummary?.title ?? bestTitle).shortened(maxLength: 56),
-            value: protectedSummary == nil && input.mode == .empty ? "No must-do yet" : "Protected",
+            value: protectedSummary == nil && input.mode == .empty ? "No must-do yet" : "Kept on today",
             semanticState: .protected,
             action: protectedSummary?.relatedGoalID.map {
-                TodayInlineAction(kind: .openPlan, title: "Protect in Plan", systemImage: "calendar.badge.clock", state: .selected, target: TodayActionTarget(goalID: $0))
+                TodayInlineAction(kind: .openPlan, title: "Open Plan", systemImage: "calendar.badge.clock", state: .selected, target: TodayActionTarget(goalID: $0))
             } ?? hero.primaryAction,
-            explanation: explanation(input, preferred: input.nowState.nextActionExplanationID, fallbackTitle: "Why protect this?")
+            explanation: explanation(input, preferred: input.nowState.nextActionExplanationID, fallbackTitle: "Why this?")
         )
         let best = TodayContractEntryState(
             id: "today2.contract.best-next",
             kind: .bestNextMove,
-            title: "Best next move",
+            title: "Do this next",
             subtitle: bestTitle.shortened(maxLength: 56),
-            value: input.nowState.nextActionConfidence == .low ? "Believable enough" : "Ready",
+            value: input.nowState.nextActionConfidence == .low ? "Doable enough" : "Ready",
             semanticState: hero.semanticState,
             action: hero.primaryAction,
             explanation: hero.explanation
@@ -905,9 +905,9 @@ private extension TodayExecutionProjector {
         case .clear:
             return "The day has room for one real move."
         case .steady:
-            return "One move is clear enough to protect."
+            return "One move is clear enough to keep in view."
         case .tight:
-            return "Keep today narrow and protected."
+            return "Keep today narrow."
         case .fragile:
             return "Use the fallback before adding pressure."
         case .atRisk:
@@ -1051,14 +1051,14 @@ private extension TodayExecutionProjector {
 
     func recoveryDetailPanels(_ input: TodayExecutionProjectionInput) -> [TodayExecutionPanelState] {
         var protected = input.resilienceAssessment.protectedHighPriorityWork.prefix(1).map {
-            TodayExecutionPanelState(id: "today2.protected.\($0.id)", kind: .recovery, title: "Protected", subtitle: $0.summary.todayShortSentence, value: $0.title.shortened(maxLength: 24), semanticState: .protected, action: openPlanAction(), explanation: nil)
+            TodayExecutionPanelState(id: "today2.protected.\($0.id)", kind: .recovery, title: "Kept in view", subtitle: $0.summary.todayShortSentence, value: $0.title.shortened(maxLength: 24), semanticState: .protected, action: openPlanAction(), explanation: nil)
         }
         if protected.isEmpty, input.nowState.deadlinePressure.level != .none {
             protected = [
                 TodayExecutionPanelState(
                     id: "today2.protected.deadline",
                     kind: .recovery,
-                    title: "Protected",
+                    title: "Kept in view",
                     subtitle: input.nowState.deadlinePressure.summary.todayShortSentence,
                     value: pressureLabel(input.nowState.deadlinePressure.level),
                     semanticState: .protected,
@@ -1121,7 +1121,7 @@ private extension TodayExecutionProjector {
         let target = TodayActionTarget(goalID: option.relatedGoalID, draftID: nil)
         switch option.strategy {
         case .openPlan, .protectDeadlineWork, .rescheduleLater, .acceptSlip:
-            return TodayInlineAction(kind: .openPlan, title: option.strategy == .protectDeadlineWork ? "Protect in Plan" : "Open Plan", systemImage: "calendar", state: .selected, target: target)
+            return TodayInlineAction(kind: .openPlan, title: "Open Plan", systemImage: "calendar", state: .selected, target: target)
         case .openCapture, .clarifyNextStep, .askForDecision:
             return TodayInlineAction(kind: .quickLog, title: "Open Capture", systemImage: "tray.and.arrow.down", state: .selected, target: target)
         case .openGoal, .reduceScope:

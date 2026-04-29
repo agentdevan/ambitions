@@ -165,7 +165,7 @@ final class DefaultShellCommandRouter: ShellCommandRouting {
                     source: source,
                     presentationContext: .quickCapture,
                     destination: .planRoute(.capturesInbox),
-                    receiptBody: "Saved locally with a Smart Attachment receipt and opened in Capture."
+                    receiptBody: "Saved locally with a receipt you can change in Capture."
                 )
                 return ShellCommandExecutionResult(
                     title: decision?.receiptLine ?? "Saved to Needs a Place",

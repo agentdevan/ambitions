@@ -93,7 +93,7 @@ enum PreviewPlanScenarios {
             title: "Conflicts to negotiate",
             subtitle: "These are negotiation items, not alarms.",
             conflicts: [
-                PlanDecisionItemState(id: "preview-conflict", title: "Protected goals are competing", detail: "Two protected goals are asking the same week to defend them.", suggestion: "Choose the one that must stay protected and let the other flex.", visualState: .warning, target: GoalRouteTarget(goalID: "preview-goal-1"), planRoute: nil)
+                PlanDecisionItemState(id: "preview-conflict", title: "Important goals are competing", detail: "Two goals are asking the same week to hold them.", suggestion: "Choose the one that must stay and let the other flex.", visualState: .warning, target: GoalRouteTarget(goalID: "preview-goal-1"), planRoute: nil)
             ]
         ),
         calendarBoundary: PlanCalendarBoundaryContractState(
@@ -119,13 +119,13 @@ enum PreviewPlanScenarios {
             detail: "Move one thing, not everything. These are suggestions until you confirm a change.",
             reasonKind: .overloadedPlan,
             reasonDetail: "Tuesday is carrying more than this plan can calmly explain.",
-            recommendedAdjustment: "Protect this",
+            recommendedAdjustment: "Keep this",
             noChangeCopy: "Nothing changed yet.",
             suggestions: [
                 PlanReflowSuggestionState(
                     id: "preview-reflow-protect",
                     kind: .protectOneItem,
-                    title: "Protect this",
+                    title: "Keep this",
                     detail: "Keep shell regression work defended before changing the rest.",
                     impactLabel: "Smallest useful adjustment",
                     boundary: PlanReflowBoundaryState(actionKind: .changePlanWindow, confirmationRequirement: .notRequired, undoAvailability: .availableLocal, safetyLabel: "Safe/local"),
@@ -162,7 +162,7 @@ enum PreviewPlanScenarios {
             title: "Recovery options",
             detail: "Start with the least disruptive option that still makes the plan believable.",
             options: [
-                PlanRecoveryGradientOptionState(id: "preview-gradient-protect", order: 0, kind: .protectOneItem, title: "Protect this", detail: "Keep one must-do defended.", boundary: PlanReflowBoundaryState(actionKind: .changePlanWindow, confirmationRequirement: .notRequired, undoAvailability: .availableLocal, safetyLabel: "Safe/local"), visualState: .selected),
+                PlanRecoveryGradientOptionState(id: "preview-gradient-protect", order: 0, kind: .protectOneItem, title: "Keep this", detail: "Keep one must-do visible.", boundary: PlanReflowBoundaryState(actionKind: .changePlanWindow, confirmationRequirement: .notRequired, undoAvailability: .availableLocal, safetyLabel: "Safe/local"), visualState: .selected),
                 PlanRecoveryGradientOptionState(id: "preview-gradient-shrink", order: 1, kind: .shrinkAction, title: "Make it smaller", detail: "Reduce the ask before moving it.", boundary: PlanReflowBoundaryState(actionKind: .shrinkAction, confirmationRequirement: .notRequired, undoAvailability: .availableLocal, safetyLabel: "Safe/local"), visualState: .default),
                 PlanRecoveryGradientOptionState(id: "preview-gradient-split", order: 2, kind: .splitAction, title: "Split it", detail: "Carry only the first clear part.", boundary: PlanReflowBoundaryState(actionKind: .splitAction, confirmationRequirement: .notRequired, undoAvailability: .availableLocal, safetyLabel: "Safe/local"), visualState: .default),
                 PlanRecoveryGradientOptionState(id: "preview-gradient-move", order: 3, kind: .moveLocalActionLater, title: "Move this later", detail: "Move one local item after confirmation.", boundary: PlanReflowBoundaryState(actionKind: .moveActionLater, confirmationRequirement: .requiredForBroadReflow, undoAvailability: .requiresConfirmation, safetyLabel: "Confirm first"), visualState: .default),
@@ -295,7 +295,7 @@ enum PreviewPlanScenarios {
                 highlight: "Keep the room visible.",
                 blocks: [],
                 overflowCount: 0,
-                openWindow: PlanOpenWindowState(title: "Leave this open", detail: "Not every open pocket needs to be filled. Protected slack keeps the week believable.", suggestionLabel: nil, target: nil, visualState: .default)
+                openWindow: PlanOpenWindowState(title: "Leave this open", detail: "Not every open pocket needs to be filled. Open room keeps the week doable.", suggestionLabel: nil, target: nil, visualState: .default)
             ),
             PlanElasticWeekDayState(
                 id: "day-6",
@@ -360,7 +360,7 @@ enum PreviewPlanScenarios {
                 target: GoalRouteTarget(goalID: "preview-goal-1"),
                 goalTitle: "Ship the native shell",
                 weekRelationship: "Visible and narrow",
-                pressureLabel: "Protected",
+                pressureLabel: "Kept in view",
                 attentionReason: "This goal has a believable lane, but it depends on Tuesday and Thursday staying protected.",
                 nextMoveLabel: "Review shell regressions",
                 visualState: .selected
@@ -445,7 +445,7 @@ enum PreviewPlanScenarios {
             label: "Light",
             availableCapacity: "7 open days",
             pressure: "Pressure is readable",
-            protectedFocus: "Protected focus is not explicit yet",
+            protectedFocus: "Focus time is not explicit yet",
             recoveryMargin: "Recovery room exists",
             visualState: .success
         ),
@@ -530,7 +530,7 @@ enum PreviewPlanScenarios {
             title: "Recovery options",
             detail: "No recovery is needed, but the order stays ready if reality changes.",
             options: [
-                PlanRecoveryGradientOptionState(id: "preview-empty-gradient-protect", order: 0, kind: .protectOneItem, title: "Protect this", detail: "Keep one must-do defended.", boundary: PlanReflowBoundaryState(actionKind: .changePlanWindow, confirmationRequirement: .notRequired, undoAvailability: .availableLocal, safetyLabel: "Safe/local"), visualState: .selected),
+                PlanRecoveryGradientOptionState(id: "preview-empty-gradient-protect", order: 0, kind: .protectOneItem, title: "Keep this", detail: "Keep one must-do visible.", boundary: PlanReflowBoundaryState(actionKind: .changePlanWindow, confirmationRequirement: .notRequired, undoAvailability: .availableLocal, safetyLabel: "Safe/local"), visualState: .selected),
                 PlanRecoveryGradientOptionState(id: "preview-empty-gradient-shrink", order: 1, kind: .shrinkAction, title: "Make it smaller", detail: "Reduce the ask before moving it.", boundary: PlanReflowBoundaryState(actionKind: .shrinkAction, confirmationRequirement: .notRequired, undoAvailability: .availableLocal, safetyLabel: "Safe/local"), visualState: .default),
                 PlanRecoveryGradientOptionState(id: "preview-empty-gradient-split", order: 2, kind: .splitAction, title: "Split it", detail: "Carry only the first clear part.", boundary: PlanReflowBoundaryState(actionKind: .splitAction, confirmationRequirement: .notRequired, undoAvailability: .availableLocal, safetyLabel: "Safe/local"), visualState: .default),
                 PlanRecoveryGradientOptionState(id: "preview-empty-gradient-move", order: 3, kind: .moveLocalActionLater, title: "Move this later", detail: "Move one local item after confirmation.", boundary: PlanReflowBoundaryState(actionKind: .moveActionLater, confirmationRequirement: .requiredForBroadReflow, undoAvailability: .requiresConfirmation, safetyLabel: "Confirm first"), visualState: .default),
@@ -587,7 +587,7 @@ enum PreviewPlanScenarios {
                 highlight: "Keep the room visible.",
                 blocks: [],
                 overflowCount: 0,
-                openWindow: PlanOpenWindowState(title: "Leave this open", detail: "Protected slack keeps the week believable.", suggestionLabel: nil, target: nil, visualState: .default)
+                openWindow: PlanOpenWindowState(title: "Leave this open", detail: "Open room keeps the week doable.", suggestionLabel: nil, target: nil, visualState: .default)
             )
         },
         believability: PlanBelievabilityState(

@@ -43,7 +43,7 @@ struct HabitsScreen: View {
                                 subtitle: "Routines should support week shape, not compete with it."
                             )
 
-                            Text("Use this route to soften, protect, or trim repeatable loops based on what the current week can actually carry.")
+                            Text("Use this route to soften, keep, or trim repeatable loops based on what the current week can actually carry.")
                                 .font(theme.typography.body)
                                 .foregroundStyle(theme.colors.textSecondary)
 

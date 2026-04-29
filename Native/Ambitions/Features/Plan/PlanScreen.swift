@@ -278,7 +278,7 @@ private struct PlanTreatyCard: View {
                 SectionHeader(title: treaty.title, subtitle: treaty.summary)
 
                 LazyVGrid(columns: [GridItem(.flexible(), spacing: theme.spacing.sm), GridItem(.flexible(), spacing: theme.spacing.sm)], spacing: theme.spacing.sm) {
-                    PlanTreatyTile(title: "Protect", detail: treaty.protectedWork, icon: "lock.shield", state: .selected)
+                    PlanTreatyTile(title: "Keep", detail: treaty.protectedWork, icon: "lock.shield", state: .selected)
                     PlanTreatyTile(title: "Flex", detail: treaty.flexibleWork, icon: "arrow.left.and.right", state: .default)
                     PlanTreatyTile(title: "Not today", detail: treaty.notTodayWork, icon: "tray", state: .warning)
                     PlanTreatyTile(title: "Recovery", detail: treaty.recoveryAllowance, icon: "sun.max", state: treaty.visualState)
@@ -363,7 +363,7 @@ private struct PlanCapacityEnvelopeCard: View {
 
                 VStack(alignment: .leading, spacing: theme.spacing.sm) {
                     PlanKeyValueRow(label: "Pressure", value: envelope.pressure, state: envelope.visualState)
-                    PlanKeyValueRow(label: "Protected focus", value: envelope.protectedFocus, state: .selected)
+                    PlanKeyValueRow(label: "Focus time", value: envelope.protectedFocus, state: .selected)
                     PlanKeyValueRow(label: "Recovery margin", value: envelope.recoveryMargin, state: envelope.visualState)
                 }
             }
@@ -964,7 +964,7 @@ private struct PlanSaveTheDayCard: View {
                 }
 
                 VStack(alignment: .leading, spacing: theme.spacing.sm) {
-                    PlanKeyValueRow(label: "Protect", value: saveTheDay.protectedItem, state: .selected)
+                    PlanKeyValueRow(label: "Keep", value: saveTheDay.protectedItem, state: .selected)
                     PlanKeyValueRow(label: "Adjust", value: saveTheDay.adjustment, state: saveTheDay.visualState)
                     PlanKeyValueRow(label: "Recover", value: saveTheDay.recoveryExplanation, state: .success)
                 }
@@ -1311,7 +1311,7 @@ private struct PlanBelievabilityCard: View {
             VStack(alignment: .leading, spacing: theme.spacing.md) {
                 SectionHeader(
                     title: "Week believability",
-                    subtitle: "Plan explains why the week feels believable, tight, or overloaded before it asks you to intervene."
+                    subtitle: "Plan explains why the week looks doable, tight, or overloaded before it asks you to intervene."
                 )
 
                 HStack(spacing: theme.spacing.xs) {
@@ -1629,7 +1629,7 @@ private struct PlanShapingActionsCard: View {
             VStack(alignment: .leading, spacing: theme.spacing.md) {
                 SectionHeader(
                     title: "Week-shaping actions",
-                    subtitle: "Keep one shaping lane obvious: edit, patch, protect, or lighten."
+                    subtitle: "Keep one shaping lane obvious: edit, patch, move later, or lighten."
                 )
 
                 LazyVGrid(columns: [GridItem(.flexible(), spacing: theme.spacing.sm), GridItem(.flexible(), spacing: theme.spacing.sm)], spacing: theme.spacing.sm) {
@@ -1735,7 +1735,7 @@ private struct PlanGoalRelationshipCard: View {
                 )
 
                 if items.isEmpty {
-                    Text("Once active goals carry real work, they will show up here with their week relationship and next believable move.")
+                    Text("Once active goals carry real work, they will show up here with their week relationship and next doable move.")
                         .font(theme.typography.body)
                         .foregroundStyle(theme.colors.textSecondary)
                 } else {
@@ -1781,7 +1781,7 @@ private struct PlanGoalRelationshipRow: View {
                     .font(theme.typography.body)
                     .foregroundStyle(theme.colors.textSecondary)
                     .fixedSize(horizontal: false, vertical: true)
-                Text("Next believable move: \(item.nextMoveLabel)")
+                Text("Next doable move: \(item.nextMoveLabel)")
                     .font(theme.typography.caption)
                     .foregroundStyle(theme.colors.textTertiary)
                     .fixedSize(horizontal: false, vertical: true)

@@ -37,7 +37,7 @@ enum ShellCommandIntent: String, CaseIterable, Hashable, Identifiable, Sendable,
 
     var subtitle: String {
         switch self {
-        case .quickCapture: "Save what needs a place with Smart Attachment and a changeable receipt."
+        case .quickCapture: "Save what needs a place with a suggested route and a receipt you can change."
         case .newGoal: "Open the existing create-goal flow inside the shell-owned compose path."
         case .quickPlanPatch: "Land in Plan to reshape the current week."
         case .quickRecovery: "Return to Today with recovery posture in view."

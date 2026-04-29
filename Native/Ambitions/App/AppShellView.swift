@@ -362,7 +362,7 @@ private struct QuietCommandSheetView: View {
                 VStack(alignment: .leading, spacing: theme.spacing.md) {
                     SectionHeader(
                         title: "What needs a place?",
-                        subtitle: "Smart Attachment saves the route with a receipt you can change in Capture."
+                        subtitle: "Ambitions suggests a place, saves a receipt, and keeps the route easy to change."
                     )
 
                     TextField("What needs a place?", text: $captureText)

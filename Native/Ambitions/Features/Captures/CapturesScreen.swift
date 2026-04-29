@@ -109,7 +109,7 @@ struct CapturesScreen: View {
                 kind: .capture,
                 eyebrow: "Fast intake",
                 title: "What needs a place?",
-                subtitle: "Capture first. Smart Attachment suggests a place, saves a receipt, and keeps the route easy to change.",
+                subtitle: "Capture first. Ambitions suggests a place, saves a receipt, and keeps the route easy to change.",
                 icon: "tray.and.arrow.down",
                 explanationTitle: viewState.captures.isEmpty ? "Empty state" : "Open routing",
                 explanation: viewState.captures.isEmpty ? "Not everything needs to become a goal." : "\(viewState.captures.filter { $0.status != .archived }.count) item\(viewState.captures.filter { $0.status != .archived }.count == 1 ? "" : "s") still have a visible destination.",

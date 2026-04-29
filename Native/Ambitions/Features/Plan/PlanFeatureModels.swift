@@ -650,7 +650,7 @@ extension PlanDashboard {
         ScreenContractImplementationSnapshot(
             screenID: .plan,
             firstScreenContent: [
-                "Believability hero",
+                "Week fit",
                 "Weekly Plan Strip",
                 "Rich Timeline Widget",
                 "Rituals",

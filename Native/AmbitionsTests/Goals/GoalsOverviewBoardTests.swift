@@ -118,7 +118,7 @@ final class GoalsOverviewBoardTests: XCTestCase {
         XCTAssertEqual(protectedCard.proofSummary.count, 1)
         XCTAssertEqual(protectedCard.proofSummary.latestTitle, "Drafted portfolio proof")
         XCTAssertTrue(protectedCard.nextVisibleStep.isAvailable)
-        XCTAssertEqual(protectedCard.momentumIntegrity.title, "Protected")
+        XCTAssertEqual(protectedCard.momentumIntegrity.title, "Kept in view")
 
         XCTAssertEqual(blockedCard.lifecycleState, .blocked)
         XCTAssertEqual(blockedCard.weather, .stormy)

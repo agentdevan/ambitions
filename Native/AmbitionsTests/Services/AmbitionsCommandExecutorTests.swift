@@ -153,7 +153,7 @@ final class AmbitionsCommandExecutorTests: XCTestCase {
         let events = try await ledger.fetchRecent(limit: 10)
 
         XCTAssertEqual(result.status, .succeeded)
-        XCTAssertEqual(result.summary, "Capture represented as a Plan seed. Scheduling is not implemented in this batch.")
+        XCTAssertEqual(result.summary, "Capture represented as a Plan idea. Scheduling is not implemented in this batch.")
         XCTAssertEqual(result.metadata["captureRoute"], CaptureRoute.planSeed.rawValue)
         XCTAssertEqual(captures.first?.kind, .oneTimeCommitment)
         XCTAssertEqual(captures.first?.route, .planSeed)

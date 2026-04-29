@@ -378,7 +378,7 @@ struct DefaultCaptureService: CaptureServicing {
     }
 
     func routeToPlanSeed(id: String, now: Date) async throws -> Capture? {
-        try await updateCaptureRoute(CaptureRouteUpdateRequest(id: id, kind: .oneTimeCommitment, route: .planSeed, assumptionSummary: "I routed this as a Plan seed. Scheduling is still deferred to Plan."), now: now)
+        try await updateCaptureRoute(CaptureRouteUpdateRequest(id: id, kind: .oneTimeCommitment, route: .planSeed, assumptionSummary: "I routed this as a Plan idea. Scheduling is still deferred to Plan."), now: now)
     }
 
     func attachCaptureToGoal(_ request: AttachCaptureToGoalRequest, now: Date) async throws -> CaptureGoalBinding? {

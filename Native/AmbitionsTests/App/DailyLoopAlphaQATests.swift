@@ -49,7 +49,7 @@ final class DailyLoopAlphaQATests: XCTestCase {
         let experience = try await service.loadTodayExperience(userDisplayName: "", now: now)
 
         XCTAssertEqual(experience.execution.hero.kind, .nextAction)
-        XCTAssertEqual(experience.execution.protectedMustDo.title, "Protect this")
+        XCTAssertEqual(experience.execution.protectedMustDo.title, "Keep this")
         XCTAssertEqual(experience.execution.bestNextMove.subtitle, "Send the client spreadsheet")
         XCTAssertEqual(experience.execution.notToday.title, "Not today")
         XCTAssertEqual(experience.execution.recoveryFallback.title, "Fallback")

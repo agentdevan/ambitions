@@ -13,7 +13,7 @@ struct CapturesViewState: Sendable {
                 "Needs a Place",
                 "Suggested routes",
                 "Recent captures",
-                "Smart Attachment receipt"
+                "Changeable route receipt"
             ],
             panels: [
                 .capture,

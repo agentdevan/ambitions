@@ -253,7 +253,7 @@ struct PreviewFixtures: Sendable {
                 ]
             ),
             systemCenter: ProfileSystemCenterState(
-                title: "Personal System Center",
+                title: "You",
                 subtitle: "Profile, memory, reviews, trust, privacy, integrations, and settings stay grouped here without adding more top-level tabs.",
                 sections: [
                     ProfileSystemCenterSection(
@@ -291,7 +291,7 @@ struct PreviewFixtures: Sendable {
                         ]
                     )
                 ],
-                footer: "You stays the Personal System Center. Deeper detail remains in the owning surfaces until the supporting controls are ready."
+                footer: "You keeps settings, history, trust, and controls together. Deeper detail remains in the owning surfaces until the supporting controls are ready."
             ),
             controlRoom: ProfileControlRoomState(
                 title: "Control room",
@@ -353,7 +353,7 @@ struct PreviewFixtures: Sendable {
                                 detail: "4 proof or feedback records can ground progress and review language.",
                                 sourceLabel: "Proof and feedback",
                                 freshness: .current,
-                                usedFor: "Used for progress summaries, Goal Weather, review receipts, and avoiding intention-only recommendations.",
+                                usedFor: "Used for progress summaries, review receipts, and avoiding intention-only recommendations.",
                                 privacyLabel: "Detail hidden in compact views",
                                 actions: [
                                     ProfileMemoryAction(id: "update-proof", title: "Update this", statusLabel: "Use owning surface", detail: "Proof and feedback stay corrected from Goal Detail, Capture, or Review context.", state: .default),
@@ -416,7 +416,7 @@ struct PreviewFixtures: Sendable {
                 title: "Receipts and audit posture",
                 subtitle: "A compact trust summary of what can explain actions today. Reviews now turns these signals into a calm receipt layer.",
                 items: [
-                    SettingsItem(id: "profile-receipts-domain", title: "Action Closure receipts", subtitle: "The receipt model can summarize what changed, why, correction availability, safe fallback, and undo status where supported.", icon: "doc.text.magnifyingglass", valueLabel: "3 policy examples"),
+                    SettingsItem(id: "profile-receipts-domain", title: "Receipts", subtitle: "Receipts can summarize what changed, why, correction availability, safe fallback, and undo status where supported.", icon: "doc.text.magnifyingglass", valueLabel: "3 policy examples"),
                     SettingsItem(id: "profile-receipts-review", title: "Reviews v1", subtitle: "Recovery Review and Life OS Receipt summarize local events, receipts, proof, and corrections without creating a top-level Insights tab.", icon: "rectangle.stack.badge.play", valueLabel: "Ready to review")
                 ],
                 footer: "Receipts are exposed here as trust posture, not as a full history browser."

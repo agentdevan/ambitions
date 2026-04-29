@@ -592,7 +592,7 @@ private extension RepositoryBackedProfileService {
         appearanceSummary: String
     ) -> ProfileSystemCenterState {
         ProfileSystemCenterState(
-            title: "Personal System Center",
+            title: "You",
             subtitle: "Profile, memory, reviews, trust, privacy, integrations, and settings stay grouped here without adding more top-level tabs.",
             sections: [
                 ProfileSystemCenterSection(
@@ -734,7 +734,7 @@ private extension RepositoryBackedProfileService {
                     ]
                 )
             ],
-            footer: "You stays the Personal System Center. Deeper detail remains in the owning surfaces until the supporting controls are ready."
+            footer: "You keeps settings, history, trust, and controls together. Deeper detail remains in the owning surfaces until the supporting controls are ready."
         )
     }
 
@@ -838,7 +838,7 @@ private extension RepositoryBackedProfileService {
                 ),
                 ProfileConstitutionRule(
                     id: "constitution-recommendation-posture",
-                    title: "Recommend one believable move",
+                    title: "Suggest one doable move",
                     detail: "Suggestions should be explainable by goal, plan, evidence, or recent feedback, not vague intelligence claims.",
                     statusLabel: snapshot.eventLedger.isEmpty ? "Evidence-light" : "Uses local evidence",
                     state: .default
@@ -945,7 +945,7 @@ private extension RepositoryBackedProfileService {
                             detail: proofFeedbackCount == 0 ? "No proof or feedback records are available yet." : "\(proofFeedbackCount) proof or feedback records can ground progress and review language.",
                             sourceLabel: "Proof and feedback",
                             freshness: proofFeedbackCount == 0 ? .mayNeedReview : .current,
-                            usedFor: "Used for progress summaries, Goal Weather, review receipts, and avoiding intention-only recommendations.",
+                            usedFor: "Used for progress summaries, review receipts, and avoiding intention-only recommendations.",
                             privacyLabel: "Detail hidden in compact views",
                             actions: [
                                 memoryAction(id: "update-proof", title: "Update this", statusLabel: "Use owning surface", detail: "Proof and feedback stay corrected from Goal Detail, Capture, or Review context.", state: .default),
@@ -1105,8 +1105,8 @@ private extension RepositoryBackedProfileService {
             items: [
                 SettingsItem(
                     id: "profile-receipts-domain",
-                    title: "Action Closure receipts",
-                    subtitle: "The receipt model can summarize what changed, why, correction availability, safe fallback, and undo status where supported.",
+                    title: "Receipts",
+                    subtitle: "Receipts can summarize what changed, why, correction availability, safe fallback, and undo status where supported.",
                     icon: "doc.text.magnifyingglass",
                     valueLabel: "\(projection.displaySummaries(limit: 3).count) policy examples"
                 ),

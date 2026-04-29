@@ -249,7 +249,7 @@ private extension AmbitionsCommandExecutor {
             guard let capture else {
                 return AmbitionsCommandExecutionResult(status: .blocked, summary: "Capture not found for commitment routing.", target: command.target, metadata: ["blockedBy": "missing_capture"])
             }
-            return captureResult(command: command, capture: capture, summary: "Commitment represented as a Plan seed. Scheduling remains deferred to Plan.")
+            return captureResult(command: command, capture: capture, summary: "Commitment represented as a Plan idea. Scheduling remains deferred to Plan.")
         } catch {
             return AmbitionsCommandExecutionResult(status: .failed, summary: error.localizedDescription, target: command.target, metadata: ["error": String(describing: error)])
         }
@@ -342,16 +342,16 @@ private extension AmbitionsCommandExecutor {
 
     func executePlanSeedRepresentation(_ command: AmbitionsCommand, context: CommandExecutionContext) async -> AmbitionsCommandExecutionResult {
         guard let captureService else {
-            return AmbitionsCommandExecutionResult(status: .blocked, summary: "Plan seed representation is unavailable without capture persistence.", target: command.target, metadata: ["blockedBy": "missing_capture_service"])
+            return AmbitionsCommandExecutionResult(status: .blocked, summary: "Plan idea representation is unavailable without capture persistence.", target: command.target, metadata: ["blockedBy": "missing_capture_service"])
         }
         guard let captureID = command.target.captureID else {
             return AmbitionsCommandExecutionResult(status: .unsupported, summary: "Creating new Plan items is represented through Capture 2.0 only when a capture target exists.", target: command.target, metadata: ["blockedBy": "plan_2_not_implemented"])
         }
         do {
             guard let capture = try await captureService.routeToPlanSeed(id: captureID, now: context.now) else {
-                return AmbitionsCommandExecutionResult(status: .blocked, summary: "Capture not found for Plan seed routing.", target: command.target, metadata: ["blockedBy": "missing_capture"])
+                return AmbitionsCommandExecutionResult(status: .blocked, summary: "Capture not found for Plan idea routing.", target: command.target, metadata: ["blockedBy": "missing_capture"])
             }
-            return captureResult(command: command, capture: capture, summary: "Capture represented as a Plan seed. Scheduling is not implemented in this batch.")
+            return captureResult(command: command, capture: capture, summary: "Capture represented as a Plan idea. Scheduling is not implemented in this batch.")
         } catch {
             return AmbitionsCommandExecutionResult(status: .failed, summary: error.localizedDescription, target: command.target, metadata: ["error": String(describing: error)])
         }

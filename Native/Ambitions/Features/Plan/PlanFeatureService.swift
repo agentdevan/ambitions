@@ -611,7 +611,7 @@ private extension RepositoryBackedPlanService {
 
         return PlanOpenWindowState(
             title: level == .open ? "Leave this open" : "Keep breathing room",
-            detail: "Not every open pocket needs to be filled. Protected slack keeps the week believable.",
+            detail: "Not every open pocket needs to be filled. Open room keeps the week doable.",
             suggestionLabel: nil,
             target: nil,
             visualState: .default
@@ -1096,7 +1096,7 @@ private extension RepositoryBackedPlanService {
             label: level.0,
             availableCapacity: openDays == 0 ? "No obvious open day" : "\(openDays) open day\(openDays == 1 ? "" : "s")",
             pressure: overloadedDays > 0 ? "Pressure is stacked" : tightDays > 0 ? "Pressure is visible" : "Pressure is readable",
-            protectedFocus: protectedCount == 0 ? "Protected focus is not explicit yet" : "\(protectedCount) protected move\(protectedCount == 1 ? "" : "s")",
+            protectedFocus: protectedCount == 0 ? "Focus time is not explicit yet" : "\(protectedCount) important move\(protectedCount == 1 ? "" : "s")",
             recoveryMargin: openDays >= 2 ? "Recovery room exists" : openDays == 1 ? "Recovery room is narrow" : "Recovery room needs protection",
             visualState: level.1
         )
@@ -1377,8 +1377,8 @@ private extension RepositoryBackedPlanService {
            let first = protectedSummaries.first {
             conflicts.append(PlanDecisionItemState(
                 id: "conflict-protected-goals",
-                title: "Protected goals are competing",
-                detail: "\(protectedSummaries.count) protected goals are asking the same week to defend them.",
+                title: "Important goals are competing",
+                detail: "\(protectedSummaries.count) important goals are asking the same week to hold them.",
                 suggestion: "Choose the one that must stay protected and let the other flex.",
                 visualState: .warning,
                 target: GoalRouteTarget(goalID: first.goal.id),
@@ -1887,7 +1887,7 @@ private extension RepositoryBackedPlanService {
                     relationship = "Present on protected time"
                     visualState = .warning
                 } else if summary.evaluation?.feasibilityLevel == .tight {
-                    pressureLabel = "Protected"
+                    pressureLabel = "Kept in view"
                     attentionReason = "This goal fits, but only if its current room stays protected."
                     relationship = "Visible and narrow"
                     visualState = .selected

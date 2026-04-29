@@ -247,7 +247,7 @@ private struct DesignSystemPreviewGallery: View {
 
     private func panelTitle(for kind: AmbitionPanelKind) -> String {
         switch kind {
-        case .heroDecision: "Choose the next believable move"
+        case .heroDecision: "Choose the next doable move"
         case .progress: "Pace is holding"
         case .timeline: "Three recent changes"
         case .schedule: "Open window later today"
@@ -295,7 +295,7 @@ private struct DesignSystemPreviewGallery: View {
         case .capture:
             HStack {
                 AmbitionChip("Raw", role: .capture)
-                AmbitionChip("Plan seed", role: .domain)
+                AmbitionChip("Plan idea", role: .domain)
                 AmbitionChip("10 min", role: .time)
             }
         case .recovery:

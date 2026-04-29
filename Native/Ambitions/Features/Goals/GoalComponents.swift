@@ -189,7 +189,7 @@ struct GoalStateChipsCard: View {
     var body: some View {
         AppCard {
             VStack(alignment: .leading, spacing: theme.spacing.sm) {
-                SectionHeader(title: "State signals", subtitle: "Protected, waiting, blocked, parked, completed, and cancelled remain distinct.")
+                SectionHeader(title: "State signals", subtitle: "Kept in view, waiting, blocked, parked, completed, and cancelled remain distinct.")
                 LazyVGrid(columns: [GridItem(.adaptive(minimum: 132), spacing: theme.spacing.xs)], alignment: .leading, spacing: theme.spacing.xs) {
                     ForEach(chips) { chip in
                         TagPill(

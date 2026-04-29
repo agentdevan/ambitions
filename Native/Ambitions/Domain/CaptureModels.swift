@@ -92,7 +92,7 @@ enum CaptureTriageDestination: String, Codable, Sendable, Equatable, CaseIterabl
         case .needsTriage:
             return "Needs triage"
         case .planSeed:
-            return "Plan seed"
+            return "Plan idea"
         case .doSoon:
             return "Do soon"
         case .turnIntoGoal:
@@ -172,7 +172,7 @@ enum CaptureRoute: String, Codable, Sendable, Equatable, Hashable, CaseIterable 
     var title: String {
         switch self {
         case .captureInbox: "Capture"
-        case .planSeed: "Plan seed"
+        case .planSeed: "Plan idea"
         case .goalSeed: "Goal seed"
         case .goalAttachment: "Attach to goal"
         case .deliverableSeed: "Deliverable seed"

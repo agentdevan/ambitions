@@ -168,6 +168,41 @@ final class ScreenContractRegistryTests: XCTestCase {
         XCTAssertTrue(issueKinds.contains(.invalidTopLevelTabs))
     }
 
+    func testD20ScreenContractsUseHumanStateLanguage() {
+        let forbidden = [
+            "AI Confidence",
+            "AI Explanation",
+            "Model Reasoning",
+            "Fix AI",
+            "Mission Control",
+            "Personal System Center",
+            "Action Closure",
+            "Proof Rail",
+            "Believability hero",
+            "Confidence score"
+        ]
+        var contractCopy: [String] = []
+        for contract in ScreenContractRegistry.contracts {
+            contractCopy.append(contract.dominantQuestion)
+            contractCopy.append(contract.densityBehavior)
+            contractCopy.append(contract.panelSizeBehavior)
+            contractCopy.append(contentsOf: contract.requiredFirstScreenContent)
+            contractCopy.append(contentsOf: contract.forbiddenFirstScreenContent)
+            contractCopy.append(contentsOf: contract.drillDowns)
+            contractCopy.append(contentsOf: contract.accessibilityRequirements)
+            contractCopy.append(contentsOf: contract.trustPrivacyRequirements)
+            contractCopy.append(contentsOf: contract.evidenceAnchors.map(\.note))
+        }
+
+        for term in forbidden {
+            XCTAssertFalse(contractCopy.contains { $0.localizedCaseInsensitiveContains(term) }, "Screen contracts still expose stale D20 copy: \(term)")
+        }
+
+        XCTAssertEqual(ScreenContractRegistry.contract(for: .goalDetail).requiredFirstScreenContent[1], "Goal detail lanes")
+        XCTAssertTrue(ScreenContractRegistry.contract(for: .plan).requiredFirstScreenContent.contains("Week fit"))
+        XCTAssertTrue(ScreenContractRegistry.contract(for: .capture).requiredFirstScreenContent.contains("Changeable route receipt"))
+    }
+
     func testD10ExternalSurfacesRemainContractOnlyUntilD22() {
         let external = ScreenContractRegistry.contract(for: .externalSurfaces)
 

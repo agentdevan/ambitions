@@ -293,7 +293,7 @@ private struct GoalDetailMissionControlCard: View {
         AppCard(state: .selected) {
             VStack(alignment: .leading, spacing: theme.spacing.md) {
                 VStack(alignment: .leading, spacing: theme.spacing.xxs) {
-                    Text("Mission Control")
+                    Text("Goal Detail")
                         .font(theme.typography.micro)
                         .foregroundStyle(theme.colors.accentWarm)
                     Text(state.currentTruth)
