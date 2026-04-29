@@ -80,7 +80,26 @@ struct ProfileTrustCenterState: Sendable, Equatable {
     let subtitle: String
     let pulse: ProfileTrustPulseState
     let items: [SettingsItem]
+    let sections: [ProfileTrustCenterSection]
+    let receiptSummaries: [ActionReceiptDisplaySummary]
     let footer: String
+}
+
+struct ProfileTrustCenterRoute: Identifiable, Sendable, Equatable {
+    let id: String
+    let title: String
+    let subtitle: String
+    let icon: String
+    let statusLabel: String
+    let semanticState: AmbitionSemanticState
+    let accessibilityHint: String
+}
+
+struct ProfileTrustCenterSection: Identifiable, Sendable, Equatable {
+    let id: String
+    let title: String
+    let footer: String?
+    let routes: [ProfileTrustCenterRoute]
 }
 
 struct ProfileControlRoomEntry: Identifiable, Sendable, Equatable {

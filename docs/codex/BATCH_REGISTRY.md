@@ -46,13 +46,13 @@ Use [../canon/Ambitions_2_0_Batch_Plan.md](../canon/Ambitions_2_0_Batch_Plan.md)
 
 ## Active Queue
 
-Current execution status: Ambitions 2.0 post-Batch-60 canon is adopted. Batches 00-88 and D01-D17 are complete for planning purposes. D18 / Trust Center Alignment is the next dependency-safe implementation batch from the Design Constitution delta/alignment backlog. Original Batches 89-120 remain future planned roadmap work only through the classifications and dependencies in [../canon/Ambitions_2_0_Roadmap_Merge_Audit.md](../canon/Ambitions_2_0_Roadmap_Merge_Audit.md).
+Current execution status: Ambitions 2.0 post-Batch-60 canon is adopted. Batches 00-88 and D01-D18 are complete for planning purposes. D19 / What Ambitions Knows is the next dependency-safe implementation batch from the Design Constitution delta/alignment backlog. Original Batches 89-120 remain future planned roadmap work only through the classifications and dependencies in [../canon/Ambitions_2_0_Roadmap_Merge_Audit.md](../canon/Ambitions_2_0_Roadmap_Merge_Audit.md).
 
 Docs-only reconciliation note: Design Constitution canon reconciliation was performed as a user-directed canon/design-system integration pass after Batch 88 planning status. It created the active design constitution and supporting matrices/specs without starting Batch 89 feature work, changing branch, changing app code, or claiming future implementation completion.
 
 Implementation gap audit note: A repo-wide Design Constitution implementation gap audit was added after roadmap verification. It preserves completed batch history and creates future delta/alignment batches for Constitution gaps without starting Batch 89 feature work or marking any delta complete.
 
-Roadmap merge audit note: The original Batches 89-120 were audited against D01-D26 after the Design Constitution. D01-D26 take precedence wherever there is conflict. Batch 89 is retained as future core-surface QA intent after the remaining D18-D21 surface/verification foundations or inside D26, not as the next runnable implementation batch.
+Roadmap merge audit note: The original Batches 89-120 were audited against D01-D26 after the Design Constitution. D01-D26 take precedence wherever there is conflict. Batch 89 is retained as future core-surface QA intent after the remaining D19-D21 surface/verification foundations or inside D26, not as the next runnable implementation batch.
 
 | Batch | Name | Status | Notes |
 | --- | --- | --- | --- |
@@ -119,8 +119,8 @@ These rows are planned future implementation work from the Design Constitution i
 | D15 | Plan Believability + Timeline Widget Alignment | Completed | Plan now asks `Does this hold together?`, carries a D10 Plan screen-contract snapshot, labels Rich Timeline evidence as `Based on your plan` / `Created in Ambitions`, labels calendar-derived mode as `From your calendar`, renames the week view to Weekly Plan Strip, and keeps calendar reads Plan-owned and writes confirmation-bound. |
 | D16 | Ritual Split Alignment | Completed | Replaced remaining user-facing standalone habit posture with Ritual/Rituals copy across Plan support loops, Rituals route messaging, Goal mode/clarification copy, and a You default showing Rituals as Plan-owned; preserved internal `habits` route/service compatibility and tests proving no top-level Habits tab returns. |
 | D17 | You Personal System Center Alignment | Completed | Added a bounded Personal System Center projection and GroupedNavigationList card under You, grouping Profile, Personalization, Memory / What Ambitions Knows, Reviews, Analytics, Trust & Explanations, Privacy, Sync / Export, Integrations, Appearance, Notifications, Accessibility, and Settings without adding tabs or claiming D18/D19 depth. |
-| D18 | Trust Center Alignment | Planned / next | Depends on D05 and D17. |
-| D19 | What Ambitions Knows | Planned | Depends on D05 and D17-D18. |
+| D18 | Trust Center Alignment | Completed | Trust Center now has navigable GroupedNavigationList sections for status/boundaries, receipts/corrections/explanations, and privacy/future capabilities, plus privacy-safe recent receipt summaries backed by D05 Action Closure receipts and conservative local-first/unavailable-state copy. |
+| D19 | What Ambitions Knows | Planned / next | Depends on D05 and D17-D18. |
 | D20 | UX Writing Cleanup | Planned | Depends on D11-D19. |
 | D21 | Accessibility Nutrition Verification | Planned | Depends on D03-D20. |
 | D22 | External Surfaces Contract Alignment | Planned | Depends on D05, D20-D21, Now State, and Command Pipeline. |

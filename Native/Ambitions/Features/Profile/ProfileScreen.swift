@@ -1036,6 +1036,39 @@ private struct ProfileTrustCenterCard: View {
                     }
                 }
 
+                GroupedNavigationList {
+                    ForEach(trustCenter.sections) { section in
+                        GroupedNavigationSection(title: section.title, footer: section.footer) {
+                            ForEach(section.routes) { route in
+                                GroupedNavigationRow(
+                                    title: route.title,
+                                    subtitle: route.subtitle,
+                                    systemImage: route.icon,
+                                    badge: GroupedNavigationBadge(route.statusLabel, state: route.semanticState),
+                                    accessibilityLabel: route.title,
+                                    accessibilityValue: route.statusLabel,
+                                    accessibilityHint: route.accessibilityHint,
+                                    action: {}
+                                )
+                            }
+                        }
+                    }
+                }
+
+                if trustCenter.receiptSummaries.isEmpty == false {
+                    VStack(alignment: .leading, spacing: theme.spacing.sm) {
+                        SectionHeader(
+                            eyebrow: "Receipts",
+                            title: "Recent trust receipts",
+                            subtitle: "Privacy-safe summaries of what changed, why, and whether correction or undo is available."
+                        )
+
+                        ForEach(trustCenter.receiptSummaries) { receipt in
+                            ProfileTrustReceiptRow(receipt: receipt)
+                        }
+                    }
+                }
+
                 if let notificationActionTitle {
                     Button(notificationActionTitle, action: onEnableNotifications)
                         .buttonStyle(AmbitionButtonStyle(tier: .secondary, state: .default))
@@ -1049,6 +1082,109 @@ private struct ProfileTrustCenterCard: View {
             }
         }
         .accessibilityIdentifier("profile.trust-center-card")
+    }
+}
+
+private struct ProfileTrustReceiptRow: View {
+    @Environment(\.ambitionTheme) private var theme
+
+    let receipt: ActionReceiptDisplaySummary
+
+    var body: some View {
+        VStack(alignment: .leading, spacing: theme.spacing.xs) {
+            HStack(alignment: .top, spacing: theme.spacing.sm) {
+                Image(systemName: iconName)
+                    .font(.system(size: theme.icon.mediumSize, weight: theme.icon.symbolWeight))
+                    .foregroundStyle(theme.colors.accentPrimary)
+                    .frame(width: 28)
+
+                VStack(alignment: .leading, spacing: theme.spacing.xxxs) {
+                    Text(receipt.title)
+                        .font(theme.typography.bodyEmphasized)
+                        .foregroundStyle(theme.colors.textPrimary)
+                    Text(receipt.summary)
+                        .font(theme.typography.body)
+                        .foregroundStyle(theme.colors.textSecondary)
+                        .fixedSize(horizontal: false, vertical: true)
+                    if let nextActionTitle = receipt.nextActionTitle {
+                        Text(nextActionTitle)
+                            .font(theme.typography.caption)
+                            .foregroundStyle(theme.colors.textTertiary)
+                            .fixedSize(horizontal: false, vertical: true)
+                    }
+                }
+
+                Spacer(minLength: theme.spacing.sm)
+            }
+
+            HStack(spacing: theme.spacing.xs) {
+                TagPill(resultLabel, state: resultState)
+                TagPill(undoLabel, state: undoState)
+                TagPill(correctionLabel, state: correctionState)
+            }
+        }
+        .padding(theme.spacing.md)
+        .background(RoundedRectangle(cornerRadius: theme.radius.lg, style: .continuous).fill(theme.colors.surfaceOverlay))
+        .overlay(RoundedRectangle(cornerRadius: theme.radius.lg, style: .continuous).stroke(theme.colors.strokeSubtle, lineWidth: 1))
+        .ambitionPanelAccessibility(
+            label: receipt.title,
+            value: "\(resultLabel). \(undoLabel). \(correctionLabel).",
+            hint: "Receipt summary. Sensitive detail is not expanded here."
+        )
+    }
+
+    private var iconName: String {
+        switch receipt.safetyState {
+        case .safeFailure, .externalUnavailable, .confirmationRequired:
+            return "exclamationmark.shield"
+        case .normal, .degraded:
+            return "doc.text.magnifyingglass"
+        }
+    }
+
+    private var resultLabel: String {
+        switch receipt.resultState {
+        case .created: "Created"
+        case .changed: "Changed"
+        case .scheduled: "Scheduled"
+        case .moved: "Moved"
+        case .attached: "Attached"
+        case .detached: "Detached"
+        case .exportedPrepared: "Export prepared"
+        case .draftedPrepared: "Draft prepared"
+        case .completed: "Completed"
+        case .failedSafely: "Safe failure"
+        case .needsConfirmation: "Needs confirmation"
+        case .noOp: "No change"
+        case .undoAvailable: "Undo available"
+        case .undoUnavailable: "Undo unavailable"
+        case .correctionAvailable: "Correction available"
+        }
+    }
+
+    private var resultState: AmbitionVisualState {
+        switch receipt.safetyState {
+        case .safeFailure, .externalUnavailable, .confirmationRequired:
+            return .warning
+        case .normal, .degraded:
+            return .default
+        }
+    }
+
+    private var undoLabel: String {
+        receipt.undoAvailability.isAvailable ? "Undo available" : "Undo not available"
+    }
+
+    private var undoState: AmbitionVisualState {
+        receipt.undoAvailability.isAvailable ? .success : .default
+    }
+
+    private var correctionLabel: String {
+        receipt.correctionAvailability.isAvailable ? "Correction available" : "Correction unavailable"
+    }
+
+    private var correctionState: AmbitionVisualState {
+        receipt.correctionAvailability.isAvailable ? .success : .default
     }
 }
 

@@ -191,6 +191,51 @@ final class ProfileFeatureServiceTests: XCTestCase {
         XCTAssertFalse(AppTab.allCases.map(\.title).contains("Habits"))
     }
 
+    func testD18TrustCenterIsNavigableReceiptAwareAndPrivacySafe() async throws {
+        let repositories = try await makeRepositories()
+        let service = RepositoryBackedProfileService(repositories: repositories)
+
+        let dashboard = try await service.loadProfileDashboard()
+        let routes = dashboard.trustCenter.sections.flatMap(\.routes)
+
+        XCTAssertEqual(dashboard.trustCenter.sections.map(\.id), [
+            "trust-center-status",
+            "trust-center-receipts",
+            "trust-center-privacy-future"
+        ])
+        XCTAssertTrue(routes.contains(where: {
+            $0.id == "trust-route-receipts" &&
+            ($0.subtitle.contains("what happened, what changed, why"))
+        }))
+        XCTAssertTrue(routes.contains(where: {
+            $0.id == "trust-route-corrections" &&
+            ($0.subtitle.contains("existing Goal Detail, Capture, teaching, and explanation seams"))
+        }))
+        XCTAssertTrue(routes.contains(where: {
+            $0.id == "trust-route-undo" &&
+            ($0.subtitle.contains("blocked or confirmation-gated"))
+        }))
+        XCTAssertTrue(routes.contains(where: {
+            $0.id == "trust-route-privacy" &&
+            $0.statusLabel == "Private by default"
+        }))
+        XCTAssertTrue(routes.contains(where: {
+            $0.id == "trust-route-sync-export" &&
+            ($0.subtitle.contains("Sync is not connected"))
+        }))
+        XCTAssertEqual(dashboard.trustCenter.receiptSummaries.count, 3)
+        XCTAssertTrue(dashboard.trustCenter.receiptSummaries.contains(where: {
+            $0.safetyState == .confirmationRequired &&
+            $0.undoAvailability == .requiresConfirmation
+        }))
+        XCTAssertTrue(dashboard.trustCenter.receiptSummaries.contains(where: {
+            $0.safetyState == .safeFailure &&
+            $0.summary.localizedCaseInsensitiveContains("No automation ran")
+        }))
+        XCTAssertFalse(dashboard.trustCenter.footer.localizedCaseInsensitiveContains("synced everywhere"))
+        XCTAssertFalse(dashboard.trustCenter.footer.localizedCaseInsensitiveContains("verified accessible"))
+    }
+
     func testReviewsV1IsYouOwnedAndTruthfulWithoutRestoringInsightsTab() async throws {
         let repositories = try await makeRepositories()
         try await repositories.eventLedger.append(

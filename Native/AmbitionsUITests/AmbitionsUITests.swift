@@ -167,6 +167,8 @@ final class AmbitionsUITests: XCTestCase {
         XCTAssertTrue(scrollUntilElementExists("profile.control-room-card", in: app))
         XCTAssertTrue(scrollUntilElementExists("profile.trust-center-card", in: app))
         XCTAssertTrue(scrollUntilStaticTextExists("Trust Center", in: app))
+        XCTAssertTrue(scrollUntilStaticTextExists("Receipts, corrections, and explanations", in: app))
+        XCTAssertTrue(scrollUntilStaticTextExists("Recent trust receipts", in: app))
         XCTAssertTrue(scrollUntilStaticTextExists("Personal Operating Constitution", in: app))
         XCTAssertTrue(scrollUntilStaticTextExists("Memory Controls", in: app))
     }

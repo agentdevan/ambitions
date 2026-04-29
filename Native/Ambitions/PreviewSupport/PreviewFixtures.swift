@@ -437,6 +437,42 @@ struct PreviewFixtures: Sendable {
                     SettingsItem(id: "profile-trust-notifications", title: "Notification pulse", subtitle: "Local reminder scheduling exists on the current runtime. Authorization stays explicit here so ambient trust never feels hidden.", icon: "bell.badge", valueLabel: "Not requested"),
                     SettingsItem(id: "profile-trust-routing", title: "System status", subtitle: "\(ExternalSurfaceTruth.verifiedRoutingTruth). External routes stay on canonical destinations, and ambient surfaces preserve local-first continuity language.", icon: "arrow.triangle.branch", valueLabel: "Calm")
                 ],
+                sections: [
+                    ProfileTrustCenterSection(
+                        id: "trust-center-status",
+                        title: "Status and boundaries",
+                        footer: "These rows describe current runtime truth.",
+                        routes: [
+                            ProfileTrustCenterRoute(id: "trust-route-local-data", title: "Local data status", subtitle: "Goals, captures, proof, corrections, receipts, and reviews read from this device.", icon: "internaldrive", statusLabel: "Stored on this device", semanticState: .trust, accessibilityHint: "Shows local storage trust status."),
+                            ProfileTrustCenterRoute(id: "trust-route-calendar", title: "Calendar boundary", subtitle: "Calendar awareness is Plan-owned. Writes require confirmation.", icon: "calendar.badge.clock", statusLabel: "Not requested", semanticState: .calendarDerived, accessibilityHint: "Shows calendar permission and write boundary."),
+                            ProfileTrustCenterRoute(id: "trust-route-external-surfaces", title: "External surfaces", subtitle: "External surfaces must use privacy snapshots and fallback routes.", icon: "rectangle.3.group", statusLabel: ExternalSurfaceTruth.productizedNeedsPlatformReview, semanticState: .caution, accessibilityHint: "Shows external-surface verification status.")
+                        ]
+                    ),
+                    ProfileTrustCenterSection(
+                        id: "trust-center-receipts",
+                        title: "Receipts, corrections, and explanations",
+                        footer: "Receipt rows summarize policy and action history without exposing raw logs by default.",
+                        routes: [
+                            ProfileTrustCenterRoute(id: "trust-route-receipts", title: "Receipts", subtitle: "Receipts say what happened, what changed, why, and what can be corrected or undone.", icon: "doc.text.magnifyingglass", statusLabel: "3 examples", semanticState: .review, accessibilityHint: "Shows receipt history posture."),
+                            ProfileTrustCenterRoute(id: "trust-route-corrections", title: "Correction routes", subtitle: "Supported corrections stay tied to existing Goal Detail, Capture, teaching, and explanation seams.", icon: "checkmark.bubble", statusLabel: "2 local", semanticState: .trust, accessibilityHint: "Shows correction availability."),
+                            ProfileTrustCenterRoute(id: "trust-route-undo", title: "Undo rules", subtitle: "Local undo is shown only where safe.", icon: "arrow.uturn.backward", statusLabel: "No silent undo", semanticState: .caution, accessibilityHint: "Shows undo safety posture.")
+                        ]
+                    ),
+                    ProfileTrustCenterSection(
+                        id: "trust-center-privacy-future",
+                        title: "Privacy and future-owned capabilities",
+                        footer: "Unavailable states stay visible.",
+                        routes: [
+                            ProfileTrustCenterRoute(id: "trust-route-privacy", title: "Privacy defaults", subtitle: "Sensitive details should be hidden on compact and external surfaces unless the user chooses otherwise.", icon: "hand.raised", statusLabel: "Private by default", semanticState: .protected, accessibilityHint: "Shows privacy-safe display posture."),
+                            ProfileTrustCenterRoute(id: "trust-route-sync-export", title: "Sync / Export truth", subtitle: "Sync is not connected. Export and import proof remain future-owned.", icon: "externaldrive", statusLabel: "Ambitions is running in explicit local-only mode.", semanticState: .caution, accessibilityHint: "Shows sync and export truth."),
+                            ProfileTrustCenterRoute(id: "trust-route-accessibility-claims", title: "Accessibility claims", subtitle: "Internal accessibility evidence exists, but user-facing claims wait for verification.", icon: "figure", statusLabel: "Unverified", semanticState: .accessibilityUnverified, accessibilityHint: "Shows accessibility claim status.")
+                        ]
+                    )
+                ],
+                receiptSummaries: [
+                    ActionReceiptDisplaySummary(id: "preview-receipt-calendar", title: "Calendar write blocked", summary: "No calendar change happened because confirmation is required.", resultState: .needsConfirmation, occurredAt: "2026-04-27T12:10:00Z", sourceDomain: .plan, undoAvailability: .requiresConfirmation, correctionAvailability: .availableWithReason, nextActionTitle: "Review in Plan", safetyState: .confirmationRequired),
+                    ActionReceiptDisplaySummary(id: "preview-receipt-memory", title: "Memory deletion blocked", summary: "No memory was forgotten because safe review and undo are incomplete.", resultState: .failedSafely, occurredAt: "2026-04-27T12:09:00Z", sourceDomain: .you, undoAvailability: .unsafe, correctionAvailability: .unavailable, nextActionTitle: nil, safetyState: .safeFailure)
+                ],
                 footer: "This establishes the trust framing layer only. Deeper continuity and sync-trust productization remain future-owned, so this surface stays truthful about what exists today."
             ),
             contextVault: ProfileContextVaultState(

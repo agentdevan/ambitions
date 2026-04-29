@@ -5,7 +5,7 @@ This file defines the standing source-of-truth hierarchy for future Ambitions wo
 ## Current Operating Truth
 
 - Product-decision Waves 1-19 are complete.
-- Current execution status remains: Batches 00-88 and D01-D17 are complete for planning purposes; D18 / Trust Center Alignment is the next dependency-safe implementation batch from the Design Constitution delta/alignment backlog.
+- Current execution status remains: Batches 00-88 and D01-D18 are complete for planning purposes; D19 / What Ambitions Knows is the next dependency-safe implementation batch from the Design Constitution delta/alignment backlog.
 - D04 Panel Size + Display Density foundation exists as shared design-system support; future batches own broad surface adoption.
 - D05 Receipt / Action Closure Search and Privacy Contract exists as a local-first receipt history/search foundation over existing Action Closure receipts, with typed filters, deterministic ordering, redacted/full-detail projections, privacy levels, safe-to-show flags, undo/proof/trust labels, and calm missing-detail fallback.
 - D06 Smart Attachment Foundation exists as a local-first routing/confidence/clarification contract over Capture and Command, with deterministic bounded local classification, Needs a Place fallback, D05-compatible receipts, redacted/full-detail projections, and correction/change affordances.
@@ -20,6 +20,7 @@ This file defines the standing source-of-truth hierarchy for future Ambitions wo
 - D15 Plan Believability + Timeline Widget Alignment exists as a bounded Plan surface alignment. Plan now asks `Does this hold together?`, validates against the D10 Plan screen contract, names the week view Weekly Plan Strip, labels Rich Timeline evidence with `Based on your plan` / `Created in Ambitions`, labels calendar-derived mode as `From your calendar`, and preserves Plan-owned calendar read/write boundaries without onboarding prompts, silent calendar writes, or raw calendar-clone UI.
 - D16 Ritual Split Alignment exists as a bounded ritual-language alignment. Remaining user-facing standalone habit posture now presents as Rituals across Plan support loops, the Plan-owned Rituals route, Goal mode/clarification copy, and a You default; internal `habits` route/service identifiers remain compatibility-only and tests prevent top-level Habits regression.
 - D17 You Personal System Center Alignment exists as a bounded You categorization layer. You now carries a Personal System Center projection and GroupedNavigationList card that groups Profile, Personalization, Memory / What Ambitions Knows, Reviews, Analytics, Trust & Explanations, Privacy, Sync / Export, Integrations, Appearance, Notifications, Accessibility, and Settings without adding tabs, reintroducing Insights/Habits/Profile as top-level surfaces, or claiming D18/D19 Trust/Memory depth.
+- D18 Trust Center Alignment exists as a bounded You-owned Trust Center layer. Trust Center now has navigable GroupedNavigationList sections for status/boundaries, receipts/corrections/explanations, and privacy/future-owned capabilities, plus privacy-safe recent receipt summaries backed by D05 Action Closure receipts. It does not build the full What Ambitions Knows memory center, export/import workflows, sync, or account systems.
 - D01-D26 classification now lives in `docs/canon/ROADMAP_BATCH_CLASSIFICATION.md` and distinguishes launch-critical, soon-after-launch, post-launch, deferred, decision-gated, and infrastructure-unlock work.
 - Original Batches 89-120 remain future planned roadmap work only through the classifications and dependencies in `docs/canon/Ambitions_2_0_Roadmap_Merge_Audit.md`.
 - Post-D26 Layer 2/Layer 3 maturity planning now lives in `docs/canon/POST_D26_MATURITY_ROADMAP.md`. It rewrites original Batches 89-120 into M-series maturity batches and R-series release-readiness gates. It is planning only and does not mark D01-D26 complete.
@@ -124,4 +125,4 @@ Use these entry points instead of duplicating a separate active-doc list here:
 
 ## Next Operating Step
 
-Continue with D18 - Trust Center Alignment unless the user explicitly changes the execution order. Post-D26 M/R work remains planning-only until D26 is complete or the user explicitly authorizes otherwise.
+Continue with D19 - What Ambitions Knows unless the user explicitly changes the execution order. Post-D26 M/R work remains planning-only until D26 is complete or the user explicitly authorizes otherwise.

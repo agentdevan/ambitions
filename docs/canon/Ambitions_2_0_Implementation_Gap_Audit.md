@@ -21,7 +21,7 @@ D14 evidence: `Native/Ambitions/Features/Goals/GoalsFeatureModels.swift`, `Nativ
 
 The repo has substantial native foundations: the five-tab shell, local-first SwiftUI app, Capture persistence, Command Pipeline, Event Ledger, Action Closure receipt models, Plan-owned calendar action boundary, rich panel primitives, Accessibility Nutrition infrastructure, Profile-backed You trust surface, local notification foundation, App Intents, widgets, and Live Activity scaffolding.
 
-The app is not yet Constitution-complete. The biggest gaps are Trust Center / What Ambitions Knows depth, systematic UX writing cleanup, external-surface contracts, and verified Accessibility Nutrition. Life Areas, North Stars, and One-Step Goals now have foundation object/projection layers; Today has its D11 plan/One-Step preview alignment; Capture has its D12 Smart Attachment / Needs a Place alignment; Goals has D13 bounded portfolio consumption with accessible Map/List fallback; Goal Detail has D14 Mission Control lane alignment; Plan has D15 believability, Rich Timeline, Weekly Plan Strip, and local-first calendar evidence alignment; Ritual language is aligned in D16; and You has its D17 Personal System Center grouping.
+The app is not yet Constitution-complete. The biggest gaps are What Ambitions Knows depth, systematic UX writing cleanup, external-surface contracts, and verified Accessibility Nutrition. Life Areas, North Stars, and One-Step Goals now have foundation object/projection layers; Today has its D11 plan/One-Step preview alignment; Capture has its D12 Smart Attachment / Needs a Place alignment; Goals has D13 bounded portfolio consumption with accessible Map/List fallback; Goal Detail has D14 Mission Control lane alignment; Plan has D15 believability, Rich Timeline, Weekly Plan Strip, and local-first calendar evidence alignment; Ritual language is aligned in D16; You has its D17 Personal System Center grouping; and Trust Center has its D18 navigable, receipt-aware, privacy-safe alignment.
 
 Several implemented surfaces are valid foundations but need alignment: Today, Capture, Goals, Goal Detail, Plan, You/Profile, external surfaces, notification controls, and shell/navigation behavior. The correct next move is not to reopen old batches; it is to add future alignment batches in dependency order.
 
@@ -69,8 +69,8 @@ Several implemented surfaces are valid foundations but need alignment: Today, Ca
 | Goals | Has Goal Lifecycle Rail, Goal Weather, Goal Atlas preview, archive summary, active cards, and D13 Life Areas / North Stars / One-Step Goals portfolio panels with Map/List fallback. | Later maturity work can deepen Path Builder and long-range portfolio behavior after D14-D26. |
 | Goal Detail | Has exact Mission Control lanes `Overview / Path / Steps / Proof / Decisions / Risks / Archive`, breadcrumb/object identity, timeline, Proof Rail, decisions, risks, archive learning, receipts, and Step-safe contained action language. | Later maturity work can deepen Path Builder, review/search, and archive learning after D15-D26. |
 | Plan | Has Plan Treaty, capacity, lifecycle rail, Rich Timeline source labels, Weekly Plan Strip naming, believability, calendar boundary, recovery/reflow, D10 Plan screen-contract snapshot coverage, and Ritual support-loop language while preserving compatibility routes internally. | Later maturity work can deepen planning/recovery after D17-D26. |
-| You | Profile-backed You now has a D17 Personal System Center map using GroupedNavigationList categories for Profile, Personalization, Memory / What Ambitions Knows, Reviews, Analytics, Trust & Explanations, Privacy, Sync / Export, Integrations, Appearance, Notifications, Accessibility, and Settings. | D18/D19 should deepen Trust Center and What Ambitions Knows without turning You into a settings dump or adding tabs. |
-| Trust / memory | Trust Center and memory controls exist, but `What Ambitions Knows` is not a named full surface and editable/deletable/recoverable memory contracts are incomplete. | Trust Center / What Ambitions Knows batches. |
+| You | Profile-backed You now has a D17 Personal System Center map using GroupedNavigationList categories for Profile, Personalization, Memory / What Ambitions Knows, Reviews, Analytics, Trust & Explanations, Privacy, Sync / Export, Integrations, Appearance, Notifications, Accessibility, and Settings. | D19 should deepen What Ambitions Knows without turning You into a settings dump or adding tabs. |
+| Trust / memory | Trust Center now has D18 GroupedNavigationList sections for status/boundaries, receipts/corrections/explanations, and privacy/future capabilities plus privacy-safe receipt summaries; memory controls exist, but `What Ambitions Knows` is not a named full surface and editable/deletable/recoverable memory contracts are incomplete. | What Ambitions Knows batch. |
 | Receipts | Receipt domain and You audit card exist; searchable receipt history and privacy-safe display rules are not implemented as a cross-surface product surface. | Receipt search/history batch. |
 | Accessibility | Infrastructure and labels exist, but Dynamic Type/VoiceOver/Reduce Motion/target-size verification across screen/panel combinations is not complete. | Accessibility Nutrition verification. |
 | External surfaces | Widgets, Live Activity, notifications, and App Intents exist; Constitution privacy, snapshot, receipt, confirmation, and verification contracts are not complete. | External surfaces and platform validation batches. |
@@ -127,12 +127,12 @@ Several implemented surfaces are valid foundations but need alignment: Today, Ca
 | Goal Detail | Mission Control, breadcrumb, timeline, Proof Rail, decisions, risks, archive, receipts, and exact `Overview / Path / Steps / Proof / Decisions / Risks / Archive` lanes. | Later maturity can deepen Path Builder, review/search, and archive learning. | Portfolio/path maturity. |
 | Capture | Fast input, routing actions, recent captures, attach to goal. | Needs a Place, Smart Attachment, editable Smart Attachment receipts, 1-3 clarification choices. | Capture + Quiet Command Sheet; Smart Attachment. |
 | Plan | Believability, Plan Treaty, Rich Timeline Widget/source labels, Weekly Plan Strip naming, calendar boundary, recovery/reflow, Plan-owned permission proof, and Ritual support-loop language. | Later maturity work can deepen planning/recovery and cross-surface continuity. | Plan/recovery maturity. |
-| You | Profile-backed You, D17 Personal System Center categories, Trust Center card, memory controls, reviews, appearance, integrations. | Trust Center depth, What Ambitions Knows, full privacy/export/import controls. | Trust Center; What Ambitions Knows. |
+| You | Profile-backed You, D17 Personal System Center categories, D18 navigable Trust Center sections, privacy-safe trust receipt summaries, memory controls, reviews, appearance, integrations. | What Ambitions Knows, full privacy/export/import controls. | What Ambitions Knows; export/import maturity. |
 | Life Areas Overview | Foundation Life Area object/projection layer, Goal Atlas preview hooks, and D13 Goals portfolio panel exist. | Dedicated detail/deeper transformation remains future maturity work. | Portfolio/path maturity. |
 | North Star Detail | Foundation North Star object/projection layer and D13 Goals rail exist. | Full detail surface absent. | Portfolio/path maturity. |
 | Task / One-Step Goal Detail | Model/projection foundation exists; D11 Today can surface compact standalone One-Step Goals, D12 can route/save from Capture, D13 can show controlled Goals portfolio items, and D14 keeps contained Goal Detail work as Steps without creating a Tasks tab. | Full standalone detail and broader Plan panel UI remain future surface work. | Plan alignment / maturity. |
 | Review | Reviews v1 is You-owned. | Needs receipt/search/memory maturity and Constitution copy pass. | Reviews/receipt maturity. |
-| Trust Center | Present as Profile/You card. | Needs dedicated navigation and GroupedNavigationList structure. | Trust Center Alignment. |
+| Trust Center | Present as a You-owned card with D18 GroupedNavigationList sections for boundaries, receipts/corrections/explanations, privacy/future capability truth, and recent receipt summaries. | Later maturity can deepen receipt search/history and platform readiness evidence. | Receipt/search maturity; external-surface verification. |
 | What Ambitions Knows | Memory Lens and memory controls exist. | Named center absent. | What Ambitions Knows. |
 | Archive | Goal archive summary exists. | Cross-object archive and receipt learning not complete. | Receipt/Archive maturity. |
 
@@ -252,8 +252,8 @@ These are future delta/alignment batches. They do not replace the existing Batch
 | D15 | Plan Believability + Timeline Widget Alignment | Completed alignment: Plan now asks `Does this hold together?`, validates a D10 Plan screen-contract snapshot, labels Rich Timeline and calendar evidence, names Weekly Plan Strip, and preserves Plan-owned calendar permission/write boundaries. |
 | D16 | Ritual Split Alignment | Completed alignment: remaining user-facing standalone habit posture now presents as Rituals across Plan support loops, the Plan-owned Rituals route, Goal mode/clarification copy, and You defaults while preserving internal compatibility identifiers. |
 | D17 | You Personal System Center Alignment | Completed: added categorized You structure and GroupedNavigationList map without a settings dump or new tabs. |
-| D18 | Trust Center Alignment | Next: make Trust Center navigable, privacy-safe, and receipt-aware. |
-| D19 | What Ambitions Knows | Build visible/editable/correctable memory center. |
+| D18 | Trust Center Alignment | Completed: Trust Center is navigable, privacy-safe, receipt-aware, and conservative about sync/export/account/accessibility/platform claims. |
+| D19 | What Ambitions Knows | Next: build visible/editable/correctable memory center. |
 | D20 | UX Writing Cleanup | Apply state-language matrix across surfaces. |
 | D21 | Accessibility Nutrition Verification | Verify screen/component matrices before claims. |
 | D22 | External Surfaces Contract Alignment | Align snapshots/actions/privacy/deep links before platform-specific deltas. |
@@ -281,8 +281,8 @@ These are future delta/alignment batches. They do not replace the existing Batch
 15. Plan Believability + Timeline Widget Alignment.
 16. Ritual Split Alignment.
 17. You Personal System Center Alignment. Completed.
-18. Trust Center Alignment. Next.
-19. What Ambitions Knows.
+18. Trust Center Alignment. Completed.
+19. What Ambitions Knows. Next.
 20. UX Writing Cleanup.
 21. Accessibility Nutrition Verification.
 22. External Surfaces Contract Alignment.
