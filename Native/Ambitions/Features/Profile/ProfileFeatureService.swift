@@ -593,148 +593,198 @@ private extension RepositoryBackedProfileService {
     ) -> ProfileSystemCenterState {
         ProfileSystemCenterState(
             title: "You",
-            subtitle: "Profile, memory, reviews, trust, privacy, integrations, and settings stay grouped here without adding more top-level tabs.",
+            subtitle: "Your settings, memory, and trust controls.",
             sections: [
                 ProfileSystemCenterSection(
-                    id: "profile-system-personal",
-                    title: "Personal setup",
+                    id: "me",
+                    title: "Me",
                     footer: nil,
                     items: [
                         ProfileSystemCenterItem(
-                            id: "profile-system-profile",
+                            id: "profile",
                             title: "Profile",
-                            subtitle: "Name, default landing tab, and review cadence for this device.",
+                            subtitle: "Name and default landing tab.",
                             icon: "person.crop.circle",
-                            statusLabel: snapshot.appState.userDisplayName.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty ? "Optional" : "Stored locally",
+                            statusLabel: snapshot.appState.userDisplayName.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty ? "Optional" : "Local",
                             semanticState: .neutral,
-                            accessibilityHint: "Shows identity and default setup status."
+                            accessibilityHint: "Opens profile settings."
                         ),
                         ProfileSystemCenterItem(
-                            id: "profile-system-personalization",
+                            id: "personalization",
                             title: "Personalization",
-                            subtitle: "Tone, recovery posture, planning strictness, and confirmation defaults remain calm and conservative.",
+                            subtitle: "Tone and planning defaults.",
                             icon: "slider.horizontal.3",
-                            statusLabel: "Local defaults",
+                            statusLabel: "Defaults",
                             semanticState: .trust,
-                            accessibilityHint: "Summarizes local personalization controls."
+                            accessibilityHint: "Opens personalization settings."
                         ),
                         ProfileSystemCenterItem(
-                            id: "profile-system-appearance",
+                            id: "appearance",
                             title: "Appearance",
-                            subtitle: "Mode and accent choices use the shared Ambitions theme.",
+                            subtitle: "Mode and accent.",
                             icon: "paintpalette",
-                            statusLabel: appearanceSummary,
+                            statusLabel: snapshot.appState.appearancePreference.title,
                             semanticState: .success,
-                            accessibilityHint: "Shows current appearance preference."
-                        ),
-                        ProfileSystemCenterItem(
-                            id: "profile-system-settings",
-                            title: "Settings",
-                            subtitle: "Routine preferences stay here as You-owned controls, not as new tabs.",
-                            icon: "gearshape",
-                            statusLabel: "Grouped",
-                            semanticState: .neutral,
-                            accessibilityHint: "Shows grouped settings posture."
+                            accessibilityHint: "Opens Appearance Studio."
                         )
                     ]
                 ),
                 ProfileSystemCenterSection(
-                    id: "profile-system-memory-trust",
-                    title: "Memory and trust",
-                    footer: "Trust Center and What Ambitions Knows now have bounded You-owned structure. Later maturity can deepen search, export/import, and recovery.",
+                    id: "memory-and-trust",
+                    title: "Memory and Trust",
+                    footer: nil,
                     items: [
                         ProfileSystemCenterItem(
-                            id: "profile-system-memory",
-                            title: "Memory / What Ambitions Knows",
-                            subtitle: "Local evidence, captures, corrections, and recent ledger signals that can explain recommendations.",
+                            id: "what-ambitions-knows",
+                            title: "What Ambitions Knows",
+                            subtitle: "Saved local context.",
                             icon: "brain.head.profile",
-                            statusLabel: contextSignals == 0 ? "No signals yet" : "\(contextSignals) local",
+                            statusLabel: contextSignals == 0 ? "Empty" : "Local",
                             semanticState: contextSignals == 0 ? .neutral : .trust,
-                            accessibilityHint: "Shows local memory signal availability."
+                            accessibilityHint: "Opens local memory controls."
                         ),
                         ProfileSystemCenterItem(
-                            id: "profile-system-reviews",
-                            title: "Reviews",
-                            subtitle: "Recovery Review and Life OS Receipt stay under You and Plan contexts.",
-                            icon: "rectangle.stack.badge.play",
-                            statusLabel: reviews.projection.lifeOSReceipt.statusLabel,
-                            semanticState: .review,
-                            accessibilityHint: "Shows current review readiness."
-                        ),
-                        ProfileSystemCenterItem(
-                            id: "profile-system-analytics",
-                            title: "Analytics",
-                            subtitle: "Contextual summaries stay inside You and goal surfaces instead of becoming an Insights tab.",
-                            icon: "chart.line.uptrend.xyaxis",
-                            statusLabel: "Contextual",
-                            semanticState: .neutral,
-                            accessibilityHint: "Shows that analytics are contextual, not a top-level surface."
-                        ),
-                        ProfileSystemCenterItem(
-                            id: "profile-system-trust",
-                            title: "Trust & Explanations",
-                            subtitle: "Receipts, corrections, and why-this language stay inspectable and confirmation-gated.",
+                            id: "trust-center",
+                            title: "Trust Center",
+                            subtitle: "Permissions, privacy, and boundaries.",
                             icon: "checkmark.shield",
-                            statusLabel: "User controlled",
+                            statusLabel: "Review",
                             semanticState: .trust,
-                            accessibilityHint: "Shows trust and explanation posture."
+                            accessibilityHint: "Opens Trust Center."
                         ),
                         ProfileSystemCenterItem(
-                            id: "profile-system-privacy",
-                            title: "Privacy",
-                            subtitle: "Sensitive details stay local-first and should remain hideable on external surfaces.",
-                            icon: "hand.raised",
-                            statusLabel: "Local-first",
-                            semanticState: .protected,
-                            accessibilityHint: "Shows privacy posture."
+                            id: "receipts-history",
+                            title: "Receipts & History",
+                            subtitle: "What changed and why.",
+                            icon: "doc.text.magnifyingglass",
+                            statusLabel: "Local",
+                            semanticState: .neutral,
+                            accessibilityHint: "Opens receipt history."
                         ),
                         ProfileSystemCenterItem(
-                            id: "profile-system-sync-export",
-                            title: "Sync / Export",
-                            subtitle: "Sync is not connected. Export and disaster recovery remain labeled until proof drills are complete.",
-                            icon: "externaldrive",
-                            statusLabel: syncStatus.detail,
+                            id: "corrections",
+                            title: "Corrections",
+                            subtitle: "Fix assumptions and teaching signals.",
+                            icon: "checkmark.bubble",
+                            statusLabel: snapshot.teachingSignals.isEmpty ? "Ready" : "\(snapshot.teachingSignals.count)",
                             semanticState: .caution,
-                            accessibilityHint: "Shows local-only sync and export readiness."
+                            accessibilityHint: "Opens corrections."
                         )
                     ]
                 ),
                 ProfileSystemCenterSection(
-                    id: "profile-system-access",
-                    title: "Access and integrations",
-                    footer: "Optional system edges stay explicit. Ambitions still works when permissions are denied or not requested.",
+                    id: "reviews-and-progress",
+                    title: "Reviews and Progress",
+                    footer: nil,
                     items: [
                         ProfileSystemCenterItem(
-                            id: "profile-system-integrations",
-                            title: "Integrations",
-                            subtitle: "Calendar, reminders, widgets, Live Activities, Shortcuts, and Share Extension status remain bounded.",
-                            icon: "rectangle.connected.to.line.below",
-                            statusLabel: calendarAuthorizationLabel(calendarAuthorization),
-                            semanticState: .calendarDerived,
-                            accessibilityHint: "Shows integration permission status."
+                            id: "reviews",
+                            title: "Reviews",
+                            subtitle: "Recovery and progress check-ins.",
+                            icon: "rectangle.stack.badge.play",
+                            statusLabel: "Review",
+                            semanticState: .review,
+                            accessibilityHint: "Opens Reviews."
                         ),
                         ProfileSystemCenterItem(
-                            id: "profile-system-notifications",
+                            id: "proof",
+                            title: "Proof",
+                            subtitle: "Evidence and progress notes.",
+                            icon: "checkmark.seal",
+                            statusLabel: "Local",
+                            semanticState: .success,
+                            accessibilityHint: "Opens proof summary."
+                        ),
+                        ProfileSystemCenterItem(
+                            id: "archive-completed",
+                            title: "Archive / Completed",
+                            subtitle: "Saved learning from finished work.",
+                            icon: "archivebox",
+                            statusLabel: "Saved",
+                            semanticState: .neutral,
+                            accessibilityHint: "Opens archive summary."
+                        )
+                    ]
+                ),
+                ProfileSystemCenterSection(
+                    id: "system-edges",
+                    title: "System Edges",
+                    footer: nil,
+                    items: [
+                        ProfileSystemCenterItem(
+                            id: "notifications",
                             title: "Notifications",
-                            subtitle: "Local reminders require explicit notification permission and are not needed to use the app.",
+                            subtitle: "Reminder permission.",
                             icon: "bell.badge",
                             statusLabel: notificationStatus.statusLabel,
                             semanticState: notificationStatus.statusLabel == "Denied" ? .caution : .neutral,
-                            accessibilityHint: "Shows notification permission status."
+                            accessibilityHint: "Opens notification settings."
                         ),
                         ProfileSystemCenterItem(
-                            id: "profile-system-accessibility",
+                            id: "integrations",
+                            title: "Integrations",
+                            subtitle: "Calendar and reminders.",
+                            icon: "rectangle.connected.to.line.below",
+                            statusLabel: calendarAuthorizationLabel(calendarAuthorization),
+                            semanticState: .calendarDerived,
+                            accessibilityHint: "Opens integrations."
+                        ),
+                        ProfileSystemCenterItem(
+                            id: "widgets-live-activities-shortcuts",
+                            title: "Widgets / Live Activities / Shortcuts",
+                            subtitle: "External surface status.",
+                            icon: "square.grid.2x2",
+                            statusLabel: "Bounded",
+                            semanticState: .neutral,
+                            accessibilityHint: "Opens external surface status."
+                        ),
+                        ProfileSystemCenterItem(
+                            id: "export-import",
+                            title: "Export / Import",
+                            subtitle: "Local backup and restore posture.",
+                            icon: "externaldrive",
+                            statusLabel: syncStatus.availability == .unavailable ? "Manual" : "Review",
+                            semanticState: .caution,
+                            accessibilityHint: "Opens export and import status."
+                        )
+                    ]
+                ),
+                ProfileSystemCenterSection(
+                    id: "accessibility-and-support",
+                    title: "Accessibility and Support",
+                    footer: "Rows open details; nothing here changes plans silently.",
+                    items: [
+                        ProfileSystemCenterItem(
+                            id: "accessibility",
                             title: "Accessibility",
-                            subtitle: "Internal checklist evidence exists; public claims are locked until manual verification is recorded.",
+                            subtitle: "Claims and manual review status.",
                             icon: "figure",
-                            statusLabel: "Claims locked",
+                            statusLabel: "Locked",
                             semanticState: .accessibilityUnverified,
-                            accessibilityHint: "Shows accessibility verification status."
+                            accessibilityHint: "Opens accessibility status."
+                        ),
+                        ProfileSystemCenterItem(
+                            id: "help-support",
+                            title: "Help / Support",
+                            subtitle: "Guidance and support posture.",
+                            icon: "questionmark.circle",
+                            statusLabel: "Guide",
+                            semanticState: .neutral,
+                            accessibilityHint: "Opens help and support."
+                        ),
+                        ProfileSystemCenterItem(
+                            id: "about",
+                            title: "About",
+                            subtitle: "Local-first app status.",
+                            icon: "info.circle",
+                            statusLabel: "Local",
+                            semanticState: .neutral,
+                            accessibilityHint: "Opens about Ambitions."
                         )
                     ]
                 )
             ],
-            footer: "You keeps settings, history, trust, and controls together. Deeper detail remains in the owning surfaces until the supporting controls are ready."
+            footer: "You keeps settings, history, trust, and controls together."
         )
     }
 

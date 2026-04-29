@@ -95,6 +95,7 @@ final class AmbitionsUITests: XCTestCase {
 
         for tab in ["Today", "Goals", "Capture", "Plan", "You"] {
             XCTAssertTrue(app.tabBars.buttons[tab].waitForExistence(timeout: 10), "Missing top-level tab \(tab)")
+            XCTAssertTrue(app.tabBars.buttons[tab].isHittable, "Top-level tab \(tab) is not hittable")
         }
         XCTAssertFalse(app.tabBars.buttons["More"].exists)
         XCTAssertFalse(app.tabBars.buttons["Captures"].exists)
@@ -102,15 +103,16 @@ final class AmbitionsUITests: XCTestCase {
         XCTAssertFalse(app.tabBars.buttons["Profile"].exists)
         XCTAssertFalse(app.tabBars.buttons["Habits"].exists)
         XCTAssertTrue(app.tabBars.buttons["Today"].isSelected)
-        XCTAssertTrue(app.staticTexts["shell.header.title"].waitForExistence(timeout: 10))
+        XCTAssertTrue(app.descendants(matching: .any)["shell.header.rail"].waitForExistence(timeout: 10))
         XCTAssertTrue(app.descendants(matching: .any)["shell.continuity-ribbon"].waitForExistence(timeout: 10))
+        XCTAssertTrue(app.descendants(matching: .any)["shell.floating-control-lane"].waitForExistence(timeout: 10))
+        assertShellFloatingButtonDoesNotCoverTabBar(in: app)
 
         app.tabBars.buttons["Capture"].tap()
         XCTAssertTrue(app.descendants(matching: .any)["captures.screen"].waitForExistence(timeout: 10))
         XCTAssertFalse(app.buttons["captures.return-to-plan"].exists)
 
         app.tabBars.buttons["Plan"].tap()
-        XCTAssertTrue(app.staticTexts["shell.header.title"].waitForExistence(timeout: 10))
         XCTAssertTrue(app.descendants(matching: .any)["plan.screen"].waitForExistence(timeout: 10))
         XCTAssertTrue(app.descendants(matching: .any)["plan.hero-card"].waitForExistence(timeout: 10))
         XCTAssertTrue(scrollUntilElementExists("plan.pressure-scrubber", in: app))
@@ -128,11 +130,13 @@ final class AmbitionsUITests: XCTestCase {
         XCTAssertTrue(app.descendants(matching: .any)["plan.screen"].waitForExistence(timeout: 10))
 
         app.tabBars.buttons["You"].tap()
-        XCTAssertTrue(app.staticTexts["shell.header.title"].waitForExistence(timeout: 10))
-        XCTAssertTrue(scrollUntilElementExists("profile.hero-card", in: app))
-        XCTAssertTrue(scrollUntilElementExists("profile.system-center-card", in: app))
-        XCTAssertTrue(scrollUntilElementExists("profile.control-room-card", in: app))
-        XCTAssertTrue(scrollUntilElementExists("profile.trust-center-card", in: app))
+        XCTAssertTrue(app.descendants(matching: .any)["you.root"].waitForExistence(timeout: 10))
+        XCTAssertTrue(app.staticTexts["Me"].waitForExistence(timeout: 10))
+        XCTAssertTrue(app.staticTexts["Memory and Trust"].waitForExistence(timeout: 10))
+        XCTAssertTrue(youRow(named: "Appearance", in: app).waitForExistence(timeout: 10))
+        XCTAssertTrue(youRow(named: "What Ambitions Knows", in: app).waitForExistence(timeout: 10))
+        XCTAssertTrue(youRow(named: "Trust Center", in: app).waitForExistence(timeout: 10))
+        XCTAssertLessThan(youRow(named: "Appearance", in: app).frame.minY, youRow(named: "What Ambitions Knows", in: app).frame.minY)
     }
 
     func testProfileAppearanceStudioControlsAreAccessibleFromKeyboardAndTouch() throws {
@@ -140,7 +144,11 @@ final class AmbitionsUITests: XCTestCase {
         app.launch()
 
         app.tabBars.buttons["You"].tap()
-        XCTAssertTrue(scrollUntilStaticTextExists("Appearance Studio", in: app, maxAttempts: 8))
+        let appearanceRow = youRow(named: "Appearance", in: app)
+        XCTAssertTrue(appearanceRow.waitForExistence(timeout: 10))
+        XCTAssertTrue(appearanceRow.isHittable)
+        appearanceRow.tap()
+        XCTAssertTrue(app.staticTexts["Appearance Studio"].waitForExistence(timeout: 10))
         XCTAssertTrue(scrollUntilStaticTextExists("Accent family", in: app, maxAttempts: 8))
         XCTAssertTrue(scrollUntilStaticTextExists("Live preview", in: app, maxAttempts: 8))
         XCTAssertTrue(scrollUntilStaticTextExists("No unsaved changes", in: app, maxAttempts: 8))
@@ -152,7 +160,9 @@ final class AmbitionsUITests: XCTestCase {
         app.launch()
 
         app.tabBars.buttons["You"].tap()
-        XCTAssertTrue(scrollUntilStaticTextExists("Appearance Studio", in: app, maxAttempts: 8))
+        let profileRow = youRow(named: "Profile", in: app)
+        XCTAssertTrue(profileRow.waitForExistence(timeout: 10))
+        profileRow.tap()
         XCTAssertTrue(scrollUntilStaticTextExists("Personal defaults", in: app, maxAttempts: 8))
         XCTAssertTrue(scrollUntilStaticTextExists("Default landing tab", in: app, maxAttempts: 8))
         XCTAssertTrue(scrollUntilStaticTextExists("Review cadence", in: app, maxAttempts: 8))
@@ -164,14 +174,12 @@ final class AmbitionsUITests: XCTestCase {
 
         app.tabBars.buttons["You"].tap()
 
-        XCTAssertTrue(scrollUntilElementExists("profile.system-center-card", in: app))
-        XCTAssertTrue(scrollUntilElementExists("profile.control-room-card", in: app))
-        XCTAssertTrue(scrollUntilElementExists("profile.trust-center-card", in: app))
-        XCTAssertTrue(scrollUntilStaticTextExists("Trust Center", in: app))
+        XCTAssertTrue(youRow(named: "What Ambitions Knows", in: app).waitForExistence(timeout: 10))
+        XCTAssertTrue(youRow(named: "Trust Center", in: app).waitForExistence(timeout: 10))
+        youRow(named: "Trust Center", in: app).tap()
+        XCTAssertTrue(app.descendants(matching: .any)["profile.trust-center-card"].waitForExistence(timeout: 10))
         XCTAssertTrue(scrollUntilStaticTextExists("Receipts, corrections, and explanations", in: app))
         XCTAssertTrue(scrollUntilStaticTextExists("Recent trust receipts", in: app))
-        XCTAssertTrue(scrollUntilStaticTextExists("Personal Operating Constitution", in: app))
-        XCTAssertTrue(scrollUntilStaticTextExists("What Ambitions Knows", in: app))
         XCTAssertTrue(scrollUntilStaticTextExists("Claims locked", in: app))
     }
 
@@ -781,6 +789,18 @@ final class AmbitionsUITests: XCTestCase {
         let labeled = app.buttons["Quiet Command Sheet"]
         _ = labeled.waitForExistence(timeout: 2)
         return labeled
+    }
+
+    private func assertShellFloatingButtonDoesNotCoverTabBar(in app: XCUIApplication, file: StaticString = #filePath, line: UInt = #line) {
+        let tabBar = app.tabBars.firstMatch
+        let button = shellCommandButton(in: app)
+        XCTAssertTrue(tabBar.waitForExistence(timeout: 10), file: file, line: line)
+        XCTAssertTrue(button.waitForExistence(timeout: 10), file: file, line: line)
+        XCTAssertFalse(tabBar.frame.intersects(button.frame), "Global add button overlaps the tab bar.", file: file, line: line)
+    }
+
+    private func youRow(named title: String, in app: XCUIApplication) -> XCUIElement {
+        app.buttons.matching(NSPredicate(format: "label CONTAINS %@", title)).firstMatch
     }
 
     private func todayGoalDetailButton(in app: XCUIApplication) -> XCUIElement {

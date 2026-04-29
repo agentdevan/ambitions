@@ -48,8 +48,11 @@ struct AmbitionsRootView: View {
             )
             #endif
 
-            shellContinuityReceipt
-            shellGlobalEntryButton(theme: resolvedTheme)
+            shellContinuityReceipt(theme: resolvedTheme)
+        }
+        .overlay(alignment: .bottom) {
+            shellFloatingControlLane(theme: resolvedTheme)
+                .padding(.bottom, resolvedTheme.spacing.xxxl + resolvedTheme.spacing.xl)
         }
         .background(resolvedTheme.shell.canvasGradient.ignoresSafeArea())
         .onAppear {
@@ -291,8 +294,6 @@ struct AmbitionsRootView: View {
                 .frame(width: 52, height: 52)
         }
         .buttonStyle(AmbitionPressableButtonStyle(state: .selected))
-        .padding(.trailing, theme.spacing.md)
-        .padding(.bottom, theme.spacing.xxl + theme.spacing.xl)
         .accessibilityElement()
         .accessibilityLabel("Add something")
         .accessibilityHint("Opens the global quick action surface.")
@@ -301,7 +302,32 @@ struct AmbitionsRootView: View {
     }
 
     @ViewBuilder
-    private var shellContinuityReceipt: some View {
+    private func shellFloatingControlLane(theme: AmbitionTheme) -> some View {
+        HStack {
+            Spacer()
+            shellGlobalEntryButton(theme: theme)
+        }
+        .padding(.horizontal, theme.spacing.md)
+        .padding(.top, theme.spacing.xs)
+        .padding(.bottom, theme.spacing.sm)
+        .background(
+            LinearGradient(
+                colors: [
+                    theme.colors.canvas.opacity(0.0),
+                    theme.colors.canvasElevated.opacity(theme.mode == .dark ? 0.94 : 0.98)
+                ],
+                startPoint: .top,
+                endPoint: .bottom
+            )
+            .allowsHitTesting(false)
+        )
+        .accessibilityElement(children: .contain)
+        .accessibilityLabel("Global action lane")
+        .accessibilityIdentifier("shell.floating-control-lane")
+    }
+
+    @ViewBuilder
+    private func shellContinuityReceipt(theme: AmbitionTheme) -> some View {
         if let receipt = navigation.continuityReceipt {
             AmbitionActionClosureTray(
                 title: receipt.title,
@@ -312,7 +338,7 @@ struct AmbitionsRootView: View {
             }
             .frame(maxWidth: dynamicTypeSize.isAccessibilitySize ? 360 : 310, alignment: .leading)
             .padding(.trailing, 20)
-            .padding(.bottom, 152)
+            .padding(.bottom, theme.spacing.xxxl + theme.spacing.xxl)
             .accessibilityIdentifier("shell.continuity-receipt")
         }
     }
@@ -435,7 +461,7 @@ struct AmbitionsRootView: View {
     private func configureTabBarAppearance(with theme: AmbitionTheme) {
         #if canImport(UIKit)
         let appearance = UITabBarAppearance()
-        appearance.configureWithTransparentBackground()
+        appearance.configureWithOpaqueBackground()
         appearance.backgroundColor = UIColor(theme.colors.canvasElevated)
         appearance.shadowColor = UIColor(theme.shell.divider)
 

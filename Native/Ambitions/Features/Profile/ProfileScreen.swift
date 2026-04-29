@@ -9,6 +9,7 @@ struct ProfileScreen: View {
     @Environment(\.ambitionTheme) private var theme
     @Environment(\.accessibilityReduceMotion) private var reduceMotion
     @State private var viewModel: ProfileViewModel
+    @State private var activeDetail: ProfileRootDetail?
     private let showsNavigationChrome: Bool
 
     @MainActor
@@ -33,92 +34,9 @@ struct ProfileScreen: View {
                     }
                     .transition(.ambitionPanel)
                 case let .loaded(dashboard):
-                    ProfileHeroCard(hero: dashboard.hero)
-
-                    ProfileSystemCenterCard(systemCenter: dashboard.systemCenter)
-
-                    ProfileControlRoomCard(controlRoom: dashboard.controlRoom)
-
-                    ProfileTrustCenterCard(
-                        trustCenter: dashboard.trustCenter,
-                        notificationActionTitle: dashboard.notificationAuthorization.actionTitle,
-                        onEnableNotifications: requestNotificationAuthorization
-                    )
-
-                    ProfileConstitutionCard(constitution: dashboard.constitution)
-
-                    ProfileMemoryControlsCard(memoryControls: dashboard.memoryControls)
-
-                    ProfileSectionCard(
-                        eyebrow: "Correction",
-                        section: ProfileSectionGroup(
-                            title: dashboard.assumptionCorrections.title,
-                            subtitle: dashboard.assumptionCorrections.subtitle,
-                            items: dashboard.assumptionCorrections.items,
-                            footer: dashboard.assumptionCorrections.footer
-                        ),
-                        accessibilityIdentifier: "profile.corrections-card"
-                    )
-
-                    ProfileAutomationBoundaryCard(boundary: dashboard.automationBoundary)
-
-                    ProfileSectionCard(
-                        eyebrow: "Receipts",
-                        section: ProfileSectionGroup(
-                            title: dashboard.receiptAudit.title,
-                            subtitle: dashboard.receiptAudit.subtitle,
-                            items: dashboard.receiptAudit.items,
-                            footer: dashboard.receiptAudit.footer
-                        ),
-                        accessibilityIdentifier: "profile.receipts-card"
-                    )
-
-                    ProfileReviewsCard(reviews: dashboard.reviews)
-
-                    ProfileAppearanceStudioCard(
-                        studio: dashboard.appearanceStudio,
-                        appearancePreference: $viewModel.appearancePreference,
-                        accentFamily: $viewModel.accentFamily,
-                        isSaving: viewModel.isSaving,
-                        hasUnsavedChanges: viewModel.hasUnsavedChanges,
-                        onSave: savePreferences
-                    )
-
-                    ProfileDefaultsCard(
-                        section: dashboard.defaultsSection,
-                        preferredTab: $viewModel.preferredTab,
-                        reviewCadenceDays: $viewModel.reviewCadenceDays
-                    )
-
-                    if let permissionState = notificationPermissionState(for: dashboard) {
-                        DegradedStateCard(
-                            state: permissionState,
-                            primaryAccessibilityIdentifier: "profile.notification-permission.primary",
-                            secondaryAccessibilityIdentifier: "profile.notification-permission.secondary",
-                            onPrimaryAction: {
-                                if dashboard.notificationAuthorization.canRequestAuthorization {
-                                    requestNotificationAuthorization()
-                                }
-                            },
-                            onSecondaryAction: {
-                                openSystemSettingsIfAvailable()
-                            }
-                        )
-                        .transition(.ambitionPanel)
-                    }
-
-                    ProfileContextVaultCard(contextVault: dashboard.contextVault)
-
-                    ProfileSectionCard(
-                        eyebrow: "System configuration",
-                        section: dashboard.integrationsSection,
-                        accessibilityIdentifier: "profile.integrations-card"
-                    )
-
-                    ProfileSectionCard(
-                        eyebrow: "Person-level",
-                        section: dashboard.accountSection,
-                        accessibilityIdentifier: "profile.account-card"
+                    ProfileSettingsRootView(
+                        dashboard: dashboard,
+                        onOpenDetail: { activeDetail = $0 }
                     )
                 }
             }
@@ -132,6 +50,24 @@ struct ProfileScreen: View {
         }
         .accessibilityIdentifier("profile.screen")
         .animation(theme.motion.animation(reduceMotion: reduceMotion, emphasis: true), value: viewModel.stateKey)
+        .sheet(item: $activeDetail) { detail in
+            ProfileRootDetailSheet(
+                detail: detail,
+                dashboard: viewModel.loadedDashboard,
+                appearancePreference: $viewModel.appearancePreference,
+                accentFamily: $viewModel.accentFamily,
+                preferredTab: $viewModel.preferredTab,
+                reviewCadenceDays: $viewModel.reviewCadenceDays,
+                isSaving: viewModel.isSaving,
+                hasUnsavedChanges: viewModel.hasUnsavedChanges,
+                onSavePreferences: savePreferences,
+                onEnableNotifications: requestNotificationAuthorization,
+                notificationPermissionState: viewModel.loadedDashboard.flatMap(notificationPermissionState),
+                onOpenSystemSettings: openSystemSettingsIfAvailable
+            )
+            .presentationDetents([.large])
+            .presentationDragIndicator(.visible)
+        }
         .task {
             await viewModel.load(using: container.profileService)
             syncAppearanceFromLoadedDashboard()
@@ -188,6 +124,315 @@ struct ProfileScreen: View {
             preconditionFailure("App container must be injected.")
         }
         return appContainer
+    }
+}
+
+private enum ProfileRootDetail: String, Identifiable {
+    case profile
+    case personalization
+    case appearance
+    case whatAmbitionsKnows
+    case trustCenter
+    case receiptsHistory
+    case corrections
+    case reviews
+    case proof
+    case archive
+    case notifications
+    case integrations
+    case widgets
+    case exportImport
+    case accessibility
+    case support
+    case about
+
+    var id: String { rawValue }
+
+    var title: String {
+        switch self {
+        case .profile: "Profile"
+        case .personalization: "Personalization"
+        case .appearance: "Appearance"
+        case .whatAmbitionsKnows: "What Ambitions Knows"
+        case .trustCenter: "Trust Center"
+        case .receiptsHistory: "Receipts & History"
+        case .corrections: "Corrections"
+        case .reviews: "Reviews"
+        case .proof: "Proof"
+        case .archive: "Archive / Completed"
+        case .notifications: "Notifications"
+        case .integrations: "Integrations"
+        case .widgets: "Widgets / Live Activities / Shortcuts"
+        case .exportImport: "Export / Import"
+        case .accessibility: "Accessibility"
+        case .support: "Help / Support"
+        case .about: "About"
+        }
+    }
+}
+
+private struct ProfileSettingsRootView: View {
+    @Environment(\.ambitionTheme) private var theme
+
+    let dashboard: ProfileDashboard
+    let onOpenDetail: (ProfileRootDetail) -> Void
+
+    var body: some View {
+        VStack(alignment: .leading, spacing: theme.spacing.lg) {
+            VStack(alignment: .leading, spacing: theme.spacing.xs) {
+                Text("You")
+                    .font(theme.typography.heroDisplay)
+                    .foregroundStyle(theme.colors.textPrimary)
+                    .lineLimit(1)
+                    .accessibilityAddTraits(.isHeader)
+
+                Text("Your settings, memory, and trust controls.")
+                    .font(theme.typography.bodySecondary)
+                    .foregroundStyle(theme.colors.textSecondary)
+                    .lineLimit(1)
+                    .truncationMode(.tail)
+            }
+            .accessibilityIdentifier("you.root-title")
+
+            ProfileCompactSystemCard(dashboard: dashboard)
+
+            GroupedNavigationList {
+                ForEach(dashboard.systemCenter.sections) { section in
+                    GroupedNavigationSection(title: section.title, footer: section.footer) {
+                        ForEach(section.items) { item in
+                            GroupedDisclosureNavigationRow(
+                                title: item.title,
+                                subtitle: item.subtitle,
+                                systemImage: item.icon,
+                                badge: GroupedNavigationBadge(item.statusLabel, state: item.semanticState),
+                                accessibilityIdentifier: "you.row.\(item.id)",
+                                accessibilityLabel: item.title,
+                                accessibilityValue: item.statusLabel,
+                                accessibilityHint: item.accessibilityHint
+                            ) {
+                                onOpenDetail(detail(for: item))
+                            }
+                        }
+                    }
+                }
+            }
+            .accessibilityIdentifier("you.grouped-navigation-root")
+        }
+        .accessibilityIdentifier("you.root")
+    }
+
+    private func detail(for item: ProfileSystemCenterItem) -> ProfileRootDetail {
+        switch item.id {
+        case "profile": .profile
+        case "personalization": .personalization
+        case "appearance": .appearance
+        case "what-ambitions-knows": .whatAmbitionsKnows
+        case "trust-center": .trustCenter
+        case "receipts-history": .receiptsHistory
+        case "corrections": .corrections
+        case "reviews": .reviews
+        case "proof": .proof
+        case "archive-completed": .archive
+        case "notifications": .notifications
+        case "integrations": .integrations
+        case "widgets-live-activities-shortcuts": .widgets
+        case "export-import": .exportImport
+        case "accessibility": .accessibility
+        case "help-support": .support
+        case "about": .about
+        default: .profile
+        }
+    }
+}
+
+private struct ProfileCompactSystemCard: View {
+    @Environment(\.ambitionTheme) private var theme
+
+    let dashboard: ProfileDashboard
+
+    var body: some View {
+        AppCard {
+            HStack(alignment: .center, spacing: theme.spacing.sm) {
+                Circle()
+                    .fill(theme.shell.activeTabBackground)
+                    .overlay(
+                        Text("A")
+                            .font(theme.typography.caption)
+                            .foregroundStyle(theme.shell.activeTabForeground)
+                    )
+                    .frame(width: 42, height: 42)
+                    .accessibilityHidden(true)
+
+                VStack(alignment: .leading, spacing: theme.spacing.xxxs) {
+                    Text(dashboard.hero.title)
+                        .font(theme.typography.bodyEmphasized)
+                        .foregroundStyle(theme.colors.textPrimary)
+                        .lineLimit(1)
+                    Text(dashboard.hero.dominantTruth)
+                        .font(theme.typography.caption)
+                        .foregroundStyle(theme.colors.textSecondary)
+                        .lineLimit(1)
+                        .truncationMode(.tail)
+                }
+
+                Spacer(minLength: theme.spacing.xs)
+
+                Text(dashboard.preferences.appearancePreference.title)
+                    .font(theme.typography.micro)
+                    .foregroundStyle(theme.colors.textPrimary)
+                    .lineLimit(1)
+                    .padding(.horizontal, theme.spacing.xs)
+                    .padding(.vertical, theme.spacing.xxxs)
+                    .background(Capsule().fill(theme.colors.surfaceOverlay))
+                    .overlay(Capsule().stroke(theme.colors.strokeSubtle, lineWidth: 1))
+            }
+            .padding(theme.spacing.sm)
+        }
+        .accessibilityIdentifier("you.compact-profile-card")
+    }
+}
+
+private struct ProfileRootDetailSheet: View {
+    @Environment(\.ambitionTheme) private var theme
+    @Environment(\.dismiss) private var dismiss
+
+    let detail: ProfileRootDetail
+    let dashboard: ProfileDashboard?
+    @Binding var appearancePreference: AppAppearancePreference
+    @Binding var accentFamily: AmbitionAccentFamily
+    @Binding var preferredTab: AppTab
+    @Binding var reviewCadenceDays: Int
+    let isSaving: Bool
+    let hasUnsavedChanges: Bool
+    let onSavePreferences: () -> Void
+    let onEnableNotifications: () -> Void
+    let notificationPermissionState: DegradedStatePresentation?
+    let onOpenSystemSettings: () -> Void
+
+    var body: some View {
+        NavigationStack {
+            ScrollView {
+                LazyVStack(alignment: .leading, spacing: theme.spacing.lg) {
+                    if let dashboard {
+                        detailContent(for: dashboard)
+                    } else {
+                        AsyncStateCard(.loading(lines: 6))
+                    }
+                }
+                .padding(.horizontal, theme.spacing.lg)
+                .padding(.vertical, theme.spacing.md)
+            }
+            .scrollIndicators(.hidden)
+            .navigationTitle(detail.title)
+            .toolbar {
+                ToolbarItem(placement: .topBarTrailing) {
+                    Button("Done") {
+                        dismiss()
+                    }
+                }
+            }
+        }
+    }
+
+    @ViewBuilder
+    private func detailContent(for dashboard: ProfileDashboard) -> some View {
+        switch detail {
+        case .profile:
+            ProfileDefaultsCard(
+                section: dashboard.defaultsSection,
+                preferredTab: $preferredTab,
+                reviewCadenceDays: $reviewCadenceDays
+            )
+            ProfileSectionCard(eyebrow: "About you", section: dashboard.accountSection, accessibilityIdentifier: "profile.account-card")
+        case .personalization:
+            ProfileConstitutionCard(constitution: dashboard.constitution)
+        case .appearance:
+            ProfileAppearanceStudioCard(
+                studio: dashboard.appearanceStudio,
+                appearancePreference: $appearancePreference,
+                accentFamily: $accentFamily,
+                isSaving: isSaving,
+                hasUnsavedChanges: hasUnsavedChanges,
+                onSave: onSavePreferences
+            )
+        case .whatAmbitionsKnows:
+            ProfileMemoryControlsCard(memoryControls: dashboard.memoryControls)
+            ProfileContextVaultCard(contextVault: dashboard.contextVault)
+        case .trustCenter:
+            ProfileTrustCenterCard(
+                trustCenter: dashboard.trustCenter,
+                notificationActionTitle: dashboard.notificationAuthorization.actionTitle,
+                onEnableNotifications: onEnableNotifications
+            )
+            ProfileAutomationBoundaryCard(boundary: dashboard.automationBoundary)
+        case .receiptsHistory:
+            ProfileSectionCard(
+                eyebrow: "Receipts",
+                section: ProfileSectionGroup(
+                    title: dashboard.receiptAudit.title,
+                    subtitle: dashboard.receiptAudit.subtitle,
+                    items: dashboard.receiptAudit.items,
+                    footer: dashboard.receiptAudit.footer
+                ),
+                accessibilityIdentifier: "profile.receipts-card"
+            )
+        case .corrections:
+            ProfileSectionCard(
+                eyebrow: "Corrections",
+                section: ProfileSectionGroup(
+                    title: dashboard.assumptionCorrections.title,
+                    subtitle: dashboard.assumptionCorrections.subtitle,
+                    items: dashboard.assumptionCorrections.items,
+                    footer: dashboard.assumptionCorrections.footer
+                ),
+                accessibilityIdentifier: "profile.corrections-card"
+            )
+        case .reviews:
+            ProfileReviewsCard(reviews: dashboard.reviews)
+        case .proof:
+            ProfileSectionCard(
+                eyebrow: "Proof",
+                section: ProfileSectionGroup(
+                    title: "Proof",
+                    subtitle: "Progress evidence stays local and feeds reviews.",
+                    items: dashboard.reviews.projection.progressLines.map {
+                        SettingsItem(id: "proof-\($0.id)", title: $0.title, subtitle: $0.detail, icon: "checkmark.seal", valueLabel: $0.sourceLabel)
+                    },
+                    footer: "Proof remains reviewable before it is reused."
+                ),
+                accessibilityIdentifier: "profile.proof-card"
+            )
+        case .archive:
+            ProfileSectionCard(eyebrow: "Archive", section: dashboard.accountSection, accessibilityIdentifier: "profile.archive-card")
+        case .notifications:
+            if let notificationPermissionState {
+                DegradedStateCard(
+                    state: notificationPermissionState,
+                    primaryAccessibilityIdentifier: "profile.notification-permission.primary",
+                    secondaryAccessibilityIdentifier: "profile.notification-permission.secondary",
+                    onPrimaryAction: onEnableNotifications,
+                    onSecondaryAction: onOpenSystemSettings
+                )
+            }
+            ProfileSectionCard(eyebrow: "Notifications", section: dashboard.integrationsSection, accessibilityIdentifier: "profile.notifications-card")
+        case .integrations, .widgets, .exportImport:
+            ProfileSectionCard(eyebrow: "System configuration", section: dashboard.integrationsSection, accessibilityIdentifier: "profile.integrations-card")
+        case .accessibility:
+            ProfileSectionCard(
+                eyebrow: "Accessibility",
+                section: ProfileSectionGroup(
+                    title: "Accessibility",
+                    subtitle: "Claims stay locked until manual verification is recorded.",
+                    items: dashboard.trustCenter.items.filter { $0.title.localizedCaseInsensitiveContains("Accessibility") },
+                    footer: "This is an internal evidence status, not a public accessibility claim."
+                ),
+                accessibilityIdentifier: "profile.accessibility-card"
+            )
+        case .support:
+            ProfileSectionCard(eyebrow: "Help", section: dashboard.accountSection, accessibilityIdentifier: "profile.support-card")
+        case .about:
+            ProfileSectionCard(eyebrow: "About", section: dashboard.accountSection, accessibilityIdentifier: "profile.about-card")
+        }
     }
 }
 

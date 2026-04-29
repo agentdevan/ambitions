@@ -426,7 +426,7 @@ public extension AmbitionTheme {
             celebrationGradient: materials.celebrationGradient,
             topStrokeOpacity: mode == .dark ? 0.28 : 0.16,
             bottomStrokeOpacity: mode == .dark ? 0.10 : 0.08,
-            backgroundBlurOpacity: mode == .dark ? 0.84 : 0.96
+            backgroundBlurOpacity: 1.0
         )
         let shell = shellTokens(for: mode, colors: colors, semanticColors: semanticColors, materials: materials, accent: accent)
         let glow = Glow(
@@ -641,13 +641,13 @@ private extension AmbitionTheme {
                 canvasSubtle: Color(red: 0.155, green: 0.150, blue: 0.158),
                 surfacePrimary: Color(red: 0.135, green: 0.135, blue: 0.155),
                 surfaceSecondary: Color(red: 0.170, green: 0.165, blue: 0.180),
-                surfaceOverlay: Color.white.opacity(0.08),
+                surfaceOverlay: Color.white.opacity(0.13),
                 textPrimary: Color(red: 0.95, green: 0.94, blue: 0.92),
-                textSecondary: Color(red: 0.76, green: 0.76, blue: 0.73),
-                textTertiary: Color(red: 0.58, green: 0.58, blue: 0.56),
+                textSecondary: Color(red: 0.84, green: 0.84, blue: 0.80),
+                textTertiary: Color(red: 0.68, green: 0.68, blue: 0.65),
                 textInverse: Color(red: 0.10, green: 0.11, blue: 0.14),
-                strokeSubtle: Color.white.opacity(0.08),
-                strokeStrong: Color.white.opacity(0.16),
+                strokeSubtle: Color.white.opacity(0.14),
+                strokeStrong: Color.white.opacity(0.24),
                 accentPrimary: accent.primary,
                 accentSecondary: accent.secondary,
                 accentWarm: accent.warm,
@@ -665,13 +665,13 @@ private extension AmbitionTheme {
                 canvasSubtle: Color(red: 0.925, green: 0.910, blue: 0.885),
                 surfacePrimary: Color(red: 0.990, green: 0.982, blue: 0.962),
                 surfaceSecondary: Color(red: 0.950, green: 0.936, blue: 0.912),
-                surfaceOverlay: Color.black.opacity(0.03),
+                surfaceOverlay: Color.black.opacity(0.055),
                 textPrimary: Color(red: 0.10, green: 0.11, blue: 0.14),
-                textSecondary: Color(red: 0.31, green: 0.33, blue: 0.37),
-                textTertiary: Color(red: 0.48, green: 0.49, blue: 0.52),
+                textSecondary: Color(red: 0.24, green: 0.26, blue: 0.30),
+                textTertiary: Color(red: 0.38, green: 0.40, blue: 0.44),
                 textInverse: Color.white,
-                strokeSubtle: Color.black.opacity(0.08),
-                strokeStrong: Color.black.opacity(0.14),
+                strokeSubtle: Color.black.opacity(0.12),
+                strokeStrong: Color.black.opacity(0.20),
                 accentPrimary: accent.primary,
                 accentSecondary: accent.secondary,
                 accentWarm: accent.warm,
@@ -796,7 +796,14 @@ private extension AmbitionTheme {
             return .init(
                 canvasGradient: materials.canvasGradient,
                 elevatedMaterial: materials.elevatedGradient,
-                headerMaterial: materials.overlayGradient,
+                headerMaterial: LinearGradient(
+                    colors: [
+                        Color(red: 0.130, green: 0.138, blue: 0.166),
+                        Color(red: 0.082, green: 0.090, blue: 0.116)
+                    ],
+                    startPoint: .topLeading,
+                    endPoint: .bottomTrailing
+                ),
                 bottomBarMaterial: LinearGradient(
                     colors: [
                         Color(red: 0.088, green: 0.096, blue: 0.122).opacity(0.98),
@@ -809,7 +816,7 @@ private extension AmbitionTheme {
                 receiptMaterial: materials.elevatedGradient,
                 activeTabForeground: accent.warm,
                 activeTabBackground: accent.warm.opacity(0.18),
-                inactiveTabForeground: Color(red: 0.58, green: 0.66, blue: 0.74),
+                inactiveTabForeground: Color(red: 0.72, green: 0.78, blue: 0.84),
                 controlForeground: colors.textPrimary,
                 controlBackground: colors.surfaceOverlay,
                 divider: colors.strokeSubtle,
@@ -827,7 +834,14 @@ private extension AmbitionTheme {
             return .init(
                 canvasGradient: materials.canvasGradient,
                 elevatedMaterial: materials.elevatedGradient,
-                headerMaterial: materials.overlayGradient,
+                headerMaterial: LinearGradient(
+                    colors: [
+                        Color(red: 1.000, green: 0.992, blue: 0.972),
+                        Color(red: 0.955, green: 0.940, blue: 0.912)
+                    ],
+                    startPoint: .topLeading,
+                    endPoint: .bottomTrailing
+                ),
                 bottomBarMaterial: LinearGradient(
                     colors: [
                         Color(red: 0.990, green: 0.982, blue: 0.962).opacity(0.98),

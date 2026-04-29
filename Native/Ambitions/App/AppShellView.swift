@@ -51,7 +51,7 @@ enum AppShellHeaderPosture: String, Sendable {
     var continuityMessage: String {
         switch self {
         case .execution:
-            "Today keeps one protected move in view."
+            "Today keeps one important move in view."
         case .direction:
             "Goals keeps direction connected to the next step."
         case .shaping:
@@ -128,71 +128,50 @@ private struct AppShellHeaderRail: View {
     var body: some View {
         VStack(spacing: 0) {
             HStack(alignment: .center, spacing: theme.spacing.md) {
-                HStack(alignment: .center, spacing: theme.spacing.sm) {
-                    if let onBack {
-                        Button(action: onBack) {
-                            Image(systemName: "chevron.left")
-                                .font(.system(size: theme.icon.smallSize, weight: .semibold))
-                                .foregroundStyle(theme.colors.textPrimary)
-                                .frame(width: 36, height: 36)
-                                .background(
-                                    Circle()
-                                        .fill(theme.colors.surfaceOverlay)
-                                )
-                                .overlay(
-                                    Circle()
-                                        .stroke(theme.colors.strokeSubtle, lineWidth: 1)
-                                )
-                        }
-                        .buttonStyle(.plain)
-                        .accessibilityIdentifier(backButtonAccessibilityIdentifier ?? "shell.header.back-button")
-                        .accessibilityLabel("Back")
-                    } else {
-                        Circle()
-                            .fill(theme.shell.activeTabBackground)
-                            .overlay(
-                                Text("A")
-                                    .font(theme.typography.caption)
-                                    .foregroundStyle(theme.shell.activeTabForeground)
-                            )
-                            .overlay(
-                                Circle()
-                                    .stroke(theme.shell.activeTabForeground.opacity(0.34), lineWidth: 1)
-                            )
-                            .frame(width: 36, height: 36)
-                            .accessibilityHidden(true)
-                    }
-
-                    VStack(alignment: .leading, spacing: theme.spacing.xxxs) {
-                        Text(title)
-                            .font(theme.typography.section)
+                if let onBack {
+                    Button(action: onBack) {
+                        Image(systemName: "chevron.left")
+                            .font(.system(size: theme.icon.smallSize, weight: .semibold))
                             .foregroundStyle(theme.colors.textPrimary)
-                            .accessibilityIdentifier("shell.header.title")
-
-                        if dynamicTypeSize.isAccessibilitySize {
-                            HStack(alignment: .firstTextBaseline, spacing: theme.spacing.xs) {
-                                Text("\(posture.modeLens.title). \(subtitle ?? posture.title)")
-                                    .font(theme.typography.caption)
-                                    .foregroundStyle(theme.colors.textSecondary)
-                                    .lineLimit(2)
-                                    .minimumScaleFactor(0.8)
-                                    .accessibilityIdentifier("shell.header.subtitle")
-                            }
-                        } else {
-                            HStack(spacing: theme.spacing.xs) {
-                                AmbitionModeLensPill(posture.modeLens)
-                                if let subtitle {
-                                    Text(subtitle)
-                                        .font(theme.typography.caption)
-                                        .foregroundStyle(theme.colors.textSecondary)
-                                        .lineLimit(1)
-                                        .accessibilityIdentifier("shell.header.subtitle")
-                                }
-                                AmbitionAmbientStatusOrb(posture.ambientStatus, showsLabel: false)
-                            }
-                        }
+                            .frame(width: 38, height: 38)
+                            .background(Circle().fill(theme.colors.surfaceOverlay))
+                            .overlay(Circle().stroke(theme.colors.strokeSubtle, lineWidth: 1))
                     }
+                    .buttonStyle(.plain)
+                    .accessibilityIdentifier(backButtonAccessibilityIdentifier ?? "shell.header.back-button")
+                    .accessibilityLabel("Back")
+                } else {
+                    Circle()
+                        .fill(theme.shell.activeTabBackground)
+                        .overlay(
+                            Text("A")
+                                .font(theme.typography.caption)
+                                .foregroundStyle(theme.shell.activeTabForeground)
+                        )
+                        .overlay(
+                            Circle()
+                                .stroke(theme.shell.activeTabForeground.opacity(0.34), lineWidth: 1)
+                        )
+                        .frame(width: 38, height: 38)
+                        .accessibilityHidden(true)
                 }
+
+                VStack(alignment: .leading, spacing: theme.spacing.xxxs) {
+                    Text(title)
+                        .font(theme.typography.section)
+                        .foregroundStyle(theme.colors.textPrimary)
+                        .lineLimit(1)
+                        .minimumScaleFactor(0.82)
+                        .accessibilityIdentifier("shell.header.title")
+
+                    Text(headerSubtitle)
+                        .font(theme.typography.caption)
+                        .foregroundStyle(theme.colors.textSecondary)
+                        .lineLimit(dynamicTypeSize.isAccessibilitySize ? 2 : 1)
+                        .truncationMode(.tail)
+                        .accessibilityIdentifier("shell.header.subtitle")
+                }
+                .layoutPriority(2)
 
                 Spacer(minLength: theme.spacing.sm)
 
@@ -209,11 +188,12 @@ private struct AppShellHeaderRail: View {
                         .accessibilityLabel(button.title)
                     }
                 }
+                .layoutPriority(1)
             }
             .padding(.horizontal, theme.spacing.lg)
             .padding(.top, theme.spacing.sm)
             .padding(.bottom, theme.spacing.sm)
-            .background(theme.shell.headerMaterial.opacity(theme.surfaces.backgroundBlurOpacity))
+            .background(theme.shell.headerMaterial)
 
             AmbitionContinuityRibbon(
                 message: posture.continuityMessage,
@@ -227,7 +207,16 @@ private struct AppShellHeaderRail: View {
                 .fill(theme.shell.divider)
                 .frame(height: 1)
         }
-        .background(theme.shell.headerMaterial.opacity(theme.surfaces.backgroundBlurOpacity))
+        .background(theme.shell.headerMaterial)
+        .shadow(color: theme.depth.resting.color, radius: theme.mode == .dark ? 14 : 10, x: 0, y: 6)
+        .accessibilityElement(children: .contain)
+        .accessibilityLabel("Shell header")
+        .accessibilityIdentifier("shell.header.rail")
+    }
+
+    private var headerSubtitle: String {
+        guard let subtitle else { return posture.title }
+        return "\(subtitle) · \(posture.modeLens.title)"
     }
 }
 

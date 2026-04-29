@@ -111,6 +111,7 @@ public struct GroupedNavigationRow: View {
     private let systemImage: String?
     private let trailingValue: String?
     private let badge: GroupedNavigationBadge?
+    private let rowAccessibilityIdentifier: String?
     private let accessibilityLabel: String?
     private let accessibilityValue: String?
     private let accessibilityHint: String?
@@ -122,6 +123,7 @@ public struct GroupedNavigationRow: View {
         systemImage: String? = nil,
         trailingValue: String? = nil,
         badge: GroupedNavigationBadge? = nil,
+        accessibilityIdentifier: String? = nil,
         accessibilityLabel: String? = nil,
         accessibilityValue: String? = nil,
         accessibilityHint: String? = nil,
@@ -132,6 +134,7 @@ public struct GroupedNavigationRow: View {
         self.systemImage = systemImage
         self.trailingValue = trailingValue
         self.badge = badge
+        self.rowAccessibilityIdentifier = accessibilityIdentifier
         self.accessibilityLabel = accessibilityLabel
         self.accessibilityValue = accessibilityValue
         self.accessibilityHint = accessibilityHint
@@ -155,6 +158,7 @@ public struct GroupedNavigationRow: View {
             value: accessibilityValue ?? accessibilityValueFallback,
             hint: accessibilityHint
         )
+        .groupedNavigationIdentifier(rowAccessibilityIdentifier)
     }
 
     private var accessibilityValueFallback: String? {
@@ -168,6 +172,7 @@ public struct GroupedDisclosureNavigationRow: View {
     private let systemImage: String?
     private let trailingValue: String?
     private let badge: GroupedNavigationBadge?
+    private let rowAccessibilityIdentifier: String?
     private let accessibilityLabel: String?
     private let accessibilityValue: String?
     private let accessibilityHint: String?
@@ -179,6 +184,7 @@ public struct GroupedDisclosureNavigationRow: View {
         systemImage: String? = nil,
         trailingValue: String? = nil,
         badge: GroupedNavigationBadge? = nil,
+        accessibilityIdentifier: String? = nil,
         accessibilityLabel: String? = nil,
         accessibilityValue: String? = nil,
         accessibilityHint: String? = nil,
@@ -189,6 +195,7 @@ public struct GroupedDisclosureNavigationRow: View {
         self.systemImage = systemImage
         self.trailingValue = trailingValue
         self.badge = badge
+        self.rowAccessibilityIdentifier = accessibilityIdentifier
         self.accessibilityLabel = accessibilityLabel
         self.accessibilityValue = accessibilityValue
         self.accessibilityHint = accessibilityHint
@@ -212,6 +219,7 @@ public struct GroupedDisclosureNavigationRow: View {
             value: accessibilityValue ?? accessibilityValueFallback,
             hint: accessibilityHint ?? "Opens details."
         )
+        .groupedNavigationIdentifier(rowAccessibilityIdentifier)
     }
 
     private var accessibilityValueFallback: String? {
@@ -389,6 +397,7 @@ private enum GroupedNavigationColorRole {
 
 private struct GroupedNavigationRowBody<Trailing: View>: View {
     @Environment(\.ambitionTheme) private var theme
+    @Environment(\.dynamicTypeSize) private var dynamicTypeSize
 
     private let title: String
     private let subtitle: String?
@@ -423,35 +432,7 @@ private struct GroupedNavigationRowBody<Trailing: View>: View {
     }
 
     var body: some View {
-        HStack(alignment: .center, spacing: theme.spacing.sm) {
-            if let systemImage {
-                Image(systemName: systemImage)
-                    .font(.system(size: theme.icon.mediumSize, weight: theme.icon.symbolWeight))
-                    .foregroundStyle(color(for: iconColorRole))
-                    .frame(width: 26, height: 26)
-                    .accessibilityHidden(true)
-            }
-
-            VStack(alignment: .leading, spacing: theme.spacing.xxxs) {
-                Text(title)
-                    .font(theme.typography.bodyEmphasized)
-                    .foregroundStyle(color(for: titleColorRole))
-                    .lineLimit(nil)
-                    .fixedSize(horizontal: false, vertical: true)
-
-                if let subtitle {
-                    Text(subtitle)
-                        .font(theme.typography.caption)
-                        .foregroundStyle(theme.colors.textSecondary)
-                        .lineLimit(nil)
-                        .fixedSize(horizontal: false, vertical: true)
-                }
-            }
-
-            Spacer(minLength: theme.spacing.xs)
-
-            trailingContent
-        }
+        content
         .padding(.horizontal, theme.spacing.md)
         .padding(.vertical, theme.spacing.xs)
         .frame(maxWidth: .infinity, minHeight: max(theme.panel.minimumTapTarget, 56), alignment: .leading)
@@ -459,7 +440,72 @@ private struct GroupedNavigationRowBody<Trailing: View>: View {
     }
 
     @ViewBuilder
-    private var trailingContent: some View {
+    private var content: some View {
+        if dynamicTypeSize.isAccessibilitySize {
+            VStack(alignment: .leading, spacing: theme.spacing.xs) {
+                HStack(alignment: .top, spacing: theme.spacing.sm) {
+                    iconView
+                    textColumn
+                    Spacer(minLength: theme.spacing.xs)
+                    if showsChevron {
+                        chevronView
+                    }
+                }
+
+                if hasTrailingContent {
+                    HStack {
+                        Spacer()
+                        trailingContent(showsChevron: false)
+                    }
+                    .padding(.leading, systemImage == nil ? 0 : 42)
+                }
+            }
+        } else {
+            HStack(alignment: .center, spacing: theme.spacing.sm) {
+                iconView
+                textColumn
+                    .layoutPriority(3)
+                Spacer(minLength: theme.spacing.xs)
+                trailingContent(showsChevron: showsChevron)
+                    .frame(maxWidth: 132, alignment: .trailing)
+                    .layoutPriority(1)
+            }
+        }
+    }
+
+    @ViewBuilder
+    private var iconView: some View {
+        if let systemImage {
+            Image(systemName: systemImage)
+                .font(.system(size: theme.icon.mediumSize, weight: theme.icon.symbolWeight))
+                .foregroundStyle(color(for: iconColorRole))
+                .frame(width: 30, height: 30)
+                .accessibilityHidden(true)
+        }
+    }
+
+    private var textColumn: some View {
+        VStack(alignment: .leading, spacing: theme.spacing.xxxs) {
+            Text(title)
+                .font(theme.typography.bodyEmphasized)
+                .foregroundStyle(color(for: titleColorRole))
+                .lineLimit(dynamicTypeSize.isAccessibilitySize ? 2 : 1)
+                .truncationMode(.tail)
+                .allowsTightening(true)
+
+            if let subtitle {
+                Text(subtitle)
+                    .font(theme.typography.caption)
+                    .foregroundStyle(theme.colors.textSecondary)
+                    .lineLimit(dynamicTypeSize.isAccessibilitySize ? 2 : 1)
+                    .truncationMode(.tail)
+                    .allowsTightening(true)
+            }
+        }
+    }
+
+    @ViewBuilder
+    private func trailingContent(showsChevron: Bool) -> some View {
         HStack(spacing: theme.spacing.xs) {
             trailing
 
@@ -467,9 +513,9 @@ private struct GroupedNavigationRowBody<Trailing: View>: View {
                 Text(trailingValue)
                     .font(theme.typography.caption)
                     .foregroundStyle(theme.colors.textSecondary)
-                    .lineLimit(2)
+                    .lineLimit(dynamicTypeSize.isAccessibilitySize ? 2 : 1)
                     .multilineTextAlignment(.trailing)
-                    .fixedSize(horizontal: false, vertical: true)
+                    .truncationMode(.tail)
             }
 
             if let badge {
@@ -477,12 +523,21 @@ private struct GroupedNavigationRowBody<Trailing: View>: View {
             }
 
             if showsChevron {
-                Image(systemName: "chevron.right")
-                    .font(.system(size: 12, weight: .semibold))
-                    .foregroundStyle(theme.colors.textTertiary)
-                    .accessibilityHidden(true)
+                chevronView
             }
         }
+    }
+
+    private var chevronView: some View {
+        Image(systemName: "chevron.right")
+            .font(.system(size: 12, weight: .semibold))
+            .foregroundStyle(theme.colors.textTertiary)
+            .frame(width: 10)
+            .accessibilityHidden(true)
+    }
+
+    private var hasTrailingContent: Bool {
+        trailingValue != nil || badge != nil
     }
 
     private func color(for role: GroupedNavigationColorRole) -> Color {
@@ -515,11 +570,13 @@ private struct GroupedNavigationBadgeView: View {
             Text(badge.title)
                 .font(theme.typography.micro)
                 .lineLimit(1)
-                .minimumScaleFactor(0.8)
+                .minimumScaleFactor(0.88)
+                .truncationMode(.tail)
         }
         .foregroundStyle(style.foreground)
         .padding(.horizontal, theme.spacing.xs)
         .padding(.vertical, theme.spacing.xxxs)
+        .frame(maxWidth: 104, alignment: .trailing)
         .background(RoundedRectangle(cornerRadius: theme.radius.chip, style: .continuous).fill(style.fill))
         .overlay(RoundedRectangle(cornerRadius: theme.radius.chip, style: .continuous).stroke(style.stroke, lineWidth: 1))
         .accessibilityElement(children: .ignore)
@@ -572,6 +629,15 @@ private extension View {
             .accessibilityLabel(label)
             .accessibilityValue(value ?? "")
             .accessibilityHint(hint ?? "")
+    }
+
+    @ViewBuilder
+    func groupedNavigationIdentifier(_ identifier: String?) -> some View {
+        if let identifier {
+            accessibilityIdentifier(identifier)
+        } else {
+            self
+        }
     }
 }
 

@@ -36,6 +36,17 @@ final class AppShellChromeTests: XCTestCase {
         XCTAssertEqual(AppShellHeaderPosture.utility.modeLens, .focus)
     }
 
+    func testShellThemeKeepsHeaderAndTabChromeReadableInBothModes() {
+        for mode in AmbitionThemeMode.allCases {
+            let theme = AmbitionTheme.theme(for: mode)
+
+            XCTAssertEqual(theme.surfaces.backgroundBlurOpacity, 1.0)
+            XCTAssertGreaterThanOrEqual(theme.panel.minimumTapTarget, 44)
+            XCTAssertGreaterThanOrEqual(theme.spacing.sm, 16)
+            XCTAssertGreaterThan(theme.radius.md, 0)
+        }
+    }
+
     func testM12HeaderPosturesExposeContinuityWithoutHiddenNavigation() {
         let messages = [
             AppShellHeaderPosture.execution.continuityMessage,

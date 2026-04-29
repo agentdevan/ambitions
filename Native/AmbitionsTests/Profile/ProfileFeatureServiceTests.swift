@@ -156,35 +156,45 @@ final class ProfileFeatureServiceTests: XCTestCase {
         let titles = items.map(\.title)
 
         XCTAssertEqual(dashboard.systemCenter.title, "You")
-        XCTAssertTrue(dashboard.systemCenter.subtitle.contains("without adding more top-level tabs"))
-        XCTAssertEqual(Set(titles), Set([
+        XCTAssertEqual(dashboard.systemCenter.subtitle, "Your settings, memory, and trust controls.")
+        XCTAssertEqual(titles, [
             "Profile",
             "Personalization",
-            "Memory / What Ambitions Knows",
-            "Reviews",
-            "Analytics",
-            "Trust & Explanations",
-            "Privacy",
-            "Sync / Export",
-            "Integrations",
             "Appearance",
+            "What Ambitions Knows",
+            "Trust Center",
+            "Receipts & History",
+            "Corrections",
+            "Reviews",
+            "Proof",
+            "Archive / Completed",
             "Notifications",
+            "Integrations",
+            "Widgets / Live Activities / Shortcuts",
+            "Export / Import",
             "Accessibility",
-            "Settings"
-        ]))
+            "Help / Support",
+            "About"
+        ])
         XCTAssertEqual(dashboard.systemCenter.sections.map(\.id), [
-            "profile-system-personal",
-            "profile-system-memory-trust",
-            "profile-system-access"
+            "me",
+            "memory-and-trust",
+            "reviews-and-progress",
+            "system-edges",
+            "accessibility-and-support"
         ])
         XCTAssertTrue(items.allSatisfy { !$0.accessibilityHint.isEmpty })
         XCTAssertTrue(items.contains(where: {
-            $0.id == "profile-system-analytics" &&
-            ($0.subtitle.contains("instead of becoming an Insights tab"))
+            $0.id == "appearance" &&
+            $0.title == "Appearance"
         }))
         XCTAssertTrue(items.contains(where: {
-            $0.id == "profile-system-sync-export" &&
-            ($0.subtitle.contains("Sync is not connected"))
+            $0.id == "what-ambitions-knows" &&
+            $0.title == "What Ambitions Knows"
+        }))
+        XCTAssertTrue(items.contains(where: {
+            $0.id == "export-import" &&
+            $0.statusLabel == "Manual"
         }))
         XCTAssertFalse(AppTab.allCases.map(\.title).contains("Profile"))
         XCTAssertFalse(AppTab.allCases.map(\.title).contains("Insights"))

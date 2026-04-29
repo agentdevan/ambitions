@@ -84,4 +84,32 @@ final class GroupedNavigationListDesignSystemTests: XCTestCase {
             XCTAssertFalse(AmbitionSemanticState.accessibilityUnverified.accessibilityText.isEmpty)
         }
     }
+
+    func testRootSettingsRowsCompileWithLongLabelsThatPreviouslyWrappedBadly() {
+        let stressLabels = [
+            "Integrations",
+            "Personalization",
+            "Accessibility",
+            "Widgets / Live Activities / Shortcuts",
+            "What Ambitions Knows"
+        ]
+
+        _ = GroupedNavigationList {
+            GroupedNavigationSection(title: "Stress") {
+                ForEach(stressLabels, id: \.self) { label in
+                    GroupedDisclosureNavigationRow(
+                        title: label,
+                        subtitle: "Concise one-line subtitle.",
+                        systemImage: "gearshape",
+                        badge: .init("Local", state: .neutral),
+                        accessibilityValue: "Local",
+                        action: {}
+                    )
+                }
+            }
+        }
+
+        XCTAssertFalse(stressLabels.contains { $0.contains("-") })
+        XCTAssertFalse(stressLabels.contains { $0.contains("\n") })
+    }
 }

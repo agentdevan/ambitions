@@ -217,3 +217,50 @@ Current UI should block:
 - final RC lock
 
 R01-R05 completion history should not be changed. Those rows remain completed for planning/evidence purposes, but this red-team audit adds a new visual/product blocker that must be corrected before any demo/release posture upgrade.
+
+## Correction Pass 1 Status
+
+Date: 2026-04-29.
+
+Status: implementation correction pass completed in source, with simulator/unit/UI validation still required before any visual approval claim. Release posture remains blocked for investor demo, TestFlight, App Store screenshots, public release claims, accessibility approval, and RC lock.
+
+What was fixed:
+
+- VQA-001: the global add control now lives in an explicit bottom safe-area lane with a stable accessibility identifier instead of being manually padded over the tab-bar region; the tab bar uses opaque UIKit appearance.
+- VQA-002 and VQA-011: the app shell header now uses a simplified title/subtitle layout, an opaque/elevated theme material, a stable `shell.header.rail` identifier, and stronger separation from scrolling content.
+- VQA-003, VQA-004, VQA-014, and VQA-022: the You root is now list-first. The prior long stack of hero/control/trust/memory/review/appearance/defaults/integration cards was moved behind grouped navigation rows and detail sheets.
+- VQA-005 and VQA-009: `GroupedNavigationList` rows now use a fixed icon lane, flexible one-line title/subtitle behavior at normal sizes, constrained trailing status width, and an accessibility-size stacked fallback.
+- VQA-006 through VQA-008: dark/light theme tokens were strengthened for text, overlays, strokes, tab labels, and header surfaces. Appearance remains a first-section row and opens Appearance Studio directly.
+- VQA-013: root-level You copy was shortened to row labels plus one-line subtitles; verbose explanatory material now lives behind rows.
+
+What remains blocked:
+
+- VQA-012, VQA-015, VQA-016 through VQA-020, VQA-024, and VQA-025 remain partially or fully open. Today, Goals, Goal Detail, Capture, and Plan still need a surface-by-surface visual compression pass and screenshot/manual review.
+- Contrast is improved through token changes, but no measured contrast audit was run and no accessibility claim is made.
+- Dynamic Type resilience is improved for grouped rows, but no simulator Dynamic Type screenshot pass or VoiceOver traversal was run.
+- Screenshot/snapshot automation still does not exist for visual approval and was not introduced in this pass.
+
+Tests added or hardened:
+
+- Shell UI smoke now asserts canonical tab buttons are hittable, verifies `shell.header.rail` and `shell.floating-control-lane`, and checks the global add button frame does not intersect the tab bar.
+- You UI smoke now requires the `you.root` grouped navigation root, required top sections, first-screen Appearance, What Ambitions Knows, and Trust Center rows, and row order with Appearance above memory/trust rows.
+- Appearance UI smoke now opens Appearance Studio through the top `Appearance` row instead of scrolling through a card stack.
+- Profile service tests now enforce the required You grouped sections and row order.
+- Appearance/theme tests now verify system/light/dark root theme resolution and opaque chrome token behavior.
+- Grouped navigation tests now include the long labels that previously broke visually: `Integrations`, `Personalization`, `Accessibility`, `Widgets / Live Activities / Shortcuts`, and `What Ambitions Knows`.
+
+Visual limitations not proven by automation:
+
+- No new screenshots were captured in this correction pass.
+- No pixel snapshot comparison, measured contrast test, real-device safe-area proof, VoiceOver audit, Dynamic Type screenshot pass, or App Store screenshot review was completed.
+- The implementation is materially more aligned with the audit direction, but it is not visually approved until a human simulator/device review and screenshot QA pass confirm the rendered result.
+
+Manual review items:
+
+- Verify the tab bar is visible and readable on all five top-level tabs in light and dark mode.
+- Verify the header does not overlap the status bar/Dynamic Island and that scroll content does not visually bleed through it.
+- Verify the You root reads as an Ambitions-flavored Settings-style grouped list, with no awkward hyphenation in `Integrations`, `Personalization`, or `Accessibility`.
+- Verify Appearance, What Ambitions Knows, and Trust Center are immediately discoverable.
+- Verify the floating add lane does not obscure content, tab labels, or the home indicator.
+- Verify dark mode and light mode visibly differ after saving Appearance settings.
+- Run the next pass as either surface-by-surface polish plus screenshot QA, or manual simulator review before further source polishing.
