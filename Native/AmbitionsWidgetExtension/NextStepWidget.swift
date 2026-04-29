@@ -110,112 +110,112 @@ private struct NextStepWidgetView: View {
     let entry: NextStepEntry
 
     var body: some View {
-        let glance = ExternalSurfaceGlanceState(snapshot: entry.snapshot)
-        let variants = variants(for: glance)
+        let projection = ExternalWidgetProjection(snapshot: entry.snapshot)
 
         Group {
             switch entry.family {
             case .accessoryInline:
-                Text("\(title(for: glance)) · \(glance.continuity.lease.freshnessLabel)")
+                Text("\(projection.title) · \(projection.trustSummary)")
             case .accessoryCircular:
-                circularView(glance: glance)
+                circularView(projection: projection)
             case .accessoryRectangular:
-                rectangularLockView(glance: glance)
+                rectangularLockView(projection: projection)
             case .systemMedium:
-                mediumView(glance: glance, variants: variants)
+                mediumView(projection: projection)
             case .systemLarge:
-                largeView(glance: glance, variants: variants)
+                largeView(projection: projection)
             default:
-                smallView(glance: glance)
+                smallView(projection: projection)
             }
         }
         .containerBackground(.fill.tertiary, for: .widget)
-        .widgetURL(glance.primaryURL)
+        .widgetURL(projection.primaryURL)
+        .accessibilityLabel(projection.accessibilityLabel)
     }
 
-    private func smallView(glance: ExternalSurfaceGlanceState) -> some View {
+    private func smallView(projection: ExternalWidgetProjection) -> some View {
         VStack(alignment: .leading, spacing: 8) {
             surfaceHeader(icon: "scope", label: "Ambitions")
             Spacer(minLength: 0)
-            Text(title(for: glance))
+            Text(projection.title)
                 .font(.headline.weight(.semibold))
                 .lineLimit(3)
-            Text(detail(for: glance))
+            Text(projection.detail)
                 .font(.caption)
                 .foregroundStyle(.secondary)
                 .lineLimit(3)
-            trustLine(glance: glance)
+            trustLine(projection: projection)
         }
         .padding()
-        .background(widgetGradient(glance: glance))
+        .background(widgetGradient(projection: projection))
     }
 
-    private func mediumView(glance: ExternalSurfaceGlanceState, variants: [ExternalSurfaceVariantState]) -> some View {
+    private func mediumView(projection: ExternalWidgetProjection) -> some View {
         HStack(alignment: .top, spacing: 12) {
             VStack(alignment: .leading, spacing: 8) {
                 surfaceHeader(icon: "scope", label: "Ambitions")
-                Text(title(for: glance))
+                Text(projection.title)
                     .font(.headline.weight(.semibold))
                     .lineLimit(2)
-                Text(detail(for: glance))
+                Text(projection.detail)
                     .font(.caption)
                     .foregroundStyle(.secondary)
                     .lineLimit(2)
-                trustLine(glance: glance)
+                trustLine(projection: projection)
             }
             Spacer(minLength: 0)
             VStack(alignment: .leading, spacing: 8) {
-                ForEach(variants.prefix(2), id: \.kind.rawValue) { variant in
+                ForEach(projection.variants.prefix(2), id: \.kind.rawValue) { variant in
                     variantRow(variant)
                 }
             }
             .frame(maxWidth: 150, alignment: .leading)
         }
         .padding()
-        .background(widgetGradient(glance: glance))
+        .background(widgetGradient(projection: projection))
     }
 
-    private func largeView(glance: ExternalSurfaceGlanceState, variants: [ExternalSurfaceVariantState]) -> some View {
+    private func largeView(projection: ExternalWidgetProjection) -> some View {
         VStack(alignment: .leading, spacing: 12) {
             surfaceHeader(icon: "sparkles", label: "Ambitions")
-            Text(title(for: glance))
+            Text(projection.title)
                 .font(.title3.weight(.semibold))
                 .lineLimit(2)
-            Text(detail(for: glance))
+            Text(projection.detail)
                 .font(.subheadline)
                 .foregroundStyle(.secondary)
                 .lineLimit(2)
             VStack(spacing: 8) {
-                ForEach(variants, id: \.kind.rawValue) { variant in
+                ForEach(projection.variants, id: \.kind.rawValue) { variant in
                     variantRow(variant)
                 }
             }
             Spacer(minLength: 0)
-            trustLine(glance: glance)
+            trustLine(projection: projection)
         }
         .padding()
-        .background(widgetGradient(glance: glance))
+        .background(widgetGradient(projection: projection))
     }
 
-    private func rectangularLockView(glance: ExternalSurfaceGlanceState) -> some View {
+    private func rectangularLockView(projection: ExternalWidgetProjection) -> some View {
         VStack(alignment: .leading, spacing: 2) {
-            Text(title(for: glance))
+            Text(projection.title)
                 .font(.headline)
                 .lineLimit(1)
-            Text(lockDetail(for: glance))
+            Text(projection.lockDetail)
                 .font(.caption)
                 .foregroundStyle(.secondary)
                 .lineLimit(2)
         }
     }
 
-    private func circularView(glance: ExternalSurfaceGlanceState) -> some View {
+    private func circularView(projection: ExternalWidgetProjection) -> some View {
         ZStack {
             AccessoryWidgetBackground()
             VStack(spacing: 1) {
-                Image(systemName: icon(for: glance))
+                Image(systemName: icon(for: projection.pressureLevel))
                     .font(.headline)
-                Text(shortPressure(glance.pressureLevel))
+                Text(shortPressure(projection.pressureLevel))
                     .font(.caption2.weight(.semibold))
             }
         }
@@ -231,7 +231,7 @@ private struct NextStepWidgetView: View {
         .foregroundStyle(.secondary)
     }
 
-    private func variantRow(_ variant: ExternalSurfaceVariantState) -> some View {
+    private func variantRow(_ variant: ExternalWidgetProjection.VariantRow) -> some View {
         HStack(alignment: .top, spacing: 8) {
             Image(systemName: icon(for: variant.kind))
                 .font(.caption.weight(.semibold))
@@ -249,95 +249,20 @@ private struct NextStepWidgetView: View {
         }
     }
 
-    private func trustLine(glance: ExternalSurfaceGlanceState) -> some View {
-        Text("\(glance.continuity.syncHealth.label) · \(glance.continuity.lease.freshnessLabel)")
+    private func trustLine(projection: ExternalWidgetProjection) -> some View {
+        Text(projection.trustSummary)
             .font(.caption2)
             .foregroundStyle(.tertiary)
             .lineLimit(1)
     }
 
-    private func widgetGradient(glance: ExternalSurfaceGlanceState) -> LinearGradient {
-        let warm = Color(red: 0.96, green: 0.72, blue: 0.42).opacity(glance.pressureLevel == .overloaded ? 0.30 : 0.18)
+    private func widgetGradient(projection: ExternalWidgetProjection) -> LinearGradient {
+        let warm = Color(red: 0.96, green: 0.72, blue: 0.42).opacity(projection.pressureLevel == .overloaded ? 0.30 : 0.18)
         return LinearGradient(
             colors: [Color(red: 0.08, green: 0.10, blue: 0.12), Color(red: 0.13, green: 0.16, blue: 0.18), warm],
             startPoint: .topLeading,
             endPoint: .bottomTrailing
         )
-    }
-
-    private func variants(for glance: ExternalSurfaceGlanceState) -> [ExternalSurfaceVariantState] {
-        guard let ambientState = glance.ambientState else { return [] }
-        return [ambientState.today, ambientState.focus, ambientState.goal, ambientState.plan]
-            .sorted { lhs, rhs in
-                prominenceRank(lhs.prominence) > prominenceRank(rhs.prominence)
-            }
-    }
-
-    private func prominenceRank(_ prominence: ExternalSurfaceVariantProminence) -> Int {
-        switch prominence {
-        case .quiet:
-            return 0
-        case .standard:
-            return 1
-        case .elevated:
-            return 2
-        }
-    }
-
-    private func title(for glance: ExternalSurfaceGlanceState) -> String {
-        if let today = glance.ambientState?.today {
-            return today.title
-        }
-        if let ritualCue = glance.ritualCue {
-            return ritualTitle(for: ritualCue.kind)
-        }
-        switch glance.todayPosture {
-        case .empty:
-            return "No next step"
-        case .active:
-            return "Next step ready"
-        case .waiting:
-            return "Waiting on a blocker"
-        case .recovery:
-            return "Recovery step ready"
-        }
-    }
-
-    private func detail(for glance: ExternalSurfaceGlanceState) -> String {
-        if let today = glance.ambientState?.today {
-            return today.detail
-        }
-        if let ritualCue = glance.ritualCue {
-            switch ritualCue.kind {
-            case .morningSetup:
-                return "One next move is ready."
-            case .middayReset:
-                return ritualCue.progressState == .needsReset ? "A smaller reset is ready." : "The next move still fits."
-            case .eveningClose:
-                return "Close the loop in Today."
-            case .weeklyReset:
-                return "Review the week in Today."
-            }
-        }
-        switch glance.todayPosture {
-        case .waiting:
-            return "Open Ambitions for the next useful move."
-        case .empty:
-            return "Open Ambitions to refresh your plan."
-        case .active, .recovery:
-            return urgencyLabel(glance.urgency)
-        }
-    }
-
-    private func lockDetail(for glance: ExternalSurfaceGlanceState) -> String {
-        switch glance.continuity.lease.status {
-        case .current:
-            return detail(for: glance)
-        case .stale:
-            return "This may be older. Open Ambitions to confirm."
-        case .unavailable:
-            return "Open Ambitions to refresh local state."
-        }
     }
 
     private func icon(for kind: ExternalSurfaceVariantKind) -> String {
@@ -353,55 +278,16 @@ private struct NextStepWidgetView: View {
         }
     }
 
-    private func icon(for glance: ExternalSurfaceGlanceState) -> String {
-        switch glance.todayPosture {
-        case .empty:
-            return "sparkle.magnifyingglass"
-        case .active:
-            return "scope"
-        case .waiting:
-            return "exclamationmark.arrow.triangle.2.circlepath"
-        case .recovery:
-            return "leaf"
-        }
-    }
-
-    private func ritualTitle(for kind: ExternalSurfaceRitualKind) -> String {
-        switch kind {
-        case .morningSetup:
-            return "Morning setup"
-        case .middayReset:
-            return "Midday reset"
-        case .eveningClose:
-            return "Evening close"
-        case .weeklyReset:
-            return "Weekly reset"
-        }
-    }
-
-    private func urgencyLabel(_ urgency: ExternalSurfaceUrgency) -> String {
-        switch urgency {
-        case .overdue:
-            return "Needs attention"
-        case .soon:
-            return "Coming up soon"
-        case .normal:
-            return "In progress"
-        case .anytime:
-            return "Flexible timing"
-        }
-    }
-
-    private func pressureLabel(_ pressure: ExternalSurfacePressureLevel) -> String {
+    private func icon(for pressure: ExternalSurfacePressureLevel) -> String {
         switch pressure {
         case .open:
-            return "Open"
+            return "sparkle.magnifyingglass"
         case .steady:
-            return "Steady"
+            return "scope"
         case .elevated:
-            return "Getting tight"
+            return "exclamationmark.arrow.triangle.2.circlepath"
         case .overloaded:
-            return "Too much planned"
+            return "leaf"
         }
     }
 
