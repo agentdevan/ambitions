@@ -59,6 +59,7 @@ Batch 82 keeps the Phase B foundations ready for surface consumption without add
 ## Export / Import and Sync Implications
 
 - Export/import must preserve object IDs, schema versions, relationship endpoints, attachment targets, receipt unchanged facts, policy decision inputs, and placeholder-only external reference boundaries.
+- M03 proves this at the portable snapshot service level for legacy pre-manifest packages, malformed package decode failures, partial reference warnings, and no-lost-data merge preservation across goals, proof, receipts, captures, and memory/teaching signals.
 - External references remain manual/reference-only unless a later owning batch implements a provider.
 - Future sync/conflict work must treat Life Graph relationships, proof/resources, promise/waiting records, receipts, and safe automation decisions as explicit local records with stable IDs. It must not infer conflict truth from display ordering or transient UI state.
 - This budget does not claim sync exists and does not apply conflict resolutions.

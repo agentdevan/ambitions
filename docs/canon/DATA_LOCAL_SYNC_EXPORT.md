@@ -187,20 +187,24 @@ Rules:
 - Preserve the user's selections where possible.
 - Show what did and did not happen.
 
-M02 implementation evidence:
+M02/M03 implementation evidence:
 
 - Import reports carry safety summaries and warnings.
 - Manifest mismatch warnings are reported before import results are trusted.
+- Partial packages report reviewable reference warnings for missing goal, Step, memory, capture, proof, receipt, and last-opened-goal references instead of hiding them.
 - Merge mode imports safe new records and reports conflicts instead of silently overwriting newer or ambiguous local data.
+- Merge mode keeps newer local goals, proof, receipts, captures, and memory/teaching signals when an older incoming package carries the same record IDs.
 - Replace-local-store mode is isolated to the portable snapshot service and is marked as requiring explicit confirmation before use.
 - An encoded portable package restore into a fresh in-memory store is covered by `PortableSnapshotServiceTests`.
+- Legacy pre-manifest packages decode with generated manifests and can merge without deleting existing local records.
+- Malformed package decode failures are tested before import mutation and leave existing local records untouched.
 
-Remaining M03 hardening:
+Remaining hardening after M03:
 
-- prove corrupt/partial package behavior,
-- prove migration and offline no-lost-data posture,
-- prove broader receipt/history integrity through failure cases,
-- and keep unsupported sync truth explicit.
+- expose the service-level export/import proof through a finished user-facing You / Trust Center flow,
+- prove real-device backup/file sharing behavior,
+- run production-store migration proof on real user data shapes,
+- and keep unsupported sync truth explicit until a future human sync decision.
 
 ## Local-First Failure States
 

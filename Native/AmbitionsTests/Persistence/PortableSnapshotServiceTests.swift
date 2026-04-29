@@ -259,12 +259,131 @@ final class PortableSnapshotServiceTests: XCTestCase {
         XCTAssertEqual(Set(loadedGoals.map(\.id)), [localGoal.id, incomingGoal.id])
     }
 
+    func testImportSnapshotReportsPartialPackageReferencesWithoutDroppingRecords() async throws {
+        let store = try AmbitionsPersistenceStore(inMemory: true)
+        let repositories = makeRepositories(store: store)
+        let localGoal = try XCTUnwrap(sampleGoal(id: "goal-local-partial", revision: 1, updatedAt: "2026-04-18T10:00:00Z"))
+        let incomingDraft = sampleDraft(id: "draft-partial", plannedGoalID: "goal-missing", updatedAt: "2026-04-19T11:00:00Z")
+        let incomingEvidence = sampleEvidence(id: "evidence-partial", goalID: "goal-missing", capturedAt: "2026-04-19T12:00:00Z")
+        let incomingFeedback = sampleFeedback(stepID: "step-missing", occurredAt: "2026-04-19T13:00:00Z")
+        let incomingCapture = sampleCapture(id: "capture-partial", updatedAt: "2026-04-19T14:00:00Z", linkedGoalID: "goal-missing")
+        let incomingTeaching = sampleTeachingSignal(goalID: "goal-missing", updatedAt: "2026-04-19T14:30:00Z")
+        var incomingState = AppStateSnapshot.default
+        incomingState.lastOpenedGoalID = "goal-missing"
+
+        try await repositories.goals.saveGoals([localGoal])
+
+        let service = PortableSnapshotService(
+            repositories: repositories,
+            resetStore: { try await store.resetAllData() }
+        )
+        let snapshot = PortableAppSnapshot(
+            metadata: PortableAppSnapshotMetadata(
+                schemaVersion: .v1,
+                exportedAt: "2026-04-19T15:00:00Z",
+                source: "native.local.repositories",
+                trustPosture: .localOnly
+            ),
+            goals: [],
+            drafts: [incomingDraft],
+            evidence: [incomingEvidence],
+            feedback: [incomingFeedback],
+            captures: [incomingCapture],
+            teachingSignals: [incomingTeaching],
+            appState: incomingState
+        )
+
+        let report = try await service.importSnapshot(snapshot, mode: .mergeWithConflictReport)
+        let loadedGoals = try await repositories.goals.listGoals()
+        let loadedDrafts = try await repositories.drafts.listDrafts()
+        let loadedEvidence = try await repositories.evidence.listEvidence(goalID: nil)
+        let loadedFeedback = try await repositories.feedback.listEvents(goalID: nil)
+        let loadedCaptures = try await repositories.captures.listCaptures()
+        let loadedTeaching = try await repositories.teaching.listSignals(goalID: nil)
+
+        XCTAssertEqual(Set(report.warnings.map(\.id)), [
+            "reference.draft.draft-partial.planned_goal",
+            "reference.evidence.evidence-partial.goal",
+            "reference.feedback.feedback-step-missing.step",
+            "reference.capture.capture-partial.goal",
+            "reference.memory.teaching-goal-missing-2026-04-19T14:30:00Z.goal",
+            "reference.app_state.last_opened_goal"
+        ])
+        XCTAssertEqual(loadedGoals.map(\.id), [localGoal.id])
+        XCTAssertEqual(loadedDrafts.map(\.id), [incomingDraft.id])
+        XCTAssertEqual(loadedEvidence.map(\.id), [incomingEvidence.id])
+        XCTAssertEqual(loadedFeedback.map(\.base.id), [incomingFeedback.base.id])
+        XCTAssertEqual(loadedCaptures.map(\.id), [incomingCapture.id])
+        XCTAssertEqual(loadedTeaching.map(\.id), [incomingTeaching.id])
+    }
+
+    func testMergeImportKeepsNewerLocalDataAcrossKeyPortableRecords() async throws {
+        let store = try AmbitionsPersistenceStore(inMemory: true)
+        let repositories = makeRepositories(store: store)
+        let localGoal = try XCTUnwrap(sampleGoal(id: "goal-no-lost-data", revision: 3, updatedAt: "2026-04-20T10:00:00Z", title: "Newer local goal"))
+        let incomingGoal = try XCTUnwrap(sampleGoal(id: "goal-no-lost-data", revision: 2, updatedAt: "2026-04-19T10:00:00Z", title: "Older incoming goal"))
+        let stepID = try XCTUnwrap(firstStepID(in: localGoal))
+        let localEvidence = sampleEvidence(id: "evidence-no-lost-data", goalID: localGoal.id, capturedAt: "2026-04-20T12:00:00Z")
+        let incomingEvidence = sampleEvidence(id: "evidence-no-lost-data", goalID: incomingGoal.id, capturedAt: "2026-04-19T12:00:00Z")
+        let localFeedback = sampleFeedback(stepID: stepID, occurredAt: "2026-04-20T13:00:00Z")
+        let incomingFeedback = sampleFeedback(stepID: stepID, occurredAt: "2026-04-19T13:00:00Z")
+        let localCapture = sampleCapture(id: "capture-no-lost-data", updatedAt: "2026-04-20T14:00:00Z", rawText: "Newer local capture")
+        let incomingCapture = sampleCapture(id: "capture-no-lost-data", updatedAt: "2026-04-19T14:00:00Z", rawText: "Older incoming capture")
+        let localTeaching = sampleTeachingSignal(id: "teaching-no-lost-data", goalID: localGoal.id, updatedAt: "2026-04-20T14:30:00Z")
+        let incomingTeaching = sampleTeachingSignal(id: "teaching-no-lost-data", goalID: localGoal.id, updatedAt: "2026-04-19T14:30:00Z")
+
+        try await repositories.goals.saveGoals([localGoal])
+        try await repositories.evidence.saveEvidence([localEvidence])
+        try await repositories.feedback.saveEvents([localFeedback], goalID: localGoal.id)
+        try await repositories.captures.saveCaptures([localCapture])
+        try await repositories.teaching.saveSignals([localTeaching])
+
+        let service = PortableSnapshotService(
+            repositories: repositories,
+            resetStore: { try await store.resetAllData() }
+        )
+        let snapshot = PortableAppSnapshot(
+            metadata: PortableAppSnapshotMetadata(
+                schemaVersion: .v1,
+                exportedAt: "2026-04-19T15:00:00Z",
+                source: "native.local.repositories",
+                trustPosture: .localOnly
+            ),
+            goals: [incomingGoal],
+            drafts: [],
+            evidence: [incomingEvidence],
+            feedback: [incomingFeedback],
+            captures: [incomingCapture],
+            teachingSignals: [incomingTeaching],
+            appState: .default
+        )
+
+        let report = try await service.importSnapshot(snapshot, mode: .mergeWithConflictReport)
+        let restoredGoal = try await repositories.goals.goal(id: localGoal.id)
+        let restoredEvidence = try await repositories.evidence.listEvidence(goalID: nil)
+        let restoredFeedback = try await repositories.feedback.listEvents(goalID: localGoal.id)
+        let restoredCapture = try await repositories.captures.capture(id: localCapture.id)
+        let restoredTeaching = try await repositories.teaching.listSignals(goalID: localGoal.id)
+
+        XCTAssertEqual(report.conflicts.map(\.recommendation), Array(repeating: .keepLocal, count: 5))
+        XCTAssertEqual(report.importedGoalCount, 0)
+        XCTAssertEqual(report.importedEvidenceCount, 0)
+        XCTAssertEqual(report.importedFeedbackCount, 0)
+        XCTAssertEqual(report.importedCaptureCount, 0)
+        XCTAssertEqual(report.importedTeachingSignalCount, 0)
+        XCTAssertEqual(restoredGoal?.title, "Newer local goal")
+        XCTAssertEqual(restoredEvidence.map(\.capturedAt), [localEvidence.capturedAt])
+        XCTAssertEqual(restoredFeedback.map(\.base.occurredAt), [localFeedback.base.occurredAt])
+        XCTAssertEqual(restoredCapture?.rawText, "Newer local capture")
+        XCTAssertEqual(restoredTeaching.map(\.updatedAt), [localTeaching.updatedAt])
+    }
+
     func testNewPhoneDisasterDrillRestoresEncodedPackageIntoFreshStore() async throws {
         let sourceStore = try AmbitionsPersistenceStore(inMemory: true)
         let sourceRepositories = makeRepositories(store: sourceStore)
         let goal = try XCTUnwrap(sampleGoal(id: "goal-new-phone", revision: 2, updatedAt: "2026-04-18T10:00:00Z"))
         let evidence = sampleEvidence(id: "evidence-new-phone", goalID: goal.id, capturedAt: "2026-04-18T12:00:00Z")
-        let feedback = sampleFeedback(stepID: "step-new-phone", occurredAt: "2026-04-18T13:00:00Z")
+        let feedback = sampleFeedback(stepID: try XCTUnwrap(firstStepID(in: goal)), occurredAt: "2026-04-18T13:00:00Z")
         let capture = sampleCapture(id: "capture-new-phone", updatedAt: "2026-04-18T14:00:00Z")
         let teaching = sampleTeachingSignal(goalID: goal.id, updatedAt: "2026-04-18T14:30:00Z")
         var state = AppStateSnapshot.default
@@ -336,7 +455,7 @@ final class PortableSnapshotServiceTests: XCTestCase {
         XCTAssertEqual(restored?.lifeGraph?.sharedLife?.responsibilities.map(\.title), ["Groceries"])
     }
 
-    func testPortableSnapshotDecodesMissingTeachingSignalsAsEmpty() throws {
+    func testPortableSnapshotDecodesMissingTeachingSignalsAsEmptyAndGeneratesManifest() throws {
         let data = Data(
             """
             {
@@ -368,6 +487,66 @@ final class PortableSnapshotServiceTests: XCTestCase {
         let snapshot = try PersistenceCoding.decoder.decode(PortableAppSnapshot.self, from: data)
 
         XCTAssertTrue(snapshot.teachingSignals.isEmpty)
+        XCTAssertEqual(snapshot.manifest.summary(for: .goalsAndPlans)?.itemCount, 0)
+        XCTAssertEqual(snapshot.manifest.userSummary, "This package can move selected local Ambitions data without requiring an account or cloud sync.")
+    }
+
+    func testLegacyPackageWithoutManifestCanMergeWithoutDeletingLocalData() async throws {
+        let store = try AmbitionsPersistenceStore(inMemory: true)
+        let repositories = makeRepositories(store: store)
+        let localGoal = try XCTUnwrap(sampleGoal(id: "goal-legacy-local", revision: 1, updatedAt: "2026-04-18T10:00:00Z"))
+        try await repositories.goals.saveGoals([localGoal])
+        let data = Data(
+            """
+            {
+              "metadata": {
+                "schemaVersion": "portable_app_snapshot.v1",
+                "exportedAt": "2026-04-19T15:00:00Z",
+                "source": "native.local.repositories",
+                "trustPosture": "local_only"
+              },
+              "goals": [],
+              "drafts": [],
+              "evidence": [],
+              "feedback": [],
+              "captures": [],
+              "appState": {
+                "id": "app_state.default",
+                "preferredTab": "today",
+                "userDisplayName": "",
+                "appearancePreference": "system",
+                "reviewCadenceDays": 7,
+                "localOnlyModeEnabled": true,
+                "hasCompletedBootstrap": false,
+                "goalPriorityOrder": []
+              }
+            }
+            """.utf8
+        )
+        let snapshot = try PersistenceCoding.decoder.decode(PortableAppSnapshot.self, from: data)
+        let service = PortableSnapshotService(
+            repositories: repositories,
+            resetStore: { try await store.resetAllData() }
+        )
+
+        let report = try await service.importSnapshot(snapshot, mode: .mergeWithConflictReport)
+        let loadedGoals = try await repositories.goals.listGoals()
+
+        XCTAssertTrue(report.warnings.isEmpty)
+        XCTAssertEqual(report.importedGoalCount, 0)
+        XCTAssertEqual(loadedGoals.map(\.id), [localGoal.id])
+    }
+
+    func testMalformedPortablePackageDecodeFailureLeavesLocalDataUntouched() async throws {
+        let store = try AmbitionsPersistenceStore(inMemory: true)
+        let repositories = makeRepositories(store: store)
+        let localGoal = try XCTUnwrap(sampleGoal(id: "goal-malformed-local", revision: 1, updatedAt: "2026-04-18T10:00:00Z"))
+        try await repositories.goals.saveGoals([localGoal])
+        let malformedData = Data(#"{ "metadata": { "schemaVersion": "portable_app_snapshot.v1" }, "goals": ["#.utf8)
+
+        XCTAssertThrowsError(try PersistenceCoding.decoder.decode(PortableAppSnapshot.self, from: malformedData))
+        let loadedGoals = try await repositories.goals.listGoals()
+        XCTAssertEqual(loadedGoals.map(\.id), [localGoal.id])
     }
 }
 
@@ -384,9 +563,9 @@ private extension PortableSnapshotServiceTests {
         )
     }
 
-    func sampleTeachingSignal(goalID: String, updatedAt: String) -> GoalTeachingSignal {
+    func sampleTeachingSignal(id: String? = nil, goalID: String, updatedAt: String) -> GoalTeachingSignal {
         GoalTeachingSignal(
-            id: "teaching-\(goalID)-\(updatedAt)",
+            id: id ?? "teaching-\(goalID)-\(updatedAt)",
             goalID: goalID,
             createdAt: updatedAt,
             updatedAt: updatedAt,
@@ -567,7 +746,7 @@ private extension PortableSnapshotServiceTests {
         )
     }
 
-    func sampleCapture(id: String, updatedAt: String, rawText: String = "Portable capture") -> Capture {
+    func sampleCapture(id: String, updatedAt: String, rawText: String = "Portable capture", linkedGoalID: String? = nil) -> Capture {
         Capture(
             id: id,
             createdAt: "2026-04-18T09:00:00Z",
@@ -575,8 +754,12 @@ private extension PortableSnapshotServiceTests {
             rawText: rawText,
             sourceType: .todayQuickCapture,
             status: .actionable,
-            linkedGoalID: nil
+            linkedGoalID: linkedGoalID
         )
+    }
+
+    func firstStepID(in goal: Goal) -> String? {
+        goal.plan?.sections.first?.steps.first?.id
     }
 }
 

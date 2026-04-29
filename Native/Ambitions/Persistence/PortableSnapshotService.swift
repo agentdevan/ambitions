@@ -92,7 +92,7 @@ private extension PortableSnapshotService {
             throw PortableSnapshotError.unsupportedSchemaVersion(snapshot.metadata.schemaVersion.rawValue)
         }
 
-        return manifestWarnings(for: snapshot)
+        return validationWarnings(for: snapshot)
     }
 
     func replaceLocalStore(with snapshot: PortableAppSnapshot, warnings: [PortableImportWarning]) async throws -> PortableImportReport {
@@ -206,6 +206,10 @@ private extension PortableSnapshotService {
         )
     }
 
+    func validationWarnings(for snapshot: PortableAppSnapshot) -> [PortableImportWarning] {
+        manifestWarnings(for: snapshot) + referenceWarnings(for: snapshot)
+    }
+
     func manifestWarnings(for snapshot: PortableAppSnapshot) -> [PortableImportWarning] {
         let expectedCounts: [PortableExportCategory: Int] = [
             .goalsAndPlans: snapshot.goals.count + snapshot.drafts.count,
@@ -229,6 +233,78 @@ private extension PortableSnapshotService {
                 message: "\(category.title) count does not match the package contents. Review this package before import."
             )
         }
+    }
+
+    func referenceWarnings(for snapshot: PortableAppSnapshot) -> [PortableImportWarning] {
+        let goalIDs = Set(snapshot.goals.map(\.id))
+        let stepIDs = Set(
+            snapshot.goals.flatMap { goal in
+                goal.plan?.sections.flatMap { section in
+                    section.steps.map(\.id)
+                } ?? []
+            }
+        )
+        var warnings: [PortableImportWarning] = []
+
+        warnings += snapshot.drafts
+            .compactMap { draft -> PortableImportWarning? in
+                guard let goalID = draft.plannedGoalID, goalIDs.contains(goalID) == false else {
+                    return nil
+                }
+                return PortableImportWarning(
+                    id: "reference.draft.\(draft.id).planned_goal",
+                    message: "A draft in this package points to a goal that is not included. Review placement before trusting the restore."
+                )
+            }
+
+        warnings += snapshot.evidence
+            .filter { goalIDs.contains($0.goalID) == false }
+            .map {
+                PortableImportWarning(
+                    id: "reference.evidence.\($0.id).goal",
+                    message: "A proof item in this package points to a goal that is not included. It will not be silently discarded, but it needs review."
+                )
+            }
+
+        warnings += snapshot.feedback
+            .filter { stepIDs.contains($0.base.stepID) == false }
+            .map {
+                PortableImportWarning(
+                    id: "reference.feedback.\($0.base.id).step",
+                    message: "A receipt in this package points to a Step that is not included. It will not be silently discarded, but it needs review."
+                )
+            }
+
+        warnings += snapshot.captures
+            .compactMap { capture -> PortableImportWarning? in
+                guard let goalID = capture.linkedGoalID, goalIDs.contains(goalID) == false else {
+                    return nil
+                }
+                return PortableImportWarning(
+                    id: "reference.capture.\(capture.id).goal",
+                    message: "A capture in this package points to a goal that is not included. Review its destination after import."
+                )
+            }
+
+        warnings += snapshot.teachingSignals
+            .filter { goalIDs.contains($0.goalID) == false }
+            .map {
+                PortableImportWarning(
+                    id: "reference.memory.\($0.id).goal",
+                    message: "A memory correction in this package points to a goal that is not included. Review before applying it broadly."
+                )
+            }
+
+        if let lastOpenedGoalID = snapshot.appState.lastOpenedGoalID, goalIDs.contains(lastOpenedGoalID) == false {
+            warnings.append(
+                PortableImportWarning(
+                    id: "reference.app_state.last_opened_goal",
+                    message: "The package remembers a last-opened goal that is not included. Navigation can fall back safely."
+                )
+            )
+        }
+
+        return warnings
     }
 
     func compareGoals(incoming: [Goal], local: [Goal]) -> (accepted: [Goal], conflicts: [PortableConflict]) {
