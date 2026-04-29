@@ -539,6 +539,7 @@ final class AmbitionsUITests: XCTestCase {
         XCTAssertTrue(scrollUntilElementExists("plan.believability-card", in: app))
         XCTAssertTrue(scrollUntilElementExists("plan.calendar-awareness", in: app))
         XCTAssertTrue(scrollUntilElementExists("plan.calendar-boundary", in: app))
+        XCTAssertTrue(scrollUntilElementExists("plan.recovery-maturity", in: app))
         XCTAssertTrue(scrollUntilElementExists("plan.execution-resilience", in: app))
         XCTAssertTrue(scrollUntilElementExists("plan.action-lane", in: app))
     }

@@ -308,6 +308,15 @@ private extension RepositoryBackedPlanService {
             openCaptures: openCaptures
         )
         let reflowReceiptPreview = makeReflowReceiptPreview(reflow: realityReflow, saveTheDay: saveTheDay)
+        let recoveryMaturity = makeRecoveryMaturity(
+            weekDays: weekDays,
+            openCaptures: openCaptures,
+            missingGoalSummaries: missingGoalSummaries,
+            calendarAwareness: calendarAwareness,
+            realityReflow: realityReflow,
+            saveTheDay: saveTheDay,
+            receiptPreview: reflowReceiptPreview
+        )
         let treaty = makeTreaty(
             posture: posture,
             capacityEnvelope: capacityEnvelope,
@@ -337,6 +346,7 @@ private extension RepositoryBackedPlanService {
             recoveryGradient: recoveryGradient,
             saveTheDay: saveTheDay,
             reflowReceiptPreview: reflowReceiptPreview,
+            recoveryMaturity: recoveryMaturity,
             pressureScrubber: pressureScrubber,
             weekDays: weekDays,
             believability: believability,
@@ -1806,6 +1816,102 @@ private extension RepositoryBackedPlanService {
             undoAvailability: undoAvailability,
             safeFailureFallback: "If you decline confirmation, Ambitions keeps the plan as-is and leaves manual planning available.",
             visualState: primary?.visualState ?? reflow.visualState
+        )
+    }
+
+    func makeRecoveryMaturity(
+        weekDays: [PlanElasticWeekDayState],
+        openCaptures: [Capture],
+        missingGoalSummaries: [GoalWeekSummary],
+        calendarAwareness: PlanCalendarAwarenessState,
+        realityReflow: PlanRealityReflowState,
+        saveTheDay: PlanSaveTheDayState,
+        receiptPreview: PlanReflowReceiptPreviewState
+    ) -> PlanRecoveryMaturityState {
+        let overloadedDays = weekDays.filter { $0.level == .overloaded || $0.level == .fragile }.count
+        let waitingCount = openCaptures.filter { capture in
+            capture.status == .waiting || capture.status == .delegated || capture.kind == .waitingItem || capture.triageStatus == .waiting
+        }.count
+        let commitmentCount = openCaptures.filter { capture in
+            capture.kind == .oneTimeCommitment || capture.kind == .deadlineTask || capture.commitmentKind != nil
+        }.count
+        let socialWaitingCount = openCaptures.filter { capture in
+            capture.waitingMetadata?.waitingOn?.isEmpty == false || capture.waitingMetadata?.blockedBy?.isEmpty == false || capture.status == .delegated
+        }.count
+        let fitLabel: String
+        if overloadedDays > 0 {
+            fitLabel = "Needs relief"
+        } else if missingGoalSummaries.isEmpty == false || waitingCount > 0 || commitmentCount > 0 {
+            fitLabel = "Needs a decision"
+        } else if realityReflow.reasonKind == .stillBelievable {
+            fitLabel = "Believable"
+        } else {
+            fitLabel = "Needs review"
+        }
+
+        let waitingDetail: String
+        if waitingCount > 0 || commitmentCount > 0 {
+            waitingDetail = "\(waitingCount) waiting item\(waitingCount == 1 ? "" : "s") and \(commitmentCount) commitment\(commitmentCount == 1 ? "" : "s") should stay visible instead of becoming quiet pressure."
+        } else {
+            waitingDetail = "No waiting item or one-time commitment is currently pushing on the plan."
+        }
+
+        let socialDetail: String
+        if socialWaitingCount > 0 {
+            socialDetail = "\(socialWaitingCount) people-shaped dependency \(socialWaitingCount == 1 ? "is" : "are") visible, but Plan keeps the language private and manual-first."
+        } else {
+            socialDetail = "No social-load assumption is inferred. You can name people-shaped pressure only when it helps you."
+        }
+
+        let signalState: AmbitionVisualState = overloadedDays > 0 || missingGoalSummaries.isEmpty == false || waitingCount > 0 || commitmentCount > 0 ? .warning : .success
+        let signals = [
+            PlanRecoveryMaturitySignalState(
+                id: "fit",
+                title: "Plan fit",
+                detail: overloadedDays > 0
+                    ? "\(overloadedDays) day\(overloadedDays == 1 ? "" : "s") need relief before the week widens."
+                    : saveTheDay.recoveryExplanation,
+                statusLabel: fitLabel,
+                boundaryLabel: "Suggests one smaller move",
+                visualState: signalState
+            ),
+            PlanRecoveryMaturitySignalState(
+                id: "waiting-commitments",
+                title: "Waiting and commitments",
+                detail: waitingDetail,
+                statusLabel: waitingCount + commitmentCount == 0 ? "Quiet" : "Visible",
+                boundaryLabel: "No silent routing",
+                visualState: waitingCount + commitmentCount == 0 ? .default : .warning
+            ),
+            PlanRecoveryMaturitySignalState(
+                id: "social-load",
+                title: "Social load",
+                detail: socialDetail,
+                statusLabel: socialWaitingCount == 0 ? "Manual" : "Private",
+                boundaryLabel: "No inference without you",
+                visualState: socialWaitingCount == 0 ? .default : .selected
+            ),
+            PlanRecoveryMaturitySignalState(
+                id: "receipt",
+                title: "Receipt and undo",
+                detail: receiptPreview.safeFailureFallback,
+                statusLabel: receiptPreview.confirmationRequired,
+                boundaryLabel: receiptPreview.undoAvailability,
+                visualState: receiptPreview.visualState
+            )
+        ]
+
+        return PlanRecoveryMaturityState(
+            title: "Recovery maturity",
+            detail: "Overloaded days become decisions with receipts, not silent reschedules.",
+            planFitLabel: fitLabel,
+            confirmationBoundary: "Save the Day and Reality Reflow require confirmation before broad plan changes.",
+            calendarBoundary: calendarAwareness.status == .calendarAware
+                ? "Calendar context can inform open windows, but Plan still does not write calendar changes silently."
+                : "Manual planning works without calendar access.",
+            socialBoundary: "People-shaped pressure stays private, optional, and manually named.",
+            receiptBoundary: "A receipt preview names what would change, what would not change, and the undo boundary.",
+            signals: signals
         )
     }
 

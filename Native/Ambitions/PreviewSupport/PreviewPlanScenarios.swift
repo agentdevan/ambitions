@@ -191,6 +191,21 @@ enum PreviewPlanScenarios {
             safeFailureFallback: "If you decline confirmation, Ambitions keeps the plan as-is and leaves manual planning available.",
             visualState: .warning
         ),
+        recoveryMaturity: PlanRecoveryMaturityState(
+            title: "Recovery maturity",
+            detail: "Overloaded days become decisions with receipts, not silent reschedules.",
+            planFitLabel: "Needs relief",
+            confirmationBoundary: "Save the Day and Reality Reflow require confirmation before broad plan changes.",
+            calendarBoundary: "Manual planning works without calendar access.",
+            socialBoundary: "People-shaped pressure stays private, optional, and manually named.",
+            receiptBoundary: "A receipt preview names what would change, what would not change, and the undo boundary.",
+            signals: [
+                PlanRecoveryMaturitySignalState(id: "fit", title: "Plan fit", detail: "One day needs relief before the week widens.", statusLabel: "Needs relief", boundaryLabel: "Suggests one smaller move", visualState: .warning),
+                PlanRecoveryMaturitySignalState(id: "waiting-commitments", title: "Waiting and commitments", detail: "One waiting item should stay visible instead of becoming quiet pressure.", statusLabel: "Visible", boundaryLabel: "No silent routing", visualState: .warning),
+                PlanRecoveryMaturitySignalState(id: "social-load", title: "Social load", detail: "People-shaped pressure stays private and manual-first.", statusLabel: "Private", boundaryLabel: "No inference without you", visualState: .selected),
+                PlanRecoveryMaturitySignalState(id: "receipt", title: "Receipt and undo", detail: "If you decline confirmation, Ambitions keeps the plan as-is.", statusLabel: "Safe local suggestion", boundaryLabel: "Undo can be local", visualState: .warning)
+            ]
+        ),
         pressureScrubber: PlanPressureScrubberState(
             title: "Pressure scrubber",
             subtitle: "Scrub the week to inspect where pressure gathers and where room remains.",
@@ -558,6 +573,21 @@ enum PreviewPlanScenarios {
             undoAvailability: "Undo can be local",
             safeFailureFallback: "If you decline confirmation, Ambitions keeps the plan as-is and leaves manual planning available.",
             visualState: .default
+        ),
+        recoveryMaturity: PlanRecoveryMaturityState(
+            title: "Recovery maturity",
+            detail: "Overloaded days become decisions with receipts, not silent reschedules.",
+            planFitLabel: "Believable",
+            confirmationBoundary: "Save the Day and Reality Reflow require confirmation before broad plan changes.",
+            calendarBoundary: "Manual planning works without calendar access.",
+            socialBoundary: "People-shaped pressure stays private, optional, and manually named.",
+            receiptBoundary: "A receipt preview names what would change, what would not change, and the undo boundary.",
+            signals: [
+                PlanRecoveryMaturitySignalState(id: "fit", title: "Plan fit", detail: "No rescue is needed; keep recovery room visible.", statusLabel: "Believable", boundaryLabel: "Suggests one smaller move", visualState: .success),
+                PlanRecoveryMaturitySignalState(id: "waiting-commitments", title: "Waiting and commitments", detail: "No waiting item or one-time commitment is currently pushing on the plan.", statusLabel: "Quiet", boundaryLabel: "No silent routing", visualState: .default),
+                PlanRecoveryMaturitySignalState(id: "social-load", title: "Social load", detail: "No social-load assumption is inferred.", statusLabel: "Manual", boundaryLabel: "No inference without you", visualState: .default),
+                PlanRecoveryMaturitySignalState(id: "receipt", title: "Receipt and undo", detail: "If you decline confirmation, Ambitions keeps the plan as-is.", statusLabel: "Safe local suggestion", boundaryLabel: "Undo can be local", visualState: .default)
+            ]
         ),
         pressureScrubber: PlanPressureScrubberState(
             title: "Pressure scrubber",

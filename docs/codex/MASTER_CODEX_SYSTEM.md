@@ -28,7 +28,7 @@ Before non-trivial planning or implementation, read:
 14. [../review/VISUAL_REVIEW_CHECKLIST.md](../review/VISUAL_REVIEW_CHECKLIST.md) when visible UI, navigation, empty states, copy, or hierarchy changes
 15. [../review/FRICTION_LOG.md](../review/FRICTION_LOG.md) when observed product friction needs to be captured without expanding scope
 
-Current execution status is Batches 00-88, D01-D26, and M01-M10 complete for planning purposes, M11 / Plan, Recovery, Commitment, Waiting, and Save-the-Day Maturity next queued / next uncompleted, and original Batches 89-120 future planned roadmap work through the roadmap merge audit and post-D26 maturity roadmap classifications. Do not skip ahead of the active M/R sequence unless direct user instructions explicitly change scope.
+Current execution status is Batches 00-88, D01-D26, and M01-M11 complete for planning purposes, M12 / Cross-Surface Continuity, Mode Lens, Mature Invention Performance next queued / next uncompleted, and original Batches 89-120 future planned roadmap work through the roadmap merge audit and post-D26 maturity roadmap classifications. Do not skip ahead of the active M/R sequence unless direct user instructions explicitly change scope.
 
 ## Product identity
 

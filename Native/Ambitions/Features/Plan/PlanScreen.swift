@@ -132,6 +132,8 @@ struct PlanScreen: View {
 
                     PlanReflowReceiptPreviewCard(preview: dashboard.reflowReceiptPreview)
 
+                    PlanRecoveryMaturityCard(maturity: dashboard.recoveryMaturity)
+
                     PlanExecutionResilienceCard(
                         resilience: dashboard.resilience,
                         onOpenGoal: openGoal,
@@ -1007,6 +1009,89 @@ private struct PlanReflowReceiptPreviewCard: View {
         .accessibilityIdentifier("plan.reflow-receipt-preview")
         .accessibilityElement(children: .contain)
         .ambitionPanelAccessibility()
+    }
+}
+
+private struct PlanRecoveryMaturityCard: View {
+    @Environment(\.ambitionTheme) private var theme
+
+    let maturity: PlanRecoveryMaturityState
+
+    var body: some View {
+        AppCard {
+            VStack(alignment: .leading, spacing: theme.spacing.md) {
+                SectionHeader(title: maturity.title, subtitle: maturity.detail)
+
+                HStack(spacing: theme.spacing.xs) {
+                    TagPill(maturity.planFitLabel, icon: "gauge", state: .selected)
+                    TagPill("Confirm first", icon: "hand.tap", state: .warning)
+                    TagPill("Private", icon: "lock", state: .default)
+                }
+                .fixedSize(horizontal: false, vertical: true)
+
+                VStack(alignment: .leading, spacing: theme.spacing.sm) {
+                    ForEach(maturity.signals) { signal in
+                        HStack(alignment: .top, spacing: theme.spacing.sm) {
+                            Image(systemName: iconName(for: signal.id))
+                                .font(.system(size: theme.icon.smallSize, weight: theme.icon.symbolWeight))
+                                .foregroundStyle(theme.stateStyle(for: signal.visualState).accent)
+                                .frame(width: 20)
+
+                            VStack(alignment: .leading, spacing: theme.spacing.xxxs) {
+                                HStack(spacing: theme.spacing.xs) {
+                                    Text(signal.title)
+                                        .font(theme.typography.bodyEmphasized)
+                                        .foregroundStyle(theme.colors.textPrimary)
+                                    TagPill(signal.statusLabel, state: signal.visualState)
+                                }
+                                Text(signal.detail)
+                                    .font(theme.typography.body)
+                                    .foregroundStyle(theme.colors.textSecondary)
+                                    .fixedSize(horizontal: false, vertical: true)
+                                Text(signal.boundaryLabel)
+                                    .font(theme.typography.caption)
+                                    .foregroundStyle(theme.colors.textTertiary)
+                                    .fixedSize(horizontal: false, vertical: true)
+                            }
+                        }
+                        .padding(theme.spacing.md)
+                        .background(
+                            RoundedRectangle(cornerRadius: theme.radius.lg, style: .continuous)
+                                .fill(theme.colors.surfaceOverlay)
+                        )
+                        .overlay(
+                            RoundedRectangle(cornerRadius: theme.radius.lg, style: .continuous)
+                                .stroke(theme.colors.strokeSubtle, lineWidth: 1)
+                        )
+                    }
+                }
+
+                VStack(alignment: .leading, spacing: theme.spacing.xs) {
+                    Text(maturity.confirmationBoundary)
+                    Text(maturity.calendarBoundary)
+                    Text(maturity.socialBoundary)
+                    Text(maturity.receiptBoundary)
+                }
+                .font(theme.typography.caption)
+                .foregroundStyle(theme.colors.textTertiary)
+                .fixedSize(horizontal: false, vertical: true)
+            }
+        }
+        .accessibilityIdentifier("plan.recovery-maturity")
+        .accessibilityElement(children: .contain)
+        .accessibilityLabel("\(maturity.title). \(maturity.detail). \(maturity.confirmationBoundary). \(maturity.calendarBoundary). \(maturity.socialBoundary).")
+        .accessibilityHint("Review Plan recovery boundaries before confirming any broad change.")
+        .ambitionPanelAccessibility()
+    }
+
+    private func iconName(for signalID: String) -> String {
+        switch signalID {
+        case "fit": "gauge"
+        case "waiting-commitments": "hourglass"
+        case "social-load": "person.2"
+        case "receipt": "receipt"
+        default: "checkmark.seal"
+        }
     }
 }
 

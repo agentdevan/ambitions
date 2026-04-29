@@ -571,6 +571,26 @@ struct PlanReflowReceiptPreviewState: Sendable {
     let visualState: AmbitionVisualState
 }
 
+struct PlanRecoveryMaturitySignalState: Identifiable, Sendable, Hashable {
+    let id: String
+    let title: String
+    let detail: String
+    let statusLabel: String
+    let boundaryLabel: String
+    let visualState: AmbitionVisualState
+}
+
+struct PlanRecoveryMaturityState: Sendable {
+    let title: String
+    let detail: String
+    let planFitLabel: String
+    let confirmationBoundary: String
+    let calendarBoundary: String
+    let socialBoundary: String
+    let receiptBoundary: String
+    let signals: [PlanRecoveryMaturitySignalState]
+}
+
 struct PlanSecondaryDestination: Identifiable, Sendable {
     let id: String
     let title: String
@@ -631,6 +651,7 @@ struct PlanDashboard: Sendable {
     let recoveryGradient: PlanRecoveryGradientState
     let saveTheDay: PlanSaveTheDayState
     let reflowReceiptPreview: PlanReflowReceiptPreviewState
+    let recoveryMaturity: PlanRecoveryMaturityState
     let pressureScrubber: PlanPressureScrubberState
     let weekDays: [PlanElasticWeekDayState]
     let believability: PlanBelievabilityState
@@ -669,7 +690,9 @@ extension PlanDashboard {
                 calendarAwareness.sourceLabel,
                 calendarBoundary.writeBoundary,
                 recoveryEntry.title,
-                saveTheDay.title
+                saveTheDay.title,
+                recoveryMaturity.title,
+                recoveryMaturity.confirmationBoundary
             ] + timelineStrip.items.map(\.sourceLabel),
             topLevelTabTitles: topLevelTabTitles,
             supportsDensityBehavior: true,

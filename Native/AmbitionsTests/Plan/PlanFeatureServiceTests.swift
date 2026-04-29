@@ -409,6 +409,34 @@ final class PlanFeatureServiceTests: XCTestCase {
         XCTAssertTrue(dashboard.saveTheDay.boundary.contains("No silent rescheduling"))
     }
 
+    func testM11RecoveryMaturityKeepsOverloadedDaysConfirmedPrivateAndReceipted() async throws {
+        let repositories = try await makeRepositories()
+        try await repositories.goals.saveGoals((0..<6).map { makeWeekVisibleGoal(id: "m11-\($0)", title: "M11 \($0)") })
+        try await repositories.captures.saveCaptures([
+            makeWaitingCapture(),
+            makeCommitmentCapture()
+        ])
+        let beforeGoals = try await repositories.goals.listGoals()
+        let beforeCaptures = try await repositories.captures.listCaptures()
+        let service = RepositoryBackedPlanService(repositories: repositories)
+
+        let dashboard = try await service.loadPlanDashboard(now: fixedDate)
+        let afterGoals = try await repositories.goals.listGoals()
+        let afterCaptures = try await repositories.captures.listCaptures()
+
+        XCTAssertEqual(dashboard.recoveryMaturity.title, "Recovery maturity")
+        XCTAssertEqual(dashboard.recoveryMaturity.planFitLabel, "Needs relief")
+        XCTAssertTrue(dashboard.recoveryMaturity.confirmationBoundary.contains("require confirmation"))
+        XCTAssertTrue(dashboard.recoveryMaturity.calendarBoundary.contains("Manual planning works") || dashboard.recoveryMaturity.calendarBoundary.contains("does not write calendar changes silently"))
+        XCTAssertTrue(dashboard.recoveryMaturity.socialBoundary.contains("private"))
+        XCTAssertTrue(dashboard.recoveryMaturity.receiptBoundary.contains("receipt preview"))
+        XCTAssertTrue(dashboard.recoveryMaturity.signals.contains(where: { $0.id == "waiting-commitments" && $0.statusLabel == "Visible" && $0.boundaryLabel == "No silent routing" }))
+        XCTAssertTrue(dashboard.recoveryMaturity.signals.contains(where: { $0.id == "social-load" && $0.boundaryLabel == "No inference without you" }))
+        XCTAssertTrue(dashboard.recoveryMaturity.signals.contains(where: { $0.id == "receipt" && $0.boundaryLabel.contains("Undo") }))
+        XCTAssertEqual(beforeGoals, afterGoals)
+        XCTAssertEqual(beforeCaptures, afterCaptures)
+    }
+
     func testReflowCopyAvoidsFakeFutureSystemClaims() async throws {
         let repositories = try await makeRepositories()
         try await repositories.goals.saveGoals((0..<6).map { makeWeekVisibleGoal(id: "copy-\($0)", title: "Copy \($0)") })
@@ -418,6 +446,8 @@ final class PlanFeatureServiceTests: XCTestCase {
             dashboard.realityReflow.title,
             dashboard.realityReflow.detail,
             dashboard.saveTheDay.boundary,
+            dashboard.recoveryMaturity.confirmationBoundary,
+            dashboard.recoveryMaturity.calendarBoundary,
             dashboard.reflowReceiptPreview.detail,
             dashboard.reflowReceiptPreview.safeFailureFallback
         ].joined(separator: " ").lowercased()
@@ -611,6 +641,22 @@ private extension PlanFeatureServiceTests {
             route: .waiting,
             triageStatus: .waiting,
             waitingMetadata: CaptureWaitingMetadata(blockedBy: "Partner response", waitingOn: "Partner")
+        )
+    }
+
+    func makeCommitmentCapture() -> Capture {
+        Capture(
+            id: "capture-commitment-reflow",
+            createdAt: GoalEngineFixtures.fixedNow,
+            updatedAt: GoalEngineFixtures.fixedNow,
+            rawText: "Send the school form by Friday",
+            sourceType: .todayQuickCapture,
+            status: .scheduled,
+            linkedGoalID: nil,
+            kind: .oneTimeCommitment,
+            route: .planSeed,
+            triageStatus: .routed,
+            commitmentKind: .oneTime
         )
     }
 }
