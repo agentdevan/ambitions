@@ -170,6 +170,61 @@ public struct AccessibilityNutritionSummaryItem: Identifiable, Hashable, Sendabl
     }
 }
 
+public enum AccessibilityNutritionEvidenceKind: String, CaseIterable, Identifiable, Sendable {
+    case designCanon
+    case sourceInspection
+    case automatedTest
+    case manualVerificationRequired
+
+    public var id: String { rawValue }
+}
+
+public struct AccessibilityNutritionEvidenceAnchor: Identifiable, Hashable, Sendable {
+    public let kind: AccessibilityNutritionEvidenceKind
+    public let path: String
+    public let note: String
+
+    public var id: String { "\(kind.rawValue):\(path):\(note)" }
+
+    public init(kind: AccessibilityNutritionEvidenceKind, path: String, note: String) {
+        self.kind = kind
+        self.path = path
+        self.note = note
+    }
+}
+
+public struct AccessibilityNutritionScreenAudit: Identifiable, Hashable, Sendable {
+    public let id: String
+    public let screenName: String
+    public let route: String
+    public let owner: String
+    public let summary: [AccessibilityNutritionSummaryItem]
+    public let evidenceAnchors: [AccessibilityNutritionEvidenceAnchor]
+    public let limitations: [String]
+
+    public var hasUserFacingClaim: Bool {
+        summary.contains { $0.canPublishAsUserFacingClaim }
+    }
+
+    public init(
+        id: String,
+        screenName: String,
+        route: String,
+        owner: String,
+        summary: [AccessibilityNutritionSummaryItem],
+        evidenceAnchors: [AccessibilityNutritionEvidenceAnchor],
+        limitations: [String]
+    ) {
+        self.id = id
+        self.screenName = screenName
+        self.route = route
+        self.owner = owner
+        self.summary = summary
+        self.evidenceAnchors = evidenceAnchors
+        self.limitations = limitations
+    }
+}
+
 public enum AccessibilityNutritionChecklist {
     public static let items: [AccessibilityNutritionItem] = AccessibilityNutritionCategory.allCases.map {
         AccessibilityNutritionItem(category: $0)
@@ -200,6 +255,70 @@ public enum AccessibilityNutritionChecklist {
                 category: $0.category,
                 status: $0.defaultStatus,
                 detail: "Not yet verified for user-facing Accessibility Nutrition Facts."
+            )
+        }
+    }
+
+    public static func d21InternalEvidenceAudits() -> [AccessibilityNutritionScreenAudit] {
+        [
+            screenAudit("today", "Today", "tab.today", "Today", source: "Native/Ambitions/Features/Today/TodayScreen.swift", tests: "Native/AmbitionsTests/Today"),
+            screenAudit("goals", "Goals", "tab.goals", "Goals", source: "Native/Ambitions/Features/Goals/GoalsScreen.swift", tests: "Native/AmbitionsTests/Goals"),
+            screenAudit("goal-detail", "Goal Detail", "goals.detail", "Goals", source: "Native/Ambitions/Features/Goals/GoalDetailScreen.swift", tests: "Native/AmbitionsTests/Goals"),
+            screenAudit("capture", "Capture", "tab.capture", "Capture", source: "Native/Ambitions/Features/Captures/CapturesScreen.swift", tests: "Native/AmbitionsTests/Captures"),
+            screenAudit("plan", "Plan", "tab.plan", "Plan", source: "Native/Ambitions/Features/Plan/PlanScreen.swift", tests: "Native/AmbitionsTests/Plan"),
+            screenAudit("you", "You", "tab.you", "You", source: "Native/Ambitions/Features/Profile/ProfileScreen.swift", tests: "Native/AmbitionsTests/Profile"),
+            screenAudit("life-areas-north-stars", "Life Areas / North Stars", "goals.life-areas", "Goals", source: "Native/Ambitions/Features/Goals/GoalsFeatureModels.swift", tests: "Native/AmbitionsTests/Goals"),
+            screenAudit("reviews-archive", "Reviews / Archive", "you.reviews", "You", source: "Native/Ambitions/Services/ReviewsV1Projector.swift", tests: "Native/AmbitionsTests/Services/ReviewsV1ProjectorTests.swift"),
+            screenAudit("trust-center-what-ambitions-knows", "Trust Center / What Ambitions Knows", "you.trust.memory", "You", source: "Native/Ambitions/Features/Profile/ProfileScreen.swift", tests: "Native/AmbitionsTests/Profile/ProfileFeatureServiceTests.swift"),
+            screenAudit("rich-panels", "Rich Panels", "component.rich-panels", "Design System", source: "Sources/Components/RichPanelPrimitives.swift", tests: "Native/AmbitionsTests/App/RichPanelDesignSystemTests.swift"),
+            screenAudit("grouped-navigation-list", "GroupedNavigationList", "component.grouped-navigation-list", "Design System", source: "Sources/Components/GroupedNavigationList.swift", tests: "Native/AmbitionsTests/App/GroupedNavigationListDesignSystemTests.swift"),
+            screenAudit("quiet-command-sheet-smart-attachment", "Quiet Command Sheet / Smart Attachment", "shell.command-sheet", "Shell / Capture", source: "Native/Ambitions/App/AppShellView.swift", tests: "Native/AmbitionsUITests/AmbitionsUITests.swift"),
+            screenAudit("external-surfaces", "External surfaces", "external.surfaces", "External Surfaces", source: "Native/Ambitions/ExternalSnapshots", tests: "Native/AmbitionsTests/App")
+        ]
+    }
+
+    private static func screenAudit(
+        _ id: String,
+        _ screenName: String,
+        _ route: String,
+        _ owner: String,
+        source: String,
+        tests: String
+    ) -> AccessibilityNutritionScreenAudit {
+        AccessibilityNutritionScreenAudit(
+            id: id,
+            screenName: screenName,
+            route: route,
+            owner: owner,
+            summary: d21InternalSummary(screenName: screenName),
+            evidenceAnchors: [
+                AccessibilityNutritionEvidenceAnchor(kind: .designCanon, path: "docs/canon/design/accessibility-nutrition-screen-matrix.md", note: "D21 screen/component requirement row"),
+                AccessibilityNutritionEvidenceAnchor(kind: .sourceInspection, path: source, note: "D21 implementation source anchor"),
+                AccessibilityNutritionEvidenceAnchor(kind: .automatedTest, path: tests, note: "D21 automated coverage anchor"),
+                AccessibilityNutritionEvidenceAnchor(kind: .manualVerificationRequired, path: "docs/canon/Ambitions_2_0_Accessibility_Nutrition.md", note: "VoiceOver, Dynamic Type, Reduce Motion, contrast, and device-band proof remain required before publication")
+            ],
+            limitations: [
+                "Internal D21 evidence only; no public Accessibility Nutrition claim is allowed from this record.",
+                "Manual VoiceOver, Dynamic Type screenshot, Reduce Motion, contrast, and real-device audit evidence remain required for R01 or release publication.",
+                "External surface evidence is contract-level until D22-D25 platform alignment and verification complete."
+            ]
+        )
+    }
+
+    private static func d21InternalSummary(screenName: String) -> [AccessibilityNutritionSummaryItem] {
+        items.map { item in
+            let status: AccessibilityNutritionVerificationStatus = item.category == .verifiedUserFacingClaims ? .unverified : .partiallySupported
+            let detail: String
+            if item.category == .verifiedUserFacingClaims {
+                detail = "\(screenName) has D21 internal evidence, but user-facing accessibility claims remain locked until manual verification and R01."
+            } else {
+                detail = "\(screenName) has D21 internal source, design, and automated-test evidence; manual device-band verification is still required before a public claim."
+            }
+
+            return AccessibilityNutritionSummaryItem(
+                category: item.category,
+                status: status,
+                detail: detail
             )
         }
     }

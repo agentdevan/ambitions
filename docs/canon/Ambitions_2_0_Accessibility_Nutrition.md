@@ -17,6 +17,18 @@ Batch 64 creates the internal layer only.
 - No final `You -> Accessibility` screen is shipped by this batch.
 - No user-facing accessibility support claim is verified by this batch.
 
+## D21 Current Status
+
+D21 records implementation-backed internal evidence for the active screen/component matrix. It does not publish Accessibility Nutrition Facts, App Store accessibility claims, or a broad "fully accessible" claim.
+
+- The D21 internal evidence registry lives in `AccessibilityNutritionChecklist.d21InternalEvidenceAudits()` in `Sources/Accessibility/AccessibilityNutrition.swift`.
+- It covers Today, Goals, Goal Detail, Capture, Plan, You, Life Areas / North Stars, Reviews / Archive, Trust Center / What Ambitions Knows, Rich Panels, GroupedNavigationList, Quiet Command Sheet / Smart Attachment, and External surfaces.
+- Each audit row names a design-canon anchor, implementation source anchor, automated-test anchor, manual-verification-required anchor, and limitations.
+- Every category except verified user-facing claims is marked `Partially supported` for internal tracking only; verified user-facing claims remain `Unverified`.
+- No audit row has `canPublishAsUserFacingClaim == true`.
+- External-surface accessibility evidence remains contract-level until D22-D25 finish widget, Live Activity, and App Intent alignment.
+- Manual VoiceOver traversal, Dynamic Type screenshots, Reduce Motion toggled review, contrast measurement, and real-device launch-band verification remain required before R01 or release publication.
+
 ## Internal Accessibility Nutrition Checklist
 
 For every audited screen, sheet, widget, Live Activity, or external entry point, record the following:
@@ -129,6 +141,8 @@ Use these statuses in docs, tests, and future You summaries:
 - `Not applicable`: the category does not materially apply to the audited surface; the reason is recorded.
 
 All categories default to `Unverified` until evidence promotes them. Historical release-candidate notes, old audits, code inspection, or expected SwiftUI behavior may inform risk, but they do not become current user-facing claims by themselves.
+
+D21 may promote internal screen/component rows to `Partially supported` only when each row names source, design, automated-test, and remaining manual-proof anchors. `Partially supported` is not a public claim.
 
 ## Verified vs Unverified Claim Rules
 
