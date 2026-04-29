@@ -4,7 +4,7 @@ Status: Active planning roadmap for Layer 2 and Layer 3 after the D01-D26 Design
 
 Purpose: Rewrite, rename, resequence, and rescope original Batches 89-120 against the newer canon docs and the D01-D26 Design Constitution delta/alignment backlog.
 
-This document does not mark D01-D26 complete. It assumes D01-D26 are complete only for planning the best post-D26 roadmap. Operational status remains owned by `docs/codex/BATCH_REGISTRY.md`.
+This document does not independently mark D01-D26 complete. Operational status remains owned by `docs/codex/BATCH_REGISTRY.md`, which now records D01-D26 complete for planning purposes after D26 release-candidate validation. M01 is the next runnable maturity batch.
 
 ## Planning Layers
 
@@ -725,13 +725,13 @@ D01-D26 are assumed complete for this planning/execution layer only. Do not alte
 
 ## Next Update Needed
 
-After D26 completes, re-open this roadmap and perform a final evidence-based adjustment using:
+After D26 validation, use this roadmap as the active M/R execution sequence. M01 should begin with the actual D01-D26 implementation evidence, validation results, known blockers, and device/platform constraints now recorded in the registry and context index:
 
 - actual D01-D26 implementation evidence,
 - actual validation results,
-- product feel from manual review,
-- user/investor priorities,
+- product feel from manual review when available,
+- user/investor priorities when explicitly supplied,
 - known blockers,
 - and device/platform constraints.
 
-Do not start M01 before D26 unless explicitly authorized for planning-only scenario preparation.
+M01 is now the next dependency-safe implementation batch. Preserve the D01-D26 completion history and do not skip ahead to M02 or R-gates until M01 is implemented, validated, documented, committed, and pushed.
