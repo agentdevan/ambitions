@@ -96,6 +96,10 @@ struct GoalDetailScreen: View {
                         GoalDetailReceiptsCard(state: missionControl.receipts)
                     }
 
+                    if let pathBuilder = detail.pathBuilder {
+                        GoalPathBuilderCard(state: pathBuilder)
+                    }
+
                     if let clarification = detail.clarification {
                         GoalDetailSectionCard(title: clarification.title, subtitle: clarification.subtitle) {
                             VStack(alignment: .leading, spacing: theme.spacing.sm) {
@@ -446,6 +450,168 @@ private struct GoalDetailTimelineCard: View {
         .accessibilityElement(children: .contain)
         .accessibilityIdentifier("goal-detail.timeline")
         .ambitionPanelAccessibility()
+    }
+}
+
+private struct GoalPathBuilderCard: View {
+    @Environment(\.ambitionTheme) private var theme
+
+    let state: GoalPathBuilderState
+
+    var body: some View {
+        GoalDetailSectionCard(title: state.title, subtitle: state.subtitle) {
+            VStack(alignment: .leading, spacing: theme.spacing.md) {
+                breadcrumb
+                todayConnection
+                phases
+
+                if state.forks.isEmpty == false {
+                    forks
+                }
+
+                if state.proofRequirements.isEmpty == false {
+                    proofRequirements
+                }
+
+                roadmapList
+            }
+        }
+        .accessibilityElement(children: .contain)
+        .accessibilityLabel(state.accessibilityLabel)
+        .accessibilityValue(state.accessibilityValue)
+        .accessibilityHint(state.accessibilityHint)
+        .accessibilityIdentifier("goal-detail.path-builder")
+    }
+
+    private var breadcrumb: some View {
+        HStack(spacing: theme.spacing.xs) {
+            ForEach(Array(state.breadcrumbLabels.enumerated()), id: \.offset) { index, label in
+                Text(label)
+                    .font(theme.typography.micro)
+                    .foregroundStyle(index == state.breadcrumbLabels.count - 1 ? theme.colors.textPrimary : theme.colors.textTertiary)
+                if index < state.breadcrumbLabels.count - 1 {
+                    Image(systemName: "chevron.right")
+                        .font(theme.typography.micro)
+                        .foregroundStyle(theme.colors.textTertiary)
+                }
+            }
+        }
+        .accessibilityHidden(true)
+    }
+
+    private var todayConnection: some View {
+        AppCard(state: .selected) {
+            VStack(alignment: .leading, spacing: theme.spacing.xs) {
+                Label("Today connection", systemImage: "scope")
+                    .font(theme.typography.micro)
+                    .foregroundStyle(theme.colors.textTertiary)
+                Text(state.todayConnectionTitle)
+                    .font(theme.typography.section)
+                    .foregroundStyle(theme.colors.textPrimary)
+                Text(state.todayConnectionSummary)
+                    .font(theme.typography.body)
+                    .foregroundStyle(theme.colors.textSecondary)
+                Text(state.planConnectionSummary)
+                    .font(theme.typography.caption)
+                    .foregroundStyle(theme.colors.textTertiary)
+            }
+        }
+    }
+
+    private var phases: some View {
+        VStack(alignment: .leading, spacing: theme.spacing.sm) {
+            SectionHeader(title: "Roadmap", subtitle: "Phases stay connected to proof and the next move.")
+            ForEach(state.phases) { phase in
+                WidgetCard(state: phase.state) {
+                    VStack(alignment: .leading, spacing: theme.spacing.xs) {
+                        HStack(alignment: .firstTextBaseline) {
+                            Text(phase.title)
+                                .font(theme.typography.section)
+                                .foregroundStyle(theme.colors.textPrimary)
+                            Spacer()
+                            TagPill(phase.statusLabel, state: phase.state)
+                        }
+                        Text(phase.summary)
+                            .font(theme.typography.body)
+                            .foregroundStyle(theme.colors.textSecondary)
+                        Label(phase.dependencySummary, systemImage: "point.3.connected.trianglepath.dotted")
+                            .font(theme.typography.caption)
+                            .foregroundStyle(theme.colors.textTertiary)
+                        Label(phase.proofSummary, systemImage: "checkmark.seal")
+                            .font(theme.typography.caption)
+                            .foregroundStyle(theme.colors.textTertiary)
+                    }
+                }
+            }
+        }
+    }
+
+    private var forks: some View {
+        VStack(alignment: .leading, spacing: theme.spacing.sm) {
+            SectionHeader(title: "Forks", subtitle: "Compare before changing the path.")
+            ForEach(state.forks) { fork in
+                WidgetCard(state: fork.state) {
+                    VStack(alignment: .leading, spacing: theme.spacing.xs) {
+                        HStack(alignment: .firstTextBaseline) {
+                            Text(fork.title)
+                                .font(theme.typography.section)
+                                .foregroundStyle(theme.colors.textPrimary)
+                            Spacer()
+                            TagPill(fork.freshnessLabel, state: fork.state)
+                        }
+                        Text(fork.summary)
+                            .font(theme.typography.body)
+                            .foregroundStyle(theme.colors.textSecondary)
+                        Text(fork.basisSummary)
+                            .font(theme.typography.caption)
+                            .foregroundStyle(theme.colors.textTertiary)
+                        Text(fork.decisionPrompt)
+                            .font(theme.typography.caption)
+                            .foregroundStyle(theme.colors.textSecondary)
+                    }
+                }
+            }
+        }
+    }
+
+    private var proofRequirements: some View {
+        VStack(alignment: .leading, spacing: theme.spacing.sm) {
+            SectionHeader(title: "Proof checks", subtitle: "Evidence keeps the roadmap honest.")
+            ForEach(state.proofRequirements) { proof in
+                HStack(alignment: .top, spacing: theme.spacing.sm) {
+                    Image(systemName: "checkmark.seal")
+                        .foregroundStyle(theme.colors.accentPrimary)
+                    VStack(alignment: .leading, spacing: theme.spacing.xxxs) {
+                        HStack {
+                            Text(proof.title)
+                                .font(theme.typography.bodyEmphasized)
+                                .foregroundStyle(theme.colors.textPrimary)
+                            Spacer()
+                            TagPill(proof.handoffLabel, state: proof.state)
+                        }
+                        Text(proof.summary)
+                            .font(theme.typography.caption)
+                            .foregroundStyle(theme.colors.textSecondary)
+                    }
+                }
+                .padding(theme.spacing.sm)
+                .background(RoundedRectangle(cornerRadius: theme.radius.md, style: .continuous).fill(theme.colors.surfaceOverlay))
+            }
+        }
+    }
+
+    private var roadmapList: some View {
+        VStack(alignment: .leading, spacing: theme.spacing.xs) {
+            SectionHeader(title: state.roadmapListTitle, subtitle: state.roadmapListSummary)
+            ForEach(state.phases) { phase in
+                Label("\(phase.title): \(phase.statusLabel)", systemImage: "list.bullet")
+                    .font(theme.typography.caption)
+                    .foregroundStyle(theme.colors.textSecondary)
+            }
+            Text(state.decisionReceiptSummary)
+                .font(theme.typography.caption)
+                .foregroundStyle(theme.colors.textTertiary)
+        }
     }
 }
 

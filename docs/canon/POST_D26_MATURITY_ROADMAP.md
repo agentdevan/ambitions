@@ -4,7 +4,7 @@ Status: Active planning roadmap for Layer 2 and Layer 3 after the D01-D26 Design
 
 Purpose: Rewrite, rename, resequence, and rescope original Batches 89-120 against the newer canon docs and the D01-D26 Design Constitution delta/alignment backlog.
 
-This document does not independently mark D01-D26 or M-series batches complete. Operational status remains owned by `docs/codex/BATCH_REGISTRY.md`, which now records D01-D26 and M01-M06 complete for planning purposes after M06 domain path packs and fork comparison. M07 is the next runnable maturity batch.
+This document does not independently mark D01-D26 or M-series batches complete. Operational status remains owned by `docs/codex/BATCH_REGISTRY.md`, which now records D01-D26 and M01-M07 complete for planning purposes after M07 Path Builder and Long-Range Roadmap UI. M08 is the next runnable maturity batch.
 
 ## Planning Layers
 
@@ -330,6 +330,8 @@ Acceptance:
 - performance budget is measured.
 
 Earliest timing: after M06 and D21.
+
+Status after M07: Completed for planning purposes by adding a Goal Detail-owned Path Builder projection/UI over the M05-M06 path intelligence seam. The implementation exposes bounded phases, dependencies, fork prompts, proof checks, Today/Plan handoff copy, a plain-list fallback, accessibility label/value/hint text, and a compact performance budget without adding a Path tab, broad path mutation/editor behavior, semantic zoom dependency, hidden scoring, professional-advice claims, persistence/export/sync changes, or real-device/manual UI proof. Validation evidence is recorded in `docs/codex/BATCH_REGISTRY.md`; M08 is next.
 
 ### M08 — Learning, Anticipation, Memory Correction, and Narrative Memory Maturity
 
@@ -746,4 +748,4 @@ After D26 validation, use this roadmap as the active M/R execution sequence. M01
 - known blockers,
 - and device/platform constraints.
 
-M01-M06 are complete for planning purposes. M07 is now the next dependency-safe implementation batch. Preserve the D01-D26 and M01-M06 completion history and do not skip ahead to M08 or R-gates until M07 is implemented, validated, documented, committed, and pushed.
+M01-M07 are complete for planning purposes. M08 is now the next dependency-safe implementation batch. Preserve the D01-D26 and M01-M07 completion history and do not skip ahead to M09 or R-gates until M08 is implemented, validated, documented, committed, and pushed.

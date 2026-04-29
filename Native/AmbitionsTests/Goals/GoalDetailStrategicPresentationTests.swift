@@ -40,6 +40,36 @@ final class GoalDetailStrategicPresentationTests: XCTestCase {
         XCTAssertFalse(missionControl.timeline.items.isEmpty)
     }
 
+    func testM07PathBuilderConnectsRoadmapForkProofAndTodayWithoutNewTab() async throws {
+        let repositories = try await makeRepositories()
+        let service = RepositoryBackedGoalsService(repositories: repositories)
+        let created = try await service.createGoal(
+            CreateGoalRequest(title: "Build a family emergency fund by 2026-12-01"),
+            now: fixedNow
+        )
+
+        let detail = try await service.loadDetail(target: created.target)
+        let pathBuilder = try XCTUnwrap(detail.pathBuilder)
+        let combinedCopy = (
+            [pathBuilder.title, pathBuilder.subtitle, pathBuilder.todayConnectionTitle, pathBuilder.todayConnectionSummary, pathBuilder.decisionReceiptSummary]
+                + pathBuilder.phases.flatMap { [$0.title, $0.summary, $0.dependencySummary, $0.proofSummary] }
+                + pathBuilder.forks.flatMap { [$0.title, $0.summary, $0.basisSummary, $0.decisionPrompt] }
+        ).joined(separator: " ")
+
+        XCTAssertEqual(pathBuilder.title, "Path Builder")
+        XCTAssertFalse(pathBuilder.phases.isEmpty)
+        XCTAssertLessThanOrEqual(pathBuilder.phases.count, 6)
+        XCTAssertFalse(pathBuilder.proofRequirements.isEmpty)
+        XCTAssertTrue(pathBuilder.forks.contains(where: { $0.decisionPrompt.localizedCaseInsensitiveContains("choose, edit, or park") }))
+        XCTAssertTrue(pathBuilder.todayConnectionTitle.isEmpty == false)
+        XCTAssertEqual(pathBuilder.roadmapListTitle, "Roadmap list")
+        XCTAssertTrue(pathBuilder.performanceBudgetSummary.contains("\(pathBuilder.phases.count) phases"))
+        XCTAssertFalse(combinedCopy.localizedCaseInsensitiveContains("best path"))
+        XCTAssertFalse(combinedCopy.localizedCaseInsensitiveContains("highest score"))
+        XCTAssertFalse(combinedCopy.localizedCaseInsensitiveContains("Path tab"))
+        XCTAssertEqual(detail.screenContractSnapshot().topLevelTabTitles, ScreenContractValidator.canonicalTopLevelTabs)
+    }
+
     func testD14GoalDetailScreenContractSnapshotSatisfiesImplementationGate() async throws {
         let repositories = try await makeRepositories()
         let service = RepositoryBackedGoalsService(repositories: repositories)

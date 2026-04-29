@@ -1017,6 +1017,53 @@ struct GoalPathStage: Identifiable, Sendable {
     let state: AmbitionVisualState
 }
 
+struct GoalPathBuilderPhaseState: Identifiable, Sendable {
+    let id: String
+    let title: String
+    let summary: String
+    let dependencySummary: String
+    let proofSummary: String
+    let statusLabel: String
+    let state: AmbitionVisualState
+}
+
+struct GoalPathBuilderForkState: Identifiable, Sendable {
+    let id: String
+    let title: String
+    let summary: String
+    let basisSummary: String
+    let decisionPrompt: String
+    let freshnessLabel: String
+    let state: AmbitionVisualState
+}
+
+struct GoalPathBuilderProofState: Identifiable, Sendable {
+    let id: String
+    let title: String
+    let summary: String
+    let handoffLabel: String
+    let state: AmbitionVisualState
+}
+
+struct GoalPathBuilderState: Sendable {
+    let title: String
+    let subtitle: String
+    let breadcrumbLabels: [String]
+    let phases: [GoalPathBuilderPhaseState]
+    let forks: [GoalPathBuilderForkState]
+    let proofRequirements: [GoalPathBuilderProofState]
+    let todayConnectionTitle: String
+    let todayConnectionSummary: String
+    let planConnectionSummary: String
+    let decisionReceiptSummary: String
+    let roadmapListTitle: String
+    let roadmapListSummary: String
+    let performanceBudgetSummary: String
+    let accessibilityLabel: String
+    let accessibilityValue: String
+    let accessibilityHint: String
+}
+
 struct GoalDetailNextMovement: Sendable {
     let title: String
     let summary: String
@@ -1279,6 +1326,7 @@ struct GoalDetailPresentation: Sendable {
     let supportModeActive: Bool
     let defaultLens: GoalDetailLens
     let missionControl: GoalDetailMissionControlState?
+    let pathBuilder: GoalPathBuilderState?
 
     init(
         target: GoalRouteTarget,
@@ -1307,7 +1355,8 @@ struct GoalDetailPresentation: Sendable {
         canSwitchToUntimed: Bool,
         supportModeActive: Bool,
         defaultLens: GoalDetailLens,
-        missionControl: GoalDetailMissionControlState? = nil
+        missionControl: GoalDetailMissionControlState? = nil,
+        pathBuilder: GoalPathBuilderState? = nil
     ) {
         self.target = target
         self.headline = headline
@@ -1336,6 +1385,7 @@ struct GoalDetailPresentation: Sendable {
         self.supportModeActive = supportModeActive
         self.defaultLens = defaultLens
         self.missionControl = missionControl
+        self.pathBuilder = pathBuilder
     }
 
     func screenContractSnapshot(
@@ -1369,7 +1419,9 @@ struct GoalDetailPresentation: Sendable {
                 missionControl?.decisions.title ?? "",
                 missionControl?.risks.title ?? "",
                 missionControl?.archive.title ?? "",
-                missionControl?.receipts.title ?? ""
+                missionControl?.receipts.title ?? "",
+                pathBuilder?.title ?? "",
+                pathBuilder?.todayConnectionTitle ?? ""
             ],
             topLevelTabTitles: topLevelTabTitles,
             supportsDensityBehavior: true,

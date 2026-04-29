@@ -307,6 +307,7 @@ final class AmbitionsUITests: XCTestCase {
         XCTAssertTrue(scrollUntilElementExists("goal-detail.decisions", in: app))
         XCTAssertTrue(scrollUntilElementExists("goal-detail.risks", in: app))
         XCTAssertTrue(scrollUntilElementExists("goal-detail.archive", in: app))
+        XCTAssertTrue(scrollUntilElementExists("goal-detail.path-builder", in: app, maxAttempts: 20))
         XCTAssertTrue(scrollUntilElementExists("goal-detail.tactics-region", in: app))
     }
 
