@@ -86,6 +86,32 @@ struct PathIntelligenceFallbackPath: Codable, Sendable, Equatable, Hashable, Ide
     let posture: GoalPathCompilePosture
 }
 
+struct PathIntelligenceDomainPackProjection: Codable, Sendable, Equatable, Hashable, Identifiable {
+    let id: String
+    let family: PathIntelligenceFamily
+    let packName: String
+    let assumptionSummary: String
+    let timelineRangeLabel: String
+    let prerequisiteSummary: String
+    let riskSummary: String
+    let proofSummary: String
+    let fallbackSummary: String
+    let domainLimitSummary: String
+    let sourceKind: PathIntelligenceSourceKind
+    let freshnessLabel: PathIntelligenceFreshnessLabel
+}
+
+struct PathIntelligenceForkComparison: Codable, Sendable, Equatable, Hashable, Identifiable {
+    let id: String
+    let forkTitle: String
+    let tradeoffSummary: String
+    let comparisonBasis: [String]
+    let decisionPrompt: String
+    let sourceIDs: [String]
+    let owningSurface: PathIntelligenceHandoffSurface
+    let freshnessLabel: PathIntelligenceFreshnessLabel
+}
+
 struct PathIntelligenceSourceBoundary: Codable, Sendable, Equatable, Hashable, Identifiable {
     let id: String
     let sourceKind: PathIntelligenceSourceKind
@@ -122,6 +148,8 @@ struct PathIntelligenceProjection: Codable, Sendable, Equatable {
     let assumptions: [PathIntelligenceAssumptionProjection]
     let proofRequirements: [PathIntelligenceProofRequirement]
     let fallbackPaths: [PathIntelligenceFallbackPath]
+    let domainPacks: [PathIntelligenceDomainPackProjection]
+    let forkComparisons: [PathIntelligenceForkComparison]
     let sourceBoundaries: [PathIntelligenceSourceBoundary]
     let futureSelfScenarios: [FutureSelfScenario]
     let dailyConnection: PathIntelligenceDailyConnection

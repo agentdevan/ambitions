@@ -7,7 +7,7 @@ protocol GoalDomainPackApplying: Sendable {
 struct DefaultGoalDomainPackService: GoalDomainPackApplying {
     private let packs: [any GoalDomainPack]
 
-    init(packs: [any GoalDomainPack] = [CareerGoalDomainPack(), EducationGoalDomainPack()]) {
+    init(packs: [any GoalDomainPack] = GoalDomainPackDefaults.all) {
         self.packs = packs
     }
 

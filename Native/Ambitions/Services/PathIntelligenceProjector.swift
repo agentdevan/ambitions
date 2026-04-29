@@ -20,6 +20,11 @@ struct DefaultPathIntelligenceProjector: PathIntelligenceProjecting {
         )
         let proofRequirements = proofRequirements(for: primary)
         let fallbackPaths = fallbackPaths(for: primary)
+        let domainPacks = domainPackProjections(
+            primary: primary,
+            proofRequirements: proofRequirements,
+            fallbackPaths: fallbackPaths
+        )
 
         return PathIntelligenceProjection(
             schemaVersion: pathIntelligenceSchemaVersion,
@@ -31,6 +36,12 @@ struct DefaultPathIntelligenceProjector: PathIntelligenceProjecting {
             assumptions: assumptionProjections(for: primary),
             proofRequirements: proofRequirements,
             fallbackPaths: fallbackPaths,
+            domainPacks: domainPacks,
+            forkComparisons: forkComparisons(
+                primary: primary,
+                domainPacks: domainPacks,
+                fallbackPaths: fallbackPaths
+            ),
             sourceBoundaries: boundaries,
             futureSelfScenarios: futureSelfScenarios(
                 primary: primary,
@@ -188,6 +199,70 @@ private extension DefaultPathIntelligenceProjector {
             .sorted { $0.id < $1.id }
     }
 
+    func domainPackProjections(
+        primary: GoalCompiledPathCandidate?,
+        proofRequirements: [PathIntelligenceProofRequirement],
+        fallbackPaths: [PathIntelligenceFallbackPath]
+    ) -> [PathIntelligenceDomainPackProjection] {
+        guard let primary else { return [] }
+        let requirementSummary = primary.requirementHints.first?.summary ?? "Use the current goal shape as the starting requirement."
+        let riskSummary = primary.risks.first?.summary ?? "Risk stays qualitative until more local proof exists."
+        let proofSummary = proofRequirements.first?.summary ?? "Save one proof marker before deepening the path."
+        let fallbackSummary = fallbackPaths.first?.summary ?? "Keep a smaller fallback path available if the first route does not hold."
+
+        return primary.appliedPacks.flatMap { pack in
+            pack.matchedDomains.map { domain in
+                let family = family(for: domain)
+                return PathIntelligenceDomainPackProjection(
+                    id: "domain-pack-\(pack.packID)-\(domain.rawValue)",
+                    family: family,
+                    packName: pack.displayName,
+                    assumptionSummary: pack.provisional
+                        ? "This pack is a reviewable suggestion because the goal still has open interpretation."
+                        : "This pack is based on the current local goal understanding.",
+                    timelineRangeLabel: timelineRangeLabel(for: family),
+                    prerequisiteSummary: requirementSummary,
+                    riskSummary: riskSummary,
+                    proofSummary: proofSummary,
+                    fallbackSummary: fallbackSummary,
+                    domainLimitSummary: domainLimitSummary(for: family),
+                    sourceKind: .domainPack,
+                    freshnessLabel: pack.provisional ? .mayNeedReview : .current
+                )
+            }
+        }
+        .sorted { $0.id < $1.id }
+    }
+
+    func forkComparisons(
+        primary: GoalCompiledPathCandidate?,
+        domainPacks: [PathIntelligenceDomainPackProjection],
+        fallbackPaths: [PathIntelligenceFallbackPath]
+    ) -> [PathIntelligenceForkComparison] {
+        guard let primary else { return [] }
+        let packBasis = domainPacks.map { "\($0.packName): \($0.domainLimitSummary)" }
+        let assumptionBasis = primary.assumptions.map { "Assumption: \($0.summary)" }
+
+        return fallbackPaths.map { fallback in
+            let basis = stableOrderedStrings(
+                packBasis
+                    + assumptionBasis
+                    + ["Fallback condition: \(fallback.condition)"]
+            )
+            return PathIntelligenceForkComparison(
+                id: "fork-comparison-\(fallback.id)",
+                forkTitle: fallback.summary,
+                tradeoffSummary: "Compare the current path with this fallback before Ambitions treats either route as settled.",
+                comparisonBasis: basis,
+                decisionPrompt: "Choose, edit, or park this fork from Goal Detail before it shapes Today.",
+                sourceIDs: stableOrderedStrings([primary.id, fallback.id] + primary.appliedPacks.map(\.packID)),
+                owningSurface: .goalDetail,
+                freshnessLabel: fallback.posture == .stronger ? .current : .mayNeedReview
+            )
+        }
+        .sorted { $0.id < $1.id }
+    }
+
     func sourceBoundaries(
         compiledPath: GoalCompiledPath,
         primary: GoalCompiledPathCandidate?,
@@ -337,6 +412,44 @@ private extension DefaultPathIntelligenceProjector {
         let trimmed = title.trimmingCharacters(in: .whitespacesAndNewlines)
         guard trimmed.isEmpty == false else { return "the smallest visible move" }
         return trimmed.prefix(1).lowercased() + trimmed.dropFirst()
+    }
+
+    func timelineRangeLabel(for family: PathIntelligenceFamily) -> String {
+        switch family {
+        case .career, .learning, .health, .finance:
+            return "Likely medium-to-long range; review after each proof point."
+        case .creativeProject, .homeAndLifeAdmin, .generalProject:
+            return "Likely short-to-medium range; adjust after the next milestone."
+        case .relationship, .personalGrowth:
+            return "Review cadence matters more than a fixed finish date."
+        }
+    }
+
+    func domainLimitSummary(for family: PathIntelligenceFamily) -> String {
+        switch family {
+        case .career:
+            return "Career guidance stays broad and should not replace role, employer, or credential research."
+        case .learning:
+            return "Learning guidance stays broad and should not replace official program requirements."
+        case .creativeProject:
+            return "Creative guidance stays project-shaped and should not prescribe taste or market outcomes."
+        case .health:
+            return "Health guidance stays organizational and should not replace professional medical advice."
+        case .finance:
+            return "Finance guidance stays organizational and should not replace professional financial advice."
+        case .relationship:
+            return "Relationship guidance stays reflection-based and should not infer private motives."
+        case .homeAndLifeAdmin:
+            return "Home and life admin guidance stays practical and should not assume outside authority."
+        case .personalGrowth:
+            return "Personal growth guidance stays self-directed and should not diagnose identity or emotion."
+        case .generalProject:
+            return "General project guidance stays broad until the goal has a clearer domain."
+        }
+    }
+
+    func stableOrderedStrings(_ values: [String]) -> [String] {
+        Array(Set(values)).sorted()
     }
 
     func stableUnique<Value: Identifiable & Hashable>(_ values: [Value]) -> [Value] where Value.ID == String {

@@ -59,6 +59,54 @@ final class GoalDomainPackServiceTests: XCTestCase {
         XCTAssertTrue(primary.resourceHooks.allSatisfy { $0.summary.isEmpty == false })
         XCTAssertTrue(primary.resourceHooks.allSatisfy { $0.optionality == .required })
     }
+
+    func testM06DefaultPacksCoverBroadDomainsWithoutTemplateSprawl() throws {
+        let cases: [(LifeDomainKey, GoalMode, String)] = [
+            (.career, .project, "career"),
+            (.education, .learning, "education"),
+            (.creativity, .project, "creative_project"),
+            (.health, .maintenance, "health"),
+            (.finance, .project, "finance"),
+            (.relationships, .delegatedSupport, "relationship"),
+            (.home, .project, "home_life_admin")
+        ]
+
+        for (domain, mode, packID) in cases {
+            let understanding = sampleUnderstanding(domain: domain, mode: mode)
+            let enriched = DefaultGoalDomainPackService().applyPacks(
+                to: GoalCompiledPath.legacyFallback(from: understanding),
+                understanding: understanding
+            )
+            let primary = try XCTUnwrap(enriched.candidates.first(where: \.isPrimary))
+
+            XCTAssertTrue(primary.appliedPacks.contains(where: { $0.packID == packID }), "Missing \(packID)")
+            XCTAssertTrue(primary.appliedPacks.allSatisfy { $0.matchConfidence <= 0.9 })
+            XCTAssertTrue(primary.appliedPacks.count <= 1, "Broad packs should not create narrow template sprawl for one clear domain.")
+        }
+    }
+
+    func testM06BroadPackAddsReviewableForkAndDomainBoundaryWithoutProfessionalAdviceClaim() throws {
+        let understanding = sampleUnderstanding(domain: .finance, mode: .project)
+        let enriched = DefaultGoalDomainPackService().applyPacks(
+            to: GoalCompiledPath.legacyFallback(from: understanding),
+            understanding: understanding
+        )
+        let primary = try XCTUnwrap(enriched.candidates.first(where: \.isPrimary))
+
+        XCTAssertTrue(primary.branches.contains(where: {
+            $0.branchType == .fallback && $0.condition.localizedCaseInsensitiveContains("feels too large")
+        }))
+        XCTAssertTrue(primary.risks.contains(where: {
+            $0.summary.localizedCaseInsensitiveContains("professional financial advice")
+        }))
+        XCTAssertTrue(primary.resourceHooks.contains(where: {
+            $0.optionality == .optional && $0.summary.localizedCaseInsensitiveContains("source or local proof")
+        }))
+        XCTAssertFalse(primary.branches.contains(where: {
+            $0.summary.localizedCaseInsensitiveContains("best path")
+                || $0.condition.localizedCaseInsensitiveContains("highest score")
+        }))
+    }
 }
 
 private extension GoalDomainPackServiceTests {
@@ -127,6 +175,45 @@ private extension GoalDomainPackServiceTests {
                 goalMode: .project,
                 planningStrategyID: .milestonePlan,
                 progressStrategyID: .timedExecution,
+                remainsProvisional: false
+            ),
+            ownership: base.ownership,
+            timeline: base.timeline,
+            successDefinition: base.successDefinition,
+            readiness: base.readiness,
+            constraints: base.constraints,
+            dependencies: base.dependencies,
+            risks: base.risks,
+            assumptions: base.assumptions,
+            clarification: base.clarification,
+            confidence: base.confidence,
+            audit: base.audit
+        )
+    }
+
+    func sampleUnderstanding(domain: LifeDomainKey, mode: GoalMode) -> GoalUnderstanding {
+        let base = GoalPathCompilerServiceTests().sampleStrongerUnderstanding()
+        return GoalUnderstanding(
+            schemaVersion: base.schemaVersion,
+            subject: base.subject,
+            primaryInterpretation: GoalUnderstandingInterpretation(
+                id: base.primaryInterpretation.id,
+                summary: base.primaryInterpretation.summary,
+                modeHint: mode,
+                domainHints: [domain],
+                supportingSignals: base.primaryInterpretation.supportingSignals,
+                source: base.primaryInterpretation.source
+            ),
+            alternateInterpretations: [],
+            domains: GoalUnderstandingDomainInterpretation(
+                primary: domain,
+                all: [LifeDomainAssignment(domain: domain, priority: 1)],
+                isAmbiguous: false
+            ),
+            mode: GoalUnderstandingModeInterpretation(
+                goalMode: mode,
+                planningStrategyID: base.mode.planningStrategyID,
+                progressStrategyID: base.mode.progressStrategyID,
                 remainsProvisional: false
             ),
             ownership: base.ownership,
