@@ -17,6 +17,15 @@ It is the short execution companion to [../canon/Ambitions_App_Store_Release_Com
 - Verify fresh install, returning user, denied permissions, no-data, lots-of-data, missed-week, export/import, and external-surface journeys on device where possible.
 - Keep representative family/shared-life, career, creative, finance/life-admin, and home/life-admin journeys as QA fixtures only; do not hardcode them into product defaults.
 
+## R04 External Truth Gate
+
+- Treat `ReleaseExternalTruthReadinessPacket` as the drafted evidence ledger for App Store copy, privacy labels, reviewer notes, release notes, investor/demo story, marketing one-pager, accessibility claims, and platform claims.
+- Do not treat the R04 packet as App Store submission readiness, TestFlight readiness, a signed archive result, or final RC lock.
+- Provide live support and privacy URLs before submission; the repo does not currently prove hosted release pages.
+- Generate and human-review current screenshots from the final signed build and privacy-safe demo data before App Store Connect entry.
+- Keep public accessibility claims locked until manual VoiceOver, Dynamic Type, Reduce Motion, contrast, motor/tap-target, and external-surface proof exists.
+- Keep widgets, Live Activities, notifications, Shortcuts/Siri, and installed-device shared-container claims blocked until device/platform proof exists.
+
 ## Reviewer Access And Completeness
 
 - Confirm the submitted build is not incomplete, placeholder-heavy, or obviously broken.

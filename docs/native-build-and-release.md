@@ -158,6 +158,19 @@ This repo does not include signing identities, provisioning profiles, or App Sto
 
 GitHub Actions does not perform these signed validation or distribution steps.
 
+## R04 External Truth Packet
+
+`ReleaseExternalTruthReadinessPacket` records the current App Store/privacy/marketing/demo truth from repo evidence. It is useful for drafting metadata and review materials, but it is not a signed archive, App Store Connect validation, screenshot set, support URL proof, TestFlight upload, or RC lock.
+
+Before submission, reconcile the packet against:
+
+- the final signed build and bundle metadata
+- current App Store screenshots from privacy-safe demo data
+- live support and privacy URLs
+- App Privacy disclosures for the submitted binary
+- physical-device proof for external surfaces where enabled
+- human approval recorded during the R05 gate
+
 ## Launch Planning And Submission Operations
 
 Use the following documents together when the task is no longer just build/test/archive validation:

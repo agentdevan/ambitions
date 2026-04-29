@@ -23,6 +23,12 @@ Its job is to answer a narrower operational question:
 
 This is a launch-planning document, not a guarantee of App Store approval.
 
+## Current R04 Truth Addendum
+
+R04 records current external-facing truth in `ReleaseExternalTruthReadinessPacket`. Where this older launch-planning document implies Apple-account-based sync, iCloud/CloudKit recovery, or launch-scope platform readiness, current active execution truth is narrower: the native app has no Ambitions account/login requirement, current sync evidence is local-only, export/import is the proved recovery seam, and rendered external surfaces still require device/platform proof before launch or App Store claims.
+
+R04 prepares draft App Store copy, privacy-label notes, reviewer notes, release notes, investor/demo story, and marketing-one-pager language from current repo evidence. It does not provide curated App Store screenshots, live support/privacy URLs, signed archive validation, App Store Connect validation, TestFlight readiness, public accessibility claims, or RC lock.
+
 ## B. Locked Launch Strategy
 
 The following decisions are treated as settled launch strategy unless canon is explicitly revised later.

@@ -70,6 +70,6 @@ final class AppShellChromeTests: XCTestCase {
             ["life-graph", "ledger-receipts", "trust-memory", "path-portfolio", "external-snapshots", "device-responsiveness"]
         )
         XCTAssertEqual(CrossSurfaceContinuityMaturityReport.layer3Blockers.map(\.ownerBatch), ["R01", "R02", "R03", "R04-R05"])
-        XCTAssertTrue(CrossSurfaceContinuityMaturityReport.completionSummary.contains("R01 is next"))
+        XCTAssertTrue(CrossSurfaceContinuityMaturityReport.completionSummary.contains("R04/R05 own remaining external release truth"))
     }
 }

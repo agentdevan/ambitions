@@ -181,6 +181,6 @@ enum CrossSurfaceContinuityMaturityReport {
     ]
 
     static var completionSummary: String {
-        "M12 verifies continuity across \(handoffs.count) handoff areas and records \(performanceChecks.count) mature performance checks; R01 is next."
+        "M12 verifies continuity across \(handoffs.count) handoff areas and records \(performanceChecks.count) mature performance checks; R04/R05 own remaining external release truth and RC lock gates."
     }
 }
