@@ -9,6 +9,7 @@ struct ExternalSurfaceSnapshot: Codable, Sendable, Equatable {
     let nowState: ExternalSurfaceNowState?
     let ambientState: ExternalSurfaceAmbientState?
     let continuity: ExternalSurfaceContinuityState
+    let privacy: ExternalSurfacePrivacySnapshotPolicy
 
     init(
         schemaVersion: String = ExternalSurfaceSnapshot.schemaVersion,
@@ -16,7 +17,8 @@ struct ExternalSurfaceSnapshot: Codable, Sendable, Equatable {
         nextAction: ExternalSurfaceNextAction?,
         nowState: ExternalSurfaceNowState? = nil,
         ambientState: ExternalSurfaceAmbientState? = nil,
-        continuity: ExternalSurfaceContinuityState? = nil
+        continuity: ExternalSurfaceContinuityState? = nil,
+        privacy: ExternalSurfacePrivacySnapshotPolicy = .safeDefault
     ) {
         self.schemaVersion = schemaVersion
         self.generatedAt = generatedAt
@@ -24,6 +26,7 @@ struct ExternalSurfaceSnapshot: Codable, Sendable, Equatable {
         self.nowState = nowState
         self.ambientState = ambientState
         self.continuity = continuity ?? .localFirst(generatedAt: generatedAt)
+        self.privacy = privacy
     }
 
     enum CodingKeys: String, CodingKey {
@@ -33,6 +36,7 @@ struct ExternalSurfaceSnapshot: Codable, Sendable, Equatable {
         case nowState
         case ambientState
         case continuity
+        case privacy
     }
 
     init(from decoder: Decoder) throws {
@@ -44,6 +48,8 @@ struct ExternalSurfaceSnapshot: Codable, Sendable, Equatable {
         ambientState = try container.decodeIfPresent(ExternalSurfaceAmbientState.self, forKey: .ambientState)
         continuity = try container.decodeIfPresent(ExternalSurfaceContinuityState.self, forKey: .continuity)
             ?? .localFirst(generatedAt: generatedAt)
+        privacy = try container.decodeIfPresent(ExternalSurfacePrivacySnapshotPolicy.self, forKey: .privacy)
+            ?? .safeDefault
     }
 }
 

@@ -121,6 +121,17 @@ enum ExternalSurfaceActionPayload {
         }
         return components.url
     }
+
+    static func safeDeepLinkURL(
+        surface: ExternalSurfacePayloadSurface,
+        goalID: String? = nil,
+        tab: String? = nil,
+        origin: ExternalSurfaceOrigin? = nil,
+        fallbackTab: String = "today"
+    ) -> URL? {
+        deepLinkURL(surface: surface, goalID: goalID, tab: tab, origin: origin)
+            ?? deepLinkURL(surface: .tab, tab: fallbackTab, origin: origin)
+    }
 }
 
 struct ExternalSurfaceGlanceState: Sendable, Equatable {

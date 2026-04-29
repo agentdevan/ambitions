@@ -28,12 +28,48 @@ final class ExternalSurfaceActionPayloadTests: XCTestCase {
         let todayURL = try XCTUnwrap(ExternalSurfaceActionPayload.deepLinkURL(surface: .tab, tab: "today"))
         let capturesURL = try XCTUnwrap(ExternalSurfaceActionPayload.deepLinkURL(surface: .capturesInbox))
         let widgetURL = try XCTUnwrap(ExternalSurfaceActionPayload.deepLinkURL(surface: .tab, tab: "today", origin: .widget))
+        let fallbackURL = try XCTUnwrap(ExternalSurfaceActionPayload.safeDeepLinkURL(surface: .goalDetail, goalID: nil, origin: .widget))
 
         XCTAssertEqual(goalURL.absoluteString, "ambitions://goal/goal-123")
         XCTAssertEqual(todayURL.absoluteString, "ambitions://tab/today")
         XCTAssertEqual(capturesURL.absoluteString, "ambitions://captures/inbox")
         XCTAssertEqual(widgetURL.absoluteString, "ambitions://tab/today?origin=widget")
+        XCTAssertEqual(fallbackURL.absoluteString, "ambitions://tab/today?origin=widget")
         XCTAssertFalse(goalURL.absoluteString.contains("Private"))
+    }
+
+    func testD22ExternalSurfaceContractsCoverCanonSurfaces() {
+        let contracts = ExternalSurfaceContractRegistry.contracts
+
+        XCTAssertEqual(Set(contracts.map(\.kind)), Set(ExternalSurfaceKind.allCases))
+        XCTAssertEqual(contracts.count, ExternalSurfaceKind.allCases.count)
+
+        for contract in contracts {
+            XCTAssertFalse(contract.allowedContent.isEmpty, "\(contract.kind) must name allowed content.")
+            XCTAssertFalse(contract.forbiddenContent.isEmpty, "\(contract.kind) must name forbidden content.")
+            XCTAssertTrue(contract.hidesSensitiveDetailsByDefault, "\(contract.kind) must hide sensitive details by default.")
+            XCTAssertFalse(contract.allowedActions.isEmpty, "\(contract.kind) must name allowed actions.")
+            XCTAssertFalse(contract.snapshotRule.isEmpty)
+            XCTAssertFalse(contract.degradedStateLabel.isEmpty)
+            XCTAssertFalse(contract.accessibilityRequirement.isEmpty)
+        }
+    }
+
+    func testD22ContractsGateCommandsReceiptsAndSensitiveEffects() {
+        let mutatingKinds: Set<ExternalSurfaceKind> = [.notifications, .widgets, .liveActivities, .appIntents, .shortcuts]
+
+        for kind in mutatingKinds {
+            let contract = ExternalSurfaceContractRegistry.contract(for: kind)
+
+            XCTAssertTrue(contract.requiresSharedCommandPipeline, "\(kind) must use the shared command pipeline.")
+            XCTAssertTrue(contract.requiresReceiptForMutation, "\(kind) must require receipts for mutations.")
+            XCTAssertTrue(contract.requiresConfirmationForSensitiveExternalDestructiveEffects, "\(kind) must gate sensitive/external/destructive effects.")
+        }
+
+        let focusFilters = ExternalSurfaceContractRegistry.contract(for: .focusFilters)
+        XCTAssertFalse(focusFilters.requiresSharedCommandPipeline)
+        XCTAssertFalse(focusFilters.requiresReceiptForMutation)
+        XCTAssertTrue(focusFilters.requiresConfirmationForSensitiveExternalDestructiveEffects)
     }
 
     func testGlanceStatePrefersNowStateAndFallsBackToOldNextActionSnapshots() throws {

@@ -38,6 +38,8 @@ final class ExternalSurfaceSnapshotTests: XCTestCase {
         XCTAssertEqual(snapshot.ambientState?.plan.action.tab, "plan")
         XCTAssertEqual(snapshot.continuity.syncHealth.state, .localFirst)
         XCTAssertEqual(snapshot.continuity.lease.freshnessLabel, "Updated recently")
+        XCTAssertEqual(snapshot.privacy.defaultVisibility, .detailsHidden)
+        XCTAssertEqual(snapshot.privacy.sensitiveDetailLabel, "Details stay private until you open Ambitions.")
         XCTAssertFalse(json.contains(sensitiveStepTitle))
         XCTAssertFalse(json.contains("Very Personal Goal"))
     }
@@ -109,6 +111,40 @@ final class ExternalSurfaceSnapshotTests: XCTestCase {
         XCTAssertNil(decoded.nowState)
         XCTAssertNil(decoded.ambientState)
         XCTAssertEqual(decoded.continuity.syncHealth.state, .localFirst)
+        XCTAssertEqual(decoded.privacy, .safeDefault)
+    }
+
+    func testD22SnapshotPrivacyPolicyRoundTripsAndKeepsStaleUnavailableLabels() throws {
+        let snapshot = ExternalSurfaceSnapshot(
+            generatedAt: "2026-04-15T12:00:00Z",
+            nextAction: nil,
+            continuity: ExternalSurfaceContinuityState(
+                lease: ExternalSurfaceNowStateLease(
+                    status: .stale,
+                    generatedAt: "2026-04-15T11:00:00Z",
+                    freshnessLabel: "This may be behind",
+                    staleActionLabel: "Open Ambitions to refresh"
+                ),
+                syncHealth: ExternalSurfaceSyncHealth(
+                    state: .stale,
+                    label: "Local state may be behind",
+                    detail: "Open Ambitions before acting from this surface."
+                ),
+                receipt: ExternalSurfaceContinuityReceipt(origin: .widget, label: "Opened from widget")
+            )
+        )
+
+        let decoded = try PersistenceCoding.decode(
+            ExternalSurfaceSnapshot.self,
+            from: PersistenceCoding.encode(snapshot)
+        )
+
+        XCTAssertEqual(decoded.privacy.defaultVisibility, .detailsHidden)
+        XCTAssertEqual(decoded.privacy.unavailableLabel, "Open Ambitions to confirm the latest local state.")
+        XCTAssertEqual(decoded.privacy.staleLabel, "This may be behind. Open Ambitions to refresh.")
+        XCTAssertEqual(decoded.continuity.lease.status, .stale)
+        XCTAssertEqual(decoded.continuity.syncHealth.state, .stale)
+        XCTAssertEqual(decoded.continuity.receipt?.origin, .widget)
     }
 
     func testLiveActivityContentStatePrefersNowStateAndFallsBackToNextAction() throws {
