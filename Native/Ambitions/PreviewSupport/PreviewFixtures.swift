@@ -247,10 +247,51 @@ struct PreviewFixtures: Sendable {
                 ],
                 stats: [
                     MetricSummary(id: "profile-1", title: "Open goals", value: "3", detail: "In active review", icon: "target"),
-                    MetricSummary(id: "profile-2", title: "Tracked habits", value: "6", detail: "Current set", icon: "repeat"),
+                    MetricSummary(id: "profile-2", title: "Tracked rituals", value: "6", detail: "Current set", icon: "repeat"),
                     MetricSummary(id: "profile-3", title: "Review cadence", value: "Weekly", detail: "Sunday reset", icon: "calendar"),
                     MetricSummary(id: "profile-4", title: "Context signals", value: "6", detail: "Evidence, feedback, and teaching", icon: "sparkles")
                 ]
+            ),
+            systemCenter: ProfileSystemCenterState(
+                title: "Personal System Center",
+                subtitle: "Profile, memory, reviews, trust, privacy, integrations, and settings stay grouped here without adding more top-level tabs.",
+                sections: [
+                    ProfileSystemCenterSection(
+                        id: "profile-system-personal",
+                        title: "Personal setup",
+                        footer: nil,
+                        items: [
+                            ProfileSystemCenterItem(id: "profile-system-profile", title: "Profile", subtitle: "Name, default landing tab, and review cadence for this device.", icon: "person.crop.circle", statusLabel: "Stored locally", semanticState: .neutral, accessibilityHint: "Shows identity and default setup status."),
+                            ProfileSystemCenterItem(id: "profile-system-personalization", title: "Personalization", subtitle: "Tone, recovery posture, planning strictness, and confirmation defaults remain calm and conservative.", icon: "slider.horizontal.3", statusLabel: "Local defaults", semanticState: .trust, accessibilityHint: "Summarizes local personalization controls."),
+                            ProfileSystemCenterItem(id: "profile-system-appearance", title: "Appearance", subtitle: "Mode and accent choices use the shared Ambitions theme.", icon: "paintpalette", statusLabel: "System mode with Sage", semanticState: .success, accessibilityHint: "Shows current appearance preference."),
+                            ProfileSystemCenterItem(id: "profile-system-settings", title: "Settings", subtitle: "Routine preferences stay here as You-owned controls, not as new tabs.", icon: "gearshape", statusLabel: "Grouped", semanticState: .neutral, accessibilityHint: "Shows grouped settings posture.")
+                        ]
+                    ),
+                    ProfileSystemCenterSection(
+                        id: "profile-system-memory-trust",
+                        title: "Memory and trust",
+                        footer: "Trust Center and What Ambitions Knows deepen later. This map stays honest about current support.",
+                        items: [
+                            ProfileSystemCenterItem(id: "profile-system-memory", title: "Memory / What Ambitions Knows", subtitle: "Local evidence, captures, corrections, and recent ledger signals that can explain recommendations.", icon: "brain.head.profile", statusLabel: "6 local", semanticState: .trust, accessibilityHint: "Shows local memory signal availability."),
+                            ProfileSystemCenterItem(id: "profile-system-reviews", title: "Reviews", subtitle: "Recovery Review and Life OS Receipt stay under You and Plan contexts.", icon: "rectangle.stack.badge.play", statusLabel: "Based on recent actions", semanticState: .review, accessibilityHint: "Shows current review readiness."),
+                            ProfileSystemCenterItem(id: "profile-system-analytics", title: "Analytics", subtitle: "Contextual summaries stay inside You and goal surfaces instead of becoming an Insights tab.", icon: "chart.line.uptrend.xyaxis", statusLabel: "Contextual", semanticState: .neutral, accessibilityHint: "Shows that analytics are contextual, not a top-level surface."),
+                            ProfileSystemCenterItem(id: "profile-system-trust", title: "Trust & Explanations", subtitle: "Receipts, corrections, and why-this language stay inspectable and confirmation-gated.", icon: "checkmark.shield", statusLabel: "User controlled", semanticState: .trust, accessibilityHint: "Shows trust and explanation posture."),
+                            ProfileSystemCenterItem(id: "profile-system-privacy", title: "Privacy", subtitle: "Sensitive details stay local-first and should remain hideable on external surfaces.", icon: "hand.raised", statusLabel: "Local-first", semanticState: .protected, accessibilityHint: "Shows privacy posture."),
+                            ProfileSystemCenterItem(id: "profile-system-sync-export", title: "Sync / Export", subtitle: "Sync is not connected. Export and disaster recovery remain labeled until proof drills are complete.", icon: "externaldrive", statusLabel: "Ambitions is running in explicit local-only mode.", semanticState: .caution, accessibilityHint: "Shows local-only sync and export readiness.")
+                        ]
+                    ),
+                    ProfileSystemCenterSection(
+                        id: "profile-system-access",
+                        title: "Access and integrations",
+                        footer: "Optional system edges stay explicit.",
+                        items: [
+                            ProfileSystemCenterItem(id: "profile-system-integrations", title: "Integrations", subtitle: "Calendar, reminders, widgets, Live Activities, Shortcuts, and Share Extension status remain bounded.", icon: "rectangle.connected.to.line.below", statusLabel: "Not requested", semanticState: .calendarDerived, accessibilityHint: "Shows integration permission status."),
+                            ProfileSystemCenterItem(id: "profile-system-notifications", title: "Notifications", subtitle: "Local reminders require explicit notification permission and are not needed to use the app.", icon: "bell.badge", statusLabel: "Not requested", semanticState: .neutral, accessibilityHint: "Shows notification permission status."),
+                            ProfileSystemCenterItem(id: "profile-system-accessibility", title: "Accessibility", subtitle: "Internal checklist evidence exists; user-facing verification waits for the accessibility claims batch.", icon: "figure", statusLabel: "Unverified", semanticState: .accessibilityUnverified, accessibilityHint: "Shows accessibility verification status.")
+                        ]
+                    )
+                ],
+                footer: "You stays the Personal System Center. Deeper detail remains in the owning surfaces until the supporting controls are ready."
             ),
             controlRoom: ProfileControlRoomState(
                 title: "Control room",
@@ -272,7 +313,7 @@ struct PreviewFixtures: Sendable {
                     ProfileConstitutionRule(id: "constitution-recovery-tone", title: "Recover without shame", detail: "Delays, skips, and smaller-version requests are treated as recovery context, not blame.", statusLabel: "Calm recovery", state: .success),
                     ProfileConstitutionRule(id: "constitution-calendar", title: "Ask before calendar writes", detail: "Calendar access is explicit and Plan-owned. Calendar writes require confirmation and are never silent.", statusLabel: "Not requested", state: .warning)
                 ],
-                footer: "These are current local defaults, not a broad account/preferences system. Batch 108 owns deeper Constitution maturity."
+                footer: "These are current local defaults, not a broad account/preferences system. Deeper Constitution maturity remains future-owned."
             ),
             memoryControls: ProfileMemoryControlState(
                 title: "Memory Controls",
@@ -396,7 +437,7 @@ struct PreviewFixtures: Sendable {
                     SettingsItem(id: "profile-trust-notifications", title: "Notification pulse", subtitle: "Local reminder scheduling exists on the current runtime. Authorization stays explicit here so ambient trust never feels hidden.", icon: "bell.badge", valueLabel: "Not requested"),
                     SettingsItem(id: "profile-trust-routing", title: "System status", subtitle: "\(ExternalSurfaceTruth.verifiedRoutingTruth). External routes stay on canonical destinations, and ambient surfaces preserve local-first continuity language.", icon: "arrow.triangle.branch", valueLabel: "Calm")
                 ],
-                footer: "Batch 52 establishes the trust framing layer only. Batch 54 owns deeper continuity/sync-trust productization, so this surface stays truthful about what exists today."
+                footer: "This establishes the trust framing layer only. Deeper continuity and sync-trust productization remain future-owned, so this surface stays truthful about what exists today."
             ),
             contextVault: ProfileContextVaultState(
                 title: "Context Vault",
@@ -411,7 +452,7 @@ struct PreviewFixtures: Sendable {
                     ProfileSignalPolicyItem(id: "profile-policy-local", title: "Local-first posture", detail: "Signals stay on device in this build and should remain inspectable before any future continuity expansion.", state: .selected),
                     ProfileSignalPolicyItem(id: "profile-policy-explicit", title: "Inspectable and understandable", detail: "The app should be able to explain what signal types exist without feeling invasive or technical.", state: .default)
                 ],
-                footer: "This is a foundation layer, not a full privacy admin surface. It prepares future compliance and trust work without inventing Batch 53 or Batch 54 flows early."
+                footer: "This is a foundation layer, not a full privacy admin surface. It prepares future compliance and trust work without inventing unfinished flows early."
             ),
             integrationsSection: ProfileSectionGroup(
                 title: "Integrations and permissions",

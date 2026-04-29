@@ -35,6 +35,8 @@ struct ProfileScreen: View {
                 case let .loaded(dashboard):
                     ProfileHeroCard(hero: dashboard.hero)
 
+                    ProfileSystemCenterCard(systemCenter: dashboard.systemCenter)
+
                     ProfileControlRoomCard(controlRoom: dashboard.controlRoom)
 
                     ProfileTrustCenterCard(
@@ -297,6 +299,54 @@ private struct ProfileControlRoomCard: View {
         }
         .accessibilityIdentifier("profile.control-room-card")
         .ambitionPanelAccessibility()
+    }
+}
+
+private struct ProfileSystemCenterCard: View {
+    @Environment(\.ambitionTheme) private var theme
+
+    let systemCenter: ProfileSystemCenterState
+
+    var body: some View {
+        AppCard {
+            VStack(alignment: .leading, spacing: theme.spacing.md) {
+                SectionHeader(
+                    eyebrow: "You",
+                    title: systemCenter.title,
+                    subtitle: systemCenter.subtitle
+                )
+
+                GroupedNavigationList {
+                    ForEach(systemCenter.sections) { section in
+                        GroupedNavigationSection(title: section.title, footer: section.footer) {
+                            ForEach(section.items) { item in
+                                GroupedNavigationRow(
+                                    title: item.title,
+                                    subtitle: item.subtitle,
+                                    systemImage: item.icon,
+                                    badge: GroupedNavigationBadge(item.statusLabel, state: item.semanticState),
+                                    accessibilityLabel: item.title,
+                                    accessibilityValue: item.statusLabel,
+                                    accessibilityHint: item.accessibilityHint,
+                                    action: {}
+                                )
+                            }
+                        }
+                    }
+                }
+
+                Text(systemCenter.footer)
+                    .font(theme.typography.caption)
+                    .foregroundStyle(theme.colors.textTertiary)
+                    .fixedSize(horizontal: false, vertical: true)
+            }
+        }
+        .accessibilityIdentifier("profile.system-center-card")
+        .ambitionPanelAccessibility(
+            label: systemCenter.title,
+            value: "\(systemCenter.sections.flatMap(\.items).count) grouped areas",
+            hint: "Personal System Center categories for You."
+        )
     }
 }
 

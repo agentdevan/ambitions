@@ -147,6 +147,50 @@ final class ProfileFeatureServiceTests: XCTestCase {
         XCTAssertTrue(dashboard.receiptAudit.subtitle.contains("Reviews now"))
     }
 
+    func testD17SystemCenterGroupsYouWithoutAddingTopLevelTabsOrOverclaiming() async throws {
+        let repositories = try await makeRepositories()
+        let service = RepositoryBackedProfileService(repositories: repositories)
+
+        let dashboard = try await service.loadProfileDashboard()
+        let items = dashboard.systemCenter.sections.flatMap(\.items)
+        let titles = items.map(\.title)
+
+        XCTAssertEqual(dashboard.systemCenter.title, "Personal System Center")
+        XCTAssertTrue(dashboard.systemCenter.subtitle.contains("without adding more top-level tabs"))
+        XCTAssertEqual(Set(titles), Set([
+            "Profile",
+            "Personalization",
+            "Memory / What Ambitions Knows",
+            "Reviews",
+            "Analytics",
+            "Trust & Explanations",
+            "Privacy",
+            "Sync / Export",
+            "Integrations",
+            "Appearance",
+            "Notifications",
+            "Accessibility",
+            "Settings"
+        ]))
+        XCTAssertEqual(dashboard.systemCenter.sections.map(\.id), [
+            "profile-system-personal",
+            "profile-system-memory-trust",
+            "profile-system-access"
+        ])
+        XCTAssertTrue(items.allSatisfy { !$0.accessibilityHint.isEmpty })
+        XCTAssertTrue(items.contains(where: {
+            $0.id == "profile-system-analytics" &&
+            ($0.subtitle.contains("instead of becoming an Insights tab"))
+        }))
+        XCTAssertTrue(items.contains(where: {
+            $0.id == "profile-system-sync-export" &&
+            ($0.subtitle.contains("Sync is not connected"))
+        }))
+        XCTAssertFalse(AppTab.allCases.map(\.title).contains("Profile"))
+        XCTAssertFalse(AppTab.allCases.map(\.title).contains("Insights"))
+        XCTAssertFalse(AppTab.allCases.map(\.title).contains("Habits"))
+    }
+
     func testReviewsV1IsYouOwnedAndTruthfulWithoutRestoringInsightsTab() async throws {
         let repositories = try await makeRepositories()
         try await repositories.eventLedger.append(

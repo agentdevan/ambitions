@@ -129,6 +129,7 @@ final class AmbitionsUITests: XCTestCase {
         app.tabBars.buttons["You"].tap()
         XCTAssertTrue(app.staticTexts["shell.header.title"].waitForExistence(timeout: 10))
         XCTAssertTrue(scrollUntilElementExists("profile.hero-card", in: app))
+        XCTAssertTrue(scrollUntilElementExists("profile.system-center-card", in: app))
         XCTAssertTrue(scrollUntilElementExists("profile.control-room-card", in: app))
         XCTAssertTrue(scrollUntilElementExists("profile.trust-center-card", in: app))
     }
@@ -162,6 +163,7 @@ final class AmbitionsUITests: XCTestCase {
 
         app.tabBars.buttons["You"].tap()
 
+        XCTAssertTrue(scrollUntilElementExists("profile.system-center-card", in: app))
         XCTAssertTrue(scrollUntilElementExists("profile.control-room-card", in: app))
         XCTAssertTrue(scrollUntilElementExists("profile.trust-center-card", in: app))
         XCTAssertTrue(scrollUntilStaticTextExists("Trust Center", in: app))

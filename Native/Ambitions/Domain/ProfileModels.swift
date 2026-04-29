@@ -99,6 +99,30 @@ struct ProfileControlRoomState: Sendable, Equatable {
     let footer: String
 }
 
+struct ProfileSystemCenterItem: Identifiable, Sendable, Equatable {
+    let id: String
+    let title: String
+    let subtitle: String
+    let icon: String
+    let statusLabel: String
+    let semanticState: AmbitionSemanticState
+    let accessibilityHint: String
+}
+
+struct ProfileSystemCenterSection: Identifiable, Sendable, Equatable {
+    let id: String
+    let title: String
+    let footer: String?
+    let items: [ProfileSystemCenterItem]
+}
+
+struct ProfileSystemCenterState: Sendable, Equatable {
+    let title: String
+    let subtitle: String
+    let sections: [ProfileSystemCenterSection]
+    let footer: String
+}
+
 struct ProfileConstitutionRule: Identifiable, Sendable, Equatable {
     let id: String
     let title: String
@@ -198,6 +222,7 @@ struct ProfilePreferencesUpdate: Sendable, Equatable {
 
 struct ProfileDashboard: Sendable, Equatable {
     let hero: ProfileHeroState
+    let systemCenter: ProfileSystemCenterState
     let controlRoom: ProfileControlRoomState
     let constitution: ProfileConstitutionState
     let memoryControls: ProfileMemoryControlState
