@@ -4,7 +4,7 @@ Status: Active planning roadmap for Layer 2 and Layer 3 after the D01-D26 Design
 
 Purpose: Rewrite, rename, resequence, and rescope original Batches 89-120 against the newer canon docs and the D01-D26 Design Constitution delta/alignment backlog.
 
-This document does not independently mark D01-D26 or M-series batches complete. Operational status remains owned by `docs/codex/BATCH_REGISTRY.md`, which now records D01-D26 and M01-M03 complete for planning purposes after M03 data-safety reliability hardening. M04 is the next runnable maturity batch.
+This document does not independently mark D01-D26 or M-series batches complete. Operational status remains owned by `docs/codex/BATCH_REGISTRY.md`, which now records D01-D26 and M01-M04 complete for planning purposes after M04 external-surface verification and continuity hardening. M05 is the next runnable maturity batch.
 
 ## Planning Layers
 
@@ -192,7 +192,7 @@ Acceptance:
 
 Earliest timing: after M02.
 
-Status after M03: completed with portable snapshot structural reference warnings, legacy pre-manifest import compatibility, malformed package decode safety, no-lost-data merge proof for newer local goals/proof/receipts/captures/memory, and explicit local-only/no-sync truth. Validation evidence: `xcodegen generate`; focused `PortableSnapshotServiceTests` (`13` tests, `0` failures); adjacent persistence/trust/receipt/memory regression lane (`48` tests, `0` failures); native simulator build on `iPhone 17`; full `AmbitionsTests` (`697` tests, `0` failures); and diff whitespace checks. Active limitations: no cloud/account/sync, no user-facing export/import UI, no real-device backup/file sharing proof, no production-store migration proof on real user data, and no rendered external-platform verification until M04/R03.
+Status after M03: completed with portable snapshot structural reference warnings, legacy pre-manifest import compatibility, malformed package decode safety, no-lost-data merge proof for newer local goals/proof/receipts/captures/memory, and explicit local-only/no-sync truth. Validation evidence: `xcodegen generate`; focused `PortableSnapshotServiceTests` (`13` tests, `0` failures); adjacent persistence/trust/receipt/memory regression lane (`48` tests, `0` failures); native simulator build on `iPhone 17`; full `AmbitionsTests` (`697` tests, `0` failures); and diff whitespace checks. Active limitations: no cloud/account/sync, no user-facing export/import UI, no real-device backup/file sharing proof, no production-store migration proof on real user data, and rendered external-platform verification remained future-owned for M04/R03.
 
 ### M04 — External Surface Verification and Continuity Hardening
 
@@ -227,6 +227,8 @@ Acceptance:
 - external surface blockers are listed for Layer 3.
 
 Earliest timing: after D22-D25 and M01.
+
+Status after M04: completed with a code-backed external surface verification checklist for notifications, widgets, Live Activities, App Intents, Shortcuts, and the shared snapshot container. The checklist consumes D22 contract truth, records stale/private/failure/routing/receipt requirements, distinguishes simulator/test evidence from required manual platform checks, and keeps all platform readiness claims blocked until device evidence exists. Validation evidence: `xcodegen generate`; focused `ExternalSurfaceVerificationChecklistTests` (`4` tests, `0` failures); adjacent external-surface regression lane (`81` tests, `0` failures); native simulator build on `iPhone 17`; full `AmbitionsTests` (`701` tests, `0` failures); and diff whitespace checks. Active limitations: no real-device notification delivery proof, no rendered widget gallery/device proof, no ActivityKit Lock Screen/Dynamic Island lifecycle proof, no Shortcuts/Siri on-device invocation proof, no installed-device app-group I/O proof, and no TestFlight/App Store/RC readiness claim.
 
 ### M05 — Path Intelligence Foundation and Future Self Simulation
 
@@ -740,4 +742,4 @@ After D26 validation, use this roadmap as the active M/R execution sequence. M01
 - known blockers,
 - and device/platform constraints.
 
-M01-M03 are complete for planning purposes. M04 is now the next dependency-safe implementation batch. Preserve the D01-D26 and M01-M03 completion history and do not skip ahead to M05 or R-gates until M04 is implemented, validated, documented, committed, and pushed.
+M01-M04 are complete for planning purposes. M05 is now the next dependency-safe implementation batch. Preserve the D01-D26 and M01-M04 completion history and do not skip ahead to M06 or R-gates until M05 is implemented, validated, documented, committed, and pushed.

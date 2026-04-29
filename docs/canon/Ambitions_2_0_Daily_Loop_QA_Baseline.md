@@ -93,7 +93,7 @@ Active limitations after M01: this remains simulator/unit/docs evidence plus a m
 | --- | --- | --- | --- |
 | Export/import disaster drill is still unproven | M02 | Blocking | Portable export/import scenario, safe failure state, and restore proof. |
 | No-lost-data and migration hardening needs dedicated proof | M03 | Blocking | Offline, migration, corrupt/partial data, and receipt integrity tests. |
-| External surfaces need platform verification | M04 | High | Rendered widget, Live Activity, notification, App Intent, shortcut, and shared-container proof where available. |
+| External surfaces still need real-device platform verification | R03 | High | M04 added a code-backed verification checklist plus simulator/unit proof for stale/private/failure contracts; rendered widget, Live Activity lifecycle, notification delivery, Shortcuts/Siri, and installed-device shared-container I/O remain device QA work. |
 | Path intelligence and Path Builder remain maturity work | M05-M07 | Medium | Qualitative path contract, domain packs, fork comparison, accessible roadmap UI. |
 | Memory correction and narrative memory need deeper controls | M08 | High | Editable/correctable memory flows, review signals, pause/delete boundaries, and receipts. |
 | Reviews and Life OS Receipt need scenario maturity | M09 | Medium | Weekly/monthly/recovery review scenarios tied to proof, decisions, and carry/drop guidance. |
