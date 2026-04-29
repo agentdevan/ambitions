@@ -390,6 +390,35 @@ struct PreviewFixtures: Sendable {
                         ]
                     )
                 ],
+                narrativeMemories: [
+                    ProfileNarrativeMemory(
+                        id: "narrative-memory-corrections",
+                        title: "You corrected how Ambitions reads something",
+                        summary: "2 manual corrections can change future explanation language where the original artifact still exists.",
+                        sourceLabel: "Manual corrections",
+                        freshness: .current,
+                        usedFor: "Used for Why Changed, recommendation wording, and future review prompts that cite the correction.",
+                        sensitiveStatusLabel: "No sensitive inference",
+                        actions: [
+                            ProfileMemoryAction(id: "narrative-correct", title: "Correct", statusLabel: "Use owning surface", detail: "Goal Detail, Capture, and explanation controls remain the supported correction paths.", state: .success),
+                            ProfileMemoryAction(id: "narrative-delete", title: "Delete", statusLabel: "Needs confirmation", detail: "Deletion is not claimed until safe review, confirmation, and undo coverage exist.", state: .warning),
+                            ProfileMemoryAction(id: "narrative-pause", title: "Pause use", statusLabel: "Review later", detail: "Pause is shown as a review need until a safe preference exists.", state: .warning)
+                        ],
+                        accessibilityLabel: "Narrative memory from corrections",
+                        accessibilityValue: "Current. Manual corrections. Sensitive categories are not inferred.",
+                        accessibilityHint: "Shows what this narrative memory uses and which correction, delete, and pause controls are safe or blocked."
+                    )
+                ],
+                conservativePatterns: [
+                    ProfileMemoryPattern(
+                        id: "memory-pattern-corrections",
+                        title: "Correction-shaped learning",
+                        summary: "Only user-confirmed correction signals are treated as learning here.",
+                        sourceLabel: "2 manual",
+                        reviewLabel: "Review before reuse",
+                        state: .success
+                    )
+                ],
                 recoverySummary: "Memory can be reviewed and corrected from the owning surfaces. Broad delete, forget, and pause controls remain confirmation-gated or future-owned.",
                 footer: "What Ambitions Knows is local, inspectable, and correctable through existing safe seams. Broad forgetting and deletion remain manual/future until the safe boundary can prove the result."
             ),

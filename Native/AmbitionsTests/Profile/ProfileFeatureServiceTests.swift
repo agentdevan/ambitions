@@ -344,6 +344,66 @@ final class ProfileFeatureServiceTests: XCTestCase {
         XCTAssertFalse(dashboard.memoryControls.footer.localizedCaseInsensitiveContains("cloud memory"))
     }
 
+    func testM08NarrativeMemoryUsesExplicitLocalEvidenceAndReviewableControls() async throws {
+        let repositories = try await makeRepositories()
+        try await repositories.teaching.saveSignals([
+            GoalTeachingSignal(
+                id: "teaching-m08",
+                goalID: "goal-1",
+                createdAt: "2026-04-28T10:00:00Z",
+                updatedAt: "2026-04-28T10:00:00Z",
+                source: .explicitManualCorrection,
+                kind: .energyFitCorrection,
+                disposition: .active,
+                anchor: GoalTeachingStableAnchor(
+                    artifactKind: .energyEvaluation,
+                    canonicalField: nil,
+                    candidateID: nil,
+                    stageID: nil,
+                    stepID: "step-1",
+                    targetFingerprint: "energy::step-1",
+                    contradictionCode: nil,
+                    contradictionArtifactRefs: []
+                ),
+                payload: .energyFit(.init(correctedDisposition: .lighterVersionNeeded)),
+                applicationKey: "goal##energy##step",
+                userNote: "Use a lighter version"
+            )
+        ])
+        try await repositories.eventLedger.append(
+            EventLedgerEntry(
+                id: "ledger-m08-correction",
+                kind: .userCorrectionAdded,
+                occurredAt: "2026-04-28T10:01:00Z",
+                source: .you,
+                title: "Correction recorded",
+                summary: "Use a lighter version.",
+                tone: .correction,
+                privacy: .standard,
+                localOnly: true
+            )
+        )
+        let service = RepositoryBackedProfileService(repositories: repositories)
+
+        let dashboard = try await service.loadProfileDashboard()
+        let narrative = try XCTUnwrap(dashboard.memoryControls.narrativeMemories.first(where: { $0.id == "narrative-memory-corrections" }))
+        let pattern = try XCTUnwrap(dashboard.memoryControls.conservativePatterns.first(where: { $0.id == "memory-pattern-corrections" }))
+
+        XCTAssertEqual(narrative.freshness, .current)
+        XCTAssertEqual(narrative.sourceLabel, "Manual corrections")
+        XCTAssertEqual(narrative.sensitiveStatusLabel, "No sensitive inference")
+        XCTAssertTrue(narrative.usedFor.contains("Why Changed"))
+        XCTAssertTrue(narrative.actions.contains(where: { $0.id == "narrative-correct" && $0.statusLabel == "Use owning surface" }))
+        XCTAssertTrue(narrative.actions.contains(where: { $0.id == "narrative-delete" && $0.statusLabel == "Needs confirmation" }))
+        XCTAssertTrue(narrative.actions.contains(where: { $0.id == "narrative-pause" && $0.statusLabel == "Review later" }))
+        XCTAssertEqual(pattern.reviewLabel, "Review before reuse")
+        XCTAssertTrue(pattern.summary.contains("user-confirmed correction"))
+        XCTAssertFalse(dashboard.memoryControls.footer.localizedCaseInsensitiveContains("confidence"))
+        XCTAssertFalse(dashboard.memoryControls.footer.localizedCaseInsensitiveContains("black-box"))
+        XCTAssertFalse(dashboard.memoryControls.conservativePatterns.map(\.summary).joined(separator: " ").localizedCaseInsensitiveContains("black-box"))
+        XCTAssertFalse(dashboard.memoryControls.narrativeMemories.map(\.summary).joined(separator: " ").localizedCaseInsensitiveContains("sensitive identity"))
+    }
+
     func testCorrectionsAndLedgerCountsUseExistingLocalRepositories() async throws {
         let repositories = try await makeRepositories()
         try await repositories.teaching.saveSignals([

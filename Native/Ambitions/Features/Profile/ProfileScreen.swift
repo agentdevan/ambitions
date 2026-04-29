@@ -436,6 +436,36 @@ private struct ProfileMemoryControlsCard: View {
                     }
                 }
 
+                if memoryControls.narrativeMemories.isEmpty == false {
+                    VStack(alignment: .leading, spacing: theme.spacing.sm) {
+                        SectionHeader(
+                            eyebrow: "Narrative memory",
+                            title: "Reviewable stories",
+                            subtitle: "Only explicit local evidence, receipts, corrections, reviews, or confirmations can shape these."
+                        )
+
+                        ForEach(memoryControls.narrativeMemories) { memory in
+                            ProfileNarrativeMemoryRow(memory: memory)
+                        }
+                    }
+                    .accessibilityIdentifier("profile.narrative-memory-section")
+                }
+
+                if memoryControls.conservativePatterns.isEmpty == false {
+                    VStack(alignment: .leading, spacing: theme.spacing.sm) {
+                        SectionHeader(
+                            eyebrow: "Pattern review",
+                            title: "Conservative signals",
+                            subtitle: "Patterns stay reviewable and never become automatic certainty."
+                        )
+
+                        ForEach(memoryControls.conservativePatterns) { pattern in
+                            ProfileMemoryPatternRow(pattern: pattern)
+                        }
+                    }
+                    .accessibilityIdentifier("profile.memory-pattern-section")
+                }
+
                 Text(memoryControls.recoverySummary)
                     .font(theme.typography.caption)
                     .foregroundStyle(theme.colors.textSecondary)
@@ -515,6 +545,95 @@ private struct ProfileMemoryItemRow: View {
             value: item.accessibilityValue,
             hint: item.accessibilityHint
         )
+    }
+}
+
+private struct ProfileNarrativeMemoryRow: View {
+    @Environment(\.ambitionTheme) private var theme
+
+    let memory: ProfileNarrativeMemory
+
+    var body: some View {
+        VStack(alignment: .leading, spacing: theme.spacing.sm) {
+            HStack(alignment: .top, spacing: theme.spacing.sm) {
+                Image(systemName: "text.book.closed")
+                    .font(.system(size: theme.icon.mediumSize, weight: theme.icon.symbolWeight))
+                    .foregroundStyle(theme.colors.accentPrimary)
+                    .frame(width: 28)
+
+                VStack(alignment: .leading, spacing: theme.spacing.xxxs) {
+                    Text(memory.title)
+                        .font(theme.typography.bodyEmphasized)
+                        .foregroundStyle(theme.colors.textPrimary)
+                    Text(memory.summary)
+                        .font(theme.typography.body)
+                        .foregroundStyle(theme.colors.textSecondary)
+                        .fixedSize(horizontal: false, vertical: true)
+                    Text(memory.usedFor)
+                        .font(theme.typography.caption)
+                        .foregroundStyle(theme.colors.textTertiary)
+                        .fixedSize(horizontal: false, vertical: true)
+                }
+
+                Spacer(minLength: theme.spacing.sm)
+            }
+
+            VStack(alignment: .leading, spacing: theme.spacing.xs) {
+                TagPill(memory.freshness.label, state: memory.freshness.visualState)
+                TagPill(memory.sourceLabel, state: .default)
+                TagPill(memory.sensitiveStatusLabel, state: .default)
+            }
+
+            VStack(alignment: .leading, spacing: theme.spacing.xs) {
+                ForEach(memory.actions) { action in
+                    VStack(alignment: .leading, spacing: theme.spacing.xs) {
+                        TagPill(action.title, state: action.state)
+                        Text(action.statusLabel)
+                            .font(theme.typography.caption.weight(.semibold))
+                            .foregroundStyle(theme.colors.textSecondary)
+                        Text(action.detail)
+                            .font(theme.typography.caption)
+                            .foregroundStyle(theme.colors.textTertiary)
+                            .fixedSize(horizontal: false, vertical: true)
+                    }
+                }
+            }
+        }
+        .padding(theme.spacing.md)
+        .background(RoundedRectangle(cornerRadius: theme.radius.lg, style: .continuous).fill(theme.colors.surfaceOverlay))
+        .overlay(RoundedRectangle(cornerRadius: theme.radius.lg, style: .continuous).stroke(theme.colors.strokeSubtle, lineWidth: 1))
+        .ambitionPanelAccessibility(
+            label: memory.accessibilityLabel,
+            value: memory.accessibilityValue,
+            hint: memory.accessibilityHint
+        )
+    }
+}
+
+private struct ProfileMemoryPatternRow: View {
+    @Environment(\.ambitionTheme) private var theme
+
+    let pattern: ProfileMemoryPattern
+
+    var body: some View {
+        WidgetCard(state: pattern.state) {
+            VStack(alignment: .leading, spacing: theme.spacing.xs) {
+                HStack(alignment: .firstTextBaseline) {
+                    Text(pattern.title)
+                        .font(theme.typography.bodyEmphasized)
+                        .foregroundStyle(theme.colors.textPrimary)
+                    Spacer()
+                    TagPill(pattern.reviewLabel, state: pattern.state)
+                }
+                Text(pattern.summary)
+                    .font(theme.typography.caption)
+                    .foregroundStyle(theme.colors.textSecondary)
+                    .fixedSize(horizontal: false, vertical: true)
+                Text(pattern.sourceLabel)
+                    .font(theme.typography.caption)
+                    .foregroundStyle(theme.colors.textTertiary)
+            }
+        }
     }
 }
 

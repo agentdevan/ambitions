@@ -210,11 +210,36 @@ struct ProfileMemoryGroup: Identifiable, Sendable, Equatable {
     let items: [ProfileMemoryItem]
 }
 
+struct ProfileNarrativeMemory: Identifiable, Sendable, Equatable {
+    let id: String
+    let title: String
+    let summary: String
+    let sourceLabel: String
+    let freshness: ProfileMemoryFreshness
+    let usedFor: String
+    let sensitiveStatusLabel: String
+    let actions: [ProfileMemoryAction]
+    let accessibilityLabel: String
+    let accessibilityValue: String
+    let accessibilityHint: String
+}
+
+struct ProfileMemoryPattern: Identifiable, Sendable, Equatable {
+    let id: String
+    let title: String
+    let summary: String
+    let sourceLabel: String
+    let reviewLabel: String
+    let state: AmbitionVisualState
+}
+
 struct ProfileMemoryControlState: Sendable, Equatable {
     let title: String
     let subtitle: String
     let items: [SettingsItem]
     let groups: [ProfileMemoryGroup]
+    let narrativeMemories: [ProfileNarrativeMemory]
+    let conservativePatterns: [ProfileMemoryPattern]
     let recoverySummary: String
     let footer: String
 }
