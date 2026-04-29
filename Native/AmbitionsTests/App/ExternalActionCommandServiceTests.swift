@@ -120,6 +120,26 @@ final class ExternalActionCommandServiceTests: XCTestCase {
         XCTAssertEqual(router.dispatchedRoutes.map(\.source), [.widgetAction])
     }
 
+    func testD25AppIntentSourceRoutesAsAppIntentInsteadOfWidgetFallback() async {
+        let runtimeExecutor = StaticRuntimeActionExecutor(
+            result: RuntimeActionResult(outcome: .routed, routeRequest: .openMemoryLens)
+        )
+        let router = RecordingExternalActionRouter()
+        let service = DefaultExternalActionCommandService(
+            runtimeExecutor: runtimeExecutor,
+            externalRouter: router
+        )
+
+        let result = await service.execute(
+            ExternalActionCommand(kind: .openMemoryLens, source: .appIntent),
+            now: .now
+        )
+
+        XCTAssertEqual(result.outcome, .routed)
+        XCTAssertEqual(result.route, .presentOverlay(.memoryLens(entrySource: .appIntent)))
+        XCTAssertEqual(router.dispatchedRoutes.map(\.source), [.appIntent])
+    }
+
     func testAppAdapterDoesNotDispatchWhenRuntimePerformsMutation() async {
         let runtimeExecutor = StaticRuntimeActionExecutor(
             result: RuntimeActionResult(outcome: .performed, messageTitle: "Recorded")

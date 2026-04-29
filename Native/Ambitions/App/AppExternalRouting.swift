@@ -414,6 +414,7 @@ struct AppExternalRouteTranslator {
             switch source {
             case .notification: .notification
             case .widget: .widget
+            case .appIntent: .appIntent
             case .deepLink: .deepLink
             case .futureExternalPayload: .external
             }

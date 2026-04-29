@@ -8,6 +8,9 @@ enum AmbitionsAppShortcutDestination: String, CaseIterable, AppEnum {
     case command
     case memoryLens = "memory_lens"
     case quickCapture = "quick_capture"
+    case startNextStep = "start_next_step"
+    case markDone = "mark_done"
+    case saveTheDay = "save_the_day"
     case quickRecovery = "quick_recovery"
     case quickFocus = "quick_focus"
     case quickPlanPatch = "quick_plan_patch"
@@ -21,8 +24,11 @@ enum AmbitionsAppShortcutDestination: String, CaseIterable, AppEnum {
             .plan: DisplayRepresentation(title: "Plan"),
             .capturesInbox: DisplayRepresentation(title: "Capture"),
             .command: DisplayRepresentation(title: "Add something"),
-            .memoryLens: DisplayRepresentation(title: "What Ambitions knows"),
-            .quickCapture: DisplayRepresentation(title: "Quick capture"),
+            .memoryLens: DisplayRepresentation(title: "What Ambitions Knows"),
+            .quickCapture: DisplayRepresentation(title: "Capture"),
+            .startNextStep: DisplayRepresentation(title: "Start Next Step"),
+            .markDone: DisplayRepresentation(title: "Mark Done"),
+            .saveTheDay: DisplayRepresentation(title: "Save the Day"),
             .quickRecovery: DisplayRepresentation(title: "Make today doable"),
             .quickFocus: DisplayRepresentation(title: "Focus"),
             .quickPlanPatch: DisplayRepresentation(title: "Adjust Plan"),
@@ -43,6 +49,12 @@ enum AmbitionsAppShortcutDestination: String, CaseIterable, AppEnum {
             return .presentOverlay(.memoryLens(entrySource: .appIntent))
         case .quickCapture:
             return .presentOverlay(.commandSheet(intent: .quickCapture, entrySource: .appIntent, presentationContext: .quickCapture))
+        case .startNextStep:
+            return .openToday(.focus)
+        case .markDone:
+            return .openToday(.focus)
+        case .saveTheDay:
+            return .openToday(.recovery)
         case .quickRecovery:
             return .openToday(.recovery)
         case .quickFocus:
@@ -63,9 +75,15 @@ enum AmbitionsAppShortcutDestination: String, CaseIterable, AppEnum {
         case .command:
             return "Add something"
         case .memoryLens:
-            return "What Ambitions knows"
+            return "What Ambitions Knows"
         case .quickCapture:
-            return "Quick capture"
+            return "Capture"
+        case .startNextStep:
+            return "Start Next Step"
+        case .markDone:
+            return "Mark Done"
+        case .saveTheDay:
+            return "Save the Day"
         case .quickRecovery:
             return "Make today doable"
         case .quickFocus:
@@ -76,6 +94,145 @@ enum AmbitionsAppShortcutDestination: String, CaseIterable, AppEnum {
     }
 
     var routeURL: URL? {
+        d25CommandDescriptor.routeURL
+    }
+}
+
+enum AmbitionsShortcutExecutionPosture: String, Sendable, Equatable {
+    case opensAppOnly
+    case queuesLocalCapture
+    case requiresInAppConfirmation
+}
+
+struct AmbitionsShortcutCommandDescriptor: Sendable, Equatable {
+    let destination: AmbitionsAppShortcutDestination
+    let title: String
+    let dialog: String
+    let commandKind: AmbitionsCommandKind
+    let actionName: ExternalSurfaceActionName
+    let contractKind: ExternalSurfaceKind
+    let executionPosture: AmbitionsShortcutExecutionPosture
+    let producesReceipt: Bool
+    let privacySummary: String
+    let routeURL: URL?
+
+    var requiresConfirmation: Bool {
+        executionPosture == .requiresInAppConfirmation
+    }
+}
+
+extension AmbitionsAppShortcutDestination {
+    var d25CommandDescriptor: AmbitionsShortcutCommandDescriptor {
+        let routeURL = Self.url(for: appRoute)
+        switch self {
+        case .today:
+            return descriptor(
+                title: "Today",
+                dialog: "Opening Today in Ambitions.",
+                commandKind: .openDestination,
+                actionName: .openToday,
+                routeURL: routeURL
+            )
+        case .plan, .quickPlanPatch:
+            return descriptor(
+                title: displayTitle,
+                dialog: "Opening Plan in Ambitions.",
+                commandKind: .openDestination,
+                actionName: .open,
+                routeURL: routeURL
+            )
+        case .capturesInbox:
+            return descriptor(
+                title: "Capture",
+                dialog: "Opening Capture in Ambitions.",
+                commandKind: .openDestination,
+                actionName: .openCapturesInbox,
+                routeURL: routeURL
+            )
+        case .command:
+            return descriptor(
+                title: "Add something",
+                dialog: "Opening the quiet add sheet in Ambitions.",
+                commandKind: .openDestination,
+                actionName: .open,
+                routeURL: routeURL
+            )
+        case .memoryLens:
+            return descriptor(
+                title: "What Ambitions Knows",
+                dialog: "Opening What Ambitions Knows.",
+                commandKind: .openDestination,
+                actionName: .openMemoryLens,
+                routeURL: routeURL
+            )
+        case .quickCapture:
+            return descriptor(
+                title: "Capture",
+                dialog: "Opening Capture in Ambitions.",
+                commandKind: .quickCapture,
+                actionName: .openCapturesInbox,
+                executionPosture: .queuesLocalCapture,
+                producesReceipt: true,
+                routeURL: routeURL
+            )
+        case .startNextStep, .quickFocus:
+            return descriptor(
+                title: displayTitle,
+                dialog: "Opening the next step in Ambitions.",
+                commandKind: .startFocus,
+                actionName: .openToday,
+                routeURL: routeURL
+            )
+        case .markDone:
+            return descriptor(
+                title: "Mark Done",
+                dialog: "Open Ambitions to confirm Mark Done.",
+                commandKind: .completeAction,
+                actionName: .complete,
+                executionPosture: .requiresInAppConfirmation,
+                producesReceipt: true,
+                routeURL: routeURL
+            )
+        case .saveTheDay, .quickRecovery:
+            return descriptor(
+                title: displayTitle,
+                dialog: "Open Ambitions to confirm Save the Day.",
+                commandKind: .recoverAction,
+                actionName: .openToday,
+                executionPosture: .requiresInAppConfirmation,
+                producesReceipt: true,
+                routeURL: routeURL
+            )
+        }
+    }
+
+    private func descriptor(
+        title: String,
+        dialog: String,
+        commandKind: AmbitionsCommandKind,
+        actionName: ExternalSurfaceActionName,
+        executionPosture: AmbitionsShortcutExecutionPosture = .opensAppOnly,
+        producesReceipt: Bool = false,
+        routeURL: URL?
+    ) -> AmbitionsShortcutCommandDescriptor {
+        let contract = ExternalSurfaceContractRegistry.contract(for: .appIntents)
+        return AmbitionsShortcutCommandDescriptor(
+            destination: self,
+            title: title,
+            dialog: dialog,
+            commandKind: commandKind,
+            actionName: actionName,
+            contractKind: contract.kind,
+            executionPosture: executionPosture,
+            producesReceipt: producesReceipt,
+            privacySummary: contract.hidesSensitiveDetailsByDefault
+                ? ExternalSurfacePrivacySnapshotPolicy.safeDefault.sensitiveDetailLabel
+                : "Shortcut details follow your Ambitions privacy settings.",
+            routeURL: routeURL
+        )
+    }
+
+    private static func url(for appRoute: AppExternalRoute) -> URL? {
         guard var components = AppExternalRouteTranslator().deepLinkURL(for: appRoute).flatMap({
             URLComponents(url: $0, resolvingAgainstBaseURL: false)
         }) else {
@@ -112,7 +269,7 @@ struct OpenAmbitionsDestinationIntent: AppIntent {
         await MainActor.run {
             AppIntentLaunchRouter.shared.queue(url)
         }
-        return .result(dialog: IntentDialog("Opening \(destination.displayTitle) in Ambitions."))
+        return .result(dialog: IntentDialog(stringLiteral: destination.d25CommandDescriptor.dialog))
     }
 }
 
@@ -154,7 +311,7 @@ struct CreateAmbitionsCaptureIntent: AppIntent {
             }
         }
 
-        return .result(dialog: IntentDialog("Saved to Ambitions."))
+        return .result(dialog: IntentDialog("Saved locally to Capture. Open Ambitions to review the receipt."))
     }
 }
 
@@ -211,44 +368,35 @@ struct AmbitionsShortcutsProvider: AppShortcutsProvider {
                 "Open what \(.applicationName) knows",
                 "Show what \(.applicationName) knows",
             ],
-            shortTitle: "What It Knows",
+            shortTitle: "What Ambitions Knows",
             systemImageName: "magnifyingglass"
         )
         AppShortcut(
-            intent: OpenAmbitionsDestinationIntent(destination: .quickCapture),
+            intent: OpenAmbitionsDestinationIntent(destination: .startNextStep),
             phrases: [
-                "Quick Capture in \(.applicationName)",
-                "Capture in \(.applicationName)",
+                "Start Next Step in \(.applicationName)",
+                "Start my next step in \(.applicationName)",
             ],
-            shortTitle: "Quick Capture",
-            systemImageName: "square.and.pencil"
-        )
-        AppShortcut(
-            intent: OpenAmbitionsDestinationIntent(destination: .quickFocus),
-            phrases: [
-                "Focus in \(.applicationName)",
-                "Open Focus in \(.applicationName)",
-            ],
-            shortTitle: "Focus",
+            shortTitle: "Start Next Step",
             systemImageName: "scope"
         )
         AppShortcut(
-            intent: OpenAmbitionsDestinationIntent(destination: .quickRecovery),
+            intent: OpenAmbitionsDestinationIntent(destination: .markDone),
             phrases: [
-                "Make today doable in \(.applicationName)",
-                "Fix today in \(.applicationName)",
+                "Mark Done in \(.applicationName)",
+                "Mark my step done in \(.applicationName)",
             ],
-            shortTitle: "Make Today Doable",
-            systemImageName: "arrow.uturn.left.circle"
+            shortTitle: "Mark Done",
+            systemImageName: "checkmark.circle"
         )
         AppShortcut(
-            intent: OpenAmbitionsDestinationIntent(destination: .quickPlanPatch),
+            intent: OpenAmbitionsDestinationIntent(destination: .saveTheDay),
             phrases: [
-                "Adjust Plan in \(.applicationName)",
-                "Open Plan in \(.applicationName)",
+                "Save the Day in \(.applicationName)",
+                "Make today doable in \(.applicationName)",
             ],
-            shortTitle: "Adjust Plan",
-            systemImageName: "calendar.badge.clock"
+            shortTitle: "Save the Day",
+            systemImageName: "arrow.uturn.left.circle"
         )
     }
 

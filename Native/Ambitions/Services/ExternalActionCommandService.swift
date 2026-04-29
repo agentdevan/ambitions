@@ -28,6 +28,7 @@ enum ExternalActionSource: Equatable, Sendable {
     case deepLink
     case notification
     case widget
+    case appIntent
     case futureExternalPayload
 }
 
@@ -175,6 +176,8 @@ final class DefaultExternalActionCommandService: ExternalActionCommandExecuting 
             return .deepLink
         case .notification:
             return .notificationAction
+        case .appIntent:
+            return .appIntent
         case .widget, .futureExternalPayload:
             return .widgetAction
         }
@@ -200,6 +203,7 @@ final class DefaultExternalActionCommandService: ExternalActionCommandExecuting 
         case .deepLink: .deepLink
         case .notification: .notification
         case .widget: .widget
+        case .appIntent: .appIntent
         case .futureExternalPayload: .external
         }
     }
