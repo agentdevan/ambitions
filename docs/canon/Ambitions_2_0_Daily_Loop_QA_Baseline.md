@@ -68,6 +68,10 @@ M01 upgrades this baseline from the Phase A daily-loop alpha into a post-D26 sce
 
 The catalog is not release readiness. It is the first maturity-layer proof that the five-tab app can be reviewed as one coherent daily life system before export/import, data-safety, external-platform, path, memory, review, portfolio, recovery, performance, accessibility-claims, and RC-lock batches deepen the evidence.
 
+## R05 Release Gate Addendum
+
+R01-R05 now complete the release-gate evidence layer for planning purposes, but they do not turn the daily-loop baseline into App Store or TestFlight proof. The final repo posture is `Candidate prepared; human approval required`; physical-device smoke, manual accessibility review, signed archive/App Store Connect validation, rendered external-surface checks, current store assets, live support/privacy URLs, and explicit human approval remain required before release claims change.
+
 Validation evidence after M01 closeout: `xcodegen generate`; focused M01/activation/daily-loop tests (`21` tests, `0` failures); adjacent shell/screen/Today/Capture/Goals/Goal Detail/Plan/You/reviews/receipts/accessibility regression lane (`138` tests, `0` failures); native simulator build on `iPhone 17`; full `AmbitionsTests` (`690` tests, `0` failures); and diff whitespace checks.
 
 Active limitations after M01: this remains simulator/unit/docs evidence plus a manual checklist. It does not prove export/import, migration/no-lost-data recovery, rendered widgets, Live Activity lifecycle delivery, real Shortcuts/Siri behavior, notification delivery, public accessibility claims, TestFlight readiness, App Store readiness, or final RC lock.

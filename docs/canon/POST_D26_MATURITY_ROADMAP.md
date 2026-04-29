@@ -4,7 +4,7 @@ Status: Active planning roadmap for Layer 2 and Layer 3 after the D01-D26 Design
 
 Purpose: Rewrite, rename, resequence, and rescope original Batches 89-120 against the newer canon docs and the D01-D26 Design Constitution delta/alignment backlog.
 
-This document does not independently mark D01-D26, M-series batches, or R-series batches complete. Operational status remains owned by `docs/codex/BATCH_REGISTRY.md`, which now records D01-D26, M01-M12, and R01-R04 complete for planning purposes after App Store, Privacy, Marketing, and Investor Demo Readiness. R05 is the next runnable release-readiness gate.
+This document does not independently mark D01-D26, M-series batches, or R-series batches complete. Operational status remains owned by `docs/codex/BATCH_REGISTRY.md`, which now records D01-D26, M01-M12, and R01-R05 complete for planning purposes after RC Lock Decision. The R-series closeout status is `Candidate prepared; human approval required`, with release submission still gated on human/device/platform/operator evidence.
 
 ## Planning Layers
 
@@ -498,7 +498,7 @@ Acceptance:
 
 Earliest timing: after M01-M11 as relevant; final version after D22-D25 if external surfaces ship.
 
-Status after M12: Completed for planning purposes by adding a visible shell continuity ribbon under the existing Mode Lens header and a code-backed `CrossSurfaceContinuityMaturityReport` for Today, Capture, Goals, Plan, You, Reviews, external surfaces, and Goal Detail Path Builder handoffs. The report also records mature performance evidence and R01-R05 blockers without adding hidden global modes, new top-level surfaces, rendered external-platform claims, public accessibility claims, TestFlight readiness, App Store readiness, or RC lock. Validation evidence is recorded in `docs/codex/BATCH_REGISTRY.md`; R01-R04 are now complete, and R05 is next.
+Status after M12: Completed for planning purposes by adding a visible shell continuity ribbon under the existing Mode Lens header and a code-backed `CrossSurfaceContinuityMaturityReport` for Today, Capture, Goals, Plan, You, Reviews, external surfaces, and Goal Detail Path Builder handoffs. The report also records mature performance evidence and R01-R05 blockers without adding hidden global modes, new top-level surfaces, rendered external-platform claims, public accessibility claims, TestFlight readiness, App Store readiness, or RC lock. Validation evidence is recorded in `docs/codex/BATCH_REGISTRY.md`; R01-R05 are now complete for planning purposes, and R05 records `Candidate prepared; human approval required`.
 
 ## Layer 3: RC Lock / TestFlight / App Store Path
 
@@ -605,7 +605,7 @@ Acceptance:
 - screenshots are current,
 - investor/demo story proves the Golden Launch Loop.
 
-Status after R04: Completed for planning purposes by adding a code-backed `ReleaseExternalTruthReadinessPacket` over App Store copy, screenshot plan, privacy labels, reviewer notes, support/contact requirements, release notes, investor demo script, marketing one-pager, accessibility claims, and platform claims. R04 drafts public-facing material from current native evidence while keeping curated screenshots, live support/privacy URLs, signed archive validation, physical-device proof, rendered external-surface proof, public accessibility claims, App Store readiness, TestFlight readiness, and RC lock explicitly gated. Validation evidence is recorded in `docs/codex/BATCH_REGISTRY.md`; R05 is next.
+Status after R04: Completed for planning purposes by adding a code-backed `ReleaseExternalTruthReadinessPacket` over App Store copy, screenshot plan, privacy labels, reviewer notes, support/contact requirements, release notes, investor demo script, marketing one-pager, accessibility claims, and platform claims. R04 drafts public-facing material from current native evidence while keeping curated screenshots, live support/privacy URLs, signed archive validation, physical-device proof, rendered external-surface proof, public accessibility claims, App Store readiness, TestFlight readiness, and RC lock explicitly gated. Validation evidence is recorded in `docs/codex/BATCH_REGISTRY.md`; R05 is also complete and preserves those gates.
 
 ### R05 — RC Lock Decision
 
@@ -628,6 +628,8 @@ Acceptance:
 - no automatic lock after D26,
 - deferred items are named honestly,
 - next roadmap layer is chosen.
+
+Status after R05: completed for planning purposes by adding a code-backed `ReleaseCandidateLockDecisionReport` that records `Candidate prepared; human approval required`, names satisfied D01-D26/M01-M12/R01-R04 evidence, blocks human approval, physical-device smoke, manual accessibility proof, signed archive/App Store Connect validation, rendered external-platform proof, and store asset/live URL work, and defers Apple-first sync plus App Store submission-candidate status to human/operator decisions. Validation evidence is recorded in `docs/codex/BATCH_REGISTRY.md`. The next action is not another automatic R-batch; it is human release review and the remaining device/platform/submission gates.
 
 ## Original 89-120 To New Roadmap Mapping
 
@@ -766,4 +768,4 @@ After D26 validation, use this roadmap as the active M/R execution sequence. M01
 - known blockers,
 - and device/platform constraints.
 
-M01-M12 and R01-R04 are complete for planning purposes. R05 is now the next dependency-safe implementation batch. Preserve the D01-D26, M01-M12, and R01-R04 completion history and do not mark RC locked unless R05 records the evidence and human approval state honestly.
+M01-M12 and R01-R05 are complete for planning purposes. Preserve the D01-D26, M01-M12, and R01-R05 completion history and keep the release-candidate status at `Candidate prepared; human approval required` unless future human/device/platform/operator evidence changes it honestly.

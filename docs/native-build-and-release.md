@@ -40,6 +40,12 @@ powershell -ExecutionPolicy Bypass -File scripts/generate_ios_app_icons.ps1
 
 The privacy manifest lives at `Native/Ambitions/Resources/PrivacyInfo.xcprivacy`.
 
+## Release Candidate Decision Status
+
+R05 records the current repo release posture in `ReleaseCandidateLockDecisionReport` as `Candidate prepared; human approval required`.
+
+That status is not a substitute for the native release workflow below. TestFlight, App Store submission, final RC lock, and public accessibility/platform claims still require physical-device smoke, manual accessibility proof, signed archive/App Store Connect validation, rendered external-surface checks, current store assets, live support/privacy URLs, and explicit human approval.
+
 ## Build The App
 
 Unsigned simulator build:

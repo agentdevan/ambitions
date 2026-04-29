@@ -8,7 +8,7 @@ final class ReleaseDeviceQAReadinessReportTests: XCTestCase {
             ReleaseDeviceQAScope.allCases
         )
         XCTAssertEqual(ReleaseDeviceQAReadinessReport.checks.count, 10)
-        XCTAssertTrue(ReleaseDeviceQAReadinessReport.readinessSummary.contains("R04 is next"))
+        XCTAssertTrue(ReleaseDeviceQAReadinessReport.readinessSummary.contains("R05 owns final RC lock truth"))
     }
 
     func testR03KeepsTestFlightGatedOnPhysicalDeviceProof() throws {

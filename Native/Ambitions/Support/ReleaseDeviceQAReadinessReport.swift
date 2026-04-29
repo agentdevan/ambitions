@@ -169,6 +169,6 @@ enum ReleaseDeviceQAReadinessReport {
     }
 
     static var readinessSummary: String {
-        "R03 records simulator/source QA for \(checks.count) device-readiness scopes and keeps TestFlight gated on physical-device smoke; R04 is next."
+        "R03 records simulator/source QA for \(checks.count) device-readiness scopes and keeps TestFlight gated on physical-device smoke; R05 owns final RC lock truth."
     }
 }

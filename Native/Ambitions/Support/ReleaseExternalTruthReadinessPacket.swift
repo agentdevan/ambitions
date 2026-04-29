@@ -85,7 +85,7 @@ enum ReleaseExternalTruthReadinessPacket {
             id: "release-notes",
             area: .releaseNotes,
             preparedStatement: "Release notes draft: Ambitions organizes life around Today, Goals, Capture, Plan, and You, with calmer capture, believable planning, recovery, proof, local trust controls, and clearer release-readiness limits.",
-            evidence: "D01-D26, M01-M12, and R01-R03 are complete for planning purposes, while R04/R05 still gate public materials and RC lock.",
+            evidence: "D01-D26, M01-M12, and R01-R04 are complete for planning purposes, while R05 still gates RC lock.",
             state: .draftedFromCurrentEvidence,
             limitation: "Final release notes must be reviewed against the exact submitted build and must not claim accessibility, sync, TestFlight, App Store, or RC readiness beyond evidence."
         ),

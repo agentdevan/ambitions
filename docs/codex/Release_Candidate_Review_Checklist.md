@@ -26,6 +26,14 @@ It is the short execution companion to [../canon/Ambitions_App_Store_Release_Com
 - Keep public accessibility claims locked until manual VoiceOver, Dynamic Type, Reduce Motion, contrast, motor/tap-target, and external-surface proof exists.
 - Keep widgets, Live Activities, notifications, Shortcuts/Siri, and installed-device shared-container claims blocked until device/platform proof exists.
 
+## R05 RC Decision Gate
+
+- Treat `ReleaseCandidateLockDecisionReport` as the final repo decision ledger, not as human approval.
+- Current repo status is `Candidate prepared; human approval required`.
+- Do not use final RC lock, TestFlight-ready, App Store-ready, real-device-verified, or accessibility-verified language until the named blockers are closed.
+- Resolve physical-device smoke, manual accessibility proof, signed archive/App Store Connect validation, rendered external-platform proof, current store screenshots, live support/privacy URLs, and final human approval before changing the release posture.
+- Keep Apple-first sync and App Store submission-candidate status as human/operator decisions, not automatic repo outcomes.
+
 ## Reviewer Access And Completeness
 
 - Confirm the submitted build is not incomplete, placeholder-heavy, or obviously broken.
@@ -56,6 +64,7 @@ It is the short execution companion to [../canon/Ambitions_App_Store_Release_Com
 ## Final Gate
 
 - Confirm Batch 60 is closed in repo truth.
+- Confirm R05 remains `Candidate prepared; human approval required` unless explicit human approval and the remaining device/platform/operator gates are recorded.
 - Confirm the release candidate matches current product truth and submission metadata.
 - Confirm all active conditional gates are resolved.
 - Record operator signoff only after the full RC gate in [../canon/Ambitions_App_Store_Release_Compliance.md](../canon/Ambitions_App_Store_Release_Compliance.md) is satisfied.

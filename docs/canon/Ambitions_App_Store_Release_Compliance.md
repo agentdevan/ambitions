@@ -48,20 +48,22 @@ When these sources conflict:
 - final submission gating comes from this document
 - execution steps come from `native-build-and-release.md` and the RC checklist
 
-## Current R04 Evidence Status
+## Current R05 Evidence Status
 
 R04 adds a code-backed `ReleaseExternalTruthReadinessPacket` for App Store copy, screenshot plan, privacy labels, reviewer notes, support/contact requirements, release notes, investor demo script, marketing one-pager, accessibility claims, and platform claims.
 
-The packet is drafting evidence only. It does not make Ambitions App Store submission-ready, TestFlight-ready, accessibility-claim-ready, platform-claim-ready, or RC locked.
+R05 adds a code-backed `ReleaseCandidateLockDecisionReport` that records `Candidate prepared; human approval required`, names satisfied D01-D26/M01-M12/R01-R04 evidence, and keeps human approval, physical-device smoke, manual accessibility proof, signed archive/App Store Connect validation, rendered external-platform proof, store assets/live URLs, Apple-first sync, and App Store submission-candidate status blocked or deferred.
 
-Current R04 limitations:
+These packets are release evidence and decision ledgers only. They do not make Ambitions App Store submission-ready, TestFlight-ready, accessibility-claim-ready, platform-claim-ready, or finally RC locked.
+
+Current R05 limitations:
 
 - screenshots remain a human-owned asset from the final signed build and privacy-safe demo data
 - live support and privacy URLs remain required before submission
 - App Privacy disclosures must still be reconciled against the final submitted binary and App Store Connect taxonomy
 - manual accessibility proof is still required before public accessibility claims
 - real-device/platform proof is still required for widgets, Live Activities, notifications, Shortcuts/Siri, and installed-device shared-container behavior
-- signed archive validation, App Store Connect validation, and final human approval remain R05/operator gates
+- signed archive validation, App Store Connect validation, and final human approval remain operator gates
 
 ## Compliance Categories
 
@@ -162,6 +164,7 @@ Classification: operational checklist item
 Roadmap support:
 
 - R04 prepares a code-backed draft packet for external truth, but final assets and App Store Connect entry remain release-operator responsibilities after product scope stabilizes
+- R05 records the current decision posture as `Candidate prepared; human approval required`; it does not replace signed archive validation, App Store Connect validation, store asset creation, or human approval
 
 Operational submission requirements:
 
