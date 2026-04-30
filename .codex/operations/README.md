@@ -1,47 +1,33 @@
-# Ambitions Codex Operations
+# Ambitions 3.0 Codex Operations
 
-This folder is the production operating manual for Codex work in Ambitions.
+Index:
 
-Use it to standardize:
-
-- task intake
-- task classification
-- execution mode selection
-- batch-pass discipline
-- change-type expectations
-- validation policy
-- regression-pack usage
-- manual signoff policy
-- known flaky-proof handling
-- escalation rules
-- release and merge readiness flow
-
-## How To Use It
-
-1. start with `task-intake.md`
-2. classify the request with `task-classification.md`
-3. choose the execution mode from `execution-modes.md`
-4. for active-batch work, apply `batch-execution-protocol.md`
-5. use `transformation-validation-matrix.md` to choose the narrowest truthful validation set
-6. use `frontend-regression-pack.md` for recurring shell/Today/Goals regression proof
-7. use `manual-signoff-checklists.md` when manual closeout is required
-8. check `known-flakes.md` before spending time rediscovering accepted instability
-9. use release flow documents when the work is nearing merge or release
-
-## Operating Principles
-
-- quality is the non-negotiable target
-- speed comes from narrower reads, bounded passes, fixed regression packs, and truthful closeout rules
-- do not spend tokens re-diagnosing already-known flakes
-- do not use full UI validation as the default answer for every batch
-- do not widen implementation while trying to close a validation-only gap
-
-## Maintenance Rules
-
-- review this layer when the same intake or execution confusion happens more than once
-- update task classes when Ambitions adds a new recurring work type
-- update regression packs when stable proof surfaces change
-- update signoff checklists when a surface meaningfully changes its closeout bar
-- update known flakes when a timing-sensitive proof is accepted, fixed, or retired
-- update release and validation docs when the native build flow or shipped surfaces change
-- prune stale operational examples when they no longer match current repo truth
+- [`.codex/operations/ambitions-3-0-default-workflow.md`](ambitions-3-0-default-workflow.md)
+- [`.codex/operations/batch-execution-protocol.md`](batch-execution-protocol.md)
+- [`.codex/operations/branch-and-sync-protocol.md`](branch-and-sync-protocol.md)
+- [`.codex/operations/change-types.md`](change-types.md)
+- [`.codex/operations/closeout-and-evidence-protocol.md`](closeout-and-evidence-protocol.md)
+- [`.codex/operations/context-loading-protocol.md`](context-loading-protocol.md)
+- [`.codex/operations/dependency-change-protocol.md`](dependency-change-protocol.md)
+- [`.codex/operations/escalation-rules.md`](escalation-rules.md)
+- [`.codex/operations/execution-modes.md`](execution-modes.md)
+- [`.codex/operations/failure-recovery-protocol.md`](failure-recovery-protocol.md)
+- [`.codex/operations/frontend-regression-pack.md`](frontend-regression-pack.md)
+- [`.codex/operations/known-flakes.md`](known-flakes.md)
+- [`.codex/operations/local-validation-protocol.md`](local-validation-protocol.md)
+- [`.codex/operations/manual-signoff-checklists.md`](manual-signoff-checklists.md)
+- [`.codex/operations/prompt-compression-protocol.md`](prompt-compression-protocol.md)
+- [`.codex/operations/regression-selection-protocol.md`](regression-selection-protocol.md)
+- [`.codex/operations/release-claim-discipline-protocol.md`](release-claim-discipline-protocol.md)
+- [`.codex/operations/release-flow.md`](release-flow.md)
+- [`.codex/operations/review-mode.md`](review-mode.md)
+- [`.codex/operations/skill-selection-protocol.md`](skill-selection-protocol.md)
+- [`.codex/operations/source-truth-reconciliation-protocol.md`](source-truth-reconciliation-protocol.md)
+- [`.codex/operations/stale-docs-reconciliation-protocol.md`](stale-docs-reconciliation-protocol.md)
+- [`.codex/operations/task-classification.md`](task-classification.md)
+- [`.codex/operations/task-intake-and-routing-protocol.md`](task-intake-and-routing-protocol.md)
+- [`.codex/operations/task-intake.md`](task-intake.md)
+- [`.codex/operations/touch-budget-protocol.md`](touch-budget-protocol.md)
+- [`.codex/operations/transformation-validation-matrix.md`](transformation-validation-matrix.md)
+- [`.codex/operations/validation-policy.md`](validation-policy.md)
+- [`.codex/operations/worktree-protocol.md`](worktree-protocol.md)
