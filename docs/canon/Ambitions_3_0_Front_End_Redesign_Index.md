@@ -47,6 +47,39 @@ Ambitions should help the user:
 
 ---
 
+## Golden Launch Loop
+
+Ambitions 3.0 front-end work must perfect this loop:
+
+```text
+Capture → Place → Plan → Do Today → Close / Recover → Save Proof
+```
+
+The complete 230-upgrade backlog for this loop now lives in:
+
+- [Ambitions 3.0 — Golden Launch Loop Upgrade Bank](./Ambitions_3_0_Golden_Launch_Loop_Upgrade_Bank.md)
+
+This upgrade bank is active front-end canon for Ambitions 3.0 planning. It must be used when creating Capture, Place, Plan, Today, Action Closure, Proof, Trust, AI/personalization, visual system, copy, and roadmap child specs.
+
+### Day Rail protection rule
+
+The Ambitions Day Rail is locked as the Today signature object. Golden Launch Loop upgrades must strengthen the Day Rail instead of replacing it.
+
+Any Do Today upgrade must preserve:
+
+- `AmbitionsDayRailView` as the dominant Today object.
+- The compact Today context header above the rail.
+- The rail as the Now / Next / Later navigation spine.
+- `Start here` as one recommended step, not a dashboard of competing recommendations.
+- Rail row tap opens Step Detail; only `Start now` opens Step Session.
+- Closure and proof appear inside or directly attached to the rail.
+- No generic timeline, task list, calendar clone, focus-timer-first redesign, productivity score, streak system, or extra Today dashboard stack.
+- No starfield treatment on Today. Starfield remains Capture and First Run only unless canon is revised.
+
+If a future implementation would conflict with the Day Rail spec, the Day Rail spec wins.
+
+---
+
 ## Non-Negotiable Product Constraints
 
 Ambitions 3.0 must not turn Ambitions into:
@@ -111,6 +144,25 @@ Examples:
 - Goals: Mission Control / Goal Detail path system
 - You: Personal system center for setup, trust, memory, history, and planning defaults
 
+### 8. Every meaningful object must answer the Golden Loop questions
+
+Every step, capture, goal input, plan item, closure, receipt, and proof artifact should be able to answer:
+
+```text
+1. Where did this come from?
+2. Where does it belong?
+3. What is the next believable step?
+4. When should it surface?
+5. Why is it recommended?
+6. What happened to it?
+7. Did it still count?
+8. What changed because of it?
+9. Can the user undo or correct it?
+10. Where is the proof?
+```
+
+If a surface cannot answer these questions, it is not yet integrated into the Ambitions 3.0 front-end loop.
+
 ---
 
 ## Active Ambitions 3.0 Child Docs
@@ -128,11 +180,34 @@ Core thesis:
 
 > The Ambitions Day Rail should not show the user’s day. It should show the user’s believable path through the day.
 
+### 2. System-wide — Golden Launch Loop Upgrade Bank
+
+Document: [Ambitions 3.0 — Golden Launch Loop Upgrade Bank](./Ambitions_3_0_Golden_Launch_Loop_Upgrade_Bank.md)
+
+Status: Active front-end canon companion  
+Surfaces: Capture, Place, Plan, Today, Close / Recover, Proof, Trust, AI/personalization, visual system, copy, roadmap  
+Primary loop: `Capture → Place → Plan → Do Today → Close / Recover → Save Proof`  
+Purpose: Preserve the full 230-upgrade backlog for perfecting the launch loop while protecting the locked Day Rail invention.
+
+Core thesis:
+
+> Capture is how things enter. The Day Rail is where life gets executed. Action Closure is how reality gets handled. Receipts and proof are how trust compounds.
+
 ---
 
 ## Planned Child Docs
 
 These docs should be added as the redesign proceeds. Keep links here even before implementation begins.
+
+### Golden Launch Loop
+
+- [x] 230-upgrade Golden Launch Loop bank
+- [ ] Universal object lifecycle contract
+- [ ] Recommended Step model refinement
+- [ ] Step source and duration source labels
+- [ ] Why This explanation system
+- [ ] Receipt and proof creation contract
+- [ ] Guided automation trust boundary system
 
 ### Today
 
@@ -160,6 +235,17 @@ These docs should be added as the redesign proceeds. Keep links here even before
 - [ ] Ready to Place flow
 - [ ] Grow into Goal flow
 - [ ] Capture-to-Today promotion
+- [ ] Capture-to-proof promotion
+- [ ] Capture decide-later queue
+
+### Place
+
+- [ ] Placement resolver
+- [ ] Placement preview
+- [ ] Placement receipt
+- [ ] Placement undo
+- [ ] Placement privacy checks
+- [ ] Bulk placement
 
 ### Plan
 
@@ -170,6 +256,25 @@ These docs should be added as the redesign proceeds. Keep links here even before
 - [ ] Planning Defaults setup
 - [ ] Vacation / Away Time setup
 - [ ] Reflow preview and plan integrity UI
+- [ ] Believability and overcommitment checks
+
+### Close / Recover
+
+- [ ] Unified Action Closure sheet
+- [ ] Still Counts flagship treatment
+- [ ] Recovery modes
+- [ ] Closure reason taxonomy
+- [ ] Long absence recovery
+- [ ] Vacation return recovery
+
+### Proof / Receipts
+
+- [ ] Proof Rail
+- [ ] What Counted review
+- [ ] Receipt toast
+- [ ] Receipt peek
+- [ ] Receipt search
+- [ ] Proof correction and privacy controls
 
 ### You
 
@@ -228,14 +333,16 @@ When using this parent doc with Codex:
 
 1. Start with this file.
 2. Open the child doc for the target surface.
-3. Compare the child doc against existing repo canon and implementation.
-4. Do not implement child specs blindly if they conflict with higher-priority canon.
-5. Preserve the canonical tabs: Today, Goals, Capture, Plan, You.
-6. Keep changes modular and testable.
-7. Avoid widening the app.
-8. Prefer reusable primitives over one-off UI.
-9. Add previews and tests with every build batch.
-10. Do not claim release readiness unless physical-device, accessibility, and App Store gates are actually verified.
+3. Open the Golden Launch Loop Upgrade Bank when the work touches Capture, Place, Plan, Today, Closure, Proof, Trust, AI/personalization, copy, or roadmap.
+4. Compare the child doc against existing repo canon and implementation.
+5. Do not implement child specs blindly if they conflict with higher-priority canon.
+6. Preserve the canonical tabs: Today, Goals, Capture, Plan, You.
+7. Preserve the locked Day Rail invention when working on Today or Do Today upgrades.
+8. Keep changes modular and testable.
+9. Avoid widening the app.
+10. Prefer reusable primitives over one-off UI.
+11. Add previews and tests with every build batch.
+12. Do not claim release readiness unless physical-device, accessibility, and App Store gates are actually verified.
 
 ---
 
@@ -248,18 +355,22 @@ When discussing future redesign work:
 3. Keep child docs implementation-grade, not just conceptual.
 4. Record decisions in the child doc rather than scattering them across chat.
 5. If a child doc changes the product direction, update this parent doc too.
+6. If a proposed Do Today upgrade changes the Day Rail, check the Day Rail protection rule before accepting it.
 
 ---
 
 ## Current Priority
 
-The current highest-priority Ambitions 3.0 front-end redesign object is:
+The current highest-priority Ambitions 3.0 front-end redesign objects are:
 
-> Today — Ambitions Day Rail
+1. Today — Ambitions Day Rail
+2. Golden Launch Loop integration
 
 Reason:
 
 Today is the flagship daily-use surface. If Today does not immediately answer what matters now, why it matters, what fits, what changed, and what counted, Ambitions cannot feel like the most important app on a user’s phone.
+
+The Golden Launch Loop ensures every major surface feeds that daily execution truth instead of becoming disconnected premium panels.
 
 ---
 
@@ -278,9 +389,12 @@ An Ambitions 3.0 front-end redesign is not complete until it is:
 - Specific enough for Codex
 - Calm enough for users
 - Deep enough to feel like Ambitions
+- Integrated into the Golden Launch Loop
+- Non-regressive to the locked Day Rail when touching Today
 
 ---
 
 ## Current Linked Specs
 
 - [Ambitions 3.0 — Day Rail SwiftUI Build Spec](./Ambitions_3_0_Day_Rail_SwiftUI_Build_Spec.md)
+- [Ambitions 3.0 — Golden Launch Loop Upgrade Bank](./Ambitions_3_0_Golden_Launch_Loop_Upgrade_Bank.md)
