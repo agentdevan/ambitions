@@ -49,6 +49,13 @@ DerivedData/
 output/DerivedData*/
 *.xcresult
 
+# generated and scratch artifacts
+/tmp/
+tmp/
+*.ndjson
+*.log
+*.tmp
+
 # local validation artifacts
 output/logs/
 output/manual-audit/
