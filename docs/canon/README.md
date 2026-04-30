@@ -1,104 +1,123 @@
 # Ambitions Canon Index
 
-This folder contains active Ambitions canon plus preserved historical support docs. Use active docs first.
+This folder contains Ambitions canon, active rebuild docs, supporting older canon, and historical context.
 
-## Active Source-Of-Truth Docs
+Ambitions 3.0 is the active rebuild source of truth.
 
-- [SOURCE_OF_TRUTH_MAP.md](SOURCE_OF_TRUTH_MAP.md)
-- [PRODUCT_DECISIONS.md](PRODUCT_DECISIONS.md)
-- [GOLDEN_LAUNCH_LOOP.md](GOLDEN_LAUNCH_LOOP.md)
-- [ROADMAP_BATCH_CLASSIFICATION.md](ROADMAP_BATCH_CLASSIFICATION.md)
-- [HUMAN_LANGUAGE_REVIEW.md](HUMAN_LANGUAGE_REVIEW.md)
-- [AMBITION_CANON_COMPLETION_REPORT.md](AMBITION_CANON_COMPLETION_REPORT.md)
-- [DOCS_RECONCILIATION_REVIEW.md](DOCS_RECONCILIATION_REVIEW.md)
-- [Ambitions_Master_Product_Visual_System_Spec_v2.md](Ambitions_Master_Product_Visual_System_Spec_v2.md)
-- [../../MASTER_PRODUCT_SPEC.md](../../MASTER_PRODUCT_SPEC.md)
-- [design/Ambitions_Design_Constitution.md](design/Ambitions_Design_Constitution.md)
-- [Ambitions_2_0_Master_Plan.md](Ambitions_2_0_Master_Plan.md)
-- [Ambitions_2_0_Product_Architecture.md](Ambitions_2_0_Product_Architecture.md)
-- [Ambitions_2_0_Systems_Architecture.md](Ambitions_2_0_Systems_Architecture.md)
-- [Ambitions_2_0_Visual_System.md](Ambitions_2_0_Visual_System.md)
-- [Ambitions_2_0_Object_Terminology.md](Ambitions_2_0_Object_Terminology.md)
-- [Ambitions_2_0_Roadmap.md](Ambitions_2_0_Roadmap.md)
-- [Ambitions_2_0_Batch_Plan.md](Ambitions_2_0_Batch_Plan.md)
-- [Ambitions_2_0_Decision_Log.md](Ambitions_2_0_Decision_Log.md)
-- [Ambitions_2_0_Implementation_Gap_Audit.md](Ambitions_2_0_Implementation_Gap_Audit.md)
-- [Ambitions_2_0_Roadmap_Merge_Audit.md](Ambitions_2_0_Roadmap_Merge_Audit.md)
-- [POST_D26_MATURITY_ROADMAP.md](POST_D26_MATURITY_ROADMAP.md)
-- [Documentation_Cleanup_Audit.md](Documentation_Cleanup_Audit.md)
+---
 
-## Active Consolidation Canon
+## Start here
 
-These docs extract existing canon into narrower implementation-readable specs. They clarify; they do not replace the active source-of-truth stack above.
+For Ambitions 3.0 work, start with:
 
-- [SOURCE_OF_TRUTH_MAP.md](SOURCE_OF_TRUTH_MAP.md)
-- [PRODUCT_DECISIONS.md](PRODUCT_DECISIONS.md)
-- [GOLDEN_LAUNCH_LOOP.md](GOLDEN_LAUNCH_LOOP.md)
-- [ROADMAP_BATCH_CLASSIFICATION.md](ROADMAP_BATCH_CLASSIFICATION.md)
-- [HUMAN_LANGUAGE_REVIEW.md](HUMAN_LANGUAGE_REVIEW.md)
-- [AMBITION_CANON_COMPLETION_REPORT.md](AMBITION_CANON_COMPLETION_REPORT.md)
-- [DOCS_RECONCILIATION_REVIEW.md](DOCS_RECONCILIATION_REVIEW.md)
-- [Ambitions_Master_Product_Visual_System_Spec_v2.md](Ambitions_Master_Product_Visual_System_Spec_v2.md)
-- [CANON_CONSOLIDATION_GAP_AUDIT.md](CANON_CONSOLIDATION_GAP_AUDIT.md)
+1. [Ambitions_3_0_Source_Of_Truth_Override.md](Ambitions_3_0_Source_Of_Truth_Override.md)
+2. [Ambitions_3_0_Front_End_Redesign_Index.md](Ambitions_3_0_Front_End_Redesign_Index.md)
+3. [Ambitions_3_0_Rebuild_Operating_Model.md](Ambitions_3_0_Rebuild_Operating_Model.md)
+4. [Ambitions_3_0_Documentation_System_Index.md](Ambitions_3_0_Documentation_System_Index.md)
+5. [Ambitions_3_0_Primitive_Architecture.md](Ambitions_3_0_Primitive_Architecture.md)
+6. [Ambitions_3_0_Product_Language_System.md](Ambitions_3_0_Product_Language_System.md)
+
+Use [../codex/BATCH_REGISTRY.md](../codex/BATCH_REGISTRY.md) for implementation status truth.
+
+Older canon remains supporting context unless the 3.0 source override or documentation index explicitly keeps it binding for a domain that 3.0 does not replace.
+
+---
+
+## Active Ambitions 3.0 governance
+
+- [Ambitions_3_0_Source_Of_Truth_Override.md](Ambitions_3_0_Source_Of_Truth_Override.md)
+- [Ambitions_3_0_Front_End_Redesign_Index.md](Ambitions_3_0_Front_End_Redesign_Index.md)
+- [Ambitions_3_0_Rebuild_Operating_Model.md](Ambitions_3_0_Rebuild_Operating_Model.md)
+- [Ambitions_3_0_Documentation_System_Index.md](Ambitions_3_0_Documentation_System_Index.md)
+- [Ambitions_3_0_FAANG_Rebuild_Documentation_Completeness_Matrix.md](Ambitions_3_0_FAANG_Rebuild_Documentation_Completeness_Matrix.md)
+- [Ambitions_3_0_Repo_Hygiene_And_Active_Canon_Policy.md](Ambitions_3_0_Repo_Hygiene_And_Active_Canon_Policy.md)
+
+---
+
+## Active strategy and rebuild docs
+
+- [Ambitions_3_0_Product_Strategy_Brief.md](Ambitions_3_0_Product_Strategy_Brief.md)
+- [Ambitions_3_0_North_Star_And_Product_Metrics.md](Ambitions_3_0_North_Star_And_Product_Metrics.md)
+- [Ambitions_3_0_Competitive_Positioning_And_Language_Research.md](Ambitions_3_0_Competitive_Positioning_And_Language_Research.md)
+- [Ambitions_3_0_Primitive_Architecture.md](Ambitions_3_0_Primitive_Architecture.md)
+- [Ambitions_3_0_Front_End_Implementation_Batch_Plan.md](Ambitions_3_0_Front_End_Implementation_Batch_Plan.md)
+- [Ambitions_3_0_Current_Implementation_Gap_Audit.md](Ambitions_3_0_Current_Implementation_Gap_Audit.md)
+- [Ambitions_3_0_Release_Readiness_And_Evidence_Gates.md](Ambitions_3_0_Release_Readiness_And_Evidence_Gates.md)
+
+---
+
+## Active IA, shell, Plan, and visual system docs
+
+- [Ambitions_3_0_Information_Architecture_And_Routing_Model.md](Ambitions_3_0_Information_Architecture_And_Routing_Model.md)
+- [Ambitions_3_0_Top_Level_Surface_Density_Constitution.md](Ambitions_3_0_Top_Level_Surface_Density_Constitution.md)
+- [Ambitions_3_0_Ambitions_Operating_Shell.md](Ambitions_3_0_Ambitions_Operating_Shell.md)
+- [Ambitions_3_0_Plan_Life_Suite_Endgame.md](Ambitions_3_0_Plan_Life_Suite_Endgame.md)
+- [Ambitions_3_0_Day_Rail_SwiftUI_Build_Spec.md](Ambitions_3_0_Day_Rail_SwiftUI_Build_Spec.md)
+- [Ambitions_3_0_Ambition_Meridian_Shell_SwiftUI_Build_Spec.md](Ambitions_3_0_Ambition_Meridian_Shell_SwiftUI_Build_Spec.md)
+- [Ambitions_3_0_Signature_Objects_And_Rail_Grammar.md](Ambitions_3_0_Signature_Objects_And_Rail_Grammar.md)
+- [Ambitions_3_0_Design_System_Primitives.md](Ambitions_3_0_Design_System_Primitives.md)
+- [Ambitions_3_0_Screenshot_Readiness_Spec.md](Ambitions_3_0_Screenshot_Readiness_Spec.md)
+- [Ambitions_3_0_First_60_Seconds_Spec.md](Ambitions_3_0_First_60_Seconds_Spec.md)
+
+---
+
+## Active Golden Launch Loop and invention docs
+
+- [Ambitions_3_0_Golden_Launch_Loop_Upgrade_Bank.md](Ambitions_3_0_Golden_Launch_Loop_Upgrade_Bank.md)
+- [Ambitions_3_0_UI_Invention_Upgrade_Bank.md](Ambitions_3_0_UI_Invention_Upgrade_Bank.md)
+- [Ambitions_3_0_UI_Invention_Evaluation_Framework.md](Ambitions_3_0_UI_Invention_Evaluation_Framework.md)
+- [Ambitions_3_0_Universal_Object_Lifecycle_Contract.md](Ambitions_3_0_Universal_Object_Lifecycle_Contract.md)
+- [Ambitions_3_0_Object_Ownership_And_Appearance_Matrix.md](Ambitions_3_0_Object_Ownership_And_Appearance_Matrix.md)
+- [Ambitions_3_0_Surface_State_Matrix.md](Ambitions_3_0_Surface_State_Matrix.md)
+- [Ambitions_3_0_Placement_Resolver_Spec.md](Ambitions_3_0_Placement_Resolver_Spec.md)
+- [Ambitions_3_0_Action_Closure_Sheet_Spec.md](Ambitions_3_0_Action_Closure_Sheet_Spec.md)
+- [Ambitions_3_0_Proof_Receipts_And_Reviews_Contract.md](Ambitions_3_0_Proof_Receipts_And_Reviews_Contract.md)
+
+---
+
+## Active language, content, and launch narrative docs
+
+- [Ambitions_3_0_Product_Language_System.md](Ambitions_3_0_Product_Language_System.md)
+- [Ambitions_3_0_Microcopy_Pattern_Library.md](Ambitions_3_0_Microcopy_Pattern_Library.md)
+- [Ambitions_3_0_Action_Verbs_And_Receipt_Grammar.md](Ambitions_3_0_Action_Verbs_And_Receipt_Grammar.md)
+- [Ambitions_3_0_Content_QA_And_Copy_Guard.md](Ambitions_3_0_Content_QA_And_Copy_Guard.md)
+- [Ambitions_3_0_Migration_And_Deprecation_Plan.md](Ambitions_3_0_Migration_And_Deprecation_Plan.md)
+- [Ambitions_3_0_Launch_Narrative_And_Demo_Script.md](Ambitions_3_0_Launch_Narrative_And_Demo_Script.md)
+
+---
+
+## Active engineering, data, AI, privacy, accessibility, and QA docs
+
+- [Ambitions_3_0_State_Machines_And_Domain_Flows.md](Ambitions_3_0_State_Machines_And_Domain_Flows.md)
+- [Ambitions_3_0_Recommendation_Contract.md](Ambitions_3_0_Recommendation_Contract.md)
+- [Ambitions_3_0_Recommendation_Eligibility_Engine.md](Ambitions_3_0_Recommendation_Eligibility_Engine.md)
+- [Ambitions_3_0_Evidence_Hierarchy.md](Ambitions_3_0_Evidence_Hierarchy.md)
+- [Ambitions_3_0_Data_Event_Taxonomy.md](Ambitions_3_0_Data_Event_Taxonomy.md)
+- [Ambitions_3_0_AI_Evaluation_And_Grounding_Plan.md](Ambitions_3_0_AI_Evaluation_And_Grounding_Plan.md)
+- [Ambitions_3_0_Personalization_Consent_Model.md](Ambitions_3_0_Personalization_Consent_Model.md)
+- [Ambitions_3_0_Codex_Only_Implementation_And_Testing_Strategy.md](Ambitions_3_0_Codex_Only_Implementation_And_Testing_Strategy.md)
+- [Ambitions_3_0_Privacy_Threat_Model.md](Ambitions_3_0_Privacy_Threat_Model.md)
+- [Ambitions_3_0_Accessibility_Conformance_Plan.md](Ambitions_3_0_Accessibility_Conformance_Plan.md)
+- [Ambitions_3_0_UX_Research_Plan.md](Ambitions_3_0_UX_Research_Plan.md)
+
+---
+
+## Supporting older canon
+
+Use these only where Ambitions 3.0 does not replace them:
+
 - [DOMAIN_MODEL.md](DOMAIN_MODEL.md)
-- [GOAL_PLAN_TASK_LIFECYCLE.md](GOAL_PLAN_TASK_LIFECYCLE.md)
-- [GOALS_GOAL_DETAIL.md](GOALS_GOAL_DETAIL.md)
-- [TODAY_NOW_STATE.md](TODAY_NOW_STATE.md)
-- [YOU_PROFILE_REVIEWS.md](YOU_PROFILE_REVIEWS.md)
-- [IA_NAVIGATION_DRILLDOWN.md](IA_NAVIGATION_DRILLDOWN.md)
-- [INTELLIGENCE_AUTOMATION_SUGGESTIONS.md](INTELLIGENCE_AUTOMATION_SUGGESTIONS.md)
-- [VISUAL_SYSTEM_COMPONENTS_MOTION.md](VISUAL_SYSTEM_COMPONENTS_MOTION.md)
-- [ACCESSIBILITY_FOCUS_SUPPORT.md](ACCESSIBILITY_FOCUS_SUPPORT.md)
-- [EXTERNAL_SURFACES_NOTIFICATIONS_WIDGETS.md](EXTERNAL_SURFACES_NOTIFICATIONS_WIDGETS.md)
-- [DATA_LOCAL_SYNC_EXPORT.md](DATA_LOCAL_SYNC_EXPORT.md)
-- [MONETIZATION_PRICING_BUSINESS_MODEL.md](MONETIZATION_PRICING_BUSINESS_MODEL.md)
-- [LAUNCH_SCOPE_MVP_QUALITY_BAR.md](LAUNCH_SCOPE_MVP_QUALITY_BAR.md)
-- [ROADMAP_BATCH_GOVERNANCE.md](ROADMAP_BATCH_GOVERNANCE.md)
-- [ONBOARDING_SPEC.md](ONBOARDING_SPEC.md)
-- [CAPTURE_SMART_ATTACHMENT.md](CAPTURE_SMART_ATTACHMENT.md)
-- [PLAN_CALENDAR_BELIEVABILITY.md](PLAN_CALENDAR_BELIEVABILITY.md)
 - [TRUST_PRIVACY_MEMORY.md](TRUST_PRIVACY_MEMORY.md)
-- [EMPTY_ERROR_RECOVERY_STATES.md](EMPTY_ERROR_RECOVERY_STATES.md)
+- [DATA_LOCAL_SYNC_EXPORT.md](DATA_LOCAL_SYNC_EXPORT.md)
 - [IMPLEMENTATION_ACCEPTANCE_GATES.md](IMPLEMENTATION_ACCEPTANCE_GATES.md)
+- [ROADMAP_BATCH_GOVERNANCE.md](ROADMAP_BATCH_GOVERNANCE.md)
+- [MONETIZATION_PRICING_BUSINESS_MODEL.md](MONETIZATION_PRICING_BUSINESS_MODEL.md)
+- [EXTERNAL_SURFACES_NOTIFICATIONS_WIDGETS.md](EXTERNAL_SURFACES_NOTIFICATIONS_WIDGETS.md)
 
-## Active Supporting Canon
+---
 
-- [POST_D26_MATURITY_ROADMAP.md](POST_D26_MATURITY_ROADMAP.md)
-  Post-D26 Layer 2/Layer 3 roadmap that rewrites original Batches 89-120 into M-series maturity batches and R-series release-readiness gates. Planning only; does not mark D01-D26 complete.
-- [Ambitions_2_0_Accessibility_Nutrition.md](Ambitions_2_0_Accessibility_Nutrition.md)
-- [Ambitions_2_0_Capability_Matrix.md](Ambitions_2_0_Capability_Matrix.md)
-- [Ambitions_2_0_Daily_Loop_QA_Baseline.md](Ambitions_2_0_Daily_Loop_QA_Baseline.md)
-- [Ambitions_2_0_Foundation_Performance_Persistence_Budget.md](Ambitions_2_0_Foundation_Performance_Persistence_Budget.md)
-- [Ambitions_2_0_Intelligence_Standards.md](Ambitions_2_0_Intelligence_Standards.md)
-- [Ambitions_2_0_RC_Maturity_Plan.md](Ambitions_2_0_RC_Maturity_Plan.md)
-- [design/README.md](design/README.md)
-
-## Design Contract Set
-
-- [design/screen-contract-matrix.md](design/screen-contract-matrix.md)
-- [design/component-contract-matrix.md](design/component-contract-matrix.md)
-- [design/ux-writing-state-language-matrix.md](design/ux-writing-state-language-matrix.md)
-- [design/accessibility-nutrition-screen-matrix.md](design/accessibility-nutrition-screen-matrix.md)
-- [design/external-surfaces-contract.md](design/external-surfaces-contract.md)
-- [design/smart-attachment-spec.md](design/smart-attachment-spec.md)
-- [design/grouped-navigation-list-spec.md](design/grouped-navigation-list-spec.md)
-- [design/panel-density-size-spec.md](design/panel-density-size-spec.md)
-- [design/DESIGN_TOKENS.md](design/DESIGN_TOKENS.md)
-
-## Historical But Useful Docs
-
-These files remain in place as historical/supporting context. They do not override the active Ambitions 2.0 source-of-truth stack.
-
-- [Ambitions_OS_Master_Roadmap.md](Ambitions_OS_Master_Roadmap.md)
-- [Ambitions_Surgical_Execution_Plan.md](Ambitions_Surgical_Execution_Plan.md)
-- [Ambitions_Codex_Batch_Plan.md](Ambitions_Codex_Batch_Plan.md)
-- [Ambitions_State_Continuity_Mesh.md](Ambitions_State_Continuity_Mesh.md)
-- [Ambitions_Product_Addendum_Continuity_Reality_Execution.md](Ambitions_Product_Addendum_Continuity_Reality_Execution.md)
-- [Ambitions_Frontend_Batches_49_60_Revised.md](Ambitions_Frontend_Batches_49_60_Revised.md)
-- [Ambitions_App_Store_Release_Compliance.md](Ambitions_App_Store_Release_Compliance.md)
-- [Ambitions_Launch_Master_Checklist.md](Ambitions_Launch_Master_Checklist.md)
-- [Ambitions_Accessibility_Nutrition_Labels_Audit.md](Ambitions_Accessibility_Nutrition_Labels_Audit.md)
-
-## Superseded / Archived Docs
+## Archive
 
 Archived superseded design and historical RC docs live in [../archive/README.md](../archive/README.md).
+
+Historical docs are context only and do not override Ambitions 3.0.
