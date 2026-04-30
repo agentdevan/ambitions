@@ -35,3 +35,14 @@ Run focused validation first. Escalate to full build/test only when touched code
 ## Focused Vs Full Validation
 
 Focused validation is enough for docs-only or narrow tests. Full validation is required for shared domain, routing, project, persistence, release, or broad UI shell changes.
+
+## Ambitions 3.0 Developer Tool Commands
+
+```bash
+git ls-files | grep -E '(^tmp/|^output/|.ndjson$|.log$|.tmp$|.xcresult$|DerivedData)' || true
+git diff --check
+git diff --cached --check
+scripts/run-doc-qa.sh || true
+```
+
+Generated logs under `output/logs/`, `docs/audits/doc-qa/*.log`, and `docs/audits/build-logs/*.log` must remain ignored.

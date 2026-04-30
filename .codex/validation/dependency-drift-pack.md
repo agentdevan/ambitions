@@ -35,3 +35,13 @@ Run focused validation first. Escalate to full build/test only when touched code
 ## Focused Vs Full Validation
 
 Focused validation is enough for docs-only or narrow tests. Full validation is required for shared domain, routing, project, persistence, release, or broad UI shell changes.
+
+## Ambitions 3.0 Developer Tool Commands
+
+```bash
+brew bundle check || true
+scripts/validate-dev-tools.sh || true
+rg -n --hidden --glob '!/.git/**' 'Brewfile|validate-dev-tools|run-doc-qa|build-local|test-local|markdownlint-cli2|lychee|xcbeautify|jq|gh' README.md docs AGENTS.md .codex scripts .github || true
+```
+
+Confirm `Brewfile.optional-later` is not required setup and that no app runtime dependency was added to `Package.swift`, `project.yml`, or app targets.

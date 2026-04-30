@@ -27,5 +27,5 @@ Then choose:
 
 Preserve XcodeGen and native SwiftUI architecture. Work on `main` unless explicitly told otherwise. Do not create new top-level destinations. Do not add runtime dependencies without the dependency policy. Do not claim implementation, test, device, accessibility, TestFlight, App Store, or release readiness without evidence.
 
-Before edits, inspect repo status and name the touch budget. After edits, run the focused validation pack, then build/test only as risk requires. Close out with files changed, commands run, PASS/PARTIAL/FAIL, remaining risks, and the next exact prompt.
+Before edits, inspect repo status and name the touch budget. When tooling matters, run `scripts/validate-dev-tools.sh`. For docs-heavy changes, run `scripts/run-doc-qa.sh`. For native build proof, prefer `scripts/build-local.sh`; for full test proof, use `scripts/test-local.sh` and report known UI smoke failures honestly. After edits, run the focused validation pack, then build/test only as risk requires. Close out with files changed, commands run, PASS/PARTIAL/FAIL, remaining risks, and the next exact prompt.
 ```

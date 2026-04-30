@@ -31,3 +31,21 @@ Required: Xcode, XcodeGen, Swift Package Manager, git, zsh/bash, ruby, python3, 
 Optional recommended: gh CLI, jq, xcbeautify, markdownlint-cli2, markdown link checker.
 
 Avoid by default: Fastlane, Tuist, SwiftGen, Sourcery, Danger, paid QA services, analytics SDKs, backend SDKs, AI SDKs.
+
+## Adopted Local Developer Tools
+
+Ambitions 3.0 now adopts these optional recommended tools as local developer tools through `Brewfile`: `gh`, `jq`, `xcbeautify`, `markdownlint-cli2`, and `lychee`.
+
+These tools are isolated from the app runtime. They improve Codex inspection, log readability, and documentation QA, but they do not change shipped Swift code or generated app artifacts.
+
+Use:
+
+```bash
+brew bundle
+scripts/validate-dev-tools.sh
+scripts/run-doc-qa.sh
+scripts/build-local.sh
+scripts/test-local.sh || true
+```
+
+SwiftLint, SwiftFormat, and Fastlane remain staged-only in `Brewfile.optional-later`. They are not active gates and should not be used to block Ambitions 3.0 work until the dependency policy promotes them.

@@ -86,3 +86,7 @@ Run narrower tests/scans from the selected validation pack.
 - `.codex/skills/evidence-gate-reporter.md`
 - `.codex/skills/build-test-pack-runner.md`
 - `.codex/skills/diff-scope-controller.md`
+
+## Ambitions 3.0 Developer Tooling Addendum
+
+License review for developer tools should cover Homebrew formula provenance and whether the tool ships in app artifacts. Current adopted tools are local-only; do not treat them as app runtime license obligations unless packaging changes.

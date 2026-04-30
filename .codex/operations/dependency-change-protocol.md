@@ -41,3 +41,12 @@ rg -n --hidden --glob '!/.git/**' 'Ambitions_2_0|Batch 61|Master Product and Vis
 - Missing credentials/tooling block the requested action.
 - Source truth conflict cannot be resolved from files.
 - The next action would require broad product implementation outside scope.
+
+## Adopted Developer Tool Steps
+
+1. Inspect `Brewfile`, `Brewfile.optional-later`, scripts, and dependency docs.
+2. Confirm no app runtime dependency was added.
+3. Run `brew bundle check || true`.
+4. Run `scripts/validate-dev-tools.sh || true`.
+5. Run the relevant commands from `.codex/validation/dependency-drift-pack.md`.
+6. Keep SwiftLint, SwiftFormat, and Fastlane staged until policy promotes them.

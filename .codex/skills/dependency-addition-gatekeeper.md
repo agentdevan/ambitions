@@ -86,3 +86,7 @@ Run narrower tests/scans from the selected validation pack.
 - `.codex/skills/evidence-gate-reporter.md`
 - `.codex/skills/build-test-pack-runner.md`
 - `.codex/skills/diff-scope-controller.md`
+
+## Ambitions 3.0 Developer Tooling Addendum
+
+Developer tools may be added only when isolated from app runtime, listed in the dependency policy, and paired with a validation command. Runtime dependencies still require a written proposal and explicit approval. SwiftLint, SwiftFormat, and Fastlane remain staged only.

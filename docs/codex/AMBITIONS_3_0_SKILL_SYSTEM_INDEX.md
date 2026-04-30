@@ -177,6 +177,7 @@ Use this index to choose repo-local skills under `.codex/skills/`. Prefer one pr
 ## Dependency/toolchain skills
 
 - [`.codex/skills/dependency-auditor.md`](../../.codex/skills/dependency-auditor.md) — dependency auditor.
+- [`.codex/skills/markdown-doc-qa-runner.md`](../../.codex/skills/markdown-doc-qa-runner.md) — markdown doc qa runner.
 - [`.codex/skills/mac-toolchain-bootstrapper.md`](../../.codex/skills/mac-toolchain-bootstrapper.md) — mac toolchain bootstrapper.
 - [`.codex/skills/xcode-version-verifier.md`](../../.codex/skills/xcode-version-verifier.md) — xcode version verifier.
 - [`.codex/skills/xcodegen-version-verifier.md`](../../.codex/skills/xcodegen-version-verifier.md) — xcodegen version verifier.

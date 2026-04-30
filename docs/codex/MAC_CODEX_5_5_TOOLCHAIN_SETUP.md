@@ -6,7 +6,7 @@ Status: Active local setup guide
 
 - Suggest: planning, audit, risk review, dependency proposal.
 - Auto Edit: scoped docs/code/test changes with known files.
-- Full Auto: only for bounded, low-risk cleanup or validation where commands are deterministic.
+- Full Auto: bounded cleanup, generated-project checks, or validation where commands are deterministic.
 
 ## Sync Protocol
 
@@ -18,18 +18,31 @@ git checkout main
 git pull --ff-only origin main
 ```
 
-If local work exists, preserve it with a branch/stash before destructive sync.
+If local work exists, preserve it with a stash or backup before destructive sync. Work on `main` unless the user explicitly says otherwise.
 
-## Tool Checks
+## Brew Bundle Setup
+
+The active local developer tool set is in `Brewfile`:
 
 ```bash
-xcodebuild -version
-xcode-select -p
-xcodegen --version
-swift --version
-rg --version
-git --version
+brew bundle
+brew bundle check || true
 ```
+
+`Brewfile.optional-later` contains SwiftLint, SwiftFormat, and Fastlane. Do not run it as required setup until the dependency policy promotes those tools.
+
+## Tool Validation
+
+```bash
+scripts/validate-dev-tools.sh
+```
+
+This checks Xcode, `xcode-select`, XcodeGen, `rg`, `git`, `gh`, `jq`, `xcbeautify`, `markdownlint-cli2`, and `lychee`. SwiftLint, SwiftFormat, and Fastlane are reported only as optional staged tools.
+
+## GitHub And JSON Helpers
+
+- `gh` is useful only when authenticated; use `gh auth status` before relying on it.
+- `jq` is preferred for parsing JSON from `xcrun simctl`, `gh`, or CI artifacts instead of brittle text slicing.
 
 ## Simulator Discovery
 
@@ -37,23 +50,37 @@ git --version
 xcrun simctl list devices available | grep -E 'iPhone' | head -20
 ```
 
-Use `iPhone 17` if `iPhone 16` is unavailable locally and record the exact destination.
+The local wrappers prefer iPhone 17, then iPhone 16, then the first available iPhone simulator.
 
-## Build Commands
+## Local Build/Test Wrappers
+
+```bash
+scripts/build-local.sh
+scripts/test-local.sh
+```
+
+Both wrappers run `xcodegen generate`, select an available simulator, write generated logs under ignored `output/logs/`, and use `xcbeautify` when installed while preserving the underlying `xcodebuild` exit status.
+
+The full UI lane currently has known failures from the FAANG handoff report. Do not claim FAANG handoff readiness or release readiness from a partial or failing full test run.
+
+## Direct Build/Test Commands
 
 ```bash
 xcodegen generate
 xcodebuild -project Ambitions.xcodeproj -scheme Ambitions -destination 'platform=iOS Simulator,name=iPhone 17' build CODE_SIGNING_ALLOWED=NO
-```
-
-## Test Commands
-
-```bash
-xcodebuild -project Ambitions.xcodeproj -scheme Ambitions -destination 'platform=iOS Simulator,name=iPhone 17' -only-testing:AmbitionsTests test CODE_SIGNING_ALLOWED=NO
 xcodebuild -project Ambitions.xcodeproj -scheme Ambitions -destination 'platform=iOS Simulator,name=iPhone 17' test CODE_SIGNING_ALLOWED=NO
 ```
 
-The full UI lane currently has known failures from the FAANG handoff report; prefer focused tests for touched paths and record existing failures honestly.
+Use direct commands when debugging wrapper behavior.
+
+## Documentation QA
+
+```bash
+scripts/run-doc-qa.sh
+DOC_QA_STRICT=1 scripts/run-doc-qa.sh
+```
+
+The default mode runs stale-guidance, deprecated-language, Markdown lint, and link checks with logs under ignored `docs/audits/doc-qa/`. `lychee` is advisory by default because external links and local network conditions can be flaky. Use strict mode only when preparing docs for a blocking gate or after the backlog is clean enough to make the signal meaningful.
 
 ## Copy Guard
 
@@ -75,11 +102,12 @@ git diff --cached --check
 sed -n '1,220p' project.yml
 sed -n '1,160p' Package.swift
 sed -n '1,220p' .github/workflows/ios-validate.yml
+sed -n '1,220p' Brewfile
 ```
 
 ## Network-Disabled Strategy
 
-Avoid relying on new network downloads. Use installed Xcode, XcodeGen, local packages, and checked-in docs/scripts. If a tool is missing, document the fallback and do not add a dependency silently.
+Use installed Xcode, XcodeGen, local packages, checked-in scripts, and docs. If an optional tool is missing, document the fallback and do not add runtime dependencies or paid services.
 
 ## Preserve Local Work
 

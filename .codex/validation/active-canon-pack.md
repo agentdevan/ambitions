@@ -35,3 +35,12 @@ Run focused validation first. Escalate to full build/test only when touched code
 ## Focused Vs Full Validation
 
 Focused validation is enough for docs-only or narrow tests. Full validation is required for shared domain, routing, project, persistence, release, or broad UI shell changes.
+
+## Ambitions 3.0 Developer Tool Commands
+
+```bash
+scripts/run-doc-qa.sh || true
+rg -n --hidden --glob '!/.git/**' 'Ambitions_2_0|v2 is now active|Batch 61|Waves 1-19|Master Product and Visual System Spec v2 is now the active|Batch 89-120' AGENTS.md README.md docs/README.md docs/codex docs/canon/Ambitions_3_0_* docs/canon/README.md || true
+```
+
+Historical/supporting references are allowed. Active read-order docs must continue to start from Ambitions 3.0.

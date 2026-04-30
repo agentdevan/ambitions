@@ -157,3 +157,15 @@ A pass is complete only when:
 - Claim implementation from canon docs alone.
 - Delete useful history to make the repo look clean.
 - Silently mutate calendar/sync/account/release claims.
+
+## Adopted Developer Tooling Layer
+
+Codex should use the local developer tooling layer when it materially improves speed or evidence quality:
+
+- Run `scripts/validate-dev-tools.sh` before major local work or when a run depends on optional developer tools.
+- Run `scripts/run-doc-qa.sh` for docs-heavy changes. Use `DOC_QA_STRICT=1 scripts/run-doc-qa.sh` only for deliberate blocking docs gates.
+- Run `scripts/build-local.sh` for app build validation; it regenerates the Xcode project, selects an available iPhone simulator, preserves `xcodebuild` status, and uses `xcbeautify` when installed.
+- Run `scripts/test-local.sh` for full local test validation, while recording known UI smoke failures honestly.
+- Use `Brewfile` for adopted developer tools and `Brewfile.optional-later` only when policy promotes staged tools.
+- Use `.codex/validation/dependency-drift-pack.md` when Brewfile, scripts, tooling docs, or dependency policy changes.
+- Use `.codex/validation/local-ci-parity-pack.md` before claiming local/CI parity.

@@ -41,3 +41,7 @@ rg -n --hidden --glob '!/.git/**' 'Ambitions_2_0|Batch 61|Master Product and Vis
 - Missing credentials/tooling block the requested action.
 - Source truth conflict cannot be resolved from files.
 - The next action would require broad product implementation outside scope.
+
+## Tooling Batch Note
+
+Tooling batches still run on `main` unless the user explicitly requests a branch. Preserve local work before sync, and do not use optional staged tools as a reason to create a new branch or block the normal mainline workflow.

@@ -41,3 +41,7 @@ rg -n --hidden --glob '!/.git/**' 'Ambitions_2_0|Batch 61|Master Product and Vis
 - Missing credentials/tooling block the requested action.
 - Source truth conflict cannot be resolved from files.
 - The next action would require broad product implementation outside scope.
+
+## Adopted Developer Tool Evidence
+
+For tooling changes, closeout must include `brew bundle check`, `scripts/validate-dev-tools.sh`, `scripts/run-doc-qa.sh`, `scripts/build-local.sh`, and `scripts/test-local.sh || true` results when run. Separate missing optional tool findings from app build failures.

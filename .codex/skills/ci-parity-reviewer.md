@@ -86,3 +86,7 @@ Run narrower tests/scans from the selected validation pack.
 - `.codex/skills/evidence-gate-reporter.md`
 - `.codex/skills/build-test-pack-runner.md`
 - `.codex/skills/diff-scope-controller.md`
+
+## Ambitions 3.0 Developer Tooling Addendum
+
+Compare local wrappers with `.github/workflows/ios-validate.yml`. Do not claim docs CI parity while docs QA remains local-only/advisory, if `lychee` is advisory, or if local optional tools are missing.

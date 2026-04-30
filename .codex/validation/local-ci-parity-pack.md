@@ -35,3 +35,13 @@ Run focused validation first. Escalate to full build/test only when touched code
 ## Focused Vs Full Validation
 
 Focused validation is enough for docs-only or narrow tests. Full validation is required for shared domain, routing, project, persistence, release, or broad UI shell changes.
+
+## Ambitions 3.0 Developer Tool Commands
+
+```bash
+scripts/build-local.sh
+scripts/test-local.sh || true
+sed -n '1,220p' .github/workflows/ios-validate.yml
+```
+
+Local/CI parity may be PARTIAL when docs QA is local-only, link checks are advisory, or full UI tests have known failures.

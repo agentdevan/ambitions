@@ -8,6 +8,7 @@ Index:
 - [`.codex/validation/base-build-test-pack.md`](base-build-test-pack.md)
 - [`.codex/validation/copy-guard-pack.md`](copy-guard-pack.md)
 - [`.codex/validation/dependency-drift-pack.md`](dependency-drift-pack.md)
+- [`.codex/validation/doc-qa-pack.md`](doc-qa-pack.md)
 - [`.codex/validation/external-surface-pack.md`](external-surface-pack.md)
 - [`.codex/validation/local-ci-parity-pack.md`](local-ci-parity-pack.md)
 - [`.codex/validation/privacy-trust-pack.md`](privacy-trust-pack.md)

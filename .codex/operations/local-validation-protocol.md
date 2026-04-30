@@ -41,3 +41,7 @@ rg -n --hidden --glob '!/.git/**' 'Ambitions_2_0|Batch 61|Master Product and Vis
 - Missing credentials/tooling block the requested action.
 - Source truth conflict cannot be resolved from files.
 - The next action would require broad product implementation outside scope.
+
+## Adopted Developer Tool Steps
+
+Use `scripts/build-local.sh` for build validation and `scripts/test-local.sh || true` for full local test evidence. Use `scripts/run-doc-qa.sh` for docs-heavy changes. If wrapper output differs from direct Xcode commands, debug the wrapper separately and do not blame product code prematurely.

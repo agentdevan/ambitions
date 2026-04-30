@@ -86,3 +86,7 @@ Run narrower tests/scans from the selected validation pack.
 - `.codex/skills/evidence-gate-reporter.md`
 - `.codex/skills/build-test-pack-runner.md`
 - `.codex/skills/diff-scope-controller.md`
+
+## Ambitions 3.0 Developer Tooling Addendum
+
+For Brewfile or toolchain changes, inspect `Brewfile`, `Brewfile.optional-later`, `scripts/validate-dev-tools.sh`, `scripts/run-doc-qa.sh`, `scripts/build-local.sh`, and `scripts/test-local.sh`. Confirm no app runtime dependencies were added, run `scripts/validate-dev-tools.sh || true`, and use `.codex/validation/dependency-drift-pack.md`.

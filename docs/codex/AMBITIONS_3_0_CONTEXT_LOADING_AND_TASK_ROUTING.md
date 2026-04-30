@@ -66,3 +66,12 @@ Use `BATCH_REGISTRY.md` for status only. Use 3.0 F-series canon for next active 
 ## Status Distinctions
 
 Canonized, designed, implementation-scoped, implemented, previewed, tested, device-verified, and release-ready are distinct states.
+
+## Developer Tool Routing
+
+- Before major local work, run `scripts/validate-dev-tools.sh` or document why the missing tool is non-blocking.
+- For docs-heavy changes, run `scripts/run-doc-qa.sh`; use strict mode only when the docs backlog is expected to be clean.
+- For app build proof, prefer `scripts/build-local.sh` unless debugging a wrapper issue.
+- For full local test proof, run `scripts/test-local.sh || true` and classify known UI smoke failures separately from new failures.
+- When `Brewfile`, scripts, dependency docs, or workflow docs change, load `.codex/context-packs/dependency-management-context.md` and run `.codex/validation/dependency-drift-pack.md`.
+- Before saying local validation mirrors CI, run `.codex/validation/local-ci-parity-pack.md`.

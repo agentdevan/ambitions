@@ -86,3 +86,7 @@ Run narrower tests/scans from the selected validation pack.
 - `.codex/skills/evidence-gate-reporter.md`
 - `.codex/skills/build-test-pack-runner.md`
 - `.codex/skills/diff-scope-controller.md`
+
+## Ambitions 3.0 Developer Tooling Addendum
+
+Prefer `scripts/build-local.sh` for local build evidence and `scripts/test-local.sh || true` for full test evidence. Both wrappers preserve `xcodebuild` status and use `xcbeautify` when installed. If a wrapper fails but direct `xcodebuild` passes, classify the failure as wrapper/tooling debt.

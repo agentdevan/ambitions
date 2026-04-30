@@ -32,3 +32,4 @@ Codex should increase Ambitions value by reducing founder re-explanation, preser
 - Better state-machine maturity: prefer explicit Step/Capture/Placement/Closure/Proof/Memory/Recommendation transitions over ad hoc flags.
 - Better proof/receipt/recommendation reliability: enforce the Evidence Hierarchy and Recommendation Eligibility Engine.
 - Better external-surface safety: project only safe summaries; preserve manual confirmation and privacy labels.
+- Better developer tooling without runtime pollution: use `gh`, `jq`, `xcbeautify`, `markdownlint-cli2`, and `lychee` for faster evidence, readable logs, and advisory doc QA while keeping Ambitions app runtime dependency-free.

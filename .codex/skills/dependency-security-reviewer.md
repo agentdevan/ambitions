@@ -86,3 +86,7 @@ Run narrower tests/scans from the selected validation pack.
 - `.codex/skills/evidence-gate-reporter.md`
 - `.codex/skills/build-test-pack-runner.md`
 - `.codex/skills/diff-scope-controller.md`
+
+## Ambitions 3.0 Developer Tooling Addendum
+
+For local developer tools, review installation source, network behavior, credentials, log output, and removal path. `gh` may expose account state, and `lychee` performs network requests unless constrained; keep both out of app runtime and report credential/network assumptions.

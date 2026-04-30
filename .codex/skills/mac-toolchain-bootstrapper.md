@@ -86,3 +86,7 @@ Run narrower tests/scans from the selected validation pack.
 - `.codex/skills/evidence-gate-reporter.md`
 - `.codex/skills/build-test-pack-runner.md`
 - `.codex/skills/diff-scope-controller.md`
+
+## Ambitions 3.0 Developer Tooling Addendum
+
+Use `brew bundle` for adopted local tools and `scripts/validate-dev-tools.sh` for proof. Do not require `Brewfile.optional-later`. Document `gh auth status` separately from `gh` installation because credentials are user-owned.
