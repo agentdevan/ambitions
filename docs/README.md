@@ -1,167 +1,134 @@
-# Docs Status
+# Ambitions Docs
 
-This folder contains the current Swift-native documentation for the Ambitions repo.
+This folder contains product, canon, implementation, build, and release documentation for the native SwiftUI Ambitions app.
+
+Ambitions 3.0 is the active rebuild documentation system.
+
+---
 
 ## Start here
 
-Use [codex/CONTEXT_INDEX.md](codex/CONTEXT_INDEX.md) for source-of-truth precedence before non-trivial work.
+Use this read order for non-trivial product, design, roadmap, language, privacy, accessibility, QA, or implementation work:
 
-For current canon ownership and consolidation, read:
+1. [canon/Ambitions_3_0_Source_Of_Truth_Override.md](canon/Ambitions_3_0_Source_Of_Truth_Override.md)
+2. [canon/Ambitions_3_0_Front_End_Redesign_Index.md](canon/Ambitions_3_0_Front_End_Redesign_Index.md)
+3. [canon/Ambitions_3_0_Rebuild_Operating_Model.md](canon/Ambitions_3_0_Rebuild_Operating_Model.md)
+4. [canon/Ambitions_3_0_Documentation_System_Index.md](canon/Ambitions_3_0_Documentation_System_Index.md)
+5. [canon/Ambitions_3_0_Primitive_Architecture.md](canon/Ambitions_3_0_Primitive_Architecture.md)
+6. [canon/Ambitions_3_0_Product_Language_System.md](canon/Ambitions_3_0_Product_Language_System.md)
+7. The target primitive, surface, state-machine, privacy, accessibility, QA, or release doc.
 
-- [canon/SOURCE_OF_TRUTH_MAP.md](canon/SOURCE_OF_TRUTH_MAP.md)
-  Active document ownership map and source-of-truth reading order. Use this before non-trivial product, design, roadmap, or implementation work.
-- [canon/PRODUCT_DECISIONS.md](canon/PRODUCT_DECISIONS.md)
-  Active product decision log for question waves and ambiguity resolution.
-- [canon/GOLDEN_LAUNCH_LOOP.md](canon/GOLDEN_LAUNCH_LOOP.md)
-  Active product-strength cutline defining the smallest undeniable launch loop and launch-critical mapping rules.
-- [canon/ROADMAP_BATCH_CLASSIFICATION.md](canon/ROADMAP_BATCH_CLASSIFICATION.md)
-  Active D01-D26 classification layer separating launch-critical, soon-after-launch, post-launch, deferred, decision-gated, and infrastructure-unlock work.
-- [canon/HUMAN_LANGUAGE_REVIEW.md](canon/HUMAN_LANGUAGE_REVIEW.md)
-  Active language correction layer ensuring normal UI copy sounds human, obvious, and not AI/producty.
-- [canon/Ambitions_2_0_Object_Terminology.md](canon/Ambitions_2_0_Object_Terminology.md)
-  Active D02 object terminology canon for Goal, Plan, Task / One-Step Goal, Step, Ritual, Receipt, and Proof naming.
-- [canon/POST_D26_MATURITY_ROADMAP.md](canon/POST_D26_MATURITY_ROADMAP.md)
-  Active Layer 2/Layer 3 planning roadmap that rewrites original Batches 89-120 into M-series maturity batches and R-series release-readiness gates. Planning only; does not mark D01-D26 complete.
-- [canon/AMBITION_CANON_COMPLETION_REPORT.md](canon/AMBITION_CANON_COMPLETION_REPORT.md)
-  Final canon completion report for Waves 1-19, including settled canon, open questions, no-drift rules, archive candidates, and the next Codex reconciliation prompt.
-- [canon/DOCS_RECONCILIATION_REVIEW.md](canon/DOCS_RECONCILIATION_REVIEW.md)
-  Post-canon docs reconciliation review identifying required source-order, historical-doc, roadmap/batch, and archive-candidate cleanup after Waves 1-19.
-- [canon/CANON_CONSOLIDATION_GAP_AUDIT.md](canon/CANON_CONSOLIDATION_GAP_AUDIT.md)
-  Documentation architecture audit showing what already existed, what was consolidated, and what still needs product decisions.
+Use [codex/BATCH_REGISTRY.md](codex/BATCH_REGISTRY.md) for implementation status truth.
 
-For the current free Codex workflow, also read:
+Older docs are supporting context unless an active Ambitions 3.0 doc explicitly keeps them binding for a domain that 3.0 does not replace.
 
-- [codex/FREE_WORKFLOW_OPERATING_SYSTEM.md](codex/FREE_WORKFLOW_OPERATING_SYSTEM.md)
-  Free, non-agent, non-GitHub-Actions operating procedure for batch lifecycle, prompt modes, local validation, anti-cost rules, acceptance gates, and reconciliation cadence.
-- [review/VISUAL_REVIEW_CHECKLIST.md](review/VISUAL_REVIEW_CHECKLIST.md)
-  Manual review checklist for visible UI, navigation, empty states, copy, hierarchy, and accessibility nutrition after UI batches.
-- [review/FRICTION_LOG.md](review/FRICTION_LOG.md)
-  Observed product friction parking lot. Use it for real friction found during testing/review, not as a parallel roadmap.
+---
 
-## Active Source-Of-Truth Docs
+## Active Ambitions 3.0 documentation system
 
-- [canon/SOURCE_OF_TRUTH_MAP.md](canon/SOURCE_OF_TRUTH_MAP.md)
-  Active source-of-truth map and reading order.
-- [canon/PRODUCT_DECISIONS.md](canon/PRODUCT_DECISIONS.md)
-  Active product decision log for resolved product-definition waves.
-- [canon/GOLDEN_LAUNCH_LOOP.md](canon/GOLDEN_LAUNCH_LOOP.md)
-  Active Golden Launch Loop, demo story, launch cutline, and product-strength rules.
-- [canon/ROADMAP_BATCH_CLASSIFICATION.md](canon/ROADMAP_BATCH_CLASSIFICATION.md)
-  Active roadmap/batch classification and launch spine for D01-D26.
-- [canon/HUMAN_LANGUAGE_REVIEW.md](canon/HUMAN_LANGUAGE_REVIEW.md)
-  Active user-facing language review and replacement table.
-- [canon/Ambitions_2_0_Object_Terminology.md](canon/Ambitions_2_0_Object_Terminology.md)
-  Active object terminology canon from D02.
-- [canon/POST_D26_MATURITY_ROADMAP.md](canon/POST_D26_MATURITY_ROADMAP.md)
-  Active post-D26 M-series/R-series maturity and release-readiness roadmap for original Batches 89-120.
-- [canon/AMBITION_CANON_COMPLETION_REPORT.md](canon/AMBITION_CANON_COMPLETION_REPORT.md)
-  Final canon completion report and next reconciliation prompt.
-- [canon/DOCS_RECONCILIATION_REVIEW.md](canon/DOCS_RECONCILIATION_REVIEW.md)
-  Post-canon docs reconciliation review and next edit-pass prompt.
-- [../MASTER_PRODUCT_SPEC.md](../MASTER_PRODUCT_SPEC.md)
-  Current shipping product truth.
-- [canon/design/Ambitions_Design_Constitution.md](canon/design/Ambitions_Design_Constitution.md)
-  Active design, IA, UX writing, interaction, trust, accessibility, and external-surface source of truth.
-- [canon/Ambitions_2_0_Master_Plan.md](canon/Ambitions_2_0_Master_Plan.md)
-  Active post-Batch-60 product canon, including the Goal / Plan / Task visual doctrine.
-- [canon/Ambitions_2_0_Product_Architecture.md](canon/Ambitions_2_0_Product_Architecture.md)
-  Active surface ownership, drilldown rules, and Goal / Plan / Task information hierarchy.
-- [canon/Ambitions_2_0_Systems_Architecture.md](canon/Ambitions_2_0_Systems_Architecture.md)
-  Active shared-system ownership for Life Graph, Action Closure, Plan, Goals/Portfolio, Path, and ambient continuity.
-- [canon/Ambitions_2_0_Visual_System.md](canon/Ambitions_2_0_Visual_System.md)
-  Active rich-panel and visual-system truth, including Goal Lifecycle Rail, Goal Weather, Proof Spine, Decision Trail, Milestone Cards, Weekly Plan Strip, and Completion Archive treatments.
-- [canon/Ambitions_2_0_Roadmap.md](canon/Ambitions_2_0_Roadmap.md)
-  Active Ambitions 2.0 roadmap.
-- [canon/Ambitions_2_0_Batch_Plan.md](canon/Ambitions_2_0_Batch_Plan.md)
-  Active Batch 61-120 execution order and owning batch scopes.
-- [canon/Ambitions_2_0_Implementation_Gap_Audit.md](canon/Ambitions_2_0_Implementation_Gap_Audit.md)
-  Active repo-wide gap audit and D01-D26 delta/alignment batch source.
-- [canon/Ambitions_2_0_Roadmap_Merge_Audit.md](canon/Ambitions_2_0_Roadmap_Merge_Audit.md)
-  Active merge map for original Batches 89-120 against D01-D26.
-- [canon/Documentation_Cleanup_Audit.md](canon/Documentation_Cleanup_Audit.md)
-  Active markdown inventory and cleanup classification audit.
-- [canon/README.md](canon/README.md)
-  Canon index for active source-of-truth, supporting canon, historical docs, and archived docs.
-- [canon/design/README.md](canon/design/README.md)
-  Active design contract index.
-- [codex/BATCH_REGISTRY.md](codex/BATCH_REGISTRY.md)
-  Active work status only.
-- [codex/batches/README.md](codex/batches/README.md)
-  Per-batch execution docs for the post-hardening frontend transformation program.
+### Source / parent / governance
 
-## Active Consolidation Canon
+- [Ambitions_3_0_Source_Of_Truth_Override.md](canon/Ambitions_3_0_Source_Of_Truth_Override.md)
+- [Ambitions_3_0_Front_End_Redesign_Index.md](canon/Ambitions_3_0_Front_End_Redesign_Index.md)
+- [Ambitions_3_0_Rebuild_Operating_Model.md](canon/Ambitions_3_0_Rebuild_Operating_Model.md)
+- [Ambitions_3_0_Documentation_System_Index.md](canon/Ambitions_3_0_Documentation_System_Index.md)
+- [Ambitions_3_0_FAANG_Rebuild_Documentation_Completeness_Matrix.md](canon/Ambitions_3_0_FAANG_Rebuild_Documentation_Completeness_Matrix.md)
+- [Ambitions_3_0_Repo_Hygiene_And_Active_Canon_Policy.md](canon/Ambitions_3_0_Repo_Hygiene_And_Active_Canon_Policy.md)
 
-These focused docs extract already-existing doctrine into implementation-readable references. They clarify the active canon; they do not create a parallel roadmap.
+### Strategy / product management
 
-- [canon/PRODUCT_DECISIONS.md](canon/PRODUCT_DECISIONS.md)
-- [canon/GOLDEN_LAUNCH_LOOP.md](canon/GOLDEN_LAUNCH_LOOP.md)
-- [canon/ROADMAP_BATCH_CLASSIFICATION.md](canon/ROADMAP_BATCH_CLASSIFICATION.md)
-- [canon/HUMAN_LANGUAGE_REVIEW.md](canon/HUMAN_LANGUAGE_REVIEW.md)
-- [canon/Ambitions_2_0_Object_Terminology.md](canon/Ambitions_2_0_Object_Terminology.md)
-- [canon/POST_D26_MATURITY_ROADMAP.md](canon/POST_D26_MATURITY_ROADMAP.md)
-- [canon/AMBITION_CANON_COMPLETION_REPORT.md](canon/AMBITION_CANON_COMPLETION_REPORT.md)
-- [canon/DOCS_RECONCILIATION_REVIEW.md](canon/DOCS_RECONCILIATION_REVIEW.md)
-- [canon/CANON_CONSOLIDATION_GAP_AUDIT.md](canon/CANON_CONSOLIDATION_GAP_AUDIT.md)
+- [Ambitions_3_0_Product_Strategy_Brief.md](canon/Ambitions_3_0_Product_Strategy_Brief.md)
+- [Ambitions_3_0_North_Star_And_Product_Metrics.md](canon/Ambitions_3_0_North_Star_And_Product_Metrics.md)
+- [Ambitions_3_0_Competitive_Positioning_And_Language_Research.md](canon/Ambitions_3_0_Competitive_Positioning_And_Language_Research.md)
+- [Ambitions_3_0_Front_End_Implementation_Batch_Plan.md](canon/Ambitions_3_0_Front_End_Implementation_Batch_Plan.md)
+- [Ambitions_3_0_Current_Implementation_Gap_Audit.md](canon/Ambitions_3_0_Current_Implementation_Gap_Audit.md)
+- [Ambitions_3_0_Release_Readiness_And_Evidence_Gates.md](canon/Ambitions_3_0_Release_Readiness_And_Evidence_Gates.md)
+
+### Product architecture / IA
+
+- [Ambitions_3_0_Primitive_Architecture.md](canon/Ambitions_3_0_Primitive_Architecture.md)
+- [Ambitions_3_0_Information_Architecture_And_Routing_Model.md](canon/Ambitions_3_0_Information_Architecture_And_Routing_Model.md)
+- [Ambitions_3_0_Top_Level_Surface_Density_Constitution.md](canon/Ambitions_3_0_Top_Level_Surface_Density_Constitution.md)
+- [Ambitions_3_0_Ambitions_Operating_Shell.md](canon/Ambitions_3_0_Ambitions_Operating_Shell.md)
+- [Ambitions_3_0_Plan_Life_Suite_Endgame.md](canon/Ambitions_3_0_Plan_Life_Suite_Endgame.md)
+
+### UI / design system
+
+- [Ambitions_3_0_Day_Rail_SwiftUI_Build_Spec.md](canon/Ambitions_3_0_Day_Rail_SwiftUI_Build_Spec.md)
+- [Ambitions_3_0_Ambition_Meridian_Shell_SwiftUI_Build_Spec.md](canon/Ambitions_3_0_Ambition_Meridian_Shell_SwiftUI_Build_Spec.md)
+- [Ambitions_3_0_Signature_Objects_And_Rail_Grammar.md](canon/Ambitions_3_0_Signature_Objects_And_Rail_Grammar.md)
+- [Ambitions_3_0_Design_System_Primitives.md](canon/Ambitions_3_0_Design_System_Primitives.md)
+- [Ambitions_3_0_Screenshot_Readiness_Spec.md](canon/Ambitions_3_0_Screenshot_Readiness_Spec.md)
+- [Ambitions_3_0_First_60_Seconds_Spec.md](canon/Ambitions_3_0_First_60_Seconds_Spec.md)
+
+### Golden Launch Loop / contracts
+
+- [Ambitions_3_0_Golden_Launch_Loop_Upgrade_Bank.md](canon/Ambitions_3_0_Golden_Launch_Loop_Upgrade_Bank.md)
+- [Ambitions_3_0_UI_Invention_Upgrade_Bank.md](canon/Ambitions_3_0_UI_Invention_Upgrade_Bank.md)
+- [Ambitions_3_0_Universal_Object_Lifecycle_Contract.md](canon/Ambitions_3_0_Universal_Object_Lifecycle_Contract.md)
+- [Ambitions_3_0_Object_Ownership_And_Appearance_Matrix.md](canon/Ambitions_3_0_Object_Ownership_And_Appearance_Matrix.md)
+- [Ambitions_3_0_Surface_State_Matrix.md](canon/Ambitions_3_0_Surface_State_Matrix.md)
+- [Ambitions_3_0_Placement_Resolver_Spec.md](canon/Ambitions_3_0_Placement_Resolver_Spec.md)
+- [Ambitions_3_0_Action_Closure_Sheet_Spec.md](canon/Ambitions_3_0_Action_Closure_Sheet_Spec.md)
+- [Ambitions_3_0_Proof_Receipts_And_Reviews_Contract.md](canon/Ambitions_3_0_Proof_Receipts_And_Reviews_Contract.md)
+
+### Language / content
+
+- [Ambitions_3_0_Product_Language_System.md](canon/Ambitions_3_0_Product_Language_System.md)
+- [Ambitions_3_0_Microcopy_Pattern_Library.md](canon/Ambitions_3_0_Microcopy_Pattern_Library.md)
+- [Ambitions_3_0_Action_Verbs_And_Receipt_Grammar.md](canon/Ambitions_3_0_Action_Verbs_And_Receipt_Grammar.md)
+- [Ambitions_3_0_Content_QA_And_Copy_Guard.md](canon/Ambitions_3_0_Content_QA_And_Copy_Guard.md)
+- [Ambitions_3_0_Migration_And_Deprecation_Plan.md](canon/Ambitions_3_0_Migration_And_Deprecation_Plan.md)
+- [Ambitions_3_0_Launch_Narrative_And_Demo_Script.md](canon/Ambitions_3_0_Launch_Narrative_And_Demo_Script.md)
+
+### Engineering / data / AI
+
+- [Ambitions_3_0_State_Machines_And_Domain_Flows.md](canon/Ambitions_3_0_State_Machines_And_Domain_Flows.md)
+- [Ambitions_3_0_Recommendation_Contract.md](canon/Ambitions_3_0_Recommendation_Contract.md)
+- [Ambitions_3_0_Recommendation_Eligibility_Engine.md](canon/Ambitions_3_0_Recommendation_Eligibility_Engine.md)
+- [Ambitions_3_0_Evidence_Hierarchy.md](canon/Ambitions_3_0_Evidence_Hierarchy.md)
+- [Ambitions_3_0_Data_Event_Taxonomy.md](canon/Ambitions_3_0_Data_Event_Taxonomy.md)
+- [Ambitions_3_0_AI_Evaluation_And_Grounding_Plan.md](canon/Ambitions_3_0_AI_Evaluation_And_Grounding_Plan.md)
+- [Ambitions_3_0_Personalization_Consent_Model.md](canon/Ambitions_3_0_Personalization_Consent_Model.md)
+
+### QA / privacy / accessibility / research
+
+- [Ambitions_3_0_Codex_Only_Implementation_And_Testing_Strategy.md](canon/Ambitions_3_0_Codex_Only_Implementation_And_Testing_Strategy.md)
+- [Ambitions_3_0_Privacy_Threat_Model.md](canon/Ambitions_3_0_Privacy_Threat_Model.md)
+- [Ambitions_3_0_Accessibility_Conformance_Plan.md](canon/Ambitions_3_0_Accessibility_Conformance_Plan.md)
+- [Ambitions_3_0_UX_Research_Plan.md](canon/Ambitions_3_0_UX_Research_Plan.md)
+
+---
+
+## Supporting older canon
+
+Some older canon remains binding only where Ambitions 3.0 does not replace it. Use the 3.0 source override and documentation system index to decide priority before relying on older docs.
+
+Older docs that still commonly matter for domains not fully replaced by 3.0 include:
+
 - [canon/DOMAIN_MODEL.md](canon/DOMAIN_MODEL.md)
-- [canon/GOAL_PLAN_TASK_LIFECYCLE.md](canon/GOAL_PLAN_TASK_LIFECYCLE.md)
-- [canon/GOALS_GOAL_DETAIL.md](canon/GOALS_GOAL_DETAIL.md)
-- [canon/TODAY_NOW_STATE.md](canon/TODAY_NOW_STATE.md)
-- [canon/YOU_PROFILE_REVIEWS.md](canon/YOU_PROFILE_REVIEWS.md)
-- [canon/IA_NAVIGATION_DRILLDOWN.md](canon/IA_NAVIGATION_DRILLDOWN.md)
-- [canon/INTELLIGENCE_AUTOMATION_SUGGESTIONS.md](canon/INTELLIGENCE_AUTOMATION_SUGGESTIONS.md)
-- [canon/VISUAL_SYSTEM_COMPONENTS_MOTION.md](canon/VISUAL_SYSTEM_COMPONENTS_MOTION.md)
-- [canon/ACCESSIBILITY_FOCUS_SUPPORT.md](canon/ACCESSIBILITY_FOCUS_SUPPORT.md)
-- [canon/EXTERNAL_SURFACES_NOTIFICATIONS_WIDGETS.md](canon/EXTERNAL_SURFACES_NOTIFICATIONS_WIDGETS.md)
-- [canon/DATA_LOCAL_SYNC_EXPORT.md](canon/DATA_LOCAL_SYNC_EXPORT.md)
-- [canon/MONETIZATION_PRICING_BUSINESS_MODEL.md](canon/MONETIZATION_PRICING_BUSINESS_MODEL.md)
-- [canon/LAUNCH_SCOPE_MVP_QUALITY_BAR.md](canon/LAUNCH_SCOPE_MVP_QUALITY_BAR.md)
-- [canon/ROADMAP_BATCH_GOVERNANCE.md](canon/ROADMAP_BATCH_GOVERNANCE.md)
-- [canon/ONBOARDING_SPEC.md](canon/ONBOARDING_SPEC.md)
-- [canon/CAPTURE_SMART_ATTACHMENT.md](canon/CAPTURE_SMART_ATTACHMENT.md)
-- [canon/PLAN_CALENDAR_BELIEVABILITY.md](canon/PLAN_CALENDAR_BELIEVABILITY.md)
 - [canon/TRUST_PRIVACY_MEMORY.md](canon/TRUST_PRIVACY_MEMORY.md)
-- [canon/EMPTY_ERROR_RECOVERY_STATES.md](canon/EMPTY_ERROR_RECOVERY_STATES.md)
+- [canon/DATA_LOCAL_SYNC_EXPORT.md](canon/DATA_LOCAL_SYNC_EXPORT.md)
 - [canon/IMPLEMENTATION_ACCEPTANCE_GATES.md](canon/IMPLEMENTATION_ACCEPTANCE_GATES.md)
-- [canon/design/DESIGN_TOKENS.md](canon/design/DESIGN_TOKENS.md)
+- [canon/ROADMAP_BATCH_GOVERNANCE.md](canon/ROADMAP_BATCH_GOVERNANCE.md)
 
-## Superseded / Archived Docs
+Archived and superseded material is indexed from [archive/README.md](archive/README.md).
 
-- [archive/README.md](archive/README.md)
-  Superseded design, historical RC, and frontend transformation docs preserved for context only.
+---
 
-Older docs in this folder are supporting context and do not override the active source-of-truth stack.
-
-## Current shipping native docs
+## Native build and release docs
 
 - [native-build-and-release.md](native-build-and-release.md)
-  Native source-of-truth build, test, archive, and CI validation guidance for the current SwiftUI iOS app.
-- [codex/Launch_Operator_Runbook.md](codex/Launch_Operator_Runbook.md)
-  Short operator runbook for App Store Connect, TestFlight, metadata, reviewer notes, and launch-day operations.
-- [codex/Release_Candidate_Review_Checklist.md](codex/Release_Candidate_Review_Checklist.md)
-  Short operator checklist for final release-candidate review, reviewer access, privacy/disclosure, and App Store submission prep.
 - [codex/BATCH_REGISTRY.md](codex/BATCH_REGISTRY.md)
-  Current batch status for active Ambitions work.
-- [rc1-native-finish-pass.md](archive/superseded-design-canon/rc1-native-finish-pass.md)
-  Historical native polish/release-candidate notes that still describe the current native app direction accurately where not superseded by newer build/release docs.
-- [implementation-backlog.md](implementation-backlog.md)
-  Supporting backlog translation aligned to the live native codebase where it does not conflict with the canonical planning stack.
+- [codex/Launch_Operator_Runbook.md](codex/Launch_Operator_Runbook.md)
+- [codex/Release_Candidate_Review_Checklist.md](codex/Release_Candidate_Review_Checklist.md)
 
-## Other reference docs
-
-- [goal-engine-contract-notes.md](goal-engine-contract-notes.md)
-  Goal-engine contract and planning notes.
+---
 
 ## Repo truth
 
-- The current shipping app is the native SwiftUI target under `Native/Ambitions/`.
-- The native SwiftUI app is the source of truth.
-- The repo no longer carries an active TypeScript / Expo / React Native runtime path.
+- The current app is the native SwiftUI target under `Native/Ambitions/`.
+- The repo no longer has an active TypeScript / Expo / React Native runtime path.
 - The current shipped native surface is local-first and on-device first.
-- Today quick capture persists to the native Captures tab.
-- External routes are registered and shell-validated for canonical Plan and Captures inbox entry points.
-- Notifications: Productized in this build, platform review still required.
-- Widgets and Live Activity: Productized in this build, platform review still required.
-- App Intents and shortcuts: Productized in this build, platform review still required.
-- Share Extension: Productized in this build, platform review still required.
-- Sync, auth, and account deletion backend flows are not current shipping features.
-- Launch planning and submission operations now have dedicated docs under `docs/canon/` and `docs/codex/`; they supplement but do not replace the roadmap or compliance canon.
+- Platform features exist only to the evidence level documented in release/readiness docs and batch registry.
+- Sync, auth, and account backend flows are not current shipping features unless later implementation evidence says otherwise.
