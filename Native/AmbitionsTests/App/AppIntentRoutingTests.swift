@@ -69,7 +69,7 @@ final class AppIntentRoutingTests: XCTestCase {
         ]
         let descriptors = activeShortcutDestinations.map(\.d25CommandDescriptor)
 
-        XCTAssertEqual(Set(descriptors.map(\.title)), ["Capture", "Start Next Step", "Mark Done", "Save the Day", "Plan"])
+        XCTAssertEqual(Set(descriptors.map(\.title)), ["Start here", "Capture", "Make today doable", "Close the loop", "Plan"])
         XCTAssertTrue(descriptors.filter(\.requiresConfirmation).allSatisfy { descriptor in
             descriptor.commandKind == .completeAction || descriptor.commandKind == .recoverAction
         })

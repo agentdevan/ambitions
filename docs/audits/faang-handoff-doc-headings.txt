@@ -1,0 +1,288 @@
+docs/archive/README.md:1:# Documentation Archive
+docs/archive/superseded-design-canon/design/Ambitions_Frontend_Transformation_Execution_Classification.md:12:# Ambitions Frontend Transformation Execution Classification
+docs/archive/superseded-design-canon/design/copy-state-language-spec.md:12:# Copy and State Language Spec
+docs/archive/superseded-design-canon/design/cross-device-surface-roles-spec.md:12:# Cross-Device Surface Roles Spec
+docs/archive/superseded-design-canon/design/design-system-spec.md:12:# Design System Spec
+docs/archive/superseded-design-canon/design/external-surface-spec.md:12:# External Surface Spec
+docs/archive/superseded-design-canon/design/motion-microinteraction-spec.md:12:# Motion and Microinteraction Spec
+docs/archive/superseded-design-canon/design/novel-interaction-systems-spec.md:12:# Novel Interaction Systems Spec
+docs/archive/superseded-design-canon/design/screen-architecture-spec.md:12:# Screen Architecture Spec
+docs/archive/superseded-design-canon/design/shell-ia-spec.md:12:# Shell IA Spec
+docs/archive/superseded-design-canon/design/transformation-terminology-spec.md:12:# Transformation Terminology Spec
+docs/archive/superseded-design-canon/design/transformation-validation-standard.md:12:# Transformation Validation Standard
+docs/archive/superseded-design-canon/design/trust-explainability-correction-spec.md:12:# Trust Explainability and Correction UX Spec
+docs/archive/superseded-design-canon/presentations/frontend-transformation-investor-deck/narrative_plan.md:12:# Ambitions Front-End Transformation Investor Deck
+docs/archive/superseded-design-canon/rc1-native-finish-pass.md:12:# Ambitions RC 1.0 Native Finish Pass
+docs/canon/ACCESSIBILITY_FOCUS_SUPPORT.md:1:# Ambitions Accessibility And Focus Support
+docs/canon/AMBITION_CANON_COMPLETION_REPORT.md:1:# Ambitions Canon Completion Report
+docs/canon/Ambitions_2_0_Accessibility_Nutrition.md:1:# Ambitions 2.0 Accessibility Nutrition
+docs/canon/Ambitions_2_0_Batch_Plan.md:1:# Ambitions 2.0 Batch Plan
+docs/canon/Ambitions_2_0_Capability_Matrix.md:1:# Ambitions 2.0 Capability Matrix
+docs/canon/Ambitions_2_0_Daily_Loop_QA_Baseline.md:1:# Ambitions 2.0 Daily Loop QA Baseline
+docs/canon/Ambitions_2_0_Decision_Log.md:1:# Ambitions 2.0 Decision Log
+docs/canon/Ambitions_2_0_Foundation_Performance_Persistence_Budget.md:1:# Ambitions 2.0 Foundation Performance and Persistence Budget
+docs/canon/Ambitions_2_0_Implementation_Gap_Audit.md:1:# Ambitions 2.0 Implementation Gap Audit
+docs/canon/Ambitions_2_0_Intelligence_Standards.md:1:# Ambitions 2.0 Intelligence Standards
+docs/canon/Ambitions_2_0_Master_Plan.md:1:# Ambitions 2.0 Master Plan
+docs/canon/Ambitions_2_0_Object_Terminology.md:1:# Ambitions 2.0 Object Terminology
+docs/canon/Ambitions_2_0_Product_Architecture.md:1:# Ambitions 2.0 Product Architecture
+docs/canon/Ambitions_2_0_RC_Maturity_Plan.md:1:# Ambitions 2.0 RC Maturity Plan
+docs/canon/Ambitions_2_0_Roadmap.md:1:# Ambitions 2.0 Roadmap
+docs/canon/Ambitions_2_0_Roadmap_Merge_Audit.md:1:# Ambitions 2.0 Roadmap Merge Audit
+docs/canon/Ambitions_2_0_Systems_Architecture.md:1:# Ambitions 2.0 Systems Architecture
+docs/canon/Ambitions_2_0_Visual_System.md:1:# Ambitions 2.0 Visual System
+docs/canon/Ambitions_3_0_AI_Evaluation_And_Grounding_Plan.md:1:# Ambitions 3.0 — AI Evaluation And Grounding Plan
+docs/canon/Ambitions_3_0_Accessibility_Conformance_Plan.md:1:# Ambitions 3.0 — Accessibility Conformance Plan
+docs/canon/Ambitions_3_0_Action_Closure_Sheet_Spec.md:1:# Ambitions 3.0 — Action Closure Sheet Spec
+docs/canon/Ambitions_3_0_Action_Verbs_And_Receipt_Grammar.md:1:# Ambitions 3.0 — Action Verbs And Receipt Grammar
+docs/canon/Ambitions_3_0_Ambition_Meridian_Shell_SwiftUI_Build_Spec.md:1:# Ambitions 3.0 — Ambition Meridian Shell SwiftUI Build Spec
+docs/canon/Ambitions_3_0_Ambitions_Operating_Shell.md:1:# Ambitions 3.0 — Ambitions Operating Shell
+docs/canon/Ambitions_3_0_Codex_Only_Implementation_And_Testing_Strategy.md:1:# Ambitions 3.0 — Codex-Only Implementation And Testing Strategy
+docs/canon/Ambitions_3_0_Competitive_Positioning_And_Language_Research.md:1:# Ambitions 3.0 — Competitive Positioning And Language Research
+docs/canon/Ambitions_3_0_Content_QA_And_Copy_Guard.md:1:# Ambitions 3.0 — Content QA And Copy Guard
+docs/canon/Ambitions_3_0_Current_Implementation_Gap_Audit.md:1:# Ambitions 3.0 — Current Implementation Gap Audit
+docs/canon/Ambitions_3_0_Current_Implementation_Gap_Audit.md:331:# Recommended F00 Audit Expansion
+docs/canon/Ambitions_3_0_Current_Implementation_Gap_Audit.md:351:# Recommended First Implementation Order
+docs/canon/Ambitions_3_0_Current_Implementation_Gap_Audit.md:52:# Known Gaps
+docs/canon/Ambitions_3_0_Data_Event_Taxonomy.md:1:# Ambitions 3.0 — Data Event Taxonomy
+docs/canon/Ambitions_3_0_Day_Rail_SwiftUI_Build_Spec.md:1:# Ambitions 3.0 — Day Rail SwiftUI Build Spec
+docs/canon/Ambitions_3_0_Design_System_Primitives.md:1:# Ambitions 3.0 — Design System Primitives
+docs/canon/Ambitions_3_0_Documentation_System_Index.md:1:# Ambitions 3.0 — Documentation System Index
+docs/canon/Ambitions_3_0_Evidence_Hierarchy.md:1:# Ambitions 3.0 — Evidence Hierarchy
+docs/canon/Ambitions_3_0_FAANG_Handoff_Readiness_Gate.md:1:# Ambitions 3.0 — FAANG Handoff Readiness Gate
+docs/canon/Ambitions_3_0_FAANG_Rebuild_Documentation_Completeness_Matrix.md:1:# Ambitions 3.0 — FAANG Rebuild Documentation Completeness Matrix
+docs/canon/Ambitions_3_0_First_60_Seconds_Spec.md:1:# Ambitions 3.0 — First 60 Seconds Spec
+docs/canon/Ambitions_3_0_Front_End_Implementation_Batch_Plan.md:102:# F-Series Batch Plan
+docs/canon/Ambitions_3_0_Front_End_Implementation_Batch_Plan.md:1:# Ambitions 3.0 — Front-End Implementation Batch Plan
+docs/canon/Ambitions_3_0_Front_End_Implementation_Batch_Plan.md:64:# FXX — Batch Name
+docs/canon/Ambitions_3_0_Front_End_Redesign_Index.md:1:# Ambitions 3.0 Front-End Redesign Index
+docs/canon/Ambitions_3_0_Golden_Launch_Loop_Upgrade_Bank.md:117:# C. Place Upgrades
+docs/canon/Ambitions_3_0_Golden_Launch_Loop_Upgrade_Bank.md:142:# D. Plan Upgrades
+docs/canon/Ambitions_3_0_Golden_Launch_Loop_Upgrade_Bank.md:177:# E. Do Today Upgrades — Day Rail Protected
+docs/canon/Ambitions_3_0_Golden_Launch_Loop_Upgrade_Bank.md:1:# Ambitions 3.0 — Golden Launch Loop Upgrade Bank
+docs/canon/Ambitions_3_0_Golden_Launch_Loop_Upgrade_Bank.md:214:# F. Close / Recover Upgrades
+docs/canon/Ambitions_3_0_Golden_Launch_Loop_Upgrade_Bank.md:244:# G. Save Proof Upgrades
+docs/canon/Ambitions_3_0_Golden_Launch_Loop_Upgrade_Bank.md:269:# H. Trust Upgrades
+docs/canon/Ambitions_3_0_Golden_Launch_Loop_Upgrade_Bank.md:289:# I. AI / Personalization Upgrades
+docs/canon/Ambitions_3_0_Golden_Launch_Loop_Upgrade_Bank.md:304:# J. Visual / Interaction Upgrades
+docs/canon/Ambitions_3_0_Golden_Launch_Loop_Upgrade_Bank.md:324:# K. Content / Language Upgrades
+docs/canon/Ambitions_3_0_Golden_Launch_Loop_Upgrade_Bank.md:337:# L. Product Moat Upgrades
+docs/canon/Ambitions_3_0_Golden_Launch_Loop_Upgrade_Bank.md:57:# A. Highest-Impact Loop Upgrades
+docs/canon/Ambitions_3_0_Golden_Launch_Loop_Upgrade_Bank.md:87:# B. Capture Upgrades
+docs/canon/Ambitions_3_0_Information_Architecture_And_Routing_Model.md:1:# Ambitions 3.0 — Information Architecture And Routing Model
+docs/canon/Ambitions_3_0_Launch_Narrative_And_Demo_Script.md:1:# Ambitions 3.0 — Launch Narrative And Demo Script
+docs/canon/Ambitions_3_0_Microcopy_Pattern_Library.md:1:# Ambitions 3.0 — Microcopy Pattern Library
+docs/canon/Ambitions_3_0_Migration_And_Deprecation_Plan.md:1:# Ambitions 3.0 — Migration And Deprecation Plan
+docs/canon/Ambitions_3_0_North_Star_And_Product_Metrics.md:1:# Ambitions 3.0 — North Star And Product Metrics
+docs/canon/Ambitions_3_0_Object_Ownership_And_Appearance_Matrix.md:1:# Ambitions 3.0 — Object Ownership And Appearance Matrix
+docs/canon/Ambitions_3_0_Personalization_Consent_Model.md:1:# Ambitions 3.0 — Personalization Consent Model
+docs/canon/Ambitions_3_0_Placement_Resolver_Spec.md:1:# Ambitions 3.0 — Placement Resolver Spec
+docs/canon/Ambitions_3_0_Plan_Life_Suite_Endgame.md:1:# Ambitions 3.0 — Plan Life Suite Endgame
+docs/canon/Ambitions_3_0_Primitive_Architecture.md:128:# Primitive 3 — Proof & Receipt Ledger
+docs/canon/Ambitions_3_0_Primitive_Architecture.md:163:# Primitive 4 — Capture → Placement Resolver
+docs/canon/Ambitions_3_0_Primitive_Architecture.md:1:# Ambitions 3.0 — Primitive Architecture
+docs/canon/Ambitions_3_0_Primitive_Architecture.md:206:# Primitive 5 — Step Execution System
+docs/canon/Ambitions_3_0_Primitive_Architecture.md:254:# Primitive 6 — Plan Life Suite
+docs/canon/Ambitions_3_0_Primitive_Architecture.md:287:# Primitive 7 — Trust & Memory Control Plane
+docs/canon/Ambitions_3_0_Primitive_Architecture.md:316:# Primitive 8 — Goal Mission Control
+docs/canon/Ambitions_3_0_Primitive_Architecture.md:357:# Primitive 9 — Recommendation Ledger
+docs/canon/Ambitions_3_0_Primitive_Architecture.md:395:# Primitive 10 — First Useful Object Onboarding
+docs/canon/Ambitions_3_0_Primitive_Architecture.md:419:# Primitive 11 — Review OS
+docs/canon/Ambitions_3_0_Primitive_Architecture.md:447:# Primitive 12 — Accessibility / ADHD Control Layer
+docs/canon/Ambitions_3_0_Primitive_Architecture.md:45:# Primitive 1 — Reality Rail
+docs/canon/Ambitions_3_0_Primitive_Architecture.md:475:# Primitive 13 — Rail / Node Visual Grammar
+docs/canon/Ambitions_3_0_Primitive_Architecture.md:493:# Primitive 14 — Ambitions Operating Shell
+docs/canon/Ambitions_3_0_Primitive_Architecture.md:522:# Primitive 15 — External Surface Projection
+docs/canon/Ambitions_3_0_Primitive_Architecture.md:539:# Primitive 16 — Release / Market Proof System
+docs/canon/Ambitions_3_0_Primitive_Architecture.md:88:# Primitive 2 — Action Closure Engine
+docs/canon/Ambitions_3_0_Privacy_Threat_Model.md:1:# Ambitions 3.0 — Privacy Threat Model
+docs/canon/Ambitions_3_0_Product_Language_System.md:1:# Ambitions 3.0 — Product Language System
+docs/canon/Ambitions_3_0_Product_Strategy_Brief.md:1:# Ambitions 3.0 — Product Strategy Brief
+docs/canon/Ambitions_3_0_Proof_Receipts_And_Reviews_Contract.md:1:# Ambitions 3.0 — Proof, Receipts, And Reviews Contract
+docs/canon/Ambitions_3_0_Rebuild_Operating_Model.md:1:# Ambitions 3.0 — Rebuild Operating Model
+docs/canon/Ambitions_3_0_Recommendation_Contract.md:1:# Ambitions 3.0 — Recommendation Contract
+docs/canon/Ambitions_3_0_Recommendation_Eligibility_Engine.md:1:# Ambitions 3.0 — Recommendation Eligibility Engine
+docs/canon/Ambitions_3_0_Release_Readiness_And_Evidence_Gates.md:1:# Ambitions 3.0 — Release Readiness And Evidence Gates
+docs/canon/Ambitions_3_0_Repo_Hygiene_And_Active_Canon_Policy.md:1:# Ambitions 3.0 — Repo Hygiene And Active Canon Policy
+docs/canon/Ambitions_3_0_Screenshot_Readiness_Spec.md:1:# Ambitions 3.0 — Screenshot Readiness Spec
+docs/canon/Ambitions_3_0_Signature_Objects_And_Rail_Grammar.md:1:# Ambitions 3.0 — Signature Objects And Rail Grammar
+docs/canon/Ambitions_3_0_Source_Of_Truth_Override.md:1:# Ambitions 3.0 — Source Of Truth Override
+docs/canon/Ambitions_3_0_State_Machines_And_Domain_Flows.md:123:# Placement Lifecycle
+docs/canon/Ambitions_3_0_State_Machines_And_Domain_Flows.md:141:# Plan Reflow Lifecycle
+docs/canon/Ambitions_3_0_State_Machines_And_Domain_Flows.md:157:# Action Closure Lifecycle
+docs/canon/Ambitions_3_0_State_Machines_And_Domain_Flows.md:177:# Proof Lifecycle
+docs/canon/Ambitions_3_0_State_Machines_And_Domain_Flows.md:198:# Memory Lifecycle
+docs/canon/Ambitions_3_0_State_Machines_And_Domain_Flows.md:1:# Ambitions 3.0 — State Machines And Domain Flows
+docs/canon/Ambitions_3_0_State_Machines_And_Domain_Flows.md:213:# Recommendation Lifecycle
+docs/canon/Ambitions_3_0_State_Machines_And_Domain_Flows.md:28:# Step State Machine
+docs/canon/Ambitions_3_0_State_Machines_And_Domain_Flows.md:97:# Capture Lifecycle
+docs/canon/Ambitions_3_0_Surface_State_Matrix.md:1:# Ambitions 3.0 — Surface State Matrix
+docs/canon/Ambitions_3_0_Top_Level_Surface_Density_Constitution.md:1:# Ambitions 3.0 — Top-Level Surface Density Constitution
+docs/canon/Ambitions_3_0_UI_Invention_Evaluation_Framework.md:151:# UI Invention Proposal — Name
+docs/canon/Ambitions_3_0_UI_Invention_Evaluation_Framework.md:1:# Ambitions 3.0 — UI Invention Evaluation Framework
+docs/canon/Ambitions_3_0_UI_Invention_Upgrade_Bank.md:1145:# 8. You / Trust / Memory Inventions
+docs/canon/Ambitions_3_0_UI_Invention_Upgrade_Bank.md:1293:# 9. Reviews Inventions
+docs/canon/Ambitions_3_0_UI_Invention_Upgrade_Bank.md:1401:# 10. First Run / Onboarding Inventions
+docs/canon/Ambitions_3_0_UI_Invention_Upgrade_Bank.md:1463:# 11. External Surfaces Inventions
+docs/canon/Ambitions_3_0_UI_Invention_Upgrade_Bank.md:1547:# 12. Visual System Inventions
+docs/canon/Ambitions_3_0_UI_Invention_Upgrade_Bank.md:1649:# 13. AI / Personalization Inventions
+docs/canon/Ambitions_3_0_UI_Invention_Upgrade_Bank.md:1733:# 14. Accessibility / ADHD Support Inventions
+docs/canon/Ambitions_3_0_UI_Invention_Upgrade_Bank.md:1825:# 15. Market / App Store / Investor Inventions
+docs/canon/Ambitions_3_0_UI_Invention_Upgrade_Bank.md:1:# Ambitions 3.0 — UI Invention Upgrade Bank
+docs/canon/Ambitions_3_0_UI_Invention_Upgrade_Bank.md:227:# 2. Today / Day Rail Inventions
+docs/canon/Ambitions_3_0_UI_Invention_Upgrade_Bank.md:423:# 3. Step Detail Inventions
+docs/canon/Ambitions_3_0_UI_Invention_Upgrade_Bank.md:49:# 1. System-Wide Flagship Inventions
+docs/canon/Ambitions_3_0_UI_Invention_Upgrade_Bank.md:557:# 4. Step Session Inventions
+docs/canon/Ambitions_3_0_UI_Invention_Upgrade_Bank.md:661:# 5. Capture Inventions
+docs/canon/Ambitions_3_0_UI_Invention_Upgrade_Bank.md:827:# 6. Plan Inventions
+docs/canon/Ambitions_3_0_UI_Invention_Upgrade_Bank.md:985:# 7. Goals Inventions
+docs/canon/Ambitions_3_0_UX_Research_Plan.md:1:# Ambitions 3.0 — UX Research Plan
+docs/canon/Ambitions_3_0_Universal_Object_Lifecycle_Contract.md:1:# Ambitions 3.0 — Universal Object Lifecycle Contract
+docs/canon/Ambitions_Accessibility_Nutrition_Labels_Audit.md:1:# Ambitions Accessibility Nutrition Labels Audit
+docs/canon/Ambitions_App_Store_Release_Compliance.md:1:# Ambitions App Store Release Compliance
+docs/canon/Ambitions_Codex_Batch_Plan.md:1:# Ambitions Codex Batch Plan
+docs/canon/Ambitions_Frontend_Batches_49_60_Revised.md:1:# Ambitions Frontend Batches 49-60 Revised
+docs/canon/Ambitions_Full_Frontend_Transformation_Program.md:1:# Ambitions Full Front-End Transformation Program â€” Master UI Roadmap and Batch Plan
+docs/canon/Ambitions_Full_Frontend_Transformation_Program.md:251:# Batch Specs
+docs/canon/Ambitions_Launch_Master_Checklist.md:1:# Ambitions Launch Master Checklist
+docs/canon/Ambitions_Master_Product_Visual_System_Spec_v2.md:1:# Ambitions Master Product and Visual System Spec v2
+docs/canon/Ambitions_Master_Product_Visual_System_v2_Decision_Addendum_2026_04_30.md:1:# Ambitions Master Product and Visual System v2 Decision Addendum
+docs/canon/Ambitions_OS_Master_Roadmap.md:1:# Ambitions OS — Master Roadmap (Ambitions 2.0)
+docs/canon/Ambitions_Product_Addendum_Continuity_Reality_Execution.md:1:# Ambitions Product Addendum — Continuity, Reality, and Execution
+docs/canon/Ambitions_State_Continuity_Mesh.md:1:# Ambitions State Continuity Mesh
+docs/canon/Ambitions_Surgical_Execution_Plan.md:1:# Ambitions Surgical Execution Plan
+docs/canon/Ambitions_Visual_QA_Red_Team_Audit.md:1:# Ambitions Visual QA Red-Team Audit
+docs/canon/CANON_CONSOLIDATION_GAP_AUDIT.md:1:# Ambitions Canon Consolidation Gap Audit
+docs/canon/CAPTURE_SMART_ATTACHMENT.md:1:# Ambitions Capture And Smart Attachment
+docs/canon/DATA_LOCAL_SYNC_EXPORT.md:1:# Ambitions Data, Local-First, Sync, And Export
+docs/canon/DOCS_RECONCILIATION_REVIEW.md:1:# Ambitions Docs Reconciliation Review
+docs/canon/DOMAIN_MODEL.md:1:# Ambitions Domain Model
+docs/canon/Documentation_Cleanup_Audit.md:1:# Documentation Cleanup Audit
+docs/canon/EMPTY_ERROR_RECOVERY_STATES.md:1:# Ambitions Empty, Error, And Recovery States
+docs/canon/EXTERNAL_SURFACES_NOTIFICATIONS_WIDGETS.md:1:# Ambitions External Surfaces, Notifications, Widgets, And Live Activities
+docs/canon/GOALS_GOAL_DETAIL.md:1:# Ambitions Goals And Goal Detail
+docs/canon/GOAL_PLAN_TASK_LIFECYCLE.md:1:# Ambitions Goal / Plan / Task Lifecycle
+docs/canon/GOLDEN_LAUNCH_LOOP.md:1:# Ambitions Golden Launch Loop
+docs/canon/HUMAN_LANGUAGE_REVIEW.md:1:# Ambitions Human Language Review
+docs/canon/IA_NAVIGATION_DRILLDOWN.md:1:# Ambitions IA, Navigation, And Drilldown
+docs/canon/IMPLEMENTATION_ACCEPTANCE_GATES.md:1:# Ambitions Implementation Acceptance Gates
+docs/canon/INTELLIGENCE_AUTOMATION_SUGGESTIONS.md:1:# Ambitions Intelligence, Automation, And Suggestions
+docs/canon/LAUNCH_SCOPE_MVP_QUALITY_BAR.md:1:# Ambitions Launch Scope, MVP, And Quality Bar
+docs/canon/MONETIZATION_PRICING_BUSINESS_MODEL.md:1:# Ambitions Monetization, Pricing, And Business Model
+docs/canon/ONBOARDING_SPEC.md:1:# Ambitions Onboarding Spec
+docs/canon/PLAN_CALENDAR_BELIEVABILITY.md:1:# Ambitions Plan, Calendar, And Believability
+docs/canon/POST_D26_MATURITY_ROADMAP.md:1:# Post-D26 Maturity Roadmap
+docs/canon/PRODUCT_DECISIONS.md:111:# Wave 5 — Capture And Smart Attachment
+docs/canon/PRODUCT_DECISIONS.md:131:# Wave 6 — Plan, Calendar, And Believability
+docs/canon/PRODUCT_DECISIONS.md:149:# Wave 7 — Goals And Goal Detail
+docs/canon/PRODUCT_DECISIONS.md:168:# Wave 8 — Today And Now State
+docs/canon/PRODUCT_DECISIONS.md:186:# Wave 9 — You, Profile, Settings, And Reviews
+docs/canon/PRODUCT_DECISIONS.md:1:# Ambitions Product Decisions
+docs/canon/PRODUCT_DECISIONS.md:204:# Wave 10 — IA, Navigation, And Drilldown
+docs/canon/PRODUCT_DECISIONS.md:21:# Wave 1 — Product Identity And Life Areas
+docs/canon/PRODUCT_DECISIONS.md:221:# Wave 11 — Intelligence, Automation, And Suggestions
+docs/canon/PRODUCT_DECISIONS.md:238:# Wave 12 — Visual System, Components, And Motion
+docs/canon/PRODUCT_DECISIONS.md:255:# Wave 13 — Accessibility And Focus Support
+docs/canon/PRODUCT_DECISIONS.md:272:# Wave 14 — External Surfaces, Notifications, Widgets, And Live Activities
+docs/canon/PRODUCT_DECISIONS.md:289:# Wave 15 — Data, Local-First, Sync, And Export
+docs/canon/PRODUCT_DECISIONS.md:306:# Wave 16 — Monetization, Pricing, And Business Model
+docs/canon/PRODUCT_DECISIONS.md:324:# Wave 17 — Launch Scope, MVP, And Quality Bar
+docs/canon/PRODUCT_DECISIONS.md:341:# Wave 18 — Roadmap, Batch Governance, And No-Drift Execution
+docs/canon/PRODUCT_DECISIONS.md:358:# Wave 19 — Final Canon Completion And Reconciliation
+docs/canon/PRODUCT_DECISIONS.md:375:# Active Follow-Up Targets
+docs/canon/PRODUCT_DECISIONS.md:50:# Wave 2 — Lifecycle And State Language
+docs/canon/PRODUCT_DECISIONS.md:70:# Wave 3 — Trust, Memory, And Receipts
+docs/canon/PRODUCT_DECISIONS.md:90:# Wave 4 — Onboarding And First-Run Flow
+docs/canon/README.md:1:# Ambitions Canon Index
+docs/canon/ROADMAP_BATCH_CLASSIFICATION.md:1:# Ambitions Roadmap And Batch Classification
+docs/canon/ROADMAP_BATCH_GOVERNANCE.md:1:# Ambitions Roadmap, Batch Governance, And No-Drift Execution
+docs/canon/SOURCE_OF_TRUTH_MAP.md:1:# Ambitions Canon Source Of Truth Map
+docs/canon/TODAY_NOW_STATE.md:1:# Ambitions Today And Now State
+docs/canon/TRUST_PRIVACY_MEMORY.md:1:# Ambitions Trust, Privacy, And Memory
+docs/canon/VISUAL_SYSTEM_COMPONENTS_MOTION.md:1:# Ambitions Visual System, Components, And Motion
+docs/canon/YOU_PROFILE_REVIEWS.md:1:# Ambitions You, Profile, Settings, And Reviews
+docs/canon/design/Ambitions_Design_Constitution.md:1:# Ambitions Design Constitution
+docs/canon/design/DESIGN_TOKENS.md:1:# Ambitions Design Tokens
+docs/canon/design/README.md:1:# Ambitions Design Truth
+docs/canon/design/accessibility-nutrition-screen-matrix.md:1:# Accessibility Nutrition Screen Matrix
+docs/canon/design/component-contract-matrix.md:1:# Component Contract Matrix
+docs/canon/design/external-surfaces-contract.md:1:# External Surfaces Contract
+docs/canon/design/grouped-navigation-list-spec.md:1:# Grouped Navigation List Spec
+docs/canon/design/panel-density-size-spec.md:1:# Panel Density And Size Spec
+docs/canon/design/screen-contract-matrix.md:1:# Screen Contract Matrix
+docs/canon/design/smart-attachment-spec.md:1:# Smart Attachment Spec
+docs/canon/design/ux-writing-state-language-matrix.md:1:# UX Writing State Language Matrix
+docs/codex/Ambitions_2_0_Codex_Execution_Guide.md:1:# Ambitions 2.0 Codex Execution Guide
+docs/codex/BATCH_REGISTRY.md:1:# Ambitions Batch Registry
+docs/codex/CONTEXT_INDEX.md:1:# Ambitions Codex Context Index
+docs/codex/FAANG_HANDOFF_REPO_CLEANUP_PROMPT.md:1:# Codex Prompt — FAANG Handoff Repo Cleanup And Readiness
+docs/codex/FREE_WORKFLOW_OPERATING_SYSTEM.md:164:# Completion Summary
+docs/codex/FREE_WORKFLOW_OPERATING_SYSTEM.md:1:# Ambitions Free Workflow Operating System
+docs/codex/Human_Release_Review_Handoff.md:1:# Human Release Review Handoff
+docs/codex/Launch_Operator_Runbook.md:1:# Launch Operator Runbook
+docs/codex/MASTER_CODEX_SYSTEM.md:1:# Ambitions Master Codex System
+docs/codex/README.md:1:# Codex Context
+docs/codex/Release_Candidate_Review_Checklist.md:1:# Release Candidate Review Checklist
+docs/codex/batches/BATCH-00-repo-operating-system.md:1:# Batch 00 — Repo Operating System / Canon Alignment
+docs/codex/batches/BATCH-01-pre-phase9-cleanup-and-captures-tab.md:1:# Batch 01 — Pre-Phase-9 Cleanup And Captures Tab
+docs/codex/batches/BATCH-02-delete-legacy-typescript-runtime.md:1:# Batch 02 — Delete Legacy TypeScript Runtime
+docs/codex/batches/BATCH-03-canon-batch-1-domain-foundation.md:1:# Batch 03 — Canon Batch 1 / Domain Foundation
+docs/codex/batches/BATCH-04-canon-batch-2-first-class-capture-core.md:1:# Batch 04 — Canon Batch 2 / First-Class Capture Core
+docs/codex/batches/BATCH-05-canon-batch-3-planning-engine-v2.md:1:# Batch 05 — Canon Batch 3 / Planning Engine v2
+docs/codex/batches/BATCH-06-canon-batch-4-recovery-engine.md:1:# Batch 06 — Canon Batch 4 / Recovery Engine
+docs/codex/batches/BATCH-07-canon-batch-5a-time-orchestration-write-paths.md:1:# Batch 07 — Canon Batch 5A / Time Orchestration Foundation (Write Paths Only)
+docs/codex/batches/BATCH-08-canon-batch-5b-time-orchestration-read-paths.md:1:# Batch 08 — Canon Batch 5B / Time Orchestration Intelligence (Read Paths)
+docs/codex/batches/BATCH-09-canon-batch-6-external-action-infrastructure.md:1:# Batch 09 — Canon Batch 6 / External Action Infrastructure
+docs/codex/batches/BATCH-10-canon-batch-7-ambient-surfaces-bundle.md:1:# Batch 10 — Canon Batch 7 / Ambient Surfaces Bundle
+docs/codex/batches/BATCH-11-canon-batch-8-ritual-os.md:1:# Batch 11 — Canon Batch 8 / Ritual OS
+docs/codex/batches/BATCH-12-canon-batch-9-sync-trust-foundation.md:1:# Batch 12 — Canon Batch 9 / Sync-Trust Foundation
+docs/codex/batches/BATCH-13-canon-batch-10-life-graph-foundation.md:1:# Batch 13 — Canon Batch 10 / Life Graph Foundation
+docs/codex/batches/BATCH-14-canon-batch-11-path-systems-foundation.md:1:# Batch 14 — Canon Batch 11 / Path Systems Foundation
+docs/codex/batches/BATCH-15-canon-batch-12-learning-and-anticipation-engine.md:1:# Batch 15 — Canon Batch 12 / Learning and Anticipation Engine
+docs/codex/batches/BATCH-16-canon-batch-13-shared-life-household-intelligence.md:1:# Batch 16 — Canon Batch 13 / Shared Life / Household Intelligence
+docs/codex/batches/BATCH-17-canon-batch-14-runtime-separation.md:1:# Batch 17 — Canon Batch 14 / Runtime Separation
+docs/codex/batches/BATCH-18-canon-batch-15-dedicated-device-prototype.md:1:# Batch 18 — Canon Batch 15 / Dedicated Device Prototype
+docs/codex/batches/BATCH-19-ambitions-2.0-canon-reset.md:1:# Batch 19 — Ambitions 2.0 Batch 00 / Canon Reset
+docs/codex/batches/BATCH-20-knowledge-provider-boundary.md:1:# Batch 20 — Ambitions 2.0 Batch 01 / Knowledge Provider Boundary
+docs/codex/batches/BATCH-21-external-knowledge-ingestion-core.md:1:# Batch 21 — Ambitions 2.0 Batch 02 / External Knowledge Ingestion Core
+docs/codex/batches/BATCH-22-clarification-and-ambiguity-engine.md:1:# Batch 22 — Ambitions 2.0 Batch 03 / Clarification and Ambiguity Engine
+docs/codex/batches/BATCH-23-generalized-goal-understanding-contracts.md:1:# Batch 23 — Ambitions 2.0 Batch 04 / Generalized Goal Understanding Contracts
+docs/codex/batches/BATCH-24-path-compiler-foundation.md:1:# Batch 24 — Ambitions 2.0 Batch 05 / Path Compiler Foundation
+docs/codex/batches/BATCH-25-domain-pack-framework.md:1:# Batch 25 — Ambitions 2.0 Batch 06 / Domain Pack Framework
+docs/codex/batches/BATCH-26-resource-graph-and-source-ranking.md:1:# Batch 26 — Ambitions 2.0 Batch 07 / Resource Graph and Source Ranking
+docs/codex/batches/BATCH-27-update-and-freshness-engine.md:1:# Batch 27 — Ambitions 2.0 Batch 08 / Update and Freshness Engine
+docs/codex/batches/BATCH-28-energy-model-foundation.md:1:# Batch 28 — Ambitions 2.0 Batch 09 / Energy Model Foundation
+docs/codex/batches/BATCH-29-energy-learning-and-ranking.md:1:# Batch 29 — Ambitions 2.0 Batch 10 / Energy Learning and Ranking
+docs/codex/batches/BATCH-30-contradiction-engine.md:1:# Batch 30 — Ambitions 2.0 Batch 11 / Contradiction Engine
+docs/codex/batches/BATCH-31-correction-and-teaching-loop.md:1:# Batch 31 — Ambitions 2.0 Batch 12 / Correction and Teaching Loop
+docs/codex/batches/BATCH-32-explainability-and-source-audit-surfaces.md:1:# Batch 32 — Ambitions 2.0 Batch 13 / Explainability and Source Audit Surfaces
+docs/codex/batches/BATCH-33-intelligence-runtime-integration.md:1:# Batch 33 — Ambitions 2.0 Batch 14 / Intelligence Runtime Integration
+docs/codex/batches/BATCH-34-product-shell-integration.md:1:# Batch 34 — Ambitions 2.0 Batch 15 / Ambitions 2.0 Product Shell Integration
+docs/codex/batches/BATCH-35-post-2.0-hardening-shell-truth-navigation-and-plan-canon-recovery.md:1:# Batch 35 — Post-2.0 Hardening 01 / Shell Truth, Navigation, and Plan Canon Recovery
+docs/codex/batches/BATCH-36-post-2.0-hardening-trust-extensions-and-external-surface-validation.md:1:# Batch 36 — Post-2.0 Hardening 02 / Trust, Extensions, and External Surface Validation
+docs/codex/batches/BATCH-37-post-2.0-hardening-secondary-surface-productization.md:1:# Batch 37 â€” Post-2.0 Hardening 03 / Secondary Surface Productization
+docs/codex/batches/BATCH-38-post-2.0-hardening-repo-truth-regression-performance-and-release-readiness.md:1:# Batch 38 â€” Post-2.0 Hardening 04 / Repo Truth, Regression, Performance, and Release Readiness
+docs/codex/batches/README.md:1:# Historical Front-End Transformation Batch Docs
+docs/codex/batches/batch-39.md:1:# Batch 39 - Front-End Transformation 00 / Program canon and shell rewrite foundation
+docs/codex/batches/batch-40.md:1:# Batch 40 - Front-End Transformation 01 / Shell reconsideration and navigation architecture
+docs/codex/batches/batch-41.md:1:# Batch 41 - Front-End Transformation 02 / Design system, materials, motion engine, and controls
+docs/codex/batches/batch-42.md:1:# Batch 42 - Front-End Transformation 03 / Global compose, search, capture, and command surface
+docs/codex/batches/batch-43.md:1:# Batch 43 - Front-End Transformation 04 / Today rebuild I - living hero, now state, and action model
+docs/codex/batches/batch-44.md:1:# Batch 44 - Front-End Transformation 05 / Today rebuild II - time aperture, recovery bloom, and day logic
+docs/codex/batches/batch-45.md:1:# Batch 45 - Front-End Transformation 06 / Goals rebuild I - direction board and horizon ladder
+docs/codex/batches/batch-46.md:1:# Batch 46 - Front-End Transformation 07 / Goal intake and Strategy Composer
+docs/codex/batches/batch-47.md:1:# Batch 47 - Front-End Transformation 08 / Goal Detail rebuild I - strategic chamber and path filmstrip
+docs/codex/batches/batch-48.md:1:# Batch 48 - Front-End Transformation 09 / Goal Detail rebuild II - trust whisper, correction, audit, and memory
+docs/codex/batches/batch-49.md:1:# Batch 49 - Front-End Transformation 10 / Plan rebuild I - elastic week and pressure scrubber
+docs/codex/batches/batch-50.md:1:# Batch 50 - Front-End Transformation 11 / Plan rebuild II - habits, captures, weekly review, and shaping logic
+docs/codex/batches/batch-51.md:1:# Batch 51 - Front-End Transformation 12 / Insights rebuild and reflection OS
+docs/codex/batches/batch-52.md:1:# Batch 52 - Front-End Transformation 13 / Profile rebuild, Appearance Studio, and Trust Center
+docs/codex/batches/batch-53.md:1:# Batch 53 - Front-End Transformation 14 / Onboarding, first-run, permissions, education, and state systems
+docs/codex/batches/batch-54.md:1:# Batch 54 - Front-End Transformation 15 / External surfaces I - widgets, Live Activities, notifications
+docs/codex/batches/batch-55.md:1:# Batch 55 - Front-End Transformation 16 / External surfaces II - share extension, App Intents, shortcuts, routing
+docs/codex/batches/batch-56.md:1:# Batch 56 - Front-End Transformation 17 / Cross-surface command, recall, and ambient coherence
+docs/codex/batches/batch-57.md:1:# Batch 57 - Front-End Transformation 18 / iPad and Mac surface architecture and first implementation
+docs/codex/batches/batch-58.md:1:# Batch 58 - Front-End Transformation 19 / Watch and Apple TV ambient surface architecture and first implementation
+docs/codex/batches/batch-59.md:1:# Batch 59 - Front-End Transformation 20 / Finish-quality pass, accessibility, performance, and release polish
+docs/codex/batches/batch-60.md:1:# Batch 60 - Front-End Transformation 21 / Finish-quality pass, accessibility, performance, and release polish
+docs/codex/repo-audit-baseline.md:1:# Ambitions Repo Audit Baseline

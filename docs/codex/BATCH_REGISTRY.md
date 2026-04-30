@@ -1,24 +1,24 @@
 # Ambitions Batch Registry
 
 This file is the operational queue for active Ambitions work.
-It tracks which batch is completed, active, or queued.
-Registry batch numbers are the operational source of truth. Canon batch numbers are semantic roadmap context and must not be renumbered retroactively.
+It tracks which batch is completed, active, queued, or preserved as historical evidence.
+Registry batch numbers are operational status truth only. Canon batch numbers are semantic roadmap context and must not be renumbered retroactively.
 
-It does not replace the higher-level vision or dependency order. For Ambitions 2.0 Batch 61 onward, use the new top-level canon first:
+Ambitions 3.0 is the active rebuild source of truth. For current execution and handoff work, use the 3.0 canonical planning stack first:
 
-- [../canon/Ambitions_2_0_Master_Plan.md](../canon/Ambitions_2_0_Master_Plan.md)
-- [../canon/Ambitions_2_0_Product_Architecture.md](../canon/Ambitions_2_0_Product_Architecture.md)
-- [../canon/Ambitions_2_0_Systems_Architecture.md](../canon/Ambitions_2_0_Systems_Architecture.md)
-- [../canon/Ambitions_2_0_Visual_System.md](../canon/Ambitions_2_0_Visual_System.md)
-- [../canon/Ambitions_2_0_Roadmap.md](../canon/Ambitions_2_0_Roadmap.md)
-- [../canon/Ambitions_2_0_Batch_Plan.md](../canon/Ambitions_2_0_Batch_Plan.md)
-- [../canon/Ambitions_2_0_RC_Maturity_Plan.md](../canon/Ambitions_2_0_RC_Maturity_Plan.md)
-- [../canon/Ambitions_2_0_Accessibility_Nutrition.md](../canon/Ambitions_2_0_Accessibility_Nutrition.md)
-- [../canon/Ambitions_2_0_Decision_Log.md](../canon/Ambitions_2_0_Decision_Log.md)
-- [../canon/Ambitions_2_0_Capability_Matrix.md](../canon/Ambitions_2_0_Capability_Matrix.md)
-- [../canon/Ambitions_2_0_Implementation_Gap_Audit.md](../canon/Ambitions_2_0_Implementation_Gap_Audit.md)
-- [../canon/Ambitions_2_0_Roadmap_Merge_Audit.md](../canon/Ambitions_2_0_Roadmap_Merge_Audit.md)
-- [../canon/Ambitions_2_0_Object_Terminology.md](../canon/Ambitions_2_0_Object_Terminology.md)
+- [../canon/Ambitions_3_0_Source_Of_Truth_Override.md](../canon/Ambitions_3_0_Source_Of_Truth_Override.md)
+- [../canon/Ambitions_3_0_Front_End_Redesign_Index.md](../canon/Ambitions_3_0_Front_End_Redesign_Index.md)
+- [../canon/Ambitions_3_0_Rebuild_Operating_Model.md](../canon/Ambitions_3_0_Rebuild_Operating_Model.md)
+- [../canon/Ambitions_3_0_Documentation_System_Index.md](../canon/Ambitions_3_0_Documentation_System_Index.md)
+- [../canon/Ambitions_3_0_Primitive_Architecture.md](../canon/Ambitions_3_0_Primitive_Architecture.md)
+- [../canon/Ambitions_3_0_Product_Language_System.md](../canon/Ambitions_3_0_Product_Language_System.md)
+- [../canon/Ambitions_3_0_Front_End_Implementation_Batch_Plan.md](../canon/Ambitions_3_0_Front_End_Implementation_Batch_Plan.md)
+- [../canon/Ambitions_3_0_Current_Implementation_Gap_Audit.md](../canon/Ambitions_3_0_Current_Implementation_Gap_Audit.md)
+- [../canon/Ambitions_3_0_Release_Readiness_And_Evidence_Gates.md](../canon/Ambitions_3_0_Release_Readiness_And_Evidence_Gates.md)
+- [../canon/Ambitions_3_0_FAANG_Handoff_Readiness_Gate.md](../canon/Ambitions_3_0_FAANG_Handoff_Readiness_Gate.md)
+- [../canon/Ambitions_3_0_Repo_Hygiene_And_Active_Canon_Policy.md](../canon/Ambitions_3_0_Repo_Hygiene_And_Active_Canon_Policy.md)
+
+Ambitions 2.0 docs remain preserved historical/supporting context unless the 3.0 source override explicitly keeps a domain binding where 3.0 has not replaced it.
 
 Older preserved continuity docs:
 
@@ -42,11 +42,11 @@ The earlier operational queue documented the repo through a post-2.0 hardening a
 
 Per the Ambitions 2.0 canon adopted on 2026-04-24, all phases and batches before Batch 61 are complete for planning purposes. Batch 60 is treated as the completed release-candidate polish batch. The active post-Batch-60 Ambitions 2.0 execution start is Batch 61.
 
-Use [../canon/Ambitions_2_0_Batch_Plan.md](../canon/Ambitions_2_0_Batch_Plan.md) for Batch 61 onward.
+Use [../canon/Ambitions_3_0_Front_End_Implementation_Batch_Plan.md](../canon/Ambitions_3_0_Front_End_Implementation_Batch_Plan.md) for the active 3.0 F-series rebuild sequence. Use [../canon/Ambitions_2_0_Batch_Plan.md](../canon/Ambitions_2_0_Batch_Plan.md) only as preserved history/supporting context.
 
 ## Active Queue
 
-Current execution status: Ambitions 2.0 post-Batch-60 canon is adopted. Batches 00-88, D01-D26, M01-M12, and R01-R05 are complete for planning purposes. The R-series release gate layer is complete with release-candidate status recorded as `Candidate prepared; human approval required`, not as App Store submission readiness or final RC lock. Original Batches 89-120 remain future planned roadmap work only through the classifications and dependencies in [../canon/Ambitions_2_0_Roadmap_Merge_Audit.md](../canon/Ambitions_2_0_Roadmap_Merge_Audit.md) and [../canon/POST_D26_MATURITY_ROADMAP.md](../canon/POST_D26_MATURITY_ROADMAP.md). The next recommended action is human release review plus physical-device, accessibility, signed-archive, external-platform, and store-asset gates before any TestFlight/App Store claim.
+Current execution status: Ambitions 3.0 is the active rebuild canon and handoff-readiness frame. Batches 00-88, D01-D26, M01-M12, and R01-R05 remain complete for planning/history purposes; the R-series release gate layer remains recorded as `Candidate prepared; human approval required`, not as App Store submission readiness or final RC lock. The active 3.0 implementation continuation is the F-series sequence in [../canon/Ambitions_3_0_Front_End_Implementation_Batch_Plan.md](../canon/Ambitions_3_0_Front_End_Implementation_Batch_Plan.md). The next implementation batch after this handoff cleanup is F00, the exact current implementation gap audit expansion, unless a human release/device/platform gate is explicitly chosen first.
 
 Master Product and Visual System Spec v2 note: A user-directed product/design-system integration pass adopted [../canon/Ambitions_Master_Product_Visual_System_Spec_v2.md](../canon/Ambitions_Master_Product_Visual_System_Spec_v2.md) as the active master product and visual direction. This canon locks grounded time context, `Start here`, Schedule & Availability under You -> Planning Behavior, Guided automation by default, vacation unavailable by default, grounded durations, cognitive fit, Action Closure, and closure receipt visibility across Today, Trust Center, and Goal Detail. This note is not a claim that every v2 surface requirement is fully implemented; code evidence and validation remain required.
 

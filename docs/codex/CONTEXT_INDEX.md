@@ -4,6 +4,12 @@ This file defines the standing source-of-truth hierarchy for future Ambitions wo
 
 ## Current Operating Truth
 
+- Ambitions 3.0 is the active rebuild source of truth for product, front-end, product language, primitive architecture, implementation sequencing, repo hygiene, and handoff readiness.
+- Start current work from [../canon/Ambitions_3_0_Source_Of_Truth_Override.md](../canon/Ambitions_3_0_Source_Of_Truth_Override.md), [../canon/Ambitions_3_0_Front_End_Redesign_Index.md](../canon/Ambitions_3_0_Front_End_Redesign_Index.md), [../canon/Ambitions_3_0_Rebuild_Operating_Model.md](../canon/Ambitions_3_0_Rebuild_Operating_Model.md), [../canon/Ambitions_3_0_Documentation_System_Index.md](../canon/Ambitions_3_0_Documentation_System_Index.md), [../canon/Ambitions_3_0_Primitive_Architecture.md](../canon/Ambitions_3_0_Primitive_Architecture.md), and [../canon/Ambitions_3_0_Product_Language_System.md](../canon/Ambitions_3_0_Product_Language_System.md).
+- Ambitions Master Product and Visual System Spec v2 and earlier docs are supporting context where compatible, but they do not override the explicit Ambitions 3.0 source override or linked 3.0 child docs.
+- Current execution status: Batches 00-88, D01-D26, M01-M12, and R01-R05 remain complete for planning/history purposes; release-candidate status remains `Candidate prepared; human approval required`. The active 3.0 continuation is F00 in [../canon/Ambitions_3_0_Front_End_Implementation_Batch_Plan.md](../canon/Ambitions_3_0_Front_End_Implementation_Batch_Plan.md) after this handoff cleanup, unless a human release/device/platform gate is explicitly chosen first.
+- Implementation remains evidence-gated; do not claim a 3.0 concept is implemented, tested, device-verified, or release-ready unless current code, previews, tests, and platform evidence prove that exact status.
+
 - Product-decision Waves 1-19 are complete.
 - Ambitions Master Product and Visual System Spec v2 is now the active master product/design direction. It locks `Start here`, grounded time context, Schedule & Availability under `You -> Planning Behavior`, Guided automation by default, vacation unavailable by default, user-owned duration labels, cognitive fit, Action Closure, and closure receipt visibility across Today, Trust Center, and Goal Detail. Implementation remains evidence-gated; do not claim full surface completion from canon adoption alone.
 - Current execution status remains: Batches 00-88, D01-D26, M01-M12, and R01-R05 are complete for planning purposes; release-candidate status is `Candidate prepared; human approval required`.
@@ -61,26 +67,29 @@ For non-trivial work, read these in order before planning:
 
 1. [AGENTS.md](../../AGENTS.md) and any more-specific scoped `AGENTS.md`.
 2. [BATCH_REGISTRY.md](BATCH_REGISTRY.md) for active work status only.
-3. [SOURCE_OF_TRUTH_MAP.md](../canon/SOURCE_OF_TRUTH_MAP.md) for document ownership and reading order.
-4. [PRODUCT_DECISIONS.md](../canon/PRODUCT_DECISIONS.md) for resolved Waves 1-19 product decisions.
-5. [GOLDEN_LAUNCH_LOOP.md](../canon/GOLDEN_LAUNCH_LOOP.md) for the smallest undeniable launch loop, launch-critical cutline, demo story, and product-strength rules.
-6. [ROADMAP_BATCH_CLASSIFICATION.md](../canon/ROADMAP_BATCH_CLASSIFICATION.md) for D01-D26 launch-critical / post-launch / deferred / decision-gated classification.
-7. [HUMAN_LANGUAGE_REVIEW.md](../canon/HUMAN_LANGUAGE_REVIEW.md) for user-facing language rules and AI/producty copy rejection.
-8. [AMBITION_CANON_COMPLETION_REPORT.md](../canon/AMBITION_CANON_COMPLETION_REPORT.md) for completion status, open questions, no-drift rules, archive candidates, and next reconciliation prompt.
-9. [DOCS_RECONCILIATION_REVIEW.md](../canon/DOCS_RECONCILIATION_REVIEW.md) when doing documentation cleanup, source-order updates, roadmap/batch reconciliation, or archive-candidate review.
-10. [MASTER_PRODUCT_SPEC.md](../../MASTER_PRODUCT_SPEC.md) for current shipping product truth and product promise.
-11. [Ambitions_Design_Constitution.md](../canon/design/Ambitions_Design_Constitution.md) for design, IA, UX writing, interaction, trust, accessibility, and external-surface authority.
-12. [Ambitions_2_0_Object_Terminology.md](../canon/Ambitions_2_0_Object_Terminology.md) for shared object terminology.
-13. [Ambitions_2_0_Product_Architecture.md](../canon/Ambitions_2_0_Product_Architecture.md) for surface ownership and drilldown rules.
-14. [Ambitions_2_0_Systems_Architecture.md](../canon/Ambitions_2_0_Systems_Architecture.md) for shared engines, local-first systems, and system ownership.
-15. [Ambitions_2_0_Visual_System.md](../canon/Ambitions_2_0_Visual_System.md) plus focused visual/design docs when UI or component work is involved.
-16. Relevant focused canon docs listed in [SOURCE_OF_TRUTH_MAP.md](../canon/SOURCE_OF_TRUTH_MAP.md).
-17. [Ambitions_2_0_Roadmap.md](../canon/Ambitions_2_0_Roadmap.md), [Ambitions_2_0_Batch_Plan.md](../canon/Ambitions_2_0_Batch_Plan.md), [Ambitions_2_0_Implementation_Gap_Audit.md](../canon/Ambitions_2_0_Implementation_Gap_Audit.md), and [Ambitions_2_0_Roadmap_Merge_Audit.md](../canon/Ambitions_2_0_Roadmap_Merge_Audit.md) for execution sequencing after source-map alignment.
-18. [POST_D26_MATURITY_ROADMAP.md](../canon/POST_D26_MATURITY_ROADMAP.md) only when planning Layer 2/Layer 3 after D26, or when explicitly asked to plan post-D26 work without changing current D-batch status.
-19. [FREE_WORKFLOW_OPERATING_SYSTEM.md](FREE_WORKFLOW_OPERATING_SYSTEM.md), [Ambitions_2_0_Codex_Execution_Guide.md](Ambitions_2_0_Codex_Execution_Guide.md), and [MASTER_CODEX_SYSTEM.md](MASTER_CODEX_SYSTEM.md) for Codex/process behavior.
-20. [VISUAL_REVIEW_CHECKLIST.md](../review/VISUAL_REVIEW_CHECKLIST.md) when visible UI, navigation, empty states, copy, or hierarchy changes.
-21. [FRICTION_LOG.md](../review/FRICTION_LOG.md) when observed product friction needs to be captured without expanding active scope.
-22. [docs/README.md](../README.md), [canon/README.md](../canon/README.md), and [archive/README.md](../archive/README.md) for index/navigation support.
+3. [Ambitions_3_0_Source_Of_Truth_Override.md](../canon/Ambitions_3_0_Source_Of_Truth_Override.md), [Ambitions_3_0_Front_End_Redesign_Index.md](../canon/Ambitions_3_0_Front_End_Redesign_Index.md), [Ambitions_3_0_Rebuild_Operating_Model.md](../canon/Ambitions_3_0_Rebuild_Operating_Model.md), [Ambitions_3_0_Documentation_System_Index.md](../canon/Ambitions_3_0_Documentation_System_Index.md), [Ambitions_3_0_Primitive_Architecture.md](../canon/Ambitions_3_0_Primitive_Architecture.md), and [Ambitions_3_0_Product_Language_System.md](../canon/Ambitions_3_0_Product_Language_System.md) for active 3.0 truth.
+4. [Ambitions_3_0_Front_End_Implementation_Batch_Plan.md](../canon/Ambitions_3_0_Front_End_Implementation_Batch_Plan.md), [Ambitions_3_0_Current_Implementation_Gap_Audit.md](../canon/Ambitions_3_0_Current_Implementation_Gap_Audit.md), and [Ambitions_3_0_Release_Readiness_And_Evidence_Gates.md](../canon/Ambitions_3_0_Release_Readiness_And_Evidence_Gates.md) for 3.0 sequencing, gap baseline, and evidence gates.
+5. [Ambitions_3_0_FAANG_Handoff_Readiness_Gate.md](../canon/Ambitions_3_0_FAANG_Handoff_Readiness_Gate.md) and [Ambitions_3_0_Repo_Hygiene_And_Active_Canon_Policy.md](../canon/Ambitions_3_0_Repo_Hygiene_And_Active_Canon_Policy.md) for cleanup and handoff work.
+6. The target 3.0 primitive, surface, privacy, accessibility, QA, or release doc.
+7. Older focused canon only where the 3.0 source override or documentation index keeps it binding for a domain that 3.0 has not replaced.
+8. [SOURCE_OF_TRUTH_MAP.md](../canon/SOURCE_OF_TRUTH_MAP.md) for older document ownership and reading order where still applicable.
+9. [PRODUCT_DECISIONS.md](../canon/PRODUCT_DECISIONS.md) for resolved Waves 1-19 product decisions.
+10. [GOLDEN_LAUNCH_LOOP.md](../canon/GOLDEN_LAUNCH_LOOP.md) for the smallest undeniable launch loop, launch-critical cutline, demo story, and product-strength rules.
+11. [ROADMAP_BATCH_CLASSIFICATION.md](../canon/ROADMAP_BATCH_CLASSIFICATION.md) for D01-D26 launch-critical / post-launch / deferred / decision-gated classification.
+12. [HUMAN_LANGUAGE_REVIEW.md](../canon/HUMAN_LANGUAGE_REVIEW.md) for user-facing language rules and AI/producty copy rejection.
+13. [AMBITION_CANON_COMPLETION_REPORT.md](../canon/AMBITION_CANON_COMPLETION_REPORT.md) for completion status, open questions, no-drift rules, archive candidates, and next reconciliation prompt.
+14. [DOCS_RECONCILIATION_REVIEW.md](../canon/DOCS_RECONCILIATION_REVIEW.md) when doing documentation cleanup, source-order updates, roadmap/batch reconciliation, or archive-candidate review.
+15. [MASTER_PRODUCT_SPEC.md](../../MASTER_PRODUCT_SPEC.md) for current shipping product truth and product promise.
+16. [Ambitions_Design_Constitution.md](../canon/design/Ambitions_Design_Constitution.md) for design, IA, UX writing, interaction, trust, accessibility, and external-surface authority.
+17. [Ambitions_2_0_Object_Terminology.md](../canon/Ambitions_2_0_Object_Terminology.md) for shared object terminology where not superseded by Ambitions 3.0 product-language docs.
+18. [Ambitions_2_0_Product_Architecture.md](../canon/Ambitions_2_0_Product_Architecture.md), [Ambitions_2_0_Systems_Architecture.md](../canon/Ambitions_2_0_Systems_Architecture.md), and [Ambitions_2_0_Visual_System.md](../canon/Ambitions_2_0_Visual_System.md) as compatibility context only where 3.0 has not replaced the domain.
+19. Relevant focused canon docs listed in [SOURCE_OF_TRUTH_MAP.md](../canon/SOURCE_OF_TRUTH_MAP.md).
+20. [Ambitions_2_0_Roadmap.md](../canon/Ambitions_2_0_Roadmap.md), [Ambitions_2_0_Batch_Plan.md](../canon/Ambitions_2_0_Batch_Plan.md), [Ambitions_2_0_Implementation_Gap_Audit.md](../canon/Ambitions_2_0_Implementation_Gap_Audit.md), and [Ambitions_2_0_Roadmap_Merge_Audit.md](../canon/Ambitions_2_0_Roadmap_Merge_Audit.md) for historical execution sequencing only where compatible.
+21. [POST_D26_MATURITY_ROADMAP.md](../canon/POST_D26_MATURITY_ROADMAP.md) only when planning Layer 2/Layer 3 after D26, or when explicitly asked to plan post-D26 work without changing current D-batch status.
+22. [FREE_WORKFLOW_OPERATING_SYSTEM.md](FREE_WORKFLOW_OPERATING_SYSTEM.md), [Ambitions_2_0_Codex_Execution_Guide.md](Ambitions_2_0_Codex_Execution_Guide.md), and [MASTER_CODEX_SYSTEM.md](MASTER_CODEX_SYSTEM.md) for Codex/process behavior.
+23. [VISUAL_REVIEW_CHECKLIST.md](../review/VISUAL_REVIEW_CHECKLIST.md) when visible UI, navigation, empty states, copy, or hierarchy changes.
+24. [FRICTION_LOG.md](../review/FRICTION_LOG.md) when observed product friction needs to be captured without expanding active scope.
+25. [docs/README.md](../README.md), [canon/README.md](../canon/README.md), and [archive/README.md](../archive/README.md) for index/navigation support.
 
 ## Precedence Model
 

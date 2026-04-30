@@ -268,3 +268,60 @@ The 3.0 documentation system is healthy when:
 - no screenshot implies an unimplemented capability is shipped
 - every build batch maps to a primitive, state machine, language rule, and evidence gate
 - generated artifacts and historical material do not re-enter the active path
+
+---
+
+## Active 3.0 Repo-Relative Path Registry
+
+This registry exists for handoff and orphan-scan clarity. The table above explains each document's job; the list below gives the exact repo-relative paths for the active Ambitions 3.0 canon set.
+
+- `docs/canon/Ambitions_3_0_AI_Evaluation_And_Grounding_Plan.md`
+- `docs/canon/Ambitions_3_0_Accessibility_Conformance_Plan.md`
+- `docs/canon/Ambitions_3_0_Action_Closure_Sheet_Spec.md`
+- `docs/canon/Ambitions_3_0_Action_Verbs_And_Receipt_Grammar.md`
+- `docs/canon/Ambitions_3_0_Ambition_Meridian_Shell_SwiftUI_Build_Spec.md`
+- `docs/canon/Ambitions_3_0_Ambitions_Operating_Shell.md`
+- `docs/canon/Ambitions_3_0_Codex_Only_Implementation_And_Testing_Strategy.md`
+- `docs/canon/Ambitions_3_0_Competitive_Positioning_And_Language_Research.md`
+- `docs/canon/Ambitions_3_0_Content_QA_And_Copy_Guard.md`
+- `docs/canon/Ambitions_3_0_Current_Implementation_Gap_Audit.md`
+- `docs/canon/Ambitions_3_0_Data_Event_Taxonomy.md`
+- `docs/canon/Ambitions_3_0_Day_Rail_SwiftUI_Build_Spec.md`
+- `docs/canon/Ambitions_3_0_Design_System_Primitives.md`
+- `docs/canon/Ambitions_3_0_Documentation_System_Index.md`
+- `docs/canon/Ambitions_3_0_Evidence_Hierarchy.md`
+- `docs/canon/Ambitions_3_0_FAANG_Handoff_Readiness_Gate.md`
+- `docs/canon/Ambitions_3_0_FAANG_Rebuild_Documentation_Completeness_Matrix.md`
+- `docs/canon/Ambitions_3_0_First_60_Seconds_Spec.md`
+- `docs/canon/Ambitions_3_0_Front_End_Implementation_Batch_Plan.md`
+- `docs/canon/Ambitions_3_0_Front_End_Redesign_Index.md`
+- `docs/canon/Ambitions_3_0_Golden_Launch_Loop_Upgrade_Bank.md`
+- `docs/canon/Ambitions_3_0_Information_Architecture_And_Routing_Model.md`
+- `docs/canon/Ambitions_3_0_Launch_Narrative_And_Demo_Script.md`
+- `docs/canon/Ambitions_3_0_Microcopy_Pattern_Library.md`
+- `docs/canon/Ambitions_3_0_Migration_And_Deprecation_Plan.md`
+- `docs/canon/Ambitions_3_0_North_Star_And_Product_Metrics.md`
+- `docs/canon/Ambitions_3_0_Object_Ownership_And_Appearance_Matrix.md`
+- `docs/canon/Ambitions_3_0_Personalization_Consent_Model.md`
+- `docs/canon/Ambitions_3_0_Placement_Resolver_Spec.md`
+- `docs/canon/Ambitions_3_0_Plan_Life_Suite_Endgame.md`
+- `docs/canon/Ambitions_3_0_Primitive_Architecture.md`
+- `docs/canon/Ambitions_3_0_Privacy_Threat_Model.md`
+- `docs/canon/Ambitions_3_0_Product_Language_System.md`
+- `docs/canon/Ambitions_3_0_Product_Strategy_Brief.md`
+- `docs/canon/Ambitions_3_0_Proof_Receipts_And_Reviews_Contract.md`
+- `docs/canon/Ambitions_3_0_Rebuild_Operating_Model.md`
+- `docs/canon/Ambitions_3_0_Recommendation_Contract.md`
+- `docs/canon/Ambitions_3_0_Recommendation_Eligibility_Engine.md`
+- `docs/canon/Ambitions_3_0_Release_Readiness_And_Evidence_Gates.md`
+- `docs/canon/Ambitions_3_0_Repo_Hygiene_And_Active_Canon_Policy.md`
+- `docs/canon/Ambitions_3_0_Screenshot_Readiness_Spec.md`
+- `docs/canon/Ambitions_3_0_Signature_Objects_And_Rail_Grammar.md`
+- `docs/canon/Ambitions_3_0_Source_Of_Truth_Override.md`
+- `docs/canon/Ambitions_3_0_State_Machines_And_Domain_Flows.md`
+- `docs/canon/Ambitions_3_0_Surface_State_Matrix.md`
+- `docs/canon/Ambitions_3_0_Top_Level_Surface_Density_Constitution.md`
+- `docs/canon/Ambitions_3_0_UI_Invention_Evaluation_Framework.md`
+- `docs/canon/Ambitions_3_0_UI_Invention_Upgrade_Bank.md`
+- `docs/canon/Ambitions_3_0_UX_Research_Plan.md`
+- `docs/canon/Ambitions_3_0_Universal_Object_Lifecycle_Contract.md`
