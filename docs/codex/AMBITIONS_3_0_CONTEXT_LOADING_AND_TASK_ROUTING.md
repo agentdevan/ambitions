@@ -31,6 +31,15 @@ Status: Active Codex routing guide
 - Release: `.codex/context-packs/release-readiness-context.md`
 - Dependencies: `.codex/context-packs/dependency-management-context.md`
 
+## Operating Protocol Routing
+
+- Always classify task width with `docs/canon/Ambitions_3_0_Task_Width_And_Batch_Combining_Gate.md` and `.codex/operations/task-width-gate-protocol.md`.
+- Use `.codex/operations/multi-primitive-batch-protocol.md` before combining primitives.
+- Use `.codex/operations/ui-test-modernization-protocol.md` before changing failing UI tests after 3.0 canon changes.
+- Use `.codex/operations/run-state-refresh-protocol.md` and `.codex/operations/large-batch-checkpoint-protocol.md` for L/XL or long-running work.
+- Use `.codex/operations/release-claim-truth-protocol.md` before making implementation, test, device, accessibility, TestFlight, App Store, release, or handoff claims.
+- Use `.codex/operations/human-approval-escalation-protocol.md` when runtime dependencies, persistence migrations, privacy model changes, app shell replacement, signed release, major navigation architecture, large historical deletions, or repeated validation failures enter scope.
+
 ## Avoiding Huge Context Loads
 
 Read the required source order, one context pack, and only the target docs/files named by the pack. Use `rg` for exact symbols and identifiers. Do not read all canon or all batches unless the task is a source-truth audit.

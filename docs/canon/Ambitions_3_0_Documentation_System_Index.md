@@ -40,9 +40,24 @@ For any Ambitions 3.0 rebuild work:
 | Doc | Job |
 |---|---|
 | `Ambitions_3_0_Codex_Performance_Operating_System.md` | Defines how Codex should work on Ambitions 3.0. |
+| `Ambitions_3_0_FAANG_Team_Operating_Model.md` | Defines role review, approval, blocking, and escalation for Codex-as-team operation. |
+| `Ambitions_3_0_Task_Width_And_Batch_Combining_Gate.md` | Defines XS/S/M/L/XL/XXL sizing, split rules, and allowed/disallowed batch combinations. |
+| `Ambitions_3_0_UI_Test_Contract.md` | Defines UI test classes, metadata, failure classification, modernization rules, and deletion guardrails. |
+| `Ambitions_3_0_Local_Toolchain_Readiness_Matrix.md` | Classifies required, adopted, advisory, later, and avoided local tools. |
+| `Ambitions_3_0_Definition_Of_Ready_And_Done.md` | Defines batch readiness and completion gates. |
+| `Ambitions_3_0_Decision_Record_Protocol.md` | Defines ADR triggers, content, and reversal requirements. |
+| `Ambitions_3_0_Architecture_Review_Board_Protocol.md` | Defines architecture review triggers and L/XL review gates. |
 | `Ambitions_3_0_Dependency_Management_Policy.md` | Defines dependency and toolchain gatekeeping. |
+| `Ambitions_3_0_Dependency_Promotion_Ladder.md` | Defines promotion states from proposed through removed. |
 | `Ambitions_3_0_Build_Skills_And_Dependency_Management.md` | Maps build skills to dependency policy. |
 | `Ambitions_3_0_Codex_Value_Maximization_System.md` | Defines how Codex increases product, engineering, QA, and release value. |
+| `Ambitions_3_0_Release_Claim_Truth_Protocol.md` | Defines status ladder and evidence required for public/release claims. |
+| `Ambitions_3_0_Roadmap_To_Code_Traceability_Rules.md` | Maps roadmap/batch claims to files, tests, and evidence. |
+| `Ambitions_3_0_Canon_To_Test_Traceability_Rules.md` | Maps canon requirements to owning tests or documented gaps. |
+| `Ambitions_3_0_Risk_Register_Protocol.md` | Defines risk entry and review rules. |
+| `Ambitions_3_0_Postmortem_And_Learning_Loop.md` | Defines learning loop for failed batches, repeated failures, and bad Codex runs. |
+| `Ambitions_3_0_Human_Approval_Escalation_Rules.md` | Defines when Codex must stop for human approval. |
+| `Ambitions_Beyond_3_0_Continuity_Rules.md` | Defines supersession and continuity rules for 3.1/4.0 and beyond. |
 | `Ambitions_3_0_Source_Of_Truth_Override.md` | States 3.0 supersession and conflict rules. |
 | `Ambitions_3_0_Front_End_Redesign_Index.md` | Parent index and front-end redesign doctrine. |
 | `Ambitions_3_0_Rebuild_Operating_Model.md` | Cross-functional rebuild governance model. |
@@ -144,6 +159,13 @@ For any Ambitions 3.0 rebuild work:
 | `Ambitions_3_0_Accessibility_Conformance_Plan.md` | VoiceOver, Dynamic Type, Reduce Motion, cognitive load, touch targets. |
 | `Ambitions_3_0_Codex_Only_Implementation_And_Testing_Strategy.md` | Codex-only testing/evidence strategy. |
 | `Ambitions_3_0_Release_Readiness_And_Evidence_Gates.md` | Release status and evidence gates. |
+| `Ambitions_3_0_Design_QA_Protocol.md` | Design QA triggers, checks, commands, evidence, and stop conditions. |
+| `Ambitions_3_0_Copy_QA_Protocol.md` | Copy QA triggers, product-language checks, evidence, and stop conditions. |
+| `Ambitions_3_0_Accessibility_QA_Protocol.md` | Accessibility QA triggers, checks, evidence, and stop conditions. |
+| `Ambitions_3_0_Privacy_Trust_QA_Protocol.md` | Privacy/trust QA triggers, checks, evidence, and stop conditions. |
+| `Ambitions_3_0_Test_Ownership_Matrix.md` | Test owner, fixture owner, class, and stability ownership by primitive/surface. |
+| `Ambitions_3_0_Flake_Management_Protocol.md` | Flake classification, quarantine, and evidence rules. |
+| `Ambitions_3_0_Build_Failure_Triage_Protocol.md` | Build failure classification and retry/escalation rules. |
 
 ---
 

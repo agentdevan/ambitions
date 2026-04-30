@@ -23,6 +23,10 @@ Ambitions 3.0 is the active source of truth. Older Codex prompts and batch files
 - [AMBITIONS_3_0_CONTEXT_LOADING_AND_TASK_ROUTING.md](AMBITIONS_3_0_CONTEXT_LOADING_AND_TASK_ROUTING.md) — how to choose context packs, skills, operations, and validation.
 - [AMBITIONS_3_0_SKILL_SYSTEM_INDEX.md](AMBITIONS_3_0_SKILL_SYSTEM_INDEX.md) — repo-local skill catalog.
 - [MAC_CODEX_5_5_TOOLCHAIN_SETUP.md](MAC_CODEX_5_5_TOOLCHAIN_SETUP.md) — local Mac/Codex setup and validation commands.
+- [AMBITIONS_3_0_RUN_STATE_PROTOCOL.md](AMBITIONS_3_0_RUN_STATE_PROTOCOL.md) — checkpointable state model for long Codex runs.
+- [AMBITIONS_3_0_LARGE_BATCH_AND_COMPACT_RECOVERY_PROTOCOL.md](AMBITIONS_3_0_LARGE_BATCH_AND_COMPACT_RECOVERY_PROTOCOL.md) — XL batch checkpoint and compaction recovery rules.
+- [AMBITIONS_3_0_PROMPT_QUALITY_RUBRIC.md](AMBITIONS_3_0_PROMPT_QUALITY_RUBRIC.md) — prompt quality scoring for future implementation asks.
+- [AMBITIONS_3_0_PARALLEL_CODEX_WORKTREE_PROTOCOL.md](AMBITIONS_3_0_PARALLEL_CODEX_WORKTREE_PROTOCOL.md) — parallel worktree guardrails.
 - [CONTEXT_INDEX.md](CONTEXT_INDEX.md) — source precedence and implementation-history navigation.
 - [BATCH_REGISTRY.md](BATCH_REGISTRY.md) — implementation status truth only.
 - [MASTER_CODEX_SYSTEM.md](MASTER_CODEX_SYSTEM.md) — standing Codex behavior, now subordinate to Ambitions 3.0.
@@ -39,6 +43,20 @@ The reusable system lives under `.codex/`:
 - `.codex/playbooks/` for failure recovery.
 - `.codex/context-packs/` for minimal context sets.
 - `.codex/checklists/` for preflight, commit, release, privacy, accessibility, and handoff checks.
+
+## FAANG Team Operating Protocols
+
+The FAANG-team operating upgrade is indexed from:
+
+- [../canon/Ambitions_3_0_FAANG_Team_Operating_Model.md](../canon/Ambitions_3_0_FAANG_Team_Operating_Model.md)
+- [../canon/Ambitions_3_0_Task_Width_And_Batch_Combining_Gate.md](../canon/Ambitions_3_0_Task_Width_And_Batch_Combining_Gate.md)
+- [../canon/Ambitions_3_0_UI_Test_Contract.md](../canon/Ambitions_3_0_UI_Test_Contract.md)
+- [../canon/Ambitions_3_0_Local_Toolchain_Readiness_Matrix.md](../canon/Ambitions_3_0_Local_Toolchain_Readiness_Matrix.md)
+- [../canon/Ambitions_3_0_Definition_Of_Ready_And_Done.md](../canon/Ambitions_3_0_Definition_Of_Ready_And_Done.md)
+- [../canon/Ambitions_3_0_Decision_Record_Protocol.md](../canon/Ambitions_3_0_Decision_Record_Protocol.md)
+- [../canon/Ambitions_3_0_Architecture_Review_Board_Protocol.md](../canon/Ambitions_3_0_Architecture_Review_Board_Protocol.md)
+- [../canon/Ambitions_3_0_Release_Claim_Truth_Protocol.md](../canon/Ambitions_3_0_Release_Claim_Truth_Protocol.md)
+- [../canon/Ambitions_Beyond_3_0_Continuity_Rules.md](../canon/Ambitions_Beyond_3_0_Continuity_Rules.md)
 
 ## Historical Material
 

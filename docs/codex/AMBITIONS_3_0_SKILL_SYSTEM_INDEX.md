@@ -6,6 +6,18 @@ Use this index to choose repo-local skills under `.codex/skills/`. Prefer one pr
 
 - [`.codex/skills/README.md`](../../.codex/skills/README.md) — folder overview and local skill entrypoint.
 
+## FAANG Team Operating Addendum
+
+Before choosing implementation skills for non-trivial work, classify task width and required role passes:
+
+- [Task Width Gate](../canon/Ambitions_3_0_Task_Width_And_Batch_Combining_Gate.md)
+- [FAANG Team Operating Model](../canon/Ambitions_3_0_FAANG_Team_Operating_Model.md)
+- [Definition Of Ready And Done](../canon/Ambitions_3_0_Definition_Of_Ready_And_Done.md)
+- [Run State Protocol](AMBITIONS_3_0_RUN_STATE_PROTOCOL.md)
+- [Large Batch And Compact Recovery Protocol](AMBITIONS_3_0_LARGE_BATCH_AND_COMPACT_RECOVERY_PROTOCOL.md)
+
+Use the role-specific reviewer/builder skills below only after the gate has selected the smallest useful role set.
+
 ## Governance and repo skills
 
 - [`.codex/skills/source-truth-reconciler.md`](../../.codex/skills/source-truth-reconciler.md) — source truth reconciler.

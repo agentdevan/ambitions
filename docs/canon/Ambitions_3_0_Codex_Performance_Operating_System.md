@@ -58,11 +58,21 @@ Older docs are supporting context only where Ambitions 3.0 explicitly keeps them
 ## Task Routing
 
 1. Identify whether the task is docs, code, UI, test, dependency, release, cleanup, or recovery.
-2. Choose the smallest `.codex/context-packs/*.md` file that covers the work.
-3. Choose the relevant `.codex/skills/*.md` file; combine skills only when ownership is clear.
-4. Choose the operation protocol under `.codex/operations/`.
-5. Choose a focused validation pack under `.codex/validation/`.
-6. Escalate to broader validation only when touched paths or risk demand it.
+2. Classify XS/S/M/L/XL/XXL width with `Ambitions_3_0_Task_Width_And_Batch_Combining_Gate.md`.
+3. Split XXL or disallowed multi-primitive work before edits.
+4. Choose the smallest `.codex/context-packs/*.md` file that covers the work.
+5. Choose the relevant `.codex/skills/*.md` file; combine skills only when ownership is clear.
+6. Choose the operation protocol under `.codex/operations/`.
+7. Choose a focused validation pack under `.codex/validation/`.
+8. Escalate to broader validation only when touched paths or risk demand it.
+
+## FAANG-Team Role Review
+
+Use `Ambitions_3_0_FAANG_Team_Operating_Model.md` to pick role passes by task size. XS/S work stays light. M/L work adds relevant product, design, content, accessibility, privacy, QA, or engineering review. XL work requires explicit checkpoints, TPM/release ownership, and no single-commit mega-change.
+
+## Ready / Done Gates
+
+Use `Ambitions_3_0_Definition_Of_Ready_And_Done.md` before and after non-trivial implementation. Ready means the primitive, surface, acceptance criteria, allowed files, forbidden files, validation pack, copy/accessibility/privacy/test/release impact, and task width are known. Done means implementation, evidence, docs/status truth, closeout, and next prompt are all present or explicitly blocked.
 
 ## Skill Selection
 

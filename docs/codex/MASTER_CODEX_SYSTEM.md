@@ -44,12 +44,18 @@ Ambitions is not a generic task app, calendar clone, habit tracker, productivity
 
 1. Inspect repo state.
 2. Reconcile Ambitions 3.0 source truth.
-3. Classify the task and choose the narrowest context pack, skill, operation, and validation pack.
-4. Plan the touch budget before edits when work spans multiple files or layers.
-5. Implement additively and preserve compatibility.
-6. Run focused validation first; broaden only when risk requires it.
-7. Update docs/status truth only when evidence changed.
-8. Close out with files changed, commands run, results, failed/not-run checks, risks, and next prompt.
+3. Classify task width with the Task Width Gate and split XXL or disallowed combinations.
+4. Choose the narrowest context pack, skill, operation, and validation pack.
+5. Run the smallest required FAANG role review for the task size.
+6. Plan the touch budget before edits when work spans multiple files or layers.
+7. Implement additively and preserve compatibility.
+8. Run focused validation first; broaden only when risk requires it.
+9. Update docs/status truth only when evidence changed.
+10. Close out with files changed, commands run, results, failed/not-run checks, risks, and next prompt.
+
+## FAANG-Team Gates
+
+Use `docs/canon/Ambitions_3_0_FAANG_Team_Operating_Model.md`, `docs/canon/Ambitions_3_0_Definition_Of_Ready_And_Done.md`, and `.codex/checklists/task-width-checklist.md` before broad work. XL work requires run-state checkpoints and must not become a single unreviewable mega-change. XXL work is not allowed as one batch.
 
 ## Claim Discipline
 

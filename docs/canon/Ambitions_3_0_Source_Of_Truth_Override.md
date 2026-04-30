@@ -141,6 +141,8 @@ Read docs/canon/Ambitions_3_0_Source_Of_Truth_Override.md, docs/canon/Ambitions_
 - `Ambitions_3_0_Rebuild_Operating_Model.md`
 - `Ambitions_3_0_Documentation_System_Index.md`
 - `Ambitions_3_0_FAANG_Rebuild_Documentation_Completeness_Matrix.md`
+- `Ambitions_3_0_FAANG_Team_Operating_Model.md`
+- `Ambitions_Beyond_3_0_Continuity_Rules.md`
 
 ### Strategy / product management
 
@@ -205,6 +207,29 @@ Read docs/canon/Ambitions_3_0_Source_Of_Truth_Override.md, docs/canon/Ambitions_
 - `Ambitions_3_0_Privacy_Threat_Model.md`
 - `Ambitions_3_0_Accessibility_Conformance_Plan.md`
 - `Ambitions_3_0_UX_Research_Plan.md`
+- `Ambitions_3_0_UI_Test_Contract.md`
+- `Ambitions_3_0_Design_QA_Protocol.md`
+- `Ambitions_3_0_Copy_QA_Protocol.md`
+- `Ambitions_3_0_Accessibility_QA_Protocol.md`
+- `Ambitions_3_0_Privacy_Trust_QA_Protocol.md`
+- `Ambitions_3_0_Test_Ownership_Matrix.md`
+- `Ambitions_3_0_Flake_Management_Protocol.md`
+- `Ambitions_3_0_Build_Failure_Triage_Protocol.md`
+
+### Codex operating / dependency / traceability
+
+- `Ambitions_3_0_Task_Width_And_Batch_Combining_Gate.md`
+- `Ambitions_3_0_Local_Toolchain_Readiness_Matrix.md`
+- `Ambitions_3_0_Definition_Of_Ready_And_Done.md`
+- `Ambitions_3_0_Decision_Record_Protocol.md`
+- `Ambitions_3_0_Architecture_Review_Board_Protocol.md`
+- `Ambitions_3_0_Dependency_Promotion_Ladder.md`
+- `Ambitions_3_0_Release_Claim_Truth_Protocol.md`
+- `Ambitions_3_0_Roadmap_To_Code_Traceability_Rules.md`
+- `Ambitions_3_0_Canon_To_Test_Traceability_Rules.md`
+- `Ambitions_3_0_Risk_Register_Protocol.md`
+- `Ambitions_3_0_Postmortem_And_Learning_Loop.md`
+- `Ambitions_3_0_Human_Approval_Escalation_Rules.md`
 
 ## Codex Operating System
 

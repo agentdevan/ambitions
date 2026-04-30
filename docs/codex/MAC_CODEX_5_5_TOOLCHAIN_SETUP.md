@@ -31,6 +31,8 @@ brew bundle check || true
 
 `Brewfile.optional-later` contains SwiftLint, SwiftFormat, and Fastlane. Do not run it as required setup until the dependency policy promotes those tools.
 
+Use `docs/canon/Ambitions_3_0_Local_Toolchain_Readiness_Matrix.md` and `docs/canon/Ambitions_3_0_Dependency_Promotion_Ladder.md` to decide whether a missing tool is blocking, adopted/advisory, optional-later, docs-only, or avoided.
+
 ## Tool Validation
 
 ```bash

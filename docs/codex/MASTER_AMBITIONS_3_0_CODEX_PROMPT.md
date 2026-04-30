@@ -25,6 +25,8 @@ Then choose:
 - one operation protocol from `.codex/operations/`, and
 - one validation pack from `.codex/validation/`.
 
+Before implementation, classify task width using `docs/canon/Ambitions_3_0_Task_Width_And_Batch_Combining_Gate.md`. For M/L/XL work, run the relevant FAANG role review from `docs/canon/Ambitions_3_0_FAANG_Team_Operating_Model.md`. For long or XL work, maintain `docs/codex/AMBITIONS_3_0_RUN_STATE_PROTOCOL.md` and `docs/codex/AMBITIONS_3_0_LARGE_BATCH_AND_COMPACT_RECOVERY_PROTOCOL.md` checkpoints. Use `docs/canon/Ambitions_3_0_Definition_Of_Ready_And_Done.md` for readiness and completion gates.
+
 Preserve XcodeGen and native SwiftUI architecture. Work on `main` unless explicitly told otherwise. Do not create new top-level destinations. Do not add runtime dependencies without the dependency policy. Do not claim implementation, test, device, accessibility, TestFlight, App Store, or release readiness without evidence.
 
 Before edits, inspect repo status and name the touch budget. When tooling matters, run `scripts/validate-dev-tools.sh`. For docs-heavy changes, run `scripts/run-doc-qa.sh`. For native build proof, prefer `scripts/build-local.sh`; for full test proof, use `scripts/test-local.sh` and report known UI smoke failures honestly. After edits, run the focused validation pack, then build/test only as risk requires. Close out with files changed, commands run, PASS/PARTIAL/FAIL, remaining risks, and the next exact prompt.

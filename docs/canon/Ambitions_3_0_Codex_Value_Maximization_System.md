@@ -33,3 +33,5 @@ Codex should increase Ambitions value by reducing founder re-explanation, preser
 - Better proof/receipt/recommendation reliability: enforce the Evidence Hierarchy and Recommendation Eligibility Engine.
 - Better external-surface safety: project only safe summaries; preserve manual confirmation and privacy labels.
 - Better developer tooling without runtime pollution: use `gh`, `jq`, `xcbeautify`, `markdownlint-cli2`, and `lychee` for faster evidence, readable logs, and advisory doc QA while keeping Ambitions app runtime dependency-free.
+- Better Codex-as-team judgment: apply task width gates, role review, Definition of Ready/Done, ADRs, architecture review, QA specialty passes, and human escalation rules before broad or risky changes.
+- Better long-run continuity: use run-state checkpoints, compact recovery, risk registers, postmortems, traceability rules, and Beyond 3.0 continuity rules so future sessions can resume from repo evidence rather than chat memory.
