@@ -22,14 +22,16 @@ Ambitions 3.0 is governed as a primitive-led rebuild operating system, not a raw
 
 For any Ambitions 3.0 rebuild work:
 
-1. `Ambitions_3_0_Source_Of_Truth_Override.md`
-2. `Ambitions_3_0_Front_End_Redesign_Index.md`
-3. `Ambitions_3_0_Rebuild_Operating_Model.md`
-4. `Ambitions_3_0_Documentation_System_Index.md`
-5. `Ambitions_3_0_Primitive_Architecture.md`
-6. `Ambitions_3_0_Product_Language_System.md`
-7. The target primitive/surface/contract doc
-8. Older focused canon only where 3.0 does not replace it
+1. `README.md`
+2. `docs/README.md`
+3. `docs/canon/Ambitions_3_0_Source_Of_Truth_Override.md`
+4. `docs/canon/Ambitions_3_0_Front_End_Redesign_Index.md`
+5. `docs/canon/Ambitions_3_0_Rebuild_Operating_Model.md`
+6. `docs/canon/Ambitions_3_0_Documentation_System_Index.md`
+7. `docs/canon/Ambitions_3_0_Primitive_Architecture.md`
+8. `docs/canon/Ambitions_3_0_Product_Language_System.md`
+9. The target Ambitions 3.0 primitive, surface, state-machine, privacy, accessibility, QA, release, or dependency doc.
+10. `docs/codex/BATCH_REGISTRY.md` for implementation status truth only.
 
 ---
 
@@ -37,6 +39,10 @@ For any Ambitions 3.0 rebuild work:
 
 | Doc | Job |
 |---|---|
+| `Ambitions_3_0_Codex_Performance_Operating_System.md` | Defines how Codex should work on Ambitions 3.0. |
+| `Ambitions_3_0_Dependency_Management_Policy.md` | Defines dependency and toolchain gatekeeping. |
+| `Ambitions_3_0_Build_Skills_And_Dependency_Management.md` | Maps build skills to dependency policy. |
+| `Ambitions_3_0_Codex_Value_Maximization_System.md` | Defines how Codex increases product, engineering, QA, and release value. |
 | `Ambitions_3_0_Source_Of_Truth_Override.md` | States 3.0 supersession and conflict rules. |
 | `Ambitions_3_0_Front_End_Redesign_Index.md` | Parent index and front-end redesign doctrine. |
 | `Ambitions_3_0_Rebuild_Operating_Model.md` | Cross-functional rebuild governance model. |

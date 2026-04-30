@@ -122,3 +122,14 @@ Use these only where Ambitions 3.0 does not replace them:
 Archived superseded design and historical RC docs live in [../archive/README.md](../archive/README.md).
 
 Historical docs are context only and do not override Ambitions 3.0.
+
+---
+
+## Ambitions 3.0 Codex Performance Operating System
+
+- [Codex Performance Operating System](Ambitions_3_0_Codex_Performance_Operating_System.md)
+- [Master Ambitions 3.0 Codex Prompt]../codex/MASTER_AMBITIONS_3_0_CODEX_PROMPT.md)
+- [Context Loading And Task Routing]../codex/AMBITIONS_3_0_CONTEXT_LOADING_AND_TASK_ROUTING.md)
+- [Skill System Index]../codex/AMBITIONS_3_0_SKILL_SYSTEM_INDEX.md)
+- [Dependency Management Policy](Ambitions_3_0_Dependency_Management_Policy.md)
+- [Mac Codex 5.5 Toolchain Setup]../codex/MAC_CODEX_5_5_TOOLCHAIN_SETUP.md)

@@ -172,3 +172,14 @@ The workflow does not prove signed archives, TestFlight, App Store Connect valid
 Ambitions 3.0 docs define the active source of truth. Older waves, v2 docs, and historical transformation material are supporting context unless explicitly kept active by the 3.0 source override.
 
 Known cleanup debt is tracked in [Ambitions_3_0_Repo_Hygiene_And_Active_Canon_Policy.md](docs/canon/Ambitions_3_0_Repo_Hygiene_And_Active_Canon_Policy.md).
+
+---
+
+## Ambitions 3.0 Codex Performance Operating System
+
+- [Codex Performance Operating System](docs/canon/Ambitions_3_0_Codex_Performance_Operating_System.md)
+- [Master Ambitions 3.0 Codex Prompt](docs/codex/MASTER_AMBITIONS_3_0_CODEX_PROMPT.md)
+- [Context Loading And Task Routing](docs/codex/AMBITIONS_3_0_CONTEXT_LOADING_AND_TASK_ROUTING.md)
+- [Skill System Index](docs/codex/AMBITIONS_3_0_SKILL_SYSTEM_INDEX.md)
+- [Dependency Management Policy](docs/canon/Ambitions_3_0_Dependency_Management_Policy.md)
+- [Mac Codex 5.5 Toolchain Setup](docs/codex/MAC_CODEX_5_5_TOOLCHAIN_SETUP.md)

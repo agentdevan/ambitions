@@ -1,50 +1,72 @@
 # Ambitions Codex Guidance
 
-- Before non-trivial planning or implementation, read `docs/codex/CONTEXT_INDEX.md` and follow its source-of-truth precedence.
-- Ambitions 1.0 foundation work is complete through registry Batch 18. Preserve that completion history exactly as historical foundation work.
-- All phases and batches before Batch 61 are complete for planning purposes.
-- Ambitions 2.0 Batch 61+ is the active canon program. The newly added `docs/canon/Ambitions_2_0_*.md` files are the top-level source of truth.
-- The permanent canonical planning stack is:
-  - `docs/canon/Ambitions_2_0_Master_Plan.md` for active post-Batch-60 product truth.
-  - `docs/canon/Ambitions_2_0_Product_Architecture.md` for product architecture.
-  - `docs/canon/Ambitions_2_0_Systems_Architecture.md` for shared systems architecture.
-  - `docs/canon/Ambitions_2_0_Visual_System.md` for visual system truth.
-  - `docs/canon/Ambitions_2_0_Roadmap.md` for roadmap programs.
-  - `docs/canon/Ambitions_2_0_Batch_Plan.md` for Batch 61-89 execution order.
-  - `docs/canon/Ambitions_2_0_Accessibility_Nutrition.md` for accessibility trust infrastructure.
-  - `docs/canon/Ambitions_2_0_Decision_Log.md` for locked decisions.
-  - `docs/canon/Ambitions_2_0_Capability_Matrix.md` for Batch 61 verification.
-  - `docs/codex/Ambitions_2_0_Codex_Execution_Guide.md` for Codex operating rules.
-  - `docs/codex/BATCH_REGISTRY.md` for active work status only.
-  - `MASTER_PRODUCT_SPEC.md` for current shipping product truth where not superseded by the new Ambitions 2.0 canon.
-  - Older roadmap, surgical, batch, frontend transformation, and design docs are preserved historical context where not superseded.
-- Work on `main` only unless the user explicitly requests branch-based work. Do not create, switch to, or suggest branches for normal Ambitions execution.
-- Do not skip ahead of the Batch 61-89 execution order in `docs/canon/Ambitions_2_0_Batch_Plan.md`.
-- Do not build surfaces before engines/services exist; do not build extension-heavy features before shared container/data boundaries exist; do not build sync backend logic before sync boundary/export-import/conflict policy are defined; do not begin device work before runtime separation exists.
-- Implement only the active batch from `docs/canon/Ambitions_2_0_Batch_Plan.md` and `docs/codex/BATCH_REGISTRY.md` unless the user explicitly changes scope.
-- Treat `docs/canon/Ambitions_Full_Frontend_Transformation_Program.md`, `docs/canon/design/README.md`, and related frontend classification docs as historical context where not superseded by the new Ambitions 2.0 canon.
-- Older roadmap, backlog, audit, release, or implementation docs are supporting context only when they conflict with the new Ambitions 2.0 canonical planning stack.
-- `Native/Ambitions/` is the source of truth for the shipping app. Treat older Expo/TypeScript material as reference-only unless a task explicitly targets it.
-- Use XcodeGen. Edit `project.yml` and regenerate the project instead of relying on a checked-in `.xcodeproj`.
-- Preserve architecture boundaries: app and routing in `Native/Ambitions/App`, domain logic in `Native/Ambitions/Domain`, services in `Native/Ambitions/Services`, persistence in `Native/Ambitions/Persistence`, feature UI in `Native/Ambitions/Features`, shared UI in `Sources/` and `AppUI/Sources/`.
-- Avoid broad rewrites when targeted edits are sufficient. Extend current repo patterns instead of introducing parallel abstractions.
-- Any task touching domain logic, persistence models, XcodeGen target wiring, extensions, routing, container wiring, release hardening, or docs truth across multiple files must start with a plan before edits.
-- Use a lightweight plan for narrow risky changes and a fuller `phase-executor` or `.codex/templates/*-plan.md` plan when the work spans multiple layers or files.
-- For non-trivial work, follow this loop: classify the task, choose the narrowest skill set, plan if risky, execute the smallest safe slice, self-check the result, then either continue, retry more narrowly, or stop and report the block.
-- Keep execution bounded. Prefer one grounded step at a time over batching unrelated edits across app, domain, persistence, docs, or config.
-- For post-hardening frontend transformation batches, follow `.codex/operations/batch-execution-protocol.md`, `.codex/operations/transformation-validation-matrix.md`, `.codex/operations/frontend-regression-pack.md`, `.codex/operations/manual-signoff-checklists.md`, and `.codex/operations/known-flakes.md`.
-- Frontend transformation batches default to a three-pass loop only: `plan`, `implement`, `closeout`. Do not widen to extra passes unless a real bug is found or a user-directed manual signoff decision is required.
-- Start every active-batch execution pass with narrow control-truth reconciliation for the active batch doc, registry, and any touched program-status wording before broader product work.
-- Use a touch budget. Name the primary files first, touch secondary files only when strictly required, and avoid opportunistic edits outside the active batch seam.
-- Prefer the focused regression pack plus batch-specific proof over full `AmbitionsUITests` for surface batches. Run the full UI suite only when the validation matrix calls for it or when focused proof indicates broader instability.
-- A timing-sensitive combined UI flake may be closed only when isolated reruns are green, manual signoff is explicit, the residual risk is documented, and the batch completion note states the caveat truthfully.
-- Retry only when the next attempt is narrower and informed by the last result. Do not repeat the same failed action blindly, and stop after a small number of grounded retries.
-- After meaningful changes, run the relevant generation, build, and test workflow when the environment supports it.
-- Do not claim validation that was not run.
-- Validation summaries should explicitly separate verified, not verified, could not verify here, likely risks, and manual follow-up required.
-- If a request would require inventing a seam the repo does not currently have, broad rewriting beyond scope, or an unavailable toolchain, stop with narrow truthful progress and a blocked-work summary instead of bluffing.
-- If the right skill is unclear, overlapping, or missing, say so, choose the narrowest truthful workflow, and avoid inventing seams that the repo does not currently support.
-- Keep docs, copy, previews, and shipped behavior truthful to the current repo state.
-- Use repo-local skills in `.codex/skills/` for specialized recurring workflows instead of expanding this file with task-specific procedures.
-- After weak, blocked, misrouted, or over-broad runs, capture the issue through `.codex/improvement/` instead of relying on memory or prompt folklore.
-- For production work intake, execution mode selection, validation, escalation, and release/readiness flow, follow `.codex/operations/`.
+Ambitions 3.0 is the active source of truth. Ambitions 2.0, v2, Waves, Batch 61+, D/M/R, and earlier batch material are preserved as implementation history or supporting context only where Ambitions 3.0 explicitly keeps them binding.
+
+## Required Read Order
+
+1. `README.md`
+2. `docs/README.md`
+3. `docs/canon/Ambitions_3_0_Source_Of_Truth_Override.md`
+4. `docs/canon/Ambitions_3_0_Front_End_Redesign_Index.md`
+5. `docs/canon/Ambitions_3_0_Rebuild_Operating_Model.md`
+6. `docs/canon/Ambitions_3_0_Documentation_System_Index.md`
+7. `docs/canon/Ambitions_3_0_Primitive_Architecture.md`
+8. `docs/canon/Ambitions_3_0_Product_Language_System.md`
+9. The target Ambitions 3.0 primitive, surface, state-machine, privacy, accessibility, QA, release, or dependency doc.
+10. `docs/codex/BATCH_REGISTRY.md` for implementation status truth only.
+
+Older docs may remain useful, but they do not override Ambitions 3.0 source docs. If old docs conflict with Ambitions 3.0, resolve in favor of Ambitions 3.0 and document the conflict when it affects implementation.
+
+## Repo Behavior
+
+- Work on `main` only unless the user explicitly requests branch-based work.
+- Do not create or switch branches for normal Ambitions execution.
+- Preserve completed implementation history exactly as history.
+- Preserve XcodeGen. Edit `project.yml` and regenerate the project; do not rely on a checked-in `.xcodeproj` as source truth.
+- Preserve the native SwiftUI architecture.
+- Do not create new top-level Ambitions destinations. The canonical destinations remain `Today / Goals / Capture / Plan / You`.
+- Do not implement product features in docs/tooling passes unless the tooling itself requires a narrow test or compatibility fix.
+- Use repo-local Codex operating docs, skills, validation packs, context packs, playbooks, and templates under `.codex/` and `docs/codex/`.
+
+## Architecture Boundaries
+
+- `Native/Ambitions/App` owns app entry, dependency container, environment injection, shell, and routing.
+- `Native/Ambitions/Domain` owns domain models, contracts, state machines, receipts, proof, recommendation, and planning logic.
+- `Native/Ambitions/Services` owns service protocols and implementations.
+- `Native/Ambitions/Persistence` owns SwiftData persistence.
+- `Native/Ambitions/Features` owns feature UI for Today, Goals, Capture, Plan, You, and owned secondary surfaces.
+- `Native/Ambitions/UI`, `Sources/`, and `AppUI/Sources/` own shared UI and package surfaces.
+- `project.yml` is the XcodeGen source of truth for targets, schemes, app extensions, and build wiring.
+
+## Execution Rules
+
+- Start non-trivial work by checking repo status, current docs, and the target code paths.
+- Use the smallest safe touch budget. Name primary files before edits.
+- Prefer deterministic, additive, compatibility-safe changes.
+- Do not silently rewrite product strategy, IA, naming, release posture, or roadmap structure.
+- Do not invent seams or claim implementation without repo evidence.
+- Do not add runtime app dependencies unless the dependency policy permits it and the user explicitly accepts the tradeoff.
+- Prefer focused validation first, then broaden based on risk.
+- After meaningful changes, run `xcodegen generate` and the relevant build/test/scan pack when local tooling supports it.
+- Validation summaries must separate verified, failed, not verified, and human/device follow-up.
+- Keep release claims conservative. Do not claim device verification, accessibility verification, TestFlight readiness, App Store readiness, or release readiness without matching evidence.
+
+## Ambitions Product Truth
+
+- Ambitions is a premium native iOS life execution system.
+- Core loop: `Capture -> Place -> Plan -> Do Today -> Close / Recover -> Save Proof`.
+- Ambitions is not a generic task app, calendar clone, habit tracker, productivity score app, chatbot, or AI wrapper.
+- User-facing language should prefer Ambitions 3.0 terms such as `Start here`, `What needs a place?`, `Does this hold together?`, `Close the loop`, `Still Counts`, `Proof saved`, and `You are in control`.
+- Avoid fake precision, fake certainty, AI theater, shame language, and silent automation.
+
+## Repo-Local Codex System
+
+Use these entry points for Codex performance and execution:
+
+- `.codex/README.md`
+- `docs/canon/Ambitions_3_0_Codex_Performance_Operating_System.md`
+- `docs/codex/MASTER_AMBITIONS_3_0_CODEX_PROMPT.md`
+- `docs/codex/AMBITIONS_3_0_CONTEXT_LOADING_AND_TASK_ROUTING.md`
+- `docs/codex/AMBITIONS_3_0_SKILL_SYSTEM_INDEX.md`
+- `docs/canon/Ambitions_3_0_Dependency_Management_Policy.md`
+- `docs/codex/MAC_CODEX_5_5_TOOLCHAIN_SETUP.md`

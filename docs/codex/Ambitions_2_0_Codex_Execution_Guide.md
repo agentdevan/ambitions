@@ -1,3 +1,9 @@
+# Historical Ambitions 2.0 note
+
+This file is preserved as implementation history/supporting context. It is not the active Codex read order for Ambitions 3.0. Use `docs/codex/MASTER_AMBITIONS_3_0_CODEX_PROMPT.md` and `docs/codex/CONTEXT_INDEX.md` first.
+
+---
+
 # Ambitions 2.0 Codex Execution Guide
 
 This file is the practical execution guide for Codex sessions. It should stay aligned with `CONTEXT_INDEX.md`, `MASTER_CODEX_SYSTEM.md`, `BATCH_REGISTRY.md`, and `FREE_WORKFLOW_OPERATING_SYSTEM.md`.

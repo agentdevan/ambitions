@@ -23,19 +23,18 @@ This does not mean 3.0 canon is implemented. Implementation remains evidence-gat
 
 For Ambitions 3.0 work, use this order:
 
-1. `docs/codex/BATCH_REGISTRY.md` for current work status only.
-2. `docs/canon/SOURCE_OF_TRUTH_MAP.md` for general document ownership.
-3. `docs/canon/Ambitions_3_0_Source_Of_Truth_Override.md` for 3.0 supersession rules.
-4. `docs/canon/Ambitions_3_0_Front_End_Redesign_Index.md` for current 3.0 parent canon.
-5. `docs/canon/Ambitions_3_0_Rebuild_Operating_Model.md` for cross-functional rebuild governance.
-6. `docs/canon/Ambitions_3_0_Documentation_System_Index.md` for the 3.0 documentation map.
-7. `docs/canon/Ambitions_3_0_Primitive_Architecture.md` for primitive-led implementation scope.
-8. `docs/canon/Ambitions_3_0_Product_Language_System.md` for user-facing/copy/code-language rules.
-9. The active Ambitions 3.0 child doc for the target surface, component, primitive, or contract.
-10. `docs/canon/Ambitions_3_0_UI_Invention_Upgrade_Bank.md` when exploring or scoping Ambitions-native UI/product inventions.
-11. `docs/canon/Ambitions_3_0_Golden_Launch_Loop_Upgrade_Bank.md` when work touches Capture, Place, Plan, Today, Closure, Proof, Trust, AI/personalization, copy, or roadmap.
-12. `docs/canon/Ambitions_Master_Product_Visual_System_Spec_v2.md` and the v2 addendum only where not superseded by linked 3.0 canon.
-13. Focused canon docs for domains that 3.0 does not replace, including Domain Model, Trust, Data, and Roadmap governance.
+1. `README.md`
+2. `docs/README.md`
+3. `docs/canon/Ambitions_3_0_Source_Of_Truth_Override.md`
+4. `docs/canon/Ambitions_3_0_Front_End_Redesign_Index.md`
+5. `docs/canon/Ambitions_3_0_Rebuild_Operating_Model.md`
+6. `docs/canon/Ambitions_3_0_Documentation_System_Index.md`
+7. `docs/canon/Ambitions_3_0_Primitive_Architecture.md`
+8. `docs/canon/Ambitions_3_0_Product_Language_System.md`
+9. The target Ambitions 3.0 primitive, surface, state-machine, privacy, accessibility, QA, release, or dependency doc.
+10. `docs/codex/BATCH_REGISTRY.md` for implementation status truth only.
+
+Older docs may be consulted only after this order, and only where Ambitions 3.0 does not replace their domain.
 
 ---
 
@@ -206,3 +205,7 @@ Read docs/canon/Ambitions_3_0_Source_Of_Truth_Override.md, docs/canon/Ambitions_
 - `Ambitions_3_0_Privacy_Threat_Model.md`
 - `Ambitions_3_0_Accessibility_Conformance_Plan.md`
 - `Ambitions_3_0_UX_Research_Plan.md`
+
+## Codex Operating System
+
+Codex work is governed by `docs/canon/Ambitions_3_0_Codex_Performance_Operating_System.md`, `docs/codex/MASTER_AMBITIONS_3_0_CODEX_PROMPT.md`, `.codex/`, and the Ambitions 3.0 dependency/toolchain docs.
