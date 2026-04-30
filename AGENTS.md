@@ -65,8 +65,13 @@ Use these entry points for Codex performance and execution:
 
 - `.codex/README.md`
 - `docs/canon/Ambitions_3_0_Codex_Performance_Operating_System.md`
+- `docs/canon/Ambitions_3_0_FAANG_Team_Operating_Model.md`
+- `docs/canon/Ambitions_3_0_Task_Width_And_Batch_Combining_Gate.md`
+- `docs/canon/Ambitions_3_0_UI_Test_Contract.md`
+- `docs/canon/Ambitions_3_0_Definition_Of_Ready_And_Done.md`
 - `docs/codex/MASTER_AMBITIONS_3_0_CODEX_PROMPT.md`
 - `docs/codex/AMBITIONS_3_0_CONTEXT_LOADING_AND_TASK_ROUTING.md`
 - `docs/codex/AMBITIONS_3_0_SKILL_SYSTEM_INDEX.md`
+- `docs/codex/AMBITIONS_3_0_RUN_STATE_PROTOCOL.md`
 - `docs/canon/Ambitions_3_0_Dependency_Management_Policy.md`
 - `docs/codex/MAC_CODEX_5_5_TOOLCHAIN_SETUP.md`
