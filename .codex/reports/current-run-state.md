@@ -1,46 +1,22 @@
 # Current Run State
 
-Status: Default template state. Do not treat this as a live run log unless a
-current XL batch explicitly updates it.
-
-Current task: none
-
-Task size: none
-
-Active mode: none
-
-Active primitive: none
-
-Active surface: none
-
-Active context pack: none
-
-Active skill: none
-
-Active operation: none
-
-Active validation pack: none
-
-Docs read: none
-
-Files allowed: none
-
-Files forbidden: none
-
-Files touched: none
-
-Decisions made: none
-
-Tests run: none
-
-Failures: none
-
-Open risks: prior FAANG handoff remains PARTIAL until UI smoke, legacy
-language, and internal identifier debt are resolved.
-
-Next phase: classify the next user request with the task width gate.
-
-Stop conditions: missing credentials, unsafe scope, destructive commands,
-or unsupported release claims.
-
-Last checkpoint: default committed state.
+- current task: F00 - Ambitions 3.0 Current Implementation Gap Audit
+- task size: L
+- active mode: audit/docs-only
+- active primitive: cross-primitive implementation traceability
+- active surface: docs/canon implementation gap audit and Codex tracking docs
+- active context pack: Active Canon Pack, UI Test Contract Pack, Repo Hygiene Pack, Copy Guard Pack, Local CI Parity Pack for evidence only
+- active skill: repo-truth-enforcer, faang-handoff-auditor, legacy-language-sweeper, release-readiness-gate-runner
+- active operation: source-truth reconciliation, task-width gate, current run-state protocol, release-claim truth protocol
+- active validation pack: docs QA, local dev tooling, local build, local tests for evidence only
+- docs read: required Ambitions 3.0 source truth read order, active Codex operating docs, active canon docs, F-series plan, release/evidence gates, handoff gate, and available audit reports
+- files allowed: docs/canon/Ambitions_3_0_Current_Implementation_Gap_Audit.md, docs/codex/BATCH_REGISTRY.md, docs/codex/CONTEXT_INDEX.md, docs/audits/ambitions-3-0-f00-current-implementation-gap-audit-report.md, .codex/reports/current-run-state.md
+- files forbidden: Native/Ambitions/**, Native/AmbitionsTests/**, Native/AmbitionsUITests/**, Sources/**, AppUI/**, project.yml, .github/workflows/**, runtime dependency manifests
+- files touched: .codex/reports/current-run-state.md; docs/canon/Ambitions_3_0_Current_Implementation_Gap_Audit.md; docs/codex/BATCH_REGISTRY.md; docs/codex/CONTEXT_INDEX.md; docs/audits/ambitions-3-0-f00-current-implementation-gap-audit-report.md
+- decisions made: classify as L audit/docs-only; app feature implementation, UI test fixes, identifier renames, workflow changes, and dependency changes are prohibited; F01 Reality Rail / Day Rail foundation is the next implementation batch from F00 evidence
+- tests run: git status/branch/head/log; scripts/validate-dev-tools.sh; scripts/run-doc-qa.sh; scripts/build-local.sh; scripts/test-local.sh; legacy language scan; internal identifier scan
+- failures: doc QA remains PARTIAL/advisory with 8,980 markdownlint findings and 5 older local-link failures; full UI smoke remains PARTIAL with 9 failures; legacy language scan found 858 hits; internal identifier scan found 3,443 hits
+- open risks: full UI smoke suite fails; legacy language/internal identifier debt remains; Reality Rail/Day Rail, Step Detail, Step Session, Action Closure, receipt/review, Capture placement, Plan Life Suite, Goal Mission Control, You trust, external-surface, accessibility, and UI test modernization work remain pending; FAANG handoff remains PARTIAL
+- next phase: F01 Reality Rail / Day Rail foundation
+- stop conditions: any required source-truth conflict that cannot be resolved from repo files; any next step requiring feature implementation, CI change, dependency addition, or readiness claim beyond evidence
+- last checkpoint: 2026-04-30 F00 audit closeout

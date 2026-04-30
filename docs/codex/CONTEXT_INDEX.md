@@ -8,7 +8,7 @@ Ambitions 3.0 is the active source of truth. This file defines Codex read order,
 - Older 1.0/2.0/v2/Waves/D/M/R material is implementation history or supporting context only where Ambitions 3.0 explicitly keeps a domain binding.
 - `docs/codex/BATCH_REGISTRY.md` is implementation status truth only. It does not override Ambitions 3.0 product direction.
 - The FAANG handoff cleanup result is PARTIAL: generated artifacts were purged, active indexes improved, but full UI smoke failed and legacy/internal migration debt remains.
-- Next active 3.0 continuation is F00 Current Implementation Gap Audit unless the user explicitly chooses another gate.
+- F00 Current Implementation Gap Audit is complete as an audit-only traceability pass. Next active 3.0 implementation continuation is F01 Reality Rail / Day Rail foundation unless the user explicitly chooses another gate.
 
 ## Required Read Order
 
@@ -53,6 +53,7 @@ For non-trivial work, read in this order:
 - [AMBITIONS_3_0_PROMPT_QUALITY_RUBRIC.md](AMBITIONS_3_0_PROMPT_QUALITY_RUBRIC.md)
 - [AMBITIONS_3_0_PARALLEL_CODEX_WORKTREE_PROTOCOL.md](AMBITIONS_3_0_PARALLEL_CODEX_WORKTREE_PROTOCOL.md)
 - [../canon/Ambitions_3_0_Dependency_Management_Policy.md](../canon/Ambitions_3_0_Dependency_Management_Policy.md)
+- [../canon/Ambitions_3_0_Current_Implementation_Gap_Audit.md](../canon/Ambitions_3_0_Current_Implementation_Gap_Audit.md)
 
 ## Historical / Supporting Material
 
