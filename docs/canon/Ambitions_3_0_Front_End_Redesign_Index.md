@@ -16,6 +16,8 @@ The goal of this parent doc is to give Codex, ChatGPT, and human reviewers one d
 
 Each child doc should be specific enough for implementation, but this parent doc should preserve the overall system logic, sequencing, and quality bar.
 
+Supporting historical front-end program: [Ambitions Full Front-End Transformation Program](./Ambitions_Full_Frontend_Transformation_Program.md). Use that document only as supporting frontend ambition/history where it does not conflict with active 3.0 canon.
+
 ---
 
 ## Ambitions 3.0 Design Thesis
@@ -139,6 +141,7 @@ Each main tab should have a clear flagship object or interaction that defines it
 Examples:
 
 - Today: Ambitions Day Rail
+- System-wide shell: Ambition Meridian Shell
 - Capture: Minimal composer plus placement routes
 - Plan: Contextual Day / Week / Month / Life Shape planner
 - Goals: Mission Control / Goal Detail path system
@@ -180,7 +183,20 @@ Core thesis:
 
 > The Ambitions Day Rail should not show the user’s day. It should show the user’s believable path through the day.
 
-### 2. System-wide — Golden Launch Loop Upgrade Bank
+### 2. System-wide — Ambition Meridian Shell
+
+Document: [Ambitions 3.0 — Ambition Meridian Shell SwiftUI Build Spec](./Ambitions_3_0_Ambition_Meridian_Shell_SwiftUI_Build_Spec.md)
+
+Status: Active implementation-grade child doc  
+Surface: System-wide across Today, Goals, Capture, Plan, and You  
+Primary component: `AmbitionsMeridianShell`  
+Purpose: Replace the feeling of a standard five-tab dock with a premium connected-node navigation instrument that keeps Today as home, Capture globally available, and active context visible without intrusive pills or badges.
+
+Core thesis:
+
+> The Ambition Meridian Shell should not be a styled tab bar. It should be Ambitions’ signature navigation instrument: one calm connected line that shows where the user is, what is active, what needs closure, and where they can go.
+
+### 3. System-wide — Golden Launch Loop Upgrade Bank
 
 Document: [Ambitions 3.0 — Golden Launch Loop Upgrade Bank](./Ambitions_3_0_Golden_Launch_Loop_Upgrade_Bank.md)
 
@@ -288,6 +304,7 @@ These docs should be added as the redesign proceeds. Keep links here even before
 
 ### System-wide
 
+- [x] Ambition Meridian Shell
 - [ ] Navigation and drill-down architecture
 - [ ] Component system / design tokens
 - [ ] Empty states
@@ -333,16 +350,17 @@ When using this parent doc with Codex:
 
 1. Start with this file.
 2. Open the child doc for the target surface.
-3. Open the Golden Launch Loop Upgrade Bank when the work touches Capture, Place, Plan, Today, Closure, Proof, Trust, AI/personalization, copy, or roadmap.
-4. Compare the child doc against existing repo canon and implementation.
-5. Do not implement child specs blindly if they conflict with higher-priority canon.
-6. Preserve the canonical tabs: Today, Goals, Capture, Plan, You.
-7. Preserve the locked Day Rail invention when working on Today or Do Today upgrades.
-8. Keep changes modular and testable.
-9. Avoid widening the app.
-10. Prefer reusable primitives over one-off UI.
-11. Add previews and tests with every build batch.
-12. Do not claim release readiness unless physical-device, accessibility, and App Store gates are actually verified.
+3. Open the Ambition Meridian Shell spec when work touches the system-wide shell, app tabs, root routing, global Capture, active-step return state, closure state, or receipt state.
+4. Open the Golden Launch Loop Upgrade Bank when the work touches Capture, Place, Plan, Today, Closure, Proof, Trust, AI/personalization, copy, or roadmap.
+5. Compare the child doc against existing repo canon and implementation.
+6. Do not implement child specs blindly if they conflict with higher-priority canon.
+7. Preserve the canonical tabs: Today, Goals, Capture, Plan, You.
+8. Preserve the locked Day Rail invention when working on Today or Do Today upgrades.
+9. Keep changes modular and testable.
+10. Avoid widening the app.
+11. Prefer reusable primitives over one-off UI.
+12. Add previews and tests with every build batch.
+13. Do not claim release readiness unless physical-device, accessibility, and App Store gates are actually verified.
 
 ---
 
@@ -356,6 +374,7 @@ When discussing future redesign work:
 4. Record decisions in the child doc rather than scattering them across chat.
 5. If a child doc changes the product direction, update this parent doc too.
 6. If a proposed Do Today upgrade changes the Day Rail, check the Day Rail protection rule before accepting it.
+7. If a proposed shell upgrade changes top-level routing, check the Ambition Meridian Shell child doc before accepting it.
 
 ---
 
@@ -364,11 +383,14 @@ When discussing future redesign work:
 The current highest-priority Ambitions 3.0 front-end redesign objects are:
 
 1. Today — Ambitions Day Rail
-2. Golden Launch Loop integration
+2. System-wide — Ambition Meridian Shell
+3. Golden Launch Loop integration
 
 Reason:
 
 Today is the flagship daily-use surface. If Today does not immediately answer what matters now, why it matters, what fits, what changed, and what counted, Ambitions cannot feel like the most important app on a user’s phone.
+
+The Meridian Shell is the signature system-wide navigation object. If the shell feels like a generic tab bar, Ambitions loses the life-OS feeling before the user reaches the deeper product value.
 
 The Golden Launch Loop ensures every major surface feeds that daily execution truth instead of becoming disconnected premium panels.
 
@@ -391,10 +413,13 @@ An Ambitions 3.0 front-end redesign is not complete until it is:
 - Deep enough to feel like Ambitions
 - Integrated into the Golden Launch Loop
 - Non-regressive to the locked Day Rail when touching Today
+- Non-regressive to the Ambition Meridian Shell when touching system-wide navigation
 
 ---
 
 ## Current Linked Specs
 
 - [Ambitions 3.0 — Day Rail SwiftUI Build Spec](./Ambitions_3_0_Day_Rail_SwiftUI_Build_Spec.md)
+- [Ambitions 3.0 — Ambition Meridian Shell SwiftUI Build Spec](./Ambitions_3_0_Ambition_Meridian_Shell_SwiftUI_Build_Spec.md)
 - [Ambitions 3.0 — Golden Launch Loop Upgrade Bank](./Ambitions_3_0_Golden_Launch_Loop_Upgrade_Bank.md)
+- [Ambitions Full Front-End Transformation Program](./Ambitions_Full_Frontend_Transformation_Program.md)
