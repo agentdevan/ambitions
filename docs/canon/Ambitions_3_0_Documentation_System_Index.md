@@ -54,6 +54,7 @@ For any Ambitions 3.0 front-end work:
 | Doc | Job |
 |---|---|
 | `Ambitions_3_0_Golden_Launch_Loop_Upgrade_Bank.md` | Full 3.0 upgrade backlog for the launch loop. |
+| `Ambitions_3_0_UI_Invention_Upgrade_Bank.md` | 160 mature Ambitions-specific UI/product invention candidates. |
 | `Ambitions_3_0_Universal_Object_Lifecycle_Contract.md` | Captured → Placed → Planned → Surfaced → Started → Closed → Proven. |
 | `Ambitions_3_0_Placement_Resolver_Spec.md` | Place step and capture routing. |
 | `Ambitions_3_0_Action_Closure_Sheet_Spec.md` | Close / Recover step and shared closure grammar. |
@@ -79,6 +80,35 @@ For any Ambitions 3.0 front-end work:
 | `Ambitions_3_0_Screenshot_Readiness_Spec.md` | Investor/App Store/design-review screenshot quality bar. |
 | `Ambitions_3_0_First_60_Seconds_Spec.md` | First-use proof loop without setup friction. |
 | `Ambitions_3_0_UI_Invention_Evaluation_Framework.md` | Evaluation framework for future Ambitions UI inventions. |
+
+---
+
+## Invention Bank Usage Rule
+
+`Ambitions_3_0_UI_Invention_Upgrade_Bank.md` is an active invention canon bank, not an implementation order.
+
+Use it to select coherent invention packages and convert them into:
+
+- child specs
+- F-series implementation batches
+- preview fixture plans
+- screenshot/demo plans
+- accessibility/trust test plans
+
+Do not implement all 160 ideas at once.
+
+The first canonization set from the bank is:
+
+1. Reality Rail
+2. Closure Diamond
+3. Proof Pulse
+4. Readiness Ring
+5. Why This Everywhere / Why This Peel
+6. Step Brief
+7. Still Counts Fast Path
+8. Placement Preview
+9. Week Shape Summary
+10. What Ambitions Knows Memory Card
 
 ---
 
@@ -112,7 +142,8 @@ Open these when work touches older domains not fully replaced by 3.0:
 5. Recommendation Contract
 6. Action Closure Sheet Spec
 7. Proof / Receipts / Reviews Contract
-8. Implementation Batch Plan
+8. UI Invention Upgrade Bank ideas 11-25 and 129-137 when relevant
+9. Implementation Batch Plan
 
 ### Building Capture / Place
 
@@ -122,7 +153,8 @@ Open these when work touches older domains not fully replaced by 3.0:
 4. Universal Object Lifecycle Contract
 5. Object Ownership Matrix
 6. Action Verbs and Receipt Grammar
-7. Capture Smart Attachment older canon
+7. UI Invention Upgrade Bank ideas 46-60 and 115-120 when relevant
+8. Capture Smart Attachment older canon
 
 ### Building Plan
 
@@ -131,7 +163,8 @@ Open these when work touches older domains not fully replaced by 3.0:
 3. Implementation Batch Plan F10-F12
 4. Surface State Matrix
 5. Recommendation Contract
-6. Plan / Calendar / Believability older canon
+6. UI Invention Upgrade Bank ideas 61-75 and 159 when relevant
+7. Plan / Calendar / Believability older canon
 
 ### Building Goals
 
@@ -140,7 +173,8 @@ Open these when work touches older domains not fully replaced by 3.0:
 3. Signature Objects and Rail Grammar
 4. Universal Object Lifecycle Contract
 5. Proof / Receipts / Reviews Contract
-6. Domain Model older canon
+6. UI Invention Upgrade Bank ideas 76-90 when relevant
+7. Domain Model older canon
 
 ### Building You / Trust
 
@@ -149,17 +183,36 @@ Open these when work touches older domains not fully replaced by 3.0:
 3. Object Ownership Matrix
 4. Proof / Receipts / Reviews Contract
 5. Action Verbs and Receipt Grammar
-6. Trust / Privacy / Memory older canon
-7. You / Profile / Reviews older canon
+6. UI Invention Upgrade Bank ideas 91-104 and 139-146 when relevant
+7. Trust / Privacy / Memory older canon
+8. You / Profile / Reviews older canon
+
+### Building Reviews
+
+1. Source override
+2. Parent index
+3. Proof / Receipts / Reviews Contract
+4. Object Ownership Matrix
+5. UI Invention Upgrade Bank ideas 105-114 when relevant
+
+### Building External Surfaces
+
+1. Source override
+2. Parent index
+3. Screenshot Readiness Spec
+4. Trust / Privacy / Memory older canon
+5. External Surfaces older canon
+6. UI Invention Upgrade Bank ideas 121-128 when relevant
 
 ### Exploring UI Inventions
 
 1. Source override
 2. Parent index
 3. UI Invention Evaluation Framework
-4. Signature Objects and Rail Grammar
-5. Screenshot Readiness Spec
-6. First 60 Seconds Spec if invention touches first run
+4. UI Invention Upgrade Bank
+5. Signature Objects and Rail Grammar
+6. Screenshot Readiness Spec
+7. First 60 Seconds Spec if invention touches first run
 
 ---
 
@@ -183,9 +236,10 @@ Current recommended implementation order:
 The 3.0 documentation system is healthy when:
 
 - every active child doc is linked from either the parent index, this index, or the source override
+- every invention bank idea is treated as canonized candidate, not shipped behavior
 - every implementation batch names the docs it read
 - no implementation claims release readiness without evidence
 - no old v2 term supersedes a newer explicit 3.0 rule
-- no UI invention becomes canon without passing the invention framework
+- no UI invention becomes implementation scope without passing the invention framework
 - no surface adds a second signature object without a canon update
 - no screenshot implies an unimplemented capability is shipped
