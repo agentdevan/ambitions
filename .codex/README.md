@@ -1,45 +1,25 @@
-# Ambitions Codex Project Config
+# Ambitions 3.0 Repo-Local Codex System
 
-This repo uses project-scoped Codex config in `.codex/config.toml`.
+This directory is the reusable operating layer for Codex work in Ambitions.
 
-## Trust And Loading
+Use it after reading the Ambitions 3.0 source hierarchy. It is not product canon; it is the execution system that keeps Codex fast, scoped, and honest.
 
-- Personal defaults live in `~/.codex/config.toml`.
-- Repo overrides live in `.codex/config.toml`.
-- Project config and repo-local skills are applied only when Codex trusts this repo.
+## Folders
 
-## Profile Intent
+- `skills/` — task-specific execution skills.
+- `operations/` — repeatable protocols for work types.
+- `templates/` — copy/paste-ready prompts and reports.
+- `validation/` — focused and full validation packs.
+- `playbooks/` — failure recovery guidance.
+- `context-packs/` — minimal source docs/files by workstream.
+- `checklists/` — preflight, implementation, commit, privacy, accessibility, release, and handoff checks.
+- `reports/` — optional local generated reports; commit only intentional handoff evidence.
 
-- `small-edit`: single-file maintenance, copy cleanup, narrow docs truth fixes.
-- `feature-build`: normal multi-file feature or wiring work inside the existing native architecture.
-- `domain-safe`: planner, routing, persistence, or other higher-risk edits that should plan first.
-- `release-check`: hardening, validation, and final docs/config truth passes.
+## How To Use
 
-## Profile Selection Notes
-
-- Profiles are mainly a CLI/App workflow convenience, not a guarantee that every Codex surface exposes explicit profile switching the same way.
-- Command-line overrides can still supersede config defaults when the invoking surface supports them.
-- Profiles tune defaults; the autonomous loop itself still comes from `AGENTS.md`, skills, and templates.
-- When in doubt for Ambitions work:
-  - choose `small-edit` for narrow maintenance
-  - choose `feature-build` for standard implementation
-  - choose `domain-safe` for planner, persistence, routing, or container work
-  - choose `release-check` for validation-heavy preflight work
-
-## Autonomous Loop Fit
-
-- `small-edit`: best when the loop can stay short and avoid a formal plan.
-- `feature-build`: best for normal bounded execution after the task has been classified and scoped.
-- `domain-safe`: best when the loop must start with planning and may need narrower retries.
-- `release-check`: best when the loop is dominated by validation, hardening, stop conditions, and final reporting.
-
-## Subagents
-
-- Subagents are not part of the default Ambitions loop.
-- Use them only when a user explicitly asks for delegated parallel review work. This repo does not assume automatic subagent spawning.
-
-## Improvement And Operations Layers
-
-- `.codex/improvement/` is the durable self-improvement loop for reviewing weak Codex runs and deciding what system layer to update.
-- `.codex/operations/` is the day-to-day operating manual for production Ambitions work intake, execution, validation, escalation, and release/readiness flow.
-- The current stack is tuned for GPT-5.4 with medium reasoning through file-based guidance, not hidden memory or automatic learning.
+1. Read `docs/codex/MASTER_AMBITIONS_3_0_CODEX_PROMPT.md`.
+2. Choose one context pack.
+3. Choose one primary skill.
+4. Choose one operation protocol.
+5. Choose one validation pack.
+6. Close out with evidence and next prompt.

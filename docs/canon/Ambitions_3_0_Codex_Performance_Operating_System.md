@@ -1,0 +1,159 @@
+# Ambitions 3.0 — Codex Performance Operating System
+
+Status: Active Ambitions 3.0 Codex operating canon
+Last updated: 2026-04-30
+
+## Purpose
+
+This document defines how Codex should work on Ambitions 3.0 so future runs are faster, safer, more truthful, and more valuable.
+
+It is broader than skills. It governs source truth, context loading, task routing, dependency discipline, validation, recovery, stale-doc protection, and release-claim discipline.
+
+## Operating Philosophy
+
+Codex should behave like a principal engineer and product-system owner:
+
+- Ground in current repo truth before edits.
+- Prefer Ambitions 3.0 canon over older docs.
+- Build through primitives and state machines, not raw idea banks.
+- Keep changes scoped, reversible, and evidence-backed.
+- Improve the system while protecting product identity.
+- Report PARTIAL or FAIL honestly when evidence is incomplete.
+
+## Ambitions 3.0 Source Hierarchy
+
+1. `README.md`
+2. `docs/README.md`
+3. `docs/canon/Ambitions_3_0_Source_Of_Truth_Override.md`
+4. `docs/canon/Ambitions_3_0_Front_End_Redesign_Index.md`
+5. `docs/canon/Ambitions_3_0_Rebuild_Operating_Model.md`
+6. `docs/canon/Ambitions_3_0_Documentation_System_Index.md`
+7. `docs/canon/Ambitions_3_0_Primitive_Architecture.md`
+8. `docs/canon/Ambitions_3_0_Product_Language_System.md`
+9. The target Ambitions 3.0 primitive, surface, state-machine, privacy, accessibility, QA, release, or dependency doc.
+10. `docs/codex/BATCH_REGISTRY.md` for implementation status truth only.
+
+Older docs are supporting context only where Ambitions 3.0 explicitly keeps them binding.
+
+## Codex Modes
+
+| Mode | Use when | Primary output |
+|---|---|---|
+| Recon Mode | Repo truth, status, source-order, or stale-local risk is unclear. | Current truth summary and risk list. |
+| Audit Mode | Asked to inspect, compare, inventory, or find gaps. | Audit file with evidence and next fixes. |
+| Planning Mode | Multi-file or risky work needs a safe path. | Touch budget, file list, validation plan. |
+| Feature Build Mode | Implementing product behavior. | Code, tests, docs/status update. |
+| UI Build Mode | Building SwiftUI surfaces or components. | UI code, previews/fixtures, UI-specific validation. |
+| Refactor Mode | Reshaping code without changing behavior. | Compatibility-preserving diff and regression proof. |
+| Test Mode | Adding or fixing tests. | Focused test coverage and command evidence. |
+| Copy/Language Mode | Visible text, App Intent copy, docs language, or copy guards. | Copy diff plus scan evidence. |
+| Privacy/Trust Mode | Memory, receipts, proof, personalization, export/import, external surfaces. | Privacy posture and consent evidence. |
+| Accessibility Mode | Labels, Dynamic Type, Reduce Motion, motor, contrast, VoiceOver. | Accessibility notes and test/manual proof requirements. |
+| Dependency Mode | Tooling, packages, CI, scripts, or local setup changes. | Dependency decision record and rollback plan. |
+| Release Gate Mode | Readiness, TestFlight, App Store, device, archive, claims. | Gate report with blocked/unblocked claims. |
+| Cleanup Mode | Generated artifacts, stale docs, indexes, repo hygiene. | Cleanup diff and inventory proof. |
+| Recovery Mode | Build/test/git/tooling failure or bad Codex run. | Root cause, bounded fix, and retry/stop decision. |
+| Closeout Mode | Work is ready to stage/commit/push/report. | Final evidence, risks, next prompt. |
+
+## Task Routing
+
+1. Identify whether the task is docs, code, UI, test, dependency, release, cleanup, or recovery.
+2. Choose the smallest `.codex/context-packs/*.md` file that covers the work.
+3. Choose the relevant `.codex/skills/*.md` file; combine skills only when ownership is clear.
+4. Choose the operation protocol under `.codex/operations/`.
+5. Choose a focused validation pack under `.codex/validation/`.
+6. Escalate to broader validation only when touched paths or risk demand it.
+
+## Skill Selection
+
+Skills are execution checklists, not permission to widen scope. Prefer one primary skill and one supporting skill. When skills disagree, Ambitions 3.0 source truth and current repo code win.
+
+## Context Loading
+
+Load context in layers:
+
+1. Required read order.
+2. One context pack.
+3. Target docs named by that context pack.
+4. Target source/test files discovered with `rg` or `git ls-files`.
+5. Previous reports only when they directly affect the task.
+
+Avoid reading huge historical docs unless a current 3.0 doc points to them.
+
+## Touch Budgets
+
+Before edits, name primary files, secondary files, and validation files. Do not modify unrelated app features during docs/tooling passes. Do not change product behavior while building Codex infrastructure unless a narrow test expectation must be aligned to current repo truth.
+
+## Prompt Compression
+
+Future prompts should include: goal, mode, active docs, allowed files, forbidden scope, validation pack, closeout format. Use `.codex/templates/` rather than long bespoke prompts.
+
+## Dependency Gatekeeping
+
+Default to no new runtime dependencies. Xcode, XcodeGen, Swift Package Manager, Ruby from macOS/Xcode, shell tools, and local Markdown/scripts are enough for most work. Any new dependency needs purpose, install command, risk, removal path, and validation command.
+
+## Local Mac Validation
+
+Use local commands first:
+
+```bash
+git status --short
+xcodegen generate
+xcrun simctl list devices available | grep -E 'iPhone' | head -20
+xcodebuild -project Ambitions.xcodeproj -scheme Ambitions -destination 'platform=iOS Simulator,name=iPhone 17' build CODE_SIGNING_ALLOWED=NO
+```
+
+Use `iPhone 17` when `iPhone 16` is unavailable and record the destination.
+
+## Build/Test Strategy
+
+- Build after meaningful code/project changes.
+- Run focused tests for touched code.
+- Run copy/privacy/accessibility scans for affected surfaces.
+- Run full UI suite only when the validation pack requires it or focused UI proof suggests broader risk.
+- Current full UI suite has known failures from the FAANG handoff audit; do not hide that failure.
+
+## Failure Recovery
+
+Classify failures as repo, environment/tooling, simulator, dependency, flaky, or unclear. Retry only when the next attempt is narrower and informed by the failure. Stop when the next action would be destructive, speculative, or require unavailable human/device proof.
+
+## Evidence Reporting
+
+Every closeout must list files changed, commands run, PASS/PARTIAL/FAIL results, what was not verified, remaining risks, and the next exact prompt.
+
+## Release Claim Discipline
+
+Do not claim release readiness, App Store readiness, TestFlight readiness, public accessibility verification, device verification, or FAANG handoff readiness unless every relevant gate has current evidence.
+
+## Stale-Doc Prevention
+
+- Active docs must point to Ambitions 3.0 first.
+- Historical docs may mention older canon only as history.
+- New status docs must distinguish canonized, implemented, tested, device-verified, and release-ready.
+- Run the stale active-guidance scan before closeout on governance/docs changes.
+
+## Handoff-Readiness Preservation
+
+The FAANG handoff audit remains the baseline until replaced by a later report. New Codex work must improve or preserve file inventory, traceability, generated-artifact hygiene, active-doc clarity, migration debt documentation, and validation evidence.
+
+## Quality Gates
+
+A pass is complete only when:
+
+- source truth is current,
+- every created skill/pack/template is indexed,
+- validation ran or was blocked with reason,
+- no generated junk is staged,
+- release claims are conservative,
+- next work is explicit.
+
+## What Codex Must Never Do
+
+- Start from stale 2.0/v2 docs as active direction.
+- Create new top-level destinations.
+- Add app runtime dependencies casually.
+- Replace XcodeGen.
+- Hide failing tests.
+- Claim implementation from canon docs alone.
+- Delete useful history to make the repo look clean.
+- Silently mutate calendar/sync/account/release claims.
