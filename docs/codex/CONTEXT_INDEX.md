@@ -10,7 +10,8 @@ Ambitions 3.0 is the active source of truth. This file defines Codex read order,
 - The FAANG handoff cleanup result is PARTIAL: generated artifacts were purged, active indexes improved, but full UI smoke failed and legacy/internal migration debt remains.
 - F00 Current Implementation Gap Audit is complete as an audit-only traceability pass.
 - F01/F02 Reality Rail work is now represented in Today state and UI evidence: Today renders a focused Reality Rail with `Start here`, `Start now`, Now/Next/Later, source/context labels, duration labels, privacy-safe projection, empty/unavailable copy, and reserved closure/proof slots.
-- Next active 3.0 implementation continuation is F03 Step Detail and recommendation explanation unless the user explicitly chooses another gate.
+- F03 Step Detail work is now represented as a Today-local sheet opened from the Reality Rail `Start here` card and Now/Next/Later rows, with grounded recommendation explanation, duration/source/context labels, private redaction, and stable `TodayStepDetail*` accessibility identifiers.
+- Next active 3.0 implementation continuation is F04 Step Session rename/migration and routing unless the user explicitly chooses another gate.
 
 ## Required Read Order
 

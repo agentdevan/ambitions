@@ -120,6 +120,16 @@ enum PreviewTodayScenarios {
     static let empty = noPlan
     static let privateRail = makePrivateRailScenario(from: stable)
     static let unavailableRail = noPlan
+    static let stepDetailStartHere = makeStartHereStepDetail()
+    static let stepDetailRow = stable.execution.dayRail.rows.first?.stepDetail(
+        privacy: stable.execution.dayRail.privacyProjection,
+        contextLabel: stable.execution.dayRail.contextSummary
+    )
+    static let privateStepDetail = privateRail.execution.dayRail.heroStep?.stepDetail(
+        privacy: privateRail.execution.dayRail.privacyProjection,
+        contextLabel: privateRail.execution.dayRail.contextSummary
+    )
+    static let missingDurationStepDetail = makeMissingDurationStepDetail()
 
     static func named(_ name: String) -> TodayExperience? {
         switch name.trimmingCharacters(in: .whitespacesAndNewlines).lowercased() {
@@ -196,6 +206,49 @@ enum PreviewTodayScenarios {
             hero: experience.hero,
             support: experience.support,
             execution: experience.execution.replacingDayRail(privateRail)
+        )
+    }
+
+    private static func makeMissingDurationStepDetail() -> DayRailStepDetailState {
+        let rail = stable.execution.dayRail
+        let row = DayRailRowState(
+            id: "preview.step-detail.missing-duration",
+            slot: .later,
+            title: "Review launch notes",
+            subtitle: "A flexible follow-up if the main block lands.",
+            duration: DayRailDurationState(minutes: nil, source: .notSet, label: "Duration not set"),
+            detailTarget: DayRailDetailTargetState(
+                kind: .stepDetail,
+                goalID: "goal-preview",
+                stepID: "step-preview",
+                draftID: nil,
+                placeholderLabel: "Open Step Detail."
+            ),
+            sourceLabels: [DayRailSourceLabelState(id: "source.preview", label: "Based on your goal path", source: .standard)]
+        )
+        return row.stepDetail(
+            privacy: rail.privacyProjection,
+            contextLabel: "Later can stay open."
+        )
+    }
+
+    private static func makeStartHereStepDetail() -> DayRailStepDetailState? {
+        guard let baseHero = stable.execution.dayRail.heroStep else { return nil }
+        let rail = stable.execution.dayRail
+        let hero = DayRailHeroStepState(
+            id: "preview.step-detail.start-here",
+            title: baseHero.title,
+            subtitle: baseHero.subtitle,
+            duration: DayRailDurationState(minutes: 25, source: .suggested, label: "25 min suggested"),
+            fitLabel: baseHero.fitLabel,
+            whySummary: baseHero.whySummary,
+            primaryAction: DayRailStepDetailState.reservedStartNowAction(target: baseHero.primaryAction.target),
+            detailTarget: baseHero.detailTarget,
+            sourceLabels: baseHero.sourceLabels
+        )
+        return hero.stepDetail(
+            privacy: rail.privacyProjection,
+            contextLabel: rail.contextSummary
         )
     }
 

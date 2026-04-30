@@ -103,8 +103,8 @@ final class TodayViewModelTests: XCTestCase {
         XCTAssertEqual(heroStep.duration.source, .suggested)
         XCTAssertEqual(rail.durationSource, .suggested)
         XCTAssertEqual(rail.primaryAction?.kind, .startFocus)
-        XCTAssertEqual(rail.rowTapDetailTargetPlaceholder?.kind, .stepDetailPlaceholder)
-        XCTAssertEqual(rail.rowTapDetailTargetPlaceholder?.placeholderLabel, "Step Detail opens in F03.")
+        XCTAssertEqual(rail.rowTapDetailTargetPlaceholder?.kind, .stepDetail)
+        XCTAssertEqual(rail.rowTapDetailTargetPlaceholder?.placeholderLabel, "Open Step Detail.")
         XCTAssertEqual(rail.rows.map(\.slot), [.now, .next, .later])
         XCTAssertTrue(rail.contextLabels.contains { $0.label == "Based on your plan" })
         XCTAssertTrue(rail.contextLabels.contains { $0.label == "Stored on this device" })
@@ -271,6 +271,105 @@ final class TodayViewModelTests: XCTestCase {
         XCTAssertTrue(renderedReservationCopy.contains("Proof and receipts stay reserved for F06."))
         XCTAssertFalse(renderedReservationCopy.contains("Completed"))
         XCTAssertFalse(renderedReservationCopy.contains("Proof saved"))
+    }
+
+    func testF03RealityRailHeroAndRowProduceStepDetailState() throws {
+        let rail = PreviewTodayScenarios.stable.execution.dayRail
+        let hero = try XCTUnwrap(rail.heroStep)
+        let row = try XCTUnwrap(rail.rows.first)
+
+        let heroDetail = hero.stepDetail(privacy: rail.privacyProjection, contextLabel: rail.contextSummary)
+        let rowDetail = row.stepDetail(privacy: rail.privacyProjection, contextLabel: rail.contextSummary)
+
+        XCTAssertEqual(heroDetail.timingBucket, "Start here")
+        XCTAssertEqual(heroDetail.title, hero.title)
+        XCTAssertEqual(heroDetail.primaryAction.title, "Start now")
+        XCTAssertEqual(heroDetail.detailTarget.kind, .stepDetail)
+        XCTAssertEqual(rowDetail.timingBucket, "Now")
+        XCTAssertEqual(rowDetail.title, row.title)
+        XCTAssertEqual(rowDetail.detailTarget.kind, .stepDetail)
+    }
+
+    func testF03StepDetailShowsCompliantDeterministicExplanationLabels() throws {
+        let detail = try XCTUnwrap(PreviewTodayScenarios.stepDetailStartHere)
+        let copy = detail.visibleCopy
+
+        XCTAssertTrue(copy.contains("Why this?"))
+        XCTAssertTrue(copy.contains("Recommended because"))
+        XCTAssertTrue(copy.contains("Based on your plan"))
+        XCTAssertTrue(copy.contains("Duration source: Suggested duration"))
+        XCTAssertTrue(copy.contains("Start now"))
+        XCTAssertTrue(copy.contains("Adjust plan"))
+        XCTAssertTrue(copy.contains("Review later"))
+        XCTAssertFalse(detail.whyBullets.isEmpty)
+    }
+
+    func testF03PrivateStepDetailRedactsSensitiveTitleAndExplanation() throws {
+        let detail = try XCTUnwrap(PreviewTodayScenarios.privateStepDetail)
+        let copy = detail.visibleCopy
+
+        XCTAssertTrue(detail.isPrivateProjection)
+        XCTAssertEqual(detail.title, "Private step")
+        XCTAssertEqual(detail.privacyStateLabel, "Details hidden here")
+        XCTAssertTrue(copy.contains("Private source"))
+        XCTAssertTrue(copy.contains("Details hidden here"))
+        XCTAssertFalse(copy.contains("Draft the talk outline"))
+        XCTAssertFalse(copy.contains("Submit my conference talk proposal"))
+        XCTAssertFalse(copy.contains("Record one rough vocal pass"))
+    }
+
+    func testF03StepDetailCopyAvoidsForbiddenTerms() throws {
+        let details = [
+            try XCTUnwrap(PreviewTodayScenarios.stepDetailStartHere),
+            try XCTUnwrap(PreviewTodayScenarios.stepDetailRow),
+            try XCTUnwrap(PreviewTodayScenarios.privateStepDetail),
+            PreviewTodayScenarios.missingDurationStepDetail
+        ]
+        let forbidden = [
+            "Start Focus",
+            "Focus Session",
+            "best next move",
+            "next best move",
+            "AI confidence",
+            "productivity score",
+            "profile tab",
+            "insights tab",
+            "habits tab",
+            "overdue",
+            "failed",
+            "missed"
+        ]
+
+        for detail in details {
+            for term in forbidden {
+                XCTAssertFalse(
+                    detail.visibleCopy.localizedCaseInsensitiveContains(term),
+                    "Step Detail visible copy should not contain forbidden term: \(term)"
+                )
+            }
+        }
+    }
+
+    func testF03StartNowRemainsReservedAndClosureProofStayUnimplemented() throws {
+        let rail = PreviewTodayScenarios.stable.execution.dayRail
+        let detail = try XCTUnwrap(PreviewTodayScenarios.stepDetailStartHere)
+
+        XCTAssertEqual(detail.primaryAction.title, "Start now")
+        XCTAssertEqual(detail.primaryAction.kind, .startFocus)
+        XCTAssertEqual(detail.secondaryActions.map(\.title), ["Adjust plan", "Review later"])
+        XCTAssertTrue(rail.closureSlot.reservedForActionClosureSheet)
+        XCTAssertTrue(rail.proofSlot.reservedForReceiptPeek)
+        XCTAssertTrue(f02RenderedReservationCopy(rail).contains("Close the loop stays reserved for F05."))
+        XCTAssertTrue(f02RenderedReservationCopy(rail).contains("Proof and receipts stay reserved for F06."))
+    }
+
+    func testF03StepDetailSupportsMissingDurationFallback() {
+        let detail = PreviewTodayScenarios.missingDurationStepDetail
+
+        XCTAssertEqual(detail.durationLabel, "Duration not set")
+        XCTAssertEqual(detail.durationSourceLabel, "Duration source: Unset")
+        XCTAssertEqual(detail.timingBucket, "Later")
+        XCTAssertTrue(detail.sourceLabel.contains("Based on your goal path"))
     }
 
     func testTodayD11ScreenContractSnapshotSatisfiesImplementationGate() async throws {

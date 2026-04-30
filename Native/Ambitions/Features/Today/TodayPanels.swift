@@ -6,23 +6,40 @@ struct AmbitionsDayRailView: View {
 
     let state: AmbitionsDayRailViewState
     let onAction: (TodayInlineAction) -> Void
+    let onOpenStepDetail: (DayRailStepDetailState) -> Void
+
+    init(
+        state: AmbitionsDayRailViewState,
+        onAction: @escaping (TodayInlineAction) -> Void,
+        onOpenStepDetail: @escaping (DayRailStepDetailState) -> Void = { _ in }
+    ) {
+        self.state = state
+        self.onAction = onAction
+        self.onOpenStepDetail = onOpenStepDetail
+    }
 
     var body: some View {
         VStack(alignment: .leading, spacing: theme.spacing.md) {
             header
 
             if let heroStep = state.heroStep {
-                DayRailHeroStepCard(step: heroStep, privacy: state.privacyProjection, onAction: onAction)
+                DayRailHeroStepCard(
+                    step: heroStep,
+                    privacy: state.privacyProjection,
+                    contextLabel: state.contextSummary,
+                    onAction: onAction,
+                    onOpenStepDetail: onOpenStepDetail
+                )
                     .accessibilityIdentifier("TodayRealityRailHero")
             } else {
                 DayRailEmptyCard(state: state)
             }
 
-            DayRailSection(title: "Now", rows: rows(for: .now), privacy: state.privacyProjection)
+            DayRailSection(title: "Now", rows: rows(for: .now), privacy: state.privacyProjection, contextLabel: state.contextSummary, onOpenStepDetail: onOpenStepDetail)
                 .accessibilityIdentifier("TodayRealityRailNowSection")
-            DayRailSection(title: "Next", rows: rows(for: .next), privacy: state.privacyProjection)
+            DayRailSection(title: "Next", rows: rows(for: .next), privacy: state.privacyProjection, contextLabel: state.contextSummary, onOpenStepDetail: onOpenStepDetail)
                 .accessibilityIdentifier("TodayRealityRailNextSection")
-            DayRailSection(title: "Later", rows: rows(for: .later), privacy: state.privacyProjection)
+            DayRailSection(title: "Later", rows: rows(for: .later), privacy: state.privacyProjection, contextLabel: state.contextSummary, onOpenStepDetail: onOpenStepDetail)
                 .accessibilityIdentifier("TodayRealityRailLaterSection")
 
             DayRailReservedSlots(closureSlot: state.closureSlot, proofSlot: state.proofSlot)
@@ -148,43 +165,51 @@ private struct DayRailHeroStepCard: View {
 
     let step: DayRailHeroStepState
     let privacy: DayRailPrivacyProjectionState
+    let contextLabel: String
     let onAction: (TodayInlineAction) -> Void
+    let onOpenStepDetail: (DayRailStepDetailState) -> Void
 
     var body: some View {
         VStack(alignment: .leading, spacing: theme.spacing.md) {
-            HStack(alignment: .top, spacing: theme.spacing.md) {
-                DayRailNode(kind: .recommended, active: true)
-                    .accessibilityHidden(true)
+            Button {
+                onOpenStepDetail(step.stepDetail(privacy: privacy, contextLabel: contextLabel))
+            } label: {
+                HStack(alignment: .top, spacing: theme.spacing.md) {
+                    DayRailNode(kind: .recommended, active: true)
+                        .accessibilityHidden(true)
 
-                VStack(alignment: .leading, spacing: theme.spacing.sm) {
-                    Text("Start here")
-                        .font(theme.typography.caption)
-                        .foregroundStyle(theme.colors.textTertiary)
-                        .accessibilityIdentifier("TodayRealityRailStartHereTitle")
-
-                    Text(step.title)
-                        .font(theme.typography.titleCompact)
-                        .foregroundStyle(theme.colors.textPrimary)
-                        .fixedSize(horizontal: false, vertical: true)
-
-                    Text(step.subtitle)
-                        .font(theme.typography.body)
-                        .foregroundStyle(theme.colors.textSecondary)
-                        .fixedSize(horizontal: false, vertical: true)
-
-                    HStack(spacing: theme.spacing.xs) {
-                        AmbitionChip(step.duration.label, role: .time, semanticState: .calendarDerived)
-                        AmbitionChip(step.fitLabel, role: .state, semanticState: .focus)
-                    }
-
-                    if step.sourceLabels.isEmpty == false {
-                        Text(sourceSummary)
+                    VStack(alignment: .leading, spacing: theme.spacing.sm) {
+                        Text("Start here")
                             .font(theme.typography.caption)
                             .foregroundStyle(theme.colors.textTertiary)
+                            .accessibilityIdentifier("TodayRealityRailStartHereTitle")
+
+                        Text(step.title)
+                            .font(theme.typography.titleCompact)
+                            .foregroundStyle(theme.colors.textPrimary)
                             .fixedSize(horizontal: false, vertical: true)
+
+                        Text(step.subtitle)
+                            .font(theme.typography.body)
+                            .foregroundStyle(theme.colors.textSecondary)
+                            .fixedSize(horizontal: false, vertical: true)
+
+                        HStack(spacing: theme.spacing.xs) {
+                            AmbitionChip(step.duration.label, role: .time, semanticState: .calendarDerived)
+                            AmbitionChip(step.fitLabel, role: .state, semanticState: .focus)
+                        }
+
+                        if step.sourceLabels.isEmpty == false {
+                            Text(sourceSummary)
+                                .font(theme.typography.caption)
+                                .foregroundStyle(theme.colors.textTertiary)
+                                .fixedSize(horizontal: false, vertical: true)
+                        }
                     }
+                    Spacer(minLength: theme.spacing.sm)
                 }
             }
+            .buttonStyle(.plain)
 
             TodayPrimaryActionButton(action: step.primaryAction, handler: onAction)
                 .accessibilityIdentifier("TodayRealityRailPrimaryAction")
@@ -201,7 +226,7 @@ private struct DayRailHeroStepCard: View {
         .accessibilityElement(children: .combine)
         .accessibilityLabel(accessibilityLabel)
         .accessibilityValue("\(step.duration.label). \(sourceSummary)")
-        .accessibilityHint("Start now is the primary action. Step Detail opens in a later batch.")
+        .accessibilityHint("Opens Step Detail. Start now stays reserved for Step Session in F04.")
         .accessibilityIdentifier(privacy.isSensitiveProjection ? "TodayRealityRailPrivateItem" : "TodayRealityRailHeroCard")
     }
 
@@ -226,6 +251,8 @@ private struct DayRailSection: View {
     let title: String
     let rows: [DayRailRowState]
     let privacy: DayRailPrivacyProjectionState
+    let contextLabel: String
+    let onOpenStepDetail: (DayRailStepDetailState) -> Void
 
     var body: some View {
         VStack(alignment: .leading, spacing: theme.spacing.xs) {
@@ -240,7 +267,7 @@ private struct DayRailSection: View {
                     .fixedSize(horizontal: false, vertical: true)
             } else {
                 ForEach(rows) { row in
-                    DayRailRow(row: row, privacy: privacy)
+                    DayRailRow(row: row, privacy: privacy, contextLabel: contextLabel, onOpenStepDetail: onOpenStepDetail)
                 }
             }
         }
@@ -265,9 +292,13 @@ private struct DayRailRow: View {
 
     let row: DayRailRowState
     let privacy: DayRailPrivacyProjectionState
+    let contextLabel: String
+    let onOpenStepDetail: (DayRailStepDetailState) -> Void
 
     var body: some View {
-        Button {} label: {
+        Button {
+            onOpenStepDetail(row.stepDetail(privacy: privacy, contextLabel: contextLabel))
+        } label: {
             HStack(alignment: .top, spacing: theme.spacing.md) {
                 DayRailNode(kind: nodeKind, active: row.slot == .now)
                     .accessibilityHidden(true)
@@ -311,7 +342,7 @@ private struct DayRailRow: View {
         .accessibilityElement(children: .combine)
         .accessibilityLabel(accessibilityLabel)
         .accessibilityValue("\(row.duration.label). \(sourceSummary)")
-        .accessibilityHint(row.detailTarget.placeholderLabel)
+        .accessibilityHint("Opens Step Detail.")
         .accessibilityIdentifier(privacy.isSensitiveProjection ? "TodayRealityRailPrivateItem" : "TodayRealityRailRow")
     }
 
@@ -384,6 +415,169 @@ private struct DayRailReservedSlots: View {
             parts.append("No silent changes.")
         }
         return parts.joined(separator: " ")
+    }
+}
+
+struct TodayStepDetailSheet: View {
+    @Environment(\.ambitionTheme) private var theme
+    @Environment(\.dismiss) private var dismiss
+
+    let detail: DayRailStepDetailState
+
+    var body: some View {
+        NavigationStack {
+            ScrollView {
+                VStack(alignment: .leading, spacing: theme.spacing.lg) {
+                    header
+                    labels
+                    whyThis
+                    privacyState
+                    actions
+                }
+                .padding(theme.spacing.lg)
+            }
+            .background(TodayBackgroundView())
+            .navigationTitle("Why this?")
+            .navigationBarTitleDisplayMode(.inline)
+            .toolbar {
+                ToolbarItem(placement: .topBarTrailing) {
+                    Button("Done") {
+                        dismiss()
+                    }
+                    .accessibilityIdentifier("TodayStepDetailDismiss")
+                }
+            }
+        }
+        .accessibilityElement(children: .contain)
+        .accessibilityLabel("Step Detail")
+        .accessibilityIdentifier("TodayStepDetail")
+    }
+
+    private var header: some View {
+        VStack(alignment: .leading, spacing: theme.spacing.sm) {
+            Text(detail.timingBucket)
+                .font(theme.typography.caption)
+                .foregroundStyle(theme.colors.textTertiary)
+
+            Text(detail.title)
+                .font(theme.typography.titleCompact)
+                .foregroundStyle(theme.colors.textPrimary)
+                .fixedSize(horizontal: false, vertical: true)
+                .accessibilityIdentifier("TodayStepDetailTitle")
+        }
+        .accessibilityElement(children: .combine)
+        .accessibilityLabel(detail.isPrivateProjection ? "Private step" : detail.title)
+    }
+
+    private var labels: some View {
+        VStack(alignment: .leading, spacing: theme.spacing.sm) {
+            detailLabel(title: "Duration", value: detail.durationLabel, identifier: "TodayStepDetailDurationLabel")
+            detailLabel(title: "Duration source", value: detail.durationSourceLabel, identifier: nil)
+            detailLabel(title: "Source", value: detail.sourceLabel, identifier: "TodayStepDetailSourceLabel")
+            detailLabel(title: "Context", value: detail.contextLabel, identifier: "TodayStepDetailContextLabel")
+        }
+    }
+
+    private func detailLabel(title: String, value: String, identifier: String?) -> some View {
+        HStack(alignment: .firstTextBaseline, spacing: theme.spacing.sm) {
+            Text(title)
+                .font(theme.typography.caption)
+                .foregroundStyle(theme.colors.textTertiary)
+                .frame(width: 112, alignment: .leading)
+            Text(value)
+                .font(theme.typography.body)
+                .foregroundStyle(theme.colors.textPrimary)
+                .fixedSize(horizontal: false, vertical: true)
+            Spacer(minLength: theme.spacing.xs)
+        }
+        .accessibilityElement(children: .combine)
+        .accessibilityLabel(title)
+        .accessibilityValue(value)
+        .accessibilityIdentifier(identifier ?? "")
+    }
+
+    private var whyThis: some View {
+        VStack(alignment: .leading, spacing: theme.spacing.sm) {
+            Text("Recommended because")
+                .font(theme.typography.bodyEmphasized)
+                .foregroundStyle(theme.colors.textPrimary)
+
+            ForEach(Array(detail.whyBullets.enumerated()), id: \.offset) { _, bullet in
+                HStack(alignment: .top, spacing: theme.spacing.sm) {
+                    Circle()
+                        .fill(theme.colors.accentWarm.opacity(0.82))
+                        .frame(width: 6, height: 6)
+                        .padding(.top, 7)
+                        .accessibilityHidden(true)
+                    Text(bullet)
+                        .font(theme.typography.body)
+                        .foregroundStyle(theme.colors.textSecondary)
+                        .fixedSize(horizontal: false, vertical: true)
+                }
+            }
+        }
+        .accessibilityElement(children: .combine)
+        .accessibilityLabel("Why this?")
+        .accessibilityValue(detail.whyBullets.joined(separator: ". "))
+        .accessibilityIdentifier("TodayStepDetailWhyThis")
+    }
+
+    @ViewBuilder
+    private var privacyState: some View {
+        if let privacyLabel = detail.privacyStateLabel {
+            HStack(spacing: theme.spacing.sm) {
+                Image(systemName: "lock.shield")
+                    .foregroundStyle(theme.semanticAccent(for: .protected))
+                    .accessibilityHidden(true)
+                Text(privacyLabel)
+                    .font(theme.typography.bodyEmphasized)
+                    .foregroundStyle(theme.colors.textPrimary)
+                Spacer(minLength: theme.spacing.sm)
+            }
+            .padding(theme.spacing.md)
+            .background(
+                RoundedRectangle(cornerRadius: theme.radius.md, style: .continuous)
+                    .fill(theme.semanticStyle(for: .protected).fill)
+            )
+            .overlay(
+                RoundedRectangle(cornerRadius: theme.radius.md, style: .continuous)
+                    .stroke(theme.semanticStyle(for: .protected).stroke, lineWidth: 1)
+            )
+            .accessibilityElement(children: .combine)
+            .accessibilityLabel("Private state")
+            .accessibilityValue(privacyLabel)
+            .accessibilityIdentifier("TodayStepDetailPrivateState")
+        }
+    }
+
+    private var actions: some View {
+        VStack(alignment: .leading, spacing: theme.spacing.sm) {
+            Button {} label: {
+                Label(detail.primaryAction.title, systemImage: detail.primaryAction.systemImage)
+                    .font(.body.weight(.semibold))
+                    .frame(maxWidth: .infinity)
+                    .frame(minHeight: 50)
+            }
+            .buttonStyle(AmbitionPressableButtonStyle(state: .default))
+            .disabled(true)
+            .accessibilityHint("Step Session starts in F04. This action is visible but not active yet.")
+            .accessibilityIdentifier("TodayStepDetailPrimaryAction")
+
+            HStack(spacing: theme.spacing.sm) {
+                ForEach(detail.secondaryActions) { action in
+                    Button {} label: {
+                        Label(action.title, systemImage: action.systemImage)
+                            .font(theme.typography.caption)
+                            .lineLimit(1)
+                            .frame(maxWidth: .infinity)
+                            .padding(.vertical, theme.spacing.sm)
+                    }
+                    .buttonStyle(AmbitionPressableButtonStyle(state: .default))
+                    .disabled(true)
+                    .accessibilityHint("Reserved placeholder. No plan changes happen from Step Detail in F03.")
+                }
+            }
+        }
     }
 }
 
@@ -486,19 +680,6 @@ private struct Diamond: Shape {
         path.addLine(to: CGPoint(x: rect.minX, y: rect.midY))
         path.closeSubpath()
         return path
-    }
-}
-
-private extension DayRailRowSlot {
-    var title: String {
-        switch self {
-        case .now:
-            "Now"
-        case .next:
-            "Next"
-        case .later:
-            "Later"
-        }
     }
 }
 

@@ -1,6 +1,6 @@
 # Ambitions 3.0 — Current Implementation Gap Audit
 
-Status: F00 completed audit baseline; implementation remains pending
+Status: F00 completed audit baseline; F01-F03 Today foundation/detail work implemented
 Parent doc: [Ambitions 3.0 Front-End Redesign Index](./Ambitions_3_0_Front_End_Redesign_Index.md)
 Implementation plan: [Ambitions 3.0 Front-End Implementation Batch Plan](./Ambitions_3_0_Front_End_Implementation_Batch_Plan.md)
 Last updated: 2026-04-30
@@ -20,10 +20,10 @@ tests, implemented canonical top-level shell labels, meaningful domain models,
 and several mature D/M/R-era foundations for Capture, Plan, You, receipts,
 reviews, external surfaces, accessibility locks, and release evidence. The gap
 is that Ambitions 3.0's signature front-end primitives are not yet fully
-implemented as user-facing 3.0 surfaces. Today still uses the existing
-TodayExecution hero/support/deep-dive stack instead of a proven
-`AmbitionsDayRailView`; Step Detail and Step Session remain route/placeholder
-seams rather than first-class 3.0 surfaces; Action Closure and Proof/Receipt
+implemented as user-facing 3.0 surfaces. Today now renders an
+`AmbitionsDayRailView` and F03 adds a Today-local Step Detail sheet from the
+Reality Rail, but Step Session remains a legacy focus/routing seam; Action
+Closure and Proof/Receipt
 logic are strong in domain/tests but not yet a shared user-facing closure sheet
 and receipt trail; Capture has Smart Attachment/Needs a Place foundations but
 not the full Placement Resolver flow; Plan, Goals, and You are substantial but
@@ -37,15 +37,15 @@ FAANG handoff remains **PARTIAL** until at least these blockers are resolved:
   surfaces
 - legacy internal identifier debt is migrated or explicitly compatibility
   isolated
-- Ambitions 3.0 Reality Rail / Day Rail, Step Detail, Step Session, Action
-  Closure, and Receipt/Proof surfaces have implementation, previews, tests, and
-  honest evidence
+- Ambitions 3.0 Step Session, Action Closure, and Receipt/Proof surfaces have
+  implementation, previews, tests, and honest evidence beyond the F01-F03 Today
+  Reality Rail and Step Detail work
 - release, accessibility, device, TestFlight, and App Store claims remain gated
   by the existing evidence rules
 
-F01 should start with **Reality Rail / Day Rail foundation**, not with broad
-visual rewrite, shell replacement, global identifier migration, or UI test
-cleanup.
+F04 should continue with **Step Session rename/migration and routing**, not with
+broad shell replacement, global identifier migration, or release readiness
+claims.
 
 ## Current Build/Test Status
 
@@ -157,8 +157,8 @@ evidence that handoff remains PARTIAL.
 
 | Surface | Canon requirement | Current implementation evidence | Tests/previews | Status | Risk | Handoff impact | Next batch |
 | --- | --- | --- | --- | --- | --- | --- | --- |
-| Today / Reality Rail / Day Rail | Day Rail is the Today signature object; `Start here`; Now/Next/Later rows; row tap to Step Detail; `Start now` to Step Session. | `TodayScreen.swift:41-69` renders `TodayExecutionHeroPanel`, support panels, and deep dive. `TodayExecutionViewState.swift:538`, `:614-615`, `:1099` contains `Start here`, `Recommended step`, `Start now`. `TodayFeatureModels.swift:49-50` still has `.startFocus`. | `TodayViewModelTests` passed; UI failures at `:444`, `:480`, `:489`, `:533`. | partial / legacy naming | Signature object not proven; route expectations fail. | P0 blocker. | F01-F02 |
-| Step Detail | Row tap opens lightweight inspection surface with why/readiness/duration/source/adjust controls. | Today can route `.openDetail` to Goal Detail via `TodayScreen.swift:134-139`; no first-class Step Detail route found. | UI `testTodayCanHandOffToGoalDetail` failed at `:489`. | missing / needs migration | Row taps may over-route to Goal Detail. | P0 blocker. | F03 |
+| Today / Reality Rail / Day Rail | Day Rail is the Today signature object; `Start here`; Now/Next/Later rows; row tap to Step Detail; `Start now` to Step Session. | `TodayScreen.swift` renders `AmbitionsDayRailView` first in loaded Today, with `Start here`, `Start now`, Now/Next/Later rows, source/context/duration labels, and reserved closure/proof slots. `TodayFeatureModels.swift:49-50` still has `.startFocus`. | `TodayViewModelTests` passed; focused Today shell/fresh-goal tests passed; full UI smoke still known failing. | partial / legacy naming | Step Session remains F04; full UI smoke still needs modernization. | P0 blocker. | F04/F16 |
+| Step Detail | Row tap opens lightweight inspection surface with why/readiness/duration/source/adjust controls. | F03 added `DayRailStepDetailState`, `TodayStepDetailSheet`, and Reality Rail hero/row taps that open Today-local detail with duration/source/context labels, recommendation bullets, and privacy-safe redaction. | Focused `TodayViewModelTests` prove detail state, copy, private redaction, reserved `Start now`, and closure/proof reservation. | implemented / Today-local | UI smoke still needs focused modernization; Step Session remains separate. | Reduced but not handoff-ready. | F16 follow-up as needed |
 | Step Session | Step-first execution drill-down, not timer-first or focus-first; supports Complete, Still Counts, Pause, Adjust. | Focus screenlet exists: `TodayFeatureModels.swift:397`, `TodayPanels.swift:1577`; route still `.startFocus` and `TodayEntryContext.focus`. | `testTodayStartFocusCanOpenBoundedFocusScreenlet` failed at `:480`; unit focus tests pass. | partial / legacy naming | Execution remains bounded focus screenlet, not 3.0 Step Session. | P0 blocker. | F04 |
 | Action Closure | Shared closure sheet with Completed, Still Counts, Rescheduled, Not needed, Blocked, Waiting, Needs Recovery, Needs Review. | Domain receipt grammar exists: `ActionClosureReceiptModels.swift:5-21`, `:110-128`, `:184-191`; no shared UI sheet verified. | `ActionClosureReceiptModelsTests` passed 15 tests. | partial | Closure is not yet a shared user-facing surface. | P0 blocker. | F05 |
 | Proof / Receipts / Reviews | Proof/receipt ledger must show toast, peek, trail/search/export levels; Reviews summarize evidence. | Receipt domain and projection exist; Reviews projection in `ReviewsV1Projector.swift`; You renders review/receipt sections in `ProfileScreen.swift:1033-1149`. | Receipt and Profile/Reviews tests pass; no shared receipt UI smoke proof. | partial | User may not recover what changed outside You detail sheets. | P1 blocker. | F06 |
@@ -222,16 +222,14 @@ evidence that handoff remains PARTIAL.
 ## FAANG Handoff Blockers
 
 1. Full UI smoke suite fails 9 tests.
-2. Reality Rail / Day Rail is not yet the proven Today signature object.
-3. Step Detail is missing as a first-class route.
-4. Step Session is still represented by legacy focus naming/screenlet seams.
-5. Shared Action Closure Sheet is missing.
-6. Receipt/proof trail is not yet visible enough beyond domain/You surfaces.
-7. Capture Placement Resolver flow is partial.
-8. Plan/Goals/You have strong foundations but not full 3.0 surface proof.
-9. Legacy internal identifiers remain widespread.
-10. External-surface copy/identifier debt remains.
-11. Accessibility/device/platform/release gates remain unverified by human or
+2. Step Session is still represented by legacy focus naming/screenlet seams.
+3. Shared Action Closure Sheet is missing.
+4. Receipt/proof trail is not yet visible enough beyond domain/You surfaces.
+5. Capture Placement Resolver flow is partial.
+6. Plan/Goals/You have strong foundations but not full 3.0 surface proof.
+7. Legacy internal identifiers remain widespread.
+8. External-surface copy/identifier debt remains.
+9. Accessibility/device/platform/release gates remain unverified by human or
     device evidence.
 
 ## Next Build Sequence From F00 Evidence
@@ -256,189 +254,53 @@ evidence that handoff remains PARTIAL.
 | F16 — UI test modernization | L | Modernize UI tests to 3.0 contracts. | QA | `Native/AmbitionsUITests`, fixtures, docs | app feature implementation | UI suite | focused then full UI | F01-F15 | deleting real coverage | failures classified and resolved | product bug found |
 | F17 — Ambitions Operating Shell / Meridian feature-flagged | L | Introduce Meridian safely after content loop. | Shell | AppShell/UI/tests | replacing tab access without fallback | shell UI tests | full build/UI | F16 | navigation loss | feature-flag/fallback, five tabs reachable | usability uncertainty |
 
-## Recommended Next Codex Prompt: F01 Reality Rail Foundation
+## Recommended Next Codex Prompt: F04 Step Session
 
 ````markdown
 You are Codex 5.5 on Mac acting as the Ambitions FAANG-level product engineering organization.
 
-Run F01 — Reality Rail / Day Rail Foundation.
+Run F04 — Step Session rename/migration and routing.
 
-This is an implementation batch, but it is foundation-only.
+This is a Today-only implementation batch focused on replacing focus-first
+execution naming/routing with Step Session behavior after F03 Step Detail.
 
 Do not rewrite the whole Today UI.
-Do not implement Step Detail yet.
-Do not implement Step Session yet.
 Do not implement Action Closure Sheet yet.
+Do not implement Proof / Receipt Ledger yet.
+Do not implement Plan Life Suite.
+Do not change shell architecture.
 Do not rename global Profile/Insights/Habits identifiers.
 Do not touch `.github/workflows/`.
 Do not add dependencies.
 Do not claim FAANG handoff readiness.
 
-Source docs to read first:
+Primary goal:
 
-1. `README.md`
-2. `docs/README.md`
-3. `AGENTS.md`
-4. `docs/canon/Ambitions_3_0_Source_Of_Truth_Override.md`
-5. `docs/canon/Ambitions_3_0_Front_End_Redesign_Index.md`
-6. `docs/canon/Ambitions_3_0_Rebuild_Operating_Model.md`
-7. `docs/canon/Ambitions_3_0_FAANG_Team_Operating_Model.md`
-8. `docs/canon/Ambitions_3_0_Task_Width_And_Batch_Combining_Gate.md`
-9. `docs/canon/Ambitions_3_0_Primitive_Architecture.md`
-10. `docs/canon/Ambitions_3_0_Product_Language_System.md`
-11. `docs/canon/Ambitions_3_0_Day_Rail_SwiftUI_Build_Spec.md`
-12. `docs/canon/Ambitions_3_0_Signature_Objects_And_Rail_Grammar.md`
-13. `docs/canon/Ambitions_3_0_Recommendation_Contract.md`
-14. `docs/canon/Ambitions_3_0_Surface_State_Matrix.md`
-15. `docs/canon/Ambitions_3_0_Current_Implementation_Gap_Audit.md`
-16. `docs/codex/BATCH_REGISTRY.md`
-17. `docs/codex/CONTEXT_INDEX.md`
+- Make `Start now` launch a bounded Today Step Session rather than legacy
+  focus-first behavior.
+- Preserve F03 Step Detail as the inspection/explanation surface.
+- Keep Action Closure, Still Counts, Proof, and Receipt behavior reserved for
+  F05-F06 unless a compile-safe placeholder is already present.
+- Remove visible `Start Focus` / `Focus Session` copy from active Today paths
+  touched by F04, while compatibility-isolating internal identifiers if a full
+  migration would exceed the task width.
 
-Use context pack:
+Expected task width:
 
-- `.codex/context-packs/today-reality-rail-context.md`
-
-Use skills:
-
-- `.codex/skills/faang-handoff-auditor.md`
-- `.codex/skills/implementation-status-verifier.md`
-- `.codex/skills/day-rail-regression-tester.md`
-- `.codex/skills/copy-guard-runner.md`
-- `repo-truth-enforcer` if docs truth changes are needed
-
-Use operation protocol:
-
-- `.codex/operations/task-width-gate-protocol.md`
-- `.codex/operations/source-truth-reconciliation-protocol.md`
-- `.codex/operations/run-state-refresh-protocol.md`
-- `.codex/operations/release-claim-truth-protocol.md`
-
-Use validation pack:
-
-- `.codex/validation/base-build-test-pack.md`
-- `.codex/validation/copy-guard-pack.md`
-- `.codex/validation/ui-test-contract-pack.md` for classification only
-
-Task width:
-
-- Expected size: M
-- Type: additive Today foundation
-- App code changes: allowed only in Today model/service/test/preview seams
+- Size: M/L
+- Type: Today execution routing implementation
+- Primitive: Step Execution
+- Surface: Today
+- App code changes: Today model/routing/UI/test/preview seams only
 - Workflow/dependency changes: prohibited
+- Release readiness claims: prohibited
 
-Exact files to inspect:
+Read the standard Ambitions 3.0 source-truth docs, the Day Rail build spec,
+F03 report, `docs/codex/BATCH_REGISTRY.md`, `docs/codex/CONTEXT_INDEX.md`,
+and the Today implementation files under `Native/Ambitions/Features/Today`.
 
-- `Native/Ambitions/Features/Today/TodayFeatureModels.swift`
-- `Native/Ambitions/Features/Today/TodayExecutionViewState.swift`
-- `Native/Ambitions/Features/Today/TodayFeatureService.swift`
-- `Native/Ambitions/Features/Today/TodayViewModel.swift`
-- `Native/Ambitions/Features/Today/TodayPanels.swift`
-- `Native/Ambitions/Features/Today/TodayScreen.swift`
-- `Native/Ambitions/PreviewSupport/PreviewTodayScenarios.swift`
-- `Native/AmbitionsTests/Today/TodayViewModelTests.swift`
-- `Native/AmbitionsTests/Today/TodayFreshGoalVisibilityTests.swift`
-- `Native/AmbitionsTests/Today/TodayShellIntegrationTests.swift`
-- `Native/AmbitionsUITests/AmbitionsUITests.swift` for known failures only
-
-Implementation scope:
-
-- Add a Day Rail / Reality Rail view-state foundation that can represent:
-  - rail mode
-  - Now / Next / Later rows
-  - dominant `Start here` hero step
-  - primary `Start now` action
-  - row-tap detail target placeholder
-  - duration source
-  - context/source labels
-  - sensitive/privacy-safe projection
-  - closure/proof slots for later F05-F06
-- Adapt existing Today projection to populate this state.
-- Add focused unit tests proving the state is deterministic, privacy-safe,
-  copy-safe, and compatible with existing Today behavior.
-- Keep existing Today UI rendering unless a tiny compile-safe hook is required.
-
-Non-goals:
-
-- no visual Day Rail implementation
-- no Step Detail screen
-- no Step Session screen
-- no Action Closure sheet
-- no global identifier migration
-- no UI test fixes unless a new test is necessary for F01 model proof
-
-Allowed files:
-
-- Today feature models/service/view-model/test/preview files listed above
-- a new Today foundation model file if it matches existing architecture
-- `docs/codex/BATCH_REGISTRY.md`
-- `docs/codex/CONTEXT_INDEX.md`
-- `.codex/reports/current-run-state.md`
-- a focused F01 audit/report doc under `docs/audits/` if useful
-
-Forbidden files:
-
-- `.github/workflows/**`
-- dependency manifests
-- `project.yml` unless XcodeGen target membership requires it for a new Swift file
-- broad Profile/Insights/Habits/AppTab migrations
-- external-surface code unless needed for compile only
-
-Tests to add/update:
-
-- focused Today model/projection tests for Day Rail state
-- copy guard assertions: no user-facing `Start Focus`, `Focus Session`,
-  `best next move`, `AI confidence`, or `productivity score`
-- privacy/accessibility fields for rail rows and hero step
-
-Copy guard:
-
-- Visible copy must use Ambitions 3.0 language:
-  - `Start here`
-  - `Start now`
-  - `Recommended step`
-  - `Why this`
-  - `Still Counts` only as a future closure slot label if needed
-- Do not expose model jargon, confidence scores, or shame language.
-
-Accessibility requirements:
-
-- Every new state object must carry enough label/value/hint text for future UI.
-- Do not rely on color-only meaning.
-- Do not require gesture-only navigation.
-
-Privacy/trust requirements:
-
-- Sensitive rows must have redacted labels.
-- Source/duration labels must be honest and local-first.
-- No calendar write, sync, account, or external-platform claim.
-
-Validation commands:
-
-```bash
-git status --short
-xcodegen generate
-xcodebuild -project Ambitions.xcodeproj -scheme Ambitions -destination 'platform=iOS Simulator,name=iPhone 17' -only-testing:AmbitionsTests/TodayViewModelTests -only-testing:AmbitionsTests/TodayFreshGoalVisibilityTests -only-testing:AmbitionsTests/TodayShellIntegrationTests test CODE_SIGNING_ALLOWED=NO
-scripts/build-local.sh || true
-rg -n --hidden --glob '!/.git/**' 'Start Focus|Focus Session|best next move|next best move|AI confidence|productivity score' Native/Ambitions/Features/Today Native/AmbitionsTests/Today || true
-```
-
-Run-state update instructions:
-
-- Update `.codex/reports/current-run-state.md` at the start and closeout.
-- Record task width, docs read, files touched, tests run, failures, risks, and
-  next phase.
-
-Closeout format:
-
-- Result: PASS/PARTIAL/FAIL
-- Task width
-- Files changed
-- Implementation summary
-- Validation run
-- Known failures/not run
-- Remaining risks
-- Commit SHA if committed
-- Next recommended batch
+Validation should include focused Today tests, touched-path copy guard,
+`scripts/build-local.sh`, and `git diff --check`.
 
 Do not claim FAANG handoff readiness. It remains PARTIAL until F01-F16 evidence
 and the full UI smoke gate pass.

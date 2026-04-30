@@ -6,6 +6,7 @@ struct TodayScreen: View {
     @Environment(\.ambitionTheme) private var theme
     @Environment(\.accessibilityReduceMotion) private var reduceMotion
     @State private var viewModel: TodayViewModel
+    @State private var selectedStepDetail: DayRailStepDetailState?
 
     private let autoLoad: Bool
     private let showsNavigationChrome: Bool
@@ -39,7 +40,13 @@ struct TodayScreen: View {
                         )
                         .transition(.ambitionPanel)
                     case let .loaded(experience):
-                        AmbitionsDayRailView(state: experience.execution.dayRail, onAction: handleAction)
+                        AmbitionsDayRailView(
+                            state: experience.execution.dayRail,
+                            onAction: handleAction,
+                            onOpenStepDetail: { detail in
+                                selectedStepDetail = detail
+                            }
+                        )
                             .transition(.ambitionPanel)
 
                         if experience.mode == .empty {
@@ -94,6 +101,10 @@ struct TodayScreen: View {
         }
         .animation(theme.motion.animation(reduceMotion: reduceMotion, emphasis: true), value: viewModel.stateKey)
         .animation(theme.motion.animation(reduceMotion: reduceMotion), value: viewModel.transientMessage?.title)
+        .sheet(item: $selectedStepDetail) { detail in
+            TodayStepDetailSheet(detail: detail)
+                .ambitionTheme(theme)
+        }
         .onChange(of: container.navigation.selectedTab) { _, selectedTab in
             guard autoLoad, selectedTab == .today else { return }
             Task {
@@ -244,5 +255,31 @@ struct TodayScreen: View {
     }
     .appContainer(PreviewAppContainerFactory.preview(todayExperience: PreviewTodayScenarios.unavailableRail))
     .ambitionTheme(.dark)
+}
+
+#Preview("Today Step Detail Start Here") {
+    if let detail = PreviewTodayScenarios.stepDetailStartHere {
+        TodayStepDetailSheet(detail: detail)
+            .ambitionTheme(.dark)
+    }
+}
+
+#Preview("Today Step Detail Row") {
+    if let detail = PreviewTodayScenarios.stepDetailRow {
+        TodayStepDetailSheet(detail: detail)
+            .ambitionTheme(.dark)
+    }
+}
+
+#Preview("Today Step Detail Private") {
+    if let detail = PreviewTodayScenarios.privateStepDetail {
+        TodayStepDetailSheet(detail: detail)
+            .ambitionTheme(.dark)
+    }
+}
+
+#Preview("Today Step Detail Missing Duration") {
+    TodayStepDetailSheet(detail: PreviewTodayScenarios.missingDurationStepDetail)
+        .ambitionTheme(.dark)
 }
 #endif

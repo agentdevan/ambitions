@@ -64,7 +64,7 @@ enum DayRailDurationSource: String, CaseIterable, Equatable {
 }
 
 enum DayRailDetailTargetKind: String, Equatable {
-    case stepDetailPlaceholder
+    case stepDetail
     case planContext
     case captureContext
     case unavailable
@@ -101,6 +101,22 @@ struct DayRailDetailTargetState: Equatable {
     let stepID: String?
     let draftID: String?
     let placeholderLabel: String
+}
+
+struct DayRailStepDetailState: Identifiable, Equatable {
+    let id: String
+    let title: String
+    let timingBucket: String
+    let durationLabel: String
+    let durationSourceLabel: String
+    let sourceLabel: String
+    let contextLabel: String
+    let whyBullets: [String]
+    let privacyStateLabel: String?
+    let isPrivateProjection: Bool
+    let primaryAction: TodayInlineAction
+    let secondaryActions: [TodayInlineAction]
+    let detailTarget: DayRailDetailTargetState
 }
 
 struct DayRailHeroStepState: Equatable {
@@ -1577,7 +1593,7 @@ private extension DayRailDetailTargetState {
             kind = .planContext
         default:
             kind = action.target.goalID != nil || action.target.stepID != nil || action.target.draftID != nil
-                ? .stepDetailPlaceholder
+                ? .stepDetail
                 : .unavailable
         }
         return DayRailDetailTargetState(
@@ -1585,8 +1601,8 @@ private extension DayRailDetailTargetState {
             goalID: action.target.goalID,
             stepID: action.target.stepID,
             draftID: action.target.draftID,
-            placeholderLabel: kind == .stepDetailPlaceholder
-                ? "Step Detail opens in F03."
+            placeholderLabel: kind == .stepDetail
+                ? "Open Step Detail."
                 : "Context route stays in the existing Today flow."
         )
     }
@@ -1625,6 +1641,158 @@ extension DayRailPrivacyProjectionState {
 
     func visibleSubtitle(_ subtitle: String) -> String {
         isSensitiveProjection ? "Details stay private on Today." : subtitle.todayShortSentence
+    }
+}
+
+extension DayRailHeroStepState {
+    func stepDetail(privacy: DayRailPrivacyProjectionState, contextLabel: String) -> DayRailStepDetailState {
+        DayRailStepDetailState(
+            id: "step-detail.hero.\(id)",
+            title: privacy.detailTitle(title),
+            timingBucket: "Start here",
+            durationLabel: duration.label,
+            durationSourceLabel: duration.source.detailLabel,
+            sourceLabel: privacy.sourceSummary(from: sourceLabels),
+            contextLabel: privacy.detailContext(contextLabel),
+            whyBullets: privacy.whyBullets(
+                primary: whySummary,
+                sourceLabel: privacy.sourceSummary(from: sourceLabels),
+                contextLabel: contextLabel,
+                goalSupport: subtitle
+            ),
+            privacyStateLabel: privacy.detailPrivacyLabel,
+            isPrivateProjection: privacy.isSensitiveProjection,
+            primaryAction: DayRailStepDetailState.reservedStartNowAction(target: primaryAction.target),
+            secondaryActions: DayRailStepDetailState.placeholderActions(target: primaryAction.target),
+            detailTarget: detailTarget
+        )
+    }
+}
+
+extension DayRailRowState {
+    func stepDetail(privacy: DayRailPrivacyProjectionState, contextLabel: String) -> DayRailStepDetailState {
+        DayRailStepDetailState(
+            id: "step-detail.row.\(id)",
+            title: privacy.detailTitle(title),
+            timingBucket: slot.title,
+            durationLabel: duration.label,
+            durationSourceLabel: duration.source.detailLabel,
+            sourceLabel: privacy.sourceSummary(from: sourceLabels),
+            contextLabel: privacy.detailContext(contextLabel),
+            whyBullets: privacy.whyBullets(
+                primary: subtitle,
+                sourceLabel: privacy.sourceSummary(from: sourceLabels),
+                contextLabel: contextLabel,
+                goalSupport: title
+            ),
+            privacyStateLabel: privacy.detailPrivacyLabel,
+            isPrivateProjection: privacy.isSensitiveProjection,
+            primaryAction: DayRailStepDetailState.reservedStartNowAction(target: TodayActionTarget(goalID: detailTarget.goalID, stepID: detailTarget.stepID, draftID: detailTarget.draftID)),
+            secondaryActions: DayRailStepDetailState.placeholderActions(target: TodayActionTarget(goalID: detailTarget.goalID, stepID: detailTarget.stepID, draftID: detailTarget.draftID)),
+            detailTarget: detailTarget
+        )
+    }
+}
+
+extension DayRailStepDetailState {
+    static func reservedStartNowAction(target: TodayActionTarget) -> TodayInlineAction {
+        TodayInlineAction(kind: .startFocus, title: "Start now", systemImage: "scope", state: .selected, target: target)
+    }
+
+    static func placeholderActions(target: TodayActionTarget) -> [TodayInlineAction] {
+        [
+            TodayInlineAction(kind: .openPlan, title: "Adjust plan", systemImage: "arrow.right.arrow.left", state: .default, target: target),
+            TodayInlineAction(kind: .defer, title: "Review later", systemImage: "clock", state: .default, target: target),
+        ]
+    }
+
+    var visibleCopy: String {
+        ([
+            title,
+            timingBucket,
+            durationLabel,
+            durationSourceLabel,
+            sourceLabel,
+            contextLabel,
+            privacyStateLabel,
+            "Why this?",
+            "Recommended because",
+            primaryAction.title,
+        ].compactMap { $0 } + whyBullets + secondaryActions.map(\.title)).joined(separator: " ")
+    }
+}
+
+extension DayRailDurationSource {
+    var detailLabel: String {
+        switch self {
+        case .userSet:
+            "Duration source: User-set"
+        case .suggested:
+            "Duration source: Suggested duration"
+        case .historicallyBased:
+            "Duration source: Historical"
+        case .acceptedFromPlan:
+            "Duration source: Accepted from plan"
+        case .calendarBlock:
+            "Duration source: Calendar-derived"
+        case .notSet:
+            "Duration source: Unset"
+        }
+    }
+}
+
+extension DayRailRowSlot {
+    var title: String {
+        switch self {
+        case .now:
+            "Now"
+        case .next:
+            "Next"
+        case .later:
+            "Later"
+        }
+    }
+}
+
+private extension DayRailPrivacyProjectionState {
+    func detailTitle(_ title: String) -> String {
+        isSensitiveProjection ? "Private step" : title
+    }
+
+    var detailPrivacyLabel: String? {
+        isSensitiveProjection ? "Details hidden here" : nil
+    }
+
+    func detailContext(_ contextLabel: String) -> String {
+        isSensitiveProjection ? "Details hidden here" : contextLabel.todayShortSentence
+    }
+
+    func sourceSummary(from labels: [DayRailSourceLabelState]) -> String {
+        if isSensitiveProjection {
+            return sourceLabel
+        }
+        let publicLabels = labels.map(\.label).filter { $0.isEmpty == false }.prefix(2)
+        return publicLabels.isEmpty ? sourceLabel : publicLabels.joined(separator: " · ")
+    }
+
+    func whyBullets(primary: String, sourceLabel: String, contextLabel: String, goalSupport: String) -> [String] {
+        if isSensitiveProjection {
+            return [
+                "Details hidden here.",
+                "Based on your plan.",
+                "You can review or adjust this before starting.",
+            ]
+        }
+
+        var bullets = [
+            primary.todayShortSentence,
+            sourceLabel,
+            contextLabel.todayShortSentence,
+        ]
+        if goalSupport.isEmpty == false {
+            bullets.append(goalSupport.todayShortSentence)
+        }
+        return Array(bullets.filter { $0.isEmpty == false }.prefix(4))
     }
 }
 
