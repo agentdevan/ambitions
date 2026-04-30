@@ -1,6 +1,507 @@
 import AmbitionsDesignSystem
 import SwiftUI
 
+struct AmbitionsDayRailView: View {
+    @Environment(\.ambitionTheme) private var theme
+
+    let state: AmbitionsDayRailViewState
+    let onAction: (TodayInlineAction) -> Void
+
+    var body: some View {
+        VStack(alignment: .leading, spacing: theme.spacing.md) {
+            header
+
+            if let heroStep = state.heroStep {
+                DayRailHeroStepCard(step: heroStep, privacy: state.privacyProjection, onAction: onAction)
+                    .accessibilityIdentifier("TodayRealityRailHero")
+            } else {
+                DayRailEmptyCard(state: state)
+            }
+
+            DayRailSection(title: "Now", rows: rows(for: .now), privacy: state.privacyProjection)
+                .accessibilityIdentifier("TodayRealityRailNowSection")
+            DayRailSection(title: "Next", rows: rows(for: .next), privacy: state.privacyProjection)
+                .accessibilityIdentifier("TodayRealityRailNextSection")
+            DayRailSection(title: "Later", rows: rows(for: .later), privacy: state.privacyProjection)
+                .accessibilityIdentifier("TodayRealityRailLaterSection")
+
+            DayRailReservedSlots(closureSlot: state.closureSlot, proofSlot: state.proofSlot)
+        }
+        .padding(theme.spacing.lg)
+        .background(
+            RoundedRectangle(cornerRadius: theme.radius.lg, style: .continuous)
+                .fill(theme.colors.surfaceSecondary.opacity(0.92))
+        )
+        .overlay(
+            RoundedRectangle(cornerRadius: theme.radius.lg, style: .continuous)
+                .stroke(theme.semanticAccent(for: semanticState).opacity(0.26), lineWidth: 1)
+        )
+        .accessibilityElement(children: .contain)
+        .accessibilityLabel(accessibilityLabel)
+        .accessibilityIdentifier("TodayRealityRail")
+    }
+
+    private var header: some View {
+        VStack(alignment: .leading, spacing: theme.spacing.sm) {
+            HStack(alignment: .firstTextBaseline, spacing: theme.spacing.sm) {
+                Text(state.dateTitle)
+                    .font(theme.typography.caption)
+                    .foregroundStyle(theme.colors.textTertiary)
+                AmbitionChip(modeLabel, role: .state, semanticState: semanticState)
+                Spacer(minLength: theme.spacing.sm)
+            }
+
+            Text(state.contextSummary)
+                .font(theme.typography.body)
+                .foregroundStyle(theme.colors.textSecondary)
+                .fixedSize(horizontal: false, vertical: true)
+
+            if state.contextLabels.isEmpty == false {
+                HStack(spacing: theme.spacing.xs) {
+                    ForEach(state.contextLabels.prefix(3)) { label in
+                        AmbitionChip(sourceLabel(label), role: .state, semanticState: sourceSemanticState(label))
+                    }
+                }
+                .accessibilityElement(children: .combine)
+                .accessibilityLabel("Source context")
+                .accessibilityValue(state.contextLabels.prefix(3).map(sourceLabel).joined(separator: ", "))
+            }
+        }
+    }
+
+    private var modeLabel: String {
+        switch state.mode {
+        case .normal:
+            "Ready"
+        case .recovery:
+            "Needs review"
+        case .protected:
+            "Protected"
+        case .overloaded:
+            "Lighten first"
+        case .empty:
+            "Open"
+        case .noSchedule:
+            "Schedule not set"
+        }
+    }
+
+    private var semanticState: AmbitionSemanticState {
+        switch state.mode {
+        case .normal:
+            .focus
+        case .recovery:
+            .recovery
+        case .protected:
+            .protected
+        case .overloaded:
+            .caution
+        case .empty:
+            .trust
+        case .noSchedule:
+            .calendarDerived
+        }
+    }
+
+    private var accessibilityLabel: String {
+        var parts = ["Reality Rail", state.dateTitle, modeLabel, state.contextSummary]
+        if let heroStep = state.heroStep {
+            parts.append("Start here")
+            parts.append(heroStep.title)
+            parts.append(heroStep.duration.label)
+            parts.append(heroStep.primaryAction.title)
+        } else {
+            parts.append("Nothing needs you right now.")
+        }
+        return parts.joined(separator: ". ")
+    }
+
+    private func rows(for slot: DayRailRowSlot) -> [DayRailRowState] {
+        state.rows.filter { $0.slot == slot }
+    }
+
+    private func sourceLabel(_ label: DayRailSourceLabelState) -> String {
+        switch label.source {
+        case .sensitive, .privateUserText:
+            state.privacyProjection.sourceLabel
+        case .calendarDerived:
+            "Calendar-derived"
+        case .standard, .syncMetadata:
+            label.label
+        }
+    }
+
+    private func sourceSemanticState(_ label: DayRailSourceLabelState) -> AmbitionSemanticState {
+        switch label.source {
+        case .sensitive, .privateUserText:
+            .protected
+        case .calendarDerived:
+            .calendarDerived
+        case .standard, .syncMetadata:
+            .trust
+        }
+    }
+}
+
+private struct DayRailHeroStepCard: View {
+    @Environment(\.ambitionTheme) private var theme
+
+    let step: DayRailHeroStepState
+    let privacy: DayRailPrivacyProjectionState
+    let onAction: (TodayInlineAction) -> Void
+
+    var body: some View {
+        VStack(alignment: .leading, spacing: theme.spacing.md) {
+            HStack(alignment: .top, spacing: theme.spacing.md) {
+                DayRailNode(kind: .recommended, active: true)
+                    .accessibilityHidden(true)
+
+                VStack(alignment: .leading, spacing: theme.spacing.sm) {
+                    Text("Start here")
+                        .font(theme.typography.caption)
+                        .foregroundStyle(theme.colors.textTertiary)
+                        .accessibilityIdentifier("TodayRealityRailStartHereTitle")
+
+                    Text(step.title)
+                        .font(theme.typography.titleCompact)
+                        .foregroundStyle(theme.colors.textPrimary)
+                        .fixedSize(horizontal: false, vertical: true)
+
+                    Text(step.subtitle)
+                        .font(theme.typography.body)
+                        .foregroundStyle(theme.colors.textSecondary)
+                        .fixedSize(horizontal: false, vertical: true)
+
+                    HStack(spacing: theme.spacing.xs) {
+                        AmbitionChip(step.duration.label, role: .time, semanticState: .calendarDerived)
+                        AmbitionChip(step.fitLabel, role: .state, semanticState: .focus)
+                    }
+
+                    if step.sourceLabels.isEmpty == false {
+                        Text(sourceSummary)
+                            .font(theme.typography.caption)
+                            .foregroundStyle(theme.colors.textTertiary)
+                            .fixedSize(horizontal: false, vertical: true)
+                    }
+                }
+            }
+
+            TodayPrimaryActionButton(action: step.primaryAction, handler: onAction)
+                .accessibilityIdentifier("TodayRealityRailPrimaryAction")
+        }
+        .padding(theme.spacing.md)
+        .background(
+            RoundedRectangle(cornerRadius: theme.radius.md, style: .continuous)
+                .fill(theme.colors.surfaceOverlay.opacity(0.95))
+        )
+        .overlay(
+            RoundedRectangle(cornerRadius: theme.radius.md, style: .continuous)
+                .stroke(theme.colors.accentWarm.opacity(0.28), lineWidth: 1)
+        )
+        .accessibilityElement(children: .combine)
+        .accessibilityLabel(accessibilityLabel)
+        .accessibilityValue("\(step.duration.label). \(sourceSummary)")
+        .accessibilityHint("Start now is the primary action. Step Detail opens in a later batch.")
+        .accessibilityIdentifier(privacy.isSensitiveProjection ? "TodayRealityRailPrivateItem" : "TodayRealityRailHeroCard")
+    }
+
+    private var sourceSummary: String {
+        if privacy.isSensitiveProjection {
+            return privacy.sourceLabel
+        }
+        let labels = step.sourceLabels.map(\.label).prefix(2)
+        return labels.isEmpty ? privacy.sourceLabel : labels.joined(separator: " · ")
+    }
+
+    private var accessibilityLabel: String {
+        privacy.isSensitiveProjection
+            ? "Start here. Private item. Details stay private on Today."
+            : "Start here. \(step.title). \(step.subtitle)"
+    }
+}
+
+private struct DayRailSection: View {
+    @Environment(\.ambitionTheme) private var theme
+
+    let title: String
+    let rows: [DayRailRowState]
+    let privacy: DayRailPrivacyProjectionState
+
+    var body: some View {
+        VStack(alignment: .leading, spacing: theme.spacing.xs) {
+            Text(title)
+                .font(theme.typography.caption)
+                .foregroundStyle(theme.colors.textTertiary)
+
+            if rows.isEmpty {
+                Text(emptyCopy)
+                    .font(theme.typography.caption)
+                    .foregroundStyle(theme.colors.textSecondary)
+                    .fixedSize(horizontal: false, vertical: true)
+            } else {
+                ForEach(rows) { row in
+                    DayRailRow(row: row, privacy: privacy)
+                }
+            }
+        }
+        .accessibilityElement(children: .contain)
+        .accessibilityLabel(title)
+    }
+
+    private var emptyCopy: String {
+        switch title {
+        case "Now":
+            "Nothing needs you right now."
+        case "Next":
+            "No next step is being pulled forward."
+        default:
+            "Later can stay open."
+        }
+    }
+}
+
+private struct DayRailRow: View {
+    @Environment(\.ambitionTheme) private var theme
+
+    let row: DayRailRowState
+    let privacy: DayRailPrivacyProjectionState
+
+    var body: some View {
+        Button {} label: {
+            HStack(alignment: .top, spacing: theme.spacing.md) {
+                DayRailNode(kind: nodeKind, active: row.slot == .now)
+                    .accessibilityHidden(true)
+
+                VStack(alignment: .leading, spacing: theme.spacing.xxs) {
+                    HStack(alignment: .firstTextBaseline, spacing: theme.spacing.xs) {
+                        Text(row.slot.title)
+                            .font(theme.typography.micro)
+                            .foregroundStyle(theme.colors.textTertiary)
+                        AmbitionChip(row.duration.label, role: .time, semanticState: .calendarDerived)
+                    }
+
+                    Text(row.title)
+                        .font(theme.typography.bodyEmphasized)
+                        .foregroundStyle(theme.colors.textPrimary)
+                        .fixedSize(horizontal: false, vertical: true)
+
+                    Text(row.subtitle)
+                        .font(theme.typography.caption)
+                        .foregroundStyle(theme.colors.textSecondary)
+                        .fixedSize(horizontal: false, vertical: true)
+                }
+
+                Spacer(minLength: theme.spacing.sm)
+                Image(systemName: "chevron.right")
+                    .font(.caption.weight(.semibold))
+                    .foregroundStyle(theme.colors.textTertiary)
+                    .accessibilityHidden(true)
+            }
+            .padding(theme.spacing.sm)
+            .background(
+                RoundedRectangle(cornerRadius: theme.radius.md, style: .continuous)
+                    .fill(theme.colors.surfaceSecondary.opacity(0.78))
+            )
+            .overlay(
+                RoundedRectangle(cornerRadius: theme.radius.md, style: .continuous)
+                    .stroke(theme.colors.strokeSubtle, lineWidth: 1)
+            )
+        }
+        .buttonStyle(.plain)
+        .accessibilityElement(children: .combine)
+        .accessibilityLabel(accessibilityLabel)
+        .accessibilityValue("\(row.duration.label). \(sourceSummary)")
+        .accessibilityHint(row.detailTarget.placeholderLabel)
+        .accessibilityIdentifier(privacy.isSensitiveProjection ? "TodayRealityRailPrivateItem" : "TodayRealityRailRow")
+    }
+
+    private var nodeKind: DayRailNodeKind {
+        switch row.slot {
+        case .now:
+            .active
+        case .next:
+            .upcoming
+        case .later:
+            .flexible
+        }
+    }
+
+    private var sourceSummary: String {
+        if privacy.isSensitiveProjection {
+            return privacy.sourceLabel
+        }
+        return row.sourceLabels.map(\.label).prefix(2).joined(separator: " · ")
+    }
+
+    private var accessibilityLabel: String {
+        privacy.isSensitiveProjection
+            ? "\(row.slot.title). Private item. Details stay private on Today."
+            : "\(row.slot.title). \(row.title). \(row.subtitle)"
+    }
+}
+
+private struct DayRailReservedSlots: View {
+    @Environment(\.ambitionTheme) private var theme
+
+    let closureSlot: DayRailClosureSlotState
+    let proofSlot: DayRailProofSlotState
+
+    var body: some View {
+        HStack(alignment: .top, spacing: theme.spacing.sm) {
+            Image(systemName: "lock.shield")
+                .font(.caption.weight(.semibold))
+                .foregroundStyle(theme.colors.textTertiary)
+                .accessibilityHidden(true)
+            Text(reservedCopy)
+                .font(theme.typography.caption)
+                .foregroundStyle(theme.colors.textSecondary)
+                .fixedSize(horizontal: false, vertical: true)
+            Spacer(minLength: theme.spacing.sm)
+        }
+        .padding(theme.spacing.sm)
+        .background(
+            RoundedRectangle(cornerRadius: theme.radius.md, style: .continuous)
+                .fill(theme.colors.surfaceOverlay.opacity(0.68))
+        )
+        .overlay(
+            RoundedRectangle(cornerRadius: theme.radius.md, style: .continuous)
+                .stroke(theme.colors.strokeSubtle, lineWidth: 1)
+        )
+        .accessibilityElement(children: .combine)
+        .accessibilityLabel("Reserved rail slots")
+        .accessibilityValue(reservedCopy)
+    }
+
+    private var reservedCopy: String {
+        var parts: [String] = []
+        if closureSlot.reservedForActionClosureSheet {
+            parts.append("Close the loop stays reserved for F05.")
+        }
+        if proofSlot.reservedForReceiptPeek {
+            parts.append("Proof and receipts stay reserved for F06.")
+        }
+        if proofSlot.noSilentChanges {
+            parts.append("No silent changes.")
+        }
+        return parts.joined(separator: " ")
+    }
+}
+
+private struct DayRailEmptyCard: View {
+    @Environment(\.ambitionTheme) private var theme
+
+    let state: AmbitionsDayRailViewState
+
+    var body: some View {
+        HStack(alignment: .top, spacing: theme.spacing.md) {
+            DayRailNode(kind: .empty, active: false)
+                .accessibilityHidden(true)
+            VStack(alignment: .leading, spacing: theme.spacing.xs) {
+                Text("Start here")
+                    .font(theme.typography.caption)
+                    .foregroundStyle(theme.colors.textTertiary)
+                    .accessibilityIdentifier("TodayRealityRailStartHereTitle")
+                Text("Nothing needs you right now.")
+                    .font(theme.typography.bodyEmphasized)
+                    .foregroundStyle(theme.colors.textPrimary)
+                    .fixedSize(horizontal: false, vertical: true)
+                Text("Capture something, choose from a goal, or leave today open.")
+                    .font(theme.typography.caption)
+                    .foregroundStyle(theme.colors.textSecondary)
+                    .fixedSize(horizontal: false, vertical: true)
+            }
+            Spacer(minLength: theme.spacing.sm)
+        }
+        .padding(theme.spacing.md)
+        .background(
+            RoundedRectangle(cornerRadius: theme.radius.md, style: .continuous)
+                .fill(theme.colors.surfaceOverlay.opacity(0.9))
+        )
+        .overlay(
+            RoundedRectangle(cornerRadius: theme.radius.md, style: .continuous)
+                .stroke(theme.colors.strokeSubtle, lineWidth: 1)
+        )
+        .accessibilityElement(children: .combine)
+        .accessibilityLabel("Start here. Nothing needs you right now.")
+        .accessibilityValue(state.contextSummary)
+        .accessibilityIdentifier("TodayRealityRailHero")
+    }
+}
+
+private struct DayRailNode: View {
+    @Environment(\.ambitionTheme) private var theme
+
+    let kind: DayRailNodeKind
+    let active: Bool
+
+    var body: some View {
+        VStack(spacing: 0) {
+            Rectangle()
+                .fill(theme.colors.strokeSubtle)
+                .frame(width: 1, height: 10)
+                .opacity(active ? 0 : 1)
+            node
+            Rectangle()
+                .fill(theme.colors.strokeSubtle)
+                .frame(width: 1, height: 28)
+        }
+        .frame(width: 26)
+    }
+
+    @ViewBuilder
+    private var node: some View {
+        switch kind {
+        case .closure:
+            Diamond()
+                .fill(theme.semanticAccent(for: .review).opacity(active ? 0.92 : 0.28))
+                .frame(width: 14, height: 14)
+        case .proof:
+            Image(systemName: "doc.text")
+                .font(.caption2.weight(.semibold))
+                .foregroundStyle(theme.semanticAccent(for: .trust))
+                .frame(width: 20, height: 20)
+        case .protected, .waiting, .blocked, .empty:
+            Circle()
+                .stroke(theme.colors.textTertiary.opacity(0.7), lineWidth: 1.4)
+                .frame(width: 14, height: 14)
+        case .recommended, .active:
+            Circle()
+                .fill(theme.colors.accentWarm)
+                .frame(width: 16, height: 16)
+                .shadow(color: theme.colors.accentWarm.opacity(0.24), radius: 8)
+        case .upcoming, .flexible:
+            Circle()
+                .stroke(theme.colors.accentWarm.opacity(kind == .upcoming ? 0.78 : 0.48), lineWidth: 1.6)
+                .frame(width: kind == .upcoming ? 14 : 11, height: kind == .upcoming ? 14 : 11)
+        }
+    }
+}
+
+private struct Diamond: Shape {
+    func path(in rect: CGRect) -> Path {
+        var path = Path()
+        path.move(to: CGPoint(x: rect.midX, y: rect.minY))
+        path.addLine(to: CGPoint(x: rect.maxX, y: rect.midY))
+        path.addLine(to: CGPoint(x: rect.midX, y: rect.maxY))
+        path.addLine(to: CGPoint(x: rect.minX, y: rect.midY))
+        path.closeSubpath()
+        return path
+    }
+}
+
+private extension DayRailRowSlot {
+    var title: String {
+        switch self {
+        case .now:
+            "Now"
+        case .next:
+            "Next"
+        case .later:
+            "Later"
+        }
+    }
+}
+
 struct TodayExecutionHeroPanel: View {
     @Environment(\.ambitionTheme) private var theme
 

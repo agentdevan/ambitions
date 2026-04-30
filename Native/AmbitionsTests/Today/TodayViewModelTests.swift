@@ -84,6 +84,195 @@ final class TodayViewModelTests: XCTestCase {
         XCTAssertTrue(experience.execution.commandMappings.contains { $0.actionKind == .askWhyThisMatters && $0.commandKind == .askWhy })
     }
 
+    func testF01DayRailFoundationProjectsStartHereRowsAndFutureSlots() async throws {
+        let repositories = try await makeRepositories()
+        let service = RepositoryBackedTodayService(repositories: repositories)
+        let now = try XCTUnwrap(DomainTimestamp.date(from: "2026-04-15T12:00:00Z"))
+        let first = makeGoal(id: "goal-first", stepID: "step-first", stepTitle: "Send the client spreadsheet", dueAt: "2026-05-15T20:00:00Z", domain: .career)
+        let second = makeGoal(id: "goal-second", stepID: "step-second", stepTitle: "Draft PM transition notes", dueAt: "2026-05-16T20:00:00Z", domain: .career)
+        let third = makeGoal(id: "goal-third", stepID: "step-third", stepTitle: "Review the budget note", dueAt: "2026-05-17T20:00:00Z", domain: .finance)
+        try await repositories.goals.saveGoals([third, second, first])
+
+        let experience = try await service.loadTodayExperience(userDisplayName: "", now: now)
+        let rail = experience.execution.dayRail
+        let heroStep = try XCTUnwrap(rail.heroStep)
+
+        XCTAssertEqual(rail.mode, .recovery)
+        XCTAssertEqual(heroStep.title, experience.execution.hero.title)
+        XCTAssertEqual(heroStep.primaryAction.title, "Start now")
+        XCTAssertEqual(heroStep.duration.source, .suggested)
+        XCTAssertEqual(rail.durationSource, .suggested)
+        XCTAssertEqual(rail.primaryAction?.kind, .startFocus)
+        XCTAssertEqual(rail.rowTapDetailTargetPlaceholder?.kind, .stepDetailPlaceholder)
+        XCTAssertEqual(rail.rowTapDetailTargetPlaceholder?.placeholderLabel, "Step Detail opens in F03.")
+        XCTAssertEqual(rail.rows.map(\.slot), [.now, .next, .later])
+        XCTAssertTrue(rail.contextLabels.contains { $0.label == "Based on your plan" })
+        XCTAssertTrue(rail.contextLabels.contains { $0.label == "Stored on this device" })
+        XCTAssertTrue(rail.closureSlot.reservedForActionClosureSheet)
+        XCTAssertTrue(rail.proofSlot.reservedForReceiptPeek)
+        XCTAssertTrue(rail.proofSlot.noSilentChanges)
+    }
+
+    func testF01DayRailPrivacyProjectionRedactsSensitiveTitles() {
+        let privateProjection = DayRailPrivacyProjectionState(classification: .privateUserText)
+        let sensitiveProjection = DayRailPrivacyProjectionState(classification: .sensitive)
+        let standardProjection = DayRailPrivacyProjectionState(classification: .standard)
+
+        XCTAssertTrue(privateProjection.isSensitiveProjection)
+        XCTAssertTrue(sensitiveProjection.isSensitiveProjection)
+        XCTAssertEqual(privateProjection.visibleTitle("Therapy appointment"), "Private item")
+        XCTAssertEqual(privateProjection.visibleSubtitle("Discuss personal details"), "Details stay private on Today.")
+        XCTAssertEqual(sensitiveProjection.sourceLabel, "Private source")
+        XCTAssertFalse(standardProjection.isSensitiveProjection)
+        XCTAssertEqual(standardProjection.visibleTitle("Draft PM transition notes"), "Draft PM transition notes")
+    }
+
+    func testF01DayRailFoundationAvoidsForbiddenRecommendationCopy() async throws {
+        let repositories = try await makeRepositories()
+        let service = RepositoryBackedTodayService(repositories: repositories)
+        let now = try XCTUnwrap(DomainTimestamp.date(from: "2026-04-15T12:00:00Z"))
+        let goal = makeGoal(
+            id: "goal-copy",
+            stepID: "step-copy",
+            stepTitle: "Draft PM transition notes",
+            dueAt: "2026-04-15T20:00:00Z",
+            domain: .career
+        )
+        try await repositories.goals.saveGoals([goal])
+
+        let rail = try await service.loadTodayExperience(userDisplayName: "", now: now).execution.dayRail
+        let visibleCopy = [
+            rail.dateTitle,
+            rail.contextSummary,
+            rail.heroStep?.title,
+            rail.heroStep?.subtitle,
+            rail.heroStep?.fitLabel,
+            rail.heroStep?.whySummary,
+            rail.heroStep?.primaryAction.title,
+            rail.closureSlot.title,
+            rail.closureSlot.subtitle,
+            rail.proofSlot.title,
+            rail.proofSlot.subtitle
+        ].compactMap { $0 }.joined(separator: " ")
+
+        let forbidden = [
+            "AI confidence",
+            "model reasoning",
+            "productivity score",
+            "best next move",
+            "next best move",
+            "overdue",
+            "failed",
+            "missed"
+        ]
+        for term in forbidden {
+            XCTAssertFalse(
+                visibleCopy.localizedCaseInsensitiveContains(term),
+                "Day Rail visible copy should not contain forbidden term: \(term)"
+            )
+        }
+    }
+
+    func testF02RealityRailVisibleProjectionUsesStartHereAndStartNowCopy() async throws {
+        let repositories = try await makeRepositories()
+        let service = RepositoryBackedTodayService(repositories: repositories)
+        let now = try XCTUnwrap(DomainTimestamp.date(from: "2026-04-15T12:00:00Z"))
+        let goal = makeGoal(
+            id: "goal-visible-rail",
+            stepID: "step-visible-rail",
+            stepTitle: "Draft PM transition notes",
+            dueAt: "2026-04-15T20:00:00Z",
+            domain: .career
+        )
+        try await repositories.goals.saveGoals([goal])
+
+        let rail = try await service.loadTodayExperience(userDisplayName: "", now: now).execution.dayRail
+        let hero = try XCTUnwrap(rail.heroStep)
+
+        XCTAssertEqual(hero.primaryAction.title, "Start now")
+        XCTAssertTrue(f02VisibleRailCopy(rail).contains("Start here"))
+        XCTAssertTrue(f02VisibleRailCopy(rail).contains("Start now"))
+        XCTAssertTrue(f02VisibleRailCopy(rail).contains("Now"))
+        XCTAssertTrue(f02VisibleRailCopy(rail).contains("Next"))
+        XCTAssertTrue(f02VisibleRailCopy(rail).contains("Later"))
+        XCTAssertTrue(f02VisibleRailCopy(rail).contains("No silent changes"))
+    }
+
+    func testF02RealityRailRowsStayDeterministicallyOrdered() async throws {
+        let repositories = try await makeRepositories()
+        let service = RepositoryBackedTodayService(repositories: repositories)
+        let now = try XCTUnwrap(DomainTimestamp.date(from: "2026-04-15T12:00:00Z"))
+        let first = makeGoal(id: "goal-a", stepID: "step-a", stepTitle: "Send the client spreadsheet", dueAt: "2026-04-15T20:00:00Z", domain: .career)
+        let second = makeGoal(id: "goal-b", stepID: "step-b", stepTitle: "Draft PM transition notes", dueAt: "2026-04-16T20:00:00Z", domain: .career)
+        let third = makeGoal(id: "goal-c", stepID: "step-c", stepTitle: "Review the budget note", dueAt: "2026-04-17T20:00:00Z", domain: .finance)
+        try await repositories.goals.saveGoals([third, first, second])
+
+        let rows = try await service.loadTodayExperience(userDisplayName: "", now: now).execution.dayRail.rows
+
+        XCTAssertEqual(rows.map(\.slot), [.now, .next, .later])
+        XCTAssertEqual(rows.map(\.title), [
+            "Send the client spreadsheet",
+            "Draft PM transition notes",
+            "Review the budget note"
+        ])
+    }
+
+    func testF02RealityRailPrivateProjectionDoesNotExposeSensitiveDetails() {
+        let rail = PreviewTodayScenarios.privateRail.execution.dayRail
+        let copy = f02VisibleRailCopy(rail)
+
+        XCTAssertTrue(rail.privacyProjection.isSensitiveProjection)
+        XCTAssertTrue(copy.contains("Private item"))
+        XCTAssertTrue(copy.contains("Details stay private on Today."))
+        XCTAssertFalse(copy.contains("Draft the talk outline"))
+        XCTAssertFalse(copy.contains("Submit my conference talk proposal"))
+        XCTAssertFalse(copy.contains("Record one rough vocal pass"))
+    }
+
+    func testF02RealityRailVisibleCopyAvoidsForbiddenTerms() {
+        let rails = [
+            PreviewTodayScenarios.stable.execution.dayRail,
+            PreviewTodayScenarios.privateRail.execution.dayRail,
+            PreviewTodayScenarios.empty.execution.dayRail
+        ]
+        let forbidden = [
+            "Start Focus",
+            "Focus Session",
+            "best next move",
+            "next best move",
+            "AI confidence",
+            "productivity score",
+            "profile tab",
+            "insights tab",
+            "habits tab",
+            "overdue",
+            "failed",
+            "missed"
+        ]
+
+        for rail in rails {
+            let copy = f02VisibleRailCopy(rail)
+            for term in forbidden {
+                XCTAssertFalse(
+                    copy.localizedCaseInsensitiveContains(term),
+                    "Reality Rail visible copy should not contain forbidden term: \(term)"
+                )
+            }
+        }
+    }
+
+    func testF02RealityRailReservedSlotsDoNotClaimClosureOrProofBehaviorImplemented() {
+        let rail = PreviewTodayScenarios.stable.execution.dayRail
+        let renderedReservationCopy = f02RenderedReservationCopy(rail)
+
+        XCTAssertTrue(rail.closureSlot.reservedForActionClosureSheet)
+        XCTAssertTrue(rail.proofSlot.reservedForReceiptPeek)
+        XCTAssertTrue(renderedReservationCopy.contains("Close the loop stays reserved for F05."))
+        XCTAssertTrue(renderedReservationCopy.contains("Proof and receipts stay reserved for F06."))
+        XCTAssertFalse(renderedReservationCopy.contains("Completed"))
+        XCTAssertFalse(renderedReservationCopy.contains("Proof saved"))
+    }
+
     func testTodayD11ScreenContractSnapshotSatisfiesImplementationGate() async throws {
         let repositories = try await makeRepositories()
         let service = RepositoryBackedTodayService(repositories: repositories)
@@ -395,6 +584,45 @@ final class TodayViewModelTests: XCTestCase {
 }
 
 private extension TodayViewModelTests {
+    func f02VisibleRailCopy(_ rail: AmbitionsDayRailViewState) -> String {
+        var copy = [
+            rail.dateTitle,
+            rail.contextSummary,
+            rail.contextLabels.map(\.label).joined(separator: " "),
+            rail.heroStep == nil ? "Start here Nothing needs you right now." : "Start here",
+            rail.heroStep?.title,
+            rail.heroStep?.subtitle,
+            rail.heroStep?.duration.label,
+            rail.heroStep?.fitLabel,
+            rail.heroStep?.primaryAction.title,
+            "Now",
+            "Next",
+            "Later",
+            rail.rows.map { "\($0.slot.rawValue) \($0.title) \($0.subtitle) \($0.duration.label)" }.joined(separator: " "),
+            f02RenderedReservationCopy(rail)
+        ].compactMap { $0 }
+
+        if rail.privacyProjection.isSensitiveProjection {
+            copy.append(rail.privacyProjection.sourceLabel)
+        }
+
+        return copy.joined(separator: " ")
+    }
+
+    func f02RenderedReservationCopy(_ rail: AmbitionsDayRailViewState) -> String {
+        var parts: [String] = []
+        if rail.closureSlot.reservedForActionClosureSheet {
+            parts.append("Close the loop stays reserved for F05.")
+        }
+        if rail.proofSlot.reservedForReceiptPeek {
+            parts.append("Proof and receipts stay reserved for F06.")
+        }
+        if rail.proofSlot.noSilentChanges {
+            parts.append("No silent changes.")
+        }
+        return parts.joined(separator: " ")
+    }
+
     func makeRepositories() async throws -> AppRepositories {
         let store = try AmbitionsPersistenceStore(inMemory: true)
         return AppRepositories(

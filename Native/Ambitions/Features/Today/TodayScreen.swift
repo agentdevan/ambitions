@@ -39,7 +39,8 @@ struct TodayScreen: View {
                         )
                         .transition(.ambitionPanel)
                     case let .loaded(experience):
-                        TodayExecutionHeroPanel(state: experience.execution, onAction: handleAction)
+                        AmbitionsDayRailView(state: experience.execution.dayRail, onAction: handleAction)
+                            .transition(.ambitionPanel)
 
                         if experience.mode == .empty {
                             DegradedStateCard(
@@ -226,6 +227,22 @@ struct TodayScreen: View {
         TodayScreen(viewModel: TodayViewModel(state: .loaded(PreviewTodayScenarios.noPlan)), autoLoad: false)
     }
     .appContainer(PreviewAppContainerFactory.preview(todayExperience: PreviewTodayScenarios.noPlan))
+    .ambitionTheme(.dark)
+}
+
+#Preview("Today Reality Rail Private") {
+    NavigationStack {
+        TodayScreen(viewModel: TodayViewModel(state: .loaded(PreviewTodayScenarios.privateRail)), autoLoad: false)
+    }
+    .appContainer(PreviewAppContainerFactory.preview(todayExperience: PreviewTodayScenarios.privateRail))
+    .ambitionTheme(.dark)
+}
+
+#Preview("Today Reality Rail Empty") {
+    NavigationStack {
+        TodayScreen(viewModel: TodayViewModel(state: .loaded(PreviewTodayScenarios.unavailableRail)), autoLoad: false)
+    }
+    .appContainer(PreviewAppContainerFactory.preview(todayExperience: PreviewTodayScenarios.unavailableRail))
     .ambitionTheme(.dark)
 }
 #endif

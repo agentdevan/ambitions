@@ -118,6 +118,8 @@ enum PreviewTodayScenarios {
     )
 
     static let empty = noPlan
+    static let privateRail = makePrivateRailScenario(from: stable)
+    static let unavailableRail = noPlan
 
     static func named(_ name: String) -> TodayExperience? {
         switch name.trimmingCharacters(in: .whitespacesAndNewlines).lowercased() {
@@ -137,9 +139,64 @@ enum PreviewTodayScenarios {
             noPlan
         case "empty":
             empty
+        case "private", "sensitive", "private-rail", "private_rail":
+            privateRail
+        case "unavailable", "empty-rail", "empty_rail":
+            unavailableRail
         default:
             nil
         }
+    }
+
+    private static func makePrivateRailScenario(from experience: TodayExperience) -> TodayExperience {
+        let privacy = DayRailPrivacyProjectionState(classification: .privateUserText)
+        let baseRail = experience.execution.dayRail
+        let privateHero = baseRail.heroStep.map { hero in
+            DayRailHeroStepState(
+                id: "\(hero.id).private",
+                title: privacy.visibleTitle(hero.title),
+                subtitle: privacy.visibleSubtitle(hero.subtitle),
+                duration: hero.duration,
+                fitLabel: hero.fitLabel,
+                whySummary: privacy.visibleSubtitle(hero.whySummary),
+                primaryAction: hero.primaryAction,
+                detailTarget: hero.detailTarget,
+                sourceLabels: [DayRailSourceLabelState(id: "source.private", label: privacy.sourceLabel, source: .privateUserText)]
+            )
+        }
+        let privateRows = baseRail.rows.map { row in
+            DayRailRowState(
+                id: "\(row.id).private",
+                slot: row.slot,
+                title: privacy.visibleTitle(row.title),
+                subtitle: privacy.visibleSubtitle(row.subtitle),
+                duration: row.duration,
+                detailTarget: row.detailTarget,
+                sourceLabels: [DayRailSourceLabelState(id: "source.private.\(row.slot.rawValue)", label: privacy.sourceLabel, source: .privateUserText)]
+            )
+        }
+        let privateRail = AmbitionsDayRailViewState(
+            id: "\(baseRail.id).private",
+            mode: baseRail.mode,
+            dateTitle: baseRail.dateTitle,
+            contextSummary: privacy.visibleSubtitle(baseRail.contextSummary),
+            heroStep: privateHero,
+            rows: privateRows,
+            primaryAction: baseRail.primaryAction,
+            rowTapDetailTargetPlaceholder: baseRail.rowTapDetailTargetPlaceholder,
+            durationSource: baseRail.durationSource,
+            contextLabels: [DayRailSourceLabelState(id: "source.private", label: privacy.sourceLabel, source: .privateUserText)],
+            privacyProjection: privacy,
+            closureSlot: baseRail.closureSlot,
+            proofSlot: baseRail.proofSlot
+        )
+
+        return TodayExperience(
+            mode: experience.mode,
+            hero: experience.hero,
+            support: experience.support,
+            execution: experience.execution.replacingDayRail(privateRail)
+        )
     }
 
     private static func makeScenario(

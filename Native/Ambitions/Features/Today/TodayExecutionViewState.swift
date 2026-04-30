@@ -39,6 +39,128 @@ enum TodayQualitativeDayState: String, Equatable {
     case protected = "Kept in view"
 }
 
+enum DayRailMode: String, CaseIterable, Equatable {
+    case normal
+    case recovery
+    case protected
+    case overloaded
+    case empty
+    case noSchedule
+}
+
+enum DayRailRowSlot: String, CaseIterable, Equatable {
+    case now
+    case next
+    case later
+}
+
+enum DayRailDurationSource: String, CaseIterable, Equatable {
+    case userSet
+    case suggested
+    case historicallyBased
+    case acceptedFromPlan
+    case calendarBlock
+    case notSet
+}
+
+enum DayRailDetailTargetKind: String, Equatable {
+    case stepDetailPlaceholder
+    case planContext
+    case captureContext
+    case unavailable
+}
+
+enum DayRailNodeKind: String, Equatable {
+    case recommended
+    case active
+    case upcoming
+    case flexible
+    case closure
+    case proof
+    case protected
+    case waiting
+    case blocked
+    case empty
+}
+
+struct DayRailDurationState: Equatable {
+    let minutes: Int?
+    let source: DayRailDurationSource
+    let label: String
+}
+
+struct DayRailSourceLabelState: Identifiable, Equatable {
+    let id: String
+    let label: String
+    let source: EventLedgerPrivacyClassification
+}
+
+struct DayRailDetailTargetState: Equatable {
+    let kind: DayRailDetailTargetKind
+    let goalID: String?
+    let stepID: String?
+    let draftID: String?
+    let placeholderLabel: String
+}
+
+struct DayRailHeroStepState: Equatable {
+    let id: String
+    let title: String
+    let subtitle: String
+    let duration: DayRailDurationState
+    let fitLabel: String
+    let whySummary: String
+    let primaryAction: TodayInlineAction
+    let detailTarget: DayRailDetailTargetState
+    let sourceLabels: [DayRailSourceLabelState]
+}
+
+struct DayRailRowState: Identifiable, Equatable {
+    let id: String
+    let slot: DayRailRowSlot
+    let title: String
+    let subtitle: String
+    let duration: DayRailDurationState
+    let detailTarget: DayRailDetailTargetState
+    let sourceLabels: [DayRailSourceLabelState]
+}
+
+struct DayRailClosureSlotState: Equatable {
+    let title: String
+    let subtitle: String
+    let reservedForActionClosureSheet: Bool
+}
+
+struct DayRailProofSlotState: Equatable {
+    let title: String
+    let subtitle: String
+    let noSilentChanges: Bool
+    let reservedForReceiptPeek: Bool
+}
+
+struct DayRailPrivacyProjectionState: Equatable {
+    let classification: EventLedgerPrivacyClassification
+    let isSensitiveProjection: Bool
+    let titleReplacement: String?
+    let sourceLabel: String
+}
+
+struct AmbitionsDayRailViewState: Equatable {
+    let id: String
+    let mode: DayRailMode
+    let dateTitle: String
+    let contextSummary: String
+    let heroStep: DayRailHeroStepState?
+    let rows: [DayRailRowState]
+    let primaryAction: TodayInlineAction?
+    let rowTapDetailTargetPlaceholder: DayRailDetailTargetState?
+    let durationSource: DayRailDurationSource
+    let contextLabels: [DayRailSourceLabelState]
+    let privacyProjection: DayRailPrivacyProjectionState
+    let closureSlot: DayRailClosureSlotState
+    let proofSlot: DayRailProofSlotState
+}
+
 struct TodayLensChipState: Identifiable, Equatable {
     let id: String
     let title: String
@@ -154,6 +276,7 @@ struct TodayOneStepGoalsPanelState: Equatable {
 }
 
 struct TodayExecutionViewState: Equatable {
+    let dayRail: AmbitionsDayRailViewState
     let activeLens: TodayLensChipState
     let availableLenses: [TodayLensChipState]
     let lensSummary: String
@@ -340,7 +463,15 @@ struct TodayExecutionViewState: Equatable {
             accessibilityValue: "No standalone task is pulling on Today.",
             accessibilityHint: "Tasks are standalone One-Step Goals. Steps remain inside Goals, Paths, or Plans."
         )
+        let dayRail = AmbitionsDayRailViewState.compatibility(
+            mode: mode,
+            hero: executionHero,
+            todayPlanLayer: todayPlanLayer,
+            closure: closure,
+            sourceLabel: "Based on your plan"
+        )
         return TodayExecutionViewState(
+            dayRail: dayRail,
             activeLens: activeLens,
             availableLenses: [activeLens],
             lensSummary: "Showing all available work.",
@@ -452,6 +583,13 @@ struct TodayExecutionProjector {
         actions.append(contentsOf: deeperActions)
 
         return TodayExecutionViewState(
+            dayRail: dayRailState(
+                input,
+                hero: hero,
+                contract: contract,
+                todayPlan: todayPlan,
+                friction: friction
+            ),
             activeLens: activeLens,
             availableLenses: lenses,
             lensSummary: lensSummary(input.nowState),
@@ -481,13 +619,98 @@ struct TodayExecutionProjector {
     }
 }
 
+extension AmbitionsDayRailViewState {
+    static func compatibility(
+        mode: TodayExperienceMode,
+        hero: TodayExecutionHeroState,
+        todayPlanLayer: TodayPlanLayerState,
+        closure: TodayContractEntryState,
+        sourceLabel: String
+    ) -> AmbitionsDayRailViewState {
+        let privacy = DayRailPrivacyProjectionState(
+            classification: .standard,
+            isSensitiveProjection: false,
+            titleReplacement: nil,
+            sourceLabel: "Stored on this device"
+        )
+        let source = DayRailSourceLabelState(id: "source.plan", label: sourceLabel, source: .standard)
+        let detailTarget = DayRailDetailTargetState.from(hero.primaryAction)
+        let duration = DayRailDurationState.placeholder(for: hero.primaryAction)
+        let heroStep = DayRailHeroStepState(
+            id: "day-rail.hero.\(hero.primaryAction.id)",
+            title: hero.title,
+            subtitle: hero.subtitle,
+            duration: duration,
+            fitLabel: hero.confidenceLabel,
+            whySummary: hero.explanation?.summary ?? hero.subtitle,
+            primaryAction: hero.primaryAction,
+            detailTarget: detailTarget,
+            sourceLabels: [source]
+        )
+        return AmbitionsDayRailViewState(
+            id: "day-rail.compat.\(mode.rawValue)",
+            mode: mode == .empty ? .empty : .normal,
+            dateTitle: "Today",
+            contextSummary: todayPlanLayer.openWindowLabel,
+            heroStep: mode == .empty ? nil : heroStep,
+            rows: DayRailRowState.rows(from: todayPlanLayer.items, fallbackHero: heroStep, privacy: privacy, source: source),
+            primaryAction: mode == .empty ? nil : hero.primaryAction,
+            rowTapDetailTargetPlaceholder: mode == .empty ? nil : detailTarget,
+            durationSource: duration.source,
+            contextLabels: [source],
+            privacyProjection: privacy,
+            closureSlot: DayRailClosureSlotState(
+                title: closure.title,
+                subtitle: closure.subtitle,
+                reservedForActionClosureSheet: true
+            ),
+            proofSlot: DayRailProofSlotState(
+                title: "Proof saved",
+                subtitle: "Receipt peek lands in a later F-series batch.",
+                noSilentChanges: true,
+                reservedForReceiptPeek: true
+            )
+        )
+    }
+}
+
 extension TodayExecutionViewState {
+    func replacingDayRail(_ dayRail: AmbitionsDayRailViewState) -> TodayExecutionViewState {
+        TodayExecutionViewState(
+            dayRail: dayRail,
+            activeLens: activeLens,
+            availableLenses: availableLenses,
+            lensSummary: lensSummary,
+            dayState: dayState,
+            dayStateSummary: dayStateSummary,
+            protectedMustDo: protectedMustDo,
+            bestNextMove: bestNextMove,
+            notToday: notToday,
+            recoveryFallback: recoveryFallback,
+            whyThisMatters: whyThisMatters,
+            actionClosureEntry: actionClosureEntry,
+            saveTheDayAction: saveTheDayAction,
+            frictionSignal: frictionSignal,
+            hero: hero,
+            todayPlanLayer: todayPlanLayer,
+            oneStepGoalsPanel: oneStepGoalsPanel,
+            supportingPanels: supportingPanels,
+            deeperSections: deeperSections,
+            commandMappings: commandMappings,
+            planRequestsCalendarPermission: planRequestsCalendarPermission,
+            emptyGuidance: emptyGuidance
+        )
+    }
+
     func screenContractSnapshot(
         topLevelTabTitles: [String] = ScreenContractValidator.canonicalTopLevelTabs
     ) -> ScreenContractImplementationSnapshot {
         ScreenContractImplementationSnapshot(
             screenID: .today,
             firstScreenContent: [
+                "Reality Rail",
+                "Start here",
+                "Now / Next / Later",
                 "Hero Decision Panel",
                 "Now Layer",
                 "Today Plan Layer",
@@ -502,6 +725,9 @@ extension TodayExecutionViewState {
             copySamples: [
                 hero.title,
                 hero.subtitle,
+                dayRail.dateTitle,
+                dayRail.heroStep?.primaryAction.title ?? "Start now",
+                dayRail.contextSummary,
                 todayPlanLayer.title,
                 todayPlanLayer.subtitle,
                 todayPlanLayer.calendarSourceLabel,
@@ -522,6 +748,97 @@ extension TodayExecutionViewState {
 }
 
 private extension TodayExecutionProjector {
+    func dayRailState(
+        _ input: TodayExecutionProjectionInput,
+        hero: TodayExecutionHeroState,
+        contract: ContractEntries,
+        todayPlan: TodayPlanLayerState,
+        friction: TodayExecutionPanelState
+    ) -> AmbitionsDayRailViewState {
+        let privacy = DayRailPrivacyProjectionState(classification: input.nowState.privacy)
+        let sourceLabels = dayRailSourceLabels(input, source: todayPlan.calendarSourceLabel)
+        let publicSource = sourceLabels.first ?? DayRailSourceLabelState(id: "source.plan", label: "Based on your plan", source: .standard)
+        let heroAction = hero.primaryAction
+        let detailTarget = DayRailDetailTargetState.from(heroAction)
+        let duration = DayRailDurationState.placeholder(for: heroAction)
+        let heroTitle = privacy.visibleTitle(hero.title)
+        let heroSubtitle = privacy.visibleSubtitle(hero.subtitle)
+        let heroStep = input.mode == .empty ? nil : DayRailHeroStepState(
+            id: "day-rail.hero.\(heroAction.id)",
+            title: heroTitle,
+            subtitle: heroSubtitle,
+            duration: duration,
+            fitLabel: fitLabel(for: hero),
+            whySummary: privacy.visibleSubtitle(hero.explanation?.summary ?? contract.why.subtitle),
+            primaryAction: heroAction,
+            detailTarget: detailTarget,
+            sourceLabels: sourceLabels
+        )
+
+        return AmbitionsDayRailViewState(
+            id: "day-rail.\(input.nowState.id)",
+            mode: dayRailMode(input, hero: hero, friction: friction),
+            dateTitle: "Today",
+            contextSummary: privacy.visibleSubtitle("\(lensSummary(input.nowState)) \(todayPlan.openWindowLabel)"),
+            heroStep: heroStep,
+            rows: DayRailRowState.rows(from: todayPlan.items, fallbackHero: heroStep, privacy: privacy, source: publicSource),
+            primaryAction: input.mode == .empty ? nil : heroAction,
+            rowTapDetailTargetPlaceholder: input.mode == .empty ? nil : detailTarget,
+            durationSource: duration.source,
+            contextLabels: sourceLabels,
+            privacyProjection: privacy,
+            closureSlot: DayRailClosureSlotState(
+                title: contract.closure.title,
+                subtitle: contract.closure.subtitle,
+                reservedForActionClosureSheet: true
+            ),
+            proofSlot: DayRailProofSlotState(
+                title: "Proof saved",
+                subtitle: input.nowState.evidenceSummaries.isEmpty
+                    ? "Receipt peek lands in a later F-series batch."
+                    : "\(input.nowState.evidenceSummaries.count) local evidence item\(input.nowState.evidenceSummaries.count == 1 ? "" : "s") counted.",
+                noSilentChanges: true,
+                reservedForReceiptPeek: true
+            )
+        )
+    }
+
+    func dayRailMode(_ input: TodayExecutionProjectionInput, hero: TodayExecutionHeroState, friction: TodayExecutionPanelState) -> DayRailMode {
+        if input.mode == .empty { return .empty }
+        if hero.kind == .recovery { return .recovery }
+        if input.nowState.todayPosture == .noPlan { return .noSchedule }
+        if input.nowState.todayPosture == .overloaded || friction.semanticState == .caution { return .overloaded }
+        if input.nowState.todayPosture == .tight { return .protected }
+        return .normal
+    }
+
+    func dayRailSourceLabels(_ input: TodayExecutionProjectionInput, source: String) -> [DayRailSourceLabelState] {
+        var labels = [
+            DayRailSourceLabelState(id: "source.plan", label: source, source: input.nowState.privacy),
+            DayRailSourceLabelState(id: "source.lens", label: input.nowState.activeContextLens.displayTitle, source: .standard),
+        ]
+        if input.realitySnapshot?.calendarContext?.hasCalendarReadAccess == true {
+            labels.append(DayRailSourceLabelState(id: "source.calendar", label: "Calendar-aware", source: .calendarDerived))
+        }
+        if input.nowState.localOnly {
+            labels.append(DayRailSourceLabelState(id: "source.local", label: "Stored on this device", source: .standard))
+        }
+        return Array(labels.prefix(3))
+    }
+
+    func fitLabel(for hero: TodayExecutionHeroState) -> String {
+        switch hero.semanticState {
+        case .focus, .success:
+            return "Strong fit"
+        case .confidenceMedium, .protected:
+            return "Good fit"
+        case .recovery, .review, .waiting:
+            return "Needs review"
+        default:
+            return "Light fit"
+        }
+    }
+
     func heroState(_ input: TodayExecutionProjectionInput) -> TodayExecutionHeroState {
         let recoveryNeeded = [.needsRecovery, .atRisk, .blocked, .recovering].contains(input.resilienceAssessment.status)
         if input.mode == .empty {
@@ -1223,6 +1540,127 @@ private extension TodayExecutionProjector {
         case .elevated, .high, .critical:
             "Plan needs attention"
         }
+    }
+}
+
+private extension DayRailDurationState {
+    static func placeholder(for action: TodayInlineAction) -> DayRailDurationState {
+        switch action.kind {
+        case .startFocus:
+            return DayRailDurationState(minutes: 25, source: .suggested, label: "25 min suggested")
+        case .complete:
+            return DayRailDurationState(minutes: nil, source: .notSet, label: "Duration not set")
+        case .openPlan, .protectLater:
+            return DayRailDurationState(minutes: nil, source: .acceptedFromPlan, label: "Accepted from plan")
+        default:
+            return DayRailDurationState(minutes: nil, source: .notSet, label: "Duration not set")
+        }
+    }
+}
+
+private extension DayRailDetailTargetState {
+    static func from(_ action: TodayInlineAction?) -> DayRailDetailTargetState {
+        guard let action else {
+            return DayRailDetailTargetState(
+                kind: .unavailable,
+                goalID: nil,
+                stepID: nil,
+                draftID: nil,
+                placeholderLabel: "Detail opens in a later F-series batch."
+            )
+        }
+        let kind: DayRailDetailTargetKind
+        switch action.kind {
+        case .quickLog:
+            kind = .captureContext
+        case .openPlan, .protectLater:
+            kind = .planContext
+        default:
+            kind = action.target.goalID != nil || action.target.stepID != nil || action.target.draftID != nil
+                ? .stepDetailPlaceholder
+                : .unavailable
+        }
+        return DayRailDetailTargetState(
+            kind: kind,
+            goalID: action.target.goalID,
+            stepID: action.target.stepID,
+            draftID: action.target.draftID,
+            placeholderLabel: kind == .stepDetailPlaceholder
+                ? "Step Detail opens in F03."
+                : "Context route stays in the existing Today flow."
+        )
+    }
+}
+
+extension DayRailPrivacyProjectionState {
+    init(classification: EventLedgerPrivacyClassification) {
+        switch classification {
+        case .sensitive, .privateUserText:
+            self.init(
+                classification: classification,
+                isSensitiveProjection: true,
+                titleReplacement: "Private item",
+                sourceLabel: "Private source"
+            )
+        case .calendarDerived:
+            self.init(
+                classification: classification,
+                isSensitiveProjection: false,
+                titleReplacement: nil,
+                sourceLabel: "Calendar-derived"
+            )
+        case .standard, .syncMetadata:
+            self.init(
+                classification: classification,
+                isSensitiveProjection: false,
+                titleReplacement: nil,
+                sourceLabel: "Stored on this device"
+            )
+        }
+    }
+
+    func visibleTitle(_ title: String) -> String {
+        titleReplacement ?? title
+    }
+
+    func visibleSubtitle(_ subtitle: String) -> String {
+        isSensitiveProjection ? "Details stay private on Today." : subtitle.todayShortSentence
+    }
+}
+
+private extension DayRailRowState {
+    static func rows(
+        from items: [TodayPlanLayerItemState],
+        fallbackHero: DayRailHeroStepState?,
+        privacy: DayRailPrivacyProjectionState,
+        source: DayRailSourceLabelState
+    ) -> [DayRailRowState] {
+        let slots: [DayRailRowSlot] = [.now, .next, .later]
+        let mapped = zip(slots, items.prefix(3)).map { slot, item in
+            DayRailRowState(
+                id: "day-rail.row.\(slot.rawValue).\(item.id)",
+                slot: slot,
+                title: privacy.visibleTitle(item.title),
+                subtitle: privacy.visibleSubtitle(item.subtitle),
+                duration: DayRailDurationState.placeholder(for: item.action ?? fallbackHero?.primaryAction ?? TodayInlineAction(kind: .openPlan, title: "Open Plan", systemImage: "calendar", state: .default, target: TodayActionTarget())),
+                detailTarget: DayRailDetailTargetState.from(item.action ?? fallbackHero?.primaryAction),
+                sourceLabels: [source]
+            )
+        }
+        if mapped.isEmpty, let fallbackHero {
+            return [
+                DayRailRowState(
+                    id: "day-rail.row.now.\(fallbackHero.id)",
+                    slot: .now,
+                    title: fallbackHero.title,
+                    subtitle: fallbackHero.subtitle,
+                    duration: fallbackHero.duration,
+                    detailTarget: fallbackHero.detailTarget,
+                    sourceLabels: fallbackHero.sourceLabels
+                )
+            ]
+        }
+        return Array(mapped)
     }
 }
 

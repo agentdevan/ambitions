@@ -1,22 +1,26 @@
 # Current Run State
 
-- current task: F00 - Ambitions 3.0 Current Implementation Gap Audit
-- task size: L
-- active mode: audit/docs-only
-- active primitive: cross-primitive implementation traceability
-- active surface: docs/canon implementation gap audit and Codex tracking docs
-- active context pack: Active Canon Pack, UI Test Contract Pack, Repo Hygiene Pack, Copy Guard Pack, Local CI Parity Pack for evidence only
-- active skill: repo-truth-enforcer, faang-handoff-auditor, legacy-language-sweeper, release-readiness-gate-runner
-- active operation: source-truth reconciliation, task-width gate, current run-state protocol, release-claim truth protocol
-- active validation pack: docs QA, local dev tooling, local build, local tests for evidence only
-- docs read: required Ambitions 3.0 source truth read order, active Codex operating docs, active canon docs, F-series plan, release/evidence gates, handoff gate, and available audit reports
-- files allowed: docs/canon/Ambitions_3_0_Current_Implementation_Gap_Audit.md, docs/codex/BATCH_REGISTRY.md, docs/codex/CONTEXT_INDEX.md, docs/audits/ambitions-3-0-f00-current-implementation-gap-audit-report.md, .codex/reports/current-run-state.md
-- files forbidden: Native/Ambitions/**, Native/AmbitionsTests/**, Native/AmbitionsUITests/**, Sources/**, AppUI/**, project.yml, .github/workflows/**, runtime dependency manifests
-- files touched: .codex/reports/current-run-state.md; docs/canon/Ambitions_3_0_Current_Implementation_Gap_Audit.md; docs/codex/BATCH_REGISTRY.md; docs/codex/CONTEXT_INDEX.md; docs/audits/ambitions-3-0-f00-current-implementation-gap-audit-report.md
-- decisions made: classify as L audit/docs-only; app feature implementation, UI test fixes, identifier renames, workflow changes, and dependency changes are prohibited; F01 Reality Rail / Day Rail foundation is the next implementation batch from F00 evidence
-- tests run: git status/branch/head/log; scripts/validate-dev-tools.sh; scripts/run-doc-qa.sh; scripts/build-local.sh; scripts/test-local.sh; legacy language scan; internal identifier scan
-- failures: doc QA remains PARTIAL/advisory with 8,980 markdownlint findings and 5 older local-link failures; full UI smoke remains PARTIAL with 9 failures; legacy language scan found 858 hits; internal identifier scan found 3,443 hits
-- open risks: full UI smoke suite fails; legacy language/internal identifier debt remains; Reality Rail/Day Rail, Step Detail, Step Session, Action Closure, receipt/review, Capture placement, Plan Life Suite, Goal Mission Control, You trust, external-surface, accessibility, and UI test modernization work remain pending; FAANG handoff remains PARTIAL
-- next phase: F01 Reality Rail / Day Rail foundation
-- stop conditions: any required source-truth conflict that cannot be resolved from repo files; any next step requiring feature implementation, CI change, dependency addition, or readiness claim beyond evidence
-- last checkpoint: 2026-04-30 F00 audit closeout
+- current task: F02 - Reality Rail visual states and copy guard
+- task size: M
+- active mode: implementation
+- active primitive: Reality Rail
+- active surface: Today
+- active context pack: .codex/context-packs/today-reality-rail-context.md
+- active skill: repo-truth-enforcer for tracking truth, swiftui-ui-patterns for native SwiftUI composition, ios-qa-regression-checker for validation closeout; requested Reality Rail Builder, Day Rail Regression Tester, SwiftUI Surface Builder, Product Language Reviewer, Accessibility Label Writer, and Copy Guard Runner skills were not exposed as callable session skills
+- active operation: render F01 Day Rail / Reality Rail state foundation into Today UI only
+- active validation pack: base-build-test-pack, copy-guard-pack, accessibility-pack, swiftui-preview-pack, ui-test-contract-pack for classification only
+- docs read: README.md; docs/README.md; AGENTS.md; Ambitions 3.0 source truth docs; Today/Reality Rail target docs; Codex run-state/task-width docs; BATCH_REGISTRY.md; CONTEXT_INDEX.md; Today Reality Rail context pack
+- files allowed: Native/Ambitions/Features/Today/**, Native/Ambitions/PreviewSupport/**, Native/AmbitionsTests/Today/**, docs/codex/BATCH_REGISTRY.md, docs/codex/CONTEXT_INDEX.md, docs/audits/ambitions-3-0-f02-reality-rail-visual-states-report.md, .codex/reports/current-run-state.md, docs/canon/Ambitions_3_0_Current_Implementation_Gap_Audit.md only if tracking truth requires it
+- files forbidden: Plan, Capture, Goals, You/Profile, shell architecture, widgets, Live Activities, App Intents, .github/workflows/**, dependency manifests, runtime dependency additions, Step Detail, Step Session, Action Closure Sheet, Proof / Receipt Ledger
+- files touched: .codex/reports/current-run-state.md; Native/Ambitions/Features/Today/TodayExecutionViewState.swift; Native/Ambitions/Features/Today/TodayPanels.swift; Native/Ambitions/Features/Today/TodayScreen.swift; Native/Ambitions/PreviewSupport/PreviewTodayScenarios.swift; Native/AmbitionsTests/Today/TodayViewModelTests.swift; docs/codex/BATCH_REGISTRY.md; docs/codex/CONTEXT_INDEX.md; docs/audits/ambitions-3-0-f02-reality-rail-visual-states-report.md
+- implemented UI components: focused Today Reality Rail component with Start here hero, Start now action, Now/Next/Later sections, privacy-safe rows, empty/unavailable state, and reserved non-complete closure/proof copy
+- tests added: focused Today rail projection assertions for Start here/Start now copy, row ordering, sensitive projection redaction, forbidden copy absence, and closure/proof reservation not claiming implemented behavior
+- validation commands: scripts/validate-dev-tools.sh || true; scripts/run-doc-qa.sh || true; scripts/build-local.sh; focused Today xcodebuild tests; touched-path copy scan; git diff --check
+- task classification: Type Today UI implementation; Primitive Reality Rail; Surface Today; app code changes allowed only in Today UI/model/test/preview seams; workflow changes prohibited; dependency changes prohibited; release readiness claims prohibited
+- decisions made: preserve existing F01 uncommitted foundation edits; implement only Today rail rendering and deterministic tests; no Step Detail, Step Session, Action Closure, proof/receipt, global identifier migration, shell, workflow, or dependency work; do not claim FAANG handoff readiness
+- tests run: preflight git status/branch/head/log; scripts/validate-dev-tools.sh || true; scripts/run-doc-qa.sh || true; scripts/build-local.sh; xcodebuild TodayViewModelTests; xcodebuild TodayFreshGoalVisibilityTests; xcodebuild TodayShellIntegrationTests; touched-path copy guard; git diff --check
+- failures: first parallel focused-test attempt produced Xcode build database lock for two lanes; reran focused lanes serially and they passed. docs QA remains PARTIAL/advisory with pre-existing markdown/deprecated-language/link backlog. known full UI smoke failures remain pre-existing and out of scope.
+- open risks: full UI smoke remains known failing; FAANG handoff remains PARTIAL; older legacy language/internal identifier debt remains; F03-F06 behavior is intentionally deferred; no manual VoiceOver/Dynamic Type/device proof was claimed
+- next phase: F03 Step Detail and recommendation explanation
+- stop conditions: source truth conflict that cannot be resolved from Ambitions 3.0 docs; compile issue requiring forbidden surface edits; dependency/workflow change required; pressure to claim release or FAANG handoff readiness
+- last checkpoint: 2026-04-30 F02 validation closeout
