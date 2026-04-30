@@ -469,7 +469,7 @@ Milestone A starts here. Goal: prove the daily operating loop without starting b
 
 ### Batch 73 - Today 2.0 / Daily Operating Contract v1
 
-- Purpose / promise: Transform Today into the user's current agreement with reality: one protected must-do, one best next move, one intentionally-not-today item, one recovery fallback, one reason this matters, and one Action Closure entry path.
+- Purpose / promise: Transform Today into the user's current agreement with reality: one protected must-do, one recommended step, one intentionally-not-today item, one recovery fallback, one reason this matters, and one Action Closure entry path.
 - Maturity gate advanced: Gate 2 for Daily Operating Contract, One Move Doctrine, Save the Day entry, Attention Shield, Anti-Plan / Not Today, and Ambient Status Orb candidate.
 - Sources consumed: Canonical Now State, Command Pipeline, Goal Believability, Execution Resilience, Recommendation Explanation, Rich Panel Visual System.
 - Receipt/explanation: why-this-now explanation and Action Closure entry point; no broad receipt system ownership.

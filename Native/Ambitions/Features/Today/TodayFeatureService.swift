@@ -820,7 +820,7 @@ private extension RepositoryBackedTodayService {
             actions.insert(
                 TodayInlineAction(
                     kind: .startFocus,
-                    title: "Start focus",
+                    title: "Start now",
                     systemImage: "scope",
                     state: .selected,
                     target: firstFocusAction.target
@@ -832,7 +832,7 @@ private extension RepositoryBackedTodayService {
             actions.insert(
                 TodayInlineAction(
                     kind: .protectLater,
-                    title: "Move later",
+                    title: "Adjust plan",
                     systemImage: "calendar.badge.clock",
                     state: .selected,
                     target: TodayActionTarget()
@@ -852,19 +852,19 @@ private extension RepositoryBackedTodayService {
     func primarySubtitle(for posture: TodayDayPosture, action: TodayInlineAction) -> String {
         switch posture {
         case .stable:
-            return "One clear move matters more than another stack of cards."
+            return "One clear step matters more than another stack of cards."
         case .tight:
-            return action.kind == .protectLater ? "Move this into Plan before pressure turns noisy." : "Keep the day doable without widening scope."
+            return action.kind == .protectLater ? "Adjust this in Plan before pressure turns noisy." : "Keep the day doable without widening scope."
         case .drifted:
-            return "Use the calmest next move to get traction back."
+            return "Use the calmest next step to get traction back."
         case .overloaded:
             return "Reduce pressure before adding more intent."
         case .recovering:
             return "Come back through one safer lane, not a full reset."
         case .lowData:
-            return "Clarify the next move before pretending certainty."
+            return "Clarify the next step before pretending certainty."
         case .noPlan:
-            return "Start with one bounded move and let the shell own the bigger reshaping."
+            return "Start with one bounded step and let the shell own the bigger reshaping."
         }
     }
 
@@ -879,11 +879,11 @@ private extension RepositoryBackedTodayService {
         case .overloaded:
             return "Lighten the day before it hardens"
         case .recovering:
-            return "Recover through one believable move"
+            return "Recover through one believable step"
         case .lowData:
-            return "Clarify the next move first"
+            return "Clarify the next step first"
         case .noPlan:
-            return "Build today from one real move"
+            return "Build today from one real step"
         }
     }
 
@@ -914,14 +914,14 @@ private extension RepositoryBackedTodayService {
             return TodayReentryState(
                 eyebrow: "Re-entry",
                 title: "Recovery landed in Today",
-                detail: "This pass is centered on the calmest next move, not the whole backlog.",
+                detail: "This pass is centered on the calmest next step, not the whole backlog.",
                 state: .selected
             )
         case .focus:
             return TodayReentryState(
                 eyebrow: "Re-entry",
                 title: "Focus landed in Today",
-                detail: "The hero is holding the clearest next move at the top of the screen.",
+                detail: "The hero is holding the clearest next step at the top of the screen.",
                 state: .success
             )
         }
@@ -972,7 +972,7 @@ private extension RepositoryBackedTodayService {
         } else {
             bestUseTitle = "Keep the day quiet"
             bestUseDetail = posture == .overloaded || posture == .drifted || posture == .recovering
-                ? "The best use of the remaining day may be protecting one believable block instead of forcing more movement."
+                ? "The best use of the remaining day may be protecting one believable block instead of forcing more work."
                 : "Unused room is allowed to stay unused when nothing cleanly fits."
         }
 
@@ -1009,7 +1009,7 @@ private extension RepositoryBackedTodayService {
             return TodayDayPressureState(
                 title: "The day still has breathing room",
                 detail: flexibleCount > 0
-                    ? "There is space for one deliberate move and one flexible option if the first block lands."
+                    ? "There is space for one deliberate step and one flexible option if the first block lands."
                     : "The visible work can stay singular without squeezing more into the day.",
                 label: "Strong fit",
                 state: .success
@@ -1024,7 +1024,7 @@ private extension RepositoryBackedTodayService {
         case .drifted:
             return TodayDayPressureState(
                 title: "The day drifted off its first plan",
-                detail: "Pressure is less about time volume and more about getting back to one believable move.",
+                detail: "Pressure is less about time volume and more about getting back to one believable step.",
                 label: "Needs recovery",
                 state: .warning
             )
@@ -1045,7 +1045,7 @@ private extension RepositoryBackedTodayService {
         case .lowData:
             return TodayDayPressureState(
                 title: "Time shape is present, but certainty is not",
-                detail: "The day can still hold one small move, but clarification matters before stronger timing claims.",
+                detail: "The day can still hold one small step, but clarification matters before stronger timing claims.",
                 label: "Needs confirmation",
                 state: .warning
             )
@@ -1053,7 +1053,7 @@ private extension RepositoryBackedTodayService {
             return TodayDayPressureState(
                 title: "Today has open room",
                 detail: fixedCount == 0
-                    ? "Nothing is forcing the day yet, so the first move should stay small and real."
+                    ? "Nothing is forcing the day yet, so the first step should stay small and real."
                     : "One small commitment is enough to make the day useful.",
                 label: "Open",
                 state: .default
@@ -1071,8 +1071,8 @@ private extension RepositoryBackedTodayService {
         let calendar = Calendar.current
         let hour = calendar.component(.hour, from: now)
         let laneTitles: [(String, String)] = [
-            ("Next 45 minutes", hour < 17 ? "A near-term block is still available if the next move stays bounded." : "A short closing block is still available if it stays gentle."),
-            ("Later today", "There is still room for one follow-on move if the first block resolves cleanly."),
+            ("Next 45 minutes", hour < 17 ? "A near-term block is still available if the next step stays bounded." : "A short closing block is still available if it stays gentle."),
+            ("Later today", "There is still room for one follow-on step if the first block resolves cleanly."),
             ("Protect the evening", "If attention is thinning, preserve one calmer block instead of adding more switching.")
         ]
 
@@ -1089,7 +1089,7 @@ private extension RepositoryBackedTodayService {
                     : lane.1
             } else {
                 title = lane.0
-                subtitle = "No additional move needs to be forced into this window."
+                subtitle = "No additional step needs to be forced into this window."
             }
             windows.append(
                 TodayOpenWindowState(
@@ -1116,7 +1116,7 @@ private extension RepositoryBackedTodayService {
         case 1:
             return "Later today"
         default:
-            return "Move later"
+            return "Adjust plan"
         }
     }
 
@@ -1142,15 +1142,15 @@ private extension RepositoryBackedTodayService {
             explanation = "Recovery here is small on purpose. The app is reducing pressure before the day turns into catch-up theater."
         case .drifted:
             title = "Recovery Bloom"
-            subtitle = "The day can still recover through one believable move."
+            subtitle = "The day can still recover through one believable step."
             explanation = "The safer path is shown first, and the prior plan stays visible only as background context."
         case .overloaded:
             title = "Lighten today"
             subtitle = "The day needs fewer simultaneous asks before effort goes up."
-            explanation = "This is not a failure state. The system is narrowing the day so the next move feels real again."
+            explanation = "This is not a failure state. The system is narrowing the day so the next step feels real again."
         case .recovering:
             title = "Stay in the recovery lane"
-            subtitle = "Use one gentle move to stabilize the rest of the day."
+            subtitle = "Use one gentle step to stabilize the rest of the day."
             explanation = "The bloom keeps the next step singular so recovery feels relieving instead of corrective."
         case .stable, .lowData, .noPlan:
             return nil
@@ -1187,10 +1187,10 @@ private extension RepositoryBackedTodayService {
             )
         }
 
-        append(actions.first(where: { $0.kind == .split }), title: "Smaller version", detail: "Shrink the next move until it feels safe to start.", state: .selected)
-        append(actions.first(where: { $0.kind == .complete || $0.kind == .startFocus }), title: "Safest next move", detail: "If the current step is still doable, stay with the calmest useful action.", state: .success)
-        append(actions.first(where: { $0.kind == .reschedule || $0.kind == .defer }), title: "Reschedule gently", detail: "Move the work without turning the day into a failure narrative.", state: .default)
-        append(actions.first(where: { $0.kind == .protectLater }), title: "Move later", detail: "Move one cleaner block into Plan instead of squeezing it here.", state: .default)
+        append(actions.first(where: { $0.kind == .split }), title: "Smaller version", detail: "Shrink the next step until it feels safe to start.", state: .selected)
+        append(actions.first(where: { $0.kind == .complete || $0.kind == .startFocus }), title: "Safest step", detail: "If the current step is still doable, stay with the calmest useful action.", state: .success)
+        append(actions.first(where: { $0.kind == .reschedule || $0.kind == .defer }), title: "Reschedule gently", detail: "Reschedule the work without turning the day into a failure narrative.", state: .default)
+        append(actions.first(where: { $0.kind == .protectLater }), title: "Adjust plan", detail: "Put one cleaner block in Plan instead of squeezing it here.", state: .default)
         append(
             TodayInlineAction(
                 kind: .openPlan,
@@ -1242,7 +1242,7 @@ private extension RepositoryBackedTodayService {
         }
 
         let detail = posture == .stable
-            ? "Focus is narrowed to one move so the rest of Today can stay quiet."
+            ? "Focus is narrowed to one step so the rest of Today can stay quiet."
             : "Focus is being used as a calmer lane back into the day."
 
         return TodayFocusScreenletState(
@@ -1421,7 +1421,7 @@ private extension RepositoryBackedTodayService {
               let selectedStep = goal.plan?.sections.flatMap(\.steps).first(where: { $0.id == stepID }) else {
             return TodayActionResponse(
                 message: TodayInlineMessage(
-                    title: "Step moved",
+                    title: "Rescheduled",
                     body: "That step is no longer available in the current native store snapshot.",
                     state: .warning
                 )
@@ -1609,7 +1609,7 @@ private extension RepositoryBackedTodayService {
                 return " The next attempt was deferred to prevent churn."
             }()
             message = TodayInlineMessage(
-                title: "Moved out of today",
+                title: "Rescheduled",
                 body: "The step was skipped without turning it into a failure state.\(deferLine)",
                 state: .warning
             )
@@ -1806,7 +1806,7 @@ private extension RepositoryBackedTodayService {
                 try await repositories.goals.saveGoals([goal])
             }
             message = TodayInlineMessage(
-                title: "A calmer next move is ready",
+                title: "A calmer next step is ready",
                 body: decision?.recoverySummary ?? decision?.smallerStep?.summary ?? selectedStep.actionability.fallbackMicroStep,
                 state: .selected
             )
@@ -1841,7 +1841,7 @@ private extension RepositoryBackedTodayService {
             }
                 ?? adjustment?.explanationHook?.explanation
                 ?? draft.map { createWhyThisMattersExplanation(draft: $0.draft, step: selectedStep).explanation }
-                ?? "\(selectedStep.title) matters because it moves \(goal.title.lowercased()) forward with visible evidence."
+                ?? "\(selectedStep.title) matters because it carries \(goal.title.lowercased()) forward with visible evidence."
             message = TodayInlineMessage(
                 title: "Why this matters",
                 body: explanation,
@@ -1934,7 +1934,7 @@ private extension RepositoryBackedTodayService {
 
         var pills = [
             TodayPillState(id: "goals", title: "\(activeGoals.count) active goals", icon: "scope", state: .selected),
-            TodayPillState(id: "steps", title: "\(actionableCount) live moves", icon: "bolt.fill", state: .default)
+            TodayPillState(id: "steps", title: "\(actionableCount) live steps", icon: "bolt.fill", state: .default)
         ]
         if clarificationCount > 0 {
             pills.append(TodayPillState(id: "clarify", title: "\(clarificationCount) question\(clarificationCount == 1 ? "" : "s")", icon: "questionmark.circle", state: .warning))
@@ -2004,7 +2004,7 @@ private extension RepositoryBackedTodayService {
         return TodayDailyTargetsState(
             title: mode == .empty ? "No live targets yet" : "Daily targets",
             subtitle: mode == .empty
-                ? "Once a goal exists, Today will surface only the few moves worth acting on."
+                ? "Once a goal exists, Today will surface only the few steps worth acting on."
                 : "This is the smallest useful set of live work from the native planner and repository layers.",
             completionLabel: completionLabel,
             items: items,
@@ -2053,7 +2053,7 @@ private extension RepositoryBackedTodayService {
             return .blocked(
                 TodayFocusBlockedState(
                     title: draft.draft.title,
-                    subtitle: "There is a blocker, but Today still offers the next best move instead of a dead end.",
+                    subtitle: "There is a blocker, but Today still offers a recommended step instead of a dead end.",
                     blockerSummary: draft.blockers.first?.reason ?? "Planning is blocked until one missing piece is clarified.",
                     nextBestAction: draft.blockers.first?.suggestedQuestion ?? draft.clarification?.questions.first?.prompt ?? "Open the draft and answer the smallest missing question.",
                     actions: [
@@ -2074,7 +2074,7 @@ private extension RepositoryBackedTodayService {
             return .empty(
                 TodayEmptyPanelState(
                     title: "Nothing needs a push",
-                    message: "Today stays calm when there is no clear next move. Untimed work can wait until it actually fits.",
+                    message: "Today stays calm when there is no clear next step. Untimed work can wait until it actually fits.",
                     actions: []
                 )
             )
@@ -2098,7 +2098,7 @@ private extension RepositoryBackedTodayService {
                         TodayInlineAction(kind: .complete, title: "Complete", systemImage: "checkmark", state: .success, target: target),
                         TodayInlineAction(kind: .split, title: "Split", systemImage: "scissors", state: .selected, target: target),
                         TodayInlineAction(kind: .defer, title: "Defer", systemImage: "clock.arrow.circlepath", state: .default, target: target),
-                        TodayInlineAction(kind: .protectLater, title: "Move later", systemImage: "calendar.badge.clock", state: .default, target: target),
+                        TodayInlineAction(kind: .protectLater, title: "Adjust plan", systemImage: "calendar.badge.clock", state: .default, target: target),
                         TodayInlineAction(kind: .askWhyThisMatters, title: "Why this matters", systemImage: "questionmark.circle", state: .default, target: target),
                         TodayInlineAction(kind: .openDetail, title: "Open detail", systemImage: "arrow.right.circle", state: .default, target: target)
                     ],
@@ -2121,7 +2121,7 @@ private extension RepositoryBackedTodayService {
                     TodayInlineAction(kind: .defer, title: "Defer", systemImage: "clock.arrow.circlepath", state: .default, target: target),
                     TodayInlineAction(kind: .reschedule, title: "Reschedule", systemImage: "forward.fill", state: .warning, target: target),
                     TodayInlineAction(kind: .split, title: "Split", systemImage: "scissors", state: .selected, target: target),
-                    TodayInlineAction(kind: .protectLater, title: "Move later", systemImage: "calendar.badge.clock", state: .default, target: target),
+                    TodayInlineAction(kind: .protectLater, title: "Adjust plan", systemImage: "calendar.badge.clock", state: .default, target: target),
                     TodayInlineAction(kind: .askWhyThisMatters, title: "Why this matters", systemImage: "questionmark.circle", state: .default, target: target),
                     TodayInlineAction(kind: .openDetail, title: "Open detail", systemImage: "arrow.right.circle", state: .default, target: target)
                 ],
@@ -2163,7 +2163,7 @@ private extension RepositoryBackedTodayService {
             title: opportunities.isEmpty ? "Free time can stay open" : "Free time opportunities",
             subtitle: opportunities.isEmpty
                 ? "Nothing here is pretending a flexible goal is late."
-                : "These are valid moves when the day opens up, especially for untimed, delegated, or exploratory work.",
+                : "These are valid steps when the day opens up, especially for untimed, delegated, or exploratory work.",
             opportunities: Array(opportunities.prefix(3))
         )
     }
@@ -2264,7 +2264,7 @@ private extension RepositoryBackedTodayService {
         let target = TodayActionTarget(goalID: goal?.id, stepID: step?.id)
         return TodayQuickCaptureState(
             title: "Quick capture",
-            subtitle: "Ask for help when the next move is still too large or too vague.",
+            subtitle: "Ask for help when the next step is still too large or too vague.",
             prompt: "Use quick log when progress happened without a clean completion event.",
             helpText: "If the active step feels heavy, ask for a smaller step before the day turns into avoidance.",
             actions: [
@@ -2386,12 +2386,12 @@ private extension RepositoryBackedTodayService {
 
     func focusReason(for goal: Goal, step: Step) -> String {
         if goal.mode == .delegatedSupport {
-            return "This move supports \(goal.actor.displayName) without turning the relationship into compliance work."
+            return "This step supports \(goal.actor.displayName) without turning the relationship into compliance work."
         }
         if HabitGoalSemantics.isHabitLike(goal: goal, step: step) {
             return "Consistency matters more than intensity here. A smaller clean repetition is better than a loud miss."
         }
-        return step.summary ?? goal.summary ?? "This is the cleanest next move from the current native plan."
+        return step.summary ?? goal.summary ?? "This is the cleanest next step from the current native plan."
     }
 
     func energyLabel(for mode: GoalMode) -> String {
@@ -2424,7 +2424,7 @@ private extension RepositoryBackedTodayService {
     func opportunitySubtitle(for goal: Goal) -> String {
         switch goal.mode {
         case .delegatedSupport:
-            return "A non-punitive support move"
+            return "A non-punitive support step"
         case .learning:
             return "A good flexible learning session"
         case .exploration:
@@ -2490,7 +2490,7 @@ private extension RepositoryBackedTodayService {
     func note(for kind: TodayActionKind, step: Step) -> String {
         switch kind {
         case .startFocus:
-            return "Started focus from Today."
+            return "Started step from Today."
         case .complete:
             return "Completed from Today."
         case .defer:
@@ -2502,7 +2502,7 @@ private extension RepositoryBackedTodayService {
         case .askWhyThisMatters:
             return "Asked why this matters from Today."
         case .protectLater:
-            return "Moved later from Today."
+            return "Rescheduled from Today."
         case .quickLog:
             return "Quick log from Today."
         case .createReminder:

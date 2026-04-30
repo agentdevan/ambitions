@@ -202,7 +202,7 @@ final class TodayFreshGoalVisibilityTests: XCTestCase {
             return XCTFail("Expected the second activation to reflect the updated active scenario.")
         }
         XCTAssertEqual(refreshedExperience.hero.truth.posture, .recovering)
-        XCTAssertEqual(refreshedExperience.hero.truth.nowTitle, "Split the next move")
+        XCTAssertEqual(refreshedExperience.hero.truth.nowTitle, "Split the next step")
         XCTAssertNotNil(refreshedExperience.support.recoveryBloom)
     }
 }

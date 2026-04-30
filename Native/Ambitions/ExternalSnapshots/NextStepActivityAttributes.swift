@@ -73,7 +73,7 @@ struct NextStepActivityAttributes: ActivityAttributes {
                 goalID: reference.goalID,
                 stepID: stepID,
                 title: glance.ambientState?.focus.title ?? "Focus step ready",
-                detail: glance.ambientState?.focus.detail ?? "Return to the bounded next move.",
+                detail: glance.ambientState?.focus.detail ?? "Return to the bounded next step.",
                 leaseLabel: glance.continuity.lease.freshnessLabel,
                 syncLabel: glance.continuity.syncHealth.label,
                 urgency: glance.urgency,
@@ -113,7 +113,7 @@ struct NextStepActivityAttributes: ActivityAttributes {
             goalID = try container.decode(String.self, forKey: .goalID)
             stepID = try container.decode(String.self, forKey: .stepID)
             title = try container.decodeIfPresent(String.self, forKey: .title) ?? "Focus step ready"
-            detail = try container.decodeIfPresent(String.self, forKey: .detail) ?? "Return to the bounded next move."
+            detail = try container.decodeIfPresent(String.self, forKey: .detail) ?? "Return to the bounded next step."
             leaseLabel = try container.decodeIfPresent(String.self, forKey: .leaseLabel) ?? "Updated recently"
             syncLabel = try container.decodeIfPresent(String.self, forKey: .syncLabel) ?? "Local-first and stable"
             urgency = try container.decode(ExternalSurfaceUrgency.self, forKey: .urgency)

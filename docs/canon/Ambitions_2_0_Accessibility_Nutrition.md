@@ -264,7 +264,7 @@ It must not show:
 
 ## Error Recovery Requirements
 
-- Failed, empty, denied-permission, degraded, and offline/local-only states need a clear next step.
+- Error, empty, denied-permission, degraded, and offline/local-only states need a clear next step.
 - Recovery states must preserve user agency and avoid blame.
 - Destructive or irreversible actions require explicit separation and confirmation where appropriate.
 - Calendar, sync/export, recommendation, and memory limitations must degrade truthfully.
@@ -272,7 +272,7 @@ It must not show:
 ## ADHD-Supportive UX Requirements
 
 - Reduce decision load before adding detail.
-- Prefer one best next move, with secondary actions clearly subordinate.
+- Prefer one recommended step, with secondary actions clearly subordinate.
 - Do not use streak pressure, guilt, or shame for missed work.
 - Provide smaller-step, later, stuck, and recovery paths where the owning batch supports them.
 - Keep labels concrete and adult, not cute or punitive.

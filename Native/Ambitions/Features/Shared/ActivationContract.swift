@@ -62,12 +62,12 @@ struct ActivationTrustMessage: Sendable, Equatable {
 }
 
 enum ActivationContract {
-    static let firstTenMinutesPromise = "Start with one real thing. Ambitions will turn it into one doable next move, show why it matters, give you a safe fallback, and stay honest about what is local."
+    static let firstTenMinutesPromise = "Start with one real thing. Ambitions will turn it into one doable next step, show why it matters, give you a safe fallback, and stay honest about what is local."
 
     static let orientationTitle = "Start with one real thing"
     static let orientationSubtitle = "Ambitions becomes useful from one meaningful goal, one messy capture, or one calm return to Today. You do not need to set up your whole life first."
 
-    static let startTitle = "Choose the first useful move"
+    static let startTitle = "Choose the first useful step"
     static let startSubtitle = "Create one specific goal or capture one loose thought. Either path keeps setup short and manual."
 
     static let trustMessage = ActivationTrustMessage(
@@ -82,7 +82,7 @@ enum ActivationContract {
     )
 
     static let onboardingSurfaceRows: [ActivationCopyRow] = [
-        ActivationCopyRow(title: "Today", detail: "Choose one doable next move.", icon: AppTab.today.systemImage),
+        ActivationCopyRow(title: "Today", detail: "Choose one doable next step.", icon: AppTab.today.systemImage),
         ActivationCopyRow(title: "Goals", detail: "Name one meaningful direction.", icon: AppTab.goals.systemImage),
         ActivationCopyRow(title: "Capture", detail: "Put messy life here first.", icon: AppTab.captures.systemImage),
         ActivationCopyRow(title: "Plan", detail: "Shape the week only when something real asks for room.", icon: AppTab.plan.systemImage),
@@ -95,7 +95,7 @@ enum ActivationContract {
             return ActivationPromise(
                 kind: kind,
                 title: "First meaningful goal",
-                explanation: "Start with one specific ambition in plain language. Ambitions should shape a doable first move without asking for a giant life plan.",
+                explanation: "Start with one specific ambition in plain language. Ambitions should shape a doable first step without asking for a giant life plan.",
                 primaryActionTitle: "Create first goal",
                 primaryRoutingHint: .createGoal
             )

@@ -87,7 +87,7 @@ But normal UI should translate them into human copy.
 | --- | --- |
 | Best Next Action | `Do this next` |
 | Now State | `Right now` / `Why this now` |
-| Protected / Protect | `Most important`, `Keep this`, `Move this later`, `What should stay?` |
+| Protected / Protect | `Most important`, `Keep this`, `Adjust plan`, `What should stay?` |
 | Needs Protection | `Too much for today` / `Too much planned` |
 | Protected block | `Time set aside` / `Focus time` |
 | Goal Weather | `How this goal is going` / status-specific copy |
@@ -97,7 +97,7 @@ But normal UI should translate them into human copy.
 | Smart Attachment | `Suggested place` / `Move it here?` |
 | Intelligence / AI | `Suggested` / `Based on...` |
 | System Center | `You` / `Your settings and history` |
-| Action Closure | `Saved`, `Moved`, `Changed`, `Undo` |
+| Action Closure | `Saved`, `Rescheduled`, `Changed`, `Undo` |
 
 ## Today Language Rule
 
@@ -288,7 +288,7 @@ Your plan is fragile
 | One protected / most important goal | Most important goal |
 | Needs Protection | Too much planned / Too much for today |
 | Protect this | Keep this |
-| Protect later | Move this later |
+| Protect later | Adjust plan |
 | Ask what to protect | Ask what should stay on today |
 | Protected block | Focus time / Time set aside |
 | Best Next Action | Do this next |
@@ -369,7 +369,7 @@ Task:
 - Preserve internal canon names where they are not visible UI.
 
 Acceptance:
-- Today uses `Do this next`, `Most important today`, `Too much for today`, `Make today doable`, `Move this later`, and related plain language.
+- Today uses `Start here`, `Recommended step`, `Too much for today`, `Make today doable`, `Adjust plan`, and related plain language.
 - Plan uses `Looks doable`, `Tight`, `Too much planned`, and `No longer works` for visible state labels.
 - Goals uses `Most important goal`, `What is next?`, and `How is this going?` style copy.
 - External surfaces avoid `protected block` and use plain copy.

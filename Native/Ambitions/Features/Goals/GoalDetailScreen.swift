@@ -53,7 +53,7 @@ struct GoalDetailScreen: View {
                         AppCard(state: .warning) {
                             SectionHeader(
                                 title: "Help-first route",
-                                subtitle: "This detail view opened from a help or correction action, so the path view is leading with the smallest trustworthy next move."
+                                subtitle: "This detail view opened from a help or correction action, so the path view is leading with the smallest trustworthy next step."
                             )
                         }
                     }
@@ -520,7 +520,7 @@ private struct GoalPathBuilderCard: View {
 
     private var phases: some View {
         VStack(alignment: .leading, spacing: theme.spacing.sm) {
-            SectionHeader(title: "Roadmap", subtitle: "Phases stay connected to proof and the next move.")
+            SectionHeader(title: "Roadmap", subtitle: "Phases stay connected to proof and the next step.")
             ForEach(state.phases) { phase in
                 WidgetCard(state: phase.state) {
                     VStack(alignment: .leading, spacing: theme.spacing.xs) {

@@ -7,7 +7,7 @@ enum ReleaseDeviceQAScope: String, CaseIterable, Sendable, Equatable {
     case deniedPermissions = "Denied permissions"
     case noData = "No data"
     case lotsOfData = "Lots of data"
-    case missedWeek = "Missed week"
+    case missedWeek = "Recovery week"
     case exportImport = "Export / import"
     case externalSurfaces = "External surfaces"
     case representativeScenarios = "Representative scenarios"
@@ -130,7 +130,7 @@ enum ReleaseDeviceQAReadinessReport {
         ReleaseRepresentativeScenarioFixture(
             id: "family-week",
             domain: "Family / shared life",
-            scenario: "A packed family week needs one protected next move, a waiting item, and non-shaming recovery.",
+            scenario: "A packed family week needs one protected next step, a waiting item, and non-shaming recovery.",
             surfaces: [.today, .plan, .reviews, .you],
             guardrail: "Fixture only; do not infer family structure or social obligations."
         ),

@@ -280,7 +280,7 @@ private extension RepositoryBackedHabitsService {
                     MetricSummary(id: "streak-recovery", title: "Recovered slips", value: "\(contexts.map(\.recoveryCount).reduce(0, +))", detail: "Recent rebounds", icon: "waveform.path.ecg")
                 ],
                 recoveryNote: recoveryCount > 0
-                    ? "When a day is missed, the next move should get easier and clearer, not louder."
+                    ? "When a day is missed, the next step should get easier and clearer, not louder."
                     : "Keep the loop small enough that it still fits on the days with less margin."
             ),
             guidanceTitle: guidanceTitle(for: mode),

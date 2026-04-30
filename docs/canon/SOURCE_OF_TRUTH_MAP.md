@@ -15,21 +15,22 @@ When a future planning, design, roadmap, or implementation task needs context, u
 5. `docs/canon/ROADMAP_BATCH_CLASSIFICATION.md` for launch-critical / soon-after-launch / post-launch / deferred / decision-gated classification of D01-D26.
 6. `docs/canon/HUMAN_LANGUAGE_REVIEW.md` for user-facing language rules and AI/producty copy rejection.
 7. `docs/canon/AMBITION_CANON_COMPLETION_REPORT.md` for completion status, open questions, no-drift rules, and next reconciliation prompt.
-8. `MASTER_PRODUCT_SPEC.md` for current shipping product truth and product promise.
-9. `docs/canon/design/Ambitions_Design_Constitution.md` for design, IA, UX writing, interaction, trust, accessibility posture, and external-surface behavior.
-10. `docs/canon/Ambitions_2_0_Product_Architecture.md` for surface ownership, drilldown rules, object hierarchy, and operating loops.
-11. `docs/canon/Ambitions_2_0_Systems_Architecture.md` for shared engines, local-first systems, and system ownership.
-12. `docs/canon/Ambitions_2_0_Visual_System.md` plus `docs/canon/design/*` for visual, component, panel, density, grouped-list, accessibility, and UX-writing contracts.
-13. Focused consolidation docs for implementation-readable detail.
-14. `docs/canon/Ambitions_2_0_Roadmap.md`, `docs/canon/Ambitions_2_0_Batch_Plan.md`, `docs/canon/POST_D26_MATURITY_ROADMAP.md`, and `docs/codex/batches/*` for execution sequencing after canon reconciliation.
-15. QA, review, and release docs for acceptance evidence.
-16. Archived docs only when explicitly marked as historical context and only where they do not conflict with active canon.
+8. `docs/canon/Ambitions_Master_Product_Visual_System_Spec_v2.md` for the current master product and visual direction, including grounded time context, Action Closure, receipt visibility, user-owned planning, and v2 language rules.
+9. `MASTER_PRODUCT_SPEC.md` for current shipping product truth and product promise where not superseded by v2 canon.
+10. `docs/canon/design/Ambitions_Design_Constitution.md` for design, IA, UX writing, interaction, trust, accessibility posture, and external-surface behavior where not superseded by v2 canon.
+11. `docs/canon/Ambitions_2_0_Product_Architecture.md` for surface ownership, drilldown rules, object hierarchy, and operating loops.
+12. `docs/canon/Ambitions_2_0_Systems_Architecture.md` for shared engines, local-first systems, and system ownership.
+13. `docs/canon/Ambitions_2_0_Visual_System.md` plus `docs/canon/design/*` for visual, component, panel, density, grouped-list, accessibility, and UX-writing contracts.
+14. Focused consolidation docs for implementation-readable detail.
+15. `docs/canon/Ambitions_2_0_Roadmap.md`, `docs/canon/Ambitions_2_0_Batch_Plan.md`, `docs/canon/POST_D26_MATURITY_ROADMAP.md`, and `docs/codex/batches/*` for execution sequencing after canon reconciliation.
+16. QA, review, and release docs for acceptance evidence.
+17. Archived docs only when explicitly marked as historical context and only where they do not conflict with active canon.
 
 ## Active Ownership Map
 
 | Truth Area | Primary Owner | Supporting Owner(s) | Notes |
 | --- | --- | --- | --- |
-| Product identity and promise | `MASTER_PRODUCT_SPEC.md` | `PRODUCT_DECISIONS.md`, `Ambitions_Design_Constitution.md` | Ambitions is a life organization system / personal life OS. |
+| Product identity and promise | `Ambitions_Master_Product_Visual_System_Spec_v2.md` | `MASTER_PRODUCT_SPEC.md`, `PRODUCT_DECISIONS.md`, `Ambitions_Design_Constitution.md` | Ambitions is a premium iPhone-native life operating system; shipping truth remains evidence-gated. |
 | Product decisions | `PRODUCT_DECISIONS.md` | focused canon docs | Resolved Wave 1-19 decision ledger. |
 | Golden launch loop / product-strength cutline | `GOLDEN_LAUNCH_LOOP.md` | `ROADMAP_BATCH_CLASSIFICATION.md`, `LAUNCH_SCOPE_MVP_QUALITY_BAR.md`, Roadmap Governance, Acceptance Gates | Defines the smallest undeniable loop: capture, place, plan, do today, recover, save proof. Launch-critical work must map here. |
 | Roadmap/batch classification | `ROADMAP_BATCH_CLASSIFICATION.md` | `GOLDEN_LAUNCH_LOOP.md`, Roadmap Governance, Batch Registry, Batch Plan | Classifies D01-D26 as launch-critical, soon-after-launch, post-launch, deferred, decision-gated, or infrastructure-unlock. |
@@ -42,12 +43,13 @@ When a future planning, design, roadmap, or implementation task needs context, u
 | Object/domain hierarchy | `DOMAIN_MODEL.md` | Product Architecture, Design Constitution | Object, field, and relationship reference. |
 | Goal/Plan/Task lifecycle | `GOAL_PLAN_TASK_LIFECYCLE.md` | Product Architecture, Systems Architecture, Visual System | State-machine and lifecycle reference. |
 | Goals and Goal Detail | `GOALS_GOAL_DETAIL.md` | Lifecycle, Visual System, Human Language Review, Golden Launch Loop | Goals direction, Goal Weather, Proof, next visible step; normal UI should use plain language such as `Most important goal`, `What is next?`, and `How is this going?`. |
-| Today and Now State | `TODAY_NOW_STATE.md` | Product Architecture, Plan canon, Human Language Review, Golden Launch Loop | Best next action, daily schedule, recovery, Now State; normal UI should say `Do this next`, `Too much for today`, and `Make today doable`. |
+| Today and Now State | `TODAY_NOW_STATE.md` | Product Architecture, Plan canon, Human Language Review, Golden Launch Loop, v2 master spec | Recommended step, daily schedule, recovery, Now State; normal UI should say `Start here`, `Recommended step`, `Too much for today`, and `Make today doable`. |
 | You / Profile / Reviews | `YOU_PROFILE_REVIEWS.md` | Trust/Memory, IA, Human Language Review | You is canonical; Profile is legacy compatibility only during migration; normal UI avoids data-console language. |
 | Capture / Smart Attachment | `CAPTURE_SMART_ATTACHMENT.md` | `design/smart-attachment-spec.md`, Human Language Review, Golden Launch Loop | Quiet Command Sheet, Needs a Place, routing receipts; normal UI should say `Suggested place` / `Move it here?`. |
 | Plan / Calendar / Believability | `PLAN_CALENDAR_BELIEVABILITY.md` | Systems Architecture, Today canon, Human Language Review, Golden Launch Loop | Believable day/week, daily schedule, optional calendar awareness; normal UI should say `Looks doable`, `Too much planned`, and `No longer works`. |
 | Intelligence / Automation | `INTELLIGENCE_AUTOMATION_SUGGESTIONS.md` | Intelligence Standards, Systems Architecture, Human Language Review | Explain, suggest, prepare; no silent important changes and no AI/model language in normal UI. |
 | Visual system / components / motion | `VISUAL_SYSTEM_COMPONENTS_MOTION.md` | Visual System, component matrix, `DESIGN_TOKENS.md` | Premium calm OS, meaningful motion, reusable tokens/components. |
+| Master product and visual v2 direction | `Ambitions_Master_Product_Visual_System_Spec_v2.md` | Visual System, Design Constitution, Product Architecture, Systems Architecture | Supersedes older conflicting language around next-move wording, Focus CTAs, guessed durations, vacation/free-time assumptions, silent reflow, and punitive closure states. |
 | Accessibility / Focus Support | `ACCESSIBILITY_FOCUS_SUPPORT.md` | Accessibility Nutrition docs, screen/component matrices | Accessibility is core quality; Focus Support protects next action clarity internally, but normal UI should avoid `protect/protected` copy. |
 | External surfaces | `EXTERNAL_SURFACES_NOTIFICATIONS_WIDGETS.md` | External Surfaces Contract, Human Language Review | Notifications, widgets, Live Activities, App Intents, Shortcuts; external copy must be especially plain and context-safe. |
 | Data / local-first / sync / export | `DATA_LOCAL_SYNC_EXPORT.md` | Trust/Memory, Systems Architecture | Local-first, no account required at launch, no launch sync, export before sync. |
@@ -99,6 +101,11 @@ The focused consolidation set now includes:
 Future work must preserve these settled rules unless a later explicit canon decision supersedes them:
 
 - Top-level shell stays `Today / Goals / Capture / Plan / You`.
+- Today hero language is `Start here`; the primary user action is a step, not a `move`, and Focus is context rather than a manual Today CTA.
+- Guided automation is the default; meaningful planning changes ask first unless a later explicit safe rule proves otherwise.
+- Vacation is not free time by default; per-vacation availability choice is required for new vacation/away setup.
+- Durations must be user-set, user-accepted, suggested, historical, actual, or unset.
+- Closure receipts must remain visible through Today, Trust Center, and Goal Detail where the current repo has receipt data.
 - Ambitions stays deep, not wide.
 - Launch-critical work must map to the Golden Launch Loop: capture, place, plan, do today, recover, save proof.
 - D01-D26 classification must follow `ROADMAP_BATCH_CLASSIFICATION.md` unless a later explicit decision supersedes it.

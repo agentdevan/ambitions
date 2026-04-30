@@ -13,7 +13,7 @@ This is a QA, performance, accessibility, and stability baseline. It does not in
 - First meaningful goal: a new user can start from one specific goal, and activation copy does not require a full life setup.
 - Capture-first path: Capture remains the singular intake and routes messy life through the canonical Capture surface.
 - Empty Today: Today points to one real action, either create a first goal or capture first, without becoming a blank dashboard.
-- Daily Operating Contract: Today remains one dominant hero with limited support panels, a protected move, one best next move, one not-today item, one fallback, and a why-this-matters explanation.
+- Daily Operating Contract: Today remains one dominant hero with limited support panels, a protected step, one recommended step, one not-today item, one fallback, and a why-this-matters explanation.
 - Save the Day: recovery remains non-punitive and route-only; it must not silently reschedule work.
 - Calendar denied or restricted: Today does not request Calendar access or write calendar blocks. Calendar-aware planning remains Plan-owned.
 - Returning low-data user: activation and degraded-state copy route back to Today, Capture, Goals, Plan, or You using existing local data only.
@@ -89,7 +89,7 @@ Active limitations after M01: this remains simulator/unit/docs evidence plus a m
 | Use denied-calendar fallback | Plan, Today, You | Plan / doable path, Today / next action, Recovery, Trust / privacy | Manual fallback; Plan-owned permission boundary; no connected-calendar claim. |
 | Start with a One-Step Goal | Capture, Today, Goals | Capture, Place / routing, Today / next action, Proof / receipt | Task is standalone; Steps remain contained; no Tasks tab. |
 | Park, defer, or drop noncritical work | Today, Plan, Goals, Reviews | Today / next action, Recovery, Proof / receipt | Park/defer/drop available where supported; non-shaming copy; change remains explainable. |
-| Return after a week away | Today, Plan, Goals, Reviews, You | Today / next action, Recovery, Proof / receipt, Trust / privacy | One re-entry move; stale context visible; review need visible. |
+| Return after a week away | Today, Plan, Goals, Reviews, You | Today / next action, Recovery, Proof / receipt, Trust / privacy | One re-entry step; stale context visible; review need visible. |
 
 ### M01 Blocker Classification
 

@@ -857,7 +857,7 @@ private extension RepositoryBackedGoalsService {
                     kind: .activeDirection,
                     title: "Active direction",
                     subtitle: activeDirectionCards.isEmpty
-                        ? "The portfolio is quiet right now. The next move is to seed one live ambition."
+                        ? "The portfolio is quiet right now. The next step is to seed one live ambition."
                         : "The ambitions that are truly alive and still have believable momentum this week.",
                     cards: Array(activeDirectionCards.prefix(4))
                 ),
@@ -1017,7 +1017,7 @@ private extension RepositoryBackedGoalsService {
             progressLabel: steps.isEmpty ? "Plan forming" : "\(completed)/\(steps.count) steps complete",
             statusLabel: renderState.title,
             timingLabel: timingLabel(for: goal.timing, goalMode: goal.mode),
-            nextStepHint: firstActive?.title ?? "Open detail to confirm the next move",
+            nextStepHint: firstActive?.title ?? "Open detail to confirm the next step",
             modeLabel: goal.mode.displayTitle,
             supportLabel: goal.mode == .delegatedSupport ? "Support for \(goal.actor.displayName)" : nil,
             relevanceScore: relevanceScore,
@@ -1504,9 +1504,9 @@ private extension RepositoryBackedGoalsService {
     ) -> String {
         switch weather {
         case .clear:
-            return "Proof and the next move are visible."
+            return "Proof and the next step are visible."
         case .cloudy:
-            return "Progress exists, but the next move needs more shape."
+            return "Progress exists, but the next step needs more shape."
         case .stormy:
             return lifecycleState == .blocked ? "A blocker is visible." : posture == .atRisk ? "Risk is visible." : "Pressure needs attention."
         case .foggy:
@@ -1533,13 +1533,13 @@ private extension RepositoryBackedGoalsService {
             return GoalMomentumIntegrity(title: "Parked", detail: "Intentionally quiet for later.", visualState: .default)
         }
         if lifecycleState == .protected {
-            return GoalMomentumIntegrity(title: "Kept in view", detail: "Keep the next move visible.", visualState: .selected)
+            return GoalMomentumIntegrity(title: "Kept in view", detail: "Keep the next step visible.", visualState: .selected)
         }
         if proofSummary.count > 0 && nextVisibleStep.isAvailable {
-            return GoalMomentumIntegrity(title: "Building proof", detail: "Evidence and a next move both exist.", visualState: .selected)
+            return GoalMomentumIntegrity(title: "Building proof", detail: "Evidence and a next step both exist.", visualState: .selected)
         }
         if proofSummary.count == 0 && nextVisibleStep.isAvailable {
-            return GoalMomentumIntegrity(title: "Needs proof", detail: "The next move is clear; evidence has not landed yet.", visualState: .default)
+            return GoalMomentumIntegrity(title: "Needs proof", detail: "The next step is clear; evidence has not landed yet.", visualState: .default)
         }
         if posture == .stalled || evidence.isEmpty {
             return GoalMomentumIntegrity(title: "Losing shape", detail: "Add one concrete next step or proof point.", visualState: .warning)
@@ -1843,7 +1843,7 @@ private extension RepositoryBackedGoalsService {
         )
         let nextStepSignal = GoalPortfolioMaturitySignal(
             id: "next-step",
-            title: missingNextStepCount == 0 ? "Next moves are clear" : "Some next moves need shape",
+            title: missingNextStepCount == 0 ? "Next steps are clear" : "Some next steps need shape",
             detail: missingNextStepCount == 0
                 ? "Every live ambition has a current next visible step."
                 : "\(missingNextStepCount) live ambitions need one concrete next step before they can carry attention.",
@@ -2479,13 +2479,13 @@ private extension RepositoryBackedGoalsService {
 
         return GoalPathBuilderState(
             title: "Path Builder",
-            subtitle: "A long-range view that still keeps the next move visible.",
+            subtitle: "A long-range view that still keeps the next step visible.",
             breadcrumbLabels: breadcrumbLabels,
             phases: phaseStates,
             forks: forks,
             proofRequirements: proofRequirements,
             todayConnectionTitle: todayTitle,
-            todayConnectionSummary: todaySummary.isEmpty ? "Keep one believable next move visible before widening the roadmap." : todaySummary,
+            todayConnectionSummary: todaySummary.isEmpty ? "Keep one believable next step visible before widening the roadmap." : todaySummary,
             planConnectionSummary: "Plan should only protect the next believable window; wider changes still need review.",
             decisionReceiptSummary: missionControl.decisions.items.first?.summary
                 ?? "Path changes should leave a decision or proof trail before they reshape the plan.",
@@ -2493,8 +2493,8 @@ private extension RepositoryBackedGoalsService {
             roadmapListSummary: "The same phases are available as a plain list for review.",
             performanceBudgetSummary: budget,
             accessibilityLabel: "Path Builder",
-            accessibilityValue: "\(phaseStates.count) phases, \(forks.count) forks, \(proofRequirements.count) proof checks. Next move: \(todayTitle).",
-            accessibilityHint: "Review the roadmap as phases, forks, proof, and the next move before changing the path."
+            accessibilityValue: "\(phaseStates.count) phases, \(forks.count) forks, \(proofRequirements.count) proof checks. Next step: \(todayTitle).",
+            accessibilityHint: "Review the roadmap as phases, forks, proof, and the next step before changing the path."
         )
     }
 
@@ -2665,7 +2665,7 @@ private extension RepositoryBackedGoalsService {
             GoalNextVisibleStep(title: $0.title, detail: $0.summary, isAvailable: true)
         } ?? GoalNextVisibleStep(
             title: renderState == .blocked ? "Resolve the blocker" : "Needs a next step",
-            detail: renderState == .blocked ? "The path should not add more work until this clears." : "Clarify one real move before adding more steps.",
+            detail: renderState == .blocked ? "The path should not add more work until this clears." : "Clarify one real step before adding more steps.",
             isAvailable: false
         )
         let proofSummary = goalDetailProofSummary(evidenceItems: evidenceItems, evidenceLabel: evidenceLabel)
@@ -2725,7 +2725,7 @@ private extension RepositoryBackedGoalsService {
                     headline: nextStep.title,
                     summary: nextStep.detail,
                     detail: nextStep.isAvailable ? "Keep this as the primary contained Step." : "This goal needs one safe next Step before the tactical list grows.",
-                    badgeTitle: nextStep.isAvailable ? "Next move" : "Needs review",
+                    badgeTitle: nextStep.isAvailable ? "Next step" : "Needs review",
                     systemImage: "scope",
                     state: nextStep.isAvailable ? .selected : .warning
                 ),
@@ -2854,13 +2854,13 @@ private extension RepositoryBackedGoalsService {
             risks.append(GoalDetailRiskState(id: "risk-waiting", title: "Waiting", summary: "One readiness gap needs an answer before the path is fully believable.", state: .warning))
         }
         if suggestions.isEmpty {
-            risks.append(GoalDetailRiskState(id: "risk-next-step", title: "Needs a next step", summary: "The goal has no clear next move in the current plan.", state: .warning))
+            risks.append(GoalDetailRiskState(id: "risk-next-step", title: "Needs a next step", summary: "The goal has no clear next step in the current plan.", state: .warning))
         }
         if evidenceItems.isEmpty {
             risks.append(GoalDetailRiskState(id: "risk-proof", title: "Proof is thin", summary: "No proof has been recorded yet.", state: .default))
         }
         if timing.dueAt != nil || timing.targetBy != nil {
-            risks.append(GoalDetailRiskState(id: "risk-timing", title: "Timing needs review", summary: "The date is visible; keep the next move believable before adding more pressure.", state: .default))
+            risks.append(GoalDetailRiskState(id: "risk-timing", title: "Timing needs review", summary: "The date is visible; keep the next step believable before adding more pressure.", state: .default))
         }
         return Array(risks.prefix(4))
     }
@@ -2993,7 +2993,7 @@ private extension RepositoryBackedGoalsService {
 
         return GoalDetailTimelineState(
             title: "Storyline",
-            subtitle: "A compact read on what happened, what is current, and what is only a possible next move.",
+            subtitle: "A compact read on what happened, what is current, and what is only a possible next step.",
             items: Array(items.prefix(7))
         )
     }
@@ -3011,7 +3011,7 @@ private extension RepositoryBackedGoalsService {
                 id: "next-step",
                 title: "This goal has a next step.",
                 status: suggestions.isEmpty ? "Needs review" : "Visible",
-                whyItMatters: "The screen should lead with one move, not a long step dump.",
+                whyItMatters: "The screen should lead with one step, not a long step dump.",
                 correctionLabel: suggestions.isEmpty ? "Review next step" : "Change next step",
                 state: suggestions.isEmpty ? .warning : .selected
             ),
@@ -3251,7 +3251,7 @@ private extension RepositoryBackedGoalsService {
             }()
             return GoalDetailActionResponse(
                 message: GoalDetailInlineMessage(
-                    title: "Moved out of the way",
+                    title: "Rescheduled",
                     body: "The path stays intact without treating one skipped step like failure.\(deferLine)",
                     state: .warning
                 )
@@ -3476,7 +3476,7 @@ private extension RepositoryBackedGoalsService {
             try await repositories.goals.saveGoals([goal])
             return GoalDetailActionResponse(
                 message: GoalDetailInlineMessage(
-                    title: "A calmer next move is ready",
+                    title: "A calmer next step is ready",
                     body: decision?.recoverySummary ?? decision?.smallerStep?.summary ?? selectedStep.actionability.fallbackMicroStep,
                     state: .selected
                 )
@@ -4200,9 +4200,9 @@ private extension RepositoryBackedGoalsService {
             case .learning, .exploration:
                 return "Stay oriented to signal and learning, not just step completion."
             case .recovery:
-                return "Keep the next move gentle enough that it still happens."
+                return "Keep the next step gentle enough that it still happens."
             default:
-                return "Understand the path, the next move, and the evidence that proves it is moving."
+                return "Understand the path, the next step, and the evidence that proves it is moving."
             }
         }
     }
@@ -4258,7 +4258,7 @@ private extension RepositoryBackedGoalsService {
             state = .success
         case let .skipped(base, _):
             title = "Skipped"
-            subtitle = base.note ?? "Moved out of the way."
+            subtitle = base.note ?? "Rescheduled."
             state = .warning
         case let .delayed(base, _, _):
             title = "Delayed"
@@ -4270,7 +4270,7 @@ private extension RepositoryBackedGoalsService {
             state = .selected
         case let .confused(base, _):
             title = "Stuck signal"
-            subtitle = base.note ?? "The next move was unclear."
+            subtitle = base.note ?? "The next step was unclear."
             state = .warning
         case let .tooBig(base):
             title = "Too big"
@@ -4435,7 +4435,7 @@ private extension RepositoryBackedGoalsService {
                     return "The current stage is visible, but Ambitions is keeping the blocker explicit instead of faking momentum."
                 }
                 if let activeStage = pathSummary.orderedStages.first(where: { $0.id == pathSummary.activeStageID }) {
-                    return "You are in \(activeStage.title), with \(progressLabel.lowercased()) and the next movement already surfaced."
+                    return "You are in \(activeStage.title), with \(progressLabel.lowercased()) and the next step already surfaced."
                 }
             }
 
@@ -4484,7 +4484,7 @@ private extension RepositoryBackedGoalsService {
                 title: suggestion.title,
                 summary: suggestion.summary,
                 timingLabel: suggestion.timingLabel,
-                rationale: whyNow ?? "This is the calmest next move still available from the current plan.",
+                rationale: whyNow ?? "This is the calmest next step still available from the current plan.",
                 state: suggestion.state
             )
         }
@@ -4622,12 +4622,12 @@ private extension RepositoryBackedGoalsService {
             case .active:
                 position = .current
                 title = "Current path"
-                summary = "Movement is already live; stay with the next visible move instead of rebuilding the whole plan."
-                highlight = "Keep the next move visible"
+                summary = "Movement is already live; stay with the next visible step instead of rebuilding the whole plan."
+                highlight = "Keep the next step visible"
             case .starter:
                 position = .current
                 title = "Starter path"
-                summary = "The path is still taking shape, but there is enough signal to make the first move visible now."
+                summary = "The path is still taking shape, but there is enough signal to make the first step visible now."
                 highlight = "Take the first visible step"
             case .clarification:
                 position = .current
@@ -4637,7 +4637,7 @@ private extension RepositoryBackedGoalsService {
             case .blocked:
                 position = .blocked
                 title = "Blocked path"
-                summary = "A real blocker is preventing movement, so the next move is to clear the obstruction rather than force progress."
+                summary = "A real blocker is preventing movement, so the next step is to clear the obstruction rather than force progress."
                 highlight = "Resolve the blocker"
             case .onHold:
                 position = .upcoming

@@ -73,7 +73,7 @@ final class ReviewsV1ProjectorTests: XCTestCase {
             occurredAt: "2026-04-28T09:00:00Z",
             source: .plan,
             title: "Protected the must-do",
-            summary: "Moved lower-stakes work so the important promise stayed visible.",
+            summary: "Rescheduled lower-stakes work so the important promise stayed visible.",
             tone: .recovering
         )
         let correctionEvent = EventLedgerEntry(

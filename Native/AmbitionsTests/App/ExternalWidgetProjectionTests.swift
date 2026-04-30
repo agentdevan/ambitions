@@ -31,9 +31,9 @@ final class ExternalWidgetProjectionTests: XCTestCase {
             ambientState: ExternalSurfaceAmbientState(
                 today: ExternalSurfaceVariantState(
                     kind: .today,
-                    title: "Today has a next move",
-                    detail: "Your next move still looks doable.",
-                    privacySummary: "Glance-safe next move only",
+                    title: "Today has a next step",
+                    detail: "Your next step still looks doable.",
+                    privacySummary: "Glance-safe next step only",
                     action: ExternalSurfaceVariantAction(title: "Open Today", surface: .tab, tab: "today"),
                     reference: ExternalSurfaceActionReference(goalID: "private-goal-id", stepID: "private-step-id"),
                     prominence: .standard
@@ -71,8 +71,8 @@ final class ExternalWidgetProjectionTests: XCTestCase {
         let projection = ExternalWidgetProjection(snapshot: snapshot)
 
         XCTAssertEqual(ExternalSurfaceContractRegistry.contract(for: .widgets).privacyDefault, .detailsHidden)
-        XCTAssertEqual(projection.title, "Today has a next move")
-        XCTAssertEqual(projection.detail, "Your next move still looks doable.")
+        XCTAssertEqual(projection.title, "Today has a next step")
+        XCTAssertEqual(projection.detail, "Your next step still looks doable.")
         XCTAssertEqual(projection.privacySummary, "Details stay private until you open Ambitions.")
         XCTAssertEqual(projection.primaryURL?.absoluteString, "ambitions://goal/private-goal-id?origin=widget")
         XCTAssertEqual(projection.variants.map(\.kind), [.focus, .today, .plan, .goal])

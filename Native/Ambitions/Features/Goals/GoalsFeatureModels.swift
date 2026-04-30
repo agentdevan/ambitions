@@ -245,7 +245,7 @@ struct GoalPortfolioMaturitySummary: Sendable, Hashable {
         let scope = GoalPortfolioMaturitySignal(id: "scope", title: "Scope is quiet", detail: "No live ambitions are competing for attention yet.", state: .default)
         let stuck = GoalPortfolioMaturitySignal(id: "stuck-work", title: "No stuck work is loud", detail: "No blockers, waiting states, or overloaded standalone Tasks are driving the board.", state: .selected)
         let proof = GoalPortfolioMaturitySignal(id: "proof", title: "Proof will appear here", detail: "Proof maturity starts after a goal has evidence or receipts.", state: .default)
-        let next = GoalPortfolioMaturitySignal(id: "next-step", title: "Next moves will appear here", detail: "Create or shape a goal to make the next move visible.", state: .default)
+        let next = GoalPortfolioMaturitySignal(id: "next-step", title: "Next steps will appear here", detail: "Create or shape a goal to make the next step visible.", state: .default)
         return GoalPortfolioMaturitySummary(
             title: "Portfolio maturity",
             subtitle: "A qualitative read on scope, proof, stuck work, and what should move next.",

@@ -168,6 +168,11 @@ final class ProfileFeatureServiceTests: XCTestCase {
             "Reviews",
             "Proof",
             "Archive / Completed",
+            "Schedule & Availability",
+            "Plan Behavior",
+            "Automation & Trust",
+            "Vacation / Away Time",
+            "Durations",
             "Notifications",
             "Integrations",
             "Widgets / Live Activities / Shortcuts",
@@ -180,6 +185,7 @@ final class ProfileFeatureServiceTests: XCTestCase {
             "me",
             "memory-and-trust",
             "reviews-and-progress",
+            "planning-behavior",
             "system-edges",
             "accessibility-and-support"
         ])
@@ -195,6 +201,14 @@ final class ProfileFeatureServiceTests: XCTestCase {
         XCTAssertTrue(items.contains(where: {
             $0.id == "export-import" &&
             $0.statusLabel == "Manual"
+        }))
+        XCTAssertTrue(items.contains(where: {
+            $0.id == "automation-trust" &&
+            $0.statusLabel == "Guided"
+        }))
+        XCTAssertTrue(items.contains(where: {
+            $0.id == "vacation-away-time" &&
+            $0.statusLabel == "Unavailable"
         }))
         XCTAssertFalse(AppTab.allCases.map(\.title).contains("Profile"))
         XCTAssertFalse(AppTab.allCases.map(\.title).contains("Insights"))

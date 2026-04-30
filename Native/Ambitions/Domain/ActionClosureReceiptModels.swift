@@ -786,6 +786,152 @@ struct ActionReceipt: Codable, Sendable, Equatable, Hashable, Identifiable {
     }
 }
 
+extension ActionReceipt {
+    static func closureReceipt(
+        id: String,
+        occurrence: StepOccurrence,
+        outcome: ClosureState,
+        stepTitle: String,
+        occurredAt: String,
+        recordedAt: String? = nil,
+        sourceDomain: ActionReceiptSourceDomain = .today,
+        why: String? = nil
+    ) -> ActionReceipt {
+        let stepReference = LifeGraphObjectReference(
+            kind: .step,
+            id: occurrence.stepID.uuidString,
+            label: stepTitle,
+            sourceDomain: sourceDomain.lifeGraphSourceDomain
+        )
+        return ActionReceipt(
+            id: id,
+            resultState: outcome.actionReceiptResultState,
+            title: outcome.receiptTitle(stepTitle: stepTitle),
+            summary: outcome.receiptSummary(stepTitle: stepTitle),
+            sourceDomain: sourceDomain,
+            occurredAt: occurredAt,
+            createdAt: recordedAt,
+            affectedObjects: [stepReference],
+            changedFacts: [
+                ActionReceiptChangedFact(
+                    id: "\(id).closure",
+                    kind: outcome.changedFactKind,
+                    object: stepReference,
+                    fieldName: "closureState",
+                    previousValueSummary: occurrence.closureState?.displayLabel,
+                    newValueSummary: outcome.displayLabel,
+                    summary: outcome.changedFactSummary(stepTitle: stepTitle)
+                )
+            ],
+            why: why.map { ActionReceiptWhyExplanation(body: $0) },
+            nextAction: outcome.nextAction,
+            correctionAvailability: .available,
+            undoAvailability: outcome.undoAvailability,
+            safetyState: outcome == .needsReview ? .confirmationRequired : .normal
+        )
+    }
+}
+
+extension ClosureState {
+    var actionReceiptResultState: ActionReceiptResultState {
+        switch self {
+        case .completed, .stillCounts:
+            .completed
+        case .moved:
+            .moved
+        case .waiting, .blocked, .needsRecovery, .needsReview, .awaitingClosure:
+            .needsConfirmation
+        case .skippedIntentionally, .notNeeded:
+            .changed
+        case .now, .next, .later:
+            .scheduled
+        }
+    }
+
+    var changedFactKind: ActionReceiptChangedFactKind {
+        switch self {
+        case .completed, .stillCounts:
+            .completedAction
+        case .moved:
+            .movedActionToLater
+        case .waiting:
+            .markedWaiting
+        case .blocked, .needsRecovery, .needsReview, .awaitingClosure, .skippedIntentionally, .notNeeded, .now, .next, .later:
+            .changedField
+        }
+    }
+
+    var undoAvailability: ActionReceiptUndoAvailability {
+        switch self {
+        case .completed, .stillCounts, .moved, .skippedIntentionally, .notNeeded, .waiting:
+            .requiresConfirmation
+        case .blocked, .needsRecovery, .needsReview, .awaitingClosure, .now, .next, .later:
+            .unavailable
+        }
+    }
+
+    var nextAction: ActionReceiptNextAction? {
+        switch self {
+        case .awaitingClosure, .needsReview:
+            ActionReceiptNextAction(kind: .openToday, title: "Close the loop", destination: .today)
+        case .needsRecovery, .blocked:
+            ActionReceiptNextAction(kind: .openPlan, title: "Adjust plan", destination: .plan)
+        case .completed, .stillCounts, .moved, .skippedIntentionally, .notNeeded, .waiting, .now, .next, .later:
+            nil
+        }
+    }
+
+    func receiptTitle(stepTitle: String) -> String {
+        switch self {
+        case .completed:
+            "Completed"
+        case .stillCounts:
+            "Still Counts"
+        case .moved:
+            "Rescheduled"
+        case .skippedIntentionally:
+            "Skipped intentionally"
+        case .notNeeded:
+            "Not Needed"
+        case .blocked, .needsRecovery:
+            "Needs Recovery"
+        case .waiting:
+            "Waiting"
+        case .needsReview, .awaitingClosure:
+            "Needs a quick check"
+        case .now, .next, .later:
+            displayLabel
+        }
+    }
+
+    func receiptSummary(stepTitle: String) -> String {
+        switch self {
+        case .completed:
+            "Completed · recorded today"
+        case .stillCounts:
+            "Still Counts · smaller version completed"
+        case .moved:
+            "Rescheduled · receipt saved"
+        case .skippedIntentionally:
+            "Skipped intentionally · receipt saved"
+        case .notNeeded:
+            "Not Needed · receipt saved"
+        case .blocked, .needsRecovery:
+            "Needs Recovery · review before changing the plan"
+        case .waiting:
+            "Waiting · dependency noted"
+        case .needsReview, .awaitingClosure:
+            "Needs a quick check · Close the loop"
+        case .now, .next, .later:
+            "\(displayLabel) · scheduled"
+        }
+    }
+
+    func changedFactSummary(stepTitle: String) -> String {
+        "\(stepTitle) -> \(displayLabel)"
+    }
+}
+
 struct ActionReceiptProjection: Sendable, Equatable {
     let receipts: [ActionReceipt]
     let rejectedReceiptIDs: [String]

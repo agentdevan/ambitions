@@ -123,7 +123,7 @@ A premium way to inspect available time, block density, and room in the day or w
 ### 6. Recovery Bloom
 A calming interaction pattern that appears when the day or week has drifted.
 It reframes the state into:
-- smallest safe next move
+- smallest safe next step
 - lighter version
 - reschedule
 - protect later
@@ -640,7 +640,7 @@ Rebuild Goal Detail into the strategic chamber of Ambitions with clearer composi
 - Goal Detail IA rewrite
 - Path Filmstrip implementation
 - goal strategic header redesign
-- progress / phase / next movement composition rewrite
+- progress / phase / next step composition rewrite
 - recent movement treatment redesign
 - strategy-versus-tactics separation
 - timeline / momentum structure redesign

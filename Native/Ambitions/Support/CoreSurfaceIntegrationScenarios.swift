@@ -53,14 +53,14 @@ enum CoreSurfaceIntegrationScenarioCatalog {
         CoreSurfaceIntegrationScenario(
             id: "meaningful-goal",
             title: "Create a meaningful goal",
-            intent: "A user can name one specific ambition and see a useful next move without setting up their whole life.",
+            intent: "A user can name one specific ambition and see a useful next step without setting up their whole life.",
             surfaces: [.goals, .goalDetail, .today, .plan],
             launchLoopSteps: [.plan, .today, .proof, .trust],
             manualSteps: [
                 "Create one ordinary but meaningful goal.",
                 "Confirm Goals shows direction, next step, and how it is going.",
                 "Open Goal Detail and confirm Steps, Proof, Decisions, Risks, and Archive stay contained there.",
-                "Return to Today and confirm the next useful move is visible."
+                "Return to Today and confirm the next useful step is visible."
             ],
             expectedEvidence: ["Goal exists", "Next step visible", "Contained Steps language", "No Tasks tab"],
             blockerIfBroken: "Core goal-to-next-action loop is not coherent.",
@@ -85,7 +85,7 @@ enum CoreSurfaceIntegrationScenarioCatalog {
         CoreSurfaceIntegrationScenario(
             id: "missed-day-recovery",
             title: "Recover from a missed day",
-            intent: "A missed day turns into one smaller next move without shame or silent rescheduling.",
+            intent: "A missed day turns into one smaller next step without shame or silent rescheduling.",
             surfaces: [.today, .plan, .reviews, .you],
             launchLoopSteps: [.today, .recovery, .proof, .trust],
             manualSteps: [

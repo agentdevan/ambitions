@@ -4,6 +4,8 @@
 
 "Calm shell, rich panels, meaningful visual state."
 
+The active master product and visual direction is [Ambitions_Master_Product_Visual_System_Spec_v2.md](Ambitions_Master_Product_Visual_System_Spec_v2.md). Its visual/product thesis is that Ambitions is a premium iPhone-native life operating system built from adaptive panels, timeline rails, grounded time context, receipts, proof, and Action Closure.
+
 Ambitions 2.0 uses rich widget-like panels throughout. A panel is a compact product object with state, hierarchy, action, and explanation. It is not a flat text card.
 
 The active design source of truth is [design/Ambitions_Design_Constitution.md](design/Ambitions_Design_Constitution.md). Supporting contracts live in [design/component-contract-matrix.md](design/component-contract-matrix.md), [design/panel-density-size-spec.md](design/panel-density-size-spec.md), and [design/grouped-navigation-list-spec.md](design/grouped-navigation-list-spec.md).

@@ -231,7 +231,7 @@ final class ExternalSurfaceSnapshotTests: XCTestCase {
         let state = try XCTUnwrap(NextStepActivityAttributes.ContentState(snapshot: snapshot, now: now))
 
         XCTAssertEqual(state.title, "Focus step ready")
-        XCTAssertEqual(state.detail, "Return to the bounded next move.")
+        XCTAssertEqual(state.detail, "Return to the bounded next step.")
         XCTAssertEqual(state.privacyLabel, "This may be behind. Open Ambitions to refresh.")
         XCTAssertEqual(state.stateLabel, "May need refresh")
         XCTAssertEqual(state.deepLinkURLString, "ambitions://goal/goal-private?origin=live_activity")

@@ -2,6 +2,8 @@
 
 Status: Active Ambitions 2.0 design source of truth.
 
+Current master product and visual direction: [../Ambitions_Master_Product_Visual_System_Spec_v2.md](../Ambitions_Master_Product_Visual_System_Spec_v2.md). The v2 spec supersedes older conflicting language around next-move wording, Focus as a CTA, guessed durations, vacation/free-time assumptions, silent reflow, stale overdue-task behavior, and punitive completion states.
+
 This constitution supersedes conflicting active design, IA, UX writing, interaction, trust, accessibility, and external-surface language. Historical docs may remain when clearly marked as superseded.
 
 Shared object names are locked in [../Ambitions_2_0_Object_Terminology.md](../Ambitions_2_0_Object_Terminology.md). Use that terminology source when changing docs, source copy, tests, previews, or compatibility notes.

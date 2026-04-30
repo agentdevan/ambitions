@@ -265,7 +265,7 @@ The tone must be honest, calm, and adult.
 These principles are the product’s operating laws.
 
 1. **Reality before aspiration** — reflect real time, real energy, and real behavior.
-2. **One best next move** — show one clear next step before anything else.
+2. **One recommended step** — show one clear next step before anything else.
 3. **Hide what can wait** — not everything deserves equal visibility at all times.
 4. **Reduce shame, increase truth** — never punish normal inconsistency.
 5. **Progress must feel visible** — movement should feel real, not administrative.
@@ -469,7 +469,7 @@ These are required product behaviors.
 
 - Every major screen must communicate its main point in under a few seconds.
 - The user should rarely face more than one major decision at a time.
-- Missed work should quickly convert into a safer next step.
+- Unclosed work should quickly convert into a safer next step.
 - Common actions should complete in a few taps.
 - The app must tell the truth when a goal, day, or week is unrealistic.
 - The product should make movement feel concrete, especially when the final result is still far away.
@@ -1053,7 +1053,7 @@ Avoid language like:
 - “You’re on fire”
 - “Streak in danger”
 - “You failed to complete”
-- “Overdue wall”
+- “Stale catch-up wall”
 
 ---
 

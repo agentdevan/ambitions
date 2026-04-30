@@ -199,7 +199,7 @@ final class GoalsOverviewBoardTests: XCTestCase {
         XCTAssertTrue(maturity.stuckWorkSignal.detail.contains("waiting or blocked"))
         XCTAssertTrue(maturity.stuckWorkSignal.detail.contains("open One-Step Goals"))
         XCTAssertEqual(maturity.proofSignal.title, "Proof is thin")
-        XCTAssertEqual(maturity.nextStepSignal.title, "Some next moves need shape")
+        XCTAssertEqual(maturity.nextStepSignal.title, "Some next steps need shape")
         XCTAssertTrue(maturity.archiveLearning.contains(where: { $0.contains("closed without being treated as failure") }))
         XCTAssertFalse(maturity.accessibilityValue.localizedCaseInsensitiveContains("score"))
     }
@@ -365,7 +365,7 @@ private extension GoalsOverviewBoardTests {
         let step = Step(
             id: "step-\(id)",
             sectionID: "section-\(id)",
-            title: "Do the next visible move",
+            title: "Do the next visible step",
             summary: nil,
             type: .actionUnit,
             state: .planned,

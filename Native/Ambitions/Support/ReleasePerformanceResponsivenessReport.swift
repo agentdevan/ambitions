@@ -57,7 +57,7 @@ enum ReleasePerformanceResponsivenessReport {
         ReleasePerformanceCheck(
             id: "today-load",
             area: .todayLoad,
-            budget: "Today should project the current next move from bounded local state rather than recomputing broad history in view bodies.",
+            budget: "Today should project the current next step from bounded local state rather than recomputing broad history in view bodies.",
             evidence: "Core-surface scenario tests and Today service regressions cover the Golden Launch Loop, denied-calendar fallback, missed-day recovery, and next-step posture.",
             evidenceLevel: .automatedSimulator,
             readiness: .acceptableForInternalTesting,

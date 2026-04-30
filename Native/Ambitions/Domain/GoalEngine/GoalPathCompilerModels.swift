@@ -716,7 +716,7 @@ struct GoalCompiledPathCompilerCore {
                     id: "branch-\(currentCandidateID)-fallback",
                     branchType: .fallback,
                     summary: "Keep a starter-safe fallback branch while uncertainty remains material.",
-                    condition: "Use this branch when assumptions still shape the next move.",
+                    condition: "Use this branch when assumptions still shape the next step.",
                     targetCandidateID: nil,
                     targetStageID: "stage-\(interpretation.id)-setup",
                     posture: .provisional

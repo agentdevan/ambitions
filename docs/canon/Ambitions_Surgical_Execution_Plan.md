@@ -297,4 +297,4 @@ The Ambitions 2.0 program should be shipped as small operational batches after t
 - Batches 30-32: contradiction, correction, explainability
 - Batches 33-34: runtime and product shell integration
 
-This order prevents the two major failure modes of Ambitions 2.0: source-less AI confidence and UI that outruns the intelligence contracts.
+This order prevents the two major failure modes of Ambitions 2.0: source-less certainty claims and UI that outruns the intelligence contracts.

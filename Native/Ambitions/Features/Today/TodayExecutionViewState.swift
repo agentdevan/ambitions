@@ -209,7 +209,7 @@ struct TodayExecutionViewState: Equatable {
         let bestNext = TodayContractEntryState(
             id: "today2.contract.best-next",
             kind: .bestNextMove,
-            title: "Do this next",
+            title: "Recommended step",
             subtitle: hero.truth.nowTitle.shortened(maxLength: 56),
             value: hero.truth.nowSubtitle.todayShortSentence,
             semanticState: semanticState(for: hero.truth.posture),
@@ -240,7 +240,7 @@ struct TodayExecutionViewState: Equatable {
             id: "today2.contract.fallback",
             kind: .recoveryFallback,
             title: "Fallback",
-            subtitle: support.recoveryBloom?.subtitle.todayShortSentence ?? "Make the move smaller before making the day louder.",
+            subtitle: support.recoveryBloom?.subtitle.todayShortSentence ?? "Make the step smaller before making the day louder.",
             value: support.recoveryBloom == nil ? "Smaller" : "Recovery ready",
             semanticState: support.recoveryBloom == nil ? .trust : .recovery,
             action: support.recoveryBloom?.options.first?.action ?? support.planAction,
@@ -259,15 +259,15 @@ struct TodayExecutionViewState: Equatable {
         let closure = TodayContractEntryState(
             id: "today2.contract.closure",
             kind: .actionClosure,
-            title: "Closure entry",
-            subtitle: "Completed, moved, protected, or recovered actions can land here later.",
-            value: "Entry only",
+            title: "Close the loop",
+            subtitle: "One step can become Completed, Still Counts, Rescheduled, Waiting, or Needs Recovery.",
+            value: "Needs a quick check",
             semanticState: .review,
-            action: nil,
+            action: TodayInlineAction(kind: .askWhyThisMatters, title: "Close the loop", systemImage: "checkmark.bubble", state: .default, target: primary.target),
             explanation: TodayExplanationAffordanceState(
-                id: "today2.closure.placeholder",
-                title: "Entry only",
-                summary: "This is a Today-level entry point only; future receipts stay owned by a later batch.",
+                id: "today2.closure.checkin",
+                title: "Needs a quick check",
+                summary: "Past scheduled steps ask for closure instead of becoming stale or punitive.",
                 explanationID: nil,
                 state: .default
             )
@@ -318,12 +318,12 @@ struct TodayExecutionViewState: Equatable {
             : planItems.map(\.timingLabel).prefix(3).joined(separator: " / ")
         let todayPlanLayer = TodayPlanLayerState(
             title: "Today Plan",
-            subtitle: planItems.isEmpty ? "Start with one real move." : "The planned day stays visible.",
+            subtitle: planItems.isEmpty ? "Start with one real step." : "The planned day stays visible.",
             compactTimelineLabel: timeline,
             openWindowLabel: support.timeAperture.bestUseTitle,
             calendarSourceLabel: "Based on your plan",
             items: Array(planItems),
-            moveAction: TodayInlineAction(kind: .openPlan, title: "Move This", systemImage: "arrow.right.arrow.left", state: .default, target: primary.target),
+            moveAction: TodayInlineAction(kind: .openPlan, title: "Adjust plan", systemImage: "arrow.right.arrow.left", state: .default, target: primary.target),
             parkAction: TodayInlineAction(kind: .defer, title: "Park / Not Today", systemImage: "pause.circle", state: .default, target: primary.target),
             markDoneAction: primary.kind == .complete ? primary : TodayInlineAction(kind: .complete, title: "Mark Done", systemImage: "checkmark.circle", state: .success, target: primary.target),
             accessibilityLabel: "Today Plan",
@@ -541,7 +541,7 @@ private extension TodayExecutionProjector {
                 confidenceLabel: "Low data",
                 primaryAction: action,
                 secondaryActions: [openPlanAction()],
-                explanation: TodayExplanationAffordanceState(id: "today2.empty.why", title: "Why?", summary: "There is not enough local goal or capture data to choose a best next move yet.", explanationID: nil, state: .default),
+                explanation: TodayExplanationAffordanceState(id: "today2.empty.why", title: "Why?", summary: "There is not enough local goal or capture data to choose a recommended step yet.", explanationID: nil, state: .default),
                 smallestUsefulNextStep: "Capture one thing.",
                 accessibilityLabel: "Today daily contract. Start with one real thing.",
                 accessibilityValue: "Empty state"
@@ -554,8 +554,8 @@ private extension TodayExecutionProjector {
             return TodayExecutionHeroState(
                 kind: .recovery,
                 eyebrow: "Daily contract",
-                title: (option?.title ?? "Recover with one move").shortened(maxLength: 36),
-                subtitle: (input.resilienceAssessment.smallestUsefulNextStep ?? option?.summary ?? "Choose the smaller safe move.").todayShortSentence,
+                title: (option?.title ?? "Recover with one step").shortened(maxLength: 36),
+                subtitle: (input.resilienceAssessment.smallestUsefulNextStep ?? option?.summary ?? "Choose the smaller safe step.").todayShortSentence,
                 semanticState: .recovery,
                 confidenceLabel: recoveryLabel(input.resilienceAssessment.status),
                 primaryAction: primary,
@@ -580,7 +580,7 @@ private extension TodayExecutionProjector {
             secondaryActions: secondaryStableActions(input, primary: primary),
             explanation: explanation(input, preferred: input.nowState.nextActionExplanationID, fallbackTitle: "Why this now?"),
             smallestUsefulNextStep: best?.title ?? input.legacyHero.truth.nowTitle,
-            accessibilityLabel: "Today best next move. \(best?.title ?? input.legacyHero.truth.nowTitle)",
+            accessibilityLabel: "Today recommended step. \(best?.title ?? input.legacyHero.truth.nowTitle)",
             accessibilityValue: input.nowState.nextActionConfidence.rawValue.capitalized
         )
     }
@@ -612,7 +612,7 @@ private extension TodayExecutionProjector {
         let best = TodayContractEntryState(
             id: "today2.contract.best-next",
             kind: .bestNextMove,
-            title: "Do this next",
+            title: "Recommended step",
             subtitle: bestTitle.shortened(maxLength: 56),
             value: input.nowState.nextActionConfidence == .low ? "Doable enough" : "Ready",
             semanticState: hero.semanticState,
@@ -634,15 +634,15 @@ private extension TodayExecutionProjector {
         let closure = TodayContractEntryState(
             id: "today2.contract.closure",
             kind: .actionClosure,
-            title: "Closure entry",
-            subtitle: "Completed, moved, protected, or recovered actions can land here later.",
-            value: "Entry only",
+            title: "Close the loop",
+            subtitle: "Completed, Still Counts, Rescheduled, Waiting, or Needs Recovery can be recorded here.",
+            value: "Needs a quick check",
             semanticState: .review,
-            action: nil,
+            action: TodayInlineAction(kind: .askWhyThisMatters, title: "Close the loop", systemImage: "checkmark.bubble", state: .default, target: hero.primaryAction.target),
             explanation: TodayExplanationAffordanceState(
-                id: "today2.closure.placeholder",
-                title: "Entry only",
-                summary: "Today is reserving this place for future receipts without creating a receipt system in this batch.",
+                id: "today2.closure.checkin",
+                title: "Needs a quick check",
+                summary: "Past scheduled steps ask for closure instead of becoming stale or punitive.",
                 explanationID: nil,
                 state: .default
             )
@@ -658,7 +658,7 @@ private extension TodayExecutionProjector {
             id: "today2.contract.not-today",
             kind: .notToday,
             title: "Not today",
-            subtitle: (parkedTitle.map { "\($0) can move slowly." } ?? "Nothing extra is being pulled into today.").todayShortSentence,
+            subtitle: (parkedTitle.map { "\($0) can wait." } ?? "Nothing extra is being pulled into today.").todayShortSentence,
             value: parkedTitle == nil ? "Nothing heavy" : "Parked",
             semanticState: .trust,
             action: nil,
@@ -673,7 +673,7 @@ private extension TodayExecutionProjector {
             id: "today2.contract.fallback",
             kind: .recoveryFallback,
             title: "Fallback",
-            subtitle: (input.resilienceAssessment.smallestUsefulNextStep ?? option?.summary ?? "Make the move smaller or protect it in Plan.").todayShortSentence,
+            subtitle: (input.resilienceAssessment.smallestUsefulNextStep ?? option?.summary ?? "Make the step smaller or protect it in Plan.").todayShortSentence,
             value: option == nil ? "Smaller" : "Recovery ready",
             semanticState: option == nil ? .trust : .recovery,
             action: action,
@@ -801,7 +801,7 @@ private extension TodayExecutionProjector {
         let source = calendarSourceLabel(input)
         let moveAction = TodayInlineAction(
             kind: .openPlan,
-            title: "Move This",
+            title: "Adjust plan",
             systemImage: "arrow.right.arrow.left",
             state: .default,
             target: hero.primaryAction.target
@@ -822,7 +822,7 @@ private extension TodayExecutionProjector {
         )
         return TodayPlanLayerState(
             title: "Today Plan",
-            subtitle: items.isEmpty ? "Start with one real move." : "The planned day stays visible.",
+            subtitle: items.isEmpty ? "Start with one real step." : "The planned day stays visible.",
             compactTimelineLabel: compactTimeline,
             openWindowLabel: openWindow,
             calendarSourceLabel: source,
@@ -834,7 +834,7 @@ private extension TodayExecutionProjector {
             accessibilityValue: items.isEmpty
                 ? "No fixed plan yet. \(source). \(openWindow)."
                 : "\(items.count) planned item\(items.count == 1 ? "" : "s"). \(compactTimeline). \(source). \(openWindow).",
-            accessibilityHint: "Shows the planned day and visible buttons to start, move, park, or mark done without requesting calendar access here."
+            accessibilityHint: "Shows the planned day and visible buttons to start, adjust, park, or mark done without requesting calendar access here."
         )
     }
 
@@ -903,9 +903,9 @@ private extension TodayExecutionProjector {
     func dayStateSummary(_ input: TodayExecutionProjectionInput) -> String {
         switch dayState(input) {
         case .clear:
-            return "The day has room for one real move."
+            return "The day has room for one real step."
         case .steady:
-            return "One move is clear enough to keep in view."
+            return "One step is clear enough to keep in view."
         case .tight:
             return "Keep today narrow."
         case .fragile:
@@ -915,7 +915,7 @@ private extension TodayExecutionProjector {
         case .recovered:
             return "Recovery is already shaping the day."
         case .protected:
-            return "The important move gets the first claim."
+            return "The important step gets the first claim."
         }
     }
 
@@ -1068,7 +1068,7 @@ private extension TodayExecutionProjector {
             ]
         }
         let passive = input.resilienceAssessment.passiveWorkDeferredCalmly.prefix(1).map {
-            TodayExecutionPanelState(id: "today2.passive.\($0.id)", kind: .priority, title: "Can move slowly", subtitle: $0.summary.todayShortSentence, value: $0.title.shortened(maxLength: 24), semanticState: .trust, action: nil, explanation: nil)
+            TodayExecutionPanelState(id: "today2.passive.\($0.id)", kind: .priority, title: "Can wait", subtitle: $0.summary.todayShortSentence, value: $0.title.shortened(maxLength: 24), semanticState: .trust, action: nil, explanation: nil)
         }
         let waiting = input.resilienceAssessment.waitingOrBlockedRemovedFromPressure.prefix(1).map {
             TodayExecutionPanelState(id: "today2.waiting.\($0.id)", kind: .waiting, title: "Waiting", subtitle: $0.summary.todayShortSentence, value: $0.title.shortened(maxLength: 24), semanticState: .waiting, action: nil, explanation: nil)
@@ -1096,7 +1096,7 @@ private extension TodayExecutionProjector {
         let target = TodayActionTarget(goalID: action.reference?.goalID, stepID: action.reference?.stepID)
         switch action.kind {
         case .focus:
-            return TodayInlineAction(kind: .startFocus, title: "Start focus", systemImage: "scope", state: .selected, target: target)
+            return TodayInlineAction(kind: .startFocus, title: "Start now", systemImage: "scope", state: .selected, target: target)
         case .completeAction:
             return TodayInlineAction(kind: .complete, title: "Complete", systemImage: "checkmark", state: .success, target: target)
         case .openGoal:

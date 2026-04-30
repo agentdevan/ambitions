@@ -68,6 +68,28 @@ private struct DesignSystemPreviewGallery: View {
                         .buttonStyle(AmbitionButtonStyle(tier: .secondary))
                 }
 
+                SectionHeader(eyebrow: "v2", title: "Adaptive System Panels", subtitle: "Canonical wrappers for grounded context, step recommendations, duration labels, and closure check-ins.")
+
+                HeroStepPanel(
+                    title: "Write the chorus",
+                    subtitle: "You have open creative time before your next commitment.",
+                    primaryActionTitle: "Start now",
+                    content: {
+                        HStack {
+                            TimeContextBadge("Free time · 1h 20m open", sourceLabel: "Based on your plan", state: .selected)
+                            DurationBadge("30 min planned")
+                        }
+                    }
+                )
+
+                ClosureCheckInPanel(subtitle: "Yesterday has 2 loose ends. Review them without turning the day into a stale list.") {
+                    HStack {
+                        StatusChip("Still Counts", state: .success)
+                        StatusChip("Rescheduled", state: .warning)
+                        StatusChip("Waiting", state: .default)
+                    }
+                }
+
                 AmbitionBand {
                     Image(systemName: "paintpalette")
                     Text("Band treatment carries lightweight continuity without turning every module into a heavy card.")
@@ -247,7 +269,7 @@ private struct DesignSystemPreviewGallery: View {
 
     private func panelTitle(for kind: AmbitionPanelKind) -> String {
         switch kind {
-        case .heroDecision: "Choose the next doable move"
+        case .heroDecision: "Choose the recommended step"
         case .progress: "Pace is holding"
         case .timeline: "Three recent changes"
         case .schedule: "Open window later today"
@@ -265,7 +287,7 @@ private struct DesignSystemPreviewGallery: View {
         switch kind {
         case .timeline:
             VStack(alignment: .leading, spacing: 10) {
-                previewTimelineRow("Moved", detail: "Draft session shifted to a calmer window.")
+            previewTimelineRow("Rescheduled", detail: "Draft session shifted to a calmer window.")
                 previewTimelineRow("Kept", detail: "Deep work stayed outside the busy block.")
                 previewTimelineRow("Recovered", detail: "Smaller version preserved momentum.")
             }

@@ -142,7 +142,7 @@ struct ExternalSurfaceSnapshotBuilder: Sendable {
                 kind: .today,
                 title: todayVariantTitle(posture: nowState.todayPosture),
                 detail: todayVariantDetail(posture: nowState.todayPosture, pressure: nowState.pressureLevel),
-                privacySummary: "Glance-safe next move only",
+                privacySummary: "Glance-safe next step only",
                 action: ExternalSurfaceVariantAction(title: "Open Today", surface: .tab, tab: "today"),
                 reference: primaryReference,
                 prominence: nowState.pressureLevel == .overloaded || nowState.pressureLevel == .elevated ? .elevated : .standard
@@ -182,7 +182,7 @@ struct ExternalSurfaceSnapshotBuilder: Sendable {
         case .empty:
             return "Today is open"
         case .active:
-            return "Today has a next move"
+            return "Today has a next step"
         case .waiting:
             return "Today needs confirmation"
         case .recovery:
@@ -193,7 +193,7 @@ struct ExternalSurfaceSnapshotBuilder: Sendable {
     private func todayVariantDetail(posture: ExternalSurfaceTodayPosture, pressure: ExternalSurfacePressureLevel) -> String {
         switch posture {
         case .empty:
-            return "Open Ambitions to set the first useful move."
+            return "Open Ambitions to set the first useful step."
         case .waiting:
             return "A blocker is visible; open Ambitions before committing."
         case .recovery:
@@ -203,7 +203,7 @@ struct ExternalSurfaceSnapshotBuilder: Sendable {
             case .open:
                 return "Room is available for a calm next step."
             case .steady:
-                return "Your next move is still believable."
+                return "Your next step is still believable."
             case .elevated:
                 return "Pressure is rising; keep the step small."
             case .overloaded:

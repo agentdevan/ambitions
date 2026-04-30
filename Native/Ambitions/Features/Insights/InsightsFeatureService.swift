@@ -213,7 +213,7 @@ private extension RepositoryBackedInsightsService {
 
         if current.frictionCount > current.visibleFollowThrough {
             dominantTruth = "Recent friction is teaching the system to lower scope before it asks for more."
-            editorialSummary = "The reflective read matters now because pressure is outpacing proof. A smaller next move will teach more than pushing harder."
+            editorialSummary = "The reflective read matters now because pressure is outpacing proof. A smaller next step will teach more than pushing harder."
             trustWhisper = "Based on this week, the calmer path is more believable right now."
         } else if current.adaptationCount > 0 && current.visibleFollowThrough > 0 {
             dominantTruth = "Adaptation is turning corrections into usable momentum."
@@ -266,7 +266,7 @@ private extension RepositoryBackedInsightsService {
         if let firstAdjustingGoal = goalStatuses.first(where: { $0.visualState != .success }), let target = firstAdjustingGoal.target {
             return InsightsHeroAction(
                 title: "Open the goal asking for care",
-                subtitle: "Inspect the clearest place where the plan wants a smaller or clearer next move.",
+                subtitle: "Inspect the clearest place where the plan wants a smaller or clearer next step.",
                 systemImage: "target",
                 visualState: firstAdjustingGoal.visualState,
                 goalTarget: target,
@@ -534,7 +534,7 @@ private extension RepositoryBackedInsightsService {
         if frictionCount > completionCount + minimumCount {
             return InsightsPostureSummary(
                 title: "Friction is leading the current story",
-                detail: "The healthiest response is to reduce pressure and make the next move smaller, not to add more commitments.",
+                detail: "The healthiest response is to reduce pressure and make the next step smaller, not to add more commitments.",
                 label: "Heavy week",
                 visualState: .warning
             )
@@ -638,7 +638,7 @@ private extension RepositoryBackedInsightsService {
                 state = .warning
             } else if frictionCount > 0 {
                 statusLabel = "Adjusting"
-                summary = "Recent friction suggests the current version of the work needs a smaller or clearer next move."
+                summary = "Recent friction suggests the current version of the work needs a smaller or clearer next step."
                 state = .selected
             } else if completionCount + minimumCount > 0 {
                 statusLabel = "Believable"
@@ -840,7 +840,7 @@ private extension RepositoryBackedInsightsService {
         }
         return activeGoalCount == 0
             ? "Reflection will become richer as live goals, evidence, and history accumulate."
-            : "Real evidence is accumulating against the current portfolio, and the plan quality looks strongest when the next move stays specific and visible."
+            : "Real evidence is accumulating against the current portfolio, and the plan quality looks strongest when the next step stays specific and visible."
     }
 
     func trendSummary(points: [TrendPoint]) -> String {
@@ -851,7 +851,7 @@ private extension RepositoryBackedInsightsService {
             return "The week improved as visible evidence accumulated and friction stayed manageable."
         }
         if first > last + 0.1 {
-            return "Signal softened later in the week, which usually means the next move needs less pressure and more clarity."
+            return "Signal softened later in the week, which usually means the next step needs less pressure and more clarity."
         }
         return "The week stayed relatively steady. Consistency is coming more from repeatable scope than from bursts."
     }

@@ -62,8 +62,8 @@ Do not create duplicate engines when inventions overlap:
 
 ## Daily Execution / Today Layer
 
-- Purpose: Turn the current day into a Daily Operating Contract: one protected must-do, one best next move, one intentionally-not-today item, one recovery fallback, one reason this matters, one Action Closure path, and one Save the Day escape hatch.
-- Owned concepts: Daily Operating Contract, Today Contract, Daily Operating Brief, One Move Doctrine, Attention Shield, Save the Day Mode, Recovery Gradient, Anti-Plan / Not Today summary, Friction Radar v1, Ambient Status Orb for day believability, and Mode Lens awareness.
+- Purpose: Turn the current day into a Daily Operating Contract: one protected must-do, one recommended step, one intentionally-not-today item, one recovery fallback, one reason this matters, one Action Closure path, and one Save the Day escape hatch.
+- Owned concepts: Daily Operating Contract, Today Contract, Daily Operating Brief, one-step doctrine, Attention Shield, Save the Day Mode, Recovery Gradient, Anti-Plan / Not Today summary, Friction Radar v1, Ambient Status Orb for day believability, and Mode Lens awareness.
 - Consumed by: Today, Plan, Capture, Reviews, widgets, App Intents.
 - Dependencies: Canonical Now State, Reality Model, Goal Believability, Execution Resilience, Action Closure, Life Graph relationships.
 - Must not be duplicated: Today-only priority logic, dense dashboards, or hidden navigation modes.

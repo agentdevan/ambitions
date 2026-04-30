@@ -30,7 +30,7 @@ final class RitualOrchestrationServiceTests: XCTestCase {
         XCTAssertEqual(plan.activeRecommendation.primaryAction?.goalID, "goal-morning")
         XCTAssertEqual(plan.activeRecommendation.primaryAction?.stepID, "step-morning")
         XCTAssertEqual(plan.signalSummary.openCaptureCount, 1)
-        XCTAssertTrue(plan.dayThesis.contains("one next move"))
+        XCTAssertTrue(plan.dayThesis.contains("one next step"))
     }
 
     func testMiddayResetUsesFrictionAndNoProgressForSmallerStepAction() throws {

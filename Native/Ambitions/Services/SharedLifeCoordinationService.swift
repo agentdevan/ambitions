@@ -73,7 +73,7 @@ private extension SharedLifeCoordinationService {
 
         var reasons = base.reasons
         if recentFriction > 0 {
-            reasons.append("Recent friction suggests the shared coordination load needs a gentler next move.")
+            reasons.append("Recent friction suggests the shared coordination load needs a gentler next step.")
         }
         if base.delegatedSupportActive && recentDelegatedUpdates == 0 {
             reasons.append("Support coordination is active, but recent support updates are still thin.")

@@ -403,7 +403,7 @@ enum PlanRealityBreakReasonKind: String, Sendable, CaseIterable {
 
     var title: String {
         switch self {
-        case .missedDay: "Missed day"
+        case .missedDay: "Needs Recovery"
         case .overloadedPlan: "Overloaded plan"
         case .noRecoveryMargin: "No room to recover"
         case .blockedGoal: "Blocked goal"
@@ -438,7 +438,7 @@ enum PlanReflowSuggestionKind: String, Sendable, CaseIterable {
         case .protectOneItem: "Keep this"
         case .shrinkAction: "Make it smaller"
         case .splitAction: "Split it"
-        case .moveLocalActionLater: "Move this later"
+        case .moveLocalActionLater: "Adjust plan"
         case .deferGoalOrItem: "Defer this"
         case .dropOptionalWork: "Drop optional work"
         case .parkGoal: "Park goal"

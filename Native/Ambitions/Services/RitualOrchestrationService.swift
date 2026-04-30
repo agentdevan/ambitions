@@ -198,17 +198,17 @@ private extension RitualOrchestrationService {
         switch kind {
         case .morningSetup:
             if summary.openCaptureCount > 0 {
-                return hasSelection ? "Pick one next move and keep open captures visible." : "Start by clearing the open capture signal."
+                return hasSelection ? "Pick one next step and keep open captures visible." : "Start by clearing the open capture signal."
             }
-            return "Pick one next move before the day gets noisy."
+            return "Pick one next step before the day gets noisy."
         case .middayReset:
             if summary.frictionTodayCount > 0 {
-                return "Use a smaller next move before pressure turns into drift."
+                return "Use a smaller next step before pressure turns into drift."
             }
             if summary.completedTodayCount == 0 {
                 return "Choose a visible minimum pass for the afternoon."
             }
-            return "Keep the afternoon pointed at the same believable next move."
+            return "Keep the afternoon pointed at the same believable next step."
         case .eveningClose:
             if summary.completedTodayCount > 0 {
                 return "Close the loop by logging what changed and leaving tomorrow lighter."
@@ -218,7 +218,7 @@ private extension RitualOrchestrationService {
             }
             return "Leave one clean note for the next return."
         case .weeklyReset:
-            return "Review the week around active goals, friction, and one believable next move."
+            return "Review the week around active goals, friction, and one believable next step."
         }
     }
 
@@ -245,12 +245,12 @@ private extension RitualOrchestrationService {
             return sharedLifeSnapshot.portfolioSummary.headline
         }
         if selection != nil {
-            return "Anchor the day around one next move."
+            return "Anchor the day around one next step."
         }
         if summary.openCaptureCount > 0 {
             return "Start by turning open captures into clearer plan signal."
         }
-        return "Keep the day light until the next move is clear."
+        return "Keep the day light until the next step is clear."
     }
 
     func weekThesis(summary: RitualSignalSummary, learningSnapshot: LearningAnticipationSnapshot?, sharedLifeSnapshot: SharedLifeCoordinationSnapshot?) -> String {

@@ -82,6 +82,51 @@ Use `.codex/operations/` for production work intake and execution conventions, a
   - `release harden this branch`
   - `final preflight`
 
+- `ambitions-canon-v2-reconciler`
+  Purpose: reconcile broad Ambitions 2.0 product/design/spec canon, roadmap, batch plans, decision logs, stale copy, terminology, and source-of-truth hierarchy before large integration work.
+  Explicit invoke: `Use ambitions-canon-v2-reconciler before integrating the master product and visual system spec.`
+  Implicit trigger examples:
+  - `reconcile the v2 canon`
+  - `update the master product spec`
+  - `clean stale roadmap or decision-log truth`
+  - `scan deprecated v2 terminology`
+
+- `ambitions-time-context-builder`
+  Purpose: implement or align Time Context Hierarchy, Schedule & Availability, free-time calculation, vacation/away behavior, durations, rigidity, readiness, cognitive fit, automation levels, and optional receipt-backed reflow.
+  Explicit invoke: `Use ambitions-time-context-builder for Schedule & Availability models.`
+  Implicit trigger examples:
+  - `build time context hierarchy`
+  - `add vacation availability behavior`
+  - `ground duration labels`
+  - `make reflow permissioned and reversible`
+
+- `ambitions-action-closure-receipts`
+  Purpose: implement or align Step Occurrence, Action Closure, closure outcomes, closure receipts, Still Counts, Needs a quick check, Today closure prompts, Trust Center receipt history, and Goal Detail receipt trails.
+  Explicit invoke: `Use ambitions-action-closure-receipts to align closure receipts.`
+  Implicit trigger examples:
+  - `add Still Counts`
+  - `show closure receipts in Today and Goal Detail`
+  - `replace missed or overdue step states`
+  - `build retroactive closure`
+
+- `ambitions-ios-surface-polisher`
+  Purpose: implement or polish Ambitions iOS surfaces under the current master product and visual system, including Today, Plan, You, Capture, Goals, Goal Detail, Trust Center, What Ambitions Knows, Reviews, Appearance Studio, Recovery Flow, shared components, previews, and fixtures.
+  Explicit invoke: `Use ambitions-ios-surface-polisher while updating Today and Plan surfaces.`
+  Implicit trigger examples:
+  - `polish Ambitions v2 surfaces`
+  - `make the Today surface match the master visual system`
+  - `align Trust Center UI`
+  - `update shared AmbitionsUI components`
+
+- `ambitions-v2-validation-closeout`
+  Purpose: validate broad Ambitions v2 product/design/model/docs/surface implementation before claiming completion, with explicit checks for canon consistency, forbidden language, five-tab IA, Today copy, schedule/vacation/cognitive-fit/receipt truth, duration grounding, previews, tests, and honest verified/not-verified reporting.
+  Explicit invoke: `Use ambitions-v2-validation-closeout before declaring this v2 integration complete.`
+  Implicit trigger examples:
+  - `close out the master product and visual system implementation`
+  - `validate v2 consistency`
+  - `scan for forbidden language`
+  - `produce the final verified/not verified summary`
+
 ## AGENTS.md vs Skills
 
 - Put repo-wide, durable truth in `AGENTS.md`.
@@ -115,6 +160,10 @@ Use `.codex/operations/` for production work intake and execution conventions, a
 - `repo-truth-enforcer` -> `ios-qa-regression-checker`
 - `planner-domain-safe-editor` -> `ios-qa-regression-checker`
 - `release-hardening` -> `repo-truth-enforcer` and `ios-qa-regression-checker`
+- `ambitions-canon-v2-reconciler` -> `ambitions-time-context-builder` -> `ambitions-action-closure-receipts` -> `ambitions-ios-surface-polisher` -> `ambitions-v2-validation-closeout`
+- `ambitions-canon-v2-reconciler` -> `ambitions-ios-surface-polisher` -> `ambitions-v2-validation-closeout`
+- `ambitions-time-context-builder` -> `ambitions-action-closure-receipts` -> `ambitions-v2-validation-closeout`
+- `ambitions-ios-surface-polisher` -> `ios-qa-regression-checker` -> `ambitions-v2-validation-closeout`
 
 ## Recovery Rules
 

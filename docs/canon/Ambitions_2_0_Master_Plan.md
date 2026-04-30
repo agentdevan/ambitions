@@ -14,6 +14,8 @@ Expanded thesis:
 
 The active design source of truth is [design/Ambitions_Design_Constitution.md](design/Ambitions_Design_Constitution.md). It wins for design, IA, UX writing, component naming, interaction, trust, accessibility, and external-surface contracts when older active docs conflict.
 
+The current master product and visual direction is [Ambitions_Master_Product_Visual_System_Spec_v2.md](Ambitions_Master_Product_Visual_System_Spec_v2.md). Its top-level thesis is: "Ambitions is a premium iPhone-native life operating system that uses adaptive panels, timeline rails, grounded time context, receipts, proof, and action closure to help people know where to start, take the right step, recover without shame, and trust what changed." It supersedes older conflicting language around next-move wording, manual Focus CTAs, guessed durations, vacation/free-time assumptions, silent reflow, stale overdue-task behavior, and punitive completion language.
+
 Ambitions 2.0 is not merely a planner, habit tracker, goal app, calendar wrapper, analytics dashboard, or beautiful productivity app. It is the daily operating loop that keeps life objects continuous, believable, provable, recoverable, correctable, trusted, remembered, focused, strategically pathed, and calm.
 
 The product direction is:
@@ -173,7 +175,7 @@ Ambitions 2.0 includes:
 - Life Graph v1 and object relationships as the connector between Capture, Today, Goals, Plan, You, Reviews, Path Intelligence, Proof of Progress, Commitments, Waiting Room, corrections, and receipts
 - Action Closure and receipts across app actions, calendar writes, export/import, external surfaces, corrections, safe failures, and undo-eligible changes
 - Living Capture, Commitments and Waiting Room, Proof of Progress, Correction Cards, Anti-Plan / Not Today, Personal Operating Constitution, Review Constellation, and Life OS Receipt as Ambitions 2.0 v1 commitments where scoped by owning batches
-- bounded Ambitions-specific engines such as Believability Kernel, Constraint Gravity, Decision Debt, Attention Shield, Opportunity Window, Momentum Integrity, Memory Confidence, Assumption Watchtower, Proof Rail, Trust Ledger, Narrative Memory Map, Re-entry, Safe Automation Boundary, and One Move Doctrine, clustered into roadmap layers rather than one batch per invention
+- bounded Ambitions-specific engines such as Believability Kernel, Constraint Gravity, Decision Debt, Attention Shield, Opportunity Window, Momentum Integrity, Memory Confidence, Assumption Watchtower, Proof Rail, Trust Ledger, Narrative Memory Map, Re-entry, Safe Automation Boundary, and the one-step doctrine, clustered into roadmap layers rather than one batch per invention
 - Accessibility Nutrition Layer
 - Apple-first sync
 - export/import trust fallback
@@ -210,7 +212,7 @@ These may remain historical or later-vision ideas, but they are not active 2.0 i
 ## Product Principles
 
 1. Reality before aspiration.
-2. One best next move before breadth.
+2. One recommended step before breadth.
 3. Insight belongs at the decision point.
 4. Recovery is a first-class execution path.
 5. Plan must degrade gracefully without permissions.
@@ -219,7 +221,7 @@ These may remain historical or later-vision ideas, but they are not active 2.0 i
 8. Top-level surfaces must stay calm.
 9. Build shared systems once before surfaces consume them.
 10. Apple-native external surfaces follow stable internal truth.
-11. One Move Doctrine: when the user is overwhelmed, Ambitions collapses complexity into one believable move.
+11. One-step doctrine: when the user is overwhelmed, Ambitions collapses complexity into one believable step.
 12. Proof over theater: progress must be backed by actions, artifacts, decisions, feedback, resolved blockers, calendar completions, notes, files, links, photos, or reflections rather than fake percentages alone.
 13. Correction over black boxes: recommendations, assumptions, memory, and actions must be correctable and future behavior must learn only from evidence and user-confirmed signals.
 14. Do Less Better: Ambitions may recommend dropping, shrinking, parking, or reviewing instead of adding work.
@@ -303,7 +305,7 @@ Ambitions 2.0 must become a daily continuity loop:
 1. Capture messy life.
 2. Classify what kind of life object it is.
 3. Attach it to goals, people, time, resources, proof, or waiting.
-4. Show one believable next move.
+4. Show one believable recommended step.
 5. Protect what matters when reality breaks.
 6. Produce a receipt for what changed.
 7. Let the user correct memory, assumptions, recommendations, and actions.

@@ -707,6 +707,58 @@ private extension RepositoryBackedProfileService {
                     ]
                 ),
                 ProfileSystemCenterSection(
+                    id: "planning-behavior",
+                    title: "Planning Behavior",
+                    footer: "Guided automation is the default. Ambitions does not fill open time just because it exists.",
+                    items: [
+                        ProfileSystemCenterItem(
+                            id: "schedule-availability",
+                            title: "Schedule & Availability",
+                            subtitle: "Work, school, protected time, buffers, and anchors.",
+                            icon: "calendar.badge.clock",
+                            statusLabel: calendarAuthorizationLabel(calendarAuthorization),
+                            semanticState: .calendarDerived,
+                            accessibilityHint: "Opens Schedule and Availability."
+                        ),
+                        ProfileSystemCenterItem(
+                            id: "plan-behavior",
+                            title: "Plan Behavior",
+                            subtitle: "Open time, protected free time, buffers, and reflow rules.",
+                            icon: "slider.horizontal.below.rectangle",
+                            statusLabel: "Do not fill",
+                            semanticState: .protected,
+                            accessibilityHint: "Opens Plan Behavior."
+                        ),
+                        ProfileSystemCenterItem(
+                            id: "automation-trust",
+                            title: "Automation & Trust",
+                            subtitle: AutomationLevel.defaultLevel.explanation,
+                            icon: "hand.raised",
+                            statusLabel: AutomationLevel.defaultLevel.displayLabel,
+                            semanticState: .trust,
+                            accessibilityHint: "Opens Automation and Trust."
+                        ),
+                        ProfileSystemCenterItem(
+                            id: "vacation-away-time",
+                            title: "Vacation / Away Time",
+                            subtitle: "Vacation is not free time unless you mark it open.",
+                            icon: "airplane.departure",
+                            statusLabel: VacationAvailabilityBehavior.defaultBehavior.displayLabel,
+                            semanticState: .protected,
+                            accessibilityHint: "Opens Vacation and Away Time."
+                        ),
+                        ProfileSystemCenterItem(
+                            id: "durations",
+                            title: "Durations",
+                            subtitle: "Planned, suggested, historical, actual, or unset.",
+                            icon: "timer",
+                            statusLabel: "Grounded",
+                            semanticState: .trust,
+                            accessibilityHint: "Opens duration behavior."
+                        )
+                    ]
+                ),
+                ProfileSystemCenterSection(
                     id: "system-edges",
                     title: "System Edges",
                     footer: nil,

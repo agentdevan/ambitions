@@ -366,7 +366,7 @@ Receipt rules:
 - Meaningful commands should produce a receipt.
 - Sensitive receipts hide details by default.
 - Receipts should be searchable later.
-- Failed actions should say what remains safe.
+- Unsuccessful actions should say what remains safe.
 - Undo availability must be truthful.
 - Correction is not the same as undo.
 - Do not over-confirm ordinary reversible local actions.
@@ -634,7 +634,7 @@ Trust implementation is acceptable when:
 - Calendar write requires confirmation.
 - Calendar-derived memory requires confirmation.
 - Sync/export/accessibility claims are truthful.
-- Failed actions state what remains safe.
+- Unsuccessful actions state what remains safe.
 - Memory deletion and delete-all-memory require confirmation.
 - No AI/model terminology appears in normal UI.
 

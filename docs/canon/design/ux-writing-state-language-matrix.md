@@ -21,7 +21,7 @@ Prefer:
 - `Most important today`.
 - `Too much for today`.
 - `Make today doable`.
-- `Move this later`.
+- `Adjust plan`.
 - `Keep this on today`.
 - `What should stay on today?`.
 - `Looks doable`.

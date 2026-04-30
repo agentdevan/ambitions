@@ -202,8 +202,8 @@ Minimum acceptance interpretation:
 
 ### Error States
 
-- Failed saves preserve user input.
-- Failed external/export-style actions explain what remains safe.
+- Unsuccessful saves preserve user input.
+- Unsuccessful external/export-style actions explain what remains safe.
 - Error states offer a next recovery action.
 
 ### Accessibility

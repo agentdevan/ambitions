@@ -85,9 +85,9 @@ struct ExternalWidgetProjection: Sendable, Equatable {
         if let ritualCue = glance.ritualCue {
             switch ritualCue.kind {
             case .morningSetup:
-                return "One next move is ready."
+                return "One next step is ready."
             case .middayReset:
-                return ritualCue.progressState == .needsReset ? "A smaller reset is ready." : "The next move still fits."
+                return ritualCue.progressState == .needsReset ? "A smaller reset is ready." : "The next step still fits."
             case .eveningClose:
                 return "Close the loop in Today."
             case .weeklyReset:
@@ -96,7 +96,7 @@ struct ExternalWidgetProjection: Sendable, Equatable {
         }
         switch glance.todayPosture {
         case .waiting:
-            return "Open Ambitions for the next useful move."
+            return "Open Ambitions for the next useful step."
         case .empty:
             return "Open Ambitions to refresh your plan."
         case .active, .recovery:

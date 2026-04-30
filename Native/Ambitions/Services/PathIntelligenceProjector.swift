@@ -344,7 +344,7 @@ private extension DefaultPathIntelligenceProjector {
             FutureSelfScenario(
                 id: "scenario-smaller-\(primary.id)",
                 kind: .smallerFirstMove,
-                title: "If the next move feels too large",
+                title: "If the next step feels too large",
                 summary: "Use the smallest readiness move before deeper commitment.",
                 assumptionIDs: assumptions,
                 notPredictionLabel: "Scenario, not prediction",
@@ -372,7 +372,7 @@ private extension DefaultPathIntelligenceProjector {
                     id: "scenario-waiting-\(primary.id)",
                     kind: .waitingReview,
                     title: "If this stays blocked",
-                    summary: "Review the blocking question before asking Today to protect a next move.",
+                    summary: "Review the blocking question before asking Today to protect a next step.",
                     assumptionIDs: assumptions,
                     notPredictionLabel: "Scenario, not prediction",
                     handoffSurface: .plan
@@ -410,7 +410,7 @@ private extension DefaultPathIntelligenceProjector {
 
     func displayTitle(_ title: String) -> String {
         let trimmed = title.trimmingCharacters(in: .whitespacesAndNewlines)
-        guard trimmed.isEmpty == false else { return "the smallest visible move" }
+        guard trimmed.isEmpty == false else { return "the smallest visible step" }
         return trimmed.prefix(1).lowercased() + trimmed.dropFirst()
     }
 

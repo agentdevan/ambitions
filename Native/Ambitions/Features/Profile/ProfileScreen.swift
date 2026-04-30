@@ -138,6 +138,11 @@ private enum ProfileRootDetail: String, Identifiable {
     case reviews
     case proof
     case archive
+    case scheduleAvailability
+    case planBehavior
+    case automationTrust
+    case vacationAwayTime
+    case durations
     case notifications
     case integrations
     case widgets
@@ -160,6 +165,11 @@ private enum ProfileRootDetail: String, Identifiable {
         case .reviews: "Reviews"
         case .proof: "Proof"
         case .archive: "Archive / Completed"
+        case .scheduleAvailability: "Schedule & Availability"
+        case .planBehavior: "Plan Behavior"
+        case .automationTrust: "Automation & Trust"
+        case .vacationAwayTime: "Vacation / Away Time"
+        case .durations: "Durations"
         case .notifications: "Notifications"
         case .integrations: "Integrations"
         case .widgets: "Widgets / Live Activities / Shortcuts"
@@ -233,6 +243,11 @@ private struct ProfileSettingsRootView: View {
         case "reviews": .reviews
         case "proof": .proof
         case "archive-completed": .archive
+        case "schedule-availability": .scheduleAvailability
+        case "plan-behavior": .planBehavior
+        case "automation-trust": .automationTrust
+        case "vacation-away-time": .vacationAwayTime
+        case "durations": .durations
         case "notifications": .notifications
         case "integrations": .integrations
         case "widgets-live-activities-shortcuts": .widgets
@@ -404,6 +419,77 @@ private struct ProfileRootDetailSheet: View {
             )
         case .archive:
             ProfileSectionCard(eyebrow: "Archive", section: dashboard.accountSection, accessibilityIdentifier: "profile.archive-card")
+        case .scheduleAvailability:
+            ProfileSectionCard(
+                eyebrow: "Planning Behavior",
+                section: ProfileSectionGroup(
+                    title: "Schedule & Availability",
+                    subtitle: "Ambitions uses this to avoid treating busy time as free time.",
+                    items: [
+                        SettingsItem(id: "schedule-work", title: "Work schedule", subtitle: "Multiple windows, irregular blocks, and low-control work are supported by the v2 model.", icon: "briefcase", valueLabel: "Local"),
+                        SettingsItem(id: "schedule-school", title: "School schedule", subtitle: "School blocks and transition buffers are hard context before open time is calculated.", icon: "graduationcap", valueLabel: "Local"),
+                        SettingsItem(id: "schedule-protected", title: "Protected time", subtitle: "Family, household, pet care, sleep, and recovery anchors stay out of free time.", icon: "shield", valueLabel: "Protected"),
+                        SettingsItem(id: "schedule-buffers", title: "Commute / transition buffers", subtitle: "Buffers count as real protected time.", icon: "arrow.left.arrow.right", valueLabel: "Hard context")
+                    ],
+                    footer: "Setup remains optional and non-blocking."
+                ),
+                accessibilityIdentifier: "profile.schedule-availability-card"
+            )
+        case .planBehavior:
+            ProfileSectionCard(
+                eyebrow: "Planning Behavior",
+                section: ProfileSectionGroup(
+                    title: "Plan Behavior",
+                    subtitle: "Control how Ambitions treats open windows and recovery prompts.",
+                    items: [
+                        SettingsItem(id: "plan-open-time", title: "Open time behavior", subtitle: "Open time is not automatically filled.", icon: "rectangle.dashed", valueLabel: AvailabilityState.doNotFill.displayLabel),
+                        SettingsItem(id: "plan-protected-free", title: "Protected free time", subtitle: "Some open windows should stay quiet.", icon: "lock", valueLabel: AvailabilityState.protectedFreeTime.displayLabel),
+                        SettingsItem(id: "plan-reflow", title: "Reflow permission", subtitle: "Meaningful day changes ask first and save receipts.", icon: "arrow.triangle.2.circlepath", valueLabel: "Ask first"),
+                        SettingsItem(id: "plan-rigidity", title: "Default rigidity", subtitle: "Flexible and optional items can move only inside trusted rules.", icon: "pin", valueLabel: RigidityLevel.flexible.displayLabel)
+                    ],
+                    footer: "Hard context, protected blocks, and user-owned boundaries win before recommendations."
+                ),
+                accessibilityIdentifier: "profile.plan-behavior-card"
+            )
+        case .automationTrust:
+            ProfileSectionCard(
+                eyebrow: "Planning Behavior",
+                section: ProfileSectionGroup(
+                    title: "Automation & Trust",
+                    subtitle: "Choose how much Ambitions may change without asking.",
+                    items: AutomationLevel.allCases.map {
+                        SettingsItem(id: "automation-\($0.rawValue)", title: $0.displayLabel, subtitle: $0.explanation, icon: $0 == .guided ? "checkmark.shield" : "hand.raised", valueLabel: $0 == AutomationLevel.defaultLevel ? "Default" : nil)
+                    },
+                    footer: "Guided is the default: Ambitions proposes and asks before changing meaningful parts of the day."
+                ),
+                accessibilityIdentifier: "profile.automation-trust-card"
+            )
+        case .vacationAwayTime:
+            ProfileSectionCard(
+                eyebrow: "Planning Behavior",
+                section: ProfileSectionGroup(
+                    title: "Vacation / Away Time",
+                    subtitle: "Vacation is not free time by default.",
+                    items: VacationAvailabilityBehavior.allCases.map {
+                        SettingsItem(id: "vacation-\($0.rawValue)", title: $0.displayLabel, subtitle: vacationAvailabilitySubtitle(for: $0), icon: "airplane.departure", valueLabel: $0 == VacationAvailabilityBehavior.defaultBehavior ? "Default" : nil)
+                    },
+                    footer: "A new vacation can make its selected behavior the future default."
+                ),
+                accessibilityIdentifier: "profile.vacation-away-card"
+            )
+        case .durations:
+            ProfileSectionCard(
+                eyebrow: "Planning Behavior",
+                section: ProfileSectionGroup(
+                    title: "Durations",
+                    subtitle: "Guessed durations are never presented as fact.",
+                    items: DurationSource.allCases.map {
+                        SettingsItem(id: "duration-\($0.rawValue)", title: durationTitle(for: $0), subtitle: durationSubtitle(for: $0), icon: "timer", valueLabel: nil)
+                    },
+                    footer: "Examples: 30 min planned, Suggested: 15-20 min, Usually 10-30 min, Duration not set."
+                ),
+                accessibilityIdentifier: "profile.durations-card"
+            )
         case .notifications:
             if let notificationPermissionState {
                 DegradedStateCard(
@@ -432,6 +518,37 @@ private struct ProfileRootDetailSheet: View {
             ProfileSectionCard(eyebrow: "Help", section: dashboard.accountSection, accessibilityIdentifier: "profile.support-card")
         case .about:
             ProfileSectionCard(eyebrow: "About", section: dashboard.accountSection, accessibilityIdentifier: "profile.about-card")
+        }
+    }
+
+    private func vacationAvailabilitySubtitle(for behavior: VacationAvailabilityBehavior) -> String {
+        switch behavior {
+        case .unavailable: "Ambitions keeps this time out of planning unless you mark part of it open."
+        case .protected: "Ambitions preserves the time and stays light."
+        case .flexible: "Ambitions may suggest light use after you confirm it."
+        case .open: "Ambitions may treat selected time as usable for planning."
+        }
+    }
+
+    private func durationTitle(for source: DurationSource) -> String {
+        switch source {
+        case .userSet: "User-set"
+        case .userAccepted: "Accepted suggestion"
+        case .suggested: "Suggested"
+        case .historical: "Historical range"
+        case .unset: "Unset"
+        case .actual: "Actual"
+        }
+    }
+
+    private func durationSubtitle(for source: DurationSource) -> String {
+        switch source {
+        case .userSet: "Shown as planned because you set it."
+        case .userAccepted: "Shown as planned after you accept it."
+        case .suggested: "Always labeled as suggested."
+        case .historical: "Always labeled as usually."
+        case .unset: "Shown as Duration not set."
+        case .actual: "Shown only after completion evidence exists."
         }
     }
 }
@@ -1759,7 +1876,7 @@ private struct ProfileTrustReceiptRow: View {
         case .created: "Created"
         case .changed: "Changed"
         case .scheduled: "Scheduled"
-        case .moved: "Moved"
+        case .moved: "Rescheduled"
         case .attached: "Attached"
         case .detached: "Detached"
         case .exportedPrepared: "Export prepared"

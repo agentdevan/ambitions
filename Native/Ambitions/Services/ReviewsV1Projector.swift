@@ -216,7 +216,7 @@ private extension ReviewsV1Projector {
                     kind: .event,
                     title: event.title,
                     detail: event.summary ?? "A local action changed position or priority.",
-                    valueLabel: event.kind == .itemDisplacedByHigherPriority ? "Moved to protect priority" : "Moved or deferred",
+                    valueLabel: event.kind == .itemDisplacedByHigherPriority ? "Rescheduled to protect priority" : "Rescheduled or deferred",
                     icon: "clock.arrow.circlepath",
                     state: .default
                 )
@@ -646,7 +646,7 @@ private extension ReviewsV1Projector {
         case .completed:
             return "Completed"
         case .moved:
-            return "Moved"
+            return "Rescheduled"
         case .changed, .scheduled, .created, .attached, .detached, .undoAvailable, .undoUnavailable, .correctionAvailable:
             return receipt.correctionAvailability.isAvailable ? "Can be corrected" : "Receipt"
         }
@@ -701,7 +701,7 @@ private extension EventLedgerKind {
         case .actionSkipped:
             return "Skipped"
         case .actionMoved, .planRescheduled:
-            return "Moved"
+            return "Rescheduled"
         case .actionSplit:
             return "Split"
         case .planRecovered, .recoveryAccepted, .recoveryDueToPriorityConflict:

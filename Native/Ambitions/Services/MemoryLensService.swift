@@ -225,13 +225,13 @@ private extension DefaultMemoryLensService {
                 explanation = "Ambitions treats the skip as useful context for reshaping, not as a failure."
             case .delayed:
                 title = "Delay recorded"
-                explanation = "Timing changed, so the safest next move may be gentler or later."
+                explanation = "Timing changed, so the safest next step may be gentler or later."
             case .edited:
                 title = "Plan edited"
                 explanation = "A step or plan phrase changed, so recall returns to the current plan shape rather than the old wording."
             case .confused:
                 title = "Clarify next step"
-                explanation = "Confusion is a signal to make the next move clearer before adding more work."
+                explanation = "Confusion is a signal to make the next step clearer before adding more work."
             case .tooBig:
                 title = "Step marked too big"
                 explanation = "The app should now prefer a smaller version when this path appears again."
@@ -243,7 +243,7 @@ private extension DefaultMemoryLensService {
                 explanation = "The path needs a relevance check before Ambitions keeps recommending the same move."
             case .askedForSmallerVersion:
                 title = "Asked for a smaller version"
-                explanation = "Recovery context is preserved so future recall can start from a believable next move."
+                explanation = "Recovery context is preserved so future recall can start from a believable next step."
             case .askedWhyThisMatters:
                 title = "Asked why this matters"
                 explanation = "Why-now context should stay close to the goal instead of becoming a detached audit item."
@@ -283,7 +283,7 @@ private extension DefaultMemoryLensService {
                 title: "Why now: \(goal.title)",
                 subtitle: pressure,
                 explanation: "This recall points to the current useful step and the reason it deserves attention, without exposing raw planning logs.",
-                queryText: [goal.title, step.title, pressure, "why now current next move"].joined(separator: " "),
+                queryText: [goal.title, step.title, pressure, "why now current next step"].joined(separator: " "),
                 timestamp: goal.updatedAt,
                 kind: .whyNow,
                 facet: .whyNow,
@@ -375,13 +375,13 @@ private extension DefaultMemoryLensService {
 
     func pressurePhrase(for goal: Goal, step: Step, recentFeedback: [GoalFeedbackEvent]) -> String {
         if recentFeedback.contains(where: { if case .askedForSmallerVersion = $0 { return true }; return false }) {
-            return "A smaller version is now the calmest next move."
+            return "A smaller version is now the calmest next step."
         }
         if recentFeedback.contains(where: { if case .delayed = $0 { return true }; return false }) {
             return "Timing changed recently, so this step needs a believable return."
         }
         if step.timing.dueAt != nil || step.timing.targetBy != nil || goal.timing.dueAt != nil || goal.timing.targetBy != nil {
-            return "Time pressure is visible, but the next move stays bounded."
+            return "Time pressure is visible, but the next step stays bounded."
         }
         return "This is the next readable move from the current local plan."
     }

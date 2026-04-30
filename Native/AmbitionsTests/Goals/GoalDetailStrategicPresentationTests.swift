@@ -33,7 +33,7 @@ final class GoalDetailStrategicPresentationTests: XCTestCase {
 
         XCTAssertEqual(missionControl.lanes.map(\.kind), [.overview, .path, .steps, .proof, .decisions, .risks, .archive])
         XCTAssertFalse(missionControl.currentTruth.isEmpty)
-        XCTAssertEqual(missionControl.lanes.first(where: { $0.kind == .steps })?.badgeTitle, "Next move")
+        XCTAssertEqual(missionControl.lanes.first(where: { $0.kind == .steps })?.badgeTitle, "Next step")
         XCTAssertEqual(missionControl.decisions.emptyTitle, "No decisions yet")
         XCTAssertEqual(missionControl.risks.emptyTitle, "No major risk visible")
         XCTAssertFalse(missionControl.archive.title.isEmpty)

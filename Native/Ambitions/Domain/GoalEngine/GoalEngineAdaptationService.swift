@@ -72,7 +72,7 @@ struct GoalEngineAdaptationService {
             recommendation = .shrinkStep(
                 stepID: input.selectedStep.id,
                 rationale: analysis.hasFragilePlan
-                    ? "Plan fragility is high, so recovery should make the next move smaller before it asks for more follow-through."
+                    ? "Plan fragility is high, so recovery should make the next step smaller before it asks for more follow-through."
                     : "Repeated avoidance combined with size complaints means the step should shrink before the planner asks for more follow-through.",
                 confidence: confidence(for: signals.frictionScore, bonus: 0.16),
                 signals: signals,

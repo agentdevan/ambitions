@@ -319,7 +319,7 @@ A copy/UI-language change passes when:
 
 - It is calm, adult, specific, clear, non-shaming, and human.
 - It follows `HUMAN_LANGUAGE_REVIEW.md`.
-- It prefers plain phrases such as `Do this next`, `Most important today`, `Too much for today`, `Make today doable`, `Move this later`, `Keep this on today`, `Looks doable`, and `No longer works` where they fit.
+- It prefers plain phrases such as `Start here`, `Recommended step`, `Most important today`, `Too much for today`, `Make today doable`, `Adjust plan`, `Keep this on today`, `Looks doable`, and `No longer works` where they fit.
 - It uses approved explanation labels such as `Why This`, `Why Now`, `Why Changed`, `What This Uses`, `Needs Confirmation`, and `Update This`.
 - It uses Wave 2 state language only where still appropriate and translates internal labels into human UI copy when needed.
 - It uses Wave 3 trust language: `You are in control` for Trust Center top status, `What Ambitions Knows` for the memory section, and `Memory` for the object/type.

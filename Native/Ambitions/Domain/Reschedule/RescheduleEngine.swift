@@ -387,7 +387,7 @@ private extension RescheduleEngine {
                 return smallerStep.summary
             }
             if input.sharedLifeSummary?.careContextActive == true {
-                return "Keep the next move gentle enough to support the current care context."
+                return "Keep the next step gentle enough to support the current care context."
             }
             return nil
         }

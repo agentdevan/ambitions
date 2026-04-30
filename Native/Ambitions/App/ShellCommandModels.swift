@@ -41,7 +41,7 @@ enum ShellCommandIntent: String, CaseIterable, Hashable, Identifiable, Sendable,
         case .newGoal: "Open the existing create-goal flow inside the shell-owned compose path."
         case .quickPlanPatch: "Land in Plan to reshape the current week."
         case .quickRecovery: "Return to Today with recovery posture in view."
-        case .quickFocus: "Return to Today and center the next move."
+        case .quickFocus: "Return to Today and center the next step."
         case .openGoal: "Find and open one goal in its canonical destination."
         case .openWeek: "Open Plan as the canonical week surface."
         case .openCapture: "Open Capture."

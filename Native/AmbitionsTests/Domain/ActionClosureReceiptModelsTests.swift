@@ -494,6 +494,58 @@ final class ActionClosureReceiptModelsTests: XCTestCase {
         XCTAssertEqual(search.emptyDetail, "Try a different filter.")
         XCTAssertTrue(search.localOnly)
     }
+
+    func testClosureReceiptUsesNonPunitiveActionClosureLanguage() {
+        let stepID = UUID(uuidString: "11111111-1111-1111-1111-111111111111")!
+        let occurrence = StepOccurrence(
+            stepID: stepID,
+            duration: DurationMetadata(plannedDuration: .seconds(1_800), source: .userSet),
+            rigidity: .flexible,
+            readiness: .ready,
+            closureState: .awaitingClosure
+        )
+
+        let stillCounts = ActionReceipt.closureReceipt(
+            id: "receipt-still-counts",
+            occurrence: occurrence,
+            outcome: .stillCounts,
+            stepTitle: "Write the chorus",
+            occurredAt: "2026-04-29T16:00:00Z",
+            recordedAt: "2026-04-29T18:00:00Z",
+            why: "User recorded a smaller version after the planned window."
+        )
+        let rescheduled = ActionReceipt.closureReceipt(
+            id: "receipt-rescheduled",
+            occurrence: occurrence,
+            outcome: .moved,
+            stepTitle: "Write the chorus",
+            occurredAt: "2026-04-29T16:00:00Z"
+        )
+        let review = ActionReceipt.closureReceipt(
+            id: "receipt-review",
+            occurrence: occurrence,
+            outcome: .awaitingClosure,
+            stepTitle: "Write the chorus",
+            occurredAt: "2026-04-29T16:00:00Z"
+        )
+
+        XCTAssertTrue(stillCounts.isWellFormed)
+        XCTAssertEqual(stillCounts.title, "Still Counts")
+        XCTAssertEqual(stillCounts.summary, "Still Counts · smaller version completed")
+        XCTAssertEqual(stillCounts.resultState, .completed)
+        XCTAssertEqual(stillCounts.undoAvailability, .requiresConfirmation)
+        XCTAssertEqual(stillCounts.changedFacts.first?.newValueSummary, "Still Counts")
+        XCTAssertEqual(rescheduled.title, "Rescheduled")
+        XCTAssertEqual(rescheduled.resultState, .moved)
+        XCTAssertEqual(review.title, "Needs a quick check")
+        XCTAssertEqual(review.nextAction?.title, "Close the loop")
+
+        let visibleCopy = [stillCounts.title, stillCounts.summary, rescheduled.title, review.title, review.summary].joined(separator: " ")
+        XCTAssertFalse(visibleCopy.localizedCaseInsensitiveContains("Overdue"))
+        XCTAssertFalse(visibleCopy.localizedCaseInsensitiveContains("Failed"))
+        XCTAssertFalse(visibleCopy.localizedCaseInsensitiveContains("Missed"))
+        XCTAssertFalse(visibleCopy.localizedCaseInsensitiveContains("Behind"))
+    }
 }
 
 private extension ActionClosureReceiptModelsTests {

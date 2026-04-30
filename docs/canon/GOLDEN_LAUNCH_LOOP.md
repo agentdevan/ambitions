@@ -44,7 +44,7 @@ Demo sequence:
 1. User captures: `Release 3 songs by August 1`.
 2. Ambitions saves it under Creative and shows where it went.
 3. Ambitions creates a simple plan with a first step.
-4. Today shows: `Do this next`.
+4. Today shows: `Start here`.
 5. The day becomes too full.
 6. Today says: `Too much for today`.
 7. User taps: `Make today doable`.
@@ -59,7 +59,7 @@ This demo should feel understandable without explaining product architecture.
 
 | Former weakness / threat | Strengthened product rule | Required fix |
 | --- | --- | --- |
-| Too much internal/product language | UI sounds human and obvious | Follow `HUMAN_LANGUAGE_REVIEW.md`; visible UI uses `Do this next`, `Too much for today`, `Make today doable`, `Move this later`. |
+| Too much internal/product language | UI sounds human and obvious | Follow `HUMAN_LANGUAGE_REVIEW.md` and the v2 master spec; visible UI uses `Start here`, `Recommended step`, `Too much for today`, `Make today doable`, `Adjust plan`. |
 | Roadmap too broad for launch | Launch proves one complete loop | Mark launch-critical work only if it supports the Golden Launch Loop. |
 | Life OS overpromise | Bigger vision is earned through the first loop | Keep `life OS` as internal/investor language; user-facing launch copy focuses on organizing goals, plans, and next steps. |
 | ADHD support too philosophical | Focus support becomes visible product quality | One primary decision per screen, clear next action, non-shaming recovery, no dense dashboard above the fold. |
@@ -76,15 +76,15 @@ Internal precision is useful for planning. Normal UI should use words people imm
 
 | Internal / canon term | User-facing direction |
 | --- | --- |
-| Best Next Action | Do this next |
+| Best Next Action | Recommended step |
 | Now State | Right now / Why this now |
 | Believability | Looks doable |
 | Fragile | Too much planned |
 | Broken / No Longer Holds | No longer works |
-| Protected / Protect | Keep this / Move this later / What should stay? |
+| Protected / Protect | Keep this / Adjust plan / What should stay? |
 | Goal Weather | How this goal is going |
 | Proof Rail / Proof Spine | Progress saved / Proof |
-| Action Closure | Saved / Moved / Changed / Undo |
+| Action Closure | Saved / Rescheduled / Changed / Undo |
 | Smart Attachment | Suggested place / Move it here? |
 | Personal System Center | You / Your settings and history |
 | Intelligence | Suggestions |

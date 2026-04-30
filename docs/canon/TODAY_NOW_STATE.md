@@ -2,7 +2,7 @@
 
 Status: Active canon consolidation layer.
 
-Purpose: Consolidate Today, Now State, best next action, current/next schedule, rituals, recovery, empty state, and sensitive-item behavior into one implementation-readable reference. This document reflects Wave 8 product decisions plus the post-canon human-language correction layer in `HUMAN_LANGUAGE_REVIEW.md`.
+Purpose: Consolidate Today, Now State, recommended step, current/next schedule, rituals, recovery, empty state, and sensitive-item behavior into one implementation-readable reference. This document reflects Wave 8 product decisions plus the post-canon human-language correction layer in `HUMAN_LANGUAGE_REVIEW.md` and the v2 master direction in `Ambitions_Master_Product_Visual_System_Spec_v2.md`.
 
 ## Core Today Doctrine
 
@@ -17,13 +17,13 @@ Help the user know what matters now.
 Internal/product concept:
 
 ```text
-One best next action.
+One recommended step.
 ```
 
 Preferred normal UI copy:
 
 ```text
-Do this next.
+Start here.
 ```
 
 Today is not:
@@ -38,7 +38,7 @@ Today is not:
 
 Recommended top-level priority:
 
-1. `Do this next` / one best next action.
+1. `Start here` / one recommended step.
 2. Plain explanation: `Why this now`.
 3. Current or next schedule slice.
 4. Full daily schedule below the main action.
@@ -60,11 +60,12 @@ Today must sound like a calm person helping the user decide what still matters.
 Use:
 
 ```text
-Do this next.
+Start here.
+Recommended step.
 Most important today.
 Too much for today.
 Make today doable.
-Move this later.
+Adjust plan.
 Keep this on today.
 What should stay on today?
 If there is time.
@@ -186,7 +187,7 @@ Pick what still needs to happen, and move the rest later.
 Recommended recovery actions:
 
 - `Make today doable`
-- `Move this later`
+- `Adjust plan`
 - `Keep this on today`
 - `Park`
 - `Open Plan`
@@ -268,7 +269,7 @@ The next-action area should answer:
 
 - What matters now?
 - Why this, not everything else?
-- What is the smallest useful next move?
+- What is the smallest useful next step?
 - What happens if the day no longer works?
 
 Rules:
@@ -277,7 +278,7 @@ Rules:
 - Alternatives can exist below, but should not dilute the main decision.
 - The user should be able to inspect `Why This` or similar explanation.
 - Sensitive items should respect private-item behavior.
-- Normal UI should say `Do this next`, not `Best Next Action`.
+- Normal UI should say `Start here` and `Recommended step`, not `Best Next Action`.
 
 ## Today Must Never Become
 
@@ -296,7 +297,7 @@ Today / Now State is acceptable when:
 
 - Today helps the user know what matters now.
 - One next action is prioritized first.
-- Normal UI says `Do this next` or equivalent plain copy.
+- Normal UI says `Start here`, `Recommended step`, or equivalent plain copy.
 - Full daily schedule appears below the main action, not above it.
 - Broken-day behavior offers recovery and asks what should stay on today.
 - Recovery uses plain copy such as `Too much for today` and `Make today doable`.

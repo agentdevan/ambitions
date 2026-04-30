@@ -168,7 +168,7 @@ Required anatomy:
 
 - what changed
 - consequence if ignored
-- safest next move
+- safest next step
 - alternatives
 - receipt after action
 
@@ -388,7 +388,7 @@ Rules:
 - Do not hide deadline impact.
 - Create receipt after meaningful recovery.
 
-### Missed Protected Item
+### Protected Item Needs Review
 
 Copy:
 

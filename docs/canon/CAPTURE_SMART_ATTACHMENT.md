@@ -66,7 +66,7 @@ Rules:
 - High confidence still requires a correctable receipt.
 - Medium confidence should not block flow; it should make correction obvious.
 - Low confidence should either ask one compact question or save safely to Needs a Place.
-- Failed classification should never discard input.
+- Unsuccessful classification should never discard input.
 
 ## Temporary Holding Area
 
@@ -211,7 +211,7 @@ Rules:
 - Preserve input.
 - Do not discard raw user thought.
 - Do not fake a successful route.
-- Failed or uncertain captures should remain recoverable.
+- Unsuccessful or uncertain captures should remain recoverable.
 
 ## Memory / Learning Boundary
 

@@ -72,7 +72,7 @@ Ambitions 2.0 is organized around one daily life operating loop:
 
 1. Life enters through Capture.
 2. Life objects connect through Life Graph.
-3. Ambitions selects one believable next move.
+3. Ambitions selects one believable recommended step.
 4. Reality changes.
 5. Ambitions reflows the plan safely.
 6. Every action closes with a receipt.
@@ -172,7 +172,7 @@ Planned object-level systems:
 5. Calendar write creates user-confirmed blocks only.
 6. Calendar writes produce Action Closure receipts and undo where safely supported.
 7. Scheduled blocks feed Now State, Today, and review.
-8. Missed or disrupted blocks enter Reality Reflow, recovery, and later review.
+8. Disrupted or unclosed blocks enter Reality Reflow, recovery, and later review.
 
 ## Global Shell / Chrome Architecture
 
@@ -203,7 +203,7 @@ The dedicated global chrome batch should establish the permanent shell, contextu
 - Mode Lens: a visible shell pill or contextual treatment for Focus, Triage, Plan, Recover, and Review. It changes emphasis, not navigation, and must not create hidden tabs or duplicate ownership.
 - Continuity Ribbon: a compact, calm strip under the header that shows the one continuity fact the user most needs.
 - Action Closure Tray: a premium receipt panel for meaningful commands, not a generic toast system.
-- Save the Day entry: a reachable rescue affordance that returns one protected must-do, one move/drop/shrink action, and one recovery explanation.
+- Save the Day entry: a reachable rescue affordance that returns one protected must-do, one reschedule/drop/shrink action, and one recovery explanation.
 - Ambient Status Orb: a reusable qualitative marker for states such as Clear, Steady, Tight, Fragile, At risk, Recovered, and Protected.
 - Life Graph Breadcrumb: a drill-down aid showing where an object lives in the user's life system; it should not clutter top-level screens.
 - Mission Control Lanes: an object-level detail pattern for Path, Now, Proof, and Risk first, with People, Resources, and Decisions later when supported.

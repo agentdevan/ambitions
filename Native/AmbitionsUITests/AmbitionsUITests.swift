@@ -464,7 +464,7 @@ final class AmbitionsUITests: XCTestCase {
         let primaryAction = app.buttons["today.hero.primary-action"]
         XCTAssertTrue(primaryAction.waitForExistence(timeout: 10))
 
-        if primaryAction.label == "Start focus" {
+        if primaryAction.label == "Start now" {
             primaryAction.tap()
         } else {
             XCTAssertEqual(primaryAction.label, "Answer")

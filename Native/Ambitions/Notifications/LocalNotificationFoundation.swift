@@ -157,7 +157,7 @@ struct NextStepLocalNotificationPlanner: Sendable {
         if let ambientTitle = snapshot?.ambientState?.focus.title {
             return ambientTitle
         }
-        guard let ritualCue = snapshot?.nowState?.ritualCue else { return "Next move ready" }
+        guard let ritualCue = snapshot?.nowState?.ritualCue else { return "Next step ready" }
         switch ritualCue.kind {
         case .morningSetup:
             return "Morning setup"
@@ -180,9 +180,9 @@ struct NextStepLocalNotificationPlanner: Sendable {
         }
         switch ritualCue.kind {
         case .morningSetup:
-            return "One next move is ready."
+            return "One next step is ready."
         case .middayReset:
-            return ritualCue.progressState == .needsReset ? "A smaller next move is ready." : "Your next move is still available."
+            return ritualCue.progressState == .needsReset ? "A smaller next step is ready." : "Your next step is still available."
         case .eveningClose:
             return "Close the loop from Today."
         case .weeklyReset:

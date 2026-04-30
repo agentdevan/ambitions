@@ -333,7 +333,7 @@ private extension LearningAnticipationService {
                 conciseReason: "Shared responsibilities are time-sensitive, so a calm coordination move now protects the path.",
                 reasons: [
                     sharedLifeSummary.reasons.first ?? "Shared responsibilities are active.",
-                    sharedLifeSummary.coordinationSignals.first?.summary ?? "Coordination still needs a visible next move."
+                    sharedLifeSummary.coordinationSignals.first?.summary ?? "Coordination still needs a visible next step."
                 ]
             )
         }

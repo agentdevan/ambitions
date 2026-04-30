@@ -29,7 +29,7 @@ I will tell you what kind of problem this is.
 I will tell you what I know, what I am assuming, and what I need to confirm.
 I will retrieve current relevant context when the world outside your head matters.
 I will compile a believable path.
-I will adapt the next move to your actual time, history, and energy fit.
+I will adapt the next step to your actual time, history, and energy fit.
 I will keep the path fresh as conditions change.
 I will help you move without turning your life into admin.
 

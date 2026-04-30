@@ -5,7 +5,7 @@ enum PreviewTodayScenarios {
     static let stable = makeScenario(
         posture: .stable,
         title: "Draft the talk outline",
-        supporting: "The clearest next move is already visible and small enough to finish.",
+        supporting: "The clearest next step is already visible and small enough to finish.",
         nowSubtitle: "Submit my conference talk proposal",
         nextTitle: "Record one rough vocal pass",
         nextSubtitle: "Flexible learning work if the main block lands early.",
@@ -27,7 +27,7 @@ enum PreviewTodayScenarios {
         nowSubtitle: "Submit my conference talk proposal",
         nextTitle: "Record one rough vocal pass",
         nextSubtitle: "Keep this flexible unless the main block slips.",
-        primaryAction: TodayInlineAction(kind: .protectLater, title: "Move later", systemImage: "calendar.badge.clock", state: .selected, target: TodayActionTarget(goalID: "goal-1", stepID: "step-1")),
+        primaryAction: TodayInlineAction(kind: .protectLater, title: "Adjust plan", systemImage: "calendar.badge.clock", state: .selected, target: TodayActionTarget(goalID: "goal-1", stepID: "step-1")),
         supportingActions: [
             TodayInlineAction(kind: .complete, title: "Complete", systemImage: "checkmark", state: .success, target: TodayActionTarget(goalID: "goal-1", stepID: "step-1")),
             TodayInlineAction(kind: .defer, title: "Defer", systemImage: "clock.arrow.circlepath", state: .default, target: TodayActionTarget(goalID: "goal-1", stepID: "step-1")),
@@ -39,14 +39,14 @@ enum PreviewTodayScenarios {
 
     static let recovery = makeScenario(
         posture: .recovering,
-        title: "Split the next move",
+        title: "Split the next step",
         supporting: "A smaller version is the safest way back into the day.",
         nowSubtitle: "Ship the native create goal flow",
         nextTitle: "Open Plan",
         nextSubtitle: "If the day still feels too heavy, protect the block there.",
         primaryAction: TodayInlineAction(kind: .split, title: "Split", systemImage: "scissors", state: .selected, target: TodayActionTarget(goalID: "goal-2", stepID: "step-2")),
         supportingActions: [
-            TodayInlineAction(kind: .protectLater, title: "Move later", systemImage: "calendar.badge.clock", state: .default, target: TodayActionTarget(goalID: "goal-2", stepID: "step-2")),
+            TodayInlineAction(kind: .protectLater, title: "Adjust plan", systemImage: "calendar.badge.clock", state: .default, target: TodayActionTarget(goalID: "goal-2", stepID: "step-2")),
             TodayInlineAction(kind: .askForHelp, title: "Ask for help", systemImage: "lifepreserver", state: .default, target: TodayActionTarget(goalID: "goal-2", stepID: "step-2"))
         ],
         reentry: TodayReentryState(
@@ -63,11 +63,11 @@ enum PreviewTodayScenarios {
         title: "Return through the next believable move",
         supporting: "The earlier plan slipped, so Today is narrowing the path back to one calmer step.",
         nowSubtitle: "Ship the native create goal flow",
-        nextTitle: "Move later",
+        nextTitle: "Adjust plan",
         nextSubtitle: "If the step still feels too large, move the shaping into Plan without shame.",
         primaryAction: TodayInlineAction(kind: .split, title: "Recover calmly", systemImage: "arrow.uturn.left.circle", state: .selected, target: TodayActionTarget(goalID: "goal-2", stepID: "step-2")),
         supportingActions: [
-            TodayInlineAction(kind: .protectLater, title: "Move later", systemImage: "calendar.badge.clock", state: .default, target: TodayActionTarget(goalID: "goal-2", stepID: "step-2")),
+            TodayInlineAction(kind: .protectLater, title: "Adjust plan", systemImage: "calendar.badge.clock", state: .default, target: TodayActionTarget(goalID: "goal-2", stepID: "step-2")),
             TodayInlineAction(kind: .reschedule, title: "Reschedule", systemImage: "forward.fill", state: .warning, target: TodayActionTarget(goalID: "goal-2", stepID: "step-2"))
         ],
         reentry: nil,
@@ -79,9 +79,9 @@ enum PreviewTodayScenarios {
         title: "Lighten the day first",
         supporting: "There are too many active asks right now, so pressure needs to come down before new effort goes up.",
         nowSubtitle: "Four active goals are pulling on the same day.",
-        nextTitle: "Move later",
+        nextTitle: "Adjust plan",
         nextSubtitle: "Use Plan to protect one block instead of trying to do all of it now.",
-        primaryAction: TodayInlineAction(kind: .protectLater, title: "Move later", systemImage: "calendar.badge.clock", state: .selected, target: TodayActionTarget()),
+        primaryAction: TodayInlineAction(kind: .protectLater, title: "Adjust plan", systemImage: "calendar.badge.clock", state: .selected, target: TodayActionTarget()),
         supportingActions: [
             TodayInlineAction(kind: .reschedule, title: "Reschedule", systemImage: "forward.fill", state: .warning, target: TodayActionTarget(goalID: "goal-1", stepID: "step-1")),
             TodayInlineAction(kind: .split, title: "Split", systemImage: "scissors", state: .selected, target: TodayActionTarget(goalID: "goal-1", stepID: "step-1"))
@@ -92,7 +92,7 @@ enum PreviewTodayScenarios {
 
     static let lowData = makeScenario(
         posture: .lowData,
-        title: "Clarify the next move first",
+        title: "Clarify the next step first",
         supporting: "The day has room, but stronger timing claims would be fake until one missing answer lands.",
         nowSubtitle: "A draft is waiting on one clarification.",
         nextTitle: "Open detail",
@@ -105,7 +105,7 @@ enum PreviewTodayScenarios {
 
     static let noPlan = makeScenario(
         posture: .noPlan,
-        title: "Build today from one real move",
+        title: "Build today from one real step",
         supporting: "Today stays calm until a real goal or draft exists.",
         nowSubtitle: "Nothing here is faking urgency.",
         nextTitle: nil,
@@ -238,7 +238,7 @@ enum PreviewTodayScenarios {
                     ? TodayFocusScreenletState(
                         title: title,
                         subtitle: nowSubtitle,
-                        detail: "Focus is narrowed to one move so the rest of Today can stay quiet.",
+                        detail: "Focus is narrowed to one step so the rest of Today can stay quiet.",
                         primaryAction: supportingActions.first ?? primaryAction,
                         secondaryActions: Array(supportingActions.dropFirst().prefix(2)),
                         trustWhisper: TodayTrustWhisperState(
@@ -328,7 +328,7 @@ enum PreviewTodayScenarios {
         case .overloaded: return "The day needs fewer simultaneous asks before effort goes up."
         case .recovering: return "Use the remaining room for one safe block, not for catching everything up."
         case .lowData: return "Clarification matters before stronger timing claims."
-        case .noPlan: return "The first move should stay bounded and real."
+        case .noPlan: return "The first step should stay bounded and real."
         }
     }
 
@@ -364,8 +364,8 @@ enum PreviewTodayScenarios {
         let options = ([primaryAction] + supportingActions).prefix(3).enumerated().map { index, action in
             TodayRecoveryOptionState(
                 id: "recovery-\(index)",
-                title: index == 0 ? "Safest next move" : action.title,
-                detail: index == 0 ? "The first option should feel like relief, not punishment." : "A calmer alternative stays visible if the first move still feels too heavy.",
+                title: index == 0 ? "Safest next step" : action.title,
+                detail: index == 0 ? "The first option should feel like relief, not punishment." : "A calmer alternative stays visible if the first step still feels too heavy.",
                 state: action.state,
                 action: action
             )

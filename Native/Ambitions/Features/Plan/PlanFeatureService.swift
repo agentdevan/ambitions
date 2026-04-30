@@ -1285,7 +1285,7 @@ private extension RepositoryBackedPlanService {
                 id: "decision-next-step-\(summary.goal.id)",
                 title: "Needs a decision",
                 detail: "\(summary.goal.title) is active but not represented in this plan window.",
-                suggestion: "Give it one next move, park it, or leave it intentionally outside today.",
+                suggestion: "Give it one next step, park it, or leave it intentionally outside today.",
                 visualState: .warning,
                 target: GoalRouteTarget(goalID: summary.goal.id),
                 planRoute: nil
@@ -1333,7 +1333,7 @@ private extension RepositoryBackedPlanService {
                 id: "decision-proof-\(noProof.goal.id)",
                 title: "Proof is thin",
                 detail: "\(noProof.goal.title) has work in the plan but no proof recorded yet.",
-                suggestion: "Keep the next move small enough to leave evidence.",
+                suggestion: "Keep the next step small enough to leave evidence.",
                 visualState: .default,
                 target: GoalRouteTarget(goalID: noProof.goal.id),
                 planRoute: nil
@@ -1437,7 +1437,7 @@ private extension RepositoryBackedPlanService {
                 id: "conflict-proof-\(thinProof.goal.id)",
                 title: "Work is moving without proof",
                 detail: "\(thinProof.goal.title) has multiple plan blocks but no proof yet.",
-                suggestion: "Make the next move receipt-friendly.",
+                suggestion: "Make the next step receipt-friendly.",
                 visualState: .default,
                 target: GoalRouteTarget(goalID: thinProof.goal.id),
                 planRoute: nil
@@ -1490,9 +1490,9 @@ private extension RepositoryBackedPlanService {
         if overloaded, let pressuredGoalSummary {
             suggestions.append(PlanDecisionItemState(
                 id: "recovery-shrink-\(pressuredGoalSummary.goal.id)",
-                title: "Shrink one move",
+                title: "Shrink one step",
                 detail: "\(pressuredGoalSummary.goal.title) is the clearest place to reduce pressure.",
-                suggestion: "Make the next move smaller before moving anything else.",
+                suggestion: "Make the next step smaller before moving anything else.",
                 visualState: .warning,
                 target: GoalRouteTarget(goalID: pressuredGoalSummary.goal.id),
                 planRoute: nil
@@ -1609,7 +1609,7 @@ private extension RepositoryBackedPlanService {
             visualState = .warning
         } else if let proofMissingSummary {
             reasonKind = .proofMissing
-            reasonDetail = "\(proofMissingSummary.goal.title) has plan work but no proof yet, so the next move should be receipt-ready."
+            reasonDetail = "\(proofMissingSummary.goal.title) has plan work but no proof yet, so the next step should be receipt-ready."
             visualState = .default
         } else if openCaptures.isEmpty == false {
             reasonKind = .urgentOutsideItem
@@ -1700,16 +1700,16 @@ private extension RepositoryBackedPlanService {
             append(.protectOneItem, detail: "Protect the one goal that must stay active now.", impact: "Narrows focus", state: .selected)
             append(.parkGoal, detail: "Park one active goal until it has real room.", impact: "Broad change needs confirmation", state: .warning)
         case .proofMissing:
-            append(.shrinkAction, detail: "Make the next move small enough to leave proof.", impact: "Receipt-ready adjustment", state: .default)
+            append(.shrinkAction, detail: "Make the next step small enough to leave proof.", impact: "Receipt-ready adjustment", state: .default)
             append(.splitAction, detail: "Split the work so the first part can close cleanly.", impact: "Local draft suggestion", state: .default)
         case .urgentOutsideItem:
             append(.deferGoalOrItem, detail: "Defer the item that does not belong in this plan window.", impact: "Needs confirmation", state: .warning, target: nil, planRoute: openCaptures.isEmpty ? nil : .capturesInbox)
             append(.dropOptionalWork, detail: "Drop optional work only after you confirm it is not needed.", impact: "Destructive choice gated", state: .warning, target: nil, planRoute: openCaptures.isEmpty ? nil : .capturesInbox)
         case .missedDay, .overloadedPlan, .noRecoveryMargin, .lowCapacityFragileDay:
             append(.protectOneItem, detail: "Keep one must-do defended before changing the rest.", impact: "Smallest useful adjustment", state: .selected)
-            append(.shrinkAction, detail: targetGoal.map { "Make \($0.title)'s next move smaller." } ?? "Make the next move smaller.", impact: "Local suggestion only", state: .warning)
+            append(.shrinkAction, detail: targetGoal.map { "Make \($0.title)'s next step smaller." } ?? "Make the next step smaller.", impact: "Local suggestion only", state: .warning)
             append(.splitAction, detail: "Split the work so today carries only the first clear part.", impact: "Local draft suggestion", state: .default)
-            append(.moveLocalActionLater, detail: "Move one local action later without touching Calendar.", impact: "Needs confirmation before mutation", state: .default)
+            append(.moveLocalActionLater, detail: "Reschedule one local action later without touching Calendar.", impact: "Needs confirmation before mutation", state: .default)
             append(.deferGoalOrItem, detail: "Defer the lower-priority item that no longer fits.", impact: "Broad change needs confirmation", state: .warning)
             append(.dropOptionalWork, detail: "Drop only optional work, and only after confirmation.", impact: "Destructive choice gated", state: .warning)
             append(.recoverRest, detail: "Protect recovery or rest as part of the plan.", impact: "No shame recovery", state: .success, target: nil)
@@ -1956,7 +1956,7 @@ private extension RepositoryBackedPlanService {
         case .protectOneItem: "Keep one must-do defended."
         case .shrinkAction: "Reduce the ask before moving it."
         case .splitAction: "Carry only the first clear part."
-        case .moveLocalActionLater: "Move one local item after confirmation."
+        case .moveLocalActionLater: "Reschedule one local item after confirmation."
         case .deferGoalOrItem: "Leave lower-priority work outside this window."
         case .dropOptionalWork: "Remove optional work only with confirmation."
         case .recoverRest: "Protect rest or recovery as real plan material."

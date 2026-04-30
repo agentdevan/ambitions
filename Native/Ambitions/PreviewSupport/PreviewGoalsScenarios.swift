@@ -381,13 +381,13 @@ enum PreviewGoalsScenarios {
         scopeSignal: GoalPortfolioMaturitySignal(id: "scope", title: "Scope needs review", detail: "4 live ambitions are active; choose what should stay protected.", state: .warning),
         stuckWorkSignal: GoalPortfolioMaturitySignal(id: "stuck-work", title: "Stuck work is visible", detail: "1 waiting or blocked · 2 crowded or stalled", state: .warning),
         proofSignal: GoalPortfolioMaturitySignal(id: "proof", title: "Proof is thin", detail: "2 live ambitions need a proof point before momentum is easy to trust.", state: .default),
-        nextStepSignal: GoalPortfolioMaturitySignal(id: "next-step", title: "Next moves are clear", detail: "Every live ambition has a current next visible step.", state: .selected),
+        nextStepSignal: GoalPortfolioMaturitySignal(id: "next-step", title: "Next steps are clear", detail: "Every live ambition has a current next visible step.", state: .selected),
         archiveLearning: [
             "Finish launch checklist: completed with proof visible.",
             "Park the old weekly board: parked so attention can stay honest."
         ],
         accessibilityLabel: "Portfolio maturity",
-        accessibilityValue: "Scope needs review. Stuck work is visible. Proof is thin. Next moves are clear.",
+        accessibilityValue: "Scope needs review. Stuck work is visible. Proof is thin. Next steps are clear.",
         accessibilityHint: "Review scope, stuck work, proof, and next-step clarity before adding more goals."
     )
 
@@ -398,7 +398,7 @@ enum PreviewGoalsScenarios {
             outcome: "Keep the shipped app truthful, validated, and ready for a narrower release-readiness pass.",
             intent: "Understand the next hardening move and the proof that the app's claims still hold.",
             progress: GoalDetailProgress(label: "5 of 11 steps landed", detail: "Progress is tracked through current plan steps, docs cleanup, and validation results.", value: 0.46, evidenceLabel: "85 minutes of visible evidence"),
-            strategicStatus: GoalDetailStrategicStatus(title: "Path is in motion", summary: "You are in the hardening closeout stage with the next move already surfaced.", supportingDetail: "Manual priority #1 • 46% visible progress"),
+            strategicStatus: GoalDetailStrategicStatus(title: "Path is in motion", summary: "You are in the hardening closeout stage with the next step already surfaced.", supportingDetail: "Manual priority #1 • 46% visible progress"),
             nextMovement: GoalDetailNextMovement(title: "Refresh release docs and trust copy", summary: "Keep You, README, and manual notes aligned with current verified behavior.", timingLabel: "Due 2026-04-15", rationale: "This keeps the release-readiness path honest before broader validation closes out.", state: .selected),
             trajectory: GoalDetailTrajectoryState(phaseTitle: "Truth and trust", phaseSummary: "Repo truth, conservative copy, and release notes are the current chamber.", milestoneSummary: "Refresh release docs and trust copy", momentumSummary: "1 of 2 visible milestones are already moving.", timelineSummary: "The deadline is real, but the path should still stay session-sized. The next step stays small enough to act on without losing the broader path."),
             timingNote: "The deadline is real, but the path should still stay session-sized.",
@@ -418,7 +418,7 @@ enum PreviewGoalsScenarios {
                     GoalDetailStepItem(id: "s1", title: "Refresh release docs and trust copy", summary: "Keep You, README, and manual notes aligned with current verified behavior.", timingLabel: "Due 2026-04-15", statusLabel: "Planned", state: .selected),
                     GoalDetailStepItem(id: "s2", title: "Rerun the native validation flow", summary: "Use the existing build and test seams and keep unresolved platform claims conservative.", timingLabel: "Due 2026-04-16", statusLabel: "Planned", state: .default),
                 ]),
-                GoalDetailSectionState(id: "sec-2", title: "Path", summary: "Broader structure beyond the next move.", kindLabel: "Upcoming", steps: [
+                GoalDetailSectionState(id: "sec-2", title: "Path", summary: "Broader structure beyond the next step.", kindLabel: "Upcoming", steps: [
                     GoalDetailStepItem(id: "s3", title: "Review manual platform checks", summary: "Keep widgets, shortcuts, and notification notes honest about what still needs hands-on verification.", timingLabel: "Due 2026-04-17", statusLabel: "Planned", state: .default),
                 ]),
             ],
@@ -450,7 +450,7 @@ enum PreviewGoalsScenarios {
             defaultLens: .tasks,
             missionControl: previewMissionControl(
                 title: "Close the hardening pass",
-                currentTruth: "You are in the hardening closeout stage with the next move already surfaced.",
+                currentTruth: "You are in the hardening closeout stage with the next step already surfaced.",
                 nextTitle: "Refresh release docs and trust copy",
                 proofItems: [
                     GoalEvidenceItem(id: "e1", title: "Today route state proved out", subtitle: "Session Logged", timestamp: "2026-04-14T11:40:00Z", state: .success),
@@ -479,7 +479,7 @@ enum PreviewGoalsScenarios {
                 GoalPathStage(id: "lp1", title: "Starter path", summary: "Low-pressure first signal", stepCountLabel: "2 steps", position: .current, statusLabel: "Current", highlight: "Record one rough pass", state: .selected),
             ],
             sections: [
-                GoalDetailSectionState(id: "lsec1", title: "Starter path", summary: "Short, safe first moves.", kindLabel: "Overview", steps: [
+                GoalDetailSectionState(id: "lsec1", title: "Starter path", summary: "Short, safe first steps.", kindLabel: "Overview", steps: [
                     GoalDetailStepItem(id: "ls1", title: "Record one rough pass", summary: "Capture one take and note the muddiest frequency area.", timingLabel: "Untimed", statusLabel: "Planned", state: .selected),
                 ]),
             ],
@@ -594,7 +594,7 @@ enum PreviewGoalsScenarios {
             outcome: "Create consistent reading support for Maya without turning the relationship into compliance work.",
             intent: "Support Maya with structure that stays collaborative and non-punitive.",
             progress: GoalDetailProgress(label: "2 of 7 support steps landed", detail: "Progress is reading the real persisted plan and evidence history.", value: 0.31, evidenceLabel: "45 minutes of visible evidence"),
-            strategicStatus: GoalDetailStrategicStatus(title: "Support path is in motion", summary: "You are in the support rhythm stage, with the next movement already surfaced.", supportingDetail: "Manual priority #3 • 31% visible progress"),
+            strategicStatus: GoalDetailStrategicStatus(title: "Support path is in motion", summary: "You are in the support rhythm stage, with the next step already surfaced.", supportingDetail: "Manual priority #3 • 31% visible progress"),
             nextMovement: GoalDetailNextMovement(title: "Set up one calm reading check-in", summary: "Invite Maya to choose the time and the book.", timingLabel: "Support window open", rationale: "This keeps the support path collaborative without taking ownership away from Maya.", state: .selected),
             trajectory: GoalDetailTrajectoryState(phaseTitle: "Support rhythm", phaseSummary: "Create repeatable, calm support loops", milestoneSummary: "Set up one calm reading check-in", momentumSummary: "45 minutes of visible evidence", timelineSummary: "Support goals should suggest windows, not impose pressure. Support goals stay non-punitive. Progress reflects what you can support, not what you can force."),
             timingNote: "Support goals should suggest windows, not impose pressure.",
@@ -647,7 +647,7 @@ enum PreviewGoalsScenarios {
             outcome: "The shell is complete.",
             intent: "Keep the completed story readable without competing for attention.",
             progress: GoalDetailProgress(label: "Complete", detail: "Closed work stays visible.", value: 1, evidenceLabel: "Proof visible"),
-            strategicStatus: GoalDetailStrategicStatus(title: "Completed", summary: "This goal is complete and no longer needs a next move.", supportingDetail: "Closed loop"),
+            strategicStatus: GoalDetailStrategicStatus(title: "Completed", summary: "This goal is complete and no longer needs a next step.", supportingDetail: "Closed loop"),
             nextMovement: nil,
             trajectory: GoalDetailTrajectoryState(phaseTitle: "Completed", phaseSummary: "The loop is closed.", milestoneSummary: "All milestones landed", momentumSummary: "Proof visible", timelineSummary: "Completed goals stay part of the story."),
             timingNote: "Completed",
@@ -668,7 +668,7 @@ enum PreviewGoalsScenarios {
             canSwitchToUntimed: false,
             supportModeActive: false,
             defaultLens: .path,
-            missionControl: previewMissionControl(title: "Stabilize the five-tab shell", currentTruth: "This goal is complete and preserved.", nextTitle: "No next move needed", proofItems: [], timelineKind: .completed)
+            missionControl: previewMissionControl(title: "Stabilize the five-tab shell", currentTruth: "This goal is complete and preserved.", nextTitle: "No next step needed", proofItems: [], timelineKind: .completed)
         ),
         parkedTarget.id: GoalDetailPresentation(
             target: parkedTarget,
@@ -704,12 +704,12 @@ enum PreviewGoalsScenarios {
             headline: GoalDetailHeadline(eyebrow: "Goal Detail", title: "Retire stale experiment", subtitle: "Closed because it no longer fits the current direction.", renderState: .onHold, modeLabel: "Exploration", timingLabel: "Cancelled", supportLabel: nil),
             outcome: "The experiment is closed.",
             intent: "Preserve what changed without treating it as active work.",
-            progress: GoalDetailProgress(label: "Cancelled", detail: "Closed without a next move.", value: 0, evidenceLabel: "No proof yet"),
+            progress: GoalDetailProgress(label: "Cancelled", detail: "Closed without a next step.", value: 0, evidenceLabel: "No proof yet"),
             strategicStatus: GoalDetailStrategicStatus(title: "Cancelled", summary: "This goal is closed and should not compete for attention.", supportingDetail: "Archive"),
             nextMovement: nil,
             trajectory: GoalDetailTrajectoryState(phaseTitle: "Cancelled", phaseSummary: "Closed exploration.", milestoneSummary: "No next milestone", momentumSummary: "No proof yet", timelineSummary: "Cancelled goals remain part of the record."),
             timingNote: "Cancelled",
-            progressNote: "Closed without a next move.",
+            progressNote: "Closed without a next step.",
             manualPriorityLabel: "Archive",
             assumptions: [],
             suggestions: [],
@@ -726,7 +726,7 @@ enum PreviewGoalsScenarios {
             canSwitchToUntimed: false,
             supportModeActive: false,
             defaultLens: .path,
-            missionControl: previewMissionControl(title: "Retire stale experiment", currentTruth: "This goal is closed and preserved.", nextTitle: "No next move needed", proofItems: [], timelineKind: .cancelled)
+            missionControl: previewMissionControl(title: "Retire stale experiment", currentTruth: "This goal is closed and preserved.", nextTitle: "No next step needed", proofItems: [], timelineKind: .cancelled)
         ),
     ]
 
@@ -740,7 +740,7 @@ enum PreviewGoalsScenarios {
     ) -> GoalDetailMissionControlState {
         let hasProof = proofItems.isEmpty == false
         let riskIsCalm = riskTitle == "No major visible risk"
-        let nextAvailable = nextTitle != "No next move needed"
+        let nextAvailable = nextTitle != "No next step needed"
         let proofHeadline = hasProof ? "\(proofItems.count) proof point\(proofItems.count == 1 ? "" : "s")" : "No proof yet"
         let riskItems = riskIsCalm ? [] : [
             GoalDetailRiskState(
@@ -768,7 +768,7 @@ enum PreviewGoalsScenarios {
             lanes: [
                 GoalDetailMissionLaneState(kind: .overview, title: "Overview", headline: timelineKind.title, summary: currentTruth, detail: "Next: \(nextTitle)", badgeTitle: "State", systemImage: "rectangle.and.text.magnifyingglass", state: .selected),
                 GoalDetailMissionLaneState(kind: .path, title: "Path", headline: "Current phase", summary: "Next milestone: \(nextTitle)", detail: "Preview path data is bounded to this goal.", badgeTitle: "Current", systemImage: "point.topleft.down.curvedto.point.bottomright.up", state: .selected),
-                GoalDetailMissionLaneState(kind: .steps, title: "Steps", headline: nextTitle, summary: nextAvailable ? "Keep this as the primary contained Step." : "No action is needed right now.", detail: "", badgeTitle: nextAvailable ? "Next move" : "Closed", systemImage: "scope", state: nextAvailable ? .selected : .default),
+                GoalDetailMissionLaneState(kind: .steps, title: "Steps", headline: nextTitle, summary: nextAvailable ? "Keep this as the primary contained Step." : "No action is needed right now.", detail: "", badgeTitle: nextAvailable ? "Next step" : "Closed", systemImage: "scope", state: nextAvailable ? .selected : .default),
                 GoalDetailMissionLaneState(kind: .proof, title: "Proof", headline: proofHeadline, summary: hasProof ? "Evidence is visible." : "Needs evidence", detail: proofItems.first.map { "Latest: \($0.title)" } ?? "No proof has been recorded for this goal yet.", badgeTitle: hasProof ? "Evidence visible" : "No proof yet", systemImage: "checkmark.seal", state: hasProof ? .selected : .default),
                 GoalDetailMissionLaneState(kind: .decisions, title: "Decisions", headline: "No decisions yet", summary: "Decision trail stays here when this goal changes.", detail: "", badgeTitle: "No decisions", systemImage: "arrow.triangle.branch", state: .default),
                 GoalDetailMissionLaneState(kind: .risks, title: "Risks", headline: riskItems.first?.title ?? "No major risk visible", summary: riskItems.first?.summary ?? "Nothing in this preview is asking for rescue.", detail: "", badgeTitle: riskIsCalm ? "Calm" : "Needs review", systemImage: "exclamationmark.triangle", state: riskIsCalm ? .success : .warning),
@@ -776,15 +776,15 @@ enum PreviewGoalsScenarios {
             ],
             timeline: GoalDetailTimelineState(
                 title: "Storyline",
-                subtitle: "A compact read on what happened, what is current, and what is only a possible next move.",
+                subtitle: "A compact read on what happened, what is current, and what is only a possible next step.",
                 items: [
                     GoalDetailTimelineItemState(id: "started-\(title)", kind: .started, title: "Started", summary: "Preview start", timestamp: nil, state: .default, isFuture: false),
                     GoalDetailTimelineItemState(id: "current-\(title)", kind: timelineKind, title: timelineKind.title, summary: currentTruth, timestamp: nil, state: timelineKind == .completed ? .success : timelineKind == .waiting ? .warning : .default, isFuture: false),
-                    GoalDetailTimelineItemState(id: "next-\(title)", kind: .next, title: nextTitle, summary: nextAvailable ? "Possible next move." : "No future certainty is claimed.", timestamp: nil, state: nextAvailable ? .selected : .default, isFuture: nextAvailable),
+                    GoalDetailTimelineItemState(id: "next-\(title)", kind: .next, title: nextTitle, summary: nextAvailable ? "Possible next step." : "No future certainty is claimed.", timestamp: nil, state: nextAvailable ? .selected : .default, isFuture: nextAvailable),
                 ]
             ),
             assumptions: [
-                GoalDetailAssumptionState(id: "next-step", title: "This goal has a next step.", status: nextAvailable ? "Visible" : "Closed", whyItMatters: "The screen should lead with one move, not a long step dump.", correctionLabel: nextAvailable ? "Change next step" : nil, state: nextAvailable ? .selected : .default),
+                GoalDetailAssumptionState(id: "next-step", title: "This goal has a next step.", status: nextAvailable ? "Visible" : "Closed", whyItMatters: "The screen should lead with one step, not a long step dump.", correctionLabel: nextAvailable ? "Change next step" : nil, state: nextAvailable ? .selected : .default),
                 GoalDetailAssumptionState(id: "proof", title: "This goal has enough proof.", status: hasProof ? "Proof visible" : "No proof yet", whyItMatters: "Progress should be backed by something observable.", correctionLabel: "Add proof later", state: hasProof ? .selected : .default),
             ],
             proofRail: GoalDetailProofRailState(title: "Proof", subtitle: hasProof ? "Evidence is visible." : "Evidence will appear here when it is recorded.", items: proofItems, emptyTitle: "No proof yet", emptyMessage: "Add proof later when there is something real to show."),
@@ -931,7 +931,7 @@ enum PreviewGoalsScenarios {
                 ]
             ),
             whyThis: GoalWhyThisState(
-                compactSummary: "The next move stays collaborative because support goals should keep the other person as the real owner.",
+                compactSummary: "The next step stays collaborative because support goals should keep the other person as the real owner.",
                 lines: [
                     "Interpretation: This is a support path, not delegated compliance.",
                     "Path: A calm check-in preserves momentum without pressure."
@@ -965,7 +965,7 @@ enum PreviewGoalsScenarios {
         lifecycleState: GoalPortfolioLifecycleState = .active,
         weather: GoalWeatherState = .clear,
         proofSummary: GoalProofSummary = GoalProofSummary(title: "2 proof points", detail: "Last proof: Goal list structure drafted", count: 2, latestTitle: "Goal list structure drafted", visualState: .selected),
-        momentumIntegrity: GoalMomentumIntegrity = GoalMomentumIntegrity(title: "Building proof", detail: "Evidence and a next move both exist.", visualState: .selected),
+        momentumIntegrity: GoalMomentumIntegrity = GoalMomentumIntegrity(title: "Building proof", detail: "Evidence and a next step both exist.", visualState: .selected),
         supportLabel: String? = nil,
         priorityLabel: String
     ) -> GoalsBoardCardState {
@@ -988,7 +988,7 @@ enum PreviewGoalsScenarios {
             nextStepHint: nextStepHint,
             lifecycleState: lifecycleState,
             weather: weather,
-            weatherSummary: weather == .clear ? "Proof and the next move are visible." : "This goal needs attention.",
+            weatherSummary: weather == .clear ? "Proof and the next step are visible." : "This goal needs attention.",
             proofSummary: proofSummary,
             nextVisibleStep: nextVisibleStep,
             momentumIntegrity: momentumIntegrity,
