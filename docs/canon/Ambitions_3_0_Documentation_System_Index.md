@@ -14,7 +14,7 @@ This index makes the Ambitions 3.0 documentation system easy to navigate.
 
 It groups active docs by job so Codex, ChatGPT, and human reviewers know which document to open for each kind of work.
 
-Ambitions 3.0 is now governed as a primitive-led rebuild operating system, not a raw idea-bank implementation.
+Ambitions 3.0 is governed as a primitive-led rebuild operating system, not a raw idea-bank implementation.
 
 ---
 
@@ -42,6 +42,7 @@ For any Ambitions 3.0 rebuild work:
 | `Ambitions_3_0_Rebuild_Operating_Model.md` | Cross-functional rebuild governance model. |
 | `Ambitions_3_0_Documentation_System_Index.md` | This navigation map. |
 | `Ambitions_3_0_FAANG_Rebuild_Documentation_Completeness_Matrix.md` | Tracks rebuild documentation completeness by discipline. |
+| `Ambitions_3_0_Repo_Hygiene_And_Active_Canon_Policy.md` | Repository cleanup, active-canon, generated-artifact, and legacy-term hygiene policy. |
 
 ---
 
@@ -172,6 +173,15 @@ Open these when work touches older domains not fully replaced by 3.0:
 7. Release Readiness And Evidence Gates
 8. Target surface/primitive docs
 
+### Repo cleanup / hygiene
+
+- Repo Hygiene And Active Canon Policy
+- Product Language System
+- Content QA And Copy Guard
+- Migration And Deprecation Plan
+- Source override
+- Documentation System Index
+
 ### Building Today
 
 - Day Rail spec
@@ -257,3 +267,4 @@ The 3.0 documentation system is healthy when:
 - no surface adds a second signature object without a canon update
 - no screenshot implies an unimplemented capability is shipped
 - every build batch maps to a primitive, state machine, language rule, and evidence gate
+- generated artifacts and historical material do not re-enter the active path
