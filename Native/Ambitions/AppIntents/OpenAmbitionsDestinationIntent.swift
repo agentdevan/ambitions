@@ -26,11 +26,11 @@ enum AmbitionsAppShortcutDestination: String, CaseIterable, AppEnum {
             .command: DisplayRepresentation(title: "Add something"),
             .memoryLens: DisplayRepresentation(title: "What Ambitions Knows"),
             .quickCapture: DisplayRepresentation(title: "Capture"),
-            .startNextStep: DisplayRepresentation(title: "Start Next Step"),
-            .markDone: DisplayRepresentation(title: "Mark Done"),
-            .saveTheDay: DisplayRepresentation(title: "Save the Day"),
+            .startNextStep: DisplayRepresentation(title: "Start here"),
+            .markDone: DisplayRepresentation(title: "Close the loop"),
+            .saveTheDay: DisplayRepresentation(title: "Make today doable"),
             .quickRecovery: DisplayRepresentation(title: "Make today doable"),
-            .quickFocus: DisplayRepresentation(title: "Focus"),
+            .quickFocus: DisplayRepresentation(title: "Start now"),
             .quickPlanPatch: DisplayRepresentation(title: "Adjust Plan"),
         ]
     }
@@ -79,15 +79,15 @@ enum AmbitionsAppShortcutDestination: String, CaseIterable, AppEnum {
         case .quickCapture:
             return "Capture"
         case .startNextStep:
-            return "Start Next Step"
+            return "Start here"
         case .markDone:
-            return "Mark Done"
+            return "Close the loop"
         case .saveTheDay:
-            return "Save the Day"
+            return "Make today doable"
         case .quickRecovery:
             return "Make today doable"
         case .quickFocus:
-            return "Focus"
+            return "Start now"
         case .quickPlanPatch:
             return "Adjust Plan"
         }
@@ -178,15 +178,15 @@ extension AmbitionsAppShortcutDestination {
         case .startNextStep, .quickFocus:
             return descriptor(
                 title: displayTitle,
-                dialog: "Opening the next step in Ambitions.",
+                dialog: "Opening the recommended step in Ambitions.",
                 commandKind: .startFocus,
                 actionName: .openToday,
                 routeURL: routeURL
             )
         case .markDone:
             return descriptor(
-                title: "Mark Done",
-                dialog: "Open Ambitions to confirm Mark Done.",
+                title: "Close the loop",
+                dialog: "Open Ambitions to close the loop.",
                 commandKind: .completeAction,
                 actionName: .complete,
                 executionPosture: .requiresInAppConfirmation,
@@ -196,7 +196,7 @@ extension AmbitionsAppShortcutDestination {
         case .saveTheDay, .quickRecovery:
             return descriptor(
                 title: displayTitle,
-                dialog: "Open Ambitions to confirm Save the Day.",
+                dialog: "Open Ambitions to make today doable.",
                 commandKind: .recoverAction,
                 actionName: .openToday,
                 executionPosture: .requiresInAppConfirmation,
@@ -374,28 +374,28 @@ struct AmbitionsShortcutsProvider: AppShortcutsProvider {
         AppShortcut(
             intent: OpenAmbitionsDestinationIntent(destination: .startNextStep),
             phrases: [
-                "Start Next Step in \(.applicationName)",
-                "Start my next step in \(.applicationName)",
+                "Start here in \(.applicationName)",
+                "Start my recommended step in \(.applicationName)",
             ],
-            shortTitle: "Start Next Step",
+            shortTitle: "Start Here",
             systemImageName: "scope"
         )
         AppShortcut(
             intent: OpenAmbitionsDestinationIntent(destination: .markDone),
             phrases: [
-                "Mark Done in \(.applicationName)",
-                "Mark my step done in \(.applicationName)",
+                "Close the loop in \(.applicationName)",
+                "Close my step in \(.applicationName)",
             ],
-            shortTitle: "Mark Done",
+            shortTitle: "Close Loop",
             systemImageName: "checkmark.circle"
         )
         AppShortcut(
             intent: OpenAmbitionsDestinationIntent(destination: .saveTheDay),
             phrases: [
-                "Save the Day in \(.applicationName)",
                 "Make today doable in \(.applicationName)",
+                "Open recovery in \(.applicationName)",
             ],
-            shortTitle: "Save the Day",
+            shortTitle: "Make Doable",
             systemImageName: "arrow.uturn.left.circle"
         )
     }
