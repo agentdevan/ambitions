@@ -33,6 +33,7 @@ Older docs are supporting context unless an active Ambitions 3.0 doc explicitly 
 - [Ambitions_3_0_Rebuild_Operating_Model.md](canon/Ambitions_3_0_Rebuild_Operating_Model.md)
 - [Ambitions_3_0_Documentation_System_Index.md](canon/Ambitions_3_0_Documentation_System_Index.md)
 - [Ambitions_3_0_FAANG_Rebuild_Documentation_Completeness_Matrix.md](canon/Ambitions_3_0_FAANG_Rebuild_Documentation_Completeness_Matrix.md)
+- [Ambitions_3_0_FAANG_Handoff_Readiness_Gate.md](canon/Ambitions_3_0_FAANG_Handoff_Readiness_Gate.md)
 - [Ambitions_3_0_Repo_Hygiene_And_Active_Canon_Policy.md](canon/Ambitions_3_0_Repo_Hygiene_And_Active_Canon_Policy.md)
 
 ### Strategy / product management
@@ -116,10 +117,12 @@ Archived and superseded material is indexed from [archive/README.md](archive/REA
 
 ---
 
-## Native build and release docs
+## Native build, release, and Codex docs
 
 - [native-build-and-release.md](native-build-and-release.md)
 - [codex/BATCH_REGISTRY.md](codex/BATCH_REGISTRY.md)
+- [codex/CONTEXT_INDEX.md](codex/CONTEXT_INDEX.md)
+- [codex/FAANG_HANDOFF_REPO_CLEANUP_PROMPT.md](codex/FAANG_HANDOFF_REPO_CLEANUP_PROMPT.md)
 - [codex/Launch_Operator_Runbook.md](codex/Launch_Operator_Runbook.md)
 - [codex/Release_Candidate_Review_Checklist.md](codex/Release_Candidate_Review_Checklist.md)
 
