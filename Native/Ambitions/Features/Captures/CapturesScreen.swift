@@ -10,82 +10,71 @@ struct CapturesScreen: View {
     @Environment(\.appContainer) private var appContainer
     @Environment(\.ambitionTheme) private var theme
     @Environment(\.accessibilityReduceMotion) private var reduceMotion
-    @State private var viewModel = CapturesViewModel()
+    @State private var viewModel: CapturesViewModel
     private let shellMode: CapturesScreenShellMode
 
+    @MainActor
     init(shellMode: CapturesScreenShellMode = .planSupport) {
         self.shellMode = shellMode
+        _viewModel = State(initialValue: CapturesViewModel())
+    }
+
+    init(
+        shellMode: CapturesScreenShellMode,
+        viewModel: CapturesViewModel
+    ) {
+        self.shellMode = shellMode
+        _viewModel = State(initialValue: viewModel)
     }
 
     var body: some View {
-        FeatureScaffoldView(
-            eyebrow: shellMode.eyebrow,
-            title: shellMode.title,
-            subtitle: shellMode.subtitle
-        ) {
-            switch viewModel.state {
-            case .loading:
-                LoadingSkeletonCard(lineCount: 6)
-                    .transition(.ambitionPanel)
-            case .failed:
-                DegradedStateCard(
-                    state: DegradedStateOrchestrator.unavailable(surface: "Capture"),
-                    primaryAccessibilityIdentifier: "captures.retry-button",
-                    onPrimaryAction: {
-                        Task { await load() }
-                    }
-                )
-                .transition(.ambitionPanel)
-            case let .loaded(viewState):
-                intakePanel(viewState: viewState)
-                .transition(.ambitionPanel)
+        ScrollView {
+            LazyVStack(alignment: .leading, spacing: theme.spacing.lg) {
+                capturePrompt
 
-                if viewState.captures.isEmpty {
+                switch viewModel.state {
+                case .loading:
+                    LoadingSkeletonCard(lineCount: 4)
+                        .transition(.ambitionPanel)
+                case .failed:
                     DegradedStateCard(
-                        state: DegradedStateOrchestrator.capturesEmpty(),
-                        primaryAccessibilityIdentifier: "captures.empty.capture-now",
-                        secondaryAccessibilityIdentifier: shellMode == .planSupport ? "captures.empty.return-to-plan" : nil,
+                        state: DegradedStateOrchestrator.unavailable(surface: "Capture"),
+                        primaryAccessibilityIdentifier: "captures.retry-button",
                         onPrimaryAction: {
-                            container.commandRouter.presentCommandSheet(
-                                intent: .quickCapture,
-                                source: .capturesScreen,
-                                presentationContext: .quickCapture
-                            )
-                        },
-                        onSecondaryAction: shellMode == .planSupport ? {
-                            container.navigation.resetPlanPath()
-                        } : nil
+                            Task { await load() }
+                        }
                     )
-                    .accessibilityIdentifier("captures.empty")
                     .transition(.ambitionPanel)
-                } else {
-                    LazyVStack(alignment: .leading, spacing: theme.spacing.lg) {
-                        if let message = viewModel.actionMessage {
-                            AppCard {
-                                VStack(alignment: .leading, spacing: theme.spacing.sm) {
-                                    Text(message.title)
-                                        .font(theme.typography.bodyEmphasized)
-                                        .foregroundStyle(theme.colors.textPrimary)
-                                    Text(message.body)
-                                        .font(theme.typography.caption)
-                                        .foregroundStyle(theme.colors.textSecondary)
-                                }
-                                .frame(maxWidth: .infinity, alignment: .leading)
-                            }
-                        }
-
-                        ForEach(groupedCaptures(viewState.captures), id: \.title) { group in
-                            VStack(alignment: .leading, spacing: theme.spacing.md) {
-                                SectionHeader(title: group.title, subtitle: group.subtitle)
-                                ForEach(group.captures) { capture in
-                                    captureCard(capture, activeGoalOptions: viewState.activeGoalOptions)
-                                }
-                            }
-                        }
-                    }
-                    .transition(.ambitionPanel)
+                case let .loaded(viewState):
+                    loadedContent(viewState)
+                        .transition(.ambitionPanel)
                 }
             }
+            .padding(.horizontal, theme.spacing.lg)
+            .padding(.top, theme.spacing.md)
+            .padding(.bottom, theme.spacing.xl)
+        }
+        .scrollIndicators(.hidden)
+        .safeAreaInset(edge: .bottom, spacing: 0) {
+            CaptureComposer(
+                text: Binding(
+                    get: { viewModel.draftText },
+                    set: { viewModel.updateDraftText($0) }
+                ),
+                error: viewModel.draftError,
+                isSubmitEnabled: canSubmitDraft,
+                onSubmit: {
+                    Task {
+                        await viewModel.createQuickCapture(
+                            captureService: container.captureService,
+                            goalsService: container.goalsService
+                        )
+                    }
+                },
+                onMicrophone: {
+                    viewModel.draftError = "Voice capture is not connected yet. Type it here for now."
+                }
+            )
         }
         .navigationTitle(shellMode.title)
         .refreshable {
@@ -99,90 +88,101 @@ struct CapturesScreen: View {
         }
     }
 
+    private var canSubmitDraft: Bool {
+        viewModel.draftText.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty == false
+    }
+
     private func load() async {
         await viewModel.load(captureService: container.captureService, goalsService: container.goalsService)
     }
 
-    private func intakePanel(viewState: CapturesViewState) -> some View {
-        CapturePanel(
-            AmbitionRichPanelConfiguration(
-                kind: .capture,
-                eyebrow: "Fast intake",
-                title: "What needs a place?",
-                subtitle: "Capture first. Ambitions suggests a place, saves a receipt, and keeps the route easy to change.",
-                icon: "tray.and.arrow.down",
-                explanationTitle: viewState.captures.isEmpty ? "Empty state" : "Open routing",
-                explanation: viewState.captures.isEmpty ? "Not everything needs to become a goal." : "\(viewState.captures.filter { $0.status != .archived }.count) item\(viewState.captures.filter { $0.status != .archived }.count == 1 ? "" : "s") still have a visible destination.",
-                accessibilityLabel: "Capture intake"
-            )
-        ) {
-            EmptyView()
-        } contentSlot: {
-            VStack(alignment: .leading, spacing: theme.spacing.sm) {
-                ZStack(alignment: .topLeading) {
-                    TextEditor(text: Binding(
-                        get: { viewModel.draftText },
-                        set: { viewModel.updateDraftText($0) }
-                    ))
-                        .font(theme.typography.body)
-                        .foregroundStyle(theme.colors.textPrimary)
-                        .frame(minHeight: 92)
-                        .scrollContentBackground(.hidden)
-                        .padding(theme.spacing.sm)
-                        .background(theme.colors.surfaceSecondary, in: RoundedRectangle(cornerRadius: theme.radius.md, style: .continuous))
-                        .overlay(
-                            RoundedRectangle(cornerRadius: theme.radius.md, style: .continuous)
-                                .stroke(theme.colors.strokeSubtle)
-                        )
-                        .accessibilityIdentifier("captures.quick-input")
-                        .accessibilityLabel("What needs a place?")
+    private var capturePrompt: some View {
+        VStack(alignment: .leading, spacing: theme.spacing.sm) {
+            Text("What needs a place?")
+                .font(theme.typography.title)
+                .foregroundStyle(theme.colors.textPrimary)
+                .accessibilityAddTraits(.isHeader)
 
-                    if viewModel.draftText.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
-                        Text("What needs a place?")
-                            .font(theme.typography.body)
-                            .foregroundStyle(theme.colors.textTertiary)
-                            .padding(.horizontal, theme.spacing.md)
-                            .padding(.vertical, theme.spacing.md)
-                            .allowsHitTesting(false)
-                    }
+            Text(promptSubtitle)
+                .font(theme.typography.body)
+                .foregroundStyle(theme.colors.textSecondary)
+                .fixedSize(horizontal: false, vertical: true)
+
+            if shellMode == .planSupport {
+                Button {
+                    container.navigation.resetPlanPath()
+                } label: {
+                    Label("Plan", systemImage: "calendar")
                 }
+                .buttonStyle(.bordered)
+                .accessibilityIdentifier("captures.return-to-plan")
+            }
+        }
+        .frame(maxWidth: .infinity, alignment: .leading)
+        .accessibilityIdentifier("captures.prompt")
+    }
 
-                if let draftError = viewModel.draftError {
-                    Text(draftError)
-                        .font(theme.typography.caption)
-                        .foregroundStyle(theme.colors.warning)
-                }
+    private var promptSubtitle: String {
+        let draftIsEmpty = viewModel.draftText.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty
+        if draftIsEmpty {
+            return "Capture one real thing. Ambitions can suggest where it belongs after you type."
+        }
+        return "Route suggestions stay editable. Nothing becomes plan work until you save it."
+    }
 
-                if let routePreview = viewModel.draftRoutePreview {
-                    draftRoutePreviewCard(routePreview)
-                }
+    @ViewBuilder
+    private func loadedContent(_ viewState: CapturesViewState) -> some View {
+        if let routePreview = viewModel.draftRoutePreview {
+            draftRoutePreviewCard(routePreview)
+        }
 
-                HStack(spacing: theme.spacing.sm) {
-                    Button {
-                        Task {
-                            await viewModel.createQuickCapture(
-                                captureService: container.captureService,
-                                goalsService: container.goalsService
-                            )
+        if let message = viewModel.actionMessage {
+            captureReceiptPreview(message)
+        }
+
+        if viewState.captures.isEmpty, viewModel.draftRoutePreview == nil, viewModel.actionMessage == nil {
+            emptyCaptureState
+        } else if viewState.captures.isEmpty == false {
+            LazyVStack(alignment: .leading, spacing: theme.spacing.lg) {
+                ForEach(groupedCaptures(viewState.captures), id: \.title) { group in
+                    VStack(alignment: .leading, spacing: theme.spacing.md) {
+                        SectionHeader(title: group.title, subtitle: group.subtitle)
+                        ForEach(group.captures) { capture in
+                            captureCard(capture, activeGoalOptions: viewState.activeGoalOptions)
                         }
-                    } label: {
-                        Label("Save", systemImage: "plus.circle.fill")
-                    }
-                    .buttonStyle(.borderedProminent)
-                    .accessibilityIdentifier("captures.quick-submit")
-
-                    if shellMode == .planSupport {
-                        Button {
-                            container.navigation.resetPlanPath()
-                        } label: {
-                            Label("Plan", systemImage: "calendar")
-                        }
-                        .buttonStyle(.bordered)
-                        .accessibilityIdentifier("captures.return-to-plan")
                     }
                 }
             }
         }
+    }
+
+    private var emptyCaptureState: some View {
+        VStack(alignment: .leading, spacing: theme.spacing.xs) {
+            Label("Ready when something needs a place", systemImage: "tray.and.arrow.down")
+                .font(theme.typography.bodyEmphasized)
+                .foregroundStyle(theme.colors.textPrimary)
+            Text("Use the composer below. This screen stays quiet until there is something to route.")
+                .font(theme.typography.caption)
+                .foregroundStyle(theme.colors.textSecondary)
+        }
+        .padding(.vertical, theme.spacing.sm)
+        .accessibilityIdentifier("captures.empty")
+    }
+
+    private func captureReceiptPreview(_ message: CaptureActionMessage) -> some View {
+        AppCard(state: .success) {
+            VStack(alignment: .leading, spacing: theme.spacing.sm) {
+                Label(message.title, systemImage: "checkmark.seal.fill")
+                    .font(theme.typography.bodyEmphasized)
+                    .foregroundStyle(theme.colors.textPrimary)
+                Text(message.body)
+                    .font(theme.typography.caption)
+                    .foregroundStyle(theme.colors.textSecondary)
+            }
+            .frame(maxWidth: .infinity, alignment: .leading)
+            .padding(theme.spacing.md)
+        }
+        .accessibilityIdentifier("captures.receipt-preview")
     }
 
     private func draftRoutePreviewCard(_ preview: CaptureDraftRoutePreview) -> some View {
@@ -426,6 +426,83 @@ private struct CaptureGroup {
     let captures: [Capture]
 }
 
+private struct CaptureComposer: View {
+    @Environment(\.ambitionTheme) private var theme
+    @Binding var text: String
+
+    let error: String?
+    let isSubmitEnabled: Bool
+    let onSubmit: () -> Void
+    let onMicrophone: () -> Void
+
+    var body: some View {
+        VStack(alignment: .leading, spacing: theme.spacing.xs) {
+            HStack(alignment: .bottom, spacing: theme.spacing.sm) {
+                HStack(spacing: theme.spacing.sm) {
+                    TextField("What needs a place?", text: $text, axis: .vertical)
+                        .font(theme.typography.body)
+                        .foregroundStyle(theme.colors.textPrimary)
+                        .lineLimit(1...3)
+                        .submitLabel(.done)
+                        .onSubmit {
+                            if isSubmitEnabled {
+                                onSubmit()
+                            }
+                        }
+                        .accessibilityIdentifier("captures.quick-input")
+                        .accessibilityLabel("What needs a place?")
+
+                    Button(action: onMicrophone) {
+                        Image(systemName: "mic.fill")
+                            .font(.system(size: theme.icon.smallSize, weight: .semibold))
+                            .frame(width: 30, height: 30)
+                    }
+                    .buttonStyle(.plain)
+                    .foregroundStyle(theme.colors.textSecondary)
+                    .accessibilityIdentifier("captures.quick-mic")
+                    .accessibilityLabel("Voice capture")
+                    .accessibilityHint("Voice capture is not connected yet.")
+                }
+                .padding(.horizontal, theme.spacing.md)
+                .padding(.vertical, theme.spacing.sm)
+                .background(theme.colors.surfaceSecondary, in: RoundedRectangle(cornerRadius: theme.radius.lg, style: .continuous))
+                .overlay(
+                    RoundedRectangle(cornerRadius: theme.radius.lg, style: .continuous)
+                        .stroke(theme.colors.strokeSubtle)
+                )
+
+                Button(action: onSubmit) {
+                    Image(systemName: "plus")
+                        .font(.system(size: theme.icon.smallSize, weight: .bold))
+                        .frame(width: 42, height: 42)
+                }
+                .buttonStyle(AmbitionPressableButtonStyle(state: isSubmitEnabled ? .selected : .disabled))
+                .disabled(isSubmitEnabled == false)
+                .accessibilityIdentifier("captures.quick-submit")
+                .accessibilityLabel("Save")
+            }
+
+            if let error {
+                Text(error)
+                    .font(theme.typography.caption)
+                    .foregroundStyle(theme.colors.warning)
+                    .accessibilityIdentifier("captures.quick-error")
+            }
+        }
+        .padding(.horizontal, theme.spacing.lg)
+        .padding(.top, theme.spacing.sm)
+        .padding(.bottom, theme.spacing.sm)
+        .background(.ultraThinMaterial)
+        .overlay(alignment: .top) {
+            Rectangle()
+                .fill(theme.colors.strokeSubtle)
+                .frame(height: 1)
+                .accessibilityHidden(true)
+        }
+        .accessibilityIdentifier("captures.composer")
+    }
+}
+
 private struct CaptureDraftRoutePreviewCard: View {
     @Environment(\.ambitionTheme) private var theme
 
@@ -541,21 +618,63 @@ private extension CapturesScreenShellMode {
 }
 
 #if DEBUG
-#Preview("Captures Light") {
+#Preview("Capture Empty") {
     NavigationStack {
-        CapturesScreen()
+        CapturesScreen(shellMode: .topLevelCapture, viewModel: CapturePreviewFactory.empty())
+    }
+    .appContainer(PreviewAppContainerFactory.preview)
+    .ambitionTheme(.dark)
+    .preferredColorScheme(.dark)
+}
+
+#Preview("Capture Route Suggestions") {
+    NavigationStack {
+        CapturesScreen(shellMode: .topLevelCapture, viewModel: CapturePreviewFactory.routeSuggestions())
+    }
+    .appContainer(PreviewAppContainerFactory.preview)
+    .ambitionTheme(.dark)
+    .preferredColorScheme(.dark)
+}
+
+#Preview("Capture Receipt") {
+    NavigationStack {
+        CapturesScreen(shellMode: .topLevelCapture, viewModel: CapturePreviewFactory.receipt())
+    }
+    .appContainer(PreviewAppContainerFactory.preview)
+    .ambitionTheme(.dark)
+    .preferredColorScheme(.dark)
+}
+
+#Preview("Capture Light") {
+    NavigationStack {
+        CapturesScreen(shellMode: .topLevelCapture, viewModel: CapturePreviewFactory.routeSuggestions())
     }
     .appContainer(PreviewAppContainerFactory.preview)
     .ambitionTheme(.light)
     .preferredColorScheme(.light)
 }
 
-#Preview("Captures Dark") {
-    NavigationStack {
-        CapturesScreen()
+@MainActor
+private enum CapturePreviewFactory {
+    static func empty() -> CapturesViewModel {
+        CapturesViewModel(state: .loaded(CapturesViewState(captures: [], activeGoalOptions: [])))
     }
-    .appContainer(PreviewAppContainerFactory.preview)
-    .ambitionTheme(.dark)
-    .preferredColorScheme(.dark)
+
+    static func routeSuggestions() -> CapturesViewModel {
+        let viewModel = CapturesViewModel(state: .loaded(CapturesViewState(captures: [], activeGoalOptions: [
+            CaptureGoalOption(id: "goal-music", title: "Music Goal", subtitle: "Creative")
+        ])))
+        viewModel.updateDraftText("Finish lyrics before rehearsal")
+        return viewModel
+    }
+
+    static func receipt() -> CapturesViewModel {
+        let viewModel = CapturesViewModel(state: .loaded(CapturesViewState(captures: [], activeGoalOptions: [])))
+        viewModel.actionMessage = CaptureActionMessage(
+            title: "Saved as Task · Today",
+            body: "This can become plan work later; no calendar event was created."
+        )
+        return viewModel
+    }
 }
 #endif

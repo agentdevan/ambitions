@@ -9,7 +9,7 @@ struct CapturesViewState: Sendable {
         ScreenContractImplementationSnapshot(
             screenID: .capture,
             firstScreenContent: [
-                "Fast input",
+                "Bottom composer",
                 "Needs a Place",
                 "Suggested routes",
                 "Recent captures",
