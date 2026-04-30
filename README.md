@@ -1,71 +1,124 @@
 # Ambitions Native iOS App
 
-Ambitions is a native iOS SwiftUI application.
+Ambitions is a native iOS SwiftUI app and premium life execution system.
 
-## Source of truth
+Ambitions helps raw intent become placed structure, placed structure become believable plans, believable plans become one clear step, real life become closure, and progress become proof.
 
-- `Native/Ambitions/` is the UI source of truth for the shipping app.
-- `Sources/` contains the `AmbitionsDesignSystem` Swift package used by the native app.
-- `AppUI/Sources/` contains the `AmbitionsWidgetUI` Swift package used by the native app.
+```text
+Capture → Place → Plan → Do Today → Close / Recover → Save Proof
+```
 
-## Canonical planning stack
+---
 
-Use [docs/codex/CONTEXT_INDEX.md](docs/codex/CONTEXT_INDEX.md) for the Codex/session read order, but start product, design, roadmap, and implementation reasoning from the completed Waves 1-19 canon-control docs:
+## Current source of truth
 
-- [SOURCE_OF_TRUTH_MAP.md](docs/canon/SOURCE_OF_TRUTH_MAP.md)
-- [PRODUCT_DECISIONS.md](docs/canon/PRODUCT_DECISIONS.md)
-- [GOLDEN_LAUNCH_LOOP.md](docs/canon/GOLDEN_LAUNCH_LOOP.md)
-- [ROADMAP_BATCH_CLASSIFICATION.md](docs/canon/ROADMAP_BATCH_CLASSIFICATION.md)
-- [HUMAN_LANGUAGE_REVIEW.md](docs/canon/HUMAN_LANGUAGE_REVIEW.md)
-- [AMBITION_CANON_COMPLETION_REPORT.md](docs/canon/AMBITION_CANON_COMPLETION_REPORT.md)
-- [DOCS_RECONCILIATION_REVIEW.md](docs/canon/DOCS_RECONCILIATION_REVIEW.md)
-- [Canon index](docs/canon/README.md)
-- [Docs index](docs/README.md)
+Start Ambitions 3.0 work from this read order:
 
-The permanent planning docs live in [docs/canon](docs/canon). Core active docs include:
+1. [Ambitions_3_0_Source_Of_Truth_Override.md](docs/canon/Ambitions_3_0_Source_Of_Truth_Override.md)
+2. [Ambitions_3_0_Front_End_Redesign_Index.md](docs/canon/Ambitions_3_0_Front_End_Redesign_Index.md)
+3. [Ambitions_3_0_Rebuild_Operating_Model.md](docs/canon/Ambitions_3_0_Rebuild_Operating_Model.md)
+4. [Ambitions_3_0_Documentation_System_Index.md](docs/canon/Ambitions_3_0_Documentation_System_Index.md)
+5. [Ambitions_3_0_Primitive_Architecture.md](docs/canon/Ambitions_3_0_Primitive_Architecture.md)
+6. [Ambitions_3_0_Product_Language_System.md](docs/canon/Ambitions_3_0_Product_Language_System.md)
+7. The target primitive, surface, state-machine, privacy, accessibility, or QA doc for the work being done.
 
-- [Ambitions_Design_Constitution.md](docs/canon/design/Ambitions_Design_Constitution.md)
-- [Ambitions_2_0_Master_Plan.md](docs/canon/Ambitions_2_0_Master_Plan.md)
-- [Ambitions_2_0_Product_Architecture.md](docs/canon/Ambitions_2_0_Product_Architecture.md)
-- [Ambitions_2_0_Systems_Architecture.md](docs/canon/Ambitions_2_0_Systems_Architecture.md)
-- [Ambitions_2_0_Visual_System.md](docs/canon/Ambitions_2_0_Visual_System.md)
-- [Ambitions_2_0_Roadmap.md](docs/canon/Ambitions_2_0_Roadmap.md)
-- [Ambitions_2_0_Batch_Plan.md](docs/canon/Ambitions_2_0_Batch_Plan.md)
-- [Ambitions_2_0_Implementation_Gap_Audit.md](docs/canon/Ambitions_2_0_Implementation_Gap_Audit.md)
-- [Ambitions_2_0_Roadmap_Merge_Audit.md](docs/canon/Ambitions_2_0_Roadmap_Merge_Audit.md)
-- [IMPLEMENTATION_ACCEPTANCE_GATES.md](docs/canon/IMPLEMENTATION_ACCEPTANCE_GATES.md)
+Use [docs/codex/BATCH_REGISTRY.md](docs/codex/BATCH_REGISTRY.md) for implementation status truth.
 
-Superseded and historical docs are indexed from [docs/archive/README.md](docs/archive/README.md) or marked as historical in [docs/canon/README.md](docs/canon/README.md). Historical docs are context only and do not override the current source map, decision ledger, Golden Launch Loop, Roadmap/Batch Classification, Human Language Review, or focused canon docs.
+Older docs are supporting context unless an active 3.0 doc explicitly keeps them binding for a domain that 3.0 does not replace.
+
+---
+
+## Ambitions 3.0 rebuild model
+
+Ambitions 3.0 is primitive-led. Build work should be scoped through 3.0 primitives, state machines, language rules, and evidence gates.
+
+Primary rebuild docs:
+
+- [Product Strategy Brief](docs/canon/Ambitions_3_0_Product_Strategy_Brief.md)
+- [Primitive Architecture](docs/canon/Ambitions_3_0_Primitive_Architecture.md)
+- [Product Language System](docs/canon/Ambitions_3_0_Product_Language_System.md)
+- [Plan Life Suite Endgame](docs/canon/Ambitions_3_0_Plan_Life_Suite_Endgame.md)
+- [Ambitions Operating Shell](docs/canon/Ambitions_3_0_Ambitions_Operating_Shell.md)
+- [Information Architecture And Routing Model](docs/canon/Ambitions_3_0_Information_Architecture_And_Routing_Model.md)
+- [State Machines And Domain Flows](docs/canon/Ambitions_3_0_State_Machines_And_Domain_Flows.md)
+- [Recommendation Eligibility Engine](docs/canon/Ambitions_3_0_Recommendation_Eligibility_Engine.md)
+- [Evidence Hierarchy](docs/canon/Ambitions_3_0_Evidence_Hierarchy.md)
+- [Personalization Consent Model](docs/canon/Ambitions_3_0_Personalization_Consent_Model.md)
+- [Codex-Only Implementation And Testing Strategy](docs/canon/Ambitions_3_0_Codex_Only_Implementation_And_Testing_Strategy.md)
+- [Release Readiness And Evidence Gates](docs/canon/Ambitions_3_0_Release_Readiness_And_Evidence_Gates.md)
+- [Repo Hygiene And Active Canon Policy](docs/canon/Ambitions_3_0_Repo_Hygiene_And_Active_Canon_Policy.md)
+
+The complete active doc map lives in [Ambitions_3_0_Documentation_System_Index.md](docs/canon/Ambitions_3_0_Documentation_System_Index.md).
+
+---
+
+## Canonical destinations
+
+Ambitions has five canonical destinations inside the Ambitions Operating Shell:
+
+- Today
+- Goals
+- Capture
+- Plan
+- You
+
+These destinations are stable for routing, accessibility, App Intents, deep links, and tests.
+
+The visual shell direction is defined in [Ambitions_3_0_Ambitions_Operating_Shell.md](docs/canon/Ambitions_3_0_Ambitions_Operating_Shell.md).
+
+---
+
+## Product language
+
+Core language:
+
+- Start here
+- What needs a place?
+- Does this hold together?
+- Close the loop
+- Still Counts
+- What changed?
+- What counted?
+- Proof saved
+- You are in control
+
+Language rules live in:
+
+- [Product Language System](docs/canon/Ambitions_3_0_Product_Language_System.md)
+- [Content QA And Copy Guard](docs/canon/Ambitions_3_0_Content_QA_And_Copy_Guard.md)
+- [Migration And Deprecation Plan](docs/canon/Ambitions_3_0_Migration_And_Deprecation_Plan.md)
+
+---
 
 ## Native structure
 
-- `Native/Ambitions/App`
-  App entry, bootstrapper, dependency container, environment injection, root tabs.
-- `Native/Ambitions/Domain`
-  Native domain models for launch/session and first-pass dashboard contracts.
-- `Native/Ambitions/Services`
-  Startup and feature service protocols plus repository-backed implementations for the active Today / Goals / Capture / Plan / You shell. Some internal compatibility seams still use older Habits, Insights, or Profile names.
-- `Native/Ambitions/Persistence`
-  SwiftData-backed native persistence for goals, drafts, evidence, feedback, and app preferences.
-- `Native/Ambitions/Features`
-  Today, Capture, Goals, Plan, and You-facing screens. Some folder names remain compatibility-oriented until their owning delta batches rename or absorb them.
-- `Native/Ambitions/UI`
-  Shared shell UI like the launch gate and background canvas.
-- `Native/Ambitions/PreviewSupport`
-  Preview-safe bootstrap and fixture data.
+- `Native/Ambitions/App` — app entry, dependency container, environment injection, and root routing.
+- `Native/Ambitions/Domain` — native domain models, state contracts, recommendation, receipt, proof, planning, and execution models.
+- `Native/Ambitions/Services` — feature service protocols and repository-backed implementations.
+- `Native/Ambitions/Persistence` — SwiftData-backed native persistence.
+- `Native/Ambitions/Features` — Today, Capture, Goals, Plan, You, and related feature surfaces.
+- `Native/Ambitions/UI` — shared shell UI.
+- `Native/Ambitions/PreviewSupport` — preview-safe bootstrap and fixture data.
+- `Sources/` — `AmbitionsDesignSystem` Swift package.
+- `AppUI/Sources/` — `AmbitionsWidgetUI` Swift package.
+
+Some internal identifiers remain compatibility-oriented and are tracked by [Repo Hygiene And Active Canon Policy](docs/canon/Ambitions_3_0_Repo_Hygiene_And_Active_Canon_Policy.md).
+
+---
 
 ## Repo boundaries
 
-- Do not add new production UI work outside `Native/Ambitions/`, `Sources/`, or `AppUI/Sources/`.
-- Do not reintroduce Expo, React Native, or TypeScript runtime files.
-- Do not add top-level tabs casually. The active shell is Today / Goals / Capture / Plan / You.
-- Do not treat non-Golden-Launch-Loop work as launch-critical without explicit justification.
-- Do not ignore D01-D26 classifications in [ROADMAP_BATCH_CLASSIFICATION.md](docs/canon/ROADMAP_BATCH_CLASSIFICATION.md).
-- Do not claim sync, export, AI, accessibility, privacy, platform behavior, or production readiness before implementation evidence exists.
+- Production UI belongs in `Native/Ambitions/`, `Sources/`, or `AppUI/Sources/`.
+- New top-level destinations require explicit 3.0 parent-canon revision.
+- Invention-bank ideas should be implemented through 3.0 primitives.
+- Production readiness claims require evidence from the release gates.
+- Generated scratch artifacts belong outside the repo.
+
+---
 
 ## Running the native app
 
-This repo includes an XcodeGen spec rather than a checked-in `.xcodeproj`.
+This repo uses XcodeGen rather than a checked-in `.xcodeproj`.
 
 On a Mac with Xcode 16+ and XcodeGen installed:
 
@@ -73,56 +126,49 @@ On a Mac with Xcode 16+ and XcodeGen installed:
 2. Open `Ambitions.xcodeproj`.
 3. Build and run the `Ambitions` scheme on an iOS Simulator.
 
-The full reproducible native generation, build, test, UI test, and archive flow lives in [docs/native-build-and-release.md](docs/native-build-and-release.md).
+The reproducible native generation, build, test, UI test, and archive flow lives in [docs/native-build-and-release.md](docs/native-build-and-release.md).
 
-## Docs status
-
-Use [docs/README.md](docs/README.md) as the index for current native SwiftUI docs and active repo-truth references.
-Batch control status for active work now lives in [docs/codex/BATCH_REGISTRY.md](docs/codex/BATCH_REGISTRY.md).
+---
 
 ## Codex workflow
 
-Shared Codex behavior starts with [docs/codex/CONTEXT_INDEX.md](docs/codex/CONTEXT_INDEX.md), then follows [docs/canon/SOURCE_OF_TRUTH_MAP.md](docs/canon/SOURCE_OF_TRUTH_MAP.md) for source-of-truth order. Windows and Mac Codex sessions should both pull the latest repo state from GitHub and use those files as standing session context; Mac sessions can start from [docs/codex/MAC_SESSION_BOOT_PROMPT.md](docs/codex/MAC_SESSION_BOOT_PROMPT.md).
+Codex work should follow:
+
+1. active 3.0 read order from this README
+2. [docs/codex/CONTEXT_INDEX.md](docs/codex/CONTEXT_INDEX.md)
+3. [docs/codex/BATCH_REGISTRY.md](docs/codex/BATCH_REGISTRY.md) for implementation status
+4. target primitive/surface docs
+5. [Codex-Only Implementation And Testing Strategy](docs/canon/Ambitions_3_0_Codex_Only_Implementation_And_Testing_Strategy.md)
+6. [Release Readiness And Evidence Gates](docs/canon/Ambitions_3_0_Release_Readiness_And_Evidence_Gates.md)
+
+Every implementation batch should report canon docs read, files changed, primitive advanced, loop step advanced, tests run, previews added, copy guard results, accessibility notes, privacy notes, and remaining gaps.
+
+---
 
 ## iOS native validation
 
 GitHub Actions validates iOS-native integrity on `macos-15` in [.github/workflows/ios-validate.yml](.github/workflows/ios-validate.yml).
 
-What the workflow verifies now:
+The workflow currently regenerates the Xcode project, resolves Swift package dependencies, builds the app target, runs unit tests, runs UI tests, runs an unsigned Release archive sanity check, and uploads `.xcresult` bundles.
 
-- Installs XcodeGen and regenerates `Ambitions.xcodeproj` from `project.yml`.
-- Derives the project name and primary scheme from `project.yml` and fails if generation drifts.
-- Lists the generated project and resolves Swift package dependencies.
-- Builds the native app target for `iphonesimulator` with signing disabled.
-- Runs `AmbitionsTests` on a deterministically selected available simulator.
-- Runs `AmbitionsUITests` in a separate macOS job using `build-for-testing` plus `test-without-building`.
-- Runs an unsigned Release archive sanity check with `CODE_SIGNING_ALLOWED=NO`.
-- Uploads `.xcresult` bundles for unit and UI test jobs.
+The workflow does not prove signed archives, TestFlight, App Store Connect validation, distribution exports, physical-device behavior, external accessibility conformance, or human usability.
 
-What the workflow does not verify:
+---
 
-- Signed archives
-- TestFlight or App Store Connect validation
-- Distribution exports
-- Physical-device behavior
+## Runtime status
 
-The UI test job is honest but scoped: it validates the current preview-bootstrapped UI flow, not a signed production install path.
-
-Local reproduction, including exact build, unit test, UI test, and archive commands, is documented in [docs/native-build-and-release.md](docs/native-build-and-release.md).
-
-## Runtime behavior
-
-- Appearance defaults to `System` and can be explicitly switched to Light or Dark from You.
-- First-run identity is blank and neutral until the user enters personal data; preview/demo fixtures remain clearly non-production.
+- The app is Swift-native and XcodeGen-driven.
+- The app boots through the native SwiftUI entry point.
+- State persists through SwiftData where implemented.
 - The current shipped surface is local-first and on-device first.
-- Today quick capture persists into the Captures tab through the native capture service.
-- Notification scheduling and calendar/reminder wiring exist in the native app.
-- Widget and Live Activity foundations exist in the repo, but they still need manual platform verification and should not be treated as fully verified shipped behavior from this README alone.
+- Notification scheduling, calendar/reminder wiring, widgets, and Live Activity foundations exist, but manual platform verification remains required before production claims.
 - Account sync is not implemented.
-- The iOS target now includes a complete native app icon set and `PrivacyInfo.xcprivacy`.
+- The iOS target includes a native app icon set and `PrivacyInfo.xcprivacy`.
 
-## Current status
+---
 
-The repo is now Swift-native and XcodeGen-driven. The app boots through the native SwiftUI entry point, persists state through SwiftData, and preserves the active Today / Goals / Capture / Plan / You shell. Older internal Captures, Habits, Insights, and Profile naming remains compatibility-only where it still exists.
+## Cleanup status
 
-Product-definition Waves 1-19 are complete. The Golden Launch Loop, Roadmap/Batch Classification, and Human Language Review are active product-strength gates. Full roadmap/batch doc reconciliation, broader user-facing string cleanup, and later archive cleanup remain pending before treating the docs layer as fully clean.
+Ambitions 3.0 docs define the active source of truth. Older waves, v2 docs, and historical transformation material are supporting context unless explicitly kept active by the 3.0 source override.
+
+Known cleanup debt is tracked in [Ambitions_3_0_Repo_Hygiene_And_Active_Canon_Policy.md](docs/canon/Ambitions_3_0_Repo_Hygiene_And_Active_Canon_Policy.md).
