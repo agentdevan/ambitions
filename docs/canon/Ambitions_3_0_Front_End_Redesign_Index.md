@@ -20,6 +20,26 @@ Supporting historical front-end program: [Ambitions Full Front-End Transformatio
 
 ---
 
+## Ambitions 3.0 Canon Layer Definition
+
+Ambitions 3.0 owns front-end redesign, interaction sequencing, implementation-grade surface specs, visual refinement, IA refinement, signature objects, and Golden Launch Loop integration.
+
+Ambitions 3.0 supersedes older front-end, visual, interaction, and navigation guidance wherever there is a direct conflict and the 3.0 doc is more recent, explicit, and linked from this parent index.
+
+Ambitions 3.0 does not replace these older canon areas unless it explicitly says so:
+
+- Domain Model.
+- Trust / Privacy / Memory.
+- Data / Local-first / Sync / Export.
+- Monetization.
+- Acceptance Gates.
+- Roadmap governance.
+- Source-of-truth ordering outside front-end redesign.
+
+Those docs remain binding where 3.0 does not explicitly supersede them.
+
+---
+
 ## Ambitions 3.0 Design Thesis
 
 Ambitions should feel like:
@@ -57,13 +77,33 @@ Ambitions 3.0 front-end work must perfect this loop:
 Capture → Place → Plan → Do Today → Close / Recover → Save Proof
 ```
 
-The complete 230-upgrade backlog for this loop now lives in:
+The complete 230-upgrade backlog for this loop lives in:
 
 - [Ambitions 3.0 — Golden Launch Loop Upgrade Bank](./Ambitions_3_0_Golden_Launch_Loop_Upgrade_Bank.md)
 
 This upgrade bank is active front-end canon for Ambitions 3.0 planning. It must be used when creating Capture, Place, Plan, Today, Action Closure, Proof, Trust, AI/personalization, visual system, copy, and roadmap child specs.
 
-### Day Rail protection rule
+### Canonical launch demo
+
+Until revised, the canonical demo story is:
+
+```text
+Release 3 songs by August 1.
+```
+
+Every launch-critical front-end surface should be able to support this demo:
+
+1. Capture the goal.
+2. Place it under Creative.
+3. Create a believable path.
+4. Show one recommended step today.
+5. Recover when today is too full.
+6. Save proof that progress happened.
+7. Show the receipt/trust trail.
+
+---
+
+## Day Rail Protection Rule
 
 The Ambitions Day Rail is locked as the Today signature object. Golden Launch Loop upgrades must strengthen the Day Rail instead of replacing it.
 
@@ -79,6 +119,33 @@ Any Do Today upgrade must preserve:
 - No starfield treatment on Today. Starfield remains Capture and First Run only unless canon is revised.
 
 If a future implementation would conflict with the Day Rail spec, the Day Rail spec wins.
+
+---
+
+## Hero Step Panel / Day Rail Canon Resolution
+
+In Ambitions 3.0, `HeroStepPanel` is no longer a separate competing Today panel by default.
+
+The canonical Today execution object is:
+
+```swift
+AmbitionsDayRailView
+```
+
+Within the Day Rail, the `Start here` recommended step is rendered as:
+
+```swift
+DayRailHeroStepCard
+```
+
+Compatibility mapping:
+
+- v2 `HeroStepPanel` -> 3.0 `DayRailHeroStepCard`
+- v2 `DayTimelineRail` -> 3.0 `AmbitionsDayRailView`
+- v2 `ClosureCheckInPanel` -> 3.0 `DayRailCloseLoopCard`
+- v2 `ReceiptTrail` / proof peek -> 3.0 `DayRailProofSavedCard`
+
+Do not render a separate Hero Step Panel above the Day Rail unless a specific future canon decision creates a temporary migration state.
 
 ---
 
@@ -134,18 +201,13 @@ Use fewer components, stronger hierarchy, native iOS patterns, refined typograph
 
 Avoid fake confidence, black-box magic, and assistant-like noise. Prefer explainable recommendations, evidence labels, and user control.
 
-### 7. Every top-level surface needs a signature object
+### 7. Every top-level surface has one signature object
 
-Each main tab should have a clear flagship object or interaction that defines its purpose.
+Every top-level tab has exactly one dominant signature object.
 
-Examples:
+A supporting panel may appear only if it clarifies, controls, or routes deeper from that signature object.
 
-- Today: Ambitions Day Rail
-- System-wide shell: Ambition Meridian Shell
-- Capture: Minimal composer plus placement routes
-- Plan: Contextual Day / Week / Month / Life Shape planner
-- Goals: Mission Control / Goal Detail path system
-- You: Personal system center for setup, trust, memory, history, and planning defaults
+Top-level screens should never become equal-weight card stacks.
 
 ### 8. Every meaningful object must answer the Golden Loop questions
 
@@ -165,6 +227,35 @@ Every step, capture, goal input, plan item, closure, receipt, and proof artifact
 ```
 
 If a surface cannot answer these questions, it is not yet integrated into the Ambitions 3.0 front-end loop.
+
+---
+
+## Canonical Signature Objects By Tab
+
+| Tab | Signature object | Primary question | Must not become |
+|---|---|---|---|
+| Today | `AmbitionsDayRailView` | What should I do now, what changed, and what counted? | Task list, calendar clone, dashboard, focus timer |
+| Goals | `AmbitionPortfolioView` + Goal Detail `MissionControlView` | Where am I headed and what is next? | Project board, KPI dashboard, motivation wall |
+| Capture | `CaptureComposer` | What needs a place? | Chat box, notes app, inbox graveyard |
+| Plan | `PlanShapeView` with Day / Week / Month scopes | Does this hold together? | Raw calendar, schedule generator, due-date list |
+| You | `PersonalSystemCenterView` | What does Ambitions know and how do I control it? | Junk drawer, social profile, analytics dashboard |
+
+Detailed rail and signature-object rules live in:
+
+- [Ambitions 3.0 — Signature Objects And Rail Grammar](./Ambitions_3_0_Signature_Objects_And_Rail_Grammar.md)
+
+---
+
+## Surface-To-Loop Mapping
+
+Every major surface must map to the Golden Launch Loop:
+
+- Capture owns Capture.
+- Place owns Place.
+- Plan owns Plan.
+- Today owns Do Today.
+- Action Closure owns Close / Recover.
+- Goal Detail, Reviews, and You own Save Proof / Trust history.
 
 ---
 
@@ -188,13 +279,13 @@ Core thesis:
 Document: [Ambitions 3.0 — Ambition Meridian Shell SwiftUI Build Spec](./Ambitions_3_0_Ambition_Meridian_Shell_SwiftUI_Build_Spec.md)
 
 Status: Active implementation-grade child doc  
-Surface: System-wide across Today, Goals, Capture, Plan, and You  
+Surface: System-wide shell across Today, Goals, Capture, Plan, and You  
 Primary component: `AmbitionsMeridianShell`  
-Purpose: Replace the feeling of a standard five-tab dock with a premium connected-node navigation instrument that keeps Today as home, Capture globally available, and active context visible without intrusive pills or badges.
+Purpose: Make the bottom navigation shell feel like a premium Ambitions-native connected-node navigation instrument while preserving the canonical five-tab IA.
 
 Core thesis:
 
-> The Ambition Meridian Shell should not be a styled tab bar. It should be Ambitions’ signature navigation instrument: one calm connected line that shows where the user is, what is active, what needs closure, and where they can go.
+> The Ambition Meridian Shell is the bottom global navigation spine. The Ambitions Day Rail is the vertical Today execution spine. Together they create the Ambitions 3.0 rail/node visual language.
 
 ### 3. System-wide — Golden Launch Loop Upgrade Bank
 
@@ -209,6 +300,73 @@ Core thesis:
 
 > Capture is how things enter. The Day Rail is where life gets executed. Action Closure is how reality gets handled. Receipts and proof are how trust compounds.
 
+### 4. System-wide — Universal Object Lifecycle Contract
+
+Document: [Ambitions 3.0 — Universal Object Lifecycle Contract](./Ambitions_3_0_Universal_Object_Lifecycle_Contract.md)
+
+Status: Active front-end canon contract  
+Surfaces: Capture, Place, Plan, Today, Goal Detail, You, Trust Center  
+Purpose: Define how every meaningful object enters Ambitions, belongs somewhere, surfaces at the right time, closes cleanly, and becomes proof.
+
+### 5. System-wide — Object Ownership And Appearance Matrix
+
+Document: [Ambitions 3.0 — Object Ownership And Appearance Matrix](./Ambitions_3_0_Object_Ownership_And_Appearance_Matrix.md)
+
+Status: Active front-end canon contract  
+Purpose: Prevent duplicate homes, dashboard creep, and cross-surface confusion by defining object ownership and contextual appearance.
+
+### 6. System-wide — Surface State Matrix
+
+Document: [Ambitions 3.0 — Surface State Matrix](./Ambitions_3_0_Surface_State_Matrix.md)
+
+Status: Active front-end canon contract  
+Purpose: Require every top-level surface and major drill-down to handle first-use, empty, normal, overloaded, recovery, away, privacy, loading, failure, undo, confirmation, and degraded-safe states.
+
+### 7. System-wide — Action Verbs And Receipt Grammar
+
+Document: [Ambitions 3.0 — Action Verbs And Receipt Grammar](./Ambitions_3_0_Action_Verbs_And_Receipt_Grammar.md)
+
+Status: Active copy and trust canon contract  
+Purpose: Keep user-facing actions and receipts calm, consistent, human, and non-shaming.
+
+### 8. System-wide — Recommendation Contract
+
+Document: [Ambitions 3.0 — Recommendation Contract](./Ambitions_3_0_Recommendation_Contract.md)
+
+Status: Active recommendation and personalization canon contract  
+Purpose: Define how recommendations stay grounded, explainable, correctable, non-theatrical, and trust-safe.
+
+### 9. Place — Placement Resolver
+
+Document: [Ambitions 3.0 — Placement Resolver Spec](./Ambitions_3_0_Placement_Resolver_Spec.md)
+
+Status: Active front-end canon child doc  
+Surface: Capture / Place flow  
+Primary component concept: `PlacementResolverView`  
+Purpose: Decide where captured or loose objects belong without turning Capture into an inbox or Plan into a dumping ground.
+
+### 10. Close / Recover — Action Closure Sheet
+
+Document: [Ambitions 3.0 — Action Closure Sheet Spec](./Ambitions_3_0_Action_Closure_Sheet_Spec.md)
+
+Status: Active front-end canon child doc  
+Primary component concept: `ActionClosureSheet`  
+Purpose: Create one shared non-shaming closure grammar across Today, Step Detail, Step Session, Goal Detail, Plan, Reviews, and Trust.
+
+### 11. Proof / Receipts / Reviews — Contract
+
+Document: [Ambitions 3.0 — Proof, Receipts, And Reviews Contract](./Ambitions_3_0_Proof_Receipts_And_Reviews_Contract.md)
+
+Status: Active front-end canon contract  
+Purpose: Keep receipts, proof, and reviews distinct while preserving trust, evidence, and review usefulness.
+
+### 12. System-wide — Signature Objects And Rail Grammar
+
+Document: [Ambitions 3.0 — Signature Objects And Rail Grammar](./Ambitions_3_0_Signature_Objects_And_Rail_Grammar.md)
+
+Status: Active visual and IA canon contract  
+Purpose: Define one dominant signature object per tab and shared rail/node grammar for Day Rail, Meridian, Goal Path, Proof, and Life Shape.
+
 ---
 
 ## Planned Child Docs
@@ -218,20 +376,30 @@ These docs should be added as the redesign proceeds. Keep links here even before
 ### Golden Launch Loop
 
 - [x] 230-upgrade Golden Launch Loop bank
-- [ ] Universal object lifecycle contract
-- [ ] Recommended Step model refinement
+- [x] Universal object lifecycle contract
+- [x] Recommended Step / recommendation contract
+- [x] Action verbs and receipt grammar
+- [x] Receipt / proof / review contract
 - [ ] Step source and duration source labels
-- [ ] Why This explanation system
-- [ ] Receipt and proof creation contract
+- [ ] Why This explanation system deep spec
 - [ ] Guided automation trust boundary system
+
+### System-wide shell / visual grammar
+
+- [x] Ambition Meridian Shell
+- [x] Signature objects and rail grammar
+- [ ] Component system / design tokens refinement
+- [ ] Motion and haptics system
+- [ ] Accessibility system
+- [ ] App Store screenshot-ready surfaces
 
 ### Today
 
 - [x] Ambitions Day Rail
-- [ ] Today Hero Step Panel refinement
+- [x] Hero Step Panel resolved into Day Rail hero card
 - [ ] Step Detail
 - [ ] Step Session
-- [ ] Action Closure Sheet
+- [x] Action Closure Sheet
 - [ ] Today Recovery / Protect the Day flow
 - [ ] Today Receipts / Proof Peek
 
@@ -247,6 +415,7 @@ These docs should be added as the redesign proceeds. Keep links here even before
 
 - [ ] Capture composer redesign
 - [ ] Dark-sky/starfield Capture background rules
+- [x] Placement Resolver
 - [ ] Needs a Place flow
 - [ ] Ready to Place flow
 - [ ] Grow into Goal flow
@@ -256,11 +425,11 @@ These docs should be added as the redesign proceeds. Keep links here even before
 
 ### Place
 
-- [ ] Placement resolver
-- [ ] Placement preview
-- [ ] Placement receipt
-- [ ] Placement undo
-- [ ] Placement privacy checks
+- [x] Placement resolver
+- [x] Placement preview
+- [x] Placement receipt
+- [x] Placement undo rule
+- [x] Placement privacy checks
 - [ ] Bulk placement
 
 ### Plan
@@ -276,10 +445,10 @@ These docs should be added as the redesign proceeds. Keep links here even before
 
 ### Close / Recover
 
-- [ ] Unified Action Closure sheet
-- [ ] Still Counts flagship treatment
+- [x] Unified Action Closure sheet
+- [x] Still Counts flagship treatment
 - [ ] Recovery modes
-- [ ] Closure reason taxonomy
+- [x] Closure reason taxonomy
 - [ ] Long absence recovery
 - [ ] Vacation return recovery
 
@@ -287,9 +456,9 @@ These docs should be added as the redesign proceeds. Keep links here even before
 
 - [ ] Proof Rail
 - [ ] What Counted review
-- [ ] Receipt toast
-- [ ] Receipt peek
-- [ ] Receipt search
+- [x] Receipt toast contract
+- [x] Receipt peek/trail/search visibility levels
+- [ ] Receipt search implementation spec
 - [ ] Proof correction and privacy controls
 
 ### You
@@ -302,18 +471,32 @@ These docs should be added as the redesign proceeds. Keep links here even before
 - [ ] Privacy / data controls
 - [ ] Reviews and reflections
 
-### System-wide
+### System-wide contracts
 
-- [x] Ambition Meridian Shell
-- [ ] Navigation and drill-down architecture
-- [ ] Component system / design tokens
-- [ ] Empty states
-- [ ] Loading states
-- [ ] Error states
-- [ ] Accessibility system
-- [ ] Motion and haptics system
-- [ ] Copy and terminology guardrails
-- [ ] App Store screenshot-ready surfaces
+- [x] Navigation and object ownership architecture
+- [x] Surface state matrix
+- [x] Copy and terminology guardrails
+- [x] Recommendation contract
+- [ ] Implementation evidence status matrix
+
+---
+
+## Child Doc Admission Test
+
+A proposed Ambitions 3.0 child doc is allowed only if it:
+
+1. Owns a specific surface, component, model, or cross-system contract.
+2. Does not duplicate an existing child doc.
+3. Defines non-goals.
+4. Names affected surfaces.
+5. Names canonical components.
+6. Defines state models or state behavior.
+7. Defines actions and navigation.
+8. Defines trust/receipt behavior.
+9. Defines accessibility behavior.
+10. Defines tests and previews.
+11. Maps to the Golden Launch Loop.
+12. States whether it is implementation permission or documentation only.
 
 ---
 
@@ -327,20 +510,46 @@ Every Ambitions 3.0 child doc should include these sections:
 4. Signature interaction or component
 5. Non-goals
 6. Visual direction
-7. SwiftUI architecture
-8. File plan
-9. Domain/view state models
+7. SwiftUI architecture or implementation architecture where relevant
+8. File plan where relevant
+9. Domain/view state models where relevant
 10. Component breakdown
 11. Actions and navigation
 12. Adaptive states
 13. Accessibility requirements
-14. Motion/haptics rules
-15. Preview fixtures
+14. Motion/haptics rules where relevant
+15. Preview fixtures where relevant
 16. Tests
 17. Acceptance criteria
 18. Codex implementation sequence
 19. Known dependencies
 20. Open questions
+
+---
+
+## Implementation Permission Rule
+
+An implementation-grade child doc is not by itself permission to build app code.
+
+Codex may implement a child doc only when the prompt explicitly scopes that child doc or an active batch references it.
+
+Child docs define what correct implementation means. They do not automatically change roadmap priority.
+
+---
+
+## Ambitions 3.0 Conflict Resolution Rules
+
+When docs conflict:
+
+1. `SOURCE_OF_TRUTH_MAP.md` decides document priority outside front-end redesign.
+2. This 3.0 parent wins for front-end redesign sequencing.
+3. A linked active 3.0 child doc wins for its owned surface/component.
+4. `DOMAIN_MODEL.md` wins for object definitions where 3.0 does not explicitly refine front-end lifecycle/state behavior.
+5. `TRUST_PRIVACY_MEMORY.md` wins for sensitive data, memory, receipts, permissions, and confirmation where 3.0 does not explicitly refine front-end presentation.
+6. `IA_NAVIGATION_DRILLDOWN.md` wins for object ownership and top-level placement where 3.0 does not explicitly supersede with a linked child doc.
+7. `IMPLEMENTATION_ACCEPTANCE_GATES.md` wins for definition of done.
+8. Older docs remain valid only where they do not conflict.
+9. Implementation status is never inferred from canon status.
 
 ---
 
@@ -350,17 +559,17 @@ When using this parent doc with Codex:
 
 1. Start with this file.
 2. Open the child doc for the target surface.
-3. Open the Ambition Meridian Shell spec when work touches the system-wide shell, app tabs, root routing, global Capture, active-step return state, closure state, or receipt state.
-4. Open the Golden Launch Loop Upgrade Bank when the work touches Capture, Place, Plan, Today, Closure, Proof, Trust, AI/personalization, copy, or roadmap.
-5. Compare the child doc against existing repo canon and implementation.
-6. Do not implement child specs blindly if they conflict with higher-priority canon.
-7. Preserve the canonical tabs: Today, Goals, Capture, Plan, You.
-8. Preserve the locked Day Rail invention when working on Today or Do Today upgrades.
-9. Keep changes modular and testable.
-10. Avoid widening the app.
-11. Prefer reusable primitives over one-off UI.
-12. Add previews and tests with every build batch.
-13. Do not claim release readiness unless physical-device, accessibility, and App Store gates are actually verified.
+3. Open the Golden Launch Loop Upgrade Bank when the work touches Capture, Place, Plan, Today, Closure, Proof, Trust, AI/personalization, copy, or roadmap.
+4. Compare the child doc against existing repo canon and implementation.
+5. Do not implement child specs blindly if they conflict with higher-priority canon.
+6. Preserve the canonical tabs: Today, Goals, Capture, Plan, You.
+7. Preserve the locked Day Rail invention when working on Today or Do Today upgrades.
+8. Keep changes modular and testable.
+9. Avoid widening the app.
+10. Prefer reusable primitives over one-off UI.
+11. Add previews and tests with every build batch.
+12. Do not claim release readiness unless physical-device, accessibility, and App Store gates are actually verified.
+13. Distinguish canonized, designed, implementation-scoped, implemented, previewed, tested, device-verified, and release-ready status.
 
 ---
 
@@ -369,12 +578,11 @@ When using this parent doc with Codex:
 When discussing future redesign work:
 
 1. Add the new redesign topic to this parent doc.
-2. Create a linked child doc for that specific surface or component.
+2. Create a linked child doc for that specific surface, component, or contract.
 3. Keep child docs implementation-grade, not just conceptual.
 4. Record decisions in the child doc rather than scattering them across chat.
 5. If a child doc changes the product direction, update this parent doc too.
 6. If a proposed Do Today upgrade changes the Day Rail, check the Day Rail protection rule before accepting it.
-7. If a proposed shell upgrade changes top-level routing, check the Ambition Meridian Shell child doc before accepting it.
 
 ---
 
@@ -383,16 +591,114 @@ When discussing future redesign work:
 The current highest-priority Ambitions 3.0 front-end redesign objects are:
 
 1. Today — Ambitions Day Rail
-2. System-wide — Ambition Meridian Shell
-3. Golden Launch Loop integration
+2. Golden Launch Loop integration
+3. Step Detail / Step Session / Action Closure
+4. Capture placement flow
+5. Plan Day / Week / Month believability suite
+6. Goals Portfolio / Goal Detail Mission Control
+7. You / Personal System Center trust and setup
+8. Ambition Meridian Shell after the stock five-tab shell remains routing-safe
 
 Reason:
 
 Today is the flagship daily-use surface. If Today does not immediately answer what matters now, why it matters, what fits, what changed, and what counted, Ambitions cannot feel like the most important app on a user’s phone.
 
-The Meridian Shell is the signature system-wide navigation object. If the shell feels like a generic tab bar, Ambitions loses the life-OS feeling before the user reaches the deeper product value.
-
 The Golden Launch Loop ensures every major surface feeds that daily execution truth instead of becoming disconnected premium panels.
+
+---
+
+## Ambitions 3.0 Front-End Build Sequence
+
+### P0 — Canon consolidation
+
+- Update source-of-truth map.
+- Keep this parent doc current.
+- Add and maintain system contracts.
+- Resolve Hero Step Panel vs Day Rail terminology.
+- Maintain object ownership matrix.
+
+### P1 — Today execution loop
+
+- `AmbitionsDayRailView`
+- Step Detail
+- Step Session
+- Action Closure Sheet
+- Receipt Peek
+
+### P2 — Capture and Place
+
+- Capture composer refinement
+- Placement Resolver
+- Needs a Place
+- Ready to Place
+- Grow into Goal
+- Placement receipts
+
+### P3 — Plan believability suite
+
+- Day scope
+- Week scope
+- Month Life Shape
+- Schedule & Availability
+- Planning Defaults
+- Vacation / Away
+
+### P4 — Goals and Proof
+
+- Goals Portfolio
+- Goal Detail Mission Control
+- Goal Path Rail
+- Proof Rail
+- Decisions / Risks
+
+### P5 — You and Trust
+
+- Personal System Center
+- Automation & Trust
+- What Ambitions Knows
+- Receipts & History
+- Reviews / Life OS Receipt
+
+### P6 — Shell polish
+
+- Ambition Meridian Shell
+- Motion/haptics
+- screenshot-ready surfaces
+- accessibility QA
+
+---
+
+## Implementation Truth Rule
+
+Canon status is not implementation status.
+
+A concept can be:
+
+- Canonized
+- Designed
+- Implementation-scoped
+- Implemented
+- Previewed
+- Tested
+- Device-verified
+- Release-ready
+
+Do not collapse these into one status.
+
+---
+
+## No New System Names Without Exit Criteria
+
+A new named Ambitions system may be added only if it has:
+
+1. user problem solved
+2. surface owner
+3. object owner
+4. component name
+5. non-goals
+6. trust implications
+7. acceptance criteria
+8. reason it cannot be handled by an existing system
 
 ---
 
@@ -402,18 +708,18 @@ An Ambitions 3.0 front-end redesign is not complete until it is:
 
 - Product-coherent
 - Visually premium
-- SwiftUI-buildable
+- SwiftUI-buildable when implementation-scoped
 - Accessibility-aware
 - Trust-aware
 - Testable
-- Previewed
+- Previewed where user-visible
 - Connected to existing canon
 - Specific enough for Codex
 - Calm enough for users
 - Deep enough to feel like Ambitions
 - Integrated into the Golden Launch Loop
 - Non-regressive to the locked Day Rail when touching Today
-- Non-regressive to the Ambition Meridian Shell when touching system-wide navigation
+- Honest about planned versus shipped state
 
 ---
 
@@ -422,4 +728,13 @@ An Ambitions 3.0 front-end redesign is not complete until it is:
 - [Ambitions 3.0 — Day Rail SwiftUI Build Spec](./Ambitions_3_0_Day_Rail_SwiftUI_Build_Spec.md)
 - [Ambitions 3.0 — Ambition Meridian Shell SwiftUI Build Spec](./Ambitions_3_0_Ambition_Meridian_Shell_SwiftUI_Build_Spec.md)
 - [Ambitions 3.0 — Golden Launch Loop Upgrade Bank](./Ambitions_3_0_Golden_Launch_Loop_Upgrade_Bank.md)
+- [Ambitions 3.0 — Universal Object Lifecycle Contract](./Ambitions_3_0_Universal_Object_Lifecycle_Contract.md)
+- [Ambitions 3.0 — Object Ownership And Appearance Matrix](./Ambitions_3_0_Object_Ownership_And_Appearance_Matrix.md)
+- [Ambitions 3.0 — Surface State Matrix](./Ambitions_3_0_Surface_State_Matrix.md)
+- [Ambitions 3.0 — Action Verbs And Receipt Grammar](./Ambitions_3_0_Action_Verbs_And_Receipt_Grammar.md)
+- [Ambitions 3.0 — Recommendation Contract](./Ambitions_3_0_Recommendation_Contract.md)
+- [Ambitions 3.0 — Placement Resolver Spec](./Ambitions_3_0_Placement_Resolver_Spec.md)
+- [Ambitions 3.0 — Action Closure Sheet Spec](./Ambitions_3_0_Action_Closure_Sheet_Spec.md)
+- [Ambitions 3.0 — Proof, Receipts, And Reviews Contract](./Ambitions_3_0_Proof_Receipts_And_Reviews_Contract.md)
+- [Ambitions 3.0 — Signature Objects And Rail Grammar](./Ambitions_3_0_Signature_Objects_And_Rail_Grammar.md)
 - [Ambitions Full Front-End Transformation Program](./Ambitions_Full_Frontend_Transformation_Program.md)
