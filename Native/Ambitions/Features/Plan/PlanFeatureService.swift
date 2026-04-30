@@ -440,8 +440,8 @@ private extension RepositoryBackedPlanService {
                 title: "Shape what carries forward",
                 subtitle: "Weekly review now continues the same authored week workspace instead of becoming a detached ritual.",
                 dominantTruth: posture.visualState == .warning
-                    ? "The review should reduce strain first, then carry forward only the moves the next week can explain."
-                    : "The review can keep what worked, leave room visible, and carry forward only the next believable moves.",
+                    ? "The review should reduce strain first, then carry forward only the steps the next week can explain."
+                    : "The review can keep what worked, leave room visible, and carry forward only the next believable steps.",
                 continuityLabel: "Return to the week with a calmer shape, not a larger list.",
                 contextPills: [
                     PlanHeroPillState(title: timeframeLabel(now: now), icon: "calendar", state: .default),
@@ -611,8 +611,8 @@ private extension RepositoryBackedPlanService {
             return PlanOpenWindowState(
                 title: level == .open ? "Open window" : "Usable room",
                 detail: contextCount == 0
-                    ? "This day can carry one believable move without turning calendar-dense."
-                    : "There is still enough room to protect or patch one calmer move.",
+                    ? "This day can carry one believable step without turning calendar-dense."
+                    : "There is still enough room to protect or patch one calmer step.",
                 suggestionLabel: suggestedSummary.goal.title,
                 target: GoalRouteTarget(goalID: suggestedSummary.goal.id),
                 visualState: level == .open ? .success : .selected
@@ -638,7 +638,7 @@ private extension RepositoryBackedPlanService {
 
         return PlanPressureScrubberState(
             title: "Pressure scrubber",
-            subtitle: "Scrub the week to inspect where pressure gathers, where room remains, and which day can take another believable move.",
+            subtitle: "Scrub the week to inspect where pressure gathers, where room remains, and which day can take another believable step.",
             defaultDayID: defaultDayID,
             points: days.map { day in
                 PlanPressureScrubberPoint(
@@ -787,7 +787,7 @@ private extension RepositoryBackedPlanService {
             return nil
         }
 
-        let suggestedGoalTitle = openWindow.suggestionLabel ?? missingGoalSummaries.first?.goal.title ?? pressuredGoalSummary?.goal.title ?? "the next lighter move"
+        let suggestedGoalTitle = openWindow.suggestionLabel ?? missingGoalSummaries.first?.goal.title ?? pressuredGoalSummary?.goal.title ?? "the next lighter step"
 
         return PlanWindowMagnetismState(
             title: "Window magnetism",
@@ -868,7 +868,7 @@ private extension RepositoryBackedPlanService {
         let roomSummary: String = {
             if openDays == 0 { return "Room is scarce, so every new ask needs a tradeoff." }
             if openDays <= 2 { return "Only a little open room remains; protect it deliberately." }
-            return "\(openDays) day\(openDays == 1 ? "" : "s") still carry visible room for a believable move."
+            return "\(openDays) day\(openDays == 1 ? "" : "s") still carry visible room for a believable step."
         }()
 
         let pressureSummary: String = {
@@ -932,7 +932,7 @@ private extension RepositoryBackedPlanService {
             return PlanWeekPrimaryAction(
                 kind: .useRoom,
                 title: "Use this room",
-                subtitle: "There is believable room for one calmer move on \(missingGoalSummary.goal.title).",
+                subtitle: "There is believable room for one calmer step on \(missingGoalSummary.goal.title).",
                 systemImage: "arrow.down.left.and.arrow.up.right",
                 state: .success,
                 goalTarget: GoalRouteTarget(goalID: missingGoalSummary.goal.id),
@@ -1021,7 +1021,7 @@ private extension RepositoryBackedPlanService {
                 subtitle: noisyDay?.highlight ?? "Lighten the loudest part of the week first.",
                 recommendation: openCaptureCount > 0
                     ? "Reduce speculative load before trying to force more commitment into the week."
-                    : "Shrink or move the heaviest ask before the week starts feeling performative.",
+                    : "Shrink or reschedule the heaviest ask before the week starts feeling performative.",
                 systemImage: PlanShapingActionKind.lighten.systemImage,
                 state: noisyDay == nil ? .default : .warning,
                 goalTarget: openCaptureCount > 0 ? nil : pressuredTarget,
@@ -1052,16 +1052,16 @@ private extension RepositoryBackedPlanService {
                 : "This plan is a calm agreement between protected work, flexible work, and room you are allowed to keep.",
             protectedWork: protectedCount == 0
                 ? "Nothing is marked as protected yet."
-                : "\(protectedCount) protected or fixed move\(protectedCount == 1 ? "" : "s") should stay defended.",
+                : "\(protectedCount) protected or fixed item\(protectedCount == 1 ? "" : "s") should stay defended.",
             flexibleWork: flexibleCount == 0
                 ? "No flexible work is asking for placement right now."
-                : "\(flexibleCount) flexible move\(flexibleCount == 1 ? "" : "s") can bend around real life.",
+                : "\(flexibleCount) flexible item\(flexibleCount == 1 ? "" : "s") can bend around real life.",
             notTodayWork: missingGoalCount + openCaptureCount == 0
                 ? "Nothing obvious needs to be kept outside today."
                 : "\(missingGoalCount + openCaptureCount) item\(missingGoalCount + openCaptureCount == 1 ? "" : "s") should wait, clarify, or stay outside today's pressure.",
             recoveryAllowance: overloadedDays == 0 && openDays > 0
                 ? "\(openDays) open day\(openDays == 1 ? "" : "s") keep recovery room visible."
-                : "Recovery room is thin; move one thing, not everything.",
+                : "Recovery room is thin; adjust one thing, not everything.",
             calendarBoundary: calendarBoundary.manualFallback,
             primaryActionTitle: primaryAction.title,
             primaryActionSubtitle: primaryAction.subtitle,
@@ -1106,7 +1106,7 @@ private extension RepositoryBackedPlanService {
             label: level.0,
             availableCapacity: openDays == 0 ? "No obvious open day" : "\(openDays) open day\(openDays == 1 ? "" : "s")",
             pressure: overloadedDays > 0 ? "Pressure is stacked" : tightDays > 0 ? "Pressure is visible" : "Pressure is readable",
-            protectedFocus: protectedCount == 0 ? "Focus time is not explicit yet" : "\(protectedCount) important move\(protectedCount == 1 ? "" : "s")",
+            protectedFocus: protectedCount == 0 ? "Focus time is not explicit yet" : "\(protectedCount) important item\(protectedCount == 1 ? "" : "s")",
             recoveryMargin: openDays >= 2 ? "Recovery room exists" : openDays == 1 ? "Recovery room is narrow" : "Recovery room needs protection",
             visualState: level.1
         )
@@ -1227,7 +1227,7 @@ private extension RepositoryBackedPlanService {
             switch day.level {
             case .open:
                 modeLabel = window.target == nil ? "Recovery" : "Focus"
-                title = window.target == nil ? "Recovery window" : "Good window for one focused move"
+                title = window.target == nil ? "Recovery window" : "Good window for one focused step"
             case .steady:
                 modeLabel = "Follow-up"
                 title = "Good for follow-up"
@@ -1357,7 +1357,7 @@ private extension RepositoryBackedPlanService {
                 id: "decision-overloaded-week",
                 title: "Clarify overloaded week",
                 detail: "At least one day is carrying too much to stay believable.",
-                suggestion: "Move one thing, not everything.",
+                suggestion: "Adjust one thing, not everything.",
                 visualState: .warning,
                 target: nil,
                 planRoute: nil
@@ -1425,7 +1425,7 @@ private extension RepositoryBackedPlanService {
                 id: "conflict-commitment-goal",
                 title: "Follow-up is competing with goal work",
                 detail: "A waiting commitment and current goal work both want attention.",
-                suggestion: "Follow up first if it unlocks the move; otherwise keep it outside today.",
+                suggestion: "Follow up first if it unlocks the step; otherwise keep it outside today.",
                 visualState: .warning,
                 target: nil,
                 planRoute: .capturesInbox
@@ -1527,7 +1527,7 @@ private extension RepositoryBackedPlanService {
             suggestions.append(PlanDecisionItemState(
                 id: "recovery-protect-room",
                 title: "Protect recovery room",
-                detail: "The safest move is keeping an open pocket unfilled.",
+                detail: "The safest choice is keeping an open pocket unfilled.",
                 suggestion: "Recovery room is part of the plan, not a failure to optimize.",
                 visualState: .success,
                 target: nil,
@@ -1589,7 +1589,7 @@ private extension RepositoryBackedPlanService {
             visualState = .warning
         } else if let blockedSummary {
             reasonKind = .blockedGoal
-            reasonDetail = "\(blockedSummary.goal.title) is still active while a planned move is blocked."
+            reasonDetail = "\(blockedSummary.goal.title) is still active while a planned step is blocked."
             visualState = .warning
         } else if waitingCaptureExists {
             reasonKind = .waitingOnPersonOrResource
@@ -1636,7 +1636,7 @@ private extension RepositoryBackedPlanService {
             title: reasonKind == .stillBelievable ? "Plan is still believable" : "Reality changed",
             detail: reasonKind == .stillBelievable
                 ? "Nothing changed yet, and no recovery action is needed."
-                : "Move one thing, not everything. These are suggestions until you confirm a change.",
+                : "Adjust one thing, not everything. These are suggestions until you confirm a change.",
             reasonKind: reasonKind,
             reasonDetail: reasonDetail,
             recommendedAdjustment: recommendedAdjustment,
@@ -1686,16 +1686,16 @@ private extension RepositoryBackedPlanService {
             append(.keepPlanUnchanged, detail: "Create or choose one plan item before reflowing anything.", impact: "No plan mutation", state: .default, target: nil)
         case .blockedGoal:
             append(.markWaiting, detail: "Keep the blocked work visible as waiting instead of adding more pressure.", impact: "Waiting state only after confirmation", state: .warning)
-            append(.protectOneItem, detail: "Protect the one unblocked move that still matters.", impact: "Protects one item", state: .selected)
+            append(.protectOneItem, detail: "Protect the one unblocked step that still matters.", impact: "Protects one item", state: .selected)
         case .waitingOnPersonOrResource:
             append(.markWaiting, detail: "Treat the dependency as waiting and keep the rest of the plan calm.", impact: "Keeps follow-up explicit", state: .warning, target: nil, planRoute: .capturesInbox)
-            append(.moveLocalActionLater, detail: "Move only the local follow-up later if it is not the protected item.", impact: "Local suggestion only", state: .default, target: nil, planRoute: .capturesInbox)
+            append(.moveLocalActionLater, detail: "Reschedule only the local follow-up later if it is not the protected item.", impact: "Local suggestion only", state: .default, target: nil, planRoute: .capturesInbox)
         case .noNextStep:
             append(.protectOneItem, detail: "Choose one must-do and leave the rest outside today.", impact: "Protects one item", state: .selected)
             append(.parkGoal, detail: "Park the goal that has no believable next step yet.", impact: "Broad change needs confirmation", state: .warning)
         case .calendarUnavailableOrDenied:
             append(.protectOneItem, detail: "Pick the one item to protect manually.", impact: "Manual planning still works", state: .selected)
-            append(.moveLocalActionLater, detail: "Move a local action later without writing to Calendar.", impact: "No calendar write", state: .default)
+            append(.moveLocalActionLater, detail: "Reschedule a local action later without writing to Calendar.", impact: "No calendar write", state: .default)
         case .tooManyActiveGoals:
             append(.protectOneItem, detail: "Protect the one goal that must stay active now.", impact: "Narrows focus", state: .selected)
             append(.parkGoal, detail: "Park one active goal until it has real room.", impact: "Broad change needs confirmation", state: .warning)
@@ -1872,7 +1872,7 @@ private extension RepositoryBackedPlanService {
                     ? "\(overloadedDays) day\(overloadedDays == 1 ? "" : "s") need relief before the week widens."
                     : saveTheDay.recoveryExplanation,
                 statusLabel: fitLabel,
-                boundaryLabel: "Suggests one smaller move",
+                boundaryLabel: "Suggests one smaller step",
                 visualState: signalState
             ),
             PlanRecoveryMaturitySignalState(
@@ -1971,7 +1971,7 @@ private extension RepositoryBackedPlanService {
         summaries
             .map { summary in
                 let represented = summary.contexts.isEmpty == false
-                let nextMove = summary.contexts.first?.step.summary ?? summary.contexts.first?.step.actionability.fallbackMicroStep ?? "Add one believable move."
+                let nextMove = summary.contexts.first?.step.summary ?? summary.contexts.first?.step.actionability.fallbackMicroStep ?? "Add one believable step."
                 let pressureLabel: String
                 let attentionReason: String
                 let relationship: String
@@ -1984,7 +1984,7 @@ private extension RepositoryBackedPlanService {
                     visualState = .warning
                 } else if summary.frictionCount > 0 {
                     pressureLabel = "Needs lighter ask"
-                    attentionReason = "Recent friction suggests the current move is heavier than the week can comfortably carry."
+                    attentionReason = "Recent friction suggests the current step is heavier than the week can comfortably carry."
                     relationship = "Visible, but straining"
                     visualState = .warning
                 } else if summary.evaluation?.feasibilityLevel == .fragile || summary.evaluation?.feasibilityLevel == .notBelievable {

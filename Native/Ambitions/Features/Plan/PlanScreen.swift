@@ -1714,7 +1714,7 @@ private struct PlanShapingActionsCard: View {
             VStack(alignment: .leading, spacing: theme.spacing.md) {
                 SectionHeader(
                     title: "Week-shaping actions",
-                    subtitle: "Keep one shaping lane obvious: edit, patch, move later, or lighten."
+                    subtitle: "Keep one shaping lane obvious: edit, patch, adjust later, or lighten."
                 )
 
                 LazyVGrid(columns: [GridItem(.flexible(), spacing: theme.spacing.sm), GridItem(.flexible(), spacing: theme.spacing.sm)], spacing: theme.spacing.sm) {
@@ -1820,7 +1820,7 @@ private struct PlanGoalRelationshipCard: View {
                 )
 
                 if items.isEmpty {
-                    Text("Once active goals carry real work, they will show up here with their week relationship and next doable move.")
+                    Text("Once active goals carry real work, they will show up here with their week relationship and next doable step.")
                         .font(theme.typography.body)
                         .foregroundStyle(theme.colors.textSecondary)
                 } else {
@@ -1866,7 +1866,7 @@ private struct PlanGoalRelationshipRow: View {
                     .font(theme.typography.body)
                     .foregroundStyle(theme.colors.textSecondary)
                     .fixedSize(horizontal: false, vertical: true)
-                Text("Next doable move: \(item.nextMoveLabel)")
+                Text("Next doable step: \(item.nextMoveLabel)")
                     .font(theme.typography.caption)
                     .foregroundStyle(theme.colors.textTertiary)
                     .fixedSize(horizontal: false, vertical: true)

@@ -940,7 +940,7 @@ private extension RepositoryBackedProfileService {
                 ),
                 ProfileConstitutionRule(
                     id: "constitution-recommendation-posture",
-                    title: "Suggest one doable move",
+                    title: "Suggest one doable step",
                     detail: "Suggestions should be explainable by goal, plan, evidence, or recent feedback, not vague intelligence claims.",
                     statusLabel: snapshot.eventLedger.isEmpty ? "Evidence-light" : "Uses local evidence",
                     state: .default

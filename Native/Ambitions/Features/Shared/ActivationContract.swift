@@ -111,7 +111,7 @@ enum ActivationContract {
             return ActivationPromise(
                 kind: kind,
                 title: "First Today Contract",
-                explanation: "Today keeps one doable move visible and keeps support panels subordinate to the day instead of becoming a dashboard.",
+                explanation: "Today keeps one doable step visible and keeps support panels subordinate to the day instead of becoming a dashboard.",
                 primaryActionTitle: "Enter Today",
                 primaryRoutingHint: .today
             )
@@ -119,7 +119,7 @@ enum ActivationContract {
             return ActivationPromise(
                 kind: kind,
                 title: "First recovery example",
-                explanation: "Recovery is part of the plan. When the day breaks, Ambitions should offer a smaller, safer move without guilt or silent rescheduling.",
+                explanation: "Recovery is part of the plan. When the day breaks, Ambitions should offer a smaller, safer step without guilt or silent rescheduling.",
                 primaryActionTitle: nil,
                 primaryRoutingHint: nil
             )
@@ -143,7 +143,7 @@ enum ActivationContract {
             return ActivationPromise(
                 kind: kind,
                 title: "First return path",
-                explanation: "A returning user should see where they left off, what is still safe, one re-entry move, and what can wait using only existing local data.",
+                explanation: "A returning user should see where they left off, what is still safe, one re-entry step, and what can wait using only existing local data.",
                 primaryActionTitle: "Come back to Today",
                 primaryRoutingHint: .today
             )
@@ -156,7 +156,7 @@ enum ActivationContract {
             return ActivationSurfaceEmptyStateRule(
                 surface: surface,
                 title: "Today is waiting for one real thing",
-                explanation: "Add one meaningful goal or capture one loose thought. Today will keep one doable move visible when there is something real to act on.",
+                explanation: "Add one meaningful goal or capture one loose thought. Today will keep one doable step visible when there is something real to act on.",
                 primaryAction: DegradedStateAction(title: "Create first goal", systemImage: "target", routingHint: .createGoal),
                 secondaryAction: DegradedStateAction(title: "Capture first", systemImage: "tray.and.arrow.down", routingHint: .quickCapture),
                 icon: "sun.max"

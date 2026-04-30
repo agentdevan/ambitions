@@ -51,7 +51,7 @@ enum AppShellHeaderPosture: String, Sendable {
     var continuityMessage: String {
         switch self {
         case .execution:
-            "Today keeps one important move in view."
+            "Today keeps one important step in view."
         case .direction:
             "Goals keeps direction connected to the next step."
         case .shaping:

@@ -445,7 +445,7 @@ private struct ProfileRootDetailSheet: View {
                         SettingsItem(id: "plan-open-time", title: "Open time behavior", subtitle: "Open time is not automatically filled.", icon: "rectangle.dashed", valueLabel: AvailabilityState.doNotFill.displayLabel),
                         SettingsItem(id: "plan-protected-free", title: "Protected free time", subtitle: "Some open windows should stay quiet.", icon: "lock", valueLabel: AvailabilityState.protectedFreeTime.displayLabel),
                         SettingsItem(id: "plan-reflow", title: "Reflow permission", subtitle: "Meaningful day changes ask first and save receipts.", icon: "arrow.triangle.2.circlepath", valueLabel: "Ask first"),
-                        SettingsItem(id: "plan-rigidity", title: "Default rigidity", subtitle: "Flexible and optional items can move only inside trusted rules.", icon: "pin", valueLabel: RigidityLevel.flexible.displayLabel)
+                        SettingsItem(id: "plan-rigidity", title: "Default rigidity", subtitle: "Flexible and optional items can shift only inside trusted rules.", icon: "pin", valueLabel: RigidityLevel.flexible.displayLabel)
                     ],
                     footer: "Hard context, protected blocks, and user-owned boundaries win before recommendations."
                 ),

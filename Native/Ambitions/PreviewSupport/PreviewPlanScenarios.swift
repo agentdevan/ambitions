@@ -10,7 +10,7 @@ enum PreviewPlanScenarios {
             title: "Does this hold together?",
             subtitle: "Plan reads the week as room, pressure, and protected structure instead of a dense calendar clone.",
             dominantTruth: "Pressure is clustering into one overloaded day, while two calmer windows still have believable room.",
-            roomSummary: "Wednesday and Saturday can still carry one small move without collapsing into calendar noise.",
+            roomSummary: "Wednesday and Saturday can still carry one small step without collapsing into calendar noise.",
             pressureSummary: "Open captures and one fragile goal are the loudest reasons the week still needs shaping.",
             contextPills: [
                 PlanHeroPillState(title: "Apr 20-Apr 26", icon: "calendar", state: .default),
@@ -31,8 +31,8 @@ enum PreviewPlanScenarios {
         treaty: PlanTreatyState(
             title: "This week's agreement",
             summary: "Protect shell work, flex the retention loop, keep one capture outside today, and leave recovery room visible.",
-            protectedWork: "3 protected or fixed moves should stay defended.",
-            flexibleWork: "4 flexible moves can bend around real life.",
+            protectedWork: "3 protected or fixed items should stay defended.",
+            flexibleWork: "4 flexible items can bend around real life.",
             notTodayWork: "2 items should wait, clarify, or stay outside today's pressure.",
             recoveryAllowance: "2 open days keep recovery room visible.",
             calendarBoundary: "Manual planning still works without calendar access.",
@@ -46,7 +46,7 @@ enum PreviewPlanScenarios {
             label: "Tight",
             availableCapacity: "2 open days",
             pressure: "Pressure is visible",
-            protectedFocus: "3 protected moves",
+            protectedFocus: "3 protected items",
             recoveryMargin: "Recovery room exists",
             visualState: .warning
         ),
@@ -78,7 +78,7 @@ enum PreviewPlanScenarios {
             title: "Opportunity windows",
             subtitle: "Windows are work modes, not a calendar grid.",
             windows: [
-                PlanOpportunityWindowItem(id: "preview-window-focus", title: "Good window for one focused move", detail: "Wednesday can carry one believable move without turning calendar-dense.", modeLabel: "Focus", timingLabel: "Wed 22", visualState: .success, target: GoalRouteTarget(goalID: "preview-goal-2")),
+                PlanOpportunityWindowItem(id: "preview-window-focus", title: "Good window for one focused step", detail: "Wednesday can carry one believable step without turning calendar-dense.", modeLabel: "Focus", timingLabel: "Wed 22", visualState: .success, target: GoalRouteTarget(goalID: "preview-goal-2")),
                 PlanOpportunityWindowItem(id: "preview-window-admin", title: "Better for admin", detail: "Thursday can hold only lightweight follow-up.", modeLabel: "Admin", timingLabel: "Thu 23", visualState: .default, target: nil)
             ]
         ),
@@ -116,7 +116,7 @@ enum PreviewPlanScenarios {
         ),
         realityReflow: PlanRealityReflowState(
             title: "Reality changed",
-            detail: "Move one thing, not everything. These are suggestions until you confirm a change.",
+            detail: "Adjust one thing, not everything. These are suggestions until you confirm a change.",
             reasonKind: .overloadedPlan,
             reasonDetail: "Tuesday is carrying more than this plan can calmly explain.",
             recommendedAdjustment: "Keep this",
@@ -200,7 +200,7 @@ enum PreviewPlanScenarios {
             socialBoundary: "People-shaped pressure stays private, optional, and manually named.",
             receiptBoundary: "A receipt preview names what would change, what would not change, and the undo boundary.",
             signals: [
-                PlanRecoveryMaturitySignalState(id: "fit", title: "Plan fit", detail: "One day needs relief before the week widens.", statusLabel: "Needs relief", boundaryLabel: "Suggests one smaller move", visualState: .warning),
+                PlanRecoveryMaturitySignalState(id: "fit", title: "Plan fit", detail: "One day needs relief before the week widens.", statusLabel: "Needs relief", boundaryLabel: "Suggests one smaller step", visualState: .warning),
                 PlanRecoveryMaturitySignalState(id: "waiting-commitments", title: "Waiting and commitments", detail: "One waiting item should stay visible instead of becoming quiet pressure.", statusLabel: "Visible", boundaryLabel: "No silent routing", visualState: .warning),
                 PlanRecoveryMaturitySignalState(id: "social-load", title: "Social load", detail: "People-shaped pressure stays private and manual-first.", statusLabel: "Private", boundaryLabel: "No inference without you", visualState: .selected),
                 PlanRecoveryMaturitySignalState(id: "receipt", title: "Receipt and undo", detail: "If you decline confirmation, Ambitions keeps the plan as-is.", statusLabel: "Safe local suggestion", boundaryLabel: "Undo can be local", visualState: .warning)
@@ -235,7 +235,7 @@ enum PreviewPlanScenarios {
                     PlanWeekBlockState(id: "m2", target: GoalRouteTarget(goalID: "preview-goal-1"), title: "Close shell polish notes", detail: "Only keep the fixes that improve clarity.", goalLabel: "Ship the native shell", timingLabel: "Flexible", kind: .flexible, visualState: .default)
                 ],
                 overflowCount: 0,
-                openWindow: PlanOpenWindowState(title: "Usable room", detail: "One smaller move still fits here if the day stays protected.", suggestionLabel: "Retention loop", target: GoalRouteTarget(goalID: "preview-goal-2"), visualState: .selected)
+                openWindow: PlanOpenWindowState(title: "Usable room", detail: "One smaller step still fits here if the day stays protected.", suggestionLabel: "Retention loop", target: GoalRouteTarget(goalID: "preview-goal-2"), visualState: .selected)
             ),
             PlanElasticWeekDayState(
                 id: "day-1",
@@ -265,7 +265,7 @@ enum PreviewPlanScenarios {
                 highlight: "Retention loop could fit here.",
                 blocks: [],
                 overflowCount: 0,
-                openWindow: PlanOpenWindowState(title: "Open window", detail: "This day can carry one believable move without turning calendar-dense.", suggestionLabel: "Retention loop", target: GoalRouteTarget(goalID: "preview-goal-2"), visualState: .success)
+                openWindow: PlanOpenWindowState(title: "Open window", detail: "This day can carry one believable step without turning calendar-dense.", suggestionLabel: "Retention loop", target: GoalRouteTarget(goalID: "preview-goal-2"), visualState: .success)
             ),
             PlanElasticWeekDayState(
                 id: "day-3",
@@ -297,7 +297,7 @@ enum PreviewPlanScenarios {
                     PlanWeekBlockState(id: "f2", target: GoalRouteTarget(goalID: "preview-goal-3"), title: "Polish roadmap wording", detail: "Remove any batch drift before wrapping the week.", goalLabel: "Refine roadmap", timingLabel: "Flexible", kind: .flexible, visualState: .default)
                 ],
                 overflowCount: 0,
-                openWindow: PlanOpenWindowState(title: "Usable room", detail: "There is still enough room to protect one smaller move.", suggestionLabel: "Retention loop", target: GoalRouteTarget(goalID: "preview-goal-2"), visualState: .selected)
+                openWindow: PlanOpenWindowState(title: "Usable room", detail: "There is still enough room to protect one smaller step.", suggestionLabel: "Retention loop", target: GoalRouteTarget(goalID: "preview-goal-2"), visualState: .selected)
             ),
             PlanElasticWeekDayState(
                 id: "day-5",
@@ -364,7 +364,7 @@ enum PreviewPlanScenarios {
                 detail: "Wednesday is the cleanest place for a calmer suggestion to dock.",
                 dayLabel: "Wed 22",
                 suggestionTitle: "Retention loop",
-                suggestionDetail: "This day can carry one believable move without turning calendar-dense.",
+                suggestionDetail: "This day can carry one believable step without turning calendar-dense.",
                 target: GoalRouteTarget(goalID: "preview-goal-2"),
                 visualState: .success
             )
@@ -387,7 +387,7 @@ enum PreviewPlanScenarios {
                 weekRelationship: "Still outside the week",
                 pressureLabel: "Carryover",
                 attentionReason: "This goal is active but the current week still does not give it believable room.",
-                nextMoveLabel: "Add one small move on Wednesday",
+                nextMoveLabel: "Add one small step on Wednesday",
                 visualState: .warning
             ),
             PlanGoalShapingItem(
@@ -396,7 +396,7 @@ enum PreviewPlanScenarios {
                 goalTitle: "Refine roadmap",
                 weekRelationship: "Visible, but straining",
                 pressureLabel: "Needs lighter ask",
-                attentionReason: "Recent friction suggests the current move is heavier than the week can comfortably carry.",
+                attentionReason: "Recent friction suggests the current step is heavier than the week can comfortably carry.",
                 nextMoveLabel: "Resolve the missing scope questions before planning more UI",
                 visualState: .warning
             )
@@ -404,8 +404,8 @@ enum PreviewPlanScenarios {
         shapingActions: [
             PlanShapingActionState(kind: .edit, title: "Edit", subtitle: "Fix shell regressions", recommendation: "Start with the clearest existing block instead of redrawing the whole week.", systemImage: "square.and.pencil", state: .selected, goalTarget: GoalRouteTarget(goalID: "preview-goal-1"), planRoute: nil),
             PlanShapingActionState(kind: .patch, title: "Patch", subtitle: "Give missing goals one believable lane instead of spreading them everywhere.", recommendation: "Use Wednesday or Friday to patch the retention loop into real room.", systemImage: "wand.and.stars", state: .warning, goalTarget: GoalRouteTarget(goalID: "preview-goal-2"), planRoute: nil),
-            PlanShapingActionState(kind: .protect, title: "Protect", subtitle: "Protect the calmest pocket before pressure spills into it.", recommendation: "The cleanest protection move is to keep Wednesday or Sunday from filling up reactively.", systemImage: "shield", state: .success, goalTarget: GoalRouteTarget(goalID: "preview-goal-2"), planRoute: nil),
-            PlanShapingActionState(kind: .lighten, title: "Lighten", subtitle: "Pressure is stacking here.", recommendation: "Shrink or move the heaviest ask before the week starts feeling performative.", systemImage: "sun.max", state: .warning, goalTarget: nil, planRoute: .capturesInbox)
+            PlanShapingActionState(kind: .protect, title: "Protect", subtitle: "Protect the calmest pocket before pressure spills into it.", recommendation: "The cleanest protection step is to keep Wednesday or Sunday from filling up reactively.", systemImage: "shield", state: .success, goalTarget: GoalRouteTarget(goalID: "preview-goal-2"), planRoute: nil),
+            PlanShapingActionState(kind: .lighten, title: "Lighten", subtitle: "Pressure is stacking here.", recommendation: "Shrink or reschedule the heaviest ask before the week starts feeling performative.", systemImage: "sun.max", state: .warning, goalTarget: nil, planRoute: .capturesInbox)
         ],
         secondaryDestinations: [
             PlanSecondaryDestination(id: "plan-habits", title: "Routines and habits", detail: "Review the repeatable loops that can steady or crowd the week.", valueLabel: "1", icon: AppTab.habits.systemImage, visualState: .selected, planRoute: .habits),
@@ -515,7 +515,7 @@ enum PreviewPlanScenarios {
             title: "Recovery room",
             detail: "Save the Day stays suggestion-only here. Broad reflow waits for confirmed recovery tools.",
             suggestions: [
-                PlanDecisionItemState(id: "preview-empty-recovery", title: "Protect recovery room", detail: "The safest move is keeping an open pocket unfilled.", suggestion: "Recovery room is part of the plan, not a failure to optimize.", visualState: .success, target: nil, planRoute: nil)
+                PlanDecisionItemState(id: "preview-empty-recovery", title: "Protect recovery room", detail: "The safest choice is keeping an open pocket unfilled.", suggestion: "Recovery room is part of the plan, not a failure to optimize.", visualState: .success, target: nil, planRoute: nil)
             ],
             boundary: "No schedule changes happen from this card."
         ),
@@ -583,7 +583,7 @@ enum PreviewPlanScenarios {
             socialBoundary: "People-shaped pressure stays private, optional, and manually named.",
             receiptBoundary: "A receipt preview names what would change, what would not change, and the undo boundary.",
             signals: [
-                PlanRecoveryMaturitySignalState(id: "fit", title: "Plan fit", detail: "No rescue is needed; keep recovery room visible.", statusLabel: "Believable", boundaryLabel: "Suggests one smaller move", visualState: .success),
+                PlanRecoveryMaturitySignalState(id: "fit", title: "Plan fit", detail: "No rescue is needed; keep recovery room visible.", statusLabel: "Believable", boundaryLabel: "Suggests one smaller step", visualState: .success),
                 PlanRecoveryMaturitySignalState(id: "waiting-commitments", title: "Waiting and commitments", detail: "No waiting item or one-time commitment is currently pushing on the plan.", statusLabel: "Quiet", boundaryLabel: "No silent routing", visualState: .default),
                 PlanRecoveryMaturitySignalState(id: "social-load", title: "Social load", detail: "No social-load assumption is inferred.", statusLabel: "Manual", boundaryLabel: "No inference without you", visualState: .default),
                 PlanRecoveryMaturitySignalState(id: "receipt", title: "Receipt and undo", detail: "If you decline confirmation, Ambitions keeps the plan as-is.", statusLabel: "Safe local suggestion", boundaryLabel: "Undo can be local", visualState: .default)
@@ -657,7 +657,7 @@ enum PreviewPlanScenarios {
         shapingActions: [
             PlanShapingActionState(kind: .edit, title: "Edit", subtitle: "No dated block is visible yet.", recommendation: "Plan stays quiet until a real block exists.", systemImage: "square.and.pencil", state: .default, goalTarget: nil, planRoute: nil),
             PlanShapingActionState(kind: .patch, title: "Patch", subtitle: "Patch the week only when real work arrives.", recommendation: "Do not manufacture density for the sake of having a plan.", systemImage: "wand.and.stars", state: .selected, goalTarget: nil, planRoute: nil),
-            PlanShapingActionState(kind: .protect, title: "Protect", subtitle: "Protect the open room while it is still calm.", recommendation: "The best protection move may be leaving the week quiet.", systemImage: "shield", state: .success, goalTarget: nil, planRoute: nil),
+            PlanShapingActionState(kind: .protect, title: "Protect", subtitle: "Protect the open room while it is still calm.", recommendation: "The best protection step may be leaving the week quiet.", systemImage: "shield", state: .success, goalTarget: nil, planRoute: nil),
             PlanShapingActionState(kind: .lighten, title: "Lighten", subtitle: "There is nothing to lighten yet.", recommendation: "No overload is visible right now.", systemImage: "sun.max", state: .default, goalTarget: nil, planRoute: nil)
         ],
         secondaryDestinations: [
@@ -675,7 +675,7 @@ enum PreviewPlanScenarios {
             eyebrow: "Weekly Review",
             title: "Shape what carries forward",
             subtitle: "Weekly review now continues the same authored week workspace instead of becoming a detached ritual.",
-            dominantTruth: "Lighten Tuesday first, then carry forward only the moves the next week can still explain.",
+            dominantTruth: "Lighten Tuesday first, then carry forward only the steps the next week can still explain.",
             continuityLabel: "Return to the week with a calmer shape, not a larger list.",
             contextPills: [
                 PlanHeroPillState(title: "Apr 20-Apr 26", icon: "calendar", state: .default),
@@ -697,10 +697,10 @@ enum PreviewPlanScenarios {
         returnPlanRoute: nil,
         splitPaneContext: PlanWindowMagnetismState(
             title: "Window magnetism",
-            detail: "Wednesday remains the cleanest place for the next calmer move to dock.",
+            detail: "Wednesday remains the cleanest place for the next calmer step to dock.",
             dayLabel: "Wed 22",
             suggestionTitle: "Retention loop",
-            suggestionDetail: "One believable move still fits without turning the next week dense.",
+            suggestionDetail: "One believable step still fits without turning the next week dense.",
             target: GoalRouteTarget(goalID: "preview-goal-2"),
             visualState: .success
         )

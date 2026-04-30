@@ -458,7 +458,7 @@ private extension RepositoryBackedHabitsService {
             if recoveryCount == 0 {
                 return minimumToday > 0
                     ? "Minimum versions are already being counted as real wins today."
-                    : "The screen is emphasizing only the moves that help today's rhythm stay alive."
+                    : "The screen is emphasizing only the steps that help today's rhythm stay alive."
             }
             return "Some rituals need recovery framing, but the rest can stay quick and obvious."
         case .recovery:

@@ -215,7 +215,7 @@ private struct WeeklyReviewCarryForwardCard: View {
             VStack(alignment: .leading, spacing: theme.spacing.md) {
                 SectionHeader(
                     title: "Carry forward carefully",
-                    subtitle: "Move only the work the next week can still explain. Everything else should lighten, park, or end."
+                    subtitle: "Carry forward only the work the next week can still explain. Everything else should lighten, park, or end."
                 )
 
                 VStack(alignment: .leading, spacing: theme.spacing.sm) {

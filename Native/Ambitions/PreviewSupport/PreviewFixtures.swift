@@ -19,7 +19,7 @@ struct PreviewFixtures: Sendable {
         ),
         todayDashboard: TodayDashboard(
             title: "Steady execution, light load",
-            subtitle: "Three deliberate moves are enough to keep momentum today.",
+            subtitle: "Three deliberate steps are enough to keep momentum today.",
             completionLabel: "58% aligned",
             targets: [
                 DashboardProgressItem(id: "today-1", title: "Tighten external-surface truth", detail: "Keep docs, You, and previews aligned", progress: 0.82, trailingValue: "82%", statusLabel: "In flight"),

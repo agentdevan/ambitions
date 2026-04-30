@@ -56,7 +56,7 @@ enum PreviewGoalsScenarios {
                         weekRelationship: "This week this goal is carrying the strongest directional weight.",
                         phaseSummary: "Truth and trust",
                         milestoneSummary: "2/5 milestones visible",
-                        pressureSummary: "The path still has believable movement.",
+                        pressureSummary: "The path still has believable momentum.",
                         nextStepHint: "Refresh release docs and trust copy",
                         priorityLabel: "Priority #1"
                     ),
@@ -74,7 +74,7 @@ enum PreviewGoalsScenarios {
                         weekRelationship: "This week can stay steady without opening Plan.",
                         phaseSummary: "Support rhythm",
                         milestoneSummary: "1/3 milestones visible",
-                        pressureSummary: "The path still has believable movement.",
+                        pressureSummary: "The path still has believable momentum.",
                         nextStepHint: "Set up one calm reading check-in",
                         supportLabel: "Support for Maya",
                         priorityLabel: "Priority #3"
@@ -97,7 +97,7 @@ enum PreviewGoalsScenarios {
                         progressValue: 0.05,
                         progressLabel: "Needs planning input",
                         timingLabel: "Flexible window",
-                        weekRelationship: "This week needs a clarifying move before more planning.",
+                        weekRelationship: "This week needs a clarifying step before more planning.",
                         phaseSummary: "Constraint definition",
                         milestoneSummary: "0/2 milestones visible",
                         pressureSummary: "The exploration still needs a real decision target before it can become a believable path.",
@@ -115,7 +115,7 @@ enum PreviewGoalsScenarios {
                         progressValue: 0.08,
                         progressLabel: "Needs planning input",
                         timingLabel: "Support when helpful",
-                        weekRelationship: "This week needs a clarifying move before more planning.",
+                        weekRelationship: "This week needs a clarifying step before more planning.",
                         phaseSummary: "Executor clarity",
                         milestoneSummary: "0/1 milestones visible",
                         pressureSummary: "This goal is still alive, but portfolio pressure is squeezing it behind clearer work.",
@@ -298,7 +298,7 @@ enum PreviewGoalsScenarios {
                         weekRelationship: "This week this goal is carrying the strongest directional weight.",
                         phaseSummary: "Starter path",
                         milestoneSummary: "0/3 milestones visible",
-                        pressureSummary: "The path still has believable movement.",
+                        pressureSummary: "The path still has believable momentum.",
                         nextStepHint: "Define scope",
                         priorityLabel: "Priority #1"
                     )
@@ -377,7 +377,7 @@ enum PreviewGoalsScenarios {
 
     static let previewMaturitySummary = GoalPortfolioMaturitySummary(
         title: "Portfolio maturity",
-        subtitle: "A qualitative read on scope, proof, stuck work, and what should move next.",
+        subtitle: "A qualitative read on scope, proof, stuck work, and what should happen next.",
         scopeSignal: GoalPortfolioMaturitySignal(id: "scope", title: "Scope needs review", detail: "4 live ambitions are active; choose what should stay protected.", state: .warning),
         stuckWorkSignal: GoalPortfolioMaturitySignal(id: "stuck-work", title: "Stuck work is visible", detail: "1 waiting or blocked · 2 crowded or stalled", state: .warning),
         proofSignal: GoalPortfolioMaturitySignal(id: "proof", title: "Proof is thin", detail: "2 live ambitions need a proof point before momentum is easy to trust.", state: .default),
@@ -396,7 +396,7 @@ enum PreviewGoalsScenarios {
             target: activeTarget,
             headline: GoalDetailHeadline(eyebrow: "Goal Detail", title: "Close the hardening pass", subtitle: "Tighten repo truth, validation coverage, and release readiness without widening scope.", renderState: .active, modeLabel: "Project", timingLabel: "Due 2026-05-01", supportLabel: nil),
             outcome: "Keep the shipped app truthful, validated, and ready for a narrower release-readiness pass.",
-            intent: "Understand the next hardening move and the proof that the app's claims still hold.",
+            intent: "Understand the next hardening step and the proof that the app's claims still hold.",
             progress: GoalDetailProgress(label: "5 of 11 steps landed", detail: "Progress is tracked through current plan steps, docs cleanup, and validation results.", value: 0.46, evidenceLabel: "85 minutes of visible evidence"),
             strategicStatus: GoalDetailStrategicStatus(title: "Path is in motion", summary: "You are in the hardening closeout stage with the next step already surfaced.", supportingDetail: "Manual priority #1 • 46% visible progress"),
             nextMovement: GoalDetailNextMovement(title: "Refresh release docs and trust copy", summary: "Keep You, README, and manual notes aligned with current verified behavior.", timingLabel: "Due 2026-04-15", rationale: "This keeps the release-readiness path honest before broader validation closes out.", state: .selected),
@@ -788,7 +788,7 @@ enum PreviewGoalsScenarios {
                 GoalDetailAssumptionState(id: "proof", title: "This goal has enough proof.", status: hasProof ? "Proof visible" : "No proof yet", whyItMatters: "Progress should be backed by something observable.", correctionLabel: "Add proof later", state: hasProof ? .selected : .default),
             ],
             proofRail: GoalDetailProofRailState(title: "Proof", subtitle: hasProof ? "Evidence is visible." : "Evidence will appear here when it is recorded.", items: proofItems, emptyTitle: "No proof yet", emptyMessage: "Add proof later when there is something real to show."),
-            decisions: GoalDetailDecisionsState(title: "Decisions", subtitle: "Decision trail stays here when this goal changes.", items: [], emptyTitle: "No decisions yet", emptyMessage: "When you move, park, change, or explain this goal, the reason will stay visible here."),
+            decisions: GoalDetailDecisionsState(title: "Decisions", subtitle: "Decision trail stays here when this goal changes.", items: [], emptyTitle: "No decisions yet", emptyMessage: "When you change, park, or explain this goal, the reason will stay visible here."),
             risks: GoalDetailRisksState(title: "Risks", subtitle: riskItems.isEmpty ? "No major risk is visible from this goal data." : "Risks stay explicit so recovery can stay calm.", items: riskItems, emptyTitle: "No major risk visible", emptyMessage: "Nothing in this goal is asking for rescue right now."),
             archive: archiveState,
             receipts: GoalDetailReceiptsState(title: "What changed", subtitle: "Goal-related receipts stay visible here when the current data source provides them.", items: [], emptyTitle: "No receipts yet", emptyMessage: "Receipts will appear here after goal changes are recorded.")

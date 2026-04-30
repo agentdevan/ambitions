@@ -1076,7 +1076,7 @@ struct GoalDetailNextMovementCard: View {
     let movement: GoalDetailNextMovement
 
     var body: some View {
-        GoalDetailSectionCard(title: "What matters next", subtitle: "One move first, before the rest of the path.") {
+        GoalDetailSectionCard(title: "What matters next", subtitle: "One step first, before the rest of the path.") {
             VStack(alignment: .leading, spacing: theme.spacing.sm) {
                 HStack(alignment: .top, spacing: theme.spacing.sm) {
                     VStack(alignment: .leading, spacing: theme.spacing.xxxs) {

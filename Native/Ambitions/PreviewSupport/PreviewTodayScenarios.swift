@@ -23,7 +23,7 @@ enum PreviewTodayScenarios {
     static let tight = makeScenario(
         posture: .tight,
         title: "Protect the outline block",
-        supporting: "The day is getting tight, so the safest move is to preserve the next meaningful block.",
+        supporting: "The day is getting tight, so the safest choice is to preserve the next meaningful block.",
         nowSubtitle: "Submit my conference talk proposal",
         nextTitle: "Record one rough vocal pass",
         nextSubtitle: "Keep this flexible unless the main block slips.",
@@ -52,7 +52,7 @@ enum PreviewTodayScenarios {
         reentry: TodayReentryState(
             eyebrow: "Re-entry",
             title: "Recovery landed in Today",
-            detail: "This pass is centered on one believable move instead of the whole backlog.",
+            detail: "This pass is centered on one believable step instead of the whole backlog.",
             state: .selected
         ),
         celebrationLine: nil
@@ -60,7 +60,7 @@ enum PreviewTodayScenarios {
 
     static let drifted = makeScenario(
         posture: .drifted,
-        title: "Return through the next believable move",
+        title: "Return through the next believable step",
         supporting: "The earlier plan slipped, so Today is narrowing the path back to one calmer step.",
         nowSubtitle: "Ship the native create goal flow",
         nextTitle: "Adjust plan",
@@ -169,7 +169,7 @@ enum PreviewTodayScenarios {
                     posture: posture,
                     contextPills: [
                         TodayPillState(id: "goals", title: mode == .empty ? "No live goals" : "4 active goals", icon: "scope", state: .selected),
-                        TodayPillState(id: "moves", title: mode == .empty ? "Waiting" : "3 live moves", icon: "bolt.fill", state: .default)
+                        TodayPillState(id: "moves", title: mode == .empty ? "Waiting" : "3 live steps", icon: "bolt.fill", state: .default)
                     ],
                     trustWhisper: TodayTrustWhisperState(
                         title: "Why this now",
@@ -177,7 +177,7 @@ enum PreviewTodayScenarios {
                         state: .selected
                     ),
                     shellSummary: GoalShellSummaryState(
-                        explanationSummary: "This move is the cleanest next step from the current path and timing context.",
+                        explanationSummary: "This step is the cleanest next step from the current path and timing context.",
                         pathSummary: "Primary path remains believable.",
                         indicators: [
                             GoalShellSummaryIndicatorState(kind: .freshness, title: "Freshness: Current Enough", systemImage: "clock.arrow.circlepath", state: .success),
@@ -215,7 +215,7 @@ enum PreviewTodayScenarios {
                         TodayOpenWindowState(
                             id: "window-2",
                             title: "Later today",
-                            subtitle: "If the first block lands, one lighter follow-on move still fits.",
+                            subtitle: "If the first block lands, one lighter follow-on step still fits.",
                             timingLabel: "Later today",
                             state: .default,
                             action: supportingActions.first
@@ -323,7 +323,7 @@ enum PreviewTodayScenarios {
     private static func pressureDetail(for posture: TodayDayPosture) -> String {
         switch posture {
         case .stable: return "There is room for one deliberate block without making the day noisy."
-        case .tight: return "One more meaningful move fits, but only if it stays singular."
+        case .tight: return "One more meaningful step fits, but only if it stays singular."
         case .drifted: return "The real pressure is re-entry, not forcing more volume."
         case .overloaded: return "The day needs fewer simultaneous asks before effort goes up."
         case .recovering: return "Use the remaining room for one safe block, not for catching everything up."

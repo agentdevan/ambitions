@@ -60,7 +60,7 @@ public enum AccessibilityNutritionCategory: String, CaseIterable, Identifiable, 
         case .errorRecovery:
             "Verify error, denied-permission, empty, failed, and degraded states include a clear next step or safe escape."
         case .cognitiveLoad:
-            "Verify top-level screens preserve one dominant decision and move audit, history, and explanation density behind disclosure."
+            "Verify top-level screens preserve one dominant decision and keep audit, history, and explanation density behind disclosure."
         case .oneHandedUsability:
             "Verify frequent Today, Capture, Plan, and recovery actions remain reachable without precision stretching."
         case .plainLanguageLabels:

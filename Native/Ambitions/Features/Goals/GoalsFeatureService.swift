@@ -873,7 +873,7 @@ private extension RepositoryBackedGoalsService {
                     kind: .recentMovement,
                     title: "Recent movement",
                     subtitle: recentMovementCards.isEmpty
-                        ? "Once a goal gets fresh evidence or a clearer move, it will surface here."
+                        ? "Once a goal gets fresh evidence or a clearer step, it will surface here."
                         : "Visible momentum so you can see which ambitions are actually moving.",
                     cards: Array(recentMovementCards)
                 )
@@ -1301,7 +1301,7 @@ private extension RepositoryBackedGoalsService {
 
     func weekRelationship(for item: GoalListItem, learningSummary: GoalLearningSummary?) -> String {
         if item.renderState == .clarification || item.renderState == .blocked {
-            return "This week needs a clarifying move before more planning."
+            return "This week needs a clarifying step before more planning."
         }
 
         if let risk = learningSummary?.timelineRisk.riskScore, risk >= 0.7 {
@@ -1340,7 +1340,7 @@ private extension RepositoryBackedGoalsService {
                 ?? "Recent movement is thin, so this goal is starting to drift out of view."
         case .active:
             return item.shellSummary?.explanationSummary
-                ?? "The path still has believable movement."
+                ?? "The path still has believable momentum."
         case .lowerPriority:
             return "This goal is intentionally quieter right now."
         case .achieved:
@@ -1727,7 +1727,7 @@ private extension RepositoryBackedGoalsService {
                 signalLabel = "Path is moving"
                 state = .selected
             } else {
-                signalLabel = "Needs a smaller move"
+                signalLabel = "Needs a smaller step"
                 state = .default
             }
 
@@ -1859,7 +1859,7 @@ private extension RepositoryBackedGoalsService {
 
         return GoalPortfolioMaturitySummary(
             title: "Portfolio maturity",
-            subtitle: "A qualitative read on scope, proof, stuck work, and what should move next.",
+            subtitle: "A qualitative read on scope, proof, stuck work, and what should happen next.",
             scopeSignal: scopeSignal,
             stuckWorkSignal: stuckWorkSignal,
             proofSignal: proofSignal,
@@ -2886,7 +2886,7 @@ private extension RepositoryBackedGoalsService {
                 subtitle: "Decision trail stays here when this goal changes.",
                 items: [],
                 emptyTitle: "No decisions yet",
-                emptyMessage: context.goal == nil ? "Starter decisions will appear after this becomes an active goal." : "When you move, park, change, or explain this goal, the reason will stay visible here."
+                emptyMessage: context.goal == nil ? "Starter decisions will appear after this becomes an active goal." : "When you change, park, or explain this goal, the reason will stay visible here."
             )
         }
 
@@ -3027,7 +3027,7 @@ private extension RepositoryBackedGoalsService {
                 id: "blocked",
                 title: "This goal is not blocked.",
                 status: risks.contains(where: { $0.id == "risk-blocked" }) ? "Blocked" : "No blocker visible",
-                whyItMatters: "Blocked goals need a clearing move before more planning.",
+                whyItMatters: "Blocked goals need a clearing step before more planning.",
                 correctionLabel: risks.contains(where: { $0.id == "risk-blocked" }) ? "Review blocker" : nil,
                 state: risks.contains(where: { $0.id == "risk-blocked" }) ? .warning : .success
             ),
@@ -4451,7 +4451,7 @@ private extension RepositoryBackedGoalsService {
             case .onHold:
                 return "This goal is paused without losing the strategic framing."
             case .active:
-                return "The path is active and oriented around the smallest move that still changes the goal."
+                return "The path is active and oriented around the smallest step that still changes the goal."
             }
         }()
 
@@ -4474,7 +4474,7 @@ private extension RepositoryBackedGoalsService {
                 title: primaryStep.title,
                 summary: primaryStep.summary ?? primaryStep.actionability.fallbackMicroStep,
                 timingLabel: timingLabel(for: primaryStep.timing, goalMode: goalMode),
-                rationale: whyNow ?? "This is the smallest move that keeps the broader path honest.",
+                rationale: whyNow ?? "This is the smallest step that keeps the broader path honest.",
                 state: stepVisualState(primaryStep.state)
             )
         }
