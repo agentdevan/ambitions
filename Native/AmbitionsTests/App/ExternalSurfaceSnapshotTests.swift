@@ -18,6 +18,21 @@ final class ExternalSurfaceSnapshotTests: XCTestCase {
 
         let snapshot = builder.makeSnapshot(goals: [goal], now: now)
         let json = try XCTUnwrap(String(data: PersistenceCoding.encode(snapshot), encoding: .utf8))
+        let widget = ExternalWidgetProjection(snapshot: snapshot)
+        let activity = try XCTUnwrap(NextStepActivityAttributes.ContentState(snapshot: snapshot, now: now))
+        let externalDisplayText = (
+            [
+                widget.title,
+                widget.detail,
+                widget.lockDetail,
+                widget.privacySummary,
+                widget.accessibilityLabel,
+                activity.title,
+                activity.detail,
+                activity.privacyLabel,
+                activity.stateLabel
+            ] + widget.variants.flatMap { [$0.title, $0.privacySummary] }
+        ).joined(separator: " ")
 
         XCTAssertEqual(snapshot.schemaVersion, ExternalSurfaceSnapshot.schemaVersion)
         XCTAssertEqual(snapshot.nextAction?.goalID, "goal-sensitive")
@@ -42,6 +57,10 @@ final class ExternalSurfaceSnapshotTests: XCTestCase {
         XCTAssertEqual(snapshot.privacy.sensitiveDetailLabel, "Details stay private until you open Ambitions.")
         XCTAssertFalse(json.contains(sensitiveStepTitle))
         XCTAssertFalse(json.contains("Very Personal Goal"))
+        XCTAssertFalse(externalDisplayText.contains(sensitiveStepTitle))
+        XCTAssertFalse(externalDisplayText.contains("Very Personal Goal"))
+        XCTAssertFalse(externalDisplayText.contains("goal-sensitive"))
+        XCTAssertFalse(externalDisplayText.contains("step-sensitive"))
     }
 
     func testSnapshotSerializationRoundTrips() throws {
