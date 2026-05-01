@@ -84,3 +84,7 @@ Canonized, designed, implementation-scoped, implemented, previewed, tested, devi
 - For full local test proof, run `scripts/test-local.sh || true` and classify known UI smoke failures separately from new failures.
 - When `Brewfile`, scripts, dependency docs, or workflow docs change, load `.codex/context-packs/dependency-management-context.md` and run `.codex/validation/dependency-drift-pack.md`.
 - Before saying local validation mirrors CI, run `.codex/validation/local-ci-parity-pack.md`.
+
+## Batch Train Orchestrator
+
+When a prompt spans multiple Ambitions 3.0 batches, load `docs/codex/AMBITIONS_3_0_BATCH_TRAIN_ORCHESTRATOR.md`, select exactly one manifest under `docs/codex/batch-trains/`, initialize `.codex/reports/current-batch-train-state.md`, and continue only on Green. Yellow/Red stops with repair/resume material. FAANG handoff remains PARTIAL unless its gate is re-run and passes.

@@ -60,3 +60,7 @@ Use `docs/canon/Ambitions_3_0_FAANG_Team_Operating_Model.md`, `docs/canon/Ambiti
 ## Claim Discipline
 
 Do not claim implemented, tested, device-verified, release-ready, accessibility-verified, TestFlight-ready, App Store-ready, or FAANG-handoff-ready unless the repo evidence proves that exact status.
+
+## Batch Train Orchestrator
+
+When a prompt spans multiple Ambitions 3.0 batches, load `docs/codex/AMBITIONS_3_0_BATCH_TRAIN_ORCHESTRATOR.md`, select exactly one manifest under `docs/codex/batch-trains/`, initialize `.codex/reports/current-batch-train-state.md`, and continue only on Green. Yellow/Red stops with repair/resume material. FAANG handoff remains PARTIAL unless its gate is re-run and passes.

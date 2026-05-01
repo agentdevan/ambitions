@@ -1,8 +1,8 @@
 # Ambitions 3.0 — Front-End Implementation Batch Plan
 
-Status: Active Ambitions 3.0 execution planning canon  
-Parent doc: [Ambitions 3.0 Front-End Redesign Index](./Ambitions_3_0_Front_End_Redesign_Index.md)  
-Source override: [Ambitions 3.0 Source Of Truth Override](./Ambitions_3_0_Source_Of_Truth_Override.md)  
+Status: Active Ambitions 3.0 execution planning canon
+Parent doc: [Ambitions 3.0 Front-End Redesign Index](./Ambitions_3_0_Front_End_Redesign_Index.md)
+Source override: [Ambitions 3.0 Source Of Truth Override](./Ambitions_3_0_Source_Of_Truth_Override.md)
 Last updated: 2026-04-30
 
 ---
@@ -103,7 +103,7 @@ Every F-series batch should include:
 
 ## F00 — Current Implementation Gap Audit
 
-Status: implementation-scoped docs batch  
+Status: implementation-scoped docs batch
 Primary output: `Ambitions_3_0_Current_Implementation_Gap_Audit.md`
 
 Purpose: compare current SwiftUI implementation, previews, tests, and canon against Ambitions 3.0.
@@ -190,6 +190,30 @@ Acceptance:
 - `Start now` opens Step Session
 - `Adjust plan`, `Why this?`, and `Make smaller` routes exist or are safely stubbed
 - sensitive/private steps use compact privacy-safe labels
+
+---
+
+## F03.5 — Today Execution State Contract Hardening
+
+Purpose: run immediately after F03 and before F04. Audit `TodayExecutionViewState.swift` after F01-F03 and extract Today rail/detail/projection responsibilities if thresholds are exceeded or if F04 would otherwise add complexity to the same file.
+
+Rules:
+
+- preserve behavior
+- preserve F01-F03 tests
+- do not build new behavior
+- do not change user-visible UI except no-op structural preservation
+- do not migrate global identifiers
+- do not alter Step Session behavior
+
+Acceptance:
+
+- build passes
+- `TodayViewModelTests` pass
+- F01-F03 focused Today tests pass
+- no user-facing copy change except incidental if required by extraction
+- Today state/projection files have clearer ownership
+- current run state and audit report are updated
 
 ---
 
@@ -364,6 +388,20 @@ Acceptance:
 
 ---
 
+## F13.5 — Goals / You / Trust Architecture Checkpoint
+
+Purpose: run between F13 and F14 if Goals work reveals ownership, proof/trust boundary, memory, consent, or state-contract risk. Audit Goals, You, Trust, Evidence, Proof, and Memory boundaries; preserve behavior; clarify object ownership; prevent F14 from layering trust/memory controls over unclear goal/proof architecture.
+
+Acceptance:
+
+- build passes
+- focused Goals/You/Trust tests pass where applicable
+- ownership boundaries are documented
+- privacy/memory risk is classified
+- F14 can proceed safely or is blocked with exact repair prompt
+
+---
+
 ## F14 — Goal Detail Mission Control
 
 Purpose: make Goal Detail the one deep destination for a goal.
@@ -413,6 +451,21 @@ Acceptance:
 - correction/delete/pause actions are visible where implemented
 - receipt history route exists or is truthfully marked future
 - export/import claims are truthful
+
+---
+
+## F16.5 — SwiftUI Architecture / State Contract Hardening
+
+Purpose: run after F15 legacy identifier migration and F16 UI test modernization if architecture scan indicates risk before F17 Shell/Meridian. Audit feature state/projector/view boundaries across Today, Capture, Plan, Goals, You, AppUI, and Sources; extract giant feature files where risk is high; preserve behavior.
+
+Acceptance:
+
+- build passes
+- focused tests pass
+- full UI smoke is passing or all remaining failures are classified
+- no feature behavior broadening
+- no runtime dependencies
+- architecture report created
 
 ---
 

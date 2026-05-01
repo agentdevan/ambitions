@@ -305,3 +305,7 @@ Validation should include focused Today tests, touched-path copy guard,
 Do not claim FAANG handoff readiness. It remains PARTIAL until F01-F16 evidence
 and the full UI smoke gate pass.
 ````
+
+## Batch Train Architecture Hardening Update
+
+F03.5 is now inserted before F04 because `TodayExecutionViewState.swift` exceeds the 1000-line architecture threshold after F01-F03. F13.5 and F16.5 are conditional checkpoint batches for Goals/You/Trust and whole-app SwiftUI state-contract risk. These batches preserve behavior and do not mark new product features implemented.

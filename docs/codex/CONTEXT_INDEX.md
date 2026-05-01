@@ -71,3 +71,14 @@ For non-trivial work, read in this order:
 - Do not add runtime dependencies without dependency-policy approval.
 - Do not claim implementation or readiness without evidence.
 - Prefer focused validation and report known full UI failures honestly.
+
+## Batch Train Context
+
+Batch-train execution uses `docs/codex/AMBITIONS_3_0_BATCH_TRAIN_ORCHESTRATOR.md`, `docs/codex/batch-trains/README.md`, `.codex/reports/current-batch-train-state.md`, and the matching validation/operation packs. Current next batch after F03 is F03.5 Today Execution State Contract Hardening.
+
+## F-Series Audit Reports
+
+- `docs/audits/ambitions-3-0-f00-current-implementation-gap-audit-report.md`
+- `docs/audits/ambitions-3-0-f02-reality-rail-visual-states-report.md`
+- `docs/audits/ambitions-3-0-f03-step-detail-recommendation-explanation-report.md`
+- `docs/audits/ambitions-3-0-batch-train-orchestrator-report.md`

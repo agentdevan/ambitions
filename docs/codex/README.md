@@ -63,3 +63,7 @@ The FAANG-team operating upgrade is indexed from:
 - [Ambitions_2_0_Codex_Execution_Guide.md](Ambitions_2_0_Codex_Execution_Guide.md) is historical/supporting unless a 3.0 doc explicitly references it.
 - [batches/](batches/) preserves implementation evidence and older prompts. Do not run old batch prompts as active Ambitions 3.0 work without reconciling them against the 3.0 source docs.
 - [FAANG_HANDOFF_REPO_CLEANUP_PROMPT.md](FAANG_HANDOFF_REPO_CLEANUP_PROMPT.md) remains the cleanup prompt used to produce the current handoff audit outputs.
+
+## Batch Train Orchestrator
+
+Use `docs/codex/AMBITIONS_3_0_BATCH_TRAIN_ORCHESTRATOR.md` plus the artifacts in this directory for gated Ambitions 3.0 batch trains. F03.5, F13.5, and F16.5 are architecture checkpoint prompts; do not skip them when their triggers fire.

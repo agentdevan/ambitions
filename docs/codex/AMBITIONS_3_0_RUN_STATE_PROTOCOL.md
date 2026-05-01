@@ -48,3 +48,7 @@ risks, and next checkpoint.
 ordinary runs, prefer final reports or audit docs over constantly changing this
 file. For XL runs, update it deliberately and reset it to default before final
 closeout unless the user asks to preserve live state.
+
+## Batch Train State
+
+Batch trains also use `.codex/reports/current-batch-train-state.md`. Treat it as the train-level sibling to current run state. It records train name, type, active batch, completed batches, gate status, selected context pack, skill, operation, validation pack, allowed/forbidden files, files touched, commands, tests, failures, architecture warnings, checkpoint history, stop condition, next batch, and resume instructions. Re-read it after compaction before continuing any train.

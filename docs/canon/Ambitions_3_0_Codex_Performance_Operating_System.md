@@ -179,3 +179,7 @@ Codex should use the local developer tooling layer when it materially improves s
 - Use `Brewfile` for adopted developer tools and `Brewfile.optional-later` only when policy promotes staged tools.
 - Use `.codex/validation/dependency-drift-pack.md` when Brewfile, scripts, tooling docs, or dependency policy changes.
 - Use `.codex/validation/local-ci-parity-pack.md` before claiming local/CI parity.
+
+## Batch Train Orchestrator
+
+When a prompt spans multiple Ambitions 3.0 batches, load `docs/codex/AMBITIONS_3_0_BATCH_TRAIN_ORCHESTRATOR.md`, select exactly one manifest under `docs/codex/batch-trains/`, initialize `.codex/reports/current-batch-train-state.md`, and continue only on Green. Yellow/Red stops with repair/resume material. FAANG handoff remains PARTIAL unless its gate is re-run and passes.

@@ -31,3 +31,7 @@ Preserve XcodeGen and native SwiftUI architecture. Work on `main` unless explici
 
 Before edits, inspect repo status and name the touch budget. When tooling matters, run `scripts/validate-dev-tools.sh`. For docs-heavy changes, run `scripts/run-doc-qa.sh`. For native build proof, prefer `scripts/build-local.sh`; for full test proof, use `scripts/test-local.sh` and report known UI smoke failures honestly. After edits, run the focused validation pack, then build/test only as risk requires. Close out with files changed, commands run, PASS/PARTIAL/FAIL, remaining risks, and the next exact prompt.
 ```
+
+## Batch Train Orchestrator
+
+When a prompt spans multiple Ambitions 3.0 batches, load `docs/codex/AMBITIONS_3_0_BATCH_TRAIN_ORCHESTRATOR.md`, select exactly one manifest under `docs/codex/batch-trains/`, initialize `.codex/reports/current-batch-train-state.md`, and continue only on Green. Yellow/Red stops with repair/resume material. FAANG handoff remains PARTIAL unless its gate is re-run and passes.

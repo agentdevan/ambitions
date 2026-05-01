@@ -1,9 +1,9 @@
 # Ambitions 3.0 — Documentation System Index
 
-Status: Active Ambitions 3.0 documentation map  
-Parent doc: [Ambitions 3.0 Front-End Redesign Index](./Ambitions_3_0_Front_End_Redesign_Index.md)  
-Source override: [Ambitions 3.0 Source Of Truth Override](./Ambitions_3_0_Source_Of_Truth_Override.md)  
-Rebuild model: [Ambitions 3.0 Rebuild Operating Model](./Ambitions_3_0_Rebuild_Operating_Model.md)  
+Status: Active Ambitions 3.0 documentation map
+Parent doc: [Ambitions 3.0 Front-End Redesign Index](./Ambitions_3_0_Front_End_Redesign_Index.md)
+Source override: [Ambitions 3.0 Source Of Truth Override](./Ambitions_3_0_Source_Of_Truth_Override.md)
+Rebuild model: [Ambitions 3.0 Rebuild Operating Model](./Ambitions_3_0_Rebuild_Operating_Model.md)
 Last updated: 2026-04-30
 
 ---
@@ -353,3 +353,11 @@ This registry exists for handoff and orphan-scan clarity. The table above explai
 - `docs/canon/Ambitions_3_0_UI_Invention_Upgrade_Bank.md`
 - `docs/canon/Ambitions_3_0_UX_Research_Plan.md`
 - `docs/canon/Ambitions_3_0_Universal_Object_Lifecycle_Contract.md`
+
+## Batch Train Orchestrator
+
+- `docs/codex/AMBITIONS_3_0_BATCH_TRAIN_ORCHESTRATOR.md`
+- `docs/codex/batch-trains/README.md`
+- `docs/canon/Ambitions_3_0_SwiftUI_State_Contract_Architecture_Standard.md`
+- `docs/canon/Ambitions_3_0_Feature_Boundary_And_File_Size_Constitution.md`
+- `docs/canon/Ambitions_3_0_State_Projection_Extraction_Rules.md`
