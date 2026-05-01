@@ -86,6 +86,45 @@ final class AppShellNavigationTests: XCTestCase {
     }
 
     @MainActor
+    func testMeridianOneTapDestinationsUseCanonicalNavigationSelection() {
+        for destination in AppMeridianDestination.all {
+            let navigation = AppNavigationModel(selectedTab: .today)
+            navigation.presentMemoryLens(source: .shellUtility)
+
+            navigation.selectTab(destination.tab)
+
+            XCTAssertEqual(navigation.selectedTab, destination.tab)
+            XCTAssertNil(navigation.activeOverlay)
+            XCTAssertTrue(navigation.goalsPath.isEmpty)
+            XCTAssertTrue(navigation.planPath.isEmpty)
+            XCTAssertTrue(navigation.insightsPath.isEmpty)
+        }
+    }
+
+    @MainActor
+    func testShellPresentationRollbackDoesNotMutateExistingRouteState() {
+        let navigation = AppNavigationModel(selectedTab: .goals)
+        navigation.openGoalDetail(goalID: "goal-shell-rollback")
+
+        XCTAssertEqual(
+            AppShellPresentationMode.resolved(
+                arguments: ["Ambitions", "--ambitions-shell=meridian"],
+                environment: [:]
+            ),
+            .meridian
+        )
+        XCTAssertEqual(
+            AppShellPresentationMode.resolved(
+                arguments: ["Ambitions", "--ambitions-shell=native"],
+                environment: [:]
+            ),
+            .nativeFallback
+        )
+        XCTAssertEqual(navigation.selectedTab, .goals)
+        XCTAssertEqual(navigation.goalsPath.first?.goalID, "goal-shell-rollback")
+    }
+
+    @MainActor
     func testNavigationInitializesCapturePreferenceIntoTopLevelCaptureRoute() {
         let navigation = AppNavigationModel(selectedTab: .captures)
 

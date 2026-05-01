@@ -11,6 +11,41 @@ final class ExternalRoutingTests: XCTestCase {
         XCTAssertEqual(route, .openTab(.goals))
     }
 
+    @MainActor
+    func testShellPresentationModesShareCanonicalRouteDispatch() {
+        let modes: [AppShellPresentationMode] = [.nativeFallback, .meridian]
+
+        for mode in modes {
+            for tab in AppTab.allCases {
+                let navigation = AppNavigationModel(selectedTab: .today)
+                let router = DefaultAppExternalRouter(navigation: navigation)
+
+                router.dispatch(.openTab(tab), source: .deepLink)
+
+                XCTAssertEqual(navigation.selectedTab, tab, "Mode \(mode.rawValue) should dispatch \(tab.rawValue)")
+                XCTAssertEqual(navigation.lastExternalRoute, .openTab(tab))
+                XCTAssertEqual(navigation.lastExternalRouteSource, .deepLink)
+            }
+        }
+    }
+
+    @MainActor
+    func testFallbackAndMeridianRouteCompatibilityForLegacyTabs() {
+        let modes: [AppShellPresentationMode] = [.nativeFallback, .meridian]
+
+        for mode in modes {
+            let habitsNavigation = AppNavigationModel(selectedTab: .today)
+            DefaultAppExternalRouter(navigation: habitsNavigation).dispatch(.openTab(.habits), source: .widgetAction)
+            XCTAssertEqual(habitsNavigation.selectedTab, .plan, "Mode \(mode.rawValue) should keep habits under Plan")
+            XCTAssertEqual(habitsNavigation.planPath, [.habits])
+
+            let insightsNavigation = AppNavigationModel(selectedTab: .today)
+            DefaultAppExternalRouter(navigation: insightsNavigation).dispatch(.openTab(.insights), source: .appIntent)
+            XCTAssertEqual(insightsNavigation.selectedTab, .profile, "Mode \(mode.rawValue) should keep insights under You")
+            XCTAssertEqual(insightsNavigation.insightsPath, [.history])
+        }
+    }
+
     func testDeepLinkTranslatorParsesCanonicalPlanTabRoute() throws {
         let translator = AppExternalRouteTranslator()
         let url = try XCTUnwrap(URL(string: "ambitions://tab/plan"))
