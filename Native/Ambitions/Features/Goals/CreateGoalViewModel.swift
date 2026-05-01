@@ -14,6 +14,24 @@ enum CreateGoalPreviewLoadState: Sendable {
     case failed(String)
 }
 
+struct CaptureGoalHandoffState: Sendable, Equatable {
+    let title: String
+    let sourceLabel: String
+    let consequenceLabel: String
+    let privacyLabel: String
+    let confirmationLabel: String
+
+    init(captureTitle: String) {
+        self.title = "Grow into Goal"
+        self.sourceLabel = captureTitle.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty
+            ? "From Capture"
+            : captureTitle.trimmingCharacters(in: .whitespacesAndNewlines)
+        self.consequenceLabel = "Creates a goal only after you confirm the setup."
+        self.privacyLabel = "Stored on this device"
+        self.confirmationLabel = "Requires your confirmation"
+    }
+}
+
 @MainActor
 @Observable
 final class CreateGoalViewModel {
@@ -94,6 +112,11 @@ final class CreateGoalViewModel {
 
     var selectedTargetDateLabel: String? {
         selectedTargetDateOverride
+    }
+
+    var captureGoalHandoff: CaptureGoalHandoffState? {
+        guard captureID != nil else { return nil }
+        return CaptureGoalHandoffState(captureTitle: trimmedTitle)
     }
 
     func answer(for field: MissingFieldKey) -> String {

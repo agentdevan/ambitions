@@ -67,6 +67,56 @@ final class CreateGoalViewModelTests: XCTestCase {
         XCTAssertFalse(viewModel.isSubmitting)
     }
 
+    func testF09CaptureHandoffPreservesCaptureIDThroughPreviewAndSubmit() async {
+        let expectedPreview = CreateGoalPreviewState(
+            normalizedTitle: "Launch community workshop",
+            summary: "A capture can become a goal after confirmation.",
+            modeLabel: GoalMode.project.displayTitle,
+            resultKind: .starterPlanned,
+            renderState: .starter,
+            selectedPace: .balanced,
+            paceOptions: [],
+            feasibility: nil,
+            deadlineGuidance: nil,
+            pathStages: [],
+            milestonePreview: [],
+            clarification: nil,
+            blocked: nil,
+            trust: StrategyComposerTrustState(
+                title: "Trust framing",
+                lines: ["This remains confirmation-based."],
+                badgeTitle: "Local first",
+                state: .default
+            ),
+            planningEvaluation: nil
+        )
+        let expectedResponse = CreateGoalResponse(
+            target: GoalRouteTarget(goalID: "goal-grown", draftID: "draft-grown"),
+            blueprint: GoalBlueprint(title: "Launch community workshop", mode: .project)
+        )
+        let service = RecordingGoalsService(response: expectedResponse, preview: expectedPreview)
+        let viewModel = CreateGoalViewModel(
+            title: "  Launch community workshop  ",
+            selectedMode: .project,
+            entrySource: .capturesScreen,
+            captureID: "capture-workshop"
+        )
+
+        let handoff = try! XCTUnwrap(viewModel.captureGoalHandoff)
+        XCTAssertEqual(handoff.title, "Grow into Goal")
+        XCTAssertEqual(handoff.sourceLabel, "Launch community workshop")
+        XCTAssertEqual(handoff.confirmationLabel, "Requires your confirmation")
+
+        await viewModel.refreshPreview(using: service, now: fixedNow)
+        _ = await viewModel.submit(using: service, now: fixedNow)
+
+        let previewRequest = await service.recordedPreviewRequest
+        let createRequest = await service.recordedCreateRequest
+        XCTAssertEqual(previewRequest?.captureID, "capture-workshop")
+        XCTAssertEqual(createRequest?.captureID, "capture-workshop")
+        XCTAssertEqual(createRequest?.entrySource, .capturesScreen)
+    }
+
     func testSubmitMovesIntoFailureStateWhenServiceThrows() async {
         let service = RecordingGoalsService(error: CreateGoalFailure.unavailable)
         let viewModel = CreateGoalViewModel(title: "Ship native create-goal flow")

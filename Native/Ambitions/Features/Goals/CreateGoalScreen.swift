@@ -25,7 +25,7 @@ struct CreateGoalScreen: View {
             VStack(alignment: .leading, spacing: theme.spacing.lg) {
                 HeroCard {
                     VStack(alignment: .leading, spacing: theme.spacing.sm) {
-                        Text(viewModel.captureID == nil ? "Goals" : "Capture to goal")
+                        Text(viewModel.captureID == nil ? "Goals" : "Grow into Goal")
                             .font(theme.typography.micro)
                             .foregroundStyle(theme.colors.accentWarm)
 
@@ -52,6 +52,9 @@ struct CreateGoalScreen: View {
                 }
 
                 intakeCard
+                if let handoff = viewModel.captureGoalHandoff {
+                    captureGoalHandoffCard(handoff)
+                }
                 composerHeroCard
 
                 switch viewModel.previewState {
@@ -158,7 +161,7 @@ struct CreateGoalScreen: View {
                         TagPill("Date \(selectedTargetDate)", icon: "calendar", state: .default)
                     }
                     if viewModel.captureID != nil {
-                        TagPill("From Capture", icon: "tray.full", state: .default)
+                        TagPill("Grow into Goal", icon: "tray.full", state: .default)
                     }
                 }
             }
@@ -200,6 +203,29 @@ struct CreateGoalScreen: View {
             }
             .padding(theme.spacing.lg)
         }
+    }
+
+    private func captureGoalHandoffCard(_ handoff: CaptureGoalHandoffState) -> some View {
+        AppCard(state: .selected) {
+            VStack(alignment: .leading, spacing: theme.spacing.sm) {
+                SectionHeader(
+                    title: handoff.title,
+                    subtitle: handoff.sourceLabel
+                )
+
+                Text(handoff.consequenceLabel)
+                    .font(theme.typography.caption)
+                    .foregroundStyle(theme.colors.textSecondary)
+
+                HStack(spacing: theme.spacing.xs) {
+                    TagPill(handoff.confirmationLabel, icon: "checkmark.seal", state: .selected)
+                    TagPill(handoff.privacyLabel, icon: "lock", state: .default)
+                }
+            }
+            .padding(theme.spacing.lg)
+        }
+        .accessibilityElement(children: .contain)
+        .accessibilityIdentifier("create-goal.capture-handoff")
     }
 
     private func clarificationCard(_ clarification: GoalClarificationState) -> some View {
@@ -437,7 +463,7 @@ struct CreateGoalScreen: View {
     private var heroSubtitle: String {
         viewModel.captureID == nil
             ? "Shape a first path before you save the goal."
-            : "Use the capture as the starting point, then confirm the path before it becomes a live goal."
+            : "Grow the capture into a goal only after you confirm the setup."
     }
 
     private var heroTitle: String {

@@ -286,7 +286,7 @@ struct CapturesScreen: View {
                         captureID: capture.id
                     )
                 } label: {
-                    Label("New goal", systemImage: "target")
+                    Label("Grow into Goal", systemImage: "target")
                 }
                 .buttonStyle(.borderedProminent)
                 .disabled(canPromoteCaptureToGoal(capture) == false)
