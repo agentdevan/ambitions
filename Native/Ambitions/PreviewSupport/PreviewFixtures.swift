@@ -472,7 +472,7 @@ struct PreviewFixtures: Sendable {
                 subtitle: "A compact trust summary of what can explain actions today. Reviews now turns these signals into a calm receipt layer.",
                 items: [
                     SettingsItem(id: "profile-receipts-domain", title: "Receipts", subtitle: "Receipts can summarize what changed, why, correction availability, safe fallback, and undo status where supported.", icon: "doc.text.magnifyingglass", valueLabel: "3 policy examples"),
-                    SettingsItem(id: "profile-receipts-review", title: "Reviews v1", subtitle: "Recovery Review and Life OS Receipt summarize local events, receipts, proof, and corrections without creating a top-level Insights tab.", icon: "rectangle.stack.badge.play", valueLabel: "Ready to review")
+                    SettingsItem(id: "profile-receipts-review", title: "Reviews", subtitle: "Recovery Review and Life OS Receipt summarize local events, receipts, proof, and corrections without creating a separate top-level destination.", icon: "rectangle.stack.badge.play", valueLabel: "Ready to review")
                 ],
                 footer: "Receipts are exposed here as trust posture, not as a full history browser."
             ),

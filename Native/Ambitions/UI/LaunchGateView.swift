@@ -42,7 +42,7 @@ struct LaunchGateView: View {
         VStack(spacing: 24) {
             AppCard {
                 VStack(alignment: .leading, spacing: 16) {
-                    Text("Launch failed")
+                    Text("Ambitions could not finish launching")
                         .font(.title2.bold())
 
                     Text(message)

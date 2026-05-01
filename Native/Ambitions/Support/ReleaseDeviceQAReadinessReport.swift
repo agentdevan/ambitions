@@ -93,7 +93,7 @@ enum ReleaseDeviceQAReadinessReport {
             blockerIfMissing: "Do not claim large-data device responsiveness."
         ),
         ReleaseDeviceQACheck(
-            id: "missed-week",
+            id: "disrupted-week",
             scope: .missedWeek,
             requiredJourney: "Return after a week away and verify stale context, review needs, and one re-entry move.",
             evidence: "M01 scenario catalog and Today/Plan/Reviews/What Ambitions Knows tests cover stale-context and recovery posture.",

@@ -70,7 +70,7 @@ enum ReleaseCandidateLockDecisionReport {
             title: "Physical-device smoke is not complete.",
             evidence: "R03 records simulator/source readiness and keeps real-device smoke, high-volume device scrolling, and installed-device app-group behavior unclaimed.",
             state: .blockedByMissingHumanOrDeviceProof,
-            nextAction: "Run the R03 fresh install, returning user, denied permissions, lots-of-data, missed-week, export/import, and external-surface journeys on a supported iPhone."
+            nextAction: "Run the R03 fresh install, returning user, denied permissions, lots-of-data, disrupted-week, export/import, and external-surface journeys on a supported iPhone."
         ),
         ReleaseCandidateDecisionItem(
             id: "manual-accessibility",

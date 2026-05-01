@@ -29,6 +29,8 @@ Rules:
 - Yellow stops unless the current batch is the remediation batch for the Yellow condition.
 - Red stops immediately.
 - Do not skip gates.
+- Do not skip F22.7.
+- Do not skip F27.5.
 - Do not run F18 unless F17 is Green.
 - Do not remove native fallback navigation.
 - Do not break top-level destination access.
@@ -38,10 +40,14 @@ Rules:
 - Do not delete UI tests without replacement or retirement evidence.
 - Do not fake App Store, device, privacy, accessibility, TestFlight, or release proof.
 - Do not claim FAANG handoff readiness until F27 reruns the gate and passes.
+- Treat Ambitions 3.0 as the current baseline. Active docs/code/tests/handoff material should not require old launches, old tabs, old shells, old batch history, or older canon to understand the current app.
+- Preserve useful history only when archived, labeled as historical/supporting context, or required for compatibility.
 
 Start with F17:
 
 `docs/codex/batches/F17_Shell_Meridian_Planning_And_Readiness_Audit_Prompt.md`
+
+Current continuation after F21.5 starts at F22 Product Language + Active Repo Baseline Reset, then F22.5 if triggered, mandatory F22.7, F23, F24, F24.5 if triggered, F25, F26, F27, mandatory F27.5, F28 if needed, F29, and F30.
 
 After every Green batch:
 

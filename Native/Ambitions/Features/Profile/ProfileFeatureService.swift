@@ -1402,7 +1402,7 @@ private extension RepositoryBackedProfileService {
                 SettingsItem(
                     id: "profile-receipts-review",
                     title: "Reviews v1",
-                    subtitle: "Recovery Review and Life OS Receipt summarize local events, receipts, proof, and corrections without creating a top-level Insights tab.",
+                    subtitle: "Recovery Review and Life OS Receipt summarize local events, receipts, proof, and corrections without creating a separate top-level destination.",
                     icon: "rectangle.stack.badge.play",
                     valueLabel: snapshot.eventLedger.isEmpty ? "Nothing to review yet" : "Ready to review"
                 )

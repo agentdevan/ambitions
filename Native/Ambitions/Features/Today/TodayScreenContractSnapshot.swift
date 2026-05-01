@@ -11,7 +11,7 @@ extension TodayExecutionViewState {
                 "Reality Rail",
                 "Start here",
                 "Now / Next / Later",
-                "Hero Decision Panel",
+                "Reality Rail",
                 "Now Layer",
                 "Today Plan Layer",
                 "Compact timeline",

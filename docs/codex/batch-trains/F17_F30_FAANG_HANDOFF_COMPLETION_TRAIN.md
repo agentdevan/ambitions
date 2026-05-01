@@ -35,16 +35,18 @@ Risk class: Critical.
 | F20 | External Surfaces Privacy-Safe Projection | After F19 Green. |
 | F21 | Full UI Smoke Stabilization | May run with known prior UI smoke failures. |
 | F21.5 | UI Flake / Reliability Hardening | Conditional after F21 trigger. |
-| F22 | Product Language + Doc QA Final Migration | May run with known doc QA backlog. |
+| F22 | Product Language + Active Repo Baseline Reset | May run with known doc QA backlog; must apply 3.0-as-baseline standard. |
 | F22.5 | Doc QA Backlog Closure | Conditional after F22 trigger. |
-| F23 | Accessibility / ADHD / Dynamic Type / VoiceOver QA | After F22 or F22.5 Green. |
+| F22.7 | Human-Made Active Repo Hygiene / 3.0-As-Baseline Gate | Mandatory after F22 and F22.5 if triggered. |
+| F23 | Accessibility / ADHD / Dynamic Type / VoiceOver QA | After F22, F22.5 if triggered, and F22.7 Green. |
 | F24 | Privacy / Trust / Local Data / Redaction QA | After F23 Green. |
 | F24.5 | Privacy Threat Model Closure | Conditional after F24 trigger. |
 | F25 | Device / Performance / State Restoration / Edge Case QA | After F24 or F24.5 Green. |
 | F26 | App Store / Marketing / Demo Truth | After F25 Green. |
 | F27 | Final FAANG Handoff Gate Rerun | Required before any handoff-ready claim. |
-| F28 | FAANG Handoff Repair Train | Conditional only if F27 PARTIAL/FAIL. |
-| F29 | Final Handoff Package + Engineer Onboarding | Only after F27 PASS. |
+| F27.5 | Human-Made Codebase Maintainability Audit | Mandatory after F27 PASS, or after F28 repairs make F27 PASS. |
+| F28 | FAANG Handoff Repair Train | Conditional only if F27 or F27.5 is PARTIAL/FAIL. |
+| F29 | Final Handoff Package + Engineer Onboarding | Only after F27 and F27.5 PASS. |
 | F30 | Beyond 3.0 Continuation Plan | Only after F29. |
 
 ## Accepted Background Yellow Conditions
@@ -56,6 +58,7 @@ These are recorded but do not stop the train by themselves unless worsened by th
 - pre-existing architecture extraction warnings unchanged
 - documented compatibility seams unchanged
 - legacy historical docs explicitly marked non-active
+- physical-device proof unavailable, as long as no physical-device claim is made
 
 ## New Yellow Stops
 
@@ -87,6 +90,10 @@ Stop immediately if:
 - a release claim is made without evidence
 - commit or push fails
 - validation cannot be trusted
+- active docs presenting old canon as current
+- active repo requiring old launch or batch history to understand current product
+- generated junk committed
+- historical docs deleted without archive-policy support
 
 ## Allowed Files
 
@@ -155,8 +162,30 @@ Stop immediately if:
 
 - active user-facing legacy language removed
 - copy guard passes for active app/docs paths
-- doc QA improved materially
+- no active source-of-truth doc points to old canon as current
+- old-version/current-version ambiguity is archived, labeled, or fixed
+- compatibility seams are documented with reason, owner, exposure status, retirement condition, and test coverage
 - markdown/link/deprecated-language backlog closed or explicitly scoped to F22.5
+
+### F22.5 Green
+
+- active docs navigable
+- no orphan active docs
+- doc QA materially improved
+- remaining markdown/link issues are historical or advisory and documented
+- no active source-truth ambiguity
+
+### F22.7 Green
+
+- active repo reads from current Ambitions 3.0 canon
+- old launches, versions, and batches are not needed for current comprehension
+- compatibility seams are labeled
+- no user-facing legacy language
+- no active docs present old canon as current
+- no generated junk committed
+- no obvious prompt-accumulated sprawl left unexplained
+- large-file risks are documented and not worsened
+- build passes
 
 ### F23 Green
 
@@ -203,10 +232,19 @@ Stop immediately if:
 - release claim truth
 - PASS only if all required gates pass
 
+### F27.5 Green
+
+- no critical maintainability blockers
+- no active old-canon confusion
+- compatibility seams documented
+- known risks indexed
+- build/test commands reliable
+- handoff package prerequisites clear
+
 ### F28/F29/F30 Gates
 
-- F28 runs only if F27 is PARTIAL/FAIL and repairs only F27 blockers.
-- F29 runs only after F27 PASS.
+- F28 runs only if F27 or F27.5 is PARTIAL/FAIL and repairs only handoff/maintainability blockers.
+- F29 runs only after F27 and F27.5 PASS.
 - F30 runs only after F29.
 
 ## Validation Commands

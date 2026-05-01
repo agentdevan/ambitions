@@ -64,6 +64,9 @@ For any Ambitions 3.0 rebuild work:
 | `Ambitions_3_0_Documentation_System_Index.md` | This navigation map. |
 | `Ambitions_3_0_FAANG_Rebuild_Documentation_Completeness_Matrix.md` | Tracks rebuild documentation completeness by discipline. |
 | `Ambitions_3_0_Repo_Hygiene_And_Active_Canon_Policy.md` | Repository cleanup, active-canon, generated-artifact, and legacy-term hygiene policy. |
+| `Ambitions_3_0_As_Current_Baseline_Policy.md` | Defines Ambitions 3.0 as the current baseline and prevents active docs from reading like migration notes. |
+| `Ambitions_3_0_Human_Made_Codebase_Standard.md` | Defines the maintainability, ownership, compatibility, and comment standards for a handoff-ready active codebase. |
+| `Ambitions_3_0_Active_History_Archive_Policy.md` | Defines how historical evidence, archive material, and compatibility history may remain without steering active product truth. |
 
 ---
 

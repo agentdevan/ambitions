@@ -35,6 +35,9 @@ Older docs are supporting context unless an active Ambitions 3.0 doc explicitly 
 - [Ambitions_3_0_FAANG_Rebuild_Documentation_Completeness_Matrix.md](canon/Ambitions_3_0_FAANG_Rebuild_Documentation_Completeness_Matrix.md)
 - [Ambitions_3_0_FAANG_Handoff_Readiness_Gate.md](canon/Ambitions_3_0_FAANG_Handoff_Readiness_Gate.md)
 - [Ambitions_3_0_Repo_Hygiene_And_Active_Canon_Policy.md](canon/Ambitions_3_0_Repo_Hygiene_And_Active_Canon_Policy.md)
+- [Ambitions_3_0_As_Current_Baseline_Policy.md](canon/Ambitions_3_0_As_Current_Baseline_Policy.md)
+- [Ambitions_3_0_Human_Made_Codebase_Standard.md](canon/Ambitions_3_0_Human_Made_Codebase_Standard.md)
+- [Ambitions_3_0_Active_History_Archive_Policy.md](canon/Ambitions_3_0_Active_History_Archive_Policy.md)
 
 ### Strategy / product management
 
@@ -125,6 +128,14 @@ Archived and superseded material is indexed from [archive/README.md](archive/REA
 - [codex/FAANG_HANDOFF_REPO_CLEANUP_PROMPT.md](codex/FAANG_HANDOFF_REPO_CLEANUP_PROMPT.md)
 - [codex/Launch_Operator_Runbook.md](codex/Launch_Operator_Runbook.md)
 - [codex/Release_Candidate_Review_Checklist.md](codex/Release_Candidate_Review_Checklist.md)
+
+---
+
+## Current baseline and history posture
+
+Ambitions 3.0 is the current product baseline. Active docs should describe the product directly, not as a migration from older launches, older tabs, older shell models, or older batch programs.
+
+Historical docs remain useful only when labeled as archive, supporting context, implementation evidence, or still-binding older canon where Ambitions 3.0 does not replace the domain.
 
 ---
 

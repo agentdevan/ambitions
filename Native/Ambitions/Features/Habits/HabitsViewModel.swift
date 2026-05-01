@@ -52,7 +52,7 @@ final class HabitsViewModel {
             await refresh(using: service, now: now)
         } catch {
             inlineMessage = HabitInlineMessage(
-                title: "Ritual action failed",
+                title: "Ritual action could not finish",
                 body: error.localizedDescription,
                 state: .warning
             )

@@ -170,7 +170,7 @@ enum CrossSurfaceContinuityMaturityReport {
             id: "r03-device-qa",
             ownerBatch: "R03",
             title: "Real-device and TestFlight readiness still need representative journey proof.",
-            requiredEvidence: "Fresh install, returning user, denied permissions, data volume, missed week, export/import, and external surface device checks."
+            requiredEvidence: "Fresh install, returning user, denied permissions, data volume, disrupted week, export/import, and external surface device checks."
         ),
         Layer3ReadinessBlocker(
             id: "r04-r05-release-truth",

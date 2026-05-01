@@ -44,7 +44,7 @@ final class AppBootstrapper {
             await importPendingExternalCreations(using: container)
             flushPendingDeepLinks(using: container)
         } catch {
-            phase = .failed("Bootstrap failed: \(error.localizedDescription)")
+            phase = .failed("Ambitions could not finish launching: \(error.localizedDescription)")
         }
     }
 

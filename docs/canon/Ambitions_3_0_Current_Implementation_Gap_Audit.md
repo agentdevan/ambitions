@@ -1,13 +1,19 @@
 # Ambitions 3.0 — Current Implementation Gap Audit
 
-Status: F00 completed audit baseline; F01-F03 Today foundation/detail work implemented
+Status: Historical F00 gap baseline with later addenda; use `docs/codex/BATCH_REGISTRY.md`, `docs/codex/CONTEXT_INDEX.md`, and the latest F-series reports for current implementation status
 Parent doc: [Ambitions 3.0 Front-End Redesign Index](./Ambitions_3_0_Front_End_Redesign_Index.md)
 Implementation plan: [Ambitions 3.0 Front-End Implementation Batch Plan](./Ambitions_3_0_Front_End_Implementation_Batch_Plan.md)
-Last updated: 2026-04-30
+Last updated: 2026-05-01
 
 ---
 
 ## Executive Verdict
+
+F22 baseline note, 2026-05-01: this document is retained as implementation-gap
+evidence, not as the current live status ledger. Some line-level examples below
+describe pre-F04/F15/F16/F21.5 conditions that have since changed. Current
+execution truth lives in `docs/codex/BATCH_REGISTRY.md`, `docs/codex/CONTEXT_INDEX.md`,
+and the latest batch reports under `docs/audits/`.
 
 F00 is an audit-only batch. It did not implement app features, fix UI tests,
 rename identifiers, change workflows, add dependencies, or claim FAANG handoff

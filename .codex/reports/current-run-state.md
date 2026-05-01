@@ -1,28 +1,26 @@
 # Current Run State
 
-- current task: F21.5 UI Flake / Reliability Hardening
+- current task: F22 Product Language + Active Repo Baseline Reset
 - task size: XL release / architecture / product quality train
-- active mode: F21.5 Green; F21 reclassified Green; F22 unblocked after commit/push
+- active mode: F22 Green; F22.5 triggered; F23 blocked until F22.5 and F22.7 Green
 - active train: F17-F30 FAANG Handoff Completion Train
-- active batch: F21.5
-- active primitive: Ambitions Operating Shell, Reality Rail, Step Detail, Goal Mission Control, Plan Life Suite, First Useful Object Onboarding
-- active surface: full UI smoke reliability, route readiness, product-contract UI assertions
-- active context pack: Ambitions 3.0 source stack, Batch Train Orchestrator, release readiness, handoff gate, UI Test Contract, SwiftUI architecture standard, F21 stop report, F21.5 prompt, Batch Registry, Context Index
-- active skill: repo-truth-enforcer, phase-executor, ios-qa-regression-checker
-- active operations: gated release train repair; Green/Yellow/Red stop discipline
-- active validation pack: dev-tools, batch-train preflight, batch-train gate check, local build, focused UI lanes, full local unit/UI suite, diff check
-- docs read: README, docs README, Ambitions 3.0 source override, front-end redesign index, rebuild operating model, documentation system index, primitive architecture, product language system, UI Test Contract, train prompt, train manifest, release readiness gates, FAANG handoff gate, SwiftUI state contract standard, Batch Registry, Context Index, F21 report, F21.5 prompt
-- files allowed: `Native/AmbitionsUITests/AmbitionsUITests.swift`, docs/audits/**, docs/codex/**, .codex/reports/**
-- files forbidden: `.github/workflows/**`, runtime dependency manifests, broad app implementation files, release readiness claims without F27 evidence
-- files touched: `Native/AmbitionsUITests/AmbitionsUITests.swift`, `docs/audits/ambitions-3-0-f21-5-ui-failure-classification.md`, `docs/audits/ambitions-3-0-f21-5-ui-flake-reliability-hardening-report.md`, F21 report addendum, docs/codex tracking files, .codex/reports
-- repair plan: classify all 8 F21 failures before edits; modernize UI test readiness helpers; replace stale layout/copy waits with current product-contract assertions; do not change app behavior unless a proven product bug appears
-- app files allowed: none required after classification
-- app files forbidden: broad shell, Today, Goals, Capture, Plan, You implementation changes; runtime dependencies; `.github/workflows/**`
-- decisions made: original failures were stale test expectation, brittle readiness, route readiness, or suite-order issues; no app behavior bug was proven; no tests were deleted; F21.5 is Green; F21 is reclassified Green
-- tests run: `scripts/build-local.sh` PASS; focused F21.5 UI group A PASS (`3` tests); focused group B final rerun PASS (`5` tests); `scripts/test-local.sh || true` PASS with `779` unit tests and `29` UI tests; final post-cleanup `scripts/test-local.sh || true` rerun PASS with `779` unit tests and `29` UI tests
-- failures: none remaining in full local unit/UI suite
-- accepted Yellow: doc QA advisory backlog unchanged; pre-existing architecture extraction warnings unchanged; compatibility seams unchanged; FAANG handoff remains PARTIAL until F27 passes
-- open risks: no device/App Store/public accessibility claim is available; F22-F30 must continue only while gates stay Green
-- next phase: commit/push F21.5, then continue to F22 if train gate remains Green
-- stop conditions: build failure, focused validation failure, forbidden file touch, runtime dependency addition, workflow touch, untrustworthy validation, commit/push failure
-- last checkpoint: F21.5 full local UI smoke passed and F21 can be reclassified Green
+- active batch: F22.5 Doc QA Backlog Closure
+- active standard: 3.0-as-baseline / human-made active repo
+- active primitive: Release / Market Proof System, Ambitions Operating Shell, product language, repo hygiene, handoff readiness
+- active surface: active docs, active copy, active tests, compatibility seam labeling, train state
+- active context pack: Ambitions 3.0 source stack, Batch Train Orchestrator, baseline policy, human-made codebase standard, active history archive policy, release readiness, handoff gate, UI Test Contract, F21/F21.5 reports, F22 report, Batch Registry, Context Index
+- active skill: repo-truth-enforcer, ios-qa-regression-checker, release-hardening
+- active operations: gated release train continuation; Green/Yellow/Red stop discipline
+- active validation pack: dev tools, batch preflight, batch gate check, local build, focused touched-scope tests, docs QA, copy guard, diff check
+- docs read: README, docs README, canon README, AGENTS, 3.0 source override, front-end redesign index, rebuild operating model, documentation system index, primitive architecture, product language system, repo hygiene policy, release readiness gates, FAANG handoff gate, SwiftUI architecture standard, feature boundary constitution, UI Test Contract, train prompt, train manifest, Batch Registry, Context Index, F21 and F21.5 reports
+- files allowed: `README.md`, `AGENTS.md`, `docs/**`, `.codex/reports/**`, `Native/**`, `AppUI/**`, `Sources/**`
+- files forbidden: `.github/workflows/**`, runtime dependency manifests, generated output, broad behavior changes, release readiness claims without F27 evidence
+- files touched: active docs/indexes/policies, F22 report, focused visible copy/state-contract test files, run-state files
+- decisions made: Ambitions 3.0 is now explicit current baseline; F22.7 and F27.5 added as mandatory train gates; active visible legacy copy found in touched surfaces was replaced; compatibility seams remain documented rather than blind-renamed
+- tests run: preflight commands PASS; `scripts/build-local.sh` PASS; focused touched-scope xcodebuild test PASS (`32` tests); `scripts/run-doc-qa.sh || true` advisory PARTIAL; `git diff --check` PASS before report creation
+- failures: initial focused test command hit Xcode build database lock because it was run concurrently with build; serial rerun passed
+- accepted Yellow: pre-existing doc QA backlog remains and triggers F22.5; pre-existing architecture warnings not assessed in F22; compatibility seams intentionally preserved; physical-device proof unavailable with no physical-device claim
+- open risks: doc QA backlog is not handoff-clean; older docs still need active/supporting/archive classification; F22.7 cannot start until F22.5 is Green; FAANG handoff remains PARTIAL until F27 passes
+- next phase: commit/push F22, then run F22.5 Doc QA Backlog Closure
+- stop conditions: build failure, focused validation failure, forbidden file touch, runtime dependency addition, workflow touch, untrustworthy validation, active source-truth old-canon ambiguity, generated junk committed, commit/push failure
+- last checkpoint: F22 report written; F22.5 triggered

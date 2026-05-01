@@ -1,10 +1,12 @@
 # Ambitions Design Truth
 
-This folder contains the active Ambitions 2.0 Design Constitution and supporting contract matrices/specs.
+This folder contains supporting design constitution material and contract matrices/specs.
 
-For active Ambitions 2.0 Batch 61+ work, the top-level design source of truth is [Ambitions_Design_Constitution.md](Ambitions_Design_Constitution.md). It wins for design, IA, UX writing, component naming, interaction, trust, accessibility, and external surfaces.
+Ambitions 3.0 is the current product baseline. Use the Ambitions 3.0 source stack first, especially [../Ambitions_3_0_Source_Of_Truth_Override.md](../Ambitions_3_0_Source_Of_Truth_Override.md), [../Ambitions_3_0_Primitive_Architecture.md](../Ambitions_3_0_Primitive_Architecture.md), and [../Ambitions_3_0_Product_Language_System.md](../Ambitions_3_0_Product_Language_System.md).
 
-The top-level visual source of truth remains [../Ambitions_2_0_Visual_System.md](../Ambitions_2_0_Visual_System.md) where it does not conflict with the Design Constitution.
+[Ambitions_Design_Constitution.md](Ambitions_Design_Constitution.md) and the matrices here remain supporting design evidence where Ambitions 3.0 does not replace the domain.
+
+The older visual system remains supporting context where it does not conflict with Ambitions 3.0.
 
 [DESIGN_TOKENS.md](DESIGN_TOKENS.md) is the implementation-readable token consolidation layer for color, typography, spacing, radius, elevation, motion, haptics, density, and semantic states. It clarifies the Visual System; it does not replace it.
 
@@ -18,11 +20,12 @@ Use these active specs together with:
 
 ## Use Rules
 
-- The Design Constitution and its supporting matrices/specs are active design canon.
+- Ambitions 3.0 docs decide active product, IA, and language direction.
+- The Design Constitution and its supporting matrices/specs are supporting design canon where not superseded.
 - Older transformation docs were moved to [../../archive/README.md](../../archive/README.md) and are historical only.
-- All batches before Batch 61 are complete for planning purposes.
+- Older batch history remains historical implementation evidence.
 - Treat iPhone execution truth as primary unless a spec explicitly defines a future-platform role.
-- Prefer [Ambitions_Design_Constitution.md](Ambitions_Design_Constitution.md), [../Ambitions_2_0_Visual_System.md](../Ambitions_2_0_Visual_System.md), and [DESIGN_TOKENS.md](DESIGN_TOKENS.md) for future active UI direction.
+- Prefer current Ambitions 3.0 docs for future active UI direction, using these matrices as supporting detail only where compatible.
 - If a future implementation task conflicts with current shipping behavior, preserve shipping truth until the relevant frontend batch becomes active.
 
 ## Active Constitution And Contract Set

@@ -32,6 +32,9 @@ Older canon remains supporting context unless the 3.0 source override or documen
 - [Ambitions_3_0_FAANG_Rebuild_Documentation_Completeness_Matrix.md](Ambitions_3_0_FAANG_Rebuild_Documentation_Completeness_Matrix.md)
 - [Ambitions_3_0_FAANG_Handoff_Readiness_Gate.md](Ambitions_3_0_FAANG_Handoff_Readiness_Gate.md)
 - [Ambitions_3_0_Repo_Hygiene_And_Active_Canon_Policy.md](Ambitions_3_0_Repo_Hygiene_And_Active_Canon_Policy.md)
+- [Ambitions_3_0_As_Current_Baseline_Policy.md](Ambitions_3_0_As_Current_Baseline_Policy.md)
+- [Ambitions_3_0_Human_Made_Codebase_Standard.md](Ambitions_3_0_Human_Made_Codebase_Standard.md)
+- [Ambitions_3_0_Active_History_Archive_Policy.md](Ambitions_3_0_Active_History_Archive_Policy.md)
 
 ---
 

@@ -1921,7 +1921,7 @@ private struct ProfileTrustReceiptRow: View {
         case .exportedPrepared: "Export prepared"
         case .draftedPrepared: "Draft prepared"
         case .completed: "Completed"
-        case .failedSafely: "Safe failure"
+        case .failedSafely: "Safely blocked"
         case .needsConfirmation: "Needs confirmation"
         case .noOp: "No change"
         case .undoAvailable: "Undo available"

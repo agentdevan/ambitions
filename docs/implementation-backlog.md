@@ -4,17 +4,17 @@ This backlog translates the current roadmap into implementation work that matche
 
 ## Precedence notice
 
-This backlog is supporting context.
+This backlog is supporting context and historical planning evidence.
 It does not override [codex/CONTEXT_INDEX.md](codex/CONTEXT_INDEX.md), [../MASTER_PRODUCT_SPEC.md](../MASTER_PRODUCT_SPEC.md), or the canonical planning docs under [canon](canon).
-When this backlog conflicts with the canonical platform vision, surgical execution order, or batch plan, follow the canonical planning stack and update this backlog later.
+When this backlog conflicts with Ambitions 3.0 canon, follow the Ambitions 3.0 source stack and update this backlog later.
 
 ## Current repo truth
 
 - The shipping product is the native SwiftUI app.
 - The live native target is local-first and on-device first.
-- The active Ambitions 2.0 shell canon is Today / Goals / Capture / Plan / You. Older code and historical notes may still use Captures, Habits, Insights, or Profile compatibility naming, but those are not active top-level IA promises.
-- The active design source of truth is [canon/design/Ambitions_Design_Constitution.md](canon/design/Ambitions_Design_Constitution.md).
-- Shared object terminology is locked in [canon/Ambitions_2_0_Object_Terminology.md](canon/Ambitions_2_0_Object_Terminology.md).
+- The active Ambitions 3.0 shell canon is Today / Goals / Capture / Plan / You. Older code and historical notes may still use Captures, Habits, Insights, or Profile compatibility naming, but those are not active top-level IA promises.
+- The active design source of truth starts with [canon/Ambitions_3_0_Source_Of_Truth_Override.md](canon/Ambitions_3_0_Source_Of_Truth_Override.md), [canon/Ambitions_3_0_Primitive_Architecture.md](canon/Ambitions_3_0_Primitive_Architecture.md), and [canon/Ambitions_3_0_Product_Language_System.md](canon/Ambitions_3_0_Product_Language_System.md). Older design constitution docs are supporting detail where compatible.
+- Object terminology follows Ambitions 3.0 first; older object terminology remains supporting context where 3.0 does not replace the domain.
 - Active canon treats Insights as contextual intelligence, Habits as absorbed into Rituals/Plan/Today/You, Profile as user-facing You, and Tasks as standalone One-Step Goals rather than a top-level Tasks tab.
 - `project.yml` currently defines the `Ambitions` app target, the `AmbitionsWidgetExtension` target, and the unit/UI test bundles.
 - The current native codebase already includes capture persistence, create-goal submission, external routing, snapshot export, local notification scheduling, EventKit integration, and widget/live-activity code paths.

@@ -78,7 +78,7 @@ final class TodayViewModel {
             await refresh(using: service, userDisplayName: userDisplayName, now: now, entryContext: entryContext)
         } catch {
             transientMessage = TodayInlineMessage(
-                title: "Action failed",
+                title: "Action could not finish",
                 body: error.localizedDescription,
                 state: .warning
             )

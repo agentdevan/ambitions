@@ -133,7 +133,7 @@ final class GoalDetailViewModel {
             await refresh(using: service)
         } catch {
             inlineMessage = GoalDetailInlineMessage(
-                title: "Action failed",
+                title: "Action could not finish",
                 body: error.localizedDescription,
                 state: .warning
             )
@@ -160,7 +160,7 @@ final class GoalDetailViewModel {
             await refresh(using: service)
         } catch {
             inlineMessage = GoalDetailInlineMessage(
-                title: "Clarification failed",
+                title: "Clarification could not finish",
                 body: error.localizedDescription,
                 state: .warning
             )
@@ -184,7 +184,7 @@ final class GoalDetailViewModel {
             await refresh(using: service)
         } catch {
             inlineMessage = GoalDetailInlineMessage(
-                title: "Correction failed",
+                title: "Correction could not finish",
                 body: error.localizedDescription,
                 state: .warning
             )

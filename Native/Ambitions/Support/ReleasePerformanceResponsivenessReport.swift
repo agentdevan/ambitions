@@ -58,7 +58,7 @@ enum ReleasePerformanceResponsivenessReport {
             id: "today-load",
             area: .todayLoad,
             budget: "Today should project the current next step from bounded local state rather than recomputing broad history in view bodies.",
-            evidence: "Core-surface scenario tests and Today service regressions cover the Golden Launch Loop, denied-calendar fallback, missed-day recovery, and next-step posture.",
+            evidence: "Core-surface scenario tests and Today service regressions cover the Golden Launch Loop, denied-calendar fallback, disrupted-day recovery, and next-step posture.",
             evidenceLevel: .automatedSimulator,
             readiness: .acceptableForInternalTesting,
             limitation: "Large-data scrolling and VoiceOver navigation remain manual/device checks."

@@ -8,7 +8,7 @@ final class CoreSurfaceIntegrationScenarioTests: XCTestCase {
         XCTAssertEqual(ids, [
             "meaningful-goal",
             "capture-place-thought",
-            "missed-day-recovery",
+            "disrupted-day-recovery",
             "overloaded-week",
             "proof-receipts-review",
             "what-ambitions-knows",

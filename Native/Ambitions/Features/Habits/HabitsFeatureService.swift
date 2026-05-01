@@ -119,7 +119,7 @@ struct RepositoryBackedHabitsService: HabitsServicing {
             }
             try await repositories.goals.saveGoals([goal])
             message = HabitInlineMessage(
-                title: "Skipped, not failed",
+                title: "Skipped, still okay",
                 body: "Today's window was intentionally let go. The next cadence point is already in place.",
                 state: .warning
             )
@@ -280,7 +280,7 @@ private extension RepositoryBackedHabitsService {
                     MetricSummary(id: "streak-recovery", title: "Recovered slips", value: "\(contexts.map(\.recoveryCount).reduce(0, +))", detail: "Recent rebounds", icon: "waveform.path.ecg")
                 ],
                 recoveryNote: recoveryCount > 0
-                    ? "When a day is missed, the next step should get easier and clearer, not louder."
+                    ? "When a day gets disrupted, the next step should get easier and clearer, not louder."
                     : "Keep the loop small enough that it still fits on the days with less margin."
             ),
             guidanceTitle: guidanceTitle(for: mode),

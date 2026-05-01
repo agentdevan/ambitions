@@ -47,6 +47,9 @@ Primary rebuild docs:
 - [Codex-Only Implementation And Testing Strategy](docs/canon/Ambitions_3_0_Codex_Only_Implementation_And_Testing_Strategy.md)
 - [Release Readiness And Evidence Gates](docs/canon/Ambitions_3_0_Release_Readiness_And_Evidence_Gates.md)
 - [Repo Hygiene And Active Canon Policy](docs/canon/Ambitions_3_0_Repo_Hygiene_And_Active_Canon_Policy.md)
+- [As Current Baseline Policy](docs/canon/Ambitions_3_0_As_Current_Baseline_Policy.md)
+- [Human-Made Codebase Standard](docs/canon/Ambitions_3_0_Human_Made_Codebase_Standard.md)
+- [Active History Archive Policy](docs/canon/Ambitions_3_0_Active_History_Archive_Policy.md)
 
 The complete active doc map lives in [Ambitions_3_0_Documentation_System_Index.md](docs/canon/Ambitions_3_0_Documentation_System_Index.md).
 
@@ -102,7 +105,7 @@ Language rules live in:
 - `Sources/` — `AmbitionsDesignSystem` Swift package.
 - `AppUI/Sources/` — `AmbitionsWidgetUI` Swift package.
 
-Some internal identifiers remain compatibility-oriented and are tracked by [Repo Hygiene And Active Canon Policy](docs/canon/Ambitions_3_0_Repo_Hygiene_And_Active_Canon_Policy.md).
+Some internal identifiers remain compatibility-oriented and are tracked by [Repo Hygiene And Active Canon Policy](docs/canon/Ambitions_3_0_Repo_Hygiene_And_Active_Canon_Policy.md). Compatibility seams should read as intentional engineering choices, not as active product language.
 
 ---
 
@@ -171,7 +174,7 @@ The workflow does not prove signed archives, TestFlight, App Store Connect valid
 
 Ambitions 3.0 docs define the active source of truth. Older waves, v2 docs, and historical transformation material are supporting context unless explicitly kept active by the 3.0 source override.
 
-Known cleanup debt is tracked in [Ambitions_3_0_Repo_Hygiene_And_Active_Canon_Policy.md](docs/canon/Ambitions_3_0_Repo_Hygiene_And_Active_Canon_Policy.md).
+Known cleanup debt is tracked in [Ambitions_3_0_Repo_Hygiene_And_Active_Canon_Policy.md](docs/canon/Ambitions_3_0_Repo_Hygiene_And_Active_Canon_Policy.md). Current baseline and archive rules live in [Ambitions_3_0_As_Current_Baseline_Policy.md](docs/canon/Ambitions_3_0_As_Current_Baseline_Policy.md), [Ambitions_3_0_Human_Made_Codebase_Standard.md](docs/canon/Ambitions_3_0_Human_Made_Codebase_Standard.md), and [Ambitions_3_0_Active_History_Archive_Policy.md](docs/canon/Ambitions_3_0_Active_History_Archive_Policy.md).
 
 ---
 

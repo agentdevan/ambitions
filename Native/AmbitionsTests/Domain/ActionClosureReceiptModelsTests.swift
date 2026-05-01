@@ -157,7 +157,7 @@ final class ActionClosureReceiptModelsTests: XCTestCase {
         let malformed = ActionReceipt(
             id: "receipt-bad-failure",
             resultState: .failedSafely,
-            title: "Action failed",
+            title: "Action could not finish",
             summary: "Calendar write was not available.",
             sourceDomain: .plan,
             occurredAt: "2026-04-26T12:00:00Z",

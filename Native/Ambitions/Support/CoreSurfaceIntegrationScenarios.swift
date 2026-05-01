@@ -83,9 +83,9 @@ enum CoreSurfaceIntegrationScenarioCatalog {
             severity: .blocking
         ),
         CoreSurfaceIntegrationScenario(
-            id: "missed-day-recovery",
-            title: "Recover from a missed day",
-            intent: "A missed day turns into one smaller next step without shame or silent rescheduling.",
+            id: "disrupted-day-recovery",
+            title: "Recover after a disrupted day",
+            intent: "A disrupted day turns into one smaller next step without shame or silent rescheduling.",
             surfaces: [.today, .plan, .reviews, .you],
             launchLoopSteps: [.today, .recovery, .proof, .trust],
             manualSteps: [

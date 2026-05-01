@@ -58,7 +58,7 @@ public enum AccessibilityNutritionCategory: String, CaseIterable, Identifiable, 
         case .keyboardAndFocusSupport:
             "Verify text entry, forms, sheets, and any hardware-keyboard-relevant controls preserve logical focus order and visible focus."
         case .errorRecovery:
-            "Verify error, denied-permission, empty, failed, and degraded states include a clear next step or safe escape."
+            "Verify error, denied-permission, empty, unresolved, and degraded states include a clear next step or safe escape."
         case .cognitiveLoad:
             "Verify top-level screens preserve one dominant decision and keep audit, history, and explanation density behind disclosure."
         case .oneHandedUsability:
@@ -66,7 +66,7 @@ public enum AccessibilityNutritionCategory: String, CaseIterable, Identifiable, 
         case .plainLanguageLabels:
             "Verify user-visible and assistive labels avoid internal model terms and describe the useful outcome plainly."
         case .noShameOrGuiltStates:
-            "Verify missed, delayed, reduced, stuck, and recovery states use calm adult language without blame or streak pressure."
+            "Verify disrupted, delayed, reduced, stuck, and recovery states use calm adult language without blame or streak pressure."
         case .privacyTrustClarity:
             "Verify intelligent recommendations, calendar-derived context, memory, sync, and export/import copy name their data basis and limits."
         case .verifiedUserFacingClaims:

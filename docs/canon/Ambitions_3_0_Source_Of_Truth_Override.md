@@ -143,6 +143,9 @@ Read docs/canon/Ambitions_3_0_Source_Of_Truth_Override.md, docs/canon/Ambitions_
 - `Ambitions_3_0_FAANG_Rebuild_Documentation_Completeness_Matrix.md`
 - `Ambitions_3_0_FAANG_Team_Operating_Model.md`
 - `Ambitions_Beyond_3_0_Continuity_Rules.md`
+- `Ambitions_3_0_As_Current_Baseline_Policy.md`
+- `Ambitions_3_0_Human_Made_Codebase_Standard.md`
+- `Ambitions_3_0_Active_History_Archive_Policy.md`
 
 ### Strategy / product management
 
