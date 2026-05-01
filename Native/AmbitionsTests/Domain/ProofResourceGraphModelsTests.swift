@@ -7,6 +7,7 @@ final class ProofResourceGraphModelsTests: XCTestCase {
             Set(ProofReferenceKind.allCases),
             [
                 .completedAction,
+                .stillCounts,
                 .note,
                 .link,
                 .fileReference,

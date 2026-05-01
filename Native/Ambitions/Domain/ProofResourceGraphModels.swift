@@ -4,6 +4,7 @@ let proofResourceGraphSchemaVersion = "proof_resource_graph.native.v1"
 
 enum ProofReferenceKind: String, Codable, Sendable, Equatable, Hashable, CaseIterable {
     case completedAction = "completed_action"
+    case stillCounts = "still_counts"
     case note
     case link
     case fileReference = "file_reference"

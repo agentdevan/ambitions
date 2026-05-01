@@ -546,6 +546,61 @@ final class ActionClosureReceiptModelsTests: XCTestCase {
         XCTAssertFalse(visibleCopy.localizedCaseInsensitiveContains("Missed"))
         XCTAssertFalse(visibleCopy.localizedCaseInsensitiveContains("Behind"))
     }
+
+    func testF06ReceiptProofLedgerCreatesRecoverableProofForStillCounts() {
+        let stepID = UUID(uuidString: "22222222-2222-2222-2222-222222222222")!
+        let occurrence = StepOccurrence(
+            stepID: stepID,
+            duration: DurationMetadata(plannedDuration: .seconds(1_800), source: .userSet),
+            rigidity: .flexible,
+            readiness: .ready,
+            closureState: .awaitingClosure
+        )
+        let receipt = ActionReceipt.closureReceipt(
+            id: "receipt-f06-still-counts",
+            occurrence: occurrence,
+            outcome: .stillCounts,
+            stepTitle: "Write the launch notes",
+            occurredAt: "2026-05-01T12:00:00Z"
+        )
+
+        let entry = ActionReceiptProofLedgerEntry(receipt: receipt)
+
+        XCTAssertEqual(entry.peekTitle, "Proof saved")
+        XCTAssertEqual(entry.proofReference?.kind, .stillCounts)
+        XCTAssertEqual(entry.proofReference?.title, "Still Counts")
+        XCTAssertEqual(entry.proofReference?.sourceObject?.kind, .receipt)
+        XCTAssertEqual(entry.receiptRecord.proofLabel, "Added to proof")
+        XCTAssertTrue(entry.isRecoverableBeyondToast)
+        XCTAssertTrue(entry.localOnly)
+        XCTAssertEqual(entry.noSilentChangesLabel, "No silent changes")
+    }
+
+    func testF06ReceiptProofLedgerDoesNotPromoteUnconfirmedReviewToProof() {
+        let stepID = UUID(uuidString: "33333333-3333-3333-3333-333333333333")!
+        let occurrence = StepOccurrence(
+            stepID: stepID,
+            duration: DurationMetadata(plannedDuration: .seconds(900), source: .suggested),
+            rigidity: .flexible,
+            readiness: .needsReview,
+            closureState: .awaitingClosure
+        )
+        let receipt = ActionReceipt.closureReceipt(
+            id: "receipt-f06-review",
+            occurrence: occurrence,
+            outcome: .needsReview,
+            stepTitle: "Clarify next step",
+            occurredAt: "2026-05-01T13:00:00Z"
+        )
+
+        let entry = ActionReceiptProofLedgerEntry(receipt: receipt)
+
+        XCTAssertNil(entry.proofReference)
+        XCTAssertEqual(entry.peekTitle, "Needs confirmation")
+        XCTAssertEqual(entry.receiptRecord.proofLabel, "Needs confirmation")
+        XCTAssertFalse(entry.receiptRecord.safeToShowInExternalSurface)
+        XCTAssertTrue(entry.isRecoverableBeyondToast)
+    }
 }
 
 private extension ActionClosureReceiptModelsTests {

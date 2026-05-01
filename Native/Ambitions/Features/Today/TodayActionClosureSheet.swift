@@ -142,9 +142,12 @@ struct TodayActionClosureSheet: View {
             Text(state.receiptPreviewTitle)
                 .font(theme.typography.bodyEmphasized)
                 .foregroundStyle(theme.colors.textPrimary)
-            Text(selectedOutcome?.receiptPreview ?? "Choose an outcome to preview the receipt.")
+            Text(receiptPreviewText)
                 .font(theme.typography.caption)
                 .foregroundStyle(theme.colors.textSecondary)
+            Text(selectedOutcome.map { state.proofReceiptPeek(for: $0).noSilentChangesLabel } ?? "No silent changes")
+                .font(theme.typography.caption)
+                .foregroundStyle(theme.colors.textTertiary)
         }
         .padding(theme.spacing.md)
         .background(
@@ -152,5 +155,13 @@ struct TodayActionClosureSheet: View {
                 .fill(theme.colors.surfaceSecondary.opacity(0.74))
         )
         .accessibilityIdentifier("TodayActionClosureReceiptPreview")
+    }
+
+    private var receiptPreviewText: String {
+        guard let selectedOutcome else {
+            return "Choose an outcome to preview the receipt."
+        }
+        let peek = state.proofReceiptPeek(for: selectedOutcome)
+        return "\(peek.title) · \(peek.subtitle)"
     }
 }

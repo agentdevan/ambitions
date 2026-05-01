@@ -403,6 +403,28 @@ final class TodayViewModelTests: XCTestCase {
         XCTAssertNotEqual(session.primaryAction.kind, .closeActionClosure)
     }
 
+    func testF06ActionClosureProjectsProofReceiptPeekWithoutPersistence() {
+        let target = TodayActionTarget(goalID: "goal-f06", stepID: "step-f06")
+        let sheet = TodayActionClosureSheetState.step(
+            title: "Write the launch notes",
+            context: "Start here",
+            target: target
+        )
+        let stillCounts = try! XCTUnwrap(sheet.outcomes.first { $0.closureState == .stillCounts })
+        let reviewLater = try! XCTUnwrap(sheet.outcomes.first { $0.closureState == .needsReview })
+
+        let proofPeek = sheet.proofReceiptPeek(for: stillCounts, occurredAt: "2026-05-01T12:00:00Z")
+        let reviewPeek = sheet.proofReceiptPeek(for: reviewLater, occurredAt: "2026-05-01T12:05:00Z")
+
+        XCTAssertEqual(proofPeek.title, "Proof saved")
+        XCTAssertTrue(proofPeek.subtitle.contains("Still Counts"))
+        XCTAssertEqual(proofPeek.proofLabel, "Added to proof")
+        XCTAssertEqual(proofPeek.privacyLabel, "Stored on this device")
+        XCTAssertEqual(proofPeek.noSilentChangesLabel, "No silent changes")
+        XCTAssertEqual(reviewPeek.title, "Needs confirmation")
+        XCTAssertEqual(reviewPeek.proofLabel, "Needs confirmation")
+    }
+
     func testF03StepDetailSupportsMissingDurationFallback() {
         let detail = PreviewTodayScenarios.missingDurationStepDetail
 

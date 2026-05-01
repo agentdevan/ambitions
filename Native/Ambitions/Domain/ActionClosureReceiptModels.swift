@@ -419,7 +419,7 @@ struct ActionReceiptHistoryRecord: Sendable, Equatable, Identifiable {
         return receipt.changedFacts.isEmpty ? ["Detail hidden"] : receipt.changedFacts.map { _ in "Detail hidden" }
     }
 
-    private var proofLabel: String {
+    var proofLabel: String {
         switch proofRelevance {
         case .notProof:
             return "Receipt"

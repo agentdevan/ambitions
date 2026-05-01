@@ -108,10 +108,11 @@ struct TodayScreen: View {
         }
         .sheet(item: $selectedActionClosure) { closure in
             TodayActionClosureSheet(state: closure) { outcome in
+                let peek = closure.proofReceiptPeek(for: outcome)
                 selectedActionClosure = nil
                 viewModel.transientMessage = TodayInlineMessage(
-                    title: outcome.title,
-                    body: outcome.receiptPreview,
+                    title: peek.title,
+                    body: "\(peek.subtitle). \(peek.privacyLabel). \(peek.noSilentChangesLabel).",
                     state: outcome.createsProof ? .success : .selected
                 )
             }
