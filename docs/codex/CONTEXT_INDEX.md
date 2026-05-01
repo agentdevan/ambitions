@@ -13,7 +13,7 @@ Ambitions 3.0 is the active source of truth. This file defines Codex read order,
 - F03 Step Detail work is now represented as a Today-local sheet opened from the Reality Rail `Start here` card and Now/Next/Later rows, with grounded recommendation explanation, duration/source/context labels, private redaction, and stable `TodayStepDetail*` accessibility identifiers.
 - F03.5 Today Execution State Contract Hardening is complete: `TodayExecutionViewState.swift` is now a small aggregate state contract, while Day Rail state, Step Detail state, projection helpers, projector logic, compatibility helpers, and screen-contract snapshot live in dedicated Today-owned files.
 - F04 Step Session, F05 Action Closure / Still Counts, F06 Proof & Receipt Ledger, F07 Capture Composer cleanup, F08 Placement Resolver, F09 Capture-to-Goal / Grow into Goal, F10 Plan Life Suite foundation, F11 Day Shape / Week Shape, F12 Reflow / Recovery / Decisions, F13 Goals / Goal Mission Control, F13.5 Goals / You / Trust architecture checkpoint, F14 You / Trust / What Ambitions Knows, F15 Legacy Identifier Migration, and F16 UI Test Modernization are complete.
-- F16.5 SwiftUI Architecture / State Contract Hardening checkpoint is complete. The active completion train is F17-F30 FAANG Handoff Completion Train. F17 Shell/Meridian planning stopped Yellow, then the F17 repair decision resolved shell ownership as Green in `docs/audits/ambitions-3-0-f17-shell-meridian-ownership-decision.md`. F18 Feature-Flagged Meridian Shell Implementation is Green, F19 Shell Route Parity / Fallback Safety is Green, and F20 External Surfaces Privacy-Safe Projection is Green. Next active 3.0 continuation is F21 Full UI Smoke Stabilization.
+- F16.5 SwiftUI Architecture / State Contract Hardening checkpoint is complete. The active completion train is F17-F30 FAANG Handoff Completion Train. F17 repair, F18, F19, and F20 are Green. F21 Full UI Smoke Stabilization stopped Yellow with full UI smoke still PARTIAL. Next active 3.0 continuation is F21.5 UI Flake / Reliability Hardening; F22 is blocked until F21/F21.5 are Green.
 
 ## Required Read Order
 
@@ -76,7 +76,7 @@ For non-trivial work, read in this order:
 
 ## Batch Train Context
 
-Batch-train execution uses `docs/codex/AMBITIONS_3_0_BATCH_TRAIN_ORCHESTRATOR.md`, `docs/codex/batch-trains/README.md`, `.codex/reports/current-batch-train-state.md`, and the matching validation/operation packs. F03.5, F13.5, and F16.5 are complete. The active train manifest is `docs/codex/batch-trains/F17_F30_FAANG_HANDOFF_COMPLETION_TRAIN.md`; the current next batch is F21 Full UI Smoke Stabilization after F20 Green.
+Batch-train execution uses `docs/codex/AMBITIONS_3_0_BATCH_TRAIN_ORCHESTRATOR.md`, `docs/codex/batch-trains/README.md`, `.codex/reports/current-batch-train-state.md`, and the matching validation/operation packs. F03.5, F13.5, and F16.5 are complete. The active train manifest is `docs/codex/batch-trains/F17_F30_FAANG_HANDOFF_COMPLETION_TRAIN.md`; the current next batch is F21.5 UI Flake / Reliability Hardening after the F21 Yellow stop.
 
 ## F-Series Audit Reports
 
@@ -102,3 +102,5 @@ Batch-train execution uses `docs/codex/AMBITIONS_3_0_BATCH_TRAIN_ORCHESTRATOR.md
 - `docs/audits/ambitions-3-0-f18-feature-flagged-meridian-shell-report.md`
 - `docs/audits/ambitions-3-0-f19-shell-route-parity-fallback-safety-report.md`
 - `docs/audits/ambitions-3-0-f20-external-surfaces-privacy-projection-report.md`
+- `docs/audits/ambitions-3-0-f21-full-ui-smoke-stabilization-report.md`
+- `docs/audits/ambitions-3-0-f17-repair-and-handoff-train-resume-report.md`

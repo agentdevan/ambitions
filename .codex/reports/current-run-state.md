@@ -1,10 +1,10 @@
 # Current Run State
 
-- current task: F20 External Surfaces Privacy-Safe Projection
+- current task: F21 Full UI Smoke Stabilization
 - task size: XL release / architecture / product quality train
-- active mode: F20 Green pending commit; F21 next if pushed
+- active mode: F21 Yellow stop; F21.5 triggered
 - active primitive: Ambitions Operating Shell, External Surface Projection, Accessibility / ADHD Control Layer, Trust & Memory Control Plane, Release / Market Proof System
-- active surface: App Intents, widgets, Live Activities, shared external snapshots, privacy-safe route handoff
+- active surface: full UI smoke stabilization and failure classification
 - active context pack: Ambitions 3.0 source stack, Batch Train Orchestrator, release readiness, handoff gate, UI Test Contract, SwiftUI architecture standard, privacy/threat/consent docs, F12-F16.5 report
 - active skill: repo-truth-enforcer plus phase-executor
 - active operations: gated release train setup; Green/Yellow/Red stop discipline
@@ -12,12 +12,12 @@
 - docs read: README, docs README, canon README, source override, front-end redesign index, rebuild operating model, documentation system index, primitive architecture, product language system, UI Test Contract, SwiftUI state contract, feature boundary constitution, state projection rules, release readiness gates, FAANG handoff gate, repo hygiene policy, privacy threat model, personalization consent model, evidence hierarchy, Beyond 3.0 continuity rules, Batch Train Orchestrator, train runner prompt, context loading/routing, run-state protocol, Mac toolchain setup, F12-F16.5 report, orchestrator report, FAANG handoff report, Batch Registry, Context Index
 - files allowed: docs/codex/**, docs/canon tracking docs, docs/audits/**, .codex/reports/**
 - files forbidden: .github/workflows/**, runtime dependency manifests, app implementation files before F17 setup is committed and pushed, release readiness claims without F27 evidence
-- files touched: `Native/AmbitionsTests/App/ExternalSurfaceSnapshotTests.swift`, F20 report and tracking files
-- decisions made: F20 is Green; external surfaces continue to use canonical route handoff and generated privacy-safe display projections; no platform/device readiness claim is made
-- tests run: focused external/privacy lane PASS (`50` tests); build PASS on iPhone 17; architecture scan advisory/PARTIAL with pre-existing warnings; copy guard only found intentional sensitive test fixtures with negative assertions; diff check PASS
-- failures: none blocking so far
+- files touched: F21 report, F17 repair/train resume report, tracking files
+- decisions made: F21 is Yellow; full UI smoke remains PARTIAL; F21.5 is triggered; F22 is blocked
+- tests run: `scripts/test-local.sh || true` PARTIAL; unit tests PASS (`779` tests); UI tests PARTIAL (`29` tests, `8` failures)
+- failures: full UI smoke remains failing; see `docs/audits/ambitions-3-0-f21-full-ui-smoke-stabilization-report.md`
 - accepted Yellow: doc QA advisory backlog unchanged; known full UI smoke failures before F21; pre-existing architecture extraction warnings unchanged; documented compatibility seams unchanged; legacy historical docs marked non-active
 - open risks: F18 needs a narrow repair/decision pass before implementation; no device/App Store/public accessibility claim is available
-- next phase: commit and push F20; if pushed, start F21 full UI smoke stabilization
+- next phase: stop; resume at F21.5 UI Flake / Reliability Hardening
 - stop conditions: build failure, focused validation failure, forbidden file touch, runtime dependency addition, workflow touch, untrustworthy validation, commit/push failure
-- last checkpoint: F20 external surfaces privacy-safe projection completed Green pending commit
+- last checkpoint: F21 full UI smoke classification completed Yellow
