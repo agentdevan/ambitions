@@ -1,23 +1,28 @@
 # Current Run State
 
-- current task: F21 Full UI Smoke Stabilization
+- current task: F21.5 UI Flake / Reliability Hardening
 - task size: XL release / architecture / product quality train
-- active mode: F21 Yellow stop; F21.5 triggered
-- active primitive: Ambitions Operating Shell, External Surface Projection, Accessibility / ADHD Control Layer, Trust & Memory Control Plane, Release / Market Proof System
-- active surface: full UI smoke stabilization and failure classification
-- active context pack: Ambitions 3.0 source stack, Batch Train Orchestrator, release readiness, handoff gate, UI Test Contract, SwiftUI architecture standard, privacy/threat/consent docs, F12-F16.5 report
-- active skill: repo-truth-enforcer plus phase-executor
-- active operations: gated release train setup; Green/Yellow/Red stop discipline
-- active validation pack: dev-tools, batch-train preflight, batch-train gate check, doc QA advisory, architecture scan advisory, local build, diff check
-- docs read: README, docs README, canon README, source override, front-end redesign index, rebuild operating model, documentation system index, primitive architecture, product language system, UI Test Contract, SwiftUI state contract, feature boundary constitution, state projection rules, release readiness gates, FAANG handoff gate, repo hygiene policy, privacy threat model, personalization consent model, evidence hierarchy, Beyond 3.0 continuity rules, Batch Train Orchestrator, train runner prompt, context loading/routing, run-state protocol, Mac toolchain setup, F12-F16.5 report, orchestrator report, FAANG handoff report, Batch Registry, Context Index
-- files allowed: docs/codex/**, docs/canon tracking docs, docs/audits/**, .codex/reports/**
-- files forbidden: .github/workflows/**, runtime dependency manifests, app implementation files before F17 setup is committed and pushed, release readiness claims without F27 evidence
-- files touched: F21 report, F17 repair/train resume report, tracking files
-- decisions made: F21 is Yellow; full UI smoke remains PARTIAL; F21.5 is triggered; F22 is blocked
-- tests run: `scripts/test-local.sh || true` PARTIAL; unit tests PASS (`779` tests); UI tests PARTIAL (`29` tests, `8` failures)
-- failures: full UI smoke remains failing; see `docs/audits/ambitions-3-0-f21-full-ui-smoke-stabilization-report.md`
-- accepted Yellow: doc QA advisory backlog unchanged; known full UI smoke failures before F21; pre-existing architecture extraction warnings unchanged; documented compatibility seams unchanged; legacy historical docs marked non-active
-- open risks: F18 needs a narrow repair/decision pass before implementation; no device/App Store/public accessibility claim is available
-- next phase: stop; resume at F21.5 UI Flake / Reliability Hardening
+- active mode: F21.5 Green; F21 reclassified Green; F22 unblocked after commit/push
+- active train: F17-F30 FAANG Handoff Completion Train
+- active batch: F21.5
+- active primitive: Ambitions Operating Shell, Reality Rail, Step Detail, Goal Mission Control, Plan Life Suite, First Useful Object Onboarding
+- active surface: full UI smoke reliability, route readiness, product-contract UI assertions
+- active context pack: Ambitions 3.0 source stack, Batch Train Orchestrator, release readiness, handoff gate, UI Test Contract, SwiftUI architecture standard, F21 stop report, F21.5 prompt, Batch Registry, Context Index
+- active skill: repo-truth-enforcer, phase-executor, ios-qa-regression-checker
+- active operations: gated release train repair; Green/Yellow/Red stop discipline
+- active validation pack: dev-tools, batch-train preflight, batch-train gate check, local build, focused UI lanes, full local unit/UI suite, diff check
+- docs read: README, docs README, Ambitions 3.0 source override, front-end redesign index, rebuild operating model, documentation system index, primitive architecture, product language system, UI Test Contract, train prompt, train manifest, release readiness gates, FAANG handoff gate, SwiftUI state contract standard, Batch Registry, Context Index, F21 report, F21.5 prompt
+- files allowed: `Native/AmbitionsUITests/AmbitionsUITests.swift`, docs/audits/**, docs/codex/**, .codex/reports/**
+- files forbidden: `.github/workflows/**`, runtime dependency manifests, broad app implementation files, release readiness claims without F27 evidence
+- files touched: `Native/AmbitionsUITests/AmbitionsUITests.swift`, `docs/audits/ambitions-3-0-f21-5-ui-failure-classification.md`, `docs/audits/ambitions-3-0-f21-5-ui-flake-reliability-hardening-report.md`, F21 report addendum, docs/codex tracking files, .codex/reports
+- repair plan: classify all 8 F21 failures before edits; modernize UI test readiness helpers; replace stale layout/copy waits with current product-contract assertions; do not change app behavior unless a proven product bug appears
+- app files allowed: none required after classification
+- app files forbidden: broad shell, Today, Goals, Capture, Plan, You implementation changes; runtime dependencies; `.github/workflows/**`
+- decisions made: original failures were stale test expectation, brittle readiness, route readiness, or suite-order issues; no app behavior bug was proven; no tests were deleted; F21.5 is Green; F21 is reclassified Green
+- tests run: `scripts/build-local.sh` PASS; focused F21.5 UI group A PASS (`3` tests); focused group B final rerun PASS (`5` tests); `scripts/test-local.sh || true` PASS with `779` unit tests and `29` UI tests; final post-cleanup `scripts/test-local.sh || true` rerun PASS with `779` unit tests and `29` UI tests
+- failures: none remaining in full local unit/UI suite
+- accepted Yellow: doc QA advisory backlog unchanged; pre-existing architecture extraction warnings unchanged; compatibility seams unchanged; FAANG handoff remains PARTIAL until F27 passes
+- open risks: no device/App Store/public accessibility claim is available; F22-F30 must continue only while gates stay Green
+- next phase: commit/push F21.5, then continue to F22 if train gate remains Green
 - stop conditions: build failure, focused validation failure, forbidden file touch, runtime dependency addition, workflow touch, untrustworthy validation, commit/push failure
-- last checkpoint: F21 full UI smoke classification completed Yellow
+- last checkpoint: F21.5 full local UI smoke passed and F21 can be reclassified Green

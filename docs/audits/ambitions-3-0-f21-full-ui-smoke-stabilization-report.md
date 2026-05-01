@@ -129,4 +129,26 @@ Required validation:
 - update F21/F21.5 reports and tracking.
 
 Continue to F22 only if F21.5 is Green and the F21 gate is reclassified Green.
+
+## F21.5 Addendum
+
+Date: 2026-05-01
+
+F21 is reclassified Green by
+`docs/audits/ambitions-3-0-f21-5-ui-flake-reliability-hardening-report.md`.
+
+F21.5 classified all 8 original UI smoke failures, replaced stale or brittle
+assertions with current product-contract assertions, did not delete any UI test,
+and did not touch app behavior files.
+
+Validation evidence:
+
+- focused repaired UI lanes: PASS
+- `scripts/test-local.sh || true`: PASS
+- unit lane: `779` tests, `0` failures
+- UI lane: `29` tests, `0` failures
+- log: `output/logs/test-local-20260501-133620.log`
+
+F22 may proceed after the F21.5 commit/push lands. FAANG handoff remains PARTIAL
+until F27 explicitly passes.
 ```
