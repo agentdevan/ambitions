@@ -195,6 +195,20 @@ F18 should start with a small repair/design slice, not visual shell code:
 5. keep destination actions calling `AppNavigationModel.selectTab`;
 6. rerun build and focused shell/routing tests.
 
+## F17 Repair Update
+
+F17 originally stopped Yellow. The follow-up F17 repair decision in
+`docs/audits/ambitions-3-0-f17-shell-meridian-ownership-decision.md` resolves
+the shell ownership ambiguity and is Green.
+
+F18 is authorized only within that ownership contract:
+
+- native fallback remains the default;
+- shell presentation mode owns presentation only;
+- `AppNavigationModel` and `AppExternalRoute` retain route ownership;
+- Meridian must not remove fallback navigation or duplicate route state;
+- F18 must prove route parity and fallback safety before continuing.
+
 ## Gate Result
 
 Yellow.

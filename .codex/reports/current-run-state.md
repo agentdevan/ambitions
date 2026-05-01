@@ -1,10 +1,10 @@
 # Current Run State
 
-- current task: F17 Shell / Meridian planning readiness audit
+- current task: F17 Shell / Meridian ownership repair decision
 - task size: XL release / architecture / product quality train
-- active mode: Part 2 F17 planning; Yellow stop
+- active mode: F17 repair decision; F18 blocked until repair Green
 - active primitive: Ambitions Operating Shell, External Surface Projection, Accessibility / ADHD Control Layer, Trust & Memory Control Plane, Release / Market Proof System
-- active surface: train docs, gates, prompts, reports, and F17 planning entry point
+- active surface: shell/navigation/routing ownership decision and F18 authorization gate
 - active context pack: Ambitions 3.0 source stack, Batch Train Orchestrator, release readiness, handoff gate, UI Test Contract, SwiftUI architecture standard, privacy/threat/consent docs, F12-F16.5 report
 - active skill: repo-truth-enforcer plus phase-executor
 - active operations: gated release train setup; Green/Yellow/Red stop discipline
@@ -12,12 +12,12 @@
 - docs read: README, docs README, canon README, source override, front-end redesign index, rebuild operating model, documentation system index, primitive architecture, product language system, UI Test Contract, SwiftUI state contract, feature boundary constitution, state projection rules, release readiness gates, FAANG handoff gate, repo hygiene policy, privacy threat model, personalization consent model, evidence hierarchy, Beyond 3.0 continuity rules, Batch Train Orchestrator, train runner prompt, context loading/routing, run-state protocol, Mac toolchain setup, F12-F16.5 report, orchestrator report, FAANG handoff report, Batch Registry, Context Index
 - files allowed: docs/codex/**, docs/canon tracking docs, docs/audits/**, .codex/reports/**
 - files forbidden: .github/workflows/**, runtime dependency manifests, app implementation files before F17 setup is committed and pushed, release readiness claims without F27 evidence
-- files touched: F17 readiness report and run-state files
-- decisions made: F17 is Yellow because shell feature-flag ownership and Meridian implementation ownership are not clean enough for automatic F18 implementation
+- files touched: F17 readiness report, F17 ownership decision report, Context Index, Batch Registry, run-state files
+- decisions made: F17 repair is Green; shell presentation mode may live app-locally, native fallback remains default, `AppNavigationModel` and `AppExternalRoute` retain route ownership, and F18 is authorized only within the repair contract
 - tests run: pre-edit dev tools PASS; batch preflight PASS; batch gate check PASS; architecture scan advisory/PARTIAL with pre-existing warnings; build PASS on iPhone 17
 - failures: none blocking so far
 - accepted Yellow: doc QA advisory backlog unchanged; known full UI smoke failures before F21; pre-existing architecture extraction warnings unchanged; documented compatibility seams unchanged; legacy historical docs marked non-active
 - open risks: F18 needs a narrow repair/decision pass before implementation; no device/App Store/public accessibility claim is available
-- next phase: commit and push F17 Yellow stop report; do not run F18
+- next phase: commit and push F17 repair decision; if pushed, start F18 feature-flagged Meridian shell implementation
 - stop conditions: build failure, focused validation failure, forbidden file touch, runtime dependency addition, workflow touch, untrustworthy validation, commit/push failure
-- last checkpoint: F17 source inspection completed; F17 report classifies Yellow
+- last checkpoint: F17 source inspection completed; F17 readiness stopped Yellow; F17 repair decision resolves ownership as Green pending validation/commit
