@@ -16,3 +16,7 @@ Index:
 - [`.codex/playbooks/toolchain-failure-triage.md`](toolchain-failure-triage.md)
 - [`.codex/playbooks/ui-test-flake-triage.md`](ui-test-flake-triage.md)
 - [`.codex/playbooks/xcodegen-regeneration.md`](xcodegen-regeneration.md)
+
+## Batch Train Orchestrator
+
+Use `docs/codex/AMBITIONS_3_0_BATCH_TRAIN_ORCHESTRATOR.md` plus the artifacts in this directory for gated Ambitions 3.0 batch trains. F03.5, F13.5, and F16.5 are architecture checkpoint prompts; do not skip them when their triggers fire.

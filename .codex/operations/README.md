@@ -53,3 +53,7 @@ Index:
 - [`.codex/operations/ui-test-modernization-protocol.md`](ui-test-modernization-protocol.md)
 - [`.codex/operations/validation-policy.md`](validation-policy.md)
 - [`.codex/operations/worktree-protocol.md`](worktree-protocol.md)
+
+## Batch Train Orchestrator
+
+Use `docs/codex/AMBITIONS_3_0_BATCH_TRAIN_ORCHESTRATOR.md` plus the artifacts in this directory for gated Ambitions 3.0 batch trains. F03.5, F13.5, and F16.5 are architecture checkpoint prompts; do not skip them when their triggers fire.

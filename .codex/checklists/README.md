@@ -18,3 +18,7 @@ Index:
 - [`.codex/checklists/toolchain-readiness-checklist.md`](toolchain-readiness-checklist.md)
 - [`.codex/checklists/ui-change-checklist.md`](ui-change-checklist.md)
 - [`.codex/checklists/ui-test-contract-checklist.md`](ui-test-contract-checklist.md)
+
+## Batch Train Orchestrator
+
+Use `docs/codex/AMBITIONS_3_0_BATCH_TRAIN_ORCHESTRATOR.md` plus the artifacts in this directory for gated Ambitions 3.0 batch trains. F03.5, F13.5, and F16.5 are architecture checkpoint prompts; do not skip them when their triggers fire.

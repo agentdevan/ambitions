@@ -38,3 +38,7 @@ Start with:
 4. Choose one operation protocol.
 5. Choose one validation pack.
 6. Close out with evidence and next prompt.
+
+## Batch Train Orchestrator
+
+Use `docs/codex/AMBITIONS_3_0_BATCH_TRAIN_ORCHESTRATOR.md` plus the artifacts in this directory for gated Ambitions 3.0 batch trains. F03.5, F13.5, and F16.5 are architecture checkpoint prompts; do not skip them when their triggers fire.

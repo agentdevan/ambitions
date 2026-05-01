@@ -1,28 +1,21 @@
 # Current Run State
 
-- current task: F03 - Step Detail and recommendation explanation
-- task size: M
-- active mode: implementation
-- active primitive: Reality Rail + Recommendation Ledger foundation
-- active surface: Today
-- active context packs: .codex/context-packs/today-reality-rail-context.md; .codex/context-packs/ai-recommendation-context.md; .codex/context-packs/privacy-accessibility-context.md
-- active skills: repo-local Reality Rail Builder, Step Detail Builder, Recommendation Explanation Writer, Product Language Reviewer, Accessibility Label Writer, Privacy Projection Tester, Copy Guard Runner; ambitions-ios-surface-polisher used as the exposed SwiftUI surface skill fallback
-- active operation: add a Today-local lightweight Step Detail / recommendation explanation surface from Reality Rail rows and Start here without Step Session, Action Closure, Proof, Plan Life Suite, shell, workflow, dependency, or global identifier migration work
-- active validation packs: base-build-test-pack; copy-guard-pack; accessibility-pack; privacy-trust-pack; recommendation-eligibility-pack; ui-test-contract-pack for classification only
-- preflight: git status clean; branch main; HEAD cb1b80a0027ee1eabcdbaef6c2df72c64a58e097; latest commit cb1b80a0 Implement F02 Reality Rail visual states
-- task classification: Type Today UI/detail implementation; Primitive Reality Rail + Recommendation Ledger foundation; Surface Today; app code changes allowed only in Today UI/model/test/preview seams; workflow changes prohibited; dependency changes prohibited; release readiness claims prohibited
-- docs read: README.md; docs/README.md; AGENTS.md; MASTER_AMBITIONS_3_0_CODEX_PROMPT.md; AMBITIONS_3_0_CONTEXT_LOADING_AND_TASK_ROUTING.md; AMBITIONS_3_0_RUN_STATE_PROTOCOL.md; Source Of Truth Override; Front-End Redesign Index; Rebuild Operating Model; Documentation System Index; FAANG Team Operating Model; Task Width Gate; Primitive Architecture; Product Language System; Day Rail SwiftUI Build Spec; Recommendation Eligibility Engine; Recommendation Contract; Evidence Hierarchy; Personalization Consent Model; Privacy Threat Model; Signature Objects And Rail Grammar; Design System Primitives; Surface State Matrix; Current Implementation Gap Audit; BATCH_REGISTRY.md; CONTEXT_INDEX.md; Today/Reality Rail, AI Recommendation, and Privacy/Accessibility context packs; F01/F02 Today implementation and tests
-- files allowed: Native/Ambitions/Features/Today/**, Native/Ambitions/PreviewSupport/**, Native/AmbitionsTests/Today/**, Native/AmbitionsUITests/AmbitionsUITests.swift inspection-only unless focused Today coverage is safe, docs/codex/BATCH_REGISTRY.md, docs/codex/CONTEXT_INDEX.md, docs/audits/ambitions-3-0-f03-step-detail-recommendation-explanation-report.md, .codex/reports/current-run-state.md, docs/canon/Ambitions_3_0_Current_Implementation_Gap_Audit.md only if tracking truth requires it
-- files forbidden: Plan, Capture, Goals, You/Profile, shell architecture, widgets, Live Activities, App Intents, .github/workflows/**, dependency manifests, runtime dependency additions, Step Session, Action Closure Sheet, Proof / Receipt Ledger, Plan Life Suite, global Profile/Insights/Habits identifier migration
-- step detail presentation choice: Today-local SwiftUI sheet from `TodayScreen`, opened by `AmbitionsDayRailView` hero-card and row taps; no global routing or Step Session
-- tests to add/update: TodayViewModelTests for selection/detail state, deterministic explanation labels, private redaction, forbidden copy absence, Start now placeholder behavior, and closure/proof reservation; focused Today UI coverage only if safe without broad smoke churn
-- validation commands: scripts/validate-dev-tools.sh || true; scripts/run-doc-qa.sh || true; scripts/build-local.sh; focused Today xcodebuild tests; touched-path copy guard; git diff --check
-- stop conditions: source truth conflict that cannot be resolved from Ambitions 3.0 docs; compile issue requiring forbidden surface edits; dependency/workflow change required; Step Session/Action Closure/Proof scope pressure; pressure to claim release or FAANG handoff readiness
-- decisions made: preserve F02 state as the base; keep Start now visible but non-session behavior; keep FAANG handoff PARTIAL
-- tests run: preflight git status/branch/head/log; `xcodegen generate`; `scripts/validate-dev-tools.sh || true`; `scripts/run-doc-qa.sh || true`; `scripts/build-local.sh`; focused `TodayViewModelTests`; focused `TodayFreshGoalVisibilityTests`; focused `TodayShellIntegrationTests`; touched-path copy guard; `git diff --check`
-- failures: first `TodayViewModelTests` compile/test pass exposed F03 test expectation issues and one duplicate `DayRailRowSlot.title` extension, fixed before final green rerun; first parallel `TodayFreshGoalVisibilityTests` run hit simulator bootstrap before connection and passed when rerun alone; doc QA remains advisory due pre-existing markdown/deprecated-language/link backlog
-- open risks: full UI smoke remains known failing and out of scope; FAANG handoff remains PARTIAL; no manual VoiceOver/Dynamic Type/device proof will be claimed without evidence
-- implementation plan: add Today-local `DayRailStepDetailState`; derive privacy-safe detail copy from existing rail hero/row state; update `AmbitionsDayRailView` to open detail from Start here and Now/Next/Later rows; add `TodayStepDetailSheet` with identifiers; update preview fixtures for normal, row, private, and missing-duration states; extend TodayViewModelTests for deterministic copy, redaction, forbidden copy, Start now placeholder behavior, and reserved closure/proof slots; update tracking docs and F03 audit report; validate with requested focused packs
-- files touched: Native/Ambitions/Features/Today/TodayExecutionViewState.swift; Native/Ambitions/Features/Today/TodayPanels.swift; Native/Ambitions/Features/Today/TodayScreen.swift; Native/Ambitions/PreviewSupport/PreviewTodayScenarios.swift; Native/AmbitionsTests/Today/TodayViewModelTests.swift; docs/codex/BATCH_REGISTRY.md; docs/codex/CONTEXT_INDEX.md; docs/canon/Ambitions_3_0_Current_Implementation_Gap_Audit.md; docs/audits/ambitions-3-0-f03-step-detail-recommendation-explanation-report.md; .codex/reports/current-run-state.md
-- next phase: F04 Step Session rename/migration and routing
-- last checkpoint: 2026-04-30 F03 implementation and validation complete; staging, commit, and push pending
+- current task: Batch Train Orchestrator setup
+- task size: L
+- active mode: Codex OS / orchestration / architecture governance docs and scripts
+- active primitive: Codex operating system
+- active surface: none; app behavior changes prohibited
+- active context pack: Ambitions 3.0 source stack plus batch train orchestrator artifacts
+- active skill: repo-truth-enforcer
+- active operation: create gated batch-train orchestrator and architecture gates
+- active validation pack: batch-train gate pack; architecture hygiene pack; doc QA advisory
+- docs read: Ambitions 3.0 source stack, run-state protocol, task-width gate, F01-F03 evidence, Today architecture-risk files summarized
+- files allowed: docs/codex, docs/canon architecture docs, docs/audits orchestrator report, .codex operations/templates/playbooks/checklists/validation/reports, scripts batch-train helpers, top-level/index docs
+- files forbidden: app behavior changes, .github/workflows/**, runtime dependencies, paid services, F04+ product implementation during setup
+- decisions made: F03.5 is next and required because TodayExecutionViewState.swift exceeds 1000 lines; FAANG handoff remains PARTIAL
+- tests run: pending final validation
+- failures: none yet for setup; known full UI smoke failures remain out of scope
+- open risks: doc QA has pre-existing advisory backlog; Part 2 may not start unless setup commits and pushes Green
+- next phase: validate orchestrator setup
+- stop conditions: build failure, focused setup script failure that invalidates gates, forbidden file changes, unclear git state, commit/push failure
+- last checkpoint: orchestrator artifacts generated
