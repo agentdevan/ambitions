@@ -233,10 +233,20 @@ struct ProfileMemoryPattern: Identifiable, Sendable, Equatable {
     let state: AmbitionVisualState
 }
 
+struct ProfilePersonalizationConsentState: Sendable, Equatable {
+    let title: String
+    let summary: String
+    let sourceLabel: String
+    let sensitiveMemoryLabel: String
+    let hiddenMemoryLabel: String
+    let controlLabel: String
+}
+
 struct ProfileMemoryControlState: Sendable, Equatable {
     let title: String
     let subtitle: String
     let items: [SettingsItem]
+    let consent: ProfilePersonalizationConsentState
     let groups: [ProfileMemoryGroup]
     let narrativeMemories: [ProfileNarrativeMemory]
     let conservativePatterns: [ProfileMemoryPattern]

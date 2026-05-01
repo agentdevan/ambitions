@@ -342,6 +342,14 @@ struct PreviewFixtures: Sendable {
                     SettingsItem(id: "profile-memory-corrections", title: "Corrections and teaching", subtitle: "User-confirmed corrections can adjust future explanations where existing teaching signals support it.", icon: "slider.horizontal.3", valueLabel: "2 local"),
                     SettingsItem(id: "profile-memory-forget", title: "Forget or clear memory", subtitle: "Destructive memory deletion is not exposed here because safe review, confirmation, and undo coverage are not complete.", icon: "trash.slash", valueLabel: "Unavailable")
                 ],
+                consent: ProfilePersonalizationConsentState(
+                    title: "Personalization consent",
+                    summary: "Ambitions can use current local memory to explain and suggest, but stronger memory changes stay reviewable.",
+                    sourceLabel: "Based on local records",
+                    sensitiveMemoryLabel: "Sensitive memory requires approval",
+                    hiddenMemoryLabel: "No hidden memory creation",
+                    controlLabel: "You are in control"
+                ),
                 groups: [
                     ProfileMemoryGroup(
                         id: "memory-group-current",

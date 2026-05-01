@@ -337,6 +337,11 @@ final class ProfileFeatureServiceTests: XCTestCase {
         let actions = items.flatMap(\.actions)
 
         XCTAssertEqual(dashboard.memoryControls.title, "What Ambitions Knows")
+        XCTAssertEqual(dashboard.memoryControls.consent.title, "Personalization consent")
+        XCTAssertEqual(dashboard.memoryControls.consent.sourceLabel, "Based on local records")
+        XCTAssertEqual(dashboard.memoryControls.consent.sensitiveMemoryLabel, "Sensitive memory requires approval")
+        XCTAssertEqual(dashboard.memoryControls.consent.hiddenMemoryLabel, "No hidden memory creation")
+        XCTAssertEqual(dashboard.memoryControls.consent.controlLabel, "You are in control")
         XCTAssertEqual(groups.map(\.id), ["memory-group-current", "memory-group-corrections"])
         XCTAssertTrue(items.contains(where: {
             $0.id == "memory-item-ledger" &&

@@ -777,6 +777,8 @@ private struct ProfileMemoryControlsCard: View {
                     }
                 }
 
+                ProfilePersonalizationConsentPanel(consent: memoryControls.consent)
+
                 ForEach(memoryControls.groups) { group in
                     VStack(alignment: .leading, spacing: theme.spacing.sm) {
                         SectionHeader(
@@ -845,6 +847,43 @@ private struct ProfileMemoryControlsCard: View {
             value: "Local memory groups, freshness labels, and safe correction controls.",
             hint: "Review what Ambitions stores and how it can be corrected."
         )
+    }
+}
+
+private struct ProfilePersonalizationConsentPanel: View {
+    @Environment(\.ambitionTheme) private var theme
+
+    let consent: ProfilePersonalizationConsentState
+
+    var body: some View {
+        VStack(alignment: .leading, spacing: theme.spacing.sm) {
+            SectionHeader(
+                eyebrow: "Consent",
+                title: consent.title,
+                subtitle: consent.summary
+            )
+
+            ScrollView(.horizontal, showsIndicators: false) {
+                HStack(spacing: theme.spacing.xs) {
+                    TagPill(consent.sourceLabel, icon: "internaldrive", state: .default)
+                    TagPill(consent.sensitiveMemoryLabel, icon: "hand.raised", state: .warning)
+                    TagPill(consent.hiddenMemoryLabel, icon: "eye.slash", state: .selected)
+                    TagPill(consent.controlLabel, icon: "person.crop.circle", state: .success)
+                }
+            }
+        }
+        .padding(theme.spacing.md)
+        .background(
+            RoundedRectangle(cornerRadius: theme.radius.lg, style: .continuous)
+                .fill(theme.colors.surfaceOverlay)
+        )
+        .overlay(
+            RoundedRectangle(cornerRadius: theme.radius.lg, style: .continuous)
+                .stroke(theme.colors.strokeSubtle, lineWidth: 1)
+        )
+        .accessibilityElement(children: .combine)
+        .accessibilityIdentifier("profile.personalization-consent")
+        .accessibilityLabel("\(consent.title). \(consent.summary). \(consent.controlLabel).")
     }
 }
 

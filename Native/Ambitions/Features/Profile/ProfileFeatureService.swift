@@ -1030,6 +1030,14 @@ private extension RepositoryBackedProfileService {
                     valueLabel: "Unavailable"
                 )
             ],
+            consent: ProfilePersonalizationConsentState(
+                title: "Personalization consent",
+                summary: "Ambitions can use current local memory to explain and suggest, but stronger memory changes stay reviewable.",
+                sourceLabel: "Based on local records",
+                sensitiveMemoryLabel: "Sensitive memory requires approval",
+                hiddenMemoryLabel: "No hidden memory creation",
+                controlLabel: "You are in control"
+            ),
             groups: [
                 ProfileMemoryGroup(
                     id: "memory-group-current",
