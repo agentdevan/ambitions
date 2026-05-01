@@ -121,6 +121,47 @@ final class SmartAttachmentServiceTests: XCTestCase {
         XCTAssertEqual(result.captureAssumptionSummary, "Saved as a Plan item without scheduling or calendar changes.")
     }
 
+    func testF08PlacementPreviewShowsDestinationConsequenceAndPrivacy() {
+        let service = DefaultSmartAttachmentService()
+
+        let result = service.route(
+            SmartAttachmentInput(rawText: "Book dentist"),
+            candidates: [],
+            maxCandidateCount: 5
+        )
+        let preview = result.placementPreview
+
+        XCTAssertEqual(preview.originalText, "Book dentist")
+        XCTAssertEqual(preview.postInputStateTitle, "Suggested Place")
+        XCTAssertEqual(preview.suggestedDestination, "Task · Today")
+        XCTAssertEqual(preview.objectTypeLabel, "Task")
+        XCTAssertEqual(preview.appearanceLabel, "Today")
+        XCTAssertTrue(preview.affectsToday)
+        XCTAssertEqual(preview.consequenceLabel, "Adds a visible Task to Today after you confirm.")
+        XCTAssertEqual(preview.privacyLabel, "Private item")
+        XCTAssertEqual(preview.primaryActionTitle, "Place it")
+        XCTAssertEqual(preview.changeActionTitle, "Change")
+        XCTAssertEqual(preview.safeActionTitle, "Decide later")
+    }
+
+    func testF08NeedsPlacePreviewPreservesSafePlacementWithoutForcingStructure() {
+        let service = DefaultSmartAttachmentService()
+
+        let result = service.route(
+            SmartAttachmentInput(rawText: "NASA"),
+            candidates: [],
+            maxCandidateCount: 5
+        )
+        let preview = result.placementPreview
+
+        XCTAssertEqual(preview.postInputStateTitle, "Needs a Decision")
+        XCTAssertEqual(preview.suggestedDestination, "Needs a Place")
+        XCTAssertEqual(preview.objectTypeLabel, "Unplaced capture")
+        XCTAssertEqual(preview.appearanceLabel, "Needs a Place")
+        XCTAssertFalse(preview.affectsToday)
+        XCTAssertEqual(preview.consequenceLabel, "Saved safely without forcing structure.")
+    }
+
     func testD12CaptureAdapterCreatesRequestFromSmartAttachmentDecision() {
         let adapter = SmartAttachmentCaptureAdapter()
 

@@ -63,10 +63,15 @@ struct CaptureDraftRouteChoice: Identifiable, Sendable, Equatable {
 }
 
 struct CaptureDraftRoutePreview: Sendable, Equatable {
+    let originalText: String
     let postInputStateTitle: String
     let receiptTitle: String
     let summary: String
     let destinationLabel: String
+    let objectTypeLabel: String
+    let appearanceLabel: String
+    let consequenceLabel: String
+    let privacyLabel: String
     let primaryActionTitle: String
     let changeActionTitle: String
     let safeActionTitle: String
@@ -79,10 +84,15 @@ struct CaptureDraftRoutePreview: Sendable, Equatable {
 
     var visibleCopy: String {
         ([
+            originalText,
             postInputStateTitle,
             receiptTitle,
             summary,
             destinationLabel,
+            objectTypeLabel,
+            appearanceLabel,
+            consequenceLabel,
+            privacyLabel,
             primaryActionTitle,
             changeActionTitle,
             safeActionTitle,
@@ -355,14 +365,20 @@ final class CapturesViewModel {
 
     private func preview(from decision: SmartAttachmentCaptureDecision) -> CaptureDraftRoutePreview {
         let choices = clarificationChoices(from: decision)
+        let placementPreview = decision.placementPreview
         return CaptureDraftRoutePreview(
-            postInputStateTitle: postInputStateTitle(for: decision),
+            originalText: placementPreview.originalText,
+            postInputStateTitle: placementPreview.postInputStateTitle,
             receiptTitle: decision.receiptLine,
             summary: decision.summary,
-            destinationLabel: decision.destinationLabel,
-            primaryActionTitle: "Place it",
-            changeActionTitle: "Change",
-            safeActionTitle: "Decide later",
+            destinationLabel: placementPreview.suggestedDestination,
+            objectTypeLabel: placementPreview.objectTypeLabel,
+            appearanceLabel: placementPreview.appearanceLabel,
+            consequenceLabel: placementPreview.consequenceLabel,
+            privacyLabel: placementPreview.privacyLabel,
+            primaryActionTitle: placementPreview.primaryActionTitle,
+            changeActionTitle: placementPreview.changeActionTitle,
+            safeActionTitle: placementPreview.safeActionTitle,
             semanticState: decision.result.resultState.rawValue,
             clarificationQuestion: decision.clarification?.question,
             choices: choices,
@@ -370,17 +386,6 @@ final class CapturesViewModel {
             accessibilityValue: decision.accessibilityValue,
             accessibilityHint: decision.accessibilityHint
         )
-    }
-
-    private func postInputStateTitle(for decision: SmartAttachmentCaptureDecision) -> String {
-        switch decision.result.resultState {
-        case .needsClarification:
-            return "Needs a Decision"
-        case .savedToNeedsPlace, .failedSafely:
-            return "Needs a Place"
-        case .savedStandalone, .attached:
-            return "Suggested Place"
-        }
     }
 
     private func clarificationChoices(from decision: SmartAttachmentCaptureDecision) -> [CaptureDraftRouteChoice] {

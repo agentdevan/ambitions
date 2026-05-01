@@ -12,7 +12,8 @@ struct SmartAttachmentCaptureDecision: Sendable, Equatable {
         return result.captureAssumptionSummary
     }
     var routeType: SmartAttachmentRouteType { result.selectedCandidate?.target.routeType ?? .idea }
-    var destinationLabel: String { result.selectedCandidate?.target.displaySegments.joined(separator: " · ") ?? "Needs a Place" }
+    var destinationLabel: String { placementPreview.suggestedDestination }
+    var placementPreview: SmartAttachmentPlacementPreview { result.placementPreview }
     var clarification: SmartAttachmentClarification? { result.clarification }
     var actions: [SmartAttachmentActionLabel] { result.actions }
     var privacyLevel: ActionReceiptPrivacyLevel { result.privacyLevel }
@@ -22,7 +23,7 @@ struct SmartAttachmentCaptureDecision: Sendable, Equatable {
     }
 
     var accessibilityValue: String {
-        "\(receiptLine). \(destinationLabel)."
+        "\(receiptLine). \(placementPreview.suggestedDestination). \(placementPreview.consequenceLabel)"
     }
 
     var accessibilityHint: String? {

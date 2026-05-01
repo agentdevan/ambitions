@@ -15,6 +15,7 @@ struct CaptureDraftRoutePreviewCard: View {
         AppCard(state: visualState) {
             VStack(alignment: .leading, spacing: theme.spacing.sm) {
                 routeSummary
+                placementDetails
                 clarificationQuestion
                 routeChoices
                 routeCommands
@@ -51,6 +52,24 @@ struct CaptureDraftRoutePreviewCard: View {
             }
             .frame(maxWidth: .infinity, alignment: .leading)
         }
+    }
+
+    private var placementDetails: some View {
+        VStack(alignment: .leading, spacing: theme.spacing.xxs) {
+            Text(preview.objectTypeLabel)
+                .font(theme.typography.caption)
+                .foregroundStyle(theme.colors.textPrimary)
+            Text(preview.appearanceLabel)
+                .font(theme.typography.caption)
+                .foregroundStyle(theme.colors.textSecondary)
+            Text(preview.consequenceLabel)
+                .font(theme.typography.caption)
+                .foregroundStyle(theme.colors.textSecondary)
+            Text(preview.privacyLabel)
+                .font(theme.typography.caption)
+                .foregroundStyle(theme.colors.textTertiary)
+        }
+        .accessibilityElement(children: .combine)
     }
 
     @ViewBuilder
