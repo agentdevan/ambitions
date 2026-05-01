@@ -1,26 +1,26 @@
 # Current Run State
 
-- current task: F26 App Store / Marketing / Demo Truth
+- current task: F27 Final FAANG Handoff Gate Rerun
 - task size: XL release / architecture / product quality train
-- active mode: F25 Green; F26 ready to begin
+- active mode: F26 Green pending commit/push; F27 blocked until F26 commit/push
 - active train: F17-F30 FAANG Handoff Completion Train
-- active batch: F26 App Store / Marketing / Demo Truth
+- active batch: F27 Final FAANG Handoff Gate Rerun
 - active standard: 3.0-as-baseline / human-made active repo
 - active primitive: Release / Market Proof System, Ambitions Operating Shell, product language, repo hygiene, handoff readiness
-- active surface: App Store truth packet, demo truth, public claim mapping, privacy/accessibility/ADHD/release claim limits
+- active surface: file inventory, generated artifact scan, legacy language scan, internal identifier scan, build/test/doc QA, traceability, release-claim truth, active repo baseline
 - active context pack: Ambitions 3.0 source stack, Batch Train Orchestrator, baseline policy, human-made codebase standard, active history archive policy, release readiness, handoff gate, UI Test Contract, F21/F21.5 reports, F22 report, Batch Registry, Context Index
 - active skill: repo-truth-enforcer, ios-qa-regression-checker, release-hardening
-- active operations: gated release train continuation; F25 device/performance/state restoration/edge case QA complete; F26 ready after F25 commit/push; Green/Yellow/Red stop discipline
-- active validation pack: marketing/demo source inspection, claim-to-evidence mapping, local build as needed, diff check
+- active operations: gated release train continuation; F26 App Store / Marketing / Demo Truth complete; F27 ready after F26 commit/push; Green/Yellow/Red stop discipline
+- active validation pack: F27 handoff gate rerun, build/test/doc QA, architecture scan, release claim truth, diff check
 - docs read: README, docs README, canon README, AGENTS, 3.0 source override, front-end redesign index, rebuild operating model, documentation system index, primitive architecture, product language system, repo hygiene policy, release readiness gates, FAANG handoff gate, SwiftUI architecture standard, feature boundary constitution, UI Test Contract, train prompt, train manifest, Batch Registry, Context Index, F21 and F21.5 reports
 - files allowed: `README.md`, `AGENTS.md`, `docs/**`, `.codex/reports/**`, `Native/**`, `AppUI/**`, `Sources/**`
 - files forbidden: `.github/workflows/**`, runtime dependency manifests, generated output, broad behavior changes, release readiness claims without F27 evidence
-- files touched: `.codex/reports/current-run-state.md`, `.codex/reports/current-batch-train-state.md`, `docs/audits/ambitions-3-0-f25-device-performance-edge-case-qa-report.md`
-- decisions made: F25 is Green on simulator/source evidence; physical-device smoke, high-volume real-device scrolling, platform-rendered external surfaces, TestFlight, and App Store readiness remain unclaimed
-- tests run: F25 focused suite passed 94 selected tests with 0 failures; `scripts/build-local.sh` passed
+- files touched: `docs/marketing/Ambitions_3_0_App_Store_Truth_Packet.md`, `docs/marketing/Ambitions_3_0_Demo_Script.md`, `docs/audits/ambitions-3-0-f26-app-store-demo-truth-report.md`, `docs/README.md`, `.codex/reports/current-run-state.md`, `.codex/reports/current-batch-train-state.md`
+- decisions made: F26 is Green on claim-to-evidence mapping; App Store, TestFlight, physical-device, public accessibility, final release, and RC lock claims remain unavailable
+- tests run: F26 focused release-truth suite passed 9 selected tests with 0 failures; `git diff --check` passed
 - failures: none in F25
 - accepted Yellow: pre-existing markdownlint backlog; pre-existing historical docs clearly marked archive/supporting; pre-existing architecture warnings not assessed in F22.5; compatibility seams intentionally preserved; physical-device proof unavailable with no physical-device claim
-- open risks: physical-device proof unavailable; large-data real-device performance unverified; platform-rendered external surfaces unverified; FAANG handoff remains PARTIAL until F27 passes
-- next phase: run F26 App Store / Marketing / Demo Truth if F25 commit/push completes cleanly
+- open risks: final screenshots, live URLs, signed archive/App Store Connect validation, physical-device proof, public accessibility verification, platform-rendered external surfaces, and FAANG handoff remain unclaimed
+- next phase: run F26 focused validation, commit/push, then run F27 Final FAANG Handoff Gate Rerun
 - stop conditions: build failure, focused validation failure, forbidden file touch, runtime dependency addition, workflow touch, untrustworthy validation, active source-truth old-canon ambiguity, generated junk committed, commit/push failure
-- last checkpoint: F25 Green pending commit/push after focused tests and local build passed
+- last checkpoint: F26 Green pending commit/push after focused release-truth tests and diff check passed

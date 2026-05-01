@@ -123,6 +123,8 @@ Archived and superseded material is indexed from [archive/README.md](archive/REA
 ## Native build, release, and Codex docs
 
 - [native-build-and-release.md](native-build-and-release.md)
+- [marketing/Ambitions_3_0_App_Store_Truth_Packet.md](marketing/Ambitions_3_0_App_Store_Truth_Packet.md)
+- [marketing/Ambitions_3_0_Demo_Script.md](marketing/Ambitions_3_0_Demo_Script.md)
 - [codex/BATCH_REGISTRY.md](codex/BATCH_REGISTRY.md)
 - [codex/CONTEXT_INDEX.md](codex/CONTEXT_INDEX.md)
 - [codex/FAANG_HANDOFF_REPO_CLEANUP_PROMPT.md](codex/FAANG_HANDOFF_REPO_CLEANUP_PROMPT.md)
@@ -171,4 +173,4 @@ Historical docs remain useful only when labeled as archive, supporting context, 
 
 ## Batch Train Orchestrator
 
-Ambitions 3.0 batch trains are governed by [codex/AMBITIONS_3_0_BATCH_TRAIN_ORCHESTRATOR.md](codex/AMBITIONS_3_0_BATCH_TRAIN_ORCHESTRATOR.md). The active completion train is [codex/batch-trains/F17_F30_FAANG_HANDOFF_COMPLETION_TRAIN.md](codex/batch-trains/F17_F30_FAANG_HANDOFF_COMPLETION_TRAIN.md). F17 repair, F18, F19, F20, F21/F21.5, F22, and F22.5 are Green by current train evidence. F22.7 Human-Made Active Repo Hygiene / 3.0-As-Baseline Gate is mandatory before F23. FAANG handoff remains PARTIAL unless the F27 handoff gate is explicitly re-run and passes.
+Ambitions 3.0 batch trains are governed by [codex/AMBITIONS_3_0_BATCH_TRAIN_ORCHESTRATOR.md](codex/AMBITIONS_3_0_BATCH_TRAIN_ORCHESTRATOR.md). The active completion train is [codex/batch-trains/F17_F30_FAANG_HANDOFF_COMPLETION_TRAIN.md](codex/batch-trains/F17_F30_FAANG_HANDOFF_COMPLETION_TRAIN.md). F17 repair, F18, F19, F20, F21/F21.5, F22, F22.5, F22.7, F23, F24, F25, and F26 are Green by current train evidence. FAANG handoff remains PARTIAL unless the F27 handoff gate is explicitly re-run and passes.
