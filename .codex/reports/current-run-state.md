@@ -1,8 +1,8 @@
 # Current Run State
 
-- current task: F17-F30 FAANG Handoff Completion Train setup
+- current task: F17 Shell / Meridian planning readiness audit
 - task size: XL release / architecture / product quality train
-- active mode: Part 1 setup; Part 2 may start only after setup commit and push
+- active mode: Part 2 F17 planning; Yellow stop
 - active primitive: Ambitions Operating Shell, External Surface Projection, Accessibility / ADHD Control Layer, Trust & Memory Control Plane, Release / Market Proof System
 - active surface: train docs, gates, prompts, reports, and F17 planning entry point
 - active context pack: Ambitions 3.0 source stack, Batch Train Orchestrator, release readiness, handoff gate, UI Test Contract, SwiftUI architecture standard, privacy/threat/consent docs, F12-F16.5 report
@@ -12,12 +12,12 @@
 - docs read: README, docs README, canon README, source override, front-end redesign index, rebuild operating model, documentation system index, primitive architecture, product language system, UI Test Contract, SwiftUI state contract, feature boundary constitution, state projection rules, release readiness gates, FAANG handoff gate, repo hygiene policy, privacy threat model, personalization consent model, evidence hierarchy, Beyond 3.0 continuity rules, Batch Train Orchestrator, train runner prompt, context loading/routing, run-state protocol, Mac toolchain setup, F12-F16.5 report, orchestrator report, FAANG handoff report, Batch Registry, Context Index
 - files allowed: docs/codex/**, docs/canon tracking docs, docs/audits/**, .codex/reports/**
 - files forbidden: .github/workflows/**, runtime dependency manifests, app implementation files before F17 setup is committed and pushed, release readiness claims without F27 evidence
-- files touched: train manifest, train prompt, F17-F30 batch prompts, active indexes, release/handoff tracking docs, run-state files, setup report
-- decisions made: F17 is the current entry point; F18 remains blocked until F17 Green; F27 is the only final FAANG handoff gate; F28 is conditional repair; F29/F30 are packaging/continuation only
+- files touched: F17 readiness report and run-state files
+- decisions made: F17 is Yellow because shell feature-flag ownership and Meridian implementation ownership are not clean enough for automatic F18 implementation
 - tests run: pre-edit dev tools PASS; batch preflight PASS; batch gate check PASS; architecture scan advisory/PARTIAL with pre-existing warnings; build PASS on iPhone 17
 - failures: none blocking so far
 - accepted Yellow: doc QA advisory backlog unchanged; known full UI smoke failures before F21; pre-existing architecture extraction warnings unchanged; documented compatibility seams unchanged; legacy historical docs marked non-active
-- open risks: setup doc QA may surface pre-existing backlog; F17 planning may still discover shell ambiguity; no device/App Store/public accessibility claim is available
-- next phase: validate setup, commit, push, then auto-start F17 only if setup commit/push is Green
+- open risks: F18 needs a narrow repair/decision pass before implementation; no device/App Store/public accessibility claim is available
+- next phase: commit and push F17 Yellow stop report; do not run F18
 - stop conditions: build failure, focused validation failure, forbidden file touch, runtime dependency addition, workflow touch, untrustworthy validation, commit/push failure
-- last checkpoint: F17-F30 setup docs created and index updates in progress
+- last checkpoint: F17 source inspection completed; F17 report classifies Yellow
