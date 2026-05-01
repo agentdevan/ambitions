@@ -2697,6 +2697,9 @@ private extension RepositoryBackedGoalsService {
         return GoalDetailMissionControlState(
             currentTruth: currentTruth,
             primaryNextMove: nextStep,
+            sourceLabel: "Based on this goal",
+            proofBoundaryLabel: evidenceItems.isEmpty ? "Proof is visible when saved" : "Proof stays attached to this goal",
+            ownershipLabel: "You own the path",
             breadcrumb: goalDetailBreadcrumb(context: context, title: title),
             lanes: [
                 GoalDetailMissionLaneState(

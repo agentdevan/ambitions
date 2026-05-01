@@ -764,6 +764,9 @@ enum PreviewGoalsScenarios {
                 detail: nextAvailable ? "Keep this as the primary contained Step." : "This goal is not asking for action.",
                 isAvailable: nextAvailable
             ),
+            sourceLabel: "Based on this goal",
+            proofBoundaryLabel: hasProof ? "Proof stays attached to this goal" : "Proof is visible when saved",
+            ownershipLabel: "You own the path",
             breadcrumb: GoalDetailBreadcrumbState(title: "Path", labels: ["Career", title], fallbackUsed: false),
             lanes: [
                 GoalDetailMissionLaneState(kind: .overview, title: "Overview", headline: timelineKind.title, summary: currentTruth, detail: "Next: \(nextTitle)", badgeTitle: "State", systemImage: "rectangle.and.text.magnifyingglass", state: .selected),

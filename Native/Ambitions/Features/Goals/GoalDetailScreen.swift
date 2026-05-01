@@ -297,7 +297,7 @@ private struct GoalDetailMissionControlCard: View {
         AppCard(state: .selected) {
             VStack(alignment: .leading, spacing: theme.spacing.md) {
                 VStack(alignment: .leading, spacing: theme.spacing.xxs) {
-                    Text("Goal Detail")
+                    Text("Goal Mission Control")
                         .font(theme.typography.micro)
                         .foregroundStyle(theme.colors.accentWarm)
                     Text(state.currentTruth)
@@ -306,6 +306,14 @@ private struct GoalDetailMissionControlCard: View {
                     Text(state.primaryNextMove.title)
                         .font(theme.typography.body)
                         .foregroundStyle(theme.colors.textSecondary)
+                }
+
+                ScrollView(.horizontal, showsIndicators: false) {
+                    HStack(spacing: theme.spacing.xs) {
+                        TagPill(state.sourceLabel, icon: "scope", state: .default)
+                        TagPill(state.proofBoundaryLabel, icon: "checkmark.seal", state: .selected)
+                        TagPill(state.ownershipLabel, icon: "person.crop.circle", state: .default)
+                    }
                 }
 
                 LazyVGrid(columns: [GridItem(.adaptive(minimum: 154), spacing: theme.spacing.sm)], alignment: .leading, spacing: theme.spacing.sm) {

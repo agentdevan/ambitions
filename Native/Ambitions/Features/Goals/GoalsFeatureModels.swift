@@ -1318,6 +1318,9 @@ struct GoalDetailArchiveState: Sendable {
 struct GoalDetailMissionControlState: Sendable {
     let currentTruth: String
     let primaryNextMove: GoalNextVisibleStep
+    let sourceLabel: String
+    let proofBoundaryLabel: String
+    let ownershipLabel: String
     let breadcrumb: GoalDetailBreadcrumbState
     let lanes: [GoalDetailMissionLaneState]
     let timeline: GoalDetailTimelineState
