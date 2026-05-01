@@ -13,7 +13,7 @@ Ambitions 3.0 is the active source of truth. This file defines Codex read order,
 - F03 Step Detail work is now represented as a Today-local sheet opened from the Reality Rail `Start here` card and Now/Next/Later rows, with grounded recommendation explanation, duration/source/context labels, private redaction, and stable `TodayStepDetail*` accessibility identifiers.
 - F03.5 Today Execution State Contract Hardening is complete: `TodayExecutionViewState.swift` is now a small aggregate state contract, while Day Rail state, Step Detail state, projection helpers, projector logic, compatibility helpers, and screen-contract snapshot live in dedicated Today-owned files.
 - F04 Step Session, F05 Action Closure / Still Counts, F06 Proof & Receipt Ledger, F07 Capture Composer cleanup, F08 Placement Resolver, F09 Capture-to-Goal / Grow into Goal, F10 Plan Life Suite foundation, F11 Day Shape / Week Shape, F12 Reflow / Recovery / Decisions, F13 Goals / Goal Mission Control, F13.5 Goals / You / Trust architecture checkpoint, F14 You / Trust / What Ambitions Knows, F15 Legacy Identifier Migration, and F16 UI Test Modernization are complete.
-- F16.5 SwiftUI Architecture / State Contract Hardening checkpoint is complete. The active completion train is F17-F30 FAANG Handoff Completion Train. F17 repair, F18, F19, F20, and F21/F21.5 are Green by current report evidence. F21.5 classified the 8 F21 UI smoke failures, modernized UI smoke readiness/product-contract assertions, and reran full local smoke with `779` unit tests and `29` UI tests passing. Next active 3.0 continuation is F22 Product Language + Active Repo Baseline Reset, followed by F22.5 if triggered and mandatory F22.7 Human-Made Active Repo Hygiene / 3.0-As-Baseline Gate. FAANG handoff remains PARTIAL until F27 passes.
+- F16.5 SwiftUI Architecture / State Contract Hardening checkpoint is complete. The active completion train is F17-F30 FAANG Handoff Completion Train. F17 repair, F18, F19, F20, F21/F21.5, F22, and F22.5 are Green by current report evidence. F21.5 classified the 8 F21 UI smoke failures, modernized UI smoke readiness/product-contract assertions, and reran full local smoke with `779` unit tests and `29` UI tests passing. F22 reset active product language and baseline policy; F22.5 closed the active broken-link trigger. Next active 3.0 continuation is mandatory F22.7 Human-Made Active Repo Hygiene / 3.0-As-Baseline Gate before F23. FAANG handoff remains PARTIAL until F27 passes.
 
 ## Required Read Order
 
@@ -79,7 +79,7 @@ For non-trivial work, read in this order:
 
 ## Batch Train Context
 
-Batch-train execution uses `docs/codex/AMBITIONS_3_0_BATCH_TRAIN_ORCHESTRATOR.md`, `docs/codex/batch-trains/README.md`, `.codex/reports/current-batch-train-state.md`, and the matching validation/operation packs. F03.5, F13.5, and F16.5 are complete. The active train manifest is `docs/codex/batch-trains/F17_F30_FAANG_HANDOFF_COMPLETION_TRAIN.md`; the current next batch is F22 Product Language + Active Repo Baseline Reset after the F21.5 Green repair and F21 Green reclassification. F22.7 and F27.5 are mandatory checkpoints.
+Batch-train execution uses `docs/codex/AMBITIONS_3_0_BATCH_TRAIN_ORCHESTRATOR.md`, `docs/codex/batch-trains/README.md`, `.codex/reports/current-batch-train-state.md`, and the matching validation/operation packs. F03.5, F13.5, and F16.5 are complete. The active train manifest is `docs/codex/batch-trains/F17_F30_FAANG_HANDOFF_COMPLETION_TRAIN.md`; the current next batch is mandatory F22.7 Human-Made Active Repo Hygiene / 3.0-As-Baseline Gate after F22 and F22.5 Green evidence. F27.5 is a mandatory maintainability checkpoint after F27 PASS or after F28 repairs make F27 PASS.
 
 ## F-Series Audit Reports
 
@@ -107,3 +107,6 @@ Batch-train execution uses `docs/codex/AMBITIONS_3_0_BATCH_TRAIN_ORCHESTRATOR.md
 - `docs/audits/ambitions-3-0-f20-external-surfaces-privacy-projection-report.md`
 - `docs/audits/ambitions-3-0-f21-full-ui-smoke-stabilization-report.md`
 - `docs/audits/ambitions-3-0-f17-repair-and-handoff-train-resume-report.md`
+- `docs/audits/ambitions-3-0-f21-5-ui-flake-reliability-hardening-report.md`
+- `docs/audits/ambitions-3-0-f22-product-language-baseline-reset-report.md`
+- `docs/audits/ambitions-3-0-f22-5-doc-qa-backlog-closure-report.md`
