@@ -12,6 +12,7 @@ struct PlanLifeSuiteShapeState: Identifiable, Sendable {
     let title: String
     let question: String
     let summary: String
+    let facts: [String]
     let sourceLabel: String
     let boundaryLabel: String
     let visualState: AmbitionVisualState
@@ -58,6 +59,7 @@ struct PlanLifeSuiteProjector: Sendable {
             question: "What can this day honestly hold?",
             summary: today.map { "\($0.weekdayLabel) has \($0.roomLabel.lowercased()) and \($0.blocks.count) planned block\($0.blocks.count == 1 ? "" : "s")." }
                 ?? "No day shape is loaded yet.",
+            facts: dayShapeFacts(today),
             sourceLabel: "Based on your plan",
             boundaryLabel: "No silent replanning",
             visualState: today?.level.visualState ?? .default
@@ -82,6 +84,11 @@ struct PlanLifeSuiteProjector: Sendable {
             summary: openCaptureCount > 0
                 ? "\(summary) \(openCaptureCount) capture\((openCaptureCount == 1) ? "" : "s") still need a place."
                 : summary,
+            facts: weekShapeFacts(
+                weekDays: weekDays,
+                pressuredDays: pressuredDays,
+                openCaptureCount: openCaptureCount
+            ),
             sourceLabel: "Based on goals and captures",
             boundaryLabel: "Suggestions require confirmation",
             visualState: pressuredDays > 0 ? .warning : .selected
@@ -96,9 +103,36 @@ struct PlanLifeSuiteProjector: Sendable {
             summary: activeGoalCount == 0
                 ? "Life Shape is quiet until active goals give Plan something to coordinate."
                 : "\(activeGoalCount) active goal\((activeGoalCount == 1) ? "" : "s") shape the current life plan.",
+            facts: [
+                activeGoalCount == 0 ? "No active goals shaping life view yet." : "\(activeGoalCount) active goal\((activeGoalCount == 1) ? "" : "s") included.",
+                "Life Shape stays inside Plan."
+            ],
             sourceLabel: "Based on active goals",
             boundaryLabel: "Life view, broader than time slots",
             visualState: activeGoalCount == 0 ? .default : .selected
         )
+    }
+
+    private func dayShapeFacts(_ today: PlanElasticWeekDayState?) -> [String] {
+        guard let today else {
+            return ["Manual shaping is available.", "Nothing moves without review."]
+        }
+        return [
+            today.capacityLabel,
+            today.openWindow?.title ?? "No open window is suggested yet.",
+            today.blocks.isEmpty ? "No planned blocks attached." : "\(today.blocks.count) planned block\((today.blocks.count == 1) ? "" : "s") attached."
+        ]
+    }
+
+    private func weekShapeFacts(
+        weekDays: [PlanElasticWeekDayState],
+        pressuredDays: Int,
+        openCaptureCount: Int
+    ) -> [String] {
+        [
+            "\(pressuredDays) pressured day\((pressuredDays == 1) ? "" : "s") visible.",
+            openCaptureCount == 1 ? "1 capture needs a place." : "\(openCaptureCount) captures need a place.",
+            "\(weekDays.count) day\((weekDays.count == 1) ? "" : "s") included in this week."
+        ]
     }
 }

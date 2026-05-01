@@ -12,8 +12,8 @@ Ambitions 3.0 is the active source of truth. This file defines Codex read order,
 - F01/F02 Reality Rail work is now represented in Today state and UI evidence: Today renders a focused Reality Rail with `Start here`, `Start now`, Now/Next/Later, source/context labels, duration labels, privacy-safe projection, empty/unavailable copy, and reserved closure/proof slots.
 - F03 Step Detail work is now represented as a Today-local sheet opened from the Reality Rail `Start here` card and Now/Next/Later rows, with grounded recommendation explanation, duration/source/context labels, private redaction, and stable `TodayStepDetail*` accessibility identifiers.
 - F03.5 Today Execution State Contract Hardening is complete: `TodayExecutionViewState.swift` is now a small aggregate state contract, while Day Rail state, Step Detail state, projection helpers, projector logic, compatibility helpers, and screen-contract snapshot live in dedicated Today-owned files.
-- F04 Step Session, F05 Action Closure / Still Counts, F06 Proof & Receipt Ledger, F07 Capture Composer cleanup, F08 Placement Resolver, F09 Capture-to-Goal / Grow into Goal, and F10 Plan Life Suite foundation are complete.
-- Next active 3.0 implementation continuation is F11 Day Shape / Week Shape unless the user explicitly chooses another gate. F11 must not start F12 Reflow / Recovery / Decisions unless F11 is Green and the reflow/decision architecture is clear.
+- F04 Step Session, F05 Action Closure / Still Counts, F06 Proof & Receipt Ledger, F07 Capture Composer cleanup, F08 Placement Resolver, F09 Capture-to-Goal / Grow into Goal, F10 Plan Life Suite foundation, and F11 Day Shape / Week Shape are complete.
+- Next active 3.0 implementation continuation is F12 Reflow / Recovery / Decisions unless the user explicitly chooses another gate. F12 must preserve trust receipts/no-silent automation and avoid Today behavior changes without an explicit Plan-to-Today handoff contract.
 
 ## Required Read Order
 
@@ -86,3 +86,4 @@ Batch-train execution uses `docs/codex/AMBITIONS_3_0_BATCH_TRAIN_ORCHESTRATOR.md
 - `docs/audits/ambitions-3-0-f03-5-today-state-contract-hardening-report.md`
 - `docs/audits/ambitions-3-0-batch-train-orchestrator-report.md`
 - `docs/audits/ambitions-3-0-f10-plan-life-suite-foundation-report.md`
+- `docs/audits/ambitions-3-0-f11-day-week-shape-report.md`

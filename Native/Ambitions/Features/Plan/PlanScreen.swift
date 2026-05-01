@@ -39,6 +39,8 @@ struct PlanScreen: View {
 
                     PlanCapacityEnvelopeCard(envelope: dashboard.capacityEnvelope)
 
+                    PlanLifeSuiteCard(suite: dashboard.lifeSuite)
+
                     PlanGoalLifecycleRailCard(rail: dashboard.lifecycleRail)
 
                     PlanTimelineStripCard(strip: dashboard.timelineStrip, onOpenGoal: openGoal)

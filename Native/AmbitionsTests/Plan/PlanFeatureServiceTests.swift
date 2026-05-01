@@ -19,6 +19,7 @@ final class PlanFeatureServiceTests: XCTestCase {
         XCTAssertEqual(dashboard.hero.title, "Does this hold together?")
         XCTAssertEqual(dashboard.lifeSuite.title, "Plan Life Suite")
         XCTAssertEqual(dashboard.lifeSuite.shapes.map(\.title), ["Day Shape", "Week Shape", "Life Shape"])
+        XCTAssertTrue(dashboard.lifeSuite.shapes.allSatisfy { $0.facts.isEmpty == false })
         XCTAssertEqual(dashboard.lifeSuite.manualFallbackLabel, "Manual fallback available")
         XCTAssertEqual(dashboard.lifeSuite.trustLabel, "No silent calendar changes")
         XCTAssertEqual(dashboard.treaty.title, "This week's agreement")
@@ -67,10 +68,34 @@ final class PlanFeatureServiceTests: XCTestCase {
         XCTAssertEqual(dashboard.lifeSuite.subtitle, "Does this hold together?")
         XCTAssertEqual(dashboard.lifeSuite.calendarBoundaryLabel, "Manual planning still works")
         XCTAssertEqual(shapes[.day]?.boundaryLabel, "No silent replanning")
+        XCTAssertTrue(shapes[.day]?.facts.contains(where: { $0.contains("planned block") }) == true)
         XCTAssertEqual(shapes[.week]?.boundaryLabel, "Suggestions require confirmation")
         XCTAssertTrue(shapes[.week]?.summary.contains("capture") == true)
+        XCTAssertTrue(shapes[.week]?.facts.contains("1 capture needs a place.") == true)
         XCTAssertEqual(shapes[.life]?.sourceLabel, "Based on active goals")
         XCTAssertFalse(dashboard.lifeSuite.trustLabel.localizedCaseInsensitiveContains("sync"))
+    }
+
+    func testF11DayAndWeekShapeExposeVisibleFactsWithoutReplanning() async throws {
+        let repositories = try await makeRepositories()
+        try await repositories.goals.saveGoals([makeWeekVisibleGoal()])
+        _ = try await DefaultCaptureService(repository: repositories.captures).createCapture(
+            CreateCaptureRequest(rawText: "Place dentist follow-up", sourceType: .todayQuickCapture),
+            now: fixedDate
+        )
+        let service = RepositoryBackedPlanService(repositories: repositories)
+
+        let dashboard = try await service.loadPlanDashboard(now: fixedDate)
+        let shapes = Dictionary(uniqueKeysWithValues: dashboard.lifeSuite.shapes.map { ($0.kind, $0) })
+
+        XCTAssertEqual(shapes[.day]?.title, "Day Shape")
+        XCTAssertEqual(shapes[.day]?.boundaryLabel, "No silent replanning")
+        XCTAssertTrue(shapes[.day]?.facts.contains(where: { $0.localizedCaseInsensitiveContains("planned block") }) == true)
+        XCTAssertEqual(shapes[.week]?.title, "Week Shape")
+        XCTAssertEqual(shapes[.week]?.boundaryLabel, "Suggestions require confirmation")
+        XCTAssertTrue(shapes[.week]?.facts.contains(where: { $0.contains("pressured day") }) == true)
+        XCTAssertTrue(shapes[.week]?.facts.contains("1 capture needs a place.") == true)
+        XCTAssertFalse(dashboard.lifeSuite.shapes.flatMap(\.facts).joined(separator: " ").localizedCaseInsensitiveContains("automatically"))
     }
 
     func testBlockedDraftsAndOpenCapturesSurfaceRealityPressureTruthfully() async throws {

@@ -712,9 +712,9 @@ enum PreviewPlanScenarios {
         title: "Plan Life Suite",
         subtitle: "Does this hold together?",
         shapes: [
-            PlanLifeSuiteShapeState(kind: .day, title: "Day Shape", question: "What can this day honestly hold?", summary: "Today has tight room and three planned blocks.", sourceLabel: "Based on your plan", boundaryLabel: "No silent replanning", visualState: .warning),
-            PlanLifeSuiteShapeState(kind: .week, title: "Week Shape", question: "Does the week still fit?", summary: "Two days may need shaping before the week feels believable.", sourceLabel: "Based on goals and captures", boundaryLabel: "Suggestions require confirmation", visualState: .warning),
-            PlanLifeSuiteShapeState(kind: .life, title: "Life Shape", question: "Is the plan still pointed at the life you are building?", summary: "Three active goals shape the current life plan.", sourceLabel: "Based on active goals", boundaryLabel: "Life view, broader than time slots", visualState: .selected)
+            PlanLifeSuiteShapeState(kind: .day, title: "Day Shape", question: "What can this day honestly hold?", summary: "Today has tight room and three planned blocks.", facts: ["Tight room", "One open window", "3 planned blocks attached."], sourceLabel: "Based on your plan", boundaryLabel: "No silent replanning", visualState: .warning),
+            PlanLifeSuiteShapeState(kind: .week, title: "Week Shape", question: "Does the week still fit?", summary: "Two days may need shaping before the week feels believable.", facts: ["2 pressured days visible.", "2 captures need a place.", "7 days included in this week."], sourceLabel: "Based on goals and captures", boundaryLabel: "Suggestions require confirmation", visualState: .warning),
+            PlanLifeSuiteShapeState(kind: .life, title: "Life Shape", question: "Is the plan still pointed at the life you are building?", summary: "Three active goals shape the current life plan.", facts: ["3 active goals included.", "Life Shape stays inside Plan."], sourceLabel: "Based on active goals", boundaryLabel: "Life view, broader than time slots", visualState: .selected)
         ],
         calendarBoundaryLabel: "Calendar stays optional",
         manualFallbackLabel: "Manual fallback available",
@@ -725,9 +725,9 @@ enum PreviewPlanScenarios {
         title: "Plan Life Suite",
         subtitle: "Does this hold together?",
         shapes: [
-            PlanLifeSuiteShapeState(kind: .day, title: "Day Shape", question: "What can this day honestly hold?", summary: "No day shape is loaded yet.", sourceLabel: "Based on your plan", boundaryLabel: "No silent replanning", visualState: .default),
-            PlanLifeSuiteShapeState(kind: .week, title: "Week Shape", question: "Does the week still fit?", summary: "The week has room until goals, captures, or routines create real constraints.", sourceLabel: "Based on goals and captures", boundaryLabel: "Suggestions require confirmation", visualState: .selected),
-            PlanLifeSuiteShapeState(kind: .life, title: "Life Shape", question: "Is the plan still pointed at the life you are building?", summary: "Life Shape is quiet until active goals give Plan something to coordinate.", sourceLabel: "Based on active goals", boundaryLabel: "Life view, broader than time slots", visualState: .default)
+            PlanLifeSuiteShapeState(kind: .day, title: "Day Shape", question: "What can this day honestly hold?", summary: "No day shape is loaded yet.", facts: ["Manual shaping is available.", "Nothing moves without review."], sourceLabel: "Based on your plan", boundaryLabel: "No silent replanning", visualState: .default),
+            PlanLifeSuiteShapeState(kind: .week, title: "Week Shape", question: "Does the week still fit?", summary: "The week has room until goals, captures, or routines create real constraints.", facts: ["0 pressured days visible.", "0 captures need a place.", "7 days included in this week."], sourceLabel: "Based on goals and captures", boundaryLabel: "Suggestions require confirmation", visualState: .selected),
+            PlanLifeSuiteShapeState(kind: .life, title: "Life Shape", question: "Is the plan still pointed at the life you are building?", summary: "Life Shape is quiet until active goals give Plan something to coordinate.", facts: ["No active goals shaping life view yet.", "Life Shape stays inside Plan."], sourceLabel: "Based on active goals", boundaryLabel: "Life view, broader than time slots", visualState: .default)
         ],
         calendarBoundaryLabel: "Manual planning still works",
         manualFallbackLabel: "Manual fallback available",
