@@ -35,7 +35,7 @@ extension TodayExecutionViewState {
         )
         let bestNext = TodayContractEntryState(
             id: "today2.contract.best-next",
-            kind: .bestNextMove,
+            kind: .recommendedStep,
             title: "Recommended step",
             subtitle: hero.truth.nowTitle.shortened(maxLength: 56),
             value: hero.truth.nowSubtitle.todayShortSentence,
@@ -182,7 +182,7 @@ extension TodayExecutionViewState {
             dayState: dayState(for: hero.truth.posture),
             dayStateSummary: hero.truth.supportingText.todayShortSentence,
             protectedMustDo: protectedMustDo,
-            bestNextMove: bestNext,
+            recommendedStep: bestNext,
             notToday: notToday,
             recoveryFallback: fallback,
             whyThisMatters: why,
@@ -245,7 +245,7 @@ extension TodayExecutionViewState {
             dayState: dayState,
             dayStateSummary: dayStateSummary,
             protectedMustDo: protectedMustDo,
-            bestNextMove: bestNextMove,
+            recommendedStep: recommendedStep,
             notToday: notToday,
             recoveryFallback: recoveryFallback,
             whyThisMatters: whyThisMatters,
@@ -315,7 +315,7 @@ extension TodayExecutionViewState {
             kind = .askWhy
             destination = nil
         case .startStepSession:
-            kind = .startFocus
+            kind = .startStepSession
             destination = nil
         case .complete:
             kind = .completeAction

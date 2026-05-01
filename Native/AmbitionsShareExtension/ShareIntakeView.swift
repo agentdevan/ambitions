@@ -6,7 +6,7 @@ struct ShareIntakeView: View {
     let onCancel: () -> Void
 
     @State private var text: String
-    @State private var landing: ExternalCreationLanding = .capturesInbox
+    @State private var landing: ExternalCreationLanding = .captureInbox
     @Environment(\.accessibilityReduceMotion) private var reduceMotion
 
     init(
@@ -44,7 +44,7 @@ struct ShareIntakeView: View {
                     .accessibilityLabel("Shared capture text")
 
                 Picker("Landing", selection: $landing) {
-                    Text("Review in Captures").tag(ExternalCreationLanding.capturesInbox)
+                    Text("Review in Captures").tag(ExternalCreationLanding.captureInbox)
                     Text("Start a Goal").tag(ExternalCreationLanding.createGoal)
                 }
                 .pickerStyle(.segmented)

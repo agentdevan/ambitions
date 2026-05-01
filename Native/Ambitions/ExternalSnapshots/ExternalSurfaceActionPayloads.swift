@@ -35,7 +35,7 @@ enum ExternalSurfaceActionName: String, Codable, Sendable, Equatable {
 enum ExternalSurfacePayloadSurface: String, Codable, Sendable, Equatable {
     case tab
     case goalDetail = "goal-detail"
-    case capturesInbox = "captures-inbox"
+    case captureInbox = "captures-inbox"
 }
 
 enum ExternalSurfaceActionPayload {
@@ -111,7 +111,7 @@ enum ExternalSurfaceActionPayload {
             guard let goalID, goalID.isEmpty == false else { return nil }
             components.host = "goal"
             components.path = "/\(goalID)"
-        case .capturesInbox:
+        case .captureInbox:
             components.host = "captures"
             components.path = "/inbox"
         }

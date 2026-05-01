@@ -75,9 +75,9 @@ final class ShareViewController: UIViewController {
     private func openAmbitions(landing: ExternalCreationLanding) {
         let url: URL? = {
             switch landing {
-            case .capturesInbox:
+            case .captureInbox:
                 return ExternalSurfaceActionPayload.deepLinkURL(
-                    surface: .capturesInbox,
+                    surface: .captureInbox,
                     origin: .shareExtension
                 )
             case .createGoal:

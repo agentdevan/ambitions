@@ -134,8 +134,13 @@ Classification:
 | Docs-only migration reference | `docs/canon/Ambitions_3_0_FAANG_Handoff_Readiness_Gate.md:127-133`; migration plans and review checklists | Allowed. |
 | False positive / generated artifact | `docs/audits/all-local-files.txt`, old generated DerivedData listings | Ignore or clean generated audit inventories later if desired. |
 
-Recommended migration batch: F15, after F01-F14 establish the new target names
-and after compatibility/deep-link risks are isolated.
+F15 migration update, 2026-05-01: active `startFocus`, `bestNextMove`, and
+`capturesInbox` identifiers were migrated to `startStepSession`,
+`recommendedStep`, and `captureInbox` while preserving raw command, deep-link,
+App Intent, external payload, share extension, widget, and notification
+compatibility. `activeFocus`, `Profile`, `Insights`, and `Habits` remain
+documented compatibility seams because they require schema-versioned external
+snapshot adapters or broad feature-folder/type migration.
 
 ## UI Test Failure Map
 

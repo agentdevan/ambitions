@@ -189,11 +189,11 @@ private extension AmbitionsCommandExecutor {
             return AmbitionsCommandExecutionResult(
                 status: .succeeded,
                 summary: smartAttachment?.receiptLine ?? "Saved to Needs a Place",
-                route: .capturesInbox,
+                route: .captureInbox,
                 target: AmbitionsCommandTarget(
                     goalID: command.target.goalID,
                     captureID: capture.id,
-                    destination: .capturesInbox
+                    destination: .captureInbox
                 ),
                 eventLedgerEntryIDs: eventIDs,
                 recommendationExplanationIDs: command.relations.recommendationExplanationIDs,
@@ -361,8 +361,8 @@ private extension AmbitionsCommandExecutor {
         AmbitionsCommandExecutionResult(
             status: .succeeded,
             summary: summary,
-            route: .capturesInbox,
-            target: AmbitionsCommandTarget(goalID: capture.linkedGoalID ?? command.target.goalID, captureID: capture.id, destination: .capturesInbox),
+            route: .captureInbox,
+            target: AmbitionsCommandTarget(goalID: capture.linkedGoalID ?? command.target.goalID, captureID: capture.id, destination: .captureInbox),
             recommendationExplanationIDs: command.relations.recommendationExplanationIDs + capture.recommendationExplanationIDs,
             metadata: [
                 "captureID": capture.id,

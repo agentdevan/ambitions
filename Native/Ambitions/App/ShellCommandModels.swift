@@ -271,7 +271,7 @@ enum ShellCommandDestination: Hashable, Sendable {
             "Goal Detail"
         case let .planRoute(target):
             switch target {
-            case .capturesInbox: "Capture"
+            case .captureInbox: "Capture"
             case .habits: "Rituals"
             case .weeklyReview: "Weekly Review"
             }

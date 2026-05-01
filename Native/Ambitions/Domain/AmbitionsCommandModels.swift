@@ -10,7 +10,7 @@ enum AmbitionsCommandKind: String, Codable, Sendable, Equatable, Hashable, CaseI
     case attachToGoal = "attach_to_goal"
     case createPlanItem = "create_plan_item"
     case scheduleItem = "schedule_item"
-    case startFocus = "start_focus"
+    case startStepSession = "start_focus"
     case completeAction = "complete_action"
     case delayAction = "delay_action"
     case splitAction = "split_action"
@@ -61,7 +61,7 @@ enum AmbitionsCommandDestination: String, Codable, Sendable, Equatable, Hashable
     case you
     case reviews
     case goalDetail = "goal_detail"
-    case capturesInbox = "captures_inbox"
+    case captureInbox = "captures_inbox"
     case memoryLens = "memory_lens"
     case commandSheet = "command_sheet"
     case weeklyReview = "weekly_review"
@@ -379,7 +379,7 @@ struct AmbitionsCommandValidator: Sendable {
                 return .needsConfirmation
             }
             return command.target.captureID == nil && command.target.planID == nil && command.payload.primaryText == nil ? .needsMissingTarget : .valid
-        case .startFocus, .completeAction, .delayAction, .splitAction:
+        case .startStepSession, .completeAction, .delayAction, .splitAction:
             return command.target.goalID == nil || command.target.stepID == nil ? .needsMissingTarget : .valid
         case .recoverAction:
             return command.target.goalID == nil && command.target.captureID == nil && command.target.planID == nil ? .needsMissingTarget : .valid
@@ -433,7 +433,7 @@ extension AmbitionsCommand {
             kind = .openDestination
             destination = .today
         case .focus:
-            kind = .startFocus
+            kind = .startStepSession
             destination = nil
         case .completeAction:
             kind = .completeAction

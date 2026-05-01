@@ -194,7 +194,7 @@ private extension DefaultMemoryLensService {
 
     func makeCaptureResults(_ captures: [Capture]) -> [MemoryLensResult] {
         captures.map { capture in
-            let destination: ShellCommandDestination = capture.linkedGoalID.map { .goal($0) } ?? .planRoute(.capturesInbox)
+            let destination: ShellCommandDestination = capture.linkedGoalID.map { .goal($0) } ?? .planRoute(.captureInbox)
             return MemoryLensResult(
                 id: "capture-\(capture.id)",
                 title: capture.rawText,

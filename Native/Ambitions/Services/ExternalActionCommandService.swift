@@ -190,7 +190,7 @@ final class DefaultExternalActionCommandService: ExternalActionCommandExecuting 
         case let .openGoalDetail(goalID):
             return .openGoalDetail(goalID: goalID)
         case .openCapturesInbox:
-            return .openPlanRoute(.capturesInbox)
+            return .openPlanRoute(.captureInbox)
         case .openMemoryLens:
             return .presentOverlay(.memoryLens(entrySource: entrySource(for: source)))
         case let .presentOverlay(overlay):

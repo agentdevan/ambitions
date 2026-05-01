@@ -66,7 +66,7 @@ struct TodayExecutionProjector {
             dayState: dayState(input),
             dayStateSummary: dayStateSummary(input),
             protectedMustDo: contract.protected,
-            bestNextMove: contract.best,
+            recommendedStep: contract.best,
             notToday: contract.notToday,
             recoveryFallback: contract.fallback,
             whyThisMatters: contract.why,
@@ -270,7 +270,7 @@ private extension TodayExecutionProjector {
         )
         let best = TodayContractEntryState(
             id: "today2.contract.best-next",
-            kind: .bestNextMove,
+            kind: .recommendedStep,
             title: "Recommended step",
             subtitle: bestTitle.shortened(maxLength: 56),
             value: input.nowState.nextActionConfidence == .low ? "Doable enough" : "Ready",

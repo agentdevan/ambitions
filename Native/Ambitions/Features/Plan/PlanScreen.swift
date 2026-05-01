@@ -56,7 +56,7 @@ struct PlanScreen: View {
                                 container.commandRouter.presentCreateGoal(source: .shellCompose)
                             },
                             onSecondaryAction: {
-                                container.navigation.openPlanRoute(.capturesInbox)
+                                container.navigation.openPlanRoute(.captureInbox)
                             }
                         )
                     }
@@ -1807,7 +1807,7 @@ private struct PlanShapingActionsCard: View {
     }
 
     private func callToActionTitle(for action: PlanShapingActionState) -> String {
-        if action.planRoute == .capturesInbox {
+        if action.planRoute == .captureInbox {
             return "Open Capture"
         }
         if action.goalTarget != nil {

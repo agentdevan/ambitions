@@ -54,7 +54,7 @@ final class AmbitionsCommandExecutorTests: XCTestCase {
         let captures = try await captureRepository.listCaptures()
         let events = try await ledger.fetchRecent(limit: 10)
         XCTAssertEqual(result.status, .succeeded)
-        XCTAssertEqual(result.route, .capturesInbox)
+        XCTAssertEqual(result.route, .captureInbox)
         XCTAssertEqual(result.target?.captureID, "capture-command")
         XCTAssertEqual(captures.map(\.rawText), ["Create spreadsheet and send it to Kaylee by EOD Tuesday"])
         XCTAssertEqual(captures.first?.sourceType, .todayQuickCapture)

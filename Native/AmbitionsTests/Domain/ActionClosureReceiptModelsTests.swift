@@ -210,8 +210,8 @@ final class ActionClosureReceiptModelsTests: XCTestCase {
         let result = AmbitionsCommandExecutionResult(
             status: .succeeded,
             summary: "Capture saved through the shared command pipeline.",
-            route: .capturesInbox,
-            target: AmbitionsCommandTarget(captureID: "capture-1", destination: .capturesInbox),
+            route: .captureInbox,
+            target: AmbitionsCommandTarget(captureID: "capture-1", destination: .captureInbox),
             eventLedgerEntryIDs: ["ledger-1"]
         )
 

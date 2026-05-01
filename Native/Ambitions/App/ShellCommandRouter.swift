@@ -164,12 +164,12 @@ final class DefaultShellCommandRouter: ShellCommandRouting {
                     title: decision?.receiptLine ?? "Saved to Needs a Place",
                     source: source,
                     presentationContext: .quickCapture,
-                    destination: .planRoute(.capturesInbox),
+                    destination: .planRoute(.captureInbox),
                     receiptBody: "Saved locally with a receipt you can change in Capture."
                 )
                 return ShellCommandExecutionResult(
                     title: decision?.receiptLine ?? "Saved to Needs a Place",
-                    destination: .planRoute(.capturesInbox),
+                    destination: .planRoute(.captureInbox),
                     createdCaptureID: capture.id
                 )
             } catch {
@@ -233,10 +233,10 @@ final class DefaultShellCommandRouter: ShellCommandRouting {
                 title: "Open capture",
                 source: source,
                 presentationContext: .recall,
-                destination: .planRoute(.capturesInbox),
+                destination: .planRoute(.captureInbox),
                 receiptBody: "Opened Capture from \(source.displayTitle)."
             )
-            return ShellCommandExecutionResult(destination: .planRoute(.capturesInbox))
+            return ShellCommandExecutionResult(destination: .planRoute(.captureInbox))
         case .memoryLens:
             presentMemoryLens(
                 intent: .memoryLens,

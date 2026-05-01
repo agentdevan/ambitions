@@ -18,7 +18,7 @@ enum ExternalCreationSource: String, Codable, Sendable, Equatable {
 }
 
 enum ExternalCreationLanding: String, Codable, Sendable, Equatable {
-    case capturesInbox = "captures_inbox"
+    case captureInbox = "captures_inbox"
     case createGoal = "create_goal"
 }
 
@@ -41,7 +41,7 @@ struct ExternalCreationRequest: Identifiable, Codable, Sendable, Equatable {
         source: ExternalCreationSource,
         sourceApplication: String? = nil,
         sourceURL: String? = nil,
-        landing: ExternalCreationLanding = .capturesInbox,
+        landing: ExternalCreationLanding = .captureInbox,
         schemaVersion: Int = Self.schemaVersion
     ) {
         self.id = id

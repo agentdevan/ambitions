@@ -65,8 +65,8 @@ final class TodayViewModelTests: XCTestCase {
         XCTAssertEqual(experience.execution.activeLens.title, "Work")
         XCTAssertEqual(experience.execution.hero.smallestUsefulNextStep, "Send the client spreadsheet")
         XCTAssertEqual(experience.execution.protectedMustDo.title, "Keep this")
-        XCTAssertEqual(experience.execution.bestNextMove.subtitle, "Send the client spreadsheet")
-        XCTAssertEqual(experience.execution.bestNextMove.title, "Recommended step")
+        XCTAssertEqual(experience.execution.recommendedStep.subtitle, "Send the client spreadsheet")
+        XCTAssertEqual(experience.execution.recommendedStep.title, "Recommended step")
         XCTAssertEqual(experience.execution.notToday.title, "Not today")
         XCTAssertEqual(experience.execution.recoveryFallback.title, "Fallback")
         XCTAssertEqual(experience.execution.whyThisMatters.title, "Why this matters")
@@ -80,7 +80,7 @@ final class TodayViewModelTests: XCTestCase {
         XCTAssertFalse(experience.execution.todayPlanLayer.openWindowLabel.isEmpty)
         XCTAssertNotNil(experience.execution.hero.explanation)
         XCTAssertNotNil(experience.execution.saveTheDayAction)
-        XCTAssertTrue(experience.execution.commandMappings.contains { $0.actionKind == .startStepSession && $0.commandKind == .startFocus })
+        XCTAssertTrue(experience.execution.commandMappings.contains { $0.actionKind == .startStepSession && $0.commandKind == .startStepSession })
         XCTAssertTrue(experience.execution.commandMappings.contains { $0.actionKind == .askWhyThisMatters && $0.commandKind == .askWhy })
     }
 

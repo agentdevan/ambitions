@@ -25,7 +25,7 @@ final class ShellCommandRouterTests: XCTestCase {
         XCTAssertEqual(navigation.selectedTab, .captures)
         XCTAssertTrue(navigation.planPath.isEmpty)
         XCTAssertEqual(result.title, "Saved as Idea")
-        XCTAssertEqual(result.destination, .planRoute(.capturesInbox))
+        XCTAssertEqual(result.destination, .planRoute(.captureInbox))
         XCTAssertEqual(navigation.recentCommandHistory.first?.title, "Saved as Idea")
     }
 

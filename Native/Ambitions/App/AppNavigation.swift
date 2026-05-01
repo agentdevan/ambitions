@@ -27,7 +27,7 @@ struct GoalRouteTarget: Hashable, Identifiable, Sendable {
 }
 
 enum PlanRouteTarget: String, Hashable, Identifiable, Sendable {
-    case capturesInbox
+    case captureInbox
     case habits
     case weeklyReview
 
@@ -149,7 +149,7 @@ final class AppNavigationModel {
 
     func openPlanRoute(_ target: PlanRouteTarget) {
         dismissOverlay()
-        if target == .capturesInbox {
+        if target == .captureInbox {
             selectedTab = .captures
             planPath = []
             return
@@ -173,7 +173,7 @@ final class AppNavigationModel {
     }
 
     func openCapturesInbox() {
-        openPlanRoute(.capturesInbox)
+        openPlanRoute(.captureInbox)
     }
 
     func openHabits() {

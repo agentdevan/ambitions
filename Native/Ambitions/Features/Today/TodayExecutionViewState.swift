@@ -22,7 +22,7 @@ enum TodayExecutionPanelKind: String, Equatable {
 
 enum TodayContractEntryKind: String, Equatable {
     case protectedMustDo
-    case bestNextMove
+    case recommendedStep
     case notToday
     case recoveryFallback
     case whyThisMatters
@@ -163,7 +163,7 @@ struct TodayExecutionViewState: Equatable {
     let dayState: TodayQualitativeDayState
     let dayStateSummary: String
     let protectedMustDo: TodayContractEntryState
-    let bestNextMove: TodayContractEntryState
+    let recommendedStep: TodayContractEntryState
     let notToday: TodayContractEntryState
     let recoveryFallback: TodayContractEntryState
     let whyThisMatters: TodayContractEntryState

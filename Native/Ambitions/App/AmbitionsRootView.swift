@@ -168,7 +168,7 @@ struct AmbitionsRootView: View {
             }
             .navigationDestination(for: PlanRouteTarget.self) { target in
                 switch target {
-                case .capturesInbox:
+                case .captureInbox:
                     AppShellScaffold(
                         title: "Capture",
                         subtitle: "Plan support route",

@@ -92,7 +92,7 @@ struct TodayScreen: View {
             if showsNavigationChrome {
                 ToolbarItem(placement: .topBarTrailing) {
                     Button {
-                        container.commandRouter.route(to: .planRoute(.capturesInbox), source: .shellUtility)
+                        container.commandRouter.route(to: .planRoute(.captureInbox), source: .shellUtility)
                     } label: {
                         Label("Capture", systemImage: AppTab.captures.systemImage)
                     }

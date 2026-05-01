@@ -396,7 +396,7 @@ private extension RepositoryBackedPlanService {
                     valueLabel: "\(openCaptures.count)",
                     icon: AppTab.captures.systemImage,
                     visualState: openCaptures.isEmpty ? .default : .warning,
-                    planRoute: .capturesInbox
+                    planRoute: .captureInbox
                 ),
                 PlanSecondaryDestination(
                     id: "plan-weekly-review",
@@ -771,7 +771,7 @@ private extension RepositoryBackedPlanService {
                         : "Attach or park capture pressure before trying to polish the schedule.",
                     state: openCaptures.isEmpty ? .default : .warning,
                     goalTarget: nil,
-                    planRoute: .capturesInbox
+                    planRoute: .captureInbox
                 ),
                 PlanExecutionResilienceLane(
                     id: "review",
@@ -939,7 +939,7 @@ private extension RepositoryBackedPlanService {
                 systemImage: "sun.max",
                 state: .warning,
                 goalTarget: openCaptureCount > 0 ? nil : pressuredGoalSummary.map { GoalRouteTarget(goalID: $0.goal.id) },
-                planRoute: openCaptureCount > 0 ? .capturesInbox : nil
+                planRoute: openCaptureCount > 0 ? .captureInbox : nil
             )
         }
 
@@ -1040,7 +1040,7 @@ private extension RepositoryBackedPlanService {
                 systemImage: PlanShapingActionKind.lighten.systemImage,
                 state: noisyDay == nil ? .default : .warning,
                 goalTarget: openCaptureCount > 0 ? nil : pressuredTarget,
-                planRoute: openCaptureCount > 0 ? .capturesInbox : nil
+                planRoute: openCaptureCount > 0 ? .captureInbox : nil
             )
         ]
     }
@@ -1327,7 +1327,7 @@ private extension RepositoryBackedPlanService {
                 suggestion: "Follow up, attach it, or keep it outside the plan.",
                 visualState: .warning,
                 target: nil,
-                planRoute: .capturesInbox
+                planRoute: .captureInbox
             ))
         }
 
@@ -1339,7 +1339,7 @@ private extension RepositoryBackedPlanService {
                 suggestion: "Resolve the smallest missing answer first.",
                 visualState: .warning,
                 target: nil,
-                planRoute: .capturesInbox
+                planRoute: .captureInbox
             ))
         }
 
@@ -1443,7 +1443,7 @@ private extension RepositoryBackedPlanService {
                 suggestion: "Follow up first if it unlocks the step; otherwise keep it outside today.",
                 visualState: .warning,
                 target: nil,
-                planRoute: .capturesInbox
+                planRoute: .captureInbox
             ))
         }
 
@@ -1534,7 +1534,7 @@ private extension RepositoryBackedPlanService {
                 suggestion: "Attach, park, or archive only after reviewing the inbox.",
                 visualState: .warning,
                 target: nil,
-                planRoute: .capturesInbox
+                planRoute: .captureInbox
             ))
         }
 
@@ -1703,8 +1703,8 @@ private extension RepositoryBackedPlanService {
             append(.markWaiting, detail: "Keep the blocked work visible as waiting instead of adding more pressure.", impact: "Waiting state only after confirmation", state: .warning)
             append(.protectOneItem, detail: "Protect the one unblocked step that still matters.", impact: "Protects one item", state: .selected)
         case .waitingOnPersonOrResource:
-            append(.markWaiting, detail: "Treat the dependency as waiting and keep the rest of the plan calm.", impact: "Keeps follow-up explicit", state: .warning, target: nil, planRoute: .capturesInbox)
-            append(.moveLocalActionLater, detail: "Reschedule only the local follow-up later if it is not the protected item.", impact: "Local suggestion only", state: .default, target: nil, planRoute: .capturesInbox)
+            append(.markWaiting, detail: "Treat the dependency as waiting and keep the rest of the plan calm.", impact: "Keeps follow-up explicit", state: .warning, target: nil, planRoute: .captureInbox)
+            append(.moveLocalActionLater, detail: "Reschedule only the local follow-up later if it is not the protected item.", impact: "Local suggestion only", state: .default, target: nil, planRoute: .captureInbox)
         case .noNextStep:
             append(.protectOneItem, detail: "Choose one must-do and leave the rest outside today.", impact: "Protects one item", state: .selected)
             append(.parkGoal, detail: "Park the goal that has no believable next step yet.", impact: "Broad change needs confirmation", state: .warning)
@@ -1718,8 +1718,8 @@ private extension RepositoryBackedPlanService {
             append(.shrinkAction, detail: "Make the next step small enough to leave proof.", impact: "Receipt-ready adjustment", state: .default)
             append(.splitAction, detail: "Split the work so the first part can close cleanly.", impact: "Local draft suggestion", state: .default)
         case .urgentOutsideItem:
-            append(.deferGoalOrItem, detail: "Defer the item that does not belong in this plan window.", impact: "Needs confirmation", state: .warning, target: nil, planRoute: openCaptures.isEmpty ? nil : .capturesInbox)
-            append(.dropOptionalWork, detail: "Drop optional work only after you confirm it is not needed.", impact: "Destructive choice gated", state: .warning, target: nil, planRoute: openCaptures.isEmpty ? nil : .capturesInbox)
+            append(.deferGoalOrItem, detail: "Defer the item that does not belong in this plan window.", impact: "Needs confirmation", state: .warning, target: nil, planRoute: openCaptures.isEmpty ? nil : .captureInbox)
+            append(.dropOptionalWork, detail: "Drop optional work only after you confirm it is not needed.", impact: "Destructive choice gated", state: .warning, target: nil, planRoute: openCaptures.isEmpty ? nil : .captureInbox)
         case .missedDay, .overloadedPlan, .noRecoveryMargin, .lowCapacityFragileDay:
             append(.protectOneItem, detail: "Keep one must-do defended before changing the rest.", impact: "Smallest useful adjustment", state: .selected)
             append(.shrinkAction, detail: targetGoal.map { "Make \($0.title)'s next step smaller." } ?? "Make the next step smaller.", impact: "Local suggestion only", state: .warning)

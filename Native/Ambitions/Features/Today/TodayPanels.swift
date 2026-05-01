@@ -712,7 +712,7 @@ struct TodayExecutionHeroPanel: View {
 
                 TodayContractGrid(entries: [
                     state.protectedMustDo,
-                    state.bestNextMove,
+                    state.recommendedStep,
                     state.notToday,
                     state.recoveryFallback,
                     state.whyThisMatters,
@@ -1187,7 +1187,7 @@ private struct TodayContractRow: View {
         switch entry.kind {
         case .protectedMustDo:
             "lock.shield.fill"
-        case .bestNextMove:
+        case .recommendedStep:
             "scope"
         case .notToday:
             "pause.circle.fill"

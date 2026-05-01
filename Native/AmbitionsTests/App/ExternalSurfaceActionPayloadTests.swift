@@ -26,7 +26,7 @@ final class ExternalSurfaceActionPayloadTests: XCTestCase {
     func testCanonicalURLsUseStableRoutesOnly() throws {
         let goalURL = try XCTUnwrap(ExternalSurfaceActionPayload.deepLinkURL(surface: .goalDetail, goalID: "goal-123"))
         let todayURL = try XCTUnwrap(ExternalSurfaceActionPayload.deepLinkURL(surface: .tab, tab: "today"))
-        let capturesURL = try XCTUnwrap(ExternalSurfaceActionPayload.deepLinkURL(surface: .capturesInbox))
+        let capturesURL = try XCTUnwrap(ExternalSurfaceActionPayload.deepLinkURL(surface: .captureInbox))
         let widgetURL = try XCTUnwrap(ExternalSurfaceActionPayload.deepLinkURL(surface: .tab, tab: "today", origin: .widget))
         let fallbackURL = try XCTUnwrap(ExternalSurfaceActionPayload.safeDeepLinkURL(surface: .goalDetail, goalID: nil, origin: .widget))
 

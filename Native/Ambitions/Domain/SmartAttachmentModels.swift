@@ -561,7 +561,7 @@ struct SmartAttachmentResult: Codable, Sendable, Equatable, Hashable, Identifiab
                 )
             ],
             why: ActionReceiptWhyExplanation(body: explanation),
-            nextAction: ActionReceiptNextAction(kind: .correctAssumption, title: "Change", destination: .capturesInbox, target: captureObject),
+            nextAction: ActionReceiptNextAction(kind: .correctAssumption, title: "Change", destination: .captureInbox, target: captureObject),
             correctionAvailability: .availableWithReason,
             undoAvailability: .notSupportedYet,
             safetyState: self.resultState == .failedSafely ? .safeFailure : .normal,

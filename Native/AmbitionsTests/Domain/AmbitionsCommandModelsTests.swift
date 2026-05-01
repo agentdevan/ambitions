@@ -13,7 +13,7 @@ final class AmbitionsCommandModelsTests: XCTestCase {
                 .attachToGoal,
                 .createPlanItem,
                 .scheduleItem,
-                .startFocus,
+                .startStepSession,
                 .completeAction,
                 .delayAction,
                 .splitAction,

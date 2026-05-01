@@ -84,14 +84,14 @@ struct AppExternalRouteTranslator {
 
         if host == "captures" || host == "inbox" {
             if pathSegments.isEmpty || pathSegments.first == "inbox" {
-                return .openPlanRoute(.capturesInbox)
+                return .openPlanRoute(.captureInbox)
             }
         }
 
         if host == "plan", let first = pathSegments.first {
             switch first.lowercased() {
             case "captures":
-                return .openPlanRoute(.capturesInbox)
+                return .openPlanRoute(.captureInbox)
             case "habits":
                 return .openPlanRoute(.habits)
             case "weekly-review":
@@ -133,7 +133,7 @@ struct AppExternalRouteTranslator {
             return .openTab(tab)
         }
         if payload.action == "open-captures-inbox" || payload.values["surface"] == "captures-inbox" {
-            return .openPlanRoute(.capturesInbox)
+            return .openPlanRoute(.captureInbox)
         }
         if let overlay = overlayRoute(values: payload.values, fallbackAction: payload.action, source: .notification) {
             return .presentOverlay(overlay)
@@ -150,7 +150,7 @@ struct AppExternalRouteTranslator {
             return .openTab(tab)
         }
         if payload.action == "open-captures-inbox" || payload.values["surface"] == "captures-inbox" {
-            return .openPlanRoute(.capturesInbox)
+            return .openPlanRoute(.captureInbox)
         }
         if let overlay = overlayRoute(values: payload.values, fallbackAction: payload.action, source: .widget) {
             return .presentOverlay(overlay)
@@ -173,8 +173,8 @@ struct AppExternalRouteTranslator {
             return ExternalSurfaceActionPayload.deepLinkURL(surface: .goalDetail, goalID: goalID)
         case let .openPlanRoute(target):
             switch target {
-            case .capturesInbox:
-                return ExternalSurfaceActionPayload.deepLinkURL(surface: .capturesInbox)
+            case .captureInbox:
+                return ExternalSurfaceActionPayload.deepLinkURL(surface: .captureInbox)
             case .habits:
                 return URL(string: "ambitions://plan/habits")
             case .weeklyReview:
@@ -244,9 +244,9 @@ struct AppExternalRouteTranslator {
             )
         case let .openPlanRoute(target):
             switch target {
-            case .capturesInbox:
+            case .captureInbox:
                 return ExternalSurfaceActionPayload.routePayload(
-                    surface: .capturesInbox,
+                    surface: .captureInbox,
                     tab: AppTab.captures.rawValue
                 )
             case .habits:
@@ -315,10 +315,10 @@ struct AppExternalRouteTranslator {
             )
         case let .openPlanRoute(target):
             switch target {
-            case .capturesInbox:
+            case .captureInbox:
                 return ExternalSurfaceActionPayload.commandPayload(
                     action: actionName,
-                    surface: .capturesInbox,
+                    surface: .captureInbox,
                     tab: AppTab.captures.rawValue
                 )
             case .habits:

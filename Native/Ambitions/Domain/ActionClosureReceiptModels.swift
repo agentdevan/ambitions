@@ -1247,7 +1247,7 @@ extension ActionReceipt {
             return ActionReceiptNextAction(kind: .openPlan, title: "Open Plan", destination: .plan)
         case .goalDetail, .goals:
             return ActionReceiptNextAction(kind: .reviewGoal, title: "Review goal", destination: result.route)
-        case .capture, .capturesInbox:
+        case .capture, .captureInbox:
             return ActionReceiptNextAction(kind: .dismiss, title: "Dismiss", destination: result.route)
         case .you, .reviews, .memoryLens, .commandSheet, .weeklyReview, nil:
             return nil

@@ -50,7 +50,7 @@ final class DailyLoopAlphaQATests: XCTestCase {
 
         XCTAssertEqual(experience.execution.hero.kind, .nextAction)
         XCTAssertEqual(experience.execution.protectedMustDo.title, "Keep this")
-        XCTAssertEqual(experience.execution.bestNextMove.subtitle, "Send the client spreadsheet")
+        XCTAssertEqual(experience.execution.recommendedStep.subtitle, "Send the client spreadsheet")
         XCTAssertEqual(experience.execution.notToday.title, "Not today")
         XCTAssertEqual(experience.execution.recoveryFallback.title, "Fallback")
         XCTAssertEqual(experience.execution.whyThisMatters.title, "Why this matters")

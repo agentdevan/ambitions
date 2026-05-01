@@ -4,7 +4,7 @@ import Foundation
 enum AmbitionsAppShortcutDestination: String, CaseIterable, AppEnum {
     case today
     case plan
-    case capturesInbox = "captures_inbox"
+    case captureInbox = "captures_inbox"
     case command
     case memoryLens = "memory_lens"
     case quickCapture = "quick_capture"
@@ -22,7 +22,7 @@ enum AmbitionsAppShortcutDestination: String, CaseIterable, AppEnum {
         [
             .today: DisplayRepresentation(title: "Today"),
             .plan: DisplayRepresentation(title: "Plan"),
-            .capturesInbox: DisplayRepresentation(title: "Capture"),
+            .captureInbox: DisplayRepresentation(title: "Capture"),
             .command: DisplayRepresentation(title: "Add something"),
             .memoryLens: DisplayRepresentation(title: "What Ambitions Knows"),
             .quickCapture: DisplayRepresentation(title: "Capture"),
@@ -41,8 +41,8 @@ enum AmbitionsAppShortcutDestination: String, CaseIterable, AppEnum {
             return .openTab(.today)
         case .plan:
             return .openTab(.plan)
-        case .capturesInbox:
-            return .openPlanRoute(.capturesInbox)
+        case .captureInbox:
+            return .openPlanRoute(.captureInbox)
         case .command:
             return .presentOverlay(.commandSheet(entrySource: .appIntent))
         case .memoryLens:
@@ -70,7 +70,7 @@ enum AmbitionsAppShortcutDestination: String, CaseIterable, AppEnum {
             return "Today"
         case .plan:
             return "Plan"
-        case .capturesInbox:
+        case .captureInbox:
             return "Capture"
         case .command:
             return "Add something"
@@ -141,7 +141,7 @@ extension AmbitionsAppShortcutDestination {
                 actionName: .open,
                 routeURL: routeURL
             )
-        case .capturesInbox:
+        case .captureInbox:
             return descriptor(
                 title: "Capture",
                 dialog: "Opening Capture in Ambitions.",
@@ -179,7 +179,7 @@ extension AmbitionsAppShortcutDestination {
             return descriptor(
                 title: displayTitle,
                 dialog: "Opening the recommended step in Ambitions.",
-                commandKind: .startFocus,
+                commandKind: .startStepSession,
                 actionName: .openToday,
                 routeURL: routeURL
             )
@@ -298,13 +298,13 @@ struct CreateAmbitionsCaptureIntent: AppIntent {
             createdAt: ISO8601DateFormatter().string(from: Date()),
             text: trimmed,
             source: .appIntent,
-            landing: .capturesInbox
+            landing: .captureInbox
         )
         try SharedExternalCreationStore().append(request)
 
         await MainActor.run {
             if let url = ExternalSurfaceActionPayload.deepLinkURL(
-                surface: .capturesInbox,
+                surface: .captureInbox,
                 origin: .appIntent
             ) {
                 AppIntentLaunchRouter.shared.queue(url)
@@ -345,7 +345,7 @@ struct AmbitionsShortcutsProvider: AppShortcutsProvider {
             systemImageName: "calendar.badge.clock"
         )
         AppShortcut(
-            intent: OpenAmbitionsDestinationIntent(destination: .capturesInbox),
+            intent: OpenAmbitionsDestinationIntent(destination: .captureInbox),
             phrases: [
                 "Open Capture in \(.applicationName)",
                 "Show Capture in \(.applicationName)",
