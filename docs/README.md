@@ -157,3 +157,7 @@ Archived and superseded material is indexed from [archive/README.md](archive/REA
 - [Parallel Codex Worktree Protocol](codex/AMBITIONS_3_0_PARALLEL_CODEX_WORKTREE_PROTOCOL.md)
 - [Dependency Management Policy](canon/Ambitions_3_0_Dependency_Management_Policy.md)
 - [Mac Codex 5.5 Toolchain Setup](codex/MAC_CODEX_5_5_TOOLCHAIN_SETUP.md)
+
+## Batch Train Orchestrator
+
+Ambitions 3.0 batch trains are governed by [codex/AMBITIONS_3_0_BATCH_TRAIN_ORCHESTRATOR.md](codex/AMBITIONS_3_0_BATCH_TRAIN_ORCHESTRATOR.md). The next active train step after F03 is F03.5 Today Execution State Contract Hardening, using [codex/BATCH_F03_5_TODAY_ARCHITECTURE_HARDENING_PROMPT.md](codex/BATCH_F03_5_TODAY_ARCHITECTURE_HARDENING_PROMPT.md) and [codex/batch-trains/F03_5_Today_Architecture_Hardening.md](codex/batch-trains/F03_5_Today_Architecture_Hardening.md). FAANG handoff remains PARTIAL unless the handoff gate is explicitly re-run and passes.

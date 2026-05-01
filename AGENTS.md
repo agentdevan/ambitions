@@ -75,3 +75,7 @@ Use these entry points for Codex performance and execution:
 - `docs/codex/AMBITIONS_3_0_RUN_STATE_PROTOCOL.md`
 - `docs/canon/Ambitions_3_0_Dependency_Management_Policy.md`
 - `docs/codex/MAC_CODEX_5_5_TOOLCHAIN_SETUP.md`
+
+## Batch Train Rule
+
+For multi-batch Ambitions 3.0 execution, use `docs/codex/AMBITIONS_3_0_BATCH_TRAIN_ORCHESTRATOR.md`, `.codex/reports/current-batch-train-state.md`, and the selected manifest under `docs/codex/batch-trains/`. Codex may continue automatically only on Green. Yellow/Red stops and produces a repair or decision prompt. F17 Shell/Meridian implementation requires explicit approval.
