@@ -438,7 +438,7 @@ public struct StreakWidget: View {
         case let .ready(content):
             WidgetSurface(chrome: .widgetCard, state: .celebration) {
                 VStack(alignment: .leading, spacing: theme.spacing.md) {
-                    WidgetTitleBlock(eyebrow: "Streak", title: content.title, subtitle: content.subtitle, badge: "Live", badgeState: .celebration)
+                    WidgetTitleBlock(eyebrow: "Rhythm", title: content.title, subtitle: content.subtitle, badge: "Live", badgeState: .celebration)
                     WidgetMetricGrid(stats: content.stats)
                     Text(content.recoveryNote)
                         .font(theme.typography.caption)

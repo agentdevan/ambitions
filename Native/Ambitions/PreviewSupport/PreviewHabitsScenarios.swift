@@ -11,10 +11,10 @@ enum PreviewHabitsScenarios {
             MetricSummary(id: "active-complete", title: "Completed", value: "1", detail: "Full versions today", icon: "checkmark.circle.fill"),
             MetricSummary(id: "active-minimum", title: "Minimum versions", value: "1", detail: "Still valid", icon: "leaf.circle"),
             MetricSummary(id: "active-recovery", title: "Recovery", value: "1", detail: "Needs gentler restart", icon: "arrow.uturn.backward.circle"),
-            MetricSummary(id: "active-streak", title: "Best streak", value: "14", detail: "Across current set", icon: "flame.fill")
+            MetricSummary(id: "active-streak", title: "Best rhythm", value: "14", detail: "Across current set", icon: "flame.fill")
         ],
         habits: [
-            makeHabit(id: "habit-planning", title: "Morning planning reset", subtitle: "A 10 minute alignment pass before the workday hardens.", cadence: "Daily rhythm", streak: "6-day streak", consistency: "86% consistency • best 9", progress: 0.86, progressLabel: "86% consistency", status: .completed, note: "Today's full version is already in the log.", minimumVersion: "Open the daily plan and define one deliberate win.", supportLabel: nil),
+            makeHabit(id: "habit-planning", title: "Morning planning reset", subtitle: "A 10 minute alignment pass before the workday hardens.", cadence: "Daily rhythm", streak: "6 steady days", consistency: "86% consistency • best 9", progress: 0.86, progressLabel: "86% consistency", status: .completed, note: "Today's full version is already in the log.", minimumVersion: "Open the daily plan and define one deliberate win.", supportLabel: nil),
             makeHabit(id: "habit-review", title: "Evening review", subtitle: "Capture what moved and what still feels heavier than it should.", cadence: "Daily rhythm", streak: "Restart gently today", consistency: "57% consistency • best 5", progress: 0.57, progressLabel: "57% consistency", status: .minimumDone, note: "The minimum version counted today. That still protects the rhythm.", minimumVersion: "Write one sentence about the day and one sentence about tomorrow.", supportLabel: nil)
         ],
         recoveryHabits: [
@@ -24,7 +24,7 @@ enum PreviewHabitsScenarios {
             title: "Consistency survives misses",
             subtitle: "Recovery is shown as part of the system instead of being treated like moral failure.",
             stats: [
-                MetricSummary(id: "streak-a", title: "Current streak", value: "6", detail: "Best live rhythm", icon: "flame"),
+                MetricSummary(id: "streak-a", title: "Current rhythm", value: "6", detail: "Best live rhythm", icon: "flame"),
                 MetricSummary(id: "streak-b", title: "Consistency", value: "62%", detail: "Last 14 days", icon: "checkmark.seal"),
                 MetricSummary(id: "streak-c", title: "Recovered slips", value: "3", detail: "Recent rebounds", icon: "waveform.path.ecg")
             ],
@@ -46,7 +46,7 @@ enum PreviewHabitsScenarios {
             MetricSummary(id: "recovery-complete", title: "Completed", value: "0", detail: "Full versions today", icon: "checkmark.circle.fill"),
             MetricSummary(id: "recovery-minimum", title: "Minimum versions", value: "0", detail: "Today", icon: "leaf.circle"),
             MetricSummary(id: "recovery-recovery", title: "Recovery", value: "2", detail: "Need care", icon: "arrow.uturn.backward.circle"),
-            MetricSummary(id: "recovery-streak", title: "Best streak", value: "8", detail: "Still recoverable", icon: "flame.fill")
+            MetricSummary(id: "recovery-streak", title: "Best rhythm", value: "8", detail: "Still recoverable", icon: "flame.fill")
         ],
         habits: [],
         recoveryHabits: [
@@ -57,7 +57,7 @@ enum PreviewHabitsScenarios {
             title: "Recovery stays visible",
             subtitle: "The goal is to restart the loop cleanly, not to preserve a perfect score.",
             stats: [
-                MetricSummary(id: "recovery-streak-a", title: "Current streak", value: "0", detail: "Fresh restart", icon: "flame"),
+                MetricSummary(id: "recovery-streak-a", title: "Current rhythm", value: "0", detail: "Fresh restart", icon: "flame"),
                 MetricSummary(id: "recovery-streak-b", title: "Consistency", value: "33%", detail: "Last 14 days", icon: "checkmark.seal"),
                 MetricSummary(id: "recovery-streak-c", title: "Recovered slips", value: "2", detail: "Past month", icon: "waveform.path.ecg")
             ],
@@ -95,15 +95,15 @@ enum PreviewHabitsScenarios {
             MetricSummary(id: "empty-a", title: "Completed", value: "0", detail: "Full versions today", icon: "checkmark.circle.fill"),
             MetricSummary(id: "empty-b", title: "Minimum versions", value: "0", detail: "Today", icon: "leaf.circle"),
             MetricSummary(id: "empty-c", title: "Recovery", value: "0", detail: "Loops needing care", icon: "arrow.uturn.backward.circle"),
-            MetricSummary(id: "empty-d", title: "Best streak", value: "0", detail: "No live rhythms yet", icon: "flame.fill")
+            MetricSummary(id: "empty-d", title: "Best rhythm", value: "0", detail: "No live rhythms yet", icon: "flame.fill")
         ],
         habits: [],
         recoveryHabits: [],
         streak: StreakSummary(
             title: "Consistency will appear here",
-            subtitle: "Once a recurring routine exists, streak and recovery interpretation will be derived from native evidence.",
+            subtitle: "Once a recurring routine exists, rhythm and recovery interpretation will be derived from native evidence.",
             stats: [
-                MetricSummary(id: "empty-streak-a", title: "Current streak", value: "0", detail: "Waiting on first ritual", icon: "flame"),
+                MetricSummary(id: "empty-streak-a", title: "Current rhythm", value: "0", detail: "Waiting on first ritual", icon: "flame"),
                 MetricSummary(id: "empty-streak-b", title: "Consistency", value: "0%", detail: "No tracked windows yet", icon: "checkmark.seal")
             ],
             recoveryNote: "Rituals are waiting on recurring structure from the native planner and goal engine, not on a separate tracker."

@@ -265,7 +265,7 @@ private extension RepositoryBackedHabitsService {
                 MetricSummary(id: "habit-stat-complete", title: "Completed", value: "\(completedToday)", detail: "Full versions today", icon: "checkmark.circle.fill"),
                 MetricSummary(id: "habit-stat-minimum", title: "Minimum versions", value: "\(minimumToday)", detail: "Counted without overreach", icon: "leaf.circle"),
                 MetricSummary(id: "habit-stat-recovery", title: "Recovery", value: "\(recoveryCount)", detail: "Loops needing care", icon: "arrow.uturn.backward.circle"),
-                MetricSummary(id: "habit-stat-streak", title: "Best streak", value: "\(bestStreak)", detail: "Current dashboard range", icon: "flame.fill")
+                MetricSummary(id: "habit-stat-streak", title: "Best rhythm", value: "\(bestStreak)", detail: "Current dashboard range", icon: "flame.fill")
             ],
             habits: activeContexts.sorted(by: habitSortDescriptor(now: now)).map(makeHabitSummary),
             recoveryHabits: recoveryContexts.sorted(by: habitSortDescriptor(now: now)).map(makeHabitSummary),
@@ -273,9 +273,9 @@ private extension RepositoryBackedHabitsService {
                 title: recoveryCount > 0 ? "Consistency survives misses" : "Rhythm is compounding",
                 subtitle: recoveryCount > 0
                     ? "Recovery is being shown as part of the system, not as a scarlet letter."
-                    : "Streaks stay useful here because they explain consistency without turning into pressure theater.",
+                    : "Rhythm stays useful here because it explains consistency without turning into pressure theater.",
                 stats: [
-                    MetricSummary(id: "streak-current", title: "Current streak", value: "\(contexts.map(\.currentStreak).max() ?? 0)", detail: "Best live rhythm", icon: "flame"),
+                    MetricSummary(id: "streak-current", title: "Current rhythm", value: "\(contexts.map(\.currentStreak).max() ?? 0)", detail: "Best live rhythm", icon: "flame"),
                     MetricSummary(id: "streak-consistency", title: "Consistency", value: "\(Int((contexts.map(\.consistency).reduce(0, +) / Double(max(contexts.count, 1))) * 100))%", detail: "Last 14 days", icon: "checkmark.seal"),
                     MetricSummary(id: "streak-recovery", title: "Recovered slips", value: "\(contexts.map(\.recoveryCount).reduce(0, +))", detail: "Recent rebounds", icon: "waveform.path.ecg")
                 ],
@@ -300,7 +300,7 @@ private extension RepositoryBackedHabitsService {
             title: context.goal.title,
             subtitle: context.step.summary ?? context.goal.summary ?? context.step.actionability.completionDefinition,
             cadenceLabel: HabitGoalSemantics.cadenceLabel(goal: context.goal, step: context.step),
-            streakLabel: context.currentStreak == 0 ? "Restart gently today" : "\(context.currentStreak)-day streak",
+            streakLabel: context.currentStreak == 0 ? "Restart gently today" : "\(context.currentStreak) steady days",
             consistencyLabel: context.bestStreak > context.currentStreak
                 ? "\(Int(context.consistency * 100))% consistency • best \(context.bestStreak)"
                 : "\(Int(context.consistency * 100))% consistency",

@@ -299,7 +299,7 @@ struct GoalPlanner: GoalPlanning {
             PlannerSectionDraft(title: "Minimum Version", summary: "The minimum version keeps the goal alive on low-energy days.", kind: .supportingWork, steps: [
                 PlannerStepDraft(title: "Write the minimum viable version", summary: nil, type: .actionUnit, timingType: .logWhenDone, actionability: actionability(action: "Define the smallest acceptable version that still counts when time or energy is low.", completion: "A single minimum version is written in a way that can be done quickly.", evidence: ["A short fallback script or checklist names the minimum version."], micro: "Write the minimum version as one sentence."))
             ]),
-            PlannerSectionDraft(title: "Recovery Logic", summary: "Recovery logic matters more than perfection because streaks break.", kind: .review, steps: [
+            PlannerSectionDraft(title: "Recovery Logic", summary: "Recovery logic matters more than perfection because rhythms get disrupted.", kind: .review, steps: [
                 PlannerStepDraft(title: "Decide how to restart after a miss", summary: nil, type: .reflectionPrompt, timingType: .logWhenDone, actionability: actionability(action: "Write the reset rule for the next day after the routine is missed.", completion: "There is one clear reset rule that says how the routine resumes without punishment.", evidence: ["A recovery note exists and uses non-judgmental language."], micro: "Write the first sentence of the reset rule only."))
             ]),
         ]

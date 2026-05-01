@@ -49,7 +49,7 @@ private struct DesignSystemPreviewGallery: View {
                         Text("WidgetCard")
                             .frame(maxWidth: .infinity, alignment: .leading)
                     }
-                    StatTile(title: "Consistency", value: "92%", detail: "7 day streak quality", icon: "waveform.path.ecg", state: .success)
+                    StatTile(title: "Consistency", value: "92%", detail: "7 day rhythm quality", icon: "waveform.path.ecg", state: .success)
                 }
 
                 SectionHeader(eyebrow: "Controls", title: "Interactive Primitives")
@@ -218,7 +218,7 @@ private struct DesignSystemPreviewGallery: View {
                     )
 
                     LoadingSkeletonCard(lineCount: 4)
-                    CelebrationBanner(title: "Momentum is compounding", subtitle: "Use this after wins, completed plans, or streak milestones.")
+                    CelebrationBanner(title: "Momentum is compounding", subtitle: "Use this after wins, completed plans, or rhythm milestones.")
                 }
 
                 VStack(spacing: 12) {
