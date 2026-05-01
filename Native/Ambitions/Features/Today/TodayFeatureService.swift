@@ -1247,12 +1247,21 @@ private extension RepositoryBackedTodayService {
             ? "Step Session is narrowed to one step so the rest of Today can stay quiet."
             : "Step Session is a calmer lane back into the day."
 
+        let closeAction = TodayInlineAction(
+            kind: .closeActionClosure,
+            title: "Close the loop",
+            systemImage: "checkmark.bubble",
+            state: .selected,
+            target: primary.target
+        )
+        let supportingActions = [closeAction] + focus.primaryActionsForRecovery.filter { $0.id != primary.id && $0.kind != .startStepSession && $0.kind != .complete }
+
         return TodayStepSessionState(
             title: title,
             subtitle: subtitle,
             detail: detail,
             primaryAction: primary,
-            secondaryActions: Array(focus.primaryActionsForRecovery.filter { $0.id != primary.id && $0.kind != .startStepSession }.prefix(2)),
+            secondaryActions: Array(supportingActions.prefix(2)),
             trustWhisper: shellSummary.map {
                 TodayTrustWhisperState(
                     title: "Based on",
@@ -1849,7 +1858,7 @@ private extension RepositoryBackedTodayService {
                 body: explanation,
                 state: .selected
             )
-        case .startStepSession, .openDetail, .openPlan, .protectLater, .dismissCelebration:
+        case .startStepSession, .closeActionClosure, .openDetail, .openPlan, .protectLater, .dismissCelebration:
             break
         }
 
@@ -2484,7 +2493,7 @@ private extension RepositoryBackedTodayService {
             return .askForSmallerStep
         case .askForHelp:
             return .stuck
-        case .complete, .createReminder, .createCalendarEvent, .askWhyThisMatters, .markNotRelevant, .openDetail, .openPlan, .protectLater, .quickLog, .dismissCelebration:
+        case .complete, .closeActionClosure, .createReminder, .createCalendarEvent, .askWhyThisMatters, .markNotRelevant, .openDetail, .openPlan, .protectLater, .quickLog, .dismissCelebration:
             return nil
         }
     }
@@ -2513,6 +2522,8 @@ private extension RepositoryBackedTodayService {
             return "Created calendar event from Today."
         case .markNotRelevant:
             return "Marked not relevant from Today."
+        case .closeActionClosure:
+            return "Closed the loop from Today."
         case .openDetail, .openPlan, .askForHelp, .dismissCelebration:
             return step.title
         }

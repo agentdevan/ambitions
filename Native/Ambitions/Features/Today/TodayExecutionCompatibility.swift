@@ -90,7 +90,7 @@ extension TodayExecutionViewState {
             subtitle: "One step can become Completed, Still Counts, Rescheduled, Waiting, or Needs Recovery.",
             value: "Needs a quick check",
             semanticState: .review,
-            action: TodayInlineAction(kind: .askWhyThisMatters, title: "Close the loop", systemImage: "checkmark.bubble", state: .default, target: primary.target),
+            action: TodayInlineAction(kind: .closeActionClosure, title: "Close the loop", systemImage: "checkmark.bubble", state: .default, target: primary.target),
             explanation: TodayExplanationAffordanceState(
                 id: "today2.closure.checkin",
                 title: "Needs a quick check",

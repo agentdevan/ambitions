@@ -363,6 +363,46 @@ final class TodayViewModelTests: XCTestCase {
         XCTAssertTrue(f02RenderedReservationCopy(rail).contains("Proof and receipts stay reserved for F06."))
     }
 
+    func testF05ActionClosureSheetSupportsStillCountsWithoutProofLedger() throws {
+        let target = TodayActionTarget(goalID: "goal-f05", stepID: "step-f05")
+        let sheet = TodayActionClosureSheetState.step(
+            title: "Write the launch notes",
+            context: "Start here",
+            target: target
+        )
+
+        XCTAssertEqual(sheet.prompt, "What happened with this step?")
+        XCTAssertEqual(sheet.primaryOutcomes.map(\.closureState), [.completed, .stillCounts, .moved, .notNeeded])
+        XCTAssertTrue(sheet.outcomes.contains { $0.closureState == .blocked })
+        XCTAssertTrue(sheet.outcomes.contains { $0.closureState == .waiting })
+        XCTAssertTrue(sheet.outcomes.contains { $0.closureState == .needsRecovery })
+        XCTAssertTrue(sheet.outcomes.contains { $0.closureState == .needsReview })
+        XCTAssertTrue(sheet.outcomes.contains { $0.title == "Review later" })
+        XCTAssertEqual(sheet.outcomes.first { $0.closureState == .stillCounts }?.receiptPreview, "Still Counts · saved as proof")
+        XCTAssertFalse(sheet.visibleCopy.localizedCaseInsensitiveContains("failed"))
+        XCTAssertFalse(sheet.visibleCopy.localizedCaseInsensitiveContains("overdue"))
+        XCTAssertFalse(sheet.visibleCopy.localizedCaseInsensitiveContains("AI confidence"))
+    }
+
+    func testF05StepSessionSurfacesCloseTheLoopWithoutAutoCompleting() async throws {
+        let repositories = try await makeRepositories()
+        let service = RepositoryBackedTodayService(repositories: repositories)
+        let now = try XCTUnwrap(DomainTimestamp.date(from: "2026-04-21T08:00:00Z"))
+        let goal = makeGoal(id: "goal-f05-session", stepID: "step-f05-session", stepTitle: "Closeable step", dueAt: "2026-04-21T16:00:00Z")
+        try await repositories.goals.saveGoals([goal])
+
+        let experience = try await service.loadTodayExperience(
+            userDisplayName: "",
+            now: now,
+            entryContext: .stepSession
+        )
+
+        let session = try XCTUnwrap(experience.support.stepSession)
+        XCTAssertEqual(session.secondaryActions.first?.kind, .closeActionClosure)
+        XCTAssertEqual(session.secondaryActions.first?.title, "Close the loop")
+        XCTAssertNotEqual(session.primaryAction.kind, .closeActionClosure)
+    }
+
     func testF03StepDetailSupportsMissingDurationFallback() {
         let detail = PreviewTodayScenarios.missingDurationStepDetail
 

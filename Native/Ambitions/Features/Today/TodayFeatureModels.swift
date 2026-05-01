@@ -53,6 +53,7 @@ enum TodayDayPosture: String, Sendable {
 
 enum TodayActionKind: String, Sendable {
     case startStepSession
+    case closeActionClosure
     case complete
     case `defer`
     case split

@@ -297,7 +297,7 @@ private extension TodayExecutionProjector {
             subtitle: "Completed, Still Counts, Rescheduled, Waiting, or Needs Recovery can be recorded here.",
             value: "Needs a quick check",
             semanticState: .review,
-            action: TodayInlineAction(kind: .askWhyThisMatters, title: "Close the loop", systemImage: "checkmark.bubble", state: .default, target: hero.primaryAction.target),
+            action: TodayInlineAction(kind: .closeActionClosure, title: "Close the loop", systemImage: "checkmark.bubble", state: .default, target: hero.primaryAction.target),
             explanation: TodayExplanationAffordanceState(
                 id: "today2.closure.checkin",
                 title: "Needs a quick check",

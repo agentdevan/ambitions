@@ -7,6 +7,7 @@ struct TodayScreen: View {
     @Environment(\.accessibilityReduceMotion) private var reduceMotion
     @State private var viewModel: TodayViewModel
     @State private var selectedStepDetail: DayRailStepDetailState?
+    @State private var selectedActionClosure: TodayActionClosureSheetState?
 
     private let autoLoad: Bool
     private let showsNavigationChrome: Bool
@@ -105,6 +106,17 @@ struct TodayScreen: View {
             TodayStepDetailSheet(detail: detail)
                 .ambitionTheme(theme)
         }
+        .sheet(item: $selectedActionClosure) { closure in
+            TodayActionClosureSheet(state: closure) { outcome in
+                selectedActionClosure = nil
+                viewModel.transientMessage = TodayInlineMessage(
+                    title: outcome.title,
+                    body: outcome.receiptPreview,
+                    state: outcome.createsProof ? .success : .selected
+                )
+            }
+            .ambitionTheme(theme)
+        }
         .onChange(of: container.navigation.selectedTab) { _, selectedTab in
             guard autoLoad, selectedTab == .today else { return }
             Task {
@@ -143,6 +155,8 @@ struct TodayScreen: View {
         switch action.kind {
         case .startStepSession:
             container.navigation.selectToday(entryContext: .stepSession)
+        case .closeActionClosure:
+            selectedActionClosure = actionClosureState(for: action)
         case .openDetail, .askForHelp:
             container.navigation.openGoalDetail(
                 goalID: action.target.goalID,
@@ -174,6 +188,34 @@ struct TodayScreen: View {
                 )
             }
         }
+    }
+
+    private func actionClosureState(for action: TodayInlineAction) -> TodayActionClosureSheetState {
+        let fallback = TodayActionClosureSheetState.step(
+            title: "Today step",
+            context: "From Today",
+            target: action.target
+        )
+        guard case let .loaded(experience) = viewModel.state else { return fallback }
+        let privacy = experience.execution.dayRail.privacyProjection
+        if let hero = experience.execution.dayRail.heroStep,
+           hero.primaryAction.target == action.target || action.target.stepID == nil {
+            return TodayActionClosureSheetState.step(
+                title: privacy.detailTitle(hero.title),
+                context: experience.execution.dayRail.contextSummary,
+                target: action.target,
+                privacyLabel: privacy.sourceLabel
+            )
+        }
+        if let row = experience.execution.dayRail.rows.first(where: { $0.detailTarget.stepID == action.target.stepID || $0.detailTarget.goalID == action.target.goalID }) {
+            return TodayActionClosureSheetState.step(
+                title: privacy.detailTitle(row.title),
+                context: row.slot.title,
+                target: action.target,
+                privacyLabel: privacy.sourceLabel
+            )
+        }
+        return fallback
     }
 
     private var container: AppContainer {
