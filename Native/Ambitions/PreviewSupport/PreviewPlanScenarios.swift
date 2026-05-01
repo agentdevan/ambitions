@@ -19,6 +19,7 @@ enum PreviewPlanScenarios {
             ],
             trustWhisper: "One active goal is still outside the week, so the current calm is real but incomplete."
         ),
+        lifeSuite: seededLifeSuite,
         primaryAction: PlanWeekPrimaryAction(
             kind: .useRoom,
             title: "Use this room",
@@ -433,6 +434,7 @@ enum PreviewPlanScenarios {
             ],
             trustWhisper: "This quiet week is real because nothing active is asking it to carry more."
         ),
+        lifeSuite: emptyLifeSuite,
         primaryAction: PlanWeekPrimaryAction(
             kind: .useRoom,
             title: "Use this room",
@@ -704,5 +706,31 @@ enum PreviewPlanScenarios {
             target: GoalRouteTarget(goalID: "preview-goal-2"),
             visualState: .success
         )
+    )
+
+    private static let seededLifeSuite = PlanLifeSuiteState(
+        title: "Plan Life Suite",
+        subtitle: "Does this hold together?",
+        shapes: [
+            PlanLifeSuiteShapeState(kind: .day, title: "Day Shape", question: "What can this day honestly hold?", summary: "Today has tight room and three planned blocks.", sourceLabel: "Based on your plan", boundaryLabel: "No silent replanning", visualState: .warning),
+            PlanLifeSuiteShapeState(kind: .week, title: "Week Shape", question: "Does the week still fit?", summary: "Two days may need shaping before the week feels believable.", sourceLabel: "Based on goals and captures", boundaryLabel: "Suggestions require confirmation", visualState: .warning),
+            PlanLifeSuiteShapeState(kind: .life, title: "Life Shape", question: "Is the plan still pointed at the life you are building?", summary: "Three active goals shape the current life plan.", sourceLabel: "Based on active goals", boundaryLabel: "Life view, broader than time slots", visualState: .selected)
+        ],
+        calendarBoundaryLabel: "Calendar stays optional",
+        manualFallbackLabel: "Manual fallback available",
+        trustLabel: "No silent calendar changes"
+    )
+
+    private static let emptyLifeSuite = PlanLifeSuiteState(
+        title: "Plan Life Suite",
+        subtitle: "Does this hold together?",
+        shapes: [
+            PlanLifeSuiteShapeState(kind: .day, title: "Day Shape", question: "What can this day honestly hold?", summary: "No day shape is loaded yet.", sourceLabel: "Based on your plan", boundaryLabel: "No silent replanning", visualState: .default),
+            PlanLifeSuiteShapeState(kind: .week, title: "Week Shape", question: "Does the week still fit?", summary: "The week has room until goals, captures, or routines create real constraints.", sourceLabel: "Based on goals and captures", boundaryLabel: "Suggestions require confirmation", visualState: .selected),
+            PlanLifeSuiteShapeState(kind: .life, title: "Life Shape", question: "Is the plan still pointed at the life you are building?", summary: "Life Shape is quiet until active goals give Plan something to coordinate.", sourceLabel: "Based on active goals", boundaryLabel: "Life view, broader than time slots", visualState: .default)
+        ],
+        calendarBoundaryLabel: "Manual planning still works",
+        manualFallbackLabel: "Manual fallback available",
+        trustLabel: "No silent calendar changes"
     )
 }

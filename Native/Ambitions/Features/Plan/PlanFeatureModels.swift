@@ -637,6 +637,7 @@ struct PlanDashboard: Sendable {
     let mode: PlanDashboardMode
     let timeframeLabel: String
     let hero: PlanRealityHeroState
+    let lifeSuite: PlanLifeSuiteState
     let primaryAction: PlanWeekPrimaryAction
     let treaty: PlanTreatyState
     let capacityEnvelope: PlanCapacityEnvelopeState
@@ -662,44 +663,4 @@ struct PlanDashboard: Sendable {
     let secondaryDestinations: [PlanSecondaryDestination]
     let emptyTitle: String?
     let emptyMessage: String?
-}
-
-extension PlanDashboard {
-    func screenContractSnapshot(
-        topLevelTabTitles: [String] = ScreenContractValidator.canonicalTopLevelTabs
-    ) -> ScreenContractImplementationSnapshot {
-        ScreenContractImplementationSnapshot(
-            screenID: .plan,
-            firstScreenContent: [
-                "Week fit",
-                "Weekly Plan Strip",
-                "Rich Timeline Widget",
-                "Rituals",
-                "Scheduling",
-                "Open windows"
-            ],
-            panels: [.heroDecision, .schedule, .timeline, .weeklyPlanStrip, .recovery, .trust],
-            actions: [.makeCalendarAware, .findWindows, .move, .protect, .saveTheWeek],
-            drillDowns: ["Calendar mode", "Rituals", "Review archive", "Receipts"],
-            copySamples: [
-                hero.title,
-                hero.subtitle,
-                treaty.title,
-                capacityEnvelope.title,
-                timelineStrip.title,
-                calendarAwareness.sourceLabel,
-                calendarBoundary.writeBoundary,
-                recoveryEntry.title,
-                saveTheDay.title,
-                recoveryMaturity.title,
-                recoveryMaturity.confirmationBoundary
-            ] + timelineStrip.items.map(\.sourceLabel),
-            topLevelTabTitles: topLevelTabTitles,
-            supportsDensityBehavior: true,
-            supportsPanelSizeBehavior: true,
-            hasAccessibilitySummary: true,
-            hasPrivacySafeState: true,
-            hasGestureAlternative: true
-        )
-    }
 }

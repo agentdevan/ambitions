@@ -218,6 +218,13 @@ private extension RepositoryBackedPlanService {
             missingGoalCount: missingGoalSummaries.count,
             activeGoalCount: activeGoals.count
         )
+        let lifeSuite = PlanLifeSuiteProjector().project(
+            weekDays: weekDays,
+            calendarAwareness: calendarAwareness,
+            openCaptureCount: openCaptures.count,
+            activeGoalCount: activeGoals.count,
+            mode: mode
+        )
         let hero = makeHero(
             posture: posture,
             timeframeLabel: timeframeLabel(now: now),
@@ -332,6 +339,7 @@ private extension RepositoryBackedPlanService {
             mode: mode,
             timeframeLabel: timeframeLabel(now: now),
             hero: hero,
+            lifeSuite: lifeSuite,
             primaryAction: primaryAction,
             treaty: treaty,
             capacityEnvelope: capacityEnvelope,

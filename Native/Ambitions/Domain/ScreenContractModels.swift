@@ -556,7 +556,7 @@ enum ScreenContractRegistry {
     private static let plan = ScreenContract(
         id: .plan,
         dominantQuestion: "Does this hold together?",
-        requiredFirstScreenContent: ["Week fit", "Weekly Plan Strip", "Rich Timeline Widget", "Rituals", "Scheduling", "Open windows"],
+        requiredFirstScreenContent: ["Day Shape", "Week fit", "Week Shape", "Life Shape", "Weekly Plan Strip", "Rich Timeline Widget", "Rituals", "Scheduling", "Open windows"],
         requiredPanels: [.heroDecision, .schedule, .timeline, .weeklyPlanStrip, .recovery, .trust],
         optionalPanels: [.groupedNavigationList, .insight],
         forbiddenFirstScreenContent: ["Onboarding permission request", "Raw calendar list"],
