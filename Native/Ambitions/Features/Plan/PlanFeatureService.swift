@@ -315,6 +315,12 @@ private extension RepositoryBackedPlanService {
             openCaptures: openCaptures
         )
         let reflowReceiptPreview = makeReflowReceiptPreview(reflow: realityReflow, saveTheDay: saveTheDay)
+        let reflowDecision = PlanReflowDecisionProjector().project(
+            reflow: realityReflow,
+            recoveryEntry: recoveryEntry,
+            saveTheDay: saveTheDay,
+            receiptPreview: reflowReceiptPreview
+        )
         let recoveryMaturity = makeRecoveryMaturity(
             weekDays: weekDays,
             openCaptures: openCaptures,
@@ -351,6 +357,7 @@ private extension RepositoryBackedPlanService {
             calendarBoundary: calendarBoundary,
             recoveryEntry: recoveryEntry,
             realityReflow: realityReflow,
+            reflowDecision: reflowDecision,
             recoveryGradient: recoveryGradient,
             saveTheDay: saveTheDay,
             reflowReceiptPreview: reflowReceiptPreview,

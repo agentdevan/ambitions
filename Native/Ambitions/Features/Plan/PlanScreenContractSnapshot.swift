@@ -32,6 +32,9 @@ extension PlanDashboard {
                 calendarAwareness.sourceLabel,
                 calendarBoundary.writeBoundary,
                 recoveryEntry.title,
+                reflowDecision.title,
+                reflowDecision.sourceLabel,
+                reflowDecision.trustLabel,
                 saveTheDay.title,
                 recoveryMaturity.title,
                 recoveryMaturity.confirmationBoundary

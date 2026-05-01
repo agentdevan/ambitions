@@ -487,6 +487,30 @@ final class PlanFeatureServiceTests: XCTestCase {
         XCTAssertEqual(beforeCaptures, afterCaptures)
     }
 
+    func testF12ReflowDecisionProjectsUserOwnedOptionsWithoutSilentAutomation() async throws {
+        let repositories = try await makeRepositories()
+        try await repositories.goals.saveGoals((0..<6).map { makeWeekVisibleGoal(id: "f12-\($0)", title: "F12 \($0)") })
+        let beforeGoals = try await repositories.goals.listGoals()
+        let beforeCaptures = try await repositories.captures.listCaptures()
+        let service = RepositoryBackedPlanService(repositories: repositories)
+
+        let dashboard = try await service.loadPlanDashboard(now: fixedDate)
+        let afterGoals = try await repositories.goals.listGoals()
+        let afterCaptures = try await repositories.captures.listCaptures()
+
+        XCTAssertEqual(dashboard.reflowDecision.title, "Reflow decisions")
+        XCTAssertEqual(dashboard.reflowDecision.sourceLabel, "Based on your plan")
+        XCTAssertEqual(dashboard.reflowDecision.trustLabel, "No silent changes")
+        XCTAssertTrue(dashboard.reflowDecision.options.contains(where: { $0.kind == .protectTime }))
+        XCTAssertTrue(dashboard.reflowDecision.options.contains(where: { $0.kind == .makeSmaller }))
+        XCTAssertTrue(dashboard.reflowDecision.options.contains(where: { $0.kind == .moveLater }))
+        XCTAssertTrue(dashboard.reflowDecision.options.contains(where: { $0.kind == .reviewPlan }))
+        XCTAssertTrue(dashboard.reflowDecision.options.allSatisfy { $0.trustLabel == "No silent changes" })
+        XCTAssertTrue(dashboard.reflowDecision.receiptLabel.contains("No silent rescheduling"))
+        XCTAssertEqual(beforeGoals, afterGoals)
+        XCTAssertEqual(beforeCaptures, afterCaptures)
+    }
+
     func testReflowCopyAvoidsFakeFutureSystemClaims() async throws {
         let repositories = try await makeRepositories()
         try await repositories.goals.saveGoals((0..<6).map { makeWeekVisibleGoal(id: "copy-\($0)", title: "Copy \($0)") })
@@ -495,6 +519,11 @@ final class PlanFeatureServiceTests: XCTestCase {
         let copy = [
             dashboard.realityReflow.title,
             dashboard.realityReflow.detail,
+            dashboard.reflowDecision.title,
+            dashboard.reflowDecision.subtitle,
+            dashboard.reflowDecision.sourceLabel,
+            dashboard.reflowDecision.trustLabel,
+            dashboard.reflowDecision.receiptLabel,
             dashboard.saveTheDay.boundary,
             dashboard.recoveryMaturity.confirmationBoundary,
             dashboard.recoveryMaturity.calendarBoundary,

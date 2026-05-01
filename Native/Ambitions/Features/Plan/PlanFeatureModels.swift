@@ -649,6 +649,7 @@ struct PlanDashboard: Sendable {
     let calendarBoundary: PlanCalendarBoundaryContractState
     let recoveryEntry: PlanRecoveryEntryState
     let realityReflow: PlanRealityReflowState
+    let reflowDecision: PlanReflowDecisionState
     let recoveryGradient: PlanRecoveryGradientState
     let saveTheDay: PlanSaveTheDayState
     let reflowReceiptPreview: PlanReflowReceiptPreviewState

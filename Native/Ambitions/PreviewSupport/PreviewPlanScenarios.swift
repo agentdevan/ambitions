@@ -159,6 +159,7 @@ enum PreviewPlanScenarios {
             ],
             visualState: .warning
         ),
+        reflowDecision: seededReflowDecision,
         recoveryGradient: PlanRecoveryGradientState(
             title: "Recovery options",
             detail: "Start with the least disruptive option that still makes the plan believable.",
@@ -543,6 +544,7 @@ enum PreviewPlanScenarios {
             ],
             visualState: .default
         ),
+        reflowDecision: emptyReflowDecision,
         recoveryGradient: PlanRecoveryGradientState(
             title: "Recovery options",
             detail: "No recovery is needed, but the order stays ready if reality changes.",
@@ -732,5 +734,83 @@ enum PreviewPlanScenarios {
         calendarBoundaryLabel: "Manual planning still works",
         manualFallbackLabel: "Manual fallback available",
         trustLabel: "No silent calendar changes"
+    )
+
+    private static let seededReflowDecision = PlanReflowDecisionState(
+        title: "Reflow decisions",
+        subtitle: "Choose one path before anything changes.",
+        sourceLabel: "Based on your plan",
+        trustLabel: "No silent changes",
+        reasonLabel: "Tuesday is carrying more than this plan can calmly explain.",
+        recoveryLabel: "No schedule changes happen from this card.",
+        receiptLabel: "Safe local suggestion. No silent rescheduling. No calendar write. Nothing changed yet.",
+        options: [
+            PlanReflowDecisionOptionState(
+                id: "preview-decision-protect",
+                kind: .protectTime,
+                title: "Protect time",
+                detail: "Keep shell regression work defended before changing the rest.",
+                impactLabel: "Smallest useful adjustment",
+                sourceLabel: "Based on your plan",
+                trustLabel: "No silent changes",
+                boundaryLabel: "Safe local suggestion. Undo can be local.",
+                visualState: .selected,
+                target: GoalRouteTarget(goalID: "preview-goal-1"),
+                planRoute: nil
+            ),
+            PlanReflowDecisionOptionState(
+                id: "preview-decision-smaller",
+                kind: .makeSmaller,
+                title: "Make smaller",
+                detail: "Close only the top regression before moving anything else.",
+                impactLabel: "Local suggestion only",
+                sourceLabel: "Based on your plan",
+                trustLabel: "No silent changes",
+                boundaryLabel: "Safe local suggestion. Undo can be local.",
+                visualState: .warning,
+                target: GoalRouteTarget(goalID: "preview-goal-1"),
+                planRoute: nil
+            ),
+            PlanReflowDecisionOptionState(
+                id: "preview-decision-review",
+                kind: .reviewPlan,
+                title: "Review plan",
+                detail: "Confirm before applying any broad reflow or calendar-impacting change.",
+                impactLabel: "Nothing changes until confirmed",
+                sourceLabel: "Based on your plan",
+                trustLabel: "No silent changes",
+                boundaryLabel: "Broad reflow needs confirmation. Undo not supported yet.",
+                visualState: .warning,
+                target: nil,
+                planRoute: nil
+            )
+        ],
+        visualState: .warning
+    )
+
+    private static let emptyReflowDecision = PlanReflowDecisionState(
+        title: "Reflow decisions",
+        subtitle: "Choose one path before anything changes.",
+        sourceLabel: "Based on your plan",
+        trustLabel: "No silent changes",
+        reasonLabel: "There is not enough plan pressure to reflow yet.",
+        recoveryLabel: "No schedule changes happen from this card.",
+        receiptLabel: "Safe local suggestion. No silent rescheduling. No calendar write. Nothing changed yet.",
+        options: [
+            PlanReflowDecisionOptionState(
+                id: "preview-empty-decision-keep",
+                kind: .keepPlan,
+                title: "Keep plan",
+                detail: "Create or choose one plan item before reflowing anything.",
+                impactLabel: "No plan mutation",
+                sourceLabel: "Based on your plan",
+                trustLabel: "No silent changes",
+                boundaryLabel: "Safe local suggestion. Undo can be local.",
+                visualState: .default,
+                target: nil,
+                planRoute: nil
+            )
+        ],
+        visualState: .default
     )
 }

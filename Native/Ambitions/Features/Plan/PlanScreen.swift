@@ -128,6 +128,8 @@ struct PlanScreen: View {
 
                     PlanRealityReflowCard(reflow: dashboard.realityReflow, onActivate: handleReflowSuggestion)
 
+                    PlanReflowDecisionCard(decision: dashboard.reflowDecision, onActivate: handleReflowDecision)
+
                     PlanRecoveryGradientCard(gradient: dashboard.recoveryGradient)
 
                     PlanSaveTheDayCard(saveTheDay: dashboard.saveTheDay)
@@ -258,6 +260,16 @@ struct PlanScreen: View {
             return
         }
         if let route = suggestion.planRoute {
+            openPlanRoute(route)
+        }
+    }
+
+    private func handleReflowDecision(_ option: PlanReflowDecisionOptionState) {
+        if let target = option.target {
+            openGoal(target)
+            return
+        }
+        if let route = option.planRoute {
             openPlanRoute(route)
         }
     }
