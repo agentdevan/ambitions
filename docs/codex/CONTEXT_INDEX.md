@@ -11,7 +11,8 @@ Ambitions 3.0 is the active source of truth. This file defines Codex read order,
 - F00 Current Implementation Gap Audit is complete as an audit-only traceability pass.
 - F01/F02 Reality Rail work is now represented in Today state and UI evidence: Today renders a focused Reality Rail with `Start here`, `Start now`, Now/Next/Later, source/context labels, duration labels, privacy-safe projection, empty/unavailable copy, and reserved closure/proof slots.
 - F03 Step Detail work is now represented as a Today-local sheet opened from the Reality Rail `Start here` card and Now/Next/Later rows, with grounded recommendation explanation, duration/source/context labels, private redaction, and stable `TodayStepDetail*` accessibility identifiers.
-- Next active 3.0 implementation continuation is F04 Step Session rename/migration and routing unless the user explicitly chooses another gate.
+- F03.5 Today Execution State Contract Hardening is complete: `TodayExecutionViewState.swift` is now a small aggregate state contract, while Day Rail state, Step Detail state, projection helpers, projector logic, compatibility helpers, and screen-contract snapshot live in dedicated Today-owned files.
+- Next active 3.0 implementation continuation is F04 Step Session rename/migration and routing unless the user explicitly chooses another gate. F04 must not start Action Closure or Proof/Receipt Ledger work.
 
 ## Required Read Order
 
@@ -74,11 +75,12 @@ For non-trivial work, read in this order:
 
 ## Batch Train Context
 
-Batch-train execution uses `docs/codex/AMBITIONS_3_0_BATCH_TRAIN_ORCHESTRATOR.md`, `docs/codex/batch-trains/README.md`, `.codex/reports/current-batch-train-state.md`, and the matching validation/operation packs. Current next batch after F03 is F03.5 Today Execution State Contract Hardening.
+Batch-train execution uses `docs/codex/AMBITIONS_3_0_BATCH_TRAIN_ORCHESTRATOR.md`, `docs/codex/batch-trains/README.md`, `.codex/reports/current-batch-train-state.md`, and the matching validation/operation packs. F03.5 Today Execution State Contract Hardening is complete; the current next batch is F04 Step Session rename/migration and routing.
 
 ## F-Series Audit Reports
 
 - `docs/audits/ambitions-3-0-f00-current-implementation-gap-audit-report.md`
 - `docs/audits/ambitions-3-0-f02-reality-rail-visual-states-report.md`
 - `docs/audits/ambitions-3-0-f03-step-detail-recommendation-explanation-report.md`
+- `docs/audits/ambitions-3-0-f03-5-today-state-contract-hardening-report.md`
 - `docs/audits/ambitions-3-0-batch-train-orchestrator-report.md`

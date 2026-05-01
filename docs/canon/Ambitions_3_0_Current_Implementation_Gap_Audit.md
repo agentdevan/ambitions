@@ -43,9 +43,12 @@ FAANG handoff remains **PARTIAL** until at least these blockers are resolved:
 - release, accessibility, device, TestFlight, and App Store claims remain gated
   by the existing evidence rules
 
-F04 should continue with **Step Session rename/migration and routing**, not with
-broad shell replacement, global identifier migration, or release readiness
-claims.
+F03.5 has now reduced the Today execution state contract risk that blocked F04:
+`TodayExecutionViewState.swift` is no longer the Day Rail, projector,
+compatibility, and screen-contract owner. F04 should continue with **Step
+Session rename/migration and routing**, not with broad shell replacement,
+global identifier migration, Action Closure, Proof/Receipt Ledger, or release
+readiness claims.
 
 ## Current Build/Test Status
 
@@ -308,4 +311,4 @@ and the full UI smoke gate pass.
 
 ## Batch Train Architecture Hardening Update
 
-F03.5 is now inserted before F04 because `TodayExecutionViewState.swift` exceeds the 1000-line architecture threshold after F01-F03. F13.5 and F16.5 are conditional checkpoint batches for Goals/You/Trust and whole-app SwiftUI state-contract risk. These batches preserve behavior and do not mark new product features implemented.
+F03.5 is complete. It was inserted before F04 because `TodayExecutionViewState.swift` exceeded the 1000-line architecture threshold after F01-F03; the file is now reduced to `181` lines, with Day Rail state, Step Detail state, projection, projector, compatibility, and screen-contract responsibilities in dedicated Today-owned files. F13.5 and F16.5 are conditional checkpoint batches for Goals/You/Trust and whole-app SwiftUI state-contract risk. These batches preserve behavior and do not mark new product features implemented.
