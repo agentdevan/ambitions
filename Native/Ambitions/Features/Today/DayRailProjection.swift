@@ -59,7 +59,7 @@ extension AmbitionsDayRailViewState {
 extension DayRailDurationState {
     static func placeholder(for action: TodayInlineAction) -> DayRailDurationState {
         switch action.kind {
-        case .startFocus:
+        case .startStepSession:
             return DayRailDurationState(minutes: 25, source: .suggested, label: "25 min suggested")
         case .complete:
             return DayRailDurationState(minutes: nil, source: .notSet, label: "Duration not set")

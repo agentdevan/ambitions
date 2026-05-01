@@ -10,7 +10,12 @@ enum TodayExperienceMode: String, Sendable {
 enum TodayEntryContext: String, Sendable {
     case standard
     case recovery
+    case stepSession
     case focus
+
+    var normalized: TodayEntryContext {
+        self == .focus ? .stepSession : self
+    }
 }
 
 enum TodayDayPosture: String, Sendable {
@@ -47,7 +52,7 @@ enum TodayDayPosture: String, Sendable {
 }
 
 enum TodayActionKind: String, Sendable {
-    case startFocus
+    case startStepSession
     case complete
     case `defer`
     case split
@@ -194,7 +199,7 @@ struct TodayMomentumStripState: Sendable {
 struct TodaySupportLayerState: Sendable {
     let timeAperture: TodayTimeApertureState
     let recoveryBloom: TodayRecoveryBloomState?
-    let focusScreenlet: TodayFocusScreenletState?
+    let stepSession: TodayStepSessionState?
     let fixedCommitments: TodayFixedCommitmentsState
     let flexibleRoom: TodayFlexibleRoomState
     let momentum: TodayMomentumStripState
@@ -394,7 +399,7 @@ struct TodayRecoveryBloomState: Sendable {
     let options: [TodayRecoveryOptionState]
 }
 
-struct TodayFocusScreenletState: Sendable {
+struct TodayStepSessionState: Sendable {
     let title: String
     let subtitle: String
     let detail: String

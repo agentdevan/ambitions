@@ -54,7 +54,7 @@ struct RepositoryBackedTodayService: TodayServicing {
 
     func performAction(_ action: TodayInlineAction, now: Date) async throws -> TodayActionResponse {
         switch action.kind {
-        case .startFocus:
+        case .startStepSession:
             return TodayActionResponse(message: nil)
         case .openDetail:
             return TodayActionResponse(
@@ -451,12 +451,12 @@ private extension RepositoryBackedTodayService {
     }
 
     func activeContextLens(entryContext: TodayEntryContext, goals: [Goal], captures: [Capture]) -> NowContextLens {
-        switch entryContext {
+        switch entryContext.normalized {
         case .recovery:
             return .recovery
-        case .focus:
+        case .stepSession:
             return .deepFocus
-        case .standard:
+        case .standard, .focus:
             break
         }
         if let captureLens = captures.compactMap(\.contextLensHint).first {
@@ -556,12 +556,12 @@ private extension RepositoryBackedTodayService {
         if mode == .empty {
             return .noPlan
         }
-        switch entryContext {
+        switch entryContext.normalized {
         case .recovery:
             return .recovering
-        case .focus:
+        case .stepSession:
             return .stable
-        case .standard:
+        case .standard, .focus:
             break
         }
         if clarificationCount > 0 {
@@ -653,7 +653,7 @@ private extension RepositoryBackedTodayService {
                 focus: focus,
                 freeTime: freeTime
             ),
-            focusScreenlet: makeFocusScreenlet(
+            stepSession: makeStepSession(
                 entryContext: entryContext,
                 focus: focus,
                 posture: posture,
@@ -812,14 +812,14 @@ private extension RepositoryBackedTodayService {
         }()
 
         var actions = focusActions
-        if entryContext != .focus,
+        if entryContext.normalized != .stepSession,
            posture == .stable,
            let firstFocusAction = focusActions.first(where: {
                $0.kind == .complete || $0.kind == .split || $0.kind == .askForHelp
            }) {
             actions.insert(
                 TodayInlineAction(
-                    kind: .startFocus,
+                    kind: .startStepSession,
                     title: "Start now",
                     systemImage: "scope",
                     state: .selected,
@@ -907,7 +907,7 @@ private extension RepositoryBackedTodayService {
     }
 
     func makeReentryState(entryContext: TodayEntryContext) -> TodayReentryState? {
-        switch entryContext {
+        switch entryContext.normalized {
         case .standard:
             return nil
         case .recovery:
@@ -917,13 +917,15 @@ private extension RepositoryBackedTodayService {
                 detail: "This pass is centered on the calmest next step, not the whole backlog.",
                 state: .selected
             )
-        case .focus:
+        case .stepSession:
             return TodayReentryState(
                 eyebrow: "Re-entry",
-                title: "Focus landed in Today",
-                detail: "The hero is holding the clearest next step at the top of the screen.",
+                title: "Step Session landed in Today",
+                detail: "The hero is holding the clearest next step without turning the session into a timer.",
                 state: .success
             )
+        case .focus:
+            return nil
         }
     }
 
@@ -1188,7 +1190,7 @@ private extension RepositoryBackedTodayService {
         }
 
         append(actions.first(where: { $0.kind == .split }), title: "Smaller version", detail: "Shrink the next step until it feels safe to start.", state: .selected)
-        append(actions.first(where: { $0.kind == .complete || $0.kind == .startFocus }), title: "Safest step", detail: "If the current step is still doable, stay with the calmest useful action.", state: .success)
+        append(actions.first(where: { $0.kind == .complete || $0.kind == .startStepSession }), title: "Safest step", detail: "If the current step is still doable, stay with the calmest useful action.", state: .success)
         append(actions.first(where: { $0.kind == .reschedule || $0.kind == .defer }), title: "Reschedule gently", detail: "Reschedule the work without turning the day into a failure narrative.", state: .default)
         append(actions.first(where: { $0.kind == .protectLater }), title: "Adjust plan", detail: "Put one cleaner block in Plan instead of squeezing it here.", state: .default)
         append(
@@ -1205,13 +1207,13 @@ private extension RepositoryBackedTodayService {
         return Array(options.prefix(4))
     }
 
-    func makeFocusScreenlet(
+    func makeStepSession(
         entryContext: TodayEntryContext,
         focus: TodayFocusState,
         posture: TodayDayPosture,
         shellSummary: GoalShellSummaryState?
-    ) -> TodayFocusScreenletState? {
-        guard entryContext == .focus else { return nil }
+    ) -> TodayStepSessionState? {
+        guard entryContext.normalized == .stepSession else { return nil }
         let fallbackAction = TodayInlineAction(
             kind: .openPlan,
             title: "Open Plan",
@@ -1219,7 +1221,7 @@ private extension RepositoryBackedTodayService {
             state: .selected,
             target: TodayActionTarget()
         )
-        let primary = focus.primaryActionsForRecovery.first(where: { $0.kind != .startFocus }) ?? fallbackAction
+        let primary = focus.primaryActionsForRecovery.first(where: { $0.kind != .startStepSession }) ?? fallbackAction
 
         let title: String
         let subtitle: String
@@ -1242,15 +1244,15 @@ private extension RepositoryBackedTodayService {
         }
 
         let detail = posture == .stable
-            ? "Focus is narrowed to one step so the rest of Today can stay quiet."
-            : "Focus is being used as a calmer lane back into the day."
+            ? "Step Session is narrowed to one step so the rest of Today can stay quiet."
+            : "Step Session is a calmer lane back into the day."
 
-        return TodayFocusScreenletState(
+        return TodayStepSessionState(
             title: title,
             subtitle: subtitle,
             detail: detail,
             primaryAction: primary,
-            secondaryActions: Array(focus.primaryActionsForRecovery.filter { $0.id != primary.id && $0.kind != .startFocus }.prefix(2)),
+            secondaryActions: Array(focus.primaryActionsForRecovery.filter { $0.id != primary.id && $0.kind != .startStepSession }.prefix(2)),
             trustWhisper: shellSummary.map {
                 TodayTrustWhisperState(
                     title: "Based on",
@@ -1847,7 +1849,7 @@ private extension RepositoryBackedTodayService {
                 body: explanation,
                 state: .selected
             )
-        case .startFocus, .openDetail, .openPlan, .protectLater, .dismissCelebration:
+        case .startStepSession, .openDetail, .openPlan, .protectLater, .dismissCelebration:
             break
         }
 
@@ -2472,7 +2474,7 @@ private extension RepositoryBackedTodayService {
 
     func rescheduleTrigger(for kind: TodayActionKind) -> RescheduleTrigger? {
         switch kind {
-        case .startFocus:
+        case .startStepSession:
             return nil
         case .defer:
             return .delay
@@ -2489,7 +2491,7 @@ private extension RepositoryBackedTodayService {
 
     func note(for kind: TodayActionKind, step: Step) -> String {
         switch kind {
-        case .startFocus:
+        case .startStepSession:
             return "Started step from Today."
         case .complete:
             return "Completed from Today."

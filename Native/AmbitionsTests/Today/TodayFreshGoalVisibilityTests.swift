@@ -27,7 +27,7 @@ final class TodayFreshGoalVisibilityTests: XCTestCase {
 
         XCTAssertEqual(experience.hero.truth.nowSubtitle, "Ship the native create goal flow")
         XCTAssertFalse(experience.hero.truth.nowTitle.isEmpty)
-        XCTAssertEqual(experience.hero.primaryAction.action.kind, .startFocus)
+        XCTAssertEqual(experience.hero.primaryAction.action.kind, .startStepSession)
         XCTAssertFalse(experience.support.timeAperture.windows.isEmpty)
         let heroActions = [experience.hero.primaryAction.action] + experience.hero.primaryAction.supportingActions
         XCTAssertTrue(heroActions.contains(where: {

@@ -39,7 +39,7 @@ final class TodayViewModelTests: XCTestCase {
         let experience = try await service.loadTodayExperience(userDisplayName: "", now: now)
 
         XCTAssertEqual(experience.hero.truth.posture, .stable)
-        XCTAssertEqual(experience.hero.primaryAction.action.kind, .startFocus)
+        XCTAssertEqual(experience.hero.primaryAction.action.kind, .startStepSession)
         XCTAssertEqual(experience.hero.primaryAction.action.target.goalID, "goal-ritual")
         XCTAssertTrue(experience.hero.truth.contextPills.contains(where: { $0.title.contains("1 active goal") }))
         XCTAssertFalse(experience.support.timeAperture.windows.isEmpty)
@@ -80,7 +80,7 @@ final class TodayViewModelTests: XCTestCase {
         XCTAssertFalse(experience.execution.todayPlanLayer.openWindowLabel.isEmpty)
         XCTAssertNotNil(experience.execution.hero.explanation)
         XCTAssertNotNil(experience.execution.saveTheDayAction)
-        XCTAssertTrue(experience.execution.commandMappings.contains { $0.actionKind == .startFocus && $0.commandKind == .startFocus })
+        XCTAssertTrue(experience.execution.commandMappings.contains { $0.actionKind == .startStepSession && $0.commandKind == .startFocus })
         XCTAssertTrue(experience.execution.commandMappings.contains { $0.actionKind == .askWhyThisMatters && $0.commandKind == .askWhy })
     }
 
@@ -102,7 +102,7 @@ final class TodayViewModelTests: XCTestCase {
         XCTAssertEqual(heroStep.primaryAction.title, "Start now")
         XCTAssertEqual(heroStep.duration.source, .suggested)
         XCTAssertEqual(rail.durationSource, .suggested)
-        XCTAssertEqual(rail.primaryAction?.kind, .startFocus)
+        XCTAssertEqual(rail.primaryAction?.kind, .startStepSession)
         XCTAssertEqual(rail.rowTapDetailTargetPlaceholder?.kind, .stepDetail)
         XCTAssertEqual(rail.rowTapDetailTargetPlaceholder?.placeholderLabel, "Open Step Detail.")
         XCTAssertEqual(rail.rows.map(\.slot), [.now, .next, .later])
@@ -350,12 +350,12 @@ final class TodayViewModelTests: XCTestCase {
         }
     }
 
-    func testF03StartNowRemainsReservedAndClosureProofStayUnimplemented() throws {
+    func testF04StartNowUsesStepSessionActionAndClosureProofStayUnimplemented() throws {
         let rail = PreviewTodayScenarios.stable.execution.dayRail
         let detail = try XCTUnwrap(PreviewTodayScenarios.stepDetailStartHere)
 
         XCTAssertEqual(detail.primaryAction.title, "Start now")
-        XCTAssertEqual(detail.primaryAction.kind, .startFocus)
+        XCTAssertEqual(detail.primaryAction.kind, .startStepSession)
         XCTAssertEqual(detail.secondaryActions.map(\.title), ["Adjust plan", "Review later"])
         XCTAssertTrue(rail.closureSlot.reservedForActionClosureSheet)
         XCTAssertTrue(rail.proofSlot.reservedForReceiptPeek)
@@ -620,23 +620,24 @@ final class TodayViewModelTests: XCTestCase {
         XCTAssertFalse(experience.support.timeAperture.windows.isEmpty)
     }
 
-    func testFocusEntryContextSurfacesBoundedFocusScreenlet() async throws {
+    func testStepSessionEntryContextSurfacesBoundedStepSession() async throws {
         let repositories = try await makeRepositories()
         let service = RepositoryBackedTodayService(repositories: repositories)
         let now = try XCTUnwrap(DomainTimestamp.date(from: "2026-04-21T08:00:00Z"))
-        let goal = makeGoal(id: "goal-focus", stepID: "step-focus", stepTitle: "Focus-backed step", dueAt: "2026-04-21T16:00:00Z")
+        let goal = makeGoal(id: "goal-step-session", stepID: "step-session-step", stepTitle: "Step Session-backed step", dueAt: "2026-04-21T16:00:00Z")
         try await repositories.goals.saveGoals([goal])
 
         let experience = try await service.loadTodayExperience(
             userDisplayName: "",
             now: now,
-            entryContext: .focus
+            entryContext: .stepSession
         )
 
         XCTAssertEqual(experience.hero.truth.posture, .stable)
         XCTAssertEqual(experience.hero.primaryAction.action.kind, .complete)
-        XCTAssertEqual(experience.support.focusScreenlet?.title, "Focus-backed step")
-        XCTAssertEqual(experience.support.focusScreenlet?.primaryAction.kind, .complete)
+        XCTAssertEqual(experience.support.stepSession?.title, "Step Session-backed step")
+        XCTAssertTrue(experience.support.stepSession?.detail.contains("Step Session") == true)
+        XCTAssertEqual(experience.support.stepSession?.primaryAction.kind, .complete)
     }
 
     @MainActor

@@ -344,11 +344,11 @@ enum PreviewTodayScenarios {
                     )
                 ),
                 recoveryBloom: recoveryBloom(for: posture, primaryAction: primaryAction, supportingActions: supportingActions),
-                focusScreenlet: reentry?.title.contains("Focus") == true
-                    ? TodayFocusScreenletState(
+                stepSession: reentry?.title.contains("Step Session") == true || reentry?.title.contains("Focus") == true
+                    ? TodayStepSessionState(
                         title: title,
                         subtitle: nowSubtitle,
-                        detail: "Focus is narrowed to one step so the rest of Today can stay quiet.",
+                        detail: "Step Session is narrowed to one step so the rest of Today can stay quiet.",
                         primaryAction: supportingActions.first ?? primaryAction,
                         secondaryActions: Array(supportingActions.dropFirst().prefix(2)),
                         trustWhisper: TodayTrustWhisperState(

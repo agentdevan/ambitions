@@ -141,8 +141,8 @@ struct TodayScreen: View {
 
     private func handleAction(_ action: TodayInlineAction) {
         switch action.kind {
-        case .startFocus:
-            container.navigation.selectToday(entryContext: .focus)
+        case .startStepSession:
+            container.navigation.selectToday(entryContext: .stepSession)
         case .openDetail, .askForHelp:
             container.navigation.openGoalDetail(
                 goalID: action.target.goalID,

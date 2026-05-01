@@ -755,7 +755,7 @@ private extension TodayExecutionProjector {
         let target = TodayActionTarget(goalID: action.reference?.goalID, stepID: action.reference?.stepID)
         switch action.kind {
         case .focus:
-            return TodayInlineAction(kind: .startFocus, title: "Start now", systemImage: "scope", state: .selected, target: target)
+            return TodayInlineAction(kind: .startStepSession, title: "Start now", systemImage: "scope", state: .selected, target: target)
         case .completeAction:
             return TodayInlineAction(kind: .complete, title: "Complete", systemImage: "checkmark", state: .success, target: target)
         case .openGoal:

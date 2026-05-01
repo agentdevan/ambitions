@@ -70,7 +70,7 @@ extension DayRailRowState {
 
 extension DayRailStepDetailState {
     static func reservedStartNowAction(target: TodayActionTarget) -> TodayInlineAction {
-        TodayInlineAction(kind: .startFocus, title: "Start now", systemImage: "scope", state: .selected, target: target)
+        TodayInlineAction(kind: .startStepSession, title: "Start now", systemImage: "scope", state: .selected, target: target)
     }
 
     static func placeholderActions(target: TodayActionTarget) -> [TodayInlineAction] {

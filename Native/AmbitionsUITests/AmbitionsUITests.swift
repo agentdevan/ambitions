@@ -453,10 +453,10 @@ final class AmbitionsUITests: XCTestCase {
 
         XCTAssertTrue(app.descendants(matching: .any)["today.screen"].waitForExistence(timeout: 10))
         XCTAssertTrue(app.descendants(matching: .any)["today.hero.reentry"].waitForExistence(timeout: 10))
-        XCTAssertTrue(scrollUntilElementExists("today.support.focus-screenlet", in: app))
+        XCTAssertTrue(scrollUntilElementExists("today.support.step-session", in: app))
     }
 
-    func testTodayStartFocusCanOpenBoundedFocusScreenlet() throws {
+    func testTodayStartNowCanOpenBoundedStepSession() throws {
         let app = makeApp(bootstrapMode: "demo")
         app.launch()
 
@@ -477,7 +477,7 @@ final class AmbitionsUITests: XCTestCase {
             focusAction.tap()
         }
 
-        XCTAssertTrue(scrollUntilElementExists("today.support.focus-screenlet", in: app))
+        XCTAssertTrue(scrollUntilElementExists("today.support.step-session", in: app))
     }
 
     func testTodayCanHandOffToGoalDetail() throws {

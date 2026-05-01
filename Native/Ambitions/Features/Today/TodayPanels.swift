@@ -226,7 +226,7 @@ private struct DayRailHeroStepCard: View {
         .accessibilityElement(children: .combine)
         .accessibilityLabel(accessibilityLabel)
         .accessibilityValue("\(step.duration.label). \(sourceSummary)")
-        .accessibilityHint("Opens Step Detail. Start now stays reserved for Step Session in F04.")
+        .accessibilityHint("Opens Step Detail. Start now opens Step Session.")
         .accessibilityIdentifier(privacy.isSensitiveProjection ? "TodayRealityRailPrivateItem" : "TodayRealityRailHeroCard")
     }
 
@@ -560,7 +560,7 @@ struct TodayStepDetailSheet: View {
             }
             .buttonStyle(AmbitionPressableButtonStyle(state: .default))
             .disabled(true)
-            .accessibilityHint("Step Session starts in F04. This action is visible but not active yet.")
+            .accessibilityHint("Starts a bounded Step Session for this step.")
             .accessibilityIdentifier("TodayStepDetailPrimaryAction")
 
             HStack(spacing: theme.spacing.sm) {
@@ -1900,9 +1900,9 @@ struct TodaySupportCard: View {
                     }
                 }
 
-                if let focusScreenlet = support.focusScreenlet {
-                    TodayFocusScreenletCard(state: focusScreenlet, onAction: onAction)
-                        .accessibilityIdentifier("today.support.focus-screenlet")
+                if let stepSession = support.stepSession {
+                    TodayStepSessionCard(state: stepSession, onAction: onAction)
+                        .accessibilityIdentifier("today.support.step-session")
                 }
 
                 if let recoveryBloom = support.recoveryBloom {
@@ -2256,16 +2256,16 @@ private struct TodayRecoveryBloomCard: View {
     }
 }
 
-private struct TodayFocusScreenletCard: View {
+private struct TodayStepSessionCard: View {
     @Environment(\.ambitionTheme) private var theme
 
-    let state: TodayFocusScreenletState
+    let state: TodayStepSessionState
     let onAction: (TodayInlineAction) -> Void
 
     var body: some View {
         VStack(alignment: .leading, spacing: theme.spacing.md) {
             SectionHeader(
-                eyebrow: "Focus screenlet",
+                eyebrow: "Step Session",
                 title: state.title,
                 subtitle: state.subtitle
             )
@@ -2410,8 +2410,8 @@ private struct TodayActionAccessibilityHint: ViewModifier {
 
     func body(content: Content) -> some View {
         switch action.kind {
-        case .startFocus:
-            content.accessibilityHint("Narrows Today into the bounded focus screenlet entry.")
+        case .startStepSession:
+            content.accessibilityHint("Starts a bounded Step Session for this one step.")
         case .askWhyThisMatters:
             content.accessibilityHint("Explains why this step is worth doing now.")
         case .protectLater:

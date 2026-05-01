@@ -314,7 +314,7 @@ extension TodayExecutionViewState {
         case .askWhyThisMatters:
             kind = .askWhy
             destination = nil
-        case .startFocus:
+        case .startStepSession:
             kind = .startFocus
             destination = nil
         case .complete:

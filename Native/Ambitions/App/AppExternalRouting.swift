@@ -570,6 +570,7 @@ private extension TodayEntryContext {
         switch self {
         case .standard: "Open Today"
         case .recovery: "Quick recovery"
+        case .stepSession: "Step Session"
         case .focus: "Quick focus"
         }
     }
@@ -578,6 +579,7 @@ private extension TodayEntryContext {
         switch self {
         case .standard: .recall
         case .recovery: .recovery
+        case .stepSession: .focus
         case .focus: .focus
         }
     }
