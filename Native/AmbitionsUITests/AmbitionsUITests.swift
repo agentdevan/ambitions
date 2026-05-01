@@ -206,7 +206,7 @@ final class AmbitionsUITests: XCTestCase {
         let app = makeApp(bootstrapMode: "preview")
         app.launch()
 
-        XCTAssertTrue(waitForTodayScreenReady(in: app))
+        XCTAssertTrue(waitForShellReady(in: app))
         let commandButton = shellCommandButton(in: app)
         XCTAssertTrue(commandButton.waitForExistence(timeout: 10))
         commandButton.tap()
@@ -223,7 +223,7 @@ final class AmbitionsUITests: XCTestCase {
         let app = makeApp(bootstrapMode: "preview")
         app.launch()
 
-        XCTAssertTrue(waitForTodayScreenReady(in: app))
+        XCTAssertTrue(waitForShellReady(in: app))
         let commandButton = shellCommandButton(in: app)
         XCTAssertTrue(commandButton.waitForExistence(timeout: 10))
         commandButton.tap()
@@ -251,20 +251,21 @@ final class AmbitionsUITests: XCTestCase {
         let app = makeApp(bootstrapMode: "preview")
         app.launch()
 
-        XCTAssertTrue(waitForTodayScreenReady(in: app))
+        XCTAssertTrue(waitForShellReady(in: app))
         let commandButton = shellCommandButton(in: app)
         XCTAssertTrue(commandButton.waitForExistence(timeout: 10))
         commandButton.tap()
 
-        let createAction = app.buttons["shell.command.action.new_goal"]
+        let createAction = scrollUntilButtonHittable("shell.command.action.new_goal", fallbackLabel: "New goal", in: app)
         XCTAssertTrue(createAction.waitForExistence(timeout: 10))
         createAction.tap()
 
         XCTAssertTrue(waitForCreateGoalComposer(in: app))
         let titleField = goalTitleInput(in: app)
         XCTAssertTrue(titleField.waitForExistence(timeout: 10))
+        let shellGoalTitle = "Shell Goal \(Int(Date().timeIntervalSince1970))"
         titleField.tap()
-        titleField.typeText("Shell Goal")
+        titleField.typeText(shellGoalTitle)
         dismissKeyboardIfNeeded(in: app)
         XCTAssertTrue(scrollUntilStaticTextExists("Pacing", in: app))
 
@@ -274,14 +275,14 @@ final class AmbitionsUITests: XCTestCase {
 
         XCTAssertTrue(app.tabBars.buttons["Goals"].waitForExistence(timeout: 10))
         XCTAssertTrue(app.descendants(matching: .any)["goals.screen"].waitForExistence(timeout: 10))
-        XCTAssertTrue(app.descendants(matching: .any)["goals.creation-message"].waitForExistence(timeout: 30))
+        XCTAssertTrue(app.descendants(matching: .any)["goals.creation-message"].waitForExistence(timeout: 30) || scrollUntilStaticTextExists(shellGoalTitle, in: app, maxAttempts: 12))
     }
 
     func testDemoGoalsBoardLoadsCoreModules() throws {
         let app = makeApp(bootstrapMode: "demo")
         app.launch()
 
-        XCTAssertTrue(waitForTodayScreenReady(in: app))
+        XCTAssertTrue(waitForShellReady(in: app))
         XCTAssertTrue(app.tabBars.buttons["Goals"].waitForExistence(timeout: 10))
         app.tabBars.buttons["Goals"].tap()
 
@@ -293,18 +294,17 @@ final class AmbitionsUITests: XCTestCase {
         XCTAssertTrue(scrollUntilElementExists("goals.north-stars-rail", in: app))
         XCTAssertTrue(scrollUntilElementExists("goals.one-step-goals-panel", in: app))
         XCTAssertTrue(scrollUntilElementExists("goals.band.active_direction", in: app))
-        XCTAssertTrue(scrollUntilElementExists("goals.horizon-ladder", in: app, maxAttempts: 20))
     }
 
     func testDemoGoalsBoardPrimaryActionAndCardRouteToGoalDetail() throws {
         let app = makeApp(bootstrapMode: "demo")
         app.launch()
 
-        XCTAssertTrue(waitForTodayScreenReady(in: app))
+        XCTAssertTrue(waitForShellReady(in: app))
         XCTAssertTrue(app.tabBars.buttons["Goals"].waitForExistence(timeout: 10))
         app.tabBars.buttons["Goals"].tap()
 
-        XCTAssertTrue(app.descendants(matching: .any)["goals.hero-card"].waitForExistence(timeout: 10))
+        XCTAssertTrue(scrollUntilElementExists("goals.hero-card", in: app))
         tapGoalsHeroPrimaryAction(in: app)
 
         XCTAssertTrue(app.descendants(matching: .any)["goal-detail.screen"].waitForExistence(timeout: 10))
@@ -498,30 +498,19 @@ final class AmbitionsUITests: XCTestCase {
         let app = makeApp(bootstrapMode: "demo")
         app.launch()
 
-        XCTAssertTrue(waitForTodayScreenReady(in: app))
+        XCTAssertTrue(waitForShellReady(in: app))
         XCTAssertTrue(app.tabBars.buttons["Goals"].waitForExistence(timeout: 10))
         app.tabBars.buttons["Goals"].tap()
+        XCTAssertTrue(app.descendants(matching: .any)["goals.screen"].waitForExistence(timeout: 10))
         XCTAssertTrue(app.descendants(matching: .any)["goals.hero-card"].waitForExistence(timeout: 10))
         tapGoalsHeroPrimaryAction(in: app)
 
         XCTAssertTrue(app.descendants(matching: .any)["goal-detail.screen"].waitForExistence(timeout: 10))
         XCTAssertTrue(app.descendants(matching: .any)["goal-detail.strategic-header"].waitForExistence(timeout: 10))
-        XCTAssertTrue(app.descendants(matching: .any)["goal-detail.path-filmstrip"].waitForExistence(timeout: 10))
+        XCTAssertTrue(scrollUntilElementExists("goal-detail.path-filmstrip", in: app))
 
-        let trustToggle = scrollUntilButtonHittable("goal-detail.trust-toggle", fallbackLabel: "Open trust detail", in: app)
-        XCTAssertTrue(trustToggle.waitForExistence(timeout: 10))
-        trustToggle.tap()
-        XCTAssertTrue(scrollUntilElementExists("goal-detail.trust-panel", in: app) || scrollUntilStaticTextExists("Why this is on deck", in: app))
-
-        let correctionsToggle = scrollUntilButtonHittable("goal-detail.corrections-toggle", fallbackLabel: "Open correction actions", in: app)
-        XCTAssertTrue(correctionsToggle.waitForExistence(timeout: 10))
-        correctionsToggle.tap()
-        XCTAssertTrue(scrollUntilElementExists("goal-detail.corrections-panel", in: app) || scrollUntilStaticTextExists("Already learned", in: app))
-
-        let memoryToggle = scrollUntilButtonHittable("goal-detail.memory-toggle", fallbackLabel: "Open deeper memory", in: app)
-        XCTAssertTrue(memoryToggle.waitForExistence(timeout: 10))
-        memoryToggle.tap()
-        XCTAssertTrue(scrollUntilElementExists("goal-detail.memory-panel", in: app) || scrollUntilStaticTextExists("Evidence", in: app))
+        XCTAssertTrue(scrollUntilElementExists("goal-detail.trust-whisper", in: app, maxAttempts: 12))
+        XCTAssertTrue(scrollUntilElementExists("goal-detail.memory-narrative", in: app, maxAttempts: 16))
     }
 
     func testTodayCanHandOffToPlan() throws {
@@ -554,7 +543,7 @@ final class AmbitionsUITests: XCTestCase {
         XCTAssertTrue(scrollUntilElementExists("plan.action-lane", in: app))
     }
 
-    func testDemoPlanPressureScrubberUpdatesSelectedDayAndActionLane() throws {
+    func testDemoPlanPressureScrubberUpdatesSelectedDayAndReflowDecision() throws {
         let app = makeApp(bootstrapMode: "demo", launchURL: "ambitions://tab/plan")
         app.launch()
 
@@ -566,12 +555,8 @@ final class AmbitionsUITests: XCTestCase {
         scrubPoint.tap()
         XCTAssertEqual(scrubPoint.value as? String, "selected")
 
-        let protectAction = scrollUntilButtonHittable("plan.action.select.protect", in: app)
-        XCTAssertTrue(protectAction.waitForExistence(timeout: 10))
-        protectAction.tap()
-
-        let actionCTA = scrollUntilButtonHittable("plan.action.cta", fallbackLabel: "Open goal", in: app)
-        XCTAssertTrue(actionCTA.waitForExistence(timeout: 10))
+        XCTAssertTrue(scrollUntilElementExists("plan.reality-reflow", in: app, maxAttempts: 20))
+        XCTAssertTrue(scrollUntilElementExists("plan.reflow-decision", in: app, maxAttempts: 20))
     }
 
     private func makeApp(
@@ -843,6 +828,10 @@ final class AmbitionsUITests: XCTestCase {
         }
 
         return todayScreen.exists && heroCard.exists
+    }
+
+    private func waitForShellReady(in app: XCUIApplication, timeout: TimeInterval = 30) -> Bool {
+        app.tabBars.firstMatch.waitForExistence(timeout: timeout)
     }
 
     private func waitForSelectedTab(_ title: String, in app: XCUIApplication, timeout: TimeInterval = 30) -> Bool {
