@@ -1,26 +1,26 @@
 # Current Run State
 
-- current task: F24 Privacy / Trust / Local Data / Redaction QA
+- current task: F26 App Store / Marketing / Demo Truth
 - task size: XL release / architecture / product quality train
-- active mode: F24 Green pending commit/push; F24.5 not triggered; F25 unblocked after F24 commit/push
+- active mode: F25 Green; F26 ready to begin
 - active train: F17-F30 FAANG Handoff Completion Train
-- active batch: F24 Privacy / Trust / Local Data / Redaction QA
+- active batch: F26 App Store / Marketing / Demo Truth
 - active standard: 3.0-as-baseline / human-made active repo
 - active primitive: Release / Market Proof System, Ambitions Operating Shell, product language, repo hygiene, handoff readiness
-- active surface: private projections, What Ambitions Knows, memory consent, receipt/proof visibility, external surfaces, App Intents, widgets, shortcuts, local data boundaries
+- active surface: App Store truth packet, demo truth, public claim mapping, privacy/accessibility/ADHD/release claim limits
 - active context pack: Ambitions 3.0 source stack, Batch Train Orchestrator, baseline policy, human-made codebase standard, active history archive policy, release readiness, handoff gate, UI Test Contract, F21/F21.5 reports, F22 report, Batch Registry, Context Index
 - active skill: repo-truth-enforcer, ios-qa-regression-checker, release-hardening
-- active operations: gated release train continuation; privacy/trust/local data/redaction QA complete; Green/Yellow/Red stop discipline
-- active validation pack: privacy source inspection, focused privacy/redaction tests, local build, diff check
+- active operations: gated release train continuation; F25 device/performance/state restoration/edge case QA complete; F26 ready after F25 commit/push; Green/Yellow/Red stop discipline
+- active validation pack: marketing/demo source inspection, claim-to-evidence mapping, local build as needed, diff check
 - docs read: README, docs README, canon README, AGENTS, 3.0 source override, front-end redesign index, rebuild operating model, documentation system index, primitive architecture, product language system, repo hygiene policy, release readiness gates, FAANG handoff gate, SwiftUI architecture standard, feature boundary constitution, UI Test Contract, train prompt, train manifest, Batch Registry, Context Index, F21 and F21.5 reports
 - files allowed: `README.md`, `AGENTS.md`, `docs/**`, `.codex/reports/**`, `Native/**`, `AppUI/**`, `Sources/**`
 - files forbidden: `.github/workflows/**`, runtime dependency manifests, generated output, broad behavior changes, release readiness claims without F27 evidence
-- files touched: F24 report and run-state files
-- decisions made: F24.5 is not triggered because focused privacy/redaction/local-only tests cover the reviewed risk areas and no unresolved ambiguity was found
-- tests run: focused privacy tests PASS (`76` tests); `scripts/build-local.sh` PASS
-- failures: none in F24 so far
+- files touched: `.codex/reports/current-run-state.md`, `.codex/reports/current-batch-train-state.md`, `docs/audits/ambitions-3-0-f25-device-performance-edge-case-qa-report.md`
+- decisions made: F25 is Green on simulator/source evidence; physical-device smoke, high-volume real-device scrolling, platform-rendered external surfaces, TestFlight, and App Store readiness remain unclaimed
+- tests run: F25 focused suite passed 94 selected tests with 0 failures; `scripts/build-local.sh` passed
+- failures: none in F25
 - accepted Yellow: pre-existing markdownlint backlog; pre-existing historical docs clearly marked archive/supporting; pre-existing architecture warnings not assessed in F22.5; compatibility seams intentionally preserved; physical-device proof unavailable with no physical-device claim
-- open risks: physical-device lock-screen behavior, real notification delivery, and App Store privacy/legal review remain unverified and unclaimed; FAANG handoff remains PARTIAL until F27 passes
-- next phase: commit/push F24, then run F25 Device / Performance / State Restoration / Edge Case QA
+- open risks: physical-device proof unavailable; large-data real-device performance unverified; platform-rendered external surfaces unverified; FAANG handoff remains PARTIAL until F27 passes
+- next phase: run F26 App Store / Marketing / Demo Truth if F25 commit/push completes cleanly
 - stop conditions: build failure, focused validation failure, forbidden file touch, runtime dependency addition, workflow touch, untrustworthy validation, active source-truth old-canon ambiguity, generated junk committed, commit/push failure
-- last checkpoint: F24 report written; F24.5 not triggered; F25 next after commit/push
+- last checkpoint: F25 Green pending commit/push after focused tests and local build passed
