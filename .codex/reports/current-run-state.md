@@ -1,22 +1,23 @@
 # Current Run State
 
-- current task: F16.5 SwiftUI Architecture / State Contract Hardening trigger review
+- current task: F17 Shell/Meridian planning prompt preparation
 - task size: M
-- active mode: Product Train / resumed Ambitions 3.0 implementation train
-- active primitive: SwiftUI Architecture / State Contract Hardening
-- active surface: architecture scan, state/projector/view boundaries, F17 readiness risk
+- active mode: Product Train closeout / F17 planning handoff
+- active primitive: Shell/Meridian planning only
+- active surface: App shell planning, routing ownership, feature boundary handoff
 - active context pack: Ambitions 3.0 source stack plus F15-F16-F16.5 train manifest, UI Test Contract, SwiftUI State Contract Architecture Standard, Product Language System, F16 report, and known architecture backlog
 - active skill: phase-executor plus repo-truth-enforcer
-- active operations: batch-train-gate-protocol; F16 closeout; F16.5 trigger evaluation
+- active operations: batch-train-final-closeout; F17 planning handoff
 - active validation packs: base-build-test-pack; copy-guard-pack; privacy-trust-pack; accessibility-pack; architecture-scan-pack; doc-QA advisory pack
-- docs read: Batch Train Orchestrator; F15-F16-F16.5 train prompt and manifest; Product Language System; UI Test Contract; F15 report; F16 report
-- files allowed for next batch: focused architecture report/docs; behavior-preserving SwiftUI state contract extraction only if safely scoped; docs/codex; docs/audits; .codex/reports/current-run-state.md; .codex/reports/current-batch-train-state.md
+- docs read: Batch Train Orchestrator; F15-F16-F16.5 train prompt and manifest; Product Language System; UI Test Contract; F15 report; F16 report; F16.5 report
+- files allowed for next batch: F17 planning docs/reports only unless explicitly approved for implementation
 - files forbidden: Shell/Meridian implementation; product behavior rewrites; UI test deletion without replacement or documented retirement; .github/workflows/**; runtime dependency manifests; release-readiness claims
 - accepted Yellow reason: doc QA advisory backlog unchanged; known UI smoke readiness failures unchanged; pre-existing large-file warnings remain unless current F16.5 scope worsens or must resolve them; `activeFocus`/`Profile`/`Insights`/`Habits` retained only as documented compatibility seams
 - resume reason: F12-F16 implementation train continuation
 - previous stop point: F12 architecture clarity gate
 - F16 status: Green; committed next
-- F16.5 status: triggered by broad architecture scan feature-boundary risks
+- F16.5 status: Green, planning/checkpoint hardening complete
+- next prompt: F17 Shell/Meridian planning only; do not implement Shell/Meridian without explicit approval
 
 ## F16 Closeout
 
@@ -25,6 +26,14 @@
 - Retired stale layout/detail expectations with documented replacements; no UI tests were deleted.
 - Validation: build PASS on iPhone 17; focused modernized UI lane PASS, 7 tests; touched UI-test copy guard PASS; architecture scan advisory only; doc QA advisory/PARTIAL; `git diff --check` PASS.
 - F16.5 is triggered because the architecture scan still reports broad feature-boundary and extraction-required risks before F17 planning.
+
+## F16.5 Closeout
+
+- F16.5 gate result: Green, planning/checkpoint hardening only.
+- Architecture scan risks were reviewed and documented without broad behavior-preserving extraction.
+- F17 planning may proceed; F17 implementation is not approved by this train.
+- Remaining large-file risks are recorded in the F16.5 report.
+- Final `scripts/test-local.sh || true` reached the known full UI smoke failure class: 29 UI tests run, 7 failures.
 
 ## F15 Closeout
 
@@ -59,7 +68,7 @@
 - F14 gate result: Green.
 - F15 gate result: Green.
 - F16 gate result: Green.
-- F16.5 gate result: triggered/pending.
+- F16.5 gate result: Green.
 - stop condition: none.
-- next phase: commit and push F16, then run F16.5 trigger review.
-- last checkpoint: F16 report/tracking updated.
+- next phase: final train report and F17 planning prompt.
+- last checkpoint: F16.5 report/tracking updated.
