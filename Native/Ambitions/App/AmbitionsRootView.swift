@@ -8,14 +8,19 @@ struct AmbitionsRootView: View {
     @Environment(\.colorScheme) private var systemColorScheme
     @Environment(\.dynamicTypeSize) private var dynamicTypeSize
     private let container: AppContainer
+    private let shellPresentationMode: AppShellPresentationMode
     @State private var navigation: AppNavigationModel
     @State private var creationMessage: GoalDetailInlineMessage?
     @State private var goalsRefreshID = 0
     @State private var isOnboardingPresented: Bool
     @State private var onboardingError: String?
 
-    init(container: AppContainer) {
+    init(
+        container: AppContainer,
+        shellPresentationMode: AppShellPresentationMode = .resolved()
+    ) {
         self.container = container
+        self.shellPresentationMode = shellPresentationMode
         _navigation = State(initialValue: container.navigation)
         _isOnboardingPresented = State(initialValue: container.session.shouldShowOnboarding)
     }
@@ -38,6 +43,7 @@ struct AmbitionsRootView: View {
             .toolbarBackground(resolvedTheme.shell.bottomBarMaterial, for: .tabBar)
             .toolbarBackground(.visible, for: .tabBar)
             .toolbarColorScheme(resolvedTheme.mode == .dark ? .dark : .light, for: .tabBar)
+            .toolbar(shellPresentationMode == .meridian ? .hidden : .visible, for: .tabBar)
             #if canImport(UIKit)
             .background(
                 ShellTabReselectionObserver { _ in
@@ -49,6 +55,17 @@ struct AmbitionsRootView: View {
             #endif
 
             shellContinuityReceipt(theme: resolvedTheme)
+        }
+        .overlay(alignment: .bottom) {
+            if shellPresentationMode == .meridian {
+                AppMeridianDestinationRail(
+                    theme: resolvedTheme,
+                    selectedTab: navigation.selectedTab.canonicalTopLevelTab
+                ) { tab in
+                    navigation.selectTab(tab)
+                }
+                .padding(.bottom, resolvedTheme.spacing.sm)
+            }
         }
         .overlay(alignment: .bottom) {
             shellFloatingControlLane(theme: resolvedTheme)

@@ -23,6 +23,68 @@ final class AppShellNavigationTests: XCTestCase {
         XCTAssertFalse(AppTab.insights.isCanonicalTopLevel)
     }
 
+    func testShellPresentationModeDefaultsToNativeFallback() {
+        XCTAssertEqual(
+            AppShellPresentationMode.resolved(arguments: ["Ambitions"], environment: [:]),
+            .nativeFallback
+        )
+    }
+
+    func testShellPresentationModeLaunchArgumentEnablesMeridian() {
+        XCTAssertEqual(
+            AppShellPresentationMode.resolved(
+                arguments: ["Ambitions", "--ambitions-shell=meridian"],
+                environment: [:]
+            ),
+            .meridian
+        )
+
+        XCTAssertEqual(
+            AppShellPresentationMode.resolved(
+                arguments: ["Ambitions", "--ambitions-shell", "meridian"],
+                environment: [:]
+            ),
+            .meridian
+        )
+    }
+
+    func testShellPresentationModeLaunchArgumentCanRollbackToNativeFallback() {
+        XCTAssertEqual(
+            AppShellPresentationMode.resolved(
+                arguments: ["Ambitions", "--ambitions-shell=native"],
+                environment: ["AMBITIONS_SHELL_PRESENTATION": "meridian"]
+            ),
+            .nativeFallback
+        )
+    }
+
+    func testShellPresentationModeEnvironmentEnablesMeridian() {
+        XCTAssertEqual(
+            AppShellPresentationMode.resolved(
+                arguments: ["Ambitions"],
+                environment: ["AMBITIONS_SHELL_PRESENTATION": "enabled"]
+            ),
+            .meridian
+        )
+    }
+
+    func testMeridianDestinationsMirrorCanonicalTabsWithoutNewRouteOwnership() {
+        let destinations = AppMeridianDestination.all
+
+        XCTAssertEqual(destinations.map(\.tab), AppTab.allCases)
+        XCTAssertEqual(destinations.map(\.title), ["Today", "Goals", "Capture", "Plan", "You"])
+        XCTAssertEqual(
+            destinations.map(\.accessibilityIdentifier),
+            [
+                "shell.meridian.destination.today",
+                "shell.meridian.destination.goals",
+                "shell.meridian.destination.captures",
+                "shell.meridian.destination.plan",
+                "shell.meridian.destination.profile"
+            ]
+        )
+    }
+
     @MainActor
     func testNavigationInitializesCapturePreferenceIntoTopLevelCaptureRoute() {
         let navigation = AppNavigationModel(selectedTab: .captures)
