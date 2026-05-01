@@ -12,7 +12,7 @@ struct CapturesViewState: Sendable {
                 "Bottom composer",
                 "Needs a Place",
                 "Suggested routes",
-                "Recent captures",
+                "Ready to Place",
                 "Changeable route receipt"
             ],
             panels: [
@@ -63,15 +63,32 @@ struct CaptureDraftRouteChoice: Identifiable, Sendable, Equatable {
 }
 
 struct CaptureDraftRoutePreview: Sendable, Equatable {
+    let postInputStateTitle: String
     let receiptTitle: String
     let summary: String
     let destinationLabel: String
+    let primaryActionTitle: String
+    let changeActionTitle: String
+    let safeActionTitle: String
     let semanticState: String
     let clarificationQuestion: String?
     let choices: [CaptureDraftRouteChoice]
     let accessibilityLabel: String
     let accessibilityValue: String
     let accessibilityHint: String?
+
+    var visibleCopy: String {
+        ([
+            postInputStateTitle,
+            receiptTitle,
+            summary,
+            destinationLabel,
+            primaryActionTitle,
+            changeActionTitle,
+            safeActionTitle,
+            clarificationQuestion
+        ].compactMap { $0 } + choices.map(\.title)).joined(separator: " ")
+    }
 }
 
 @MainActor
@@ -188,7 +205,7 @@ final class CapturesViewModel {
                 ),
                 now: now
             )
-            actionMessage = CaptureActionMessage(title: "Archived", body: "This capture is out of the active inbox.")
+            actionMessage = CaptureActionMessage(title: "Archived", body: "This capture is out of the active list.")
             return nil
         }
     }
@@ -276,7 +293,7 @@ final class CapturesViewModel {
             await load(captureService: captureService, goalsService: goalsService)
             return target
         } catch {
-            actionMessage = CaptureActionMessage(title: "Capture action failed", body: error.localizedDescription)
+            actionMessage = CaptureActionMessage(title: "Save did not finish", body: error.localizedDescription)
             await load(captureService: captureService, goalsService: goalsService)
             return nil
         }
@@ -339,9 +356,13 @@ final class CapturesViewModel {
     private func preview(from decision: SmartAttachmentCaptureDecision) -> CaptureDraftRoutePreview {
         let choices = clarificationChoices(from: decision)
         return CaptureDraftRoutePreview(
+            postInputStateTitle: postInputStateTitle(for: decision),
             receiptTitle: decision.receiptLine,
             summary: decision.summary,
             destinationLabel: decision.destinationLabel,
+            primaryActionTitle: "Place it",
+            changeActionTitle: "Change",
+            safeActionTitle: "Decide later",
             semanticState: decision.result.resultState.rawValue,
             clarificationQuestion: decision.clarification?.question,
             choices: choices,
@@ -349,6 +370,17 @@ final class CapturesViewModel {
             accessibilityValue: decision.accessibilityValue,
             accessibilityHint: decision.accessibilityHint
         )
+    }
+
+    private func postInputStateTitle(for decision: SmartAttachmentCaptureDecision) -> String {
+        switch decision.result.resultState {
+        case .needsClarification:
+            return "Needs a Decision"
+        case .savedToNeedsPlace, .failedSafely:
+            return "Needs a Place"
+        case .savedStandalone, .attached:
+            return "Suggested Place"
+        }
     }
 
     private func clarificationChoices(from decision: SmartAttachmentCaptureDecision) -> [CaptureDraftRouteChoice] {

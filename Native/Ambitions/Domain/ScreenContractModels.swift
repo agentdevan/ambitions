@@ -530,7 +530,7 @@ enum ScreenContractRegistry {
     private static let capture = ScreenContract(
         id: .capture,
         dominantQuestion: "What needs a place?",
-        requiredFirstScreenContent: ["Bottom composer", "Needs a Place", "Suggested routes", "Recent captures", "Changeable route receipt"],
+        requiredFirstScreenContent: ["Bottom composer", "Needs a Place", "Suggested routes", "Ready to Place", "Changeable route receipt"],
         requiredPanels: [.capture, .smartAttachmentReceipt, .receipt, .trust],
         optionalPanels: [.groupedNavigationList],
         forbiddenFirstScreenContent: ["Chat-first AI surface", "Long inbox as primary"],

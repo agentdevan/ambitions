@@ -91,6 +91,7 @@ final class CapturesViewModelTests: XCTestCase {
         await viewModel.load(captureService: captureService, goalsService: goalsService)
         viewModel.updateDraftText("NASA")
 
+        XCTAssertEqual(viewModel.draftRoutePreview?.postInputStateTitle, "Needs a Decision")
         XCTAssertEqual(viewModel.draftRoutePreview?.receiptTitle, "Saved to Needs a Place")
         XCTAssertEqual(viewModel.draftRoutePreview?.clarificationQuestion, "What should this become?")
         XCTAssertEqual(viewModel.draftRoutePreview?.choices.map(\.title), ["Task", "Goal", "Needs a Place"])
@@ -99,7 +100,28 @@ final class CapturesViewModelTests: XCTestCase {
         viewModel.selectDraftRoute(.task)
 
         XCTAssertEqual(viewModel.draftRoutePreview?.receiptTitle, "Saved as Task · Today")
+        XCTAssertEqual(viewModel.draftRoutePreview?.postInputStateTitle, "Suggested Place")
         XCTAssertEqual(viewModel.draftRoutePreview?.choices.first?.isSelected, true)
+    }
+
+    func testF07ComposerPreviewUsesPlacementLanguageWithoutInboxFraming() async {
+        let captureService = MutableCaptureService(captures: [])
+        let goalsService = StaticGoalsService(items: [])
+        let viewModel = CapturesViewModel()
+
+        await viewModel.load(captureService: captureService, goalsService: goalsService)
+        viewModel.updateDraftText("Book dentist")
+
+        let preview = try! XCTUnwrap(viewModel.draftRoutePreview)
+        XCTAssertEqual(preview.postInputStateTitle, "Suggested Place")
+        XCTAssertEqual(preview.primaryActionTitle, "Place it")
+        XCTAssertEqual(preview.changeActionTitle, "Change")
+        XCTAssertEqual(preview.safeActionTitle, "Decide later")
+        XCTAssertFalse(preview.visibleCopy.localizedCaseInsensitiveContains("inbox"))
+        XCTAssertFalse(preview.visibleCopy.localizedCaseInsensitiveContains("backlog"))
+        XCTAssertFalse(preview.visibleCopy.localizedCaseInsensitiveContains("triage"))
+        XCTAssertFalse(preview.visibleCopy.localizedCaseInsensitiveContains("classify"))
+        XCTAssertFalse(preview.visibleCopy.localizedCaseInsensitiveContains("chat"))
     }
 
     func testD12QuickCapturePersistsSmartAttachmentReceiptAndRoute() async {
@@ -196,7 +218,7 @@ final class CapturesViewModelTests: XCTestCase {
         )
 
         XCTAssertNil(target)
-        XCTAssertEqual(viewModel.actionMessage?.title, "Capture action failed")
+        XCTAssertEqual(viewModel.actionMessage?.title, "Save did not finish")
         XCTAssertTrue(viewModel.actionMessage?.body.contains("Test capture failure") == true)
     }
 
