@@ -163,6 +163,7 @@ Historical docs are context only and do not override Ambitions 3.0.
 ## Architecture And Batch Train Additions
 
 - [Ambitions 3.0 Batch Train Orchestrator](../codex/AMBITIONS_3_0_BATCH_TRAIN_ORCHESTRATOR.md)
+- [F17-F30 FAANG Handoff Completion Train](../codex/batch-trains/F17_F30_FAANG_HANDOFF_COMPLETION_TRAIN.md)
 - [SwiftUI State Contract Architecture Standard](./Ambitions_3_0_SwiftUI_State_Contract_Architecture_Standard.md)
 - [Feature Boundary And File Size Constitution](./Ambitions_3_0_Feature_Boundary_And_File_Size_Constitution.md)
 - [State Projection Extraction Rules](./Ambitions_3_0_State_Projection_Extraction_Rules.md)

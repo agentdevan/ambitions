@@ -227,3 +227,9 @@ It must include:
 The repository is not FAANG-handoff ready until all ten gates pass.
 
 Partial cleanup may be useful, but it must not be described as complete handoff readiness.
+
+## Active Completion Train
+
+The current handoff completion path is governed by `docs/codex/batch-trains/F17_F30_FAANG_HANDOFF_COMPLETION_TRAIN.md`.
+
+FAANG handoff remains PARTIAL until F27 explicitly reruns this gate and passes. F28 is conditional repair only if F27 is PARTIAL/FAIL. F29 final handoff packaging is blocked until F27 PASS.

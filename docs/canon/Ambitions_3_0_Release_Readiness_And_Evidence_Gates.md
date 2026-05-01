@@ -158,3 +158,9 @@ Do not call Ambitions 3.0 release-ready if:
 ## Acceptance Criteria
 
 Release readiness is mature when every major Ambitions 3.0 primitive has a status, evidence, test path, and known gap list.
+
+## F17-F30 Handoff Completion Train Tracking
+
+The active release-quality continuation is `docs/codex/batch-trains/F17_F30_FAANG_HANDOFF_COMPLETION_TRAIN.md`.
+
+Release, App Store, TestFlight, physical-device, public accessibility, and FAANG handoff claims remain unavailable unless the relevant F17-F30 batch gate records matching evidence. F27 is the final FAANG handoff gate rerun; it may produce PASS only if the handoff gate passes with build, test, doc QA, traceability, privacy, accessibility, architecture, and release-claim evidence.

@@ -277,8 +277,10 @@ Open these when work touches older domains not fully replaced by 3.0:
 4. F07-F09 — Capture and Placement.
 5. F10-F12 — Plan Life Suite foundation.
 6. F13-F16 — Goals, Goal Detail, You, Trust.
-7. F17 — Ambitions Operating Shell / Meridian feature-flagged.
-8. F18-F20 — Motion, accessibility, screenshots, release evidence.
+7. F17 — Shell / Meridian planning and readiness audit.
+8. F18-F20 — Feature-flagged Meridian shell, route parity, fallback safety, and privacy-safe external projection.
+9. F21-F26 — Full UI smoke, doc QA, accessibility, privacy/trust, performance/edge-case, and App Store/demo truth.
+10. F27-F30 — Final FAANG handoff gate rerun, conditional repair, handoff package, and Beyond 3.0 continuation plan.
 
 ---
 
@@ -358,6 +360,9 @@ This registry exists for handoff and orphan-scan clarity. The table above explai
 
 - `docs/codex/AMBITIONS_3_0_BATCH_TRAIN_ORCHESTRATOR.md`
 - `docs/codex/batch-trains/README.md`
+- `docs/codex/batch-trains/F17_F30_FAANG_HANDOFF_COMPLETION_TRAIN.md`
+- `docs/codex/BATCH_TRAIN_F17_F30_FAANG_HANDOFF_PROMPT.md`
+- `docs/codex/batches/F17_Shell_Meridian_Planning_And_Readiness_Audit_Prompt.md`
 - `docs/canon/Ambitions_3_0_SwiftUI_State_Contract_Architecture_Standard.md`
 - `docs/canon/Ambitions_3_0_Feature_Boundary_And_File_Size_Constitution.md`
 - `docs/canon/Ambitions_3_0_State_Projection_Extraction_Rules.md`

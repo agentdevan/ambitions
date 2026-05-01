@@ -317,3 +317,7 @@ and the full UI smoke gate pass.
 ## Batch Train Architecture Hardening Update
 
 F03.5 is complete. It was inserted before F04 because `TodayExecutionViewState.swift` exceeded the 1000-line architecture threshold after F01-F03; the file is now reduced to `181` lines, with Day Rail state, Step Detail state, projection, projector, compatibility, and screen-contract responsibilities in dedicated Today-owned files. F13.5 and F16.5 are conditional checkpoint batches for Goals/You/Trust and whole-app SwiftUI state-contract risk. These batches preserve behavior and do not mark new product features implemented.
+
+## F17-F30 Completion Train Update
+
+F16.5 is complete and Green as a planning/checkpoint hardening batch. The current next batch is F17 Shell / Meridian Planning & Readiness Audit. F18 implementation remains blocked until F17 produces a Green architecture and ownership plan. F27 is the final FAANG handoff gate rerun; FAANG handoff remains PARTIAL until that gate passes.

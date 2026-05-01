@@ -35,3 +35,5 @@ Before edits, inspect repo status and name the touch budget. When tooling matter
 ## Batch Train Orchestrator
 
 When a prompt spans multiple Ambitions 3.0 batches, load `docs/codex/AMBITIONS_3_0_BATCH_TRAIN_ORCHESTRATOR.md`, select exactly one manifest under `docs/codex/batch-trains/`, initialize `.codex/reports/current-batch-train-state.md`, and continue only on Green. Yellow/Red stops with repair/resume material. FAANG handoff remains PARTIAL unless its gate is re-run and passes.
+
+For the current handoff completion lane, use `docs/codex/batch-trains/F17_F30_FAANG_HANDOFF_COMPLETION_TRAIN.md` and start with `docs/codex/batches/F17_Shell_Meridian_Planning_And_Readiness_Audit_Prompt.md`. Do not run F18 implementation unless F17 is Green.

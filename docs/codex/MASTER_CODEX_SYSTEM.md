@@ -64,3 +64,5 @@ Do not claim implemented, tested, device-verified, release-ready, accessibility-
 ## Batch Train Orchestrator
 
 When a prompt spans multiple Ambitions 3.0 batches, load `docs/codex/AMBITIONS_3_0_BATCH_TRAIN_ORCHESTRATOR.md`, select exactly one manifest under `docs/codex/batch-trains/`, initialize `.codex/reports/current-batch-train-state.md`, and continue only on Green. Yellow/Red stops with repair/resume material. FAANG handoff remains PARTIAL unless its gate is re-run and passes.
+
+Current completion train: `docs/codex/batch-trains/F17_F30_FAANG_HANDOFF_COMPLETION_TRAIN.md`. Current entry point: F17 Shell/Meridian planning only. F18 implementation is blocked until F17 produces a Green architecture and ownership plan.

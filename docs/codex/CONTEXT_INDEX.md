@@ -13,7 +13,7 @@ Ambitions 3.0 is the active source of truth. This file defines Codex read order,
 - F03 Step Detail work is now represented as a Today-local sheet opened from the Reality Rail `Start here` card and Now/Next/Later rows, with grounded recommendation explanation, duration/source/context labels, private redaction, and stable `TodayStepDetail*` accessibility identifiers.
 - F03.5 Today Execution State Contract Hardening is complete: `TodayExecutionViewState.swift` is now a small aggregate state contract, while Day Rail state, Step Detail state, projection helpers, projector logic, compatibility helpers, and screen-contract snapshot live in dedicated Today-owned files.
 - F04 Step Session, F05 Action Closure / Still Counts, F06 Proof & Receipt Ledger, F07 Capture Composer cleanup, F08 Placement Resolver, F09 Capture-to-Goal / Grow into Goal, F10 Plan Life Suite foundation, F11 Day Shape / Week Shape, F12 Reflow / Recovery / Decisions, F13 Goals / Goal Mission Control, F13.5 Goals / You / Trust architecture checkpoint, F14 You / Trust / What Ambitions Knows, F15 Legacy Identifier Migration, and F16 UI Test Modernization are complete.
-- F16.5 SwiftUI Architecture / State Contract Hardening checkpoint is complete. Next active 3.0 continuation is F17 Shell/Meridian planning only; F17 implementation still requires explicit approval.
+- F16.5 SwiftUI Architecture / State Contract Hardening checkpoint is complete. The active completion train is F17-F30 FAANG Handoff Completion Train. Next active 3.0 continuation is F17 Shell/Meridian planning only; F18 implementation remains blocked until F17 produces a Green architecture and ownership plan.
 
 ## Required Read Order
 
@@ -76,7 +76,7 @@ For non-trivial work, read in this order:
 
 ## Batch Train Context
 
-Batch-train execution uses `docs/codex/AMBITIONS_3_0_BATCH_TRAIN_ORCHESTRATOR.md`, `docs/codex/batch-trains/README.md`, `.codex/reports/current-batch-train-state.md`, and the matching validation/operation packs. F03.5 Today Execution State Contract Hardening is complete; the current next batch is F04 Step Session rename/migration and routing.
+Batch-train execution uses `docs/codex/AMBITIONS_3_0_BATCH_TRAIN_ORCHESTRATOR.md`, `docs/codex/batch-trains/README.md`, `.codex/reports/current-batch-train-state.md`, and the matching validation/operation packs. F03.5, F13.5, and F16.5 are complete. The active train manifest is `docs/codex/batch-trains/F17_F30_FAANG_HANDOFF_COMPLETION_TRAIN.md`; the current next batch is F17 Shell/Meridian planning only.
 
 ## F-Series Audit Reports
 
@@ -93,3 +93,7 @@ Batch-train execution uses `docs/codex/AMBITIONS_3_0_BATCH_TRAIN_ORCHESTRATOR.md
 - `docs/audits/ambitions-3-0-f13-5-goals-you-trust-architecture-checkpoint-report.md`
 - `docs/audits/ambitions-3-0-f14-you-trust-what-ambitions-knows-report.md`
 - `docs/audits/ambitions-3-0-f15-legacy-identifier-migration-report.md`
+- `docs/audits/ambitions-3-0-f16-ui-test-modernization-report.md`
+- `docs/audits/ambitions-3-0-f16-5-swiftui-architecture-state-contract-hardening-report.md`
+- `docs/audits/ambitions-3-0-auto-batch-train-f12-through-f16-5-report.md`
+- `docs/audits/ambitions-3-0-f17-f30-faang-handoff-completion-train-setup-report.md`
