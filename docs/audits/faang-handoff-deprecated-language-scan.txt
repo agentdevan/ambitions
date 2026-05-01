@@ -1,27 +1,16 @@
-./.codex/skills/planner-domain-safe-editor/SKILL.md:50:7. Retry only when the next move is narrower than the failed one and directly tied to the observed breakage.
-./Sources/Accessibility/AccessibilityNutrition.swift:61:            "Verify error, denied-permission, empty, failed, and degraded states include a clear next step or safe escape."
-./Sources/Accessibility/AccessibilityNutrition.swift:69:            "Verify missed, delayed, reduced, stuck, and recovery states use calm adult language without blame or streak pressure."
-./AGENTS.md:41:- Retry only when the next attempt is narrower and informed by the last result. Do not repeat the same failed action blindly, and stop after a small number of grounded retries.
-./.codex/skills/ambitions-action-closure-receipts/SKILL.md:24:- Ambitions does not mark a step failed because the user forgot to open the app.
-./.codex/skills/README.md:109:  - `replace missed or overdue step states`
-./.codex/improvement/eval-refinement-template.md:5:- What the current eval pack missed:
-./.codex/skills/ambitions-canon-v2-reconciler/SKILL.md:28:- Deprecated user-facing language: `Your best next move`, `next best move`, `Start Focus`, `Focus session`, `Overdue`, `Failed`, `Missed`, `Behind`.
-./.codex/improvement/skill-refinement-template.md:6:- Request shape that failed:
-./.codex/skills/ambitions-v2-validation-closeout/SKILL.md:17:- No `Start Focus`.
-./.codex/skills/ambitions-v2-validation-closeout/SKILL.md:38:rg -n "Your best next move|next best move|Start Focus|Focus session|Overdue|Failed|Missed|Behind" Native Sources AppUI docs
-./.codex/improvement/failure-taxonomy.md:23:- `release-hardening-gap`: a merge or release readiness check missed config, docs, or validation work
+./AGENTS.md:51:- Validation summaries must separate verified, failed, not verified, and human/device follow-up.
+./AGENTS.md:58:- Ambitions is not a generic task app, calendar clone, habit tracker, productivity score app, chatbot, or AI wrapper.
 ./MASTER_PRODUCT_SPEC.md:524:Returning after a missed day or week must feel simple and non-threatening.
 ./MASTER_PRODUCT_SPEC.md:1055:- “You failed to complete”
 ./MASTER_PRODUCT_SPEC.md:1294:- missed time no longer creates a dead-end feeling
 ./MASTER_PRODUCT_SPEC.md:1404:- continuity logic that survives missed time
 ./MASTER_PRODUCT_SPEC.md:1513:- shame-based overdue framing
+./docs/marketing/Ambitions_3_0_App_Store_Truth_Packet.md:147:- productivity score or fake certainty
 ./Native/AmbitionsWidgetExtension/NextStepLiveActivityWidget.swift:76:        case .overdue:
 ./Native/AmbitionsWidgetExtension/NextStepLiveActivityWidget.swift:89:        case .overdue:
-./docs/local-notification-simulator-testing.md:20:3. Wait for the scheduled notification interval (soon = ~5 minutes, overdue = ~1 minute).
-./docs/archive/superseded-design-canon/design/copy-state-language-spec.md:48:- you failed
-./.codex/evals/prompts/22-release-miss-refinement.md:32:- the refinement path is clear if a blocker was missed
-./docs/archive/superseded-design-canon/design/screen-architecture-spec.md:85:2. current best next move
-./docs/archive/superseded-design-canon/design/screen-architecture-spec.md:688:- state what failed
+./scripts/run-doc-qa.sh:45:run_and_log "deprecated-language" rg -n --hidden --glob '!/.git/**' 'Start Focus|Focus Session|best next move|next best move|AI confidence|productivity score|profile tab|insights tab|habits tab|overdue|failed|missed' .
+./scripts/run-doc-qa.sh:78:  echo "Docs QA failed under current strictness."
+./scripts/test-local.sh:48:  echo "test-local failed. Check $LOG_FILE and classify whether failures are known UI smoke debt, wrapper/tooling issues, or new regressions."
 ./Native/Ambitions/Services/AmbitionsCommandExecutor.swift:185:                    metadata["eventLedgerEmission"] = "failed"
 ./Native/Ambitions/Services/AmbitionsCommandExecutor.swift:204:                status: .failed,
 ./Native/Ambitions/Services/AmbitionsCommandExecutor.swift:254:            return AmbitionsCommandExecutionResult(status: .failed, summary: error.localizedDescription, target: command.target, metadata: ["error": String(describing: error)])
@@ -30,43 +19,59 @@
 ./Native/Ambitions/Services/AmbitionsCommandExecutor.swift:325:            return AmbitionsCommandExecutionResult(status: .failed, summary: error.localizedDescription, target: command.target, metadata: ["error": String(describing: error)])
 ./Native/Ambitions/Services/AmbitionsCommandExecutor.swift:356:            return AmbitionsCommandExecutionResult(status: .failed, summary: error.localizedDescription, target: command.target, metadata: ["error": String(describing: error)])
 ./Native/Ambitions/Services/AmbitionsCommandExecutor.swift:384:            status = .failed
-./.codex/evals/README.md:22:- Retries should get narrower instead of repeating the same failed step.
-./docs/codex/batches/BATCH-27-update-and-freshness-engine.md:58:  - failed at compile time because the new freshness/update contracts did not exist yet
+./docs/codex/batches/F22_Product_Language_And_Doc_QA_Final_Migration_Prompt.md:17:rg -n --hidden --glob '!/.git/**' 'Start Focus|Focus Session|best next move|next best move|AI confidence|productivity score|profile tab|insights tab|habits tab|overdue|failed|missed' . || true
 ./docs/canon/Ambitions_2_0_Daily_Loop_QA_Baseline.md:85:| Recover from a missed day | Today, Plan, Reviews, You | Today / next action, Recovery, Proof / receipt, Trust / privacy | Recovery copy is non-shaming; no silent calendar write; review/receipt context visible. |
-./Native/Ambitions/Services/ExternalActionCommandService.swift:112:    case failed
-./docs/codex/FAANG_HANDOFF_REPO_CLEANUP_PROMPT.md:180:  'Start Focus|Focus Session|best next move|next best move|AI confidence|productivity score|profile tab|insights tab|habits tab|overdue|failed|missed' . || true
+./docs/canon/Ambitions_3_0_Universal_Object_Lifecycle_Contract.md:54:- a failed-safe message that preserves the input
 ./docs/canon/Ambitions_3_0_North_Star_And_Product_Metrics.md:101:- productivity score
 ./Native/Ambitions/Services/ReviewsV1Projector.swift:629:             .recommendationShown, .recommendationAccepted, .recommendationDismissed,
 ./Native/Ambitions/Services/ReviewsV1Projector.swift:640:        case .failedSafely:
 ./Native/Ambitions/Services/ReviewsV1Projector.swift:661:        case .failedSafely:
 ./Native/Ambitions/Services/ReviewsV1Projector.swift:676:        case .needsConfirmation, .failedSafely:
-./docs/canon/Ambitions_3_0_Current_Implementation_Gap_Audit.md:90:- User-facing UI must not say `Start Focus` or `Focus Session`.
-./docs/canon/Ambitions_3_0_Recommendation_Contract.md:103:- AI confidence
-./docs/canon/Ambitions_3_0_Recommendation_Contract.md:107:- productivity score
-./docs/codex/Release_Candidate_Review_Checklist.md:17:- Verify fresh install, returning user, denied permissions, no-data, lots-of-data, missed-week, export/import, and external-surface journeys on device where possible.
+./docs/canon/Ambitions_3_0_Evidence_Hierarchy.md:132:- turn one missed step into a user trait
+./docs/canon/Ambitions_3_0_Current_Implementation_Gap_Audit.md:94:  'Start Focus|Focus Session|best next move|next best move|AI confidence|productivity score|profile tab|insights tab|habits tab|overdue|failed|missed' \
+./docs/canon/Ambitions_3_0_Current_Implementation_Gap_Audit.md:106:| Compatibility test/reference | ~80 | tests for no `AI confidence`, `Profile` tab absence, safe failure states | Allowed where the test protects migration or copy guard. |
+./docs/canon/Ambitions_3_0_Current_Implementation_Gap_Audit.md:108:| User-facing UI debt | 3+ confirmed | `Native/AmbitionsWidgetExtension/NextStepLiveActivityWidget.swift:76`, `:89` use `.overdue`; `Native/Ambitions/UI/LaunchGateView.swift:45` says `Launch failed`; Capture failure title at `Native/Ambitions/Features/Captures/CapturesViewModel.swift:279` | F15/F16 copy and external-surface cleanup. |
+./docs/canon/Ambitions_3_0_Current_Implementation_Gap_Audit.md:109:| Accessibility label debt | Low but real | `Sources/Accessibility/AccessibilityNutrition.swift:61`, `:69` discuss failed/missed states as audit language | Mostly allowed checklist language; verify future labels do not leak shame copy. |
+./docs/canon/Ambitions_3_0_Current_Implementation_Gap_Audit.md:110:| App Intent / widget / external-surface debt | Confirmed | Live Activity and snapshot state use `overdue`, external `focus` variant copy | F15, after F01-F06 clarify new Step Session naming. |
+./docs/canon/Ambitions_3_0_Current_Implementation_Gap_Audit.md:112:| False positives | Many | `failed` as engineering/test status; `missed` in recovery research; `productivity score` in forbidden-copy lists | Keep as guard/history. |
+./docs/canon/Ambitions_3_0_Current_Implementation_Gap_Audit.md:153:Latest full UI result: 29 UI tests run, 9 failed.
+./docs/canon/Ambitions_3_0_Current_Implementation_Gap_Audit.md:157:| `testDemoPlanPressureScrubberUpdatesSelectedDayAndActionLane` | `Native/AmbitionsUITests/AmbitionsUITests.swift:570` | Plan | `XCTAssertTrue failed`; log shows repeated search for plan elements | outdated test expectation / accessibility identifier drift | F16; may also need F10-F12 Plan proof |
+./docs/canon/Ambitions_3_0_Current_Implementation_Gap_Audit.md:164:| `testTodayCanHandOffToPlan` | `:533` | Today to Plan | expected `today.action.openPlan.none` / `Open Plan`; failed after repeated scroll attempts | real implementation gap or outdated selector | F01-F02, F16 |
+./docs/canon/Ambitions_3_0_Current_Implementation_Gap_Audit.md:176:| Step Session | Step-first execution drill-down, not timer-first or focus-first; supports Complete, Still Counts, Pause, Adjust. | Focus screenlet exists: `TodayFeatureModels.swift:397`, `TodayPanels.swift:1577`; route still `.startFocus` and `TodayEntryContext.focus`. | `testTodayStartFocusCanOpenBoundedFocusScreenlet` failed at `:480`; unit focus tests pass. | partial / legacy naming | Execution remains bounded focus screenlet, not 3.0 Step Session. | P0 blocker. | F04 |
+./docs/canon/Ambitions_3_0_Current_Implementation_Gap_Audit.md:184:| App Intents / Widgets / External Surfaces | Privacy-safe projection; no unsupported platform readiness; no legacy copy leaks. | `project.yml:43-71`, App Intent files, external snapshots; `ExternalSurfaceSnapshotBuilder.swift:65-66`, `:150-156` still use `bestNextStep`/`activeFocus`/Focus copy. Widget Live Activity has `.overdue`. | External unit tests pass; no rendered widget/device proof. | partial / external debt | Platform claims remain blocked; copy/identifier debt. | F15 plus release gates. | F15/R gates |
+./docs/canon/Ambitions_3_0_Current_Implementation_Gap_Audit.md:256:| F04 — Step Session rename/migration and routing | M/L | Replace focus-first execution with Step Session. | Step Execution | Today action enums/routes/session view/tests | global Profile/Insights rename | Today tests, UI focus test | focused Today tests; build | F03 | compatibility naming | visible copy says Step Session/Start now, no `Start Focus` | breaking deep links/intents |
+./docs/canon/Ambitions_3_0_Current_Implementation_Gap_Audit.md:298:- Remove visible `Start Focus` / `Focus Session` copy from active Today paths
 ./Native/Ambitions/Services/ExecutionResilienceProjector.swift:291:                    id: "disruption.ledger.missed_action",
 ./Native/Ambitions/Services/ExecutionResilienceProjector.swift:292:                    kind: .missedAction,
 ./Native/Ambitions/Services/ExecutionResilienceProjector.swift:400:        if disruptions.contains(where: { [.missedAction, .overloadedDay, .lowCapacity, .noOpenWindow].contains($0.kind) }) {
 ./Native/Ambitions/Services/ExecutionResilienceProjector.swift:618:            case .missedAction:
 ./Native/Ambitions/Services/ExecutionResilienceProjector.swift:619:                return .missedAction
 ./Native/Ambitions/Services/ExecutionResilienceProjector.swift:824:        case .missedAction, .blockedByWaiting, .stalePlan, .underdefinedNextStep, .recoveryAlreadyInProgress:
+./docs/canon/Ambitions_3_0_Recommendation_Contract.md:103:- AI confidence
+./docs/canon/Ambitions_3_0_Recommendation_Contract.md:107:- productivity score
+./docs/canon/Ambitions_3_0_UX_Research_Plan.md:31:5. Does Action Closure reduce shame compared with overdue tasks?
 ./docs/canon/Ambitions_3_0_UI_Invention_Upgrade_Bank.md:109:Must not become a chatbot answer, AI confidence display, or defensive system explanation.
 ./docs/canon/Ambitions_3_0_UI_Invention_Upgrade_Bank.md:249:Must not become overdue badges or failure states.
 ./docs/canon/Ambitions_3_0_UI_Invention_Upgrade_Bank.md:1111:Parked goals are not failed. They are inactive but preserved for review.
 ./docs/canon/Ambitions_3_0_UI_Invention_Upgrade_Bank.md:1719:Dismissed suggestions cool down and do not repeatedly resurface the same day.
-./docs/codex/CONTEXT_INDEX.md:39:- M01 Core Surface Integration QA and Indispensability Scenarios exists as a post-D26 scenario catalog and blocker classification layer, not as release readiness. `CoreSurfaceIntegrationScenarioCatalog` covers create meaningful goal, capture/place thought, missed-day recovery, overloaded week, proof/receipts review, What Ambitions Knows inspection, denied-calendar fallback, One-Step Goal start, park/defer/drop, and week-away return scenarios across Today, Goals, Goal Detail, Capture, Plan, You, reviews, proof, receipts, recovery, and trust. Validation evidence: `xcodegen generate`; focused M01/activation/daily-loop tests (`21` tests, `0` failures); adjacent integration regression lane (`138` tests, `0` failures); native simulator build on `iPhone 17`; full `AmbitionsTests` (`690` tests, `0` failures); and diff whitespace checks. M01 does not claim real-device QA, export/import safety, migration/no-lost-data proof, rendered external-platform verification, public accessibility claims, TestFlight readiness, App Store readiness, or RC lock. Last completed commit before M01 closeout was `c7d444ad`; the M01 closeout commit is `Complete M01 core surface integration qa`.
-./docs/codex/CONTEXT_INDEX.md:53:- R03 Device QA, TestFlight Readiness, and Scenario Review exists as a code-backed release device-readiness report, not as physical-device validation or TestFlight readiness certification. `ReleaseDeviceQAReadinessReport` covers real-device smoke, fresh install, returning user, denied permissions, no data, lots of data, missed week, export/import, external surfaces, and representative scenario fixtures across family/shared life, career, creative project, finance/life admin, and home/life admin as fixtures only. Validation evidence: `xcodegen generate`; focused R03/R-gate report tests (`16` tests, `0` failures, including `ReleaseDeviceQAReadinessReportTests`); adjacent device/external/release regression lane (`59` tests, `0` failures); focused simulator UI smoke for forced onboarding, canonical shell, and Plan route (`3` checks passed after replacing one stale onboarding copy assertion); native simulator build on `iPhone 17`; full `AmbitionsTests` (`723` tests, `0` failures); and diff whitespace checks. R03 does not claim physical-device smoke, high-volume device scrolling, rendered widgets, Live Activity lifecycle, notification delivery, Shortcuts/Siri invocation, installed-device app-group I/O, TestFlight upload readiness, App Store readiness, or RC lock. Last completed commit before R03 closeout was `84c7d666`; the R03 closeout commit is `Complete R03 device qa testflight readiness`.
-./docs/codex/Launch_Operator_Runbook.md:128:- record what launch doctrine or checklist item failed so it is not repeated
+./docs/canon/Ambitions_3_0_Screenshot_Readiness_Spec.md:40:- no productivity score
+./docs/canon/Ambitions_3_0_Screenshot_Readiness_Spec.md:86:- productivity score
+./docs/codex/batches/F03_5_Today_Execution_State_Contract_Hardening_Prompt.md:21:Stop on Yellow/Red gates, forbidden scope pressure, failed build/focused tests, privacy/copy regression, or extraction becoming a broad rewrite.
+./docs/canon/Ambitions_3_0_Build_Failure_Triage_Protocol.md:24:3. If wrapper failed, compare with direct `xcodebuild`.
+./docs/canon/INTELLIGENCE_AUTOMATION_SUGGESTIONS.md:238:- suggestion cannot be dismissed
+./docs/canon/Ambitions_2_0_Master_Plan.md:17:The current master product and visual direction is [Ambitions_Master_Product_Visual_System_Spec_v2.md](Ambitions_Master_Product_Visual_System_Spec_v2.md). Its top-level thesis is: "Ambitions is a premium iPhone-native life operating system that uses adaptive panels, timeline rails, grounded time context, receipts, proof, and action closure to help people know where to start, take the right step, recover without shame, and trust what changed." It supersedes older conflicting language around next-move wording, manual Focus CTAs, guessed durations, vacation/free-time assumptions, silent reflow, stale overdue-task behavior, and punitive completion language.
 ./docs/canon/TRUST_PRIVACY_MEMORY.md:335:- failed safely
-./Native/Ambitions/Services/SmartAttachmentService.swift:25:                resultState: .failedSafely,
-./Native/Ambitions/Notifications/LocalNotificationFoundation.swift:195:        case .overdue:
-./docs/codex/BATCH_REGISTRY.md:103:Continuation note after R03: R03 completed device-readiness and scenario-review evidence by adding a code-backed `ReleaseDeviceQAReadinessReport` for real-device smoke, fresh install, returning user, denied permissions, no data, lots of data, missed week, export/import, external surfaces, and representative family/shared-life, career, creative, finance/life-admin, and home/life-admin scenario fixtures as QA fixtures only. Validation evidence for the R03 closeout: `xcodegen generate`; focused R03/R-gate report tests (`16` tests, `0` failures, including `ReleaseDeviceQAReadinessReportTests`); adjacent device/external/release regression lane (`59` tests, `0` failures); focused simulator UI smoke for forced onboarding, canonical shell, and Plan route (`3` checks passed after replacing one stale onboarding copy assertion); native simulator build on `iPhone 17`; full `AmbitionsTests` (`723` tests, `0` failures); and diff whitespace checks. Active limitations: R03 records simulator/source evidence only, keeps physical-device smoke, high-volume device scrolling, rendered widgets, Live Activity lifecycle, notification delivery, Shortcuts/Siri invocation, installed-device app-group I/O, TestFlight upload readiness, App Store readiness, and RC lock unclaimed for R04/R05/human-device gates. Last completed commit before this note was `84c7d666`; the R03 closeout commit is `Complete R03 device qa testflight readiness`.
-./docs/audits/faang-handoff-traceability-matrix.md:19:| Recommendation eligibility must be grounded and explainable without fake AI confidence. | `docs/canon/Ambitions_3_0_Recommendation_Eligibility_Engine.md`; `docs/canon/Ambitions_3_0_Recommendation_Contract.md` | `Native/Ambitions/Domain/RecommendationExplanationModels.swift`; `Native/Ambitions/Features/Today/TodayFeatureService.swift` | `Native/AmbitionsTests/Services/PathIntelligenceProjectorTests.swift`; `Native/AmbitionsTests/App/CoreSurfaceIntegrationScenarioTests.swift` | partial | Internal `bestNextMove` naming remains scheduled migration debt. |
+./docs/canon/Ambitions_3_0_Action_Closure_Sheet_Spec.md:13:A step is not simply done or failed. It needs a calm closure outcome that records what actually happened, what still counts, what changed, and what should happen next.
+./docs/canon/Ambitions_3_0_Action_Closure_Sheet_Spec.md:213:- mark old work as failed automatically
+./docs/canon/Ambitions_3_0_FAANG_Team_Operating_Model.md:111:large historical doc deletion, or two failed repair attempts.
 ./docs/canon/Ambitions_3_0_Product_Strategy_Brief.md:54:- a productivity score app
 ./docs/canon/Ambitions_3_0_Product_Strategy_Brief.md:97:3. When my plan breaks, I want to recover without feeling like I failed.
-./docs/codex/batches/BATCH-35-post-2.0-hardening-shell-truth-navigation-and-plan-canon-recovery.md:58:- tightened deep-link, payload, and external-route truth so canonical `ambitions://tab/plan` is supported and older captures/habits tab payloads still resolve safely into the new shell map
+./docs/canon/Ambitions_3_0_First_60_Seconds_Spec.md:148:Do not imply the user failed setup.
+./docs/codex/batches/BATCH-27-update-and-freshness-engine.md:58:  - failed at compile time because the new freshness/update contracts did not exist yet
 ./docs/canon/Ambitions_2_0_Intelligence_Standards.md:86:- Recovery state: whether the plan is already compressed, missed, displaced, or fragile.
 ./docs/canon/Ambitions_2_0_Intelligence_Standards.md:244:- Batch 72: Execution Resilience must handle missed high-priority items, displaced lower-priority tasks, deadline compression, and too many commitments for available context/time.
+./docs/canon/Ambitions_2_0_Capability_Matrix.md:58:| Goals surface | Partially implemented | Code/tests: `GoalsScreen`, `GoalDetailScreen`, `GoalsFeatureService.loadDetail`, `GoalDetailPresentation`, `GoalExplainabilityProjectionTests`, `GoalDetailStrategicPresentationTests`. | Goals and detail surfaces exist with explainability and planning logic, but not final 2.0 goal-detail composition. | If overclaimed, confidence/believability and long-range path work may be missed. | 77 | Keep current Goals surface; defer redesign/detail expansion to Batch 77 after global chrome, Life Graph, and Action Closure foundations. |
+./docs/canon/Ambitions_2_0_Capability_Matrix.md:73:| Error states | Partially implemented | Code: `AsyncViewState.failed`, `AsyncStateCard.error`, feature view models with failure states. | Error state primitives exist, but coverage quality varies by feature. | If wrong, release hardening may miss user-facing failures. | 84, 86 | Re-check after feature batches; keep Batch 61 docs-only. |
 ./docs/canon/Ambitions_3_0_Content_QA_And_Copy_Guard.md:39:- best next move
 ./docs/canon/Ambitions_3_0_Content_QA_And_Copy_Guard.md:40:- next best move
 ./docs/canon/Ambitions_3_0_Content_QA_And_Copy_Guard.md:41:- Start Focus
@@ -85,69 +90,76 @@
 ./docs/canon/Ambitions_3_0_Content_QA_And_Copy_Guard.md:92:| AI confidence | Why this / Based on |
 ./docs/canon/Ambitions_3_0_Content_QA_And_Copy_Guard.md:105:grep -Rni "best next move\|next best move\|Start Focus\|Focus Session\|AI confidence\|productivity score\|overdue\|failed\|behind\|missed\|incomplete\|profile tab\|insights tab\|habits tab" Native docs Sources || true
 ./docs/canon/Ambitions_3_0_Content_QA_And_Copy_Guard.md:136:- save failed
-./docs/audits/faang-handoff-internal-identifier-scan.txt:434:docs/audits/faang-handoff-deprecated-language-scan.txt:46:./Native/Ambitions/Features/Profile/ProfileViewModel.swift:23:        case let .failed(message):
-./docs/audits/faang-handoff-internal-identifier-scan.txt:435:docs/audits/faang-handoff-deprecated-language-scan.txt:47:./Native/Ambitions/Features/Profile/ProfileViewModel.swift:24:            return "failed:\(message)"
-./docs/audits/faang-handoff-internal-identifier-scan.txt:436:docs/audits/faang-handoff-deprecated-language-scan.txt:48:./Native/Ambitions/Features/Profile/ProfileViewModel.swift:61:            state = .failed("Unable to load You: \(error.localizedDescription)")
-./docs/audits/faang-handoff-internal-identifier-scan.txt:437:docs/audits/faang-handoff-deprecated-language-scan.txt:49:./Native/Ambitions/Features/Profile/ProfileViewModel.swift:82:            state = .failed("Unable to save You: \(error.localizedDescription)")
-./docs/audits/faang-handoff-internal-identifier-scan.txt:438:docs/audits/faang-handoff-deprecated-language-scan.txt:50:./Native/Ambitions/Features/Profile/ProfileFeatureService.swift:893:                forgetMemory.receiptRecommendation.resultState == .failedSafely
-./docs/audits/faang-handoff-internal-identifier-scan.txt:439:docs/audits/faang-handoff-deprecated-language-scan.txt:69:./Native/Ambitions/Features/Profile/ProfileScreen.swift:28:                case let .failed(message):
-./docs/audits/faang-handoff-internal-identifier-scan.txt:440:docs/audits/faang-handoff-deprecated-language-scan.txt:70:./Native/Ambitions/Features/Profile/ProfileScreen.swift:1885:        case .failedSafely: "Safe failure"
-./docs/audits/faang-handoff-internal-identifier-scan.txt:441:docs/audits/faang-handoff-deprecated-language-scan.txt:80:./Native/Ambitions/Features/Habits/HabitsViewModel.swift:18:        case let .failed(message):
-./docs/audits/faang-handoff-internal-identifier-scan.txt:442:docs/audits/faang-handoff-deprecated-language-scan.txt:81:./Native/Ambitions/Features/Habits/HabitsViewModel.swift:19:            return "failed:\(message)"
-./docs/audits/faang-handoff-internal-identifier-scan.txt:443:docs/audits/faang-handoff-deprecated-language-scan.txt:82:./Native/Ambitions/Features/Habits/HabitsViewModel.swift:41:            state = .failed("Unable to load Rituals: \(error.localizedDescription)")
-./docs/audits/faang-handoff-internal-identifier-scan.txt:444:docs/audits/faang-handoff-deprecated-language-scan.txt:83:./Native/Ambitions/Features/Habits/HabitsViewModel.swift:55:                title: "Ritual action failed",
-./docs/audits/faang-handoff-internal-identifier-scan.txt:445:docs/audits/faang-handoff-deprecated-language-scan.txt:88:./Native/Ambitions/Features/Habits/HabitsFeatureService.swift:122:                title: "Skipped, not failed",
-./docs/audits/faang-handoff-internal-identifier-scan.txt:446:docs/audits/faang-handoff-deprecated-language-scan.txt:89:./Native/Ambitions/Features/Habits/HabitsFeatureService.swift:283:                    ? "When a day is missed, the next step should get easier and clearer, not louder."
-./docs/audits/faang-handoff-internal-identifier-scan.txt:447:docs/audits/faang-handoff-deprecated-language-scan.txt:91:./Native/Ambitions/Features/Habits/HabitsScreen.swift:28:                case .failed:
-./docs/audits/faang-handoff-internal-identifier-scan.txt:448:docs/audits/faang-handoff-deprecated-language-scan.txt:223:./Native/Ambitions/Features/Insights/InsightsScreen.swift:24:                case .failed:
-./docs/audits/faang-handoff-internal-identifier-scan.txt:449:docs/audits/faang-handoff-deprecated-language-scan.txt:224:./Native/Ambitions/Features/Insights/InsightsScreen.swift:273:                case let .failed(message):
-./docs/audits/faang-handoff-internal-identifier-scan.txt:450:docs/audits/faang-handoff-deprecated-language-scan.txt:228:./Native/Ambitions/Features/Insights/InsightsViewModel.swift:17:        case let .failed(message):
-./docs/audits/faang-handoff-internal-identifier-scan.txt:451:docs/audits/faang-handoff-deprecated-language-scan.txt:229:./Native/Ambitions/Features/Insights/InsightsViewModel.swift:18:            return "failed:\(message)"
-./docs/audits/faang-handoff-internal-identifier-scan.txt:452:docs/audits/faang-handoff-deprecated-language-scan.txt:230:./Native/Ambitions/Features/Insights/InsightsViewModel.swift:36:            state = .failed("Unable to load History: \(error.localizedDescription)")
-./docs/audits/faang-handoff-readiness-report.md:81:rg -n --hidden --glob '!/.git/**' 'Start Focus|Focus Session|best next move|next best move|AI confidence|productivity score|profile tab|insights tab|habits tab|overdue|failed|missed' . || true
 ./docs/canon/POST_D26_MATURITY_ROADMAP.md:92:  - recover from a missed day,
 ./docs/canon/POST_D26_MATURITY_ROADMAP.md:388:- shame missed work,
 ./docs/canon/POST_D26_MATURITY_ROADMAP.md:570:- missed week,
 ./docs/canon/POST_D26_MATURITY_ROADMAP.md:581:Status after R03: Completed for planning purposes by adding a code-backed `ReleaseDeviceQAReadinessReport` over real-device smoke, fresh install, returning user, denied permissions, no data, lots of data, missed week, export/import, external surfaces, and representative scenario fixtures. R03 records simulator/source evidence and keeps representative family/shared-life, career, creative, finance/life-admin, and home/life-admin journeys as QA fixtures only, not product defaults. Validation evidence is recorded in `docs/codex/BATCH_REGISTRY.md`; R04 later completed, and R05 is now next. Active limitations: no physical-device smoke, high-volume device scrolling, rendered widget/gallery proof, Live Activity Lock Screen/Dynamic Island lifecycle proof, notification delivery proof, Shortcuts/Siri device proof, installed-device app-group I/O proof, TestFlight upload readiness, App Store readiness, or RC lock.
-./docs/canon/Ambitions_2_0_Roadmap_Merge_Audit.md:64:| 89 | Core Surface Integration QA and Performance Pass | Prove Today, Goals, Goal Detail, Plan, You, Reviews, Capture, Life Graph, Proof, Waiting, and Action Closure behave as one loop. | D10-D21, D26 | PARTIALLY_SUPERSEDED_BY_D_BATCH | D10-D21 own the Constitution screen/component/copy/accessibility alignment that must exist before a core integration pass is meaningful. | Representative scenarios for five goals, missed week, wrong recommendation, waiting, calendar denied. | Running now would validate pre-Constitution surfaces and could bless missing Life Areas, One-Step Goals, Smart Attachment, GroupedNavigationList, density, and accessibility work. | Retain as a focused core-loop QA slice after D21 or fold its scenario set into D26. | After D21; before or inside D26. |
-./docs/canon/Ambitions_2_0_Roadmap_Merge_Audit.md:88:| 113 | Onboarding, Empty States, and Returning User Continuity | Make first-run, degraded, empty, and re-entry states truthful after mature systems exist. | D20-D21, D26 | RETAIN_BUT_RESEQUENCE_AFTER_D_BATCHES | Constitution onboarding forbids upfront permissions and depends on final copy/accessibility truth. | Returning after a month and missed-week re-entry scenarios. | Could request permissions in onboarding or educate about unimplemented systems. | Retain after UX/accessibility alignment; keep no upfront permissions. | After D21; validate in D26. |
 ./docs/canon/Ambitions_3_0_Front_End_Redesign_Index.md:123:Avoid legacy or competitor-shaped language such as Start Focus, Focus Session, best next move, AI confidence, productivity score, overdue, failed, missed, profile tab, insights tab, habits tab, inbox, and generic dashboard language.
 ./docs/canon/Ambitions_Master_Product_Visual_System_v2_Decision_Addendum_2026_04_30.md:49:- Your best next move
 ./docs/canon/Ambitions_Master_Product_Visual_System_v2_Decision_Addendum_2026_04_30.md:50:- next best move
 ./docs/canon/Ambitions_Master_Product_Visual_System_v2_Decision_Addendum_2026_04_30.md:51:- Start Focus
 ./docs/canon/Ambitions_Master_Product_Visual_System_v2_Decision_Addendum_2026_04_30.md:52:- Focus Session
 ./docs/canon/Ambitions_Master_Product_Visual_System_v2_Decision_Addendum_2026_04_30.md:54:- AI confidence / Productivity score / Optimization rating
-./Native/Ambitions/Domain/SafeAutomationPolicyModels.swift:264:        case .failedSafely:
-./Native/Ambitions/Domain/SafeAutomationPolicyModels.swift:276:        if receiptRecommendation.resultState == .failedSafely {
-./Native/Ambitions/Domain/SafeAutomationPolicyModels.swift:293:        case .failedSafely:
-./Native/Ambitions/Domain/SafeAutomationPolicyModels.swift:294:            return .failedSafely
-./Native/Ambitions/Domain/SafeAutomationPolicyModels.swift:307:        guard receiptRecommendation.resultState == .failedSafely || receiptRecommendation.safetyState == .safeFailure else {
-./Native/Ambitions/Domain/SafeAutomationPolicyModels.swift:489:                receiptState: .failedSafely,
-./Native/Ambitions/Domain/SafeAutomationPolicyModels.swift:501:                receiptState: .failedSafely,
-./Native/Ambitions/Domain/SafeAutomationPolicyModels.swift:513:                receiptState: .failedSafely,
-./Native/Ambitions/Domain/SafeAutomationPolicyModels.swift:525:                receiptState: .failedSafely,
-./Native/Ambitions/Domain/SafeAutomationPolicyModels.swift:557:                receiptState: .failedSafely,
-./docs/canon/Ambitions_3_0_Universal_Object_Lifecycle_Contract.md:54:- a failed-safe message that preserves the input
-./docs/canon/Ambitions_3_0_Evidence_Hierarchy.md:132:- turn one missed step into a user trait
-./docs/canon/Ambitions_3_0_Surface_State_Matrix.md:34:14. Save failed
-./docs/canon/Ambitions_3_0_Surface_State_Matrix.md:98:- save failed
-./docs/canon/Ambitions_3_0_Surface_State_Matrix.md:116:- placement failed safely
-./docs/canon/Ambitions_3_0_Surface_State_Matrix.md:133:- calendar write failed locally safe
-./Native/Ambitions/Domain/CommitmentWaitingModels.swift:27:    case overdue
-./Native/Ambitions/Domain/CommitmentWaitingModels.swift:54:    case overdue
-./Native/Ambitions/Domain/CommitmentWaitingModels.swift:63:    case overduePromise = "overdue_promise"
-./Native/Ambitions/Domain/CommitmentWaitingModels.swift:178:        case .open, .waiting, .dueSoon, .overdue, .blocked:
-./Native/Ambitions/Domain/CommitmentWaitingModels.swift:256:        case .waiting, .followUpDue, .overdue, .blocked:
-./Native/Ambitions/Domain/CommitmentWaitingModels.swift:479:            if commitment.state == .overdue {
-./Native/Ambitions/Domain/CommitmentWaitingModels.swift:482:                        id: "social-load:overdue-promise:\(commitment.id)",
-./Native/Ambitions/Domain/CommitmentWaitingModels.swift:483:                        kind: .overduePromise,
+./.codex/validation/local-ci-parity-pack.md:22:- Tests/scans passed or failed.
 ./docs/canon/EMPTY_ERROR_RECOVERY_STATES.md:69:- failed
 ./docs/canon/EMPTY_ERROR_RECOVERY_STATES.md:200:| Today | No planned work yet; explain that Today gets useful after one object exists | Could not load current plan; local data remains safe | Day drifted, no open window, overloaded, missed protected item, sensitive item collapsed | Capture Something / Save the Day |
 ./docs/canon/EMPTY_ERROR_RECOVERY_STATES.md:203:| Capture | Nothing needs a place | Could not save capture; preserve user input | Low-confidence route, needs clarification, failed attachment | Save / Change Route |
 ./docs/canon/EMPTY_ERROR_RECOVERY_STATES.md:206:| Trust Center | No receipts or trust issues yet; top status says You are in control | Could not load trust history; privacy controls remain available | Memory stale, sync/export failed, permission denied, learning paused | Inspect / Correct |
 ./docs/canon/EMPTY_ERROR_RECOVERY_STATES.md:530:- Parked does not mean failed.
-./Native/Ambitions/Domain/EventLedgerModels.swift:44:    case recommendationDismissed = "recommendation_dismissed"
+./Native/Ambitions/Services/SmartAttachmentService.swift:25:                resultState: .failedSafely,
+./docs/canon/SOURCE_OF_TRUTH_MAP.md:40:| Human user-facing language | `Ambitions_Master_Product_Visual_System_Spec_v2.md` | `HUMAN_LANGUAGE_REVIEW.md`, `ux-writing-state-language-matrix.md`, Acceptance Gates, Today canon | Current language locks include `Start here`, `Recommended step`, `Start now`, `Open step`, `Adjust plan`, `Why this?`, and avoid `Your best next move`, `Start Focus`, and failure/shame language. |
+./docs/canon/SOURCE_OF_TRUTH_MAP.md:46:| Goal/Plan/Task lifecycle | `GOAL_PLAN_TASK_LIFECYCLE.md` | Product Architecture, Systems Architecture, Visual System, v2 master spec/addendum | State-machine and lifecycle reference. V2 requires Action Closure instead of binary overdue/failure handling. |
+./docs/canon/SOURCE_OF_TRUTH_MAP.md:110:- Step Session is the execution drill-down launched from `Start now` / `Open step`; it is not called Focus Session and is not timer-first.
+./docs/canon/SOURCE_OF_TRUTH_MAP.md:160:Before implementation, read docs/canon/SOURCE_OF_TRUTH_MAP.md and follow its source-of-truth order. Do not treat archived or superseded docs as active canon. The active master direction is docs/canon/Ambitions_Master_Product_Visual_System_Spec_v2.md plus docs/canon/Ambitions_Master_Product_Visual_System_v2_Decision_Addendum_2026_04_30.md. Distinguish planned canon from shipped code. Preserve the five-tab shell, canonical 12-screen reference board, Golden Launch Loop, Human Language Review where not superseded by v2, local-first trust posture, receipt/privacy boundaries, and accessibility evidence requirements. Normal UI must use Start here / Recommended step / Start now / Open step / Adjust plan / Why this? language; do not ship Your best next move, Start Focus, AI/model/confidence/productivity-score, or failure/shame language in visible copy.
+./docs/canon/Ambitions_3_0_Migration_And_Deprecation_Plan.md:31:| profile tab | You destination |
+./docs/canon/Ambitions_3_0_Migration_And_Deprecation_Plan.md:33:| insights tab | Reviews route or Plan/You destination context |
+./docs/canon/Ambitions_3_0_Migration_And_Deprecation_Plan.md:35:| habits tab | no top-level destination |
+./docs/canon/Ambitions_3_0_Migration_And_Deprecation_Plan.md:36:| Focus Session | Step Session |
+./docs/canon/Ambitions_3_0_Migration_And_Deprecation_Plan.md:37:| Start Focus | Start now |
+./docs/canon/Ambitions_3_0_Migration_And_Deprecation_Plan.md:39:| next best move | Recommended step |
+./docs/canon/Ambitions_3_0_Migration_And_Deprecation_Plan.md:43:| AI confidence | Why this / Based on |
+./docs/canon/Ambitions_3_0_Documentation_System_Index.md:58:| `Ambitions_3_0_Postmortem_And_Learning_Loop.md` | Defines learning loop for failed batches, repeated failures, and bad Codex runs. |
+./docs/canon/DOMAIN_MODEL.md:548:- failed safely
+./docs/canon/Ambitions_3_0_Copy_QA_Protocol.md:20:- No fake AI certainty, productivity scores, shame, or release claims.
+./docs/canon/Ambitions_3_0_Copy_QA_Protocol.md:27:rg -n --hidden --glob '!/.git/**' 'Start Focus|Focus Session|best next move|next best move|AI confidence|productivity score|profile tab|insights tab|habits tab|overdue|failed|missed' Native Sources AppUI docs .codex || true
+./docs/canon/Ambitions_2_0_Roadmap_Merge_Audit.md:64:| 89 | Core Surface Integration QA and Performance Pass | Prove Today, Goals, Goal Detail, Plan, You, Reviews, Capture, Life Graph, Proof, Waiting, and Action Closure behave as one loop. | D10-D21, D26 | PARTIALLY_SUPERSEDED_BY_D_BATCH | D10-D21 own the Constitution screen/component/copy/accessibility alignment that must exist before a core integration pass is meaningful. | Representative scenarios for five goals, missed week, wrong recommendation, waiting, calendar denied. | Running now would validate pre-Constitution surfaces and could bless missing Life Areas, One-Step Goals, Smart Attachment, GroupedNavigationList, density, and accessibility work. | Retain as a focused core-loop QA slice after D21 or fold its scenario set into D26. | After D21; before or inside D26. |
+./docs/canon/Ambitions_2_0_Roadmap_Merge_Audit.md:88:| 113 | Onboarding, Empty States, and Returning User Continuity | Make first-run, degraded, empty, and re-entry states truthful after mature systems exist. | D20-D21, D26 | RETAIN_BUT_RESEQUENCE_AFTER_D_BATCHES | Constitution onboarding forbids upfront permissions and depends on final copy/accessibility truth. | Returning after a month and missed-week re-entry scenarios. | Could request permissions in onboarding or educate about unimplemented systems. | Retain after UX/accessibility alignment; keep no upfront permissions. | After D21; validate in D26. |
+./docs/canon/Ambitions_2_0_RC_Maturity_Plan.md:381:- clear failed-safe state
+./docs/canon/Ambitions_2_0_RC_Maturity_Plan.md:409:- urgent deadline after missed plan
+./docs/canon/Ambitions_3_0_Launch_Narrative_And_Demo_Script.md:105:- productivity score
+./docs/canon/Ambitions_2_0_Batch_Plan.md:511:- Concrete acceptance criteria: focused scenario proof for missed day/week, low-energy day, calendar denied, and urgent deadline; performance baseline recorded without claiming unmeasured numbers; accessibility checklist updated.
+./docs/canon/Ambitions_2_0_Batch_Plan.md:551:- Concrete acceptance criteria: receipt states include created, changed, scheduled, moved, attached, exported, prepared, completed, failed safely, needs confirmation, and undo available; unsupported commands fail safely without success history.
+./docs/canon/Ambitions_2_0_Batch_Plan.md:586:| 89 | Core Surface Integration QA and Performance Pass proves Today, Goals, Goal Detail, Plan, You, Reviews, Capture, Life Graph, Proof, Waiting, and Action Closure behave as one loop. | Gates 3 and 5 | 83-88 | Representative scenarios pass for five competing goals, missed week, wrong recommendation corrected, waiting on another person, calendar denied; performance budget and accessibility checklist updated. |
+./docs/canon/Ambitions_2_0_Batch_Plan.md:598:| 90 | Export / Import Proof and Disaster Drill verifies portable trust fallback, restore flow, export receipts, and new-phone scenario. | Gate 4 | 80, 87-89 | Export/import claims match evidence; restore scenario is documented; user can see what was exported/imported and what failed safely. |
+./docs/canon/Ambitions_2_0_Batch_Plan.md:654:| 113 | Onboarding, Empty States, and Returning User Continuity make first-run, degraded, empty, and re-entry states truthful after mature systems exist. | Gate 4 | No stale/demo copy; no false education; returning after a month and missed-week scenarios land calmly. |
+./docs/canon/Ambitions_2_0_Batch_Plan.md:655:| 114 | Representative Scenario Fixtures and Indispensability QA v1 turns canon scenarios into reusable validation scripts/checklists. | Gate 6 | Scenarios cover apartments, Product transition, EP, new baby, debt, certification, missed week, five goals, calendar denied, export restore, wrong recommendation, waiting, urgent missed deadline, and low-energy day. |
+./docs/canon/Ambitions_3_0_Postmortem_And_Learning_Loop.md:11:- Repeated failed validation.
+./docs/canon/Ambitions_3_0_Plan_Life_Suite_Endgame.md:332:- missed day
+./docs/canon/Ambitions_3_0_Plan_Life_Suite_Endgame.md:333:- missed week
+./.codex/validation/state-machine-pack.md:22:- Tests/scans passed or failed.
+./docs/canon/Ambitions_3_0_Golden_Launch_Loop_Upgrade_Bank.md:36:- No generic timeline, task list, calendar clone, focus-timer-first redesign, productivity score, streak system, or extra Today dashboard stack.
+./docs/canon/Ambitions_3_0_Golden_Launch_Loop_Upgrade_Bank.md:63:5. Internal Step Believability Check — evaluate fit without exposing productivity scores.
+./docs/canon/Ambitions_3_0_Golden_Launch_Loop_Upgrade_Bank.md:111:48. Capture Unresolved Count — use 3 things need a place, never overdue inbox.
+./docs/canon/Ambitions_3_0_Golden_Launch_Loop_Upgrade_Bank.md:186:106. Non-Shaming Rail Language — no overdue, failed, missed, behind, or incomplete copy.
+./docs/canon/Ambitions_3_0_Golden_Launch_Loop_Upgrade_Bank.md:223:138. Skipped / Not Needed State — intentionally removed, not failed.
+./docs/canon/Ambitions_3_0_Golden_Launch_Loop_Upgrade_Bank.md:235:150. Missed Day Recovery — yesterday needs closure; nothing failed.
+./docs/canon/Ambitions_3_0_Golden_Launch_Loop_Upgrade_Bank.md:328:218. Recovery Copy Bank — nothing failed, keep what matters, close what happened.
+./docs/canon/design/Ambitions_Design_Constitution.md:5:Current master product and visual direction: [../Ambitions_Master_Product_Visual_System_Spec_v2.md](../Ambitions_Master_Product_Visual_System_Spec_v2.md). The v2 spec supersedes older conflicting language around next-move wording, Focus as a CTA, guessed durations, vacation/free-time assumptions, silent reflow, stale overdue-task behavior, and punitive completion states.
+./.codex/validation/batch-train-release-claim-pack.md:21:Validation summary with verified, failed, not verified, and human/device follow-up separated.
+./docs/codex/batches/BATCH-35-post-2.0-hardening-shell-truth-navigation-and-plan-canon-recovery.md:58:- tightened deep-link, payload, and external-route truth so canonical `ambitions://tab/plan` is supported and older captures/habits tab payloads still resolve safely into the new shell map
 ./Native/Ambitions/Services/GoalExplainabilityProjector.swift:345:                    GoalTeachingContradictionDispositionCorrection(correctedDisposition: .dismissed)
+./.codex/validation/privacy-trust-pack.md:22:- Tests/scans passed or failed.
+./docs/canon/design/ux-writing-state-language-matrix.md:37:- Shame language such as failed, lazy, behind again, streak lost.
+./.codex/validation/copy-guard-pack.md:22:- Tests/scans passed or failed.
+./.codex/validation/swiftui-state-contract-pack.md:31:Validation summary with verified, failed, not verified, and human/device follow-up separated.
+./docs/canon/Ambitions_2_0_Accessibility_Nutrition.md:276:- Do not use streak pressure, guilt, or shame for missed work.
+./docs/canon/Ambitions_3_0_Surface_State_Matrix.md:34:14. Save failed
+./docs/canon/Ambitions_3_0_Surface_State_Matrix.md:98:- save failed
+./docs/canon/Ambitions_3_0_Surface_State_Matrix.md:116:- placement failed safely
+./docs/canon/Ambitions_3_0_Surface_State_Matrix.md:133:- calendar write failed locally safe
+./docs/canon/Ambitions_3_0_Primitive_Architecture.md:84:- productivity score
+./docs/canon/Ambitions_3_0_Primitive_Architecture.md:121:- overdue system
+./.codex/validation/release-readiness-pack.md:22:- Tests/scans passed or failed.
 ./docs/canon/Ambitions_3_0_Day_Rail_SwiftUI_Build_Spec.md:73:- Shame from missed tasks
 ./docs/canon/Ambitions_3_0_Day_Rail_SwiftUI_Build_Spec.md:137:- Build a productivity score
 ./docs/canon/Ambitions_3_0_Day_Rail_SwiftUI_Build_Spec.md:511:AI confidence
@@ -163,37 +175,11 @@
 ./docs/canon/Ambitions_3_0_Day_Rail_SwiftUI_Build_Spec.md:1605:    "best next move",
 ./docs/canon/Ambitions_3_0_Day_Rail_SwiftUI_Build_Spec.md:1606:    "AI confidence",
 ./docs/canon/Ambitions_3_0_Day_Rail_SwiftUI_Build_Spec.md:1652:Start Focus
-./docs/canon/Ambitions_3_0_UX_Research_Plan.md:31:5. Does Action Closure reduce shame compared with overdue tasks?
-./docs/canon/Ambitions_3_0_Migration_And_Deprecation_Plan.md:31:| profile tab | You destination |
-./docs/canon/Ambitions_3_0_Migration_And_Deprecation_Plan.md:33:| insights tab | Reviews route or Plan/You destination context |
-./docs/canon/Ambitions_3_0_Migration_And_Deprecation_Plan.md:35:| habits tab | no top-level destination |
-./docs/canon/Ambitions_3_0_Migration_And_Deprecation_Plan.md:36:| Focus Session | Step Session |
-./docs/canon/Ambitions_3_0_Migration_And_Deprecation_Plan.md:37:| Start Focus | Start now |
-./docs/canon/Ambitions_3_0_Migration_And_Deprecation_Plan.md:39:| next best move | Recommended step |
-./docs/canon/Ambitions_3_0_Migration_And_Deprecation_Plan.md:43:| AI confidence | Why this / Based on |
-./docs/canon/Ambitions_3_0_Screenshot_Readiness_Spec.md:40:- no productivity score
-./docs/canon/Ambitions_3_0_Screenshot_Readiness_Spec.md:86:- productivity score
-./Native/Ambitions/Domain/GoalEngine/GoalTeachingModels.swift:51:    case dismissed
-./docs/canon/DOMAIN_MODEL.md:548:- failed safely
-./docs/canon/design/ux-writing-state-language-matrix.md:37:- Shame language such as failed, lazy, behind again, streak lost.
-./docs/canon/INTELLIGENCE_AUTOMATION_SUGGESTIONS.md:238:- suggestion cannot be dismissed
-./docs/canon/Ambitions_2_0_RC_Maturity_Plan.md:381:- clear failed-safe state
-./docs/canon/Ambitions_2_0_RC_Maturity_Plan.md:409:- urgent deadline after missed plan
-./docs/canon/design/Ambitions_Design_Constitution.md:5:Current master product and visual direction: [../Ambitions_Master_Product_Visual_System_Spec_v2.md](../Ambitions_Master_Product_Visual_System_Spec_v2.md). The v2 spec supersedes older conflicting language around next-move wording, Focus as a CTA, guessed durations, vacation/free-time assumptions, silent reflow, stale overdue-task behavior, and punitive completion states.
-./docs/canon/Ambitions_2_0_Batch_Plan.md:511:- Concrete acceptance criteria: focused scenario proof for missed day/week, low-energy day, calendar denied, and urgent deadline; performance baseline recorded without claiming unmeasured numbers; accessibility checklist updated.
-./docs/canon/Ambitions_2_0_Batch_Plan.md:551:- Concrete acceptance criteria: receipt states include created, changed, scheduled, moved, attached, exported, prepared, completed, failed safely, needs confirmation, and undo available; unsupported commands fail safely without success history.
-./docs/canon/Ambitions_2_0_Batch_Plan.md:586:| 89 | Core Surface Integration QA and Performance Pass proves Today, Goals, Goal Detail, Plan, You, Reviews, Capture, Life Graph, Proof, Waiting, and Action Closure behave as one loop. | Gates 3 and 5 | 83-88 | Representative scenarios pass for five competing goals, missed week, wrong recommendation corrected, waiting on another person, calendar denied; performance budget and accessibility checklist updated. |
-./docs/canon/Ambitions_2_0_Batch_Plan.md:598:| 90 | Export / Import Proof and Disaster Drill verifies portable trust fallback, restore flow, export receipts, and new-phone scenario. | Gate 4 | 80, 87-89 | Export/import claims match evidence; restore scenario is documented; user can see what was exported/imported and what failed safely. |
-./docs/canon/Ambitions_2_0_Batch_Plan.md:654:| 113 | Onboarding, Empty States, and Returning User Continuity make first-run, degraded, empty, and re-entry states truthful after mature systems exist. | Gate 4 | No stale/demo copy; no false education; returning after a month and missed-week scenarios land calmly. |
-./docs/canon/Ambitions_2_0_Batch_Plan.md:655:| 114 | Representative Scenario Fixtures and Indispensability QA v1 turns canon scenarios into reusable validation scripts/checklists. | Gate 6 | Scenarios cover apartments, Product transition, EP, new baby, debt, certification, missed week, five goals, calendar denied, export restore, wrong recommendation, waiting, urgent missed deadline, and low-energy day. |
-./docs/canon/Ambitions_3_0_Action_Closure_Sheet_Spec.md:13:A step is not simply done or failed. It needs a calm closure outcome that records what actually happened, what still counts, what changed, and what should happen next.
-./docs/canon/Ambitions_3_0_Action_Closure_Sheet_Spec.md:213:- mark old work as failed automatically
-./docs/canon/Ambitions_3_0_Data_Event_Taxonomy.md:130:- productivity score
-./docs/canon/Ambitions_3_0_Plan_Life_Suite_Endgame.md:332:- missed day
-./docs/canon/Ambitions_3_0_Plan_Life_Suite_Endgame.md:333:- missed week
-./docs/canon/Ambitions_3_0_Front_End_Implementation_Batch_Plan.md:204:- no `Start Focus` / `Focus Session` user-facing copy
-./docs/canon/Ambitions_2_0_Accessibility_Nutrition.md:276:- Do not use streak pressure, guilt, or shame for missed work.
-./docs/canon/Ambitions_3_0_Launch_Narrative_And_Demo_Script.md:105:- productivity score
+./docs/canon/Ambitions_Accessibility_Nutrition_Labels_Audit.md:118:- issue references for any failed or partial task
+./docs/canon/Ambitions_2_0_Systems_Architecture.md:56:- Result states include: created, changed, scheduled, moved, attached, exported, drafted/prepared, completed, failed safely, needs confirmation, and undo available where safely supported.
+./docs/canon/Ambitions_2_0_Systems_Architecture.md:158:- Owned concepts: drift, missed work, slipped deadlines, overloaded days, no open window, blocked/waiting pressure removal, priority conflict, displaced lower-priority work, passive work deferral, split action, smaller version, reschedule representation, protect deadline work, replan/open destination prompt, review prompt.
+./docs/canon/Ambitions_3_0_Front_End_Implementation_Batch_Plan.md:228:- no `Start Focus` / `Focus Session` user-facing copy
+./.codex/validation/batch-train-stop-pack.md:21:Validation summary with verified, failed, not verified, and human/device follow-up separated.
 ./docs/canon/Ambitions_3_0_Action_Verbs_And_Receipt_Grammar.md:21:| Begin a step | Start now | Start Focus |
 ./docs/canon/Ambitions_3_0_Action_Verbs_And_Receipt_Grammar.md:28:| Resolve reality state | Close the loop | Mark failed |
 ./docs/canon/Ambitions_3_0_Action_Verbs_And_Receipt_Grammar.md:69:- Your best next move
@@ -201,33 +187,6 @@
 ./docs/canon/Ambitions_3_0_Action_Verbs_And_Receipt_Grammar.md:71:- Start Focus
 ./docs/canon/Ambitions_3_0_Action_Verbs_And_Receipt_Grammar.md:72:- Focus Session
 ./docs/canon/Ambitions_3_0_Action_Verbs_And_Receipt_Grammar.md:73:- AI confidence
-./docs/canon/Ambitions_3_0_Primitive_Architecture.md:84:- productivity score
-./docs/canon/Ambitions_3_0_Primitive_Architecture.md:121:- overdue system
-./docs/canon/Ambitions_3_0_Codex_Only_Implementation_And_Testing_Strategy.md:102:- no AI confidence/productivity score language
-./docs/canon/Ambitions_3_0_Codex_Only_Implementation_And_Testing_Strategy.md:142:- expose AI confidence or productivity scores
-./docs/canon/Ambitions_3_0_Golden_Launch_Loop_Upgrade_Bank.md:36:- No generic timeline, task list, calendar clone, focus-timer-first redesign, productivity score, streak system, or extra Today dashboard stack.
-./docs/canon/Ambitions_3_0_Golden_Launch_Loop_Upgrade_Bank.md:63:5. Internal Step Believability Check — evaluate fit without exposing productivity scores.
-./docs/canon/Ambitions_3_0_Golden_Launch_Loop_Upgrade_Bank.md:111:48. Capture Unresolved Count — use 3 things need a place, never overdue inbox.
-./docs/canon/Ambitions_3_0_Golden_Launch_Loop_Upgrade_Bank.md:186:106. Non-Shaming Rail Language — no overdue, failed, missed, behind, or incomplete copy.
-./docs/canon/Ambitions_3_0_Golden_Launch_Loop_Upgrade_Bank.md:223:138. Skipped / Not Needed State — intentionally removed, not failed.
-./docs/canon/Ambitions_3_0_Golden_Launch_Loop_Upgrade_Bank.md:235:150. Missed Day Recovery — yesterday needs closure; nothing failed.
-./docs/canon/Ambitions_3_0_Golden_Launch_Loop_Upgrade_Bank.md:328:218. Recovery Copy Bank — nothing failed, keep what matters, close what happened.
-./docs/canon/MONETIZATION_PRICING_BUSINESS_MODEL.md:154:- user is recovering from a missed day
-./docs/canon/Ambitions_Master_Product_Visual_System_Spec_v2.md:9:This document supersedes conflicting active language around `Your best next move`, `next best move`, manual `Start Focus` sessions, guessed durations, free-time assumptions, vacation as free time, silent automatic reflow, stale overdue task behavior, punitive completion language, generic dashboard framing, and top-level screen duplication.
-./docs/canon/Ambitions_Master_Product_Visual_System_Spec_v2.md:176:- `Your best next move`
-./docs/canon/Ambitions_Master_Product_Visual_System_Spec_v2.md:177:- `next best move`
-./docs/canon/Ambitions_Master_Product_Visual_System_Spec_v2.md:178:- `Start Focus`
-./docs/canon/Ambitions_Master_Product_Visual_System_Spec_v2.md:181:- `AI confidence`
-./docs/canon/Ambitions_Master_Product_Visual_System_Spec_v2.md:219:The Today hero uses `Start here`, not `Your best next move`.
-./docs/canon/Ambitions_Master_Product_Visual_System_Spec_v2.md:221:The action is a `Recommended step`, not a `next best move`.
-./docs/canon/Ambitions_Master_Product_Visual_System_Spec_v2.md:715:- Ambitions does not mark a step as failed because the user forgot to open the app.
-./docs/canon/Ambitions_Master_Product_Visual_System_Spec_v2.md:903:Do not call it Focus Session.
-./docs/canon/Ambitions_Master_Product_Visual_System_Spec_v2.md:1516:Today must avoid dashboard clutter, too many cards, old tasks taking over, and shameful overdue lists.
-./docs/canon/Ambitions_Master_Product_Visual_System_Spec_v2.md:1543:- Today CTAs are `Start now` or `Open step`, not `Start Focus`.
-./docs/canon/TODAY_NOW_STATE.md:175:- Do not hide missed work.
-./docs/canon/Ambitions_2_0_Systems_Architecture.md:56:- Result states include: created, changed, scheduled, moved, attached, exported, drafted/prepared, completed, failed safely, needs confirmation, and undo available where safely supported.
-./docs/canon/Ambitions_2_0_Systems_Architecture.md:158:- Owned concepts: drift, missed work, slipped deadlines, overloaded days, no open window, blocked/waiting pressure removal, priority conflict, displaced lower-priority work, passive work deferral, split action, smaller version, reschedule representation, protect deadline work, replan/open destination prompt, review prompt.
-./docs/canon/Ambitions_Accessibility_Nutrition_Labels_Audit.md:118:- issue references for any failed or partial task
 ./docs/canon/Ambitions_3_0_Product_Language_System.md:121:- profile tab
 ./docs/canon/Ambitions_3_0_Product_Language_System.md:122:- insights tab
 ./docs/canon/Ambitions_3_0_Product_Language_System.md:123:- habits tab
@@ -243,17 +202,50 @@
 ./docs/canon/Ambitions_3_0_Product_Language_System.md:364:- overdue
 ./docs/canon/Ambitions_3_0_Product_Language_System.md:426:- AI confidence
 ./docs/canon/Ambitions_3_0_Product_Language_System.md:430:- productivity score
-./docs/canon/SOURCE_OF_TRUTH_MAP.md:40:| Human user-facing language | `Ambitions_Master_Product_Visual_System_Spec_v2.md` | `HUMAN_LANGUAGE_REVIEW.md`, `ux-writing-state-language-matrix.md`, Acceptance Gates, Today canon | Current language locks include `Start here`, `Recommended step`, `Start now`, `Open step`, `Adjust plan`, `Why this?`, and avoid `Your best next move`, `Start Focus`, and failure/shame language. |
-./docs/canon/SOURCE_OF_TRUTH_MAP.md:46:| Goal/Plan/Task lifecycle | `GOAL_PLAN_TASK_LIFECYCLE.md` | Product Architecture, Systems Architecture, Visual System, v2 master spec/addendum | State-machine and lifecycle reference. V2 requires Action Closure instead of binary overdue/failure handling. |
-./docs/canon/SOURCE_OF_TRUTH_MAP.md:110:- Step Session is the execution drill-down launched from `Start now` / `Open step`; it is not called Focus Session and is not timer-first.
-./docs/canon/SOURCE_OF_TRUTH_MAP.md:160:Before implementation, read docs/canon/SOURCE_OF_TRUTH_MAP.md and follow its source-of-truth order. Do not treat archived or superseded docs as active canon. The active master direction is docs/canon/Ambitions_Master_Product_Visual_System_Spec_v2.md plus docs/canon/Ambitions_Master_Product_Visual_System_v2_Decision_Addendum_2026_04_30.md. Distinguish planned canon from shipped code. Preserve the five-tab shell, canonical 12-screen reference board, Golden Launch Loop, Human Language Review where not superseded by v2, local-first trust posture, receipt/privacy boundaries, and accessibility evidence requirements. Normal UI must use Start here / Recommended step / Start now / Open step / Adjust plan / Why this? language; do not ship Your best next move, Start Focus, AI/model/confidence/productivity-score, or failure/shame language in visible copy.
-./docs/canon/Ambitions_2_0_Master_Plan.md:17:The current master product and visual direction is [Ambitions_Master_Product_Visual_System_Spec_v2.md](Ambitions_Master_Product_Visual_System_Spec_v2.md). Its top-level thesis is: "Ambitions is a premium iPhone-native life operating system that uses adaptive panels, timeline rails, grounded time context, receipts, proof, and action closure to help people know where to start, take the right step, recover without shame, and trust what changed." It supersedes older conflicting language around next-move wording, manual Focus CTAs, guessed durations, vacation/free-time assumptions, silent reflow, stale overdue-task behavior, and punitive completion language.
+./.codex/validation/architecture-hygiene-pack.md:21:Validation summary with verified, failed, not verified, and human/device follow-up separated.
+./docs/canon/Ambitions_3_0_Codex_Only_Implementation_And_Testing_Strategy.md:102:- no AI confidence/productivity score language
+./docs/canon/Ambitions_3_0_Codex_Only_Implementation_And_Testing_Strategy.md:142:- expose AI confidence or productivity scores
+./docs/canon/MONETIZATION_PRICING_BUSINESS_MODEL.md:154:- user is recovering from a missed day
 ./docs/canon/Ambitions_3_0_Object_Ownership_And_Appearance_Matrix.md:32:| Needs a Place item | Capture / Place | You review, weekly cleanup | overdue inbox item |
-./Native/Ambitions/Domain/GoalEngine/GoalEnginePlanner.swift:303:                PlannerStepDraft(title: "Decide how to restart after a miss", summary: nil, type: .reflectionPrompt, timingType: .logWhenDone, actionability: actionability(action: "Write the reset rule for the next day after the routine is missed.", completion: "There is one clear reset rule that says how the routine resumes without punishment.", evidence: ["A recovery note exists and uses non-judgmental language."], micro: "Write the first sentence of the reset rule only."))
-./docs/canon/Ambitions_3_0_First_60_Seconds_Spec.md:148:Do not imply the user failed setup.
-./Native/Ambitions/Runtime/AmbitionsRuntimeServices.swift:125:            return RuntimeActionResult(outcome: .failed)
-./docs/canon/Ambitions_2_0_Capability_Matrix.md:58:| Goals surface | Partially implemented | Code/tests: `GoalsScreen`, `GoalDetailScreen`, `GoalsFeatureService.loadDetail`, `GoalDetailPresentation`, `GoalExplainabilityProjectionTests`, `GoalDetailStrategicPresentationTests`. | Goals and detail surfaces exist with explainability and planning logic, but not final 2.0 goal-detail composition. | If overclaimed, confidence/believability and long-range path work may be missed. | 77 | Keep current Goals surface; defer redesign/detail expansion to Batch 77 after global chrome, Life Graph, and Action Closure foundations. |
-./docs/canon/Ambitions_2_0_Capability_Matrix.md:73:| Error states | Partially implemented | Code: `AsyncViewState.failed`, `AsyncStateCard.error`, feature view models with failure states. | Error state primitives exist, but coverage quality varies by feature. | If wrong, release hardening may miss user-facing failures. | 84, 86 | Re-check after feature batches; keep Batch 61 docs-only. |
+./.codex/validation/batch-train-continuation-pack.md:21:Validation summary with verified, failed, not verified, and human/device follow-up separated.
+./docs/canon/Ambitions_Master_Product_Visual_System_Spec_v2.md:9:This document supersedes conflicting active language around `Your best next move`, `next best move`, manual `Start Focus` sessions, guessed durations, free-time assumptions, vacation as free time, silent automatic reflow, stale overdue task behavior, punitive completion language, generic dashboard framing, and top-level screen duplication.
+./docs/canon/Ambitions_Master_Product_Visual_System_Spec_v2.md:176:- `Your best next move`
+./docs/canon/Ambitions_Master_Product_Visual_System_Spec_v2.md:177:- `next best move`
+./docs/canon/Ambitions_Master_Product_Visual_System_Spec_v2.md:178:- `Start Focus`
+./docs/canon/Ambitions_Master_Product_Visual_System_Spec_v2.md:181:- `AI confidence`
+./docs/canon/Ambitions_Master_Product_Visual_System_Spec_v2.md:219:The Today hero uses `Start here`, not `Your best next move`.
+./docs/canon/Ambitions_Master_Product_Visual_System_Spec_v2.md:221:The action is a `Recommended step`, not a `next best move`.
+./docs/canon/Ambitions_Master_Product_Visual_System_Spec_v2.md:715:- Ambitions does not mark a step as failed because the user forgot to open the app.
+./docs/canon/Ambitions_Master_Product_Visual_System_Spec_v2.md:903:Do not call it Focus Session.
+./docs/canon/Ambitions_Master_Product_Visual_System_Spec_v2.md:1516:Today must avoid dashboard clutter, too many cards, old tasks taking over, and shameful overdue lists.
+./docs/canon/Ambitions_Master_Product_Visual_System_Spec_v2.md:1543:- Today CTAs are `Start now` or `Open step`, not `Start Focus`.
+./docs/canon/TODAY_NOW_STATE.md:175:- Do not hide missed work.
+./.codex/validation/dependency-drift-pack.md:22:- Tests/scans passed or failed.
+./docs/canon/Ambitions_3_0_Data_Event_Taxonomy.md:130:- productivity score
+./.codex/validation/recommendation-eligibility-pack.md:22:- Tests/scans passed or failed.
+./.codex/validation/batch-train-gate-pack.md:21:Validation summary with verified, failed, not verified, and human/device follow-up separated.
+./Native/Ambitions/Services/ExternalActionCommandService.swift:112:    case failed
+./.codex/validation/active-canon-pack.md:22:- Tests/scans passed or failed.
+./.codex/validation/swiftui-preview-pack.md:22:- Tests/scans passed or failed.
+./docs/codex/FAANG_HANDOFF_REPO_CLEANUP_PROMPT.md:180:  'Start Focus|Focus Session|best next move|next best move|AI confidence|productivity score|profile tab|insights tab|habits tab|overdue|failed|missed' . || true
+./.codex/validation/copy-qa-pack.md:11:rg -n --hidden --glob '!/.git/**' 'Start Focus|Focus Session|best next move|next best move|AI confidence|productivity score|profile tab|insights tab|habits tab|overdue|failed|missed' Native Sources AppUI docs .codex || true
+./docs/codex/MASTER_CODEX_SYSTEM.md:31:The FAANG handoff audit is PARTIAL. Generated scratch artifacts were purged and active 3.0 indexes were improved, but the full UI test suite failed with 10 UI smoke failures, legacy-language hits remain, and internal identifier migration debt remains. Future Codex runs must treat those as active risks until fixed or intentionally rebaselined with evidence.
+./docs/codex/MASTER_CODEX_SYSTEM.md:41:Ambitions is not a generic task app, calendar clone, habit tracker, productivity score app, chatbot, or AI-wrapper product.
+./docs/codex/MASTER_CODEX_SYSTEM.md:54:10. Close out with files changed, commands run, results, failed/not-run checks, risks, and next prompt.
+./Native/Ambitions/Notifications/LocalNotificationFoundation.swift:195:        case .overdue:
+./.codex/operations/batch-train-rollback-protocol.md:36:Any Yellow/Red gate, unclear dirty state, forbidden file touched, failed build/focused test, privacy/copy leak, unapproved dependency/workflow change, or unapproved task-width escalation.
+./docs/codex/Release_Candidate_Review_Checklist.md:17:- Verify fresh install, returning user, denied permissions, no-data, lots-of-data, missed-week, export/import, and external-surface journeys on device where possible.
+./.codex/validation/external-surface-pack.md:22:- Tests/scans passed or failed.
+./.codex/validation/accessibility-pack.md:22:- Tests/scans passed or failed.
+./docs/codex/CONTEXT_INDEX.md:10:- The FAANG handoff cleanup result is PARTIAL: generated artifacts were purged, active indexes improved, but full UI smoke failed and legacy/internal migration debt remains.
+./.codex/validation/batch-train-resume-pack.md:21:Validation summary with verified, failed, not verified, and human/device follow-up separated.
+./.codex/validation/base-build-test-pack.md:22:- Tests/scans passed or failed.
+./.codex/validation/feature-file-responsibility-pack.md:21:Validation summary with verified, failed, not verified, and human/device follow-up separated.
+./.codex/skills/planner-domain-safe-editor/SKILL.md:50:7. Retry only when the next move is narrower than the failed one and directly tied to the observed breakage.
+./.codex/operations/batch-train-human-escalation.md:36:Any Yellow/Red gate, unclear dirty state, forbidden file touched, failed build/focused test, privacy/copy leak, unapproved dependency/workflow change, or unapproved task-width escalation.
+./.codex/validation/app-store-truth-pack.md:22:- Tests/scans passed or failed.
+./.codex/validation/repo-hygiene-pack.md:22:- Tests/scans passed or failed.
+./.codex/operations/swiftui-state-contract-hardening-protocol.md:36:Any Yellow/Red gate, unclear dirty state, forbidden file touched, failed build/focused test, privacy/copy leak, unapproved dependency/workflow change, or unapproved task-width escalation.
 ./Native/Ambitions/Domain/ActionClosureReceiptModels.swift:15:    case failedSafely = "failed_safely"
 ./Native/Ambitions/Domain/ActionClosureReceiptModels.swift:124:    case failedSafely = "failed_safely"
 ./Native/Ambitions/Domain/ActionClosureReceiptModels.swift:359:        if receipt.resultState == .failedSafely || receipt.safetyState == .safeFailure {
@@ -266,121 +258,237 @@
 ./Native/Ambitions/Domain/ActionClosureReceiptModels.swift:1221:        case .requiresConfirmation, .failed, .blocked, .unsupported:
 ./Native/Ambitions/Domain/ActionClosureReceiptModels.swift:1233:        case .failed, .blocked, .unsupported:
 ./Native/Ambitions/Domain/ActionClosureReceiptModels.swift:1265:        case .failedSafely:
-./Native/Ambitions/ExternalSnapshots/ExternalSurfaceSnapshotContracts.swift:90:    case overdue
-./Native/Ambitions/ExternalSnapshots/ExternalSurfaceSnapshotBuilder.swift:220:        case .overdue:
-./Native/Ambitions/ExternalSnapshots/ExternalSurfaceSnapshotBuilder.swift:250:        if delta < 0 { return .overdue }
-./Native/Ambitions/ExternalSnapshots/ExternalWidgetProjection.swift:164:        case .overdue:
+./Native/Ambitions/Domain/SafeAutomationPolicyModels.swift:264:        case .failedSafely:
+./Native/Ambitions/Domain/SafeAutomationPolicyModels.swift:276:        if receiptRecommendation.resultState == .failedSafely {
+./Native/Ambitions/Domain/SafeAutomationPolicyModels.swift:293:        case .failedSafely:
+./Native/Ambitions/Domain/SafeAutomationPolicyModels.swift:294:            return .failedSafely
+./Native/Ambitions/Domain/SafeAutomationPolicyModels.swift:307:        guard receiptRecommendation.resultState == .failedSafely || receiptRecommendation.safetyState == .safeFailure else {
+./Native/Ambitions/Domain/SafeAutomationPolicyModels.swift:489:                receiptState: .failedSafely,
+./Native/Ambitions/Domain/SafeAutomationPolicyModels.swift:501:                receiptState: .failedSafely,
+./Native/Ambitions/Domain/SafeAutomationPolicyModels.swift:513:                receiptState: .failedSafely,
+./Native/Ambitions/Domain/SafeAutomationPolicyModels.swift:525:                receiptState: .failedSafely,
+./Native/Ambitions/Domain/SafeAutomationPolicyModels.swift:557:                receiptState: .failedSafely,
+./.codex/operations/batch-train-resume-protocol.md:7:Use after compaction, failed validation, or user-approved resume.
+./.codex/operations/batch-train-resume-protocol.md:36:Any Yellow/Red gate, unclear dirty state, forbidden file touched, failed build/focused test, privacy/copy leak, unapproved dependency/workflow change, or unapproved task-width escalation.
+./Native/Ambitions/Domain/CommitmentWaitingModels.swift:27:    case overdue
+./Native/Ambitions/Domain/CommitmentWaitingModels.swift:54:    case overdue
+./Native/Ambitions/Domain/CommitmentWaitingModels.swift:63:    case overduePromise = "overdue_promise"
+./Native/Ambitions/Domain/CommitmentWaitingModels.swift:178:        case .open, .waiting, .dueSoon, .overdue, .blocked:
+./Native/Ambitions/Domain/CommitmentWaitingModels.swift:256:        case .waiting, .followUpDue, .overdue, .blocked:
+./Native/Ambitions/Domain/CommitmentWaitingModels.swift:479:            if commitment.state == .overdue {
+./Native/Ambitions/Domain/CommitmentWaitingModels.swift:482:                        id: "social-load:overdue-promise:\(commitment.id)",
+./Native/Ambitions/Domain/CommitmentWaitingModels.swift:483:                        kind: .overduePromise,
+./Native/Ambitions/Domain/EventLedgerModels.swift:44:    case recommendationDismissed = "recommendation_dismissed"
 ./Native/Ambitions/Domain/AmbitionsCommandModels.swift:249:    case failed
-./Native/Ambitions/Domain/RecommendationExplanationModels.swift:204:        case .recommendationShown, .recommendationAccepted, .recommendationDismissed:
+./Native/Ambitions/Runtime/AmbitionsRuntimeServices.swift:125:            return RuntimeActionResult(outcome: .failed)
+./.codex/operations/batch-train-commit-policy.md:36:Any Yellow/Red gate, unclear dirty state, forbidden file touched, failed build/focused test, privacy/copy leak, unapproved dependency/workflow change, or unapproved task-width escalation.
+./Native/Ambitions/Domain/GoalEngine/GoalTeachingModels.swift:51:    case dismissed
+./Native/Ambitions/PreviewSupport/PreviewGoalsScenarios.swift:870:                        GoalTeachingContradictionDispositionCorrection(correctedDisposition: .dismissed)
+./.codex/operations/batch-train-green-gate-protocol.md:36:Any Yellow/Red gate, unclear dirty state, forbidden file touched, failed build/focused test, privacy/copy leak, unapproved dependency/workflow change, or unapproved task-width escalation.
+./Native/Ambitions/PreviewSupport/PreviewFixtures.swift:596:                    ActionReceiptDisplaySummary(id: "preview-receipt-memory", title: "Memory deletion blocked", summary: "No memory was forgotten because safe review and undo are incomplete.", resultState: .failedSafely, occurredAt: "2026-04-27T12:09:00Z", sourceDomain: .you, undoAvailability: .unsafe, correctionAvailability: .unavailable, nextActionTitle: nil, safetyState: .safeFailure)
+./.codex/operations/batch-train-validation-escalation.md:36:Any Yellow/Red gate, unclear dirty state, forbidden file touched, failed build/focused test, privacy/copy leak, unapproved dependency/workflow change, or unapproved task-width escalation.
+./.codex/operations/batch-train-red-stop-protocol.md:36:Any Yellow/Red gate, unclear dirty state, forbidden file touched, failed build/focused test, privacy/copy leak, unapproved dependency/workflow change, or unapproved task-width escalation.
 ./Native/Ambitions/Features/Profile/ProfileViewModel.swift:23:        case let .failed(message):
 ./Native/Ambitions/Features/Profile/ProfileViewModel.swift:24:            return "failed:\(message)"
 ./Native/Ambitions/Features/Profile/ProfileViewModel.swift:61:            state = .failed("Unable to load You: \(error.localizedDescription)")
 ./Native/Ambitions/Features/Profile/ProfileViewModel.swift:82:            state = .failed("Unable to save You: \(error.localizedDescription)")
-./Native/Ambitions/Features/Today/TodayViewModel.swift:18:        case let .failed(message):
-./Native/Ambitions/Features/Today/TodayViewModel.swift:19:            return "failed:\(message)"
-./Native/Ambitions/Features/Today/TodayViewModel.swift:64:            state = .failed("Unable to load Today: \(error.localizedDescription)")
-./Native/Ambitions/Features/Today/TodayViewModel.swift:81:                title: "Action failed",
-./Native/Ambitions/PreviewSupport/PreviewGoalsScenarios.swift:867:                        GoalTeachingContradictionDispositionCorrection(correctedDisposition: .dismissed)
+./Native/Ambitions/Domain/GoalEngine/GoalEnginePlanner.swift:303:                PlannerStepDraft(title: "Decide how to restart after a miss", summary: nil, type: .reflectionPrompt, timingType: .logWhenDone, actionability: actionability(action: "Write the reset rule for the next day after the routine is missed.", completion: "There is one clear reset rule that says how the routine resumes without punishment.", evidence: ["A recovery note exists and uses non-judgmental language."], micro: "Write the first sentence of the reset rule only."))
 ./Native/Ambitions/Features/Profile/ProfileFeatureService.swift:893:                forgetMemory.receiptRecommendation.resultState == .failedSafely
-./Native/Ambitions/PreviewSupport/PreviewFixtures.swift:588:                    ActionReceiptDisplaySummary(id: "preview-receipt-memory", title: "Memory deletion blocked", summary: "No memory was forgotten because safe review and undo are incomplete.", resultState: .failedSafely, occurredAt: "2026-04-27T12:09:00Z", sourceDomain: .you, undoAvailability: .unsafe, correctionAvailability: .unavailable, nextActionTitle: nil, safetyState: .safeFailure)
+./Native/Ambitions/Features/Profile/ProfileScreen.swift:28:                case let .failed(message):
+./Native/Ambitions/Features/Profile/ProfileScreen.swift:1924:        case .failedSafely: "Safely blocked"
+./docs/codex/Launch_Operator_Runbook.md:128:- record what launch doctrine or checklist item failed so it is not repeated
+./Native/Ambitions/Persistence/PersistenceContracts.swift:212:    case missed
+./Native/Ambitions/Domain/RecommendationExplanationModels.swift:204:        case .recommendationShown, .recommendationAccepted, .recommendationDismissed:
 ./Native/Ambitions/Domain/SmartAttachmentModels.swift:125:    case unavailableFailed = "unavailable_failed"
 ./Native/Ambitions/Domain/SmartAttachmentModels.swift:143:    case failedSafely = "failed_safely"
 ./Native/Ambitions/Domain/SmartAttachmentModels.swift:534:        case .failedSafely:
 ./Native/Ambitions/Domain/SmartAttachmentModels.swift:535:            resultState = .failedSafely
 ./Native/Ambitions/Domain/SmartAttachmentModels.swift:538:        let safeFailure = self.resultState == .failedSafely
 ./Native/Ambitions/Domain/SmartAttachmentModels.swift:567:            safetyState: self.resultState == .failedSafely ? .safeFailure : .normal,
+./docs/codex/BATCH_REGISTRY.md:59:Continuation note after F04: F04 completed the scoped Step Session rename/routing pass. Today now has a `stepSession` entry context, `.startStepSession` action kind, `TodayStepSessionState`, `TodayStepSessionCard`, and stable `today.support.step-session` identifier; legacy `.focus` remains a compatibility alias for shell/external routes until F15. F04 did not implement Action Closure, Still Counts, Proof, Receipt Ledger, Shell/Meridian, runtime dependencies, workflow changes, or release claims. Validation evidence: `scripts/build-local.sh` PASS on `iPhone 17`; focused `TodayViewModelTests` PASS (`29` tests); focused `TodayFreshGoalVisibilityTests` PASS (`5` tests); focused `TodayShellIntegrationTests` PASS (`1` test); focused Step Session unit proof PASS; `scripts/swiftui-architecture-scan.sh` advisory only; touched-path copy scan found only intentional test guard strings and existing no-silent-reschedule copy; `git diff --check` PASS. Accepted background Yellow: doc QA advisory backlog unchanged, full UI smoke readiness failures unchanged, and the focused UI smoke failed before reaching Step Session assertion because `today.screen` / hero readiness did not establish. FAANG handoff remains PARTIAL.
+./docs/codex/BATCH_REGISTRY.md:141:Continuation note after R03: R03 completed device-readiness and scenario-review evidence by adding a code-backed `ReleaseDeviceQAReadinessReport` for real-device smoke, fresh install, returning user, denied permissions, no data, lots of data, missed week, export/import, external surfaces, and representative family/shared-life, career, creative, finance/life-admin, and home/life-admin scenario fixtures as QA fixtures only. Validation evidence for the R03 closeout: `xcodegen generate`; focused R03/R-gate report tests (`16` tests, `0` failures, including `ReleaseDeviceQAReadinessReportTests`); adjacent device/external/release regression lane (`59` tests, `0` failures); focused simulator UI smoke for forced onboarding, canonical shell, and Plan route (`3` checks passed after replacing one stale onboarding copy assertion); native simulator build on `iPhone 17`; full `AmbitionsTests` (`723` tests, `0` failures); and diff whitespace checks. Active limitations: R03 records simulator/source evidence only, keeps physical-device smoke, high-volume device scrolling, rendered widgets, Live Activity lifecycle, notification delivery, Shortcuts/Siri invocation, installed-device app-group I/O, TestFlight upload readiness, App Store readiness, and RC lock unclaimed for R04/R05/human-device gates. Last completed commit before this note was `84c7d666`; the R03 closeout commit is `Complete R03 device qa testflight readiness`.
+./Native/Ambitions/Domain/ExecutionResilienceModels.swift:6:    case missedAction = "missed_action"
+./Native/Ambitions/Domain/ExecutionResilienceModels.swift:51:    case missedAction = "missed_action"
 ./Native/Ambitions/Features/Habits/HabitsViewModel.swift:18:        case let .failed(message):
 ./Native/Ambitions/Features/Habits/HabitsViewModel.swift:19:            return "failed:\(message)"
 ./Native/Ambitions/Features/Habits/HabitsViewModel.swift:41:            state = .failed("Unable to load Rituals: \(error.localizedDescription)")
-./Native/Ambitions/Features/Habits/HabitsViewModel.swift:55:                title: "Ritual action failed",
-./Native/Ambitions/Features/Profile/ProfileScreen.swift:28:                case let .failed(message):
-./Native/Ambitions/Features/Profile/ProfileScreen.swift:1885:        case .failedSafely: "Safe failure"
-./Native/Ambitions/Domain/ExecutionResilienceModels.swift:6:    case missedAction = "missed_action"
-./Native/Ambitions/Domain/ExecutionResilienceModels.swift:51:    case missedAction = "missed_action"
-./Native/Ambitions/Features/Habits/HabitsFeatureService.swift:122:                title: "Skipped, not failed",
-./Native/Ambitions/Features/Habits/HabitsFeatureService.swift:283:                    ? "When a day is missed, the next step should get easier and clearer, not louder."
+./Native/Ambitions/Persistence/LegacyImportService.swift:339:        case .missed, .deferred:
+./docs/codex/MAC_CODEX_5_5_TOOLCHAIN_SETUP.md:90:rg -n --hidden --glob '!/.git/**' 'Start Focus|Focus Session|best next move|next best move|AI confidence|productivity score|profile tab|insights tab|habits tab|overdue|failed|missed' . || true
 ./Native/Ambitions/Features/Habits/HabitsScreen.swift:28:                case .failed:
-./Native/Ambitions/Features/Today/TodayScreen.swift:30:                    case .failed:
-./Native/Ambitions/App/AppBootstrapper.swift:12:        case failed(String)
-./Native/Ambitions/App/AppBootstrapper.swift:47:            phase = .failed("Bootstrap failed: \(error.localizedDescription)")
-./Native/Ambitions/App/AppBootstrapper.swift:60:        case .idle, .launching, .failed:
 ./Native/Ambitions/Domain/Planning/PlanningEvaluation.swift:479:        case .overdue:
 ./Native/Ambitions/Domain/Planning/PlanningEvaluation.swift:503:        case overdue
 ./Native/Ambitions/Domain/Planning/PlanningEvaluation.swift:515:        if delta < 0 { return .overdue }
 ./Native/Ambitions/Features/Plan/PlanFeatureModels.swift:390:    case missedDay = "missed_day"
 ./Native/Ambitions/Features/Plan/PlanFeatureModels.swift:406:        case .missedDay: "Needs Recovery"
-./Native/Ambitions/Features/Goals/CreateGoalScreen.swift:43:                if case let .failed(message) = viewModel.submissionState {
-./Native/Ambitions/Features/Goals/CreateGoalScreen.swift:64:                case let .failed(message):
-./Native/Ambitions/Features/Goals/CreateGoalScreen.swift:449:        case let .failed(message):
-./Native/Ambitions/Features/Goals/CreateGoalScreen.swift:469:        case let .failed(message):
-./Native/Ambitions/Features/Goals/CreateGoalScreen.swift:491:        case .failed:
-./Native/Ambitions/Features/Goals/CreateGoalScreen.swift:502:        case .failed:
-./Native/Ambitions/UI/LaunchGateView.swift:14:            case let .failed(message):
-./Native/Ambitions/UI/LaunchGateView.swift:45:                    Text("Launch failed")
+./.codex/skills/ambitions-canon-v2-reconciler/SKILL.md:28:- Deprecated user-facing language: `Your best next move`, `next best move`, `Start Focus`, `Focus session`, `Overdue`, `Failed`, `Missed`, `Behind`.
+./docs/audits/ambitions-3-0-f21-5-ui-flake-reliability-hardening-report.md:105:- Group B first repair run: failed, exposing remaining stale Today contracts
+./Native/Ambitions/Domain/SmartAttachmentPlacementPreview.swift:45:        case .savedToNeedsPlace, .failedSafely:
 ./Native/Ambitions/Features/Plan/PlanScreen.swift:26:                case .failed:
+./Native/Ambitions/Support/ReleaseDeviceQAReadinessReport.swift:10:    case missedWeek = "Recovery week"
+./Native/Ambitions/Support/ReleaseDeviceQAReadinessReport.swift:97:            scope: .missedWeek,
+./Native/Ambitions/Features/Plan/WeeklyReviewScreen.swift:17:        case let .failed(message):
+./Native/Ambitions/Features/Plan/WeeklyReviewScreen.swift:18:            return "failed:\(message)"
+./Native/Ambitions/Features/Plan/WeeklyReviewScreen.swift:32:            state = .failed("Unable to load Weekly Review: \(error.localizedDescription)")
+./Native/Ambitions/Features/Plan/WeeklyReviewScreen.swift:49:                case .failed:
+./docs/audits/ambitions-3-0-f17-repair-and-handoff-train-resume-report.md:111:  focused F19 proof but failed in full-suite order.
+./Native/Ambitions/Features/Plan/PlanViewModel.swift:17:        case let .failed(message):
+./Native/Ambitions/Features/Plan/PlanViewModel.swift:18:            return "failed:\(message)"
+./Native/Ambitions/Features/Plan/PlanViewModel.swift:36:            state = .failed("Unable to load Plan: \(error.localizedDescription)")
+./Native/Ambitions/Features/Plan/PlanViewModel.swift:44:            state = .failed("Unable to make Plan calendar-aware: \(error.localizedDescription)")
+./docs/audits/ambitions-3-0-codex-performance-operating-system-report.md:10:This does not claim Ambitions product handoff readiness. The FAANG handoff report remains PARTIAL because the full UI suite failed and language/internal identifier migration debt remains.
+./docs/audits/faang-handoff-internal-identifier-scan.txt:1311:docs/audits/faang-handoff-traceability-matrix.md:19:| Recommendation eligibility must be grounded and explainable without fake AI confidence. | `docs/canon/Ambitions_3_0_Recommendation_Eligibility_Engine.md`; `docs/canon/Ambitions_3_0_Recommendation_Contract.md` | `Native/Ambitions/Domain/RecommendationExplanationModels.swift`; `Native/Ambitions/Features/Today/TodayFeatureService.swift` | `Native/AmbitionsTests/Services/PathIntelligenceProjectorTests.swift`; `Native/AmbitionsTests/App/CoreSurfaceIntegrationScenarioTests.swift` | partial | Internal `bestNextMove` naming remains scheduled migration debt. |
+./docs/audits/faang-handoff-internal-identifier-scan.txt:1520:docs/audits/faang-handoff-deprecated-language-scan.txt:64:./docs/audits/faang-handoff-traceability-matrix.md:19:| Recommendation eligibility must be grounded and explainable without fake AI confidence. | `docs/canon/Ambitions_3_0_Recommendation_Eligibility_Engine.md`; `docs/canon/Ambitions_3_0_Recommendation_Contract.md` | `Native/Ambitions/Domain/RecommendationExplanationModels.swift`; `Native/Ambitions/Features/Today/TodayFeatureService.swift` | `Native/AmbitionsTests/Services/PathIntelligenceProjectorTests.swift`; `Native/AmbitionsTests/App/CoreSurfaceIntegrationScenarioTests.swift` | partial | Internal `bestNextMove` naming remains scheduled migration debt. |
+./docs/audits/faang-handoff-internal-identifier-scan.txt:1521:docs/audits/faang-handoff-deprecated-language-scan.txt:88:./docs/audits/faang-handoff-internal-identifier-scan.txt:434:docs/audits/faang-handoff-deprecated-language-scan.txt:46:./Native/Ambitions/Features/Profile/ProfileViewModel.swift:23:        case let .failed(message):
+./docs/audits/faang-handoff-internal-identifier-scan.txt:1522:docs/audits/faang-handoff-deprecated-language-scan.txt:89:./docs/audits/faang-handoff-internal-identifier-scan.txt:435:docs/audits/faang-handoff-deprecated-language-scan.txt:47:./Native/Ambitions/Features/Profile/ProfileViewModel.swift:24:            return "failed:\(message)"
+./docs/audits/faang-handoff-internal-identifier-scan.txt:1523:docs/audits/faang-handoff-deprecated-language-scan.txt:90:./docs/audits/faang-handoff-internal-identifier-scan.txt:436:docs/audits/faang-handoff-deprecated-language-scan.txt:48:./Native/Ambitions/Features/Profile/ProfileViewModel.swift:61:            state = .failed("Unable to load You: \(error.localizedDescription)")
+./docs/audits/faang-handoff-internal-identifier-scan.txt:1524:docs/audits/faang-handoff-deprecated-language-scan.txt:91:./docs/audits/faang-handoff-internal-identifier-scan.txt:437:docs/audits/faang-handoff-deprecated-language-scan.txt:49:./Native/Ambitions/Features/Profile/ProfileViewModel.swift:82:            state = .failed("Unable to save You: \(error.localizedDescription)")
+./docs/audits/faang-handoff-internal-identifier-scan.txt:1525:docs/audits/faang-handoff-deprecated-language-scan.txt:92:./docs/audits/faang-handoff-internal-identifier-scan.txt:438:docs/audits/faang-handoff-deprecated-language-scan.txt:50:./Native/Ambitions/Features/Profile/ProfileFeatureService.swift:893:                forgetMemory.receiptRecommendation.resultState == .failedSafely
+./docs/audits/faang-handoff-internal-identifier-scan.txt:1526:docs/audits/faang-handoff-deprecated-language-scan.txt:93:./docs/audits/faang-handoff-internal-identifier-scan.txt:439:docs/audits/faang-handoff-deprecated-language-scan.txt:69:./Native/Ambitions/Features/Profile/ProfileScreen.swift:28:                case let .failed(message):
+./docs/audits/faang-handoff-internal-identifier-scan.txt:1527:docs/audits/faang-handoff-deprecated-language-scan.txt:94:./docs/audits/faang-handoff-internal-identifier-scan.txt:440:docs/audits/faang-handoff-deprecated-language-scan.txt:70:./Native/Ambitions/Features/Profile/ProfileScreen.swift:1885:        case .failedSafely: "Safe failure"
+./docs/audits/faang-handoff-internal-identifier-scan.txt:1528:docs/audits/faang-handoff-deprecated-language-scan.txt:95:./docs/audits/faang-handoff-internal-identifier-scan.txt:441:docs/audits/faang-handoff-deprecated-language-scan.txt:80:./Native/Ambitions/Features/Habits/HabitsViewModel.swift:18:        case let .failed(message):
+./docs/audits/faang-handoff-internal-identifier-scan.txt:1529:docs/audits/faang-handoff-deprecated-language-scan.txt:96:./docs/audits/faang-handoff-internal-identifier-scan.txt:442:docs/audits/faang-handoff-deprecated-language-scan.txt:81:./Native/Ambitions/Features/Habits/HabitsViewModel.swift:19:            return "failed:\(message)"
+./docs/audits/faang-handoff-internal-identifier-scan.txt:1530:docs/audits/faang-handoff-deprecated-language-scan.txt:97:./docs/audits/faang-handoff-internal-identifier-scan.txt:443:docs/audits/faang-handoff-deprecated-language-scan.txt:82:./Native/Ambitions/Features/Habits/HabitsViewModel.swift:41:            state = .failed("Unable to load Rituals: \(error.localizedDescription)")
+./docs/audits/faang-handoff-internal-identifier-scan.txt:1531:docs/audits/faang-handoff-deprecated-language-scan.txt:98:./docs/audits/faang-handoff-internal-identifier-scan.txt:444:docs/audits/faang-handoff-deprecated-language-scan.txt:83:./Native/Ambitions/Features/Habits/HabitsViewModel.swift:55:                title: "Ritual action failed",
+./docs/audits/faang-handoff-internal-identifier-scan.txt:1532:docs/audits/faang-handoff-deprecated-language-scan.txt:99:./docs/audits/faang-handoff-internal-identifier-scan.txt:445:docs/audits/faang-handoff-deprecated-language-scan.txt:88:./Native/Ambitions/Features/Habits/HabitsFeatureService.swift:122:                title: "Skipped, not failed",
+./docs/audits/faang-handoff-internal-identifier-scan.txt:1533:docs/audits/faang-handoff-deprecated-language-scan.txt:100:./docs/audits/faang-handoff-internal-identifier-scan.txt:446:docs/audits/faang-handoff-deprecated-language-scan.txt:89:./Native/Ambitions/Features/Habits/HabitsFeatureService.swift:283:                    ? "When a day is missed, the next step should get easier and clearer, not louder."
+./docs/audits/faang-handoff-internal-identifier-scan.txt:1534:docs/audits/faang-handoff-deprecated-language-scan.txt:101:./docs/audits/faang-handoff-internal-identifier-scan.txt:447:docs/audits/faang-handoff-deprecated-language-scan.txt:91:./Native/Ambitions/Features/Habits/HabitsScreen.swift:28:                case .failed:
+./docs/audits/faang-handoff-internal-identifier-scan.txt:1535:docs/audits/faang-handoff-deprecated-language-scan.txt:102:./docs/audits/faang-handoff-internal-identifier-scan.txt:448:docs/audits/faang-handoff-deprecated-language-scan.txt:223:./Native/Ambitions/Features/Insights/InsightsScreen.swift:24:                case .failed:
+./docs/audits/faang-handoff-internal-identifier-scan.txt:1536:docs/audits/faang-handoff-deprecated-language-scan.txt:103:./docs/audits/faang-handoff-internal-identifier-scan.txt:449:docs/audits/faang-handoff-deprecated-language-scan.txt:224:./Native/Ambitions/Features/Insights/InsightsScreen.swift:273:                case let .failed(message):
+./docs/audits/faang-handoff-internal-identifier-scan.txt:1537:docs/audits/faang-handoff-deprecated-language-scan.txt:104:./docs/audits/faang-handoff-internal-identifier-scan.txt:450:docs/audits/faang-handoff-deprecated-language-scan.txt:228:./Native/Ambitions/Features/Insights/InsightsViewModel.swift:17:        case let .failed(message):
+./docs/audits/faang-handoff-internal-identifier-scan.txt:1538:docs/audits/faang-handoff-deprecated-language-scan.txt:105:./docs/audits/faang-handoff-internal-identifier-scan.txt:451:docs/audits/faang-handoff-deprecated-language-scan.txt:229:./Native/Ambitions/Features/Insights/InsightsViewModel.swift:18:            return "failed:\(message)"
+./docs/audits/faang-handoff-internal-identifier-scan.txt:1539:docs/audits/faang-handoff-deprecated-language-scan.txt:106:./docs/audits/faang-handoff-internal-identifier-scan.txt:452:docs/audits/faang-handoff-deprecated-language-scan.txt:230:./Native/Ambitions/Features/Insights/InsightsViewModel.swift:36:            state = .failed("Unable to load History: \(error.localizedDescription)")
+./docs/audits/faang-handoff-internal-identifier-scan.txt:1540:docs/audits/faang-handoff-deprecated-language-scan.txt:275:./Native/Ambitions/Features/Profile/ProfileViewModel.swift:23:        case let .failed(message):
+./docs/audits/faang-handoff-internal-identifier-scan.txt:1541:docs/audits/faang-handoff-deprecated-language-scan.txt:276:./Native/Ambitions/Features/Profile/ProfileViewModel.swift:24:            return "failed:\(message)"
+./docs/audits/faang-handoff-internal-identifier-scan.txt:1542:docs/audits/faang-handoff-deprecated-language-scan.txt:277:./Native/Ambitions/Features/Profile/ProfileViewModel.swift:61:            state = .failed("Unable to load You: \(error.localizedDescription)")
+./docs/audits/faang-handoff-internal-identifier-scan.txt:1543:docs/audits/faang-handoff-deprecated-language-scan.txt:278:./Native/Ambitions/Features/Profile/ProfileViewModel.swift:82:            state = .failed("Unable to save You: \(error.localizedDescription)")
+./docs/audits/faang-handoff-internal-identifier-scan.txt:1544:docs/audits/faang-handoff-deprecated-language-scan.txt:284:./Native/Ambitions/Features/Profile/ProfileFeatureService.swift:893:                forgetMemory.receiptRecommendation.resultState == .failedSafely
+./docs/audits/faang-handoff-internal-identifier-scan.txt:1545:docs/audits/faang-handoff-deprecated-language-scan.txt:292:./Native/Ambitions/Features/Habits/HabitsViewModel.swift:18:        case let .failed(message):
+./docs/audits/faang-handoff-internal-identifier-scan.txt:1546:docs/audits/faang-handoff-deprecated-language-scan.txt:293:./Native/Ambitions/Features/Habits/HabitsViewModel.swift:19:            return "failed:\(message)"
+./docs/audits/faang-handoff-internal-identifier-scan.txt:1547:docs/audits/faang-handoff-deprecated-language-scan.txt:294:./Native/Ambitions/Features/Habits/HabitsViewModel.swift:41:            state = .failed("Unable to load Rituals: \(error.localizedDescription)")
+./docs/audits/faang-handoff-internal-identifier-scan.txt:1548:docs/audits/faang-handoff-deprecated-language-scan.txt:295:./Native/Ambitions/Features/Habits/HabitsViewModel.swift:55:                title: "Ritual action failed",
+./docs/audits/faang-handoff-internal-identifier-scan.txt:1549:docs/audits/faang-handoff-deprecated-language-scan.txt:296:./Native/Ambitions/Features/Profile/ProfileScreen.swift:28:                case let .failed(message):
+./docs/audits/faang-handoff-internal-identifier-scan.txt:1550:docs/audits/faang-handoff-deprecated-language-scan.txt:297:./Native/Ambitions/Features/Profile/ProfileScreen.swift:1885:        case .failedSafely: "Safe failure"
+./docs/audits/faang-handoff-internal-identifier-scan.txt:1551:docs/audits/faang-handoff-deprecated-language-scan.txt:300:./Native/Ambitions/Features/Habits/HabitsFeatureService.swift:122:                title: "Skipped, not failed",
+./docs/audits/faang-handoff-internal-identifier-scan.txt:1552:docs/audits/faang-handoff-deprecated-language-scan.txt:301:./Native/Ambitions/Features/Habits/HabitsFeatureService.swift:283:                    ? "When a day is missed, the next step should get easier and clearer, not louder."
+./docs/audits/faang-handoff-internal-identifier-scan.txt:1553:docs/audits/faang-handoff-deprecated-language-scan.txt:302:./Native/Ambitions/Features/Habits/HabitsScreen.swift:28:                case .failed:
+./docs/audits/faang-handoff-internal-identifier-scan.txt:1554:docs/audits/faang-handoff-deprecated-language-scan.txt:342:./Native/Ambitions/Features/Insights/InsightsScreen.swift:24:                case .failed:
+./docs/audits/faang-handoff-internal-identifier-scan.txt:1555:docs/audits/faang-handoff-deprecated-language-scan.txt:343:./Native/Ambitions/Features/Insights/InsightsScreen.swift:273:                case let .failed(message):
+./docs/audits/faang-handoff-internal-identifier-scan.txt:1556:docs/audits/faang-handoff-deprecated-language-scan.txt:352:./Native/Ambitions/Features/Insights/InsightsViewModel.swift:17:        case let .failed(message):
+./docs/audits/faang-handoff-internal-identifier-scan.txt:1557:docs/audits/faang-handoff-deprecated-language-scan.txt:353:./Native/Ambitions/Features/Insights/InsightsViewModel.swift:18:            return "failed:\(message)"
+./docs/audits/faang-handoff-internal-identifier-scan.txt:1558:docs/audits/faang-handoff-deprecated-language-scan.txt:354:./Native/Ambitions/Features/Insights/InsightsViewModel.swift:36:            state = .failed("Unable to load History: \(error.localizedDescription)")
+./docs/audits/ambitions-3-0-dev-tooling-adoption-report.md:85:- `scripts/test-local.sh || true`: PARTIAL. `AmbitionsTests` passed 744 tests. `AmbitionsUITests` failed 9 tests, consistent with the known FAANG handoff UI-smoke debt class. This does not indicate an app build break from the tooling batch.
+./.codex/operations/batch-train-orchestration-protocol.md:36:Any Yellow/Red gate, unclear dirty state, forbidden file touched, failed build/focused test, privacy/copy leak, unapproved dependency/workflow change, or unapproved task-width escalation.
+./.codex/skills/ambitions-v2-validation-closeout/SKILL.md:17:- No `Start Focus`.
+./.codex/skills/ambitions-v2-validation-closeout/SKILL.md:38:rg -n "Your best next move|next best move|Start Focus|Focus session|Overdue|Failed|Missed|Behind" Native Sources AppUI docs
+./docs/audits/faang-handoff-traceability-matrix.md:19:| Recommendation eligibility must be grounded and explainable without fake AI confidence. | `docs/canon/Ambitions_3_0_Recommendation_Eligibility_Engine.md`; `docs/canon/Ambitions_3_0_Recommendation_Contract.md` | `Native/Ambitions/Domain/RecommendationExplanationModels.swift`; `Native/Ambitions/Features/Today/TodayFeatureService.swift` | `Native/AmbitionsTests/Services/PathIntelligenceProjectorTests.swift`; `Native/AmbitionsTests/App/CoreSurfaceIntegrationScenarioTests.swift` | partial | Internal `bestNextMove` naming remains scheduled migration debt. |
+./docs/audits/ambitions-3-0-f21-5-ui-failure-classification.md:33:| `testForcedOnboardingCaptureFirstPathOpensQuickCapture` | `Native/AmbitionsUITests/AmbitionsUITests.swift:59` | `XCTAssertTrue failed` waiting for `No hidden analytics` | Forced onboarding capture-first path keeps first-run trust copy honest, then opens quick capture. | Current activation copy uses `No account required`, `Starts locally`, `Manual first`, and `Optional connections`; `No hidden analytics` is not current copy. | Onboarding / Capture | First Useful Object Onboarding; Capture -> Placement Resolver | stale test expectation / copy migration | Replace the stale copy wait with current trust-copy waits and preserve quick-capture assertion. | Yes | Repaired test asserts `Starts locally`, `Manual first`, and `shell.command.capture-field`. No retirement. |
+./docs/audits/ambitions-3-0-f21-5-ui-failure-classification.md:34:| `testPreviewBootstrapCanCreateGoalFromEmptyState` | `Native/AmbitionsUITests/AmbitionsUITests.swift:88` | `XCTAssertTrue failed` waiting for `goals.creation-message` | Empty Goals can open Create Goal, accept a title, submit, and acknowledge or show the created goal. | Submit path reached post-submit state, but the test accepted only one exact acknowledgement identifier. | Goals | Goal Mission Control; First Useful Object Onboarding | brittle post-submit wait | Replace single-message wait with product-contract helper accepting `goals.creation-message`, created title visibility, or Goals surface readiness. | Yes | Repaired helper `waitForCreatedGoalAcknowledgement` preserves created-goal acknowledgement/visibility. No retirement. |
+./docs/audits/ambitions-3-0-f21-5-ui-failure-classification.md:35:| `testPreviewBootstrapExposesCanonicalFiveTabShellAndSecondarySurfaces` | `Native/AmbitionsUITests/AmbitionsUITests.swift:112` | `XCTAssertTrue failed` waiting for `captures.screen` after tapping Capture | Five canonical destinations stay reachable and secondary surfaces remain under their owners. | Focused F19 proof passed, while the full-suite broad shell smoke failed after prior failures. Direct launch-url Capture also passed, so this was route-readiness/suite-order ambiguity, not proven product regression. | Shell / Capture | Ambitions Operating Shell | suite-order state leakage / route readiness issue | Make fallback shell mode explicit and use a bounded canonical destination helper before destination assertions. | Yes | Repaired `openCanonicalDestination` still requires canonical Today / Goals / Capture / Plan / You reachability. No retirement. |
+./docs/audits/ambitions-3-0-f21-5-ui-failure-classification.md:36:| `testQuickRecoveryAndQuickFocusReturnToTodayWithExplicitReentry` | `Native/AmbitionsUITests/AmbitionsUITests.swift:434` | `XCTAssertTrue failed` inside `waitForTodayScreenReady` | Quick recovery and quick focus route back to Today with explicit reentry state. | The helper waited for retired `today.hero-card`; current Today signature is `TodayRealityRail`. The command buttons can also require scroll-based hittability in the command sheet. | Today / Shell command sheet | Reality Rail; Step Execution System | stale test expectation / readiness helper drift / brittle hittability wait | Modernize Today readiness to accept Reality Rail contracts and use bounded scroll-to-button helpers for command actions. | Yes | Repaired test asserts command actions return to `today.screen` plus `TodayRealityRail`. No retirement. |
+./docs/audits/ambitions-3-0-f21-5-ui-failure-classification.md:37:| `testTodayCanHandOffToGoalDetail` | `Native/AmbitionsUITests/AmbitionsUITests.swift:487` | `XCTAssertTrue failed` inside `waitForTodayScreenReady` | Today can hand off from the recommended step into the current detail surface for the recommended work. | The stale Today readiness helper failed before handoff. Current Today 3.0 opens the Today-owned Step Detail sheet from `Start here`; a full Goal Detail route is not the current implemented handoff for this smoke path. | Today | Reality Rail; Step Detail | stale test expectation / product-contract drift | Replace stale Goal Detail expectation with current Step Detail contract. | Yes | Repaired test asserts `TodayStepDetail`, `TodayStepDetailWhyThis`, and `TodayStepDetailPrimaryAction`. No test deleted; historical test name remains but assertion now tracks current contract. |
+./docs/audits/ambitions-3-0-f21-5-ui-failure-classification.md:38:| `testTodayCanHandOffToPlan` | `Native/AmbitionsUITests/AmbitionsUITests.swift:520` | `XCTAssertTrue failed` inside `waitForTodayScreenReady` | From Today context, Plan remains reachable through the canonical shell route. | The stale Today readiness helper failed before Plan assertion; the earlier Today-specific `today.action.openPlan.none` lookup was not the current reliable product contract. | Today / Plan | Reality Rail; Plan Life Suite | stale test expectation / route readiness drift | Use Reality Rail readiness and canonical Plan destination helper. | Yes | Repaired test first establishes Today readiness, then asserts `plan.screen` via canonical Plan destination. No retirement. |
+./docs/audits/ambitions-3-0-f21-5-ui-failure-classification.md:39:| `testTodayStartNowCanOpenBoundedStepSession` | `Native/AmbitionsUITests/AmbitionsUITests.swift:463` | `XCTAssertTrue failed` inside `waitForTodayScreenReady` | `Start now` remains visible as the bounded execution entry point from Today detail. | The stale Today readiness helper failed before primary action logic. Current Today Step Detail exposes `Start now` as the primary reserved execution action; the old support-card wait was a brittle downstream expectation for this smoke. | Today | Reality Rail; Step Execution System | stale test expectation / readiness helper drift | Use Reality Rail readiness, open Step Detail, and assert the current `Start now` primary action contract. | Yes | Repaired test asserts `TodayStepDetailPrimaryAction` plus visible `Start now`. No retirement. |
+./docs/audits/ambitions-3-0-f21-5-ui-failure-classification.md:40:| `testTodaySurfaceShowsDominantHeroAndPrimaryAction` | `Native/AmbitionsUITests/AmbitionsUITests.swift:378` | `XCTAssertTrue failed` inside `waitForTodayScreenReady` | Today shows its dominant signature object and primary action. | Test asserted old dominant hero/support identifiers after Ambitions 3.0 moved the first-screen contract to Reality Rail / Day Rail. | Today | Reality Rail; Rail / Node Visual Grammar | stale test expectation / visual structure contract drift | Replace old hero-card assertion with `TodayRealityRail`, section identifiers, and primary action helper. | Yes | Repaired test asserts `TodayRealityRail`, `TodayRealityRailNowSection`, `TodayRealityRailNextSection`, `TodayRealityRailLaterSection`, and a primary action. No retirement. |
+./docs/audits/ambitions-3-0-f21-5-ui-failure-classification.md:57:- product behavior unrelated to failed UI smoke contracts.
+./docs/audits/ambitions-3-0-f19-shell-route-parity-fallback-safety-report.md:94:five-tab test failed once. Narrow rerun of the canonical five-tab test passed.
+./.codex/operations/feature-file-responsibility-review-protocol.md:36:Any Yellow/Red gate, unclear dirty state, forbidden file touched, failed build/focused test, privacy/copy leak, unapproved dependency/workflow change, or unapproved task-width escalation.
+./docs/audits/faang-handoff-readiness-report.md:22:| 6. Build/test proof | PARTIAL | `xcodegen generate` passed; simulator build passed on `iPhone 17`; focused AppIntent routing rerun passed after a 3.0 shortcut-label test update; full `xcodebuild test` failed with 10 UI smoke failures. | Full readiness requires fixing or intentionally rebaselining the failing UI smoke lane, then rerunning the full test command. |
+./docs/audits/faang-handoff-readiness-report.md:87:rg -n --hidden --glob '!/.git/**' 'Start Focus|Focus Session|best next move|next best move|AI confidence|productivity score|profile tab|insights tab|habits tab|overdue|failed|missed' . || true
+./docs/audits/ambitions-3-0-f05-action-closure-report.md:48:- touched-path copy scan: no new user-facing fake AI confidence/explanation,
+./docs/audits/ambitions-3-0-f05-action-closure-report.md:49:  productivity score, shame, or silent-automation language introduced; matches
+./.codex/operations/batch-train-yellow-stop-protocol.md:36:Any Yellow/Red gate, unclear dirty state, forbidden file touched, failed build/focused test, privacy/copy leak, unapproved dependency/workflow change, or unapproved task-width escalation.
+./docs/audits/ambitions-3-0-f12-reflow-recovery-decisions-report.md:53:- Copy guard: touched-path scan found only existing/internal failure-state names and the pre-existing `missedDay` enum.
+./docs/audits/ambitions-3-0-f22-7-human-made-active-repo-hygiene-report.md:119:| `.failed` / `.failedSafely` | internal result and receipt taxonomy | visible copy softened to `could not finish` / `Safely blocked` where active | receipt, command, and copy tests |
+./docs/audits/ambitions-3-0-f22-7-human-made-active-repo-hygiene-report.md:160:- `.failed` appears in internal state-machine tests;
+./Native/Ambitions/Features/Plan/PlanFeatureService.swift:1723:        case .missedDay, .overloadedPlan, .noRecoveryMargin, .lowCapacityFragileDay:
+./docs/audits/ambitions-3-0-f06-proof-receipt-ledger-report.md:48:- touched-path copy scan: no new fake AI confidence/explanation, productivity
+./docs/archive/superseded-design-canon/design/copy-state-language-spec.md:48:- you failed
+./docs/audits/ambitions-3-0-f21-full-ui-smoke-stabilization-report.md:63:  in the F19 focused UI subset and final proof rerun, then failed in the full
+./docs/audits/ambitions-3-0-f21-full-ui-smoke-stabilization-report.md:75:- a previously passing focused shell smoke test failed in full-suite order;
+./Native/Ambitions/Features/Today/TodayViewModel.swift:18:        case let .failed(message):
+./Native/Ambitions/Features/Today/TodayViewModel.swift:19:            return "failed:\(message)"
+./Native/Ambitions/Features/Today/TodayViewModel.swift:64:            state = .failed("Unable to load Today: \(error.localizedDescription)")
+./docs/audits/ambitions-3-0-f22-product-language-baseline-reset-report.md:81:- `Launch failed` -> `Ambitions could not finish launching`
+./docs/audits/ambitions-3-0-f22-product-language-baseline-reset-report.md:82:- `Action failed` -> `Action could not finish`
+./docs/audits/ambitions-3-0-f22-product-language-baseline-reset-report.md:83:- `Clarification failed` -> `Clarification could not finish`
+./docs/audits/ambitions-3-0-f22-product-language-baseline-reset-report.md:84:- `Correction failed` -> `Correction could not finish`
+./docs/audits/ambitions-3-0-f22-product-language-baseline-reset-report.md:85:- `Ritual action failed` -> `Ritual action could not finish`
+./docs/audits/ambitions-3-0-f22-product-language-baseline-reset-report.md:86:- `Skipped, not failed` -> `Skipped, still okay`
+./docs/audits/ambitions-3-0-f22-product-language-baseline-reset-report.md:87:- `missed day/week` support-report language -> `disrupted day/week`
+./docs/audits/ambitions-3-0-f22-product-language-baseline-reset-report.md:116:- Remaining `overdue` in Live Activity/widget code is an internal enum value
+./docs/audits/ambitions-3-0-f22-product-language-baseline-reset-report.md:118:- Remaining `.failed` / `.failedSafely` values are internal state/result names
+./docs/audits/ambitions-3-0-f22-product-language-baseline-reset-report.md:153:| `.failed` / `.failedSafely` | Internal error/result taxonomy | Domain / Services | Visible strings adjusted where found | Only renamed with domain-wide adapter | Receipt/automation tests |
+./docs/audits/ambitions-3-0-f22-product-language-baseline-reset-report.md:171:- build/test/report language such as `failed` in validation contexts;
+./docs/audits/ambitions-3-0-f22-product-language-baseline-reset-report.md:172:- `productivity score` and `AI confidence` inside banned-term lists;
+./docs/audits/ambitions-3-0-f22-product-language-baseline-reset-report.md:173:- `missed` in older historical docs or recovery research context.
+./docs/audits/ambitions-3-0-f22-product-language-baseline-reset-report.md:196:- Initial focused test attempt: failed with Xcode build database lock because
+./docs/archive/superseded-design-canon/design/screen-architecture-spec.md:85:2. current best next move
+./docs/archive/superseded-design-canon/design/screen-architecture-spec.md:688:- state what failed
+./docs/local-notification-simulator-testing.md:20:3. Wait for the scheduled notification interval (soon = ~5 minutes, overdue = ~1 minute).
+./.codex/operations/postmortem-learning-loop-protocol.md:8:2. Identify the failed protocol or missing gate.
+./Native/Ambitions/Features/Today/TodayScreen.swift:32:                    case .failed:
+./Native/Ambitions/Features/Goals/CreateGoalScreen.swift:43:                if case let .failed(message) = viewModel.submissionState {
+./Native/Ambitions/Features/Goals/CreateGoalScreen.swift:67:                case let .failed(message):
+./Native/Ambitions/Features/Goals/CreateGoalScreen.swift:475:        case let .failed(message):
+./Native/Ambitions/Features/Goals/CreateGoalScreen.swift:495:        case let .failed(message):
+./Native/Ambitions/Features/Goals/CreateGoalScreen.swift:517:        case .failed:
+./Native/Ambitions/Features/Goals/CreateGoalScreen.swift:528:        case .failed:
+./.codex/skills/ambitions-action-closure-receipts/SKILL.md:24:- Ambitions does not mark a step failed because the user forgot to open the app.
 ./Native/Ambitions/Features/Goals/GoalsViewModels.swift:20:        case let .failed(message):
 ./Native/Ambitions/Features/Goals/GoalsViewModels.swift:21:            return "failed:\(message)"
 ./Native/Ambitions/Features/Goals/GoalsViewModels.swift:45:            state = .failed("Unable to load Goals: \(error.localizedDescription)")
 ./Native/Ambitions/Features/Goals/GoalsViewModels.swift:70:        case let .failed(message):
 ./Native/Ambitions/Features/Goals/GoalsViewModels.swift:71:            return "failed:\(message)"
 ./Native/Ambitions/Features/Goals/GoalsViewModels.swift:112:            state = .failed("Unable to load Goal Detail: \(error.localizedDescription)")
-./Native/Ambitions/Features/Goals/GoalsViewModels.swift:136:                title: "Action failed",
-./Native/Ambitions/Features/Goals/GoalsViewModels.swift:163:                title: "Clarification failed",
-./Native/Ambitions/Features/Goals/GoalsViewModels.swift:187:                title: "Correction failed",
-./Native/Ambitions/UI/AsyncViewState.swift:6:    case failed(String)
-./Native/Ambitions/Features/Plan/WeeklyReviewScreen.swift:17:        case let .failed(message):
-./Native/Ambitions/Features/Plan/WeeklyReviewScreen.swift:18:            return "failed:\(message)"
-./Native/Ambitions/Features/Plan/WeeklyReviewScreen.swift:32:            state = .failed("Unable to load Weekly Review: \(error.localizedDescription)")
-./Native/Ambitions/Features/Plan/WeeklyReviewScreen.swift:49:                case .failed:
+./.codex/operations/batch-train-repair-prompt-protocol.md:36:Any Yellow/Red gate, unclear dirty state, forbidden file touched, failed build/focused test, privacy/copy leak, unapproved dependency/workflow change, or unapproved task-width escalation.
 ./Native/Ambitions/Features/Goals/GoalDetailScreen.swift:21:                case let .failed(message):
-./Native/Ambitions/Features/Plan/PlanViewModel.swift:17:        case let .failed(message):
-./Native/Ambitions/Features/Plan/PlanViewModel.swift:18:            return "failed:\(message)"
-./Native/Ambitions/Features/Plan/PlanViewModel.swift:36:            state = .failed("Unable to load Plan: \(error.localizedDescription)")
-./Native/Ambitions/Features/Plan/PlanViewModel.swift:44:            state = .failed("Unable to make Plan calendar-aware: \(error.localizedDescription)")
-./Native/Ambitions/Persistence/PersistenceContracts.swift:212:    case missed
 ./Native/Ambitions/Features/Goals/GoalsScreen.swift:46:                case .failed:
-./Native/Ambitions/Features/Insights/InsightsScreen.swift:24:                case .failed:
-./Native/Ambitions/Features/Insights/InsightsScreen.swift:273:                case let .failed(message):
 ./Native/Ambitions/Features/Goals/CreateGoalViewModel.swift:7:    case failed(String)
 ./Native/Ambitions/Features/Goals/CreateGoalViewModel.swift:14:    case failed(String)
-./Native/Ambitions/Features/Goals/CreateGoalViewModel.swift:74:        case let .failed(message):
-./Native/Ambitions/Features/Goals/CreateGoalViewModel.swift:75:            return "failed:\(message)"
-./Native/Ambitions/Features/Goals/CreateGoalViewModel.swift:144:            previewState = .failed("Unable to shape the strategy yet: \(error.localizedDescription)")
-./Native/Ambitions/Features/Goals/CreateGoalViewModel.swift:211:            submissionState = .failed("Unable to create Goal: \(error.localizedDescription)")
-./Native/Ambitions/Features/Plan/PlanFeatureService.swift:1708:        case .missedDay, .overloadedPlan, .noRecoveryMargin, .lowCapacityFragileDay:
-./Native/Ambitions/Persistence/LegacyImportService.swift:339:        case .missed, .deferred:
+./Native/Ambitions/Features/Goals/CreateGoalViewModel.swift:92:        case let .failed(message):
+./Native/Ambitions/Features/Goals/CreateGoalViewModel.swift:93:            return "failed:\(message)"
+./Native/Ambitions/Features/Goals/CreateGoalViewModel.swift:167:            previewState = .failed("Unable to shape the strategy yet: \(error.localizedDescription)")
+./Native/Ambitions/Features/Goals/CreateGoalViewModel.swift:234:            submissionState = .failed("Unable to create Goal: \(error.localizedDescription)")
+./Native/Ambitions/Features/Insights/InsightsScreen.swift:24:                case .failed:
+./Native/Ambitions/Features/Insights/InsightsScreen.swift:273:                case let .failed(message):
 ./Native/Ambitions/Features/Insights/InsightsViewModel.swift:17:        case let .failed(message):
 ./Native/Ambitions/Features/Insights/InsightsViewModel.swift:18:            return "failed:\(message)"
 ./Native/Ambitions/Features/Insights/InsightsViewModel.swift:36:            state = .failed("Unable to load History: \(error.localizedDescription)")
-./Native/Ambitions/Support/CrossSurfaceContinuityMaturityReport.swift:173:            requiredEvidence: "Fresh install, returning user, denied permissions, data volume, missed week, export/import, and external surface device checks."
-./Native/Ambitions/Features/Captures/CapturesViewModel.swift:104:        case let .failed(message):
-./Native/Ambitions/Features/Captures/CapturesViewModel.swift:105:            return "failed:\(message)"
-./Native/Ambitions/Features/Captures/CapturesViewModel.swift:119:            state = .failed("Unable to load captures: \(error.localizedDescription)")
-./Native/Ambitions/Features/Captures/CapturesViewModel.swift:279:            actionMessage = CaptureActionMessage(title: "Capture action failed", body: error.localizedDescription)
-./Native/Ambitions/Features/Captures/CapturesViewModel.swift:372:        case .savedStandalone, .failedSafely:
-./Native/AmbitionsTests/Today/TodayViewModelTests.swift:389:        guard case let .failed(message) = state else {
-./Native/AmbitionsTests/Today/TodayViewModelTests.swift:390:            return XCTFail("Expected Today refresh to end in a failed state.")
-./Native/AmbitionsTests/Today/TodayViewModelTests.swift:483:            "Today failed on purpose."
-./Native/AmbitionsTests/Captures/CapturesViewModelTests.swift:199:        XCTAssertEqual(viewModel.actionMessage?.title, "Capture action failed")
-./Native/Ambitions/Support/ReleaseCandidateLockDecisionReport.swift:73:            nextAction: "Run the R03 fresh install, returning user, denied permissions, lots-of-data, missed-week, export/import, and external-surface journeys on a supported iPhone."
-./Native/AmbitionsTests/Services/PathIntelligenceProjectorTests.swift:72:        XCTAssertFalse(humanFacingCopy.localizedCaseInsensitiveContains("AI confidence"))
+./Native/Ambitions/Features/Captures/CapturesViewModel.swift:131:        case let .failed(message):
+./Native/Ambitions/Features/Captures/CapturesViewModel.swift:132:            return "failed:\(message)"
+./Native/Ambitions/Features/Captures/CapturesViewModel.swift:146:            state = .failed("Unable to load captures: \(error.localizedDescription)")
+./Native/Ambitions/Features/Captures/CapturesViewModel.swift:409:        case .savedStandalone, .failedSafely:
 ./Native/Ambitions/Features/Captures/CapturesScreen.swift:39:                case .failed:
-./Native/Ambitions/Support/CoreSurfaceIntegrationScenarios.swift:86:            id: "missed-day-recovery",
-./Native/Ambitions/Support/CoreSurfaceIntegrationScenarios.swift:87:            title: "Recover from a missed day",
-./Native/Ambitions/Support/CoreSurfaceIntegrationScenarios.swift:88:            intent: "A missed day turns into one smaller next step without shame or silent rescheduling.",
-./Native/AmbitionsTests/Goals/CreateGoalViewModelTests.swift:77:        guard case let .failed(message) = viewModel.submissionState else {
-./Native/Ambitions/Support/ReleasePerformanceResponsivenessReport.swift:61:            evidence: "Core-surface scenario tests and Today service regressions cover the Golden Launch Loop, denied-calendar fallback, missed-day recovery, and next-step posture.",
-./Native/Ambitions/Support/ReleaseDeviceQAReadinessReport.swift:10:    case missedWeek = "Recovery week"
-./Native/Ambitions/Support/ReleaseDeviceQAReadinessReport.swift:96:            id: "missed-week",
-./Native/Ambitions/Support/ReleaseDeviceQAReadinessReport.swift:97:            scope: .missedWeek,
-./Native/AmbitionsTests/Services/ExecutionResilienceProjectorTests.swift:48:        XCTAssertTrue(assessment.disruptions.contains { $0.kind == .missedAction })
+./.codex/playbooks/batch-train-resume-after-failed-build.md:3:Path: .codex/playbooks/batch-train-resume-after-failed-build.md
+./.codex/playbooks/batch-train-resume-after-failed-focused-test.md:3:Path: .codex/playbooks/batch-train-resume-after-failed-focused-test.md
+./docs/audits/ambitions-3-0-f00-current-implementation-gap-audit-report.md:43:rg -n --hidden --glob '!/.git/**' 'Start Focus|Focus Session|best next move|next best move|AI confidence|productivity score|profile tab|insights tab|habits tab|overdue|failed|missed' . || true
+./docs/audits/ambitions-3-0-f00-current-implementation-gap-audit-report.md:87:- Active user-facing debt: confirmed in widget/external-surface fallback copy and some defensive error strings, including `overdue` and `failed`.
+./docs/audits/ambitions-3-0-f00-current-implementation-gap-audit-report.md:111:- External surfaces compile but still carry legacy focus/overdue/fallback language and lack rendered/device proof.
+./docs/audits/ambitions-3-0-f15-legacy-identifier-migration-report.md:51:  and test vocabulary such as `failed`, `overdue`, and `missed`; F15 introduced
+./docs/audits/ambitions-3-0-f04-step-session-report.md:50:- touched-path copy scan: no user-facing `Focus screenlet`, `Focus Session`,
+./docs/audits/ambitions-3-0-f04-step-session-report.md:51:  fake AI confidence/explanation, timer-first, or silent-automation regression
+./docs/audits/ambitions-3-0-f04-step-session-report.md:61:  `testTodayStartNowCanOpenBoundedStepSession` failed before Step Session
+./docs/audits/ambitions-3-0-f26-app-store-demo-truth-report.md:43:The F26 claim scan found expected guard/history/test hits for terms such as subscription, productivity score, accessibility claims, App Store submission posture, and TestFlight limitations. No new active public claim was introduced by F26.
+./Native/Ambitions/ExternalSnapshots/ExternalSurfaceSnapshotContracts.swift:90:    case overdue
+./Native/Ambitions/ExternalSnapshots/ExternalWidgetProjection.swift:164:        case .overdue:
+./Native/Ambitions/ExternalSnapshots/ExternalSurfaceSnapshotBuilder.swift:220:        case .overdue:
+./Native/Ambitions/ExternalSnapshots/ExternalSurfaceSnapshotBuilder.swift:250:        if delta < 0 { return .overdue }
+./Native/Ambitions/App/AppBootstrapper.swift:12:        case failed(String)
+./Native/Ambitions/App/AppBootstrapper.swift:47:            phase = .failed("Ambitions could not finish launching: \(error.localizedDescription)")
+./Native/Ambitions/App/AppBootstrapper.swift:60:        case .idle, .launching, .failed:
+./.codex/evals/prompts/22-release-miss-refinement.md:32:- the refinement path is clear if a blocker was missed
+./.codex/evals/README.md:22:- Retries should get narrower instead of repeating the same failed step.
+./Native/Ambitions/UI/LaunchGateView.swift:14:            case let .failed(message):
+./docs/audits/ambitions-3-0-f02-reality-rail-visual-states-report.md:114:  'Start Focus|Focus Session|best next move|next best move|AI confidence|productivity score|profile tab|insights tab|habits tab|overdue|failed|missed' \
+./Native/AmbitionsTests/Services/SmartAttachmentServiceTests.swift:83:        XCTAssertEqual(result.resultState, .failedSafely)
+./.codex/improvement/eval-refinement-template.md:5:- What the current eval pack missed:
 ./Native/AmbitionsTests/Services/AmbitionsCommandExecutorTests.swift:235:        XCTAssertEqual(invalidResult.status, .failed)
-./Native/AmbitionsTests/App/ReleaseExternalTruthReadinessPacketTests.swift:28:            "AI confidence",
+./Native/AmbitionsTests/Services/PathIntelligenceProjectorTests.swift:72:        XCTAssertFalse(humanFacingCopy.localizedCaseInsensitiveContains("AI confidence"))
+./Native/Ambitions/UI/AsyncViewState.swift:6:    case failed(String)
 ./Native/AmbitionsTests/Services/GoalTeachingSignalServiceTests.swift:105:                GoalTeachingContradictionDispositionCorrection(correctedDisposition: .dismissed)
 ./Native/AmbitionsTests/Domain/EventLedgerModelsTests.swift:46:            .recommendationDismissed,
-./Native/AmbitionsTests/Services/SmartAttachmentServiceTests.swift:83:        XCTAssertEqual(result.resultState, .failedSafely)
-./Native/AmbitionsTests/App/CoreSurfaceIntegrationScenarioTests.swift:11:            "missed-day-recovery",
-./Native/AmbitionsTests/App/CoreSurfaceIntegrationScenarioTests.swift:41:        XCTAssertFalse(joined.localizedCaseInsensitiveContains("AI confidence"))
+./Native/AmbitionsTests/Services/ExecutionResilienceProjectorTests.swift:48:        XCTAssertTrue(assessment.disruptions.contains { $0.kind == .missedAction })
+./.codex/improvement/failure-taxonomy.md:23:- `release-hardening-gap`: a merge or release readiness check missed config, docs, or validation work
 ./Native/AmbitionsTests/Domain/CommitmentWaitingModelsTests.swift:20:        XCTAssertEqual(Set(CommitmentState.allCases), [.open, .waiting, .dueSoon, .overdue, .done, .parked, .blocked])
 ./Native/AmbitionsTests/Domain/CommitmentWaitingModelsTests.swift:39:        XCTAssertEqual(Set(WaitingState.allCases), [.waiting, .followUpDue, .overdue, .resolved, .parked, .blocked])
 ./Native/AmbitionsTests/Domain/CommitmentWaitingModelsTests.swift:116:        let overduePromise = CommitmentReference(
@@ -388,16 +496,56 @@
 ./Native/AmbitionsTests/Domain/CommitmentWaitingModelsTests.swift:121:            state: .overdue,
 ./Native/AmbitionsTests/Domain/CommitmentWaitingModelsTests.swift:149:            commitments: [overduePromise, sensitiveFollowUp, lowStakesFollowUp],
 ./Native/AmbitionsTests/Domain/CommitmentWaitingModelsTests.swift:155:            [.someoneWaitingOnYou, .overduePromise, .sensitiveFollowUp, .lowStakesFollowUp, .waitingOnSomeone]
+./Native/AmbitionsTests/Today/TodayViewModelTests.swift:159:            "AI confidence",
+./Native/AmbitionsTests/Today/TodayViewModelTests.swift:161:            "productivity score",
+./Native/AmbitionsTests/Today/TodayViewModelTests.swift:162:            "best next move",
+./Native/AmbitionsTests/Today/TodayViewModelTests.swift:163:            "next best move",
+./Native/AmbitionsTests/Today/TodayViewModelTests.swift:164:            "overdue",
+./Native/AmbitionsTests/Today/TodayViewModelTests.swift:165:            "failed",
+./Native/AmbitionsTests/Today/TodayViewModelTests.swift:166:            "missed"
+./Native/AmbitionsTests/Today/TodayViewModelTests.swift:239:            "Start Focus",
+./Native/AmbitionsTests/Today/TodayViewModelTests.swift:240:            "Focus Session",
+./Native/AmbitionsTests/Today/TodayViewModelTests.swift:241:            "best next move",
+./Native/AmbitionsTests/Today/TodayViewModelTests.swift:242:            "next best move",
+./Native/AmbitionsTests/Today/TodayViewModelTests.swift:243:            "AI confidence",
+./Native/AmbitionsTests/Today/TodayViewModelTests.swift:244:            "productivity score",
+./Native/AmbitionsTests/Today/TodayViewModelTests.swift:245:            "profile tab",
+./Native/AmbitionsTests/Today/TodayViewModelTests.swift:246:            "insights tab",
+./Native/AmbitionsTests/Today/TodayViewModelTests.swift:247:            "habits tab",
+./Native/AmbitionsTests/Today/TodayViewModelTests.swift:248:            "overdue",
+./Native/AmbitionsTests/Today/TodayViewModelTests.swift:249:            "failed",
+./Native/AmbitionsTests/Today/TodayViewModelTests.swift:250:            "missed"
+./Native/AmbitionsTests/Today/TodayViewModelTests.swift:329:            "Start Focus",
+./Native/AmbitionsTests/Today/TodayViewModelTests.swift:330:            "Focus Session",
+./Native/AmbitionsTests/Today/TodayViewModelTests.swift:331:            "best next move",
+./Native/AmbitionsTests/Today/TodayViewModelTests.swift:332:            "next best move",
+./Native/AmbitionsTests/Today/TodayViewModelTests.swift:333:            "AI confidence",
+./Native/AmbitionsTests/Today/TodayViewModelTests.swift:334:            "productivity score",
+./Native/AmbitionsTests/Today/TodayViewModelTests.swift:335:            "profile tab",
+./Native/AmbitionsTests/Today/TodayViewModelTests.swift:336:            "insights tab",
+./Native/AmbitionsTests/Today/TodayViewModelTests.swift:337:            "habits tab",
+./Native/AmbitionsTests/Today/TodayViewModelTests.swift:338:            "overdue",
+./Native/AmbitionsTests/Today/TodayViewModelTests.swift:339:            "failed",
+./Native/AmbitionsTests/Today/TodayViewModelTests.swift:340:            "missed"
+./Native/AmbitionsTests/Today/TodayViewModelTests.swift:382:        XCTAssertFalse(sheet.visibleCopy.localizedCaseInsensitiveContains("failed"))
+./Native/AmbitionsTests/Today/TodayViewModelTests.swift:383:        XCTAssertFalse(sheet.visibleCopy.localizedCaseInsensitiveContains("overdue"))
+./Native/AmbitionsTests/Today/TodayViewModelTests.swift:384:        XCTAssertFalse(sheet.visibleCopy.localizedCaseInsensitiveContains("AI confidence"))
+./Native/AmbitionsTests/Today/TodayViewModelTests.swift:740:        guard case let .failed(message) = state else {
+./Native/AmbitionsTests/Today/TodayViewModelTests.swift:741:            return XCTFail("Expected Today refresh to end in a failed state.")
+./Native/AmbitionsTests/Today/TodayViewModelTests.swift:873:            "Today failed on purpose."
+./.codex/improvement/skill-refinement-template.md:6:- Request shape that failed:
+./Native/AmbitionsTests/Domain/SafeAutomationPolicyModelsTests.swift:93:        XCTAssertEqual(receipt.resultState, .failedSafely)
+./Native/AmbitionsTests/Domain/SafeAutomationPolicyModelsTests.swift:158:        XCTAssertEqual(deleteDecision.receiptRecommendation.resultState, .failedSafely)
 ./Native/AmbitionsTests/Domain/ExecutionResilienceModelsTests.swift:9:                .missedAction,
 ./Native/AmbitionsTests/Domain/SmartAttachmentModelsTests.swift:107:            id: "smart-attachment-failed",
 ./Native/AmbitionsTests/Domain/SmartAttachmentModelsTests.swift:109:            resultState: .failedSafely,
 ./Native/AmbitionsTests/Domain/SmartAttachmentModelsTests.swift:121:        XCTAssertEqual(receipt.resultState, .failedSafely)
 ./Native/AmbitionsTests/Domain/ActionClosureReceiptModelsTests.swift:18:                .failedSafely,
 ./Native/AmbitionsTests/Domain/ActionClosureReceiptModelsTests.swift:159:            resultState: .failedSafely,
-./Native/AmbitionsTests/Domain/ActionClosureReceiptModelsTests.swift:160:            title: "Action failed",
 ./Native/AmbitionsTests/Domain/ActionClosureReceiptModelsTests.swift:169:            resultState: .failedSafely,
 ./Native/AmbitionsTests/Domain/ActionClosureReceiptModelsTests.swift:177:                    id: "fact-failed",
 ./Native/AmbitionsTests/Domain/ActionClosureReceiptModelsTests.swift:178:                    kind: .failedSafely,
 ./Native/AmbitionsTests/Domain/ActionClosureReceiptModelsTests.swift:258:        XCTAssertEqual(receipt.resultState, .failedSafely)
-./Native/AmbitionsTests/Domain/SafeAutomationPolicyModelsTests.swift:93:        XCTAssertEqual(receipt.resultState, .failedSafely)
-./Native/AmbitionsTests/Domain/SafeAutomationPolicyModelsTests.swift:158:        XCTAssertEqual(deleteDecision.receiptRecommendation.resultState, .failedSafely)
+./Native/AmbitionsTests/Goals/CreateGoalViewModelTests.swift:127:        guard case let .failed(message) = viewModel.submissionState else {
+./Native/AmbitionsTests/App/ReleaseExternalTruthReadinessPacketTests.swift:28:            "AI confidence",
+./Native/AmbitionsTests/App/CoreSurfaceIntegrationScenarioTests.swift:41:        XCTAssertFalse(joined.localizedCaseInsensitiveContains("AI confidence"))
