@@ -2,7 +2,7 @@
 
 ## Purpose And Scope
 
-This document is the Batch 54 continuity contract for Ambitions.
+This document is historical/supporting Batch 54 continuity evidence for Ambitions.
 
 It governs how state, sync trust, provenance, handoff, return, and degraded continuity should behave before external-surface widening.
 
@@ -13,8 +13,8 @@ It does not implement sync, widgets, Live Activities, notifications, App Intents
 Use this document with:
 
 - [Ambitions_Full_Frontend_Transformation_Program.md](Ambitions_Full_Frontend_Transformation_Program.md)
-- [design/cross-device-surface-roles-spec.md](design/cross-device-surface-roles-spec.md)
-- [design/trust-explainability-correction-spec.md](design/trust-explainability-correction-spec.md)
+- [../archive/superseded-design-canon/design/cross-device-surface-roles-spec.md](../archive/superseded-design-canon/design/cross-device-surface-roles-spec.md)
+- [../archive/superseded-design-canon/design/trust-explainability-correction-spec.md](../archive/superseded-design-canon/design/trust-explainability-correction-spec.md)
 - [../codex/BATCH_REGISTRY.md](../codex/BATCH_REGISTRY.md)
 
 When continuity wording conflicts, use the standing precedence in [../codex/CONTEXT_INDEX.md](../codex/CONTEXT_INDEX.md).

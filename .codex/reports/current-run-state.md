@@ -1,8 +1,8 @@
 # Current Run State
 
-- current task: F22 Product Language + Active Repo Baseline Reset
+- current task: F22.5 Doc QA Backlog Closure
 - task size: XL release / architecture / product quality train
-- active mode: F22 Green; F22.5 triggered; F23 blocked until F22.5 and F22.7 Green
+- active mode: F22.5 Green pending commit/push; F23 blocked until mandatory F22.7 Green
 - active train: F17-F30 FAANG Handoff Completion Train
 - active batch: F22.5 Doc QA Backlog Closure
 - active standard: 3.0-as-baseline / human-made active repo
@@ -10,17 +10,17 @@
 - active surface: active docs, active copy, active tests, compatibility seam labeling, train state
 - active context pack: Ambitions 3.0 source stack, Batch Train Orchestrator, baseline policy, human-made codebase standard, active history archive policy, release readiness, handoff gate, UI Test Contract, F21/F21.5 reports, F22 report, Batch Registry, Context Index
 - active skill: repo-truth-enforcer, ios-qa-regression-checker, release-hardening
-- active operations: gated release train continuation; Green/Yellow/Red stop discipline
-- active validation pack: dev tools, batch preflight, batch gate check, local build, focused touched-scope tests, docs QA, copy guard, diff check
+- active operations: gated release train continuation; F22.5 doc QA closure; Green/Yellow/Red stop discipline
+- active validation pack: docs QA, link check, batch gate check, local build, diff check
 - docs read: README, docs README, canon README, AGENTS, 3.0 source override, front-end redesign index, rebuild operating model, documentation system index, primitive architecture, product language system, repo hygiene policy, release readiness gates, FAANG handoff gate, SwiftUI architecture standard, feature boundary constitution, UI Test Contract, train prompt, train manifest, Batch Registry, Context Index, F21 and F21.5 reports
 - files allowed: `README.md`, `AGENTS.md`, `docs/**`, `.codex/reports/**`, `Native/**`, `AppUI/**`, `Sources/**`
 - files forbidden: `.github/workflows/**`, runtime dependency manifests, generated output, broad behavior changes, release readiness claims without F27 evidence
-- files touched: active docs/indexes/policies, F22 report, focused visible copy/state-contract test files, run-state files
-- decisions made: Ambitions 3.0 is now explicit current baseline; F22.7 and F27.5 added as mandatory train gates; active visible legacy copy found in touched surfaces was replaced; compatibility seams remain documented rather than blind-renamed
-- tests run: preflight commands PASS; `scripts/build-local.sh` PASS; focused touched-scope xcodebuild test PASS (`32` tests); `scripts/run-doc-qa.sh || true` advisory PARTIAL; `git diff --check` PASS before report creation
-- failures: initial focused test command hit Xcode build database lock because it was run concurrently with build; serial rerun passed
-- accepted Yellow: pre-existing doc QA backlog remains and triggers F22.5; pre-existing architecture warnings not assessed in F22; compatibility seams intentionally preserved; physical-device proof unavailable with no physical-device claim
-- open risks: doc QA backlog is not handoff-clean; older docs still need active/supporting/archive classification; F22.7 cannot start until F22.5 is Green; FAANG handoff remains PARTIAL until F27 passes
-- next phase: commit/push F22, then run F22.5 Doc QA Backlog Closure
+- files touched: three active/historical docs with broken archive links, F22.5 report, run-state files
+- decisions made: F22.5 is docs-only; older continuity/front-end evidence should resolve to archived superseded-design-canon files and be labeled historical/supporting instead of appearing as current 3.0 source truth
+- tests run: `scripts/run-doc-qa.sh || true` advisory PARTIAL with lychee `0` errors and markdownlint `10101` errors; `git diff --check` PASS before report creation; `scripts/batch-train-gate-check.sh || true` advisory Yellow while F22.5 files were intentionally dirty; `scripts/build-local.sh` PASS
+- failures: none in F22.5 validation; markdownlint backlog remains pre-existing advisory debt
+- accepted Yellow: pre-existing markdownlint backlog; pre-existing historical docs clearly marked archive/supporting; pre-existing architecture warnings not assessed in F22.5; compatibility seams intentionally preserved; physical-device proof unavailable with no physical-device claim
+- open risks: markdownlint backlog is not handoff-clean; broader historical corpus cleanup remains advisory; F22.7 cannot be skipped; FAANG handoff remains PARTIAL until F27 passes
+- next phase: commit/push F22.5, then run mandatory F22.7 Human-Made Active Repo Hygiene / 3.0-As-Baseline Gate
 - stop conditions: build failure, focused validation failure, forbidden file touch, runtime dependency addition, workflow touch, untrustworthy validation, active source-truth old-canon ambiguity, generated junk committed, commit/push failure
-- last checkpoint: F22 report written; F22.5 triggered
+- last checkpoint: F22.5 report written; broken link trigger closed; F22.7 next

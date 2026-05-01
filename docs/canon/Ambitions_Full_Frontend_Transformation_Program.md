@@ -202,7 +202,7 @@ Close motion, accessibility, performance, regression, and release-grade visual p
 
 ## Execution Classification Overlay
 
-Use [design/Ambitions_Frontend_Transformation_Execution_Classification.md](design/Ambitions_Frontend_Transformation_Execution_Classification.md) as the canonical tiering source for this program.
+Use [../archive/superseded-design-canon/design/Ambitions_Frontend_Transformation_Execution_Classification.md](../archive/superseded-design-canon/design/Ambitions_Frontend_Transformation_Execution_Classification.md) as historical tiering evidence for this program.
 
 That document determines:
 

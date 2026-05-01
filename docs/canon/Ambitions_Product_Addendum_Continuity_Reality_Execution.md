@@ -2,15 +2,15 @@
 
 ## Status
 
-Supporting canon addendum for post-Batch-48 doctrine.
+Historical/supporting canon addendum for post-Batch-48 doctrine.
 
 This file does not replace the canonical planning stack.
 Its role is to capture doctrine that should be reflected in:
 
 - [../../MASTER_PRODUCT_SPEC.md](../../MASTER_PRODUCT_SPEC.md)
 - [Ambitions_Full_Frontend_Transformation_Program.md](Ambitions_Full_Frontend_Transformation_Program.md)
-- [design/shell-ia-spec.md](design/shell-ia-spec.md)
-- [design/screen-architecture-spec.md](design/screen-architecture-spec.md)
+- [../archive/superseded-design-canon/design/shell-ia-spec.md](../archive/superseded-design-canon/design/shell-ia-spec.md)
+- [../archive/superseded-design-canon/design/screen-architecture-spec.md](../archive/superseded-design-canon/design/screen-architecture-spec.md)
 
 ## Purpose
 
