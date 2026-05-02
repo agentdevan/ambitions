@@ -1,12 +1,12 @@
 # PX20 PXOS Beyond Roadmap Prompt
 <!-- markdownlint-disable MD013 -->
 
-Status: Queued Ambitions 4.0 future-canon batch; not implemented; blocked pending `Start PXOS Future-Canon Train`.
+Status: Completed Ambitions 4.0 future-canon roadmap batch; not implemented app behavior.
 
 ## Purpose
 
-Advance PXOS Beyond Roadmap for PXOS without implementing app behavior or inventing product
-direction beyond locked source truth.
+Advance PXOS Beyond Roadmap for PXOS without implementing app behavior or
+inventing product direction beyond locked source truth.
 
 ## Source Truth Files To Read First
 
@@ -60,7 +60,7 @@ Owner: roadmap. Boundary: Beyond roadmap update only.
 ## Batch-Specific Acceptance Criteria
 
 - Roadmap language is future-only unless implementation evidence exists.
-- Product Depth remains deep-not-wide and blocked until formalized.
+- Product Depth remains deep-not-wide, formalized, and blocked until selected.
 - Release readiness remains human-proof-bound.
 - The roadmap does not start PXOS, ME, CS, AOS, Product Depth, or release work.
 
@@ -82,7 +82,9 @@ PXOS implementation, AOS01, ME01, CS01, REC02, or Product Depth.
 No new top-level tab, chatbot-first direction, generic productivity expansion,
 release-readiness claim, platform-readiness claim, model/runtime work,
 backend/sync/cloud work, dependency changes, workflow changes, production Swift,
-visual redesign implementation, compatibility seam retirement, stacked-card top-level composition, top-level detail-container UI, or dashboard-like card grids.
+visual redesign implementation, compatibility seam retirement, stacked-card
+top-level composition, top-level detail-container UI, or dashboard-like card
+grids.
 
 ## Required Validation
 
@@ -106,8 +108,9 @@ changed, no unsupported claim, and validation is clean or advisory-only.
 Yellow: doc QA/tooling backlog or an open future decision is classified and does
 not affect current implementation truth.
 
-Red: product direction invented, PXOS marked started/complete, app code touched,
-release/platform claim added, AOS/ME/CS/REC02 started, top-level tab changed, stacked-card top-level composition accepted, or
+Red: product direction invented, PXOS implementation marked started/complete,
+app code touched, release/platform claim added, AOS/ME/CS/REC02 started,
+top-level tab changed, stacked-card top-level composition accepted, or
 validation failure unclassified.
 
 ## Stop Conditions
@@ -142,6 +145,7 @@ next named gate.
 
 ## Next Safe Prompt / Path
 
-Use the next direct PX prompt only after the train has been explicitly started
-with `Start PXOS Future-Canon Train`, this batch is Green, committed, pushed,
-and no Yellow/Red gate blocks continuation.
+PXOS direct prompts are complete after PX20. Continue to the next global batch
+only after this batch is Green or accepted Yellow, committed, pushed, and a new
+dry-run selection says execution is allowed. The next global batch is ME01, but
+ME01 must still pass maintainability scope, file-boundary, and validation gates.

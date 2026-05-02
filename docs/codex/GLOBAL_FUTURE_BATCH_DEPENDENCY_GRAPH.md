@@ -2,7 +2,7 @@
 
 <!-- markdownlint-disable MD013 -->
 
-Status: Ambitions 4.0 dependency graph; active through PX19 future-canon evidence
+Status: Ambitions 4.0 dependency graph; active through PX20 future-canon evidence
 Date: 2026-05-02
 
 ## Phase Map
@@ -43,7 +43,7 @@ Ambitions 4.0 is the active post-3.0 execution program, not a shipped product ve
 - PX17 is complete as Release Truth Product Messaging future-canon work.
 - PX18 is complete as PXOS Implementation Readiness Reorder recurring-gate work.
 - PX19 is complete as PXOS Handoff future-canon work.
-- PX20 depends on PX19 and relevant completed PX surface canon.
+- PX20 is complete as PXOS Beyond Roadmap future-canon work.
 - PX14 depends on PX02-PX13.
 - PX18 depends on PX01-PX17 and recurs before major implementation lanes.
 - ME01 depends on explicit approval phrase `Start ME Train`.

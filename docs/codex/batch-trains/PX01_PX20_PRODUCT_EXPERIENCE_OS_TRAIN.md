@@ -1,7 +1,7 @@
 # PX01-PX20 Product Experience OS Train
 <!-- markdownlint-disable MD013 -->
 
-Status: PXOS future-canon train active through PX19 only; PXOS implementation not started.
+Status: PXOS future-canon train complete through PX20; PXOS implementation not started.
 Train type: queued future-canon and later implementation-readiness train
 Date: 2026-05-02
 
@@ -69,7 +69,7 @@ ordering, REC closure, F30 being complete, or mentioning PXOS in a prompt.
 - PX17: Release Truth Product Messaging. Owner: release messaging. Boundary: Release-safe product messaging canon only. Status: complete after PX17 commit.
 - PX18: PXOS Implementation Readiness Reorder. Owner: global reorder. Boundary: Implementation readiness reorder only. Status: complete after PX18 commit; recurring gate before implementation.
 - PX19: PXOS Handoff. Owner: handoff. Boundary: PXOS handoff package only. Status: complete after PX19 commit.
-- PX20: PXOS Beyond Roadmap. Owner: roadmap. Boundary: Beyond roadmap update only.
+- PX20: PXOS Beyond Roadmap. Owner: roadmap. Boundary: Beyond roadmap update only. Status: complete after PX20 commit.
 
 ## Validation Plan
 

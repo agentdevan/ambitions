@@ -1,11 +1,11 @@
 # Current Run State
 
-Active train: PXOS future-canon train
-Active batch: none; PX19 complete and PX20 next eligible pending dry-run
+Active train: none; PXOS future-canon train complete
+Active batch: none; PX20 complete and ME01 next eligible pending dry-run
 selection
 Current out-of-train task: none
-Scope: PX19 PXOS Handoff complete; PXOS implementation not started; Product
-Depth train not started; AmbitionsOS implementation not started
+Scope: PX20 PXOS Beyond Roadmap complete; PXOS implementation not started;
+ME/CS/Product Depth/AmbitionsOS trains not started
 Date: 2026-05-02
 Branch: main
 
@@ -22,7 +22,7 @@ Branch: main
   shipped product version, not implemented by implication, and not
   release-proven.
 - AmbitionsOS: future canon only, not current app implementation truth.
-- PXOS: future user-facing product experience canon only; PX01-PX19 future
+- PXOS: future user-facing product experience canon only; PX01-PX20 future
   canon complete; PXOS implementation not started.
 - AOS/ME/CS/Product Depth: queued/blocked and not started.
 - Release Evidence Closure: REC01 inventory is accepted baseline evidence;
@@ -45,16 +45,16 @@ Branch: main
 - PX16: complete as future-canon docs work.
 - PX17: complete as future-canon docs work.
 - PX18: complete as recurring implementation-readiness gate work.
-- PX19: complete as future-canon handoff work; PX20 next global batch pending
+- PX19: complete as future-canon handoff work.
+- PX20: complete as future-canon roadmap work; ME01 next global batch pending
   dry-run selection.
 - Current user prompt preauthorizes Ambitions 4.0 global sequence continuation
   through routine train transitions, but not proof, validation, Red, release,
   platform, legal/privacy, physical-device, public accessibility, TestFlight,
   App Store Connect, signed archive, visual-approval, or final release gates.
-- PX20: queued/blocked and not started; batch-specific prompt hardening
-  completed.
+- ME01-ME12: queued/blocked and not started.
 - Product Depth: formalized as a queued/blocked PD01-PD18 train; not started.
-- Global order: 95 formal batches at program start; 71 remain after PX19.
+- Global order: 95 formal batches at program start; 70 remain after PX20.
 
 ## Boundaries
 
@@ -73,36 +73,35 @@ Branch: main
 Run git status, branch/HEAD checks, diff check, PXOS/release-claim/status
 scans, PXOS drift scans, doc QA advisory, batch-train gate advisory, targeted
 markdownlint, file-size snapshot, and changed-file boundary check. App
-build/test is skipped because app code is forbidden for PX19.
+build/test is skipped because app code is forbidden for PX20.
 
 ## Current Validation Result
 
-PX19 validation is PASS WITH YELLOW before commit.
+PX20 validation is PASS WITH YELLOW before commit.
 
 Verified:
 
 - `git diff --check` passed.
-- Focused markdownlint on PX19 touched handoff/report/control docs passed with
-  0 errors.
-- Stale-status scan passed after final evidence update and dependency-graph
-  repair; remaining PX01-PX18 mentions are intentional historical scope.
+- Focused markdownlint on PX20 touched roadmap/report/control docs passed with
+  0 errors after a local roadmap line-length waiver and duplicate blank-line
+  cleanup in the touched roadmap file.
+- Stale-status scan passed after final evidence update.
 - Release/PXOS claim scan found only guardrails, forbidden-claim examples,
   non-claim status text, or historical future-row language.
 - PXOS drift scan found only forbidden examples, guardrails, or historical
   status rows, not accepted product direction.
-- Changed-file boundary is accepted Yellow: 13 docs/control/report files after
-  one required dependency-graph status-truth repair, with no app code touched.
-- File-size snapshot captured no Swift changes: handoff package 173 lines,
-  ledger 102 lines, PX19 prompt 150 lines, report 135 lines before final
-  evidence update, current run-state 91 lines, batch-train state 63 lines.
+- Changed-file boundary passed: 13 docs/control/report files only.
+- File-size snapshot captured no Swift changes: roadmap 278 lines, ledger 103
+  lines, PX20 prompt 151 lines, report 136 lines before final evidence update,
+  current run-state 91 lines, batch-train state 62 lines.
 - `scripts/run-doc-qa.sh || true` remains Yellow for known repo-wide docs QA
   backlog; lychee passed with 645 OK and 0 errors.
 - `scripts/batch-train-gate-check.sh || true` remains Yellow only for the
-  expected active PX19 dirty tree before commit.
+  expected active PX20 dirty tree before commit.
 
 Not verified:
 
 - App build/test, screenshots, simulator, physical-device, TestFlight, App
   Store Connect, signed archive, public accessibility, legal/privacy signoff,
-  platform proof, and final release proof. PX19 is docs-only and makes none of
+  platform proof, and final release proof. PX20 is docs-only and makes none of
   those claims.

@@ -1,4 +1,5 @@
 # Ambitions Beyond 3.0 Roadmap
+<!-- markdownlint-disable MD013 -->
 
 Status: Continuity roadmap; represented operationally by the Ambitions 4.0 Execution Program
 Date: 2026-05-01
@@ -151,8 +152,6 @@ Required future-train setup:
 - stage, commit, and push each Green batch before continuing;
 - preserve exact validation logs and stop on untrusted validation.
 
-
-
 ### Lane 6: Product Experience OS Future Canon
 
 Goal: define the future user-facing product experience system before major
@@ -211,12 +210,66 @@ Lane 5 now points to `docs/codex/AMBITIONS_CODEX_OS_CONTINUITY_PROTOCOL.md`, Amb
 
 AOS implementation is queued/blocked through `docs/codex/batch-trains/AOS01_AOS30_AMBITIONSOS_LOCAL_INTELLIGENCE_TRAIN.md`. The first post-F30 path selected by the 2026-05-02 pre-train hardening pass is Release Evidence Closure. Maintainability Extraction, Compatibility Seam Retirement, Product Depth, and AOS implementation remain not started unless explicitly activated later. Product Depth is formalized as `docs/codex/batch-trains/PD01_PD18_PRODUCT_DEPTH_TRAIN.md` and starts only with `Start Product Depth Train`.
 
-
 ## Post-F30 Activation Status
 
 As of 2026-05-02, Ambitions 3.0 is complete by F30 closeout evidence and F17-F30 is historical Green train evidence. AmbitionsOS remains future canon, not current implementation truth. The first safe post-3.0 train selected after pre-train hardening is Release Evidence Closure, beginning with REC01 Release Evidence Truth Inventory. This activation does not start AOS, ME, CS, Product Depth, or any app implementation work. Product Depth is formalized as an Ambitions 4.0 queued train but remains blocked/not started.
 
-
 ## PXOS Future-Canon Path
 
 PXOS is added as future user-facing product experience canon under this roadmap. It does not supersede Ambitions 3.0, does not claim implementation, does not start PXOS, and does not start REC02, AOS, ME, CS, or Product Depth. PXOS should exist before major user-facing implementation so future work has surface hierarchy, copy, visual, accessibility, trust, recovery, and release-claim gates.
+
+## PXOS Future-Canon Closeout
+
+As of PX20, the PXOS future-canon train is complete as docs-only canon and
+roadmap evidence. PXOS defines the future user-facing product experience system
+for Ambitions 4.0, but it remains future canon only.
+
+Completed PXOS outcomes:
+
+- parent PXOS promise, surface hierarchy, and top-level composition law;
+- Today, Goals, Capture, Plan, and You future surface canon;
+- closure, recovery, trust, proof, receipts, copy, explanation, visual,
+  onboarding, accessibility, degraded-state, depth, continuity,
+  recommendation-expression, release-safe messaging, reorder, handoff, and
+  roadmap controls;
+- decision ledger entries separating locked, open, and deferred decisions;
+- a handoff package for future Codex/human operators.
+
+Blocked implementation lanes:
+
+- PXOS UI implementation remains blocked until a named implementation prompt
+  passes affected ME, CS, AOS, REC, visual, accessibility, copy, trust/proof,
+  and validation gates.
+- Product Depth is formalized but not started. It remains blocked until its
+  approval, owner map, relevant ME/CS gates, and AOS gates when runtime logic is
+  touched.
+- ME and CS remain queued/blocked until selected by global dry-run and their
+  maintainability/compatibility gates.
+- AmbitionsOS remains future canon until AOS batches run, validate, commit, and
+  record evidence.
+- Release posture remains human-proof-bound; PXOS docs do not create App Store,
+  TestFlight, physical-device, signed archive, public accessibility, platform,
+  legal/privacy, or final release proof.
+
+Recurring gates before later product work:
+
+- rerun the PX18 implementation-readiness reorder gate before any major PXOS or
+  Product Depth implementation lane;
+- run ME gates before large UI/file expansion;
+- run CS gates before route, raw-value, external-surface, import/export,
+  persistence, or legacy naming retirement;
+- run AOS gates before user-facing runtime intelligence or recommendation
+  behavior;
+- run REC/release-claim gates before public product messaging or readiness
+  posture changes.
+
+Next decision path after PXOS closeout:
+
+1. ME maintainability baseline if the next work risks large-file growth.
+2. CS compatibility baseline if the next work risks route/raw/external seams.
+3. Product Depth only after its approval phrase and dependency map.
+4. AOS only after runtime/source-truth/privacy gates are selected.
+5. Human/operator release proof only through REC/release handoff checklists.
+
+No path above starts automatically from this roadmap. Each future batch must
+pass the global dry-run selection and commit its own evidence.
