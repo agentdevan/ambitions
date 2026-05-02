@@ -3,9 +3,9 @@
 <!-- markdownlint-disable MD013 -->
 
 Active train: CS compatibility seam retirement train
-Active batch: CS08 Import Export Persistence Compatibility Proof dry-run pending
+Active batch: CS08 Import Export Persistence Compatibility Proof evidence in progress
 Current out-of-train task: none
-Scope: ME01-ME12 maintainability train complete with commit/push evidence; ME11 repair not triggered; PXOS implementation not started; CS01 complete; CS07 complete as focused compatibility proof; CS08 is next pending dry-run selection; Signature Interface/Product Depth/AmbitionsOS trains not started
+Scope: ME01-ME12 maintainability train complete with commit/push evidence; ME11 repair not triggered; PXOS implementation not started; CS01 complete; CS07 complete as focused compatibility proof; CS08 selected by global order and run as focused import/export/persistence proof; Signature Interface/Product Depth/AmbitionsOS trains not started
 Date: 2026-05-02
 Branch: main
 
@@ -32,9 +32,10 @@ Branch: main
 - ME12: complete as maintainability handoff evidence with commit/push evidence (`7f7ab99b6a671b08bf2706d778af01e06b907f8e`, report repair `f51f937a`).
 - CS01: complete as audit-only compatibility seam registry and risk map; no seam retired and no app code edited.
 - CS07: complete as focused external route/widget/App Intent compatibility proof; no seam retired and no app code edited. Commit evidence: `e4c04ff2`, report SHA repair: `ef536cae`.
-- CS train: active with CS08 next only after dry-run selection says `Execution allowed: YES`.
+- CS08: in progress as focused import/export/persistence compatibility proof; no seam retired and no app code edited.
+- CS train: active through CS08 proof evidence only; CS02 is next after CS08 commit/push if continuation gates pass.
 - SI/Product Depth/AOS: queued/blocked and not started.
-- Global order: 113 formal batches after SI insertion; 75 remain after CS07 commit.
+- Global order: 113 formal batches after SI insertion; 74 remain after CS08 commit.
 
 ## Boundaries
 
@@ -47,25 +48,29 @@ Branch: main
 
 ## Current Validation Result
 
-CS07 validation is PASS WITH YELLOW with focused compatibility evidence committed and pushed.
+CS08 validation is PASS WITH YELLOW with focused compatibility evidence ready for commit.
 
 Verified:
 
+- CS08 touched only docs/status files and did not edit tests or app code.
+- CS08 focused import/export/persistence compatibility lane passed 36 tests with 0 failures.
+- Passing log: `output/logs/cs08-import-export-persistence-tests-20260502-141058.log`.
+- CS08 proves current simulator/unit behavior for external creation import, portable snapshot export/import, legacy import, persistence repositories, sync capability posture, and persistence budget boundaries.
+- `git diff --check` passed.
+- Changed-file boundary passed; dirty files were limited to `docs/**` and `.codex/**`.
+- Focused markdownlint on changed CS08 docs/status files is PASS WITH YELLOW because registry/context docs carry existing markdownlint backlog.
+- `scripts/run-doc-qa.sh || true` is PASS WITH YELLOW with existing stale-guidance, deprecated-language, and markdownlint advisory logs; lychee passed.
+- `scripts/batch-train-gate-check.sh || true` is PASS WITH YELLOW with only the expected dirty-tree hint before commit.
 - CS07 touched only docs/status files and did not edit tests or app code.
 - CS07 focused external compatibility lane passed 81 tests with 0 failures.
 - Passing log: `output/logs/cs07-external-compatibility-tests-20260502-135725.log`.
 - CS07 proves current simulator/unit behavior for external routes, widgets, App Intent / Shortcut routes, action payloads, snapshots, screen contracts, and release-claim boundaries.
-- `git diff --check` passed.
-- Changed-file boundary passed; dirty files were limited to `docs/**` and `.codex/**`.
-- Focused markdownlint on changed CS07 docs/status files is PASS WITH YELLOW because registry/context docs carry existing markdownlint backlog.
-- `scripts/run-doc-qa.sh || true` is PASS WITH YELLOW with existing stale-guidance, deprecated-language, and markdownlint advisory logs; lychee passed.
-- `scripts/batch-train-gate-check.sh || true` is PASS WITH YELLOW with only the expected dirty-tree hint before commit.
 - Release/platform claim scan found only forbidden-claim lists, scan commands, historical logs, and explicit non-claims.
 
 Not verified:
 
-- Screenshots, physical-device, TestFlight, App Store Connect, signed archive, public accessibility, legal/privacy signoff, platform proof, human visual approval, rendered widget/App Shortcut OS proof, and final release proof. CS07 makes none of those claims.
+- Screenshots, physical-device export/import, external file-transfer proof, TestFlight, App Store Connect, signed archive, public accessibility, legal/privacy signoff, platform proof, human visual approval, rendered widget/App Shortcut OS proof, and final release proof. CS08 makes none of those claims.
 
 ## Next Eligible Batch
 
-The next global batch is CS08 Import Export Persistence Compatibility Proof only if dry-run selection says `Execution allowed: YES`.
+After CS08 commit/push and post-commit drift checks, the next global batch is CS02 Profile To You Internal Naming Retirement only if dry-run selection says `Execution allowed: YES`.

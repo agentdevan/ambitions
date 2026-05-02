@@ -2,7 +2,7 @@
 
 <!-- markdownlint-disable MD013 -->
 
-Status: Ambitions 4.0 dependency graph; active through CS07 external compatibility proof evidence and SI formalization
+Status: Ambitions 4.0 dependency graph; active through CS08 import/export/persistence compatibility proof evidence and SI formalization
 Date: 2026-05-02
 
 ## Phase Map
@@ -53,6 +53,7 @@ Ambitions 4.0 is the active post-3.0 execution program, not a shipped product ve
 - ME02-ME07 are complete as behavior-preserving extraction evidence. ME09 is complete as product-contract test validation evidence. ME11 is not triggered because no current ME Red or unaccepted Yellow requires repair. ME12 is complete as maintainability handoff evidence.
 - CS01 is complete as audit-only compatibility seam registry evidence under current global preauthorization.
 - CS07 is complete as focused external route/widget/App Intent compatibility proof under current global preauthorization.
+- CS08 is complete as focused import/export/persistence compatibility proof under current global preauthorization.
 - CS02-CS06 depend on CS01 and the relevant CS07/CS08 compatibility proof where route/raw/external/import/export/persistence risk exists.
 - SI01 depends on PXOS complete, ME01/ME08/ME10/ME02 Green, and SI Codex OS quality gates.
 - SI02-SI18 depend on SI01, predecessor SI batches, relevant ME gates, relevant CS gates, SI review-board gates, preview/visual QA evidence, and accessibility/Reduce Motion gates.

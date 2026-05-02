@@ -3,9 +3,9 @@
 <!-- markdownlint-disable MD013 -->
 
 Active train: CS compatibility seam retirement train
-Active batch: CS08 Import Export Persistence Compatibility Proof dry-run pending
+Active batch: CS08 Import Export Persistence Compatibility Proof evidence in progress
 Current out-of-train task: none
-Scope: ME01-ME12 maintainability train complete with commit/push evidence; ME11 repair not triggered; PXOS implementation not started; CS01 complete; CS07 complete as focused compatibility proof; CS08 is next pending dry-run selection; Signature Interface/Product Depth/AmbitionsOS trains not started
+Scope: ME01-ME12 maintainability train complete with commit/push evidence; ME11 repair not triggered; PXOS implementation not started; CS01 complete; CS07 complete as focused compatibility proof; CS08 selected by global order and run as focused import/export/persistence proof; Signature Interface/Product Depth/AmbitionsOS trains not started
 Date: 2026-05-02
 
 ## Baseline
@@ -30,16 +30,25 @@ Product Depth is formalized as a queued/blocked PD01-PD18 train with required ap
 
 ## Ambitions 4.0 Status
 
-Ambitions 4.0 is the active post-3.0 execution program, not a shipped product version. The global order now has 113 formal batches after SI insertion: REC02-REC06, PX01-PX20, ME01-ME12, CS01-CS10, SI01-SI18, PD01-PD18, and AOS01-AOS30. REC02-REC06, PX01-PX20, ME01, ME08, ME10, ME02, ME03, ME04, ME05, ME06, ME07, ME09, ME12, CS01, and CS07 are complete after CS07 commit; 75 formal batches remain queued/blocked or future-selected.
+Ambitions 4.0 is the active post-3.0 execution program, not a shipped product version. The global order now has 113 formal batches after SI insertion: REC02-REC06, PX01-PX20, ME01-ME12, CS01-CS10, SI01-SI18, PD01-PD18, and AOS01-AOS30. REC02-REC06, PX01-PX20, ME01, ME08, ME10, ME02, ME03, ME04, ME05, ME06, ME07, ME09, ME12, CS01, CS07, and CS08 are complete after CS08 commit; 74 formal batches remain queued/blocked or future-selected.
 
 ## Boundaries
 
-No product behavior expansion. No visual redesign. No compatibility seam retired. No dependencies. No workflow changes. No release claim. CS01 is audit-only evidence; CS07 is focused simulator/unit proof; CS08-CS10, SI implementation, Product Depth, AOS, and PXOS implementation remain unstarted.
+No product behavior expansion. No visual redesign. No compatibility seam retired. No dependencies. No workflow changes. No release claim. CS01 is audit-only evidence; CS07 and CS08 are focused simulator/unit proof; CS02-CS06, CS09-CS10, SI implementation, Product Depth, AOS, and PXOS implementation remain unstarted.
 
 ## Validation Result
 
-CS07 is PASS WITH YELLOW with commit/push evidence:
+CS08 is PASS WITH YELLOW pending commit/push evidence:
 
+- CS08 touched only docs/status files and did not edit tests or app code.
+- CS08 focused import/export/persistence lane passed 36 tests with 0 failures.
+- Passing log: `output/logs/cs08-import-export-persistence-tests-20260502-141058.log`.
+- No seam was retired; old values must remain until the relevant CS retirement batch proves compatibility and rollback.
+- `git diff --check` passed.
+- Changed-file boundary passed; dirty files were limited to `docs/**` and `.codex/**`.
+- Focused markdownlint on changed CS08 docs/status files is PASS WITH YELLOW because registry/context docs carry existing markdownlint backlog.
+- `scripts/run-doc-qa.sh || true` is PASS WITH YELLOW with existing stale-guidance, deprecated-language, and markdownlint advisory logs; lychee passed.
+- `scripts/batch-train-gate-check.sh || true` is PASS WITH YELLOW with only the expected dirty-tree hint before commit.
 - CS07 touched only docs/status files and did not edit tests or app code.
 - CS07 focused external compatibility lane passed 81 tests with 0 failures.
 - Passing log: `output/logs/cs07-external-compatibility-tests-20260502-135725.log`.
@@ -57,4 +66,4 @@ The current user prompt says `Run Global Batch Sequence Until Blocked` and expli
 
 ## Next Eligible Batch
 
-The next global batch is CS08 Import Export Persistence Compatibility Proof only if dry-run selection says `Execution allowed: YES`.
+After CS08 commit/push and post-commit drift checks, the next global batch is CS02 Profile To You Internal Naming Retirement only if dry-run selection says `Execution allowed: YES`.
