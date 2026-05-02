@@ -5,7 +5,7 @@ This folder contains operating context for Ambitions Codex runs.
 
 Ambitions 3.0 is the active source of truth. Older Codex prompts and batch files are implementation history or support material unless Ambitions 3.0 explicitly keeps them binding.
 
-Ambitions 4.0 is the active post-3.0 execution program, not a shipped product version. Use [../canon/Ambitions_4_0_Execution_Program.md](../canon/Ambitions_4_0_Execution_Program.md) for queued/blocked status semantics across the 95-batch global order.
+Ambitions 4.0 is the active post-3.0 execution program, not a shipped product version. Use [../canon/Ambitions_4_0_Execution_Program.md](../canon/Ambitions_4_0_Execution_Program.md) for queued/blocked status semantics across the 113-batch global order after SI insertion.
 
 ## Required Read Order
 
@@ -72,7 +72,7 @@ The FAANG-team operating upgrade is indexed from:
 
 Use `docs/codex/AMBITIONS_3_0_BATCH_TRAIN_ORCHESTRATOR.md` plus the artifacts in this directory for gated Ambitions 3.0 batch trains. F03.5, F13.5, and F16.5 are architecture checkpoint prompts; do not skip them when their triggers fire.
 
-Completed historical train: [batch-trains/F17_F30_FAANG_HANDOFF_COMPLETION_TRAIN.md](batch-trains/F17_F30_FAANG_HANDOFF_COMPLETION_TRAIN.md). F17 through F30 are Green by current train evidence. F27 remains PASS after the F28 repair/rebaseline, F27.5 completed with no critical maintainability blocker, F29 created the final engineer handoff package, and F30 created the Beyond 3.0 continuation plan and final closeout. Beyond 3.0 is now represented operationally by the Ambitions 4.0 Execution Program. Release Evidence Closure is complete through REC06; PX01-PX20 are complete as future canon/roadmap evidence, and PXOS, ME, CS, Product Depth, and AOS remain future/queued until selected and proven by evidence.
+Completed historical train: [batch-trains/F17_F30_FAANG_HANDOFF_COMPLETION_TRAIN.md](batch-trains/F17_F30_FAANG_HANDOFF_COMPLETION_TRAIN.md). F17 through F30 are Green by current train evidence. F27 remains PASS after the F28 repair/rebaseline, F27.5 completed with no critical maintainability blocker, F29 created the final engineer handoff package, and F30 created the Beyond 3.0 continuation plan and final closeout. Beyond 3.0 is now represented operationally by the Ambitions 4.0 Execution Program. Release Evidence Closure is complete through REC06; PX01-PX20 are complete as future canon/roadmap evidence, and PXOS, ME, CS, Signature Interface, Product Depth, and AOS remain future/queued until selected and proven by evidence.
 
 ## Ambitions 4.0 Global Batch Controls
 
@@ -85,7 +85,7 @@ Completed historical train: [batch-trains/F17_F30_FAANG_HANDOFF_COMPLETION_TRAIN
 - [Global Batch Continuation Protocol](GLOBAL_BATCH_CONTINUATION_PROTOCOL.md)
 - [Global Batch FAANG Quality Bar](GLOBAL_BATCH_FAANG_QUALITY_BAR.md)
 
-These controls define the Ambitions 4.0 global execution order, automated gates, repair behavior, validation strength, and continuation rules. They are not approval to start REC02, PXOS, ME, CS, AOS, Product Depth, or any implementation train.
+These controls define the Ambitions 4.0 global execution order, automated gates, repair behavior, validation strength, and continuation rules. They are not approval to start REC02, PXOS, ME, CS, SI, AOS, Product Depth, or any implementation train.
 
 ## AmbitionsOS Future Trains
 
@@ -93,6 +93,7 @@ These controls define the Ambitions 4.0 global execution order, automated gates,
 - [AOS01-AOS30 Train](batch-trains/AOS01_AOS30_AMBITIONSOS_LOCAL_INTELLIGENCE_TRAIN.md)
 - [ME01-ME12 Train](batch-trains/ME01_ME12_MAINTAINABILITY_EXTRACTION_TRAIN.md)
 - [CS01-CS10 Train](batch-trains/CS01_CS10_COMPATIBILITY_SEAM_RETIREMENT_TRAIN.md)
+- [SI01-SI18 Train](batch-trains/SI01_SI18_SIGNATURE_INTERFACE_IMPLEMENTATION_TRAIN.md)
 
 These trains are queued/blocked in Ambitions 4.0 and must not run automatically after canon authoring.
 

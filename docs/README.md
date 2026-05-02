@@ -4,7 +4,7 @@ This folder contains product, canon, implementation, build, and release document
 
 Ambitions 3.0 is the active rebuild documentation system.
 
-Ambitions 4.0 is the active post-3.0 execution program, not a shipped product version. Use [canon/Ambitions_4_0_Execution_Program.md](canon/Ambitions_4_0_Execution_Program.md) for queued/blocked batch semantics and the 95-batch global execution order.
+Ambitions 4.0 is the active post-3.0 execution program, not a shipped product version. Use [canon/Ambitions_4_0_Execution_Program.md](canon/Ambitions_4_0_Execution_Program.md) for queued/blocked batch semantics and the 113-batch global execution order after SI insertion.
 
 ---
 

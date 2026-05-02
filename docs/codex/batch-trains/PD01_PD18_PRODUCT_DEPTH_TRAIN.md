@@ -82,4 +82,4 @@ Each batch leaves an audit/report, changed files, validation logs or command out
 
 ## What This Train Must Not Claim
 
-No Product Depth implementation until an individual PD implementation batch runs and passes. No release readiness, App Store readiness, TestFlight readiness, physical-device proof, public accessibility conformance, platform integration proof, AOS/ME/CS/PXOS start, or REC02 start.
+No Product Depth implementation until an individual PD implementation batch runs and passes. No release readiness, App Store readiness, TestFlight readiness, physical-device proof, public accessibility conformance, platform integration proof, AOS/ME/CS/SI/PXOS start, or REC02 start.

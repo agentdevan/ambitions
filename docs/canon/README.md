@@ -153,6 +153,7 @@ Historical docs are context only and do not override Ambitions 3.0.
 - [Postmortem And Learning Loop](Ambitions_3_0_Postmortem_And_Learning_Loop.md)
 - [Human Approval Escalation Rules](Ambitions_3_0_Human_Approval_Escalation_Rules.md)
 - [Ambitions 4.0 Execution Program](Ambitions_4_0_Execution_Program.md)
+- [Ambitions Signature Interface System](Ambitions_Signature_Interface_System.md)
 - [Beyond 3.0 Continuity Rules](Ambitions_Beyond_3_0_Continuity_Rules.md)
 - [Master Ambitions 3.0 Codex Prompt](../codex/MASTER_AMBITIONS_3_0_CODEX_PROMPT.md)
 - [Context Loading And Task Routing](../codex/AMBITIONS_3_0_CONTEXT_LOADING_AND_TASK_ROUTING.md)

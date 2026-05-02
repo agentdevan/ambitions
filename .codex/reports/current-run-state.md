@@ -3,9 +3,9 @@
 <!-- markdownlint-disable MD013 -->
 
 Active train: ME maintainability extraction train selected by global sequence
-Active batch: none; ME02 complete and Signature Interface Codex OS quality-gate upgrade active before SI formalization and ME03 continuation
-Current out-of-train task: Signature Interface Codex OS quality-gate upgrade
-Scope: ME01 Maintainability Baseline And Ownership Map complete; ME08 Shared Projector State Helper Standards complete; ME10 Architecture Scan Gate complete; ME02 GoalsFeatureService extraction complete; PXOS implementation not started; CS/Product Depth/AmbitionsOS trains not started
+Active batch: none; SI formalization active before ME03 continuation
+Current out-of-train task: Signature Interface train formalization
+Scope: ME01 Maintainability Baseline And Ownership Map complete; ME08 Shared Projector State Helper Standards complete; ME10 Architecture Scan Gate complete; ME02 GoalsFeatureService extraction complete; PXOS implementation not started; CS/Signature Interface/Product Depth/AmbitionsOS trains not started
 Date: 2026-05-02
 Branch: main
 
@@ -28,9 +28,10 @@ Branch: main
 - ME02: complete as behavior-preserving Goals service extraction; moved DEBUG-only `StubGoalsService` to a Goals support file and repaired the current-batch compile Red.
 - Current user prompt preauthorizes Ambitions 4.0 global sequence continuation through routine train transitions, but not proof, validation, Red, release, platform, legal/privacy, physical-device, public accessibility, TestFlight, App Store Connect, signed archive, visual-approval, or final release gates.
 - ME03-ME07, ME09, ME11-ME12: queued/blocked and not started.
-- CS/Product Depth/AOS: queued/blocked and not started.
+- CS/SI/Product Depth/AOS: queued/blocked and not started.
+- Signature Interface: formalized as a queued/blocked SI01-SI18 train; not started.
 - Product Depth: formalized as a queued/blocked PD01-PD18 train; not started.
-- Global order: 95 formal batches at program start; 66 remain after ME02 before Signature Interface formalization. SI formalization is expected to update the formal total to 113.
+- Global order: 113 formal batches after SI insertion; 84 remain after ME02 and SI formalization.
 
 ## Boundaries
 
@@ -39,7 +40,7 @@ Branch: main
 - No compatibility seam retired.
 - No dependencies added.
 - No workflow changes.
-- No release, App Store, TestFlight, final RC, physical-device, public accessibility, signed archive, App Store Connect, external-platform, AmbitionsOS implementation, Product Depth implementation, or PXOS implementation claim added.
+- No release, App Store, TestFlight, final RC, physical-device, public accessibility, signed archive, App Store Connect, external-platform, AmbitionsOS implementation, Signature Interface implementation, Product Depth implementation, or PXOS implementation claim added.
 
 ## Current Validation Plan
 

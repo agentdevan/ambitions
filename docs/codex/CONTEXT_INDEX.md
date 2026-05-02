@@ -14,7 +14,7 @@ Ambitions 3.0 is the active source of truth. This file defines Codex read order,
 - F03.5 Today Execution State Contract Hardening is complete: `TodayExecutionViewState.swift` is now a small aggregate state contract, while Day Rail state, Step Detail state, projection helpers, projector logic, compatibility helpers, and screen-contract snapshot live in dedicated Today-owned files.
 - F04 Step Session, F05 Action Closure / Still Counts, F06 Proof & Receipt Ledger, F07 Capture Composer cleanup, F08 Placement Resolver, F09 Capture-to-Goal / Grow into Goal, F10 Plan Life Suite foundation, F11 Day Shape / Week Shape, F12 Reflow / Recovery / Decisions, F13 Goals / Goal Mission Control, F13.5 Goals / You / Trust architecture checkpoint, F14 You / Trust / What Ambitions Knows, F15 Legacy Identifier Migration, and F16 UI Test Modernization are complete.
 - F16.5 SwiftUI Architecture / State Contract Hardening checkpoint is complete. The active completion train is F17-F30 FAANG Handoff Completion Train. F17 repair, F18, F19, F20, F21/F21.5, F22, F22.5, F22.7, F23, F24, F25, F26, F27, F27.5, F28, F29, and F30 are Green by current train evidence. F27 passed after F28 rebaselined the Goal Detail trust/memory UI proof to stable owned section anchors and reran `scripts/test-local.sh` cleanly with 779 unit tests and 29 UI tests. F27.5 found no critical maintainability blocker and fixed stale active train-entry wording. F29 created the engineer handoff package. F30 created the Beyond 3.0 continuation roadmap and final train closeout.
-- Ambitions 4.0 is the active post-3.0 execution program, not a shipped product version. It started with 95 formal queued/blocked batches in global order: REC02-REC06, PX01-PX20, ME01-ME12, CS01-CS10, PD01-PD18, and AOS01-AOS30. REC02-REC06 are complete as Release Evidence Closure, PX01-PX20 are complete as future PXOS canon/roadmap evidence, ME01 is complete as maintainability audit evidence, ME08 is complete as shared projector/state/helper standards evidence, ME10 is complete as recurring architecture-gate evidence, ME02 is complete as behavior-preserving Goals service extraction evidence, and 66 formal batches remain before Signature Interface formalization. Future canon remains not implemented until explicit batches produce evidence.
+- Ambitions 4.0 is the active post-3.0 execution program, not a shipped product version. It started with 113 formal batches in global order after SI insertion: REC02-REC06, PX01-PX20, ME01-ME12, CS01-CS10, SI01-SI18, PD01-PD18, and AOS01-AOS30. REC02-REC06 are complete as Release Evidence Closure, PX01-PX20 are complete as future PXOS canon/roadmap evidence, ME01 is complete as maintainability audit evidence, ME08 is complete as shared projector/state/helper standards evidence, ME10 is complete as recurring architecture-gate evidence, ME02 is complete as behavior-preserving Goals service extraction evidence, and 84 formal batches remain after SI insertion. Future canon remains not implemented until explicit batches produce evidence.
 
 ## Required Read Order
 
@@ -81,7 +81,7 @@ For non-trivial work, read in this order:
 
 ## Batch Train Context
 
-Batch-train execution uses `docs/codex/AMBITIONS_3_0_BATCH_TRAIN_ORCHESTRATOR.md`, `docs/codex/batch-trains/README.md`, `.codex/reports/current-batch-train-state.md`, and the matching validation/operation packs. F03.5, F13.5, and F16.5 are complete. The F17-F30 train is complete by current train evidence. After the 2026-05-02 pre-train hardening pass, Release Evidence Closure is complete through REC06; PX01-PX20 are complete as future PXOS canon/roadmap evidence; ME01 is complete as maintainability audit evidence; ME08 is complete as shared standards evidence; ME10 is complete as recurring architecture-gate evidence; ME02 is complete as behavior-preserving Goals service extraction evidence; ME03-ME07, ME09, ME11-ME12, CS, Product Depth, and AOS remain queued/blocked under the Ambitions 4.0 Execution Program.
+Batch-train execution uses `docs/codex/AMBITIONS_3_0_BATCH_TRAIN_ORCHESTRATOR.md`, `docs/codex/batch-trains/README.md`, `.codex/reports/current-batch-train-state.md`, and the matching validation/operation packs. F03.5, F13.5, and F16.5 are complete. The F17-F30 train is complete by current train evidence. After the 2026-05-02 pre-train hardening pass, Release Evidence Closure is complete through REC06; PX01-PX20 are complete as future PXOS canon/roadmap evidence; ME01 is complete as maintainability audit evidence; ME08 is complete as shared standards evidence; ME10 is complete as recurring architecture-gate evidence; ME02 is complete as behavior-preserving Goals service extraction evidence; ME03-ME07, ME09, ME11-ME12, CS, Signature Interface, Product Depth, and AOS remain queued/blocked under the Ambitions 4.0 Execution Program.
 
 ## Ambitions 4.0 Global Batch Execution Context
 
@@ -97,7 +97,7 @@ Use this context before selecting any queued cross-train batch after REC01:
 - `GLOBAL_BATCH_FAANG_QUALITY_BAR.md`
 - `../audits/global-future-batch-sequencing-report.md`
 
-These files define Ambitions 4.0 order, gates, repair loops, continuation, validation strength, and quality bars only. They do not start REC05, PXOS, ME, CS, AOS, Product Depth, app implementation, release readiness, or human-proof work.
+These files define Ambitions 4.0 order, gates, repair loops, continuation, validation strength, and quality bars only. They do not start REC05, PXOS, ME, CS, SI, AOS, Product Depth, app implementation, release readiness, or human-proof work.
 
 ## Handoff Package
 
@@ -196,8 +196,19 @@ Use this context when the user explicitly chooses PXOS or future user-facing pro
 - `docs/codex/PXOS_PRODUCT_DECISION_LEDGER.md`
 - `docs/codex/batch-trains/PX01_PX20_PRODUCT_EXPERIENCE_OS_TRAIN.md`
 
-PXOS is future canon for user-facing experience, not current app implementation. PX01-PX20 are complete as future canon/roadmap evidence. REC02-REC06 are complete as Release Evidence Closure; ME01 is complete as maintainability audit evidence; AOS, ME extraction, CS, Product Depth, and PXOS implementation remain queued/blocked and not started until their gates allow execution.
+PXOS is future canon for user-facing experience, not current app implementation. PX01-PX20 are complete as future canon/roadmap evidence. REC02-REC06 are complete as Release Evidence Closure; ME01 is complete as maintainability audit evidence; AOS, ME extraction, CS, SI, Product Depth, and PXOS implementation remain queued/blocked and not started until their gates allow execution.
 
+
+## Signature Interface Queued Train Context
+
+Use this context when SI is selected by global order or explicit phrase:
+
+- `docs/canon/Ambitions_Signature_Interface_System.md`
+- `docs/codex/batch-trains/SI01_SI18_SIGNATURE_INTERFACE_IMPLEMENTATION_TRAIN.md`
+- `.codex/review-boards/signature-interface-review-board.md`
+- `.codex/skills/signature-interface-creative-director.md`
+
+SI starts only through global dry-run selection or `Start Signature Interface Train`. SI remains queued/blocked and not implemented.
 
 ## Product Depth Queued Train Context
 

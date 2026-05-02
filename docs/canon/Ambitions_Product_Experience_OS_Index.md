@@ -145,3 +145,8 @@ PXOS future work is governed by `docs/codex/PXOS_TRAIN_CONTROL_SYSTEM.md`,
 ## Implementation Boundary
 
 This is future canon and process guidance only. It does not implement app behavior, change production Swift, start PXOS, start AOS/ME/CS/REC02, retire compatibility seams, add dependencies, change workflows, add backend/sync/cloud/model runtime, or create release/platform readiness claims.
+
+
+## Signature Interface Handoff
+
+PXOS remains future user-facing canon. Signature Interface (SI01-SI18) is the queued Ambitions 4.0 implementation lane that turns PXOS visual, interaction, accessibility, trust, and top-level surface rules into reusable SwiftUI primitives. PXOS completion does not mean SI is implemented.

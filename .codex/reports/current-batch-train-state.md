@@ -3,9 +3,9 @@
 <!-- markdownlint-disable MD013 -->
 
 Active train: ME maintainability extraction train selected by global sequence
-Active batch: none; ME02 complete and Signature Interface Codex OS quality-gate upgrade active before SI formalization and ME03 continuation
-Current out-of-train task: Signature Interface Codex OS quality-gate upgrade
-Scope: ME01 Maintainability Baseline And Ownership Map complete; ME08 Shared Projector State Helper Standards complete; ME10 Architecture Scan Gate complete; ME02 GoalsFeatureService extraction complete; PXOS implementation not started; CS/Product Depth/AmbitionsOS trains not started
+Active batch: none; SI formalization active before ME03 continuation
+Current out-of-train task: Signature Interface train formalization
+Scope: ME01 Maintainability Baseline And Ownership Map complete; ME08 Shared Projector State Helper Standards complete; ME10 Architecture Scan Gate complete; ME02 GoalsFeatureService extraction complete; PXOS implementation not started; CS/Signature Interface/Product Depth/AmbitionsOS trains not started
 Date: 2026-05-02
 
 ## Baseline
@@ -28,21 +28,25 @@ ME01 produced the Lane 2 ownership map and risk baseline for the six large owner
 
 REC02-REC06 standalone prompt files exist. REC02 produced the human operator release proof plan. REC03 produced the validation log ledger. REC04 corrected claim-copy guard status wording. REC05 produced the human review packet. REC06 produced the release evidence closure handoff. PX15 produced cross-surface continuity canon. PX16 produced user-facing intelligence/recommendation expression canon. PX17 produced release-safe product messaging canon. PX18 produced the recurring implementation-readiness reorder gate. PX19 produced the PXOS handoff package. PX20 produced the Beyond roadmap closeout. ME01 produced the maintainability baseline and ownership map. ME08 produced shared projector/state/helper standards. ME10 produced the recurring architecture gate. ME02 produced the first Goals service extraction evidence.
 
+## Signature Interface Formalization Status
+
+Signature Interface is formalized as a queued/blocked SI01-SI18 train after the SI Codex OS quality-gate upgrade. SI is not implemented and must wait for global-order selection or `Start Signature Interface Train`, PXOS/ME/CS prerequisites, visual QA, accessibility, preview, Reduce Motion, and file-size/component-boundary gates.
+
 ## Product Depth Formalization Status
 
 Product Depth is formalized as a queued/blocked PD01-PD18 train with required approval phrase `Start Product Depth Train`. This does not start Product Depth, PXOS implementation, ME extraction, CS, AOS, or app implementation.
 
 ## Signature Interface Codex OS Status
 
-Signature Interface is not implemented and SI01-SI18 are not yet formalized in the global order. The current out-of-train task adds SI-specific review skills, review boards, local advisory scripts, and global protocol gates so future SI batches must pass creative-direction, invented-but-native, anti-generic UI, preview, visual QA, accessibility, Reduce Motion, interaction/motion/haptics, symbol grammar, and file-size/component-boundary review before Green.
+Signature Interface is not implemented. The SI Codex OS quality-gate task added SI-specific review skills, review boards, local advisory scripts, and global protocol gates so future SI batches must pass creative-direction, invented-but-native, anti-generic UI, preview, visual QA, accessibility, Reduce Motion, interaction/motion/haptics, symbol grammar, and file-size/component-boundary review before Green.
 
 ## Ambitions 4.0 Status
 
-Ambitions 4.0 is the active post-3.0 execution program, not a shipped product version. The global order started with 95 formal batches: REC02-REC06, PX01-PX20, ME01-ME12, CS01-CS10, PD01-PD18, and AOS01-AOS30. REC02-REC06, PX01-PX20, ME01, ME08, ME10, and ME02 are complete; 66 formal batches remain queued/blocked or future-selected before Signature Interface formalization.
+Ambitions 4.0 is the active post-3.0 execution program, not a shipped product version. The global order now has 113 formal batches after SI insertion: REC02-REC06, PX01-PX20, ME01-ME12, CS01-CS10, SI01-SI18, PD01-PD18, and AOS01-AOS30. REC02-REC06, PX01-PX20, ME01, ME08, ME10, and ME02 are complete; 84 formal batches remain queued/blocked or future-selected.
 
 ## Boundaries
 
-No product behavior expansion. No compatibility seam retired. No dependencies. No workflow changes. No release claim. AOS, CS, Product Depth, SI, and PXOS implementation remain unstarted. REC02 planned human/operator proof only; it did not perform or claim proof. REC03 indexed logs and proof gaps only; it did not rerun app validation or claim release/platform proof. REC04 guarded release/status copy only; it did not claim release/platform proof. REC05 created a human review packet only; it did not perform human proof or claim approval/readiness. REC06 created a closure handoff only; it did not claim release readiness. PX01-PX20 created future canon/gate/handoff/roadmap evidence only; they did not implement PXOS, AmbitionsOS, Product Depth, model/runtime behavior, personalization proof, release readiness, platform readiness, or change app behavior. ME01 created audit evidence only; ME08 created standards evidence only; ME10 created architecture-gate evidence only; ME02 extracted DEBUG-only Goals support without changing live behavior.
+No product behavior expansion. No compatibility seam retired. No dependencies. No workflow changes. No release claim. AOS, CS, SI implementation, Product Depth, and PXOS implementation remain unstarted. REC02 planned human/operator proof only; it did not perform or claim proof. REC03 indexed logs and proof gaps only; it did not rerun app validation or claim release/platform proof. REC04 guarded release/status copy only; it did not claim release/platform proof. REC05 created a human review packet only; it did not perform human proof or claim approval/readiness. REC06 created a closure handoff only; it did not claim release readiness. PX01-PX20 created future canon/gate/handoff/roadmap evidence only; they did not implement PXOS, SI, AmbitionsOS, Product Depth, model/runtime behavior, personalization proof, release readiness, platform readiness, or change app behavior. ME01 created audit evidence only; ME08 created standards evidence only; ME10 created architecture-gate evidence only; ME02 extracted DEBUG-only Goals support without changing live behavior.
 
 ## Continuation Rule
 

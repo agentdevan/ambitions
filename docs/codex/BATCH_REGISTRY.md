@@ -22,7 +22,7 @@ Ambitions 2.0 docs remain preserved historical/supporting context unless the 3.0
 
 ## Ambitions 4.0 Execution Program Status
 
-Ambitions 4.0 is the active post-3.0 execution program, not a shipped product version. It does not claim release readiness, App Store readiness, TestFlight readiness, physical-device proof, platform proof, public accessibility proof, PXOS implementation, Product Depth implementation, or AmbitionsOS implementation.
+Ambitions 4.0 is the active post-3.0 execution program, not a shipped product version. It does not claim release readiness, App Store readiness, TestFlight readiness, physical-device proof, platform proof, public accessibility proof, PXOS implementation, Signature Interface implementation, Product Depth implementation, or AmbitionsOS implementation.
 
 Current 4.0 status:
 
@@ -56,13 +56,16 @@ Current 4.0 status:
 - Completed: ME10 Architecture Scan Gate.
 - Completed: ME02 GoalsFeatureService Extraction.
 - Active evidence baseline: REC01 Release Evidence Truth Inventory.
+- Completed: Signature Interface Codex OS quality gates.
+- Formalized: SI01-SI18 Signature Interface Implementation Train; queued/blocked and not started.
 - Next queued / blocked: ME03 TodayFeatureService Extraction pending global dry-run selection after SI formalization is reconciled.
 - Queued / Blocked: ME03-ME07, ME09, ME11-ME12 pending current global preauthorization or `Start ME Train`.
 - Queued / Blocked: CS01-CS10 pending `Start CS Train`.
-- Queued / Blocked: PD01-PD18 pending `Start Product Depth Train` plus PXOS/ME/CS/AOS-if-needed gates.
+- Queued / Blocked: SI01-SI18 pending global-order selection or `Start Signature Interface Train` plus PXOS/ME/CS/SI quality gates.
+- Queued / Blocked: PD01-PD18 pending `Start Product Depth Train` plus PXOS/ME/CS/SI/AOS-if-needed gates.
 - Queued / Blocked: AOS01-AOS30 pending `Start AOS Train`.
-- Total formal remaining batches in the 4.0 global order at program start: 95.
-- Remaining after ME02: 66 before Signature Interface formalization.
+- Total formal Ambitions 4.0 batches after SI insertion: 113.
+- Remaining after ME02 and SI insertion: 84.
 
 Use [../canon/Ambitions_4_0_Execution_Program.md](../canon/Ambitions_4_0_Execution_Program.md) and [GLOBAL_FUTURE_BATCH_EXECUTION_ORDER.md](GLOBAL_FUTURE_BATCH_EXECUTION_ORDER.md) for current post-3.0 status semantics.
 
@@ -400,7 +403,8 @@ These batches are complete for planning purposes. They remain as historical cont
 | ME10 Architecture Scan Gate | Completed / audit-only | Converted the architecture scan into a recurring ME gate. No extraction run. |
 | ME02-ME07, ME09, ME11-ME12 Maintainability Extraction Train | Queued / Blocked | Requires current global preauthorization or `Start ME Train` and Green predecessor gates. |
 | CS01-CS10 Compatibility Seam Retirement Train | Queued / Blocked | Requires `Start CS Train` and Green predecessor gates. |
-| PD01-PD18 Product Depth Train | Queued / Blocked | Formal Product Depth train. Requires exact approval phrase `Start Product Depth Train`, PXOS Product Depth gates, relevant ME/CS gates, and AOS blockers when runtime logic is touched. |
+| SI01-SI18 Signature Interface Implementation Train | Queued / Blocked | Formal Signature Interface train. Requires global-order selection or `Start Signature Interface Train`, PXOS completion, relevant ME/CS gates, and SI visual quality gates. |
+| PD01-PD18 Product Depth Train | Queued / Blocked | Formal Product Depth train. Requires exact approval phrase `Start Product Depth Train`, PXOS Product Depth gates, relevant ME/CS/SI gates, and AOS blockers when runtime logic is touched. |
 | PXOS Future-Canon Integration | Completed / docs-only | Added Product Experience OS future canon and Codex OS controls. It does not start PXOS implementation or the PXOS train. |
 | PX01-PX20 Product Experience OS Train | Completed / docs-only | PX01-PX20 are complete as future canon/roadmap evidence. PXOS implementation is not started. |
 

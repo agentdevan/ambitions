@@ -6,7 +6,7 @@ Date: 2026-05-02
 
 ## Purpose
 
-The Ambitions 4.0 Execution Program is the active post-3.0 implementation and canon-execution program for Ambitions. It turns the completed Ambitions 3.0 baseline, Release Evidence Closure, PXOS, ME, CS, Product Depth, and AmbitionsOS planning into one globally ordered, gated execution system.
+The Ambitions 4.0 Execution Program is the active post-3.0 implementation and canon-execution program for Ambitions. It turns the completed Ambitions 3.0 baseline, Release Evidence Closure, PXOS, ME, CS, Signature Interface, Product Depth, and AmbitionsOS planning into one globally ordered, gated execution system.
 
 This program is not a release label, shipped product version, App Store claim, TestFlight claim, physical-device proof, platform proof, public accessibility proof, privacy/legal signoff, or claim that future canon is implemented.
 
@@ -30,7 +30,7 @@ REC owns release evidence truth and claim boundaries. REC01 is active/started. R
 
 PXOS is future user-facing canon and a queued Ambitions 4.0 train. PXOS is not implemented app behavior. PX01-PX20 are queued/blocked pending `Start PXOS Future-Canon Train` and their named gates.
 
-PXOS may define future user-facing expression, but it does not start Product Depth, AOS, ME, CS, or app implementation by implication.
+PXOS may define future user-facing expression, but it does not start Signature Interface, Product Depth, AOS, ME, CS, or app implementation by implication.
 
 ## Relationship To ME
 
@@ -40,11 +40,17 @@ ME owns maintainability and extraction readiness before large UI or product expa
 
 CS owns compatibility seam safety before route, raw value, deep-link, widget, App Intent, import/export, persistence, or external surface retirement. CS01-CS10 are queued/blocked pending `Start CS Train`. No compatibility seam is retired by this program label alone.
 
+## Relationship To SI
+
+Signature Interface is now a formal SI01-SI18 train in the Ambitions 4.0 global order. It is queued/blocked, not started, and not implemented. SI owns Ambitions-exclusive SwiftUI primitives, shell/IA/action/navigation/loading/icon/motion systems, visual QA gates, and top-level surface composition implementation.
+
+SI may start only when the global order reaches it or the exact phrase `Start Signature Interface Train` is supplied, and only after PXOS, relevant ME/CS gates, REC claim boundaries, accessibility, preview, visual QA, and file-size/component gates are Green or accepted Yellow.
+
 ## Relationship To PD
 
 Product Depth is now a formal PD01-PD18 train in the Ambitions 4.0 global order. It is queued/blocked, not started, and not implemented.
 
-Product Depth may start only after `Start Product Depth Train`, PXOS Product Depth gates, relevant ME/CS gates, and AOS-if-needed gates. Product Depth deepens Today, Goals, Capture, Plan, and You through drill-downs and owned detail flows. It must not widen the app.
+Product Depth may start only after `Start Product Depth Train`, PXOS Product Depth gates, relevant ME/CS/SI gates, and AOS-if-needed gates. Product Depth deepens Today, Goals, Capture, Plan, and You through drill-downs and owned detail flows. It must not widen the app.
 
 ## Relationship To AOS
 
@@ -75,7 +81,7 @@ Batch/train statuses:
 
 ## Global Order Summary
 
-Total formal remaining Ambitions 4.0 batches: 95.
+Total formal Ambitions 4.0 batches after SI insertion: 113.
 
 Active batch:
 
@@ -87,8 +93,9 @@ Queued batches:
 - PX01-PX20: global order 006-025; queued/blocked pending `Start PXOS Future-Canon Train`.
 - ME01-ME12: global order 026-037; queued/blocked pending `Start ME Train`.
 - CS01-CS10: global order 038-047; queued/blocked pending `Start CS Train`.
-- PD01-PD18: global order 048-065; queued/blocked pending `Start Product Depth Train` and prerequisite PXOS/ME/CS/AOS-if-needed gates.
-- AOS01-AOS30: global order 066-095; queued/blocked pending `Start AOS Train`.
+- SI01-SI18: global order 048-065; queued/blocked pending global-order selection or `Start Signature Interface Train`, PXOS complete, relevant ME/CS gates, and SI quality gates.
+- PD01-PD18: global order 066-083; queued/blocked pending `Start Product Depth Train` and prerequisite PXOS/ME/CS/SI/AOS-if-needed gates.
+- AOS01-AOS30: global order 084-113; queued/blocked pending `Start AOS Train`.
 
 ## Blocked And Gated Areas
 
@@ -96,23 +103,25 @@ Queued batches:
 - PXOS: blocked by PXOS train approval, source truth, product decision locks, and top-level surface composition gates.
 - ME: blocked by ME approval, ownership maps, file-size/diff-size gates, and behavior-preservation validation.
 - CS: blocked by CS approval, seam registry, external/import/export/persistence proof, and compatibility gates.
-- Product Depth: blocked by PXOS Product Depth canon, PX18 readiness, relevant ME/CS gates, AOS-if-needed gates, and approval phrase.
+- Signature Interface: blocked by PXOS completion, ME/CS prerequisites, SI Codex OS gates, visual QA/preview/accessibility gates, and global-order or SI approval.
+- Product Depth: blocked by PXOS Product Depth canon, PX18 readiness, relevant ME/CS/SI gates, AOS-if-needed gates, and approval phrase.
 - AOS: blocked by AOS approval, runtime contracts, privacy/source-truth gates, and later PXOS expression gates before user-facing intelligence.
 
 ## What 4.0 May Claim
 
 - Ambitions 3.0 is the completed baseline by F30 evidence.
 - Ambitions 4.0 is the active post-3.0 execution program.
-- The 4.0 global execution order includes 95 formal remaining batches.
+- The 4.0 global execution order includes 113 formal batches after SI insertion.
 - REC01 is active/started.
 - REC02-REC06, PX01-PX20, ME01-ME12, CS01-CS10, PD01-PD18, and AOS01-AOS30 are queued/blocked as named.
-- PXOS, Product Depth, and AmbitionsOS are future canon or queued trains until implemented by explicit evidence-producing batches.
+- PXOS, SI, Product Depth, and AmbitionsOS are future canon or queued trains until implemented by explicit evidence-producing batches.
 
 ## What 4.0 Must Not Claim
 
 - Ambitions 4.0 is shipped, release-ready, production-ready, App Store-ready, TestFlight-ready, physical-device-proven, platform-proven, public-accessibility-proven, privacy/legal-approved, or externally rendered.
 - PXOS is implemented.
 - AmbitionsOS is implemented.
+- Signature Interface is implemented.
 - Product Depth is implemented.
 - Any queued batch is complete, running, or started unless the registry and evidence say so.
 - Any top-level tab beyond Today, Goals, Capture, Plan, and You exists or is approved.
@@ -125,6 +134,7 @@ Queued batches:
 - `Start PXOS Future-Canon Train`: start PXOS future-canon train only.
 - `Start ME Train`: start ME only.
 - `Start CS Train`: start CS only.
+- `Start Signature Interface Train`: start SI only.
 - `Start Product Depth Train`: start Product Depth only.
 - `Start AOS Train`: start AOS only.
 
@@ -157,10 +167,4 @@ Top-level surfaces must be visual orientation surfaces, not stacked-card detail 
 
 ## Next Safe Path
 
-The next safe execution path remains:
-
-```text
-Continue Release Evidence Closure
-```
-
-That phrase continues REC only. It does not start PXOS, ME, CS, Product Depth, AOS, or implementation work.
+The next safe execution path is the global dry-run selection from `GLOBAL_FUTURE_BATCH_EXECUTION_ORDER.md` after the current batch/report state is refreshed.

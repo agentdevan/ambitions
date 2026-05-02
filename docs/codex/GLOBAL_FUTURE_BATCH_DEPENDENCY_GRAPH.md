@@ -2,7 +2,7 @@
 
 <!-- markdownlint-disable MD013 -->
 
-Status: Ambitions 4.0 dependency graph; active through ME10 architecture gate evidence
+Status: Ambitions 4.0 dependency graph; active through ME02 extraction evidence and SI formalization
 Date: 2026-05-02
 
 ## Phase Map
@@ -14,12 +14,13 @@ Date: 2026-05-02
 | 2 PXOS readiness canon | 016-025 | Define onboarding, accessibility, degraded states, Product Depth, continuity, intelligence expression, messaging, reorder, handoff, roadmap. | PXOS can gate implementation without claiming implementation. |
 | 3 Maintainability prerequisites | 026-037 | Map large files, set extraction standards, run architecture gate, extract owners, rebaseline tests, repair, handoff. | Large UI work has maintainable owners. |
 | 4 Compatibility prerequisites | 038-047 | Map seams, prove external/import/export/persistence compatibility, retire safe seams, repair, handoff. | Renames/removals do not break routes or data. |
-| 5 Product Depth | 048-065 | Deepen existing surfaces through PD01-PD18 after PXOS plus ME/CS gates. | Formal depth work remains deep-not-wide and gate-bound. |
-| 6 AOS internal foundations | 066-088 | Build AmbitionsOS contracts and kernels without user-facing exposure. | Internal intelligence has typed, private, source-grounded contracts. |
-| 7 AOS expression and QA | 089-095 | Integrate only after PXOS/ME/CS, build fixtures, QA, claim truth, handoff, repair/roadmap. | User-facing intelligence waits for proof and gates. |
+| 5 Signature Interface | 048-065 | Build SI01-SI18 interface primitives after ME/CS prerequisites and before Product Depth. | Ambitions-native UI primitives and visual QA gates exist before depth work. |
+| 6 Product Depth | 066-083 | Deepen existing surfaces through PD01-PD18 after PXOS plus ME/CS/SI gates. | Formal depth work remains deep-not-wide and gate-bound. |
+| 7 AOS internal foundations | 084-106 | Build AmbitionsOS contracts and kernels without user-facing exposure. | Internal intelligence has typed, private, source-grounded contracts. |
+| 8 AOS expression and QA | 107-113 | Integrate only after PXOS/ME/CS/SI/PD where relevant, build fixtures, QA, claim truth, handoff, repair/roadmap. | User-facing intelligence waits for proof and gates. |
 | 8 Release readiness evidence | Future human-led lane | Actual release readiness proof after implementation evidence and human/platform proof. | No public readiness claim without evidence. |
 
-Ambitions 4.0 is the active post-3.0 execution program, not a shipped product version. This graph covers 95 formal queued/blocked batches and does not make PXOS, Product Depth, or AmbitionsOS implemented.
+Ambitions 4.0 is the active post-3.0 execution program, not a shipped product version. This graph covers 113 formal queued/blocked batches and does not make PXOS, SI, Product Depth, or AmbitionsOS implemented.
 
 ## Hard Dependencies
 
@@ -52,10 +53,19 @@ Ambitions 4.0 is the active post-3.0 execution program, not a shipped product ve
 - ME02-ME07 depend on ME01, ME08 standards, ME10 architecture gate, and behavior-preservation tests.
 - CS01 depends on explicit approval phrase `Start CS Train`.
 - CS02-CS06 depend on CS01 and the relevant CS07/CS08 compatibility proof where route/raw/external/import/export/persistence risk exists.
+- SI01 depends on PXOS complete, ME01/ME08/ME10/ME02 Green, and SI Codex OS quality gates.
+- SI02-SI18 depend on SI01, predecessor SI batches, relevant ME gates, relevant CS gates, SI review-board gates, preview/visual QA evidence, and accessibility/Reduce Motion gates.
+- PD02-PD04 depend on SI04/SI05/SI10/SI12/SI13/SI17 where relevant.
+- PD05-PD08 depend on SI06/SI07/SI10/SI12/SI14/SI17 where relevant.
+- PD09-PD11 depend on SI09/SI12/SI13/SI17 where relevant.
+- PD12-PD14 depend on SI08/SI12/SI13/SI17 where relevant.
+- PD15-PD16 depend on SI03/SI10/SI11/SI13/SI14 where relevant.
+- PD17 depends on SI03/SI10/SI12/SI17.
+- PD18 depends on SI18.
 - AOS01 depends on explicit approval phrase `Start AOS Train`.
 - AOS02-AOS23 depend on AOS01 and the kernel dependencies named in the AOS train manifest.
-- AOS24 depends on AOS18-AOS23, PXOS expression gates, ME maintainability gates, and CS compatibility gates.
-- PD01 depends on `Start Product Depth Train`, PX14, PX18, affected ME/CS dependency identification, and explicit train gates.
+- AOS24 depends on AOS18-AOS23, PXOS expression gates, ME maintainability gates, CS compatibility gates, and SI18 handoff if intelligence is exposed in the UI.
+- PD01 depends on `Start Product Depth Train`, PX14, PX18, SI18 handoff where UI primitives are relevant, affected ME/CS dependency identification, and explicit train gates.
 - PD02-PD18 depend on PD01, their predecessor PD batches, affected PXOS surface gates, affected ME gates, affected CS gates, and AOS runtime gates if runtime/source-truth/proof logic is touched.
 
 ## Soft Dependencies
@@ -68,6 +78,7 @@ Ambitions 4.0 is the active post-3.0 execution program, not a shipped product ve
 - CS01 should precede any user-facing terminology work that tempts internal seam deletion.
 - AOS16/AOS17 should precede runtime-heavy or sensitive projection work.
 - AOS18 should precede broad AOS behavior implementation.
+- SI18 should precede Product Depth and AOS24 UI exposure.
 
 ## Blockers
 
@@ -91,7 +102,8 @@ Ambitions 4.0 is the active post-3.0 execution program, not a shipped product ve
 | ME Maintainability Gate | Large UI/product expansion in affected files | Owner file is too large/tangled or lacks behavior-preservation tests. |
 | CS Compatibility Gate | Renames, removals, routes, raw values, widgets, App Intents, import/export, persistence | Replacement map or compatibility proof is missing. |
 | AOS Runtime/Intelligence Gate | Recommendation/source-truth/runtime/intelligence work | Typed contracts, privacy projection, fallback, or source truth is missing. |
-| Product Depth Gate | PD01-PD18 or drill-down/detail work beyond current canon | PXOS, ME, CS, AOS-runtime-if-needed, or approval prerequisites are unresolved. |
+| Product Depth Gate | PD01-PD18 or drill-down/detail work beyond current canon | PXOS, ME, CS, SI, AOS-runtime-if-needed, or approval prerequisites are unresolved. |
+| Signature Interface Gate | SI01-SI18 or Ambitions-native interface primitives | SI Codex OS gates, PXOS source truth, ME/CS prerequisites, visual QA, accessibility, or file-size evidence is unresolved. |
 
 ## Gates That Must Recur
 
@@ -125,6 +137,7 @@ Parallel work is disabled by default. It is allowed only after explicit approval
 - ME01, ME09, ME11, ME12.
 - CS01-CS10 unless a future CS proof explicitly permits disjoint parallelism.
 - AOS01-AOS09, AOS11, AOS14-AOS21, AOS23-AOS30.
+- SI01-SI18 are serial-only unless a future Green SI01 owner map explicitly permits disjoint work.
 - PD01-PD18 are serial-only unless a future Green PD01 dependency map explicitly permits disjoint work; implementation PD batches are serial by default.
 - Any human-proof, release-claim, route/persistence, top-level UI, or runtime/intelligence exposure batch.
 

@@ -119,3 +119,10 @@ Every PD batch must prove:
 ## What This Plan Does Not Prove
 
 This plan does not prove implementation, release readiness, TestFlight readiness, App Store readiness, physical-device proof, public accessibility conformance, signed archive validation, App Store Connect validation, external-platform rendering, PXOS implementation, or AmbitionsOS implementation.
+
+
+## Signature Interface Dependencies
+
+Product Depth now depends on the queued SI train where relevant. PD02-PD04 depend on SI04/SI05/SI10/SI12/SI13/SI17. PD05-PD08 depend on SI06/SI07/SI10/SI12/SI14/SI17. PD09-PD11 depend on SI09/SI12/SI13/SI17. PD12-PD14 depend on SI08/SI12/SI13/SI17. PD15-PD16 depend on SI03/SI10/SI11/SI13/SI14. PD17 depends on SI03/SI10/SI12/SI17. PD18 depends on SI18.
+
+These dependencies do not start Product Depth or SI implementation. They prevent depth work from using generic UI where Ambitions-native primitives should exist.

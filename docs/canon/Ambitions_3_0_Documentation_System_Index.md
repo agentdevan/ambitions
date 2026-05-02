@@ -57,7 +57,7 @@ For any Ambitions 3.0 rebuild work:
 | `Ambitions_3_0_Risk_Register_Protocol.md` | Defines risk entry and review rules. |
 | `Ambitions_3_0_Postmortem_And_Learning_Loop.md` | Defines learning loop for failed batches, repeated failures, and bad Codex runs. |
 | `Ambitions_3_0_Human_Approval_Escalation_Rules.md` | Defines when Codex must stop for human approval. |
-| `Ambitions_4_0_Execution_Program.md` | Defines the active post-3.0 execution program, queued/blocked status vocabulary, and 95-batch global order semantics without claiming shipped 4.0 behavior. |
+| `Ambitions_4_0_Execution_Program.md` | Defines the active post-3.0 execution program, queued/blocked status vocabulary, and 113-batch global order semantics after SI insertion without claiming shipped 4.0 behavior. |
 | `Ambitions_Beyond_3_0_Continuity_Rules.md` | Defines supersession and continuity rules for 3.1/4.0 and beyond. |
 | `Ambitions_3_0_Source_Of_Truth_Override.md` | States 3.0 supersession and conflict rules. |
 | `Ambitions_3_0_Front_End_Redesign_Index.md` | Parent index and front-end redesign doctrine. |

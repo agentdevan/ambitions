@@ -33,7 +33,7 @@ Older docs are supporting context unless an active 3.0 doc explicitly keeps them
 [Ambitions 4.0 Execution Program](docs/canon/Ambitions_4_0_Execution_Program.md) is the active post-3.0 implementation and canon-execution program. It is not a shipped product version, release-readiness claim, App Store claim, TestFlight claim, physical-device proof, platform proof, or public accessibility proof.
 
 Ambitions 3.0 remains the completed baseline after F30. Ambitions 4.0 currently
-means the repo has a 95-batch global execution order; REC02-REC06,
+means the repo has a 113-batch global execution order after SI insertion; REC02-REC06,
 PX01-PX20, and ME01 are complete as docs/evidence/canon/audit work, and
 ME08-ME12, CS01-CS10, PD01-PD18, and AOS01-AOS30 remain queued/blocked.
 Future canon remains future canon until implemented and proven. After ME01, 69
@@ -223,7 +223,7 @@ maintainability blocker, F29 created the final engineer handoff package, and F30
 created the Beyond 3.0 continuation plan and final train closeout. Beyond 3.0 is
 now represented operationally by the Ambitions 4.0 Execution Program. Release
 Evidence Closure is complete through REC06. PX01-PX20 are complete as future
-PXOS canon/roadmap evidence; ME, CS, Product Depth, and AOS remain queued/blocked until
+PXOS canon/roadmap evidence; ME, CS, Signature Interface, Product Depth, and AOS remain queued/blocked until
 their gates allow execution.
 
 ## Product Experience OS Future Canon
