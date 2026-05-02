@@ -1,7 +1,7 @@
 # REC05 Human Review Packet Prompt
 <!-- markdownlint-disable MD013 -->
 
-Status: Queued Ambitions 4.0 evidence batch; not started; blocked pending `Continue Release Evidence Closure` and REC04 Green.
+Status: Queued Ambitions 4.0 evidence batch; not started; blocked pending `Continue Release Evidence Closure` or current global 4.0 preauthorization and REC04 Green.
 
 ## Batch Identity
 
@@ -10,7 +10,8 @@ Status: Queued Ambitions 4.0 evidence batch; not started; blocked pending `Conti
 - Train: Release Evidence Closure
 - Mode: evidence/docs-only
 - Owner: operator release review handoff
-- Required approval phrase: `Continue Release Evidence Closure`
+- Required approval phrase: `Continue Release Evidence Closure` or current
+  global Ambitions 4.0 preauthorization
 
 ## Purpose
 

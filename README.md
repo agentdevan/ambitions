@@ -33,11 +33,11 @@ Older docs are supporting context unless an active 3.0 doc explicitly keeps them
 [Ambitions 4.0 Execution Program](docs/canon/Ambitions_4_0_Execution_Program.md) is the active post-3.0 implementation and canon-execution program. It is not a shipped product version, release-readiness claim, App Store claim, TestFlight claim, physical-device proof, platform proof, or public accessibility proof.
 
 Ambitions 3.0 remains the completed baseline after F30. Ambitions 4.0 currently
-means the repo has a 95-batch global execution order; REC02, REC03, and REC04
-are complete, REC05-REC06 are
-queued/blocked, and PX01-PX20, ME01-ME12, CS01-CS10, PD01-PD18, and AOS01-AOS30
-remain queued/blocked. Future canon remains future canon until implemented and
-proven. After REC04, 92 formal batches remain.
+means the repo has a 95-batch global execution order; REC02, REC03, REC04, and
+REC05 are complete, REC06 is queued/blocked, and PX01-PX20, ME01-ME12,
+CS01-CS10, PD01-PD18, and AOS01-AOS30 remain queued/blocked. Future canon
+remains future canon until implemented and proven. After REC05, 91 formal
+batches remain.
 
 ---
 
