@@ -1,6 +1,7 @@
 # Product Depth And Drilldown Rules
+<!-- markdownlint-disable MD013 -->
 
-Status: PXOS future canon; not current app implementation truth
+Status: PXOS future canon; PX14 complete; not current app implementation truth
 Date: 2026-05-02
 
 ## Purpose
@@ -30,6 +31,88 @@ Top-level PXOS surfaces must pass:
 
 Reject future UI concepts that use vertical stacks of generic cards as the
 primary structure for Today, Goals, Capture, Plan, or You.
+
+## Product Depth Definition
+
+Product Depth is not a new product mode. It is the rule that every meaningful
+secondary object has a home inside an existing surface.
+
+Allowed depth destinations:
+
+- Today: Step Detail, Step Session, closure/recovery, proof peek, source detail.
+- Goals: Goal Detail, Mission Control lanes, proof/history, alternate paths.
+- Capture: routing review, placement correction, grow-into-goal, source detail.
+- Plan: day/week shape, reflow decisions, pressure review, Life Shape detail.
+- You: grouped navigation, trust review, memory/data controls, setup defaults.
+- Cross-surface: receipts/history, proof detail, trust review, source detail,
+  privacy controls.
+
+Product Depth must never create a sixth destination. It must not create a
+generic dashboard, inbox, notes area, habit mode, chatbot surface, analytics
+tab, calendar clone, or project-management system.
+
+## Depth Ownership Contract
+
+Every future depth concept must name:
+
+- owning top-level surface;
+- owned drill-down, sheet, lane, or detail route;
+- primary object;
+- rollback path;
+- source/trust/proof boundary;
+- accessibility and cognitive-load evidence;
+- ME owner-file gate if implementation touches large UI/service files;
+- CS gate if it touches routes, raw values, deep links, widgets, App Intents,
+  import/export, persistence, or compatibility seams;
+- AOS gate if it touches recommendation, source truth, proof, alternate path,
+  adaptation, reality drift, commitment time, or runtime logic.
+
+If ownership is unclear, the concept is not ready.
+
+## Product Depth Start Boundary
+
+PX14 defines future Product Depth drill-down architecture only. It does not
+start the `PD01-PD18 Product Depth Train`, does not authorize implementation,
+and does not make PD01 selectable without its required approval phrase and
+global gates.
+
+The PD train may start only when:
+
+- `Start Product Depth Train` is explicitly satisfied or global preauthorization
+  and the selected PD batch's gates explicitly allow it;
+- PX14 is Green;
+- PX18 implementation-readiness reorder is Green;
+- affected ME and CS gates are identified and Green or accepted Yellow;
+- affected AOS gates are Green when runtime/intelligence/proof/source-truth
+  logic is touched;
+- REC release-claim boundaries remain Green.
+
+## Anti-Sprawl Tests
+
+Future Product Depth work is Red if it:
+
+- adds a new top-level tab;
+- makes a top-level surface a detail archive;
+- uses stacked same-size cards as the primary top-level structure;
+- creates a generic dashboard or analytics wall;
+- creates a chat-first surface;
+- creates an inbox, notes app, habit tracker, calendar clone, or enterprise
+  project-management mode;
+- bypasses ME/CS gates to implement faster;
+- hides proof, source, privacy, or recovery detail without an owned route.
+
+## Acceptance Tests For Future Depth Prompts
+
+Each depth prompt must answer:
+
+- What surface owns this?
+- What object becomes deeper?
+- What stays on the top-level surface?
+- What moves into drill-down?
+- What proof/source/trust detail is visible or inspectable?
+- What is the rollback path?
+- Which ME/CS/AOS gates apply?
+- What validation proves the top-level orientation rule stayed intact?
 
 ## Required Source Stack
 

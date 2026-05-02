@@ -16,7 +16,7 @@ Date: 2026-05-02
 - PX11 is complete as Onboarding Setup future-canon work.
 - PX12 is complete as Accessibility Cognitive Load Emotional Safety future-canon work.
 - PX13 is complete as Empty Edge Degraded States future-canon work.
-- PX14 depends on PX01-PX13.
+- PX14 is complete as Product Depth Drilldown Architecture future-canon work.
 - PX15 depends on PX02-PX08 and PX14.
 - PX16 depends on AmbitionsOS recommendation, source-truth, privacy, and PX09.
 - PX17 depends on REC boundaries and PX09.
