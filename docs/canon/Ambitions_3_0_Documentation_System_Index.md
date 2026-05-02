@@ -369,3 +369,7 @@ This registry exists for handoff and orphan-scan clarity. The table above explai
 - `docs/canon/Ambitions_3_0_SwiftUI_State_Contract_Architecture_Standard.md`
 - `docs/canon/Ambitions_3_0_Feature_Boundary_And_File_Size_Constitution.md`
 - `docs/canon/Ambitions_3_0_State_Projection_Extraction_Rules.md`
+
+## AmbitionsOS Future Canon
+
+AmbitionsOS future canon lives under Beyond 3.0 and is not current implementation truth. Start from `AmbitionsOS_Index.md`, `AmbitionsOS_Core_Architecture.md`, `AmbitionsOS_Runtime_Contract.md`, the AOS train-control docs, and the Beyond 3.0 roadmap before any AOS/ME/CS future train.

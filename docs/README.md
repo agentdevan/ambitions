@@ -178,3 +178,7 @@ Historical docs remain useful only when labeled as archive, supporting context, 
 ## Batch Train Orchestrator
 
 Ambitions 3.0 batch trains are governed by [codex/AMBITIONS_3_0_BATCH_TRAIN_ORCHESTRATOR.md](codex/AMBITIONS_3_0_BATCH_TRAIN_ORCHESTRATOR.md). The active completion train is [codex/batch-trains/F17_F30_FAANG_HANDOFF_COMPLETION_TRAIN.md](codex/batch-trains/F17_F30_FAANG_HANDOFF_COMPLETION_TRAIN.md). F17 repair, F18, F19, F20, F21/F21.5, F22, F22.5, F22.7, F23, F24, F25, and F26 are Green by current train evidence. FAANG handoff remains PARTIAL unless the F27 handoff gate is explicitly re-run and passes.
+
+## AmbitionsOS Future Canon
+
+AmbitionsOS future-canon docs are indexed from [canon/AmbitionsOS_Index.md](canon/AmbitionsOS_Index.md). They consolidate future life-intelligence architecture and AOS/ME/CS train planning without changing current app behavior or release claims.

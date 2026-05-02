@@ -1,26 +1,27 @@
 # Current Run State
 
-- current task: F30 Beyond 3.0 Continuation Plan
-- task size: XL release / architecture / product quality train
-- active mode: F30 Green; train complete at F30 closeout commit
-- active train: F17-F30 FAANG Handoff Completion Train
-- active batch: F30 Beyond 3.0 Continuation Plan
-- active standard: 3.0-as-baseline / human-made active repo
-- active primitive: Release / Market Proof System, Ambitions Operating Shell, product language, repo hygiene, handoff readiness
-- active surface: Beyond 3.0 roadmap, final train closeout, continuity and risk sequencing
-- active context pack: Ambitions 3.0 source stack, Batch Train Orchestrator, baseline policy, human-made codebase standard, active history archive policy, release readiness, handoff gate, UI Test Contract, F21/F21.5 reports, F22 report, Batch Registry, Context Index
-- active skill: repo-truth-enforcer, ios-qa-regression-checker, release-hardening
-- active operations: gated release train closeout; F30 continuity planning completed; Green/Yellow/Red stop discipline
-- active validation pack: continuity doc consistency, active-doc truth check, F27/F29 evidence linkage, diff check
-- docs read: README, docs README, canon README, AGENTS, 3.0 source override, front-end redesign index, rebuild operating model, documentation system index, primitive architecture, product language system, repo hygiene policy, release readiness gates, FAANG handoff gate, SwiftUI architecture standard, feature boundary constitution, UI Test Contract, train prompt, train manifest, Batch Registry, Context Index, F21 and F21.5 reports
-- files allowed: `README.md`, `AGENTS.md`, `docs/**`, `.codex/reports/**`, `Native/**`, `AppUI/**`, `Sources/**`
-- files forbidden: `.github/workflows/**`, runtime dependency manifests, generated output, broad behavior changes, release readiness claims without F27 evidence
-- files touched: F30 roadmap and final closeout docs, active docs index, run-state files, Context Index, Batch Registry, train manifest
-- decisions made: F30 started only after F29 was committed and pushed; F30 is docs/planning-only and does not start future implementation work; train stops after F30 closeout push
-- tests run: `scripts/build-local.sh` passed before the F27/F28 rebaseline; latest `scripts/test-local.sh` passed 779 unit tests and 29/29 UI tests; focused rerun of `testGoalDetailTrustAndMemoryDisclosureStayBelowStrategicLayer` passed; focused shell/bootstrap transition proof passed; F30 `git diff --check` passed; F30 active stale-status scan returned no matches; F30 `scripts/run-doc-qa.sh || true` completed with known advisory backlog and lychee 0 errors
-- failures: none in the latest F27 rerun; no critical F27.5 maintainability blocker found; advisory doc QA and architecture-scan backlog remain accepted Yellow background
-- accepted Yellow: pre-existing markdownlint backlog; pre-existing historical docs clearly marked archive/supporting; pre-existing architecture warnings not assessed in F22.5; compatibility seams intentionally preserved; physical-device proof unavailable with no physical-device claim
-- open risks: markdownlint backlog, large-file architecture risks, physical-device proof unavailable, platform-rendered external surfaces unverified
-- next phase: push F30 closeout, then stop the train complete
-- stop conditions: build failure, focused validation failure, forbidden file touch, runtime dependency addition, workflow touch, untrustworthy validation, active source-truth old-canon ambiguity, generated junk committed, commit/push failure
-- last checkpoint: F30 roadmap and final closeout report completed Green
+Active batch: AmbitionsOS Future-Canon Integration
+Scope: docs/protocol/roadmap only
+Date: 2026-05-01
+Branch: main
+
+## Current Truth
+
+- F17-F30 FAANG Handoff Completion Train: complete and Green by current train evidence.
+- Beyond 3.0 path: Future-canon authoring with Lane 2, Lane 3, and Lane 5 planning folded in.
+- Planning gate result: YELLOW, safe only as docs/protocol/canon changes with file-count consolidation.
+- File manifest summary: AmbitionsOS parent/kernel docs, AOS/ME/CS train controls and prompts, skills, review boards, evidence/traceability protocols, consolidated catalogs, indexes, and audit reports.
+
+## Boundaries
+
+- No app behavior implemented.
+- No production Swift refactor performed.
+- No compatibility seam retired.
+- No dependencies added.
+- No workflow changes.
+- No release claim added.
+- No post-train implementation begins automatically.
+
+## Validation Plan
+
+Run git status, doc QA advisory, batch train gate advisory, SwiftUI architecture advisory, local build advisory, diff check, forbidden claim scans, and document skipped advisory scripts because this batch consolidated scripts as proposed rather than executable.

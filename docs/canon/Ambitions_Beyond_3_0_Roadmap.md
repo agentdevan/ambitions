@@ -154,3 +154,22 @@ behavior.
 - No silent memory or personalization behavior.
 - No App Store/TestFlight/release-readiness claim by implication.
 - No broad historical rewrite or deletion without archive-policy approval.
+
+## AmbitionsOS Future-Canon Authoring Path
+
+AmbitionsOS is added as a future-canon continuation plan under this roadmap. It is not current implementation truth, does not supersede Ambitions 3.0 by implication, does not create release approval, and does not start implementation automatically.
+
+AmbitionsOS consolidates pending Goal Intelligence, Path Requirements, Path Evolution, Life Commitments, Daily Operating System, Calendar/Reminders replacement strategy, offline-first, source-truth, privacy, performance, local/on-device intelligence boundaries, maintainability extraction planning, compatibility seam retirement planning, and Codex OS continuity under one parent architecture:
+
+- `docs/canon/AmbitionsOS_Index.md`
+- `docs/canon/AmbitionsOS_Core_Architecture.md`
+- `docs/canon/AmbitionsOS_Runtime_Contract.md`
+- `docs/codex/AMBITIONSOS_AOS_TRAIN_CONTROL_SYSTEM.md`
+
+Lane 2 now points to `docs/canon/Ambitions_Beyond_3_0_Maintainability_Extraction_Plan.md` and `docs/codex/batch-trains/ME01_ME12_MAINTAINABILITY_EXTRACTION_TRAIN.md`.
+
+Lane 3 now points to `docs/canon/Ambitions_Beyond_3_0_Compatibility_Seam_Retirement_Plan.md` and `docs/codex/batch-trains/CS01_CS10_COMPATIBILITY_SEAM_RETIREMENT_TRAIN.md`.
+
+Lane 5 now points to `docs/codex/AMBITIONS_CODEX_OS_CONTINUITY_PROTOCOL.md`, AmbitionsOS evidence/traceability protocols, reusable skills, review boards, and train-control assets.
+
+AOS implementation is future-only through `docs/codex/batch-trains/AOS01_AOS30_AMBITIONSOS_LOCAL_INTELLIGENCE_TRAIN.md`. The next post-F30 path remains a user decision: Release Evidence Closure, Maintainability Extraction, Compatibility Seam Retirement, Product Depth, or AOS implementation.

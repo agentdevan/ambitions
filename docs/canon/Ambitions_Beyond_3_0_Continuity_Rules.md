@@ -36,3 +36,7 @@ Archive superseded docs only after active indexes link replacements. Do not dele
 ## Compatibility
 
 Future migrations should preserve working behavior until replacements are implemented, tested, and traceable.
+
+## AmbitionsOS Future Canon Continuity
+
+AmbitionsOS canon is future guidance under Beyond 3.0. It must not supersede Ambitions 3.0 unless a future source-of-truth override explicitly says so. AOS, ME, and CS trains remain future-only until explicitly approved, gated, validated, committed, and evidence-bound.

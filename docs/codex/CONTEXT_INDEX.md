@@ -128,3 +128,19 @@ Batch-train execution uses `docs/codex/AMBITIONS_3_0_BATCH_TRAIN_ORCHESTRATOR.md
 - `docs/audits/ambitions-3-0-f28-faang-handoff-repair-report.md`
 - `docs/audits/ambitions-3-0-f29-final-handoff-package-engineer-onboarding-report.md`
 - `docs/audits/ambitions-3-0-final-train-closeout-report.md`
+
+## AmbitionsOS Future Canon Context
+
+Use this context when the user explicitly chooses AmbitionsOS, AOS, Maintainability Extraction, Compatibility Seam Retirement, or Codex OS Continuity after F30:
+
+- `docs/canon/AmbitionsOS_Index.md`
+- `docs/canon/AmbitionsOS_Core_Architecture.md`
+- `docs/canon/AmbitionsOS_Runtime_Contract.md`
+- `docs/canon/Ambitions_Beyond_3_0_Maintainability_Extraction_Plan.md`
+- `docs/canon/Ambitions_Beyond_3_0_Compatibility_Seam_Retirement_Plan.md`
+- `docs/codex/AMBITIONSOS_AOS_TRAIN_CONTROL_SYSTEM.md`
+- `docs/codex/batch-trains/AOS01_AOS30_AMBITIONSOS_LOCAL_INTELLIGENCE_TRAIN.md`
+- `docs/codex/batch-trains/ME01_ME12_MAINTAINABILITY_EXTRACTION_TRAIN.md`
+- `docs/codex/batch-trains/CS01_CS10_COMPATIBILITY_SEAM_RETIREMENT_TRAIN.md`
+
+AmbitionsOS is future canon, not current app implementation truth. Do not start future trains automatically.

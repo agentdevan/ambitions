@@ -69,3 +69,12 @@ The FAANG-team operating upgrade is indexed from:
 Use `docs/codex/AMBITIONS_3_0_BATCH_TRAIN_ORCHESTRATOR.md` plus the artifacts in this directory for gated Ambitions 3.0 batch trains. F03.5, F13.5, and F16.5 are architecture checkpoint prompts; do not skip them when their triggers fire.
 
 Active completion train: [batch-trains/F17_F30_FAANG_HANDOFF_COMPLETION_TRAIN.md](batch-trains/F17_F30_FAANG_HANDOFF_COMPLETION_TRAIN.md). F17 through F28 are Green by current train evidence. F27.5 Human-Made Codebase Maintainability Audit is the active checkpoint; F29/F30 remain blocked until F27.5 is Green.
+
+## AmbitionsOS Future Trains
+
+- [AOS Train Control System](AMBITIONSOS_AOS_TRAIN_CONTROL_SYSTEM.md)
+- [AOS01-AOS30 Train](batch-trains/AOS01_AOS30_AMBITIONSOS_LOCAL_INTELLIGENCE_TRAIN.md)
+- [ME01-ME12 Train](batch-trains/ME01_ME12_MAINTAINABILITY_EXTRACTION_TRAIN.md)
+- [CS01-CS10 Train](batch-trains/CS01_CS10_COMPATIBILITY_SEAM_RETIREMENT_TRAIN.md)
+
+These trains are future-only and must not run automatically after canon authoring.

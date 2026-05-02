@@ -170,3 +170,14 @@ Historical docs are context only and do not override Ambitions 3.0.
 - [SwiftUI State Contract Architecture Standard](./Ambitions_3_0_SwiftUI_State_Contract_Architecture_Standard.md)
 - [Feature Boundary And File Size Constitution](./Ambitions_3_0_Feature_Boundary_And_File_Size_Constitution.md)
 - [State Projection Extraction Rules](./Ambitions_3_0_State_Projection_Extraction_Rules.md)
+
+## AmbitionsOS Future Canon
+
+- [AmbitionsOS Index](AmbitionsOS_Index.md)
+- [AmbitionsOS Core Architecture](AmbitionsOS_Core_Architecture.md)
+- [AmbitionsOS Runtime Contract](AmbitionsOS_Runtime_Contract.md)
+- [AmbitionsOS Strategy SWOT And Risk Register](AmbitionsOS_Strategy_SWOT_And_Risk_Register.md)
+- [Maintainability Extraction Plan](Ambitions_Beyond_3_0_Maintainability_Extraction_Plan.md)
+- [Compatibility Seam Retirement Plan](Ambitions_Beyond_3_0_Compatibility_Seam_Retirement_Plan.md)
+
+These are future-canon planning docs under Beyond 3.0. They do not claim current app implementation or release readiness.
