@@ -20,7 +20,7 @@ Date: 2026-05-02
 - PX15 is complete as Cross Surface Continuity future-canon work.
 - PX16 is complete as User Facing AI Trust And Recommendation Copy future-canon work.
 - PX17 is complete as Release Truth Product Messaging future-canon work.
-- PX18 depends on PX01-PX17 and must run before any PXOS implementation lane.
+- PX18 is complete as a recurring implementation-readiness reorder gate and must rerun before any PXOS implementation lane.
 - PX19 depends on PX18.
 - PX20 depends on PX19 or explicit user decision.
 

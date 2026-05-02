@@ -1,9 +1,9 @@
 # Current Batch Train State
 
 Active train: PXOS future-canon train
-Active batch: none; PX17 complete and PX18 next eligible pending dry-run selection
+Active batch: none; PX18 complete and PX19 next eligible pending dry-run selection
 Current out-of-train task: none
-Scope: PX17 Release Truth Product Messaging future-canon surface complete; PXOS implementation not started; Product Depth train not started; AmbitionsOS implementation not started
+Scope: PX18 PXOS Implementation Readiness Reorder recurring gate complete; PXOS implementation not started; Product Depth train not started; AmbitionsOS implementation not started
 Date: 2026-05-02
 
 ## Baseline
@@ -12,11 +12,11 @@ F17-F30 FAANG Handoff Completion Train is complete and Green by current train ev
 
 ## Active Train Truth
 
-Release Evidence Closure is complete through REC06 as an evidence/status train. PX01-PX17 are complete as future PXOS canon. Human/operator proof remains pending and blocks any release-posture upgrade.
+Release Evidence Closure is complete through REC06 as an evidence/status train. PX01-PX18 are complete as future PXOS canon. Human/operator proof remains pending and blocks any release-posture upgrade.
 
 ## PXOS Status
 
-PXOS future canon and train-control docs exist. PX01-PX17 are complete under current global preauthorization. PXOS implementation is not started, Product Depth is not started, AmbitionsOS implementation is not started, release readiness is not claimed, and future PXOS docs batches remain future-canon only until they produce evidence.
+PXOS future canon and train-control docs exist. PX01-PX18 are complete under current global preauthorization. PXOS implementation is not started, Product Depth is not started, AmbitionsOS implementation is not started, release readiness is not claimed, and future PXOS docs batches remain future-canon only until they produce evidence.
 
 ## Prompt Hardening Status
 
@@ -25,9 +25,9 @@ release proof plan. REC03 produced the validation log ledger. REC04 corrected
 claim-copy guard status wording. REC05 produced the human review packet. REC06
 produced the release evidence closure handoff. PX15 produced cross-surface
 continuity canon. PX16 produced user-facing intelligence/recommendation
-expression canon. PX17 produced release-safe product messaging canon. PX18-PX20
-prompts remain queued/blocked future-canon prompts until selected by global
-dry-run.
+expression canon. PX17 produced release-safe product messaging canon. PX18
+produced the recurring implementation-readiness reorder gate. PX19-PX20 prompts
+remain queued/blocked future-canon prompts until selected by global dry-run.
 
 ## Product Depth Formalization Status
 
@@ -38,7 +38,7 @@ Product Depth is formalized as a queued/blocked PD01-PD18 train with required ap
 Ambitions 4.0 is the active post-3.0 execution program, not a shipped product
 version. The global order started with 95 formal batches: REC02-REC06,
 PX01-PX20, ME01-ME12, CS01-CS10, PD01-PD18, and AOS01-AOS30. REC02-REC06 and
-PX01-PX17 are complete; 73 formal batches remain queued/blocked or future-selected.
+PX01-PX18 are complete; 72 formal batches remain queued/blocked or future-selected.
 
 ## Boundaries
 
@@ -49,7 +49,7 @@ planned human/operator proof only; it did not perform or claim proof. REC03
 indexed logs and proof gaps only; it did not rerun app validation or claim
 release/platform proof. REC04 guarded release/status copy only; it did not claim
 release/platform proof. REC05 created a human review packet only; it did not
-perform human proof or claim approval/readiness. REC06 created a closure handoff only; it did not claim release readiness. PX01-PX17 created future canon only; they did not implement PXOS, AmbitionsOS, Product Depth, model/runtime behavior, personalization proof, release readiness, platform readiness, or change app behavior.
+perform human proof or claim approval/readiness. REC06 created a closure handoff only; it did not claim release readiness. PX01-PX18 created future canon/gate evidence only; they did not implement PXOS, AmbitionsOS, Product Depth, model/runtime behavior, personalization proof, release readiness, platform readiness, or change app behavior.
 
 ## Continuation Rule
 
