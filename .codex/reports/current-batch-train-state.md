@@ -38,7 +38,7 @@ No product behavior expansion. No visual redesign. No compatibility seam retired
 
 ## Validation Result
 
-CS02B is PASS WITH YELLOW pending commit/push evidence:
+CS02B is PASS WITH YELLOW with commit/push evidence:
 
 - CS02A touched only docs/status files and did not edit tests or app code.
 - CS02A created Profile/You seam inventory, compatibility contract ledger, and accessibility identifier ledger.
@@ -46,6 +46,7 @@ CS02B is PASS WITH YELLOW pending commit/push evidence:
 - CS02B touched focused app shell/external routing tests and a report only; no production Swift was edited.
 - CS02B focused app shell and external routing tests passed `54` tests with `0` failures.
 - CS02B proves `AppTab(rawValue: "profile")`, `profile` payloads, `ambitions://tab/profile`, stored `.profile` preferred tab, and Insights payload tab values remain compatible while `.profile.title` displays `You`.
+- CS02B commit evidence: `b180e782`.
 - CS02C is deferred as accepted Yellow; the Profile seam is not claimed retired.
 
 Previous CS08 evidence remains:

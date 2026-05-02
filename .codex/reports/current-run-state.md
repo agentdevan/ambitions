@@ -48,7 +48,7 @@ Branch: main
 
 ## Current Validation Result
 
-CS02B validation is PASS WITH YELLOW pending commit/push evidence. Focused app shell and external routing tests passed `54` tests with `0` failures, proving old `profile` raw/default/external route compatibility and visible `You` display can coexist. CS02C remains deferred as accepted Yellow; the Profile seam is not claimed retired.
+CS02B validation is PASS WITH YELLOW with commit/push evidence `b180e782`. Focused app shell and external routing tests passed `54` tests with `0` failures, proving old `profile` raw/default/external route compatibility and visible `You` display can coexist. CS02C remains deferred as accepted Yellow; the Profile seam is not claimed retired.
 
 Verified:
 

@@ -1,6 +1,6 @@
 # CS02B Profile Compatibility And You Surface Naming Report
 
-Status: CS02B complete pending commit SHA.
+Status: CS02B complete with commit evidence.
 Date: 2026-05-02
 
 ## Batch
@@ -84,4 +84,4 @@ evidence and the global train may dry-run the next eligible CS batch.
 
 ## Commit SHA
 
-Pending CS02B commit.
+CS02B commit: `b180e782`.
