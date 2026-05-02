@@ -1,12 +1,13 @@
 # PX12 Accessibility Cognitive Load Emotional Safety Prompt
 <!-- markdownlint-disable MD013 -->
 
-Status: Queued Ambitions 4.0 future-canon batch; not implemented; blocked pending `Start PXOS Future-Canon Train`.
+Status: Complete Ambitions 4.0 future-canon batch; not implemented app behavior.
 
 ## Purpose
 
-Advance Accessibility Cognitive Load Emotional Safety for PXOS without implementing app behavior or inventing product
-direction beyond locked source truth.
+Advance Accessibility Cognitive Load Emotional Safety for PXOS without
+implementing app behavior or inventing product direction beyond locked source
+truth.
 
 ## Source Truth Files To Read First
 
@@ -47,7 +48,8 @@ applied. Open or deferred decisions must be recorded and not silently resolved.
 
 ## Exact Surface Ownership
 
-Owner: accessibility/cognitive load. Boundary: Accessibility and emotional safety canon only.
+Owner: accessibility/cognitive load. Boundary: Accessibility and emotional
+safety canon only.
 
 ## Batch-Specific Deliverables
 
@@ -108,9 +110,10 @@ changed, no unsupported claim, and validation is clean or advisory-only.
 Yellow: doc QA/tooling backlog or an open future decision is classified and does
 not affect current implementation truth.
 
-Red: product direction invented, PXOS marked started/complete, app code touched,
-release/platform claim added, AOS/ME/CS/REC02 started, top-level tab changed, stacked-card top-level composition accepted, or
-validation failure unclassified.
+Red: product direction invented, PXOS marked implemented, app code touched,
+release/platform claim added, AOS/ME/CS/REC02 started, top-level tab changed,
+stacked-card top-level composition accepted, or validation failure
+unclassified.
 
 ## Stop Conditions
 
@@ -144,6 +147,7 @@ next named gate.
 
 ## Next Safe Prompt / Path
 
-Use the next direct PX prompt only after the train has been explicitly started
-with `Start PXOS Future-Canon Train`, this batch is Green, committed, pushed,
-and no Yellow/Red gate blocks continuation.
+Use the next direct PX prompt only after this batch is Green, committed, pushed,
+the next dry-run says `Execution allowed: YES`, and no Yellow/Red gate blocks
+continuation. The current global Ambitions 4.0 preauthorization may satisfy
+routine PXOS train continuation, but it does not replace proof or gates.
