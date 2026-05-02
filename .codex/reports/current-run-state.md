@@ -5,7 +5,7 @@
 Active train: ME maintainability extraction train selected by global sequence
 Active batch: ME06 ProfileFeatureService Extraction dry-run pending
 Current out-of-train task: none
-Scope: ME01 Maintainability Baseline And Ownership Map complete; ME08 Shared Projector State Helper Standards complete; ME10 Architecture Scan Gate complete; ME02 GoalsFeatureService extraction complete; ME03 TodayFeatureService extraction complete; ME04 TodayPanels extraction complete; ME05 PlanFeatureService extraction complete with commit evidence; PXOS implementation not started; CS/Signature Interface/Product Depth/AmbitionsOS trains not started
+Scope: ME01 Maintainability Baseline And Ownership Map complete; ME08 Shared Projector State Helper Standards complete; ME10 Architecture Scan Gate complete; ME02 GoalsFeatureService extraction complete; ME03 TodayFeatureService extraction complete; ME04 TodayPanels extraction complete; ME05 PlanFeatureService extraction complete with commit/push evidence; PXOS implementation not started; CS/Signature Interface/Product Depth/AmbitionsOS trains not started
 Date: 2026-05-02
 Branch: main
 
@@ -24,7 +24,7 @@ Branch: main
 - ME02: complete as behavior-preserving Goals service extraction.
 - ME03: complete as behavior-preserving Today service extraction.
 - ME04: complete as behavior-preserving TodayPanels extraction with commit/push evidence.
-- ME05: complete as behavior-preserving PlanFeatureService extraction with commit evidence.
+- ME05: complete as behavior-preserving PlanFeatureService extraction with commit/push evidence.
 - ME06-ME07, ME09, ME11-ME12: queued/blocked and not started.
 - CS/SI/Product Depth/AOS: queued/blocked and not started.
 - Global order: 113 formal batches after SI insertion; 81 remain after ME05 commit.
@@ -40,7 +40,7 @@ Branch: main
 
 ## Current Validation Result
 
-ME05 validation is PASS WITH YELLOW before commit.
+ME05 validation is PASS WITH YELLOW after commit/push.
 
 Verified:
 

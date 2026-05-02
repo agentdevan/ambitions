@@ -404,7 +404,8 @@ These batches are complete for planning purposes. They remain as historical cont
 | ME01 Maintainability Baseline And Ownership Map | Completed / audit-only | Created the Lane 2 ownership map and risk baseline. No extraction run. |
 | ME08 Shared Projector State Helper Standards | Completed / audit-only | Created shared projector/state/helper standards and corrected the stale Plan projector assumption. No extraction run. |
 | ME10 Architecture Scan Gate | Completed / audit-only | Converted the architecture scan into a recurring ME gate. No extraction run. |
-| ME02-ME07, ME09, ME11-ME12 Maintainability Extraction Train | Queued / Blocked | Requires current global preauthorization or `Start ME Train` and Green predecessor gates. |
+| ME02-ME05 Maintainability Extraction Evidence | Completed / extraction | ME02-ME05 are complete as behavior-preserving extraction evidence with focused validation. |
+| ME06-ME07, ME09, ME11-ME12 Maintainability Extraction Train | Queued / Blocked | Requires current global preauthorization or `Start ME Train` and Green predecessor gates. |
 | CS01-CS10 Compatibility Seam Retirement Train | Queued / Blocked | Requires `Start CS Train` and Green predecessor gates. |
 | SI01-SI18 Signature Interface Implementation Train | Queued / Blocked | Formal Signature Interface train. Requires global-order selection or `Start Signature Interface Train`, PXOS completion, relevant ME/CS gates, and SI visual quality gates. |
 | PD01-PD18 Product Depth Train | Queued / Blocked | Formal Product Depth train. Requires exact approval phrase `Start Product Depth Train`, PXOS Product Depth gates, relevant ME/CS/SI gates, and AOS blockers when runtime logic is touched. |
@@ -420,7 +421,8 @@ These batches are complete for planning purposes. They remain as historical cont
 | ME01 Maintainability Baseline And Ownership Map | Completed / audit-only | Planning baseline complete; no extraction run in this pass. |
 | ME08 Shared Projector State Helper Standards | Completed / audit-only | Standards baseline complete; no extraction run in this pass. |
 | ME10 Architecture Scan Gate | Completed / audit-only | Recurring architecture gate complete; no extraction run in this pass. |
-| ME02-ME07, ME09, ME11-ME12 Maintainability Extraction Train | Queued / Blocked | Planning/extraction sequence remains queued; no extraction run in this pass. |
+| ME02-ME05 Maintainability Extraction Evidence | Completed / extraction | ME02-ME05 are complete as behavior-preserving extraction evidence. |
+| ME06-ME07, ME09, ME11-ME12 Maintainability Extraction Train | Queued / Blocked | Remaining planning/extraction sequence is queued; no later ME extraction has run in this pass. |
 | CS01-CS10 Compatibility Seam Retirement Train | Queued / Blocked | Planning only; no seam retired in this pass. |
 | Product Experience OS / PXOS | Queued / Blocked future canon | User-facing future experience canon in Ambitions 4.0. Does not claim implementation. |
 | Product Depth / PD01-PD18 | Queued / Blocked | Deepens Today, Goals, Capture, Plan, and You through drill-downs and proof/review/setup depth. Does not add top-level destinations or claim implementation. |
