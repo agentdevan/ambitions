@@ -81,7 +81,7 @@ For non-trivial work, read in this order:
 
 ## Batch Train Context
 
-Batch-train execution uses `docs/codex/AMBITIONS_3_0_BATCH_TRAIN_ORCHESTRATOR.md`, `docs/codex/batch-trains/README.md`, `.codex/reports/current-batch-train-state.md`, and the matching validation/operation packs. F03.5, F13.5, and F16.5 are complete. The F17-F30 train is complete by current train evidence. After the 2026-05-02 pre-train hardening pass, Release Evidence Closure is active at REC01; REC02-REC06, PXOS, ME, CS, Product Depth, and AOS are queued/blocked under the Ambitions 4.0 Execution Program.
+Batch-train execution uses `docs/codex/AMBITIONS_3_0_BATCH_TRAIN_ORCHESTRATOR.md`, `docs/codex/batch-trains/README.md`, `.codex/reports/current-batch-train-state.md`, and the matching validation/operation packs. F03.5, F13.5, and F16.5 are complete. The F17-F30 train is complete by current train evidence. After the 2026-05-02 pre-train hardening pass, Release Evidence Closure is active; REC02 is complete, REC03-REC06 remain queued/blocked, and PXOS, ME, CS, Product Depth, and AOS are queued/blocked under the Ambitions 4.0 Execution Program.
 
 ## Ambitions 4.0 Global Batch Execution Context
 
@@ -97,7 +97,7 @@ Use this context before selecting any queued cross-train batch after REC01:
 - `GLOBAL_BATCH_FAANG_QUALITY_BAR.md`
 - `../audits/global-future-batch-sequencing-report.md`
 
-These files define Ambitions 4.0 order, gates, repair loops, continuation, validation strength, and quality bars only. They do not start REC02, PXOS, ME, CS, AOS, Product Depth, app implementation, release readiness, or human-proof work.
+These files define Ambitions 4.0 order, gates, repair loops, continuation, validation strength, and quality bars only. They do not start REC03, PXOS, ME, CS, AOS, Product Depth, app implementation, release readiness, or human-proof work.
 
 ## Handoff Package
 
@@ -192,7 +192,7 @@ Use this context when the user explicitly chooses PXOS or future user-facing pro
 - `docs/codex/PXOS_PRODUCT_DECISION_LEDGER.md`
 - `docs/codex/batch-trains/PX01_PX20_PRODUCT_EXPERIENCE_OS_TRAIN.md`
 
-PXOS is future canon for user-facing experience, not current app implementation. PXOS train starts only if the user says exactly `Start PXOS Future-Canon Train`. REC01 remains active; REC02, AOS, ME, CS, Product Depth, and PXOS implementation remain queued/blocked and not started until explicitly approved by their gates.
+PXOS is future canon for user-facing experience, not current app implementation. PXOS train starts only when global order, preauthorization, and PXOS gates allow it. REC02 is complete as release-proof planning; REC03-REC06, AOS, ME, CS, Product Depth, and PXOS implementation remain queued/blocked and not started until their gates allow execution.
 
 
 ## Product Depth Queued Train Context

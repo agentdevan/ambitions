@@ -1,9 +1,9 @@
 # Current Batch Train State
 
 Active train: Release Evidence Closure
-Active batch: REC02 Human Operator Release Proof Plan
+Active batch: none; REC02 complete and REC03 next eligible
 Current out-of-train task: none
-Scope: REC02 docs/evidence proof planning only
+Scope: REC02 docs/evidence proof planning complete; REC03 dry-run pending
 Date: 2026-05-02
 
 ## Baseline
