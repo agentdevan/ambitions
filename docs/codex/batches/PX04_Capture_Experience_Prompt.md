@@ -1,7 +1,7 @@
 # PX04 Capture Experience Prompt
 <!-- markdownlint-disable MD013 -->
 
-Status: Queued Ambitions 4.0 future-canon batch; not implemented; blocked pending `Start PXOS Future-Canon Train`.
+Status: Complete Ambitions 4.0 future-canon batch after PX04 evidence; app behavior not implemented.
 
 ## Purpose
 
@@ -107,7 +107,7 @@ changed, no unsupported claim, and validation is clean or advisory-only.
 Yellow: doc QA/tooling backlog or an open future decision is classified and does
 not affect current implementation truth.
 
-Red: product direction invented, PXOS marked started/complete, app code touched,
+Red: product direction invented, PXOS implementation marked started/complete, app code touched,
 release/platform claim added, AOS/ME/CS/REC02 started, top-level tab changed, stacked-card top-level composition accepted, or
 validation failure unclassified.
 
@@ -127,7 +127,7 @@ It may claim future PXOS canon or prompt work exists after commit.
 
 ## What This Batch Must Not Claim
 
-It must not claim PXOS implemented, shipped, active train started, release-ready,
+It must not claim PXOS implemented, shipped, release-ready,
 App Store ready, TestFlight ready, physical-device passed, platform integrated,
 AOS/ME/CS started, or REC02 started.
 
@@ -143,6 +143,6 @@ next named gate.
 
 ## Next Safe Prompt / Path
 
-Use the next direct PX prompt only after the train has been explicitly started
-with `Start PXOS Future-Canon Train`, this batch is Green, committed, pushed,
-and no Yellow/Red gate blocks continuation.
+Use the next direct PX prompt only after global/PXOS continuation rules allow
+it, this batch is Green or accepted Yellow, committed, pushed, and no Red gate
+blocks continuation.
