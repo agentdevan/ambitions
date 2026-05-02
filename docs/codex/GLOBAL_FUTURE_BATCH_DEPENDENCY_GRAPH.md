@@ -2,7 +2,7 @@
 
 <!-- markdownlint-disable MD013 -->
 
-Status: Ambitions 4.0 dependency graph; active through PX08 future-canon evidence
+Status: Ambitions 4.0 dependency graph; active through PX09 future-canon evidence
 Date: 2026-05-02
 
 ## Phase Map
@@ -32,7 +32,8 @@ Ambitions 4.0 is the active post-3.0 execution program, not a shipped product ve
 - PX06 is complete as You future-canon surface work.
 - PX07 is complete as Action Closure Recovery future-canon work.
 - PX08 is complete as Trust Proof Receipts future-canon work.
-- PX09-PX20 depend on PX01 and relevant completed PX surface canon.
+- PX09 is complete as Copy Language Explanation future-canon work.
+- PX10-PX20 depend on PX01 and relevant completed PX surface canon.
 - PX14 depends on PX02-PX13.
 - PX18 depends on PX01-PX17 and recurs before major implementation lanes.
 - ME01 depends on explicit approval phrase `Start ME Train`.
@@ -49,6 +50,7 @@ Ambitions 4.0 is the active post-3.0 execution program, not a shipped product ve
 
 - REC should precede PX17 and any public product messaging.
 - PX09 should precede most copy-bearing future implementation.
+- PX10 should follow PX09 before major visual implementation.
 - PX10 and PX12 should precede major UI implementation.
 - ME01/ME10 should precede any large SwiftUI/product-surface expansion.
 - CS01 should precede any user-facing terminology work that tempts internal seam deletion.
@@ -99,7 +101,7 @@ Ambitions 4.0 is the active post-3.0 execution program, not a shipped product ve
 
 Parallel work is disabled by default. It is allowed only after explicit approval, disjoint write sets, Green prerequisites, and one commit per batch.
 
-- PX02-PX08 are conceptually parallel-safe after PX01 because they are surface-canon docs, but serial is preferred unless a user explicitly authorizes parallel work.
+- PX02-PX09 are conceptually parallel-safe after PX01 because they are surface-canon docs, but serial is preferred unless a user explicitly authorizes parallel work.
 - ME02, ME03, ME05, and ME06 may be parallel-safe after ME01/ME08/ME10 if owner files are disjoint and tests are independent.
 - AOS10, AOS12, and AOS13 may be parallel-safe after AOS04 if contracts and write sets are disjoint.
 - AOS22 may be parallel-safe after AOS02/AOS12/AOS13 if it does not touch the same owner files as active work.

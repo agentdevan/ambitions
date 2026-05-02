@@ -1,7 +1,7 @@
 # PX01-PX20 Product Experience OS Train
 <!-- markdownlint-disable MD013 -->
 
-Status: PXOS future-canon train active through PX08 only; PXOS implementation not started.
+Status: PXOS future-canon train active through PX09 only; PXOS implementation not started.
 Train type: queued future-canon and later implementation-readiness train
 Date: 2026-05-02
 
@@ -58,7 +58,7 @@ ordering, REC closure, F30 being complete, or mentioning PXOS in a prompt.
 - PX06: You Personal System Center. Owner: You. Boundary: You experience canon only. Status: complete after PX06 commit.
 - PX07: Action Closure Recovery Experience. Owner: cross-surface closure/recovery. Boundary: Action Closure and Recovery experience canon only. Status: complete after PX07 commit.
 - PX08: Trust Proof Receipts Experience. Owner: trust/proof/receipts. Boundary: Trust, proof, receipts experience canon only. Status: complete after PX08 commit.
-- PX09: Copy Language Explanation System. Owner: copy/explanation. Boundary: Copy and explanation canon only.
+- PX09: Copy Language Explanation System. Owner: copy/explanation. Boundary: Copy and explanation canon only. Status: complete after PX09 commit.
 - PX10: Visual Interaction System. Owner: visual/interaction. Boundary: Visual interaction canon only.
 - PX11: Onboarding Setup Experience. Owner: onboarding/setup. Boundary: Onboarding and setup canon only.
 - PX12: Accessibility Cognitive Load Emotional Safety. Owner: accessibility/cognitive load. Boundary: Accessibility and emotional safety canon only.
