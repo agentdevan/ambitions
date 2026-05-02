@@ -2,8 +2,8 @@
 
 Active train: Release Evidence Closure
 Active batch: REC01 Release Evidence Truth Inventory
-Current out-of-train task: PXOS Future-Canon Integration and Codex OS Upgrade
-Scope: docs/protocol/future-canon/Codex-process only
+Current out-of-train task: Global Future Batch Sequencing and Codex OS Orchestrator
+Scope: docs/protocol/planning/Codex-OS only
 Date: 2026-05-02
 Branch: main
 
@@ -31,4 +31,4 @@ Branch: main
 
 ## Current Validation Plan
 
-Run git status, diff check, PXOS file counts, PXOS/status/release/copy/drift scans, doc QA advisory, batch-train gate advisory, and changed-file boundary check. App build/test is skipped because app code is forbidden for this pass.
+Run git status, diff check, batch prompt counts, Product Depth scans, status/release/top-level-composition/repair-protocol/approval-phrase scans, doc QA advisory, batch-train gate advisory, and changed-file boundary check. App build/test is skipped because app code is forbidden for this pass.

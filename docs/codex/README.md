@@ -70,6 +70,19 @@ Use `docs/codex/AMBITIONS_3_0_BATCH_TRAIN_ORCHESTRATOR.md` plus the artifacts in
 
 Completed historical train: [batch-trains/F17_F30_FAANG_HANDOFF_COMPLETION_TRAIN.md](batch-trains/F17_F30_FAANG_HANDOFF_COMPLETION_TRAIN.md). F17 through F30 are Green by current train evidence. F27 remains PASS after the F28 repair/rebaseline, F27.5 completed with no critical maintainability blocker, F29 created the final engineer handoff package, and F30 created the Beyond 3.0 continuation plan and final closeout. Release Evidence Closure is the first active post-3.0 train after the 2026-05-02 pre-train hardening pass; AOS, ME, CS, and Product Depth remain future/not started.
 
+## Global Future Batch Controls
+
+- [Global Future Batch Execution Order](GLOBAL_FUTURE_BATCH_EXECUTION_ORDER.md)
+- [Global Future Batch Dependency Graph](GLOBAL_FUTURE_BATCH_DEPENDENCY_GRAPH.md)
+- [Global Future Batch Gate Matrix](GLOBAL_FUTURE_BATCH_GATE_MATRIX.md)
+- [Global Batch Execution Orchestrator](GLOBAL_BATCH_EXECUTION_ORCHESTRATOR.md)
+- [Global Batch Automated Gate Protocol](GLOBAL_BATCH_AUTOMATED_GATE_PROTOCOL.md)
+- [Global Batch Repair Loop Protocol](GLOBAL_BATCH_REPAIR_LOOP_PROTOCOL.md)
+- [Global Batch Continuation Protocol](GLOBAL_BATCH_CONTINUATION_PROTOCOL.md)
+- [Global Batch FAANG Quality Bar](GLOBAL_BATCH_FAANG_QUALITY_BAR.md)
+
+These controls define global order, automated gates, repair behavior, validation strength, and continuation rules. They are not approval to start REC02, PXOS, ME, CS, AOS, Product Depth, or any implementation train.
+
 ## AmbitionsOS Future Trains
 
 - [AOS Train Control System](AMBITIONSOS_AOS_TRAIN_CONTROL_SYSTEM.md)

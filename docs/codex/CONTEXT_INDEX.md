@@ -81,6 +81,22 @@ For non-trivial work, read in this order:
 
 Batch-train execution uses `docs/codex/AMBITIONS_3_0_BATCH_TRAIN_ORCHESTRATOR.md`, `docs/codex/batch-trains/README.md`, `.codex/reports/current-batch-train-state.md`, and the matching validation/operation packs. F03.5, F13.5, and F16.5 are complete. The active train manifest is `docs/codex/batch-trains/F17_F30_FAANG_HANDOFF_COMPLETION_TRAIN.md`; F27, F27.5, F28, F29, and F30 are Green. The train stops after the F30 closeout push. After the 2026-05-02 pre-train hardening pass, Release Evidence Closure is the first active post-3.0 train; AOS, ME, CS, and Product Depth remain future/not started.
 
+## Global Future Batch Execution Context
+
+Use this context before selecting any future cross-train batch after REC01:
+
+- `GLOBAL_FUTURE_BATCH_EXECUTION_ORDER.md`
+- `GLOBAL_FUTURE_BATCH_DEPENDENCY_GRAPH.md`
+- `GLOBAL_FUTURE_BATCH_GATE_MATRIX.md`
+- `GLOBAL_BATCH_EXECUTION_ORCHESTRATOR.md`
+- `GLOBAL_BATCH_AUTOMATED_GATE_PROTOCOL.md`
+- `GLOBAL_BATCH_REPAIR_LOOP_PROTOCOL.md`
+- `GLOBAL_BATCH_CONTINUATION_PROTOCOL.md`
+- `GLOBAL_BATCH_FAANG_QUALITY_BAR.md`
+- `../audits/global-future-batch-sequencing-report.md`
+
+These files define order, gates, repair loops, continuation, validation strength, and quality bars only. They do not start REC02, PXOS, ME, CS, AOS, Product Depth, app implementation, release readiness, or human-proof work.
+
 ## Handoff Package
 
 - `../handoff/Ambitions_3_0_FAANG_Engineer_Handoff.md`

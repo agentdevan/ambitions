@@ -2,8 +2,8 @@
 
 Active train: Release Evidence Closure
 Active batch: REC01 Release Evidence Truth Inventory
-Current out-of-train task: PXOS Future-Canon Integration and Codex OS Upgrade
-Scope: docs/protocol/future-canon/Codex-process only
+Current out-of-train task: Global Future Batch Sequencing and Codex OS Orchestrator
+Scope: docs/protocol/planning/Codex-OS only
 Date: 2026-05-02
 
 ## Baseline
@@ -12,11 +12,11 @@ F17-F30 FAANG Handoff Completion Train is complete and Green by current train ev
 
 ## Active Train Truth
 
-Release Evidence Closure remains the active first post-3.0 train at REC01. REC02 is not started. This PXOS integration task is not REC02 and does not complete REC01.
+Release Evidence Closure remains the active first post-3.0 train at REC01. REC02 is not started. This global sequencing task is not REC02 and does not complete REC01.
 
 ## PXOS Status
 
-PXOS future canon and train-control docs exist. PXOS train is future/inactive and starts only with the exact approval phrase `Start PXOS Future-Canon Train`.
+PXOS future canon and train-control docs exist. PXOS train is future/inactive and starts only with the exact approval phrase `Start PXOS Future-Canon Train`. Global sequencing docs may order future PXOS work but must not start it.
 
 ## Boundaries
 
