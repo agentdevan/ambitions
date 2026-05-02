@@ -7,8 +7,11 @@ Status: Future planning with CS01 registry evidence; no seam retired
 ## Current Evidence
 
 - CS01 Compatibility Seam Registry And Risk Map is complete as audit-only evidence.
+- CS07 External Route Widget AppIntent Compatibility Proof is complete as focused simulator/unit proof.
 - CS01 report: `docs/audits/cs01-compatibility-seam-registry-and-risk-map-report.md`.
+- CS07 report: `docs/audits/cs07-external-route-widget-appintent-compatibility-proof-report.md`.
 - No route, raw value, widget payload, App Intent payload, import/export payload, persistence/schema value, accessibility identifier, visible copy, test expectation, or Swift implementation was changed by CS01.
+- No seam was retired by CS07. CS07 does not prove physical-device, signed-archive, App Store Connect, rendered widget, notification-delivery, or App Shortcuts OS-visibility behavior.
 
 ## Candidate Seams
 

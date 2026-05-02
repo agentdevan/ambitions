@@ -3,9 +3,9 @@
 <!-- markdownlint-disable MD013 -->
 
 Active train: CS compatibility seam retirement train
-Active batch: CS01 Compatibility Seam Registry And Risk Map evidence in progress
+Active batch: CS07 External Route Widget AppIntent Compatibility Proof evidence in progress
 Current out-of-train task: none
-Scope: ME01-ME12 maintainability train complete with commit/push evidence; ME11 repair not triggered; PXOS implementation not started; CS01 selected by global order and run as docs-only compatibility audit; Signature Interface/Product Depth/AmbitionsOS trains not started
+Scope: ME01-ME12 maintainability train complete with commit/push evidence; ME11 repair not triggered; PXOS implementation not started; CS01 complete; CS07 selected by global order and run as focused compatibility proof; Signature Interface/Product Depth/AmbitionsOS trains not started
 Date: 2026-05-02
 
 ## Baseline
@@ -30,22 +30,25 @@ Product Depth is formalized as a queued/blocked PD01-PD18 train with required ap
 
 ## Ambitions 4.0 Status
 
-Ambitions 4.0 is the active post-3.0 execution program, not a shipped product version. The global order now has 113 formal batches after SI insertion: REC02-REC06, PX01-PX20, ME01-ME12, CS01-CS10, SI01-SI18, PD01-PD18, and AOS01-AOS30. REC02-REC06, PX01-PX20, ME01, ME08, ME10, ME02, ME03, ME04, ME05, ME06, ME07, ME09, ME12, and CS01 are complete after CS01 commit; 76 formal batches remain queued/blocked or future-selected.
+Ambitions 4.0 is the active post-3.0 execution program, not a shipped product version. The global order now has 113 formal batches after SI insertion: REC02-REC06, PX01-PX20, ME01-ME12, CS01-CS10, SI01-SI18, PD01-PD18, and AOS01-AOS30. REC02-REC06, PX01-PX20, ME01, ME08, ME10, ME02, ME03, ME04, ME05, ME06, ME07, ME09, ME12, CS01, and CS07 are complete after CS07 commit; 75 formal batches remain queued/blocked or future-selected.
 
 ## Boundaries
 
-No product behavior expansion. No visual redesign. No compatibility seam retired. No dependencies. No workflow changes. No release claim. CS01 is audit-only evidence; CS07-CS10, SI implementation, Product Depth, AOS, and PXOS implementation remain unstarted.
+No product behavior expansion. No visual redesign. No compatibility seam retired. No dependencies. No workflow changes. No release claim. CS01 is audit-only evidence; CS07 is focused simulator/unit proof; CS08-CS10, SI implementation, Product Depth, AOS, and PXOS implementation remain unstarted.
 
 ## Validation Result
 
-CS01 is PASS WITH YELLOW pending commit/push evidence:
+CS07 is PASS WITH YELLOW pending commit/push evidence:
 
-- CS01 touched only docs/status files and did not edit tests or app code.
-- CS01 mapped Profile/You, Insights, Habits/Ritual/Plan, activeFocus/TodayFocus/.focus, internal .failed taxonomy, and adjacent Capture/Captures/capturesInbox risk.
-- No seam was retired; old values must remain until CS07/CS08 and the relevant retirement batch prove compatibility.
-- `git diff --check`, focused markdownlint on changed docs, changed-file boundary, and release-claim scan passed.
-- `scripts/run-doc-qa.sh || true` remains Yellow/advisory from the existing stale-guidance/deprecated-language/markdownlint backlog; lychee passed.
-- `scripts/batch-train-gate-check.sh || true` reported the expected dirty-tree advisory before CS01 commit.
+- CS07 touched only docs/status files and did not edit tests or app code.
+- CS07 focused external compatibility lane passed 81 tests with 0 failures.
+- Passing log: `output/logs/cs07-external-compatibility-tests-20260502-135725.log`.
+- No seam was retired; old values must remain until CS08 and the relevant retirement batch prove compatibility.
+- `git diff --check` passed.
+- Changed-file boundary passed; dirty files were limited to `docs/**` and `.codex/**`.
+- Focused markdownlint on changed CS07 docs/status files is PASS WITH YELLOW because registry/context docs carry existing markdownlint backlog.
+- `scripts/run-doc-qa.sh || true` is PASS WITH YELLOW with existing stale-guidance, deprecated-language, and markdownlint advisory logs; lychee passed.
+- `scripts/batch-train-gate-check.sh || true` is PASS WITH YELLOW with only the expected dirty-tree hint before commit.
 
 ## Continuation Rule
 
@@ -53,4 +56,4 @@ The current user prompt says `Run Global Batch Sequence Until Blocked` and expli
 
 ## Next Eligible Batch
 
-After CS01 commit/push and post-commit drift checks, the next global batch is CS07 External Route Widget AppIntent Compatibility Proof only if dry-run selection says `Execution allowed: YES`.
+After CS07 commit/push and post-commit drift checks, the next global batch is CS08 Import Export Persistence Compatibility Proof only if dry-run selection says `Execution allowed: YES`.

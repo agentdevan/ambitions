@@ -2,13 +2,13 @@
 
 <!-- markdownlint-disable MD013 -->
 
-Status: Active Ambitions 4.0 train manifest; CS01 audit evidence complete; CS07 is next if global continuation gates pass.
+Status: Active Ambitions 4.0 train manifest; CS01 audit evidence and CS07 external compatibility proof complete; CS08 is next if global continuation gates pass.
 
 ## Start Rule
 
 This train starts only when the user explicitly approves it after Ambitions 3.0/F17-F30 truth is Green and `docs/codex/BATCH_REGISTRY.md` records the selected train as active. Required user approval phrase: `Start CS Train`.
 
-Current global execution note: the active prompt phrase `Run Global Batch Sequence Until Blocked` preauthorizes routine Ambitions 4.0 train transitions when global order and gates are Green or accepted Yellow. CS01 was selected by global order after ME12 and completed as audit-only evidence without retiring seams.
+Current global execution note: the active prompt phrase `Run Global Batch Sequence Until Blocked` preauthorizes routine Ambitions 4.0 train transitions when global order and gates are Green or accepted Yellow. CS01 was selected by global order after ME12 and completed as audit-only evidence without retiring seams. CS07 completed focused external route/widget/App Intent compatibility proof without retiring seams.
 
 ## What Does Not Start This Train
 
@@ -41,7 +41,7 @@ Allowed files are the files named by each batch prompt. Forbidden across the tra
 - CS04: Habits Ritual Plan Compatibility Retirement. Action: retires. Seam: Habits route/model compatibility for Ritual/Plan continuity. Gate: replacement map and compatibility proof before deletion.
 - CS05: ActiveFocus TodayFocus Retirement. Action: retires. Seam: activeFocus, TodayFocus*, and .focus Today compatibility. Gate: replacement map and compatibility proof before deletion.
 - CS06: Internal Failed Taxonomy Retirement. Action: retires. Seam: internal .failed taxonomy where visible language stays humane. Gate: replacement map and compatibility proof before deletion.
-- CS07: External Route Widget AppIntent Compatibility Proof. Action: proves. Seam: external routes, widget payloads, App Intent/Shortcut payloads. Gate: replacement map and compatibility proof before deletion.
+- CS07: External Route Widget AppIntent Compatibility Proof. Action: proves. Seam: external routes, widget payloads, App Intent/Shortcut payloads. Gate: replacement map and compatibility proof before deletion. Status: complete as focused simulator/unit proof; no seam retired.
 - CS08: Import Export Persistence Compatibility Proof. Action: proves. Seam: import/export payloads and persistence/schema compatibility views. Gate: replacement map and compatibility proof before deletion.
 - CS09: Compatibility Regression Repair. Action: repairs. Seam: files named by failed CS evidence. Gate: replacement map and compatibility proof before deletion.
 - CS10: Compatibility Retirement Handoff. Action: hands off. Seam: docs/audits, docs/codex, .codex/reports. Gate: replacement map and compatibility proof before deletion.

@@ -3,9 +3,9 @@
 <!-- markdownlint-disable MD013 -->
 
 Active train: CS compatibility seam retirement train
-Active batch: CS01 Compatibility Seam Registry And Risk Map evidence in progress
+Active batch: CS07 External Route Widget AppIntent Compatibility Proof evidence in progress
 Current out-of-train task: none
-Scope: ME01-ME12 maintainability train complete with commit/push evidence; ME11 repair not triggered; PXOS implementation not started; CS01 selected by global order and run as docs-only compatibility audit; Signature Interface/Product Depth/AmbitionsOS trains not started
+Scope: ME01-ME12 maintainability train complete with commit/push evidence; ME11 repair not triggered; PXOS implementation not started; CS01 complete; CS07 selected by global order and run as focused compatibility proof; Signature Interface/Product Depth/AmbitionsOS trains not started
 Date: 2026-05-02
 Branch: main
 
@@ -30,10 +30,11 @@ Branch: main
 - ME09: complete as product-contract test rebaseline evidence with commit/push evidence (`6bfa6a4b3dde950269eca4c69450687798c340b2`, report repair `5cd24178`).
 - ME11: conditional repair batch not triggered by current ME evidence.
 - ME12: complete as maintainability handoff evidence with commit/push evidence (`7f7ab99b6a671b08bf2706d778af01e06b907f8e`, report repair `f51f937a`).
-- CS01: in progress as audit-only compatibility seam registry and risk map; no seam retired and no app code edited.
-- CS train: active through CS01 audit evidence only; CS07 is next after CS01 commit/push if continuation gates pass.
+- CS01: complete as audit-only compatibility seam registry and risk map; no seam retired and no app code edited.
+- CS07: in progress as focused external route/widget/App Intent compatibility proof; no seam retired and no app code edited.
+- CS train: active through CS07 proof evidence only; CS08 is next after CS07 commit/push if continuation gates pass.
 - SI/Product Depth/AOS: queued/blocked and not started.
-- Global order: 113 formal batches after SI insertion; 76 remain after CS01 commit.
+- Global order: 113 formal batches after SI insertion; 75 remain after CS07 commit.
 
 ## Boundaries
 
@@ -46,23 +47,25 @@ Branch: main
 
 ## Current Validation Result
 
-CS01 validation is PASS WITH YELLOW with docs/audit evidence pending commit.
+CS07 validation is PASS WITH YELLOW with focused compatibility evidence ready for commit.
 
 Verified:
 
-- CS01 touched only docs/status files and did not edit tests or app code.
-- CS01 created a compatibility seam registry for Profile/You, Insights, Habits/Ritual/Plan, activeFocus/TodayFocus/.focus, internal .failed taxonomy, and adjacent Capture/Captures/capturesInbox risk.
+- CS07 touched only docs/status files and did not edit tests or app code.
+- CS07 focused external compatibility lane passed 81 tests with 0 failures.
+- Passing log: `output/logs/cs07-external-compatibility-tests-20260502-135725.log`.
+- CS07 proves current simulator/unit behavior for external routes, widgets, App Intent / Shortcut routes, action payloads, snapshots, screen contracts, and release-claim boundaries.
 - `git diff --check` passed.
-- Focused markdownlint on changed CS01 docs passed.
-- Changed-file boundary check passed.
-- `scripts/run-doc-qa.sh || true` remains Yellow/advisory from the known stale-guidance/deprecated-language/markdownlint backlog; lychee passed.
-- `scripts/batch-train-gate-check.sh || true` reported the expected dirty-tree advisory before CS01 commit.
+- Changed-file boundary passed; dirty files were limited to `docs/**` and `.codex/**`.
+- Focused markdownlint on changed CS07 docs/status files is PASS WITH YELLOW because registry/context docs carry existing markdownlint backlog.
+- `scripts/run-doc-qa.sh || true` is PASS WITH YELLOW with existing stale-guidance, deprecated-language, and markdownlint advisory logs; lychee passed.
+- `scripts/batch-train-gate-check.sh || true` is PASS WITH YELLOW with only the expected dirty-tree hint before commit.
 - Release/platform claim scan found only forbidden-claim lists, scan commands, historical logs, and explicit non-claims.
 
 Not verified:
 
-- Screenshots, physical-device, TestFlight, App Store Connect, signed archive, public accessibility, legal/privacy signoff, platform proof, human visual approval, and final release proof. CS01 makes none of those claims.
+- Screenshots, physical-device, TestFlight, App Store Connect, signed archive, public accessibility, legal/privacy signoff, platform proof, human visual approval, rendered widget/App Shortcut OS proof, and final release proof. CS07 makes none of those claims.
 
 ## Next Eligible Batch
 
-After CS01 commit/push and post-commit drift checks, the next global batch is CS07 External Route Widget AppIntent Compatibility Proof only if dry-run selection says `Execution allowed: YES`.
+After CS07 commit/push and post-commit drift checks, the next global batch is CS08 Import Export Persistence Compatibility Proof only if dry-run selection says `Execution allowed: YES`.
