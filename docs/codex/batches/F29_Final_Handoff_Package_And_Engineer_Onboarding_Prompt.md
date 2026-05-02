@@ -1,6 +1,6 @@
 # F29 Final Handoff Package And Engineer Onboarding Prompt
 
-Status: Blocked until F27 PASS
+Status: Historical completed batch prompt
 
 Scope:
 

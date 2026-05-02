@@ -123,6 +123,9 @@ Archived and superseded material is indexed from [archive/README.md](archive/REA
 ## Native build, release, and Codex docs
 
 - [native-build-and-release.md](native-build-and-release.md)
+- [handoff/Ambitions_3_0_FAANG_Engineer_Handoff.md](handoff/Ambitions_3_0_FAANG_Engineer_Handoff.md)
+- [handoff/Ambitions_3_0_Architecture_Map.md](handoff/Ambitions_3_0_Architecture_Map.md)
+- [handoff/Ambitions_3_0_Testing_And_Release_Proof.md](handoff/Ambitions_3_0_Testing_And_Release_Proof.md)
 - [marketing/Ambitions_3_0_App_Store_Truth_Packet.md](marketing/Ambitions_3_0_App_Store_Truth_Packet.md)
 - [marketing/Ambitions_3_0_Demo_Script.md](marketing/Ambitions_3_0_Demo_Script.md)
 - [codex/BATCH_REGISTRY.md](codex/BATCH_REGISTRY.md)

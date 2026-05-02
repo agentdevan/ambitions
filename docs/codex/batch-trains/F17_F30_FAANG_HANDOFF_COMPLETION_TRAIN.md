@@ -12,11 +12,11 @@ This train is not permission to blindly implement. It is a gated train. Codex ma
 
 ## Current Entry Point
 
-F27.5 Human-Made Codebase Maintainability Audit.
+F29 Final Handoff Package + Engineer Onboarding is Green pending commit/push.
 
-F17 through F28 are Green by current train evidence.
+F17 through F29 are Green by current train evidence.
 
-F29 and F30 remain blocked until F27.5 is Green.
+F30 remains blocked until F29 commit/push completes.
 
 ## Train Type
 

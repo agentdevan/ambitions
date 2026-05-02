@@ -1,26 +1,26 @@
 # Current Run State
 
-- current task: F27.5 Human-Made Codebase Maintainability Audit
+- current task: F29 Final Handoff Package + Engineer Onboarding
 - task size: XL release / architecture / product quality train
-- active mode: F27.5 Green; F29 next/not started; F30 blocked
+- active mode: F29 Green pending commit/push; F27/F27.5/F28 Green; F30 blocked until F29 commit/push completes
 - active train: F17-F30 FAANG Handoff Completion Train
-- active batch: F27.5 Human-Made Codebase Maintainability Audit
+- active batch: F29 Final Handoff Package + Engineer Onboarding
 - active standard: 3.0-as-baseline / human-made active repo
 - active primitive: Release / Market Proof System, Ambitions Operating Shell, product language, repo hygiene, handoff readiness
-- active surface: maintainability blockers, compatibility seams, active canon readability, known architecture risks, handoff prerequisites
+- active surface: engineer handoff package, architecture map, testing/release proof, onboarding path
 - active context pack: Ambitions 3.0 source stack, Batch Train Orchestrator, baseline policy, human-made codebase standard, active history archive policy, release readiness, handoff gate, UI Test Contract, F21/F21.5 reports, F22 report, Batch Registry, Context Index
 - active skill: repo-truth-enforcer, ios-qa-regression-checker, release-hardening
-- active operations: gated release train continuation; F27.5 audit/classification completed Green; Green/Yellow/Red stop discipline
-- active validation pack: maintainability scans, architecture scan, active-doc truth check, build/test evidence review, diff check
+- active operations: gated release train continuation; F29 handoff packaging completed; Green/Yellow/Red stop discipline
+- active validation pack: handoff doc consistency, active-doc truth check, F27/F27.5 evidence linkage, diff check
 - docs read: README, docs README, canon README, AGENTS, 3.0 source override, front-end redesign index, rebuild operating model, documentation system index, primitive architecture, product language system, repo hygiene policy, release readiness gates, FAANG handoff gate, SwiftUI architecture standard, feature boundary constitution, UI Test Contract, train prompt, train manifest, Batch Registry, Context Index, F21 and F21.5 reports
 - files allowed: `README.md`, `AGENTS.md`, `docs/**`, `.codex/reports/**`, `Native/**`, `AppUI/**`, `Sources/**`
 - files forbidden: `.github/workflows/**`, runtime dependency manifests, generated output, broad behavior changes, release readiness claims without F27 evidence
-- files touched: UI test reliability helper, F27/F28 audit reports, refreshed handoff inventory/orphan/traceability artifacts, run-state files, Context Index
-- decisions made: F27.5 found no critical maintainability blocker, fixed stale active train-entry wording, and indexed known architecture/compatibility debt; F29 is next after F27.5 commit/push
+- files touched: F29 handoff docs, F29 report, active docs index, run-state files, Context Index, Batch Registry, train manifest
+- decisions made: F29 started after F27.5 commit/push; F29 handoff package is docs-only and reuses F27/F28/F27.5 proof; F30 remains blocked until F29 commit/push completes
 - tests run: `scripts/build-local.sh` passed before the rebaseline; latest `scripts/test-local.sh` passed 779 unit tests and 29/29 UI tests; focused rerun of `testGoalDetailTrustAndMemoryDisclosureStayBelowStrategicLayer` passed; focused shell/bootstrap transition proof passed; `git diff --check` passed before the final doc/status edits
 - failures: none in the latest F27 rerun; no critical F27.5 maintainability blocker found; advisory doc QA and architecture-scan backlog remain accepted Yellow background
 - accepted Yellow: pre-existing markdownlint backlog; pre-existing historical docs clearly marked archive/supporting; pre-existing architecture warnings not assessed in F22.5; compatibility seams intentionally preserved; physical-device proof unavailable with no physical-device claim
-- open risks: markdownlint backlog, large-file architecture risks, physical-device proof unavailable, platform-rendered external surfaces unverified, F29 handoff package not started
-- next phase: F29 Final Handoff Package + Engineer Onboarding after F27.5 commit/push
+- open risks: markdownlint backlog, large-file architecture risks, physical-device proof unavailable, platform-rendered external surfaces unverified
+- next phase: commit/push F29, then start F30 Beyond 3.0 Continuation Plan only if commit/push succeeds
 - stop conditions: build failure, focused validation failure, forbidden file touch, runtime dependency addition, workflow touch, untrustworthy validation, active source-truth old-canon ambiguity, generated junk committed, commit/push failure
-- last checkpoint: F27.5 Green report written after maintainability scan/classification and active train-entry docs fix
+- last checkpoint: F29 handoff package written and indexed; F30 not started
