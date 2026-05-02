@@ -28,7 +28,8 @@ Ambitions 4.0 is the active post-3.0 execution program, not a shipped product ve
 - PX02 is complete as Today future-canon surface work.
 - PX03 is complete as Goals future-canon surface work.
 - PX04 is complete as Capture future-canon surface work.
-- PX05-PX20 depend on PX01 and relevant completed PX surface canon.
+- PX05 is complete as Plan future-canon surface work.
+- PX06-PX20 depend on PX01 and relevant completed PX surface canon.
 - PX14 depends on PX02-PX13.
 - PX18 depends on PX01-PX17 and recurs before major implementation lanes.
 - ME01 depends on explicit approval phrase `Start ME Train`.

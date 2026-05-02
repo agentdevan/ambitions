@@ -7,7 +7,8 @@ Date: 2026-05-02
 - PX02 is complete as Today future-canon surface work.
 - PX03 is complete as Goals future-canon surface work.
 - PX04 is complete as Capture future-canon surface work.
-- PX05-PX08 depend on PX01, relevant completed surface continuity, and owning
+- PX05 is complete as Plan future-canon surface work.
+- PX06-PX08 depend on PX01, relevant completed surface continuity, and owning
   surface canon.
 - PX09 and PX10 depend on PX01 and all affected surface canon.
 - PX11 depends on PX01, PX05, PX06, and REC claim boundaries.
