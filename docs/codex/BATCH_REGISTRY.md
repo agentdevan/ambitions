@@ -69,13 +69,14 @@ Current 4.0 status:
 - Completed: CS01 Compatibility Seam Registry And Risk Map.
 - Completed: CS07 External Route Widget AppIntent Compatibility Proof.
 - Completed: CS08 Import Export Persistence Compatibility Proof.
-- Next queued / blocked: CS02 Profile To You Internal Naming Retirement pending global dry-run selection.
-- Queued / Blocked: CS02-CS06 and CS09-CS10 pending current global preauthorization or `Start CS Train`.
+- Completed: CS02A Profile/You Compatibility Map And Migration Design as internal stage of formal CS02; no seam retired.
+- Next queued / blocked: CS02B User-Facing You Alias And Compatibility Preservation pending dry-run selection inside the repaired CS02 prompt.
+- Queued / Blocked: CS02C, CS03-CS06, and CS09-CS10 pending current global preauthorization or `Start CS Train`.
 - Queued / Blocked: SI01-SI18 pending global-order selection or `Start Signature Interface Train` plus PXOS/ME/CS/SI quality gates.
 - Queued / Blocked: PD01-PD18 pending `Start Product Depth Train` plus PXOS/ME/CS/SI/AOS-if-needed gates.
 - Queued / Blocked: AOS01-AOS30 pending `Start AOS Train`.
 - Total formal Ambitions 4.0 batches after SI insertion: 113.
-- Remaining after CS08 and SI insertion: 74.
+- Remaining after CS02A and SI insertion: 74 formal batches remain because CS02A is an internal stage of formal CS02, not a new formal batch.
 
 Use [../canon/Ambitions_4_0_Execution_Program.md](../canon/Ambitions_4_0_Execution_Program.md) and [GLOBAL_FUTURE_BATCH_EXECUTION_ORDER.md](GLOBAL_FUTURE_BATCH_EXECUTION_ORDER.md) for current post-3.0 status semantics.
 

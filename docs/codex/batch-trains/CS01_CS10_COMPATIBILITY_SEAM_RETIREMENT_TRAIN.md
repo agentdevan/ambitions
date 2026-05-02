@@ -2,7 +2,7 @@
 
 <!-- markdownlint-disable MD013 -->
 
-Status: Active Ambitions 4.0 train manifest; CS01 audit evidence, CS07 external compatibility proof, and CS08 import/export/persistence proof complete; CS02 is next if global continuation gates pass.
+Status: Active Ambitions 4.0 train manifest; CS01 audit evidence, CS07 external compatibility proof, CS08 import/export/persistence proof, and CS02A Profile/You seam repair evidence complete; CS02B is next if global continuation gates pass.
 
 ## Start Rule
 
@@ -36,7 +36,7 @@ Allowed files are the files named by each batch prompt. Forbidden across the tra
 ## Batch Order And Gates
 
 - CS01: Compatibility Seam Registry And Risk Map. Action: maps. Seam: all Lane 3 candidate seams. Gate: replacement map and compatibility proof before deletion. Status: complete as audit-only evidence; no seam retired.
-- CS02: Profile To You Internal Naming Retirement. Action: retires. Seam: Profile internal naming behind the You surface. Gate: replacement map and compatibility proof before deletion.
+- CS02: Profile To You Compatibility Seam Repair And Narrow Retirement. Action: staged map/prove/retire. Seam: Profile internal naming, `profile` raw/default compatibility, You user-facing display, and accessibility identifiers. Gate: CS02A inventory/contract/accessibility ledgers before CS02B proof; CS02C retirement blocked until proof exists. Formal count remains 113.
 - CS03: Insights Compatibility Retirement. Action: retires. Seam: Insights route/model compatibility for contextual intelligence. Gate: replacement map and compatibility proof before deletion.
 - CS04: Habits Ritual Plan Compatibility Retirement. Action: retires. Seam: Habits route/model compatibility for Ritual/Plan continuity. Gate: replacement map and compatibility proof before deletion.
 - CS05: ActiveFocus TodayFocus Retirement. Action: retires. Seam: activeFocus, TodayFocus*, and .focus Today compatibility. Gate: replacement map and compatibility proof before deletion.
