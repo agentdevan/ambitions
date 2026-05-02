@@ -1,15 +1,30 @@
 # Visual Interaction System
+<!-- markdownlint-disable MD013 -->
 
-Status: PXOS future canon; not current app implementation truth
+Status: PXOS future canon; PX10 complete; not current app implementation truth
 Date: 2026-05-02
 
 ## Purpose
 
-Visual identity: dark-mode-first, warm graphite, charcoal, soft black, subtle glass/material surfaces, premium rounded panels, quiet luxury, native iOS restraint, crisp hierarchy, minimal but not empty, deep not wide, visually stunning without decorative noise, restrained celestial/dark-sky signature only where appropriate.
+PXOS visual interaction makes Ambitions feel calm, premium, native, spatial,
+and deeply organized without becoming decorative, generic, or dashboard-like.
 
-Use compact safe-area-aware contextual headers, premium grouped panels, connected rails, subtle receipts, tappable rows, progressive disclosure, tactile but not gamified interactions, motion as orientation, reduced-motion equivalents, clear spatial hierarchy, calm affordances, restrained accent color, and visually obvious primary action.
+Visual identity: dark-mode-first, warm graphite, charcoal, soft black, subtle
+glass/material surfaces, premium rounded panels, quiet luxury, native iOS
+restraint, crisp hierarchy, minimal but not empty, deep not wide, visually
+stunning without decorative noise, restrained celestial/dark-sky signature only
+where appropriate.
 
-Avoid giant redundant headers by default, cluttered dashboards, loud gradients everywhere, cartoon visuals, excessive color, generic cards everywhere, fake AI glow, unnecessary SaaS charts, top-level visual noise, dense control panels, and desktop dashboard patterns.
+Use compact safe-area-aware contextual headers, premium grouped panels,
+connected rails, subtle receipts, tappable rows, progressive disclosure,
+tactile but not gamified interactions, motion as orientation, reduced-motion
+equivalents, clear spatial hierarchy, calm affordances, restrained accent
+color, and visually obvious primary action.
+
+Avoid giant redundant headers by default, cluttered dashboards, loud gradients
+everywhere, cartoon visuals, excessive color, generic cards everywhere, fake AI
+glow, unnecessary SaaS charts, top-level visual noise, dense control panels,
+and desktop dashboard patterns.
 
 ## Composition Bar
 
@@ -29,6 +44,57 @@ Top-level visual structure should be composed from hierarchy and shape:
 Use cards sparingly and with varied purpose. Reject top-level concepts where
 the screen is understandable only by reading a long sequence of equal-weight
 panels.
+
+## Top-Level Orientation Patterns
+
+Each main destination needs a primary visual object:
+
+- Today: Reality Rail / Ambitions Day Rail with one clear lead state, Now/Next/Later rhythm, and a visible `Start here` decision.
+- Goals: Ambition Portfolio / Mission Control map showing vitality, direction, path progress, and drill-down lanes without KPI dashboard posture.
+- Capture: private intake composer with placement state, consequence preview, and restrained dark-sky signature only where it supports focus.
+- Plan: Life Shape map with capacity, pressure, protected/free time, and reflow entry points without becoming a calendar clone.
+- You: Personal System Center with grouped control/navigation structure, trust posture, setup state, and privacy/data controls without settings clutter.
+
+## Rhythm, Materials, And Shape
+
+- hierarchy first: one dominant object, secondary lanes, then detail routes;
+- materials support focus, not novelty;
+- rounded panels remain premium and purposeful, not a carpet of identical cards;
+- spacing should create calm scanning paths and preserve Dynamic Type;
+- accent color should signal action/state sparingly and never be the only cue;
+- receipts and proof should feel subtle, local, and inspectable.
+
+## Motion, Haptics, And Reduce Motion
+
+Motion clarifies state transitions:
+
+- rail movement shows today-state progression;
+- map or lane transitions show drill-down context;
+- proof/receipt pulses confirm meaningful local changes;
+- recovery/reflow transitions show what changed and what stayed stable.
+
+Every meaningful motion needs a Reduce Motion equivalent: instant state change,
+static emphasis, text/status update, or non-motion highlight. Haptics should
+reinforce user-initiated confirmation only and must not become gamified reward.
+
+## Per-Surface Composition Criteria
+
+- Today passes when the main day state is legible in three seconds without
+  reading every row.
+- Goals passes when the user sees direction, pressure, and next drill-down
+  without a generic chart wall.
+- Capture passes when input, placement state, and consequence are obvious
+  without inbox/task-list drift.
+- Plan passes when capacity and pressure are visible without calendar-clone
+  dominance.
+- You passes when control, trust, setup, and data ownership are visible without
+  hiding everything in generic settings.
+
+## Visual Proof Boundary
+
+PX10 does not provide screenshot, preview, simulator, device, or app behavior
+proof. Future implementation batches must produce visual evidence appropriate
+to their scope before claiming visual acceptance.
 
 ## Required Source Stack
 

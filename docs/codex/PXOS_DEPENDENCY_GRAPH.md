@@ -12,8 +12,8 @@ Date: 2026-05-02
 - PX07 is complete as Action Closure Recovery future-canon work.
 - PX08 is complete as Trust Proof Receipts future-canon work.
 - PX09 is complete as Copy Language Explanation future-canon work.
-- PX10 depends on PX01, PX09, and all affected surface canon.
-- PX11 depends on PX01, PX05, PX06, and REC claim boundaries.
+- PX10 is complete as Visual Interaction future-canon work.
+- PX11 depends on PX01, PX09, PX10, PX05, PX06, and REC claim boundaries.
 - PX12 depends on PX01 and all surface prompts that touch UI.
 - PX13 depends on PX01 and all surface canon.
 - PX14 depends on PX01-PX13.

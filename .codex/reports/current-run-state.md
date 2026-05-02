@@ -1,9 +1,9 @@
 # Current Run State
 
 Active train: PXOS future-canon train
-Active batch: none; PX09 complete and PX10 next eligible pending dry-run selection
+Active batch: none; PX10 complete and PX11 next eligible pending dry-run selection
 Current out-of-train task: none
-Scope: PX09 Copy Language Explanation future-canon surface complete; PXOS implementation not started
+Scope: PX10 Visual Interaction future-canon surface complete; PXOS implementation not started
 Date: 2026-05-02
 Branch: main
 
@@ -17,7 +17,7 @@ Branch: main
 - F30: complete; Beyond 3.0 roadmap and final train closeout created.
 - Ambitions 4.0 Execution Program: active post-3.0 execution program, not a shipped product version, not implemented by implication, and not release-proven.
 - AmbitionsOS: future canon only, not current app implementation truth.
-- PXOS: future user-facing product experience canon only; PX01-PX09 future canon complete; PXOS implementation not started.
+- PXOS: future user-facing product experience canon only; PX01-PX10 future canon complete; PXOS implementation not started.
 - AOS/ME/CS/Product Depth: queued/blocked and not started.
 - Release Evidence Closure: REC01 inventory is accepted baseline evidence; REC02 proof plan complete; REC03 validation-log ledger complete; REC04 release-claim copy guard complete; REC05 human review packet complete; REC06 release closure handoff complete.
 - PX03: complete as future-canon docs work.
@@ -26,14 +26,15 @@ Branch: main
 - PX06: complete as future-canon docs work.
 - PX07: complete as future-canon docs work.
 - PX08: complete as future-canon docs work.
-- PX09: complete as future-canon docs work; PX10 next global batch pending dry-run selection.
+- PX09: complete as future-canon docs work.
+- PX10: complete as future-canon docs work; PX11 next global batch pending dry-run selection.
 - Current user prompt preauthorizes Ambitions 4.0 global sequence continuation
   through routine train transitions, but not proof, validation, Red, release,
   platform, legal/privacy, physical-device, public accessibility, TestFlight,
   App Store Connect, signed archive, visual-approval, or final release gates.
-- PX10-PX20: queued/blocked and not started; batch-specific prompt hardening completed.
+- PX11-PX20: queued/blocked and not started; batch-specific prompt hardening completed.
 - Product Depth: formalized as a queued/blocked PD01-PD18 train; not started.
-- Global order: 95 formal batches at program start; 81 remain after PX09.
+- Global order: 95 formal batches at program start; 80 remain after PX10.
 
 ## Boundaries
 
@@ -46,12 +47,13 @@ Branch: main
 
 ## Current Validation Plan
 
-Run git status, branch/HEAD checks, diff check, PXOS/release-claim/status scans, product-language drift scans, doc QA advisory, batch-train gate advisory, targeted markdownlint, file-size snapshot, and changed-file boundary check. App build/test is skipped because app code is forbidden for PX09.
+Run git status, branch/HEAD checks, diff check, PXOS/release-claim/status scans, visual/product drift scans, doc QA advisory, batch-train gate advisory, targeted markdownlint, file-size snapshot, and changed-file boundary check. App build/test is skipped because app code is forbidden for PX10.
 
 ## Current Validation Result
 
-PX09 validation PASS WITH YELLOW. Adequate docs/future-canon validation:
+PX10 validation PASS WITH YELLOW. Adequate docs/future-canon validation:
 targeted markdownlint and `git diff --check` passed, changed-file boundary
 passed with `14` files inside the allowed docs/control scope, doc QA remains
-advisory with lychee `645 OK` / `0 Errors`, and the batch-train gate dirty-tree
-hint is expected before the PX09 commit.
+advisory with lychee `645 OK` / `0 Errors`, visual/product and release-claim
+scan matches are guardrail/non-claim examples, and the batch-train gate
+dirty-tree hint is expected before the PX10 commit.
