@@ -30,15 +30,16 @@ Current 4.0 status:
 - Completed: REC03 Validation Log Ledger Closure.
 - Completed: REC04 Release Claim Copy Guard.
 - Completed: REC05 Human Review Packet.
+- Completed: REC06 Release Evidence Closure Handoff.
 - Active evidence baseline: REC01 Release Evidence Truth Inventory.
-- Next queued / blocked: REC06 in Release Evidence Closure.
-- Queued / Blocked: PX01-PX20 pending `Start PXOS Future-Canon Train`.
+- Next queued / blocked: PX01 Product Experience OS Canon And Surface Hierarchy pending global dry-run selection.
+- Queued / Blocked: PX02-PX20 pending PX01 and global/PXOS gates.
 - Queued / Blocked: ME01-ME12 pending `Start ME Train`.
 - Queued / Blocked: CS01-CS10 pending `Start CS Train`.
 - Queued / Blocked: PD01-PD18 pending `Start Product Depth Train` plus PXOS/ME/CS/AOS-if-needed gates.
 - Queued / Blocked: AOS01-AOS30 pending `Start AOS Train`.
 - Total formal remaining batches in the 4.0 global order at program start: 95.
-- Remaining after REC05: 91.
+- Remaining after REC06: 90.
 
 Use [../canon/Ambitions_4_0_Execution_Program.md](../canon/Ambitions_4_0_Execution_Program.md) and [GLOBAL_FUTURE_BATCH_EXECUTION_ORDER.md](GLOBAL_FUTURE_BATCH_EXECUTION_ORDER.md) for current post-3.0 status semantics.
 
@@ -367,9 +368,9 @@ These batches are complete for planning purposes. They remain as historical cont
 
 | Train | Status | Notes |
 | --- | --- | --- |
-| Release Evidence Closure Train | Active | Selected as the first safe post-3.0 train after the 2026-05-02 pre-train hardening and 3.0 truth check. REC01 is active/started and limited to evidence/status/release-truth inventory. |
-| REC01 Release Evidence Truth Inventory | Active / started | Creates `docs/audits/rec01-release-evidence-truth-inventory-report.md`, preserves F17-F30 truth, inventories simulator evidence and release proof gaps, and must not implement app behavior or claim readiness. |
-| REC02-REC06 Prompt Hardening | Completed / docs-only | Added standalone queued/blocked REC02-REC06 prompt files so the next Release Evidence Closure batches are executable by prompt, without starting REC02 or marking any REC batch complete. |
+| Release Evidence Closure Train | Completed / docs-only | Completed REC01-REC06 as evidence/status/release-truth work after the 2026-05-02 pre-train hardening and 3.0 truth check. Human/operator proof remains pending. |
+| REC01 Release Evidence Truth Inventory | Completed / accepted baseline | Created `docs/audits/rec01-release-evidence-truth-inventory-report.md`, preserved F17-F30 truth, inventoried simulator evidence and release proof gaps, and did not implement app behavior or claim readiness. |
+| REC02-REC06 Evidence Closure | Completed / docs-only | REC02 proof plan, REC03 validation ledger, REC04 claim copy guard, REC05 human review packet, and REC06 closure handoff are complete without claiming human proof or release readiness. |
 | AOS01-AOS30 AmbitionsOS Local Intelligence Train | Queued / Blocked | Requires `Start AOS Train` and Green predecessor gates. |
 | ME01-ME12 Maintainability Extraction Train | Queued / Blocked | Requires `Start ME Train` and Green predecessor gates. |
 | CS01-CS10 Compatibility Seam Retirement Train | Queued / Blocked | Requires `Start CS Train` and Green predecessor gates. |

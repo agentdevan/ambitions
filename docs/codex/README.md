@@ -71,7 +71,7 @@ The FAANG-team operating upgrade is indexed from:
 
 Use `docs/codex/AMBITIONS_3_0_BATCH_TRAIN_ORCHESTRATOR.md` plus the artifacts in this directory for gated Ambitions 3.0 batch trains. F03.5, F13.5, and F16.5 are architecture checkpoint prompts; do not skip them when their triggers fire.
 
-Completed historical train: [batch-trains/F17_F30_FAANG_HANDOFF_COMPLETION_TRAIN.md](batch-trains/F17_F30_FAANG_HANDOFF_COMPLETION_TRAIN.md). F17 through F30 are Green by current train evidence. F27 remains PASS after the F28 repair/rebaseline, F27.5 completed with no critical maintainability blocker, F29 created the final engineer handoff package, and F30 created the Beyond 3.0 continuation plan and final closeout. Beyond 3.0 is now represented operationally by the Ambitions 4.0 Execution Program. Release Evidence Closure is active at REC01; REC02-REC06, PXOS, ME, CS, Product Depth, and AOS are queued/blocked and not started.
+Completed historical train: [batch-trains/F17_F30_FAANG_HANDOFF_COMPLETION_TRAIN.md](batch-trains/F17_F30_FAANG_HANDOFF_COMPLETION_TRAIN.md). F17 through F30 are Green by current train evidence. F27 remains PASS after the F28 repair/rebaseline, F27.5 completed with no critical maintainability blocker, F29 created the final engineer handoff package, and F30 created the Beyond 3.0 continuation plan and final closeout. Beyond 3.0 is now represented operationally by the Ambitions 4.0 Execution Program. Release Evidence Closure is complete through REC06; PX01 is the next global batch pending dry-run selection, and PXOS, ME, CS, Product Depth, and AOS remain future/queued until selected and proven by evidence.
 
 ## Ambitions 4.0 Global Batch Controls
 
@@ -97,7 +97,7 @@ These trains are queued/blocked in Ambitions 4.0 and must not run automatically 
 
 ## Active Post-3.0 Train
 
-- [REC01-REC06 Release Evidence Closure Train](batch-trains/REC01_REC06_RELEASE_EVIDENCE_CLOSURE_TRAIN.md) is the active first post-3.0 train after the 2026-05-02 pre-train hardening pass. REC01 is active/started and does not implement app behavior.
+- [REC01-REC06 Release Evidence Closure Train](batch-trains/REC01_REC06_RELEASE_EVIDENCE_CLOSURE_TRAIN.md) is complete as evidence/status work after the 2026-05-02 pre-train hardening pass. It did not implement app behavior or claim release/platform proof.
 
 
 ## PXOS Future Controls

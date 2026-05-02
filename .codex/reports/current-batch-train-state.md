@@ -1,9 +1,9 @@
 # Current Batch Train State
 
-Active train: Release Evidence Closure
-Active batch: none; REC05 complete and REC06 next eligible only as docs/evidence handoff
+Active train: none; Release Evidence Closure complete through REC06
+Active batch: none; PX01 next eligible pending dry-run selection
 Current out-of-train task: none
-Scope: REC05 docs/evidence human review packet complete; human/operator proof remains pending
+Scope: REC06 docs/evidence release closure handoff complete; human/operator proof remains pending
 Date: 2026-05-02
 
 ## Baseline
@@ -12,11 +12,12 @@ F17-F30 FAANG Handoff Completion Train is complete and Green by current train ev
 
 ## Active Train Truth
 
-Release Evidence Closure remains active. REC01 is the accepted inventory
-baseline. REC02 is complete as a human-operator proof planning batch. REC03 is
-complete as a validation-log ledger batch. REC04 is complete as a release-claim
-copy guard batch. REC05 is complete as a human review packet batch. REC06 is
-next eligible only as a docs/evidence handoff that keeps human proof pending.
+Release Evidence Closure is complete through REC06 as an evidence/status train.
+REC01 is the accepted inventory baseline. REC02 is complete as a human-operator
+proof planning batch. REC03 is complete as a validation-log ledger batch. REC04
+is complete as a release-claim copy guard batch. REC05 is complete as a human
+review packet batch. REC06 is complete as a closure handoff. Human/operator
+proof remains pending and blocks any release-posture upgrade.
 
 ## PXOS Status
 
@@ -27,8 +28,8 @@ PXOS future canon and train-control docs exist. PXOS train is queued/blocked in 
 REC02-REC06 standalone prompt files exist. REC02 produced the human operator
 release proof plan. REC03 produced the validation log ledger. REC04 corrected
 claim-copy guard status wording. REC05 produced the human review packet. REC06
-remains a queued/blocked Ambitions 4.0 evidence prompt. PX01-PX20 prompts remain
-queued/blocked future-canon prompts.
+produced the release evidence closure handoff. PX01-PX20 prompts remain
+queued/blocked future-canon prompts until selected by global dry-run.
 
 ## Product Depth Formalization Status
 
@@ -38,9 +39,8 @@ Product Depth is formalized as a queued/blocked PD01-PD18 train with required ap
 
 Ambitions 4.0 is the active post-3.0 execution program, not a shipped product
 version. The global order started with 95 formal batches: REC02-REC06,
-PX01-PX20, ME01-ME12, CS01-CS10, PD01-PD18, and AOS01-AOS30. REC02, REC03,
-REC04, and REC05 are complete; 91 formal batches remain queued/blocked or
-future-selected.
+PX01-PX20, ME01-ME12, CS01-CS10, PD01-PD18, and AOS01-AOS30. REC02-REC06 are
+complete; 90 formal batches remain queued/blocked or future-selected.
 
 ## Boundaries
 
@@ -51,7 +51,8 @@ planned human/operator proof only; it did not perform or claim proof. REC03
 indexed logs and proof gaps only; it did not rerun app validation or claim
 release/platform proof. REC04 guarded release/status copy only; it did not claim
 release/platform proof. REC05 created a human review packet only; it did not
-perform human proof or claim approval/readiness.
+perform human proof or claim approval/readiness. REC06 created a closure handoff
+only; it did not claim release readiness or start future implementation.
 
 ## Continuation Rule
 

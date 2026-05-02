@@ -1,7 +1,7 @@
 # REC06 Release Evidence Closure Handoff Prompt
 <!-- markdownlint-disable MD013 -->
 
-Status: Queued Ambitions 4.0 evidence batch; not started; blocked pending `Continue Release Evidence Closure` and REC05 Green.
+Status: Queued Ambitions 4.0 evidence batch; not started; blocked pending `Continue Release Evidence Closure` or current global 4.0 preauthorization and REC05 Green.
 
 ## Batch Identity
 
@@ -10,7 +10,8 @@ Status: Queued Ambitions 4.0 evidence batch; not started; blocked pending `Conti
 - Train: Release Evidence Closure
 - Mode: evidence/docs-only
 - Owner: release evidence closure and next decision
-- Required approval phrase: `Continue Release Evidence Closure`
+- Required approval phrase: `Continue Release Evidence Closure` or current
+  global Ambitions 4.0 preauthorization
 
 ## Purpose
 
@@ -72,14 +73,15 @@ Stop if REC evidence is incomplete, contradictory, or claim-unsafe.
   - exact next decision prompt/path
 - Update registry/context/run-state only after evidence.
 - Mark REC closure truth carefully without claiming release readiness.
-- Decide whether global order can move to the next train only as a future
-  decision path, not as automatic execution.
+- Decide whether global order can move to the next train through the global
+  orchestrator and current preauthorization only after REC06 is committed and
+  the next-batch dry-run says `Execution allowed: YES`.
 
 ## Required Non-Goals
 
-No app implementation, no release readiness claim, no human proof claim, no train
-auto-start, no Product Depth/PXOS/AOS/ME/CS activation, no workflow/dependency
-change, no signing/platform action.
+No app implementation, no release readiness claim, no human proof claim, no
+Product Depth/PXOS/AOS/ME/CS implementation or current-app activation, no
+workflow/dependency change, no signing/platform action.
 
 ## Required Validation Commands
 
@@ -134,6 +136,7 @@ AmbitionsOS implementation, or automatic next-train start.
 
 ## Next Safe Prompt / Path
 
-After REC06, stop. The next path must be chosen explicitly through the global
-orchestrator, for example `Run Next Global Batch`, `Start PXOS Future-Canon
-Train`, `Start ME Train`, `Start CS Train`, or `Start AOS Train`.
+After REC06, select the next global batch only through the global orchestrator,
+current preauthorization, and the mandatory dry-run gate. Do not claim the next
+train has started, and do not claim future canon is implemented, until the next
+batch actually begins and produces evidence.

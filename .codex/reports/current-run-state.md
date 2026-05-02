@@ -1,9 +1,9 @@
 # Current Run State
 
-Active train: Release Evidence Closure
-Active batch: none; REC05 complete and REC06 next eligible only as docs/evidence handoff
+Active train: none; Release Evidence Closure complete through REC06
+Active batch: none; PX01 next eligible pending dry-run selection
 Current out-of-train task: none
-Scope: REC05 docs/evidence human review packet complete; human/operator proof remains pending
+Scope: REC06 docs/evidence release closure handoff complete; human/operator proof remains pending
 Date: 2026-05-02
 Branch: main
 
@@ -19,15 +19,15 @@ Branch: main
 - AmbitionsOS: future canon only, not current app implementation truth.
 - PXOS: future user-facing product experience canon only; PXOS train queued/blocked and not started.
 - AOS/ME/CS/Product Depth: queued/blocked and not started.
-- Release Evidence Closure: REC01 inventory is active baseline evidence; REC02 proof plan complete; REC03 validation-log ledger complete; REC04 release-claim copy guard complete; REC05 human review packet complete.
-- REC06: queued/blocked and not started.
+- Release Evidence Closure: REC01 inventory is accepted baseline evidence; REC02 proof plan complete; REC03 validation-log ledger complete; REC04 release-claim copy guard complete; REC05 human review packet complete; REC06 release closure handoff complete.
+- PX01: next global batch pending dry-run selection; PXOS remains future canon until evidence.
 - Current user prompt preauthorizes Ambitions 4.0 global sequence continuation
   through routine train transitions, but not proof, validation, Red, release,
   platform, legal/privacy, physical-device, public accessibility, TestFlight,
   App Store Connect, signed archive, visual-approval, or final release gates.
 - PX01-PX20: queued/blocked and not started; batch-specific prompt hardening completed.
 - Product Depth: formalized as a queued/blocked PD01-PD18 train; not started.
-- Global order: 95 formal batches at program start; 91 remain after REC05.
+- Global order: 95 formal batches at program start; 90 remain after REC06.
 
 ## Boundaries
 
@@ -40,8 +40,8 @@ Branch: main
 
 ## Current Validation Plan
 
-Run git status, branch/HEAD checks, diff check, release-claim scan, doc QA advisory, batch-train gate advisory, targeted markdownlint, file-size snapshot, and changed-file boundary check. App build/test is skipped because app code is forbidden for REC05.
+Run git status, branch/HEAD checks, diff check, release-claim scan, status scan, doc QA advisory, batch-train gate advisory, targeted markdownlint, file-size snapshot, and changed-file boundary check. App build/test is skipped because app code is forbidden for REC06.
 
 ## Current Validation Result
 
-PASS WITH YELLOW. REC05 created the human review packet and kept human/operator proof pending. `git diff --check`, doc QA, gate check, claim scan, targeted lint, file-size snapshot, and boundary results are recorded in the REC05 report. App build/test was skipped because REC05 forbids app code and changed only docs/control files.
+PASS WITH YELLOW. REC06 created the Release Evidence Closure handoff and kept human/operator proof pending. `git diff --check`, doc QA, gate check, claim scan, status scan, targeted lint, file-size snapshot, and boundary results are recorded in the REC06 report. App build/test was skipped because REC06 forbids app code and changed only docs/control files.
