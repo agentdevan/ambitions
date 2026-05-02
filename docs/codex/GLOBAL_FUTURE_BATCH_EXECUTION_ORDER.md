@@ -7,7 +7,7 @@ Date: 2026-05-02
 
 ## Purpose
 
-This document defines the global order for remaining formal future Ambitions work across Release Evidence Closure, PXOS, Maintainability Extraction, Compatibility Seam Retirement, AmbitionsOS, and Product Depth. It is an execution map, not execution approval.
+This document defines the global order for remaining formal future Ambitions work across Release Evidence Closure, PXOS, Maintainability Extraction, Compatibility Seam Retirement, Product Depth, and AmbitionsOS. It is an execution map, not execution approval.
 
 Use this file to choose the next eligible batch only after the relevant approval phrase and gates pass. Keep canonical batch IDs stable; use the global order number for cross-train sequencing.
 
@@ -41,7 +41,7 @@ Use this file to choose the next eligible batch only after the relevant approval
 - PXOS is future user-facing canon only. PX01-PX20 are future/not started.
 - ME01-ME12, CS01-CS10, and AOS01-AOS30 are future/not started.
 - AmbitionsOS is future canon only, not implemented app behavior.
-- Product Depth is blocked as a future lane. No formal PD batch prompts were found.
+- Product Depth is a formal future/not-started PD01-PD18 train.
 - Top-level surfaces remain `Today / Goals / Capture / Plan / You`.
 - Top-level surfaces must be visual orientation surfaces, not vertical stacks of generic cards.
 
@@ -58,7 +58,7 @@ human-proof boundaries, and clean validation.
 4. ME before large UI expansion: known large/tangled owners must be mapped and extracted before major surface work in affected zones.
 5. CS before renames/removals: routes, raw values, widgets, App Intents, import/export, and persistence seams must be proven before retirement.
 6. AOS internal before AOS exposure: internal kernels may be built after contracts, but user-facing intelligence waits for PXOS expression and trust gates.
-7. Product Depth waits for PXOS plus relevant ME/CS gates and must deepen existing surfaces, not widen the app.
+7. Product Depth is formalized as PD01-PD18, waits for PXOS plus relevant ME/CS gates, and must deepen existing surfaces, not widen the app.
 8. Red blocks continuation. Yellow continues only when classified, owned, and safe.
 
 ## Master Ordered List
@@ -112,57 +112,76 @@ human-proof boundaries, and clean validation.
 | 045 | CS06 | CS | Compatibility retirement | Internal failure taxonomy retirement waits for copy and compatibility gates. | CS01 Green, Copy/Language | Serial-only | Yes | Strong compatibility validation | product-language reviewer, compatibility reviewer | Continue only on Green |
 | 046 | CS09 | CS | Repair | Repair only after classified CS evidence. | Failed/Yellow CS gate | Serial-only | Conditional | Strong repair validation | codex-repair-train-designer, compatibility board | Stop if repair cannot stay scoped |
 | 047 | CS10 | CS | Handoff | CS handoff follows retirements/proofs/repairs. | CS01-CS09 resolved | Serial-only | Yes | Adequate handoff evidence | evidence-gate-reporter, compatibility board | Stop unless next train explicitly approved |
-| 048 | AOS01 | AOS | Docs/contract | AmbitionsOS runtime contract blocks all AOS work. | `Start AOS Train`, Source Truth, Runtime Contract | Serial-only | Yes | Adequate docs evidence | runtime-contract-reviewer, AOS architecture board | Continue only on Green |
-| 049 | AOS02 | AOS | Internal foundation | Life Graph event log follows AOS01. | AOS01 Green, Privacy | Serial-only | Yes | Strong implementation validation | event taxonomy, privacy reviewer | Continue only on Green |
-| 050 | AOS03 | AOS | Internal foundation | Projection store depends on event log. | AOS02 Green | Serial-only | Yes | Strong implementation validation | runtime contract, testability reviewer | Continue only on Green |
-| 051 | AOS04 | AOS | Internal foundation | Control plane classifier depends on contracts and projection store. | AOS01-AOS03 Green | Serial-only | Yes | Strong implementation validation | runtime contract, governance reviewer | Continue only on Green |
-| 052 | AOS05 | AOS | Internal foundation | Starting Position depends on graph and control plane. | AOS02-AOS04 Green | Serial-only | Yes | Strong implementation validation | source truth, privacy reviewer | Continue only on Green |
-| 053 | AOS06 | AOS | Internal foundation | Goal compiler depends on Starting Position. | AOS05 Green | Serial-only | Yes | Strong implementation validation | goal path reviewer, testability reviewer | Continue only on Green |
-| 054 | AOS07 | AOS | Internal foundation | Local goal packs depend on goal compiler. | AOS06 Green | Serial-only | Yes | Strong implementation validation | source truth, local language boundary | Continue only on Green |
-| 055 | AOS08 | AOS | Internal foundation | Alternate paths depend on starting position and goal path. | AOS05-AOS07 Green | Serial-only | Yes | Strong implementation validation | alternate path reviewer, proof/trust | Continue only on Green |
-| 056 | AOS09 | AOS | Internal foundation | Option value depends on path portfolio. | AOS08 Green | Serial-only | Yes | Strong implementation validation | longevity reviewer, product identity | Continue only on Green |
-| 057 | AOS10 | AOS | Internal foundation | Commitment time depends on graph/control plane. | AOS02-AOS04 Green | Parallel-safe after AOS04 if disjoint | Yes | Strong implementation validation | commitment/time reviewer, privacy | Continue only on Green |
-| 058 | AOS12 | AOS | Internal foundation | Proof trust can proceed after graph/control plane and before recommendations. | AOS02-AOS04 Green | Parallel-safe after AOS04 if disjoint | Yes | Strong implementation validation | proof/trust, receipt models | Continue only on Green |
-| 059 | AOS13 | AOS | Internal foundation | Source Truth must precede recommendation exposure. | AOS02-AOS04 Green | Parallel-safe after AOS04 if disjoint | Yes | Strong implementation validation | source-truth safety, privacy | Continue only on Green |
-| 060 | AOS11 | AOS | Internal foundation | Reality Drift needs Commitment Time and Proof Trust. | AOS10/AOS12 Green | Serial-only | Yes | Strong implementation validation | reality drift, recovery reviewer | Continue only on Green |
-| 061 | AOS14 | AOS | Internal foundation | Recommendation Start Here needs control plane, proof, and source truth. | AOS04/AOS12/AOS13 Green | Serial-only | Yes | Strong implementation validation | recommendation eligibility, source truth | No user-facing exposure yet |
-| 062 | AOS15 | AOS | Planning boundary | Local Language planning needs deterministic fallback and source truth. | AOS04/AOS13/AOS14 Green | Serial-only | Yes | Adequate/Strong depending on scope | runtime contract, privacy/trust | No model runtime without approval |
-| 063 | AOS16 | AOS | Runtime gate | Performance Energy must exist before runtime-heavy work. | AOS01-AOS15 classified | Serial-preferred | Yes | Adequate gate evidence | performance-energy reviewer | Convert to recurring runtime gate |
-| 064 | AOS17 | AOS | Runtime gate | Privacy Safety must exist before sensitive/external projection. | AOS01-AOS16 classified | Serial-preferred | Yes | Adequate gate evidence | privacy safety board, projection reviewer | Convert to recurring privacy gate |
-| 065 | AOS18 | AOS | Evaluation | Golden scenarios depend on kernel contracts. | AOS01-AOS17 Green | Serial-only | Yes | Strong validation evidence | AOS fixture architect, evaluation reviewer | Continue only on Green |
-| 066 | AOS19 | AOS | Experience contract | Experience kernel follows fixtures and PXOS expression. | AOS18 Green, PXOS expression gates | Serial-only | Yes | Adequate/Strong | cognitive load, PXOS reviewer | No broad UI work by implication |
-| 067 | AOS20 | AOS | Internal personalization | Local calibration depends on recommendation and evaluation. | AOS14/AOS18 Green, Privacy | Serial-only | Yes | Strong implementation validation | privacy/trust, memory consent | Continue only on Green |
-| 068 | AOS21 | AOS | Planning/external | Interoperability planning waits for privacy/performance gates. | AOS16/AOS17 Green, CS external proof | Serial-only | Yes | Adequate planning evidence | app-intent, external-surface, privacy | No platform implementation by implication |
-| 069 | AOS22 | AOS | Internal foundation | Longevity depends on graph, proof, and source truth. | AOS02/AOS12/AOS13 Green | Parallel-safe after dependencies if disjoint | Yes | Strong implementation validation | longevity, export/import safety | Continue only on Green |
-| 070 | AOS23 | AOS | Governance | Registry follows all kernel contracts. | AOS01-AOS22 classified | Serial-only | Yes | Adequate governance evidence | governance, train integrity | Continue only on Green |
-| 071 | AOS24 | AOS | UI integration | UI integration waits for contracts, fixtures, PXOS, ME, and CS gates. | AOS18-AOS23 Green, PXOS, ME, CS | Serial-only | Yes | Strong implementation plus UI evidence | PXOS surface, accessibility, visual, ME/CS | Stop on human proof or weak validation |
-| 072 | AOS25 | AOS | Tests/fixtures | Fixture library follows UI integration and evaluation. | AOS18/AOS24 Green | Serial-only | Yes | Strong test evidence | fixture architect, test-impact architect | Continue only on Green |
-| 073 | AOS26 | AOS | QA | Privacy/performance QA follows gates and fixtures. | AOS16/AOS17/AOS18/AOS25 Green | Serial-only | Yes | Strong QA evidence | privacy/performance boards | Continue only on Green |
-| 074 | AOS27 | AOS | Claim truth | App Store claim truth follows QA but cannot claim readiness without human proof. | AOS26 Green, REC Release Claim | Serial-only | Yes | Adequate release evidence | release-claim-truth-enforcer, human proof | Stop on readiness ambiguity |
-| 075 | AOS28 | AOS | Handoff | Handoff follows claim truth. | AOS27 Green | Serial-only | Yes | Adequate handoff evidence | evidence gate, FAANG handoff auditor | Stop unless explicit continuation |
-| 076 | AOS29 | AOS | Repair | Repair train runs only after classified AOS Yellow/Red. | Failed/Yellow AOS gate | Serial-only | Conditional | Strong repair validation | repair train, AOS red-team reviewer | Stop if repair cannot stay scoped |
-| 077 | AOS30 | AOS | Roadmap | Beyond roadmap follows handoff or explicit decision. | AOS28 Green or explicit user decision | Serial-only | Yes | Adequate docs evidence | roadmap-sequencer, governance | Stop after roadmap |
+| 048 | PD01 | PD | Docs/planning | Formal PD canon and owner/dependency map follows PX14/PX18 and precedes implementation. | `Start Product Depth Train`, PX14/PX18 Green, ME/CS dependency map | Serial-only | Yes | Adequate docs evidence | product-depth-strategist, top-level composition, ME/CS reviewers | Does not start implementation |
+| 049 | PD02 | PD | Implementation | Today Step Detail depth waits for Today PXOS, recovery/proof gates, and Today ME owner proof. | PD01 Green, PX02/PX07/PX08, ME Today, Accessibility/Copy | Serial-only | Yes | Strong implementation validation | Today reviewer, product-depth, accessibility, proof/receipt | Continue only on Green |
+| 050 | PD03 | PD | Implementation | Step Session depends on Step Detail and Today/TodayPanels maintainability. | PD02 Green, ME Today/TodayPanels, Visual/Cognitive Load, Proof/Receipt | Serial-only | Yes | Strong implementation validation | Today reviewer, visual, accessibility, receipt/proof | Continue only on Green |
+| 051 | PD04 | PD | Implementation | Recovery/closure depth depends on PX07/PX09 and may block on AOS runtime if logic touched. | PX07/PX09 Green, PD02 Green, AOS dependency if runtime touched | Serial-only | Yes | Strong implementation validation | recovery reviewer, copy, AOS/proof if needed | Stop on runtime blocker |
+| 052 | PD05 | PD | Implementation | Goal Detail/Mission Control depth waits for Goals PXOS, PX14, and ME Goals. | PX03/PX14 Green, ME Goals, CS route check if relevant | Serial-only | Yes | Strong implementation validation | Goals reviewer, product-depth, ME/CS | Continue only on Green |
+| 053 | PD06 | PD | Implementation | Goal lifecycle visualization depends on Mission Control architecture. | PD05 Green, Visual Quality, Accessibility, Top-Level/Drill-down | Serial-only | Yes | Strong implementation validation | premium visual, accessibility, Goals reviewer | Continue only on Green |
+| 054 | PD07 | PD | Implementation | Goal proof/decision history waits for trust/proof gates and AOS proof if runtime touched. | PX08 Green, PD05 Green, AOS Proof Trust if model touched, Privacy/Trust | Serial-only | Yes | Strong implementation validation | trust/proof, privacy, Goals reviewer | Stop on proof/runtime blocker |
+| 055 | PD08 | PD | Implementation | Alternate path depth waits for Goals continuity and AOS alternate-path if runtime touched. | PX03/PX15 Green, PD05 Green, AOS Alternate Path if runtime touched | Serial-only | Yes | Strong implementation validation | alternate path, source truth, Goals reviewer | Stop on fake certainty |
+| 056 | PD09 | PD | Implementation | Capture placement review waits for Capture PXOS, edge states, and privacy. | PX04/PX13 Green, Privacy, ME Capture if files touched | Serial-only | Yes | Strong implementation validation | Capture reviewer, privacy, product-depth | Continue only on Green |
+| 057 | PD10 | PD | Implementation | Capture correction depends on placement review and AOS adaptation/source truth if learning touched. | PD09 Green, AOS Adaptation/Source Truth if touched, Privacy/Copy | Serial-only | Yes | Strong implementation validation | Capture reviewer, privacy, source-truth | Stop on hidden-memory blocker |
+| 058 | PD11 | PD | Implementation | Grow Into Goal bridges Capture and Goals after placement/correction and continuity gates. | PD09/PD10 Green, PX03/PX04/PX15, AOS Goal Path if touched | Serial-only | Yes | Strong implementation validation | Capture/Goals reviewers, CS navigation, AOS if needed | Continue only on Green |
+| 059 | PD12 | PD | Implementation | Plan reflow decision depth waits for Plan PXOS, recovery/trust gates, and AOS runtime if touched. | PX05/PX07/PX08 Green, ME Plan, AOS Reality/Commitment if touched | Serial-only | Yes | Strong implementation validation | Plan reviewer, recovery/trust, AOS if needed | Stop on silent rearrangement |
+| 060 | PD13 | PD | Implementation | Plan pressure/recovery review depends on reflow detail and copy/accessibility gates. | PD12 Green, Accessibility/Cognitive Load, Copy | Serial-only | Yes | Strong implementation validation | Plan reviewer, accessibility, copy | Continue only on Green |
+| 061 | PD14 | PD | Implementation | Life Shape drill-downs wait for Plan visual/accessibility/PXOS gates and Plan ME. | PX05/PX10/PX12 Green, ME Plan/PlanScreen, Visual/Accessibility | Serial-only | Yes | Strong implementation validation | Plan reviewer, visual, accessibility, ME | Continue only on Green |
+| 062 | PD15 | PD | Implementation | You trust/receipts depth waits for You and trust PXOS plus Profile/You ME. | PX06/PX08 Green, ME Profile/You, Privacy/Trust | Serial-only | Yes | Strong implementation validation | You trust reviewer, privacy, receipt/proof | Continue only on Green |
+| 063 | PD16 | PD | Implementation | Schedule/defaults depth waits for You/onboarding PXOS and REC claim guard. | PX06/PX11 Green, REC Release Claim, Privacy/Permission Copy | Serial-only | Yes | Strong implementation validation | You reviewer, release-claim, privacy | Stop on unsupported integration claim |
+| 064 | PD17 | PD | Mixed implementation | Cross-surface proof/review integration waits for earlier PD proof/reflow/You history and CS navigation. | PX15 Green, PD07/PD12/PD15 Green, CS route/navigation, AOS proof if data touched | Serial-only | Yes | Strong implementation validation | cross-surface reviewer, CS, proof/trust, AOS if needed | Continue only on Green |
+| 065 | PD18 | PD | Docs/handoff | PD closeout follows prior PD evidence and unresolved Yellow classification. | PD01-PD17 resolved or deferred, Validation Evidence, Handoff/Rollback | Serial-only | Yes | Adequate handoff evidence | evidence-gate-reporter, product-depth, release-claim | Stop after handoff |
+| 066 | AOS01 | AOS | Docs/contract | AmbitionsOS runtime contract blocks all AOS work. | `Start AOS Train`, Source Truth, Runtime Contract | Serial-only | Yes | Adequate docs evidence | runtime-contract-reviewer, AOS architecture board | Continue only on Green |
+| 067 | AOS02 | AOS | Internal foundation | Life Graph event log follows AOS01. | AOS01 Green, Privacy | Serial-only | Yes | Strong implementation validation | event taxonomy, privacy reviewer | Continue only on Green |
+| 068 | AOS03 | AOS | Internal foundation | Projection store depends on event log. | AOS02 Green | Serial-only | Yes | Strong implementation validation | runtime contract, testability reviewer | Continue only on Green |
+| 069 | AOS04 | AOS | Internal foundation | Control plane classifier depends on contracts and projection store. | AOS01-AOS03 Green | Serial-only | Yes | Strong implementation validation | runtime contract, governance reviewer | Continue only on Green |
+| 070 | AOS05 | AOS | Internal foundation | Starting Position depends on graph and control plane. | AOS02-AOS04 Green | Serial-only | Yes | Strong implementation validation | source truth, privacy reviewer | Continue only on Green |
+| 071 | AOS06 | AOS | Internal foundation | Goal compiler depends on Starting Position. | AOS05 Green | Serial-only | Yes | Strong implementation validation | goal path reviewer, testability reviewer | Continue only on Green |
+| 072 | AOS07 | AOS | Internal foundation | Local goal packs depend on goal compiler. | AOS06 Green | Serial-only | Yes | Strong implementation validation | source truth, local language boundary | Continue only on Green |
+| 073 | AOS08 | AOS | Internal foundation | Alternate paths depend on starting position and goal path. | AOS05-AOS07 Green | Serial-only | Yes | Strong implementation validation | alternate path reviewer, proof/trust | Continue only on Green |
+| 074 | AOS09 | AOS | Internal foundation | Option value depends on path portfolio. | AOS08 Green | Serial-only | Yes | Strong implementation validation | longevity reviewer, product identity | Continue only on Green |
+| 075 | AOS10 | AOS | Internal foundation | Commitment time depends on graph/control plane. | AOS02-AOS04 Green | Parallel-safe after AOS04 if disjoint | Yes | Strong implementation validation | commitment/time reviewer, privacy | Continue only on Green |
+| 076 | AOS12 | AOS | Internal foundation | Proof trust can proceed after graph/control plane and before recommendations. | AOS02-AOS04 Green | Parallel-safe after AOS04 if disjoint | Yes | Strong implementation validation | proof/trust, receipt models | Continue only on Green |
+| 077 | AOS13 | AOS | Internal foundation | Source Truth must precede recommendation exposure. | AOS02-AOS04 Green | Parallel-safe after AOS04 if disjoint | Yes | Strong implementation validation | source-truth safety, privacy | Continue only on Green |
+| 078 | AOS11 | AOS | Internal foundation | Reality Drift needs Commitment Time and Proof Trust. | AOS10/AOS12 Green | Serial-only | Yes | Strong implementation validation | reality drift, recovery reviewer | Continue only on Green |
+| 079 | AOS14 | AOS | Internal foundation | Recommendation Start Here needs control plane, proof, and source truth. | AOS04/AOS12/AOS13 Green | Serial-only | Yes | Strong implementation validation | recommendation eligibility, source truth | No user-facing exposure yet |
+| 080 | AOS15 | AOS | Planning boundary | Local Language planning needs deterministic fallback and source truth. | AOS04/AOS13/AOS14 Green | Serial-only | Yes | Adequate/Strong depending on scope | runtime contract, privacy/trust | No model runtime without approval |
+| 081 | AOS16 | AOS | Runtime gate | Performance Energy must exist before runtime-heavy work. | AOS01-AOS15 classified | Serial-preferred | Yes | Adequate gate evidence | performance-energy reviewer | Convert to recurring runtime gate |
+| 082 | AOS17 | AOS | Runtime gate | Privacy Safety must exist before sensitive/external projection. | AOS01-AOS16 classified | Serial-preferred | Yes | Adequate gate evidence | privacy safety board, projection reviewer | Convert to recurring privacy gate |
+| 083 | AOS18 | AOS | Evaluation | Golden scenarios depend on kernel contracts. | AOS01-AOS17 Green | Serial-only | Yes | Strong validation evidence | AOS fixture architect, evaluation reviewer | Continue only on Green |
+| 084 | AOS19 | AOS | Experience contract | Experience kernel follows fixtures and PXOS expression. | AOS18 Green, PXOS expression gates | Serial-only | Yes | Adequate/Strong | cognitive load, PXOS reviewer | No broad UI work by implication |
+| 085 | AOS20 | AOS | Internal personalization | Local calibration depends on recommendation and evaluation. | AOS14/AOS18 Green, Privacy | Serial-only | Yes | Strong implementation validation | privacy/trust, memory consent | Continue only on Green |
+| 086 | AOS21 | AOS | Planning/external | Interoperability planning waits for privacy/performance gates. | AOS16/AOS17 Green, CS external proof | Serial-only | Yes | Adequate planning evidence | app-intent, external-surface, privacy | No platform implementation by implication |
+| 087 | AOS22 | AOS | Internal foundation | Longevity depends on graph, proof, and source truth. | AOS02/AOS12/AOS13 Green | Parallel-safe after dependencies if disjoint | Yes | Strong implementation validation | longevity, export/import safety | Continue only on Green |
+| 088 | AOS23 | AOS | Governance | Registry follows all kernel contracts. | AOS01-AOS22 classified | Serial-only | Yes | Adequate governance evidence | governance, train integrity | Continue only on Green |
+| 089 | AOS24 | AOS | UI integration | UI integration waits for contracts, fixtures, PXOS, ME, and CS gates. | AOS18-AOS23 Green, PXOS, ME, CS | Serial-only | Yes | Strong implementation plus UI evidence | PXOS surface, accessibility, visual, ME/CS | Stop on human proof or weak validation |
+| 090 | AOS25 | AOS | Tests/fixtures | Fixture library follows UI integration and evaluation. | AOS18/AOS24 Green | Serial-only | Yes | Strong test evidence | fixture architect, test-impact architect | Continue only on Green |
+| 091 | AOS26 | AOS | QA | Privacy/performance QA follows gates and fixtures. | AOS16/AOS17/AOS18/AOS25 Green | Serial-only | Yes | Strong QA evidence | privacy/performance boards | Continue only on Green |
+| 092 | AOS27 | AOS | Claim truth | App Store claim truth follows QA but cannot claim readiness without human proof. | AOS26 Green, REC Release Claim | Serial-only | Yes | Adequate release evidence | release-claim-truth-enforcer, human proof | Stop on readiness ambiguity |
+| 093 | AOS28 | AOS | Handoff | Handoff follows claim truth. | AOS27 Green | Serial-only | Yes | Adequate handoff evidence | evidence gate, FAANG handoff auditor | Stop unless explicit continuation |
+| 094 | AOS29 | AOS | Repair | Repair train runs only after classified AOS Yellow/Red. | Failed/Yellow AOS gate | Serial-only | Conditional | Strong repair validation | repair train, AOS red-team reviewer | Stop if repair cannot stay scoped |
+| 095 | AOS30 | AOS | Roadmap | Beyond roadmap follows handoff or explicit decision. | AOS28 Green or explicit user decision | Serial-only | Yes | Adequate docs evidence | roadmap-sequencer, governance | Stop after roadmap |
 
-## Product Depth Lane
+## Product Depth Train
 
-No formal `PD*.md` batch prompts were found. Product Depth is therefore not numbered as a batch train in this global order. It is a blocked future lane pending:
+Product Depth is now formalized as `PD01-PD18 Product Depth Train` and remains future/not started. It is blocked until:
 
-- PX14 Product Depth Drilldown Architecture Green.
-- PX18 readiness reorder Green as a recurring gate.
-- Affected ME gates Green for any owner files touched.
-- Affected CS gates Green for routes, raw values, external surfaces, import/export, or persistence seams.
-- PXOS Top-Level Surface Composition Gate Green.
-- Explicit user approval with a formal Product Depth prompt.
+- the user says exactly `Start Product Depth Train`;
+- PX14 Product Depth Drilldown Architecture is Green;
+- PX18 readiness reorder is Green as a recurring gate;
+- affected ME gates are Green for any owner files touched;
+- affected CS gates are Green for routes, raw values, external surfaces, import/export, or persistence seams;
+- PXOS Top-Level Surface Composition Gate is Green;
+- AOS runtime gates are Green when a PD batch touches recommendation, source truth, adaptation, proof, alternate-path, reality-drift, or commitment-time logic.
 
-Product Depth must deepen existing Today, Goals, Capture, Plan, and You surfaces through drill-downs and owned detail flows. It must not widen Ambitions with new top-level tabs, dashboards, chat-first surfaces, habit modes, notes areas, or calendar clones.
+Product Depth must deepen existing Today, Goals, Capture, Plan, and You surfaces through drill-downs and owned detail flows. It must not widen Ambitions with new top-level tabs, dashboards, chat-first surfaces, habit modes, notes areas, inbox/notes modes, project-management modes, or calendar clones.
 
 ## Batch Classification Summary
 
 - Keep order: REC02-REC06 after REC01; PX01-PX20 within PXOS canon sequence; most AOS kernel dependencies.
 - Move earlier: REC evidence before product messaging; PXOS before user-facing implementation; ME baseline before expansion; CS registry and compatibility proofs before retirements.
-- Move later: AOS user-facing exposure, Product Depth implementation, release readiness evidence, platform claims.
+- Move later: AOS user-facing exposure, Product Depth implementation until PXOS/ME/CS gates are Green, release readiness evidence, platform claims.
 - Convert to recurring gate: PX18, ME10, AOS16, AOS17, and all global gate matrix checks.
-- Block until dependency resolved: Product Depth; AOS24 UI integration; CS retirements before proof; release/App Store/TestFlight claims before human/platform proof.
+- Block until dependency resolved: PD implementation without PXOS/ME/CS/AOS prerequisites; AOS24 UI integration; CS retirements before proof; release/App Store/TestFlight claims before human/platform proof.
 
 ## Human-Proof Stop Conditions
 

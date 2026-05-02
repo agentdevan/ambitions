@@ -2,8 +2,8 @@
 
 Active train: Release Evidence Closure
 Active batch: REC01 Release Evidence Truth Inventory
-Current out-of-train task: Batch Prompt Completeness Audit and Hardening
-Scope: docs/protocol/prompt-hardening only
+Current out-of-train task: Product Depth Train Formalization and Global Order Integration
+Scope: docs/protocol/future-train formalization only
 Date: 2026-05-02
 
 ## Baseline
@@ -21,6 +21,10 @@ PXOS future canon and train-control docs exist. PXOS train is future/inactive an
 ## Prompt Hardening Status
 
 REC02-REC06 standalone prompt files were created as future/not-started prompts. PX01-PX20 prompts were deepened with batch-specific deliverables and acceptance criteria. This did not start REC02, PXOS, or any future train.
+
+## Product Depth Formalization Status
+
+Product Depth is formalized as a future/not-started PD01-PD18 train with required approval phrase `Start Product Depth Train`. This does not start Product Depth, REC02, PXOS, ME, CS, AOS, or app implementation.
 
 ## Boundaries
 

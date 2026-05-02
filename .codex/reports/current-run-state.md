@@ -2,8 +2,8 @@
 
 Active train: Release Evidence Closure
 Active batch: REC01 Release Evidence Truth Inventory
-Current out-of-train task: Batch Prompt Completeness Audit and Hardening
-Scope: docs/protocol/prompt-hardening only
+Current out-of-train task: Product Depth Train Formalization and Global Order Integration
+Scope: docs/protocol/future-train formalization only
 Date: 2026-05-02
 Branch: main
 
@@ -21,6 +21,7 @@ Branch: main
 - Release Evidence Closure: active at REC01; REC02 not started.
 - REC02-REC06: future/not started; standalone prompt hardening completed.
 - PX01-PX20: future/not started; batch-specific prompt hardening completed.
+- Product Depth: formalized as a future/not-started PD01-PD18 train; not started.
 
 ## Boundaries
 
@@ -33,8 +34,8 @@ Branch: main
 
 ## Current Validation Plan
 
-Run git status, diff check, REC/PX prompt counts, prompt completeness scans, Product Depth scans, status/release/top-level-composition scans, doc QA advisory, batch-train gate advisory, and changed-file boundary check. App build/test is skipped because app code is forbidden for this pass.
+Run git status, diff check, PD prompt/train counts, Product Depth approval phrase scans, started/completed status scans, anti-sprawl scans, release-claim scans, doc QA advisory, batch-train gate advisory, and changed-file boundary check. App build/test is skipped because app code is forbidden for this pass.
 
 ## Current Validation Result
 
-PASS WITH YELLOW. `git diff --check` passed; changed-file boundary remained limited to `docs/**` and `.codex/**`; REC prompt count is 6; PX prompt count is 20; PX deliverable and acceptance sections are present in all 20 PX prompts; REC02-REC06 standalone identity sections are present. Doc QA and batch-train gate checks remain advisory Yellow because the working tree contains this expected docs-only change set and the repo has a broader pre-existing markdown/deprecated-language backlog.
+PASS WITH YELLOW. `git diff --check` passed; changed-file boundary remained limited to `docs/**` and `.codex/**`; PD prompt count is 18; PD train manifest count is 1; targeted markdownlint over new PD files passed with 0 errors; Product Depth start/completion scans found only future/not-started or forbidden-claim guardrails. Doc QA and batch-train gate checks remain advisory Yellow because the working tree contains this expected docs-only change set and the repo has a broader pre-existing markdown/deprecated-language backlog.

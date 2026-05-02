@@ -191,3 +191,40 @@ Use this context when the user explicitly chooses PXOS or future user-facing pro
 - `docs/codex/batch-trains/PX01_PX20_PRODUCT_EXPERIENCE_OS_TRAIN.md`
 
 PXOS is future canon for user-facing experience, not current app implementation. PXOS train starts only if the user says exactly `Start PXOS Future-Canon Train`. REC01 remains active; REC02, AOS, ME, CS, Product Depth, and PXOS implementation remain unstarted until explicitly approved by their gates.
+
+
+## Product Depth Future Train Context
+
+Use this context when the user explicitly chooses Product Depth after the
+required PXOS, ME, CS, AOS-if-needed, and REC claim gates:
+
+- `docs/canon/Ambitions_Product_Depth_Plan.md`
+- `docs/canon/PXOS_Product_Depth_And_Drilldown_Rules.md`
+- `docs/codex/batch-trains/PD01_PD18_PRODUCT_DEPTH_TRAIN.md`
+- `docs/codex/batches/PD01_Product_Depth_Canon_Inventory_And_Ownership_Map_Prompt.md`
+- `docs/codex/batches/PD02_Today_Step_Detail_Depth_Prompt.md`
+- `docs/codex/batches/PD03_Today_Step_Session_Depth_Prompt.md`
+- `docs/codex/batches/PD04_Today_Recovery_And_Closure_Depth_Prompt.md`
+- `docs/codex/batches/PD05_Goals_Mission_Control_Detail_Architecture_Prompt.md`
+- `docs/codex/batches/PD06_Goal_Lifecycle_And_Path_Visualization_Prompt.md`
+- `docs/codex/batches/PD07_Goal_Proof_And_Decision_History_Depth_Prompt.md`
+- `docs/codex/batches/PD08_Goal_Alternate_Path_And_Tradeoff_Depth_Prompt.md`
+- `docs/codex/batches/PD09_Capture_Placement_Review_Prompt.md`
+- `docs/codex/batches/PD10_Capture_Correction_And_Confidence_Loops_Prompt.md`
+- `docs/codex/batches/PD11_Grow_Into_Goal_Flow_Prompt.md`
+- `docs/codex/batches/PD12_Plan_Reflow_Decision_Depth_Prompt.md`
+- `docs/codex/batches/PD13_Plan_Recovery_And_Pressure_Review_Prompt.md`
+- `docs/codex/batches/PD14_Life_Shape_Drilldowns_Prompt.md`
+- `docs/codex/batches/PD15_You_Trust_History_And_Receipts_Center_Prompt.md`
+- `docs/codex/batches/PD16_Schedule_Availability_And_Planning_Defaults_Depth_Prompt.md`
+- `docs/codex/batches/PD17_Cross_Surface_Proof_And_Review_Integration_Prompt.md`
+- `docs/codex/batches/PD18_Product_Depth_Handoff_And_Next_Lane_Readiness_Prompt.md`
+- `docs/codex/GLOBAL_FUTURE_BATCH_EXECUTION_ORDER.md`
+- `docs/codex/GLOBAL_FUTURE_BATCH_GATE_MATRIX.md`
+
+Product Depth starts only if the user says exactly
+`Start Product Depth Train`. PD01-PD18 remain future/not started. Product Depth
+must deepen Today, Goals, Capture, Plan, and You; it must not add new top-level
+tabs, generic dashboards, stacked-card top-level screens, habit tracker modes,
+calendar clones, chatbot-first AI surfaces, inbox/notes modes, or enterprise
+project-management systems.
