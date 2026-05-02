@@ -28,6 +28,16 @@ Do not treat vague language as execution approval.
 
 This global sequencing prompt is not an approval phrase to execute a future batch.
 
+When a current user prompt says the exact phrase
+`Run Global Batch Sequence Until Blocked` and explicitly preauthorizes the
+Ambitions 4.0 Execution Program, that approval satisfies routine train
+transition approval for REC02-REC06, PX01-PX20, ME01-ME12, CS01-CS10,
+PD01-PD18, and AOS01-AOS30 in global order. This preauthorization is only
+permission to attempt the next eligible batch. It does not satisfy proof,
+validation, release, platform, visual-approval, privacy/legal, App Store
+Connect, TestFlight, signed archive, physical-device, public accessibility, or
+final release decision requirements.
+
 ## Execution Loop
 
 1. Confirm branch is `main` unless the user explicitly requested otherwise.
@@ -35,7 +45,9 @@ This global sequencing prompt is not an approval phrase to execute a future batc
 3. Select the next eligible batch from `GLOBAL_FUTURE_BATCH_EXECUTION_ORDER.md`.
 4. Read the batch prompt or, if a REC02-REC06 prompt file does not exist, the REC train manifest entry.
 5. Read all source truth required by that batch.
-6. Confirm the exact approval phrase exists for the batch/train/mode.
+6. Confirm the exact approval phrase exists for the batch/train/mode, or that
+   the current prompt's global 4.0 sequence preauthorization explicitly covers
+   the selected train.
 7. Confirm all prerequisite gates are Green or accepted Yellow.
 8. Confirm no blocker exists.
 9. Create a narrow implementation or docs plan with allowed/forbidden files.
@@ -72,10 +84,15 @@ Continuous mode is allowed only when:
 - Each batch can be committed independently.
 - No human proof is required.
 - Validation strength is Strong or Adequate.
-- No batch requires a separate approval phrase.
+- No batch requires a separate approval phrase outside the current global 4.0
+  preauthorization.
 - Train control and global order both allow continuation.
 
 Continuous mode means implement, validate, repair, commit, then continue. It never means pushing through failures.
+
+Continuous mode has no arbitrary batch-count cap. After compaction, resume, or
+long-run context refresh, reload the 4.0 execution source truth, the last
+completed batch report, and the next selected prompt before continuing.
 
 ## Gate Sequence
 
@@ -131,7 +148,7 @@ Stop on:
 - App Store Connect, signing, hardware, public accessibility, external rendered proof, or release decision requirement.
 - Forbidden file touch.
 - Weak/Missing implementation validation.
-- Missing approval phrase.
+- Missing approval phrase or missing current global 4.0 preauthorization.
 - Unsafe dirty worktree.
 - Source truth conflict affecting safety.
 - Global order and train manifest conflict affecting safety.

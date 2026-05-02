@@ -3,7 +3,7 @@
 Active train: Release Evidence Closure
 Active batch: REC01 Release Evidence Truth Inventory
 Current out-of-train task: Ambitions 4.0 Execution Program Status Semantics and Global Order Reconciliation
-Scope: docs/protocol/status-truth/planning only
+Scope: docs/protocol/status-truth/planning and global-continuation protocol repair only
 Date: 2026-05-02
 
 ## Baseline
@@ -36,4 +36,10 @@ No app behavior implemented. No production refactor. No compatibility seam retir
 
 ## Continuation Rule
 
-Do not start REC02, PX01, AOS01, ME01, CS01, Product Depth, or any implementation train automatically. Continue only after explicit user approval and matching train gates.
+The current user prompt says `Run Global Batch Sequence Until Blocked` and
+explicitly preauthorizes routine Ambitions 4.0 train transitions. Continue only
+in global order, after dry-run selection says `Execution allowed: YES`, and only
+while Green or accepted Yellow gates remain safe. Stop for unresolved Red, weak
+or missing implementation validation, human-only proof, forbidden files,
+unsupported release/platform claims, product-quality degradation, unsafe dirty
+state, or stale source truth.

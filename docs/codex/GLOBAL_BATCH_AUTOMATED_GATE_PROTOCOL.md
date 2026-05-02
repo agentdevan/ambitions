@@ -9,6 +9,18 @@ Date: 2026-05-02
 
 Every future global batch must produce explicit gate outputs before closeout and continuation. Automated gates are source-truth, scope, evidence, validation, and drift checks plus reviewer outputs. They do not replace human-only proof.
 
+Before edits, every batch must perform a dry-run selection and declare whether
+execution is allowed. The dry-run names the selected global batch, prompt path,
+train, current status, approval coverage, allowed and forbidden files, required
+gates, expected validation strength, human-proof risk, expected stop condition,
+and `Execution allowed: YES` or `Execution allowed: NO`.
+
+Before edits, every batch must also declare its execution budget: maximum file
+count touched, intended new files, intended deleted files, diff size category,
+whether app code is allowed, whether docs-only mode applies, whether tests may
+be edited, whether screenshots/previews are required, and whether human proof
+may be required.
+
 ## Gate Output Schema
 
 Use this shape in batch reports:
@@ -47,6 +59,12 @@ Red means a correctness-affecting test failure, build failure caused by the batc
 - AOS: typed contracts, privacy/fallback/source-truth/performance/evaluation evidence.
 - Validation: commands, logs, PASS/PARTIAL/FAIL, proof scope, non-claims.
 - Handoff/Rollback: report, next prompt, rollback steps.
+- Batch report: batch-specific report under `docs/audits/`, unless the prompt
+  defines a stricter alternate report path.
+- Post-commit drift: current batch complete with evidence, next batch selected
+  correctly, no later batch accidentally started, train status consistent,
+  global order count stable, approval phrases unchanged, and unsupported
+  release/PXOS/AOS/Product Depth claims absent.
 
 ## Batch-Type Gates
 

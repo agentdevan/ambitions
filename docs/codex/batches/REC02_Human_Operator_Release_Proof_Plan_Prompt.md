@@ -10,7 +10,9 @@ Status: Queued Ambitions 4.0 evidence batch; not started; blocked pending `Conti
 - Train: Release Evidence Closure
 - Mode: evidence/docs-only
 - Owner: release evidence and human-proof boundary
-- Required approval phrase: `Continue Release Evidence Closure`
+- Required approval phrase: `Continue Release Evidence Closure`, or current
+  global Ambitions 4.0 preauthorization via
+  `Run Global Batch Sequence Until Blocked`
 
 ## Purpose
 
@@ -45,11 +47,14 @@ proof.
 - `git rev-parse HEAD`
 - `git log -1 --oneline`
 - Confirm REC01 is Green or accepted Yellow by repo evidence.
-- Confirm the user said exactly `Continue Release Evidence Closure`.
+- Confirm the user said exactly `Continue Release Evidence Closure`, or that
+  the current prompt explicitly preauthorizes Ambitions 4.0 global execution via
+  `Run Global Batch Sequence Until Blocked`.
 - Confirm REC02 is not already marked started or complete.
 
-Stop if REC01 evidence is not accepted, the approval phrase is missing, the
-branch is not `main`, or any app/workflow/dependency file is dirty.
+Stop if REC01 evidence is not accepted, approval is missing from both the REC
+phrase and current global 4.0 preauthorization, the branch is not `main`, or
+any app/workflow/dependency file is dirty.
 
 ## Allowed Files
 
@@ -150,4 +155,5 @@ implementation, or AmbitionsOS implementation.
 ## Next Safe Prompt / Path
 
 `REC03 Validation Log Ledger Closure` only after REC02 is Green or accepted
-Yellow, committed, pushed, and train continuation is explicitly allowed.
+Yellow, committed, pushed, and train continuation is explicitly allowed by REC
+approval or current global 4.0 preauthorization.

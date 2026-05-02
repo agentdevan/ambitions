@@ -31,11 +31,18 @@ This protocol defines how future Codex sessions repair Red failures and classify
 ## Yellow Advisory Loop
 
 1. Classify the Yellow.
-2. Decide whether it must be fixed now.
-3. Fix now if it affects the next batch, safety, release claims, product identity, architecture, compatibility, accessibility, or testing strength.
-4. Defer only if already planned for a future batch or existing backlog.
-5. Document the deferral owner.
-6. Document why continuation is safe.
+2. Classify it as Fix Now, Already Owned by Later Batch, Existing Repo-Wide
+   Advisory, Tooling/Environment Advisory, Human-Proof Advisory, or Needs New
+   Repair Batch.
+3. Decide whether it must be fixed now.
+4. Fix now if it affects the current batch, next batch safety, release claims,
+   product identity, architecture, maintainability, compatibility,
+   accessibility, validation strength, or source-truth integrity.
+5. Defer only if it is already owned by a later batch, already part of the docs
+   QA backlog, environment/tooling-only, human-proof-only, or fixing it now
+   would create unsafe scope creep.
+6. Document the deferral owner, why deferral is safe, whether it blocks later
+   batches, and when it must be revisited.
 7. Continue only if all Red gates are clear.
 
 ## Forbidden Repair Tactics

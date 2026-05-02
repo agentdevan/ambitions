@@ -18,7 +18,8 @@ This protocol defines when Codex may continue from one globally ordered batch to
 - Next batch prerequisites are satisfied.
 - Next batch source truth is available.
 - Next batch does not require human proof.
-- Next batch does not require a separate approval phrase that is missing.
+- Next batch does not require a separate approval phrase that is missing or not
+  covered by current global 4.0 preauthorization.
 - Train control allows continuation.
 - Global order allows continuation.
 - Batch scope remains manageable.
@@ -32,8 +33,11 @@ This protocol defines when Codex may continue from one globally ordered batch to
 - Human proof is required.
 - App Store Connect, device signing, hardware proof, external rendered proof, public accessibility proof, legal/privacy signoff, or production release decision is required.
 - Batch would exceed safe scope.
-- Next batch requires explicit user approval.
-- Next batch changes train type from docs-only to code implementation and approval is not present.
+- Next batch requires explicit user approval that is not covered by current
+  global 4.0 preauthorization.
+- Next batch changes train type from docs-only to code implementation and
+  approval is not present through the global sequence prompt or a specific
+  train phrase.
 - Context is too stale to continue safely.
 - Current branch is dirty in an unsafe way.
 - Validation is Weak or Missing for an implementation batch.
@@ -52,9 +56,26 @@ Run multiple global batches in order only when the user says `Run Global Batch S
 
 Continuous mode never allows continuation through unresolved Red.
 
+Continuous mode has no arbitrary milestone or batch-count cap. Continue until a
+real blocker appears: unresolved Red, weak or missing implementation
+validation, human-only proof, unsafe state, missing source truth, forbidden
+file drift, unsupported claims, or explicit user stop.
+
 ## Approval Phrase Handling
 
-Global approval phrases do not replace train-specific phrases when a train requires one. If the next globally ordered batch is in REC, PXOS, ME, CS, or AOS and its train phrase is missing, stop and ask for the exact phrase.
+The exact phrase `Run Global Batch Sequence Until Blocked` may replace routine
+train-specific continuation phrases only when the current user prompt
+explicitly preauthorizes Ambitions 4.0 execution across the named trains. In
+that mode, do not stop merely to ask for `Continue Release Evidence Closure`,
+`Start PXOS Future-Canon Train`, `Start ME Train`, `Start CS Train`,
+`Start Product Depth Train`, or `Start AOS Train`.
+
+Global preauthorization does not replace proof. Stop for physical-device proof,
+App Store Connect proof, TestFlight proof, signed archive distribution proof,
+public accessibility conformance, legal/privacy signoff, product-owner visual
+approval when required by the batch, final release decisions, external platform
+proof Codex cannot perform, unresolved Red, weak implementation validation, or
+unsafe state.
 
 ## Commit-After-Each-Batch Rule
 
@@ -66,7 +87,11 @@ Codex must stop and produce an operator checklist for human-only proof. It may d
 
 ## Context-Staleness Stop Rule
 
-Stop when source truth, current branch state, validation status, or batch manifest status is stale or unclear. Refresh repo truth before continuing.
+Stop only when source truth, current branch state, validation status, or batch
+manifest status remains stale or unclear after refresh. After compaction,
+resume, or long-run context refresh, reload the 4.0 execution source truth, the
+last completed batch report, and the next selected batch prompt before
+continuing.
 
 ## Validation-Strength Stop Rule
 
