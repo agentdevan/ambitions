@@ -1,9 +1,9 @@
 # Current Run State
 
 Active train: Release Evidence Closure
-Active batch: REC04 Release Claim Copy Guard
+Active batch: none; REC04 complete and REC05 next eligible
 Current out-of-train task: none
-Scope: REC04 docs/evidence release-claim copy guard
+Scope: REC04 docs/evidence release-claim copy guard complete; REC05 dry-run pending
 Date: 2026-05-02
 Branch: main
 
@@ -19,7 +19,7 @@ Branch: main
 - AmbitionsOS: future canon only, not current app implementation truth.
 - PXOS: future user-facing product experience canon only; PXOS train queued/blocked and not started.
 - AOS/ME/CS/Product Depth: queued/blocked and not started.
-- Release Evidence Closure: REC01 inventory is active baseline evidence; REC02 proof plan complete; REC03 validation-log ledger complete; REC04 release-claim copy guard complete pending commit.
+- Release Evidence Closure: REC01 inventory is active baseline evidence; REC02 proof plan complete; REC03 validation-log ledger complete; REC04 release-claim copy guard complete.
 - REC05-REC06: queued/blocked and not started.
 - Current user prompt preauthorizes Ambitions 4.0 global sequence continuation
   through routine train transitions, but not proof, validation, Red, release,
@@ -44,4 +44,4 @@ Run git status, branch/HEAD checks, diff check, pre/post release-claim scans, do
 
 ## Current Validation Result
 
-PASS WITH YELLOW pending commit. REC04 corrected active release/status wording and classified noisy claim-scan hits. `git diff --check`, doc QA, gate check, claim scan, targeted lint, and boundary results are recorded in the REC04 report. App build/test is skipped because REC04 forbids app code and changes only docs.
+PASS WITH YELLOW. REC04 corrected active release/status wording and classified noisy claim-scan hits. `git diff --check`, doc QA, gate check, claim scan, targeted lint, and boundary results are recorded in the REC04 report. App build/test was skipped because REC04 forbids app code and changed only docs.

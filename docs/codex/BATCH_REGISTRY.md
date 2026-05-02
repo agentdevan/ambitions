@@ -28,7 +28,7 @@ Current 4.0 status:
 
 - Completed: REC02 Human Operator Release Proof Plan.
 - Completed: REC03 Validation Log Ledger Closure.
-- Active: REC04 Release Claim Copy Guard.
+- Completed: REC04 Release Claim Copy Guard.
 - Active evidence baseline: REC01 Release Evidence Truth Inventory.
 - Next queued / blocked: REC05-REC06 in Release Evidence Closure.
 - Queued / Blocked: PX01-PX20 pending `Start PXOS Future-Canon Train`.
@@ -37,7 +37,6 @@ Current 4.0 status:
 - Queued / Blocked: PD01-PD18 pending `Start Product Depth Train` plus PXOS/ME/CS/AOS-if-needed gates.
 - Queued / Blocked: AOS01-AOS30 pending `Start AOS Train`.
 - Total formal remaining batches in the 4.0 global order at program start: 95.
-- Remaining after REC03: 93.
 - Remaining after REC04: 92.
 
 Use [../canon/Ambitions_4_0_Execution_Program.md](../canon/Ambitions_4_0_Execution_Program.md) and [GLOBAL_FUTURE_BATCH_EXECUTION_ORDER.md](GLOBAL_FUTURE_BATCH_EXECUTION_ORDER.md) for current post-3.0 status semantics.
