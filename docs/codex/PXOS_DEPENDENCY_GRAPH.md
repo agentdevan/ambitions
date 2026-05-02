@@ -15,7 +15,7 @@ Date: 2026-05-02
 - PX10 is complete as Visual Interaction future-canon work.
 - PX11 is complete as Onboarding Setup future-canon work.
 - PX12 is complete as Accessibility Cognitive Load Emotional Safety future-canon work.
-- PX13 depends on PX01, PX07, PX08, PX09, PX10, PX11, PX12, and all surface canon.
+- PX13 is complete as Empty Edge Degraded States future-canon work.
 - PX14 depends on PX01-PX13.
 - PX15 depends on PX02-PX08 and PX14.
 - PX16 depends on AmbitionsOS recommendation, source-truth, privacy, and PX09.

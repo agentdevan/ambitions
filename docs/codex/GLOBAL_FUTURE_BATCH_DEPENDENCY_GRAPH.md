@@ -2,7 +2,7 @@
 
 <!-- markdownlint-disable MD013 -->
 
-Status: Ambitions 4.0 dependency graph; active through PX12 future-canon evidence
+Status: Ambitions 4.0 dependency graph; active through PX13 future-canon evidence
 Date: 2026-05-02
 
 ## Phase Map
@@ -36,7 +36,8 @@ Ambitions 4.0 is the active post-3.0 execution program, not a shipped product ve
 - PX10 is complete as Visual Interaction future-canon work.
 - PX11 is complete as Onboarding Setup future-canon work.
 - PX12 is complete as Accessibility Cognitive Load Emotional Safety future-canon work.
-- PX13-PX20 depend on PX01 and relevant completed PX surface canon.
+- PX13 is complete as Empty Edge Degraded States future-canon work.
+- PX14-PX20 depend on PX01 and relevant completed PX surface canon.
 - PX14 depends on PX02-PX13.
 - PX18 depends on PX01-PX17 and recurs before major implementation lanes.
 - ME01 depends on explicit approval phrase `Start ME Train`.
