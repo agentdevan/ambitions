@@ -1,10 +1,14 @@
 # CS01-CS10 Compatibility Seam Retirement Train
 
-Status: Queued Ambitions 4.0 train manifest; not started; blocked pending `Start CS Train`.
+<!-- markdownlint-disable MD013 -->
+
+Status: Active Ambitions 4.0 train manifest; CS01 audit evidence complete; CS07 is next if global continuation gates pass.
 
 ## Start Rule
 
 This train starts only when the user explicitly approves it after Ambitions 3.0/F17-F30 truth is Green and `docs/codex/BATCH_REGISTRY.md` records the selected train as active. Required user approval phrase: `Start CS Train`.
+
+Current global execution note: the active prompt phrase `Run Global Batch Sequence Until Blocked` preauthorizes routine Ambitions 4.0 train transitions when global order and gates are Green or accepted Yellow. CS01 was selected by global order after ME12 and completed as audit-only evidence without retiring seams.
 
 ## What Does Not Start This Train
 
@@ -31,7 +35,7 @@ Allowed files are the files named by each batch prompt. Forbidden across the tra
 
 ## Batch Order And Gates
 
-- CS01: Compatibility Seam Registry And Risk Map. Action: maps. Seam: all Lane 3 candidate seams. Gate: replacement map and compatibility proof before deletion.
+- CS01: Compatibility Seam Registry And Risk Map. Action: maps. Seam: all Lane 3 candidate seams. Gate: replacement map and compatibility proof before deletion. Status: complete as audit-only evidence; no seam retired.
 - CS02: Profile To You Internal Naming Retirement. Action: retires. Seam: Profile internal naming behind the You surface. Gate: replacement map and compatibility proof before deletion.
 - CS03: Insights Compatibility Retirement. Action: retires. Seam: Insights route/model compatibility for contextual intelligence. Gate: replacement map and compatibility proof before deletion.
 - CS04: Habits Ritual Plan Compatibility Retirement. Action: retires. Seam: Habits route/model compatibility for Ritual/Plan continuity. Gate: replacement map and compatibility proof before deletion.
@@ -48,7 +52,7 @@ Each batch report must include: command evidence, log paths when available, pass
 
 ## Auto-Continuation
 
-Auto-continuation is disabled by default. It is allowed only when the active batch is Green, committed, pushed, and the next batch is the direct successor in this manifest. Yellow or Red requires an explicit repair or user-decision prompt.
+Auto-continuation is disabled by default outside global execution mode. In global execution mode, continuation is allowed only when the active batch is Green or accepted Yellow, committed, pushed, and the next batch is selected by the global order. Yellow must be classified and owned; Red blocks continuation.
 
 ## Release Claim Boundary
 

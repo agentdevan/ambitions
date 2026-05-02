@@ -66,13 +66,14 @@ Current 4.0 status:
 - Active evidence baseline: REC01 Release Evidence Truth Inventory.
 - Completed: Signature Interface Codex OS quality gates.
 - Formalized: SI01-SI18 Signature Interface Implementation Train; queued/blocked and not started.
-- Next queued / blocked: CS01 Compatibility Audit pending global dry-run selection.
-- Queued / Blocked: CS01-CS10 pending current global preauthorization or `Start CS Train`.
+- Completed: CS01 Compatibility Seam Registry And Risk Map.
+- Next queued / blocked: CS07 External Route Widget AppIntent Compatibility Proof pending global dry-run selection.
+- Queued / Blocked: CS07-CS10 pending current global preauthorization or `Start CS Train`.
 - Queued / Blocked: SI01-SI18 pending global-order selection or `Start Signature Interface Train` plus PXOS/ME/CS/SI quality gates.
 - Queued / Blocked: PD01-PD18 pending `Start Product Depth Train` plus PXOS/ME/CS/SI/AOS-if-needed gates.
 - Queued / Blocked: AOS01-AOS30 pending `Start AOS Train`.
 - Total formal Ambitions 4.0 batches after SI insertion: 113.
-- Remaining after ME12 and SI insertion: 77.
+- Remaining after CS01 and SI insertion: 76.
 
 Use [../canon/Ambitions_4_0_Execution_Program.md](../canon/Ambitions_4_0_Execution_Program.md) and [GLOBAL_FUTURE_BATCH_EXECUTION_ORDER.md](GLOBAL_FUTURE_BATCH_EXECUTION_ORDER.md) for current post-3.0 status semantics.
 
@@ -414,7 +415,8 @@ These batches are complete for planning purposes. They remain as historical cont
 | ME09 Product Contract Test Rebaseline | Completed / test evidence | Focused product-contract lane passed; no test edit required. |
 | ME11 Maintainability Regression Repair | Not triggered / conditional | No current ME Red or unaccepted Yellow requires repair. |
 | ME12 Maintainability Handoff | Completed / handoff evidence | ME train handoff complete; ME11 not triggered. |
-| CS01-CS10 Compatibility Seam Retirement Train | Queued / Blocked | Requires current global preauthorization or `Start CS Train` and Green predecessor gates. |
+| CS01 Compatibility Seam Registry And Risk Map | Completed / audit evidence | Created the seam registry and risk map; no seam retired. |
+| CS07-CS10 Compatibility Seam Retirement Train | Queued / Blocked | Requires current global preauthorization or `Start CS Train` and Green predecessor gates. |
 | SI01-SI18 Signature Interface Implementation Train | Queued / Blocked | Formal Signature Interface train. Requires global-order selection or `Start Signature Interface Train`, PXOS completion, relevant ME/CS gates, and SI visual quality gates. |
 | PD01-PD18 Product Depth Train | Queued / Blocked | Formal Product Depth train. Requires exact approval phrase `Start Product Depth Train`, PXOS Product Depth gates, relevant ME/CS/SI gates, and AOS blockers when runtime logic is touched. |
 | PXOS Future-Canon Integration | Completed / docs-only | Added Product Experience OS future canon and Codex OS controls. It does not start PXOS implementation or the PXOS train. |
@@ -435,6 +437,7 @@ These batches are complete for planning purposes. They remain as historical cont
 | ME09 Product Contract Test Rebaseline | Completed / test evidence | Focused product-contract lane passed; no test edit required. |
 | ME11 Maintainability Regression Repair | Not triggered / conditional | No current ME Red or unaccepted Yellow requires repair. |
 | ME12 Maintainability Handoff | Completed / handoff evidence | ME train handoff complete; no further ME batch active. |
-| CS01-CS10 Compatibility Seam Retirement Train | Queued / Blocked | Planning only; no seam retired in this pass. |
+| CS01 Compatibility Seam Registry And Risk Map | Completed / audit evidence | Planning evidence only; no seam retired in this pass. |
+| CS07-CS10 Compatibility Seam Retirement Train | Queued / Blocked | Compatibility proofs, retirements, repair, and handoff remain queued/blocked. |
 | Product Experience OS / PXOS | Queued / Blocked future canon | User-facing future experience canon in Ambitions 4.0. Does not claim implementation. |
 | Product Depth / PD01-PD18 | Queued / Blocked | Deepens Today, Goals, Capture, Plan, and You through drill-downs and proof/review/setup depth. Does not add top-level destinations or claim implementation. |

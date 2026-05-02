@@ -2,10 +2,10 @@
 
 <!-- markdownlint-disable MD013 -->
 
-Active train: CS compatibility seam retirement train selected next by global sequence
-Active batch: CS01 Compatibility Audit dry-run pending
+Active train: CS compatibility seam retirement train
+Active batch: CS01 Compatibility Seam Registry And Risk Map evidence in progress
 Current out-of-train task: none
-Scope: ME01-ME12 maintainability train complete with commit/push evidence; ME11 repair not triggered; PXOS implementation not started; CS01 selected next by global order; Signature Interface/Product Depth/AmbitionsOS trains not started
+Scope: ME01-ME12 maintainability train complete with commit/push evidence; ME11 repair not triggered; PXOS implementation not started; CS01 selected by global order and run as docs-only compatibility audit; Signature Interface/Product Depth/AmbitionsOS trains not started
 Date: 2026-05-02
 
 ## Baseline
@@ -30,22 +30,22 @@ Product Depth is formalized as a queued/blocked PD01-PD18 train with required ap
 
 ## Ambitions 4.0 Status
 
-Ambitions 4.0 is the active post-3.0 execution program, not a shipped product version. The global order now has 113 formal batches after SI insertion: REC02-REC06, PX01-PX20, ME01-ME12, CS01-CS10, SI01-SI18, PD01-PD18, and AOS01-AOS30. REC02-REC06, PX01-PX20, ME01, ME08, ME10, ME02, ME03, ME04, ME05, ME06, ME07, ME09, and ME12 are complete after ME12 commit; 77 formal batches remain queued/blocked or future-selected.
+Ambitions 4.0 is the active post-3.0 execution program, not a shipped product version. The global order now has 113 formal batches after SI insertion: REC02-REC06, PX01-PX20, ME01-ME12, CS01-CS10, SI01-SI18, PD01-PD18, and AOS01-AOS30. REC02-REC06, PX01-PX20, ME01, ME08, ME10, ME02, ME03, ME04, ME05, ME06, ME07, ME09, ME12, and CS01 are complete after CS01 commit; 76 formal batches remain queued/blocked or future-selected.
 
 ## Boundaries
 
-No product behavior expansion. No visual redesign. No compatibility seam retired. No dependencies. No workflow changes. No release claim. AOS, CS, SI implementation, Product Depth, and PXOS implementation remain unstarted.
+No product behavior expansion. No visual redesign. No compatibility seam retired. No dependencies. No workflow changes. No release claim. CS01 is audit-only evidence; CS07-CS10, SI implementation, Product Depth, AOS, and PXOS implementation remain unstarted.
 
 ## Validation Result
 
-ME12 is PASS WITH YELLOW with commit/push evidence:
+CS01 is PASS WITH YELLOW pending commit/push evidence:
 
-- ME09 focused product-contract tests passed with 145 tests and 0 failures.
-- ME12 touched only docs/status files and did not edit tests or app code.
-- `git diff --check` passed.
-- Architecture scan remains an expected Yellow/advisory because large owner files still require extraction.
-- Doc QA remains an expected Yellow/advisory from the existing repo-wide backlog.
-- Release/platform claim scan found no new active readiness claim.
+- CS01 touched only docs/status files and did not edit tests or app code.
+- CS01 mapped Profile/You, Insights, Habits/Ritual/Plan, activeFocus/TodayFocus/.focus, internal .failed taxonomy, and adjacent Capture/Captures/capturesInbox risk.
+- No seam was retired; old values must remain until CS07/CS08 and the relevant retirement batch prove compatibility.
+- `git diff --check`, focused markdownlint on changed docs, changed-file boundary, and release-claim scan passed.
+- `scripts/run-doc-qa.sh || true` remains Yellow/advisory from the existing stale-guidance/deprecated-language/markdownlint backlog; lychee passed.
+- `scripts/batch-train-gate-check.sh || true` reported the expected dirty-tree advisory before CS01 commit.
 
 ## Continuation Rule
 
@@ -53,4 +53,4 @@ The current user prompt says `Run Global Batch Sequence Until Blocked` and expli
 
 ## Next Eligible Batch
 
-After ME12 commit/push and post-commit drift checks, the next global batch is CS01 Compatibility Audit only if dry-run selection says `Execution allowed: YES`.
+After CS01 commit/push and post-commit drift checks, the next global batch is CS07 External Route Widget AppIntent Compatibility Proof only if dry-run selection says `Execution allowed: YES`.
