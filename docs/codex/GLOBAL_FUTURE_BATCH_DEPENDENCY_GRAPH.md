@@ -2,7 +2,7 @@
 
 <!-- markdownlint-disable MD013 -->
 
-Status: Ambitions 4.0 dependency graph; active through ME04 extraction evidence and SI formalization
+Status: Ambitions 4.0 dependency graph; active through ME05 extraction evidence and SI formalization
 Date: 2026-05-02
 
 ## Phase Map
@@ -50,7 +50,7 @@ Ambitions 4.0 is the active post-3.0 execution program, not a shipped product ve
 - ME01 is complete as maintainability audit evidence under current global preauthorization.
 - ME08 is complete as shared projector/state/helper standards evidence under current global preauthorization.
 - ME10 is complete as recurring architecture gate evidence under current global preauthorization.
-- ME02-ME07 depend on ME01, ME08 standards, ME10 architecture gate, and behavior-preservation tests.
+- ME02-ME05 are complete as behavior-preserving extraction evidence. ME06-ME07 depend on ME01, ME08 standards, ME10 architecture gate, and behavior-preservation tests.
 - CS01 depends on explicit approval phrase `Start CS Train`.
 - CS02-CS06 depend on CS01 and the relevant CS07/CS08 compatibility proof where route/raw/external/import/export/persistence risk exists.
 - SI01 depends on PXOS complete, ME01/ME08/ME10/ME02 Green, and SI Codex OS quality gates.
@@ -126,7 +126,7 @@ Ambitions 4.0 is the active post-3.0 execution program, not a shipped product ve
 Parallel work is disabled by default. It is allowed only after explicit approval, disjoint write sets, Green prerequisites, and one commit per batch.
 
 - PX02-PX10 are conceptually parallel-safe after PX01 because they are surface-canon docs, but serial is preferred unless a user explicitly authorizes parallel work.
-- ME02, ME03, ME05, and ME06 may be parallel-safe after ME01/ME08/ME10 if owner files are disjoint and tests are independent.
+- ME06 may be parallel-safe after ME01/ME08/ME10 if owner files are disjoint and tests are independent.
 - AOS10, AOS12, and AOS13 may be parallel-safe after AOS04 if contracts and write sets are disjoint.
 - AOS22 may be parallel-safe after AOS02/AOS12/AOS13 if it does not touch the same owner files as active work.
 
