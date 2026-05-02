@@ -29,7 +29,7 @@ Branch: main
 - ME07: complete as behavior-preserving PlanScreen extraction with commit/push evidence.
 - ME09: complete as product-contract test rebaseline evidence with commit/push evidence (`6bfa6a4b3dde950269eca4c69450687798c340b2`, report repair `5cd24178`).
 - ME11: conditional repair batch not triggered by current ME evidence.
-- ME12: complete as maintainability handoff evidence pending commit/push evidence.
+- ME12: complete as maintainability handoff evidence with commit/push evidence (`7f7ab99b6a671b08bf2706d778af01e06b907f8e`, report repair `f51f937a`).
 - CS01: queued/blocked and not started; selected next only after dry-run says execution is allowed.
 - CS/SI/Product Depth/AOS: queued/blocked and not started.
 - Global order: 113 formal batches after SI insertion; 77 remain after ME12 commit.
