@@ -1,4 +1,5 @@
 # Surface Hierarchy And Navigation
+<!-- markdownlint-disable MD013 -->
 
 Status: PXOS future canon; not current app implementation truth
 Date: 2026-05-02
@@ -8,11 +9,23 @@ Date: 2026-05-02
 The top-level surfaces remain Today, Goals, Capture, Plan, and You. PXOS deepens these surfaces through sheets, panels, drill-downs, receipts/history, setup flows, trust review, proof detail, and source detail.
 
 Surface ownership:
+
 - Today: what matters now and one calm execution path.
 - Goals: strategic direction and Mission Control.
 - Capture: fast private intake and placement.
 - Plan: time, capacity, pressure, and Life Shape.
 - You: Personal System Center, preferences, trust, data, setup, and controls.
+
+PX01 locks these drill-down families as the approved depth model:
+
+- Today: Step Detail, Step Session, recovery, closure, proof peek, source detail.
+- Goals: Goal Detail, Mission Control lanes, proof/history, alternate paths.
+- Capture: routing review, placement correction, grow-into-goal, source detail.
+- Plan: day/week shape, reflow decisions, pressure review, Life Shape detail.
+- You: grouped navigation, trust review, memory/data controls, setup defaults.
+
+Future PXOS batches may refine the exact expression, but they must preserve the
+owner and keep secondary detail behind deliberate drill-downs.
 
 No new top-level tab, no chat-first surface, no generic dashboard, no separate inbox, no generic analytics tab, no standalone habit mode.
 

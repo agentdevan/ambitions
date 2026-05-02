@@ -1,4 +1,5 @@
 # PXOS Product Decision Ledger
+<!-- markdownlint-disable MD013 -->
 
 Status: Future-canon decision ledger; PXOS implementation not started
 Date: 2026-05-02
@@ -27,7 +28,8 @@ convert open questions into locked decisions.
 | Top-level surfaces remain Today / Goals / Capture / Plan / You | User prompt and 3.0 canon | PXOS | all | PX/Product Depth | Blocks new tabs | Deep-not-wide scan | No new IA claim | Locked by user |
 | Ambitions should feel 70% Apple quiet luxury, 20% OpenAI intelligence, 10% executive command surface | User prompt | PXOS visual/copy | all | PX | Sets quality bar | Visual/copy review | Future direction only | Locked by user |
 | AmbitionsOS owns internal intelligence; PXOS owns user-facing expression | User prompt | PXOS/AOS | all | PX/AOS | Defines dependency | Cross-train traceability | Prevents implementation claim | Locked by user |
-| REC01 remains active; REC02 must not start here | User prompt and REC manifest | REC | release evidence | REC | Preserves active train | Registry scan | Prevents release overclaim | Locked by REC/release truth |
+| REC01-REC06 are complete as evidence/status work; human proof remains pending | REC06 handoff | REC | release evidence | REC | Preserves release claim boundary | Registry scan | Prevents release overclaim | Locked by REC/release truth |
+| PX01 may start through current global preauthorization after REC06 | User prompt and global order | PXOS | all | PX | Allows future-canon sequencing only | Dry-run gate | No implementation claim | Locked by user |
 | AOS/ME/CS remain future/inactive | User prompt and registry | Governance | all | AOS/ME/CS | Blocks automatic starts | Status scans | Prevents false status | Locked by REC/release truth |
 | Capture uses restrained dark-sky/starfield signature in Capture and First Run | User prompt | PXOS Capture | Capture/onboarding | PX | Future visual direction | Visual review | Future only | Locked by user |
 | Default automation level is Guided | User prompt | PXOS You | You | PX | Future setup default | Trust review | No current behavior claim | Locked by user |

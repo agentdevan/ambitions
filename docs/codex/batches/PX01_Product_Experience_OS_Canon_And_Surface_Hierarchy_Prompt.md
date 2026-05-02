@@ -1,7 +1,7 @@
 # PX01 Product Experience OS Canon And Surface Hierarchy Prompt
 <!-- markdownlint-disable MD013 -->
 
-Status: Queued Ambitions 4.0 future-canon batch; not implemented; blocked pending `Start PXOS Future-Canon Train`.
+Status: Queued Ambitions 4.0 future-canon batch; not implemented; blocked pending `Start PXOS Future-Canon Train` or current global 4.0 preauthorization.
 
 ## Purpose
 
@@ -72,7 +72,8 @@ Owner: all. Boundary: PXOS canon and hierarchy only.
 - AmbitionsOS: internal intelligence/runtime dependency; PXOS owns expression.
 - ME: check extraction before large UI/file expansion.
 - CS: check compatibility before route/raw/external/persistence changes.
-- REC: check release/product-message claims; REC02 must not start here.
+- REC: check release/product-message claims; REC closure must not be treated as
+  release proof.
 
 ## Implementation Boundary
 
@@ -108,8 +109,8 @@ changed, no unsupported claim, and validation is clean or advisory-only.
 Yellow: doc QA/tooling backlog or an open future decision is classified and does
 not affect current implementation truth.
 
-Red: product direction invented, PXOS marked started/complete, app code touched,
-release/platform claim added, AOS/ME/CS/REC02 started, top-level tab changed, stacked-card top-level composition accepted, or
+Red: product direction invented, PXOS implementation marked started/complete,
+app code touched, release/platform claim added, AOS/ME/CS started, top-level tab changed, stacked-card top-level composition accepted, or
 validation failure unclassified.
 
 ## Stop Conditions
@@ -128,9 +129,9 @@ It may claim future PXOS canon or prompt work exists after commit.
 
 ## What This Batch Must Not Claim
 
-It must not claim PXOS implemented, shipped, active train started, release-ready,
+It must not claim PXOS implemented, shipped, release-ready,
 App Store ready, TestFlight ready, physical-device passed, platform integrated,
-AOS/ME/CS started, or REC02 started.
+AOS/ME/CS started, or REC human proof passed.
 
 ## What This Batch Does Not Prove
 
@@ -144,6 +145,6 @@ next named gate.
 
 ## Next Safe Prompt / Path
 
-Use the next direct PX prompt only after the train has been explicitly started
-with `Start PXOS Future-Canon Train`, this batch is Green, committed, pushed,
-and no Yellow/Red gate blocks continuation.
+Use the next direct PX prompt only after this batch is Green, committed, pushed,
+the current global preauthorization or `Start PXOS Future-Canon Train` remains
+valid, and no Yellow/Red gate blocks continuation.

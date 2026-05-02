@@ -1,6 +1,6 @@
 # PXOS Train Control System
 
-Status: Future train governance; PXOS train not started
+Status: PX01 future-canon complete; PXOS implementation not started
 Date: 2026-05-02
 
 ## Start Rule
@@ -9,13 +9,18 @@ The PXOS train starts only when the user says exactly:
 
 `Start PXOS Future-Canon Train`
 
-This current integration prompt does not count as that approval phrase.
+or when the current user prompt explicitly preauthorizes Ambitions 4.0 global
+sequence execution across PXOS and the selected batch dry-run says
+`Execution allowed: YES`.
+
+Routine global preauthorization does not replace proof, validation, source
+truth, Red stops, human-proof stops, or product-decision locks.
 
 ## What Does Not Start PXOS
 
 Creating PXOS canon, updating Beyond 3.0 roadmap, creating PXOS prompts,
-starting REC01, completing REC01, completing F30, or creating this train control
-system does not start PXOS.
+completing REC closure, completing F30, or creating this train control system
+does not start PXOS implementation.
 
 ## Required Before Implementation
 

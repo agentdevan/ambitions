@@ -1,6 +1,7 @@
 # PX01-PX20 Product Experience OS Train
+<!-- markdownlint-disable MD013 -->
 
-Status: Queued Ambitions 4.0 train manifest; PXOS train not started; blocked pending `Start PXOS Future-Canon Train`.
+Status: PXOS future-canon train active through PX01 only; PXOS implementation not started.
 Train type: queued future-canon and later implementation-readiness train
 Date: 2026-05-02
 
@@ -8,17 +9,21 @@ Date: 2026-05-02
 
 `Start PXOS Future-Canon Train`
 
-No other phrase starts PXOS. This integration batch does not start PXOS.
+Current global Ambitions 4.0 preauthorization may also start a selected PXOS
+batch when the dry-run says `Execution allowed: YES`.
+
+No approval phrase starts PXOS implementation by implication.
 
 ## What Starts The Train
 
-Only the required phrase plus a clean preflight, current registry/context state,
-Green or accepted-Yellow REC01 truth, and no unresolved Red in PXOS controls.
+Only the required phrase or global preauthorization plus a clean preflight,
+current registry/context state, Green or accepted-Yellow REC closure truth, and
+no unresolved Red in PXOS controls.
 
 ## What Does Not Start The Train
 
 Creating this manifest, creating PXOS canon, updating indexes, selecting future
-ordering, REC01 being active, F30 being complete, or mentioning PXOS in a prompt.
+ordering, REC closure, F30 being complete, or mentioning PXOS in a prompt.
 
 ## Source Truth Hierarchy
 
@@ -45,7 +50,7 @@ ordering, REC01 being active, F30 being complete, or mentioning PXOS in a prompt
 
 ## Batch Order
 
-- PX01: Product Experience OS Canon And Surface Hierarchy. Owner: all. Boundary: PXOS canon and hierarchy only.
+- PX01: Product Experience OS Canon And Surface Hierarchy. Owner: all. Boundary: PXOS canon and hierarchy only. Status: complete after PX01 commit.
 - PX02: Today Experience Operating Surface. Owner: Today. Boundary: Today experience canon only.
 - PX03: Goals Mission Control Experience. Owner: Goals. Boundary: Goals/Mission Control experience canon only.
 - PX04: Capture Experience. Owner: Capture. Boundary: Capture experience canon only.

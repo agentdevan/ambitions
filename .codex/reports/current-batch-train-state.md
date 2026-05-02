@@ -1,9 +1,9 @@
 # Current Batch Train State
 
-Active train: none; Release Evidence Closure complete through REC06
-Active batch: none; PX01 next eligible pending dry-run selection
+Active train: PXOS future-canon train
+Active batch: none; PX01 complete and PX02 next eligible pending dry-run selection
 Current out-of-train task: none
-Scope: REC06 docs/evidence release closure handoff complete; human/operator proof remains pending
+Scope: PX01 future-canon surface hierarchy complete; PXOS implementation not started
 Date: 2026-05-02
 
 ## Baseline
@@ -12,23 +12,18 @@ F17-F30 FAANG Handoff Completion Train is complete and Green by current train ev
 
 ## Active Train Truth
 
-Release Evidence Closure is complete through REC06 as an evidence/status train.
-REC01 is the accepted inventory baseline. REC02 is complete as a human-operator
-proof planning batch. REC03 is complete as a validation-log ledger batch. REC04
-is complete as a release-claim copy guard batch. REC05 is complete as a human
-review packet batch. REC06 is complete as a closure handoff. Human/operator
-proof remains pending and blocks any release-posture upgrade.
+Release Evidence Closure is complete through REC06 as an evidence/status train. PX01 is complete as future PXOS parent canon and surface hierarchy. Human/operator proof remains pending and blocks any release-posture upgrade.
 
 ## PXOS Status
 
-PXOS future canon and train-control docs exist. PXOS train is queued/blocked in the Ambitions 4.0 Execution Program and starts only with the exact approval phrase `Start PXOS Future-Canon Train`. Global sequencing docs may order PXOS work but must not start it.
+PXOS future canon and train-control docs exist. PX01 is complete under current global preauthorization. PXOS implementation is not started, and future PXOS docs batches remain future-canon only until they produce evidence.
 
 ## Prompt Hardening Status
 
 REC02-REC06 standalone prompt files exist. REC02 produced the human operator
 release proof plan. REC03 produced the validation log ledger. REC04 corrected
 claim-copy guard status wording. REC05 produced the human review packet. REC06
-produced the release evidence closure handoff. PX01-PX20 prompts remain
+produced the release evidence closure handoff. PX02-PX20 prompts remain
 queued/blocked future-canon prompts until selected by global dry-run.
 
 ## Product Depth Formalization Status
@@ -39,20 +34,19 @@ Product Depth is formalized as a queued/blocked PD01-PD18 train with required ap
 
 Ambitions 4.0 is the active post-3.0 execution program, not a shipped product
 version. The global order started with 95 formal batches: REC02-REC06,
-PX01-PX20, ME01-ME12, CS01-CS10, PD01-PD18, and AOS01-AOS30. REC02-REC06 are
-complete; 90 formal batches remain queued/blocked or future-selected.
+PX01-PX20, ME01-ME12, CS01-CS10, PD01-PD18, and AOS01-AOS30. REC02-REC06 and
+PX01 are complete; 89 formal batches remain queued/blocked or future-selected.
 
 ## Boundaries
 
 No app behavior implemented. No production refactor. No compatibility seam
 retired. No dependencies. No workflow changes. No release claim. AOS, ME, CS,
-Product Depth, PXOS train, and PXOS implementation remain unstarted. REC02
+Product Depth, PXOS implementation remain unstarted. REC02
 planned human/operator proof only; it did not perform or claim proof. REC03
 indexed logs and proof gaps only; it did not rerun app validation or claim
 release/platform proof. REC04 guarded release/status copy only; it did not claim
 release/platform proof. REC05 created a human review packet only; it did not
-perform human proof or claim approval/readiness. REC06 created a closure handoff
-only; it did not claim release readiness or start future implementation.
+perform human proof or claim approval/readiness. REC06 created a closure handoff only; it did not claim release readiness. PX01 created future canon only; it did not implement PXOS or change app behavior.
 
 ## Continuation Rule
 

@@ -33,10 +33,10 @@ Older docs are supporting context unless an active 3.0 doc explicitly keeps them
 [Ambitions 4.0 Execution Program](docs/canon/Ambitions_4_0_Execution_Program.md) is the active post-3.0 implementation and canon-execution program. It is not a shipped product version, release-readiness claim, App Store claim, TestFlight claim, physical-device proof, platform proof, or public accessibility proof.
 
 Ambitions 3.0 remains the completed baseline after F30. Ambitions 4.0 currently
-means the repo has a 95-batch global execution order; REC02-REC06 are complete,
-PX01 is the next global batch pending dry-run selection, and PX02-PX20,
+means the repo has a 95-batch global execution order; REC02-REC06 and PX01 are
+complete, PX02 is the next global batch pending dry-run selection, and PX03-PX20,
 ME01-ME12, CS01-CS10, PD01-PD18, and AOS01-AOS30 remain queued/blocked. Future
-canon remains future canon until implemented and proven. After REC06, 90 formal
+canon remains future canon until implemented and proven. After PX01, 89 formal
 batches remain.
 
 ---
@@ -228,4 +228,4 @@ until their gates allow execution.
 
 ## Product Experience OS Future Canon
 
-[Ambitions Product Experience OS](docs/canon/Ambitions_Product_Experience_OS_Index.md), abbreviated PXOS, is future canon for the user-facing product experience in the Ambitions 4.0 Execution Program. PXOS sits beside AmbitionsOS: AmbitionsOS owns future internal intelligence/runtime architecture; PXOS owns future screens, surfaces, hierarchy, copy, interaction, recovery, trust, visual design, accessibility, and release-safe product messaging. PXOS is not current app implementation and the PXOS train is queued/blocked, not started.
+[Ambitions Product Experience OS](docs/canon/Ambitions_Product_Experience_OS_Index.md), abbreviated PXOS, is future canon for the user-facing product experience in the Ambitions 4.0 Execution Program. PXOS sits beside AmbitionsOS: AmbitionsOS owns future internal intelligence/runtime architecture; PXOS owns future screens, surfaces, hierarchy, copy, interaction, recovery, trust, visual design, accessibility, and release-safe product messaging. PX01 is complete as parent future canon; PXOS is not current app implementation.

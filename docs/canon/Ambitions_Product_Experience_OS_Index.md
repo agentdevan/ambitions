@@ -1,6 +1,7 @@
 # Ambitions Product Experience OS Index
+<!-- markdownlint-disable MD013 -->
 
-Status: Future canon in the Ambitions 4.0 Execution Program; PXOS queued/not started; PXOS implementation not started
+Status: Future canon in the Ambitions 4.0 Execution Program; PX01 parent canon complete; PXOS implementation not started
 Date: 2026-05-02
 Abbreviation: PXOS
 
@@ -73,6 +74,19 @@ enough to act.
 
 PXOS may define drill-downs, sheets, panels, review surfaces, setup surfaces,
 and subflows under those five tabs. It must not add a sixth tab.
+
+PX01 locks this parent hierarchy as future canon only:
+
+- Today owns what matters now and one calm execution path.
+- Goals owns strategic direction, Goal Detail, and Mission Control.
+- Capture owns fast private intake, placement, and correction.
+- Plan owns time, capacity, pressure, recovery, and Life Shape.
+- You owns the Personal System Center, preferences, trust, data, setup, and
+  controls.
+
+All additional detail must deepen these surfaces through named drill-downs,
+sheets, lanes, histories, setup flows, proof detail, source detail, or trust
+review. It must not widen Ambitions with new top-level destinations.
 
 ## Top-Level Surface Composition Law
 

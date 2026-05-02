@@ -1,4 +1,5 @@
 # Ambitions Codex Context
+<!-- markdownlint-disable MD013 -->
 
 This folder contains operating context for Ambitions Codex runs.
 
@@ -99,7 +100,6 @@ These trains are queued/blocked in Ambitions 4.0 and must not run automatically 
 
 - [REC01-REC06 Release Evidence Closure Train](batch-trains/REC01_REC06_RELEASE_EVIDENCE_CLOSURE_TRAIN.md) is complete as evidence/status work after the 2026-05-02 pre-train hardening pass. It did not implement app behavior or claim release/platform proof.
 
-
 ## PXOS Future Controls
 
 - [PXOS Train Control System](PXOS_TRAIN_CONTROL_SYSTEM.md)
@@ -108,4 +108,6 @@ These trains are queued/blocked in Ambitions 4.0 and must not run automatically 
 - [PXOS Batch Prompt Standard](PXOS_BATCH_PROMPT_STANDARD.md)
 - [PX01-PX20 Train](batch-trains/PX01_PX20_PRODUCT_EXPERIENCE_OS_TRAIN.md)
 
-PXOS is future user-facing product experience canon. The PXOS train is queued/blocked and starts only with the exact approval phrase `Start PXOS Future-Canon Train`.
+PXOS is future user-facing product experience canon. PX01 is complete as parent
+future canon; PXOS implementation is not started. Later PXOS batches start only
+through global dry-run and valid approval gates.
