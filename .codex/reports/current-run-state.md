@@ -1,9 +1,9 @@
 # Current Run State
 
 Active train: PXOS future-canon train
-Active batch: none; PX01 complete and PX02 next eligible pending dry-run selection
+Active batch: none; PX02 complete and PX03 next eligible pending dry-run selection
 Current out-of-train task: none
-Scope: PX01 future-canon surface hierarchy complete; PXOS implementation not started
+Scope: PX02 Today future-canon operating surface complete; PXOS implementation not started
 Date: 2026-05-02
 Branch: main
 
@@ -17,17 +17,17 @@ Branch: main
 - F30: complete; Beyond 3.0 roadmap and final train closeout created.
 - Ambitions 4.0 Execution Program: active post-3.0 execution program, not a shipped product version, not implemented by implication, and not release-proven.
 - AmbitionsOS: future canon only, not current app implementation truth.
-- PXOS: future user-facing product experience canon only; PX01 parent canon complete; PXOS implementation not started.
+- PXOS: future user-facing product experience canon only; PX01-PX02 future canon complete; PXOS implementation not started.
 - AOS/ME/CS/Product Depth: queued/blocked and not started.
 - Release Evidence Closure: REC01 inventory is accepted baseline evidence; REC02 proof plan complete; REC03 validation-log ledger complete; REC04 release-claim copy guard complete; REC05 human review packet complete; REC06 release closure handoff complete.
-- PX01: complete as future-canon docs work; PX02 next global batch pending dry-run selection.
+- PX02: complete as future-canon docs work; PX03 next global batch pending dry-run selection.
 - Current user prompt preauthorizes Ambitions 4.0 global sequence continuation
   through routine train transitions, but not proof, validation, Red, release,
   platform, legal/privacy, physical-device, public accessibility, TestFlight,
   App Store Connect, signed archive, visual-approval, or final release gates.
-- PX02-PX20: queued/blocked and not started; batch-specific prompt hardening completed.
+- PX03-PX20: queued/blocked and not started; batch-specific prompt hardening completed.
 - Product Depth: formalized as a queued/blocked PD01-PD18 train; not started.
-- Global order: 95 formal batches at program start; 89 remain after PX01.
+- Global order: 95 formal batches at program start; 88 remain after PX02.
 
 ## Boundaries
 
@@ -40,8 +40,8 @@ Branch: main
 
 ## Current Validation Plan
 
-Run git status, branch/HEAD checks, diff check, PXOS/release-claim/status scans, doc QA advisory, batch-train gate advisory, targeted markdownlint, file-size snapshot, and changed-file boundary check. App build/test is skipped because app code is forbidden for PX01.
+Run git status, branch/HEAD checks, diff check, PXOS/release-claim/status scans, doc QA advisory, batch-train gate advisory, targeted markdownlint, file-size snapshot, and changed-file boundary check. App build/test is skipped because app code is forbidden for PX02.
 
 ## Current Validation Result
 
-PASS WITH YELLOW. PX01 locked future PXOS parent canon and surface hierarchy while keeping PXOS implementation unstarted. Validation results are recorded in the PX01 report. App build/test was skipped because PX01 forbids app code and changed only docs/control files.
+PASS WITH YELLOW. PX02 locked future Today operating surface canon while keeping PXOS implementation unstarted. Validation results are recorded in the PX02 report. App build/test was skipped because PX02 forbids app code and changed only docs/control files.

@@ -1,7 +1,7 @@
 # PX01-PX20 Product Experience OS Train
 <!-- markdownlint-disable MD013 -->
 
-Status: PXOS future-canon train active through PX01 only; PXOS implementation not started.
+Status: PXOS future-canon train active through PX02 only; PXOS implementation not started.
 Train type: queued future-canon and later implementation-readiness train
 Date: 2026-05-02
 
@@ -51,7 +51,7 @@ ordering, REC closure, F30 being complete, or mentioning PXOS in a prompt.
 ## Batch Order
 
 - PX01: Product Experience OS Canon And Surface Hierarchy. Owner: all. Boundary: PXOS canon and hierarchy only. Status: complete after PX01 commit.
-- PX02: Today Experience Operating Surface. Owner: Today. Boundary: Today experience canon only.
+- PX02: Today Experience Operating Surface. Owner: Today. Boundary: Today experience canon only. Status: complete after PX02 commit.
 - PX03: Goals Mission Control Experience. Owner: Goals. Boundary: Goals/Mission Control experience canon only.
 - PX04: Capture Experience. Owner: Capture. Boundary: Capture experience canon only.
 - PX05: Plan Life Shape Experience. Owner: Plan. Boundary: Plan/Life Shape experience canon only.

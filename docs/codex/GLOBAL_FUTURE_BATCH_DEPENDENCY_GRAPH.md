@@ -25,7 +25,8 @@ Ambitions 4.0 is the active post-3.0 execution program, not a shipped product ve
 
 - REC02 depends on REC01 Green or accepted Yellow and the approval phrase `Continue Release Evidence Closure`.
 - PX01 depends on explicit approval phrase `Start PXOS Future-Canon Train`.
-- PX02-PX20 depend on PX01.
+- PX02 is complete as Today future-canon surface work.
+- PX03-PX20 depend on PX01 and relevant completed PX surface canon.
 - PX14 depends on PX02-PX13.
 - PX18 depends on PX01-PX17 and recurs before major implementation lanes.
 - ME01 depends on explicit approval phrase `Start ME Train`.

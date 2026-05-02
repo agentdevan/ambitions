@@ -41,7 +41,7 @@ Use this file to choose the next eligible batch only after the relevant approval
 - Ambitions 4.0 is the active post-3.0 execution program, not a shipped product version.
 - Total formal remaining Ambitions 4.0 batches at program start: 95.
 - REC02-REC06 are complete as Release Evidence Closure batches.
-- PXOS is future user-facing canon only. PX01 is complete as parent canon; PX02 is next pending dry-run selection; PX03-PX20 are queued/blocked and not started.
+- PXOS is future user-facing canon only. PX01-PX02 are complete as future canon; PX03 is next pending dry-run selection; PX04-PX20 are queued/blocked and not started.
 - ME01-ME12, CS01-CS10, and AOS01-AOS30 are queued/blocked and not started.
 - AmbitionsOS is future canon only, not implemented app behavior.
 - Product Depth is a formal queued/blocked PD01-PD18 train and not started.
@@ -49,7 +49,7 @@ Use this file to choose the next eligible batch only after the relevant approval
 - Top-level surfaces must be visual orientation surfaces, not vertical stacks of generic cards.
 
 Prompt completeness note: REC02-REC06 standalone prompt files exist and have
-run through REC closure evidence. PX01 is complete as parent future canon. PX02 is the next global batch only after the mandatory dry-run selection says `Execution allowed: YES`.
+run through REC closure evidence. PX01-PX02 are complete as future canon. PX03 is the next global batch only after the mandatory dry-run selection says `Execution allowed: YES`.
 
 ## Global Sequencing Principles
 
@@ -72,8 +72,8 @@ run through REC closure evidence. PX01 is complete as parent future canon. PX02 
 | 004 | REC05 | REC | Evidence | Human review packet follows claim guard. | Complete by REC05 evidence | Serial-only | No; complete | Adequate docs evidence | manual-verification-blocker, release evidence reviewer | Completed; human proof still pending |
 | 005 | REC06 | REC | Evidence | Closure handoff follows review packet. | Complete by REC06 evidence | Serial-only | No; complete | Adequate docs evidence | evidence-gate-reporter, release-claim-truth-enforcer | Completed; next batch requires dry-run |
 | 006 | PX01 | PXOS | Docs/canon | PXOS parent canon and surface hierarchy block all later PXOS work. | Complete by PX01 evidence | Serial-only | No; complete | Adequate docs evidence | source-truth-reconciler, product decision lock, surface hierarchy | Completed; PXOS implementation not started |
-| 007 | PX02 | PXOS | Docs/canon | Today expression depends on PX01. | PX01 Green, PXOS, Top-Level Composition, current global 4.0 preauthorization or `Start PXOS Future-Canon Train` | Parallel-safe after PX01 with PX03-PX08 only if approved | Dry-run pending | Adequate docs evidence | top-level composition, premium visual, accessibility | Continue only on Green |
-| 008 | PX03 | PXOS | Docs/canon | Goals/Mission Control depends on PX01 and top-level law. | PX01 Green, PXOS, Product Depth | Parallel-safe after PX01 with PX02/PX04-PX08 only if approved | Yes | Adequate docs evidence | product-depth-strategist, deep-not-wide reviewer | Continue only on Green |
+| 007 | PX02 | PXOS | Docs/canon | Today expression depends on PX01. | Complete by PX02 evidence | Serial-only | No; complete | Adequate docs evidence | top-level composition, premium visual, accessibility | Completed; PXOS implementation not started |
+| 008 | PX03 | PXOS | Docs/canon | Goals/Mission Control depends on PX01 and top-level law. | PX01-PX02 Green, PXOS, Product Depth, current global 4.0 preauthorization or `Start PXOS Future-Canon Train` | Parallel-safe after PX02 with PX04-PX08 only if approved | Dry-run pending | Adequate docs evidence | product-depth-strategist, deep-not-wide reviewer | Continue only on Green |
 | 009 | PX04 | PXOS | Docs/canon | Capture expression depends on PX01. | PX01 Green, PXOS, Trust/Privacy | Parallel-safe after PX01 with PX02/PX03/PX05-PX08 only if approved | Yes | Adequate docs evidence | privacy/trust, product language | Continue only on Green |
 | 010 | PX05 | PXOS | Docs/canon | Plan/Life Shape depends on PX01. | PX01 Green, PXOS, Accessibility | Parallel-safe after PX01 with PX02-PX04/PX06-PX08 only if approved | Yes | Adequate docs evidence | plan UX, cognitive-load reviewer | Continue only on Green |
 | 011 | PX06 | PXOS | Docs/canon | You/Personal System Center depends on PX01 and trust boundaries. | PX01 Green, PXOS, Trust/Proof | Parallel-safe after PX01 with PX02-PX05/PX07-PX08 only if approved | Yes | Adequate docs evidence | trust UX, privacy reviewer | Continue only on Green |
@@ -168,7 +168,8 @@ run through REC closure evidence. PX01 is complete as parent future canon. PX02 
 | --- | --- | --- | --- | --- |
 | REC02-REC06 | Queued / Blocked | `Continue Release Evidence Closure`, REC01 accepted, release-claim and human-proof gates | Not app implementation | Not release-proven; may only document evidence boundaries |
 | PX01 | Completed | PX01 evidence | Future canon only; not implemented | No PXOS implementation or release-readiness claim |
-| PX02-PX20 | Queued / Blocked | Current global preauthorization or `Start PXOS Future-Canon Train`, PXOS gates, source truth | Future canon only; not implemented | No PXOS implementation or release-readiness claim |
+| PX02 | Completed | PX02 evidence | Future canon only; not implemented | No PXOS implementation or release-readiness claim |
+| PX03-PX20 | Queued / Blocked | Current global preauthorization or `Start PXOS Future-Canon Train`, PXOS gates, source truth | Future canon only; not implemented | No PXOS implementation or release-readiness claim |
 | ME01-ME12 | Queued / Blocked | `Start ME Train`, ME maintainability gates | Not started; extraction not performed | No release/platform claim |
 | CS01-CS10 | Queued / Blocked | `Start CS Train`, CS compatibility gates | Not started; no seam retired | No release/platform claim |
 | PD01-PD18 | Queued / Blocked | `Start Product Depth Train`, PXOS plus relevant ME/CS/AOS-if-needed gates | Not started; not implemented | No Product Depth implementation or release claim |
