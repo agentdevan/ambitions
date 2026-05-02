@@ -1,7 +1,9 @@
 # REC04 Release Claim Copy Guard Prompt
 <!-- markdownlint-disable MD013 -->
 
-Status: Queued Ambitions 4.0 evidence batch; not started; blocked pending `Continue Release Evidence Closure` and REC03 Green.
+Status: Queued Ambitions 4.0 evidence batch; not started; blocked pending
+`Continue Release Evidence Closure` or current global 4.0 preauthorization, and
+REC03 Green.
 
 ## Batch Identity
 
@@ -10,7 +12,8 @@ Status: Queued Ambitions 4.0 evidence batch; not started; blocked pending `Conti
 - Train: Release Evidence Closure
 - Mode: evidence/docs-only
 - Owner: release claim and active-copy truth
-- Required approval phrase: `Continue Release Evidence Closure`
+- Required approval phrase: `Continue Release Evidence Closure` or current
+  `Run Global Batch Sequence Until Blocked` Ambitions 4.0 preauthorization
 
 ## Purpose
 

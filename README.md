@@ -32,7 +32,12 @@ Older docs are supporting context unless an active 3.0 doc explicitly keeps them
 
 [Ambitions 4.0 Execution Program](docs/canon/Ambitions_4_0_Execution_Program.md) is the active post-3.0 implementation and canon-execution program. It is not a shipped product version, release-readiness claim, App Store claim, TestFlight claim, physical-device proof, platform proof, or public accessibility proof.
 
-Ambitions 3.0 remains the completed baseline after F30. Ambitions 4.0 currently means the repo has a 95-batch global execution order with REC01 active, REC02-REC06 queued/blocked, PX01-PX20 queued/blocked, ME01-ME12 queued/blocked, CS01-CS10 queued/blocked, PD01-PD18 queued/blocked, and AOS01-AOS30 queued/blocked. Future canon remains future canon until implemented and proven.
+Ambitions 3.0 remains the completed baseline after F30. Ambitions 4.0 currently
+means the repo has a 95-batch global execution order; REC02 and REC03 are
+complete, REC04 is the active release-claim copy guard batch, REC05-REC06 are
+queued/blocked, and PX01-PX20, ME01-ME12, CS01-CS10, PD01-PD18, and AOS01-AOS30
+remain queued/blocked. Future canon remains future canon until implemented and
+proven. After REC04, 92 formal batches remain.
 
 ---
 
@@ -209,7 +214,17 @@ Known cleanup debt is tracked in [Ambitions_3_0_Repo_Hygiene_And_Active_Canon_Po
 
 ## Batch Train Orchestrator
 
-Ambitions 3.0 batch trains are governed by [docs/codex/AMBITIONS_3_0_BATCH_TRAIN_ORCHESTRATOR.md](docs/codex/AMBITIONS_3_0_BATCH_TRAIN_ORCHESTRATOR.md). The [F17-F30 FAANG Handoff Completion Train](docs/codex/batch-trains/F17_F30_FAANG_HANDOFF_COMPLETION_TRAIN.md) is complete and preserved as historical train evidence after F30. F27 is PASS after the F28 repair/rebaseline, F27.5 is complete with no critical maintainability blocker, F29 created the final engineer handoff package, and F30 created the Beyond 3.0 continuation plan and final train closeout. Beyond 3.0 is now represented operationally by the Ambitions 4.0 Execution Program. Release Evidence Closure is active at REC01; REC02-REC06, PXOS, ME, CS, Product Depth, and AOS are queued/blocked and remain not started until explicitly approved by their gates.
+Ambitions 3.0 batch trains are governed by
+[docs/codex/AMBITIONS_3_0_BATCH_TRAIN_ORCHESTRATOR.md](docs/codex/AMBITIONS_3_0_BATCH_TRAIN_ORCHESTRATOR.md).
+The [F17-F30 FAANG Handoff Completion Train](docs/codex/batch-trains/F17_F30_FAANG_HANDOFF_COMPLETION_TRAIN.md)
+is complete and preserved as historical train evidence after F30. F27 is PASS
+after the F28 repair/rebaseline, F27.5 is complete with no critical
+maintainability blocker, F29 created the final engineer handoff package, and F30
+created the Beyond 3.0 continuation plan and final train closeout. Beyond 3.0 is
+now represented operationally by the Ambitions 4.0 Execution Program. Release
+Evidence Closure is active; REC02 and REC03 are complete, REC04 is active for
+release-claim copy guard work, REC05-REC06 are queued/blocked, and PXOS, ME, CS,
+Product Depth, and AOS remain queued/blocked until their gates allow execution.
 
 ## Product Experience OS Future Canon
 

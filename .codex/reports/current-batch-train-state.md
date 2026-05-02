@@ -1,9 +1,9 @@
 # Current Batch Train State
 
 Active train: Release Evidence Closure
-Active batch: none; REC03 complete and REC04 next eligible
+Active batch: REC04 Release Claim Copy Guard
 Current out-of-train task: none
-Scope: REC03 docs/evidence validation-log ledger closure complete; REC04 dry-run pending
+Scope: REC04 docs/evidence release-claim copy guard
 Date: 2026-05-02
 
 ## Baseline
@@ -14,8 +14,8 @@ F17-F30 FAANG Handoff Completion Train is complete and Green by current train ev
 
 Release Evidence Closure remains active. REC01 is the accepted inventory
 baseline. REC02 is complete as a human-operator proof planning batch. REC03 is
-complete as a validation-log ledger batch. REC04 is the next eligible global
-batch after REC03 commit/push and dry-run selection.
+complete as a validation-log ledger batch. REC04 is complete as a release-claim
+copy guard batch pending commit/push and post-commit drift check.
 
 ## PXOS Status
 
@@ -25,7 +25,8 @@ PXOS future canon and train-control docs exist. PXOS train is queued/blocked in 
 
 REC02-REC06 standalone prompt files exist. REC02 produced the human operator
 release proof plan. REC03 produced the validation log ledger. REC04-REC06 remain
-queued/blocked Ambitions 4.0 evidence prompts. PX01-PX20 prompts remain
+queued/blocked Ambitions 4.0 evidence prompts. REC04 corrected claim-copy guard
+status wording. PX01-PX20 prompts remain
 queued/blocked future-canon prompts.
 
 ## Product Depth Formalization Status
@@ -37,7 +38,7 @@ Product Depth is formalized as a queued/blocked PD01-PD18 train with required ap
 Ambitions 4.0 is the active post-3.0 execution program, not a shipped product
 version. The global order started with 95 formal batches: REC02-REC06,
 PX01-PX20, ME01-ME12, CS01-CS10, PD01-PD18, and AOS01-AOS30. REC02 is complete;
-REC03 is complete; 93 formal batches remain queued/blocked or
+REC03 is complete; REC04 is complete pending commit; 92 formal batches remain queued/blocked or
 future-selected.
 
 ## Boundaries
@@ -47,6 +48,7 @@ retired. No dependencies. No workflow changes. No release claim. AOS, ME, CS,
 Product Depth, PXOS train, and PXOS implementation remain unstarted. REC02
 planned human/operator proof only; it did not perform or claim proof. REC03
 indexed logs and proof gaps only; it did not rerun app validation or claim
+release/platform proof. REC04 guarded release/status copy only; it did not claim
 release/platform proof.
 
 ## Continuation Rule
