@@ -3,9 +3,9 @@
 <!-- markdownlint-disable MD013 -->
 
 Active train: CS compatibility seam retirement train
-Active batch: CS07 External Route Widget AppIntent Compatibility Proof evidence in progress
+Active batch: CS08 Import Export Persistence Compatibility Proof dry-run pending
 Current out-of-train task: none
-Scope: ME01-ME12 maintainability train complete with commit/push evidence; ME11 repair not triggered; PXOS implementation not started; CS01 complete; CS07 selected by global order and run as focused compatibility proof; Signature Interface/Product Depth/AmbitionsOS trains not started
+Scope: ME01-ME12 maintainability train complete with commit/push evidence; ME11 repair not triggered; PXOS implementation not started; CS01 complete; CS07 complete as focused compatibility proof; CS08 is next pending dry-run selection; Signature Interface/Product Depth/AmbitionsOS trains not started
 Date: 2026-05-02
 
 ## Baseline
@@ -38,11 +38,12 @@ No product behavior expansion. No visual redesign. No compatibility seam retired
 
 ## Validation Result
 
-CS07 is PASS WITH YELLOW pending commit/push evidence:
+CS07 is PASS WITH YELLOW with commit/push evidence:
 
 - CS07 touched only docs/status files and did not edit tests or app code.
 - CS07 focused external compatibility lane passed 81 tests with 0 failures.
 - Passing log: `output/logs/cs07-external-compatibility-tests-20260502-135725.log`.
+- Commit evidence: `e4c04ff2`, report SHA repair: `ef536cae`.
 - No seam was retired; old values must remain until CS08 and the relevant retirement batch prove compatibility.
 - `git diff --check` passed.
 - Changed-file boundary passed; dirty files were limited to `docs/**` and `.codex/**`.
@@ -56,4 +57,4 @@ The current user prompt says `Run Global Batch Sequence Until Blocked` and expli
 
 ## Next Eligible Batch
 
-After CS07 commit/push and post-commit drift checks, the next global batch is CS08 Import Export Persistence Compatibility Proof only if dry-run selection says `Execution allowed: YES`.
+The next global batch is CS08 Import Export Persistence Compatibility Proof only if dry-run selection says `Execution allowed: YES`.

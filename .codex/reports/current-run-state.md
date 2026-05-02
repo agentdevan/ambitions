@@ -3,9 +3,9 @@
 <!-- markdownlint-disable MD013 -->
 
 Active train: CS compatibility seam retirement train
-Active batch: CS07 External Route Widget AppIntent Compatibility Proof evidence in progress
+Active batch: CS08 Import Export Persistence Compatibility Proof dry-run pending
 Current out-of-train task: none
-Scope: ME01-ME12 maintainability train complete with commit/push evidence; ME11 repair not triggered; PXOS implementation not started; CS01 complete; CS07 selected by global order and run as focused compatibility proof; Signature Interface/Product Depth/AmbitionsOS trains not started
+Scope: ME01-ME12 maintainability train complete with commit/push evidence; ME11 repair not triggered; PXOS implementation not started; CS01 complete; CS07 complete as focused compatibility proof; CS08 is next pending dry-run selection; Signature Interface/Product Depth/AmbitionsOS trains not started
 Date: 2026-05-02
 Branch: main
 
@@ -31,8 +31,8 @@ Branch: main
 - ME11: conditional repair batch not triggered by current ME evidence.
 - ME12: complete as maintainability handoff evidence with commit/push evidence (`7f7ab99b6a671b08bf2706d778af01e06b907f8e`, report repair `f51f937a`).
 - CS01: complete as audit-only compatibility seam registry and risk map; no seam retired and no app code edited.
-- CS07: in progress as focused external route/widget/App Intent compatibility proof; no seam retired and no app code edited.
-- CS train: active through CS07 proof evidence only; CS08 is next after CS07 commit/push if continuation gates pass.
+- CS07: complete as focused external route/widget/App Intent compatibility proof; no seam retired and no app code edited. Commit evidence: `e4c04ff2`, report SHA repair: `ef536cae`.
+- CS train: active with CS08 next only after dry-run selection says `Execution allowed: YES`.
 - SI/Product Depth/AOS: queued/blocked and not started.
 - Global order: 113 formal batches after SI insertion; 75 remain after CS07 commit.
 
@@ -47,7 +47,7 @@ Branch: main
 
 ## Current Validation Result
 
-CS07 validation is PASS WITH YELLOW with focused compatibility evidence ready for commit.
+CS07 validation is PASS WITH YELLOW with focused compatibility evidence committed and pushed.
 
 Verified:
 
@@ -68,4 +68,4 @@ Not verified:
 
 ## Next Eligible Batch
 
-After CS07 commit/push and post-commit drift checks, the next global batch is CS08 Import Export Persistence Compatibility Proof only if dry-run selection says `Execution allowed: YES`.
+The next global batch is CS08 Import Export Persistence Compatibility Proof only if dry-run selection says `Execution allowed: YES`.
