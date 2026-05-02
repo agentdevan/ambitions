@@ -1,9 +1,9 @@
 # Current Run State
 
 Active train: ME maintainability extraction train selected by global sequence
-Active batch: none; ME10 complete and ME02 next eligible pending dry-run selection
+Active batch: none; ME02 complete and Signature Interface formalization next per current prompt before ME03 continuation
 Current out-of-train task: none
-Scope: ME01 Maintainability Baseline And Ownership Map complete; ME08 Shared Projector State Helper Standards complete; ME10 Architecture Scan Gate complete; no extraction performed; PXOS implementation not started; CS/Product Depth/AmbitionsOS trains not started
+Scope: ME01 Maintainability Baseline And Ownership Map complete; ME08 Shared Projector State Helper Standards complete; ME10 Architecture Scan Gate complete; ME02 GoalsFeatureService extraction complete; PXOS implementation not started; CS/Product Depth/AmbitionsOS trains not started
 Date: 2026-05-02
 Branch: main
 
@@ -23,11 +23,12 @@ Branch: main
 - ME01: complete as audit-only maintainability baseline and ownership map; no Swift files changed and no extraction performed.
 - ME08: complete as audit-only shared projector/state/helper standards; no Swift files changed and no extraction performed.
 - ME10: complete as audit-only recurring architecture gate; no Swift files changed and no extraction performed.
+- ME02: complete as behavior-preserving Goals service extraction; moved DEBUG-only `StubGoalsService` to a Goals support file and repaired the current-batch compile Red.
 - Current user prompt preauthorizes Ambitions 4.0 global sequence continuation through routine train transitions, but not proof, validation, Red, release, platform, legal/privacy, physical-device, public accessibility, TestFlight, App Store Connect, signed archive, visual-approval, or final release gates.
-- ME02-ME07, ME09, ME11-ME12: queued/blocked and not started.
+- ME03-ME07, ME09, ME11-ME12: queued/blocked and not started.
 - CS/Product Depth/AOS: queued/blocked and not started.
 - Product Depth: formalized as a queued/blocked PD01-PD18 train; not started.
-- Global order: 95 formal batches at program start; 67 remain after ME10.
+- Global order: 95 formal batches at program start; 66 remain after ME02 before Signature Interface formalization.
 
 ## Boundaries
 
@@ -40,19 +41,20 @@ Branch: main
 
 ## Current Validation Plan
 
-Run git status, branch/HEAD checks, diff check, read-only architecture scan and Lane 2 file-size snapshot, sensitive-term scan, release-claim/status scans, doc QA advisory, batch-train gate advisory, focused markdownlint, and changed-file boundary check. App build/test is skipped because app code is forbidden for ME10.
+After ME02 closeout, formalize the Signature Interface train as docs/status work before continuing ME03. Run git status, branch/HEAD checks, diff check, architecture scan, release-claim/status scans, doc QA advisory, batch-train gate advisory, focused markdownlint, changed-file boundary checks, and SI formalization validation.
 
 ## Current Validation Result
 
-ME10 validation is PASS WITH YELLOW before commit.
+ME02 validation is PASS WITH YELLOW before commit.
 
 Verified:
 
-- `git diff --check` will run before ME10 commit.
-- Read-only architecture scan found existing `EXTRACTION_REQUIRED`, `EXTRACTION_RECOMMENDED`, and `RESPONSIBILITY_REVIEW` findings.
-- Lane 2 owner files remain unchanged from ME01 and are owned by ME02-ME07.
+- `scripts/build-local.sh` passed on `iPhone 17` after the ME02 Red repair.
+- Focused Goals behavior-preservation tests passed with 52 tests and 0 failures.
+- `git diff --check` passed after the ME02 code repair.
+- Architecture scan remains advisory; remaining Lane 2 owner files are owned by ME03-ME07.
 - `scripts/swiftui-architecture-scan.sh || true` remains expected Yellow/advisory because large owner files still require extraction.
 
 Not verified:
 
-- App build/test, screenshots, simulator, physical-device, TestFlight, App Store Connect, signed archive, public accessibility, legal/privacy signoff, platform proof, and final release proof. ME10 is audit/gate-only and makes none of those claims.
+- Screenshots, physical-device, TestFlight, App Store Connect, signed archive, public accessibility, legal/privacy signoff, platform proof, and final release proof. ME02 makes none of those claims.

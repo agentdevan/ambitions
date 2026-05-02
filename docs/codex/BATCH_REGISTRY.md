@@ -54,14 +54,15 @@ Current 4.0 status:
 - Completed: ME01 Maintainability Baseline And Ownership Map.
 - Completed: ME08 Shared Projector State Helper Standards.
 - Completed: ME10 Architecture Scan Gate.
+- Completed: ME02 GoalsFeatureService Extraction.
 - Active evidence baseline: REC01 Release Evidence Truth Inventory.
-- Next queued / blocked: ME02 GoalsFeatureService Extraction pending global dry-run selection.
-- Queued / Blocked: ME02-ME07, ME09, ME11-ME12 pending current global preauthorization or `Start ME Train`.
+- Next queued / blocked: ME03 TodayFeatureService Extraction pending global dry-run selection after SI formalization is reconciled.
+- Queued / Blocked: ME03-ME07, ME09, ME11-ME12 pending current global preauthorization or `Start ME Train`.
 - Queued / Blocked: CS01-CS10 pending `Start CS Train`.
 - Queued / Blocked: PD01-PD18 pending `Start Product Depth Train` plus PXOS/ME/CS/AOS-if-needed gates.
 - Queued / Blocked: AOS01-AOS30 pending `Start AOS Train`.
 - Total formal remaining batches in the 4.0 global order at program start: 95.
-- Remaining after ME10: 67.
+- Remaining after ME02: 66 before Signature Interface formalization.
 
 Use [../canon/Ambitions_4_0_Execution_Program.md](../canon/Ambitions_4_0_Execution_Program.md) and [GLOBAL_FUTURE_BATCH_EXECUTION_ORDER.md](GLOBAL_FUTURE_BATCH_EXECUTION_ORDER.md) for current post-3.0 status semantics.
 

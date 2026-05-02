@@ -1,6 +1,7 @@
 # ME02 GoalsFeatureService Extraction Prompt
+<!-- markdownlint-disable MD013 -->
 
-Status: Queued Ambitions 4.0 maintainability/extraction batch; not started; not implemented; blocked pending `Start ME Train`.
+Status: Completed Ambitions 4.0 maintainability/extraction batch; behavior-preserving Goals support extraction evidence recorded.
 
 ## Batch Identity
 
@@ -9,6 +10,26 @@ Status: Queued Ambitions 4.0 maintainability/extraction batch; not started; not 
 - Mode: extraction only
 - Owner file or files: `Native/Ambitions/Features/Goals/GoalsFeatureService.swift`
 - Extraction target: Extract projector/state/helper responsibilities only after behavior-preservation tests exist.
+- Completed extraction: moved DEBUG-only `StubGoalsService` preview/test support from `GoalsFeatureService.swift` to `StubGoalsService.swift`.
+
+## Completion Evidence
+
+ME02 completed on 2026-05-02 as a narrow extraction. The batch reduced
+`GoalsFeatureService.swift` from 5,024 to 4,883 lines, created
+`StubGoalsService.swift` at 144 lines, and preserved live repository-backed
+Goals behavior. The current-batch Red compile failure caused by file-private
+`GoalsFeatureError` visibility after extraction was repaired by making the
+error type internal to the app module.
+
+Validation evidence:
+
+- `scripts/build-local.sh`: pass on `iPhone 17`.
+- Focused Goals behavior-preservation tests: pass, 52 tests, 0 failures.
+- `git diff --check`: pass after code repair.
+
+ME02 does not claim product depth, UI redesign, route/raw-value changes,
+persistence changes, release readiness, platform proof, PXOS implementation,
+Product Depth implementation, or AmbitionsOS implementation.
 
 ## Purpose
 

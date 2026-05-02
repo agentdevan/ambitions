@@ -2,7 +2,7 @@
 
 <!-- markdownlint-disable MD013 -->
 
-Status: Ambitions 4.0 global execution order; 95 formal batches at program start; active through ME10 architecture gate evidence
+Status: Ambitions 4.0 global execution order; 95 formal batches at program start; active through ME02 Goals service extraction evidence
 Date: 2026-05-02
 
 ## Purpose
@@ -42,14 +42,14 @@ Use this file to choose the next eligible batch only after the relevant approval
 - Total formal remaining Ambitions 4.0 batches at program start: 95.
 - REC02-REC06 are complete as Release Evidence Closure batches.
 - PXOS is future user-facing canon only. PX01-PX20 are complete as future canon/roadmap evidence; PXOS implementation is not started.
-- ME01 is complete as maintainability audit evidence; ME08 is complete as shared standards evidence; ME10 is complete as recurring architecture gate evidence; ME02-ME07, ME09, ME11-ME12, CS01-CS10, and AOS01-AOS30 are queued/blocked and not started.
+- ME01 is complete as maintainability audit evidence; ME08 is complete as shared standards evidence; ME10 is complete as recurring architecture gate evidence; ME02 is complete as behavior-preserving Goals service extraction evidence; ME03-ME07, ME09, ME11-ME12, CS01-CS10, and AOS01-AOS30 are queued/blocked and not started.
 - AmbitionsOS is future canon only, not implemented app behavior.
 - Product Depth is a formal queued/blocked PD01-PD18 train and not started.
 - Top-level surfaces remain `Today / Goals / Capture / Plan / You`.
 - Top-level surfaces must be visual orientation surfaces, not vertical stacks of generic cards.
 
 Prompt completeness note: REC02-REC06 standalone prompt files exist and have
-run through REC closure evidence. PX01-PX20 are complete as future canon/roadmap evidence. ME01 is complete as audit evidence. ME08 is complete as shared standards evidence. ME10 is complete as recurring architecture gate evidence. ME02 is the next global batch only after the mandatory dry-run selection says `Execution allowed: YES`.
+run through REC closure evidence. PX01-PX20 are complete as future canon/roadmap evidence. ME01 is complete as audit evidence. ME08 is complete as shared standards evidence. ME10 is complete as recurring architecture gate evidence. ME02 is complete as behavior-preserving extraction evidence. ME03 is the next ME batch only after the mandatory dry-run selection says `Execution allowed: YES` and after Signature Interface formalization is reconciled into the global order.
 
 ## Global Sequencing Principles
 
@@ -94,7 +94,7 @@ run through REC closure evidence. PX01-PX20 are complete as future canon/roadmap
 | 026 | ME01 | ME | Audit | Maintainability baseline must precede affected extraction and UI expansion. | Complete by ME01 evidence | Serial-only | No; complete | Adequate audit evidence | large-file-extraction-architect, feature-file responsibility | Completed |
 | 027 | ME08 | ME | Audit/standards | Shared standards should precede repeated extractions. | Complete by ME08 evidence | Parallel-safe with no code edits only | No; complete | Adequate audit evidence | component extraction, testability reviewer | Completed |
 | 028 | ME10 | ME | Recurring gate | Architecture scan becomes a recurring gate before large code work. | Complete by ME10 evidence | Serial-preferred | No; complete | Adequate audit evidence | architecture review board, file-size reviewer | Completed recurring gate |
-| 029 | ME02 | ME | Extraction | Goals service extraction before Goals/Mission Control expansion. | ME01/ME08/ME10 Green, behavior preservation tests | Parallel-safe after baseline if disjoint | Yes | Strong implementation validation | large-file extraction, test-impact architect | Continue only on Green |
+| 029 | ME02 | ME | Extraction | Goals service extraction before Goals/Mission Control expansion. | Complete by ME02 evidence | Parallel-safe after baseline if disjoint | No; complete | Strong implementation validation | large-file extraction, test-impact architect | Completed; next step is SI formalization before further ME continuation |
 | 030 | ME03 | ME | Extraction | Today service extraction before Today expansion. | ME01/ME08/ME10 Green, behavior preservation tests | Parallel-safe after baseline if disjoint | Yes | Strong implementation validation | large-file extraction, test-impact architect | Continue only on Green |
 | 031 | ME04 | ME | Extraction | TodayPanels extraction before more Today UI work. | ME03 Green or explicit safe owner map | Serial-preferred | Yes | Strong implementation validation | swiftui component extractor, visual regression | Continue only on Green |
 | 032 | ME05 | ME | Extraction | Plan service extraction before Plan/Life Shape expansion. | ME01/ME08/ME10 Green, behavior preservation tests | Parallel-safe after baseline if disjoint | Yes | Strong implementation validation | large-file extraction, test-impact architect | Continue only on Green |
@@ -190,7 +190,8 @@ run through REC closure evidence. PX01-PX20 are complete as future canon/roadmap
 | ME01 | Completed audit | ME01 evidence | Audit only; extraction not performed | No release/platform claim |
 | ME08 | Completed audit/standards | ME08 evidence | Audit/standards only; extraction not performed | No release/platform claim |
 | ME10 | Completed recurring gate | ME10 evidence | Audit/gate only; extraction not performed | No release/platform claim |
-| ME02-ME07, ME09, ME11-ME12 | Queued / Blocked | Current global preauthorization or `Start ME Train`, ME maintainability gates | Not started; extraction not performed | No release/platform claim |
+| ME02 | Completed extraction | ME02 evidence | DEBUG-only Goals stub extracted; live behavior preserved | No release/platform claim |
+| ME03-ME07, ME09, ME11-ME12 | Queued / Blocked | Current global preauthorization or `Start ME Train`, ME maintainability gates | Not started; extraction not performed | No release/platform claim |
 | CS01-CS10 | Queued / Blocked | `Start CS Train`, CS compatibility gates | Not started; no seam retired | No release/platform claim |
 | PD01-PD18 | Queued / Blocked | `Start Product Depth Train`, PXOS plus relevant ME/CS/AOS-if-needed gates | Not started; not implemented | No Product Depth implementation or release claim |
 | AOS01-AOS30 | Queued / Blocked | `Start AOS Train`, AOS runtime/privacy/source-truth gates | Future canon or queued implementation only as named; not app behavior until proven | No AmbitionsOS implementation or release-readiness claim |

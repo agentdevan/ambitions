@@ -1,7 +1,7 @@
 # Ambitions Beyond 3.0 Maintainability Extraction Plan
 <!-- markdownlint-disable MD013 -->
 
-Status: Future planning plus ME01 audit baseline and ME08 standards; no refactor performed
+Status: Future planning plus ME01 audit baseline, ME08 standards, ME10 gate, and ME02 extraction evidence
 
 ## Candidates
 
@@ -29,6 +29,12 @@ or perform extraction.
 ME08 completed shared projector/state/helper standards on 2026-05-02 before
 repeated extraction. ME10 completed the recurring architecture scan gate on
 2026-05-02 before large SwiftUI or service expansion.
+
+ME02 completed the first Goals service extraction on 2026-05-02. It moved the
+DEBUG-only `StubGoalsService` preview/test service from
+`GoalsFeatureService.swift` to `StubGoalsService.swift`, reduced
+`GoalsFeatureService.swift` from 5,024 to 4,883 lines, created a 144-line
+support file, and preserved live repository-backed behavior.
 
 ## ME08 Shared Standards
 
@@ -68,6 +74,25 @@ Extract projector/state/helper seams before adding behavior. Protect behavior wi
 - New or materially larger Swift files must record before/after line counts,
   owner, responsibility, test lane, and rollback path in the batch report.
 - ME02-ME07 remain the owners for the six Lane 2 extraction files.
+
+## ME02 Extraction Evidence
+
+- Owner: `Native/Ambitions/Features/Goals/GoalsFeatureService.swift`.
+- Extracted support file:
+  `Native/Ambitions/Features/Goals/StubGoalsService.swift`.
+- Responsibility moved: DEBUG-only preview/test service conformance used by
+  preview containers and focused tests.
+- Before/after size: owner file 5,024 to 4,883 lines; extracted support file
+  144 lines; combined touched Goals service/support footprint 5,027 lines.
+- Red repair: moving the stub exposed a private-file visibility boundary for
+  `GoalsFeatureError`; ME02 repaired it by making the error type internal to
+  the app module while keeping it unexported outside the module.
+- Behavior proof: native simulator build passed on `iPhone 17`; focused Goals
+  behavior tests passed with 52 tests and 0 failures.
+- Non-claims: no behavior expansion, copy change, accessibility identifier
+  change, route/raw-value change, persistence/schema change, dependency change,
+  workflow change, visual redesign, release/platform claim, Product Depth
+  implementation, PXOS implementation, or AmbitionsOS implementation.
 
 ## Evidence Required
 
