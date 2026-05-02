@@ -3,7 +3,7 @@
 <!-- markdownlint-disable MD013 -->
 
 Active train: CS compatibility seam retirement train
-Active batch: CS03B User-Facing Plan Alias And Insights Compatibility Preservation complete pending commit evidence; CS04 dry-run next
+Active batch: CS03B User-Facing Plan Alias And Insights Compatibility Preservation complete with commit/push evidence; CS04 dry-run next
 Current out-of-train task: none
 Scope: ME01-ME12 maintainability train complete with commit/push evidence; ME11 repair not triggered; PXOS implementation not started; CS01 complete; CS07 complete as focused compatibility proof; CS08 complete as focused import/export/persistence proof; CS02A repairs the Profile/You seam scope without code edits; CS02B adds focused compatibility proof; CS03A repairs the Insights seam scope without code edits; CS03B adds focused compatibility proof; CS04 is next pending dry-run selection; Signature Interface/Product Depth/AmbitionsOS trains not started
 Date: 2026-05-02
@@ -30,7 +30,7 @@ Product Depth is formalized as a queued/blocked PD01-PD18 train with required ap
 
 ## Ambitions 4.0 Status
 
-Ambitions 4.0 is the active post-3.0 execution program, not a shipped product version. The global order now has 113 formal batches after SI insertion: REC02-REC06, PX01-PX20, ME01-ME12, CS01-CS10, SI01-SI18, PD01-PD18, and AOS01-AOS30. REC02-REC06, PX01-PX20, ME01, ME08, ME10, ME02, ME03, ME04, ME05, ME06, ME07, ME09, ME12, CS01, CS07, CS08, CS02A, CS02B, CS03A, and CS03B are complete or pending commit evidence; CS02C and CS03C remain deferred as accepted Yellow inside formal CS02/CS03.
+Ambitions 4.0 is the active post-3.0 execution program, not a shipped product version. The global order now has 113 formal batches after SI insertion: REC02-REC06, PX01-PX20, ME01-ME12, CS01-CS10, SI01-SI18, PD01-PD18, and AOS01-AOS30. REC02-REC06, PX01-PX20, ME01, ME08, ME10, ME02, ME03, ME04, ME05, ME06, ME07, ME09, ME12, CS01, CS07, CS08, CS02A, CS02B, CS03A, and CS03B are complete with evidence; CS02C and CS03C remain deferred as accepted Yellow inside formal CS02/CS03.
 
 ## Boundaries
 
@@ -49,7 +49,7 @@ CS03A is PASS WITH YELLOW with commit/push evidence `a0d898ea`:
 - `scripts/batch-train-gate-check.sh || true` is PASS WITH YELLOW with only the expected dirty-tree hint before commit.
 - CS03B is the next narrowed proof step; CS03C remains blocked/deferred and the Insights seam is not claimed retired.
 
-CS03B is PASS WITH YELLOW pending commit/push evidence:
+CS03B is PASS WITH YELLOW with commit/push evidence `126e86be`:
 
 - CS03B touched focused app shell/external routing tests and a report only; no production Swift was edited.
 - CS03B focused app shell and external routing tests passed `58` tests with `0` failures.

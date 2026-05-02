@@ -2,7 +2,7 @@
 
 <!-- markdownlint-disable MD013 -->
 
-Status: CS03B complete pending commit evidence.
+Status: CS03B complete with commit/push evidence.
 Date: 2026-05-02
 
 ## Batch
@@ -109,4 +109,4 @@ YES`.
 
 ## Commit SHA
 
-Pending CS03B commit.
+`126e86be` (`Preserve Insights compatibility while supporting Plan surface naming`).

@@ -3,7 +3,7 @@
 <!-- markdownlint-disable MD013 -->
 
 Active train: CS compatibility seam retirement train
-Active batch: CS03B User-Facing Plan Alias And Insights Compatibility Preservation complete pending commit evidence; CS04 dry-run next
+Active batch: CS03B User-Facing Plan Alias And Insights Compatibility Preservation complete with commit/push evidence; CS04 dry-run next
 Current out-of-train task: none
 Scope: ME01-ME12 maintainability train complete with commit/push evidence; ME11 repair not triggered; PXOS implementation not started; CS01 complete; CS07 complete as focused compatibility proof; CS08 complete as focused import/export/persistence proof; CS02A repaired the Profile/You seam scope without code edits; CS02B added focused test proof; CS03A repaired the Insights seam scope without code edits; CS03B added focused test proof; CS04 is next pending dry-run selection; Signature Interface/Product Depth/AmbitionsOS trains not started
 Date: 2026-05-02
@@ -33,7 +33,7 @@ Branch: main
 - CS01: complete as audit-only compatibility seam registry and risk map; no seam retired and no app code edited.
 - CS07: complete as focused external route/widget/App Intent compatibility proof; no seam retired and no app code edited. Commit evidence: `e4c04ff2`, report SHA repair: `ef536cae`.
 - CS08: complete as focused import/export/persistence compatibility proof; no seam retired and no app code edited. Commit evidence: `d2c328d6`, report SHA repair: `9144add3`.
-- CS train: active with CS02 and CS03 internally staged; CS02A and CS02B are complete, CS02C is deferred as accepted Yellow, CS03A is complete with commit evidence `a0d898ea`, CS03B is complete pending commit evidence, CS03C remains blocked/deferred, and CS04 is next only after dry-run selection says `Execution allowed: YES`.
+- CS train: active with CS02 and CS03 internally staged; CS02A and CS02B are complete, CS02C is deferred as accepted Yellow, CS03A is complete with commit evidence `a0d898ea`, CS03B is complete with commit evidence `126e86be`, CS03C remains blocked/deferred, and CS04 is next only after dry-run selection says `Execution allowed: YES`.
 - SI/Product Depth/AOS: queued/blocked and not started.
 - Global order: 113 formal batches after SI insertion; 72 formal batches remain because CS02A and CS03A are internal stages of formal CS02/CS03, not new formal batches.
 
@@ -50,7 +50,7 @@ Branch: main
 
 CS03A validation is PASS WITH YELLOW with commit/push evidence `a0d898ea`. It is docs/protocol-only, creates the Insights/Plan seam inventory, compatibility contract ledger, accessibility identifier ledger, contextual-intelligence semantics map, and split report, and repairs the CS03 prompt into CS03A/CS03B/CS03C staging. `git diff --check` passed, changed-file boundary passed with only `docs/**` and `.codex/**`, release-claim scan found only guardrails/non-claims/historical logs, `scripts/run-doc-qa.sh || true` remains advisory with existing stale-guidance/deprecated-language/markdownlint backlog and lychee passed, and `scripts/batch-train-gate-check.sh || true` had only the expected dirty-tree hint before commit. No seam is retired.
 
-CS03B validation is PASS WITH YELLOW pending commit/push evidence. It touched only focused app shell/external routing tests and a report; no production Swift was edited. Focused app shell and external routing tests passed 58 tests with 0 failures, proving old `insights` raw/external route compatibility, stable `InsightsRouteTarget` deep links, notification/widget `tab=insights` parsing, visible `Plan` top-level canon, no visible top-level `Insights` destination, and current You/Profile history support routing can coexist. CS03C remains deferred as accepted Yellow; the Insights seam is not claimed retired.
+CS03B validation is PASS WITH YELLOW with commit/push evidence `126e86be`. It touched only focused app shell/external routing tests and a report; no production Swift was edited. Focused app shell and external routing tests passed 58 tests with 0 failures, proving old `insights` raw/external route compatibility, stable `InsightsRouteTarget` deep links, notification/widget `tab=insights` parsing, visible `Plan` top-level canon, no visible top-level `Insights` destination, and current You/Profile history support routing can coexist. CS03C remains deferred as accepted Yellow; the Insights seam is not claimed retired.
 
 CS02B validation remains PASS WITH YELLOW with commit/push evidence `b180e782`. Focused app shell and external routing tests passed `54` tests with `0` failures, proving old `profile` raw/default/external route compatibility and visible `You` display can coexist. CS02C remains deferred as accepted Yellow; the Profile seam is not claimed retired.
 
