@@ -38,6 +38,7 @@ Older docs are supporting context unless an active Ambitions 3.0 doc explicitly 
 - [Ambitions_3_0_As_Current_Baseline_Policy.md](canon/Ambitions_3_0_As_Current_Baseline_Policy.md)
 - [Ambitions_3_0_Human_Made_Codebase_Standard.md](canon/Ambitions_3_0_Human_Made_Codebase_Standard.md)
 - [Ambitions_3_0_Active_History_Archive_Policy.md](canon/Ambitions_3_0_Active_History_Archive_Policy.md)
+- [Ambitions_Beyond_3_0_Roadmap.md](canon/Ambitions_Beyond_3_0_Roadmap.md)
 
 ### Strategy / product management
 

@@ -1,6 +1,6 @@
 # F30 Beyond 3.0 Continuation Plan Prompt
 
-Status: Blocked until F29 Green
+Status: Historical completed batch prompt
 
 Scope:
 

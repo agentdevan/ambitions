@@ -7,13 +7,13 @@ Ambitions 3.0 is the active source of truth. This file defines Codex read order,
 - Ambitions 3.0 is active for product, front-end, product language, primitive architecture, implementation sequencing, repo hygiene, dependency discipline, and handoff readiness.
 - Older 1.0/2.0/v2/Waves/D/M/R material is implementation history or supporting context only where Ambitions 3.0 explicitly keeps a domain binding.
 - `docs/codex/BATCH_REGISTRY.md` is implementation status truth only. It does not override Ambitions 3.0 product direction.
-- The F27 FAANG handoff gate rerun is PASS after F28 repaired/rebaselined the full-suite Goal Detail trust/memory UI proof. F27.5 is Green, F29 is Green pending commit/push, and F30 remains blocked until F29 commit/push completes.
+- The F27 FAANG handoff gate rerun is PASS after F28 repaired/rebaselined the full-suite Goal Detail trust/memory UI proof. F27.5, F29, and F30 are Green by current train evidence; the F17-F30 train is complete at the F30 closeout commit.
 - F00 Current Implementation Gap Audit is complete as an audit-only traceability pass.
 - F01/F02 Reality Rail work is now represented in Today state and UI evidence: Today renders a focused Reality Rail with `Start here`, `Start now`, Now/Next/Later, source/context labels, duration labels, privacy-safe projection, empty/unavailable copy, and reserved closure/proof slots.
 - F03 Step Detail work is now represented as a Today-local sheet opened from the Reality Rail `Start here` card and Now/Next/Later rows, with grounded recommendation explanation, duration/source/context labels, private redaction, and stable `TodayStepDetail*` accessibility identifiers.
 - F03.5 Today Execution State Contract Hardening is complete: `TodayExecutionViewState.swift` is now a small aggregate state contract, while Day Rail state, Step Detail state, projection helpers, projector logic, compatibility helpers, and screen-contract snapshot live in dedicated Today-owned files.
 - F04 Step Session, F05 Action Closure / Still Counts, F06 Proof & Receipt Ledger, F07 Capture Composer cleanup, F08 Placement Resolver, F09 Capture-to-Goal / Grow into Goal, F10 Plan Life Suite foundation, F11 Day Shape / Week Shape, F12 Reflow / Recovery / Decisions, F13 Goals / Goal Mission Control, F13.5 Goals / You / Trust architecture checkpoint, F14 You / Trust / What Ambitions Knows, F15 Legacy Identifier Migration, and F16 UI Test Modernization are complete.
-- F16.5 SwiftUI Architecture / State Contract Hardening checkpoint is complete. The active completion train is F17-F30 FAANG Handoff Completion Train. F17 repair, F18, F19, F20, F21/F21.5, F22, F22.5, F22.7, F23, F24, F25, F26, F27, F27.5, F28, and F29 are Green by current train evidence. F27 passed after F28 rebaselined the Goal Detail trust/memory UI proof to stable owned section anchors and reran `scripts/test-local.sh` cleanly with 779 unit tests and 29 UI tests. F27.5 found no critical maintainability blocker and fixed stale active train-entry wording. F29 created the engineer handoff package; F30 remains blocked until F29 commit/push completes.
+- F16.5 SwiftUI Architecture / State Contract Hardening checkpoint is complete. The active completion train is F17-F30 FAANG Handoff Completion Train. F17 repair, F18, F19, F20, F21/F21.5, F22, F22.5, F22.7, F23, F24, F25, F26, F27, F27.5, F28, F29, and F30 are Green by current train evidence. F27 passed after F28 rebaselined the Goal Detail trust/memory UI proof to stable owned section anchors and reran `scripts/test-local.sh` cleanly with 779 unit tests and 29 UI tests. F27.5 found no critical maintainability blocker and fixed stale active train-entry wording. F29 created the engineer handoff package. F30 created the Beyond 3.0 continuation roadmap and final train closeout.
 
 ## Required Read Order
 
@@ -79,13 +79,14 @@ For non-trivial work, read in this order:
 
 ## Batch Train Context
 
-Batch-train execution uses `docs/codex/AMBITIONS_3_0_BATCH_TRAIN_ORCHESTRATOR.md`, `docs/codex/batch-trains/README.md`, `.codex/reports/current-batch-train-state.md`, and the matching validation/operation packs. F03.5, F13.5, and F16.5 are complete. The active train manifest is `docs/codex/batch-trains/F17_F30_FAANG_HANDOFF_COMPLETION_TRAIN.md`; F27, F27.5, F28, and F29 are Green. F30 Beyond 3.0 Continuation Plan remains blocked until F29 commit/push completes.
+Batch-train execution uses `docs/codex/AMBITIONS_3_0_BATCH_TRAIN_ORCHESTRATOR.md`, `docs/codex/batch-trains/README.md`, `.codex/reports/current-batch-train-state.md`, and the matching validation/operation packs. F03.5, F13.5, and F16.5 are complete. The active train manifest is `docs/codex/batch-trains/F17_F30_FAANG_HANDOFF_COMPLETION_TRAIN.md`; F27, F27.5, F28, F29, and F30 are Green. The train stops after the F30 closeout push; no post-train implementation starts automatically.
 
 ## Handoff Package
 
 - `../handoff/Ambitions_3_0_FAANG_Engineer_Handoff.md`
 - `../handoff/Ambitions_3_0_Architecture_Map.md`
 - `../handoff/Ambitions_3_0_Testing_And_Release_Proof.md`
+- `../canon/Ambitions_Beyond_3_0_Roadmap.md`
 
 ## F-Series Audit Reports
 
@@ -126,3 +127,4 @@ Batch-train execution uses `docs/codex/AMBITIONS_3_0_BATCH_TRAIN_ORCHESTRATOR.md
 - `docs/audits/ambitions-3-0-f27-5-human-made-codebase-maintainability-audit.md`
 - `docs/audits/ambitions-3-0-f28-faang-handoff-repair-report.md`
 - `docs/audits/ambitions-3-0-f29-final-handoff-package-engineer-onboarding-report.md`
+- `docs/audits/ambitions-3-0-final-train-closeout-report.md`

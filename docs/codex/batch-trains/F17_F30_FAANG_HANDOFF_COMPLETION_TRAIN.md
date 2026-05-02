@@ -12,11 +12,11 @@ This train is not permission to blindly implement. It is a gated train. Codex ma
 
 ## Current Entry Point
 
-F29 Final Handoff Package + Engineer Onboarding is Green pending commit/push.
+F30 Beyond 3.0 Continuation Plan is Green.
 
-F17 through F29 are Green by current train evidence.
+F17 through F30 are Green by current train evidence.
 
-F30 remains blocked until F29 commit/push completes.
+F30 is the final batch in this train. No post-train implementation starts automatically.
 
 ## Train Type
 
