@@ -1,9 +1,9 @@
 # Current Run State
 
 Active train: ME maintainability extraction train selected by global sequence
-Active batch: none; ME01 complete and ME08 next eligible pending dry-run selection
+Active batch: none; ME08 complete and ME10 next eligible pending dry-run selection
 Current out-of-train task: none
-Scope: ME01 Maintainability Baseline And Ownership Map complete; no extraction performed; PXOS implementation not started; CS/Product Depth/AmbitionsOS trains not started
+Scope: ME01 Maintainability Baseline And Ownership Map complete; ME08 Shared Projector State Helper Standards complete; no extraction performed; PXOS implementation not started; CS/Product Depth/AmbitionsOS trains not started
 Date: 2026-05-02
 Branch: main
 
@@ -21,11 +21,12 @@ Branch: main
 - Release Evidence Closure: REC01 inventory is accepted baseline evidence; REC02 proof plan complete; REC03 validation-log ledger complete; REC04 release-claim copy guard complete; REC05 human review packet complete; REC06 release closure handoff complete.
 - PX01-PX20: complete as future-canon docs/roadmap work; PXOS implementation not started.
 - ME01: complete as audit-only maintainability baseline and ownership map; no Swift files changed and no extraction performed.
+- ME08: complete as audit-only shared projector/state/helper standards; no Swift files changed and no extraction performed.
 - Current user prompt preauthorizes Ambitions 4.0 global sequence continuation through routine train transitions, but not proof, validation, Red, release, platform, legal/privacy, physical-device, public accessibility, TestFlight, App Store Connect, signed archive, visual-approval, or final release gates.
-- ME08-ME12: queued/blocked and not started.
+- ME10-ME12: queued/blocked and not started.
 - CS/Product Depth/AOS: queued/blocked and not started.
 - Product Depth: formalized as a queued/blocked PD01-PD18 train; not started.
-- Global order: 95 formal batches at program start; 69 remain after ME01.
+- Global order: 95 formal batches at program start; 68 remain after ME08.
 
 ## Boundaries
 
@@ -38,20 +39,19 @@ Branch: main
 
 ## Current Validation Plan
 
-Run git status, branch/HEAD checks, diff check, Lane 2 file-size snapshot, ownership/sensitive-term scan, architecture scan advisory, test-lane discovery, release-claim/status scans, doc QA advisory, batch-train gate advisory, focused markdownlint, and changed-file boundary check. App build/test is skipped because app code is forbidden for ME01.
+Run git status, branch/HEAD checks, diff check, read-only projector/state/helper seam discovery, Plan seam correction scan, architecture scan advisory, release-claim/status scans, doc QA advisory, batch-train gate advisory, focused markdownlint, and changed-file boundary check. App build/test is skipped because app code is forbidden for ME08.
 
 ## Current Validation Result
 
-ME01 validation is PASS WITH YELLOW before commit.
+ME08 validation is PASS WITH YELLOW before commit.
 
 Verified:
 
-- `git diff --check` passed before edits.
-- Lane 2 file-size snapshot captured six owner files totaling 16,704 lines before and after ME01: GoalsFeatureService 5,024; TodayFeatureService 2,718; TodayPanels 2,423; PlanFeatureService 2,394; ProfileScreen 2,167; PlanScreen 1,978.
-- Ownership/sensitive-term scan found expected compatibility, route, accessibility, `Profile`/`You`, and product-copy anchors for audit mapping only.
-- `scripts/swiftui-architecture-scan.sh || true` remains Yellow/advisory and flags all six Lane 2 files as `EXTRACTION_REQUIRED`.
-- Test-lane discovery identified focused extraction proof owners without changing tests.
+- `git diff --check` will run before ME08 commit.
+- Read-only seam discovery found Today projector/state/helper examples, shared UI primitive seams, and current Plan seams.
+- `PlanLifeSuiteProjector.swift` does not exist; ME08 standards correct the assumption and name `PlanLifeSuiteState.swift`, `PlanReflowDecisionState.swift`, and `PlanScreenContractSnapshot.swift`.
+- `scripts/swiftui-architecture-scan.sh || true` remains expected Yellow/advisory because large owner files still require extraction.
 
 Not verified:
 
-- App build/test, screenshots, simulator, physical-device, TestFlight, App Store Connect, signed archive, public accessibility, legal/privacy signoff, platform proof, and final release proof. ME01 is audit-only and makes none of those claims.
+- App build/test, screenshots, simulator, physical-device, TestFlight, App Store Connect, signed archive, public accessibility, legal/privacy signoff, platform proof, and final release proof. ME08 is audit/standards-only and makes none of those claims.

@@ -1,6 +1,7 @@
 # Ambitions Beyond 3.0 Maintainability Extraction Plan
+<!-- markdownlint-disable MD013 -->
 
-Status: Future planning plus ME01 audit baseline; no refactor performed
+Status: Future planning plus ME01 audit baseline and ME08 standards; no refactor performed
 
 ## Candidates
 
@@ -25,9 +26,30 @@ or perform extraction.
 | `Native/Ambitions/Features/Profile/ProfileScreen.swift` | ME06 | 2,167 | `EXTRACTION_REQUIRED` |
 | `Native/Ambitions/Features/Plan/PlanScreen.swift` | ME07 | 1,978 | `EXTRACTION_REQUIRED` |
 
-ME08 owns shared projector/state/helper standards before repeated extraction.
-ME10 owns the recurring architecture scan gate before large SwiftUI or service
-expansion.
+ME08 completed shared projector/state/helper standards on 2026-05-02 before
+repeated extraction. ME10 owns the recurring architecture scan gate before large
+SwiftUI or service expansion.
+
+## ME08 Shared Standards
+
+- State files own serializable/display state only. They do not fetch, mutate,
+  route, or format broad copy.
+- Projector files are deterministic and side-effect free. Large projectors split
+  by projection family before new behavior lands.
+- Helper files are named by responsibility, not vague utility buckets.
+- View files receive already-shaped state and invoke callbacks. Logic-heavy
+  additions to view files are Yellow or Red depending on size and risk.
+- Screen contract snapshots live beside the owned feature and protect visible
+  product language plus accessibility anchors.
+- Accessibility identifiers, routes, raw values, persistence, and external
+  payloads are compatibility-sensitive and require CS proof before changes.
+- Existing shared UI primitives are reused before local panel/list abstractions
+  are invented.
+- Each extraction batch names behavior-preservation tests before moving code.
+- Current Plan seams are `PlanLifeSuiteState.swift`,
+  `PlanReflowDecisionState.swift`, and `PlanScreenContractSnapshot.swift`.
+  Future extraction batches must not assume `PlanLifeSuiteProjector.swift`
+  exists or create it without an explicit owner/gate.
 
 ## Rules
 
