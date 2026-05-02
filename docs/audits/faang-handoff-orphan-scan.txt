@@ -1,6 +1,0 @@
-docs/audits/ambitions-3-0-f21-5-ui-failure-classification.md
-docs/audits/ambitions-3-0-f22-7-human-made-active-repo-hygiene-report.md
-docs/audits/ambitions-3-0-f23-accessibility-adhd-qa-report.md
-docs/audits/ambitions-3-0-f24-privacy-trust-qa-report.md
-docs/audits/ambitions-3-0-f25-device-performance-edge-case-qa-report.md
-docs/audits/ambitions-3-0-f26-app-store-demo-truth-report.md

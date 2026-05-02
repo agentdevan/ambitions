@@ -957,6 +957,7 @@ docs/audits/ambitions-3-0-f24-privacy-trust-qa-report.md
 docs/audits/ambitions-3-0-f25-device-performance-edge-case-qa-report.md
 docs/audits/ambitions-3-0-f26-app-store-demo-truth-report.md
 docs/audits/ambitions-3-0-faang-team-operating-upgrade-report.md
+docs/audits/ambitions-3-0-final-faang-handoff-readiness-report.md
 docs/audits/ambitions-3-0-risk-register.md
 docs/audits/dependency-management-audit.md
 docs/audits/faang-handoff-deprecated-language-scan.txt

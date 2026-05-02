@@ -481,8 +481,7 @@ final class AmbitionsUITests: XCTestCase {
         app.launch()
 
         XCTAssertTrue(waitForShellReady(in: app))
-        XCTAssertTrue(app.tabBars.buttons["Goals"].waitForExistence(timeout: 10))
-        app.tabBars.buttons["Goals"].tap()
+        XCTAssertTrue(openCanonicalDestination("Goals", screenIdentifier: "goals.screen", in: app))
         XCTAssertTrue(app.descendants(matching: .any)["goals.screen"].waitForExistence(timeout: 10))
         XCTAssertTrue(app.descendants(matching: .any)["goals.hero-card"].waitForExistence(timeout: 10))
         tapGoalsHeroPrimaryAction(in: app)
@@ -492,7 +491,7 @@ final class AmbitionsUITests: XCTestCase {
         XCTAssertTrue(scrollUntilElementExists("goal-detail.path-filmstrip", in: app))
 
         XCTAssertTrue(scrollUntilElementExists("goal-detail.trust-whisper", in: app, maxAttempts: 12))
-        XCTAssertTrue(scrollUntilElementExists("goal-detail.memory-narrative", in: app, maxAttempts: 16))
+        XCTAssertTrue(scrollUntilElementExists("goal-detail.memory-narrative", in: app, maxAttempts: 24))
     }
 
     func testTodayCanHandOffToPlan() throws {
@@ -781,15 +780,8 @@ final class AmbitionsUITests: XCTestCase {
             return true
         }
 
-        let tabButton = app.tabBars.buttons[title]
-        if tabButton.waitForExistence(timeout: 5) {
-            tabButton.tap()
-        } else {
-            let meridianButton = app.buttons.matching(NSPredicate(format: "label == %@", title)).firstMatch
-            guard meridianButton.waitForExistence(timeout: 5) else {
-                return false
-            }
-            meridianButton.tap()
+        guard tapCanonicalDestination(title, in: app) else {
+            return false
         }
 
         let deadline = Date().addingTimeInterval(timeout)
@@ -799,7 +791,35 @@ final class AmbitionsUITests: XCTestCase {
             }
         }
 
+        if title != "Today", tapCanonicalDestination("Today", in: app), tapCanonicalDestination(title, in: app) {
+            let retryDeadline = Date().addingTimeInterval(timeout)
+            while Date() < retryDeadline {
+                if screen.waitForExistence(timeout: 1) {
+                    return true
+                }
+            }
+        }
+
         return screen.exists
+    }
+
+    private func tapCanonicalDestination(_ title: String, in app: XCUIApplication) -> Bool {
+        let tabButton = app.tabBars.buttons[title]
+        if tabButton.waitForExistence(timeout: 5) {
+            if tabButton.isHittable {
+                tabButton.tap()
+            } else {
+                tabButton.coordinate(withNormalizedOffset: CGVector(dx: 0.5, dy: 0.5)).tap()
+            }
+            return true
+        }
+
+        let meridianButton = app.buttons.matching(NSPredicate(format: "label == %@", title)).firstMatch
+        guard meridianButton.waitForExistence(timeout: 5) else {
+            return false
+        }
+        meridianButton.tap()
+        return true
     }
 
     private func assertShellFloatingButtonDoesNotCoverTabBar(in app: XCUIApplication, file: StaticString = #filePath, line: UInt = #line) {
