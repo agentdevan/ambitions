@@ -3,9 +3,9 @@
 <!-- markdownlint-disable MD013 -->
 
 Active train: CS compatibility seam retirement train
-Active batch: CS08 Import Export Persistence Compatibility Proof evidence in progress
+Active batch: CS02 Profile To You Internal Naming Retirement dry-run pending
 Current out-of-train task: none
-Scope: ME01-ME12 maintainability train complete with commit/push evidence; ME11 repair not triggered; PXOS implementation not started; CS01 complete; CS07 complete as focused compatibility proof; CS08 selected by global order and run as focused import/export/persistence proof; Signature Interface/Product Depth/AmbitionsOS trains not started
+Scope: ME01-ME12 maintainability train complete with commit/push evidence; ME11 repair not triggered; PXOS implementation not started; CS01 complete; CS07 complete as focused compatibility proof; CS08 complete as focused import/export/persistence proof; CS02 is next pending dry-run selection; Signature Interface/Product Depth/AmbitionsOS trains not started
 Date: 2026-05-02
 Branch: main
 
@@ -32,8 +32,8 @@ Branch: main
 - ME12: complete as maintainability handoff evidence with commit/push evidence (`7f7ab99b6a671b08bf2706d778af01e06b907f8e`, report repair `f51f937a`).
 - CS01: complete as audit-only compatibility seam registry and risk map; no seam retired and no app code edited.
 - CS07: complete as focused external route/widget/App Intent compatibility proof; no seam retired and no app code edited. Commit evidence: `e4c04ff2`, report SHA repair: `ef536cae`.
-- CS08: in progress as focused import/export/persistence compatibility proof; no seam retired and no app code edited.
-- CS train: active through CS08 proof evidence only; CS02 is next after CS08 commit/push if continuation gates pass.
+- CS08: complete as focused import/export/persistence compatibility proof; no seam retired and no app code edited. Commit evidence: `d2c328d6`, report SHA repair: `9144add3`.
+- CS train: active with CS02 next only after dry-run selection says `Execution allowed: YES`.
 - SI/Product Depth/AOS: queued/blocked and not started.
 - Global order: 113 formal batches after SI insertion; 74 remain after CS08 commit.
 
@@ -48,7 +48,7 @@ Branch: main
 
 ## Current Validation Result
 
-CS08 validation is PASS WITH YELLOW with focused compatibility evidence ready for commit.
+CS08 validation is PASS WITH YELLOW with focused compatibility evidence committed and pushed.
 
 Verified:
 
@@ -73,4 +73,4 @@ Not verified:
 
 ## Next Eligible Batch
 
-After CS08 commit/push and post-commit drift checks, the next global batch is CS02 Profile To You Internal Naming Retirement only if dry-run selection says `Execution allowed: YES`.
+The next global batch is CS02 Profile To You Internal Naming Retirement only if dry-run selection says `Execution allowed: YES`.
