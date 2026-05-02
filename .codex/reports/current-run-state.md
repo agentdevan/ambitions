@@ -1,9 +1,9 @@
 # Current Run State
 
 Active train: Release Evidence Closure
-Active batch: REC03 Validation Log Ledger Closure
+Active batch: none; REC03 complete and REC04 next eligible
 Current out-of-train task: none
-Scope: REC03 docs/evidence validation-log ledger closure
+Scope: REC03 docs/evidence validation-log ledger closure complete; REC04 dry-run pending
 Date: 2026-05-02
 Branch: main
 
@@ -19,7 +19,7 @@ Branch: main
 - AmbitionsOS: future canon only, not current app implementation truth.
 - PXOS: future user-facing product experience canon only; PXOS train queued/blocked and not started.
 - AOS/ME/CS/Product Depth: queued/blocked and not started.
-- Release Evidence Closure: REC01 inventory is active baseline evidence; REC02 proof plan complete; REC03 validation-log ledger complete pending commit.
+- Release Evidence Closure: REC01 inventory is active baseline evidence; REC02 proof plan complete; REC03 validation-log ledger complete.
 - REC04-REC06: queued/blocked and not started.
 - Current user prompt preauthorizes Ambitions 4.0 global sequence continuation
   through routine train transitions, but not proof, validation, Red, release,
@@ -44,4 +44,4 @@ Run git status, branch/HEAD checks, diff check, output-log listing, doc QA advis
 
 ## Current Validation Result
 
-PASS WITH YELLOW pending commit. REC03 creates a validation log ledger and keeps human-only proof gaps explicit. `git diff --check`, doc QA, gate check, claim scan, and boundary results are recorded in the REC03 report. App build/test is skipped because REC03 forbids app code and changes only evidence docs.
+PASS WITH YELLOW. REC03 created a validation log ledger and kept human-only proof gaps explicit. `git diff --check`, doc QA, gate check, claim scan, and boundary results are recorded in the REC03 report. App build/test was skipped because REC03 forbids app code and changed only evidence docs.
