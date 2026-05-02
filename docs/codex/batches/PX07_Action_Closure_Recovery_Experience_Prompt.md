@@ -1,12 +1,12 @@
 # PX07 Action Closure Recovery Experience Prompt
 <!-- markdownlint-disable MD013 -->
 
-Status: Queued Ambitions 4.0 future-canon batch; not implemented; blocked pending `Start PXOS Future-Canon Train`.
+Status: Complete Ambitions 4.0 future-canon batch; not implemented app behavior.
 
 ## Purpose
 
-Advance Action Closure Recovery Experience for PXOS without implementing app behavior or inventing product
-direction beyond locked source truth.
+Advance Action Closure Recovery Experience for PXOS without implementing app
+behavior or inventing product direction beyond locked source truth.
 
 ## Source Truth Files To Read First
 
@@ -145,6 +145,7 @@ next named gate.
 
 ## Next Safe Prompt / Path
 
-Use the next direct PX prompt only after the train has been explicitly started
-with `Start PXOS Future-Canon Train`, this batch is Green, committed, pushed,
-and no Yellow/Red gate blocks continuation.
+Use the next direct PX prompt only after this batch is Green, committed, pushed,
+the next dry-run says `Execution allowed: YES`, and no Yellow/Red gate blocks
+continuation. The current global Ambitions 4.0 preauthorization may satisfy
+routine PXOS train continuation, but it does not replace proof or gates.

@@ -2,7 +2,7 @@
 
 <!-- markdownlint-disable MD013 -->
 
-Status: Ambitions 4.0 dependency graph; active through PX06 future-canon evidence
+Status: Ambitions 4.0 dependency graph; active through PX07 future-canon evidence
 Date: 2026-05-02
 
 ## Phase Map
@@ -30,7 +30,8 @@ Ambitions 4.0 is the active post-3.0 execution program, not a shipped product ve
 - PX04 is complete as Capture future-canon surface work.
 - PX05 is complete as Plan future-canon surface work.
 - PX06 is complete as You future-canon surface work.
-- PX07-PX20 depend on PX01 and relevant completed PX surface canon.
+- PX07 is complete as Action Closure Recovery future-canon work.
+- PX08-PX20 depend on PX01 and relevant completed PX surface canon.
 - PX14 depends on PX02-PX13.
 - PX18 depends on PX01-PX17 and recurs before major implementation lanes.
 - ME01 depends on explicit approval phrase `Start ME Train`.

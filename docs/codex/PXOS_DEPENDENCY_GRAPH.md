@@ -9,7 +9,8 @@ Date: 2026-05-02
 - PX04 is complete as Capture future-canon surface work.
 - PX05 is complete as Plan future-canon surface work.
 - PX06 is complete as You future-canon surface work.
-- PX07-PX08 depend on PX01, relevant completed surface continuity, and owning
+- PX07 is complete as Action Closure Recovery future-canon work.
+- PX08 depends on PX01, relevant completed surface continuity, and owning
   surface canon.
 - PX09 and PX10 depend on PX01 and all affected surface canon.
 - PX11 depends on PX01, PX05, PX06, and REC claim boundaries.
