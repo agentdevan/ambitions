@@ -1,4 +1,5 @@
 # PX17 Release Truth Product Messaging Prompt
+<!-- markdownlint-disable MD013 -->
 
 Status: Future prompt; do not run automatically. PXOS train not started.
 
@@ -47,6 +48,22 @@ applied. Open or deferred decisions must be recorded and not silently resolved.
 ## Exact Surface Ownership
 
 Owner: release messaging. Boundary: Release-safe product messaging canon only.
+
+## Batch-Specific Deliverables
+
+- Define release-safe PXOS product messaging after REC evidence boundaries.
+- Separate future canon language from current implementation truth.
+- Specify allowed, blocked, and human-proof-dependent claims.
+- Define scans for App Store, TestFlight, device, accessibility, platform,
+  AmbitionsOS, PXOS implementation, and AI/product messaging overclaims.
+
+## Batch-Specific Acceptance Criteria
+
+- Messaging never outruns REC evidence.
+- PXOS may be described as future canon only unless implementation proof exists.
+- AmbitionsOS may be described as future/internal canon only unless evidence
+  exists.
+- Any human-proof-dependent claim stops Codex and produces an operator checklist.
 
 ## Relationships
 

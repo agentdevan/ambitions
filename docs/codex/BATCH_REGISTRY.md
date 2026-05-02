@@ -347,12 +347,13 @@ These batches are complete for planning purposes. They remain as historical cont
 | --- | --- | --- |
 | Release Evidence Closure Train | Active | Selected as the first safe post-3.0 train after the 2026-05-02 pre-train hardening and 3.0 truth check. REC01 is active/started and limited to evidence/status/release-truth inventory. |
 | REC01 Release Evidence Truth Inventory | Active / started | Creates `docs/audits/rec01-release-evidence-truth-inventory-report.md`, preserves F17-F30 truth, inventories simulator evidence and release proof gaps, and must not implement app behavior or claim readiness. |
+| REC02-REC06 Prompt Hardening | Completed / docs-only | Added standalone future/not-started REC02-REC06 prompt files so the next Release Evidence Closure batches are executable by prompt, without starting REC02 or marking any REC batch complete. |
 | AOS01-AOS30 AmbitionsOS Local Intelligence Train | Future / not started | Requires explicit user approval and Green predecessor gates. |
 | ME01-ME12 Maintainability Extraction Train | Future / not started | Requires explicit user approval and Green predecessor gates. |
 | CS01-CS10 Compatibility Seam Retirement Train | Future / not started | Requires explicit user approval and Green predecessor gates. |
 | Product Depth | Future / not started | Requires explicit user approval and scoped prompt. |
 | PXOS Future-Canon Integration | Completed / docs-only | Added Product Experience OS future canon and Codex OS controls. It does not start PXOS implementation or the PXOS train. |
-| PX01-PX20 Product Experience OS Train | Future / not started | Requires exact user phrase `Start PXOS Future-Canon Train`. |
+| PX01-PX20 Product Experience OS Train | Future / not started | Requires exact user phrase `Start PXOS Future-Canon Train`. PX prompts now include batch-specific deliverables and acceptance criteria, but the train remains future/inactive. |
 
 ## Beyond 3.0 Future Canon Status
 

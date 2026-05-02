@@ -1,4 +1,5 @@
 # PX16 User Facing AI Trust And Recommendation Copy Prompt
+<!-- markdownlint-disable MD013 -->
 
 Status: Future prompt; do not run automatically. PXOS train not started.
 
@@ -47,6 +48,24 @@ applied. Open or deferred decisions must be recorded and not silently resolved.
 ## Exact Surface Ownership
 
 Owner: recommendation/trust copy. Boundary: AI/recommendation expression canon only.
+
+## Batch-Specific Deliverables
+
+- Define user-facing recommendation and intelligence expression without AI
+  theater, confidence scores, or model jargon.
+- Specify `Start here`, `Recommended step`, `Why this`, `Based on`, source needs
+  review, fallback, and degraded-state language.
+- Define how AOS source truth, proof trust, privacy, and fallback boundaries are
+  expressed in PXOS.
+- Name what must remain internal-only until AOS evidence exists.
+
+## Batch-Specific Acceptance Criteria
+
+- Recommendations are source-grounded and user-owned.
+- No user-facing intelligence appears without PXOS, AOS, privacy, and fallback
+  gates.
+- Copy does not imply hosted AI, production model behavior, or certainty.
+- Trust and correction paths are visible where recommendations affect action.
 
 ## Relationships
 

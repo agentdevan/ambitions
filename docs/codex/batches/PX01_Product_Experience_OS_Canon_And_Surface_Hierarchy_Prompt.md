@@ -1,4 +1,5 @@
 # PX01 Product Experience OS Canon And Surface Hierarchy Prompt
+<!-- markdownlint-disable MD013 -->
 
 Status: Future prompt; do not run automatically. PXOS train not started.
 
@@ -47,6 +48,23 @@ applied. Open or deferred decisions must be recorded and not silently resolved.
 ## Exact Surface Ownership
 
 Owner: all. Boundary: PXOS canon and hierarchy only.
+
+## Batch-Specific Deliverables
+
+- Define PXOS as future user-facing experience canon beside AmbitionsOS.
+- Lock the five top-level surfaces: Today, Goals, Capture, Plan, You.
+- Define surface ownership, allowed drill-down families, and forbidden new tabs.
+- Codify the Top-Level Surface Composition Rule as a start gate for UI work.
+- Record open/deferred product decisions in the PXOS decision ledger.
+- Update PXOS train/control docs only as future-canon process truth.
+
+## Batch-Specific Acceptance Criteria
+
+- Every surface has a clear owner and "deep, not wide" boundary.
+- No PXOS wording implies current app behavior or implementation.
+- Glance, one-primary-object, and drill-down discipline tests are named.
+- Product Depth remains blocked until PX14/PX18 plus ME/CS gates.
+- REC, ME, CS, and AOS dependencies are referenced without starting them.
 
 ## Relationships
 

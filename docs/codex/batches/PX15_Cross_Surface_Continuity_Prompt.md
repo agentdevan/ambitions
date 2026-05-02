@@ -1,4 +1,5 @@
 # PX15 Cross Surface Continuity Prompt
+<!-- markdownlint-disable MD013 -->
 
 Status: Future prompt; do not run automatically. PXOS train not started.
 
@@ -47,6 +48,23 @@ applied. Open or deferred decisions must be recorded and not silently resolved.
 ## Exact Surface Ownership
 
 Owner: cross-surface. Boundary: Continuity canon only.
+
+## Batch-Specific Deliverables
+
+- Define cross-surface continuity for Capture -> Place -> Plan -> Do Today ->
+  Close/Recover -> Save Proof.
+- Specify handoffs between Capture, Goals, Plan, Today, You, receipts, proof,
+  and trust review.
+- Define source/freshness continuity, privacy redaction, rollback, and user
+  correction paths.
+- Name compatibility gates for future route/raw/external-surface changes.
+
+## Batch-Specific Acceptance Criteria
+
+- Continuity deepens the five surfaces without adding a hub tab.
+- Handoffs are user-visible and do not silently mutate plans or data.
+- External projections require privacy and CS gates before implementation.
+- Each handoff has a source, destination, and failure/recovery state.
 
 ## Relationships
 

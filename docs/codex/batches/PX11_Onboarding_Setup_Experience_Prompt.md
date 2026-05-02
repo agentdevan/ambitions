@@ -1,4 +1,5 @@
 # PX11 Onboarding Setup Experience Prompt
+<!-- markdownlint-disable MD013 -->
 
 Status: Future prompt; do not run automatically. PXOS train not started.
 
@@ -47,6 +48,22 @@ applied. Open or deferred decisions must be recorded and not silently resolved.
 ## Exact Surface Ownership
 
 Owner: onboarding/setup. Boundary: Onboarding and setup canon only.
+
+## Batch-Specific Deliverables
+
+- Define first-run, setup, personalization, permission education, and returning
+  user onboarding for PXOS.
+- Preserve no calendar permission request during onboarding.
+- Specify first useful object, Guided automation default, trust controls, import
+  or skip options, and source/freshness setup language.
+- Separate onboarding canon from current app behavior and implementation.
+
+## Batch-Specific Acceptance Criteria
+
+- Onboarding gets the user to a useful first object without permission pressure.
+- Setup language avoids fake personalization or AI claims.
+- Human trust controls are visible before any sensitive personalization.
+- Exact First Run sequence decisions are locked, open, or deferred.
 
 ## Relationships
 

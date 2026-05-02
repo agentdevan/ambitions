@@ -1,4 +1,5 @@
 # PX20 PXOS Beyond Roadmap Prompt
+<!-- markdownlint-disable MD013 -->
 
 Status: Future prompt; do not run automatically. PXOS train not started.
 
@@ -47,6 +48,21 @@ applied. Open or deferred decisions must be recorded and not silently resolved.
 ## Exact Surface Ownership
 
 Owner: roadmap. Boundary: Beyond roadmap update only.
+
+## Batch-Specific Deliverables
+
+- Update the Beyond roadmap with PXOS outcomes, blocked Product Depth lane,
+  ME/CS/AOS dependencies, release evidence boundaries, and next decision paths.
+- Preserve Ambitions 3.0 completion truth and PXOS future-canon status.
+- Identify future implementation lanes without creating automatic execution.
+- Record which gates recur before any later product work.
+
+## Batch-Specific Acceptance Criteria
+
+- Roadmap language is future-only unless implementation evidence exists.
+- Product Depth remains deep-not-wide and blocked until formalized.
+- Release readiness remains human-proof-bound.
+- The roadmap does not start PXOS, ME, CS, AOS, Product Depth, or release work.
 
 ## Relationships
 

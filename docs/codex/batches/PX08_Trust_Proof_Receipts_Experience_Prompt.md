@@ -1,4 +1,5 @@
 # PX08 Trust Proof Receipts Experience Prompt
+<!-- markdownlint-disable MD013 -->
 
 Status: Future prompt; do not run automatically. PXOS train not started.
 
@@ -47,6 +48,22 @@ applied. Open or deferred decisions must be recorded and not silently resolved.
 ## Exact Surface Ownership
 
 Owner: trust/proof/receipts. Boundary: Trust, proof, receipts experience canon only.
+
+## Batch-Specific Deliverables
+
+- Define future trust, proof, and receipt expression across Today, Goals, Plan,
+  and You.
+- Specify proof saved, stored on this device, no silent changes, source labels,
+  freshness labels, receipt history, and correction affordances.
+- Define what appears as a top-level preview versus receipt/history detail.
+- Name privacy redaction and export/import expectations for proof surfaces.
+
+## Batch-Specific Acceptance Criteria
+
+- Proof and receipts support trust without flooding top-level tabs.
+- Every source-sensitive claim has source/freshness posture.
+- Receipts do not claim external sync, legal proof, or platform integration.
+- Trust controls remain visible, reversible, and user-owned.
 
 ## Relationships
 

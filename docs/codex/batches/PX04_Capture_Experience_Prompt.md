@@ -1,4 +1,5 @@
 # PX04 Capture Experience Prompt
+<!-- markdownlint-disable MD013 -->
 
 Status: Future prompt; do not run automatically. PXOS train not started.
 
@@ -47,6 +48,22 @@ applied. Open or deferred decisions must be recorded and not silently resolved.
 ## Exact Surface Ownership
 
 Owner: Capture. Boundary: Capture experience canon only.
+
+## Batch-Specific Deliverables
+
+- Define Capture as fast private intake and placement, not a notes app or inbox.
+- Specify raw input, placement preview, Needs a Place, Suggested Place, and
+  Decide later expression.
+- Define Grow into Goal, routing review, privacy labels, and consequence copy.
+- Keep calendar permission and planning authority out of Capture onboarding.
+- Name empty, ambiguous, failed-save, and offline capture states.
+
+## Batch-Specific Acceptance Criteria
+
+- Capture is optimized for quick intake plus clear placement ownership.
+- Placement detail moves behind review or confirmation, not top-level clutter.
+- Copy stays private, calm, and non-automated.
+- No inbox tab, generic notes expansion, or silent routing claim appears.
 
 ## Relationships
 

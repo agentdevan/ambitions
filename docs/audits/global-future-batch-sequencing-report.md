@@ -33,7 +33,7 @@ Required source stack was read: `README.md`, `AGENTS.md`, `docs/README.md`, `doc
 - Total formal future batches globally ordered: 77.
 - Included: REC02-REC06, PX01-PX20, ME01-ME12, CS01-CS10, AOS01-AOS30.
 - REC01 was read as active/started context and was not globally ordered as remaining work.
-- REC02-REC06 were reviewed from the REC train manifest because standalone prompt files are not present.
+- REC02-REC06 were initially reviewed from the REC train manifest. A later prompt-hardening pass added standalone REC02-REC06 prompt files while preserving future/not-started status.
 - Product Depth was not formalized as `PD*.md`; it is documented as a blocked future lane pending PXOS plus relevant ME/CS gates and explicit formal prompt approval.
 
 ## Global Phase Summary
@@ -133,7 +133,7 @@ Global protocols forbid repairs that weaken product canon, UX, accessibility, ma
 
 ## Remaining Yellow Advisories
 
-- REC02-REC06 have train-manifest entries but no standalone prompt files.
+- REC02-REC06 standalone prompt files now exist after the prompt-hardening pass.
 - Product Depth has PXOS canon and roadmap references but no formal `PD*.md` batch train.
 - Existing doc QA/markdownlint/deprecated-language backlog may remain advisory unless validation shows new Red.
 - This pass did not run app build/tests because app code was forbidden and untouched.

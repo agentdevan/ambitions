@@ -1,4 +1,5 @@
 # PX05 Plan Life Shape Experience Prompt
+<!-- markdownlint-disable MD013 -->
 
 Status: Future prompt; do not run automatically. PXOS train not started.
 
@@ -47,6 +48,25 @@ applied. Open or deferred decisions must be recorded and not silently resolved.
 ## Exact Surface Ownership
 
 Owner: Plan. Boundary: Plan/Life Shape experience canon only.
+
+## Batch-Specific Deliverables
+
+- Define Plan as capacity, commitments, pressure, Life Shape, and consequence
+  review.
+- Specify Day Shape, Week Shape, Life Shape, reflow, recovery, and decision
+  entry points.
+- Define calendar-denied, no-calendar, overloaded, conflicting, and changed-plan
+  states without silent automation.
+- Name what belongs in Plan detail views versus the top-level Plan orientation.
+- Preserve Plan-owned calendar permission boundaries.
+
+## Batch-Specific Acceptance Criteria
+
+- Plan shows capacity/pressure orientation without becoming a calendar clone.
+- Detailed schedules, diagnostics, and receipts move into Plan detail flows.
+- No silent rescheduling, no automatic calendar writes, and no permission ask
+  during onboarding.
+- Plan language remains suggestion/confirmation oriented.
 
 ## Relationships
 

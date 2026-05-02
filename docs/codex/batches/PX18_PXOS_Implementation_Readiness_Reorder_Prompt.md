@@ -1,4 +1,5 @@
 # PX18 PXOS Implementation Readiness Reorder Prompt
+<!-- markdownlint-disable MD013 -->
 
 Status: Future prompt; do not run automatically. PXOS train not started.
 
@@ -47,6 +48,23 @@ applied. Open or deferred decisions must be recorded and not silently resolved.
 ## Exact Surface Ownership
 
 Owner: global reorder. Boundary: Implementation readiness reorder only.
+
+## Batch-Specific Deliverables
+
+- Re-evaluate PXOS, REC, ME, CS, AOS, Product Depth, and release gates before
+  any PXOS implementation lane starts.
+- Classify each candidate implementation batch as ready, blocked, split, merged,
+  moved earlier, moved later, converted to recurring gate, or future-only.
+- Produce a dependency-aware next-batch prompt path.
+- Confirm top-level composition, ME, CS, AOS, accessibility, copy, visual, trust,
+  and release gates are present.
+
+## Batch-Specific Acceptance Criteria
+
+- PX18 is a recurring gate, not a one-time checklist.
+- No implementation starts from this reorder batch.
+- Weak validation or missing ME/CS/AOS/PXOS gates blocks implementation.
+- Product Depth remains blocked unless formally approved and gated.
 
 ## Relationships
 

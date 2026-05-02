@@ -37,13 +37,18 @@ Use this file to choose the next eligible batch only after the relevant approval
 - Ambitions 3.0 is complete by F30 closeout evidence.
 - F17-F30 is historical complete train evidence.
 - Release Evidence Closure is active at REC01.
-- REC02-REC06 are future continuation batches from the REC train manifest. Standalone REC02-REC06 prompt files are not present as of this pass.
+- REC02-REC06 are future continuation batches with standalone prompt files.
 - PXOS is future user-facing canon only. PX01-PX20 are future/not started.
 - ME01-ME12, CS01-CS10, and AOS01-AOS30 are future/not started.
 - AmbitionsOS is future canon only, not implemented app behavior.
 - Product Depth is blocked as a future lane. No formal PD batch prompts were found.
 - Top-level surfaces remain `Today / Goals / Capture / Plan / You`.
 - Top-level surfaces must be visual orientation surfaces, not vertical stacks of generic cards.
+
+Prompt completeness note: REC02 is no longer blocked by a missing standalone
+prompt file. It remains blocked by normal execution gates: REC01 acceptance,
+the `Continue Release Evidence Closure` approval phrase, release-claim safety,
+human-proof boundaries, and clean validation.
 
 ## Global Sequencing Principles
 

@@ -1,4 +1,5 @@
 # PX09 Copy Language Explanation System Prompt
+<!-- markdownlint-disable MD013 -->
 
 Status: Future prompt; do not run automatically. PXOS train not started.
 
@@ -47,6 +48,25 @@ applied. Open or deferred decisions must be recorded and not silently resolved.
 ## Exact Surface Ownership
 
 Owner: copy/explanation. Boundary: Copy and explanation canon only.
+
+## Batch-Specific Deliverables
+
+- Define PXOS copy rules for surfaces, recommendations, explanations, recovery,
+  trust, proof, empty states, and degraded states.
+- Specify preferred phrases, forbidden phrases, fallback language, source labels,
+  and "why this" patterns without AI theater.
+- Provide examples for Today, Goals, Capture, Plan, You, closure, trust, and
+  release-safe messaging.
+- Update drift scans for generic productivity, dashboard, chatbot, and fake
+  precision language.
+
+## Batch-Specific Acceptance Criteria
+
+- Copy explains decisions through sources and context, not model confidence.
+- Language avoids shame, fake certainty, and productivity jargon.
+- Recommendation language remains "Recommended step" / "Based on" / "Why this"
+  rather than AI or optimization claims.
+- Release-safe phrases are separated from shipped/product claims.
 
 ## Relationships
 

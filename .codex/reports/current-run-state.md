@@ -2,8 +2,8 @@
 
 Active train: Release Evidence Closure
 Active batch: REC01 Release Evidence Truth Inventory
-Current out-of-train task: Global Future Batch Sequencing and Codex OS Orchestrator
-Scope: docs/protocol/planning/Codex-OS only
+Current out-of-train task: Batch Prompt Completeness Audit and Hardening
+Scope: docs/protocol/prompt-hardening only
 Date: 2026-05-02
 Branch: main
 
@@ -19,6 +19,8 @@ Branch: main
 - PXOS: future user-facing product experience canon only; PXOS train not started.
 - AOS/ME/CS/Product Depth: future/not started.
 - Release Evidence Closure: active at REC01; REC02 not started.
+- REC02-REC06: future/not started; standalone prompt hardening completed.
+- PX01-PX20: future/not started; batch-specific prompt hardening completed.
 
 ## Boundaries
 
@@ -31,4 +33,8 @@ Branch: main
 
 ## Current Validation Plan
 
-Run git status, diff check, batch prompt counts, Product Depth scans, status/release/top-level-composition/repair-protocol/approval-phrase scans, doc QA advisory, batch-train gate advisory, and changed-file boundary check. App build/test is skipped because app code is forbidden for this pass.
+Run git status, diff check, REC/PX prompt counts, prompt completeness scans, Product Depth scans, status/release/top-level-composition scans, doc QA advisory, batch-train gate advisory, and changed-file boundary check. App build/test is skipped because app code is forbidden for this pass.
+
+## Current Validation Result
+
+PASS WITH YELLOW. `git diff --check` passed; changed-file boundary remained limited to `docs/**` and `.codex/**`; REC prompt count is 6; PX prompt count is 20; PX deliverable and acceptance sections are present in all 20 PX prompts; REC02-REC06 standalone identity sections are present. Doc QA and batch-train gate checks remain advisory Yellow because the working tree contains this expected docs-only change set and the repo has a broader pre-existing markdown/deprecated-language backlog.

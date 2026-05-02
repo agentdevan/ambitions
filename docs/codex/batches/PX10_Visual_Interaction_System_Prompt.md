@@ -1,4 +1,5 @@
 # PX10 Visual Interaction System Prompt
+<!-- markdownlint-disable MD013 -->
 
 Status: Future prompt; do not run automatically. PXOS train not started.
 
@@ -47,6 +48,22 @@ applied. Open or deferred decisions must be recorded and not silently resolved.
 ## Exact Surface Ownership
 
 Owner: visual/interaction. Boundary: Visual interaction canon only.
+
+## Batch-Specific Deliverables
+
+- Define PXOS visual system rules for calm premium native orientation surfaces.
+- Specify hierarchy, rhythm, primary object, rails/lanes/maps, materials, motion,
+  haptics, touch targets, and Reduce Motion equivalents.
+- Provide visual composition acceptance criteria for each top-level tab.
+- Document forbidden visual patterns: repeated same-size card stacks, dashboard
+  grids, generic charts, fake AI glow, and decorative noise.
+
+## Batch-Specific Acceptance Criteria
+
+- Each top-level tab has a visual orientation pattern beyond a card list.
+- Motion clarifies state and has a reduced-motion fallback.
+- Visual hierarchy supports the 3-second glance test.
+- Implementation readiness remains blocked until future visual proof gates run.
 
 ## Relationships
 

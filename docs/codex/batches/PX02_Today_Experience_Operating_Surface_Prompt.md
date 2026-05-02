@@ -1,4 +1,5 @@
 # PX02 Today Experience Operating Surface Prompt
+<!-- markdownlint-disable MD013 -->
 
 Status: Future prompt; do not run automatically. PXOS train not started.
 
@@ -47,6 +48,25 @@ applied. Open or deferred decisions must be recorded and not silently resolved.
 ## Exact Surface Ownership
 
 Owner: Today. Boundary: Today experience canon only.
+
+## Batch-Specific Deliverables
+
+- Define the future Today top-level orientation surface, not an archive of
+  stacked detail cards.
+- Specify the Hero Step Panel, Now/Next/Later rail, and one primary action.
+- Name how Step Detail, Step Session, Action Closure, Still Counts, recovery,
+  proof preview, and source labels live behind drill-downs or sheets.
+- Define Today privacy redaction, degraded states, and no-silent-change copy.
+- Capture visual-orientation examples and anti-examples for Today.
+
+## Batch-Specific Acceptance Criteria
+
+- Today passes the 3-second glance test with one dominant next decision.
+- Secondary explanation, proof, history, diagnostics, and receipts are pushed
+  into owned drill-downs.
+- Today does not become a task list, dashboard, calendar clone, or card stack.
+- Start here, Start now, Close the loop, Still Counts, and Proof saved language
+  is used only where source truth supports it.
 
 ## Relationships
 

@@ -168,6 +168,11 @@ Use this context when the active train is REC01-REC06 Release Evidence Closure:
 
 - `docs/codex/batch-trains/REC01_REC06_RELEASE_EVIDENCE_CLOSURE_TRAIN.md`
 - `docs/codex/batches/REC01_Release_Evidence_Truth_Inventory_Prompt.md`
+- `docs/codex/batches/REC02_Human_Operator_Release_Proof_Plan_Prompt.md`
+- `docs/codex/batches/REC03_Validation_Log_Ledger_Closure_Prompt.md`
+- `docs/codex/batches/REC04_Release_Claim_Copy_Guard_Prompt.md`
+- `docs/codex/batches/REC05_Human_Review_Packet_Prompt.md`
+- `docs/codex/batches/REC06_Release_Evidence_Closure_Handoff_Prompt.md`
 - `docs/audits/rec01-release-evidence-truth-inventory-report.md`
 
 Release Evidence Closure is evidence/status/release-truth focused. It does not implement app features and does not claim App Store readiness, TestFlight readiness, final RC lock, physical-device verification, public accessibility conformance, signed archive validation, App Store Connect validation, rendered external-platform proof, or AmbitionsOS implementation.

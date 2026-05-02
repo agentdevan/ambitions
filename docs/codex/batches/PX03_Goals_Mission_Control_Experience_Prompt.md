@@ -1,4 +1,5 @@
 # PX03 Goals Mission Control Experience Prompt
+<!-- markdownlint-disable MD013 -->
 
 Status: Future prompt; do not run automatically. PXOS train not started.
 
@@ -47,6 +48,24 @@ applied. Open or deferred decisions must be recorded and not silently resolved.
 ## Exact Surface Ownership
 
 Owner: Goals. Boundary: Goals/Mission Control experience canon only.
+
+## Batch-Specific Deliverables
+
+- Define Goals as strategic direction and Mission Control, not a task database.
+- Specify the top-level Goals orientation object, goal vitality/progress model,
+  and drill-down entry points to Goal Detail and Mission Control lanes.
+- Define how paths, alternatives, proof, constraints, source truth, and risk
+  appear without overwhelming the top-level tab.
+- Name Product Depth boundaries for goal requirements, paths, and receipts.
+- Record open visualization decisions for future design proof.
+
+## Batch-Specific Acceptance Criteria
+
+- Goals keeps one clear strategic orientation on the top-level surface.
+- Detailed path depth moves behind Goal Detail or Mission Control lanes.
+- No new analytics tab, OKR dashboard, or generic project-management surface is
+  introduced.
+- CS compatibility is flagged before any future internal naming/route changes.
 
 ## Relationships
 

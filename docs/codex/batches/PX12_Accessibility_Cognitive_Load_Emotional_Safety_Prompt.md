@@ -1,4 +1,5 @@
 # PX12 Accessibility Cognitive Load Emotional Safety Prompt
+<!-- markdownlint-disable MD013 -->
 
 Status: Future prompt; do not run automatically. PXOS train not started.
 
@@ -47,6 +48,23 @@ applied. Open or deferred decisions must be recorded and not silently resolved.
 ## Exact Surface Ownership
 
 Owner: accessibility/cognitive load. Boundary: Accessibility and emotional safety canon only.
+
+## Batch-Specific Deliverables
+
+- Define PXOS accessibility and cognitive-load requirements for all top-level
+  surfaces and drill-downs.
+- Specify Dynamic Type, VoiceOver, Reduce Motion, no color-only meaning, touch
+  target, gesture alternatives, focus order, and cognitive load checks.
+- Define emotional safety rules for recovery, blocked states, proof gaps, and
+  long-gap returns.
+- Create acceptance criteria future UI batches must cite.
+
+## Batch-Specific Acceptance Criteria
+
+- Accessibility requirements are specific enough to block unsafe UI prompts.
+- Recovery and edge-state copy remains non-shaming.
+- Top-level surfaces do not require reading every label to orient.
+- Human accessibility conformance remains unclaimed until human proof exists.
 
 ## Relationships
 

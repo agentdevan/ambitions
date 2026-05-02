@@ -1,4 +1,5 @@
 # PX14 Product Depth Drilldown Architecture Prompt
+<!-- markdownlint-disable MD013 -->
 
 Status: Future prompt; do not run automatically. PXOS train not started.
 
@@ -47,6 +48,24 @@ applied. Open or deferred decisions must be recorded and not silently resolved.
 ## Exact Surface Ownership
 
 Owner: drill-down/depth. Boundary: Depth and drilldown architecture canon only.
+
+## Batch-Specific Deliverables
+
+- Define Product Depth as drill-down depth inside existing surfaces, not app
+  widening.
+- Map allowed depth destinations: Step Detail, Step Session, Goal Detail,
+  Mission Control lanes, Plan detail views, Life Shape drill-downs, Capture
+  routing review, You grouped navigation, receipts/history, proof detail, setup,
+  trust/review, source detail, and privacy controls.
+- Define prerequisites for formal `PD` prompt creation.
+- Define anti-sprawl tests for future depth work.
+
+## Batch-Specific Acceptance Criteria
+
+- Product Depth cannot start from this batch.
+- No new top-level tab or generic dashboard/inbox/notes/chat surface is allowed.
+- Every depth concept has an owning top-level surface and rollback path.
+- ME/CS gates are required before implementation in affected owner files.
 
 ## Relationships
 

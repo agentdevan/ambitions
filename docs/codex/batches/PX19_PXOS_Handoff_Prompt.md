@@ -1,4 +1,5 @@
 # PX19 PXOS Handoff Prompt
+<!-- markdownlint-disable MD013 -->
 
 Status: Future prompt; do not run automatically. PXOS train not started.
 
@@ -47,6 +48,21 @@ applied. Open or deferred decisions must be recorded and not silently resolved.
 ## Exact Surface Ownership
 
 Owner: handoff. Boundary: PXOS handoff package only.
+
+## Batch-Specific Deliverables
+
+- Create the PXOS handoff package with canon index, decisions, open questions,
+  Yellow advisories, blocked lanes, gate status, and next prompt path.
+- Summarize PX01-PX18 outputs without claiming implementation.
+- Preserve REC, ME, CS, AOS, Product Depth, and release boundaries.
+- Include rollback/repair and continuation instructions for future Codex runs.
+
+## Batch-Specific Acceptance Criteria
+
+- A future engineer can find every PXOS source and gate from the handoff.
+- Open decisions are not silently closed.
+- No PXOS implementation, readiness, or shipped-experience claim is introduced.
+- The next path requires explicit approval.
 
 ## Relationships
 

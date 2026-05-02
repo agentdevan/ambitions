@@ -1,4 +1,5 @@
 # PX07 Action Closure Recovery Experience Prompt
+<!-- markdownlint-disable MD013 -->
 
 Status: Future prompt; do not run automatically. PXOS train not started.
 
@@ -47,6 +48,24 @@ applied. Open or deferred decisions must be recorded and not silently resolved.
 ## Exact Surface Ownership
 
 Owner: cross-surface closure/recovery. Boundary: Action Closure and Recovery experience canon only.
+
+## Batch-Specific Deliverables
+
+- Define Action Closure as Close the loop, Still Counts, recovery, waiting,
+  blocked, not needed, rescheduled, and review-later expression.
+- Specify where closure appears in Today, Step Session, Plan recovery, Goal
+  Detail, receipts, and proof views.
+- Define non-shaming recovery language and no-silent-change guarantees.
+- Name which details belong in closure sheets, receipts, and review flows rather
+  than top-level tabs.
+
+## Batch-Specific Acceptance Criteria
+
+- Closure never marks the user or their life as failed.
+- Recovery offers visible alternatives and preserves user control.
+- Receipt/proof previews are source-bound and do not imply persistence beyond
+  current implementation truth.
+- No automation or reschedule claim appears without confirmation.
 
 ## Relationships
 

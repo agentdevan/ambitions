@@ -1,4 +1,5 @@
 # PX06 You Personal System Center Prompt
+<!-- markdownlint-disable MD013 -->
 
 Status: Future prompt; do not run automatically. PXOS train not started.
 
@@ -47,6 +48,25 @@ applied. Open or deferred decisions must be recorded and not silently resolved.
 ## Exact Surface Ownership
 
 Owner: You. Boundary: You experience canon only.
+
+## Batch-Specific Deliverables
+
+- Define You as the Personal System Center for assumptions, trust, source truth,
+  preferences, correction, export/import posture, and controls.
+- Specify What Ambitions Knows, source freshness, review-needed states, and
+  safe-vs-blocked controls.
+- Define how memory, personalization, receipts, privacy, and correction appear
+  without settings clutter on other tabs.
+- Preserve You as user-facing language even where internal code still says
+  Profile.
+
+## Batch-Specific Acceptance Criteria
+
+- You centralizes trust and controls without becoming a generic settings dump.
+- Sensitive data has source/freshness/ownership labels.
+- Memory and personalization remain user-controlled and local-first unless
+  future proof changes that truth.
+- CS gates are required before internal Profile naming retirement.
 
 ## Relationships
 

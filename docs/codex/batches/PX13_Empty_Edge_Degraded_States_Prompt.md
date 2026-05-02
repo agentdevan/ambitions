@@ -1,4 +1,5 @@
 # PX13 Empty Edge Degraded States Prompt
+<!-- markdownlint-disable MD013 -->
 
 Status: Future prompt; do not run automatically. PXOS train not started.
 
@@ -47,6 +48,21 @@ applied. Open or deferred decisions must be recorded and not silently resolved.
 ## Exact Surface Ownership
 
 Owner: empty/edge/degraded. Boundary: Empty/edge/degraded state canon only.
+
+## Batch-Specific Deliverables
+
+- Define empty, edge, degraded, offline, unavailable, denied-permission, stale
+  source, no recommendation, overwhelming day, late start, and long-gap states.
+- Map each state to Today, Goals, Capture, Plan, You, closure, trust, and proof.
+- Specify fallback copy, user action, source label, and recovery path for each.
+- Preserve local-first and no-hidden-automation posture.
+
+## Batch-Specific Acceptance Criteria
+
+- Every degraded state gives a calm next action or honest no-action state.
+- Missing data is not framed as user failure.
+- Model/runtime/platform unavailability is not hidden.
+- Edge-state detail moves into owned surfaces, not top-level clutter.
 
 ## Relationships
 
