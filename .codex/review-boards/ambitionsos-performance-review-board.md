@@ -43,3 +43,14 @@ Forbidden file touched, unclassified test/build failure, privacy leak, release o
 ## Required Report Section
 
 Verdict, evidence, risks, accepted Yellow conditions, Red stops if any, and next gate.
+
+## Board-Specific Focus
+
+This board owns work budgets, app launch, model invocation budget, graph/projection cost, low-power/thermal behavior, and old-device fallback. It is not a generic approval stamp; it must identify the exact owner, affected surfaces, proof required, proof missing, and consequence of proceeding.
+
+## Board-Specific Rejection Examples
+
+- Proceeding because a manifest exists but predecessor evidence is missing.
+- Treating advisory simulator or doc proof as release readiness.
+- Allowing source-sensitive, privacy-sensitive, compatibility-sensitive, or performance-sensitive changes without the matching ledger update.
+- Accepting generated-looking docs or prompts that do not tell the next Codex run what to read, touch, test, report, and stop on.

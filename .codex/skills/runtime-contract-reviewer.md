@@ -75,3 +75,18 @@ Command, timestamp, log path when available, pass/fail/partial status, proof sco
 - top-level surface addition by implication
 - platform readiness without rendered/source proof
 - generated-looking docs with no owner, gate, or consequence
+
+## Ambitions-Specific Operating Focus
+
+Runtime contract owner. Reject vague prose as truth, direct model mutation, unsupported kernel outputs, missing source/privacy/performance/user-approval gates.
+
+## Distinct Rejection Examples
+
+- Future canon presented as current app behavior.
+- Broad app edits in a docs/protocol/status batch.
+- Unsupported release, platform, source-truth, privacy, accessibility, or performance claim.
+- Generic productivity, chatbot, analytics-dashboard, calendar-clone, or habit-streak drift.
+
+## Required Output Detail
+
+Name the exact source docs read, files reviewed, evidence checked, Green/Yellow/Red verdict, rejection reason for any unsafe work, and the next allowed gate.

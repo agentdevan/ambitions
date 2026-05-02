@@ -79,7 +79,7 @@ For non-trivial work, read in this order:
 
 ## Batch Train Context
 
-Batch-train execution uses `docs/codex/AMBITIONS_3_0_BATCH_TRAIN_ORCHESTRATOR.md`, `docs/codex/batch-trains/README.md`, `.codex/reports/current-batch-train-state.md`, and the matching validation/operation packs. F03.5, F13.5, and F16.5 are complete. The active train manifest is `docs/codex/batch-trains/F17_F30_FAANG_HANDOFF_COMPLETION_TRAIN.md`; F27, F27.5, F28, F29, and F30 are Green. The train stops after the F30 closeout push; no post-train implementation starts automatically.
+Batch-train execution uses `docs/codex/AMBITIONS_3_0_BATCH_TRAIN_ORCHESTRATOR.md`, `docs/codex/batch-trains/README.md`, `.codex/reports/current-batch-train-state.md`, and the matching validation/operation packs. F03.5, F13.5, and F16.5 are complete. The active train manifest is `docs/codex/batch-trains/F17_F30_FAANG_HANDOFF_COMPLETION_TRAIN.md`; F27, F27.5, F28, F29, and F30 are Green. The train stops after the F30 closeout push. After the 2026-05-02 pre-train hardening pass, Release Evidence Closure is the first active post-3.0 train; AOS, ME, CS, and Product Depth remain future/not started.
 
 ## Handoff Package
 
@@ -144,3 +144,14 @@ Use this context when the user explicitly chooses AmbitionsOS, AOS, Maintainabil
 - `docs/codex/batch-trains/CS01_CS10_COMPATIBILITY_SEAM_RETIREMENT_TRAIN.md`
 
 AmbitionsOS is future canon, not current app implementation truth. Do not start future trains automatically.
+
+
+## Release Evidence Closure Context
+
+Use this context when the active train is REC01-REC06 Release Evidence Closure:
+
+- `docs/codex/batch-trains/REC01_REC06_RELEASE_EVIDENCE_CLOSURE_TRAIN.md`
+- `docs/codex/batches/REC01_Release_Evidence_Truth_Inventory_Prompt.md`
+- `docs/audits/rec01-release-evidence-truth-inventory-report.md`
+
+Release Evidence Closure is evidence/status/release-truth focused. It does not implement app features and does not claim App Store readiness, TestFlight readiness, final RC lock, physical-device verification, public accessibility conformance, signed archive validation, App Store Connect validation, rendered external-platform proof, or AmbitionsOS implementation.

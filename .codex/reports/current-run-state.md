@@ -1,16 +1,22 @@
 # Current Run State
 
-Active batch: AmbitionsOS Future-Canon Integration
-Scope: docs/protocol/roadmap only
-Date: 2026-05-01
+Active batch: REC01 Release Evidence Truth Inventory
+Active train: Release Evidence Closure
+Scope: docs/protocol/status/release-truth only
+Date: 2026-05-02
 Branch: main
 
 ## Current Truth
 
-- F17-F30 FAANG Handoff Completion Train: complete and Green by current train evidence.
-- Beyond 3.0 path: Future-canon authoring with Lane 2, Lane 3, and Lane 5 planning folded in.
-- Planning gate result: YELLOW, safe only as docs/protocol/canon changes with file-count consolidation.
-- File manifest summary: AmbitionsOS parent/kernel docs, AOS/ME/CS train controls and prompts, skills, review boards, evidence/traceability protocols, consolidated catalogs, indexes, and audit reports.
+- Ambitions 3.0: complete by F30 closeout evidence.
+- F17-F30 FAANG Handoff Completion Train: complete and Green historical train evidence.
+- F27: PASS after F28 repair/rebaseline.
+- F27.5: complete with no critical maintainability blocker while indexing known large-file and compatibility-seam debt.
+- F29: complete; final engineer handoff package created under `docs/handoff/`.
+- F30: complete; Beyond 3.0 roadmap and final train closeout created.
+- AmbitionsOS: future canon only, not current app implementation truth.
+- AOS/ME/CS/Product Depth: future/not started.
+- Release Evidence Closure: active; REC01 started after PASS WITH YELLOW pre-train hardening and status truth check.
 
 ## Boundaries
 
@@ -19,9 +25,8 @@ Branch: main
 - No compatibility seam retired.
 - No dependencies added.
 - No workflow changes.
-- No release claim added.
-- No post-train implementation begins automatically.
+- No release, App Store, TestFlight, final RC, physical-device, public accessibility, signed archive, App Store Connect, external-platform, or AmbitionsOS implementation claim added.
 
-## Validation Plan
+## Current Validation Plan
 
-Run git status, doc QA advisory, batch train gate advisory, SwiftUI architecture advisory, local build advisory, diff check, forbidden claim scans, and document skipped advisory scripts because this batch consolidated scripts as proposed rather than executable.
+Run git status, diff check, doc QA advisory, batch-train gate advisory, status truth scans, prompt hardening scans, count checks, changed-file boundary check, and release-claim scans. App build/test is skipped unless app code changes, which is forbidden for this pass.

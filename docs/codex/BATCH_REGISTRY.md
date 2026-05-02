@@ -339,6 +339,19 @@ These batches are complete for planning purposes. They remain as historical cont
 | 58 | Front-End Transformation 19 / Watch and Apple TV ambient surface architecture and first implementation | Completed | Completed for planning purposes before the post-Batch-60 Ambitions 2.0 canon. |
 | 59 | Front-End Transformation 20 / Finish-quality pass, accessibility, performance, and release polish | Completed | Completed for planning purposes before the post-Batch-60 Ambitions 2.0 canon. |
 
+
+
+## Post-F30 Active Train Status
+
+| Train | Status | Notes |
+| --- | --- | --- |
+| Release Evidence Closure Train | Active | Selected as the first safe post-3.0 train after the 2026-05-02 pre-train hardening and 3.0 truth check. REC01 is active/started and limited to evidence/status/release-truth inventory. |
+| REC01 Release Evidence Truth Inventory | Active / started | Creates `docs/audits/rec01-release-evidence-truth-inventory-report.md`, preserves F17-F30 truth, inventories simulator evidence and release proof gaps, and must not implement app behavior or claim readiness. |
+| AOS01-AOS30 AmbitionsOS Local Intelligence Train | Future / not started | Requires explicit user approval and Green predecessor gates. |
+| ME01-ME12 Maintainability Extraction Train | Future / not started | Requires explicit user approval and Green predecessor gates. |
+| CS01-CS10 Compatibility Seam Retirement Train | Future / not started | Requires explicit user approval and Green predecessor gates. |
+| Product Depth | Future / not started | Requires explicit user approval and scoped prompt. |
+
 ## Beyond 3.0 Future Canon Status
 
 | Path | Status | Notes |

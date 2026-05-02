@@ -147,6 +147,11 @@ The default safest first move is Release Evidence Closure because it converts
 existing train evidence into human/operator proof without changing product
 behavior.
 
+Status as of 2026-05-02: the pre-train hardening pass selected Release Evidence
+Closure as the first post-F30 train and started REC01 Release Evidence Truth
+Inventory. This is evidence/status work only. It does not start AOS, ME, CS,
+Product Depth, or app implementation.
+
 ## Non-Goals
 
 - No backend/account/sync expansion without explicit canon and dependency review.
@@ -172,4 +177,9 @@ Lane 3 now points to `docs/canon/Ambitions_Beyond_3_0_Compatibility_Seam_Retirem
 
 Lane 5 now points to `docs/codex/AMBITIONS_CODEX_OS_CONTINUITY_PROTOCOL.md`, AmbitionsOS evidence/traceability protocols, reusable skills, review boards, and train-control assets.
 
-AOS implementation is future-only through `docs/codex/batch-trains/AOS01_AOS30_AMBITIONSOS_LOCAL_INTELLIGENCE_TRAIN.md`. The next post-F30 path remains a user decision: Release Evidence Closure, Maintainability Extraction, Compatibility Seam Retirement, Product Depth, or AOS implementation.
+AOS implementation is future-only through `docs/codex/batch-trains/AOS01_AOS30_AMBITIONSOS_LOCAL_INTELLIGENCE_TRAIN.md`. The first post-F30 path selected by the 2026-05-02 pre-train hardening pass is Release Evidence Closure. Maintainability Extraction, Compatibility Seam Retirement, Product Depth, and AOS implementation remain future/not started unless explicitly activated later.
+
+
+## Post-F30 Activation Status
+
+As of 2026-05-02, Ambitions 3.0 is complete by F30 closeout evidence and F17-F30 is historical Green train evidence. AmbitionsOS remains future canon, not current implementation truth. The first safe post-3.0 train selected after pre-train hardening is Release Evidence Closure, beginning with REC01 Release Evidence Truth Inventory. This activation does not start AOS, ME, CS, Product Depth, or any app implementation work.
