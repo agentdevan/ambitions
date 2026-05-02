@@ -153,6 +153,26 @@ final class AppShellNavigationTests: XCTestCase {
 
         XCTAssertEqual(navigation.selectedTab, .profile)
         XCTAssertEqual(navigation.insightsPath, [.history])
+        XCTAssertTrue(navigation.planPath.isEmpty)
+        XCTAssertEqual(AppTab.plan.title, "Plan")
+        XCTAssertEqual(AppTab.insights.rawValue, "insights")
+        XCTAssertEqual(AppTab.insights.title, "History")
+        XCTAssertFalse(AppTab.allCases.contains(.insights))
+    }
+
+    @MainActor
+    func testLegacyInsightsSelectionPreservesPlanCanonWithoutDuplicateDestination() {
+        let navigation = AppNavigationModel(selectedTab: .today)
+
+        navigation.selectTab(.insights)
+
+        XCTAssertEqual(navigation.selectedTab, .profile)
+        XCTAssertEqual(navigation.insightsPath, [.history])
+        XCTAssertTrue(navigation.planPath.isEmpty)
+        XCTAssertEqual(AppTab.allCases.map(\.title), ["Today", "Goals", "Capture", "Plan", "You"])
+        XCTAssertFalse(AppTab.allCases.contains(.insights))
+        XCTAssertEqual(AppTab.plan.title, "Plan")
+        XCTAssertEqual(AppTab.insights.canonicalTopLevelTab, .profile)
     }
 
     @MainActor

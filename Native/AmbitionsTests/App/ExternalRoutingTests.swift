@@ -66,6 +66,19 @@ final class ExternalRoutingTests: XCTestCase {
         XCTAssertEqual(route, .openTab(.plan))
     }
 
+    func testDeepLinkTranslatorPreservesLegacyInsightsTabCompatibility() throws {
+        let translator = AppExternalRouteTranslator()
+        let url = try XCTUnwrap(URL(string: "ambitions://tab/insights"))
+
+        let route = translator.route(fromDeepLink: url)
+
+        XCTAssertEqual(route, .openTab(.insights))
+        XCTAssertEqual(AppTab.insights.rawValue, "insights")
+        XCTAssertEqual(AppTab.insights.canonicalTopLevelTab, .profile)
+        XCTAssertEqual(AppTab.plan.title, "Plan")
+        XCTAssertFalse(AppTab.allCases.contains(.insights))
+    }
+
     func testDeepLinkTranslatorParsesTodayEntryContextRoute() throws {
         let translator = AppExternalRouteTranslator()
         let url = try XCTUnwrap(URL(string: "ambitions://tab/today?context=focus&origin=app_intent"))
@@ -247,6 +260,14 @@ final class ExternalRoutingTests: XCTestCase {
             translator.route(fromWidget: AppWidgetRoutingPayload(action: "open", values: ["tab": "profile"])),
             .openTab(.profile)
         )
+        XCTAssertEqual(
+            translator.route(fromNotification: AppNotificationRoutingPayload(action: "open", values: ["tab": "insights"])),
+            .openTab(.insights)
+        )
+        XCTAssertEqual(
+            translator.route(fromWidget: AppWidgetRoutingPayload(action: "open", values: ["tab": "insights"])),
+            .openTab(.insights)
+        )
     }
 
     func testInsightsPayloadUsesProfileCompatibilityTabForYouSurface() {
@@ -256,6 +277,27 @@ final class ExternalRoutingTests: XCTestCase {
 
         XCTAssertEqual(payload[ExternalSurfaceActionPayload.Key.tab], "profile")
         XCTAssertEqual(AppTab.profile.title, "You")
+    }
+
+    func testLegacyInsightsRoutesAndPayloadsRemainCompatibleWithoutPlanMigrationClaim() throws {
+        let translator = AppExternalRouteTranslator()
+
+        let historyURL = try XCTUnwrap(URL(string: "ambitions://insights/history"))
+        let monthlyURL = try XCTUnwrap(URL(string: "ambitions://insights/monthly-review"))
+        let historyDeepLink = try XCTUnwrap(translator.deepLinkURL(for: .openInsightsRoute(.history)))
+        let monthlyDeepLink = try XCTUnwrap(translator.deepLinkURL(for: .openInsightsRoute(.monthlyReview)))
+        let historyPayload = translator.routePayload(for: .openInsightsRoute(.history))
+        let monthlyPayload = translator.notificationPayload(for: .openInsightsRoute(.monthlyReview), action: "open")
+
+        XCTAssertEqual(translator.route(fromDeepLink: historyURL), .openInsightsRoute(.history))
+        XCTAssertEqual(translator.route(fromDeepLink: monthlyURL), .openInsightsRoute(.monthlyReview))
+        XCTAssertEqual(historyDeepLink.absoluteString, "ambitions://insights/history")
+        XCTAssertEqual(monthlyDeepLink.absoluteString, "ambitions://insights/monthly-review")
+        XCTAssertEqual(historyPayload[ExternalSurfaceActionPayload.Key.tab], AppTab.profile.rawValue)
+        XCTAssertEqual(historyPayload[ExternalSurfaceActionPayload.Key.surface], InsightsRouteTarget.history.rawValue)
+        XCTAssertEqual(monthlyPayload.values[ExternalSurfaceActionPayload.Key.tab], AppTab.profile.rawValue)
+        XCTAssertEqual(monthlyPayload.values["insightsRoute"], InsightsRouteTarget.monthlyReview.rawValue)
+        XCTAssertEqual(AppTab.plan.title, "Plan")
     }
 
     func testRouteTranslatorGeneratesDeterministicDeepLinks() throws {
@@ -391,6 +433,27 @@ final class ExternalRoutingTests: XCTestCase {
         XCTAssertEqual(navigation.selectedTab, .profile)
         XCTAssertEqual(navigation.lastExternalRoute, .openTab(.profile))
         XCTAssertEqual(AppTab.profile.title, "You")
+    }
+
+    @MainActor
+    func testRouterDispatchesInsightsCompatibilityRoutesToYouHistorySupport() {
+        let navigation = AppNavigationModel(selectedTab: .today)
+        let router = DefaultAppExternalRouter(navigation: navigation)
+
+        router.dispatch(.openTab(.insights), source: .deepLink)
+
+        XCTAssertEqual(navigation.selectedTab, .profile)
+        XCTAssertEqual(navigation.insightsPath, [.history])
+        XCTAssertTrue(navigation.planPath.isEmpty)
+        XCTAssertEqual(navigation.lastExternalRoute, .openTab(.insights))
+        XCTAssertEqual(AppTab.plan.title, "Plan")
+        XCTAssertFalse(AppTab.allCases.contains(.insights))
+
+        router.dispatch(.openInsightsRoute(.monthlyReview), source: .deepLink)
+
+        XCTAssertEqual(navigation.selectedTab, .profile)
+        XCTAssertEqual(navigation.insightsPath, [.monthlyReview])
+        XCTAssertEqual(navigation.lastExternalRoute, .openInsightsRoute(.monthlyReview))
     }
 
     @MainActor

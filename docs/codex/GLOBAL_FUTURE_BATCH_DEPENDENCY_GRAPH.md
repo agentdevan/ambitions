@@ -2,7 +2,7 @@
 
 <!-- markdownlint-disable MD013 -->
 
-Status: Ambitions 4.0 dependency graph; active through CS03A Insights compatibility seam repair evidence and SI formalization
+Status: Ambitions 4.0 dependency graph; active through CS03B Insights compatibility proof evidence and SI formalization
 Date: 2026-05-02
 
 ## Phase Map
@@ -55,7 +55,7 @@ Ambitions 4.0 is the active post-3.0 execution program, not a shipped product ve
 - CS07 is complete as focused external route/widget/App Intent compatibility proof under current global preauthorization.
 - CS08 is complete as focused import/export/persistence compatibility proof under current global preauthorization.
 - CS02 is internally staged under global order `041`: CS02A Profile/You compatibility map and ledger repair precedes CS02B route/raw/default/display proof; CS02C narrow internal retirement is blocked until CS02A and CS02B are Green or accepted Yellow. The formal batch count remains 113.
-- CS03 is internally staged under global order `042`: CS03A Insights/Plan compatibility map and ledger repair precedes CS03B route/raw/default/external/display proof; CS03C narrow internal retirement is blocked until CS03A and CS03B are Green or accepted Yellow. Current repo truth maps legacy `insights` compatibility to You/Profile history support rather than directly to Plan; CS03B must preserve that behavior unless a safer adapter is proven. The formal batch count remains 113.
+- CS03 is internally staged under global order `042`: CS03A Insights/Plan compatibility map and ledger repair precedes CS03B route/raw/default/external/display proof; CS03C narrow internal retirement is blocked/deferred after CS03A and CS03B Green or accepted Yellow. Current repo truth maps legacy `insights` compatibility to You/Profile history support rather than directly to Plan; CS03B preserves that behavior with focused tests. The formal batch count remains 113.
 - CS04-CS06 depend on CS01 and the relevant CS07/CS08 compatibility proof where route/raw/external/import/export/persistence risk exists.
 - SI01 depends on PXOS complete, ME01/ME08/ME10/ME02 Green, and SI Codex OS quality gates.
 - SI02-SI18 depend on SI01, predecessor SI batches, relevant ME gates, relevant CS gates, SI review-board gates, preview/visual QA evidence, and accessibility/Reduce Motion gates.
