@@ -33,15 +33,16 @@ Current 4.0 status:
 - Completed: REC06 Release Evidence Closure Handoff.
 - Completed: PX01 Product Experience OS Canon And Surface Hierarchy.
 - Completed: PX02 Today Experience Operating Surface.
+- Completed: PX03 Goals Mission Control Experience.
 - Active evidence baseline: REC01 Release Evidence Truth Inventory.
-- Next queued / blocked: PX03 Goals Mission Control Experience pending global dry-run selection.
-- Queued / Blocked: PX04-PX20 pending PX01-PX03 and global/PXOS gates.
+- Next queued / blocked: PX04 Capture Experience pending global dry-run selection.
+- Queued / Blocked: PX05-PX20 pending PX01-PX04 and global/PXOS gates.
 - Queued / Blocked: ME01-ME12 pending `Start ME Train`.
 - Queued / Blocked: CS01-CS10 pending `Start CS Train`.
 - Queued / Blocked: PD01-PD18 pending `Start Product Depth Train` plus PXOS/ME/CS/AOS-if-needed gates.
 - Queued / Blocked: AOS01-AOS30 pending `Start AOS Train`.
 - Total formal remaining batches in the 4.0 global order at program start: 95.
-- Remaining after PX02: 88.
+- Remaining after PX03: 87.
 
 Use [../canon/Ambitions_4_0_Execution_Program.md](../canon/Ambitions_4_0_Execution_Program.md) and [GLOBAL_FUTURE_BATCH_EXECUTION_ORDER.md](GLOBAL_FUTURE_BATCH_EXECUTION_ORDER.md) for current post-3.0 status semantics.
 
@@ -378,7 +379,7 @@ These batches are complete for planning purposes. They remain as historical cont
 | CS01-CS10 Compatibility Seam Retirement Train | Queued / Blocked | Requires `Start CS Train` and Green predecessor gates. |
 | PD01-PD18 Product Depth Train | Queued / Blocked | Formal Product Depth train. Requires exact approval phrase `Start Product Depth Train`, PXOS Product Depth gates, relevant ME/CS gates, and AOS blockers when runtime logic is touched. |
 | PXOS Future-Canon Integration | Completed / docs-only | Added Product Experience OS future canon and Codex OS controls. It does not start PXOS implementation or the PXOS train. |
-| PX01-PX20 Product Experience OS Train | Active future-canon docs train | PX01-PX02 are complete as future canon. PX03-PX20 remain queued/blocked until selected by global dry-run; PXOS implementation is not started. |
+| PX01-PX20 Product Experience OS Train | Active future-canon docs train | PX01-PX03 are complete as future canon. PX04-PX20 remain queued/blocked until selected by global dry-run; PXOS implementation is not started. |
 
 ## Ambitions 4.0 Future Canon Status
 
