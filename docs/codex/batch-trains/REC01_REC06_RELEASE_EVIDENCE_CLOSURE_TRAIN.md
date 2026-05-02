@@ -1,6 +1,6 @@
 # REC01-REC06 Release Evidence Closure Train
 
-Status: Active train manifest; REC01 started on 2026-05-02 after pre-train hardening and 3.0 truth check.
+Status: Active Ambitions 4.0 train manifest; REC01 started on 2026-05-02, REC02-REC06 queued/blocked and not started.
 
 ## Start Rule
 
@@ -16,16 +16,16 @@ Convert Ambitions 3.0 simulator and documentation evidence into an honest releas
 
 ## Historical Truth To Preserve
 
-Ambitions 3.0 is complete by F30 closeout evidence. F17-F30 remains historically complete. AmbitionsOS remains future canon, not current app behavior. AOS, ME, CS, and Product Depth are future/not started.
+Ambitions 3.0 is complete by F30 closeout evidence. F17-F30 remains historically complete. AmbitionsOS remains future canon, not current app behavior. AOS, ME, CS, Product Depth, and PXOS are queued/blocked Ambitions 4.0 trains and not started.
 
 ## Batch Order
 
 - REC01: Release Evidence Truth Inventory. Status: Active/started. Scope: inventory current evidence, claim boundaries, gaps, and advisory state. No app code.
-- REC02: Human Operator Release Proof Plan. Status: Future. Scope: physical device, accessibility, App Store Connect, signed archive, and external-platform proof plan.
-- REC03: Validation Log Ledger Closure. Status: Future. Scope: preserve and index validation logs and unsupported proof gaps.
-- REC04: Release Claim Copy Guard. Status: Future. Scope: ensure active docs and handoff copy avoid readiness claims not backed by evidence.
-- REC05: Human Review Packet. Status: Future. Scope: operator-facing release review packet.
-- REC06: Release Evidence Closure Handoff. Status: Future. Scope: closeout report and next decision.
+- REC02: Human Operator Release Proof Plan. Status: Queued/Blocked. Scope: physical device, accessibility, App Store Connect, signed archive, and external-platform proof plan.
+- REC03: Validation Log Ledger Closure. Status: Queued/Blocked. Scope: preserve and index validation logs and unsupported proof gaps.
+- REC04: Release Claim Copy Guard. Status: Queued/Blocked. Scope: ensure active docs and handoff copy avoid readiness claims not backed by evidence.
+- REC05: Human Review Packet. Status: Queued/Blocked. Scope: operator-facing release review packet.
+- REC06: Release Evidence Closure Handoff. Status: Queued/Blocked. Scope: closeout report and next decision.
 
 ## Gates
 

@@ -2,7 +2,7 @@
 
 <!-- markdownlint-disable MD013 -->
 
-Status: Global planning and Codex OS control; no future train started
+Status: Ambitions 4.0 global Codex OS control; no queued train started
 Date: 2026-05-02
 
 ## Purpose

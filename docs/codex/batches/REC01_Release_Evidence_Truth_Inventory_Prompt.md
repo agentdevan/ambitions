@@ -87,7 +87,7 @@ REC01 does not prove release readiness. It only inventories current evidence and
 
 ## Commit Message Recommendation
 
-`Harden future trains and verify 3.0 status truth`
+`Harden queued trains and verify 3.0 status truth`
 
 ## Next Safe Prompt / Next Gate
 

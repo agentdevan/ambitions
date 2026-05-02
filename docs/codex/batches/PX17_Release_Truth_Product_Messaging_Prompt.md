@@ -1,7 +1,7 @@
 # PX17 Release Truth Product Messaging Prompt
 <!-- markdownlint-disable MD013 -->
 
-Status: Future prompt; do not run automatically. PXOS train not started.
+Status: Queued Ambitions 4.0 future-canon batch; not implemented; blocked pending `Start PXOS Future-Canon Train`.
 
 ## Purpose
 

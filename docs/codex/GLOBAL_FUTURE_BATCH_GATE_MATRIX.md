@@ -1,11 +1,13 @@
-# Global Future Batch Gate Matrix
+# Ambitions 4.0 Global Future Batch Gate Matrix
 
 <!-- markdownlint-disable MD013 -->
 
-Status: Global planning and Codex OS control; no future train started
+Status: Ambitions 4.0 gate matrix; queued/blocked batches only; no queued train started
 Date: 2026-05-02
 
 ## Gate Result Contract
+
+This matrix governs the Ambitions 4.0 Execution Program. It does not make any queued batch started, implemented, shipped, or release-proven.
 
 Every gate returns:
 

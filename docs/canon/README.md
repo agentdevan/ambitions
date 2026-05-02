@@ -152,6 +152,7 @@ Historical docs are context only and do not override Ambitions 3.0.
 - [Risk Register Protocol](Ambitions_3_0_Risk_Register_Protocol.md)
 - [Postmortem And Learning Loop](Ambitions_3_0_Postmortem_And_Learning_Loop.md)
 - [Human Approval Escalation Rules](Ambitions_3_0_Human_Approval_Escalation_Rules.md)
+- [Ambitions 4.0 Execution Program](Ambitions_4_0_Execution_Program.md)
 - [Beyond 3.0 Continuity Rules](Ambitions_Beyond_3_0_Continuity_Rules.md)
 - [Master Ambitions 3.0 Codex Prompt](../codex/MASTER_AMBITIONS_3_0_CODEX_PROMPT.md)
 - [Context Loading And Task Routing](../codex/AMBITIONS_3_0_CONTEXT_LOADING_AND_TASK_ROUTING.md)
@@ -180,7 +181,7 @@ Historical docs are context only and do not override Ambitions 3.0.
 - [Maintainability Extraction Plan](Ambitions_Beyond_3_0_Maintainability_Extraction_Plan.md)
 - [Compatibility Seam Retirement Plan](Ambitions_Beyond_3_0_Compatibility_Seam_Retirement_Plan.md)
 
-These are future-canon planning docs under Beyond 3.0. They do not claim current app implementation or release readiness.
+These are future-canon planning docs now governed operationally by the Ambitions 4.0 Execution Program. They do not claim current app implementation or release readiness.
 
 
 ## Product Experience OS Future Canon
@@ -195,4 +196,4 @@ These are future-canon planning docs under Beyond 3.0. They do not claim current
 - [PXOS You Personal System Center Canon](PXOS_You_Personal_System_Center_Canon.md)
 - [PXOS Release Safe Product Messaging](PXOS_Release_Safe_Product_Messaging.md)
 
-These docs are future canon under Beyond 3.0. They do not claim current app implementation, release readiness, or PXOS train activation.
+These docs are future canon in the Ambitions 4.0 Execution Program. They do not claim current app implementation, release readiness, or PXOS train activation.

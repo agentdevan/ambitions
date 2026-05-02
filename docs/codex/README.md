@@ -4,6 +4,8 @@ This folder contains operating context for Ambitions Codex runs.
 
 Ambitions 3.0 is the active source of truth. Older Codex prompts and batch files are implementation history or support material unless Ambitions 3.0 explicitly keeps them binding.
 
+Ambitions 4.0 is the active post-3.0 execution program, not a shipped product version. Use [../canon/Ambitions_4_0_Execution_Program.md](../canon/Ambitions_4_0_Execution_Program.md) for queued/blocked status semantics across the 95-batch global order.
+
 ## Required Read Order
 
 1. `README.md`
@@ -29,6 +31,7 @@ Ambitions 3.0 is the active source of truth. Older Codex prompts and batch files
 - [AMBITIONS_3_0_PARALLEL_CODEX_WORKTREE_PROTOCOL.md](AMBITIONS_3_0_PARALLEL_CODEX_WORKTREE_PROTOCOL.md) — parallel worktree guardrails.
 - [CONTEXT_INDEX.md](CONTEXT_INDEX.md) — source precedence and implementation-history navigation.
 - [BATCH_REGISTRY.md](BATCH_REGISTRY.md) — implementation status truth only.
+- [../canon/Ambitions_4_0_Execution_Program.md](../canon/Ambitions_4_0_Execution_Program.md) — active post-3.0 execution-program status semantics.
 - [MASTER_CODEX_SYSTEM.md](MASTER_CODEX_SYSTEM.md) — standing Codex behavior, now subordinate to Ambitions 3.0.
 - [FREE_WORKFLOW_OPERATING_SYSTEM.md](FREE_WORKFLOW_OPERATING_SYSTEM.md) — free local validation and handoff workflow.
 
@@ -68,9 +71,9 @@ The FAANG-team operating upgrade is indexed from:
 
 Use `docs/codex/AMBITIONS_3_0_BATCH_TRAIN_ORCHESTRATOR.md` plus the artifacts in this directory for gated Ambitions 3.0 batch trains. F03.5, F13.5, and F16.5 are architecture checkpoint prompts; do not skip them when their triggers fire.
 
-Completed historical train: [batch-trains/F17_F30_FAANG_HANDOFF_COMPLETION_TRAIN.md](batch-trains/F17_F30_FAANG_HANDOFF_COMPLETION_TRAIN.md). F17 through F30 are Green by current train evidence. F27 remains PASS after the F28 repair/rebaseline, F27.5 completed with no critical maintainability blocker, F29 created the final engineer handoff package, and F30 created the Beyond 3.0 continuation plan and final closeout. Release Evidence Closure is the first active post-3.0 train after the 2026-05-02 pre-train hardening pass; AOS, ME, CS, and Product Depth remain future/not started.
+Completed historical train: [batch-trains/F17_F30_FAANG_HANDOFF_COMPLETION_TRAIN.md](batch-trains/F17_F30_FAANG_HANDOFF_COMPLETION_TRAIN.md). F17 through F30 are Green by current train evidence. F27 remains PASS after the F28 repair/rebaseline, F27.5 completed with no critical maintainability blocker, F29 created the final engineer handoff package, and F30 created the Beyond 3.0 continuation plan and final closeout. Beyond 3.0 is now represented operationally by the Ambitions 4.0 Execution Program. Release Evidence Closure is active at REC01; REC02-REC06, PXOS, ME, CS, Product Depth, and AOS are queued/blocked and not started.
 
-## Global Future Batch Controls
+## Ambitions 4.0 Global Batch Controls
 
 - [Global Future Batch Execution Order](GLOBAL_FUTURE_BATCH_EXECUTION_ORDER.md)
 - [Global Future Batch Dependency Graph](GLOBAL_FUTURE_BATCH_DEPENDENCY_GRAPH.md)
@@ -81,7 +84,7 @@ Completed historical train: [batch-trains/F17_F30_FAANG_HANDOFF_COMPLETION_TRAIN
 - [Global Batch Continuation Protocol](GLOBAL_BATCH_CONTINUATION_PROTOCOL.md)
 - [Global Batch FAANG Quality Bar](GLOBAL_BATCH_FAANG_QUALITY_BAR.md)
 
-These controls define global order, automated gates, repair behavior, validation strength, and continuation rules. They are not approval to start REC02, PXOS, ME, CS, AOS, Product Depth, or any implementation train.
+These controls define the Ambitions 4.0 global execution order, automated gates, repair behavior, validation strength, and continuation rules. They are not approval to start REC02, PXOS, ME, CS, AOS, Product Depth, or any implementation train.
 
 ## AmbitionsOS Future Trains
 
@@ -90,7 +93,7 @@ These controls define global order, automated gates, repair behavior, validation
 - [ME01-ME12 Train](batch-trains/ME01_ME12_MAINTAINABILITY_EXTRACTION_TRAIN.md)
 - [CS01-CS10 Train](batch-trains/CS01_CS10_COMPATIBILITY_SEAM_RETIREMENT_TRAIN.md)
 
-These trains are future-only and must not run automatically after canon authoring.
+These trains are queued/blocked in Ambitions 4.0 and must not run automatically after canon authoring.
 
 ## Active Post-3.0 Train
 
@@ -105,4 +108,4 @@ These trains are future-only and must not run automatically after canon authorin
 - [PXOS Batch Prompt Standard](PXOS_BATCH_PROMPT_STANDARD.md)
 - [PX01-PX20 Train](batch-trains/PX01_PX20_PRODUCT_EXPERIENCE_OS_TRAIN.md)
 
-PXOS is future user-facing product experience canon. The PXOS train is future/inactive and starts only with the exact approval phrase `Start PXOS Future-Canon Train`.
+PXOS is future user-facing product experience canon. The PXOS train is queued/blocked and starts only with the exact approval phrase `Start PXOS Future-Canon Train`.

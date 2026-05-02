@@ -1,6 +1,6 @@
 # AmbitionsOS Index
 
-Status: Future canon under Ambitions Beyond 3.0; not current app implementation truth
+Status: Future canon in the Ambitions 4.0 Execution Program; queued/not started; not current app implementation truth
 Date: 2026-05-01
 
 ## What AmbitionsOS Is
@@ -15,13 +15,13 @@ AmbitionsOS is not a chatbot, bundled LLM, generic productivity engine, Calendar
 
 ## Relationship To Ambitions 3.0
 
-Ambitions 3.0 remains the active source of truth. AmbitionsOS is future canon under `docs/canon/Ambitions_Beyond_3_0_Roadmap.md`. It extends the 3.0 primitive architecture only through explicit future trains and never silently supersedes `Today / Goals / Capture / Plan / You`.
+Ambitions 3.0 remains the completed baseline and current app truth. AmbitionsOS is future canon governed operationally by `docs/canon/Ambitions_4_0_Execution_Program.md` and anchored historically by `docs/canon/Ambitions_Beyond_3_0_Roadmap.md`. It extends the 3.0 primitive architecture only through explicitly approved queued trains and never silently supersedes `Today / Goals / Capture / Plan / You`.
 
 ## Relationship To Beyond 3.0 Lanes
 
-- Lane 2 Maintainability And Extraction: future ME train, not a refactor in this batch.
-- Lane 3 Compatibility Seam Retirement: future CS train, not a seam retirement in this batch.
-- Lane 5 Codex Operating System Continuity: future train governance, evidence ledgers, traceability, prompt quality, repair trains, and review boards.
+- Lane 2 Maintainability And Extraction: queued ME train, not a refactor in this batch.
+- Lane 3 Compatibility Seam Retirement: queued CS train, not a seam retirement in this batch.
+- Lane 5 Codex Operating System Continuity: queued train governance, evidence ledgers, traceability, prompt quality, repair trains, and review boards.
 
 ## Child-Domain Mapping
 

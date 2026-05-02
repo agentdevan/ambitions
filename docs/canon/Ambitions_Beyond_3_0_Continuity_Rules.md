@@ -1,10 +1,12 @@
 # Ambitions Beyond 3.0 Continuity Rules
 
-Status: Future-canon continuity governance
+Status: Continuity governance; represented operationally by the Ambitions 4.0 Execution Program
 
 ## Purpose
 
 Ambitions 3.0 operating discipline must survive 3.1, 4.0, and later canon without stale-doc drift or product identity loss.
+
+Beyond 3.0 remains the continuity label and file-path anchor. Active post-3.0 execution is now the Ambitions 4.0 Execution Program, which is not a shipped product version and does not make queued future canon implemented.
 
 ## Introducing Future Canon
 
@@ -39,11 +41,11 @@ Future migrations should preserve working behavior until replacements are implem
 
 ## AmbitionsOS Future Canon Continuity
 
-AmbitionsOS canon is future guidance under Beyond 3.0. It must not supersede Ambitions 3.0 unless a future source-of-truth override explicitly says so. AOS, ME, and CS trains remain future-only until explicitly approved, gated, validated, committed, and evidence-bound.
+AmbitionsOS canon is future guidance in the Ambitions 4.0 Execution Program. It must not supersede Ambitions 3.0 unless a future source-of-truth override explicitly says so. AOS, ME, and CS trains remain queued/blocked and not started until explicitly approved, gated, validated, committed, and evidence-bound.
 
 
 ## PXOS Future Canon Continuity
 
-PXOS canon is future user-facing product experience guidance under Beyond 3.0. It must not supersede Ambitions 3.0 unless a future source-of-truth override explicitly says so. PXOS train work remains future/inactive until the user says exactly `Start PXOS Future-Canon Train`, predecessor gates pass, and evidence is recorded.
+PXOS canon is future user-facing product experience guidance in the Ambitions 4.0 Execution Program. It must not supersede Ambitions 3.0 unless a future source-of-truth override explicitly says so. PXOS train work remains queued/blocked and not started until the user says exactly `Start PXOS Future-Canon Train`, predecessor gates pass, and evidence is recorded.
 
 PXOS must preserve Today / Goals / Capture / Plan / You, Ambitions 3.0 completion truth, AmbitionsOS future-only status, REC release-claim boundaries, ME maintainability gates, and CS compatibility gates.

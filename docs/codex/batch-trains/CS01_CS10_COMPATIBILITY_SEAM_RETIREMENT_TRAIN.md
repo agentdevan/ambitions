@@ -1,10 +1,10 @@
 # CS01-CS10 Compatibility Seam Retirement Train
 
-Status: Future train manifest; not started automatically
+Status: Queued Ambitions 4.0 train manifest; not started; blocked pending `Start CS Train`.
 
 ## Start Rule
 
-This train starts only when the user explicitly approves it after Ambitions 3.0/F17-F30 truth is Green and `docs/codex/BATCH_REGISTRY.md` records the selected train as active. Required user approval phrase: `Start CS01 Compatibility Seam Registry And Risk Map`.
+This train starts only when the user explicitly approves it after Ambitions 3.0/F17-F30 truth is Green and `docs/codex/BATCH_REGISTRY.md` records the selected train as active. Required user approval phrase: `Start CS Train`.
 
 ## What Does Not Start This Train
 

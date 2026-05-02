@@ -1,7 +1,7 @@
 # REC05 Human Review Packet Prompt
 <!-- markdownlint-disable MD013 -->
 
-Status: Future prompt; do not run automatically. REC05 is not started.
+Status: Queued Ambitions 4.0 evidence batch; not started; blocked pending `Continue Release Evidence Closure` and REC04 Green.
 
 ## Batch Identity
 

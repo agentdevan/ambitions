@@ -1,7 +1,7 @@
 # REC02 Human Operator Release Proof Plan Prompt
 <!-- markdownlint-disable MD013 -->
 
-Status: Future prompt; do not run automatically. REC02 is not started.
+Status: Queued Ambitions 4.0 evidence batch; not started; blocked pending `Continue Release Evidence Closure`.
 
 ## Batch Identity
 

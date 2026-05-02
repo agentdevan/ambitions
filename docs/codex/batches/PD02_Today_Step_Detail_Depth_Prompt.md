@@ -1,7 +1,7 @@
 # PD02 Today Step Detail Depth Prompt
 <!-- markdownlint-disable MD013 -->
 
-Status: Future prompt; do not run automatically. Product Depth train not started.
+Status: Queued Ambitions 4.0 Product Depth batch; not started; not implemented; blocked pending `Start Product Depth Train` and prerequisite gates.
 
 ## Batch Identity
 

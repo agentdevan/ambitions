@@ -1,6 +1,6 @@
 # Ambitions Beyond 3.0 Roadmap
 
-Status: Future-canon continuation plan
+Status: Continuity roadmap; represented operationally by the Ambitions 4.0 Execution Program
 Date: 2026-05-01
 
 ## Purpose
@@ -12,6 +12,10 @@ active 3.0 source of truth.
 It is not a feature implementation batch, release approval, App Store plan, or
 permission to supersede Ambitions 3.0 canon. Future canon must follow
 `docs/canon/Ambitions_Beyond_3_0_Continuity_Rules.md`.
+
+## Operational Bridge
+
+Beyond 3.0 remains the link-stable continuity name for these roadmap files. Active post-3.0 execution is now governed by `docs/canon/Ambitions_4_0_Execution_Program.md` and the 4.0 global execution order. Queued 4.0 batches are not implemented, not shipped, and not release-proven.
 
 ## Current Baseline
 
@@ -109,7 +113,7 @@ focused tests, and rollback path.
 Goal: deepen the existing primitives instead of adding new top-level
 destinations.
 
-Status: formal future train created; Product Depth train future/inactive.
+Status: formal Ambitions 4.0 train created; Product Depth train queued/blocked and not started.
 Required approval phrase to start Product Depth train:
 `Start Product Depth Train`.
 
@@ -131,7 +135,7 @@ Formal lane assets:
 - `docs/codex/batch-trains/PD01_PD18_PRODUCT_DEPTH_TRAIN.md`
 - `docs/codex/batches/PD01_Product_Depth_Canon_Inventory_And_Ownership_Map_Prompt.md`
 
-PD01-PD18 remain future/not started. Formalizing the lane does not start
+PD01-PD18 remain queued/blocked and not started. Formalizing the lane does not start
 Product Depth, PXOS, ME, CS, AOS, REC02, or app implementation.
 
 ### Lane 5: Codex Operating System Continuity
@@ -159,17 +163,17 @@ runtime architecture. PXOS owns how that intelligence appears to users through
 surfaces, copy, navigation, interaction, trust, proof, recovery, accessibility,
 visual hierarchy, and release-safe product messaging.
 
-Status: future canon created; PXOS train future/inactive. Required approval
+Status: future canon created; PXOS train queued/blocked and not started. Required approval
 phrase to start PXOS train: `Start PXOS Future-Canon Train`.
 
 ## First Future Decision
 
-Before any Beyond 3.0 implementation starts, choose one path:
+Before any Ambitions 4.0 queued batch starts, choose one path:
 
 - Release evidence closure if the next goal is external readiness.
 - Maintainability extraction if the next goal is engineering durability.
 - Product depth if the next goal is native experience growth.
-- Future-canon authoring if Ambitions 3.1 or 4.0 is being introduced.
+- Future-canon authoring if a later product version is being introduced.
 
 The default safest first move is Release Evidence Closure because it converts
 existing train evidence into human/operator proof without changing product
@@ -205,12 +209,12 @@ Lane 3 now points to `docs/canon/Ambitions_Beyond_3_0_Compatibility_Seam_Retirem
 
 Lane 5 now points to `docs/codex/AMBITIONS_CODEX_OS_CONTINUITY_PROTOCOL.md`, AmbitionsOS evidence/traceability protocols, reusable skills, review boards, and train-control assets.
 
-AOS implementation is future-only through `docs/codex/batch-trains/AOS01_AOS30_AMBITIONSOS_LOCAL_INTELLIGENCE_TRAIN.md`. The first post-F30 path selected by the 2026-05-02 pre-train hardening pass is Release Evidence Closure. Maintainability Extraction, Compatibility Seam Retirement, Product Depth, and AOS implementation remain future/not started unless explicitly activated later. Product Depth is formalized as `docs/codex/batch-trains/PD01_PD18_PRODUCT_DEPTH_TRAIN.md` and starts only with `Start Product Depth Train`.
+AOS implementation is queued/blocked through `docs/codex/batch-trains/AOS01_AOS30_AMBITIONSOS_LOCAL_INTELLIGENCE_TRAIN.md`. The first post-F30 path selected by the 2026-05-02 pre-train hardening pass is Release Evidence Closure. Maintainability Extraction, Compatibility Seam Retirement, Product Depth, and AOS implementation remain not started unless explicitly activated later. Product Depth is formalized as `docs/codex/batch-trains/PD01_PD18_PRODUCT_DEPTH_TRAIN.md` and starts only with `Start Product Depth Train`.
 
 
 ## Post-F30 Activation Status
 
-As of 2026-05-02, Ambitions 3.0 is complete by F30 closeout evidence and F17-F30 is historical Green train evidence. AmbitionsOS remains future canon, not current implementation truth. The first safe post-3.0 train selected after pre-train hardening is Release Evidence Closure, beginning with REC01 Release Evidence Truth Inventory. This activation does not start AOS, ME, CS, Product Depth, or any app implementation work. Product Depth is formalized as a future train but remains inactive.
+As of 2026-05-02, Ambitions 3.0 is complete by F30 closeout evidence and F17-F30 is historical Green train evidence. AmbitionsOS remains future canon, not current implementation truth. The first safe post-3.0 train selected after pre-train hardening is Release Evidence Closure, beginning with REC01 Release Evidence Truth Inventory. This activation does not start AOS, ME, CS, Product Depth, or any app implementation work. Product Depth is formalized as an Ambitions 4.0 queued train but remains blocked/not started.
 
 
 ## PXOS Future-Canon Path

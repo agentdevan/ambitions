@@ -1,6 +1,6 @@
 # AOS02 Life Graph Event Log Foundation Prompt
 
-Status: Future prompt; do not run automatically.
+Status: Queued Ambitions 4.0 AmbitionsOS batch; not started; future canon only until implemented by evidence; blocked pending `Start AOS Train`.
 
 ## Batch Identity
 

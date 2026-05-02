@@ -1,8 +1,8 @@
 # PD01-PD18 Product Depth Train
 <!-- markdownlint-disable MD013 -->
 
-Status: Future train manifest; Product Depth train not started
-Train type: future implementation / product-depth / drill-down expansion
+Status: Queued Ambitions 4.0 train manifest; Product Depth train not started; blocked pending `Start Product Depth Train` and prerequisite gates.
+Train type: queued implementation / product-depth / drill-down expansion
 Date: 2026-05-02
 
 ## Required User Approval Phrase

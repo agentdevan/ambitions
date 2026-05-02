@@ -1,8 +1,8 @@
-# Global Future Batch Dependency Graph
+# Ambitions 4.0 Global Future Batch Dependency Graph
 
 <!-- markdownlint-disable MD013 -->
 
-Status: Global planning and Codex OS control; no future train started
+Status: Ambitions 4.0 dependency graph; queued/blocked batches only; no queued train started
 Date: 2026-05-02
 
 ## Phase Map
@@ -18,6 +18,8 @@ Date: 2026-05-02
 | 6 AOS internal foundations | 066-088 | Build AmbitionsOS contracts and kernels without user-facing exposure. | Internal intelligence has typed, private, source-grounded contracts. |
 | 7 AOS expression and QA | 089-095 | Integrate only after PXOS/ME/CS, build fixtures, QA, claim truth, handoff, repair/roadmap. | User-facing intelligence waits for proof and gates. |
 | 8 Release readiness evidence | Future human-led lane | Actual release readiness proof after implementation evidence and human/platform proof. | No public readiness claim without evidence. |
+
+Ambitions 4.0 is the active post-3.0 execution program, not a shipped product version. This graph covers 95 formal queued/blocked batches and does not make PXOS, Product Depth, or AmbitionsOS implemented.
 
 ## Hard Dependencies
 
@@ -54,7 +56,7 @@ Date: 2026-05-02
 - Weak or Missing validation for an implementation batch.
 - Human-proof requirement that Codex cannot perform.
 - Global order and train manifest disagreement that affects safety.
-- PXOS or AmbitionsOS described as implemented without evidence.
+- PXOS, Product Depth, or AmbitionsOS described as implemented without evidence.
 - REC02, PXOS, ME, CS, AOS, or Product Depth started by implication.
 - Top-level surface composition rule weakened or bypassed.
 

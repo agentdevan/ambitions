@@ -1,7 +1,7 @@
 # PX01-PX20 Product Experience OS Train
 
-Status: Future train manifest; PXOS train not started
-Train type: future-canon and later implementation-readiness train
+Status: Queued Ambitions 4.0 train manifest; PXOS train not started; blocked pending `Start PXOS Future-Canon Train`.
+Train type: queued future-canon and later implementation-readiness train
 Date: 2026-05-02
 
 ## Required User Approval Phrase

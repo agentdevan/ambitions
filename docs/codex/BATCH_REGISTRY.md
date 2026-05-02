@@ -20,6 +20,23 @@ Ambitions 3.0 is the active rebuild source of truth. For current execution and h
 
 Ambitions 2.0 docs remain preserved historical/supporting context unless the 3.0 source override explicitly keeps a domain binding where 3.0 has not replaced it.
 
+## Ambitions 4.0 Execution Program Status
+
+Ambitions 4.0 is the active post-3.0 execution program, not a shipped product version. It does not claim release readiness, App Store readiness, TestFlight readiness, physical-device proof, platform proof, public accessibility proof, PXOS implementation, Product Depth implementation, or AmbitionsOS implementation.
+
+Current 4.0 status:
+
+- Active: REC01 Release Evidence Truth Inventory.
+- Queued / Blocked: REC02-REC06 pending `Continue Release Evidence Closure`.
+- Queued / Blocked: PX01-PX20 pending `Start PXOS Future-Canon Train`.
+- Queued / Blocked: ME01-ME12 pending `Start ME Train`.
+- Queued / Blocked: CS01-CS10 pending `Start CS Train`.
+- Queued / Blocked: PD01-PD18 pending `Start Product Depth Train` plus PXOS/ME/CS/AOS-if-needed gates.
+- Queued / Blocked: AOS01-AOS30 pending `Start AOS Train`.
+- Total formal remaining batches in the 4.0 global order: 95.
+
+Use [../canon/Ambitions_4_0_Execution_Program.md](../canon/Ambitions_4_0_Execution_Program.md) and [GLOBAL_FUTURE_BATCH_EXECUTION_ORDER.md](GLOBAL_FUTURE_BATCH_EXECUTION_ORDER.md) for current post-3.0 status semantics.
+
 Older preserved continuity docs:
 
 - [../canon/Ambitions_OS_Master_Roadmap.md](../canon/Ambitions_OS_Master_Roadmap.md)
@@ -347,21 +364,21 @@ These batches are complete for planning purposes. They remain as historical cont
 | --- | --- | --- |
 | Release Evidence Closure Train | Active | Selected as the first safe post-3.0 train after the 2026-05-02 pre-train hardening and 3.0 truth check. REC01 is active/started and limited to evidence/status/release-truth inventory. |
 | REC01 Release Evidence Truth Inventory | Active / started | Creates `docs/audits/rec01-release-evidence-truth-inventory-report.md`, preserves F17-F30 truth, inventories simulator evidence and release proof gaps, and must not implement app behavior or claim readiness. |
-| REC02-REC06 Prompt Hardening | Completed / docs-only | Added standalone future/not-started REC02-REC06 prompt files so the next Release Evidence Closure batches are executable by prompt, without starting REC02 or marking any REC batch complete. |
-| AOS01-AOS30 AmbitionsOS Local Intelligence Train | Future / not started | Requires explicit user approval and Green predecessor gates. |
-| ME01-ME12 Maintainability Extraction Train | Future / not started | Requires explicit user approval and Green predecessor gates. |
-| CS01-CS10 Compatibility Seam Retirement Train | Future / not started | Requires explicit user approval and Green predecessor gates. |
-| PD01-PD18 Product Depth Train | Future / not started | Formal future Product Depth train. Requires exact approval phrase `Start Product Depth Train`, PXOS Product Depth gates, relevant ME/CS gates, and AOS blockers when runtime logic is touched. |
+| REC02-REC06 Prompt Hardening | Completed / docs-only | Added standalone queued/blocked REC02-REC06 prompt files so the next Release Evidence Closure batches are executable by prompt, without starting REC02 or marking any REC batch complete. |
+| AOS01-AOS30 AmbitionsOS Local Intelligence Train | Queued / Blocked | Requires `Start AOS Train` and Green predecessor gates. |
+| ME01-ME12 Maintainability Extraction Train | Queued / Blocked | Requires `Start ME Train` and Green predecessor gates. |
+| CS01-CS10 Compatibility Seam Retirement Train | Queued / Blocked | Requires `Start CS Train` and Green predecessor gates. |
+| PD01-PD18 Product Depth Train | Queued / Blocked | Formal Product Depth train. Requires exact approval phrase `Start Product Depth Train`, PXOS Product Depth gates, relevant ME/CS gates, and AOS blockers when runtime logic is touched. |
 | PXOS Future-Canon Integration | Completed / docs-only | Added Product Experience OS future canon and Codex OS controls. It does not start PXOS implementation or the PXOS train. |
-| PX01-PX20 Product Experience OS Train | Future / not started | Requires exact user phrase `Start PXOS Future-Canon Train`. PX prompts now include batch-specific deliverables and acceptance criteria, but the train remains future/inactive. |
+| PX01-PX20 Product Experience OS Train | Queued / Blocked | Requires exact user phrase `Start PXOS Future-Canon Train`. PX prompts now include batch-specific deliverables and acceptance criteria, but the train remains queued/blocked and not started. |
 
-## Beyond 3.0 Future Canon Status
+## Ambitions 4.0 Future Canon Status
 
 | Path | Status | Notes |
 | --- | --- | --- |
 | AmbitionsOS Future-Canon Integration | Completed / docs-only | Creates the future AmbitionsOS parent canon, kernel docs, runtime contract, AOS train controls, ME/CS train plans, Codex OS protocols, skills, review boards, consolidated catalogs, and audit reports. No app behavior, production refactor, compatibility seam retirement, dependency, workflow, platform capability, persistence/schema, release, App Store, TestFlight, device, accessibility, or final RC claim is added. |
-| AOS01-AOS30 AmbitionsOS Local Intelligence Train | Future / not started | Requires explicit user approval and Green predecessor gates. |
-| ME01-ME12 Maintainability Extraction Train | Future / not started | Planning only; no extraction run in this batch. |
-| CS01-CS10 Compatibility Seam Retirement Train | Future / not started | Planning only; no seam retired in this batch. |
-| Product Experience OS / PXOS | Future canon / train not started | User-facing future experience canon under Beyond 3.0. Does not claim implementation. |
-| Product Depth / PD01-PD18 | Future train / not started | Deepens Today, Goals, Capture, Plan, and You through drill-downs and proof/review/setup depth. Does not add top-level destinations or claim implementation. |
+| AOS01-AOS30 AmbitionsOS Local Intelligence Train | Queued / Blocked | Requires `Start AOS Train` and Green predecessor gates. |
+| ME01-ME12 Maintainability Extraction Train | Queued / Blocked | Planning only; no extraction run in this pass. |
+| CS01-CS10 Compatibility Seam Retirement Train | Queued / Blocked | Planning only; no seam retired in this pass. |
+| Product Experience OS / PXOS | Queued / Blocked future canon | User-facing future experience canon in Ambitions 4.0. Does not claim implementation. |
+| Product Depth / PD01-PD18 | Queued / Blocked | Deepens Today, Goals, Capture, Plan, and You through drill-downs and proof/review/setup depth. Does not add top-level destinations or claim implementation. |

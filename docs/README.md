@@ -4,6 +4,8 @@ This folder contains product, canon, implementation, build, and release document
 
 Ambitions 3.0 is the active rebuild documentation system.
 
+Ambitions 4.0 is the active post-3.0 execution program, not a shipped product version. Use [canon/Ambitions_4_0_Execution_Program.md](canon/Ambitions_4_0_Execution_Program.md) for queued/blocked batch semantics and the 95-batch global execution order.
+
 ---
 
 ## Start here
@@ -38,6 +40,7 @@ Older docs are supporting context unless an active Ambitions 3.0 doc explicitly 
 - [Ambitions_3_0_As_Current_Baseline_Policy.md](canon/Ambitions_3_0_As_Current_Baseline_Policy.md)
 - [Ambitions_3_0_Human_Made_Codebase_Standard.md](canon/Ambitions_3_0_Human_Made_Codebase_Standard.md)
 - [Ambitions_3_0_Active_History_Archive_Policy.md](canon/Ambitions_3_0_Active_History_Archive_Policy.md)
+- [Ambitions_4_0_Execution_Program.md](canon/Ambitions_4_0_Execution_Program.md)
 - [Ambitions_Beyond_3_0_Roadmap.md](canon/Ambitions_Beyond_3_0_Roadmap.md)
 - [Ambitions_Product_Experience_OS_Index.md](canon/Ambitions_Product_Experience_OS_Index.md) - future PXOS user-facing product experience canon
 
@@ -178,13 +181,13 @@ Historical docs remain useful only when labeled as archive, supporting context, 
 
 ## Batch Train Orchestrator
 
-Ambitions 3.0 batch trains are governed by [codex/AMBITIONS_3_0_BATCH_TRAIN_ORCHESTRATOR.md](codex/AMBITIONS_3_0_BATCH_TRAIN_ORCHESTRATOR.md). The active completion train is [codex/batch-trains/F17_F30_FAANG_HANDOFF_COMPLETION_TRAIN.md](codex/batch-trains/F17_F30_FAANG_HANDOFF_COMPLETION_TRAIN.md). F17 repair, F18, F19, F20, F21/F21.5, F22, F22.5, F22.7, F23, F24, F25, and F26 are Green by current train evidence. FAANG handoff remains PARTIAL unless the F27 handoff gate is explicitly re-run and passes.
+Ambitions 3.0 batch trains are governed by [codex/AMBITIONS_3_0_BATCH_TRAIN_ORCHESTRATOR.md](codex/AMBITIONS_3_0_BATCH_TRAIN_ORCHESTRATOR.md). The [F17-F30 FAANG Handoff Completion Train](codex/batch-trains/F17_F30_FAANG_HANDOFF_COMPLETION_TRAIN.md) is complete and preserved as historical train evidence after F30. F27 remains PASS after F28 repair/rebaseline, F27.5 completed with no critical maintainability blocker, F29 created the final engineer handoff package, and F30 created the Beyond 3.0 continuation plan and final train closeout. Beyond 3.0 is now represented operationally by the Ambitions 4.0 Execution Program.
 
 ## AmbitionsOS Future Canon
 
-AmbitionsOS future-canon docs are indexed from [canon/AmbitionsOS_Index.md](canon/AmbitionsOS_Index.md). They consolidate future life-intelligence architecture and AOS/ME/CS train planning without changing current app behavior or release claims.
+AmbitionsOS future-canon docs are indexed from [canon/AmbitionsOS_Index.md](canon/AmbitionsOS_Index.md). They consolidate queued Ambitions 4.0 life-intelligence architecture and AOS/ME/CS train planning without changing current app behavior or release claims.
 
 
 ## PXOS Future Canon
 
-PXOS future-canon docs are indexed from [canon/Ambitions_Product_Experience_OS_Index.md](canon/Ambitions_Product_Experience_OS_Index.md). They define future user-facing product experience, Codex process controls, and implementation ordering. They do not claim current app implementation, release readiness, or PXOS train activation.
+PXOS future-canon docs are indexed from [canon/Ambitions_Product_Experience_OS_Index.md](canon/Ambitions_Product_Experience_OS_Index.md). They define queued Ambitions 4.0 future user-facing product experience, Codex process controls, and implementation ordering. They do not claim current app implementation, release readiness, or PXOS train activation.

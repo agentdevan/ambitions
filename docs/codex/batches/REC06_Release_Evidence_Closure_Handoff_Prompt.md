@@ -1,7 +1,7 @@
 # REC06 Release Evidence Closure Handoff Prompt
 <!-- markdownlint-disable MD013 -->
 
-Status: Future prompt; do not run automatically. REC06 is not started.
+Status: Queued Ambitions 4.0 evidence batch; not started; blocked pending `Continue Release Evidence Closure` and REC05 Green.
 
 ## Batch Identity
 
@@ -86,7 +86,7 @@ change, no signing/platform action.
 - `git status --short`
 - `git diff --check`
 - Release-claim scan over `README.md docs .codex`
-- Status scan for unintended started/completed future trains
+- Status scan for unintended started/completed queued trains
 - `scripts/run-doc-qa.sh || true`
 - `scripts/batch-train-gate-check.sh || true`
 - Changed-file boundary check limited to `docs/**` and `.codex/**`
@@ -108,7 +108,7 @@ files changed, and validation is clean or advisory-only.
 Yellow: nonblocking doc/tooling/human-proof advisories remain classified and do
 not imply readiness.
 
-Red: release readiness is claimed, human proof is faked, a future train is
+Red: release readiness is claimed, human proof is faked, a queued train is
 started by implication, unsupported platform claims appear, app files change, or
 validation failure is unclassified.
 

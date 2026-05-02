@@ -28,6 +28,14 @@ Older docs are supporting context unless an active 3.0 doc explicitly keeps them
 
 ---
 
+## Ambitions 4.0 execution program
+
+[Ambitions 4.0 Execution Program](docs/canon/Ambitions_4_0_Execution_Program.md) is the active post-3.0 implementation and canon-execution program. It is not a shipped product version, release-readiness claim, App Store claim, TestFlight claim, physical-device proof, platform proof, or public accessibility proof.
+
+Ambitions 3.0 remains the completed baseline after F30. Ambitions 4.0 currently means the repo has a 95-batch global execution order with REC01 active, REC02-REC06 queued/blocked, PX01-PX20 queued/blocked, ME01-ME12 queued/blocked, CS01-CS10 queued/blocked, PD01-PD18 queued/blocked, and AOS01-AOS30 queued/blocked. Future canon remains future canon until implemented and proven.
+
+---
+
 ## Ambitions 3.0 rebuild model
 
 Ambitions 3.0 is primitive-led. Build work should be scoped through 3.0 primitives, state machines, language rules, and evidence gates.
@@ -187,6 +195,7 @@ Known cleanup debt is tracked in [Ambitions_3_0_Repo_Hygiene_And_Active_Canon_Po
 - [Local Toolchain Readiness Matrix](docs/canon/Ambitions_3_0_Local_Toolchain_Readiness_Matrix.md)
 - [Definition Of Ready And Done](docs/canon/Ambitions_3_0_Definition_Of_Ready_And_Done.md)
 - [Release Claim Truth Protocol](docs/canon/Ambitions_3_0_Release_Claim_Truth_Protocol.md)
+- [Ambitions 4.0 Execution Program](docs/canon/Ambitions_4_0_Execution_Program.md)
 - [Beyond 3.0 Continuity Rules](docs/canon/Ambitions_Beyond_3_0_Continuity_Rules.md)
 - [Master Ambitions 3.0 Codex Prompt](docs/codex/MASTER_AMBITIONS_3_0_CODEX_PROMPT.md)
 - [Context Loading And Task Routing](docs/codex/AMBITIONS_3_0_CONTEXT_LOADING_AND_TASK_ROUTING.md)
@@ -200,8 +209,8 @@ Known cleanup debt is tracked in [Ambitions_3_0_Repo_Hygiene_And_Active_Canon_Po
 
 ## Batch Train Orchestrator
 
-Ambitions 3.0 batch trains are governed by [docs/codex/AMBITIONS_3_0_BATCH_TRAIN_ORCHESTRATOR.md](docs/codex/AMBITIONS_3_0_BATCH_TRAIN_ORCHESTRATOR.md). The [F17-F30 FAANG Handoff Completion Train](docs/codex/batch-trains/F17_F30_FAANG_HANDOFF_COMPLETION_TRAIN.md) is complete and preserved as historical train evidence after F30. F27 is PASS after the F28 repair/rebaseline, F27.5 is complete with no critical maintainability blocker, F29 created the final engineer handoff package, and F30 created the Beyond 3.0 continuation plan and final train closeout. Release Evidence Closure is the active first post-3.0 train at REC01; REC02, AOS, ME, CS, Product Depth, and PXOS remain unstarted until explicitly approved by their gates.
+Ambitions 3.0 batch trains are governed by [docs/codex/AMBITIONS_3_0_BATCH_TRAIN_ORCHESTRATOR.md](docs/codex/AMBITIONS_3_0_BATCH_TRAIN_ORCHESTRATOR.md). The [F17-F30 FAANG Handoff Completion Train](docs/codex/batch-trains/F17_F30_FAANG_HANDOFF_COMPLETION_TRAIN.md) is complete and preserved as historical train evidence after F30. F27 is PASS after the F28 repair/rebaseline, F27.5 is complete with no critical maintainability blocker, F29 created the final engineer handoff package, and F30 created the Beyond 3.0 continuation plan and final train closeout. Beyond 3.0 is now represented operationally by the Ambitions 4.0 Execution Program. Release Evidence Closure is active at REC01; REC02-REC06, PXOS, ME, CS, Product Depth, and AOS are queued/blocked and remain not started until explicitly approved by their gates.
 
 ## Product Experience OS Future Canon
 
-[Ambitions Product Experience OS](docs/canon/Ambitions_Product_Experience_OS_Index.md), abbreviated PXOS, is future canon for the user-facing product experience beyond Ambitions 3.0. PXOS sits beside AmbitionsOS: AmbitionsOS owns future internal intelligence/runtime architecture; PXOS owns future screens, surfaces, hierarchy, copy, interaction, recovery, trust, visual design, accessibility, and release-safe product messaging. PXOS is not current app implementation and the PXOS train is not started.
+[Ambitions Product Experience OS](docs/canon/Ambitions_Product_Experience_OS_Index.md), abbreviated PXOS, is future canon for the user-facing product experience in the Ambitions 4.0 Execution Program. PXOS sits beside AmbitionsOS: AmbitionsOS owns future internal intelligence/runtime architecture; PXOS owns future screens, surfaces, hierarchy, copy, interaction, recovery, trust, visual design, accessibility, and release-safe product messaging. PXOS is not current app implementation and the PXOS train is queued/blocked, not started.

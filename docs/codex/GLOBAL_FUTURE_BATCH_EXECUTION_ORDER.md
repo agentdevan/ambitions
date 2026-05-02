@@ -1,13 +1,13 @@
-# Global Future Batch Execution Order
+# Ambitions 4.0 Global Future Batch Execution Order
 
 <!-- markdownlint-disable MD013 -->
 
-Status: Global planning and Codex OS control; no future train started
+Status: Ambitions 4.0 global execution order; 95 formal queued/blocked batches; no queued train started
 Date: 2026-05-02
 
 ## Purpose
 
-This document defines the global order for remaining formal future Ambitions work across Release Evidence Closure, PXOS, Maintainability Extraction, Compatibility Seam Retirement, Product Depth, and AmbitionsOS. It is an execution map, not execution approval.
+This document defines the Ambitions 4.0 global order for remaining formal Ambitions work across Release Evidence Closure, PXOS, Maintainability Extraction, Compatibility Seam Retirement, Product Depth, and AmbitionsOS. It is an execution map, not execution approval.
 
 Use this file to choose the next eligible batch only after the relevant approval phrase and gates pass. Keep canonical batch IDs stable; use the global order number for cross-train sequencing.
 
@@ -18,6 +18,7 @@ Use this file to choose the next eligible batch only after the relevant approval
 - `docs/README.md`
 - `docs/canon/README.md`
 - `docs/canon/Ambitions_3_0_Source_Of_Truth_Override.md`
+- `docs/canon/Ambitions_4_0_Execution_Program.md`
 - `docs/canon/Ambitions_3_0_Documentation_System_Index.md`
 - `docs/canon/Ambitions_Beyond_3_0_Roadmap.md`
 - `docs/canon/Ambitions_Beyond_3_0_Continuity_Rules.md`
@@ -37,11 +38,13 @@ Use this file to choose the next eligible batch only after the relevant approval
 - Ambitions 3.0 is complete by F30 closeout evidence.
 - F17-F30 is historical complete train evidence.
 - Release Evidence Closure is active at REC01.
-- REC02-REC06 are future continuation batches with standalone prompt files.
-- PXOS is future user-facing canon only. PX01-PX20 are future/not started.
-- ME01-ME12, CS01-CS10, and AOS01-AOS30 are future/not started.
+- Ambitions 4.0 is the active post-3.0 execution program, not a shipped product version.
+- Total formal remaining Ambitions 4.0 batches: 95.
+- REC02-REC06 are queued/blocked continuation batches with standalone prompt files.
+- PXOS is future user-facing canon only. PX01-PX20 are queued/blocked and not started.
+- ME01-ME12, CS01-CS10, and AOS01-AOS30 are queued/blocked and not started.
 - AmbitionsOS is future canon only, not implemented app behavior.
-- Product Depth is a formal future/not-started PD01-PD18 train.
+- Product Depth is a formal queued/blocked PD01-PD18 train and not started.
 - Top-level surfaces remain `Today / Goals / Capture / Plan / You`.
 - Top-level surfaces must be visual orientation surfaces, not vertical stacks of generic cards.
 
@@ -161,9 +164,20 @@ human-proof boundaries, and clean validation.
 | 094 | AOS29 | AOS | Repair | Repair train runs only after classified AOS Yellow/Red. | Failed/Yellow AOS gate | Serial-only | Conditional | Strong repair validation | repair train, AOS red-team reviewer | Stop if repair cannot stay scoped |
 | 095 | AOS30 | AOS | Roadmap | Beyond roadmap follows handoff or explicit decision. | AOS28 Green or explicit user decision | Serial-only | Yes | Adequate docs evidence | roadmap-sequencer, governance | Stop after roadmap |
 
+## Status Semantics For All 95 Formal Batches
+
+| Range | Status | Start condition | Implementation status | Release-claim status |
+| --- | --- | --- | --- | --- |
+| REC02-REC06 | Queued / Blocked | `Continue Release Evidence Closure`, REC01 accepted, release-claim and human-proof gates | Not app implementation | Not release-proven; may only document evidence boundaries |
+| PX01-PX20 | Queued / Blocked | `Start PXOS Future-Canon Train`, PXOS gates, source truth | Future canon only; not implemented | No PXOS implementation or release-readiness claim |
+| ME01-ME12 | Queued / Blocked | `Start ME Train`, ME maintainability gates | Not started; extraction not performed | No release/platform claim |
+| CS01-CS10 | Queued / Blocked | `Start CS Train`, CS compatibility gates | Not started; no seam retired | No release/platform claim |
+| PD01-PD18 | Queued / Blocked | `Start Product Depth Train`, PXOS plus relevant ME/CS/AOS-if-needed gates | Not started; not implemented | No Product Depth implementation or release claim |
+| AOS01-AOS30 | Queued / Blocked | `Start AOS Train`, AOS runtime/privacy/source-truth gates | Future canon or queued implementation only as named; not app behavior until proven | No AmbitionsOS implementation or release-readiness claim |
+
 ## Product Depth Train
 
-Product Depth is now formalized as `PD01-PD18 Product Depth Train` and remains future/not started. It is blocked until:
+Product Depth is now formalized as `PD01-PD18 Product Depth Train` and remains queued/blocked and not started. It is blocked until:
 
 - the user says exactly `Start Product Depth Train`;
 - PX14 Product Depth Drilldown Architecture is Green;

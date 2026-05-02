@@ -1,7 +1,7 @@
 # REC03 Validation Log Ledger Closure Prompt
 <!-- markdownlint-disable MD013 -->
 
-Status: Future prompt; do not run automatically. REC03 is not started.
+Status: Queued Ambitions 4.0 evidence batch; not started; blocked pending `Continue Release Evidence Closure` and REC02 Green.
 
 ## Batch Identity
 

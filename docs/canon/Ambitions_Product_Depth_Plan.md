@@ -1,7 +1,7 @@
 # Ambitions Product Depth Plan
 <!-- markdownlint-disable MD013 -->
 
-Status: Future canon; Product Depth train not started
+Status: Future canon in the Ambitions 4.0 Execution Program; Product Depth train queued/blocked and not started
 Date: 2026-05-02
 
 ## Purpose
@@ -40,7 +40,7 @@ Top-level surfaces remain visual orientation surfaces. Detail belongs behind dri
 
 Train name: `PD01-PD18 Product Depth Train`
 
-Status: Future/not started.
+Status: Queued/blocked and not started.
 
 Required approval phrase: `Start Product Depth Train`.
 
@@ -101,7 +101,7 @@ Purpose: deepen Ambitions' existing surfaces through drill-downs, detail flows, 
 
 ## Blocked And Unblocked Status
 
-All PD batches are future/not started. PD01 may be selected only after the required approval phrase and prerequisite gates. PD02-PD18 remain blocked until their named PXOS, ME, CS, AOS, REC, validation, and predecessor gates are Green or accepted Yellow.
+All PD batches are queued/blocked and not started. PD01 may be selected only after the required approval phrase and prerequisite gates. PD02-PD18 remain blocked until their named PXOS, ME, CS, AOS, REC, validation, and predecessor gates are Green or accepted Yellow.
 
 ## Anti-Sprawl Tests
 

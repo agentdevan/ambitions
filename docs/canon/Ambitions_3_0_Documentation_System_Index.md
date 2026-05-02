@@ -57,6 +57,7 @@ For any Ambitions 3.0 rebuild work:
 | `Ambitions_3_0_Risk_Register_Protocol.md` | Defines risk entry and review rules. |
 | `Ambitions_3_0_Postmortem_And_Learning_Loop.md` | Defines learning loop for failed batches, repeated failures, and bad Codex runs. |
 | `Ambitions_3_0_Human_Approval_Escalation_Rules.md` | Defines when Codex must stop for human approval. |
+| `Ambitions_4_0_Execution_Program.md` | Defines the active post-3.0 execution program, queued/blocked status vocabulary, and 95-batch global order semantics without claiming shipped 4.0 behavior. |
 | `Ambitions_Beyond_3_0_Continuity_Rules.md` | Defines supersession and continuity rules for 3.1/4.0 and beyond. |
 | `Ambitions_3_0_Source_Of_Truth_Override.md` | States 3.0 supersession and conflict rules. |
 | `Ambitions_3_0_Front_End_Redesign_Index.md` | Parent index and front-end redesign doctrine. |
@@ -372,10 +373,10 @@ This registry exists for handoff and orphan-scan clarity. The table above explai
 
 ## AmbitionsOS Future Canon
 
-AmbitionsOS future canon lives under Beyond 3.0 and is not current implementation truth. Start from `AmbitionsOS_Index.md`, `AmbitionsOS_Core_Architecture.md`, `AmbitionsOS_Runtime_Contract.md`, the AOS train-control docs, and the Beyond 3.0 roadmap before any AOS/ME/CS future train.
+AmbitionsOS future canon is governed operationally by the Ambitions 4.0 Execution Program and is not current implementation truth. Start from `Ambitions_4_0_Execution_Program.md`, `AmbitionsOS_Index.md`, `AmbitionsOS_Core_Architecture.md`, `AmbitionsOS_Runtime_Contract.md`, the AOS train-control docs, and the Beyond 3.0 continuity roadmap before any AOS/ME/CS queued train.
 
 
-## Beyond 3.0 Future Canon Docs
+## Beyond 3.0 / Ambitions 4.0 Future Canon Docs
 
 | Doc | Job |
 |---|---|

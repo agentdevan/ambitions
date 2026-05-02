@@ -14,6 +14,7 @@ Ambitions 3.0 is the active source of truth. This file defines Codex read order,
 - F03.5 Today Execution State Contract Hardening is complete: `TodayExecutionViewState.swift` is now a small aggregate state contract, while Day Rail state, Step Detail state, projection helpers, projector logic, compatibility helpers, and screen-contract snapshot live in dedicated Today-owned files.
 - F04 Step Session, F05 Action Closure / Still Counts, F06 Proof & Receipt Ledger, F07 Capture Composer cleanup, F08 Placement Resolver, F09 Capture-to-Goal / Grow into Goal, F10 Plan Life Suite foundation, F11 Day Shape / Week Shape, F12 Reflow / Recovery / Decisions, F13 Goals / Goal Mission Control, F13.5 Goals / You / Trust architecture checkpoint, F14 You / Trust / What Ambitions Knows, F15 Legacy Identifier Migration, and F16 UI Test Modernization are complete.
 - F16.5 SwiftUI Architecture / State Contract Hardening checkpoint is complete. The active completion train is F17-F30 FAANG Handoff Completion Train. F17 repair, F18, F19, F20, F21/F21.5, F22, F22.5, F22.7, F23, F24, F25, F26, F27, F27.5, F28, F29, and F30 are Green by current train evidence. F27 passed after F28 rebaselined the Goal Detail trust/memory UI proof to stable owned section anchors and reran `scripts/test-local.sh` cleanly with 779 unit tests and 29 UI tests. F27.5 found no critical maintainability blocker and fixed stale active train-entry wording. F29 created the engineer handoff package. F30 created the Beyond 3.0 continuation roadmap and final train closeout.
+- Ambitions 4.0 is the active post-3.0 execution program, not a shipped product version. It currently contains 95 formal queued/blocked batches in global order: REC02-REC06, PX01-PX20, ME01-ME12, CS01-CS10, PD01-PD18, and AOS01-AOS30. Future canon remains not implemented until explicit batches produce evidence.
 
 ## Required Read Order
 
@@ -62,6 +63,7 @@ For non-trivial work, read in this order:
 - [../canon/Ambitions_3_0_As_Current_Baseline_Policy.md](../canon/Ambitions_3_0_As_Current_Baseline_Policy.md)
 - [../canon/Ambitions_3_0_Human_Made_Codebase_Standard.md](../canon/Ambitions_3_0_Human_Made_Codebase_Standard.md)
 - [../canon/Ambitions_3_0_Active_History_Archive_Policy.md](../canon/Ambitions_3_0_Active_History_Archive_Policy.md)
+- [../canon/Ambitions_4_0_Execution_Program.md](../canon/Ambitions_4_0_Execution_Program.md)
 
 ## Historical / Supporting Material
 
@@ -79,11 +81,11 @@ For non-trivial work, read in this order:
 
 ## Batch Train Context
 
-Batch-train execution uses `docs/codex/AMBITIONS_3_0_BATCH_TRAIN_ORCHESTRATOR.md`, `docs/codex/batch-trains/README.md`, `.codex/reports/current-batch-train-state.md`, and the matching validation/operation packs. F03.5, F13.5, and F16.5 are complete. The active train manifest is `docs/codex/batch-trains/F17_F30_FAANG_HANDOFF_COMPLETION_TRAIN.md`; F27, F27.5, F28, F29, and F30 are Green. The train stops after the F30 closeout push. After the 2026-05-02 pre-train hardening pass, Release Evidence Closure is the first active post-3.0 train; AOS, ME, CS, and Product Depth remain future/not started.
+Batch-train execution uses `docs/codex/AMBITIONS_3_0_BATCH_TRAIN_ORCHESTRATOR.md`, `docs/codex/batch-trains/README.md`, `.codex/reports/current-batch-train-state.md`, and the matching validation/operation packs. F03.5, F13.5, and F16.5 are complete. The F17-F30 train is complete by current train evidence. After the 2026-05-02 pre-train hardening pass, Release Evidence Closure is active at REC01; REC02-REC06, PXOS, ME, CS, Product Depth, and AOS are queued/blocked under the Ambitions 4.0 Execution Program.
 
-## Global Future Batch Execution Context
+## Ambitions 4.0 Global Batch Execution Context
 
-Use this context before selecting any future cross-train batch after REC01:
+Use this context before selecting any queued cross-train batch after REC01:
 
 - `GLOBAL_FUTURE_BATCH_EXECUTION_ORDER.md`
 - `GLOBAL_FUTURE_BATCH_DEPENDENCY_GRAPH.md`
@@ -95,7 +97,7 @@ Use this context before selecting any future cross-train batch after REC01:
 - `GLOBAL_BATCH_FAANG_QUALITY_BAR.md`
 - `../audits/global-future-batch-sequencing-report.md`
 
-These files define order, gates, repair loops, continuation, validation strength, and quality bars only. They do not start REC02, PXOS, ME, CS, AOS, Product Depth, app implementation, release readiness, or human-proof work.
+These files define Ambitions 4.0 order, gates, repair loops, continuation, validation strength, and quality bars only. They do not start REC02, PXOS, ME, CS, AOS, Product Depth, app implementation, release readiness, or human-proof work.
 
 ## Handoff Package
 
@@ -190,10 +192,10 @@ Use this context when the user explicitly chooses PXOS or future user-facing pro
 - `docs/codex/PXOS_PRODUCT_DECISION_LEDGER.md`
 - `docs/codex/batch-trains/PX01_PX20_PRODUCT_EXPERIENCE_OS_TRAIN.md`
 
-PXOS is future canon for user-facing experience, not current app implementation. PXOS train starts only if the user says exactly `Start PXOS Future-Canon Train`. REC01 remains active; REC02, AOS, ME, CS, Product Depth, and PXOS implementation remain unstarted until explicitly approved by their gates.
+PXOS is future canon for user-facing experience, not current app implementation. PXOS train starts only if the user says exactly `Start PXOS Future-Canon Train`. REC01 remains active; REC02, AOS, ME, CS, Product Depth, and PXOS implementation remain queued/blocked and not started until explicitly approved by their gates.
 
 
-## Product Depth Future Train Context
+## Product Depth Queued Train Context
 
 Use this context when the user explicitly chooses Product Depth after the
 required PXOS, ME, CS, AOS-if-needed, and REC claim gates:
@@ -223,7 +225,7 @@ required PXOS, ME, CS, AOS-if-needed, and REC claim gates:
 - `docs/codex/GLOBAL_FUTURE_BATCH_GATE_MATRIX.md`
 
 Product Depth starts only if the user says exactly
-`Start Product Depth Train`. PD01-PD18 remain future/not started. Product Depth
+`Start Product Depth Train`. PD01-PD18 remain queued/blocked and not started. Product Depth
 must deepen Today, Goals, Capture, Plan, and You; it must not add new top-level
 tabs, generic dashboards, stacked-card top-level screens, habit tracker modes,
 calendar clones, chatbot-first AI surfaces, inbox/notes modes, or enterprise

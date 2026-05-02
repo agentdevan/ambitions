@@ -2,7 +2,7 @@
 
 <!-- markdownlint-disable MD013 -->
 
-Status: Global planning and Codex OS control; no future train started
+Status: Ambitions 4.0 execution-program orchestrator; no queued train started
 Date: 2026-05-02
 
 ## Purpose
@@ -10,6 +10,8 @@ Date: 2026-05-02
 This orchestrator tells future Codex sessions how to select, execute, validate, repair, commit, and continue globally ordered batches without weakening Ambitions product quality or truth.
 
 This document does not start REC02, PXOS, ME, CS, AOS, Product Depth, or any implementation train.
+
+Ambitions 4.0 is the active post-3.0 execution program, not a shipped product version. Queued 4.0 batches are not implemented and not release-proven until a batch runs, validates, commits, and records evidence.
 
 ## Approval Phrases
 
@@ -21,6 +23,7 @@ Do not treat vague language as execution approval.
 - `Start PXOS Future-Canon Train`: start PXOS future-canon train only.
 - `Start ME Train`: start ME only.
 - `Start CS Train`: start CS only.
+- `Start Product Depth Train`: start Product Depth only.
 - `Start AOS Train`: start AOS only.
 
 This global sequencing prompt is not an approval phrase to execute a future batch.

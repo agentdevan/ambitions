@@ -1,13 +1,13 @@
 # Ambitions Product Experience OS Index
 
-Status: Future canon under Beyond 3.0; PXOS implementation not started
+Status: Future canon in the Ambitions 4.0 Execution Program; PXOS queued/not started; PXOS implementation not started
 Date: 2026-05-02
 Abbreviation: PXOS
 
 ## Definition
 
 Product Experience OS is the future user-facing operating system canon for
-Ambitions beyond 3.0. It defines how Ambitions should feel, behave, explain,
+the Ambitions 4.0 Execution Program. It defines how Ambitions should feel, behave, explain,
 guide, recover, prove, personalize, and organize the user's life across Today,
 Goals, Capture, Plan, You, closure, recovery, trust, proof, receipts,
 onboarding, setup, personalization, copy, visual design, accessibility,
@@ -15,7 +15,7 @@ cognitive load, degraded states, cross-surface continuity, and release-safe
 product messaging.
 
 PXOS creates the future user-facing product experience system for Ambitions
-beyond 3.0, using Ambitions 3.0 as the completed baseline and AmbitionsOS, ME,
+after the completed 3.0 baseline, using Ambitions 3.0 as the completed baseline and AmbitionsOS, ME,
 CS, and REC as planned future constraints. It may redesign the future
 experience model, but it must preserve Ambitions' identity, top-level tabs,
 core primitives, compatibility safety, source-truth discipline, and historical

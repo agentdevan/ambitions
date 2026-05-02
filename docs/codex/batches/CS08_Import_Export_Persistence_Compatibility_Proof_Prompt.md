@@ -1,6 +1,6 @@
 # CS08 Import Export Persistence Compatibility Proof Prompt
 
-Status: Future prompt; do not run automatically.
+Status: Queued Ambitions 4.0 compatibility batch; not started; not implemented; blocked pending `Start CS Train`.
 
 ## Batch Identity
 

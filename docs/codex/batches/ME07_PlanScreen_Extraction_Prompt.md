@@ -1,6 +1,6 @@
 # ME07 PlanScreen Extraction Prompt
 
-Status: Future prompt; do not run automatically.
+Status: Queued Ambitions 4.0 maintainability/extraction batch; not started; not implemented; blocked pending `Start ME Train`.
 
 ## Batch Identity
 

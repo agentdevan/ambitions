@@ -1,10 +1,10 @@
 # AOS01-AOS30 AmbitionsOS Local Intelligence Train
 
-Status: Future train manifest; not started automatically
+Status: Queued Ambitions 4.0 train manifest; not started; blocked pending `Start AOS Train`.
 
 ## Start Rule
 
-This train starts only when the user explicitly approves it after Ambitions 3.0/F17-F30 truth is Green and `docs/codex/BATCH_REGISTRY.md` records the selected train as active. Required user approval phrase: `Start AOS01 AmbitionsOS Canon And Runtime Contract`.
+This train starts only when the user explicitly approves it after Ambitions 3.0/F17-F30 truth is Green and `docs/codex/BATCH_REGISTRY.md` records the selected train as active. Required user approval phrase: `Start AOS Train`.
 
 ## What Does Not Start This Train
 

@@ -1,7 +1,7 @@
 # REC04 Release Claim Copy Guard Prompt
 <!-- markdownlint-disable MD013 -->
 
-Status: Future prompt; do not run automatically. REC04 is not started.
+Status: Queued Ambitions 4.0 evidence batch; not started; blocked pending `Continue Release Evidence Closure` and REC03 Green.
 
 ## Batch Identity
 
