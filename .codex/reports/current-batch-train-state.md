@@ -3,7 +3,7 @@
 <!-- markdownlint-disable MD013 -->
 
 Active train: CS compatibility seam retirement train
-Active batch: CS03A Insights/Plan Compatibility Map And Migration Design complete pending validation/commit; CS03B dry-run next
+Active batch: CS03A Insights/Plan Compatibility Map And Migration Design complete with commit evidence; CS03B dry-run next
 Current out-of-train task: none
 Scope: ME01-ME12 maintainability train complete with commit/push evidence; ME11 repair not triggered; PXOS implementation not started; CS01 complete; CS07 complete as focused compatibility proof; CS08 complete as focused import/export/persistence proof; CS02A repairs the Profile/You seam scope without code edits; CS02B adds focused compatibility proof; CS03A repairs the Insights seam scope without code edits; CS03B is next pending dry-run selection; Signature Interface/Product Depth/AmbitionsOS trains not started
 Date: 2026-05-02
@@ -30,7 +30,7 @@ Product Depth is formalized as a queued/blocked PD01-PD18 train with required ap
 
 ## Ambitions 4.0 Status
 
-Ambitions 4.0 is the active post-3.0 execution program, not a shipped product version. The global order now has 113 formal batches after SI insertion: REC02-REC06, PX01-PX20, ME01-ME12, CS01-CS10, SI01-SI18, PD01-PD18, and AOS01-AOS30. REC02-REC06, PX01-PX20, ME01, ME08, ME10, ME02, ME03, ME04, ME05, ME06, ME07, ME09, ME12, CS01, CS07, CS08, CS02A, CS02B, and CS03A are complete or pending final validation/commit evidence; CS02C and CS03C remain deferred as accepted Yellow inside formal CS02/CS03.
+Ambitions 4.0 is the active post-3.0 execution program, not a shipped product version. The global order now has 113 formal batches after SI insertion: REC02-REC06, PX01-PX20, ME01-ME12, CS01-CS10, SI01-SI18, PD01-PD18, and AOS01-AOS30. REC02-REC06, PX01-PX20, ME01, ME08, ME10, ME02, ME03, ME04, ME05, ME06, ME07, ME09, ME12, CS01, CS07, CS08, CS02A, CS02B, and CS03A are complete with validation/commit evidence; CS02C and CS03C remain deferred as accepted Yellow inside formal CS02/CS03.
 
 ## Boundaries
 
@@ -38,7 +38,7 @@ No product behavior expansion. No visual redesign. No compatibility seam retired
 
 ## Validation Result
 
-CS03A is PASS WITH YELLOW pending commit/push evidence:
+CS03A is PASS WITH YELLOW with commit/push evidence `a0d898ea`:
 
 - CS03A touched only docs/status files and did not edit tests or app code.
 - CS03A created the Insights/Plan seam inventory, compatibility contract ledger, accessibility identifier ledger, and contextual-intelligence semantics map.

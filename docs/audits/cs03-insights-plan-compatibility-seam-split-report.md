@@ -2,7 +2,7 @@
 
 <!-- markdownlint-disable MD013 -->
 
-Status: CS03A complete pending commit evidence.
+Status: CS03A complete with commit evidence.
 Date: 2026-05-02
 
 ## Batch
@@ -136,4 +136,4 @@ Insights Compatibility Preservation` inside
 
 ## Commit SHA
 
-Pending CS03A commit.
+CS03A commit: `a0d898ea`.
