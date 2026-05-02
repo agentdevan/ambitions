@@ -1,7 +1,7 @@
 # PX16 User Facing AI Trust And Recommendation Copy Prompt
 <!-- markdownlint-disable MD013 -->
 
-Status: Queued Ambitions 4.0 future-canon batch; not implemented; blocked pending `Start PXOS Future-Canon Train`.
+Status: Completed Ambitions 4.0 future-canon batch; not implemented as app behavior.
 
 ## Purpose
 
@@ -109,7 +109,7 @@ changed, no unsupported claim, and validation is clean or advisory-only.
 Yellow: doc QA/tooling backlog or an open future decision is classified and does
 not affect current implementation truth.
 
-Red: product direction invented, PXOS marked started/complete, app code touched,
+Red: product direction invented, PXOS marked implemented, app code touched,
 release/platform claim added, AOS/ME/CS/REC02 started, top-level tab changed, stacked-card top-level composition accepted, or
 validation failure unclassified.
 
@@ -145,6 +145,7 @@ next named gate.
 
 ## Next Safe Prompt / Path
 
-Use the next direct PX prompt only after the train has been explicitly started
-with `Start PXOS Future-Canon Train`, this batch is Green, committed, pushed,
-and no Yellow/Red gate blocks continuation.
+Use `PX17_Release_Truth_Product_Messaging_Prompt.md` only after current global
+preauthorization or a valid PXOS approval phrase is satisfied, this batch is
+Green or accepted Yellow, committed, pushed, and no Yellow/Red gate blocks
+continuation.

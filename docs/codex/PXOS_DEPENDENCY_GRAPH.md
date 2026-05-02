@@ -18,8 +18,8 @@ Date: 2026-05-02
 - PX13 is complete as Empty Edge Degraded States future-canon work.
 - PX14 is complete as Product Depth Drilldown Architecture future-canon work.
 - PX15 is complete as Cross Surface Continuity future-canon work.
-- PX16 depends on AmbitionsOS recommendation, source-truth, privacy, PX09, PX13, and PX15.
-- PX17 depends on REC boundaries and PX09.
+- PX16 is complete as User Facing AI Trust And Recommendation Copy future-canon work.
+- PX17 depends on REC boundaries, PX09, and PX16.
 - PX18 depends on PX01-PX17 and must run before any PXOS implementation lane.
 - PX19 depends on PX18.
 - PX20 depends on PX19 or explicit user decision.

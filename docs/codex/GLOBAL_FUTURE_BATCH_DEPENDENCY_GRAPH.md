@@ -2,7 +2,7 @@
 
 <!-- markdownlint-disable MD013 -->
 
-Status: Ambitions 4.0 dependency graph; active through PX15 future-canon evidence
+Status: Ambitions 4.0 dependency graph; active through PX16 future-canon evidence
 Date: 2026-05-02
 
 ## Phase Map
@@ -39,7 +39,8 @@ Ambitions 4.0 is the active post-3.0 execution program, not a shipped product ve
 - PX13 is complete as Empty Edge Degraded States future-canon work.
 - PX14 is complete as Product Depth Drilldown Architecture future-canon work.
 - PX15 is complete as Cross Surface Continuity future-canon work.
-- PX16-PX20 depend on PX01 and relevant completed PX surface canon.
+- PX16 is complete as User Facing AI Trust And Recommendation Copy future-canon work.
+- PX17-PX20 depend on PX01 and relevant completed PX surface canon.
 - PX14 depends on PX02-PX13.
 - PX18 depends on PX01-PX17 and recurs before major implementation lanes.
 - ME01 depends on explicit approval phrase `Start ME Train`.
@@ -115,7 +116,7 @@ Parallel work is disabled by default. It is allowed only after explicit approval
 ## Serial-Only Lanes
 
 - REC02-REC06.
-- PX01, PX14, PX15, PX16-PX20.
+- PX01, PX14, PX15, PX16, PX17-PX20.
 - ME01, ME09, ME11, ME12.
 - CS01-CS10 unless a future CS proof explicitly permits disjoint parallelism.
 - AOS01-AOS09, AOS11, AOS14-AOS21, AOS23-AOS30.
