@@ -1,7 +1,7 @@
 # Ambitions Beyond 3.0 Maintainability Extraction Plan
 <!-- markdownlint-disable MD013 -->
 
-Status: Future planning plus ME01 audit baseline, ME08 standards, ME10 gate, and ME02 extraction evidence
+Status: Future planning plus completed ME01-ME12 maintainability handoff evidence
 
 ## Candidates
 
@@ -35,6 +35,25 @@ DEBUG-only `StubGoalsService` preview/test service from
 `GoalsFeatureService.swift` to `StubGoalsService.swift`, reduced
 `GoalsFeatureService.swift` from 5,024 to 4,883 lines, created a 144-line
 support file, and preserved live repository-backed behavior.
+
+ME03-ME07 completed the remaining first-pass extraction sequence:
+
+| Batch | Owner | Extracted support | Owner before | Owner after | Validation |
+| --- | --- | --- | ---: | ---: | --- |
+| ME03 | `TodayFeatureService.swift` | `StubTodayService.swift`, `TodayFeatureSnapshot.swift` | 2,718 | 2,665 | Build and focused Today tests passed |
+| ME04 | `TodayPanels.swift` | `TodayDayRailPanels.swift` | 2,423 | 1,741 | Compile Red repaired; build and focused Today tests passed |
+| ME05 | `PlanFeatureService.swift` | `PlanFeatureSnapshot.swift`, `PlanCalendarAwarenessSupport.swift` | 2,394 | 2,278 | Build and focused Plan/calendar tests passed |
+| ME06 | `ProfileScreen.swift` | `ProfileRootSurface.swift` | 2,167 | 1,987 | Build and focused Profile/You tests passed |
+| ME07 | `PlanScreen.swift` | `PlanFoundationCards.swift` | 1,978 | 1,732 | Build and focused Plan/calendar tests passed |
+
+ME09 completed product-contract test evidence after the extraction sequence.
+The focused lane covering Goals, Today, Plan/calendar, Profile/You, and screen
+contracts passed with 145 tests and 0 failures. No tests were edited, deleted,
+weakened, broadened, or rebaselined.
+
+ME11 is not triggered by current ME evidence. ME12 completed the ME handoff and
+records that residual large-file findings remain advisory backlog or future
+batch gate input, not a current unresolved ME Red.
 
 ## ME08 Shared Standards
 
@@ -97,3 +116,15 @@ Extract projector/state/helper seams before adding behavior. Protect behavior wi
 ## Evidence Required
 
 Ownership map, behavior preservation tests, UI/product contract tests, copy and accessibility preservation, rollback plan, diff-size budget, architecture scan, build, focused tests, and honest release-claim boundary.
+
+## Handoff To Later Trains
+
+- CS batches own compatibility seam retirement proof before route, raw-value,
+  import/export, persistence, widget, App Intent, or external payload changes.
+- SI and PD implementation batches must avoid adding behavior to the six Lane 2
+  owners unless the batch explicitly owns that file family and records
+  architecture-scan/file-size evidence.
+- AOS batches must not use ME evidence to claim runtime intelligence,
+  automation, platform integration, or release readiness.
+- Release/operator proof remains REC-owned and human/platform proof remains
+  unperformed.

@@ -1,6 +1,6 @@
 # ME01-ME12 Maintainability Extraction Train
 
-Status: Queued Ambitions 4.0 train manifest; not started; blocked pending `Start ME Train`.
+Status: Completed Ambitions 4.0 maintainability handoff evidence; ME11 not triggered; no further ME batch active.
 
 ## Start Rule
 
@@ -59,3 +59,12 @@ This train does not create release readiness, App Store readiness, TestFlight re
 ## Closeout
 
 Closeout requires an audit report, registry/context/run-state updates, evidence ledger entry, diff boundary check, and exact next-user-decision statement. ME closeout must also update the maintainability extraction plan, large-file ownership map, and residual debt ledger.
+
+## ME12 Closeout Truth
+
+ME12 completed the train handoff on 2026-05-02 as docs-only evidence. ME01,
+ME08, ME10, ME02-ME07, and ME09 are complete; ME11 is not triggered by current
+evidence. The next global batch is CS01 only after dry-run selection says
+`Execution allowed: YES`. This train does not claim all large-file debt is
+resolved, compatibility seams retired, Product Depth implemented, Signature
+Interface implemented, AmbitionsOS implemented, or any release/platform proof.
