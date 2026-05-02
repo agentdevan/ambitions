@@ -2,7 +2,7 @@
 
 <!-- markdownlint-disable MD013 -->
 
-Status: Ambitions 4.0 dependency graph; active through ME03 extraction evidence and SI formalization
+Status: Ambitions 4.0 dependency graph; active through ME04 extraction evidence and SI formalization
 Date: 2026-05-02
 
 ## Phase Map

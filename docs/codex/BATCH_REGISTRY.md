@@ -56,17 +56,18 @@ Current 4.0 status:
 - Completed: ME10 Architecture Scan Gate.
 - Completed: ME02 GoalsFeatureService Extraction.
 - Completed: ME03 TodayFeatureService Extraction.
+- Completed: ME04 TodayPanels Extraction.
 - Active evidence baseline: REC01 Release Evidence Truth Inventory.
 - Completed: Signature Interface Codex OS quality gates.
 - Formalized: SI01-SI18 Signature Interface Implementation Train; queued/blocked and not started.
-- Next queued / blocked: ME04 TodayPanels Extraction pending global dry-run selection.
-- Queued / Blocked: ME04-ME07, ME09, ME11-ME12 pending current global preauthorization or `Start ME Train`.
+- Next queued / blocked: ME05 PlanFeatureService Extraction pending global dry-run selection.
+- Queued / Blocked: ME05-ME07, ME09, ME11-ME12 pending current global preauthorization or `Start ME Train`.
 - Queued / Blocked: CS01-CS10 pending `Start CS Train`.
 - Queued / Blocked: SI01-SI18 pending global-order selection or `Start Signature Interface Train` plus PXOS/ME/CS/SI quality gates.
 - Queued / Blocked: PD01-PD18 pending `Start Product Depth Train` plus PXOS/ME/CS/SI/AOS-if-needed gates.
 - Queued / Blocked: AOS01-AOS30 pending `Start AOS Train`.
 - Total formal Ambitions 4.0 batches after SI insertion: 113.
-- Remaining after ME03 and SI insertion: 83.
+- Remaining after ME04 and SI insertion: 82.
 
 Use [../canon/Ambitions_4_0_Execution_Program.md](../canon/Ambitions_4_0_Execution_Program.md) and [GLOBAL_FUTURE_BATCH_EXECUTION_ORDER.md](GLOBAL_FUTURE_BATCH_EXECUTION_ORDER.md) for current post-3.0 status semantics.
 
