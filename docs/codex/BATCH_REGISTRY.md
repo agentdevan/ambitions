@@ -59,17 +59,18 @@ Current 4.0 status:
 - Completed: ME04 TodayPanels Extraction.
 - Completed: ME05 PlanFeatureService Extraction.
 - Completed: ME06 ProfileScreen You Surface Extraction.
+- Completed: ME07 PlanScreen Extraction.
 - Active evidence baseline: REC01 Release Evidence Truth Inventory.
 - Completed: Signature Interface Codex OS quality gates.
 - Formalized: SI01-SI18 Signature Interface Implementation Train; queued/blocked and not started.
-- Next queued / blocked: ME07 PlanScreen Extraction pending global dry-run selection.
-- Queued / Blocked: ME07, ME09, ME11-ME12 pending current global preauthorization or `Start ME Train`.
+- Next queued / blocked: ME09 Product Contract Test Rebaseline pending global dry-run selection.
+- Queued / Blocked: ME09, ME11-ME12 pending current global preauthorization or `Start ME Train`.
 - Queued / Blocked: CS01-CS10 pending `Start CS Train`.
 - Queued / Blocked: SI01-SI18 pending global-order selection or `Start Signature Interface Train` plus PXOS/ME/CS/SI quality gates.
 - Queued / Blocked: PD01-PD18 pending `Start Product Depth Train` plus PXOS/ME/CS/SI/AOS-if-needed gates.
 - Queued / Blocked: AOS01-AOS30 pending `Start AOS Train`.
 - Total formal Ambitions 4.0 batches after SI insertion: 113.
-- Remaining after ME06 and SI insertion: 80.
+- Remaining after ME07 and SI insertion: 79.
 
 Use [../canon/Ambitions_4_0_Execution_Program.md](../canon/Ambitions_4_0_Execution_Program.md) and [GLOBAL_FUTURE_BATCH_EXECUTION_ORDER.md](GLOBAL_FUTURE_BATCH_EXECUTION_ORDER.md) for current post-3.0 status semantics.
 
@@ -407,7 +408,8 @@ These batches are complete for planning purposes. They remain as historical cont
 | ME10 Architecture Scan Gate | Completed / audit-only | Converted the architecture scan into a recurring ME gate. No extraction run. |
 | ME02-ME05 Maintainability Extraction Evidence | Completed / extraction | ME02-ME05 are complete as behavior-preserving extraction evidence with focused validation. |
 | ME06 ProfileScreen You Surface Extraction | Completed / extraction | Completed as behavior-preserving You root surface extraction evidence. |
-| ME07, ME09, ME11-ME12 Maintainability Extraction Train | Queued / Blocked | Requires current global preauthorization or `Start ME Train` and Green predecessor gates. |
+| ME07 PlanScreen Extraction | Completed / extraction | Completed as behavior-preserving PlanScreen extraction evidence. |
+| ME09, ME11-ME12 Maintainability Extraction Train | Queued / Blocked | Requires current global preauthorization or `Start ME Train` and Green predecessor gates. |
 | CS01-CS10 Compatibility Seam Retirement Train | Queued / Blocked | Requires `Start CS Train` and Green predecessor gates. |
 | SI01-SI18 Signature Interface Implementation Train | Queued / Blocked | Formal Signature Interface train. Requires global-order selection or `Start Signature Interface Train`, PXOS completion, relevant ME/CS gates, and SI visual quality gates. |
 | PD01-PD18 Product Depth Train | Queued / Blocked | Formal Product Depth train. Requires exact approval phrase `Start Product Depth Train`, PXOS Product Depth gates, relevant ME/CS/SI gates, and AOS blockers when runtime logic is touched. |
@@ -425,7 +427,8 @@ These batches are complete for planning purposes. They remain as historical cont
 | ME10 Architecture Scan Gate | Completed / audit-only | Recurring architecture gate complete; no extraction run in this pass. |
 | ME02-ME05 Maintainability Extraction Evidence | Completed / extraction | ME02-ME05 are complete as behavior-preserving extraction evidence. |
 | ME06 ProfileScreen You Surface Extraction | Completed / extraction | Completed as behavior-preserving You root surface extraction evidence. |
-| ME07, ME09, ME11-ME12 Maintainability Extraction Train | Queued / Blocked | Remaining planning/extraction sequence is queued; no later ME extraction has run in this pass. |
+| ME07 PlanScreen Extraction | Completed / extraction | Completed as behavior-preserving PlanScreen extraction evidence. |
+| ME09, ME11-ME12 Maintainability Extraction Train | Queued / Blocked | Remaining planning/extraction sequence is queued; no later ME extraction has run in this pass. |
 | CS01-CS10 Compatibility Seam Retirement Train | Queued / Blocked | Planning only; no seam retired in this pass. |
 | Product Experience OS / PXOS | Queued / Blocked future canon | User-facing future experience canon in Ambitions 4.0. Does not claim implementation. |
 | Product Depth / PD01-PD18 | Queued / Blocked | Deepens Today, Goals, Capture, Plan, and You through drill-downs and proof/review/setup depth. Does not add top-level destinations or claim implementation. |
