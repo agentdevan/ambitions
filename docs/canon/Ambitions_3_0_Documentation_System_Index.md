@@ -373,3 +373,16 @@ This registry exists for handoff and orphan-scan clarity. The table above explai
 ## AmbitionsOS Future Canon
 
 AmbitionsOS future canon lives under Beyond 3.0 and is not current implementation truth. Start from `AmbitionsOS_Index.md`, `AmbitionsOS_Core_Architecture.md`, `AmbitionsOS_Runtime_Contract.md`, the AOS train-control docs, and the Beyond 3.0 roadmap before any AOS/ME/CS future train.
+
+
+## Beyond 3.0 Future Canon Docs
+
+| Doc | Job |
+|---|---|
+| `AmbitionsOS_Index.md` | Future internal intelligence/runtime architecture. |
+| `Ambitions_Product_Experience_OS_Index.md` | Future PXOS user-facing product experience canon. |
+| `PXOS_Product_Promise_And_Experience_Principles.md` | PXOS product promise and experience laws. |
+| `PXOS_Surface_Hierarchy_And_Navigation.md` | Future surface hierarchy and no-sprawl rules. |
+| `PXOS_Release_Safe_Product_Messaging.md` | Release-safe product messaging boundaries. |
+
+PXOS does not supersede Ambitions 3.0 by implication and does not claim current implementation.

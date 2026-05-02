@@ -351,6 +351,8 @@ These batches are complete for planning purposes. They remain as historical cont
 | ME01-ME12 Maintainability Extraction Train | Future / not started | Requires explicit user approval and Green predecessor gates. |
 | CS01-CS10 Compatibility Seam Retirement Train | Future / not started | Requires explicit user approval and Green predecessor gates. |
 | Product Depth | Future / not started | Requires explicit user approval and scoped prompt. |
+| PXOS Future-Canon Integration | Completed / docs-only | Added Product Experience OS future canon and Codex OS controls. It does not start PXOS implementation or the PXOS train. |
+| PX01-PX20 Product Experience OS Train | Future / not started | Requires exact user phrase `Start PXOS Future-Canon Train`. |
 
 ## Beyond 3.0 Future Canon Status
 
@@ -360,3 +362,4 @@ These batches are complete for planning purposes. They remain as historical cont
 | AOS01-AOS30 AmbitionsOS Local Intelligence Train | Future / not started | Requires explicit user approval and Green predecessor gates. |
 | ME01-ME12 Maintainability Extraction Train | Future / not started | Planning only; no extraction run in this batch. |
 | CS01-CS10 Compatibility Seam Retirement Train | Future / not started | Planning only; no seam retired in this batch. |
+| Product Experience OS / PXOS | Future canon / train not started | User-facing future experience canon under Beyond 3.0. Does not claim implementation. |

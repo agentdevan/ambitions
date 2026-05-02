@@ -82,3 +82,14 @@ These trains are future-only and must not run automatically after canon authorin
 ## Active Post-3.0 Train
 
 - [REC01-REC06 Release Evidence Closure Train](batch-trains/REC01_REC06_RELEASE_EVIDENCE_CLOSURE_TRAIN.md) is the active first post-3.0 train after the 2026-05-02 pre-train hardening pass. REC01 is active/started and does not implement app behavior.
+
+
+## PXOS Future Controls
+
+- [PXOS Train Control System](PXOS_TRAIN_CONTROL_SYSTEM.md)
+- [PXOS Gate Matrix](PXOS_GATE_MATRIX.md)
+- [PXOS Product Decision Ledger](PXOS_PRODUCT_DECISION_LEDGER.md)
+- [PXOS Batch Prompt Standard](PXOS_BATCH_PROMPT_STANDARD.md)
+- [PX01-PX20 Train](batch-trains/PX01_PX20_PRODUCT_EXPERIENCE_OS_TRAIN.md)
+
+PXOS is future user-facing product experience canon. The PXOS train is future/inactive and starts only with the exact approval phrase `Start PXOS Future-Canon Train`.

@@ -39,6 +39,7 @@ Older docs are supporting context unless an active Ambitions 3.0 doc explicitly 
 - [Ambitions_3_0_Human_Made_Codebase_Standard.md](canon/Ambitions_3_0_Human_Made_Codebase_Standard.md)
 - [Ambitions_3_0_Active_History_Archive_Policy.md](canon/Ambitions_3_0_Active_History_Archive_Policy.md)
 - [Ambitions_Beyond_3_0_Roadmap.md](canon/Ambitions_Beyond_3_0_Roadmap.md)
+- [Ambitions_Product_Experience_OS_Index.md](canon/Ambitions_Product_Experience_OS_Index.md) - future PXOS user-facing product experience canon
 
 ### Strategy / product management
 
@@ -182,3 +183,8 @@ Ambitions 3.0 batch trains are governed by [codex/AMBITIONS_3_0_BATCH_TRAIN_ORCH
 ## AmbitionsOS Future Canon
 
 AmbitionsOS future-canon docs are indexed from [canon/AmbitionsOS_Index.md](canon/AmbitionsOS_Index.md). They consolidate future life-intelligence architecture and AOS/ME/CS train planning without changing current app behavior or release claims.
+
+
+## PXOS Future Canon
+
+PXOS future-canon docs are indexed from [canon/Ambitions_Product_Experience_OS_Index.md](canon/Ambitions_Product_Experience_OS_Index.md). They define future user-facing product experience, Codex process controls, and implementation ordering. They do not claim current app implementation, release readiness, or PXOS train activation.

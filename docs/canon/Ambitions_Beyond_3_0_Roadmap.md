@@ -16,8 +16,8 @@ permission to supersede Ambitions 3.0 canon. Future canon must follow
 ## Current Baseline
 
 Ambitions 3.0 is the active source of truth. The current native app has Green
-train evidence through F29, and F27 passed after the F28 Goal Detail
-trust/memory UI proof repair/rebaseline.
+train evidence through F30. F27 passed after the F28 Goal Detail
+trust/memory UI proof repair/rebaseline, F27.5 completed with no critical maintainability blocker, F29 created the final engineer handoff package, and F30 created the final closeout.
 
 Latest recorded local proof:
 
@@ -134,6 +134,21 @@ Required future-train setup:
 - stage, commit, and push each Green batch before continuing;
 - preserve exact validation logs and stop on untrusted validation.
 
+
+
+### Lane 6: Product Experience OS Future Canon
+
+Goal: define the future user-facing product experience system before major
+post-3.0 product-depth or intelligence UI implementation.
+
+PXOS sits beside AmbitionsOS. AmbitionsOS owns internal future intelligence and
+runtime architecture. PXOS owns how that intelligence appears to users through
+surfaces, copy, navigation, interaction, trust, proof, recovery, accessibility,
+visual hierarchy, and release-safe product messaging.
+
+Status: future canon created; PXOS train future/inactive. Required approval
+phrase to start PXOS train: `Start PXOS Future-Canon Train`.
+
 ## First Future Decision
 
 Before any Beyond 3.0 implementation starts, choose one path:
@@ -183,3 +198,8 @@ AOS implementation is future-only through `docs/codex/batch-trains/AOS01_AOS30_A
 ## Post-F30 Activation Status
 
 As of 2026-05-02, Ambitions 3.0 is complete by F30 closeout evidence and F17-F30 is historical Green train evidence. AmbitionsOS remains future canon, not current implementation truth. The first safe post-3.0 train selected after pre-train hardening is Release Evidence Closure, beginning with REC01 Release Evidence Truth Inventory. This activation does not start AOS, ME, CS, Product Depth, or any app implementation work.
+
+
+## PXOS Future-Canon Path
+
+PXOS is added as future user-facing product experience canon under this roadmap. It does not supersede Ambitions 3.0, does not claim implementation, does not start PXOS, and does not start REC02, AOS, ME, CS, or Product Depth. PXOS should exist before major user-facing implementation so future work has surface hierarchy, copy, visual, accessibility, trust, recovery, and release-claim gates.

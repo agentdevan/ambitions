@@ -181,3 +181,18 @@ Historical docs are context only and do not override Ambitions 3.0.
 - [Compatibility Seam Retirement Plan](Ambitions_Beyond_3_0_Compatibility_Seam_Retirement_Plan.md)
 
 These are future-canon planning docs under Beyond 3.0. They do not claim current app implementation or release readiness.
+
+
+## Product Experience OS Future Canon
+
+- [Ambitions Product Experience OS Index](Ambitions_Product_Experience_OS_Index.md)
+- [PXOS Product Promise And Experience Principles](PXOS_Product_Promise_And_Experience_Principles.md)
+- [PXOS Surface Hierarchy And Navigation](PXOS_Surface_Hierarchy_And_Navigation.md)
+- [PXOS Today Experience Canon](PXOS_Today_Experience_Canon.md)
+- [PXOS Goals Mission Control Canon](PXOS_Goals_Mission_Control_Canon.md)
+- [PXOS Capture Experience Canon](PXOS_Capture_Experience_Canon.md)
+- [PXOS Plan Life Shape Canon](PXOS_Plan_Life_Shape_Canon.md)
+- [PXOS You Personal System Center Canon](PXOS_You_Personal_System_Center_Canon.md)
+- [PXOS Release Safe Product Messaging](PXOS_Release_Safe_Product_Messaging.md)
+
+These docs are future canon under Beyond 3.0. They do not claim current app implementation, release readiness, or PXOS train activation.

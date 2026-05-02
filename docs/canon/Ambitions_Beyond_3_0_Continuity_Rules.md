@@ -40,3 +40,10 @@ Future migrations should preserve working behavior until replacements are implem
 ## AmbitionsOS Future Canon Continuity
 
 AmbitionsOS canon is future guidance under Beyond 3.0. It must not supersede Ambitions 3.0 unless a future source-of-truth override explicitly says so. AOS, ME, and CS trains remain future-only until explicitly approved, gated, validated, committed, and evidence-bound.
+
+
+## PXOS Future Canon Continuity
+
+PXOS canon is future user-facing product experience guidance under Beyond 3.0. It must not supersede Ambitions 3.0 unless a future source-of-truth override explicitly says so. PXOS train work remains future/inactive until the user says exactly `Start PXOS Future-Canon Train`, predecessor gates pass, and evidence is recorded.
+
+PXOS must preserve Today / Goals / Capture / Plan / You, Ambitions 3.0 completion truth, AmbitionsOS future-only status, REC release-claim boundaries, ME maintainability gates, and CS compatibility gates.

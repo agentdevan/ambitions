@@ -1,0 +1,99 @@
+# PX01-PX20 Product Experience OS Train
+
+Status: Future train manifest; PXOS train not started
+Train type: future-canon and later implementation-readiness train
+Date: 2026-05-02
+
+## Required User Approval Phrase
+
+`Start PXOS Future-Canon Train`
+
+No other phrase starts PXOS. This integration batch does not start PXOS.
+
+## What Starts The Train
+
+Only the required phrase plus a clean preflight, current registry/context state,
+Green or accepted-Yellow REC01 truth, and no unresolved Red in PXOS controls.
+
+## What Does Not Start The Train
+
+Creating this manifest, creating PXOS canon, updating indexes, selecting future
+ordering, REC01 being active, F30 being complete, or mentioning PXOS in a prompt.
+
+## Source Truth Hierarchy
+
+- `README.md`
+- `AGENTS.md`
+- `docs/canon/Ambitions_3_0_Source_Of_Truth_Override.md`
+- `docs/canon/Ambitions_3_0_Front_End_Redesign_Index.md`
+- `docs/canon/Ambitions_3_0_Primitive_Architecture.md`
+- `docs/canon/Ambitions_Beyond_3_0_Roadmap.md`
+- `docs/canon/Ambitions_Beyond_3_0_Continuity_Rules.md`
+- `docs/canon/Ambitions_Product_Experience_OS_Index.md`
+- `docs/canon/AmbitionsOS_Index.md`
+- `docs/codex/PXOS_TRAIN_CONTROL_SYSTEM.md`
+- `docs/codex/PXOS_PRODUCT_DECISION_LEDGER.md`
+- `docs/codex/BATCH_REGISTRY.md`
+- `docs/codex/CONTEXT_INDEX.md`
+
+## Relationship To REC, ME, CS, AOS
+
+- REC owns release evidence and product messaging claim boundaries.
+- ME owns extraction and maintainability gates before large UI expansion.
+- CS owns safe retirement of compatibility seams before renames/removals.
+- AmbitionsOS owns internal intelligence/runtime; PXOS owns user-facing expression.
+
+## Batch Order
+
+- PX01: Product Experience OS Canon And Surface Hierarchy. Owner: all. Boundary: PXOS canon and hierarchy only.
+- PX02: Today Experience Operating Surface. Owner: Today. Boundary: Today experience canon only.
+- PX03: Goals Mission Control Experience. Owner: Goals. Boundary: Goals/Mission Control experience canon only.
+- PX04: Capture Experience. Owner: Capture. Boundary: Capture experience canon only.
+- PX05: Plan Life Shape Experience. Owner: Plan. Boundary: Plan/Life Shape experience canon only.
+- PX06: You Personal System Center. Owner: You. Boundary: You experience canon only.
+- PX07: Action Closure Recovery Experience. Owner: cross-surface closure/recovery. Boundary: Action Closure and Recovery experience canon only.
+- PX08: Trust Proof Receipts Experience. Owner: trust/proof/receipts. Boundary: Trust, proof, receipts experience canon only.
+- PX09: Copy Language Explanation System. Owner: copy/explanation. Boundary: Copy and explanation canon only.
+- PX10: Visual Interaction System. Owner: visual/interaction. Boundary: Visual interaction canon only.
+- PX11: Onboarding Setup Experience. Owner: onboarding/setup. Boundary: Onboarding and setup canon only.
+- PX12: Accessibility Cognitive Load Emotional Safety. Owner: accessibility/cognitive load. Boundary: Accessibility and emotional safety canon only.
+- PX13: Empty Edge Degraded States. Owner: empty/edge/degraded. Boundary: Empty/edge/degraded state canon only.
+- PX14: Product Depth Drilldown Architecture. Owner: drill-down/depth. Boundary: Depth and drilldown architecture canon only.
+- PX15: Cross Surface Continuity. Owner: cross-surface. Boundary: Continuity canon only.
+- PX16: User Facing AI Trust And Recommendation Copy. Owner: recommendation/trust copy. Boundary: AI/recommendation expression canon only.
+- PX17: Release Truth Product Messaging. Owner: release messaging. Boundary: Release-safe product messaging canon only.
+- PX18: PXOS Implementation Readiness Reorder. Owner: global reorder. Boundary: Implementation readiness reorder only.
+- PX19: PXOS Handoff. Owner: handoff. Boundary: PXOS handoff package only.
+- PX20: PXOS Beyond Roadmap. Owner: roadmap. Boundary: Beyond roadmap update only.
+
+## Validation Plan
+
+Every PX batch runs git status, diff check, PXOS drift scans, release-claim
+scans when messaging is touched, doc QA advisory, batch-train gate advisory, and
+focused validation named by the batch prompt. UI implementation batches later
+must add screenshots/previews, accessibility evidence, copy evidence, and
+focused app tests.
+
+## Stop Conditions
+
+Stop on product invention, new top-level tab, unapproved train start,
+unsupported release/platform/AI claim, app-code change in docs-only work,
+forbidden file drift, missing product decision lock, ME/CS/AOS dependency gap,
+or unclassified validation failure.
+
+## Auto-Continuation And Commit Rules
+
+Auto-continuation is disabled by default. Continue only after Green evidence,
+report, registry/context/run-state update, commit, push, and the next direct
+successor being allowed. Yellow or Red stops.
+
+## Evidence Rules
+
+Each batch leaves an audit/report, changed files, validation logs or command
+output, unresolved Yellows, rollback/repair path, and exact next prompt.
+
+## What This Train Must Not Claim
+
+No PXOS implementation, shipped status, release readiness, App Store readiness,
+TestFlight readiness, physical-device proof, public accessibility conformance,
+platform integration proof, AOS/ME/CS start, or REC02 start.

@@ -1,0 +1,106 @@
+# Ambitions Product Experience OS Index
+
+Status: Future canon under Beyond 3.0; PXOS implementation not started
+Date: 2026-05-02
+Abbreviation: PXOS
+
+## Definition
+
+Product Experience OS is the future user-facing operating system canon for
+Ambitions beyond 3.0. It defines how Ambitions should feel, behave, explain,
+guide, recover, prove, personalize, and organize the user's life across Today,
+Goals, Capture, Plan, You, closure, recovery, trust, proof, receipts,
+onboarding, setup, personalization, copy, visual design, accessibility,
+cognitive load, degraded states, cross-surface continuity, and release-safe
+product messaging.
+
+PXOS creates the future user-facing product experience system for Ambitions
+beyond 3.0, using Ambitions 3.0 as the completed baseline and AmbitionsOS, ME,
+CS, and REC as planned future constraints. It may redesign the future
+experience model, but it must preserve Ambitions' identity, top-level tabs,
+core primitives, compatibility safety, source-truth discipline, and historical
+3.0 completion truth.
+
+## What PXOS Is Not
+
+PXOS is not app implementation, a shipped product claim, a top-level tab, a
+chatbot direction, a generic productivity system, a calendar clone, a habit
+tracker, a notes app, a SaaS dashboard, a fake AI dashboard, an enterprise OKR
+system, a streak machine, or permission for Codex to invent product direction.
+
+## Relationship To Ambitions 3.0
+
+Ambitions 3.0 is the completed baseline. PXOS may evolve future experience
+beyond the current 3.0 app, but it preserves Today / Goals / Capture / Plan /
+You, the core loop, Action Closure, proof/trust/receipt direction, premium
+native design direction, recovery-oriented language, source-truth discipline,
+and historical completion evidence.
+
+PXOS must not imply that future user-facing experience is implemented.
+
+## Relationship To AmbitionsOS
+
+AmbitionsOS owns internal future intelligence: Life Graph, Source Truth,
+Starting Position, Goal Path, Alternate Path, Commitment Time, Reality Drift,
+Proof Trust, Recommendation, Local Language, Performance Energy, Privacy
+Safety, Evaluation, Experience, Adaptation, Interoperability, Longevity,
+Governance, and Runtime Contract.
+
+PXOS owns user-facing expression: surface hierarchy, visual hierarchy,
+navigation, drill-downs, interactions, user-facing language, explanations,
+trust UI, proof UI, receipt UI, recovery flows, onboarding, setup, empty
+states, degraded states, accessibility, cognitive load, product depth, visual
+system, and cross-surface continuity.
+
+## Product Feeling
+
+Ambitions should feel like 70% Apple quiet luxury, 20% OpenAI intelligence, and
+10% executive command surface. It should feel native, expensive, calm,
+intelligent, restrained, deep, trustworthy, beautiful, dynamic, human,
+organized, capable, premium, life-shaping, quietly powerful, personally
+adaptive, believable, source-grounded, and recovery-aware.
+
+Primary user feeling: I know what matters now, and my life feels organized
+enough to act.
+
+## Locked Top-Level Surfaces
+
+- Today
+- Goals
+- Capture
+- Plan
+- You
+
+PXOS may define drill-downs, sheets, panels, review surfaces, setup surfaces,
+and subflows under those five tabs. It must not add a sixth tab.
+
+## Child Canon
+
+- `PXOS_Product_Promise_And_Experience_Principles.md`
+- `PXOS_Surface_Hierarchy_And_Navigation.md`
+- `PXOS_Today_Experience_Canon.md`
+- `PXOS_Goals_Mission_Control_Canon.md`
+- `PXOS_Capture_Experience_Canon.md`
+- `PXOS_Plan_Life_Shape_Canon.md`
+- `PXOS_You_Personal_System_Center_Canon.md`
+- `PXOS_Action_Closure_Recovery_Canon.md`
+- `PXOS_Trust_Proof_Receipts_Canon.md`
+- `PXOS_Visual_Interaction_System.md`
+- `PXOS_Copy_Language_And_Explanation_System.md`
+- `PXOS_Onboarding_Setup_And_Personalization.md`
+- `PXOS_Accessibility_Cognitive_Load_And_Emotional_Safety.md`
+- `PXOS_Empty_Edge_And_Degraded_States.md`
+- `PXOS_Product_Depth_And_Drilldown_Rules.md`
+- `PXOS_Cross_Surface_Continuity_System.md`
+- `PXOS_User_Facing_AI_Trust_And_Recommendation_Expression.md`
+- `PXOS_Release_Safe_Product_Messaging.md`
+
+## Codex OS Controls
+
+PXOS future work is governed by `docs/codex/PXOS_TRAIN_CONTROL_SYSTEM.md`,
+`PXOS_GATE_MATRIX.md`, `PXOS_BATCH_PROMPT_STANDARD.md`,
+`PXOS_PRODUCT_DECISION_LEDGER.md`, and `PXOS_DEFINITION_OF_READY_DONE.md`.
+
+## Implementation Boundary
+
+This is future canon and process guidance only. It does not implement app behavior, change production Swift, start PXOS, start AOS/ME/CS/REC02, retire compatibility seams, add dependencies, change workflows, add backend/sync/cloud/model runtime, or create release/platform readiness claims.

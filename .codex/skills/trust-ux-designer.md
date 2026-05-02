@@ -86,3 +86,7 @@ Run narrower tests/scans from the selected validation pack.
 - `.codex/skills/evidence-gate-reporter.md`
 - `.codex/skills/build-test-pack-runner.md`
 - `.codex/skills/diff-scope-controller.md`
+
+## PXOS Future-Canon Focus
+
+When PXOS work is in scope, read `docs/canon/Ambitions_Product_Experience_OS_Index.md`, `docs/codex/PXOS_GATE_MATRIX.md`, and `docs/codex/PXOS_PRODUCT_DECISION_LEDGER.md` before review. Reject Codex-created product direction, new top-level tabs, generic task/dashboard/chatbot drift, unsupported release claims, UI work without accessibility/copy/visual gates, large-file expansion without ME review, compatibility deletion without CS proof, and intelligence expression without AmbitionsOS/PXOS trust boundaries.

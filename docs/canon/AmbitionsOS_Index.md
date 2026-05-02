@@ -58,6 +58,14 @@ Compatibility Seam Retirement lives inside Governance Kernel, Interoperability K
 - Governance Kernel
 - Runtime Contract
 
+
+
+## Relationship To PXOS
+
+PXOS, the Product Experience OS, is the future user-facing product experience canon that sits beside AmbitionsOS. AmbitionsOS owns internal intelligence/runtime/source-truth/recommendation/proof/privacy architecture. PXOS owns the future expression of that architecture through screens, surface hierarchy, copy, navigation, interaction, recovery, trust UI, proof UI, receipts, visual design, accessibility, and release-safe product messaging.
+
+AmbitionsOS does not make PXOS implemented, and PXOS does not make AmbitionsOS implemented. Both remain future canon until explicit implementation trains produce evidence.
+
 ## Surface Relationship
 
 Today shows the next useful decision, not full path depth. Goals and Goal Detail own path depth and Mission Control. Capture owns raw dreams and placement. Plan owns capacity, commitments, feasibility, and consequence review. You owns assumptions, source truth, memory, controls, correction, export/import posture, and trust. Meridian remains shell/navigation identity, not an AmbitionsOS tab.

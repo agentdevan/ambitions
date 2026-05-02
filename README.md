@@ -200,4 +200,8 @@ Known cleanup debt is tracked in [Ambitions_3_0_Repo_Hygiene_And_Active_Canon_Po
 
 ## Batch Train Orchestrator
 
-Ambitions 3.0 batch trains are governed by [docs/codex/AMBITIONS_3_0_BATCH_TRAIN_ORCHESTRATOR.md](docs/codex/AMBITIONS_3_0_BATCH_TRAIN_ORCHESTRATOR.md). The active completion train is [F17-F30 FAANG Handoff Completion Train](docs/codex/batch-trains/F17_F30_FAANG_HANDOFF_COMPLETION_TRAIN.md). F17 repair, F18, F19, F20, F21/F21.5, F22, and F22.5 are Green by current train evidence. F22.7 Human-Made Active Repo Hygiene / 3.0-As-Baseline Gate is mandatory before F23. FAANG handoff remains PARTIAL unless the F27 handoff gate is explicitly re-run and passes.
+Ambitions 3.0 batch trains are governed by [docs/codex/AMBITIONS_3_0_BATCH_TRAIN_ORCHESTRATOR.md](docs/codex/AMBITIONS_3_0_BATCH_TRAIN_ORCHESTRATOR.md). The [F17-F30 FAANG Handoff Completion Train](docs/codex/batch-trains/F17_F30_FAANG_HANDOFF_COMPLETION_TRAIN.md) is complete and preserved as historical train evidence after F30. F27 is PASS after the F28 repair/rebaseline, F27.5 is complete with no critical maintainability blocker, F29 created the final engineer handoff package, and F30 created the Beyond 3.0 continuation plan and final train closeout. Release Evidence Closure is the active first post-3.0 train at REC01; REC02, AOS, ME, CS, Product Depth, and PXOS remain unstarted until explicitly approved by their gates.
+
+## Product Experience OS Future Canon
+
+[Ambitions Product Experience OS](docs/canon/Ambitions_Product_Experience_OS_Index.md), abbreviated PXOS, is future canon for the user-facing product experience beyond Ambitions 3.0. PXOS sits beside AmbitionsOS: AmbitionsOS owns future internal intelligence/runtime architecture; PXOS owns future screens, surfaces, hierarchy, copy, interaction, recovery, trust, visual design, accessibility, and release-safe product messaging. PXOS is not current app implementation and the PXOS train is not started.

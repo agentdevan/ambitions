@@ -2,25 +2,26 @@
 
 Active train: Release Evidence Closure
 Active batch: REC01 Release Evidence Truth Inventory
-Scope: docs/protocol/status/release-truth only
+Current out-of-train task: PXOS Future-Canon Integration and Codex OS Upgrade
+Scope: docs/protocol/future-canon/Codex-process only
 Date: 2026-05-02
 
 ## Baseline
 
-F17-F30 FAANG Handoff Completion Train is complete and Green by current train evidence. F27 passed after the F28 Goal Detail trust/memory UI proof repair/rebaseline. F27.5 completed with no critical maintainability blocker while indexing large-file and compatibility-seam debt. F29 created the final engineer handoff package. F30 created the Beyond 3.0 roadmap and final train closeout.
+F17-F30 FAANG Handoff Completion Train is complete and Green by current train evidence. F27 passed after F28 repair/rebaseline. F27.5 completed with no critical maintainability blocker. F29 created the final engineer handoff package. F30 created the Beyond 3.0 roadmap and final train closeout.
 
-## Activation Gate
+## Active Train Truth
 
-Pre-train hardening and 3.0 status truth check result: PASS WITH YELLOW. No unresolved Red finding blocks train start. Release Evidence Closure is selected as the first safe post-3.0 train because it is evidence/status/release-truth focused and does not implement app behavior.
+Release Evidence Closure remains the active first post-3.0 train at REC01. REC02 is not started. This PXOS integration task is not REC02 and does not complete REC01.
 
-## Current Batch
+## PXOS Status
 
-REC01 is active/started. It inventories current release evidence, simulator proof boundaries, doc QA/tooling advisories, and proof gaps for physical-device verification, public accessibility conformance, TestFlight readiness, App Store submission readiness, final RC lock, signed archive/App Store Connect validation, and rendered external-platform proof.
+PXOS future canon and train-control docs exist. PXOS train is future/inactive and starts only with the exact approval phrase `Start PXOS Future-Canon Train`.
 
 ## Boundaries
 
-No app behavior implemented. No production refactor. No compatibility seam retired. No dependencies. No workflow changes. No release claim. AOS, ME, CS, and Product Depth remain future/not started.
+No app behavior implemented. No production refactor. No compatibility seam retired. No dependencies. No workflow changes. No release claim. AOS, ME, CS, Product Depth, REC02, PXOS train, and PXOS implementation remain unstarted.
 
 ## Continuation Rule
 
-Do not start REC02 or any other future train automatically. Continue only after REC01 evidence is accepted, committed, pushed, and the user explicitly chooses to continue Release Evidence Closure.
+Do not start REC02, PX01, AOS01, ME01, CS01, Product Depth, or any implementation train automatically. Continue only after explicit user approval and matching train gates.

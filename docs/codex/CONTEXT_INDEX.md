@@ -155,3 +155,18 @@ Use this context when the active train is REC01-REC06 Release Evidence Closure:
 - `docs/audits/rec01-release-evidence-truth-inventory-report.md`
 
 Release Evidence Closure is evidence/status/release-truth focused. It does not implement app features and does not claim App Store readiness, TestFlight readiness, final RC lock, physical-device verification, public accessibility conformance, signed archive validation, App Store Connect validation, rendered external-platform proof, or AmbitionsOS implementation.
+
+
+## PXOS Future Canon Context
+
+Use this context when the user explicitly chooses PXOS or future user-facing product-experience canon after F30:
+
+- `docs/canon/Ambitions_Product_Experience_OS_Index.md`
+- `docs/canon/PXOS_Product_Promise_And_Experience_Principles.md`
+- `docs/canon/PXOS_Surface_Hierarchy_And_Navigation.md`
+- `docs/codex/PXOS_TRAIN_CONTROL_SYSTEM.md`
+- `docs/codex/PXOS_GATE_MATRIX.md`
+- `docs/codex/PXOS_PRODUCT_DECISION_LEDGER.md`
+- `docs/codex/batch-trains/PX01_PX20_PRODUCT_EXPERIENCE_OS_TRAIN.md`
+
+PXOS is future canon for user-facing experience, not current app implementation. PXOS train starts only if the user says exactly `Start PXOS Future-Canon Train`. REC01 remains active; REC02, AOS, ME, CS, Product Depth, and PXOS implementation remain unstarted until explicitly approved by their gates.
