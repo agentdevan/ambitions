@@ -75,7 +75,7 @@ Current 4.0 status:
 - Completed: CS03A Insights/Plan Compatibility Map And Migration Design as internal stage of formal CS03; no seam retired.
 - Completed: CS03B User-Facing Plan Alias And Insights Compatibility Preservation as focused test proof; old `insights` compatibility and visible `Plan` naming are preserved.
 - Accepted Yellow: CS03C Narrow Internal Insights Retirement remains blocked/deferred; current repo truth preserves legacy `insights` compatibility through You/Profile history support until stronger proof exists.
-- Next queued / blocked: CS04 Habits Ritual Plan Compatibility Retirement pending dry-run selection.
+- Stopped on Red: CS04 Habits Ritual Plan Compatibility Retirement dry-run returned `Execution allowed: NO`; it needs a CS04 seam repair/split before execution.
 - Queued / Blocked: CS02C, CS03C, CS04-CS06, and CS09-CS10 pending current global preauthorization or `Start CS Train`.
 - Queued / Blocked: SI01-SI18 pending global-order selection or `Start Signature Interface Train` plus PXOS/ME/CS/SI quality gates.
 - Queued / Blocked: PD01-PD18 pending `Start Product Depth Train` plus PXOS/ME/CS/SI/AOS-if-needed gates.

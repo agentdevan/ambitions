@@ -2,7 +2,7 @@
 
 <!-- markdownlint-disable MD013 -->
 
-Status: Active Ambitions 4.0 train manifest; CS01 audit evidence, CS07 external compatibility proof, CS08 import/export/persistence proof, CS02A/CS02B Profile/You compatibility evidence, and CS03A/CS03B Insights compatibility evidence complete; CS04 is next if global continuation gates pass.
+Status: Active Ambitions 4.0 train manifest; CS01 audit evidence, CS07 external compatibility proof, CS08 import/export/persistence proof, CS02A/CS02B Profile/You compatibility evidence, and CS03A/CS03B Insights compatibility evidence complete; CS04 is stopped on dry-run Red/NO pending seam repair.
 
 ## Start Rule
 

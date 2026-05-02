@@ -3,9 +3,9 @@
 <!-- markdownlint-disable MD013 -->
 
 Active train: CS compatibility seam retirement train
-Active batch: CS03B User-Facing Plan Alias And Insights Compatibility Preservation complete with commit/push evidence; CS04 dry-run next
+Active batch: CS04 Habits Ritual Plan Compatibility Retirement stopped on dry-run Red
 Current out-of-train task: none
-Scope: ME01-ME12 maintainability train complete with commit/push evidence; ME11 repair not triggered; PXOS implementation not started; CS01 complete; CS07 complete as focused compatibility proof; CS08 complete as focused import/export/persistence proof; CS02A repairs the Profile/You seam scope without code edits; CS02B adds focused compatibility proof; CS03A repairs the Insights seam scope without code edits; CS03B adds focused compatibility proof; CS04 is next pending dry-run selection; Signature Interface/Product Depth/AmbitionsOS trains not started
+Scope: ME01-ME12 maintainability train complete with commit/push evidence; ME11 repair not triggered; PXOS implementation not started; CS01 complete; CS07 complete as focused compatibility proof; CS08 complete as focused import/export/persistence proof; CS02A repairs the Profile/You seam scope without code edits; CS02B adds focused compatibility proof; CS03A repairs the Insights seam scope without code edits; CS03B adds focused compatibility proof; CS04 dry-run returned Red/NO and is blocked pending repair; Signature Interface/Product Depth/AmbitionsOS trains not started
 Date: 2026-05-02
 
 ## Baseline
@@ -34,7 +34,7 @@ Ambitions 4.0 is the active post-3.0 execution program, not a shipped product ve
 
 ## Boundaries
 
-No product behavior expansion. No visual redesign. No compatibility seam retired. No dependencies. No workflow changes. No release claim. CS01 is audit-only evidence; CS07 and CS08 are focused simulator/unit proof; CS02A is docs/protocol seam repair; CS02B is focused test proof; CS03A is docs/protocol seam repair; CS03B is focused test proof; CS02C, CS03C, CS04-CS06, CS09-CS10, SI implementation, Product Depth, AOS, and PXOS implementation remain unstarted until their gates allow.
+No product behavior expansion. No visual redesign. No compatibility seam retired. No dependencies. No workflow changes. No release claim. CS01 is audit-only evidence; CS07 and CS08 are focused simulator/unit proof; CS02A is docs/protocol seam repair; CS02B is focused test proof; CS03A is docs/protocol seam repair; CS03B is focused test proof; CS04 is stopped on dry-run Red/NO pending repair; CS02C, CS03C, CS04-CS06, CS09-CS10, SI implementation, Product Depth, AOS, and PXOS implementation remain unstarted until their gates allow.
 
 ## Validation Result
 
@@ -98,4 +98,4 @@ The current user prompt says `Run Global Batch Sequence Until Blocked` and expli
 
 ## Next Eligible Batch
 
-After CS03B validation/commit evidence, the next global batch is CS04 Habits Ritual Plan Compatibility Retirement only if dry-run selection says `Execution allowed: YES`.
+CS04 dry-run returned `Execution allowed: NO`. The next safe action is a CS04 Habits/Ritual/Plan compatibility seam repair prompt that creates a seam inventory, contract ledger, accessibility/default/persistence/external-route proof plan, and staged CS04A/CS04B/CS04C path before any retirement.
