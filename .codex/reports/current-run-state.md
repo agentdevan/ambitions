@@ -3,9 +3,9 @@
 <!-- markdownlint-disable MD013 -->
 
 Active train: ME maintainability extraction train selected by global sequence
-Active batch: ME04 TodayPanels Extraction closeout
+Active batch: ME05 PlanFeatureService Extraction dry-run pending
 Current out-of-train task: none
-Scope: ME01 Maintainability Baseline And Ownership Map complete; ME08 Shared Projector State Helper Standards complete; ME10 Architecture Scan Gate complete; ME02 GoalsFeatureService extraction complete; ME03 TodayFeatureService extraction complete; ME04 TodayPanels extraction complete pending commit; PXOS implementation not started; CS/Signature Interface/Product Depth/AmbitionsOS trains not started
+Scope: ME01 Maintainability Baseline And Ownership Map complete; ME08 Shared Projector State Helper Standards complete; ME10 Architecture Scan Gate complete; ME02 GoalsFeatureService extraction complete; ME03 TodayFeatureService extraction complete; ME04 TodayPanels extraction complete and pushed; PXOS implementation not started; CS/Signature Interface/Product Depth/AmbitionsOS trains not started
 Date: 2026-05-02
 Branch: main
 
@@ -23,7 +23,7 @@ Branch: main
 - ME10: complete as audit-only recurring architecture gate; no Swift files changed and no extraction performed.
 - ME02: complete as behavior-preserving Goals service extraction.
 - ME03: complete as behavior-preserving Today service extraction with commit/push evidence.
-- ME04: complete as behavior-preserving TodayPanels extraction pending commit/push.
+- ME04: complete as behavior-preserving TodayPanels extraction with commit/push evidence.
 - ME05-ME07, ME09, ME11-ME12: queued/blocked and not started.
 - CS/SI/Product Depth/AOS: queued/blocked and not started.
 - Global order: 113 formal batches after SI insertion; 82 remain after ME04 commit.
@@ -59,4 +59,4 @@ Not verified:
 
 ## Next Eligible Batch
 
-After ME04 commit/push and post-commit drift checks, the next global batch is ME05 PlanFeatureService Extraction only if dry-run selection says `Execution allowed: YES`.
+The next global batch is ME05 PlanFeatureService Extraction only if dry-run selection says `Execution allowed: YES`.

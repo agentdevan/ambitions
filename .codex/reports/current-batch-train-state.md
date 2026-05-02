@@ -3,9 +3,9 @@
 <!-- markdownlint-disable MD013 -->
 
 Active train: ME maintainability extraction train selected by global sequence
-Active batch: ME04 TodayPanels Extraction closeout
+Active batch: ME05 PlanFeatureService Extraction dry-run pending
 Current out-of-train task: none
-Scope: ME01 Maintainability Baseline And Ownership Map complete; ME08 Shared Projector State Helper Standards complete; ME10 Architecture Scan Gate complete; ME02 GoalsFeatureService extraction complete; ME03 TodayFeatureService extraction complete; ME04 TodayPanels extraction complete pending commit; PXOS implementation not started; CS/Signature Interface/Product Depth/AmbitionsOS trains not started
+Scope: ME01 Maintainability Baseline And Ownership Map complete; ME08 Shared Projector State Helper Standards complete; ME10 Architecture Scan Gate complete; ME02 GoalsFeatureService extraction complete; ME03 TodayFeatureService extraction complete; ME04 TodayPanels extraction complete and pushed; PXOS implementation not started; CS/Signature Interface/Product Depth/AmbitionsOS trains not started
 Date: 2026-05-02
 
 ## Baseline
@@ -14,7 +14,7 @@ F17-F30 FAANG Handoff Completion Train is complete and Green by current train ev
 
 ## Active Train Truth
 
-Release Evidence Closure is complete through REC06 as an evidence/status train. PX01-PX20 are complete as future PXOS canon/roadmap evidence. ME01 is complete as audit-only maintainability baseline and ownership map evidence. ME08 is complete as shared projector/state/helper standards evidence. ME10 is complete as recurring architecture-gate evidence. ME02 is complete as behavior-preserving Goals service extraction evidence. ME03 is complete as behavior-preserving Today service extraction evidence. ME04 is complete as behavior-preserving TodayPanels extraction evidence pending commit/push. Human/operator proof remains pending and blocks any release-posture upgrade.
+Release Evidence Closure is complete through REC06 as an evidence/status train. PX01-PX20 are complete as future PXOS canon/roadmap evidence. ME01 is complete as audit-only maintainability baseline and ownership map evidence. ME08 is complete as shared projector/state/helper standards evidence. ME10 is complete as recurring architecture-gate evidence. ME02 is complete as behavior-preserving Goals service extraction evidence. ME03 is complete as behavior-preserving Today service extraction evidence. ME04 is complete as behavior-preserving TodayPanels extraction evidence with commit/push evidence. Human/operator proof remains pending and blocks any release-posture upgrade.
 
 ## ME Status
 
@@ -54,4 +54,4 @@ The current user prompt says `Run Global Batch Sequence Until Blocked` and expli
 
 ## Next Eligible Batch
 
-After ME04 commit/push and post-commit drift checks, the next global batch is ME05 PlanFeatureService Extraction only if dry-run selection says `Execution allowed: YES`.
+The next global batch is ME05 PlanFeatureService Extraction only if dry-run selection says `Execution allowed: YES`.
