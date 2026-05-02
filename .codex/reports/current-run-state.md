@@ -3,9 +3,9 @@
 <!-- markdownlint-disable MD013 -->
 
 Active train: CS compatibility seam retirement train
-Active batch: CS02A Profile/You Compatibility Map And Migration Design complete; CS02B dry-run next
+Active batch: CS02B User-Facing You Alias And Compatibility Preservation complete; CS03 dry-run next
 Current out-of-train task: none
-Scope: ME01-ME12 maintainability train complete with commit/push evidence; ME11 repair not triggered; PXOS implementation not started; CS01 complete; CS07 complete as focused compatibility proof; CS08 complete as focused import/export/persistence proof; CS02A repairs the Profile/You seam scope without code edits; CS02B is next pending dry-run selection; Signature Interface/Product Depth/AmbitionsOS trains not started
+Scope: ME01-ME12 maintainability train complete with commit/push evidence; ME11 repair not triggered; PXOS implementation not started; CS01 complete; CS07 complete as focused compatibility proof; CS08 complete as focused import/export/persistence proof; CS02A repaired the Profile/You seam scope without code edits; CS02B added focused test proof; CS03 is next pending dry-run selection; Signature Interface/Product Depth/AmbitionsOS trains not started
 Date: 2026-05-02
 Branch: main
 
@@ -33,7 +33,7 @@ Branch: main
 - CS01: complete as audit-only compatibility seam registry and risk map; no seam retired and no app code edited.
 - CS07: complete as focused external route/widget/App Intent compatibility proof; no seam retired and no app code edited. Commit evidence: `e4c04ff2`, report SHA repair: `ef536cae`.
 - CS08: complete as focused import/export/persistence compatibility proof; no seam retired and no app code edited. Commit evidence: `d2c328d6`, report SHA repair: `9144add3`.
-- CS train: active with CS02 internally staged; CS02A docs/protocol repair complete and CS02B next only after dry-run selection says `Execution allowed: YES`.
+- CS train: active with CS02 internally staged; CS02A and CS02B are complete, CS02C is deferred as accepted Yellow, and CS03 is next only after dry-run selection says `Execution allowed: YES`.
 - SI/Product Depth/AOS: queued/blocked and not started.
 - Global order: 113 formal batches after SI insertion; 74 formal batches remain because CS02A is an internal stage of formal CS02, not a new formal batch.
 
@@ -48,7 +48,7 @@ Branch: main
 
 ## Current Validation Result
 
-CS02A validation is PASS WITH YELLOW with docs/protocol compatibility seam repair evidence committed and pushed (`3ce24112`; report repair `80780e3b`).
+CS02B validation is PASS WITH YELLOW pending commit/push evidence. Focused app shell and external routing tests passed `54` tests with `0` failures, proving old `profile` raw/default/external route compatibility and visible `You` display can coexist. CS02C remains deferred as accepted Yellow; the Profile seam is not claimed retired.
 
 Verified:
 
@@ -73,4 +73,4 @@ Not verified:
 
 ## Next Eligible Batch
 
-The next narrowed action is CS02B User-Facing You Alias And Compatibility Preservation inside the repaired formal CS02 prompt only if dry-run selection says `Execution allowed: YES`.
+The next global batch is CS03 Insights Compatibility Retirement only if dry-run selection says `Execution allowed: YES`.

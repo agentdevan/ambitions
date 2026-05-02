@@ -70,7 +70,9 @@ Current 4.0 status:
 - Completed: CS07 External Route Widget AppIntent Compatibility Proof.
 - Completed: CS08 Import Export Persistence Compatibility Proof.
 - Completed: CS02A Profile/You Compatibility Map And Migration Design as internal stage of formal CS02; no seam retired.
-- Next queued / blocked: CS02B User-Facing You Alias And Compatibility Preservation pending dry-run selection inside the repaired CS02 prompt.
+- Completed: CS02B User-Facing You Alias And Compatibility Preservation as focused test proof; old `profile` compatibility and visible `You` naming are preserved.
+- Accepted Yellow: CS02C Narrow Internal Naming Retirement remains blocked/deferred; broad Profile retirement is not required for current user-facing canon compliance.
+- Next queued / blocked: CS03 Insights Compatibility Retirement pending dry-run selection.
 - Queued / Blocked: CS02C, CS03-CS06, and CS09-CS10 pending current global preauthorization or `Start CS Train`.
 - Queued / Blocked: SI01-SI18 pending global-order selection or `Start Signature Interface Train` plus PXOS/ME/CS/SI quality gates.
 - Queued / Blocked: PD01-PD18 pending `Start Product Depth Train` plus PXOS/ME/CS/SI/AOS-if-needed gates.

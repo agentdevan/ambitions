@@ -3,9 +3,9 @@
 <!-- markdownlint-disable MD013 -->
 
 Active train: CS compatibility seam retirement train
-Active batch: CS02A Profile/You Compatibility Map And Migration Design complete; CS02B dry-run next
+Active batch: CS02B User-Facing You Alias And Compatibility Preservation complete; CS03 dry-run next
 Current out-of-train task: none
-Scope: ME01-ME12 maintainability train complete with commit/push evidence; ME11 repair not triggered; PXOS implementation not started; CS01 complete; CS07 complete as focused compatibility proof; CS08 complete as focused import/export/persistence proof; CS02A repairs the Profile/You seam scope without code edits; CS02B is next pending dry-run selection; Signature Interface/Product Depth/AmbitionsOS trains not started
+Scope: ME01-ME12 maintainability train complete with commit/push evidence; ME11 repair not triggered; PXOS implementation not started; CS01 complete; CS07 complete as focused compatibility proof; CS08 complete as focused import/export/persistence proof; CS02A repairs the Profile/You seam scope without code edits; CS02B adds focused compatibility proof; CS03 is next pending dry-run selection; Signature Interface/Product Depth/AmbitionsOS trains not started
 Date: 2026-05-02
 
 ## Baseline
@@ -30,21 +30,23 @@ Product Depth is formalized as a queued/blocked PD01-PD18 train with required ap
 
 ## Ambitions 4.0 Status
 
-Ambitions 4.0 is the active post-3.0 execution program, not a shipped product version. The global order now has 113 formal batches after SI insertion: REC02-REC06, PX01-PX20, ME01-ME12, CS01-CS10, SI01-SI18, PD01-PD18, and AOS01-AOS30. REC02-REC06, PX01-PX20, ME01, ME08, ME10, ME02, ME03, ME04, ME05, ME06, ME07, ME09, ME12, CS01, CS07, CS08, and CS02A are complete after CS02A repair evidence; 74 formal batches remain because CS02A is an internal stage of formal CS02, not a new formal batch.
+Ambitions 4.0 is the active post-3.0 execution program, not a shipped product version. The global order now has 113 formal batches after SI insertion: REC02-REC06, PX01-PX20, ME01-ME12, CS01-CS10, SI01-SI18, PD01-PD18, and AOS01-AOS30. REC02-REC06, PX01-PX20, ME01, ME08, ME10, ME02, ME03, ME04, ME05, ME06, ME07, ME09, ME12, CS01, CS07, CS08, CS02A, and CS02B are complete; CS02C remains deferred as accepted Yellow inside formal CS02.
 
 ## Boundaries
 
-No product behavior expansion. No visual redesign. No compatibility seam retired. No dependencies. No workflow changes. No release claim. CS01 is audit-only evidence; CS07 and CS08 are focused simulator/unit proof; CS02A is docs/protocol seam repair; CS02B/CS02C, CS03-CS06, CS09-CS10, SI implementation, Product Depth, AOS, and PXOS implementation remain unstarted.
+No product behavior expansion. No visual redesign. No compatibility seam retired. No dependencies. No workflow changes. No release claim. CS01 is audit-only evidence; CS07 and CS08 are focused simulator/unit proof; CS02A is docs/protocol seam repair; CS02B is focused test proof; CS02C, CS03-CS06, CS09-CS10, SI implementation, Product Depth, AOS, and PXOS implementation remain unstarted.
 
 ## Validation Result
 
-CS02A is PASS WITH YELLOW with commit/push evidence:
+CS02B is PASS WITH YELLOW pending commit/push evidence:
 
 - CS02A touched only docs/status files and did not edit tests or app code.
 - CS02A created Profile/You seam inventory, compatibility contract ledger, and accessibility identifier ledger.
 - CS02A repaired the CS02 prompt into CS02A/CS02B/CS02C internal staging without changing the formal 113-batch global order.
-- CS02A does not retire the Profile seam and does not change route/raw/default/accessibility behavior.
-- Commit evidence: `3ce24112`, report repair: `80780e3b`.
+- CS02B touched focused app shell/external routing tests and a report only; no production Swift was edited.
+- CS02B focused app shell and external routing tests passed `54` tests with `0` failures.
+- CS02B proves `AppTab(rawValue: "profile")`, `profile` payloads, `ambitions://tab/profile`, stored `.profile` preferred tab, and Insights payload tab values remain compatible while `.profile.title` displays `You`.
+- CS02C is deferred as accepted Yellow; the Profile seam is not claimed retired.
 
 Previous CS08 evidence remains:
 
@@ -75,4 +77,4 @@ The current user prompt says `Run Global Batch Sequence Until Blocked` and expli
 
 ## Next Eligible Batch
 
-The next narrowed action is CS02B User-Facing You Alias And Compatibility Preservation inside the repaired formal CS02 prompt only if dry-run selection says `Execution allowed: YES`.
+The next global batch is CS03 Insights Compatibility Retirement only if dry-run selection says `Execution allowed: YES`.

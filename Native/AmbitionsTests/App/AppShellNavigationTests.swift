@@ -11,14 +11,19 @@ final class AppShellNavigationTests: XCTestCase {
 
     func testLegacyTabRawValuesRemainDecodableAndNormalizeSafely() {
         XCTAssertEqual(AppTab(rawValue: "captures"), .captures)
+        XCTAssertEqual(AppTab(rawValue: "profile"), .profile)
         XCTAssertEqual(AppTab(rawValue: "habits"), .habits)
         XCTAssertEqual(AppTab(rawValue: "insights"), .insights)
         XCTAssertEqual(AppTab.captures.canonicalTopLevelTab, .captures)
+        XCTAssertEqual(AppTab.profile.canonicalTopLevelTab, .profile)
         XCTAssertEqual(AppTab.habits.canonicalTopLevelTab, .plan)
         XCTAssertEqual(AppTab.insights.canonicalTopLevelTab, .profile)
+        XCTAssertEqual(AppTab.profile.rawValue, "profile")
+        XCTAssertEqual(AppTab.profile.title, "You")
         XCTAssertEqual(AppTab.habits.title, "Rituals")
         XCTAssertEqual(AppTab.insights.title, "History")
         XCTAssertTrue(AppTab.captures.isCanonicalTopLevel)
+        XCTAssertTrue(AppTab.profile.isCanonicalTopLevel)
         XCTAssertFalse(AppTab.habits.isCanonicalTopLevel)
         XCTAssertFalse(AppTab.insights.isCanonicalTopLevel)
     }
@@ -225,6 +230,20 @@ final class AppShellNavigationTests: XCTestCase {
         let preferences = try await RepositoryBackedAppPreferencesStore(appStateRepository: appState).loadPreferences()
 
         XCTAssertEqual(preferences.preferredTab, .plan)
+    }
+
+    func testStoredProfilePreferredTabLoadsIntoYouSurfaceCompatibility() async throws {
+        let store = try AmbitionsPersistenceStore(inMemory: true)
+        let appState = SwiftDataAppStateRepository(store: store)
+        var state = AppStateSnapshot.default
+        state.preferredTab = .profile
+        try await appState.saveState(state)
+
+        let preferences = try await RepositoryBackedAppPreferencesStore(appStateRepository: appState).loadPreferences()
+
+        XCTAssertEqual(preferences.preferredTab, .profile)
+        XCTAssertEqual(preferences.preferredTab.title, "You")
+        XCTAssertEqual(preferences.preferredTab.rawValue, "profile")
     }
 
     @MainActor

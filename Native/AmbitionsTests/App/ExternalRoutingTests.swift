@@ -11,6 +11,17 @@ final class ExternalRoutingTests: XCTestCase {
         XCTAssertEqual(route, .openTab(.goals))
     }
 
+    func testDeepLinkTranslatorPreservesProfileCompatibilityTabAsYouSurface() throws {
+        let translator = AppExternalRouteTranslator()
+        let url = try XCTUnwrap(URL(string: "ambitions://tab/profile"))
+
+        let route = translator.route(fromDeepLink: url)
+
+        XCTAssertEqual(route, .openTab(.profile))
+        XCTAssertEqual(AppTab.profile.title, "You")
+        XCTAssertEqual(AppTab.profile.rawValue, "profile")
+    }
+
     @MainActor
     func testShellPresentationModesShareCanonicalRouteDispatch() {
         let modes: [AppShellPresentationMode] = [.nativeFallback, .meridian]
@@ -228,6 +239,23 @@ final class ExternalRoutingTests: XCTestCase {
             translator.route(fromWidget: AppWidgetRoutingPayload(action: "open", values: ["tab": "habits"])),
             .openTab(.habits)
         )
+        XCTAssertEqual(
+            translator.route(fromNotification: AppNotificationRoutingPayload(action: "open", values: ["tab": "profile"])),
+            .openTab(.profile)
+        )
+        XCTAssertEqual(
+            translator.route(fromWidget: AppWidgetRoutingPayload(action: "open", values: ["tab": "profile"])),
+            .openTab(.profile)
+        )
+    }
+
+    func testInsightsPayloadUsesProfileCompatibilityTabForYouSurface() {
+        let translator = AppExternalRouteTranslator()
+
+        let payload = translator.routePayload(for: .openInsightsRoute(.history))
+
+        XCTAssertEqual(payload[ExternalSurfaceActionPayload.Key.tab], "profile")
+        XCTAssertEqual(AppTab.profile.title, "You")
     }
 
     func testRouteTranslatorGeneratesDeterministicDeepLinks() throws {
@@ -351,6 +379,18 @@ final class ExternalRoutingTests: XCTestCase {
         router.dispatch(.openTab(.habits), source: .deepLink)
         XCTAssertEqual(navigation.selectedTab, .plan)
         XCTAssertEqual(navigation.planPath, [.habits])
+    }
+
+    @MainActor
+    func testRouterDispatchesProfileCompatibilityTabToYouSurface() {
+        let navigation = AppNavigationModel(selectedTab: .today)
+        let router = DefaultAppExternalRouter(navigation: navigation)
+
+        router.dispatch(.openTab(.profile), source: .deepLink)
+
+        XCTAssertEqual(navigation.selectedTab, .profile)
+        XCTAssertEqual(navigation.lastExternalRoute, .openTab(.profile))
+        XCTAssertEqual(AppTab.profile.title, "You")
     }
 
     @MainActor
