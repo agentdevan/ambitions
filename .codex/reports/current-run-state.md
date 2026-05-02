@@ -1,8 +1,10 @@
 # Current Run State
 
+<!-- markdownlint-disable MD013 -->
+
 Active train: ME maintainability extraction train selected by global sequence
-Active batch: none; ME02 complete and Signature Interface formalization next per current prompt before ME03 continuation
-Current out-of-train task: none
+Active batch: none; ME02 complete and Signature Interface Codex OS quality-gate upgrade active before SI formalization and ME03 continuation
+Current out-of-train task: Signature Interface Codex OS quality-gate upgrade
 Scope: ME01 Maintainability Baseline And Ownership Map complete; ME08 Shared Projector State Helper Standards complete; ME10 Architecture Scan Gate complete; ME02 GoalsFeatureService extraction complete; PXOS implementation not started; CS/Product Depth/AmbitionsOS trains not started
 Date: 2026-05-02
 Branch: main
@@ -28,7 +30,7 @@ Branch: main
 - ME03-ME07, ME09, ME11-ME12: queued/blocked and not started.
 - CS/Product Depth/AOS: queued/blocked and not started.
 - Product Depth: formalized as a queued/blocked PD01-PD18 train; not started.
-- Global order: 95 formal batches at program start; 66 remain after ME02 before Signature Interface formalization.
+- Global order: 95 formal batches at program start; 66 remain after ME02 before Signature Interface formalization. SI formalization is expected to update the formal total to 113.
 
 ## Boundaries
 
@@ -41,7 +43,7 @@ Branch: main
 
 ## Current Validation Plan
 
-After ME02 closeout, formalize the Signature Interface train as docs/status work before continuing ME03. Run git status, branch/HEAD checks, diff check, architecture scan, release-claim/status scans, doc QA advisory, batch-train gate advisory, focused markdownlint, changed-file boundary checks, and SI formalization validation.
+After ME02 closeout, first complete the Signature Interface Codex OS quality-gate upgrade, then formalize the Signature Interface train as docs/status work before continuing ME03. Run git status, branch/HEAD checks, diff check, SI script inventory/readiness checks, release-claim/status scans, doc QA advisory, batch-train gate advisory, focused markdownlint, changed-file boundary checks, and SI formalization validation.
 
 ## Current Validation Result
 

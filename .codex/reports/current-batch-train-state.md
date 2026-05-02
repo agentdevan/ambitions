@@ -1,8 +1,10 @@
 # Current Batch Train State
 
+<!-- markdownlint-disable MD013 -->
+
 Active train: ME maintainability extraction train selected by global sequence
-Active batch: none; ME02 complete and Signature Interface formalization next per current prompt before ME03 continuation
-Current out-of-train task: none
+Active batch: none; ME02 complete and Signature Interface Codex OS quality-gate upgrade active before SI formalization and ME03 continuation
+Current out-of-train task: Signature Interface Codex OS quality-gate upgrade
 Scope: ME01 Maintainability Baseline And Ownership Map complete; ME08 Shared Projector State Helper Standards complete; ME10 Architecture Scan Gate complete; ME02 GoalsFeatureService extraction complete; PXOS implementation not started; CS/Product Depth/AmbitionsOS trains not started
 Date: 2026-05-02
 
@@ -29,6 +31,10 @@ REC02-REC06 standalone prompt files exist. REC02 produced the human operator rel
 ## Product Depth Formalization Status
 
 Product Depth is formalized as a queued/blocked PD01-PD18 train with required approval phrase `Start Product Depth Train`. This does not start Product Depth, PXOS implementation, ME extraction, CS, AOS, or app implementation.
+
+## Signature Interface Codex OS Status
+
+Signature Interface is not implemented and SI01-SI18 are not yet formalized in the global order. The current out-of-train task adds SI-specific review skills, review boards, local advisory scripts, and global protocol gates so future SI batches must pass creative-direction, invented-but-native, anti-generic UI, preview, visual QA, accessibility, Reduce Motion, interaction/motion/haptics, symbol grammar, and file-size/component-boundary review before Green.
 
 ## Ambitions 4.0 Status
 

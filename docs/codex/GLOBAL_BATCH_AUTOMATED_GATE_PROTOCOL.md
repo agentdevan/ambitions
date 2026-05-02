@@ -57,6 +57,7 @@ Red means a correctness-affecting test failure, build failure caused by the batc
 - ME: before/after file sizes, owner map, extraction plan, behavior tests.
 - CS: replacement map, compatibility proof, rollback plan.
 - AOS: typed contracts, privacy/fallback/source-truth/performance/evaluation evidence.
+- SI: Signature Interface creative direction, invented-but-native rubric, anti-generic UI scan, top-level composition evidence when surfaces are touched, preview coverage, visual QA report, accessibility/Dynamic Type/VoiceOver notes, Reduce Motion evidence, symbol grammar, and file-size/component-boundary evidence.
 - Validation: commands, logs, PASS/PARTIAL/FAIL, proof scope, non-claims.
 - Handoff/Rollback: report, next prompt, rollback steps.
 - Batch report: batch-specific report under `docs/audits/`, unless the prompt
@@ -73,6 +74,10 @@ Docs-only batches must run Source Truth, Scope Boundary, Product Decision Lock, 
 Implementation batches must also run file-size/diff-size, test strength, maintainability, accessibility/copy/visual if UI is touched, compatibility if seams are touched, privacy/trust if data or recommendations are touched, and release-claim scans if messaging is touched.
 
 Release/evidence batches must run REC Release Evidence, Release Claim Safety, Human Proof, Handoff, and Rollback gates.
+
+Signature Interface implementation batches must run Signature Interface Creative Direction, Native iPhone Believability, Anti-Generic UI, Interaction/Motion/Haptics, Reduce Motion, Accessibility/Dynamic Type/VoiceOver, Preview Coverage, Visual QA, File-Size/Component Boundary, and Release-Claim Safety gates. If the batch touches Today, Goals, Capture, Plan, You, app shell, surface shell, navigation lists, or drill-down entry/exit, it must also run the Top-Level Surface Composition or IA/Shell/Navigation gate as relevant.
+
+SI implementation Green requires build/focused test proof plus UI-quality evidence. Build passing alone is not enough. Each primitive must document the component state matrix, preview or screenshot evidence where tooling supports it, and an invented-but-native rubric scored 1-5 for originality, native iPhone believability, usefulness, restraint, accessibility, emotional tone, system coherence, and maintainability. Green requires average score >= 4, no category below 3, and no Red in accessibility, release-claim safety, route/compatibility, or file-size boundary.
 
 ## Failure Handling
 
@@ -93,3 +98,20 @@ scripts/batch-train-gate-check.sh || true
 ```
 
 Add batch-specific scans for claims, product drift, top-level composition, file sizes, compatibility, tests, and validation logs. Advisory commands must be classified, not ignored.
+
+Signature Interface batches should add the local SI advisory scans created for the train:
+
+```bash
+scripts/si-component-inventory.sh || true
+scripts/si-anti-generic-ui-scan.sh || true
+scripts/si-top-level-composition-scan.sh || true
+scripts/si-preview-coverage-scan.sh || true
+scripts/si-accessibility-scan.sh || true
+scripts/si-motion-reduce-motion-scan.sh || true
+scripts/si-file-size-scan.sh || true
+scripts/si-symbol-grammar-scan.sh || true
+scripts/si-visual-qa-report.sh || true
+scripts/si-readiness-gate.sh || true
+```
+
+These scripts are advisory and read-only. They do not fake screenshot proof, human visual approval, physical-device proof, public accessibility conformance, App Store/TestFlight proof, or release readiness.

@@ -23,6 +23,7 @@ Do not treat vague language as execution approval.
 - `Start PXOS Future-Canon Train`: start PXOS future-canon train only.
 - `Start ME Train`: start ME only.
 - `Start CS Train`: start CS only.
+- `Start Signature Interface Train`: start SI only.
 - `Start Product Depth Train`: start Product Depth only.
 - `Start AOS Train`: start AOS only.
 
@@ -32,7 +33,7 @@ When a current user prompt says the exact phrase
 `Run Global Batch Sequence Until Blocked` and explicitly preauthorizes the
 Ambitions 4.0 Execution Program, that approval satisfies routine train
 transition approval for REC02-REC06, PX01-PX20, ME01-ME12, CS01-CS10,
-PD01-PD18, and AOS01-AOS30 in global order. This preauthorization is only
+SI01-SI18, PD01-PD18, and AOS01-AOS30 in global order. This preauthorization is only
 permission to attempt the next eligible batch. It does not satisfy proof,
 validation, release, platform, visual-approval, privacy/legal, App Store
 Connect, TestFlight, signed archive, physical-device, public accessibility, or
@@ -125,6 +126,7 @@ Use additional reviewers by batch type:
 - PXOS/user-facing: PXOS surface hierarchy, product-depth/deep-not-wide, top-level composition, premium visual, product language, accessibility/cognitive-load, recovery, trust/proof.
 - ME/code maintainability: maintainability, large-file extraction, testability, file-size/diff-size.
 - CS/compatibility: compatibility migration, route/raw value/external surface, persistence/import/export if relevant.
+- SI/signature UI: signature-interface creative director, Ambitions-native UI primitive, top-level surface composition, IA/shell/navigation, interaction/motion/haptics, accessibility adaptive interface, visual QA/preview fixture, iconography/symbol, loading/degraded state, file-size/component boundary, and release-claim safety.
 - AOS/intelligence: runtime contract, privacy/trust, recommendation/source-truth, fallback/degraded-state.
 - REC/release: release evidence, claim boundary, human proof.
 
@@ -154,6 +156,7 @@ Stop on:
 - Global order and train manifest conflict affecting safety.
 - Product degradation proposed as a repair.
 - Top-level surface composition violation.
+- SI primitive generic/dashboard/card-stack drift, missing SI visual QA evidence, missing Reduce Motion equivalent for SI motion work, or uncontrolled SI component/file-size regression.
 - Unsupported release/platform/PXOS/AmbitionsOS implementation claim.
 
 ## Commit Rules

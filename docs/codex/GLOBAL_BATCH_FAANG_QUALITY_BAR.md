@@ -49,6 +49,10 @@ Date: 2026-05-02
 - Top-level tabs prioritize visual state, spatial hierarchy, one primary object or decision, and drill-down entry points.
 - Cards are used with purpose, not as same-size stacks that become the whole screen.
 - Visual proof is required for meaningful UI work where tooling supports it.
+- Signature Interface primitives must be invented but native: original, believable on iPhone, useful, restrained, accessible, emotionally safe, system-coherent, and maintainable.
+- UI-changing SI batches must include preview/state evidence, an anti-generic UI scan, visual QA notes, accessibility notes, reduced-motion notes, and file-size/component-boundary evidence.
+- Top-level SI work must prove no new tab, no vertical stack of unrelated modules, one primary visual object, subordinate supporting modules, clear primary action, VoiceOver order matching visual hierarchy, and five-second glance legibility.
+- Build passing is not enough for SI Green; the SI visual quality gates must also pass or produce accepted Yellow with a named owner.
 
 ## Copy And Language Requirements
 
@@ -96,3 +100,12 @@ Unacceptable fixes include:
 - Broadening scope to dodge a failing gate.
 - Disabling tests without replacement or documented retirement.
 - Changing train status to make a report look Green.
+
+## Signature Interface Quality Requirements
+
+- `Signature Interface Creative Direction Gate`, `Native iPhone Believability Gate`, `Anti-Generic UI Gate`, `Preview Coverage Gate`, `Visual QA Gate`, `Interaction/Motion/Haptics Gate`, `Reduce Motion Gate`, `Accessibility/Dynamic Type/VoiceOver Gate`, and `File-Size/Component Boundary Gate` are required for SI implementation batches.
+- Every SI primitive must define normal, selected, focused, loading, empty, disabled, error/degraded, privacy-sensitive, reduced-motion, and Dynamic Type states where applicable.
+- Motion must orient, confirm, or reduce uncertainty; decorative motion, gamified feedback, and missing Reduce Motion equivalents are Red unless repaired.
+- Iconography must use SF Symbols where possible, pair symbols with labels or equivalent accessibility, and avoid icon-only or color-only meaning.
+- Loading, skeleton, waiting, stale-source, partial-source, and degraded states must be honest and leave the user with a clear next action.
+- SI must not become docs-only ornamentation, style-only panels, generic cards, dashboard skins, calendar-clone UI, chatbot wrapper UI, or one-off visual components without state, interaction, accessibility, preview, and maintainability proof.

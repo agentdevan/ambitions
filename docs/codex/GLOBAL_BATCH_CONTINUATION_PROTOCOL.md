@@ -68,7 +68,8 @@ train-specific continuation phrases only when the current user prompt
 explicitly preauthorizes Ambitions 4.0 execution across the named trains. In
 that mode, do not stop merely to ask for `Continue Release Evidence Closure`,
 `Start PXOS Future-Canon Train`, `Start ME Train`, `Start CS Train`,
-`Start Product Depth Train`, or `Start AOS Train`.
+`Start Signature Interface Train`, `Start Product Depth Train`, or
+`Start AOS Train`.
 
 Global preauthorization does not replace proof. Stop for physical-device proof,
 App Store Connect proof, TestFlight proof, signed archive distribution proof,
@@ -96,3 +97,9 @@ continuing.
 ## Validation-Strength Stop Rule
 
 Weak or Missing validation blocks implementation continuation. Docs-only work may continue with advisory validation only when the advisory is classified, noncritical, and does not hide Red.
+
+## Signature Interface Continuation Rule
+
+SI implementation continuation requires Strong implementation validation plus SI quality-gate evidence. Build success alone is not enough. Stop if a UI-changing SI batch lacks preview/state evidence, anti-generic UI review, visual QA notes, accessibility/Dynamic Type/VoiceOver review, reduced-motion evidence for motion work, file-size/component-boundary review, or release-claim safety review.
+
+The global phrase `Run Global Batch Sequence Until Blocked` may carry execution into SI when SI appears in the global order and prerequisites are Green or accepted Yellow. It does not authorize fake human visual approval, physical-device proof, public accessibility conformance, App Store/TestFlight proof, signed archive proof, or release readiness.
