@@ -12,11 +12,11 @@ This train is not permission to blindly implement. It is a gated train. Codex ma
 
 ## Current Entry Point
 
-F17 Shell / Meridian Planning & Readiness Audit.
+F27.5 Human-Made Codebase Maintainability Audit.
 
-F18 implementation is blocked unless F17 produces a Green architecture and ownership plan.
+F17 through F28 are Green by current train evidence.
 
-FAANG handoff remains PARTIAL until F27 explicitly reruns the FAANG handoff gate and passes.
+F29 and F30 remain blocked until F27.5 is Green.
 
 ## Train Type
 

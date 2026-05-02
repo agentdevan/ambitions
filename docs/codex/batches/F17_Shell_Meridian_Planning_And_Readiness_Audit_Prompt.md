@@ -1,6 +1,6 @@
 # F17 Shell / Meridian Planning And Readiness Audit Prompt
 
-Status: Active next batch prompt
+Status: Historical completed batch prompt
 Train: F17-F30 FAANG Handoff Completion Train
 
 Run F17 as planning/readiness only. Do not implement Shell/Meridian UI.

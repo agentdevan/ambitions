@@ -68,4 +68,4 @@ The FAANG-team operating upgrade is indexed from:
 
 Use `docs/codex/AMBITIONS_3_0_BATCH_TRAIN_ORCHESTRATOR.md` plus the artifacts in this directory for gated Ambitions 3.0 batch trains. F03.5, F13.5, and F16.5 are architecture checkpoint prompts; do not skip them when their triggers fire.
 
-Active completion train: [batch-trains/F17_F30_FAANG_HANDOFF_COMPLETION_TRAIN.md](batch-trains/F17_F30_FAANG_HANDOFF_COMPLETION_TRAIN.md). Start from [batches/F17_Shell_Meridian_Planning_And_Readiness_Audit_Prompt.md](batches/F17_Shell_Meridian_Planning_And_Readiness_Audit_Prompt.md). F18 remains blocked until F17 is Green, and FAANG handoff remains PARTIAL until F27 reruns and passes the handoff gate.
+Active completion train: [batch-trains/F17_F30_FAANG_HANDOFF_COMPLETION_TRAIN.md](batch-trains/F17_F30_FAANG_HANDOFF_COMPLETION_TRAIN.md). F17 through F28 are Green by current train evidence. F27.5 Human-Made Codebase Maintainability Audit is the active checkpoint; F29/F30 remain blocked until F27.5 is Green.

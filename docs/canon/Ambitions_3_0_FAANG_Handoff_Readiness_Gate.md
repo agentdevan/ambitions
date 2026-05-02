@@ -232,4 +232,4 @@ Partial cleanup may be useful, but it must not be described as complete handoff 
 
 The current handoff completion path is governed by `docs/codex/batch-trains/F17_F30_FAANG_HANDOFF_COMPLETION_TRAIN.md`.
 
-FAANG handoff remains PARTIAL until F27 explicitly reruns this gate and passes. F28 is conditional repair only if F27 is PARTIAL/FAIL. F29 final handoff packaging is blocked until F27 PASS.
+F27 has passed by current train evidence. F28 is conditional repair only if F27 or F27.5 is PARTIAL/FAIL. F29 final handoff packaging is blocked until both F27 and F27.5 PASS.
