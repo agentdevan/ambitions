@@ -74,12 +74,18 @@ focused validation named by the batch prompt. UI implementation batches later
 must add screenshots/previews, accessibility evidence, copy evidence, and
 focused app tests.
 
+Every batch that touches a top-level surface must also prove the PXOS
+composition rule: no stacked-card primary structure, no top-level detail
+container, no dashboard-like card grid, one dominant visual object or decision,
+3-second glance readability, and a named drill-down destination for secondary
+detail.
+
 ## Stop Conditions
 
 Stop on product invention, new top-level tab, unapproved train start,
 unsupported release/platform/AI claim, app-code change in docs-only work,
 forbidden file drift, missing product decision lock, ME/CS/AOS dependency gap,
-or unclassified validation failure.
+stacked-card top-level composition, or unclassified validation failure.
 
 ## Auto-Continuation And Commit Rules
 

@@ -9,6 +9,28 @@ PXOS makes Ambitions deeper without making it wider. Top-level surfaces stay res
 
 Reject sprawl: new top-level tabs, generic dashboard pages, chat-first AI surfaces, separate inbox tab, generic notes area, calendar clone, analytics tab, habit tracker mode, project-management mode, or duplicate versions of existing surfaces.
 
+## Drill-Down Discipline
+
+Top-level tabs orient the user. They should not carry all available detail.
+
+Move detail behind a tap when it is not required for immediate orientation or
+the next action. This includes proof/history overload, diagnostics, source
+detail, repeated receipt detail, secondary explanations, setup configuration,
+long preference lists, and object history.
+
+Top-level PXOS surfaces must pass:
+
+- Glance test: main state is legible in 3 seconds.
+- One-primary-object test: one dominant visual object or decision is visible.
+- Drill-down discipline test: secondary information has an obvious destination
+  behind Step Detail, Step Session, Goal Detail, Mission Control lanes, Plan
+  detail views, Life Shape drill-downs, Capture routing review, You grouped
+  navigation, receipts/history, proof detail, setup flows, or trust/review
+  surfaces.
+
+Reject future UI concepts that use vertical stacks of generic cards as the
+primary structure for Today, Goals, Capture, Plan, or You.
+
 ## Required Source Stack
 
 - `README.md`

@@ -16,6 +16,51 @@ Surface ownership:
 
 No new top-level tab, no chat-first surface, no generic dashboard, no separate inbox, no generic analytics tab, no standalone habit mode.
 
+## Top-Level Surface Composition Rule
+
+Top-level tabs are visual orientation surfaces. They are not detail containers,
+not proof/history archives, and not vertical piles of generic cards.
+
+Every top-level tab must prioritize:
+
+- visual state
+- spatial hierarchy
+- shape
+- priority
+- rhythm
+- progress
+- pressure
+- context
+- primary action
+- drill-down entry points
+
+Every top-level tab must minimize:
+
+- long text blocks
+- repeated same-size cards
+- dense lists
+- duplicate panels
+- exposed diagnostics
+- proof/history/detail overload
+- dashboard-like card grids
+- settings clutter outside You
+
+Future concepts must pass:
+
+- Glance test: a user understands the main state in 3 seconds without reading
+  every label.
+- One-primary-object test: the dominant visual object or decision is clear.
+- Drill-down discipline test: anything not needed for immediate orientation or
+  the next action moves behind a tap.
+
+Reject future UI concepts that use vertical stacks of generic cards as the
+primary structure.
+
+Details belong in Step Detail, Step Session, Goal Detail, Mission Control
+lanes, Plan detail views, Life Shape drill-downs, Capture routing review, You
+grouped navigation, receipts/history, proof detail, setup flows, and
+trust/review surfaces.
+
 ## Required Source Stack
 
 - `README.md`

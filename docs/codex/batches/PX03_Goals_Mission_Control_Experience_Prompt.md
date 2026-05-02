@@ -66,14 +66,14 @@ PXOS implementation, AOS01, ME01, CS01, REC02, or Product Depth.
 No new top-level tab, chatbot-first direction, generic productivity expansion,
 release-readiness claim, platform-readiness claim, model/runtime work,
 backend/sync/cloud work, dependency changes, workflow changes, production Swift,
-visual redesign implementation, or compatibility seam retirement.
+visual redesign implementation, compatibility seam retirement, stacked-card top-level composition, top-level detail-container UI, or dashboard-like card grids.
 
 ## Required Validation
 
 - `git status --short`
 - `git diff --check`
 - PXOS status and release-claim scans
-- PXOS drift scans
+- PXOS drift scans, including stacked-card and top-level detail-container scans
 - `scripts/run-doc-qa.sh || true`
 - `scripts/batch-train-gate-check.sh || true`
 
@@ -91,7 +91,7 @@ Yellow: doc QA/tooling backlog or an open future decision is classified and does
 not affect current implementation truth.
 
 Red: product direction invented, PXOS marked started/complete, app code touched,
-release/platform claim added, AOS/ME/CS/REC02 started, top-level tab changed, or
+release/platform claim added, AOS/ME/CS/REC02 started, top-level tab changed, stacked-card top-level composition accepted, or
 validation failure unclassified.
 
 ## Stop Conditions

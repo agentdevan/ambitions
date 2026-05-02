@@ -74,6 +74,33 @@ enough to act.
 PXOS may define drill-downs, sheets, panels, review surfaces, setup surfaces,
 and subflows under those five tabs. It must not add a sixth tab.
 
+## Top-Level Surface Composition Law
+
+PXOS explicitly rejects the repeated "stacked cards all the way down" UI
+pattern. Ambitions top-level tabs are visual orientation surfaces, not detail
+containers.
+
+Top-level tabs must prioritize visual state, spatial hierarchy, shape,
+priority, rhythm, progress, pressure, context, primary action, and drill-down
+entry points.
+
+Top-level tabs must minimize long text blocks, repeated same-size cards, dense
+lists, duplicate panels, exposed diagnostics, proof/history/detail overload,
+dashboard-like card grids, and settings clutter outside You.
+
+Each top-level tab must pass three tests:
+
+- Glance test: the main state is understandable in 3 seconds without reading
+  every label.
+- One-primary-object test: the dominant visual object or decision is obvious.
+- Drill-down discipline test: information not needed for immediate orientation
+  or the next action moves behind a tap.
+
+Details belong in Step Detail, Step Session, Goal Detail, Mission Control
+lanes, Plan detail views, Life Shape drill-downs, Capture routing review, You
+grouped navigation, receipts/history, proof detail, setup flows, and
+trust/review surfaces.
+
 ## Child Canon
 
 - `PXOS_Product_Promise_And_Experience_Principles.md`

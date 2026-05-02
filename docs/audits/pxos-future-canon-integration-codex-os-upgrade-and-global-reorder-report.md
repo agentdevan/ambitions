@@ -126,3 +126,32 @@ No app behavior, no Swift refactor, no compatibility retirement, no AOS/ME/CS st
 ## Exact Next Recommended Prompt / Path
 
 Continue REC01/REC02 only if the user explicitly chooses Release Evidence Closure. Start PXOS only if the user says exactly `Start PXOS Future-Canon Train`.
+
+## 2026-05-02 PXOS Top-Level Surface Composition Addendum
+
+Result: PASS.
+
+Scope: docs/protocol/future-canon only.
+
+The PXOS top-level surface composition rule was added as locked future canon.
+PXOS now explicitly rejects repeated "stacked cards all the way down" top-level
+UI composition. Today, Goals, Capture, Plan, and You are visual orientation
+surfaces, not detail containers.
+
+Updated controls:
+
+- Parent PXOS index now owns the composition law.
+- Surface hierarchy now requires visual state, spatial hierarchy, shape,
+  priority, rhythm, progress, pressure, context, primary action, and drill-down
+  entry points.
+- Visual system now rejects same-size vertical card stacks as the primary
+  top-level structure.
+- Product depth rules now require the glance test, one-primary-object test, and
+  drill-down discipline test.
+- PXOS gate matrix now includes a Top-Level Composition Gate.
+- PXOS prompt standard and all PX future prompts now reject stacked-card
+  top-level composition and require drift scans for it.
+- PXOS product decision ledger now records the rule as locked by user.
+
+No app behavior, Swift, workflows, dependencies, PXOS implementation, REC02,
+AOS, ME, or CS was started.

@@ -16,6 +16,7 @@ Every PXOS future prompt must be self-contained and executable.
 - Allowed files
 - Forbidden files
 - Exact surface ownership
+- Top-level surface composition tests, if a top-level tab is touched
 - Relationship to Ambitions 3.0
 - Relationship to AmbitionsOS
 - Relationship to ME
@@ -38,3 +39,8 @@ Every PXOS future prompt must be self-contained and executable.
 Reject prompts that only say follow canon, validate, update as needed, preserve
 behavior, selected by manifest, improve design, make it premium, or add polish
 without concrete owners, files, gates, evidence, and stop conditions.
+
+For top-level surface work, reject prompts that propose a vertical stack of
+generic cards as the main structure. The prompt must require a glance test,
+one-primary-object test, and drill-down discipline test, and it must name where
+secondary detail moves behind a tap.

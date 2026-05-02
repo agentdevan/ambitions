@@ -10,13 +10,16 @@ language, calendar-clone language, chatbot-wrapper language, AI overclaiming,
 App Store/TestFlight overclaiming, production-ready overclaiming, physical-device
 overclaiming, hidden automation language, shame/failure language, unsupported
 platform integration, unsupported personalization/memory, next-best-move copy,
-generic dashboard terminology, enterprise OKR drift, and command-center sprawl.
+generic dashboard terminology, enterprise OKR drift, command-center sprawl,
+stacked-card top-level composition, repeated same-size card stacks, dense
+top-level lists, and top-level detail-container drift.
 
 ## Advisory Scan
 
 ```bash
 grep -R "Your best next move\|next best move\|failed\|failure\|streak broken\|AI magic\|fully automated" docs/canon docs/codex .codex || true
 grep -R "new top-level tab\|sixth tab\|chatbot\|dashboard\|habit tracker\|calendar clone" docs/canon docs/codex .codex || true
+grep -R "stacked cards\|same-size cards\|card grid\|detail container\|dense list" docs/canon docs/codex .codex || true
 ```
 
 Hits are allowed in forbidden-language lists, negative tests, risk registers,

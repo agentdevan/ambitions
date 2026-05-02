@@ -11,6 +11,25 @@ Use compact safe-area-aware contextual headers, premium grouped panels, connecte
 
 Avoid giant redundant headers by default, cluttered dashboards, loud gradients everywhere, cartoon visuals, excessive color, generic cards everywhere, fake AI glow, unnecessary SaaS charts, top-level visual noise, dense control panels, and desktop dashboard patterns.
 
+## Composition Bar
+
+The repeated "stacked cards all the way down" pattern is not a PXOS visual
+system. Cards may be used for object summaries, receipts, rows, and drill-down
+entries, but a top-level surface must not become a same-size vertical card
+stack.
+
+Top-level visual structure should be composed from hierarchy and shape:
+
+- a dominant primary object or decision
+- connected rails, lanes, timelines, or maps where they clarify state
+- compact contextual headers
+- grouped controls only where the surface needs them
+- progressive disclosure for proof, diagnostics, history, and secondary detail
+
+Use cards sparingly and with varied purpose. Reject top-level concepts where
+the screen is understandable only by reading a long sequence of equal-weight
+panels.
+
 ## Required Source Stack
 
 - `README.md`
