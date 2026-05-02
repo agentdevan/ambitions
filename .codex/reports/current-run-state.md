@@ -1,9 +1,9 @@
 # Current Run State
 
 Active train: Release Evidence Closure
-Active batch: none; REC02 complete and REC03 next eligible
+Active batch: REC03 Validation Log Ledger Closure
 Current out-of-train task: none
-Scope: REC02 docs/evidence proof planning complete; REC03 dry-run pending
+Scope: REC03 docs/evidence validation-log ledger closure
 Date: 2026-05-02
 Branch: main
 
@@ -19,15 +19,15 @@ Branch: main
 - AmbitionsOS: future canon only, not current app implementation truth.
 - PXOS: future user-facing product experience canon only; PXOS train queued/blocked and not started.
 - AOS/ME/CS/Product Depth: queued/blocked and not started.
-- Release Evidence Closure: REC01 inventory is active baseline evidence; REC02 proof plan complete.
-- REC03-REC06: queued/blocked and not started.
+- Release Evidence Closure: REC01 inventory is active baseline evidence; REC02 proof plan complete; REC03 validation-log ledger complete pending commit.
+- REC04-REC06: queued/blocked and not started.
 - Current user prompt preauthorizes Ambitions 4.0 global sequence continuation
   through routine train transitions, but not proof, validation, Red, release,
   platform, legal/privacy, physical-device, public accessibility, TestFlight,
   App Store Connect, signed archive, visual-approval, or final release gates.
 - PX01-PX20: queued/blocked and not started; batch-specific prompt hardening completed.
 - Product Depth: formalized as a queued/blocked PD01-PD18 train; not started.
-- Global order: 95 formal batches at program start; 94 remain after REC02.
+- Global order: 95 formal batches at program start; 93 remain after REC03.
 
 ## Boundaries
 
@@ -40,8 +40,8 @@ Branch: main
 
 ## Current Validation Plan
 
-Run git status, branch/HEAD checks, diff check, doc QA advisory, batch-train gate advisory, release-claim scan, and changed-file boundary check. App build/test is skipped because app code is forbidden for REC02.
+Run git status, branch/HEAD checks, diff check, output-log listing, doc QA advisory, batch-train gate advisory, release-claim scan, and changed-file boundary check. App build/test is skipped because app code is forbidden for REC03.
 
 ## Current Validation Result
 
-PASS WITH YELLOW. `git diff --check` passed; changed files stayed within `docs/**` and `.codex/**`; release-claim scan hits are forbidden-claim lists, negative examples, non-claims, or scan commands; `scripts/run-doc-qa.sh || true` remains Yellow from the existing markdown/deprecated-language backlog with lychee PASS; `scripts/batch-train-gate-check.sh || true` is advisory because expected REC02 docs changes are present before commit. App build/test was skipped because REC02 forbids app code and changes only release-proof planning docs.
+PASS WITH YELLOW pending commit. REC03 creates a validation log ledger and keeps human-only proof gaps explicit. `git diff --check`, doc QA, gate check, claim scan, and boundary results are recorded in the REC03 report. App build/test is skipped because REC03 forbids app code and changes only evidence docs.
