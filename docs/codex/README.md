@@ -72,7 +72,7 @@ The FAANG-team operating upgrade is indexed from:
 
 Use `docs/codex/AMBITIONS_3_0_BATCH_TRAIN_ORCHESTRATOR.md` plus the artifacts in this directory for gated Ambitions 3.0 batch trains. F03.5, F13.5, and F16.5 are architecture checkpoint prompts; do not skip them when their triggers fire.
 
-Completed historical train: [batch-trains/F17_F30_FAANG_HANDOFF_COMPLETION_TRAIN.md](batch-trains/F17_F30_FAANG_HANDOFF_COMPLETION_TRAIN.md). F17 through F30 are Green by current train evidence. F27 remains PASS after the F28 repair/rebaseline, F27.5 completed with no critical maintainability blocker, F29 created the final engineer handoff package, and F30 created the Beyond 3.0 continuation plan and final closeout. Beyond 3.0 is now represented operationally by the Ambitions 4.0 Execution Program. Release Evidence Closure is complete through REC06; PX01-PX07 are complete as future canon, PX08 is the next global batch pending dry-run selection, and PXOS, ME, CS, Product Depth, and AOS remain future/queued until selected and proven by evidence.
+Completed historical train: [batch-trains/F17_F30_FAANG_HANDOFF_COMPLETION_TRAIN.md](batch-trains/F17_F30_FAANG_HANDOFF_COMPLETION_TRAIN.md). F17 through F30 are Green by current train evidence. F27 remains PASS after the F28 repair/rebaseline, F27.5 completed with no critical maintainability blocker, F29 created the final engineer handoff package, and F30 created the Beyond 3.0 continuation plan and final closeout. Beyond 3.0 is now represented operationally by the Ambitions 4.0 Execution Program. Release Evidence Closure is complete through REC06; PX01-PX08 are complete as future canon, PX09 is the next global batch pending dry-run selection, and PXOS, ME, CS, Product Depth, and AOS remain future/queued until selected and proven by evidence.
 
 ## Ambitions 4.0 Global Batch Controls
 
@@ -108,6 +108,6 @@ These trains are queued/blocked in Ambitions 4.0 and must not run automatically 
 - [PXOS Batch Prompt Standard](PXOS_BATCH_PROMPT_STANDARD.md)
 - [PX01-PX20 Train](batch-trains/PX01_PX20_PRODUCT_EXPERIENCE_OS_TRAIN.md)
 
-PXOS is future user-facing product experience canon. PX01-PX07 are complete as
+PXOS is future user-facing product experience canon. PX01-PX08 are complete as
 future canon; PXOS implementation is not started. Later PXOS batches start only
 through global dry-run and valid approval gates.
