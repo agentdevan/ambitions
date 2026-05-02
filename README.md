@@ -34,10 +34,10 @@ Older docs are supporting context unless an active 3.0 doc explicitly keeps them
 
 Ambitions 3.0 remains the completed baseline after F30. Ambitions 4.0 currently
 means the repo has a 95-batch global execution order; REC02-REC06 and
-PX01-PX18 are complete, PX19 is the next global batch pending dry-run
-selection, and PX20, ME01-ME12, CS01-CS10, PD01-PD18, and AOS01-AOS30
+PX01-PX19 are complete, PX20 is the next global batch pending dry-run
+selection, and ME01-ME12, CS01-CS10, PD01-PD18, and AOS01-AOS30
 remain queued/blocked. Future canon remains future canon until implemented and
-proven. After PX18, 72 formal batches remain.
+proven. After PX19, 71 formal batches remain.
 
 ---
 
@@ -222,10 +222,10 @@ after the F28 repair/rebaseline, F27.5 is complete with no critical
 maintainability blocker, F29 created the final engineer handoff package, and F30
 created the Beyond 3.0 continuation plan and final train closeout. Beyond 3.0 is
 now represented operationally by the Ambitions 4.0 Execution Program. Release
-Evidence Closure is complete through REC06. PX01-PX18 are complete as future
-PXOS canon; PX19, ME, CS, Product Depth, and AOS remain queued/blocked until
+Evidence Closure is complete through REC06. PX01-PX19 are complete as future
+PXOS canon/handoff; PX20, ME, CS, Product Depth, and AOS remain queued/blocked until
 their gates allow execution.
 
 ## Product Experience OS Future Canon
 
-[Ambitions Product Experience OS](docs/canon/Ambitions_Product_Experience_OS_Index.md), abbreviated PXOS, is future canon for the user-facing product experience in the Ambitions 4.0 Execution Program. PXOS sits beside AmbitionsOS: AmbitionsOS owns future internal intelligence/runtime architecture; PXOS owns future screens, surfaces, hierarchy, copy, interaction, recovery, trust, visual design, accessibility, and release-safe product messaging. PX01-PX18 are complete as future canon; PXOS is not current app implementation.
+[Ambitions Product Experience OS](docs/canon/Ambitions_Product_Experience_OS_Index.md), abbreviated PXOS, is future canon for the user-facing product experience in the Ambitions 4.0 Execution Program. PXOS sits beside AmbitionsOS: AmbitionsOS owns future internal intelligence/runtime architecture; PXOS owns future screens, surfaces, hierarchy, copy, interaction, recovery, trust, visual design, accessibility, and release-safe product messaging. PX01-PX19 are complete as future canon/handoff evidence; PXOS is not current app implementation.
