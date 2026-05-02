@@ -2,7 +2,7 @@
 
 <!-- markdownlint-disable MD013 -->
 
-Status: Ambitions 4.0 dependency graph; active through PX20 future-canon evidence
+Status: Ambitions 4.0 dependency graph; active through ME01 maintainability audit evidence
 Date: 2026-05-02
 
 ## Phase Map
@@ -46,7 +46,7 @@ Ambitions 4.0 is the active post-3.0 execution program, not a shipped product ve
 - PX20 is complete as PXOS Beyond Roadmap future-canon work.
 - PX14 depends on PX02-PX13.
 - PX18 depends on PX01-PX17 and recurs before major implementation lanes.
-- ME01 depends on explicit approval phrase `Start ME Train`.
+- ME01 is complete as maintainability audit evidence under current global preauthorization.
 - ME02-ME07 depend on ME01, ME08 standards where relevant, ME10 architecture gate, and behavior-preservation tests.
 - CS01 depends on explicit approval phrase `Start CS Train`.
 - CS02-CS06 depend on CS01 and the relevant CS07/CS08 compatibility proof where route/raw/external/import/export/persistence risk exists.
