@@ -38,12 +38,13 @@ No product behavior expansion. No visual redesign. No compatibility seam retired
 
 ## Validation Result
 
-CS02A is PASS WITH YELLOW pending commit/push evidence:
+CS02A is PASS WITH YELLOW with commit/push evidence:
 
 - CS02A touched only docs/status files and did not edit tests or app code.
 - CS02A created Profile/You seam inventory, compatibility contract ledger, and accessibility identifier ledger.
 - CS02A repaired the CS02 prompt into CS02A/CS02B/CS02C internal staging without changing the formal 113-batch global order.
 - CS02A does not retire the Profile seam and does not change route/raw/default/accessibility behavior.
+- Commit evidence: `3ce24112`, report repair: `80780e3b`.
 
 Previous CS08 evidence remains:
 

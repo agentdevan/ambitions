@@ -115,4 +115,4 @@ CS02B may start only after dry-run selection says `Execution allowed: YES`.
 
 ## Commit SHA
 
-CS02A commit: `3ce24112`.
+CS02A commit: `3ce24112`; report SHA repair: `80780e3b`.

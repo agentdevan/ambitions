@@ -35,7 +35,7 @@ Branch: main
 - CS08: complete as focused import/export/persistence compatibility proof; no seam retired and no app code edited. Commit evidence: `d2c328d6`, report SHA repair: `9144add3`.
 - CS train: active with CS02 internally staged; CS02A docs/protocol repair complete and CS02B next only after dry-run selection says `Execution allowed: YES`.
 - SI/Product Depth/AOS: queued/blocked and not started.
-- Global order: 113 formal batches after SI insertion; 74 remain after CS08 commit.
+- Global order: 113 formal batches after SI insertion; 74 formal batches remain because CS02A is an internal stage of formal CS02, not a new formal batch.
 
 ## Boundaries
 
@@ -48,7 +48,7 @@ Branch: main
 
 ## Current Validation Result
 
-CS02A validation is PASS WITH YELLOW with docs/protocol compatibility seam repair evidence pending commit/push.
+CS02A validation is PASS WITH YELLOW with docs/protocol compatibility seam repair evidence committed and pushed (`3ce24112`; report repair `80780e3b`).
 
 Verified:
 
