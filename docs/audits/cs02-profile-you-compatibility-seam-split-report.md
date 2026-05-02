@@ -1,6 +1,6 @@
 # CS02 Profile-To-You Compatibility Seam Split Report
 
-Status: CS02A complete pending commit SHA.
+Status: CS02A complete with commit evidence.
 Date: 2026-05-02
 
 ## Batch
@@ -115,4 +115,4 @@ CS02B may start only after dry-run selection says `Execution allowed: YES`.
 
 ## Commit SHA
 
-Pending CS02A commit.
+CS02A commit: `3ce24112`.
