@@ -3,9 +3,9 @@
 <!-- markdownlint-disable MD013 -->
 
 Active train: ME maintainability extraction train selected by global sequence
-Active batch: ME03 TodayFeatureService Extraction closeout
+Active batch: ME04 TodayPanels Extraction dry-run pending
 Current out-of-train task: none
-Scope: ME01 Maintainability Baseline And Ownership Map complete; ME08 Shared Projector State Helper Standards complete; ME10 Architecture Scan Gate complete; ME02 GoalsFeatureService extraction complete; ME03 TodayFeatureService extraction complete pending commit; PXOS implementation not started; CS/Signature Interface/Product Depth/AmbitionsOS trains not started
+Scope: ME01 Maintainability Baseline And Ownership Map complete; ME08 Shared Projector State Helper Standards complete; ME10 Architecture Scan Gate complete; ME02 GoalsFeatureService extraction complete; ME03 TodayFeatureService extraction complete and pushed; PXOS implementation not started; CS/Signature Interface/Product Depth/AmbitionsOS trains not started
 Date: 2026-05-02
 Branch: main
 
@@ -22,7 +22,7 @@ Branch: main
 - ME08: complete as audit-only shared projector/state/helper standards; no Swift files changed and no extraction performed.
 - ME10: complete as audit-only recurring architecture gate; no Swift files changed and no extraction performed.
 - ME02: complete as behavior-preserving Goals service extraction.
-- ME03: complete as behavior-preserving Today service extraction pending commit/push.
+- ME03: complete as behavior-preserving Today service extraction with commit/push evidence.
 - ME04-ME07, ME09, ME11-ME12: queued/blocked and not started.
 - CS/SI/Product Depth/AOS: queued/blocked and not started.
 - Global order: 113 formal batches after SI insertion; 83 remain after ME03 commit.
@@ -57,4 +57,4 @@ Not verified:
 
 ## Next Eligible Batch
 
-After ME03 commit/push and post-commit drift checks, the next global batch is ME04 TodayPanels Extraction only if dry-run selection says `Execution allowed: YES`.
+The next global batch is ME04 TodayPanels Extraction only if dry-run selection says `Execution allowed: YES`.
