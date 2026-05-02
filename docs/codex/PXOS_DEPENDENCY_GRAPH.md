@@ -13,8 +13,8 @@ Date: 2026-05-02
 - PX08 is complete as Trust Proof Receipts future-canon work.
 - PX09 is complete as Copy Language Explanation future-canon work.
 - PX10 is complete as Visual Interaction future-canon work.
-- PX11 depends on PX01, PX09, PX10, PX05, PX06, and REC claim boundaries.
-- PX12 depends on PX01 and all surface prompts that touch UI.
+- PX11 is complete as Onboarding Setup future-canon work.
+- PX12 depends on PX01, PX09, PX10, PX11, and all surface prompts that touch UI.
 - PX13 depends on PX01 and all surface canon.
 - PX14 depends on PX01-PX13.
 - PX15 depends on PX02-PX08 and PX14.

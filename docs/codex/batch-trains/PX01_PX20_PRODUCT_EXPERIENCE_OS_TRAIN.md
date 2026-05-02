@@ -1,7 +1,7 @@
 # PX01-PX20 Product Experience OS Train
 <!-- markdownlint-disable MD013 -->
 
-Status: PXOS future-canon train active through PX10 only; PXOS implementation not started.
+Status: PXOS future-canon train active through PX11 only; PXOS implementation not started.
 Train type: queued future-canon and later implementation-readiness train
 Date: 2026-05-02
 
@@ -60,7 +60,7 @@ ordering, REC closure, F30 being complete, or mentioning PXOS in a prompt.
 - PX08: Trust Proof Receipts Experience. Owner: trust/proof/receipts. Boundary: Trust, proof, receipts experience canon only. Status: complete after PX08 commit.
 - PX09: Copy Language Explanation System. Owner: copy/explanation. Boundary: Copy and explanation canon only. Status: complete after PX09 commit.
 - PX10: Visual Interaction System. Owner: visual/interaction. Boundary: Visual interaction canon only. Status: complete after PX10 commit.
-- PX11: Onboarding Setup Experience. Owner: onboarding/setup. Boundary: Onboarding and setup canon only.
+- PX11: Onboarding Setup Experience. Owner: onboarding/setup. Boundary: Onboarding and setup canon only. Status: complete after PX11 commit.
 - PX12: Accessibility Cognitive Load Emotional Safety. Owner: accessibility/cognitive load. Boundary: Accessibility and emotional safety canon only.
 - PX13: Empty Edge Degraded States. Owner: empty/edge/degraded. Boundary: Empty/edge/degraded state canon only.
 - PX14: Product Depth Drilldown Architecture. Owner: drill-down/depth. Boundary: Depth and drilldown architecture canon only.
