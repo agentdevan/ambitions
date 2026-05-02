@@ -1,9 +1,9 @@
 # Current Run State
 
 Active train: Release Evidence Closure
-Active batch: REC01 Release Evidence Truth Inventory
-Current out-of-train task: Ambitions 4.0 Global Batch Sequence Readiness Review
-Scope: docs/protocol/status-truth/planning and global-continuation protocol repair only
+Active batch: REC02 Human Operator Release Proof Plan
+Current out-of-train task: none
+Scope: REC02 docs/evidence proof planning only
 Date: 2026-05-02
 Branch: main
 
@@ -19,15 +19,15 @@ Branch: main
 - AmbitionsOS: future canon only, not current app implementation truth.
 - PXOS: future user-facing product experience canon only; PXOS train queued/blocked and not started.
 - AOS/ME/CS/Product Depth: queued/blocked and not started.
-- Release Evidence Closure: active at REC01; REC02 not started.
-- REC02-REC06: queued/blocked and not started; standalone prompt hardening completed.
+- Release Evidence Closure: REC01 inventory is active baseline evidence; REC02 proof plan complete.
+- REC03-REC06: queued/blocked and not started.
 - Current user prompt preauthorizes Ambitions 4.0 global sequence continuation
   through routine train transitions, but not proof, validation, Red, release,
   platform, legal/privacy, physical-device, public accessibility, TestFlight,
   App Store Connect, signed archive, visual-approval, or final release gates.
 - PX01-PX20: queued/blocked and not started; batch-specific prompt hardening completed.
 - Product Depth: formalized as a queued/blocked PD01-PD18 train; not started.
-- Global order: 95 formal remaining batches.
+- Global order: 95 formal batches at program start; 94 remain after REC02.
 
 ## Boundaries
 
@@ -36,12 +36,12 @@ Branch: main
 - No compatibility seam retired.
 - No dependencies added.
 - No workflow changes.
-- No release, App Store, TestFlight, final RC, physical-device, public accessibility, signed archive, App Store Connect, external-platform, AmbitionsOS implementation, or PXOS implementation claim added.
+- No release, App Store, TestFlight, final RC, physical-device, public accessibility, signed archive, App Store Connect, external-platform, AmbitionsOS implementation, Product Depth implementation, or PXOS implementation claim added.
 
 ## Current Validation Plan
 
-Run git status, diff check, formal batch counts, Ambitions 4.0 terminology scans, Beyond 3.0 reconciliation scans, started/completed status scans, release/platform/PXOS/AOS/PD implementation claim scans, global-order table scan, doc QA advisory, batch-train gate advisory, and changed-file boundary check. App build/test is skipped because app code is forbidden for this pass.
+Run git status, branch/HEAD checks, diff check, doc QA advisory, batch-train gate advisory, release-claim scan, and changed-file boundary check. App build/test is skipped because app code is forbidden for REC02.
 
 ## Current Validation Result
 
-PASS WITH YELLOW. `git diff --check` passed; formal prompt counts are REC 6, PX 20, ME 12, CS 10, PD 18, and AOS 30; the global order still exposes the `Global | Batch` table and the 95 formal remaining queued batches. Phase 1 found and repaired a continuation-protocol mismatch so `Run Global Batch Sequence Until Blocked` can preauthorize routine Ambitions 4.0 train transitions without weakening proof or validation gates. Remaining Yellow is advisory: doc QA and batch-train gate checks may surface the broader pre-existing markdown/deprecated-language backlog and expected docs-only dirty working tree during validation.
+PASS WITH YELLOW. `git diff --check` passed; changed files stayed within `docs/**` and `.codex/**`; release-claim scan hits are forbidden-claim lists, negative examples, non-claims, or scan commands; `scripts/run-doc-qa.sh || true` remains Yellow from the existing markdown/deprecated-language backlog with lychee PASS; `scripts/batch-train-gate-check.sh || true` is advisory because expected REC02 docs changes are present before commit. App build/test was skipped because REC02 forbids app code and changes only release-proof planning docs.

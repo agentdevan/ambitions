@@ -26,14 +26,16 @@ Ambitions 4.0 is the active post-3.0 execution program, not a shipped product ve
 
 Current 4.0 status:
 
-- Active: REC01 Release Evidence Truth Inventory.
-- Queued / Blocked: REC02-REC06 pending `Continue Release Evidence Closure`.
+- Completed: REC02 Human Operator Release Proof Plan.
+- Active evidence baseline: REC01 Release Evidence Truth Inventory.
+- Next queued / blocked: REC03-REC06 in Release Evidence Closure.
 - Queued / Blocked: PX01-PX20 pending `Start PXOS Future-Canon Train`.
 - Queued / Blocked: ME01-ME12 pending `Start ME Train`.
 - Queued / Blocked: CS01-CS10 pending `Start CS Train`.
 - Queued / Blocked: PD01-PD18 pending `Start Product Depth Train` plus PXOS/ME/CS/AOS-if-needed gates.
 - Queued / Blocked: AOS01-AOS30 pending `Start AOS Train`.
-- Total formal remaining batches in the 4.0 global order: 95.
+- Total formal remaining batches in the 4.0 global order at program start: 95.
+- Remaining after REC02: 94.
 
 Use [../canon/Ambitions_4_0_Execution_Program.md](../canon/Ambitions_4_0_Execution_Program.md) and [GLOBAL_FUTURE_BATCH_EXECUTION_ORDER.md](GLOBAL_FUTURE_BATCH_EXECUTION_ORDER.md) for current post-3.0 status semantics.
 
