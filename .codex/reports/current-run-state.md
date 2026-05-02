@@ -5,7 +5,7 @@
 Active train: CS compatibility seam retirement train selected next by global sequence
 Active batch: CS01 Compatibility Audit dry-run pending
 Current out-of-train task: none
-Scope: ME01-ME12 maintainability train complete pending ME12 commit/push evidence; ME11 repair not triggered; PXOS implementation not started; CS01 selected next by global order; Signature Interface/Product Depth/AmbitionsOS trains not started
+Scope: ME01-ME12 maintainability train complete with commit evidence; ME11 repair not triggered; PXOS implementation not started; CS01 selected next by global order; Signature Interface/Product Depth/AmbitionsOS trains not started
 Date: 2026-05-02
 Branch: main
 
@@ -45,7 +45,7 @@ Branch: main
 
 ## Current Validation Result
 
-ME12 validation is PASS WITH YELLOW before commit/push.
+ME12 validation is PASS WITH YELLOW with commit evidence.
 
 Verified:
 
