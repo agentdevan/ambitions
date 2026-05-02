@@ -6,7 +6,7 @@ Date: 2026-05-02
 Phase: Signature Interface Codex OS quality-gate upgrade
 Result: PASS WITH YELLOW
 Validation strength: Adequate
-Commit SHA: Pending commit
+Commit SHA: `a2ee3758e8ddf48b4634be4a2158a47d97e26889`
 
 ## Scope Completed
 
