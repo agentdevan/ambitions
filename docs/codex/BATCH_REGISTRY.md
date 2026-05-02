@@ -53,14 +53,15 @@ Current 4.0 status:
 - Completed: PX20 PXOS Beyond Roadmap.
 - Completed: ME01 Maintainability Baseline And Ownership Map.
 - Completed: ME08 Shared Projector State Helper Standards.
+- Completed: ME10 Architecture Scan Gate.
 - Active evidence baseline: REC01 Release Evidence Truth Inventory.
-- Next queued / blocked: ME10 Architecture Scan Gate pending global dry-run selection.
-- Queued / Blocked: ME10-ME12 pending current global preauthorization or `Start ME Train`.
+- Next queued / blocked: ME02 GoalsFeatureService Extraction pending global dry-run selection.
+- Queued / Blocked: ME02-ME07, ME09, ME11-ME12 pending current global preauthorization or `Start ME Train`.
 - Queued / Blocked: CS01-CS10 pending `Start CS Train`.
 - Queued / Blocked: PD01-PD18 pending `Start Product Depth Train` plus PXOS/ME/CS/AOS-if-needed gates.
 - Queued / Blocked: AOS01-AOS30 pending `Start AOS Train`.
 - Total formal remaining batches in the 4.0 global order at program start: 95.
-- Remaining after ME08: 68.
+- Remaining after ME10: 67.
 
 Use [../canon/Ambitions_4_0_Execution_Program.md](../canon/Ambitions_4_0_Execution_Program.md) and [GLOBAL_FUTURE_BATCH_EXECUTION_ORDER.md](GLOBAL_FUTURE_BATCH_EXECUTION_ORDER.md) for current post-3.0 status semantics.
 
@@ -395,7 +396,8 @@ These batches are complete for planning purposes. They remain as historical cont
 | AOS01-AOS30 AmbitionsOS Local Intelligence Train | Queued / Blocked | Requires `Start AOS Train` and Green predecessor gates. |
 | ME01 Maintainability Baseline And Ownership Map | Completed / audit-only | Created the Lane 2 ownership map and risk baseline. No extraction run. |
 | ME08 Shared Projector State Helper Standards | Completed / audit-only | Created shared projector/state/helper standards and corrected the stale Plan projector assumption. No extraction run. |
-| ME10-ME12 Maintainability Extraction Train | Queued / Blocked | Requires current global preauthorization or `Start ME Train` and Green predecessor gates. |
+| ME10 Architecture Scan Gate | Completed / audit-only | Converted the architecture scan into a recurring ME gate. No extraction run. |
+| ME02-ME07, ME09, ME11-ME12 Maintainability Extraction Train | Queued / Blocked | Requires current global preauthorization or `Start ME Train` and Green predecessor gates. |
 | CS01-CS10 Compatibility Seam Retirement Train | Queued / Blocked | Requires `Start CS Train` and Green predecessor gates. |
 | PD01-PD18 Product Depth Train | Queued / Blocked | Formal Product Depth train. Requires exact approval phrase `Start Product Depth Train`, PXOS Product Depth gates, relevant ME/CS gates, and AOS blockers when runtime logic is touched. |
 | PXOS Future-Canon Integration | Completed / docs-only | Added Product Experience OS future canon and Codex OS controls. It does not start PXOS implementation or the PXOS train. |
@@ -409,7 +411,8 @@ These batches are complete for planning purposes. They remain as historical cont
 | AOS01-AOS30 AmbitionsOS Local Intelligence Train | Queued / Blocked | Requires `Start AOS Train` and Green predecessor gates. |
 | ME01 Maintainability Baseline And Ownership Map | Completed / audit-only | Planning baseline complete; no extraction run in this pass. |
 | ME08 Shared Projector State Helper Standards | Completed / audit-only | Standards baseline complete; no extraction run in this pass. |
-| ME10-ME12 Maintainability Extraction Train | Queued / Blocked | Planning/extraction sequence remains queued; no extraction run in this pass. |
+| ME10 Architecture Scan Gate | Completed / audit-only | Recurring architecture gate complete; no extraction run in this pass. |
+| ME02-ME07, ME09, ME11-ME12 Maintainability Extraction Train | Queued / Blocked | Planning/extraction sequence remains queued; no extraction run in this pass. |
 | CS01-CS10 Compatibility Seam Retirement Train | Queued / Blocked | Planning only; no seam retired in this pass. |
 | Product Experience OS / PXOS | Queued / Blocked future canon | User-facing future experience canon in Ambitions 4.0. Does not claim implementation. |
 | Product Depth / PD01-PD18 | Queued / Blocked | Deepens Today, Goals, Capture, Plan, and You through drill-downs and proof/review/setup depth. Does not add top-level destinations or claim implementation. |

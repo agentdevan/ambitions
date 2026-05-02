@@ -27,8 +27,8 @@ or perform extraction.
 | `Native/Ambitions/Features/Plan/PlanScreen.swift` | ME07 | 1,978 | `EXTRACTION_REQUIRED` |
 
 ME08 completed shared projector/state/helper standards on 2026-05-02 before
-repeated extraction. ME10 owns the recurring architecture scan gate before large
-SwiftUI or service expansion.
+repeated extraction. ME10 completed the recurring architecture scan gate on
+2026-05-02 before large SwiftUI or service expansion.
 
 ## ME08 Shared Standards
 
@@ -54,6 +54,20 @@ SwiftUI or service expansion.
 ## Rules
 
 Extract projector/state/helper seams before adding behavior. Protect behavior with focused product-contract tests. Keep visible copy, route compatibility, accessibility identifiers, public behavior, and raw values stable. Avoid broad cleanup, visual redesign, product expansion, dependency changes, workflow changes, and unrelated naming cleanup.
+
+## ME10 Architecture Gate
+
+- Rerun `scripts/swiftui-architecture-scan.sh || true` before ME extraction
+  batches and before broad UI/service growth.
+- Files reported as `EXTRACTION_REQUIRED` cannot receive new behavior unless
+  the current batch owns extraction or records a safe, validated exception.
+- Files reported as `EXTRACTION_RECOMMENDED` require responsibility review
+  before broad additions.
+- Files reported as `RESPONSIBILITY_REVIEW` require named ownership before
+  growing the file.
+- New or materially larger Swift files must record before/after line counts,
+  owner, responsibility, test lane, and rollback path in the batch report.
+- ME02-ME07 remain the owners for the six Lane 2 extraction files.
 
 ## Evidence Required
 

@@ -2,7 +2,7 @@
 
 <!-- markdownlint-disable MD013 -->
 
-Status: Ambitions 4.0 dependency graph; active through ME08 shared standards evidence
+Status: Ambitions 4.0 dependency graph; active through ME10 architecture gate evidence
 Date: 2026-05-02
 
 ## Phase Map
@@ -48,6 +48,7 @@ Ambitions 4.0 is the active post-3.0 execution program, not a shipped product ve
 - PX18 depends on PX01-PX17 and recurs before major implementation lanes.
 - ME01 is complete as maintainability audit evidence under current global preauthorization.
 - ME08 is complete as shared projector/state/helper standards evidence under current global preauthorization.
+- ME10 is complete as recurring architecture gate evidence under current global preauthorization.
 - ME02-ME07 depend on ME01, ME08 standards, ME10 architecture gate, and behavior-preservation tests.
 - CS01 depends on explicit approval phrase `Start CS Train`.
 - CS02-CS06 depend on CS01 and the relevant CS07/CS08 compatibility proof where route/raw/external/import/export/persistence risk exists.

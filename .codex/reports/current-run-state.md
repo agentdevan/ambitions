@@ -1,9 +1,9 @@
 # Current Run State
 
 Active train: ME maintainability extraction train selected by global sequence
-Active batch: none; ME08 complete and ME10 next eligible pending dry-run selection
+Active batch: none; ME10 complete and ME02 next eligible pending dry-run selection
 Current out-of-train task: none
-Scope: ME01 Maintainability Baseline And Ownership Map complete; ME08 Shared Projector State Helper Standards complete; no extraction performed; PXOS implementation not started; CS/Product Depth/AmbitionsOS trains not started
+Scope: ME01 Maintainability Baseline And Ownership Map complete; ME08 Shared Projector State Helper Standards complete; ME10 Architecture Scan Gate complete; no extraction performed; PXOS implementation not started; CS/Product Depth/AmbitionsOS trains not started
 Date: 2026-05-02
 Branch: main
 
@@ -22,11 +22,12 @@ Branch: main
 - PX01-PX20: complete as future-canon docs/roadmap work; PXOS implementation not started.
 - ME01: complete as audit-only maintainability baseline and ownership map; no Swift files changed and no extraction performed.
 - ME08: complete as audit-only shared projector/state/helper standards; no Swift files changed and no extraction performed.
+- ME10: complete as audit-only recurring architecture gate; no Swift files changed and no extraction performed.
 - Current user prompt preauthorizes Ambitions 4.0 global sequence continuation through routine train transitions, but not proof, validation, Red, release, platform, legal/privacy, physical-device, public accessibility, TestFlight, App Store Connect, signed archive, visual-approval, or final release gates.
-- ME10-ME12: queued/blocked and not started.
+- ME02-ME07, ME09, ME11-ME12: queued/blocked and not started.
 - CS/Product Depth/AOS: queued/blocked and not started.
 - Product Depth: formalized as a queued/blocked PD01-PD18 train; not started.
-- Global order: 95 formal batches at program start; 68 remain after ME08.
+- Global order: 95 formal batches at program start; 67 remain after ME10.
 
 ## Boundaries
 
@@ -39,19 +40,19 @@ Branch: main
 
 ## Current Validation Plan
 
-Run git status, branch/HEAD checks, diff check, read-only projector/state/helper seam discovery, Plan seam correction scan, architecture scan advisory, release-claim/status scans, doc QA advisory, batch-train gate advisory, focused markdownlint, and changed-file boundary check. App build/test is skipped because app code is forbidden for ME08.
+Run git status, branch/HEAD checks, diff check, read-only architecture scan and Lane 2 file-size snapshot, sensitive-term scan, release-claim/status scans, doc QA advisory, batch-train gate advisory, focused markdownlint, and changed-file boundary check. App build/test is skipped because app code is forbidden for ME10.
 
 ## Current Validation Result
 
-ME08 validation is PASS WITH YELLOW before commit.
+ME10 validation is PASS WITH YELLOW before commit.
 
 Verified:
 
-- `git diff --check` will run before ME08 commit.
-- Read-only seam discovery found Today projector/state/helper examples, shared UI primitive seams, and current Plan seams.
-- `PlanLifeSuiteProjector.swift` does not exist; ME08 standards correct the assumption and name `PlanLifeSuiteState.swift`, `PlanReflowDecisionState.swift`, and `PlanScreenContractSnapshot.swift`.
+- `git diff --check` will run before ME10 commit.
+- Read-only architecture scan found existing `EXTRACTION_REQUIRED`, `EXTRACTION_RECOMMENDED`, and `RESPONSIBILITY_REVIEW` findings.
+- Lane 2 owner files remain unchanged from ME01 and are owned by ME02-ME07.
 - `scripts/swiftui-architecture-scan.sh || true` remains expected Yellow/advisory because large owner files still require extraction.
 
 Not verified:
 
-- App build/test, screenshots, simulator, physical-device, TestFlight, App Store Connect, signed archive, public accessibility, legal/privacy signoff, platform proof, and final release proof. ME08 is audit/standards-only and makes none of those claims.
+- App build/test, screenshots, simulator, physical-device, TestFlight, App Store Connect, signed archive, public accessibility, legal/privacy signoff, platform proof, and final release proof. ME10 is audit/gate-only and makes none of those claims.
