@@ -85,60 +85,7 @@ struct RepositoryBackedTodayService: TodayServicing {
     }
 }
 
-struct StubTodayService: TodayServicing {
-    let experience: TodayExperience
-    let actionResponse: TodayActionResponse?
-
-    init(experience: TodayExperience, actionResponse: TodayActionResponse? = nil) {
-        self.experience = experience
-        self.actionResponse = actionResponse
-    }
-
-    func loadTodayExperience(userDisplayName: String, now: Date, entryContext: TodayEntryContext) async throws -> TodayExperience {
-        _ = userDisplayName
-        _ = now
-        _ = entryContext
-        return experience
-    }
-
-    func performAction(_ action: TodayInlineAction, now: Date) async throws -> TodayActionResponse {
-        _ = action
-        _ = now
-        return actionResponse ?? TodayActionResponse(message: nil)
-    }
-}
-
 private extension RepositoryBackedTodayService {
-    struct Snapshot {
-        let goals: [Goal]
-        let drafts: [PersistedGoalDraft]
-        let evidence: [ProgressEvidence]
-        let feedback: [GoalFeedbackEvent]
-        let captures: [Capture]
-        let eventLedger: [EventLedgerEntry]
-        let appState: AppStateSnapshot
-    }
-
-    func loadSnapshot() async throws -> Snapshot {
-        async let goals = repositories.goals.listGoals()
-        async let drafts = repositories.drafts.listDrafts()
-        async let evidence = repositories.evidence.listEvidence(goalID: nil)
-        async let feedback = repositories.feedback.listEvents(goalID: nil)
-        async let captures = repositories.captures.listCaptures()
-        async let eventLedger = repositories.eventLedger.fetchRecent(limit: 20)
-        async let appState = repositories.appState.loadState()
-
-        return try await Snapshot(
-            goals: goals,
-            drafts: drafts,
-            evidence: evidence,
-            feedback: feedback,
-            captures: captures,
-            eventLedger: eventLedger,
-            appState: appState
-        )
-    }
-
     func makeExperience(snapshot: Snapshot, userDisplayName: String, now: Date, entryContext: TodayEntryContext) async throws -> TodayExperience {
         let activeGoals = snapshot.goals.filter { $0.state == .active || $0.state == .paused }
         let learningSnapshot = learningService.buildSnapshot(
