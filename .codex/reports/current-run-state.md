@@ -5,7 +5,7 @@
 Active train: ME maintainability extraction train selected by global sequence
 Active batch: ME12 Maintainability Handoff dry-run pending
 Current out-of-train task: none
-Scope: ME01 Maintainability Baseline And Ownership Map complete; ME08 Shared Projector State Helper Standards complete; ME10 Architecture Scan Gate complete; ME02 GoalsFeatureService extraction complete; ME03 TodayFeatureService extraction complete; ME04 TodayPanels extraction complete; ME05 PlanFeatureService extraction complete; ME06 ProfileScreen You Surface extraction complete; ME07 PlanScreen extraction complete; ME09 product-contract test rebaseline evidence complete pending commit/push evidence; ME11 repair not triggered; PXOS implementation not started; CS/Signature Interface/Product Depth/AmbitionsOS trains not started
+Scope: ME01 Maintainability Baseline And Ownership Map complete; ME08 Shared Projector State Helper Standards complete; ME10 Architecture Scan Gate complete; ME02 GoalsFeatureService extraction complete; ME03 TodayFeatureService extraction complete; ME04 TodayPanels extraction complete; ME05 PlanFeatureService extraction complete; ME06 ProfileScreen You Surface extraction complete; ME07 PlanScreen extraction complete; ME09 product-contract test rebaseline evidence complete with commit evidence; ME11 repair not triggered; PXOS implementation not started; CS/Signature Interface/Product Depth/AmbitionsOS trains not started
 Date: 2026-05-02
 Branch: main
 
@@ -27,7 +27,7 @@ Branch: main
 - ME05: complete as behavior-preserving PlanFeatureService extraction with commit/push evidence.
 - ME06: complete as behavior-preserving ProfileScreen You Surface extraction with commit/push evidence.
 - ME07: complete as behavior-preserving PlanScreen extraction with commit/push evidence.
-- ME09: complete as product-contract test rebaseline evidence pending commit/push evidence.
+- ME09: complete as product-contract test rebaseline evidence with commit evidence (`6bfa6a4b3dde950269eca4c69450687798c340b2`).
 - ME11: conditional repair batch not triggered by current ME evidence.
 - ME12: queued/blocked and not started.
 - CS/SI/Product Depth/AOS: queued/blocked and not started.
@@ -44,7 +44,7 @@ Branch: main
 
 ## Current Validation Result
 
-ME09 validation is PASS WITH YELLOW before commit/push.
+ME09 validation is PASS WITH YELLOW with commit evidence.
 
 Verified:
 
