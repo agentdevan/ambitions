@@ -2,7 +2,7 @@
 
 <!-- markdownlint-disable MD013 -->
 
-Status: Ambitions 4.0 global execution order; 95 formal batches at program start; active through PX16 future-canon evidence
+Status: Ambitions 4.0 global execution order; 95 formal batches at program start; active through PX17 future-canon evidence
 Date: 2026-05-02
 
 ## Purpose
@@ -41,7 +41,7 @@ Use this file to choose the next eligible batch only after the relevant approval
 - Ambitions 4.0 is the active post-3.0 execution program, not a shipped product version.
 - Total formal remaining Ambitions 4.0 batches at program start: 95.
 - REC02-REC06 are complete as Release Evidence Closure batches.
-- PXOS is future user-facing canon only. PX01-PX16 are complete as future canon; PX17 is next pending dry-run selection; PX18-PX20 are queued/blocked and not started.
+- PXOS is future user-facing canon only. PX01-PX17 are complete as future canon; PX18 is next pending dry-run selection; PX19-PX20 are queued/blocked and not started.
 - ME01-ME12, CS01-CS10, and AOS01-AOS30 are queued/blocked and not started.
 - AmbitionsOS is future canon only, not implemented app behavior.
 - Product Depth is a formal queued/blocked PD01-PD18 train and not started.
@@ -49,7 +49,7 @@ Use this file to choose the next eligible batch only after the relevant approval
 - Top-level surfaces must be visual orientation surfaces, not vertical stacks of generic cards.
 
 Prompt completeness note: REC02-REC06 standalone prompt files exist and have
-run through REC closure evidence. PX01-PX16 are complete as future canon. PX17 is the next global batch only after the mandatory dry-run selection says `Execution allowed: YES`.
+run through REC closure evidence. PX01-PX17 are complete as future canon. PX18 is the next global batch only after the mandatory dry-run selection says `Execution allowed: YES`.
 
 ## Global Sequencing Principles
 
@@ -87,7 +87,7 @@ run through REC closure evidence. PX01-PX16 are complete as future canon. PX17 i
 | 019 | PX14 | PXOS | Docs/canon | Product Depth architecture must be canon before PD formalization. | Complete by PX14 evidence | Serial-only | No; complete | Adequate docs evidence | product-depth-strategist, drilldown-depth-reviewer | Completed; does not start Product Depth |
 | 020 | PX15 | PXOS | Docs/canon | Cross-surface continuity follows depth and degraded-state rules. | Complete by PX15 evidence | Serial-preferred | No; complete | Adequate docs evidence | information architecture, compatibility reviewer | Completed; PXOS implementation not started |
 | 021 | PX16 | PXOS | Docs/canon | User-facing intelligence expression waits for PXOS trust and AOS boundaries. | Complete by PX16 evidence | Serial-only | No; complete | Adequate docs evidence | recommendation/source-truth, privacy/trust | Completed; does not expose intelligence |
-| 022 | PX17 | PXOS | Docs/canon | Product messaging must wait for REC boundaries and PXOS language. | REC06 Green or accepted Yellow, PX09 Green, Release Claim | Serial-only | Yes | Adequate docs evidence | release-claim-truth-enforcer, copy reviewer | Stop on any claim ambiguity |
+| 022 | PX17 | PXOS | Docs/canon | Product messaging must wait for REC boundaries and PXOS language. | Complete by PX17 evidence | Serial-only | No; complete | Adequate docs evidence | release-claim-truth-enforcer, copy reviewer | Completed; no release readiness claim |
 | 023 | PX18 | PXOS | Recurring gate | Implementation readiness reorder must run before any PXOS implementation lane. | PX01-PX17 Green, ME/CS/AOS cross-check | Serial-only | Yes | Adequate docs evidence | roadmap-sequencer, codex-train-integrity-lead | Convert to recurring gate before implementation |
 | 024 | PX19 | PXOS | Handoff | Handoff follows readiness reorder. | PX18 Green, Handoff, Rollback | Serial-only | Yes | Adequate docs evidence | evidence-gate-reporter, post-run closeout | Stop unless user selects next lane |
 | 025 | PX20 | PXOS | Roadmap | Beyond roadmap follows PXOS handoff. | PX19 Green or explicit decision | Serial-only | Yes | Adequate docs evidence | roadmap-sequencer, product strategy reviewer | Stop after roadmap |
@@ -183,7 +183,8 @@ run through REC closure evidence. PX01-PX16 are complete as future canon. PX17 i
 | PX14 | Completed | PX14 evidence | Future canon only; not implemented | No PXOS implementation, Product Depth implementation, or release-readiness claim |
 | PX15 | Completed | PX15 evidence | Future canon only; not implemented | No PXOS implementation or release-readiness claim |
 | PX16 | Completed | PX16 evidence | Future canon only; not implemented | No PXOS implementation, AmbitionsOS implementation, model-runtime, personalization-proof, or release-readiness claim |
-| PX17-PX20 | Queued / Blocked | Current global preauthorization or `Start PXOS Future-Canon Train`, PXOS gates, source truth | Future canon only; not implemented | No PXOS implementation or release-readiness claim |
+| PX17 | Completed | PX17 evidence | Future canon only; not implemented | No PXOS implementation or release-readiness claim |
+| PX18-PX20 | Queued / Blocked | Current global preauthorization or `Start PXOS Future-Canon Train`, PXOS gates, source truth | Future canon only; not implemented | No PXOS implementation or release-readiness claim |
 | ME01-ME12 | Queued / Blocked | `Start ME Train`, ME maintainability gates | Not started; extraction not performed | No release/platform claim |
 | CS01-CS10 | Queued / Blocked | `Start CS Train`, CS compatibility gates | Not started; no seam retired | No release/platform claim |
 | PD01-PD18 | Queued / Blocked | `Start Product Depth Train`, PXOS plus relevant ME/CS/AOS-if-needed gates | Not started; not implemented | No Product Depth implementation or release claim |
