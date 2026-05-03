@@ -2,12 +2,12 @@
 
 Date: 2026-05-03
 Active train: Ambitions 4.0 External Brain Foundation
-Current batch: EB20 complete; EB21 next eligible
-Scope: EB20 closed as Product Maturity And Onboarding gate/evidence only. It
-records the first-week value contract, repairs stale prompt global-order
-metadata, and defers product Swift until exact owner files, focused tests,
-preview evidence, privacy evidence, accessibility evidence, rollback, and
-release-claim proof are named. No app
+Current batch: EB21 complete; EB22 next eligible
+Scope: EB21 closed as Product Maturity And Onboarding gate/evidence only. It
+records the concierge setup and planning-defaults contract, repairs stale
+prompt global-order metadata, and defers product Swift until exact owner files,
+focused tests, preview evidence, privacy evidence, accessibility evidence,
+rollback, and release-claim proof are named. No app
 behavior, route/raw value, persistence/schema, dependency, workflow, signing,
 top-level-tab, production asset, or public accessibility/release claim change was
 made.
@@ -26,6 +26,8 @@ made.
   it authorizes no app behavior by itself.
 - EB20 is complete as value-first onboarding gate/evidence only; it authorizes
   no app behavior by itself.
+- EB21 is complete as concierge setup/planning-defaults gate/evidence only; it
+  authorizes no app behavior by itself.
 - DAV01 is complete as source-truth/surface-map evidence only; DAV02 is
   complete as shared SwiftUI primitive implementation; DAV03 is complete as
   bounded Today visual implementation; DAV04 is complete as bounded Capture
@@ -39,7 +41,7 @@ made.
   fixture/scenario gallery implementation; DAV13 is complete as rendering and
   battery risk evidence; DAV14 is complete as visual regression and
   product-experience QA evidence; DAV15 is complete as train closeout evidence;
-  EB21 remains active planned scope and is next eligible.
+  EB22 remains active planned scope and is next eligible.
 - PXEQ is a mandatory product-experience gate for EB UI-affecting batches; it
   is not a shipped app feature and not a new EB batch identity.
 - Optimized global order after EB32 places DAV01-DAV15 before UI-heavy EB
@@ -50,15 +52,15 @@ made.
 
 ## Current Validation Result
 
-EB20 validation result: PASS WITH YELLOW. `git diff --check`, EB active train
+EB21 validation result: PASS WITH YELLOW. `git diff --check`, EB active train
 integration gate, EB unsupported-claim scan, EB 5.0 drift scan, no-fake-proof
 gate, canon language drift scan, release-claim safety scan, docs QA, and batch
 train gate were run. Hard checks passed. Accepted Yellow remains for existing
 claim/copy/docs advisory backlog, working-tree gate hints during validation,
-and future product implementation proof because EB20 intentionally changed no
+and future product implementation proof because EB21 intentionally changes no
 Swift or app behavior.
 
 ## Next Safe Path
 
-Run EB21 Concierge Setup And Planning Defaults Onboarding only after EB20 is
-validated, committed, and pushed.
+Run EB22 Privacy Setup And Trust Onboarding only after EB21 is validated,
+committed, and pushed.

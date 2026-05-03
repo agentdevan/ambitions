@@ -6,7 +6,7 @@
 
 - Batch ID: EB21
 - Name: Concierge Setup And Planning Defaults Onboarding
-- Global order after EB insertion: 067
+- Global order after EB insertion: 071
 
 ## Active 4.0 Status
 

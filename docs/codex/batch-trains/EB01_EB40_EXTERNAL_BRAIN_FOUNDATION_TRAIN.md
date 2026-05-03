@@ -30,8 +30,8 @@ Original formal Ambitions 4.0 batch count: 113. Active expansion added: 40. New 
 - 064: EB18 Source Freshness Privacy Receipts And Non Claims. Status: active planned / queued; not completed. Boundary: Implementation allowed later for source freshness, privacy receipts, and non-claim ledger only.
 - 050: EB19 Product Maturity Onboarding Canon. Status: complete by EB19 evidence; no app behavior implemented. Boundary: Docs/canon; no production implementation was allowed because EB19 establishes maturity/onboarding gates.
 - 066: EB20 Value Based Onboarding And First Week Success. Status: complete as gate/evidence; no app behavior. Boundary: Implementation allowed later for first-week value path only.
-- 067: EB21 Concierge Setup And Planning Defaults Onboarding. Status: active next. Boundary: Implementation allowed later for concierge setup and planning defaults only.
-- 068: EB22 Privacy Setup And Trust Onboarding. Status: active planned / queued; not completed. Boundary: Implementation allowed later for privacy setup only.
+- 067: EB21 Concierge Setup And Planning Defaults Onboarding. Status: complete as gate/evidence; no app behavior. Boundary: Implementation allowed later for concierge setup and planning defaults only.
+- 068: EB22 Privacy Setup And Trust Onboarding. Status: active next. Boundary: Implementation allowed later for privacy setup only.
 - 069: EB23 Maturity Levels Progressive Disclosure And Life Season Templates. Status: active planned / queued; not completed. Boundary: Implementation allowed later for maturity levels and life season templates only.
 - 070: EB24 Onboarding Receipts Skip Later And Setup Recovery. Status: active planned / queued; not completed. Boundary: Implementation allowed later for onboarding receipts and skip/later recovery only.
 - 049: EB25 Accessibility Cognitive Load Canon. Status: complete by EB25 evidence; no app behavior implemented. Boundary: Docs/canon; no production implementation was allowed because EB25 establishes accessibility gates.
