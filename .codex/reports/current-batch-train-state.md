@@ -114,7 +114,7 @@ The current user prompt says `Run Global Batch Sequence Until Blocked` and expli
 
 ## Next Eligible Batch
 
-CS05B is PASS WITH YELLOW pending commit evidence:
+CS05B is PASS WITH YELLOW with commit evidence `bfc23f10`:
 
 - CS05B touched only focused tests and docs/status files; no production Swift, AppUI, Sources, route/raw values, persistence behavior, default-tab behavior, or accessibility identifiers were edited.
 - CS05B focused simulator/unit compatibility tests passed 74 selected tests with 0 failures.

@@ -10,6 +10,8 @@ Formal batch: 044 — CS05 ActiveFocus TodayFocus Retirement
 
 Internal stage: CS05B — ActiveFocus Compatibility Preservation Proof
 
+Commit evidence: `bfc23f10`
+
 ## Summary
 
 CS05B added focused compatibility tests only. It did not edit production Swift, route/raw values, default-tab behavior, persistence behavior, accessibility identifiers, widget source files, App Intent source files, or Today feature source files.
