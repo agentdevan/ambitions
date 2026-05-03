@@ -11,8 +11,8 @@ DAV makes Ambitions visually alive without making it loud, generic, heavy, unrea
 
 ## Train Order
 
-- 055: DAV01 Dynamic Visual Source Truth And Surface Map. Status: active next. Boundary: docs/source map only.
-- 056: DAV02 Reusable Living Visual Primitives Implementation. Status: queued. Boundary: shared SwiftUI visual primitives and motion helpers.
+- 055: DAV01 Dynamic Visual Source Truth And Surface Map. Status: complete as docs/source map only; no production Swift or app behavior.
+- 056: DAV02 Reusable Living Visual Primitives Implementation. Status: active next. Boundary: shared SwiftUI visual primitives and motion helpers.
 - 057: DAV03 Today DayTimelineRail And HeroStepPanel Implementation. Status: queued. Boundary: Today visual composition only.
 - 058: DAV04 Capture AtmosphereComposer And RoutingReceipts Implementation. Status: queued. Boundary: Capture visual composition only.
 - 059: DAV05 Plan LifeShapeMap And CapacityVisuals Implementation. Status: queued. Boundary: Plan visual composition only.
@@ -34,4 +34,3 @@ DAV makes Ambitions visually alive without making it loud, generic, heavy, unrea
 - Use native SwiftUI and existing design system/package structure.
 - Every UI batch must include Reduce Motion, Dynamic Type, VoiceOver, preview/fixture, and PXEQ evidence.
 - No third-party visual dependencies.
-
