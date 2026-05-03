@@ -6,7 +6,7 @@
 
 - Batch ID: EB20
 - Name: Value Based Onboarding And First Week Success
-- Global order after EB insertion: 066
+- Global order after EB insertion: 070
 
 ## Active 4.0 Status
 
