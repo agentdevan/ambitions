@@ -148,6 +148,22 @@ final class AppShellNavigationTests: XCTestCase {
     }
 
     @MainActor
+    func testLegacyHabitsSelectionPreservesRitualPlanSemanticsWithoutDuplicateDestination() {
+        let navigation = AppNavigationModel(selectedTab: .today)
+
+        navigation.selectTab(.habits)
+
+        XCTAssertEqual(navigation.selectedTab, .plan)
+        XCTAssertEqual(navigation.planPath, [.habits])
+        XCTAssertTrue(navigation.insightsPath.isEmpty)
+        XCTAssertEqual(AppTab.allCases.map(\.title), ["Today", "Goals", "Capture", "Plan", "You"])
+        XCTAssertFalse(AppTab.allCases.contains(.habits))
+        XCTAssertEqual(AppTab.habits.rawValue, "habits")
+        XCTAssertEqual(AppTab.habits.title, "Rituals")
+        XCTAssertEqual(AppTab.habits.canonicalTopLevelTab, .plan)
+    }
+
+    @MainActor
     func testNavigationInitializesLegacyInsightsPreferenceIntoYouSupportRoute() {
         let navigation = AppNavigationModel(selectedTab: .insights)
 

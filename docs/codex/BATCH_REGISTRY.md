@@ -76,12 +76,14 @@ Current 4.0 status:
 - Completed: CS03B User-Facing Plan Alias And Insights Compatibility Preservation as focused test proof; old `insights` compatibility and visible `Plan` naming are preserved.
 - Accepted Yellow: CS03C Narrow Internal Insights Retirement remains blocked/deferred; current repo truth preserves legacy `insights` compatibility through You/Profile history support until stronger proof exists.
 - Completed: CS04A Habits/Ritual/Plan Compatibility Map And Retirement Ledger as internal docs/protocol stage of formal CS04; no seam retired and no app code edited.
-- Queued / Blocked: CS02C, CS03C, CS04B-CS04C, CS05-CS06, and CS09-CS10 pending current global preauthorization or `Start CS Train`.
+- Completed: CS04B Ritual/Plan Compatibility Preservation Proof as focused test proof; old `habits` compatibility and Plan-owned `Rituals` semantics are preserved.
+- Accepted Yellow: CS04C Narrow Internal Habits Retirement remains blocked/deferred; no Habits seam is claimed retired.
+- Queued / Blocked: CS02C, CS03C, CS04C, CS05-CS06, and CS09-CS10 pending current global preauthorization or `Start CS Train`.
 - Queued / Blocked: SI01-SI18 pending global-order selection or `Start Signature Interface Train` plus PXOS/ME/CS/SI quality gates.
 - Queued / Blocked: PD01-PD18 pending `Start Product Depth Train` plus PXOS/ME/CS/SI/AOS-if-needed gates.
 - Queued / Blocked: AOS01-AOS30 pending `Start AOS Train`.
 - Total formal Ambitions 4.0 batches after SI insertion: 113.
-- Remaining after CS04A and SI insertion: 72 formal batches remain because CS02A/CS03A/CS04A are internal stages of formal CS02/CS03/CS04, not new formal batches.
+- Remaining after CS04B and SI insertion: 71 formal batches remain because CS02A/CS03A/CS04A are internal stages of formal CS02/CS03/CS04, not new formal batches and formal CS04 is complete as accepted Yellow by CS04A/CS04B evidence.
 
 Use [../canon/Ambitions_4_0_Execution_Program.md](../canon/Ambitions_4_0_Execution_Program.md) and [GLOBAL_FUTURE_BATCH_EXECUTION_ORDER.md](GLOBAL_FUTURE_BATCH_EXECUTION_ORDER.md) for current post-3.0 status semantics.
 

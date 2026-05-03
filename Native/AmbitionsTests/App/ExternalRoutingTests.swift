@@ -79,6 +79,19 @@ final class ExternalRoutingTests: XCTestCase {
         XCTAssertFalse(AppTab.allCases.contains(.insights))
     }
 
+    func testDeepLinkTranslatorPreservesLegacyHabitsTabAsPlanRitualRoute() throws {
+        let translator = AppExternalRouteTranslator()
+        let legacyTabURL = try XCTUnwrap(URL(string: "ambitions://tab/habits"))
+        let planRouteURL = try XCTUnwrap(URL(string: "ambitions://plan/habits"))
+
+        XCTAssertEqual(translator.route(fromDeepLink: legacyTabURL), .openTab(.habits))
+        XCTAssertEqual(translator.route(fromDeepLink: planRouteURL), .openPlanRoute(.habits))
+        XCTAssertEqual(AppTab.habits.rawValue, "habits")
+        XCTAssertEqual(AppTab.habits.title, "Rituals")
+        XCTAssertEqual(AppTab.habits.canonicalTopLevelTab, .plan)
+        XCTAssertFalse(AppTab.allCases.contains(.habits))
+    }
+
     func testDeepLinkTranslatorParsesTodayEntryContextRoute() throws {
         let translator = AppExternalRouteTranslator()
         let url = try XCTUnwrap(URL(string: "ambitions://tab/today?context=focus&origin=app_intent"))
@@ -298,6 +311,29 @@ final class ExternalRoutingTests: XCTestCase {
         XCTAssertEqual(monthlyPayload.values[ExternalSurfaceActionPayload.Key.tab], AppTab.profile.rawValue)
         XCTAssertEqual(monthlyPayload.values["insightsRoute"], InsightsRouteTarget.monthlyReview.rawValue)
         XCTAssertEqual(AppTab.plan.title, "Plan")
+    }
+
+    func testLegacyHabitsRoutesAndPayloadsRemainCompatibleWithPlanRitualSemantics() throws {
+        let translator = AppExternalRouteTranslator()
+
+        let routeURL = try XCTUnwrap(translator.deepLinkURL(for: .openPlanRoute(.habits)))
+        let routePayload = translator.routePayload(for: .openPlanRoute(.habits))
+        let notificationPayload = translator.notificationPayload(for: .openPlanRoute(.habits), action: "open")
+        let widgetPayload = translator.widgetPayload(for: .openPlanRoute(.habits), action: "open")
+
+        XCTAssertEqual(routeURL.absoluteString, "ambitions://plan/habits")
+        XCTAssertEqual(translator.route(fromDeepLink: routeURL), .openPlanRoute(.habits))
+        XCTAssertEqual(routePayload[ExternalSurfaceActionPayload.Key.tab], AppTab.plan.rawValue)
+        XCTAssertEqual(routePayload["subroute"], PlanRouteTarget.habits.rawValue)
+        XCTAssertEqual(notificationPayload.values[ExternalSurfaceActionPayload.Key.tab], AppTab.plan.rawValue)
+        XCTAssertEqual(notificationPayload.values["subroute"], PlanRouteTarget.habits.rawValue)
+        XCTAssertEqual(widgetPayload.values[ExternalSurfaceActionPayload.Key.tab], AppTab.plan.rawValue)
+        XCTAssertEqual(widgetPayload.values["subroute"], PlanRouteTarget.habits.rawValue)
+        XCTAssertEqual(
+            translator.route(fromWidget: AppWidgetRoutingPayload(action: "open", values: ["tab": "habits"])),
+            .openTab(.habits)
+        )
+        XCTAssertEqual(AppTab.allCases.map(\.title), ["Today", "Goals", "Capture", "Plan", "You"])
     }
 
     func testRouteTranslatorGeneratesDeterministicDeepLinks() throws {

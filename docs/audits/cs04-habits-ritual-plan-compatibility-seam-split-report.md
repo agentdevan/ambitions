@@ -94,7 +94,7 @@ Revert the CS04A docs/control files. No app behavior rollback is required becaus
 
 ## Next Safe Path
 
-CS04B may run only after CS04A validation/commit evidence and a dry-run returning `Execution allowed: YES`. CS04C remains blocked.
+CS04B is recorded separately in `docs/audits/cs04-habits-ritual-plan-compatibility-proof-report.md`. CS04C remains blocked/deferred until a future batch proves a narrow retirement is safe.
 
 ## Commit SHA
 
