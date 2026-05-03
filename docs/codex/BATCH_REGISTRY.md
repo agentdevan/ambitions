@@ -90,14 +90,15 @@ Current 4.0 status:
 - Complete: EB13 Trust Privacy User Control Canon is complete as canon/evidence only; Trust Center, private mode, export/delete, and durable memory app behavior are not implemented.
 - Complete: EB25 Accessibility Cognitive Load Canon is complete as canon/evidence only; accessibility modes, UI behavior, and public conformance proof are not implemented.
 - Complete: EB19 Product Maturity Onboarding Canon is complete as canon/evidence only; onboarding app behavior is not implemented.
-- Active Planned / Queued: EB02-EB12, EB14-EB18, EB20-EB24, and EB26-EB40 Ambitions 4.0 External Brain Foundation expansion segment; not completed and not implemented in app behavior.
+- Complete: EB02 Universal Capture Canon And Domain Model is complete as canon/domain planning evidence only; capture app behavior and domain code are not implemented.
+- Active Planned / Queued: EB07-EB12, EB14-EB18, EB20-EB24, EB03-EB06, and EB26-EB40 Ambitions 4.0 External Brain Foundation expansion segment; not completed and not implemented in app behavior.
 - Queued / Blocked: SI01-SI18 pending global-order selection or `Start Signature Interface Train` plus PXOS/ME/CS/SI quality gates.
 - Queued / Blocked: PD01-PD18 pending `Start Product Depth Train` plus PXOS/ME/CS/SI/AOS-if-needed gates.
 - Queued / Blocked: AOS01-AOS30 pending `Start AOS Train`.
 - Original formal Ambitions 4.0 batches after SI insertion: 113.
 - Active External Brain expansion added: EB01-EB40 as active planned Ambitions 4.0 scope.
 - New active planned Ambitions 4.0 total after EB integration: 153.
-- Remaining after EB19: 103 active planned batches remain including EB02-EB12, EB14-EB18, EB20-EB24, EB26-EB40, CS10, SI01-SI18, PD01-PD18, and AOS01-AOS30; CS02A-CS06A, CS02B-CS06B, and CS09A-CS09B are internal stages, not new formal batches; CS02C-CS06C and CS09C are accepted Yellow/deferred.
+- Remaining after EB02: 102 active planned batches remain including EB07-EB12, EB14-EB18, EB20-EB24, EB03-EB06, EB26-EB40, CS10, SI01-SI18, PD01-PD18, and AOS01-AOS30; CS02A-CS06A, CS02B-CS06B, and CS09A-CS09B are internal stages, not new formal batches; CS02C-CS06C and CS09C are accepted Yellow/deferred.
 
 Use [../canon/Ambitions_4_0_Execution_Program.md](../canon/Ambitions_4_0_Execution_Program.md) and [GLOBAL_FUTURE_BATCH_EXECUTION_ORDER.md](GLOBAL_FUTURE_BATCH_EXECUTION_ORDER.md) for current post-3.0 status semantics.
 

@@ -11,7 +11,7 @@ Original formal Ambitions 4.0 batch count: 113. Active expansion added: 40. New 
 ## Batch Order
 
 - 047: EB01 External Brain Source Truth And Kernel Architecture. Status: complete by EB01 evidence; no app behavior implemented. Boundary: Docs/canon; no production implementation was allowed because EB01 establishes source truth and gates.
-- 048: EB02 Universal Capture Canon And Domain Model. Status: active planned / queued; not completed. Boundary: Canon/domain planning; no production implementation in EB02 until exact domain files are approved by gate.
+- 051: EB02 Universal Capture Canon And Domain Model. Status: complete by EB02 evidence; no app behavior or domain code implemented. Boundary: Canon/domain planning; production implementation remains deferred until exact domain files are approved by gate.
 - 049: EB03 Universal Capture Composer And Routing. Status: active planned / queued; not completed. Boundary: Implementation allowed later inside Capture composer/routing only after EB13 and EB25 gates.
 - 050: EB04 Capture Classification And Clarification. Status: active planned / queued; not completed. Boundary: Implementation allowed later for classification and one-question clarification only.
 - 051: EB05 Capture Clusters Review Bundles And Open Loops. Status: active planned / queued; not completed. Boundary: Implementation allowed later for clusters, review bundles, and open-loop signals only.
