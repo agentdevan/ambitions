@@ -6,7 +6,7 @@
 
 - Batch ID: EB24
 - Name: Onboarding Receipts Skip Later And Setup Recovery
-- Global order after EB insertion: 070
+- Global order after EB insertion: 074
 
 ## Active 4.0 Status
 

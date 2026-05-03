@@ -136,9 +136,15 @@ Current 4.0 status:
   defers product Swift until exact owner files, focused tests, preview
   evidence, privacy evidence, accessibility evidence, rollback, and
   release-claim proof are named.
-- Active Planned / Queued: EB24 Onboarding Receipts Skip Later And Setup
-  Recovery is next eligible after EB23; production SwiftUI is allowed only
-  inside the active EB batch boundary.
+- Complete: EB24 Onboarding Receipts Skip Later And Setup Recovery is complete
+  as Product Maturity And Onboarding / Trust evidence only. It records the
+  onboarding receipt, skip/later, and setup recovery contract, repairs the
+  prompt global-order metadata to 074, and defers product Swift until exact
+  owner files, focused tests, preview evidence, privacy evidence, accessibility
+  evidence, rollback, and release-claim proof are named.
+- Active Planned / Queued: EB03 Universal Capture Composer And Routing is next
+  eligible after EB24; production SwiftUI is allowed only inside the active EB
+  batch boundary.
 - Active Planned / Queued: EB08-EB12, EB14-EB18, EB20-EB24, EB03-EB06, and EB26-EB40 Ambitions 4.0 External Brain Foundation expansion segment; not completed and not implemented in app behavior.
 - Queued / Blocked: SI01-SI18 pending global-order selection or `Start Signature Interface Train` plus PXOS/ME/CS/SI quality gates.
 - Queued / Blocked: PD01-PD18 pending `Start Product Depth Train` plus PXOS/ME/CS/SI/AOS-if-needed gates.
