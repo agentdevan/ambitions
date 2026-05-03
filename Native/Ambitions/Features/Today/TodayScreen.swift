@@ -41,7 +41,7 @@ struct TodayScreen: View {
                         )
                         .transition(.ambitionPanel)
                     case let .loaded(experience):
-                        AmbitionsDayRailView(
+                        DayTimelineRail(
                             state: experience.execution.dayRail,
                             onAction: handleAction,
                             onOpenStepDetail: { detail in

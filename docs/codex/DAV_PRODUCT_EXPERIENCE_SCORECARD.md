@@ -14,7 +14,7 @@ Each implemented surface must score 4/5 or higher on native iPhone believability
 | Surface | Status | Score | Notes |
 | --- | --- | --- | --- |
 | Shared primitives | Complete DAV02 | 4/5 | Native SwiftUI, state-driven, evidence labels, Reduce Motion-aware motion helpers, VoiceOver labels, and high Dynamic Type preview evidence. Surface-specific scoring waits for DAV03-DAV09. |
-| Today | Pending DAV03 | Not scored | Requires before/after visual evidence. |
+| Today | Complete DAV03 | 4/5 | Existing Reality Rail became DayTimelineRail, with DAV living background, pressure glow, evidence label, proof pulse, hero transition, Reduce Motion-aware animation, stable accessibility identifiers, and no route or persistence change. |
 | Capture | Pending DAV04 | Not scored | Requires composer and routing receipt evidence. |
 | Plan | Pending DAV05 | Not scored | Requires LifeShape/capacity evidence. |
 | Goals | Pending DAV06 | Not scored | Requires lane/proof/blocker evidence. |

@@ -1,9 +1,34 @@
 import AmbitionsDesignSystem
 import SwiftUI
 
+struct DayTimelineRail: View {
+    let state: AmbitionsDayRailViewState
+    let onAction: (TodayInlineAction) -> Void
+    let onOpenStepDetail: (DayRailStepDetailState) -> Void
+
+    init(
+        state: AmbitionsDayRailViewState,
+        onAction: @escaping (TodayInlineAction) -> Void,
+        onOpenStepDetail: @escaping (DayRailStepDetailState) -> Void = { _ in }
+    ) {
+        self.state = state
+        self.onAction = onAction
+        self.onOpenStepDetail = onOpenStepDetail
+    }
+
+    var body: some View {
+        AmbitionsDayRailView(
+            state: state,
+            onAction: onAction,
+            onOpenStepDetail: onOpenStepDetail
+        )
+    }
+}
+
 
 struct AmbitionsDayRailView: View {
     @Environment(\.ambitionTheme) private var theme
+    @Environment(\.accessibilityReduceMotion) private var reduceMotion
 
     let state: AmbitionsDayRailViewState
     let onAction: (TodayInlineAction) -> Void
@@ -47,13 +72,22 @@ struct AmbitionsDayRailView: View {
         }
         .padding(theme.spacing.lg)
         .background(
-            RoundedRectangle(cornerRadius: theme.radius.lg, style: .continuous)
-                .fill(theme.colors.surfaceSecondary.opacity(0.92))
+            ZStack {
+                LivingSurfaceBackground(context: .today, state: livingState, intensity: 0.72)
+                RoundedRectangle(cornerRadius: theme.radius.lg, style: .continuous)
+                    .fill(theme.colors.surfaceSecondary.opacity(0.88))
+            }
         )
         .overlay(
             RoundedRectangle(cornerRadius: theme.radius.lg, style: .continuous)
                 .stroke(theme.semanticAccent(for: semanticState).opacity(0.26), lineWidth: 1)
         )
+        .overlay(alignment: .bottomLeading) {
+            PressureGlow(level: pressureLevel, context: .today, label: "Today pressure")
+                .padding(.horizontal, theme.spacing.lg)
+                .padding(.bottom, theme.spacing.sm)
+        }
+        .animation(DAVMotionPreset.railProgress.animation(theme: theme, reduceMotion: reduceMotion), value: state.id)
         .accessibilityElement(children: .contain)
         .accessibilityLabel(accessibilityLabel)
         .accessibilityIdentifier("TodayRealityRail")
@@ -84,6 +118,14 @@ struct AmbitionsDayRailView: View {
                 .accessibilityLabel("Source context")
                 .accessibilityValue(state.contextLabels.prefix(3).map(sourceLabel).joined(separator: ", "))
             }
+
+            EvidenceLabel(
+                modeLabel,
+                detail: state.contextSummary,
+                source: state.privacyProjection.sourceLabel,
+                state: livingState,
+                context: .today
+            )
         }
     }
 
@@ -118,6 +160,40 @@ struct AmbitionsDayRailView: View {
             .trust
         case .noSchedule:
             .calendarDerived
+        }
+    }
+
+    private var livingState: LivingVisualState {
+        switch state.mode {
+        case .normal:
+            .active
+        case .recovery:
+            .recovery
+        case .protected:
+            .sensitive
+        case .overloaded:
+            .pressured
+        case .empty:
+            .empty
+        case .noSchedule:
+            .stale
+        }
+    }
+
+    private var pressureLevel: Double {
+        switch state.mode {
+        case .normal:
+            0.48
+        case .recovery:
+            0.36
+        case .protected:
+            0.28
+        case .overloaded:
+            0.84
+        case .empty:
+            0.10
+        case .noSchedule:
+            0.58
         }
     }
 
@@ -163,6 +239,7 @@ struct AmbitionsDayRailView: View {
 
 private struct DayRailHeroStepCard: View {
     @Environment(\.ambitionTheme) private var theme
+    @Environment(\.accessibilityReduceMotion) private var reduceMotion
 
     let step: DayRailHeroStepState
     let privacy: DayRailPrivacyProjectionState
@@ -206,6 +283,17 @@ private struct DayRailHeroStepCard: View {
                                 .foregroundStyle(theme.colors.textTertiary)
                                 .fixedSize(horizontal: false, vertical: true)
                         }
+
+                        HStack(alignment: .center, spacing: theme.spacing.sm) {
+                            EvidenceLabel(
+                                "Why this now",
+                                detail: step.whySummary,
+                                source: sourceSummary,
+                                state: .proof,
+                                context: .today
+                            )
+                            ProofPulse(isActive: true, label: "Today proof available")
+                        }
                     }
                     Spacer(minLength: theme.spacing.sm)
                 }
@@ -229,6 +317,7 @@ private struct DayRailHeroStepCard: View {
         .accessibilityValue("\(step.duration.label). \(sourceSummary)")
         .accessibilityHint("Opens Step Detail. Start now opens Step Session.")
         .accessibilityIdentifier(privacy.isSensitiveProjection ? "TodayRealityRailPrivateItem" : "TodayRealityRailHeroCard")
+        .transition(DAVMotionPreset.heroExpansion.transition(reduceMotion: reduceMotion))
     }
 
     private var sourceSummary: String {
@@ -683,4 +772,3 @@ private struct Diamond: Shape {
         return path
     }
 }
-
