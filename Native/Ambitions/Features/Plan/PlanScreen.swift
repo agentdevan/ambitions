@@ -17,145 +17,152 @@ struct PlanScreen: View {
     }
 
     var body: some View {
-        ScrollView {
-            LazyVStack(alignment: .leading, spacing: theme.spacing.lg) {
-                switch viewModel.state {
-                case .loading:
-                    AsyncStateCard(.loading(lines: 9))
-                        .transition(.ambitionPanel)
-                case .failed:
-                    DegradedStateCard(
-                        state: DegradedStateOrchestrator.unavailable(surface: "Plan"),
-                        primaryAccessibilityIdentifier: "plan.retry-button",
-                        onPrimaryAction: {
-                            Task { await viewModel.refresh(using: container.planService) }
-                        }
-                    )
-                    .transition(.ambitionPanel)
-                case let .loaded(dashboard):
-                    PlanHeroCard(hero: dashboard.hero, action: dashboard.primaryAction, onPrimaryAction: handlePrimaryAction)
+        ZStack {
+            LivingSurfaceBackground(context: .plan, state: planLivingState, intensity: 0.64)
+                .ignoresSafeArea()
 
-                    PlanTreatyCard(treaty: dashboard.treaty)
-
-                    PlanCapacityEnvelopeCard(envelope: dashboard.capacityEnvelope)
-
-                    PlanLifeSuiteCard(suite: dashboard.lifeSuite)
-
-                    PlanGoalLifecycleRailCard(rail: dashboard.lifecycleRail)
-
-                    PlanTimelineStripCard(strip: dashboard.timelineStrip, onOpenGoal: openGoal)
-
-                    if let emptyTitle = dashboard.emptyTitle, let emptyMessage = dashboard.emptyMessage {
+            ScrollView {
+                LazyVStack(alignment: .leading, spacing: theme.spacing.lg) {
+                    switch viewModel.state {
+                    case .loading:
+                        AsyncStateCard(.loading(lines: 9))
+                            .transition(.ambitionPanel)
+                    case .failed:
                         DegradedStateCard(
-                            state: DegradedStateOrchestrator.planEmpty(),
-                            primaryAccessibilityIdentifier: "plan.empty.create-goal",
-                            secondaryAccessibilityIdentifier: "plan.empty.open-captures",
+                            state: DegradedStateOrchestrator.unavailable(surface: "Plan"),
+                            primaryAccessibilityIdentifier: "plan.retry-button",
                             onPrimaryAction: {
-                                _ = emptyTitle
-                                _ = emptyMessage
-                                container.commandRouter.presentCreateGoal(source: .shellCompose)
-                            },
-                            onSecondaryAction: {
-                                container.navigation.openPlanRoute(.captureInbox)
+                                Task { await viewModel.refresh(using: container.planService) }
                             }
                         )
-                    }
+                        .transition(.ambitionPanel)
+                    case let .loaded(dashboard):
+                        PlanHeroCard(hero: dashboard.hero, action: dashboard.primaryAction, onPrimaryAction: handlePrimaryAction)
 
-                    PlanPressureScrubberCard(
-                        scrubber: dashboard.pressureScrubber,
-                        selectedDayID: bindingForSelectedDay(defaultID: dashboard.pressureScrubber.defaultDayID)
-                    )
+                        PlanScopeChipStrip(timeframeLabel: dashboard.timeframeLabel)
 
-                    PlanGoalRelationshipCard(items: dashboard.goalShapingItems) { target in
-                        openGoal(target)
-                    }
+                        PlanTreatyCard(treaty: dashboard.treaty)
 
-                    PlanSecondaryDestinationsCard(destinations: dashboard.secondaryDestinations) { destination in
-                        if let planRoute = destination.planRoute {
-                            openPlanRoute(planRoute)
+                        PlanCapacityEnvelopeCard(envelope: dashboard.capacityEnvelope)
+
+                        PlanLifeSuiteCard(suite: dashboard.lifeSuite)
+
+                        PlanGoalLifecycleRailCard(rail: dashboard.lifecycleRail)
+
+                        PlanTimelineStripCard(strip: dashboard.timelineStrip, onOpenGoal: openGoal)
+
+                        if let emptyTitle = dashboard.emptyTitle, let emptyMessage = dashboard.emptyMessage {
+                            DegradedStateCard(
+                                state: DegradedStateOrchestrator.planEmpty(),
+                                primaryAccessibilityIdentifier: "plan.empty.create-goal",
+                                secondaryAccessibilityIdentifier: "plan.empty.open-captures",
+                                onPrimaryAction: {
+                                    _ = emptyTitle
+                                    _ = emptyMessage
+                                    container.commandRouter.presentCreateGoal(source: .shellCompose)
+                                },
+                                onSecondaryAction: {
+                                    container.navigation.openPlanRoute(.captureInbox)
+                                }
+                            )
                         }
-                    }
 
-                    PlanElasticWeekCard(
-                        days: dashboard.weekDays,
-                        selectedDayID: bindingForSelectedDay(defaultID: dashboard.pressureScrubber.defaultDayID)
-                    )
+                        PlanPressureScrubberCard(
+                            scrubber: dashboard.pressureScrubber,
+                            selectedDayID: bindingForSelectedDay(defaultID: dashboard.pressureScrubber.defaultDayID)
+                        )
 
-                    if let selectedDay = selectedDay(in: dashboard) {
-                        PlanBelievabilityCard(
-                            believability: dashboard.believability,
-                            selectedDay: selectedDay,
+                        PlanGoalRelationshipCard(items: dashboard.goalShapingItems) { target in
+                            openGoal(target)
+                        }
+
+                        PlanSecondaryDestinationsCard(destinations: dashboard.secondaryDestinations) { destination in
+                            if let planRoute = destination.planRoute {
+                                openPlanRoute(planRoute)
+                            }
+                        }
+
+                        PlanElasticWeekCard(
+                            days: dashboard.weekDays,
+                            selectedDayID: bindingForSelectedDay(defaultID: dashboard.pressureScrubber.defaultDayID)
+                        )
+
+                        if let selectedDay = selectedDay(in: dashboard) {
+                            PlanBelievabilityCard(
+                                believability: dashboard.believability,
+                                selectedDay: selectedDay,
+                                onOpenGoal: openGoal,
+                                onOpenWindow: handleOpenWindow
+                            )
+                        }
+
+                        PlanCalendarAwarenessCard(
+                            state: dashboard.calendarAwareness,
+                            onPrimaryAction: handleCalendarAwarenessAction
+                        )
+
+                        PlanOpportunityWindowsCard(windows: dashboard.opportunityWindows, onOpenGoal: openGoal)
+
+                        PlanDecisionListCard(
+                            title: dashboard.decisionDebt.title,
+                            subtitle: dashboard.decisionDebt.subtitle,
+                            emptyTitle: "No decision needed",
+                            emptyDetail: "The current plan is not asking for another decision right now.",
+                            items: dashboard.decisionDebt.items,
+                            accessibilityIdentifier: "plan.decision-debt",
+                            onActivate: handleDecisionItem
+                        )
+
+                        PlanDecisionListCard(
+                            title: dashboard.conflictCourt.title,
+                            subtitle: dashboard.conflictCourt.subtitle,
+                            emptyTitle: "No conflict to negotiate",
+                            emptyDetail: "Nothing visible is competing hard enough to need attention.",
+                            items: dashboard.conflictCourt.conflicts,
+                            accessibilityIdentifier: "plan.conflict-court",
+                            onActivate: handleDecisionItem
+                        )
+
+                        PlanCalendarBoundaryContractCard(
+                            boundary: dashboard.calendarBoundary,
+                            onPrimaryAction: {
+                                handleCalendarAwarenessAction(dashboard.calendarAwareness)
+                            }
+                        )
+
+                        PlanRecoveryEntryCard(recovery: dashboard.recoveryEntry, onActivate: handleDecisionItem)
+
+                        PlanRealityReflowCard(reflow: dashboard.realityReflow, onActivate: handleReflowSuggestion)
+
+                        PlanReflowDecisionCard(decision: dashboard.reflowDecision, onActivate: handleReflowDecision)
+
+                        PlanRecoveryGradientCard(gradient: dashboard.recoveryGradient)
+
+                        PlanSaveTheDayCard(saveTheDay: dashboard.saveTheDay)
+
+                        PlanReflowReceiptPreviewCard(preview: dashboard.reflowReceiptPreview)
+
+                        PlanRecoveryMaturityCard(maturity: dashboard.recoveryMaturity)
+
+                        PlanExecutionResilienceCard(
+                            resilience: dashboard.resilience,
                             onOpenGoal: openGoal,
-                            onOpenWindow: handleOpenWindow
+                            onOpenPlanRoute: openPlanRoute
+                        )
+
+                        PlanShapingActionsCard(
+                            actions: dashboard.shapingActions,
+                            selectedKind: $selectedActionKind,
+                            selectedDay: selectedDay(in: dashboard),
+                            onActivate: handleShapingAction
                         )
                     }
-
-                    PlanCalendarAwarenessCard(
-                        state: dashboard.calendarAwareness,
-                        onPrimaryAction: handleCalendarAwarenessAction
-                    )
-
-                    PlanOpportunityWindowsCard(windows: dashboard.opportunityWindows, onOpenGoal: openGoal)
-
-                    PlanDecisionListCard(
-                        title: dashboard.decisionDebt.title,
-                        subtitle: dashboard.decisionDebt.subtitle,
-                        emptyTitle: "No decision needed",
-                        emptyDetail: "The current plan is not asking for another decision right now.",
-                        items: dashboard.decisionDebt.items,
-                        accessibilityIdentifier: "plan.decision-debt",
-                        onActivate: handleDecisionItem
-                    )
-
-                    PlanDecisionListCard(
-                        title: dashboard.conflictCourt.title,
-                        subtitle: dashboard.conflictCourt.subtitle,
-                        emptyTitle: "No conflict to negotiate",
-                        emptyDetail: "Nothing visible is competing hard enough to need attention.",
-                        items: dashboard.conflictCourt.conflicts,
-                        accessibilityIdentifier: "plan.conflict-court",
-                        onActivate: handleDecisionItem
-                    )
-
-                    PlanCalendarBoundaryContractCard(
-                        boundary: dashboard.calendarBoundary,
-                        onPrimaryAction: {
-                            handleCalendarAwarenessAction(dashboard.calendarAwareness)
-                        }
-                    )
-
-                    PlanRecoveryEntryCard(recovery: dashboard.recoveryEntry, onActivate: handleDecisionItem)
-
-                    PlanRealityReflowCard(reflow: dashboard.realityReflow, onActivate: handleReflowSuggestion)
-
-                    PlanReflowDecisionCard(decision: dashboard.reflowDecision, onActivate: handleReflowDecision)
-
-                    PlanRecoveryGradientCard(gradient: dashboard.recoveryGradient)
-
-                    PlanSaveTheDayCard(saveTheDay: dashboard.saveTheDay)
-
-                    PlanReflowReceiptPreviewCard(preview: dashboard.reflowReceiptPreview)
-
-                    PlanRecoveryMaturityCard(maturity: dashboard.recoveryMaturity)
-
-                    PlanExecutionResilienceCard(
-                        resilience: dashboard.resilience,
-                        onOpenGoal: openGoal,
-                        onOpenPlanRoute: openPlanRoute
-                    )
-
-                    PlanShapingActionsCard(
-                        actions: dashboard.shapingActions,
-                        selectedKind: $selectedActionKind,
-                        selectedDay: selectedDay(in: dashboard),
-                        onActivate: handleShapingAction
-                    )
                 }
+                .padding(.horizontal, theme.spacing.lg)
+                .padding(.vertical, theme.spacing.md)
             }
-            .padding(.horizontal, theme.spacing.lg)
-            .padding(.vertical, theme.spacing.md)
+            .scrollIndicators(.hidden)
         }
-        .scrollIndicators(.hidden)
         .navigationTitle(showsNavigationChrome ? "Plan" : "")
         .toolbar {
             if showsNavigationChrome {
@@ -188,6 +195,21 @@ struct PlanScreen: View {
             preconditionFailure("App container must be injected.")
         }
         return appContainer
+    }
+
+    private var planLivingState: LivingVisualState {
+        guard case let .loaded(dashboard) = viewModel.state else {
+            return .calm
+        }
+
+        let label = dashboard.capacityEnvelope.label.lowercased()
+        if label.contains("overloaded") || label.contains("tight") {
+            return .pressured
+        }
+        if dashboard.calendarAwareness.status == .denied {
+            return .recovery
+        }
+        return .active
     }
 
     private func bindingForSelectedDay(defaultID: String) -> Binding<String> {
@@ -280,6 +302,36 @@ struct PlanScreen: View {
 
     private func openGoal(_ target: GoalRouteTarget) {
         container.navigation.openGoalDetail(target)
+    }
+}
+
+private struct PlanScopeChipStrip: View {
+    @Environment(\.ambitionTheme) private var theme
+
+    let timeframeLabel: String
+
+    var body: some View {
+        StateDrivenMaterialPanel(context: .plan, state: .active) {
+            VStack(alignment: .leading, spacing: theme.spacing.sm) {
+                HStack(spacing: theme.spacing.xs) {
+                    AmbitionChip("Day", role: .time, semanticState: .calendarDerived)
+                    AmbitionChip("Week", role: .time, semanticState: .focus)
+                    AmbitionChip("Month", role: .time, semanticState: .neutral)
+                }
+                .accessibilityElement(children: .combine)
+                .accessibilityLabel("Plan scope")
+                .accessibilityValue("Day, Week, Month")
+
+                EvidenceLabel(
+                    "Time-aware plan",
+                    detail: timeframeLabel,
+                    source: "Plan",
+                    state: .active,
+                    context: .plan
+                )
+            }
+        }
+        .accessibilityIdentifier("plan.scope-chip-strip")
     }
 }
 

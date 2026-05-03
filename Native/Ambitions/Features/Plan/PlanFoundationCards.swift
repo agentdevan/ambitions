@@ -95,6 +95,16 @@ struct PlanCapacityEnvelopeCard: View {
                     TagPill(envelope.availableCapacity, icon: "calendar", state: envelope.visualState)
                 }
 
+                PressureGlow(level: pressureLevel, context: .plan, label: "Plan pressure")
+
+                EvidenceLabel(
+                    envelope.label,
+                    detail: envelope.detail,
+                    source: envelope.availableCapacity,
+                    state: livingState,
+                    context: .plan
+                )
+
                 VStack(alignment: .leading, spacing: theme.spacing.sm) {
                     PlanKeyValueRow(label: "Pressure", value: envelope.pressure, state: envelope.visualState)
                     PlanKeyValueRow(label: "Focus time", value: envelope.protectedFocus, state: .selected)
@@ -104,6 +114,34 @@ struct PlanCapacityEnvelopeCard: View {
         }
         .accessibilityIdentifier("plan.capacity-envelope")
         .ambitionPanelAccessibility()
+    }
+
+    private var pressureLevel: Double {
+        let label = envelope.label.lowercased()
+        if label.contains("overloaded") || label.contains("too much") {
+            return 0.88
+        }
+        if label.contains("tight") {
+            return 0.70
+        }
+        if label.contains("steady") {
+            return 0.46
+        }
+        return 0.22
+    }
+
+    private var livingState: LivingVisualState {
+        let label = envelope.label.lowercased()
+        if label.contains("overloaded") || label.contains("too much") {
+            return .recovery
+        }
+        if label.contains("tight") {
+            return .pressured
+        }
+        if label.contains("steady") {
+            return .active
+        }
+        return .calm
     }
 }
 

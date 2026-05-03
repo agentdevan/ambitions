@@ -96,9 +96,9 @@ Current 4.0 status:
 - Complete: EB32 Cross Kernel Dependency And Gate Integration is complete as dependency/gate evidence only; no production Swift, persistence, route/raw values, visual UI, or app behavior is implemented.
 - Complete: DAV01 Dynamic Visual Source Truth And Surface Map is complete as docs/source mapping evidence only; no production Swift, visual UI, or app behavior is implemented.
 - Complete: DAV02 Reusable Living Visual Primitives Implementation is complete as shared SwiftUI primitive implementation; primitives are not wired into top-level app surfaces yet.
-- Active Planned / Queued: DAV05-DAV15 Dynamic Adaptive Visual System
-  expansion remains active Ambitions 4.0 implementation scope after DAV04;
-  DAV05 is next eligible and production SwiftUI is allowed only inside each
+- Active Planned / Queued: DAV06-DAV15 Dynamic Adaptive Visual System
+  expansion remains active Ambitions 4.0 implementation scope after DAV05;
+  DAV06 is next eligible and production SwiftUI is allowed only inside each
   DAV batch boundary.
 - Active Planned / Queued: EB08-EB12, EB14-EB18, EB20-EB24, EB03-EB06, and EB26-EB40 Ambitions 4.0 External Brain Foundation expansion segment; not completed and not implemented in app behavior.
 - Queued / Blocked: SI01-SI18 pending global-order selection or `Start Signature Interface Train` plus PXOS/ME/CS/SI quality gates.
@@ -108,8 +108,8 @@ Current 4.0 status:
 - Active External Brain expansion added: EB01-EB40 as active planned Ambitions 4.0 scope.
 - Active Dynamic Adaptive Visual System expansion added: DAV01-DAV15 as active planned Ambitions 4.0 implementation scope.
 - New active planned Ambitions 4.0 total after EB and DAV integration: 168.
-- Remaining after DAV04: 110 active planned batches remain including
-  DAV05-DAV15, EB08-EB12, EB14-EB18, EB20-EB24, EB03-EB06, EB26-EB40,
+- Remaining after DAV05: 109 active planned batches remain including
+  DAV06-DAV15, EB08-EB12, EB14-EB18, EB20-EB24, EB03-EB06, EB26-EB40,
   CS10, SI01-SI18, PD01-PD18, and AOS01-AOS30; CS02A-CS06A,
   CS02B-CS06B, and CS09A-CS09B are internal stages, not new formal batches;
   CS02C-CS06C and CS09C are accepted Yellow/deferred.
