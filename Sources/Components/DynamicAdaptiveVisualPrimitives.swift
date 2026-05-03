@@ -92,6 +92,40 @@ public enum DAVMotionPreset: String, CaseIterable, Sendable {
     case heroExpansion
     case stateSettle
 
+    public var stateMeaning: String {
+        switch self {
+        case .subtlePulse:
+            return "A proof or attention state became visible."
+        case .softReveal:
+            return "A surface or module became available without changing ownership."
+        case .railProgress:
+            return "A timeline or ordered rail advanced to a new visible state."
+        case .receiptConfirmation:
+            return "A receipt, proof, or safety confirmation settled."
+        case .heroExpansion:
+            return "A primary visual object expanded into the working context."
+        case .stateSettle:
+            return "A module reached a stable state after data or selection changed."
+        }
+    }
+
+    public var reduceMotionEquivalent: String {
+        switch self {
+        case .subtlePulse:
+            return "Static state label with proof or attention icon."
+        case .softReveal:
+            return "Opacity-only or instant reveal with the same label and hierarchy."
+        case .railProgress:
+            return "Static rail position, progress label, and accessible value."
+        case .receiptConfirmation:
+            return "Static receipt/proof state with source and undo or correction labels."
+        case .heroExpansion:
+            return "Direct focus or navigation with the destination title preserved."
+        case .stateSettle:
+            return "Immediate stable module state with non-color label."
+        }
+    }
+
     public func animation(theme: AmbitionTheme, reduceMotion: Bool) -> Animation? {
         guard reduceMotion == false else { return nil }
 
