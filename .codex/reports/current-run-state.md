@@ -2,12 +2,13 @@
 
 Date: 2026-05-03
 Active train: Ambitions 4.0 External Brain Foundation
-Current batch: DAV13 complete; DAV14 next eligible
-Scope: DAV13 closed the DAV rendering and battery risk ledger and tightened the
-local DAV visual performance risk scan. The pass classified blur/material,
-TimelineView/Canvas, animation, shimmer, preview gallery cost, Dynamic Type,
-VoiceOver grouping, Reduce Motion, and fallback ownership without changing app
-behavior. No route/raw value, persistence/schema, dependency, workflow, signing,
+Current batch: DAV14 complete; DAV15 next eligible
+Scope: DAV14 closed visual regression and product-experience QA evidence for
+DAV03-DAV13. The pass records PXEQ, anti-generic, accessibility, Reduce Motion,
+preview, photo-reference, Signature Experience, Transformative Motion, and
+performance-risk evidence without claiming rendered screenshot, physical-device,
+manual VoiceOver, contrast, App Store, production, or award proof. No app
+behavior, route/raw value, persistence/schema, dependency, workflow, signing,
 top-level-tab, production asset, or public accessibility/release claim change was
 made.
 
@@ -34,8 +35,9 @@ made.
   Reduce Motion classification and helper metadata; DAV11 is complete as
   internal visual accessibility evidence closeout; DAV12 is complete as preview
   fixture/scenario gallery implementation; DAV13 is complete as rendering and
-  battery risk evidence; DAV14-DAV15 remain active planned implementation scope
-  and DAV14 is next eligible.
+  battery risk evidence; DAV14 is complete as visual regression and
+  product-experience QA evidence; DAV15 remains active planned closeout scope
+  and DAV15 is next eligible.
 - PXEQ is a mandatory product-experience gate for EB UI-affecting batches; it
   is not a shipped app feature and not a new EB batch identity.
 - Optimized global order after EB32 places DAV01-DAV15 before UI-heavy EB
@@ -46,15 +48,16 @@ made.
 
 ## Current Validation Result
 
-DAV13 validation result: PASS WITH YELLOW. `git diff --check`,
-photo-matched asset check, DAV visual performance risk scan, DAV/SIG
-scorecards, DAV preview fixture check, and Transformative Motion
-boundary/state-meaning checks passed. Advisory scans remain Yellow for
-historical repo backlog terms, human/device energy proof, Instruments/FPS/thermal
-proof, DAV14 rendered visual QA, and SIG14/SIG15 final performance/accessibility
-closeout.
+DAV14 validation result: PASS WITH YELLOW. `git diff --check`, DAV preview
+fixture check, DAV visual performance risk scan, local simulator build,
+photo-matched asset check, DAV/PXEQ/SIG scorecards, PXEQ readiness/evidence
+checks, Transformative Motion checks, and doc QA were run. Hard gates passed.
+Accepted Yellow remains for advisory PXEQ drift scans, existing docs QA backlog,
+uncommitted working-tree gate hints during validation, missing rendered
+screenshot export, human visual review, physical-device proof, manual
+VoiceOver traversal, contrast measurement, and Instruments/battery proof.
 
 ## Next Safe Path
 
-Run DAV14 VisualRegression And ProductExperience QA after DAV13 is validated,
+Run DAV15 Dynamic Adaptive Visual System Closeout after DAV14 is validated,
 committed, and pushed.

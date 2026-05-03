@@ -104,9 +104,10 @@ Current 4.0 status:
 - Complete: DAV11 DynamicType VoiceOver And VisualAccessibility Closeout is complete as internal evidence closeout. DAV03-DAV10 surfaces now have a documented Dynamic Type, VoiceOver, non-color meaning, tap/gesture, Reduce Motion, and visual accessibility matrix; human/device proof remains Yellow and no public accessibility claim was made.
 - Complete: DAV12 SurfacePreviewFixtures And ScenarioGallery is complete as bounded preview fixture/gallery implementation. `Sources/Previews/DynamicAdaptiveVisualPreviews.swift` now has named DAV12 scenarios for calm normal day, overloaded day, recovery day, empty/routed capture, blocked step, Still Counts, goal proof/blocker, stale/rejected/private memory, high Dynamic Type, and Reduce Motion; no app behavior, route/raw, persistence/schema, dependency, workflow, signing, top-level-tab, or production asset change was made.
 - Complete: DAV13 VisualPerformance Rendering And BatteryRisk is complete as rendering/battery risk evidence and script enforcement. DAV blur/material, TimelineView/Canvas, animation, shimmer, and preview-cost risks are classified with Reduce Motion/fallback notes; no app behavior, route/raw, persistence/schema, dependency, workflow, signing, top-level-tab, or production asset change was made.
-- Active Planned / Queued: DAV14-DAV15 Dynamic Adaptive Visual System
-  expansion remains active Ambitions 4.0 implementation scope after DAV13;
-  DAV14 is next eligible and production SwiftUI is allowed only inside each
+- Complete: DAV14 VisualRegression And ProductExperience QA is complete as visual QA/PXEQ evidence. DAV03-DAV13 surfaces and primitives are scored at 4/5 with Yellow advisories for rendered screenshot, physical-device, manual VoiceOver, contrast, and human visual proof; no unresolved PXEQ Red, app behavior, route/raw, persistence/schema, dependency, workflow, signing, top-level-tab, or production asset change was made.
+- Active Planned / Queued: DAV15 Dynamic Adaptive Visual System
+  closeout remains active Ambitions 4.0 implementation scope after DAV14;
+  DAV15 is next eligible and production SwiftUI is allowed only inside the
   DAV batch boundary.
 - Active Planned / Queued: EB08-EB12, EB14-EB18, EB20-EB24, EB03-EB06, and EB26-EB40 Ambitions 4.0 External Brain Foundation expansion segment; not completed and not implemented in app behavior.
 - Queued / Blocked: SI01-SI18 pending global-order selection or `Start Signature Interface Train` plus PXOS/ME/CS/SI quality gates.
