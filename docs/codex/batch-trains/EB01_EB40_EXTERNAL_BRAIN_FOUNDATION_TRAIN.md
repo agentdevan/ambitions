@@ -4,13 +4,13 @@
 
 Status: Active planned Ambitions 4.0 scope / not yet completed / implementation proceeds only through batch order.
 
-Start behavior: this EB train becomes part of the active Ambitions 4.0 global train after CS09 is accepted Yellow / parked and this integration meta-batch is committed. EB01 is the next eligible batch if validation is Green or accepted Yellow.
+Start behavior: this EB train becomes part of the active Ambitions 4.0 global train after CS09 is accepted Yellow / parked and this integration meta-batch is committed. EB01 is complete by evidence; EB13 is the next eligible optimized batch if validation is Green or accepted Yellow.
 
 Original formal Ambitions 4.0 batch count: 113. Active expansion added: 40. New active planned total: 153.
 
 ## Batch Order
 
-- 047: EB01 External Brain Source Truth And Kernel Architecture. Status: active planned / queued; not completed. Boundary: Docs/canon; no production implementation is allowed because EB01 establishes source truth and gates.
+- 047: EB01 External Brain Source Truth And Kernel Architecture. Status: complete by EB01 evidence; no app behavior implemented. Boundary: Docs/canon; no production implementation was allowed because EB01 establishes source truth and gates.
 - 048: EB02 Universal Capture Canon And Domain Model. Status: active planned / queued; not completed. Boundary: Canon/domain planning; no production implementation in EB02 until exact domain files are approved by gate.
 - 049: EB03 Universal Capture Composer And Routing. Status: active planned / queued; not completed. Boundary: Implementation allowed later inside Capture composer/routing only after EB13 and EB25 gates.
 - 050: EB04 Capture Classification And Clarification. Status: active planned / queued; not completed. Boundary: Implementation allowed later for classification and one-question clarification only.
