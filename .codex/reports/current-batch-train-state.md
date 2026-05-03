@@ -2,10 +2,11 @@
 
 Date: 2026-05-03
 Active train: Ambitions 4.0 External Brain Foundation
-Current batch: DAV03 complete; DAV04 next eligible
-Scope: DAV03 upgraded the Today DayTimelineRail and HeroStepPanel composition
-using DAV primitives. No persistence/schema, route/raw value, default-tab,
-dependency, workflow, signing, or top-level-tab changes were made.
+Current batch: DAV04 complete; DAV05 next eligible
+Scope: DAV04 upgraded Capture with a CaptureAtmosphereComposer, DAV
+atmosphere, route-preview evidence, and receipt visuals. No persistence/schema,
+routing raw value, default-tab, dependency, workflow, signing, or top-level-tab
+changes were made.
 
 ## Current Truth
 
@@ -16,8 +17,9 @@ dependency, workflow, signing, or top-level-tab changes were made.
 - EB32 is complete as cross-kernel dependency/gate integration evidence only; it authorizes no app behavior by itself.
 - DAV01 is complete as source-truth/surface-map evidence only; DAV02 is
   complete as shared SwiftUI primitive implementation; DAV03 is complete as
-  bounded Today visual implementation; DAV04-DAV15 remain active planned
-  implementation scope and DAV04 is next eligible.
+  bounded Today visual implementation; DAV04 is complete as bounded Capture
+  visual implementation; DAV05-DAV15 remain active planned implementation
+  scope and DAV05 is next eligible.
 - PXEQ is a mandatory product-experience gate for EB UI-affecting batches; it is not a shipped app feature and not a new EB batch identity.
 - Optimized global order after EB32 places DAV01-DAV15 before UI-heavy EB implementation.
 - CS09 accepted Yellow / parked remains preserved; CS09C remains deferred until a named compatibility regression exists.
@@ -25,10 +27,11 @@ dependency, workflow, signing, or top-level-tab changes were made.
 
 ## Current Validation Result
 
-DAV03 validation result: PASS WITH YELLOW. Yellow advisories are existing
-repo-wide docs QA backlog, DAV10-DAV15 closeout deferrals, and
-human/platform proof non-claims.
+DAV04 validation result: PASS WITH YELLOW. Yellow advisories are expected
+production-Swift boundary scan hits under DAV04 authorization, existing
+repo-wide docs QA backlog, DAV10-DAV15 closeout deferrals, and human/platform
+proof non-claims.
 
 ## Next Safe Path
 
-Run DAV04 Capture AtmosphereComposer And RoutingReceipts Implementation.
+Run DAV05 Plan LifeShapeMap And CapacityVisuals Implementation.

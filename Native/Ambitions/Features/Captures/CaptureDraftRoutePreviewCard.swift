@@ -12,21 +12,31 @@ struct CaptureDraftRoutePreviewCard: View {
     }
 
     var body: some View {
-        AppCard(state: visualState) {
+        StateDrivenMaterialPanel(context: .capture, state: livingState) {
             VStack(alignment: .leading, spacing: theme.spacing.sm) {
                 routeSummary
+                EvidenceLabel(
+                    preview.postInputStateTitle,
+                    detail: preview.summary,
+                    source: preview.destinationLabel,
+                    state: livingState,
+                    context: .capture
+                )
                 placementDetails
                 clarificationQuestion
                 routeChoices
                 routeCommands
             }
-            .padding(theme.spacing.md)
         }
         .accessibilityElement(children: .combine)
         .accessibilityLabel(preview.accessibilityLabel)
         .accessibilityValue(preview.accessibilityValue)
         .accessibilityHint(preview.accessibilityHint ?? "Choose a different route if this is not right.")
         .accessibilityIdentifier("captures.smart-attachment-preview")
+    }
+
+    private var livingState: LivingVisualState {
+        visualState == .warning ? .pressured : .active
     }
 
     private var routeSummary: some View {
