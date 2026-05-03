@@ -31,7 +31,7 @@ PXEQ is a docs/tooling enforcement layer, not an EB identity batch. It must be i
 | 050 | EB19 | Product Maturity Onboarding Canon | Docs/canon | Onboarding maturity gates must precede setup and advanced memory exposure. | Active planned / queued; not completed |
 | 051 | EB02 | Universal Capture Canon And Domain Model | Canon/domain planning | Capture canon must precede capture implementation. | Active planned / queued; not completed |
 | 052 | EB07 | Life Memory Graph Canon And Domain Model | Canon/domain planning | Life Memory canon waits for Trust canon and precedes memory implementation. | Active planned / queued; not completed |
-| 053 | EB31 | Cross Kernel Primitives And Event Receipts | Mixed planning | Cross-kernel primitives need core kernel canon before integration. | Active planned / queued; not completed |
+| 053 | EB31 | Cross Kernel Primitives And Event Receipts | Mixed planning | Cross-kernel primitives need core kernel canon before integration. | Complete by EB31 evidence; no domain code, receipt code, persistence, or app behavior implemented |
 | 054 | EB32 | Cross Kernel Dependency And Gate Integration | Gate integration | Dependency gates follow primitive map before implementation-heavy lanes. | Active planned / queued; not completed |
 | 055 | EB20 | Value Based Onboarding And First Week Success | Implementation later | Value-first onboarding follows onboarding canon and precedes sensitive setup. | Active planned / queued; not completed |
 | 056 | EB21 | Concierge Setup And Planning Defaults Onboarding | Implementation later | Planning defaults follow value-first onboarding. | Active planned / queued; not completed |
@@ -91,4 +91,4 @@ Do not run durable memory, search, recommendation, private mode, correction/dele
 
 ## Exact Next Eligible Batch Calculation
 
-Current state after EB07 and PXEQ setup: EB01, EB13, EB25, EB19, EB02, and EB07 are complete by evidence; PXEQ is installed as a mandatory UI gate; next eligible EB batch remains EB31.
+Current state after EB31: EB01, EB13, EB25, EB19, EB02, EB07, and EB31 are complete by evidence; PXEQ is installed as a mandatory UI gate; next eligible EB batch is EB32.

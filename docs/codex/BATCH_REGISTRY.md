@@ -92,14 +92,15 @@ Current 4.0 status:
 - Complete: EB19 Product Maturity Onboarding Canon is complete as canon/evidence only; onboarding app behavior is not implemented.
 - Complete: EB02 Universal Capture Canon And Domain Model is complete as canon/domain planning evidence only; capture app behavior and domain code are not implemented.
 - Complete: EB07 Life Memory Graph Canon And Domain Model is complete as canon/domain planning evidence only; durable memory app behavior and domain code are not implemented.
-- Active Planned / Queued: EB31-EB32, EB08-EB12, EB14-EB18, EB20-EB24, EB03-EB06, and EB26-EB40 Ambitions 4.0 External Brain Foundation expansion segment; not completed and not implemented in app behavior.
+- Complete: EB31 Cross Kernel Primitives And Event Receipts is complete as cross-kernel primitive/receipt evidence only; no domain code, receipt code, persistence, or app behavior is implemented.
+- Active Planned / Queued: EB32, EB08-EB12, EB14-EB18, EB20-EB24, EB03-EB06, and EB26-EB40 Ambitions 4.0 External Brain Foundation expansion segment; not completed and not implemented in app behavior.
 - Queued / Blocked: SI01-SI18 pending global-order selection or `Start Signature Interface Train` plus PXOS/ME/CS/SI quality gates.
 - Queued / Blocked: PD01-PD18 pending `Start Product Depth Train` plus PXOS/ME/CS/SI/AOS-if-needed gates.
 - Queued / Blocked: AOS01-AOS30 pending `Start AOS Train`.
 - Original formal Ambitions 4.0 batches after SI insertion: 113.
 - Active External Brain expansion added: EB01-EB40 as active planned Ambitions 4.0 scope.
 - New active planned Ambitions 4.0 total after EB integration: 153.
-- Remaining after EB07: 101 active planned batches remain including EB31-EB32, EB08-EB12, EB14-EB18, EB20-EB24, EB03-EB06, EB26-EB40, CS10, SI01-SI18, PD01-PD18, and AOS01-AOS30; CS02A-CS06A, CS02B-CS06B, and CS09A-CS09B are internal stages, not new formal batches; CS02C-CS06C and CS09C are accepted Yellow/deferred.
+- Remaining after EB31: 100 active planned batches remain including EB32, EB08-EB12, EB14-EB18, EB20-EB24, EB03-EB06, EB26-EB40, CS10, SI01-SI18, PD01-PD18, and AOS01-AOS30; CS02A-CS06A, CS02B-CS06B, and CS09A-CS09B are internal stages, not new formal batches; CS02C-CS06C and CS09C are accepted Yellow/deferred.
 
 Use [../canon/Ambitions_4_0_Execution_Program.md](../canon/Ambitions_4_0_Execution_Program.md) and [GLOBAL_FUTURE_BATCH_EXECUTION_ORDER.md](GLOBAL_FUTURE_BATCH_EXECUTION_ORDER.md) for current post-3.0 status semantics.
 
