@@ -22,7 +22,7 @@ No product behavior expansion. No visual redesign. No compatibility seam retired
 
 ## CS06B Validation Result
 
-CS06B is PASS WITH YELLOW pending commit evidence:
+CS06B is PASS WITH YELLOW with commit evidence `e5ea890e`:
 
 - CS06B added focused test proof for failed-taxonomy raw values and external action `.failed` propagation.
 - Focused simulator/unit lane passed 71 tests with 0 failures.
@@ -33,6 +33,7 @@ CS06B is PASS WITH YELLOW pending commit evidence:
 - Release-claim scan is PASS WITH YELLOW: hits are forbidden-claim lists, scan commands, historical logs, and explicit non-claims only.
 - `scripts/run-doc-qa.sh || true` is PASS WITH YELLOW with existing stale-guidance, deprecated-language, and markdownlint advisory backlog; lychee passed with 647 links and 0 errors.
 - `scripts/batch-train-gate-check.sh || true` is PASS WITH YELLOW with only the expected dirty-tree hint before commit.
+- Post-commit drift check passed: working tree clean and `scripts/batch-train-gate-check.sh || true` reported `GREEN_HINT working tree clean`.
 
 ## Yellow Advisories
 

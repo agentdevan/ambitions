@@ -38,7 +38,7 @@ Branch: main
 
 CS06A is PASS WITH YELLOW with commit evidence `50ea5c17` and report evidence commit `e1f104f3`.
 
-CS06B is PASS WITH YELLOW pending commit evidence:
+CS06B is PASS WITH YELLOW with commit evidence `e5ea890e`:
 
 - CS06B touched only focused tests and docs/status files; no production Swift was edited.
 - Added `testCS06FailedTaxonomyRawValuesRemainCompatibilityStable`, locking `failed`, `failed_safely`, `safe_failure`, and `unavailable_failed` raw values.
@@ -51,6 +51,7 @@ CS06B is PASS WITH YELLOW pending commit evidence:
 - Release-claim scan is PASS WITH YELLOW: hits are forbidden-claim lists, scan commands, historical logs, and explicit non-claims only.
 - `scripts/run-doc-qa.sh || true` is PASS WITH YELLOW with existing stale-guidance, deprecated-language, and markdownlint advisory backlog; lychee passed with 647 links and 0 errors.
 - `scripts/batch-train-gate-check.sh || true` is PASS WITH YELLOW with only the expected dirty-tree hint before commit.
+- Post-commit drift check passed: working tree clean and `scripts/batch-train-gate-check.sh || true` reported `GREEN_HINT working tree clean`.
 
 Not verified:
 

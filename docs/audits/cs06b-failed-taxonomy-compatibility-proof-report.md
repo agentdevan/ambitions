@@ -1,6 +1,6 @@
 # CS06B Failed-Taxonomy Compatibility Proof Report
 
-Status: PASS WITH YELLOW pending commit evidence. CS06B is focused proof only and does not retire the failed taxonomy.
+Status: PASS WITH YELLOW with commit evidence `e5ea890e`. CS06B is focused proof only and does not retire the failed taxonomy.
 
 ## Starting State
 
