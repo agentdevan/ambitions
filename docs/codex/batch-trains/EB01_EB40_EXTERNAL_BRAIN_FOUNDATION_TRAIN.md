@@ -34,7 +34,7 @@ Original formal Ambitions 4.0 batch count: 113. Active expansion added: 40. New 
 - 068: EB22 Privacy Setup And Trust Onboarding. Status: active planned / queued; not completed. Boundary: Implementation allowed later for privacy setup only.
 - 069: EB23 Maturity Levels Progressive Disclosure And Life Season Templates. Status: active planned / queued; not completed. Boundary: Implementation allowed later for maturity levels and life season templates only.
 - 070: EB24 Onboarding Receipts Skip Later And Setup Recovery. Status: active planned / queued; not completed. Boundary: Implementation allowed later for onboarding receipts and skip/later recovery only.
-- 071: EB25 Accessibility Cognitive Load Canon. Status: active planned / queued; not completed. Boundary: Docs/canon; no production implementation is allowed because EB25 establishes accessibility gates.
+- 049: EB25 Accessibility Cognitive Load Canon. Status: complete by EB25 evidence; no app behavior implemented. Boundary: Docs/canon; no production implementation was allowed because EB25 establishes accessibility gates.
 - 072: EB26 Cognitive Load Modes And Interface Density. Status: active planned / queued; not completed. Boundary: Implementation allowed later for cognitive load modes and density only.
 - 073: EB27 Dynamic Type VoiceOver And Reduce Motion. Status: active planned / queued; not completed. Boundary: Implementation allowed later for Dynamic Type, VoiceOver, and Reduce Motion evidence only.
 - 074: EB28 Plain Language Anxiety Safe Copy And Explain This Screen. Status: active planned / queued; not completed. Boundary: Implementation allowed later for plain language and explain-this-screen only.
