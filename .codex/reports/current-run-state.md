@@ -2,12 +2,12 @@
 
 Date: 2026-05-03
 Active train: Ambitions 4.0 External Brain Foundation
-Current batch: EB22 complete; EB23 next eligible
-Scope: EB22 closed as Trust, Privacy, And User Control gate/evidence only. It
-records the privacy setup and trust onboarding contract, repairs stale prompt
-global-order metadata, and defers product Swift until exact owner files,
-focused tests, preview evidence, privacy evidence, accessibility evidence,
-rollback, and release-claim proof are named. No app
+Current batch: EB23 complete; EB24 next eligible
+Scope: EB23 closed as Product Maturity And Onboarding gate/evidence only. It
+records the maturity-level, progressive-disclosure, and life-season template
+contract, repairs stale prompt global-order metadata, and defers product Swift
+until exact owner files, focused tests, preview evidence, privacy evidence,
+accessibility evidence, rollback, and release-claim proof are named. No app
 behavior, route/raw value, persistence/schema, dependency, workflow, signing,
 top-level-tab, production asset, or public accessibility/release claim change was
 made.
@@ -30,6 +30,8 @@ made.
   authorizes no app behavior by itself.
 - EB22 is complete as privacy setup/trust onboarding gate/evidence only; it
   authorizes no app behavior by itself.
+- EB23 is complete as maturity/progressive-disclosure/life-season template
+  gate/evidence only; it authorizes no app behavior by itself.
 - DAV01 is complete as source-truth/surface-map evidence only; DAV02 is
   complete as shared SwiftUI primitive implementation; DAV03 is complete as
   bounded Today visual implementation; DAV04 is complete as bounded Capture
@@ -43,7 +45,7 @@ made.
   fixture/scenario gallery implementation; DAV13 is complete as rendering and
   battery risk evidence; DAV14 is complete as visual regression and
   product-experience QA evidence; DAV15 is complete as train closeout evidence;
-  EB23 remains active planned scope and is next eligible.
+  EB24 remains active planned scope and is next eligible.
 - PXEQ is a mandatory product-experience gate for EB UI-affecting batches; it
   is not a shipped app feature and not a new EB batch identity.
 - Optimized global order after EB32 places DAV01-DAV15 before UI-heavy EB
@@ -54,15 +56,15 @@ made.
 
 ## Current Validation Result
 
-EB22 validation result: PASS WITH YELLOW. `git diff --check`, EB active train
+EB23 validation result: PASS WITH YELLOW. `git diff --check`, EB active train
 integration gate, EB unsupported-claim scan, EB 5.0 drift scan, no-fake-proof
 gate, canon language drift scan, release-claim safety scan, docs QA, and batch
 train gate were run. Hard checks passed. Accepted Yellow remains for existing
 claim/copy/docs advisory backlog, working-tree gate hints during validation,
-and future product implementation proof because EB22 intentionally changes no
+and future product implementation proof because EB23 intentionally changes no
 Swift or app behavior.
 
 ## Next Safe Path
 
-Run EB23 Maturity Levels Progressive Disclosure And Life Season Templates only after EB22 is validated,
+Run EB24 Onboarding Receipts Skip Later And Setup Recovery only after EB23 is validated,
 committed, and pushed.

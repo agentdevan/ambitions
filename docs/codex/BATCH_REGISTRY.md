@@ -129,9 +129,16 @@ Current 4.0 status:
   072, and defers product Swift until exact owner files, focused tests, preview
   evidence, privacy evidence, accessibility evidence, rollback, and
   release-claim proof are named.
-- Active Planned / Queued: EB23 Maturity Levels Progressive Disclosure And
-  Life Season Templates is next eligible after EB22; production SwiftUI is
-  allowed only inside the active EB batch boundary.
+- Complete: EB23 Maturity Levels Progressive Disclosure And Life Season
+  Templates is complete as Product Maturity And Onboarding gate/evidence only.
+  It records the maturity-level, progressive-disclosure, and life-season
+  template contract, repairs the prompt global-order metadata to 073, and
+  defers product Swift until exact owner files, focused tests, preview
+  evidence, privacy evidence, accessibility evidence, rollback, and
+  release-claim proof are named.
+- Active Planned / Queued: EB24 Onboarding Receipts Skip Later And Setup
+  Recovery is next eligible after EB23; production SwiftUI is allowed only
+  inside the active EB batch boundary.
 - Active Planned / Queued: EB08-EB12, EB14-EB18, EB20-EB24, EB03-EB06, and EB26-EB40 Ambitions 4.0 External Brain Foundation expansion segment; not completed and not implemented in app behavior.
 - Queued / Blocked: SI01-SI18 pending global-order selection or `Start Signature Interface Train` plus PXOS/ME/CS/SI quality gates.
 - Queued / Blocked: PD01-PD18 pending `Start Product Depth Train` plus PXOS/ME/CS/SI/AOS-if-needed gates.

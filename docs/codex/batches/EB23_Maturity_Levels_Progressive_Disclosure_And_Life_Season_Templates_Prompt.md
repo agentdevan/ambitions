@@ -6,7 +6,7 @@
 
 - Batch ID: EB23
 - Name: Maturity Levels Progressive Disclosure And Life Season Templates
-- Global order after EB insertion: 069
+- Global order after EB insertion: 073
 
 ## Active 4.0 Status
 
