@@ -5,7 +5,7 @@
 Active train: CS compatibility seam retirement train
 Active batch: CS09 Compatibility Regression Repair
 Current out-of-train task: none
-Scope: ME01-ME12 maintainability train complete with commit/push evidence; ME11 repair not triggered; PXOS implementation not started; CS01 complete; CS07 complete as focused compatibility proof; CS08 complete as focused import/export/persistence proof; CS02A/CS02B, CS03A/CS03B, CS04A/CS04B, CS05A/CS05B, and CS06A/CS06B complete as internal compatibility seam repair/proof stages; CS02C-CS06C deferred; CS09 dry-run stopped on Red because no named compatibility regression target exists; Signature Interface/Product Depth/AmbitionsOS trains not started
+Scope: ME01-ME12 maintainability train complete with commit/push evidence; ME11 repair not triggered; PXOS implementation not started; CS01 complete; CS07 complete as focused compatibility proof; CS08 complete as focused import/export/persistence proof; CS02A/CS02B, CS03A/CS03B, CS04A/CS04B, CS05A/CS05B, and CS06A/CS06B complete as internal compatibility seam repair/proof stages; CS02C-CS06C deferred; CS09 repaired into CS09A/CS09B/CS09C and accepted Yellow/parked because no named compatibility regression target exists; Signature Interface/Product Depth/AmbitionsOS trains not started
 Date: 2026-05-03
 
 ## Active Train Truth
@@ -35,14 +35,14 @@ CS06B is PASS WITH YELLOW with commit evidence `e5ea890e`:
 - `scripts/batch-train-gate-check.sh || true` is PASS WITH YELLOW with only the expected dirty-tree hint before commit.
 - Post-commit drift check passed: working tree clean and `scripts/batch-train-gate-check.sh || true` reported `GREEN_HINT working tree clean`.
 
-## CS09 Dry-Run Result
+## CS09 Conditional Repair Result
 
-CS09 is STOPPED ON RED.
+CS09 is PASS WITH YELLOW / parked.
 
-- Execution allowed: NO.
 - CS09 may repair only a named compatibility regression from failed CS evidence.
-- Current evidence from CS02B, CS03B, CS04B, CS05B, and CS06B contains accepted Yellow deferred retirements, not a failed compatibility regression target.
-- Proceeding would invent scope or prematurely execute deferred CS02C-CS06C retirement work.
+- CS09A documents the conditional regression target template and repair protocol.
+- CS09B proves current evidence from CS02B, CS03B, CS04B, CS05B, and CS06B contains accepted Yellow deferred retirements, not a failed compatibility regression target.
+- CS09C is deferred until a named compatibility regression target exists.
 - Red report: `docs/audits/cs09-compatibility-regression-repair-dry-run-red-report.md`.
 
 ## Yellow Advisories
@@ -60,6 +60,6 @@ Continue only in global order, after dry-run selection says `Execution allowed: 
 
 ## Next Eligible Batch
 
-CS09 is the current blocked batch. Exact next recommended prompt/path:
+CS09 is accepted Yellow/parked. Exact next recommended prompt/path:
 
-`Repair CS09 Conditional Compatibility Regression Repair Scope And Resume Global Train`
+`Integrate External Brain Foundation into Ambitions 4.0 train`

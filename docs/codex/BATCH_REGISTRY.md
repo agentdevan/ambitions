@@ -84,13 +84,13 @@ Current 4.0 status:
 - Completed: CS06A Failed-Taxonomy Compatibility Map And Seam Ledger as internal docs/protocol stage of formal CS06; no seam retired, no app code edited, no enum/raw value changed, and no copy/accessibility identifier changed.
 - Completed: CS06B Failed-Taxonomy Compatibility Proof as focused simulator/unit proof; no seam retired and no production Swift edited.
 - Accepted Yellow: CS06C Narrow Internal Failed-Taxonomy Retirement remains blocked/deferred until a later proof shows retirement is safe.
-- Stopped on Red: CS09 Compatibility Regression Repair dry-run returned Execution allowed: NO because no named compatibility regression target exists.
+- Accepted Yellow / Parked: CS09 Compatibility Regression Repair was repaired into CS09A/CS09B/CS09C internal stages. CS09A/CS09B are docs/protocol proof stages; no named compatibility regression target exists, so CS09C is deferred.
 - Queued / Blocked: CS02C, CS03C, CS04C, CS05C, CS06C, and CS10 pending current global preauthorization or `Start CS Train`.
 - Queued / Blocked: SI01-SI18 pending global-order selection or `Start Signature Interface Train` plus PXOS/ME/CS/SI quality gates.
 - Queued / Blocked: PD01-PD18 pending `Start Product Depth Train` plus PXOS/ME/CS/SI/AOS-if-needed gates.
 - Queued / Blocked: AOS01-AOS30 pending `Start AOS Train`.
 - Total formal Ambitions 4.0 batches after SI insertion: 113.
-- Remaining after CS06B and SI insertion: 68 formal batches remain including the blocked `046 — CS09` slot; CS02A-CS06A and CS02B-CS06B are internal stages of formal CS02-CS06, not new formal batches; CS02C-CS06C are accepted Yellow/deferred.
+- Remaining after CS09 accepted Yellow and SI insertion: 67 formal batches remain before External Brain integration; CS02A-CS06A, CS02B-CS06B, and CS09A-CS09B are internal stages, not new formal batches; CS02C-CS06C and CS09C are accepted Yellow/deferred.
 
 Use [../canon/Ambitions_4_0_Execution_Program.md](../canon/Ambitions_4_0_Execution_Program.md) and [GLOBAL_FUTURE_BATCH_EXECUTION_ORDER.md](GLOBAL_FUTURE_BATCH_EXECUTION_ORDER.md) for current post-3.0 status semantics.
 
