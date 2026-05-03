@@ -13,7 +13,7 @@ Each implemented surface must score 4/5 or higher on native iPhone believability
 
 | Surface | Status | Score | Notes |
 | --- | --- | --- | --- |
-| Shared primitives | Pending DAV02 | Not scored | Requires build and preview evidence. |
+| Shared primitives | Complete DAV02 | 4/5 | Native SwiftUI, state-driven, evidence labels, Reduce Motion-aware motion helpers, VoiceOver labels, and high Dynamic Type preview evidence. Surface-specific scoring waits for DAV03-DAV09. |
 | Today | Pending DAV03 | Not scored | Requires before/after visual evidence. |
 | Capture | Pending DAV04 | Not scored | Requires composer and routing receipt evidence. |
 | Plan | Pending DAV05 | Not scored | Requires LifeShape/capacity evidence. |
@@ -21,4 +21,3 @@ Each implemented surface must score 4/5 or higher on native iPhone believability
 | You | Pending DAV07 | Not scored | Requires personal system center evidence. |
 | Memory | Pending DAV08 | Not scored | Requires source/confidence/control evidence. |
 | Trust/Receipts | Pending DAV09 | Not scored | Requires receipt/proof/source evidence. |
-
