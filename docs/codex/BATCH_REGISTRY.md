@@ -105,10 +105,15 @@ Current 4.0 status:
 - Complete: DAV12 SurfacePreviewFixtures And ScenarioGallery is complete as bounded preview fixture/gallery implementation. `Sources/Previews/DynamicAdaptiveVisualPreviews.swift` now has named DAV12 scenarios for calm normal day, overloaded day, recovery day, empty/routed capture, blocked step, Still Counts, goal proof/blocker, stale/rejected/private memory, high Dynamic Type, and Reduce Motion; no app behavior, route/raw, persistence/schema, dependency, workflow, signing, top-level-tab, or production asset change was made.
 - Complete: DAV13 VisualPerformance Rendering And BatteryRisk is complete as rendering/battery risk evidence and script enforcement. DAV blur/material, TimelineView/Canvas, animation, shimmer, and preview-cost risks are classified with Reduce Motion/fallback notes; no app behavior, route/raw, persistence/schema, dependency, workflow, signing, top-level-tab, or production asset change was made.
 - Complete: DAV14 VisualRegression And ProductExperience QA is complete as visual QA/PXEQ evidence. DAV03-DAV13 surfaces and primitives are scored at 4/5 with Yellow advisories for rendered screenshot, physical-device, manual VoiceOver, contrast, and human visual proof; no unresolved PXEQ Red, app behavior, route/raw, persistence/schema, dependency, workflow, signing, top-level-tab, or production asset change was made.
-- Active Planned / Queued: DAV15 Dynamic Adaptive Visual System
-  closeout remains active Ambitions 4.0 implementation scope after DAV14;
-  DAV15 is next eligible and production SwiftUI is allowed only inside the
-  DAV batch boundary.
+- Complete: DAV15 Dynamic Adaptive Visual System Closeout is complete as DAV
+  train closeout, accepted-Yellow ledger, release-claim boundary, and EB handoff
+  evidence. DAV01-DAV15 are complete with accepted Yellow for screenshot,
+  physical-device, manual VoiceOver, contrast, human visual, and
+  Instruments/battery proof; no release readiness, App Store readiness, Apple
+  Award, full accessibility, or device proof claim is made.
+- Active Planned / Queued: EB20 ValueFirstOnboardingAndConciergeSetup is next
+  eligible after DAV15; production SwiftUI is allowed only inside the active EB
+  batch boundary.
 - Active Planned / Queued: EB08-EB12, EB14-EB18, EB20-EB24, EB03-EB06, and EB26-EB40 Ambitions 4.0 External Brain Foundation expansion segment; not completed and not implemented in app behavior.
 - Queued / Blocked: SI01-SI18 pending global-order selection or `Start Signature Interface Train` plus PXOS/ME/CS/SI quality gates.
 - Queued / Blocked: PD01-PD18 pending `Start Product Depth Train` plus PXOS/ME/CS/SI/AOS-if-needed gates.

@@ -25,7 +25,7 @@ DAV makes Ambitions visually alive without making it loud, generic, heavy, unrea
 - 066: DAV12 SurfacePreviewFixtures And ScenarioGallery. Status: complete. Boundary: preview fixtures/scenario gallery.
 - 067: DAV13 VisualPerformance Rendering And BatteryRisk. Status: complete. Boundary: rendering/performance risk evidence.
 - 068: DAV14 VisualRegression And ProductExperience QA. Status: complete. Boundary: visual QA and PXEQ scorecard.
-- 069: DAV15 Dynamic Adaptive Visual System Closeout. Status: active next. Boundary: closeout/handoff; no release readiness claim.
+- 069: DAV15 Dynamic Adaptive Visual System Closeout. Status: complete. Boundary: closeout/handoff; no release readiness claim.
 
 ## Hard Rules
 
