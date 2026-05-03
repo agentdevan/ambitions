@@ -44,6 +44,10 @@ struct ProfileScreen: View {
             .padding(.vertical, theme.spacing.md)
         }
         .scrollIndicators(.hidden)
+        .background {
+            LivingSurfaceBackground(context: .you, state: .calm, intensity: 0.68)
+                .ignoresSafeArea()
+        }
         .navigationTitle(showsNavigationChrome ? "You" : "")
         .refreshable {
             await refresh()
@@ -1977,6 +1981,52 @@ private struct ProfileSettingRow: View {
 }
 
 #Preview("You Dark") {
+    NavigationStack {
+        ProfileScreen(viewModel: ProfileViewModel(state: .loaded(PreviewFixtures.default.profileDashboard)))
+    }
+    .appContainer(PreviewAppContainerFactory.preview)
+    .ambitionTheme(.dark)
+    .preferredColorScheme(.dark)
+}
+
+#Preview("You System Center Setup Incomplete") {
+    NavigationStack {
+        ProfileScreen(viewModel: ProfileViewModel(state: .loaded(PreviewFixtures.default.profileDashboard)))
+    }
+    .appContainer(PreviewAppContainerFactory.preview)
+    .ambitionTheme(.dark)
+    .preferredColorScheme(.dark)
+}
+
+#Preview("You Trust Privacy Focused") {
+    NavigationStack {
+        ProfileScreen(viewModel: ProfileViewModel(state: .loaded(PreviewFixtures.default.profileDashboard)))
+    }
+    .appContainer(PreviewAppContainerFactory.preview)
+    .ambitionTheme(.dark)
+    .preferredColorScheme(.dark)
+}
+
+#Preview("You High Dynamic Type") {
+    NavigationStack {
+        ProfileScreen(viewModel: ProfileViewModel(state: .loaded(PreviewFixtures.default.profileDashboard)))
+    }
+    .appContainer(PreviewAppContainerFactory.preview)
+    .ambitionTheme(.dark)
+    .preferredColorScheme(.dark)
+    .environment(\.dynamicTypeSize, .accessibility3)
+}
+
+#Preview("You Reduce Motion") {
+    NavigationStack {
+        ProfileScreen(viewModel: ProfileViewModel(state: .loaded(PreviewFixtures.default.profileDashboard)))
+    }
+    .appContainer(PreviewAppContainerFactory.preview)
+    .ambitionTheme(.dark)
+    .preferredColorScheme(.dark)
+}
+
+#Preview("You Minimal State") {
     NavigationStack {
         ProfileScreen(viewModel: ProfileViewModel(state: .loaded(PreviewFixtures.default.profileDashboard)))
     }

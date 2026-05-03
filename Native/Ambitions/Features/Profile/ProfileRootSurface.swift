@@ -57,56 +57,128 @@ enum ProfileRootDetail: String, Identifiable {
 
 struct ProfileSettingsRootView: View {
     @Environment(\.ambitionTheme) private var theme
+    @Environment(\.accessibilityReduceMotion) private var reduceMotion
+    @State private var selectedRowHapticToken = ""
 
     let dashboard: ProfileDashboard
     let onOpenDetail: (ProfileRootDetail) -> Void
 
     var body: some View {
         VStack(alignment: .leading, spacing: theme.spacing.lg) {
-            VStack(alignment: .leading, spacing: theme.spacing.xs) {
-                Text("You")
-                    .font(theme.typography.heroDisplay)
-                    .foregroundStyle(theme.colors.textPrimary)
-                    .lineLimit(1)
-                    .accessibilityAddTraits(.isHeader)
+            SystemProfilePanel(dashboard: dashboard)
 
-                Text("Your settings, memory, and trust controls.")
-                    .font(theme.typography.bodySecondary)
-                    .foregroundStyle(theme.colors.textSecondary)
-                    .lineLimit(1)
-                    .truncationMode(.tail)
+            GroupedNavigationSystem(
+                sections: groupedNavigationSections,
+                context: .you,
+                accessibilityIdentifierPrefix: "you.row"
+            ) { item in
+                selectedRowHapticToken = item.id
+                onOpenDetail(detail(for: item.id))
             }
-            .accessibilityIdentifier("you.root-title")
-
-            ProfileCompactSystemCard(dashboard: dashboard)
-
-            GroupedNavigationList {
-                ForEach(dashboard.systemCenter.sections) { section in
-                    GroupedNavigationSection(title: section.title, footer: section.footer) {
-                        ForEach(section.items) { item in
-                            GroupedDisclosureNavigationRow(
-                                title: item.title,
-                                subtitle: item.subtitle,
-                                systemImage: item.icon,
-                                badge: GroupedNavigationBadge(item.statusLabel, state: item.semanticState),
-                                accessibilityIdentifier: "you.row.\(item.id)",
-                                accessibilityLabel: item.title,
-                                accessibilityValue: item.statusLabel,
-                                accessibilityHint: item.accessibilityHint
-                            ) {
-                                onOpenDetail(detail(for: item))
-                            }
-                        }
-                    }
-                }
-            }
+            .transition(DAVMotionPreset.softReveal.transition(reduceMotion: reduceMotion))
             .accessibilityIdentifier("you.grouped-navigation-root")
+
+            Text(dashboard.systemCenter.footer)
+                .font(theme.typography.caption)
+                .foregroundStyle(theme.colors.textTertiary)
+                .fixedSize(horizontal: false, vertical: true)
         }
         .accessibilityIdentifier("you.root")
+        .ambitionHaptic(theme.haptics.routeChange, trigger: selectedRowHapticToken)
     }
 
-    private func detail(for item: ProfileSystemCenterItem) -> ProfileRootDetail {
+    private var groupedNavigationSections: [GroupedNavigationSystemSection] {
+        [
+            groupedSection(
+                id: "planning-setup",
+                title: "Planning Setup",
+                subtitle: "Defaults that shape how Ambitions helps without taking over.",
+                itemIDs: ["profile", "personalization", "appearance"]
+            ),
+            groupedSection(
+                id: "schedule-availability",
+                title: "Schedule & Availability",
+                subtitle: "Time, availability, away states, and duration defaults stay user-owned.",
+                itemIDs: ["schedule-availability", "plan-behavior", "vacation-away-time", "durations"]
+            ),
+            groupedSection(
+                id: "trust-memory",
+                title: "Trust, Memory & Receipts",
+                subtitle: "Inspectable memory, receipts, corrections, proof, and review history.",
+                itemIDs: ["trust-center", "what-ambitions-knows", "receipts-history", "corrections", "reviews", "proof", "archive-completed"]
+            ),
+            groupedSection(
+                id: "privacy-accessibility",
+                title: "Privacy, Accessibility & Boundaries",
+                subtitle: "Controls that keep the system understandable, bounded, and humane.",
+                itemIDs: ["export-import", "accessibility", "notifications", "integrations", "widgets-live-activities-shortcuts"]
+            ),
+            groupedSection(
+                id: "preferences-personalization",
+                title: "Preferences / Personalization",
+                subtitle: "Support and app truth without a settings dump.",
+                itemIDs: ["help-support", "about"]
+            )
+        ]
+    }
+
+    private func groupedSection(
+        id: String,
+        title: String,
+        subtitle: String,
+        itemIDs: [String]
+    ) -> GroupedNavigationSystemSection {
+        let items = itemIDs.compactMap(systemCenterItem)
+        return GroupedNavigationSystemSection(
+            id: id,
+            title: title,
+            subtitle: subtitle,
+            items: items
+        )
+    }
+
+    private func systemCenterItem(for id: String) -> GroupedNavigationSystemItem? {
+        guard let item = dashboard.systemCenter.sections
+            .flatMap(\.items)
+            .first(where: { $0.id == id })
+        else { return nil }
+
+        return GroupedNavigationSystemItem(
+            id: item.id,
+            title: normalizedTitle(for: item),
+            subtitle: item.subtitle,
+            symbolName: item.icon,
+            state: livingState(for: item.semanticState),
+            statusLabel: item.statusLabel
+        )
+    }
+
+    private func normalizedTitle(for item: ProfileSystemCenterItem) -> String {
         switch item.id {
+        case "profile": "Planning Setup"
+        case "personalization": "Planning Defaults"
+        case "what-ambitions-knows": "Memory"
+        case "receipts-history": "Receipts / History"
+        case "export-import": "Privacy"
+        case "notifications", "integrations", "widgets-live-activities-shortcuts":
+            "Automation & Trust"
+        default: item.title
+        }
+    }
+
+    private func livingState(for semanticState: AmbitionSemanticState) -> LivingVisualState {
+        switch semanticState {
+        case .success, .trust, .protected, .accessibilityVerified: .proof
+        case .caution, .review, .waiting, .confidenceLow, .accessibilityUnverified: .stale
+        case .risk: .pressured
+        case .recovery: .recovery
+        case .capture, .focus, .calendarDerived, .confidenceHigh, .confidenceMedium: .active
+        case .neutral: .calm
+        }
+    }
+
+    private func detail(for itemID: String) -> ProfileRootDetail {
+        switch itemID {
         case "profile": .profile
         case "personalization": .personalization
         case "appearance": .appearance
@@ -134,49 +206,120 @@ struct ProfileSettingsRootView: View {
     }
 }
 
-private struct ProfileCompactSystemCard: View {
+private struct SystemProfilePanel: View {
     @Environment(\.ambitionTheme) private var theme
 
     let dashboard: ProfileDashboard
 
     var body: some View {
-        AppCard {
-            HStack(alignment: .center, spacing: theme.spacing.sm) {
-                Circle()
-                    .fill(theme.shell.activeTabBackground)
-                    .overlay(
-                        Text("A")
-                            .font(theme.typography.caption)
-                            .foregroundStyle(theme.shell.activeTabForeground)
-                    )
-                    .frame(width: 42, height: 42)
-                    .accessibilityHidden(true)
+        StateDrivenMaterialPanel(context: .you, state: .proof) {
+            VStack(alignment: .leading, spacing: theme.spacing.md) {
+                HStack(alignment: .top, spacing: theme.spacing.sm) {
+                    Image(systemName: "person.crop.circle.badge.checkmark")
+                        .font(.system(size: theme.icon.largeSize, weight: theme.icon.symbolWeight))
+                        .foregroundStyle(LivingTabContext.you.accent(in: theme))
+                        .frame(width: 44, height: 44)
+                        .background(
+                            Circle()
+                                .fill(LivingTabContext.you.accent(in: theme).opacity(0.14))
+                        )
+                        .overlay {
+                            Circle()
+                                .strokeBorder(LivingTabContext.you.accent(in: theme).opacity(0.26), lineWidth: 1)
+                        }
+                        .accessibilityHidden(true)
 
-                VStack(alignment: .leading, spacing: theme.spacing.xxxs) {
-                    Text(dashboard.hero.title)
-                        .font(theme.typography.bodyEmphasized)
-                        .foregroundStyle(theme.colors.textPrimary)
-                        .lineLimit(1)
-                    Text(dashboard.hero.dominantTruth)
-                        .font(theme.typography.caption)
-                        .foregroundStyle(theme.colors.textSecondary)
-                        .lineLimit(1)
-                        .truncationMode(.tail)
+                    VStack(alignment: .leading, spacing: theme.spacing.xxs) {
+                        Text("You")
+                            .font(theme.typography.caption)
+                            .foregroundStyle(theme.colors.textSecondary)
+                            .accessibilityAddTraits(.isHeader)
+
+                        Text(dashboard.hero.title)
+                            .font(theme.typography.hero)
+                            .foregroundStyle(theme.colors.textPrimary)
+                            .fixedSize(horizontal: false, vertical: true)
+
+                        Text("You are in control")
+                            .font(theme.typography.bodyEmphasized)
+                            .foregroundStyle(theme.colors.textPrimary)
+                            .fixedSize(horizontal: false, vertical: true)
+                    }
+
+                    Spacer(minLength: theme.spacing.xs)
+
+                    EvidenceLabel(
+                        "Local-first",
+                        detail: "Trust visible",
+                        source: "You owns controls",
+                        state: .proof,
+                        context: .trust
+                    )
                 }
 
-                Spacer(minLength: theme.spacing.xs)
+                Text(dashboard.hero.dominantTruth)
+                    .font(theme.typography.bodySecondary)
+                    .foregroundStyle(theme.colors.textSecondary)
+                    .fixedSize(horizontal: false, vertical: true)
 
-                Text(dashboard.preferences.appearancePreference.title)
-                    .font(theme.typography.micro)
-                    .foregroundStyle(theme.colors.textPrimary)
-                    .lineLimit(1)
-                    .padding(.horizontal, theme.spacing.xs)
-                    .padding(.vertical, theme.spacing.xxxs)
-                    .background(Capsule().fill(theme.colors.surfaceOverlay))
-                    .overlay(Capsule().stroke(theme.colors.strokeSubtle, lineWidth: 1))
+                LazyVGrid(
+                    columns: [GridItem(.adaptive(minimum: 150), spacing: theme.spacing.xs)],
+                    alignment: .leading,
+                    spacing: theme.spacing.xs
+                ) {
+                    ForEach(primaryEvidenceLabels) { label in
+                        EvidenceLabel(
+                            label.title,
+                            detail: label.detail,
+                            source: label.source,
+                            state: label.state,
+                            context: label.context
+                        )
+                    }
+                }
+                .fixedSize(horizontal: false, vertical: true)
             }
-            .padding(theme.spacing.sm)
         }
-        .accessibilityIdentifier("you.compact-profile-card")
+        .accessibilityIdentifier("you.system-profile-panel")
+        .accessibilityElement(children: .contain)
+        .accessibilityLabel("\(dashboard.hero.title). You are in control. \(dashboard.hero.dominantTruth)")
     }
+
+    private var primaryEvidenceLabels: [SystemProfileEvidence] {
+        [
+            SystemProfileEvidence(
+                id: "trust",
+                title: "Trust Center",
+                detail: "Reviewable",
+                source: "No silent changes",
+                state: .proof,
+                context: .trust
+            ),
+            SystemProfileEvidence(
+                id: "memory",
+                title: "Memory",
+                detail: "Inspectable",
+                source: "Local records",
+                state: .calm,
+                context: .memory
+            ),
+            SystemProfileEvidence(
+                id: "accessibility",
+                title: "Accessibility",
+                detail: "Claims locked",
+                source: "Human proof pending",
+                state: .stale,
+                context: .you
+            )
+        ]
+    }
+}
+
+private struct SystemProfileEvidence: Identifiable {
+    let id: String
+    let title: String
+    let detail: String
+    let source: String
+    let state: LivingVisualState
+    let context: LivingTabContext
 }

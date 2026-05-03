@@ -519,19 +519,22 @@ public struct GroupedNavigationSystemItem: Identifiable, Sendable {
     public let subtitle: String
     public let symbolName: String
     public let state: LivingVisualState
+    public let statusLabel: String?
 
     public init(
         id: String,
         title: String,
         subtitle: String,
         symbolName: String,
-        state: LivingVisualState = .calm
+        state: LivingVisualState = .calm,
+        statusLabel: String? = nil
     ) {
         self.id = id
         self.title = title
         self.subtitle = subtitle
         self.symbolName = symbolName
         self.state = state
+        self.statusLabel = statusLabel
     }
 }
 
@@ -559,13 +562,19 @@ public struct GroupedNavigationSystem: View {
 
     private let sections: [GroupedNavigationSystemSection]
     private let context: LivingTabContext
+    private let accessibilityIdentifierPrefix: String?
+    private let onSelect: ((GroupedNavigationSystemItem) -> Void)?
 
     public init(
         sections: [GroupedNavigationSystemSection],
-        context: LivingTabContext = .you
+        context: LivingTabContext = .you,
+        accessibilityIdentifierPrefix: String? = nil,
+        onSelect: ((GroupedNavigationSystemItem) -> Void)? = nil
     ) {
         self.sections = sections
         self.context = context
+        self.accessibilityIdentifierPrefix = accessibilityIdentifierPrefix
+        self.onSelect = onSelect
     }
 
     public var body: some View {
@@ -597,10 +606,11 @@ public struct GroupedNavigationSystem: View {
         }
     }
 
+    @ViewBuilder
     private func row(for item: GroupedNavigationSystemItem) -> some View {
         let accent = item.state == .calm ? context.accent(in: theme) : theme.stateStyle(for: item.state.ambitionState).accent
 
-        return HStack(alignment: .center, spacing: theme.spacing.sm) {
+        let rowContent = HStack(alignment: .center, spacing: theme.spacing.sm) {
             Image(systemName: item.symbolName)
                 .font(.system(size: theme.icon.mediumSize, weight: theme.icon.symbolWeight))
                 .foregroundStyle(accent)
@@ -622,6 +632,22 @@ public struct GroupedNavigationSystem: View {
 
             Spacer(minLength: theme.spacing.sm)
 
+            if let statusLabel = item.statusLabel {
+                Text(statusLabel)
+                    .font(theme.typography.micro)
+                    .foregroundStyle(theme.colors.textSecondary)
+                    .lineLimit(1)
+                    .minimumScaleFactor(0.82)
+                    .padding(.horizontal, theme.spacing.xs)
+                    .padding(.vertical, theme.spacing.xxxs)
+                    .background(Capsule(style: .continuous).fill(accent.opacity(0.10)))
+                    .overlay {
+                        Capsule(style: .continuous)
+                            .strokeBorder(accent.opacity(0.18), lineWidth: 1)
+                    }
+                    .accessibilityHidden(true)
+            }
+
             Image(systemName: "chevron.right")
                 .font(.system(size: theme.icon.smallSize, weight: theme.icon.symbolWeight))
                 .foregroundStyle(theme.colors.textTertiary)
@@ -638,7 +664,54 @@ public struct GroupedNavigationSystem: View {
         }
         .ambitionMinimumTapTarget()
         .accessibilityElement(children: .combine)
-        .accessibilityLabel("\(item.title). \(item.subtitle). \(item.state.title).")
+        .accessibilityLabel(accessibilitySummary(for: item))
+        .modifier(GroupedNavigationSystemIdentifier(identifier: accessibilityIdentifier(for: item)))
+
+        if let onSelect {
+            Button {
+                onSelect(item)
+            } label: {
+                rowContent
+            }
+            .buttonStyle(GroupedNavigationSystemButtonStyle())
+        } else {
+            rowContent
+        }
+    }
+
+    private func accessibilitySummary(for item: GroupedNavigationSystemItem) -> String {
+        [item.title, item.subtitle, item.statusLabel, item.state.title]
+            .compactMap { $0 }
+            .joined(separator: ". ")
+    }
+
+    private func accessibilityIdentifier(for item: GroupedNavigationSystemItem) -> String? {
+        guard let accessibilityIdentifierPrefix else { return nil }
+        return "\(accessibilityIdentifierPrefix).\(item.id)"
+    }
+}
+
+private struct GroupedNavigationSystemButtonStyle: ButtonStyle {
+    @Environment(\.ambitionTheme) private var theme
+    @Environment(\.accessibilityReduceMotion) private var reduceMotion
+
+    func makeBody(configuration: Configuration) -> some View {
+        configuration.label
+            .scaleEffect(configuration.isPressed && reduceMotion == false ? 0.992 : 1)
+            .opacity(configuration.isPressed ? 0.92 : 1)
+            .animation(theme.motion.settleAnimation(reduceMotion: reduceMotion), value: configuration.isPressed)
+    }
+}
+
+private struct GroupedNavigationSystemIdentifier: ViewModifier {
+    let identifier: String?
+
+    func body(content: Content) -> some View {
+        if let identifier {
+            content.accessibilityIdentifier(identifier)
+        } else {
+            content
+        }
     }
 }
 #endif
