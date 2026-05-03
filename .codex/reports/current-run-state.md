@@ -2,11 +2,12 @@
 
 Date: 2026-05-03
 Active train: Ambitions 4.0 External Brain Foundation
-Current batch: DAV07 complete; DAV08 next eligible
-Scope: DAV07 upgraded You with a photo-matched System Profile panel and
-grouped navigation system after verifying the uploaded reference assets. No
-production asset catalog, persistence/schema, route/raw value, dependency,
-workflow, signing, or top-level-tab changes were made.
+Current batch: DAV08 complete; DAV09 next eligible
+Scope: DAV08 upgraded Memory recall surfaces with a photo-matched
+ContextRecallCard and bounded MemoryConstellation after verifying the uploaded
+reference assets. No durable memory, hidden inference, production asset
+catalog, persistence/schema, route/raw value, dependency, workflow, signing, or
+top-level-tab changes were made.
 
 ## Current Truth
 
@@ -25,8 +26,9 @@ workflow, signing, or top-level-tab changes were made.
   bounded Today visual implementation; DAV04 is complete as bounded Capture
   visual implementation; DAV05 is complete as bounded Plan visual
   implementation; DAV06 is complete as bounded Goals visual implementation;
-  DAV07 is complete as bounded You/Profile visual implementation; DAV08-DAV15
-  remain active planned implementation scope and DAV08 is next eligible.
+  DAV07 is complete as bounded You/Profile visual implementation; DAV08 is
+  complete as bounded Memory/recall visual implementation; DAV09-DAV15 remain
+  active planned implementation scope and DAV09 is next eligible.
 - PXEQ is a mandatory product-experience gate for EB UI-affecting batches; it
   is not a shipped app feature and not a new EB batch identity.
 - Optimized global order after EB32 places DAV01-DAV15 before UI-heavy EB
@@ -37,14 +39,15 @@ workflow, signing, or top-level-tab changes were made.
 
 ## Current Validation Result
 
-DAV07 validation result: PASS WITH YELLOW. `swift build`, final
-`scripts/build-local.sh`, focused You/Profile and shell navigation tests
-(41 tests, 0 failures), `git diff --check`, and
-`scripts/photo-matched-reference-assets-check.sh` passed. Yellow advisories are
-expected DAV/SIG preview, motion, accessibility, performance, and generic scan
-hits owned by DAV10-DAV15/SIG closeout batches or existing repo backlog; no
-remaining Red.
+DAV08 validation result: PASS WITH YELLOW. `swift build`,
+`scripts/build-local.sh`, focused Profile and shell navigation tests (41 tests,
+0 failures), `git diff --check`, and the photo-matched reference asset check
+passed after a recoverable old-filename audit-report Red was repaired. Yellow
+advisories are expected DAV/SIG preview, motion, accessibility, performance, and
+generic scan hits owned by DAV10-DAV15/SIG closeout batches or existing repo
+backlog; no remaining Red.
 
 ## Next Safe Path
 
-Run DAV08 Memory ContextRecall And MemoryConstellation Implementation.
+Run DAV09 TrustReceiptStack EvidenceLabels And ProofPulse Implementation after
+DAV08 is validated, committed, and pushed.

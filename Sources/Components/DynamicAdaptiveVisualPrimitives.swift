@@ -513,6 +513,248 @@ public struct QuietCommandSurface<Content: View>: View {
     }
 }
 
+public enum ContextRecallState: String, CaseIterable, Identifiable, Sendable {
+    case current
+    case stale
+    case rejected
+    case sensitive
+    case corrected
+    case noResult
+
+    public var id: String { rawValue }
+
+    public var title: String {
+        switch self {
+        case .current: "Current"
+        case .stale: "Needs Review"
+        case .rejected: "Rejected"
+        case .sensitive: "Sensitive"
+        case .corrected: "Corrected"
+        case .noResult: "No Hidden Memory"
+        }
+    }
+
+    public var symbolName: String {
+        switch self {
+        case .current: "checkmark.seal"
+        case .stale: "clock.badge.exclamationmark"
+        case .rejected: "xmark.shield"
+        case .sensitive: "hand.raised"
+        case .corrected: "pencil.and.scribble"
+        case .noResult: "eye.slash"
+        }
+    }
+
+    public var livingState: LivingVisualState {
+        switch self {
+        case .current, .corrected:
+            return .proof
+        case .stale:
+            return .stale
+        case .rejected:
+            return .recovery
+        case .sensitive:
+            return .sensitive
+        case .noResult:
+            return .empty
+        }
+    }
+}
+
+public struct ContextRecallCard: View {
+    @Environment(\.ambitionTheme) private var theme
+
+    private let title: String
+    private let summary: String
+    private let sourceLabel: String
+    private let confidenceLabel: String
+    private let state: ContextRecallState
+    private let context: LivingTabContext
+    private let controls: [String]
+
+    public init(
+        title: String,
+        summary: String,
+        sourceLabel: String,
+        confidenceLabel: String,
+        state: ContextRecallState,
+        context: LivingTabContext = .memory,
+        controls: [String] = []
+    ) {
+        self.title = title
+        self.summary = summary
+        self.sourceLabel = sourceLabel
+        self.confidenceLabel = confidenceLabel
+        self.state = state
+        self.context = context
+        self.controls = controls
+    }
+
+    public var body: some View {
+        StateDrivenMaterialPanel(context: context, state: state.livingState) {
+            HStack(alignment: .top, spacing: theme.spacing.sm) {
+                Image(systemName: state.symbolName)
+                    .font(.system(size: theme.icon.mediumSize, weight: theme.icon.symbolWeight))
+                    .foregroundStyle(context.accent(in: theme))
+                    .frame(width: 34, height: 34)
+                    .background(Circle().fill(context.accent(in: theme).opacity(0.12)))
+                    .accessibilityHidden(true)
+
+                VStack(alignment: .leading, spacing: theme.spacing.xxxs) {
+                    Text(state.title)
+                        .font(theme.typography.caption.weight(.semibold))
+                        .foregroundStyle(context.accent(in: theme))
+                    Text(title)
+                        .font(theme.typography.section)
+                        .foregroundStyle(theme.colors.textPrimary)
+                        .fixedSize(horizontal: false, vertical: true)
+                    Text(summary)
+                        .font(theme.typography.bodySecondary)
+                        .foregroundStyle(theme.colors.textSecondary)
+                        .fixedSize(horizontal: false, vertical: true)
+                }
+
+                Spacer(minLength: theme.spacing.xs)
+            }
+
+            FlowEvidenceLabels(
+                labels: [
+                    EvidenceLabel(sourceLabel, detail: "Source visible", state: state.livingState, context: context),
+                    EvidenceLabel(confidenceLabel, detail: "No hidden certainty", state: state.livingState, context: .trust)
+                ]
+            )
+
+            if controls.isEmpty == false {
+                QuietCommandSurface(
+                    placeholder: "Review controls",
+                    detail: controls.joined(separator: " · "),
+                    context: .trust
+                ) {
+                    Image(systemName: "chevron.right")
+                        .font(.system(size: theme.icon.smallSize, weight: theme.icon.symbolWeight))
+                        .foregroundStyle(theme.colors.textTertiary)
+                        .accessibilityHidden(true)
+                }
+            }
+        }
+        .accessibilityElement(children: .combine)
+        .accessibilityLabel(accessibilitySummary)
+    }
+
+    private var accessibilitySummary: String {
+        [state.title, title, summary, sourceLabel, confidenceLabel, controls.joined(separator: ", ")]
+            .filter { $0.isEmpty == false }
+            .joined(separator: ". ")
+    }
+}
+
+public struct MemoryConstellationNode: Identifiable, Sendable {
+    public let id: String
+    public let title: String
+    public let detail: String
+    public let state: ContextRecallState
+
+    public init(id: String, title: String, detail: String, state: ContextRecallState) {
+        self.id = id
+        self.title = title
+        self.detail = detail
+        self.state = state
+    }
+}
+
+public struct MemoryConstellation: View {
+    @Environment(\.ambitionTheme) private var theme
+    @Environment(\.accessibilityReduceMotion) private var reduceMotion
+
+    private let title: String
+    private let subtitle: String
+    private let nodes: [MemoryConstellationNode]
+
+    public init(title: String, subtitle: String, nodes: [MemoryConstellationNode]) {
+        self.title = title
+        self.subtitle = subtitle
+        self.nodes = nodes
+    }
+
+    public var body: some View {
+        StateDrivenMaterialPanel(context: .memory, state: .calm) {
+            SectionHeader(eyebrow: "Memory map", title: title, subtitle: subtitle)
+
+            VStack(spacing: theme.spacing.sm) {
+                HStack(alignment: .center, spacing: theme.spacing.xs) {
+                    ForEach(nodes) { node in
+                        MemoryConstellationNodeView(node: node)
+                    }
+                }
+
+                Capsule(style: .continuous)
+                    .fill(theme.semanticColors.trust.opacity(0.28))
+                    .frame(height: 1)
+                    .overlay(alignment: .leading) {
+                        Capsule(style: .continuous)
+                            .fill(theme.semanticColors.protected.opacity(reduceMotion ? 0.28 : 0.42))
+                            .frame(maxWidth: .infinity)
+                    }
+                    .accessibilityHidden(true)
+            }
+        }
+        .accessibilityElement(children: .contain)
+        .accessibilityLabel("\(title). \(subtitle). \(nodes.count) visible memory states.")
+    }
+}
+
+private struct MemoryConstellationNodeView: View {
+    @Environment(\.ambitionTheme) private var theme
+
+    let node: MemoryConstellationNode
+
+    var body: some View {
+        VStack(spacing: theme.spacing.xxs) {
+            Image(systemName: node.state.symbolName)
+                .font(.system(size: theme.icon.smallSize, weight: theme.icon.symbolWeight))
+                .foregroundStyle(node.state == .sensitive ? theme.semanticColors.protected : theme.semanticColors.trust)
+                .frame(width: 34, height: 34)
+                .background(
+                    Circle()
+                        .fill(theme.colors.surfaceOverlay)
+                        .overlay(Circle().strokeBorder(theme.semanticColors.trust.opacity(0.24), lineWidth: 1))
+                )
+                .accessibilityHidden(true)
+
+            Text(node.title)
+                .font(theme.typography.caption.weight(.semibold))
+                .foregroundStyle(theme.colors.textPrimary)
+                .multilineTextAlignment(.center)
+                .lineLimit(2)
+                .minimumScaleFactor(0.82)
+
+            Text(node.detail)
+                .font(theme.typography.micro)
+                .foregroundStyle(theme.colors.textTertiary)
+                .multilineTextAlignment(.center)
+                .lineLimit(2)
+                .minimumScaleFactor(0.82)
+        }
+        .frame(maxWidth: .infinity, minHeight: 104)
+        .accessibilityElement(children: .combine)
+        .accessibilityLabel("\(node.title). \(node.detail). \(node.state.title).")
+    }
+}
+
+private struct FlowEvidenceLabels: View {
+    @Environment(\.ambitionTheme) private var theme
+
+    let labels: [EvidenceLabel]
+
+    var body: some View {
+        VStack(alignment: .leading, spacing: theme.spacing.xs) {
+            ForEach(labels.indices, id: \.self) { index in
+                labels[index]
+            }
+        }
+    }
+}
+
 public struct GroupedNavigationSystemItem: Identifiable, Sendable {
     public let id: String
     public let title: String

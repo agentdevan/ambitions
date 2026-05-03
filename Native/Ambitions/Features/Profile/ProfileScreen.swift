@@ -595,6 +595,24 @@ private struct ProfileMemoryControlsCard: View {
                     subtitle: memoryControls.subtitle
                 )
 
+                ContextRecallCard(
+                    title: "What Ambitions remembers",
+                    summary: memoryControls.recoverySummary,
+                    sourceLabel: "Source: local receipts, corrections, reviews, and explicit profile context",
+                    confidenceLabel: primaryRecallState == .current ? "Confidence: reviewable" : "Confidence: needs review",
+                    state: primaryRecallState,
+                    context: .memory,
+                    controls: memoryControls.items.prefix(3).map(\.title)
+                )
+                .accessibilityIdentifier("profile.context-recall-card")
+
+                MemoryConstellation(
+                    title: "Visible memory states",
+                    subtitle: "A bounded map of current, stale, sensitive, corrected, and empty states. It is not a hidden inference graph.",
+                    nodes: constellationNodes
+                )
+                .accessibilityIdentifier("profile.memory-constellation")
+
                 VStack(alignment: .leading, spacing: theme.spacing.sm) {
                     ForEach(memoryControls.items) { item in
                         ProfileSettingRow(item: item)
@@ -671,6 +689,77 @@ private struct ProfileMemoryControlsCard: View {
             value: "Local memory groups, freshness labels, and safe correction controls.",
             hint: "Review what Ambitions stores and how it can be corrected."
         )
+    }
+
+    private var primaryRecallState: ContextRecallState {
+        let freshness = memoryControls.groups.flatMap(\.items).map(\.freshness)
+
+        if freshness.contains(.mayNeedReview) {
+            return .stale
+        }
+
+        if memoryControls.narrativeMemories.contains(where: { $0.sensitiveStatusLabel.localizedCaseInsensitiveContains("sensitive") }) {
+            return .sensitive
+        }
+
+        if memoryControls.conservativePatterns.contains(where: { $0.reviewLabel.localizedCaseInsensitiveContains("correct") }) {
+            return .corrected
+        }
+
+        return freshness.isEmpty ? .noResult : .current
+    }
+
+    private var constellationNodes: [MemoryConstellationNode] {
+        let memoryNodes = memoryControls.groups
+            .flatMap(\.items)
+            .prefix(3)
+            .map { item in
+                MemoryConstellationNode(
+                    id: item.id,
+                    title: item.title,
+                    detail: item.sourceLabel,
+                    state: item.freshness.contextRecallState
+                )
+            }
+
+        let narrativeNodes = memoryControls.narrativeMemories
+            .prefix(1)
+            .map { memory in
+                MemoryConstellationNode(
+                    id: memory.id,
+                    title: memory.title,
+                    detail: memory.sensitiveStatusLabel,
+                    state: memory.sensitiveStatusLabel.localizedCaseInsensitiveContains("sensitive") ? .sensitive : memory.freshness.contextRecallState
+                )
+            }
+
+        let nodes = Array(memoryNodes + narrativeNodes)
+
+        if nodes.isEmpty {
+            return [
+                MemoryConstellationNode(
+                    id: "memory-no-result",
+                    title: "No hidden memory",
+                    detail: "Nothing inferred",
+                    state: .noResult
+                )
+            ]
+        }
+
+        return nodes
+    }
+}
+
+private extension ProfileMemoryFreshness {
+    var contextRecallState: ContextRecallState {
+        switch self {
+        case .current:
+            return .current
+        case .mayNeedReview:
+            return .stale
+        case .basedOnOlderContext:
+            return .corrected
+        }
     }
 }
 
@@ -2031,6 +2120,91 @@ private struct ProfileSettingRow: View {
         ProfileScreen(viewModel: ProfileViewModel(state: .loaded(PreviewFixtures.default.profileDashboard)))
     }
     .appContainer(PreviewAppContainerFactory.preview)
+    .ambitionTheme(.dark)
+    .preferredColorScheme(.dark)
+}
+
+#Preview("You Memory Stale") {
+    ScrollView {
+        ContextRecallCard(
+            title: "Availability pattern may need review",
+            summary: "This recall is old enough that Ambitions should ask before using it to shape planning.",
+            sourceLabel: "Source: older local review",
+            confidenceLabel: "Confidence: needs review",
+            state: .stale,
+            controls: ["Review", "Correct", "Ignore"]
+        )
+        .padding()
+    }
+    .background(LivingSurfaceBackground(context: .memory, state: .stale).ignoresSafeArea())
+    .ambitionTheme(.dark)
+    .preferredColorScheme(.dark)
+}
+
+#Preview("You Memory Rejected") {
+    ScrollView {
+        ContextRecallCard(
+            title: "Rejected assumption",
+            summary: "The user rejected this signal, so it remains visible only as correction history.",
+            sourceLabel: "Source: correction receipt",
+            confidenceLabel: "Confidence: not active",
+            state: .rejected,
+            controls: ["View receipt"]
+        )
+        .padding()
+    }
+    .background(LivingSurfaceBackground(context: .memory, state: .recovery).ignoresSafeArea())
+    .ambitionTheme(.dark)
+    .preferredColorScheme(.dark)
+}
+
+#Preview("You Memory Private") {
+    ScrollView {
+        ContextRecallCard(
+            title: "Sensitive context is protected",
+            summary: "This context requires explicit review before it appears in planning guidance.",
+            sourceLabel: "Source: private profile context",
+            confidenceLabel: "Confidence: protected",
+            state: .sensitive,
+            controls: ["Review privacy", "Keep hidden"]
+        )
+        .padding()
+    }
+    .background(LivingSurfaceBackground(context: .memory, state: .sensitive).ignoresSafeArea())
+    .ambitionTheme(.dark)
+    .preferredColorScheme(.dark)
+}
+
+#Preview("You Memory Corrected") {
+    ScrollView {
+        ContextRecallCard(
+            title: "Planning default corrected",
+            summary: "The corrected version is the only active version used for future recall surfaces.",
+            sourceLabel: "Source: explicit correction",
+            confidenceLabel: "Confidence: user-confirmed",
+            state: .corrected,
+            controls: ["View correction"]
+        )
+        .padding()
+    }
+    .background(LivingSurfaceBackground(context: .memory, state: .proof).ignoresSafeArea())
+    .ambitionTheme(.dark)
+    .preferredColorScheme(.dark)
+}
+
+#Preview("You Memory No Result") {
+    ScrollView {
+        ContextRecallCard(
+            title: "No hidden memory",
+            summary: "Ambitions has no recall result for this context and should say so plainly.",
+            sourceLabel: "Source: none",
+            confidenceLabel: "Confidence: no result",
+            state: .noResult,
+            controls: []
+        )
+        .padding()
+    }
+    .background(LivingSurfaceBackground(context: .memory, state: .empty).ignoresSafeArea())
     .ambitionTheme(.dark)
     .preferredColorScheme(.dark)
 }
