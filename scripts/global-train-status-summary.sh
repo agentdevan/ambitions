@@ -20,15 +20,17 @@ for id in EB01 EB13 EB25 EB19 EB02 EB07 EB31 EB32; do
     EB32) name="Cross Kernel Dependency And Gate Integration"; global="054" ;;
       *) name="Unknown"; global="unknown" ;;
     esac
+    echo "Active train: Ambitions 4.0 External Brain Foundation"
+    echo "Total planned batches: 153"
     echo "Next eligible batch: $id $name"
     echo "Global order: $global"
+    echo "Working tree:"
+    git status --short
     exit 0
   fi
 done
 echo "Next eligible batch: EB20 Value Based Onboarding And First Week Success"
 echo "Global order: 055"
-
-echo "Active train: Ambitions 4.0 External Brain Foundation"
 echo "Total planned batches: 153"
 echo "Working tree:"
 git status --short

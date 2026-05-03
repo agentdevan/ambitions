@@ -17,6 +17,11 @@ Date: 2026-05-03
 8. Recommendation evidence must precede recommendations.
 9. Risk register and scenario library must precede QA closeout.
 10. Accessibility evidence and release-claim review trail EB closeout.
+11. PXEQ Product Experience Equivalence is mandatory before any EB UI-heavy implementation can pass Green.
+
+## PXEQ Product-Experience Dependency
+
+PXEQ is a docs/tooling enforcement layer, not an EB identity batch. It must be installed and referenced before EB03, EB14, EB20, EB26, EB33, or any UI-affecting EB batch claims Green. PXEQ prevents static documentation-driven UI, generic card stacks, heavy settings surfaces, overbuilt memory UI, noisy intelligence modules, unreadable visual materials, decorative motion, and technically passing but mediocre product experience.
 
 ## Topological Implementation Order
 
@@ -74,15 +79,16 @@ Parallelization is off by default. After EB01/EB13/EB25/EB19/EB02/EB07/EB31/EB32
 - EB26-EB30 blocked by EB25.
 - EB33-EB34 blocked by EB08-EB12 and EB31-EB32.
 - EB35-EB40 blocked by the evidence named in each closeout batch.
+- EB03, EB14, EB20, EB26, EB33, and any other UI-affecting EB batch are additionally blocked by PXEQ installation, PXEQ prompt reference, and PXEQ UI implementation evidence.
 
 ## Proof Requirements Per Dependency
 
-Every dependency requires source truth read, allowed/forbidden file boundary, privacy evidence, accessibility/cognitive-load evidence, release-claim scan, validation command results, and a clean committed state.
+Every dependency requires source truth read, allowed/forbidden file boundary, privacy evidence, accessibility/cognitive-load evidence, release-claim scan, validation command results, and a clean committed state. UI-affecting dependencies also require PXEQ surface evidence, before/after product-experience impact, living-state purpose, preview or no-UI evidence, and anti-generic checks.
 
 ## Unsafe Early-Execution Warnings
 
-Do not run durable memory, search, recommendation, private mode, correction/deletion, or advanced onboarding implementation before Trust and Accessibility gates. Do not promote capture to memory before capture receipts and Trust controls.
+Do not run durable memory, search, recommendation, private mode, correction/deletion, or advanced onboarding implementation before Trust and Accessibility gates. Do not promote capture to memory before capture receipts and Trust controls. Do not let EB UI implementation pass Green before PXEQ proof shows the surface is native, calm, useful, readable, living for a reason, and not a generic productivity dashboard.
 
 ## Exact Next Eligible Batch Calculation
 
-Current state after External Brain integration: global order 047, EB01 active planned / queued, no EB batch complete. Next eligible: EB01 unless current validation produces Red.
+Current state after EB07 and PXEQ setup: EB01, EB13, EB25, EB19, EB02, and EB07 are complete by evidence; PXEQ is installed as a mandatory UI gate; next eligible EB batch remains EB31.
