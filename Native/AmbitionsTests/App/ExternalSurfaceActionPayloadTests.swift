@@ -122,6 +122,29 @@ final class ExternalSurfaceActionPayloadTests: XCTestCase {
         XCTAssertEqual(legacy.pressureLevel, .steady)
     }
 
+    func testGlanceStatePreservesActiveFocusPriorityOverBestNextStep() throws {
+        let snapshot = ExternalSurfaceSnapshot(
+            generatedAt: "2026-04-15T12:00:00Z",
+            nextAction: nil,
+            nowState: ExternalSurfaceNowState(
+                todayPosture: .active,
+                pressureLevel: .steady,
+                bestNextStep: ExternalSurfaceActionReference(goalID: "goal-best", stepID: "step-best"),
+                activeFocus: ExternalSurfaceActionReference(goalID: "goal-focus", stepID: "step-focus"),
+                openCaptureUrgency: .none,
+                blockerSummary: ExternalSurfaceBlockerSummary(waitingCount: 0, blockedCount: 0),
+                supportedCommands: [
+                    ExternalSurfaceCommandDescriptor(kind: .openToday, requiresGoalID: false, requiresStepID: false),
+                ]
+            )
+        )
+
+        let glance = ExternalSurfaceGlanceState(snapshot: snapshot)
+
+        XCTAssertEqual(glance.primaryReference?.goalID, "goal-focus")
+        XCTAssertEqual(glance.primaryReference?.stepID, "step-focus")
+    }
+
     func testGlanceStateUsesCalmUnavailableLanguageWhenSnapshotIsMissing() throws {
         let glance = ExternalSurfaceGlanceState(snapshot: nil)
 

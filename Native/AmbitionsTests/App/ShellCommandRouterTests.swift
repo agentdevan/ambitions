@@ -69,6 +69,26 @@ final class ShellCommandRouterTests: XCTestCase {
         XCTAssertTrue(navigation.continuityReceipt?.body.contains("source context preserved") == true)
     }
 
+    func testQuickFocusCommandPreservesFocusContextCompatibility() async {
+        let navigation = AppNavigationModel(selectedTab: .plan)
+        let router = DefaultShellCommandRouter(navigation: navigation, captureService: StubCaptureService(captures: []))
+
+        let result = await router.execute(
+            intent: .quickFocus,
+            text: "",
+            goalID: nil,
+            captureID: nil,
+            source: .appIntent,
+            now: .now
+        )
+
+        XCTAssertEqual(ShellCommandIntent.quickFocus.rawValue, "quick_focus")
+        XCTAssertEqual(navigation.selectedTab, .today)
+        XCTAssertEqual(navigation.todayEntryContext, .focus)
+        XCTAssertEqual(navigation.recentCommandHistory.first?.presentationContext, .focus)
+        XCTAssertEqual(result.destination, ShellCommandDestination.tab(.today))
+    }
+
     func testPresentCreateGoalCarriesSeedTextAndCaptureContext() {
         let navigation = AppNavigationModel(selectedTab: .plan)
         let router = DefaultShellCommandRouter(navigation: navigation, captureService: StubCaptureService(captures: []))

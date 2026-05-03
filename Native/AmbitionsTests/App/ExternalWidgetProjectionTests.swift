@@ -80,6 +80,30 @@ final class ExternalWidgetProjectionTests: XCTestCase {
         XCTAssertFalse(projection.accessibilityLabel.contains("private-step-id"))
     }
 
+    func testFocusNowWidgetProjectionPreservesActiveFocusPrimaryReference() throws {
+        let snapshot = ExternalSurfaceSnapshot(
+            generatedAt: "2026-04-15T12:00:00Z",
+            nextAction: nil,
+            nowState: ExternalSurfaceNowState(
+                todayPosture: .active,
+                pressureLevel: .steady,
+                bestNextStep: ExternalSurfaceActionReference(goalID: "goal-best", stepID: "step-best"),
+                activeFocus: ExternalSurfaceActionReference(goalID: "goal-focus", stepID: "step-focus"),
+                openCaptureUrgency: .none,
+                blockerSummary: ExternalSurfaceBlockerSummary(waitingCount: 0, blockedCount: 0),
+                supportedCommands: [
+                    ExternalSurfaceCommandDescriptor(kind: .openToday, requiresGoalID: false, requiresStepID: false),
+                ]
+            )
+        )
+
+        let projection = ExternalWidgetProjection(snapshot: snapshot)
+
+        XCTAssertEqual(projection.primaryURL?.absoluteString, "ambitions://goal/goal-focus?origin=widget")
+        XCTAssertEqual(projection.title, "Next step ready")
+        XCTAssertEqual(projection.privacySummary, "Details stay private until you open Ambitions.")
+    }
+
     func testD23WidgetProjectionUsesSafeFallbackForMissingSnapshot() {
         let projection = ExternalWidgetProjection(snapshot: nil)
 

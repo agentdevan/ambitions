@@ -102,6 +102,24 @@ final class ExternalRoutingTests: XCTestCase {
         XCTAssertEqual(translator.source(fromDeepLink: url), .appIntent)
     }
 
+    func testFocusContextRoutesAndPayloadsRemainCompatibleWithTodayStepPosture() throws {
+        let translator = AppExternalRouteTranslator()
+        let route = AppExternalRoute.openToday(.focus)
+        let deepLink = try XCTUnwrap(translator.deepLinkURL(for: route))
+        let routePayload = translator.routePayload(for: route)
+        let notificationPayload = translator.notificationPayload(for: route, action: "open")
+        let widgetPayload = translator.widgetPayload(for: route, action: "open")
+
+        XCTAssertEqual(deepLink.absoluteString, "ambitions://tab/today?context=focus")
+        XCTAssertEqual(translator.route(fromDeepLink: deepLink), .openToday(.focus))
+        XCTAssertEqual(routePayload[ExternalSurfaceActionPayload.Key.tab], AppTab.today.rawValue)
+        XCTAssertEqual(routePayload["context"], TodayEntryContext.focus.rawValue)
+        XCTAssertEqual(notificationPayload.values["context"], TodayEntryContext.focus.rawValue)
+        XCTAssertEqual(widgetPayload.values["context"], TodayEntryContext.focus.rawValue)
+        XCTAssertEqual(translator.route(fromNotification: notificationPayload), .openTab(.today))
+        XCTAssertEqual(translator.route(fromWidget: widgetPayload), .openTab(.today))
+    }
+
     func testDeepLinkTranslatorParsesGoalRoute() throws {
         let translator = AppExternalRouteTranslator()
         let url = try XCTUnwrap(URL(string: "ambitions://goal/goal-123"))

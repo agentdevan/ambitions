@@ -103,6 +103,34 @@ final class ExternalSurfaceSnapshotTests: XCTestCase {
         XCTAssertEqual(decoded, snapshot)
     }
 
+    func testActiveFocusSnapshotFieldRemainsLegacyCompatible() throws {
+        let snapshot = ExternalSurfaceSnapshot(
+            generatedAt: "2026-04-15T12:00:00Z",
+            nextAction: nil,
+            nowState: ExternalSurfaceNowState(
+                todayPosture: .active,
+                pressureLevel: .steady,
+                bestNextStep: ExternalSurfaceActionReference(goalID: "goal-best", stepID: "step-best"),
+                activeFocus: ExternalSurfaceActionReference(goalID: "goal-focus", stepID: "step-focus"),
+                openCaptureUrgency: .none,
+                blockerSummary: ExternalSurfaceBlockerSummary(waitingCount: 0, blockedCount: 0),
+                ritualCue: nil,
+                supportedCommands: [
+                    ExternalSurfaceCommandDescriptor(kind: .openToday, requiresGoalID: false, requiresStepID: false),
+                ]
+            )
+        )
+
+        let data = try PersistenceCoding.encode(snapshot)
+        let json = try XCTUnwrap(String(data: data, encoding: .utf8))
+        let decoded = try PersistenceCoding.decode(ExternalSurfaceSnapshot.self, from: data)
+
+        XCTAssertTrue(json.contains("\"activeFocus\""))
+        XCTAssertEqual(decoded.nowState?.activeFocus?.goalID, "goal-focus")
+        XCTAssertEqual(decoded.nowState?.activeFocus?.stepID, "step-focus")
+        XCTAssertEqual(decoded.nowState?.bestNextStep?.goalID, "goal-best")
+    }
+
     func testSnapshotUsesSharedPlanningNextStepSelectorForNowState() throws {
         let formatter = ISO8601DateFormatter()
         formatter.formatOptions = [.withInternetDateTime]

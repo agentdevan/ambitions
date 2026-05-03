@@ -3,9 +3,9 @@
 <!-- markdownlint-disable MD013 -->
 
 Active train: CS compatibility seam retirement train
-Active batch: CS05A ActiveFocus/TodayFocus Compatibility Map And Retirement Ledger
+Active batch: CS05B ActiveFocus Compatibility Preservation Proof
 Current out-of-train task: none
-Scope: ME01-ME12 maintainability train complete with commit/push evidence; ME11 repair not triggered; PXOS implementation not started; CS01 complete; CS07 complete as focused compatibility proof; CS08 complete as focused import/export/persistence proof; CS02A repairs the Profile/You seam scope without code edits; CS02B adds focused compatibility proof; CS03A repairs the Insights seam scope without code edits; CS03B adds focused compatibility proof; CS04A repairs the Habits/Ritual/Plan seam scope without code edits; CS04B adds focused compatibility proof; CS05A repairs the ActiveFocus/TodayFocus seam scope without code edits; Signature Interface/Product Depth/AmbitionsOS trains not started
+Scope: ME01-ME12 maintainability train complete with commit/push evidence; ME11 repair not triggered; PXOS implementation not started; CS01 complete; CS07 complete as focused compatibility proof; CS08 complete as focused import/export/persistence proof; CS02A repairs the Profile/You seam scope without code edits; CS02B adds focused compatibility proof; CS03A repairs the Insights seam scope without code edits; CS03B adds focused compatibility proof; CS04A repairs the Habits/Ritual/Plan seam scope without code edits; CS04B adds focused compatibility proof; CS05A repairs the ActiveFocus/TodayFocus seam scope without code edits; CS05B adds focused compatibility proof; Signature Interface/Product Depth/AmbitionsOS trains not started
 Date: 2026-05-03
 
 ## Baseline
@@ -30,11 +30,11 @@ Product Depth is formalized as a queued/blocked PD01-PD18 train with required ap
 
 ## Ambitions 4.0 Status
 
-Ambitions 4.0 is the active post-3.0 execution program, not a shipped product version. The global order now has 113 formal batches after SI insertion: REC02-REC06, PX01-PX20, ME01-ME12, CS01-CS10, SI01-SI18, PD01-PD18, and AOS01-AOS30. REC02-REC06, PX01-PX20, ME01, ME08, ME10, ME02, ME03, ME04, ME05, ME06, ME07, ME09, ME12, CS01, CS07, CS08, CS02A, CS02B, CS03A, CS03B, CS04A, CS04B, and CS05A are complete with evidence; CS02C, CS03C, CS04C, and CS05C remain deferred/blocked as accepted Yellow inside formal CS02/CS03/CS04/CS05.
+Ambitions 4.0 is the active post-3.0 execution program, not a shipped product version. The global order now has 113 formal batches after SI insertion: REC02-REC06, PX01-PX20, ME01-ME12, CS01-CS10, SI01-SI18, PD01-PD18, and AOS01-AOS30. REC02-REC06, PX01-PX20, ME01, ME08, ME10, ME02, ME03, ME04, ME05, ME06, ME07, ME09, ME12, CS01, CS07, CS08, CS02A, CS02B, CS03A, CS03B, CS04A, CS04B, CS05A, and CS05B are complete with evidence; CS02C, CS03C, CS04C, and CS05C remain deferred/blocked as accepted Yellow inside formal CS02/CS03/CS04/CS05.
 
 ## Boundaries
 
-No product behavior expansion. No visual redesign. No compatibility seam retired. No dependencies. No workflow changes. No release claim. CS01 is audit-only evidence; CS07 and CS08 are focused simulator/unit proof; CS02A is docs/protocol seam repair; CS02B is focused test proof; CS03A is docs/protocol seam repair; CS03B is focused test proof; CS04A is docs/protocol seam repair; CS04B is focused test proof; CS05A is docs/protocol seam repair; CS05B focused proof is next eligible after dry-run; CS02C, CS03C, CS04C, CS05C, CS06, CS09-CS10, SI implementation, Product Depth, AOS, and PXOS implementation remain unstarted until their gates allow.
+No product behavior expansion. No visual redesign. No compatibility seam retired. No dependencies. No workflow changes. No release claim. CS01 is audit-only evidence; CS07 and CS08 are focused simulator/unit proof; CS02A is docs/protocol seam repair; CS02B is focused test proof; CS03A is docs/protocol seam repair; CS03B is focused test proof; CS04A is docs/protocol seam repair; CS04B is focused test proof; CS05A is docs/protocol seam repair; CS05B is focused test proof; CS02C, CS03C, CS04C, CS05C, CS06, CS09-CS10, SI implementation, Product Depth, AOS, and PXOS implementation remain unstarted until their gates allow.
 
 ## Validation Result
 
@@ -114,10 +114,10 @@ The current user prompt says `Run Global Batch Sequence Until Blocked` and expli
 
 ## Next Eligible Batch
 
-CS05A is PASS WITH YELLOW with commit evidence `b74f4644`:
+CS05B is PASS WITH YELLOW pending commit evidence:
 
-- CS05A touched only docs/status files and did not edit tests, production Swift, AppUI, or Sources.
-- CS05A created the ActiveFocus/TodayFocus seam inventory, compatibility contract ledger, accessibility/route/payload ledger, and retirement risk map.
-- CS05A repaired the CS05 prompt into CS05A/CS05B/CS05C internal staging without changing the formal 113-batch global order.
-- CS05A documents `activeFocus`, `ExternalSurfaceNowState.activeFocus`, `TodayFocus*`, `.focus`, `context=focus`, `quick_focus`, `focusNow`, and `FocusNowWidget` as live compatibility surfaces.
-- CS05B is the next narrowed proof step; CS05C remains blocked/deferred and the ActiveFocus/TodayFocus seam is not claimed retired.
+- CS05B touched only focused tests and docs/status files; no production Swift, AppUI, Sources, route/raw values, persistence behavior, default-tab behavior, or accessibility identifiers were edited.
+- CS05B focused simulator/unit compatibility tests passed 74 selected tests with 0 failures.
+- CS05B proves `activeFocus` snapshot compatibility, active focus priority over `bestNextStep`, FocusNow widget projection primary target, Today focus deep-link/payload compatibility, and `quick_focus` shell command behavior.
+- CS05C remains blocked/deferred and the ActiveFocus/TodayFocus seam is not claimed retired.
+- CS06 dry-run is the next eligible formal-batch step.
