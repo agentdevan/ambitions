@@ -41,7 +41,7 @@ Original formal Ambitions 4.0 batch count: 113. Active expansion added: 40. New 
 - 075: EB29 Voice First Operation And Motor Accessibility. Status: active planned / queued; not completed. Boundary: Implementation allowed later for voice-first and motor alternatives only.
 - 076: EB30 Overloaded Day Adaptation And Low Cognitive Load Flows. Status: active planned / queued; not completed. Boundary: Implementation allowed later for overloaded-day adaptation only.
 - 053: EB31 Cross Kernel Primitives And Event Receipts. Status: complete by EB31 evidence; no domain code, receipt code, persistence, or app behavior implemented. Boundary: Cross-kernel primitive/receipt evidence only; implementation waits for named owner files and focused tests.
-- 078: EB32 Cross Kernel Dependency And Gate Integration. Status: active planned / queued; not completed. Boundary: Gate integration; app implementation waits for named owner files.
+- 054: EB32 Cross Kernel Dependency And Gate Integration. Status: complete by EB32 evidence; no production Swift, persistence, route/raw values, visual UI, or app behavior implemented. Boundary: Dependency/gate integration; UI-heavy implementation waits for PXEQ and DAV gates.
 - 079: EB33 External Brain Search And Context Recall. Status: active planned / queued; not completed. Boundary: Implementation allowed later for source-grounded recall/search only.
 - 080: EB34 External Brain Command Surface Integration. Status: active planned / queued; not completed. Boundary: Implementation allowed later for command surface integration only.
 - 081: EB35 External Brain Preview Fixtures And Scenario Library. Status: active planned / queued; not completed. Boundary: Implementation allowed later for fixtures and scenarios only.

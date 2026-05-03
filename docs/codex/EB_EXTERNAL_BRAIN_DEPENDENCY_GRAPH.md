@@ -32,7 +32,7 @@ PXEQ is a docs/tooling enforcement layer, not an EB identity batch. It must be i
 | 051 | EB02 | Universal Capture Canon And Domain Model | Canon/domain planning | Capture canon must precede capture implementation. | Active planned / queued; not completed |
 | 052 | EB07 | Life Memory Graph Canon And Domain Model | Canon/domain planning | Life Memory canon waits for Trust canon and precedes memory implementation. | Active planned / queued; not completed |
 | 053 | EB31 | Cross Kernel Primitives And Event Receipts | Mixed planning | Cross-kernel primitives need core kernel canon before integration. | Complete by EB31 evidence; no domain code, receipt code, persistence, or app behavior implemented |
-| 054 | EB32 | Cross Kernel Dependency And Gate Integration | Gate integration | Dependency gates follow primitive map before implementation-heavy lanes. | Active planned / queued; not completed |
+| 054 | EB32 | Cross Kernel Dependency And Gate Integration | Gate integration | Dependency gates follow primitive map before implementation-heavy lanes. | Complete by EB32 evidence; no production Swift, persistence, route/raw values, visual UI, or app behavior implemented |
 | 055 | EB20 | Value Based Onboarding And First Week Success | Implementation later | Value-first onboarding follows onboarding canon and precedes sensitive setup. | Active planned / queued; not completed |
 | 056 | EB21 | Concierge Setup And Planning Defaults Onboarding | Implementation later | Planning defaults follow value-first onboarding. | Active planned / queued; not completed |
 | 057 | EB22 | Privacy Setup And Trust Onboarding | Implementation later | Privacy setup follows Trust and onboarding canon. | Active planned / queued; not completed |
@@ -80,6 +80,7 @@ Parallelization is off by default. After EB01/EB13/EB25/EB19/EB02/EB07/EB31/EB32
 - EB33-EB34 blocked by EB08-EB12 and EB31-EB32.
 - EB35-EB40 blocked by the evidence named in each closeout batch.
 - EB03, EB14, EB20, EB26, EB33, and any other UI-affecting EB batch are additionally blocked by PXEQ installation, PXEQ prompt reference, and PXEQ UI implementation evidence.
+- DAV visual implementation batches, once integrated, must run before UI-heavy EB implementation may claim product-experience Green. DAV03-DAV09 precede EB03, EB14, EB20, EB26, and EB33. DAV10-DAV15 precede EB35, EB38, and EB40 closeout.
 
 ## Proof Requirements Per Dependency
 
@@ -91,4 +92,4 @@ Do not run durable memory, search, recommendation, private mode, correction/dele
 
 ## Exact Next Eligible Batch Calculation
 
-Current state after EB31: EB01, EB13, EB25, EB19, EB02, EB07, and EB31 are complete by evidence; PXEQ is installed as a mandatory UI gate; next eligible EB batch is EB32.
+Current state after EB32: EB01, EB13, EB25, EB19, EB02, EB07, EB31, and EB32 are complete by evidence; PXEQ is installed as a mandatory UI gate; DAV integration is authorized next before UI-heavy EB implementation.
