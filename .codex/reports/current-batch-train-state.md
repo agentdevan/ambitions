@@ -2,14 +2,14 @@
 
 Date: 2026-05-03
 Active train: Ambitions 4.0 External Brain Foundation
-Current batch: DAV12 complete; DAV13 next eligible
-Scope: DAV12 added a bounded Dynamic Adaptive Visual preview fixture/gallery
-inventory in `Sources/Previews` and tightened the local preview fixture script.
-The gallery names calm normal day, overloaded day, recovery day, empty/routed
-capture, blocked step, Still Counts, goal proof/blocker, stale/rejected/private
-memory, high Dynamic Type, and Reduce Motion scenarios. No app behavior,
-route/raw value, persistence/schema, dependency, workflow, signing, top-level-tab,
-production asset, or public accessibility/release claim change was made.
+Current batch: DAV13 complete; DAV14 next eligible
+Scope: DAV13 closed the DAV rendering and battery risk ledger and tightened the
+local DAV visual performance risk scan. The pass classified blur/material,
+TimelineView/Canvas, animation, shimmer, preview gallery cost, Dynamic Type,
+VoiceOver grouping, Reduce Motion, and fallback ownership without changing app
+behavior. No route/raw value, persistence/schema, dependency, workflow, signing,
+top-level-tab, production asset, or public accessibility/release claim change was
+made.
 
 ## Current Truth
 
@@ -33,8 +33,9 @@ production asset, or public accessibility/release claim change was made.
   bounded Trust/receipt visual implementation; DAV10 is complete as motion /
   Reduce Motion classification and helper metadata; DAV11 is complete as
   internal visual accessibility evidence closeout; DAV12 is complete as preview
-  fixture/scenario gallery implementation; DAV13-DAV15 remain active planned
-  implementation scope and DAV13 is next eligible.
+  fixture/scenario gallery implementation; DAV13 is complete as rendering and
+  battery risk evidence; DAV14-DAV15 remain active planned implementation scope
+  and DAV14 is next eligible.
 - PXEQ is a mandatory product-experience gate for EB UI-affecting batches; it
   is not a shipped app feature and not a new EB batch identity.
 - Optimized global order after EB32 places DAV01-DAV15 before UI-heavy EB
@@ -45,15 +46,15 @@ production asset, or public accessibility/release claim change was made.
 
 ## Current Validation Result
 
-DAV12 validation result: PASS WITH YELLOW. `swift build`,
-`scripts/build-local.sh || true`, `git diff --check`, photo-matched asset check,
-DAV/SIG scorecards, DAV preview fixture check, and Transformative Motion
+DAV13 validation result: PASS WITH YELLOW. `git diff --check`,
+photo-matched asset check, DAV visual performance risk scan, DAV/SIG
+scorecards, DAV preview fixture check, and Transformative Motion
 boundary/state-meaning checks passed. Advisory scans remain Yellow for
-historical repo backlog terms, future rendered screenshot/visual QA, DAV13
-performance evidence, SIG15 final accessibility/motion closeout, and human or
-device proof.
+historical repo backlog terms, human/device energy proof, Instruments/FPS/thermal
+proof, DAV14 rendered visual QA, and SIG14/SIG15 final performance/accessibility
+closeout.
 
 ## Next Safe Path
 
-Run DAV13 VisualPerformance Rendering And BatteryRisk after DAV12 is validated,
+Run DAV14 VisualRegression And ProductExperience QA after DAV13 is validated,
 committed, and pushed.
