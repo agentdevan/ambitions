@@ -2,11 +2,12 @@
 
 Date: 2026-05-03
 Active train: Ambitions 4.0 External Brain Foundation
-Current batch: DAV10 complete; DAV11 next eligible
-Scope: DAV10 classified DAV03-DAV09 motion and added in-code state-meaning and
-Reduce Motion equivalent metadata to `DAVMotionPreset` after verifying the
-uploaded reference assets. No route/raw value, persistence/schema, dependency,
-workflow, signing, top-level-tab, or motion-only meaning change was made.
+Current batch: DAV11 complete; DAV12 next eligible
+Scope: DAV11 closed the DAV03-DAV10 internal Dynamic Type, VoiceOver,
+non-color meaning, tap/gesture, Reduce Motion, and visual accessibility evidence
+matrix after verifying the uploaded reference assets. No production Swift,
+route/raw value, persistence/schema, dependency, workflow, signing, top-level-tab,
+or public accessibility claim change was made.
 
 ## Current Truth
 
@@ -28,8 +29,9 @@ workflow, signing, top-level-tab, or motion-only meaning change was made.
   DAV07 is complete as bounded You/Profile visual implementation; DAV08 is
   complete as bounded Memory/recall visual implementation; DAV09 is complete as
   bounded Trust/receipt visual implementation; DAV10 is complete as motion /
-  Reduce Motion classification and helper metadata; DAV11-DAV15 remain active
-  planned implementation scope and DAV11 is next eligible.
+  Reduce Motion classification and helper metadata; DAV11 is complete as
+  internal visual accessibility evidence closeout; DAV12-DAV15 remain active
+  planned implementation scope and DAV12 is next eligible.
 - PXEQ is a mandatory product-experience gate for EB UI-affecting batches; it
   is not a shipped app feature and not a new EB batch identity.
 - Optimized global order after EB32 places DAV01-DAV15 before UI-heavy EB
@@ -40,14 +42,14 @@ workflow, signing, top-level-tab, or motion-only meaning change was made.
 
 ## Current Validation Result
 
-DAV10 validation result: PASS WITH YELLOW. `swift build`,
-`scripts/build-local.sh`, focused AccessibilityNutritionChecklist tests (10
-tests, 0 failures), `git diff --check`, photo-matched reference asset check,
-and Transformative Motion boundary/state-meaning checks passed. Yellow
-advisories remain for human/device Reduce Motion walkthrough, screenshot/movie
-proof, and DAV11/SIG15 cross-surface accessibility closeout; no remaining Red.
+DAV11 validation result: PASS WITH YELLOW. `git diff --check`,
+photo-matched asset check, DAV/SIG scorecards, Transformative Motion boundary
+and state-meaning checks, and focused `AccessibilityNutritionChecklistTests`
+passed. DAV/SIG advisory scans remain Yellow for human/device accessibility
+proof, rendered screenshot gallery, DAV12/DAV14 preview/visual QA, and SIG15
+final accessibility/motion closeout.
 
 ## Next Safe Path
 
-Run DAV11 DynamicType VoiceOver And VisualAccessibility Closeout after DAV10 is
-validated, committed, and pushed.
+Run DAV12 SurfacePreviewFixtures And ScenarioGallery after DAV11 is validated,
+committed, and pushed.

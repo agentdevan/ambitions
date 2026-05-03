@@ -21,8 +21,8 @@ DAV makes Ambitions visually alive without making it loud, generic, heavy, unrea
 - 062: DAV08 Memory ContextRecall And MemoryConstellation Implementation. Status: complete. Boundary: memory/recall visual prototypes or owned surfaces only; no durable memory behavior.
 - 063: DAV09 TrustReceiptStack EvidenceLabels And ProofPulse Implementation. Status: complete. Boundary: trust/receipt visual primitives only.
 - 064: DAV10 AdaptiveMotion ReduceMotion And StateTransitions. Status: complete. Boundary: motion/reduce-motion closeout.
-- 065: DAV11 DynamicType VoiceOver And VisualAccessibility Closeout. Status: active next. Boundary: accessibility evidence closeout.
-- 066: DAV12 SurfacePreviewFixtures And ScenarioGallery. Status: queued. Boundary: preview fixtures/scenario gallery.
+- 065: DAV11 DynamicType VoiceOver And VisualAccessibility Closeout. Status: complete. Boundary: accessibility evidence closeout.
+- 066: DAV12 SurfacePreviewFixtures And ScenarioGallery. Status: active next. Boundary: preview fixtures/scenario gallery.
 - 067: DAV13 VisualPerformance Rendering And BatteryRisk. Status: queued. Boundary: rendering/performance risk evidence.
 - 068: DAV14 VisualRegression And ProductExperience QA. Status: queued. Boundary: visual QA and PXEQ scorecard.
 - 069: DAV15 Dynamic Adaptive Visual System Closeout. Status: queued. Boundary: closeout/handoff; no release readiness claim.

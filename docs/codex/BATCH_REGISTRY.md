@@ -101,9 +101,10 @@ Current 4.0 status:
 - Complete: DAV08 Memory ContextRecall And MemoryConstellation Implementation is complete as bounded Memory/recall visual implementation. You/Memory now has `ContextRecallCard`, bounded `MemoryConstellation`, source/confidence/control evidence, stale/rejected/private/corrected/no-result preview states, and no durable memory, hidden inference, persistence/schema/route/raw-value/dependency/top-level-tab change.
 - Complete: DAV09 TrustReceiptStack EvidenceLabels And ProofPulse Implementation is complete as bounded Trust/receipt visual implementation. Trust Center now has `TrustReceiptStack`, source/freshness evidence labels, proof pulse, correction/undo affordance copy, no-receipts/proof/correction/undo/stale-source preview states, and no export/delete behavior, legal/privacy claim, persistence/schema/route/raw-value/dependency/top-level-tab change.
 - Complete: DAV10 AdaptiveMotion ReduceMotion And StateTransitions is complete as motion classification and helper metadata. `DAVMotionPreset` now exposes state-meaning and Reduce Motion equivalent metadata, DAV03-DAV09 motion is classified, and no route/raw/persistence/dependency/top-level-tab change or motion-only meaning was introduced.
-- Active Planned / Queued: DAV11-DAV15 Dynamic Adaptive Visual System
-  expansion remains active Ambitions 4.0 implementation scope after DAV10;
-  DAV11 is next eligible and production SwiftUI is allowed only inside each
+- Complete: DAV11 DynamicType VoiceOver And VisualAccessibility Closeout is complete as internal evidence closeout. DAV03-DAV10 surfaces now have a documented Dynamic Type, VoiceOver, non-color meaning, tap/gesture, Reduce Motion, and visual accessibility matrix; human/device proof remains Yellow and no public accessibility claim was made.
+- Active Planned / Queued: DAV12-DAV15 Dynamic Adaptive Visual System
+  expansion remains active Ambitions 4.0 implementation scope after DAV11;
+  DAV12 is next eligible and production SwiftUI is allowed only inside each
   DAV batch boundary.
 - Active Planned / Queued: EB08-EB12, EB14-EB18, EB20-EB24, EB03-EB06, and EB26-EB40 Ambitions 4.0 External Brain Foundation expansion segment; not completed and not implemented in app behavior.
 - Queued / Blocked: SI01-SI18 pending global-order selection or `Start Signature Interface Train` plus PXOS/ME/CS/SI quality gates.
@@ -113,8 +114,8 @@ Current 4.0 status:
 - Active External Brain expansion added: EB01-EB40 as active planned Ambitions 4.0 scope.
 - Active Dynamic Adaptive Visual System expansion added: DAV01-DAV15 as active planned Ambitions 4.0 implementation scope.
 - New active planned Ambitions 4.0 total after EB and DAV integration: 168.
-- Remaining after DAV10: 104 active planned batches remain including
-  DAV11-DAV15, EB08-EB12, EB14-EB18, EB20-EB24, EB03-EB06, EB26-EB40,
+- Remaining after DAV11: 103 active planned batches remain including
+  DAV12-DAV15, EB08-EB12, EB14-EB18, EB20-EB24, EB03-EB06, EB26-EB40,
   CS10, SI01-SI18, PD01-PD18, and AOS01-AOS30; CS02A-CS06A,
   CS02B-CS06B, and CS09A-CS09B are internal stages, not new formal batches;
   CS02C-CS06C and CS09C are accepted Yellow/deferred.
