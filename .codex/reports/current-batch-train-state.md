@@ -22,7 +22,7 @@ No product behavior expansion. No visual redesign. No compatibility seam retired
 
 ## CS06A Validation Result
 
-CS06A is PASS WITH YELLOW pending commit evidence:
+CS06A is PASS WITH YELLOW with commit evidence `50ea5c17`:
 
 - CS06A repaired the CS06 prompt into CS06A/CS06B/CS06C internal staging without changing the formal batch count.
 - CS06A created a compatibility contract ledger, copy/accessibility language ledger, technical-state preservation ledger, historical-docs truth ledger, retirement risk map, and audit report.
@@ -34,6 +34,7 @@ CS06A is PASS WITH YELLOW pending commit evidence:
 - Release-claim scan is PASS WITH YELLOW: hits are forbidden-claim lists, scan commands, historical logs, and explicit non-claims only.
 - `scripts/run-doc-qa.sh || true` is PASS WITH YELLOW with existing stale-guidance, deprecated-language, and markdownlint advisory backlog; lychee passed with 647 links and 0 errors.
 - `scripts/batch-train-gate-check.sh || true` is PASS WITH YELLOW with only the expected dirty-tree hint before commit.
+- Post-commit drift check passed: working tree clean and `scripts/batch-train-gate-check.sh || true` reported `GREEN_HINT working tree clean`.
 
 ## Yellow Advisories
 

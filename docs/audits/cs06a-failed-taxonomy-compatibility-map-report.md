@@ -1,6 +1,6 @@
 # CS06A Failed-Taxonomy Compatibility Map Report
 
-Status: PASS WITH YELLOW candidate pending validation. CS06A is docs/protocol-only and does not retire the failed taxonomy.
+Status: PASS WITH YELLOW with commit evidence `50ea5c17`. CS06A is docs/protocol-only and does not retire the failed taxonomy.
 
 ## Starting State
 
