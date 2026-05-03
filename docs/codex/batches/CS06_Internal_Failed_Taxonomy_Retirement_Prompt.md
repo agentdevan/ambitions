@@ -1,31 +1,133 @@
-# CS06 Internal Failed Taxonomy Retirement Prompt
+# CS06 Internal Failed Taxonomy Compatibility Repair Prompt
 
-Status: Queued Ambitions 4.0 compatibility batch; not started; not implemented; blocked pending `Start CS Train`.
+Status: Formal Ambitions 4.0 compatibility batch `CS06`; internally staged as CS06A/CS06B/CS06C after dry-run Red. CS06A and CS06B/CS06C are internal repair stages only, not new formal batches. Formal Ambitions 4.0 batch count remains `113`.
 
 ## Batch Identity
 
 - Batch ID: `CS06`
 - Name: Internal Failed Taxonomy Retirement
-- Compatibility action: retires
-- Candidate seam: internal .failed taxonomy where visible language stays humane
-- Target: Retire only after copy and raw-value compatibility proof.
+- Repaired staging: `CS06A` map/ledger, `CS06B` focused proof, `CS06C` narrow retirement only if proven safe
+- Candidate seam: `.failed` / `failed` / `failure` taxonomy spanning technical command state, external action state, async UI state, safe-automation receipt state, support/checklist language, copy/accessibility language, tests, logs, and historical docs
+- Compatibility action: preserve technical failure semantics first; retire only proven unsafe user-facing language or dead compatibility seams later
 
 ## Purpose
 
-Retire or prove compatibility seams only when replacement, migration, rollback, and external-route evidence are stronger than the seam being removed. Preserve historical payloads, user data, routes, accessibility identifiers, visible humane copy, and release-claim truth.
+Repair CS06 from a broad retirement prompt into a staged compatibility migration. CS06 must separate precise technical failure semantics from user-facing recovery language and historical truth before any rename, deletion, raw-value mutation, or copy change is attempted.
 
 ## Source Truth Files To Read First
 
 - `README.md`
 - `AGENTS.md`
 - `docs/canon/Ambitions_3_0_Source_Of_Truth_Override.md`
-- `docs/canon/Ambitions_3_0_Primitive_Architecture.md`
-- `docs/canon/Ambitions_Beyond_3_0_Roadmap.md`
+- `docs/canon/Ambitions_3_0_Product_Language_System.md`
+- `docs/canon/Ambitions_3_0_Action_Verbs_And_Receipt_Grammar.md`
+- `docs/canon/Ambitions_3_0_Surface_State_Matrix.md`
+- `docs/canon/PXOS_Copy_Language_And_Explanation_System.md`
 - `docs/canon/Ambitions_Beyond_3_0_Compatibility_Seam_Retirement_Plan.md`
 - `docs/codex/batch-trains/CS01_CS10_COMPATIBILITY_SEAM_RETIREMENT_TRAIN.md`
 - `docs/codex/BATCH_REGISTRY.md`
 - `docs/codex/CONTEXT_INDEX.md`
 - `.codex/skills/compatibility-migration-architect.md`
+- `docs/audits/cs06-failed-taxonomy-compatibility-contract-ledger.md`
+- `docs/audits/cs06-failed-taxonomy-copy-accessibility-language-ledger.md`
+- `docs/audits/cs06-failed-taxonomy-technical-state-preservation-ledger.md`
+- `docs/audits/cs06-failed-taxonomy-historical-docs-truth-ledger.md`
+- `docs/audits/cs06-failed-taxonomy-retirement-risk-map.md`
+
+## CS06A - Failed-Taxonomy Compatibility Map And Seam Ledger
+
+Type: docs/protocol only.
+
+Purpose: inventory and classify every meaningful failed/failure seam before code or copy edits.
+
+Allowed files:
+
+- `docs/audits/cs06-failed-taxonomy-compatibility-contract-ledger.md`
+- `docs/audits/cs06-failed-taxonomy-copy-accessibility-language-ledger.md`
+- `docs/audits/cs06-failed-taxonomy-technical-state-preservation-ledger.md`
+- `docs/audits/cs06-failed-taxonomy-historical-docs-truth-ledger.md`
+- `docs/audits/cs06-failed-taxonomy-retirement-risk-map.md`
+- `docs/audits/cs06a-failed-taxonomy-compatibility-map-report.md`
+- This prompt file
+- Codex train/status docs under `docs/codex/**`
+- `.codex/reports/current-run-state.md`
+- `.codex/reports/current-batch-train-state.md`
+
+Forbidden files:
+
+- `Native/**`
+- `Sources/**`
+- `AppUI/**`
+- Tests, unless only a non-production proof placeholder is explicitly justified
+- Dependency manifests, workflows, signing/project release config
+
+CS06A Green criteria:
+
+- Compatibility contract ledger exists.
+- User-facing copy/accessibility language ledger exists.
+- Technical-state preservation ledger exists.
+- Historical-doc truth ledger exists.
+- Retirement risk map exists.
+- This prompt is repaired into CS06A/CS06B/CS06C staging.
+- No production Swift, tests, enum cases, raw values, route values, persistence/default behavior, accessibility identifiers, command behavior, async state behavior, safe-automation behavior, or historical truth is changed.
+
+CS06A Red criteria:
+
+- Production Swift is touched.
+- Any enum/raw value, command status, external action outcome, receipt state, log state, accessibility identifier, persisted value, or behavior is changed.
+- Historical `.failed` evidence is rewritten as if the historical event did not happen.
+- CS06 still instructs broad failed-taxonomy retirement without proof.
+
+## CS06B - Focused Failed-Taxonomy Compatibility Proof
+
+Type: focused proof only.
+
+Purpose: prove technical `.failed` semantics remain stable while user-facing recovery/copy candidates are isolated from technical states.
+
+Allowed files:
+
+- Focused test files proving command execution failure status, external action failure handling, async UI failure/error state behavior, safe-automation receipt failure semantics, and copy/accessibility mapping where testable
+- CS06B proof report under `docs/audits/**`
+- Codex train/status docs under `docs/codex/**` and `.codex/reports/**`
+
+Forbidden files:
+
+- Production Swift unless the CS06A ledger proves a tiny non-production fixture/helper cannot carry the proof and the change is explicitly justified
+- Enum/raw-value changes
+- Persistence/default-tab changes
+- Accessibility identifier changes
+- Broad command, receipt, automation, async-state, copy, or taxonomy refactors
+
+Required proof:
+
+- `AmbitionsCommandExecutionStatus.failed` remains the technical status for invalid commands and thrown command execution errors.
+- `ExternalActionOutcome.failed` remains available for true external action failure.
+- `AsyncViewState.failed` and launch/bootstrap failure states remain available for true async/load failures.
+- `failedSafely`, `safeFailure`, and related receipt raw values remain stable where they mean safe non-execution or safe rollback.
+- User-facing copy that should avoid blame is identified without changing behavior.
+- Historical docs/logs remain truthful and are not rewritten as current product claims.
+
+## CS06C - Narrow Internal Failed-Taxonomy Retirement
+
+Type: implementation or copy retirement only if CS06A and CS06B prove a seam is safe.
+
+Purpose: retire only seams classified as safe, preserving all technical failure semantics and historical truth.
+
+CS06C is blocked until CS06A and CS06B are Green or accepted Yellow. If no seam is proven safe, CS06C must remain deferred as accepted Yellow.
+
+Allowed changes:
+
+- User-facing copy/accessibility wording classified by CS06A as a rename candidate and proven safe by CS06B
+- Dead compatibility aliases classified as safe to retire by CS06A and proven unused by CS06B
+- Focused tests and reports proving no behavior, persistence, accessibility, or raw-value break
+
+Forbidden changes:
+
+- Broad failed/failure rename
+- Removing `AmbitionsCommandExecutionStatus.failed`, `ExternalActionOutcome.failed`, async `.failed` state, `failedSafely`, `safeFailure`, or persisted receipt raw values without explicit migration proof
+- Rewriting historical docs/logs
+- Weakening tests
+- Expanding into command, receipt, automation, architecture, copywriting, support, accessibility, or repo-wide taxonomy cleanup
 
 ## Required Preflight Checks
 
@@ -33,76 +135,74 @@ Retire or prove compatibility seams only when replacement, migration, rollback, 
 - `git branch --show-current`
 - `git rev-parse HEAD`
 - `git log -1 --oneline`
-- `rg -n "internal|Profile|You|Insights|Habits|activeFocus|TodayFocus|\.focus|failed|rawValue|deepLink|widget|AppIntent|import|export" Native docs .codex || true`
+- `rg -n "\\.failed|failed|Failed|failure|Failure|safeFailure|failedSafely|unavailableFailed" Native Sources AppUI docs .codex scripts || true`
 
-Stop if predecessor CS gates are not Green, if the seam owner is unclear, or if route/raw-value/persistence/external payload impact cannot be mapped.
-
-## Allowed Files
-
-- Seam owner files discovered and named in the replacement map
-- Focused tests for legacy and replacement behavior
-- Compatibility fixtures for old routes, raw values, imports/exports, widgets, App Intents, shortcuts, and persistence views when applicable
-- `docs/**` and `.codex/**` for maps, reports, traceability, and evidence
-
-## Forbidden Files
-
-- `.github/workflows/**`
-- Dependency manifests, lockfiles, signing/project release config
-- Deleting legacy values, routes, payload decoders, fixtures, or migration adapters before proof exists
-- Product behavior expansion, visual redesign, broad cleanup, AOS implementation, release claims, backend/sync/account/model/runtime work
-
-## Implementation Boundary
-
-This batch may map, prove, repair, hand off, or retire only the named seam action. A retire action requires replacement map, route/deep-link review, schema/persistence review, widget/App Intent/Shortcut review, import/export review, preview fixture review, focused tests, rollback path, and release-claim review before deletion.
-
-## Required Non-Goals
-
-No opportunistic renaming, no broad product language sweep, no schema migration without explicit migration gate, no platform-readiness claim, no release-readiness claim, no deletion before proof.
+Stop if predecessor CS gates are not Green or accepted Yellow, if any failed/failure seam cannot be classified, or if a proposed retirement touches raw values, persistence, accessibility, command execution, async UI state, safe-automation receipts, external actions, or historical truth without proof.
 
 ## Required Validation Commands
 
+CS06A:
+
 - `git status --short`
-- Focused compatibility tests named by the seam map
+- `git diff --check`
+- Changed-file boundary check proving docs/protocol-only changes
+- `grep -R "CS06A\\|CS06B\\|CS06C\\|Failed Taxonomy\\|failed-taxonomy" docs .codex | cat || true`
+- `grep -R "App Store ready\\|TestFlight ready\\|production ready\\|physical device passed\\|failed taxonomy retired\\|failure taxonomy retired\\|CS06 complete" README.md docs .codex | cat || true`
 - `scripts/run-doc-qa.sh || true`
 - `scripts/batch-train-gate-check.sh || true`
-- `scripts/build-local.sh || true` when app code changed
+
+CS06B/CS06C:
+
+- Narrowest focused xcodebuild test set for command execution, external action commands, async UI state, safe-automation receipts, and any touched copy/accessibility seam
+- Broader relevant command/external-action/automation/receipt/navigation tests if available
 - `git diff --check`
+- Changed-file boundary check
+- Release-claim scan
+- Existing Codex/batch gate checks
 
 ## Required Evidence Outputs
 
-- Compatibility seam report with old value, replacement value, affected routes, payloads, persistence/import/export impact, external surfaces, tests, rollback, and release-claim status
-- Updated compatibility registry and traceability matrix
-- Registry/context/run-state update after evidence
-- Failure-forensics report for any unclassified compatibility issue
+- CS06A compatibility contract ledger
+- CS06A copy/accessibility language ledger
+- CS06A technical-state preservation ledger
+- CS06A historical-doc truth ledger
+- CS06A retirement risk map
+- CS06A audit report
+- CS06B focused proof report before any CS06C retirement
+- CS06C retirement report only if a narrow retirement is executed
 
 ## Green / Yellow / Red Criteria
 
-Green: replacement map is complete, old payloads still open, focused compatibility proof passes, rollback exists, and no release/platform claim is introduced.
+Green: all meaningful failed/failure seams are classified, technical states are preserved, focused proof passes, no forbidden files are touched, rollback exists, and no release/platform claim is introduced.
 
-Yellow: advisory docs/tooling backlog or a nonblocking legacy seam remains intentionally preserved with owner and review date.
+Yellow: a technical or historical seam remains intentionally preserved; a user-facing copy candidate is deferred until CS06C; exact rendered UI/accessibility exposure requires later proof; existing repo-wide docs QA backlog remains advisory.
 
-Red: route/deep-link uncertainty, raw-value uncertainty, widget/App Intent/Shortcut uncertainty, import/export uncertainty, persistence/schema uncertainty, accessibility identifier mismatch, public copy regression, deletion before proof, or release claim ambiguity.
+Red: enum/raw-value uncertainty, command status uncertainty, external action uncertainty, async UI uncertainty, safe-automation receipt uncertainty, persistence uncertainty, accessibility identifier mismatch, public copy regression, deletion before proof, historical truth rewrite, test weakening, broad taxonomy refactor, or release claim ambiguity.
 
 ## Stop Conditions
 
-Stop on any Red, missing seam owner, legacy payload failure, unclassified UI/test failure, migration uncertainty, missing rollback path, or request to retire adjacent seams.
+Stop on any Red, missing seam owner, legacy payload/state failure, unclassified UI/test failure, migration uncertainty, missing rollback path, forbidden file touch, or request to retire adjacent seams.
 
 ## Rollback / Repair Expectations
 
-Preserve old values until proof is Green. Repair through CS09 only after classifying the compatibility failure. Do not remove fallback decoders or route aliases without documented retirement evidence.
+Preserve technical `.failed` / `failedSafely` / `safeFailure` values until proof is Green. Repair through CS09 only after classifying the compatibility failure. Do not remove fallback decoders, route aliases, command statuses, receipt states, test fixtures, or historical evidence without documented retirement proof.
 
-## What This Batch Must Not Claim
+## Claims
 
-It must not claim all compatibility seams are retired, external platform readiness, App Store/TestFlight/device readiness, or AmbitionsOS implementation.
+CS06A may claim only that the failed-taxonomy seam has been mapped and staged. CS06B may claim focused compatibility proof for the tested seams. CS06C may claim only the specific safe retirement it performs.
 
-## What This Batch Does Not Prove
+## Non-Claims
 
-It does not prove physical-device behavior, signed archive validation, public accessibility conformance, or future platform behavior beyond the focused seam evidence.
+CS06 must not claim the failed taxonomy is retired unless CS06C actually retires a proven-safe seam. It must not claim all compatibility seams are retired, external platform readiness, App Store/TestFlight/device readiness, public accessibility conformance, AmbitionsOS implementation, Signature Interface implementation, Product Depth implementation, or release readiness.
 
 ## Commit Message Recommendation
 
-`Run CS06 Internal Failed Taxonomy Retirement`
+CS06A: `Repair CS06 failed taxonomy compatibility seam scope`
+
+CS06B: `Prove failed taxonomy compatibility semantics`
+
+CS06C: `Retire safe failed taxonomy seam after proof`
 
 ## Next Safe Prompt / Next Gate
 
-Continue only to the next CS batch after Green evidence is recorded, committed, and pushed. Yellow or Red requires repair or user decision.
+After CS06A Green or accepted Yellow, run the narrowed CS06B proof dry-run. Continue only if `Execution allowed: YES`. After CS06B proof, defer CS06C unless a narrow retirement is proven safe. Continue to CS09 only after CS06 is Green or accepted Yellow and evidence is committed and pushed.

@@ -5,7 +5,7 @@
 Active train: CS compatibility seam retirement train
 Active batch: CS06 Internal Failed Taxonomy Retirement
 Current out-of-train task: none
-Scope: ME01-ME12 maintainability train complete with commit/push evidence; ME11 repair not triggered; PXOS implementation not started; CS01 complete; CS07 complete as focused compatibility proof; CS08 complete as focused import/export/persistence proof; CS02A repaired the Profile/You seam scope without code edits; CS02B added focused test proof; CS03A repaired the Insights seam scope without code edits; CS03B added focused test proof; CS04A repaired the Habits/Ritual/Plan seam scope without code edits; CS04B added focused test proof; CS05A repaired the ActiveFocus/TodayFocus seam scope without code edits; CS05B added focused test proof; CS06 dry-run stopped on Red; Signature Interface/Product Depth/AmbitionsOS trains not started
+Scope: ME01-ME12 maintainability train complete with commit/push evidence; ME11 repair not triggered; PXOS implementation not started; CS01 complete; CS07 complete as focused compatibility proof; CS08 complete as focused import/export/persistence proof; CS02A/CS02B, CS03A/CS03B, CS04A/CS04B, and CS05A/CS05B complete as internal compatibility seam repair/proof stages; CS06A Failed-Taxonomy Compatibility Map And Seam Ledger complete as docs/protocol repair; CS06B focused proof is next; Signature Interface/Product Depth/AmbitionsOS trains not started
 Date: 2026-05-03
 Branch: main
 
@@ -17,68 +17,51 @@ Branch: main
 - PXOS: future user-facing product experience canon only; PX01-PX20 future canon complete; PXOS implementation not started.
 - Signature Interface: formalized as a queued/blocked SI01-SI18 train; not started and not implemented.
 - Product Depth: formalized as a queued/blocked PD01-PD18 train; not started.
-- Release Evidence Closure: REC01 inventory is accepted baseline evidence; REC02-REC06 are complete as evidence/status work only.
-- ME01: complete as audit-only maintainability baseline and ownership map; no Swift files changed and no extraction performed.
-- ME08: complete as audit-only shared projector/state/helper standards; no Swift files changed and no extraction performed.
-- ME10: complete as audit-only recurring architecture gate; no Swift files changed and no extraction performed.
-- ME02: complete as behavior-preserving Goals service extraction.
-- ME03: complete as behavior-preserving Today service extraction.
-- ME04: complete as behavior-preserving TodayPanels extraction with commit/push evidence.
-- ME05: complete as behavior-preserving PlanFeatureService extraction with commit/push evidence.
-- ME06: complete as behavior-preserving ProfileScreen You Surface extraction with commit/push evidence.
-- ME07: complete as behavior-preserving PlanScreen extraction with commit/push evidence.
-- ME09: complete as product-contract test rebaseline evidence with commit/push evidence (`6bfa6a4b3dde950269eca4c69450687798c340b2`, report repair `5cd24178`).
-- ME11: conditional repair batch not triggered by current ME evidence.
-- ME12: complete as maintainability handoff evidence with commit/push evidence (`7f7ab99b6a671b08bf2706d778af01e06b907f8e`, report repair `f51f937a`).
+- ME01-ME12: complete or not triggered by documented gates.
 - CS01: complete as audit-only compatibility seam registry and risk map; no seam retired and no app code edited.
-- CS07: complete as focused external route/widget/App Intent compatibility proof; no seam retired and no app code edited. Commit evidence: `e4c04ff2`, report SHA repair: `ef536cae`.
-- CS08: complete as focused import/export/persistence compatibility proof; no seam retired and no app code edited. Commit evidence: `d2c328d6`, report SHA repair: `9144add3`.
-- CS train: active with CS02, CS03, CS04, and CS05 internally staged; CS02A and CS02B are complete, CS02C is deferred as accepted Yellow, CS03A is complete with commit evidence `a0d898ea`, CS03B is complete with commit evidence `126e86be`, CS03C remains blocked/deferred, CS04A is complete with commit evidence `4766b9d7`, CS04B is complete with commit evidence `7e4a574d`, CS04C remains blocked/deferred, CS05A is complete with commit evidence `b74f4644`, CS05B is complete with commit evidence `bfc23f10`, CS05C remains blocked/deferred, and CS06 dry-run returned `Execution allowed: NO`.
+- CS07: complete as focused external route/widget/App Intent compatibility proof; no seam retired and no app code edited.
+- CS08: complete as focused import/export/persistence compatibility proof; no seam retired and no app code edited.
+- CS02A/CS02B: complete as Profile/You compatibility seam repair and proof; CS02C remains deferred.
+- CS03A/CS03B: complete as Insights/Plan compatibility seam repair and proof; CS03C remains deferred.
+- CS04A/CS04B: complete as Habits/Ritual/Plan compatibility seam repair and proof; CS04C remains deferred.
+- CS05A/CS05B: complete as ActiveFocus/TodayFocus compatibility seam repair and proof; CS05C remains deferred.
+- CS06A: complete as Failed-Taxonomy compatibility seam map and ledger repair. No failed taxonomy seam is retired.
 - SI/Product Depth/AOS: queued/blocked and not started.
-- Global order: 113 formal batches after SI insertion; current active order is `045 — CS06`; 70 formal batches remain after CS05B because CS02A/CS03A/CS04A/CS05A and CS02B/CS03B/CS04B/CS05B are internal stages, not new formal batches, and CS05C is accepted Yellow/deferred. CS06 is stopped on Red before execution.
+- Global order: 113 formal batches after SI insertion; current active order remains `045 — CS06`; 70 formal batches remain because CS02A/CS03A/CS04A/CS05A/CS06A and CS02B/CS03B/CS04B/CS05B are internal stages, not new formal batches. CS06B is the next narrowed proof step.
 
 ## Boundaries
 
 - No product behavior expansion.
 - No visual redesign.
 - No compatibility seam retired.
+- No production Swift edited in CS06A.
+- No tests edited in CS06A.
+- No enum/raw value, route/raw value, accessibility identifier, default-tab, persistence, command execution, async UI state, external action command, or safe-automation receipt behavior changed in CS06A.
 - No dependencies added.
 - No workflow changes.
 - No release, App Store, TestFlight, final RC, physical-device, public accessibility, signed archive, App Store Connect, external-platform, AmbitionsOS implementation, Signature Interface implementation, Product Depth implementation, or PXOS implementation claim added.
 
 ## Current Validation Result
 
-CS03A validation is PASS WITH YELLOW with commit/push evidence `a0d898ea`. It is docs/protocol-only, creates the Insights/Plan seam inventory, compatibility contract ledger, accessibility identifier ledger, contextual-intelligence semantics map, and split report, and repairs the CS03 prompt into CS03A/CS03B/CS03C staging. `git diff --check` passed, changed-file boundary passed with only `docs/**` and `.codex/**`, release-claim scan found only guardrails/non-claims/historical logs, `scripts/run-doc-qa.sh || true` remains advisory with existing stale-guidance/deprecated-language/markdownlint backlog and lychee passed, and `scripts/batch-train-gate-check.sh || true` had only the expected dirty-tree hint before commit. No seam is retired.
+CS06A is PASS WITH YELLOW pending commit evidence:
 
-CS03B validation is PASS WITH YELLOW with commit/push evidence `126e86be`. It touched only focused app shell/external routing tests and a report; no production Swift was edited. Focused app shell and external routing tests passed 58 tests with 0 failures, proving old `insights` raw/external route compatibility, stable `InsightsRouteTarget` deep links, notification/widget `tab=insights` parsing, visible `Plan` top-level canon, no visible top-level `Insights` destination, and current You/Profile history support routing can coexist. CS03C remains deferred as accepted Yellow; the Insights seam is not claimed retired.
-
-CS04A validation is PASS WITH YELLOW with commit/push evidence `4766b9d7`. It touched only docs/status files and did not edit tests or app code. CS04A created the Habits/Ritual/Plan seam inventory, compatibility contract ledger, accessibility identifier ledger, retirement risk map, and split report, and repaired the CS04 prompt into CS04A/CS04B/CS04C staging without changing the formal 113-batch global order. CS04A documents source truth that `AppTab.habits`, `PlanRouteTarget.habits`, `ambitions://tab/habits`, `ambitions://plan/habits`, widget/notification `tab=habits`, `habits.*` identifiers, and Plan-owned Rituals support semantics are live compatibility surfaces. CS04B is the next narrowed proof step; CS04C remains blocked/deferred and the Habits seam is not claimed retired.
-
-CS04B validation is PASS WITH YELLOW with commit/push evidence `7e4a574d`. It touched only focused app shell/external routing tests and a report/status docs; no production Swift was edited. Focused app shell and external routing tests passed 61 tests with 0 failures, proving legacy `habits` shell selection, `ambitions://tab/habits`, `ambitions://plan/habits`, generated Plan/Habits payload shape, visible five-tab canon, and no visible top-level Habits destination. Adjacent Plan/Habits/Ritual service tests passed 38 tests with 0 failures, preserving Plan-owned Rituals and recurring-loop semantics. CS04C remains deferred as accepted Yellow; the Habits seam is not claimed retired.
-
-CS02B validation remains PASS WITH YELLOW with commit/push evidence `b180e782`. Focused app shell and external routing tests passed `54` tests with `0` failures, proving old `profile` raw/default/external route compatibility and visible `You` display can coexist. CS02C remains deferred as accepted Yellow; the Profile seam is not claimed retired.
-
-Verified:
-
-- CS08 touched only docs/status files and did not edit tests or app code.
-- CS08 focused import/export/persistence compatibility lane passed 36 tests with 0 failures.
-- Passing log: `output/logs/cs08-import-export-persistence-tests-20260502-141058.log`.
-- CS08 proves current simulator/unit behavior for external creation import, portable snapshot export/import, legacy import, persistence repositories, sync capability posture, and persistence budget boundaries.
+- CS06A touched only docs/status files and did not edit tests or app code.
+- CS06A repaired `docs/codex/batches/CS06_Internal_Failed_Taxonomy_Retirement_Prompt.md` into CS06A/CS06B/CS06C internal staging without changing the formal 113-batch global order.
+- CS06A created the failed-taxonomy compatibility contract ledger, copy/accessibility language ledger, technical-state preservation ledger, historical-docs truth ledger, retirement risk map, and CS06A audit report.
+- CS06A classifies command execution `.failed`, external action `.failed`, runtime action `.failed`, async `.failed`, bootstrap `.failed`, `failedSafely`, `safeFailure`, `unavailable_failed`, `safeFailureMessage`, failure-path tests, tooling pass/fail language, and historical validation/audit truth as must-preserve technical or historical states.
+- CS06A identifies visible or assistive failed/failure language as a user-facing rename candidate only after focused CS06B proof.
+- CS06A proves no seam is safe to retire yet; CS06C remains deferred as accepted Yellow until CS06B proves a narrow target.
 - `git diff --check` passed.
-- Changed-file boundary passed; dirty files were limited to `docs/**` and `.codex/**`.
-- Focused markdownlint on changed CS08 docs/status files is PASS WITH YELLOW because registry/context docs carry existing markdownlint backlog.
-- `scripts/run-doc-qa.sh || true` is PASS WITH YELLOW with existing stale-guidance, deprecated-language, and markdownlint advisory logs; lychee passed.
+- Changed-file boundary passed with docs/status edits only.
+- Release-claim scan is PASS WITH YELLOW: hits are forbidden-claim lists, scan commands, historical logs, and explicit non-claims only.
+- `scripts/run-doc-qa.sh || true` is PASS WITH YELLOW with existing stale-guidance, deprecated-language, and markdownlint advisory backlog; lychee passed with 647 links and 0 errors.
 - `scripts/batch-train-gate-check.sh || true` is PASS WITH YELLOW with only the expected dirty-tree hint before commit.
-- CS07 touched only docs/status files and did not edit tests or app code.
-- CS07 focused external compatibility lane passed 81 tests with 0 failures.
-- Passing log: `output/logs/cs07-external-compatibility-tests-20260502-135725.log`.
-- CS07 proves current simulator/unit behavior for external routes, widgets, App Intent / Shortcut routes, action payloads, snapshots, screen contracts, and release-claim boundaries.
-- Release/platform claim scan found only forbidden-claim lists, scan commands, historical logs, and explicit non-claims.
 
 Not verified:
 
-- Screenshots, physical-device export/import, external file-transfer proof, TestFlight, App Store Connect, signed archive, public accessibility, legal/privacy signoff, platform proof, human visual approval, rendered widget/App Shortcut OS proof, and final release proof. CS08 makes none of those claims.
+- CS06B focused tests are not yet run.
+- Screenshots, physical-device proof, rendered widget/App Shortcut OS proof, public accessibility conformance, TestFlight, App Store Connect, signed archive, legal/privacy signoff, human visual approval, and final release proof are not performed. CS06A makes none of those claims.
 
 ## Next Eligible Batch
 
-CS06 dry-run is STOPPED ON RED. The current CS06 prompt attempts a broad internal `.failed` taxonomy retirement, but source discovery shows the seam spans command execution status, external action command failure states, async UI state, safe-automation receipt semantics, copy/accessibility language, tests, support checklists, logs, and historical docs. Execution is not allowed until CS06 is repaired into staged map/proof/retire work. Recommended next path: `Repair CS06 Failed Taxonomy Compatibility Seam And Resume Global Train`.
+CS06B Failed-Taxonomy Compatibility Proof is the next narrowed step. Recommended next path: run a CS06B dry-run and, only if `Execution allowed: YES`, add focused test proof for command execution failure status, external action failure handling, async UI failure/error states, safe-automation receipt failure semantics, and copy/accessibility mapping without production Swift changes unless the CS06A ledger proves a tiny fixture/helper change is necessary.

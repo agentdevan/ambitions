@@ -81,13 +81,15 @@ Current 4.0 status:
 - Completed: CS05A ActiveFocus/TodayFocus Compatibility Map And Retirement Ledger as internal docs/protocol stage of formal CS05; no seam retired and no app code edited.
 - Completed: CS05B ActiveFocus Compatibility Preservation Proof as focused simulator/unit proof; no seam retired and no production Swift edited.
 - Accepted Yellow: CS05C Narrow Internal Today Focus Retirement remains blocked/deferred until a later proof shows retirement is safe.
-- Stopped on Red: CS06 Internal Failed Taxonomy Retirement dry-run returned `Execution allowed: NO`; repair required before execution.
+- Completed: CS06A Failed-Taxonomy Compatibility Map And Seam Ledger as internal docs/protocol stage of formal CS06; no seam retired, no app code edited, no enum/raw value changed, and no copy/accessibility identifier changed.
+- Next narrowed proof: CS06B Failed-Taxonomy Compatibility Proof must prove technical `.failed` semantics remain stable before any CS06C retirement.
+- Accepted Yellow: CS06C Narrow Internal Failed-Taxonomy Retirement remains blocked/deferred until a later proof shows retirement is safe.
 - Queued / Blocked: CS02C, CS03C, CS04C, CS05C, and CS09-CS10 pending current global preauthorization or `Start CS Train`.
 - Queued / Blocked: SI01-SI18 pending global-order selection or `Start Signature Interface Train` plus PXOS/ME/CS/SI quality gates.
 - Queued / Blocked: PD01-PD18 pending `Start Product Depth Train` plus PXOS/ME/CS/SI/AOS-if-needed gates.
 - Queued / Blocked: AOS01-AOS30 pending `Start AOS Train`.
 - Total formal Ambitions 4.0 batches after SI insertion: 113.
-- Remaining after CS05B and SI insertion: 70 formal batches remain because CS02A/CS03A/CS04A/CS05A and CS02B/CS03B/CS04B/CS05B are internal stages of formal CS02/CS03/CS04/CS05, not new formal batches; CS05C is accepted Yellow/deferred.
+- Remaining after CS06A and SI insertion: 70 formal batches remain because CS02A/CS03A/CS04A/CS05A/CS06A and CS02B/CS03B/CS04B/CS05B are internal stages of formal CS02/CS03/CS04/CS05/CS06, not new formal batches; CS05C and CS06C are accepted Yellow/deferred.
 
 Use [../canon/Ambitions_4_0_Execution_Program.md](../canon/Ambitions_4_0_Execution_Program.md) and [GLOBAL_FUTURE_BATCH_EXECUTION_ORDER.md](GLOBAL_FUTURE_BATCH_EXECUTION_ORDER.md) for current post-3.0 status semantics.
 
