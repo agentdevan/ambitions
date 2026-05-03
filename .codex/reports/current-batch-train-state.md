@@ -3,9 +3,9 @@
 <!-- markdownlint-disable MD013 -->
 
 Active train: CS compatibility seam retirement train
-Active batch: CS06 Internal Failed Taxonomy Retirement
+Active batch: CS09 Compatibility Regression Repair
 Current out-of-train task: none
-Scope: ME01-ME12 maintainability train complete with commit/push evidence; ME11 repair not triggered; PXOS implementation not started; CS01 complete; CS07 complete as focused compatibility proof; CS08 complete as focused import/export/persistence proof; CS02A/CS02B, CS03A/CS03B, CS04A/CS04B, CS05A/CS05B, and CS06A/CS06B complete as internal compatibility seam repair/proof stages; CS06C deferred; Signature Interface/Product Depth/AmbitionsOS trains not started
+Scope: ME01-ME12 maintainability train complete with commit/push evidence; ME11 repair not triggered; PXOS implementation not started; CS01 complete; CS07 complete as focused compatibility proof; CS08 complete as focused import/export/persistence proof; CS02A/CS02B, CS03A/CS03B, CS04A/CS04B, CS05A/CS05B, and CS06A/CS06B complete as internal compatibility seam repair/proof stages; CS02C-CS06C deferred; CS09 dry-run stopped on Red because no named compatibility regression target exists; Signature Interface/Product Depth/AmbitionsOS trains not started
 Date: 2026-05-03
 
 ## Active Train Truth
@@ -35,9 +35,20 @@ CS06B is PASS WITH YELLOW with commit evidence `e5ea890e`:
 - `scripts/batch-train-gate-check.sh || true` is PASS WITH YELLOW with only the expected dirty-tree hint before commit.
 - Post-commit drift check passed: working tree clean and `scripts/batch-train-gate-check.sh || true` reported `GREEN_HINT working tree clean`.
 
+## CS09 Dry-Run Result
+
+CS09 is STOPPED ON RED.
+
+- Execution allowed: NO.
+- CS09 may repair only a named compatibility regression from failed CS evidence.
+- Current evidence from CS02B, CS03B, CS04B, CS05B, and CS06B contains accepted Yellow deferred retirements, not a failed compatibility regression target.
+- Proceeding would invent scope or prematurely execute deferred CS02C-CS06C retirement work.
+- Red report: `docs/audits/cs09-compatibility-regression-repair-dry-run-red-report.md`.
+
 ## Yellow Advisories
 
 - CS06C narrow retirement remains deferred because no seam is proven safe to retire.
+- CS02C, CS03C, CS04C, and CS05C narrow retirements remain deferred under their accepted Yellow proof reports.
 - User-facing copy/accessibility candidates remain inventoried only.
 - Exact rendered UI/accessibility exposure for some failed/failure states remains unverified.
 - Existing repo-wide docs QA backlog may remain Yellow if unrelated.
@@ -49,4 +60,6 @@ Continue only in global order, after dry-run selection says `Execution allowed: 
 
 ## Next Eligible Batch
 
-After CS06B commit/push and post-commit drift checks, run the `046 — CS09 Compatibility Regression Repair` dry-run. Continue only if execution is allowed.
+CS09 is the current blocked batch. Exact next recommended prompt/path:
+
+`Repair CS09 Conditional Compatibility Regression Repair Scope And Resume Global Train`
