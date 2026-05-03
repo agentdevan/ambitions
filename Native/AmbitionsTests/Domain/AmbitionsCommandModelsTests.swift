@@ -2,6 +2,14 @@ import XCTest
 @testable import Ambitions
 
 final class AmbitionsCommandModelsTests: XCTestCase {
+    func testCS06FailedTaxonomyRawValuesRemainCompatibilityStable() {
+        XCTAssertEqual(AmbitionsCommandExecutionStatus.failed.rawValue, "failed")
+        XCTAssertEqual(ActionReceiptResultState.failedSafely.rawValue, "failed_safely")
+        XCTAssertEqual(ActionReceiptSafetyState.safeFailure.rawValue, "safe_failure")
+        XCTAssertEqual(SmartAttachmentConfidenceBand.unavailableFailed.rawValue, "unavailable_failed")
+        XCTAssertEqual(SmartAttachmentResultState.failedSafely.rawValue, "failed_safely")
+    }
+
     func testCommandKindTaxonomyCoversBatch68Foundation() {
         XCTAssertEqual(
             Set(AmbitionsCommandKind.allCases),

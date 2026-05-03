@@ -82,7 +82,7 @@ Current 4.0 status:
 - Completed: CS05B ActiveFocus Compatibility Preservation Proof as focused simulator/unit proof; no seam retired and no production Swift edited.
 - Accepted Yellow: CS05C Narrow Internal Today Focus Retirement remains blocked/deferred until a later proof shows retirement is safe.
 - Completed: CS06A Failed-Taxonomy Compatibility Map And Seam Ledger as internal docs/protocol stage of formal CS06; no seam retired, no app code edited, no enum/raw value changed, and no copy/accessibility identifier changed.
-- Next narrowed proof: CS06B Failed-Taxonomy Compatibility Proof must prove technical `.failed` semantics remain stable before any CS06C retirement.
+- Completed: CS06B Failed-Taxonomy Compatibility Proof as focused simulator/unit proof; no seam retired and no production Swift edited.
 - Accepted Yellow: CS06C Narrow Internal Failed-Taxonomy Retirement remains blocked/deferred until a later proof shows retirement is safe.
 - Queued / Blocked: CS02C, CS03C, CS04C, CS05C, and CS09-CS10 pending current global preauthorization or `Start CS Train`.
 - Queued / Blocked: SI01-SI18 pending global-order selection or `Start Signature Interface Train` plus PXOS/ME/CS/SI quality gates.

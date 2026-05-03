@@ -165,6 +165,31 @@ final class ExternalActionCommandServiceTests: XCTestCase {
         XCTAssertTrue(router.dispatchedRoutes.isEmpty)
     }
 
+    func testCS06RuntimeFailedOutcomeStaysTechnicalAndDoesNotDispatchRoute() async {
+        let runtimeExecutor = StaticRuntimeActionExecutor(
+            result: RuntimeActionResult(outcome: .failed, messageTitle: "Action could not complete")
+        )
+        let router = RecordingExternalActionRouter()
+        let service = DefaultExternalActionCommandService(
+            runtimeExecutor: runtimeExecutor,
+            externalRouter: router
+        )
+
+        let result = await service.execute(
+            ExternalActionCommand(
+                kind: .complete,
+                target: ExternalActionTarget(goalID: "goal-1", stepID: "step-1"),
+                source: .notification
+            ),
+            now: .now
+        )
+
+        XCTAssertEqual(result.outcome, .failed)
+        XCTAssertEqual(result.messageTitle, "Action could not complete")
+        XCTAssertNil(result.route)
+        XCTAssertTrue(router.dispatchedRoutes.isEmpty)
+    }
+
     func testUnsupportedCommandFailsSafelyWithoutMutation() async {
         let today = RecordingExternalActionTodayService()
         let router = RecordingExternalActionRouter()
