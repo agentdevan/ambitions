@@ -114,7 +114,7 @@ The current user prompt says `Run Global Batch Sequence Until Blocked` and expli
 
 ## Next Eligible Batch
 
-CS05A is PASS WITH YELLOW pending commit/push evidence:
+CS05A is PASS WITH YELLOW with commit evidence `b74f4644`:
 
 - CS05A touched only docs/status files and did not edit tests, production Swift, AppUI, or Sources.
 - CS05A created the ActiveFocus/TodayFocus seam inventory, compatibility contract ledger, accessibility/route/payload ledger, and retirement risk map.

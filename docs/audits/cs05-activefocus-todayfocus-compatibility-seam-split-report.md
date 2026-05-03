@@ -2,7 +2,7 @@
 
 <!-- markdownlint-disable MD013 -->
 
-Status: CS05A complete pending commit/push evidence.
+Status: CS05A complete with commit evidence.
 Date: 2026-05-03
 
 ## Batch
@@ -106,4 +106,4 @@ Run CS05B dry-run. Continue only if `Execution allowed: YES`. CS05C remains bloc
 
 ## Commit SHA
 
-Pending post-commit evidence.
+`b74f4644`
