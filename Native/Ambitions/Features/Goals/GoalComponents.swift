@@ -1,6 +1,293 @@
 import AmbitionsDesignSystem
 import SwiftUI
 
+struct GoalMissionControlLanes: View {
+    @Environment(\.ambitionTheme) private var theme
+    @Environment(\.accessibilityReduceMotion) private var reduceMotion
+    @State private var hasAppeared = false
+
+    let overview: GoalsOverview
+    let onPrimaryAction: (GoalsBoardPrimaryAction) -> Void
+
+    private var primaryGoal: GoalsBoardCardState? {
+        overview.bands
+            .first(where: { $0.kind == .activeDirection })?
+            .cards
+            .first ?? overview.bands.flatMap(\.cards).first
+    }
+
+    private var pressureGoal: GoalsBoardCardState? {
+        overview.bands
+            .first(where: { $0.kind == .pressure })?
+            .cards
+            .first
+    }
+
+    private var lanes: [GoalMissionControlLaneState] {
+        let proof = primaryGoal?.proofSummary
+        let blocker = pressureGoal
+        let next = primaryGoal?.nextVisibleStep
+        let momentum = primaryGoal?.momentumIntegrity
+
+        return [
+            GoalMissionControlLaneState(
+                id: "proof",
+                title: "Proof",
+                value: (proof?.count ?? 0) > 0 ? "\(proof?.count ?? 0) saved" : "Not yet",
+                detail: proof?.latestTitle ?? proof?.detail ?? "Proof will appear after progress is saved.",
+                symbolName: "checkmark.seal",
+                state: (proof?.count ?? 0) > 0 ? .proof : .calm,
+                level: min(1, max(0.18, Double(proof?.count ?? 0) / 4.0)),
+                showsProofPulse: (proof?.count ?? 0) > 0
+            ),
+            GoalMissionControlLaneState(
+                id: "blockers",
+                title: "Blockers",
+                value: blocker == nil ? "Clear" : blocker?.renderState.title ?? "Needs attention",
+                detail: blocker?.nextStepHint ?? "No true blocker is leading the board right now.",
+                symbolName: "exclamationmark.triangle",
+                state: blocker == nil ? .calm : .pressured,
+                level: blocker == nil ? 0.18 : pressureLevel(for: blocker)
+            ),
+            GoalMissionControlLaneState(
+                id: "next-step",
+                title: "Next Step",
+                value: next?.isAvailable == false ? "Needs review" : "Ready",
+                detail: next?.title ?? primaryGoal?.nextStepHint ?? overview.heroPrimaryAction.title,
+                symbolName: "scope",
+                state: next?.isAvailable == false ? .stale : .active,
+                level: next?.isAvailable == false ? 0.38 : 0.74
+            ),
+            GoalMissionControlLaneState(
+                id: "momentum",
+                title: "Momentum",
+                value: momentum?.title ?? primaryGoal?.progressLabel ?? "Quiet",
+                detail: momentum?.detail ?? overview.hero.pressureSummary,
+                symbolName: "waveform.path.ecg",
+                state: momentum?.visualState == .success ? .proof : .active,
+                level: max(0.24, primaryGoal?.progressValue ?? 0.28)
+            ),
+        ]
+    }
+
+    var body: some View {
+        AdaptiveModuleChrome(
+            title: "Mission Control",
+            subtitle: "Proof, blockers, next step, and momentum stay visible without turning Goals into a task board.",
+            context: .goals,
+            state: pressureGoal == nil ? .active : .pressured,
+            evidence: "Photo-matched DAV06 reference inspected"
+        ) {
+            VStack(alignment: .leading, spacing: theme.spacing.md) {
+                heroHeader
+
+                LazyVGrid(
+                    columns: [GridItem(.adaptive(minimum: 148), spacing: theme.spacing.sm)],
+                    alignment: .leading,
+                    spacing: theme.spacing.sm
+                ) {
+                    ForEach(Array(lanes.enumerated()), id: \.element.id) { index, lane in
+                        GoalMissionControlLaneCard(
+                            lane: lane,
+                            revealDelay: reduceMotion ? 0 : Double(index) * 0.04,
+                            hasAppeared: hasAppeared
+                        )
+                    }
+                }
+
+                GoalsHeroPrimaryActionButton(
+                    action: overview.heroPrimaryAction,
+                    handler: onPrimaryAction
+                )
+            }
+        }
+        .overlay(alignment: .topTrailing) {
+            PressureGlow(
+                level: pressureGoal == nil ? 0.28 : pressureLevel(for: pressureGoal),
+                context: .goals,
+                label: "Goal mission pressure"
+            )
+            .frame(width: 150)
+            .padding(theme.spacing.lg)
+        }
+        .accessibilityElement(children: .contain)
+        .accessibilityIdentifier("goals.mission-control-lanes")
+        .onAppear {
+            hasAppeared = true
+        }
+    }
+
+    private var heroHeader: some View {
+        VStack(alignment: .leading, spacing: theme.spacing.xs) {
+            HStack(alignment: .firstTextBaseline, spacing: theme.spacing.xs) {
+                Text("Goals")
+                    .font(theme.typography.micro)
+                    .foregroundStyle(theme.colors.accentWarm)
+
+                Text(primaryGoal?.renderState.title ?? "Ready")
+                    .font(theme.typography.caption)
+                    .foregroundStyle(theme.stateStyle(for: primaryGoal?.renderState.visualState ?? .default).accent)
+                    .lineLimit(1)
+                    .minimumScaleFactor(0.78)
+                    .padding(.horizontal, theme.spacing.xs)
+                    .padding(.vertical, theme.spacing.xxxs)
+                    .background(
+                        Capsule(style: .continuous)
+                            .fill(theme.stateStyle(for: primaryGoal?.renderState.visualState ?? .default).fill)
+                    )
+                    .overlay {
+                        Capsule(style: .continuous)
+                            .strokeBorder(theme.stateStyle(for: primaryGoal?.renderState.visualState ?? .default).stroke, lineWidth: 1)
+                    }
+            }
+
+            Text(primaryGoal?.title ?? overview.hero.title)
+                .font(theme.typography.hero)
+                .foregroundStyle(theme.colors.textPrimary)
+                .fixedSize(horizontal: false, vertical: true)
+
+            Text(overview.hero.dominantTruth)
+                .font(theme.typography.body)
+                .foregroundStyle(theme.colors.textSecondary)
+                .fixedSize(horizontal: false, vertical: true)
+        }
+        .accessibilityElement(children: .combine)
+        .accessibilityLabel([
+            "Goals Mission Control",
+            primaryGoal?.title ?? overview.hero.title,
+            primaryGoal?.renderState.title ?? "Ready",
+            overview.hero.dominantTruth
+        ].joined(separator: ". "))
+    }
+
+    private func pressureLevel(for goal: GoalsBoardCardState?) -> Double {
+        guard let goal else { return 0.18 }
+
+        switch goal.posture {
+        case .atRisk:
+            return 0.74
+        case .crowded:
+            return 0.66
+        case .stalled:
+            return 0.54
+        case .active:
+            return 0.42
+        case .lowerPriority, .achieved:
+            return 0.28
+        }
+    }
+}
+
+private struct GoalMissionControlLaneState: Identifiable, Sendable {
+    let id: String
+    let title: String
+    let value: String
+    let detail: String
+    let symbolName: String
+    let state: LivingVisualState
+    let level: Double
+    var showsProofPulse: Bool = false
+}
+
+private struct GoalMissionControlLaneCard: View {
+    @Environment(\.ambitionTheme) private var theme
+    @Environment(\.accessibilityReduceMotion) private var reduceMotion
+
+    let lane: GoalMissionControlLaneState
+    let revealDelay: Double
+    let hasAppeared: Bool
+
+    var body: some View {
+        let accent = lane.state == .proof ? theme.semanticColors.protected : theme.stateStyle(for: lane.state.ambitionState).accent
+        let shape = RoundedRectangle(cornerRadius: theme.radius.lg, style: .continuous)
+
+        VStack(alignment: .leading, spacing: theme.spacing.xs) {
+            HStack(alignment: .top, spacing: theme.spacing.xs) {
+                Image(systemName: lane.symbolName)
+                    .font(.system(size: theme.icon.smallSize, weight: theme.icon.symbolWeight))
+                    .foregroundStyle(accent)
+                    .frame(width: 28, height: 28)
+                    .background(Circle().fill(accent.opacity(0.13)))
+                    .accessibilityHidden(true)
+
+                Spacer(minLength: theme.spacing.xs)
+
+                if lane.showsProofPulse {
+                    ProofPulse(isActive: hasAppeared, label: "Proof lane has saved proof")
+                        .frame(width: 34, height: 34)
+                }
+            }
+
+            VStack(alignment: .leading, spacing: theme.spacing.xxxs) {
+                Text(lane.title)
+                    .font(theme.typography.caption)
+                    .foregroundStyle(theme.colors.textTertiary)
+                Text(lane.value)
+                    .font(theme.typography.bodyEmphasized)
+                    .foregroundStyle(theme.colors.textPrimary)
+                    .fixedSize(horizontal: false, vertical: true)
+                Text(lane.detail)
+                    .font(theme.typography.caption)
+                    .foregroundStyle(theme.colors.textSecondary)
+                    .lineLimit(3)
+                    .fixedSize(horizontal: false, vertical: true)
+            }
+
+            GoalMissionControlSparkLine(level: lane.level, accent: accent)
+        }
+        .frame(maxWidth: .infinity, minHeight: 168, alignment: .topLeading)
+        .padding(theme.spacing.sm)
+        .background {
+            shape.fill(theme.surfaces.elevatedGradient)
+        }
+        .overlay {
+            shape.strokeBorder(accent.opacity(0.24), lineWidth: 1)
+        }
+        .shadow(color: accent.opacity(0.10), radius: 18, x: 0, y: 10)
+        .opacity(hasAppeared || reduceMotion ? 1 : 0.84)
+        .offset(y: hasAppeared || reduceMotion ? 0 : 6)
+        .animation(
+            reduceMotion ? nil : .easeOut(duration: 0.34).delay(revealDelay),
+            value: hasAppeared
+        )
+        .accessibilityElement(children: .ignore)
+        .accessibilityLabel("\(lane.title). \(lane.value). \(lane.detail)")
+    }
+}
+
+private struct GoalMissionControlSparkLine: View {
+    @Environment(\.accessibilityReduceMotion) private var reduceMotion
+
+    let level: Double
+    let accent: Color
+
+    private var normalizedLevel: Double {
+        min(1, max(0.12, level))
+    }
+
+    var body: some View {
+        HStack(alignment: .bottom, spacing: 4) {
+            ForEach(0..<6, id: \.self) { index in
+                Capsule(style: .continuous)
+                    .fill(accent.opacity(index == 5 ? 0.62 : 0.26))
+                    .frame(
+                        width: 5,
+                        height: barHeight(index: index)
+                    )
+            }
+        }
+        .frame(height: 32, alignment: .bottomLeading)
+        .frame(maxWidth: .infinity, alignment: .leading)
+        .accessibilityHidden(true)
+    }
+
+    private func barHeight(index: Int) -> CGFloat {
+        let base = CGFloat(normalizedLevel)
+        let wave = reduceMotion ? CGFloat(index + 1) / 7 : abs(sin(Double(index) * 0.72 + normalizedLevel))
+        return max(8, 10 + (base * 16) + CGFloat(wave * 10))
+    }
+}
+
 struct GoalsHeroCard: View {
     @Environment(\.ambitionTheme) private var theme
 

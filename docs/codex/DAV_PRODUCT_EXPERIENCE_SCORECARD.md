@@ -17,7 +17,7 @@ Each implemented surface must score 4/5 or higher on native iPhone believability
 | Today | Complete DAV03 | 4/5 | Existing Reality Rail became DayTimelineRail, with DAV living background, pressure glow, evidence label, proof pulse, hero transition, Reduce Motion-aware animation, stable accessibility identifiers, and no route or persistence change. |
 | Capture | Complete DAV04 | 4/5 | Capture remains composer-first with DAV atmosphere, named CaptureAtmosphereComposer, editable route-preview evidence, receipt pulse, no-shame empty copy, and no routing or persistence change. |
 | Plan | Complete DAV05 | 4/5 | Plan gained a DAV background, Day/Week/Month scope chip strip, LifeShapeMap, pressure glow, capacity evidence label, and preserved suggestion-only calendar boundaries with no permission or routing change. |
-| Goals | Pending DAV06 | Not scored | Requires lane/proof/blocker evidence. |
+| Goals | Complete DAV06 | 4/5 | Goals gained a photo-matched Mission Control first visual object with Proof, Blockers, Next Step, and Momentum lanes, DAV background, proof pulse, pressure glow, Reduce Motion-aware reveal, large type preview evidence, focused Goals test proof, and no route/persistence/schema change. |
 | You | Pending DAV07 | Not scored | Requires personal system center evidence. |
 | Memory | Pending DAV08 | Not scored | Requires source/confidence/control evidence. |
 | Trust/Receipts | Pending DAV09 | Not scored | Requires receipt/proof/source evidence. |

@@ -52,7 +52,12 @@ struct GoalsScreen: View {
                         }
                     )
                 case let .loaded(overview):
-                    GoalsHeroCard(overview: overview, onPrimaryAction: handlePrimaryAction)
+                    GoalMissionControlLanes(
+                        overview: overview,
+                        onPrimaryAction: handlePrimaryAction
+                    )
+                    .transition(DAVMotionPreset.heroExpansion.transition(reduceMotion: reduceMotion))
+
                     GoalsWeekPressureCard(summary: overview.weekPressureSummary)
                         .transition(.ambitionPanel)
                     GoalsPortfolioMaturityCard(summary: overview.maturitySummary)
@@ -145,6 +150,10 @@ struct GoalsScreen: View {
             .padding(.vertical, theme.spacing.md)
         }
         .accessibilityIdentifier("goals.screen")
+        .background {
+            LivingSurfaceBackground(context: .goals, state: .active, intensity: 0.72)
+                .ignoresSafeArea()
+        }
         .scrollIndicators(.hidden)
         .refreshable {
             await viewModel.refresh(using: container.goalsService)
@@ -279,5 +288,14 @@ struct GoalsScreen: View {
     }
     .appContainer(PreviewAppContainerFactory.preview)
     .ambitionTheme(.dark)
+}
+
+#Preview("Goals Mission Control Large Type") {
+    NavigationStack {
+        GoalsScreen(viewModel: GoalsViewModel(state: .loaded(PreviewGoalsScenarios.overview)))
+    }
+    .appContainer(PreviewAppContainerFactory.preview)
+    .ambitionTheme(.dark)
+    .environment(\.sizeCategory, .accessibilityExtraExtraExtraLarge)
 }
 #endif

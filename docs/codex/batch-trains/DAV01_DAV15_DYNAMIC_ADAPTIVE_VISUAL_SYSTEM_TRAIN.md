@@ -16,8 +16,8 @@ DAV makes Ambitions visually alive without making it loud, generic, heavy, unrea
 - 057: DAV03 Today DayTimelineRail And HeroStepPanel Implementation. Status: complete. Boundary: Today visual composition only.
 - 058: DAV04 Capture AtmosphereComposer And RoutingReceipts Implementation. Status: complete. Boundary: Capture visual composition only.
 - 059: DAV05 Plan LifeShapeMap And CapacityVisuals Implementation. Status: complete. Boundary: Plan visual composition only.
-- 060: DAV06 Goals MissionControlLanes Implementation. Status: active next. Boundary: Goals visual composition only.
-- 061: DAV07 You SystemProfilePanel And GroupedNavigation Implementation. Status: queued. Boundary: You/Profile visual composition only.
+- 060: DAV06 Goals MissionControlLanes Implementation. Status: complete. Boundary: Goals visual composition only.
+- 061: DAV07 You SystemProfilePanel And GroupedNavigation Implementation. Status: active next. Boundary: You/Profile visual composition only.
 - 062: DAV08 Memory ContextRecall And MemoryConstellation Implementation. Status: queued. Boundary: memory/recall visual prototypes or owned surfaces only; no durable memory behavior.
 - 063: DAV09 TrustReceiptStack EvidenceLabels And ProofPulse Implementation. Status: queued. Boundary: trust/receipt visual primitives only.
 - 064: DAV10 AdaptiveMotion ReduceMotion And StateTransitions. Status: queued. Boundary: motion/reduce-motion closeout.
