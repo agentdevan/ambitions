@@ -16,7 +16,7 @@ Original formal Ambitions 4.0 batch count: 113. Active expansion added: 40. New 
 - 050: EB04 Capture Classification And Clarification. Status: active planned / queued; not completed. Boundary: Implementation allowed later for classification and one-question clarification only.
 - 051: EB05 Capture Clusters Review Bundles And Open Loops. Status: active planned / queued; not completed. Boundary: Implementation allowed later for clusters, review bundles, and open-loop signals only.
 - 052: EB06 Capture Receipts Undo And Reclassification. Status: active planned / queued; not completed. Boundary: Implementation allowed later for receipts, undo, and reclassification only.
-- 053: EB07 Life Memory Graph Canon And Domain Model. Status: active planned / queued; not completed. Boundary: Canon/domain planning; durable memory implementation waits for EB13.
+- 052: EB07 Life Memory Graph Canon And Domain Model. Status: complete by EB07 evidence; no app behavior or domain code implemented. Boundary: Canon/domain planning; durable memory implementation remains deferred to later gated batches.
 - 054: EB08 Memory Source Confidence And Trust Decay. Status: active planned / queued; not completed. Boundary: Implementation allowed later for source, confidence, and trust decay only.
 - 055: EB09 Life Event Decision And Context Recall Memory. Status: active planned / queued; not completed. Boundary: Implementation allowed later for life event, decision, and recall records only.
 - 056: EB10 Personal Operating Manual. Status: active planned / queued; not completed. Boundary: Implementation allowed later for personal operating manual only.
