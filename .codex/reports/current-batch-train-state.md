@@ -2,12 +2,11 @@
 
 Date: 2026-05-03
 Active train: Ambitions 4.0 External Brain Foundation
-Current batch: EB24 complete; EB03 next eligible
-Scope: EB24 closed as Product Maturity And Onboarding / Trust gate/evidence
-only. It records the onboarding receipt, skip/later, and setup recovery
-contract, repairs stale prompt global-order metadata, and defers product Swift
-until exact owner files, focused tests, preview evidence, privacy evidence,
-accessibility evidence, rollback, and release-claim proof are named. No app
+Current batch: EB03 blocked before implementation
+Scope: EB03 Universal Capture Composer And Routing is next eligible, but the
+prompt names broad Capture/Domain production families without exact owner
+files, a focused behavior target, focused tests, preview evidence, rollback, or
+route/raw/persistence proof. No EB03 implementation was started. No app
 behavior, route/raw value, persistence/schema, dependency, workflow, signing,
 top-level-tab, production asset, or public accessibility/release claim change was
 made.
@@ -47,7 +46,8 @@ made.
   fixture/scenario gallery implementation; DAV13 is complete as rendering and
   battery risk evidence; DAV14 is complete as visual regression and
   product-experience QA evidence; DAV15 is complete as train closeout evidence;
-  EB03 remains active planned scope and is next eligible.
+  EB03 remains active planned scope and is blocked until scoped into exact
+  owner files and focused validation.
 - PXEQ is a mandatory product-experience gate for EB UI-affecting batches; it
   is not a shipped app feature and not a new EB batch identity.
 - Optimized global order after EB32 places DAV01-DAV15 before UI-heavy EB
@@ -66,7 +66,13 @@ claim/copy/docs advisory backlog, working-tree gate hints during validation,
 and future product implementation proof because EB24 intentionally changes no
 Swift or app behavior.
 
+EB03 preflight result: BLOCKED. Proceeding would require broad production Swift
+work in Capture and Domain without a narrowed owner-file set, focused tests,
+preview evidence, rollback plan, and route/raw/persistence proof. Required
+repair path: split EB03 into EB03A owner map, EB03B capture composer/routing
+implementation, and EB03C focused proof/closeout before product Swift changes.
+
 ## Next Safe Path
 
-Inspect EB03 Universal Capture Composer And Routing only after EB24 is
-validated, committed, and pushed.
+Repair EB03 scope before implementation. Do not restart completed DAV or
+EB20-EB24 batches.
