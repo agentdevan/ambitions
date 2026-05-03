@@ -123,9 +123,15 @@ Current 4.0 status:
   global-order metadata to 071, and defers product Swift until exact owner
   files, focused tests, preview evidence, privacy evidence, accessibility
   evidence, rollback, and release-claim proof are named.
-- Active Planned / Queued: EB22 Privacy Setup And Trust Onboarding is next
-  eligible after EB21; production SwiftUI is allowed only inside the active EB
-  batch boundary.
+- Complete: EB22 Privacy Setup And Trust Onboarding is complete as Trust,
+  Privacy, And User Control gate/evidence only. It records the privacy setup
+  and trust onboarding contract, repairs the prompt global-order metadata to
+  072, and defers product Swift until exact owner files, focused tests, preview
+  evidence, privacy evidence, accessibility evidence, rollback, and
+  release-claim proof are named.
+- Active Planned / Queued: EB23 Maturity Levels Progressive Disclosure And
+  Life Season Templates is next eligible after EB22; production SwiftUI is
+  allowed only inside the active EB batch boundary.
 - Active Planned / Queued: EB08-EB12, EB14-EB18, EB20-EB24, EB03-EB06, and EB26-EB40 Ambitions 4.0 External Brain Foundation expansion segment; not completed and not implemented in app behavior.
 - Queued / Blocked: SI01-SI18 pending global-order selection or `Start Signature Interface Train` plus PXOS/ME/CS/SI quality gates.
 - Queued / Blocked: PD01-PD18 pending `Start Product Depth Train` plus PXOS/ME/CS/SI/AOS-if-needed gates.

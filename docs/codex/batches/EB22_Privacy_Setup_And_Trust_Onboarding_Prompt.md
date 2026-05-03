@@ -6,7 +6,7 @@
 
 - Batch ID: EB22
 - Name: Privacy Setup And Trust Onboarding
-- Global order after EB insertion: 068
+- Global order after EB insertion: 072
 
 ## Active 4.0 Status
 
