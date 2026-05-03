@@ -198,3 +198,5 @@ These are future-canon planning docs now governed operationally by the Ambitions
 - [PXOS Release Safe Product Messaging](PXOS_Release_Safe_Product_Messaging.md)
 
 These docs are future canon in the Ambitions 4.0 Execution Program. They do not claim current app implementation, release readiness, or PXOS train activation.
+
+- [Ambitions 4.0 External Brain Foundation](Ambitions_4_0_External_Brain_Foundation_Index.md) - active planned 4.0 expansion scope; not app behavior until EB batch evidence proves it.

@@ -2,10 +2,10 @@
 
 <!-- markdownlint-disable MD013 -->
 
-Active train: CS compatibility seam retirement train
-Active batch: CS09 Compatibility Regression Repair
-Current out-of-train task: none
-Scope: ME01-ME12 maintainability train complete with commit/push evidence; ME11 repair not triggered; PXOS implementation not started; CS01 complete; CS07 complete as focused compatibility proof; CS08 complete as focused import/export/persistence proof; CS02A/CS02B, CS03A/CS03B, CS04A/CS04B, CS05A/CS05B, and CS06A/CS06B complete as internal compatibility seam repair/proof stages; CS02C-CS06C deferred; CS09 repaired into CS09A/CS09B/CS09C and accepted Yellow/parked because no named compatibility regression target exists; Signature Interface/Product Depth/AmbitionsOS trains not started
+Active train: Ambitions 4.0 External Brain Foundation integration
+Active batch: EB integration meta-batch
+Current out-of-train task: External Brain active 4.0 integration
+Scope: ME01-ME12 maintainability train complete with commit/push evidence; ME11 repair not triggered; PXOS implementation not started; CS01 complete; CS07 complete as focused compatibility proof; CS08 complete as focused import/export/persistence proof; CS02A/CS02B, CS03A/CS03B, CS04A/CS04B, CS05A/CS05B, and CS06A/CS06B complete as internal compatibility seam repair/proof stages; CS02C-CS06C deferred; CS09 repaired into CS09A/CS09B/CS09C and accepted Yellow/parked because no named compatibility regression target exists; External Brain active planned scope integrated; EB01 next eligible after integration; Signature Interface/Product Depth/AmbitionsOS trains not started
 Date: 2026-05-03
 
 ## Active Train Truth
@@ -60,6 +60,6 @@ Continue only in global order, after dry-run selection says `Execution allowed: 
 
 ## Next Eligible Batch
 
-CS09 is accepted Yellow/parked. Exact next recommended prompt/path:
+External Brain is active planned Ambitions 4.0 scope. Exact next recommended prompt/path:
 
-`Integrate External Brain Foundation into Ambitions 4.0 train`
+`Run EB01 External Brain Source Truth And Kernel Architecture dry-run under global continuation rules`

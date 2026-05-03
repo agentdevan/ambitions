@@ -191,3 +191,5 @@ AmbitionsOS future-canon docs are indexed from [canon/AmbitionsOS_Index.md](cano
 ## PXOS Future Canon
 
 PXOS future-canon docs are indexed from [canon/Ambitions_Product_Experience_OS_Index.md](canon/Ambitions_Product_Experience_OS_Index.md). They define queued Ambitions 4.0 future user-facing product experience, Codex process controls, and implementation ordering. They do not claim current app implementation, release readiness, or PXOS train activation.
+
+- [Ambitions 4.0 External Brain Foundation](canon/Ambitions_4_0_External_Brain_Foundation_Index.md) - active planned 4.0 expansion scope; not app behavior until EB batch evidence proves it.

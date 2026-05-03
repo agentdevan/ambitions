@@ -1,4 +1,4 @@
-# Accessibility Cognitive Load Reviewer
+# External Brain Test Fixture Reviewer
 
 ## Purpose
 

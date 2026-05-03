@@ -1,4 +1,4 @@
-# Accessibility Cognitive Load Reviewer
+# No Creepy Intelligence Reviewer
 
 ## Purpose
 

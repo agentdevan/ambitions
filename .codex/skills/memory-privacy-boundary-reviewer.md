@@ -1,4 +1,4 @@
-# Accessibility Cognitive Load Reviewer
+# Memory Privacy Boundary Reviewer
 
 ## Purpose
 

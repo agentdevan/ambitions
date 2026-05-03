@@ -229,3 +229,5 @@ their gates allow execution.
 ## Product Experience OS Future Canon
 
 [Ambitions Product Experience OS](docs/canon/Ambitions_Product_Experience_OS_Index.md), abbreviated PXOS, is future canon for the user-facing product experience in the Ambitions 4.0 Execution Program. PXOS sits beside AmbitionsOS: AmbitionsOS owns future internal intelligence/runtime architecture; PXOS owns future screens, surfaces, hierarchy, copy, interaction, recovery, trust, visual design, accessibility, and release-safe product messaging. PX01-PX20 are complete as future canon/roadmap evidence; PXOS is not current app implementation.
+
+- [Ambitions 4.0 External Brain Foundation](docs/canon/Ambitions_4_0_External_Brain_Foundation_Index.md) - active planned 4.0 expansion scope; not app behavior until EB batch evidence proves it.

@@ -113,3 +113,5 @@ PXOS is future user-facing product experience canon. PX01-PX20 are complete as
 future canon/roadmap evidence; PXOS implementation is not started. Later
 implementation work starts only through global dry-run and valid approval
 gates.
+
+- [EB External Brain Dependency Graph](EB_EXTERNAL_BRAIN_DEPENDENCY_GRAPH.md) - active planned 4.0 EB train dependencies.

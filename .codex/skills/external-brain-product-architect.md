@@ -1,4 +1,4 @@
-# Accessibility Cognitive Load Reviewer
+# External Brain Product Architect
 
 ## Purpose
 

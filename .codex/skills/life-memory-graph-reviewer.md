@@ -1,4 +1,4 @@
-# Accessibility Cognitive Load Reviewer
+# Life Memory Graph Reviewer
 
 ## Purpose
 
