@@ -3,9 +3,9 @@
 <!-- markdownlint-disable MD013 -->
 
 Active train: CS compatibility seam retirement train
-Active batch: CS04B Ritual/Plan Compatibility Preservation Proof
+Active batch: CS05 ActiveFocus TodayFocus Retirement dry-run Red
 Current out-of-train task: none
-Scope: ME01-ME12 maintainability train complete with commit/push evidence; ME11 repair not triggered; PXOS implementation not started; CS01 complete; CS07 complete as focused compatibility proof; CS08 complete as focused import/export/persistence proof; CS02A repaired the Profile/You seam scope without code edits; CS02B added focused test proof; CS03A repaired the Insights seam scope without code edits; CS03B added focused test proof; CS04A repaired the Habits/Ritual/Plan seam scope without code edits; CS04B added focused test proof; Signature Interface/Product Depth/AmbitionsOS trains not started
+Scope: ME01-ME12 maintainability train complete with commit/push evidence; ME11 repair not triggered; PXOS implementation not started; CS01 complete; CS07 complete as focused compatibility proof; CS08 complete as focused import/export/persistence proof; CS02A repaired the Profile/You seam scope without code edits; CS02B added focused test proof; CS03A repaired the Insights seam scope without code edits; CS03B added focused test proof; CS04A repaired the Habits/Ritual/Plan seam scope without code edits; CS04B added focused test proof; CS05 dry-run stopped on Red; Signature Interface/Product Depth/AmbitionsOS trains not started
 Date: 2026-05-02
 Branch: main
 
@@ -33,9 +33,9 @@ Branch: main
 - CS01: complete as audit-only compatibility seam registry and risk map; no seam retired and no app code edited.
 - CS07: complete as focused external route/widget/App Intent compatibility proof; no seam retired and no app code edited. Commit evidence: `e4c04ff2`, report SHA repair: `ef536cae`.
 - CS08: complete as focused import/export/persistence compatibility proof; no seam retired and no app code edited. Commit evidence: `d2c328d6`, report SHA repair: `9144add3`.
-- CS train: active with CS02, CS03, and CS04 internally staged; CS02A and CS02B are complete, CS02C is deferred as accepted Yellow, CS03A is complete with commit evidence `a0d898ea`, CS03B is complete with commit evidence `126e86be`, CS03C remains blocked/deferred, CS04A is complete with commit evidence `4766b9d7`, CS04B is complete with commit evidence `7e4a574d`, and CS04C remains blocked/deferred.
+- CS train: active with CS02, CS03, and CS04 internally staged; CS02A and CS02B are complete, CS02C is deferred as accepted Yellow, CS03A is complete with commit evidence `a0d898ea`, CS03B is complete with commit evidence `126e86be`, CS03C remains blocked/deferred, CS04A is complete with commit evidence `4766b9d7`, CS04B is complete with commit evidence `7e4a574d`, CS04C remains blocked/deferred, and CS05 is stopped on dry-run Red.
 - SI/Product Depth/AOS: queued/blocked and not started.
-- Global order: 113 formal batches after SI insertion; 71 formal batches remain because formal CS04 is complete as accepted Yellow by CS04A/CS04B evidence, and CS02A/CS03A/CS04A are internal stages, not new formal batches.
+- Global order: 113 formal batches after SI insertion; current active order is `044 — CS05`; 71 formal batches remain because CS05 is not complete and CS02A/CS03A/CS04A are internal stages, not new formal batches.
 
 ## Boundaries
 
@@ -81,4 +81,4 @@ Not verified:
 
 ## Next Eligible Batch
 
-CS04B is complete as focused compatibility proof with commit evidence `7e4a574d`. The next safe action is CS05 dry-run. CS04C remains blocked/deferred because no narrow retirement is proven safe.
+CS05 dry-run returned `Execution allowed: NO` and stopped on Red. The next safe action is to repair CS05 into internal CS05A/CS05B/CS05C stages before any implementation or retirement. CS04C remains blocked/deferred because no narrow retirement is proven safe.
