@@ -755,6 +755,216 @@ private struct FlowEvidenceLabels: View {
     }
 }
 
+public enum TrustReceiptVisualState: String, CaseIterable, Identifiable, Sendable {
+    case proofSaved
+    case correction
+    case undo
+    case staleSource
+    case blocked
+    case empty
+
+    public var id: String { rawValue }
+
+    public var title: String {
+        switch self {
+        case .proofSaved: "Proof saved"
+        case .correction: "Correction visible"
+        case .undo: "Undo available"
+        case .staleSource: "Source may need review"
+        case .blocked: "Blocked safely"
+        case .empty: "No receipts"
+        }
+    }
+
+    public var livingState: LivingVisualState {
+        switch self {
+        case .proofSaved, .correction, .undo:
+            return .proof
+        case .staleSource:
+            return .stale
+        case .blocked:
+            return .pressured
+        case .empty:
+            return .empty
+        }
+    }
+
+    public var symbolName: String {
+        switch self {
+        case .proofSaved: "checkmark.seal.fill"
+        case .correction: "checkmark.bubble"
+        case .undo: "arrow.uturn.backward.circle"
+        case .staleSource: "clock.badge.exclamationmark"
+        case .blocked: "exclamationmark.shield"
+        case .empty: "tray"
+        }
+    }
+}
+
+public struct TrustReceiptStackItem: Identifiable, Sendable {
+    public let id: String
+    public let title: String
+    public let summary: String
+    public let sourceLabel: String
+    public let freshnessLabel: String
+    public let undoLabel: String
+    public let correctionLabel: String
+    public let nextActionLabel: String?
+    public let state: TrustReceiptVisualState
+
+    public init(
+        id: String,
+        title: String,
+        summary: String,
+        sourceLabel: String,
+        freshnessLabel: String,
+        undoLabel: String,
+        correctionLabel: String,
+        nextActionLabel: String? = nil,
+        state: TrustReceiptVisualState
+    ) {
+        self.id = id
+        self.title = title
+        self.summary = summary
+        self.sourceLabel = sourceLabel
+        self.freshnessLabel = freshnessLabel
+        self.undoLabel = undoLabel
+        self.correctionLabel = correctionLabel
+        self.nextActionLabel = nextActionLabel
+        self.state = state
+    }
+}
+
+public struct TrustReceiptStack: View {
+    @Environment(\.ambitionTheme) private var theme
+
+    private let title: String
+    private let subtitle: String
+    private let items: [TrustReceiptStackItem]
+
+    public init(
+        title: String = "Trust receipts",
+        subtitle: String = "Privacy-safe summaries of what changed, why, and what can be corrected or undone.",
+        items: [TrustReceiptStackItem]
+    ) {
+        self.title = title
+        self.subtitle = subtitle
+        self.items = items
+    }
+
+    public var body: some View {
+        AdaptiveModuleChrome(
+            title: title,
+            subtitle: subtitle,
+            context: .trust,
+            state: items.isEmpty ? .empty : .proof,
+            evidence: items.isEmpty ? "No receipt is shown without source evidence" : "\(items.count) source-bound receipts"
+        ) {
+            if items.isEmpty {
+                TrustReceiptEmptyState()
+            } else {
+                VStack(alignment: .leading, spacing: theme.spacing.sm) {
+                    ForEach(items) { item in
+                        TrustReceiptStackRow(item: item)
+                    }
+                }
+            }
+        }
+        .accessibilityIdentifier("trust.receipt-stack")
+    }
+}
+
+private struct TrustReceiptEmptyState: View {
+    @Environment(\.ambitionTheme) private var theme
+
+    var body: some View {
+        QuietCommandSurface(
+            placeholder: "No receipts to show",
+            detail: "Ambitions should say when there is no audit trail instead of implying hidden proof.",
+            context: .trust
+        ) {
+            ProofPulse(isActive: false, label: "No proof receipt visible")
+        }
+    }
+}
+
+private struct TrustReceiptStackRow: View {
+    @Environment(\.ambitionTheme) private var theme
+
+    let item: TrustReceiptStackItem
+
+    var body: some View {
+        VStack(alignment: .leading, spacing: theme.spacing.sm) {
+            HStack(alignment: .top, spacing: theme.spacing.sm) {
+                ProofPulse(isActive: item.state == .proofSaved || item.state == .correction || item.state == .undo, label: item.state.title)
+
+                VStack(alignment: .leading, spacing: theme.spacing.xxxs) {
+                    Text(item.title)
+                        .font(theme.typography.bodyEmphasized)
+                        .foregroundStyle(theme.colors.textPrimary)
+                        .fixedSize(horizontal: false, vertical: true)
+
+                    Text(item.summary)
+                        .font(theme.typography.bodySecondary)
+                        .foregroundStyle(theme.colors.textSecondary)
+                        .fixedSize(horizontal: false, vertical: true)
+
+                    if let nextActionLabel = item.nextActionLabel {
+                        Text(nextActionLabel)
+                            .font(theme.typography.caption)
+                            .foregroundStyle(theme.colors.textTertiary)
+                            .fixedSize(horizontal: false, vertical: true)
+                    }
+                }
+
+                Spacer(minLength: theme.spacing.xs)
+            }
+
+            VStack(alignment: .leading, spacing: theme.spacing.xs) {
+                EvidenceLabel(item.sourceLabel, detail: "Action source", state: item.state.livingState, context: .trust)
+                EvidenceLabel(item.freshnessLabel, detail: "Source freshness", state: item.state.livingState, context: .memory)
+            }
+
+            QuietCommandSurface(
+                placeholder: "Correction and undo",
+                detail: "\(item.correctionLabel). \(item.undoLabel).",
+                context: .trust
+            ) {
+                Image(systemName: item.state.symbolName)
+                    .font(.system(size: theme.icon.smallSize, weight: theme.icon.symbolWeight))
+                    .foregroundStyle(.secondary)
+                    .accessibilityHidden(true)
+            }
+        }
+        .padding(theme.spacing.md)
+        .background(
+            RoundedRectangle(cornerRadius: theme.radius.lg, style: .continuous)
+                .fill(theme.colors.surfaceOverlay)
+        )
+        .overlay {
+            RoundedRectangle(cornerRadius: theme.radius.lg, style: .continuous)
+                .strokeBorder(theme.semanticColors.protected.opacity(0.22), lineWidth: 1)
+        }
+        .accessibilityElement(children: .combine)
+        .accessibilityLabel(accessibilitySummary)
+    }
+
+    private var accessibilitySummary: String {
+        [
+            item.state.title,
+            item.title,
+            item.summary,
+            item.sourceLabel,
+            item.freshnessLabel,
+            item.correctionLabel,
+            item.undoLabel,
+            item.nextActionLabel
+        ]
+        .compactMap { $0 }
+        .joined(separator: ". ")
+    }
+}
+
 public struct GroupedNavigationSystemItem: Identifiable, Sendable {
     public let id: String
     public let title: String

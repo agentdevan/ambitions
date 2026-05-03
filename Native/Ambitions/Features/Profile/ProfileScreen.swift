@@ -1736,19 +1736,11 @@ private struct ProfileTrustCenterCard: View {
                     }
                 }
 
-                if trustCenter.receiptSummaries.isEmpty == false {
-                    VStack(alignment: .leading, spacing: theme.spacing.sm) {
-                        SectionHeader(
-                            eyebrow: "Receipts",
-                            title: "Recent trust receipts",
-                            subtitle: "Privacy-safe summaries of what changed, why, and whether correction or undo is available."
-                        )
-
-                        ForEach(trustCenter.receiptSummaries) { receipt in
-                            ProfileTrustReceiptRow(receipt: receipt)
-                        }
-                    }
-                }
+                TrustReceiptStack(
+                    title: "Recent trust receipts",
+                    subtitle: "Privacy-safe summaries of what changed, why, and whether correction or undo is available.",
+                    items: trustReceiptStackItems
+                )
 
                 if let notificationActionTitle {
                     Button(notificationActionTitle, action: onEnableNotifications)
@@ -1763,6 +1755,22 @@ private struct ProfileTrustCenterCard: View {
             }
         }
         .accessibilityIdentifier("profile.trust-center-card")
+    }
+
+    private var trustReceiptStackItems: [TrustReceiptStackItem] {
+        trustCenter.receiptSummaries.map { receipt in
+            TrustReceiptStackItem(
+                id: receipt.id,
+                title: receipt.title,
+                summary: receipt.summary,
+                sourceLabel: receipt.sourceDomain.trustReceiptSourceLabel,
+                freshnessLabel: receipt.safetyState.trustReceiptFreshnessLabel,
+                undoLabel: receipt.undoAvailability.trustReceiptUndoLabel,
+                correctionLabel: receipt.correctionAvailability.trustReceiptCorrectionLabel,
+                nextActionLabel: receipt.nextActionTitle,
+                state: receipt.trustReceiptVisualState
+            )
+        }
     }
 }
 
@@ -1866,6 +1874,93 @@ private struct ProfileTrustReceiptRow: View {
 
     private var correctionState: AmbitionVisualState {
         receipt.correctionAvailability.isAvailable ? .success : .default
+    }
+}
+
+private extension ActionReceiptDisplaySummary {
+    var trustReceiptVisualState: TrustReceiptVisualState {
+        if safetyState == .safeFailure || safetyState == .externalUnavailable || safetyState == .confirmationRequired {
+            return .blocked
+        }
+
+        if correctionAvailability.isAvailable {
+            return .correction
+        }
+
+        if undoAvailability.isAvailable {
+            return .undo
+        }
+
+        switch resultState {
+        case .completed, .created, .changed, .attached, .scheduled:
+            return .proofSaved
+        case .failedSafely, .needsConfirmation:
+            return .blocked
+        case .undoAvailable:
+            return .undo
+        case .correctionAvailable:
+            return .correction
+        case .undoUnavailable, .noOp, .moved, .detached, .exportedPrepared, .draftedPrepared:
+            return .staleSource
+        }
+    }
+}
+
+private extension ActionReceiptSourceDomain {
+    var trustReceiptSourceLabel: String {
+        switch self {
+        case .today: "Source: Today"
+        case .goals: "Source: Goals"
+        case .capture: "Source: Capture"
+        case .plan: "Source: Plan"
+        case .you: "Source: You"
+        case .reviews: "Source: Reviews"
+        case .goalDetail: "Source: Goal Detail"
+        case .commandPipeline: "Source: Command"
+        case .eventLedger: "Source: Event Ledger"
+        case .proof: "Source: Proof"
+        case .resource: "Source: Resource"
+        case .commitment: "Source: Commitment"
+        case .calendar: "Source: Calendar boundary"
+        case .exportImport: "Source: Export / import boundary"
+        case .externalSurface: "Source: External surface"
+        case .system: "Source: System"
+        }
+    }
+}
+
+private extension ActionReceiptSafetyState {
+    var trustReceiptFreshnessLabel: String {
+        switch self {
+        case .normal: "Freshness: current local receipt"
+        case .degraded: "Freshness: degraded source"
+        case .safeFailure: "Freshness: blocked safely"
+        case .externalUnavailable: "Freshness: external source unavailable"
+        case .confirmationRequired: "Freshness: waiting for confirmation"
+        }
+    }
+}
+
+private extension ActionReceiptUndoAvailability {
+    var trustReceiptUndoLabel: String {
+        switch self {
+        case .availableLocal: "Undo available locally"
+        case .requiresConfirmation: "Undo requires confirmation"
+        case .unavailable: "Undo unavailable"
+        case .unsafe: "Undo blocked as unsafe"
+        case .notSupportedYet: "Undo not supported yet"
+        }
+    }
+}
+
+private extension ActionReceiptCorrectionAvailability {
+    var trustReceiptCorrectionLabel: String {
+        switch self {
+        case .available: "Correction available"
+        case .availableWithReason: "Correction available with reason"
+        case .unavailable: "Correction unavailable"
+        case .notSupportedYet: "Correction not supported yet"
+        }
     }
 }
 
@@ -2205,6 +2300,104 @@ private struct ProfileSettingRow: View {
         .padding()
     }
     .background(LivingSurfaceBackground(context: .memory, state: .empty).ignoresSafeArea())
+    .ambitionTheme(.dark)
+    .preferredColorScheme(.dark)
+}
+
+#Preview("You Trust Receipts Empty") {
+    ScrollView {
+        TrustReceiptStack(items: [])
+            .padding()
+    }
+    .background(LivingSurfaceBackground(context: .trust, state: .empty).ignoresSafeArea())
+    .ambitionTheme(.dark)
+    .preferredColorScheme(.dark)
+}
+
+#Preview("You Trust Proof Saved") {
+    ScrollView {
+        TrustReceiptStack(items: [
+            TrustReceiptStackItem(
+                id: "preview-proof-saved",
+                title: "Proof saved",
+                summary: "A completed step produced local proof and a visible receipt.",
+                sourceLabel: "Source: Today",
+                freshnessLabel: "Freshness: current local receipt",
+                undoLabel: "Undo available locally",
+                correctionLabel: "Correction available",
+                nextActionLabel: "Review proof",
+                state: .proofSaved
+            )
+        ])
+        .padding()
+    }
+    .background(LivingSurfaceBackground(context: .trust, state: .proof).ignoresSafeArea())
+    .ambitionTheme(.dark)
+    .preferredColorScheme(.dark)
+}
+
+#Preview("You Trust Correction") {
+    ScrollView {
+        TrustReceiptStack(items: [
+            TrustReceiptStackItem(
+                id: "preview-correction",
+                title: "Correction recorded",
+                summary: "A user correction is visible as the active trust signal.",
+                sourceLabel: "Source: You",
+                freshnessLabel: "Freshness: current local receipt",
+                undoLabel: "Undo unavailable",
+                correctionLabel: "Correction available with reason",
+                nextActionLabel: "View correction",
+                state: .correction
+            )
+        ])
+        .padding()
+    }
+    .background(LivingSurfaceBackground(context: .trust, state: .proof).ignoresSafeArea())
+    .ambitionTheme(.dark)
+    .preferredColorScheme(.dark)
+}
+
+#Preview("You Trust Undo") {
+    ScrollView {
+        TrustReceiptStack(items: [
+            TrustReceiptStackItem(
+                id: "preview-undo",
+                title: "Plan change can be undone",
+                summary: "A local reversible change exposes undo without implying silent automation.",
+                sourceLabel: "Source: Plan",
+                freshnessLabel: "Freshness: current local receipt",
+                undoLabel: "Undo requires confirmation",
+                correctionLabel: "Correction unavailable",
+                nextActionLabel: "Review in Plan",
+                state: .undo
+            )
+        ])
+        .padding()
+    }
+    .background(LivingSurfaceBackground(context: .trust, state: .active).ignoresSafeArea())
+    .ambitionTheme(.dark)
+    .preferredColorScheme(.dark)
+}
+
+#Preview("You Trust Stale Source") {
+    ScrollView {
+        TrustReceiptStack(items: [
+            TrustReceiptStackItem(
+                id: "preview-stale-source",
+                title: "Source may need review",
+                summary: "This receipt stays visible, but its source should not be treated as fresh proof.",
+                sourceLabel: "Source: older review",
+                freshnessLabel: "Freshness: degraded source",
+                undoLabel: "Undo not supported yet",
+                correctionLabel: "Correction not supported yet",
+                nextActionLabel: nil,
+                state: .staleSource
+            )
+        ])
+        .padding()
+    }
+    .background(LivingSurfaceBackground(context: .trust, state: .stale).ignoresSafeArea())
     .ambitionTheme(.dark)
     .preferredColorScheme(.dark)
 }
