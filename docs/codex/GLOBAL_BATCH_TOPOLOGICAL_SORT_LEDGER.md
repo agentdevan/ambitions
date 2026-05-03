@@ -1,24 +1,13 @@
-# EB External Brain Dependency Graph
+# Global Batch Topological Sort Ledger
 
-<!-- markdownlint-disable MD013 -->
-
-Status: Active Ambitions 4.0 External Brain dependency graph; not implementation evidence.
+Status: Active Ambitions 4.0 order optimization ledger.
 Date: 2026-05-03
 
-## Kernel-Level Dependencies
+## Original Order
 
-1. EB01 Source Truth precedes all EB batches.
-2. Trust, Privacy, And User Control is required before durable Life Memory implementation.
-3. Accessibility And Cognitive Load applies to every kernel and precedes UI-heavy work.
-4. Product Maturity And Onboarding must precede onboarding implementation and broad advanced-memory exposure.
-5. Universal Capture must precede capture implementation and memory ingestion.
-6. Life Memory Graph must follow Trust canon and precede context recall/search.
-7. Trust Center and user controls must precede memory correction/deletion UI.
-8. Recommendation evidence must precede recommendations.
-9. Risk register and scenario library must precede QA closeout.
-10. Accessibility evidence and release-claim review trail EB closeout.
+External Brain was inserted after CS09 accepted Yellow / parked as EB01-EB40 at global 047-086 in identity order.
 
-## Topological Implementation Order
+## Proposed Optimized Order
 
 | 047 | EB01 | External Brain Source Truth And Kernel Architecture | Docs/canon | Establishes source truth and verifies existing scaffold instead of creating duplicate canon. | Active planned / queued; not completed |
 | 048 | EB13 | Trust Privacy User Control Canon | Docs/canon | Trust, privacy, user control, export/delete, correction, and receipt boundaries must precede durable memory. | Active planned / queued; not completed |
@@ -61,28 +50,10 @@ Date: 2026-05-03
 | 085 | EB39 | External Brain Handoff And RC Readiness Implications | Handoff | Handoff trails privacy, accessibility, QA, and claim scans. | Active planned / queued; not completed |
 | 086 | EB40 | Ambitions 4.0 External Brain Closeout | Closeout | Closeout requires EB01-EB39 Green or accepted Yellow. | Active planned / queued; not completed |
 
-## Allowed Parallelization Lanes
+## Move Reasons
 
-Parallelization is off by default. After EB01/EB13/EB25/EB19/EB02/EB07/EB31/EB32 are Green, disjoint lanes may be planned for onboarding, capture, trust, accessibility, and memory only if write sets do not overlap and each batch commits independently.
+EB13, EB25, and EB19 move before capture/memory implementation because Trust, Accessibility, and Onboarding gates reduce privacy, cognitive-load, and source-truth risk. EB31/EB32 move before implementation lanes because cross-kernel primitives and gates are safer before surface/domain work.
 
-## Blocked-By Relationships
+## Status Preservation Proof
 
-- EB03-EB06 blocked by EB02, EB13, EB25, EB31, EB32.
-- EB08-EB12 blocked by EB07, EB13, EB25, EB14, EB17.
-- EB14-EB18 blocked by EB13 and EB25.
-- EB20-EB24 blocked by EB19, EB13, EB25.
-- EB26-EB30 blocked by EB25.
-- EB33-EB34 blocked by EB08-EB12 and EB31-EB32.
-- EB35-EB40 blocked by the evidence named in each closeout batch.
-
-## Proof Requirements Per Dependency
-
-Every dependency requires source truth read, allowed/forbidden file boundary, privacy evidence, accessibility/cognitive-load evidence, release-claim scan, validation command results, and a clean committed state.
-
-## Unsafe Early-Execution Warnings
-
-Do not run durable memory, search, recommendation, private mode, correction/deletion, or advanced onboarding implementation before Trust and Accessibility gates. Do not promote capture to memory before capture receipts and Trust controls.
-
-## Exact Next Eligible Batch Calculation
-
-Current state after External Brain integration: global order 047, EB01 active planned / queued, no EB batch complete. Next eligible: EB01 unless current validation produces Red.
+No existing batch names or statuses are changed by this ledger. EB file names remain identities. Global execution order is the dependency-optimized order. CS09 accepted Yellow/parked and CS02C-CS06C deferred truth remain preserved. EB01 remains next eligible.
