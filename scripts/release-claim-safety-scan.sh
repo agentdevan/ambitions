@@ -7,7 +7,7 @@ echo "$name: Codex OS deterministic advisory scan"
 files=$(git diff --name-only HEAD -- | tr "\n" " ")
 [ -z "$files" ] && files="docs/codex .codex/skills .codex/review-boards .codex/validation"
 case "$name" in
-  release-claim-safety-scan.sh) pattern="production ready|TestFlight ready|App Store ready|market proven|physical device passed|legal signoff|privacy certified|accessibility compliant|fully autonomous|AI understands everything|remembers everything|guaranteed" ;;
+  release-claim-safety-scan.sh) pattern="production ready|release ready|TestFlight ready|App Store ready|market proven|screenshot verified|device verified|physical device passed|VoiceOver verified|Instruments passed|battery safe|legal signoff|privacy certified|accessibility compliant|fully autonomous|AI understands everything|remembers everything|guaranteed" ;;
   privacy-boundary-scan.sh) pattern="sensitive memory|inference|recommendation|local-first|private mode|export/delete" ;;
   memory-safety-scan.sh) pattern="durable memory|inferred memory|fake intimacy|creepy|remembers everything" ;;
   accessibility-cognitive-load-scan.sh) pattern="color-only|VoiceOver|Dynamic Type|Reduce Motion|shame|blame|failed|overloaded day" ;;
@@ -23,5 +23,5 @@ case "$name" in
   fixture-coverage-scan.sh) pattern="fixture|preview|overloaded-day|recovery" ;;
   *) pattern="External Brain" ;;
 esac
-rg -n -i "$pattern" $files 2>/dev/null | head -80 || true
+rg -n -i "$pattern" $files 2>/dev/null | rg -v 'scripts/release-claim-safety-scan.sh' | head -80 || true
 echo "YELLOW advisory scan complete; review hits for context and explicit non-claims"

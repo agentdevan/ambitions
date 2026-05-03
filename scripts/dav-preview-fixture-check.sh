@@ -4,6 +4,13 @@ ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 cd "$ROOT"
 echo "dav-preview-fixture-check"
 required=(
+  "Today"
+  "Goals"
+  "Capture"
+  "Plan"
+  "You"
+  "Memory"
+  "Trust"
   "calm normal day"
   "overloaded day"
   "recovery day"
@@ -18,11 +25,14 @@ required=(
   "Private memory"
   "Dynamic Type"
   "Reduce Motion"
+  "empty state"
+  "high-pressure"
+  "action closure"
 )
 
 missing=0
 for pattern in "${required[@]}"; do
-  if ! rg -n "$pattern" Native/Ambitions/PreviewSupport Sources/Previews docs/audits docs/codex >/dev/null 2>&1; then
+  if ! rg -n -i "$pattern" Native/Ambitions/PreviewSupport Sources/Previews docs/audits docs/codex >/dev/null 2>&1; then
     echo "RED missing DAV preview scenario: $pattern"
     missing=1
   fi

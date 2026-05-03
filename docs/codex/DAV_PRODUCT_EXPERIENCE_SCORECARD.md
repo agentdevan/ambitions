@@ -7,7 +7,23 @@ Date: 2026-05-03
 
 ## Required Dimensions
 
-Each implemented surface must score 4/5 or higher on native iPhone believability, simplicity, minimalism with utility, conservative futurism, living statefulness, visual beauty, readability, motion meaning, accessibility, Reduce Motion, Dynamic Type, VoiceOver, no generic dashboard drift, no generic card pile, and trust/source clarity where relevant.
+Each implemented surface must score 4/5 or higher on Ambitions-specific product
+quality, not generic UI quality:
+
+- Premium iPhone-native feel.
+- One primary visual object.
+- No generic card stack.
+- No SaaS dashboard drift.
+- Calm hierarchy.
+- Trust/proof clarity.
+- Recovery without shame.
+- Ambitions terminology compliance.
+- Touch target and accessibility awareness.
+- Reduce Motion awareness.
+- Dark-mode visual believability.
+- Settings-style grouped list correctness where relevant.
+- Living statefulness without decorative busyness.
+- Photo-reference fidelity where DAV visual work is in scope.
 
 ## Current Scores
 
