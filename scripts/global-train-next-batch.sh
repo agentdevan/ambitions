@@ -3,10 +3,27 @@ set -u
 ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 cd "$ROOT"
 echo "global-train-next-batch.sh: Codex OS deterministic next-batch calculation"
-if rg -q "Complete: EB01|EB01 .*complete|EB01 is complete" docs/codex/BATCH_REGISTRY.md .codex/reports/current-run-state.md docs/codex/GLOBAL_FUTURE_BATCH_EXECUTION_ORDER.md; then
-  echo "Next eligible batch: EB13 Trust Privacy User Control Canon"
-  echo "Reason: EB01 is complete; EB13 is the optimized Trust/Privacy/User Control gate before durable memory"
-else
-  echo "Next eligible batch: EB01 External Brain Source Truth And Kernel Architecture"
-  echo "Reason: no EB batch is complete; EB01 precedes all EB work"
-fi
+completed() {
+  local id="$1"
+  rg -q "Complete: $id|$id .*complete|$id is complete|\| [0-9]{3} \| $id \| .*No; complete" docs/codex/BATCH_REGISTRY.md .codex/reports/current-run-state.md docs/codex/GLOBAL_FUTURE_BATCH_EXECUTION_ORDER.md 2>/dev/null
+}
+for id in EB01 EB13 EB25 EB19 EB02 EB07 EB31 EB32; do
+  if ! completed "$id"; then
+    case "$id" in
+    EB01) name="External Brain Source Truth And Kernel Architecture"; global="047" ;;
+    EB13) name="Trust Privacy User Control Canon"; global="048" ;;
+    EB25) name="Accessibility Cognitive Load Canon"; global="049" ;;
+    EB19) name="Product Maturity Onboarding Canon"; global="050" ;;
+    EB02) name="Universal Capture Canon And Domain Model"; global="051" ;;
+    EB07) name="Life Memory Graph Canon And Domain Model"; global="052" ;;
+    EB31) name="Cross Kernel Primitives And Event Receipts"; global="053" ;;
+    EB32) name="Cross Kernel Dependency And Gate Integration"; global="054" ;;
+      *) name="Unknown"; global="unknown" ;;
+    esac
+    echo "Next eligible batch: $id $name"
+    echo "Global order: $global"
+    exit 0
+  fi
+done
+echo "Next eligible batch: EB20 Value Based Onboarding And First Week Success"
+echo "Global order: 055"

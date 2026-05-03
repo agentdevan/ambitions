@@ -22,7 +22,7 @@ Original formal Ambitions 4.0 batch count: 113. Active expansion added: 40. New 
 - 056: EB10 Personal Operating Manual. Status: active planned / queued; not completed. Boundary: Implementation allowed later for personal operating manual only.
 - 057: EB11 Memory Correction Deletion And Rejection. Status: active planned / queued; not completed. Boundary: Implementation allowed later for correction, deletion, and rejected memory only.
 - 058: EB12 Memory Receipts And Why Remembered This. Status: active planned / queued; not completed. Boundary: Implementation allowed later for memory receipts and why-remembered explanations only.
-- 059: EB13 Trust Privacy User Control Canon. Status: active planned / queued; not completed. Boundary: Docs/canon; no production implementation is allowed because EB13 is an early trust gate.
+- 048: EB13 Trust Privacy User Control Canon. Status: complete by EB13 evidence; no app behavior implemented. Boundary: Docs/canon; no production implementation was allowed because EB13 is an early trust gate.
 - 060: EB14 Trust Center And Data Map. Status: active planned / queued; not completed. Boundary: Implementation allowed later for Trust Center and data map only.
 - 061: EB15 Recommendation Evidence And Inference Boundaries. Status: active planned / queued; not completed. Boundary: Implementation allowed later for evidence and inference boundaries only.
 - 062: EB16 Private Mode And Sensitive Area Controls. Status: active planned / queued; not completed. Boundary: Implementation allowed later for private mode and sensitive controls only.
