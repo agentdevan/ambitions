@@ -66,7 +66,7 @@ CS04A is PASS WITH YELLOW with commit/push evidence `4766b9d7`:
 - CS04A documents `AppTab.habits`, `PlanRouteTarget.habits`, `ambitions://tab/habits`, `ambitions://plan/habits`, widget/notification `tab=habits`, `habits.*` identifiers, and Plan-owned Rituals support semantics as live compatibility surfaces.
 - CS04B is the next narrowed proof step; CS04C remains blocked/deferred and the Habits seam is not claimed retired.
 
-CS04B is PASS WITH YELLOW pending commit/push evidence:
+CS04B is PASS WITH YELLOW with commit/push evidence `7e4a574d`:
 
 - CS04B touched focused app shell/external routing tests and a report/status docs only; no production Swift was edited.
 - CS04B focused app shell and external routing tests passed `61` tests with `0` failures.
@@ -114,4 +114,4 @@ The current user prompt says `Run Global Batch Sequence Until Blocked` and expli
 
 ## Next Eligible Batch
 
-CS04B is complete as focused compatibility proof pending commit evidence. The next safe action is CS05 dry-run. CS04C remains blocked/deferred because no narrow retirement is proven safe.
+CS04B is complete as focused compatibility proof with commit evidence `7e4a574d`. The next safe action is CS05 dry-run. CS04C remains blocked/deferred because no narrow retirement is proven safe.

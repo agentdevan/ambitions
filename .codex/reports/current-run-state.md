@@ -33,7 +33,7 @@ Branch: main
 - CS01: complete as audit-only compatibility seam registry and risk map; no seam retired and no app code edited.
 - CS07: complete as focused external route/widget/App Intent compatibility proof; no seam retired and no app code edited. Commit evidence: `e4c04ff2`, report SHA repair: `ef536cae`.
 - CS08: complete as focused import/export/persistence compatibility proof; no seam retired and no app code edited. Commit evidence: `d2c328d6`, report SHA repair: `9144add3`.
-- CS train: active with CS02, CS03, and CS04 internally staged; CS02A and CS02B are complete, CS02C is deferred as accepted Yellow, CS03A is complete with commit evidence `a0d898ea`, CS03B is complete with commit evidence `126e86be`, CS03C remains blocked/deferred, CS04A is complete with commit evidence `4766b9d7`, CS04B is complete pending commit evidence, and CS04C remains blocked/deferred.
+- CS train: active with CS02, CS03, and CS04 internally staged; CS02A and CS02B are complete, CS02C is deferred as accepted Yellow, CS03A is complete with commit evidence `a0d898ea`, CS03B is complete with commit evidence `126e86be`, CS03C remains blocked/deferred, CS04A is complete with commit evidence `4766b9d7`, CS04B is complete with commit evidence `7e4a574d`, and CS04C remains blocked/deferred.
 - SI/Product Depth/AOS: queued/blocked and not started.
 - Global order: 113 formal batches after SI insertion; 71 formal batches remain because formal CS04 is complete as accepted Yellow by CS04A/CS04B evidence, and CS02A/CS03A/CS04A are internal stages, not new formal batches.
 
@@ -54,7 +54,7 @@ CS03B validation is PASS WITH YELLOW with commit/push evidence `126e86be`. It to
 
 CS04A validation is PASS WITH YELLOW with commit/push evidence `4766b9d7`. It touched only docs/status files and did not edit tests or app code. CS04A created the Habits/Ritual/Plan seam inventory, compatibility contract ledger, accessibility identifier ledger, retirement risk map, and split report, and repaired the CS04 prompt into CS04A/CS04B/CS04C staging without changing the formal 113-batch global order. CS04A documents source truth that `AppTab.habits`, `PlanRouteTarget.habits`, `ambitions://tab/habits`, `ambitions://plan/habits`, widget/notification `tab=habits`, `habits.*` identifiers, and Plan-owned Rituals support semantics are live compatibility surfaces. CS04B is the next narrowed proof step; CS04C remains blocked/deferred and the Habits seam is not claimed retired.
 
-CS04B validation is PASS WITH YELLOW pending commit evidence. It touched only focused app shell/external routing tests and a report/status docs; no production Swift was edited. Focused app shell and external routing tests passed 61 tests with 0 failures, proving legacy `habits` shell selection, `ambitions://tab/habits`, `ambitions://plan/habits`, generated Plan/Habits payload shape, visible five-tab canon, and no visible top-level Habits destination. Adjacent Plan/Habits/Ritual service tests passed 38 tests with 0 failures, preserving Plan-owned Rituals and recurring-loop semantics. CS04C remains deferred as accepted Yellow; the Habits seam is not claimed retired.
+CS04B validation is PASS WITH YELLOW with commit/push evidence `7e4a574d`. It touched only focused app shell/external routing tests and a report/status docs; no production Swift was edited. Focused app shell and external routing tests passed 61 tests with 0 failures, proving legacy `habits` shell selection, `ambitions://tab/habits`, `ambitions://plan/habits`, generated Plan/Habits payload shape, visible five-tab canon, and no visible top-level Habits destination. Adjacent Plan/Habits/Ritual service tests passed 38 tests with 0 failures, preserving Plan-owned Rituals and recurring-loop semantics. CS04C remains deferred as accepted Yellow; the Habits seam is not claimed retired.
 
 CS02B validation remains PASS WITH YELLOW with commit/push evidence `b180e782`. Focused app shell and external routing tests passed `54` tests with `0` failures, proving old `profile` raw/default/external route compatibility and visible `You` display can coexist. CS02C remains deferred as accepted Yellow; the Profile seam is not claimed retired.
 
@@ -81,4 +81,4 @@ Not verified:
 
 ## Next Eligible Batch
 
-CS04B is complete as focused compatibility proof pending commit evidence. The next safe action is CS05 dry-run. CS04C remains blocked/deferred because no narrow retirement is proven safe.
+CS04B is complete as focused compatibility proof with commit evidence `7e4a574d`. The next safe action is CS05 dry-run. CS04C remains blocked/deferred because no narrow retirement is proven safe.
