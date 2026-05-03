@@ -53,6 +53,8 @@ Respect EB13 Trust and EB25 Accessibility early gates. Universal Capture cannot 
 
 UI-affecting work must read `docs/codex/PXEQ_PRODUCT_EXPERIENCE_EQUIVALENCE_GATE.md`, `docs/codex/PXEQ_LIVING_INTERFACE_RUBRIC.md`, `docs/codex/PXEQ_SURFACE_BEHAVIOR_MATRIX.md`, `docs/codex/PXEQ_VISUAL_SYSTEM_CONSERVATIVE_FUTURISM_RULES.md`, `docs/codex/PXEQ_MOTION_AND_STATE_CHANGE_RULES.md`, `docs/codex/PXEQ_MINIMALISM_WITH_UTILITY_RULES.md`, and `docs/codex/PXEQ_UI_IMPLEMENTATION_EVIDENCE_TEMPLATE.md`. The batch report must record either no UI changed or PXEQ evidence: primary visual object, living/evolving state reason, before/after product-experience impact, preview/fixture evidence, Reduce Motion/Dynamic Type/VoiceOver/tap target/contrast/non-color proof, and anti-generic checks. Technical pass with mediocre, generic, static, cluttered, unreadable, noisy, decorative, or overbuilt experience is Yellow or Red depending on severity.
 
+UI-affecting work must also cite `docs/canon/Ambitions_4_0_Signature_Experience_Layer.md`, `docs/canon/Ambitions_4_0_Transformative_Motion_System.md` when motion is affected, and `docs/reference/visual-targets/ambitionsos-photo-matched/README.md`; it must record SIG scorecard, DAV scorecard, photo-matched reference evidence, preview evidence, accessibility evidence, Reduce Motion evidence, and Transformative Motion QA when motion is affected.
+
 ## Privacy Requirements
 
 Classify sensitive data, local-first posture, permission boundary, export/delete impact, source freshness, private mode, and privacy receipt needs.

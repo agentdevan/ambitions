@@ -39,3 +39,7 @@ Stop on motion-only meaning.
 ## Next Safe Path
 DAV11 accessibility closeout.
 
+## Required Premium Experience Gates
+- Inspect `docs/reference/visual-targets/ambitionsos-photo-matched/`.
+- Cite Signature Experience and Transformative Motion docs.
+- Pass SIG scorecard, PXEQ scorecard, DAV scorecard, Transformative Motion QA, accessibility evidence, Reduce Motion evidence, preview evidence, and photo-reference evidence.

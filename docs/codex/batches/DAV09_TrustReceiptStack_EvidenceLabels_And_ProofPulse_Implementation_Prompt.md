@@ -39,3 +39,7 @@ Stop on export/delete or legal/privacy claim drift.
 ## Next Safe Path
 DAV10 motion.
 
+## Required Premium Experience Gates
+- Inspect `docs/reference/visual-targets/ambitionsos-photo-matched/`.
+- Cite Signature Experience and Transformative Motion docs.
+- Pass SIG scorecard, PXEQ scorecard, DAV scorecard, Transformative Motion QA if proof/receipt motion is affected, accessibility evidence, Reduce Motion evidence, preview evidence, and photo-reference evidence.

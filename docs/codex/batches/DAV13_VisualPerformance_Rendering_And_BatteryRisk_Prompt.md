@@ -39,3 +39,7 @@ Stop on performance/battery uncertainty that cannot be bounded.
 ## Next Safe Path
 DAV14 QA.
 
+## Required Premium Experience Gates
+- Inspect `docs/reference/visual-targets/ambitionsos-photo-matched/`.
+- Cite Signature Experience and Transformative Motion docs.
+- Pass SIG scorecard, PXEQ scorecard, DAV scorecard, Transformative Motion QA when motion is affected, accessibility evidence, Reduce Motion evidence, preview evidence, performance risk evidence, and photo-reference evidence.

@@ -39,3 +39,7 @@ Stop on unresolved PXEQ Red.
 ## Next Safe Path
 DAV15 closeout.
 
+## Required Premium Experience Gates
+- Inspect `docs/reference/visual-targets/ambitionsos-photo-matched/`.
+- Cite Signature Experience and Transformative Motion docs.
+- Pass SIG scorecard, PXEQ scorecard, DAV scorecard, Transformative Motion QA if motion is affected, accessibility evidence, Reduce Motion evidence, preview evidence, visual QA evidence, and photo-reference evidence.

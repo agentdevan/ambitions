@@ -39,3 +39,7 @@ Stop on public conformance claim or blocker.
 ## Next Safe Path
 DAV12 previews.
 
+## Required Premium Experience Gates
+- Inspect `docs/reference/visual-targets/ambitionsos-photo-matched/`.
+- Cite Signature Experience docs.
+- Pass SIG scorecard, PXEQ scorecard, DAV scorecard, accessibility evidence, Reduce Motion evidence, preview evidence, and photo-reference evidence.

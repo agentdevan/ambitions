@@ -39,3 +39,7 @@ Stop on fake data claims.
 ## Next Safe Path
 DAV13 performance.
 
+## Required Premium Experience Gates
+- Inspect `docs/reference/visual-targets/ambitionsos-photo-matched/`.
+- Cite Signature Experience and Transformative Motion docs where scenarios include motion.
+- Pass SIG scorecard, PXEQ scorecard, DAV scorecard, Transformative Motion QA if motion scenarios are added, accessibility evidence, Reduce Motion evidence, preview evidence, and photo-reference evidence.

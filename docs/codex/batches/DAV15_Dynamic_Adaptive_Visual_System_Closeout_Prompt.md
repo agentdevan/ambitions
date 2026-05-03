@@ -39,3 +39,7 @@ Stop on false release/public conformance claim.
 ## Next Safe Path
 Resume EB implementation lanes with DAV/PXEQ gates.
 
+## Required Premium Experience Gates
+- Inspect `docs/reference/visual-targets/ambitionsos-photo-matched/`.
+- Cite Signature Experience and Transformative Motion docs.
+- Pass SIG scorecard, PXEQ scorecard, DAV scorecard, Transformative Motion QA, accessibility evidence, Reduce Motion evidence, preview evidence, visual QA, performance evidence, and photo-reference evidence before closeout claims.

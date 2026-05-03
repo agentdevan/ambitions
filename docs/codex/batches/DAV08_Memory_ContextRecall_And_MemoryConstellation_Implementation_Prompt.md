@@ -39,3 +39,7 @@ Stop on persistence/privacy uncertainty.
 ## Next Safe Path
 DAV09 Trust receipts.
 
+## Required Premium Experience Gates
+- Inspect `docs/reference/visual-targets/ambitionsos-photo-matched/`.
+- Cite Signature Experience and Transformative Motion docs.
+- Pass SIG scorecard, PXEQ scorecard, DAV scorecard, accessibility evidence, Reduce Motion evidence, preview evidence, and photo-reference evidence.
