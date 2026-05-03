@@ -2,7 +2,7 @@
 
 <!-- markdownlint-disable MD013 -->
 
-Status: Ambitions 4.0 global execution order; 113 formal batches after SI insertion; CS05B focused proof complete pending CS06 dry-run
+Status: Ambitions 4.0 global execution order; 113 formal batches after SI insertion; stopped on CS06 dry-run Red
 Date: 2026-05-03
 
 ## Purpose
@@ -111,7 +111,7 @@ run through REC closure evidence. PX01-PX20 are complete as future canon/roadmap
 | 042 | CS03 | CS | Staged compatibility repair/proof | Insights direct retirement was repaired into CS03A map/ledger repair, CS03B compatibility proof, and CS03C blocked narrow retirement. | Complete by CS03A/CS03B evidence; CS03C deferred | Serial-only | No; complete as accepted Yellow | Adequate CS03A docs evidence; Strong CS03B compatibility validation | compatibility migration, routing reviewer, contextual-intelligence reviewer | Completed with accepted Yellow; Insights seam not retired |
 | 043 | CS04 | CS | Staged compatibility repair/proof | Habits/Ritual/Plan direct retirement was repaired into CS04A map/ledger repair, CS04B compatibility proof, and CS04C blocked narrow retirement. | Complete by CS04A/CS04B evidence; CS04C deferred | Serial-only | No; complete as accepted Yellow | Adequate CS04A docs evidence; Strong CS04B compatibility validation | compatibility migration, persistence reviewer, accessibility identifier reviewer | Completed with accepted Yellow; Habits seam not retired |
 | 044 | CS05 | CS | Staged compatibility repair/proof | ActiveFocus/TodayFocus direct retirement was repaired into CS05A map/schema/route/payload ledger repair, CS05B focused proof, and CS05C blocked narrow retirement. | CS05A and CS05B evidence complete; CS05C deferred | Serial-only | Accepted Yellow complete for current CS05 stage | Adequate CS05A docs evidence; Strong CS05B compatibility validation | compatibility migration, routing reviewer, Today state contract, widget/App Intent reviewer | Continue to CS06 dry-run; seam not retired |
-| 045 | CS06 | CS | Compatibility retirement | Internal failure taxonomy retirement waits for copy and compatibility gates. | CS01 Green, Copy/Language | Serial-only | Yes | Strong compatibility validation | product-language reviewer, compatibility reviewer | Continue only on Green |
+| 045 | CS06 | CS | Compatibility retirement | Internal failure taxonomy retirement waits for copy and compatibility gates. | CS01 Green, Copy/Language | Serial-only | No; dry-run Red | Strong compatibility validation | product-language reviewer, compatibility reviewer | Repair into staged map/proof/retire work before execution |
 | 046 | CS09 | CS | Repair | Repair only after classified CS evidence. | Failed/Yellow CS gate | Serial-only | Conditional | Strong repair validation | codex-repair-train-designer, compatibility board | Stop if repair cannot stay scoped |
 | 047 | CS10 | CS | Handoff | CS handoff follows retirements/proofs/repairs. | CS01-CS09 resolved | Serial-only | Yes | Adequate handoff evidence | evidence-gate-reporter, compatibility board | Stop unless next train explicitly approved |
 | 048 | SI01 | SI | Docs/architecture | Signature Interface architecture follows ME/CS prerequisites and precedes UI primitive implementation. | PXOS complete, ME01/ME08/ME10/ME02 Green, SI Codex OS gates | Serial-only | Yes | Adequate docs evidence | Signature Interface review board, prompt quality, ME/CS reviewers | Continue only on Green |
@@ -221,7 +221,8 @@ run through REC closure evidence. PX01-PX20 are complete as future canon/roadmap
 | CS03 | Completed accepted Yellow | CS03A/CS03B evidence | CS03A docs/protocol repair and CS03B focused proof complete; CS03C deferred; Insights seam not retired | No release/platform claim |
 | CS04 | Completed accepted Yellow | CS04A/CS04B evidence | CS04A docs/protocol repair and CS04B focused proof complete; CS04C deferred; Habits seam not retired | No release/platform claim |
 | CS05 | Accepted Yellow / completed current safe stages | CS05A and CS05B evidence | CS05A docs/protocol repair and CS05B focused proof complete; CS05C deferred; activeFocus/TodayFocus seam not retired | No release/platform claim |
-| CS06 / CS09-CS10 | Queued / Blocked | Current global preauthorization or `Start CS Train`, CS compatibility gates | Retirements, repair, and handoff not started | No release/platform claim |
+| CS06 | Stopped on Red | CS05B evidence, CS compatibility gates | Dry-run found seam too broad for direct retirement; repair required | No release/platform claim |
+| CS09-CS10 | Queued / Blocked | Current global preauthorization or `Start CS Train`, CS compatibility gates | Repair and handoff not started | No release/platform claim |
 | SI01-SI18 | Queued / Blocked | Global preauthorization or `Start Signature Interface Train`, PXOS complete, ME/CS prerequisites, SI gates | Not started; not implemented | No SI implementation or release claim |
 | PD01-PD18 | Queued / Blocked | `Start Product Depth Train`, PXOS plus relevant ME/CS/SI/AOS-if-needed gates | Not started; not implemented | No Product Depth implementation or release claim |
 | AOS01-AOS30 | Queued / Blocked | `Start AOS Train`, AOS runtime/privacy/source-truth gates | Future canon or queued implementation only as named; not app behavior until proven | No AmbitionsOS implementation or release-readiness claim |

@@ -3,9 +3,9 @@
 <!-- markdownlint-disable MD013 -->
 
 Active train: CS compatibility seam retirement train
-Active batch: CS05B ActiveFocus Compatibility Preservation Proof
+Active batch: CS06 Internal Failed Taxonomy Retirement
 Current out-of-train task: none
-Scope: ME01-ME12 maintainability train complete with commit/push evidence; ME11 repair not triggered; PXOS implementation not started; CS01 complete; CS07 complete as focused compatibility proof; CS08 complete as focused import/export/persistence proof; CS02A repaired the Profile/You seam scope without code edits; CS02B added focused test proof; CS03A repaired the Insights seam scope without code edits; CS03B added focused test proof; CS04A repaired the Habits/Ritual/Plan seam scope without code edits; CS04B added focused test proof; CS05A repaired the ActiveFocus/TodayFocus seam scope without code edits; CS05B added focused test proof; Signature Interface/Product Depth/AmbitionsOS trains not started
+Scope: ME01-ME12 maintainability train complete with commit/push evidence; ME11 repair not triggered; PXOS implementation not started; CS01 complete; CS07 complete as focused compatibility proof; CS08 complete as focused import/export/persistence proof; CS02A repaired the Profile/You seam scope without code edits; CS02B added focused test proof; CS03A repaired the Insights seam scope without code edits; CS03B added focused test proof; CS04A repaired the Habits/Ritual/Plan seam scope without code edits; CS04B added focused test proof; CS05A repaired the ActiveFocus/TodayFocus seam scope without code edits; CS05B added focused test proof; CS06 dry-run stopped on Red; Signature Interface/Product Depth/AmbitionsOS trains not started
 Date: 2026-05-03
 Branch: main
 
@@ -33,9 +33,9 @@ Branch: main
 - CS01: complete as audit-only compatibility seam registry and risk map; no seam retired and no app code edited.
 - CS07: complete as focused external route/widget/App Intent compatibility proof; no seam retired and no app code edited. Commit evidence: `e4c04ff2`, report SHA repair: `ef536cae`.
 - CS08: complete as focused import/export/persistence compatibility proof; no seam retired and no app code edited. Commit evidence: `d2c328d6`, report SHA repair: `9144add3`.
-- CS train: active with CS02, CS03, CS04, and CS05 internally staged; CS02A and CS02B are complete, CS02C is deferred as accepted Yellow, CS03A is complete with commit evidence `a0d898ea`, CS03B is complete with commit evidence `126e86be`, CS03C remains blocked/deferred, CS04A is complete with commit evidence `4766b9d7`, CS04B is complete with commit evidence `7e4a574d`, CS04C remains blocked/deferred, CS05A is complete with commit evidence `b74f4644`, CS05B is complete with commit evidence `bfc23f10`, and CS05C remains blocked/deferred.
+- CS train: active with CS02, CS03, CS04, and CS05 internally staged; CS02A and CS02B are complete, CS02C is deferred as accepted Yellow, CS03A is complete with commit evidence `a0d898ea`, CS03B is complete with commit evidence `126e86be`, CS03C remains blocked/deferred, CS04A is complete with commit evidence `4766b9d7`, CS04B is complete with commit evidence `7e4a574d`, CS04C remains blocked/deferred, CS05A is complete with commit evidence `b74f4644`, CS05B is complete with commit evidence `bfc23f10`, CS05C remains blocked/deferred, and CS06 dry-run returned `Execution allowed: NO`.
 - SI/Product Depth/AOS: queued/blocked and not started.
-- Global order: 113 formal batches after SI insertion; current active order is `044 — CS05`; 70 formal batches remain after CS05B because CS02A/CS03A/CS04A/CS05A and CS02B/CS03B/CS04B/CS05B are internal stages, not new formal batches, and CS05C is accepted Yellow/deferred.
+- Global order: 113 formal batches after SI insertion; current active order is `045 — CS06`; 70 formal batches remain after CS05B because CS02A/CS03A/CS04A/CS05A and CS02B/CS03B/CS04B/CS05B are internal stages, not new formal batches, and CS05C is accepted Yellow/deferred. CS06 is stopped on Red before execution.
 
 ## Boundaries
 
@@ -81,4 +81,4 @@ Not verified:
 
 ## Next Eligible Batch
 
-CS05B validation is PASS WITH YELLOW with commit evidence `bfc23f10`. It touched only focused tests and docs/status files; no production Swift, AppUI, Sources, route/raw values, default-tab behavior, persistence behavior, or accessibility identifiers were edited. Focused simulator/unit compatibility tests passed 74 selected tests with 0 failures, proving `activeFocus` snapshot compatibility, active focus priority over `bestNextStep`, FocusNow widget projection primary target, Today focus deep-link/payload compatibility, and `quick_focus` shell command behavior. CS05C remains blocked/deferred and the ActiveFocus/TodayFocus seam is not claimed retired. The next eligible formal batch is CS06 dry-run.
+CS06 dry-run is STOPPED ON RED. The current CS06 prompt attempts a broad internal `.failed` taxonomy retirement, but source discovery shows the seam spans command execution status, external action command failure states, async UI state, safe-automation receipt semantics, copy/accessibility language, tests, support checklists, logs, and historical docs. Execution is not allowed until CS06 is repaired into staged map/proof/retire work. Recommended next path: `Repair CS06 Failed Taxonomy Compatibility Seam And Resume Global Train`.

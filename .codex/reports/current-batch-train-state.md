@@ -3,9 +3,9 @@
 <!-- markdownlint-disable MD013 -->
 
 Active train: CS compatibility seam retirement train
-Active batch: CS05B ActiveFocus Compatibility Preservation Proof
+Active batch: CS06 Internal Failed Taxonomy Retirement
 Current out-of-train task: none
-Scope: ME01-ME12 maintainability train complete with commit/push evidence; ME11 repair not triggered; PXOS implementation not started; CS01 complete; CS07 complete as focused compatibility proof; CS08 complete as focused import/export/persistence proof; CS02A repairs the Profile/You seam scope without code edits; CS02B adds focused compatibility proof; CS03A repairs the Insights seam scope without code edits; CS03B adds focused compatibility proof; CS04A repairs the Habits/Ritual/Plan seam scope without code edits; CS04B adds focused compatibility proof; CS05A repairs the ActiveFocus/TodayFocus seam scope without code edits; CS05B adds focused compatibility proof; Signature Interface/Product Depth/AmbitionsOS trains not started
+Scope: ME01-ME12 maintainability train complete with commit/push evidence; ME11 repair not triggered; PXOS implementation not started; CS01 complete; CS07 complete as focused compatibility proof; CS08 complete as focused import/export/persistence proof; CS02A repairs the Profile/You seam scope without code edits; CS02B adds focused compatibility proof; CS03A repairs the Insights seam scope without code edits; CS03B adds focused compatibility proof; CS04A repairs the Habits/Ritual/Plan seam scope without code edits; CS04B adds focused compatibility proof; CS05A repairs the ActiveFocus/TodayFocus seam scope without code edits; CS05B adds focused compatibility proof; CS06 dry-run stopped on Red; Signature Interface/Product Depth/AmbitionsOS trains not started
 Date: 2026-05-03
 
 ## Baseline
@@ -34,7 +34,7 @@ Ambitions 4.0 is the active post-3.0 execution program, not a shipped product ve
 
 ## Boundaries
 
-No product behavior expansion. No visual redesign. No compatibility seam retired. No dependencies. No workflow changes. No release claim. CS01 is audit-only evidence; CS07 and CS08 are focused simulator/unit proof; CS02A is docs/protocol seam repair; CS02B is focused test proof; CS03A is docs/protocol seam repair; CS03B is focused test proof; CS04A is docs/protocol seam repair; CS04B is focused test proof; CS05A is docs/protocol seam repair; CS05B is focused test proof; CS02C, CS03C, CS04C, CS05C, CS06, CS09-CS10, SI implementation, Product Depth, AOS, and PXOS implementation remain unstarted until their gates allow.
+No product behavior expansion. No visual redesign. No compatibility seam retired. No dependencies. No workflow changes. No release claim. CS01 is audit-only evidence; CS07 and CS08 are focused simulator/unit proof; CS02A is docs/protocol seam repair; CS02B is focused test proof; CS03A is docs/protocol seam repair; CS03B is focused test proof; CS04A is docs/protocol seam repair; CS04B is focused test proof; CS05A is docs/protocol seam repair; CS05B is focused test proof; CS06 is stopped on dry-run Red; CS02C, CS03C, CS04C, CS05C, CS09-CS10, SI implementation, Product Depth, AOS, and PXOS implementation remain unstarted until their gates allow.
 
 ## Validation Result
 
@@ -120,4 +120,5 @@ CS05B is PASS WITH YELLOW with commit evidence `bfc23f10`:
 - CS05B focused simulator/unit compatibility tests passed 74 selected tests with 0 failures.
 - CS05B proves `activeFocus` snapshot compatibility, active focus priority over `bestNextStep`, FocusNow widget projection primary target, Today focus deep-link/payload compatibility, and `quick_focus` shell command behavior.
 - CS05C remains blocked/deferred and the ActiveFocus/TodayFocus seam is not claimed retired.
-- CS06 dry-run is the next eligible formal-batch step.
+- CS06 dry-run returned `Execution allowed: NO` because internal `.failed` taxonomy retirement spans command execution status, external action command failure states, async UI state, safe-automation receipt semantics, copy/accessibility language, tests, support checklists, logs, and historical docs.
+- Recommended next path: `Repair CS06 Failed Taxonomy Compatibility Seam And Resume Global Train`.

@@ -81,7 +81,8 @@ Current 4.0 status:
 - Completed: CS05A ActiveFocus/TodayFocus Compatibility Map And Retirement Ledger as internal docs/protocol stage of formal CS05; no seam retired and no app code edited.
 - Completed: CS05B ActiveFocus Compatibility Preservation Proof as focused simulator/unit proof; no seam retired and no production Swift edited.
 - Accepted Yellow: CS05C Narrow Internal Today Focus Retirement remains blocked/deferred until a later proof shows retirement is safe.
-- Queued / Blocked: CS02C, CS03C, CS04C, CS05C, CS06, and CS09-CS10 pending current global preauthorization or `Start CS Train`.
+- Stopped on Red: CS06 Internal Failed Taxonomy Retirement dry-run returned `Execution allowed: NO`; repair required before execution.
+- Queued / Blocked: CS02C, CS03C, CS04C, CS05C, and CS09-CS10 pending current global preauthorization or `Start CS Train`.
 - Queued / Blocked: SI01-SI18 pending global-order selection or `Start Signature Interface Train` plus PXOS/ME/CS/SI quality gates.
 - Queued / Blocked: PD01-PD18 pending `Start Product Depth Train` plus PXOS/ME/CS/SI/AOS-if-needed gates.
 - Queued / Blocked: AOS01-AOS30 pending `Start AOS Train`.
