@@ -2,7 +2,7 @@
 
 <!-- markdownlint-disable MD013 -->
 
-Status: CS04A complete pending commit evidence.
+Status: CS04A complete with commit/push evidence.
 Date: 2026-05-02
 
 ## Batch
@@ -10,7 +10,7 @@ Date: 2026-05-02
 - Formal batch ID: `CS04`
 - Internal completed stage: `CS04A`
 - Global order number: `043`
-- Result: PASS WITH YELLOW pending commit evidence.
+- Result: PASS WITH YELLOW.
 - Validation strength: Adequate docs/protocol evidence.
 
 ## Scope Completed
@@ -98,4 +98,4 @@ CS04B may run only after CS04A validation/commit evidence and a dry-run returnin
 
 ## Commit SHA
 
-Pending CS04A commit.
+`4766b9d7`

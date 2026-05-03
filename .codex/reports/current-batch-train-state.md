@@ -58,7 +58,7 @@ CS03B is PASS WITH YELLOW with commit/push evidence `126e86be`:
 - CS03B preserves current source truth that legacy `insights` compatibility resolves through You/Profile history support, not a direct Plan migration.
 - CS03C is deferred as accepted Yellow; the Insights seam is not claimed retired.
 
-CS04A is PASS WITH YELLOW pending commit/push evidence:
+CS04A is PASS WITH YELLOW with commit/push evidence `4766b9d7`:
 
 - CS04A touched only docs/status files and did not edit tests or app code.
 - CS04A created the Habits/Ritual/Plan seam inventory, compatibility contract ledger, accessibility identifier ledger, and retirement risk map.
@@ -106,4 +106,4 @@ The current user prompt says `Run Global Batch Sequence Until Blocked` and expli
 
 ## Next Eligible Batch
 
-CS04A is complete as docs/protocol repair pending commit evidence. The next safe action is CS04B focused compatibility proof if dry-run returns `Execution allowed: YES`; CS04C remains blocked until CS04B proves a narrow retirement is safe.
+CS04A is complete as docs/protocol repair with commit/push evidence. The next safe action is CS04B focused compatibility proof if dry-run returns `Execution allowed: YES`; CS04C remains blocked until CS04B proves a narrow retirement is safe.
