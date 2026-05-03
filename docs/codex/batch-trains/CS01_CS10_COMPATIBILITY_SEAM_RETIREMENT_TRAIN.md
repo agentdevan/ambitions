@@ -2,7 +2,7 @@
 
 <!-- markdownlint-disable MD013 -->
 
-Status: Active Ambitions 4.0 train manifest; CS01 audit evidence, CS07 external compatibility proof, CS08 import/export/persistence proof, CS02A/CS02B Profile/You compatibility evidence, and CS03A/CS03B Insights compatibility evidence complete; CS04 is stopped on dry-run Red/NO pending seam repair.
+Status: Active Ambitions 4.0 train manifest; CS01 audit evidence, CS07 external compatibility proof, CS08 import/export/persistence proof, CS02A/CS02B Profile/You compatibility evidence, CS03A/CS03B Insights compatibility evidence, and CS04A Habits/Ritual/Plan compatibility map evidence complete; CS04B is the next narrowed proof stage.
 
 ## Start Rule
 
@@ -38,7 +38,7 @@ Allowed files are the files named by each batch prompt. Forbidden across the tra
 - CS01: Compatibility Seam Registry And Risk Map. Action: maps. Seam: all Lane 3 candidate seams. Gate: replacement map and compatibility proof before deletion. Status: complete as audit-only evidence; no seam retired.
 - CS02: Profile To You Compatibility Seam Repair And Narrow Retirement. Action: staged map/prove/retire. Seam: Profile internal naming, `profile` raw/default compatibility, You user-facing display, and accessibility identifiers. Status: CS02A and CS02B complete with accepted Yellow; CS02C retirement remains blocked/deferred. Formal count remains 113.
 - CS03: Insights Compatibility Retirement. Action: staged map/prove/retire. Seam: Insights route/model/raw/default/external/accessibility compatibility and contextual-intelligence semantics. Status: CS03A complete as map/ledger repair; CS03B complete as route/raw/external/display focused proof; CS03C narrow internal retirement blocked/deferred. Current repo truth preserves legacy `insights` compatibility through You/Profile history support until stronger proof exists. Formal count remains 113.
-- CS04: Habits Ritual Plan Compatibility Retirement. Action: retires. Seam: Habits route/model compatibility for Ritual/Plan continuity. Gate: replacement map and compatibility proof before deletion.
+- CS04: Habits Ritual Plan Compatibility Retirement. Action: staged map/prove/retire. Seam: Habits route/model/raw/default/external/accessibility compatibility for Ritual/Plan continuity. Status: CS04A complete as map/ledger repair; CS04B focused compatibility proof is next; CS04C narrow retirement blocked until CS04A and CS04B are Green or accepted Yellow. Formal count remains 113.
 - CS05: ActiveFocus TodayFocus Retirement. Action: retires. Seam: activeFocus, TodayFocus*, and .focus Today compatibility. Gate: replacement map and compatibility proof before deletion.
 - CS06: Internal Failed Taxonomy Retirement. Action: retires. Seam: internal .failed taxonomy where visible language stays humane. Gate: replacement map and compatibility proof before deletion.
 - CS07: External Route Widget AppIntent Compatibility Proof. Action: proves. Seam: external routes, widget payloads, App Intent/Shortcut payloads. Gate: replacement map and compatibility proof before deletion. Status: complete as focused simulator/unit proof; no seam retired.

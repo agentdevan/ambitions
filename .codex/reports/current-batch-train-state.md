@@ -3,9 +3,9 @@
 <!-- markdownlint-disable MD013 -->
 
 Active train: CS compatibility seam retirement train
-Active batch: CS04 Habits Ritual Plan Compatibility Retirement stopped on dry-run Red
+Active batch: CS04A Habits/Ritual/Plan Compatibility Map And Retirement Ledger
 Current out-of-train task: none
-Scope: ME01-ME12 maintainability train complete with commit/push evidence; ME11 repair not triggered; PXOS implementation not started; CS01 complete; CS07 complete as focused compatibility proof; CS08 complete as focused import/export/persistence proof; CS02A repairs the Profile/You seam scope without code edits; CS02B adds focused compatibility proof; CS03A repairs the Insights seam scope without code edits; CS03B adds focused compatibility proof; CS04 dry-run returned Red/NO and is blocked pending repair; Signature Interface/Product Depth/AmbitionsOS trains not started
+Scope: ME01-ME12 maintainability train complete with commit/push evidence; ME11 repair not triggered; PXOS implementation not started; CS01 complete; CS07 complete as focused compatibility proof; CS08 complete as focused import/export/persistence proof; CS02A repairs the Profile/You seam scope without code edits; CS02B adds focused compatibility proof; CS03A repairs the Insights seam scope without code edits; CS03B adds focused compatibility proof; CS04A repairs the Habits/Ritual/Plan seam scope without code edits; CS04B focused proof is next; Signature Interface/Product Depth/AmbitionsOS trains not started
 Date: 2026-05-02
 
 ## Baseline
@@ -30,11 +30,11 @@ Product Depth is formalized as a queued/blocked PD01-PD18 train with required ap
 
 ## Ambitions 4.0 Status
 
-Ambitions 4.0 is the active post-3.0 execution program, not a shipped product version. The global order now has 113 formal batches after SI insertion: REC02-REC06, PX01-PX20, ME01-ME12, CS01-CS10, SI01-SI18, PD01-PD18, and AOS01-AOS30. REC02-REC06, PX01-PX20, ME01, ME08, ME10, ME02, ME03, ME04, ME05, ME06, ME07, ME09, ME12, CS01, CS07, CS08, CS02A, CS02B, CS03A, and CS03B are complete with evidence; CS02C and CS03C remain deferred as accepted Yellow inside formal CS02/CS03.
+Ambitions 4.0 is the active post-3.0 execution program, not a shipped product version. The global order now has 113 formal batches after SI insertion: REC02-REC06, PX01-PX20, ME01-ME12, CS01-CS10, SI01-SI18, PD01-PD18, and AOS01-AOS30. REC02-REC06, PX01-PX20, ME01, ME08, ME10, ME02, ME03, ME04, ME05, ME06, ME07, ME09, ME12, CS01, CS07, CS08, CS02A, CS02B, CS03A, CS03B, and CS04A are complete with evidence; CS02C, CS03C, and CS04C remain deferred/blocked as accepted Yellow or pending proof inside formal CS02/CS03/CS04.
 
 ## Boundaries
 
-No product behavior expansion. No visual redesign. No compatibility seam retired. No dependencies. No workflow changes. No release claim. CS01 is audit-only evidence; CS07 and CS08 are focused simulator/unit proof; CS02A is docs/protocol seam repair; CS02B is focused test proof; CS03A is docs/protocol seam repair; CS03B is focused test proof; CS04 is stopped on dry-run Red/NO pending repair; CS02C, CS03C, CS04-CS06, CS09-CS10, SI implementation, Product Depth, AOS, and PXOS implementation remain unstarted until their gates allow.
+No product behavior expansion. No visual redesign. No compatibility seam retired. No dependencies. No workflow changes. No release claim. CS01 is audit-only evidence; CS07 and CS08 are focused simulator/unit proof; CS02A is docs/protocol seam repair; CS02B is focused test proof; CS03A is docs/protocol seam repair; CS03B is focused test proof; CS04A is docs/protocol seam repair; CS04B is the next narrowed proof stage; CS02C, CS03C, CS04C, CS05-CS06, CS09-CS10, SI implementation, Product Depth, AOS, and PXOS implementation remain unstarted until their gates allow.
 
 ## Validation Result
 
@@ -57,6 +57,14 @@ CS03B is PASS WITH YELLOW with commit/push evidence `126e86be`:
 - CS03B proves visible top-level tabs remain `Today / Goals / Capture / Plan / You`; no visible top-level `Insights` destination is introduced.
 - CS03B preserves current source truth that legacy `insights` compatibility resolves through You/Profile history support, not a direct Plan migration.
 - CS03C is deferred as accepted Yellow; the Insights seam is not claimed retired.
+
+CS04A is PASS WITH YELLOW pending commit/push evidence:
+
+- CS04A touched only docs/status files and did not edit tests or app code.
+- CS04A created the Habits/Ritual/Plan seam inventory, compatibility contract ledger, accessibility identifier ledger, and retirement risk map.
+- CS04A repaired the CS04 prompt into CS04A/CS04B/CS04C internal staging without changing the formal 113-batch global order.
+- CS04A documents `AppTab.habits`, `PlanRouteTarget.habits`, `ambitions://tab/habits`, `ambitions://plan/habits`, widget/notification `tab=habits`, `habits.*` identifiers, and Plan-owned Rituals support semantics as live compatibility surfaces.
+- CS04B is the next narrowed proof step; CS04C remains blocked/deferred and the Habits seam is not claimed retired.
 
 CS02B remains PASS WITH YELLOW with commit/push evidence:
 
@@ -98,4 +106,4 @@ The current user prompt says `Run Global Batch Sequence Until Blocked` and expli
 
 ## Next Eligible Batch
 
-CS04 dry-run returned `Execution allowed: NO`. The next safe action is a CS04 Habits/Ritual/Plan compatibility seam repair prompt that creates a seam inventory, contract ledger, accessibility/default/persistence/external-route proof plan, and staged CS04A/CS04B/CS04C path before any retirement.
+CS04A is complete as docs/protocol repair pending commit evidence. The next safe action is CS04B focused compatibility proof if dry-run returns `Execution allowed: YES`; CS04C remains blocked until CS04B proves a narrow retirement is safe.
