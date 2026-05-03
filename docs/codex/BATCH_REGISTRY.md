@@ -78,13 +78,14 @@ Current 4.0 status:
 - Completed: CS04A Habits/Ritual/Plan Compatibility Map And Retirement Ledger as internal docs/protocol stage of formal CS04; no seam retired and no app code edited.
 - Completed: CS04B Ritual/Plan Compatibility Preservation Proof as focused test proof; old `habits` compatibility and Plan-owned `Rituals` semantics are preserved.
 - Accepted Yellow: CS04C Narrow Internal Habits Retirement remains blocked/deferred; no Habits seam is claimed retired.
-- Stopped on Red: CS05 ActiveFocus TodayFocus Retirement dry-run returned `Execution allowed: NO`; repair into internal map/proof/retirement stages before implementation.
-- Queued / Blocked: CS02C, CS03C, CS04C, CS06, and CS09-CS10 pending current global preauthorization or `Start CS Train`.
+- Completed: CS05A ActiveFocus/TodayFocus Compatibility Map And Retirement Ledger as internal docs/protocol stage of formal CS05; no seam retired and no app code edited.
+- Accepted Yellow: CS05B ActiveFocus Compatibility Preservation Proof is next eligible after dry-run; CS05C Narrow Internal Today Focus Retirement remains blocked/deferred until proof exists.
+- Queued / Blocked: CS02C, CS03C, CS04C, CS05C, CS06, and CS09-CS10 pending current global preauthorization or `Start CS Train`.
 - Queued / Blocked: SI01-SI18 pending global-order selection or `Start Signature Interface Train` plus PXOS/ME/CS/SI quality gates.
 - Queued / Blocked: PD01-PD18 pending `Start Product Depth Train` plus PXOS/ME/CS/SI/AOS-if-needed gates.
 - Queued / Blocked: AOS01-AOS30 pending `Start AOS Train`.
 - Total formal Ambitions 4.0 batches after SI insertion: 113.
-- Remaining after CS04B and SI insertion: 71 formal batches remain because CS05 is not complete and CS02A/CS03A/CS04A are internal stages of formal CS02/CS03/CS04, not new formal batches.
+- Remaining after CS05A and SI insertion: 71 formal batches remain because CS05 is not complete until CS05B/CS05C are resolved and CS02A/CS03A/CS04A/CS05A are internal stages of formal CS02/CS03/CS04/CS05, not new formal batches.
 
 Use [../canon/Ambitions_4_0_Execution_Program.md](../canon/Ambitions_4_0_Execution_Program.md) and [GLOBAL_FUTURE_BATCH_EXECUTION_ORDER.md](GLOBAL_FUTURE_BATCH_EXECUTION_ORDER.md) for current post-3.0 status semantics.
 

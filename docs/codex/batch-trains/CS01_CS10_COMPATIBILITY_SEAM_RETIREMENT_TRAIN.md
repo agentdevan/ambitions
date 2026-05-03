@@ -2,7 +2,7 @@
 
 <!-- markdownlint-disable MD013 -->
 
-Status: Active Ambitions 4.0 train manifest; CS01 audit evidence, CS07 external compatibility proof, CS08 import/export/persistence proof, CS02A/CS02B Profile/You compatibility evidence, CS03A/CS03B Insights compatibility evidence, and CS04A/CS04B Habits/Ritual/Plan compatibility evidence complete; CS05 is the next formal batch pending dry-run.
+Status: Active Ambitions 4.0 train manifest; CS01 audit evidence, CS07 external compatibility proof, CS08 import/export/persistence proof, CS02A/CS02B Profile/You compatibility evidence, CS03A/CS03B Insights compatibility evidence, CS04A/CS04B Habits/Ritual/Plan compatibility evidence, and CS05A ActiveFocus/TodayFocus compatibility map evidence complete; CS05B is the next internal proof stage pending dry-run.
 
 ## Start Rule
 
@@ -39,7 +39,7 @@ Allowed files are the files named by each batch prompt. Forbidden across the tra
 - CS02: Profile To You Compatibility Seam Repair And Narrow Retirement. Action: staged map/prove/retire. Seam: Profile internal naming, `profile` raw/default compatibility, You user-facing display, and accessibility identifiers. Status: CS02A and CS02B complete with accepted Yellow; CS02C retirement remains blocked/deferred. Formal count remains 113.
 - CS03: Insights Compatibility Retirement. Action: staged map/prove/retire. Seam: Insights route/model/raw/default/external/accessibility compatibility and contextual-intelligence semantics. Status: CS03A complete as map/ledger repair; CS03B complete as route/raw/external/display focused proof; CS03C narrow internal retirement blocked/deferred. Current repo truth preserves legacy `insights` compatibility through You/Profile history support until stronger proof exists. Formal count remains 113.
 - CS04: Habits Ritual Plan Compatibility Retirement. Action: staged map/prove/retire. Seam: Habits route/model/raw/default/external/accessibility compatibility for Ritual/Plan continuity. Status: CS04A complete as map/ledger repair; CS04B complete as route/raw/external/display focused proof; CS04C narrow internal retirement blocked/deferred. Formal count remains 113.
-- CS05: ActiveFocus TodayFocus Retirement. Action: retires. Seam: activeFocus, TodayFocus*, and .focus Today compatibility. Gate: replacement map and compatibility proof before deletion.
+- CS05: ActiveFocus TodayFocus Retirement. Action: staged map/prove/retire. Seam: activeFocus external snapshot schema, TodayFocus* state/service naming, `.focus` Today route context, shell quick focus, App Intent route, and FocusNow widget compatibility. Status: CS05A complete as map/schema/route/payload ledger repair; CS05B focused external snapshot/widget/App Intent/Today proof is next; CS05C narrow internal retirement blocked/deferred. Formal count remains 113.
 - CS06: Internal Failed Taxonomy Retirement. Action: retires. Seam: internal .failed taxonomy where visible language stays humane. Gate: replacement map and compatibility proof before deletion.
 - CS07: External Route Widget AppIntent Compatibility Proof. Action: proves. Seam: external routes, widget payloads, App Intent/Shortcut payloads. Gate: replacement map and compatibility proof before deletion. Status: complete as focused simulator/unit proof; no seam retired.
 - CS08: Import Export Persistence Compatibility Proof. Action: proves. Seam: import/export payloads and persistence/schema compatibility views. Gate: replacement map and compatibility proof before deletion. Status: complete as focused simulator/unit proof; no seam retired.
