@@ -7,7 +7,7 @@ completed() {
   local id="$1"
   rg -q "Complete: $id|$id is complete|\| [0-9]{3} \| $id \| [^|]* \| [^|]* \| [^|]* \| [^|]* \| [^|]* \| No; complete" docs/codex/BATCH_REGISTRY.md .codex/reports/current-run-state.md docs/codex/GLOBAL_FUTURE_BATCH_EXECUTION_ORDER.md 2>/dev/null
 }
-for id in EB01 EB13 EB25 EB19 EB02 EB07 EB31 EB32 DAV01 DAV02 DAV03 DAV04 DAV05 DAV06 DAV07 DAV08 DAV09 DAV10 DAV11 DAV12 DAV13 DAV14 DAV15 EB20 EB21 EB22 EB23 EB24 EB03A EB03B EB04 EB05 EB06 EB14 EB15 EB16 EB17 EB18 EB26 EB27 EB28 EB29 EB30 EB08 EB09 EB10 EB11 EB12 EB33 EB34 EB35 EB36 EB37 EB38 EB39; do
+for id in EB01 EB13 EB25 EB19 EB02 EB07 EB31 EB32 DAV01 DAV02 DAV03 DAV04 DAV05 DAV06 DAV07 DAV08 DAV09 DAV10 DAV11 DAV12 DAV13 DAV14 DAV15 EB20 EB21 EB22 EB23 EB24 EB03A EB03B EB04 EB05 EB06 EB14 EB15 EB16 EB17 EB18 EB26 EB27 EB28 EB29 EB30 EB08 EB09 EB10 EB11 EB12 EB33 EB34 EB35 EB36 EB37 EB38 EB39 EB40 CS10; do
   if ! completed "$id"; then
     case "$id" in
     EB01) name="External Brain Source Truth And Kernel Architecture"; global="047" ;;
@@ -65,6 +65,8 @@ for id in EB01 EB13 EB25 EB19 EB02 EB07 EB31 EB32 DAV01 DAV02 DAV03 DAV04 DAV05 
     EB37) name="External Brain Privacy Threat Model"; global="098" ;;
     EB38) name="External Brain Accessibility Evidence Closeout"; global="099" ;;
     EB39) name="External Brain Handoff And RC Readiness Implications"; global="100" ;;
+    EB40) name="Ambitions 4.0 External Brain Closeout"; global="101" ;;
+    CS10) name="Compatibility Retirement Handoff"; global="102" ;;
       *) name="Unknown"; global="unknown" ;;
     esac
     echo "Active train: Ambitions 4.0 External Brain Foundation"
@@ -76,8 +78,8 @@ for id in EB01 EB13 EB25 EB19 EB02 EB07 EB31 EB32 DAV01 DAV02 DAV03 DAV04 DAV05 
     exit 0
   fi
 done
-echo "Next eligible batch: EB40 Ambitions 4.0 External Brain Closeout"
-echo "Global order: 101"
+echo "Next eligible batch: SI01 Signature Interface Architecture"
+echo "Global order: 103"
 echo "Total planned batches: 168"
 echo "Working tree:"
 git status --short

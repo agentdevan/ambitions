@@ -353,7 +353,15 @@ Current 4.0 status:
   behavior, screenshot proof, release/RC/TestFlight/App Store posture upgrade,
   or release-claim changes. EB40 Ambitions 4.0 External Brain Closeout is the
   next eligible EB batch.
-- Active Planned / Queued: EB40 Ambitions 4.0 External Brain Foundation expansion closeout; not completed and not implemented in app behavior.
+- Complete: EB40 Ambitions 4.0 External Brain Closeout is complete as
+  External Brain train closeout evidence with accepted Yellow. It records the
+  EB01-EB40 summary, allowed/not-allowed claims, accepted Yellow owners,
+  release-claim safety seal, next global path, and rollback, without
+  Native/Sources/AppUI/test/project, route/raw value, persistence/schema,
+  dependency, workflow, signing, production asset, app behavior, screenshot
+  proof, release/RC/TestFlight/App Store posture upgrade, or release-claim
+  changes.
+- Complete: EB01-EB40 Ambitions 4.0 External Brain Foundation expansion segment is closed with accepted Yellow and is not whole-product/release/app-store/accessibility/device proof.
 - Queued / Blocked: SI01-SI18 pending global-order selection or `Start Signature Interface Train` plus PXOS/ME/CS/SI quality gates.
 - Queued / Blocked: PD01-PD18 pending `Start Product Depth Train` plus PXOS/ME/CS/SI/AOS-if-needed gates.
 - Queued / Blocked: AOS01-AOS30 pending `Start AOS Train`.
