@@ -1,8 +1,8 @@
 # Current Batch Train State
 
 Date: 2026-05-04
-Active train: Ambitions 4.0 External Brain Foundation
-Current batch: SI01 next eligible after CS10 handoff
+Active train: Signature Interface
+Current batch: SI02 next eligible after SI01 architecture
 Scope: Complete: EB03A Universal Capture Composer Routing Owner Map. Complete:
 EB03B Universal Capture Composer Routing Implementation. Complete: EB04
 Capture Classification And Clarification. Complete: EB05 Capture Clusters
@@ -85,7 +85,8 @@ accessibility/release claim change was made.
   batch. EB38 is complete as an accessibility evidence closeout. EB39 is
   complete as an External Brain handoff and RC implications batch. EB40 is
   complete as the External Brain train closeout. CS10 is complete as a
-  compatibility handoff. SI01 is the next eligible global batch.
+  compatibility handoff. SI01 is complete as Signature Interface architecture
+  evidence. SI02 is the next eligible global batch.
 - PXEQ is a mandatory product-experience gate for EB UI-affecting batches; it
   is not a shipped app feature and not a new EB batch identity.
 - Optimized global order after EB32 places DAV01-DAV15 before UI-heavy EB
@@ -325,11 +326,19 @@ widget/App Intent/Shortcut, app behavior, seam retirement, or release/platform
 posture changes were made. Yellow items are deferred CS02C-CS06C/CS09C seams,
 human/platform proof, and existing advisory backlog.
 
+SI01 result: PASS WITH YELLOW. `docs/audits/si01-signature-interface-architecture-report.md`
+records the Signature Interface SwiftUI architecture map and future SI owner
+families. No production Swift, tests, project, route/raw, persistence/schema,
+app behavior, screenshot proof, human/device/accessibility proof, or
+release/platform posture changes were made. Yellow items are future UI
+preview/rendered proof, human/device/VoiceOver proof, Instruments/battery proof,
+and implementation-time exact owner-file evidence for SI02-SI18.
+
 ## Next Safe Path
 
-Run SI01 Signature Interface Architecture next if global train rules permit. Do not restart broad
+Run SI02 Adaptive Panel Action And Module Foundation next if global train rules permit. Do not restart broad
 EB03, EB04, EB05, EB06, EB14, EB15, EB16, EB17, EB18, EB26, EB27, EB28, EB29,
 EB30, EB08, EB09, EB10, EB11, EB12, EB33, EB34, EB35, EB36, EB37, EB38, EB39,
-EB40, CS10, or completed DAV / EB20-EB24 batches. SI01 must remain an
-architecture/source-truth batch unless its prompt explicitly permits production
-implementation.
+EB40, CS10, SI01, or completed DAV / EB20-EB24 batches. SI02 must remain a
+bounded Signature Interface primitive implementation batch unless its prompt
+requires a narrower stop or repair.

@@ -7,7 +7,7 @@ completed() {
   local id="$1"
   rg -q "Complete: $id|$id is complete|\| [0-9]{3} \| $id \| [^|]* \| [^|]* \| [^|]* \| [^|]* \| [^|]* \| No; complete" docs/codex/BATCH_REGISTRY.md .codex/reports/current-run-state.md docs/codex/GLOBAL_FUTURE_BATCH_EXECUTION_ORDER.md 2>/dev/null
 }
-for id in EB01 EB13 EB25 EB19 EB02 EB07 EB31 EB32 DAV01 DAV02 DAV03 DAV04 DAV05 DAV06 DAV07 DAV08 DAV09 DAV10 DAV11 DAV12 DAV13 DAV14 DAV15 EB20 EB21 EB22 EB23 EB24 EB03A EB03B EB04 EB05 EB06 EB14 EB15 EB16 EB17 EB18 EB26 EB27 EB28 EB29 EB30 EB08 EB09 EB10 EB11 EB12 EB33 EB34 EB35 EB36 EB37 EB38 EB39 EB40 CS10; do
+for id in EB01 EB13 EB25 EB19 EB02 EB07 EB31 EB32 DAV01 DAV02 DAV03 DAV04 DAV05 DAV06 DAV07 DAV08 DAV09 DAV10 DAV11 DAV12 DAV13 DAV14 DAV15 EB20 EB21 EB22 EB23 EB24 EB03A EB03B EB04 EB05 EB06 EB14 EB15 EB16 EB17 EB18 EB26 EB27 EB28 EB29 EB30 EB08 EB09 EB10 EB11 EB12 EB33 EB34 EB35 EB36 EB37 EB38 EB39 EB40 CS10 SI01 SI02 SI03 SI04 SI05 SI06 SI07 SI08 SI09 SI10 SI11 SI12 SI13 SI14 SI15 SI16 SI17 SI18; do
   if ! completed "$id"; then
     case "$id" in
     EB01) name="External Brain Source Truth And Kernel Architecture"; global="047" ;;
@@ -67,6 +67,24 @@ for id in EB01 EB13 EB25 EB19 EB02 EB07 EB31 EB32 DAV01 DAV02 DAV03 DAV04 DAV05 
     EB39) name="External Brain Handoff And RC Readiness Implications"; global="100" ;;
     EB40) name="Ambitions 4.0 External Brain Closeout"; global="101" ;;
     CS10) name="Compatibility Retirement Handoff"; global="102" ;;
+    SI01) name="Signature Interface Architecture"; global="103" ;;
+    SI02) name="Adaptive Panel Action And Module Foundation"; global="104" ;;
+    SI03) name="App Shell IA And Navigation List System"; global="105" ;;
+    SI04) name="DayTimelineRail 2.0"; global="106" ;;
+    SI05) name="Hero Step Panel System"; global="107" ;;
+    SI06) name="LifePath Visualization System"; global="108" ;;
+    SI07) name="Mission Control Lane Components"; global="109" ;;
+    SI08) name="LifeShape Time Capacity Map"; global="110" ;;
+    SI09) name="Capture Atmosphere Composer"; global="111" ;;
+    SI10) name="Trust Receipt Layer"; global="112" ;;
+    SI11) name="Personal System Center Components"; global="113" ;;
+    SI12) name="Interaction Motion Haptics System"; global="114" ;;
+    SI13) name="Loading Empty Degraded State Primitives"; global="115" ;;
+    SI14) name="Iconography Symbol And Status Grammar"; global="116" ;;
+    SI15) name="Accessibility Adaptive Interface Pass"; global="117" ;;
+    SI16) name="Preview Fixture And Visual QA Infrastructure"; global="118" ;;
+    SI17) name="Top-Level Surface Composition Implementation"; global="119" ;;
+    SI18) name="Signature Interface Handoff And Product Depth Readiness"; global="120" ;;
       *) name="Unknown"; global="unknown" ;;
     esac
     echo "Next eligible batch: $id $name"
@@ -74,5 +92,5 @@ for id in EB01 EB13 EB25 EB19 EB02 EB07 EB31 EB32 DAV01 DAV02 DAV03 DAV04 DAV05 
     exit 0
   fi
 done
-echo "Next eligible batch: SI01 Signature Interface Architecture"
-echo "Global order: 103"
+echo "Next eligible batch: PD01 Product Depth Train"
+echo "Global order: 121"
