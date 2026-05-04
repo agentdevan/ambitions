@@ -142,9 +142,15 @@ Current 4.0 status:
   prompt global-order metadata to 074, and defers product Swift until exact
   owner files, focused tests, preview evidence, privacy evidence, accessibility
   evidence, rollback, and release-claim proof are named.
-- Active Planned / Queued: EB03 Universal Capture Composer And Routing is next
-  eligible after EB24; production SwiftUI is allowed only inside the active EB
-  batch boundary.
+- Complete: EB03A Universal Capture Composer Routing Owner Map is complete as
+  repair/evidence only. Split / Blocked Parent: EB03 Universal Capture
+  Composer And Routing is not
+  complete and must not be run as one broad implementation batch. EB03A
+  named owner files, non-owner boundaries, EB03B scope, tests, preview lane,
+  rollback, and proof gates. EB03B Universal Capture Composer Routing
+  Implementation is the next eligible EB implementation batch; it may touch
+  production Swift only inside the EB03A owner map and must prove route/raw/
+  persistence/accessibility/preview/rollback evidence before EB04.
 - Active Planned / Queued: EB08-EB12, EB14-EB18, EB20-EB24, EB03-EB06, and EB26-EB40 Ambitions 4.0 External Brain Foundation expansion segment; not completed and not implemented in app behavior.
 - Queued / Blocked: SI01-SI18 pending global-order selection or `Start Signature Interface Train` plus PXOS/ME/CS/SI quality gates.
 - Queued / Blocked: PD01-PD18 pending `Start Product Depth Train` plus PXOS/ME/CS/SI/AOS-if-needed gates.

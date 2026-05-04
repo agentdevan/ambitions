@@ -2,14 +2,17 @@
 
 Date: 2026-05-03
 Active train: Ambitions 4.0 External Brain Foundation
-Current batch: EB03 blocked before implementation
-Scope: EB03 Universal Capture Composer And Routing is next eligible, but the
-prompt names broad Capture/Domain production families without exact owner
-files, a focused behavior target, focused tests, preview evidence, rollback, or
-route/raw/persistence proof. No EB03 implementation was started. No app
-behavior, route/raw value, persistence/schema, dependency, workflow, signing,
-top-level-tab, production asset, or public accessibility/release claim change was
-made.
+Current batch: EB03B next eligible after EB03A owner-map repair
+Scope: Complete: EB03A Universal Capture Composer Routing Owner Map. EB03
+Universal Capture Composer And Routing was blocked because the
+original EB03 prompt named broad Capture/Domain production families without
+exact owner files, a focused behavior target, focused tests, preview evidence,
+rollback, or route/raw/persistence proof. EB03A repaired that blocker by
+naming owner files, non-owner boundaries, EB03B implementation scope, required
+tests, preview lane, rollback path, and global train updates. No EB03
+implementation was started. No app behavior, route/raw value,
+persistence/schema, dependency, workflow, signing, top-level-tab, production
+asset, or public accessibility/release claim change was made.
 
 ## Current Truth
 
@@ -46,8 +49,9 @@ made.
   fixture/scenario gallery implementation; DAV13 is complete as rendering and
   battery risk evidence; DAV14 is complete as visual regression and
   product-experience QA evidence; DAV15 is complete as train closeout evidence;
-  EB03 remains active planned scope and is blocked until scoped into exact
-  owner files and focused validation.
+  EB03 remains a split parent and is not complete as app behavior. EB03A is
+  complete as owner-map repair evidence; EB03B is the next eligible
+  implementation batch only inside the owner map and focused validation lane.
 - PXEQ is a mandatory product-experience gate for EB UI-affecting batches; it
   is not a shipped app feature and not a new EB batch identity.
 - Optimized global order after EB32 places DAV01-DAV15 before UI-heavy EB
@@ -66,13 +70,15 @@ claim/copy/docs advisory backlog, working-tree gate hints during validation,
 and future product implementation proof because EB24 intentionally changes no
 Swift or app behavior.
 
-EB03 preflight result: BLOCKED. Proceeding would require broad production Swift
-work in Capture and Domain without a narrowed owner-file set, focused tests,
-preview evidence, rollback plan, and route/raw/persistence proof. Required
-repair path: split EB03 into EB03A owner map, EB03B capture composer/routing
-implementation, and EB03C focused proof/closeout before product Swift changes.
+EB03A result: PASS WITH YELLOW. `docs/audits/eb03a-universal-capture-composer-routing-owner-map-report.md`
+names exact owner files, non-owner boundaries, EB03B safe implementation scope,
+required tests, preview lane, rollback path, and train split updates. Yellow
+items are future EB03B proof items: screenshot/rendered visual proof,
+human/device/VoiceOver proof, and product Swift implementation proof.
 
 ## Next Safe Path
 
-Repair EB03 scope before implementation. Do not restart completed DAV or
-EB20-EB24 batches.
+Run EB03B Universal Capture Composer Routing Implementation next. Do not
+restart broad EB03 or completed DAV / EB20-EB24 batches. EB03B must stay inside
+the EB03A owner map and prove route/raw/persistence/accessibility/preview/
+rollback evidence before EB04.
