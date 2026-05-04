@@ -1,6 +1,6 @@
 # Ambitions Product Experience Pack Repo Traceability Map
 
-Status: Batch 1A/1B/1C/1D docs/planning artifact; no app implementation started
+Status: Batch 1A/1B/1C/1D/1E docs/planning artifact; no app implementation started
 Date: 2026-05-04
 
 ## Purpose
@@ -182,6 +182,24 @@ approval phrase is given, Batch 1E final file-boundary approval as Green/Yellow,
 narrow implementation planning as Yellow/Stop, and broad app implementation as
 Red.
 
+## Batch 1E Final Boundary And Planning Gate Addendum
+
+Batch 1E created:
+
+- `docs/handoff/Ambitions_Product_Experience_Pack_Final_File_Boundary_Approval.md`
+- `docs/audits/ambitions-product-experience-pack-batch-1e-implementation-planning-gate.md`
+
+The final boundary approval confirms that Product Experience Pack handoff docs
+and audit reports are the only Yellow docs-only editable areas from this gate.
+App code, navigation, design tokens, persistence, runtime, CI/config,
+tests/previews/fixtures, Product Depth train state, and global train state
+remain approval-gated or stopped according to the final boundary table.
+
+The implementation-planning gate rates Product Depth PD01 as Stop until the
+exact approval phrase is given, narrow accent and MissionControlTimeSpine
+planning as Yellow/Stop docs-only options, broad app implementation as Red, and
+global train resumption as Stop.
+
 ## Top-Level Surface Mapping
 
 | Surface | Locked primary object | Current repo files | Apparent alignment | Apparent conflict | Caveat | Implementation risk | Future treatment | Recommendation |
@@ -241,8 +259,12 @@ Red.
 
 ## Recommended Next Action
 
-Recommended: run Batch 1E docs-only final file-boundary approval and
-implementation-planning gate. It should preserve the Batch 1D source-truth
-packet, avoid app code, and prepare only the next user decision. Do not start
-Product Depth unless the user says the exact approval phrase from the Product
-Depth manifest.
+Recommended: stop for user decision.
+
+Allowed next choices are to keep Codex parked, run named docs-only cleanup for a
+specific unresolved doc gap, request a narrow implementation-planning prompt for
+one specific object later, or start Product Depth PD01 only with the exact
+approval phrase: `Start Product Depth Train`.
+
+Do not start Product Depth without that phrase. Broad app implementation remains
+Red.

@@ -1,6 +1,6 @@
 # Ambitions Product Experience Pack File Boundary Map
 
-Status: Batch 1A preliminary map hardened by Batch 1B/1C/1D; planning-only
+Status: Batch 1A preliminary map hardened by Batch 1B/1C/1D/1E; planning-only
 Date: 2026-05-04
 
 ## Purpose
@@ -74,6 +74,8 @@ or source-truth boundary artifacts when the task stays docs-only.
 - `docs/audits/ambitions-product-experience-pack-batch-1c-copy-boundary-scan.md`
 - `docs/handoff/Ambitions_Product_Experience_Pack_Source_Truth_Packet.md`
 - `docs/audits/ambitions-product-experience-pack-batch-1d-readiness-gate-report.md`
+- `docs/handoff/Ambitions_Product_Experience_Pack_Final_File_Boundary_Approval.md`
+- `docs/audits/ambitions-product-experience-pack-batch-1e-implementation-planning-gate.md`
 - `docs/audits/*product-experience*report.md`
 - `docs/codex/CONTEXT_INDEX.md` only if a later prompt asks to index the
   artifact.
@@ -307,7 +309,17 @@ gate for Product Experience Pack work.
 
 ## Boundary Recommendation
 
-The next safe docs action is Batch 1E final file-boundary approval and
-implementation-planning gate. It should stay docs-only, preserve the Batch 1D
-source-truth packet, and avoid editing app code, theme tokens, navigation,
-persistence, runtime, CI, tests, previews, fixtures, or generated files.
+The next safe action is a user decision, not an automatic batch.
+
+Options:
+
+- Start Product Depth PD01 only with the exact phrase:
+  `Start Product Depth Train`.
+- Keep Codex parked.
+- Run additional docs-only cleanup only for a named unresolved doc gap.
+- Request a narrow implementation-planning prompt later for one specific
+  object.
+
+No app code, theme tokens, navigation, persistence, runtime, CI, tests,
+previews, fixtures, or generated files are authorized by this boundary map.
+Broad app implementation remains Red.

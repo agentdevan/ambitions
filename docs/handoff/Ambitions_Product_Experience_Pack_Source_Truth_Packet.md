@@ -1,6 +1,6 @@
 # Ambitions Product Experience Pack Source Truth Packet
 
-Status: Batch 1D docs/planning packet; no app implementation authorized
+Status: Batch 1D docs/planning packet with Batch 1E final gate reference; no app implementation authorized
 Date: 2026-05-04
 
 ## 1. Packet Purpose
@@ -35,8 +35,12 @@ Future Product Experience Pack work must obey this hierarchy:
 14. Batch 1A Boundary Report.
 15. Batch 1B Reconciliation Report.
 16. Batch 1C Copy-Boundary Scan.
-17. Existing repo files and architecture.
-18. Existing Codex OS / train rules.
+17. Batch 1D Source Truth Packet.
+18. Batch 1D Readiness Gate Report.
+19. Batch 1E Final File-Boundary Approval.
+20. Batch 1E Implementation-Planning Gate.
+21. Existing repo files and architecture.
+22. Existing Codex OS / train rules.
 
 Older docs may be useful as preserved history only where the active source
 truth keeps them binding.
@@ -380,3 +384,25 @@ Stop future work if any of these occur:
 - Dirty worktree or unrelated user changes in target files.
 - Product Depth approval phrase required and not provided.
 - Global train approval required and not provided.
+
+## 13. Batch 1E Final Gate Reference
+
+Batch 1E created the final handoff gate artifacts:
+
+- `docs/handoff/Ambitions_Product_Experience_Pack_Final_File_Boundary_Approval.md`
+- `docs/audits/ambitions-product-experience-pack-batch-1e-implementation-planning-gate.md`
+
+These docs finalize the file-boundary approval and implementation-planning
+decision menu. They do not authorize app code edits, Product Depth, global train
+continuation, Batch 2, implementation prompts, Candidate finalization, or caveat
+removal.
+
+The current next action is a user decision:
+
+- Start Product Depth only with the exact phrase `Start Product Depth Train`.
+- Keep Codex parked.
+- Run additional docs-only cleanup only for a named unresolved doc gap.
+- Request a narrow implementation-planning prompt later for one specific
+  object.
+
+Broad app implementation remains Red.
