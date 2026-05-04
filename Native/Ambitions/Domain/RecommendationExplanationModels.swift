@@ -276,6 +276,17 @@ struct RecommendationExplanationCorrectionAction: Codable, Sendable, Equatable, 
     }
 }
 
+struct RecommendationEvidenceBoundarySummary: Sendable, Equatable, Hashable {
+    let evidenceLabel: String
+    let inferenceBoundaryLabel: String
+    let userControlLabel: String
+    let privacyLabel: String
+    let citedSourceIDs: [String]
+    let isEvidenceLight: Bool
+    let hasCorrectableInference: Bool
+    let requiresSensitiveReview: Bool
+}
+
 struct RecommendationExplanation: Codable, Sendable, Equatable, Hashable, Identifiable {
     let id: String
     let type: RecommendationExplanationType
@@ -370,5 +381,61 @@ struct RecommendationExplanation: Codable, Sendable, Equatable, Hashable, Identi
 
     var containsGoalScopeOrDeliverableEvidence: Bool {
         evidence.contains { $0.isGoalScopeRelevant }
+    }
+
+    var evidenceBoundarySummary: RecommendationEvidenceBoundarySummary {
+        let citedSourceIDs = Array(Set(evidence.compactMap(\.sourceID))).sorted()
+        let hasEvidence = evidence.isEmpty == false
+        let hasCorrectableAssumption = assumptions.contains { $0.isUserCorrectable }
+        let hasCorrectiveAction = correctionActions.isEmpty == false || userCorrectableFields.isEmpty == false
+        let allAssumptionsCorrectable = assumptions.isEmpty == false && assumptions.allSatisfy(\.isUserCorrectable)
+        let hasUncertainty = uncertainty.isEmpty == false
+
+        let evidenceLabel: String
+        if referencesEventLedger {
+            evidenceLabel = "Cites local records"
+        } else if hasEvidence {
+            evidenceLabel = "Uses local explanation evidence"
+        } else {
+            evidenceLabel = "Evidence-light"
+        }
+
+        let inferenceBoundaryLabel: String
+        if assumptions.isEmpty && hasUncertainty == false {
+            inferenceBoundaryLabel = "No stated inference"
+        } else if allAssumptionsCorrectable || hasCorrectableAssumption {
+            inferenceBoundaryLabel = "Inference stated and correctable"
+        } else {
+            inferenceBoundaryLabel = "Inference stated with limited correction"
+        }
+
+        let userControlLabel: String
+        if hasCorrectiveAction {
+            userControlLabel = "Correction available"
+        } else if hasCorrectableAssumption {
+            userControlLabel = "Clarification available"
+        } else {
+            userControlLabel = "Review only"
+        }
+
+        let privacyLabel: String
+        if containsCalendarDerivedEvidence {
+            privacyLabel = "Calendar-derived"
+        } else if localOnly {
+            privacyLabel = "Local-only"
+        } else {
+            privacyLabel = "Needs privacy review"
+        }
+
+        return RecommendationEvidenceBoundarySummary(
+            evidenceLabel: evidenceLabel,
+            inferenceBoundaryLabel: inferenceBoundaryLabel,
+            userControlLabel: userControlLabel,
+            privacyLabel: privacyLabel,
+            citedSourceIDs: citedSourceIDs,
+            isEvidenceLight: hasEvidence == false,
+            hasCorrectableInference: hasCorrectableAssumption || hasCorrectiveAction,
+            requiresSensitiveReview: localOnly == false || privacy != .standard || containsCalendarDerivedEvidence
+        )
     }
 }

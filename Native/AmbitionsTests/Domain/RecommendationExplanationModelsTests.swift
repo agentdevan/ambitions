@@ -194,4 +194,101 @@ final class RecommendationExplanationModelsTests: XCTestCase {
         XCTAssertEqual(explanation.privacy, .calendarDerived)
         XCTAssertTrue(explanation.localOnly)
     }
+
+    func testEvidenceBoundarySummaryNamesLocalEvidenceAndCorrectionAvailability() {
+        let explanation = RecommendationExplanation(
+            id: "explanation-boundary-evidence",
+            type: .whyChanged,
+            title: "Why changed",
+            summary: "A correction changed the recommendation.",
+            recommendationTitle: "Use the lighter version",
+            evidence: [
+                RecommendationExplanationEvidence(
+                    id: "correction",
+                    category: .userCorrection,
+                    title: "Correction",
+                    sourceID: "correction-1"
+                )
+            ],
+            assumptions: [
+                RecommendationExplanationAssumption(
+                    id: "assumption-energy",
+                    summary: "I assumed this needs a lighter version.",
+                    fieldKey: "energy_fit"
+                )
+            ],
+            userCorrectableFields: ["energy_fit"],
+            correctionActions: [
+                RecommendationExplanationCorrectionAction(
+                    id: "correct-energy",
+                    kind: .changeImportance,
+                    title: "Use a different fit",
+                    targetFieldKey: "energy_fit"
+                )
+            ],
+            lastUpdatedAt: "2026-05-03T23:50:00Z",
+            source: .recommendation
+        )
+
+        let boundary = explanation.evidenceBoundarySummary
+
+        XCTAssertEqual(boundary.evidenceLabel, "Uses local explanation evidence")
+        XCTAssertEqual(boundary.inferenceBoundaryLabel, "Inference stated and correctable")
+        XCTAssertEqual(boundary.userControlLabel, "Correction available")
+        XCTAssertEqual(boundary.privacyLabel, "Local-only")
+        XCTAssertEqual(boundary.citedSourceIDs, ["correction-1"])
+        XCTAssertFalse(boundary.isEvidenceLight)
+        XCTAssertTrue(boundary.hasCorrectableInference)
+        XCTAssertFalse(boundary.requiresSensitiveReview)
+    }
+
+    func testEvidenceBoundarySummaryKeepsEvidenceLightRecommendationsHonest() {
+        let explanation = RecommendationExplanation(
+            id: "explanation-boundary-light",
+            type: .whyThis,
+            title: "Why this",
+            summary: "This is a default suggestion.",
+            recommendationTitle: "Start small",
+            lastUpdatedAt: "2026-05-03T23:55:00Z",
+            source: .system
+        )
+
+        let boundary = explanation.evidenceBoundarySummary
+
+        XCTAssertEqual(boundary.evidenceLabel, "Evidence-light")
+        XCTAssertEqual(boundary.inferenceBoundaryLabel, "No stated inference")
+        XCTAssertEqual(boundary.userControlLabel, "Review only")
+        XCTAssertTrue(boundary.isEvidenceLight)
+        XCTAssertFalse(boundary.hasCorrectableInference)
+    }
+
+    func testEvidenceBoundarySummaryFlagsCalendarDerivedPrivacyBoundary() {
+        let entry = EventLedgerEntry(
+            id: "ledger-calendar-boundary",
+            kind: .calendarContextObserved,
+            occurredAt: "2026-05-03T23:58:00Z",
+            source: .calendar,
+            title: "Calendar context observed",
+            privacy: .calendarDerived
+        )
+        let explanation = RecommendationExplanation(
+            id: "explanation-boundary-calendar",
+            type: .whyCalendarAware,
+            title: "Why calendar-aware",
+            summary: "The suggestion uses calendar-derived pressure.",
+            recommendationTitle: "Move deep work",
+            evidence: [RecommendationExplanationEvidence.fromEventLedgerEntry(entry)],
+            lastUpdatedAt: "2026-05-03T23:59:00Z",
+            source: .plan,
+            relations: RecommendationExplanationRelations(eventLedgerEntryIDs: [entry.id]),
+            privacy: .calendarDerived
+        )
+
+        let boundary = explanation.evidenceBoundarySummary
+
+        XCTAssertEqual(boundary.evidenceLabel, "Cites local records")
+        XCTAssertEqual(boundary.privacyLabel, "Calendar-derived")
+        XCTAssertEqual(boundary.citedSourceIDs, [entry.id])
+        XCTAssertTrue(boundary.requiresSensitiveReview)
+    }
 }

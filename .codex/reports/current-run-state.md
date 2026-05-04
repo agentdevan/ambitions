@@ -2,7 +2,7 @@
 
 Date: 2026-05-03
 Active train: Ambitions 4.0 External Brain Foundation
-Current batch: EB15 next eligible after EB14 implementation
+Current batch: EB16 next eligible after EB15 implementation
 Scope: Complete: EB03A Universal Capture Composer Routing Owner Map. Complete:
 EB03B Universal Capture Composer Routing Implementation. Complete: EB04
 Capture Classification And Clarification. Complete: EB05 Capture Clusters
@@ -55,7 +55,9 @@ accessibility/release claim change was made.
   bundle/open-loop projection pass. EB06 is complete as a scoped
   receipt/reclassification projection pass with honest undo-not-supported state.
   EB14 is complete as a bounded You/Profile Trust Center data map
-  implementation. EB15 is the next eligible EB batch.
+  implementation. EB15 is complete as a bounded recommendation
+  evidence/inference boundary summary domain implementation. EB16 is the next
+  eligible EB batch.
 - PXEQ is a mandatory product-experience gate for EB UI-affecting batches; it
   is not a shipped app feature and not a new EB batch identity.
 - Optimized global order after EB32 places DAV01-DAV15 before UI-heavy EB
@@ -107,10 +109,16 @@ initializer value. Yellow items are screenshots/rendered proof not produced,
 human/device/VoiceOver review not run, Instruments/battery proof not run, and
 existing advisory backlog.
 
+EB15 result: PASS WITH YELLOW. `docs/audits/eb15-recommendation-evidence-inference-boundaries-report.md`
+records the computed `RecommendationEvidenceBoundarySummary`, focused
+recommendation model tests, `swift build`, and `scripts/build-local.sh`. Yellow
+items are UI preview/screenshot proof not applicable because no UI changed,
+human/device/VoiceOver review not run, Instruments/battery proof not run, and
+existing advisory backlog.
+
 ## Next Safe Path
 
-Run EB15 Recommendation Evidence And Inference Boundaries next. Do not restart
-broad EB03, EB04, EB05, EB06, EB14, or completed DAV / EB20-EB24 batches. EB15
+Run EB16 Private Mode And Sensitive Area Controls next. Do not restart broad
+EB03, EB04, EB05, EB06, EB14, EB15, or completed DAV / EB20-EB24 batches. EB16
 must name exact owner files, focused tests, accessibility/privacy proof, and
-rollback before widening beyond recommendation evidence and inference
-boundaries.
+rollback before widening beyond private mode and sensitive area controls.

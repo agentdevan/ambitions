@@ -183,7 +183,14 @@ Current 4.0 status:
   sync/account/cloud behavior, production asset, or release-claim changes. EB15
   Recommendation Evidence And Inference Boundaries is the next eligible EB
   batch.
-- Active Planned / Queued: EB08-EB12, EB15-EB18, EB20-EB24, EB03-EB06, and EB26-EB40 Ambitions 4.0 External Brain Foundation expansion segment; not completed and not implemented in app behavior.
+- Complete: EB15 Recommendation Evidence And Inference Boundaries is complete
+  as a bounded recommendation domain boundary implementation. It adds a computed
+  evidence/inference/privacy/control summary for existing recommendation
+  explanations, backed by focused domain tests, without route/raw,
+  persistence/schema, UI, top-level-tab, dependency, workflow, signing, network,
+  sync/account/cloud behavior, production asset, or release-claim changes. EB16
+  Private Mode And Sensitive Area Controls is the next eligible EB batch.
+- Active Planned / Queued: EB08-EB12, EB16-EB18, EB20-EB24, EB03-EB06, and EB26-EB40 Ambitions 4.0 External Brain Foundation expansion segment; not completed and not implemented in app behavior.
 - Queued / Blocked: SI01-SI18 pending global-order selection or `Start Signature Interface Train` plus PXOS/ME/CS/SI quality gates.
 - Queued / Blocked: PD01-PD18 pending `Start Product Depth Train` plus PXOS/ME/CS/SI/AOS-if-needed gates.
 - Queued / Blocked: AOS01-AOS30 pending `Start AOS Train`.
