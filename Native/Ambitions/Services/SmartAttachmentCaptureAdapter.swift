@@ -23,7 +23,9 @@ struct SmartAttachmentCaptureDecision: Sendable, Equatable {
     }
 
     var accessibilityValue: String {
-        "\(receiptLine). \(placementPreview.suggestedDestination). \(placementPreview.consequenceLabel)"
+        let proof = result.selectedCandidate?.evidenceLabels.prefix(3).joined(separator: ", ")
+        let proofLine = proof?.isEmpty == false ? " Route evidence: \(proof ?? "")." : ""
+        return "\(receiptLine). \(placementPreview.suggestedDestination). \(placementPreview.consequenceLabel).\(proofLine)"
     }
 
     var accessibilityHint: String? {

@@ -147,10 +147,13 @@ Current 4.0 status:
   Composer And Routing is not
   complete and must not be run as one broad implementation batch. EB03A
   named owner files, non-owner boundaries, EB03B scope, tests, preview lane,
-  rollback, and proof gates. EB03B Universal Capture Composer Routing
-  Implementation is the next eligible EB implementation batch; it may touch
-  production Swift only inside the EB03A owner map and must prove route/raw/
-  persistence/accessibility/preview/rollback evidence before EB04.
+  rollback, and proof gates.
+- Complete: EB03B Universal Capture Composer Routing Implementation is
+  complete as the first scoped Capture composer/routing implementation pass.
+  It added local route-proof presentation and named Capture preview lanes
+  without route/raw, persistence/schema, top-level-tab, dependency, workflow,
+  signing, or release-claim changes. EB04 Capture Classification And
+  Clarification is the next eligible EB batch.
 - Active Planned / Queued: EB08-EB12, EB14-EB18, EB20-EB24, EB03-EB06, and EB26-EB40 Ambitions 4.0 External Brain Foundation expansion segment; not completed and not implemented in app behavior.
 - Queued / Blocked: SI01-SI18 pending global-order selection or `Start Signature Interface Train` plus PXOS/ME/CS/SI quality gates.
 - Queued / Blocked: PD01-PD18 pending `Start Product Depth Train` plus PXOS/ME/CS/SI/AOS-if-needed gates.

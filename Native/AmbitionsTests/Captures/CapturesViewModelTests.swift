@@ -96,12 +96,16 @@ final class CapturesViewModelTests: XCTestCase {
         XCTAssertEqual(viewModel.draftRoutePreview?.clarificationQuestion, "What should this become?")
         XCTAssertEqual(viewModel.draftRoutePreview?.choices.map(\.title), ["Task", "Goal", "Needs a Place"])
         XCTAssertEqual(viewModel.draftRoutePreview?.choices.count, 3)
+        XCTAssertEqual(viewModel.draftRoutePreview?.routeProofTitle, "Route needs your choice")
+        XCTAssertEqual(viewModel.draftRoutePreview?.routeProofDetail, "No safe destination yet; the capture stays private and editable.")
 
         viewModel.selectDraftRoute(.task)
 
         XCTAssertEqual(viewModel.draftRoutePreview?.receiptTitle, "Saved as Task · Today")
         XCTAssertEqual(viewModel.draftRoutePreview?.postInputStateTitle, "Suggested Place")
         XCTAssertEqual(viewModel.draftRoutePreview?.choices.first?.isSelected, true)
+        XCTAssertEqual(viewModel.draftRoutePreview?.routeProofTitle, "Chosen by you")
+        XCTAssertEqual(viewModel.draftRoutePreview?.routeProofDetail, "Chosen route")
     }
 
     func testF07ComposerPreviewUsesPlacementLanguageWithoutInboxFraming() async {
@@ -121,11 +125,33 @@ final class CapturesViewModelTests: XCTestCase {
         XCTAssertEqual(preview.appearanceLabel, "Today")
         XCTAssertEqual(preview.consequenceLabel, "Adds a visible Task to Today after you confirm.")
         XCTAssertEqual(preview.privacyLabel, "Private item")
+        XCTAssertEqual(preview.routeProofTitle, "Route evidence")
+        XCTAssertEqual(preview.routeProofDetail, "Standalone")
         XCTAssertFalse(preview.visibleCopy.localizedCaseInsensitiveContains("inbox"))
         XCTAssertFalse(preview.visibleCopy.localizedCaseInsensitiveContains("backlog"))
         XCTAssertFalse(preview.visibleCopy.localizedCaseInsensitiveContains("triage"))
         XCTAssertFalse(preview.visibleCopy.localizedCaseInsensitiveContains("classify"))
         XCTAssertFalse(preview.visibleCopy.localizedCaseInsensitiveContains("chat"))
+        XCTAssertFalse(preview.visibleCopy.localizedCaseInsensitiveContains("AI"))
+        XCTAssertFalse(preview.visibleCopy.localizedCaseInsensitiveContains("cloud"))
+    }
+
+    func testEB03BRouteProofUsesGoalEvidenceWhenAvailable() async {
+        let captureService = MutableCaptureService(captures: [])
+        let goalsService = StaticGoalsService(items: [
+            goalItem(id: "goal-music", title: "Music Goal", renderState: .active)
+        ])
+        let viewModel = CapturesViewModel()
+
+        await viewModel.load(captureService: captureService, goalsService: goalsService)
+        viewModel.updateDraftText("Finished Music Goal proof")
+
+        let preview = try! XCTUnwrap(viewModel.draftRoutePreview)
+        XCTAssertEqual(preview.receiptTitle, "Attached as Proof · Music Goal")
+        XCTAssertEqual(preview.routeProofTitle, "Route evidence")
+        XCTAssertEqual(preview.routeProofDetail, "goal, music")
+        XCTAssertTrue(preview.visibleCopy.localizedCaseInsensitiveContains("goal, music"))
+        XCTAssertFalse(preview.visibleCopy.localizedCaseInsensitiveContains("AI confidence"))
     }
 
     func testD12QuickCapturePersistsSmartAttachmentReceiptAndRoute() async {

@@ -22,6 +22,13 @@ struct CaptureDraftRoutePreviewCard: View {
                     state: livingState,
                     context: .capture
                 )
+                EvidenceLabel(
+                    preview.routeProofTitle,
+                    detail: preview.routeProofDetail,
+                    source: "Local route proof",
+                    state: livingState,
+                    context: .capture
+                )
                 placementDetails
                 clarificationQuestion
                 routeChoices

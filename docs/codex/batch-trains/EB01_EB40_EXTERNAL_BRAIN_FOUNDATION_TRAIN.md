@@ -15,11 +15,10 @@ Original formal Ambitions 4.0 batch count: 113. Active expansion added: 40. New 
 - 049 / 075A-075B: EB03 Universal Capture Composer And Routing. Status:
   split after scope blocker; parent EB03 remains not complete. EB03A Universal
   Capture Composer Routing Owner Map is complete as repair/evidence only.
-  EB03B Universal Capture Composer Routing Implementation is next eligible and
-  may change production Swift only inside the EB03A owner map with focused
-  route/raw/persistence/accessibility/preview/rollback proof. Boundary:
-  implementation remains inside Capture composer/routing after EB13, EB25, and
-  EB03A gates.
+  EB03B Universal Capture Composer Routing Implementation is complete as a
+  scoped Capture route-proof presentation pass with focused validation and no
+  route/raw or persistence/schema changes. Boundary: future EB03 follow-up work
+  remains inside Capture composer/routing after EB13, EB25, and EB03A gates.
 - 050: EB04 Capture Classification And Clarification. Status: active planned / queued; not completed. Boundary: Implementation allowed later for classification and one-question clarification only.
 - 051: EB05 Capture Clusters Review Bundles And Open Loops. Status: active planned / queued; not completed. Boundary: Implementation allowed later for clusters, review bundles, and open-loop signals only.
 - 052: EB06 Capture Receipts Undo And Reclassification. Status: active planned / queued; not completed. Boundary: Implementation allowed later for receipts, undo, and reclassification only.

@@ -643,6 +643,43 @@ private extension CapturesScreenShellMode {
     .preferredColorScheme(.dark)
 }
 
+#Preview("Capture Needs a Place") {
+    NavigationStack {
+        CapturesScreen(shellMode: .topLevelCapture, viewModel: CapturePreviewFactory.needsPlace())
+    }
+    .appContainer(PreviewAppContainerFactory.preview)
+    .ambitionTheme(.dark)
+    .preferredColorScheme(.dark)
+}
+
+#Preview("Capture Manual Route") {
+    NavigationStack {
+        CapturesScreen(shellMode: .topLevelCapture, viewModel: CapturePreviewFactory.manualRoute())
+    }
+    .appContainer(PreviewAppContainerFactory.preview)
+    .ambitionTheme(.dark)
+    .preferredColorScheme(.dark)
+}
+
+#Preview("Capture Dynamic Type") {
+    NavigationStack {
+        CapturesScreen(shellMode: .topLevelCapture, viewModel: CapturePreviewFactory.routeSuggestions())
+    }
+    .appContainer(PreviewAppContainerFactory.preview)
+    .ambitionTheme(.dark)
+    .preferredColorScheme(.dark)
+    .environment(\.dynamicTypeSize, .accessibility2)
+}
+
+#Preview("Capture Reduce Motion") {
+    NavigationStack {
+        CapturesScreen(shellMode: .topLevelCapture, viewModel: CapturePreviewFactory.routeSuggestions())
+    }
+    .appContainer(PreviewAppContainerFactory.preview)
+    .ambitionTheme(.dark)
+    .preferredColorScheme(.dark)
+}
+
 #Preview("Capture Receipt") {
     NavigationStack {
         CapturesScreen(shellMode: .topLevelCapture, viewModel: CapturePreviewFactory.receipt())
@@ -672,6 +709,19 @@ private enum CapturePreviewFactory {
             CaptureGoalOption(id: "goal-music", title: "Music Goal", subtitle: "Creative")
         ])))
         viewModel.updateDraftText("Finish lyrics before rehearsal")
+        return viewModel
+    }
+
+    static func needsPlace() -> CapturesViewModel {
+        let viewModel = CapturesViewModel(state: .loaded(CapturesViewState(captures: [], activeGoalOptions: [])))
+        viewModel.updateDraftText("NASA")
+        return viewModel
+    }
+
+    static func manualRoute() -> CapturesViewModel {
+        let viewModel = CapturesViewModel(state: .loaded(CapturesViewState(captures: [], activeGoalOptions: [])))
+        viewModel.updateDraftText("NASA")
+        viewModel.selectDraftRoute(.task)
         return viewModel
     }
 

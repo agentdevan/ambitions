@@ -179,6 +179,32 @@ final class SmartAttachmentServiceTests: XCTestCase {
         XCTAssertEqual(request?.assumptionSummary, "Saved as a standalone Task because no existing local destination was reliable enough.")
     }
 
+    func testEB03BRouteProofStaysLocalAndAccessible() {
+        let adapter = SmartAttachmentCaptureAdapter()
+
+        let decision = adapter.decision(
+            rawText: "Finished launch proof",
+            sourceType: .todayQuickCapture,
+            sourceSurface: "Capture",
+            candidates: [
+                SmartAttachmentDestinationCandidate(
+                    id: "goal-launch",
+                    label: "Launch",
+                    destinationKind: .existingGoal,
+                    supportedRouteTypes: [.proofItem],
+                    placementLabel: "Launch Goal"
+                )
+            ]
+        )
+
+        XCTAssertEqual(decision?.receiptLine, "Attached as Proof · Launch")
+        XCTAssertEqual(decision?.result.selectedCandidate?.evidenceLabels, ["launch"])
+        XCTAssertEqual(decision?.createCaptureRequest(rawText: "Finished launch proof").linkedGoalID, "goal-launch")
+        XCTAssertTrue(decision?.accessibilityValue.localizedCaseInsensitiveContains("Route evidence: launch") == true)
+        XCTAssertFalse(decision?.accessibilityValue.localizedCaseInsensitiveContains("AI") == true)
+        XCTAssertFalse(decision?.accessibilityValue.localizedCaseInsensitiveContains("cloud") == true)
+    }
+
     func testD12CaptureAdapterManualNeedsPlaceChoiceStaysPressureFree() {
         let adapter = SmartAttachmentCaptureAdapter()
 

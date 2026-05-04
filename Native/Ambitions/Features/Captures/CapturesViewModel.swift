@@ -67,6 +67,8 @@ struct CaptureDraftRoutePreview: Sendable, Equatable {
     let postInputStateTitle: String
     let receiptTitle: String
     let summary: String
+    let routeProofTitle: String
+    let routeProofDetail: String
     let destinationLabel: String
     let objectTypeLabel: String
     let appearanceLabel: String
@@ -88,6 +90,8 @@ struct CaptureDraftRoutePreview: Sendable, Equatable {
             postInputStateTitle,
             receiptTitle,
             summary,
+            routeProofTitle,
+            routeProofDetail,
             destinationLabel,
             objectTypeLabel,
             appearanceLabel,
@@ -371,6 +375,8 @@ final class CapturesViewModel {
             postInputStateTitle: placementPreview.postInputStateTitle,
             receiptTitle: decision.receiptLine,
             summary: decision.summary,
+            routeProofTitle: routeProofTitle(from: decision),
+            routeProofDetail: routeProofDetail(from: decision),
             destinationLabel: placementPreview.suggestedDestination,
             objectTypeLabel: placementPreview.objectTypeLabel,
             appearanceLabel: placementPreview.appearanceLabel,
@@ -386,6 +392,33 @@ final class CapturesViewModel {
             accessibilityValue: decision.accessibilityValue,
             accessibilityHint: decision.accessibilityHint
         )
+    }
+
+    private func routeProofTitle(from decision: SmartAttachmentCaptureDecision) -> String {
+        if decision.result.selectedCandidate?.target.isNeedsPlace == true {
+            return "Route needs your choice"
+        }
+        if decision.result.selectedCandidate?.isSuggestedAttachment == true {
+            return "Suggested attachment available"
+        }
+        if decision.selectedRouteType != nil {
+            return "Chosen by you"
+        }
+        return "Route evidence"
+    }
+
+    private func routeProofDetail(from decision: SmartAttachmentCaptureDecision) -> String {
+        if decision.result.selectedCandidate?.target.isNeedsPlace == true {
+            return "No safe destination yet; the capture stays private and editable."
+        }
+        if let labels = decision.result.selectedCandidate?.evidenceLabels,
+           labels.isEmpty == false {
+            return labels.prefix(3).joined(separator: ", ")
+        }
+        if decision.selectedRouteType != nil {
+            return "Manual route choice; you can still change it before saving."
+        }
+        return "Local text only; no calendar, network, account, or cloud route."
     }
 
     private func clarificationChoices(from decision: SmartAttachmentCaptureDecision) -> [CaptureDraftRouteChoice] {
