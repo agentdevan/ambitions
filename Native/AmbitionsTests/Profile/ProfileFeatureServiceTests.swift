@@ -454,6 +454,11 @@ final class ProfileFeatureServiceTests: XCTestCase {
             $0.detail.contains("Deletion is not claimed")
         }))
         XCTAssertTrue(actions.contains(where: {
+            $0.id == "reject-teaching" &&
+            $0.statusLabel == "Review first" &&
+            $0.detail.contains("receipt-backed rejection")
+        }))
+        XCTAssertTrue(actions.contains(where: {
             $0.id == "pause-proof" &&
             $0.statusLabel == "Review later"
         }))
@@ -512,6 +517,7 @@ final class ProfileFeatureServiceTests: XCTestCase {
         XCTAssertEqual(narrative.sensitiveStatusLabel, "No sensitive inference")
         XCTAssertTrue(narrative.usedFor.contains("Why Changed"))
         XCTAssertTrue(narrative.actions.contains(where: { $0.id == "narrative-correct" && $0.statusLabel == "Use owning surface" }))
+        XCTAssertTrue(narrative.actions.contains(where: { $0.id == "narrative-reject" && $0.statusLabel == "Review first" }))
         XCTAssertTrue(narrative.actions.contains(where: { $0.id == "narrative-delete" && $0.statusLabel == "Needs confirmation" }))
         XCTAssertTrue(narrative.actions.contains(where: { $0.id == "narrative-pause" && $0.statusLabel == "Review later" }))
         XCTAssertEqual(pattern.reviewLabel, "Review before reuse")
@@ -520,6 +526,36 @@ final class ProfileFeatureServiceTests: XCTestCase {
         XCTAssertFalse(dashboard.memoryControls.footer.localizedCaseInsensitiveContains("black-box"))
         XCTAssertFalse(dashboard.memoryControls.conservativePatterns.map(\.summary).joined(separator: " ").localizedCaseInsensitiveContains("black-box"))
         XCTAssertFalse(dashboard.memoryControls.narrativeMemories.map(\.summary).joined(separator: " ").localizedCaseInsensitiveContains("sensitive identity"))
+    }
+
+    func testEB11MemoryControlsExposeCorrectionDeletionAndRejectionBoundaries() async throws {
+        let repositories = try await makeRepositories()
+        let service = RepositoryBackedProfileService(repositories: repositories)
+
+        let dashboard = try await service.loadProfileDashboard()
+        let rejected = try XCTUnwrap(dashboard.memoryControls.items.first(where: { $0.id == "profile-memory-rejected" }))
+        let correctionActions = dashboard.memoryControls.groups
+            .flatMap(\.items)
+            .first(where: { $0.id == "memory-item-corrections" })?
+            .actions ?? []
+
+        XCTAssertEqual(rejected.title, "Rejected memory")
+        XCTAssertEqual(rejected.valueLabel, "Review first")
+        XCTAssertTrue(rejected.subtitle?.contains("source-tied") ?? false)
+        XCTAssertTrue(rejected.subtitle?.contains("durable rejection rules wait") ?? false)
+        XCTAssertTrue(correctionActions.contains(where: {
+            $0.id == "correct-teaching" &&
+            $0.statusLabel == "Available when present"
+        }))
+        XCTAssertTrue(correctionActions.contains(where: {
+            $0.id == "reject-teaching" &&
+            $0.detail.contains("receipt-backed rejection")
+        }))
+        XCTAssertTrue(correctionActions.contains(where: {
+            $0.id == "delete-teaching" &&
+            $0.detail.contains("Deletion is not claimed")
+        }))
+        XCTAssertTrue(dashboard.memoryControls.footer.contains("durable rejected-memory rules remain manual/future"))
     }
 
     func testCorrectionsAndLedgerCountsUseExistingLocalRepositories() async throws {

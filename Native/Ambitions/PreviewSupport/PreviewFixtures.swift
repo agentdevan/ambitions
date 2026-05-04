@@ -343,7 +343,8 @@ struct PreviewFixtures: Sendable {
                     SettingsItem(id: "profile-memory-ledger", title: "Event Ledger", subtitle: "Recent meaningful actions and changes can support explanations. Full raw history stays off this top-level surface.", icon: "list.bullet.rectangle", valueLabel: "2 recent"),
                     SettingsItem(id: "profile-memory-evidence", title: "Proof and feedback", subtitle: "Progress evidence and feedback help Ambitions avoid relying only on intention.", icon: "checkmark.seal", valueLabel: "4 local"),
                     SettingsItem(id: "profile-memory-corrections", title: "Corrections and teaching", subtitle: "User-confirmed corrections can adjust future explanations where existing teaching signals support it.", icon: "slider.horizontal.3", valueLabel: "2 local"),
-                    SettingsItem(id: "profile-memory-forget", title: "Forget or clear memory", subtitle: "Destructive memory deletion is not exposed here because safe review, confirmation, and undo coverage are not complete.", icon: "trash.slash", valueLabel: "Unavailable")
+                    SettingsItem(id: "profile-memory-forget", title: "Forget or clear memory", subtitle: "Destructive memory deletion is not exposed here because safe review, confirmation, and undo coverage are not complete.", icon: "trash.slash", valueLabel: "Unavailable"),
+                    SettingsItem(id: "profile-memory-rejected", title: "Rejected memory", subtitle: "Rejected learning stays reviewable and source-tied here; durable rejection rules wait for receipt-backed correction and delete coverage.", icon: "xmark.seal", valueLabel: "Review first")
                 ],
                 consent: ProfilePersonalizationConsentState(
                     title: "Personalization consent",
@@ -416,6 +417,7 @@ struct PreviewFixtures: Sendable {
                                 privacyLabel: "Correctable",
                                 actions: [
                                     ProfileMemoryAction(id: "correct-teaching", title: "Correct", statusLabel: "Available", detail: "Corrections stay tied to existing teaching and explanation paths.", state: .success),
+                                    ProfileMemoryAction(id: "reject-teaching", title: "Reject reuse", statusLabel: "Review first", detail: "Rejected correction memory is treated as a review need until receipt-backed rejection and delete coverage are proven.", state: .warning),
                                     ProfileMemoryAction(id: "delete-teaching", title: "Delete", statusLabel: "Needs confirmation", detail: "Deletion is not claimed until safe review, confirmation, and undo coverage exist.", state: .warning)
                                 ],
                                 accessibilityLabel: "Corrections and teaching memory",
@@ -436,6 +438,7 @@ struct PreviewFixtures: Sendable {
                         sensitiveStatusLabel: "No sensitive inference",
                         actions: [
                             ProfileMemoryAction(id: "narrative-correct", title: "Correct", statusLabel: "Use owning surface", detail: "Goal Detail, Capture, and explanation controls remain the supported correction paths.", state: .success),
+                            ProfileMemoryAction(id: "narrative-reject", title: "Reject reuse", statusLabel: "Review first", detail: "Rejection is not durable memory behavior here; it is a safe review boundary until receipts and delete coverage exist.", state: .warning),
                             ProfileMemoryAction(id: "narrative-delete", title: "Delete", statusLabel: "Needs confirmation", detail: "Deletion is not claimed until safe review, confirmation, and undo coverage exist.", state: .warning),
                             ProfileMemoryAction(id: "narrative-pause", title: "Pause use", statusLabel: "Review later", detail: "Pause is shown as a review need until a safe preference exists.", state: .warning)
                         ],

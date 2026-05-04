@@ -1110,6 +1110,13 @@ private extension RepositoryBackedProfileService {
                     subtitle: "Destructive memory deletion is not exposed here because safe review, confirmation, and undo coverage are not complete.",
                     icon: "trash.slash",
                     valueLabel: "Unavailable"
+                ),
+                SettingsItem(
+                    id: "profile-memory-rejected",
+                    title: "Rejected memory",
+                    subtitle: "Rejected learning stays reviewable and source-tied here; durable rejection rules wait for receipt-backed correction and delete coverage.",
+                    icon: "xmark.seal",
+                    valueLabel: "Review first"
                 )
             ],
             consent: ProfilePersonalizationConsentState(
@@ -1230,6 +1237,7 @@ private extension RepositoryBackedProfileService {
                             privacyLabel: "Correctable",
                             actions: [
                                 memoryAction(id: "correct-teaching", title: "Correct", statusLabel: correctionCount == 0 ? "Available when present" : "Available", detail: "Corrections stay tied to existing teaching and explanation paths.", state: correctionCount == 0 ? .default : .success),
+                                memoryAction(id: "reject-teaching", title: "Reject reuse", statusLabel: "Review first", detail: "Rejected correction memory is treated as a review need until receipt-backed rejection and delete coverage are proven.", state: .warning),
                                 memoryAction(id: "delete-teaching", title: "Delete", statusLabel: "Needs confirmation", detail: "Deletion is not claimed until safe review, confirmation, and undo coverage exist.", state: .warning)
                             ],
                             accessibilityLabel: "Corrections and teaching memory",
@@ -1242,7 +1250,7 @@ private extension RepositoryBackedProfileService {
             narrativeMemories: narrativeMemories,
             conservativePatterns: conservativePatterns,
             recoverySummary: hasRecentMemory ? "Memory can be reviewed and corrected from the owning surfaces. Broad delete, forget, and pause controls remain confirmation-gated or future-owned." : "There is little local memory yet. Ambitions should say when a recommendation is evidence-light instead of pretending it knows more.",
-            footer: "What Ambitions Knows is local, inspectable, and correctable through existing safe seams. Narrative memory only appears from explicit local evidence, receipts, corrections, reviews, or confirmations; broad forgetting and deletion remain manual/future until the safe boundary can prove the result."
+            footer: "What Ambitions Knows is local, inspectable, and correctable through existing safe seams. Narrative memory only appears from explicit local evidence, receipts, corrections, reviews, or confirmations; broad forgetting, deletion, and durable rejected-memory rules remain manual/future until the safe boundary can prove the result."
         )
     }
 
@@ -1266,6 +1274,7 @@ private extension RepositoryBackedProfileService {
                     sensitiveStatusLabel: "No sensitive inference",
                     actions: [
                         memoryAction(id: "narrative-correct", title: "Correct", statusLabel: "Use owning surface", detail: "Goal Detail, Capture, and explanation controls remain the supported correction paths.", state: .success),
+                        memoryAction(id: "narrative-reject", title: "Reject reuse", statusLabel: "Review first", detail: "Rejection is not durable memory behavior here; it is a safe review boundary until receipts and delete coverage exist.", state: .warning),
                         memoryAction(id: "narrative-delete", title: "Delete", statusLabel: "Needs confirmation", detail: "Deletion is not claimed until safe review, confirmation, and undo coverage exist.", state: .warning),
                         memoryAction(id: "narrative-pause", title: "Pause use", statusLabel: "Review later", detail: "Pause is shown as a review need until a safe preference exists.", state: .warning)
                     ],
