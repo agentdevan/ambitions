@@ -23,6 +23,8 @@ struct PlanScreen: View {
 
             ScrollView {
                 LazyVStack(alignment: .leading, spacing: theme.spacing.lg) {
+                    TopLevelSurfaceCompositionBar(surface: .plan)
+
                     switch viewModel.state {
                     case .loading:
                         AsyncStateCard(.loading(lines: 9))

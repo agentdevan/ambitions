@@ -21,6 +21,8 @@ struct ProfileScreen: View {
     var body: some View {
         ScrollView {
             LazyVStack(alignment: .leading, spacing: theme.spacing.lg) {
+                TopLevelSurfaceCompositionBar(surface: .you)
+
                 switch viewModel.state {
                 case .loading:
                     AsyncStateCard(.loading(lines: 12))

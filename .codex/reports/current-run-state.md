@@ -2,7 +2,7 @@
 
 Date: 2026-05-04
 Active train: Signature Interface
-Current batch: SI17 Top Level Surface Composition Implementation queued
+Current batch: SI18 Signature Interface Handoff And Product Depth Readiness queued
 Scope: Complete: EB03A Universal Capture Composer Routing Owner Map. Complete:
 EB03B Universal Capture Composer Routing Implementation. Complete: EB04
 Capture Classification And Clarification. Complete: EB05 Capture Clusters
@@ -99,7 +99,10 @@ accessibility/release claim change was made.
   shared Interaction Motion Haptics System implementation evidence. SI13 is
   complete as shared Loading Empty Degraded State Primitives implementation
   evidence. SI14 is complete as shared Iconography Symbol And Status Grammar
-  implementation evidence.
+  implementation evidence. SI15 is complete as shared Accessibility Adaptive
+  Interface evidence. SI16 is complete as Preview Fixture And Visual QA
+  Infrastructure evidence. SI17 is complete as bounded top-level surface
+  composition evidence across Today, Goals, Capture, Plan, and You.
 - PXEQ is a mandatory product-experience gate for EB UI-affecting batches; it
   is not a shipped app feature and not a new EB batch identity.
 - Optimized global order after EB32 places DAV01-DAV15 before UI-heavy EB
@@ -468,12 +471,12 @@ public accessibility or profiling proof.
 
 ## Next Safe Path
 
-Run SI17 Top Level Surface Composition Implementation next if global train rules permit. Do not restart broad
+Run SI18 Signature Interface Handoff And Product Depth Readiness next if global train rules permit. Do not restart broad
 EB03, EB04, EB05, EB06, EB14, EB15, EB16, EB17, EB18, EB26, EB27, EB28, EB29,
 EB30, EB08, EB09, EB10, EB11, EB12, EB33, EB34, EB35, EB36, EB37, EB38, EB39,
 EB40, CS10, SI01, SI02, SI03, SI04, SI05, SI06, SI07, SI08, SI09, SI10, SI11,
-SI12, SI13, SI14, SI15, SI16, or completed DAV / EB20-EB24 batches. SI17 must remain a
-bounded Signature Interface top-level surface composition pass
+SI12, SI13, SI14, SI15, SI16, SI17, or completed DAV / EB20-EB24 batches. SI18 must remain a
+bounded Signature Interface handoff and readiness pass
 unless its prompt
 requires a narrower stop or repair.
 
@@ -522,15 +525,38 @@ Yellow items are no rendered screenshot artifact, no human visual approval,
 no physical-device proof, no manual VoiceOver traversal, no contrast review,
 no profiling proof, and existing advisory scan backlog.
 
+## SI17 Top Level Surface Composition Implementation
+
+Date: 2026-05-04
+Result: PASS WITH YELLOW
+
+SI17 result: PASS WITH YELLOW. `docs/audits/si17-top-level-surface-composition-report.md`
+records the bounded top-level composition primitive and five-surface adoption.
+`Sources/Components/TopLevelSurfaceCompositionPrimitives.swift` adds a shared
+orientation model and `TopLevelSurfaceCompositionBar` for Today, Goals,
+Capture, Plan, and You. `Sources/Previews/TopLevelSurfaceCompositionPreviews.swift`
+adds named default, Dynamic Type, and static-motion preview variants.
+`Native/AmbitionsTests/App/TopLevelSurfaceCompositionTests.swift` adds focused
+automated proof that the canonical five surfaces stay fixed, each surface has
+one primary Ambitions object, supporting modules stay subordinate, and generic
+surface drift / unsupported claim language is absent. The five top-level
+screens add the bar without changing routes, raw values, persistence/schema,
+dependencies, workflows, signing, entitlements, top-level tabs, LDI runtime,
+or release claims. `xcodegen generate` and focused
+`TopLevelSurfaceCompositionTests` passed. Yellow items are no rendered
+screenshot artifact, no human visual approval, no physical-device proof, no
+manual VoiceOver traversal, existing large Plan/Profile owner-file backlog,
+and existing advisory scan backlog.
+
 ## Living Dream Architecture Integration Pause
 
 Date: 2026-05-04
 Batch type: docs/Codex OS/global-train integration only.
 
-- SI01-SI16 completion history above remains binding and is not rewritten.
-- SI17 remains the next eligible implementation batch after SI16.
+- SI01-SI17 completion history above remains binding and is not rewritten.
+- SI18 remains the next eligible handoff batch after SI17.
 - LDI01-LDI22 Living Dream Intelligence Train is inserted after AOS30 by default.
-- Queued SI17-SI18, PD01-PD18, and AOS01-AOS30 prompts now carry LDI hook notes only where future/queued.
+- Queued SI18, PD01-PD18, and AOS01-AOS30 prompts now carry LDI hook notes only where future/queued.
 - This integration does not claim runtime Living Dream behavior, remote model service,
   server-owned continuity, Ambitions-operated data storage, CloudKit entitlement changes,
   device proof, public accessibility compliance, beta distribution proof,
