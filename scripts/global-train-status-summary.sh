@@ -78,6 +78,7 @@ for id in EB01 EB13 EB25 EB19 EB02 EB07 EB31 EB32 DAV01 DAV02 DAV03 DAV04 DAV05 
     exit 0
   fi
 done
+echo "Active train: Signature Interface"
 echo "Next eligible batch: SI01 Signature Interface Architecture"
 echo "Global order: 103"
 echo "Total planned batches: 168"

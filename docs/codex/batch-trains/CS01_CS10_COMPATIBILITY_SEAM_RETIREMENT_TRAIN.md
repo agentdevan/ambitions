@@ -2,7 +2,7 @@
 
 <!-- markdownlint-disable MD013 -->
 
-Status: Active Ambitions 4.0 train manifest; CS01 audit evidence, CS07 external compatibility proof, CS08 import/export/persistence proof, CS02A/CS02B Profile/You compatibility evidence, CS03A/CS03B Insights compatibility evidence, CS04A/CS04B Habits/Ritual/Plan compatibility evidence, CS05A/CS05B ActiveFocus/TodayFocus compatibility evidence, and CS06A/CS06B Failed-Taxonomy compatibility evidence complete; CS02C-CS06C remain deferred and CS09 is accepted Yellow / parked after conditional-scope repair because no named compatibility regression target exists.
+Status: Complete as Ambitions 4.0 compatibility handoff evidence with accepted Yellow; CS01 audit evidence, CS07 external compatibility proof, CS08 import/export/persistence proof, CS02A/CS02B Profile/You compatibility evidence, CS03A/CS03B Insights compatibility evidence, CS04A/CS04B Habits/Ritual/Plan compatibility evidence, CS05A/CS05B ActiveFocus/TodayFocus compatibility evidence, CS06A/CS06B Failed-Taxonomy compatibility evidence, CS09 conditional-scope repair, and CS10 handoff are complete. CS02C-CS06C and CS09C remain deferred; no broad seam retirement is claimed.
 
 ## Start Rule
 
@@ -44,7 +44,7 @@ Allowed files are the files named by each batch prompt. Forbidden across the tra
 - CS07: External Route Widget AppIntent Compatibility Proof. Action: proves. Seam: external routes, widget payloads, App Intent/Shortcut payloads. Gate: replacement map and compatibility proof before deletion. Status: complete as focused simulator/unit proof; no seam retired.
 - CS08: Import Export Persistence Compatibility Proof. Action: proves. Seam: import/export payloads and persistence/schema compatibility views. Gate: replacement map and compatibility proof before deletion. Status: complete as focused simulator/unit proof; no seam retired.
 - CS09: Compatibility Regression Repair. Action: conditional repairs only. Seam: files named by failed CS evidence. Gate: named regression target with expected behavior, actual broken behavior, source truth, failing evidence, impacted files, allowed boundary, validation lane, and rollback plan. Status: accepted Yellow / parked after CS09A/CS09B conditional-scope repair; no current named compatibility regression target exists. CS09C is deferred until a target exists.
-- CS10: Compatibility Retirement Handoff. Action: hands off. Seam: docs/audits, docs/codex, .codex/reports. Gate: replacement map and compatibility proof before deletion.
+- CS10: Compatibility Retirement Handoff. Action: hands off. Seam: docs/audits, docs/codex, .codex/reports. Status: complete as docs-only handoff evidence with residual seam ledger; no seam retired.
 
 ## Validation Matrix
 

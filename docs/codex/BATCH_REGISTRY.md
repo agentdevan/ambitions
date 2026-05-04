@@ -85,7 +85,8 @@ Current 4.0 status:
 - Completed: CS06B Failed-Taxonomy Compatibility Proof as focused simulator/unit proof; no seam retired and no production Swift edited.
 - Accepted Yellow: CS06C Narrow Internal Failed-Taxonomy Retirement remains blocked/deferred until a later proof shows retirement is safe.
 - Accepted Yellow / Parked: CS09 Compatibility Regression Repair was repaired into CS09A/CS09B/CS09C internal stages. CS09A/CS09B are docs/protocol proof stages; no named compatibility regression target exists, so CS09C is deferred.
-- Queued / Blocked: CS02C, CS03C, CS04C, CS05C, CS06C, CS09C, and CS10 pending current global preauthorization or `Start CS Train`.
+- Complete: CS10 Compatibility Retirement Handoff is complete as docs-only handoff evidence. It records the compatibility retirement handoff, residual seam ledger, and deferred owners for CS02C-CS06C and CS09C without retiring seams, touching production Swift/tests/project files, changing route/raw values, persistence/schema, import/export, widget/App Intent/Shortcut behavior, app behavior, or release/platform posture.
+- Queued / Blocked: CS02C, CS03C, CS04C, CS05C, CS06C, and CS09C remain deferred until a named owner batch and proof target exists.
 - Complete: EB01 External Brain Source Truth And Kernel Architecture is complete as evidence/reconciliation only; External Brain app behavior is not implemented.
 - Complete: EB13 Trust Privacy User Control Canon is complete as canon/evidence only; Trust Center, private mode, export/delete, and durable memory app behavior are not implemented.
 - Complete: EB25 Accessibility Cognitive Load Canon is complete as canon/evidence only; accessibility modes, UI behavior, and public conformance proof are not implemented.
@@ -362,6 +363,9 @@ Current 4.0 status:
   proof, release/RC/TestFlight/App Store posture upgrade, or release-claim
   changes.
 - Complete: EB01-EB40 Ambitions 4.0 External Brain Foundation expansion segment is closed with accepted Yellow and is not whole-product/release/app-store/accessibility/device proof.
+- Complete: CS10 Compatibility Retirement Handoff is complete as docs-only
+  compatibility handoff evidence. It records residual seam owners and does not
+  retire CS02C-CS06C/CS09C seams or change app behavior.
 - Queued / Blocked: SI01-SI18 pending global-order selection or `Start Signature Interface Train` plus PXOS/ME/CS/SI quality gates.
 - Queued / Blocked: PD01-PD18 pending `Start Product Depth Train` plus PXOS/ME/CS/SI/AOS-if-needed gates.
 - Queued / Blocked: AOS01-AOS30 pending `Start AOS Train`.

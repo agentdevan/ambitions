@@ -2,7 +2,7 @@
 
 Date: 2026-05-04
 Active train: Ambitions 4.0 External Brain Foundation
-Current batch: CS10 next eligible after EB40 closeout
+Current batch: SI01 next eligible after CS10 handoff
 Scope: Complete: EB03A Universal Capture Composer Routing Owner Map. Complete:
 EB03B Universal Capture Composer Routing Implementation. Complete: EB04
 Capture Classification And Clarification. Complete: EB05 Capture Clusters
@@ -84,8 +84,8 @@ accessibility/release claim change was made.
   risk-register closeout. EB37 is complete as a docs/canon privacy threat-model
   batch. EB38 is complete as an accessibility evidence closeout. EB39 is
   complete as an External Brain handoff and RC implications batch. EB40 is
-  complete as the External Brain train closeout. CS10 is the next eligible
-  global batch.
+  complete as the External Brain train closeout. CS10 is complete as a
+  compatibility handoff. SI01 is the next eligible global batch.
 - PXEQ is a mandatory product-experience gate for EB UI-affecting batches; it
   is not a shipped app feature and not a new EB batch identity.
 - Optimized global order after EB32 places DAV01-DAV15 before UI-heavy EB
@@ -318,10 +318,18 @@ made. Yellow items are human/device/accessibility proof, rendered proof,
 profiling proof, export/delete and durable-memory future implementation,
 sync/account/cloud future implementation, and existing advisory backlog.
 
+CS10 result: PASS WITH YELLOW. `docs/audits/cs10-compatibility-retirement-handoff-report.md`
+records the compatibility retirement handoff and residual seam ledger. No
+production Swift, tests, project, route/raw, persistence/schema, import/export,
+widget/App Intent/Shortcut, app behavior, seam retirement, or release/platform
+posture changes were made. Yellow items are deferred CS02C-CS06C/CS09C seams,
+human/platform proof, and existing advisory backlog.
+
 ## Next Safe Path
 
-Run CS10 Compatibility Retirement Handoff next if global train rules permit. Do not restart broad
+Run SI01 Signature Interface Architecture next if global train rules permit. Do not restart broad
 EB03, EB04, EB05, EB06, EB14, EB15, EB16, EB17, EB18, EB26, EB27, EB28, EB29,
 EB30, EB08, EB09, EB10, EB11, EB12, EB33, EB34, EB35, EB36, EB37, EB38, EB39,
-EB40, or completed DAV / EB20-EB24 batches. CS10 must remain a compatibility
-handoff and must not claim retired seams beyond existing CS proof.
+EB40, CS10, or completed DAV / EB20-EB24 batches. SI01 must remain an
+architecture/source-truth batch unless its prompt explicitly permits production
+implementation.
