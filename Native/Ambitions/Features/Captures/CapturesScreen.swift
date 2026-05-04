@@ -66,6 +66,7 @@ struct CapturesScreen: View {
                     get: { viewModel.draftText },
                     set: { viewModel.updateDraftText($0) }
                 ),
+                routePreview: viewModel.draftRoutePreview,
                 error: viewModel.draftError,
                 isSubmitEnabled: canSubmitDraft,
                 onSubmit: {
@@ -78,6 +79,9 @@ struct CapturesScreen: View {
                 },
                 onMicrophone: {
                     viewModel.draftError = "Voice capture is not connected yet. Type it here for now."
+                },
+                onRouteChoice: { routeType in
+                    viewModel.selectDraftRoute(routeType)
                 }
             )
         }
@@ -461,127 +465,6 @@ private struct CaptureGroup {
     let title: String
     let subtitle: String
     let captures: [Capture]
-}
-
-private struct CaptureAtmosphereComposer: View {
-    @Binding var text: String
-
-    let error: String?
-    let isSubmitEnabled: Bool
-    let onSubmit: () -> Void
-    let onMicrophone: () -> Void
-
-    var body: some View {
-        CaptureComposer(
-            text: $text,
-            error: error,
-            isSubmitEnabled: isSubmitEnabled,
-            onSubmit: onSubmit,
-            onMicrophone: onMicrophone
-        )
-    }
-}
-
-private struct CaptureComposer: View {
-    @Environment(\.ambitionTheme) private var theme
-    @Environment(\.accessibilityReduceMotion) private var reduceMotion
-    @Binding var text: String
-
-    let error: String?
-    let isSubmitEnabled: Bool
-    let onSubmit: () -> Void
-    let onMicrophone: () -> Void
-
-    var body: some View {
-        VStack(alignment: .leading, spacing: theme.spacing.xs) {
-            HStack(alignment: .bottom, spacing: theme.spacing.sm) {
-                HStack(spacing: theme.spacing.sm) {
-                    TextField("What needs a place?", text: $text, axis: .vertical)
-                        .font(theme.typography.body)
-                        .foregroundStyle(theme.colors.textPrimary)
-                        .lineLimit(1...3)
-                        .submitLabel(.done)
-                        .onSubmit {
-                            if isSubmitEnabled {
-                                onSubmit()
-                            }
-                        }
-                        .accessibilityIdentifier("captures.quick-input")
-                        .accessibilityLabel("What needs a place?")
-
-                    Button(action: onMicrophone) {
-                        Image(systemName: "mic.fill")
-                            .font(.system(size: theme.icon.smallSize, weight: .semibold))
-                            .frame(width: 30, height: 30)
-                    }
-                    .buttonStyle(.plain)
-                    .foregroundStyle(theme.colors.textSecondary)
-                    .accessibilityIdentifier("captures.quick-mic")
-                    .accessibilityLabel("Voice capture")
-                    .accessibilityHint("Voice capture is not connected yet.")
-                }
-                .padding(.horizontal, theme.spacing.md)
-                .padding(.vertical, theme.spacing.sm)
-                .background(
-                    ZStack {
-                        ContextAtmosphereLayer(
-                            context: .capture,
-                            state: isSubmitEnabled ? .active : .empty,
-                            intensity: 0.42
-                        )
-                        RoundedRectangle(cornerRadius: theme.radius.lg, style: .continuous)
-                            .fill(theme.colors.surfaceSecondary.opacity(0.92))
-                    }
-                )
-                .overlay(
-                    RoundedRectangle(cornerRadius: theme.radius.lg, style: .continuous)
-                        .stroke(theme.colors.strokeSubtle)
-                )
-
-                Button(action: onSubmit) {
-                    Image(systemName: "plus")
-                        .font(.system(size: theme.icon.smallSize, weight: .bold))
-                        .frame(width: 42, height: 42)
-                }
-                .buttonStyle(AmbitionPressableButtonStyle(state: isSubmitEnabled ? .selected : .disabled))
-                .disabled(isSubmitEnabled == false)
-                .accessibilityIdentifier("captures.quick-submit")
-                .accessibilityLabel("Save")
-            }
-
-            if let error {
-                Text(error)
-                    .font(theme.typography.caption)
-                    .foregroundStyle(theme.colors.warning)
-                    .accessibilityIdentifier("captures.quick-error")
-            }
-
-            EvidenceLabel(
-                isSubmitEnabled ? "Ready to place" : "Needs a place",
-                detail: isSubmitEnabled
-                    ? "Ambitions will suggest a route after you save."
-                    : "Type one real thing; no inbox pressure is added.",
-                source: "Capture composer",
-                state: isSubmitEnabled ? .active : .empty,
-                context: .capture
-            )
-        }
-        .padding(.horizontal, theme.spacing.lg)
-        .padding(.top, theme.spacing.sm)
-        .padding(.bottom, theme.spacing.sm)
-        .background(.ultraThinMaterial)
-        .overlay(alignment: .top) {
-            Rectangle()
-                .fill(theme.colors.strokeSubtle)
-                .frame(height: 1)
-                .accessibilityHidden(true)
-        }
-        .animation(
-            DAVMotionPreset.receiptConfirmation.animation(theme: theme, reduceMotion: reduceMotion),
-            value: isSubmitEnabled
-        )
-        .accessibilityIdentifier("captures.composer")
-    }
 }
 
 private extension NowContextLens {

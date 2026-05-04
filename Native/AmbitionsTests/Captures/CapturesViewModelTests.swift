@@ -136,6 +136,32 @@ final class CapturesViewModelTests: XCTestCase {
         XCTAssertFalse(preview.visibleCopy.localizedCaseInsensitiveContains("cloud"))
     }
 
+    func testSI09ComposerPresentationRevealsRouteWithoutSilentMutationCopy() async {
+        let captureService = MutableCaptureService(captures: [])
+        let goalsService = StaticGoalsService(items: [])
+        let viewModel = CapturesViewModel()
+
+        await viewModel.load(captureService: captureService, goalsService: goalsService)
+        viewModel.updateDraftText("Book dentist")
+
+        let presentation = CaptureAtmosphereComposerPresentation(
+            text: viewModel.draftText,
+            routePreview: viewModel.draftRoutePreview,
+            error: nil,
+            isSubmitEnabled: true
+        )
+
+        XCTAssertTrue(presentation.isRouteRevealVisible)
+        XCTAssertEqual(presentation.placementTitle, "Suggested Place")
+        XCTAssertEqual(presentation.destinationLabel, "Task · Today")
+        XCTAssertEqual(presentation.privacyLabel, "Private item")
+        XCTAssertEqual(presentation.submitLabel, "Save capture")
+        XCTAssertTrue(presentation.evidenceDetail.localizedCaseInsensitiveContains("after you confirm"))
+        XCTAssertFalse(presentation.accessibilityValue.localizedCaseInsensitiveContains("chat"))
+        XCTAssertFalse(presentation.accessibilityValue.localizedCaseInsensitiveContains("calendar event"))
+        XCTAssertFalse(presentation.accessibilityValue.localizedCaseInsensitiveContains("AI"))
+    }
+
     func testEB03BRouteProofUsesGoalEvidenceWhenAvailable() async {
         let captureService = MutableCaptureService(captures: [])
         let goalsService = StaticGoalsService(items: [
