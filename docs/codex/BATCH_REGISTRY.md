@@ -321,7 +321,14 @@ Current 4.0 status:
   network, sync/account/cloud behavior, production asset, screenshot proof, or
   release-claim changes. EB36 External Brain QA Regression And Risk Register is
   the next eligible EB batch.
-- Active Planned / Queued: EB36-EB40 Ambitions 4.0 External Brain Foundation expansion segment; not completed and not implemented in app behavior.
+- Complete: EB36 External Brain QA Regression And Risk Register is complete as
+  a docs-only QA/risk closeout. It upgrades the External Brain risk register
+  with durable risk IDs, owners, mitigations, next-review lanes, release impact,
+  and an EB36 regression matrix, without Native/Sources/AppUI/test/project,
+  route/raw value, persistence/schema, dependency, workflow, signing, production
+  asset, app behavior, screenshot proof, or release-claim changes. EB37 External
+  Brain Privacy Threat Model is the next eligible EB batch.
+- Active Planned / Queued: EB37-EB40 Ambitions 4.0 External Brain Foundation expansion segment; not completed and not implemented in app behavior.
 - Queued / Blocked: SI01-SI18 pending global-order selection or `Start Signature Interface Train` plus PXOS/ME/CS/SI quality gates.
 - Queued / Blocked: PD01-PD18 pending `Start Product Depth Train` plus PXOS/ME/CS/SI/AOS-if-needed gates.
 - Queued / Blocked: AOS01-AOS30 pending `Start AOS Train`.

@@ -2,7 +2,7 @@
 
 Date: 2026-05-04
 Active train: Ambitions 4.0 External Brain Foundation
-Current batch: EB36 next eligible after EB35 implementation
+Current batch: EB37 next eligible after EB36 closeout
 Scope: Complete: EB03A Universal Capture Composer Routing Owner Map. Complete:
 EB03B Universal Capture Composer Routing Implementation. Complete: EB04
 Capture Classification And Clarification. Complete: EB05 Capture Clusters
@@ -80,7 +80,8 @@ accessibility/release claim change was made.
   implementation with source-grounded command semantics, destinations, trust
   boundaries, and fallbacks for existing shell command intents. EB35 is complete
   as a bounded PreviewSupport scenario-library implementation for External
-  Brain preview/fixture coverage. EB36 is the next eligible EB batch.
+  Brain preview/fixture coverage. EB36 is complete as a docs-only QA/regression
+  risk-register closeout. EB37 is the next eligible EB batch.
 - PXEQ is a mandatory product-experience gate for EB UI-affecting batches; it
   is not a shipped app feature and not a new EB batch identity.
 - Optimized global order after EB32 places DAV01-DAV15 before UI-heavy EB
@@ -273,11 +274,18 @@ executed 2 tests with 0 failures. Yellow items are screenshots/rendered proof
 not produced, human/device/VoiceOver review not run, and existing advisory
 backlog.
 
+EB36 result: PASS WITH YELLOW. `docs/audits/eb36-qa-regression-risk-register-report.md`
+records the docs-only External Brain risk register upgrade and EB36 regression
+matrix. No production Swift, tests, project, route/raw, persistence/schema, UI
+behavior, screenshot proof, or release-claim changes were made. Yellow items
+are future-owned privacy threat model, human/device/accessibility proof,
+rendered proof, profiling proof, and existing advisory backlog.
+
 ## Next Safe Path
 
-Run EB36 External Brain QA Regression And Risk Register next. Do not restart broad
+Run EB37 External Brain Privacy Threat Model next. Do not restart broad
 EB03, EB04, EB05, EB06, EB14, EB15, EB16, EB17, EB18, EB26, EB27, EB28, EB29,
-EB30, EB08, EB09, EB10, EB11, EB12, EB33, EB34, EB35, or completed DAV /
-EB20-EB24 batches. EB36 must name exact QA/risk owner files, regression evidence,
-privacy proof, accessibility proof, route/raw/persistence non-change proof, and
-rollback before widening beyond QA regression and risk-register behavior.
+EB30, EB08, EB09, EB10, EB11, EB12, EB33, EB34, EB35, EB36, or completed DAV /
+EB20-EB24 batches. EB37 must name exact privacy threat model files, mitigations,
+proof gaps, release impact, and route/raw/persistence non-change proof before
+widening beyond privacy threat-model behavior.
