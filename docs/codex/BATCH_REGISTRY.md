@@ -328,7 +328,15 @@ Current 4.0 status:
   route/raw value, persistence/schema, dependency, workflow, signing, production
   asset, app behavior, screenshot proof, or release-claim changes. EB37 External
   Brain Privacy Threat Model is the next eligible EB batch.
-- Active Planned / Queued: EB37-EB40 Ambitions 4.0 External Brain Foundation expansion segment; not completed and not implemented in app behavior.
+- Complete: EB37 External Brain Privacy Threat Model is complete as docs/canon
+  privacy threat-model evidence. It adds the 4.0 External Brain privacy threat
+  model with sensitive data classes, threat IDs, mitigations, Green proof
+  requirements, owner follow-ups, and release-claim impact, without
+  Native/Sources/AppUI/test/project, route/raw value, persistence/schema,
+  dependency, workflow, signing, production asset, app behavior, screenshot
+  proof, legal/privacy approval, or release-claim changes. EB38 External Brain
+  Accessibility Evidence Closeout is the next eligible EB batch.
+- Active Planned / Queued: EB38-EB40 Ambitions 4.0 External Brain Foundation expansion segment; not completed and not implemented in app behavior.
 - Queued / Blocked: SI01-SI18 pending global-order selection or `Start Signature Interface Train` plus PXOS/ME/CS/SI quality gates.
 - Queued / Blocked: PD01-PD18 pending `Start Product Depth Train` plus PXOS/ME/CS/SI/AOS-if-needed gates.
 - Queued / Blocked: AOS01-AOS30 pending `Start AOS Train`.
