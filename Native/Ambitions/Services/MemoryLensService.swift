@@ -71,6 +71,52 @@ enum MemoryLensRecallFacet: String, Sendable, Equatable, CaseIterable {
     }
 }
 
+enum MemoryLensSourceEvidence: String, Sendable, Equatable, CaseIterable {
+    case currentPlan
+    case capturedThought
+    case userFeedback
+    case userCorrection
+    case appHandoff
+
+    var title: String {
+        switch self {
+        case .currentPlan: "Current plan"
+        case .capturedThought: "Captured thought"
+        case .userFeedback: "User feedback"
+        case .userCorrection: "User correction"
+        case .appHandoff: "App handoff"
+        }
+    }
+}
+
+enum MemoryLensConfidenceBand: String, Sendable, Equatable, CaseIterable {
+    case direct
+    case inferred
+    case needsReview
+
+    var title: String {
+        switch self {
+        case .direct: "Direct"
+        case .inferred: "Inferred"
+        case .needsReview: "Needs review"
+        }
+    }
+}
+
+enum MemoryLensTrustDecayState: String, Sendable, Equatable, CaseIterable {
+    case current
+    case aging
+    case reviewBeforeUse
+
+    var title: String {
+        switch self {
+        case .current: "Current"
+        case .aging: "Aging"
+        case .reviewBeforeUse: "Review before use"
+        }
+    }
+}
+
 struct MemoryLensResult: Identifiable, Sendable, Equatable {
     let id: String
     let title: String
@@ -87,6 +133,37 @@ struct MemoryLensResult: Identifiable, Sendable, Equatable {
     var badgeTitle: String { kind.title }
     var systemImage: String { kind.systemImage }
     var facetTitle: String { facet.title }
+    var sourceEvidence: MemoryLensSourceEvidence {
+        switch kind {
+        case .goal, .week, .whyNow, .learning:
+            .currentPlan
+        case .capture:
+            .capturedThought
+        case .recentChange:
+            .userFeedback
+        case .teaching:
+            .userCorrection
+        case .handoff:
+            .appHandoff
+        }
+    }
+    var confidenceBand: MemoryLensConfidenceBand {
+        switch kind {
+        case .goal, .week, .capture, .teaching, .handoff:
+            .direct
+        case .recentChange, .whyNow, .learning:
+            .inferred
+        }
+    }
+    var trustDecayState: MemoryLensTrustDecayState {
+        switch kind {
+        case .goal, .week, .capture, .recentChange, .whyNow, .teaching, .handoff:
+            .current
+        case .learning:
+            .aging
+        }
+    }
+    var allowsMemoryClaim: Bool { false }
 }
 
 struct DefaultMemoryLensService: MemoryLensServicing {

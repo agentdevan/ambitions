@@ -253,7 +253,15 @@ Current 4.0 status:
   top-level-tab, dependency, workflow, signing, network, sync/account/cloud
   behavior, production asset, or release-claim changes. EB08 Memory Source
   Confidence And Trust Decay is the next eligible EB batch.
-- Active Planned / Queued: EB08-EB12 and EB33-EB40 Ambitions 4.0 External Brain Foundation expansion segment; not completed and not implemented in app behavior.
+- Complete: EB08 Memory Source Confidence And Trust Decay is complete as a
+  bounded non-persistent Memory Lens source/confidence/trust-decay metadata
+  implementation. It adds source evidence, confidence band, trust-decay state,
+  and claim-lock metadata to existing memory recall results with focused Memory
+  Lens tests only, without route, persistence/schema, top-level-tab, dependency,
+  workflow, signing, network, sync/account/cloud behavior, production asset, or
+  release-claim changes. EB09 Life Event Decision And Context Recall Memory is
+  the next eligible EB batch.
+- Active Planned / Queued: EB09-EB12 and EB33-EB40 Ambitions 4.0 External Brain Foundation expansion segment; not completed and not implemented in app behavior.
 - Queued / Blocked: SI01-SI18 pending global-order selection or `Start Signature Interface Train` plus PXOS/ME/CS/SI quality gates.
 - Queued / Blocked: PD01-PD18 pending `Start Product Depth Train` plus PXOS/ME/CS/SI/AOS-if-needed gates.
 - Queued / Blocked: AOS01-AOS30 pending `Start AOS Train`.

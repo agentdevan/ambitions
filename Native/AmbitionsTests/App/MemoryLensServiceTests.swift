@@ -90,6 +90,65 @@ final class MemoryLensServiceTests: XCTestCase {
         XCTAssertTrue(correction.contains(where: { $0.kind == .teaching && $0.facet == .recentCorrection }))
         XCTAssertTrue(handoff.contains(where: { $0.kind == .handoff && $0.facet == .handoff }))
     }
+
+    func testSearchResultsCarrySourceConfidenceAndTrustDecayEvidence() async throws {
+        let store = try AmbitionsPersistenceStore(inMemory: true)
+        let repositories = makeRepositories(store: store)
+        let goal = try XCTUnwrap(goalFromFixture(id: "clear-timed-self-goal"))
+        let step = try XCTUnwrap(goal.plan?.sections.flatMap(\.steps).first)
+        try await repositories.goals.saveGoals([goal])
+        try await repositories.captures.saveCaptures([
+            Capture(
+                id: "capture-source",
+                createdAt: "2026-04-20T10:00:00Z",
+                updatedAt: "2026-04-20T10:00:00Z",
+                rawText: "File the reimbursement receipt",
+                sourceType: nil,
+                status: .actionable,
+                linkedGoalID: nil
+            )
+        ])
+        try await repositories.feedback.saveEvents([
+            .askedWhyThisMatters(
+                base: GoalFeedbackEventBase(
+                    id: "feedback-why",
+                    stepID: step.id,
+                    occurredAt: "2026-04-22T10:00:00Z",
+                    note: "Why does this matter now?"
+                )
+            )
+        ], goalID: goal.id)
+        let service = DefaultMemoryLensService(repositories: repositories)
+
+        let results = await service.search(query: "", seedIntent: .memoryLens)
+
+        XCTAssertFalse(results.isEmpty)
+        XCTAssertTrue(results.allSatisfy { !$0.allowsMemoryClaim })
+        XCTAssertTrue(results.contains {
+            $0.kind == .goal &&
+                $0.sourceEvidence == .currentPlan &&
+                $0.confidenceBand == .direct &&
+                $0.trustDecayState == .current
+        })
+        XCTAssertTrue(results.contains {
+            $0.kind == .capture &&
+                $0.sourceEvidence == .capturedThought &&
+                $0.confidenceBand == .direct &&
+                $0.trustDecayState == .current
+        })
+        XCTAssertTrue(results.contains {
+            $0.kind == .whyNow &&
+                $0.sourceEvidence == .currentPlan &&
+                $0.confidenceBand == .inferred &&
+                $0.trustDecayState == .current
+        })
+        XCTAssertTrue(results.contains {
+            $0.kind == .learning &&
+                $0.sourceEvidence == .currentPlan &&
+                $0.confidenceBand == .inferred &&
+                $0.trustDecayState == .aging
+        })
+    }
 }
 
 private extension MemoryLensServiceTests {
