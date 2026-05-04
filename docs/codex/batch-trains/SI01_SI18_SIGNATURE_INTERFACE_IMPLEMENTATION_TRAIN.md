@@ -66,7 +66,7 @@ SI creates the reusable interface language that PD and AOS24 can compose. It is 
 | SI10 | Trust Receipt Layer | SwiftUI implementation | 057 | Complete | Built reusable trust/proof/receipt layer. |
 | SI11 | Personal System Center Components | SwiftUI implementation | 058 | Complete | Built reusable You header, setup completeness, grouped navigation wrapper, preview states, and focused design-system tests. |
 | SI12 | Interaction Motion Haptics System | SwiftUI implementation | 059 | Complete | Built shared interaction tokens, transition helpers, optional user-initiated haptic mappings, Reduce Motion equivalents, preview evidence, and focused design-system tests. |
-| SI13 | Loading Empty Degraded State Primitives | SwiftUI implementation | 060 | Queued/blocked; not started | Build reusable loading, empty, and degraded primitives. |
+| SI13 | Loading Empty Degraded State Primitives | SwiftUI implementation | 060 | Complete | Built shared loading/degraded state taxonomy, state module, stale source label, recovery prompt module, previews, and focused design-system tests. |
 | SI14 | Iconography Symbol And Status Grammar | SwiftUI/design-system implementation | 061 | Queued/blocked; not started | Build status/source/proof/recovery icon and symbol grammar. |
 | SI15 | Accessibility Adaptive Interface Pass | SwiftUI implementation/test pass | 062 | Queued/blocked; not started | Validate SI primitives for accessibility and cognitive load. |
 | SI16 | Preview Fixture And Visual QA Infrastructure | implementation/test infrastructure | 063 | Queued/blocked; not started | Build preview fixtures and visual QA harness. |
