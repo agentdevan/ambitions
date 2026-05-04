@@ -147,6 +147,33 @@ final class ProfileFeatureServiceTests: XCTestCase {
         XCTAssertTrue(dashboard.receiptAudit.subtitle.contains("Reviews now"))
     }
 
+    func testEB10PersonalOperatingManualNamesPreferenceMemoryBoundaries() async throws {
+        let repositories = try await makeRepositories()
+        let service = RepositoryBackedProfileService(repositories: repositories)
+
+        let dashboard = try await service.loadProfileDashboard()
+        let rules = dashboard.constitution.rules
+
+        XCTAssertTrue(rules.contains(where: {
+            $0.id == "constitution-low-risk-preferences" &&
+            $0.detail.contains("Display, density, recovery, and repeated routing preferences") &&
+            $0.detail.contains("visible, source-tied, and correctable") &&
+            $0.statusLabel == "Receipt first"
+        }))
+        XCTAssertTrue(rules.contains(where: {
+            $0.id == "constitution-sensitive-memory" &&
+            $0.detail.contains("Health, relationship, financial, location, calendar-derived") &&
+            $0.statusLabel == "Approval required"
+        }))
+        XCTAssertTrue(rules.contains(where: {
+            $0.id == "constitution-operating-manual-evidence" &&
+            $0.detail.contains("must admit when context is thin") &&
+            $0.statusLabel == "Evidence-light"
+        }))
+        XCTAssertFalse(rules.map(\.detail).joined(separator: " ").localizedCaseInsensitiveContains("cloud memory"))
+        XCTAssertFalse(rules.map(\.detail).joined(separator: " ").localizedCaseInsensitiveContains("automatic profile"))
+    }
+
     func testD17SystemCenterGroupsYouWithoutAddingTopLevelTabsOrOverclaiming() async throws {
         let repositories = try await makeRepositories()
         let service = RepositoryBackedProfileService(repositories: repositories)

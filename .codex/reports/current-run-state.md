@@ -2,7 +2,7 @@
 
 Date: 2026-05-03
 Active train: Ambitions 4.0 External Brain Foundation
-Current batch: EB10 next eligible after EB09 implementation
+Current batch: EB11 next eligible after EB10 implementation
 Scope: Complete: EB03A Universal Capture Composer Routing Owner Map. Complete:
 EB03B Universal Capture Composer Routing Implementation. Complete: EB04
 Capture Classification And Clarification. Complete: EB05 Capture Clusters
@@ -70,7 +70,8 @@ accessibility/release claim change was made.
   accessibility/cognitive-load evidence requirements implementation. EB08 is
   complete as a bounded memory source/confidence/trust-decay implementation.
   EB09 is complete as a bounded life-event/decision/context-recall memory
-  implementation. EB10 is the next eligible EB batch.
+  implementation. EB10 is complete as a bounded You/Profile Personal Operating
+  Constitution implementation. EB11 is the next eligible EB batch.
 - PXEQ is a mandatory product-experience gate for EB UI-affecting batches; it
   is not a shipped app feature and not a new EB batch identity.
 - Optimized global order after EB32 places DAV01-DAV15 before UI-heavy EB
@@ -214,11 +215,20 @@ Memory/Trust UI consumption not implemented, screenshots/rendered proof not
 produced, human/device/VoiceOver review not run, durable correction/delete/export
 behavior deferred, and existing advisory backlog.
 
+EB10 result: PASS WITH YELLOW. `docs/audits/eb10-personal-operating-manual-report.md`
+records the bounded You/Profile Personal Operating Constitution rules for
+low-risk preference visibility, sensitive-memory approval, and evidence-light
+operating-manual claims, focused Profile service tests, preview fixture
+evidence, `swift build`, and `scripts/build-local.sh`. Yellow items are
+screenshots/rendered proof not produced, human/device/VoiceOver review not run,
+durable memory preference persistence/delete/export behavior deferred, and
+existing advisory backlog.
+
 ## Next Safe Path
 
-Run EB10 Personal Operating Manual And Preferences next. Do not restart broad
+Run EB11 Memory Correction Deletion And Rejection next. Do not restart broad
 EB03, EB04, EB05, EB06, EB14, EB15, EB16, EB17, EB18, EB26, EB27, EB28, EB29,
-EB30, EB08, EB09, or completed DAV / EB20-EB24 batches. EB10 must name exact
-owner files, focused tests, preference/manual proof, privacy proof,
-correction/delete/export non-claim boundaries, and rollback before widening
-beyond personal operating manual or preference behavior.
+EB30, EB08, EB09, EB10, or completed DAV / EB20-EB24 batches. EB11 must name
+exact owner files, focused tests, correction/delete/rejection proof, privacy
+proof, route/raw/persistence non-change proof, and rollback before widening
+beyond memory correction, deletion, or rejected-memory behavior.

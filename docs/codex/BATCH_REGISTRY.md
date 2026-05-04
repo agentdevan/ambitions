@@ -269,7 +269,16 @@ Current 4.0 status:
   signing, network, sync/account/cloud behavior, production asset, or
   release-claim changes. EB10 Personal Operating Manual And Preferences is the
   next eligible EB batch.
-- Active Planned / Queued: EB10-EB12 and EB33-EB40 Ambitions 4.0 External Brain Foundation expansion segment; not completed and not implemented in app behavior.
+- Complete: EB10 Personal Operating Manual And Preferences is complete as a
+  bounded You/Profile Personal Operating Constitution implementation. It adds
+  low-risk preference visibility, sensitive-memory approval, and evidence-light
+  operating-manual rules to the existing constitution projection with focused
+  Profile service tests and preview fixture evidence only, without route,
+  persistence/schema, top-level-tab, dependency, workflow, signing, network,
+  sync/account/cloud behavior, production asset, durable memory behavior, or
+  release-claim changes. EB11 Memory Correction Deletion And Rejection is the
+  next eligible EB batch.
+- Active Planned / Queued: EB11-EB12 and EB33-EB40 Ambitions 4.0 External Brain Foundation expansion segment; not completed and not implemented in app behavior.
 - Queued / Blocked: SI01-SI18 pending global-order selection or `Start Signature Interface Train` plus PXOS/ME/CS/SI quality gates.
 - Queued / Blocked: PD01-PD18 pending `Start Product Depth Train` plus PXOS/ME/CS/SI/AOS-if-needed gates.
 - Queued / Blocked: AOS01-AOS30 pending `Start AOS Train`.

@@ -1014,6 +1014,27 @@ private extension RepositoryBackedProfileService {
                     state: .success
                 ),
                 ProfileConstitutionRule(
+                    id: "constitution-low-risk-preferences",
+                    title: "Make low-risk preferences visible",
+                    detail: "Display, density, recovery, and repeated routing preferences may be remembered only when they stay visible, source-tied, and correctable.",
+                    statusLabel: "Receipt first",
+                    state: .default
+                ),
+                ProfileConstitutionRule(
+                    id: "constitution-sensitive-memory",
+                    title: "Ask before sensitive memory",
+                    detail: "Health, relationship, financial, location, calendar-derived, and sensitive Life Area context requires user review before stronger memory use.",
+                    statusLabel: "Approval required",
+                    state: .warning
+                ),
+                ProfileConstitutionRule(
+                    id: "constitution-operating-manual-evidence",
+                    title: "Do not invent an operating manual",
+                    detail: "The personal operating manual can summarize explicit local choices and evidence, but it must admit when context is thin.",
+                    statusLabel: snapshot.eventLedger.isEmpty && snapshot.teachingSignals.isEmpty ? "Evidence-light" : "Evidence-led",
+                    state: snapshot.eventLedger.isEmpty && snapshot.teachingSignals.isEmpty ? .default : .success
+                ),
+                ProfileConstitutionRule(
                     id: "constitution-calendar",
                     title: "Ask before calendar writes",
                     detail: "Calendar access is explicit and Plan-owned. Calendar writes require confirmation and are never silent.",
