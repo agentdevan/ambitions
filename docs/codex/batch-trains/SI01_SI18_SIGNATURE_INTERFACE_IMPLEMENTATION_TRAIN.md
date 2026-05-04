@@ -69,7 +69,7 @@ SI creates the reusable interface language that PD and AOS24 can compose. It is 
 | SI13 | Loading Empty Degraded State Primitives | SwiftUI implementation | 060 | Complete | Built shared loading/degraded state taxonomy, state module, stale source label, recovery prompt module, previews, and focused design-system tests. |
 | SI14 | Iconography Symbol And Status Grammar | SwiftUI/design-system implementation | 061 | Complete | Built shared status/source/proof/privacy/pressure/recovery symbol grammar, visible label pairing, previews, and focused design-system tests. |
 | SI15 | Accessibility Adaptive Interface Pass | SwiftUI implementation/test pass | 062 | Complete | Built shared adaptive axes, review lanes, visible fallbacks, VoiceOver summaries, Reduce Motion equivalents, previews, and focused design-system tests. |
-| SI16 | Preview Fixture And Visual QA Infrastructure | implementation/test infrastructure | 063 | Queued/blocked; not started | Build preview fixtures and visual QA harness. |
+| SI16 | Preview Fixture And Visual QA Infrastructure | implementation/test infrastructure | 063 | Complete | Built deterministic preview fixtures and visual QA harness evidence. |
 | SI17 | Top-Level Surface Composition Implementation | SwiftUI implementation | 064 | Queued/blocked; not started | Apply SI primitives to top-level surfaces. |
 | SI18 | Signature Interface Handoff And Product Depth Readiness | docs/handoff/evidence | 065 | Queued/blocked; not started | Close SI and determine Product Depth readiness. |
 
