@@ -2,7 +2,7 @@
 
 Date: 2026-05-04
 Active train: Ambitions 4.0 External Brain Foundation
-Current batch: EB39 next eligible after EB38 closeout
+Current batch: EB40 next eligible after EB39 closeout
 Scope: Complete: EB03A Universal Capture Composer Routing Owner Map. Complete:
 EB03B Universal Capture Composer Routing Implementation. Complete: EB04
 Capture Classification And Clarification. Complete: EB05 Capture Clusters
@@ -82,7 +82,8 @@ accessibility/release claim change was made.
   as a bounded PreviewSupport scenario-library implementation for External
   Brain preview/fixture coverage. EB36 is complete as a docs-only QA/regression
   risk-register closeout. EB37 is complete as a docs/canon privacy threat-model
-  batch. EB38 is complete as an accessibility evidence closeout. EB39 is the
+  batch. EB38 is complete as an accessibility evidence closeout. EB39 is
+  complete as an External Brain handoff and RC implications batch. EB40 is the
   next eligible EB batch.
 - PXEQ is a mandatory product-experience gate for EB UI-affecting batches; it
   is not a shipped app feature and not a new EB batch identity.
@@ -300,12 +301,20 @@ or release-claim changes were made. Yellow items are human/device/VoiceOver/
 Dynamic Type/contrast/motor/cognitive-load proof, handoff/RC implications,
 final EB closeout, and existing advisory backlog.
 
+EB39 result: PASS WITH YELLOW. `docs/audits/eb39-handoff-rc-readiness-implications-report.md`
+records the docs-only External Brain handoff and RC implications packet. No
+production Swift, tests, project, route/raw, persistence/schema, UI behavior,
+screenshot proof, release/RC/TestFlight/App Store posture upgrade, or
+release-claim changes were made. Yellow items are final EB40 closeout,
+human/device/accessibility proof, rendered proof, profiling proof, legal/privacy
+signoff, and existing advisory backlog.
+
 ## Next Safe Path
 
-Run EB39 External Brain Handoff And RC Readiness Implications next. Do not restart broad
+Run EB40 Ambitions 4.0 External Brain Closeout next. Do not restart broad
 EB03, EB04, EB05, EB06, EB14, EB15, EB16, EB17, EB18, EB26, EB27, EB28, EB29,
 EB30, EB08, EB09, EB10, EB11, EB12, EB33, EB34, EB35, EB36, EB37, or completed
-DAV / EB20-EB24 batches. EB39 must summarize handoff and RC implications
-without claiming production readiness, release readiness, App Store/TestFlight
-readiness, legal/privacy signoff, physical-device proof, or public
-accessibility proof.
+DAV / EB20-EB24 batches. EB40 must close EB01-EB39 honestly with accepted
+Yellow owners and must not claim production readiness, release readiness, App
+Store/TestFlight readiness, legal/privacy signoff, physical-device proof, or
+public accessibility proof.

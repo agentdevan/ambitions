@@ -344,7 +344,16 @@ Current 4.0 status:
   proof, public accessibility proof, physical-device proof, or release-claim
   changes. EB39 External Brain Handoff And RC Readiness Implications is the
   next eligible EB batch.
-- Active Planned / Queued: EB39-EB40 Ambitions 4.0 External Brain Foundation expansion segment; not completed and not implemented in app behavior.
+- Complete: EB39 External Brain Handoff And RC Readiness Implications is
+  complete as docs-only handoff evidence. It adds the External Brain handoff and
+  RC implications packet, preserves `Candidate prepared; human approval
+  required`, and records allowed/not-allowed claims and EB40 handoff
+  requirements, without Native/Sources/AppUI/test/project, route/raw value,
+  persistence/schema, dependency, workflow, signing, production asset, app
+  behavior, screenshot proof, release/RC/TestFlight/App Store posture upgrade,
+  or release-claim changes. EB40 Ambitions 4.0 External Brain Closeout is the
+  next eligible EB batch.
+- Active Planned / Queued: EB40 Ambitions 4.0 External Brain Foundation expansion closeout; not completed and not implemented in app behavior.
 - Queued / Blocked: SI01-SI18 pending global-order selection or `Start Signature Interface Train` plus PXOS/ME/CS/SI quality gates.
 - Queued / Blocked: PD01-PD18 pending `Start Product Depth Train` plus PXOS/ME/CS/SI/AOS-if-needed gates.
 - Queued / Blocked: AOS01-AOS30 pending `Start AOS Train`.
