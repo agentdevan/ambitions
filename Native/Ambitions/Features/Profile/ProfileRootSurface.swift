@@ -57,7 +57,6 @@ enum ProfileRootDetail: String, Identifiable {
 
 struct ProfileSettingsRootView: View {
     @Environment(\.ambitionTheme) private var theme
-    @Environment(\.accessibilityReduceMotion) private var reduceMotion
     @State private var selectedRowHapticToken = ""
 
     let dashboard: ProfileDashboard
@@ -65,18 +64,24 @@ struct ProfileSettingsRootView: View {
 
     var body: some View {
         VStack(alignment: .leading, spacing: theme.spacing.lg) {
-            SystemProfilePanel(dashboard: dashboard)
+            PersonalSystemCenterHeader(
+                title: dashboard.hero.title,
+                summary: dashboard.hero.dominantTruth,
+                signals: primarySignals
+            )
 
-            GroupedNavigationSystem(
-                sections: groupedNavigationSections,
-                context: .you,
-                accessibilityIdentifierPrefix: "you.row"
-            ) { item in
+            PersonalSystemCenterSetupCompleteness(
+                title: "Setup completeness",
+                summary: "Trust, memory, planning, and access stay visible before deeper setup.",
+                completedCount: setupCompletedCount,
+                totalCount: setupItems.count,
+                items: setupItems
+            )
+
+            PersonalSystemCenterNavigation(sections: groupedNavigationSections) { item in
                 selectedRowHapticToken = item.id
                 onOpenDetail(detail(for: item.id))
             }
-            .transition(DAVMotionPreset.softReveal.transition(reduceMotion: reduceMotion))
-            .accessibilityIdentifier("you.grouped-navigation-root")
 
             Text(dashboard.systemCenter.footer)
                 .font(theme.typography.caption)
@@ -204,90 +209,10 @@ struct ProfileSettingsRootView: View {
         default: .profile
         }
     }
-}
 
-private struct SystemProfilePanel: View {
-    @Environment(\.ambitionTheme) private var theme
-
-    let dashboard: ProfileDashboard
-
-    var body: some View {
-        StateDrivenMaterialPanel(context: .you, state: .proof) {
-            VStack(alignment: .leading, spacing: theme.spacing.md) {
-                HStack(alignment: .top, spacing: theme.spacing.sm) {
-                    Image(systemName: "person.crop.circle.badge.checkmark")
-                        .font(.system(size: theme.icon.largeSize, weight: theme.icon.symbolWeight))
-                        .foregroundStyle(LivingTabContext.you.accent(in: theme))
-                        .frame(width: 44, height: 44)
-                        .background(
-                            Circle()
-                                .fill(LivingTabContext.you.accent(in: theme).opacity(0.14))
-                        )
-                        .overlay {
-                            Circle()
-                                .strokeBorder(LivingTabContext.you.accent(in: theme).opacity(0.26), lineWidth: 1)
-                        }
-                        .accessibilityHidden(true)
-
-                    VStack(alignment: .leading, spacing: theme.spacing.xxs) {
-                        Text("You")
-                            .font(theme.typography.caption)
-                            .foregroundStyle(theme.colors.textSecondary)
-                            .accessibilityAddTraits(.isHeader)
-
-                        Text(dashboard.hero.title)
-                            .font(theme.typography.hero)
-                            .foregroundStyle(theme.colors.textPrimary)
-                            .fixedSize(horizontal: false, vertical: true)
-
-                        Text("You are in control")
-                            .font(theme.typography.bodyEmphasized)
-                            .foregroundStyle(theme.colors.textPrimary)
-                            .fixedSize(horizontal: false, vertical: true)
-                    }
-
-                    Spacer(minLength: theme.spacing.xs)
-
-                    EvidenceLabel(
-                        "Local-first",
-                        detail: "Trust visible",
-                        source: "You owns controls",
-                        state: .proof,
-                        context: .trust
-                    )
-                }
-
-                Text(dashboard.hero.dominantTruth)
-                    .font(theme.typography.bodySecondary)
-                    .foregroundStyle(theme.colors.textSecondary)
-                    .fixedSize(horizontal: false, vertical: true)
-
-                LazyVGrid(
-                    columns: [GridItem(.adaptive(minimum: 150), spacing: theme.spacing.xs)],
-                    alignment: .leading,
-                    spacing: theme.spacing.xs
-                ) {
-                    ForEach(primaryEvidenceLabels) { label in
-                        EvidenceLabel(
-                            label.title,
-                            detail: label.detail,
-                            source: label.source,
-                            state: label.state,
-                            context: label.context
-                        )
-                    }
-                }
-                .fixedSize(horizontal: false, vertical: true)
-            }
-        }
-        .accessibilityIdentifier("you.system-profile-panel")
-        .accessibilityElement(children: .contain)
-        .accessibilityLabel("\(dashboard.hero.title). You are in control. \(dashboard.hero.dominantTruth)")
-    }
-
-    private var primaryEvidenceLabels: [SystemProfileEvidence] {
+    private var primarySignals: [PersonalSystemCenterSignal] {
         [
-            SystemProfileEvidence(
+            PersonalSystemCenterSignal(
                 id: "trust",
                 title: "Trust Center",
                 detail: "Reviewable",
@@ -295,7 +220,7 @@ private struct SystemProfilePanel: View {
                 state: .proof,
                 context: .trust
             ),
-            SystemProfileEvidence(
+            PersonalSystemCenterSignal(
                 id: "memory",
                 title: "Memory",
                 detail: "Inspectable",
@@ -303,7 +228,7 @@ private struct SystemProfilePanel: View {
                 state: .calm,
                 context: .memory
             ),
-            SystemProfileEvidence(
+            PersonalSystemCenterSignal(
                 id: "accessibility",
                 title: "Accessibility",
                 detail: "Claims locked",
@@ -313,13 +238,32 @@ private struct SystemProfilePanel: View {
             )
         ]
     }
-}
 
-private struct SystemProfileEvidence: Identifiable {
-    let id: String
-    let title: String
-    let detail: String
-    let source: String
-    let state: LivingVisualState
-    let context: LivingTabContext
+    private var setupItems: [PersonalSystemCenterSetupItem] {
+        [
+            setupItem(id: "profile"),
+            setupItem(id: "what-ambitions-knows"),
+            setupItem(id: "trust-center"),
+            setupItem(id: "schedule-availability"),
+            setupItem(id: "accessibility")
+        ].compactMap { $0 }
+    }
+
+    private var setupCompletedCount: Int {
+        setupItems.filter { $0.state == .proof || $0.state == .active }.count
+    }
+
+    private func setupItem(id: String) -> PersonalSystemCenterSetupItem? {
+        guard let item = dashboard.systemCenter.sections
+            .flatMap(\.items)
+            .first(where: { $0.id == id })
+        else { return nil }
+
+        return PersonalSystemCenterSetupItem(
+            id: item.id,
+            title: normalizedTitle(for: item),
+            statusLabel: item.statusLabel,
+            state: livingState(for: item.semanticState)
+        )
+    }
 }

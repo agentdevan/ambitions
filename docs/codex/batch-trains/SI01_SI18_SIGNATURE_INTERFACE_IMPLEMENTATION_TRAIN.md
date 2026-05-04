@@ -64,7 +64,7 @@ SI creates the reusable interface language that PD and AOS24 can compose. It is 
 | SI08 | LifeShape Time Capacity Map | SwiftUI implementation | 055 | Complete | Built Plan time/capacity/pressure primitive. |
 | SI09 | Capture Atmosphere Composer | SwiftUI implementation | 056 | Complete | Built Capture signature atmosphere/composer primitive. |
 | SI10 | Trust Receipt Layer | SwiftUI implementation | 057 | Complete | Built reusable trust/proof/receipt layer. |
-| SI11 | Personal System Center Components | SwiftUI implementation | 058 | Queued/blocked; not started | Build reusable You top/header/grouped navigation primitives. |
+| SI11 | Personal System Center Components | SwiftUI implementation | 058 | Complete | Built reusable You header, setup completeness, grouped navigation wrapper, preview states, and focused design-system tests. |
 | SI12 | Interaction Motion Haptics System | SwiftUI implementation | 059 | Queued/blocked; not started | Build interaction behavior for SI primitives. |
 | SI13 | Loading Empty Degraded State Primitives | SwiftUI implementation | 060 | Queued/blocked; not started | Build reusable loading, empty, and degraded primitives. |
 | SI14 | Iconography Symbol And Status Grammar | SwiftUI/design-system implementation | 061 | Queued/blocked; not started | Build status/source/proof/recovery icon and symbol grammar. |

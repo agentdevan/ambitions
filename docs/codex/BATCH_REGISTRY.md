@@ -65,7 +65,7 @@ Current 4.0 status:
 - Completed: ME12 Maintainability Handoff.
 - Active evidence baseline: REC01 Release Evidence Truth Inventory.
 - Completed: Signature Interface Codex OS quality gates.
-- Active: SI01-SI18 Signature Interface Implementation Train; SI01-SI10 complete and SI11-SI18 queued/blocked.
+- Active: SI01-SI18 Signature Interface Implementation Train; SI01-SI11 complete and SI12-SI18 queued/blocked.
 - Completed: CS01 Compatibility Seam Registry And Risk Map.
 - Completed: CS07 External Route Widget AppIntent Compatibility Proof.
 - Completed: CS08 Import Export Persistence Compatibility Proof.
@@ -414,7 +414,13 @@ Current 4.0 status:
   source freshness labels, proof preview, inline receipt, toast, Why this?
   affordance, preview states, and focused design-system test proof without
   changing routes, raw values, persistence, LDI runtime, or product surfaces.
-- Queued / Blocked: SI11-SI18 pending global-order selection or `Start Signature Interface Train` plus PXOS/ME/CS/SI quality gates. LDI hooks are queued-only and do not rewrite SI01-SI10 history.
+- Complete: SI11 Personal System Center Components is complete as shared You
+  primitive implementation evidence. It adds reusable Personal System Center
+  header, setup completeness, grouped navigation wrapper, preview states,
+  focused design-system test proof, and You root-surface composition without
+  changing routes, raw values, persistence, accounts, backend, sync, CloudKit,
+  or LDI runtime.
+- Queued / Blocked: SI12-SI18 pending global-order selection or `Start Signature Interface Train` plus PXOS/ME/CS/SI quality gates. LDI hooks are queued-only and do not rewrite SI01-SI11 history.
 - Queued / Blocked: PD01-PD18 pending `Start Product Depth Train` plus PXOS/ME/CS/SI/AOS-if-needed gates.
 - Queued / Blocked: AOS01-AOS30 pending `Start AOS Train`.
 - Queued / Blocked: LDI01-LDI22 Living Dream Intelligence Train pending AOS30 Green by default or explicit user decision for earlier dependency split.
@@ -772,7 +778,7 @@ These batches are complete for planning purposes. They remain as historical cont
 | CS07 External Route Widget AppIntent Compatibility Proof | Completed / focused proof | External route, widget, App Intent, external snapshot, and screen-contract focused tests passed; no seam retired. |
 | CS08 Import Export Persistence Compatibility Proof | Completed / focused proof | Import/export, portable snapshot, legacy import, persistence repository, sync posture, and persistence budget focused tests passed; no seam retired. |
 | CS02-CS06 / CS09-CS10 Compatibility Seam Retirement Train | Queued / Blocked | Requires current global preauthorization or `Start CS Train` and Green predecessor gates. |
-| SI01-SI18 Signature Interface Implementation Train | Active | SI01-SI10 complete; SI11-SI18 require global-order selection or `Start Signature Interface Train`, PXOS completion, relevant ME/CS gates, and SI visual quality gates. |
+| SI01-SI18 Signature Interface Implementation Train | Active | SI01-SI11 complete; SI12-SI18 require global-order selection or `Start Signature Interface Train`, PXOS completion, relevant ME/CS gates, and SI visual quality gates. |
 | PD01-PD18 Product Depth Train | Queued / Blocked | Formal Product Depth train. Requires exact approval phrase `Start Product Depth Train`, PXOS Product Depth gates, relevant ME/CS/SI gates, and AOS blockers when runtime logic is touched. |
 | PXOS Future-Canon Integration | Completed / docs-only | Added Product Experience OS future canon and Codex OS controls. It does not start PXOS implementation or the PXOS train. |
 | PX01-PX20 Product Experience OS Train | Completed / docs-only | PX01-PX20 are complete as future canon/roadmap evidence. PXOS implementation is not started. |
