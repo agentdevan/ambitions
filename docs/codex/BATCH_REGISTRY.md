@@ -312,7 +312,16 @@ Current 4.0 status:
   asset, durable memory behavior, calendar writes, or release-claim changes.
   EB35 External Brain Preview Fixtures And Scenario Library is the next eligible
   EB batch.
-- Active Planned / Queued: EB35-EB40 Ambitions 4.0 External Brain Foundation expansion segment; not completed and not implemented in app behavior.
+- Complete: EB35 External Brain Preview Fixtures And Scenario Library is
+  complete as a bounded PreviewSupport scenario-library implementation. It adds
+  typed External Brain preview scenarios for Capture, Memory Lens, correction
+  review, shell command contracts, You trust/memory controls, and overloaded
+  recovery with focused fixture tests only, without UI behavior, route/raw value
+  changes, persistence/schema, top-level-tab, dependency, workflow, signing,
+  network, sync/account/cloud behavior, production asset, screenshot proof, or
+  release-claim changes. EB36 External Brain QA Regression And Risk Register is
+  the next eligible EB batch.
+- Active Planned / Queued: EB36-EB40 Ambitions 4.0 External Brain Foundation expansion segment; not completed and not implemented in app behavior.
 - Queued / Blocked: SI01-SI18 pending global-order selection or `Start Signature Interface Train` plus PXOS/ME/CS/SI quality gates.
 - Queued / Blocked: PD01-PD18 pending `Start Product Depth Train` plus PXOS/ME/CS/SI/AOS-if-needed gates.
 - Queued / Blocked: AOS01-AOS30 pending `Start AOS Train`.

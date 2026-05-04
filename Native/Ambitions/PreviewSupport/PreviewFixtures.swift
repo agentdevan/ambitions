@@ -1,6 +1,20 @@
 import AmbitionsDesignSystem
 import Foundation
 
+struct ExternalBrainPreviewScenario: Sendable, Equatable, Identifiable {
+    let id: String
+    let title: String
+    let surface: String
+    let fixtureOwner: String
+    let sourceTruth: String
+    let commandIntent: ShellCommandIntent?
+    let memoryQuery: String?
+    let privacyBoundary: String
+    let accessibilityExpectation: String
+    let yellowLimit: String
+    let expectedEvidence: [String]
+}
+
 struct PreviewFixtures: Sendable {
     let preferences: AppPreferences
     let todayDashboard: TodayDashboard
@@ -9,6 +23,7 @@ struct PreviewFixtures: Sendable {
     let habitsDashboard: HabitsDashboard
     let insightsDashboard: InsightsDashboard
     let profileDashboard: ProfileDashboard
+    let externalBrainScenarios: [ExternalBrainPreviewScenario]
 
     static let `default` = PreviewFixtures(
         preferences: AppPreferences(
@@ -670,6 +685,86 @@ struct PreviewFixtures: Sendable {
                 actionTitle: "Enable notifications"
             ),
             preferences: ProfilePreferencesState(preferredTab: .today, appearancePreference: .system, accentFamily: .sage, reviewCadenceDays: 7, localOnlyModeEnabled: true)
-        )
+        ),
+        externalBrainScenarios: [
+            ExternalBrainPreviewScenario(
+                id: "eb35-capture-needs-place",
+                title: "Capture needs a place",
+                surface: "Capture",
+                fixtureOwner: "Native/Ambitions/PreviewSupport/PreviewFixtures.swift",
+                sourceTruth: "Universal Capture / Smart Attachment",
+                commandIntent: .quickCapture,
+                memoryQuery: nil,
+                privacyBoundary: "Local capture text only; no durable memory claim.",
+                accessibilityExpectation: "Plain receipt, non-color route state, and editable review path.",
+                yellowLimit: "No screenshot proof or human VoiceOver proof in EB35.",
+                expectedEvidence: ["capture fixture", "smart attachment route", "receipt copy"]
+            ),
+            ExternalBrainPreviewScenario(
+                id: "eb35-memory-context-recall",
+                title: "Memory context recall",
+                surface: "What Ambitions knows",
+                fixtureOwner: "Native/Ambitions/Services/MemoryLensService.swift",
+                sourceTruth: "Life Memory / Trust",
+                commandIntent: .memoryLens,
+                memoryQuery: "safe context recall",
+                privacyBoundary: "Searches source-grounded context without creating durable memory.",
+                accessibilityExpectation: "Result rows must expose source, confidence, and review state.",
+                yellowLimit: "Rendered Memory Lens screenshots remain future-owned.",
+                expectedEvidence: ["memory query", "source evidence", "review boundary"]
+            ),
+            ExternalBrainPreviewScenario(
+                id: "eb35-correction-trail",
+                title: "Correction trail requires review",
+                surface: "What Ambitions knows",
+                fixtureOwner: "Native/Ambitions/Services/MemoryLensService.swift",
+                sourceTruth: "Life Memory / User Control",
+                commandIntent: .memoryLens,
+                memoryQuery: "Correction trail",
+                privacyBoundary: "Correction signals cannot become durable memory without review.",
+                accessibilityExpectation: "Review-before-memory state must be spoken as text.",
+                yellowLimit: "Durable correction/delete/export behavior remains future-owned.",
+                expectedEvidence: ["correction trail query", "requires review", "no durable claim"]
+            ),
+            ExternalBrainPreviewScenario(
+                id: "eb35-command-surface-contract",
+                title: "Command surface safety contract",
+                surface: "Shell command",
+                fixtureOwner: "Native/Ambitions/App/ShellCommandModels.swift",
+                sourceTruth: "Command Surface / Trust",
+                commandIntent: .quickPlanPatch,
+                memoryQuery: nil,
+                privacyBoundary: "Routes to Plan without calendar writes or silent reshaping.",
+                accessibilityExpectation: "Command explanation must name destination and fallback.",
+                yellowLimit: "No rendered command UI proof in EB35.",
+                expectedEvidence: ["command contract", "fallback", "no calendar write"]
+            ),
+            ExternalBrainPreviewScenario(
+                id: "eb35-trust-memory-controls",
+                title: "Trust and memory controls",
+                surface: "You",
+                fixtureOwner: "Native/Ambitions/Features/Profile/ProfileFeatureService.swift",
+                sourceTruth: "Trust Center / What Ambitions Knows",
+                commandIntent: nil,
+                memoryQuery: nil,
+                privacyBoundary: "Memory, receipts, privacy, and correction controls stay visible.",
+                accessibilityExpectation: "Rows need labels, hints, and non-color status text.",
+                yellowLimit: "Human trust review and device proof remain future-owned.",
+                expectedEvidence: ["profile fixture", "memory controls", "receipt audit"]
+            ),
+            ExternalBrainPreviewScenario(
+                id: "eb35-overloaded-recovery",
+                title: "Overloaded recovery path",
+                surface: "Today / Plan",
+                fixtureOwner: "Sources/Previews/DynamicAdaptiveVisualPreviews.swift",
+                sourceTruth: "Cognitive Load / Recovery",
+                commandIntent: .quickRecovery,
+                memoryQuery: nil,
+                privacyBoundary: "Recovery posture changes no saved plans silently.",
+                accessibilityExpectation: "Reduce Motion and low-load copy must preserve meaning.",
+                yellowLimit: "EB35 records the scenario; UI proof remains DAV/SIG-owned.",
+                expectedEvidence: ["recovery scenario", "no shame copy", "no silent mutation"]
+            )
+        ]
     )
 }
