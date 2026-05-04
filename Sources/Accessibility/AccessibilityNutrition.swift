@@ -379,6 +379,98 @@ public enum EB28PlainLanguageExplanationEvidence {
     }
 }
 
+public enum AccessibilityInputAlternativeAxis: String, CaseIterable, Identifiable, Sendable {
+    case voiceFirstCapture
+    case motorAlternative
+    case gestureAlternative
+
+    public var id: String { rawValue }
+
+    public var title: String {
+        switch self {
+        case .voiceFirstCapture: "Voice-first capture"
+        case .motorAlternative: "Motor alternative"
+        case .gestureAlternative: "Gesture alternative"
+        }
+    }
+}
+
+public struct AccessibilityInputAlternativeRequirement: Identifiable, Hashable, Sendable {
+    public let axis: AccessibilityInputAlternativeAxis
+    public let ownerFile: String
+    public let automatedProofTarget: String
+    public let requiredAlternative: String
+    public let privacyBoundary: String
+    public let requiresVisibleControl: Bool
+    public let changesCaptureBehavior: Bool
+    public let releaseClaimAllowed: Bool
+
+    public var id: AccessibilityInputAlternativeAxis { axis }
+
+    public init(
+        axis: AccessibilityInputAlternativeAxis,
+        ownerFile: String,
+        automatedProofTarget: String,
+        requiredAlternative: String,
+        privacyBoundary: String,
+        requiresVisibleControl: Bool = true,
+        changesCaptureBehavior: Bool = false,
+        releaseClaimAllowed: Bool = false
+    ) {
+        self.axis = axis
+        self.ownerFile = ownerFile
+        self.automatedProofTarget = automatedProofTarget
+        self.requiredAlternative = requiredAlternative
+        self.privacyBoundary = privacyBoundary
+        self.requiresVisibleControl = requiresVisibleControl
+        self.changesCaptureBehavior = changesCaptureBehavior
+        self.releaseClaimAllowed = releaseClaimAllowed
+    }
+}
+
+public enum EB29InputAlternativeEvidence {
+    public static let ownerBatch = "EB29"
+
+    public static let sourceTruth: [String] = [
+        "docs/canon/Ambitions_4_0_Accessibility_And_Cognitive_Load_Kernel.md",
+        "docs/codex/batches/EB29_Voice_First_Operation_And_Motor_Accessibility_Prompt.md",
+        "docs/canon/PXOS_Accessibility_Cognitive_Load_And_Emotional_Safety.md",
+        "Native/Ambitions/Features/Captures/CapturesScreen.swift"
+    ]
+
+    public static let requirements: [AccessibilityInputAlternativeRequirement] = [
+        AccessibilityInputAlternativeRequirement(
+            axis: .voiceFirstCapture,
+            ownerFile: "Native/Ambitions/Features/Captures/CapturesScreen.swift",
+            automatedProofTarget: "Native/AmbitionsTests/Captures/CapturesViewModelTests.swift",
+            requiredAlternative: "Voice capture must have visible review, edit, place, and cancel controls before any routing or memory effect.",
+            privacyBoundary: "No transcript, recording, or sensitive capture is stored or routed without user-visible review."
+        ),
+        AccessibilityInputAlternativeRequirement(
+            axis: .motorAlternative,
+            ownerFile: "Sources/Accessibility/AccessibilityNutrition.swift",
+            automatedProofTarget: "Native/AmbitionsTests/App/AccessibilityNutritionChecklistTests.swift",
+            requiredAlternative: "Every precision, drag, swipe, or long-press path needs a button, menu, or row alternative.",
+            privacyBoundary: "Motor alternatives must not expose extra private context or create hidden automation."
+        ),
+        AccessibilityInputAlternativeRequirement(
+            axis: .gestureAlternative,
+            ownerFile: "Sources/Components/GroupedNavigationList.swift",
+            automatedProofTarget: "Native/AmbitionsTests/App/GroupedNavigationListDesignSystemTests.swift",
+            requiredAlternative: "Disclosure and navigation rows need stable labels, hit areas, and non-gesture activation.",
+            privacyBoundary: "Navigation alternatives must preserve the same destination and privacy-safe label."
+        )
+    ]
+
+    public static var changesCaptureBehavior: Bool {
+        requirements.contains(where: \.changesCaptureBehavior)
+    }
+
+    public static var releaseClaimsAllowed: Bool {
+        requirements.allSatisfy(\.releaseClaimAllowed)
+    }
+}
+
 public struct AccessibilityNutritionScreenAudit: Identifiable, Hashable, Sendable {
     public let id: String
     public let screenName: String

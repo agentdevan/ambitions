@@ -2,7 +2,7 @@
 
 Date: 2026-05-03
 Active train: Ambitions 4.0 External Brain Foundation
-Current batch: EB29 next eligible after EB28 implementation
+Current batch: EB30 next eligible after EB29 implementation
 Scope: Complete: EB03A Universal Capture Composer Routing Owner Map. Complete:
 EB03B Universal Capture Composer Routing Implementation. Complete: EB04
 Capture Classification And Clarification. Complete: EB05 Capture Clusters
@@ -64,8 +64,9 @@ accessibility/release claim change was made.
   bounded shared design-system cognitive-load/interface-density primitive
   implementation. EB27 is complete as a bounded shared accessibility evidence
   requirements implementation. EB28 is complete as a bounded shared
-  accessibility/copy evidence requirements implementation. EB29 is the next
-  eligible EB batch.
+  accessibility/copy evidence requirements implementation. EB29 is complete as
+  a bounded shared accessibility/input-alternative evidence requirements
+  implementation. EB30 is the next eligible EB batch.
 - PXEQ is a mandatory product-experience gate for EB UI-affecting batches; it
   is not a shipped app feature and not a new EB batch identity.
 - Optimized global order after EB32 places DAV01-DAV15 before UI-heavy EB
@@ -175,10 +176,19 @@ surface consumption not implemented, screenshots/rendered proof not produced,
 human/device/VoiceOver review not run, plain-language human review not run, and
 existing advisory backlog.
 
+EB29 result: PASS WITH YELLOW. `docs/audits/eb29-voice-first-motor-accessibility-report.md`
+records the bounded shared accessibility
+`EB29InputAlternativeEvidence` requirements for voice-first capture, motor
+alternatives, and gesture alternatives, focused accessibility tests,
+`swift build`, and `scripts/build-local.sh`. Yellow items are current Capture
+voice behavior not implemented, screenshots/rendered proof not produced,
+human/device/VoiceOver review not run, motor-accessibility human review not
+run, and existing advisory backlog.
+
 ## Next Safe Path
 
-Run EB29 Voice First Operation And Motor Accessibility next. Do not
+Run EB30 Overloaded Day Adaptation And Low Cognitive Load Flows next. Do not
 restart broad EB03, EB04, EB05, EB06, EB14, EB15, EB16, EB17, EB18, EB26,
-EB27, EB28, or completed DAV / EB20-EB24 batches. EB29 must name exact owner files,
+EB27, EB28, EB29, or completed DAV / EB20-EB24 batches. EB30 must name exact owner files,
 focused tests, accessibility/privacy proof, and rollback before widening beyond
-voice-first or motor accessibility behavior.
+overloaded-day or low-cognitive-load behavior.

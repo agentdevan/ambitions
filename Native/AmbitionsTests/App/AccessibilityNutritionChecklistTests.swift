@@ -206,6 +206,45 @@ final class AccessibilityNutritionChecklistTests: XCTestCase {
         })
     }
 
+    func testEB29InputAlternativeEvidenceCoversVoiceMotorAndGesturePaths() {
+        let requirements = EB29InputAlternativeEvidence.requirements
+
+        XCTAssertEqual(Set(requirements.map(\.axis)), Set(AccessibilityInputAlternativeAxis.allCases))
+        XCTAssertEqual(EB29InputAlternativeEvidence.ownerBatch, "EB29")
+        XCTAssertFalse(EB29InputAlternativeEvidence.changesCaptureBehavior)
+        XCTAssertFalse(EB29InputAlternativeEvidence.releaseClaimsAllowed)
+
+        for requirement in requirements {
+            XCTAssertFalse(requirement.ownerFile.isEmpty)
+            XCTAssertFalse(requirement.automatedProofTarget.isEmpty)
+            XCTAssertFalse(requirement.requiredAlternative.isEmpty)
+            XCTAssertFalse(requirement.privacyBoundary.isEmpty)
+            XCTAssertTrue(requirement.requiresVisibleControl)
+            XCTAssertFalse(requirement.changesCaptureBehavior)
+            XCTAssertFalse(requirement.releaseClaimAllowed)
+        }
+    }
+
+    func testEB29InputAlternativeEvidenceKeepsVoiceCaptureReviewVisible() {
+        let requirements = EB29InputAlternativeEvidence.requirements
+
+        XCTAssertTrue(requirements.contains {
+            $0.axis == .voiceFirstCapture &&
+                $0.ownerFile == "Native/Ambitions/Features/Captures/CapturesScreen.swift" &&
+                $0.requiredAlternative.localizedCaseInsensitiveContains("review") &&
+                $0.privacyBoundary.localizedCaseInsensitiveContains("without user-visible review")
+        })
+        XCTAssertTrue(requirements.contains {
+            $0.axis == .motorAlternative &&
+                $0.requiredAlternative.localizedCaseInsensitiveContains("button")
+        })
+        XCTAssertTrue(requirements.contains {
+            $0.axis == .gestureAlternative &&
+                $0.ownerFile == "Sources/Components/GroupedNavigationList.swift" &&
+                $0.requiredAlternative.localizedCaseInsensitiveContains("non-gesture activation")
+        })
+    }
+
     private static let d21ExpectedAuditOrder = [
         "today",
         "goals",
