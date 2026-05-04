@@ -1,0 +1,164 @@
+# Ambitions Product Depth Canon, Inventory, And Ownership Map
+<!-- markdownlint-disable MD013 -->
+
+Status: PD01 source-truth map; Product Depth implementation not started
+Date: 2026-05-04
+
+## Purpose
+
+This is the formal Product Depth source-truth map created by PD01. It
+reconciles the Product Experience Pack handoff packet with the existing Product
+Depth plan, PXOS Product Depth rules, SI18 handoff, global order, gate matrix,
+batch registry, and repo architecture.
+
+This document authorizes planning and ownership only. It does not implement app
+code, edit navigation, edit design tokens, edit persistence, edit sync, edit
+auth, edit network, edit AI/LDI runtime, edit CI/config, add dependencies,
+change routes/raw values, retire compatibility seams, create release claims, or
+claim Product Depth implementation.
+
+## Source Truth Hierarchy
+
+Future Product Depth work must use this stack:
+
+1. Direct user instructions for the selected batch.
+2. `AGENTS.md`.
+3. Product Experience Pack source-truth packet and final boundary approval.
+4. Ambitions 3.0 source-truth override and front-end parent canon.
+5. PXOS Product Depth and drilldown rules.
+6. This PD01 canon, inventory, and ownership map.
+7. SI18 handoff evidence.
+8. Global order, gate matrix, batch registry, context index, and run-state docs.
+9. Current native SwiftUI repo evidence.
+
+When this map conflicts with the locked Product Experience Pack source truth,
+the locked Product Experience Pack source truth wins and the conflict must be
+reported before implementation.
+
+## Product Depth Definition
+
+Product Depth is the Ambitions 4.0 lane for deepening the existing top-level
+surfaces without widening the app.
+
+Product Depth may add or improve owned drill-downs, sheets, lanes, detail
+routes, proof/review surfaces, receipts/history, setup/defaults flows, and
+cross-surface proof/review links behind:
+
+- Today.
+- Goals.
+- Capture.
+- Plan.
+- You.
+- Cross-surface proof/review where it remains subordinate to the five surfaces.
+
+Product Depth must not add a sixth top-level destination, generic dashboard,
+chatbot-first surface, inbox, notes app, habit tracker mode, calendar clone,
+analytics wall, OKR/KPI tracker, enterprise project-management system, or
+stacked-card top-level composition.
+
+## Locked Product Experience Pack Alignment
+
+| Locked source truth | PD01 mapping |
+| --- | --- |
+| Today -> Reality Rail | Today Product Depth belongs behind Reality Rail through Step Detail, Step Session, closure/recovery, proof peek, and source detail. |
+| Goals -> LifePath View | Goals Product Depth belongs behind LifePath View through Goal Detail, MissionControlTimeSpine, proof/history, lifecycle, and alternate-path details. |
+| Capture -> Text-first Capture Atmosphere Composer | Capture Product Depth belongs behind text-first capture through placement review, correction, Grow into Goal, and source detail after content exists. |
+| Plan -> LifeShape Map | Plan Product Depth belongs behind LifeShape Map through reflow decisions, pressure review, and capacity-lens LifeShape drill-downs. |
+| You -> Personal System Center | You Product Depth belongs behind Personal System Center through trust history, receipts, memory/privacy controls, setup/defaults, and Appearance Studio. |
+| MissionControlTimeSpine order | Goals depth must reconcile to Completed, Now, Friction, Next, Horizon before implementation. |
+| Appearance Studio rules | Accent work remains a Yellow conflict and design-token/default migration gate; Gold default and launch taxonomy are locked. |
+| Proof/source/privacy/receipt semantics | Proof is evidence; source is freshness/conflict/review boundary; privacy is user control; receipt is consequence and reversibility. |
+| Accessibility / Reduced Motion | Every invented visual object requires non-visual, Dynamic Type, VoiceOver, no-color-only, and Reduced Motion equivalents. |
+
+## Drill-Down Inventory By Surface
+
+| Surface | Primary object | Allowed depth homes | Top-level must preserve | Must not become |
+| --- | --- | --- | --- | --- |
+| Today | Reality Rail | Step Detail, Step Session, closure/recovery sheet, proof peek, source detail | One recommended step, Now/Next/Later orientation, calm recovery, proof as evidence | Task list, dashboard, timer-first focus app, productivity score |
+| Goals | LifePath View | Goal Detail, MissionControlTimeSpine, proof/history, alternate paths, lifecycle/path detail | LifePath direction, goal orientation, visible trust/proof boundary | Kanban, OKR/KPI tracker, habit tracker, roadmap/Gantt |
+| Capture | Text-first Capture Atmosphere Composer | Placement review, correction, Grow into Goal, source detail, receipt detail | Text-first capture, secondary voice/add/attachment, placement only after content | Inbox, notes app, automatic goal factory, route confidence theater |
+| Plan | LifeShape Map | Reflow Decision, pressure review, Day/Week/Month capacity lenses, protected-time explanation | LifeShape-first capacity and defaults | Calendar clone, event grid, silent rearrangement, shame loop |
+| You | Personal System Center | Trust history, receipts center, privacy/memory controls, schedule/defaults, Appearance Studio | Trust/control-first, copy-density guard, user control | Settings clone, admin console, surveillance dashboard, vanity analytics |
+| Cross-surface | Proof / review / receipts | Proof detail, receipt history by meaning, source detail, review links | Subordinate to the owning surface | New review tab, activity feed, notification feed, achievement layer |
+
+## Feature-Depth Candidate Map
+
+| Candidate | Owning surface | PD batch | Status after PD01 | Required gates before implementation | Caveat / conflict |
+| --- | --- | --- | --- | --- | --- |
+| Step Detail depth | Today | PD02 | Candidate implementation owner mapped | PX02, PX07/PX08 where proof/recovery appears, SI04/SI05/SI10/SI13/SI17, ME Today | Must remain lightweight drill-down, not card expansion. |
+| Step Session depth | Today | PD03 | Candidate implementation owner mapped | PD02 Green, SI05/SI10/SI12/SI13/SI17, ME Today/TodayPanels, accessibility/copy | Depth not proven complete; timer remains secondary. |
+| Recovery and closure depth | Today / Recovery | PD04 | Candidate implementation owner mapped | PD02 Green, PX07/PX09, SI10/SI13, AOS if runtime recovery logic changes | Must not become overdue/failure/shame loop. |
+| MissionControlTimeSpine | Goals | PD05 | Candidate implementation owner mapped; Yellow conflict remains | PX03/PX14, SI06/SI07/SI10/SI14/SI17, ME Goals, CS if routes/raw values touched | Locked order Completed -> Now -> Friction -> Next -> Horizon unresolved against current lane evidence. |
+| Goal lifecycle/path visualization | Goals | PD06 | Candidate implementation owner mapped | PD05 Green, SI06/SI07/SI12/SI17, visual/accessibility gates | Must not become KPI/OKR or decorative path. |
+| Goal proof/decision history | Goals / Proof | PD07 | Candidate implementation owner mapped | PD05 Green, PX08, SI10/SI14, AOS proof if runtime/data logic touched | Proof is evidence, not achievement. |
+| Goal alternate path/tradeoff | Goals | PD08 | Candidate implementation owner mapped | PD05 Green, PX03/PX15, AOS alternate-path if runtime logic touched | Candidate-style detail remains gated; no fake certainty. |
+| Capture placement review | Capture | PD09 | Candidate implementation owner mapped | PX04/PX13, SI09/SI10/SI13/SI17, privacy/copy gates, ME Capture if large owner touched | Placement appears only after content exists. |
+| Capture correction | Capture | PD10 | Candidate remains gated | PD09 Green, privacy/copy, AOS adaptation/source truth if learning touched | Must avoid confidence language and hidden automation. |
+| Grow into Goal | Capture / Goals | PD11 | Candidate remains gated | PD09/PD10 Green, PX03/PX04/PX15, CS navigation if route touched, AOS goal path if runtime touched | Candidate items must not be silently upgraded. |
+| Reflow Decision depth | Plan | PD12 | Candidate implementation owner mapped | PX05/PX07/PX08, SI08/SI10/SI13/SI17, ME Plan, AOS if commitment/runtime logic touched | User-owned, non-silent consequence review. |
+| Pressure review | Plan | PD13 | Candidate remains gated | PD12 Green, accessibility/copy, Plan pressure evidence | No productivity-loss or shame framing. |
+| Month LifeShape Lens | Plan | PD14 | Candidate remains high-risk | PX05/PX10/PX12, SI08/SI12/SI13/SI17, ME Plan/PlanScreen | Highest calendar-clone risk; capacity lens only. |
+| Trust history and receipts center | You | PD15 | Candidate implementation owner mapped | PX06/PX08, SI10/SI11/SI13/SI14, ME You/Profile, privacy/trust | Receipt is consequence/reversibility, not feed. |
+| Schedule, availability, defaults | You | PD16 | Candidate remains gated | PX06/PX11, REC claim boundaries, privacy/permission copy, CS if route/default touched | Plan-owned calendar permission; no unsupported integration claim. |
+| Cross-surface proof/review | Cross-surface | PD17 | Candidate remains gated | Earlier PD proof/reflow/You history, PX15, CS route/navigation, AOS proof if data touched | Must not create new review tab or activity feed. |
+| Product Depth handoff | Cross-surface | PD18 | Handoff owner mapped | PD01-PD17 resolved or deferred | Must not claim release/app implementation beyond evidence. |
+
+## Implementation Dependency Map
+
+| Dependency lane | PD01 decision | Future implementation impact |
+| --- | --- | --- |
+| PXOS | PX01-PX20 are complete as future canon/roadmap evidence; PX14/PX18 satisfy PD formalization prerequisites. | Each PD implementation still names its surface-specific PXOS gates. |
+| SI | SI01-SI18 are complete as Signature Interface evidence with accepted Yellow advisories. | PD should compose SI primitives where relevant, but SI evidence does not authorize routes, persistence, runtime, or implementation completion claims. |
+| ME | ME01-ME12 are complete or not triggered by their documented gates. | Large owner files remain implementation-time gates; PD batches must name exact owner files and validation. |
+| CS | CS01, CS07, CS08, CS02A/B, CS03A/B, CS04A/B, CS05A/B, CS06A/B, CS09A/B, and CS10 evidence preserves compatibility; CS02C-CS06C and CS09C remain deferred. | Do not retire route/raw/external/import/export/persistence seams without explicit CS proof. |
+| AOS | AOS01-AOS30 remain queued/blocked. | Runtime intelligence, source truth, proof logic, adaptation, alternate path, and reality-drift changes are blockers until AOS gates pass. |
+| REC / release | REC02-REC06 claim boundaries are complete as evidence. | No release/platform/accessibility/device/TestFlight/App Store claims without matching proof. |
+| LDI | LDI01-LDI22 are future/post-AOS by default. | LDI review homes may be marked future drill-downs only; no new top-level destination or runtime claim. |
+
+## Blocked / Unblocked Status
+
+| Batch | Status after PD01 | Continuation note |
+| --- | --- | --- |
+| PD01 | Complete / accepted Yellow after validation and commit | Docs/planning only; no app code changed. |
+| PD02 | Next eligible direct successor only if PD01 is accepted Yellow/Green, committed, pushed, clean, and continuation gates allow it | Implementation batch; requires strong validation and Today owner gates. |
+| PD03-PD18 | Queued / Blocked | Each waits for predecessor and named PXOS/ME/CS/SI/AOS-if-needed gates. |
+| Global train outside PD | Stopped / not resumed | Requires its own explicit approval and gate path. |
+
+## Conflict Register
+
+| Conflict | Severity | Owner | PD01 decision |
+| --- | --- | --- | --- |
+| Accent taxonomy/default mismatch | Yellow | Appearance Studio / theme / You | Preserve as Yellow. Do not edit design tokens or persistence defaults in PD01. Future docs-only alias/migration plan or approved implementation needed. |
+| MissionControlTimeSpine order mismatch / unknown | Yellow | Goals / PD05 | Preserve as Yellow. PD05 must reconcile current Proof/Blockers/Next Step/Momentum-style evidence to Completed/Now/Friction/Next/Horizon before code. |
+| User-facing copy boundary | Yellow | Cross-surface copy / PD implementation batches | Preserve staged remediation model from Batch 1C. Future PD batches must avoid forbidden copy and run copy scans. |
+| Step Session depth unknown | Yellow | Today / PD03 | Preserve; PD03 cannot claim depth from existing evidence before implementation proof. |
+| Month LifeShape calendar-clone risk | Yellow | Plan / PD14 | Preserve; PD14 must prove capacity-lens behavior. |
+| You / Privacy / Memory / Receipts density | Yellow | You / PD15-PD16 | Preserve copy-density and trust/control-first guardrails. |
+| Candidate items | Yellow | Object owners | Candidate items remain Candidate until a named batch explicitly finalizes or defers them. |
+| Broad app implementation | Red | Cross-surface | Remains Red and unauthorized. |
+
+## Product Depth Acceptance Rules
+
+Every future PD batch must prove:
+
+- the owning surface is Today, Goals, Capture, Plan, You, or cross-surface
+  proof/review;
+- the top-level surface keeps orientation and one-primary-object hierarchy;
+- secondary detail moves behind an owned drill-down, lane, sheet, review
+  surface, proof detail, setup flow, or receipt/history view;
+- no new top-level destination or generic product mode is introduced;
+- proof, source, privacy, and receipt semantics match the Product Experience
+  Pack;
+- accessibility, Dynamic Type, VoiceOver, no-color-only meaning, and Reduced
+  Motion equivalents are named and validated;
+- ME, CS, AOS, REC, SI, and PXOS dependencies are classified before code;
+- validation strength matches the batch type.
+
+## Non-Claims
+
+PD01 does not prove Product Depth implementation, PD02 readiness beyond
+continuation eligibility, release readiness, TestFlight readiness, App Store
+readiness, physical-device proof, public accessibility conformance, signed
+archive validation, App Store Connect validation, external-platform rendering,
+PXOS implementation, AmbitionsOS implementation, LDI runtime, sync/auth/network
+behavior, persistence migration, or AI/model runtime behavior.

@@ -208,13 +208,18 @@ Use this context when SI is selected by global order or explicit phrase:
 - `.codex/review-boards/signature-interface-review-board.md`
 - `.codex/skills/signature-interface-creative-director.md`
 
-SI01-SI18 are complete as bounded Signature Interface evidence. Product Depth remains stopped for the `Start Product Depth Train` user-decision gate.
+SI01-SI18 are complete as bounded Signature Interface evidence. The Product
+Depth approval phrase has been provided; PD01 is accepted Yellow as the Product
+Depth docs/planning source-truth batch. Product Depth implementation remains
+unstarted until an individual PD implementation batch runs and proves its
+scope.
 
 ## Product Depth Queued Train Context
 
 Use this context when the user explicitly chooses Product Depth after the
 required PXOS, ME, CS, AOS-if-needed, and REC claim gates:
 
+- `docs/canon/Ambitions_Product_Depth_Canon_Inventory_And_Ownership_Map.md`
 - `docs/canon/Ambitions_Product_Depth_Plan.md`
 - `docs/canon/PXOS_Product_Depth_And_Drilldown_Rules.md`
 - `docs/codex/batch-trains/PD01_PD18_PRODUCT_DEPTH_TRAIN.md`
@@ -239,10 +244,12 @@ required PXOS, ME, CS, AOS-if-needed, and REC claim gates:
 - `docs/codex/GLOBAL_FUTURE_BATCH_EXECUTION_ORDER.md`
 - `docs/codex/GLOBAL_FUTURE_BATCH_GATE_MATRIX.md`
 
-Product Depth starts only if the user says exactly
-`Start Product Depth Train`. PD01-PD18 remain queued/blocked and not started. Product Depth
-must deepen Today, Goals, Capture, Plan, and You; it must not add new top-level
-tabs, generic dashboards, stacked-card top-level screens, habit tracker modes,
+Product Depth started only after the user said exactly
+`Start Product Depth Train`. PD01 is accepted Yellow as the docs/planning
+source-truth batch; Product Depth implementation remains unstarted until an
+individual implementation batch runs and validates. Product Depth must deepen
+Today, Goals, Capture, Plan, and You; it must not add new top-level tabs,
+generic dashboards, stacked-card top-level screens, habit tracker modes,
 calendar clones, chatbot-first AI surfaces, inbox/notes modes, or enterprise
 project-management systems.
 

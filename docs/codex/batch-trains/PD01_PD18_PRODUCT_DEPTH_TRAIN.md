@@ -1,7 +1,7 @@
 # PD01-PD18 Product Depth Train
 <!-- markdownlint-disable MD013 -->
 
-Status: Queued Ambitions 4.0 train manifest; Product Depth train not started; blocked pending `Start Product Depth Train` and prerequisite gates.
+Status: Active Ambitions 4.0 Product Depth train; approval phrase satisfied; PD01 accepted Yellow; Product Depth implementation not started.
 Train type: queued implementation / product-depth / drill-down expansion
 Date: 2026-05-02
 
@@ -28,6 +28,9 @@ Product Depth must deepen existing surfaces and must not widen the app. No new t
 - `docs/canon/Ambitions_Product_Experience_OS_Index.md`
 - `docs/canon/PXOS_Product_Depth_And_Drilldown_Rules.md`
 - `docs/canon/Ambitions_Product_Depth_Plan.md`
+- `docs/canon/Ambitions_Product_Depth_Canon_Inventory_And_Ownership_Map.md`
+- `docs/handoff/Ambitions_Product_Experience_Pack_Source_Truth_Packet.md`
+- `docs/handoff/Ambitions_Product_Experience_Pack_Final_File_Boundary_Approval.md`
 - `docs/codex/GLOBAL_FUTURE_BATCH_EXECUTION_ORDER.md`
 - `docs/codex/GLOBAL_FUTURE_BATCH_GATE_MATRIX.md`
 - `docs/codex/BATCH_REGISTRY.md`
@@ -43,7 +46,7 @@ Product Depth must deepen existing surfaces and must not widen the app. No new t
 
 ## Batch Order
 
-- PD01: Product Depth Canon, Inventory, and Ownership Map. Type: Docs/planning. Owner: Cross-surface. Boundary: Create the formal Product Depth source of truth.
+- PD01: Product Depth Canon, Inventory, and Ownership Map. Type: Docs/planning. Owner: Cross-surface. Boundary: Create the formal Product Depth source of truth. Status: accepted Yellow as PD01 source-truth map; no app implementation.
 - PD02: Today Step Detail Depth. Type: Implementation. Owner: Today. Boundary: Make Step Detail a real lightweight drill-down, not a card-expanded task row.
 - PD03: Today Step Session Depth. Type: Implementation. Owner: Today. Boundary: Make Step Session the execution environment for a step.
 - PD04: Today Recovery and Closure Depth. Type: Implementation. Owner: Today / Recovery. Boundary: Make missed, moved, blocked, skipped, and still-valid steps recoverable without shame.
@@ -79,6 +82,18 @@ Auto-continuation is disabled by default. Continue only after Green evidence, re
 ## Evidence Rules
 
 Each batch leaves an audit/report, changed files, validation logs or command output, unresolved Yellows, rollback/repair path, and exact next prompt.
+
+## PD01 Source Truth Map
+
+PD01 creates
+`docs/canon/Ambitions_Product_Depth_Canon_Inventory_And_Ownership_Map.md` as
+the formal Product Depth canon, inventory, candidate, ownership, dependency,
+conflict, and blocked/unblocked status map.
+
+The map is planning truth only. It does not implement Product Depth, change app
+code, edit routes/raw values, change persistence/schema, alter sync/auth/network
+behavior, touch AI/LDI runtime, update CI/config, or claim release/platform
+readiness.
 
 ## What This Train Must Not Claim
 

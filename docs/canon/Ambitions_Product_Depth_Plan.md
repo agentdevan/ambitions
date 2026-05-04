@@ -1,14 +1,17 @@
 # Ambitions Product Depth Plan
 <!-- markdownlint-disable MD013 -->
 
-Status: Future canon in the Ambitions 4.0 Execution Program; Product Depth train queued/blocked and not started
+Status: Active Product Depth canon in the Ambitions 4.0 Execution Program; PD01 accepted Yellow; Product Depth implementation not started
 Date: 2026-05-02
 
 ## Purpose
 
 Product Depth is the future Ambitions lane for making the existing product surfaces deeper, more trustworthy, and more useful without widening the app. It turns secondary information, proof, review, recovery, setup, and continuity into owned drill-downs behind the existing five top-level surfaces.
 
-This plan is not implementation approval. It does not start Product Depth, REC02, PXOS, ME, CS, AOS, or release work.
+This plan is not implementation approval. PD01 started only after the required
+approval phrase was provided. PD01 creates canon, inventory, ownership, and
+dependency truth. It does not implement app code, start REC02, restart PXOS,
+restart ME/CS/AOS, resume the global train, or create release work.
 
 ## Governing Rule
 
@@ -32,6 +35,9 @@ Top-level surfaces remain visual orientation surfaces. Detail belongs behind dri
 - `docs/canon/Ambitions_Beyond_3_0_Roadmap.md`
 - `docs/canon/Ambitions_Product_Experience_OS_Index.md`
 - `docs/canon/PXOS_Product_Depth_And_Drilldown_Rules.md`
+- `docs/canon/Ambitions_Product_Depth_Canon_Inventory_And_Ownership_Map.md`
+- `docs/handoff/Ambitions_Product_Experience_Pack_Source_Truth_Packet.md`
+- `docs/handoff/Ambitions_Product_Experience_Pack_Final_File_Boundary_Approval.md`
 - `docs/codex/GLOBAL_FUTURE_BATCH_EXECUTION_ORDER.md`
 - `docs/codex/GLOBAL_FUTURE_BATCH_GATE_MATRIX.md`
 - `docs/codex/batch-trains/PD01_PD18_PRODUCT_DEPTH_TRAIN.md`
@@ -40,7 +46,10 @@ Top-level surfaces remain visual orientation surfaces. Detail belongs behind dri
 
 Train name: `PD01-PD18 Product Depth Train`
 
-Status: Queued/blocked and not started.
+Status: Active after approval phrase; PD01 is accepted Yellow as the
+docs/planning source-truth batch. Product Depth implementation remains not
+started until an individual PD implementation batch runs, validates, commits,
+and closes.
 
 Required approval phrase: `Start Product Depth Train`.
 
@@ -56,6 +65,29 @@ Purpose: deepen Ambitions' existing surfaces through drill-downs, detail flows, 
 | Plan | Reflow decisions, pressure recovery, Life Shape drill-downs, capacity/protected-time explanation | Calendar clone, dense event grid, shame loop |
 | You | Trust history, receipts center, source review, schedule/defaults, automation history | Vanity analytics dashboard, account/settings sprawl |
 | Cross-surface | Proof/review links across Capture, Today, Goals, Plan, and You | New review tab, generic activity feed |
+
+## PD01 Canon And Ownership Map
+
+PD01 created
+`docs/canon/Ambitions_Product_Depth_Canon_Inventory_And_Ownership_Map.md` as
+the formal Product Depth source-truth map.
+
+That map defines:
+
+- Product Depth definition.
+- Product Experience Pack alignment.
+- drill-down inventory by surface.
+- feature-depth candidate ownership.
+- implementation dependency map.
+- blocked/unblocked status.
+- conflict register.
+- Product Depth acceptance rules.
+
+The map preserves documented Yellow conflicts and caveats: accent
+taxonomy/default mismatch, MissionControlTimeSpine order mismatch/unknown,
+user-facing copy-boundary remediation, Step Session depth unknown, Month
+LifeShape calendar-clone risk, You / Privacy / Receipts copy-density risk, and
+Candidate item status.
 
 ## Top-Level Vs Drill-Down Matrix
 
@@ -101,7 +133,13 @@ Purpose: deepen Ambitions' existing surfaces through drill-downs, detail flows, 
 
 ## Blocked And Unblocked Status
 
-All PD batches are queued/blocked and not started. PD01 may be selected only after the required approval phrase and prerequisite gates. PD02-PD18 remain blocked until their named PXOS, ME, CS, AOS, REC, validation, and predecessor gates are Green or accepted Yellow.
+PD01 may run after the required approval phrase and prerequisite gates. PD01
+closed accepted Yellow with docs-only evidence. PD02 is the next direct
+successor only after PD01 commits, pushes, leaves a clean worktree, and the
+continuation gate allows it.
+
+PD03-PD18 remain blocked until their named PXOS, ME, CS, AOS-if-needed, REC,
+validation, and predecessor gates are Green or accepted Yellow.
 
 ## Anti-Sprawl Tests
 
@@ -125,4 +163,6 @@ This plan does not prove implementation, release readiness, TestFlight readiness
 
 Product Depth now depends on the queued SI train where relevant. PD02-PD04 depend on SI04/SI05/SI10/SI12/SI13/SI17. PD05-PD08 depend on SI06/SI07/SI10/SI12/SI14/SI17. PD09-PD11 depend on SI09/SI12/SI13/SI17. PD12-PD14 depend on SI08/SI12/SI13/SI17. PD15-PD16 depend on SI03/SI10/SI11/SI13/SI14. PD17 depends on SI03/SI10/SI12/SI17. PD18 depends on SI18.
 
-These dependencies do not start Product Depth or SI implementation. They prevent depth work from using generic UI where Ambitions-native primitives should exist.
+SI01-SI18 are complete as accepted-Yellow Signature Interface evidence. These
+dependencies do not prove Product Depth implementation. They prevent depth work
+from using generic UI where Ambitions-native primitives should exist.

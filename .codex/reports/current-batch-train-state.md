@@ -1,8 +1,8 @@
 # Current Batch Train State
 
 Date: 2026-05-04
-Active train: Signature Interface
-Current batch: STOPPED FOR USER DECISION after SI18; PD01 requires Product Depth approval phrase
+Active train: Product Depth
+Current batch: PD01 complete / accepted Yellow; PD02 next eligible if continuation gates allow
 Scope: Complete: EB03A Universal Capture Composer Routing Owner Map. Complete:
 EB03B Universal Capture Composer Routing Implementation. Complete: EB04
 Capture Classification And Clarification. Complete: EB05 Capture Clusters
@@ -472,12 +472,29 @@ public accessibility or profiling proof.
 
 ## Next Safe Path
 
-Do not start PD01 until the Product Depth approval phrase is satisfied. Do not restart broad
+Product Depth approval phrase is satisfied. Run PD01 only within docs/planning
+scope, then continue to PD02 only if PD01 closes Green or accepted Yellow and
+the Product Depth continuation gates allow it. Do not restart broad
 EB03, EB04, EB05, EB06, EB14, EB15, EB16, EB17, EB18, EB26, EB27, EB28, EB29,
 EB30, EB08, EB09, EB10, EB11, EB12, EB33, EB34, EB35, EB36, EB37, EB38, EB39,
 EB40, CS10, SI01, SI02, SI03, SI04, SI05, SI06, SI07, SI08, SI09, SI10, SI11,
 SI12, SI13, SI14, SI15, SI16, SI17, SI18, or completed DAV / EB20-EB24 batches.
-The next safe action is a user decision: `Start Product Depth Train`.
+The next safe action is PD02 if PD01 has been committed, pushed, the worktree is
+clean, and Product Depth continuation gates allow it.
+
+## PD01 Product Depth Canon, Inventory, And Ownership Map
+
+Date: 2026-05-04
+Result: ACCEPTED YELLOW
+
+PD01 created the formal Product Depth canon, inventory, ownership, candidate,
+dependency, conflict, and blocked/unblocked status map. It uses the completed
+Product Experience Pack handoff packet as controlling source truth. It did not
+edit app code, navigation, design tokens, persistence, sync/auth/network,
+AI/LDI runtime, CI/config, generated files, routes/raw values, tests, previews,
+fixtures, or release/platform claims. Validation closed accepted Yellow because
+the advisory docs QA backlog and scan hits are known/nonblocking and no
+forbidden production file family was touched.
 
 ## SI15 Accessibility Adaptive Interface Pass
 

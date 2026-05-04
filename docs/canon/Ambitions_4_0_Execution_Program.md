@@ -48,9 +48,9 @@ SI may start only when the global order reaches it or the exact phrase `Start Si
 
 ## Relationship To PD
 
-Product Depth is now a formal PD01-PD18 train in the Ambitions 4.0 global order. It is queued/blocked, not started, and not implemented.
+Product Depth is now a formal PD01-PD18 train in the Ambitions 4.0 global order. The train is active at PD01 for docs/planning canon, inventory, and ownership mapping after the exact approval phrase was supplied. Product Depth app implementation is not started and remains bounded by batch-specific gates.
 
-Product Depth may start only after `Start Product Depth Train`, PXOS Product Depth gates, relevant ME/CS/SI gates, and AOS-if-needed gates. Product Depth deepens Today, Goals, Capture, Plan, and You through drill-downs and owned detail flows. It must not widen the app.
+Product Depth may continue only after `Start Product Depth Train`, PXOS Product Depth gates, relevant ME/CS/SI gates, and AOS-if-needed gates. Product Depth deepens Today, Goals, Capture, Plan, and You through drill-downs and owned detail flows. It must not widen the app.
 
 ## Relationship To AOS
 
@@ -86,6 +86,7 @@ Total formal Ambitions 4.0 batches after SI insertion: 113.
 Active batch:
 
 - REC01 Release Evidence Truth Inventory.
+- PD01 Product Depth Canon, Inventory, and Ownership Map.
 
 Queued batches:
 
@@ -94,7 +95,7 @@ Queued batches:
 - ME01-ME12: global order 026-037; queued/blocked pending `Start ME Train`.
 - CS01-CS10: global order 038-047; queued/blocked pending `Start CS Train`.
 - SI01-SI18: global order 048-065; queued/blocked pending global-order selection or `Start Signature Interface Train`, PXOS complete, relevant ME/CS gates, and SI quality gates.
-- PD01-PD18: global order 066-083; queued/blocked pending `Start Product Depth Train` and prerequisite PXOS/ME/CS/SI/AOS-if-needed gates.
+- PD01-PD18: global order 066-083; PD01 active/accepted Yellow for docs/planning canon, inventory, and ownership mapping after `Start Product Depth Train`; PD02-PD18 remain gated by prerequisite PXOS/ME/CS/SI/AOS-if-needed gates and batch-specific file boundaries.
 - AOS01-AOS30: global order 084-113; queued/blocked pending `Start AOS Train`.
 
 ## Blocked And Gated Areas
@@ -104,7 +105,7 @@ Queued batches:
 - ME: blocked by ME approval, ownership maps, file-size/diff-size gates, and behavior-preservation validation.
 - CS: blocked by CS approval, seam registry, external/import/export/persistence proof, and compatibility gates.
 - Signature Interface: blocked by PXOS completion, ME/CS prerequisites, SI Codex OS gates, visual QA/preview/accessibility gates, and global-order or SI approval.
-- Product Depth: blocked by PXOS Product Depth canon, PX18 readiness, relevant ME/CS/SI gates, AOS-if-needed gates, and approval phrase.
+- Product Depth: PD01 approval phrase satisfied; implementation and later batches remain blocked by PXOS Product Depth canon, PX18 readiness, relevant ME/CS/SI gates, AOS-if-needed gates, and batch-specific gates.
 - AOS: blocked by AOS approval, runtime contracts, privacy/source-truth gates, and later PXOS expression gates before user-facing intelligence.
 
 ## What 4.0 May Claim
