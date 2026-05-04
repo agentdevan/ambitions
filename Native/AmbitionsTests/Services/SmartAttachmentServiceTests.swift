@@ -131,6 +131,53 @@ final class SmartAttachmentServiceTests: XCTestCase {
         XCTAssertEqual(request?.triageStatus, .assumedRoute)
     }
 
+    func testEB05AmbiguousCaptureCreatesReviewBundleWithOpenLoopSignal() {
+        let service = DefaultSmartAttachmentService()
+
+        let result = service.route(
+            SmartAttachmentInput(rawText: "Maybe build launch checklist tomorrow"),
+            candidates: [],
+            maxCandidateCount: 5
+        )
+        let bundle = result.reviewBundle
+
+        XCTAssertEqual(bundle.title, "Needs a Place review")
+        XCTAssertEqual(bundle.summary, "1 open review loop kept explicit before placement.")
+        XCTAssertEqual(bundle.clusters.map(\.title), ["Unplaced capture"])
+        XCTAssertEqual(bundle.clusters.first?.summary, "Held safely until the user chooses where it belongs.")
+        XCTAssertEqual(bundle.openLoopSignals.map(\.title), ["Route needs a choice"])
+        XCTAssertEqual(bundle.openLoopSignals.first?.requiresUserChoice, true)
+        XCTAssertTrue(bundle.accessibilitySummary.contains("1 open loop"))
+        XCTAssertFalse(bundle.accessibilitySummary.localizedCaseInsensitiveContains("AI"))
+    }
+
+    func testEB05SuggestedAttachmentCreatesRouteReviewBundleWithoutPersistenceChange() {
+        let service = DefaultSmartAttachmentService()
+
+        let result = service.route(
+            SmartAttachmentInput(rawText: "Find NASA contacts on LinkedIn later"),
+            candidates: [
+                SmartAttachmentDestinationCandidate(
+                    id: "goal-astronaut",
+                    label: "NASA contacts",
+                    destinationKind: .existingGoal,
+                    supportedRouteTypes: [.goal, .task, .proofItem],
+                    placementLabel: "Become an Astronaut"
+                )
+            ],
+            maxCandidateCount: 5
+        )
+        let bundle = result.reviewBundle
+
+        XCTAssertEqual(bundle.title, "Route review")
+        XCTAssertEqual(bundle.clusters.map(\.title), ["Task"])
+        XCTAssertEqual(bundle.clusters.first?.evidenceLabels, ["contacts", "nasa"])
+        XCTAssertEqual(bundle.openLoopSignals.map(\.title), ["Suggested attachment available"])
+        XCTAssertEqual(bundle.actionTitles, ["Attach", "Change", "Keep Standalone"])
+        XCTAssertEqual(result.captureRoute, .planSeed)
+        XCTAssertEqual(result.triageStatus, .assumedRoute)
+    }
+
     func testFailureUsesNeedsPlaceAndRetryCopyMetadata() {
         let service = DefaultSmartAttachmentService()
 

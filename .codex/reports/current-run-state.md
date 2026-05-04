@@ -2,14 +2,15 @@
 
 Date: 2026-05-03
 Active train: Ambitions 4.0 External Brain Foundation
-Current batch: EB05 next eligible after EB04 implementation
+Current batch: EB06 next eligible after EB05 implementation
 Scope: Complete: EB03A Universal Capture Composer Routing Owner Map. Complete:
 EB03B Universal Capture Composer Routing Implementation. Complete: EB04
-Capture Classification And Clarification. EB04 changed only the scoped Smart
-Attachment classification branch and focused tests. No route/raw value,
+Capture Classification And Clarification. Complete: EB05 Capture Clusters
+Review Bundles And Open Loops. EB05 changed only the scoped non-persistent Smart
+Attachment review projection and focused tests. No route/raw value,
 persistence/schema, dependency, workflow, signing, top-level-tab, production
-asset, network/sync/account/cloud behavior, or public accessibility/release
-claim change was made.
+asset, network/sync/account/cloud behavior, UI surface, or public
+accessibility/release claim change was made.
 
 ## Current Truth
 
@@ -49,7 +50,8 @@ claim change was made.
   EB03 remains a split parent, with EB03A complete as owner-map repair evidence
   and EB03B complete as the first scoped Capture composer/routing
   implementation pass. EB04 is complete as a scoped one-question clarification
-  pass. EB05 is the next eligible EB batch.
+  pass. EB05 is complete as a scoped non-persistent capture cluster/review
+  bundle/open-loop projection pass. EB06 is the next eligible EB batch.
 - PXEQ is a mandatory product-experience gate for EB UI-affecting batches; it
   is not a shipped app feature and not a new EB batch identity.
 - Optimized global order after EB32 places DAV01-DAV15 before UI-heavy EB
@@ -74,9 +76,18 @@ Attachment tests, `swift build`, and `scripts/build-local.sh`. Yellow items are
 screenshots/rendered proof not produced, human/device/VoiceOver review not run,
 and existing advisory backlog.
 
+EB05 result: PASS WITH YELLOW. `docs/audits/eb05-capture-clusters-review-bundles-open-loops-report.md`
+records the computed Smart Attachment review bundle, capture cluster, and
+open-loop signal projection, focused Smart Attachment tests, `swift build`, and
+`scripts/build-local.sh`. One focused test Red was repaired before closeout.
+Yellow items are screenshots/rendered proof not produced, human/device/VoiceOver
+review not run, Instruments/battery proof not run, and existing advisory
+backlog.
+
 ## Next Safe Path
 
-Run EB05 Capture Clusters Review Bundles And Open Loops next. Do not restart
-broad EB03, EB04, or completed DAV / EB20-EB24 batches. EB05 must name exact
+Run EB06 Capture Receipts Undo And Reclassification next. Do not restart broad
+EB03, EB04, EB05, or completed DAV / EB20-EB24 batches. EB06 must name exact
 owner files, focused tests, preview/fixture evidence, accessibility/privacy
-proof, and rollback before widening beyond clusters/review bundles/open loops.
+proof, and rollback before widening beyond receipts, undo, and
+reclassification.

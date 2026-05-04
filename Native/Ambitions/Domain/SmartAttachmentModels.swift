@@ -419,6 +419,64 @@ struct SmartAttachmentReceiptProjection: Sendable, Equatable {
     let isRedacted: Bool
 }
 
+struct SmartAttachmentCaptureCluster: Sendable, Equatable, Hashable, Identifiable {
+    let id: String
+    let title: String
+    let summary: String
+    let evidenceLabels: [String]
+    let itemCount: Int
+
+    init(id: String, title: String, summary: String, evidenceLabels: [String] = [], itemCount: Int = 1) {
+        self.id = SmartAttachmentRouteTarget.normalizedRequired(id)
+        self.title = SmartAttachmentRouteTarget.normalizedRequired(title)
+        self.summary = SmartAttachmentRouteTarget.normalizedRequired(summary)
+        self.evidenceLabels = Array(Set(evidenceLabels.map(SmartAttachmentRouteTarget.normalizedRequired).filter { $0.isEmpty == false })).sorted()
+        self.itemCount = max(1, itemCount)
+    }
+}
+
+struct SmartAttachmentOpenLoopSignal: Sendable, Equatable, Hashable, Identifiable {
+    let id: String
+    let title: String
+    let reason: String
+    let requiresUserChoice: Bool
+
+    init(id: String, title: String, reason: String, requiresUserChoice: Bool) {
+        self.id = SmartAttachmentRouteTarget.normalizedRequired(id)
+        self.title = SmartAttachmentRouteTarget.normalizedRequired(title)
+        self.reason = SmartAttachmentRouteTarget.normalizedRequired(reason)
+        self.requiresUserChoice = requiresUserChoice
+    }
+}
+
+struct SmartAttachmentReviewBundle: Sendable, Equatable, Hashable, Identifiable {
+    let id: String
+    let title: String
+    let summary: String
+    let clusters: [SmartAttachmentCaptureCluster]
+    let openLoopSignals: [SmartAttachmentOpenLoopSignal]
+    let actionTitles: [String]
+    let accessibilitySummary: String
+
+    init(
+        id: String,
+        title: String,
+        summary: String,
+        clusters: [SmartAttachmentCaptureCluster],
+        openLoopSignals: [SmartAttachmentOpenLoopSignal],
+        actionTitles: [String],
+        accessibilitySummary: String
+    ) {
+        self.id = SmartAttachmentRouteTarget.normalizedRequired(id)
+        self.title = SmartAttachmentRouteTarget.normalizedRequired(title)
+        self.summary = SmartAttachmentRouteTarget.normalizedRequired(summary)
+        self.clusters = clusters
+        self.openLoopSignals = openLoopSignals
+        self.actionTitles = actionTitles.map(SmartAttachmentRouteTarget.normalizedRequired).filter { $0.isEmpty == false }
+        self.accessibilitySummary = SmartAttachmentRouteTarget.normalizedRequired(accessibilitySummary)
+    }
+}
+
 struct SmartAttachmentResult: Codable, Sendable, Equatable, Hashable, Identifiable {
     let id: String
     let input: SmartAttachmentInput
@@ -568,5 +626,106 @@ struct SmartAttachmentResult: Codable, Sendable, Equatable, Hashable, Identifiab
             safeFailure: safeFailure,
             sourceObject: captureObject
         )
+    }
+}
+
+extension SmartAttachmentResult {
+    var reviewBundle: SmartAttachmentReviewBundle {
+        let cluster = SmartAttachmentCaptureCluster(
+            id: "cluster.\(id)",
+            title: clusterTitle,
+            summary: clusterSummary,
+            evidenceLabels: suggestedCandidate?.evidenceLabels ?? selectedCandidate?.evidenceLabels ?? [],
+            itemCount: 1
+        )
+        let signals = openLoopSignals
+        let actionTitles = actions.map(\.title)
+
+        return SmartAttachmentReviewBundle(
+            id: "review-bundle.\(id)",
+            title: reviewBundleTitle,
+            summary: reviewBundleSummary(openLoopCount: signals.count),
+            clusters: [cluster],
+            openLoopSignals: signals,
+            actionTitles: actionTitles,
+            accessibilitySummary: accessibilityReviewSummary(openLoopCount: signals.count, actionTitles: actionTitles)
+        )
+    }
+
+    private var reviewBundleTitle: String {
+        if savesToNeedsPlace || resultState == .needsClarification {
+            return "Needs a Place review"
+        }
+        if suggestedCandidate != nil {
+            return "Route review"
+        }
+        return "Placed capture review"
+    }
+
+    private var clusterTitle: String {
+        if savesToNeedsPlace || resultState == .needsClarification {
+            return "Unplaced capture"
+        }
+        if selectedCandidate?.target.routeType == .proofItem {
+            return "Proof candidate"
+        }
+        return selectedCandidate?.target.routeType.userFacingLabel ?? "Capture"
+    }
+
+    private var clusterSummary: String {
+        if savesToNeedsPlace || resultState == .needsClarification {
+            return "Held safely until the user chooses where it belongs."
+        }
+        if let destination = selectedCandidate?.target.displaySegments.joined(separator: " · "), destination.isEmpty == false {
+            return "Locally grouped by \(destination)."
+        }
+        return "Locally grouped by conservative capture route."
+    }
+
+    private var openLoopSignals: [SmartAttachmentOpenLoopSignal] {
+        var signals = [SmartAttachmentOpenLoopSignal]()
+        if savesToNeedsPlace || resultState == .needsClarification {
+            signals.append(
+                SmartAttachmentOpenLoopSignal(
+                    id: "open-loop.\(id).route-choice",
+                    title: "Route needs a choice",
+                    reason: clarification?.question ?? "The route was not safe to infer.",
+                    requiresUserChoice: true
+                )
+            )
+        }
+        if let suggestedCandidate {
+            signals.append(
+                SmartAttachmentOpenLoopSignal(
+                    id: "open-loop.\(id).suggested-attachment",
+                    title: "Suggested attachment available",
+                    reason: "Local wording also matched \(suggestedCandidate.target.destinationLabel ?? "an existing item").",
+                    requiresUserChoice: true
+                )
+            )
+        }
+        if resultState == .failedSafely {
+            signals.append(
+                SmartAttachmentOpenLoopSignal(
+                    id: "open-loop.\(id).safe-failure",
+                    title: "Capture kept safely",
+                    reason: failureReason ?? "No route was applied.",
+                    requiresUserChoice: false
+                )
+            )
+        }
+        return signals
+    }
+
+    private func reviewBundleSummary(openLoopCount: Int) -> String {
+        if openLoopCount == 0 {
+            return "No open review loop is required before saving this local route."
+        }
+        return "\(openLoopCount) open review loop\(openLoopCount == 1 ? "" : "s") kept explicit before placement."
+    }
+
+    private func accessibilityReviewSummary(openLoopCount: Int, actionTitles: [String]) -> String {
+        let actions = actionTitles.isEmpty ? "No actions" : actionTitles.joined(separator: ", ")
+        return "\(reviewBundleTitle). \(openLoopCount) open loop\(openLoopCount == 1 ? "" : "s"). Actions: \(actions)."
     }
 }

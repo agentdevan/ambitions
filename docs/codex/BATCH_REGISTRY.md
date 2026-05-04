@@ -160,6 +160,13 @@ Current 4.0 status:
   persistence/schema, UI, top-level-tab, dependency, workflow, signing, network,
   sync, account, cloud, or release-claim changes. EB05 Capture Clusters Review
   Bundles And Open Loops is the next eligible EB batch.
+- Complete: EB05 Capture Clusters Review Bundles And Open Loops is complete as
+  a bounded non-persistent Smart Attachment review projection. It added computed
+  capture cluster, review bundle, and open-loop signal projections from existing
+  local route/clarification/evidence state with focused tests, without route/raw,
+  persistence/schema, UI, top-level-tab, dependency, workflow, signing, network,
+  sync, account, cloud, or release-claim changes. EB06 Capture Receipts Undo And
+  Reclassification is the next eligible EB batch.
 - Active Planned / Queued: EB08-EB12, EB14-EB18, EB20-EB24, EB03-EB06, and EB26-EB40 Ambitions 4.0 External Brain Foundation expansion segment; not completed and not implemented in app behavior.
 - Queued / Blocked: SI01-SI18 pending global-order selection or `Start Signature Interface Train` plus PXOS/ME/CS/SI quality gates.
 - Queued / Blocked: PD01-PD18 pending `Start Product Depth Train` plus PXOS/ME/CS/SI/AOS-if-needed gates.
