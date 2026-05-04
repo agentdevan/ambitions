@@ -2,7 +2,7 @@
 
 Date: 2026-05-03
 Active train: Ambitions 4.0 External Brain Foundation
-Current batch: EB09 next eligible after EB08 implementation
+Current batch: EB10 next eligible after EB09 implementation
 Scope: Complete: EB03A Universal Capture Composer Routing Owner Map. Complete:
 EB03B Universal Capture Composer Routing Implementation. Complete: EB04
 Capture Classification And Clarification. Complete: EB05 Capture Clusters
@@ -69,7 +69,8 @@ accessibility/release claim change was made.
   implementation. EB30 is complete as a bounded shared
   accessibility/cognitive-load evidence requirements implementation. EB08 is
   complete as a bounded memory source/confidence/trust-decay implementation.
-  EB09 is the next eligible EB batch.
+  EB09 is complete as a bounded life-event/decision/context-recall memory
+  implementation. EB10 is the next eligible EB batch.
 - PXEQ is a mandatory product-experience gate for EB UI-affecting batches; it
   is not a shipped app feature and not a new EB batch identity.
 - Optimized global order after EB32 places DAV01-DAV15 before UI-heavy EB
@@ -205,11 +206,19 @@ not implemented, screenshots/rendered proof not produced, human/device/VoiceOver
 review not run, durable correction/delete/export behavior deferred, and existing
 advisory backlog.
 
+EB09 result: PASS WITH YELLOW. `docs/audits/eb09-life-event-decision-context-recall-memory-report.md`
+records the bounded non-persistent Memory Lens life-event, decision, and
+context-recall classification implementation, focused Memory Lens tests,
+`swift build`, and `scripts/build-local.sh`. Yellow items are current
+Memory/Trust UI consumption not implemented, screenshots/rendered proof not
+produced, human/device/VoiceOver review not run, durable correction/delete/export
+behavior deferred, and existing advisory backlog.
+
 ## Next Safe Path
 
-Run EB09 Life Event Decision And Context Recall Memory next. Do not restart broad
+Run EB10 Personal Operating Manual And Preferences next. Do not restart broad
 EB03, EB04, EB05, EB06, EB14, EB15, EB16, EB17, EB18, EB26, EB27, EB28, EB29,
-EB30, EB08, or completed DAV / EB20-EB24 batches. EB09 must name exact owner
-files, focused tests, context-recall proof, privacy proof,
+EB30, EB08, EB09, or completed DAV / EB20-EB24 batches. EB10 must name exact
+owner files, focused tests, preference/manual proof, privacy proof,
 correction/delete/export non-claim boundaries, and rollback before widening
-beyond life-event decision or context-recall memory behavior.
+beyond personal operating manual or preference behavior.

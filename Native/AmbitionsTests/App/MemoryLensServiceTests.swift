@@ -149,6 +149,77 @@ final class MemoryLensServiceTests: XCTestCase {
                 $0.trustDecayState == .aging
         })
     }
+
+    func testSearchResultsClassifyLifeEventsDecisionsAndContextRecallMemory() async throws {
+        let store = try AmbitionsPersistenceStore(inMemory: true)
+        let repositories = makeRepositories(store: store)
+        let goal = try XCTUnwrap(goalFromFixture(id: "clear-timed-self-goal"))
+        let step = try XCTUnwrap(goal.plan?.sections.flatMap(\.steps).first)
+        try await repositories.goals.saveGoals([goal])
+        try await repositories.feedback.saveEvents([
+            .delayed(
+                base: GoalFeedbackEventBase(
+                    id: "feedback-delay",
+                    stepID: step.id,
+                    occurredAt: "2026-04-22T10:00:00Z",
+                    note: "Moved this to protect the week."
+                ),
+                timingAdjustment: .laterToday,
+                date: nil
+            )
+        ], goalID: goal.id)
+        try await repositories.teaching.saveSignals([
+            GoalTeachingSignal(
+                id: "teaching-context",
+                goalID: goal.id,
+                createdAt: "2026-04-22T11:00:00Z",
+                updatedAt: "2026-04-22T11:00:00Z",
+                source: .explicitManualCorrection,
+                kind: .classificationCorrection,
+                disposition: .active,
+                anchor: GoalTeachingStableAnchor(
+                    artifactKind: .classificationField,
+                    canonicalField: .mode,
+                    candidateID: nil,
+                    stageID: nil,
+                    stepID: step.id,
+                    targetFingerprint: "classification::\(step.id)",
+                    contradictionCode: nil,
+                    contradictionArtifactRefs: []
+                ),
+                payload: .classification(.init(
+                    field: .mode,
+                    correctedValue: .mode(.learning)
+                )),
+                applicationKey: "goal##classification",
+                userNote: "Treat this as ongoing context"
+            )
+        ])
+        let service = DefaultMemoryLensService(repositories: repositories)
+
+        let results = await service.search(query: "", seedIntent: .memoryLens)
+
+        XCTAssertTrue(results.contains {
+            $0.kind == .week &&
+                $0.contextRecallClass == .lifeEvent &&
+                !$0.requiresUserReviewBeforeDurableMemory
+        })
+        XCTAssertTrue(results.contains {
+            $0.kind == .recentChange &&
+                $0.contextRecallClass == .decision &&
+                $0.requiresUserReviewBeforeDurableMemory
+        })
+        XCTAssertTrue(results.contains {
+            $0.kind == .goal &&
+                $0.contextRecallClass == .contextRecall &&
+                !$0.requiresUserReviewBeforeDurableMemory
+        })
+        XCTAssertTrue(results.contains {
+            $0.kind == .teaching &&
+                $0.contextRecallClass == .correctionMemory &&
+                $0.requiresUserReviewBeforeDurableMemory
+        })
+    }
 }
 
 private extension MemoryLensServiceTests {

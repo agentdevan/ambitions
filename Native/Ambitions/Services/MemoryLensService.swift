@@ -117,6 +117,22 @@ enum MemoryLensTrustDecayState: String, Sendable, Equatable, CaseIterable {
     }
 }
 
+enum MemoryLensContextRecallClass: String, Sendable, Equatable, CaseIterable {
+    case lifeEvent
+    case decision
+    case contextRecall
+    case correctionMemory
+
+    var title: String {
+        switch self {
+        case .lifeEvent: "Life event"
+        case .decision: "Decision"
+        case .contextRecall: "Context recall"
+        case .correctionMemory: "Correction memory"
+        }
+    }
+}
+
 struct MemoryLensResult: Identifiable, Sendable, Equatable {
     let id: String
     let title: String
@@ -161,6 +177,26 @@ struct MemoryLensResult: Identifiable, Sendable, Equatable {
             .current
         case .learning:
             .aging
+        }
+    }
+    var contextRecallClass: MemoryLensContextRecallClass {
+        switch kind {
+        case .week, .handoff:
+            .lifeEvent
+        case .recentChange, .whyNow:
+            .decision
+        case .goal, .capture:
+            .contextRecall
+        case .teaching, .learning:
+            .correctionMemory
+        }
+    }
+    var requiresUserReviewBeforeDurableMemory: Bool {
+        switch contextRecallClass {
+        case .lifeEvent, .contextRecall:
+            false
+        case .decision, .correctionMemory:
+            true
         }
     }
     var allowsMemoryClaim: Bool { false }

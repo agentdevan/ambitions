@@ -261,7 +261,15 @@ Current 4.0 status:
   workflow, signing, network, sync/account/cloud behavior, production asset, or
   release-claim changes. EB09 Life Event Decision And Context Recall Memory is
   the next eligible EB batch.
-- Active Planned / Queued: EB09-EB12 and EB33-EB40 Ambitions 4.0 External Brain Foundation expansion segment; not completed and not implemented in app behavior.
+- Complete: EB09 Life Event Decision And Context Recall Memory is complete as a
+  bounded non-persistent Memory Lens classification implementation. It adds
+  life-event, decision, context-recall, and correction-memory classification
+  with user-review-before-durable-memory gates and focused Memory Lens tests
+  only, without route, persistence/schema, top-level-tab, dependency, workflow,
+  signing, network, sync/account/cloud behavior, production asset, or
+  release-claim changes. EB10 Personal Operating Manual And Preferences is the
+  next eligible EB batch.
+- Active Planned / Queued: EB10-EB12 and EB33-EB40 Ambitions 4.0 External Brain Foundation expansion segment; not completed and not implemented in app behavior.
 - Queued / Blocked: SI01-SI18 pending global-order selection or `Start Signature Interface Train` plus PXOS/ME/CS/SI quality gates.
 - Queued / Blocked: PD01-PD18 pending `Start Product Depth Train` plus PXOS/ME/CS/SI/AOS-if-needed gates.
 - Queued / Blocked: AOS01-AOS30 pending `Start AOS Train`.
