@@ -58,6 +58,9 @@ struct GoalsScreen: View {
                     )
                     .transition(DAVMotionPreset.heroExpansion.transition(reduceMotion: reduceMotion))
 
+                    GoalLifePathView(overview: overview)
+                        .transition(.ambitionPanel)
+
                     GoalsWeekPressureCard(summary: overview.weekPressureSummary)
                         .transition(.ambitionPanel)
                     GoalsPortfolioMaturityCard(summary: overview.maturitySummary)

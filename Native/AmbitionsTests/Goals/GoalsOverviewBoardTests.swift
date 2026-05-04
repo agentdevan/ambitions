@@ -297,6 +297,25 @@ final class GoalsOverviewBoardTests: XCTestCase {
 
         XCTAssertTrue(issues.isEmpty, issues.map(\.message).joined(separator: "\n"))
     }
+
+    func testSI06LifePathStateUsesProofRiskNextAndPrivateFallbacks() {
+        let state = GoalLifePathState(overview: PreviewGoalsScenarios.overview)
+
+        XCTAssertEqual(state.badge, "Route attention")
+        XCTAssertTrue(state.nodes.contains(where: { $0.kind == .start }))
+        XCTAssertTrue(state.nodes.contains(where: { $0.kind == .current }))
+        XCTAssertTrue(state.nodes.contains(where: { $0.kind == .proof }))
+        XCTAssertTrue(state.nodes.contains(where: { $0.kind == .risk }))
+        XCTAssertTrue(state.nodes.contains(where: { $0.kind == .next }))
+        XCTAssertTrue(state.nodes.allSatisfy { $0.nonColorMeaning.isEmpty == false })
+        XCTAssertFalse(state.alternateRoutes.isEmpty)
+        XCTAssertFalse(state.accessibilityValue.localizedCaseInsensitiveContains("score"))
+
+        let privateState = GoalLifePathState(overview: PreviewGoalsScenarios.overview, privacySensitive: true)
+        XCTAssertEqual(privateState.title, "Private ambition path")
+        XCTAssertTrue(privateState.nodes.contains(where: { $0.detail.localizedCaseInsensitiveContains("hidden") }))
+        XCTAssertTrue(privateState.accessibilityHint.localizedCaseInsensitiveContains("private"))
+    }
 }
 
 private extension GoalsOverviewBoardTests {

@@ -387,7 +387,12 @@ Current 4.0 status:
   strip, loading/disabled hero preview fixtures, named preview evidence, and
   focused Today tests without changing routes, raw values, persistence, or
   non-Today behavior.
-- Queued / Blocked: SI06-SI18 pending global-order selection or `Start Signature Interface Train` plus PXOS/ME/CS/SI quality gates.
+- Complete: SI06 LifePath Visualization System is complete as bounded Goals
+  implementation evidence. It adds a Goals-owned LifePath object with start,
+  current, proof, risk, next-step, alternate-route, private, Dynamic Type, and
+  no-animation preview proof without changing routes, raw values, persistence,
+  or non-Goals behavior.
+- Queued / Blocked: SI07-SI18 pending global-order selection or `Start Signature Interface Train` plus PXOS/ME/CS/SI quality gates.
 - Queued / Blocked: PD01-PD18 pending `Start Product Depth Train` plus PXOS/ME/CS/SI/AOS-if-needed gates.
 - Queued / Blocked: AOS01-AOS30 pending `Start AOS Train`.
 - Original formal Ambitions 4.0 batches after SI insertion: 113.
@@ -744,7 +749,7 @@ These batches are complete for planning purposes. They remain as historical cont
 | CS07 External Route Widget AppIntent Compatibility Proof | Completed / focused proof | External route, widget, App Intent, external snapshot, and screen-contract focused tests passed; no seam retired. |
 | CS08 Import Export Persistence Compatibility Proof | Completed / focused proof | Import/export, portable snapshot, legacy import, persistence repository, sync posture, and persistence budget focused tests passed; no seam retired. |
 | CS02-CS06 / CS09-CS10 Compatibility Seam Retirement Train | Queued / Blocked | Requires current global preauthorization or `Start CS Train` and Green predecessor gates. |
-| SI01-SI18 Signature Interface Implementation Train | Active | SI01-SI05 complete; SI06-SI18 require global-order selection or `Start Signature Interface Train`, PXOS completion, relevant ME/CS gates, and SI visual quality gates. |
+| SI01-SI18 Signature Interface Implementation Train | Active | SI01-SI06 complete; SI07-SI18 require global-order selection or `Start Signature Interface Train`, PXOS completion, relevant ME/CS gates, and SI visual quality gates. |
 | PD01-PD18 Product Depth Train | Queued / Blocked | Formal Product Depth train. Requires exact approval phrase `Start Product Depth Train`, PXOS Product Depth gates, relevant ME/CS/SI gates, and AOS blockers when runtime logic is touched. |
 | PXOS Future-Canon Integration | Completed / docs-only | Added Product Experience OS future canon and Codex OS controls. It does not start PXOS implementation or the PXOS train. |
 | PX01-PX20 Product Experience OS Train | Completed / docs-only | PX01-PX20 are complete as future canon/roadmap evidence. PXOS implementation is not started. |
