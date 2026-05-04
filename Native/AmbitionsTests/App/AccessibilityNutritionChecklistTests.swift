@@ -168,6 +168,44 @@ final class AccessibilityNutritionChecklistTests: XCTestCase {
         })
     }
 
+    func testEB28PlainLanguageEvidenceCoversCopyRecoveryAndScreenExplanation() {
+        let requirements = EB28PlainLanguageExplanationEvidence.requirements
+
+        XCTAssertEqual(Set(requirements.map(\.axis)), Set(AccessibilityPlainLanguageAxis.allCases))
+        XCTAssertEqual(EB28PlainLanguageExplanationEvidence.ownerBatch, "EB28")
+        XCTAssertFalse(EB28PlainLanguageExplanationEvidence.changesUserFacingBehavior)
+        XCTAssertFalse(EB28PlainLanguageExplanationEvidence.releaseClaimsAllowed)
+
+        for requirement in requirements {
+            XCTAssertFalse(requirement.ownerFile.isEmpty)
+            XCTAssertFalse(requirement.automatedProofTarget.isEmpty)
+            XCTAssertFalse(requirement.requiredPattern.isEmpty)
+            XCTAssertFalse(requirement.forbiddenPattern.isEmpty)
+            XCTAssertFalse(requirement.userFacingBehaviorChanged)
+            XCTAssertFalse(requirement.releaseClaimAllowed)
+        }
+    }
+
+    func testEB28PlainLanguageEvidenceBlocksAnxietyAndAITheaterDrift() {
+        let requirements = EB28PlainLanguageExplanationEvidence.requirements
+
+        XCTAssertTrue(requirements.contains {
+            $0.axis == .plainLanguageCopy &&
+                $0.requiredPattern.localizedCaseInsensitiveContains("Recommended step") &&
+                $0.forbiddenPattern.localizedCaseInsensitiveContains("confidence scores")
+        })
+        XCTAssertTrue(requirements.contains {
+            $0.axis == .anxietySafeRecovery &&
+                $0.requiredPattern.localizedCaseInsensitiveContains("recoverable") &&
+                $0.forbiddenPattern.localizedCaseInsensitiveContains("shame")
+        })
+        XCTAssertTrue(requirements.contains {
+            $0.axis == .screenExplanation &&
+                $0.ownerFile == "Native/Ambitions/Domain/ScreenContractModels.swift" &&
+                $0.forbiddenPattern.localizedCaseInsensitiveContains("unsupported implementation claim")
+        })
+    }
+
     private static let d21ExpectedAuditOrder = [
         "today",
         "goals",

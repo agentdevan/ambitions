@@ -290,6 +290,95 @@ public enum EB27AccessibilityAdjustmentEvidence {
     }
 }
 
+public enum AccessibilityPlainLanguageAxis: String, CaseIterable, Identifiable, Sendable {
+    case plainLanguageCopy
+    case anxietySafeRecovery
+    case screenExplanation
+
+    public var id: String { rawValue }
+
+    public var title: String {
+        switch self {
+        case .plainLanguageCopy: "Plain-language copy"
+        case .anxietySafeRecovery: "Anxiety-safe recovery"
+        case .screenExplanation: "Explain this screen"
+        }
+    }
+}
+
+public struct AccessibilityPlainLanguageRequirement: Identifiable, Hashable, Sendable {
+    public let axis: AccessibilityPlainLanguageAxis
+    public let ownerFile: String
+    public let automatedProofTarget: String
+    public let requiredPattern: String
+    public let forbiddenPattern: String
+    public let userFacingBehaviorChanged: Bool
+    public let releaseClaimAllowed: Bool
+
+    public var id: AccessibilityPlainLanguageAxis { axis }
+
+    public init(
+        axis: AccessibilityPlainLanguageAxis,
+        ownerFile: String,
+        automatedProofTarget: String,
+        requiredPattern: String,
+        forbiddenPattern: String,
+        userFacingBehaviorChanged: Bool = false,
+        releaseClaimAllowed: Bool = false
+    ) {
+        self.axis = axis
+        self.ownerFile = ownerFile
+        self.automatedProofTarget = automatedProofTarget
+        self.requiredPattern = requiredPattern
+        self.forbiddenPattern = forbiddenPattern
+        self.userFacingBehaviorChanged = userFacingBehaviorChanged
+        self.releaseClaimAllowed = releaseClaimAllowed
+    }
+}
+
+public enum EB28PlainLanguageExplanationEvidence {
+    public static let ownerBatch = "EB28"
+
+    public static let sourceTruth: [String] = [
+        "docs/canon/Ambitions_4_0_Accessibility_And_Cognitive_Load_Kernel.md",
+        "docs/canon/PXOS_Copy_Language_And_Explanation_System.md",
+        "docs/canon/Ambitions_3_0_Product_Language_System.md",
+        "docs/codex/batches/EB28_Plain_Language_Anxiety_Safe_Copy_And_Explain_This_Screen_Prompt.md"
+    ]
+
+    public static let requirements: [AccessibilityPlainLanguageRequirement] = [
+        AccessibilityPlainLanguageRequirement(
+            axis: .plainLanguageCopy,
+            ownerFile: "docs/canon/PXOS_Copy_Language_And_Explanation_System.md",
+            automatedProofTarget: "Native/AmbitionsTests/App/AccessibilityNutritionChecklistTests.swift",
+            requiredPattern: "Use Start here, Recommended step, Adjust plan, Why this?, and Based on... labels.",
+            forbiddenPattern: "No model jargon, confidence scores, generic dashboards, hustle copy, or fake certainty."
+        ),
+        AccessibilityPlainLanguageRequirement(
+            axis: .anxietySafeRecovery,
+            ownerFile: "docs/canon/PXOS_Accessibility_Cognitive_Load_And_Emotional_Safety.md",
+            automatedProofTarget: "Native/AmbitionsTests/App/AccessibilityNutritionChecklistTests.swift",
+            requiredPattern: "Treat disrupted plans as recoverable reality states with a clear next action.",
+            forbiddenPattern: "No guilt, shame, streak pressure, blame, or character judgment."
+        ),
+        AccessibilityPlainLanguageRequirement(
+            axis: .screenExplanation,
+            ownerFile: "Native/Ambitions/Domain/ScreenContractModels.swift",
+            automatedProofTarget: "Native/AmbitionsTests/App/ScreenContractRegistryTests.swift",
+            requiredPattern: "Explain purpose, source, state, consequence, and user control without a defensive essay.",
+            forbiddenPattern: "No hidden automation, no AI-performance display, and no unsupported implementation claim."
+        )
+    ]
+
+    public static var changesUserFacingBehavior: Bool {
+        requirements.contains(where: \.userFacingBehaviorChanged)
+    }
+
+    public static var releaseClaimsAllowed: Bool {
+        requirements.allSatisfy(\.releaseClaimAllowed)
+    }
+}
+
 public struct AccessibilityNutritionScreenAudit: Identifiable, Hashable, Sendable {
     public let id: String
     public let screenName: String

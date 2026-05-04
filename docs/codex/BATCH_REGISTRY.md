@@ -229,7 +229,15 @@ Current 4.0 status:
   sync/account/cloud behavior, production asset, or release-claim changes. EB28
   Plain Language Anxiety Safe Copy And Explain This Screen is the next eligible
   EB batch.
-- Active Planned / Queued: EB08-EB12, EB20-EB24, EB03-EB06, and EB28-EB40 Ambitions 4.0 External Brain Foundation expansion segment; not completed and not implemented in app behavior.
+- Complete: EB28 Plain Language Anxiety Safe Copy And Explain This Screen is
+  complete as a bounded shared accessibility/copy evidence implementation. It
+  adds source-backed plain-language copy, anxiety-safe recovery, and
+  screen-explanation requirements with focused accessibility tests only,
+  without current surface consumption, route, persistence/schema, top-level-tab,
+  dependency, workflow, signing, network, sync/account/cloud behavior,
+  production asset, or release-claim changes. EB29 Voice First Operation And
+  Motor Accessibility is the next eligible EB batch.
+- Active Planned / Queued: EB08-EB12, EB20-EB24, EB03-EB06, and EB29-EB40 Ambitions 4.0 External Brain Foundation expansion segment; not completed and not implemented in app behavior.
 - Queued / Blocked: SI01-SI18 pending global-order selection or `Start Signature Interface Train` plus PXOS/ME/CS/SI quality gates.
 - Queued / Blocked: PD01-PD18 pending `Start Product Depth Train` plus PXOS/ME/CS/SI/AOS-if-needed gates.
 - Queued / Blocked: AOS01-AOS30 pending `Start AOS Train`.
