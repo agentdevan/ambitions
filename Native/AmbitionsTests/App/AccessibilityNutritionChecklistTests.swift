@@ -131,6 +131,43 @@ final class AccessibilityNutritionChecklistTests: XCTestCase {
         }
     }
 
+    func testEB27AdjustmentEvidenceCoversDynamicTypeVoiceOverAndReduceMotion() {
+        let requirements = EB27AccessibilityAdjustmentEvidence.requirements
+
+        XCTAssertEqual(Set(requirements.map(\.axis)), Set(AccessibilityAdjustmentAxis.allCases))
+        XCTAssertEqual(EB27AccessibilityAdjustmentEvidence.ownerBatch, "EB27")
+        XCTAssertFalse(EB27AccessibilityAdjustmentEvidence.userFacingClaimsAllowed)
+
+        for requirement in requirements {
+            XCTAssertFalse(requirement.ownerFile.isEmpty)
+            XCTAssertFalse(requirement.automatedProofTarget.isEmpty)
+            XCTAssertFalse(requirement.requiredFallback.isEmpty)
+            XCTAssertFalse(requirement.manualProofStillRequired.isEmpty)
+            XCTAssertTrue(requirement.nonColorMeaningRequired)
+            XCTAssertFalse(requirement.userFacingClaimAllowed)
+        }
+    }
+
+    func testEB27AdjustmentEvidenceNamesExistingOwnerFilesAndManualLimits() {
+        let requirements = EB27AccessibilityAdjustmentEvidence.requirements
+
+        XCTAssertTrue(requirements.contains {
+            $0.axis == .dynamicTypeLayout &&
+                $0.ownerFile == "Sources/Theme/PanelDensitySize.swift" &&
+                $0.requiredFallback.localizedCaseInsensitiveContains("lower density")
+        })
+        XCTAssertTrue(requirements.contains {
+            $0.axis == .voiceOverOrder &&
+                $0.ownerFile == "Sources/Accessibility/AccessibilityNutrition.swift" &&
+                $0.manualProofStillRequired.localizedCaseInsensitiveContains("Manual VoiceOver")
+        })
+        XCTAssertTrue(requirements.contains {
+            $0.axis == .reduceMotionEquivalent &&
+                $0.ownerFile == "Sources/Components/DynamicAdaptiveVisualPrimitives.swift" &&
+                $0.requiredFallback.localizedCaseInsensitiveContains("static state")
+        })
+    }
+
     private static let d21ExpectedAuditOrder = [
         "today",
         "goals",

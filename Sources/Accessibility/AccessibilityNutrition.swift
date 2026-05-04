@@ -193,6 +193,103 @@ public struct AccessibilityNutritionEvidenceAnchor: Identifiable, Hashable, Send
     }
 }
 
+public enum AccessibilityAdjustmentAxis: String, CaseIterable, Identifiable, Sendable {
+    case dynamicTypeLayout
+    case voiceOverOrder
+    case reduceMotionEquivalent
+
+    public var id: String { rawValue }
+
+    public var title: String {
+        switch self {
+        case .dynamicTypeLayout: "Dynamic Type layout"
+        case .voiceOverOrder: "VoiceOver order"
+        case .reduceMotionEquivalent: "Reduce Motion equivalent"
+        }
+    }
+
+    public var claimBoundary: String {
+        switch self {
+        case .dynamicTypeLayout:
+            "Source and automated evidence only; no screenshot/no-clipping claim."
+        case .voiceOverOrder:
+            "Source and automated evidence only; no manual VoiceOver traversal claim."
+        case .reduceMotionEquivalent:
+            "Source and automated evidence only; no toggled walkthrough claim."
+        }
+    }
+}
+
+public struct AccessibilityAdjustmentEvidenceRequirement: Identifiable, Hashable, Sendable {
+    public let axis: AccessibilityAdjustmentAxis
+    public let ownerFile: String
+    public let automatedProofTarget: String
+    public let requiredFallback: String
+    public let manualProofStillRequired: String
+    public let nonColorMeaningRequired: Bool
+    public let userFacingClaimAllowed: Bool
+
+    public var id: AccessibilityAdjustmentAxis { axis }
+
+    public init(
+        axis: AccessibilityAdjustmentAxis,
+        ownerFile: String,
+        automatedProofTarget: String,
+        requiredFallback: String,
+        manualProofStillRequired: String,
+        nonColorMeaningRequired: Bool = true,
+        userFacingClaimAllowed: Bool = false
+    ) {
+        self.axis = axis
+        self.ownerFile = ownerFile
+        self.automatedProofTarget = automatedProofTarget
+        self.requiredFallback = requiredFallback
+        self.manualProofStillRequired = manualProofStillRequired
+        self.nonColorMeaningRequired = nonColorMeaningRequired
+        self.userFacingClaimAllowed = userFacingClaimAllowed
+    }
+}
+
+public enum EB27AccessibilityAdjustmentEvidence {
+    public static let ownerBatch = "EB27"
+
+    public static let sourceTruth: [String] = [
+        "docs/canon/Ambitions_4_0_Accessibility_And_Cognitive_Load_Kernel.md",
+        "docs/codex/batches/EB27_Dynamic_Type_VoiceOver_And_Reduce_Motion_Prompt.md",
+        "Sources/Accessibility/AccessibilityNutrition.swift",
+        "Sources/Theme/PanelDensitySize.swift",
+        "Sources/Components/DynamicAdaptiveVisualPrimitives.swift"
+    ]
+
+    public static let requirements: [AccessibilityAdjustmentEvidenceRequirement] = [
+        AccessibilityAdjustmentEvidenceRequirement(
+            axis: .dynamicTypeLayout,
+            ownerFile: "Sources/Theme/PanelDensitySize.swift",
+            automatedProofTarget: "Native/AmbitionsTests/App/PanelDensitySizeDesignSystemTests.swift",
+            requiredFallback: "Accessibility text sizes force lower density and keep the primary decision visible.",
+            manualProofStillRequired: "Accessibility-size screenshots and no-clipping review remain required before public claims."
+        ),
+        AccessibilityAdjustmentEvidenceRequirement(
+            axis: .voiceOverOrder,
+            ownerFile: "Sources/Accessibility/AccessibilityNutrition.swift",
+            automatedProofTarget: "Native/AmbitionsTests/App/AccessibilityNutritionChecklistTests.swift",
+            requiredFallback: "Every screen evidence record must name purpose, state, primary action, and manual traversal need.",
+            manualProofStillRequired: "Manual VoiceOver traversal across top-level and detail surfaces remains required before public claims."
+        ),
+        AccessibilityAdjustmentEvidenceRequirement(
+            axis: .reduceMotionEquivalent,
+            ownerFile: "Sources/Components/DynamicAdaptiveVisualPrimitives.swift",
+            automatedProofTarget: "Native/AmbitionsTests/App/PanelDensitySizeDesignSystemTests.swift",
+            requiredFallback: "Reduced Motion must preserve meaning through static state, text, icon, disclosure, or opacity fallback.",
+            manualProofStillRequired: "A toggled Reduce Motion walkthrough remains required before public claims."
+        )
+    ]
+
+    public static var userFacingClaimsAllowed: Bool {
+        requirements.allSatisfy(\.userFacingClaimAllowed)
+    }
+}
+
 public struct AccessibilityNutritionScreenAudit: Identifiable, Hashable, Sendable {
     public let id: String
     public let screenName: String
