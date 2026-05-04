@@ -2,7 +2,7 @@
 
 Date: 2026-05-04
 Active train: Signature Interface
-Current batch: SI14 Iconography Symbol And Status Grammar queued
+Current batch: SI15 Accessibility Adaptive Interface Pass queued
 Scope: Complete: EB03A Universal Capture Composer Routing Owner Map. Complete:
 EB03B Universal Capture Composer Routing Implementation. Complete: EB04
 Capture Classification And Clarification. Complete: EB05 Capture Clusters
@@ -98,7 +98,8 @@ accessibility/release claim change was made.
   bounded Personal System Center Components implementation. SI12 is complete as
   shared Interaction Motion Haptics System implementation evidence. SI13 is
   complete as shared Loading Empty Degraded State Primitives implementation
-  evidence.
+  evidence. SI14 is complete as shared Iconography Symbol And Status Grammar
+  implementation evidence.
 - PXEQ is a mandatory product-experience gate for EB UI-affecting batches; it
   is not a shipped app feature and not a new EB batch identity.
 - Optimized global order after EB32 places DAV01-DAV15 before UI-heavy EB
@@ -108,6 +109,18 @@ accessibility/release claim change was made.
 - CS02C-CS06C deferred truth remains preserved.
 
 ## Current Validation Result
+
+SI14 result: PASS WITH YELLOW.
+`docs/audits/si14-iconography-symbol-status-grammar-report.md` records the
+shared status family and role grammar, `AmbitionsStatusSymbol`, visible label
+pairing, non-color cues, Reduce Motion semantics, existing-state mappings,
+named previews, focused design-system tests, `xcodegen generate`,
+`scripts/build-local.sh`, SI advisory scans, doc QA, release-claim scan, and
+LDI advisory scans. Yellow items are screenshots/rendered proof not produced,
+human/device/VoiceOver review not run, Instruments/battery proof not run,
+unsigned simulator app-group warnings during passing tests, no product-surface
+composition, the stale embedded SI14 prompt order label, no LDI runtime
+implementation, and existing advisory backlog.
 
 SI13 result: PASS WITH YELLOW.
 `docs/audits/si13-loading-empty-degraded-state-primitives-report.md` records
@@ -455,13 +468,13 @@ public accessibility or profiling proof.
 
 ## Next Safe Path
 
-Run SI14 Iconography Symbol And Status Grammar next if global train rules permit. Do not restart broad
+Run SI15 Accessibility Adaptive Interface Pass next if global train rules permit. Do not restart broad
 EB03, EB04, EB05, EB06, EB14, EB15, EB16, EB17, EB18, EB26, EB27, EB28, EB29,
 EB30, EB08, EB09, EB10, EB11, EB12, EB33, EB34, EB35, EB36, EB37, EB38, EB39,
 EB40, CS10, SI01, SI02, SI03, SI04, SI05, SI06, SI07, SI08, SI09, SI10, SI11,
-SI12, SI13, or completed DAV / EB20-EB24 batches. SI14 must remain a
-bounded Signature Interface iconography, symbol, and status-grammar
-implementation batch unless its prompt
+SI12, SI13, SI14, or completed DAV / EB20-EB24 batches. SI15 must remain a
+bounded Signature Interface accessibility adaptive implementation/test pass
+unless its prompt
 requires a narrower stop or repair.
 
 ## Living Dream Architecture Integration Pause
@@ -469,8 +482,11 @@ requires a narrower stop or repair.
 Date: 2026-05-04
 Batch type: docs/Codex OS/global-train integration only.
 
-- SI01-SI13 completion history above remains binding and is not rewritten.
-- SI14 remains the next eligible implementation batch after SI13.
+- SI01-SI14 completion history above remains binding and is not rewritten.
+- SI15 remains the next eligible implementation batch after SI14.
 - LDI01-LDI22 Living Dream Intelligence Train is inserted after AOS30 by default.
-- Queued SI14-SI18, PD01-PD18, and AOS01-AOS30 prompts now carry LDI hook notes only where future/queued.
-- This integration does not claim runtime Living Dream behavior, hosted AI, backend sync, user-data server, CloudKit entitlement changes, device proof, public accessibility compliance, TestFlight readiness, App Store readiness, or release readiness.
+- Queued SI15-SI18, PD01-PD18, and AOS01-AOS30 prompts now carry LDI hook notes only where future/queued.
+- This integration does not claim runtime Living Dream behavior, remote model service,
+  server-owned continuity, Ambitions-operated data storage, CloudKit entitlement changes,
+  device proof, public accessibility compliance, beta distribution proof,
+  storefront proof, or final release approval.
