@@ -104,4 +104,31 @@ final class ShellCommandRouterTests: XCTestCase {
         XCTAssertEqual(navigation.activeOverlay?.query, "Turn this capture into a believable goal")
         XCTAssertEqual(navigation.activeOverlay?.captureID, "capture-123")
     }
+
+    func testEB34ExternalBrainCommandContractsAreSafeAndSourceGrounded() {
+        let contracts = ShellCommandIntent.allCases.map(\.externalBrainCommandContract)
+
+        XCTAssertTrue(contracts.allSatisfy(\.isSafeForExternalBrainCommandSurface))
+        XCTAssertTrue(contracts.allSatisfy { !$0.sourceOfTruth.isEmpty })
+        XCTAssertTrue(contracts.allSatisfy { !$0.safetySummary.isEmpty })
+        XCTAssertTrue(contracts.allSatisfy { !$0.fallbackSummary.isEmpty })
+        XCTAssertTrue(contracts.allSatisfy { !$0.writesCalendar })
+        XCTAssertTrue(contracts.allSatisfy { !$0.createsDurableMemory })
+
+        let quickCapture = ShellCommandIntent.quickCapture.externalBrainCommandContract
+        XCTAssertEqual(quickCapture.commandKind, .quickCapture)
+        XCTAssertEqual(quickCapture.destination, .planRoute(.captureInbox))
+        XCTAssertTrue(quickCapture.touchesUserText)
+        XCTAssertTrue(quickCapture.safetySummary.contains("local capture"))
+
+        let memoryLens = ShellCommandIntent.memoryLens.externalBrainCommandContract
+        XCTAssertNil(memoryLens.commandKind)
+        XCTAssertEqual(memoryLens.sourceOfTruth, "Life Memory")
+        XCTAssertTrue(memoryLens.safetySummary.contains("source-grounded"))
+
+        let plan = ShellCommandIntent.quickPlanPatch.externalBrainCommandContract
+        XCTAssertEqual(plan.commandKind, .openDestination)
+        XCTAssertEqual(plan.destination, .tab(.plan))
+        XCTAssertTrue(plan.safetySummary.contains("without writing calendar"))
+    }
 }

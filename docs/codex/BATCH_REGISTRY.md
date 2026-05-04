@@ -303,7 +303,16 @@ Current 4.0 status:
   durable memory storage/export/delete behavior, UI surface changes, or
   release-claim changes. EB34 External Brain Command Surface Integration is the
   next eligible EB batch.
-- Active Planned / Queued: EB34-EB40 Ambitions 4.0 External Brain Foundation expansion segment; not completed and not implemented in app behavior.
+- Complete: EB34 External Brain Command Surface Integration is complete as a
+  bounded shell command contract implementation. It maps existing shell command
+  intents to source-grounded command semantics, destinations, trust boundaries,
+  and fallbacks with focused ShellCommandRouter tests only, without new command
+  execution behavior, route/raw value changes, persistence/schema, top-level-tab,
+  dependency, workflow, signing, network, sync/account/cloud behavior, production
+  asset, durable memory behavior, calendar writes, or release-claim changes.
+  EB35 External Brain Preview Fixtures And Scenario Library is the next eligible
+  EB batch.
+- Active Planned / Queued: EB35-EB40 Ambitions 4.0 External Brain Foundation expansion segment; not completed and not implemented in app behavior.
 - Queued / Blocked: SI01-SI18 pending global-order selection or `Start Signature Interface Train` plus PXOS/ME/CS/SI quality gates.
 - Queued / Blocked: PD01-PD18 pending `Start Product Depth Train` plus PXOS/ME/CS/SI/AOS-if-needed gates.
 - Queued / Blocked: AOS01-AOS30 pending `Start AOS Train`.

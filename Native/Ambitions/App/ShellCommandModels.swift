@@ -73,6 +73,118 @@ enum ShellCommandIntent: String, CaseIterable, Hashable, Identifiable, Sendable,
             return .quietCommandSheet
         }
     }
+
+    var externalBrainCommandContract: ShellExternalBrainCommandContract {
+        switch self {
+        case .quickCapture:
+            ShellExternalBrainCommandContract(
+                intent: self,
+                commandKind: .quickCapture,
+                destination: .planRoute(.captureInbox),
+                sourceOfTruth: "Capture",
+                safetySummary: "Creates a local capture with source context and a receipt.",
+                fallbackSummary: "If capture persistence is unavailable, leave the command blocked.",
+                touchesUserText: true
+            )
+        case .newGoal:
+            ShellExternalBrainCommandContract(
+                intent: self,
+                commandKind: nil,
+                destination: .overlay(.createGoal(entrySource: .shellCompose)),
+                sourceOfTruth: "Goals",
+                safetySummary: "Opens the existing goal setup surface without silently creating a goal.",
+                fallbackSummary: "If seeded context is missing, open goal setup empty.",
+                touchesUserText: true
+            )
+        case .quickPlanPatch, .openWeek:
+            ShellExternalBrainCommandContract(
+                intent: self,
+                commandKind: .openDestination,
+                destination: .tab(.plan),
+                sourceOfTruth: "Plan",
+                safetySummary: "Routes to Plan without writing calendar or reshaping the week.",
+                fallbackSummary: "If route context is missing, open Plan root."
+            )
+        case .quickRecovery, .quickFocus:
+            ShellExternalBrainCommandContract(
+                intent: self,
+                commandKind: .openDestination,
+                destination: .tab(.today),
+                sourceOfTruth: "Today",
+                safetySummary: "Routes to Today with posture context only.",
+                fallbackSummary: "If posture context is unavailable, open Today normally."
+            )
+        case .openGoal:
+            ShellExternalBrainCommandContract(
+                intent: self,
+                commandKind: .openDestination,
+                destination: nil,
+                sourceOfTruth: "Goals",
+                safetySummary: "Opens a known goal or asks Memory Lens for a source-grounded target.",
+                fallbackSummary: "If no goal identifier is present, open Memory Lens."
+            )
+        case .openCapture:
+            ShellExternalBrainCommandContract(
+                intent: self,
+                commandKind: .openDestination,
+                destination: .planRoute(.captureInbox),
+                sourceOfTruth: "Capture",
+                safetySummary: "Opens Capture without mutating saved captures.",
+                fallbackSummary: "If capture context is missing, open Capture root."
+            )
+        case .memoryLens:
+            ShellExternalBrainCommandContract(
+                intent: self,
+                commandKind: nil,
+                destination: .overlay(.memoryLens(entrySource: .shellUtility)),
+                sourceOfTruth: "Life Memory",
+                safetySummary: "Searches source-grounded context without creating durable memory.",
+                fallbackSummary: "If query context is empty, open Memory Lens in recall mode.",
+                touchesUserText: true
+            )
+        }
+    }
+}
+
+struct ShellExternalBrainCommandContract: Hashable, Sendable {
+    let intent: ShellCommandIntent
+    let commandKind: AmbitionsCommandKind?
+    let destination: ShellCommandDestination?
+    let sourceOfTruth: String
+    let safetySummary: String
+    let fallbackSummary: String
+    let requiresUserConfirmation: Bool
+    let writesCalendar: Bool
+    let createsDurableMemory: Bool
+    let touchesUserText: Bool
+
+    init(
+        intent: ShellCommandIntent,
+        commandKind: AmbitionsCommandKind?,
+        destination: ShellCommandDestination?,
+        sourceOfTruth: String,
+        safetySummary: String,
+        fallbackSummary: String,
+        requiresUserConfirmation: Bool = false,
+        writesCalendar: Bool = false,
+        createsDurableMemory: Bool = false,
+        touchesUserText: Bool = false
+    ) {
+        self.intent = intent
+        self.commandKind = commandKind
+        self.destination = destination
+        self.sourceOfTruth = sourceOfTruth
+        self.safetySummary = safetySummary
+        self.fallbackSummary = fallbackSummary
+        self.requiresUserConfirmation = requiresUserConfirmation
+        self.writesCalendar = writesCalendar
+        self.createsDurableMemory = createsDurableMemory
+        self.touchesUserText = touchesUserText
+    }
+
+    var isSafeForExternalBrainCommandSurface: Bool {
+        writesCalendar == false && createsDurableMemory == false
+    }
 }
 
 enum ShellCommandEntrySource: String, Hashable, Sendable, Codable {
