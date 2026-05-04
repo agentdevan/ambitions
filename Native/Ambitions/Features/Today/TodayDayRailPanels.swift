@@ -285,16 +285,12 @@ private struct DayRailHeroStepCard: View {
                                 .fixedSize(horizontal: false, vertical: true)
                         }
 
-                        HStack(alignment: .center, spacing: theme.spacing.sm) {
-                            EvidenceLabel(
-                                "Why this now",
-                                detail: step.whySummary,
-                                source: sourceSummary,
-                                state: .proof,
-                                context: .today
-                            )
-                            ProofPulse(isActive: true, label: "Today proof available")
-                        }
+                        HeroStepPanelSignalRow(
+                            action: step.primaryAction,
+                            reason: step.whySummary,
+                            sourceSummary: sourceSummary,
+                            isPrivateProjection: privacy.isSensitiveProjection
+                        )
                     }
                     Spacer(minLength: theme.spacing.sm)
                 }

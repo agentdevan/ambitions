@@ -58,7 +58,7 @@ SI creates the reusable interface language that PD and AOS24 can compose. It is 
 | SI02 | Adaptive Panel Action And Module Foundation | SwiftUI implementation | 049 | Complete | Build adaptive panels, actions, materials, and in-app module foundations. |
 | SI03 | App Shell IA And Navigation List System | SwiftUI implementation | 050 | Complete | Build shell, IA, and grouped navigation primitives. |
 | SI04 | DayTimelineRail 2.0 | SwiftUI implementation | 051 | Complete | Build the Ambitions-exclusive Today rail primitive. |
-| SI05 | Hero Step Panel System | SwiftUI implementation | 052 | Queued/blocked; not started | Build the adaptive Today hero object. |
+| SI05 | Hero Step Panel System | SwiftUI implementation | 052 | Complete | Build the adaptive Today hero object. |
 | SI06 | LifePath Visualization System | SwiftUI implementation | 053 | Queued/blocked; not started | Invent Ambitions goal path visual grammar. |
 | SI07 | Mission Control Lane Components | SwiftUI implementation | 054 | Queued/blocked; not started | Build reusable lanes for Goal Detail and Mission Control. |
 | SI08 | LifeShape Time Capacity Map | SwiftUI implementation | 055 | Queued/blocked; not started | Build Plan time/capacity/pressure primitive. |

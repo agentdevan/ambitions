@@ -309,6 +309,23 @@ struct TodayScreen: View {
     .environment(\.dynamicTypeSize, .accessibility3)
 }
 
+#Preview("Today SI05 Hero Loading") {
+    NavigationStack {
+        TodayScreen(viewModel: TodayViewModel(state: .loaded(PreviewTodayScenarios.heroLoading)), autoLoad: false)
+    }
+    .appContainer(PreviewAppContainerFactory.preview(todayExperience: PreviewTodayScenarios.heroLoading))
+    .ambitionTheme(.dark)
+}
+
+#Preview("Today SI05 Hero Disabled Dynamic Type") {
+    NavigationStack {
+        TodayScreen(viewModel: TodayViewModel(state: .loaded(PreviewTodayScenarios.heroDisabled)), autoLoad: false)
+    }
+    .appContainer(PreviewAppContainerFactory.preview(todayExperience: PreviewTodayScenarios.heroDisabled))
+    .ambitionTheme(.dark)
+    .environment(\.dynamicTypeSize, .accessibility3)
+}
+
 #Preview("Today Step Detail Start Here") {
     if let detail = PreviewTodayScenarios.stepDetailStartHere {
         TodayStepDetailSheet(detail: detail)

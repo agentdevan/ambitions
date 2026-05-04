@@ -120,6 +120,26 @@ enum PreviewTodayScenarios {
     static let empty = noPlan
     static let privateRail = makePrivateRailScenario(from: stable)
     static let unavailableRail = noPlan
+    static let heroLoading = makeHeroActionScenario(
+        from: stable,
+        action: TodayInlineAction(
+            kind: .openDetail,
+            title: "Opening step",
+            systemImage: "arrow.right.circle",
+            state: .loading,
+            target: TodayActionTarget(goalID: "goal-1", stepID: "step-1")
+        )
+    )
+    static let heroDisabled = makeHeroActionScenario(
+        from: lowData,
+        action: TodayInlineAction(
+            kind: .openDetail,
+            title: "Needs review",
+            systemImage: "exclamationmark.triangle",
+            state: .disabled,
+            target: TodayActionTarget(draftID: "draft-1")
+        )
+    )
     static let stepDetailStartHere = makeStartHereStepDetail()
     static let stepDetailRow = stable.execution.dayRail.rows.first?.stepDetail(
         privacy: stable.execution.dayRail.privacyProjection,
@@ -206,6 +226,48 @@ enum PreviewTodayScenarios {
             hero: experience.hero,
             support: experience.support,
             execution: experience.execution.replacingDayRail(privateRail)
+        )
+    }
+
+    private static func makeHeroActionScenario(
+        from experience: TodayExperience,
+        action: TodayInlineAction
+    ) -> TodayExperience {
+        let baseRail = experience.execution.dayRail
+        guard let baseHero = baseRail.heroStep else { return experience }
+        let hero = DayRailHeroStepState(
+            id: "\(baseHero.id).\(action.state.rawValue)",
+            title: baseHero.title,
+            subtitle: baseHero.subtitle,
+            duration: baseHero.duration,
+            fitLabel: action.state == .disabled ? "Needs review" : baseHero.fitLabel,
+            whySummary: action.state == .disabled
+                ? "The source is visible, but the next action should wait for review."
+                : baseHero.whySummary,
+            primaryAction: action,
+            detailTarget: baseHero.detailTarget,
+            sourceLabels: baseHero.sourceLabels
+        )
+        let rail = AmbitionsDayRailViewState(
+            id: "\(baseRail.id).hero-\(action.state.rawValue)",
+            mode: baseRail.mode,
+            dateTitle: baseRail.dateTitle,
+            contextSummary: baseRail.contextSummary,
+            heroStep: hero,
+            rows: baseRail.rows,
+            primaryAction: action,
+            rowTapDetailTargetPlaceholder: baseRail.rowTapDetailTargetPlaceholder,
+            durationSource: baseRail.durationSource,
+            contextLabels: baseRail.contextLabels,
+            privacyProjection: baseRail.privacyProjection,
+            closureSlot: baseRail.closureSlot,
+            proofSlot: baseRail.proofSlot
+        )
+        return TodayExperience(
+            mode: experience.mode,
+            hero: experience.hero,
+            support: experience.support,
+            execution: experience.execution.replacingDayRail(rail)
         )
     }
 

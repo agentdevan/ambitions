@@ -248,6 +248,33 @@ final class TodayViewModelTests: XCTestCase {
         XCTAssertTrue(rails.contains { $0.privacyProjection.isSensitiveProjection })
     }
 
+    func testSI05HeroStepPanelSignalRowCoversActionStatesAndPrivacy() throws {
+        let rails = [
+            PreviewTodayScenarios.stable.execution.dayRail,
+            PreviewTodayScenarios.recovery.execution.dayRail,
+            PreviewTodayScenarios.privateRail.execution.dayRail,
+            PreviewTodayScenarios.heroLoading.execution.dayRail,
+            PreviewTodayScenarios.heroDisabled.execution.dayRail
+        ]
+        let heroes = try rails.map { try XCTUnwrap($0.heroStep) }
+
+        for (hero, rail) in zip(heroes, rails) {
+            _ = HeroStepPanelSignalRow(
+                action: hero.primaryAction,
+                reason: hero.whySummary,
+                sourceSummary: rail.privacyProjection.sourceSummary(from: hero.sourceLabels),
+                isPrivateProjection: rail.privacyProjection.isSensitiveProjection
+            )
+        }
+
+        XCTAssertEqual(
+            Set(heroes.map(\.primaryAction.state)),
+            [.success, .selected, .loading, .disabled]
+        )
+        XCTAssertTrue(rails.contains { $0.privacyProjection.isSensitiveProjection })
+        XCTAssertTrue(PreviewTodayScenarios.heroDisabled.execution.dayRail.heroStep?.fitLabel == "Needs review")
+    }
+
     func testF02RealityRailVisibleCopyAvoidsForbiddenTerms() {
         let rails = [
             PreviewTodayScenarios.stable.execution.dayRail,
