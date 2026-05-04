@@ -2,7 +2,7 @@
 
 Date: 2026-05-03
 Active train: Ambitions 4.0 External Brain Foundation
-Current batch: EB30 next eligible after EB29 implementation
+Current batch: EB08 next eligible after EB30 implementation
 Scope: Complete: EB03A Universal Capture Composer Routing Owner Map. Complete:
 EB03B Universal Capture Composer Routing Implementation. Complete: EB04
 Capture Classification And Clarification. Complete: EB05 Capture Clusters
@@ -66,7 +66,9 @@ accessibility/release claim change was made.
   requirements implementation. EB28 is complete as a bounded shared
   accessibility/copy evidence requirements implementation. EB29 is complete as
   a bounded shared accessibility/input-alternative evidence requirements
-  implementation. EB30 is the next eligible EB batch.
+  implementation. EB30 is complete as a bounded shared
+  accessibility/cognitive-load evidence requirements implementation. EB08 is
+  the next eligible EB batch.
 - PXEQ is a mandatory product-experience gate for EB UI-affecting batches; it
   is not a shipped app feature and not a new EB batch identity.
 - Optimized global order after EB32 places DAV01-DAV15 before UI-heavy EB
@@ -185,10 +187,20 @@ voice behavior not implemented, screenshots/rendered proof not produced,
 human/device/VoiceOver review not run, motor-accessibility human review not
 run, and existing advisory backlog.
 
+EB30 result: PASS WITH YELLOW. `docs/audits/eb30-overloaded-day-low-cognitive-load-flows-report.md`
+records the bounded shared accessibility
+`EB30OverloadAdaptationEvidence` requirements for overloaded Today, overloaded
+Plan, and low-load recovery, focused accessibility tests, `swift build`, and
+`scripts/build-local.sh`. Yellow items are current Today/Plan overload behavior
+not implemented, screenshots/rendered proof not produced, human/device/VoiceOver
+review not run, overloaded-day human cognitive-load review not run, and existing
+advisory backlog.
+
 ## Next Safe Path
 
-Run EB30 Overloaded Day Adaptation And Low Cognitive Load Flows next. Do not
-restart broad EB03, EB04, EB05, EB06, EB14, EB15, EB16, EB17, EB18, EB26,
-EB27, EB28, EB29, or completed DAV / EB20-EB24 batches. EB30 must name exact owner files,
-focused tests, accessibility/privacy proof, and rollback before widening beyond
-overloaded-day or low-cognitive-load behavior.
+Run EB08 Memory Source Confidence And Trust Decay next. Do not restart broad
+EB03, EB04, EB05, EB06, EB14, EB15, EB16, EB17, EB18, EB26, EB27, EB28, EB29,
+EB30, or completed DAV / EB20-EB24 batches. EB08 must name exact owner files,
+focused tests, source/confidence/trust proof, privacy proof, correction/delete
+non-claim boundaries, and rollback before widening beyond memory
+source/confidence/trust-decay behavior.

@@ -7,7 +7,7 @@ completed() {
   local id="$1"
   rg -q "Complete: $id|$id is complete|\| [0-9]{3} \| $id \| [^|]* \| [^|]* \| [^|]* \| [^|]* \| [^|]* \| No; complete" docs/codex/BATCH_REGISTRY.md .codex/reports/current-run-state.md docs/codex/GLOBAL_FUTURE_BATCH_EXECUTION_ORDER.md 2>/dev/null
 }
-for id in EB01 EB13 EB25 EB19 EB02 EB07 EB31 EB32 DAV01 DAV02 DAV03 DAV04 DAV05 DAV06 DAV07 DAV08 DAV09 DAV10 DAV11 DAV12 DAV13 DAV14 DAV15 EB20 EB21 EB22 EB23 EB24; do
+for id in EB01 EB13 EB25 EB19 EB02 EB07 EB31 EB32 DAV01 DAV02 DAV03 DAV04 DAV05 DAV06 DAV07 DAV08 DAV09 DAV10 DAV11 DAV12 DAV13 DAV14 DAV15 EB20 EB21 EB22 EB23 EB24 EB03A EB03B EB04 EB05 EB06 EB14 EB15 EB16 EB17 EB18 EB26 EB27 EB28 EB29 EB30; do
   if ! completed "$id"; then
     case "$id" in
     EB01) name="External Brain Source Truth And Kernel Architecture"; global="047" ;;
@@ -38,6 +38,21 @@ for id in EB01 EB13 EB25 EB19 EB02 EB07 EB31 EB32 DAV01 DAV02 DAV03 DAV04 DAV05 
     EB22) name="Privacy Setup And Trust Onboarding"; global="072" ;;
     EB23) name="Maturity Levels Progressive Disclosure And Life Season Templates"; global="073" ;;
     EB24) name="Onboarding Receipts Skip Later And Setup Recovery"; global="074" ;;
+    EB03A) name="Universal Capture Composer Routing Owner Map"; global="075A" ;;
+    EB03B) name="Universal Capture Composer Routing Implementation"; global="075B" ;;
+    EB04) name="Capture Classification And Clarification"; global="076" ;;
+    EB05) name="Capture Clusters Review Bundles And Open Loops"; global="077" ;;
+    EB06) name="Capture Receipts Undo And Reclassification"; global="078" ;;
+    EB14) name="Trust Center And Data Map"; global="079" ;;
+    EB15) name="Recommendation Evidence And Inference Boundaries"; global="080" ;;
+    EB16) name="Private Mode And Sensitive Area Controls"; global="081" ;;
+    EB17) name="Undo Correction Audit Trail And Export"; global="082" ;;
+    EB18) name="Source Freshness Privacy Receipts And Non Claims"; global="083" ;;
+    EB26) name="Cognitive Load Modes"; global="084" ;;
+    EB27) name="Dynamic Type VoiceOver Reduce Motion"; global="085" ;;
+    EB28) name="Plain Language Anxiety Safe Copy And Explain This Screen"; global="086" ;;
+    EB29) name="Voice First Operation And Motor Accessibility"; global="087" ;;
+    EB30) name="Overloaded Day Adaptation And Low Cognitive Load Flows"; global="088" ;;
       *) name="Unknown"; global="unknown" ;;
     esac
     echo "Active train: Ambitions 4.0 External Brain Foundation"
@@ -49,8 +64,8 @@ for id in EB01 EB13 EB25 EB19 EB02 EB07 EB31 EB32 DAV01 DAV02 DAV03 DAV04 DAV05 
     exit 0
   fi
 done
-echo "Next eligible batch: EB03 Capture Placement And Context Understanding"
-echo "Global order: 075"
+echo "Next eligible batch: EB08 Memory Source Confidence And Trust Decay"
+echo "Global order: 089"
 echo "Total planned batches: 168"
 echo "Working tree:"
 git status --short

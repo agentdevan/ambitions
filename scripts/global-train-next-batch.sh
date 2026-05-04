@@ -7,7 +7,7 @@ completed() {
   local id="$1"
   rg -q "Complete: $id|$id is complete|\| [0-9]{3} \| $id \| [^|]* \| [^|]* \| [^|]* \| [^|]* \| [^|]* \| No; complete" docs/codex/BATCH_REGISTRY.md .codex/reports/current-run-state.md docs/codex/GLOBAL_FUTURE_BATCH_EXECUTION_ORDER.md 2>/dev/null
 }
-for id in EB01 EB13 EB25 EB19 EB02 EB07 EB31 EB32 DAV01 DAV02 DAV03 DAV04 DAV05 DAV06 DAV07 DAV08 DAV09 DAV10 DAV11 DAV12 DAV13 DAV14 DAV15 EB20 EB21 EB22 EB23 EB24 EB03A EB03B EB04 EB05 EB06 EB14 EB15 EB16 EB17 EB18 EB26 EB27 EB28 EB29; do
+for id in EB01 EB13 EB25 EB19 EB02 EB07 EB31 EB32 DAV01 DAV02 DAV03 DAV04 DAV05 DAV06 DAV07 DAV08 DAV09 DAV10 DAV11 DAV12 DAV13 DAV14 DAV15 EB20 EB21 EB22 EB23 EB24 EB03A EB03B EB04 EB05 EB06 EB14 EB15 EB16 EB17 EB18 EB26 EB27 EB28 EB29 EB30; do
   if ! completed "$id"; then
     case "$id" in
     EB01) name="External Brain Source Truth And Kernel Architecture"; global="047" ;;
@@ -52,6 +52,7 @@ for id in EB01 EB13 EB25 EB19 EB02 EB07 EB31 EB32 DAV01 DAV02 DAV03 DAV04 DAV05 
     EB27) name="Dynamic Type VoiceOver Reduce Motion"; global="085" ;;
     EB28) name="Plain Language Anxiety Safe Copy And Explain This Screen"; global="086" ;;
     EB29) name="Voice First Operation And Motor Accessibility"; global="087" ;;
+    EB30) name="Overloaded Day Adaptation And Low Cognitive Load Flows"; global="088" ;;
       *) name="Unknown"; global="unknown" ;;
     esac
     echo "Next eligible batch: $id $name"
@@ -59,5 +60,5 @@ for id in EB01 EB13 EB25 EB19 EB02 EB07 EB31 EB32 DAV01 DAV02 DAV03 DAV04 DAV05 
     exit 0
   fi
 done
-echo "Next eligible batch: EB30 Overloaded Day Adaptation And Low Cognitive Load Flows"
-echo "Global order: 088"
+echo "Next eligible batch: EB08 Memory Source Confidence And Trust Decay"
+echo "Global order: 089"

@@ -245,6 +245,48 @@ final class AccessibilityNutritionChecklistTests: XCTestCase {
         })
     }
 
+    func testEB30OverloadAdaptationEvidenceCoversTodayPlanAndRecovery() {
+        let requirements = EB30OverloadAdaptationEvidence.requirements
+
+        XCTAssertEqual(Set(requirements.map(\.axis)), Set(AccessibilityOverloadAdaptationAxis.allCases))
+        XCTAssertEqual(EB30OverloadAdaptationEvidence.ownerBatch, "EB30")
+        XCTAssertFalse(EB30OverloadAdaptationEvidence.changesTodayOrPlanBehavior)
+        XCTAssertFalse(EB30OverloadAdaptationEvidence.releaseClaimsAllowed)
+
+        for requirement in requirements {
+            XCTAssertFalse(requirement.ownerFile.isEmpty)
+            XCTAssertFalse(requirement.automatedProofTarget.isEmpty)
+            XCTAssertFalse(requirement.requiredAdaptation.isEmpty)
+            XCTAssertFalse(requirement.forbiddenAdaptation.isEmpty)
+            XCTAssertTrue(requirement.requiresUserControl)
+            XCTAssertFalse(requirement.changesTodayOrPlanBehavior)
+            XCTAssertFalse(requirement.releaseClaimAllowed)
+        }
+    }
+
+    func testEB30OverloadAdaptationEvidenceRejectsShameAndHiddenAutomation() {
+        let requirements = EB30OverloadAdaptationEvidence.requirements
+
+        XCTAssertTrue(requirements.contains {
+            $0.axis == .overloadedToday &&
+                $0.ownerFile == "Native/Ambitions/Features/Today/TodayScreen.swift" &&
+                $0.requiredAdaptation.localizedCaseInsensitiveContains("one clear next action") &&
+                $0.forbiddenAdaptation.localizedCaseInsensitiveContains("shame")
+        })
+        XCTAssertTrue(requirements.contains {
+            $0.axis == .overloadedPlan &&
+                $0.ownerFile == "Native/Ambitions/Features/Plan/PlanScreen.swift" &&
+                $0.requiredAdaptation.localizedCaseInsensitiveContains("plain language") &&
+                $0.forbiddenAdaptation.localizedCaseInsensitiveContains("automatic calendar mutation")
+        })
+        XCTAssertTrue(requirements.contains {
+            $0.axis == .lowLoadRecovery &&
+                $0.ownerFile == "Sources/Theme/PanelDensitySize.swift" &&
+                $0.requiredAdaptation.localizedCaseInsensitiveContains("larger panels") &&
+                $0.forbiddenAdaptation.localizedCaseInsensitiveContains("motion-only state")
+        })
+    }
+
     private static let d21ExpectedAuditOrder = [
         "today",
         "goals",
