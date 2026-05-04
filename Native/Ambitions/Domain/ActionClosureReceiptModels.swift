@@ -436,6 +436,10 @@ struct ActionReceiptHistoryRecord: Sendable, Equatable, Identifiable {
         ActionReceiptRecoveryAuditExportSummary(record: self)
     }
 
+    var sourceFreshnessPrivacySummary: ActionReceiptSourceFreshnessPrivacySummary {
+        ActionReceiptSourceFreshnessPrivacySummary(record: self)
+    }
+
     private var relatedObjectLabels: [String] {
         receipt.affectedObjects.map { object in
             switch object.kind {
@@ -479,6 +483,101 @@ struct ActionReceiptHistoryRecord: Sendable, Equatable, Identifiable {
             receipt.safetyState == .confirmationRequired ||
             receipt.undoAvailability == .requiresConfirmation ||
             receipt.correctionAvailability == .availableWithReason
+    }
+}
+
+struct ActionReceiptSourceFreshnessPrivacySummary: Sendable, Equatable, Identifiable {
+    let id: String
+    let receiptID: String
+    let sourceFreshnessLabel: String
+    let privacyReceiptLabel: String
+    let sourceEvidenceLabel: String
+    let nonClaimLabel: String
+    let canUseAsCurrentLocalSource: Bool
+    let redactsPrivateDetail: Bool
+    let requiresFreshnessReview: Bool
+    let localOnly: Bool
+    let publicClaimAllowed: Bool
+
+    init(record: ActionReceiptHistoryRecord) {
+        let receipt = record.receipt
+        let redactsPrivateDetail = record.privacyLevel.requiresRedactionByDefault ||
+            record.hasMissingDetail
+        let requiresFreshnessReview = Self.requiresFreshnessReview(record: record)
+
+        self.id = "receipt.source-freshness-privacy.\(receipt.id)"
+        self.receiptID = receipt.id
+        self.sourceFreshnessLabel = Self.sourceFreshnessLabel(
+            record: record,
+            redactsPrivateDetail: redactsPrivateDetail,
+            requiresFreshnessReview: requiresFreshnessReview
+        )
+        self.privacyReceiptLabel = Self.privacyReceiptLabel(record: record)
+        self.sourceEvidenceLabel = Self.sourceEvidenceLabel(record: record)
+        self.nonClaimLabel = "Public proof stays locked until evidence exists"
+        self.canUseAsCurrentLocalSource = record.localOnly &&
+            redactsPrivateDetail == false &&
+            requiresFreshnessReview == false
+        self.redactsPrivateDetail = redactsPrivateDetail
+        self.requiresFreshnessReview = requiresFreshnessReview
+        self.localOnly = record.localOnly
+        self.publicClaimAllowed = false
+    }
+
+    private static func requiresFreshnessReview(record: ActionReceiptHistoryRecord) -> Bool {
+        record.hasMissingDetail ||
+            record.requiresConfirmationBeforeBroaderUse ||
+            record.receipt.safetyState != .normal ||
+            record.receipt.resultState == .needsConfirmation ||
+            record.receipt.resultState == .failedSafely ||
+            record.receipt.resultState == .draftedPrepared ||
+            record.proofRelevance == .needsConfirmation
+    }
+
+    private static func sourceFreshnessLabel(
+        record: ActionReceiptHistoryRecord,
+        redactsPrivateDetail: Bool,
+        requiresFreshnessReview: Bool
+    ) -> String {
+        if record.hasMissingDetail {
+            return "Source freshness needs detail"
+        }
+        if record.receipt.safetyState != .normal || record.receipt.resultState == .failedSafely {
+            return "Source freshness degraded"
+        }
+        if redactsPrivateDetail {
+            return "Source freshness private"
+        }
+        if requiresFreshnessReview {
+            return "Source freshness needs review"
+        }
+        return "Source freshness current local receipt"
+    }
+
+    private static func privacyReceiptLabel(record: ActionReceiptHistoryRecord) -> String {
+        if record.localOnly == false {
+            return "Privacy receipt needs confirmation"
+        }
+        if record.privacyLevel.requiresRedactionByDefault || record.hasMissingDetail {
+            return "Privacy receipt hides private detail"
+        }
+        return "Privacy receipt stored on this device"
+    }
+
+    private static func sourceEvidenceLabel(record: ActionReceiptHistoryRecord) -> String {
+        if record.hasMissingDetail {
+            return "Source evidence unavailable"
+        }
+        if record.receipt.sourceObject != nil {
+            return "Source evidence links receipt to source object"
+        }
+        if record.receipt.why != nil {
+            return "Source evidence includes reason"
+        }
+        if record.receipt.changedFacts.isEmpty == false {
+            return "Source evidence includes changed facts"
+        }
+        return "Source evidence is receipt metadata only"
     }
 }
 

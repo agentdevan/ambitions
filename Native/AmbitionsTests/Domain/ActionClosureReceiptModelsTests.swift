@@ -495,6 +495,119 @@ final class ActionClosureReceiptModelsTests: XCTestCase {
         XCTAssertTrue(search.localOnly)
     }
 
+    func testEB18SourceFreshnessPrivacySummaryAllowsCurrentLocalReceiptsOnly() {
+        let capture = object(.capture, "capture-1", label: "Launch checklist", sourceDomain: .capture)
+        let receipt = ActionReceipt(
+            id: "receipt-eb18-current",
+            resultState: .created,
+            title: "Capture saved",
+            summary: "Saved launch checklist.",
+            sourceDomain: .capture,
+            occurredAt: "2026-05-03T13:00:00Z",
+            affectedObjects: [capture],
+            changedFacts: [
+                ActionReceiptChangedFact(
+                    id: "fact-eb18-current",
+                    kind: .createdCapture,
+                    object: capture,
+                    summary: "Capture was saved."
+                )
+            ],
+            correctionAvailability: .available,
+            undoAvailability: .availableLocal,
+            sourceObject: capture
+        )
+
+        let summary = ActionReceiptHistoryRecord(receipt: receipt).sourceFreshnessPrivacySummary
+
+        XCTAssertEqual(summary.receiptID, "receipt-eb18-current")
+        XCTAssertEqual(summary.sourceFreshnessLabel, "Source freshness current local receipt")
+        XCTAssertEqual(summary.privacyReceiptLabel, "Privacy receipt stored on this device")
+        XCTAssertEqual(summary.sourceEvidenceLabel, "Source evidence links receipt to source object")
+        XCTAssertEqual(summary.nonClaimLabel, "Public proof stays locked until evidence exists")
+        XCTAssertTrue(summary.canUseAsCurrentLocalSource)
+        XCTAssertFalse(summary.redactsPrivateDetail)
+        XCTAssertFalse(summary.requiresFreshnessReview)
+        XCTAssertTrue(summary.localOnly)
+        XCTAssertFalse(summary.publicClaimAllowed)
+    }
+
+    func testEB18SourceFreshnessPrivacySummaryRedactsSensitiveReceipts() {
+        let goal = object(.goal, "goal-private", label: "Private goal", sourceDomain: .goals)
+        let receipt = receipt(
+            id: "receipt-eb18-private",
+            resultState: .changed,
+            title: "Private goal changed",
+            affectedObjects: [goal],
+            changedFacts: [
+                ActionReceiptChangedFact(
+                    id: "fact-eb18-private",
+                    kind: .changedField,
+                    object: goal,
+                    summary: "Private detail changed."
+                )
+            ]
+        )
+
+        let summary = ActionReceiptHistoryRecord(
+            receipt: receipt,
+            privacyLevel: .sensitive
+        ).sourceFreshnessPrivacySummary
+
+        XCTAssertEqual(summary.sourceFreshnessLabel, "Source freshness private")
+        XCTAssertEqual(summary.privacyReceiptLabel, "Privacy receipt hides private detail")
+        XCTAssertEqual(summary.sourceEvidenceLabel, "Source evidence includes changed facts")
+        XCTAssertFalse(summary.canUseAsCurrentLocalSource)
+        XCTAssertTrue(summary.redactsPrivateDetail)
+        XCTAssertFalse(summary.requiresFreshnessReview)
+        XCTAssertTrue(summary.localOnly)
+        XCTAssertFalse(summary.publicClaimAllowed)
+    }
+
+    func testEB18SourceFreshnessPrivacySummaryDegradesUnsafeOrMissingReceipts() {
+        let planItem = object(.action, "plan-item-1", label: "Draft launch block", sourceDomain: .plan)
+        let safeFailure = ActionReceipt(
+            id: "receipt-eb18-degraded",
+            resultState: .failedSafely,
+            title: "Action did not change anything",
+            summary: "Source could not be used.",
+            sourceDomain: .system,
+            occurredAt: "2026-05-03T13:10:00Z",
+            affectedObjects: [planItem],
+            changedFacts: [
+                ActionReceiptChangedFact(
+                    id: "fact-eb18-degraded",
+                    kind: .failedSafely,
+                    object: planItem,
+                    summary: "No source was stored."
+                )
+            ],
+            safetyState: .safeFailure,
+            safeFailure: ActionReceiptSafeFailure(
+                whatFailed: "Source update",
+                unchangedFacts: ["No source was stored.", "No plan item was changed."]
+            )
+        )
+        let missing = receipt(
+            id: "receipt-eb18-missing",
+            resultState: .changed,
+            title: "Missing detail",
+            affectedObjects: [planItem]
+        )
+
+        let degradedSummary = ActionReceiptHistoryRecord(receipt: safeFailure).sourceFreshnessPrivacySummary
+        let missingSummary = ActionReceiptHistoryRecord(receipt: missing).sourceFreshnessPrivacySummary
+
+        XCTAssertEqual(degradedSummary.sourceFreshnessLabel, "Source freshness degraded")
+        XCTAssertTrue(degradedSummary.requiresFreshnessReview)
+        XCTAssertFalse(degradedSummary.canUseAsCurrentLocalSource)
+        XCTAssertEqual(missingSummary.sourceFreshnessLabel, "Source freshness needs detail")
+        XCTAssertEqual(missingSummary.sourceEvidenceLabel, "Source evidence unavailable")
+        XCTAssertTrue(missingSummary.redactsPrivateDetail)
+        XCTAssertTrue(missingSummary.requiresFreshnessReview)
+        XCTAssertFalse(missingSummary.canUseAsCurrentLocalSource)
+    }
+
     func testEB17RecoveryAuditExportSummaryNamesSafeLocalControls() {
         let capture = object(.capture, "capture-1", label: "Launch checklist", sourceDomain: .capture)
         let receipt = ActionReceipt(

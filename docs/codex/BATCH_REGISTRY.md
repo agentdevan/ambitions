@@ -206,7 +206,15 @@ Current 4.0 status:
   sync/account/cloud behavior, production asset, or release-claim changes. EB18
   Source Freshness Privacy Receipts And Non Claims is the next eligible EB
   batch.
-- Active Planned / Queued: EB08-EB12, EB18, EB20-EB24, EB03-EB06, and EB26-EB40 Ambitions 4.0 External Brain Foundation expansion segment; not completed and not implemented in app behavior.
+- Complete: EB18 Source Freshness Privacy Receipts And Non Claims is complete
+  as a bounded receipt-domain source freshness, privacy receipt, and non-claim
+  summary implementation. It adds computed labels and proof locks with focused
+  receipt tests only, without source-refresh scheduling, durable privacy receipt
+  storage, export/delete behavior, route/raw, persistence/schema, UI,
+  top-level-tab, dependency, workflow, signing, network, sync/account/cloud
+  behavior, production asset, or release-claim changes. EB26 Cognitive Load
+  Modes is the next eligible EB batch.
+- Active Planned / Queued: EB08-EB12, EB20-EB24, EB03-EB06, and EB26-EB40 Ambitions 4.0 External Brain Foundation expansion segment; not completed and not implemented in app behavior.
 - Queued / Blocked: SI01-SI18 pending global-order selection or `Start Signature Interface Train` plus PXOS/ME/CS/SI quality gates.
 - Queued / Blocked: PD01-PD18 pending `Start Product Depth Train` plus PXOS/ME/CS/SI/AOS-if-needed gates.
 - Queued / Blocked: AOS01-AOS30 pending `Start AOS Train`.
