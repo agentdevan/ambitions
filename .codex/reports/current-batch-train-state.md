@@ -2,7 +2,7 @@
 
 Date: 2026-05-03
 Active train: Ambitions 4.0 External Brain Foundation
-Current batch: EB17 next eligible after EB16 implementation
+Current batch: EB18 next eligible after EB17 implementation
 Scope: Complete: EB03A Universal Capture Composer Routing Owner Map. Complete:
 EB03B Universal Capture Composer Routing Implementation. Complete: EB04
 Capture Classification And Clarification. Complete: EB05 Capture Clusters
@@ -58,7 +58,8 @@ accessibility/release claim change was made.
   implementation. EB15 is complete as a bounded recommendation
   evidence/inference boundary summary domain implementation. EB16 is complete
   as a bounded You/Profile private-mode and sensitive-area controls
-  implementation. EB17 is the next eligible EB batch.
+  implementation. EB17 is complete as a bounded receipt recovery/audit/export
+  summary implementation. EB18 is the next eligible EB batch.
 - PXEQ is a mandatory product-experience gate for EB UI-affecting batches; it
   is not a shipped app feature and not a new EB batch identity.
 - Optimized global order after EB32 places DAV01-DAV15 before UI-heavy EB
@@ -124,9 +125,18 @@ Yellow items are screenshots/rendered proof not produced, human/device/VoiceOver
 review not run, Instruments/battery proof not run, and existing advisory
 backlog.
 
+EB17 result: PASS WITH YELLOW. `docs/audits/eb17-undo-correction-audit-trail-export-report.md`
+records the bounded receipt-domain `ActionReceiptRecoveryAuditExportSummary`,
+focused receipt tests, `swift build`, and `scripts/build-local.sh`. Yellow
+items are actual undo/correction/export/delete execution behavior not
+implemented, UI preview/screenshot proof not applicable because no UI changed,
+human/device/VoiceOver review not run, Instruments/battery proof not run, and
+existing advisory backlog.
+
 ## Next Safe Path
 
-Run EB17 Undo Correction Audit Trail And Export next. Do not restart broad
-EB03, EB04, EB05, EB06, EB14, EB15, EB16, or completed DAV / EB20-EB24 batches.
-EB17 must name exact owner files, focused tests, accessibility/privacy proof,
-and rollback before widening beyond undo, correction, audit trail, or export.
+Run EB18 Source Freshness Privacy Receipts And Non Claims next. Do not restart
+broad EB03, EB04, EB05, EB06, EB14, EB15, EB16, EB17, or completed DAV /
+EB20-EB24 batches. EB18 must name exact owner files, focused tests,
+accessibility/privacy proof, and rollback before widening beyond source
+freshness, privacy receipts, or non-claim ledger behavior.

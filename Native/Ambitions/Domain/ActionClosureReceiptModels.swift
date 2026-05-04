@@ -432,6 +432,10 @@ struct ActionReceiptHistoryRecord: Sendable, Equatable, Identifiable {
         }
     }
 
+    var recoveryAuditExportSummary: ActionReceiptRecoveryAuditExportSummary {
+        ActionReceiptRecoveryAuditExportSummary(record: self)
+    }
+
     private var relatedObjectLabels: [String] {
         receipt.affectedObjects.map { object in
             switch object.kind {
@@ -475,6 +479,107 @@ struct ActionReceiptHistoryRecord: Sendable, Equatable, Identifiable {
             receipt.safetyState == .confirmationRequired ||
             receipt.undoAvailability == .requiresConfirmation ||
             receipt.correctionAvailability == .availableWithReason
+    }
+}
+
+struct ActionReceiptRecoveryAuditExportSummary: Sendable, Equatable, Identifiable {
+    let id: String
+    let receiptID: String
+    let auditTrailLabel: String
+    let undoLabel: String
+    let correctionLabel: String
+    let exportLabel: String
+    let privacyBoundaryLabel: String
+    let rollbackBoundaryLabel: String
+    let canAttemptLocalUndo: Bool
+    let canRequestCorrection: Bool
+    let canIncludeInLocalExportSummary: Bool
+    let safeToShowInExternalSurface: Bool
+    let requiresConfirmationBeforeAction: Bool
+    let noSilentChanges: Bool
+
+    init(record: ActionReceiptHistoryRecord) {
+        let receipt = record.receipt
+        self.id = "receipt.recovery-audit-export.\(receipt.id)"
+        self.receiptID = receipt.id
+        self.auditTrailLabel = Self.auditTrailLabel(record: record)
+        self.undoLabel = Self.undoLabel(receipt.undoAvailability)
+        self.correctionLabel = Self.correctionLabel(receipt.correctionAvailability)
+        self.exportLabel = Self.exportLabel(record: record)
+        self.privacyBoundaryLabel = Self.privacyBoundaryLabel(record: record)
+        self.rollbackBoundaryLabel = "Rollback uses the receipt record and source object; no silent mutation"
+        self.canAttemptLocalUndo = receipt.undoAvailability == .availableLocal
+        self.canRequestCorrection = receipt.correctionAvailability.isAvailable
+        self.canIncludeInLocalExportSummary = record.localOnly &&
+            record.privacyLevel.requiresRedactionByDefault == false &&
+            record.hasMissingDetail == false
+        self.safeToShowInExternalSurface = record.safeToShowInExternalSurface
+        self.requiresConfirmationBeforeAction = record.requiresConfirmationBeforeBroaderUse ||
+            receipt.undoAvailability == .requiresConfirmation ||
+            receipt.safetyState == .confirmationRequired ||
+            receipt.resultState == .needsConfirmation
+        self.noSilentChanges = true
+    }
+
+    private static func auditTrailLabel(record: ActionReceiptHistoryRecord) -> String {
+        if record.hasMissingDetail {
+            return "Audit trail needs detail before use"
+        }
+        if record.receipt.changedFacts.isEmpty {
+            return "Audit trail records receipt metadata"
+        }
+        if record.receipt.why != nil {
+            return "Audit trail includes source, reason, changed facts, and receipt time"
+        }
+        return "Audit trail includes source, changed facts, and receipt time"
+    }
+
+    private static func undoLabel(_ availability: ActionReceiptUndoAvailability) -> String {
+        switch availability {
+        case .availableLocal:
+            return "Undo available on this device"
+        case .requiresConfirmation:
+            return "Undo needs confirmation"
+        case .unsafe:
+            return "Undo blocked"
+        case .notSupportedYet:
+            return "Undo future-owned"
+        case .unavailable:
+            return "Undo not available"
+        }
+    }
+
+    private static func correctionLabel(_ availability: ActionReceiptCorrectionAvailability) -> String {
+        switch availability {
+        case .available:
+            return "Correction available"
+        case .availableWithReason:
+            return "Correction available with reason"
+        case .notSupportedYet:
+            return "Correction future-owned"
+        case .unavailable:
+            return "Correction not available"
+        }
+    }
+
+    private static func exportLabel(record: ActionReceiptHistoryRecord) -> String {
+        if record.localOnly == false {
+            return "Export needs confirmation"
+        }
+        if record.privacyLevel.requiresRedactionByDefault || record.hasMissingDetail {
+            return "Export summary redacted"
+        }
+        return "Local export summary available"
+    }
+
+    private static func privacyBoundaryLabel(record: ActionReceiptHistoryRecord) -> String {
+        if record.localOnly == false {
+            return "Not local-only"
+        }
+        if record.privacyLevel.requiresRedactionByDefault {
+            return "Private detail hidden"
+        }
+        return "Stored on this device"
     }
 }
 

@@ -495,6 +495,117 @@ final class ActionClosureReceiptModelsTests: XCTestCase {
         XCTAssertTrue(search.localOnly)
     }
 
+    func testEB17RecoveryAuditExportSummaryNamesSafeLocalControls() {
+        let capture = object(.capture, "capture-1", label: "Launch checklist", sourceDomain: .capture)
+        let receipt = ActionReceipt(
+            id: "receipt-eb17-safe",
+            resultState: .attached,
+            title: "Capture placed",
+            summary: "Placed launch checklist in the right goal.",
+            sourceDomain: .capture,
+            occurredAt: "2026-05-03T12:00:00Z",
+            affectedObjects: [capture],
+            changedFacts: [
+                ActionReceiptChangedFact(
+                    id: "fact-eb17-placed",
+                    kind: .attachedCaptureToGoal,
+                    object: capture,
+                    summary: "Capture was linked to a goal."
+                )
+            ],
+            why: ActionReceiptWhyExplanation(body: "The user confirmed the destination."),
+            correctionAvailability: .availableWithReason,
+            undoAvailability: .availableLocal,
+            sourceObject: capture
+        )
+
+        let summary = ActionReceiptHistoryRecord(receipt: receipt).recoveryAuditExportSummary
+
+        XCTAssertEqual(summary.receiptID, "receipt-eb17-safe")
+        XCTAssertEqual(summary.auditTrailLabel, "Audit trail includes source, reason, changed facts, and receipt time")
+        XCTAssertEqual(summary.undoLabel, "Undo available on this device")
+        XCTAssertEqual(summary.correctionLabel, "Correction available with reason")
+        XCTAssertEqual(summary.exportLabel, "Local export summary available")
+        XCTAssertEqual(summary.privacyBoundaryLabel, "Stored on this device")
+        XCTAssertTrue(summary.canAttemptLocalUndo)
+        XCTAssertTrue(summary.canRequestCorrection)
+        XCTAssertTrue(summary.canIncludeInLocalExportSummary)
+        XCTAssertFalse(summary.safeToShowInExternalSurface)
+        XCTAssertTrue(summary.requiresConfirmationBeforeAction)
+        XCTAssertTrue(summary.noSilentChanges)
+    }
+
+    func testEB17RecoveryAuditExportSummaryRedactsPrivateExportAndExternalUse() {
+        let goal = object(.goal, "goal-private", label: "Private goal", sourceDomain: .goals)
+        let receipt = receipt(
+            id: "receipt-eb17-private",
+            resultState: .changed,
+            title: "Private goal changed",
+            affectedObjects: [goal],
+            changedFacts: [
+                ActionReceiptChangedFact(
+                    id: "fact-eb17-private",
+                    kind: .changedField,
+                    object: goal,
+                    summary: "Private wording changed."
+                )
+            ],
+            undoAvailability: .availableLocal
+        )
+
+        let summary = ActionReceiptHistoryRecord(
+            receipt: receipt,
+            privacyLevel: .sensitive
+        ).recoveryAuditExportSummary
+
+        XCTAssertEqual(summary.exportLabel, "Export summary redacted")
+        XCTAssertEqual(summary.privacyBoundaryLabel, "Private detail hidden")
+        XCTAssertFalse(summary.canIncludeInLocalExportSummary)
+        XCTAssertFalse(summary.safeToShowInExternalSurface)
+        XCTAssertTrue(summary.canAttemptLocalUndo)
+    }
+
+    func testEB17RecoveryAuditExportSummaryKeepsSafeFailuresNonMutating() {
+        let planItem = object(.action, "plan-item-1", label: "Draft launch block", sourceDomain: .plan)
+        let receipt = ActionReceipt(
+            id: "receipt-eb17-safe-failure",
+            resultState: .failedSafely,
+            title: "Action did not change anything",
+            summary: "Export was not prepared because confirmation was missing.",
+            sourceDomain: .exportImport,
+            occurredAt: "2026-05-03T12:10:00Z",
+            affectedObjects: [planItem],
+            changedFacts: [
+                ActionReceiptChangedFact(
+                    id: "fact-eb17-safe-failure",
+                    kind: .failedSafely,
+                    object: planItem,
+                    summary: "No export file was created."
+                )
+            ],
+            correctionAvailability: .availableWithReason,
+            undoAvailability: .unavailable,
+            safetyState: .safeFailure,
+            safeFailure: ActionReceiptSafeFailure(
+                whatFailed: "Export preparation",
+                whyFailed: "Confirmation missing.",
+                unchangedFacts: ["No export file was created.", "No stored data was changed."]
+            )
+        )
+
+        let summary = ActionReceiptHistoryRecord(receipt: receipt).recoveryAuditExportSummary
+
+        XCTAssertEqual(summary.undoLabel, "Undo not available")
+        XCTAssertEqual(summary.correctionLabel, "Correction available with reason")
+        XCTAssertEqual(summary.exportLabel, "Local export summary available")
+        XCTAssertFalse(summary.canAttemptLocalUndo)
+        XCTAssertTrue(summary.canRequestCorrection)
+        XCTAssertFalse(summary.safeToShowInExternalSurface)
+        XCTAssertTrue(summary.requiresConfirmationBeforeAction)
+        XCTAssertTrue(summary.noSilentChanges)
+        XCTAssertEqual(summary.rollbackBoundaryLabel, "Rollback uses the receipt record and source object; no silent mutation")
+    }
+
     func testClosureReceiptUsesNonPunitiveActionClosureLanguage() {
         let stepID = UUID(uuidString: "11111111-1111-1111-1111-111111111111")!
         let occurrence = StepOccurrence(

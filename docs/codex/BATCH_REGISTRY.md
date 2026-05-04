@@ -198,7 +198,15 @@ Current 4.0 status:
   workflow, signing, network, sync/account/cloud behavior, export/delete
   behavior, production asset, or release-claim changes. EB17 Undo Correction
   Audit Trail And Export is the next eligible EB batch.
-- Active Planned / Queued: EB08-EB12, EB17-EB18, EB20-EB24, EB03-EB06, and EB26-EB40 Ambitions 4.0 External Brain Foundation expansion segment; not completed and not implemented in app behavior.
+- Complete: EB17 Undo Correction Audit Trail And Export is complete as a
+  bounded receipt-domain recovery/audit/export summary implementation. It adds
+  computed local undo/correction/audit/export boundary labels and focused
+  receipt tests only, without actual undo/export/delete execution, route/raw,
+  persistence/schema, UI, top-level-tab, dependency, workflow, signing, network,
+  sync/account/cloud behavior, production asset, or release-claim changes. EB18
+  Source Freshness Privacy Receipts And Non Claims is the next eligible EB
+  batch.
+- Active Planned / Queued: EB08-EB12, EB18, EB20-EB24, EB03-EB06, and EB26-EB40 Ambitions 4.0 External Brain Foundation expansion segment; not completed and not implemented in app behavior.
 - Queued / Blocked: SI01-SI18 pending global-order selection or `Start Signature Interface Train` plus PXOS/ME/CS/SI quality gates.
 - Queued / Blocked: PD01-PD18 pending `Start Product Depth Train` plus PXOS/ME/CS/SI/AOS-if-needed gates.
 - Queued / Blocked: AOS01-AOS30 pending `Start AOS Train`.
