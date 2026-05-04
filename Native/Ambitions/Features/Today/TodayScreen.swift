@@ -300,6 +300,15 @@ struct TodayScreen: View {
     .ambitionTheme(.dark)
 }
 
+#Preview("Today SI04 Rail Dynamic Type") {
+    NavigationStack {
+        TodayScreen(viewModel: TodayViewModel(state: .loaded(PreviewTodayScenarios.overloaded)), autoLoad: false)
+    }
+    .appContainer(PreviewAppContainerFactory.preview(todayExperience: PreviewTodayScenarios.overloaded))
+    .ambitionTheme(.dark)
+    .environment(\.dynamicTypeSize, .accessibility3)
+}
+
 #Preview("Today Step Detail Start Here") {
     if let detail = PreviewTodayScenarios.stepDetailStartHere {
         TodayStepDetailSheet(detail: detail)

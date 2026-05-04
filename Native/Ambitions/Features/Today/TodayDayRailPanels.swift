@@ -47,6 +47,7 @@ struct AmbitionsDayRailView: View {
     var body: some View {
         VStack(alignment: .leading, spacing: theme.spacing.md) {
             header
+            DayRailRhythmStrip(state: state, semanticState: semanticState)
 
             if let heroStep = state.heroStep {
                 DayRailHeroStepCard(

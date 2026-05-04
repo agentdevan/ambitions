@@ -1,4 +1,5 @@
 @testable import Ambitions
+import AmbitionsDesignSystem
 import Foundation
 import XCTest
 
@@ -227,6 +228,24 @@ final class TodayViewModelTests: XCTestCase {
         XCTAssertFalse(copy.contains("Draft the talk outline"))
         XCTAssertFalse(copy.contains("Submit my conference talk proposal"))
         XCTAssertFalse(copy.contains("Record one rough vocal pass"))
+    }
+
+    func testSI04DayRailRhythmStripCompilesForRequiredPreviewStates() {
+        let rails = [
+            PreviewTodayScenarios.stable.execution.dayRail,
+            PreviewTodayScenarios.privateRail.execution.dayRail,
+            PreviewTodayScenarios.overloaded.execution.dayRail,
+            PreviewTodayScenarios.empty.execution.dayRail
+        ]
+
+        for rail in rails {
+            _ = DayRailRhythmStrip(state: rail, semanticState: .focus)
+        }
+
+        XCTAssertEqual(rails.map(\.mode), [.normal, .normal, .normal, .empty])
+        XCTAssertEqual(DayRailRowSlot.allCases.map(\.title), ["Now", "Next", "Later"])
+        XCTAssertTrue(rails.contains { $0.heroStep == nil })
+        XCTAssertTrue(rails.contains { $0.privacyProjection.isSensitiveProjection })
     }
 
     func testF02RealityRailVisibleCopyAvoidsForbiddenTerms() {
