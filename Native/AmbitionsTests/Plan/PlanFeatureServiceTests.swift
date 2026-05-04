@@ -76,6 +76,30 @@ final class PlanFeatureServiceTests: XCTestCase {
         XCTAssertFalse(dashboard.lifeSuite.trustLabel.localizedCaseInsensitiveContains("sync"))
     }
 
+    func testSI08LifeShapeMapItemsExposeCapacityPressureAndNoMutationBoundary() async throws {
+        let repositories = try await makeRepositories()
+        try await repositories.goals.saveGoals([
+            makeWeekVisibleGoal(id: "shape-tight-1", title: "Tight one"),
+            makeWeekVisibleGoal(id: "shape-tight-2", title: "Tight two"),
+            makeWeekVisibleGoal(id: "shape-tight-3", title: "Tight three")
+        ])
+        let dashboard = try await RepositoryBackedPlanService(repositories: repositories).loadPlanDashboard(now: fixedDate)
+
+        let items = dashboard.lifeSuite.shapes.map(PlanLifeShapeMapItem.init(shape:))
+        let weekItem = try XCTUnwrap(items.first { $0.id == PlanLifeSuiteShapeKind.week.rawValue })
+
+        XCTAssertEqual(items.map(\.accessibilityIdentifier), [
+            "plan.life-shape-map.day_shape",
+            "plan.life-shape-map.week_shape",
+            "plan.life-shape-map.life_shape"
+        ])
+        XCTAssertGreaterThan(weekItem.pressureLevel, 0.45)
+        XCTAssertTrue(weekItem.capacityLabel.localizedCaseInsensitiveContains("pressure"))
+        XCTAssertTrue(weekItem.recoveryLabel.localizedCaseInsensitiveContains("lighten"))
+        XCTAssertTrue(weekItem.accessibilityHint.localizedCaseInsensitiveContains("without changing"))
+        XCTAssertFalse(items.map(\.summary).joined(separator: " ").localizedCaseInsensitiveContains("calendar grid"))
+    }
+
     func testF11DayAndWeekShapeExposeVisibleFactsWithoutReplanning() async throws {
         let repositories = try await makeRepositories()
         try await repositories.goals.saveGoals([makeWeekVisibleGoal()])

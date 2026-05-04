@@ -65,7 +65,7 @@ Current 4.0 status:
 - Completed: ME12 Maintainability Handoff.
 - Active evidence baseline: REC01 Release Evidence Truth Inventory.
 - Completed: Signature Interface Codex OS quality gates.
-- Active: SI01-SI18 Signature Interface Implementation Train; SI01-SI07 complete and SI08-SI18 queued/blocked.
+- Active: SI01-SI18 Signature Interface Implementation Train; SI01-SI08 complete and SI09-SI18 queued/blocked.
 - Completed: CS01 Compatibility Seam Registry And Risk Map.
 - Completed: CS07 External Route Widget AppIntent Compatibility Proof.
 - Completed: CS08 Import Export Persistence Compatibility Proof.
@@ -757,7 +757,7 @@ These batches are complete for planning purposes. They remain as historical cont
 | CS07 External Route Widget AppIntent Compatibility Proof | Completed / focused proof | External route, widget, App Intent, external snapshot, and screen-contract focused tests passed; no seam retired. |
 | CS08 Import Export Persistence Compatibility Proof | Completed / focused proof | Import/export, portable snapshot, legacy import, persistence repository, sync posture, and persistence budget focused tests passed; no seam retired. |
 | CS02-CS06 / CS09-CS10 Compatibility Seam Retirement Train | Queued / Blocked | Requires current global preauthorization or `Start CS Train` and Green predecessor gates. |
-| SI01-SI18 Signature Interface Implementation Train | Active | SI01-SI07 complete; SI08-SI18 require global-order selection or `Start Signature Interface Train`, PXOS completion, relevant ME/CS gates, and SI visual quality gates. |
+| SI01-SI18 Signature Interface Implementation Train | Active | SI01-SI08 complete; SI09-SI18 require global-order selection or `Start Signature Interface Train`, PXOS completion, relevant ME/CS gates, and SI visual quality gates. |
 | PD01-PD18 Product Depth Train | Queued / Blocked | Formal Product Depth train. Requires exact approval phrase `Start Product Depth Train`, PXOS Product Depth gates, relevant ME/CS/SI gates, and AOS blockers when runtime logic is touched. |
 | PXOS Future-Canon Integration | Completed / docs-only | Added Product Experience OS future canon and Codex OS controls. It does not start PXOS implementation or the PXOS train. |
 | PX01-PX20 Product Experience OS Train | Completed / docs-only | PX01-PX20 are complete as future canon/roadmap evidence. PXOS implementation is not started. |

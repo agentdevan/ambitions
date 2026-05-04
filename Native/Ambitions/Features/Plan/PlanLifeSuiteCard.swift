@@ -11,7 +11,7 @@ struct PlanLifeSuiteCard: View {
             VStack(alignment: .leading, spacing: theme.spacing.md) {
                 SectionHeader(title: suite.title, subtitle: suite.subtitle)
 
-                LifeShapeMap(suite: suite)
+                PlanLifeShapeTimeCapacityMap(suite: suite)
 
                 LazyVGrid(
                     columns: [
@@ -38,64 +38,6 @@ struct PlanLifeSuiteCard: View {
         .accessibilityIdentifier("plan.life-suite")
         .accessibilityElement(children: .contain)
         .ambitionPanelAccessibility()
-    }
-}
-
-private struct LifeShapeMap: View {
-    @Environment(\.ambitionTheme) private var theme
-
-    let suite: PlanLifeSuiteState
-
-    var body: some View {
-        StateDrivenMaterialPanel(context: .plan, state: .active) {
-            VStack(alignment: .leading, spacing: theme.spacing.md) {
-                HStack(alignment: .firstTextBaseline, spacing: theme.spacing.sm) {
-                    Text("LifeShapeMap")
-                        .font(theme.typography.bodyEmphasized)
-                        .foregroundStyle(theme.colors.textPrimary)
-                    Spacer(minLength: theme.spacing.sm)
-                    AmbitionChip(suite.calendarBoundaryLabel, role: .time, semanticState: .calendarDerived)
-                }
-
-                HStack(alignment: .bottom, spacing: theme.spacing.sm) {
-                    ForEach(suite.shapes) { shape in
-                        VStack(alignment: .leading, spacing: theme.spacing.xs) {
-                            RoundedRectangle(cornerRadius: theme.radius.sm, style: .continuous)
-                                .fill(theme.stateStyle(for: shape.visualState).accent.opacity(0.74))
-                                .frame(height: height(for: shape))
-                            Text(shape.kind.rawValue.capitalized)
-                                .font(theme.typography.micro)
-                                .foregroundStyle(theme.colors.textTertiary)
-                                .lineLimit(1)
-                        }
-                        .frame(maxWidth: .infinity, alignment: .bottomLeading)
-                    }
-                }
-                .accessibilityHidden(true)
-
-                EvidenceLabel(
-                    "Shape before schedule",
-                    detail: suite.subtitle,
-                    source: suite.manualFallbackLabel,
-                    state: .active,
-                    context: .plan
-                )
-            }
-        }
-        .accessibilityElement(children: .combine)
-        .accessibilityLabel("Life Shape Map")
-        .accessibilityValue(suite.shapes.map { "\($0.title), \($0.summary)" }.joined(separator: ". "))
-    }
-
-    private func height(for shape: PlanLifeSuiteShapeState) -> CGFloat {
-        switch shape.kind {
-        case .day:
-            54
-        case .week:
-            78
-        case .life:
-            42
-        }
     }
 }
 
