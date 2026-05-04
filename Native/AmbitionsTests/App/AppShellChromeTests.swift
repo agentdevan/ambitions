@@ -83,4 +83,20 @@ final class AppShellChromeTests: XCTestCase {
         XCTAssertEqual(CrossSurfaceContinuityMaturityReport.layer3Blockers.map(\.ownerBatch), ["R01", "R02", "R03", "R04-R05"])
         XCTAssertTrue(CrossSurfaceContinuityMaturityReport.completionSummary.contains("R04/R05 own remaining external release truth"))
     }
+
+    func testSI03SurfaceShellKindsDoNotCreateNavigationDestinations() {
+        XCTAssertEqual(
+            AmbitionsSurfaceShellKind.allCases,
+            [.topLevelSurface, .drillDown, .utilityHub, .overlayHost]
+        )
+
+        for kind in AmbitionsSurfaceShellKind.allCases {
+            XCTAssertFalse(kind.title.isEmpty)
+            XCTAssertFalse(kind.accessibilityRole.isEmpty)
+            XCTAssertTrue(AmbitionModeLens.allCases.contains(kind.defaultLens))
+            XCTAssertTrue(AmbitionAmbientStatus.allCases.contains(kind.defaultStatus))
+        }
+
+        XCTAssertEqual(AppTab.allCases.map(\.title), ["Today", "Goals", "Capture", "Plan", "You"])
+    }
 }

@@ -112,4 +112,43 @@ final class GroupedNavigationListDesignSystemTests: XCTestCase {
         XCTAssertFalse(stressLabels.contains { $0.contains("-") })
         XCTAssertFalse(stressLabels.contains { $0.contains("\n") })
     }
+
+    func testSI03SurfaceShellAndOverlayZoneCompileWithGroupedNavigationHub() {
+        let primaryAction = AmbitionsSurfaceHeaderAction(
+            title: "Open command",
+            systemImage: "command",
+            accessibilityIdentifier: "test.si03.command",
+            action: {}
+        )
+
+        _ = AmbitionsSurfaceShell(
+            kind: .utilityHub,
+            title: "You",
+            subtitle: "Personal system center.",
+            statusMessage: "Routes remain owned by Today, Goals, Capture, Plan, and You.",
+            primaryAction: primaryAction
+        ) {
+            GroupedNavigationList {
+                GroupedNavigationSection(title: "Trust") {
+                    GroupedDisclosureNavigationRow(
+                        title: "What Ambitions knows",
+                        subtitle: "Review saved context.",
+                        systemImage: "checkmark.shield",
+                        badge: .init("Private", state: .protected),
+                        accessibilityHint: "Opens saved context.",
+                        action: {}
+                    )
+                }
+            }
+
+            ShellOverlayZone(
+                title: "Return path",
+                subtitle: "Temporary overlay.",
+                isPresented: true,
+                onDismiss: {}
+            ) {
+                Text("Owned overlay content")
+            }
+        }
+    }
 }

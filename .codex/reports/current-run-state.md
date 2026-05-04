@@ -2,7 +2,7 @@
 
 Date: 2026-05-04
 Active train: Signature Interface
-Current batch: SI03 next eligible after SI02 foundation
+Current batch: SI04 next eligible after SI03 shell/navigation foundation
 Scope: Complete: EB03A Universal Capture Composer Routing Owner Map. Complete:
 EB03B Universal Capture Composer Routing Implementation. Complete: EB04
 Capture Classification And Clarification. Complete: EB05 Capture Clusters
@@ -87,7 +87,8 @@ accessibility/release claim change was made.
   complete as the External Brain train closeout. CS10 is complete as a
   compatibility handoff. SI01 is complete as Signature Interface architecture
   evidence. SI02 is complete as adaptive panel/action/module foundation
-  implementation. SI03 is the next eligible global batch.
+  implementation. SI03 is complete as app shell/IA/navigation-list foundation
+  implementation. SI04 is the next eligible global batch.
 - PXEQ is a mandatory product-experience gate for EB UI-affecting batches; it
   is not a shipped app feature and not a new EB batch identity.
 - Optimized global order after EB32 places DAV01-DAV15 before UI-heavy EB
