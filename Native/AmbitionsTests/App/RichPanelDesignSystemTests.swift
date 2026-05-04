@@ -83,4 +83,65 @@ final class RichPanelDesignSystemTests: XCTestCase {
             }
         }
     }
+
+    func testSI02PanelEmphasisCoversModuleAndStateOwners() {
+        let required: Set<PanelEmphasis> = [
+            .orientation,
+            .action,
+            .receipt,
+            .proof,
+            .source,
+            .recovery,
+            .setup,
+            .pressure,
+            .quiet
+        ]
+
+        XCTAssertEqual(Set(PanelEmphasis.allCases), required)
+        for emphasis in PanelEmphasis.allCases {
+            XCTAssertFalse(emphasis.title.isEmpty)
+            XCTAssertFalse(emphasis.icon.isEmpty)
+            XCTAssertFalse(emphasis.accessibilityText.isEmpty)
+            XCTAssertFalse(emphasis.semanticState.accessibilityText.isEmpty)
+        }
+    }
+
+    func testSI02AdaptivePanelConfigurationCarriesAccessibleState() {
+        let loading = AdaptivePanelConfiguration(
+            emphasis: .action,
+            title: "Finding the safest action",
+            status: "Working",
+            isLoading: true
+        )
+        let disabled = AdaptivePanelConfiguration(
+            emphasis: .recovery,
+            title: "Recovery paused",
+            status: "Unavailable",
+            isDisabled: true
+        )
+        let privatePanel = AdaptivePanelConfiguration(
+            emphasis: .source,
+            title: "Private source",
+            isPrivacySensitive: true
+        )
+
+        XCTAssertEqual(loading.state, .loading)
+        XCTAssertEqual(disabled.state, .disabled)
+        XCTAssertEqual(privatePanel.state, .selected)
+        XCTAssertTrue(privatePanel.defaultAccessibilityLabel.contains("private"))
+        XCTAssertTrue(loading.defaultAccessibilityLabel.contains("loading"))
+        XCTAssertTrue(disabled.defaultAccessibilityLabel.contains("disabled"))
+    }
+
+    func testSI02ActionRolesMapToExistingButtonTiers() {
+        XCTAssertEqual(AmbitionsActionRole.primary.tier, .primary)
+        XCTAssertEqual(AmbitionsActionRole.secondary.tier, .secondary)
+        XCTAssertEqual(AmbitionsActionRole.quiet.tier, .tertiary)
+        XCTAssertEqual(AmbitionsActionRole.recovery.tier, .recovery)
+        XCTAssertEqual(AmbitionsActionRole.destructive.tier, .destructive)
+
+        for role in AmbitionsActionRole.allCases {
+            XCTAssertFalse(role.defaultIcon.isEmpty)
+        }
+    }
 }

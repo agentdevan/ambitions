@@ -190,6 +190,62 @@ private struct DesignSystemPreviewGallery: View {
 
                 SectionHeader(eyebrow: "Batch 63", title: "Rich Panel Foundations", subtitle: "Canonical panel types with semantic state, action, explanation, and visual slots.")
 
+                SectionHeader(eyebrow: "SI02", title: "Adaptive Panel + Action Foundation", subtitle: "Shared Signature Interface primitives for module shells, action hierarchy, loading, disabled, privacy, and Dynamic Type lanes.")
+
+                AdaptivePanel(
+                    .init(
+                        emphasis: .orientation,
+                        title: "Start with the one thing that keeps the day together",
+                        subtitle: "A calm module shell for future Today, Goals, Capture, Plan, and You surfaces.",
+                        status: "Ready",
+                        accessibilityHint: "Reviews the primary orientation module."
+                    )
+                ) {
+                    VStack(alignment: .leading, spacing: 12) {
+                        AmbitionBand {
+                            Image(systemName: "checkmark.seal")
+                            Text("State is carried by text, symbol, and structure, not color alone.")
+                                .font(.caption)
+                        }
+
+                        HStack(spacing: 12) {
+                            AmbitionsActionButton("Start here", icon: "arrow.right.circle.fill", role: .primary) {}
+                            QuietActionButton("Why this", icon: "questionmark.circle") {}
+                        }
+                    }
+                }
+
+                LazyVGrid(
+                    columns: [GridItem(.adaptive(minimum: 220), spacing: 12, alignment: .top)],
+                    alignment: .leading,
+                    spacing: 12
+                ) {
+                    AdaptivePanel(.init(emphasis: .proof, title: "Proof saved", status: "Proof")) {
+                        AmbitionChip("Local receipt", role: .state, semanticState: .trust)
+                    }
+
+                    AdaptivePanel(.init(emphasis: .source, title: "Private source", status: "Private", isPrivacySensitive: true)) {
+                        AmbitionChip("Inspectable", role: .protected)
+                    }
+
+                    AdaptivePanel(.init(emphasis: .action, title: "Finding the safest action", isLoading: true))
+
+                    AdaptivePanel(.init(emphasis: .recovery, title: "Recovery option paused", status: "Disabled", isDisabled: true)) {
+                        AmbitionsActionButton("Still counts", role: .recovery) {}
+                    }
+                }
+
+                AmbitionsInAppModule(
+                    title: "Module shell",
+                    subtitle: "For future owned Ambitions modules, not equal-weight dashboard cards.",
+                    emphasis: .quiet
+                ) {
+                    HStack {
+                        AmbitionChip("Reduced Motion safe", role: .state, semanticState: .accessibilityVerified)
+                        AmbitionChip("44 pt targets", role: .state, semanticState: .accessibilityVerified)
+                    }
+                }
+
                 ForEach(AmbitionPanelKind.allCases) { kind in
                     AmbitionRichPanel(panelConfiguration(for: kind)) {
                         previewVisualSlot(for: kind)
@@ -447,6 +503,10 @@ struct DesignSystemPreviewGallery_Previews: PreviewProvider {
                 .ambitionTheme(.light)
                 .preferredColorScheme(.light)
                 .previewDisplayName("Light Hook")
+
+            DesignSystemPreviewGallery()
+                .environment(\.dynamicTypeSize, .accessibility3)
+                .previewDisplayName("SI02 High Dynamic Type")
         }
     }
 }
