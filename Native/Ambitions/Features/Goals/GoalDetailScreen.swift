@@ -296,79 +296,26 @@ private struct GoalDetailMissionControlCard: View {
     var body: some View {
         AppCard(state: .selected) {
             VStack(alignment: .leading, spacing: theme.spacing.md) {
-                VStack(alignment: .leading, spacing: theme.spacing.xxs) {
-                    Text("Goal Mission Control")
-                        .font(theme.typography.micro)
-                        .foregroundStyle(theme.colors.accentWarm)
-                    Text(state.currentTruth)
-                        .font(theme.typography.section)
-                        .foregroundStyle(theme.colors.textPrimary)
-                    Text(state.primaryNextMove.title)
-                        .font(theme.typography.body)
-                        .foregroundStyle(theme.colors.textSecondary)
-                }
+                MissionControlLaneHeader(
+                    eyebrow: "Goal Mission Control",
+                    title: state.currentTruth,
+                    subtitle: state.primaryNextMove.title,
+                    badges: [
+                        MissionControlLaneHeaderBadge(id: "source", title: state.sourceLabel, symbolName: "scope", state: .default),
+                        MissionControlLaneHeaderBadge(id: "proof", title: state.proofBoundaryLabel, symbolName: "checkmark.seal", state: .selected),
+                        MissionControlLaneHeaderBadge(id: "owner", title: state.ownershipLabel, symbolName: "person.crop.circle", state: .default),
+                    ]
+                )
 
-                ScrollView(.horizontal, showsIndicators: false) {
-                    HStack(spacing: theme.spacing.xs) {
-                        TagPill(state.sourceLabel, icon: "scope", state: .default)
-                        TagPill(state.proofBoundaryLabel, icon: "checkmark.seal", state: .selected)
-                        TagPill(state.ownershipLabel, icon: "person.crop.circle", state: .default)
-                    }
-                }
-
-                LazyVGrid(columns: [GridItem(.adaptive(minimum: 154), spacing: theme.spacing.sm)], alignment: .leading, spacing: theme.spacing.sm) {
-                    ForEach(state.lanes) { lane in
-                        GoalDetailMissionLaneCard(lane: lane)
-                    }
-                }
+                MissionControlLaneGrid(
+                    items: state.lanes.map(MissionControlLaneItem.init(detailLane:)),
+                    density: .standard
+                )
             }
         }
         .accessibilityElement(children: .contain)
         .accessibilityIdentifier("goal-detail.mission-control")
         .ambitionPanelAccessibility()
-    }
-}
-
-private struct GoalDetailMissionLaneCard: View {
-    @Environment(\.ambitionTheme) private var theme
-
-    let lane: GoalDetailMissionLaneState
-
-    var body: some View {
-        VStack(alignment: .leading, spacing: theme.spacing.xs) {
-            HStack(alignment: .center, spacing: theme.spacing.xs) {
-                Image(systemName: lane.systemImage)
-                    .font(.system(size: theme.icon.smallSize, weight: theme.icon.symbolWeight))
-                    .foregroundStyle(theme.stateStyle(for: lane.state).accent)
-                Text(lane.title)
-                    .font(theme.typography.caption)
-                    .foregroundStyle(theme.colors.textTertiary)
-                Spacer(minLength: theme.spacing.xs)
-                TagPill(lane.badgeTitle, state: lane.state)
-            }
-
-            Text(lane.headline)
-                .font(theme.typography.bodyEmphasized)
-                .foregroundStyle(theme.colors.textPrimary)
-                .fixedSize(horizontal: false, vertical: true)
-            Text(lane.summary)
-                .font(theme.typography.caption)
-                .foregroundStyle(theme.colors.textSecondary)
-                .fixedSize(horizontal: false, vertical: true)
-            if lane.detail.isEmpty == false {
-                Text(lane.detail)
-                    .font(theme.typography.micro)
-                    .foregroundStyle(theme.colors.textTertiary)
-                    .fixedSize(horizontal: false, vertical: true)
-            }
-        }
-        .frame(maxWidth: .infinity, minHeight: 148, alignment: .topLeading)
-        .padding(theme.spacing.sm)
-        .background(RoundedRectangle(cornerRadius: theme.radius.md, style: .continuous).fill(theme.colors.surfaceOverlay))
-        .overlay(RoundedRectangle(cornerRadius: theme.radius.md, style: .continuous).stroke(theme.stateStyle(for: lane.state).stroke, lineWidth: 1))
-        .accessibilityElement(children: .combine)
-        .accessibilityLabel("\(lane.title). \(lane.headline). \(lane.summary)")
-        .accessibilityIdentifier(lane.kind.accessibilityIdentifier)
     }
 }
 

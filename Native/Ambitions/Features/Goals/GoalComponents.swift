@@ -81,19 +81,12 @@ struct GoalMissionControlLanes: View {
             VStack(alignment: .leading, spacing: theme.spacing.md) {
                 heroHeader
 
-                LazyVGrid(
-                    columns: [GridItem(.adaptive(minimum: 148), spacing: theme.spacing.sm)],
-                    alignment: .leading,
-                    spacing: theme.spacing.sm
-                ) {
-                    ForEach(Array(lanes.enumerated()), id: \.element.id) { index, lane in
-                        GoalMissionControlLaneCard(
-                            lane: lane,
-                            revealDelay: reduceMotion ? 0 : Double(index) * 0.04,
-                            hasAppeared: hasAppeared
-                        )
-                    }
-                }
+                MissionControlLaneGrid(
+                    items: lanes.map(MissionControlLaneItem.init(boardLane:)),
+                    density: .expanded,
+                    animatedReveal: true,
+                    hasAppeared: hasAppeared
+                )
 
                 GoalsHeroPrimaryActionButton(
                     action: overview.heroPrimaryAction,
@@ -178,7 +171,7 @@ struct GoalMissionControlLanes: View {
     }
 }
 
-private struct GoalMissionControlLaneState: Identifiable, Sendable {
+struct GoalMissionControlLaneState: Identifiable, Sendable {
     let id: String
     let title: String
     let value: String
@@ -187,105 +180,6 @@ private struct GoalMissionControlLaneState: Identifiable, Sendable {
     let state: LivingVisualState
     let level: Double
     var showsProofPulse: Bool = false
-}
-
-private struct GoalMissionControlLaneCard: View {
-    @Environment(\.ambitionTheme) private var theme
-    @Environment(\.accessibilityReduceMotion) private var reduceMotion
-
-    let lane: GoalMissionControlLaneState
-    let revealDelay: Double
-    let hasAppeared: Bool
-
-    var body: some View {
-        let accent = lane.state == .proof ? theme.semanticColors.protected : theme.stateStyle(for: lane.state.ambitionState).accent
-        let shape = RoundedRectangle(cornerRadius: theme.radius.lg, style: .continuous)
-
-        VStack(alignment: .leading, spacing: theme.spacing.xs) {
-            HStack(alignment: .top, spacing: theme.spacing.xs) {
-                Image(systemName: lane.symbolName)
-                    .font(.system(size: theme.icon.smallSize, weight: theme.icon.symbolWeight))
-                    .foregroundStyle(accent)
-                    .frame(width: 28, height: 28)
-                    .background(Circle().fill(accent.opacity(0.13)))
-                    .accessibilityHidden(true)
-
-                Spacer(minLength: theme.spacing.xs)
-
-                if lane.showsProofPulse {
-                    ProofPulse(isActive: hasAppeared, label: "Proof lane has saved proof")
-                        .frame(width: 34, height: 34)
-                }
-            }
-
-            VStack(alignment: .leading, spacing: theme.spacing.xxxs) {
-                Text(lane.title)
-                    .font(theme.typography.caption)
-                    .foregroundStyle(theme.colors.textTertiary)
-                Text(lane.value)
-                    .font(theme.typography.bodyEmphasized)
-                    .foregroundStyle(theme.colors.textPrimary)
-                    .fixedSize(horizontal: false, vertical: true)
-                Text(lane.detail)
-                    .font(theme.typography.caption)
-                    .foregroundStyle(theme.colors.textSecondary)
-                    .lineLimit(3)
-                    .fixedSize(horizontal: false, vertical: true)
-            }
-
-            GoalMissionControlSparkLine(level: lane.level, accent: accent)
-        }
-        .frame(maxWidth: .infinity, minHeight: 168, alignment: .topLeading)
-        .padding(theme.spacing.sm)
-        .background {
-            shape.fill(theme.surfaces.elevatedGradient)
-        }
-        .overlay {
-            shape.strokeBorder(accent.opacity(0.24), lineWidth: 1)
-        }
-        .shadow(color: accent.opacity(0.10), radius: 18, x: 0, y: 10)
-        .opacity(hasAppeared || reduceMotion ? 1 : 0.84)
-        .offset(y: hasAppeared || reduceMotion ? 0 : 6)
-        .animation(
-            reduceMotion ? nil : .easeOut(duration: 0.34).delay(revealDelay),
-            value: hasAppeared
-        )
-        .accessibilityElement(children: .ignore)
-        .accessibilityLabel("\(lane.title). \(lane.value). \(lane.detail)")
-    }
-}
-
-private struct GoalMissionControlSparkLine: View {
-    @Environment(\.accessibilityReduceMotion) private var reduceMotion
-
-    let level: Double
-    let accent: Color
-
-    private var normalizedLevel: Double {
-        min(1, max(0.12, level))
-    }
-
-    var body: some View {
-        HStack(alignment: .bottom, spacing: 4) {
-            ForEach(0..<6, id: \.self) { index in
-                Capsule(style: .continuous)
-                    .fill(accent.opacity(index == 5 ? 0.62 : 0.26))
-                    .frame(
-                        width: 5,
-                        height: barHeight(index: index)
-                    )
-            }
-        }
-        .frame(height: 32, alignment: .bottomLeading)
-        .frame(maxWidth: .infinity, alignment: .leading)
-        .accessibilityHidden(true)
-    }
-
-    private func barHeight(index: Int) -> CGFloat {
-        let base = CGFloat(normalizedLevel)
-        let wave = reduceMotion ? CGFloat(index + 1) / 7 : abs(sin(Double(index) * 0.72 + normalizedLevel))
-        return max(8, 10 + (base * 16) + CGFloat(wave * 10))
-    }
 }
 
 struct GoalsHeroCard: View {

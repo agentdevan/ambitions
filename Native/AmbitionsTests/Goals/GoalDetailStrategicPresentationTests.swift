@@ -43,6 +43,27 @@ final class GoalDetailStrategicPresentationTests: XCTestCase {
         XCTAssertFalse(missionControl.timeline.items.isEmpty)
     }
 
+    func testMissionControlLanePrimitivePreservesGoalDetailLaneContract() async throws {
+        let repositories = try await makeRepositories()
+        let service = RepositoryBackedGoalsService(repositories: repositories)
+        let created = try await service.createGoal(
+            CreateGoalRequest(title: "Ship the family emergency plan"),
+            now: fixedNow
+        )
+
+        let detail = try await service.loadDetail(target: created.target)
+        let missionControl = try XCTUnwrap(detail.missionControl)
+        let proofLane = try XCTUnwrap(missionControl.lanes.first(where: { $0.kind == .proof }))
+        let laneItem = MissionControlLaneItem(detailLane: proofLane)
+
+        XCTAssertEqual(laneItem.id, GoalDetailMissionLaneKind.proof.rawValue)
+        XCTAssertEqual(laneItem.title, proofLane.title)
+        XCTAssertEqual(laneItem.value, proofLane.headline)
+        XCTAssertEqual(laneItem.badgeTitle, proofLane.badgeTitle)
+        XCTAssertEqual(laneItem.accessibilityIdentifier, proofLane.kind.accessibilityIdentifier)
+        XCTAssertTrue(laneItem.accessibilityHint.contains("Goal Detail"))
+    }
+
     func testM07PathBuilderConnectsRoadmapForkProofAndTodayWithoutNewTab() async throws {
         let repositories = try await makeRepositories()
         let service = RepositoryBackedGoalsService(repositories: repositories)
