@@ -558,6 +558,22 @@ final class ProfileFeatureServiceTests: XCTestCase {
         XCTAssertTrue(dashboard.memoryControls.footer.contains("durable rejected-memory rules remain manual/future"))
     }
 
+    func testEB12MemoryReceiptsExplainWhyRememberedThisWithoutDurableReceiptClaims() async throws {
+        let repositories = try await makeRepositories()
+        let service = RepositoryBackedProfileService(repositories: repositories)
+
+        let dashboard = try await service.loadProfileDashboard()
+        let memoryReceipt = try XCTUnwrap(dashboard.receiptAudit.items.first(where: { $0.id == "profile-receipts-memory" }))
+
+        XCTAssertEqual(memoryReceipt.title, "Memory receipts")
+        XCTAssertEqual(memoryReceipt.valueLabel, "Evidence-light")
+        XCTAssertTrue(memoryReceipt.subtitle?.contains("Why remembered this") ?? false)
+        XCTAssertTrue(memoryReceipt.subtitle?.contains("source, freshness, use, privacy posture") ?? false)
+        XCTAssertTrue(memoryReceipt.subtitle?.contains("correction or delete availability") ?? false)
+        XCTAssertFalse(memoryReceipt.subtitle?.localizedCaseInsensitiveContains("synced") ?? true)
+        XCTAssertFalse(memoryReceipt.subtitle?.localizedCaseInsensitiveContains("permanent") ?? true)
+    }
+
     func testCorrectionsAndLedgerCountsUseExistingLocalRepositories() async throws {
         let repositories = try await makeRepositories()
         try await repositories.teaching.saveSignals([

@@ -1529,6 +1529,13 @@ private extension RepositoryBackedProfileService {
                     valueLabel: snapshot.eventLedger.isEmpty ? "No recent events" : "\(snapshot.eventLedger.count) recent"
                 ),
                 SettingsItem(
+                    id: "profile-receipts-memory",
+                    title: "Memory receipts",
+                    subtitle: "Why remembered this should cite source, freshness, use, privacy posture, and correction or delete availability before memory is reused.",
+                    icon: "brain.head.profile",
+                    valueLabel: snapshot.teachingSignals.isEmpty ? "Evidence-light" : "Why remembered"
+                ),
+                SettingsItem(
                     id: "profile-receipts-review",
                     title: "Reviews v1",
                     subtitle: "Recovery Review and Life OS Receipt summarize local events, receipts, proof, and corrections without creating a separate top-level destination.",
