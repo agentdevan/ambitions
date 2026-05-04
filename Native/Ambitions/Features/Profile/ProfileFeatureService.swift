@@ -273,6 +273,13 @@ private extension RepositoryBackedProfileService {
                         valueLabel: "Future planned"
                     )
                 ],
+                dataMap: makeTrustDataMap(
+                    snapshot: snapshot,
+                    syncStatus: syncStatus,
+                    notificationStatus: notificationStatus,
+                    calendarAuthorization: calendarAuthorization,
+                    receipts: policyReceipts
+                ),
                 sections: makeTrustCenterSections(
                     syncStatus: syncStatus,
                     notificationStatus: notificationStatus,
@@ -445,6 +452,60 @@ private extension RepositoryBackedProfileService {
                 localOnlyModeEnabled: true
             )
         )
+    }
+
+    func makeTrustDataMap(
+        snapshot: Snapshot,
+        syncStatus: SyncCapabilityStatus,
+        notificationStatus: ProfileNotificationAuthorization,
+        calendarAuthorization: CalendarRemindersAuthorizationState,
+        receipts: [ActionReceipt]
+    ) -> [ProfileTrustDataMapItem] {
+        let openCaptures = snapshot.captures.filter { $0.status != .archived }.count
+        let receiptCount = ActionReceiptProjection(receipts: receipts).displaySummaries().count
+        let localSignalCount = snapshot.evidence.count + snapshot.feedback.count + snapshot.teachingSignals.count + snapshot.eventLedger.count
+        return [
+            ProfileTrustDataMapItem(
+                id: "trust-data-map-local-context",
+                title: "Local context",
+                dataTypes: "Goals, captures, proof, corrections, receipts, reviews",
+                sourceLabel: "\(localSignalCount) local signals, \(openCaptures) open captures",
+                controlLabel: "Inspect and correct from owning surfaces",
+                privacyLabel: "Private by default",
+                statusLabel: "Stored on this device",
+                semanticState: .trust
+            ),
+            ProfileTrustDataMapItem(
+                id: "trust-data-map-permissions",
+                title: "Permission boundaries",
+                dataTypes: "Notifications and Plan-owned calendar awareness",
+                sourceLabel: "Notifications \(notificationStatus.statusLabel); calendar \(calendarAuthorizationLabel(calendarAuthorization))",
+                controlLabel: "System permission controls stay explicit",
+                privacyLabel: "No silent calendar writes",
+                statusLabel: "Permission-gated",
+                semanticState: .calendarDerived
+            ),
+            ProfileTrustDataMapItem(
+                id: "trust-data-map-receipts",
+                title: "Receipts and correction state",
+                dataTypes: "Action receipts, undo posture, correction availability",
+                sourceLabel: receiptCount == 0 ? "No recent receipts" : "\(receiptCount) receipt examples",
+                controlLabel: "Change, correct, or review where supported",
+                privacyLabel: "Summaries first",
+                statusLabel: "Evidence-led",
+                semanticState: .review
+            ),
+            ProfileTrustDataMapItem(
+                id: "trust-data-map-future-owned",
+                title: "Future-owned edges",
+                dataTypes: "Sync, export proof, destructive delete, broad memory controls",
+                sourceLabel: syncStatus.detail,
+                controlLabel: "Blocked until owner batch proves safety",
+                privacyLabel: "No hidden account or cloud claim",
+                statusLabel: "Future-owned",
+                semanticState: .caution
+            )
+        ]
     }
 
     func makeTrustCenterSections(

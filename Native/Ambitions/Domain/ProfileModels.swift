@@ -75,11 +75,23 @@ struct ProfileTrustPulseState: Sendable, Equatable {
     let state: AmbitionVisualState
 }
 
+struct ProfileTrustDataMapItem: Identifiable, Sendable, Equatable {
+    let id: String
+    let title: String
+    let dataTypes: String
+    let sourceLabel: String
+    let controlLabel: String
+    let privacyLabel: String
+    let statusLabel: String
+    let semanticState: AmbitionSemanticState
+}
+
 struct ProfileTrustCenterState: Sendable, Equatable {
     let title: String
     let subtitle: String
     let pulse: ProfileTrustPulseState
     let items: [SettingsItem]
+    let dataMap: [ProfileTrustDataMapItem]
     let sections: [ProfileTrustCenterSection]
     let receiptSummaries: [ActionReceiptDisplaySummary]
     let footer: String

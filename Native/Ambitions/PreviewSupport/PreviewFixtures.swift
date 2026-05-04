@@ -559,6 +559,12 @@ struct PreviewFixtures: Sendable {
                     SettingsItem(id: "profile-trust-notifications", title: "Notification pulse", subtitle: "Local reminder scheduling exists on the current runtime. Authorization stays explicit here so ambient trust never feels hidden.", icon: "bell.badge", valueLabel: "Not requested"),
                     SettingsItem(id: "profile-trust-routing", title: "System status", subtitle: "\(ExternalSurfaceTruth.verifiedRoutingTruth). External routes stay on canonical destinations, and ambient surfaces preserve local-first continuity language.", icon: "arrow.triangle.branch", valueLabel: "Calm")
                 ],
+                dataMap: [
+                    ProfileTrustDataMapItem(id: "trust-data-map-local-context", title: "Local context", dataTypes: "Goals, captures, proof, corrections, receipts, reviews", sourceLabel: "Preview local signals", controlLabel: "Inspect and correct from owning surfaces", privacyLabel: "Private by default", statusLabel: "Stored on this device", semanticState: .trust),
+                    ProfileTrustDataMapItem(id: "trust-data-map-permissions", title: "Permission boundaries", dataTypes: "Notifications and Plan-owned calendar awareness", sourceLabel: "Notifications not requested; calendar not requested", controlLabel: "System permission controls stay explicit", privacyLabel: "No silent calendar writes", statusLabel: "Permission-gated", semanticState: .calendarDerived),
+                    ProfileTrustDataMapItem(id: "trust-data-map-receipts", title: "Receipts and correction state", dataTypes: "Action receipts, undo posture, correction availability", sourceLabel: "2 receipt examples", controlLabel: "Change, correct, or review where supported", privacyLabel: "Summaries first", statusLabel: "Evidence-led", semanticState: .review),
+                    ProfileTrustDataMapItem(id: "trust-data-map-future-owned", title: "Future-owned edges", dataTypes: "Sync, export proof, destructive delete, broad memory controls", sourceLabel: "Ambitions is running in explicit local-only mode.", controlLabel: "Blocked until owner batch proves safety", privacyLabel: "No hidden account or cloud claim", statusLabel: "Future-owned", semanticState: .caution)
+                ],
                 sections: [
                     ProfileTrustCenterSection(
                         id: "trust-center-status",

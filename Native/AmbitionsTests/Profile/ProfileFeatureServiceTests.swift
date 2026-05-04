@@ -260,6 +260,50 @@ final class ProfileFeatureServiceTests: XCTestCase {
         XCTAssertFalse(dashboard.trustCenter.footer.localizedCaseInsensitiveContains("verified accessible"))
     }
 
+    func testEB14TrustCenterDataMapNamesSourcesControlsAndFutureOwnedEdges() async throws {
+        let repositories = try await makeRepositories()
+        try await repositories.eventLedger.append(
+            EventLedgerEntry(
+                id: "ledger-eb14",
+                kind: .userCorrectionAdded,
+                occurredAt: "2026-05-03T23:40:00Z",
+                source: .you,
+                title: "Correction recorded",
+                summary: "Use a lighter version.",
+                tone: .correction,
+                privacy: .standard,
+                localOnly: true
+            )
+        )
+        let service = RepositoryBackedProfileService(repositories: repositories)
+
+        let dashboard = try await service.loadProfileDashboard()
+        let dataMap = dashboard.trustCenter.dataMap
+
+        XCTAssertEqual(dataMap.map(\.id), [
+            "trust-data-map-local-context",
+            "trust-data-map-permissions",
+            "trust-data-map-receipts",
+            "trust-data-map-future-owned"
+        ])
+        XCTAssertTrue(dataMap.contains(where: {
+            $0.id == "trust-data-map-local-context" &&
+            $0.dataTypes.contains("Goals, captures, proof") &&
+            $0.controlLabel == "Inspect and correct from owning surfaces" &&
+            $0.privacyLabel == "Private by default"
+        }))
+        XCTAssertTrue(dataMap.contains(where: {
+            $0.id == "trust-data-map-permissions" &&
+            $0.privacyLabel == "No silent calendar writes"
+        }))
+        XCTAssertTrue(dataMap.contains(where: {
+            $0.id == "trust-data-map-future-owned" &&
+            $0.controlLabel == "Blocked until owner batch proves safety" &&
+            $0.privacyLabel == "No hidden account or cloud claim"
+        }))
+        XCTAssertFalse(dataMap.map(\.sourceLabel).joined(separator: " ").localizedCaseInsensitiveContains("synced everywhere"))
+    }
+
     func testReviewsV1IsYouOwnedAndTruthfulWithoutRestoringInsightsTab() async throws {
         let repositories = try await makeRepositories()
         try await repositories.eventLedger.append(

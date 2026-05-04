@@ -2,7 +2,7 @@
 
 Date: 2026-05-03
 Active train: Ambitions 4.0 External Brain Foundation
-Current batch: EB14 next eligible after EB06 implementation
+Current batch: EB15 next eligible after EB14 implementation
 Scope: Complete: EB03A Universal Capture Composer Routing Owner Map. Complete:
 EB03B Universal Capture Composer Routing Implementation. Complete: EB04
 Capture Classification And Clarification. Complete: EB05 Capture Clusters
@@ -54,7 +54,8 @@ accessibility/release claim change was made.
   pass. EB05 is complete as a scoped non-persistent capture cluster/review
   bundle/open-loop projection pass. EB06 is complete as a scoped
   receipt/reclassification projection pass with honest undo-not-supported state.
-  EB14 is the next eligible EB batch.
+  EB14 is complete as a bounded You/Profile Trust Center data map
+  implementation. EB15 is the next eligible EB batch.
 - PXEQ is a mandatory product-experience gate for EB UI-affecting batches; it
   is not a shipped app feature and not a new EB batch identity.
 - Optimized global order after EB32 places DAV01-DAV15 before UI-heavy EB
@@ -97,9 +98,19 @@ implemented, screenshots/rendered proof not produced, human/device/VoiceOver
 review not run, Instruments/battery proof not run, and existing advisory
 backlog.
 
+EB14 result: PASS WITH YELLOW. `docs/audits/eb14-trust-center-data-map-report.md`
+records the bounded You/Profile Trust Center data map, preview fixture update,
+focused Profile tests, `swift build`, and `scripts/build-local.sh`. One
+recoverable Red was repaired before closeout: the preview fixture was updated
+with the new `dataMap` argument after focused tests exposed the missing
+initializer value. Yellow items are screenshots/rendered proof not produced,
+human/device/VoiceOver review not run, Instruments/battery proof not run, and
+existing advisory backlog.
+
 ## Next Safe Path
 
-Run EB14 Trust Center Data Map And Controls next. Do not restart broad EB03,
-EB04, EB05, EB06, or completed DAV / EB20-EB24 batches. EB14 must name exact
-owner files, focused tests, preview/fixture evidence, accessibility/privacy
-proof, and rollback before widening beyond Trust Center data map and controls.
+Run EB15 Recommendation Evidence And Inference Boundaries next. Do not restart
+broad EB03, EB04, EB05, EB06, EB14, or completed DAV / EB20-EB24 batches. EB15
+must name exact owner files, focused tests, accessibility/privacy proof, and
+rollback before widening beyond recommendation evidence and inference
+boundaries.

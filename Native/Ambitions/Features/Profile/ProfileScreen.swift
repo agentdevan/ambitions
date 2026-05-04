@@ -1717,6 +1717,19 @@ private struct ProfileTrustCenterCard: View {
                     }
                 }
 
+                VStack(alignment: .leading, spacing: theme.spacing.sm) {
+                    SectionHeader(
+                        eyebrow: "Data map",
+                        title: "What this surface can explain",
+                        subtitle: "A compact inventory of local context, permissions, receipts, and future-owned edges."
+                    )
+
+                    ForEach(trustCenter.dataMap) { item in
+                        ProfileTrustDataMapRow(item: item)
+                    }
+                }
+                .accessibilityIdentifier("profile.trust-data-map")
+
                 GroupedNavigationList {
                     ForEach(trustCenter.sections) { section in
                         GroupedNavigationSection(title: section.title, footer: section.footer) {
@@ -1771,6 +1784,47 @@ private struct ProfileTrustCenterCard: View {
                 state: receipt.trustReceiptVisualState
             )
         }
+    }
+}
+
+private struct ProfileTrustDataMapRow: View {
+    @Environment(\.ambitionTheme) private var theme
+
+    let item: ProfileTrustDataMapItem
+
+    var body: some View {
+        VStack(alignment: .leading, spacing: theme.spacing.xs) {
+            HStack(alignment: .firstTextBaseline, spacing: theme.spacing.sm) {
+                Text(item.title)
+                    .font(theme.typography.bodyEmphasized)
+                    .foregroundStyle(theme.colors.textPrimary)
+
+                Spacer(minLength: theme.spacing.sm)
+
+                Text(item.statusLabel)
+                    .font(theme.typography.caption)
+                    .foregroundStyle(theme.colors.textSecondary)
+                    .padding(.horizontal, theme.spacing.sm)
+                    .padding(.vertical, theme.spacing.xxxs)
+                    .background(Capsule().fill(theme.colors.surfaceOverlay))
+            }
+
+            Text(item.dataTypes)
+                .font(theme.typography.body)
+                .foregroundStyle(theme.colors.textSecondary)
+                .fixedSize(horizontal: false, vertical: true)
+
+            Text("\(item.sourceLabel) · \(item.controlLabel) · \(item.privacyLabel)")
+                .font(theme.typography.caption)
+                .foregroundStyle(theme.colors.textTertiary)
+                .fixedSize(horizontal: false, vertical: true)
+        }
+        .padding(theme.spacing.md)
+        .background(RoundedRectangle(cornerRadius: theme.radius.lg, style: .continuous).fill(theme.colors.surfaceOverlay))
+        .overlay(RoundedRectangle(cornerRadius: theme.radius.lg, style: .continuous).stroke(theme.colors.strokeSubtle, lineWidth: 1))
+        .accessibilityElement(children: .combine)
+        .accessibilityLabel(item.title)
+        .accessibilityValue("\(item.statusLabel). \(item.dataTypes). \(item.sourceLabel). \(item.controlLabel). \(item.privacyLabel).")
     }
 }
 
