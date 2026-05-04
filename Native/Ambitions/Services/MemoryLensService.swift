@@ -133,6 +133,24 @@ enum MemoryLensContextRecallClass: String, Sendable, Equatable, CaseIterable {
     }
 }
 
+enum MemoryLensContextRetrievalScope: String, Sendable, Equatable, CaseIterable {
+    case activePlan
+    case inboxContext
+    case feedbackHistory
+    case correctionTrail
+    case appContinuity
+
+    var title: String {
+        switch self {
+        case .activePlan: "Active plan"
+        case .inboxContext: "Inbox context"
+        case .feedbackHistory: "Feedback history"
+        case .correctionTrail: "Correction trail"
+        case .appContinuity: "App continuity"
+        }
+    }
+}
+
 struct MemoryLensResult: Identifiable, Sendable, Equatable {
     let id: String
     let title: String
@@ -200,6 +218,34 @@ struct MemoryLensResult: Identifiable, Sendable, Equatable {
         }
     }
     var allowsMemoryClaim: Bool { false }
+    var retrievalScope: MemoryLensContextRetrievalScope {
+        switch kind {
+        case .goal, .week, .whyNow, .learning:
+            .activePlan
+        case .capture:
+            .inboxContext
+        case .recentChange:
+            .feedbackHistory
+        case .teaching:
+            .correctionTrail
+        case .handoff:
+            .appContinuity
+        }
+    }
+    var contextRetrievalSummary: String {
+        let reviewLabel = requiresUserReviewBeforeDurableMemory ? "review before durable memory" : "safe for context recall"
+        return "\(retrievalScope.title); \(sourceEvidence.title); \(confidenceBand.title); \(trustDecayState.title); \(contextRecallClass.title); \(reviewLabel)"
+    }
+    var recallSearchTokens: String {
+        [
+            retrievalScope.title,
+            sourceEvidence.title,
+            confidenceBand.title,
+            trustDecayState.title,
+            contextRecallClass.title,
+            requiresUserReviewBeforeDurableMemory ? "review before durable memory" : "safe context recall"
+        ].joined(separator: " ")
+    }
 }
 
 struct DefaultMemoryLensService: MemoryLensServicing {
@@ -241,7 +287,8 @@ struct DefaultMemoryLensService: MemoryLensServicing {
             combined.append(contentsOf: teachingResults)
             let filtered = combined.filter { result in
                 guard trimmedQuery.isEmpty == false else { return true }
-                return result.queryText.localizedCaseInsensitiveContains(trimmedQuery)
+                return result.queryText.localizedCaseInsensitiveContains(trimmedQuery) ||
+                    result.recallSearchTokens.localizedCaseInsensitiveContains(trimmedQuery)
             }
             let ordered = filtered.sorted { lhs, rhs in
                 let lhsPriority = prioritized[lhs.kind] ?? 99

@@ -295,7 +295,15 @@ Current 4.0 status:
   network, sync/account/cloud behavior, production asset, durable memory receipt
   storage, export/delete behavior, or release-claim changes. EB33 Search Recall
   And Context Retrieval is the next eligible EB batch.
-- Active Planned / Queued: EB33-EB40 Ambitions 4.0 External Brain Foundation expansion segment; not completed and not implemented in app behavior.
+- Complete: EB33 Search Recall And Context Retrieval is complete as a bounded
+  Memory Lens implementation. It adds source-grounded context retrieval scope,
+  retrieval summary, and recall search tokens with focused Memory Lens service
+  tests only, without route, persistence/schema, top-level-tab, dependency,
+  workflow, signing, network, sync/account/cloud behavior, production asset,
+  durable memory storage/export/delete behavior, UI surface changes, or
+  release-claim changes. EB34 External Brain Command Surface Integration is the
+  next eligible EB batch.
+- Active Planned / Queued: EB34-EB40 Ambitions 4.0 External Brain Foundation expansion segment; not completed and not implemented in app behavior.
 - Queued / Blocked: SI01-SI18 pending global-order selection or `Start Signature Interface Train` plus PXOS/ME/CS/SI quality gates.
 - Queued / Blocked: PD01-PD18 pending `Start Product Depth Train` plus PXOS/ME/CS/SI/AOS-if-needed gates.
 - Queued / Blocked: AOS01-AOS30 pending `Start AOS Train`.

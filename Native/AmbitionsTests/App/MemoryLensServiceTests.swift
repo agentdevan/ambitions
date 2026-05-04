@@ -220,6 +220,71 @@ final class MemoryLensServiceTests: XCTestCase {
                 $0.requiresUserReviewBeforeDurableMemory
         })
     }
+
+    func testEB33SearchCanRecallBySourceGroundedRetrievalMetadata() async throws {
+        let store = try AmbitionsPersistenceStore(inMemory: true)
+        let repositories = makeRepositories(store: store)
+        let goal = try XCTUnwrap(goalFromFixture(id: "clear-timed-self-goal"))
+        let step = try XCTUnwrap(goal.plan?.sections.flatMap(\.steps).first)
+        try await repositories.goals.saveGoals([goal])
+        try await repositories.captures.saveCaptures([
+            Capture(
+                id: "capture-context",
+                createdAt: "2026-04-20T10:00:00Z",
+                updatedAt: "2026-04-20T10:00:00Z",
+                rawText: "Renew the passport before the trip",
+                sourceType: nil,
+                status: .actionable,
+                linkedGoalID: nil
+            )
+        ])
+        try await repositories.teaching.saveSignals([
+            GoalTeachingSignal(
+                id: "teaching-recall",
+                goalID: goal.id,
+                createdAt: "2026-04-22T11:00:00Z",
+                updatedAt: "2026-04-22T11:00:00Z",
+                source: .explicitManualCorrection,
+                kind: .energyFitCorrection,
+                disposition: .active,
+                anchor: GoalTeachingStableAnchor(
+                    artifactKind: .energyEvaluation,
+                    canonicalField: nil,
+                    candidateID: nil,
+                    stageID: nil,
+                    stepID: step.id,
+                    targetFingerprint: "energy::\(step.id)",
+                    contradictionCode: nil,
+                    contradictionArtifactRefs: []
+                ),
+                payload: .energyFit(.init(correctedDisposition: .lighterVersionNeeded)),
+                applicationKey: "goal##energy##step",
+                userNote: "Keep this lighter"
+            )
+        ])
+        let service = DefaultMemoryLensService(repositories: repositories)
+
+        let capturedContext = await service.search(query: "Inbox context", seedIntent: .memoryLens)
+        let correctionTrail = await service.search(query: "Correction trail", seedIntent: .memoryLens)
+        let safeRecall = await service.search(query: "safe context recall", seedIntent: .memoryLens)
+
+        XCTAssertTrue(capturedContext.contains(where: {
+            $0.kind == .capture &&
+                $0.retrievalScope == .inboxContext &&
+                $0.contextRetrievalSummary.contains("Captured thought")
+        }))
+        XCTAssertTrue(correctionTrail.contains(where: {
+            $0.kind == .teaching &&
+                $0.retrievalScope == .correctionTrail &&
+                $0.requiresUserReviewBeforeDurableMemory
+        }))
+        XCTAssertTrue(safeRecall.contains(where: {
+            $0.kind == .goal &&
+                $0.contextRecallClass == .contextRecall &&
+                !$0.requiresUserReviewBeforeDurableMemory
+        }))
+        XCTAssertTrue(correctionTrail.allSatisfy { !$0.allowsMemoryClaim })
+    }
 }
 
 private extension MemoryLensServiceTests {

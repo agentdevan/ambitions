@@ -1,8 +1,8 @@
 # Current Run State
 
-Date: 2026-05-03
+Date: 2026-05-04
 Active train: Ambitions 4.0 External Brain Foundation
-Current batch: EB33 next eligible after EB12 implementation
+Current batch: EB34 next eligible after EB33 implementation
 Scope: Complete: EB03A Universal Capture Composer Routing Owner Map. Complete:
 EB03B Universal Capture Composer Routing Implementation. Complete: EB04
 Capture Classification And Clarification. Complete: EB05 Capture Clusters
@@ -74,7 +74,9 @@ accessibility/release claim change was made.
   Constitution implementation. EB11 is complete as a bounded You/Profile memory
   correction, deletion, and rejected-memory boundary implementation. EB12 is
   complete as a bounded You/Profile memory receipt / why-remembered evidence
-  implementation. EB33 is the next eligible EB batch.
+  implementation. EB33 is complete as a bounded Memory Lens search/context
+  recall implementation with source-grounded retrieval scope, retrieval summary,
+  and recall search tokens. EB34 is the next eligible EB batch.
 - PXEQ is a mandatory product-experience gate for EB UI-affecting batches; it
   is not a shipped app feature and not a new EB batch identity.
 - Optimized global order after EB32 places DAV01-DAV15 before UI-heavy EB
@@ -242,11 +244,19 @@ focused Profile service tests, preview fixture evidence, `swift build`, and
 produced, human/device/VoiceOver review not run, durable memory receipt storage
 or export/delete behavior deferred, and existing advisory backlog.
 
+EB33 result: PASS WITH YELLOW. `docs/audits/eb33-search-context-recall-report.md`
+records the bounded Memory Lens context retrieval scope, retrieval summary, and
+recall search token implementation, focused Memory Lens service tests,
+`swift build`, and `scripts/build-local.sh`. Yellow items are current UI
+consumption not implemented, screenshots/rendered proof not produced,
+human/device/VoiceOver review not run, durable memory storage/export/delete
+behavior deferred, and existing advisory backlog.
+
 ## Next Safe Path
 
-Run EB33 Search Recall And Context Retrieval next. Do not restart broad
+Run EB34 External Brain Command Surface Integration next. Do not restart broad
 EB03, EB04, EB05, EB06, EB14, EB15, EB16, EB17, EB18, EB26, EB27, EB28, EB29,
-EB30, EB08, EB09, EB10, EB11, EB12, or completed DAV / EB20-EB24 batches. EB33
-must name exact owner files, focused tests, search/recall/context retrieval
-proof, privacy proof, route/raw/persistence non-change proof, and rollback
-before widening beyond search recall and context retrieval behavior.
+EB30, EB08, EB09, EB10, EB11, EB12, EB33, or completed DAV / EB20-EB24 batches.
+EB34 must name exact command surface owner files, focused tests, privacy proof,
+accessibility proof, route/raw/persistence non-change proof, and rollback before
+widening beyond command surface integration behavior.
