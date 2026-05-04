@@ -2,7 +2,7 @@
 
 Date: 2026-05-03
 Active train: Ambitions 4.0 External Brain Foundation
-Current batch: EB16 next eligible after EB15 implementation
+Current batch: EB17 next eligible after EB16 implementation
 Scope: Complete: EB03A Universal Capture Composer Routing Owner Map. Complete:
 EB03B Universal Capture Composer Routing Implementation. Complete: EB04
 Capture Classification And Clarification. Complete: EB05 Capture Clusters
@@ -56,8 +56,9 @@ accessibility/release claim change was made.
   receipt/reclassification projection pass with honest undo-not-supported state.
   EB14 is complete as a bounded You/Profile Trust Center data map
   implementation. EB15 is complete as a bounded recommendation
-  evidence/inference boundary summary domain implementation. EB16 is the next
-  eligible EB batch.
+  evidence/inference boundary summary domain implementation. EB16 is complete
+  as a bounded You/Profile private-mode and sensitive-area controls
+  implementation. EB17 is the next eligible EB batch.
 - PXEQ is a mandatory product-experience gate for EB UI-affecting batches; it
   is not a shipped app feature and not a new EB batch identity.
 - Optimized global order after EB32 places DAV01-DAV15 before UI-heavy EB
@@ -116,9 +117,16 @@ items are UI preview/screenshot proof not applicable because no UI changed,
 human/device/VoiceOver review not run, Instruments/battery proof not run, and
 existing advisory backlog.
 
+EB16 result: PASS WITH YELLOW. `docs/audits/eb16-private-mode-sensitive-area-controls-report.md`
+records the bounded You/Profile private-mode controls lane, preview fixture
+update, focused Profile tests, `swift build`, and `scripts/build-local.sh`.
+Yellow items are screenshots/rendered proof not produced, human/device/VoiceOver
+review not run, Instruments/battery proof not run, and existing advisory
+backlog.
+
 ## Next Safe Path
 
-Run EB16 Private Mode And Sensitive Area Controls next. Do not restart broad
-EB03, EB04, EB05, EB06, EB14, EB15, or completed DAV / EB20-EB24 batches. EB16
-must name exact owner files, focused tests, accessibility/privacy proof, and
-rollback before widening beyond private mode and sensitive area controls.
+Run EB17 Undo Correction Audit Trail And Export next. Do not restart broad
+EB03, EB04, EB05, EB06, EB14, EB15, EB16, or completed DAV / EB20-EB24 batches.
+EB17 must name exact owner files, focused tests, accessibility/privacy proof,
+and rollback before widening beyond undo, correction, audit trail, or export.

@@ -386,6 +386,24 @@ final class ProfileFeatureServiceTests: XCTestCase {
         XCTAssertEqual(dashboard.memoryControls.consent.sensitiveMemoryLabel, "Sensitive memory requires approval")
         XCTAssertEqual(dashboard.memoryControls.consent.hiddenMemoryLabel, "No hidden memory creation")
         XCTAssertEqual(dashboard.memoryControls.consent.controlLabel, "You are in control")
+        XCTAssertEqual(dashboard.memoryControls.privateModeControls.map(\.id), [
+            "private-mode-compact-detail",
+            "private-mode-external-surfaces",
+            "private-mode-sensitive-memory",
+            "private-mode-destructive-controls"
+        ])
+        XCTAssertTrue(dashboard.memoryControls.privateModeControls.contains(where: {
+            $0.id == "private-mode-sensitive-memory" &&
+            $0.statusLabel == "Approval required" &&
+            $0.privacyLabel == "No sensitive inference" &&
+            $0.controlLabel == "Review first"
+        }))
+        XCTAssertTrue(dashboard.memoryControls.privateModeControls.contains(where: {
+            $0.id == "private-mode-destructive-controls" &&
+            $0.statusLabel == "Future-owned" &&
+            $0.privacyLabel == "No silent deletion" &&
+            $0.controlLabel == "Blocked safely"
+        }))
         XCTAssertEqual(groups.map(\.id), ["memory-group-current", "memory-group-corrections"])
         XCTAssertTrue(items.contains(where: {
             $0.id == "memory-item-ledger" &&

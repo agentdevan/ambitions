@@ -350,6 +350,12 @@ struct PreviewFixtures: Sendable {
                     hiddenMemoryLabel: "No hidden memory creation",
                     controlLabel: "You are in control"
                 ),
+                privateModeControls: [
+                    ProfilePrivateModeControl(id: "private-mode-compact-detail", title: "Compact private detail", summary: "Proof, feedback, and narrative memory stay summarized before any detailed review.", statusLabel: "Summaries first", privacyLabel: "Detail hidden", controlLabel: "Open owning surface", state: .success),
+                    ProfilePrivateModeControl(id: "private-mode-external-surfaces", title: "External surfaces", summary: "Widgets, Live Activities, Shortcuts, and Share Extension must use privacy snapshots or fallback routes.", statusLabel: "Protected", privacyLabel: "Snapshot-safe", controlLabel: "No raw memory", state: .warning),
+                    ProfilePrivateModeControl(id: "private-mode-sensitive-memory", title: "Sensitive memory", summary: "Sensitive categories are not inferred here and require explicit approval before stronger use.", statusLabel: "Approval required", privacyLabel: "No sensitive inference", controlLabel: "Review first", state: .warning),
+                    ProfilePrivateModeControl(id: "private-mode-destructive-controls", title: "Destructive controls", summary: "Forget, delete, and broad pause remain blocked until confirmation, receipt, and undo coverage are proven.", statusLabel: "Future-owned", privacyLabel: "No silent deletion", controlLabel: "Blocked safely", state: .warning)
+                ],
                 groups: [
                     ProfileMemoryGroup(
                         id: "memory-group-current",

@@ -621,6 +621,21 @@ private struct ProfileMemoryControlsCard: View {
 
                 ProfilePersonalizationConsentPanel(consent: memoryControls.consent)
 
+                if memoryControls.privateModeControls.isEmpty == false {
+                    VStack(alignment: .leading, spacing: theme.spacing.sm) {
+                        SectionHeader(
+                            eyebrow: "Private mode",
+                            title: "Sensitive areas",
+                            subtitle: "Private context stays summarized, approval-gated, or blocked until a safe owner proves more."
+                        )
+
+                        ForEach(memoryControls.privateModeControls) { control in
+                            ProfilePrivateModeControlRow(control: control)
+                        }
+                    }
+                    .accessibilityIdentifier("profile.private-mode-controls")
+                }
+
                 ForEach(memoryControls.groups) { group in
                     VStack(alignment: .leading, spacing: theme.spacing.sm) {
                         SectionHeader(
@@ -797,6 +812,48 @@ private struct ProfilePersonalizationConsentPanel: View {
         .accessibilityElement(children: .combine)
         .accessibilityIdentifier("profile.personalization-consent")
         .accessibilityLabel("\(consent.title). \(consent.summary). \(consent.controlLabel).")
+    }
+}
+
+private struct ProfilePrivateModeControlRow: View {
+    @Environment(\.ambitionTheme) private var theme
+
+    let control: ProfilePrivateModeControl
+
+    var body: some View {
+        VStack(alignment: .leading, spacing: theme.spacing.xs) {
+            HStack(alignment: .firstTextBaseline, spacing: theme.spacing.sm) {
+                Text(control.title)
+                    .font(theme.typography.bodyEmphasized)
+                    .foregroundStyle(theme.colors.textPrimary)
+
+                Spacer(minLength: theme.spacing.sm)
+
+                TagPill(control.statusLabel, state: control.state)
+            }
+
+            Text(control.summary)
+                .font(theme.typography.body)
+                .foregroundStyle(theme.colors.textSecondary)
+                .fixedSize(horizontal: false, vertical: true)
+
+            HStack(spacing: theme.spacing.xs) {
+                TagPill(control.privacyLabel, icon: "lock.shield", state: .default)
+                TagPill(control.controlLabel, icon: "hand.tap", state: control.state)
+            }
+        }
+        .padding(theme.spacing.md)
+        .background(
+            RoundedRectangle(cornerRadius: theme.radius.lg, style: .continuous)
+                .fill(theme.colors.surfaceOverlay)
+        )
+        .overlay(
+            RoundedRectangle(cornerRadius: theme.radius.lg, style: .continuous)
+                .stroke(theme.colors.strokeSubtle, lineWidth: 1)
+        )
+        .accessibilityElement(children: .combine)
+        .accessibilityLabel(control.title)
+        .accessibilityValue("\(control.statusLabel). \(control.privacyLabel). \(control.controlLabel). \(control.summary)")
     }
 }
 

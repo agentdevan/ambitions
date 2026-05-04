@@ -254,11 +254,22 @@ struct ProfilePersonalizationConsentState: Sendable, Equatable {
     let controlLabel: String
 }
 
+struct ProfilePrivateModeControl: Identifiable, Sendable, Equatable {
+    let id: String
+    let title: String
+    let summary: String
+    let statusLabel: String
+    let privacyLabel: String
+    let controlLabel: String
+    let state: AmbitionVisualState
+}
+
 struct ProfileMemoryControlState: Sendable, Equatable {
     let title: String
     let subtitle: String
     let items: [SettingsItem]
     let consent: ProfilePersonalizationConsentState
+    let privateModeControls: [ProfilePrivateModeControl]
     let groups: [ProfileMemoryGroup]
     let narrativeMemories: [ProfileNarrativeMemory]
     let conservativePatterns: [ProfileMemoryPattern]
