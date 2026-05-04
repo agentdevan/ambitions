@@ -16,6 +16,10 @@ Status: Queued Ambitions 4.0 AmbitionsOS batch; not started; future canon only u
 
 Move exactly this batch's AmbitionsOS contract or implementation slice forward without widening Ambitions into a chatbot, generic productivity app, calendar clone, source-certification authority, or broad AI assistant. Preserve current Ambitions 3.0 behavior unless this batch explicitly owns a tested behavior change.
 
+## Living Dream Architecture Hook
+
+LDI hook: Recommendation Start Here should map Today Bridge and Action Closure steps: source-check, proof, clarification, review, recovery, and Still Counts without guarantee language.
+
 ## Source Truth Files To Read First
 
 - `README.md`

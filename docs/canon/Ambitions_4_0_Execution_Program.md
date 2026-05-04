@@ -168,3 +168,8 @@ Top-level surfaces must be visual orientation surfaces, not stacked-card detail 
 ## Next Safe Path
 
 The next safe execution path is the global dry-run selection from `GLOBAL_FUTURE_BATCH_EXECUTION_ORDER.md` after the current batch/report state is refreshed.
+
+
+## Living Dream Architecture Cross-Link
+
+- `docs/canon/AmbitionsOS_Living_Dream_Architecture_Index.md` is future implementation source truth and train governance for LDI01-LDI22. It does not claim runtime Living Dream behavior.

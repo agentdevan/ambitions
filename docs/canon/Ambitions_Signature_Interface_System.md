@@ -124,3 +124,8 @@ SI implementation requires PXOS complete, ME relevant gates, CS compatibility ga
 ## Handoff Into PD And AOS24
 
 PD must compose SI primitives where relevant. AOS24 must depend on SI handoff if intelligence is exposed in UI. SI18 closes SI with primitive inventory, unresolved Yellow owners, PD readiness map, AOS24 implications, and rollback path.
+
+
+## Living Dream Architecture Cross-Link
+
+- `docs/canon/AmbitionsOS_Living_Dream_Architecture_Index.md` is future implementation source truth and train governance for LDI01-LDI22. It does not claim runtime Living Dream behavior.

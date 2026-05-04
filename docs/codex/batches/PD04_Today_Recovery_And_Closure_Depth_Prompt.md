@@ -189,3 +189,7 @@ It does not prove release readiness, human-only proof, public accessibility conf
 ## Next Safe Prompt / Path
 
 Use the next direct PD prompt only after this batch is Green or accepted Yellow, committed, pushed, branch-clean, and continuation gates allow it. Otherwise stop and produce a repair or decision prompt.
+
+## Living Dream Architecture Hook
+
+LDI hook: Recovery/closure depth may prepare plan mutation and living recompile review states; no silent rearrangement or runtime recompile without AOS/LDI gates.

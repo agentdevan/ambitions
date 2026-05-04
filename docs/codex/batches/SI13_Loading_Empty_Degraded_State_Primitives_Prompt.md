@@ -20,6 +20,10 @@ Build reusable loading, empty, and degraded primitives.
 
 PXOS defines experience intent. SI creates reusable SwiftUI expression. ME protects file ownership. CS protects compatibility. PD composes SI primitives into depth. AOS may expose runtime intelligence only through trust gates. REC keeps claims bounded.
 
+## Living Dream Architecture Hook
+
+LDI hook: Loading/empty/degraded primitives should include source-stale, source-conflict, pack-unavailable, iCloud-unavailable, local-only, update-pending, privacy-sensitive, crisis-support, and unsafe-blocked states as future visual states.
+
 ## User-Visible Outcome
 
 Users see honest states and safe next actions.

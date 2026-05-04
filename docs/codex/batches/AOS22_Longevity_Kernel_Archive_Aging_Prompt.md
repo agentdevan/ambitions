@@ -16,6 +16,10 @@ Status: Queued Ambitions 4.0 AmbitionsOS batch; not started; future canon only u
 
 Move exactly this batch's AmbitionsOS contract or implementation slice forward without widening Ambitions into a chatbot, generic productivity app, calendar clone, source-certification authority, or broad AI assistant. Preserve current Ambitions 3.0 behavior unless this batch explicitly owns a tested behavior change.
 
+## Living Dream Architecture Hook
+
+LDI hook: Longevity should map Continuity Sync, Archive, Schema Migration, Multi-Device Merge Ledger, restore, and conflict review boundaries.
+
 ## Source Truth Files To Read First
 
 - `README.md`

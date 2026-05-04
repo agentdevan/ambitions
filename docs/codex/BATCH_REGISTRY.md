@@ -392,13 +392,14 @@ Current 4.0 status:
   current, proof, risk, next-step, alternate-route, private, Dynamic Type, and
   no-animation preview proof without changing routes, raw values, persistence,
   or non-Goals behavior.
-- Queued / Blocked: SI07-SI18 pending global-order selection or `Start Signature Interface Train` plus PXOS/ME/CS/SI quality gates.
+- Queued / Blocked: SI07-SI18 pending global-order selection or `Start Signature Interface Train` plus PXOS/ME/CS/SI quality gates. LDI hooks are queued-only and do not rewrite SI01-SI06 history.
 - Queued / Blocked: PD01-PD18 pending `Start Product Depth Train` plus PXOS/ME/CS/SI/AOS-if-needed gates.
 - Queued / Blocked: AOS01-AOS30 pending `Start AOS Train`.
+- Queued / Blocked: LDI01-LDI22 Living Dream Intelligence Train pending AOS30 Green by default or explicit user decision for earlier dependency split.
 - Original formal Ambitions 4.0 batches after SI insertion: 113.
 - Active External Brain expansion added: EB01-EB40 as active planned Ambitions 4.0 scope.
 - Active Dynamic Adaptive Visual System expansion added: DAV01-DAV15 as active planned Ambitions 4.0 implementation scope.
-- New active planned Ambitions 4.0 total after EB and DAV integration: 168.
+- New active planned Ambitions 4.0 total after EB, DAV, and LDI integration: 190.
 - Remaining after DAV11: 103 active planned batches remain including
   DAV12-DAV15, EB08-EB12, EB14-EB18, EB20-EB24, EB03-EB06, EB26-EB40,
   CS10, SI01-SI18, PD01-PD18, and AOS01-AOS30; CS02A-CS06A,
@@ -775,3 +776,12 @@ These batches are complete for planning purposes. They remain as historical cont
 | CS02-CS06 / CS09-CS10 Compatibility Seam Retirement Train | Queued / Blocked | Retirements, repair, and handoff remain queued/blocked. |
 | Product Experience OS / PXOS | Queued / Blocked future canon | User-facing future experience canon in Ambitions 4.0. Does not claim implementation. |
 | Product Depth / PD01-PD18 | Queued / Blocked | Deepens Today, Goals, Capture, Plan, and You through drill-downs and proof/review/setup depth. Does not add top-level destinations or claim implementation. |
+
+
+## Living Dream Intelligence Train Registry
+
+| Train | Status | Gate / owner |
+| --- | --- | --- |
+| LDI01-LDI22 Living Dream Intelligence Train | Queued / Blocked | Inserted after AOS30 by default; requires LDI source truth, safety/privacy/source/professional-boundary gates, and no runtime/release overclaim. |
+
+LDI integration note: Living Dream Architecture is future implementation source truth and train governance. It does not claim full Living Dream runtime behavior until LDI/AOS/PD/SI implementation batches run, validate, commit, and record evidence.

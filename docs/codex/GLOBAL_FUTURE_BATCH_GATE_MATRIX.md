@@ -49,6 +49,7 @@ Every gate returns:
 | Interaction/Motion/Haptics Gate | SI interaction/motion/haptics | Motion orients/confirms/reduces uncertainty; haptics are purposeful; interaction states are testable. | Minor motion polish deferred with owner. | Decorative/gamified motion or interaction increases cognitive load. | `interaction-motion-haptics-reviewer` |
 | Reduce Motion Gate | SI/UI motion | Reduced Motion equivalent is defined and validated where motion matters. | Motion is noncritical and fallback owner named. | Required motion work lacks Reduce Motion equivalent. | `accessibility-adaptive-interface-reviewer` |
 | SI File-Size/Component Boundary Gate | SI implementation | Components are small, named, reusable, previewable, and do not bloat owner files. | File-size increase is documented and owned by a near-term extraction/follow-up. | Giant one-off visual owner or unreviewable UI diff. | `si-file-size-component-boundary-reviewer` |
+| LDI Living Dream Source Truth Gate | LDI batches and queued SI/PD/AOS hooks that touch Living Dream concepts | LDI canon is read, one primary handling lane is named where relevant, safety/privacy/source/professional-boundary boundaries are explicit, and no runtime claim outruns evidence. | Future fixture/human proof gap is named with owner and no unsupported claim is made. | Unsafe/professional advice path, user-data server, hosted AI, silent commitment mutation, unknown lane, or full runtime/release claim without proof. | `living-dream-architect`, LDI review board |
 | Product Drift Gate | Every batch | Preserves Ambitions identity and five-tab IA. | Historical wording hit in negative examples only. | Task app, habit tracker, calendar clone, chatbot, dashboard, or new tab drift. | product strategy reviewer |
 | Validation Evidence Gate | Every batch | Commands, logs, pass/fail, proof scope, and non-claims recorded. | Advisory command failure classified. | Required evidence missing or skipped without reason. | `evidence-gate-reporter` |
 | Validation Strength Gate | Every batch | Strength is Strong or Adequate for batch type. | Weak/Missing only for docs-only or explicitly owned future validation. | Weak/Missing for implementation batch. | validation-evidence auditor |
@@ -68,6 +69,7 @@ Every gate returns:
 - ME/code maintainability: Source Truth, Scope, ME, File Size, Test Strength, Validation Strength, Rollback.
 - CS/compatibility: Source Truth, Scope, CS, Profile/You Compatibility when CS02 is active, Insights/Plan Compatibility when CS03 is active, Habits/Ritual/Plan Compatibility when CS04 is active, Test Strength, Release Claim Safety if external, Rollback.
 - AOS/intelligence: Source Truth, Scope, AOS Runtime/Intelligence, Privacy/Trust, Performance, Evaluation, PXOS and PXEQ expression before exposure.
+- LDI/Living Dream: Source Truth, Scope, LDI Living Dream Source Truth, Safety/Legality/Feasibility, Professional Boundary, Local-First Privacy, Source Claim/Pack Integrity, No Silent Mutation, Product Drift, Release Claim Safety, Evidence Manifest, Rollback.
 - Product Depth: PXOS, Product Depth, Signature Interface, Top-Level Composition, ME, CS, AOS when runtime/source-truth/proof logic is touched, Accessibility, Visual, Copy, Privacy/Trust, Validation Strength.
 - Signature Interface: Source Truth, Scope, Signature Interface Creative Direction, Anti-Generic UI, Visual Quality, Accessibility/Cognitive Load, Interaction/Motion/Haptics, Reduce Motion, Preview Coverage, File Size/Diff Size, SI File-Size/Component Boundary, Release Claim Safety, Product Drift, Validation Strength, Handoff, Rollback. Add Top-Level Surface Composition and IA/Shell/Navigation review when shell, navigation, or top-level surfaces are touched.
 
@@ -76,3 +78,8 @@ Every gate returns:
 - Green: may close and commit. Continuation still requires the continuation protocol.
 - Yellow: classify, assign owner, decide fix-now vs defer, document why continuation is safe.
 - Red: stop forward progress and enter `GLOBAL_BATCH_REPAIR_LOOP_PROTOCOL.md`.
+
+
+## LDI01-LDI22 Living Dream batch gate pack
+
+LDI01-LDI22 use the LDI/Living Dream gate pack and remain queued after AOS30 by default.

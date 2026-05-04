@@ -367,3 +367,14 @@ EB30, EB08, EB09, EB10, EB11, EB12, EB33, EB34, EB35, EB36, EB37, EB38, EB39,
 EB40, CS10, SI01, SI02, or completed DAV / EB20-EB24 batches. SI03 must remain a
 bounded Signature Interface shell/navigation implementation batch unless its prompt
 requires a narrower stop or repair.
+
+## Living Dream Architecture Integration Pause
+
+Date: 2026-05-04
+Batch type: docs/Codex OS/global-train integration only.
+
+- SI01-SI06 completion history above remains binding and is not rewritten.
+- SI07 remains the next eligible implementation batch after this integration.
+- LDI01-LDI22 Living Dream Intelligence Train is inserted after AOS30 by default.
+- Queued SI07-SI18, PD01-PD18, and AOS01-AOS30 prompts now carry LDI hook notes only where future/queued.
+- This integration does not claim runtime Living Dream behavior, hosted AI, backend sync, user-data server, CloudKit entitlement changes, device proof, public accessibility compliance, TestFlight readiness, App Store readiness, or release readiness.

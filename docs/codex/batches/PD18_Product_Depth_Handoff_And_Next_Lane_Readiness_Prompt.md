@@ -178,3 +178,7 @@ It does not prove release readiness, human-only proof, public accessibility conf
 ## Next Safe Prompt / Path
 
 Use the next direct PD prompt only after this batch is Green or accepted Yellow, committed, pushed, branch-clean, and continuation gates allow it. Otherwise stop and produce a repair or decision prompt.
+
+## Living Dream Architecture Hook
+
+LDI hook: PD handoff must include LDI readiness, unresolved Yellow ownership, and PD/AOS/LDI dependency boundaries.

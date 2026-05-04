@@ -20,6 +20,10 @@ Build reusable lanes for Goal Detail and Mission Control.
 
 PXOS defines experience intent. SI creates reusable SwiftUI expression. ME protects file ownership. CS protects compatibility. PD composes SI primitives into depth. AOS may expose runtime intelligence only through trust gates. REC keeps claims bounded.
 
+## Living Dream Architecture Hook
+
+LDI hook: Mission Control lanes may include future dream-review, source-check, proof, review, recovery, privacy, professional-boundary, and source-state lane variants. SI07 owns reusable visual lane expression only; it must not implement LDI routing, source claims, or runtime intelligence.
+
 ## User-Visible Outcome
 
 Goal Detail organizes depth as distinct lanes instead of stacked cards.

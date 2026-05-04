@@ -20,6 +20,10 @@ Close SI and determine Product Depth readiness.
 
 PXOS defines experience intent. SI creates reusable SwiftUI expression. ME protects file ownership. CS protects compatibility. PD composes SI primitives into depth. AOS may expose runtime intelligence only through trust gates. REC keeps claims bounded.
 
+## Living Dream Architecture Hook
+
+LDI hook: Handoff must include an LDI readiness map for PD, AOS, and LDI01-LDI22, plus unresolved Yellow owners for source packs, recompiler, safety triage, continuity, fixtures, and professional boundaries.
+
 ## User-Visible Outcome
 
 Product Depth starts only with clear SI evidence boundaries.

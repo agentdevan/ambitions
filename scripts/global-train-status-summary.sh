@@ -92,7 +92,7 @@ for id in EB01 EB13 EB25 EB19 EB02 EB07 EB31 EB32 DAV01 DAV02 DAV03 DAV04 DAV05 
     else
       echo "Active train: Ambitions 4.0 External Brain Foundation"
     fi
-    echo "Total planned batches: 168"
+    echo "Total planned batches: 190"
     echo "Next eligible batch: $id $name"
     echo "Global order: $global"
     echo "Working tree:"
@@ -103,6 +103,6 @@ done
 echo "Active train: Product Depth"
 echo "Next eligible batch: PD01 Product Depth Train"
 echo "Global order: 121"
-echo "Total planned batches: 168"
+echo "Total planned batches: 190"
 echo "Working tree:"
 git status --short

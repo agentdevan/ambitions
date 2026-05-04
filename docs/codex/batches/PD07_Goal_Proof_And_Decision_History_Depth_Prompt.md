@@ -184,3 +184,7 @@ It does not prove release readiness, human-only proof, public accessibility conf
 ## Next Safe Prompt / Path
 
 Use the next direct PD prompt only after this batch is Green or accepted Yellow, committed, pushed, branch-clean, and continuation gates allow it. Otherwise stop and produce a repair or decision prompt.
+
+## Living Dream Architecture Hook
+
+LDI hook: Goals depth may prepare dream-to-goal review, requirement graph, path portfolio, alternate path, North Star, proof/history, and professional-boundary source states after owned gates.

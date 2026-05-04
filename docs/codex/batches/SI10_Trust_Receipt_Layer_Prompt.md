@@ -20,6 +20,10 @@ Build reusable trust/proof/receipt layer.
 
 PXOS defines experience intent. SI creates reusable SwiftUI expression. ME protects file ownership. CS protects compatibility. PD composes SI primitives into depth. AOS may expose runtime intelligence only through trust gates. REC keeps claims bounded.
 
+## Living Dream Architecture Hook
+
+LDI hook: Trust Receipt Layer must prepare visual receipt types for Dream Handling Receipt, Source Change Receipt, Mutation Receipt, Unsafe Redirect Receipt, Source Conflict Receipt, and Professional Boundary Receipt without implementing receipt runtime.
+
 ## User-Visible Outcome
 
 Meaningful changes have calm receipt/proof evidence without interrupting flow.

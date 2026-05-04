@@ -20,6 +20,10 @@ Build reusable You top/header/grouped navigation primitives.
 
 PXOS defines experience intent. SI creates reusable SwiftUI expression. ME protects file ownership. CS protects compatibility. PD composes SI primitives into depth. AOS may expose runtime intelligence only through trust gates. REC keeps claims bounded.
 
+## Living Dream Architecture Hook
+
+LDI hook: Personal System Center components may expose future controls for source packs, privacy modes, sync/archive states, what Ambitions knows, continuity, and plan mutation permissions. No account/backend/CloudKit entitlement work is owned by SI11.
+
 ## User-Visible Outcome
 
 You becomes a calm control center for trust and setup.

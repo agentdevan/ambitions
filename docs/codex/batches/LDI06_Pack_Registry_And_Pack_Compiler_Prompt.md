@@ -1,0 +1,159 @@
+# LDI06 Pack Registry And Pack Compiler Prompt
+
+<!-- markdownlint-disable MD013 -->
+
+## Batch Identity
+
+- Batch ID: LDI06
+- Title: Pack Registry And Pack Compiler
+- Train: LDI01-LDI22 Living Dream Intelligence Train
+- Default global placement: after AOS30 unless explicit user decision changes it
+- Type: future implementation / governance according to boundary
+
+## Status
+
+Queued. Do not start until global order selects this batch or the user explicitly authorizes an earlier LDI gate.
+
+## Purpose
+
+Defines pack registry/compiler contracts and review states.
+
+## Source Truth Files To Read First
+
+- README.md
+- AGENTS.md
+- docs/canon/Ambitions_3_0_Source_Of_Truth_Override.md
+- docs/canon/Ambitions_3_0_Primitive_Architecture.md
+- docs/canon/AmbitionsOS_Living_Dream_Architecture_Index.md
+- docs/canon/AmbitionsOS_Living_Dream_System_Map.md
+- docs/canon/AmbitionsOS_Dream_Handling_Lanes_And_Ladder.md
+- docs/canon/AmbitionsOS_Source_Claim_Graph_And_Pack_System.md
+- docs/canon/AmbitionsOS_Living_Plan_Recompiler.md
+- docs/canon/AmbitionsOS_Safety_Legality_Feasibility_Triage.md
+- docs/canon/AmbitionsOS_Continuity_Sync_Archive_And_Merge.md
+- docs/canon/AmbitionsOS_LDI_Evaluation_And_Governance.md
+- docs/codex/LDI_BATCH_GATE_MATRIX.md
+- docs/codex/LDI_DEPENDENCY_GRAPH.md
+- docs/codex/BATCH_REGISTRY.md
+- docs/codex/GLOBAL_FUTURE_BATCH_EXECUTION_ORDER.md
+
+## Required Preflight Checks
+
+- `git status --short`
+- `git branch --show-current`
+- `scripts/global-train-next-batch.sh || true`
+- `scripts/ldi-gate-check.sh || true`
+- `scripts/ldi-release-claim-scan.sh || true`
+
+## Allowed Files
+
+- docs/canon/** when owned by this batch
+- docs/codex/** when owned by this batch
+- docs/audits/**
+- .codex/skills/** and .codex/review-boards/** only if this batch owns governance changes
+- scripts/ldi-*.sh and scripts/ldi-*.py
+- Native/Ambitions/** only when this batch explicitly owns implementation and the owner map is recorded before edits
+- Native/AmbitionsTests/** only for focused tests owned by this batch
+
+## Forbidden Files
+
+- .github/workflows/**
+- signing, entitlements, provisioning, TestFlight, App Store, release config
+- route/raw-value/persistence/schema changes unless this exact batch owns them and proof is named before edits
+- backend/account/telemetry/hosted AI/user-data server implementation
+- new top-level destination or tab
+- broad SI/PD/AOS rewrites
+
+## Ownership Target Or Discovery Rule
+
+Boundary: pack types, pack schema, pack quality states, generation/review pipeline.
+
+Before implementation, name exact owner files, non-owner files, tests, preview or fixture seams, rollback files, and route/raw/persistence/accessibility non-change proof. If owner files are not provable, stop and create an owner-map repair batch.
+
+## Required Implementation Boundary
+
+Implement only the smallest usable slice that advances Pack Registry And Pack Compiler. Any runtime behavior must be deterministic, local-first, evidence-producing, and compatible with Ambitions' five destination IA.
+
+## Non-Goals
+
+No promise that every dream becomes a plan. No unsafe operationalization. No professional advice. No silent commitment mutation. No hosted AI or user-data backend. No release readiness claim.
+
+## Required Codex OS Gates
+
+- LDI Source Truth Gate
+- Handling Lane Gate when lanes are touched
+- Safety Legality Feasibility Gate when capture/routing/safety is touched
+- Source Claim Pack Gate when claims or packs are touched
+- Pack Supply Chain Gate when packs/imports are touched
+- Local-First Privacy Gate
+- No Silent Mutation Gate when plans/commitments are touched
+- Professional Boundary Gate when regulated domains are touched
+- Release Claim Safety Gate
+- Evidence Manifest Gate
+- Rollback Gate
+
+## Required Skills / Review Boards
+
+- .codex/skills/living-dream-architect.md
+- .codex/skills/dream-safety-legality-triage-reviewer.md when safety/triage is touched
+- .codex/skills/source-claim-graph-architect.md when claims are touched
+- .codex/skills/pack-supply-chain-security-reviewer.md when packs are touched
+- .codex/skills/living-plan-recompiler-architect.md when recompile/mutation is touched
+- .codex/review-boards/living-dream-architecture-review-board.md
+- .codex/review-boards/dream-safety-legality-review-board.md when safety is touched
+- .codex/review-boards/source-claim-pack-security-review-board.md when claims/packs are touched
+
+## Validation Commands
+
+- `git diff --check`
+- `scripts/ldi-gate-check.sh || true`
+- `scripts/ldi-release-claim-scan.sh || true`
+- `scripts/ldi-handling-lane-scan.sh || true`
+- `python3 scripts/ldi-source-pack-schema-check.py || true`
+- `python3 scripts/ldi-safety-redteam-fixture-check.py || true`
+- `python3 scripts/ldi-pack-supply-chain-scan.py || true`
+- focused Swift build/tests only if production Swift is touched
+
+## Required Evidence Outputs
+
+Batch report with files changed, source truth read, owner map, tests or not-run reason, preview/fixture evidence or not-run reason, route/raw/persistence/accessibility proof where relevant, Yellow owners, Red repairs, rollback path, and next eligible batch.
+
+## Green Criteria
+
+Implementation stays inside boundary, required gates pass, proof is concrete, no forbidden files touched, no unsupported claims, and working tree is clean after commit.
+
+## Yellow Criteria
+
+Future fixture or human/device proof is unavailable but no claim is made, advisory scans report planned fixture gaps, or a queued prerequisite owns a deferred piece.
+
+## Red Criteria
+
+Unsafe plan operationalized, professional advice claimed, user data server/backend/hosted AI introduced, new top-level destination created, commitments move silently, source truth conflicts unresolved, forbidden file touched, or release/platform claim outruns proof.
+
+## Stop Conditions
+
+Stop on Red, unknown dirty tree, owner-map uncertainty, route/raw/persistence risk without proof, or validation failure caused by this batch that cannot be repaired safely.
+
+## Rollback / Repair Expectations
+
+Revert only this batch's changed owner files. Preserve previous completed train history. If scope is too broad, split into A/B/C owner-map/proof/implementation stages.
+
+## What This Batch May Claim
+
+It may claim only the specific docs, contracts, fixtures, tests, or implementation proven by its evidence.
+
+## What This Batch Must Not Claim
+
+No full Living Dream runtime, production AI, official requirement verification, professional advice, device proof, public accessibility compliance, TestFlight readiness, App Store readiness, or release readiness.
+
+## What This Batch Does Not Prove
+
+It does not prove every dream can become a plan, that source packs are official, that CloudKit sync is shipped, or that human review happened unless evidence says so.
+
+## Commit Message Recommendation
+
+`Run LDI06 Pack Registry And Pack Compiler`
+
+## Next Safe Prompt / Next Gate
+
+After Green or accepted Yellow, ask global train for the next eligible batch. Expected next gate: LDI07.

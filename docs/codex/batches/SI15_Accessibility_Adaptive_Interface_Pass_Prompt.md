@@ -20,6 +20,10 @@ Validate SI primitives for accessibility and cognitive load.
 
 PXOS defines experience intent. SI creates reusable SwiftUI expression. ME protects file ownership. CS protects compatibility. PD composes SI primitives into depth. AOS may expose runtime intelligence only through trust gates. REC keeps claims bounded.
 
+## Living Dream Architecture Hook
+
+LDI hook: Accessibility pass must account for crisis/sensitive/privacy-safe presentation, Dynamic Type for review lanes, VoiceOver labels for source/professional/privacy states, and no cognitive overload in handling-lane review.
+
 ## User-Visible Outcome
 
 SI primitives remain usable under accessibility settings.

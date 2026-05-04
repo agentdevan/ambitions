@@ -20,6 +20,10 @@ Apply SI primitives to top-level surfaces.
 
 PXOS defines experience intent. SI creates reusable SwiftUI expression. ME protects file ownership. CS protects compatibility. PD composes SI primitives into depth. AOS may expose runtime intelligence only through trust gates. REC keeps claims bounded.
 
+## Living Dream Architecture Hook
+
+LDI hook: Top-level composition must ensure LDI review states do not turn Today, Goals, Capture, Plan, or You into generic stacks, dashboards, project-management boards, chatbot surfaces, or a sixth destination.
+
 ## User-Visible Outcome
 
 App becomes visibly reimagined around Ambitions-native objects while keeping five-tab IA.

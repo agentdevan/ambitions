@@ -88,3 +88,8 @@ Still not claimed: physical-device verification, public accessibility conformanc
 This document is future-canon guidance. It does not claim current app behavior, release readiness, App Store readiness, TestFlight readiness, physical-device verification, public accessibility conformance, signed archive validation, rendered platform proof, backend capability, sync, hosted AI, telemetry, or platform integration support.
 
 Do not use this document to start implementation automatically. Future work must pass the named train gates, preserve Ambitions 3.0 source truth, and record evidence before claims.
+
+
+## Living Dream Architecture Cross-Link
+
+- `docs/canon/AmbitionsOS_Living_Dream_Architecture_Index.md` is future implementation source truth and train governance for LDI01-LDI22. It does not claim runtime Living Dream behavior.

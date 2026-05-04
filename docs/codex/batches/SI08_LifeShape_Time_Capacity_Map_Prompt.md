@@ -20,6 +20,10 @@ Build Plan time/capacity/pressure primitive.
 
 PXOS defines experience intent. SI creates reusable SwiftUI expression. ME protects file ownership. CS protects compatibility. PD composes SI primitives into depth. AOS may expose runtime intelligence only through trust gates. REC keeps claims bounded.
 
+## Living Dream Architecture Hook
+
+LDI hook: LifeShape capacity primitives may later express source-check, review, capacity-collapse, privacy-sensitive, and recovery states. SI08 does not implement living recompile or commitment mutation logic.
+
 ## User-Visible Outcome
 
 Plan shows capacity shape without becoming a calendar grid.

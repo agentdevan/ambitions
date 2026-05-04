@@ -20,6 +20,10 @@ Build preview fixtures and visual QA harness.
 
 PXOS defines experience intent. SI creates reusable SwiftUI expression. ME protects file ownership. CS protects compatibility. PD composes SI primitives into depth. AOS may expose runtime intelligence only through trust gates. REC keeps claims bounded.
 
+## Living Dream Architecture Hook
+
+LDI hook: Preview/visual QA infrastructure should add an LDI fixture state matrix for handling lanes, source states, privacy states, red-team states, and degraded/sync states when fixtures exist.
+
 ## User-Visible Outcome
 
 Future SI/PD batches produce deterministic visual evidence.

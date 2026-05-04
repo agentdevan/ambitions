@@ -20,6 +20,10 @@ Build status/source/proof/recovery icon and symbol grammar.
 
 PXOS defines experience intent. SI creates reusable SwiftUI expression. ME protects file ownership. CS protects compatibility. PD composes SI primitives into depth. AOS may expose runtime intelligence only through trust gates. REC keeps claims bounded.
 
+## Living Dream Architecture Hook
+
+LDI hook: Iconography/status grammar should include source state, professional-boundary, unsafe-blocked, crisis-support, privacy-sensitive, sync-state, pack-state, source-conflict, and source-stale semantics with no color-only meaning.
+
 ## User-Visible Outcome
 
 Ambitions gains consistent scanning symbols without hidden meaning.

@@ -16,6 +16,10 @@ Status: Queued Ambitions 4.0 AmbitionsOS batch; not started; future canon only u
 
 Move exactly this batch's AmbitionsOS contract or implementation slice forward without widening Ambitions into a chatbot, generic productivity app, calendar clone, source-certification authority, or broad AI assistant. Preserve current Ambitions 3.0 behavior unless this batch explicitly owns a tested behavior change.
 
+## Living Dream Architecture Hook
+
+LDI hook: Local Goal Packs should map Pack Registry, Pack Compiler, quality states, draft/generated/reviewed boundaries, and no executable logic.
+
 ## Source Truth Files To Read First
 
 - `README.md`

@@ -19,8 +19,9 @@ Date: 2026-05-02
 | 7 AOS internal foundations | 084-106 | Build AmbitionsOS contracts and kernels without user-facing exposure. | Internal intelligence has typed, private, source-grounded contracts. |
 | 8 AOS expression and QA | 107-113 | Integrate only after PXOS/ME/CS/SI/PD where relevant, build fixtures, QA, claim truth, handoff, repair/roadmap. | User-facing intelligence waits for proof and gates. |
 | 8 Release readiness evidence | Future human-led lane | Actual release readiness proof after implementation evidence and human/platform proof. | No public readiness claim without evidence. |
+| 9 Living Dream Intelligence | 169-190 | Implement LDI01-LDI22 after AOS30 by default. | Every dream is classified, protected, routed, and handled honestly; full runtime only after evidence. |
 
-Ambitions 4.0 is the active post-3.0 execution program, not a shipped product version. This graph covers 113 formal queued/blocked batches and does not make PXOS, SI, Product Depth, or AmbitionsOS implemented.
+Ambitions 4.0 is the active post-3.0 execution program, not a shipped product version. This graph now covers 190 active planned batches after EB, DAV, SI, PD, AOS, and LDI insertion. It does not make PXOS, SI, Product Depth, AmbitionsOS, or Living Dream runtime implemented.
 
 ## Hard Dependencies
 
@@ -74,6 +75,14 @@ Ambitions 4.0 is the active post-3.0 execution program, not a shipped product ve
 - PD01 depends on `Start Product Depth Train`, PX14, PX18, SI18 handoff where UI primitives are relevant, affected ME/CS dependency identification, and explicit train gates.
 - PD02-PD18 depend on PD01, their predecessor PD batches, affected PXOS surface gates, affected ME gates, affected CS gates, and AOS runtime gates if runtime/source-truth/proof logic is touched.
 
+- LDI01 depends on AOS30 Green by default, or an explicit user decision plus dependency review for an earlier individual LDI gate.
+- LDI02-LDI22 depend on predecessor LDI batches and the LDI train manifest.
+- SI queued batches may add LDI visual hooks only; SI does not implement LDI runtime.
+- PD queued batches may add LDI drill-down homes inside existing destinations only; PD does not create a sixth destination.
+- AOS queued batches may map LDI contracts into owned kernels; mismatched runtime requirements defer to LDI.
+- AOS24 UI integration must not expose LDI user-facing intelligence without SI/PD/AOS/LDI gates where relevant.
+- PD runtime-touching batches must stop if LDI/AOS source truth, proof trust, recommendation, privacy, or recompiler gates are not ready.
+
 ## Soft Dependencies
 
 - REC should precede PX17 and any public product messaging.
@@ -85,6 +94,7 @@ Ambitions 4.0 is the active post-3.0 execution program, not a shipped product ve
 - AOS16/AOS17 should precede runtime-heavy or sensitive projection work.
 - AOS18 should precede broad AOS behavior implementation.
 - SI18 should precede Product Depth and AOS24 UI exposure.
+- AOS30 should precede LDI01 by default unless explicit user decision and dependency review choose a narrower earlier gate.
 
 ## Blockers
 
@@ -108,6 +118,7 @@ Ambitions 4.0 is the active post-3.0 execution program, not a shipped product ve
 | ME Maintainability Gate | Large UI/product expansion in affected files | Owner file is too large/tangled or lacks behavior-preservation tests. |
 | CS Compatibility Gate | Renames, removals, routes, raw values, widgets, App Intents, import/export, persistence | Replacement map or compatibility proof is missing. |
 | AOS Runtime/Intelligence Gate | Recommendation/source-truth/runtime/intelligence work | Typed contracts, privacy projection, fallback, or source truth is missing. |
+| LDI Living Dream Gate | Dream handling, source packs, recompiler, continuity, or safety triage | LDI source truth, handling lane, safety/privacy/source/professional-boundary, no-silent-mutation, and release-claim evidence are missing. |
 | Product Depth Gate | PD01-PD18 or drill-down/detail work beyond current canon | PXOS, ME, CS, SI, AOS-runtime-if-needed, or approval prerequisites are unresolved. |
 | Signature Interface Gate | SI01-SI18 or Ambitions-native interface primitives | SI Codex OS gates, PXOS source truth, ME/CS prerequisites, visual QA, accessibility, or file-size evidence is unresolved. |
 

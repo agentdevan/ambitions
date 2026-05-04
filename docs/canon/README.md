@@ -200,3 +200,8 @@ These are future-canon planning docs now governed operationally by the Ambitions
 These docs are future canon in the Ambitions 4.0 Execution Program. They do not claim current app implementation, release readiness, or PXOS train activation.
 
 - [Ambitions 4.0 External Brain Foundation](Ambitions_4_0_External_Brain_Foundation_Index.md) - active planned 4.0 expansion scope; not app behavior until EB batch evidence proves it.
+
+
+## Living Dream Architecture Cross-Link
+
+- `docs/canon/AmbitionsOS_Living_Dream_Architecture_Index.md` is future implementation source truth and train governance for LDI01-LDI22. It does not claim runtime Living Dream behavior.

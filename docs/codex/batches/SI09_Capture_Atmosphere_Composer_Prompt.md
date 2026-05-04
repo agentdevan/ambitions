@@ -20,6 +20,10 @@ Build Capture signature atmosphere/composer primitive.
 
 PXOS defines experience intent. SI creates reusable SwiftUI expression. ME protects file ownership. CS protects compatibility. PD composes SI primitives into depth. AOS may expose runtime intelligence only through trust gates. REC keeps claims bounded.
 
+## Living Dream Architecture Hook
+
+LDI hook: Capture atmosphere/composer must be ready for the capture handling ladder, seriousness routing, one-question clarification, safety/regulated/fantasy markers, unsafe redirect states, and source-check-first presentation. SI09 owns visual/composer expression only.
+
 ## User-Visible Outcome
 
 Capture feels like a calm place to put thoughts, not a chat box.

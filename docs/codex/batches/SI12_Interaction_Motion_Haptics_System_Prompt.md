@@ -20,6 +20,10 @@ Build interaction behavior for SI primitives.
 
 PXOS defines experience intent. SI creates reusable SwiftUI expression. ME protects file ownership. CS protects compatibility. PD composes SI primitives into depth. AOS may expose runtime intelligence only through trust gates. REC keeps claims bounded.
 
+## Living Dream Architecture Hook
+
+LDI hook: Interaction/motion/haptics must treat LDI state changes as meaning-bearing transitions only: clarify, source-check, review, proof, privacy, unsafe redirect, and recompile states. No decorative infinite motion or hidden commitment movement.
+
 ## User-Visible Outcome
 
 Motion explains changes without gamifying Ambitions.
