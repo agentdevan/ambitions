@@ -27,7 +27,11 @@ Original formal Ambitions 4.0 batch count: 113. Active expansion added: 40. New 
   complete as bounded non-persistent Smart Attachment review projection.
   Boundary: added computed capture cluster, review bundle, and open-loop signal
   projections only; no route/raw, persistence/schema, or UI surface change.
-- 052: EB06 Capture Receipts Undo And Reclassification. Status: active planned / queued; not completed. Boundary: Implementation allowed later for receipts, undo, and reclassification only.
+- 052 / 078: EB06 Capture Receipts Undo And Reclassification. Status:
+  complete as bounded non-persistent Smart Attachment receipt/reclassification
+  projection. Boundary: records receipt, correction, reclassification, rollback,
+  and honest undo-not-supported state only; no route/raw, persistence/schema, or
+  UI surface change.
 - 052: EB07 Life Memory Graph Canon And Domain Model. Status: complete by EB07 evidence; no app behavior or domain code implemented. Boundary: Canon/domain planning; durable memory implementation remains deferred to later gated batches.
 - 054: EB08 Memory Source Confidence And Trust Decay. Status: active planned / queued; not completed. Boundary: Implementation allowed later for source, confidence, and trust decay only.
 - 055: EB09 Life Event Decision And Context Recall Memory. Status: active planned / queued; not completed. Boundary: Implementation allowed later for life event, decision, and recall records only.

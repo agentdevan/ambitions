@@ -477,6 +477,16 @@ struct SmartAttachmentReviewBundle: Sendable, Equatable, Hashable, Identifiable 
     }
 }
 
+struct SmartAttachmentReclassificationProjection: Sendable, Equatable, Hashable {
+    let receiptTitle: String
+    let undoAvailability: ActionReceiptUndoAvailability
+    let undoSummary: String
+    let correctionAvailability: ActionReceiptCorrectionAvailability
+    let reclassificationActions: [String]
+    let rollbackSummary: String
+    let accessibilitySummary: String
+}
+
 struct SmartAttachmentResult: Codable, Sendable, Equatable, Hashable, Identifiable {
     let id: String
     let input: SmartAttachmentInput
@@ -630,6 +640,25 @@ struct SmartAttachmentResult: Codable, Sendable, Equatable, Hashable, Identifiab
 }
 
 extension SmartAttachmentResult {
+    var reclassificationProjection: SmartAttachmentReclassificationProjection {
+        let actionTitles = reclassificationActionTitles
+        let undoSummary = "Undo is not applied automatically; use Change before saving or reclassify after placement."
+        let correctionAvailability: ActionReceiptCorrectionAvailability = actionTitles.isEmpty ? .unavailable : .availableWithReason
+        let rollbackSummary = savesToNeedsPlace
+            ? "Rollback keeps the capture in Needs a Place with the original text preserved."
+            : "Rollback returns the capture to Needs a Place and preserves the original text and receipt."
+
+        return SmartAttachmentReclassificationProjection(
+            receiptTitle: receiptLine,
+            undoAvailability: .notSupportedYet,
+            undoSummary: undoSummary,
+            correctionAvailability: correctionAvailability,
+            reclassificationActions: actionTitles,
+            rollbackSummary: rollbackSummary,
+            accessibilitySummary: "\(receiptLine). Undo not supported yet. \(correctionAvailability.isAvailable ? "Correction available." : "No correction action available.")"
+        )
+    }
+
     var reviewBundle: SmartAttachmentReviewBundle {
         let cluster = SmartAttachmentCaptureCluster(
             id: "cluster.\(id)",
@@ -650,6 +679,19 @@ extension SmartAttachmentResult {
             actionTitles: actionTitles,
             accessibilitySummary: accessibilityReviewSummary(openLoopCount: signals.count, actionTitles: actionTitles)
         )
+    }
+
+    private var reclassificationActionTitles: [String] {
+        guard resultState != .failedSafely else { return [] }
+        return actions.filter { action in
+            switch action {
+            case .change, .task, .goal, .idea, .proof, .waiting, .plan, .attach, .keepStandalone:
+                return true
+            case .retry, .copy:
+                return false
+            }
+        }
+        .map(\.title)
     }
 
     private var reviewBundleTitle: String {

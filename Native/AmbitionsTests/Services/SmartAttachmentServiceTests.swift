@@ -178,6 +178,52 @@ final class SmartAttachmentServiceTests: XCTestCase {
         XCTAssertEqual(result.triageStatus, .assumedRoute)
     }
 
+    func testEB06ReclassificationProjectionKeepsUndoHonestAndCorrectionVisible() {
+        let service = DefaultSmartAttachmentService()
+
+        let result = service.route(
+            SmartAttachmentInput(rawText: "Find NASA contacts on LinkedIn later"),
+            candidates: [
+                SmartAttachmentDestinationCandidate(
+                    id: "goal-astronaut",
+                    label: "NASA contacts",
+                    destinationKind: .existingGoal,
+                    supportedRouteTypes: [.goal, .task, .proofItem],
+                    placementLabel: "Become an Astronaut"
+                )
+            ],
+            maxCandidateCount: 5
+        )
+        let projection = result.reclassificationProjection
+        let receipt = result.actionReceipt(captureID: "capture-1", occurredAt: "2026-05-03T23:20:00Z")
+
+        XCTAssertEqual(projection.receiptTitle, "Saved as Task · Today")
+        XCTAssertEqual(projection.undoAvailability, .notSupportedYet)
+        XCTAssertEqual(projection.correctionAvailability, .availableWithReason)
+        XCTAssertEqual(projection.reclassificationActions, ["Attach", "Change", "Keep Standalone"])
+        XCTAssertTrue(projection.rollbackSummary.contains("Needs a Place"))
+        XCTAssertTrue(projection.accessibilitySummary.contains("Undo not supported yet"))
+        XCTAssertEqual(receipt.undoAvailability, .notSupportedYet)
+        XCTAssertEqual(receipt.correctionAvailability, .availableWithReason)
+    }
+
+    func testEB06FailedCaptureProjectionDoesNotExposeFakeUndoOrCorrection() {
+        let service = DefaultSmartAttachmentService()
+
+        let result = service.route(
+            SmartAttachmentInput(rawText: "   "),
+            candidates: [],
+            maxCandidateCount: 5
+        )
+        let projection = result.reclassificationProjection
+
+        XCTAssertEqual(projection.undoAvailability, .notSupportedYet)
+        XCTAssertEqual(projection.correctionAvailability, .unavailable)
+        XCTAssertEqual(projection.reclassificationActions, [])
+        XCTAssertTrue(projection.undoSummary.contains("not applied automatically"))
+        XCTAssertTrue(projection.accessibilitySummary.contains("Undo not supported yet"))
+    }
+
     func testFailureUsesNeedsPlaceAndRetryCopyMetadata() {
         let service = DefaultSmartAttachmentService()
 
