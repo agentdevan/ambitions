@@ -336,7 +336,15 @@ Current 4.0 status:
   dependency, workflow, signing, production asset, app behavior, screenshot
   proof, legal/privacy approval, or release-claim changes. EB38 External Brain
   Accessibility Evidence Closeout is the next eligible EB batch.
-- Active Planned / Queued: EB38-EB40 Ambitions 4.0 External Brain Foundation expansion segment; not completed and not implemented in app behavior.
+- Complete: EB38 External Brain Accessibility Evidence Closeout is complete as
+  evidence closeout only. It records the External Brain accessibility evidence
+  matrix across EB25-EB30, DAV11, EB35, EB36, and EB37, without
+  Native/Sources/AppUI/test/project, route/raw value, persistence/schema,
+  dependency, workflow, signing, production asset, app behavior, screenshot
+  proof, public accessibility proof, physical-device proof, or release-claim
+  changes. EB39 External Brain Handoff And RC Readiness Implications is the
+  next eligible EB batch.
+- Active Planned / Queued: EB39-EB40 Ambitions 4.0 External Brain Foundation expansion segment; not completed and not implemented in app behavior.
 - Queued / Blocked: SI01-SI18 pending global-order selection or `Start Signature Interface Train` plus PXOS/ME/CS/SI quality gates.
 - Queued / Blocked: PD01-PD18 pending `Start Product Depth Train` plus PXOS/ME/CS/SI/AOS-if-needed gates.
 - Queued / Blocked: AOS01-AOS30 pending `Start AOS Train`.
