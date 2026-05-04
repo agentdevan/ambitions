@@ -1,6 +1,6 @@
 # Ambitions Product Experience Pack Repo Traceability Map
 
-Status: Batch 1A/1B docs/planning artifact; no app implementation started
+Status: Batch 1A/1B/1C docs/planning artifact; no app implementation started
 Date: 2026-05-04
 
 ## Purpose
@@ -130,6 +130,43 @@ consequence and reversibility; privacy as user control.
 Recommendation: run a docs-only copy-boundary scan before any app copy cleanup.
 Do not rename internal compatibility cases or raw values in Batch 1B.
 
+## Batch 1C Copy-Boundary Scan Addendum
+
+Batch 1C ran a docs-only risky-copy scan and created
+`docs/audits/ambitions-product-experience-pack-batch-1c-copy-boundary-scan.md`.
+The scan confirms that legacy or risky terms are broad enough that remediation
+must be staged and evidence-bound rather than performed as a bulk rename.
+
+Summary:
+
+- User-facing risk clusters: Habit/Ritual preview copy, Insights/History
+  metrics and labels, Goal confidence/explainability labels, external snapshot
+  urgency/mode labels, ScreenContract forbidden-copy lists, and privacy/source
+  language that can drift into detection or certification tone.
+- Internal compatibility/domain allowed clusters: `AppTab` compatibility cases,
+  route fallbacks, async `.failed` states, receipt `failedSafely` raw values,
+  domain confidence/score models, stale source states, goal modes, and legacy
+  import/portable snapshot contracts.
+- Historical/source-truth allowed clusters: canon forbidden lists, audit logs,
+  train prompts, release claim ledgers, and validation scripts that mention
+  risky terms as negative examples or technical pass/fail vocabulary.
+- Test/fixture/preview risk clusters: `Native/Ambitions/PreviewSupport/**`,
+  `Sources/Previews/**`, and `Native/AmbitionsTests/**` contain strings that
+  may be visible in previews, screenshots, accessibility evidence, or asserted
+  product contracts.
+
+Safe rule: internal compatibility words are not automatically user-facing copy
+debt. They may remain when preserving history, migration, routing
+compatibility, raw values, or technical state. Future implementation must keep
+those words out of visible labels, VoiceOver labels, receipts, headers,
+buttons, tab labels, empty states, onboarding copy, and external snapshot copy
+unless the source truth explicitly permits the wording.
+
+Recommended treatment: Stage future copy work through inventory, fixture/preview
+correction, visible UI copy correction, accessibility label correction,
+receipt/source/privacy copy correction, and regression scans. Do not edit source
+copy without explicit scope, owner files, focused tests, and copy-scan evidence.
+
 ## Top-Level Surface Mapping
 
 | Surface | Locked primary object | Current repo files | Apparent alignment | Apparent conflict | Caveat | Implementation risk | Future treatment | Recommendation |
@@ -168,7 +205,7 @@ Do not rename internal compatibility cases or raw values in Batch 1B.
 | --- | --- | --- | --- | --- | --- | --- |
 | Accent system conflict | Yellow | Appearance Studio Addendum; Pack accent rules | `Sources/Theme/AmbitionTheme.swift`, `Native/Ambitions/Persistence/PersistenceContracts.swift`, `ProfileScreen.swift`, `ProfileFeatureService.swift`, `ProfileViewModel.swift` | Do not edit tokens until naming/default persistence implications are mapped. This is a naming/token migration conflict with product implications. | Yes, before token/default changes. | Create a docs-only alias plan first; mark design token files approval-gated. |
 | MissionControlTimeSpine order conflict / unknown | Yellow | Product Object Spec Export; Pack MissionControlTimeSpine rule | `GoalMissionControlLanePrimitives.swift`, `GoalComponents.swift`, `GoalDetailScreen.swift`, `GoalsFeatureService.swift`, `Sources/Components/ShellChromePrimitives.swift` | Do not implement Mission Control depth until order and owner are reconciled. Current repo is partial alignment with unresolved order conflict. | Yes, if current lane model should be replaced. | Use as PD01 mapping input if Product Depth starts; otherwise keep docs-only. |
-| Compatibility vocabulary risk | Yellow | Product Language System; Pack forbidden-copy rules | `AppTab.swift`, `AppNavigation.swift`, `Habits*`, `Insights*`, `Profile*`, async/result/domain files | Preserve internal seams; do not expose legacy or certainty-oriented language in new UI. | No for preservation; yes for retirement or user-facing copy changes. | Run Batch 1C docs-only copy-boundary scan. |
+| Compatibility vocabulary risk | Yellow | Product Language System; Pack forbidden-copy rules | `AppTab.swift`, `AppNavigation.swift`, `Habits*`, `Insights*`, `Profile*`, async/result/domain files, previews, fixtures, tests, source/privacy/receipt labels | Preserve internal seams; do not expose legacy or certainty-oriented language in new UI. | No for preservation; yes for retirement or user-facing copy changes. | Use Batch 1C registry as future copy-remediation boundary. |
 | Step Session depth unknown | Yellow | Today Pack object rules; PD03 manifest | `TodayScreen.swift`, `TodayViewModel.swift`, `TodayActionClosureSheet.swift` | Do not claim Step Session is complete Product Depth. | Yes before PD03 starts. | Let PD02/PD03 sequence decide after `Start Product Depth Train`. |
 | Month LifeShape calendar-clone risk | Yellow | Plan LifeShape-first rule; caveats | `PlanLifeShapeTimeCapacityMap.swift`, `PlanLifeSuiteState.swift`, `PlanFeatureService.swift` | Do not add Month UI until capacity-lens contract is explicit. | Yes if Month lens is redesigned. | Narrow Plan LifeShape docs reconciliation or PD14 planning gate. |
 | Validation command uncertainty | Yellow | Codex OS validation rules | `scripts/run-doc-qa.sh`, `scripts/batch-train-gate-check.sh`, `docs/native-build-and-release.md`, `.github/workflows/ios-validate.yml` | Docs-only validation can use doc QA and gate hints; lint/format command remains non-canonical. | No. | Record commands found; avoid inventing lint/format commands. |
@@ -189,7 +226,7 @@ Do not rename internal compatibility cases or raw values in Batch 1B.
 
 ## Recommended Next Action
 
-Recommended: run Batch 1C docs-only copy-boundary scan. It should inspect
-user-facing strings and separate true Pack-facing copy issues from internal
-compatibility vocabulary. Do not start Product Depth unless the user says the
-exact approval phrase from the Product Depth manifest.
+Recommended: run Batch 1D docs-only source-truth packet assembly and readiness
+gate. It should assemble Batch 0 through Batch 1C evidence into a source-truth
+handoff packet without implementing app code. Do not start Product Depth unless
+the user says the exact approval phrase from the Product Depth manifest.

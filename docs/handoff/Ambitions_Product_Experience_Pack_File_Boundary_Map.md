@@ -1,6 +1,6 @@
 # Ambitions Product Experience Pack File Boundary Map
 
-Status: Batch 1A preliminary map hardened by Batch 1B; planning-only
+Status: Batch 1A preliminary map hardened by Batch 1B/1C; planning-only
 Date: 2026-05-04
 
 ## Purpose
@@ -71,6 +71,7 @@ or source-truth boundary artifacts when the task stays docs-only.
 - `docs/handoff/Ambitions_Product_Experience_Pack_File_Boundary_Map.md`
 - `docs/audits/ambitions-product-experience-pack-batch-1a-boundary-report.md`
 - `docs/audits/ambitions-product-experience-pack-batch-1b-reconciliation-report.md`
+- `docs/audits/ambitions-product-experience-pack-batch-1c-copy-boundary-scan.md`
 - `docs/audits/*product-experience*report.md`
 - `docs/codex/CONTEXT_INDEX.md` only if a later prompt asks to index the
   artifact.
@@ -240,6 +241,36 @@ source truth, routing, persistence, config, or runtime behavior.
   - `Native/AmbitionsUITests/**`
   - Preview and fixture files when edits would update asserted product truth.
 
+## Copy-Boundary Categories
+
+These categories come from Batch 1C and must be used before any future copy
+remediation:
+
+- Green allowed preservation:
+  - Technical enum cases, raw values, route compatibility values, migration
+    labels, validation pass/fail language, and historical audit truth.
+- Yellow user-facing inventory candidates:
+  - Strings in `Native/Ambitions/Features/**`, `Sources/Components/**`,
+    `Native/Ambitions/ExternalSnapshots/**`, and source-derived UI models that
+    may render visible copy or spoken labels.
+- Yellow test/fixture/preview candidates:
+  - `Native/Ambitions/PreviewSupport/**`, `Sources/Previews/**`,
+    `Native/AmbitionsTests/**`, and `Native/AmbitionsUITests/**` when the string
+    is used as screenshot, preview, UI, or accessibility evidence.
+- Red forbidden bulk changes:
+  - Broad renames of `AppTab` compatibility cases, `Profile` owner names,
+    `Insights` routes, `Habits` routes/models, `.failed` async states, receipt
+    raw values, stale/source states, confidence/score domain models, or external
+    snapshot contracts without migration proof.
+- Stop/user-decision copy files:
+  - Navigation labels, tab labels, onboarding copy, receipts, source/privacy
+    marks, external snapshot copy, VoiceOver labels, and trust/privacy copy when
+    the change could alter source-truth semantics.
+
+Future copy remediation must not treat internal naming as automatic copy debt.
+Any source edit touching compatibility enums/routes/raw values requires explicit
+scope, tests, and migration or compatibility evidence.
+
 ## Validation Scripts / Commands
 
 Commands found in repo docs/scripts during Batch 0 and Batch 1A:
@@ -274,8 +305,7 @@ gate for Product Experience Pack work.
 
 ## Boundary Recommendation
 
-The next safe docs action is Batch 1C copy-boundary scan. It should stay
-docs-only, inspect user-facing strings, and separate true Pack-facing copy
-issues from internal compatibility vocabulary. It should not edit app code,
-theme tokens, navigation, persistence, runtime, CI, tests, previews, fixtures,
-or generated files.
+The next safe docs action is Batch 1D source-truth packet assembly and
+readiness gate. It should stay docs-only and assemble Batch 0 through Batch 1C
+evidence without editing app code, theme tokens, navigation, persistence,
+runtime, CI, tests, previews, fixtures, or generated files.
