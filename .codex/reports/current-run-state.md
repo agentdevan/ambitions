@@ -2,11 +2,11 @@
 
 Date: 2026-05-03
 Active train: Ambitions 4.0 External Brain Foundation
-Current batch: EB04 next eligible after EB03B implementation
+Current batch: EB05 next eligible after EB04 implementation
 Scope: Complete: EB03A Universal Capture Composer Routing Owner Map. Complete:
-EB03B Universal Capture Composer Routing Implementation. EB03B changed only
-the scoped Capture composer route-proof presentation, named Capture previews,
-Smart Attachment accessibility value, and focused tests. No route/raw value,
+EB03B Universal Capture Composer Routing Implementation. Complete: EB04
+Capture Classification And Clarification. EB04 changed only the scoped Smart
+Attachment classification branch and focused tests. No route/raw value,
 persistence/schema, dependency, workflow, signing, top-level-tab, production
 asset, network/sync/account/cloud behavior, or public accessibility/release
 claim change was made.
@@ -48,7 +48,8 @@ claim change was made.
   product-experience QA evidence; DAV15 is complete as train closeout evidence;
   EB03 remains a split parent, with EB03A complete as owner-map repair evidence
   and EB03B complete as the first scoped Capture composer/routing
-  implementation pass. EB04 is the next eligible EB batch.
+  implementation pass. EB04 is complete as a scoped one-question clarification
+  pass. EB05 is the next eligible EB batch.
 - PXEQ is a mandatory product-experience gate for EB UI-affecting batches; it
   is not a shipped app feature and not a new EB batch identity.
 - Optimized global order after EB32 places DAV01-DAV15 before UI-heavy EB
@@ -67,16 +68,15 @@ claim/copy/docs advisory backlog, working-tree gate hints during validation,
 and future product implementation proof because EB24 intentionally changes no
 Swift or app behavior.
 
-EB03B result: PASS WITH YELLOW. `docs/audits/eb03b-universal-capture-composer-routing-implementation-report.md`
-records local route-proof presentation, named Capture preview lanes, focused
-route/view-model tests, focused service/persistence tests, `swift build`, and
-`scripts/build-local.sh`. Yellow items are screenshots/rendered proof not
-produced, human/device/VoiceOver review not run, existing advisory backlog, and
-one touched negative test guard string for `AI confidence`.
+EB04 result: PASS WITH YELLOW. `docs/audits/eb04-capture-classification-and-clarification-report.md`
+records the ambiguous-route one-question clarification branch, focused Smart
+Attachment tests, `swift build`, and `scripts/build-local.sh`. Yellow items are
+screenshots/rendered proof not produced, human/device/VoiceOver review not run,
+and existing advisory backlog.
 
 ## Next Safe Path
 
-Run EB04 Capture Classification And Clarification next. Do not restart broad
-EB03 or completed DAV / EB20-EB24 batches. EB04 must name exact owner files,
-focused tests, preview/fixture evidence, accessibility/privacy proof, and
-rollback before widening beyond classification/one-question clarification.
+Run EB05 Capture Clusters Review Bundles And Open Loops next. Do not restart
+broad EB03, EB04, or completed DAV / EB20-EB24 batches. EB05 must name exact
+owner files, focused tests, preview/fixture evidence, accessibility/privacy
+proof, and rollback before widening beyond clusters/review bundles/open loops.

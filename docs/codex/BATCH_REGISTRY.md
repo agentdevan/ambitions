@@ -154,6 +154,12 @@ Current 4.0 status:
   without route/raw, persistence/schema, top-level-tab, dependency, workflow,
   signing, or release-claim changes. EB04 Capture Classification And
   Clarification is the next eligible EB batch.
+- Complete: EB04 Capture Classification And Clarification is complete as a
+  scoped Smart Attachment classification pass. It added a bounded one-question
+  clarification for ambiguous local route signals without route/raw,
+  persistence/schema, UI, top-level-tab, dependency, workflow, signing, network,
+  sync, account, cloud, or release-claim changes. EB05 Capture Clusters Review
+  Bundles And Open Loops is the next eligible EB batch.
 - Active Planned / Queued: EB08-EB12, EB14-EB18, EB20-EB24, EB03-EB06, and EB26-EB40 Ambitions 4.0 External Brain Foundation expansion segment; not completed and not implemented in app behavior.
 - Queued / Blocked: SI01-SI18 pending global-order selection or `Start Signature Interface Train` plus PXOS/ME/CS/SI quality gates.
 - Queued / Blocked: PD01-PD18 pending `Start Product Depth Train` plus PXOS/ME/CS/SI/AOS-if-needed gates.

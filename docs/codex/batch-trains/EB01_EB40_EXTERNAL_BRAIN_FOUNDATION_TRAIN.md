@@ -19,7 +19,10 @@ Original formal Ambitions 4.0 batch count: 113. Active expansion added: 40. New 
   scoped Capture route-proof presentation pass with focused validation and no
   route/raw or persistence/schema changes. Boundary: future EB03 follow-up work
   remains inside Capture composer/routing after EB13, EB25, and EB03A gates.
-- 050: EB04 Capture Classification And Clarification. Status: active planned / queued; not completed. Boundary: Implementation allowed later for classification and one-question clarification only.
+- 050 / 076: EB04 Capture Classification And Clarification. Status: complete
+  as scoped Smart Attachment classification implementation. Boundary: added
+  one-question clarification for ambiguous local route signals only; no
+  route/raw or persistence/schema change.
 - 051: EB05 Capture Clusters Review Bundles And Open Loops. Status: active planned / queued; not completed. Boundary: Implementation allowed later for clusters, review bundles, and open-loop signals only.
 - 052: EB06 Capture Receipts Undo And Reclassification. Status: active planned / queued; not completed. Boundary: Implementation allowed later for receipts, undo, and reclassification only.
 - 052: EB07 Life Memory Graph Canon And Domain Model. Status: complete by EB07 evidence; no app behavior or domain code implemented. Boundary: Canon/domain planning; durable memory implementation remains deferred to later gated batches.

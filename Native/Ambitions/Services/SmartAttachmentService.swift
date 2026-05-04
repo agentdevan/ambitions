@@ -42,6 +42,7 @@ struct DefaultSmartAttachmentService: SmartAttachmentRouting {
         )
         let tokenCount = tokens(in: text).count
         let routeIsWeak = routeType == .idea && tokenCount <= 2
+        let ambiguity = ambiguityClarification(for: input, routeType: routeType, text: text)
 
         if routeIsWeak {
             return SmartAttachmentResult(
@@ -54,6 +55,21 @@ struct DefaultSmartAttachmentService: SmartAttachmentRouting {
                 receiptLine: "Saved to Needs a Place",
                 explanation: "Saved to Needs a Place because this needs one compact route choice.",
                 actions: [.change, .task, .goal, .idea],
+                privacyLevel: .privateItem
+            )
+        }
+
+        if let ambiguity {
+            return SmartAttachmentResult(
+                id: resultID,
+                input: input,
+                resultState: .needsClarification,
+                confidence: .needsClarification,
+                selectedCandidate: needsPlaceCandidate(id: "candidate.needs-place.ambiguous", input: input),
+                clarification: ambiguity,
+                receiptLine: "Saved to Needs a Place",
+                explanation: "Saved to Needs a Place because this could become more than one useful thing.",
+                actions: ambiguity.choices.map(\.actionLabel),
                 privacyLevel: .privateItem
             )
         }
@@ -195,6 +211,32 @@ private extension DefaultSmartAttachmentService {
             "buy", "call", "email", "send", "draft", "write", "find", "fix", "create",
             "make", "book", "pay", "pick up", "review", "submit", "finish"
         ].contains { text.contains($0) }
+    }
+
+    func ambiguityClarification(
+        for input: SmartAttachmentInput,
+        routeType: SmartAttachmentRouteType,
+        text: String
+    ) -> SmartAttachmentClarification? {
+        guard routeType != .proofItem else { return nil }
+        let lowercased = text.lowercased()
+        var choices = [SmartAttachmentClarificationChoice]()
+        if containsTaskVerb(lowercased) || lowercased.contains("tomorrow") || lowercased.contains("schedule") {
+            choices.append(SmartAttachmentClarificationChoice(id: "clarify.task", actionLabel: .task, routeType: .task))
+        }
+        if lowercased.contains("goal") || lowercased.contains("launch") || lowercased.contains("build ") || lowercased.contains("learn ") {
+            choices.append(SmartAttachmentClarificationChoice(id: "clarify.goal", actionLabel: .goal, routeType: .goal))
+        }
+        if lowercased.contains("idea") || lowercased.contains("maybe") || lowercased.contains("someday") {
+            choices.append(SmartAttachmentClarificationChoice(id: "clarify.idea", actionLabel: .idea, routeType: .idea))
+        }
+        let uniqueChoices = Array(Dictionary(grouping: choices, by: \.routeType).compactMap { $0.value.first })
+            .sorted { $0.routeType.rawValue < $1.routeType.rawValue }
+        guard uniqueChoices.count > 1 else { return nil }
+        return SmartAttachmentClarification(
+            question: "What should this become first?",
+            choices: Array(uniqueChoices.prefix(3))
+        )
     }
 
     func rankCandidates(

@@ -71,6 +71,66 @@ final class SmartAttachmentServiceTests: XCTestCase {
         XCTAssertEqual(result.clarification?.choices.count, 3)
     }
 
+    func testEB04AmbiguousClassificationAsksOneQuestionWithoutForcingRoute() {
+        let service = DefaultSmartAttachmentService()
+
+        let result = service.route(
+            SmartAttachmentInput(rawText: "Maybe build launch checklist tomorrow"),
+            candidates: [],
+            maxCandidateCount: 5
+        )
+
+        XCTAssertEqual(result.resultState, .needsClarification)
+        XCTAssertEqual(result.confidence, .needsClarification)
+        XCTAssertEqual(result.receiptLine, "Saved to Needs a Place")
+        XCTAssertEqual(result.explanation, "Saved to Needs a Place because this could become more than one useful thing.")
+        XCTAssertEqual(result.clarification?.question, "What should this become first?")
+        XCTAssertEqual(result.clarification?.choices.map(\.routeType), [.goal, .idea, .task])
+        XCTAssertEqual(result.actions, [.goal, .idea, .task])
+        XCTAssertEqual(result.captureRoute, .captureInbox)
+    }
+
+    func testEB04ProofClassificationDoesNotAskWhenLocalGoalEvidenceMatches() {
+        let service = DefaultSmartAttachmentService()
+
+        let result = service.route(
+            SmartAttachmentInput(rawText: "Finished launch proof tomorrow"),
+            candidates: [
+                SmartAttachmentDestinationCandidate(
+                    id: "goal-launch",
+                    label: "Launch",
+                    destinationKind: .existingGoal,
+                    supportedRouteTypes: [.proofItem]
+                )
+            ],
+            maxCandidateCount: 5
+        )
+
+        XCTAssertEqual(result.resultState, .attached)
+        XCTAssertNil(result.clarification)
+        XCTAssertEqual(result.selectedCandidate?.target.routeType, .proofItem)
+    }
+
+    func testEB04AmbiguousManualChoiceStillMapsToCaptureRequest() {
+        let adapter = SmartAttachmentCaptureAdapter()
+
+        let decision = adapter.decision(
+            rawText: "Maybe build launch checklist tomorrow",
+            sourceType: .todayQuickCapture,
+            sourceSurface: "Capture",
+            selectedRouteType: .task
+        )
+        let request = decision?.createCaptureRequest(
+            rawText: "Maybe build launch checklist tomorrow",
+            sourceType: .todayQuickCapture
+        )
+
+        XCTAssertEqual(decision?.receiptLine, "Saved as Task · Today")
+        XCTAssertEqual(request?.kind, .oneTimeCommitment)
+        XCTAssertEqual(request?.route, .planSeed)
+        XCTAssertEqual(request?.triageStatus, .assumedRoute)
+    }
+
     func testFailureUsesNeedsPlaceAndRetryCopyMetadata() {
         let service = DefaultSmartAttachmentService()
 
