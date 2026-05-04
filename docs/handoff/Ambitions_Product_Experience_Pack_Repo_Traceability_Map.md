@@ -1,6 +1,6 @@
 # Ambitions Product Experience Pack Repo Traceability Map
 
-Status: Batch 1A/1B/1C docs/planning artifact; no app implementation started
+Status: Batch 1A/1B/1C/1D docs/planning artifact; no app implementation started
 Date: 2026-05-04
 
 ## Purpose
@@ -167,6 +167,21 @@ correction, visible UI copy correction, accessibility label correction,
 receipt/source/privacy copy correction, and regression scans. Do not edit source
 copy without explicit scope, owner files, focused tests, and copy-scan evidence.
 
+## Batch 1D Source-Truth Packet And Readiness Gate Addendum
+
+Batch 1D created:
+
+- `docs/handoff/Ambitions_Product_Experience_Pack_Source_Truth_Packet.md`
+- `docs/audits/ambitions-product-experience-pack-batch-1d-readiness-gate-report.md`
+
+The source-truth packet assembles locked identity, objects, visual-board
+caveats, accessibility requirements, copy guardrails, anti-generic guardrails,
+Candidate/caveat register, repo handoff evidence, conflicts, and future stop
+conditions. The readiness gate rates Product Depth PD01 as Stop until the exact
+approval phrase is given, Batch 1E final file-boundary approval as Green/Yellow,
+narrow implementation planning as Yellow/Stop, and broad app implementation as
+Red.
+
 ## Top-Level Surface Mapping
 
 | Surface | Locked primary object | Current repo files | Apparent alignment | Apparent conflict | Caveat | Implementation risk | Future treatment | Recommendation |
@@ -226,7 +241,8 @@ copy without explicit scope, owner files, focused tests, and copy-scan evidence.
 
 ## Recommended Next Action
 
-Recommended: run Batch 1D docs-only source-truth packet assembly and readiness
-gate. It should assemble Batch 0 through Batch 1C evidence into a source-truth
-handoff packet without implementing app code. Do not start Product Depth unless
-the user says the exact approval phrase from the Product Depth manifest.
+Recommended: run Batch 1E docs-only final file-boundary approval and
+implementation-planning gate. It should preserve the Batch 1D source-truth
+packet, avoid app code, and prepare only the next user decision. Do not start
+Product Depth unless the user says the exact approval phrase from the Product
+Depth manifest.

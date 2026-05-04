@@ -271,8 +271,12 @@ Optional scan commands run:
 
 ## 23. Recommended Next Action
 
-Recommended one next action: Batch 1D docs-only source-truth packet assembly
-and readiness gate.
+Batch 1D follow-up completed in
+`docs/handoff/Ambitions_Product_Experience_Pack_Source_Truth_Packet.md` and
+`docs/audits/ambitions-product-experience-pack-batch-1d-readiness-gate-report.md`.
+
+Current recommended one next action: Batch 1E docs-only final file-boundary
+approval and implementation-planning gate.
 
 Do not start Product Depth unless the user gives the exact approval phrase from
 the Product Depth manifest.

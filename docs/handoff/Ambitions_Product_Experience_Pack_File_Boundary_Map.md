@@ -1,6 +1,6 @@
 # Ambitions Product Experience Pack File Boundary Map
 
-Status: Batch 1A preliminary map hardened by Batch 1B/1C; planning-only
+Status: Batch 1A preliminary map hardened by Batch 1B/1C/1D; planning-only
 Date: 2026-05-04
 
 ## Purpose
@@ -72,6 +72,8 @@ or source-truth boundary artifacts when the task stays docs-only.
 - `docs/audits/ambitions-product-experience-pack-batch-1a-boundary-report.md`
 - `docs/audits/ambitions-product-experience-pack-batch-1b-reconciliation-report.md`
 - `docs/audits/ambitions-product-experience-pack-batch-1c-copy-boundary-scan.md`
+- `docs/handoff/Ambitions_Product_Experience_Pack_Source_Truth_Packet.md`
+- `docs/audits/ambitions-product-experience-pack-batch-1d-readiness-gate-report.md`
 - `docs/audits/*product-experience*report.md`
 - `docs/codex/CONTEXT_INDEX.md` only if a later prompt asks to index the
   artifact.
@@ -305,7 +307,7 @@ gate for Product Experience Pack work.
 
 ## Boundary Recommendation
 
-The next safe docs action is Batch 1D source-truth packet assembly and
-readiness gate. It should stay docs-only and assemble Batch 0 through Batch 1C
-evidence without editing app code, theme tokens, navigation, persistence,
-runtime, CI, tests, previews, fixtures, or generated files.
+The next safe docs action is Batch 1E final file-boundary approval and
+implementation-planning gate. It should stay docs-only, preserve the Batch 1D
+source-truth packet, and avoid editing app code, theme tokens, navigation,
+persistence, runtime, CI, tests, previews, fixtures, or generated files.
