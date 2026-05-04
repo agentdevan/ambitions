@@ -438,7 +438,13 @@ Current 4.0 status:
   cues, Reduce Motion semantics, preview evidence, existing-state mappings, and
   focused design-system test proof without changing routes, raw values,
   persistence, product surfaces, LDI runtime, or release claims.
-- Queued / Blocked: SI15-SI18 pending global-order selection or `Start Signature Interface Train` plus PXOS/ME/CS/SI quality gates. LDI hooks are queued-only and do not rewrite SI01-SI14 history.
+- Complete: SI15 Accessibility Adaptive Interface Pass is complete as shared
+  accessibility/adaptive evidence for SI primitives. It adds adaptive axes,
+  review lanes, lane/axis requirements, visible fallbacks, VoiceOver summaries,
+  Reduce Motion equivalents, preview evidence, and focused design-system test
+  proof without changing routes, raw values, persistence, product surfaces, LDI
+  runtime, or release claims.
+- Queued / Blocked: SI16-SI18 pending global-order selection or `Start Signature Interface Train` plus PXOS/ME/CS/SI quality gates. LDI hooks are queued-only and do not rewrite SI01-SI15 history.
 - Queued / Blocked: PD01-PD18 pending `Start Product Depth Train` plus PXOS/ME/CS/SI/AOS-if-needed gates.
 - Queued / Blocked: AOS01-AOS30 pending `Start AOS Train`.
 - Queued / Blocked: LDI01-LDI22 Living Dream Intelligence Train pending AOS30 Green by default or explicit user decision for earlier dependency split.

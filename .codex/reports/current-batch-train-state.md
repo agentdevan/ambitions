@@ -2,7 +2,7 @@
 
 Date: 2026-05-04
 Active train: Signature Interface
-Current batch: SI15 Accessibility Adaptive Interface Pass queued
+Current batch: SI16 Preview Fixture And Visual QA Infrastructure queued
 Scope: Complete: EB03A Universal Capture Composer Routing Owner Map. Complete:
 EB03B Universal Capture Composer Routing Implementation. Complete: EB04
 Capture Classification And Clarification. Complete: EB05 Capture Clusters
@@ -468,24 +468,47 @@ public accessibility or profiling proof.
 
 ## Next Safe Path
 
-Run SI15 Accessibility Adaptive Interface Pass next if global train rules permit. Do not restart broad
+Run SI16 Preview Fixture And Visual QA Infrastructure next if global train rules permit. Do not restart broad
 EB03, EB04, EB05, EB06, EB14, EB15, EB16, EB17, EB18, EB26, EB27, EB28, EB29,
 EB30, EB08, EB09, EB10, EB11, EB12, EB33, EB34, EB35, EB36, EB37, EB38, EB39,
 EB40, CS10, SI01, SI02, SI03, SI04, SI05, SI06, SI07, SI08, SI09, SI10, SI11,
-SI12, SI13, SI14, or completed DAV / EB20-EB24 batches. SI15 must remain a
-bounded Signature Interface accessibility adaptive implementation/test pass
+SI12, SI13, SI14, SI15, or completed DAV / EB20-EB24 batches. SI16 must remain a
+bounded Signature Interface preview fixture and visual QA infrastructure pass
 unless its prompt
 requires a narrower stop or repair.
+
+## SI15 Accessibility Adaptive Interface Pass
+
+Date: 2026-05-04
+Result: PASS WITH YELLOW
+
+SI15 result: PASS WITH YELLOW. `docs/audits/si15-accessibility-adaptive-interface-report.md`
+records the shared accessibility/adaptive evidence matrix for SI primitives.
+`Sources/Components/AccessibilityAdaptiveInterfacePrimitives.swift` adds
+adaptive axes, review lanes, lane/axis requirements, visible fallbacks,
+VoiceOver summaries, Reduce Motion equivalents, manual-proof locks, and
+visual-only LDI hook semantics. `Sources/Previews/AccessibilityAdaptiveInterfacePreviews.swift`
+adds named default, Dynamic Type, and static-motion preview variants.
+`Native/AmbitionsTests/App/AccessibilityAdaptiveInterfaceDesignSystemTests.swift`
+adds focused automated proof. `xcodegen generate`, focused
+`AccessibilityAdaptiveInterfaceDesignSystemTests`, and `scripts/build-local.sh`
+passed. No routes, raw values, persistence/schema, dependencies, workflows,
+signing, entitlements, top-level tabs, product surfaces, runtime intelligence,
+LDI runtime, or release claims changed. Yellow items are no rendered screenshot,
+manual VoiceOver, toggled Reduce Motion walkthrough, tap-target/motor review,
+contrast review, cognitive-load review, human visual approval, physical-device
+proof, external accessibility proof, profiling proof, and existing advisory
+scan backlog.
 
 ## Living Dream Architecture Integration Pause
 
 Date: 2026-05-04
 Batch type: docs/Codex OS/global-train integration only.
 
-- SI01-SI14 completion history above remains binding and is not rewritten.
-- SI15 remains the next eligible implementation batch after SI14.
+- SI01-SI15 completion history above remains binding and is not rewritten.
+- SI16 remains the next eligible implementation batch after SI15.
 - LDI01-LDI22 Living Dream Intelligence Train is inserted after AOS30 by default.
-- Queued SI15-SI18, PD01-PD18, and AOS01-AOS30 prompts now carry LDI hook notes only where future/queued.
+- Queued SI16-SI18, PD01-PD18, and AOS01-AOS30 prompts now carry LDI hook notes only where future/queued.
 - This integration does not claim runtime Living Dream behavior, remote model service,
   server-owned continuity, Ambitions-operated data storage, CloudKit entitlement changes,
   device proof, public accessibility compliance, beta distribution proof,
