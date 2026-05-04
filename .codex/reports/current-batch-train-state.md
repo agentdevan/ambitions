@@ -2,7 +2,7 @@
 
 Date: 2026-05-03
 Active train: Ambitions 4.0 External Brain Foundation
-Current batch: EB26 next eligible after EB18 implementation
+Current batch: EB27 next eligible after EB26 implementation
 Scope: Complete: EB03A Universal Capture Composer Routing Owner Map. Complete:
 EB03B Universal Capture Composer Routing Implementation. Complete: EB04
 Capture Classification And Clarification. Complete: EB05 Capture Clusters
@@ -60,8 +60,9 @@ accessibility/release claim change was made.
   as a bounded You/Profile private-mode and sensitive-area controls
   implementation. EB17 is complete as a bounded receipt recovery/audit/export
   summary implementation. EB18 is complete as a bounded receipt source
-  freshness/privacy/non-claim summary implementation. EB26 is the next eligible
-  EB batch.
+  freshness/privacy/non-claim summary implementation. EB26 is complete as a
+  bounded shared design-system cognitive-load/interface-density primitive
+  implementation. EB27 is the next eligible EB batch.
 - PXEQ is a mandatory product-experience gate for EB UI-affecting batches; it
   is not a shipped app feature and not a new EB batch identity.
 - Optimized global order after EB32 places DAV01-DAV15 before UI-heavy EB
@@ -144,9 +145,19 @@ behavior, and public-proof unlocking not implemented, UI preview/screenshot
 proof not applicable because no UI changed, human/device/VoiceOver review not
 run, Instruments/battery proof not run, and existing advisory backlog.
 
+EB26 result: PASS WITH YELLOW. `docs/audits/eb26-cognitive-load-modes-interface-density-report.md`
+records the bounded shared design-system `AmbitionCognitiveLoadMode`,
+`AmbitionInterfaceDensityLevel`, and
+`AmbitionCognitiveLoadDisplayProfile` primitives, focused density tests,
+`swift build`, and `scripts/build-local.sh`. Yellow items are current UI
+settings consumption not implemented, rendered screenshot proof not produced,
+human/device/VoiceOver review not run, Instruments/battery proof not run, and
+existing advisory backlog.
+
 ## Next Safe Path
 
-Run EB26 Cognitive Load Modes next. Do not restart broad EB03, EB04, EB05,
-EB06, EB14, EB15, EB16, EB17, EB18, or completed DAV / EB20-EB24 batches. EB26
-must name exact owner files, focused tests, accessibility/privacy proof, and
-rollback before widening beyond cognitive-load mode behavior.
+Run EB27 Dynamic Type VoiceOver Reduce Motion next. Do not restart broad EB03,
+EB04, EB05, EB06, EB14, EB15, EB16, EB17, EB18, EB26, or completed DAV /
+EB20-EB24 batches. EB27 must name exact owner files, focused tests,
+accessibility/privacy proof, and rollback before widening beyond Dynamic Type,
+VoiceOver, or Reduce Motion behavior.

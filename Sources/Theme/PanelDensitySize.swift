@@ -40,6 +40,138 @@ public enum AmbitionPanelSize: String, CaseIterable, Codable, Sendable, Identifi
     }
 }
 
+public enum AmbitionInterfaceDensityLevel: String, CaseIterable, Codable, Sendable, Identifiable {
+    case low
+    case standard
+    case high
+
+    public var id: String { rawValue }
+
+    public var title: String {
+        switch self {
+        case .low: "Low"
+        case .standard: "Standard"
+        case .high: "High"
+        }
+    }
+
+    public var displayDensity: AmbitionDisplayDensity {
+        switch self {
+        case .low: .minimal
+        case .standard: .balanced
+        case .high: .detailed
+        }
+    }
+}
+
+public enum AmbitionCognitiveLoadMode: String, CaseIterable, Codable, Sendable, Identifiable {
+    case calm
+    case balanced
+    case focus
+    case recovery
+
+    public var id: String { rawValue }
+
+    public var title: String {
+        switch self {
+        case .calm: "Calm"
+        case .balanced: "Balanced"
+        case .focus: "Focus"
+        case .recovery: "Recovery"
+        }
+    }
+
+    public var purposeLabel: String {
+        switch self {
+        case .calm:
+            "Reduce visible detail and keep the primary decision clear."
+        case .balanced:
+            "Show useful context while keeping optional detail behind disclosure."
+        case .focus:
+            "Keep one action dominant and collapse neighboring detail."
+        case .recovery:
+            "Make recovery steps larger, calmer, and non-shaming."
+        }
+    }
+
+    public var defaultInterfaceDensity: AmbitionInterfaceDensityLevel {
+        switch self {
+        case .calm, .focus, .recovery:
+            .low
+        case .balanced:
+            .standard
+        }
+    }
+
+    public var defaultPanelSize: AmbitionPanelSize {
+        switch self {
+        case .calm, .balanced, .focus:
+            .comfortable
+        case .recovery:
+            .large
+        }
+    }
+}
+
+public struct AmbitionCognitiveLoadDisplayProfile: Hashable, Codable, Sendable {
+    public let mode: AmbitionCognitiveLoadMode
+    public let densityLevel: AmbitionInterfaceDensityLevel
+    public let panelSize: AmbitionPanelSize
+    public let configuration: AmbitionPanelDisplayConfiguration
+    public let explanationLabel: String
+    public let allowsAmbientMotion: Bool
+    public let keepsOptionalPanelsCollapsed: Bool
+    public let voiceOverSummaryRequired: Bool
+    public let colorOnlyMeaningAllowed: Bool
+
+    public init(
+        mode: AmbitionCognitiveLoadMode = .balanced,
+        densityLevel: AmbitionInterfaceDensityLevel? = nil,
+        panelSize: AmbitionPanelSize? = nil,
+        contentSizeCategory: ContentSizeCategory = .large,
+        reduceMotion: Bool = false
+    ) {
+        let requestedDensity = densityLevel ?? mode.defaultInterfaceDensity
+        let requestedSize = panelSize ?? mode.defaultPanelSize
+        let baseConfiguration = AmbitionPanelDisplayConfiguration(
+            density: requestedDensity.displayDensity,
+            size: requestedSize
+        )
+        let resolvedConfiguration = baseConfiguration.resolved(
+            for: contentSizeCategory,
+            reduceMotion: reduceMotion
+        )
+        let resolvedDensityLevel = AmbitionInterfaceDensityLevel(
+            displayDensity: resolvedConfiguration.effectiveDensity
+        )
+
+        self.mode = mode
+        self.densityLevel = resolvedDensityLevel
+        self.panelSize = resolvedConfiguration.size
+        self.configuration = resolvedConfiguration
+        self.explanationLabel = mode.purposeLabel
+        self.allowsAmbientMotion = reduceMotion == false && mode == .balanced
+        self.keepsOptionalPanelsCollapsed = mode != .balanced ||
+            resolvedDensityLevel != .high ||
+            resolvedConfiguration.shouldCollapseOptionalPanels
+        self.voiceOverSummaryRequired = true
+        self.colorOnlyMeaningAllowed = false
+    }
+}
+
+public extension AmbitionInterfaceDensityLevel {
+    init(displayDensity: AmbitionDisplayDensity) {
+        switch displayDensity {
+        case .minimal:
+            self = .low
+        case .balanced:
+            self = .standard
+        case .detailed:
+            self = .high
+        }
+    }
+}
+
 public struct AmbitionPanelDisplayConfiguration: Hashable, Codable, Sendable {
     public static let `default` = AmbitionPanelDisplayConfiguration(
         density: .balanced,

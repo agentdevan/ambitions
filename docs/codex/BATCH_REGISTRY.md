@@ -214,7 +214,14 @@ Current 4.0 status:
   top-level-tab, dependency, workflow, signing, network, sync/account/cloud
   behavior, production asset, or release-claim changes. EB26 Cognitive Load
   Modes is the next eligible EB batch.
-- Active Planned / Queued: EB08-EB12, EB20-EB24, EB03-EB06, and EB26-EB40 Ambitions 4.0 External Brain Foundation expansion segment; not completed and not implemented in app behavior.
+- Complete: EB26 Cognitive Load Modes And Interface Density is complete as a
+  bounded shared design-system primitive implementation. It adds non-persistent
+  cognitive-load mode, interface-density level, and display-profile primitives
+  with focused density tests only, without current surface consumption, route,
+  persistence/schema, top-level-tab, dependency, workflow, signing, network,
+  sync/account/cloud behavior, production asset, or release-claim changes. EB27
+  Dynamic Type VoiceOver Reduce Motion is the next eligible EB batch.
+- Active Planned / Queued: EB08-EB12, EB20-EB24, EB03-EB06, and EB27-EB40 Ambitions 4.0 External Brain Foundation expansion segment; not completed and not implemented in app behavior.
 - Queued / Blocked: SI01-SI18 pending global-order selection or `Start Signature Interface Train` plus PXOS/ME/CS/SI quality gates.
 - Queued / Blocked: PD01-PD18 pending `Start Product Depth Train` plus PXOS/ME/CS/SI/AOS-if-needed gates.
 - Queued / Blocked: AOS01-AOS30 pending `Start AOS Train`.

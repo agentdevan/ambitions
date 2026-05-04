@@ -145,4 +145,66 @@ final class PanelDensitySizeDesignSystemTests: XCTestCase {
             }
         }
     }
+
+    func testEB26CognitiveLoadModesMapToSafeDisplayProfiles() {
+        let theme = AmbitionTheme.theme(for: .dark)
+
+        for mode in AmbitionCognitiveLoadMode.allCases {
+            let profile = AmbitionCognitiveLoadDisplayProfile(mode: mode)
+            let heroDecision = theme.panelDisplayDecision(
+                for: .heroDecision,
+                configuration: profile.configuration
+            )
+            let trustDecision = theme.panelDisplayDecision(
+                for: .trustActionNeeded,
+                configuration: profile.configuration
+            )
+
+            XCTAssertEqual(profile.mode, mode)
+            XCTAssertFalse(profile.explanationLabel.isEmpty)
+            XCTAssertTrue(profile.voiceOverSummaryRequired)
+            XCTAssertFalse(profile.colorOnlyMeaningAllowed)
+            XCTAssertEqual(heroDecision.visibility, .full)
+            XCTAssertNotEqual(trustDecision.visibility, .hidden)
+        }
+    }
+
+    func testEB26LargeDynamicTypeForcesLowInterfaceDensity() {
+        let profile = AmbitionCognitiveLoadDisplayProfile(
+            mode: .balanced,
+            densityLevel: .high,
+            panelSize: .comfortable,
+            contentSizeCategory: .accessibilityExtraLarge
+        )
+
+        XCTAssertEqual(profile.densityLevel, .low)
+        XCTAssertEqual(profile.configuration.effectiveDensity, .minimal)
+        XCTAssertTrue(profile.keepsOptionalPanelsCollapsed)
+    }
+
+    func testEB26ReduceMotionDisablesAmbientMotionWithoutChangingMeaning() {
+        let normal = AmbitionCognitiveLoadDisplayProfile(
+            mode: .balanced,
+            reduceMotion: false
+        )
+        let reduced = AmbitionCognitiveLoadDisplayProfile(
+            mode: .balanced,
+            reduceMotion: true
+        )
+
+        XCTAssertTrue(normal.allowsAmbientMotion)
+        XCTAssertFalse(reduced.allowsAmbientMotion)
+        XCTAssertEqual(normal.explanationLabel, reduced.explanationLabel)
+        XCTAssertTrue(reduced.voiceOverSummaryRequired)
+    }
+
+    func testEB26RecoveryModeUsesLargeLowDensityNonColorMeaning() {
+        let profile = AmbitionCognitiveLoadDisplayProfile(mode: .recovery)
+
+        XCTAssertEqual(profile.densityLevel, .low)
+        XCTAssertEqual(profile.panelSize, .large)
+        XCTAssertTrue(profile.keepsOptionalPanelsCollapsed)
+        XCTAssertFalse(profile.colorOnlyMeaningAllowed)
+        XCTAssertTrue(profile.explanationLabel.localizedCaseInsensitiveContains("non-shaming"))
+    }
 }
