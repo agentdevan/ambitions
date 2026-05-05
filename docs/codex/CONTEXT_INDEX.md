@@ -349,6 +349,27 @@ generic dashboards, stacked-card top-level screens, habit tracker modes,
 calendar clones, chatbot-first AI surfaces, inbox/notes modes, or enterprise
 project-management systems.
 
+## Platform / Framework / Compliance Context
+
+Use this context when the global full-stack order selects PFC batches:
+
+- `docs/canon/Ambitions_Platform_Legal_And_Framework_Completion_Plan.md`
+- `docs/codex/batch-trains/PFC01_PFC40_PLATFORM_FRAMEWORK_COMPLIANCE_TRAIN.md`
+- `docs/codex/batches/PFC01_Repo_And_Build_System_Inventory_Prompt.md`
+- `docs/codex/batches/PFC02_Architecture_Boundary_And_Module_Map_Prompt.md`
+- `docs/codex/batches/PFC03_Dead_Code_Prompt_Artifact_Naming_Smell_Audit_Prompt.md`
+- `docs/audits/pfc01-repo-build-system-inventory-report.md`
+- `docs/audits/pfc02-architecture-boundary-module-map-report.md`
+- `docs/audits/pfc03-dead-code-prompt-artifact-naming-smell-audit-report.md`
+
+PFC01 is Green as docs-only repo/build inventory evidence. PFC02 is Green as
+docs-only architecture boundary evidence. PFC03 is Green as docs-only
+dead-code, prompt-artifact, naming-smell, and cleanup-queue evidence. PFC03
+does not authorize deletion, rename, route/raw-value change, production Swift
+edits, config/dependency/workflow changes, or release/handoff readiness claims.
+PFC04 Dependency And Supply Chain Policy Enforcement is the next eligible PFC
+batch under the full-stack order.
+
 
 ## Living Dream Intelligence Context
 

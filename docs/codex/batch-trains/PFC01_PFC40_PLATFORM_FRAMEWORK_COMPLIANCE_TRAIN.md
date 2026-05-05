@@ -1,7 +1,7 @@
 # PFC01-PFC40 Platform / Framework / Compliance Completion Train
 <!-- markdownlint-disable MD013 -->
 
-Status: Active-scope planning truth; PFC01 Green; PFC02 Green; PFC03 queued next. No implementation starts by reading this file.
+Status: Active-scope planning truth; PFC01 Green; PFC02 Green; PFC03 Green; PFC04 queued next. No implementation starts by reading this file.
 Date: 2026-05-05
 Train code: PFC
 
@@ -83,6 +83,10 @@ Type: Audit/repair planning.
 Owner: Maintainability.
 Goal: Identify dead files, prompt-built residue, stale names, duplicate models, and unexplained folders.
 Required result: cleanup queue; no deletion without owner proof.
+Status: Green as docs-only cleanup queue and naming-smell classification.
+Existing stub, placeholder, compatibility, and stale-copy signals are
+Yellow-owned by future maintainability, shell, copy-boundary, and platform
+owner batches; no deletion or rename is authorized by PFC03.
 
 ### PFC04 — Dependency And Supply Chain Policy Enforcement
 

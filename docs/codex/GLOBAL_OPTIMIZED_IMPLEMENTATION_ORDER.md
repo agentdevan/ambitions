@@ -64,8 +64,9 @@ Train-specific approval remains valid for a single train only:
 
 Full-stack insertion after optimized row 010: PFC01 is complete / Green as
 repo/build inventory. PFC02 is complete / Green as architecture boundary map.
-PFC03-PFC04 remain before row 011 FCP implementation under the stricter
-full-stack order.
+PFC03 is complete / Green as dead-code, prompt-artifact, and naming-smell audit.
+PFC04 remains before row 011 FCP implementation under the stricter full-stack
+order.
 | 011 | FCP17 Schedule / Availability / Defaults Center | FCP | Implementation | Build Availability Center before Start Here relies on time-fit proof. | PD16; FCP01-FCP04. | Single-batch. |
 | 012 | FCP06 Receipt Drawer / Trust Layer | FCP | Implementation | Shared trust drawer should exist before Start Here/Rail/Plan/Goal integrations mature. | FCP01-FCP04; PD15/PD17 preferred. | Single-batch. |
 | 013 | FCP05 Start Here Surface | FCP | Implementation | Start Here becomes flagship daily decision object after trust and availability foundations. | FCP01-FCP04; PD02-PD04; FCP06/FCP17 preferred. | Single-batch. |
