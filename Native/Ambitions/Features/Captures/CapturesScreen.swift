@@ -294,14 +294,17 @@ struct CapturesScreen: View {
                         .frame(maxWidth: .infinity, alignment: .leading)
                 }
 
-                placementReview(capture.placementReviewState)
+                placementReview(capture.placementReviewState, correction: capture.correctionReviewState)
 
                 captureActions(for: capture, activeGoalOptions: activeGoalOptions)
             }
         }
     }
 
-    private func placementReview(_ review: CapturePlacementReviewState) -> some View {
+    private func placementReview(
+        _ review: CapturePlacementReviewState,
+        correction: CaptureCorrectionReviewState
+    ) -> some View {
         VStack(alignment: .leading, spacing: theme.spacing.xs) {
             Divider()
 
@@ -318,12 +321,21 @@ struct CapturesScreen: View {
             Label(review.privacyLabel, systemImage: "lock.shield")
             Label(review.confirmationLabel, systemImage: "hand.raised")
             Label(review.archiveLabel, systemImage: "archivebox")
+
+            Label(correction.title, systemImage: "arrow.uturn.backward")
+                .font(theme.typography.caption.weight(.semibold))
+                .foregroundStyle(theme.colors.textPrimary)
+            Label(correction.routeCorrectionLabel, systemImage: "arrow.triangle.branch")
+            Label(correction.notGoalLabel, systemImage: "target")
+            Label(correction.notNowLabel, systemImage: "moon")
+            Label(correction.receiptLabel, systemImage: "doc.text.magnifyingglass")
+            Label(correction.learningBoundaryLabel, systemImage: "hand.raised")
         }
         .font(theme.typography.caption)
         .foregroundStyle(theme.colors.textSecondary)
         .accessibilityElement(children: .combine)
         .accessibilityLabel(review.title)
-        .accessibilityValue(review.accessibilityValue)
+        .accessibilityValue([review.accessibilityValue, correction.accessibilityValue].joined(separator: ". "))
         .accessibilityIdentifier("captures.placement-review.\(review.id)")
     }
 

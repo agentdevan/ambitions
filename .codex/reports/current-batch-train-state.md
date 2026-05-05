@@ -2,12 +2,12 @@
 
 Date: 2026-05-04
 Active train: Product Depth
-Current batch: PD09 complete / accepted Yellow
-Scope: PD09 deepened only Capture-owned placement review presentation behind
-existing captured items. It added presentation-derived placement review state,
-Capture UI, focused Capture tests, and Product Depth docs. It did not turn
-Capture into an inbox or feed, did not add a top-level destination, did not
-perform silent placement, and did not touch persistence/schema, sync/auth/
+Current batch: PD10 complete / accepted Yellow
+Scope: PD10 deepened only Capture-owned correction review presentation behind
+existing captured items. It added presentation-derived correction options for
+place-somewhere-else, not-a-goal, not-now, correction receipt, and local review
+boundaries. It did not add hidden learning, user-facing confidence language,
+automatic goal creation, personalization, persistence/schema, sync/auth/
 network, AI/LDI runtime, navigation, route/raw values, CI/config, dependencies,
 release/platform claims, broad app implementation, or Candidate finalization.
 Complete: EB03A
@@ -123,17 +123,17 @@ accessibility/release claim change was made.
 
 ## Current Validation Result
 
-PD09 result: PASS WITH ACCEPTED YELLOW.
-`docs/audits/pd09-capture-placement-review-report.md` records the bounded
-Capture placement review presentation layer, destination/consequence/privacy/
-confirmation/archive labels, accessibility summary, focused Capture and Smart
-Attachment tests, `xcodegen generate`, `scripts/build-local.sh`, Product Depth
-copy/drift/release scans, accessibility and Reduce Motion advisory scans, doc
-QA, batch gate, and boundary scan. Yellow items are no screenshot/rendered
+PD10 result: PASS WITH ACCEPTED YELLOW.
+`docs/audits/pd10-capture-correction-review-report.md` records the bounded
+Capture correction review presentation layer, place-somewhere-else, not-a-goal,
+not-now, correction receipt, and no-hidden-memory labels, focused Capture and
+Smart Attachment tests, `xcodegen generate`, `scripts/build-local.sh`, Product
+Depth copy/drift/release scans, accessibility and Reduce Motion advisory scans,
+doc QA, batch gate, and boundary scan. Yellow items are no screenshot/rendered
 proof, no human/device/VoiceOver/Dynamic Type/Reduce Motion walkthrough,
 existing file-size/doc-QA advisory backlog, internal compatibility vocabulary
 in existing Capture tests/source, and the generic boundary script flagging
-PD09-allowed Capture files despite explicit Capture implementation scope.
+PD10-allowed Capture files despite explicit Capture implementation scope.
 
 PD03 result: PASS WITH ACCEPTED YELLOW.
 `docs/audits/pd03-today-step-session-depth-report.md` records the bounded

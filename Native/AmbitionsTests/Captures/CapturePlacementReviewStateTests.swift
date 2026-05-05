@@ -52,6 +52,22 @@ final class CapturePlacementReviewStateTests: XCTestCase {
         XCTAssertFalse(review.accessibilityValue.localizedCaseInsensitiveContains("notification feed"))
     }
 
+    func testCorrectionReviewNamesUserOwnedOptionsWithoutHiddenLearning() {
+        let capture = makeCapture(status: .actionable, route: .goalSeed)
+
+        let correction = capture.correctionReviewState
+
+        XCTAssertEqual(correction.title, "Correction options")
+        XCTAssertTrue(correction.routeCorrectionLabel.localizedCaseInsensitiveContains("Place somewhere else"))
+        XCTAssertTrue(correction.notGoalLabel.localizedCaseInsensitiveContains("Not a goal"))
+        XCTAssertTrue(correction.notNowLabel.localizedCaseInsensitiveContains("Review later"))
+        XCTAssertTrue(correction.receiptLabel.localizedCaseInsensitiveContains("reviewable"))
+        XCTAssertTrue(correction.learningBoundaryLabel.localizedCaseInsensitiveContains("no hidden memory"))
+        XCTAssertFalse(correction.accessibilityValue.localizedCaseInsensitiveContains("AI confidence"))
+        XCTAssertFalse(correction.accessibilityValue.localizedCaseInsensitiveContains("confidence percentage"))
+        XCTAssertFalse(correction.accessibilityValue.localizedCaseInsensitiveContains("fully automated"))
+    }
+
     private func makeCapture(
         status: CaptureStatus,
         route: CaptureRoute,

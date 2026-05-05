@@ -25,6 +25,26 @@ struct CapturePlacementReviewState: Sendable, Equatable, Identifiable {
     }
 }
 
+struct CaptureCorrectionReviewState: Sendable, Equatable, Identifiable {
+    let id: String
+    let title: String
+    let routeCorrectionLabel: String
+    let notGoalLabel: String
+    let notNowLabel: String
+    let receiptLabel: String
+    let learningBoundaryLabel: String
+
+    var accessibilityValue: String {
+        [
+            routeCorrectionLabel,
+            notGoalLabel,
+            notNowLabel,
+            receiptLabel,
+            learningBoundaryLabel
+        ].joined(separator: ". ")
+    }
+}
+
 extension Capture {
     var placementReviewState: CapturePlacementReviewState {
         CapturePlacementReviewState(
@@ -38,6 +58,18 @@ extension Capture {
             confirmationLabel: placementConfirmationLabel,
             archiveLabel: "Archive keeps it out of active review.",
             state: placementVisualState
+        )
+    }
+
+    var correctionReviewState: CaptureCorrectionReviewState {
+        CaptureCorrectionReviewState(
+            id: "capture-correction-review-\(id)",
+            title: "Correction options",
+            routeCorrectionLabel: routeCorrectionLabel,
+            notGoalLabel: notGoalLabel,
+            notNowLabel: "Not now: Review later keeps it out of Today.",
+            receiptLabel: "Correction receipt: the change you choose is reviewable.",
+            learningBoundaryLabel: "Placement choices stay local and reviewable; no hidden memory changes."
         )
     }
 
@@ -126,6 +158,24 @@ extension Capture {
             .warning
         case .optionalSomeday, .archived:
             .disabled
+        }
+    }
+
+    private var routeCorrectionLabel: String {
+        switch status {
+        case .archived:
+            "Archived captures stay out of active correction."
+        default:
+            "Place somewhere else: choose Task, Goal, Waiting, Review later, or Archive."
+        }
+    }
+
+    private var notGoalLabel: String {
+        switch route {
+        case .goalSeed, .goalAttachment:
+            "Not a goal: keep it as Task, Idea, Waiting, or Review later."
+        default:
+            "Not a goal: no Goal is created unless you choose Grow into Goal."
         }
     }
 }
