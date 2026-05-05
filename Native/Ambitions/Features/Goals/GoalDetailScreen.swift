@@ -475,7 +475,7 @@ private struct GoalPathBuilderCard: View {
 
     private var phases: some View {
         VStack(alignment: .leading, spacing: theme.spacing.sm) {
-            SectionHeader(title: "Roadmap", subtitle: "Phases stay connected to proof and the next step.")
+            SectionHeader(title: "Path shape", subtitle: "Phases stay connected to proof and the next step.")
             ForEach(state.phases) { phase in
                 WidgetCard(state: phase.state) {
                     VStack(alignment: .leading, spacing: theme.spacing.xs) {
@@ -503,7 +503,7 @@ private struct GoalPathBuilderCard: View {
 
     private var forks: some View {
         VStack(alignment: .leading, spacing: theme.spacing.sm) {
-            SectionHeader(title: "Forks", subtitle: "Compare before changing the path.")
+            SectionHeader(title: "Route options", subtitle: "Indicators only; compare before changing the path.")
             ForEach(state.forks) { fork in
                 WidgetCard(state: fork.state) {
                     VStack(alignment: .leading, spacing: theme.spacing.xs) {
@@ -531,7 +531,7 @@ private struct GoalPathBuilderCard: View {
 
     private var proofRequirements: some View {
         VStack(alignment: .leading, spacing: theme.spacing.sm) {
-            SectionHeader(title: "Proof checks", subtitle: "Evidence keeps the roadmap honest.")
+            SectionHeader(title: "Proof checks", subtitle: "Evidence keeps the path shape honest.")
             ForEach(state.proofRequirements) { proof in
                 HStack(alignment: .top, spacing: theme.spacing.sm) {
                     Image(systemName: "checkmark.seal")

@@ -2334,7 +2334,7 @@ private extension RepositoryBackedGoalsService {
             ?? nextMovement?.summary
             ?? missionControl.primaryNextMove.detail
         let breadcrumbLabels = Array((missionControl.breadcrumb.labels + ["Path Builder"]).prefix(4))
-        let budget = "Bounded roadmap: \(phaseStates.count) phases, \(forks.count) forks, \(proofRequirements.count) proof checks."
+        let budget = "Bounded path shape: \(phaseStates.count) phases, \(forks.count) route options, \(proofRequirements.count) proof checks."
 
         return GoalPathBuilderState(
             title: "Path Builder",
@@ -2344,16 +2344,16 @@ private extension RepositoryBackedGoalsService {
             forks: forks,
             proofRequirements: proofRequirements,
             todayConnectionTitle: todayTitle,
-            todayConnectionSummary: todaySummary.isEmpty ? "Keep one believable next step visible before widening the roadmap." : todaySummary,
+            todayConnectionSummary: todaySummary.isEmpty ? "Keep one believable next step visible before widening the path shape." : todaySummary,
             planConnectionSummary: "Plan should only protect the next believable window; wider changes still need review.",
             decisionReceiptSummary: missionControl.decisions.items.first?.summary
                 ?? "Path changes should leave a decision or proof trail before they reshape the plan.",
-            roadmapListTitle: "Roadmap list",
+            roadmapListTitle: "Path list",
             roadmapListSummary: "The same phases are available as a plain list for review.",
             performanceBudgetSummary: budget,
             accessibilityLabel: "Path Builder",
             accessibilityValue: "\(phaseStates.count) phases, \(forks.count) forks, \(proofRequirements.count) proof checks. Next step: \(todayTitle).",
-            accessibilityHint: "Review the roadmap as phases, forks, proof, and the next step before changing the path."
+            accessibilityHint: "Review the path shape as phases, route options, proof, and the next step before changing the path."
         )
     }
 
@@ -2565,7 +2565,7 @@ private extension RepositoryBackedGoalsService {
                     headline: proofSummary.latestTitle ?? proofSummary.title,
                     summary: proofSummary.detail,
                     detail: archive.learning.isEmpty
-                        ? "Completed work stays attached as evidence, not as a trophy."
+                        ? "Completed work stays attached as evidence, not as celebration."
                         : archive.learning,
                     badgeTitle: proofSummary.count == 0 ? "No proof yet" : "Evidence visible",
                     systemImage: "checkmark.seal",
@@ -2609,7 +2609,7 @@ private extension RepositoryBackedGoalsService {
                     detail: [
                         pathDetail,
                         "Decisions: \(decisionHeadline).",
-                        "Horizon stays directional, not a roadmap or Gantt chart."
+                        "Horizon stays directional, not a rigid planning chart."
                     ].joined(separator: " "),
                     badgeTitle: "Direction",
                     systemImage: "point.topleft.down.curvedto.point.bottomright.up",

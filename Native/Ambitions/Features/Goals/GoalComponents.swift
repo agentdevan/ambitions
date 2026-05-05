@@ -1185,15 +1185,15 @@ struct GoalDetailFilmstripCard: View {
     let stages: [GoalPathStage]
 
     var body: some View {
-        GoalDetailSectionCard(title: "Path filmstrip", subtitle: "Movement stays visible before deeper tactics.") {
+        GoalDetailSectionCard(title: "Lifecycle path", subtitle: "Current position, proof, risk, and horizon stay visible before deeper tactics.") {
             ScrollView(.horizontal, showsIndicators: false) {
                 HStack(spacing: theme.spacing.sm) {
                     ForEach(stages) { stage in
                         VStack(alignment: .leading, spacing: theme.spacing.xs) {
                             HStack(alignment: .top, spacing: theme.spacing.xs) {
-                                Circle()
-                                    .fill(color(for: stage))
-                                    .frame(width: 10, height: 10)
+                                Image(systemName: symbol(for: stage))
+                                    .font(.system(size: theme.icon.smallSize, weight: theme.icon.symbolWeight))
+                                    .foregroundStyle(color(for: stage))
                                 VStack(alignment: .leading, spacing: theme.spacing.xxxs) {
                                     Text(stage.statusLabel)
                                         .font(theme.typography.micro)
@@ -1205,6 +1205,8 @@ struct GoalDetailFilmstripCard: View {
                                 Spacer(minLength: theme.spacing.sm)
                                 TagPill(stage.stepCountLabel, state: stage.state)
                             }
+
+                            markerRow(for: stage)
 
                             Text(stage.summary)
                                 .font(theme.typography.caption)
@@ -1229,12 +1231,43 @@ struct GoalDetailFilmstripCard: View {
                                 .fill(color(for: stage))
                                 .frame(width: 3)
                         }
+                        .accessibilityElement(children: .combine)
+                        .accessibilityLabel(stage.title)
+                        .accessibilityValue(stage.accessibilitySummary)
+                        .accessibilityHint("Path stage marker. No color is required to understand this state.")
                     }
                 }
                 .padding(.vertical, 1)
             }
         }
         .accessibilityIdentifier("goal-detail.path-filmstrip")
+    }
+
+    @ViewBuilder
+    private func markerRow(for stage: GoalPathStage) -> some View {
+        HStack(spacing: theme.spacing.xs) {
+            Label(stage.lifecycleMarkerLabel, systemImage: symbol(for: stage))
+                .labelStyle(.titleAndIcon)
+            Text(stage.progressShapeLabel)
+
+            if let proof = stage.proofMarkerLabel {
+                Label(proof, systemImage: "checkmark.seal")
+                    .labelStyle(.titleAndIcon)
+            }
+
+            if let risk = stage.riskMarkerLabel {
+                Label(risk, systemImage: "exclamationmark.triangle")
+                    .labelStyle(.titleAndIcon)
+            }
+
+            if let route = stage.routeIndicatorLabel {
+                Label(route, systemImage: "arrow.triangle.branch")
+                    .labelStyle(.titleAndIcon)
+            }
+        }
+        .font(theme.typography.micro)
+        .foregroundStyle(theme.colors.textTertiary)
+        .lineLimit(2)
     }
 
     private func color(for stage: GoalPathStage) -> Color {
@@ -1247,6 +1280,19 @@ struct GoalDetailFilmstripCard: View {
             return theme.colors.warning
         case .upcoming:
             return theme.colors.textTertiary
+        }
+    }
+
+    private func symbol(for stage: GoalPathStage) -> String {
+        switch stage.position {
+        case .completed:
+            "checkmark.seal"
+        case .current:
+            "scope"
+        case .blocked:
+            "exclamationmark.triangle"
+        case .upcoming:
+            "arrow.triangle.branch"
         }
     }
 }

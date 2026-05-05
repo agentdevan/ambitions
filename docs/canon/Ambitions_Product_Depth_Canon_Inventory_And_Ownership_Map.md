@@ -1,7 +1,7 @@
 # Ambitions Product Depth Canon, Inventory, And Ownership Map
 <!-- markdownlint-disable MD013 -->
 
-Status: PD01 source-truth map; PD02 accepted Yellow as bounded Today Step Detail implementation; PD03 accepted Yellow as bounded Today Step Session implementation; PD04 accepted Yellow as bounded Today recovery/closure implementation; PD05 Green as bounded Goals Mission Control detail architecture implementation
+Status: PD01 source-truth map; PD02 accepted Yellow as bounded Today Step Detail implementation; PD03 accepted Yellow as bounded Today Step Session implementation; PD04 accepted Yellow as bounded Today recovery/closure implementation; PD05 Green as bounded Goals Mission Control detail architecture implementation; PD06 Green as bounded Goal Lifecycle and Path Visualization implementation
 Date: 2026-05-04
 
 ## Purpose
@@ -89,7 +89,7 @@ stacked-card top-level composition.
 | Step Session depth | Today | PD03 | Accepted Yellow implementation evidence | PD02 accepted Yellow, SI05/SI10/SI12/SI13/SI17, ME Today/TodayPanels, accessibility/copy | Step-first execution environment implemented; timer remains secondary and no persistence/runtime claim is added. |
 | Recovery and closure depth | Today / Recovery | PD04 | Accepted Yellow implementation evidence | PD02 accepted Yellow, PX07/PX09, SI10/SI13, AOS if runtime recovery logic changes | Closure sheet now exposes humane consequence/recovery copy and receipt boundary; no runtime recovery or silent plan mutation claim. |
 | MissionControlTimeSpine | Goals | PD05 | Green implementation evidence | PX03/PX14, SI06/SI07/SI10/SI14/SI17, ME Goals, CS if routes/raw values touched | Visible Goal Detail lane order reconciled to Completed -> Now -> Friction -> Next -> Horizon while preserving internal lane-kind compatibility. |
-| Goal lifecycle/path visualization | Goals | PD06 | Candidate implementation owner mapped | PD05 Green, SI06/SI07/SI12/SI17, visual/accessibility gates | Must not become KPI/OKR or decorative path. |
+| Goal lifecycle/path visualization | Goals | PD06 | Green implementation evidence | PD05 Green, SI06/SI07/SI12/SI17, visual/accessibility gates | Goal Detail path stages now expose text-plus-symbol lifecycle, progress, proof, risk, and route markers with non-color accessibility summaries. Must not become KPI/OKR or decorative path. |
 | Goal proof/decision history | Goals / Proof | PD07 | Candidate implementation owner mapped | PD05 Green, PX08, SI10/SI14, AOS proof if runtime/data logic touched | Proof is evidence, not achievement. |
 | Goal alternate path/tradeoff | Goals | PD08 | Candidate implementation owner mapped | PD05 Green, PX03/PX15, AOS alternate-path if runtime logic touched | Candidate-style detail remains gated; no fake certainty. |
 | Capture placement review | Capture | PD09 | Candidate implementation owner mapped | PX04/PX13, SI09/SI10/SI13/SI17, privacy/copy gates, ME Capture if large owner touched | Placement appears only after content exists. |
@@ -124,7 +124,8 @@ stacked-card top-level composition.
 | PD03 | Complete / accepted Yellow after validation and commit | Bounded Today implementation; Step Session is step-first, timer-secondary, and receipt/proof-boundary aware. |
 | PD04 | Complete / accepted Yellow after validation and commit | Bounded Today implementation; closure/recovery depth is presentation-bounded and does not claim AOS runtime recovery or plan mutation. |
 | PD05 | Complete / Green after validation and commit | Bounded Goals implementation; Goal Detail Mission Control visible lane order now follows Completed -> Now -> Friction -> Next -> Horizon without navigation/raw-value changes. |
-| PD06-PD18 | Queued / Blocked | Each waits for predecessor and named PXOS/ME/CS/SI/AOS-if-needed gates. |
+| PD06 | Complete / Green after validation and commit | Bounded Goals implementation; Goal Detail lifecycle/path visualization now exposes current position, progress shape, proof, risk, and route markers without navigation/raw-value changes. |
+| PD07-PD18 | Queued / Blocked | Each waits for predecessor and named PXOS/ME/CS/SI/AOS-if-needed gates. |
 | Global train outside PD | Stopped / not resumed | Requires its own explicit approval and gate path. |
 
 ## Conflict Register

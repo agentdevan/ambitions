@@ -2,14 +2,13 @@
 
 Date: 2026-05-04
 Active train: Product Depth
-Current batch: PD05 Green; PD06 next eligible after commit/push
-Scope: PD05 reconciles only the Goals-owned Goal Detail Mission Control lane
-architecture to the locked MissionControlTimeSpine order: Completed, Now,
-Friction, Next, Horizon. It adjusts Goal Detail mission-control state,
-rendered lane labels, and focused Goals tests without adding a top-level
-destination, editing navigation/source-truth tabs, persistence, sync/auth/
-network, AI/LDI runtime, CI/config, dependency, release/platform claim, broad
-app implementation, or Candidate finalization. Complete: EB03A
+Current batch: PD06 complete / Green
+Scope: PD06 deepened only Goals-owned Goal Detail lifecycle/path visualization.
+It adjusted Goal Detail path stage state, path filmstrip rendering, Path
+Builder copy, and focused Goals tests. It did not add a top-level destination,
+edit navigation/source-truth tabs, persistence, sync/auth/network, AI/LDI
+runtime, CI/config, dependency, release/platform claims, broad app
+implementation, or Candidate finalization. Complete: EB03A
 Universal Capture Composer Routing
 Owner Map. Complete:
 EB03B Universal Capture Composer Routing Implementation. Complete: EB04
@@ -496,14 +495,15 @@ as docs/planning source truth. PD02 is complete / accepted Yellow as bounded
 Today Step Detail implementation. PD03 is complete / accepted Yellow as
 bounded Today Step Session implementation. PD04 is complete / accepted Yellow
 as bounded Today recovery/closure implementation. PD05 is Green as bounded
-Goals Mission Control detail architecture implementation. Continue to PD06 only
-if PD05 commits, pushes, leaves a clean worktree, and the Product Depth
+Goals Mission Control detail architecture implementation. PD06 is Green as
+bounded Goals lifecycle/path visualization implementation. Continue to PD07
+only if PD06 commits, pushes, leaves a clean worktree, and the Product Depth
 continuation gates allow it. Do not restart broad
 EB03, EB04, EB05, EB06, EB14, EB15, EB16, EB17, EB18, EB26, EB27, EB28, EB29,
 EB30, EB08, EB09, EB10, EB11, EB12, EB33, EB34, EB35, EB36, EB37, EB38, EB39,
 EB40, CS10, SI01, SI02, SI03, SI04, SI05, SI06, SI07, SI08, SI09, SI10, SI11,
 SI12, SI13, SI14, SI15, SI16, SI17, SI18, or completed DAV / EB20-EB24 batches.
-The next safe action is PD06 if PD05 commits, pushes, the worktree is clean,
+The next safe action is PD07 if PD06 commits, pushes, the worktree is clean,
 and Product Depth continuation gates allow it.
 
 ## PD01 Product Depth Canon, Inventory, And Ownership Map
@@ -562,6 +562,38 @@ for Still Counts, Moved, Skipped / Not Needed, Blocked, Waiting, Needs
 Recovery, and Needs Review outcomes. It did not add runtime recovery logic,
 Plan mutation, persistence, navigation, AI/LDI behavior, or broad Product Depth
 implementation.
+
+## PD05 Goals Mission Control Detail Architecture
+
+Date: 2026-05-04
+Result: GREEN
+
+PD05 reconciled the visible Goal Detail Mission Control lane order to
+Completed / Now / Friction / Next / Horizon while preserving internal
+lane-kind compatibility. It touched only Goals owner files, focused Goal
+Detail tests, and Product Depth train/run-state docs. No route/raw value,
+navigation, persistence/schema, sync/auth/network, AI/LDI runtime, dependency,
+workflow, generated project source truth, or release/platform claim changed.
+
+## PD06 Goal Lifecycle And Path Visualization
+
+Date: 2026-05-04
+Result: GREEN
+
+PD06 deepened Goal Detail lifecycle/path visualization inside the Goals owner
+boundary. Path stages now expose text-plus-symbol lifecycle, progress shape,
+proof, risk, and route markers; the Lifecycle path surface includes
+non-color-only marker text and accessibility summaries. Path Builder visible
+copy now prefers path shape / route option language. Internal compatibility
+names remain where required and are not user-facing product truth. No top-level
+destination, navigation, persistence/schema, sync/auth/network, AI/LDI runtime,
+design token, dependency, workflow, generated project source truth, Candidate
+finalization, or release/platform claim changed. Validation passed for
+`xcodegen generate`, focused `GoalDetailStrategicPresentationTests` (17 tests,
+0 failures), `scripts/build-local.sh`, diff checks, and advisory scans. Yellow
+items are expected historical/advisory scan hits, no screenshot/rendered proof,
+no manual VoiceOver traversal, no toggled Reduce Motion walkthrough, and no
+physical-device proof.
 
 ## SI15 Accessibility Adaptive Interface Pass
 

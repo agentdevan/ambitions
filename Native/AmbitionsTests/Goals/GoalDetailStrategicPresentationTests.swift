@@ -17,6 +17,8 @@ final class GoalDetailStrategicPresentationTests: XCTestCase {
         XCTAssertNotNil(detail.nextMovement)
         XCTAssertFalse(detail.pathStages.isEmpty)
         XCTAssertTrue(detail.pathStages.contains(where: { $0.position == .current || $0.position == .blocked }))
+        XCTAssertTrue(detail.pathStages.contains(where: { $0.lifecycleMarkerLabel == "Current position" || $0.lifecycleMarkerLabel == "Friction marker" }))
+        XCTAssertTrue(detail.pathStages.allSatisfy { $0.accessibilitySummary.isEmpty == false })
         XCTAssertFalse(detail.trajectory.phaseTitle.isEmpty)
     }
 
@@ -88,11 +90,13 @@ final class GoalDetailStrategicPresentationTests: XCTestCase {
         XCTAssertFalse(pathBuilder.proofRequirements.isEmpty)
         XCTAssertTrue(pathBuilder.forks.contains(where: { $0.decisionPrompt.localizedCaseInsensitiveContains("choose, edit, or park") }))
         XCTAssertTrue(pathBuilder.todayConnectionTitle.isEmpty == false)
-        XCTAssertEqual(pathBuilder.roadmapListTitle, "Roadmap list")
+        XCTAssertEqual(pathBuilder.roadmapListTitle, "Path list")
         XCTAssertTrue(pathBuilder.performanceBudgetSummary.contains("\(pathBuilder.phases.count) phases"))
+        XCTAssertTrue(pathBuilder.performanceBudgetSummary.contains("route options"))
         XCTAssertFalse(combinedCopy.localizedCaseInsensitiveContains("best path"))
         XCTAssertFalse(combinedCopy.localizedCaseInsensitiveContains("highest score"))
         XCTAssertFalse(combinedCopy.localizedCaseInsensitiveContains("Path tab"))
+        XCTAssertFalse(combinedCopy.localizedCaseInsensitiveContains("Roadmap"))
         XCTAssertEqual(detail.screenContractSnapshot().topLevelTabTitles, ScreenContractValidator.canonicalTopLevelTabs)
     }
 
@@ -340,6 +344,8 @@ final class GoalDetailStrategicPresentationTests: XCTestCase {
         XCTAssertEqual(stages.first?.position, .current)
         XCTAssertEqual(stages.first?.statusLabel, "Current")
         XCTAssertEqual(stages.first?.highlight, "Outline the talk pitch")
+        XCTAssertEqual(stages.first?.lifecycleMarkerLabel, "Current position")
+        XCTAssertEqual(stages.first?.progressShapeLabel, "In motion now")
     }
 
     func testMakePathStagesSynthesizesFilmstripWhenNoPathOrSectionsExist() async throws {
@@ -350,11 +356,13 @@ final class GoalDetailStrategicPresentationTests: XCTestCase {
         XCTAssertEqual(blockedStages.count, 1)
         XCTAssertEqual(blockedStages.first?.position, .blocked)
         XCTAssertEqual(blockedStages.first?.highlight, "Resolve the blocker")
+        XCTAssertEqual(blockedStages.first?.riskMarkerLabel, "Risk visible")
 
         let starterStages = service.makePathStagesForTesting(pathSummary: nil, sections: [], renderState: .starter)
         XCTAssertEqual(starterStages.count, 1)
         XCTAssertEqual(starterStages.first?.position, .current)
         XCTAssertEqual(starterStages.first?.highlight, "Take the first visible step")
+        XCTAssertEqual(starterStages.first?.proofMarkerLabel, "Proof can be added here")
     }
 
     func testClarificationAndBlockedScenariosKeepTruthFirstMovement() {

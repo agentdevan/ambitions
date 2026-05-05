@@ -1060,6 +1060,70 @@ struct GoalPathStage: Identifiable, Sendable {
     let state: AmbitionVisualState
 }
 
+extension GoalPathStage {
+    var lifecycleMarkerLabel: String {
+        switch position {
+        case .completed:
+            "Proof-backed stage"
+        case .current:
+            "Current position"
+        case .blocked:
+            "Friction marker"
+        case .upcoming:
+            "Horizon marker"
+        }
+    }
+
+    var progressShapeLabel: String {
+        switch position {
+        case .completed:
+            "Already landed"
+        case .current:
+            "In motion now"
+        case .blocked:
+            "Needs recovery"
+        case .upcoming:
+            "Not yet active"
+        }
+    }
+
+    var proofMarkerLabel: String? {
+        switch position {
+        case .completed:
+            "Evidence attached"
+        case .current:
+            "Proof can be added here"
+        case .blocked:
+            nil
+        case .upcoming:
+            nil
+        }
+    }
+
+    var riskMarkerLabel: String? {
+        position == .blocked ? "Risk visible" : nil
+    }
+
+    var routeIndicatorLabel: String? {
+        position == .upcoming ? "Route option" : nil
+    }
+
+    var accessibilitySummary: String {
+        [
+            lifecycleMarkerLabel,
+            progressShapeLabel,
+            statusLabel,
+            stepCountLabel,
+            highlight.map { "Highlight: \($0)" },
+            proofMarkerLabel,
+            riskMarkerLabel,
+            routeIndicatorLabel,
+        ]
+        .compactMap { $0 }
+        .joined(separator: ". ")
+    }
+}
+
 struct GoalPathBuilderPhaseState: Identifiable, Sendable {
     let id: String
     let title: String
