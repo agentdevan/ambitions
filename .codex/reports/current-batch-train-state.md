@@ -2,14 +2,14 @@
 
 Date: 2026-05-04
 Active train: Product Depth
-Current batch: PD12 complete / accepted Yellow
-Scope: PD12 deepened only the existing Plan Reflow Decision presentation. It
-added explicit what-changed, why, impacted-step, capacity-impact,
-protected-time, and accept/edit/decline decision labels to user-owned reflow
-options. It did not add silent rearrangement, calendar writes, persistence/
-schema changes, sync/auth/network, AI/LDI runtime, route/raw-value changes,
-CI/config, dependencies, release/platform claims, broad app implementation, or
-Candidate finalization.
+Current batch: PD13 complete / accepted Yellow
+Scope: PD13 deepened only the existing Plan pressure/recovery presentation. It
+added a Plan-owned pressure and recovery review with overloaded-day relief,
+recovery space, protected-time conflict, late-start adjustment, recovery-day
+review, and qualitative capacity-review labels. It did not add silent
+rearrangement, calendar writes, persistence/schema changes, sync/auth/network,
+AI/LDI runtime, route/raw-value changes, CI/config, dependencies,
+release/platform claims, broad app implementation, or Candidate finalization.
 Complete: EB03A
 Universal Capture Composer Routing
 Owner Map. Complete:
@@ -122,6 +122,17 @@ accessibility/release claim change was made.
 - CS02C-CS06C deferred truth remains preserved.
 
 ## Current Validation Result
+
+PD13 result: PASS WITH ACCEPTED YELLOW.
+`docs/audits/pd13-plan-recovery-pressure-review-report.md` records the bounded
+Plan pressure and recovery review layer, overloaded-day relief copy, recovery
+space, protected-time conflict, late-start adjustment, recovery-day review, and
+qualitative capacity review. Focused Plan tests passed after one in-scope
+initializer repair. Yellow items are no screenshot/rendered proof, no
+human/device/VoiceOver/Dynamic Type/Reduce Motion walkthrough, existing
+file-size/doc-QA/accessibility advisory backlog, internal compatibility
+vocabulary in existing Plan tests/source, and the generic boundary script
+flagging PD13-allowed Plan files despite explicit Plan implementation scope.
 
 PD12 result: PASS WITH ACCEPTED YELLOW.
 `docs/audits/pd12-plan-reflow-decision-depth-report.md` records the bounded

@@ -28,6 +28,8 @@ extension PlanDashboard {
                 lifeSuite.trustLabel,
                 treaty.title,
                 capacityEnvelope.title,
+                pressureRecoveryReview.title,
+                pressureRecoveryReview.capacityReviewLabel,
                 timelineStrip.title,
                 calendarAwareness.sourceLabel,
                 calendarBoundary.writeBoundary,

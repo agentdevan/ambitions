@@ -343,6 +343,53 @@ final class PlanFeatureServiceTests: XCTestCase {
         XCTAssertEqual(overloadedDashboard.capacityEnvelope.label, "Overloaded")
     }
 
+    func testPressureRecoveryReviewExplainsOverloadWithoutShameOrMutation() async throws {
+        let repositories = try await makeRepositories()
+        try await repositories.goals.saveGoals((0..<6).map { makeWeekVisibleGoal(id: "pressure-\($0)", title: "Pressure \($0)") })
+        let beforeGoals = try await repositories.goals.listGoals()
+        let beforeCaptures = try await repositories.captures.listCaptures()
+        let service = RepositoryBackedPlanService(repositories: repositories)
+
+        let dashboard = try await service.loadPlanDashboard(now: fixedDate)
+        let afterGoals = try await repositories.goals.listGoals()
+        let afterCaptures = try await repositories.captures.listCaptures()
+        let review = dashboard.pressureRecoveryReview
+
+        XCTAssertEqual(review.title, "Pressure and recovery review")
+        XCTAssertTrue(review.weekPressureLabel.contains("need relief"))
+        XCTAssertTrue(review.overloadedDayLabel.contains("reduce one ask"))
+        XCTAssertTrue(review.recoverySpaceLabel.contains("Recovery space"))
+        XCTAssertTrue(review.protectedTimeConflictLabel.contains("Protected time conflict"))
+        XCTAssertTrue(review.lateStartAdjustmentLabel.contains("Late-start adjustment"))
+        XCTAssertTrue(review.recoveryDayReviewLabel.contains("Still counts"))
+        XCTAssertTrue(review.capacityReviewLabel.contains("qualitative"))
+        XCTAssertTrue(review.signals.contains(where: { $0.id == "week-pressure" && $0.boundaryLabel == "Explain before changing" }))
+        XCTAssertTrue(review.signals.contains(where: { $0.id == "protected-time" && $0.boundaryLabel == "No silent rescheduling" }))
+        XCTAssertTrue(review.accessibilityValue.contains("Capacity review"))
+
+        let riskyCopy = [
+            review.title,
+            review.detail,
+            review.weekPressureLabel,
+            review.overloadedDayLabel,
+            review.recoverySpaceLabel,
+            review.protectedTimeConflictLabel,
+            review.lateStartAdjustmentLabel,
+            review.recoveryDayReviewLabel,
+            review.capacityReviewLabel
+        ].joined(separator: " ").lowercased()
+
+        XCTAssertFalse(riskyCopy.contains("overdue"))
+        XCTAssertFalse(riskyCopy.contains("failed"))
+        XCTAssertFalse(riskyCopy.contains("punishment"))
+        XCTAssertFalse(riskyCopy.contains("productivity loss"))
+        XCTAssertFalse(riskyCopy.contains("score"))
+        XCTAssertFalse(riskyCopy.contains("confidence"))
+        XCTAssertFalse(riskyCopy.contains("%"))
+        XCTAssertEqual(beforeGoals, afterGoals)
+        XCTAssertEqual(beforeCaptures, afterCaptures)
+    }
+
     func testDecisionDebtConflictCourtAndRecoveryAreSuggestionOnly() async throws {
         let repositories = try await makeRepositories()
         try await repositories.goals.saveGoals([

@@ -214,6 +214,14 @@ private extension RepositoryBackedPlanService {
             saveTheDay: saveTheDay,
             receiptPreview: reflowReceiptPreview
         )
+        let pressureRecoveryReview = makePressureRecoveryReview(
+            weekDays: weekDays,
+            capacityEnvelope: capacityEnvelope,
+            recoveryEntry: recoveryEntry,
+            realityReflow: realityReflow,
+            saveTheDay: saveTheDay,
+            recoveryMaturity: recoveryMaturity
+        )
         let treaty = makeTreaty(
             posture: posture,
             capacityEnvelope: capacityEnvelope,
@@ -233,6 +241,7 @@ private extension RepositoryBackedPlanService {
             primaryAction: primaryAction,
             treaty: treaty,
             capacityEnvelope: capacityEnvelope,
+            pressureRecoveryReview: pressureRecoveryReview,
             lifecycleRail: lifecycleRail,
             timelineStrip: timelineStrip,
             opportunityWindows: opportunityWindows,
@@ -580,6 +589,86 @@ private extension RepositoryBackedPlanService {
             label: posture.label,
             supportLabel: supportLabel,
             visualState: posture.visualState
+        )
+    }
+
+    func makePressureRecoveryReview(
+        weekDays: [PlanElasticWeekDayState],
+        capacityEnvelope: PlanCapacityEnvelopeState,
+        recoveryEntry: PlanRecoveryEntryState,
+        realityReflow: PlanRealityReflowState,
+        saveTheDay: PlanSaveTheDayState,
+        recoveryMaturity: PlanRecoveryMaturityState
+    ) -> PlanPressureRecoveryReviewState {
+        let overloadedDays = weekDays.filter { $0.level == .overloaded || $0.level == .fragile }.count
+        let tightDays = weekDays.filter { $0.level == .tight }.count
+        let openDays = weekDays.filter { $0.level == .open }.count
+        let protectedConflicts = weekDays.flatMap(\.blocks).filter { block in
+            (block.kind == .fixed || block.kind == .protected) && block.visualState == .warning
+        }
+        let pressureVisible = overloadedDays > 0 || tightDays > 0 || protectedConflicts.isEmpty == false
+        let visualState: AmbitionVisualState = pressureVisible ? .warning : .selected
+        let dayNoun = overloadedDays == 1 ? "day" : "days"
+        let openNoun = openDays == 1 ? "day" : "days"
+        let conflictNoun = protectedConflicts.count == 1 ? "item" : "items"
+
+        return PlanPressureRecoveryReviewState(
+            title: "Pressure and recovery review",
+            detail: pressureVisible
+                ? "Pressure gets explained before the week changes, then recovery stays smaller than the strain."
+                : "The week still has readable room, so recovery can stay protective instead of becoming extra planning.",
+            weekPressureLabel: overloadedDays > 0
+                ? "\(overloadedDays) \(dayNoun) need relief before adding work."
+                : tightDays > 0
+                    ? "\(tightDays) tight day\(tightDays == 1 ? "" : "s") should stay visible before anything moves."
+                    : "Pressure is readable and does not need a larger plan.",
+            overloadedDayLabel: overloadedDays > 0
+                ? "Overloaded day explanation: reduce one ask before adding another."
+                : "Overloaded day explanation: no day is asking for relief right now.",
+            recoverySpaceLabel: openDays > 0
+                ? "Recovery space: \(openDays) open \(openNoun) can protect breathing room."
+                : "Recovery space: make one smaller pocket before widening the week.",
+            protectedTimeConflictLabel: protectedConflicts.isEmpty
+                ? "Protected time conflict: nothing protected is competing loudly."
+                : "Protected time conflict: \(protectedConflicts.count) fixed or protected \(conflictNoun) need care before moving anything.",
+            lateStartAdjustmentLabel: "Late-start adjustment: \(saveTheDay.adjustment) Start with the smaller version.",
+            recoveryDayReviewLabel: "Recovery-day review: Still counts; protect what remains and make the next ask lighter.",
+            capacityReviewLabel: "Capacity review: \(capacityEnvelope.label.lowercased()) is qualitative, with no percentage or certainty claim.",
+            signals: [
+                PlanPressureRecoverySignalState(
+                    id: "week-pressure",
+                    title: "Week pressure",
+                    detail: realityReflow.reasonDetail,
+                    statusLabel: capacityEnvelope.label,
+                    boundaryLabel: "Explain before changing",
+                    visualState: visualState
+                ),
+                PlanPressureRecoverySignalState(
+                    id: "recovery-space",
+                    title: "Recovery space",
+                    detail: recoveryEntry.detail,
+                    statusLabel: openDays > 0 ? "Available" : "Make room",
+                    boundaryLabel: "Reduce the ask",
+                    visualState: openDays > 0 ? .success : .warning
+                ),
+                PlanPressureRecoverySignalState(
+                    id: "protected-time",
+                    title: "Protected time",
+                    detail: protectedConflicts.first?.detail ?? "Nothing protected needs to be moved automatically.",
+                    statusLabel: protectedConflicts.isEmpty ? "Clear" : "Review",
+                    boundaryLabel: "No silent rescheduling",
+                    visualState: protectedConflicts.isEmpty ? .success : .warning
+                ),
+                PlanPressureRecoverySignalState(
+                    id: "recovery-boundary",
+                    title: "Recovery boundary",
+                    detail: recoveryMaturity.confirmationBoundary,
+                    statusLabel: recoveryMaturity.planFitLabel,
+                    boundaryLabel: "Confirm first",
+                    visualState: recoveryMaturity.planFitLabel == "Needs relief" ? .warning : .selected
+                )
+            ],
+            visualState: visualState
         )
     }
 

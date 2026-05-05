@@ -96,7 +96,7 @@ stacked-card top-level composition.
 | Capture correction | Capture | PD10 | Accepted Yellow implementation evidence | PD09 accepted Yellow, privacy/copy, AOS adaptation/source truth if learning touched | Captured items now include presentation-derived correction options, correction receipt language, and local/no-hidden-memory boundaries. No user-facing confidence language, hidden learning, personalization, or AOS runtime change was made. |
 | Grow into Goal | Capture / Goals | PD11 | Candidate remains gated | PD09/PD10 Green, PX03/PX04/PX15, CS navigation if route touched, AOS goal path if runtime touched | Candidate items must not be silently upgraded. |
 | Reflow Decision depth | Plan | PD12 | Complete / accepted Yellow after validation and commit | PX05/PX07/PX08, SI08/SI10/SI13/SI17, ME Plan, AOS if commitment/runtime logic touched | User-owned, non-silent consequence review; no calendar write, silent rearrangement, persistence/schema, route/raw-value, or AOS runtime change. |
-| Pressure review | Plan | PD13 | Candidate remains gated | PD12 Green, accessibility/copy, Plan pressure evidence | No productivity-loss or shame framing. |
+| Pressure review | Plan | PD13 | Complete / accepted Yellow after validation and commit | PD12 accepted Yellow, accessibility/copy, Plan pressure evidence | Plan pressure/recovery review now explains overload, recovery space, protected-time conflict, late-start adjustment, recovery-day review, and qualitative capacity without shame framing, fake precision, calendar writes, silent rearrangement, persistence/schema, route/raw-value, or AOS runtime change. |
 | Month LifeShape Lens | Plan | PD14 | Candidate remains high-risk | PX05/PX10/PX12, SI08/SI12/SI13/SI17, ME Plan/PlanScreen | Highest calendar-clone risk; capacity lens only. |
 | Trust history and receipts center | You | PD15 | Candidate implementation owner mapped | PX06/PX08, SI10/SI11/SI13/SI14, ME You/Profile, privacy/trust | Receipt is consequence/reversibility, not feed. |
 | Schedule, availability, defaults | You | PD16 | Candidate remains gated | PX06/PX11, REC claim boundaries, privacy/permission copy, CS if route/default touched | Plan-owned calendar permission; no unsupported integration claim. |
@@ -131,7 +131,8 @@ stacked-card top-level composition.
 | PD10 | Complete / accepted Yellow after validation and commit | Bounded Capture implementation; captured items surface correction options, receipt language, and local/no-hidden-memory boundaries without hidden learning or user-facing confidence copy. |
 | PD11 | Complete / accepted Yellow after validation and commit | Bounded Capture/Goals implementation; Create Goal surfaces a goal seed review with why-this-might-be-a-goal, starting position, first milestone, first recommended step, proof/source seed, and explicit confirmation before promotion without automatic goal creation, route/raw-value changes, persistence/schema changes, or AOS runtime changes. |
 | PD12 | Complete / accepted Yellow after validation and commit | Bounded Plan implementation; Reflow Decision options now name what changed, why, impacted steps, capacity impact, protected-time impact, and accept/edit/decline choices without silent rearrangement, calendar writes, persistence/schema changes, route/raw-value changes, or AOS runtime changes. |
-| PD13-PD18 | Queued / Blocked | Each waits for predecessor and named PXOS/ME/CS/SI/AOS-if-needed gates. |
+| PD13 | Complete / accepted Yellow after validation and commit | Bounded Plan implementation; Pressure/recovery review now names overload relief, recovery space, protected-time conflict, late-start adjustment, recovery-day review, and qualitative capacity review without shame framing, fake precision, calendar writes, persistence/schema changes, route/raw-value changes, or AOS runtime changes. |
+| PD14-PD18 | Queued / Blocked | Each waits for predecessor and named PXOS/ME/CS/SI/AOS-if-needed gates. |
 | Global train outside PD | Stopped / not resumed | Requires its own explicit approval and gate path. |
 
 ## Conflict Register
@@ -177,6 +178,7 @@ path/tradeoff presentation depth. PD09 proves only bounded Capture placement
 review presentation depth. PD10 proves only bounded Capture correction review
 presentation depth. PD11 proves only bounded Capture/Goals grow-into-goal seed
 review depth. PD12 proves only bounded Plan Reflow Decision presentation depth.
+PD13 proves only bounded Plan pressure/recovery review presentation depth.
 These batches do not prove later PD readiness beyond
 continuation eligibility, release readiness, TestFlight readiness, App Store
 readiness, physical-device proof, public accessibility conformance, signed

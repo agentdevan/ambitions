@@ -283,6 +283,57 @@ struct PlanCapacityEnvelopeState: Sendable {
     let visualState: AmbitionVisualState
 }
 
+struct PlanPressureRecoverySignalState: Identifiable, Sendable, Hashable {
+    let id: String
+    let title: String
+    let detail: String
+    let statusLabel: String
+    let boundaryLabel: String
+    let visualState: AmbitionVisualState
+}
+
+struct PlanPressureRecoveryReviewState: Sendable {
+    let title: String
+    let detail: String
+    let weekPressureLabel: String
+    let overloadedDayLabel: String
+    let recoverySpaceLabel: String
+    let protectedTimeConflictLabel: String
+    let lateStartAdjustmentLabel: String
+    let recoveryDayReviewLabel: String
+    let capacityReviewLabel: String
+    let signals: [PlanPressureRecoverySignalState]
+    let visualState: AmbitionVisualState
+
+    static let baseline = PlanPressureRecoveryReviewState(
+        title: "Pressure and recovery review",
+        detail: "Pressure gets explained before the week changes.",
+        weekPressureLabel: "Pressure is readable.",
+        overloadedDayLabel: "Overloaded day explanation: no day is asking for relief right now.",
+        recoverySpaceLabel: "Recovery space: keep breathing room visible.",
+        protectedTimeConflictLabel: "Protected time conflict: nothing protected is competing loudly.",
+        lateStartAdjustmentLabel: "Late-start adjustment: start with the smaller version.",
+        recoveryDayReviewLabel: "Recovery-day review: Still counts.",
+        capacityReviewLabel: "Capacity review: qualitative only.",
+        signals: [],
+        visualState: .default
+    )
+
+    var accessibilityValue: String {
+        [
+            detail,
+            weekPressureLabel,
+            overloadedDayLabel,
+            recoverySpaceLabel,
+            protectedTimeConflictLabel,
+            lateStartAdjustmentLabel,
+            recoveryDayReviewLabel,
+            capacityReviewLabel,
+            signals.map { "\($0.title): \($0.detail)" }.joined(separator: ". ")
+        ].joined(separator: ". ")
+    }
+}
+
 struct PlanGoalLifecycleRailSegment: Identifiable, Sendable, Hashable {
     let lifecycleState: GoalPortfolioLifecycleState
     let count: Int
@@ -641,6 +692,7 @@ struct PlanDashboard: Sendable {
     let primaryAction: PlanWeekPrimaryAction
     let treaty: PlanTreatyState
     let capacityEnvelope: PlanCapacityEnvelopeState
+    let pressureRecoveryReview: PlanPressureRecoveryReviewState
     let lifecycleRail: PlanGoalLifecycleRailState
     let timelineStrip: PlanTimelineStripState
     let opportunityWindows: PlanOpportunityWindowsState
@@ -664,4 +716,70 @@ struct PlanDashboard: Sendable {
     let secondaryDestinations: [PlanSecondaryDestination]
     let emptyTitle: String?
     let emptyMessage: String?
+
+    init(
+        mode: PlanDashboardMode,
+        timeframeLabel: String,
+        hero: PlanRealityHeroState,
+        lifeSuite: PlanLifeSuiteState,
+        primaryAction: PlanWeekPrimaryAction,
+        treaty: PlanTreatyState,
+        capacityEnvelope: PlanCapacityEnvelopeState,
+        pressureRecoveryReview: PlanPressureRecoveryReviewState = .baseline,
+        lifecycleRail: PlanGoalLifecycleRailState,
+        timelineStrip: PlanTimelineStripState,
+        opportunityWindows: PlanOpportunityWindowsState,
+        decisionDebt: PlanDecisionDebtState,
+        conflictCourt: PlanConflictCourtState,
+        calendarBoundary: PlanCalendarBoundaryContractState,
+        recoveryEntry: PlanRecoveryEntryState,
+        realityReflow: PlanRealityReflowState,
+        reflowDecision: PlanReflowDecisionState,
+        recoveryGradient: PlanRecoveryGradientState,
+        saveTheDay: PlanSaveTheDayState,
+        reflowReceiptPreview: PlanReflowReceiptPreviewState,
+        recoveryMaturity: PlanRecoveryMaturityState,
+        pressureScrubber: PlanPressureScrubberState,
+        weekDays: [PlanElasticWeekDayState],
+        believability: PlanBelievabilityState,
+        calendarAwareness: PlanCalendarAwarenessState,
+        resilience: PlanExecutionResilienceState,
+        goalShapingItems: [PlanGoalShapingItem],
+        shapingActions: [PlanShapingActionState],
+        secondaryDestinations: [PlanSecondaryDestination],
+        emptyTitle: String?,
+        emptyMessage: String?
+    ) {
+        self.mode = mode
+        self.timeframeLabel = timeframeLabel
+        self.hero = hero
+        self.lifeSuite = lifeSuite
+        self.primaryAction = primaryAction
+        self.treaty = treaty
+        self.capacityEnvelope = capacityEnvelope
+        self.pressureRecoveryReview = pressureRecoveryReview
+        self.lifecycleRail = lifecycleRail
+        self.timelineStrip = timelineStrip
+        self.opportunityWindows = opportunityWindows
+        self.decisionDebt = decisionDebt
+        self.conflictCourt = conflictCourt
+        self.calendarBoundary = calendarBoundary
+        self.recoveryEntry = recoveryEntry
+        self.realityReflow = realityReflow
+        self.reflowDecision = reflowDecision
+        self.recoveryGradient = recoveryGradient
+        self.saveTheDay = saveTheDay
+        self.reflowReceiptPreview = reflowReceiptPreview
+        self.recoveryMaturity = recoveryMaturity
+        self.pressureScrubber = pressureScrubber
+        self.weekDays = weekDays
+        self.believability = believability
+        self.calendarAwareness = calendarAwareness
+        self.resilience = resilience
+        self.goalShapingItems = goalShapingItems
+        self.shapingActions = shapingActions
+        self.secondaryDestinations = secondaryDestinations
+        self.emptyTitle = emptyTitle
+        self.emptyMessage = emptyMessage
+    }
 }

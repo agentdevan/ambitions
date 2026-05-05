@@ -47,6 +47,8 @@ struct PlanScreen: View {
 
                         PlanCapacityEnvelopeCard(envelope: dashboard.capacityEnvelope)
 
+                        PlanPressureRecoveryReviewCard(review: dashboard.pressureRecoveryReview)
+
                         PlanLifeSuiteCard(suite: dashboard.lifeSuite)
 
                         PlanGoalLifecycleRailCard(rail: dashboard.lifecycleRail)
@@ -772,6 +774,88 @@ private struct PlanRecoveryGradientCard: View {
         .accessibilityIdentifier("plan.recovery-gradient")
         .accessibilityElement(children: .contain)
         .ambitionPanelAccessibility()
+    }
+}
+
+private struct PlanPressureRecoveryReviewCard: View {
+    @Environment(\.ambitionTheme) private var theme
+
+    let review: PlanPressureRecoveryReviewState
+
+    var body: some View {
+        AppCard(state: review.visualState) {
+            VStack(alignment: .leading, spacing: theme.spacing.md) {
+                SectionHeader(title: review.title, subtitle: review.detail)
+
+                HStack(spacing: theme.spacing.xs) {
+                    TagPill("Explain first", icon: "text.magnifyingglass", state: review.visualState)
+                    TagPill("No silent changes", icon: "hand.tap", state: .warning)
+                    TagPill("Still counts", icon: "checkmark.seal", state: .success)
+                }
+                .fixedSize(horizontal: false, vertical: true)
+
+                VStack(alignment: .leading, spacing: theme.spacing.sm) {
+                    PlanKeyValueRow(label: "Week", value: review.weekPressureLabel, state: review.visualState)
+                    PlanKeyValueRow(label: "Overload", value: review.overloadedDayLabel, state: review.visualState)
+                    PlanKeyValueRow(label: "Recovery", value: review.recoverySpaceLabel, state: .success)
+                    PlanKeyValueRow(label: "Protected", value: review.protectedTimeConflictLabel, state: .selected)
+                    PlanKeyValueRow(label: "Late start", value: review.lateStartAdjustmentLabel, state: .default)
+                    PlanKeyValueRow(label: "Review", value: review.recoveryDayReviewLabel, state: .success)
+                    PlanKeyValueRow(label: "Capacity", value: review.capacityReviewLabel, state: .default)
+                }
+
+                VStack(alignment: .leading, spacing: theme.spacing.sm) {
+                    ForEach(review.signals) { signal in
+                        HStack(alignment: .top, spacing: theme.spacing.sm) {
+                            Image(systemName: iconName(for: signal.id))
+                                .font(.system(size: theme.icon.smallSize, weight: theme.icon.symbolWeight))
+                                .foregroundStyle(theme.stateStyle(for: signal.visualState).accent)
+                                .frame(width: 20)
+
+                            VStack(alignment: .leading, spacing: theme.spacing.xxxs) {
+                                HStack(spacing: theme.spacing.xs) {
+                                    Text(signal.title)
+                                        .font(theme.typography.bodyEmphasized)
+                                        .foregroundStyle(theme.colors.textPrimary)
+                                    TagPill(signal.statusLabel, state: signal.visualState)
+                                }
+                                Text(signal.detail)
+                                    .font(theme.typography.body)
+                                    .foregroundStyle(theme.colors.textSecondary)
+                                    .fixedSize(horizontal: false, vertical: true)
+                                Text(signal.boundaryLabel)
+                                    .font(theme.typography.caption)
+                                    .foregroundStyle(theme.colors.textTertiary)
+                                    .fixedSize(horizontal: false, vertical: true)
+                            }
+                        }
+                        .padding(theme.spacing.md)
+                        .background(
+                            RoundedRectangle(cornerRadius: theme.radius.lg, style: .continuous)
+                                .fill(theme.colors.surfaceOverlay)
+                        )
+                        .overlay(
+                            RoundedRectangle(cornerRadius: theme.radius.lg, style: .continuous)
+                                .stroke(theme.colors.strokeSubtle, lineWidth: 1)
+                        )
+                    }
+                }
+            }
+        }
+        .accessibilityIdentifier("plan.pressure-recovery-review")
+        .accessibilityElement(children: .combine)
+        .accessibilityLabel(review.accessibilityValue)
+        .ambitionPanelAccessibility()
+    }
+
+    private func iconName(for id: String) -> String {
+        switch id {
+        case "week-pressure": "gauge.with.dots.needle.bottom.50percent"
+        case "recovery-space": "sun.max"
+        case "protected-time": "clock.badge.checkmark"
+        case "recovery-boundary": "hand.tap"
+        default: "checkmark.circle"
+        }
     }
 }
 
