@@ -33,8 +33,6 @@ struct GoalsScreen: View {
     var body: some View {
         ScrollView {
             LazyVStack(alignment: .leading, spacing: theme.spacing.lg) {
-                TopLevelSurfaceCompositionBar(surface: .goals)
-
                 switch viewModel.state {
                 case .loading:
                     HeroCard {

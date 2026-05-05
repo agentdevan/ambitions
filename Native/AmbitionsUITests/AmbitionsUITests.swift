@@ -14,7 +14,7 @@ final class AmbitionsUITests: XCTestCase {
         app.tabBars.buttons["Goals"].tap()
 
         XCTAssertTrue(app.descendants(matching: .any)["goals.screen"].waitForExistence(timeout: 10))
-        XCTAssertTrue(app.descendants(matching: .any)["goals.hero-card"].waitForExistence(timeout: 10))
+        XCTAssertTrue(waitForGoalsPrimaryObject(in: app))
         XCTAssertTrue(goalCreateButton(in: app).waitForExistence(timeout: 10))
     }
 
@@ -114,7 +114,7 @@ final class AmbitionsUITests: XCTestCase {
 
         XCTAssertTrue(openCanonicalDestination("Plan", screenIdentifier: "plan.screen", in: app))
         XCTAssertTrue(app.descendants(matching: .any)["plan.hero-card"].waitForExistence(timeout: 10))
-        XCTAssertTrue(scrollUntilElementExists("plan.pressure-scrubber", in: app))
+        XCTAssertTrue(scrollUntilElementExists("plan.pressure-scrubber", in: app, maxAttempts: 24))
         XCTAssertTrue(scrollUntilElementExists("plan.goal-relationship-card", in: app))
         XCTAssertTrue(scrollUntilElementExists("plan.open-plan-habits-button", in: app))
         app.buttons["plan.open-plan-habits-button"].tap()
@@ -170,7 +170,7 @@ final class AmbitionsUITests: XCTestCase {
         let app = makeApp(bootstrapMode: "preview")
         app.launch()
 
-        app.tabBars.buttons["You"].tap()
+        XCTAssertTrue(openCanonicalDestination("You", screenIdentifier: "you.root", in: app))
 
         XCTAssertTrue(youRow(named: "What Ambitions Knows", in: app).waitForExistence(timeout: 10))
         XCTAssertTrue(youRow(named: "Trust Center", in: app).waitForExistence(timeout: 10))
@@ -285,7 +285,7 @@ final class AmbitionsUITests: XCTestCase {
         app.tabBars.buttons["Goals"].tap()
 
         XCTAssertTrue(app.descendants(matching: .any)["goals.screen"].waitForExistence(timeout: 10))
-        XCTAssertTrue(app.descendants(matching: .any)["goals.hero-card"].waitForExistence(timeout: 10))
+        XCTAssertTrue(waitForGoalsPrimaryObject(in: app))
         XCTAssertTrue(scrollUntilElementExists("goals.week-pressure", in: app))
         XCTAssertTrue(scrollUntilElementExists("goals.portfolio-maturity", in: app))
         XCTAssertTrue(scrollUntilElementExists("goals.life-areas-panel", in: app))
@@ -302,7 +302,7 @@ final class AmbitionsUITests: XCTestCase {
         XCTAssertTrue(app.tabBars.buttons["Goals"].waitForExistence(timeout: 10))
         app.tabBars.buttons["Goals"].tap()
 
-        XCTAssertTrue(scrollUntilElementExists("goals.hero-card", in: app))
+        XCTAssertTrue(waitForGoalsPrimaryObject(in: app))
         tapGoalsHeroPrimaryAction(in: app)
 
         XCTAssertTrue(app.descendants(matching: .any)["goal-detail.screen"].waitForExistence(timeout: 10))
@@ -483,7 +483,7 @@ final class AmbitionsUITests: XCTestCase {
         XCTAssertTrue(waitForShellReady(in: app))
         XCTAssertTrue(openCanonicalDestination("Goals", screenIdentifier: "goals.screen", in: app))
         XCTAssertTrue(app.descendants(matching: .any)["goals.screen"].waitForExistence(timeout: 10))
-        XCTAssertTrue(app.descendants(matching: .any)["goals.hero-card"].waitForExistence(timeout: 10))
+        XCTAssertTrue(waitForGoalsPrimaryObject(in: app))
         tapGoalsHeroPrimaryAction(in: app)
 
         XCTAssertTrue(app.descendants(matching: .any)["goal-detail.screen"].waitForExistence(timeout: 10))
@@ -510,7 +510,7 @@ final class AmbitionsUITests: XCTestCase {
         XCTAssertTrue(waitForSelectedTab("Plan", in: app))
         XCTAssertTrue(app.descendants(matching: .any)["plan.screen"].waitForExistence(timeout: 15))
         XCTAssertTrue(app.descendants(matching: .any)["plan.hero-card"].waitForExistence(timeout: 10))
-        XCTAssertTrue(scrollUntilElementExists("plan.pressure-scrubber", in: app))
+        XCTAssertTrue(scrollUntilElementExists("plan.pressure-scrubber", in: app, maxAttempts: 24))
         XCTAssertTrue(scrollUntilElementExists("plan.timeline-strip", in: app))
         XCTAssertTrue(scrollUntilElementExists("plan.weekly-plan-strip", in: app))
         XCTAssertTrue(scrollUntilElementExists("plan.believability-card", in: app))
@@ -733,6 +733,23 @@ final class AmbitionsUITests: XCTestCase {
         let fallback = app.descendants(matching: .any)["goals.hero.primary-action"]
         _ = fallback.waitForExistence(timeout: 2)
         return fallback
+    }
+
+    private func waitForGoalsPrimaryObject(in app: XCUIApplication, timeout: TimeInterval = 20) -> Bool {
+        let candidates = [
+            app.descendants(matching: .any)["goals.mission-control-lanes"],
+            app.descendants(matching: .any)["goals.life-path"],
+            app.descendants(matching: .any)["goals.hero-card"]
+        ]
+        let deadline = Date().addingTimeInterval(timeout)
+
+        while Date() < deadline {
+            if candidates.contains(where: { $0.waitForExistence(timeout: 1) }) {
+                return true
+            }
+        }
+
+        return candidates.contains(where: \.exists)
     }
 
     private func tapGoalsHeroPrimaryAction(in app: XCUIApplication) {

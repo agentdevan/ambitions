@@ -34,8 +34,6 @@ struct CapturesScreen: View {
 
             ScrollView {
                 LazyVStack(alignment: .leading, spacing: theme.spacing.lg) {
-                    TopLevelSurfaceCompositionBar(surface: .capture, state: captureCompositionState)
-
                     capturePrompt
 
                     switch viewModel.state {

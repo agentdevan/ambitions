@@ -2,17 +2,17 @@
 
 Date: 2026-05-05
 Active train: Global full-stack execution
-Current batch: FVQ01 Rendered Visual Freshness And Flagship Gate Accepted
-Yellow; full-stack order selects FVQ02 Five Top-Level Surface Visual Sweep next
-under the stricter FVQ visual excellence train.
-Scope: FVQ01 captured durable default Today simulator evidence, recorded
-freshness metadata, repaired the generic Today composition explainer out of the
-first viewport, and reordered Start Here before rail metadata. FVQ01 changed
-only scoped Today visual owner files, visual evidence docs, and train-state
-docs. It did not change route/raw value, persistence/schema, permission
-request, calendar write, sync/account, release, legal/privacy, CI,
-workflow/signing, entitlement, AI runtime, AOS runtime, LDI runtime, or public
-accessibility claim files.
+Current batch: FVQ02 Five Top-Level Surface Visual Sweep Accepted Yellow;
+full-stack order selects FVQ03 Drill-Down And External Surface Visual Sweep
+next under the stricter FVQ visual excellence train.
+Scope: FVQ02 captured durable simulator screenshots for Today, Goals, Capture,
+Plan, and You; removed the generic top-level composition explainer card from
+Goals, Capture, Plan, and You; and documented remaining visual evidence gaps.
+FVQ02 changed only scoped top-level feature surface presentation files, visual
+evidence docs, and train-state docs. It did not change route/raw value,
+persistence/schema, permission request, calendar write, sync/account, release,
+legal/privacy, CI, workflow/signing, entitlement, AI runtime, AOS runtime, LDI
+runtime, or public accessibility claim files.
 
 ## Full-Stack Global Order Reconciliation
 
@@ -42,8 +42,9 @@ implementation evidence. FCP08 is complete / Green as Ambition Meridian Shell
 implementation evidence. FCP09 is complete / Green as Motion / Haptics /
 Reduced Motion Proof implementation evidence. PFC13 is complete / Green as
 WidgetKit Strategy And Object Map evidence. FVQ01 is complete / Accepted
-Yellow as rendered visual freshness and flagship proof evidence. FVQ02 is the
-next eligible global batch before PFC15. Accepted Yellow:
+Yellow as rendered visual freshness and flagship proof evidence. FVQ02 is
+complete / Accepted Yellow as five top-level surface visual sweep evidence.
+FVQ03 is the next eligible global batch before PFC15. Accepted Yellow:
 Found Life source truth was inserted by remote after FCP17 had already landed,
 so FL01 records the mismatch and FL01-FL06 now govern any further FCP, AOS,
 LDI, or PFC work that touches life visibility, recall, commitment memory,
