@@ -26,6 +26,24 @@ Ambitions 4.0 is the active post-3.0 execution program, not a shipped product ve
 
 Current 4.0 status:
 
+- Active global overlay: `GLOBAL_FULL_STACK_COMPLETION_ORDER.md` is now the
+  highest-priority remaining-work order. It adds FCP flagship completion and
+  PFC platform/framework/compliance completion while preserving completed
+  batch history.
+- Queued source truth: FCP01-FCP30 Flagship Completion Plan source truth exists
+  as docs-only planning truth. FCP implementation has not started. FCP targets
+  25 major product objects and app-wide 10/10 audit closure, but the docs alone
+  authorize no production Swift, route/raw-value, persistence/schema,
+  dependency/workflow/signing/CI, release/platform/accessibility/privacy, or
+  AI/runtime claim.
+- Queued source truth: PFC01-PFC40 Platform / Framework / Compliance
+  Completion source truth exists as docs-only planning truth. PFC implementation
+  has not started. PFC covers repo/build, architecture, schema, sync, widgets,
+  Live Activities, App Intents, notifications, StoreKit, privacy/legal,
+  security, performance, observability, release engineering, and handoff
+  readiness without claiming legal compliance, App Store readiness, TestFlight
+  readiness, physical-device proof, public accessibility conformance, sync, or
+  monetization.
 - Completed: REC02 Human Operator Release Proof Plan.
 - Completed: REC03 Validation Log Ledger Closure.
 - Completed: REC04 Release Claim Copy Guard.

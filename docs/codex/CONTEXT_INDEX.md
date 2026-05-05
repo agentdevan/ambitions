@@ -7,6 +7,14 @@ Ambitions 3.0 is the active source of truth. This file defines Codex read order,
 - Ambitions 3.0 is active for product, front-end, product language, primitive architecture, implementation sequencing, repo hygiene, dependency discipline, and handoff readiness.
 - Older 1.0/2.0/v2/Waves/D/M/R material is implementation history or supporting context only where Ambitions 3.0 explicitly keeps a domain binding.
 - `docs/codex/BATCH_REGISTRY.md` is implementation status truth only. It does not override Ambitions 3.0 product direction.
+- `docs/codex/GLOBAL_FULL_STACK_COMPLETION_ORDER.md` is the highest-priority
+  overlay for remaining cross-train execution. It inserts FCP flagship
+  completion and PFC platform/framework/compliance completion while preserving
+  completed batch history and no-claim boundaries.
+- FCP source truth exists and FCP implementation has not started. PFC source
+  truth exists and PFC implementation has not started. Both are queued under the
+  full-stack order and require batch-specific gates before any production app,
+  platform, persistence, sync, legal/privacy, or release claim work.
 - The F27 FAANG handoff gate rerun is PASS after F28 repaired/rebaselined the full-suite Goal Detail trust/memory UI proof. F27.5, F29, and F30 are Green by current train evidence; the F17-F30 train is complete at the F30 closeout commit.
 - F00 Current Implementation Gap Audit is complete as an audit-only traceability pass.
 - F01/F02 Reality Rail work is now represented in Today state and UI evidence: Today renders a focused Reality Rail with `Start here`, `Start now`, Now/Next/Later, source/context labels, duration labels, privacy-safe projection, empty/unavailable copy, and reserved closure/proof slots.
@@ -93,6 +101,8 @@ at PD16 if continuation gates allow.
 
 Use this context before selecting any queued cross-train batch after REC01:
 
+- `GLOBAL_FULL_STACK_COMPLETION_ORDER.md`
+- `GLOBAL_OPTIMIZED_IMPLEMENTATION_ORDER.md`
 - `GLOBAL_FUTURE_BATCH_EXECUTION_ORDER.md`
 - `GLOBAL_FUTURE_BATCH_DEPENDENCY_GRAPH.md`
 - `GLOBAL_FUTURE_BATCH_GATE_MATRIX.md`
@@ -104,6 +114,27 @@ Use this context before selecting any queued cross-train batch after REC01:
 - `../audits/global-future-batch-sequencing-report.md`
 
 These files define Ambitions 4.0 order, gates, repair loops, continuation, validation strength, and quality bars only. They do not start REC05, PXOS, ME, CS, SI, AOS, Product Depth, app implementation, release readiness, or human-proof work.
+
+## Flagship Completion And Platform Compliance Context
+
+Use this context when the full-stack order selects FCP or PFC work:
+
+- `docs/canon/Ambitions_10_10_Flagship_Completion_Plan.md`
+- `docs/canon/Ambitions_Platform_Legal_And_Framework_Completion_Plan.md`
+- `docs/codex/GLOBAL_FULL_STACK_COMPLETION_ORDER.md`
+- `docs/codex/GLOBAL_OPTIMIZED_IMPLEMENTATION_ORDER.md`
+- `docs/codex/FLAGSHIP_COMPLETION_OBJECT_SCORECARD.md`
+- `docs/codex/FLAGSHIP_COMPLETION_GATE_MATRIX.md`
+- `docs/codex/FLAGSHIP_COMPLETION_FILE_BOUNDARY_MAP.md`
+- `docs/codex/batch-trains/FCP01_FCP30_FLAGSHIP_COMPLETION_TRAIN.md`
+- `docs/codex/batch-trains/PFC01_PFC40_PLATFORM_FRAMEWORK_COMPLIANCE_TRAIN.md`
+- `docs/codex/batches/FCP_NEXT_ELIGIBLE_BATCH_PROMPT.md`
+- `docs/codex/batches/FCP_REGISTRY_CONTEXT_RECONCILIATION_PROMPT.md`
+
+FCP and PFC source truth are active planning truth only. They do not claim FCP
+implementation, PFC implementation, App Store readiness, TestFlight readiness,
+legal/privacy compliance, physical-device proof, public accessibility proof,
+sync/cloud behavior, monetization, or release readiness.
 
 ## Handoff Package
 

@@ -1,8 +1,8 @@
 # Current Batch Train State
 
 Date: 2026-05-05
-Active train: Product Depth
-Current batch: PD15 complete / Green
+Active train: Global full-stack execution
+Current batch: FCP/PFC registry-context reconciliation active
 Scope: PD15 deepened only the existing You/Profile Personal System Center
 trust/history seam. It added a You-owned Trust History Center that distinguishes
 receipts, proof, changes, source review, privacy labels, and automation
@@ -11,6 +11,27 @@ safe automation policy state. It did not add a feed, vanity analytics
 dashboard, route/raw-value change, persistence/schema change, sync/auth/network,
 AI/LDI runtime, account/cloud behavior, CI/config, dependencies, release/platform
 claims, broad app implementation, or Candidate finalization.
+
+## Full-Stack Global Order Reconciliation
+
+`GLOBAL_FULL_STACK_COMPLETION_ORDER.md` is now the highest-priority overlay for
+remaining cross-train execution. The repo has been pulled to the latest
+`origin/main`, PD15 has closed Green, and this run is reconciling FCP/PFC source
+truth into registry, context, and batch-train state before selecting the next
+eligible full-stack batch.
+
+FCP source truth exists through `Ambitions_10_10_Flagship_Completion_Plan.md`,
+the FCP train manifest, object scorecard, gate matrix, and file-boundary map.
+FCP implementation has not started.
+
+PFC source truth exists through
+`Ambitions_Platform_Legal_And_Framework_Completion_Plan.md` and the PFC train
+manifest. PFC implementation has not started.
+
+No production Swift, route/raw value, persistence/schema, sync/cloud,
+monetization, privacy/legal, release, App Store, TestFlight, physical-device,
+public accessibility, workflow, signing, entitlement, CI, AI runtime, or LDI
+runtime claim is authorized by these docs alone.
 Complete: EB03A
 Universal Capture Composer Routing
 Owner Map. Complete:
