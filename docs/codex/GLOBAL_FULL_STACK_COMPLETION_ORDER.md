@@ -192,7 +192,10 @@ A 10/10 user-facing app is not enough. Ambitions is not globally complete until:
     strategy. It locks sparse opt-in notifications, Plan-owned Calendar read
     and write permission copy, explicit Reminders posture, deferred Focus
     Filter integration, and no hidden mutation before PFC20 proof.
-37. PFC21 StoreKit / Monetization Strategy.
+37. PFC21 StoreKit / Monetization Strategy. Completed Accepted Yellow on
+    2026-05-05 as docs/business/platform strategy. Safe launch default is no
+    StoreKit, subscription, IAP, paywall, ads, or external purchase link; exact
+    future tier/pricing/product/legal decisions remain owner-gated.
 38. PFC24 Privacy Data Map And App Privacy Labels.
 39. PFC25 Privacy Manifest / Required-Reason API Audit.
 40. PFC26 Terms / Privacy Policy / Legal Review Packet.

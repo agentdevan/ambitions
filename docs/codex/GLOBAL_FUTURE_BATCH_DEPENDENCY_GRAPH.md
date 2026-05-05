@@ -183,6 +183,14 @@ Plan-owned, Calendar writes require explicit confirmation, Reminders require an
 explicit user action, Focus Filter implementation is deferred by default, and
 hidden mutation is blocked before PFC20 proof.
 
+PFC21 is complete Accepted Yellow as of 2026-05-05. Future StoreKit,
+monetization, entitlement, paywall, trial, offer, external-purchase, or
+subscription work must use `docs/canon/Ambitions_StoreKit_Monetization_Strategy.md`
+as the business/platform boundary: launch default is no StoreKit, subscription,
+IAP, paywall, ads, or external purchase link; future exact pricing, product ids,
+tiers, App Store Connect setup, legal review, and business decisions remain
+owner-gated before PFC22/PFC23.
+
 ## Gates That Must Recur
 
 - Source Truth Gate.
