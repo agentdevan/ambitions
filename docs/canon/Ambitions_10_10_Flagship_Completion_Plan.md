@@ -110,6 +110,50 @@ FCP standardizes the following Ambitions-native object language:
 
 These are implementation objects, not decorative names. Each must have product purpose, state model, accessibility behavior, reduced-motion behavior, and test proof.
 
+### 3.1 Object Anatomy Lock
+
+Every FCP implementation object must name its anatomy before code is accepted.
+The anatomy may be expressed through SwiftUI composition, view state, fixtures,
+tests, or docs, but it must be visible enough for reviewers to reject generic
+cards, grids, lists, dashboards, feeds, settings dumps, or unsupported claims.
+
+| Vocabulary | Product role | Required anatomy | Acceptance rule | Red drift |
+| --- | --- | --- | --- | --- |
+| Surface | Dominant product object for a tab or major drill-down. | Primary object, orientation header, action path, trust/source/privacy marker, accessibility traversal. | One surface owns the user's orientation; detail goes behind deliberate taps. | Parallel destination, stacked cards, dashboard shell. |
+| Rail | Ordered execution over time. | Active node, previous/next segments, closure knot, proof marker, pressure/recovery edge. | Time order helps action without becoming an agenda or calendar clone. | Task timeline, equal-card agenda, shame/overdue lane. |
+| Spine | Proof, mission, or continuity structure. | Ordered backbone, lanes/beads/knots, selected detail, source/review markers. | Spine holds relationship and order without becoming a metrics grid. | Dashboard, kanban, PM board, trophy/feed ledger. |
+| Thread | Compressed relationship between step, goal, proof, and next action. | Current action, goal link, proof/source bead, risk or alternate marker, next anchor. | Relationship is legible at a glance and expands only on intent. | Generic breadcrumb, roadmap, progress ring as product. |
+| Edge | Context-bearing perimeter or side treatment. | Time/capacity/source/privacy cue, non-color status, static reduced-motion equivalent. | Edge supports the main object without carrying hidden meaning. | Decorative glow, color-only state, fake ambience. |
+| Fold | Progressive disclosure for explanation, source, or decision. | Closed summary, expanded explanation, source/review boundary, explicit user action. | Folds explain consequential choices before mutation. | Hidden automation, AI explanation panel, drawer-like feed. |
+| Drawer | Reviewable receipt/proof layer. | What happened, why, source, freshness, privacy, change, undo/correction/review. | Drawer is system trust infrastructure, not a snackbar. | Notification feed, activity stream, source-less claim. |
+| Pocket | Protected execution or availability area. | Boundary, allowed activity, duration/source, pause/stop behavior, receipt handoff. | Pocket protects focus or time without gamification. | Pomodoro clone, auto-filled free time, hidden mutation. |
+| Field | Ambient pressure/capacity area. | Capacity contour, pressure marker, protected area, recovery cue, text label. | Field makes capacity legible without fake precision. | Analytics chart, heatmap dashboard, decorative gradient. |
+| Receipt | User-visible record of action, source, privacy, and reversibility. | Event, cause, source, privacy, consequence, correction/undo route. | Receipt records consequence and user control. | Notification, toast-only save state, audit jargon. |
+| Proof | Evidence that progress happened. | Evidence item, source/freshness, privacy/redaction, correction state, placement. | Proof is evidence, not achievement or trophy. | Gamification, streak, score, trophy shelf. |
+| Closure | User-owned resolution of an action. | Outcome set, still-counts option, blocked/recovery path, receipt preview. | Closure is reviewable and non-shaming before confirmation. | Binary done/failed, shame state, silent reschedule. |
+| Lens | Controlled view into memory/source context. | Scope, source age, why remembered/source reason, privacy shutter, correction control. | Lens gives user-controlled context without omniscience. | Surveillance tone, hidden inference, unsupported memory claim. |
+| Resolver | Placement/correction object. | Proposed destination, consequence, source/review boundary, correction path, receipt. | Resolver keeps placement explicit after content exists. | Inbox, auto-route, confidence percentage, hidden learning. |
+| Center | User-control surface. | Status posture, control groups, receipts/history, privacy/memory settings, safe copy density. | Center gives control without becoming a settings dump. | Diagnostics console, generic settings list, creepy monitoring. |
+
+### 3.2 Object Acceptance Rules
+
+An FCP object is not accepted unless it has:
+
+1. A named owner surface within Today, Goals, Capture, Plan, or You.
+2. A primary user purpose that can be understood without marketing copy.
+3. A state model covering normal, empty/loading/degraded, private, source-review,
+   blocked/recovery, Dynamic Type, and Reduced Motion where applicable.
+4. A trust/source/privacy/receipt posture when the object recommends, places,
+   reflows, closes, proves, remembers, or mutates anything consequential.
+5. Non-color meaning, privacy-safe accessibility labels, and a static
+   reduced-motion equivalent for any visual state or motion.
+6. Focused validation evidence from the owning batch before runtime claims.
+
+An FCP object is rejected if it creates a new top-level destination, hides one
+of Today / Goals / Capture / Plan / You, turns internal compatibility vocabulary
+into user-facing copy, or claims release/platform/legal/privacy/accessibility,
+sync/cloud, AI runtime, LDI runtime, StoreKit, or device proof without evidence.
+
 ## 4. Object Implementation Requirements
 
 ### 4.1 Start Here Surface / Hero Step Panel

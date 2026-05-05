@@ -131,6 +131,8 @@ Depends on: FCP01.
 Goal: Lock Surface, Rail, Spine, Thread, Edge, Fold, Drawer, Pocket, Field, Receipt, Proof, Closure, Lens, Resolver, Center as implementation vocabulary.
 Required output: anatomy table and object acceptance rules.
 Stop if: vocabulary introduces new top-level destinations.
+Status: Complete Green on 2026-05-05 as docs-only vocabulary/anatomy lock.
+Evidence: `docs/audits/fcp02-object-vocabulary-anatomy-lock-report.md`.
 
 ### FCP03 — Ownership / File Boundary / Dependency Map
 

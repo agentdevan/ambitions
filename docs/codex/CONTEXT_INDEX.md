@@ -132,13 +132,17 @@ Use this context when the full-stack order selects FCP or PFC work:
 - `docs/codex/batches/FCP_REGISTRY_CONTEXT_RECONCILIATION_PROMPT.md`
 - `docs/audits/fcp-pfc-global-registry-context-reconciliation-report.md`
 - `docs/audits/fcp01-flagship-completion-source-truth-lock-report.md`
+- `docs/audits/fcp02-object-vocabulary-anatomy-lock-report.md`
 
 FCP/PFC reconciliation is complete as docs-only operating truth. FCP01 is
 complete as a source-truth lock only: it makes the 10/10 object standard,
 scorecard, gate matrix, and file-boundary map discoverable before later FCP
-batches. FCP and PFC source truth remain active planning truth only. They do not
-claim FCP implementation, PFC implementation, App Store readiness, TestFlight
-readiness, legal/privacy compliance, physical-device proof, public
+batches. FCP02 is complete as a docs-only object vocabulary/anatomy lock:
+Surface, Rail, Spine, Thread, Edge, Fold, Drawer, Pocket, Field, Receipt,
+Proof, Closure, Lens, Resolver, and Center are implementation objects, not
+decorative labels. FCP and PFC source truth remain active planning truth only.
+They do not claim FCP implementation, PFC implementation, App Store readiness,
+TestFlight readiness, legal/privacy compliance, physical-device proof, public
 accessibility proof, sync/cloud behavior, monetization, or release readiness.
 
 ## Handoff Package

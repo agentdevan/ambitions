@@ -43,6 +43,12 @@ Current 4.0 status:
   scorecard, gate matrix, file-boundary map, registry/context pointers, and the
   FCP01 audit report. It does not start FCP production Swift implementation or
   claim any object has reached 10/10 runtime quality.
+- Complete / accepted Yellow: FCP02 Object Vocabulary And Anatomy Lock is
+  complete as docs-only source-truth evidence. It locks Surface, Rail, Spine,
+  Thread, Edge, Fold, Drawer, Pocket, Field, Receipt, Proof, Closure, Lens,
+  Resolver, and Center as implementation vocabulary with anatomy and acceptance
+  rules. It introduces no new top-level destinations and does not authorize app
+  code edits by itself.
 - Queued source truth: FCP01-FCP30 Flagship Completion Plan source truth exists
   as docs-only planning truth. FCP implementation has not started. FCP targets
   25 major product objects and app-wide 10/10 audit closure, but the docs alone
