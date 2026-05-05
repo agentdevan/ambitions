@@ -2,14 +2,15 @@
 
 Date: 2026-05-04
 Active train: Product Depth
-Current batch: PD08 complete / accepted Yellow
-Scope: PD08 deepened only Goals-owned Goal Detail alternate path and tradeoff
-presentation. It added presentation-derived tradeoff/review state, Goal Detail
-UI, focused Goals tests, and Product Depth docs. It did not touch AOS
-alternate-path runtime logic, automated reroute behavior, plan mutation,
-persistence/schema, sync/auth/network, AI/LDI runtime, navigation,
-route/raw values, CI/config, dependencies, release/platform claims, broad app
-implementation, or Candidate finalization. Complete: EB03A
+Current batch: PD09 complete / accepted Yellow
+Scope: PD09 deepened only Capture-owned placement review presentation behind
+existing captured items. It added presentation-derived placement review state,
+Capture UI, focused Capture tests, and Product Depth docs. It did not turn
+Capture into an inbox or feed, did not add a top-level destination, did not
+perform silent placement, and did not touch persistence/schema, sync/auth/
+network, AI/LDI runtime, navigation, route/raw values, CI/config, dependencies,
+release/platform claims, broad app implementation, or Candidate finalization.
+Complete: EB03A
 Universal Capture Composer Routing
 Owner Map. Complete:
 EB03B Universal Capture Composer Routing Implementation. Complete: EB04
@@ -122,17 +123,17 @@ accessibility/release claim change was made.
 
 ## Current Validation Result
 
-PD08 result: PASS WITH ACCEPTED YELLOW.
-`docs/audits/pd08-goal-alternate-path-tradeoff-depth-report.md` records the
-bounded Goal Detail alternate-path/tradeoff presentation layer, route option
-comparison, effort/time/energy labels, recovery labels, user-review requirement,
-focused Goal Detail tests, `xcodegen generate`, `scripts/build-local.sh`,
-Product Depth copy/drift/release scans, accessibility and Reduce Motion
-advisory scans, doc QA, batch gate, and boundary scan. Yellow items are no
-screenshot/rendered proof, no human/device/VoiceOver/Dynamic Type/Reduce
-Motion walkthrough, existing file-size/doc-QA advisory backlog, and the generic
-boundary script flagging PD08-allowed Goals files despite explicit Goals
-implementation scope.
+PD09 result: PASS WITH ACCEPTED YELLOW.
+`docs/audits/pd09-capture-placement-review-report.md` records the bounded
+Capture placement review presentation layer, destination/consequence/privacy/
+confirmation/archive labels, accessibility summary, focused Capture and Smart
+Attachment tests, `xcodegen generate`, `scripts/build-local.sh`, Product Depth
+copy/drift/release scans, accessibility and Reduce Motion advisory scans, doc
+QA, batch gate, and boundary scan. Yellow items are no screenshot/rendered
+proof, no human/device/VoiceOver/Dynamic Type/Reduce Motion walkthrough,
+existing file-size/doc-QA advisory backlog, internal compatibility vocabulary
+in existing Capture tests/source, and the generic boundary script flagging
+PD09-allowed Capture files despite explicit Capture implementation scope.
 
 PD03 result: PASS WITH ACCEPTED YELLOW.
 `docs/audits/pd03-today-step-session-depth-report.md` records the bounded

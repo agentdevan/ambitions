@@ -294,9 +294,37 @@ struct CapturesScreen: View {
                         .frame(maxWidth: .infinity, alignment: .leading)
                 }
 
+                placementReview(capture.placementReviewState)
+
                 captureActions(for: capture, activeGoalOptions: activeGoalOptions)
             }
         }
+    }
+
+    private func placementReview(_ review: CapturePlacementReviewState) -> some View {
+        VStack(alignment: .leading, spacing: theme.spacing.xs) {
+            Divider()
+
+            HStack(alignment: .firstTextBaseline, spacing: theme.spacing.xs) {
+                Label(review.title, systemImage: "tray.and.arrow.down")
+                    .font(theme.typography.caption.weight(.semibold))
+                    .foregroundStyle(theme.colors.textPrimary)
+                Spacer()
+                TagPill(review.placementStateTitle, state: review.state)
+            }
+
+            Label(review.destinationLabel, systemImage: "arrow.triangle.branch")
+            Label(review.consequenceLabel, systemImage: "checkmark.seal")
+            Label(review.privacyLabel, systemImage: "lock.shield")
+            Label(review.confirmationLabel, systemImage: "hand.raised")
+            Label(review.archiveLabel, systemImage: "archivebox")
+        }
+        .font(theme.typography.caption)
+        .foregroundStyle(theme.colors.textSecondary)
+        .accessibilityElement(children: .combine)
+        .accessibilityLabel(review.title)
+        .accessibilityValue(review.accessibilityValue)
+        .accessibilityIdentifier("captures.placement-review.\(review.id)")
     }
 
     private func state(for capture: Capture) -> AmbitionVisualState {

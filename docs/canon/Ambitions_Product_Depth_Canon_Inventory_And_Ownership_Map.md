@@ -1,7 +1,7 @@
 # Ambitions Product Depth Canon, Inventory, And Ownership Map
 <!-- markdownlint-disable MD013 -->
 
-Status: PD01 source-truth map; PD02 accepted Yellow as bounded Today Step Detail implementation; PD03 accepted Yellow as bounded Today Step Session implementation; PD04 accepted Yellow as bounded Today recovery/closure implementation; PD05 Green as bounded Goals Mission Control detail architecture implementation; PD06 Green as bounded Goal Lifecycle and Path Visualization implementation; PD07 accepted Yellow as bounded Goal Proof and Decision History implementation; PD08 accepted Yellow as bounded Goal Alternate Path and Tradeoff implementation
+Status: PD01 source-truth map; PD02 accepted Yellow as bounded Today Step Detail implementation; PD03 accepted Yellow as bounded Today Step Session implementation; PD04 accepted Yellow as bounded Today recovery/closure implementation; PD05 Green as bounded Goals Mission Control detail architecture implementation; PD06 Green as bounded Goal Lifecycle and Path Visualization implementation; PD07 accepted Yellow as bounded Goal Proof and Decision History implementation; PD08 accepted Yellow as bounded Goal Alternate Path and Tradeoff implementation; PD09 accepted Yellow as bounded Capture Placement Review implementation
 Date: 2026-05-04
 
 ## Purpose
@@ -92,7 +92,7 @@ stacked-card top-level composition.
 | Goal lifecycle/path visualization | Goals | PD06 | Green implementation evidence | PD05 Green, SI06/SI07/SI12/SI17, visual/accessibility gates | Goal Detail path stages now expose text-plus-symbol lifecycle, progress, proof, risk, and route markers with non-color accessibility summaries. Must not become KPI/OKR or decorative path. |
 | Goal proof/decision history | Goals / Proof | PD07 | Accepted Yellow implementation evidence | PD05 Green, PX08, SI10/SI14, AOS proof if runtime/data logic touched | Goal Detail now includes a presentation-derived review trail for proof, decisions, assumptions, and receipts. Proof remains evidence, not achievement; no proof runtime/data logic was touched. |
 | Goal alternate path/tradeoff | Goals | PD08 | Accepted Yellow implementation evidence | PD05 Green, PX03/PX15, AOS alternate-path if runtime logic touched | Goal Detail now includes a presentation-derived tradeoff review for route options, effort/time/energy comparison, recovery labels, and user-review requirements. No automated reroute, route mutation, plan mutation, or AOS runtime logic was touched. |
-| Capture placement review | Capture | PD09 | Candidate implementation owner mapped | PX04/PX13, SI09/SI10/SI13/SI17, privacy/copy gates, ME Capture if large owner touched | Placement appears only after content exists. |
+| Capture placement review | Capture | PD09 | Accepted Yellow implementation evidence | PX04/PX13, SI09/SI10/SI13/SI17, privacy/copy gates, ME Capture if large owner touched | Captured items now include presentation-derived destination, consequence, privacy, user-confirmation, and archive/discard labels after content exists. No silent placement, inbox/feed mode, persistence/schema, or AOS runtime change was made. |
 | Capture correction | Capture | PD10 | Candidate remains gated | PD09 Green, privacy/copy, AOS adaptation/source truth if learning touched | Must avoid confidence language and hidden automation. |
 | Grow into Goal | Capture / Goals | PD11 | Candidate remains gated | PD09/PD10 Green, PX03/PX04/PX15, CS navigation if route touched, AOS goal path if runtime touched | Candidate items must not be silently upgraded. |
 | Reflow Decision depth | Plan | PD12 | Candidate implementation owner mapped | PX05/PX07/PX08, SI08/SI10/SI13/SI17, ME Plan, AOS if commitment/runtime logic touched | User-owned, non-silent consequence review. |
@@ -127,7 +127,8 @@ stacked-card top-level composition.
 | PD06 | Complete / Green after validation and commit | Bounded Goals implementation; Goal Detail lifecycle/path visualization now exposes current position, progress shape, proof, risk, and route markers without navigation/raw-value changes. |
 | PD07 | Complete / accepted Yellow after validation and commit | Bounded Goals implementation; Goal Detail review trail surfaces proof, decision, assumption, and receipt history from existing mission-control state without runtime proof model changes. |
 | PD08 | Complete / accepted Yellow after validation and commit | Bounded Goals implementation; Goal Detail tradeoff review surfaces route comparison, recovery, and review requirements from existing path-builder state without automated reroute or AOS runtime changes. |
-| PD09-PD18 | Queued / Blocked | Each waits for predecessor and named PXOS/ME/CS/SI/AOS-if-needed gates. |
+| PD09 | Complete / accepted Yellow after validation and commit | Bounded Capture implementation; captured items surface placement review with destination, consequence, privacy, user confirmation, and archive/discard posture without inbox/feed mode or silent placement. |
+| PD10-PD18 | Queued / Blocked | Each waits for predecessor and named PXOS/ME/CS/SI/AOS-if-needed gates. |
 | Global train outside PD | Stopped / not resumed | Requires its own explicit approval and gate path. |
 
 ## Conflict Register
@@ -169,10 +170,10 @@ depth. PD05 proves only bounded Goal Detail Mission Control visible lane-order
 depth. PD06 proves only bounded Goal Detail lifecycle/path visualization
 depth. PD07 proves only bounded Goal Detail proof/decision-history
 presentation depth. PD08 proves only bounded Goal Detail alternate
-path/tradeoff presentation depth. These batches do not prove later PD readiness
-beyond continuation eligibility, release readiness, TestFlight readiness, App
-Store readiness, physical-device proof, public accessibility conformance,
-signed archive validation, App Store Connect validation, external-platform
-rendering, PXOS implementation, AmbitionsOS implementation, LDI runtime,
-sync/auth/network behavior, persistence migration, or AI/model runtime
-behavior.
+path/tradeoff presentation depth. PD09 proves only bounded Capture placement
+review presentation depth. These batches do not prove later PD readiness beyond
+continuation eligibility, release readiness, TestFlight readiness, App Store
+readiness, physical-device proof, public accessibility conformance, signed
+archive validation, App Store Connect validation, external-platform rendering,
+PXOS implementation, AmbitionsOS implementation, LDI runtime, sync/auth/network
+behavior, persistence migration, or AI/model runtime behavior.
