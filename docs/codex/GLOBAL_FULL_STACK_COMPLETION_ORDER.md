@@ -80,7 +80,8 @@ A 10/10 user-facing app is not enough. Ambitions is not globally complete until:
 
 ### Phase 3 — FCP Core Product Objects
 
-19. FCP17 Schedule / Availability / Defaults Center.
+19. FCP17 Schedule / Availability / Defaults Center. Completed Green as
+    You-owned Availability Center implementation on 2026-05-05.
 20. FCP06 Receipt Drawer / Trust Layer.
 21. FCP05 Start Here Surface.
 22. FCP07 Reality Rail Continuity.

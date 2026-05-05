@@ -741,6 +741,37 @@ final class ProfileFeatureServiceTests: XCTestCase {
         XCTAssertFalse(visibleCopy.localizedCaseInsensitiveContains("permission grab"))
     }
 
+    func testFCP17AvailabilityCenterProtectsHardContextAndTrustDefaults() async throws {
+        let repositories = try await makeRepositories()
+        let service = RepositoryBackedProfileService(repositories: repositories)
+
+        let dashboard = try await service.loadProfileDashboard()
+        let center = dashboard.availabilityCenter
+        let visibleCopy = (
+            [center.title, center.subtitle, center.footer] +
+            center.hardContextStack.flatMap(itemCopy) +
+            center.protectedPocketMap.flatMap(itemCopy) +
+            center.planningDefaults.flatMap(itemCopy) +
+            center.automationTrustControls.flatMap(itemCopy) +
+            center.durationSourceProof.flatMap(itemCopy) +
+            center.vacationAwayBehavior.flatMap(itemCopy)
+        ).joined(separator: " ")
+
+        XCTAssertEqual(center.title, "Availability Center")
+        XCTAssertTrue(visibleCopy.contains("Committed blocks, sleep, care, commute, and buffers win"))
+        XCTAssertTrue(visibleCopy.contains("Open time is not auto-filled"))
+        XCTAssertTrue(visibleCopy.contains("Day, Week, and Month are capacity lenses"))
+        XCTAssertTrue(visibleCopy.contains("Guided automation"))
+        XCTAssertTrue(visibleCopy.contains("Calendar writes require confirmation"))
+        XCTAssertTrue(visibleCopy.contains("Vacation is not free time by default"))
+        XCTAssertTrue(visibleCopy.contains("does not request permissions, write calendars, auto-fill open time, or run broad reflow"))
+        XCTAssertFalse(visibleCopy.localizedCaseInsensitiveContains("auto-scheduler"))
+        XCTAssertFalse(visibleCopy.localizedCaseInsensitiveContains("calendar clone"))
+        XCTAssertFalse(visibleCopy.localizedCaseInsensitiveContains("calendar sync"))
+        XCTAssertFalse(visibleCopy.localizedCaseInsensitiveContains("AI confidence"))
+        XCTAssertFalse(visibleCopy.localizedCaseInsensitiveContains("productivity score"))
+    }
+
     func testPD17CrossSurfaceProofReviewConnectsOwningSurfacesWithoutNewDashboard() async throws {
         let repositories = try await makeRepositories()
         try await repositories.evidence.saveEvidence([
@@ -828,6 +859,10 @@ final class ProfileFeatureServiceTests: XCTestCase {
 }
 
 private extension ProfileFeatureServiceTests {
+    func itemCopy(_ item: ProfileAvailabilityCenterItem) -> [String] {
+        [item.title, item.summary, item.statusLabel, item.sourceLabel]
+    }
+
     func makeRepositories() async throws -> AppRepositories {
         let store = try AmbitionsPersistenceStore(inMemory: true)
         return AppRepositories(

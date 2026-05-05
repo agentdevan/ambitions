@@ -84,8 +84,16 @@ Current 4.0 status:
   stopping, FAANG-style review packets, anti-agentic-slop reviewers, and
   non-mutating advisory scans. It does not implement product features or edit
   production Swift.
+- Complete / Green: FCP17 Schedule / Availability / Defaults Center is complete
+  as bounded You-owned Availability Center implementation. It adds typed
+  availability center state, hard context, protected pockets, planning defaults,
+  automation trust controls, duration source proof, vacation/away behavior, a
+  Schedule & Availability detail card, and focused Profile tests without
+  route/raw-value, persistence/schema, permission-request, calendar-write,
+  sync/account, release, legal/privacy, or public accessibility claims.
 - Queued source truth: FCP01-FCP30 Flagship Completion Plan source truth exists
-  as docs-only planning truth. FCP implementation has not started. FCP targets
+  as active implementation truth. FCP implementation has started with FCP17.
+  FCP targets
   25 major product objects and app-wide 10/10 audit closure, but the docs alone
   authorize no production Swift, route/raw-value, persistence/schema,
   dependency/workflow/signing/CI, release/platform/accessibility/privacy, or
@@ -1001,6 +1009,7 @@ note and the PD18 audit report.
 | PFC08 Corruption Recovery / Backup / Restore Plan | Complete / Green | PFC08 completed as docs-only recovery planning evidence. It classified current service-level malformed package, unsupported version, manifest warning, conflict, fresh-store restore, and local-only sync proof; documented future recovery copy, destructive-action stop conditions, and later PFC owners; and changed no production Swift, schema, tests, workflow, project, dependency, signing, entitlement, privacy manifest, lockfile, or generated output. |
 | PFC09 iCloud / CloudKit Sync Strategy Decision | Complete / Green | PFC09 completed as docs-only sync strategy decision evidence. Current/launch strategy remains explicit local-only, no account, no launch sync, and no CloudKit/server/backend claim. CloudKit, server-backed sync, or indefinite local-only future posture require later approved product/platform/privacy/legal decision and proof. |
 | PFC12 App Groups / Shared Storage Boundary | Complete / Green | PFC12 completed as app-group/shared-storage boundary evidence. It documented the existing `group.com.ambitions.shared` app/widget/share entitlement match, shared external snapshot and external creation queue paths, privacy-safe minimization rules, and focused external-surface/shared-creation proof without editing production Swift, entitlements, signing, project, workflow, schema, sync/cloud/account, release, or legal/privacy claim files. |
+| FCP17 Schedule / Availability / Defaults Center | Complete / Green | FCP17 completed as bounded You-owned Availability Center implementation. It added typed Availability Center state, a Schedule & Availability detail card, and focused Profile tests proving hard context, protected pockets, open-time protection, Guided automation, duration labels, and vacation/away behavior without route/raw-value, persistence/schema, permission-request, calendar-write, sync/account, release, legal/privacy, or public accessibility claims. |
 | PXOS Future-Canon Integration | Completed / docs-only | Added Product Experience OS future canon and Codex OS controls. It does not start PXOS implementation or the PXOS train. |
 | PX01-PX20 Product Experience OS Train | Completed / docs-only | PX01-PX20 are complete as future canon/roadmap evidence. PXOS implementation is not started. |
 

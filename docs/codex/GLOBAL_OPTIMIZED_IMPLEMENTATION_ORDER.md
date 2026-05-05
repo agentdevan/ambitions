@@ -78,7 +78,7 @@ PFC12 is complete / Green as app-group/shared-storage boundary evidence. It
 documented the existing app/widget/share extension entitlement match,
 privacy-safe shared snapshot and external creation queue boundaries, and focused
 test proof. The full-stack order now resumes row 011 FCP17 next.
-| 011 | FCP17 Schedule / Availability / Defaults Center | FCP | Implementation | Build Availability Center before Start Here relies on time-fit proof. | PD16; FCP01-FCP04. | Single-batch. |
+| 011 | FCP17 Schedule / Availability / Defaults Center | FCP | Implementation | Completed Green on 2026-05-05 as bounded You-owned Availability Center with hard context, protected pockets, defaults, automation trust, durations, and away behavior. | PD16; FCP01-FCP04. | Complete; next FCP06. |
 | 012 | FCP06 Receipt Drawer / Trust Layer | FCP | Implementation | Shared trust drawer should exist before Start Here/Rail/Plan/Goal integrations mature. | FCP01-FCP04; PD15/PD17 preferred. | Single-batch. |
 | 013 | FCP05 Start Here Surface | FCP | Implementation | Start Here becomes flagship daily decision object after trust and availability foundations. | FCP01-FCP04; PD02-PD04; FCP06/FCP17 preferred. | Single-batch. |
 | 014 | FCP07 Reality Rail Continuity | FCP | Implementation | Rail integrates Start Here, proof, closure, pressure. | FCP05/FCP06. | Single-batch. |

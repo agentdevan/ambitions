@@ -37,3 +37,36 @@ struct ProfilePlanningDefaultsCenterState: Sendable, Equatable {
         sections.first { $0.id == id }
     }
 }
+
+struct ProfileAvailabilityCenterItem: Identifiable, Sendable, Equatable {
+    let id: String
+    let title: String
+    let summary: String
+    let statusLabel: String
+    let sourceLabel: String
+    let state: AmbitionVisualState
+}
+
+struct ProfileAvailabilityCenterState: Sendable, Equatable {
+    let title: String
+    let subtitle: String
+    let hardContextStack: [ProfileAvailabilityCenterItem]
+    let protectedPocketMap: [ProfileAvailabilityCenterItem]
+    let planningDefaults: [ProfileAvailabilityCenterItem]
+    let automationTrustControls: [ProfileAvailabilityCenterItem]
+    let durationSourceProof: [ProfileAvailabilityCenterItem]
+    let vacationAwayBehavior: [ProfileAvailabilityCenterItem]
+    let footer: String
+
+    static let empty = ProfileAvailabilityCenterState(
+        title: "Availability Center",
+        subtitle: "Hard context, protected pockets, defaults, automation trust, durations, and away behavior stay reviewable before Plan uses them.",
+        hardContextStack: [],
+        protectedPocketMap: [],
+        planningDefaults: [],
+        automationTrustControls: [],
+        durationSourceProof: [],
+        vacationAwayBehavior: [],
+        footer: "Availability is user-owned. Open time is not automatically free work time."
+    )
+}

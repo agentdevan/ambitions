@@ -2,17 +2,16 @@
 
 Date: 2026-05-05
 Active train: Global full-stack execution
-Current batch: PFC12 App Groups / Shared Storage Boundary Green; full-stack
-order selects FCP17 Schedule / Availability / Defaults Center next if
-continuation gates allow.
-Scope: PFC12 completed as app-group/shared-storage boundary evidence after
-PFC09. It documents the existing `group.com.ambitions.shared` app/widget/share
-entitlement match, shared external snapshot path, external creation queue path,
-privacy-safe minimization rules, and focused test proof. PFC12 changed no
-production Swift, shared packages, tests, project generation source truth,
-workflows, dependencies, signing, entitlements, privacy manifests, lockfiles,
-Brewfiles, schema, sync/cloud/account behavior, release claim, or legal/privacy
-claim file.
+Current batch: FCP17 Schedule / Availability / Defaults Center Green;
+full-stack order selects FCP06 Receipt Drawer / Trust Layer next if continuation
+gates allow.
+Scope: FCP17 completed as bounded You-owned Availability Center implementation
+after PFC12. It added typed Availability Center state, hard context, protected
+pockets, planning defaults, automation trust controls, duration source proof,
+vacation/away behavior, a Schedule & Availability detail card, and focused
+Profile tests. FCP17 changed no route/raw value, persistence/schema,
+permission-request, calendar-write, sync/account, release, legal/privacy, or
+public accessibility claim file.
 
 ## Full-Stack Global Order Reconciliation
 
@@ -27,8 +26,8 @@ the FCP train manifest, object scorecard, gate matrix, and file-boundary map.
 FCP/PFC registry-context reconciliation, FCP01 source-truth lock, FCP02 object
 vocabulary/anatomy lock, and FCP03 ownership/boundary map are complete as
 docs-only operating truth. FCP04 preview fixture and QA matrix expansion is
-complete as source-truth planning evidence. FCP production Swift implementation
-has not started.
+complete as source-truth planning evidence. FCP17 is complete / Green as the
+first bounded FCP production Swift implementation in the global order.
 
 PD16 is complete / Green as bounded You/Profile implementation evidence. It
 adds typed planning setup depth for Schedule & Availability, Planning Defaults,

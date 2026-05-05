@@ -368,6 +368,8 @@ Use this context when the global full-stack order selects PFC batches:
 - `docs/audits/pfc02-architecture-boundary-module-map-report.md`
 - `docs/audits/pfc03-dead-code-prompt-artifact-naming-smell-audit-report.md`
 - `docs/audits/pfc04-dependency-supply-chain-policy-report.md`
+- `docs/codex/batches/FCP17_Schedule_Availability_Defaults_Center_Prompt.md`
+- `docs/audits/fcp17-schedule-availability-defaults-center-report.md`
 - `docs/audits/pfc05-ci-local-toolchain-reproducibility-report.md`
 - `docs/audits/pfc06-schema-persistence-source-truth-report.md`
 - `docs/audits/pfc07-migration-ladder-backward-compatibility-tests-report.md`
@@ -403,8 +405,14 @@ sync UI claims. PFC12 App Groups / Shared Storage Boundary is Green as
 app-group/shared-storage evidence for the existing `group.com.ambitions.shared`
 app/widget/share entitlement match, shared snapshot path, external creation
 queue path, privacy-safe minimization rules, and focused test proof. PFC10/PFC11
-remain governed by the PFC train and future sync approval gates. The full-stack
-order resumes FCP17 next.
+remain governed by the PFC train and future sync approval gates. FCP17 is
+complete as bounded You-owned Availability Center implementation: typed
+Availability Center state, hard context, protected
+pockets, planning defaults, automation trust controls, duration source proof,
+vacation/away behavior, a Schedule & Availability detail card, and focused
+Profile tests. It does not authorize route/raw-value, persistence/schema,
+permission-request, calendar-write, sync/account, release, legal/privacy, or
+public accessibility claims. The full-stack order selects FCP06 next.
 
 
 ## Living Dream Intelligence Context

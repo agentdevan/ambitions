@@ -248,6 +248,7 @@ private struct ProfileRootDetailSheet: View {
         case .archive:
             ProfileSectionCard(eyebrow: "Archive", section: dashboard.accountSection, accessibilityIdentifier: "profile.archive-card")
         case .scheduleAvailability:
+            ProfileAvailabilityCenterCard(center: dashboard.availabilityCenter)
             if let section = dashboard.planningDefaultsCenter.section(id: "schedule-availability") {
                 ProfilePlanningDefaultsSectionCard(section: section, accessibilityIdentifier: "profile.schedule-availability-card")
             }

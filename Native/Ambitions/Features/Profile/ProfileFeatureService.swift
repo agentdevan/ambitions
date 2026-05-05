@@ -197,6 +197,11 @@ private extension RepositoryBackedProfileService {
                 remindersAuthorization: remindersAuthorization,
                 safetySamples: safetySamples
             ),
+            availabilityCenter: makeAvailabilityCenter(
+                calendarAuthorization: calendarAuthorization,
+                remindersAuthorization: remindersAuthorization,
+                safetySamples: safetySamples
+            ),
             receiptAudit: makeReceiptAudit(snapshot: snapshot, receipts: policyReceipts),
             trustHistoryCenter: makeTrustHistoryCenter(
                 snapshot: snapshot,
@@ -1637,6 +1642,140 @@ private extension RepositoryBackedProfileService {
             ],
             footer: "Planning setup is useful when it makes recommendations fit real capacity. It should never pressure completion or imply hidden access."
         )
+    }
+
+    func makeAvailabilityCenter(
+        calendarAuthorization: CalendarRemindersAuthorizationState,
+        remindersAuthorization: CalendarRemindersAuthorizationState,
+        safetySamples: SafetyBoundarySamples
+    ) -> ProfileAvailabilityCenterState {
+        ProfileAvailabilityCenterState(
+            title: "Availability Center",
+            subtitle: "The rules Plan must respect before it suggests where work fits.",
+            hardContextStack: [
+                ProfileAvailabilityCenterItem(
+                    id: "hard-context-work-school",
+                    title: "Work, school, and fixed anchors",
+                    summary: "Committed blocks, sleep, care, commute, and buffers win before any planning suggestion.",
+                    statusLabel: calendarAuthorizationLabel(calendarAuthorization),
+                    sourceLabel: "Source: Plan-owned calendar boundary",
+                    state: .default
+                ),
+                ProfileAvailabilityCenterItem(
+                    id: "hard-context-protected-time",
+                    title: "Protected time",
+                    summary: "Protected pockets are treated as real commitments, not open capacity.",
+                    statusLabel: "Hard context",
+                    sourceLabel: "Source: User default",
+                    state: .success
+                )
+            ],
+            protectedPocketMap: [
+                ProfileAvailabilityCenterItem(
+                    id: "protected-pocket-open-time",
+                    title: "Open time is not auto-filled",
+                    summary: "Open windows can help Plan see possibility, but Ambitions must not pack them by default.",
+                    statusLabel: AvailabilityState.doNotFill.displayLabel,
+                    sourceLabel: "Source: Planning default",
+                    state: .success
+                ),
+                ProfileAvailabilityCenterItem(
+                    id: "protected-pocket-buffers",
+                    title: "Buffers create breathing room",
+                    summary: "Transitions, rest, and family/context margins stay visible before a day is reshaped.",
+                    statusLabel: "Protected",
+                    sourceLabel: "Source: Capacity boundary",
+                    state: .success
+                )
+            ],
+            planningDefaults: [
+                ProfileAvailabilityCenterItem(
+                    id: "planning-defaults-capacity-lenses",
+                    title: "Day, Week, and Month are capacity lenses",
+                    summary: "They are not calendar modes and should not become dense event grids.",
+                    statusLabel: "Capacity lens",
+                    sourceLabel: "Source: Product canon",
+                    state: .default
+                ),
+                ProfileAvailabilityCenterItem(
+                    id: "planning-defaults-reflow-review",
+                    title: "Reflow stays reviewable",
+                    summary: "Meaningful rearrangement needs a visible review boundary and receipt posture.",
+                    statusLabel: "Ask first",
+                    sourceLabel: "Source: Trust default",
+                    state: .warning
+                )
+            ],
+            automationTrustControls: [
+                ProfileAvailabilityCenterItem(
+                    id: "automation-guided-default",
+                    title: "Guided automation is default",
+                    summary: AutomationLevel.defaultLevel.explanation,
+                    statusLabel: AutomationLevel.defaultLevel.displayLabel,
+                    sourceLabel: "Source: Automation policy",
+                    state: .selected
+                ),
+                ProfileAvailabilityCenterItem(
+                    id: "automation-calendar-confirmation",
+                    title: "Calendar writes require confirmation",
+                    summary: safetySamples.calendarWrite.reasons.map(\.userFacingSummary).joined(separator: " "),
+                    statusLabel: "Requires confirmation",
+                    sourceLabel: "Source: Plan safety policy",
+                    state: .warning
+                )
+            ],
+            durationSourceProof: DurationSource.allCases.map { source in
+                ProfileAvailabilityCenterItem(
+                    id: "duration-source-\(source.rawValue)",
+                    title: durationTitle(for: source),
+                    summary: durationSubtitle(for: source),
+                    statusLabel: "Labeled",
+                    sourceLabel: "Source: Duration proof",
+                    state: source == .unset ? .default : .success
+                )
+            },
+            vacationAwayBehavior: [
+                ProfileAvailabilityCenterItem(
+                    id: "away-default",
+                    title: "Vacation is not free time by default",
+                    summary: "Away time protects recovery unless the user explicitly marks part of it available.",
+                    statusLabel: VacationAvailabilityBehavior.defaultBehavior.displayLabel,
+                    sourceLabel: "Source: Away behavior default",
+                    state: .success
+                ),
+                ProfileAvailabilityCenterItem(
+                    id: "away-override",
+                    title: "Per-away override",
+                    summary: "A specific away block can be open, protected, or mixed without changing future defaults.",
+                    statusLabel: "Visible choice",
+                    sourceLabel: "Source: User override",
+                    state: .default
+                )
+            ],
+            footer: "Availability Center explains how defaults affect Today and Plan. It does not request permissions, write calendars, auto-fill open time, or run broad reflow."
+        )
+    }
+
+    private func durationTitle(for source: DurationSource) -> String {
+        switch source {
+        case .userSet: "User-set"
+        case .userAccepted: "Accepted suggestion"
+        case .suggested: "Suggested"
+        case .historical: "Historical range"
+        case .unset: "Unset"
+        case .actual: "Actual"
+        }
+    }
+
+    private func durationSubtitle(for source: DurationSource) -> String {
+        switch source {
+        case .userSet: "Shown as planned because you set it."
+        case .userAccepted: "Shown as planned after you accept it."
+        case .suggested: "Always labeled as suggested."
+        case .historical: "Always labeled as usually."
+        case .unset: "Shown as Duration not set."
+        case .actual: "Shown only after completion evidence exists."
+        }
     }
 
     func makePolicyReceipts(safetySamples: SafetyBoundarySamples) -> [ActionReceipt] {

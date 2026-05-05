@@ -406,6 +406,7 @@ struct ProfileDashboard: Sendable, Equatable {
     let assumptionCorrections: ProfileAssumptionCorrectionState
     let automationBoundary: ProfileAutomationBoundaryState
     let planningDefaultsCenter: ProfilePlanningDefaultsCenterState
+    let availabilityCenter: ProfileAvailabilityCenterState
     let receiptAudit: ProfileReceiptAuditState
     let trustHistoryCenter: ProfileTrustHistoryCenterState
     let crossSurfaceProofReview: ProfileCrossSurfaceProofReviewState
@@ -428,6 +429,7 @@ struct ProfileDashboard: Sendable, Equatable {
         assumptionCorrections: ProfileAssumptionCorrectionState,
         automationBoundary: ProfileAutomationBoundaryState,
         planningDefaultsCenter: ProfilePlanningDefaultsCenterState = .empty,
+        availabilityCenter: ProfileAvailabilityCenterState = .empty,
         receiptAudit: ProfileReceiptAuditState,
         trustHistoryCenter: ProfileTrustHistoryCenterState = .empty,
         crossSurfaceProofReview: ProfileCrossSurfaceProofReviewState = .empty,
@@ -449,6 +451,7 @@ struct ProfileDashboard: Sendable, Equatable {
         self.assumptionCorrections = assumptionCorrections
         self.automationBoundary = automationBoundary
         self.planningDefaultsCenter = planningDefaultsCenter
+        self.availabilityCenter = availabilityCenter
         self.receiptAudit = receiptAudit
         self.trustHistoryCenter = trustHistoryCenter
         self.crossSurfaceProofReview = crossSurfaceProofReview

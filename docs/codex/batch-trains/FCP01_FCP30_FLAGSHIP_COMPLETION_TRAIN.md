@@ -261,6 +261,12 @@ Owner: You / Plan.
 Depends on: PD16 preferred; EB21/EB22 boundaries.
 Goal: Create AvailabilityCenter from Schedule, Planning Defaults, Automation Trust, Vacation/Away, Durations.
 Acceptance: hard context wins; open time not auto-filled; Guided default; vacation not free time unless marked.
+Status: Complete Green on 2026-05-05 as a bounded You-owned Availability Center
+implementation. It added typed Availability Center state, a Schedule &
+Availability detail card, and focused Profile tests without route/raw-value,
+persistence/schema, permission-request, calendar-write, sync/account, release,
+legal/privacy, or public accessibility claims.
+Evidence: `docs/audits/fcp17-schedule-availability-defaults-center-report.md`.
 
 ### FCP18 — Capture Placement Shelf
 
