@@ -167,12 +167,19 @@ Acceptance: not a generic card; explains why now, source, time fit, goal thread,
 
 ### FCP06 — Receipt Drawer / Trust Layer
 
+Status: Complete Green on 2026-05-05 as shared Receipt Drawer and Source Fold
+foundation. Start Here attachment is deferred to FCP05 under the newer global
+order because FCP05 was not complete when FCP06 ran.
+
 Type: Implementation.
 Owner: Shared Trust.
-Depends on: FCP05; SI10; DAV09; EB17/EB18 where relevant.
+Depends on: FCP01-FCP04; SI10; DAV09; EB17/EB18 where relevant. The older
+FCP05 dependency applies to Start Here attachment, not the shared trust
+foundation.
 Goal: Create reusable ReceiptDrawer and SourceFold; attach to Start Here first.
 Likely files: TrustReceiptLayerPrimitives, DynamicAdaptiveVisualPrimitives, Today integration, tests/previews.
 Acceptance: every receipt answers what happened, why, source, freshness, privacy, change, undo/correction/review.
+Evidence: `docs/audits/fcp06-receipt-drawer-trust-layer-report.md`.
 
 ### FCP07 — Reality Rail Continuity
 

@@ -134,6 +134,16 @@ Current 4.0 status:
   authorizes no production Swift, route/raw-value, persistence/schema,
   sync/cloud, AI/AOS/LDI runtime, legal/privacy, release, workflow/signing/CI,
   or public accessibility claim by itself.
+- Complete / Green: FCP06 Receipt Drawer / Trust Layer is complete as shared
+  trust primitive implementation evidence. It adds `ReceiptDrawer`,
+  `ReceiptDrawerSection`, and `SourceFold` to the existing trust receipt layer,
+  extends receipt items with why, change/no-change, and correction facts, and
+  proves the trust facts with focused design-system tests. Start Here
+  attachment is deferred to FCP05; FCP06 does not create a receipt inbox,
+  activity feed, analytics log UI, dashboard, route/raw-value change,
+  persistence/schema change, sync/cloud behavior, external surface behavior,
+  AI runtime, LDI runtime, release/legal/privacy claim, or public accessibility
+  claim.
 - Queued source truth: FCP01-FCP30 Flagship Completion Plan source truth exists
   as active implementation truth. FCP implementation has started with FCP17.
   FCP targets

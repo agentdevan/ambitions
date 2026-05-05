@@ -2,14 +2,13 @@
 
 Date: 2026-05-05
 Active train: Global full-stack execution
-Current batch: FL06 Weekly Life Sweep Ritual Green; full-stack order selects
-FCP06 Receipt Drawer / Trust Layer next if continuation gates allow.
-Scope: FL06 completed as docs-only Found Life product-ritual source truth. It
-defines the calm weekly sweep prompt set, state model, source/privacy/receipt
-boundaries, candidate-safety rules, and integration map without implementing
-AOS runtime, LDI runtime, persistence/schema, sync/cloud, notifications,
-widgets, Live Activities, App Intents, or a new surface. FL06 changed no
-production Swift, route/raw value, persistence/schema, permission-request,
+Current batch: FCP06 Receipt Drawer / Trust Layer Green; full-stack order
+selects FCP05 Start Here Surface next if continuation gates allow.
+Scope: FCP06 completed as shared trust primitive implementation evidence. It
+adds ReceiptDrawer, ReceiptDrawerSection, and SourceFold, extends receipt items
+with why/change/correction facts, and proves source/freshness/privacy/review/
+undo/correction facts with focused tests. Start Here attachment is deferred to
+FCP05. FCP06 changed no route/raw value, persistence/schema, permission-request,
 calendar-write, sync/account, release, legal/privacy, CI, workflow/signing,
 entitlement, AI runtime, AOS runtime, LDI runtime, or public accessibility
 claim file.
@@ -83,10 +82,12 @@ docs-only sync strategy decision evidence. PFC12 is complete / Green as
 app-group/shared-storage boundary evidence. Later PFC implementation beyond
 existing test execution has not started.
 
-No production Swift, route/raw value, persistence/schema, sync/cloud,
-monetization, privacy/legal, release, App Store, TestFlight, physical-device,
-public accessibility, workflow, signing, entitlement, CI, AI runtime, or LDI
-runtime claim is authorized by these docs alone.
+No further production Swift beyond the scoped FCP06 shared trust primitive
+changes is authorized by these docs alone. No route/raw value,
+persistence/schema, sync/cloud, monetization, privacy/legal, release, App
+Store, TestFlight, physical-device, public accessibility, workflow, signing,
+entitlement, CI, AI runtime, or LDI runtime claim is authorized by these docs
+alone.
 Complete: EB03A
 Universal Capture Composer Routing
 Owner Map. Complete:

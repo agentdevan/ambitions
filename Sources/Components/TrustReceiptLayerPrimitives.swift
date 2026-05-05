@@ -122,7 +122,10 @@ public struct TrustReceiptLayerItem: Identifiable, Equatable, Sendable {
     public let sourceLabel: String
     public let freshness: SourceFreshnessState
     public let privacyLabel: String
+    public let whyLabel: String?
+    public let changeLabel: String?
     public let undoLabel: String?
+    public let correctionLabel: String?
     public let reviewLabel: String?
     public let redactedDetail: String?
 
@@ -134,7 +137,10 @@ public struct TrustReceiptLayerItem: Identifiable, Equatable, Sendable {
         sourceLabel: String,
         freshness: SourceFreshnessState,
         privacyLabel: String = "Private by default",
+        whyLabel: String? = nil,
+        changeLabel: String? = nil,
         undoLabel: String? = nil,
+        correctionLabel: String? = nil,
         reviewLabel: String? = nil,
         redactedDetail: String? = nil
     ) {
@@ -145,7 +151,10 @@ public struct TrustReceiptLayerItem: Identifiable, Equatable, Sendable {
         self.sourceLabel = sourceLabel
         self.freshness = freshness
         self.privacyLabel = privacyLabel
+        self.whyLabel = whyLabel
+        self.changeLabel = changeLabel
         self.undoLabel = undoLabel
+        self.correctionLabel = correctionLabel
         self.reviewLabel = reviewLabel
         self.redactedDetail = redactedDetail
     }
@@ -158,11 +167,33 @@ public struct TrustReceiptLayerItem: Identifiable, Equatable, Sendable {
             sourceLabel,
             freshness.label,
             privacyLabel,
+            whyLabel,
+            changeLabel,
+            correctionLabel,
             reviewLabel,
             undoLabel
         ]
         .compactMap { $0 }
         .joined(separator: ". ")
+    }
+}
+
+public struct ReceiptDrawerSection: Identifiable, Equatable, Sendable {
+    public let id: String
+    public let title: String
+    public let subtitle: String?
+    public let items: [TrustReceiptLayerItem]
+
+    public init(
+        id: String,
+        title: String,
+        subtitle: String? = nil,
+        items: [TrustReceiptLayerItem]
+    ) {
+        self.id = id
+        self.title = title
+        self.subtitle = subtitle
+        self.items = items
     }
 }
 
@@ -186,6 +217,51 @@ public struct SourceFreshnessLabel: View {
             context: .trust
         )
         .accessibilityIdentifier("trust.source-freshness.\(state.rawValue)")
+    }
+}
+
+public struct SourceFold: View {
+    @Environment(\.ambitionTheme) private var theme
+    @Environment(\.dynamicTypeSize) private var dynamicTypeSize
+
+    private let item: TrustReceiptLayerItem
+
+    public init(item: TrustReceiptLayerItem) {
+        self.item = item
+    }
+
+    public var body: some View {
+        let stacksVertically = dynamicTypeSize.isAccessibilitySize
+
+        Group {
+            if stacksVertically {
+                VStack(alignment: .leading, spacing: theme.spacing.xs) {
+                    foldContent
+                }
+            } else {
+                HStack(alignment: .top, spacing: theme.spacing.xs) {
+                    foldContent
+                }
+            }
+        }
+        .padding(.vertical, theme.spacing.xs)
+        .accessibilityElement(children: .combine)
+        .accessibilityIdentifier("trust.source-fold.\(item.id)")
+        .accessibilityLabel("Source fold")
+        .accessibilityValue(item.accessibilitySummary)
+    }
+
+    @ViewBuilder
+    private var foldContent: some View {
+        EvidenceLabel(
+            item.sourceLabel,
+            detail: item.freshness.detail,
+            source: "Source",
+            state: item.freshness.visualState,
+            context: .trust
+        )
+        AmbitionChip(item.privacyLabel, icon: "lock", role: .protected, semanticState: .trust)
+        SourceFreshnessLabel(item.freshness)
     }
 }
 
@@ -218,16 +294,150 @@ public struct ProofPreview: View {
                         .foregroundStyle(theme.colors.textSecondary)
                         .fixedSize(horizontal: false, vertical: true)
 
-                    HStack(spacing: theme.spacing.xs) {
-                        AmbitionChip(item.privacyLabel, icon: "lock", role: .protected, semanticState: .trust)
-                        SourceFreshnessLabel(item.freshness)
-                    }
-                    .fixedSize(horizontal: false, vertical: true)
+                    SourceFold(item: item)
                 }
             }
         }
         .accessibilityIdentifier("trust.proof-preview.\(item.id)")
         .accessibilityLabel(item.accessibilitySummary)
+    }
+}
+
+public struct ReceiptDrawer: View {
+    @Environment(\.ambitionTheme) private var theme
+
+    private let title: String
+    private let subtitle: String?
+    private let sections: [ReceiptDrawerSection]
+    private let onReview: ((TrustReceiptLayerItem) -> Void)?
+    private let onUndo: ((TrustReceiptLayerItem) -> Void)?
+
+    public init(
+        title: String = "Receipts",
+        subtitle: String? = "What changed, why, and what you can review.",
+        sections: [ReceiptDrawerSection],
+        onReview: ((TrustReceiptLayerItem) -> Void)? = nil,
+        onUndo: ((TrustReceiptLayerItem) -> Void)? = nil
+    ) {
+        self.title = title
+        self.subtitle = subtitle
+        self.sections = sections
+        self.onReview = onReview
+        self.onUndo = onUndo
+    }
+
+    public var body: some View {
+        StateDrivenMaterialPanel(context: .trust, state: .calm) {
+            VStack(alignment: .leading, spacing: theme.spacing.md) {
+                VStack(alignment: .leading, spacing: theme.spacing.xxxs) {
+                    Text(title)
+                        .font(theme.typography.sectionTitle)
+                        .foregroundStyle(theme.colors.textPrimary)
+                    if let subtitle {
+                        Text(subtitle)
+                            .font(theme.typography.bodySecondary)
+                            .foregroundStyle(theme.colors.textSecondary)
+                            .fixedSize(horizontal: false, vertical: true)
+                    }
+                }
+
+                if sections.isEmpty || sections.allSatisfy({ $0.items.isEmpty }) {
+                    emptyState
+                } else {
+                    ForEach(sections) { section in
+                        drawerSection(section)
+                    }
+                }
+            }
+        }
+        .accessibilityElement(children: .contain)
+        .accessibilityIdentifier("trust.receipt-drawer")
+    }
+
+    private var emptyState: some View {
+        VStack(alignment: .leading, spacing: theme.spacing.xs) {
+            Text("No receipt yet")
+                .font(theme.typography.bodyEmphasized)
+                .foregroundStyle(theme.colors.textPrimary)
+            Text("When Ambitions changes something, the receipt will show the consequence and review path.")
+                .font(theme.typography.bodySecondary)
+                .foregroundStyle(theme.colors.textSecondary)
+                .fixedSize(horizontal: false, vertical: true)
+        }
+        .accessibilityIdentifier("trust.receipt-drawer.empty")
+    }
+
+    private func drawerSection(_ section: ReceiptDrawerSection) -> some View {
+        VStack(alignment: .leading, spacing: theme.spacing.sm) {
+            VStack(alignment: .leading, spacing: theme.spacing.xxxs) {
+                Text(section.title)
+                    .font(theme.typography.bodyEmphasized)
+                    .foregroundStyle(theme.colors.textPrimary)
+                if let subtitle = section.subtitle {
+                    Text(subtitle)
+                        .font(theme.typography.caption)
+                        .foregroundStyle(theme.colors.textSecondary)
+                }
+            }
+
+            ForEach(section.items) { item in
+                ReceiptDrawerRow(
+                    item: item,
+                    onReview: onReview.map { action in { action(item) } },
+                    onUndo: onUndo.map { action in { action(item) } }
+                )
+            }
+        }
+        .accessibilityIdentifier("trust.receipt-drawer.section.\(section.id)")
+    }
+}
+
+private struct ReceiptDrawerRow: View {
+    @Environment(\.ambitionTheme) private var theme
+
+    let item: TrustReceiptLayerItem
+    let onReview: (() -> Void)?
+    let onUndo: (() -> Void)?
+
+    var body: some View {
+        VStack(alignment: .leading, spacing: theme.spacing.sm) {
+            ProofPreview(item: item)
+
+            VStack(alignment: .leading, spacing: theme.spacing.xs) {
+                receiptFact("What happened", item.summary)
+                receiptFact("Why", item.whyLabel ?? "User review controls the next change.")
+                receiptFact("Change", item.changeLabel ?? "No hidden change is implied.")
+                if let correctionLabel = item.correctionLabel {
+                    receiptFact("Correction", correctionLabel)
+                }
+            }
+
+            HStack(spacing: theme.spacing.xs) {
+                if let reviewLabel = item.reviewLabel, let onReview {
+                    QuietActionButton(reviewLabel, icon: "doc.text.magnifyingglass", action: onReview)
+                }
+                if let undoLabel = item.undoLabel, let onUndo {
+                    QuietActionButton(undoLabel, icon: "arrow.uturn.backward", action: onUndo)
+                }
+            }
+        }
+        .padding(.vertical, theme.spacing.xs)
+        .accessibilityElement(children: .combine)
+        .accessibilityIdentifier("trust.receipt-drawer.row.\(item.id)")
+        .accessibilityLabel(item.title)
+        .accessibilityValue(item.accessibilitySummary)
+    }
+
+    private func receiptFact(_ title: String, _ value: String) -> some View {
+        VStack(alignment: .leading, spacing: theme.spacing.xxxs) {
+            Text(title)
+                .font(theme.typography.micro)
+                .foregroundStyle(theme.colors.textTertiary)
+            Text(value)
+                .font(theme.typography.caption)
+                .foregroundStyle(theme.colors.textSecondary)
+                .fixedSize(horizontal: false, vertical: true)
+        }
     }
 }
 

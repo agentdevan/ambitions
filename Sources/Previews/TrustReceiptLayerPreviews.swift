@@ -13,7 +13,10 @@ private struct TrustReceiptLayerPreviewGallery: View {
             sourceLabel: "Today closure",
             freshness: .fresh,
             privacyLabel: "Private proof",
+            whyLabel: "The user chose Still Counts instead of silent rescheduling.",
+            changeLabel: "Closure was recorded; the day was not rearranged.",
             undoLabel: "Undo",
+            correctionLabel: "Correction stays available from the receipt.",
             reviewLabel: "Review"
         ),
         TrustReceiptLayerItem(
@@ -24,7 +27,10 @@ private struct TrustReceiptLayerPreviewGallery: View {
             sourceLabel: "Capture route",
             freshness: .fresh,
             privacyLabel: "Private item",
+            whyLabel: "The user confirmed the destination.",
+            changeLabel: "Capture placement changed with a receipt.",
             undoLabel: "Move back",
+            correctionLabel: "Route can be corrected without losing the capture.",
             reviewLabel: "Why this?"
         ),
         TrustReceiptLayerItem(
@@ -35,6 +41,9 @@ private struct TrustReceiptLayerPreviewGallery: View {
             sourceLabel: "Local receipt",
             freshness: .localOnly,
             privacyLabel: "Local only",
+            whyLabel: "Sensitive detail is hidden outside the review surface.",
+            changeLabel: "Only the safe summary is visible here.",
+            correctionLabel: "Privacy can be reviewed from You.",
             reviewLabel: "Review privacy",
             redactedDetail: "Private detail redacted"
         ),
@@ -46,6 +55,9 @@ private struct TrustReceiptLayerPreviewGallery: View {
             sourceLabel: "Saved source",
             freshness: .stale,
             privacyLabel: "Private source",
+            whyLabel: "The source is useful but older than the review window.",
+            changeLabel: "No action changes until the user reviews the source.",
+            correctionLabel: "Source may be replaced or corrected.",
             reviewLabel: "Review source"
         ),
         TrustReceiptLayerItem(
@@ -56,6 +68,8 @@ private struct TrustReceiptLayerPreviewGallery: View {
             sourceLabel: "Device receipt",
             freshness: .offline,
             privacyLabel: "On device",
+            whyLabel: "Source access is unavailable.",
+            changeLabel: "Receipt remains local.",
             undoLabel: "Undo"
         ),
         TrustReceiptLayerItem(
@@ -66,6 +80,9 @@ private struct TrustReceiptLayerPreviewGallery: View {
             sourceLabel: "Boundary scaffold",
             freshness: .partial,
             privacyLabel: "Sensitive",
+            whyLabel: "Professional topics need outside sources.",
+            changeLabel: "Ambitions keeps this as review, not advice.",
+            correctionLabel: "Boundary can be reviewed before acting.",
             reviewLabel: "Review boundary"
         )
     ]
@@ -81,6 +98,26 @@ private struct TrustReceiptLayerPreviewGallery: View {
                 )
 
                 InlineTrustReceipt(item: items[1], onReview: {}, onUndo: {})
+
+                ReceiptDrawer(
+                    title: "Receipt Drawer",
+                    sections: [
+                        ReceiptDrawerSection(
+                            id: "recent",
+                            title: "Recent receipts",
+                            subtitle: "Consequences and review paths stay visible.",
+                            items: Array(items.prefix(3))
+                        ),
+                        ReceiptDrawerSection(
+                            id: "source-review",
+                            title: "Source review",
+                            subtitle: "Older, local, and boundary states stay separate.",
+                            items: Array(items.suffix(3))
+                        )
+                    ],
+                    onReview: { _ in },
+                    onUndo: { _ in }
+                )
 
                 ProofPreview(item: items[2])
 

@@ -44,8 +44,9 @@ Ambitions 3.0 is the active source of truth. This file defines Codex read order,
   complete Green as Commitment Memory / Open Loop Registry source truth. FL04 is
   complete Green as Searchable Life Recall source truth. FL05 is complete Green
   as Option Value / Pivot Preservation source truth. FL06 is complete Green as
-  Weekly Life Sweep ritual source truth. The next eligible global batch is
-  FCP06 Receipt Drawer / Trust Layer.
+  Weekly Life Sweep ritual source truth. FCP06 is complete Green as shared
+  ReceiptDrawer / SourceFold trust foundation. The next eligible global batch
+  is FCP05 Start Here Surface.
 - The F27 FAANG handoff gate rerun is PASS after F28 repaired/rebaselined the full-suite Goal Detail trust/memory UI proof. F27.5, F29, and F30 are Green by current train evidence; the F17-F30 train is complete at the F30 closeout commit.
 - F00 Current Implementation Gap Audit is complete as an audit-only traceability pass.
 - F01/F02 Reality Rail work is now represented in Today state and UI evidence: Today renders a focused Reality Rail with `Start here`, `Start now`, Now/Next/Later, source/context labels, duration labels, privacy-safe projection, empty/unavailable copy, and reserved closure/proof slots.
@@ -426,7 +427,8 @@ pockets, planning defaults, automation trust controls, duration source proof,
 vacation/away behavior, a Schedule & Availability detail card, and focused
 Profile tests. It does not authorize route/raw-value, persistence/schema,
 permission-request, calendar-write, sync/account, release, legal/privacy, or
-public accessibility claims. The full-stack order selects FCP06 next.
+public accessibility claims. FCP06 is complete Green as shared ReceiptDrawer /
+SourceFold trust foundation, and the full-stack order selects FCP05 next.
 
 
 ## Living Dream Intelligence Context
