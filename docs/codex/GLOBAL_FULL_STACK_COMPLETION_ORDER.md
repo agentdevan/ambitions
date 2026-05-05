@@ -8,7 +8,7 @@ Date: 2026-05-05
 
 This document extends the optimized implementation order to cover every non-user-facing domain required for a true 10/10 FAANG-grade app: repo cleanliness, build framework, architecture, schema, iCloud sync, widgets, Live Activities, App Intents, notifications, monetization, privacy, legal review, security, performance, observability, release engineering, and handoff.
 
-Use this file as the highest-priority overlay for remaining work. It supersedes `GLOBAL_OPTIMIZED_IMPLEMENTATION_ORDER.md` only where it adds or reorders PFC platform/framework/compliance batches and Found Life source-truth batches. Historical batch identities remain stable.
+Use this file as the highest-priority overlay for remaining work. It supersedes `GLOBAL_OPTIMIZED_IMPLEMENTATION_ORDER.md` only where it adds or reorders PFC platform/framework/compliance batches, Found Life source-truth batches, and rendered visual quality proof insertions. Historical batch identities remain stable.
 
 ## Core Rule
 
@@ -16,6 +16,7 @@ A 10/10 user-facing app is not enough. Ambitions is not globally complete until:
 
 - FL locks the Found Life purpose: life visibility, promise memory, searchable recall, open-loop closure, option value, and weekly life sweep.
 - FCP closes product-object quality.
+- FVQ proves rendered simulator output is fresh, durable, and visually worthy of a FAANG-level flagship app rather than only structurally correct.
 - PFC closes platform/framework/legal/business/build quality.
 - AOS/LDI close runtime intelligence and living-dream safety where implemented.
 - Release evidence and human/legal/device proof gates remain evidence-bound.
@@ -26,8 +27,9 @@ A 10/10 user-facing app is not enough. Ambitions is not globally complete until:
 - FCP source truth exists and is queued.
 - PFC source truth exists and is queued.
 - FL source truth exists and is queued after completed FCP17 and before remaining FCP core product-object implementation.
+- FVQ source truth exists and is inserted after completed FCP09 before broad external-surface strategy unless the active local run has already started PFC13, in which case Codex must finish the active batch safely and run FVQ01 immediately afterward.
 - AOS and LDI remain queued.
-- No FL/FCP/PFC production implementation has started by virtue of this document.
+- No FL/FCP/PFC/FVQ production implementation has started by virtue of this document.
 
 ## Full-Stack Optimized Order
 
@@ -129,129 +131,146 @@ A 10/10 user-facing app is not enough. Ambitions is not globally complete until:
     user-initiated haptic policy, preview evidence, and focused tests on
     2026-05-05.
 
+### Phase 3.5 — Rendered Visual Freshness And Flagship Proof
+
+32. FVQ01 Rendered Visual Freshness And Flagship Gate. Must run before broad
+    external-surface strategy continues, unless PFC13 is already actively in
+    progress in the local worktree when Codex pulls this update; if so, finish
+    that active batch safely and run FVQ01 immediately afterward. FVQ01 must
+    prove simulator freshness, durable screenshot evidence, FAANG-level Today
+    visual scoring, and visual Red/Yellow repair handling before the train
+    continues.
+
 ### Phase 4 — External Surface Strategy Before Implementation
 
-32. PFC13 WidgetKit Strategy And Object Map.
-33. PFC15 Live Activities / ActivityKit Strategy.
-34. PFC17 App Intents / Shortcuts / Spotlight Strategy.
-35. PFC19 Notifications / Focus / Calendar / Reminders Integration Strategy.
-36. PFC21 StoreKit / Monetization Strategy.
-37. PFC24 Privacy Data Map And App Privacy Labels.
-38. PFC25 Privacy Manifest / Required-Reason API Audit.
-39. PFC26 Terms / Privacy Policy / Legal Review Packet.
-40. PFC27 Safety / Professional Boundary / Crisis Policy.
-41. PFC28 Security Threat Model And Secrets Audit.
-42. PFC29 Logging / Analytics / Observability Policy.
-43. PFC30 Performance Budget And Instruments Plan.
+33. PFC13 WidgetKit Strategy And Object Map.
+34. PFC15 Live Activities / ActivityKit Strategy.
+35. PFC17 App Intents / Shortcuts / Spotlight Strategy.
+36. PFC19 Notifications / Focus / Calendar / Reminders Integration Strategy.
+37. PFC21 StoreKit / Monetization Strategy.
+38. PFC24 Privacy Data Map And App Privacy Labels.
+39. PFC25 Privacy Manifest / Required-Reason API Audit.
+40. PFC26 Terms / Privacy Policy / Legal Review Packet.
+41. PFC27 Safety / Professional Boundary / Crisis Policy.
+42. PFC28 Security Threat Model And Secrets Audit.
+43. PFC29 Logging / Analytics / Observability Policy.
+44. PFC30 Performance Budget And Instruments Plan.
 
 ### Phase 5 — FCP Surface Maturity
 
-44. FCP22 Personal System Center Refactor.
-45. FCP23 Memory Lens / External Brain Visual Layer.
-46. FCP24 Appearance Studio.
-47. FCP18 Capture Placement Shelf.
-48. FCP19 Placement Resolver / Correction Fold.
-49. FCP20 Grow Into Goal Seed Incubator.
-50. FCP21 Voice / Motor Capture Accessibility.
-51. FCP14 LifeShape Contour Map.
-52. FCP15 Reflow Decision Fold.
-53. FCP16 Pressure Field / Recovery Loop.
-54. FCP10 MissionControlTimeSpine.
-55. FCP11 LifePath Thread.
-56. FCP12 Proof Spine / Evidence Ledger.
-57. FCP13B Goal Alternate Path / Decision History Polish.
-58. FCP25 Loading / Empty / Degraded State Objectization.
-59. FCP26 Iconography / Status Grammar Hardening.
+45. FCP22 Personal System Center Refactor.
+46. FCP23 Memory Lens / External Brain Visual Layer.
+47. FCP24 Appearance Studio.
+48. FCP18 Capture Placement Shelf.
+49. FCP19 Placement Resolver / Correction Fold.
+50. FCP20 Grow Into Goal Seed Incubator.
+51. FCP21 Voice / Motor Capture Accessibility.
+52. FCP14 LifeShape Contour Map.
+53. FCP15 Reflow Decision Fold.
+54. FCP16 Pressure Field / Recovery Loop.
+55. FCP10 MissionControlTimeSpine.
+56. FCP11 LifePath Thread.
+57. FCP12 Proof Spine / Evidence Ledger.
+58. FCP13B Goal Alternate Path / Decision History Polish.
+59. FCP25 Loading / Empty / Degraded State Objectization.
+60. FCP26 Iconography / Status Grammar Hardening.
 
 ### Phase 6 — External Surface Implementation
 
-60. PFC10 CloudKit Schema / Zone / Conflict Model.
-61. PFC11 Sync Implementation And Conflict Tests, or explicit local-only closure.
-62. PFC14 WidgetKit Implementation And Tests.
-63. PFC16 Live Activities Implementation And Tests.
-64. PFC18 App Intents / Shortcuts Implementation And Tests.
-65. PFC20 Notifications / Calendar / Reminders Implementation Proof.
-66. PFC22 StoreKit Entitlement Implementation And Tests, or monetization deferral.
-67. PFC23 Paywall / Upgrade UX Compliance Review.
+61. PFC10 CloudKit Schema / Zone / Conflict Model.
+62. PFC11 Sync Implementation And Conflict Tests, or explicit local-only closure.
+63. PFC14 WidgetKit Implementation And Tests.
+64. PFC16 Live Activities Implementation And Tests.
+65. PFC18 App Intents / Shortcuts Implementation And Tests.
+66. PFC20 Notifications / Calendar / Reminders Implementation Proof.
+67. PFC22 StoreKit Entitlement Implementation And Tests, or monetization deferral.
+68. PFC23 Paywall / Upgrade UX Compliance Review.
 
 ### Phase 7 — AOS Internal Foundations
 
-68. AOS01 AmbitionsOS Canon And Runtime Contract.
-69. AOS02 Life Graph Event Log Foundation.
-70. AOS03 Graph Delta Review Projection Store.
-71. AOS04 Control Plane Work Classifier.
-72. AOS12 Proof Trust Closure Receipts.
-73. AOS13 Source Truth Claim State Machine.
-74. AOS10 Commitment Time Kernel.
-75. AOS05 Starting Position Kernel.
-76. AOS06 Goal Path Kernel Goal Compiler.
-77. AOS07 Local Goal Packs Requirement Slots.
-78. AOS08 Alternate Path Kernel Path Portfolio.
-79. AOS09 Option Value North Star.
-80. AOS11 Reality Drift Bounded Reflow.
-81. AOS14 Recommendation Start Here Kernel.
-82. AOS15 Local Language Kernel Planning.
-83. AOS16 Performance Energy Kernel.
-84. AOS17 Privacy Safety Kernel.
-85. AOS18 Evaluation Golden Scenarios.
-86. AOS19 Experience Kernel Celestial Cognitive Load.
-87. AOS20 Adaptation Kernel Local Personalization.
-88. AOS21 Interoperability Kernel App Intents EventKit Planning.
-89. AOS22 Longevity Kernel Archive Aging.
-90. AOS23 Governance Kernel Registry.
+69. AOS01 AmbitionsOS Canon And Runtime Contract.
+70. AOS02 Life Graph Event Log Foundation.
+71. AOS03 Graph Delta Review Projection Store.
+72. AOS04 Control Plane Work Classifier.
+73. AOS12 Proof Trust Closure Receipts.
+74. AOS13 Source Truth Claim State Machine.
+75. AOS10 Commitment Time Kernel.
+76. AOS05 Starting Position Kernel.
+77. AOS06 Goal Path Kernel Goal Compiler.
+78. AOS07 Local Goal Packs Requirement Slots.
+79. AOS08 Alternate Path Kernel Path Portfolio.
+80. AOS09 Option Value North Star.
+81. AOS11 Reality Drift Bounded Reflow.
+82. AOS14 Recommendation Start Here Kernel.
+83. AOS15 Local Language Kernel Planning.
+84. AOS16 Performance Energy Kernel.
+85. AOS17 Privacy Safety Kernel.
+86. AOS18 Evaluation Golden Scenarios.
+87. AOS19 Experience Kernel Celestial Cognitive Load.
+88. AOS20 Adaptation Kernel Local Personalization.
+89. AOS21 Interoperability Kernel App Intents EventKit Planning.
+90. AOS22 Longevity Kernel Archive Aging.
+91. AOS23 Governance Kernel Registry.
 
 ### Phase 8 — LDI Safety / Runtime / Source Gates
 
-91. LDI01 Living Dream Architecture Source Truth.
-92. LDI02 Capture Handling Ladder.
-93. LDI03 Dream Safety Legality Feasibility Triage.
-94. LDI04 North Star Extraction.
-95. LDI05 Source Claim Graph.
-96. LDI06 Pack Registry And Pack Compiler.
-97. LDI07 Pack Supply Chain Security.
-98. LDI08 Requirement Graph Runtime.
-99. LDI09 Eligibility And Deadline Runtime.
-100. LDI10 Starting Position And Privacy Intake.
-101. LDI11 Path Portfolio Runtime.
-102. LDI12 Capacity And Commitment-Time Bridge.
-103. LDI13 Today Bridge And Action Closure.
-104. LDI14 Trust Review And Dream Handling Receipts.
-105. LDI15 Living Plan Recompiler.
-106. LDI16 Mutation Permissions And Impact Levels.
-107. LDI20 Freshness Broker.
-108. LDI21 Red-Team Evaluation Suite.
-109. LDI17 Continuity Sync.
-110. LDI18 Archive And Schema Migration.
-111. LDI19 Multi-Device Merge Ledger.
-112. LDI22 Governance And Maintenance Console.
+92. LDI01 Living Dream Architecture Source Truth.
+93. LDI02 Capture Handling Ladder.
+94. LDI03 Dream Safety Legality Feasibility Triage.
+95. LDI04 North Star Extraction.
+96. LDI05 Source Claim Graph.
+97. LDI06 Pack Registry And Pack Compiler.
+98. LDI07 Pack Supply Chain Security.
+99. LDI08 Requirement Graph Runtime.
+100. LDI09 Eligibility And Deadline Runtime.
+101. LDI10 Starting Position And Privacy Intake.
+102. LDI11 Path Portfolio Runtime.
+103. LDI12 Capacity And Commitment-Time Bridge.
+104. LDI13 Today Bridge And Action Closure.
+105. LDI14 Trust Review And Dream Handling Receipts.
+106. LDI15 Living Plan Recompiler.
+107. LDI16 Mutation Permissions And Impact Levels.
+108. LDI20 Freshness Broker.
+109. LDI21 Red-Team Evaluation Suite.
+110. LDI17 Continuity Sync.
+111. LDI18 Archive And Schema Migration.
+112. LDI19 Multi-Device Merge Ledger.
+113. LDI22 Governance And Maintenance Console.
 
 ### Phase 9 — Integration / QA / Performance / External Proof
 
-113. AOS24 AmbitionsOS UI Integration.
-114. AOS25 AmbitionsOS Test Fixture Library.
-115. FCP27 Cross-Surface Proof / Review Mesh.
-116. PFC31 Performance / Battery Implementation Repairs.
-117. PFC32 Accessibility Across External Surfaces.
-118. PFC33 Data Freshness Broker And Stale-State Gates.
-119. AOS26 AmbitionsOS Privacy Performance QA.
-120. PFC35 Test Strategy And Coverage Matrix.
+114. AOS24 AmbitionsOS UI Integration.
+115. AOS25 AmbitionsOS Test Fixture Library.
+116. FCP27 Cross-Surface Proof / Review Mesh.
+117. PFC31 Performance / Battery Implementation Repairs.
+118. PFC32 Accessibility Across External Surfaces.
+119. PFC33 Data Freshness Broker And Stale-State Gates.
+120. AOS26 AmbitionsOS Privacy Performance QA.
+121. PFC35 Test Strategy And Coverage Matrix.
 
 ### Phase 10 — Legal / App Store / Release Engineering / Handoff
 
-121. PFC34 App Store Metadata / Screenshot / Claim Truth Pack.
-122. PFC36 Release Engineering And TestFlight Readiness Plan.
-123. PFC37 FAANG Handoff Architecture Packet.
-124. PFC38 Repo Hygiene And Prompt-Built Smell Removal.
-125. FCP28 Full App 10/10 Audit.
-126. PFC39 Full Platform / Legal / Framework Audit.
-127. FCP29 Human Visual / Accessibility / Device Proof Packet.
-128. AOS27 AmbitionsOS App Store Claim Truth.
-129. PFC40 Platform / Framework / Compliance Handoff.
-130. AOS28 AmbitionsOS Handoff.
-131. FCP30 Flagship Completion Handoff.
-132. AOS29 AmbitionsOS Repair Train, conditional only.
-133. AOS30 AmbitionsOS Beyond Roadmap.
-134. CS02C-CS06C / CS09C deferred compatibility retirements, conditional only if named proof target exists.
+122. PFC34 App Store Metadata / Screenshot / Claim Truth Pack.
+123. PFC36 Release Engineering And TestFlight Readiness Plan.
+124. PFC37 FAANG Handoff Architecture Packet.
+125. PFC38 Repo Hygiene And Prompt-Built Smell Removal.
+126. FCP28 Full App 10/10 Audit.
+127. PFC39 Full Platform / Legal / Framework Audit.
+128. FCP29 Human Visual / Accessibility / Device Proof Packet.
+129. AOS27 AmbitionsOS App Store Claim Truth.
+130. PFC40 Platform / Framework / Compliance Handoff.
+131. AOS28 AmbitionsOS Handoff.
+132. FCP30 Flagship Completion Handoff.
+133. AOS29 AmbitionsOS Repair Train, conditional only.
+134. AOS30 AmbitionsOS Beyond Roadmap.
+135. CS02C-CS06C / CS09C deferred compatibility retirements, conditional only if named proof target exists.
+
+## Why FVQ01 Is Placed After FCP09 And Before Broad External Strategy
+
+- FCP05/FCP07/FCP13A/FCP08/FCP09 can produce structurally correct Today, shell, closure, and motion contracts while rendered output still looks prototype-level.
+- FVQ01 forces simulator freshness proof, durable screenshot evidence, numeric visual scoring, and repair classification before the train moves into broad external/platform strategy.
+- If PFC13 is already in progress when this file is pulled, Codex must finish that active batch safely and run FVQ01 immediately afterward.
+- FVQ01 is not final human visual signoff; it is a blocking Codex OS visual proof gate so Green cannot mean merely compiled.
 
 ## Why Found Life Is Placed After FCP17 And Before The Remaining FCP Core Objects
 
@@ -272,4 +291,4 @@ A 10/10 user-facing app is not enough. Ambitions is not globally complete until:
 
 ## No-Claim Boundary
 
-This order does not claim implementation, legal compliance, App Store readiness, TestFlight readiness, physical-device proof, public accessibility conformance, iCloud sync, StoreKit monetization, widgets, Live Activities, App Intents, notifications, analytics, release readiness, Found Life runtime, searchable recall runtime, or FAANG handoff readiness. It defines the order required to prove or safely defer those claims.
+This order does not claim implementation, legal compliance, App Store readiness, TestFlight readiness, physical-device proof, public accessibility conformance, iCloud sync, StoreKit monetization, widgets, Live Activities, App Intents, notifications, analytics, release readiness, Found Life runtime, searchable recall runtime, rendered flagship visual signoff, or FAANG handoff readiness. It defines the order required to prove or safely defer those claims.
