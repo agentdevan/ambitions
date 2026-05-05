@@ -201,7 +201,11 @@ A 10/10 user-facing app is not enough. Ambitions is not globally complete until:
     data behavior to draft App Privacy labels of Data Not Collected and No
     Tracking, while keeping final App Store Connect entry, live privacy policy,
     signed-binary reconciliation, and human legal/privacy approval gated.
-39. PFC25 Privacy Manifest / Required-Reason API Audit.
+39. PFC25 Privacy Manifest / Required-Reason API Audit. Completed Green on
+    2026-05-05 as docs/platform/privacy audit. It leaves
+    `PrivacyInfo.xcprivacy` unchanged because active source scans found no
+    direct required-reason API usage requiring declaration, while final archive
+    privacy-report proof remains release-gated.
 40. PFC26 Terms / Privacy Policy / Legal Review Packet.
 41. PFC27 Safety / Professional Boundary / Crisis Policy.
 42. PFC28 Security Threat Model And Secrets Audit.

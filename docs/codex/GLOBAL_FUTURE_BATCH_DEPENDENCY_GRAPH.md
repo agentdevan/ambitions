@@ -201,6 +201,15 @@ based on local-first repo evidence only; final App Store Connect entry, live
 privacy policy URL, signed-binary reconciliation, and human legal/privacy review
 remain gated.
 
+PFC25 is complete Green as of 2026-05-05. Future privacy manifest,
+required-reason API, dependency, SDK, framework, App Store archive, or privacy
+report work must use
+`docs/canon/Ambitions_Privacy_Manifest_Required_Reason_API_Audit.md` as the
+manifest boundary. The current `PrivacyInfo.xcprivacy` remains unchanged
+because active source scans found no direct UserDefaults, file timestamp, disk
+space, system boot time, or active-keyboard API use requiring declaration;
+final Xcode archive privacy-report proof remains release-gated.
+
 ## Gates That Must Recur
 
 - Source Truth Gate.
