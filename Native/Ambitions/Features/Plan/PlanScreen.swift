@@ -288,7 +288,11 @@ struct PlanScreen: View {
         }
     }
 
-    private func handleReflowDecision(_ option: PlanReflowDecisionOptionState) {
+    private func handleReflowDecision(
+        _ option: PlanReflowDecisionOptionState,
+        action: PlanReflowDecisionActionKind
+    ) {
+        guard action != .decline else { return }
         if let target = option.target {
             openGoal(target)
             return

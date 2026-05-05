@@ -2,13 +2,12 @@
 
 Date: 2026-05-04
 Active train: Product Depth
-Current batch: PD11 complete / accepted Yellow
-Scope: PD11 deepened only the existing Capture-to-Goals grow-into-goal setup
-path. It added a presentation-derived goal seed review to Create Goal covering
-why this might be a goal, starting position, first milestone, first recommended
-step, proof/source seed, and explicit confirmation before promotion. It did not
-add automatic goal creation, hidden learning, personalization, persistence/
-schema, sync/auth/network, AI/LDI runtime, navigation, route/raw values,
+Current batch: PD12 complete / accepted Yellow
+Scope: PD12 deepened only the existing Plan Reflow Decision presentation. It
+added explicit what-changed, why, impacted-step, capacity-impact,
+protected-time, and accept/edit/decline decision labels to user-owned reflow
+options. It did not add silent rearrangement, calendar writes, persistence/
+schema changes, sync/auth/network, AI/LDI runtime, route/raw-value changes,
 CI/config, dependencies, release/platform claims, broad app implementation, or
 Candidate finalization.
 Complete: EB03A
@@ -123,6 +122,19 @@ accessibility/release claim change was made.
 - CS02C-CS06C deferred truth remains preserved.
 
 ## Current Validation Result
+
+PD12 result: PASS WITH ACCEPTED YELLOW.
+`docs/audits/pd12-plan-reflow-decision-depth-report.md` records the bounded
+Plan Reflow Decision presentation layer, explicit what-changed/why/impacted
+steps/capacity/protected-time labels, accept/edit/decline decision choices,
+focused Plan tests, `xcodegen generate`, `scripts/build-local.sh`, Product
+Depth copy/drift/release scans, accessibility and Reduce Motion advisory
+scans, file-size advisory scan, doc QA, batch gate, and boundary scan. Yellow
+items are no screenshot/rendered proof, no human/device/VoiceOver/Dynamic Type
+/ Reduce Motion walkthrough, existing file-size/doc-QA advisory backlog,
+internal compatibility vocabulary in existing Plan tests/source, and the
+generic boundary script flagging PD12-allowed Plan files despite explicit Plan
+implementation scope.
 
 PD11 result: PASS WITH ACCEPTED YELLOW.
 `docs/audits/pd11-grow-into-goal-flow-report.md` records the bounded

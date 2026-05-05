@@ -531,6 +531,22 @@ final class PlanFeatureServiceTests: XCTestCase {
         XCTAssertTrue(dashboard.reflowDecision.options.contains(where: { $0.kind == .reviewPlan }))
         XCTAssertTrue(dashboard.reflowDecision.options.allSatisfy { $0.trustLabel == "No silent changes" })
         XCTAssertTrue(dashboard.reflowDecision.receiptLabel.contains("No silent rescheduling"))
+        XCTAssertTrue(dashboard.reflowDecision.options.allSatisfy { option in
+            option.whatChangedLabel.hasPrefix("What changed:")
+                && option.whyChangedLabel.hasPrefix("Why:")
+                && option.impactedStepsLabel.hasPrefix("Impacted steps:")
+                && option.capacityImpactLabel.hasPrefix("Capacity impact:")
+                && option.protectedTimeImpactLabel.hasPrefix("Protected time impact:")
+        })
+        XCTAssertTrue(dashboard.reflowDecision.options.allSatisfy { option in
+            option.actions.map(\.kind) == [.accept, .edit, .decline]
+        })
+        XCTAssertTrue(dashboard.reflowDecision.options.allSatisfy { option in
+            option.accessibilityValue.contains("What changed:")
+                && option.accessibilityValue.contains("Capacity impact:")
+                && option.accessibilityValue.contains("Protected time impact:")
+                && option.accessibilityValue.contains("Accept, Edit, Decline")
+        })
         XCTAssertEqual(beforeGoals, afterGoals)
         XCTAssertEqual(beforeCaptures, afterCaptures)
     }

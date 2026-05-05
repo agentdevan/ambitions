@@ -5,7 +5,7 @@ struct PlanReflowDecisionCard: View {
     @Environment(\.ambitionTheme) private var theme
 
     let decision: PlanReflowDecisionState
-    let onActivate: (PlanReflowDecisionOptionState) -> Void
+    let onActivate: (PlanReflowDecisionOptionState, PlanReflowDecisionActionKind) -> Void
 
     var body: some View {
         AppCard(state: decision.visualState) {
@@ -33,13 +33,7 @@ struct PlanReflowDecisionCard: View {
 
                 VStack(alignment: .leading, spacing: theme.spacing.sm) {
                     ForEach(decision.options) { option in
-                        Button {
-                            onActivate(option)
-                        } label: {
-                            PlanReflowDecisionOptionRow(option: option)
-                        }
-                        .buttonStyle(.plain)
-                        .disabled(option.target == nil && option.planRoute == nil)
+                        PlanReflowDecisionOptionRow(option: option, onActivate: onActivate)
                     }
                 }
 
@@ -59,39 +53,60 @@ private struct PlanReflowDecisionOptionRow: View {
     @Environment(\.ambitionTheme) private var theme
 
     let option: PlanReflowDecisionOptionState
+    let onActivate: (PlanReflowDecisionOptionState, PlanReflowDecisionActionKind) -> Void
 
     var body: some View {
-        HStack(alignment: .top, spacing: theme.spacing.sm) {
-            Image(systemName: option.kind.icon)
-                .font(.system(size: theme.icon.smallSize, weight: theme.icon.symbolWeight))
-                .foregroundStyle(theme.stateStyle(for: option.visualState).accent)
-                .frame(width: 20)
+        VStack(alignment: .leading, spacing: theme.spacing.sm) {
+            HStack(alignment: .top, spacing: theme.spacing.sm) {
+                Image(systemName: option.kind.icon)
+                    .font(.system(size: theme.icon.smallSize, weight: theme.icon.symbolWeight))
+                    .foregroundStyle(theme.stateStyle(for: option.visualState).accent)
+                    .frame(width: 20)
 
-            VStack(alignment: .leading, spacing: theme.spacing.xxxs) {
-                HStack(spacing: theme.spacing.xs) {
-                    Text(option.title)
-                        .font(theme.typography.bodyEmphasized)
-                        .foregroundStyle(theme.colors.textPrimary)
-                    TagPill(option.trustLabel, state: option.visualState)
+                VStack(alignment: .leading, spacing: theme.spacing.xxxs) {
+                    HStack(spacing: theme.spacing.xs) {
+                        Text(option.title)
+                            .font(theme.typography.bodyEmphasized)
+                            .foregroundStyle(theme.colors.textPrimary)
+                        TagPill(option.trustLabel, state: option.visualState)
+                    }
+
+                    Text(option.detail)
+                        .font(theme.typography.body)
+                        .foregroundStyle(theme.colors.textSecondary)
+                        .fixedSize(horizontal: false, vertical: true)
+
+                    Text("\(option.impactLabel). \(option.boundaryLabel)")
+                        .font(theme.typography.caption)
+                        .foregroundStyle(theme.colors.textTertiary)
+                        .fixedSize(horizontal: false, vertical: true)
                 }
 
-                Text(option.detail)
-                    .font(theme.typography.body)
-                    .foregroundStyle(theme.colors.textSecondary)
-                    .fixedSize(horizontal: false, vertical: true)
-
-                Text("\(option.impactLabel). \(option.boundaryLabel)")
-                    .font(theme.typography.caption)
-                    .foregroundStyle(theme.colors.textTertiary)
-                    .fixedSize(horizontal: false, vertical: true)
+                Spacer(minLength: theme.spacing.sm)
             }
 
-            Spacer(minLength: theme.spacing.sm)
+            VStack(alignment: .leading, spacing: theme.spacing.xs) {
+                decisionFact(option.whatChangedLabel, icon: "arrow.triangle.2.circlepath")
+                decisionFact(option.whyChangedLabel, icon: "questionmark.circle")
+                decisionFact(option.impactedStepsLabel, icon: "checklist")
+                decisionFact(option.capacityImpactLabel, icon: "gauge.medium")
+                decisionFact(option.protectedTimeImpactLabel, icon: "clock.badge.checkmark")
+            }
 
-            if option.target != nil || option.planRoute != nil {
-                Image(systemName: "chevron.right")
-                    .font(.system(size: theme.icon.smallSize, weight: theme.icon.symbolWeight))
-                    .foregroundStyle(theme.colors.textTertiary)
+            HStack(spacing: theme.spacing.xs) {
+                ForEach(option.actions) { action in
+                    Button {
+                        onActivate(option, action.kind)
+                    } label: {
+                        Label(action.title, systemImage: action.kind.icon)
+                            .font(theme.typography.caption)
+                            .lineLimit(1)
+                            .minimumScaleFactor(0.82)
+                    }
+                    .buttonStyle(AmbitionButtonStyle(tier: .secondary, state: action.visualState))
+                    .disabled(action.isEnabled == false)
+                    .accessibilityLabel("\(action.title). \(action.detail)")
+                }
             }
         }
         .padding(theme.spacing.md)
@@ -104,6 +119,20 @@ private struct PlanReflowDecisionOptionRow: View {
                 .stroke(theme.colors.strokeSubtle, lineWidth: 1)
         )
         .accessibilityElement(children: .combine)
-        .accessibilityLabel("\(option.title). \(option.detail). \(option.trustLabel). \(option.boundaryLabel)")
+        .accessibilityLabel(option.title)
+        .accessibilityValue(option.accessibilityValue)
+    }
+
+    private func decisionFact(_ text: String, icon: String) -> some View {
+        HStack(alignment: .top, spacing: theme.spacing.xs) {
+            Image(systemName: icon)
+                .font(.system(size: theme.icon.smallSize, weight: theme.icon.symbolWeight))
+                .foregroundStyle(theme.colors.textTertiary)
+                .frame(width: 18)
+            Text(text)
+                .font(theme.typography.caption)
+                .foregroundStyle(theme.colors.textTertiary)
+                .fixedSize(horizontal: false, vertical: true)
+        }
     }
 }
