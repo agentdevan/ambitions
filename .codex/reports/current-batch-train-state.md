@@ -2,20 +2,18 @@
 
 Date: 2026-05-05
 Active train: Global full-stack execution
-Current batch: PFC17 App Intents / Shortcuts / Spotlight Strategy complete
-Green; full-stack order selects PFC19 Notifications / Focus / Calendar /
-Reminders Integration Strategy next.
-Scope: PFC17 created the docs/product/platform App Intents / Shortcuts /
-Spotlight strategy at
-`docs/canon/Ambitions_App_Intents_Shortcuts_Spotlight_Strategy.md`, defined the
-bounded future launch candidate set, kept consequential mutation behind in-app
-confirmation and receipt proof, treated compatibility destinations as internal
-route compatibility, and did not approve launch CoreSpotlight indexing by
-default. PFC17 changed only docs and train-state files. It did not change
-production Swift, route/raw value, persistence/schema, permission request,
-calendar/reminder write, sync/account, release, legal/privacy, CI,
-workflow/signing, entitlement, AI runtime, AOS runtime, LDI runtime, or public
-accessibility claim files.
+Current batch: PFC19 Notifications / Focus / Calendar / Reminders Integration
+Strategy complete Green; full-stack order selects PFC21 StoreKit / Monetization
+Strategy next.
+Scope: PFC19 created the docs/product/platform integration strategy at
+`docs/canon/Ambitions_Notifications_Focus_Calendar_Reminders_Strategy.md`,
+locked sparse opt-in notifications, Plan-owned Calendar read/write permission
+copy, explicit Reminders posture, deferred Focus Filter implementation, and no
+hidden mutation before PFC20 proof. PFC19 changed only docs and train-state
+files. It did not change production Swift, route/raw value, persistence/schema,
+permission request, calendar/reminder write behavior, sync/account, release,
+legal/privacy, CI, workflow/signing, entitlement, AI runtime, AOS runtime, LDI
+runtime, or public accessibility claim files.
 
 ## Full-Stack Global Order Reconciliation
 
@@ -53,7 +51,9 @@ evidence. MEG01 is complete / Green as advanced-rendering eligibility evidence.
 FVQ05 is complete / Green as final visual proof packet integration evidence.
 PFC15 is complete / Green as Live Activities / ActivityKit strategy evidence.
 PFC17 is complete / Green as App Intents / Shortcuts / Spotlight strategy
-evidence. PFC19 is the next eligible global batch. Accepted Yellow:
+evidence. PFC19 is complete / Green as Notifications / Focus / Calendar /
+Reminders integration strategy evidence. PFC21 is the next eligible global
+batch. Accepted Yellow:
 Found Life source truth was inserted by remote after FCP17 had already landed,
 so FL01 records the mismatch and FL01-FL06 now govern any further FCP, AOS,
 LDI, or PFC work that touches life visibility, recall, commitment memory,

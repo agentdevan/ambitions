@@ -175,6 +175,14 @@ confirmation plus receipt proof, compatibility destinations remain internal
 unless separately proved, and CoreSpotlight indexing of user life content is not
 approved by default.
 
+PFC19 is complete Green as of 2026-05-05. Future notification, Focus, Calendar,
+Reminders, EventKit, or permission work must use
+`docs/canon/Ambitions_Notifications_Focus_Calendar_Reminders_Strategy.md` as the
+platform boundary: notifications are sparse and opt-in, Calendar permission is
+Plan-owned, Calendar writes require explicit confirmation, Reminders require an
+explicit user action, Focus Filter implementation is deferred by default, and
+hidden mutation is blocked before PFC20 proof.
+
 ## Gates That Must Recur
 
 - Source Truth Gate.

@@ -188,6 +188,10 @@ A 10/10 user-facing app is not enough. Ambitions is not globally complete until:
     in-app confirmation and receipt proof, and does not approve launch
     CoreSpotlight indexing by default.
 36. PFC19 Notifications / Focus / Calendar / Reminders Integration Strategy.
+    Completed Green on 2026-05-05 as docs/product/platform integration
+    strategy. It locks sparse opt-in notifications, Plan-owned Calendar read
+    and write permission copy, explicit Reminders posture, deferred Focus
+    Filter integration, and no hidden mutation before PFC20 proof.
 37. PFC21 StoreKit / Monetization Strategy.
 38. PFC24 Privacy Data Map And App Privacy Labels.
 39. PFC25 Privacy Manifest / Required-Reason API Audit.
